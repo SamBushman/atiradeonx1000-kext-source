@@ -104,6 +104,19 @@ public:
     void     set_volatile_state(UInt32 *state);
     IOReturn set_surface_blocking(UInt32 blockingMode);
 
+    /*
+     * decompress_and_flush_depth_buffer - CONFIRMED real name, found this
+     * pass (opcode 0x45's real body, kext offset in the 0x2ee.. range).
+     * Real call shape: `decompress_and_flush_depth_buffer(surface,
+     * surfaceBufferScratch, 0, record)` returning a real UInt32 (used as a
+     * record-dword count/index in the caller). Same real subclass-
+     * qualification note as `resolve_fsaa_buffer`/`surface_buffer_idx_mask`
+     * above (real decompile types the receiver as the `ATIR500Surface`
+     * subclass; declared here on the unified `IOATIR500Surface` per this
+     * project's current, not-yet-split model - see GAPS.md section 8).
+     */
+    UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
+
     /* add_gl_context_to_list / remove_gl_context_from_list - CONFIRMED
      * real names (a surface tracks which GL contexts currently reference
      * it). Bodies UNKNOWN beyond that role. */

@@ -47,9 +47,9 @@ fixed:
   CURRENT record's own natural embedded distance field. Fixed to `return record;` (this file's
   established "use the generic advance" signal) at all three sites.
 
-`Sources/ATIR500GLContext_ProcessCommandBuffer.cpp` has a named, correctly-dispatched handler for every
-real opcode this project ever catalogued, but several bodies are honest stubs pointing at the exact
-source document to transcribe from rather than full reconstructions:
+**Update: as of this pass, every opcode in `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp` is fully
+transcribed from complete real decompiles - no stub handlers remain.** The per-opcode history below is
+kept for the record of what was found and corrected along the way:
 
 - ~~Opcodes `0x02-0x05` (HyperZ/HiZ block management)~~ RESOLVED - all four fully transcribed from complete
   real decompiles, including opcode `0x05`'s real cross-context HiZ state sharing.
@@ -116,10 +116,15 @@ source document to transcribe from rather than full reconstructions:
   throughout this project's own code without ever being declared anywhere - a real gap, now fixed
   (ATIRadeonX1000Registers.h). One real transcription bug caught during review: a big-endian byte-order
   mixup extracting the low/high bytes of a 16-bit value (`this+0x5d4`/`this+0x5d5`) - fixed.
-- Opcodes `0x44`/`0x45`/`0x46` - not yet re-examined against the raw decompile this pass; `0x46` in
-  particular should be re-verified even though it already calls the real
-  `process_kATIGLStreamFastClearColor` (its current record-index arguments were never independently
-  checked against a fresh decompile).
+- ~~Opcodes `0x44`/`0x45`/`0x46`~~ RESOLVED - **every opcode in `process_command_buffer` is now fully
+  transcribed.** `0x44` (transfer-buffer GART completion) - real, notable finding: the first place this
+  project has found `map_transfer_to_GART` called directly from inside `process_command_buffer` itself
+  (inline, not deferred) rather than only from the bind-family opcodes. `0x45` (real
+  `build_surface_from_texture` + a newly-found `IOATIR500Surface::decompress_and_flush_depth_buffer` call
+  pair, now declared) - real, notable finding: this project's earlier naming had 0x45 confused with "fast
+  clear"; 0x46 is the real fast-clear opcode, 0x45 is a real depth-buffer flush/decompress mechanism.
+  `0x46` re-verified against a fresh, complete read of its real call site (`process_kATIGLStreamFastClearColor(this,puVar65)`,
+  no extra arguments) - the existing handler was already correct.
 
 ## 3. Register-state serialization: mostly done, one open question, two functions still bodies-empty
 

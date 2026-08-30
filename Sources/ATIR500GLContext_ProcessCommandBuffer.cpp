@@ -2409,19 +2409,152 @@ LAB_0002e114_41:
     return record; /* real: on success, falls to the shared generic distance-based advance (the raw decompile's own trailing `iVar52 = uVar63 << 2;` recomputes the SAME natural distance from the untouched header dword - a no-op, same pattern as opcode 0x39) */
 }
 
-/* Opcode 0x44: CONFIRMED real transfer-buffer GART completion - calls
- * map_transfer_to_GART, builds a Type-3-wrapped completion record
- * referencing register index 0x575. */
+/*
+ * Opcode 0x44: CONFIRMED, fully transcribed this pass - real transfer-
+ * buffer GART completion. Gated on the current render-target-0 texture
+ * being kind 6 or having a nonzero `+0x48` flag (the SAME gate opcode
+ * 0x3e uses). Real, notable branch: if the transfer buffer's own `+0x48`
+ * AND `+4` fields are both still zero, it maps the transfer buffer (and,
+ * if still needed, the fixed `this+0xcc` buffer) to GART right there,
+ * INLINE, rather than deferring - the first place this project has found
+ * `map_transfer_to_GART` called directly from inside `process_command_buffer`
+ * itself rather than only from the bind-family opcodes. Shares the SAME
+ * per-mip generation-counter bit-twiddle shape as 0x3e/0x40, and falls
+ * into the SAME trivial `LAB_000300b8` header-rewrite tail as 0x3e when
+ * there is no valid render target.
+ */
 static UInt32 *handle_transfer_gart_completion(ATIR500GLContext *ctx, UInt32 *record) {
-    (void)ctx;
-    return record; /* TODO: real body not yet re-transcribed */
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt32 *puVar65 = record;
+
+    UInt32 rt0Tex = U32At(self, 0x2a4);
+    if (rt0Tex == 0 || !(U8At(reinterpret_cast<void *>(rt0Tex), 0x20) == 6 || U32At(reinterpret_cast<void *>(rt0Tex), 0x48) != 0)) {
+        /* real: LAB_000300b8 */
+        UInt32 uVar38 = 0x80000000u;
+        if (puVar65[1] != 1) {
+            uVar38 = (puVar65[1] - 2) * 0x10000u | 0xc0001000u;
+        }
+        *puVar65 = uVar38;
+        return record;
+    }
+
+    VendorTransferBuffer *transferBuf = reinterpret_cast<VendorTransferBuffer *>(puVar65[3]);
+    UInt32 uVar38 = puVar65[2];
+    UInt32 uVar55 = puVar65[4];
+
+    if (U32At(transferBuf, 0x48) == 0 && U32At(transferBuf, 4) == 0) {
+        ctx->map_transfer_to_GART(transferBuf);
+        if (U32At(self, 0xd0) == 0) {
+            ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(self + 0xcc));
+        }
+    }
+
+    *puVar65 = 0xc0031000u;
+    UInt32 uVar58 = uVar55 + U32At(transferBuf, 0x48);
+    if (U32At(transferBuf, 0x48) == 0) {
+        *puVar65 = 0xc0011000u;
+        puVar65[3] = 0x575u;
+        puVar65[4] = 2u;
+        uVar58 = uVar55 + U32At(transferBuf, 4) + U32At(accel, 0x8a4);
+    }
+
+    SInt32 iVar59 = static_cast<SInt32>(uVar38 >> 0x10) * 2;
+    UInt16 uVar15 = static_cast<UInt16>(1u << (uVar38 & 0x3fu));
+    void *rt0Rec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(rt0Tex), 0x14));
+    U16At(reinterpret_cast<UInt8 *>(rt0Rec) + iVar59, 0x28) |= uVar15;
+    U16At(reinterpret_cast<UInt8 *>(rt0Rec) + iVar59, 0x1c) &= static_cast<UInt16>(~uVar15);
+    puVar65[0x10] = uVar58;
+
+    UInt32 uVar55b = puVar65[0x16];
+    SInt32 texOff = static_cast<SInt32>(ctx->GetTextureOffset(reinterpret_cast<VendorTextureBuffer *>(rt0Tex), true));
+    puVar65[0x16] = uVar55b + static_cast<UInt32>(texOff);
+    U32At(transferBuf, 0x5c) = U32At(accel, 0x50);
+
+    /* real: LAB_0002fe70 - shared with a trivial internal tail elsewhere in
+     * the raw decompile (a generic "stamp rt0's generation counter" idiom
+     * this project has already transcribed identically several times). */
+    U32At(rt0Rec, 0xc) = U32At(accel, 0x50);
+    return record; /* real: falls to the shared generic distance-based advance */
 }
 
-/* Opcode 0x45: CONFIRMED real build_surface_from_texture call
- * (depth/stencil-gated at its one known real call site). */
-static UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *record) {
-    (void)ctx;
-    return record; /* TODO: real argument marshalling not yet re-transcribed */
+/*
+ * Opcode 0x45: CONFIRMED, fully transcribed this pass - real
+ * `build_surface_from_texture` + `decompress_and_flush_depth_buffer` call
+ * pair (the actual real implementation behind this project's `handle_fast_clear`
+ * naming confusion - 0x46, not 0x45, is the real "fast clear" opcode; 0x45
+ * is a real "flush/decompress a depth buffer, patching the record if the
+ * flush emitted fewer real dwords than reserved" mechanism). Real, notable
+ * branch: if the target texture's HyperZ block (`+0x6c`) is UNALLOCATED
+ * (`-1`), this does NOT attempt the flush at all - it just advances a
+ * dword-count tally and skips straight to the trailing "did we emit fewer
+ * dwords than reserved" patch.
+ */
+static UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt32 *puVar65 = record;
+    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
+    IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
+
+    UInt32 uVar38 = puVar65[3];
+    UInt32 uVar73 = puVar65[1];
+    VendorTextureBuffer *local_378 = nullptr;
+    ATIR500SurfaceBuffer local_374 = {}; /* real scratch ATIR500SurfaceBuffer, populated by build_surface_from_texture below */
+    UInt32 local_348 = 0;
+    (void)local_348; /* real: assigned from local_378+0x7c but never read again in this opcode's own real body */
+
+    if (uVar38 != 0xffffffffu) {
+        if (uVar38 < U32At(sharedAllocator, 0x14) &&
+            U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), uVar38 * 4) != 0) {
+            local_378 = reinterpret_cast<VendorTextureBuffer *>(
+                U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), uVar38 * 4));
+            if (static_cast<SInt32>(U32At(local_378, 0x6c)) != -1) {
+                ctx->build_surface_from_texture(
+                    local_378, &local_374,
+                    U16At(local_378, 0x70), U16At(local_378, 0x72),
+                    U8At(puVar65, 0x13),
+                    U32At(local_378, 0x74), U16At(local_378, 0x78));
+                local_348 = U32At(local_378, 0x7c);
+                uVar38 = surface->decompress_and_flush_depth_buffer(&local_374, 0, puVar65);
+                U16At(local_378, 0x7a) = 0;
+                /* real: goto LAB_0002eed0 - falls through to the trailing check below */
+            } else {
+                uVar73 = uVar73 + puVar65[2];
+                uVar38 = 0;
+                /* real: goto LAB_0002eed8 - skips the `uVar38 <= uVar73` gate below */
+                if (uVar38 < uVar73) {
+                    UInt32 uVar75 = 0x80000000u;
+                    if (uVar73 - uVar38 != 1) {
+                        uVar75 = ((uVar73 - uVar38) - 2) * 0x10000u | 0xc0001000u;
+                    }
+                    puVar65[uVar38] = uVar75;
+                }
+                return record; /* real: falls to the shared generic distance-based advance */
+            }
+        } else {
+            /* real: goto LAB_00030d40 - a real forced-termination path. */
+            U32At(ctx->accelerator, 0x50) -= state.local_380;
+            state.local_384 = 0;
+            state.forceTerminate = true;
+            return record;
+        }
+    } else {
+        UInt16 unit = U16At(self, 0xae);
+        void *mipEntry = reinterpret_cast<void *>(U32At(reinterpret_cast<UInt8 *>(surface) + unit * 0x78, 0xa8));
+        uVar38 = surface->decompress_and_flush_depth_buffer(reinterpret_cast<ATIR500SurfaceBuffer *>(mipEntry), 0, puVar65);
+    }
+
+    /* real: LAB_0002eed0 - both paths above that reach here converge on the same trailing check */
+    if (uVar38 <= uVar73) {
+        if (uVar38 < uVar73) {
+            UInt32 uVar75 = 0x80000000u;
+            if (uVar73 - uVar38 != 1) {
+                uVar75 = ((uVar73 - uVar38) - 2) * 0x10000u | 0xc0001000u;
+            }
+            puVar65[uVar38] = uVar75;
+        }
+    }
+    return record; /* real: falls to the shared generic distance-based advance */
 }
 
 /* Opcode 0x46: CONFIRMED real fast-clear (process_kATIGLStreamFastClearColor). */
@@ -2431,18 +2564,13 @@ static UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record) {
 }
 
 /*
- * The real dispatch loop. CONFIRMED overall shape: read one dword, branch
- * on real PM4 packet type (Type-0 register write, Type-2 filler, Type-3
- * opcode packet) OR this driver's own embedded top-byte marker language,
- * advance the cursor by the real distance encoded in the low 24 bits, and
- * repeat until the buffer's declared length is consumed.
- *
- * The embedded-marker branch below is a real, faithful reconstruction of
- * the confirmed opcode table; PM4 Type-0/Type-2/Type-3 handling is
- * INFERRED from this project's general PM4 knowledge (stage2-pm4-confirmed.md)
- * rather than re-transcribed from this exact function's own real Type-0/
- * Type-3 handling code, which this reconstruction pass did not re-read
- * line-by-line for that part.
+ * STALE COMMENT REMOVED this pass: this block previously claimed a real
+ * PM4 Type-0/Type-2/Type-3 packet dispatch exists in this loop, inferred
+ * from general PM4 knowledge rather than this exact decompile. A complete
+ * read of the real loop (see the file header and this function's own
+ * preamble comment below) found no such dispatch anywhere in the real
+ * function - that framework was removed earlier this pass. See the file
+ * header comment at the top of this file for the corrected, full account.
  */
 IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
     ProcessCommandBufferState state; /* real local_cc/local_384/local_388/local_380/local_378 - see the struct's own doc comment */
@@ -2537,7 +2665,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x43000000: next = handle_texture_commit_with_generation(this, record, state); break;
             case 0x41000000: next = handle_rendertarget_commit(this, record, state); break;
             case 0x44000000: next = handle_transfer_gart_completion(this, record); break;
-            case 0x45000000: next = handle_build_surface_from_texture(this, record); break;
+            case 0x45000000: next = handle_build_surface_from_texture(this, record, state); break;
             case 0x46000000: next = handle_fast_clear(this, record); break;
             default:
                 if (opcode >= 0x16000000 && opcode <= 0x25000000) {
