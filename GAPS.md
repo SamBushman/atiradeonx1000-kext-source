@@ -95,12 +95,16 @@ source document to transcribe from rather than full reconstructions:
 - ~~Opcode `0x3d`~~ RESOLVED - a trivial real forward to `IOATIR500Surface::set_volatile_state`. Also fixed
   that method's own declared signature (was `UInt32*` state passed as a value at the real call site, not
   taken by reference as this project's header previously modeled with an added `&`).
-- Opcodes `0x3b`/`0x3e`/`0x3f`/`0x40`/`0x43` (this project's earlier pass wrongly assumed these five were
-  "structurally identical" to each other and to `0x3a`/`0x3d` - CORRECTED: they are not, each is
-  individually large and dense, more closely related in shape to `handle_texture_bind` than to `0x3a`/
-  `0x3d`) - `0x3e` and `0x40`'s real bodies were read in full this pass (kext_process_cmd_buf.txt lines
-  ~1459-1710) but not yet transcribed; `0x3b`/`0x3f` were not yet located. Still an honest stub
-  (`handle_texture_load_family`).
+- ~~Opcodes `0x3b`/`0x3e`/`0x3f`/`0x40`/`0x43`~~ RESOLVED - all five fully transcribed as individually
+  distinct handlers (`handle_query_buffer_bind`, `handle_rt0_texture_commit`,
+  `handle_rendertarget_tiling_commit`, `handle_index_buffer_commit`, `handle_texture_commit_with_generation`),
+  replacing the earlier catch-all stub that wrongly assumed all five (plus `0x3a`/`0x3d`) were
+  "structurally identical." Real, notable findings: a THIRD distinct atomic-decrement magnitude
+  (`-0x10000`, used by `0x3e`/`0x43`, alongside the already-known `-1` and `-0xffff`); `0x40` is the one
+  variant in this family that does NOT call `restore_state_destroyed_by_pageoff` even when gated on;
+  `0x3f` reuses the same format table five times in a real cascading bit-patch sequence into one register
+  slot, the densest single-register patch outside opcode 0x31; `0x40` uses a third, previously-unused
+  format table (`FormatTableLookup_0x0004d2e4`).
 - Opcode `0x41` (render-target commit) - real body located this pass (kext_process_cmd_buf.txt starting
   ~line 1713) and confirmed to be another large, dense function (a real per-attachment loop with texture
   bind/relist logic and `build_surface_from_texture` calls) - NOT fully read or transcribed yet, current
