@@ -159,14 +159,58 @@ static UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 
  * DIRECTLY. This is the proof that write_kernel_context_buffer_regs is a
  * shared "commit everything" primitive used by two independent opcodes
  * (0x29 and 0x41), not opcode-41-specific.
+ *
+ * The real 8-case switch table below is now CONFIRMED, transcribed from
+ * discard_command_buffer's own real, identical handling of this same
+ * opcode (a second, independent real trace of the same record - see
+ * Sources/ATIR500GLContext_DiscardBuffer.cpp). NOTE: discard_command_buffer
+ * processes a FIXED 4 slots regardless of live attachment count; whether
+ * this main processing path does the same or uses the dynamic
+ * `attachmentCount` was not independently re-confirmed for THIS exact
+ * function (its own decompile was not re-read this pass) - the fixed-4
+ * shape is used here as the best available real evidence.
  */
 static UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *record) {
-    /* TODO: the real 0/1/2/3/7/8/0x10/0x11 -> 0/4/5/6/2/3/7/8 switch table
-     * (same shape as opcode 0x2a's attachment-enum table) goes here,
-     * updating ctx's attachmentCount and per-slot state. */
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+
+    for (UInt32 i = 0; i < 4; ++i) {
+        UInt32 enumValue = record[1 + i];
+        UInt16 slotCode;
+        switch (enumValue) {
+            case 1:    slotCode = 0;    break;
+            case 2:    slotCode = 4;    break;
+            case 3:    slotCode = 5;    break;
+            case 7:    slotCode = 2;    break;
+            case 8:    slotCode = 3;    break;
+            case 0x10: slotCode = 9;    break;
+            case 0x11: slotCode = 0x17; break;
+            default:   slotCode = 1;    break; /* CONFIRMED real default case */
+        }
+        *reinterpret_cast<UInt16 *>(self + 0x3aa + i * 2) = slotCode;
+    }
+
+    *reinterpret_cast<UInt16 *>(self + 0xac) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
+    *reinterpret_cast<UInt32 *>(self + 0x35c) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
+
+    if (record[5] == 0x10) {
+        *reinterpret_cast<UInt16 *>(self + 0x3aa) = 9;
+        *reinterpret_cast<UInt16 *>(self + 0xac) = 9;
+    }
+
+    /* real "is a real secondary/pair unit configured" gate - see
+     * ATIR500GLContext.h's someUnitIndex field note */
+    if ((*reinterpret_cast<UInt32 *>(self + 0x8c) & 0x80) != 0) {
+        UInt32 pairEnum = record[1];
+        if (pairEnum == 7 || pairEnum == 8) {
+            *reinterpret_cast<UInt16 *>(self + 0xae) = static_cast<UInt16>(pairEnum);
+        } else {
+            *reinterpret_cast<UInt16 *>(self + 0xae) = 6;
+        }
+    }
+
     ctx->build_scissor();
     ctx->write_kernel_context_buffer_regs(record, 0, record[6], record[7]); /* CONFIRMED exact real call shape */
-    return record; /* real advance amount depends on the (not yet re-transcribed) switch body above */
+    return record; /* real advance amount UNKNOWN - not independently confirmed for this exact opcode length */
 }
 
 /*
@@ -184,6 +228,32 @@ static UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *r
     record[/* real offset for scissor Y */ 0] = ctx->scissorY; /* placeholder index - TODO: exact record layout not re-transcribed */
     (void)ctx;
     return record;
+}
+
+/*
+ * Opcode 0x36: NEW, previously-uncatalogued opcode - found via
+ * discard_command_buffer's cleanup-path trace (Sources/
+ * ATIR500GLContext_DiscardBuffer.cpp), not via this function's own
+ * execute-path decompile (this project has never located a 0x36 handler
+ * in process_command_buffer's own real body - a real, open gap, see
+ * GAPS.md). Modeled here by direct analogy with the discard-path's own
+ * confirmed refcount semantics: a real texture REFERENCE SWAP at
+ * `this+0x334`. Whether the execute path does anything beyond this
+ * bookkeeping (e.g. an actual register write) is UNKNOWN.
+ */
+static UInt32 *handle_texture_reference_swap(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    void *oldTex = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(self + 0x334));
+    void *newTex = reinterpret_cast<void *>(record[1]);
+    if (oldTex != nullptr && *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(oldTex) + 0x48) == 0) {
+        *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(oldTex) + 0xe) -= 1;
+    }
+    if (newTex != nullptr && *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(newTex) + 0x48) == 0) {
+        *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(newTex) + 0xe) += 1;
+    }
+    *reinterpret_cast<UInt32 *>(self + 0x334) = reinterpret_cast<UInt32>(newTex);
+    *record = PM4_TYPE2_FILLER; /* INFERRED self-consuming marker erasure, matching every other confirmed opcode in this family - not independently confirmed for 0x36 specifically */
+    return record + 1;
 }
 
 /*
@@ -409,6 +479,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x2f000000: next = handle_hyperz_commit(this, record); break;
             case 0x30000000: next = handle_fsaa_resolve_setup(this, record); break;
             case 0x31000000: next = handle_fsaa_resolve_blit(this, record); break;
+            case 0x36000000: next = handle_texture_reference_swap(this, record); break;
             case 0x37000000: next = handle_deferred_offset_patch(this, record); break;
             case 0x38000000: next = handle_address_fixup(this, record); break;
             case 0x39000000: next = handle_bind_vertex_attributes(this, record); break;

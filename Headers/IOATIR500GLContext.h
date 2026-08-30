@@ -75,6 +75,17 @@ public:
     virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options,
                                           IOMemoryDescriptor **memory) override;
 
+    /*
+     * add_texture_to_stream / remove_texture_from_stream / map_transfer_to_GART -
+     * CONFIRMED to be real methods of THIS base class (real decompiled
+     * signatures are `IOATIR500GLContext::`, not `ATIR500GLContext::` -
+     * corrected from an earlier draft that had these on the subclass).
+     * Fully reconstructed in Sources/IOATIR500GLContext_TextureStream.cpp.
+     */
+    void add_texture_to_stream(VendorTextureBuffer *texture);
+    void remove_texture_from_stream(VendorTextureBuffer *texture);
+    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+
 protected:
     ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
     void                  *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers */

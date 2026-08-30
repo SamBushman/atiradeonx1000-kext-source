@@ -139,7 +139,10 @@ public:
      * VRAM-direct/GART/surface-backed storage via a real type byte. Full
      * internal body UNKNOWN beyond this role. */
     UInt32 GetTextureOffset(VendorTextureBuffer *texture, bool forWrite);
-    void   WriteTextureOffset(UInt32 relativeOffset, UInt32 *patchLocation, UInt32 size, VendorTextureBuffer *texture);
+    /* Real return value is the real dword-count written (3 or 4), not
+     * void as an earlier draft guessed - fixed after full transcription
+     * in Sources/ATIR500GLContext_TextureOffsets.cpp. */
+    UInt32 WriteTextureOffset(UInt32 param1, UInt32 *outputBuffer, UInt32 index, VendorTextureBuffer *texture);
 
     /* GetVertexArrayOffset / WriteVertexArrayOffset - CONFIRMED real names
      * (opcode 0x39's full trace, stage4-embedded-opcode-table-completed.md).
@@ -148,41 +151,58 @@ public:
      * texture-fetch-unit hardware (a genuine, confirmed R5xx architectural
      * fact: vertex attributes and fragment textures share fetch hardware). */
     UInt32 GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt32 param2);
-    void   WriteVertexArrayOffset(UInt32 *patchLocation, UInt32 relativeOffset);
+    /* Real return value is a fixed dword-count constant (0x18), not void -
+     * fixed after full transcription. */
+    UInt32 WriteVertexArrayOffset(UInt32 *outputBuffer, UInt32 startIndex);
 
     /* GetQueryOffset - CONFIRMED real name (GL_ARB_occlusion_query support,
      * stage3-query-api-and-flush-safety-check.md), body UNKNOWN beyond role. */
     UInt32 GetQueryOffset(VendorTextureBuffer *buffer, UInt32 param2, UInt32 param3);
 
     /*
-     * add_texture_to_stream / remove_texture_from_stream / load_texture /
-     * alloc_and_load_texture / compact_current_textures - CONFIRMED real
-     * names, the texture-binding machinery every texture-load opcode
-     * (0x06-0x15 unbind family, 0x37/0x39/0x3b/0x3e/0x3f/0x40/0x43 bind
-     * family) ultimately calls. Bodies UNKNOWN beyond the role already
-     * documented in stage3-kernel-side-hang-mechanism-confirmed.md and
-     * stage4-embedded-opcode-table-completed.md.
+     * NOTE: add_texture_to_stream/remove_texture_from_stream/
+     * map_transfer_to_GART are real methods of the BASE class
+     * (IOATIR500GLContext) - see IOATIR500GLContext.h, corrected from an
+     * earlier draft that had them here.
      */
-    void     add_texture_to_stream(VendorTextureBuffer *texture);
-    void     remove_texture_from_stream(VendorTextureBuffer *texture);
+
+    /* load_texture / alloc_and_load_texture / compact_current_textures -
+     * CONFIRMED real names and large, complex real bodies (kext offsets
+     * 0x29480/0x2a3d0/0x29dd0) - the texture-binding machinery every
+     * texture-load opcode (0x06-0x15 unbind family, 0x37/0x39/0x3b/0x3e/
+     * 0x3f/0x40/0x43 bind family) ultimately calls. Real decompiled
+     * bodies were read this pass but are large enough (dozens of local
+     * variables, dense per-mip/tiling math matching
+     * write_kernel_context_buffer_regs's shape) that full transcription
+     * was deferred - see GAPS.md. */
     void     load_texture(VendorTextureBuffer *texture);
     IOReturn alloc_and_load_texture(VendorTextureBuffer *texture);
     void     compact_current_textures(VendorTextureBuffer *texture);
 
-    /* map_transfer_to_GART / freeToAllocGART (this context's own override) -
-     * CONFIRMED real names/roles (used identically across GL/2D/DVD
-     * contexts and the IDCT engine). */
-    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+    /* freeToAllocGART (this context's own override) - CONFIRMED real
+     * name/role (used identically across GL/2D/DVD contexts and the IDCT
+     * engine). */
     bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
 
-    /* process_kATIGLStreamFastClearColor - CONFIRMED real name (opcode
-     * 0x46, "fast clear"). Body UNKNOWN beyond that role. */
+    /*
+     * process_kATIGLStreamFastClearColor - CONFIRMED, fully decoded (real
+     * kext offset 0x292a0, opcode 0x46 "fast clear"). Real per-mip
+     * render-target offset/tiling computation for TWO surfaces (color +
+     * an associated Z/stencil-adjacent surface at `this+0xae`'s unit
+     * index), writing a real Type-0-header-shaped burst. Full
+     * reconstruction in Sources/ATIR500GLContext_Surfaces.cpp.
+     */
     void process_kATIGLStreamFastClearColor(UInt32 *record);
 
-    /* build_surface_from_texture - CONFIRMED real name (opcode 0x45,
-     * depth/stencil-gated at its one known real call site). */
-    void *build_surface_from_texture(VendorTextureBuffer *texture, ATIR500SurfaceBuffer *surfaceBuffer,
-                                      UInt16 param3, UInt16 param4, UInt32 param5, UInt32 param6);
+    /*
+     * build_surface_from_texture - CONFIRMED, fully decoded (real kext
+     * offset 0x28200, opcode 0x45). Real signature returns void, not a
+     * pointer (corrected from an earlier draft's guess) - it populates
+     * the caller-owned `surfaceBuffer` in place. Full reconstruction in
+     * Sources/ATIR500GLContext_Surfaces.cpp.
+     */
+    void build_surface_from_texture(VendorTextureBuffer *texture, ATIR500SurfaceBuffer *surfaceBuffer,
+                                     UInt16 param3, UInt16 param4, UInt8 param5, UInt32 param6, UInt16 param7);
 
     /* submit_context_buffer / discard_command_buffer - CONFIRMED real
      * names for the two real buffer-lifecycle bookends around
