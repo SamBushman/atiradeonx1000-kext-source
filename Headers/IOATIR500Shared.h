@@ -25,6 +25,21 @@ public:
      * Real vtable calls at +0x48 (init-like, must succeed) and +0x18
      * (release-like) are known to exist - see IOATIR500GLContext_Start.cpp -
      * but not independently named or decompiled this pass. */
+
+    /*
+     * delete_texture - CONFIRMED real name/signature (real mangled
+     * symbol __ZN15IOATIR500Shared14delete_textureEP19VendorTextureBuffer,
+     * kext offset 0x17950), found this pass (issue #7) as a real call
+     * site in ATIR500DVDContext::process_command_buffer's texture-
+     * unbind family. Real gating pattern at every call site: only
+     * invoked after a real refcount-style helper (this project's
+     * FUN_0003911c) returns exactly 1, i.e. "this was the last
+     * reference". Own body NOT independently decompiled this pass. Also
+     * declared (not yet reconstructed) elsewhere in this project's
+     * comments: new_agp_texture/new_texture - the same real allocator
+     * GL/2D's declare_image/create_image call through.
+     */
+    void delete_texture(VendorTextureBuffer *texture);
 };
 
 #endif /* IOATIR500SHARED_H */

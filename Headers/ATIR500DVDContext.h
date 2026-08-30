@@ -42,6 +42,32 @@ public:
      * override of the same real name. Body UNKNOWN beyond role. */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
+    /*
+     * submit_context_buffer / allocAllContextBuffers - CONFIRMED real
+     * names/signatures (real mangled symbols
+     * __ZN17ATIR500DVDContext21submit_context_bufferEv /
+     * __ZN19IOATIR500DVDContext22allocAllContextBuffersEm), the same
+     * real per-context-type pattern GL has its own versions of (issue
+     * #5). Neither independently decompiled this pass.
+     */
+    void submit_context_buffer(void);
+    bool allocAllContextBuffers(UInt32 size);
+
+    /*
+     * process_command_buffer - PARTIALLY RESOLVED (issue #7): the real
+     * dispatch skeleton and two real opcode families (texture bind,
+     * covering opcodes 0x19/0x1a/0x1b/0x1c/0x1e-0x25/0x26-0x2a/0x2d, and
+     * texture unbind, covering 0x2b/0x2c/0x2e-0x30/0x32-0x34/0x36-0x3c -
+     * 33 of the real ~55 opcodes) are transcribed - see
+     * Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp for the two
+     * handler functions and GAPS.md for the full opcode-by-opcode
+     * status. The remaining opcodes (dense per-mip YUV/tiling math,
+     * comparable in density to GL's own richest opcodes) are NOT yet
+     * transcribed, so this method itself is not yet declared/wired -
+     * the two handlers exist as free functions a future completed
+     * dispatcher will call.
+     */
+
 protected:
     sATIDVDIDCTInfo *idctInfo; /* +0xf8-adjacent per-context IDCT state - CONFIRMED to be reached through boundSurface's slot in the real decompile (`*(int*)(this+0xf8)`); modeled as its own field here since sATIDVDIDCTInfo (Headers/ATIRadeonX1000Types.h) IS the real struct doIDCT receives as its first argument, and this project confirmed the two are the same object (doIDCT's param_1 gets passed around identically to what setup_buffers/dvd_setup_overlay's `this+0xf8` chases). */
 };
