@@ -4,22 +4,24 @@
  * PARTIALLY RESOLVED (issue #7): the DVD context's own embedded
  * command-buffer opcode language. Real dispatch mechanism confirmed
  * (top-byte opcode over a `this+0xa4+0x1c`-based record stream,
- * self-consuming low-24-bit distance fields) and two real opcode
- * families - texture bind and texture unbind - fully transcribed from
- * complete real decompiles (kext offsets within
- * ATIR500DVDContext::process_command_buffer, 0x357c0). These two
- * families alone cover 33 of the real ~55 opcodes (bind: 0x19, 0x1a,
- * 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d; unbind: 0x2b, 0x2c, 0x2e-0x30,
- * 0x32-0x34, 0x36-0x3c).
+ * self-consuming low-24-bit distance fields) and four real opcode
+ * groups - texture bind, texture unbind, the opcode 0x2 return-code
+ * setter, and the opcode 0x5/0x6 texture-sampler-state pair - fully
+ * transcribed from complete real decompiles (kext offsets within
+ * ATIR500DVDContext::process_command_buffer, 0x357c0). Together these
+ * cover 36 of the real ~55 opcodes (bind: 0x19, 0x1a, 0x1b, 0x1c, 0x1d,
+ * 0x1e-0x25, 0x26-0x2a, 0x2d; unbind: 0x2b, 0x2c, 0x2e-0x30, 0x32-0x34,
+ * 0x36-0x3c; plus 0x02, 0x05, 0x06).
  *
- * The remaining ~21 opcodes (0x02, 0x04-0x0d, 0x11-0x18, 0x31,
- * 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) are dense per-mip YUV/tiling
- * math comparable in density to GL's own richest opcodes (real
- * floating-point double arithmetic, multiple format-table lookups per
- * opcode) - NOT transcribed this pass. `process_command_buffer` itself
- * is therefore NOT yet declared/assembled as one function - these two
- * handlers exist as free functions a future completed dispatcher will
- * call, matching how GL's own opcode-by-opcode effort progressed.
+ * The remaining ~19 opcodes (0x04, 0x07-0x0d, 0x11-0x18, 0x31, 0x35,
+ * 0x3d-0x3f, 0x42-0x44, 0x46-0x47) are dense per-mip YUV/tiling math
+ * comparable in density to GL's own richest opcodes (real floating-
+ * point double arithmetic, multiple format-table lookups per opcode) -
+ * NOT transcribed this pass (0x07/0x08 are trivial aborts, not real
+ * handlers, but listed for completeness). `process_command_buffer`
+ * itself is therefore NOT yet declared/assembled as one function -
+ * these handlers exist as free functions a future completed dispatcher
+ * will call, matching how GL's own opcode-by-opcode effort progressed.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call
  * touched in the two transcribed handlers - complete real decompiles,
@@ -41,6 +43,7 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 
 extern "C" UInt32 FUN_0003911c(void *refcountFieldAddr);
@@ -184,4 +187,84 @@ static void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 
         *reinterpret_cast<UInt32 *>(slotAddr) = 0;
     }
     *record = 0x80000000u;
+}
+
+/*
+ * handle_opcode_02 - RESOLVED (issue #7), fully transcribed. The
+ * function's own overall return value (`local_68` in the raw decompile,
+ * returned verbatim at the shared tail) is set to 3 here - a DIFFERENT
+ * value from GL's and 2D's own opcode 0x2, which both set their
+ * equivalent return value to 1. Real, deliberate per-class difference,
+ * not a transcription error. Natural distance applies (no override).
+ */
+static void handle_opcode_02(UInt32 &result) {
+    result = 3;
+}
+
+/*
+ * handle_texture_sampler_state - RESOLVED (issue #7), fully
+ * transcribed. Covers opcodes 0x5 and 0x6 - a real texture-sampler-
+ * state PM4 record pair sharing an identical header/tail template with
+ * opcode 0xd's own transfer-buffer setup (`0x1393`/10/`0x5c8`/
+ * `0x20000`/`0xc0069a00`/`0x52f036da`, and a `0xd0b`/5/`0x5c8`/
+ * `0x10000` tail) - confirming that template is a general "sampler
+ * state" shape reused across at least two real, distinct source kinds
+ * (bound-surface mip records here, transfer buffers for opcode 0xd).
+ *
+ * Real per-mip lookup: `boundSurface + record[1]*0x78`. `record[2]==0`
+ * selects the plain luma-plane base offset; nonzero selects the real
+ * YUV 4:2:0 combined-plane formula (`height*pitch*3 >> 1 + base`) - the
+ * same real chroma formula this project already found documented in
+ * this file's own earlier skeleton-mapping pass. Opcode 0x6
+ * additionally adds the plain luma-plane size unconditionally on top
+ * (real evidence it targets the position PAST the luma plane, versus
+ * opcode 0x5's own plain "plane base" role).
+ */
+static void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt8 *mip = surf + record[1] * 0x78;
+    UInt8 embeddedByte = U8At(record, 0xf);
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+
+    UInt32 pitch = U16At(mip, 0x570);
+    UInt32 base;
+    if (opcode == 0x05000000u) {
+        base = (record[2] == 0) ? U32At(mip, 0x560)
+                                 : static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1) + U32At(mip, 0x560);
+    } else {
+        UInt32 lumaSize = static_cast<UInt32>(heightDelta) * pitch;
+        base = lumaSize + U32At(mip, 0x560);
+        if (record[2] != 0) {
+            base += static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1);
+        }
+    }
+
+    UInt8 tileFlag = U8At(mip, 0x590);
+    UInt32 bigTileBit = (tileFlag < 2) ? 0 : 0x80000000u;
+
+    record[0] = 0x1393;
+    record[1] = 10;
+    record[2] = 0x5c8;
+    record[3] = 0x20000;
+    record[4] = 0xc0069a00;
+    record[5] = 0x52f036da;
+    record[6] = bigTileBit | (base >> 10) | ((pitch & 0x3fc0u) << 16) | ((tileFlag & 1) << 0x1e);
+    record[7] = U32At(self, 0x158);
+    record[8] = (static_cast<UInt32>(U16At(mip, 0x576)) << 16) | U16At(mip, 0x574);
+    record[9] = embeddedByte | (embeddedByte << 24) | (embeddedByte << 16) | (embeddedByte << 8);
+
+    record[10] = 0; /* real: unconditional for both opcodes */
+    UInt32 dims;
+    if (opcode == 0x05000000u) {
+        dims = static_cast<UInt32>(heightDelta) | ((pitch & 0xfffcu) << 14);
+    } else {
+        dims = ((pitch & 0xfffcu) << 14) | (static_cast<UInt32>(heightDelta) >> 1);
+    }
+
+    record[0xb] = dims;
+    record[0xc] = 0xd0b;
+    record[0xd] = 5;
+    record[0xe] = 0x5c8;
+    record[0xf] = 0x10000;
 }

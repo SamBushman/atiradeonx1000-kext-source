@@ -55,16 +55,17 @@ public:
 
     /*
      * process_command_buffer - PARTIALLY RESOLVED (issue #7): the real
-     * dispatch skeleton and two real opcode families (texture bind,
-     * covering opcodes 0x19/0x1a/0x1b/0x1c/0x1d/0x1e-0x25/0x26-0x2a/0x2d, and
-     * texture unbind, covering 0x2b/0x2c/0x2e-0x30/0x32-0x34/0x36-0x3c -
-     * 33 of the real ~55 opcodes) are transcribed - see
-     * Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp for the two
-     * handler functions and GAPS.md for the full opcode-by-opcode
-     * status. The remaining opcodes (dense per-mip YUV/tiling math,
-     * comparable in density to GL's own richest opcodes) are NOT yet
-     * transcribed, so this method itself is not yet declared/wired -
-     * the two handlers exist as free functions a future completed
+     * dispatch skeleton and four real opcode groups (texture bind,
+     * covering opcodes 0x19/0x1a/0x1b/0x1c/0x1d/0x1e-0x25/0x26-0x2a/0x2d;
+     * texture unbind, covering 0x2b/0x2c/0x2e-0x30/0x32-0x34/0x36-0x3c;
+     * the opcode 0x2 return-code setter; and the opcode 0x5/0x6
+     * texture-sampler-state pair - 36 of the real ~55 opcodes) are
+     * transcribed - see Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp
+     * for the handler functions and GAPS.md for the full opcode-by-
+     * opcode status. The remaining opcodes (dense per-mip YUV/tiling
+     * math, comparable in density to GL's own richest opcodes) are NOT
+     * yet transcribed, so this method itself is not yet declared/wired -
+     * the handlers exist as free functions a future completed
      * dispatcher will call.
      */
 
