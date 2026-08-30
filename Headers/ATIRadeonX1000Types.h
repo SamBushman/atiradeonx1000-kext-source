@@ -16,25 +16,33 @@
 #include <IOKit/IOTypes.h>
 
 /*
- * VendorCommandDescriptor - CONFIRMED shape, INFERRED field names.
+ * VendorCommandDescriptor - CORRECTED this pass, real role and field
+ * offsets now CONFIRMED for ATIR500GLContext::process_command_buffer
+ * specifically (kext_process_cmd_buf.txt line 7's `param_1`).
  *
- * The argument to every context class's process_command_buffer(). Real
- * decompiled signature: process_command_buffer(VendorCommandDescriptor*).
- * The command-processing loop in every context class reads a base pointer
- * and length from this descriptor before walking the actual command
- * stream - the exact field layout was never independently confirmed
- * (process_command_buffer's prologue was read many times, but a dedicated
- * struct-layout pass on VendorCommandDescriptor itself was not done this
- * project). Field names/order below are INFERRED from the two values every
- * context class's prologue clearly extracts (a buffer pointer, a length).
+ * This project's earlier pass assumed this struct was an INPUT the caller
+ * uses to hand process_command_buffer a command-stream pointer/length. A
+ * complete read of the real function's preamble and exit path shows this is
+ * WRONG: the command stream this function actually walks comes from
+ * `this`'s own VendorCommandBufferHeader (`this+0xe0`, see below) - never
+ * from this parameter. `param_1` is used PURELY AS AN OUTPUT, written only
+ * once, right before every real return, describing a leftover "already
+ * processed, not yet submitted to hardware" dword range plus the walk's
+ * final record-pointer position - real fields, all CONFIRMED at these exact
+ * offsets from the function's own tail (`LAB_00031340`):
+ *     *(ulong *)param_1        = (local_388 & ~3) + *(int*)(this+0xe0) + 0x20;
+ *     *(ulong *)(param_1+4)    = *(int*)(this+0xd0) + local_388 + 0x20;
+ *     *(ulong *)(param_1+8)    = local_384 + uVar63 [+1 if odd-adjusted];
+ *     *(ulong **)(param_1+0xc) = puVar65; // the walk's own final cursor
+ * The real MEANING of this output (a resume-state struct for a later call?
+ * a submit_buffer-shaped descriptor for some other consumer?) is an
+ * INFERENCE, not confirmed - what's CONFIRMED is the mechanical shape.
  */
 struct VendorCommandDescriptor {
-    void *          commandBuffer;   /* INFERRED: base of the command stream to process */
-    UInt32          commandLength;   /* INFERRED: length in bytes or dwords - not confirmed which */
-    /* UNKNOWN: real struct is very likely larger than this - only the
-     * fields actually dereferenced in the traced prologues are represented.
-     * TODO: a dedicated decompile of the struct's use across all four
-     * process_command_buffer implementations would nail this down exactly. */
+    void *          pendingBufferStart;  /* +0x0, CONFIRMED written: (local_388 & ~3) + contextBufferHeader + 0x20 */
+    UInt32          pendingBufferOffset; /* +0x4, CONFIRMED written: this+0xd0's value + local_388 + 0x20 */
+    UInt32          pendingDwordCount;   /* +0x8, CONFIRMED written: local_384 (+ uVar63, real odd-count adjustment) */
+    UInt32 *        finalRecordCursor;   /* +0xc, CONFIRMED written: the walk's own final record pointer */
 };
 
 /*
@@ -55,6 +63,18 @@ struct VendorCommandDescriptor {
  * independently-computed base pointers in two different binaries) - kept
  * here as a real, named, but separately-tracked hypothesis rather than
  * silently assumed.
+ *
+ * STRENGTHENED this pass: ATIR500GLContext::process_command_buffer's own
+ * real preamble (kext_process_cmd_buf.txt line 173) sets its walk's very
+ * first record pointer to `(UInt32*)((UInt8*)(*(UInt32*)(this+0xe0)) + 0x1c)`
+ * - i.e. `&header->chainLinkOrGeneration` IS the real start of the embedded
+ * command-record array this function walks. This makes the `= 9` seeded by
+ * start() a real INITIAL RECORD HEADER (opcode 0, distance 9 dwords) rather
+ * than a plain scalar field - a harmless self-skipping placeholder for a
+ * freshly-initialized, still-empty command buffer. Still not proven
+ * identical to the userspace bundle's own +0x1c field (two independently-
+ * computed base pointers, per the paragraph above), but now a real,
+ * internally-consistent confirmation on the KERNEL side alone.
  */
 struct VendorCommandBufferHeader {
     UInt8   _unknown_00[0x1c];

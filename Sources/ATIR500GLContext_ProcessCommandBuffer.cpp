@@ -3,11 +3,31 @@
  *
  * The real embedded command-buffer processor - the single most thoroughly
  * reverse-engineered function in this entire project. Real kext address:
- * 0x2b820 (ATIR500GLContext::process_command_buffer). This reconstruction
- * walks the real command-processor dispatch: real PM4 Type-0/Type-2/Type-3
- * packets, PLUS this driver's own private "embedded extended opcode"
- * marker language layered inside them (top byte 0x02-0x46, low 24 bits a
- * distance-to-next-record).
+ * 0x2b820 (ATIR500GLContext::process_command_buffer). This function walks
+ * this driver's own private "embedded extended opcode" marker language
+ * (top byte 0x02-0x46, low 24 bits a distance-to-next-record, in DWORDS).
+ *
+ * CORRECTED this pass: this project's earlier version of this file header
+ * claimed the loop also dispatches real PM4 Type-0/Type-2/Type-3 packets
+ * before trying the embedded language - a real, disclosed mistake. A
+ * complete read of the raw decompile's loop top (kext_process_cmd_buf.txt
+ * lines 178-186) shows no such check exists anywhere in this function: the
+ * loop reads the header and goes straight to the embedded-opcode dispatch,
+ * every time. The PM4-packet-type framework this project had built (now
+ * removed from this file) was invented by analogy with generic AMD PM4
+ * command-processor knowledge, not derived from this specific decompile -
+ * exactly the kind of unjustified shortcut this project's "no shortcuts"
+ * standard exists to catch. If a plain PM4 Type-0/2/3 dispatch is real
+ * somewhere else in this driver (a different, earlier consumer of the ring
+ * buffer before records reach this function, perhaps), it is NOT part of
+ * process_command_buffer itself and does not belong in this file.
+ *
+ * Also CORRECTED this pass: the walk's initial record pointer and its own
+ * end-of-buffer exit behavior - see the function body's own comments and
+ * VendorCommandDescriptor's doc comment (ATIRadeonX1000Types.h) for the
+ * real, considerably more involved mechanism this project's earlier
+ * version had oversimplified into "read `descriptor->commandBuffer`, loop
+ * until distance is zero, return success."
  *
  * IMPORTANT, faithfully preserved: the real chain-walk loop has ZERO
  * bounds checking against the buffer's real end/limit - this is the
@@ -17,8 +37,13 @@
  * silently patching it, because the point of this reconstruction is a
  * faithful, debuggable copy of the real driver - the historical hang
  * mechanism is exactly the kind of thing you'd want to be able to see and
- * single-step through in a debugger. A conservative bounds check IS
- * marked, clearly, as an opt-in experiment below (see PROMO4_SAFE_WALK).
+ * single-step through in a debugger. (The PROMO4_SAFE_WALK opt-in bounds
+ * check this project had planned as an experiment here was removed along
+ * with the wrong PM4/descriptor-input model it depended on - there is no
+ * real "buffer length" input to bound against with the corrected
+ * understanding that this function walks a stream it owns internally, not
+ * one the caller hands in. A real bounds check would need a different
+ * real limit, not yet identified.)
  *
  * Confidence: see per-opcode notes. Every opcode implemented below was
  * independently traced and documented across
@@ -33,27 +58,12 @@
 #include "../Headers/IOATIR500Accelerator.h"
 #include "../Headers/IOATIR500Surface.h"
 
-/*
- * Uncomment to add a real bounds check against the buffer's end/limit
- * before dereferencing each record - NOT present in the real driver.
- * Left off by default so this file's behavior matches the real kext
- * exactly, hang-prone chain-walk included.
- */
-// #define PROMO4_SAFE_WALK 1
-
-/* Real PM4 packet-type helpers - CONFIRMED, used throughout this project
- * since stage2-pm4-confirmed.md. */
-static inline UInt32 PM4_TYPE(UInt32 v)       { return (v >> 30) & 3; }
-static inline UInt32 PM4_TYPE0_COUNT(UInt32 v) { return ((v >> 16) & 0x3FFF) + 1; }
-static inline UInt32 PM4_TYPE0_BASE(UInt32 v)  { return v & 0x1FFF; }
-static inline UInt32 PM4_TYPE3_OPCODE(UInt32 v) { return (v >> 8) & 0xFF; }
 #define PM4_TYPE2_FILLER 0x80000000u
 
 /* The embedded marker language's own top-byte opcode extractor -
  * CONFIRMED shape (`uVar38 & 0xff000000`) used identically across every
  * context class's process_command_buffer this project decompiled. */
 static inline UInt32 EMBEDDED_OPCODE(UInt32 v) { return v & 0xff000000u; }
-static inline UInt32 EMBEDDED_DISTANCE(UInt32 v) { return v & 0x00ffffffu; }
 
 /*
  * ProcessCommandBufferState - CONFIRMED real, function-wide local state
@@ -75,10 +85,40 @@ static inline UInt32 EMBEDDED_DISTANCE(UInt32 v) { return v & 0x00ffffffu; }
  */
 struct ProcessCommandBufferState {
     UInt32 local_cc = 0;
-    UInt32 local_384 = 0;
+    /* CORRECTED: real initial value is 0xffffffff, not 0 (kext_process_cmd_buf.txt
+     * line 166: `local_384 = 0xffffffff;`). Every real read site only ever tests
+     * `local_384 != 0`, so this doesn't change observed behavior at any site found
+     * so far, but the literal value is preserved for fidelity per the no-shortcuts
+     * standard - if a future opcode ever reads the exact magnitude, this matters. */
+    UInt32 local_384 = 0xffffffffu;
     UInt32 local_388 = 0;
     UInt32 local_380 = 0;
     void  *local_378 = nullptr;
+    /* Real shared scratch buffer (`arStack_2fc`, a `register_tracking_state[24]`)
+     * passed to every real call site of restore_state_destroyed_by_pageoff -
+     * CONFIRMED to be a single function-wide local, not a per-opcode temp, since
+     * multiple distinct opcode bodies (0x06-0x15's bind handler, 0x39's vertex-
+     * attribute bind loop) each call restore_state_destroyed_by_pageoff with the
+     * same stack slot. */
+    register_tracking_state scratchState[24] = {};
+    /*
+     * CONFIRMED real, distinct control-flow signal this pass found, NOT
+     * present in this project's earlier model: `goto LAB_00030d40` (a real
+     * "texture table lookup failed" fallback used by opcode 0x26 and the
+     * 0x06-0x15 bind family) forces the shared tail's distance/advance
+     * variables to ZERO REGARDLESS of the current record's own real
+     * embedded distance field, which - per the tail's own real logic
+     * (kext_process_cmd_buf.txt lines 3295-3312) - means STOP WALKING
+     * ENTIRELY and write real resume-state into the function's own
+     * VendorCommandDescriptor* output parameter, not simply "advance by
+     * zero and re-enter the opcode switch on the same record" (which
+     * would be a real infinite loop) and NOT "apply the record's own
+     * natural distance" (this project's earlier, WRONG modeling of this
+     * exact path, which conflated it with the ordinary generic-advance
+     * signal). See the main dispatch loop's own tail logic for how this
+     * flag is consumed.
+     */
+    bool forceTerminate = false;
 };
 
 /* ---- Per-opcode handlers, in real opcode order ---- */
@@ -302,13 +342,13 @@ static UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) 
 }
 
 /*
- * Opcodes 0x06-0x15 (16 values) and their second alias family,
- * 0x16/0x18/0x19/0x1b/0x1c/0x1e/0x1f/0x21/0x22/0x24/0x25 (11 more values,
- * same handler): real, CONFIRMED per-texture-unit unbind. `N = (opcode's
- * unit-selecting arithmetic)` selects the unit; real formula confirmed
- * this session: `unitIndex = (opcode + 0xea000000) >> 0x16` mapping the
- * marker's top byte to a byte offset within the this+0x2a4-based per-unit
- * slot array (textureSlotArray in ATIR500GLContext.h).
+ * Opcodes 0x16/0x18/0x19/0x1b/0x1c/0x1e/0x1f/0x21/0x22/0x24/0x25 (11
+ * values): real, CONFIRMED per-texture-unit plain unbind - CORRECTED this
+ * pass to exclude opcodes 0x06-0x15, which are a real, separate, much
+ * larger FULL BIND operation (see handle_texture_bind above). `unitIndex =
+ * (opcode + 0xea000000) >> 0x16` maps the marker's top byte to a byte
+ * offset within the this+0x2a4-based per-unit slot array (textureSlotArray
+ * in ATIR500GLContext.h).
  */
 static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -339,7 +379,18 @@ static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 o
         *slot = nullptr;
     }
     *record = PM4_TYPE2_FILLER; /* real: LAB_0002eae8 */
-    return record + 1;
+    /* CORRECTED this pass: this project originally assumed self-consuming
+     * into PM4_TYPE2_FILLER meant a hardcoded "advance by 1 dword" - a full
+     * read of the real function's tail (LAB_00031340) shows there is no
+     * such per-opcode advance at all. EVERY opcode, including this one,
+     * relies on the SAME shared tail applying the CURRENT record's own
+     * natural embedded distance field (computed once at the top of each
+     * loop iteration, before any handler runs) - self-consuming a record
+     * only ever changes its CONTENT, never how far the walk steps past it.
+     * Returning `record` unchanged is this file's established signal for
+     * "apply the generic distance-based advance" (see the dispatch loop's
+     * own comment). */
+    return record;
 }
 
 /*
@@ -382,6 +433,192 @@ UInt32 RTOffsetTilingBurst(void *pAVar77, UInt32 unitIndex, UInt32 nextIndex, UI
 } // namespace
 
 /*
+ * Opcodes 0x06-0x15 (16 values, one per fragment-texture unit): CORRECTED
+ * and fully transcribed this pass. This project's earlier pass wrongly
+ * lumped this whole range into the same simple "unbind" handler as the
+ * real, SEPARATE 0x16-0x25 family above - reading the complete raw
+ * decompile (kext_process_cmd_buf.txt lines 178-317, literally the FIRST
+ * condition tested in the whole per-record dispatch: `if (uVar75 < 0x10)`
+ * where `uVar75 = (header's top byte) - 6`) shows this range is a real
+ * FULL TEXTURE BIND, not a plain unbind:
+ *   1. unbind whatever texture is currently in this unit's slot (same
+ *      remove_texture_from_stream + refcount-decrement pattern as the
+ *      plain unbind family);
+ *   2. look up the NEW texture from the shared texture table by the
+ *      record's own index operand (`record[1]`) - falling through to the
+ *      shared LAB_00030d40 failure tail (clears pending-flush state and
+ *      advances) if the index is out of range or the slot is empty;
+ *   3. add_texture_to_stream the new texture, and if its shared "dirty"
+ *      record needs it, flush any already-pending buffer, then
+ *      alloc_and_load_texture, optionally restore_state_destroyed_by_pageoff,
+ *      optionally a second map_transfer_to_GART;
+ *   4. patch the texture's own format-selector field (`+0x68`) via a real
+ *      3-way branch on the record's own top-2-bit format selector: a
+ *      format-table-driven bit-depth shift (selector==1), a real
+ *      surface-backed-texture pitch/height lookup via
+ *      IOATIR500Surface::surface_buffer_idx_mask (when the texture's own
+ *      `+0x20` kind byte is 0 - the same "surface-backed" kind this
+ *      project's add_texture_to_stream/remove_texture_from_stream already
+ *      named), or a plain literal store otherwise;
+ *   5. a real, NOT-YET-INDEPENDENTLY-CONFIRMED packed dual-16-bit-counter
+ *      update at the texture's shared record `+0x10` (real magnitude
+ *      `-0xffff`, not the ordinary `-1` this project's decrement helper
+ *      uses everywhere else - see the inline comment at that line for the
+ *      "move a unit from a queued sub-count to an active sub-count"
+ *      reading, which is an INFERENCE, not confirmed);
+ *   6. if the texture is itself display-surface-backed (`+0x48 != 0`), a
+ *      real doubly-linked-list re-insertion into the accelerator's own
+ *      texture list at `+0x600`/`+0x5dc` (a DIFFERENT list than the one
+ *      add_texture_to_stream itself manages at `+0x6d0`/`+0x69c`);
+ *   7. WriteTextureOffset, then store the new texture into the unit slot.
+ *
+ * Real formula for which unit this opcode addresses (distinct from the
+ * plain-unbind family's `(opcode + 0xea000000) >> 0x16` formula):
+ * `unitIndex = ((header's top byte) - 6) * 4`, a plain byte offset into
+ * the same `this+0x2a4`-based per-unit slot array.
+ */
+static UInt32 *handle_texture_bind(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record, ProcessCommandBufferState &state) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt32 unitByteOffset = ((opcode >> 0x18) - 6) * 4;
+
+    VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(self + unitByteOffset + 0x2a4);
+    if (*slot != nullptr) {
+        ctx->remove_texture_from_stream(*slot);
+        VendorTextureBuffer *oldTex = *slot;
+        void *oldRec = reinterpret_cast<void *>(U32At(oldTex, 0x14));
+        UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(oldRec) + 0x10);
+        UInt32 before = *countField;
+        *countField = before - 1; /* real: non-atomic stand-in, see DiscardBuffer.cpp's note */
+        if (before == 1) {
+            IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+            (void)shared; /* real: IOATIR500Shared::delete_texture(shared, oldTex); */
+        }
+        *slot = nullptr;
+    }
+
+    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
+    if (U32At(sharedAllocator, 0x14) <= record[1]) {
+        /* real: goto LAB_00030d40 - CORRECTED this pass, this is a real
+         * forced-termination path, NOT the ordinary generic-advance signal
+         * (see ProcessCommandBufferState::forceTerminate's doc comment). */
+        U32At(accel, 0x50) -= state.local_380;
+        state.local_384 = 0;
+        state.forceTerminate = true;
+        return record;
+    }
+    VendorTextureBuffer *newTex = reinterpret_cast<VendorTextureBuffer *>(
+        U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4));
+    if (newTex == nullptr) {
+        U32At(accel, 0x50) -= state.local_380;
+        state.local_384 = 0;
+        state.forceTerminate = true;
+        return record; /* same real LAB_00030d40 fallthrough */
+    }
+
+    ctx->add_texture_to_stream(newTex);
+    void *rec = reinterpret_cast<void *>(U32At(newTex, 0x14));
+    if (U8At(rec, 0x14) != 0) {
+        if (state.local_384 != 0) {
+            UInt32 uVar38 = static_cast<UInt32>(record[-1]) >> 2;
+            if (4 < uVar38) {
+                UInt32 uVar73 = (uVar38 != 5) ? (((uVar38 - 6) * 0x10000) | 0xc0001000u) : 0x80000000u;
+                record[-static_cast<SInt32>(uVar38)] = uVar73;
+            }
+            record[-4] = 0x1393; record[-3] = 0; record[-2] = 0x5c8; record[-1] = 0x20000;
+            U32At(accel, 0x704) += state.local_384 * 4;
+            U32At(accel, 0xb94) = 1;
+            UInt32 newTag = ctx->accelerator->submit_buffer(
+                reinterpret_cast<UInt32 *>((state.local_388 & 0xfffffffcu) + U32At(self, 0xe0) + 0x20),
+                state.local_388 + U32At(self, 0xd0) + 0x20, state.local_384);
+            U32At(self, 0xdc) = newTag;
+            UInt32 uVar55 = state.local_384;
+            state.local_380 = 0;
+            state.local_384 = 0;
+            state.local_388 = uVar55 * 4 + state.local_388;
+        }
+        ctx->alloc_and_load_texture(newTex);
+        if (U32At(accel, 0xb90) != 0) {
+            ctx->restore_state_destroyed_by_pageoff(state.scratchState);
+        }
+        if (U32At(self, 0xd0) == 0) {
+            ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(self + 0xcc));
+        }
+    }
+
+    UInt32 formatBits = U32At(newTex, 0x68);
+    UInt32 formatSel = record[2] >> 0x1e;
+    UInt32 selBits = formatSel << 0x1e;
+    U32At(newTex, 0x68) = selBits | (formatBits & 0x3fffffffu);
+    if (formatSel != 0) {
+        /* real: `*(byte*)(puVar65+3)` - puVar65+3 lands on record[3]'s own
+         * aligned address, and a byte read there captures the FIRST byte in
+         * memory order. This target is big-endian PowerPC, so that is
+         * record[3]'s TOP byte (bits 31:24), not its low byte. */
+        UInt8 recordByte3 = U8At(record, 3 * 4);
+        UInt32 shiftedByte = static_cast<UInt32>(recordByte3) << 0x16;
+        U32At(newTex, 0x68) = shiftedByte | selBits | (formatBits & 0x3fffffu);
+        if (formatSel == 1) {
+            UInt32 tableOffset = static_cast<UInt32>(recordByte3) * 0x1c;
+            bool bVar1 = (U8At(rec, 0x15) & 0x18) == 0;
+            UInt32 tableVal = FormatTableLookup_0x0004d2dc(tableOffset);
+            SInt32 shiftBase = bVar1 ? 0 : -static_cast<SInt32>((tableVal >> 8) & 3);
+            SInt32 shiftAmount = (shiftBase - static_cast<SInt32>((tableVal >> 0xc) & 7) + 5) & 0x3f;
+            SInt32 shifted = static_cast<SInt32>(record[3] & 0xffffffu) >> shiftAmount;
+            UInt32 uVar38 = static_cast<UInt32>(shifted) << 5;
+            if ((U8At(rec, 0x15) & 4) != 0) {
+                uVar38 = static_cast<UInt32>(shifted << 0xc) >> 3;
+            }
+            U32At(newTex, 0x68) = ((uVar38 >> 5) & 0x3fffffu) | (U32At(newTex, 0x68) & 0xffc00000u);
+        } else if (U8At(newTex, 0x20) == 0) {
+            /* real: texture kind byte (+0x20) == 0, the same "surface-backed"
+             * kind already named in IOATIR500GLContext_TextureStream.cpp */
+            IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(newTex, 0x50));
+            UInt32 uVar38 = 0;
+            if (surface != nullptr) {
+                UInt32 idxOut = 0;
+                UInt32 idx = surface->surface_buffer_idx_mask(U32At(newTex, 0x58), &idxOut);
+                void *bufEntry = reinterpret_cast<void *>(U32At(reinterpret_cast<UInt8 *>(surface) + idx * 4, 0xb70));
+                uVar38 = static_cast<UInt32>(U16At(bufEntry, 0x14)) * static_cast<UInt32>(U16At(bufEntry, 0x16));
+                if (uVar38 < 0x20) uVar38 = 0x20;
+            }
+            U32At(newTex, 0x68) = (((uVar38 * (record[3] & 0xffffffu)) >> 5) & 0x3fffffu) | (U32At(newTex, 0x68) & 0xffc00000u);
+        } else {
+            U32At(newTex, 0x68) = (record[3] & 0x3fffffu) | shiftedByte | selBits;
+        }
+    }
+
+    U32At(newTex, 0x60) = record[2] & 0x3fffffffu;
+
+    /* real: packed dual-16-bit-counter update at rec+0x10 - see file header note.
+     * Magnitude is a real, confirmed -0xffff (NOT the ordinary -1 refcount
+     * decrement used everywhere else in this driver), which in 32-bit
+     * two's-complement arithmetic is exactly "subtract 1 from the high
+     * 16 bits, add 1 to the low 16 bits" - an INFERENCE (not independently
+     * confirmed) that this field packs two related 16-bit sub-counts. */
+    UInt32 *packedCountField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec) + 0x10);
+    *packedCountField = *packedCountField - 0xffffu;
+
+    if (U32At(newTex, 0x48) != 0) {
+        /* real doubly-linked-list re-insertion into the accelerator's own
+         * texture list at +0x600/+0x5dc - a DIFFERENT list than the one
+         * add_texture_to_stream manages at +0x6d0/+0x69c. */
+        UInt32 prevNode = U32At(newTex, 0x24);
+        U32At(reinterpret_cast<void *>(prevNode), 0x28) = U32At(newTex, 0x28);
+        U32At(reinterpret_cast<void *>(U32At(newTex, 0x28)), 0x24) = prevNode;
+        U32At(newTex, 0x24) = U32At(accel, 0x600);
+        U32At(newTex, 0x28) = reinterpret_cast<UInt32>(accel) + 0x5dc;
+        U32At(accel, 0x600) = reinterpret_cast<UInt32>(newTex);
+        U32At(reinterpret_cast<void *>(U32At(newTex, 0x24)), 0x28) = reinterpret_cast<UInt32>(newTex);
+    }
+
+    ctx->WriteTextureOffset((opcode >> 0x18) - 6, record, 0, newTex);
+    *slot = newTex;
+
+    return record; /* real: falls to the shared generic distance-based advance */
+}
+
+/*
  * Opcode 0x26: CONFIRMED, fully transcribed real GART transfer-buffer
  * bind (real kext offset within the ~0x2e900-0x2ea00 dispatch region).
  * Real, substantially more involved than this project's earlier
@@ -399,9 +636,25 @@ static UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
 
-    if (U32At(sharedAllocator, 0x14) <= record[1]) return record; /* real: goto LAB_00030d40 - falls to the generic advance, see the dispatch loop's own note */
+    if (U32At(sharedAllocator, 0x14) <= record[1]) {
+        /* real: goto LAB_00030d40 - CORRECTED this pass, a real forced-
+         * termination path (see ProcessCommandBufferState::forceTerminate),
+         * NOT the ordinary generic-advance signal this project originally
+         * modeled it as. LAB_00030d40's own shared body (not just the jump)
+         * includes the accel+0x50/local_380 adjustment and local_384 reset
+         * below - every real caller of that label runs this, not just 0x26. */
+        U32At(ctx->accelerator, 0x50) -= state.local_380;
+        state.local_384 = 0;
+        state.forceTerminate = true;
+        return record;
+    }
     VendorTextureBuffer *tex = reinterpret_cast<VendorTextureBuffer *>(U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4));
-    if (tex == nullptr) return record; /* same real fallthrough */
+    if (tex == nullptr) {
+        U32At(ctx->accelerator, 0x50) -= state.local_380;
+        state.local_384 = 0;
+        state.forceTerminate = true;
+        return record; /* same real LAB_00030d40 fallthrough */
+    }
 
     VendorTextureBuffer *old = reinterpret_cast<VendorTextureBuffer *>(U32At(self, 0x328));
     void *local_378 = tex;
@@ -460,7 +713,10 @@ static UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *reco
         U32At(self, 0x328) = 0;
     }
     *record = PM4_TYPE2_FILLER;
-    return record + 1;
+    /* CORRECTED this pass: see handle_remove_texture_from_stream's identical
+     * correction note - self-consuming does not imply a hardcoded advance;
+     * the shared tail's own natural distance-based advance always applies. */
+    return record;
 }
 
 /*
@@ -637,7 +893,9 @@ static UInt32 *handle_texture_reference_swap(ATIR500GLContext *ctx, UInt32 *reco
     }
     *reinterpret_cast<UInt32 *>(self + 0x334) = reinterpret_cast<UInt32>(newTex);
     *record = PM4_TYPE2_FILLER; /* INFERRED self-consuming marker erasure, matching every other confirmed opcode in this family - not independently confirmed for 0x36 specifically */
-    return record + 1;
+    /* CORRECTED this pass: see handle_remove_texture_from_stream's identical
+     * correction note - self-consuming does not imply a hardcoded advance. */
+    return record;
 }
 
 /*
@@ -646,15 +904,22 @@ static UInt32 *handle_texture_reference_swap(ATIR500GLContext *ctx, UInt32 *reco
  * this driver, this is a *named* marker - a real glFlush-equivalent
  * expressed in the marker language.
  */
-static UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record) {
-    /* TODO: real `if (pendingCount != 0) submit_buffer(...)` body - see
-     * stage4-opcode-range-0x02-0x31-traced.md's exact transcription for
-     * the pending-count bookkeeping fields (local_384/local_388 in the
-     * original decompile - not yet mapped to named ATIR500GLContext
-     * fields in this reconstruction). */
-    (void)ctx;
-    *record = PM4_TYPE2_FILLER;
-    return record + 1;
+static UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    if (state.local_384 != 0) {
+        U32At(ctx->accelerator, 0x704) += state.local_384 * 4;
+        U32At(ctx->accelerator, 0xb94) = 1;
+        UInt32 uVar40 = ctx->accelerator->submit_buffer(
+            reinterpret_cast<UInt32 *>((state.local_388 & 0xfffffffcu) + U32At(self, 0xe0) + 0x20),
+            state.local_388 + U32At(self, 0xd0) + 0x20, state.local_384);
+        U32At(self, 0xdc) = uVar40;
+        UInt32 iVar59 = state.local_384 * 4;
+        state.local_384 = 0;
+        state.local_388 = iVar59 + state.local_388;
+        state.local_380 = 0;
+    }
+    *record = 0x80000000u;
+    return record; /* real: falls through to the shared generic distance-based advance */
 }
 
 /* Opcode 0x2c: CONFIRMED real mip/slice-aware scissor intersection.
@@ -905,45 +1170,67 @@ static UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record) {
  */
 IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
     ProcessCommandBufferState state; /* real local_cc/local_384/local_388/local_380/local_378 - see the struct's own doc comment */
-    UInt32 *record = static_cast<UInt32 *>(descriptor->commandBuffer);
-#ifdef PROMO4_SAFE_WALK
-    UInt32 *realEnd = record + (descriptor->commandLength / sizeof(UInt32)); /* NOT present in the real driver - see file header */
-#endif
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+
+    /*
+     * Real preamble (kext_process_cmd_buf.txt lines 164-177) - CORRECTED
+     * this pass. This project's earlier version wrongly assumed the walk
+     * starts from `descriptor->commandBuffer` (an INPUT). It does not: the
+     * real initial record pointer is `&contextBufferHeader->chainLinkOrGeneration`
+     * (`this+0xe0`'s pointee, offset +0x1c) - this function walks a command
+     * stream owned by `this` itself, not one the caller hands in. See
+     * VendorCommandDescriptor's own doc comment in ATIRadeonX1000Types.h for
+     * the real (output-only) role `descriptor` actually plays.
+     */
+    UInt8 *contextBufferHeader = reinterpret_cast<UInt8 *>(U32At(self, 0xe0));
+    UInt32 *record = reinterpret_cast<UInt32 *>(contextBufferHeader + 0x1c);
+
+    /*
+     * Real one-time HyperZ state priming, CONFIRMED real calls
+     * (`compute_sc_hyperz_en`/`compute_zb_bw_cntl`, real arguments read from
+     * `this+0x108`'s pointee). Their return values (`local_2e4`/`local_2e0`
+     * in the raw decompile) are, per a full read of this function, never
+     * read again anywhere in its body - kept here anyway (rather than
+     * silently dropped) because both functions are already independently
+     * known (from their own transcriptions) to WRITE real per-surface
+     * HyperZ fields as a side effect, so discarding the calls entirely
+     * would risk silently losing that real effect. Real, CONFIRMED-dead
+     * companion locals `local_1c8`/`local_1c4`/`local_1c0` (computed from
+     * `this+0x108` too) are NOT modeled here at all - grepping the complete
+     * raw decompile shows they are written here and never read anywhere
+     * else in this function.
+     */
+    UInt8 *contextRegs = reinterpret_cast<UInt8 *>(U32At(self, 0x108));
+    (void)compute_sc_hyperz_en(U32At(contextRegs, 0));
+    (void)compute_zb_bw_cntl(U32At(contextRegs, 4));
 
     for (;;) {
-#ifdef PROMO4_SAFE_WALK
-        if (record >= realEnd) break; /* the fix the real driver does NOT have */
-#endif
         UInt32 header = *record;
-        UInt32 type = PM4_TYPE(header);
 
-        if (type == 2) {
-            /* real PM4 Type-2: pure filler, advance one dword */
-            record += 1;
-            continue;
-        }
-        if (type == 0) {
-            /* real PM4 Type-0: register write burst - not this driver's
-             * embedded marker language at all. INFERRED advance amount
-             * (real Type-0 semantics: 1 header dword + COUNT value dwords). */
-            record += 1 + PM4_TYPE0_COUNT(header);
-            continue;
-        }
-        if (type == 3 && PM4_TYPE3_OPCODE(header) == 0x10 /* real NOP opcode */) {
-            /* A real Type-3 NOP - either a genuine no-op, or (far more
-             * commonly in this driver) the CONFIRMED "self-consuming
-             * marker erasure" convention every deferred-patch opcode above
-             * uses once it has consumed its own content. */
-            record += 1 + PM4_TYPE0_COUNT(header); /* INFERRED: Type-3's count field uses the identical bit position as Type-0's */
-            continue;
-        }
+        /* Not a real PM4 packet-type dispatch: CORRECTED this pass - a
+         * complete read of the raw decompile's loop top (lines 178-186)
+         * confirms there is NO PM4 Type-0/Type-2/Type-3 pre-check anywhere
+         * in this real function. This project's earlier version invented
+         * that check by analogy with generic AMD PM4 command-processor
+         * knowledge, not from this specific decompile - a real, disclosed
+         * mistake, now removed. The real loop reads the header and goes
+         * straight to this driver's own embedded marker language. */
+        UInt32 distance = header & 0x00ffffffu;   /* uVar63 */
+        /* real: `dataCacheBlockTouch(puVar65 + uVar63);` - a real hardware
+         * cache-prefetch hint for the record `distance` dwords ahead, with
+         * no portable C++ equivalent and no effect on program behavior -
+         * safe to omit in a host reimplementation. */
+        UInt32 opcode = header & 0xff000000u;     /* uVar38 */
+        UInt32 topByteMinus6 = (header >> 0x18) - 6; /* uVar75 */
 
-        /* Not a plain PM4 packet - try this driver's own embedded
-         * extended-opcode marker language. CONFIRMED dispatch range
-         * 0x02000000-0x46000000. */
-        UInt32 opcode = EMBEDDED_OPCODE(header);
-        UInt32 *next = nullptr;
+        UInt32 *next = record;
 
+        if (topByteMinus6 < 0x10) {
+            /* real: literally the FIRST condition tested in the whole
+             * per-record dispatch (`if (uVar75 < 0x10)`) - preserved here
+             * structurally by checking it before the switch. */
+            next = handle_texture_bind(this, opcode, record, state);
+        } else
         switch (opcode) {
             case 0x02000000: next = handle_set_return_code_3(this, record, state); break;
             case 0x03000000: next = handle_set_return_code_2(this, record, state); break;
@@ -956,7 +1243,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x28000000: next = handle_single_rendertarget_scissor(this, record); break;
             case 0x29000000: next = handle_vertex_format_and_commit(this, record); break;
             case 0x2a000000: next = handle_rendertarget_pair_scissor(this, record); break;
-            case 0x2b000000: next = handle_explicit_flush(this, record); break;
+            case 0x2b000000: next = handle_explicit_flush(this, record, state); break;
             case 0x2c000000: next = handle_mip_scissor_intersect(this, record); break;
             case 0x2f000000: next = handle_hyperz_commit(this, record); break;
             case 0x30000000: next = handle_fsaa_resolve_setup(this, record); break;
@@ -973,53 +1260,78 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x45000000: next = handle_build_surface_from_texture(this, record); break;
             case 0x46000000: next = handle_fast_clear(this, record); break;
             default:
-                if (opcode >= 0x06000000 && opcode <= 0x25000000) {
-                    /* the shared unbind family, including the second alias
-                     * range 0x16-0x25 confirmed this session */
+                if (opcode >= 0x16000000 && opcode <= 0x25000000) {
+                    /* the real, separate, plain unbind family - confirmed to
+                     * be ONLY opcodes 0x16/0x18/0x19/0x1b/0x1c/0x1e/0x1f/0x21/
+                     * 0x22/0x24/0x25 (11 explicit values, real reserved gaps
+                     * at 0x17/0x1a/0x1d/0x20/0x23 already excluded by their
+                     * own `case` labels above) - CORRECTED this pass, this
+                     * range previously and wrongly started at 0x06 (0x06-0x15
+                     * is the real texture-BIND range, handled before this
+                     * switch is even entered - see handle_texture_bind). */
                     next = handle_remove_texture_from_stream(this, opcode, record);
-                } else {
-                    /* CONFIRMED: end-of-buffer sentinel or truly unknown
-                     * content - the real driver's own behavior for the
-                     * loop-terminating case was not independently
-                     * re-transcribed for this reconstruction; the low 24
-                     * bits' real distance-to-next-record value governs
-                     * advancement here, exactly as documented in
-                     * stage3-embedded-opcode-language.md. */
-                    UInt32 distance = EMBEDDED_DISTANCE(header);
-                    if (distance == 0) {
-                        return kIOReturnSuccess; /* INFERRED loop-termination condition */
-                    }
-                    next = record + distance; /* the real, confirmed ZERO-BOUNDS-CHECKED advance - see file header */
                 }
+                /* else: real, confirmed end-of-buffer sentinel or genuinely
+                 * unrecognized content - `next` is already `record`
+                 * unchanged, so the shared tail below applies the header's
+                 * own natural distance field exactly as every other
+                 * "no real handler needed" opcode does. */
                 break;
         }
 
         /*
-         * CONFIRMED real structural fact this reconstruction pass found:
-         * many real opcode bodies (0x02-0x05, the reserved no-ops,
-         * 0x26-0x2a/0x2c/0x30/0x37-0x45) do NOT self-compute their own
-         * "next record" pointer - they write real values into `record`'s
-         * OWN fields (sometimes including `record[0]` itself, as opcode
-         * 0x28 does) and then real-fall-through to the same generic
-         * distance-based advance every other unrecognized opcode uses
-         * (`LAB_00031340` in the raw decompile). A handler returning
-         * `record` completely unchanged is the real, unambiguous signal
-         * for this case (no opcode that genuinely advances zero dwords
-         * makes sense - it would be a real infinite loop in the ORIGINAL
-         * driver too), so it's used here as a real, safe sentinel rather
-         * than threading a distance value through every handler
-         * signature. IMPORTANT: this reads `header`, the dword captured
-         * BEFORE any handler ran (some handlers, like opcode 0x28,
-         * overwrite `record[0]` itself as part of their real logic) -
-         * exactly matching the real function's own read-before-write
-         * ordering.
+         * Real shared tail (`LAB_00031340`, kext_process_cmd_buf.txt lines
+         * 3295-3312) - CORRECTED and completed this pass. This project's
+         * earlier version modeled this as a plain "advance by the record's
+         * own distance, or return success if that distance is zero" - a
+         * real, significant simplification. The actual real tail:
+         *   1. computes the byte-advance from EITHER the current record's
+         *      own natural embedded distance (the common case) OR a forced
+         *      zero (when a handler hit a real `goto LAB_00030d40` failure
+         *      path - see ProcessCommandBufferState::forceTerminate);
+         *   2. advances the walk cursor by that amount regardless;
+         *   3. if the EFFECTIVE distance was zero (natural end-of-buffer OR
+         *      a forced termination), does NOT simply return success - it
+         *      writes real resume/pending-buffer state back into the
+         *      `descriptor` output parameter (see VendorCommandDescriptor's
+         *      own corrected doc comment) and returns the real accumulated
+         *      `local_cc` return code (set by opcodes 0x02/0x03 to 3/2,
+         *      otherwise the real default of 0/kIOReturnSuccess);
+         *      otherwise the do-while genuinely loops back to the top.
+         * IMPORTANT: `next == record` (this project's established signal
+         * for "no explicit alternate pointer") is what selects the natural-
+         * distance path below; every currently-transcribed opcode uses this
+         * path (verified: none currently returns a distinct pointer), but
+         * the `next != record` branch is kept for any future opcode that
+         * genuinely needs one - unexercised so far, flagged accordingly.
          */
-        if (next == record) {
-            UInt32 distance = EMBEDDED_DISTANCE(header);
-            if (distance == 0) return kIOReturnSuccess; /* INFERRED loop-termination condition, matching the default case above */
-            next = record + distance;
+        if (next != record) {
+            /* Not currently exercised by any transcribed opcode - see note
+             * above. If this is ever hit, re-verify against the real tail:
+             * this project has not confirmed any real opcode bypasses
+             * LAB_00031340's own exit-check entirely. */
+            record = next;
+            continue;
         }
 
-        record = next;
+        UInt32 effectiveDistance = state.forceTerminate ? 0u : distance;
+        state.forceTerminate = false;
+        record = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(record) + effectiveDistance * 4);
+
+        if (effectiveDistance == 0) {
+            UInt32 uVar55 = state.local_384; /* real: `local_384 + uVar63` with uVar63 == 0 here */
+            if ((uVar55 & 1) != 0) {
+                *record = 0x80000000u;
+                uVar55 = state.local_384 + 1;
+                record += 1;
+            }
+            descriptor->pendingBufferStart = reinterpret_cast<void *>(
+                (state.local_388 & 0xfffffffcu) + reinterpret_cast<UInt32>(contextBufferHeader) + 0x20);
+            descriptor->pendingBufferOffset = U32At(self, 0xd0) + state.local_388 + 0x20;
+            descriptor->pendingDwordCount = uVar55;
+            descriptor->finalRecordCursor = record;
+            U32At(this->accelerator, 0x78) = 0;
+            return static_cast<IOReturn>(state.local_cc);
+        }
     }
 }

@@ -120,7 +120,11 @@ public:
     void     free_buffer_backing_store(ATIR500SurfaceBuffer *buffer);
     void     attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
                                           UInt32 param3, UInt32 alignedPitch);
-    UInt32   surface_buffer_idx_mask(void);
+    UInt32   surface_buffer_idx_mask(UInt32 param1, UInt32 *outParam);
+    /* FIXED this pass: real call site (opcodes 0x06-0x15's texture-bind
+     * handler, ATIR500GLContext_ProcessCommandBuffer.cpp) passes TWO
+     * explicit arguments (both real 32-bit `ulong` values on this PPC32
+     * target, not 64-bit) - this declaration previously dropped both. */
 
 protected:
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */

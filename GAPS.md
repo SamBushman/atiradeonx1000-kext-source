@@ -13,15 +13,50 @@ the concrete first steps.
 
 ## 2. `process_command_buffer`'s opcode handlers - the largest reconstruction gap
 
+**Major structural corrections this pass** (found while transcribing the remaining opcodes, by finally
+reading the complete raw decompile rather than the excerpts used earlier): this project's model of the
+function's own SKELETON - not just individual opcode bodies - had several real, disclosed mistakes, now
+fixed:
+
+- **Opcodes `0x06-0x15` are a real FULL TEXTURE BIND, not a plain unbind.** This project's earlier pass
+  wrongly lumped this whole 16-value range into the same simple unbind handler as the real, separate
+  `0x16-0x25` family. The real range is checked as literally the FIRST condition in the whole per-record
+  dispatch and does unbind-old + table-lookup-new + `add_texture_to_stream` + format-field setup +
+  `WriteTextureOffset` - see `handle_texture_bind`'s own header comment for the full real sequence. Fixing
+  this also surfaced and fixed two real header-signature bugs it depends on:
+  `IOATIR500Surface::resolve_fsaa_buffer` and `surface_buffer_idx_mask` were both missing real parameters.
+- **There is no real PM4 Type-0/Type-2/Type-3 packet dispatch anywhere in this function.** This project's
+  earlier version of this file invented that pre-check by analogy with generic AMD PM4 command-processor
+  knowledge, not from this specific decompile - confirmed absent by a complete read of the real loop top.
+  Removed, along with the now-dead `PM4_TYPE`/`PM4_TYPE0_COUNT`/`PM4_TYPE0_BASE`/`PM4_TYPE3_OPCODE` helpers.
+- **The walk's real initial record pointer comes from `this` itself, not the `descriptor` parameter.** The
+  real starting point is `&(*(VendorCommandBufferHeader**)(this+0xe0))->chainLinkOrGeneration` (offset
+  `+0x1c`) - this function processes a command stream it owns internally. `VendorCommandDescriptor`
+  (the `descriptor` parameter) is real, but is used PURELY AS AN OUTPUT, written only right before every
+  real return - see its own corrected doc comment in `ATIRadeonX1000Types.h`.
+- **The real exit tail (`LAB_00031340`) is a pause/resume mechanism, not a plain "return success."** When
+  the walk reaches a record whose real distance is (or is forced to) zero, the function does NOT just
+  return - it writes four real fields describing pending/leftover state into `descriptor` and returns a
+  real accumulated status code. This project's earlier "if distance==0, return kIOReturnSuccess" was a
+  real oversimplification, now replaced with the full real mechanism (see `ProcessCommandBufferState`'s
+  new `forceTerminate` flag and the dispatch loop's own tail comment).
+- **Self-consuming a record does NOT mean "advance by a fixed amount."** Several already-transcribed
+  handlers (the plain unbind family, opcode `0x27`, opcode `0x36`) had wrongly modeled
+  `*record = 0x80000000; return record + 1;` - the real driver has no such per-opcode fixed advance;
+  EVERY opcode, self-consuming or not, relies on the shared tail's distance-based advance using the
+  CURRENT record's own natural embedded distance field. Fixed to `return record;` (this file's
+  established "use the generic advance" signal) at all three sites.
+
 `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp` has a named, correctly-dispatched handler for every
 real opcode this project ever catalogued, but several bodies are honest stubs pointing at the exact
 source document to transcribe from rather than full reconstructions:
 
-- Opcodes `0x02-0x05` (HyperZ/HiZ block management) - categorized, never bit-traced (a deliberate scoping
-  choice at the time, given the redesign proposal skips HyperZ entirely).
-- Opcode `0x26`/`0x27` (transfer-buffer bind/unbind) - real refcount/lookup body not transcribed.
-- Opcode `0x28` (single render-target + scissor) - real per-mip offset/pitch formula not transcribed
-  (shares its shape with `write_kernel_context_buffer_regs`, see below).
+- ~~Opcodes `0x02-0x05` (HyperZ/HiZ block management)~~ RESOLVED - all four fully transcribed from complete
+  real decompiles, including opcode `0x05`'s real cross-context HiZ state sharing.
+- ~~Opcodes `0x06-0x15`~~ RESOLVED (and RETARGETED - see this section's own header above: this is a real
+  full texture BIND, a much larger real operation than the plain unbind this project first assumed).
+- ~~Opcode `0x26`/`0x27` (transfer-buffer bind/unbind)~~ RESOLVED - both fully transcribed.
+- ~~Opcode `0x28` (single render-target + scissor)~~ RESOLVED - fully transcribed via `RTOffsetTilingBurst`.
 - ~~Opcode `0x29` (vertex-format switch table)~~ RESOLVED - the real 8-case enum-remapping switch was
   confirmed and transcribed via `discard_command_buffer`'s independent trace of the same opcode (see
   section 5's discovery of opcode `0x36`, found the same way). One real open item remains: whether this
@@ -29,8 +64,8 @@ source document to transcribe from rather than full reconstructions:
   `attachmentCount` - not independently re-confirmed for this exact function.
 - ~~Opcode `0x2a` (render-target-pair + scissor)~~ RESOLVED - fully transcribed (`RTOffsetTilingBurst`
   reused twice, real duplicated scissor-Y write into two record slots).
-- Opcode `0x2b` (explicit flush) - real pending-count bookkeeping fields not mapped to named struct
-  fields yet.
+- ~~Opcode `0x2b` (explicit flush)~~ RESOLVED - fully transcribed, threaded through
+  `ProcessCommandBufferState`.
 - ~~Opcode `0x2c` (mip-aware scissor intersect)~~ RESOLVED - fully transcribed via `RTOffsetTilingBurst`.
   Real, notable finding: this opcode reads BOTH `this+0x354` and `this+0x358` together as a Y/X pair,
   which is new evidence for (but doesn't resolve) section 3's open `build_scissor` question about
