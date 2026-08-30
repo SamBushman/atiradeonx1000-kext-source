@@ -47,10 +47,14 @@ public:
     IOReturn set_surface_vsync_options(void *inStruct, void *outStruct, UInt32 structSize, UInt32 *outTag);  /* 14, CONFIRMED body (stage9): same deliberate-stub pattern as set_surface_paging_options */
     IOReturn set_macrovision(UInt32 enable);                                                              /* 15, CONFIRMED body (stage9): real and functioning - iterates every active display connection, calls a vtable method (opcode 0x92) on each */
 
-    /* ---- Extra table, selectors 16-18 ---- */
-    IOReturn read_regs(UInt32 *offsets, UInt32 *outValues, UInt32 byteCount, UInt32 *inOutCount);        /* 16, CONFIRMED body: masks each offset with REGISTER_ACCESS_WINDOW_MASK, validates against a device-active flag AND a caller-claimed-vs-actual size check before touching hardware */
-    IOReturn write_regs(UInt32 *offsetValuePairs, UInt32 pairByteCount);                                 /* 17, CONFIRMED body: same masking/validation as read_regs */
-    IOReturn write_2_regs(UInt32 offset1, UInt32 offset2, UInt32 *values, UInt32 byteCount);              /* 18, CONFIRMED body: writes two independently-addressed registers per iteration, same masking */
+    /*
+     * NOTE on selectors 16-18: real decompiled signatures for read_regs/
+     * write_regs/write_2_regs are `ATIR5002DContext::` (the SUBCLASS),
+     * not `IOATIR5002DContext::` (this base class) - matching the exact
+     * same base/subclass method split pattern already established for
+     * the GL context (IOATIR500GLContext.h/ATIR500GLContext.h). See
+     * ATIR5002DContext.h for those three methods.
+     */
 
 protected:
     void *accelerator;   /* +0x94, CONFIRMED offset (every method above reaches hardware through `*(int*)(this+0x94)`) */

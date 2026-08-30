@@ -284,6 +284,29 @@ struct sATIDVDIDCTInfo {
 };
 
 /*
+ * sATIDVDIDCTParams - CONFIRMED shape, from doIDCT's own real decompiled
+ * use of its second argument (real mangled signature just calls it
+ * `unsigned long`, but every real use in the decompile treats it as a
+ * pointer to this real struct - a classic decompiler pointer-degraded-to-
+ * integer artifact, not a real scalar argument). This is the real,
+ * caller-supplied "which plane, which field, where to put the computed
+ * geometry" IDCT ioctl parameter block - distinct from sATIDVDIDCTInfo,
+ * which is the real per-context IDCT state object.
+ */
+struct sATIDVDIDCTParams {
+    UInt32  chromaFlag;      /* +0x00, CONFIRMED: 0 => luma-only pitch, nonzero => chroma pitch doubled */
+    UInt32  fieldFlag;       /* +0x04, CONFIRMED: gates which of two address-computation branches runs */
+    UInt32  destPlaneIndex;  /* +0x08, CONFIRMED: used as a mip/plane-table index (`*8 * 0x78 + ...`) in the luma (chromaFlag==0... actually fieldFlag==0) branch */
+    UInt32  planeSelector;   /* +0x0c, CONFIRMED: 0 => luma plane (uses lumaBufferA/B), 1 => chroma plane (uses chromaBufferA/B); any other value => kIOReturnBadArgument */
+    UInt8   _pad_0x10[0x1c - 0x10];
+    UInt32  computedStride;  /* +0x1c, CONFIRMED: real computed (height * strideOrDoubled - 1) value */
+    UInt32  computedChromaStride; /* +0x20, CONFIRMED: real computed (strideOrDoubled * (height>>1) - 1) value, chroma-plane-shaped */
+    UInt32  destBaseAddress; /* +0x2c, CONFIRMED: real computed destination base address (luma or chroma plane) */
+    UInt32  destEndAddress;  /* +0x30, CONFIRMED: real computed destination end address */
+    UInt32  strideBroadcast; /* +0x28, CONFIRMED: real (stride | stride<<16) packed value */
+};
+
+/*
  * sIOGLNewTextureData / sIOGLNewTextureReturnData / sIOGLContextReadBufferData -
  * UNKNOWN layout. Only their names, argument positions, and the small
  * number of leading dwords actually dereferenced in new_texture/read_buffer
