@@ -22,7 +22,11 @@ source document to transcribe from rather than full reconstructions:
 - Opcode `0x26`/`0x27` (transfer-buffer bind/unbind) - real refcount/lookup body not transcribed.
 - Opcode `0x28` (single render-target + scissor) - real per-mip offset/pitch formula not transcribed
   (shares its shape with `write_kernel_context_buffer_regs`, see below).
-- Opcode `0x29` (vertex-format switch table) - the 8-case enum-remapping switch itself not transcribed.
+- ~~Opcode `0x29` (vertex-format switch table)~~ RESOLVED - the real 8-case enum-remapping switch was
+  confirmed and transcribed via `discard_command_buffer`'s independent trace of the same opcode (see
+  section 5's discovery of opcode `0x36`, found the same way). One real open item remains: whether this
+  main execute-path handler processes a fixed 4 slots (as `discard_command_buffer` does) or the dynamic
+  `attachmentCount` - not independently re-confirmed for this exact function.
 - Opcode `0x2a` (render-target-pair + scissor) - real per-slot bind body not transcribed.
 - Opcode `0x2b` (explicit flush) - real pending-count bookkeeping fields not mapped to named struct
   fields yet.
@@ -55,18 +59,24 @@ something other than a plain "Y" value. **Does not require hardware** - needs ei
 whatever function writes `this+0x354`, or a live trace correlating both fields against real on-screen
 scissor behavior (the latter would need hardware).
 
-`restore_state_destroyed_by_pageoff` (the capstone function) and `compute_sc_hyperz_en`/
-`compute_zb_bw_cntl`'s real bit-level HyperZ decision logic remain TODO stubs - not yet re-read from a
-full decompile the way `write_kernel_context_buffer_regs` was this pass.
+~~`restore_state_destroyed_by_pageoff` (the capstone function) and `compute_sc_hyperz_en`/
+`compute_zb_bw_cntl`'s real bit-level HyperZ decision logic remain TODO stubs~~ **RESOLVED**: all three
+are now fully transcribed from complete real decompiles (`Sources/ATIR500GLContext_RestoreState.cpp`,
+`Sources/ATIR500GLContext_RegisterState.cpp`). This closes issue #4 entirely. `compute_sc_hyperz_en`/
+`compute_zb_bw_cntl` revealed and named two real per-surface flags
+(`ATIR500SurfaceBuffer::hyperZEligible`/`zbBandwidthEligible`). `restore_state_destroyed_by_pageoff`'s
+transcription is dense (~120 real pairs) and comes with an explicit caveat in the file about
+transposition risk - one was already caught and fixed, others may remain; spot-check any specific
+value against the raw decompile before relying on it for a real test.
 
-## 4. Several real internal helper functions are declared but have no `.cpp` body at all
+## 4. Several real internal helper functions - most now reconstructed
 
 `build_scissor`, `GetTextureOffset`/`WriteTextureOffset`, `GetVertexArrayOffset`/`WriteVertexArrayOffset`,
-`GetQueryOffset`, `add_texture_to_stream`/`remove_texture_from_stream`/`load_texture`/
-`alloc_and_load_texture`/`compact_current_textures`, `map_transfer_to_GART`,
-`process_kATIGLStreamFastClearColor`, `build_surface_from_texture`, `submit_context_buffer`,
-`discard_command_buffer` - all real, confirmed to exist and have a confirmed *role* (see the header
-comments in `Headers/ATIR500GLContext.h`), none have a source file yet. Each would need either a fresh
+`GetQueryOffset`, `add_texture_to_stream`/`remove_texture_from_stream`, `map_transfer_to_GART`,
+`process_kATIGLStreamFastClearColor`, `build_surface_from_texture`, `discard_command_buffer` are now all
+**fully reconstructed** from complete real decompiles (closing most of issue #5). Still real, confirmed-
+to-exist, but only lightly sampled (not fully transcribed, given their size/density):
+`load_texture`/`alloc_and_load_texture`/`compact_current_textures`/`submit_context_buffer` - each would need a fresh
 targeted Ghidra decompile pass or transcription from this project's existing stage docs where one already
 covers it.
 
