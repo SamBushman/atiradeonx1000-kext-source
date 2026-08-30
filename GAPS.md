@@ -263,14 +263,46 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages are entirely unimplemented
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - SKELETON MAPPED, transcription started
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
-their own (same mechanism as GL's, different opcode numbers) - neither has been reconstructed into C++ at
-all here, only confirmed to exist and sampled at a categorical level (see
-`stage9-gl-remaining-methods-gart-pool-power-interrupts.md`). DVD's is flagged there as the single best
-future target given direct evidence of real YUV 4:2:0 plane-geometry math and a texture-sampler-state
-record - directly relevant to this project's H.264 goal.
+their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
+record stream, self-consuming low-24-bit distance fields, same `0x80000000`-sentinel exit-descriptor
+write at buffer end - just different opcode numbers/semantics). Real address: DVD 0x357c0
+(`ATIR500DVDContext::process_command_buffer`), 2D 0x326d0. DVD alone is ~0x39a0 bytes of real machine
+code - about 61% of GL's own `process_command_buffer` (~0x5db0 bytes), which took this project many
+dedicated commits across a full session to fully transcribe. **This is genuinely comparable in scope to
+that whole effort, not a small remaining item** - full completion needs its own dedicated multi-session
+pass, same as GL's did.
+
+**This pass established the real skeleton** (the essential first step, matching how GL's own
+`stage3-embedded-opcode-language.md` began before opcode-by-opcode work started) and characterized several
+real opcode families in detail, without yet transcribing them into compilable C++:
+
+- **Confirmed real opcode range**: 0x02, 0x04-0x0d, 0x12-0x25, 0x26-0x39, 0x3a-0x3f, 0x42-0x44, 0x46-0x47
+  (~55 distinct top-byte values dispatched on) - extracted directly from the real decompile's full
+  if/else-chain, not sampled.
+- **Opcodes 0x1e-0x25, 0x26-0x2a (via one shared handler)**: a real "bind texture unit N" family, N
+  derived directly from the opcode value itself (`(opcode - 0x1e) * 4`-ish indexing into a per-unit
+  texture-slot array at `this+0x104`) - the SAME real add_texture_to_stream / GART-map / transfer-buffer-
+  list-splice pattern this project already fully reconstructed for GL's `alloc_and_load_texture`/
+  `get_texture` this pass (issue #5) - directly reusable understanding.
+- **Opcodes 0x26-0x39-ish (a second shared handler)**: the mirror-image real "unbind texture unit N"
+  family - calls `remove_texture_from_stream` and a real `IOATIR500Shared::delete_texture` (a real,
+  previously-undiscovered method on that still-unreconstructed class - see issue #10's
+  `Headers/IOATIR500Shared.h`).
+- **Opcodes 0x5/0x6 and 0xa/0xb/0xc/0xd**: real, dense per-mip YUV surface setup handlers - CONFIRMED
+  direct evidence of the real YUV 4:2:0 combined luma+chroma plane-size formula
+  (`height * pitch * 3 >> 1`, appearing at multiple real call sites) and real PM4 register writes forming
+  what looks like a texture-sampler-state record (`0x1393`/`0x5c8`/`0xd0b` family), using the SAME real
+  format-lookup tables (`DAT_0004d2e0`/`DAT_0004d2dc`) GL's own `build_scissor`/
+  `write_kernel_context_buffer_regs` already reference - directly relevant to this project's H.264 goal,
+  and the highest-value remaining target.
+- Several trivial shared exit paths (malformed-opcode-abort, plain distance-only skip, sentinel-write)
+  identified and are cheap to transcribe once opcode-by-opcode work resumes.
+
+2D's `process_command_buffer` (0x326d0) is much smaller (~0xe40 bytes, ~15% of GL's size) and was not
+examined this pass - likely the more tractable of the two once DVD's higher-value work is further along.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
 
