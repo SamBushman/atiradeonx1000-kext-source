@@ -203,5 +203,11 @@ extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, 
  */
 extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
+/* FormatTableLookup_0x0004d2e4 - a THIRD real, confirmed-to-exist format
+ * table (`DAT_0004d2e4` in the raw decompile), found this pass in opcode
+ * 0x31's real trace (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) -
+ * same real indexing convention (`formatTableIndex * 0x1c`) as the other
+ * two. Raw table content not extracted from the binary this pass. */
+extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
 
 #endif /* ATIRADEONX1000_REGISTERS_H */

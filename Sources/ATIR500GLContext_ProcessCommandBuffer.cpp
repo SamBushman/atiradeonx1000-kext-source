@@ -313,16 +313,12 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
  * floating-point NDC/viewport math and US-block shader headers - the
  * second independent confirmed real example (after
  * _radeon3DCopySetup/_radeon3DFillSetup) of this driver generation's
- * "blit via textured quad" technique. Full field-by-field transcription
- * deliberately deferred - see stage4-opcode-range-0x02-0x31-traced.md for
- * the complete real trace this would be built from.
+ * "blit via textured quad" technique. FULLY transcribed, literally,
+ * in Sources/ATIR500GLContext_FSAAResolveBlit.cpp (see that file for the
+ * transcription method and an honest caveat about the two real, open
+ * integration/precision gaps it documents).
  */
-static UInt32 *handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record) {
-    (void)ctx;
-    /* TODO: this is the single largest remaining reconstruction gap in
-     * this file - see the doc reference above for the real trace. */
-    return record;
-}
+extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record);
 
 /* Opcode 0x37: CONFIRMED real "deferred texture/render-target
  * offset-and-format patch" - the answer to how this driver embeds a
@@ -478,7 +474,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x2c000000: next = handle_mip_scissor_intersect(this, record); break;
             case 0x2f000000: next = handle_hyperz_commit(this, record); break;
             case 0x30000000: next = handle_fsaa_resolve_setup(this, record); break;
-            case 0x31000000: next = handle_fsaa_resolve_blit(this, record); break;
+            case 0x31000000: next = ATIR500GLContext_handle_fsaa_resolve_blit(this, record); break;
             case 0x36000000: next = handle_texture_reference_swap(this, record); break;
             case 0x37000000: next = handle_deferred_offset_patch(this, record); break;
             case 0x38000000: next = handle_address_fixup(this, record); break;
