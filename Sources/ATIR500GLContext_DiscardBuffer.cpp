@@ -18,16 +18,18 @@
  * - CONFIRMS opcode 0x29's real 8-case switch table (already folded into
  *   ATIR500GLContext_ProcessCommandBuffer.cpp's handler as a second
  *   independent source).
- * - A NEW, previously-uncatalogued opcode: 0x36000000 - a real texture
- *   REFERENCE SWAP at `this+0x334` (decrement the old bound texture's
- *   refcount, increment the new one's, store the new pointer). This
- *   opcode was never seen in any of this project's prior opcode-language
- *   sweeps (stage3/stage4 in the reveng repo) - it sits in the middle of
- *   the already-mapped 0x30-0x3a range and was apparently missed because
- *   it has no real effect in process_command_buffer's own EXECUTE path
- *   traced so far (this trace only saw it in the DISCARD/cleanup path).
- *   Real, concrete follow-up: check whether process_command_buffer's own
- *   execute-path body has a 0x36 handler this project hasn't found yet.
+ * - A NEW, previously-uncatalogued opcode: 0x36000000 - this cleanup-path
+ *   trace correctly identifies a real refcount touch at `this+0x334`
+ *   (decrement the old bound value's refcount, increment the new one's,
+ *   store the new pointer) - CONFIRMED still accurate. A later pass found
+ *   this opcode's real EXECUTE-path body
+ *   (ATIR500GLContext_ProcessCommandBuffer.cpp's
+ *   handle_transfer_buffer_bind_and_fixup): `this+0x334` is really a
+ *   TRANSFER-BUFFER slot (closer in kind to opcodes 0x26/0x27 than to a
+ *   texture reference), and the execute path additionally does a real
+ *   embedded address-fixup loop (shape-identical to opcode 0x38's) this
+ *   cleanup-only trace has no way to see. Not a contradiction between the
+ *   two traces - just two different real views of the same opcode.
  * - Real detail on opcode 0x3b (texture-slot swap) not previously this
  *   precise: it calls a real vtable method at offset 0x14c on a memory-
  *   descriptor-shaped object to (re)establish a real backing mapping, and
@@ -148,10 +150,13 @@ void ATIR500GLContext::discard_command_buffer(void) {
             }
         } else if (opcode == 0x36000000) {
             /*
-             * NEW, previously-uncatalogued opcode. Real texture REFERENCE
-             * SWAP at this+0x334: release the old bound texture's
-             * reference (if its real "transferBufferFlag" field is
-             * clear), take a new reference on the incoming one, store it.
+             * Real transfer-buffer slot at this+0x334 (CORRECTED naming -
+             * see file header note; this project's earlier "texture
+             * reference swap" description undersold what this field really
+             * is, though the refcount mechanics below remain accurate):
+             * release the old bound value's reference (if its real
+             * "transferBufferFlag" field is clear), take a new reference on
+             * the incoming one, store it.
              */
             void *oldTex = reinterpret_cast<void *>(U32At(self, 0x334));
             void *newTex = reinterpret_cast<void *>(record[1]);
