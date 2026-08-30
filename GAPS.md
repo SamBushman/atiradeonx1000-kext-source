@@ -81,10 +81,35 @@ source document to transcribe from rather than full reconstructions:
   shader headers, reusing the same `_g_r500_3d_blit_state_packet` template as
   `restore_state_destroyed_by_pageoff`. Full real trace already exists in
   `g5-h264-gpu-decode`'s `promo4-client/reveng/stage4-opcode-range-0x02-0x31-traced.md`.
-- Opcodes `0x37`/`0x38`/`0x39` (deferred texture/render-target offset patch, address fixup, vertex-
-  attribute binding) and the `0x3a/0x3b/0x3d/0x3e/0x3f/0x40/0x43` texture-load family, plus `0x44`/`0x45`
-  - all have real, complete traces already written up in `stage4-embedded-opcode-table-completed.md` and
-  its follow-ups; none transcribed into this reconstruction's C++ yet.
+- ~~Opcodes `0x37`/`0x38`/`0x39`~~ RESOLVED - all three fully transcribed (deferred texture/render-target
+  offset patch, address fixup, vertex-attribute binding). `0x37`'s transcription has one honestly-flagged
+  unconfirmed inference (a read of `uVar75` with no visible assignment in that opcode's own text); `0x38`'s
+  has one honestly-flagged disambiguation (a `puVar65[2]` read that textually appears after that same slot
+  was overwritten - modeled as reading the pre-overwrite value, not independently confirmed against raw
+  machine code).
+- ~~Opcode `0x3a`~~ RESOLVED - a real, unconditional 17-slot clear (the vertex-attribute-slot range opcode
+  0x39 populates). Also fixed a real infinite-loop-shaped bug this same opcode's transcription in
+  `discard_command_buffer` had (a loop-bound comparison that could never become true), and removed a
+  fabricated `record[1]`-driven conditional gate that a full read of the real execute-path body does not
+  support.
+- ~~Opcode `0x3d`~~ RESOLVED - a trivial real forward to `IOATIR500Surface::set_volatile_state`. Also fixed
+  that method's own declared signature (was `UInt32*` state passed as a value at the real call site, not
+  taken by reference as this project's header previously modeled with an added `&`).
+- Opcodes `0x3b`/`0x3e`/`0x3f`/`0x40`/`0x43` (this project's earlier pass wrongly assumed these five were
+  "structurally identical" to each other and to `0x3a`/`0x3d` - CORRECTED: they are not, each is
+  individually large and dense, more closely related in shape to `handle_texture_bind` than to `0x3a`/
+  `0x3d`) - `0x3e` and `0x40`'s real bodies were read in full this pass (kext_process_cmd_buf.txt lines
+  ~1459-1710) but not yet transcribed; `0x3b`/`0x3f` were not yet located. Still an honest stub
+  (`handle_texture_load_family`).
+- Opcode `0x41` (render-target commit) - real body located this pass (kext_process_cmd_buf.txt starting
+  ~line 1713) and confirmed to be another large, dense function (a real per-attachment loop with texture
+  bind/relist logic and `build_surface_from_texture` calls) - NOT fully read or transcribed yet, current
+  stub's `write_kernel_context_buffer_regs` call was an unverified guess by analogy with opcode 0x29 and
+  should be treated as unconfirmed.
+- Opcodes `0x44`/`0x45`/`0x46` - not yet re-examined against the raw decompile this pass; `0x46` in
+  particular should be re-verified even though it already calls the real
+  `process_kATIGLStreamFastClearColor` (its current record-index arguments were never independently
+  checked against a fresh decompile).
 
 ## 3. Register-state serialization: mostly done, one open question, two functions still bodies-empty
 

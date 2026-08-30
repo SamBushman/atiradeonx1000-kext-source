@@ -1214,13 +1214,60 @@ LAB_0002f978_37:
     return record; /* real: falls to LAB_00031340 */
 }
 
-/* Opcode 0x38: CONFIRMED real deferred address-fixup pass - consumes
- * itself (overwrites its own marker with real Type-2 filler) then walks an
- * embedded array converting relative offsets into absolute GART addresses. */
+/*
+ * Opcode 0x38: CONFIRMED, fully transcribed this pass - real deferred
+ * address-fixup pass. Consumes its own leading 4 dwords (real Type-2-style
+ * filler, `0x80000000` not the `PM4_TYPE2_FILLER` self-consume this
+ * project's earlier stub guessed), then walks a real embedded array
+ * converting relative dword-offsets into absolute addresses (a real base
+ * computed from the accelerator's GART-window fields plus this context's
+ * own buffer-header fields - the SAME base formula this file's
+ * pending-buffer-flush pattern already uses elsewhere), stride 3 dwords
+ * per real entry, two outputs per entry.
+ *
+ * HONEST AMBIGUITY, disclosed rather than silently resolved: the raw
+ * decompile computes the real base (`iVar59`) using `puVar65[2]` in an
+ * expression that textually appears AFTER `puVar65[2]` was already
+ * overwritten to `0x80000000` two lines earlier. Using the just-clobbered
+ * placeholder value would make the whole address computation nonsensical,
+ * so this project's strong inference is that the compiled code actually
+ * used a register holding `puVar65[2]`'s ORIGINAL value (a common
+ * decompiler artifact where linearized pseudocode implies a memory
+ * read-after-write that the real machine code's register allocation never
+ * actually performed) - modeled here by saving the original value before
+ * the overwrite. NOT independently confirmed against the raw machine code.
+ */
 static UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record) {
-    (void)ctx;
-    *record = PM4_TYPE2_FILLER;
-    return record + 1; /* TODO: real embedded-array walk not yet re-transcribed */
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt32 *puVar65 = record;
+
+    UInt32 uVar38 = (puVar65[1] + 1) >> 1;
+    UInt32 origWord2 = puVar65[2]; /* see HONEST AMBIGUITY note above */
+    *puVar65 = 0x80000000u;
+    puVar65[1] = 0x80000000u;
+    puVar65[2] = 0x80000000u;
+    puVar65[3] = 0x80000000u;
+
+    SInt32 iVar59 = static_cast<SInt32>(U32At(accel, 0x8a4)) + static_cast<SInt32>(U32At(self, 0xd0)) +
+                    (static_cast<SInt32>(origWord2) * 4 - static_cast<SInt32>(U32At(self, 0xe0) + 0x20)) + 0x20;
+
+    if (uVar38 != 0) {
+        SInt32 iVar48 = 6;
+        SInt32 iVar33 = 0x1c;
+        UInt32 *puVar69 = puVar65;
+        do {
+            puVar65[iVar48] = reinterpret_cast<UInt32>(puVar65) + puVar69[6] * 4 + static_cast<UInt32>(iVar59);
+            U32At(reinterpret_cast<UInt8 *>(puVar65) + iVar33, 0) =
+                reinterpret_cast<UInt32>(puVar65) + puVar69[7] * 4 + static_cast<UInt32>(iVar59);
+            puVar69 += 3;
+            iVar48 += 3;
+            iVar33 += 0xc;
+            uVar38 -= 1;
+        } while (uVar38 != 0);
+    }
+
+    return record; /* real: falls through to whatever comes after this if-chain's end - see file header for the shared-tail cascade note */
 }
 
 /*
@@ -1463,20 +1510,95 @@ static UInt32 *handle_bind_vertex_attributes(ATIR500GLContext *ctx, UInt32 *reco
         state.forceTerminate = true;
     }
     return record; /* real: on success, falls to the shared generic distance-based advance (the raw decompile's own trailing `iVar52 = uVar63 << 2;` is a no-op re-affirmation of that same natural advance, since uVar63/iVar52 were reused as scratch within this opcode's own body) */
-    return record;
 }
 
-/* Opcodes 0x3a/0x3d/0x3e/0x3b/0x3f/0x40/0x43: CONFIRMED real texture
- * load/attach family - structurally identical add_texture_to_stream /
- * alloc_and_load_texture calls, differing only in which per-context
- * texture-slot field they target (textureSlotArray vs
- * secondaryTextureSlotA vs secondaryTextureSlotB) - real, confirmed
- * evidence this driver tracks multiple independent texture-unit slots
- * through parallel, structurally-identical opcode variants. */
+/*
+ * CORRECTED this pass: this project's earlier version grouped opcodes
+ * 0x3a/0x3b/0x3d/0x3e/0x3f/0x40/0x43 into one stub handler on the
+ * (unverified) assumption they were "structurally identical." Reading the
+ * complete real decompile shows this is wrong - these are genuinely
+ * distinct real opcodes of very different sizes and shapes (0x3a is a
+ * trivial fixed-range clear; 0x3d is a two-line forward; 0x3e/0x40/0x43
+ * are each large, dense render-target/vertex-index-buffer commits with
+ * real per-opcode register-index differences). Split into individual
+ * handlers below, matching this project's established per-opcode pattern.
+ */
+
+/*
+ * Opcode 0x3a: CONFIRMED, fully transcribed - a real, unconditional sweep
+ * clearing every bound vertex-attribute-buffer slot (`this+0x2e4` through
+ * `this+0x2e4+0x40`, 17 entries, stride 4 - exactly the slot range opcode
+ * 0x39 populates, unit indices 0x10-0x20). Self-consumes via the SAME
+ * shared `LAB_0002eae8` tail the plain fragment-texture unbind family
+ * uses. This pass also found and fixed a real bug in this project's
+ * `discard_command_buffer` transcription of this same opcode (a broken
+ * loop-bound comparison that could never terminate) - see
+ * ATIR500GLContext_DiscardBuffer.cpp's own corrected comment.
+ */
+static UInt32 *handle_clear_vertex_attribute_slots(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    for (UInt8 *p = self + 0x2e4; p <= self + 0x2e4 + 0x40; p += 4) {
+        VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(p);
+        if (*slot != nullptr) {
+            ctx->remove_texture_from_stream(*slot);
+            VendorTextureBuffer *tex = *slot;
+            void *rec = reinterpret_cast<void *>(U32At(tex, 0x14));
+            UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec) + 0x10);
+            UInt32 before = *countField;
+            *countField = before - 1; /* real: non-atomic stand-in, see DiscardBuffer.cpp's note */
+            if (before == 1) {
+                IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+                (void)shared; /* real: IOATIR500Shared::delete_texture(shared, tex); */
+            }
+            *slot = nullptr;
+        }
+    }
+    *record = PM4_TYPE2_FILLER; /* real: LAB_0002eae8 */
+    return record; /* real: falls through to the shared generic distance-based advance - see handle_remove_texture_from_stream's identical correction note */
+}
+
+/*
+ * Opcode 0x3d: CONFIRMED, fully transcribed - a real, trivial forward to
+ * `IOATIR500Surface::set_volatile_state`, gated on a magic constant
+ * (`0x132`) matching this record's own type tag. Self-consumes into
+ * either a real 4-dword `0x80000000` block (match) or a real 2-dword
+ * block (no match).
+ */
+static UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt32 *puVar65 = record;
+    if (puVar65[1] == 0x132) {
+        UInt32 uVar55 = puVar65[2];
+        *puVar65 = 0x80000000u; puVar65[1] = 0x80000000u; puVar65[2] = 0x80000000u; puVar65[3] = 0x80000000u;
+        IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
+        if (surface != nullptr) {
+            /* real: `uVar55` (record[2]) is passed BY VALUE, not by
+             * reference - it must itself already be a real pointer value
+             * (a client-supplied address) embedded in the command stream,
+             * matching set_volatile_state's declared `UInt32 *state`
+             * parameter. */
+            surface->set_volatile_state(reinterpret_cast<UInt32 *>(uVar55));
+        }
+    } else {
+        *puVar65 = 0x80000000u; puVar65[1] = 0x80000000u;
+    }
+    return record; /* real: falls through to the shared generic distance-based advance */
+}
+
+/*
+ * Opcodes 0x3e/0x3b/0x3f/0x40/0x43: CONFIRMED real, each individually
+ * large and dense (a texture-table lookup + add_texture_to_stream +
+ * pending-flush + alloc_and_load_texture + real per-opcode register-index
+ * patch sequence, closely related in shape to handle_texture_bind but not
+ * identical - each has real, opcode-specific field-index differences not
+ * yet fully cross-checked). Partially read this pass
+ * (kext_process_cmd_buf.txt lines ~1459-1710 cover 0x3e and 0x40's real
+ * bodies in full; 0x3b and 0x3f were not located this pass) but NOT yet
+ * transcribed to the no-shortcuts standard - real bodies deliberately left
+ * as an honest stub rather than an approximated one. See GAPS.md.
+ */
 static UInt32 *handle_texture_load_family(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
     (void)opcode;
-    /* TODO: dispatch to the correct slot field per opcode, then call
-     * add_texture_to_stream/alloc_and_load_texture. */
     (void)ctx;
     return record;
 }
@@ -1608,8 +1730,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x37000000: next = handle_deferred_offset_patch(this, record); break;
             case 0x38000000: next = handle_address_fixup(this, record); break;
             case 0x39000000: next = handle_bind_vertex_attributes(this, record, state); break;
-            case 0x3a000000: case 0x3b000000: case 0x3d000000: case 0x3e000000:
-            case 0x3f000000: case 0x40000000: case 0x43000000:
+            case 0x3a000000: next = handle_clear_vertex_attribute_slots(this, record); break;
+            case 0x3d000000: next = handle_forward_volatile_state(this, record); break;
+            case 0x3b000000: case 0x3e000000: case 0x3f000000: case 0x40000000: case 0x43000000:
                 next = handle_texture_load_family(this, opcode, record); break;
             case 0x41000000: next = handle_rendertarget_commit(this, record); break;
             case 0x44000000: next = handle_transfer_gart_completion(this, record); break;

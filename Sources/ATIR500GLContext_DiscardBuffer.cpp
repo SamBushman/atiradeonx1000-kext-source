@@ -121,18 +121,30 @@ void ATIR500GLContext::discard_command_buffer(void) {
                     (pairEnum == 7 || pairEnum == 8) ? static_cast<UInt16>(pairEnum) : 6;
             }
         } else if (opcode == 0x3a000000) {
-            /* real: release EVERY bound texture across a fixed range
-             * (this+0x2e4 .. this+0x44, stride 4) - a "clear all bound
-             * textures" operation, real gate on record[1]==0 controlling
-             * whether it stops after one or sweeps the whole range. */
-            bool stopAfterOne = (record[1] == 0);
-            for (UInt8 *p = self + 0x2e4; ; p += 4) {
+            /*
+             * CORRECTED this pass: this project's earlier loop bound here
+             * (`p + 4 == self + 0x44`) was a real bug - `p` starts at
+             * `self+0x2e4`, so that comparison could never become true
+             * (the loop would run away / overflow). Also removed a
+             * fabricated `record[1]==0` early-exit gate: a full read of
+             * this SAME opcode's real EXECUTE-path body (
+             * ATIR500GLContext_ProcessCommandBuffer.cpp's
+             * handle_clear_all_vertex_attribute_slots) shows an
+             * unconditional 17-entry sweep with no such gate, and the two
+             * paths almost certainly iterate the identical fixed range -
+             * this project's earlier claim of a conditional gate here was
+             * not grounded in anything actually read from this decompile.
+             * Real range, now confirmed via the execute path: `self+0x2e4`
+             * through `self+0x2e4+0x40` inclusive (17 entries, stride 4) -
+             * exactly the vertex-attribute-buffer slot range opcode 0x39
+             * populates (unit indices 0x10-0x20).
+             */
+            for (UInt8 *p = self + 0x2e4; p <= self + 0x2e4 + 0x40; p += 4) {
                 void *slot = reinterpret_cast<void *>(U32At(p, 0));
                 if (slot != nullptr) {
                     ReleaseBoundTextureSlot(this, slot, sharedAllocator);
                     U32At(p, 0) = 0;
                 }
-                if (stopAfterOne || p + 4 == self + 0x44) break;
             }
         } else if (opcode == 0x36000000) {
             /*
