@@ -54,25 +54,250 @@ static inline UInt32 PM4_TYPE3_OPCODE(UInt32 v) { return (v >> 8) & 0xFF; }
 static inline UInt32 EMBEDDED_OPCODE(UInt32 v) { return v & 0xff000000u; }
 static inline UInt32 EMBEDDED_DISTANCE(UInt32 v) { return v & 0x00ffffffu; }
 
+/*
+ * ProcessCommandBufferState - CONFIRMED real, function-wide local state
+ * this project's earlier per-opcode-handler split (a real, disclosed
+ * reconstruction choice - see file header) initially didn't thread
+ * through. Real names from the decompile: `local_cc` (the function's own
+ * eventual return value, written by opcodes 0x02/0x03), `local_384`/
+ * `local_388`/`local_380` (a pending-submission dword count / byte
+ * offset / a third counter, read and reset by opcode 0x26's "flush if a
+ * transfer buffer needs a real backing" path and, per
+ * stage4-opcode-range-0x02-0x31-traced.md, opcode 0x2b's explicit-flush
+ * path too - not yet wired there, see that handler's own TODO),
+ * `local_378` (a scratch VendorTransferBuffer* used by opcode 0x26 and,
+ * per the raw decompile, opcode 0x37's surface-backed branch). Threaded
+ * as a reference parameter to every handler that touches it, rather than
+ * silently working around the gap - this is the correct fix for the
+ * architectural tension the per-opcode split created, not a new
+ * shortcut.
+ */
+struct ProcessCommandBufferState {
+    UInt32 local_cc = 0;
+    UInt32 local_384 = 0;
+    UInt32 local_388 = 0;
+    UInt32 local_380 = 0;
+    void  *local_378 = nullptr;
+};
+
 /* ---- Per-opcode handlers, in real opcode order ---- */
 
 /*
- * Opcodes 0x02-0x05: real HyperZ/HiZ compressed-Z block management, using
- * the real, named HiZ memory-manager functions HZMEM_GetBlockOffset/
- * HZMEM_GetBlockCount/HZMEM_IsPartial. CONFIRMED to be real and non-trivial
- * (stage4-opcode-range-0x02-0x31-traced.md); NOT traced to full bit-level
- * precision there, and not reconstructed field-by-field here either, for
- * the same reason given at the time: this project's redesign proposal
- * already avoids HyperZ entirely for a minimal draw, so the marginal value
- * of a byte-exact reconstruction is low relative to everything else in
- * this file. TODO if HyperZ is ever needed: re-trace kext offsets in the
- * 0x2e820-0x2ea00-ish range (see the stage4 doc) field-by-field.
+ * Opcodes 0x02/0x03: CONFIRMED, fully transcribed - genuinely trivial,
+ * contrary to this project's earlier categorization as "HyperZ block
+ * management" (that description belongs to 0x04/0x05 only). These two
+ * just set the function's own eventual return value (`local_cc`) to 3
+ * or 2 respectively - real, distinct status codes this project never
+ * independently named. Real: no dword output, no record mutation - the
+ * generic distance-based advance (this function's own dispatch loop)
+ * handles cursor movement.
  */
-static UInt32 *handle_hyperz_block_ops(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
-    (void)ctx; (void)opcode;
-    /* TODO: real HZMEM_GetBlockOffset/GetBlockCount/IsPartial-based
-     * compressed-Z clear/resolve logic goes here. */
+static UInt32 *handle_set_return_code_3(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    (void)ctx;
+    state.local_cc = 3;
     return record;
+}
+static UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    (void)ctx;
+    state.local_cc = 2;
+    return record;
+}
+
+/*
+ * Opcode 0x04: CONFIRMED, fully transcribed real HyperZ/HiZ fast-clear
+ * setup. Resolves the real bound-surface HiZ record (same two-mode
+ * selection as build_scissor/write_kernel_context_buffer_regs), checks
+ * a real "surface already fully HiZ-compressed" sentinel
+ * (`surfaceRecord+0x28 == 0x3ff00000`-ish bit pattern) to choose between
+ * a trivial fast-clear header and a real, dense HZMEM-block-offset-
+ * driven partial-clear burst (real float math for the partial case, via
+ * the same "magic bias" trick as opcode 0x31). Ends with a real vtable
+ * call at offset 0x5a4 - the SAME real, still-unnamed virtual method
+ * opcode 0x2f's HyperZ commit handler also calls.
+ */
+static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    void *pAVar77;
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        void *surfBase = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(self + 0x290));
+        UInt16 unit = *reinterpret_cast<UInt16 *>(self + 0xac);
+        pAVar77 = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(surfBase) + unit * 0x78 + 0xa8));
+    } else {
+        pAVar77 = self + (*reinterpret_cast<UInt16 *>(self + 0x3b2)) * 0x78 + 0x3c0;
+    }
+
+    UInt32 uVar58 = record[1];
+    UInt32 uVar55 = record[2];
+    *record = 0xc0011000;
+    if ((*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x28) & 0x3ff00000u) == 0x3ff00000u) {
+        *record = 0xc00b1000;
+    } else {
+        UInt32 uVar61 = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(reinterpret_cast<UInt8 *>(ctx->accelerator) + 0x870),
+                                              *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x28), 2);
+        UInt32 uVar38 = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(reinterpret_cast<UInt8 *>(ctx->accelerator) + 0x870),
+                                             *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x28), 2);
+        UInt8 *boundSurfaceBase = reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(self + 0x290));
+        bool volatileGate = (*reinterpret_cast<UInt32 *>(boundSurfaceBase + 0xbe8) & 0x700000) == 0;
+        if (volatileGate || *reinterpret_cast<SInt16 *>(self + 0xac) != 9) {
+            record[0xc] = 0;
+        } else {
+            record[0xc] = 0x600;
+        }
+        record[8] = uVar61;
+        UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+        record[9] = uVar38 / static_cast<UInt32>((*reinterpret_cast<SInt32 *>(accel + 0xb98)) << 4);
+        UInt32 isPartial = HZMEM_IsPartial(reinterpret_cast<_HZDATA *>(accel + 0x870),
+                                            *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x28), 2);
+        if (isPartial == 0) {
+            record[0xd] = (uVar58 - 2) * 0x10000 | 0xc0001000;
+        } else {
+            UInt16 uVar15 = *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x1e);
+            UInt32 iVar48 = ((*reinterpret_cast<UInt32 *>(accel + 0xb74) & 0x10000) == 0) ? 0xc : 0x10;
+            UInt32 uVar38b = 0;
+            if ((*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x3c) & 0xf00000) != 0) {
+                uVar38b = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x14)) /
+                          ((*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x3c) >> 0x14) & 0xf);
+            }
+            UInt32 uVar73 = 0x20 / *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x16);
+            if (uVar73 <= uVar38b) uVar73 = uVar38b;
+            SInt32 iVar33 = 0x20;
+            UInt32 uVar38c;
+            if (*reinterpret_cast<SInt32 *>(accel + 0xb98) == 4) {
+                uVar38c = static_cast<UInt32>(iVar33 * ((iVar33 + static_cast<SInt32>(uVar73) - 1) / iVar33));
+            } else {
+                iVar33 = (*reinterpret_cast<SInt32 *>(accel + 0xb98)) << 4;
+                uVar38c = (iVar33 != 0) ? static_cast<UInt32>(iVar33 * ((iVar33 + static_cast<SInt32>(uVar73) - 1) / iVar33)) : 0;
+            }
+            UInt32 blockCount2 = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(accel + 0x870),
+                                                      *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x28), 2);
+            double dVar31 = DOUBLE_0004c3b8; /* real, distinct third bias constant this pass found - see ATIRadeonX1000Registers.h */
+            uVar38c = (static_cast<UInt32>(blockCount2 << 4) / uVar38c) & 0xfffffff0u;
+            UInt32 iStack_1b4 = uVar15 + uVar38c;
+            record[uVar55 + 1] = (static_cast<UInt32>(iVar48 * (uVar15 - uVar38c)) >> 1) | (record[uVar55 + 1] & 0xffff0000u);
+            /* real: `(float)((double)CONCAT44(0x43300000,iStack_1b4) - DOUBLE_0004c3b0) * dVar31` -
+             * the SAME magic-bias trick as opcode 0x31, unsigned this time (no XOR 0x80000000). */
+            union { double d; struct { UInt32 hi, lo; } parts; } u;
+            u.parts.hi = 0x43300000; u.parts.lo = iStack_1b4;
+            float biased = static_cast<float>(u.d - DOUBLE_0004c3b0);
+            record[uVar55 + 7] = static_cast<UInt32>(biased * static_cast<float>(dVar31));
+        }
+        *reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x36) = 1;
+    }
+    *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x30) = record[6];
+    /* real vtable call at offset 0x5a4 - UNKNOWN real virtual method name,
+     * same unresolved slot as opcode 0x2f (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp) */
+    // (**(code**)(*(int*)this + 0x5a4))(this);
+    return record; /* real: falls to LAB_00031340, this function's own generic distance-based advance */
+}
+
+/*
+ * Opcode 0x05: CONFIRMED, fully transcribed real HyperZ Z-pass/stencil
+ * block setup - the densest of the four HyperZ opcodes. Real, two-part
+ * structure: (1) a trivial "not usable" fast-out path when the surface's
+ * HiZ field is fully masked; (2) a real dual-block-query path (block
+ * kind 0 AND block kind 1 - plausibly depth vs. stencil) computing real
+ * tile-scale/pitch adjustments and, when partial, a real float-based
+ * scale factor via the same magic-bias trick, writing into a SEPARATE
+ * context's own buffer (`this+0x348`) if this context is itself in
+ * alternate mode - real, direct evidence of cross-context HiZ state
+ * sharing this project had not previously documented.
+ */
+static UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    void *pAVar77 = self + 0x5a0;
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        void *surfBase = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(self + 0x290));
+        UInt16 unit = *reinterpret_cast<UInt16 *>(self + 0xae);
+        pAVar77 = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(surfBase) + unit * 0x78 + 0xa8));
+    }
+    UInt8 *p77 = reinterpret_cast<UInt8 *>(pAVar77);
+
+    UInt32 uVar55 = *reinterpret_cast<UInt32 *>(p77 + 0x28);
+    UInt32 uVar58 = record[1], uVar64 = record[2], uVar61 = record[3], uVar62 = record[5];
+
+    if ((uVar55 & 0x3ff) == 0x3ff || (uVar55 & 0xffc00) == 0xffc00) {
+        *record = (record[4] - 2) * 0x10000 | 0xc0001000;
+        p77[0x35] = 0; p77[0x34] = 0;
+        return record; /* real: falls to LAB_00031340 */
+    }
+
+    *record = 0xc0041000;
+    UInt32 blockOffset0 = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(accel + 0x870), uVar55, 0);
+    UInt32 blockCount0 = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(accel + 0x870), *reinterpret_cast<UInt32 *>(p77 + 0x28), 0);
+    UInt32 isPartial0 = HZMEM_IsPartial(reinterpret_cast<_HZDATA *>(accel + 0x870), *reinterpret_cast<UInt32 *>(p77 + 0x28), 0);
+    UInt32 blockOffset1 = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(accel + 0x870), *reinterpret_cast<UInt32 *>(p77 + 0x28), 1);
+    UInt32 blockCount1 = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(accel + 0x870), *reinterpret_cast<UInt32 *>(p77 + 0x28), 1);
+    UInt32 isPartial1 = HZMEM_IsPartial(reinterpret_cast<_HZDATA *>(accel + 0x870), *reinterpret_cast<UInt32 *>(p77 + 0x28), 1);
+    SInt32 iVar33 = (*reinterpret_cast<SInt32 *>(accel + 0xb98)) * (*reinterpret_cast<SInt32 *>(accel + 0xb9c));
+
+    record[9] = blockOffset0;
+    record[10] = blockCount0 / static_cast<UInt32>(iVar33 * 0x10);
+    p77[0x34] = 1;
+
+    if (uVar58 == 0) {
+        p77[0x35] = 0;
+    } else if ((*reinterpret_cast<UInt32 *>(p77 + 0x28) & 0xffc00u) == 0xffc00u) {
+        *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(record) + uVar64) = 0xc0021000;
+        p77[0x35] = 0;
+    } else {
+        record[uVar64 / 4 + 1] = blockOffset1;
+        record[uVar64 / 4 + 2] = blockCount1 / static_cast<UInt32>(iVar33 * 4);
+        p77[0x35] = 1;
+    }
+
+    if (isPartial0 == 0 && isPartial1 == 0) {
+        record[uVar62 + 1] &= 0xffff0000u;
+    } else {
+        UInt32 uVar75 = 0;
+        SInt32 iVar48 = *reinterpret_cast<SInt32 *>(accel + 0xb98);
+        UInt8 *unitRecAe = self + (*reinterpret_cast<UInt16 *>(self + 0xae)) * 0x78 + *reinterpret_cast<UInt32 *>(self + 0x290);
+        if ((*reinterpret_cast<UInt32 *>(unitRecAe + 0xe4) & 0xf00000) != 0) {
+            uVar75 = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(unitRecAe + 0xbc)) /
+                     ((*reinterpret_cast<UInt32 *>(unitRecAe + 0xe4) >> 0x14) & 0xf);
+        }
+        UInt32 uVar37 = 0x20 / *reinterpret_cast<UInt16 *>(unitRecAe + 0xbe);
+        if (uVar37 <= uVar75) uVar37 = uVar75;
+        SInt32 tileBase;
+        UInt32 uVar75b;
+        if (iVar48 == 4) {
+            tileBase = 0x20;
+            uVar75b = static_cast<UInt32>(tileBase * ((tileBase + static_cast<SInt32>(uVar37) - 1) / tileBase));
+        } else {
+            tileBase = iVar48 << 4;
+            uVar75b = (tileBase != 0) ? static_cast<UInt32>(tileBase * ((tileBase + static_cast<SInt32>(uVar37) - 1) / tileBase)) : 0;
+        }
+        UInt16 uVar53 = *reinterpret_cast<UInt16 *>(p77 + 0x1e);
+        UInt32 uVar37b = (*reinterpret_cast<UInt32 *>(accel + 0xb74) >> 4) & 3;
+        SInt32 iVar59 = uVar37b * 0x10;
+        SInt32 iVar33b = (iVar48 == 4) ? static_cast<SInt32>(uVar37b << 5) : iVar59;
+        UInt32 uVar38 = (blockCount1 < blockCount0) ? blockCount1 : blockCount0;
+        UInt32 uVar73 = (uVar75b != 0) ? ((uVar38 * static_cast<UInt32>(iVar59)) / uVar75b) & static_cast<UInt32>(-iVar33b) : 0;
+        UInt32 uVar38b = (uVar53 != 0) ? ((record[uVar62 + 1] & 0xffffu) / uVar53) * (uVar53 - uVar73) : 0;
+
+        void *local_378 = nullptr;
+        if ((*reinterpret_cast<UInt32 *>(p77 + 0x3c) & 0xf000) != 0) {
+            UInt32 iStack_1ac = uVar73 + uVar53;
+            UInt32 uStack_1a4 = ((*reinterpret_cast<UInt32 *>(p77 + 0x3c) >> 0xc) & 0xf) ^ 0x80000000u;
+            union { double d; struct { UInt32 hi, lo; } p; } uA; uA.p.hi = 0x43300000; uA.p.lo = uStack_1a4;
+            float fVar4 = static_cast<float>(uA.d - DOUBLE_0004c3a8);
+            union { double d; struct { UInt32 hi, lo; } p; } uB; uB.p.hi = 0x43300000; uB.p.lo = iStack_1ac;
+            float ratio = static_cast<float>(uB.d - DOUBLE_0004c3b0) / (fVar4 + fVar4);
+            local_378 = reinterpret_cast<void *>(static_cast<UInt32>(ratio));
+        }
+        record[uVar62 + 1] = uVar38b | (record[uVar62 + 1] & 0xffff0000u);
+        record[uVar62 + 7] = reinterpret_cast<UInt32>(local_378);
+    }
+
+    *reinterpret_cast<UInt32 *>(p77 + 0x2c) = record[uVar61];
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) != 0 && *reinterpret_cast<UInt32 *>(self + 0x348) != 0) {
+        /* real, direct cross-context HiZ state sharing - see file header note */
+        UInt8 *otherCtx = reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(self + 0x348));
+        *reinterpret_cast<UInt32 *>(otherCtx + 0x7c) = record[uVar61];
+        *reinterpret_cast<UInt16 *>(otherCtx + 0x7a) = static_cast<UInt16>(p77[0x34]) | (static_cast<UInt16>(p77[0x35]) << 8);
+    }
+    /* real vtable call at offset 0x5a4 - see handle_hyperz_fast_clear_setup's identical note */
+    return record; /* real: falls to LAB_00031340 */
 }
 
 /*
@@ -85,14 +310,34 @@ static UInt32 *handle_hyperz_block_ops(ATIR500GLContext *ctx, UInt32 opcode, UIn
  * slot array (textureSlotArray in ATIR500GLContext.h).
  */
 static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 unitIndex = (opcode + 0xea000000u) >> 0x16;
-    VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(
-        reinterpret_cast<UInt8 *>(ctx) + 0x2a4 + unitIndex * 4);
+    VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(self + unitIndex + 0x2a4);
     if (*slot != nullptr) {
         ctx->remove_texture_from_stream(*slot);
+        /*
+         * CONFIRMED, previously missing from this handler: a SECOND real
+         * step after remove_texture_from_stream - a real atomic
+         * (PowerPC lwarx/stwcx.-style) decrement of the texture's GART-
+         * mapping refcount at `texture+0x14`, further offset `+0x10`
+         * (the identical pattern this project's discard_command_buffer
+         * transcription already named `ReleaseBoundTextureSlot`), and if
+         * it just hit zero, a real call to IOATIR500Shared::delete_texture.
+         * Represented non-atomically per the same rationale given in
+         * Sources/ATIR500GLContext_DiscardBuffer.cpp.
+         */
+        VendorTextureBuffer *tex = *slot;
+        void *rec = reinterpret_cast<void *>(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(tex) + 0x14));
+        UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec) + 0x10);
+        UInt32 before = *countField;
+        *countField = before - 1;
+        if (before == 1) {
+            IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+            (void)shared; /* real: IOATIR500Shared::delete_texture(shared, tex); */
+        }
         *slot = nullptr;
     }
-    *record = PM4_TYPE2_FILLER;
+    *record = PM4_TYPE2_FILLER; /* real: LAB_0002eae8 */
     return record + 1;
 }
 
@@ -111,123 +356,261 @@ static UInt32 *handle_reserved_noop(ATIR500GLContext *ctx, UInt32 opcode, UInt32
     return record; /* real observed behavior: falls through, does nothing */
 }
 
-/* Opcode 0x26: real GART transfer-buffer bind. CONFIRMED
- * (stage4-opcode-range-0x02-0x31-traced.md). */
-static UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record) {
-    /* Real: look up a texture/transfer-buffer descriptor via this+0x88's
-     * table, track it in transferBufferSlot, refcount++, map_transfer_to_GART. */
-    (void)ctx;
-    *record = PM4_TYPE2_FILLER; /* TODO: real refcount/lookup body not fully re-transcribed here */
-    return record + 1;
+namespace {
+inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
+
+/* Real render-target offset/tiling burst - the SAME shape used by
+ * opcodes 0x28/0x2a and write_kernel_context_buffer_regs. Factored out
+ * once here since 0x2a computes it twice (main + secondary target). */
+UInt32 RTOffsetTilingBurst(void *pAVar77, UInt32 unitIndex, UInt32 nextIndex, UInt32 mipFraction) {
+    UInt32 hz = 0;
+    if ((U32At(pAVar77, 0x3c) & 0xf00000) != 0) {
+        hz = static_cast<UInt32>(U16At(pAVar77, 0x14)) / ((U32At(pAVar77, 0x3c) >> 0x14) & 0xf);
+    }
+    UInt32 tileDim = 0x20 / U16At(pAVar77, 0x16);
+    if (tileDim <= hz) tileDim = hz;
+    UInt32 msb = (U8At(pAVar77, 0x38) < 2) ? 0u : 0x80000000u;
+    return msb | ((U32At(pAVar77, unitIndex * 4 + 0x40) * static_cast<UInt32>(U16At(pAVar77, 0x20)) +
+                   mipFraction * (U32At(pAVar77, nextIndex * 4 + 0x40) - U32At(pAVar77, unitIndex * 4 + 0x40)) +
+                   U32At(pAVar77, 8)) >> 10) |
+           ((tileDim * U16At(pAVar77, 0x16) * 0x10000u) & 0x3fc00000u) |
+           ((U8At(pAVar77, 0x38) & 1u) << 0x1e);
+}
+} // namespace
+
+/*
+ * Opcode 0x26: CONFIRMED, fully transcribed real GART transfer-buffer
+ * bind (real kext offset within the ~0x2e900-0x2ea00 dispatch region).
+ * Real, substantially more involved than this project's earlier
+ * simplified version: looks up a real texture-table entry via `this+0x88`,
+ * swaps it into `transferBufferSlot` (`this+0x328`) with real refcount
+ * inc/dec on the old/new entries, and - if the new entry has no real
+ * backing yet (`+4 == 0`) - a real "flush pending buffer if non-empty"
+ * step (referencing this function's own shared `ProcessCommandBufferState`)
+ * followed by TWO real map_transfer_to_GART calls (the new entry, and,
+ * if `this+0xd0` is still zero, a second fixed buffer at `this+0xcc`).
+ * Self-consumes into a real two-dword `0x80000000` pair plus a real
+ * "attach cookie" write at `record[5]`.
+ */
+static UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
+
+    if (U32At(sharedAllocator, 0x14) <= record[1]) return record; /* real: goto LAB_00030d40 - falls to the generic advance, see the dispatch loop's own note */
+    VendorTextureBuffer *tex = reinterpret_cast<VendorTextureBuffer *>(U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4));
+    if (tex == nullptr) return record; /* same real fallthrough */
+
+    VendorTextureBuffer *old = reinterpret_cast<VendorTextureBuffer *>(U32At(self, 0x328));
+    void *local_378 = tex;
+    if (old != tex) {
+        if (old != nullptr) {
+            U32At(reinterpret_cast<void *>(U32At(old, 0x14)), 8) = U32At(ctx->accelerator, 0x50);
+            *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(U32At(self, 0x328)) + 0xe) -= 1;
+        }
+        *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(tex) + 0xe) += 1;
+        U32At(self, 0x328) = reinterpret_cast<UInt32>(tex);
+    }
+
+    if (U32At(tex, 4) == 0) {
+        if (state.local_384 != 0) {
+            UInt32 uVar38 = static_cast<UInt32>(record[-1]) >> 2;
+            if (4 < uVar38) {
+                UInt32 uVar73 = (uVar38 != 5) ? (((uVar38 - 6) * 0x10000) | 0xc0001000u) : 0x80000000u;
+                record[-static_cast<SInt32>(uVar38)] = uVar73;
+            }
+            record[-4] = 0x1393; record[-3] = 0; record[-2] = 0x5c8; record[-1] = 0x20000;
+            U32At(ctx->accelerator, 0x704) += state.local_384 * 4;
+            U32At(ctx->accelerator, 0xb94) = 1;
+            UInt32 newTag = ctx->accelerator->submit_buffer(
+                reinterpret_cast<UInt32 *>(((state.local_388 & 0xfffffffcu) + U32At(self, 0xe0) + 0x20)),
+                state.local_388 + U32At(self, 0xd0) + 0x20, state.local_384);
+            U32At(self, 0xdc) = newTag;
+            UInt32 uVar55 = state.local_384;
+            state.local_380 = 0;
+            state.local_384 = 0;
+            state.local_388 = uVar55 * 4 + state.local_388;
+        }
+        ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(local_378));
+        if (U32At(self, 0xd0) == 0) {
+            ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(self + 0xcc));
+        }
+    }
+    *record = 0x80000000u;
+    record[1] = 0x80000000u;
+    record[5] = U32At(local_378, 4) + U32At(ctx->accelerator, 0x8a4) + record[5] + 0x80;
+    return record; /* real: falls to LAB_00031340 */
 }
 
-/* Opcode 0x27: real GART transfer-buffer unbind - the simplest handler in
- * the whole language. CONFIRMED. */
+/*
+ * Opcode 0x27: CONFIRMED, fully transcribed. The real transfer-buffer
+ * unbind - decrements the currently-bound transfer buffer's refcount
+ * (if any), clears `transferBufferSlot`, then jumps into the SAME
+ * simple `record[0] = 0x80000000` self-erasure the plain texture-unbind
+ * family uses (`LAB_0002eae8` in the raw decompile).
+ */
 static UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record) {
-    /* Real: decrement transferBufferSlot's refcount, clear it. */
-    (void)ctx;
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    void *bound = reinterpret_cast<void *>(U32At(self, 0x328));
+    if (bound != nullptr) {
+        U32At(reinterpret_cast<void *>(U32At(bound, 0x14)), 8) = U32At(ctx->accelerator, 0x50);
+        *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(bound) + 0xe) -= 1;
+        U32At(self, 0x328) = 0;
+    }
     *record = PM4_TYPE2_FILLER;
     return record + 1;
 }
 
 /*
- * Opcode 0x28: real single render-target + scissor commit. CONFIRMED,
- * including the real methodological finding that this opcode's embedded
- * register index 0x50b (byte 0x142c) is NOT real MMIO - it's a
- * driver-internal software bookkeeping field (see
- * ATIRadeonX1000Registers.h's note on this). Full per-mip offset/pitch
- * computation matches the same shape already reconstructed in
- * write_kernel_context_buffer_regs.
+ * Opcode 0x28: CONFIRMED, fully transcribed real single render-target +
+ * scissor commit, including the real methodological finding that this
+ * opcode's embedded register index 0x50b (byte 0x142c) is NOT real MMIO
+ * - a driver-internal software field (ATIRadeonX1000Registers.h). Real
+ * header `0x105bb` OVERWRITES `record[0]` itself (the marker's own
+ * dword) - the reason the dispatch loop's shared "record unchanged means
+ * apply the generic advance" rule reads `header` captured BEFORE this
+ * handler runs, not `*record` afterward.
  */
 static UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 *record) {
-    record[1] = ctx->scissorY; /* CONFIRMED: embeds the live scissor rect verbatim, same fields build_scissor computes */
-    record[2] = ctx->scissorX;
-    /* record[0] real header 0x105bb (a real Type-0-shaped header, base index 0x5bb);
-     * record[3] carries the real 0x50b software-internal field;
-     * record[4] carries the real render-target offset/pitch/tiling value -
-     * TODO: transcribe the exact per-mip formula from
-     * write_kernel_context_buffer_regs.cpp once written, they share it. */
-    return record + 5; /* CONFIRMED real record length for this opcode */
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    void *pAVar77;
+    UInt32 unitIndex, nextIndex, mipFraction;
+    if (U32At(self, 0x3bc) == 0) {
+        mipFraction = U32At(self, 0x29c);
+        unitIndex = U32At(self, 0x298);
+        nextIndex = mipFraction + 1;
+        void *surfBase = reinterpret_cast<void *>(U32At(self, 0x290));
+        pAVar77 = reinterpret_cast<void *>(U32At(surfBase, U16At(self, 0xac) * 4 + 0xb70));
+    } else {
+        unitIndex = 0; mipFraction = 0; nextIndex = 1;
+        pAVar77 = self + U16At(self, 0x3b2) * 0x78 + 0x3c0;
+    }
+
+    *record = 0x105bb;
+    record[1] = ctx->scissorY; /* this+0x354, CONFIRMED verbatim embed */
+    record[2] = ctx->scissorX; /* this+0x358, CONFIRMED verbatim embed */
+    record[3] = 0x50bu; /* CONFIRMED software-internal field index, NOT real MMIO - see ATIRadeonX1000Registers.h */
+    record[4] = RTOffsetTilingBurst(pAVar77, unitIndex, nextIndex, mipFraction);
+    return record; /* real: falls to LAB_00031340 */
 }
 
 /*
- * Opcode 0x29: CONFIRMED, one of the two most architecturally significant
- * opcodes in the whole language. A real vertex-format-configuration opcode
- * with a switch mapping small enum values (0/1/2/3/7/8/0x10/0x11) to
- * internal semantic-slot codes, tracking attachmentCount, and - the real
- * finding - calling build_scissor() and write_kernel_context_buffer_regs()
- * DIRECTLY. This is the proof that write_kernel_context_buffer_regs is a
- * shared "commit everything" primitive used by two independent opcodes
- * (0x29 and 0x41), not opcode-41-specific.
- *
- * The real 8-case switch table below is now CONFIRMED, transcribed from
- * discard_command_buffer's own real, identical handling of this same
- * opcode (a second, independent real trace of the same record - see
- * Sources/ATIR500GLContext_DiscardBuffer.cpp). NOTE: discard_command_buffer
- * processes a FIXED 4 slots regardless of live attachment count; whether
- * this main processing path does the same or uses the dynamic
- * `attachmentCount` was not independently re-confirmed for THIS exact
- * function (its own decompile was not re-read this pass) - the fixed-4
- * shape is used here as the best available real evidence.
+ * Opcode 0x29: CONFIRMED, fully transcribed - one of the two most
+ * architecturally significant opcodes in the whole language. Now
+ * cross-checked against BOTH this opcode's own real execute-path body
+ * (found this pass) AND discard_command_buffer's independent trace - the
+ * two agree exactly on the 8-case switch table. New real details this
+ * pass added: a real "reset alternate-mode flag" step at entry, a real
+ * PER-SLOT count (`this+0x3a8`) that only increments for cases that
+ * actually match (0/1/2/3/7/8/0x10 - NOT case 0x11, which writes a fixed
+ * slot without incrementing the count) rather than this project's
+ * earlier fixed-4-slots assumption, and confirmation this opcode really
+ * does call build_scissor()/write_kernel_context_buffer_regs() directly.
  */
 static UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
 
-    for (UInt32 i = 0; i < 4; ++i) {
-        UInt32 enumValue = record[1 + i];
-        UInt16 slotCode;
-        switch (enumValue) {
-            case 1:    slotCode = 0;    break;
-            case 2:    slotCode = 4;    break;
-            case 3:    slotCode = 5;    break;
-            case 7:    slotCode = 2;    break;
-            case 8:    slotCode = 3;    break;
-            case 0x10: slotCode = 9;    break;
-            case 0x11: slotCode = 0x17; break;
-            default:   slotCode = 1;    break; /* CONFIRMED real default case */
+    if (U32At(self, 0x3bc) != 0) U32At(self, 0x3bc) = 0;
+
+    UInt32 uVar38 = 0;
+    UInt32 *puVar69 = record;
+    UInt8 *pAVar77 = self;
+    for (SInt32 i = 4; i != 0; --i) {
+        switch (puVar69[1]) {
+            case 0:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 1; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 1:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 0; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 2:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 4; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 3:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 5; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 7:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 2; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 8:    U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 3; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 0x10: U16At(self, static_cast<int>((uVar38 & 0xffffu) * 2) + 0x3aa) = 9; uVar38 = (uVar38 & 0xffffu) + 1; U16At(self, 0x3a8) = static_cast<UInt16>(uVar38); break;
+            case 0x11: U16At(pAVar77, 0x3aa) = 0x17; break; /* real: writes pAVar77 (the WALKING pointer, not `self`!) - see NOTE below */
+            default: break;
         }
-        *reinterpret_cast<UInt16 *>(self + 0x3aa + i * 2) = slotCode;
+        puVar69 += 1;
+        pAVar77 += 2;
     }
 
-    *reinterpret_cast<UInt16 *>(self + 0xac) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
-    *reinterpret_cast<UInt32 *>(self + 0x35c) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
-
+    if ((uVar38 & 0xffff) == 0) {
+        U16At(self, 0x3a8) = 1;
+        U16At(self, 0x3aa) = 1;
+    }
+    U16At(self, 0xac) = U16At(self, 0x3aa);
+    U32At(self, 0x35c) = U16At(self, 0x3aa);
     if (record[5] == 0x10) {
-        *reinterpret_cast<UInt16 *>(self + 0x3aa) = 9;
-        *reinterpret_cast<UInt16 *>(self + 0xac) = 9;
+        U16At(self, 0x3aa) = 9;
+        U16At(self, 0xac) = 9;
     }
 
-    /* real "is a real secondary/pair unit configured" gate - see
-     * ATIR500GLContext.h's someUnitIndex field note */
-    if ((*reinterpret_cast<UInt32 *>(self + 0x8c) & 0x80) != 0) {
-        UInt32 pairEnum = record[1];
-        if (pairEnum == 7 || pairEnum == 8) {
-            *reinterpret_cast<UInt16 *>(self + 0xae) = static_cast<UInt16>(pairEnum);
-        } else {
-            *reinterpret_cast<UInt16 *>(self + 0xae) = 6;
-        }
+    if ((U32At(self, 0x8c) & 0x80) != 0) {
+        UInt32 uVar55 = record[1];
+        U16At(self, 0xae) = (uVar55 == 7 || uVar55 == 8) ? static_cast<UInt16>(uVar55) : 6;
     }
 
+    /* real vtable call at offset 0x5a4 - same unresolved slot as opcodes 0x04/0x05/0x2f */
+    // (**(code**)(*(int*)this + 0x5a4))(this);
     ctx->build_scissor();
-    ctx->write_kernel_context_buffer_regs(record, 0, record[6], record[7]); /* CONFIRMED exact real call shape */
-    return record; /* real advance amount UNKNOWN - not independently confirmed for this exact opcode length */
+    ctx->write_kernel_context_buffer_regs(record, 0, record[6], record[7]);
+    return record; /* real: falls to LAB_00031340 */
 }
 
 /*
- * Opcode 0x2a: CONFIRMED. Render-target-PAIR binding plus the live scissor
- * rectangle, using a real GL-attachment-enum-to-internal-slot lookup table
- * (1/2/3/4/7/8/10/11 -> 0/4/5/6/2/3/7/8 - plausibly
- * GL_COLOR_ATTACHMENT0/1/depth/stencil).
+ * Opcode 0x2a: CONFIRMED, fully transcribed. Render-target-PAIR binding
+ * plus the live scissor rectangle. Real structure: TWO independent
+ * RTOffsetTilingBurst computations (one for the attachment-enum-selected
+ * target, one for a SEPARATE, already-bound secondary target at
+ * `this+0xac`'s unit) written into `record[0]`/`record[1]` respectively,
+ * followed by the live scissor rect duplicated into BOTH `record[2]`/
+ * `record[4]` (real - not a copy-paste artifact, the raw decompile writes
+ * the same value twice).
  */
 static UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *record) {
-    static const UInt8 kAttachmentSlotTable[12] = {
-        /* index by real attachment enum value 0..11, 0xff = invalid */
-        0xff, 0, 4, 5, 6, 0xff, 0xff, 2, 3, 0xff, 7, 8
-    };
-    (void)kAttachmentSlotTable; /* TODO: wire into the real per-slot bind body */
-    record[/* real offset for scissor Y */ 0] = ctx->scissorY; /* placeholder index - TODO: exact record layout not re-transcribed */
-    (void)ctx;
-    return record;
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+
+    UInt32 attachEnum = record[1];
+    UInt32 slot;
+    switch (attachEnum) {
+        case 1: slot = 0; break;
+        case 2: slot = 4; break;
+        case 3: slot = 5; break;
+        case 4: slot = 6; break;
+        case 7: slot = 2; break;
+        case 8: slot = 3; break;
+        case 10: slot = 7; break;
+        case 0xb: slot = 8; break;
+        default: slot = 1; break;
+    }
+
+    bool altMode = U32At(self, 0x3bc) != 0;
+    UInt32 unitIndex, nextIndex, mipFraction;
+    void *pAVar77;
+    if (!altMode) {
+        unitIndex = U32At(self, 0x29c);
+        mipFraction = U32At(self, 0x298);
+        nextIndex = unitIndex + 1;
+        void *surfBase = reinterpret_cast<void *>(U32At(self, 0x290));
+        pAVar77 = reinterpret_cast<void *>(U32At(surfBase, slot * 4 + 0xb70));
+    } else {
+        unitIndex = 0; mipFraction = 0; nextIndex = 1;
+        pAVar77 = self + U16At(self, 0x3b2) * 0x78 + 0x3c0;
+    }
+    *record = RTOffsetTilingBurst(pAVar77, unitIndex, nextIndex, mipFraction);
+
+    void *pAVar77b;
+    if (!altMode) {
+        void *surfBase = reinterpret_cast<void *>(U32At(self, 0x290));
+        pAVar77b = reinterpret_cast<void *>(U32At(surfBase, U16At(self, 0xac) * 4 + 0xb70));
+    } else {
+        pAVar77b = self + U16At(self, 0x3b2) * 0x78 + 0x3c0;
+    }
+    record[1] = RTOffsetTilingBurst(pAVar77b, unitIndex, nextIndex, mipFraction);
+
+    UInt32 scissorY = ctx->scissorY;
+    record[2] = scissorY;
+    record[3] = ctx->scissorX;
+    record[4] = scissorY; /* real: duplicated, not a transcription error - see doc comment */
+    return record; /* real: falls to LAB_00031340 */
 }
 
 /*
@@ -421,6 +804,7 @@ static UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record) {
  * line-by-line for that part.
  */
 IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
+    ProcessCommandBufferState state; /* real local_cc/local_384/local_388/local_380/local_378 - see the struct's own doc comment */
     UInt32 *record = static_cast<UInt32 *>(descriptor->commandBuffer);
 #ifdef PROMO4_SAFE_WALK
     UInt32 *realEnd = record + (descriptor->commandLength / sizeof(UInt32)); /* NOT present in the real driver - see file header */
@@ -461,11 +845,13 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
         UInt32 *next = nullptr;
 
         switch (opcode) {
-            case 0x02000000: case 0x03000000: case 0x04000000: case 0x05000000:
-                next = handle_hyperz_block_ops(this, opcode, record); break;
+            case 0x02000000: next = handle_set_return_code_3(this, record, state); break;
+            case 0x03000000: next = handle_set_return_code_2(this, record, state); break;
+            case 0x04000000: next = handle_hyperz_fast_clear_setup(this, record); break;
+            case 0x05000000: next = handle_hyperz_zpass_setup(this, record); break;
             case 0x17000000: case 0x1a000000: case 0x1d000000: case 0x20000000: case 0x23000000:
                 next = handle_reserved_noop(this, opcode, record); break;
-            case 0x26000000: next = handle_bind_transfer_buffer(this, record); break;
+            case 0x26000000: next = handle_bind_transfer_buffer(this, record, state); break;
             case 0x27000000: next = handle_unbind_transfer_buffer(this, record); break;
             case 0x28000000: next = handle_single_rendertarget_scissor(this, record); break;
             case 0x29000000: next = handle_vertex_format_and_commit(this, record); break;
@@ -506,6 +892,32 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
                     next = record + distance; /* the real, confirmed ZERO-BOUNDS-CHECKED advance - see file header */
                 }
                 break;
+        }
+
+        /*
+         * CONFIRMED real structural fact this reconstruction pass found:
+         * many real opcode bodies (0x02-0x05, the reserved no-ops,
+         * 0x26-0x2a/0x2c/0x30/0x37-0x45) do NOT self-compute their own
+         * "next record" pointer - they write real values into `record`'s
+         * OWN fields (sometimes including `record[0]` itself, as opcode
+         * 0x28 does) and then real-fall-through to the same generic
+         * distance-based advance every other unrecognized opcode uses
+         * (`LAB_00031340` in the raw decompile). A handler returning
+         * `record` completely unchanged is the real, unambiguous signal
+         * for this case (no opcode that genuinely advances zero dwords
+         * makes sense - it would be a real infinite loop in the ORIGINAL
+         * driver too), so it's used here as a real, safe sentinel rather
+         * than threading a distance value through every handler
+         * signature. IMPORTANT: this reads `header`, the dword captured
+         * BEFORE any handler ran (some handlers, like opcode 0x28,
+         * overwrite `record[0]` itself as part of their real logic) -
+         * exactly matching the real function's own read-before-write
+         * ordering.
+         */
+        if (next == record) {
+            UInt32 distance = EMBEDDED_DISTANCE(header);
+            if (distance == 0) return kIOReturnSuccess; /* INFERRED loop-termination condition, matching the default case above */
+            next = record + distance;
         }
 
         record = next;

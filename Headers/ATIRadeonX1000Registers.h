@@ -179,6 +179,23 @@
 #define SC_CLIP_RULE_VALUE_0xAAAA 0xaaaa
 
 /*
+ * Real float/double data constants at fixed kext addresses, used by
+ * opcode 0x31's (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) and
+ * opcode 0x04's (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp)
+ * real floating-point math. Centralized here (rather than declared
+ * separately in each .cpp) since both real call sites need them.
+ * Values UNKNOWN - not read out of the binary's __literal4/__literal8
+ * sections this pass; see GAPS.md.
+ */
+extern "C" const double DOUBLE_0004c3a8; /* kext offset 0x4c3a8 - CONFIRMED role: 2^52, the standard "magic bias" for software int-to-double conversion */
+extern "C" const double DOUBLE_0004c3b0; /* kext offset 0x4c3b0 - CONFIRMED role: a second bias constant, used for one specific operand pair in each real call site - not independently verified whether numerically identical to DOUBLE_0004c3a8 */
+extern "C" const double DOUBLE_0004c3b8; /* kext offset 0x4c3b8 - CONFIRMED real, distinct THIRD constant, found in opcode 0x04's real HyperZ fast-clear trace - used as a real multiplicative scale factor (not a bias subtracted before use, unlike the other two) */
+extern "C" const float  FLOAT_0004c370;  /* kext offset 0x4c370 - role UNKNOWN, used as the zero-case fallback for reciprocal scale factors (plausibly 0.0f or 1.0f) */
+extern "C" const float  FLOAT_0004c374;  /* kext offset 0x4c374 - role UNKNOWN, real numerator in per-axis reciprocal-scale divisions (plausibly a fixed texture-space extent) */
+extern "C" const float  FLOAT_0004c37c;  /* kext offset 0x4c37c - role UNKNOWN, real subpixel/fixed-point scale applied to coordinate DELTAS (plausibly 16.0f for R5xx's 12.4 fixed-point vertex format) */
+extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - role UNKNOWN, real scale applied to coordinate SUMS (plausibly 0.5f for a midpoint, or a texture-space normalization constant) */
+
+/*
  * _HZDATA / HZMEM_GetBlockOffset - CONFIRMED real, named HiZ memory-
  * manager type and function this project found directly in the kext's
  * own symbol table (a real Apple-internal helper, not reconstructed by

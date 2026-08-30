@@ -82,15 +82,10 @@
 #include "../Headers/ATIR500GLContext.h"
 #include "../Headers/ATIRadeonX1000Registers.h"
 
-/* Real named float/double constants this function reads - real kext
- * data addresses given in each comment; values UNKNOWN (not read out of
- * the binary this pass) - see file header. */
-extern "C" const double DOUBLE_0004c3a8; /* kext offset 0x4c3a8 - CONFIRMED role: 2^52, the standard "magic bias" for software int-to-double conversion */
-extern "C" const double DOUBLE_0004c3b0; /* kext offset 0x4c3b0 - CONFIRMED role: a second bias constant used for one specific pair (fVar7/fVar8's initial computation only) - not independently verified whether numerically identical to DOUBLE_0004c3a8 */
-extern "C" const float  FLOAT_0004c370;  /* kext offset 0x4c370 - role UNKNOWN, used as the zero-case fallback for reciprocal scale factors (plausibly 0.0f or 1.0f) */
-extern "C" const float  FLOAT_0004c374;  /* kext offset 0x4c374 - role UNKNOWN, real numerator in per-axis reciprocal-scale divisions (plausibly a fixed texture-space extent) */
-extern "C" const float  FLOAT_0004c37c;  /* kext offset 0x4c37c - role UNKNOWN, real subpixel/fixed-point scale applied to coordinate DELTAS (plausibly 16.0f for R5xx's 12.4 fixed-point vertex format) */
-extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - role UNKNOWN, real scale applied to coordinate SUMS (plausibly 0.5f for a midpoint, or a texture-space normalization constant) */
+/* Real named float/double data constants this function reads - declared
+ * in ATIRadeonX1000Registers.h (shared with opcode 0x04's real use of
+ * the same constants) - see that header for details and real values'
+ * unknown status. */
 
 namespace {
 
