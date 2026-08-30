@@ -22,6 +22,7 @@
 #include <IOKit/IOUserClient.h>
 #include "ATIRadeonX1000Types.h"
 
+class ATIRadeonX1000;
 class IOATIR500Shared;
 class IOATIR500Surface;
 
@@ -57,7 +58,7 @@ public:
      */
 
 protected:
-    void *accelerator;   /* +0x94, CONFIRMED offset (every method above reaches hardware through `*(int*)(this+0x94)`) */
+    ATIRadeonX1000 *accelerator;   /* +0x94, CONFIRMED offset (every method above reaches hardware through `*(int*)(this+0x94)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
     void *sharedAllocator; /* +0x88, CONFIRMED: the IOATIR500Shared* lazily created via create_shared() on first texture/transfer allocation */
     IOATIR500Surface *boundSurface; /* +0x100, CONFIRMED: the currently-bound surface, read throughout lock_memory/swap_surface/create_transfer */
 };

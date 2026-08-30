@@ -23,6 +23,7 @@
 #include <IOKit/IOUserClient.h>
 #include "ATIRadeonX1000Types.h"
 
+class ATIRadeonX1000;
 class IOATIR500Surface;
 
 class IOATIR500DVDContext : public IOUserClient {
@@ -52,7 +53,7 @@ public:
      */
 
 protected:
-    void *accelerator;              /* +0x8c, CONFIRMED offset */
+    ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
     IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */
 };
 

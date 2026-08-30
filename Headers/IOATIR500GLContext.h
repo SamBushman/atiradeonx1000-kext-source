@@ -24,7 +24,7 @@
 #include <IOKit/IOUserClient.h>
 #include "ATIRadeonX1000Types.h"
 
-class IOATIR500Accelerator;
+class ATIRadeonX1000;
 struct VendorTextureBuffer;
 struct VendorTransferBuffer;
 
@@ -76,7 +76,7 @@ public:
                                           IOMemoryDescriptor **memory) override;
 
 protected:
-    IOATIR500Accelerator *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer */
+    ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
     void                  *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers */
     /*
      * The regular external-method table pointer - CONFIRMED to exist at

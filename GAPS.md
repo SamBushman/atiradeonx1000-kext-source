@@ -117,8 +117,19 @@ extensive notes on, but none of them are userspace kernel extensions and reconst
 "compilable source" would mean a different kind of project (a from-scratch OpenGL/AGL/CFPlugIn
 implementation) - out of scope here.
 
-## 10. `Info.plist`'s PCI device-ID match string is an unverified placeholder
+## 10. ~~`Info.plist`'s PCI device-ID match string is an unverified placeholder~~ RESOLVED
 
-See the file's own inline comment. **Requires real hardware** to close (or, short of that, reading the
-real, already-loaded `ATIRadeonX1000.kext`'s own `Info.plist` directly off the Tiger HD this project has
-read-only access to, which was simply never done - a pure oversight, not a hardware-access gap).
+Closed without hardware: this project already had read-only access to the real, shipped kext's own
+`Info.plist` (pulled from the Tiger HD earlier in the `g5-h264-gpu-decode` project) - it just hadn't been
+opened yet. Reading it resolved this AND corrected two bigger things:
+
+- The real `IOClass` is `ATIRadeonX1000` itself (the concrete subclass), not `IOATIR500Accelerator` (its
+  base class) - this project's class hierarchy had the relationship backwards, now fixed in
+  `Headers/ATIRadeonX1000.h`/`Headers/IOATIR500Accelerator.h` and every context class's `accelerator`
+  field type.
+- The real dependencies are `IOGraphicsFamily`/`IONDRVSupport`/`IOPCIFamily`, not `IOAcceleratorFamily`
+  as originally guessed by name-analogy.
+- Real bonus finds: two previously-unknown driver config flags (`ATIEnableWideBlitSupport`/
+  `ATIUseTearingWideBlit`, plausibly relevant to the already-analyzed blit opcodes - nobody has traced
+  which function reads them) and real GPU sensor-properties (thermal monitoring, low priority for this
+  project's goals but a genuine new fact).

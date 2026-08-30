@@ -1,66 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
-  Info.plist - best-effort IOKitPersonalities stub.
+  Info.plist - VERIFIED against the real, shipped kext's own Info.plist,
+  read directly (read-only) off the Tiger HD this project has access to
+  (previously pulled to the local sandbox but not opened until closing out
+  GitHub issue #9). Real driver version: ATIRadeonX1000 1.4.19.00 (4002).
 
-  UNKNOWN / NOT VERIFIED: the exact IOPCIPrimaryMatch vendor/device ID
-  string for this specific card. ATI's PCI vendor ID (0x1002) is well
-  known; the R580 chip family used in the X1900 series has several real
-  device IDs across its variants (XT/XTX/GT/etc.) and this project never
-  independently confirmed which one this specific G5's card reports.
-
-  REQUIRES HARDWARE to close: run `ioreg -l -p IODeviceTree | grep -A20
-  ATY,` or `lspci -n`-equivalent on the real G5 (or read the existing,
-  already-loaded ATIRadeonX1000.kext's own Info.plist directly off the
-  Tiger HD, which this project has read-only access to and simply never
-  extracted this specific value from) to get the exact real ID string and
-  replace the placeholder below.
+  This CORRECTS several placeholders from the first draft of this file:
+  - IOClass is really "ATIRadeonX1000" (the concrete subclass), not
+    "IOATIR500Accelerator" (its base class) - see ATIRadeonX1000.h's
+    updated comment for the class-hierarchy correction this drove.
+  - Real dependencies are IOGraphicsFamily/IONDRVSupport/IOPCIFamily, NOT
+    IOAcceleratorFamily as originally guessed.
+  - The real IOPCIMatch lists SEVEN device IDs, not one guessed value
+    (though the single placeholder guessed in the first draft, 0x72491002,
+    turned out to genuinely be one of the seven real IDs).
 -->
 <plist version="1.0">
 <dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleExecutable</key>
+    <string>ATIRadeonX1000</string>
+    <key>CFBundleGetInfoString</key>
+    <string>ATIRadeonX1000 1.4.19.00 (4002)</string>
     <key>CFBundleIdentifier</key>
-    <string>com.apple.driver.ATIRadeonX1000</string>
+    <string>com.apple.ATIRadeonX1000</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
     <key>CFBundleName</key>
-    <string>ATIRadeonX1000 (reconstruction)</string>
-    <key>CFBundleVersion</key>
-    <string>0.0.1</string>
+    <string>ATI RadeonX1000 Kernel Extension</string>
     <key>CFBundlePackageType</key>
     <string>KEXT</string>
-    <key>OSBundleLibraries</key>
-    <dict>
-        <key>com.apple.iokit.IOPCIFamily</key>
-        <string>1.0</string>
-        <key>com.apple.iokit.IOGraphicsFamily</key>
-        <string>1.0</string>
-        <key>com.apple.iokit.IOAcceleratorFamily</key>
-        <string>1.0</string>
-        <key>com.apple.kernel.libkern</key>
-        <string>6.0</string>
-        <key>com.apple.kernel.iokit</key>
-        <string>6.0</string>
-    </dict>
+    <key>CFBundleShortVersionString</key>
+    <string>1.4.19</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>4.1.9</string>
     <key>IOKitPersonalities</key>
     <dict>
         <key>ATIRadeonX1000</key>
         <dict>
+            <!--
+              ATIEnableWideBlitSupport / ATIUseTearingWideBlit - two real,
+              previously-unknown driver config flags this project's
+              decompilation never surfaced (Info.plist-only properties,
+              read by some function this project never traced reading
+              IORegistry properties at startup). Plausibly relevant to the
+              already-extensively-analyzed blit/render-target opcodes
+              (0x28/0x2a/0x31) - a real, concrete new avenue if anyone
+              wants to chase down which function reads these.
+            -->
+            <key>ATIEnableWideBlitSupport</key>
+            <true/>
+            <key>ATIUseTearingWideBlit</key>
+            <false/>
             <key>CFBundleIdentifier</key>
-            <string>com.apple.driver.ATIRadeonX1000</string>
+            <string>com.apple.ATIRadeonX1000</string>
+            <key>IOCFPlugInTypes</key>
+            <dict>
+                <!-- Real UUID -> the GA plugin's own real CFPlugIn factory -->
+                <key>ACCF0000-0000-0000-0000-000a2789904e</key>
+                <string>ATIRadeonX1000GA.plugin</string>
+            </dict>
             <key>IOClass</key>
-            <string>IOATIR500Accelerator</string>
+            <string>ATIRadeonX1000</string>
+            <key>IODVDBundleName</key>
+            <string>ATIRadeonX1000VADriver</string>
+            <key>IOMatchCategory</key>
+            <string>IOAccelerator</string>
+            <!--
+              Real, verified device IDs this exact kext supports - X1900
+              plus several related/predecessor R5xx-family chips sharing
+              the same driver.
+            -->
+            <key>IOPCIMatch</key>
+            <string>0x72401002 0x71461002 0x71421002 0x71091002 0x71C51002 0x71C01002 0x72491002</string>
             <key>IOProviderClass</key>
             <string>IOPCIDevice</string>
+            <key>IOSourceVersion</key>
+            <string>1.4.19.00</string>
             <!--
-              PLACEHOLDER - NOT VERIFIED, requires real hardware to confirm.
-              0x1002 is ATI's real PCI vendor ID; 0x7249 is this project's
-              best unverified guess at a real R580/X1900 device ID from
-              general knowledge of the chip family, NOT independently
-              confirmed against this specific G5's card.
+              Real GPU thermal-sensor registration this project never
+              explored at all - a genuinely new, low-priority avenue
+              (SMC-adjacent hardware monitoring, unrelated to the
+              render/compute goals this project has focused on).
             -->
-            <key>IOPCIPrimaryMatch</key>
-            <string>0x72491002&amp;0xffffffff</string>
-            <key>IOProbeScore</key>
-            <integer>0</integer>
+            <key>sensor-properties</key>
+            <array>
+                <dict>
+                    <key>device_type</key>
+                    <data>Z3B1LXNlbnNvcg==</data>
+                    <key>location</key>
+                    <string>GPU</string>
+                    <key>name</key>
+                    <string>gpu-sensor</string>
+                    <key>polling-period</key>
+                    <data>AAAAAQAAAAA=</data>
+                    <key>reg</key>
+                    <data>AAAAAg==</data>
+                    <key>sample-period</key>
+                    <data>AAAAAACYmAA=</data>
+                    <key>sensor-id</key>
+                    <data>AAAABg==</data>
+                    <key>version</key>
+                    <data>AAAAAg==</data>
+                    <key>zone</key>
+                    <data>AAAAAg==</data>
+                </dict>
+            </array>
         </dict>
+    </dict>
+    <key>OSBundleLibraries</key>
+    <dict>
+        <key>com.apple.iokit.IOGraphicsFamily</key>
+        <string>1.0.0b1</string>
+        <key>com.apple.iokit.IONDRVSupport</key>
+        <string>1.0.0b1</string>
+        <key>com.apple.iokit.IOPCIFamily</key>
+        <string>1.0.0b1</string>
+        <key>com.apple.kernel.iokit</key>
+        <string>1.0.0b1</string>
     </dict>
 </dict>
 </plist>

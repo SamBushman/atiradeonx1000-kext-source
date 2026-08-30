@@ -1,9 +1,15 @@
 /*
  * IOATIR500Accelerator.h
  *
- * The top-level IOKit service. Owns the shared ATIRadeonX1000 hardware
- * object, is the real `IOServiceOpen` target userspace connects to, and
- * arbitrates GART memory across every live context of all four types.
+ * The generic accelerator-family base class - real IOService subclass
+ * (CONFIRMED: `OSBundleLibraries` in the real kext Info.plist lists only
+ * IOGraphicsFamily/IONDRVSupport/IOPCIFamily, not IOAcceleratorFamily, so
+ * this is plain `IOService`, not some later framework's base class).
+ * `ATIRadeonX1000` (ATIRadeonX1000.h) is its real, concrete, chip-specific
+ * subclass and the actual `IOClass` IOKit instantiates - see that header's
+ * updated comment for how this project learned that. Implements
+ * newUserClient's real type dispatch and the cross-context GART pool
+ * arbitration every context class ultimately shares.
  *
  * Confidence: CONFIRMED unless marked otherwise. See ../README.md.
  */
@@ -12,8 +18,8 @@
 #define IOATIR500ACCELERATOR_H
 
 #include <IOKit/IOService.h>
-#include "ATIRadeonX1000.h"
 
+class ATIRadeonX1000;
 class IOATIR5002DContext;
 class IOATIR500DVDContext;
 class IOATIR500GLContext;

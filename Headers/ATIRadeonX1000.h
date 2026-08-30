@@ -1,12 +1,36 @@
 /*
  * ATIRadeonX1000.h
  *
- * The base hardware-access class. Every context class (GL/2D/DVD/Surface)
- * holds a pointer to a shared instance of this class and reaches all real
- * MMIO/ring-buffer/fence machinery through it. Real class name confirmed
- * via decompiled method signatures throughout the project
- * (`ATIRadeonX1000::submit_buffer`, `ATIRadeonX1000::submit_idct_buffer_consumed`,
- * `ATIRadeonX1000::waitForRetiredTimeStamp`, etc.)
+ * *** CORRECTED (2026-08-30) - see the real Info.plist find below ***
+ *
+ * This project always knew `ATIRadeonX1000` was a real class (from real
+ * decompiled method signatures like `ATIRadeonX1000::submit_buffer`,
+ * `ATIRadeonX1000::submit_idct_buffer_consumed`,
+ * `ATIRadeonX1000::waitForRetiredTimeStamp`), but earlier modeled it as a
+ * bare, non-IOKit "hardware helper" object every context class merely
+ * holds a pointer to - separate from the real class hierarchy entirely.
+ *
+ * Reading the REAL kext `Info.plist` (already pulled read-only from the
+ * Tiger HD earlier this project, just never opened until now) settles
+ * this: `<key>IOClass</key><string>ATIRadeonX1000</string>` - **this is
+ * the real, concrete, IOKit-registered driver class** IOKit instantiates
+ * directly for a matching `IOPCIDevice`. It is therefore this project's
+ * `IOATIR500Accelerator` base class's real, concrete SUBCLASS - not a
+ * separate, disconnected helper object. Every context class's
+ * `accelerator` pointer (this+200 on GL, this+0x94 on 2D, this+0x8c on
+ * DVD) is a pointer to the one real, live `ATIRadeonX1000` instance, typed
+ * as such (not merely `IOATIR500Accelerator*`) precisely because these
+ * contexts need the chip-specific methods declared here, not just the
+ * generic accelerator-family ones on the base class.
+ *
+ * The real Info.plist also settled a related question this project had
+ * only guessed at: `OSBundleLibraries` lists `IOGraphicsFamily`/
+ * `IONDRVSupport`/`IOPCIFamily` (all `1.0.0b1`) - **not**
+ * `IOAcceleratorFamily`. This driver predates/does not use that later,
+ * more generic framework; `IOATIR500Accelerator`'s real base is plain
+ * `IOService`, and `IOATIR500GLContext`/etc.'s real base is plain
+ * `IOUserClient` - both already modeled correctly, just confirmed now
+ * rather than assumed by name-analogy.
  *
  * Confidence: CONFIRMED unless marked otherwise. See ../README.md.
  */
@@ -14,13 +38,15 @@
 #ifndef ATIRADEONX1000_H
 #define ATIRADEONX1000_H
 
-#include <IOKit/IOService.h>
+#include "IOATIR500Accelerator.h"
 #include "ATIRadeonX1000Types.h"
 
 class IOWorkLoop;
 class IOMemoryDescriptor;
 
-class ATIRadeonX1000 {
+class ATIRadeonX1000 : public IOATIR500Accelerator {
+    OSDeclareDefaultStructors(ATIRadeonX1000)
+
 public:
     /*
      * Real, confirmed field offsets (from this base pointer, as reached
