@@ -328,9 +328,9 @@ separate handlers, which made a full pass tractable in one sitting. Real confirm
   similar but are meaningfully different, confirmed by checking every real `goto` site in the raw decompile
   individually rather than assuming.
 
-**DVD - real further progress this pass**: four real opcode groups are now fully transcribed from complete
-real decompiles - see `Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`. Together they cover 36 of the
-real ~55 opcodes:
+**DVD - real further progress this pass**: seven real opcode groups are now fully transcribed from complete
+real decompiles - see `Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`. Together they cover 40 real
+opcodes with genuine handlers, plus four more confirmed to need none at all:
 - **Bind** (0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d - 19 opcodes): real "bind texture unit N"
   logic, N derived directly from the opcode value. Reuses the exact same `sharedAllocator`-indexed lookup
   and the same two accelerator-level lists (`+0x600`/`+0x5dc`, `+0x6d0`/`+0x69c`) already reconstructed for
@@ -342,28 +342,44 @@ real ~55 opcodes:
 - **Opcode 0x02**: sets the function's own overall return value to 3 - a real, deliberate difference from
   GL's and 2D's own opcode 0x2, which both set 1 instead.
 - **Opcodes 0x5/0x6**: a real texture-sampler-state PM4 record pair, sharing an identical header/tail
-  template with opcode 0xd's own (still-unresolved) transfer-buffer setup - real confirmation that
-  template is a general "sampler state" shape reused across multiple real source kinds. Real per-mip
-  lookup through `boundSurface`, and a second independent sighting of the real YUV 4:2:0 combined-plane
-  formula (`height*pitch*3 >> 1`) this project's earlier DVD skeleton pass first found in opcode 0xd.
+  template with opcode 0xd's own setup (also now resolved - see below) - real confirmation that template
+  is a general "sampler state" shape reused across multiple real source kinds. Real per-mip lookup through
+  `boundSurface`, and a second independent sighting of the real YUV 4:2:0 combined-plane formula
+  (`height*pitch*3 >> 1`) this project's earlier DVD skeleton pass first found in opcode 0xd.
+- **Opcode 0xd**: a third real sighting of the same sampler-state header/tail template, real per-source
+  branch (transfer buffer from the same per-unit slot array bind/unbind use, or a fixed record embedded in
+  `boundSurface` itself).
+- **Opcode 0xa** (the densest opcode in this cluster, and the highest-value target for the H.264 goal):
+  real per-mip Y/UV plane pitch+offset setup, gated on a real "engine ready" flag and vtable call. A THIRD
+  independent sighting of the YUV 4:2:0 combined-plane formula - this time applied to the Y-plane base
+  itself, not just a chroma offset - plus a real UV-plane offset built from the luma-plane size. Finishes
+  with the same real format-table-driven tiling word (`FormatTableLookup_0x0004d2e0`/`_0x0004d2dc`) GL's
+  own `build_scissor`/`write_kernel_context_buffer_regs` already use.
+- **Opcode 0xb**: a single-plane cousin of 0xa (no Y/UV split), same real per-source branch shape as
+  opcode 0xd and the same format-table tiling-word computation.
+- **Opcode 0xc confirmed to have NO real handler** - re-reading the raw decompile's brace structure
+  precisely (not just its surface `goto` targets) shows it falls straight through to the same trivial-abort
+  path as opcodes 0x07/0x08/0x09, all four wrongly assumed part of "real work remaining" by earlier passes.
 - Real, previously-undocumented fields found and declared: `sharedAllocator` (+0x84, `IOATIR500Shared*` -
   same real +0x10/+0x14 table layout as 2D's own, now confirmed on a second class independently),
   `commandBufferBase` (+0xa4), `ringSlotZeroCheck` (+0x94), `pendingTransferBuffer` (+0x90),
   `lastSubmitResult` (+0xa0) - all mirroring roles this project already named on GL/2D's own equivalents.
-- Two real bugs caught during transcription (own first-draft errors, not present in the shipped driver):
+- Three real bugs caught during transcription (own first-draft errors, not present in the shipped driver):
   the bind handler's flush path must use the record count *saved before* it's reset to zero, not the live
-  (by-then-zeroed) counter; and two 16-bit field reads in the sampler-state handler were initially coded
-  via a 32-bit read plus a `& 0xffff` mask, which reads the WRONG two bytes on a big-endian target Ghidra
-  had already flagged as a real `ushort` - caught by re-checking each field's real declared width against
-  the raw decompile rather than assuming a uniform read helper was safe everywhere.
+  (by-then-zeroed) counter; two 16-bit field reads in the sampler-state handler were initially coded via a
+  32-bit read plus a `& 0xffff` mask, which reads the WRONG two bytes on a big-endian target Ghidra had
+  already flagged as a real `ushort`; and opcode 0xc was initially assumed to share a body with 0xa/0xb/0xd
+  before a careful brace-by-brace re-read showed it doesn't.
+- **Honestly-flagged real anomaly, not resolved**: opcodes 0xa and 0xb's own real decompiled bodies both
+  read a local variable (`local_64`/`local_58`) as part of a tiling-word bitmask (`... & 0xfe00c001`)
+  before ever assigning it within the function - a genuine uninitialized-stack-local read in the real
+  compiled driver, or a Ghidra stack-slot-reuse artifact this project cannot distinguish from static
+  analysis alone. Modeled as 0 in both transcriptions rather than silently guessing a "real" value.
 
-Still open: ~19 opcodes (0x04, 0x07-0x0d, 0x11-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) - dense
-per-mip YUV/tiling math comparable in density to GL's own richest opcodes (real floating-point double
-arithmetic, multiple format-table lookups per opcode; 0x07/0x08 are trivial aborts, not real handlers,
-listed for completeness), including the highest-value remaining target for the H.264 goal (opcodes
-0xa/0xb/0xc/0xd's own YUV surface setup). `process_command_buffer` itself is not yet assembled as one
-function - the transcribed handlers are free functions awaiting a completed
-dispatcher.
+Still open: ~19 real opcodes (0x04, 0x11-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) - dense per-mip
+YUV/tiling math comparable in density to GL's own richest opcodes (real floating-point double arithmetic,
+multiple format-table lookups per opcode). `process_command_buffer` itself is not yet assembled as one
+function - the transcribed handlers are free functions awaiting a completed dispatcher.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
 
