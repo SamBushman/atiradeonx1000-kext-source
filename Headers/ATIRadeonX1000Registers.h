@@ -205,6 +205,28 @@ extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - role UNKNOWN, 
  */
 struct _HZDATA;
 extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+/*
+ * FIXED this pass: HZMEM_GetBlockCount/HZMEM_IsPartial were already being
+ * called throughout ATIR500GLContext_ProcessCommandBuffer.cpp and
+ * ATIR500GLContext_RegisterState.cpp (real, CONFIRMED sibling functions to
+ * HZMEM_GetBlockOffset, same real call shape) but were never actually
+ * declared anywhere in this project's headers - a real gap that would have
+ * failed to compile. Same real signature shape as HZMEM_GetBlockOffset.
+ */
+extern "C" UInt32 HZMEM_GetBlockCount(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+/*
+ * HZMEM_Alloc - CONFIRMED real, found this pass in opcode 0x41's real
+ * body (real depth/stencil HyperZ block auto-allocation). Real signature
+ * INFERRED from its two real call-site shapes:
+ *   HZMEM_Alloc(hizData, 0xffffffff, 0, tileDim, size)       - fresh alloc
+ *   HZMEM_Alloc(hizData, existingBlockHandle, 1, tileDim, size) - a second,
+ *     related allocation given an already-allocated block (stencil
+ *     following depth) - the real meaning of the second/third parameters
+ *     is INFERRED (a "previous block" handle and a "chain to it" flag),
+ *     not independently confirmed against HZMEM_Alloc's own body.
+ */
+extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, UInt32 chainFlag, UInt32 tileDim, UInt32 size);
 
 /*
  * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 -

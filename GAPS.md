@@ -105,11 +105,17 @@ source document to transcribe from rather than full reconstructions:
   `0x3f` reuses the same format table five times in a real cascading bit-patch sequence into one register
   slot, the densest single-register patch outside opcode 0x31; `0x40` uses a third, previously-unused
   format table (`FormatTableLookup_0x0004d2e4`).
-- Opcode `0x41` (render-target commit) - real body located this pass (kext_process_cmd_buf.txt starting
-  ~line 1713) and confirmed to be another large, dense function (a real per-attachment loop with texture
-  bind/relist logic and `build_surface_from_texture` calls) - NOT fully read or transcribed yet, current
-  stub's `write_kernel_context_buffer_regs` call was an unverified guess by analogy with opcode 0x29 and
-  should be treated as unconfirmed.
+- ~~Opcode `0x41`~~ RESOLVED - fully transcribed, the largest single opcode after 0x31. Real per-color-
+  attachment loop populating the `this+0x3b2` alternate-mode table (the SAME table opcodes
+  0x02-0x05/0x28/0x29/0x2a/0x2c read), a separate depth-attachment bind with real HyperZ block auto-
+  allocation (`HZMEM_Alloc`, newly declared this pass), and a separate stencil-attachment bind that reuses
+  the depth bind's own staging field (`this+0x348`) for a second, distinct purpose - confirmed real, not a
+  transcription artifact. Found and declared a real, previously-unknown helper function this opcode calls
+  three times (`get_texture`) - its own body was not independently decompiled, called opaquely rather than
+  guessed-and-inlined. Also found that `HZMEM_GetBlockCount`/`HZMEM_IsPartial` were already being called
+  throughout this project's own code without ever being declared anywhere - a real gap, now fixed
+  (ATIRadeonX1000Registers.h). One real transcription bug caught during review: a big-endian byte-order
+  mixup extracting the low/high bytes of a 16-bit value (`this+0x5d4`/`this+0x5d5`) - fixed.
 - Opcodes `0x44`/`0x45`/`0x46` - not yet re-examined against the raw decompile this pass; `0x46` in
   particular should be re-verified even though it already calls the real
   `process_kATIGLStreamFastClearColor` (its current record-index arguments were never independently

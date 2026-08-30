@@ -175,8 +175,9 @@ public:
     /* load_texture / alloc_and_load_texture / compact_current_textures -
      * CONFIRMED real names and large, complex real bodies (kext offsets
      * 0x29480/0x2a3d0/0x29dd0) - the texture-binding machinery every
-     * texture-load opcode (0x06-0x15 unbind family, 0x37/0x39/0x3b/0x3e/
-     * 0x3f/0x40/0x43 bind family) ultimately calls. Real decompiled
+     * texture-load opcode (0x06-0x15 BIND family - CORRECTED, not the
+     * plain unbind this project's earlier pass wrongly called it - plus
+     * 0x37/0x39/0x3b/0x3e/0x3f/0x40/0x43) ultimately calls. Real decompiled
      * bodies were read this pass but are large enough (dozens of local
      * variables, dense per-mip/tiling math matching
      * write_kernel_context_buffer_regs's shape) that full transcription
@@ -184,6 +185,22 @@ public:
     void     load_texture(VendorTextureBuffer *texture);
     IOReturn alloc_and_load_texture(VendorTextureBuffer *texture);
     void     compact_current_textures(VendorTextureBuffer *texture);
+
+    /*
+     * get_texture - CONFIRMED real name, found this pass (opcode 0x41's
+     * real body, three identical call sites). Real signature confirmed
+     * from those call sites; the function's OWN body was NOT independently
+     * decompiled this pass - an honest, disclosed gap (see GAPS.md), not
+     * assumed to be equivalent to the "add_texture_to_stream + pending-
+     * flush + alloc_and_load_texture + restore_state + map_transfer_to_GART"
+     * bundle this project manually inlines at every OTHER real bind call
+     * site, even though the parameter shape (three state pointers plus the
+     * shared register_tracking_state scratch buffer) makes that a
+     * plausible guess. Called opaquely wherever the real decompile calls
+     * it, rather than guessed-and-inlined.
+     */
+    void get_texture(UInt32 *record, VendorTextureBuffer *texture, UInt32 *pLocal388, UInt32 *pLocal384,
+                      UInt32 *pLocal380, register_tracking_state *scratch);
 
     /* freeToAllocGART (this context's own override) - CONFIRMED real
      * name/role (used identically across GL/2D/DVD contexts and the IDCT

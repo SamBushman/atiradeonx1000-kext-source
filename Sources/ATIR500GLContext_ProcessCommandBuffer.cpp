@@ -2106,12 +2106,307 @@ static UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt
     return record; /* real: falls to the shared generic distance-based advance */
 }
 
-/* Opcode 0x41: CONFIRMED real render-target/framebuffer commit - the
- * first-found (chronologically) caller of write_kernel_context_buffer_regs,
- * now known to share that function with opcode 0x29. */
-static UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record) {
-    ctx->write_kernel_context_buffer_regs(record, 0, record[6], record[7]); /* INFERRED to match opcode 0x29's exact call shape - not independently re-verified for 0x41 specifically in this reconstruction pass */
-    return record;
+/*
+ * Opcode 0x41: CONFIRMED, fully transcribed this pass - real render-
+ * target/framebuffer commit, the single largest and most involved opcode
+ * in this whole language after 0x31. Literal transcription of
+ * kext_process_cmd_buf.txt lines 1713-1985, real variable names preserved
+ * where dense (per this file's established method - see
+ * ATIR500GLContext_FSAAResolveBlit.cpp's own note). Real structure:
+ *   1. clears a real 4-entry `this+0x3b2` attachment-index table and resets
+ *      the real `this+0x3a8` attachment counter (both also read/written by
+ *      opcodes 0x02-0x05/0x28/0x29/0x2a/0x2c's "alternate mode" per-unit
+ *      table selection - this is the function that POPULATES that table);
+ *   2. a real per-color-attachment loop (real count `record[1]`, capped
+ *      contributions to the 4-entry table above) that unbinds whatever was
+ *      previously in a real per-attachment texture array (`this+0x338`,
+ *      stride 4), binds the new one via the real `get_texture` helper
+ *      (found this pass - see ATIR500GLContext.h), and calls
+ *      `build_surface_from_texture` into a real per-attachment surface-
+ *      struct array (`this+0x3c0`, stride 0x78) - on a lookup failure,
+ *      the real driver does NOT abort the whole opcode: it zeroes a local
+ *      that later forces the shared tail's advance to zero (modeled via
+ *      `forceZeroAdvance`, distinct from the harder `LAB_00030d40`-style
+ *      `state.forceTerminate` used by the SEPARATE depth-attachment lookup
+ *      failure below) and jumps straight to step 3;
+ *   3. a real single-slot depth-attachment bind (`this+0x348`) with its own
+ *      real HyperZ block auto-allocation (`HZMEM_Alloc`, gated on the
+ *      surface's own `+0x6c` field being unallocated and a real minimum-
+ *      size check) populating a real cluster of per-context HyperZ fields
+ *      (`this+0x5c8/0x5cc/0x5d4/0x5d5`);
+ *   4. a real, SEPARATE single-slot stencil-attachment bind, REUSING
+ *      `this+0x348` as its staging field (a real, confirmed overwrite of
+ *      the same field for a second, distinct logical purpose within one
+ *      opcode invocation - not a mistake, preserved exactly);
+ *   5. `this+0x3bc=1` (enters "alternate mode"), `build_scissor`, the
+ *      real shared vtable call at `+0x5a4`, and a final
+ *      `write_kernel_context_buffer_regs` call over the per-color-
+ *      attachment record range.
+ */
+static UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt32 *puVar65 = record;
+    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
+
+    UInt32 uVar55 = puVar65[1];
+    for (int i = 0; i < 4; ++i) U16At(self, 0x3b2 + i * 2) = 0;
+    UInt32 uVar58 = puVar65[4];
+    UInt32 uVar61 = puVar65[5];
+    U16At(self, 0x3a8) = 0;
+
+    bool forceZeroAdvance = false;
+    SInt32 iVar59 = 6; /* real: dword index into the record for the NEXT (depth) slot after the color attachments */
+
+    if (uVar55 != 0) {
+        for (UInt32 attach = 0; attach < uVar55; ++attach) {
+            UInt8 *attachCtx = self + attach * 0x78;   /* real: pAVar77 */
+            UInt8 *surfaceOut = self + 0x3c0 + attach * 0x78; /* real: local_c0 */
+            UInt32 *slot = reinterpret_cast<UInt32 *>(self + 0x338 + attach * 4); /* real: pAVar72+0x338 */
+            UInt32 recordByteOff = 0x18 + attach * 0x18; /* real: iVar52 inside the loop */
+            UInt32 *recEntry = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(puVar65) + recordByteOff); /* real: puVar42 */
+
+            VendorTextureBuffer *local_37c = nullptr;
+            U16At(attachCtx, 0x3dc) = static_cast<UInt16>(puVar65[2]);
+            U16At(attachCtx, 0x3de) = static_cast<UInt16>(puVar65[3]);
+
+            if (*slot != 0) {
+                void *oldRec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(*slot), 0x14));
+                U16At(oldRec, 0x36) -= 1;
+                ctx->remove_texture_from_stream(reinterpret_cast<VendorTextureBuffer *>(*slot));
+                VendorTextureBuffer *oldTex = reinterpret_cast<VendorTextureBuffer *>(*slot);
+                void *rec2 = reinterpret_cast<void *>(U32At(oldTex, 0x14));
+                UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec2) + 0x10);
+                UInt32 before = *countField;
+                *countField = before - 1;
+                if (before == 1) {
+                    IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+                    (void)shared; /* real: IOATIR500Shared::delete_texture(shared, oldTex); */
+                }
+                *slot = 0;
+            }
+
+            UInt32 uVar63 = U32At(reinterpret_cast<UInt8 *>(puVar65) + recordByteOff, 0);
+            if (uVar63 != 0xffffffffu) {
+                UInt16 attachSlotCount = U16At(self, 0x3a8);
+                if (attachSlotCount < 4) {
+                    U16At(self, 0x3a8) = attachSlotCount + 1;
+                    U16At(self, static_cast<int>(attachSlotCount) * 2 + 0x3b2) = static_cast<UInt16>(attach);
+                    uVar63 = U32At(reinterpret_cast<UInt8 *>(puVar65) + recordByteOff, 0);
+                }
+                if (U32At(sharedAllocator, 0x14) <= uVar63 ||
+                    (local_37c = reinterpret_cast<VendorTextureBuffer *>(
+                         U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), uVar63 * 4)),
+                     local_37c == nullptr)) {
+                    forceZeroAdvance = true;
+                    state.local_384 = 0;
+                    U32At(accel, 0x50) -= state.local_380;
+                    /* real: the per-iteration `iVar59 += 6` increment happens
+                     * AFTER this goto in the raw decompile, so on failure
+                     * iVar59 only reflects PREVIOUSLY completed attachments,
+                     * not the current (failing) one - set explicitly here to
+                     * match, since this project's loop doesn't increment
+                     * iVar59 per-iteration the way the raw decompile does. */
+                    iVar59 = 6 + static_cast<SInt32>(attach) * 6;
+                    goto LAB_0002e114_41;
+                }
+                ctx->add_texture_to_stream(local_37c);
+                ctx->get_texture(puVar65, local_37c, &state.local_388, &state.local_384, &state.local_380, state.scratchState);
+                UInt32 genWord = recEntry[10];
+                UInt32 uVar63b = (genWord >> 0xf) & 0x1fffeu;
+                UInt16 uVar15 = static_cast<UInt16>(1u << (genWord & 0x3fu));
+                void *rec378 = reinterpret_cast<void *>(U32At(local_37c, 0x14));
+                U16At(rec378, 0x36) += 1;
+                UInt8 *fieldAddr = reinterpret_cast<UInt8 *>(rec378) + uVar63b;
+                U16At(fieldAddr, 0x28) |= uVar15;
+                U16At(fieldAddr, 0x1c) &= static_cast<UInt16>(~uVar15);
+                ctx->build_surface_from_texture(
+                    local_37c, reinterpret_cast<ATIR500SurfaceBuffer *>(surfaceOut),
+                    U16At(puVar65, 10), U16At(puVar65, 0xe),
+                    U8At(recEntry, 0x2f), recEntry[7], U16At(recEntry, 0x22));
+                *slot = reinterpret_cast<UInt32>(local_37c);
+            }
+        }
+        iVar59 = 6 + static_cast<SInt32>(uVar55) * 6;
+    }
+
+LAB_0002e114_41:
+    if (U16At(self, 0x3a8) == 0) {
+        U16At(self, 0x3b2) = 0;
+        U16At(self, 0x3a8) = 1;
+    }
+    {
+        VendorTextureBuffer *local_37c = nullptr;
+        U32At(self, 0x5c8) = 0xffffffffu;
+        if (U32At(self, 0x348) != 0) {
+            void *oldRec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(self, 0x348)), 0x14));
+            U16At(oldRec, 0x36) -= 1;
+            VendorTextureBuffer *oldTex = reinterpret_cast<VendorTextureBuffer *>(U32At(self, 0x348));
+            ctx->remove_texture_from_stream(oldTex);
+            void *rec2 = reinterpret_cast<void *>(U32At(oldTex, 0x14));
+            UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec2) + 0x10);
+            UInt32 before = *countField;
+            *countField = before - 1;
+            if (before == 1) {
+                IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+                (void)shared; /* real: IOATIR500Shared::delete_texture(shared, oldTex); */
+            }
+            U32At(self, 0x348) = 0;
+        }
+
+        UInt32 *puVar54 = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4);
+        UInt32 uVar63 = *puVar54;
+        if (uVar63 != 0xffffffffu) {
+            if (U32At(sharedAllocator, 0x14) <= uVar63 ||
+                (local_37c = reinterpret_cast<VendorTextureBuffer *>(
+                     U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), uVar63 * 4)),
+                 local_37c == nullptr)) {
+                /* real: goto LAB_00030d40 - a real, full forced termination,
+                 * DIFFERENT from forceZeroAdvance above (this one skips the
+                 * rest of the function entirely, including the stencil bind
+                 * and the final write_kernel_context_buffer_regs call). */
+                state.local_384 = 0;
+                U32At(accel, 0x50) -= state.local_380;
+                state.forceTerminate = true;
+                return record;
+            }
+            ctx->add_texture_to_stream(local_37c);
+            ctx->get_texture(puVar65, local_37c, &state.local_388, &state.local_384, &state.local_380, state.scratchState);
+            UInt32 depthRecordByteOff = static_cast<UInt32>(iVar59) * 4 + 0x10;
+            UInt32 genWord = U32At(reinterpret_cast<UInt8 *>(puVar65) + depthRecordByteOff, 0);
+            UInt32 uVar63b = (genWord >> 0xf) & 0x1fffeu;
+            UInt16 uVar15 = static_cast<UInt16>(1u << (genWord & 0x3fu));
+            void *rec378 = reinterpret_cast<void *>(U32At(local_37c, 0x14));
+            U16At(rec378, 0x36) += 1;
+            UInt8 *fieldAddr = reinterpret_cast<UInt8 *>(rec378) + uVar63b;
+            U16At(fieldAddr, 0x28) |= uVar15;
+            U16At(fieldAddr, 0x1c) &= static_cast<UInt16>(~uVar15);
+            ctx->build_surface_from_texture(
+                local_37c, reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x5a0),
+                U16At(puVar65, 10), U16At(puVar65, 0xe),
+                U8At(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 0x17, 0),
+                U32At(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 4, 0),
+                U16At(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 10, 0));
+        }
+
+        if (local_37c != nullptr) {
+            /* real HyperZ block auto-allocation for the depth surface */
+            if (static_cast<SInt32>(U32At(local_37c, 0x6c)) == -1 && U16At(self, 0x5bc) > 0x20) {
+                UInt16 sizeField = U16At(self, 0x5be);
+                UInt32 uVar55b = sizeField;
+                if (sizeField > 0x10) {
+                    SInt32 tileBase = 0x20;
+                    SInt32 sampleMode = static_cast<SInt32>(U32At(accel, 0xb98));
+                    UInt32 uVar62b;
+                    if (sampleMode == 4) {
+                        uVar62b = static_cast<UInt32>(((static_cast<SInt32>(U16At(self, 0x5b4)) + tileBase - 1) / tileBase) * tileBase);
+                    } else {
+                        SInt32 t = sampleMode << 4;
+                        uVar62b = (t != 0) ? static_cast<UInt32>(((static_cast<SInt32>(U16At(self, 0x5b4)) + t - 1) / t) * t) : 0;
+                    }
+                    if ((sizeField & 0x1f) != 0) {
+                        uVar55b = (sizeField & 0xffffffe0u) + 0x20;
+                    }
+                    UInt32 depthBlock = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), 0xffffffffu, 0, uVar62b, uVar55b);
+                    U32At(local_37c, 0x6c) = depthBlock;
+                    if ((U32At(local_37c, 0x6c) & 0xffc00u) == 0xffc00u) {
+                        UInt32 uVar55c;
+                        SInt32 tileBase2 = 0x20;
+                        SInt32 sampleMode2 = static_cast<SInt32>(U32At(accel, 0xb98));
+                        if (sampleMode2 == 4) {
+                            uVar55c = static_cast<UInt32>(((static_cast<SInt32>(U16At(self, 0x5b4)) + tileBase2 - 1) / tileBase2) * tileBase2);
+                        } else {
+                            SInt32 t2 = sampleMode2 << 4;
+                            uVar55c = (t2 != 0) ? static_cast<UInt32>(((static_cast<SInt32>(U16At(self, 0x5b4)) + t2 - 1) / t2) * t2) : 0;
+                        }
+                        UInt16 sizeField2 = U16At(self, 0x5be);
+                        UInt32 uVar63c = sizeField2;
+                        if ((sizeField2 & 0x1f) != 0) {
+                            uVar63c = (sizeField2 & 0xffffffe0u) + 0x20;
+                        }
+                        UInt32 stencilBlock = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), U32At(local_37c, 0x6c), 1, uVar55c, uVar63c);
+                        U32At(local_37c, 0x6c) = stencilBlock;
+                    }
+                    U16At(local_37c, 0x70) = U16At(self, 0x5bc);
+                    U16At(local_37c, 0x72) = U16At(self, 0x5be);
+                    U16At(local_37c, 0x78) = U16At(self, 0x5b8);
+                    U16At(local_37c, 0x7a) = 0;
+                    U32At(local_37c, 0x74) = U32At(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 4, 0);
+                }
+            }
+            U32At(self, 0x5c8) = U32At(local_37c, 0x6c);
+            /* real: `this[0x5d4] = SUB21(value,0)` (the 16-bit value's LOW
+             * byte) and `this[0x5d5] = SUB21(value>>8,0)` (its HIGH byte).
+             * This target is big-endian, so the value's low byte lives at
+             * the HIGHER memory address (+0x7b), not +0x7a - a real, easy-
+             * to-get-backwards detail, caught and fixed during review. */
+            U8At(self, 0x5d4) = U8At(local_37c, 0x7b);
+            U8At(self, 0x5d5) = U8At(local_37c, 0x7a);
+            UInt32 uVar40 = U32At(local_37c, 0x7c);
+            U32At(self, 0x348) = reinterpret_cast<UInt32>(local_37c);
+            U32At(self, 0x5cc) = uVar40;
+        }
+
+        /* real, SEPARATE stencil-attachment bind, reusing this+0x348 */
+        local_37c = nullptr;
+        UInt32 *stencilEntry = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 0x18); /* real: puVar42 = puVar65 + iVar59 + 6 */
+        if (stencilEntry[0] != 0xffffffffu) {
+            if (U32At(self, 0x348) != 0) {
+                void *oldRec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(self, 0x348)), 0x14));
+                U16At(oldRec, 0x36) -= 1;
+                VendorTextureBuffer *oldTex = reinterpret_cast<VendorTextureBuffer *>(U32At(self, 0x348));
+                ctx->remove_texture_from_stream(oldTex);
+                void *rec2 = reinterpret_cast<void *>(U32At(oldTex, 0x14));
+                UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rec2) + 0x10);
+                UInt32 before = *countField;
+                *countField = before - 1;
+                if (before == 1) {
+                    IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
+                    (void)shared; /* real: IOATIR500Shared::delete_texture(shared, oldTex); */
+                }
+                U32At(self, 0x348) = 0;
+            }
+            if (U32At(sharedAllocator, 0x14) <= stencilEntry[0] ||
+                (local_37c = reinterpret_cast<VendorTextureBuffer *>(
+                     U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), stencilEntry[0] * 4)),
+                 local_37c == nullptr)) {
+                /* real: goto LAB_00030d40 */
+                state.local_384 = 0;
+                U32At(accel, 0x50) -= state.local_380;
+                state.forceTerminate = true;
+                return record;
+            }
+            ctx->add_texture_to_stream(local_37c);
+            ctx->get_texture(puVar65, local_37c, &state.local_388, &state.local_384, &state.local_380, state.scratchState);
+            UInt32 genWord = stencilEntry[4];
+            UInt32 uVar63b = (genWord >> 0xf) & 0x1fffeu;
+            UInt16 uVar15 = static_cast<UInt16>(1u << (genWord & 0x3fu));
+            void *rec378 = reinterpret_cast<void *>(U32At(local_37c, 0x14));
+            U16At(rec378, 0x36) += 1;
+            UInt8 *fieldAddr = reinterpret_cast<UInt8 *>(rec378) + uVar63b;
+            U16At(fieldAddr, 0x28) |= uVar15;
+            U16At(fieldAddr, 0x1c) &= static_cast<UInt16>(~uVar15);
+            ctx->build_surface_from_texture(
+                local_37c, reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x618),
+                U16At(puVar65, 10), U16At(puVar65, 0xe),
+                U8At(reinterpret_cast<UInt8 *>(stencilEntry) + 0x17, 0),
+                stencilEntry[1], U16At(reinterpret_cast<UInt8 *>(stencilEntry) + 10, 0));
+            U32At(self, 0x348) = reinterpret_cast<UInt32>(local_37c);
+        }
+    }
+
+    U32At(self, 0x3bc) = 1;
+    ctx->build_scissor();
+    /* real vtable call at offset 0x5a4 - same unresolved slot as opcodes 0x04/0x05/0x29/0x2f */
+    // (**(code**)(*(int*)this + 0x5a4))(this);
+    U32At(accel, 0x78) = 0;
+    *puVar65 = (static_cast<UInt32>(iVar59) + 10) * 0x10000u | 0xc0001000u;
+    ctx->write_kernel_context_buffer_regs(reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 0x30), 0, uVar58, uVar61);
+
+    if (forceZeroAdvance) {
+        state.forceTerminate = true;
+    }
+    return record; /* real: on success, falls to the shared generic distance-based advance (the raw decompile's own trailing `iVar52 = uVar63 << 2;` recomputes the SAME natural distance from the untouched header dword - a no-op, same pattern as opcode 0x39) */
 }
 
 /* Opcode 0x44: CONFIRMED real transfer-buffer GART completion - calls
@@ -2240,7 +2535,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x3f000000: next = handle_rendertarget_tiling_commit(this, record, state); break;
             case 0x40000000: next = handle_index_buffer_commit(this, record, state); break;
             case 0x43000000: next = handle_texture_commit_with_generation(this, record, state); break;
-            case 0x41000000: next = handle_rendertarget_commit(this, record); break;
+            case 0x41000000: next = handle_rendertarget_commit(this, record, state); break;
             case 0x44000000: next = handle_transfer_gart_completion(this, record); break;
             case 0x45000000: next = handle_build_surface_from_texture(this, record); break;
             case 0x46000000: next = handle_fast_clear(this, record); break;
