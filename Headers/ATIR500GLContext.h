@@ -202,6 +202,17 @@ public:
     void get_texture(UInt32 *record, VendorTextureBuffer *texture, UInt32 *pLocal388, UInt32 *pLocal384,
                       UInt32 *pLocal380, register_tracking_state *scratch);
 
+    /*
+     * convertIOGLBufferToBufIdx - CONFIRMED real name, found this pass
+     * (opcode 0x32's real body). Real signature confirmed from its one
+     * known call site: converts a real client-facing "IOGL buffer" enum
+     * (e.g. the same attachment-format values opcode 0x31/0x32 switch on -
+     * color/depth/stencil selectors) into a real internal buffer/mip-table
+     * index, written to the output parameter. Own body NOT independently
+     * decompiled this pass - called opaquely, like `get_texture`.
+     */
+    void convertIOGLBufferToBufIdx(UInt32 glBufferEnum, UInt32 *outIndex);
+
     /* freeToAllocGART (this context's own override) - CONFIRMED real
      * name/role (used identically across GL/2D/DVD contexts and the IDCT
      * engine). */

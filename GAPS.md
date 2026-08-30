@@ -13,6 +13,19 @@ the concrete first steps.
 
 ## 2. `process_command_buffer`'s opcode handlers - the largest reconstruction gap
 
+**Status: COMPLETE.** Every real opcode this driver's embedded marker language actually dispatches is now
+transcribed. This was verified mechanically, not just by inspection: grepping the complete raw decompile
+for every `uVar38 <op> 0x??000000` comparison actually present in the function's ~3315 lines produces the
+exact same opcode set this project's dispatch `switch` now handles (either via an explicit `case` or via
+one of the two confirmed opcode-range checks, `0x06-0x15` and `0x16-0x25`) - nothing left over on either
+side. Along the way, this pass found this project's ORIGINAL opcode inventory (built earlier from staged
+narrative documents, not a full mechanical sweep) had actually missed FOUR real opcodes entirely -
+`0x2d` (reserved/dead, same shape as the already-known `0x17/0x1a/0x1d/0x20/0x23` gaps), `0x33` (a real
+inline color+Z-buffer register burst), `0x34` (a real query/fence-slot allocator), and `0x35` (another
+render-target generation-stamp opcode) - plus a fifth, `0x32`, that WAS known by number but whose real body
+had never been located (a large depth-flush + per-tile texture-fetch-register-patch function, the closest
+thing in this language to opcode 0x31's own tile loop). All five are now fully transcribed.
+
 **Major structural corrections this pass** (found while transcribing the remaining opcodes, by finally
 reading the complete raw decompile rather than the excerpts used earlier): this project's model of the
 function's own SKELETON - not just individual opcode bodies - had several real, disclosed mistakes, now

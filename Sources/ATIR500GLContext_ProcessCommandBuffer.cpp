@@ -2270,6 +2270,211 @@ static UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt
  * `RTOffsetTilingBurst` (no MSB/tile-dim terms) - NOT reused as that
  * helper, to avoid silently adding terms this real formula does not have.
  */
+/*
+ * Opcode 0x32: NEW, previously-uncatalogued opcode, found this pass while
+ * sweeping the raw decompile for every opcode literal actually tested.
+ * Literal transcription of kext_process_cmd_buf.txt lines 2269-2451, real
+ * variable names preserved throughout (this file's established method for
+ * its densest functions - deliberately NOT renamed, per
+ * ATIR500GLContext_FSAAResolveBlit.cpp's own note on why renaming caused a
+ * real mistake there). Real, CONFIRMED shape: another member of the
+ * render-target family (same rt0-valid gate as 0x35/0x3e/0x40/0x43/0x44),
+ * combining a real depth-buffer decompress/flush (opcode 0x45's own
+ * mechanism, called directly here) with a real per-tile texture-fetch
+ * register-patch loop (16-dword-stride tile records, real format-table-
+ * driven shift math) - structurally the closest thing in this whole
+ * opcode language to opcode 0x31's own tile loop, after 0x31 itself.
+ *
+ * Real, structurally unique detail found here: this opcode's OWN record
+ * header is NOT at `record` itself - it is `record - record[2]` dwords
+ * back (both the depth-flush call and the failure-path header rewrite use
+ * this backward-indexed address). No other opcode in this language does
+ * this. `record[2]` doubles as this backward distance AND (after the
+ * depth-flush branch) is overwritten with `puVar65[0xa1]`'s old value
+ * during the tile-loop setup - two genuinely different real meanings for
+ * the same real variable slot (`uVar55` in the raw decompile), preserved
+ * exactly via a fresh local instead of reusing one name across both roles.
+ *
+ * Real, found this pass: a new helper `convertIOGLBufferToBufIdx` (now
+ * declared in ATIR500GLContext.h) and a second, parallel per-mip data
+ * array at `pAVar77+0x44` (alongside the already-known `+0x40` array).
+ */
+static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt32 *puVar65 = record;
+
+    UInt32 rt0Tex = U32At(self, 0x2a4);
+    UInt32 uVar55 = puVar65[2]; /* real: doubles as "backward distance to this opcode's real header" */
+
+    if (rt0Tex != 0 && (U8At(reinterpret_cast<void *>(rt0Tex), 0x20) == 6 || U32At(reinterpret_cast<void *>(rt0Tex), 0x48) != 0)) {
+        UInt32 uVar38 = puVar65[4];
+        UInt32 uVar58 = puVar65[5];
+
+        if (uVar55 != 0) {
+            UInt32 uVar73 = puVar65[3];
+            SInt32 iVar59b;
+            if (uVar73 == 8 || uVar73 == 0xb) {
+                iVar59b = 8;
+            } else if (uVar73 == 7 || uVar73 == 10) {
+                iVar59b = 7;
+            } else {
+                iVar59b = 6;
+            }
+
+            void *pAVar43 = reinterpret_cast<void *>(U32At(self, 0x290)); /* real: surface */
+            ATIR500SurfaceBuffer *pAVar45;
+            if (U32At(self, 0x3bc) == 0) {
+                pAVar45 = reinterpret_cast<ATIR500SurfaceBuffer *>(
+                    U32At(reinterpret_cast<UInt8 *>(pAVar43) + iVar59b * 4, 0xb70));
+            } else {
+                pAVar45 = reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x5a0);
+            }
+
+            UInt32 *backRecord = puVar65 - uVar55;
+            IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(pAVar43);
+            UInt32 flushResult = surface->decompress_and_flush_depth_buffer(pAVar45, 0, backRecord);
+            UInt32 uVar73b = 0x80000000u;
+            if (uVar55 - flushResult != 1) {
+                uVar73b = ((uVar55 - flushResult) - 2) * 0x10000u | 0xc0001000u;
+            }
+            backRecord[flushResult] = uVar73b;
+            rt0Tex = U32At(self, 0x2a4); /* real: reloaded fresh */
+        }
+
+        SInt32 iVar48 = static_cast<SInt32>(uVar38 >> 0x10) * 2;
+        void *rt0Rec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(rt0Tex), 0x14));
+        UInt16 uVar15 = static_cast<UInt16>(1u << (uVar38 & 0x3fu));
+        U16At(reinterpret_cast<UInt8 *>(rt0Rec) + iVar48, 0x28) |= uVar15;
+        U16At(reinterpret_cast<UInt8 *>(rt0Rec) + iVar48, 0x1c) &= static_cast<UInt16>(~uVar15);
+        *puVar65 = 0xc0051000u;
+
+        UInt32 local_378 = 0;
+        ctx->convertIOGLBufferToBufIdx(puVar65[3], &local_378);
+
+        void *pAVar77;
+        SInt32 iVar59, iVar48b;
+        UInt32 uVar38b;
+        if (U32At(self, 0x3bc) == 0) {
+            uVar38b = U32At(self, 0x29c);
+            iVar48b = static_cast<SInt32>(U32At(self, 0x298));
+            iVar59 = static_cast<SInt32>(uVar38b) + 1;
+            pAVar77 = reinterpret_cast<void *>(
+                U32At(reinterpret_cast<UInt8 *>(U32At(self, 0x290)) + local_378 * 4, 0xb70));
+        } else if (puVar65[3] == 4) {
+            pAVar77 = self + 0x5a0;
+            iVar59 = 1; uVar38b = 0; iVar48b = 0;
+        } else {
+            iVar59 = 1; uVar38b = 0; iVar48b = 0;
+            pAVar77 = self + U16At(self, 0x3b2) * 0x78 + 0x3c0;
+        }
+
+        UInt8 AVar10 = U8At(pAVar77, 0x3a);
+        puVar65[0xa7] = ((static_cast<UInt32>(U8At(pAVar77, 0x38)) & 7u) << 2) |
+            ((static_cast<UInt32>(U32At(pAVar77, uVar38b * 4 + 0x40)) * static_cast<UInt32>(U16At(pAVar77, 0x20)) +
+              static_cast<UInt32>(iVar48b) * (U32At(pAVar77, static_cast<UInt32>(iVar59) * 4 + 0x40) - U32At(pAVar77, uVar38b * 4 + 0x40)) +
+              U32At(pAVar77, 8)) & 0xffffffe0u);
+
+        UInt32 uVar73c, uVar75;
+        if ((U32At(pAVar77, 0x3c) & 0xf00000) == 0) {
+            uVar73c = 0;
+        } else {
+            iVar59 = static_cast<SInt32>(static_cast<UInt32>(U16At(pAVar77, 0x1c)) / ((U32At(pAVar77, 0x3c) >> 0x14) & 0xf)) >> (uVar38b & 0x3f);
+            uVar73c = (iVar59 == 0) ? 0u : static_cast<UInt32>(iVar59 - 1);
+        }
+        uVar75 = 0;
+        iVar59 = static_cast<SInt32>(static_cast<UInt32>(U16At(pAVar77, 0x1e))) >> (uVar38b & 0x3f);
+        if (iVar59 != 0) uVar75 = static_cast<UInt32>(iVar59 - 1);
+        puVar65[0xad] = (uVar73c & 0x7ffu) | ((uVar75 & 0x7ffu) << 0xb) | 0x80000000u;
+
+        UInt32 fmtWord = FormatTableLookup_0x0004d2e4(static_cast<UInt32>(AVar10) * 0x1c);
+        puVar65[0xaf] = ((fmtWord >> 0x13) & 0x1fu) | ((fmtWord & 0x40u) << 0x10) | ((fmtWord >> 7) & 0xe00u) |
+                        ((fmtWord >> 1) & 0x7000u) | ((fmtWord & 0x1c00u) << 5) | ((fmtWord & 0x380u) << 0xb);
+
+        UInt32 pitchWord = U32At(pAVar77, 0x3c);
+        bool noHz = (pitchWord & 0xf00000) == 0;
+        UInt32 uVar75b = noHz ? 0u : static_cast<UInt32>(
+            static_cast<SInt32>(static_cast<UInt32>(U16At(pAVar77, 0x14)) / ((pitchWord >> 0x14) & 0xf)) >> (uVar38b & 0x3f));
+        UInt32 uVar37 = 0x20 / U16At(pAVar77, 0x16);
+        if (0x20u / U16At(pAVar77, 0x16) <= uVar75b) uVar37 = uVar75b;
+
+        UInt32 uVar73d;
+        if (noHz) {
+            uVar73d = 0;
+        } else {
+            iVar59 = static_cast<SInt32>(static_cast<UInt32>(U16At(pAVar77, 0x1c)) / ((pitchWord >> 0x14) & 0xf)) >> (uVar38b & 0x3f);
+            uVar73d = (iVar59 == 0) ? 0u : static_cast<UInt32>(iVar59 - 1);
+        }
+        UInt32 uVar75c = 0;
+        iVar59 = static_cast<SInt32>(static_cast<UInt32>(U16At(pAVar77, 0x1e))) >> (uVar38b & 0x3f);
+        if (iVar59 != 0) uVar75c = static_cast<UInt32>(iVar59 - 1);
+
+        UInt32 uVar55b = puVar65[0xa1]; /* real: SEPARATE real meaning from the outer uVar55 - see file header note */
+        puVar65[0xb1] = ((uVar37 - 1) & 0x3fffu) | ((uVar73d & 0x800u) << 4) | ((uVar75c & 0x800u) << 5);
+        puVar65[0x12] = U32At(accel, 0xb74);
+        SInt32 texOff = static_cast<SInt32>(ctx->GetTextureOffset(reinterpret_cast<VendorTextureBuffer *>(rt0Tex), true));
+        UInt32 *puVar69 = puVar65 + 0xc4;
+        puVar65[0xa1] = uVar55b + static_cast<UInt32>(texOff);
+
+        AVar10 = U8At(pAVar77, 0x3a); /* real: re-read, redundant but real */
+        UInt32 uVar73e = 0;
+        if ((U32At(pAVar77, 0x3c) & 0xf00000) != 0) {
+            uVar73e = static_cast<UInt32>(static_cast<SInt32>(
+                static_cast<UInt32>(U16At(pAVar77, 0x14)) / ((U32At(pAVar77, 0x3c) >> 0x14) & 0xf)) >> (uVar38b & 0x3f));
+        }
+        UInt32 uVar75d = 0x20 / U16At(pAVar77, 0x16);
+        if (0x20u / U16At(pAVar77, 0x16) <= uVar73e) uVar75d = uVar73e;
+
+        UInt16 uVar15b = U16At(pAVar77, 0x20);
+        SInt32 iVar74 = static_cast<SInt32>(U32At(pAVar77, 8));
+        SInt32 iVar59c = static_cast<SInt32>(U32At(pAVar77, uVar38b * 4 + 0x40));
+        SInt32 iVar33 = static_cast<SInt32>(U32At(pAVar77, uVar38b * 4 + 0x44)); /* real: a SECOND, parallel per-mip array at +0x44 */
+        UInt8 AVar11 = U8At(pAVar77, 0x38);
+
+        if (uVar58 != 0 && static_cast<SInt32>(uVar58) > 0) {
+            do {
+                UInt32 uVar38c;
+                SInt32 iVar49;
+                if ((AVar11 >> 1) == 0) {
+                    uVar38c = FormatTableLookup_0x0004d2dc(static_cast<UInt32>(AVar10) * 0x1c);
+                    iVar49 = 0;
+                } else {
+                    uVar38c = FormatTableLookup_0x0004d2dc(static_cast<UInt32>(AVar10) * 0x1c);
+                    iVar49 = -static_cast<SInt32>((uVar38c >> 8) & 3);
+                }
+                uVar38c = (uVar38c >> 0xc) & 7;
+                iVar49 = static_cast<SInt32>(*puVar69) >> (((iVar49 - static_cast<SInt32>(uVar38c)) + 5) & 0x3f);
+                if ((AVar11 & 1) == 0) {
+                    iVar49 = iVar49 << 5;
+                } else {
+                    iVar49 = (iVar49 << 0xc) >> 3;
+                }
+                *puVar69 = 0x1150u;
+                puVar69[1] = ((static_cast<UInt32>(AVar11 >> 1) & 3u) << 3) | ((static_cast<UInt32>(AVar11) & 1u) << 2) |
+                    (static_cast<UInt32>(iVar59c * static_cast<SInt32>(uVar15b) + iVar48b * (iVar33 - iVar59c) + iVar74 + iVar49 +
+                                         static_cast<SInt32>(uVar75d * puVar69[1] << uVar38c)) & 0xffffffe0u);
+                UInt32 uVar55c = puVar69[2];
+                UInt32 uVar38d = puVar65[0xad];
+                puVar69[2] = 0x1120u;
+                puVar69[3] = (((puVar69[3] - 1) * 0x800u) & 0x3ff800u) | ((uVar55c - 1) & 0x7ffu) | (uVar38d & 0xffc00000u);
+                puVar69 += 0x10;
+                uVar58 -= 1;
+            } while (uVar58 != 0);
+        }
+
+        U32At(reinterpret_cast<void *>(U32At(self, 0x290)), 0x80) = U32At(accel, 0x50);
+        /* real: LAB_0002fe70 - ALSO runs after the write just above (both
+         * stamps happen, at two different real addresses) */
+        U32At(rt0Rec, 0xc) = U32At(accel, 0x50);
+        return record; /* real: falls to the shared generic distance-based advance */
+    }
+
+    /* real: rt0 not valid - trivial header rewrite at this opcode's own
+     * backward-indexed real header address */
+    (puVar65 - uVar55)[0] = (uVar55 + puVar65[1] - 2) * 0x10000u | 0xc0001000u;
+    return record;
+}
+
 static UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
@@ -2948,6 +3153,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x38000000: next = handle_address_fixup(this, record); break;
             case 0x39000000: next = handle_bind_vertex_attributes(this, record, state); break;
             case 0x3a000000: next = handle_clear_vertex_attribute_slots(this, record); break;
+            case 0x32000000: next = handle_depth_flush_and_tile_patch(this, record); break;
             case 0x33000000: next = handle_color_and_z_register_burst(this, record); break;
             case 0x34000000: next = handle_query_fence_alloc(this, record, state); break;
             case 0x3d000000: next = handle_forward_volatile_state(this, record); break;
