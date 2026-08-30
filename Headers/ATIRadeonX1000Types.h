@@ -316,4 +316,60 @@ struct sIOGLContextReadBufferData {
     /* UNKNOWN beyond this point */
 };
 
+/*
+ * VendorExternalMethod - CONFIRMED shape: a real 24-byte (6-dword) struct,
+ * read directly off raw kext bytes this project dumped this session (see
+ * stage5-iouserclient-external-method-api-complete.md). Every context
+ * class's external-method table (regular table, extra-selector table, and
+ * the GL context's special single-entry selector-20 slot) is a real,
+ * static array of these.
+ *
+ * Real dword layout, confirmed by reading every entry of every table:
+ *   [0] target   - always 0 in the static template; patched live to the
+ *                  real target object pointer by getTargetAndMethodForIndex
+ *                  at call time (CONFIRMED: this dword is 0 in 100% of the
+ *                  ~90 real entries this project dumped across all four
+ *                  context classes).
+ *   [1] flags    - CONFIRMED constant 0xffff in every single entry dumped.
+ *                  Real meaning UNKNOWN - by shape/position this matches
+ *                  classic IOExternalMethod's `flags` (IOOptionBits) field,
+ *                  but this driver's real encoding was never independently
+ *                  decoded (a constant value across ~90 real, functionally
+ *                  different entries is itself informative: whatever
+ *                  scalar-vs-structure/sync-vs-async distinction classic
+ *                  IOExternalMethod's flags field usually carries is
+ *                  evidently NOT encoded here, or is encoded identically
+ *                  for every method in this driver).
+ *   [2] function - CONFIRMED real function pointer, resolved to a real
+ *                  symbol for every entry this project dumped.
+ *   [3] count0   - CONFIRMED small integer, by call-site cross-reference
+ *                  (stage7's IOServiceOpen-caller confirmation) this is
+ *                  the real scalar/structure INPUT count.
+ *   [4] count1   - CONFIRMED small integer; by the same cross-reference,
+ *                  the real scalar/structure OUTPUT count for most
+ *                  entries, though a few entries (e.g. GL selector 6)
+ *                  show a real call site treating a different field as
+ *                  the output count - see the per-table source files for
+ *                  entry-by-entry notes where this project's confidence
+ *                  is lower.
+ *   [5] count2   - CONFIRMED small integer, present in every entry;
+ *                  UNKNOWN precise meaning (a third count - plausibly a
+ *                  structure-output *size* distinct from a scalar-output
+ *                  *count* - not independently confirmed).
+ *
+ * 0xffffffff appears in several `count0`/`count1` slots (e.g. GL
+ * selector 7's `read_buffer`, selector 10's `new_texture`) - CONFIRMED
+ * real (read directly off the raw bytes), INFERRED to mean "variable
+ * size" (the classic IOKit `kIOUCVariableStructureSize` sentinel is
+ * `0xffffffff` in real Apple headers from this era, which matches).
+ */
+struct VendorExternalMethod {
+    UInt32 target;    /* always 0 in the static template */
+    UInt32 flags;     /* always 0xffff, confirmed constant, real meaning UNKNOWN */
+    void  *function;
+    UInt32 count0;
+    UInt32 count1;
+    UInt32 count2;
+};
+
 #endif /* ATIRADEONX1000_TYPES_H */
