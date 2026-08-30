@@ -93,10 +93,12 @@ public:
 
     /*
      * restore_state_destroyed_by_pageoff - CONFIRMED, the capstone
-     * function (stage4-complete-register-tracking-state-map.md). Rebuilds
-     * the ENTIRE real 3D render state after a VRAM eviction by serializing
-     * a register_tracking_state snapshot back out as ~45 confirmed real
-     * PM4 register writes via write_r500_3d_blit_state_packet.
+     * function. Rebuilds the ENTIRE real 3D render state after a VRAM
+     * eviction by serializing a register_tracking_state snapshot back out
+     * as ~120 real PM4-header-shaped writes. FULLY transcribed in
+     * Sources/ATIR500GLContext_RestoreState.cpp from a complete real
+     * decompile (real kext offset 0x2af10) - see that file for an honest
+     * caveat about transposition risk in a transcription this dense.
      */
     void restore_state_destroyed_by_pageoff(register_tracking_state *savedState);
 
@@ -113,31 +115,35 @@ public:
     void write_r500_zdecompress_restore_add_on_packet(r500_zdecompress_restore_add_on_packet_struct *packet);
 
     /*
-     * compute_sc_hyperz_en / compute_zb_bw_cntl - CONFIRMED real HyperZ
-     * decision logic (stage4-render-target-and-full-draw-reference.md).
-     * Both take the requested value and return the real, hardware-safe
-     * value to actually write to SC_HYPERZ_EN / ZB_BW_CNTL - confirmed
-     * this session to be directly invoked by TWO real call sites each
-     * (write_kernel_context_buffer_regs's HyperZ burst, AND opcode 0x2f's
-     * dedicated "HyperZ configuration commit" handler).
+     * compute_sc_hyperz_en / compute_zb_bw_cntl - CONFIRMED, FULLY
+     * transcribed (real kext offsets 0x26df0/0x26e40) in
+     * Sources/ATIR500GLContext_RegisterState.cpp. Both resolve the real
+     * bound surface record and gate their real bit contributions on two
+     * real per-surface flags this pass discovered and named
+     * (ATIR500SurfaceBuffer::hyperZEligible/zbBandwidthEligible, +0x35/
+     * +0x34) - confirmed to be directly invoked by TWO real call sites
+     * each (write_kernel_context_buffer_regs's HyperZ burst, AND opcode
+     * 0x2f's dedicated "HyperZ configuration commit" handler).
      */
     UInt32 compute_sc_hyperz_en(UInt32 requested);
     UInt32 compute_zb_bw_cntl(UInt32 requested);
 
     /*
-     * build_scissor - CONFIRMED real name and role: computes the fields
-     * this project tracks as `this+0x354`/`this+0x358` (the live scissor
-     * rectangle), written directly into the command stream by opcodes
-     * 0x28/0x29/0x2a. Internal computation UNKNOWN beyond "produces the
-     * two scissor dwords" - never independently decompiled this project.
+     * build_scissor - CONFIRMED, FULLY transcribed (real kext offset
+     * 0x27ee0) in Sources/ATIR500GLContext_RegisterState.cpp. Real,
+     * surprising finding from that transcription: it only ever writes
+     * `this+0x358`, never `this+0x354` - see that file's note (this
+     * project's earlier assumption the two form a simple Y/X pair is now
+     * an open question, tracked in GAPS.md).
      */
     void build_scissor(void);
 
-    /* GetTextureOffset / WriteTextureOffset - CONFIRMED real names and
-     * role (stage3, referenced throughout the opcode-0x37 trace): resolve
-     * a VendorTextureBuffer's real GPU-visible base address, distinguishing
-     * VRAM-direct/GART/surface-backed storage via a real type byte. Full
-     * internal body UNKNOWN beyond this role. */
+    /* GetTextureOffset / WriteTextureOffset - CONFIRMED, FULLY
+     * transcribed (real kext offsets 0x280c0/0x28420) in
+     * Sources/ATIR500GLContext_TextureOffsets.cpp: resolve a
+     * VendorTextureBuffer's real GPU-visible base address via a real
+     * 6-value type-discriminant byte at +0x20, distinguishing VRAM-
+     * direct/chained/surface-backed storage. */
     UInt32 GetTextureOffset(VendorTextureBuffer *texture, bool forWrite);
     /* Real return value is the real dword-count written (3 or 4), not
      * void as an earlier draft guessed - fixed after full transcription

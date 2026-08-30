@@ -419,3 +419,65 @@ void ATIR500GLContext::build_scissor(void) {
      */
     scissorX = ((static_cast<UInt32>(dimA) << (shiftAmount & 0x3f)) & 0x3fff) | ((dimB & 0x3fff) << 0x10);
 }
+
+/*
+ * compute_sc_hyperz_en - CONFIRMED, fully transcribed (real kext offset
+ * 0x26df0; this project's earlier draft of this function was a stub -
+ * this replaces it after a fresh decompile). Real logic: resolve the
+ * real surface record (either the bound surface's `this+0xae`-indexed
+ * mip record, or the alternate-mode fixed record at `this+0x5a0` - the
+ * exact same two-mode selection write_kernel_context_buffer_regs and
+ * build_scissor already use). If that surface's real `hyperZEligible`
+ * flag (+0x35) is clear, OR the caller's requested value has bit 0
+ * clear, the result's bit 0 is forced to 0; otherwise it's forced to 1.
+ * Every other bit of `requested` passes through unchanged.
+ */
+UInt32 ATIR500GLContext::compute_sc_hyperz_en(UInt32 requested) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    ATIR500SurfaceBuffer *rec;
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        UInt8 *surfaceBase = static_cast<UInt8 *>(boundSurface);
+        UInt16 unit = *reinterpret_cast<UInt16 *>(self + 0xae);
+        rec = *reinterpret_cast<ATIR500SurfaceBuffer **>(surfaceBase + unit * 4 + 0xb70);
+    } else {
+        rec = reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x5a0);
+    }
+
+    UInt32 bit0 = (rec->hyperZEligible != 0 && (requested & 1) != 0) ? 1u : 0u;
+    return (requested & 0xfffffffeu) | bit0;
+}
+
+/*
+ * compute_zb_bw_cntl - CONFIRMED, fully transcribed (real kext offset
+ * 0x26e40; replaces this project's earlier stub the same way as
+ * compute_sc_hyperz_en above). Same real surface-record selection. Real
+ * bit 0x1c (HZ_MIN-area, per ATIRadeonX1000Registers.h's ZB_BW_CNTL
+ * note) is set when the surface's `zbBandwidthEligible` flag is set AND
+ * either its block width (+0x16) exceeds 2 texels or its tiling-degree
+ * bits (a real 4-bit field inside `formatOrTilingBits`, bits 20-23)
+ * exceed 2. Real bit 0x1 is set when `hyperZEligible` is set AND the
+ * caller requested bit 0 - the same condition compute_sc_hyperz_en uses.
+ */
+UInt32 ATIR500GLContext::compute_zb_bw_cntl(UInt32 requested) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    ATIR500SurfaceBuffer *rec;
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        UInt8 *surfaceBase = static_cast<UInt8 *>(boundSurface);
+        UInt16 unit = *reinterpret_cast<UInt16 *>(self + 0xae);
+        rec = *reinterpret_cast<ATIR500SurfaceBuffer **>(surfaceBase + unit * 4 + 0xb70);
+    } else {
+        rec = reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x5a0);
+    }
+
+    UInt32 bits = 0;
+    UInt8 *recBytes = reinterpret_cast<UInt8 *>(rec);
+    UInt16 blockWidth = *reinterpret_cast<UInt16 *>(recBytes + 0x16);
+    UInt32 tilingDegree = (*reinterpret_cast<UInt32 *>(recBytes + 0x3c) >> 0x14) & 0xf;
+    if (rec->zbBandwidthEligible != 0 && (blockWidth > 2 || tilingDegree > 2)) {
+        bits = 0x1c;
+    }
+    if (rec->hyperZEligible != 0 && (requested & 1) != 0) {
+        bits |= 1;
+    }
+    return (requested & 0xffffffe2u) | bits;
+}
