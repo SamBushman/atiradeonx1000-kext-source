@@ -272,15 +272,26 @@ all here, only confirmed to exist and sampled at a categorical level (see
 future target given direct evidence of real YUV 4:2:0 plane-geometry math and a texture-sampler-state
 record - directly relevant to this project's H.264 goal.
 
-## 8. `IOATIR500Surface`'s remaining lock/shape methods have no bodies
+## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
 
 Of the 19 real selectors, only the video-relevant overlay family (5 methods) and a handful of others
 sampled for confirmation (`surface_control`, `surface_flush`, `get_state`, `set_shape`, `surface_read`,
-`surface_query_lock`, one lock/unlock pair) have any real decompiled content behind them anywhere in this
-project's history. The remaining ~9 (`surface_read_lock_options`, `surface_write_lock_options`,
-`surface_write_unlock_options`, `set_shape_backing`, `set_id_mode`, `set_scale`, `surface_write_lock`,
-`surface_write_unlock`, `set_shape_backing_length`) were never independently decompiled at all - their
-real behavior is inferred by strong analogy with the ones that were, not confirmed.
+`surface_query_lock`, one lock/unlock pair) had any real decompiled content behind them. Of the remaining
+~9, **6 are now RESOLVED this pass**: `surface_read_lock_options`, `surface_write_lock_options`,
+`surface_write_unlock_options`, `surface_write_lock`, `surface_write_unlock`, `set_scale` are all fully
+transcribed from complete real decompiles - see `Sources/IOATIR500Surface_LockShape.cpp`. Real signature
+corrections found along the way: several of these had the wrong parameter count or return type
+(`IOReturn` vs real `void`); `set_scale` in particular had a completely wrong shape - this project had
+guessed raw `UInt32 xScale, UInt32 yScale` where the real 2nd parameter is a real `IOAccelSurfaceScaling*`
+struct pointer. Also formally declared the two shared internal helpers these all forward into
+(`surface_lock_options`/`surface_unlock_options`, previously only referenced in comments) and two more
+real, previously-undeclared internal helpers found as their own real functions:
+`surface_write_lock_int`/`surface_write_unlock_int`.
+
+**Still deferred, given their size/density**: `set_id_mode` (~184 lines) and `set_shape_backing`/
+`set_shape_backing_length` (thin forwards into a shared, also-large `set_shape_backing_length_ext`, ~236
+lines) - real signatures corrected to match the real mangled symbols, but bodies not transcribed. See
+`Headers/IOATIR500Surface.h`.
 
 ## 9. This reconstruction covers the kext only, not the userspace binaries
 

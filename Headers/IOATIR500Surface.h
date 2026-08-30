@@ -39,30 +39,96 @@ class IOATIR500GLContext;
 struct IOAccelSurfaceReadData;
 struct IOAccelSurfaceData;
 struct IOAccelSurfaceScaling;
+struct IOAccelDeviceRegion;
 
 class IOATIR500Surface : public IOUserClient {
     OSDeclareDefaultStructors(IOATIR500Surface)
 
 public:
-    IOReturn surface_read_lock_options(void *inStruct, UInt32 size);          /* 0 */
+    /*
+     * RESOLVED this pass (issue #8): surface_read_lock_options,
+     * surface_write_lock_options, surface_write_unlock_options,
+     * surface_write_lock, surface_write_unlock, set_scale all now fully
+     * transcribed from complete real decompiles - see
+     * Sources/IOATIR500Surface_LockShape.cpp. Several REAL SIGNATURE
+     * CORRECTIONS found in the process (this project's earlier
+     * declarations undercounted parameters or assumed the wrong return
+     * type for these six):
+     *   - surface_read_lock_options / surface_write_lock_options: real
+     *     3 params (UInt32, IOAccelSurfaceData*, UInt32), not 2
+     *     (void*, UInt32).
+     *   - surface_write_unlock_options: real 1 param (UInt32), not 0.
+     *   - surface_write_lock / surface_write_unlock /
+     *     surface_write_unlock_options: real return type `void`, not
+     *     `IOReturn`.
+     *   - set_scale: real 2nd param is `IOAccelSurfaceScaling*` (a real
+     *     scaling-parameters struct), not raw `UInt32 xScale, UInt32
+     *     yScale` - this project had guessed the wrong shape entirely.
+     * set_id_mode and set_shape_backing/set_shape_backing_length remain
+     * declared-but-deferred (see below and GAPS.md) - set_id_mode's
+     * real body is large and dense; the shape-backing pair both tail-
+     * call a shared, also-large `set_shape_backing_length_ext` helper
+     * this pass found but did not fully transcribe.
+     */
+    IOReturn surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 0 */
     IOReturn surface_read_unlock_options(void);                                /* 1 */
     IOReturn get_state(UInt32 *outStateBits);                                  /* 2, CONFIRMED body (stage10): real vtable call at offset 0x520, maps to 0/1 */
-    IOReturn surface_write_lock_options(void *inStruct, UInt32 size);          /* 3 */
-    IOReturn surface_write_unlock_options(void);                               /* 4 */
+    void     surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 3 */
+    void     surface_write_unlock_options(UInt32 options);                     /* 4 */
     IOReturn surface_read(IOAccelSurfaceReadData *readData, UInt32 structSize); /* 5, CONFIRMED body (stage10): real clipped-readback pattern, identical shape to the GL context's read_buffer */
-    IOReturn set_shape_backing(void *inStruct, UInt32 size);                   /* 6 */
-    IOReturn set_id_mode(UInt32 mode);                                         /* 7 */
-    IOReturn set_scale(UInt32 flags, UInt32 xScale, UInt32 yScale);            /* 8 */
+    /*
+     * set_shape_backing / set_id_mode / set_scale / set_shape /
+     * set_shape_backing_length - real signatures CORRECTED to match the
+     * real mangled symbols (found this pass); bodies for set_shape_backing,
+     * set_id_mode, and set_shape_backing_length remain deferred - see
+     * GAPS.md. set_shape_backing/set_shape_backing_length are thin
+     * conditional forwards to the also-deferred set_shape_backing_length_ext
+     * (real kext offset 0x152d0, a real 7-parameter function).
+     */
+    void     set_shape_backing(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
+                                IOAccelDeviceRegion *region, UInt32 param6);    /* 6, body deferred */
+    IOReturn set_id_mode(UInt32 mode, UInt32 modeBits);                       /* 7, body deferred */
+    IOReturn set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3); /* 8, RESOLVED this pass - see Sources/IOATIR500Surface_LockShape.cpp */
     IOReturn set_shape(void);                                                  /* 9, CONFIRMED body (stage10): a real one-line forward to set_shape_backing_length_ext (not itself a distinct external method - an internal helper name this project happened to see via the decompile) */
     IOReturn surface_flush(UInt32 param1, UInt32 param2);                      /* 10, CONFIRMED body (stage10): real - alloc_surfaces_retry then flush_surface, plus real completion-counter bookkeeping via a vtable call at offset 0x54c */
     IOReturn surface_query_lock(void);                                        /* 11, CONFIRMED body (stage10): real availability check without acquiring, using the same pending-GPU-flush bits as lock_memory */
     IOReturn surface_read_lock(IOAccelSurfaceData *data, UInt32 size);         /* 12, CONFIRMED body (stage10): thin forward to surface_lock_options(this, 1, 2, data, size) */
     IOReturn surface_read_unlock(void);                                       /* 13, CONFIRMED body (stage10): thin forward to surface_unlock_options(this, 1, 2) */
-    IOReturn surface_write_lock(IOAccelSurfaceData *data, UInt32 size);        /* 14 */
-    IOReturn surface_write_unlock(void);                                      /* 15 */
+    void     surface_write_lock(IOAccelSurfaceData *data, UInt32 size);       /* 14, RESOLVED this pass */
+    void     surface_write_unlock(void);                                     /* 15, RESOLVED this pass */
     IOReturn surface_control(UInt32 selector, UInt32 param2, UInt32 *inOut);   /* 16, CONFIRMED body (stage10): real dispatcher - param2==1 -> set_surface_blocking, param2==4 -> set_volatile_state, else kIOReturnBadArgument */
-    IOReturn set_shape_backing_length(UInt32 length);                         /* 17 */
+    IOReturn set_shape_backing_length(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
+                                       UInt32 param5, IOAccelDeviceRegion *region); /* 17, body deferred */
     IOReturn surface_control_alias(UInt32 selector, UInt32 param2, UInt32 *inOut); /* 18, CONFIRMED to be a real, deliberate alias of selector 16 - same function address, not two implementations */
+
+    /*
+     * surface_lock_options / surface_unlock_options - CONFIRMED real
+     * names/signatures (real mangled symbols
+     * __ZN16IOATIR500Surface20surface_lock_optionsE9eLockTypemP18IOAccelSurfaceDatam /
+     * __ZN16IOATIR500Surface22surface_unlock_optionsE9eLockTypem), the
+     * shared internal helpers every real lock/unlock external method
+     * above forwards into (lockType 1=read, 2=write). `eLockType`
+     * modeled as `UInt32` (a real Apple IOAcceleratorFamily enum, not
+     * reconstructed here). Bodies NOT independently decompiled this
+     * pass - referenced by name in this project's comments for a while,
+     * only now formally declared.
+     */
+    IOReturn surface_lock_options(UInt32 lockType, UInt32 param2, IOAccelSurfaceData *data, UInt32 size);
+    void     surface_unlock_options(UInt32 lockType, UInt32 param2);
+
+    /*
+     * surface_write_lock_int / surface_write_unlock_int - RESOLVED
+     * (issue #8), fully transcribed (real kext offsets 0x114a0/0x11540)
+     * - see Sources/IOATIR500Surface_LockShape.cpp. Real internal
+     * per-buffer lock/unlock helpers indexed by a mip/buffer index, used
+     * around GPU-visible surface-buffer access; real vtable calls at
+     * +0x5fc/+0x600 (names UNKNOWN) plus real completion-counter
+     * bookkeeping via a vtable call at +0x558 on this+0xd50 (the same
+     * "accelerator-ish" pointer other IOATIR500Surface methods reach
+     * through).
+     */
+    void surface_write_lock_int(UInt32 bufferIndex, UInt32 *outParam2, UInt32 *outParam3);
+    void surface_write_unlock_int(UInt32 bufferIndex);
 
     /*
      * ---- Video/overlay-adjacent real methods, called from
