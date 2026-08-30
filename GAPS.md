@@ -179,21 +179,28 @@ value against the raw decompile before relying on it for a real test.
 `build_scissor`, `GetTextureOffset`/`WriteTextureOffset`, `GetVertexArrayOffset`/`WriteVertexArrayOffset`,
 `GetQueryOffset`, `add_texture_to_stream`/`remove_texture_from_stream`, `map_transfer_to_GART`,
 `process_kATIGLStreamFastClearColor`, `build_surface_from_texture`, `discard_command_buffer` are now all
-**fully reconstructed** from complete real decompiles (closing most of issue #5). Still real, confirmed-
-to-exist, but only lightly sampled (not fully transcribed, given their size/density):
-`load_texture`/`alloc_and_load_texture`/`compact_current_textures`/`submit_context_buffer` - each would need a fresh
-targeted Ghidra decompile pass or transcription from this project's existing stage docs where one already
-covers it.
+**fully reconstructed** from complete real decompiles.
 
-**Two MORE real helpers found this pass** (during the opcode-language completion work), same category -
-declared with confirmed real signatures, but their own bodies were never independently decompiled:
-- `get_texture` (`ATIR500GLContext.h`) - found via opcode 0x41's three real call sites. Parameter shape
-  (three pending-state pointers plus the shared register-tracking scratch buffer) makes it a plausible
-  match for the "add_texture_to_stream + pending-flush + alloc_and_load_texture + restore_state +
-  map_transfer_to_GART" bundle this project manually inlines at every OTHER real bind call site - but this
-  is a guess, not confirmed.
-- `convertIOGLBufferToBufIdx` (`ATIR500GLContext.h`) - found via opcode 0x32's one real call site. Converts
-  a real client-facing "IOGL buffer" enum into an internal buffer/mip-table index; real mapping unknown.
+**RESOLVED this pass (issue #5)**: `alloc_and_load_texture`, `compact_current_textures`,
+`submit_context_buffer`, `get_texture`, and `convertIOGLBufferToBufIdx` are now ALL fully transcribed too -
+see `Sources/ATIR500GLContext_TextureLoad.cpp` and (for `convertIOGLBufferToBufIdx`, a real free function,
+not a member) `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp`. Real findings along the way:
+- `get_texture` was close to this project's own guess (the "pending-flush + alloc_and_load_texture +
+  restore_state + map_transfer_to_GART" bundle), plus a real atomic packed-counter update this project
+  hadn't anticipated.
+- `alloc_and_load_texture` is really `void` and `compact_current_textures` really returns a value - this
+  project had the two return types swapped. Two more return-type drifts fixed along the way:
+  `write_kernel_context_buffer_regs` (declared `void`, really `UInt32`) and `submit_context_buffer`
+  (declared `IOReturn`, really `void`).
+- `submit_context_buffer` directly confirms what `invalidate()`'s dirty bit (this+0x108's +0x1c, bit 0) is
+  *for*: it's the real trigger deciding whether to do a full register-state flush or just reuse the
+  current ring-buffer slot - a clean cross-reference to issue #12.1's resolution.
+- Four new real methods surfaced as call sites and declared (bodies not independently decompiled):
+  `IOATIR500Accelerator::freeToAllocTextureVRAM`, `IOATIR500Surface::alloc_surfaces_keep`,
+  `IOATIR500Surface::move_buffer_to_backing_store`, `IOATIR500Surface::copy_buffer_from_backing_store`.
+
+**Still deferred, given its size** (~380 lines, dense per-mip/tiling math): `load_texture` - see
+`Headers/ATIR500GLContext.h`'s declaration.
 
 **Also found, not yet resolved**: opcode 0x29's real execute-path handler was cross-checked against
 `discard_command_buffer`'s independent trace of the same opcode, and both agree on the 8-case switch table
@@ -209,13 +216,8 @@ four-field zero (`+0x210/+0x218/+0x21c/+0x220`), but the full real body was neve
 independent of - and does not block - opcode 0x3b's real EXECUTE-path body, which this project's
 `handle_query_buffer_bind` (in `ATIR500GLContext_ProcessCommandBuffer.cpp`) fully transcribes.
 
-**A real, unnamed virtual method** at vtable offset `+0x5a4` on `ATIR500GLContext`'s own vtable is called
-from SEVEN real, confirmed sites now (opcodes `0x02`/`0x03`(?)/`0x04`/`0x05`/`0x29`/`0x2f`/`0x41` - always
-via the identical raw-function-pointer-cast pattern, never given a name since no real method with a
-matching real signature was ever independently attributed to that slot). Resolving its real name would
-need either a base-class `start()`/constructor decompile that populates the vtable (see section 6) or a
-targeted search of the class's other declared-but-unassigned method slots for one whose real address
-matches.
+~~**A real, unnamed virtual method** at vtable offset `+0x5a4`...~~ **RESOLVED (issue #12.1)**: it's
+`ATIR500GLContext::invalidate()` - see section 6 and `Headers/ATIR500GLContext.h`.
 
 **A real, open opcode-0x31 tail-integration question** (found finishing the opcode language this pass):
 opcode 0x31's handler (`ATIR500GLContext_handle_fsaa_resolve_blit`) is the one confirmed opcode whose real

@@ -109,7 +109,7 @@ public:
      * (opcode 0x41's handler, and opcode 0x29's vertex-format-config
      * handler) - not opcode-41-specific as first assumed.
      */
-    void write_kernel_context_buffer_regs(UInt32 *outputBuffer, UInt32 param2, UInt32 param3, UInt32 param4);
+    UInt32 write_kernel_context_buffer_regs(UInt32 *outputBuffer, UInt32 param2, UInt32 param3, UInt32 param4); /* return type FIXED this pass (issue #5) - real definition in ATIR500GLContext_RegisterState.cpp already returns UInt32; this declaration had drifted out of sync */
 
     /*
      * restore_state_destroyed_by_pageoff - CONFIRMED, the capstone
@@ -192,46 +192,58 @@ public:
      * earlier draft that had them here.
      */
 
-    /* load_texture / alloc_and_load_texture / compact_current_textures -
-     * CONFIRMED real names and large, complex real bodies (kext offsets
-     * 0x29480/0x2a3d0/0x29dd0) - the texture-binding machinery every
-     * texture-load opcode (0x06-0x15 BIND family - CORRECTED, not the
-     * plain unbind this project's earlier pass wrongly called it - plus
-     * 0x37/0x39/0x3b/0x3e/0x3f/0x40/0x43) ultimately calls. Real decompiled
-     * bodies were read this pass but are large enough (dozens of local
-     * variables, dense per-mip/tiling math matching
-     * write_kernel_context_buffer_regs's shape) that full transcription
-     * was deferred - see GAPS.md. */
+    /*
+     * load_texture / alloc_and_load_texture / compact_current_textures -
+     * PARTIALLY RESOLVED (issue #5): alloc_and_load_texture and
+     * compact_current_textures fully transcribed this pass (real kext
+     * offsets 0x2a3d0/0x29dd0) - see Sources/ATIR500GLContext_TextureLoad.cpp.
+     * load_texture (0x29480) remains deferred - its real decompiled body
+     * was read this pass too but is large enough (~380 lines, dozens of
+     * locals, dense per-mip/tiling math matching
+     * write_kernel_context_buffer_regs's shape) that transcribing it to
+     * the same standard as its now-resolved siblings needs its own
+     * dedicated pass rather than being rushed alongside them - see
+     * GAPS.md. This machinery backs every texture-load opcode (0x06-0x15
+     * BIND family - not plain unbind - plus 0x37/0x39/0x3b/0x3e/0x3f/
+     * 0x40/0x43).
+     *
+     * RETURN TYPES CORRECTED this pass - the real decompile shows these
+     * were swapped from what this project had assumed:
+     * alloc_and_load_texture is real `void` (was declared `IOReturn`),
+     * compact_current_textures really returns a value (was declared
+     * `void`) - both confirmed directly from their real decompiled
+     * bodies' `return` statements.
+     */
     void     load_texture(VendorTextureBuffer *texture);
-    IOReturn alloc_and_load_texture(VendorTextureBuffer *texture);
-    void     compact_current_textures(VendorTextureBuffer *texture);
+    void     alloc_and_load_texture(VendorTextureBuffer *texture);
+    IOReturn compact_current_textures(VendorTextureBuffer *texture);
 
     /*
-     * get_texture - CONFIRMED real name, found this pass (opcode 0x41's
-     * real body, three identical call sites). Real signature confirmed
-     * from those call sites; the function's OWN body was NOT independently
-     * decompiled this pass - an honest, disclosed gap (see GAPS.md), not
-     * assumed to be equivalent to the "add_texture_to_stream + pending-
-     * flush + alloc_and_load_texture + restore_state + map_transfer_to_GART"
-     * bundle this project manually inlines at every OTHER real bind call
-     * site, even though the parameter shape (three state pointers plus the
-     * shared register_tracking_state scratch buffer) makes that a
-     * plausible guess. Called opaquely wherever the real decompile calls
-     * it, rather than guessed-and-inlined.
+     * get_texture - RESOLVED (issue #5): real body fully decompiled and
+     * transcribed this pass (kext offset 0x2b5f0) - see
+     * Sources/ATIR500GLContext_TextureLoad.cpp. Confirms the guess this
+     * project had flagged as plausible-but-unconfirmed: it IS close to
+     * the "pending-flush + alloc_and_load_texture + restore_state +
+     * map_transfer_to_GART" bundle manually inlined at other bind call
+     * sites, plus a real atomic counter update this project hadn't
+     * anticipated.
      */
     void get_texture(UInt32 *record, VendorTextureBuffer *texture, UInt32 *pLocal388, UInt32 *pLocal384,
                       UInt32 *pLocal380, register_tracking_state *scratch);
 
     /*
-     * convertIOGLBufferToBufIdx - CONFIRMED real name, found this pass
-     * (opcode 0x32's real body). Real signature confirmed from its one
-     * known call site: converts a real client-facing "IOGL buffer" enum
-     * (e.g. the same attachment-format values opcode 0x31/0x32 switch on -
-     * color/depth/stencil selectors) into a real internal buffer/mip-table
-     * index, written to the output parameter. Own body NOT independently
-     * decompiled this pass - called opaquely, like `get_texture`.
+     * convertIOGLBufferToBufIdx - RESOLVED (issue #5): real body fully
+     * decompiled this pass. CORRECTED signature - this is NOT a member
+     * of this class at all: it's a real free (non-member, non-static-
+     * member) C++ function (mangled `_Z25convertIOGLBufferToBufIdxmPm`,
+     * global namespace), and it returns `bool`-like success/failure
+     * (`undefined4`, 1/0), not `void`. Declared and defined in
+     * Sources/ATIR500GLContext_ProcessCommandBuffer.cpp next to its one
+     * real call site (opcode 0x32). Real body: a plain 7-case switch
+     * mapping client-facing "IOGL buffer" enum values (0/1/2/3/4/7/8) to
+     * internal buffer/mip-table indices (1/0/4/5/6/2/3) - default case
+     * returns failure (0) and writes 1 as a fallback index.
      */
-    void convertIOGLBufferToBufIdx(UInt32 glBufferEnum, UInt32 *outIndex);
 
     /* freeToAllocGART (this context's own override) - CONFIRMED real
      * name/role (used identically across GL/2D/DVD contexts and the IDCT
@@ -260,9 +272,12 @@ public:
 
     /* submit_context_buffer / discard_command_buffer - CONFIRMED real
      * names for the two real buffer-lifecycle bookends around
-     * process_command_buffer's own "submit if nearly full" internal calls. */
-    IOReturn submit_context_buffer(void);
-    void     discard_command_buffer(void);
+     * process_command_buffer's own "submit if nearly full" internal
+     * calls. submit_context_buffer RESOLVED (issue #5) - fully
+     * transcribed, see Sources/ATIR500GLContext_TextureLoad.cpp. Return
+     * type CORRECTED to real `void` (was declared `IOReturn`). */
+    void submit_context_buffer(void);
+    void discard_command_buffer(void);
 
 protected:
     /*

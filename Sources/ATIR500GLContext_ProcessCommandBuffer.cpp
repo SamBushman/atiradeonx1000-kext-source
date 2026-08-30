@@ -2291,6 +2291,27 @@ static UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt
  * declared in ATIR500GLContext.h) and a second, parallel per-mip data
  * array at `pAVar77+0x44` (alongside the already-known `+0x40` array).
  */
+
+/*
+ * convertIOGLBufferToBufIdx - RESOLVED (issue #5), fully transcribed
+ * (real kext offset 0x26ce0). A real free function, not a member of
+ * any class - see ATIR500GLContext.h's note. The one real call site
+ * below (opcode 0x32) discards the real return value in the real
+ * decompile too - not this project's own omission.
+ */
+static bool convertIOGLBufferToBufIdx(UInt32 glBufferEnum, UInt32 *outIndex) {
+    switch (glBufferEnum) {
+        case 0: *outIndex = 1; return true;
+        case 1: *outIndex = 0; return true;
+        case 2: *outIndex = 4; return true;
+        case 3: *outIndex = 5; return true;
+        case 4: *outIndex = 6; return true;
+        case 7: *outIndex = 2; return true;
+        case 8: *outIndex = 3; return true;
+        default: *outIndex = 1; return false;
+    }
+}
+
 static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
@@ -2342,7 +2363,7 @@ static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *
         *puVar65 = 0xc0051000u;
 
         UInt32 local_378 = 0;
-        ctx->convertIOGLBufferToBufIdx(puVar65[3], &local_378);
+        convertIOGLBufferToBufIdx(puVar65[3], &local_378);
 
         void *pAVar77;
         SInt32 iVar59, iVar48b;

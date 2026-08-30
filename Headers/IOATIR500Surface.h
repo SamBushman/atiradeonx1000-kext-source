@@ -134,6 +134,31 @@ public:
     void     attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
                                           UInt32 param3, UInt32 alignedPitch);
     UInt32   surface_buffer_idx_mask(UInt32 param1, UInt32 *outParam);
+
+    /*
+     * alloc_surfaces_keep - CONFIRMED real name/signature, found this
+     * pass as a real call site in ATIR500GLContext::alloc_and_load_texture
+     * (issue #5) - see Sources/ATIR500GLContext_TextureLoad.cpp. Real
+     * call shape: `alloc_surfaces_keep(surface, ctx-owned surface ptr,
+     * ctx's 42-entry texture-slot array, 0x2a, a real bitmask)` - the
+     * same "exclude list + count" shape freeToAllocTextureVRAM uses. Own
+     * body NOT independently decompiled this pass.
+     */
+    UInt32 alloc_surfaces_keep(IOATIR500Surface *excludeSurface, VendorTextureBuffer **excludeList,
+                                SInt32 excludeCount, UInt32 mask);
+
+    /*
+     * move_buffer_to_backing_store / copy_buffer_from_backing_store -
+     * CONFIRMED real names/signatures, found this pass as real call
+     * sites in ATIR500GLContext::compact_current_textures (issue #5) -
+     * see Sources/ATIR500GLContext_TextureLoad.cpp. move_buffer's
+     * return value (if any) is discarded at every real call site seen
+     * this pass; copy_buffer's real return IS checked at one real call
+     * site (a success/failure indicator). Neither body independently
+     * decompiled this pass.
+     */
+    void   move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer);
+    UInt32 copy_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer);
     /* FIXED this pass: real call site (opcodes 0x06-0x15's texture-bind
      * handler, ATIR500GLContext_ProcessCommandBuffer.cpp) passes TWO
      * explicit arguments (both real 32-bit `ulong` values on this PPC32

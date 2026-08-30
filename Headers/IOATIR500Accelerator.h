@@ -108,6 +108,17 @@ public:
     void *find_surface_for_id(UInt32 surfaceID);
 
     /*
+     * freeToAllocTextureVRAM - CONFIRMED real name/signature (real
+     * mangled symbol __ZN20IOATIR500Accelerator22freeToAllocTextureVRAMEP16IOATIR500SurfacePP19VendorTextureBufferlS3_),
+     * found this pass as a real call site in ATIR500GLContext::
+     * alloc_and_load_texture / compact_current_textures (issue #5) -
+     * see Sources/ATIR500GLContext_TextureLoad.cpp. Own body NOT
+     * independently decompiled this pass.
+     */
+    UInt32 freeToAllocTextureVRAM(IOATIR500Surface *surface, VendorTextureBuffer **excludeList,
+                                   SInt32 excludeCount, VendorTextureBuffer *needed);
+
+    /*
      * getVRAMDescriptors / allocCommandBuffer - CONFIRMED real names and
      * to be real methods of this class (both are real, mangled, exported
      * symbols - __ZN20IOATIR500Accelerator18getVRAMDescriptorsEv at kext
