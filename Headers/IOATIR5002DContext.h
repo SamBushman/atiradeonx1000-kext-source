@@ -49,6 +49,18 @@ public:
     IOReturn set_macrovision(UInt32 enable);                                                              /* 15, CONFIRMED body (stage9): real and functioning - iterates every active display connection, calls a vtable method (opcode 0x92) on each */
 
     /*
+     * map_transfer_to_GART - CONFIRMED real name/signature (real mangled
+     * symbol __ZN18IOATIR5002DContext20map_transfer_to_GARTEP20VendorTransferBuffer),
+     * found this pass as a real call site in ATIR5002DContext::
+     * process_command_buffer (issue #7) - see
+     * Sources/ATIR5002DContext_ProcessCommandBuffer.cpp. Same real role
+     * as the identically-named methods on IOATIR500GLContext/
+     * IOATIR500DVDContext. Own body NOT independently decompiled this
+     * pass.
+     */
+    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+
+    /*
      * NOTE on selectors 16-18: real decompiled signatures for read_regs/
      * write_regs/write_2_regs are `ATIR5002DContext::` (the SUBCLASS),
      * not `IOATIR5002DContext::` (this base class) - matching the exact
@@ -59,8 +71,20 @@ public:
 
 protected:
     ATIRadeonX1000 *accelerator;   /* +0x94, CONFIRMED offset (every method above reaches hardware through `*(int*)(this+0x94)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
-    void *sharedAllocator; /* +0x88, CONFIRMED: the IOATIR500Shared* lazily created via create_shared() on first texture/transfer allocation */
+    IOATIR500Shared *sharedAllocator; /* +0x88, CONFIRMED: the IOATIR500Shared* lazily created via create_shared() on first texture/transfer allocation. Concrete type CONFIRMED this pass (issue #7) - real bounds-checked texture-by-index lookups go through its own +0x10 (array)/+0x14 (count) fields, the same real layout independently confirmed via DVD's this+0x84 and GL's own texture lists. */
     IOATIR500Surface *boundSurface; /* +0x100, CONFIRMED: the currently-bound surface, read throughout lock_memory/swap_surface/create_transfer */
+
+    /*
+     * Real fields found this pass (issue #7), via
+     * ATIR5002DContext::process_command_buffer:
+     */
+    VendorTextureBuffer *lastBoundTexture; /* +0x114, CONFIRMED: the currently-bound texture for the raw command-buffer bind opcodes (0x3/0x4/0x7/0x8/0xd/0x13) - flushed and re-set every time a bind opcode runs, mirroring the same single-slot "last bound" pattern GL's own context classes don't need (GL tracks a 42-entry array instead - this class only ever has one). */
+    void *pendingWriteQueue; /* +200 (0xc8), CONFIRMED: the SAME real "pending write batch" object GL's invalidate()/submit_context_buffer use at this+0x108 (own +0x1c bit 0 = dirty flag) - same idiom, different per-class offset. */
+    UInt32 commandBufferBase; /* +0xac, CONFIRMED: the real command-buffer base this class's process_command_buffer reads records from (+0x1c offset to the first record), and submit_buffer's own base-address argument. */
+    UInt32 ringSlotBufferOffset; /* +0x9c, CONFIRMED: mirrors GL's own this+0xd0 role - zero-checked to decide whether to GART-map the pending transfer buffer. */
+    UInt8 pendingTransferBuffer[1]; /* +0x98, CONFIRMED to exist (passed to map_transfer_to_GART as `this+0x98`) - real size/type UNKNOWN, modeled as a byte anchor only. */
+    UInt32 lastSubmitResult; /* +0xa8, CONFIRMED: stores ATIRadeonX1000::submit_buffer's real return value, mirroring GL's this+0xdc/this+0x7c role. */
+    UInt32 defaultMipIndex; /* +0x110, CONFIRMED: real fallback per-mip index used when boundSurface (this+0x100) is null. */
 };
 
 #endif /* IOATIR5002DCONTEXT_H */

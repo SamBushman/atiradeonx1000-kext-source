@@ -263,7 +263,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - SKELETON MAPPED, transcription started
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD skeleton-mapped
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -301,8 +301,35 @@ real opcode families in detail, without yet transcribing them into compilable C+
 - Several trivial shared exit paths (malformed-opcode-abort, plain distance-only skip, sentinel-write)
   identified and are cheap to transcribe once opcode-by-opcode work resumes.
 
-2D's `process_command_buffer` (0x326d0) is much smaller (~0xe40 bytes, ~15% of GL's size) and was not
-examined this pass - likely the more tractable of the two once DVD's higher-value work is further along.
+~~2D's `process_command_buffer` (0x326d0) is much smaller... and was not examined this pass~~ **RESOLVED**:
+2D's own opcode language is now **fully transcribed** from a complete real decompile - see
+`Sources/ATIR5002DContext_ProcessCommandBuffer.cpp`. Unlike GL/DVD, it's small enough (~0xe40 bytes, ~15%
+of GL's size) that the real binary keeps every opcode inline in one function rather than splitting into
+separate handlers, which made a full pass tractable in one sitting. Real confirmed opcode range: 0x2-0xe,
+0x10-0x13 (14 distinct top-byte values). Real findings:
+- Four real texture-bind opcode families (0x3/0x4, 0x7/0x8, 0x10, 0x13), each reusing the exact same
+  `sharedAllocator`-indexed lookup and the SAME two accelerator-level lists (`+0x600`/`+0x5dc` and
+  `+0x6d0`/`+0x69c`) this project already reconstructed for GL (issue #5) - directly transferable
+  understanding paid off here.
+- `this+200` (0xc8) carries the exact same "pending write batch" dirty-bit idiom as GL's own
+  `invalidate()`/`submit_context_buffer` (`this+0x108` there) - same real pattern, different per-class
+  field offset, now confirmed on a THIRD context class after DVD's own equivalent.
+- `sharedAllocator` (`this+0x88`, already declared on `IOATIR5002DContext`) is a real `IOATIR500Shared*`
+  owning a real texture-lookup-by-index table at its own `+0x10`/`+0x14` - independently confirming the
+  same layout DVD's `this+0x84` and GL's own texture lists already established.
+- Three real opcode pairs (0x9/0xa, 0xb/0xc, 0xd/0xe) share exactly two real output shapes (a short
+  `0x1150`-family write and a longer sentinel-plus-sampler-state write), differing only in how the source
+  mip record is looked up (fixed per-index array, `find_surface_for_id` + `alloc_surfaces_keep`, or the
+  bound-surface-or-fallback-index pattern also used by opcodes 0x11/0x12).
+- One correctness bug caught and fixed during transcription (not present in the shipped driver, an error
+  in this project's own first-draft C++): an unrecognized opcode value is a plain pass-through in the real
+  binary (just consumes the record's own natural distance), NOT the harsh "reset the whole accumulated
+  count to zero" abort that real bounds-check failures trigger - the two real exit paths look superficially
+  similar but are meaningfully different, confirmed by checking every real `goto` site in the raw decompile
+  individually rather than assuming.
+
+DVD's `process_command_buffer` (0x357c0, ~0x39a0 bytes) remains the real, comparably-large-to-GL
+undertaking described above - not touched further this pass.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
 
