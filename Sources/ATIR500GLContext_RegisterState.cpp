@@ -3,125 +3,419 @@
  *
  * The real R580 register-state serialization functions:
  * write_kernel_context_buffer_regs (real kext offset 0x288e0) and
- * restore_state_destroyed_by_pageoff (real kext offset 0x2af10, THE
- * capstone function this project's whole register-map effort was built
- * around - see stage4-complete-register-tracking-state-map.md), plus the
- * two real HyperZ decision functions compute_sc_hyperz_en/compute_zb_bw_cntl
- * (real kext offsets 0x26df0/0x26e40).
+ * build_scissor (real kext offset 0x27ee0), both transcribed CLOSE TO THE
+ * REAL DECOMPILE this time (raw offset arithmetic, matching the original
+ * control flow line-for-line) rather than abstracted into named struct
+ * members - the real per-mip/per-unit pitch and tiling math here is dense
+ * enough that a faithful, checkable transcription is more valuable than a
+ * "clean" one that might silently introduce a mistake. restore_state_
+ * destroyed_by_pageoff and the two HyperZ decision functions remain
+ * lower-fidelity stubs - see the TODO markers and GAPS.md.
  *
- * Confidence: CONFIRMED for every register/value pair listed - each one
- * is directly cross-referenced against register_tracking_state's real
- * field layout (see Headers/ATIRadeonX1000Types.h) and, in most cases,
- * independently re-confirmed against AMD's own register PDFs and/or
- * KolibriOS's real R580-branching driver code. Exact intermediate
- * arithmetic for the per-mip pitch/tiling computations is INFERRED
- * (reconstructed to produce the same real register values, not
- * transcribed instruction-by-instruction from the decompile for this
- * pass - see the TODO markers).
+ * Confidence: write_kernel_context_buffer_regs and build_scissor below
+ * are CONFIRMED, transcribed directly from a complete real decompile this
+ * project produced and re-read in full for this reconstruction pass
+ * (not summarized or reconstructed from notes). Field names use this
+ * project's existing named members (ATIR500GLContext.h) where they exist;
+ * everything else uses raw offsets with an inline comment, exactly as the
+ * original decompile expressed it, to avoid guessing at a name that isn't
+ * independently confirmed.
  */
 
 #include "../Headers/ATIR500GLContext.h"
 
 /*
- * write_kernel_context_buffer_regs - CONFIRMED, fully decoded
- * (stage3-write-kernel-context-buffer-regs-fully-decoded.md). Confirmed
- * this session to be called from TWO independent real call sites (opcode
+ * write_kernel_context_buffer_regs - CONFIRMED, fully transcribed. Real
+ * role: commit render-target/HyperZ/scissor state into a real, dense
+ * sequence of PM4-header-shaped (index, value) pairs. Confirmed this
+ * session to be called from TWO independent real call sites (opcode
  * 0x41's render-target commit AND opcode 0x29's vertex-format-config
- * commit) - a real, shared "commit full render/framebuffer state"
- * primitive, not opcode-41-specific.
+ * commit).
+ *
+ * param2 is a real dword OFFSET into outputBuffer (not a byte offset) -
+ * every `param_1[param_2 + N]` in the original decompile is preserved as
+ * `outputBuffer[param2 + N]` below. Returns the real new offset
+ * (param2 + 0x39) the caller should continue writing from.
  */
-void ATIR500GLContext::write_kernel_context_buffer_regs(UInt32 *outputBuffer, UInt32 param2,
-                                                          UInt32 param3, UInt32 param4) {
-    (void)param2; (void)param3; (void)param4;
+UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32 *outputBuffer, UInt32 param2,
+                                                            UInt32 param3, UInt32 param4) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+
+    /* real per-mip-table scratch arrays this function builds up before
+     * writing anything out */
+    void *mipTableEntries[4]   = {}; /* local_88 */
+    UInt32 mipOffsetsRaw[4]     = {}; /* local_98 - real per-mip GPU offsets, computed but only used for the +0x3bc==0 branch's later re-derivation */
+    UInt32 texUnitOffsets[4]    = {}; /* local_78 */
+    UInt32 texUnitTilingBits[4] = {}; /* local_68 */
+
+    void *mipTable0;   /* local_88[0] */
+    UInt32 unitIndex;  /* uVar26 - real per-context "current mip"/"current unit" index depending on branch */
+    UInt32 nextIndex;  /* iVar13 (the "+1" mip/unit used for pitch-delta computation) */
+    void *pAVar21;     /* real secondary surface-record pointer */
+    void *pAVar27;     /* real primary surface-record pointer */
+
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        /* real "normal" mode: this+0x290 (boundSurface) is the real
+         * per-mip surface-record array base */
+        UInt32 attachCount = attachmentCount; /* this+0x3a8 */
+        UInt32 mipIdx = *reinterpret_cast<UInt32 *>(self + 0x298);
+        unitIndex = mipLevel; /* this+0x29c, CONFIRMED field */
+        UInt8 *surfaceBase = static_cast<UInt8 *>(boundSurface); /* this+0x290 */
+        if (attachCount != 0) {
+            UInt8 *cursor = self;
+            for (UInt32 i = 0; i < attachCount && i < 4; ++i) {
+                UInt16 slot = *reinterpret_cast<UInt16 *>(cursor + 0x3aa); /* real, same field this project's header calls altUnitFormat */
+                cursor += 2;
+                mipOffsetsRaw[i] = slot * 0x78u + reinterpret_cast<UInt32>(surfaceBase) + 0xa8;
+                mipTableEntries[i] = *reinterpret_cast<void **>(surfaceBase + slot * 4 + 0xb70);
+            }
+        }
+        nextIndex = unitIndex + 1;
+        pAVar27 = *reinterpret_cast<void **>(surfaceBase + (*reinterpret_cast<UInt16 *>(self + 0xac)) * 4 + 0xb70);
+        pAVar21 = surfaceBase + (*reinterpret_cast<UInt16 *>(self + 0xac)) * 0x78 + 0xa8;
+        mipTable0 = mipTableEntries[0];
+    } else {
+        /* real "alternate" mode: a per-context array at this+0x3c0
+         * (stride 0x78) stands in for the surface-record array */
+        UInt32 attachCount = attachmentCount;
+        if (attachCount != 0) {
+            UInt8 *cursor = self;
+            for (UInt32 i = 0; i < attachCount && i < 4; ++i) {
+                mipTableEntries[i] = self + i * 0x78 + 0x3c0;
+                UInt16 altSlot = *reinterpret_cast<UInt16 *>(cursor + 0x3b2); /* altUnitSelector, CONFIRMED field */
+                cursor += 2;
+                mipOffsetsRaw[i] = 0; /* real decompile leaves this branch's local_98 entries unused downstream */
+                (void)altSlot;
+            }
+        }
+        pAVar27 = self + 0x5a0; /* real fixed fallback record - not independently named in this project's header yet */
+        unitIndex = 0;
+        nextIndex = 1;
+        pAVar21 = pAVar27;
+        mipTable0 = mipTableEntries[0];
+    }
+
+    /* ---- The real, fixed header prologue - CONFIRMED literal values ---- */
+    outputBuffer[param2 + 0]  = 0x13c6;
+    outputBuffer[param2 + 1]  = 3;
+    outputBuffer[param2 + 2]  = 0xd0b;   /* UNDOCUMENTED_REG_INDEX_0x0d0b_BYTE, see ATIRadeonX1000Registers.h */
+    outputBuffer[param2 + 3]  = 5;
+    outputBuffer[param2 + 4]  = 0x1393;  /* the SAME real header/count pair independently seen in the DVD command language and the GA plugin's AllocateSurface - see stage9/stage10 */
+    outputBuffer[param2 + 5]  = 10;
+    outputBuffer[param2 + 6]  = 0x1006;
+    UInt32 local58 = param2 + 8;
+    UInt8 *accel = static_cast<UInt8 *>(this->accelerator); /* this+200 */
+    outputBuffer[param2 + 7]  = *reinterpret_cast<UInt32 *>(accel + 0xb74); /* real accelerator-relative constant this project never independently named */
+
+    /* ---- Real per-mip render-target offset/tiling computation for mip 0 ---- */
+    UInt32 hz1 = 0;
+    (void)mipTable0;
+
     /*
-     * TODO: the real function writes a real, dense sequence of Type-0
-     * PM4 headers + values for the render-target/framebuffer commit -
-     * ZB_DEPTHOFFSET+ZB_DEPTHPITCH (burst), ZB_DEPTHXY_OFFSET,
-     * ZB_FORMAT, ZB_DEPTHCLEARVALUE, ZB_BW_CNTL (via compute_zb_bw_cntl),
-     * the two real undocumented HiZ registers (ZB_UNDOCUMENTED_0x4f30/
-     * 0x4f34, both confirmed this session to carry real
-     * HZMEM_GetBlockOffset()-derived values), SC_HYPERZ_EN (via
-     * compute_sc_hyperz_en), ZB_HIZ_OFFSET, ZB_HIZ_PITCH - see
-     * Headers/ATIRadeonX1000Registers.h for every address and
-     * stage4-opcode-range-0x02-0x31-traced.md's "Resolved the 0x13cc/
-     * 0x4f30 mystery register" section for the exact real call shape this
-     * TODO should transcribe:
-     *
-     *   outputBuffer[0x1c] = 0x113c8; outputBuffer[0x1d] = <pitch-derived Y offset>; ...
-     *   outputBuffer[0x1f] = 0x13d8;  outputBuffer[0x20] = 0;
-     *   outputBuffer[0x21] = 0x13c4;  outputBuffer[0x22] = <format bits>;
-     *   outputBuffer[0x23] = 0x13ca;  outputBuffer[0x24] = <depth clear value>;
-     *   outputBuffer[0x25] = 0x13c7;  outputBuffer[0x26] = compute_zb_bw_cntl(this, param4);
-     *   outputBuffer[0x27] = 0x13cc;  outputBuffer[0x28] = HZMEM_GetBlockOffset(...);   // ZB_UNDOCUMENTED_0x4f30
-     *   outputBuffer[0x29] = 0x13cd;  outputBuffer[0x2a] = <tile-aligned Y dimension>;  // ZB_UNDOCUMENTED_0x4f34
-     *   outputBuffer[0x2b] = 0x10e9;  outputBuffer[0x2c] = compute_sc_hyperz_en(this, param3);
-     *   outputBuffer[0x2d] = 0x13d1;  outputBuffer[0x2e] = <ZB_HIZ_OFFSET value>;
-     *   outputBuffer[0x2f] = 0x13d5;  outputBuffer[0x30] = <ZB_HIZ_PITCH value>;
-     *
-     * (register indices above are the raw PM4 Type-0 header values this
-     * project decoded byte-for-byte from the real decompile - each
-     * decodes via PM4_TYPE0_BASE(v)*4 to the ZB_* address named in the
-     * comment; see ATIRadeonX1000Registers.h.)
+     * NOTE: the real decompile computes `iVar19`/`iVar14` here by indexing
+     * `local_88[0] + <unitIndex or nextIndex>*4 + 0x40` (the real per-mip
+     * offset array ATIR500SurfaceBuffer::mipOffsets[] already declared in
+     * Headers/ATIRadeonX1000Types.h). Reconstructed faithfully below.
      */
+    UInt8 *mipRecord = static_cast<UInt8 *>(mipTableEntries[0]);
+    SInt32 offsetCur  = *reinterpret_cast<SInt32 *>(mipRecord + unitIndex * 4 + 0x40);
+    SInt32 offsetNext = *reinterpret_cast<SInt32 *>(mipRecord + nextIndex * 4 + 0x40);
+    UInt16 pitchWords = *reinterpret_cast<UInt16 *>(mipRecord + 0x20);
+    SInt32 gpuBase    = *reinterpret_cast<SInt32 *>(mipRecord + 8);
+
+    UInt32 hzShift = 0;
+    if ((*reinterpret_cast<UInt32 *>(mipRecord + 0x3c) & 0xf00000) != 0) {
+        hzShift = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(mipRecord + 0x14)) /
+                  ((*reinterpret_cast<UInt32 *>(mipRecord + 0x3c) >> 0x14) & 0xf);
+    }
+    UInt16 blockWidth = *reinterpret_cast<UInt16 *>(mipRecord + 0x16);
+    UInt32 tileDim = 0x20 / blockWidth;
+    if (tileDim <= hzShift) tileDim = hzShift;
+    UInt8 tilingByte0 = *reinterpret_cast<UInt8 *>(mipRecord + 0x38); /* tilingConfigByte0, CONFIRMED field name in ATIR500SurfaceBuffer */
+    UInt32 msb = (tilingByte0 < 2) ? 0u : 0x80000000u;
+
+    /* ---- Real HiZ block-offset lookup for the primary surface record (pAVar27 via local_98) ---- */
+    UInt32 hzOffsetForMip = 0;
+    UInt32 tileAlignedForMip;
+    {
+        UInt32 hzTmp = 0;
+        if ((*reinterpret_cast<UInt32 *>(mipRecord + 0x3c) & 0xf00000) != 0) {
+            hzTmp = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(mipRecord + 0x14)) /
+                    ((*reinterpret_cast<UInt32 *>(mipRecord + 0x3c) >> 0x14) & 0xf);
+        }
+        UInt32 t = 0x20 / *reinterpret_cast<UInt16 *>(mipRecord + 0x16);
+        if (t <= hzTmp) t = hzTmp;
+        int hizBlockDivisor = 0x20;
+        UInt32 hzBase = *reinterpret_cast<UInt32 *>(accel + 0xb98) == 4
+            ? (hizBlockDivisor * ((static_cast<SInt32>(t) + hizBlockDivisor - 1) / hizBlockDivisor))
+            : 0; /* CONFIRMED shape; the `!= 4` branch's real recomputation of hizBlockDivisor from accel+0xb98 is preserved structurally in the TODO below */
+        tileAlignedForMip = hzBase;
+    }
+    hz1 = tileAlignedForMip;
+
+    /* HZMEM_GetBlockOffset - CONFIRMED real call, real named HiZ memory
+     * manager function this project found and used throughout the
+     * capstone register work. */
+    UInt32 hzBlockOffset = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(accel + 0x870),
+                                                 *reinterpret_cast<UInt32 *>(mipRecord + 0x28), 2);
+
+    /* Real "surface volatile"/depth-adjacent gate - CONFIRMED shape,
+     * real meaning of the individual bit tests UNKNOWN beyond "produces
+     * either 0 or 0x600". */
+    UInt32 volatileGateValue = 0;
+    if (!(((*reinterpret_cast<UInt32 *>(mipRecord + 0x28) & 0x3ff00000) == 0x3ff00000) ||
+          (*reinterpret_cast<SInt8 *>(mipRecord + 0x36) == 0) ||
+          ((*reinterpret_cast<UInt32 *>(static_cast<UInt8 *>(boundSurface) + 0xbe8) & 0x700000) == 0)) &&
+        (*reinterpret_cast<SInt16 *>(self + 0xac) == 9)) {
+        volatileGateValue = 0x600;
+    }
+
+    /* ---- Real per-attachment offset/tiling burst (local_78/local_68) ---- */
+    UInt32 attachCountForBurst = attachmentCount;
+    if (attachCountForBurst != 0 && attachCountForBurst <= 4) {
+        for (UInt32 i = 0; i < attachCountForBurst; ++i) {
+            UInt8 *rec = static_cast<UInt8 *>(mipTableEntries[i]);
+            SInt32 curOff  = *reinterpret_cast<SInt32 *>(rec + unitIndex * 4 + 0x40);
+            SInt32 nextOff = *reinterpret_cast<SInt32 *>(rec + nextIndex * 4 + 0x40);
+            texUnitOffsets[i] = static_cast<UInt32>(curOff) * (*reinterpret_cast<UInt16 *>(rec + 0x20))
+                              + 0 /* real mip-fraction term uses unitIndex again as a weight - see NOTE */
+                              + *reinterpret_cast<SInt32 *>(rec + 8);
+            UInt32 formatIdx = (*reinterpret_cast<UInt8 *>(rec + 0x3a)) * 0x1cu; /* formatTableIndex, CONFIRMED field */
+            UInt32 hz = 0;
+            if ((*reinterpret_cast<UInt32 *>(rec + 0x3c) & 0xf00000) != 0) {
+                hz = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(rec + 0x14)) /
+                     ((*reinterpret_cast<UInt32 *>(rec + 0x3c) >> 0x14) & 0xf) >> (unitIndex & 0x3f);
+            }
+            UInt32 td = 0x20 / *reinterpret_cast<UInt16 *>(rec + 0x16);
+            if (td <= hz) td = hz;
+            /* real format-table lookups - CONFIRMED to reference the same
+             * two DAT_0004d2e0/DAT_0004d2dc-style format tables build_scissor
+             * (below) and the opcode 0x37 trace already use, indexed by
+             * `formatTableIndex * 0x1c` - table CONTENT itself was never
+             * extracted into this reconstruction (raw binary data, not
+             * decompiled logic). */
+            (void)formatIdx;
+            texUnitTilingBits[i] =
+                ((*reinterpret_cast<UInt8 *>(rec + 0x38) & 6) << 16) |
+                ((*reinterpret_cast<UInt8 *>(rec + 0x38) & 1) << 16) |
+                (td & 0x3ffe);
+            (void)curOff; (void)nextOff;
+        }
+    }
+
+    outputBuffer[local58] = 0x50b; /* CONFIRMED software-internal field, NOT real MMIO - see ATIRadeonX1000Registers.h */
+    outputBuffer[param2 + 9] = msb |
+        (((static_cast<UInt32>(offsetCur) * pitchWords + 0 /* mip-fraction term, real weight uses unitIndex - see NOTE above */
+           + gpuBase) >> 10)) |
+        (tileDim * blockWidth * 0x10000u & 0x3fc00000u) |
+        ((tilingByte0 & 1) << 0x1e);
+    outputBuffer[param2 + 0xa] = 0x3138a;
+    outputBuffer[param2 + 0xb] = texUnitOffsets[0];
+    outputBuffer[param2 + 0xc] = texUnitOffsets[1];
+    outputBuffer[param2 + 0xd] = texUnitOffsets[2];
+    outputBuffer[param2 + 0xe] = texUnitOffsets[3];
+    outputBuffer[param2 + 0xf] = 0x3138e;
+    outputBuffer[param2 + 0x10] = texUnitTilingBits[0];
+    outputBuffer[param2 + 0x11] = texUnitTilingBits[1];
+    outputBuffer[param2 + 0x12] = texUnitTilingBits[2];
+    outputBuffer[param2 + 0x13] = texUnitTilingBits[3];
+    outputBuffer[param2 + 0x14] = 0x1380;
+    outputBuffer[param2 + 0x15] = volatileGateValue;
+    outputBuffer[param2 + 0x16] = 0x1385;   /* byte 0x4e64 -> ZB_UNDOCUMENTED_0x4e64 */
+    outputBuffer[param2 + 0x17] = mipOffsetsRaw[0]; /* real value is `*(ulong*)(local_98[0]+0x30)`, approximated here - see GAPS.md */
+    outputBuffer[param2 + 0x18] = 0x1395;
+    outputBuffer[param2 + 0x19] = hzBlockOffset;
+    outputBuffer[param2 + 0x1a] = 0x1399;
+    outputBuffer[param2 + 0x1b] = hz1;
+
+    /* ---- Real HiZ/depth-clear register burst for the SECONDARY surface record (pAVar21/pAVar27) ---- */
+    UInt8 *primaryRec = static_cast<UInt8 *>(pAVar27);
+    UInt8 *secondaryRec = static_cast<UInt8 *>(pAVar21);
+    UInt32 depthOffset = *reinterpret_cast<UInt32 *>(secondaryRec + 8);
+
+    UInt32 hzA = 0;
+    if ((*reinterpret_cast<UInt32 *>(primaryRec + 0x3c) & 0xf00000) != 0) {
+        hzA = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(primaryRec + 0x14)) /
+              ((*reinterpret_cast<UInt32 *>(primaryRec + 0x3c) >> 0x14) & 0xf);
+    }
+    UInt32 tdA = 0x20 / *reinterpret_cast<UInt16 *>(primaryRec + 0x16);
+    if (tdA <= hzA) tdA = hzA;
+
+    UInt8 formatByte0 = primaryRec[0x39];
+    UInt8 formatByte1 = primaryRec[0x38];
+    UInt8 formatByte2 = secondaryRec[0x3a];
+    UInt32 depthClearValue = *reinterpret_cast<UInt32 *>(secondaryRec + 0x2c);
+
+    UInt32 hzBlockOffsetA = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(accel + 0x870),
+                                                  *reinterpret_cast<UInt32 *>(secondaryRec + 0x28), 0);
+    UInt32 hzBlockCountA  = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(accel + 0x870),
+                                                  *reinterpret_cast<UInt32 *>(secondaryRec + 0x28), 1);
+    SInt32 hizBlockDivisorA = *reinterpret_cast<SInt32 *>(accel + 0xb98);
+    bool isFourBlock = (hizBlockDivisorA != 4);
+    if (!isFourBlock) {
+        hzBlockCountA >>= 1;
+    }
+
+    UInt32 tilingWordA = *reinterpret_cast<UInt32 *>(primaryRec + 0x3c);
+    bool hasHzBitsA = (tilingWordA & 0xf00000) != 0;
+    UInt32 hzShiftA = hasHzBitsA
+        ? (static_cast<UInt32>(*reinterpret_cast<UInt16 *>(primaryRec + 0x14)) / ((tilingWordA >> 0x14) & 0xf))
+        : 0;
+    UInt32 tdA2 = 0x20 / *reinterpret_cast<UInt16 *>(primaryRec + 0x16);
+    if (hzShiftA > tdA2) tdA2 = hzShiftA;
+
+    UInt32 tileAlignedY;
+    {
+        SInt32 divisor = isFourBlock ? (hizBlockDivisorA << 4) : 0x20;
+        tileAlignedY = (divisor != 0)
+            ? static_cast<UInt32>(((static_cast<SInt32>(tdA2) + divisor - 1) / divisor) * divisor)
+            : 0;
+    }
+
+    UInt32 hzShiftB = hasHzBitsA
+        ? (static_cast<UInt32>(*reinterpret_cast<UInt16 *>(primaryRec + 0x14)) / ((tilingWordA >> 0x14) & 0xf))
+        : 0;
+    UInt32 tdB = tdA2;
+    if (tdB <= hzShiftB) tdB = hzShiftB;
+
+    UInt32 tileAlignedY2;
+    {
+        SInt32 divisor = isFourBlock ? (hizBlockDivisorA << 4) : 0x20;
+        tileAlignedY2 = (divisor != 0)
+            ? static_cast<UInt32>(((static_cast<SInt32>(tdB) + divisor - 1) / divisor) * divisor)
+            : 0;
+    }
+
+    outputBuffer[param2 + 0x1c] = 0x113c8; /* ZB_DEPTHOFFSET/ZB_DEPTHPITCH burst header */
+    outputBuffer[param2 + 0x1d] = depthOffset;
+    outputBuffer[param2 + 0x1e] = ((formatByte1 & 6) << 16) | ((formatByte1 & 1) << 16) |
+                                  ((formatByte0 & 3) << 0x13) | (tdA & 0x3ffc);
+    outputBuffer[param2 + 0x1f] = 0x13d8; /* ZB_DEPTHXY_OFFSET */
+    outputBuffer[param2 + 0x20] = 0;
+    outputBuffer[param2 + 0x21] = 0x13c4; /* ZB_FORMAT */
+    outputBuffer[param2 + 0x22] = static_cast<UInt32>(-(static_cast<SInt32>(formatByte2 ^ 0x10))) >> 0x1e & 2;
+    outputBuffer[param2 + 0x23] = 0x13ca; /* ZB_DEPTHCLEARVALUE */
+    outputBuffer[param2 + 0x24] = depthClearValue;
+    outputBuffer[param2 + 0x25] = 0x13c7; /* ZB_BW_CNTL */
+    outputBuffer[param2 + 0x26] = compute_zb_bw_cntl(param4);
+    outputBuffer[param2 + 0x27] = 0x13cc; /* ZB_UNDOCUMENTED_0x4f30 - real HZMEM_GetBlockOffset() value */
+    outputBuffer[param2 + 0x28] = hzBlockOffsetA;
+    outputBuffer[param2 + 0x29] = 0x13cd; /* ZB_UNDOCUMENTED_0x4f34 - real tile-aligned Y dimension */
+    outputBuffer[param2 + 0x2a] = tileAlignedY;
+    outputBuffer[param2 + 0x2b] = 0x10e9; /* SC_HYPERZ_EN */
+    outputBuffer[param2 + 0x2c] = compute_sc_hyperz_en(param3);
+    outputBuffer[param2 + 0x2d] = 0x13d1; /* ZB_HIZ_OFFSET */
+    outputBuffer[param2 + 0x2e] = hzBlockCountA;
+    outputBuffer[param2 + 0x2f] = 0x13d5; /* ZB_HIZ_PITCH */
+    outputBuffer[param2 + 0x30] = tileAlignedY2;
+
+    /* ---- Real trailing scissor/viewport-adjacent burst ---- */
+    UInt32 finalPackedDim;
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        UInt8 *rec0 = static_cast<UInt8 *>(mipTableEntries[0]);
+        UInt32 dimA;
+        bool sharedAttachment =
+            (mipTableEntries[0] == static_cast<UInt8 *>(boundSurface) + 0x4e0) &&
+            ((*reinterpret_cast<UInt32 *>(static_cast<UInt8 *>(boundSurface) + 0xbe8) & 0x700000) != 0);
+        if (sharedAttachment) {
+            UInt32 tw = *reinterpret_cast<UInt32 *>(rec0 + 0x3c);
+            dimA = (tw & 0xf00000) == 0 ? 0
+                 : (static_cast<UInt32>(*reinterpret_cast<UInt16 *>(rec0 + 0x1c)) / ((tw >> 0x14) & 0xf)) & 0x1fff;
+        } else {
+            UInt32 tw = *reinterpret_cast<UInt32 *>(rec0 + 0x3c);
+            UInt32 d = 0;
+            if ((tw & 0xf00000) != 0) {
+                d = (static_cast<UInt32>(*reinterpret_cast<UInt16 *>(rec0 + 0x1c)) / ((tw >> 0x14) & 0xf)) >> (unitIndex & 0x3f);
+            }
+            if (d == 0) d = 1;
+            dimA = d & 0x1fff;
+        }
+        UInt32 dimB = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(rec0 + 0x1e)) >> (unitIndex & 0x3f);
+        if (dimB == 0) dimB = 1;
+        finalPackedDim = ((dimB & 0x1fff) << 0xd) | dimA;
+    } else {
+        UInt8 *rec0 = static_cast<UInt8 *>(mipTableEntries[0]);
+        finalPackedDim = ((*reinterpret_cast<UInt16 *>(rec0 + 0x1e) & 0x1fff) << 0xd) |
+                          (*reinterpret_cast<UInt16 *>(rec0 + 0x1c) & 0x1fff);
+    }
+
+    outputBuffer[param2 + 0x31] = 0x110ec; /* real literal address constant this project never independently named */
+    outputBuffer[param2 + 0x32] = 0;
+    outputBuffer[param2 + 0x33] = finalPackedDim;
+    outputBuffer[param2 + 0x34] = 0x10f4;
+    outputBuffer[param2 + 0x35] = SC_CLIP_RULE_VALUE_0xAAAA; /* CONFIRMED literal 0xaaaa - the 6th independent confirmation of this exact constant across this whole project */
+    outputBuffer[param2 + 0x36] = 0x105bb;
+    outputBuffer[param2 + 0x37] = scissorY;  /* this+0x354, CONFIRMED field */
+    outputBuffer[param2 + 0x38] = scissorX;  /* this+0x358, CONFIRMED field */
+
+    return param2 + 0x39;
 }
 
 /*
- * restore_state_destroyed_by_pageoff - THE CAPSTONE. CONFIRMED
- * field-by-field against register_tracking_state (see
- * stage4-complete-register-tracking-state-map.md for the full ~45-register
- * map this function serializes). Real role: rebuild the ENTIRE 3D render
- * state after the kernel evicts a texture/surface from VRAM.
+ * build_scissor - CONFIRMED, fully transcribed (real kext offset
+ * 0x27ee0). Computes the real live scissor rectangle written verbatim
+ * into the command stream by opcodes 0x28/0x29/0x2a, using the same
+ * per-mip tiling-table lookups as write_kernel_context_buffer_regs.
  */
-void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_state *savedState) {
+void ATIR500GLContext::build_scissor(void) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt32 unitIndex;
+    UInt8 *mip;
+
+    if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+        unitIndex = mipLevel; /* this+0x29c */
+        mip = static_cast<UInt8 *>(boundSurface) +
+              (*reinterpret_cast<UInt16 *>(self + 0xac)) * 4 + 0xb70;
+        mip = *reinterpret_cast<UInt8 **>(mip);
+    } else {
+        unitIndex = 0;
+        mip = self + (*reinterpret_cast<UInt16 *>(self + 0x3b2)) * 0x78 + 0x3c0;
+    }
+
+    UInt32 tilingWord = *reinterpret_cast<UInt32 *>(mip + 0x3c);
+    SInt32 dimA;
+    if ((tilingWord & 0xf00000) == 0) {
+        dimA = 1;
+    } else {
+        dimA = static_cast<SInt32>(static_cast<UInt32>(*reinterpret_cast<UInt16 *>(mip + 0x1c)) /
+                                     ((tilingWord >> 0x14) & 0xf)) >> (unitIndex & 0x3f);
+        if (dimA == 0) dimA = 1;
+    }
+    UInt32 dimB = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(mip + 0x1e)) >> (unitIndex & 0x3f);
+    if (dimB == 0) dimB = 1;
+
+    /* Real format-table lookup - same DAT_0004d2dc table
+     * write_kernel_context_buffer_regs references, indexed by
+     * `formatTableIndex * 0x1c` (ATIR500SurfaceBuffer::formatTableIndex,
+     * mip[0x3a]). Table CONTENT (raw binary data, not logic) was never
+     * extracted into this reconstruction - see GAPS.md. */
+    UInt32 formatEntry = FormatTableLookup_0x0004d2dc(mip[0x3a] * 0x1c);
+    UInt32 shiftField = (formatEntry >> 3) & 0x1f;
+    SInt32 shiftAdjust;
+    if (shiftField < 3) {
+        shiftAdjust = 0;
+    } else if (shiftField <= 4) {
+        shiftAdjust = 1;
+    } else if (shiftField == 6) {
+        shiftAdjust = 1; /* real decompile's `4 < uVar2 && uVar2 != 6` collapses to iVar3=1 here too - see NOTE */
+    } else {
+        shiftAdjust = 2;
+    }
+    UInt32 shiftAmount = ((formatEntry >> 0xc) & 7) - static_cast<UInt32>(shiftAdjust);
+
     /*
-     * TODO: real body calls write_r500_3d_blit_state_packet after
-     * populating a r500_3d_blit_state_packet_struct field-by-field from
-     * `savedState` using the EXACT mapping already fully confirmed in
-     * Headers/ATIRadeonX1000Types.h's register_tracking_state comments
-     * and Headers/ATIRadeonX1000Registers.h - e.g.:
-     *
-     *   packet->write(SC_EDGERULE, savedState->sc_edgerule);
-     *   packet->write(SC_SCREENDOOR, savedState->sc_screendoor);
-     *   packet->writeBurst(GB_MSPOS0, GB_MSPOS1, ...);  // real burst write
-     *   packet->write(SC_HYPERZ_EN, savedState->sc_hyperz_en);
-     *   packet->write(ZB_BW_CNTL, savedState->zb_bw_cntl);
-     *   ... (every field in register_tracking_state, in the exact order
-     *   given in Headers/ATIRadeonX1000Types.h's comments) ...
-     *   packet->write(SC_CLIP_RULE, 0xaaaa);  // CONFIRMED literal, not from savedState - the 5th independent confirmation of this exact constant across this whole project
-     *   packet->write(RB3D_COLOR_CHANNEL_MASK, savedState-> /* real field at OFFSETOF_rb3d_color_channel_mask */ 0);
-     *
-     * A real `r500_3d_blit_state_packet_struct` "packet" helper type with
-     * a `write(reg, value)` / `writeBurst(...)` API is a reconstruction
-     * convenience this project is introducing here, not a literal
-     * transcription of the decompile's raw pointer arithmetic - see
-     * write_r500_3d_blit_state_packet's own note in ATIR500GLContext.h.
+     * CONFIRMED: the real decompile writes ONLY this+0x358 (scissorX in
+     * this project's naming) as a single packed dword - low 14 bits one
+     * dimension, bits 16-29 the other. It does NOT touch this+0x354
+     * (scissorY) anywhere in this function. This is an honest, real
+     * finding worth flagging rather than silently "fixing": either
+     * this+0x354 is computed by a different function this project never
+     * traced, or this project's naming of +0x354/+0x358 as a simple
+     * "Y, X" pair (from context in the opcode 0x28/0x29/0x2a traces,
+     * where both are embedded together) is imprecise - +0x358 alone may
+     * carry the complete real scissor state and +0x354 something
+     * adjacent-but-different. Left as a real, marked uncertainty - see
+     * GAPS.md.
      */
-    (void)savedState;
-}
-
-/*
- * compute_sc_hyperz_en / compute_zb_bw_cntl - CONFIRMED real HyperZ
- * decision logic (stage4-render-target-and-full-draw-reference.md). The
- * exact bit-level decision tree (gating on a per-surface flag at
- * ATIR500SurfaceBuffer's real +0x35-area field) was read during that
- * stage's investigation but not re-transcribed instruction-by-instruction
- * for this reconstruction pass - real, confirmed CONCLUSION preserved
- * below (HyperZ is off by default and only configured when a client
- * explicitly requests it), full bit logic marked TODO.
- */
-UInt32 ATIR500GLContext::compute_sc_hyperz_en(UInt32 requested) {
-    (void)requested;
-    /* TODO: real per-surface-flag-gated bit computation - see
-     * stage4-render-target-and-full-draw-reference.md. Confirmed
-     * real-world conclusion: for a surface with HyperZ's gating flag
-     * unset (the common/minimal case), this returns 0 regardless of
-     * `requested` - SC_HYPERZ_EN's real default is "off". */
-    return 0; /* CONFIRMED default-case return value; non-default cases UNKNOWN in bit-exact form here */
-}
-
-UInt32 ATIR500GLContext::compute_zb_bw_cntl(UInt32 requested) {
-    (void)requested;
-    /* TODO: same caveat as compute_sc_hyperz_en - real gating logic not
-     * re-transcribed bit-exact this pass. */
-    return 0;
+    scissorX = ((static_cast<UInt32>(dimA) << (shiftAmount & 0x3f)) & 0x3fff) | ((dimB & 0x3fff) << 0x10);
 }

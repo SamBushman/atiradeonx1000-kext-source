@@ -168,4 +168,40 @@
  */
 #define REGISTER_ACCESS_WINDOW_MASK 0x1ffc
 
+/*
+ * SC_CLIP_RULE_VALUE_0xAAAA - CONFIRMED literal value written to
+ * SC_CLIP_RULE throughout this driver (write_kernel_context_buffer_regs,
+ * the capstone restore_state_destroyed_by_pageoff trace, and others) -
+ * the single most cross-validated constant in this whole project (six
+ * independent sightings across this project's full history, most
+ * recently in write_kernel_context_buffer_regs's own full transcription).
+ */
+#define SC_CLIP_RULE_VALUE_0xAAAA 0xaaaa
+
+/*
+ * _HZDATA / HZMEM_GetBlockOffset - CONFIRMED real, named HiZ memory-
+ * manager type and function this project found directly in the kext's
+ * own symbol table (a real Apple-internal helper, not reconstructed by
+ * this project). Real signature INFERRED from call-site shape
+ * (`HZMEM_GetBlockOffset(&accel->hizDataAt0x870, surfaceRecordField0x28, blockKind)`).
+ * `_HZDATA`'s own internal layout was never decompiled - opaque here.
+ */
+struct _HZDATA;
+extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+
+/*
+ * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 -
+ * INFERRED helper wrapping this project's own naming for two real,
+ * confirmed-to-exist binary data tables (`DAT_0004d2dc`/`DAT_0004d2e0` in
+ * the raw decompile) indexed by `ATIR500SurfaceBuffer::formatTableIndex * 0x1c`
+ * throughout build_scissor, write_kernel_context_buffer_regs, and the
+ * opcode 0x37 trace. These are real pixel-FORMAT DESCRIPTOR tables (not
+ * code) - their raw bytes were never extracted from the binary into this
+ * reconstruction. A real implementation should read them directly out of
+ * the kext's __const section at those addresses rather than guess at
+ * their content structurally.
+ */
+extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
+extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
+
 #endif /* ATIRADEONX1000_REGISTERS_H */
