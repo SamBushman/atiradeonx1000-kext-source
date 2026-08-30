@@ -331,7 +331,7 @@ separate handlers, which made a full pass tractable in one sitting. Real confirm
 **DVD - real further progress this pass**: two of the shared handlers the earlier skeleton pass identified
 (the texture bind and unbind families) are now fully transcribed from complete real decompiles - see
 `Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`. Together they cover 33 of the real ~55 opcodes:
-- **Bind** (0x19, 0x1a, 0x1b, 0x1c, 0x1e-0x25, 0x26-0x2a, 0x2d - 18 opcodes): real "bind texture unit N"
+- **Bind** (0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d - 19 opcodes): real "bind texture unit N"
   logic, N derived directly from the opcode value. Reuses the exact same `sharedAllocator`-indexed lookup
   and the same two accelerator-level lists (`+0x600`/`+0x5dc`, `+0x6d0`/`+0x69c`) already reconstructed for
   GL and 2D this session (issue #5) - the skeleton pass's prediction that this understanding would
@@ -348,7 +348,7 @@ separate handlers, which made a full pass tractable in one sitting. Real confirm
   it's reset to zero, not the live (by-then-zeroed) counter - the real decompile's `uVar10 = local_6c`
   save is easy to miss on a fast read.
 
-Still open: ~22 opcodes (0x02, 0x04-0x0d, 0x11-0x18, 0x1d, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) -
+Still open: ~21 opcodes (0x02, 0x04-0x0d, 0x11-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) -
 dense per-mip YUV/tiling math comparable in density to GL's own richest opcodes (real floating-point
 double arithmetic, multiple format-table lookups per opcode), including the highest-value target for the
 H.264 goal (opcodes 0x5/0x6/0xa/0xb/0xc/0xd's YUV surface setup). `process_command_buffer` itself is not
