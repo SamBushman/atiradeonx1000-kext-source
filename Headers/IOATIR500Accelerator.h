@@ -126,14 +126,34 @@ private:
     /*
      * newUserClient's four real vtable-dispatched factory slots. Real
      * offsets confirmed from the decompile (`*(int*)this + 0x5d4/0x5d8/
-     * 0x5dc/0x5e0`); this project could not read their actual targets
-     * because the corresponding vtable bytes are zero in every Ghidra
-     * import attempted (an unsupported "PPC_RELOC_LOCAL_SECTDIFF"-family
-     * Mach-O relocation, per the import-time warnings) - see
-     * stage5-iouserclient-external-method-api-complete.md. A real
-     * hardware/toolchain fix (parsing the raw Mach-O relocation table by
-     * hand, or building with a linker that resolves it) would let these
-     * be named for real; not done this pass.
+     * 0x5dc/0x5e0`); this project could not read their actual targets.
+     *
+     * CONFIRMED this pass (live access to the real kext binary via the
+     * G5, cross-checked with nm/otool/Ghidra together): the vtable base
+     * itself is real and unambiguous - `IOATIR500Accelerator::vtable` /
+     * `__ZTV20IOATIR500Accelerator` sits at file-verified address
+     * 0x46970 in `__TEXT,__const`, and the constructor's own decompile
+     * (`*(undefined **)this = &vtable;`) confirms this class's vtable
+     * pointer has NO Itanium-style offset-to-top/RTTI header skip - the
+     * `this->vtable + 0x5d4` addressing this project already used is
+     * exactly right, zero shift. So the four target *addresses* (0x46f44/
+     * 0x46f48/0x46f4c/0x46f50) are pinned down precisely; only their
+     * *contents* remain unknown.
+     *
+     * Those four words are still genuinely unresolved, and for a more
+     * specific reason than originally logged: Ghidra's relocation table
+     * marks them SKIPPED and substitutes a placeholder that traces to
+     * unrelated `_ModeNNTable` video-mode data, not a real function -
+     * i.e. Ghidra's "reads as zero" really means "could not resolve",
+     * not that the linked value is zero. `otool -rv` (without full
+     * scattered-pair decoding) separately misreads the same words as
+     * plain external refs to `__cxa_pure_virtual`, which can't be
+     * literally true (this dispatch path returns real working contexts
+     * on real hardware) - almost certainly a scattered relocation PAIR
+     * being read as a simple entry. Closing this for real needs either
+     * a hand decode of the raw `scattered_relocation_info` struct pairs
+     * at this address, or a live kxld-relocated memory read on hardware.
+     * See issue #6 for the full investigation.
      */
     // UNKNOWN: virtual createSurfaceContext(...)  at vtable+0x5d4
     // UNKNOWN: virtual create2DContext(...)       at vtable+0x5d8
