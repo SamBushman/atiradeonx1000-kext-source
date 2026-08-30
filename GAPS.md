@@ -27,12 +27,20 @@ source document to transcribe from rather than full reconstructions:
   section 5's discovery of opcode `0x36`, found the same way). One real open item remains: whether this
   main execute-path handler processes a fixed 4 slots (as `discard_command_buffer` does) or the dynamic
   `attachmentCount` - not independently re-confirmed for this exact function.
-- Opcode `0x2a` (render-target-pair + scissor) - real per-slot bind body not transcribed.
+- ~~Opcode `0x2a` (render-target-pair + scissor)~~ RESOLVED - fully transcribed (`RTOffsetTilingBurst`
+  reused twice, real duplicated scissor-Y write into two record slots).
 - Opcode `0x2b` (explicit flush) - real pending-count bookkeeping fields not mapped to named struct
   fields yet.
-- Opcode `0x2c` (mip-aware scissor intersect) - real per-mip computation not transcribed.
-- Opcode `0x2f` (HyperZ commit) - the trailing vtable call's real virtual method name is unknown.
-- Opcode `0x30` (FSAA resolve setup) - real format-code switch not transcribed.
+- ~~Opcode `0x2c` (mip-aware scissor intersect)~~ RESOLVED - fully transcribed via `RTOffsetTilingBurst`.
+  Real, notable finding: this opcode reads BOTH `this+0x354` and `this+0x358` together as a Y/X pair,
+  which is new evidence for (but doesn't resolve) section 3's open `build_scissor` question about
+  `this+0x354` never being written.
+- ~~Opcode `0x2f` (HyperZ commit)~~ RESOLVED - fully transcribed, including the real trailing raw vtable
+  call through slot `+0x5a4`. That slot's real virtual-method NAME is still unknown (called via a raw
+  function-pointer cast, not invented) - a small residual gap, not a missing transcription.
+- ~~Opcode `0x30` (FSAA resolve setup)~~ RESOLVED - fully transcribed. Found and fixed a real bug in this
+  project's own `IOATIR500Surface::resolve_fsaa_buffer` declaration while doing so: it was missing one of
+  four real trailing dword parameters the actual call site passes.
 - **Opcode `0x31` (FSAA resolve blit) - entirely stubbed.** This is the single largest remaining gap in
   the whole file: a complete textured-quad draw with real floating-point NDC/viewport math and US-block
   shader headers, reusing the same `_g_r500_3d_blit_state_packet` template as

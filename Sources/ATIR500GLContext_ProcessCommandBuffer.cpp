@@ -31,6 +31,7 @@
 
 #include "../Headers/ATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
+#include "../Headers/IOATIR500Surface.h"
 
 /*
  * Uncomment to add a real bounds check against the buffer's end/limit
@@ -656,35 +657,134 @@ static UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record) {
     return record + 1;
 }
 
-/* Opcode 0x2c: CONFIRMED real mip/slice-aware scissor intersection -
- * narrows a computed per-mip rect against the currently active scissor via
- * real min/max clamps. */
+/* Opcode 0x2c: CONFIRMED real mip/slice-aware scissor intersection.
+ * Literal transcription of the raw decompile (kext_process_cmd_buf.txt
+ * lines 2663-2721): picks either the bound surface's per-mip offset table
+ * (this+0x3bc == 0, the common case) or a fixed per-context render-target
+ * slot (this+0x3b2 selects which of a this+0x3c0[0x78] array), computes the
+ * SAME render-target offset/tiling word opcodes 0x28/0x2a use (reused here
+ * via RTOffsetTilingBurst), and then min/max-clamps the result's Y/X pairs
+ * against the CURRENT this+0x354/this+0x358 fields.
+ *
+ * Real, notable finding: this is a real, confirmed READ of this+0x354
+ * (scissorY) as well as this+0x358 (scissorX) - both fields are genuinely
+ * live and used together as a Y/X pair here, even though build_scissor
+ * (ATIR500GLContext_RegisterState.cpp) only ever WRITES this+0x358. This
+ * does not resolve GAPS.md section 3's open question (some other function
+ * must write this+0x354), but it is real evidence the two fields really are
+ * a coordinate pair, not unrelated values.
+ */
 static UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *record) {
-    /* TODO: real per-mip pitch/offset computation (mirrors opcode 0x28's
-     * shape) then min/max clamp against ctx->scissorY/scissorX. */
-    (void)ctx;
-    return record + 3; /* CONFIRMED real record length for this opcode */
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt32 *puVar65 = record;
+    UInt32 iVar33, iVar59, iVar48;
+    void *pAVar77;
+
+    if (U32At(self, 0x3bc) == 0) {
+        iVar33 = U32At(self, 0x29c);        /* mipLevel */
+        iVar59 = U32At(self, 0x298);
+        iVar48 = iVar33 + 1;
+        pAVar77 = reinterpret_cast<void *>(
+            U32At(reinterpret_cast<void *>(U32At(self, 0x290) + static_cast<UInt32>(U16At(self, 0xac)) * 4), 0xb70));
+    } else {
+        iVar59 = 0;
+        iVar33 = 0;
+        iVar48 = 1;
+        pAVar77 = self + static_cast<UInt32>(U16At(self, 0x3b2)) * 0x78 + 0x3c0;
+    }
+
+    puVar65[0] = RTOffsetTilingBurst(pAVar77, iVar33, iVar48, iVar59);
+
+    UInt32 uVar38 = puVar65[1] >> 0x10;
+    UInt32 uVar73 = U32At(self, 0x354) >> 0x10;
+    UInt32 uVar53 = puVar65[2] & 0xffff;
+    UInt32 uVar35 = U32At(self, 0x358) & 0xffff;
+    UInt32 uVar57 = puVar65[1] & 0xffff;
+    UInt32 uVar34 = U32At(self, 0x354) & 0xffff;
+    UInt32 uVar75 = puVar65[2] >> 0x10;
+    UInt32 uVar37 = U32At(self, 0x358) >> 0x10;
+    if (uVar73 < uVar38) uVar73 = uVar38;
+    if (uVar34 < uVar57) uVar34 = uVar57;
+    if (uVar75 < uVar37) uVar37 = uVar75;
+    if (uVar53 < uVar35) uVar35 = uVar53;
+    puVar65[1] = uVar34 | (uVar73 << 0x10);
+    puVar65[2] = uVar35 | (uVar37 << 0x10);
+
+    return record; /* real: falls through to the shared generic distance-based advance */
 }
 
-/* Opcodes 0x2f: CONFIRMED real HyperZ configuration commit - directly
- * calls compute_sc_hyperz_en/compute_zb_bw_cntl and patches the results
- * into the embedded slots. */
+/* Opcode 0x2f: CONFIRMED real HyperZ configuration commit - directly
+ * calls compute_sc_hyperz_en/compute_zb_bw_cntl, patches the results into
+ * the embedded slots, then makes a real, raw vtable call through this
+ * object's own vtable slot +0x5a4 (`(**(code **)(*(int *)this + 0x5a4))(this);`
+ * in the raw decompile). That slot's real virtual-method name is UNKNOWN -
+ * this project never traced which declared method compiles down to that
+ * offset - so it is called here through a raw function-pointer cast rather
+ * than invented a plausible-sounding name, per the no-shortcuts standard:
+ * an honestly-unnamed real call beats a fabricated one. Like 0x2c/0x30, the
+ * real decompile shows this opcode falls through to the shared generic
+ * distance-based advance afterward (line 2767's `goto LAB_00031340;` closes
+ * the whole `0x2c / 0x2f / 0x30` if-chain), so this returns `record`
+ * unchanged rather than a hardcoded length. */
 static UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     record[0] = PM4_TYPE2_FILLER;
     record[2] = ctx->compute_sc_hyperz_en(record[2]);
     record[4] = ctx->compute_zb_bw_cntl(record[4]);
-    /* TODO: real trailing vtable call `(**(code**)(*(int*)this+0x5a4))(this)` -
-     * UNKNOWN real virtual method name, not resolved this project. */
-    return record + 5; /* CONFIRMED real record length */
+
+    typedef void (*Vtable0x5a4Fn)(void *);
+    Vtable0x5a4Fn fn = *reinterpret_cast<Vtable0x5a4Fn *>(U32At(self, 0) + 0x5a4);
+    fn(self);
+
+    return record; /* real: falls through to the shared generic distance-based advance */
 }
 
-/* Opcode 0x30: CONFIRMED real FSAA resolve-buffer setup, calling the real,
- * named ATIR500Surface::resolve_fsaa_buffer. */
+/* Opcode 0x30: CONFIRMED real FSAA resolve-buffer setup. Literal
+ * transcription of kext_process_cmd_buf.txt lines 2731-2766: remaps the
+ * embedded format code through the SAME 6-case switch table pattern
+ * (default/1/2/3/7/8) seen elsewhere in this driver's format handling, calls
+ * the real ATIR500Surface::resolve_fsaa_buffer, and - if that call returns a
+ * pointer still inside this record's own dword span - patches either a
+ * `0x80000000` filler (if fewer than 4 real dwords of room remain) or a
+ * real Type-3 NOP-with-count word into the leftover space. Falls through to
+ * the shared generic advance afterward, same as 0x2c/0x2f. */
 static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) {
-    (void)ctx;
-    /* TODO: real format-code switch + resolve_fsaa_buffer call - see
-     * stage4-opcode-range-0x02-0x31-traced.md for the exact switch table. */
-    return record + 1;
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt32 *puVar65 = record;
+    UInt32 uVar55 = puVar65[1];
+    UInt32 uVar58;
+    switch (puVar65[2]) {
+        default: uVar58 = 1; break;
+        case 1:  uVar58 = 0; break;
+        case 2:  uVar58 = 4; break;
+        case 3:  uVar58 = 5; break;
+        case 7:  uVar58 = 2; break;
+        case 8:  uVar58 = 3; break;
+    }
+
+    /* Real decompile types this as `ATIR500Surface *` (a subclass-qualified
+     * call, `ATIR500Surface::resolve_fsaa_buffer`) - this project's
+     * IOATIR500Surface.h has never been split into base/subclass the way
+     * GL/2D/DVD were (see GAPS.md section 8), so IOATIR500Surface is used
+     * here as the closest currently-declared type; if Surface ever gets a
+     * real base/subclass split, resolve_fsaa_buffer likely belongs on the
+     * subclass side along with this call. */
+    IOATIR500Surface *boundSurface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
+    UInt32 *puVar42 = reinterpret_cast<UInt32 *>(
+        boundSurface->resolve_fsaa_buffer(static_cast<UInt32>(U16At(self, 0xac)), uVar58,
+                                           puVar65, puVar65[3] == 0 ? false : true,
+                                           puVar65[4], puVar65[5], puVar65[6], puVar65[7]));
+
+    if (puVar42 < puVar65 + uVar55) {
+        SInt32 iVar59 = static_cast<SInt32>((puVar65 + uVar55) - puVar42);
+        if (static_cast<UInt32>(iVar59 - 4) < 4) {
+            *puVar42 = 0x80000000;
+        } else {
+            *puVar42 = (((iVar59 >> 2) + -2) * 0x10000) | 0xc0001000;
+        }
+    }
+
+    return record; /* real: falls through to the shared generic distance-based advance */
 }
 
 /*

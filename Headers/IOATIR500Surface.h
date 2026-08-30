@@ -94,7 +94,12 @@ public:
      * set_scaling/set_volatile_state). Bodies UNKNOWN beyond their roles. */
     void     flush_surface(UInt32 param1, UInt32 param2);
     void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlock,
-                                  bool clearFlag, UInt32 param6, UInt32 param7, UInt32 param8);
+                                  bool clearFlag, UInt32 param5, UInt32 param6, UInt32 param7,
+                                  UInt32 param8);
+    /* FIXED this pass: the real opcode 0x30 call site
+     * (ATIR500GLContext_ProcessCommandBuffer.cpp's handle_fsaa_resolve_setup)
+     * passes FOUR trailing dwords (puVar65[4..7]) after clearFlag, not
+     * three - this signature previously dropped one parameter. */
     IOReturn set_scaling(UInt32 flags, IOAccelSurfaceScaling *scaling);
     void     set_volatile_state(UInt32 *state);
     IOReturn set_surface_blocking(UInt32 blockingMode);
