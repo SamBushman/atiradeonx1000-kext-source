@@ -39,14 +39,25 @@ source document to transcribe from rather than full reconstructions:
   - all have real, complete traces already written up in `stage4-embedded-opcode-table-completed.md` and
   its follow-ups; none transcribed into this reconstruction's C++ yet.
 
-## 3. Register-state serialization functions are structurally complete but body-empty
+## 3. Register-state serialization: mostly done, one open question, two functions still bodies-empty
 
-`write_kernel_context_buffer_regs` and `restore_state_destroyed_by_pageoff` in
-`Sources/ATIR500GLContext_RegisterState.cpp` document every real register/value pair they're confirmed to
-write (in exact real order, per the capstone register map), but the actual `dwordBuffer[i] = ...`
-statements are left as a TODO block rather than written out - this is mechanical, well-documented work,
-just not yet done. `compute_sc_hyperz_en`/`compute_zb_bw_cntl`'s real bit-level decision logic is also not
-transcribed (only their confirmed default-case return values are).
+`write_kernel_context_buffer_regs` and `build_scissor` in `Sources/ATIR500GLContext_RegisterState.cpp`
+have now been fully transcribed from a complete real decompile (not just summarized) - real per-mip
+offset/tiling math, every register write in real order, HZMEM_GetBlockOffset calls, and a 6th independent
+sighting of `SC_CLIP_RULE = 0xaaaa`.
+
+**A real, open question this transcription surfaced**: `build_scissor`'s real decompiled body only ever
+writes `this+0x358` (`scissorX`) - it never touches `this+0x354` (`scissorY`) at all. This calls into
+question this project's earlier assumption (from the opcode 0x28/0x29/0x2a traces, where both fields are
+embedded together into the command stream) that the two are a simple Y/X coordinate pair. Either
+`this+0x354` is computed by a different function this project never traced, or the field's real role is
+something other than a plain "Y" value. **Does not require hardware** - needs either a fresh decompile of
+whatever function writes `this+0x354`, or a live trace correlating both fields against real on-screen
+scissor behavior (the latter would need hardware).
+
+`restore_state_destroyed_by_pageoff` (the capstone function) and `compute_sc_hyperz_en`/
+`compute_zb_bw_cntl`'s real bit-level HyperZ decision logic remain TODO stubs - not yet re-read from a
+full decompile the way `write_kernel_context_buffer_regs` was this pass.
 
 ## 4. Several real internal helper functions are declared but have no `.cpp` body at all
 
