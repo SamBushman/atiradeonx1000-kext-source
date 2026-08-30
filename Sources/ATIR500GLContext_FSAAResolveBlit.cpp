@@ -531,22 +531,28 @@ UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 
     *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(ctx->accelerator) + 0x78) = 0;
 
     /*
-     * Real, open integration note: at this point the real decompile falls
-     * straight into process_command_buffer's shared exit tail
-     * (`LAB_00031340` in the raw decompile) - the same real "advance the
-     * cursor, and if the caller's own accounting says the buffer is fully
-     * consumed, write back the output descriptor fields and return" logic
-     * every opcode in this function shares, NOT specific to opcode 0x31.
-     * This project's Sources/ATIR500GLContext_ProcessCommandBuffer.cpp
-     * does not yet implement that shared tail - it currently just returns
-     * `record` (the caller-visible end-of-record cursor) from every
-     * handler and lets the dispatch loop's own generic distance-based
-     * advance take over, which is NOT how the real function's ending
-     * works for this specific opcode (0x31 is the last opcode in the real
-     * dispatch chain and falls into a shared exit that reads/writes real
-     * fields on the caller's own VendorCommandDescriptor). Reconciling
-     * this real shared tail with this project's dispatch-loop
-     * reconstruction is a genuine, concrete remaining gap - see GAPS.md.
+     * Real, open integration note - UPDATED: a later pass fully corrected
+     * process_command_buffer's dispatch tail (`LAB_00031340`) to implement
+     * the real pause/resume mechanism (writing real pending-state fields
+     * into the caller's `VendorCommandDescriptor` and returning a real
+     * accumulated status code) - see ATIR500GLContext_ProcessCommandBuffer.cpp
+     * and GAPS.md section 2. That tail now runs correctly for every opcode
+     * that returns `record` unchanged (this file's established "use the
+     * generic distance-based advance" signal).
+     *
+     * This function is the one confirmed EXCEPTION: it returns `local_d0`,
+     * an explicitly-computed pointer distinct from `record` (since this
+     * opcode's real tile loop consumes a data-dependent number of dwords
+     * the header's own encoded distance field cannot represent generically
+     * the way every other opcode's fixed/simple body can). The dispatch
+     * loop's own `if (next != record)` branch handles this by advancing
+     * straight to `local_d0` and re-entering the loop - but it does NOT run
+     * the tail's real exit-descriptor-write/status-return check in that
+     * case, whereas the real decompile shows this opcode's ending DOES fall
+     * into that same shared check. Whether that matters in practice depends
+     * on whether `local_d0` can ever coincide with a real "buffer now fully
+     * consumed" position - NOT independently confirmed either way. Real,
+     * concrete open item, tracked as a residual issue on this repo.
      */
     return local_d0;
 }

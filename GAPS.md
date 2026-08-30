@@ -176,6 +176,47 @@ to-exist, but only lightly sampled (not fully transcribed, given their size/dens
 targeted Ghidra decompile pass or transcription from this project's existing stage docs where one already
 covers it.
 
+**Two MORE real helpers found this pass** (during the opcode-language completion work), same category -
+declared with confirmed real signatures, but their own bodies were never independently decompiled:
+- `get_texture` (`ATIR500GLContext.h`) - found via opcode 0x41's three real call sites. Parameter shape
+  (three pending-state pointers plus the shared register-tracking scratch buffer) makes it a plausible
+  match for the "add_texture_to_stream + pending-flush + alloc_and_load_texture + restore_state +
+  map_transfer_to_GART" bundle this project manually inlines at every OTHER real bind call site - but this
+  is a guess, not confirmed.
+- `convertIOGLBufferToBufIdx` (`ATIR500GLContext.h`) - found via opcode 0x32's one real call site. Converts
+  a real client-facing "IOGL buffer" enum into an internal buffer/mip-table index; real mapping unknown.
+
+**Also found, not yet resolved**: opcode 0x29's real execute-path handler was cross-checked against
+`discard_command_buffer`'s independent trace of the same opcode, and both agree on the 8-case switch table
+- but one open question remains unconfirmed: whether the EXECUTE-path handler processes a fixed 4 slots
+(as the discard path does) or the dynamic `record[1]` attachment count opcode 0x41 uses for its own,
+separate per-attachment loop. A fresh, targeted re-read of opcode 0x29's real loop-bound computation would
+settle this.
+
+**Also found, not yet resolved**: `discard_command_buffer`'s own handling of opcode 0x3b (query-buffer
+bind's cleanup/discard-path counterpart) is explicitly deferred in that file's own comment - it correctly
+identifies a real vtable call at offset `+0x14c` on a memory-descriptor-shaped object plus a real
+four-field zero (`+0x210/+0x218/+0x21c/+0x220`), but the full real body was never transcribed. This is
+independent of - and does not block - opcode 0x3b's real EXECUTE-path body, which this project's
+`handle_query_buffer_bind` (in `ATIR500GLContext_ProcessCommandBuffer.cpp`) fully transcribes.
+
+**A real, unnamed virtual method** at vtable offset `+0x5a4` on `ATIR500GLContext`'s own vtable is called
+from SEVEN real, confirmed sites now (opcodes `0x02`/`0x03`(?)/`0x04`/`0x05`/`0x29`/`0x2f`/`0x41` - always
+via the identical raw-function-pointer-cast pattern, never given a name since no real method with a
+matching real signature was ever independently attributed to that slot). Resolving its real name would
+need either a base-class `start()`/constructor decompile that populates the vtable (see section 6) or a
+targeted search of the class's other declared-but-unassigned method slots for one whose real address
+matches.
+
+**A real, open opcode-0x31 tail-integration question** (found finishing the opcode language this pass):
+opcode 0x31's handler (`ATIR500GLContext_handle_fsaa_resolve_blit`) is the one confirmed opcode whose real
+ending returns an explicitly-computed next-record pointer rather than relying on the header's own encoded
+distance field (every other opcode in the language does the latter). The dispatch loop's `if (next !=
+record)` branch advances straight to that pointer without running the tail's real "is the buffer now fully
+consumed" exit-descriptor-write check, but the real decompile shows this opcode's real ending DOES fall
+into that same shared check. Whether this ever actually diverges from real hardware behavior is
+unconfirmed - see that function's own updated header comment.
+
 ## 5. `IOATIR500Accelerator`'s four context-factory vtable slots are a real tooling ceiling, not a gap
 
 `newUserClient`'s four real vtable slots (`+0x5d4/0x5d8/0x5dc/0x5e0`) read as zero in every Ghidra import
