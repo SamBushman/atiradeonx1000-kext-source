@@ -48,6 +48,11 @@ Everything here falls into one of three tiers, marked per-file and per-function 
 - `Resources/Info.plist` - a best-effort `IOKitPersonalities` stub for the real PCI device IDs this
   project has referenced (X1900/R580), for whenever there's a real target to build/load this against.
 
+## Current status and known gaps
+
+See `GAPS.md` for the full, itemized list of every real `TODO`/`UNKNOWN` left behind by this pass,
+mirrored into this repo's GitHub issues for tracking.
+
 ## What to do when hardware is available again
 
 1. Get a real Tiger or Leopard `Kernel.framework`/`IOKit.framework` header set (from the actual SDK on

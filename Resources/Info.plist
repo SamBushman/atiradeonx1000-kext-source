@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Info.plist - best-effort IOKitPersonalities stub.
+
+  UNKNOWN / NOT VERIFIED: the exact IOPCIPrimaryMatch vendor/device ID
+  string for this specific card. ATI's PCI vendor ID (0x1002) is well
+  known; the R580 chip family used in the X1900 series has several real
+  device IDs across its variants (XT/XTX/GT/etc.) and this project never
+  independently confirmed which one this specific G5's card reports.
+
+  REQUIRES HARDWARE to close: run `ioreg -l -p IODeviceTree | grep -A20
+  ATY,` or `lspci -n`-equivalent on the real G5 (or read the existing,
+  already-loaded ATIRadeonX1000.kext's own Info.plist directly off the
+  Tiger HD, which this project has read-only access to and simply never
+  extracted this specific value from) to get the exact real ID string and
+  replace the placeholder below.
+-->
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>com.apple.driver.ATIRadeonX1000</string>
+    <key>CFBundleName</key>
+    <string>ATIRadeonX1000 (reconstruction)</string>
+    <key>CFBundleVersion</key>
+    <string>0.0.1</string>
+    <key>CFBundlePackageType</key>
+    <string>KEXT</string>
+    <key>OSBundleLibraries</key>
+    <dict>
+        <key>com.apple.iokit.IOPCIFamily</key>
+        <string>1.0</string>
+        <key>com.apple.iokit.IOGraphicsFamily</key>
+        <string>1.0</string>
+        <key>com.apple.iokit.IOAcceleratorFamily</key>
+        <string>1.0</string>
+        <key>com.apple.kernel.libkern</key>
+        <string>6.0</string>
+        <key>com.apple.kernel.iokit</key>
+        <string>6.0</string>
+    </dict>
+    <key>IOKitPersonalities</key>
+    <dict>
+        <key>ATIRadeonX1000</key>
+        <dict>
+            <key>CFBundleIdentifier</key>
+            <string>com.apple.driver.ATIRadeonX1000</string>
+            <key>IOClass</key>
+            <string>IOATIR500Accelerator</string>
+            <key>IOProviderClass</key>
+            <string>IOPCIDevice</string>
+            <!--
+              PLACEHOLDER - NOT VERIFIED, requires real hardware to confirm.
+              0x1002 is ATI's real PCI vendor ID; 0x7249 is this project's
+              best unverified guess at a real R580/X1900 device ID from
+              general knowledge of the chip family, NOT independently
+              confirmed against this specific G5's card.
+            -->
+            <key>IOPCIPrimaryMatch</key>
+            <string>0x72491002&amp;0xffffffff</string>
+            <key>IOProbeScore</key>
+            <integer>0</integer>
+        </dict>
+    </dict>
+</dict>
+</plist>
