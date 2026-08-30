@@ -407,15 +407,39 @@ void ATIR500GLContext::build_scissor(void) {
      * CONFIRMED: the real decompile writes ONLY this+0x358 (scissorX in
      * this project's naming) as a single packed dword - low 14 bits one
      * dimension, bits 16-29 the other. It does NOT touch this+0x354
-     * (scissorY) anywhere in this function. This is an honest, real
-     * finding worth flagging rather than silently "fixing": either
-     * this+0x354 is computed by a different function this project never
-     * traced, or this project's naming of +0x354/+0x358 as a simple
-     * "Y, X" pair (from context in the opcode 0x28/0x29/0x2a traces,
-     * where both are embedded together) is imprecise - +0x358 alone may
-     * carry the complete real scissor state and +0x354 something
-     * adjacent-but-different. Left as a real, marked uncertainty - see
-     * GAPS.md.
+     * (scissorY) anywhere in this function.
+     *
+     * RESOLVED (issue #11): an exhaustive whole-kext instruction scan for
+     * the literal offset 0x354 (every function in the binary, not just
+     * this class) turns up exactly three hits, and no others:
+     *   - ATIR500GLContext::start (0x285c4): `this[0x354] = 0`, part of
+     *     the same zero-init block that also clears this+0x358 - see
+     *     Headers/ATIR500GLContext.h's start() note.
+     *   - write_kernel_context_buffer_regs (0x29234): relays it verbatim
+     *     into the command buffer at slot param2+0x37, immediately
+     *     followed by scissorX at +0x38 - already reflected above.
+     *   - process_command_buffer's opcode 0x2c handler (0x2ebec): splits
+     *     both this+0x354 and this+0x358 into their high/low 16-bit
+     *     halves and takes the pairwise MAX against the incoming
+     *     record's own bound (`if (contextHalf < recordHalf) contextHalf
+     *     = recordHalf;`), i.e. this+0x354/this+0x358 act as an outer
+     *     clamp/floor that opcode 0x2c widens against, not a value it
+     *     overwrites.
+     * So option 1 from the original writeup is ruled out for any
+     * directly-offset access: no other function anywhere in this kext
+     * writes this+0x354 by that literal offset. Given every write site
+     * sets it to a compile-time 0 and no traced function ever changes
+     * that, this+0x354 is a real, load-bearing field (opcode 0x2c
+     * genuinely uses it as intended, paired with +0x358) whose value is
+     * simply always 0 in front of every path this project has traced -
+     * functionally a no-op floor for the MAX in opcode 0x2c's clamp,
+     * since 0 never wins against a real record bound. Two possibilities
+     * remain open, now narrowed considerably: a write exists only via a
+     * computed (non-literal-immediate) offset this scan cannot see - or
+     * on real X1900 hardware this value never legitimately needs to be
+     * nonzero (e.g. because the driver's internal coordinate space
+     * always has a Y origin of 0) and this is not a bug at all. See
+     * GAPS.md and issue #11 for the full trace.
      */
     scissorX = ((static_cast<UInt32>(dimA) << (shiftAmount & 0x3f)) & 0x3fff) | ((dimB & 0x3fff) << 0x10);
 }

@@ -146,14 +146,19 @@ have now been fully transcribed from a complete real decompile (not just summari
 offset/tiling math, every register write in real order, HZMEM_GetBlockOffset calls, and a 6th independent
 sighting of `SC_CLIP_RULE = 0xaaaa`.
 
-**A real, open question this transcription surfaced**: `build_scissor`'s real decompiled body only ever
-writes `this+0x358` (`scissorX`) - it never touches `this+0x354` (`scissorY`) at all. This calls into
-question this project's earlier assumption (from the opcode 0x28/0x29/0x2a traces, where both fields are
-embedded together into the command stream) that the two are a simple Y/X coordinate pair. Either
-`this+0x354` is computed by a different function this project never traced, or the field's real role is
-something other than a plain "Y" value. **Does not require hardware** - needs either a fresh decompile of
-whatever function writes `this+0x354`, or a live trace correlating both fields against real on-screen
-scissor behavior (the latter would need hardware).
+~~**A real, open question this transcription surfaced**: `build_scissor`'s real decompiled body only ever
+writes `this+0x358` (`scissorX`) - it never touches `this+0x354` (`scissorY`) at all.~~ **RESOLVED (issue
+#11)**: an exhaustive whole-kext scan (every instruction in the binary, not just this class) for the
+literal offset `0x354` finds exactly three real references and no others - `ATIR500GLContext::start`
+zero-initializes it once, `write_kernel_context_buffer_regs` relays it verbatim alongside `scissorX`, and
+opcode 0x2c's handler in `process_command_buffer` takes the pairwise MAX of it (split into high/low
+16-bit halves) against the incoming record's own bound, exactly as this project's opcode traces already
+assumed. So the two fields genuinely are used as a paired bound, and no other function anywhere writes
+`this+0x354` by direct offset - it is always the constructor's 0 in every path this project has traced,
+which makes it a functional no-op in opcode 0x2c's MAX clamp (0 never wins). Two narrower possibilities
+remain, worth a note but not further open work: a write via a computed (non-literal) offset this scan
+can't see, or this value is legitimately always 0 on real hardware and not a bug at all. See
+`Sources/ATIR500GLContext_RegisterState.cpp`'s `build_scissor` comment for the full trace.
 
 ~~`restore_state_destroyed_by_pageoff` (the capstone function) and `compute_sc_hyperz_en`/
 `compute_zb_bw_cntl`'s real bit-level HyperZ decision logic remain TODO stubs~~ **RESOLVED**: all three
