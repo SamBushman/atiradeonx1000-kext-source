@@ -230,16 +230,32 @@ driver-logic gap. Closing this needs either a Ghidra version/plugin that support
 or hand-parsing the kext's raw Mach-O relocation table (no `otool`/`llvm-objdump` was available in the
 environment this was written in either - a second, smaller tooling gap).
 
-## 6. The base classes' own construction/initialization was never decompiled from scratch
+## 6. The base classes' own construction/initialization - RESOLVED (issue #10)
 
-`ATIRadeonX1000` (the hardware class) and the four `IO`-prefixed base user-client classes' own field
-layouts were all learned *indirectly*, through other functions dereferencing them - no function was ever
-decompiled specifically to answer "what does this class's own constructor initialize, in order, from
-offset zero." This means real field ordering relative to each other (not just each field's own existence)
-is uncertain in several places - see e.g. `ATIRadeonX1000.h`'s note about `deviceActiveFlag`'s uncertain
-position relative to the command lock and MMIO base fields. Also unknown: which function actually
-populates `IOATIR500GLContext`'s `regularMethodTable` at `+0x2a0` (confirmed to exist, confirmed NOT to be
-`ATIR500GLContext::start()`, which only sets the special selector-20 slot).
+~~`ATIRadeonX1000` (the hardware class) and the four `IO`-prefixed base user-client classes' own field
+layouts were all learned *indirectly*... field ordering relative to each other... is uncertain...~~
+
+The actual constructors (`ATIRadeonX1000::ATIRadeonX1000`, and the four `IO*Context`/`IOATIR500Surface`
+constructors) turn out to be thin trampolines that only call an imported base-class constructor and set
+the vtable pointer - none of them touch this project's own fields at all. Real per-instance state is set
+in each class's `start()`, matching the standard IOKit pattern. Decompiling
+`ATIRadeonX1000::start` directly (kext offset 0x1f750) found real, repeated, self-consistent accesses to
+all three previously-uncertain fields from ATIRadeonX1000's *own* methods (not just via other classes'
+pointers, which is strictly stronger evidence): `deviceActiveFlag` (+0x80) as a real byte flag in 6
+independent functions, `commandLock` (+0x840) as a real lock-pointer word in 6 independent functions, and
+`mmioBase` (+0x860) set once in `start()` and mirrored to three other fields. All three are self-consistent
+in access width and semantics everywhere they appear - the "unordered" struct hack in `ATIRadeonX1000.h`
+has been replaced with a normal, correctly-ordered layout.
+
+Separately, **`regularMethodTable`'s populator is now found**: `IOATIR500GLContext::start` (kext offset
+0x7690) - a previously entirely unlocated function, distinct from `ATIR500GLContext::start` (0x28540, the
+*subclass's* start, which only sets the special selector-20 slot). Fully transcribed into
+`Sources/IOATIR500GLContext_Start.cpp`. Bonus finds from that same decompile: `clientHandle`'s concrete
+real type is `IOATIR500Shared*` (a real, allocated-here class this project has still not reconstructed -
+see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liveGLContextListHead`
+(`+0x60`) is now CONFIRMED (was INFERRED) via this function's real list-insertion write, which also
+surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
+the accelerator's live-GL-context list.
 
 ## 7. The 2D and DVD contexts' own embedded command-buffer languages are entirely unimplemented
 

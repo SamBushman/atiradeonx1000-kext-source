@@ -23,9 +23,12 @@
 
 /*
  * The 20-entry regular table (selectors 0-19), base class
- * IOATIR500GLContext. Real kext address: 0x47618.
+ * IOATIR500GLContext. Real kext address: 0x47618. External linkage
+ * (not `static`) so IOATIR500GLContext::start (Sources/
+ * IOATIR500GLContext_Start.cpp) can point regularMethodTable at it
+ * directly, matching the real decompile.
  */
-static const VendorExternalMethod kGLRegularMethods[20] = {
+const VendorExternalMethod kGLRegularMethods[20] = {
     /*  0 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_surface,                 4, 4, 0 },
     /*  1 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_swap_rect,               4, 4, 0 },
     /*  2 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_swap_interval,           4, 2, 0 },

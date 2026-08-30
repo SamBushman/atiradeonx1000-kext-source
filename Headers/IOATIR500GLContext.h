@@ -25,6 +25,7 @@
 #include "ATIRadeonX1000Types.h"
 
 class ATIRadeonX1000;
+class IOATIR500Shared;
 struct VendorTextureBuffer;
 struct VendorTransferBuffer;
 
@@ -76,6 +77,41 @@ public:
                                           IOMemoryDescriptor **memory) override;
 
     /*
+     * start - CONFIRMED, fully decompiled this pass (real kext offset
+     * 0x7690 - previously unlocated; not to be confused with
+     * ATIR500GLContext::start at 0x28540, the SUBCLASS's own start(),
+     * which only sets the special selector-20 slot at +0x360). This is
+     * the real answer to the long-standing "which function populates
+     * regularMethodTable" question: it does so directly, near the end,
+     * on success: `this->regularMethodTable = &methodDescs;` (the same
+     * real static table already transcribed into
+     * Sources/IOATIR500GLContext_ExternalMethods.cpp).
+     *
+     * Also zero-initializes a large block of per-instance state (roughly
+     * this+0x7c..this+0x2a4, mirroring the sibling context classes' own
+     * start() pattern - see ATIR500GLContext.h), allocates a real
+     * `IOATIR500Shared` instance and stores it at `clientHandle` (+0x88 -
+     * confirms that field's concrete real type), and on full success
+     * links this context into the accelerator's own live-context list
+     * (`accelerator+0x60 = this` - see IOATIR500Accelerator.h's
+     * liveGLContextListHead, now CONFIRMED from this write site). Calls
+     * three real accelerator methods to do so - getVRAMDescriptors,
+     * allocCommandBuffer (both newly declared on IOATIR500Accelerator.h
+     * this pass), and this class's own allocAllContextBuffers.
+     */
+    virtual bool start(IOService *provider) override;
+
+    /*
+     * allocAllContextBuffers - CONFIRMED to exist and be a real member of
+     * this class (mangled __ZN18IOATIR500GLContext22allocAllContextBuffersEm,
+     * kext offset 0x74d0; IOATIR5002DContext and IOATIR500DVDContext each
+     * have their own same-named, same-signature method too - a real
+     * per-context-type pattern). Called from start() with a fixed size
+     * argument (0x8000 for GL); not independently decompiled itself.
+     */
+    bool allocAllContextBuffers(UInt32 size);
+
+    /*
      * add_texture_to_stream / remove_texture_from_stream / map_transfer_to_GART -
      * CONFIRMED to be real methods of THIS base class (real decompiled
      * signatures are `IOATIR500GLContext::`, not `ATIR500GLContext::` -
@@ -88,17 +124,20 @@ public:
 
 protected:
     ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
-    void                  *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers */
+    IOATIR500Shared       *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers. Concrete type CONFIRMED this pass - IOATIR500GLContext::start allocates it via `new IOATIR500Shared` and stores the result here directly (was `void*`; IOATIR500Shared itself remains a real but not-yet-reconstructed class - see IOATIR500Accelerator.h). */
+    IOATIR500GLContext    *nextLiveContext; /* +0x80, CONFIRMED, NEW finding this pass: the intrusive "next" link for the accelerator's live-GL-context singly-linked list (see start()'s real head-insertion push into accelerator+0x60 / liveGLContextListHead). Not previously documented. */
     /*
      * The regular external-method table pointer - CONFIRMED to exist at
      * this offset (ATIR500GLContext::getTargetAndMethodForIndex:
      * `return selector*0x18 + *(int*)(this+0x2a0);` for selector < 20).
-     * UNKNOWN which function actually populates it (not
-     * IOATIR500GLContext::start, which only sets the *subclass's* special
-     * selector-20 slot at +0x360 - see ATIR500GLContext.h). Most likely a
-     * base-class start()/init() this project never located precisely;
-     * the real static table it points at IS fully known (methodDescs,
-     * transcribed into Sources/IOATIR500GLContext_ExternalMethods.cpp).
+     * RESOLVED this pass (issue #10): populated by IOATIR500GLContext::
+     * start (kext offset 0x7690, this class's OWN start - not
+     * ATIR500GLContext::start at 0x28540, the subclass's, which only
+     * sets the special selector-20 slot at +0x360). Real assignment:
+     * `this->regularMethodTable = &kGLRegularMethods;` (Ghidra's own name
+     * for the table, derived from its enclosing function, is
+     * `start(IOService*)::methodDescs`) - see that method's declaration
+     * above for the full decompile summary.
      */
     void *regularMethodTable;             /* +0x2a0 */
 };

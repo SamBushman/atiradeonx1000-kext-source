@@ -26,6 +26,10 @@ class IOATIR500GLContext;
 class IOATIR500Surface;
 class IOATIR500Shared;
 struct VendorTransferBuffer;
+struct VendorCommandBuffer; /* real, distinct mangled type name (19VendorCommandBuffer) -
+                              * NOT the same as VendorCommandBufferHeader (25 chars) already in
+                              * ATIRadeonX1000Types.h; found this pass via allocCommandBuffer's
+                              * real signature, layout not yet independently decompiled */
 
 class IOATIR500Accelerator : public IOService {
     OSDeclareDefaultStructors(IOATIR500Accelerator)
@@ -103,6 +107,20 @@ public:
      * get_surface_info calls it), signature INFERRED. */
     void *find_surface_for_id(UInt32 surfaceID);
 
+    /*
+     * getVRAMDescriptors / allocCommandBuffer - CONFIRMED real names and
+     * to be real methods of this class (both are real, mangled, exported
+     * symbols - __ZN20IOATIR500Accelerator18getVRAMDescriptorsEv at kext
+     * offset 0x4d20, __ZN20IOATIR500Accelerator18allocCommandBufferEP19VendorCommandBufferm
+     * at 0x23e0), found this pass as real call sites in
+     * IOATIR500GLContext::start (see IOATIR500GLContext.h). Signatures
+     * INFERRED from that one call site
+     * (`getVRAMDescriptors(accel)`, `allocCommandBuffer(accel, &this[0xcc], 0x20000)`);
+     * neither has been independently decompiled itself.
+     */
+    bool getVRAMDescriptors(void);
+    bool allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size);
+
     /* setup_stereo - CONFIRMED real name (IOATIR500GLContext::set_stereo
      * calls it), signature INFERRED. */
     IOReturn setup_stereo(UInt32 param1, UInt32 param2);
@@ -120,7 +138,12 @@ private:
      */
     IOATIR5002DContext  *live2DContextListHead;  /* +0x64, INFERRED offset */
     IOATIR500DVDContext *liveDVDContextListHead; /* +0x68, INFERRED offset */
-    IOATIR500GLContext  *liveGLContextListHead;  /* +0x60, INFERRED offset */
+    IOATIR500GLContext  *liveGLContextListHead;  /* +0x60, CONFIRMED this pass: IOATIR500GLContext::start's
+                                                    * real decompile does `piVar4[0x18] = this` on the accelerator
+                                                    * pointer (piVar4 = *(int**)(this+200)), i.e. accelerator+0x60
+                                                    * word-indexed - an independent, direct confirmation of this
+                                                    * offset from the writer side, not just freeWaitToAllocGART's
+                                                    * reader side. See IOATIR500GLContext.h's start() note. */
     IOATIR500Surface    *liveSurfaceListHead;    /* +0x5c, INFERRED offset */
 
     /*

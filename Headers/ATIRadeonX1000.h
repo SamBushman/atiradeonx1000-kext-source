@@ -52,33 +52,32 @@ public:
      * Real, confirmed field offsets (from this base pointer, as reached
      * via each context class's own "this+N" accelerator pointer - e.g.
      * ATIR500GLContext at +200/0xc8, ATIR5002DContext at +0x94,
-     * ATIR500DVDContext at +0x8c). This project never independently
-     * decompiled ATIRadeonX1000's own constructor/init to get a from-zero
-     * field list - every offset below was learned indirectly, through a
-     * context class dereferencing it. Gaps are real (not every byte in
+     * ATIR500DVDContext at +0x8c). Gaps are real (not every byte in
      * between was ever touched by decompiled code this project read).
+     *
+     * RESOLVED (issue #10): this project's own constructors turned out to
+     * be thin trampolines that never touch these fields (real
+     * initialization happens in start(), the standard IOKit pattern).
+     * ATIRadeonX1000::start itself (kext offset 0x1f750, a large
+     * function) has not been fully transcribed into this repo - this
+     * finding comes from a targeted decompile used only to answer this
+     * specific field-ordering question. Directly found real,
+     * repeated, self-consistent accesses to deviceActiveFlag (6
+     * independent ATIRadeonX1000:: functions) and commandLock (6 more) -
+     * not just via other classes' pointers as before - plus mmioBase's
+     * own real set-and-mirror site inside start() itself, confirming
+     * both their individual reality and their relative order below - no
+     * longer modeled as "unordered".
      */
-    UInt8   _pad_before_lock[0x840];
-    void *  commandLock;              /* +0x840, CONFIRMED: passed to lock/unlock helper pairs (FUN_xxxx(this+0x840)) bracketing nearly every external method body across all four context classes - a real recursive/simple mutex */
+    UInt8   _pad_before_active[0x80];
+    UInt8   deviceActiveFlag;         /* +0x80, CONFIRMED: a real byte gate checked before nearly every hardware operation in every context class, and directly read/written by 6 independent ATIRadeonX1000:: methods (callPlatformFunction, submit_empty_buffer, start_promo4_engine/stop_promo4_engine, GPUSensorFunc, system_will_change_speed) - always as a single byte, never contradicted */
+    UInt8   _pad_0x81[0x840 - 0x81];
+    void *  commandLock;              /* +0x840, CONFIRMED: passed to lock/unlock helper pairs (FUN_xxxx(this+0x840)) bracketing nearly every external method body across all four context classes, and loaded directly in 6 independent ATIRadeonX1000:: methods (GPUSensorFunc, system_did_change_speed, system_will_change_speed, SWDSFunc, display_mode_did_change, display_mode_will_change) - always as a single word, never contradicted */
     UInt8   _pad_0x844[0x854 - 0x844];
     UInt32  idctSubmitBaseCounter;    /* +0x854, CONFIRMED: read at the top of doIDCT, compared against submit_idct_buffer_consumed's return value */
     UInt8   _pad_0x858[0x860 - 0x858];
-    void *  mmioBase;                 /* +0x860, CONFIRMED: the real MMIO base pointer used by read_regs/write_regs (masked with REGISTER_ACCESS_WINDOW_MASK before use) */
-    UInt8   _pad_0x864[0x80 - 0];     /* placeholder spacer - see note below */
-    /*
-     * NOTE on field ordering: +0x80 (device-active flag) is CONFIRMED to
-     * exist and be checked before nearly every hardware operation in every
-     * context class (`*(char*)(accelBase+0x80) == '\0'` => kIOReturnNotOpen-
-     * style error), but this project never established whether +0x80 comes
-     * before or after +0x840/+0x854/+0x860 in the real struct - the offsets
-     * were each learned independently from different call sites, not from
-     * one single field-by-field decompile of this class's layout. Modeled
-     * honestly below as a separately-named field rather than silently
-     * picking an order the analysis never actually confirmed.
-     */
-    UInt8   _unordered_placeholder[0x8b0];
-    UInt8   deviceActiveFlag;         /* CONFIRMED to exist as a byte gate at real offset +0x80 from this object's base - see note above about ordering uncertainty relative to the fields already listed */
-    UInt8   _pad_after_active[0x8b7];
+    void *  mmioBase;                 /* +0x860, CONFIRMED: the real MMIO base pointer used by read_regs/write_regs (masked with REGISTER_ACCESS_WINDOW_MASK before use); ATIRadeonX1000::start sets it once to a real detected value and mirrors it to +0x864/+0x90c/+0x928 */
+    UInt8   _pad_0x864[0x8d8 - 0x864];
     void *  clientMemoryDescriptorType0; /* +0x8d8, CONFIRMED: the real IOMemoryDescriptor returned by every context's clientMemoryForType(0, ...) */
     UInt8   _pad_0x8dc[0x918 - 0x8dc];
     UInt32  mainRingCursor;           /* +0x918, INFERRED offset (this project confirmed the field's existence and role - the real write-cursor submit_ring_data advances - via the same +0x1600-relative-to-userspace reasoning as the client-side cursor fields, not from a from-zero decompile of this exact byte) */
