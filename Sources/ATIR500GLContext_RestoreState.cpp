@@ -74,10 +74,7 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
                                *reinterpret_cast<UInt32 **>(p1 + 0x140));
     *reinterpret_cast<UInt32 *>(p1 + 0x13c) = *reinterpret_cast<UInt32 *>(p1 + 0x140);
 
-    /* real vtable call, offset 0x5a4 - UNKNOWN real virtual method name,
-     * same unresolved slot as opcode 0x2f's trailing call
-     * (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp) */
-    // (**(code**)(*(int*)this + 0x5a4))(this);
+    invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
 
     /* real per-context ring-buffer-slot bookkeeping - advances a 4-bit
      * rotating slot index (this+0x28c, mod 16) and accumulates a real

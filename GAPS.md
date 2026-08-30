@@ -83,9 +83,13 @@ kept for the record of what was found and corrected along the way:
   Real, notable finding: this opcode reads BOTH `this+0x354` and `this+0x358` together as a Y/X pair,
   which is new evidence for (but doesn't resolve) section 3's open `build_scissor` question about
   `this+0x354` never being written.
-- ~~Opcode `0x2f` (HyperZ commit)~~ RESOLVED - fully transcribed, including the real trailing raw vtable
-  call through slot `+0x5a4`. That slot's real virtual-method NAME is still unknown (called via a raw
-  function-pointer cast, not invented) - a small residual gap, not a missing transcription.
+- ~~Opcode `0x2f` (HyperZ commit)~~ RESOLVED - fully transcribed, including the real trailing vtable call
+  through slot `+0x5a4`. ~~That slot's real virtual-method NAME is still unknown~~ **RESOLVED (issue
+  #12.1)**: it's `ATIR500GLContext::invalidate()` (kext offset 0x26fb0, real body fully transcribed - a
+  one-line dirty-bit set on the object at `this+0x108`). Verified via the vtable slot's real raw bytes
+  cross-checked against a second, already-known-correct slot on the same vtable before trusting it (see
+  `Headers/ATIR500GLContext.h`'s `invalidate()` declaration for the full method). All six real call sites
+  (opcodes 0x02-0x05/0x29/0x2f/0x41 and `restore_state_destroyed_by_pageoff`) updated to call it by name.
 - ~~Opcode `0x30` (FSAA resolve setup)~~ RESOLVED - fully transcribed. Found and fixed a real bug in this
   project's own `IOATIR500Surface::resolve_fsaa_buffer` declaration while doing so: it was missing one of
   four real trailing dword parameters the actual call site passes.

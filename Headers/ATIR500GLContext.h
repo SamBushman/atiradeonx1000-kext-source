@@ -66,6 +66,26 @@ public:
     virtual void stop(IOService *provider) override;
 
     /*
+     * invalidate - RESOLVED (issue #12.1): this is the real name of the
+     * previously-unnamed vtable+0x5a4 virtual method called from opcodes
+     * 0x02/0x03/0x04/0x05/0x29/0x2f/0x41 and from restore_state_destroyed_by_pageoff
+     * (real mangled symbol __ZN16ATIR500GLContext10invalidateEv, kext
+     * offset 0x26fb0; every sibling context class - 2D/DVD/Surface - has
+     * its own identically-named, identically-shaped override, a real
+     * shared pattern). Resolved via the vtable slot's real raw bytes
+     * (Ghidra marks the relocation SKIPPED, same as issue #6, but this
+     * one is a plain local VANILLA relocation into __TEXT,__text, not a
+     * SECTDIFF pair - confirmed via otool -rv and cross-checked against
+     * a second, already-known-correct vtable slot at the same class's
+     * +0x348 before trusting it). Real body: fully transcribed, one
+     * line - `*(uint*)(*(int*)(this+0x108) + 0x1c) |= 1;` - sets a dirty/
+     * invalidate bit on the object start() allocates and zeroes at
+     * this+0x108 (see start()'s note above; that object's own type and
+     * the meaning of its +0x1c field are UNKNOWN).
+     */
+    virtual void invalidate();
+
+    /*
      * process_command_buffer - THE central function of this entire
      * project. CONFIRMED, opcode-by-opcode, for the full real range
      * 0x02-0x46 (see stage3-embedded-opcode-language.md through

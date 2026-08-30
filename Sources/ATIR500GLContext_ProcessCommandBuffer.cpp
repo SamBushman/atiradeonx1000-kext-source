@@ -152,9 +152,10 @@ static UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, P
  * (`surfaceRecord+0x28 == 0x3ff00000`-ish bit pattern) to choose between
  * a trivial fast-clear header and a real, dense HZMEM-block-offset-
  * driven partial-clear burst (real float math for the partial case, via
- * the same "magic bias" trick as opcode 0x31). Ends with a real vtable
- * call at offset 0x5a4 - the SAME real, still-unnamed virtual method
- * opcode 0x2f's HyperZ commit handler also calls.
+ * the same "magic bias" trick as opcode 0x31). Ends with a real call to
+ * invalidate() (RESOLVED issue #12.1 - the real name of vtable+0x5a4,
+ * the same slot opcode 0x2f's HyperZ commit handler also calls - see
+ * Headers/ATIR500GLContext.h).
  */
 static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -225,9 +226,7 @@ static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *rec
         *reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x36) = 1;
     }
     *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(pAVar77) + 0x30) = record[6];
-    /* real vtable call at offset 0x5a4 - UNKNOWN real virtual method name,
-     * same unresolved slot as opcode 0x2f (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp) */
-    // (**(code**)(*(int*)this + 0x5a4))(this);
+    ctx->invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
     return record; /* real: falls to LAB_00031340, this function's own generic distance-based advance */
 }
 
@@ -337,7 +336,7 @@ static UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) 
         *reinterpret_cast<UInt32 *>(otherCtx + 0x7c) = record[uVar61];
         *reinterpret_cast<UInt16 *>(otherCtx + 0x7a) = static_cast<UInt16>(p77[0x34]) | (static_cast<UInt16>(p77[0x35]) << 8);
     }
-    /* real vtable call at offset 0x5a4 - see handle_hyperz_fast_clear_setup's identical note */
+    ctx->invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
     return record; /* real: falls to LAB_00031340 */
 }
 
@@ -808,8 +807,7 @@ static UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *re
         U16At(self, 0xae) = (uVar55 == 7 || uVar55 == 8) ? static_cast<UInt16>(uVar55) : 6;
     }
 
-    /* real vtable call at offset 0x5a4 - same unresolved slot as opcodes 0x04/0x05/0x2f */
-    // (**(code**)(*(int*)this + 0x5a4))(this);
+    ctx->invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
     ctx->build_scissor();
     ctx->write_kernel_context_buffer_regs(record, 0, record[6], record[7]);
     return record; /* real: falls to LAB_00031340 */
@@ -1086,26 +1084,20 @@ static UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *recor
 
 /* Opcode 0x2f: CONFIRMED real HyperZ configuration commit - directly
  * calls compute_sc_hyperz_en/compute_zb_bw_cntl, patches the results into
- * the embedded slots, then makes a real, raw vtable call through this
- * object's own vtable slot +0x5a4 (`(**(code **)(*(int *)this + 0x5a4))(this);`
- * in the raw decompile). That slot's real virtual-method name is UNKNOWN -
- * this project never traced which declared method compiles down to that
- * offset - so it is called here through a raw function-pointer cast rather
- * than invented a plausible-sounding name, per the no-shortcuts standard:
- * an honestly-unnamed real call beats a fabricated one. Like 0x2c/0x30, the
- * real decompile shows this opcode falls through to the shared generic
- * distance-based advance afterward (line 2767's `goto LAB_00031340;` closes
- * the whole `0x2c / 0x2f / 0x30` if-chain), so this returns `record`
- * unchanged rather than a hardcoded length. */
+ * the embedded slots, then calls invalidate() (RESOLVED issue #12.1 -
+ * the real name of this object's vtable+0x5a4 slot, previously called
+ * through a raw function-pointer cast since the name was UNKNOWN - see
+ * Headers/ATIR500GLContext.h). Like 0x2c/0x30, the real decompile shows
+ * this opcode falls through to the shared generic distance-based advance
+ * afterward (line 2767's `goto LAB_00031340;` closes the whole
+ * `0x2c / 0x2f / 0x30` if-chain), so this returns `record` unchanged
+ * rather than a hardcoded length. */
 static UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     record[0] = PM4_TYPE2_FILLER;
     record[2] = ctx->compute_sc_hyperz_en(record[2]);
     record[4] = ctx->compute_zb_bw_cntl(record[4]);
 
-    typedef void (*Vtable0x5a4Fn)(void *);
-    Vtable0x5a4Fn fn = *reinterpret_cast<Vtable0x5a4Fn *>(U32At(self, 0) + 0x5a4);
-    fn(self);
+    ctx->invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
 
     return record; /* real: falls through to the shared generic distance-based advance */
 }
@@ -2633,10 +2625,10 @@ static UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *
  *      `this+0x348` as its staging field (a real, confirmed overwrite of
  *      the same field for a second, distinct logical purpose within one
  *      opcode invocation - not a mistake, preserved exactly);
- *   5. `this+0x3bc=1` (enters "alternate mode"), `build_scissor`, the
- *      real shared vtable call at `+0x5a4`, and a final
- *      `write_kernel_context_buffer_regs` call over the per-color-
- *      attachment record range.
+ *   5. `this+0x3bc=1` (enters "alternate mode"), `build_scissor`,
+ *      `invalidate()` (RESOLVED issue #12.1 - real name of the shared
+ *      vtable+0x5a4 slot), and a final `write_kernel_context_buffer_regs`
+ *      call over the per-color-attachment record range.
  */
 static UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -2892,8 +2884,7 @@ LAB_0002e114_41:
 
     U32At(self, 0x3bc) = 1;
     ctx->build_scissor();
-    /* real vtable call at offset 0x5a4 - same unresolved slot as opcodes 0x04/0x05/0x29/0x2f */
-    // (**(code**)(*(int*)this + 0x5a4))(this);
+    ctx->invalidate(); /* RESOLVED (issue #12.1): real name of vtable+0x5a4 - see Headers/ATIR500GLContext.h */
     U32At(accel, 0x78) = 0;
     *puVar65 = (static_cast<UInt32>(iVar59) + 10) * 0x10000u | 0xc0001000u;
     ctx->write_kernel_context_buffer_regs(reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(puVar65) + static_cast<UInt32>(iVar59) * 4 + 0x30), 0, uVar58, uVar61);
