@@ -4,30 +4,54 @@
  * PARTIALLY RESOLVED (issue #7): the DVD context's own embedded
  * command-buffer opcode language. Real dispatch mechanism confirmed
  * (top-byte opcode over a `this+0xa4+0x1c`-based record stream,
- * self-consuming low-24-bit distance fields) and SEVEN real opcode
+ * self-consuming low-24-bit distance fields) and EIGHT real opcode
  * groups - texture bind, texture unbind, the opcode 0x2 return-code
- * setter, the opcode 0x5/0x6 texture-sampler-state pair, and opcodes
- * 0xa/0xb/0xd's own per-mip YUV/tiling setup - fully transcribed from
- * complete real decompiles (kext offsets within
- * ATIR500DVDContext::process_command_buffer, 0x357c0). Together these
- * cover 40 real opcodes with genuine handlers (bind: 0x19, 0x1a, 0x1b,
- * 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d; unbind: 0x2b, 0x2c, 0x2e-0x30,
- * 0x32-0x34, 0x36-0x3c; plus 0x02, 0x05, 0x06, 0x0a, 0x0b, 0x0d), plus
- * four more (0x07, 0x08, 0x09, 0x0c) confirmed this pass to be trivial
- * abort paths with NO real handler at all - re-reading the raw
- * decompile's brace structure precisely (not just its surface `goto`
- * targets) showed 0xc in particular was wrongly assumed part of the
- * "0xa/0xb/0xc/0xd cluster" by this project's own earlier skeleton-
- * mapping pass; corrected here.
+ * setter, the opcode 0x5/0x6 texture-sampler-state pair, opcodes
+ * 0xa/0xb/0xd's own per-mip YUV/tiling setup, and the opcode 0x4
+ * explicit-flush - fully transcribed from complete real decompiles
+ * (kext offsets within ATIR500DVDContext::process_command_buffer,
+ * 0x357c0). Together these cover 41 real opcodes with genuine handlers
+ * (bind: 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d;
+ * unbind: 0x2b, 0x2c, 0x2e-0x30, 0x32-0x34, 0x36-0x3c; plus 0x02, 0x04,
+ * 0x05, 0x06, 0x0a, 0x0b, 0x0d), plus four more (0x07, 0x08, 0x09,
+ * 0x0c) confirmed to be trivial abort paths with NO real handler at
+ * all - re-reading the raw decompile's brace structure precisely (not
+ * just its surface `goto` targets) showed 0xc in particular was
+ * wrongly assumed part of the "0xa/0xb/0xc/0xd cluster" by this
+ * project's own earlier skeleton-mapping pass; corrected here.
  *
- * The remaining ~19 real opcodes (0x04, 0x11-0x18, 0x31, 0x35, 0x3d-0x3f,
- * 0x42-0x44, 0x46-0x47) are dense per-mip YUV/tiling math comparable in
- * density to GL's own richest opcodes (real floating-point double
- * arithmetic, multiple format-table lookups per opcode) - NOT
- * transcribed this pass. `process_command_buffer` itself is therefore
- * NOT yet declared/assembled as one function - these handlers exist as
- * free functions a future completed dispatcher will call, matching how
- * GL's own opcode-by-opcode effort progressed.
+ * CORRECTION to this project's own earlier opcode-range accounting:
+ * DVD has NO real opcode 0x11 at all (an earlier pass's "remaining
+ * opcodes" list wrongly included it, apparently carried over by
+ * mistake from the UNRELATED opcode 0x11 this project already
+ * resolved on the 2D context - a real, different opcode language).
+ * Grepping the complete raw decompile for every real `uVar17 ==/!=
+ * 0x??000000` comparison confirms DVD's own opcode 0x12 is the
+ * smallest value in that neighborhood actually dispatched on.
+ *
+ * Real, high-value finding this pass: opcode 0x12's own real body
+ * spans roughly 750+ lines of raw decompile (loop-based, multiple
+ * fixed-size local arrays, dense per-plane geometry math) - comparable
+ * in scale to GL's own opcode 0x31, which this project's history
+ * explicitly flagged as "the single largest remaining gap" in the
+ * entire GL reconstruction. NOT attempted this pass; a correct
+ * transcription needs its own dedicated pass, not a continuation of
+ * this session's per-opcode cadence.
+ *
+ * The remaining ~18 real opcodes (0x12 [very large, see above], 0x14-
+ * 0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) were NOT
+ * transcribed this pass. Continuing reliably needs a more rigorous
+ * method than this pass's manual brace-reading of the raw decompile -
+ * that method already produced two real opcode-boundary mistakes this
+ * session (0x1d wrongly modeled as separate from the bind family in an
+ * earlier commit, and 0x11 wrongly carried into this file's own
+ * "remaining" list) that needed correcting after the fact. A future
+ * pass should cross-check routing against the real compiled branch
+ * instructions (raw disassembly), not decompiled C brace nesting
+ * alone, before trusting an opcode boundary. `process_command_buffer`
+ * itself is therefore NOT yet declared/assembled as one function -
+ * these handlers exist as free functions a future completed dispatcher
+ * will call, matching how GL's own opcode-by-opcode effort progressed.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call
  * touched in the two transcribed handlers - complete real decompiles,
@@ -549,4 +573,29 @@ static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record) {
                (static_cast<UInt32>(U8At(sourceRecord, 0x158) & 1u) << 16) |
                (divFinal & 0x3ffeu) | (local_58 & 0xfe00c001u);
     record[7] = local_58;
+}
+
+/*
+ * handle_opcode_04 - RESOLVED (issue #7), fully transcribed. A real
+ * explicit-flush opcode - same real shape as GL's own opcode 0x2b -
+ * flushes any pending write batch (the same real save-before-reset
+ * pattern as handle_texture_bind's own flush path) and writes a plain
+ * sentinel. No real per-opcode payload beyond the flush itself.
+ */
+static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+
+    if (recordCount != 0) {
+        UInt32 savedCount = recordCount; /* real: uVar10, saved at the top of the dispatch loop before any opcode runs */
+        UInt32 flushDwords = recordCount * 4;
+        recordCount = 0;
+        UInt32 bufBase = (byteOffset & 0xfffffffcu) + U32At(self, 0xa4);
+        U32At(accel, 0x708) += flushDwords;
+        UInt32 bufEnd = byteOffset + U32At(self, 0x94);
+        byteOffset += flushDwords;
+        U32At(self, 0xa0) = ctx->accelerator->submit_buffer(
+            reinterpret_cast<UInt32 *>(bufBase + 0x20), bufEnd + 0x20, savedCount);
+    }
+    *record = 0x80000000u;
 }

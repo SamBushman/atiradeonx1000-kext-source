@@ -55,19 +55,21 @@ public:
 
     /*
      * process_command_buffer - PARTIALLY RESOLVED (issue #7): the real
-     * dispatch skeleton and seven real opcode groups (texture bind,
+     * dispatch skeleton and eight real opcode groups (texture bind,
      * covering opcodes 0x19/0x1a/0x1b/0x1c/0x1d/0x1e-0x25/0x26-0x2a/0x2d;
      * texture unbind, covering 0x2b/0x2c/0x2e-0x30/0x32-0x34/0x36-0x3c;
-     * the opcode 0x2 return-code setter; the opcode 0x5/0x6 texture-
-     * sampler-state pair; and opcodes 0xa/0xb/0xd's own per-mip YUV/
-     * tiling setup - 40 real opcodes with genuine handlers) are
-     * transcribed, plus four more (0x07/0x08/0x09/0x0c) confirmed to be
-     * trivial abort paths with no real handler - see
-     * Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp for the
-     * handler functions and GAPS.md for the full opcode-by-opcode
-     * status. The remaining ~19 real opcodes (dense per-mip YUV/tiling
-     * math, comparable in density to GL's own richest opcodes) are NOT
-     * yet transcribed, so this method itself is not yet declared/wired -
+     * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush;
+     * the opcode 0x5/0x6 texture-sampler-state pair; and opcodes
+     * 0xa/0xb/0xd's own per-mip YUV/tiling setup - 41 real opcodes with
+     * genuine handlers) are transcribed, plus four more (0x07/0x08/
+     * 0x09/0x0c) confirmed to be trivial abort paths with no real
+     * handler - see Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp
+     * for the handler functions and GAPS.md for the full opcode-by-
+     * opcode status, including a real correction (DVD has no opcode
+     * 0x11 at all) and a flagged large remaining item (opcode 0x12,
+     * comparable in scale to GL's own single-largest gap, opcode 0x31).
+     * The remaining ~18 real opcodes are NOT yet transcribed, so this
+     * method itself is not yet declared/wired -
      * the handlers exist as free functions a future completed
      * dispatcher will call.
      */

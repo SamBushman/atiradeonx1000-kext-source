@@ -328,8 +328,8 @@ separate handlers, which made a full pass tractable in one sitting. Real confirm
   similar but are meaningfully different, confirmed by checking every real `goto` site in the raw decompile
   individually rather than assuming.
 
-**DVD - real further progress this pass**: seven real opcode groups are now fully transcribed from complete
-real decompiles - see `Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`. Together they cover 40 real
+**DVD - real further progress this pass**: eight real opcode groups are now fully transcribed from complete
+real decompiles - see `Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`. Together they cover 41 real
 opcodes with genuine handlers, plus four more confirmed to need none at all:
 - **Bind** (0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d - 19 opcodes): real "bind texture unit N"
   logic, N derived directly from the opcode value. Reuses the exact same `sharedAllocator`-indexed lookup
@@ -341,6 +341,8 @@ opcodes with genuine handlers, plus four more confirmed to need none at all:
   `Headers/IOATIR500Shared.h`).
 - **Opcode 0x02**: sets the function's own overall return value to 3 - a real, deliberate difference from
   GL's and 2D's own opcode 0x2, which both set 1 instead.
+- **Opcode 0x04**: a real explicit-flush opcode - same real shape as GL's own opcode 0x2b - flushes any
+  pending write batch and writes a plain sentinel, no other real payload.
 - **Opcodes 0x5/0x6**: a real texture-sampler-state PM4 record pair, sharing an identical header/tail
   template with opcode 0xd's own setup (also now resolved - see below) - real confirmation that template
   is a general "sampler state" shape reused across multiple real source kinds. Real per-mip lookup through
@@ -376,10 +378,31 @@ opcodes with genuine handlers, plus four more confirmed to need none at all:
   compiled driver, or a Ghidra stack-slot-reuse artifact this project cannot distinguish from static
   analysis alone. Modeled as 0 in both transcriptions rather than silently guessing a "real" value.
 
-Still open: ~19 real opcodes (0x04, 0x11-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) - dense per-mip
-YUV/tiling math comparable in density to GL's own richest opcodes (real floating-point double arithmetic,
-multiple format-table lookups per opcode). `process_command_buffer` itself is not yet assembled as one
-function - the transcribed handlers are free functions awaiting a completed dispatcher.
+**Correction to this project's own earlier opcode-range accounting**: DVD has NO real opcode 0x11 at all -
+an earlier pass's "remaining opcodes" list wrongly included it, apparently carried over by mistake from the
+UNRELATED opcode 0x11 this project already resolved on the 2D context (a real, different opcode language -
+see section 7's own 2D writeup). Mechanically re-confirmed by grepping the complete raw decompile for every
+real `uVar17 ==/!= 0x??000000` comparison: 0x12 is the smallest value actually dispatched on in that
+neighborhood.
+
+**Real, high-value finding this pass**: opcode 0x12's own real body spans roughly 750+ lines of raw
+decompile (loop-based, multiple fixed-size local arrays, dense per-plane geometry math) - comparable in
+scale to GL's own opcode 0x31, which this project's history (section 2 above) explicitly flagged as "the
+single largest remaining gap" in the entire GL reconstruction. NOT attempted this pass; needs its own
+dedicated pass, not a continuation of this session's per-opcode cadence.
+
+Still open: ~18 real opcodes (0x12 [very large, see above], 0x14-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44,
+0x46-0x47) - the rest are dense per-mip YUV/tiling math comparable in density to GL's own richest opcodes
+(real floating-point double arithmetic, multiple format-table lookups per opcode), not yet examined in
+detail. `process_command_buffer` itself is not yet assembled as one function - the transcribed handlers are
+free functions awaiting a completed dispatcher.
+
+**Methodology note for continuing this**: this pass's manual reading of the raw decompile's brace
+structure produced two real opcode-boundary mistakes this session that needed correcting after the fact
+(opcode 0x1d wrongly modeled as separate from the bind family in an earlier commit; opcode 0x11 wrongly
+carried into the "remaining" list, as above). A future pass should cross-check routing against the real
+compiled branch instructions (raw disassembly) before trusting an opcode boundary inferred from decompiled
+C brace nesting alone, especially for the deepest-nested parts of this function.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
 
