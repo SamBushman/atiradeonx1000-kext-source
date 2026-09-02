@@ -250,13 +250,31 @@ consumed" exit-descriptor-write check, but the real decompile shows this opcode'
 into that same shared check. Whether this ever actually diverges from real hardware behavior is
 unconfirmed - see that function's own updated header comment.
 
-## 5. `IOATIR500Accelerator`'s four context-factory vtable slots are a real tooling ceiling, not a gap
+## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
 
-`newUserClient`'s four real vtable slots (`+0x5d4/0x5d8/0x5dc/0x5e0`) read as zero in every Ghidra import
-attempted - an unsupported Mach-O relocation type (`PPC_RELOC_LOCAL_SECTDIFF`, decimal 15), not a
-driver-logic gap. Closing this needs either a Ghidra version/plugin that supports this relocation type,
-or hand-parsing the kext's raw Mach-O relocation table (no `otool`/`llvm-objdump` was available in the
-environment this was written in either - a second, smaller tooling gap).
+**Names/purpose effectively RESOLVED**, and by a completely different, more reliable method than decoding
+the vtable itself: `newUserClient`'s four real vtable slots (`+0x5d4/0x5d8/0x5dc/0x5e0`) map to
+`createSurfaceContext`/`create2DContext`/`createDVDContext`/`createGLContext` respectively - type 0
+(Surface) and type 1 (GL) are CONFIRMED via real `IOServiceOpen(...)` call sites in this project's own
+downloaded userspace binaries (`_gldAttachDrawable`, `_gldCreateContext`); type 2 (2D) and type 3 (DVD)
+are INFERRED by elimination. See `Headers/IOATIR500Accelerator.h`'s updated declarations.
+
+**The four words' raw numeric CONTENTS remain unresolved** - a real, exhaustively-investigated dead end
+this pass, not the `PPC_RELOC_LOCAL_SECTDIFF` (type 15) tooling gap originally logged. A Ghidra headless
+script parsing the raw Mach-O structures directly (not just the higher-level analyzed Program - see
+`Headers/IOATIR500Accelerator.h`'s full writeup) found the real relocation entries are type 0
+(`GENERIC_RELOC_VANILLA`), non-scattered, non-external - ruling out SECTDIFF entirely. Also ruled out:
+plain absolute address (the raw values point into unrelated data - a video-mode table, and this class's
+own destructor), section ordinal (binary has only 10 sections total, values are in the hundreds of
+thousands), symbol-table index (values mostly out of bounds for the 1215-entry symbol table), a parsing
+bug (manual raw-byte reads agree byte-for-byte with Ghidra's own parse), and a separate `LC_DYSYMTAB`
+local-relocation table (confirmed absent from this file). Leading hypothesis, unconfirmed: these slots
+were never locally overridden in this compiled object and only ever got their real addresses via Apple's
+kext-load-time "vtable patching" (`kxld`) against the live kernel - if true, the real numeric values may
+not exist anywhere in this static file at all, and only a live kxld-relocated memory read on real
+hardware could recover them. Lower priority now than when this issue was filed, since the actually
+load-bearing information (the real names above) is already solid, and a numeric value can't be verified
+without a real compile+link anyway (see gap 1).
 
 ## 6. The base classes' own construction/initialization - RESOLVED (issue #10)
 
