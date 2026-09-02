@@ -194,18 +194,15 @@ public:
 
     /*
      * load_texture / alloc_and_load_texture / compact_current_textures -
-     * PARTIALLY RESOLVED (issue #5): alloc_and_load_texture and
-     * compact_current_textures fully transcribed this pass (real kext
-     * offsets 0x2a3d0/0x29dd0) - see Sources/ATIR500GLContext_TextureLoad.cpp.
-     * load_texture (0x29480) remains deferred - its real decompiled body
-     * was read this pass too but is large enough (~380 lines, dozens of
-     * locals, dense per-mip/tiling math matching
-     * write_kernel_context_buffer_regs's shape) that transcribing it to
-     * the same standard as its now-resolved siblings needs its own
-     * dedicated pass rather than being rushed alongside them - see
-     * GAPS.md. This machinery backs every texture-load opcode (0x06-0x15
-     * BIND family - not plain unbind - plus 0x37/0x39/0x3b/0x3e/0x3f/
-     * 0x40/0x43).
+     * FULLY RESOLVED (issue #5): all three now fully transcribed (real
+     * kext offsets 0x29480/0x2a3d0/0x29dd0) - see
+     * Sources/ATIR500GLContext_TextureLoad.cpp for all three, including
+     * load_texture's own detailed header comment (deferred across an
+     * earlier pass for being large/dense - ~380 lines, dozens of locals,
+     * per-mip/tiling math matching write_kernel_context_buffer_regs's
+     * shape - now done). This machinery backs every texture-load opcode
+     * (0x06-0x15 BIND family - not plain unbind - plus 0x37/0x39/0x3b/
+     * 0x3e/0x3f/0x40/0x43).
      *
      * RETURN TYPES CORRECTED this pass - the real decompile shows these
      * were swapped from what this project had assumed:

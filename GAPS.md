@@ -174,7 +174,7 @@ transcription is dense (~120 real pairs) and comes with an explicit caveat in th
 transposition risk - one was already caught and fixed, others may remain; spot-check any specific
 value against the raw decompile before relying on it for a real test.
 
-## 4. Several real internal helper functions - most now reconstructed
+## 4. Several real internal helper functions - RESOLVED (issue #5), all now reconstructed
 
 `build_scissor`, `GetTextureOffset`/`WriteTextureOffset`, `GetVertexArrayOffset`/`WriteVertexArrayOffset`,
 `GetQueryOffset`, `add_texture_to_stream`/`remove_texture_from_stream`, `map_transfer_to_GART`,
@@ -199,8 +199,30 @@ not a member) `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp`. Real findings
   `IOATIR500Accelerator::freeToAllocTextureVRAM`, `IOATIR500Surface::alloc_surfaces_keep`,
   `IOATIR500Surface::move_buffer_to_backing_store`, `IOATIR500Surface::copy_buffer_from_backing_store`.
 
-**Still deferred, given its size** (~380 lines, dense per-mip/tiling math): `load_texture` - see
-`Headers/ATIR500GLContext.h`'s declaration.
+**RESOLVED (final piece of issue #5)**: `load_texture` (~380 lines, dense per-mip/tiling math) is now also
+fully transcribed - see `Sources/ATIR500GLContext_TextureLoad.cpp`'s own detailed header comment. Issue #5
+is now fully closed - all six originally-declared-but-bodyless internal helpers are reconstructed. Notable
+findings:
+- Two more real vtable slots surfaced, both on a "memory-descriptor-shaped" object reached through the
+  texture's own `memoryDescriptor` field (+0x08): +0x14c (a real second call site for the same slot
+  `ATIR500GLContext_DiscardBuffer.cpp`'s opcode 0x3b trace already flagged as unresolved, issue #12 item 3)
+  and +0xd0/+0x18 (get-hardware-tiling-info / release, not previously seen anywhere else in this project).
+- Confirmed cross-reference: the per-face dirty/loaded bitmask array this function scans (`mip+0x1c`/
+  `mip+0x28`, up to 6 UInt16 entries) is the exact same memory `alloc_and_load_texture`/
+  `compact_current_textures` already zero out via their six explicit `mip[0x28..0x32]=0` writes during
+  eviction - direct confirmation those six writes really are "clear the per-face loaded-bitmask array."
+- Confirmed cross-reference: `load_texture`'s "linear" tiling path sets `accelerator+0xb90=1` - the exact
+  same "mid-pageoff" flag `get_texture` checks before calling `restore_state_destroyed_by_pageoff`, and
+  `submit_context_buffer` clears at its own start. `load_texture` is the real producer of that flag.
+- The function's two tiling paths (dispatched on a real sign-bit test, `hwInfo[8] < 0`) build genuinely
+  different per-tile PM4 register bursts - informally "macro-tiled" (3 fields/tile) vs "linear" (5
+  fields/tile, plus a per-level `hwShiftA`/`hwShiftB` recurrence) below, not real driver terminology.
+- Like `write_kernel_context_buffer_regs`/`restore_state_destroyed_by_pageoff` elsewhere in this project,
+  the deepest per-tile arithmetic (particularly the "linear" path's per-level recurrence and the
+  "macro-tiled" path's LOD-bias computation, which reads from a real but structurally-UNKNOWN-beyond-this-
+  one-use `pAVar22`-shaped object) is transcribed faithfully from the real decompile but dense enough to
+  warrant an independent spot-check - or live hardware verification - before fully trusting any single bit
+  position. See the function's own header comment for the exact caveat.
 
 **Also found, not yet resolved**: opcode 0x29's real execute-path handler was cross-checked against
 `discard_command_buffer`'s independent trace of the same opcode, and both agree on the 8-case switch table

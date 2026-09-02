@@ -1,23 +1,35 @@
 /*
  * ATIR500GLContext_TextureLoad.cpp
  *
- * PARTIALLY RESOLVED (issue #5): get_texture, alloc_and_load_texture,
- * and compact_current_textures - three of the four remaining declared-
- * but-bodyless internal helpers - fully decompiled and transcribed this
- * pass (real kext offsets 0x2b5f0, 0x2a3d0, 0x29dd0 respectively).
- * load_texture (0x29480) was read but deliberately deferred - see
- * Headers/ATIR500GLContext.h's declaration and GAPS.md.
+ * FULLY RESOLVED (issue #5): all six of this project's remaining
+ * declared-but-bodyless internal helpers - get_texture,
+ * alloc_and_load_texture, compact_current_textures, submit_context_buffer,
+ * convertIOGLBufferToBufIdx (a real free function, see
+ * ATIR500GLContext.h), and finally load_texture itself - are now fully
+ * decompiled and transcribed (real kext offsets 0x2b5f0, 0x2a3d0, 0x29dd0,
+ * 0x2a8b0, 0x26ce0, and 0x29480 respectively). load_texture was the one
+ * deliberately deferred across an earlier pass (large/dense, ~380 lines)
+ * - see its own header comment below for the full real structure.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call
  * touched - transcribed directly from complete real decompiles, not
  * summarized. Several sub-calls reached through raw vtable-offset casts
- * (accelerator vtable +0x524/+0x528, IOATIR500Surface vtable +0x5c4/
- * +0x5cc/+0x5d0) have real, confirmed-to-exist targets but UNKNOWN real
- * names - called opaquely per this project's no-shortcuts standard,
- * same as elsewhere. get_texture's atomic decrement loop was verified
- * against raw PPC disassembly (lwarx/stwcx.), not just Ghidra's
- * decompile, since the decompiler couldn't fully resolve it into clean
- * C on its own.
+ * (accelerator vtable +0x524/+0x528/+0x54c, IOATIR500Surface vtable
+ * +0x5c4/+0x5cc/+0x5d0, and two more used only by load_texture at
+ * +0x14c/+0xd0/+0x18 on a real "memory-descriptor-shaped" object - see
+ * ATIR500GLContext_DiscardBuffer.cpp's matching cross-reference) have
+ * real, confirmed-to-exist targets but UNKNOWN real names - called
+ * opaquely per this project's no-shortcuts standard, same as elsewhere.
+ * get_texture's atomic decrement loop was verified against raw PPC
+ * disassembly (lwarx/stwcx.), not just Ghidra's decompile, since the
+ * decompiler couldn't fully resolve it into clean C on its own.
+ * load_texture's own deepest per-tile register-burst math (particularly
+ * its "linear" tiling path's per-level hwShiftA/hwShiftB recurrence and
+ * its LOD-bias computation's own `pAVar22`-shaped struct) is transcribed
+ * faithfully but, like write_kernel_context_buffer_regs and
+ * restore_state_destroyed_by_pageoff elsewhere in this project, dense
+ * enough to warrant an independent spot-check before being fully trusted
+ * bit-for-bit - see load_texture's own header comment for specifics.
  */
 
 #include "../Headers/ATIR500GLContext.h"
@@ -674,4 +686,454 @@ void ATIR500GLContext::submit_context_buffer() {
         *reinterpret_cast<UInt32 *>(*reinterpret_cast<UInt32 *>(ringBase + 0x120) + 0x14));
     *reinterpret_cast<UInt32 *>(ringBase + 0x11c) = submitResult;
     *reinterpret_cast<UInt32 *>(self + 0x7c) = submitResult;
+}
+
+/*
+ * load_texture - RESOLVED (issue #5), fully transcribed (real kext offset
+ * 0x29480). This is the deferred function - see this file's own header
+ * and GAPS.md for why it was split from its now-resolved siblings.
+ *
+ * Real structure, in order:
+ *
+ * 1. Dirty-mip scan: for each of the texture's `faceCount` faces (mip[0x34],
+ *    a byte - almost certainly cubemap face count, 1 or 6 in practice) and
+ *    each mip level in [baseLevel, baseLevel+levelCount-1] (mip[0x17],
+ *    mip[0x35]), tests bit `level` of `(dirtyBits & ~loadedBits)` where
+ *    dirtyBits/loadedBits are per-face UInt16 fields at `mip + face*2 +
+ *    0x1c` / `mip + face*2 + 0x28` respectively - CONFIRMED CROSS-REFERENCE:
+ *    the `+0x28` array (up to 6 UInt16 entries, one per face) is the exact
+ *    same memory `alloc_and_load_texture`/`compact_current_textures` clear
+ *    to zero via their six explicit `mip[0x28]..mip[0x32] = 0` writes during
+ *    eviction. If no face/level combination is dirty-and-unloaded, returns
+ *    immediately (nothing to do).
+ *
+ * 2. GART-mapping prep: calls a real vtable method at offset 0x14c on the
+ *    texture's `memoryDescriptor` field (VendorTextureBuffer+0x08, per
+ *    ATIRadeonX1000Types.h) - the SAME real vtable slot
+ *    Sources/ATIR500GLContext_DiscardBuffer.cpp's header already flags as
+ *    "a real vtable method... to (re)establish a real backing mapping" on
+ *    opcode 0x3b's cleanup path (issue #12 item 3) - this is a second,
+ *    independent real call site for that same slot, with concrete argument
+ *    values, though still not independently named (opaque call, matching
+ *    this project's no-shortcuts standard). Returns null on failure (early
+ *    return). The resulting handle's own vtable+0xd0 (no extra args) then
+ *    returns `hwInfo`, a heavily-indexed per-mip/tile hardware-tiling
+ *    descriptor this function reads extensively - CONFIRMED this handle is
+ *    released via vtable+0x18 right before returning (matches the
+ *    `gartMapping`/`memoryDescriptor` struct comment's established
+ *    "released via vtable+0x18" pattern).
+ *
+ * 3. Per-texture-type dispatch (type 3 / type 7 / anything else) computing
+ *    `payloadByteLen` and an initial `tileXBase` value - types 3 and 7 both
+ *    real-splice a transfer buffer into the accelerator's transfer-buffer
+ *    list (accelerator+0x6d0/+0x69c, the SAME list alloc_and_load_texture's
+ *    `spliceIntoTransferList` uses) via a SEPARATE, not-independently-
+ *    decompiled small helper at real address 0x29da8 (own copy of the same
+ *    unlink pattern as `FUN_0002a864` above - different address, same real
+ *    shape, opaque call).
+ *
+ * 4. Real completion-stamp accumulation via accelerator vtable+0x54c
+ *    (accelerator+0x744 += stamp(mip+0xc)) - the SAME real vtable call
+ *    `compact_current_textures`/`restore_state_destroyed_by_pageoff` make
+ *    against a different accumulator field (+0x780); this one is specific
+ *    to texture loads. `record` (the PM4 burst output buffer) is then
+ *    computed as `hwInfo + 0xa00` bytes - CONFIRMED CROSS-REFERENCE: this
+ *    exact `+0xa00` constant reappears in both of this function's own
+ *    `submit_buffer` calls at the tail (`tex+4 (GART address) + 0xa00`),
+ *    confirming `hwInfo` is the kernel-mapped view of the same GART
+ *    allocation the texture's own +4 field addresses.
+ *
+ * 5. A real two-way branch on `hwInfo[8]`'s sign bit (real offset 0x20,
+ *    tested as `< 0`) - real evidence of two genuinely different tiling
+ *    code paths (informally "macro-tiled" vs "linear" below, not real
+ *    driver terminology, chosen for readability):
+ *
+ *    - Path A (hwInfo[8] < 0): walks all faces/levels again, building a
+ *      3-field-per-tile register burst (an "enable" marker plus X/Y base
+ *      addresses, or a "disabled" marker if the level is out of the
+ *      dirty-and-unloaded set), reading a per-tile record at `hwInfo +
+ *      tileIndex*0x20` (tileIndex = face*13+level) with fields at +0x40
+ *      (UInt16, output DWORD slot), +0x42 (UInt16, repeat count), +0x44/
+ *      +0x48 (SInt32 X/Y base), +0x4c/+0x50 (SInt32 X/Y stride). Marks
+ *      each face's levels loaded (`loadedBits |= dirtyBits`) as it goes.
+ *      Finishes with a real LOD-bias register computation read from a
+ *      SEPARATE per-context "current surface buffer entry" pointer
+ *      (`pAVar22` in the raw decompile) whose own real field layout
+ *      (+0x08/+0x14/+0x16/+0x20/+0x38/+0x3c, plus a 2-entry SInt32 array at
+ *      +0x40) is UNKNOWN beyond what this one computation implies -
+ *      genuinely reached via two different real source expressions
+ *      depending on `this+0x3bc`, both eventually indexing the same
+ *      `surface+idx*4+0xb70`-shaped array `compact_current_textures`
+ *      already uses for `ATIR500SurfaceBuffer` lookups (plausible, not
+ *      confirmed, that `pAVar22` IS an `ATIR500SurfaceBuffer*`).
+ *
+ *    - Path B (hwInfo[8] >= 0): offsets `record` forward by `hwInfo[1]`
+ *      dwords (a real "header size" - the matching `submit_buffer` call
+ *      below re-adds the same offset when computing the GART address, a
+ *      direct confirmation), writes one fixed dword (`record[0xb] =
+ *      accelerator+0xb74`), then runs a real small state machine on
+ *      `mip[0x15]`'s upper bits and `hwInfo[0x1a]` (a byte) to pick one of
+ *      three `(tileMode, tileParam)` pairs - transcribed as clean
+ *      structured code below; the raw decompile's own label soup
+ *      (LAB_00029a5c/LAB_00029a64/LAB_00029a94) was verified by hand to
+ *      collapse to exactly this if/else-if/else with no behavior change.
+ *      Then a face/level double loop writes a real 5-field-per-repeat
+ *      register burst per tile (fields at relative dword offsets +1/+3/+5/
+ *      +9 within a 0x1d-dword stride, packing hwInfo[0x1b] and evolving
+ *      per-level shift values `hwShiftA`/`hwShiftB` whose own recurrence -
+ *      each level's value is `max(a fixed floor, half of the previous
+ *      level's value)` - is transcribed exactly as decompiled but NOT
+ *      independently re-verified against raw disassembly. Sets
+ *      accelerator+0xb90 = 1 at the end - CONFIRMED CROSS-REFERENCE: this
+ *      is the exact same "mid-pageoff" flag `get_texture` checks before
+ *      calling `restore_state_destroyed_by_pageoff`, and that
+ *      `submit_context_buffer` clears at its own start - Path B is the
+ *      real producer of that flag.
+ *
+ * 6. Shared tail: pads `record` to an even dword count (writing a
+ *    `0x80000000` terminator if needed), accumulates
+ *    accelerator+0x704/+0x71c (byte-count and payload-length accumulators,
+ *    the same +0x704 field `compact_current_textures`/
+ *    `submit_context_buffer` also accumulate), submits via
+ *    `ATIRadeonX1000::submit_buffer` (base GART address differs by
+ *    `hwInfo[1]*4` between the two tiling paths, matching the Path-B-only
+ *    forward offset applied to `record` above), stores the result on
+ *    `mip+0xc` (the same field the completion-stamp call above reads), and
+ *    for type 7 propagates that same value into a second, real but
+ *    UNKNOWN-precision field reached through the type's own inner transfer
+ *    buffer (two pointer indirections deep - arithmetic transcribed
+ *    faithfully, exact struct identity not independently confirmed).
+ *    Finally releases the GART-mapping handle from step 2 via vtable+0x18.
+ *
+ * Confidence: CONFIRMED for the overall structure, every real offset and
+ * cross-referenced field, and both submit_buffer call sites. The Path A/
+ * Path B per-tile register-burst payloads themselves (which exact bits go
+ * where in the output PM4 stream) are transcribed faithfully from the real
+ * decompile but, like `write_kernel_context_buffer_regs` and
+ * `restore_state_destroyed_by_pageoff` elsewhere in this project, are
+ * dense enough (particularly Path B's per-level hwShiftA/hwShiftB
+ * recurrence) that a systematic line-by-line spot-check against the real
+ * decompile - or, ideally, live hardware behavior - is worth doing before
+ * fully trusting any single bit position here. Real per-tile struct field
+ * names beyond what's cross-referenced above are UNKNOWN; kept as raw byte
+ * offsets rather than invented names, per this project's standard.
+ */
+void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
+
+    UInt8 *mip = *reinterpret_cast<UInt8 **>(tex + 0x14);
+    SInt32 yOffset = *reinterpret_cast<SInt32 *>(tex + 0x48); /* real: also gates the type-3/7 splice paths as "pending" when nonzero, same field alloc_and_load_texture/compact_current_textures test as a boolean - here its actual VALUE is used as a pixel Y delta, consistent with "nonzero == suballocated within a shared region, and the value is the real offset within it" */
+    UInt32 faceCount = *reinterpret_cast<UInt8 *>(mip + 0x34);
+    UInt32 baseLevel = *reinterpret_cast<UInt8 *>(mip + 0x17);
+    UInt32 lastLevel = baseLevel + *reinterpret_cast<UInt8 *>(mip + 0x35) - 1;
+    if (faceCount == 0) return;
+
+    bool needsReload = false;
+    for (UInt32 face = 0; face < faceCount; face++) {
+        UInt8 *faceMip = mip + face * 2;
+        if (baseLevel <= lastLevel) {
+            for (UInt32 level = baseLevel; level <= lastLevel; level++) {
+                UInt16 dirtyBits = *reinterpret_cast<UInt16 *>(faceMip + 0x1c);
+                UInt16 loadedBits = *reinterpret_cast<UInt16 *>(faceMip + 0x28);
+                if (((static_cast<UInt32>(dirtyBits) & ~static_cast<UInt32>(loadedBits)) >> (level & 0x3f)) & 1) {
+                    needsReload = true;
+                }
+            }
+        }
+    }
+    if (!needsReload) return;
+
+    /* Real vtable+0x14c call on the texture's memoryDescriptor (+0x08) -
+     * see this function's own header comment. Args transcribed exactly;
+     * `_ASICSupportsAGP` is Ghidra's own (plausibly misleading - it's used
+     * elsewhere as a raw shift count, not just a boolean) auto-name for a
+     * real global this project has not independently investigated. */
+    extern int _ASICSupportsAGP;
+    typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
+    void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
+    void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
+        *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
+        memoryDescriptor, _ASICSupportsAGP, 0,
+        *reinterpret_cast<UInt32 *>(accel + 0x82c) | 1, 0, 0);
+    if (memHandle == nullptr) return;
+
+    typedef UInt32 *(*GetHwInfoFn)(void *);
+    UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);
+    UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
+
+    /* Own copy (real address 0x29da8) of the same unlink-then-splice-into-
+     * accelerator-transfer-list pattern alloc_and_load_texture's
+     * FUN_0002a864/spliceIntoTransferList already use - not independently
+     * decompiled, called opaquely like that one. */
+    extern void FUN_00029da8(void *node);
+    auto spliceIntoAccelTransferList = [&](UInt8 *node) {
+        FUN_00029da8(node + 0x2c);
+        UInt8 *prevNode = *reinterpret_cast<UInt8 **>(node + 0x34);
+        UInt8 *nextNode = *reinterpret_cast<UInt8 **>(node + 0x38);
+        *reinterpret_cast<UInt32 *>(prevNode + 0x38) = reinterpret_cast<UInt32>(nextNode);
+        *reinterpret_cast<UInt32 *>(nextNode + 0x34) = reinterpret_cast<UInt32>(prevNode);
+        *reinterpret_cast<UInt32 *>(node + 0x34) = *reinterpret_cast<UInt32 *>(accel + 0x6d0);
+        *reinterpret_cast<UInt32 *>(node + 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
+        *reinterpret_cast<UInt32 *>(accel + 0x6d0) = reinterpret_cast<UInt32>(node);
+        UInt8 *newPrev = *reinterpret_cast<UInt8 **>(node + 0x34);
+        *reinterpret_cast<UInt32 *>(newPrev + 0x38) = reinterpret_cast<UInt32>(node);
+    };
+
+    UInt32 discriminant = *reinterpret_cast<UInt32 *>(tex + 0x20);
+    UInt32 payloadByteLen; /* real: local_54 */
+    SInt32 tileXBase;      /* real: iVar17, first component - accel+0x8a4 added below */
+
+    if (discriminant == 3) {
+        if (*reinterpret_cast<UInt32 *>(tex + 4) != 0) {
+            spliceIntoAccelTransferList(tex);
+        } else {
+            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(texture));
+            if (*reinterpret_cast<UInt32 *>(tex + 4) != 0) spliceIntoAccelTransferList(tex);
+        }
+        /* real: param_1[0x20] is still 3 here, so the raw decompile's own
+         * "if (type != 7) goto LAB_00029724" always takes that branch -
+         * collapsed directly, no dead re-check needed. */
+        payloadByteLen = *reinterpret_cast<UInt32 *>(tex + 0x50);
+        tileXBase = *reinterpret_cast<SInt32 *>(tex + 4);
+    } else if (discriminant == 7) {
+        UInt8 *inner = *reinterpret_cast<UInt8 **>(tex + 0x58); /* VendorTransferBuffer* */
+        if (*reinterpret_cast<UInt32 *>(inner + 4) == 0) {
+            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(inner));
+        }
+        bool relinkTex;
+        if (*reinterpret_cast<UInt32 *>(tex + 4) == 0) {
+            /* real: temporary pin/refcount bump around the nested map call */
+            *reinterpret_cast<SInt16 *>(inner + 0xe) += 1;
+            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(texture));
+            UInt32 mappedNow = *reinterpret_cast<UInt32 *>(tex + 4);
+            *reinterpret_cast<SInt16 *>(inner + 0xe) -= 1;
+            relinkTex = (mappedNow != 0);
+        } else {
+            relinkTex = true;
+        }
+        if (relinkTex) spliceIntoAccelTransferList(tex);
+        if (*reinterpret_cast<UInt32 *>(inner + 4) != 0) spliceIntoAccelTransferList(inner);
+
+        payloadByteLen = *reinterpret_cast<UInt32 *>(tex + 0x50);
+        tileXBase = *reinterpret_cast<SInt32 *>(*reinterpret_cast<UInt32 *>(tex + 0x58) + 4);
+    } else {
+        payloadByteLen = *reinterpret_cast<UInt32 *>(tex + 0x50);
+        tileXBase = *reinterpret_cast<SInt32 *>(tex + 4);
+    }
+
+    /* Real completion-stamp accumulation - see header comment. */
+    typedef UInt32 (*StampFn)(void *, UInt32);
+    UInt32 stampDelta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<void ***>(accel) + (0x54c / 4)))(
+        accel, *reinterpret_cast<UInt32 *>(mip + 0xc));
+    UInt32 *record = hwInfo + 0x280; /* real: hwInfo + 0xa00 bytes */
+    *reinterpret_cast<UInt32 *>(accel + 0x744) += stampDelta;
+    tileXBase += *reinterpret_cast<SInt32 *>(accel + 0x8a4);
+
+    UInt32 finalDwordCount;
+
+    if (static_cast<SInt32>(hwInfo[8]) < 0) {
+        /* ---- Path A ("macro-tiled") ---- */
+        if (*reinterpret_cast<SInt32 *>(tex + 100) == 2) {
+            hwInfo[0x285] = 1;
+        } else if (*reinterpret_cast<SInt32 *>(tex + 100) == 4) {
+            hwInfo[0x285] = 2;
+        }
+
+        for (UInt32 face = 0; face < faceCount; face++) {
+            UInt8 *faceMip = mip + face * 2;
+            if (baseLevel <= lastLevel) {
+                UInt16 loadedBits = *reinterpret_cast<UInt16 *>(faceMip + 0x28);
+                UInt16 dirtyBits = *reinterpret_cast<UInt16 *>(faceMip + 0x1c);
+                for (UInt32 level = baseLevel; level <= lastLevel; level++) {
+                    UInt32 tileIndex = face * 0xd + level;
+                    UInt8 *tile = hwInfoBytes + tileIndex * 0x20;
+                    UInt32 outSlot = *reinterpret_cast<UInt16 *>(tile + 0x40);
+                    UInt32 repeatCount = *reinterpret_cast<UInt16 *>(tile + 0x42);
+                    SInt32 xBase = *reinterpret_cast<SInt32 *>(tile + 0x44);
+                    SInt32 yBase = *reinterpret_cast<SInt32 *>(tile + 0x48);
+                    SInt32 xStride = *reinterpret_cast<SInt32 *>(tile + 0x4c);
+                    SInt32 yStride = *reinterpret_cast<SInt32 *>(tile + 0x50);
+                    if (repeatCount == 0) repeatCount = 1;
+
+                    UInt32 slot = outSlot;
+                    for (UInt32 rep = 0; rep < repeatCount; rep++) {
+                        if (((static_cast<UInt32>(dirtyBits) & ~static_cast<UInt32>(loadedBits)) >> (level & 0x3f) & 1) == 0) {
+                            record[slot] = 0xc0101000u;
+                        } else {
+                            record[slot] = 0x80000000u;
+                            record[slot + 4] = static_cast<UInt32>(xBase + tileXBase);
+                            record[slot + 7] = static_cast<UInt32>(yBase + yOffset);
+                        }
+                        slot += 0x12;
+                        xBase += xStride;
+                        yBase += yStride;
+                    }
+                }
+            }
+            *reinterpret_cast<UInt16 *>(faceMip + 0x28) |= *reinterpret_cast<UInt16 *>(faceMip + 0x1c);
+        }
+
+        UInt32 outIndex = hwInfo[0];
+        record[outIndex] = 0x50bu;
+
+        SInt32 lodA, lodB, lodC; /* real: iVar32, iVar26, iVar8 */
+        UInt8 *surfBufEntry;      /* real: pAVar22 */
+        if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
+            lodA = *reinterpret_cast<SInt32 *>(self + 0x29c);
+            lodB = *reinterpret_cast<SInt32 *>(self + 0x298);
+            lodC = lodA + 1;
+            surfBufEntry = *reinterpret_cast<UInt8 **>(
+                static_cast<UInt32>(*reinterpret_cast<UInt16 *>(self + 0xac)) * 4 +
+                *reinterpret_cast<UInt32 *>(self + 0x290) + 0xb70);
+        } else {
+            lodB = 0;
+            lodA = 0;
+            lodC = 1;
+            surfBufEntry = self + static_cast<UInt32>(*reinterpret_cast<UInt16 *>(self + 0x3b2)) * 0x78 + 0x3c0;
+        }
+
+        UInt32 lodBiasA = 0;
+        if ((*reinterpret_cast<UInt32 *>(surfBufEntry + 0x3c) & 0xf00000u) != 0) {
+            lodBiasA = static_cast<UInt32>(*reinterpret_cast<UInt16 *>(surfBufEntry + 0x14)) /
+                       ((*reinterpret_cast<UInt32 *>(surfBufEntry + 0x3c) >> 0x14) & 0xf);
+        }
+        UInt32 lodBiasB = 0x20u / *reinterpret_cast<UInt16 *>(surfBufEntry + 0x16);
+        if (lodBiasB <= lodBiasA) lodBiasB = lodBiasA;
+        UInt32 highBit = (*reinterpret_cast<UInt8 *>(surfBufEntry + 0x38) < 2) ? 0u : 0x80000000u;
+
+        SInt32 *lodTable = reinterpret_cast<SInt32 *>(surfBufEntry + 0x40);
+        SInt32 term1 = (lodTable[lodA] * static_cast<SInt32>(*reinterpret_cast<UInt16 *>(surfBufEntry + 0x20)) +
+                         lodB * (lodTable[lodC] - lodTable[lodA]) +
+                         *reinterpret_cast<SInt32 *>(surfBufEntry + 8)) >> 10;
+        UInt32 term2 = (lodBiasB * (*reinterpret_cast<UInt16 *>(surfBufEntry + 0x16)) * 0x10000u) & 0x3fc00000u;
+        UInt32 term3 = static_cast<UInt32>(*reinterpret_cast<UInt8 *>(surfBufEntry + 0x38) & 1) << 0x1e;
+        record[outIndex + 1] = highBit | static_cast<UInt32>(term1) | term2 | term3;
+
+        finalDwordCount = outIndex + 2;
+    } else {
+        /* ---- Path B ("linear") ---- */
+        record += hwInfo[1];
+        record[0xb] = *reinterpret_cast<UInt32 *>(accel + 0xb74);
+
+        UInt8 mipFlags = *reinterpret_cast<UInt8 *>(mip + 0x15) >> 3;
+        UInt32 hwByte1a = *reinterpret_cast<UInt8 *>(hwInfoBytes + 0x1a);
+        UInt32 tileMode;   /* real: iVar5 */
+        SInt32 tileParam;  /* real: iVar8 */
+        if ((mipFlags & 3) == 0) {
+            tileMode = 0; tileParam = 5;
+        } else {
+            /* real: verified by hand that the raw decompile's
+             * LAB_00029a5c/LAB_00029a64/LAB_00029a94 label soup collapses
+             * to exactly this - see header comment. */
+            bool exactMatch = ((mipFlags & 2) != 0) || (hwByte1a == 0);
+            if (hwByte1a > 3) {
+                tileMode = 0; tileParam = 5;
+            } else if (exactMatch) {
+                tileMode = 2; tileParam = 3;
+            } else {
+                tileMode = 1; tileParam = 4;
+            }
+        }
+
+        UInt32 maxFloorA = 0x20u >> (hwByte1a & 0x3f);
+        UInt32 maxFloorB = 1u << ((tileParam - static_cast<SInt32>(hwByte1a)) & 0x3f);
+
+        for (UInt32 face = 0; face < faceCount; face++) {
+            UInt8 *faceMip = mip + face * 2;
+            UInt32 valA = hwInfo[4] >> (hwByte1a & 0x3f);
+            hwByte1a = hwInfo[3] >> (hwByte1a & 0x3f);
+
+            if (baseLevel <= lastLevel) {
+                UInt32 fullMipFlags = *reinterpret_cast<UInt8 *>(mip + 0x15);
+                for (UInt32 level = baseLevel; level <= lastLevel; level++) {
+                    UInt32 tileIndex = face * 0xd + level;
+                    UInt8 *tile = hwInfoBytes + tileIndex * 0x20;
+                    UInt32 *dst = record + *reinterpret_cast<UInt16 *>(tile + 0x18);
+
+                    if ((fullMipFlags & 4) != 0) {
+                        SInt32 shifted = static_cast<SInt32>(
+                            static_cast<UInt32>(*reinterpret_cast<UInt16 *>(hwInfoBytes + 0x16))) >> (level & 0x3f);
+                        UInt32 clamped = 1u << tileMode;
+                        if (static_cast<SInt32>(clamped) < shifted) clamped = static_cast<UInt32>(shifted);
+                        /* real: the raw decompile expresses this via a comma
+                         * operator with an embedded side effect (`iVar12 = 1,
+                         * cond`) inside an `||`, which nets out to exactly
+                         * this once traced by hand: iVar12 (-> bit 2 of
+                         * fullMipFlags below) is 1 when BOTH of these hold,
+                         * 0 if either fails. */
+                        bool gate = (hwByte1a >= (maxFloorB << 3)) && (clamped >= (1u << (tileMode + 3)));
+                        fullMipFlags = (gate ? 4u : 0u) | (fullMipFlags & ~4u);
+                    }
+
+                    UInt16 loadedBits = *reinterpret_cast<UInt16 *>(faceMip + 0x28);
+                    UInt16 dirtyBits = *reinterpret_cast<UInt16 *>(faceMip + 0x1c);
+                    if (((static_cast<UInt32>(dirtyBits) & ~static_cast<UInt32>(loadedBits)) >> (level & 0x3f) & 1) == 0) {
+                        UInt32 repeatCount = *reinterpret_cast<UInt16 *>(tile + 0x42);
+                        *dst = ((repeatCount * 0x1d) - 2) * 0x10000u | 0xc0001000u;
+                    } else {
+                        SInt32 xBase = *reinterpret_cast<SInt32 *>(tile + 0x44);
+                        SInt32 yBase = *reinterpret_cast<SInt32 *>(tile + 0x48);
+                        *dst = 0x138a;
+                        UInt32 repeatCount = *reinterpret_cast<UInt16 *>(tile + 0x42);
+                        for (UInt32 rep = 0; rep < repeatCount; rep++) {
+                            dst[1] = static_cast<UInt32>(yBase + yOffset);
+                            dst[3] = ((hwByte1a >> 1) & 0x1fffu) << 1 |
+                                     ((fullMipFlags >> 3) & 3u) << 0x11 |
+                                     ((fullMipFlags >> 2) & 1u) << 0x10 |
+                                     (dst[3] & 0xffe0c001u);
+                            UInt8 hwByte1b = hwInfoBytes[0x1b];
+                            dst[9] = ((valA - 1) & 0x3fffu) | (dst[9] & 0xffffc000u);
+                            dst[5] = (static_cast<UInt32>(xBase + tileXBase) & 0xffffffe0u) | (hwByte1b & 3u);
+                            dst += 0x1d;
+                            xBase += *reinterpret_cast<SInt32 *>(tile + 0x4c);
+                            yBase += *reinterpret_cast<SInt32 *>(tile + 0x50);
+                        }
+                    }
+
+                    /* real per-level recurrence - see header comment's
+                     * caveat about this not being independently
+                     * re-verified against raw disassembly. */
+                    UInt32 halfB = hwByte1a >> 1;
+                    hwByte1a = valA >> 1;
+                    valA = (maxFloorA < hwByte1a) ? hwByte1a : maxFloorA;
+                    hwByte1a = (maxFloorB < halfB) ? halfB : maxFloorB;
+                }
+            }
+            *reinterpret_cast<UInt16 *>(faceMip + 0x28) |= *reinterpret_cast<UInt16 *>(faceMip + 0x1c);
+        }
+
+        finalDwordCount = hwInfo[2];
+        *reinterpret_cast<UInt32 *>(accel + 0xb90) = 1; /* CONFIRMED CROSS-REFERENCE: the "mid-pageoff" flag get_texture/submit_context_buffer both reference - see header comment. */
+    }
+
+    UInt32 paddedCount = finalDwordCount;
+    if ((finalDwordCount & 1) != 0) {
+        paddedCount = finalDwordCount + 1;
+        record[finalDwordCount] = 0x80000000u;
+    }
+    *reinterpret_cast<UInt32 *>(accel + 0x704) += paddedCount * 4;
+    *reinterpret_cast<UInt32 *>(accel + 0x71c) += payloadByteLen;
+
+    UInt32 submitResult;
+    if (static_cast<SInt32>(hwInfo[8]) < 0) {
+        submitResult = accelerator->submit_buffer(record, *reinterpret_cast<UInt32 *>(tex + 4) + 0xa00, paddedCount);
+    } else {
+        submitResult = accelerator->submit_buffer(
+            record, hwInfo[1] * 4 + *reinterpret_cast<UInt32 *>(tex + 4) + 0xa00, paddedCount);
+    }
+    *reinterpret_cast<UInt32 *>(mip + 0xc) = submitResult;
+
+    if (discriminant == 7) {
+        /* real: two pointer indirections deep through the type's inner
+         * transfer buffer - arithmetic transcribed faithfully, exact
+         * struct identity UNKNOWN (see header comment). */
+        UInt8 *inner = *reinterpret_cast<UInt8 **>(tex + 0x58);
+        UInt8 *innerTarget = *reinterpret_cast<UInt8 **>(inner + 0x14);
+        *reinterpret_cast<UInt32 *>(innerTarget + 8) = *reinterpret_cast<UInt32 *>(mip + 0xc);
+    }
+
+    typedef void (*ReleaseFn)(void *);
+    (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
 }
