@@ -78,11 +78,21 @@ public:
      * after an earlier attempt at it was deliberately abandoned
      * mid-branch on a register whose value looked unexplained -
      * resolved by re-reading from the real function entry rather than
-     * mid-function; see handle_opcode_17's own header comment) (49 real
-     * opcodes with genuine handlers now), plus four more
-     * (0x07/0x08/0x09/0x0c) confirmed to be real HARD-ABORT paths (not a
-     * plain skip - see the dispatcher's own comment) with no other real
-     * handler.
+     * mid-function; see handle_opcode_17's own header comment), and
+     * FINALLY 0x12 (the single largest item in this whole issue, closing
+     * it out - two independent real transfer buffers each GART-mapped
+     * via the exact same real sequence `handle_opcode_18` already
+     * transcribes, feeding an 8-entry stride table split across two
+     * near-mirror 30-slot PM4 bursts, each ending in a real caller-data-
+     * driven variable-length trailing loop using the exact same real
+     * 32-bit-address-arithmetic-overflow idiom `handle_opcode_3d`
+     * documents, independently re-confirmed here via direct disassembly
+     * tracing; see handle_opcode_12's own header comment for a real
+     * false lead this project chased and ruled out while locating this
+     * opcode's true body) (50 real opcodes with genuine handlers now),
+     * plus four more (0x07/0x08/0x09/0x0c) confirmed to be real
+     * HARD-ABORT paths (not a plain skip - see the dispatcher's own
+     * comment) with no other real handler.
      *
      * THREE REAL CORRECTIONS to this project's own earlier opcode
      * accounting, found via direct PPC branch-instruction tracing (not
@@ -107,20 +117,8 @@ public:
      * handler function and GAPS.md for the full opcode-by-opcode status,
      * including a real correction (DVD has no opcode 0x11 at all).
      *
-     * STILL OPEN: one real opcode (0x12) - down from seven at the start
-     * of this pass. Real, disassembly-verified target address recorded
-     * in the dispatcher's own `switch` (the explicit not-yet-transcribed
-     * case) so a future pass can go straight to decompiling it without
-     * re-deriving the address mapping, which was itself the hard,
-     * error-prone part of this pass. Opcode 0x12 is ~750 lines of real
-     * dense per-plane geometry math, comparable in scale to GL's own
-     * single-largest gap (opcode 0x2d - CORRECTED, issue #12 item 4:
-     * that GL content was misattributed to "opcode 0x31" when this note
-     * was first written; the real GL opcode 0x31 is much smaller and is
-     * now fully transcribed). This dispatcher explicitly falls through
-     * to the natural-distance default for it - a KNOWN GAP, not a
-     * confirmed real no-op; do not trust it for this opcode value on
-     * real hardware.
+     * FULLY RESOLVED: issue #7 is closed. Every real DVD opcode this
+     * project found now has a genuine handler wired into the dispatcher.
      */
     IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 

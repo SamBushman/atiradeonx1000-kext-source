@@ -1,7 +1,7 @@
 /*
  * ATIR500DVDContext_ProcessCommandBuffer.cpp
  *
- * PARTIALLY RESOLVED (issue #7): the DVD context's own embedded
+ * FULLY RESOLVED (issue #7): the DVD context's own embedded
  * command-buffer opcode language. Real dispatch mechanism confirmed
  * (top-byte opcode over a `this+0xa4+0x1c`-based record stream,
  * self-consuming low-24-bit distance fields), and `process_command_buffer`
@@ -23,7 +23,7 @@
  * in the dispatcher's own comments for every opcode, transcribed or
  * not, so a future pass never has to re-derive them).
  *
- * Real opcode groups now transcribed (49 real opcodes with genuine
+ * Real opcode groups now transcribed (50 real opcodes with genuine
  * handlers): texture bind (0x19-0x1d, 0x1e-0x25, 0x26-0x2a); texture
  * unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35, 0x36-0x3c);
  * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush; the
@@ -137,18 +137,38 @@
  * over) between how its `altFlag` polarity maps to output formulas
  * across its two outer branches.
  *
- * STILL OPEN, real disassembly-verified target address on record for a
- * future pass (see the dispatcher's own explicit not-yet-transcribed
- * `case` for the current text - down to ONE opcode from the original
- * seven, after this pass's continuations): opcode 0x12 (~750 real
- * lines, comparable in scale to GL's own single-largest gap, opcode
- * 0x2d - CORRECTED, issue #12 item 4: that GL content was misattributed
- * to "opcode 0x31" when this note was first written; the real GL opcode
- * 0x31 is much smaller and is now fully transcribed - see
- * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve).
- * This is a genuinely large remaining undertaking - same scope note
- * this file has carried since it was first opened - not a small
- * residual item.
+ * FINAL CONTINUATION: opcode 0x12 transcribed and wired - the single
+ * largest item in this whole issue (~750 real decompile lines, comparable
+ * in scale to GL's own single-largest gap, opcode 0x2d - CORRECTED,
+ * issue #12 item 4: that GL content was misattributed to "opcode 0x31"
+ * when this note was first written; the real GL opcode 0x31 is much
+ * smaller and is now fully transcribed - see
+ * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve),
+ * closing out issue #7 entirely. A real false lead was chased and ruled
+ * out while locating this opcode's true body: Ghidra's own decompile
+ * renders a second, textually-adjacent block right after 0x12's real
+ * content that looks by proximity/indentation like it might continue
+ * being part of 0x12, but a direct disassembly cross-check (no
+ * `b 0x0003903c` - that block's own real exit target - anywhere in
+ * 0x12's real `0x35c04`-`0x364c0` address range, and every real
+ * dispatch-table target in the whole enclosing function independently
+ * re-derived and found already accounted for by already-committed
+ * handlers) proved it is NOT part of this opcode - see
+ * `handle_opcode_12`'s own header comment for the full account. Reuses
+ * `handle_opcode_18`'s own transfer-buffer GART-mapping sequence
+ * verbatim for two independent real buffers, and independently
+ * re-confirms (via direct disassembly instruction tracing, not
+ * decompile pointer-type inference) the same real 32-bit-address-
+ * arithmetic-overflow idiom `handle_opcode_3d` already documented, this
+ * time inside a genuine multi-iteration loop rather than a one-time
+ * computation - a second, convergent data point that this is a real,
+ * deliberate compiler/idiom pattern in this codebase rather than a
+ * one-off.
+ *
+ * ISSUE #7 STATUS: FULLY RESOLVED. Every real DVD opcode this project
+ * found (50 with genuine handlers, plus 4 confirmed real hard-abort
+ * paths with no other handler) now has real, disassembly-verified
+ * behavior wired into the dispatcher.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call in
  * every transcribed handler - complete real decompiles, cross-checked
@@ -1974,6 +1994,357 @@ static void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record) {
 }
 
 /*
+ * handle_opcode_12 - RESOLVED (issue #7), fully transcribed - the
+ * single largest remaining item for this whole issue, closing it out.
+ * Real target address `0x35c04`.
+ *
+ * A REAL FALSE LEAD encountered while locating this opcode's decompile
+ * text, worth recording so a future pass doesn't repeat the detour:
+ * Ghidra's own C decompile of the enclosing giant function renders a
+ * SECOND, textually-adjacent-looking block right after this opcode's
+ * real content (mode 2/3/other Y/UV pitch formulas using
+ * `boundSurface+0x7b8`/`+0x7c8`, superficially resembling
+ * `handle_opcode_14`/`16`/`17`'s own shape but larger) that looks, by
+ * decompile indentation and proximity, like it might continue being
+ * part of opcode `0x12`. It is NOT. Cross-checked directly against
+ * disassembly: this opcode's real machine code (`0x35c04` through the
+ * single real `b 0x00039028` exit at `0x364b0`, confirmed to be the
+ * ONLY shared-exit branch anywhere in that whole address range) is
+ * fully, exclusively explained by the content transcribed below: There
+ * is no `b 0x0003903c` (the target that adjacent-looking block's own
+ * decompile "goto" names) anywhere in `0x12`'s real address range.
+ * Cross-referencing every real dispatch-table target in the enclosing
+ * function against this project's already-committed handlers (a full
+ * re-derivation done specifically to chase this down) showed every
+ * single real address already accounted for - meaning that
+ * textually-adjacent block is either a Ghidra rendering artifact of
+ * already-covered content, or genuinely dead/unreachable code, either
+ * way NOT a live gap this dispatcher needs to cover. Recorded here so
+ * a future reader who notices the same "shouldn't this belong to 0x12
+ * too?" question doesn't have to redo this investigation.
+ *
+ * Real structure: two independent, real transfer buffers (`record[1]`-
+ * and `record[5]`-indexed, `this+record[N]*4+0x104` - the SAME real
+ * array `handle_opcode_18` above already established), each real
+ * GART-mapped and linked-list-spliced via the exact same real sequence
+ * `handle_opcode_18` already transcribes (reused verbatim here, not
+ * re-derived) if not already mapped. Real per-buffer running-sum
+ * values feed an 8-entry stride table (`local_b4`/`local_a4`, split 4
+ * and 4 from one continuous running total) used as a real per-plane Y
+ * IDCT-working-surface geometry table (matches this file's own
+ * `setup_buffers`-adjacent role - the doIDCT working-surface path is
+ * this whole project's stated priority target).
+ *
+ * Writes TWO real, near-mirror 30-slot PM4 bursts (`record[6]`- and
+ * `record[7]`-indexed - real DISTINCT offsets, not shared) each burst
+ * spanning slots `[-0xe, 0xf]` relative to its own base pointer: a real
+ * `0x832`/`0x833` transfer-buffer-sum header pair, a real `0x1150`-
+ * `0x1154` five-slot block sourced from the `local_b4`/`local_a4`
+ * stride table, a real 4-way-branched `0x1155`/`0x1156` pair (branch
+ * key: `record[2]==0 || record[0xc]!=0`, then `record[3]==0` - the
+ * SAME real 2-condition/3-way shape `handle_opcode_14`'s own `mode`/
+ * `altFlag` branches use, reused here for a completely different real
+ * field pair), a real `0x1157`-`0x115c` four-slot block sourced from
+ * two more per-mip records (`record[0xb]`/`record[0xa]`, real INDEPENDENT
+ * mips, each read via `boundSurface+record[N]*0x78+0x560` - the SAME
+ * real per-mip base-field convention every opcode in this cluster
+ * shares), and finally a real, CALLER-DATA-DRIVEN variable-length
+ * trailing loop (walking a real linked list of caller-embedded 2-slot
+ * entries, each stamped with a real `0x80000000` sentinel pair and
+ * given a real computed value/tile-packed word, terminating on a real
+ * caller-supplied zero stride) - this trailing loop is confirmed, via
+ * direct disassembly instruction tracing (not decompile pointer-type
+ * inference), to use the EXACT SAME real 32-bit-address-arithmetic-
+ * overflow idiom `handle_opcode_3d`'s own header comment already
+ * documents (`cursor[1]` self-consumed to `0x80000000` immediately
+ * before being used, scaled by 4 for dword-index arithmetic, and
+ * overflowing back to exactly 0) - independently re-confirmed here via
+ * a full instruction-by-instruction trace (`rlwinm r2,r2,0x2,...`
+ * truncating the just-stored `0x80000000` to 0 before it's added into
+ * the next address), not assumed from the pattern alone. The two
+ * bursts' own trailing loops differ only in one real final OR-in
+ * constant (`0x1200000` for the first, `0x1a00000` for the second) -
+ * transcribed as observed, not assumed symmetric.
+ *
+ * Real, honestly-flagged reuse: `record[9]` is read TWICE with two
+ * completely different real meanings across this function's own real
+ * lifetime - first as a per-mip INDEX (for the stride-table base
+ * pointer and the running-sum multiplier), later reinterpreted as raw
+ * tile-flag BYTES (`boundSurface+record[9]*0x78+0x590`, matching every
+ * other opcode's own `tileBit0`/`tileBit1` convention) - modeled here
+ * as two distinctly-named locals (`mipIndexForStride` vs.
+ * `tileByteSource`) rather than one C++ variable reused, to keep the
+ * two real meanings from reading as accidental reuse. Likewise
+ * `record[0xb]`/`record[10]` are each read once as a raw mip INDEX and
+ * then immediately replaced, in the same real local, by the actual
+ * BASE VALUE looked up through that index - kept as separate locals
+ * here for the same reason.
+ *
+ * Ends by directly overwriting `record[0]` itself with a fixed real
+ * constant (`0xc00c1000`) - the SAME real in-place-record-rewrite
+ * pattern the two burst headers above already exercise, and safe with
+ * respect to the dispatcher's own outer loop, which has already
+ * extracted this iteration's real `opcode`/`distance` pair from the
+ * ORIGINAL `record[0]` value before this handler ever runs.
+ */
+static bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+
+    if (U32At(accel, 0x8bc) == 0) return false;
+
+    typedef void (*EngineKickFn)(void *, UInt32);
+    (*reinterpret_cast<EngineKickFn *>(*reinterpret_cast<void ***>(accel) + (0x5ec / 4)))(accel, U32At(self, 0x154));
+
+    if (record[0xd] == 0) return false;
+
+    UInt32 branchFlagA = record[2];       /* real: gates the 0x1155/0x1156 pair's outer choice */
+    UInt32 branchFlagB = record[3];       /* real: gates the 0x1155/0x1156 pair's inner choice, reused for both bursts */
+    UInt32 burst1Offset = record[6];
+    UInt32 burst2Offset = record[7];
+    UInt32 headerAdjust = record[8];
+    UInt32 mipIndexForStride = record[9]; /* real: FIRST meaning of record[9] - see header note */
+    UInt32 mipIndexR10 = record[10];
+    SInt16 heightFieldA = static_cast<SInt16>(U16At(surf, 0x98));
+    SInt16 heightFieldB = static_cast<SInt16>(U16At(surf, 0x96));
+    UInt32 mipIndexR11 = record[0xb];
+    UInt32 branchFlagC = record[0xc];
+
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+    UInt8 *bufA = *reinterpret_cast<UInt8 **>(self + record[1] * 4 + 0x104);
+    if (U32At(bufA, 4) != 0 ||
+        (ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(bufA)),
+         U32At(bufA, 4) != 0)) {
+        FUN_0003913c(bufA + 0x2c);
+        void *prevNode = reinterpret_cast<void *>(U32At(bufA, 0x34));
+        void *nextNode = reinterpret_cast<void *>(U32At(bufA, 0x38));
+        U32At(prevNode, 0x38) = reinterpret_cast<UInt32>(nextNode);
+        U32At(nextNode, 0x34) = reinterpret_cast<UInt32>(prevNode);
+        U32At(bufA, 0x34) = U32At(accel, 0x6d0);
+        U32At(bufA, 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
+        U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(bufA);
+        void *newPrev = reinterpret_cast<void *>(U32At(bufA, 0x34));
+        U32At(newPrev, 0x38) = reinterpret_cast<UInt32>(bufA);
+    }
+    UInt32 bufASum = 0;
+    U8At(reinterpret_cast<void *>(U32At(bufA, 0x14)), 0x14) = 0;
+    if (U32At(bufA, 4) != 0) {
+        bufASum = U32At(bufA, 4) + U32At(bufA, 0x50) + U32At(accel, 0x8a4);
+    }
+
+    UInt32 local_b4[4];
+    UInt32 local_a4[4];
+    {
+        SInt32 stride = static_cast<SInt32>(
+            ((((static_cast<UInt32>(heightFieldA - heightFieldB) >> 2) & 0x3ffffffcu) + 0xffu) & 0xffffff00u) *
+            (static_cast<UInt32>(heightDelta) >> 4));
+        UInt32 running = bufASum + mipIndexForStride * static_cast<UInt32>(stride) * 8;
+        for (int i = 0; i < 4; i++) { local_b4[i] = running; running += static_cast<UInt32>(stride); }
+        for (int i = 0; i < 4; i++) { local_a4[i] = running; running += static_cast<UInt32>(stride); }
+    }
+
+    UInt8 *bufB = *reinterpret_cast<UInt8 **>(self + record[5] * 4 + 0x104);
+    if (U32At(bufB, 4) != 0 ||
+        (ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(bufB)),
+         U32At(bufB, 4) != 0)) {
+        FUN_0003913c(bufB + 0x2c);
+        void *prevNode = reinterpret_cast<void *>(U32At(bufB, 0x34));
+        void *nextNode = reinterpret_cast<void *>(U32At(bufB, 0x38));
+        U32At(prevNode, 0x38) = reinterpret_cast<UInt32>(nextNode);
+        U32At(nextNode, 0x34) = reinterpret_cast<UInt32>(prevNode);
+        U32At(bufB, 0x34) = U32At(accel, 0x6d0);
+        U32At(bufB, 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
+        U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(bufB);
+        void *newPrev = reinterpret_cast<void *>(U32At(bufB, 0x34));
+        U32At(newPrev, 0x38) = reinterpret_cast<UInt32>(bufB);
+    }
+    UInt32 bufBSum = 0;
+    U8At(reinterpret_cast<void *>(U32At(bufB, 0x14)), 0x14) = 0;
+    if (U32At(bufB, 4) != 0) {
+        bufBSum = U32At(bufB, 4) + U32At(bufB, 0x50) + U32At(accel, 0x8a4);
+    }
+
+    UInt8 *mip = surf + mipIndexForStride * 0x78;
+    UInt32 pitchDiv = U16At(surf, 0x8b8);
+    UInt32 *burst1 = record + burst1Offset;
+    UInt32 mipPitch = U16At(mip, 0x570);
+    UInt32 baseR11 = U32At(surf + mipIndexR11 * 0x78, 0x560);
+    UInt32 baseR10 = U32At(surf + mipIndexR10 * 0x78, 0x560);
+    UInt32 mipBase = U32At(mip, 0x560);
+    UInt8 tileByteSource = U8At(mip, 0x590); /* real: SECOND meaning of record[9] - see header note */
+    UInt32 tileBit0 = tileByteSource & 1u;
+    UInt32 tileBit1raw = static_cast<UInt32>(tileByteSource) >> 1;
+    UInt32 rowSize = static_cast<UInt32>(heightDelta) * mipPitch;
+    UInt32 surf8a8 = U32At(surf, 0x8a8);
+    UInt32 tileBits = (tileBit0 << 2) | ((tileBit1raw & 3u) << 3);
+
+    burst1[-0xe] = 0x832;
+    burst1[-0xd] = bufBSum;
+    burst1[-0xc] = 0x833;
+    burst1[-0xb] = bufBSum;
+    burst1[-10] = 0x1150;
+    burst1[-9] = (local_b4[0] & 0xffffffe0u) | 2;
+    burst1[-8] = 0x1151;
+    burst1[-7] = (local_b4[1] & 0xffffffe0u) | 2;
+    burst1[-6] = 0x1152;
+    burst1[-5] = (local_b4[2] & 0xffffffe0u) | 2;
+    burst1[-4] = 0x1153;
+    burst1[-3] = (local_b4[3] & 0xffffffe0u) | 2;
+    burst1[-2] = 0x1154;
+    UInt32 baseR10Masked = tileBits | (baseR10 & 0xffffffe0u);
+    burst1[-1] = baseR10Masked;
+
+    if (branchFlagA == 0 || branchFlagC != 0) {
+        burst1[0] = 0x1155;
+        burst1[1] = baseR10Masked;
+        burst1[2] = 0x1156;
+        burst1[3] = tileBits | ((mipPitch + baseR10) & 0xffffffe0u);
+    } else if (branchFlagB == 0) {
+        burst1[0] = 0x1155;
+        burst1[1] = baseR10Masked;
+        burst1[2] = 0x1156;
+        burst1[3] = tileBits | ((mipBase + mipPitch) & 0xffffffe0u);
+    } else {
+        burst1[0] = 0x1155;
+        burst1[1] = tileBits | (mipBase & 0xffffffe0u);
+        burst1[2] = 0x1156;
+        burst1[3] = tileBits | ((mipPitch + baseR10) & 0xffffffe0u);
+    }
+
+    bool branchFlagBIsZero = (branchFlagB == 0);
+    burst1[4] = 0x1157;
+    UInt32 baseR11Masked = tileBits | (baseR11 & 0xffffffe0u);
+    burst1[5] = baseR11Masked;
+    burst1[6] = 0x1158;
+    burst1[7] = baseR11Masked;
+    burst1[8] = 0x1159;
+    burst1[9] = tileBits | ((mipPitch + baseR11) & 0xffffffe0u);
+    burst1[10] = 0x115a;
+    UInt32 surf8a8Masked = tileBits | (surf8a8 & 0xffffffe0u);
+    burst1[0xb] = surf8a8Masked;
+    UInt32 burst1Tail;
+    if (branchFlagBIsZero) {
+        burst1[0xc] = 0x115b;
+        burst1[0xd] = surf8a8Masked;
+        burst1Tail = ((surf8a8 + pitchDiv) & 0xffffffe0u) | tileBits;
+    } else {
+        burst1[0xc] = 0x115b;
+        burst1Tail = tileBits | ((surf8a8 + pitchDiv) & 0xffffffe0u);
+        burst1[0xd] = burst1Tail;
+    }
+    burst1[0xe] = 0x115c;
+    burst1[0xf] = burst1Tail;
+    UInt32 surf8a8Updated = surf8a8 + static_cast<UInt32>(heightDelta) * pitchDiv;
+
+    UInt32 *burst2 = record + burst2Offset;
+    UInt32 rowPlusR10 = rowSize + baseR10;
+    UInt32 mipBasePlusRow = mipBase + rowSize;
+
+    burst2[-0xe] = 0x832;
+    UInt32 bufBSumAdjusted = bufBSum + headerAdjust * 4;
+    burst2[-0xd] = bufBSumAdjusted;
+    burst2[-0xc] = 0x833;
+    burst2[-0xb] = bufBSumAdjusted;
+    burst2[-10] = 0x1150;
+    burst2[-9] = (local_a4[0] & 0xffffffe0u) | 2;
+    burst2[-8] = 0x1151;
+    burst2[-7] = (local_a4[1] & 0xffffffe0u) | 2;
+    burst2[-6] = 0x1152;
+    burst2[-5] = (local_a4[2] & 0xffffffe0u) | 2;
+    burst2[-4] = 0x1153;
+    burst2[-3] = (local_a4[3] & 0xffffffe0u) | 2;
+    burst2[-2] = 0x1154;
+    UInt32 rowPlusR10Masked = tileBits | (rowPlusR10 & 0xffffffe0u);
+    burst2[-1] = rowPlusR10Masked;
+
+    if (branchFlagA == 0 || branchFlagC != 0) {
+        burst2[0] = 0x1155;
+        burst2[1] = rowPlusR10Masked;
+        burst2[2] = 0x1156;
+        burst2[3] = tileBits | ((mipPitch + rowPlusR10) & 0xffffffe0u);
+    } else if (branchFlagBIsZero) {
+        burst2[0] = 0x1155;
+        burst2[1] = rowPlusR10Masked;
+        burst2[2] = 0x1156;
+        burst2[3] = tileBits | ((mipPitch + mipBasePlusRow) & 0xffffffe0u);
+    } else {
+        burst2[0] = 0x1155;
+        burst2[1] = tileBits | (mipBasePlusRow & 0xffffffe0u);
+        burst2[2] = 0x1156;
+        burst2[3] = tileBits | ((mipPitch + rowPlusR10) & 0xffffffe0u);
+    }
+
+    burst2[4] = 0x1157;
+    UInt32 rowPlusR11Masked = tileBits | ((rowSize + baseR11) & 0xffffffe0u);
+    burst2[5] = rowPlusR11Masked;
+    burst2[6] = 0x1158;
+    burst2[7] = rowPlusR11Masked;
+    burst2[8] = 0x1159;
+    burst2[9] = tileBits | ((mipPitch + rowSize + baseR11) & 0xffffffe0u);
+    burst2[10] = 0x115a;
+    UInt32 surf8a8UpdatedMasked = tileBits | (surf8a8Updated & 0xffffffe0u);
+    burst2[0xb] = surf8a8UpdatedMasked;
+    UInt32 burst2Tail;
+    if (branchFlagBIsZero) {
+        burst2[0xc] = 0x115b;
+        burst2[0xd] = surf8a8UpdatedMasked;
+        burst2Tail = ((pitchDiv + surf8a8Updated) & 0xffffffe0u) | tileBits;
+    } else {
+        burst2[0xc] = 0x115b;
+        burst2Tail = tileBits | ((pitchDiv + surf8a8Updated) & 0xffffffe0u);
+        burst2[0xd] = burst2Tail;
+    }
+    burst2[0xe] = 0x115c;
+    burst2[0xf] = burst2Tail;
+
+    UInt8 tailByte = U8At(mip, 0x591);
+
+    UInt32 *cursor1 = burst1 + 0x10;
+    if (burst1[0x10] != 0) {
+        UInt32 stride = burst1[0x10];
+        do {
+            cursor1[0] = 0x80000000u;
+            cursor1[1] = 0x80000000u;
+            UInt32 *entry = cursor1 + 2; /* real: cursor1 + cursor1[1] + 2, simplifies to cursor1+2 -
+                                             same self-consuming-sentinel-overflow idiom as
+                                             handle_opcode_3d's own documented finding, independently
+                                             re-confirmed here via direct disassembly instruction
+                                             tracing - see this function's own header comment. */
+            UInt32 val = (entry[0] != 0) ? (mipBase + mipPitch) : mipBase;
+            UInt32 entry1Orig = entry[1];
+            entry[0] = val & 0xffffffe0u;
+            entry[1] = ((tileBit1raw & 3u) << 0x11) | (tileBit0 << 0x10) | (entry1Orig & 0x3ffeu) |
+                       ((tailByte & 3u) << 0x13) | 0x1200000u;
+            cursor1 = cursor1 + stride + 2;
+            stride = cursor1[0];
+        } while (stride != 0);
+    }
+    *cursor1 = 0x80000000u;
+
+    UInt32 *cursor2 = burst2 + 0x10;
+    if (burst2[0x10] != 0) {
+        UInt32 stride = burst2[0x10];
+        do {
+            cursor2[0] = 0x80000000u;
+            cursor2[1] = 0x80000000u;
+            UInt32 *entry = cursor2 + 2; /* real: same overflow simplification as cursor1's loop above */
+            UInt32 val = (entry[0] != 0) ? (mipPitch + mipBasePlusRow) : mipBasePlusRow;
+            UInt32 entry1Orig = entry[1];
+            entry[0] = val & 0xffffffe0u;
+            entry[1] = ((tileBit1raw & 3u) << 0x11) | (tileBit0 << 0x10) | (entry1Orig & 0x3ffeu) |
+                       ((tailByte & 3u) << 0x13) | 0x1a00000u; /* real: different final constant than cursor1's loop */
+            cursor2 = cursor2 + stride + 2;
+            stride = cursor2[0];
+        } while (stride != 0);
+    }
+    *cursor2 = 0x80000000u;
+
+    record[0] = 0xc00c1000u;
+    return true;
+}
+
+/*
  * process_command_buffer - RESOLVED (issue #7) for every opcode this
  * pass has transcribed; STILL PARTIAL overall - see the explicit
  * fallthrough case below for exactly which seven opcodes remain (real,
@@ -2126,17 +2497,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             break;
 
         case 0x12000000u:
-            /* NOT YET TRANSCRIBED (issue #7's one remaining opcode - down
-             * from seven at the start of this pass; every other opcode
-             * this cluster has, including 0x17 just above, is now done -
-             * see the handlers above). Real, disassembly-verified target
-             * address, ready for a future pass: 0x35c04, ~750 lines - the
-             * single largest remaining gap in this whole function,
-             * comparable in scale to GL's own largest opcode. Has REAL,
-             * DISTINCT behavior on real hardware - this fallthrough to the
-             * natural-distance default is a KNOWN GAP, not a confirmed
-             * real no-op. Do not trust this dispatcher for this opcode
-             * value. */
+            if (!handle_opcode_12(this, record)) abortToZero = true;
             break;
 
         default:

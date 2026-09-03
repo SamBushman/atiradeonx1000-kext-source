@@ -398,7 +398,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 1 opcode remains)
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - FULLY RESOLVED (both 2D and DVD)
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -639,13 +639,39 @@ isolated function (via `createFunction` in a read-only headless pass) - PPC flow
 the entire shared-tail network again, producing an even larger, no cleaner result than the existing giant
 decompile; direct disassembly tracing remained the only real path for this opcode.
 
-**Still open, real disassembly-verified address on record** (in the dispatcher's own explicit
-not-yet-transcribed `case`, so a future pass can go straight to decompiling without re-deriving the
-mapping) - down to ONE opcode from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
-single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d). This
-dispatcher explicitly falls through to the natural-distance default for it, with a loud comment - a KNOWN
-GAP, not a confirmed real no-op; do not trust it for this opcode value on real hardware. Genuinely still a
-nontrivial remaining item, though the cluster is now down to just this one from the original ~18.
+**FINAL CONTINUATION - ISSUE #7 FULLY RESOLVED**: opcode 0x12 (`0x35c04`-`0x364c0`, ~750 real decompile
+lines) transcribed and wired, closing out the last remaining opcode in this whole issue. Two independent
+real transfer buffers (`record[1]`/`record[5]`-indexed), each GART-mapped and linked-list-spliced via the
+exact same real sequence `handle_opcode_18` already established (reused verbatim, not re-derived), feed an
+8-entry stride table that's split across two real, near-mirror 30-slot PM4 bursts (`record[6]`/`record[7]`-
+indexed) - each burst a `0x832`/`0x833` header, a 5-slot `0x1150`-`0x1154` block from the stride table, a
+4-way-branched `0x1155`/`0x1156` pair, a 4-slot `0x1157`-`0x115c` block from two more independent per-mip
+records, and a real caller-data-driven variable-length trailing loop.
+
+That trailing loop independently re-confirms (via direct disassembly instruction tracing, not decompile
+pointer-type inference) the exact same real 32-bit-address-arithmetic-overflow idiom `handle_opcode_3d`
+already documented (a self-consuming `0x80000000` sentinel immediately reused in pointer-index arithmetic
+that overflows back to 0) - this time inside a genuine multi-iteration loop rather than a one-time
+computation, a second convergent data point that this is a real, deliberate compiler pattern in this
+codebase, not a one-off curiosity.
+
+**A real false lead was chased and ruled out** while locating this opcode's true body: Ghidra's own C
+decompile renders a second, textually-adjacent-looking block right after 0x12's real content (a
+mode-2/3/other Y/UV formula using `boundSurface+0x7b8`/`+0x7c8`, superficially resembling
+`handle_opcode_14`/`16`/`17`'s own shape) that, by proximity and indentation, looks like it might continue
+being part of 0x12. Direct disassembly cross-check disproved this conclusively: 0x12's real address range
+(`0x35c04`-`0x364c0`) contains exactly one real shared-exit branch (`b 0x00039028`, at the very end), and
+zero occurrences of `b 0x0003903c` - the exit target that block's own decompile "goto" names. A full
+re-derivation of every real dispatch-table target in the whole enclosing function (done specifically to
+chase this down) showed every single one already accounted for by an already-committed handler, confirming
+that block is either a Ghidra rendering artifact of already-covered content or genuinely dead/unreachable
+code - either way, not a live gap. See `handle_opcode_12`'s own header comment for the full account; worth
+remembering as a concrete instance of this file's own established rule that decompile text/proximity is
+never sufficient on its own for structural claims about this giant function.
+
+**Issue #7 status: FULLY RESOLVED.** Every real DVD opcode this project found - 50 with genuine handlers,
+plus 4 confirmed real hard-abort paths with no other handler - now has real, disassembly-verified behavior
+wired into `process_command_buffer`'s dispatcher, closing out the last of the original ~18 open items.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 
