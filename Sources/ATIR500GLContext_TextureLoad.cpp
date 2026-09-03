@@ -154,10 +154,15 @@ extern void FUN_0002a864(void *transferBuffer);
 
 /*
  * Two more real accelerator vtable calls alloc_and_load_texture makes -
- * RESOLVED, issue #19: `ATIRadeonX1000::allocate_texture`/
- * `::deallocate_texture` (see ATIRadeonX1000.h). Called directly through
- * the typed `accelerator` member below rather than the raw vtable-offset
- * casts this project previously used here.
+ * RESOLVED, issue #19/#23: `ATIRadeonX1000::allocate_texture`/
+ * `::deallocate_texture` (see ATIRadeonX1000.h and
+ * Sources/ATIRadeonX1000_TextureVRAM.cpp for the real bodies). Called
+ * directly through the typed `accelerator` member below rather than the
+ * raw vtable-offset casts this project previously used here.
+ * `deallocate_texture`'s real signature CORRECTED, issue #23: takes a
+ * real `VendorTextureBuffer*` parameter - the two real call sites below
+ * were passing none at all, fixed to pass the real texture in scope at
+ * each site.
  */
 
 /*
@@ -248,7 +253,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
         bool retry = true;
         if (*reinterpret_cast<UInt32 *>(tex + 0x48) != 0) {
             if ((*reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(tex + 0x14) + 0x14) & 2) != 0) {
-                accelerator->deallocate_texture();
+                accelerator->deallocate_texture(reinterpret_cast<VendorTextureBuffer *>(tex)); /* real texture param, issue #23 correction */
                 UInt8 *mip = *reinterpret_cast<UInt8 **>(tex + 0x14);
                 mip[0x14] = 1;
                 *reinterpret_cast<UInt16 *>(mip + 0x28) = 0;
@@ -425,7 +430,7 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
             IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(boundTex + 0x50);
             evictSurfaceBuffers(surface, i);
         } else {
-            accelerator->deallocate_texture();
+            accelerator->deallocate_texture(reinterpret_cast<VendorTextureBuffer *>(boundTex)); /* real texture param, issue #23 correction */
         }
 
         UInt8 *mip = *reinterpret_cast<UInt8 **>(boundTex + 0x14);

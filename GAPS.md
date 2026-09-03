@@ -1064,16 +1064,24 @@ dozen real methods, a genuine free-list VRAM/GART pool allocator) - only 2 of it
 (the ones needed to fix the bug above), left as its own minimal shell (`Headers/ATIR500Memory.h`) rather
 than fully investigated; worth its own future issue.
 
-**Still deferred, substantial real functions** (issues #22/#23 stay open for these): `dealloc_surface`'s
+**Also resolved since** (issue #23): `waitForTimeStamp`/`sleepForTimeStamp`/`waitForConsumedIDCTTimeStamp`
+(`Sources/ATIRadeonX1000_TimeStampWait.cpp`) - three real, independently-compiled instances of one real
+hardware-fence busy-wait-with-periodic-block algorithm, differing only in which hardware timestamp they
+poll and which real per-call-site lazy-binding stub instances (12 more added to issue #15's catalog) they
+call for the shared timing/scheduling primitives (real identities INFERRED from argument shape and
+standard XNU convention, not confirmed). And `allocate_texture`/`deallocate_texture`
+(`Sources/ATIRadeonX1000_TextureVRAM.cpp`) - both real and dense, `allocate_texture` also cross-referencing
+issue #20's own unresolved GART-handle-object mystery (new data posted there). **Real signature bug caught
+and fixed**: `deallocate_texture`'s real body takes a `VendorTextureBuffer*` parameter - issue #19's own
+filing had it taking none, and both real call sites (`ATIR500GLContext_TextureLoad.cpp`) were passing
+nothing at all; fixed. Two more new real functions found and declared as a side effect:
+`HZMEM_Free`/`IOATIR500Accelerator::pageOffDataBuffer` (own bodies not decompiled).
+
+**Still deferred, substantial real functions** (issue #22 stays open for these): `dealloc_surface`'s
 subclass override, `alloc_surface_buffer`, `prepare_vram`'s subclass override, `resetFullScreen`'s
 subclass override (which itself surfaced ANOTHER real, uncatalogued Surface vtable slot, `+0x5e0`, called
-with real arguments `id, 0, 1` - not investigated), `shape_surface` (a real outlier, ~19KB of raw
-decompile - by far the largest single function this project has ever decompiled), `allocate_texture`/
-`deallocate_texture` (both real and dense, `allocate_texture` also cross-referencing issue #20's own
-unresolved GART-handle-object mystery, see above), and the `waitForTimeStamp`/`sleepForTimeStamp`/
-`waitForConsumedIDCTTimeStamp` family (all three share one real polling-loop algorithm against a real
-hardware timestamp counter, differing only in which register/offset they read and which real timing-helper
-stub addresses they call - a clean, economical transcription once done, just not done yet).
+with real arguments `id, 0, 1` - not investigated), and `shape_surface` (a real outlier, ~19KB of raw
+decompile - by far the largest single function this project has ever decompiled).
 
 ## 19. `map_transfer_to_GART`'s real gating condition - RESOLVED (as much as possible), issue #26
 

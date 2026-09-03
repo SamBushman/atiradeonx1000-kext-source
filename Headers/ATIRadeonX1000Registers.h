@@ -244,6 +244,14 @@ extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt3
 extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, UInt32 chainFlag, UInt32 tileDim, UInt32 size);
 
 /*
+ * HZMEM_Free - RESOLVED, issue #23 (found in `ATIRadeonX1000::deallocate_texture`'s own real
+ * body, `Sources/ATIRadeonX1000_TextureVRAM.cpp`). Same real 3-argument shape as
+ * `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial` above - the inverse operation, freeing a
+ * real HyperZ block back to the pool. Own body not independently decompiled this pass.
+ */
+extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+
+/*
  * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 /
  * FormatTableLookup_0x0004d2e4 - RESOLVED (issue #14). These are NOT three
  * independent tables - real structural finding: they're three adjacent
@@ -301,7 +309,7 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * own reopen comment for the full account of that correction.
  * ============================================================================
  *
- * Every one of the 28 real kext-local `FUN_XXXXXXXX` symbols this project
+ * Every one of the 40 real kext-local `FUN_XXXXXXXX` symbols this project
  * had called opaquely throughout (`FUN_00007424`, `FUN_000147f0`,
  * `FUN_00014810`, `FUN_00014820`, `FUN_00014850`, `FUN_00015870`,
  * `FUN_000158b0`, `FUN_000158c0`, `FUN_000158d0`, `FUN_000158e0`,
@@ -309,7 +317,10 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * `FUN_0002a864`, `FUN_000314c4`, `FUN_000334cc`, `FUN_0003577c`,
  * `FUN_000357ac`, `FUN_000390dc`, `FUN_0003911c`, `FUN_0003913c`,
  * `FUN_00044868`, `FUN_00044d74`, `FUN_0001a194`, `FUN_0001a274`,
- * `FUN_0001a2e4`, `FUN_0001a204`) is, in the real kext binary, a REAL
+ * `FUN_0001a2e4`, `FUN_0001a204`, `FUN_00025344`, `FUN_00025324`,
+ * `FUN_00025314`, `FUN_00025334`, `FUN_00025ac4`, `FUN_00025aa4`,
+ * `FUN_00025a94`, `FUN_00025ab4`, `FUN_00025644`, `FUN_00025624`,
+ * `FUN_00025614`, `FUN_00025634`) is, in the real kext binary, a REAL
  * LAZY-BINDING STUB TRAMPOLINE - not a local function this project failed
  * to decompile. (`FUN_00044d74` added by the issue #17 investigation -
  * `ATIR500Surface::back_resolve_fsaa_buffer`'s own call-site instance of
@@ -324,6 +335,14 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * `operator new(unsigned long)` rather than the same external target as
  * the other 24 - a real, distinct external symbol from this catalog's
  * other entries, still genuinely unidentified either way; does not
+ * change this issue's own open status. The 12 `FUN_000253xx`/
+ * `FUN_00025axx`/`FUN_000256xx` addresses added by the issue #23
+ * investigation - `waitForTimeStamp`/`sleepForTimeStamp`/
+ * `waitForConsumedIDCTTimeStamp`'s own real timing/scheduling primitive
+ * calls, 4 per variant (own per-call-site stub instance each,
+ * `Sources/ATIRadeonX1000_TimeStampWait.cpp` has the full account
+ * including this project's own INFERRED, not confirmed, guess at their
+ * real XNU-kernel-API identities from argument shape alone); does not
  * change this issue's own open status.)
  * Each one's real body is exactly the same real 4-instruction sequence
  * (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`), with LITERAL

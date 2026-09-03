@@ -151,6 +151,16 @@ public:
     void                 freeOneDataBuffer(VendorTextureBuffer *buffer);
     bool                 allocDataBufferBacking(VendorTextureBuffer *buffer);
 
+    /*
+     * pageOffDataBuffer - CONFIRMED real name (real mangled class-qualified
+     * decompile, found this pass - issue #23 - as a real call site in
+     * `ATIRadeonX1000::deallocate_texture`'s own body,
+     * `Sources/ATIRadeonX1000_TextureVRAM.cpp`). Own body not
+     * independently decompiled this pass; real signature INFERRED from
+     * that one real call site's own shape.
+     */
+    void pageOffDataBuffer(VendorTextureBuffer *buffer);
+
     /* find_surface_for_id - CONFIRMED real name (IOATIR500GLContext::
      * get_surface_info calls it), signature INFERRED. */
     void *find_surface_for_id(UInt32 surfaceID);
