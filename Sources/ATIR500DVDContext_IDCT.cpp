@@ -39,7 +39,7 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, sATIDVDIDCTParams *par
         return kIOReturnNotOpen;
     }
 
-    /* lock(accel) - real function FUN_000357ac. RESOLVED, issue #15: a
+    /* lock(accel) - real function FUN_000357ac. CONFIRMED (issue #15 investigation, issue still open): a
      * real lazy-binding external stub with no local body in this binary -
      * see the comprehensive finding at the end of
      * Headers/ATIRadeonX1000Registers.h. Real name still UNKNOWN. */

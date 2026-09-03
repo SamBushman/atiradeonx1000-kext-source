@@ -144,7 +144,7 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
  * list (accelerator+0x6d0 head / +0x69c sentinel - the SAME real
  * circular-doubly-linked-list shape get_texture uses on the texture
  * list at +0x600/+0x5dc, just a different instance for transfer
- * buffers). Real address 0x2a864. RESOLVED, issue #15: a real
+ * buffers). Real address 0x2a864. CONFIRMED (issue #15 investigation, issue still open): a real
  * lazy-binding external stub with no local body in this binary at all -
  * see the comprehensive finding at the end of
  * Headers/ATIRadeonX1000Registers.h.

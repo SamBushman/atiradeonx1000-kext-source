@@ -60,7 +60,7 @@ public:
      * initializes four swap-chain-related fields, sets the special
      * selector-20 methodDescs pointer described above, and finally calls
      * FUN_000286dc/ec (a lock-pair) around the base class's own start() -
-     * RESOLVED, issue #15: real lazy-binding external stubs with no local
+     * CONFIRMED (issue #15 investigation, issue still open): real lazy-binding external stubs with no local
      * body in this binary, real names UNKNOWN and unrecoverable without
      * live kxld resolution - see the comprehensive finding at the end of
      * `Headers/ATIRadeonX1000Registers.h`. stop() UNKNOWN - not decompiled

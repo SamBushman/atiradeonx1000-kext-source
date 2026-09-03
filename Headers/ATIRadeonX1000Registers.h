@@ -294,8 +294,11 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
 
 /*
  * ============================================================================
- * The ~24 opaque FUN_XXXXXXXX helpers - RESOLVED (issue #15), with a real
- * structural finding that changes what "resolved" means for this group.
+ * The ~24 opaque FUN_XXXXXXXX helpers - issue #15 STILL OPEN. Real
+ * narrowing found below, but the issue's actual ask (identifying what
+ * these functions are) is NOT satisfied - corrected after an earlier
+ * pass wrongly closed this issue; see GAPS.md section 12 and the issue's
+ * own reopen comment for the full account of that correction.
  * ============================================================================
  *
  * Every one of the 23 real kext-local `FUN_XXXXXXXX` symbols this project
@@ -352,17 +355,19 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * each - lock/unlock pairs, an alloc/free pair, transfer-buffer
  * GART-mapping helpers, atomic packed-counter/refcount helpers, and the
  * blit-state-packet template-copy helper (see each symbol's own
- * declaration site for its specific role) - satisfying this issue's own
- * stated alternate success criterion ("confirmed to be a real,
- * well-understood standard-library-style primitive... reasonable to
- * keep calling opaquely by name once identified"). What's now CLOSED
- * OUT rather than merely inferred is WHY no further static decompilation
- * work will ever recover more than this: there is no more to decompile
- * in this file. Recovering each stub's exact real symbol name (e.g.
- * confirming `FUN_000147f0` really is `IOLockLock` or equivalent) would
- * require either live kxld-resolved memory on real hardware, or a real
- * kernel/IOKit KPI export-symbol list to cross-reference against by
- * address - neither available in this sandboxed environment.
+ * declaration site for its specific role). This predates the current
+ * investigation and is NOT the same as satisfying issue #15's actual
+ * ask ("confirmed... once identified") - no real symbol name has been
+ * recovered for any of these 23 functions. What this pass DID establish
+ * with certainty is WHY no further static decompilation work will ever
+ * recover more than role-level inference: there is no local body to
+ * decompile in this file, full stop. Recovering each stub's exact real
+ * symbol name (e.g. confirming `FUN_000147f0` really is `IOLockLock` or
+ * equivalent) would require either live kxld-resolved memory on real
+ * hardware, or a real kernel/IOKit KPI export-symbol list to
+ * cross-reference against by address - neither available in this
+ * sandboxed environment. Issue #15 stays open until one of those paths
+ * is actually available, same standing as issue #6.
  */
 
 #endif /* ATIRADEONX1000_REGISTERS_H */

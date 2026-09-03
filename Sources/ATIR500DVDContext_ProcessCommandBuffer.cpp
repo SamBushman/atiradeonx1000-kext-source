@@ -179,7 +179,7 @@
  * `delete_texture` on it returning exactly 1, "this was the last
  * reference") and `FUN_0003913c` (the same real "ensure GART-mapped"
  * idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called opaquely -
- * RESOLVED, issue #15: both, and `FUN_000390dc` below, are real
+ * CONFIRMED (issue #15 investigation, issue still open): both, and `FUN_000390dc` below, are real
  * lazy-binding external stubs with no local body in this binary at all
  * (not a "left un-decompiled" gap) - see the comprehensive finding at
  * the end of `Headers/ATIRadeonX1000Registers.h`.

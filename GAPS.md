@@ -842,26 +842,36 @@ fixed-point. `DOUBLE_0004c3a8`'s real value also directly cross-confirms the lit
 `4503601774854144.0` magic-bias constant this project's DVD-context and `resolve_fsaa_buffer`
 transcriptions had already independently derived and used inline elsewhere - a nice convergent check.
 
-## 12. ~24 opaque `FUN_XXXXXXXX` helper functions - RESOLVED, issue #15
+## 12. ~24 opaque `FUN_XXXXXXXX` helper functions - STILL OPEN, issue #15 (real narrowing, not resolved)
 
-**RESOLVED, with a real finding that changes the shape of the answer.** These are NOT local functions
-this project failed to decompile - direct inspection showed every one of the 23 real kext-local addresses
-(a 24th, `FUN_0002c790`, turned out to be a real miscategorization - see below) is a real lazy-binding
-external-symbol stub trampoline: the identical real 4-instruction sequence
+**CORRECTED**: an earlier pass of this file marked this RESOLVED - that was premature and has been
+reverted (a user correction caught it). The real narrowing below is genuine, durable progress, but it does
+NOT satisfy this issue's own actual ask (identifying what these functions really are) - it only explains
+why that identification isn't achievable through static analysis alone. Same standing as issue #6: real
+progress, still open, needs hardware or an external symbol source to actually close.
+
+Real finding that changes the SHAPE of the remaining work: these are NOT local functions this project
+failed to decompile - direct inspection showed every one of the 23 real kext-local addresses (a 24th,
+`FUN_0002c790`, turned out to be a real miscategorization - see below, that correction stands) is a real
+lazy-binding external-symbol stub trampoline: the identical real 4-instruction sequence
 (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`) with LITERAL ZERO immediates in the static binary,
 not a body with any real logic to decompile at all.
 
-Confirmed this is genuinely unresolvable via static analysis (not just an unanalyzed local call) via three
-independent checks, matching the same rigor issue #6 already used on this same binary: (1) this kext has
-NO `LC_DYSYMTAB` at all - a real, structural fact about this specific Tiger/Leopard-era binary format, not
-an analysis gap; (2) the `__text` section's own per-section relocation table (`nreloc=11622`) was read
+Confirmed this is genuinely unresolvable via static analysis alone (not just an unanalyzed local call) via
+three independent checks, matching the same rigor issue #6 already used on this same binary: (1) this kext
+has NO `LC_DYSYMTAB` at all - a real, structural fact about this specific Tiger/Leopard-era binary format,
+not an analysis gap; (2) the `__text` section's own per-section relocation table (`nreloc=11622`) was read
 directly and produced nothing resolvable at these specific addresses; (3) Ghidra's own original
 full-analysis import recorded zero real references from any of these 23 addresses - the same tool that
 correctly resolves thousands of other real internal calls throughout this binary found nothing to resolve
-here either. Real target symbol identity requires live kxld-time resolution on real hardware, or a real
-kernel/IOKit KPI export list to cross-reference by address - neither available in this environment. Same
-real category of limitation as issue #6's accelerator vtable slots, now confirmed for a second, much
-larger group of symbols in this same binary.
+here either. **What's still genuinely missing, and what it would actually take to get it**: the real
+target symbol name/address for each stub, recoverable only via (a) a live kxld-resolved memory read on
+real hardware (the kernel patches these trampolines' immediates at kext-load time - reading that live
+memory then cross-referencing against a live kernel symbol map would give real names), or (b) a real
+kernel/IOKit KPI export-symbol list to cross-reference by address, neither available in this sandboxed
+environment. Same real category of limitation as issue #6's accelerator vtable slots, now confirmed for a
+second, much larger group of symbols in this same binary - and, like issue #6, staying open until one of
+those two paths actually closes it.
 
 **Real correction to this project's own issue #15 filing**: `FUN_0002c790` was miscategorized - that
 address belongs to a completely different, out-of-scope binary (`ATIRadeonX1000GLDriver.bundle`, a
@@ -871,8 +881,10 @@ correctly, since it was never really part of this binary.
 This project's own earlier role-level inferences (lock/unlock pairs, an alloc/free pair, transfer-buffer
 GART-mapping helpers, atomic refcount helpers, the blit-state-packet template-copy helper) remain the real,
 standing understanding for each - derived from real call-site analysis, independent of ever seeing these
-functions' own bodies - satisfying issue #15's own stated alternate success criterion. Full account and
-complete symbol list in the comprehensive note at the end of `Headers/ATIRadeonX1000Registers.h`.
+functions' own bodies. **This is NOT the same as satisfying issue #15's own "confirmed... once identified"
+bar** - role-level inference existed before this pass too; what this pass actually added is the structural
+proof that no further static decompilation can ever recover more than that, not an identification. Full
+account and complete symbol list in the comprehensive note at the end of `Headers/ATIRadeonX1000Registers.h`.
 
 ## 13. `IOATIR500Surface` was never split into a real base/subclass pair - issue #16
 

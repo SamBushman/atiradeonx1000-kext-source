@@ -69,7 +69,7 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
  * FUN_000286dc/ec and discard_command_buffer's own lock pair: each
  * real caller gets its own small lock/unlock function taking the real
  * commandLock pointer (this+0xd50's own +0x840 here) as sole argument,
- * rather than one shared helper. RESOLVED (issue #15): both are real
+ * rather than one shared helper. CONFIRMED (issue #15 investigation, issue still open): both are real
  * lazy-binding external stubs with no local body in this binary at all -
  * see the comprehensive finding at the end of
  * `Headers/ATIRadeonX1000Registers.h` for the full account (real names
@@ -210,7 +210,7 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * Confidence: CONFIRMED for the overall control flow and every real
  * offset/constant (all read directly from a fresh complete decompile,
  * cross-checked against the real disassembly for the parameter-count
- * question above). RESOLVED (issue #15): the four opaque helper calls
+ * question above). CONFIRMED (issue #15 investigation, issue still open): the four opaque helper calls
  * below are all real lazy-binding external stubs with no local body in
  * this binary at all, not a "left un-decompiled" gap - see the
  * comprehensive finding at the end of
@@ -525,7 +525,7 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  * on any single bit position here, same caveat this project already
  * gives its other densest functions.
  */
-/* RESOLVED (issue #15): all five below are real lazy-binding external
+/* CONFIRMED (issue #15 investigation, issue still open): all five below are real lazy-binding external
  * stubs with no local body in this binary - see the comprehensive
  * finding at the end of `Headers/ATIRadeonX1000Registers.h`. */
 extern void FUN_000158e0(void *lockPtr);
