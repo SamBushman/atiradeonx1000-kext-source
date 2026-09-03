@@ -28,6 +28,7 @@
 class ATIRadeonX1000;
 class IOATIR500GLContext;
 class IOTextureBuffer; /* real, opaque backing-store handle type - forward declared only, not reconstructed (Apple's own real type, same policy as IOAccelSurfaceData etc. below) */
+struct VendorTransferBuffer;
 
 /*
  * IOAccelSurfaceReadData / IOAccelSurfaceData / IOAccelSurfaceScaling -
@@ -310,8 +311,8 @@ public:
     virtual void   invalidate();                                   /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only) */
     virtual void   dealloc_surface(UInt32 surfaceIndex);            /* +0x5cc, real addr 0x12580 (base) / 0x3df70 (subclass override) - real mangled param type confirmed `unsigned long` */
     virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer); /* +0x5d0, real addr 0x3e230 on ATIR500Surface (subclass-only) - real mangled param type confirmed */
-    virtual void   prepare_vram(ATIR500SurfaceBuffer *buffer);      /* +0x5fc, real addr 0x110e0 (base) / 0x3dc50 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred */
-    virtual void   complete_vram(ATIR500SurfaceBuffer *buffer);     /* +0x600, real addr 0x110f0 (base) / 0x3c000 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred */
+    virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);      /* +0x5fc, real addr 0x110e0 (base) / 0x3dc50 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: real return type is a real, checked UInt32 (0/1), not void - both real bodies' own decompiles show explicit `return` statements with real values. */
+    virtual UInt32 complete_vram(ATIR500SurfaceBuffer *buffer);     /* +0x600, real addr 0x110f0 (base) / 0x3c000 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: same real non-void finding as prepare_vram above. */
 
     /*
      * resetFullScreen / is_flip_allowed - RESOLVED, issue #18 (found
@@ -344,6 +345,28 @@ public:
      */
     virtual void   shape_surface();                                          /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) */
     virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
+
+    /*
+     * map_transfer_to_GART - CONFIRMED real, distinct method on THIS
+     * class (real mangled receiver `IOATIR500Surface`, own real body NOT
+     * decompiled this pass) - found (issue #22) as a real call site in
+     * `ATIR500Surface::dealloc_surface`. A DIFFERENT real function from
+     * the already-fully-transcribed `IOATIR500GLContext::map_transfer_to_GART`
+     * (`Headers/IOATIR500GLContext.h`) - same real name, different real
+     * receiver class, confirmed via Ghidra's own class-qualified
+     * decompile naming for each, not assumed.
+     */
+    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+
+    /*
+     * allocAllSlaveSwapBuffers - CONFIRMED real name/address (real
+     * mangled symbol __ZN16IOATIR500Surface24allocAllSlaveSwapBuffersEmm,
+     * kext offset 0x11e50, found in this project's own earlier symbol
+     * sweep but never declared until now - issue #22). Own body NOT
+     * decompiled this pass; real return type INFERRED (checked against 0
+     * at its one known real call site, `dealloc_surface`).
+     */
+    UInt32 allocAllSlaveSwapBuffers(UInt32 param1, UInt32 param2);
 
 protected:
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */

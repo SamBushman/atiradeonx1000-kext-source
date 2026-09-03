@@ -1077,11 +1077,27 @@ filing had it taking none, and both real call sites (`ATIR500GLContext_TextureLo
 nothing at all; fixed. Two more new real functions found and declared as a side effect:
 `HZMEM_Free`/`IOATIR500Accelerator::pageOffDataBuffer` (own bodies not decompiled).
 
-**Still deferred, substantial real functions** (issue #22 stays open for these): `dealloc_surface`'s
-subclass override, `alloc_surface_buffer`, `prepare_vram`'s subclass override, `resetFullScreen`'s
-subclass override (which itself surfaced ANOTHER real, uncatalogued Surface vtable slot, `+0x5e0`, called
-with real arguments `id, 0, 1` - not investigated), and `shape_surface` (a real outlier, ~19KB of raw
-decompile - by far the largest single function this project has ever decompiled).
+**Also resolved since** (issue #22): `dealloc_surface`'s subclass override
+(`Sources/ATIR500Surface_VRAM.cpp`), `prepare_vram`/`complete_vram`'s subclass overrides
+(`Sources/ATIR500Surface_PrepareCompleteVRAM.cpp`), `alloc_surface_buffer`
+(`Sources/ATIR500Surface_AllocSurfaceBuffer.cpp`), and `resetFullScreen` base+subclass
+(`Sources/ATIR500Surface_ResetFullScreen.cpp`, which itself surfaced ANOTHER real, uncatalogued Surface
+vtable slot, `+0x5e0`, called with real arguments `id, 0, 1` - still not investigated). **Real return-type
+bug caught and fixed**: `prepare_vram`/`complete_vram` were both originally declared `void` - both real
+bodies (base and subclass, all four) return a real, checked `UInt32`. Two more new real functions found
+along the way (own bodies not decompiled): `IOATIR500Surface::allocAllSlaveSwapBuffers`,
+`IOATIR500Surface::map_transfer_to_GART` (a real, DIFFERENT function from
+`IOATIR500GLContext::map_transfer_to_GART`, same name/different receiver class, confirmed via Ghidra's own
+class-qualified decompile naming), and the real symbol `enforceInOrderExecutionIO`. Several real
+transcription mistakes were self-caught and fixed BEFORE commit this pass via careful line-by-line
+re-verification against each raw decompile - an `int*`-scaled pointer-arithmetic trap
+(`*(char*)((int*)accel+0x20)` is `accel+0x80`, not `accel+0x20`) that affected two functions, an inverted
+nested if/else in `resetFullScreen`, a base-vs-virtual dispatch mixup on an `is_flip_allowed()` call, and a
+dereferenced-pointer-vs-raw-offset mixup (`*(int*)(accel+0x860)` is a pointer VALUE, not the address
+`accel+0x860` itself).
+
+**Still deferred**: `shape_surface` (a real outlier, ~19KB of raw decompile - by far the largest single
+function this project has ever decompiled) - issue #22 stays open for this alone.
 
 ## 19. `map_transfer_to_GART`'s real gating condition - RESOLVED (as much as possible), issue #26
 

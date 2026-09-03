@@ -93,12 +93,16 @@ void ATIR500Surface::invalidate() {
     }
 }
 
-void IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer * /* real: unused */) {
-    /* CONFIRMED: real base-class body always succeeds, no side effects. */
+UInt32 IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer * /* real: unused */) {
+    /* CONFIRMED: real base-class body always succeeds, no side effects. RETURN TYPE
+     * CORRECTED, issue #22: real body is `return 1;`, not void. */
+    return 1;
 }
 
-void IOATIR500Surface::complete_vram(ATIR500SurfaceBuffer * /* real: unused */) {
-    /* CONFIRMED: real base-class body always succeeds, no side effects. */
+UInt32 IOATIR500Surface::complete_vram(ATIR500SurfaceBuffer * /* real: unused */) {
+    /* CONFIRMED: real base-class body always succeeds, no side effects. RETURN TYPE
+     * CORRECTED, issue #22: real body is `return 1;`, not void. */
+    return 1;
 }
 
 SInt32 IOATIR500Surface::is_flip_allowed() {
