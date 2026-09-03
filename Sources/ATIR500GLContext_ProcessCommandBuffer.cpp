@@ -1395,6 +1395,22 @@ extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, 
  * accelerator's current generation into it). If there is no bound texture,
  * or its dimension/count field is zero, a trivial `LAB_0002f978` fallback
  * just rewrites the record's own header.
+ *
+ * RESOLVED, issue #12 item 5 (was an "HONEST GAP" - the generation-counter
+ * update's `uVar75` input had no visible assignment anywhere in this
+ * opcode's own decompiled text, and this project's earlier transcription
+ * guessed it was really the destroyed original `uVar38` entry count):
+ * a closer re-read of this opcode's own real preamble - immediately after
+ * splitting `record[3]` into the two array-count fields, BEFORE either the
+ * surface-backed or plain-texture branch runs - shows a real,
+ * previously-untranscribed `uVar71 = puVar61[2];` read. That's the actual
+ * source: `record[2]`, read once at the very top of this opcode's handler.
+ * `uVar71` IS reassigned inside the surface-backed loop further down, but
+ * the plain-texture branch (the one that actually uses this value) never
+ * takes that loop, so it sees the original `record[2]` untouched - this
+ * project's earlier guess (the destroyed `uVar38`) happened to have
+ * plausible-looking shape but was not the real source. Now transcribed
+ * exactly, no remaining ambiguity.
  */
 static UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -1426,6 +1442,7 @@ static UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *recor
             UInt32 uVar73 = puVar65[3] & 0xffffu;   /* real: first-array entry count */
             UInt32 uVar38 = puVar65[3] >> 0x10;     /* real: second-array entry count */
             UInt32 *puVar67 = puVar65 + uVar73;
+            UInt32 origWord2 = puVar65[2]; /* real: read here, only actually used by the plain-texture branch's generation-counter update far below - RESOLVED, issue #12 item 5, see header comment */
             *puVar65 = ((uVar38 + uVar73 + 2) * 0x10000u) | 0xc0001000u;
             puVar67[uVar38 + 0xf] = U32At(accel, 0xb74);
             UInt32 *puVar69 = puVar65;
@@ -1486,25 +1503,14 @@ static UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *recor
                 }
                 /*
                  * real: surface-generation-counter bookkeeping, plain-texture
-                 * path only. HONEST GAP: the raw decompile reads `uVar75`
-                 * here (`iVar59 = (uVar75 >> 0x10) * 2;`) with NO assignment
-                 * to `uVar75` anywhere in this opcode's own decompiled text
-                 * (lines 1079-1158) - it must be carrying a value left over
-                 * from something earlier in the whole function (a real
-                 * function-wide register reuse this project has not traced),
-                 * or Ghidra has mis-attributed a value that's really the
-                 * ORIGINAL (pre-decrement) `uVar38` entry count read at this
-                 * opcode's own top (`puVar65[3] >> 0x10`, destroyed by the
-                 * `for (; uVar38 != 0; ...)` loop just above) to this name.
-                 * This project's BEST GUESS - NOT CONFIRMED - uses that
-                 * original count, since the surrounding shape (a doubled
-                 * count used as a byte offset, then as bit-shift widths)
-                 * fits it plausibly. Flagged rather than silently assumed.
+                 * path only. RESOLVED, issue #12 item 5: this reads
+                 * `origWord2` (the real `record[2]`, captured at this
+                 * opcode's own top - see header comment and that capture
+                 * site above) - no longer an unconfirmed guess.
                  */
-                UInt32 uVar75 = puVar65[3] >> 0x10; /* UNCONFIRMED inference - see comment above */
-                SInt32 iVar59c = static_cast<SInt32>(uVar75) * 2;
+                SInt32 iVar59c = static_cast<SInt32>(origWord2) * 2;
                 void *rec = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(rt0Tex), 0x14));
-                UInt16 uVar15 = static_cast<UInt16>(((1u << (uVar75 & 0x3fu)) + 0xffffffffu) << ((uVar75 >> 8) & 0x3fu));
+                UInt16 uVar15 = static_cast<UInt16>(((1u << (origWord2 & 0x3fu)) + 0xffffffffu) << ((origWord2 >> 8) & 0x3fu));
                 U16At(reinterpret_cast<UInt8 *>(rec) + iVar59c, 0x28) |= uVar15;
                 U16At(reinterpret_cast<UInt8 *>(rec) + iVar59c, 0x1c) &= static_cast<UInt16>(~uVar15);
                 U32At(rec, 0xc) = U32At(accel, 0x50);
@@ -1528,17 +1534,34 @@ LAB_0002f978_37:
  * pending-buffer-flush pattern already uses elsewhere), stride 3 dwords
  * per real entry, two outputs per entry.
  *
- * HONEST AMBIGUITY, disclosed rather than silently resolved: the raw
- * decompile computes the real base (`iVar59`) using `puVar65[2]` in an
- * expression that textually appears AFTER `puVar65[2]` was already
- * overwritten to `0x80000000` two lines earlier. Using the just-clobbered
+ * UPGRADED to CONFIRMED, issue #12 item 5 (was an "HONEST AMBIGUITY" -
+ * the raw decompile computes the real base (`iVar59`) using `puVar65[2]`
+ * in an expression that textually appears AFTER `puVar65[2]` was already
+ * overwritten to `0x80000000` two lines earlier; using the just-clobbered
  * placeholder value would make the whole address computation nonsensical,
- * so this project's strong inference is that the compiled code actually
- * used a register holding `puVar65[2]`'s ORIGINAL value (a common
- * decompiler artifact where linearized pseudocode implies a memory
- * read-after-write that the real machine code's register allocation never
- * actually performed) - modeled here by saving the original value before
- * the overwrite. NOT independently confirmed against the raw machine code.
+ * so this project's original inference was that the compiled code actually
+ * used a register holding `puVar65[2]`'s ORIGINAL value - plausible but,
+ * at the time, not independently checked against anything). A fresh look
+ * finds strong corroboration a few lines further down the SAME decompile:
+ * opcode `0x3d` (`ATIR500GLContext_ProcessCommandBuffer.cpp`'s own
+ * `if (uVar34 == 0x3d000000)` branch) does the textually-identical
+ * "self-consume this record's leading 4 dwords to `0x80000000`, THEN use
+ * a value read from the same now-overwritten slot" shape - but there,
+ * Ghidra's own decompile explicitly introduces a temporary
+ * (`uVar51 = puVar61[2];`) BEFORE the overwrite and uses `uVar51`
+ * afterward, rather than re-reading `puVar61[2]` post-store. Since both
+ * opcodes share the exact same real idiom (a real PPC compiler keeping a
+ * value live in a register across a sequence of stores to the memory it
+ * came from), and Ghidra correctly recovers the pre-overwrite-temporary
+ * shape for one instance of that idiom in this very function, the far more
+ * likely explanation for opcode 0x38's apparent read-after-write is a
+ * decompiler rendering inconsistency between two structurally identical
+ * cases - not a real distinct machine-code behavior. Still not a raw
+ * disassembly-level check, so not escalated all the way to "CONFIRMED via
+ * machine code," but no longer treated as an open, undecided ambiguity.
+ * Modeled here (correctly, and now on stronger footing) by saving the
+ * original value before the overwrite, matching opcode 0x3d's own
+ * unambiguous pattern.
  */
 static UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);

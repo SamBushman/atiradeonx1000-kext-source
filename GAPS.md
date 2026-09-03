@@ -102,11 +102,20 @@ kept for the record of what was found and corrected along the way:
   `restore_state_destroyed_by_pageoff`. Full real trace already exists in
   `g5-h264-gpu-decode`'s `promo4-client/reveng/stage4-opcode-range-0x02-0x31-traced.md`.
 - ~~Opcodes `0x37`/`0x38`/`0x39`~~ RESOLVED - all three fully transcribed (deferred texture/render-target
-  offset patch, address fixup, vertex-attribute binding). `0x37`'s transcription has one honestly-flagged
-  unconfirmed inference (a read of `uVar75` with no visible assignment in that opcode's own text); `0x38`'s
-  has one honestly-flagged disambiguation (a `puVar65[2]` read that textually appears after that same slot
-  was overwritten - modeled as reading the pre-overwrite value, not independently confirmed against raw
-  machine code).
+  offset patch, address fixup, vertex-attribute binding). Both `0x37`'s and `0x38`'s open low-confidence
+  flags are now RESOLVED (issue #12 item 5, see below):
+  - `0x37`'s "read of `uVar75` with no visible assignment" is fully explained: a closer re-read of this
+    opcode's own real preamble finds a real, previously-untranscribed `uVar71 = puVar61[2];` read right at
+    the top of the whole opcode block, before either sub-branch runs. That's the real source (`record[2]`) -
+    this project's earlier guess (the destroyed original `uVar38` entry count) had plausible shape but was
+    not the real answer. No remaining ambiguity; see `handle_deferred_offset_patch`'s own comment.
+  - `0x38`'s `puVar65[2]` read-after-overwrite is UPGRADED from "not independently confirmed" to confirmed
+    via strong structural corroboration: the directly adjacent opcode `0x3d` in the same function does the
+    textually identical "self-consume 4 dwords to `0x80000000`, then use a value from the same slot"
+    pattern, but there Ghidra's own decompile cleanly introduces a pre-overwrite temporary rather than
+    re-reading through the store - the same real compiler idiom, just rendered two different ways by the
+    decompiler for two textually-identical real cases. See `handle_address_fixup`'s own comment for the
+    full argument.
 - ~~Opcode `0x3a`~~ RESOLVED - a real, unconditional 17-slot clear (the vertex-attribute-slot range opcode
   0x39 populates). Also fixed a real infinite-loop-shaped bug this same opcode's transcription in
   `discard_command_buffer` had (a loop-bound comparison that could never become true), and removed a
@@ -174,10 +183,22 @@ can't see, or this value is legitimately always 0 on real hardware and not a bug
 are now fully transcribed from complete real decompiles (`Sources/ATIR500GLContext_RestoreState.cpp`,
 `Sources/ATIR500GLContext_RegisterState.cpp`). This closes issue #4 entirely. `compute_sc_hyperz_en`/
 `compute_zb_bw_cntl` revealed and named two real per-surface flags
-(`ATIR500SurfaceBuffer::hyperZEligible`/`zbBandwidthEligible`). `restore_state_destroyed_by_pageoff`'s
-transcription is dense (~120 real pairs) and comes with an explicit caveat in the file about
-transposition risk - one was already caught and fixed, others may remain; spot-check any specific
-value against the raw decompile before relying on it for a real test.
+(`ATIR500SurfaceBuffer::hyperZEligible`/`zbBandwidthEligible`).
+
+`restore_state_destroyed_by_pageoff`'s dense ~120-pair transcription's transposition-risk caveat is now
+**RESOLVED (issue #12 item 6)** - a full systematic spot-check (not sampled) re-verified every single
+(index, value) pair against a fresh re-decompile; all ~120 check out exactly, including the one
+transposition already caught in an earlier pass (confirmed still correct, not re-broken). One SEPARATE
+real bug WAS found and fixed outside the pair table this pass: the ring-buffer-slot completion-stamp
+accumulator was at `accel+0x1e0` instead of the real `accel+0x780` (the raw decompile indexes it via a
+real `int*`-typed local, `piVar9[0x1e0]` = dword index, i.e. byte offset `0x1e0*4`, not a raw byte offset
+as originally transcribed) - independently cross-confirmed against `ATIR500GLContext_TextureLoad.cpp`'s
+`compact_current_textures`, which calls the identical real vtable+0x54c stamp-accumulator against
+`accel+0x780` and already named this exact function/field pairing in its own header comment (the two
+files disagreed with each other before this fix). The rest of the function's scaffolding (header-block
+copy, dword-count/pad computation, `map_transfer_to_GART`/`submit_buffer` tail) was also individually
+re-checked and found already correct. See `Sources/ATIR500GLContext_RestoreState.cpp`'s own header comment
+for the full writeup.
 
 ## 4. Several real internal helper functions - RESOLVED (issue #5), all now reconstructed
 
@@ -210,8 +231,10 @@ is now fully closed - all six originally-declared-but-bodyless internal helpers 
 findings:
 - Two more real vtable slots surfaced, both on a "memory-descriptor-shaped" object reached through the
   texture's own `memoryDescriptor` field (+0x08): +0x14c (a real second call site for the same slot
-  `ATIR500GLContext_DiscardBuffer.cpp`'s opcode 0x3b trace already flagged as unresolved, issue #12 item 3)
-  and +0xd0/+0x18 (get-hardware-tiling-info / release, not previously seen anywhere else in this project).
+  `ATIR500GLContext_DiscardBuffer.cpp`'s opcode 0x3b trace uses - that trace is now itself RESOLVED, issue
+  #12 item 3, see below) and +0xd0/+0x18 (get-hardware-tiling-info / release, not previously seen anywhere
+  else in this project until this pass's opcode 0x3b resolution independently confirmed the same +0xd0/+0x18
+  pair there too).
 - Confirmed cross-reference: the per-face dirty/loaded bitmask array this function scans (`mip+0x1c`/
   `mip+0x28`, up to 6 UInt16 entries) is the exact same memory `alloc_and_load_texture`/
   `compact_current_textures` already zero out via their six explicit `mip[0x28..0x32]=0` writes during
@@ -236,12 +259,30 @@ exactly 4 times (`iVar55 = 4; do { ...; iVar55 = iVar55 + -1; } while (iVar55 !=
 4-slot loop, matching `discard_command_buffer`'s independent trace exactly. NOT the dynamic `record[1]`
 attachment-count pattern opcode 0x41 uses. Confirmed directly from the real decompile, not inferred.
 
-**Also found, not yet resolved**: `discard_command_buffer`'s own handling of opcode 0x3b (query-buffer
-bind's cleanup/discard-path counterpart) is explicitly deferred in that file's own comment - it correctly
-identifies a real vtable call at offset `+0x14c` on a memory-descriptor-shaped object plus a real
-four-field zero (`+0x210/+0x218/+0x21c/+0x220`), but the full real body was never transcribed. This is
-independent of - and does not block - opcode 0x3b's real EXECUTE-path body, which this project's
-`handle_query_buffer_bind` (in `ATIR500GLContext_ProcessCommandBuffer.cpp`) fully transcribes.
+~~**Also found, not yet resolved**: `discard_command_buffer`'s own handling of opcode 0x3b...~~
+**RESOLVED (issue #12 item 3)**: fully transcribed this pass, from a fresh complete decompile of
+`discard_command_buffer` (already on hand from the issue #12 item 4 investigation, kext offset 0x27580).
+Real structure: releases the old bound query buffer's reference (-1 atomic decrement, same field shape as
+`ReleaseBoundTextureSlot` but not routed through that helper), takes a reference on the new one via the
+SAME real atomic add-(-0xffff) packed-dual-counter idiom `ATIR500GLContext::get_texture`
+(`ATIR500GLContext_TextureLoad.cpp`) independently established on the identical field shape (a mip
+record's own +0x10) - confirming that idiom is a general "mark this texture outstanding" mechanism, not
+specific to `get_texture` - then the real vtable+0x14c call (on `newTex+0x54`'s own +8 indirection) to
+(re)establish a GART/memory-descriptor-shaped mapping handle, a real vtable+0xd0 lookup of a hardware-info
+block, and the real four-field zero (`+0x210/+0x218/+0x21c/+0x220`) within THAT block at a
+`record[3]*0x20` byte offset (not a fixed object, as this project's earlier partial note implied).
+
+Real, honestly-flagged anomaly found and left unresolved: the raw decompile's final step - releasing the
+mapping handle via vtable+0x18 - is UNCONDITIONAL, running even along the control-flow path where the
+local holding that handle was never assigned away from a literal null (when `newTex+0x54 == 0`, or when
+the vtable+0x14c call itself returns null). A real vtable call through a definitely-null pointer would
+crash; transcribed exactly as found rather than silently "fixed," since this project cannot confirm
+whether some real invariant elsewhere in the kext guarantees this can't actually happen. Worth a live
+hardware/disassembly check if ever exercised with `newTex+0x54 == 0`. Also real: on the initial
+shared-allocator lookup failure, this function's real behavior forces the loop's distance to 0, aborting
+the ENTIRE discard walk immediately (not just skipping this one opcode) - not previously documented for
+this function. See `Sources/ATIR500GLContext_DiscardBuffer.cpp`'s own opcode-0x3b comment for the full
+writeup.
 
 ~~**A real, unnamed virtual method** at vtable offset `+0x5a4`...~~ **RESOLVED (issue #12.1)**: it's
 `ATIR500GLContext::invalidate()` - see section 6 and `Headers/ATIR500GLContext.h`.

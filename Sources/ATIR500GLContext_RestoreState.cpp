@@ -32,16 +32,38 @@
  *   reappear here exactly as ATIRadeonX1000Registers.h already documents
  *   (RB3D_COLOR_CHANNEL_MASK/RB3D_ROPCNTL, real aliased register indices).
  *
- * HONEST CAVEAT: this is ~120 real (index, value) pairs transcribed by
- * hand from a linear decompile where the real source reads its local
- * `uVar5` variable one statement ahead of where it's consumed (a real
- * compiler-scheduling artifact, not this project's choice) - a genuine
- * transposition risk. One transposition (destination offsets 0x8c/0x310)
- * was caught and fixed during this same pass; others may remain. Anyone
- * relying on a *specific* register value here for a real hardware test
- * should re-check that one pair against the raw decompile
- * (kext offset 0x2af10) before trusting it, rather than assuming the
- * whole block is error-free just because most of it is.
+ * RESOLVED, issue #12 item 6 - systematic spot-check complete. Every one
+ * of the ~120 (index, value) pairs below was individually re-verified,
+ * pair by pair, against a fresh Ghidra headless re-decompile of this exact
+ * function (kext offset 0x2af10) - not sampled, all of them. One
+ * transposition (destination offsets 0x8c/0x310) was already caught and
+ * fixed in an earlier pass and is CONFIRMED still correct (not re-broken).
+ * No further transposition errors were found in the (index, value) table
+ * itself - all ~120 pairs check out exactly against the raw decompile.
+ *
+ * One real, separate, CONFIRMED bug WAS found and fixed this pass, outside
+ * the (index, value) table: the ring-buffer-slot bookkeeping's completion-
+ * stamp accumulator was reading/writing `accel + 0x1e0` when the real
+ * value is `accel + 0x780` (the raw decompile indexes it as `piVar9[0x1e0]`
+ * on a real `int *`-typed local - a DWORD index, `0x1e0 * 4 = 0x780` bytes,
+ * not a raw byte offset as this project's earlier transcription treated
+ * it). Independently cross-confirmed against
+ * `ATIR500GLContext_TextureLoad.cpp`'s `compact_current_textures`, which
+ * calls the exact same real vtable+0x54c stamp-accumulator against
+ * `accel+0x780` - that file's own header comment already named this
+ * function/field pairing, meaning the two files disagreed with each other
+ * before this fix. See that accumulator's own comment below for the full
+ * writeup. The rest of the function's scaffolding (the header-block copy,
+ * the dword-count/pad computation, the `map_transfer_to_GART`/
+ * `submit_buffer` tail) was also individually re-checked against the raw
+ * decompile this pass and found to already match exactly.
+ *
+ * Original honest caveat, now addressed by the above: this is ~120 real
+ * (index, value) pairs transcribed by hand from a linear decompile where
+ * the real source reads its local `uVar5` variable one statement ahead of
+ * where it's consumed (a real compiler-scheduling artifact, not this
+ * project's choice) - a genuine transposition risk in principle, now
+ * checked in full rather than spot-sampled.
  */
 
 #include "../Headers/ATIR500GLContext.h"
@@ -80,15 +102,27 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
      * rotating slot index (this+0x28c, mod 16) and accumulates a real
      * completion-stamp delta via a vtable call at accel+0x54c (the same
      * offset already confirmed elsewhere as a fence/stamp-accumulator
-     * call). */
+     * call).
+     *
+     * CORRECTED, issue #12 item 6 (systematic spot-check pass): the raw
+     * decompile accesses this accumulator as `piVar9[0x1e0]`, where
+     * `piVar9` is declared `int *` - a DWORD-indexed access, i.e. real
+     * BYTE offset `0x1e0 * 4 = 0x780`, not `0x1e0`. This project's earlier
+     * transcription carried the raw `0x1e0` straight over as if it were
+     * already a byte offset - a real, confirmed bug, caught by this
+     * cross-reference: `ATIR500GLContext_TextureLoad.cpp`'s
+     * `compact_current_textures` independently calls the SAME real
+     * vtable+0x54c stamp-accumulator against `accel+0x780` (that file's
+     * own header comment already cited this exact function/field pairing -
+     * the two disagreed with each other before this fix). */
     UInt32 slot = (*reinterpret_cast<UInt32 *>(self + 0x28c) + 1) & 0xf;
     *reinterpret_cast<UInt32 *>(self + 0x28c) = slot;
     UInt8 *slotRecord = self + slot * 0x18;
-    UInt32 accelAccum = *reinterpret_cast<UInt32 *>(accel + 0x1e0);
+    UInt32 accelAccum = *reinterpret_cast<UInt32 *>(accel + 0x780);
     typedef UInt32 (*VTableCall0x54c)(void *, UInt32);
     UInt32 delta = (reinterpret_cast<VTableCall0x54c>(*reinterpret_cast<UInt32 **>(accel))[0x54c / 4])(
         accel, *reinterpret_cast<UInt32 *>(slotRecord + 0x11c));
-    *reinterpret_cast<UInt32 *>(accel + 0x1e0) = accelAccum + delta;
+    *reinterpret_cast<UInt32 *>(accel + 0x780) = accelAccum + delta;
 
     /* real 8-dword header block copy from this+0x108 into the new slot's
      * own header area (this+slot*0x18+0x120) */

@@ -30,12 +30,17 @@
  *   embedded address-fixup loop (shape-identical to opcode 0x38's) this
  *   cleanup-only trace has no way to see. Not a contradiction between the
  *   two traces - just two different real views of the same opcode.
- * - Real detail on opcode 0x3b (texture-slot swap) not previously this
- *   precise: it calls a real vtable method at offset 0x14c on a memory-
- *   descriptor-shaped object to (re)establish a real backing mapping, and
- *   zeroes four fields at a computed offset (+0x210/+0x218/+0x21c/+0x220 -
- *   the same field cluster opcode 0x3b's kernel bind-side handler already
- *   partially named in this project's earlier work) before releasing it.
+ * - Opcode 0x3b's cleanup-path counterpart to `handle_query_buffer_bind` -
+ *   RESOLVED, issue #12 item 3, fully transcribed (was previously deferred
+ *   as a stub with only a partial description). Calls a real vtable method
+ *   at offset 0x14c on a memory-descriptor-shaped object to (re)establish a
+ *   real backing mapping (the same real slot `ATIR500GLContext::load_texture`
+ *   independently calls), and zeroes a real four-field cluster
+ *   (+0x210/+0x218/+0x21c/+0x220) within the resulting hardware-info block
+ *   before releasing the mapping handle. See that opcode's own branch below
+ *   for the full transcription and an honestly-flagged real anomaly (an
+ *   apparently-unconditional release call through a pointer that can be
+ *   null on the raw decompile's own control-flow shape).
  */
 
 #include "../Headers/ATIR500GLContext.h"
@@ -186,10 +191,118 @@ void ATIR500GLContext::discard_command_buffer(void) {
                 }
             }
         } else if (opcode == 0x3b000000) {
-            /* real texture-slot swap with backing-store re-establishment -
-             * see file header note. Full transcription deferred (real
-             * vtable-driven backing-mapping setup, not just a refcount
-             * touch) - see GAPS.md. */
+            /*
+             * RESOLVED, issue #12 item 3. Full real transcription of opcode
+             * 0x3b's discard/cleanup-path counterpart to the execute path's
+             * handle_query_buffer_bind (ATIR500GLContext_ProcessCommandBuffer.cpp) -
+             * same shared-allocator lookup-table guard shape as that
+             * function. Real structure: release the old bound query
+             * buffer's reference (-1 atomic decrement, same field shape
+             * ReleaseBoundTextureSlot uses but not routed through that
+             * helper - this real function operates on the query slot
+             * directly), take a reference on the new one via the SAME real
+             * atomic add-(-0xffff) packed-dual-counter idiom
+             * ATIR500GLContext::get_texture (ATIR500GLContext_TextureLoad.cpp)
+             * already established on this identical field shape (a mip
+             * record's own +0x10) - CONFIRMS that idiom is a general "mark
+             * this texture outstanding" mechanism, not specific to
+             * get_texture. Then a real vtable+0x14c call on a related
+             * object (newTex+0x54, one more indirection through +8) to
+             * (re)establish a GART/memory-descriptor-shaped mapping handle -
+             * the SAME real vtable slot ATIR500GLContext::load_texture's
+             * own step 2 independently calls (see that function's header
+             * comment) - on success, looks up a real per-record hardware-
+             * info block via vtable+0xd0 and zeros a 4-field cluster within
+             * it at a `record[3]*0x20` byte offset (this project's earlier
+             * partial note on this opcode's `+0x210/+0x218/+0x21c/+0x220`
+             * cluster - now placed correctly, on the hwInfo block, not a
+             * fixed object).
+             *
+             * Real, honestly-flagged anomaly, NOT resolved: the raw
+             * decompile's FINAL step - releasing the handle via vtable+0x18 -
+             * is UNCONDITIONAL, running even when `newTex+0x54` was zero or
+             * the vtable+0x14c call itself returned null, in which case the
+             * local holding the handle was never assigned away from a
+             * literal null. A real vtable call through a definitely-null
+             * pointer would crash. Transcribed exactly as found rather than
+             * "fixed" with a defensive null check this project cannot
+             * confirm the real driver actually has - plausibly some real
+             * invariant elsewhere in this kext guarantees `newTex+0x54` is
+             * always nonzero by the time a discard can reach this opcode
+             * (e.g. always set by this same opcode's execute-path bind
+             * before a matching discard could ever be issued), but that is
+             * NOT independently confirmed. Worth a live hardware/
+             * disassembly check if this path is ever exercised with
+             * `newTex+0x54 == 0`. Also NOTE: the raw decompile renders the
+             * vtable+0xd0 call with zero arguments, unlike load_texture's
+             * own vtable+0xd0 call (which does pass the receiver) - treated
+             * here as the same Ghidra calling-convention-inference artifact
+             * load_texture's own header comment already flags for this
+             * exact vtable slot ("no extra args"), not a real different
+             * signature; the receiver is still passed as the sole arg.
+             *
+             * Also real, and matching the raw decompile precisely: on the
+             * initial shared-allocator lookup failure (the SAME guard shape
+             * handle_query_buffer_bind's execute path has), this function's
+             * real behavior is to force `distance` to 0 - which, per this
+             * function's own shared loop tail below, means the ENTIRE
+             * discard walk aborts immediately rather than skipping just
+             * this one opcode. A real, deliberate "abort processing this
+             * discard buffer" behavior, not previously documented for this
+             * function.
+             */
+            UInt32 recordSlot3 = record[3];
+            if (U32At(sharedAllocator, 0x14) <= record[1] ||
+                U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4) == 0) {
+                distance = 0;
+            } else {
+                void *newTex = reinterpret_cast<void *>(
+                    U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4));
+
+                void *oldQuery = reinterpret_cast<void *>(U32At(self, 0x32c));
+                if (oldQuery != nullptr) {
+                    void *oldRec = reinterpret_cast<void *>(U32At(oldQuery, 0x14));
+                    UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(oldRec) + 0x10);
+                    if (DecrementRefAndWasLast(countField)) {
+                        IOATIR500Shared *shared = reinterpret_cast<IOATIR500Shared *>(sharedAllocator);
+                        (void)shared;
+                        /* real: IOATIR500Shared::delete_texture(shared, oldQuery); */
+                    }
+                }
+
+                /* real atomic add of -0xffff on newTex's mip record +0x10 -
+                 * SAME packed dual-counter idiom as get_texture's own
+                 * atomic decrement-by-0xffff on the identical field shape -
+                 * see ATIR500GLContext_TextureLoad.cpp's header comment. */
+                void *newRec = reinterpret_cast<void *>(U32At(newTex, 0x14));
+                __sync_fetch_and_add(reinterpret_cast<SInt32 *>(reinterpret_cast<UInt8 *>(newRec) + 0x10),
+                                      static_cast<SInt32>(-0xffff));
+
+                U32At(self, 0x32c) = reinterpret_cast<UInt32>(newTex);
+
+                void *memHandle = nullptr;
+                if (U32At(newTex, 0x54) != 0) {
+                    void *relatedObj = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(newTex, 0x54)), 8));
+                    extern int _ASICSupportsAGP;
+                    typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
+                    memHandle = (*reinterpret_cast<PrepareMappingFn *>(
+                        *reinterpret_cast<void ***>(relatedObj) + (0x14c / 4)))(relatedObj, _ASICSupportsAGP, 0, 1, 0, 0);
+                    if (memHandle != nullptr) {
+                        typedef UInt32 *(*GetHwInfoFn)(void *);
+                        UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(
+                            *reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);
+                        UInt8 *dest = reinterpret_cast<UInt8 *>(hwInfo) + recordSlot3 * 0x20;
+                        *reinterpret_cast<UInt32 *>(dest + 0x21c) = 0;
+                        *reinterpret_cast<UInt32 *>(dest + 0x210) = 0;
+                        *reinterpret_cast<UInt32 *>(dest + 0x220) = 0;
+                        *reinterpret_cast<UInt32 *>(dest + 0x218) = 0;
+                    }
+                }
+                /* real: unconditional vtable+0x18 release, even if
+                 * memHandle is still null here - see anomaly note above. */
+                typedef void (*ReleaseFn)(void *);
+                (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
+            }
         } else if (opcode == 0x3d000000) {
             /* real: gated on a magic constant (0x132) matching this
              * record's own type tag, forwards to
