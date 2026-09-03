@@ -392,31 +392,26 @@ previously-undocumented real fields on `ATIR500SurfaceBuffer` (`+0x30`/`+0x36`/`
 (`SamplesTableLookup`, `ATIRadeonX1000Registers.h`), matching the existing `FormatTableLookup_0x0004d2e0/
 dc/e4` convention.
 
-## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
+## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - FULLY RESOLVED, issue #6
 
-**Names/purpose effectively RESOLVED**, and by a completely different, more reliable method than decoding
-the vtable itself: `newUserClient`'s four real vtable slots (`+0x5d4/0x5d8/0x5dc/0x5e0`) map to
-`createSurfaceContext`/`create2DContext`/`createDVDContext`/`createGLContext` respectively - type 0
-(Surface) and type 1 (GL) are CONFIRMED via real `IOServiceOpen(...)` call sites in this project's own
-downloaded userspace binaries (`_gldAttachDrawable`, `_gldCreateContext`); type 2 (2D) and type 3 (DVD)
-are INFERRED by elimination. See `Headers/IOATIR500Accelerator.h`'s updated declarations.
+**Both the names/purpose AND the raw numeric values are now resolved.** Names: `newUserClient`'s four
+real vtable slots (`+0x5d4/0x5d8/0x5dc/0x5e0`) map to `createSurfaceContext`/`create2DContext`/
+`createDVDContext`/`createGLContext` respectively - type 0 (Surface) and type 1 (GL) CONFIRMED via real
+`IOServiceOpen(...)` call sites in this project's own downloaded userspace binaries, type 2 (2D) and type
+3 (DVD) INFERRED by elimination.
 
-**The four words' raw numeric CONTENTS remain unresolved** - a real, exhaustively-investigated dead end
-this pass, not the `PPC_RELOC_LOCAL_SECTDIFF` (type 15) tooling gap originally logged. A Ghidra headless
-script parsing the raw Mach-O structures directly (not just the higher-level analyzed Program - see
-`Headers/IOATIR500Accelerator.h`'s full writeup) found the real relocation entries are type 0
-(`GENERIC_RELOC_VANILLA`), non-scattered, non-external - ruling out SECTDIFF entirely. Also ruled out:
-plain absolute address (the raw values point into unrelated data - a video-mode table, and this class's
-own destructor), section ordinal (binary has only 10 sections total, values are in the hundreds of
-thousands), symbol-table index (values mostly out of bounds for the 1215-entry symbol table), a parsing
-bug (manual raw-byte reads agree byte-for-byte with Ghidra's own parse), and a separate `LC_DYSYMTAB`
-local-relocation table (confirmed absent from this file). Leading hypothesis, unconfirmed: these slots
-were never locally overridden in this compiled object and only ever got their real addresses via Apple's
-kext-load-time "vtable patching" (`kxld`) against the live kernel - if true, the real numeric values may
-not exist anywhere in this static file at all, and only a live kxld-relocated memory read on real
-hardware could recover them. Lower priority now than when this issue was filed, since the actually
-load-bearing information (the real names above) is already solid, and a numeric value can't be verified
-without a real compile+link anyway (see gap 1).
+**The key correction that resolved the raw values**: every earlier attempt read these four words off
+`IOATIR500Accelerator`'s OWN vtable (`__ZTV20IOATIR500Accelerator`, `0x46970`) and correctly proved that
+copy is genuine linker placeholder content (not `PPC_RELOC_LOCAL_SECTDIFF` as first logged, but real,
+exhaustively-ruled-out `GENERIC_RELOC_VANILLA` placeholder bytes - ruled out plain absolute address,
+section ordinal, symbol-table index, a parsing bug, and a separate `LC_DYSYMTAB` table). True, but beside
+the point: no real object in this driver is ever a bare `IOATIR500Accelerator` - every real instance is
+the concrete `ATIRadeonX1000` subclass, which has its OWN real vtable
+(`__ZTV14ATIRadeonX1000`, `0x491c8`) that DOES locally override all four slots. Reading that vtable
+directly gives real values that independently CONFIRM the existing name mapping exactly:
+`+0x5d4`→`ATIRadeonX1000::new_surface` (`0x1a140`), `+0x5d8`→`new_2d_context` (`0x1a220`),
+`+0x5dc`→`new_dvd_context` (`0x1a290`), `+0x5e0`→`new_gl_context` (`0x1a1b0`). See
+`Headers/IOATIR500Accelerator.h`/`Headers/ATIRadeonX1000.h`'s updated declarations for the full account.
 
 ## 6. The base classes' own construction/initialization - RESOLVED (issue #10)
 
@@ -948,3 +943,74 @@ that file was re-verified line-by-line against its own raw decompile and found a
 Also found: `FUN_00044d74` (this function's blit-state-packet-template-copy call) is a real, separate
 lazy-binding stub instance - added to issue #15's stub catalog (`ATIRadeonX1000Registers.h`); does not
 change that issue's own open status.
+
+## 15. `IOATIR500Surface`'s remaining raw-vtable-offset calls - RESOLVED, issue #18
+
+12 real, distinct `IOATIR500Surface`/`ATIR500Surface` vtable slots (8 in the original filing, 4 more
+found while wiring the rest in) resolved via the same technique that resolved issue #6: reading
+`ATIR500Surface`'s own concrete-subclass vtable (`__ZTV14ATIR500Surface`, `0x4bbe0`) directly, since every
+real Surface object in this driver is that subclass (issue #16).
+
+- `+0x5b4`/`+0x5b8`/`+0x5bc` → `update_ref_stamps`/`increment_refcounts`/`decrement_refcounts` (base-level,
+  not subclass-overridden - `remove_texture_from_stream`/`add_texture_to_stream`,
+  `IOATIR500GLContext_TextureStream.cpp`).
+- `+0x5c4` → `invalidate` (subclass-only override, same real per-context dirty-bit pattern issue #12.1
+  already established for `ATIR500GLContext`).
+- `+0x5cc`/`+0x5d0` → `dealloc_surface`/`alloc_surface_buffer` (`compact_current_textures`'s
+  `evictSurfaceBuffers` helper, `ATIR500GLContext_TextureLoad.cpp`).
+- `+0x5fc`/`+0x600` → `prepare_vram`/`complete_vram` (`surface_write_lock_int`/`unlock_int`,
+  `IOATIR500Surface_LockShape.cpp`) - real mangled parameter type is `ATIR500SurfaceBuffer*`, not the
+  generic `void*` this project's call sites had inferred.
+- `+0x5a8`/`+0x5dc` → `resetFullScreen`/`is_flip_allowed` (`set_id_mode`, `IOATIR500Surface_LockShape.cpp`)
+  - found mid-wiring, not in the original 8-slot filing (no explicit "names UNKNOWN" comment had flagged
+  them, but the same real gap).
+- `+0x5c8`/`+0x5b0` → `shape_surface`/`is_surface_size_supported`
+  (`set_shape_backing_length_ext`, same file) - `is_surface_size_supported`'s real mangled parameter
+  types are `short`, not the `SInt32` the call site had inferred.
+
+All 12 declarations added to `Headers/IOATIR500Surface.h` (the base - required even where the real
+override is subclass-only, since every real call site reaches them through a base-typed pointer via
+ordinary virtual dispatch, not a subclass-typed one). Every raw vtable-offset cast this touched replaced
+with a real named call. None of the real function bodies (base or subclass) independently decompiled this
+pass - only the vtable slot values/real names were in scope.
+
+## 16. `IOATIR500Accelerator`/`ATIRadeonX1000`'s remaining raw-vtable-offset calls - RESOLVED, issue #19
+
+9 real, distinct vtable slots (7 in the original filing, 2 more found while wiring the rest in) resolved
+the same way as issue #6/#18 - reading `ATIRadeonX1000`'s own concrete-subclass vtable
+(`__ZTV14ATIRadeonX1000`, `0x491c8`) directly.
+
+- `+0x524`/`+0x528` → `deallocate_texture`/`allocate_texture` (`alloc_and_load_texture`,
+  `ATIR500GLContext_TextureLoad.cpp`) - `deallocate_texture` takes NO texture parameter, contrary to what
+  its name alone suggests.
+- `+0x530` → `setup3D` (`IOATIR500GLContext::start()`) - this call was previously left ENTIRELY UNCALLED
+  in the transcription (only a comment recorded the real decompile line); now actually wired into the
+  real failure-path control flow.
+- `+0x54c`/`+0x558` → `waitForTimeStamp`/`sleepForTimeStamp`, extending the already-known
+  `waitForRetiredTimeStamp`/`waitForTimeStampNoLock`/`waitForConsumedIDCTTimeStamp` fence-wait family to
+  its real full 8-member set (`compact_current_textures`/`submit_context_buffer`/
+  `restore_state_destroyed_by_pageoff`/`surface_write_lock_int`/`set_shape_backing_length_ext`).
+- `+0x5a8` → `addTransferToGART` (`map_transfer_to_GART`, `IOATIR500GLContext_TextureStream.cpp`) - takes
+  NO buffer parameter, contrary to what its name alone suggests.
+- `+0x5ec` → confirmed as the real vtable slot for the ALREADY-declared `waitForConsumedIDCTTimeStamp`
+  (`ATIR500DVDContext_ProcessCommandBuffer.cpp`'s opcode `0x0a`/`0x12` handlers).
+- `+0x540`/`+0x544` → `tmpAllocVRAM`/`tmpDeallocVRAM` (`IOATIR500Surface::set_id_mode`/
+  `set_shape_backing_length_ext`) - found mid-wiring, not in the original 7-slot filing.
+
+All declarations added to `Headers/ATIRadeonX1000.h`. Real parameter/return types corrected against each
+call site's own existing typedef where this project's earlier guesses (in the issue's own filing) turned
+out wrong (e.g. `waitForTimeStamp`/`sleepForTimeStamp` return `UInt32`, not `IOReturn`).
+
+## 17. `IOATIR500Shared` / the texture-adjacent GART-handle object - PARTIAL PROGRESS, issue #20 still open
+
+`init` (`+0x48`) resolved via the same base/subclass-vtable-read technique - real addr `0x16aa0`.
+`+0x18`/`+0xd0` on `IOATIR500Shared`'s own vtable (`__ZTV15IOATIR500Shared`, `0x48f28`) confirmed genuine
+placeholder content (raw 0), the SAME real category issue #6 established for the accelerator's factory
+slots - `IOATIR500Shared` has no known subclass in this project (unlike Surface/Accelerator), so this is
+the concrete vtable and there is no further subclass to check.
+
+**New finding**: `IOATIR500Shared`'s own vtable is only `0xd8` bytes long (`0x48f28` to the next real
+symbol, `__ZTVN15IOATIR500Shared9MetaClassE` at `0x49000`) - so `+0x14c` (the third offset this issue's
+own texture-adjacent object calls) is mathematically OUT OF BOUNDS for this class's vtable. This rules
+out `IOATIR500Shared` as that object's real class - it is confirmed to be a DIFFERENT, still-unidentified,
+longer-vtable class. Real identity of that object (reached via `texture+0x54`, then `+8`) remains open.

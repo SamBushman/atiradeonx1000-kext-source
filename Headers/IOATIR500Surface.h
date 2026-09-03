@@ -256,6 +256,90 @@ public:
      * explicit arguments (both real 32-bit `ulong` values on this PPC32
      * target, not 64-bit) - this declaration previously dropped both. */
 
+    /*
+     * Five real vtable slots - RESOLVED, issue #18. Declared HERE on the
+     * base rather than on `ATIR500Surface` (the concrete subclass)
+     * because every real call site reaches them through a base-typed
+     * `IOATIR500Surface *`/`this` pointer via ordinary virtual dispatch
+     * (`Sources/ATIR500GLContext_TextureLoad.cpp`'s `evictSurfaceBuffers`,
+     * `Sources/IOATIR500Surface_LockShape.cpp`'s
+     * `surface_write_lock_int`/`unlock_int`) - C++ requires the
+     * declaration live wherever the call is actually written, and virtual
+     * dispatch then reaches whichever class's real override actually
+     * exists at runtime. Real names/addresses found by reading
+     * `ATIR500Surface`'s own vtable (`__ZTV14ATIR500Surface`, `0x4bbe0`)
+     * directly - the same technique that resolved issue #6/#19's
+     * accelerator slots.
+     *
+     * `invalidate` exists ONLY as a subclass override (this base class's
+     * own copy of that vtable slot is genuine placeholder content, raw
+     * 0) - the same real per-context dirty-bit override pattern
+     * `ATIR500GLContext::invalidate` already established (issue #12.1).
+     * The other four ALSO have their own, different, real bodies on this
+     * base class (`dealloc_surface` at real addr `0x12580`,
+     * `alloc_surface_buffer` unresolved on the base - raw 0,
+     * `prepare_vram`/`complete_vram` at `0x110e0`/`0x110f0`) - but since
+     * every real Surface object in this driver is the concrete
+     * `ATIR500Surface` subclass (issue #16), the subclass's own override
+     * bodies (`0x3df70`/`0x3e230`/`0x3dc50`/`0x3c000` respectively) are
+     * the ones real callers actually reach. None of the seven real
+     * bodies (base or subclass) independently decompiled this pass -
+     * only the vtable slot values/real names were in scope for issue
+     * #18.
+     */
+    /*
+     * update_ref_stamps / increment_refcounts / decrement_refcounts -
+     * RESOLVED, issue #18. Three more real vtable slots, called from
+     * `IOATIR500GLContext::remove_texture_from_stream`/
+     * `add_texture_to_stream` (`Sources/IOATIR500GLContext_TextureStream.cpp`)
+     * against a texture's own `+0x50`-field Surface pointer. Unlike the
+     * five below, these are NOT subclass overrides - `ATIR500Surface`'s
+     * own vtable has the identical addresses at these three slots as the
+     * base, confirming this base class's own bodies are what every real
+     * caller reaches either way.
+     */
+    virtual void   update_ref_stamps(UInt32 generation, UInt32 tag); /* +0x5b4, real addr 0x13fe0 */
+    virtual void   increment_refcounts(UInt32 tag);                  /* +0x5b8, real addr 0x13ff0 */
+    virtual void   decrement_refcounts(UInt32 tag);                  /* +0x5bc, real addr 0x14000 */
+
+    virtual void   invalidate();                                   /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only) */
+    virtual void   dealloc_surface(UInt32 surfaceIndex);            /* +0x5cc, real addr 0x12580 (base) / 0x3df70 (subclass override) - real mangled param type confirmed `unsigned long` */
+    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer); /* +0x5d0, real addr 0x3e230 on ATIR500Surface (subclass-only) - real mangled param type confirmed */
+    virtual void   prepare_vram(ATIR500SurfaceBuffer *buffer);      /* +0x5fc, real addr 0x110e0 (base) / 0x3dc50 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred */
+    virtual void   complete_vram(ATIR500SurfaceBuffer *buffer);     /* +0x600, real addr 0x110f0 (base) / 0x3c000 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred */
+
+    /*
+     * resetFullScreen / is_flip_allowed - RESOLVED, issue #18 (found
+     * while wiring in the rest of that issue - `set_id_mode`
+     * (`Sources/IOATIR500Surface_LockShape.cpp`) calls both through raw
+     * `Fn0x5a8`/`Fn0x5dc` vtable-offset casts this project had never
+     * flagged with an explicit "names UNKNOWN" note, so they weren't in
+     * that issue's original enumeration - same real gap regardless, same
+     * resolution technique). Both real names ALREADY declared-sounding
+     * enough that they were presumably assumed resolved somewhere -
+     * confirmed here they were not actually declared anywhere in this
+     * project before now. Both exist as real, different bodies on base
+     * and subclass; every real Surface object is the concrete
+     * `ATIR500Surface` subclass (issue #16), so the subclass bodies
+     * (`0x3cf60`/`0x3ae30`) are what real callers reach.
+     */
+    virtual void   resetFullScreen();                               /* +0x5a8, real addr 0x139d0 (base) / 0x3cf60 (subclass override) */
+    virtual SInt32 is_flip_allowed();                                /* +0x5dc, real addr 0x13f60 (base) / 0x3ae30 (subclass override) */
+
+    /*
+     * shape_surface / is_surface_size_supported - RESOLVED, issue #18
+     * (found while wiring in the rest of that issue -
+     * `set_shape_backing_length_ext` calls both through raw
+     * `Fn0x5c8`/`Fn0x5b0` casts, same real gap regardless of not being in
+     * that issue's original enumeration). `shape_surface` is
+     * subclass-only (base's own copy of this vtable slot is genuine
+     * placeholder content, raw 0), matching `invalidate`'s pattern above.
+     * `is_surface_size_supported`'s real mangled parameter types are
+     * `short` (not the `SInt32` this project's call site had inferred).
+     */
+    virtual void   shape_surface();                                          /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) */
+    virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
+
 protected:
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
 

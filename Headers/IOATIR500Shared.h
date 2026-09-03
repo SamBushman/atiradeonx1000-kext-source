@@ -21,10 +21,27 @@
 class IOATIR500Shared {
 public:
     IOATIR500Shared();
-    /* Real size CONFIRMED (0x28 bytes, from its allocation site).
-     * Real vtable calls at +0x48 (init-like, must succeed) and +0x18
-     * (release-like) are known to exist - see IOATIR500GLContext_Start.cpp -
-     * but not independently named or decompiled this pass. */
+    /* Real size CONFIRMED (0x28 bytes, from its allocation site). */
+
+    /*
+     * init - RESOLVED, issue #20 (partial). Real vtable slot `+0x48`,
+     * real addr `0x16aa0` - found by reading this class's own vtable
+     * (`__ZTV15IOATIR500Shared`, `0x48f28`) directly, the same technique
+     * that resolved issues #6/#18/#19. Real return type INFERRED as the
+     * conventional IOKit `bool` (`IOATIR500GLContext_Start.cpp`'s own
+     * call site checks the result against 0 for failure) - own body not
+     * independently decompiled this pass.
+     *
+     * The paired real `+0x18` (release-like) vtable call this class's
+     * own real constructor-site failure path also makes is STILL
+     * genuinely unresolved - confirmed genuine placeholder content
+     * (raw 0) on this class's own vtable, the SAME real category issue
+     * #6 established for the accelerator's factory slots. This class has
+     * no known subclass in this project (unlike Surface/Accelerator), so
+     * there is no further subclass vtable to check - issue #20 stays
+     * open for this slot.
+     */
+    bool init();
 
     /*
      * delete_texture - CONFIRMED real name/signature (real mangled

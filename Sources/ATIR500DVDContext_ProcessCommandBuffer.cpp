@@ -527,8 +527,8 @@ static void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record) {
  * densest real opcode in this cluster and the highest-value target for
  * the H.264 project goal. Real per-mip Y/UV plane pitch+offset setup,
  * gated on a real "engine ready" flag (`accelerator+0x8bc`, word-index
- * 0x22f in the raw decompile) and a real vtable call at
- * `accelerator+0x5ec`. On success, writes a real second, independent
+ * 0x22f in the raw decompile) and `ATIRadeonX1000::waitForConsumedIDCTTimeStamp`
+ * (RESOLVED, issue #19; real vtable slot +0x5ec). On success, writes a real second, independent
  * sighting of the YUV 4:2:0 combined-plane formula
  * (`height*pitch*3 >> 1`) - this time applied to the Y-plane base
  * itself under one real embedded flag combination, not just the
@@ -579,8 +579,7 @@ static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &loc
 
     if (U32At(accel, 0x8bc) == 0) return false;
 
-    typedef void (*EngineKickFn)(void *, UInt32);
-    (*reinterpret_cast<EngineKickFn *>(*reinterpret_cast<void ***>(accel) + (0x5ec / 4)))(accel, U32At(self, 0x154));
+    ctx->accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x154)); /* RESOLVED, issue #19: real vtable slot +0x5ec */
 
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     U32At(surf, 0xd90) = record[1];
@@ -2098,8 +2097,7 @@ static bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record) {
 
     if (U32At(accel, 0x8bc) == 0) return false;
 
-    typedef void (*EngineKickFn)(void *, UInt32);
-    (*reinterpret_cast<EngineKickFn *>(*reinterpret_cast<void ***>(accel) + (0x5ec / 4)))(accel, U32At(self, 0x154));
+    ctx->accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x154)); /* RESOLVED, issue #19: real vtable slot +0x5ec */
 
     if (record[0xd] == 0) return false;
 

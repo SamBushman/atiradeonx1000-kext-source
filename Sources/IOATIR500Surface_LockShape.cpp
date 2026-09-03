@@ -26,6 +26,7 @@
  */
 
 #include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
 void IOATIR500Surface::surface_write_unlock() {
@@ -101,42 +102,33 @@ IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scalin
  * (the SAME real per-mip array shape ATIR500GLContext::build_scissor
  * and friends index via a texture's own +0xb70 field - here indexed
  * directly off the surface object itself). Real vtable calls at
- * +0x5fc (lock) / +0x600 (unlock), names UNKNOWN. surface_write_lock_int
- * additionally does real completion-counter bookkeeping via a vtable
- * call at +0x558 on this+0xd50 (mirrors the same real "stamp delta"
- * pattern ATIR500GLContext::compact_current_textures/
- * submit_context_buffer use on their own accelerator pointer, at the
- * same +0x54c-family offset region - see
- * Sources/ATIR500GLContext_TextureLoad.cpp).
+ * +0x5fc (lock) / +0x600 (unlock) are RESOLVED (issue #18):
+ * `prepare_vram`/`complete_vram` (Headers/IOATIR500Surface.h) -
+ * surface_write_lock_int additionally does real completion-counter
+ * bookkeeping via `ATIRadeonX1000::sleepForTimeStamp` (RESOLVED, issue
+ * #19) on this+0xd50 (mirrors the same real "stamp delta" pattern
+ * ATIR500GLContext::compact_current_textures/submit_context_buffer use
+ * on their own accelerator pointer, at the same waitForTimeStamp/
+ * sleepForTimeStamp family - see Sources/ATIR500GLContext_TextureLoad.cpp).
  */
-static inline void callSurfaceVtable0x5fc(void *surfaceObj, void *mip) {
-    typedef void (*Fn)(void *, void *);
-    (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(surfaceObj) + (0x5fc / 4)))(surfaceObj, mip);
-}
-static inline void callSurfaceVtable0x600(void *surfaceObj, void *mip) {
-    typedef void (*Fn)(void *, void *);
-    (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(surfaceObj) + (0x600 / 4)))(surfaceObj, mip);
-}
 
 void IOATIR500Surface::surface_write_lock_int(UInt32 bufferIndex, UInt32 *outParam2, UInt32 *outParam3) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *mip = *reinterpret_cast<UInt8 **>(self + bufferIndex * 4 + 0xb70);
 
-    callSurfaceVtable0x5fc(self, mip);
+    prepare_vram(reinterpret_cast<ATIR500SurfaceBuffer *>(mip));
     *outParam2 = *reinterpret_cast<UInt32 *>(mip + 8);
     *outParam3 = *reinterpret_cast<UInt16 *>(mip + 0x18);
 
     UInt8 *accelIsh = *reinterpret_cast<UInt8 **>(self + 0xd50);
-    typedef UInt32 (*StampFn)(void *, UInt32);
-    UInt32 stampDelta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<void ***>(accelIsh) + (0x558 / 4)))(
-        accelIsh, *reinterpret_cast<UInt32 *>(accelIsh + 0x50) - 1); /* real: piVar1[0x14], word-indexed = +0x50 */
+    UInt32 stampDelta = accelerator->sleepForTimeStamp(*reinterpret_cast<UInt32 *>(accelIsh + 0x50) - 1); /* real: piVar1[0x14], word-indexed = +0x50 */
     *reinterpret_cast<UInt32 *>(accelIsh + 0x7bc) += stampDelta; /* real: piVar1[0x1ef] = accelIsh+0x7bc word-indexed */
 }
 
 void IOATIR500Surface::surface_write_unlock_int(UInt32 bufferIndex) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *mip = *reinterpret_cast<UInt8 **>(self + bufferIndex * 4 + 0xb70);
-    callSurfaceVtable0x600(self, mip);
+    complete_vram(reinterpret_cast<ATIR500SurfaceBuffer *>(mip));
 }
 
 namespace {
@@ -274,8 +266,7 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
             UInt32 oldId = U32At(self, 0xc14);
             if (oldId != 0xffff && mode != oldId &&
                 this == *reinterpret_cast<IOATIR500Surface **>(accel + oldId * 0x20 + 0xe8)) {
-                typedef void (*Fn0x5a8)(void *);
-                (*reinterpret_cast<Fn0x5a8 *>(*reinterpret_cast<void ***>(self) + (0x5a8 / 4)))(self);
+                resetFullScreen(); /* RESOLVED, issue #18 */
                 U32At(accel, U32At(self, 0xc14) * 0x20 + 0xe8) = 0;
             }
             U32At(self, 0xa4) = idOrComplement;
@@ -335,8 +326,7 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
                 U16At(self, 0xbd6) = h;
                 U16At(self, 0xbda) = h;
 
-                typedef SInt32 (*Fn0x5dc)(void *);
-                SInt32 commitResult = (*reinterpret_cast<Fn0x5dc *>(*reinterpret_cast<void ***>(self) + (0x5dc / 4)))(self);
+                SInt32 commitResult = is_flip_allowed(); /* RESOLVED, issue #18 */
                 if (commitResult == 0) {
                     U8At(self, id * 0x94 + 0xcac) = 1;
                     U32At(self, 0xbf8) |= 0x10000000u;
@@ -359,15 +349,12 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
                 U32At(self, 0xbf8) &= 0xdfffffffu;
                 if (sizeOrHandle != 0) {
                     UInt32 scratch[4] = {0, 0, 0, 0}; /* real: local_38/local_34/local_30/local_2c */
-                    typedef void *(*Fn0x540)(void *, void *, SInt32, UInt32);
-                    void *mapped = (*reinterpret_cast<Fn0x540 *>(*reinterpret_cast<void ***>(accel) + (0x540 / 4)))(
-                        accel, scratch, sizeOrHandle, 0x1000);
+                    void *mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), sizeOrHandle, 0x1000); /* RESOLVED, issue #19 */
                     if (mapped == nullptr) {
                         result = 0xe00002be;
                         U32At(self, 0xbf8) |= 0x20000000u;
                     } else {
-                        typedef void (*Fn0x544)(void *, void *);
-                        (*reinterpret_cast<Fn0x544 *>(*reinterpret_cast<void ***>(accel) + (0x544 / 4)))(accel, scratch);
+                        accelerator->tmpDeallocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch)); /* RESOLVED, issue #19 */
                     }
                 }
             }
@@ -481,9 +468,9 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  *     rejections from steps 1/2/4/5): writes two more per-surface byte
  *     flags (+0xbef from `shapeBits` bit 3; +0xbed from `shapeBits` bit 4
  *     OR this+0xbee being nonzero), then - unless `shapeBits & 1` is set -
- *     accumulates a real completion-stamp via the accelerator's own
- *     vtable+0x558 (the SAME real stamp-accumulator vtable slot
- *     `surface_write_lock_int` already calls, here with a DIFFERENT real
+ *     accumulates a real completion-stamp via
+ *     `ATIRadeonX1000::sleepForTimeStamp` (RESOLVED, issue #19; the SAME
+ *     real method `surface_write_lock_int` already calls, here with a DIFFERENT real
  *     argument, `this+0x80`, and a DIFFERENT real accumulator field,
  *     `accelerator+0x7c0` - a FOURTH distinct completion-stamp
  *     accumulator this project has now found, alongside the
@@ -671,13 +658,11 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32
             }
 
             if (needsRetag || (U32At(self, 0xd70) & 2u) != 0) {
-                typedef void (*Fn0x5c8)(void *);
-                (*reinterpret_cast<Fn0x5c8 *>(*reinterpret_cast<void ***>(self) + (0x5c8 / 4)))(self);
+                shape_surface(); /* RESOLVED, issue #18 */
                 update_contexts();
             }
-            typedef SInt32 (*Fn0x5b0)(void *, SInt32, SInt32);
-            SInt32 commitOk = (*reinterpret_cast<Fn0x5b0 *>(*reinterpret_cast<void ***>(self) + (0x5b0 / 4)))(
-                self, static_cast<SInt32>(U16At(self, 0xbd4)), static_cast<SInt32>(U16At(self, 0xbd6)));
+            SInt32 commitOk = is_surface_size_supported( /* RESOLVED, issue #18 */
+                static_cast<SInt16>(U16At(self, 0xbd4)), static_cast<SInt16>(U16At(self, 0xbd6)));
 
             if (commitOk == 0) {
                 result = 0xe00002be;
@@ -685,17 +670,15 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32
             } else {
                 if (needsRetag) {
                     UInt32 scratch[4] = {0, 0, 0, 0}; /* real: local_48/local_44/local_40/local_3c */
-                    typedef void *(*Fn0x540)(void *, void *, SInt32, UInt32);
-                    void *mapped = (*reinterpret_cast<Fn0x540 *>(*reinterpret_cast<void ***>(accel) + (0x540 / 4)))(
-                        accel, scratch, *reinterpret_cast<SInt32 *>(*reinterpret_cast<UInt32 *>(self + 0xb70) + 0x10), 0x1000);
+                    void *mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), /* RESOLVED, issue #19 */
+                        *reinterpret_cast<SInt32 *>(*reinterpret_cast<UInt32 *>(self + 0xb70) + 0x10), 0x1000);
                     if (mapped == nullptr) {
                         result = 0xe00002be;
                         U32At(self, 0xbf8) |= 0x20000000u;
                         goto shared_tail;
                     }
                     U32At(self, 0xbf8) &= 0xdfffffffu;
-                    typedef void (*Fn0x544)(void *, void *);
-                    (*reinterpret_cast<Fn0x544 *>(*reinterpret_cast<void ***>(accel) + (0x544 / 4)))(accel, scratch);
+                    accelerator->tmpDeallocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch)); /* RESOLVED, issue #19 */
                 }
                 ATIR500SurfaceBuffer *primaryBuf = *reinterpret_cast<ATIR500SurfaceBuffer **>(self + 0xb70);
                 if (param4IsSentinel) {
@@ -728,11 +711,10 @@ shared_tail:
     if ((shapeBits & 1u) == 0) {
         /* real: accumulator at accelerator+0x7c0 - CORRECTED, same class
          * of dword-index-vs-byte-offset bug as issue #12 item 6 - see
-         * header comment above. */
-        typedef UInt32 (*Fn0x558)(void *, UInt32);
+         * header comment above. Vtable call RESOLVED (issue #19):
+         * ATIRadeonX1000::sleepForTimeStamp. */
         UInt32 before = U32At(accel, 0x7c0);
-        UInt32 delta = (*reinterpret_cast<Fn0x558 *>(*reinterpret_cast<void ***>(accel) + (0x558 / 4)))(
-            accel, U32At(self, 0x80));
+        UInt32 delta = accelerator->sleepForTimeStamp(U32At(self, 0x80));
         U32At(accel, 0x7c0) = before + delta;
         U8At(self, 0xbf2) = 0;
     } else {

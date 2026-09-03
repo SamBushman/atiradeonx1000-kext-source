@@ -28,6 +28,7 @@
 
 #include "../Headers/IOATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
+#include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Shared.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
@@ -128,19 +129,17 @@ bool IOATIR500GLContext::start(IOService *provider) {
         return false;
     }
 
-    /* Real vtable calls - IOATIR500Shared's own method set is UNKNOWN
-     * (see IOATIR500Shared.h), so these are left as raw vtable-offset
-     * calls exactly as decompiled rather than invented named methods.
-     * The +0x48 (init) call's real decompile passes `this_00` as its one
-     * argument; the +0x18 (release) call's real decompile shows it
+    /* Real vtable call at +0x48 RESOLVED (issue #20 partial): `init()`
+     * (see IOATIR500Shared.h). The +0x18 (release) call remains a raw
+     * vtable-offset cast - CONFIRMED genuinely unresolvable statically
+     * (issue #20), not merely un-named. Its real decompile shows it
      * called with NO visible argument at all - almost certainly a
-     * decompiler artifact (a real release/free vtable call needs its
-     * own `this`), so it's passed here for correctness. Flagged as
-     * INFERRED, not a literal transcription, unlike the init call. */
-    typedef int (*ShareInitFn)(IOATIR500Shared *);
+     * decompiler artifact (a real release/free vtable call needs its own
+     * `this`), so it's passed here for correctness. Flagged as INFERRED,
+     * not a literal transcription. */
     typedef void (*ShareReleaseFn)(IOATIR500Shared *);
     void **shareVtable = *reinterpret_cast<void ***>(clientHandle);
-    if (reinterpret_cast<ShareInitFn>(shareVtable[0x48 / 4])(clientHandle) == 0) {
+    if (clientHandle->init() == 0) {
         reinterpret_cast<ShareReleaseFn>(shareVtable[0x18 / 4])(clientHandle); /* INFERRED argument - see above */
         clientHandle = nullptr;
         stop(provider);
@@ -156,19 +155,25 @@ bool IOATIR500GLContext::start(IOService *provider) {
         *reinterpret_cast<void **>(self + 0x78);
 
     /*
-     * Real vtable call at accelerator+0x530, gated on the accelerator
-     * having NO live GL context (accel+0x60 == 0, liveGLContextListHead)
-     * AND no live DVD context (accel+0x68 == 0, liveDVDContextListHead) -
-     * i.e. only runs once, for the first live GL-or-DVD context.
-     * INFERRED role: some kind of shared first-open hardware/state
-     * setup; not independently named or decompiled this pass. On
-     * failure (real return 0), start() bails out via the same failure
-     * path as everything else here.
+     * ATIRadeonX1000::setup3D - RESOLVED (issue #19; real vtable slot
+     * +0x530). Gated on the accelerator having NO live GL context
+     * (accel+0x60 == 0, liveGLContextListHead) AND no live DVD context
+     * (accel+0x68 == 0, liveDVDContextListHead) - i.e. only runs once,
+     * for the first live GL-or-DVD context. INFERRED role beyond the
+     * real name: some kind of shared first-open hardware/state setup;
+     * own body not independently decompiled this pass. Real return
+     * value IS checked (`if (iVar3 == 0) goto failure`) - previously
+     * left as a comment-only note, never actually wired into this
+     * function's own compiled code path; now wired in via the same
+     * failure path as everything else here.
      */
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     if (*reinterpret_cast<UInt32 *>(accel + 0x60) == 0 &&
         *reinterpret_cast<UInt32 *>(accel + 0x68) == 0) {
-        /* real: iVar3 = (**(code**)(*piVar4 + 0x530))(); if (iVar3 == 0) goto failure; */
+        if (accelerator->setup3D() == 0) {
+            stop(provider);
+            return false;
+        }
     }
 
     /*

@@ -49,8 +49,8 @@
  * not a raw byte offset as this project's earlier transcription treated
  * it). Independently cross-confirmed against
  * `ATIR500GLContext_TextureLoad.cpp`'s `compact_current_textures`, which
- * calls the exact same real vtable+0x54c stamp-accumulator against
- * `accel+0x780` - that file's own header comment already named this
+ * calls the exact same real `ATIRadeonX1000::waitForTimeStamp`
+ * (RESOLVED, issue #19) against `accel+0x780` - that file's own header comment already named this
  * function/field pairing, meaning the two files disagreed with each other
  * before this fix. See that accumulator's own comment below for the full
  * writeup. The rest of the function's scaffolding (the header-block copy,
@@ -100,9 +100,9 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
 
     /* real per-context ring-buffer-slot bookkeeping - advances a 4-bit
      * rotating slot index (this+0x28c, mod 16) and accumulates a real
-     * completion-stamp delta via a vtable call at accel+0x54c (the same
-     * offset already confirmed elsewhere as a fence/stamp-accumulator
-     * call).
+     * completion-stamp delta via `ATIRadeonX1000::waitForTimeStamp`
+     * (RESOLVED, issue #19; the same real method already confirmed
+     * elsewhere as this project's fence/stamp-accumulator call).
      *
      * CORRECTED, issue #12 item 6 (systematic spot-check pass): the raw
      * decompile accesses this accumulator as `piVar9[0x1e0]`, where
@@ -112,16 +112,14 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
      * already a byte offset - a real, confirmed bug, caught by this
      * cross-reference: `ATIR500GLContext_TextureLoad.cpp`'s
      * `compact_current_textures` independently calls the SAME real
-     * vtable+0x54c stamp-accumulator against `accel+0x780` (that file's
-     * own header comment already cited this exact function/field pairing -
-     * the two disagreed with each other before this fix). */
+     * `waitForTimeStamp` against `accel+0x780` (that file's own header
+     * comment already cited this exact function/field pairing - the two
+     * disagreed with each other before this fix). */
     UInt32 slot = (*reinterpret_cast<UInt32 *>(self + 0x28c) + 1) & 0xf;
     *reinterpret_cast<UInt32 *>(self + 0x28c) = slot;
     UInt8 *slotRecord = self + slot * 0x18;
     UInt32 accelAccum = *reinterpret_cast<UInt32 *>(accel + 0x780);
-    typedef UInt32 (*VTableCall0x54c)(void *, UInt32);
-    UInt32 delta = (reinterpret_cast<VTableCall0x54c>(*reinterpret_cast<UInt32 **>(accel))[0x54c / 4])(
-        accel, *reinterpret_cast<UInt32 *>(slotRecord + 0x11c));
+    UInt32 delta = accelerator->waitForTimeStamp(*reinterpret_cast<UInt32 *>(slotRecord + 0x11c));
     *reinterpret_cast<UInt32 *>(accel + 0x780) = accelAccum + delta;
 
     /* real 8-dword header block copy from this+0x108 into the new slot's

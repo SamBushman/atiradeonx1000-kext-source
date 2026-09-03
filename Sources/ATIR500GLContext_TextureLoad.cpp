@@ -13,13 +13,14 @@
  *
  * Confidence: CONFIRMED for control flow and every field offset/call
  * touched - transcribed directly from complete real decompiles, not
- * summarized. Several sub-calls reached through raw vtable-offset casts
- * (accelerator vtable +0x524/+0x528/+0x54c, IOATIR500Surface vtable
- * +0x5c4/+0x5cc/+0x5d0, and two more used only by load_texture at
- * +0x14c/+0xd0/+0x18 on a real "memory-descriptor-shaped" object - see
- * ATIR500GLContext_DiscardBuffer.cpp's matching cross-reference) have
- * real, confirmed-to-exist targets but UNKNOWN real names - called
- * opaquely per this project's no-shortcuts standard, same as elsewhere.
+ * summarized. Several sub-calls originally reached through raw
+ * vtable-offset casts (accelerator vtable +0x524/+0x528/+0x54c,
+ * IOATIR500Surface vtable +0x5c4/+0x5cc/+0x5d0) are now RESOLVED (issues
+ * #18/#19) to real named methods - see ATIRadeonX1000.h/ATIR500Surface.h.
+ * Two more used only by load_texture at +0x14c/+0xd0/+0x18 on a real
+ * "memory-descriptor-shaped" object (see
+ * ATIR500GLContext_DiscardBuffer.cpp's matching cross-reference) remain
+ * genuinely UNKNOWN - real class identity still open, issue #20.
  * get_texture's atomic decrement loop was verified against raw PPC
  * disassembly (lwarx/stwcx.), not just Ghidra's decompile, since the
  * decompiler couldn't fully resolve it into clean C on its own.
@@ -152,20 +153,12 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
 extern void FUN_0002a864(void *transferBuffer);
 
 /*
- * Two more real, confirmed-to-exist accelerator vtable calls
- * alloc_and_load_texture makes - real names UNKNOWN, called through raw
- * vtable-offset casts rather than invented named methods, matching this
- * project's no-shortcuts standard elsewhere (e.g.
- * Sources/ATIR500GLContext_ProcessCommandBuffer.cpp).
+ * Two more real accelerator vtable calls alloc_and_load_texture makes -
+ * RESOLVED, issue #19: `ATIRadeonX1000::allocate_texture`/
+ * `::deallocate_texture` (see ATIRadeonX1000.h). Called directly through
+ * the typed `accelerator` member below rather than the raw vtable-offset
+ * casts this project previously used here.
  */
-static inline int callAcceleratorVtable0x528(void *accelObj, void *texture) {
-    typedef int (*Fn)(void *, void *);
-    return (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(accelObj) + (0x528 / 4)))(accelObj, texture);
-}
-static inline void callAcceleratorVtable0x524(void *accelObj) {
-    typedef void (*Fn)(void *);
-    (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(accelObj) + (0x524 / 4)))(accelObj);
-}
 
 /*
  * alloc_and_load_texture - RESOLVED (issue #5), fully transcribed (real
@@ -215,7 +208,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
 
     if (discriminant == 3) {
         if (*reinterpret_cast<UInt32 *>(tex + 0x48) == 0 &&
-            callAcceleratorVtable0x528(accel, tex) == 0 &&
+            accelerator->allocate_texture(reinterpret_cast<VendorTextureBuffer *>(tex)) == 0 &&
             accelerator->freeToAllocTextureVRAM(
                 *reinterpret_cast<IOATIR500Surface **>(self + 0x290),
                 reinterpret_cast<VendorTextureBuffer **>(self + 0x2a4), 0x2a, texture) == 0 &&
@@ -255,7 +248,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
         bool retry = true;
         if (*reinterpret_cast<UInt32 *>(tex + 0x48) != 0) {
             if ((*reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(tex + 0x14) + 0x14) & 2) != 0) {
-                callAcceleratorVtable0x524(accel);
+                accelerator->deallocate_texture();
                 UInt8 *mip = *reinterpret_cast<UInt8 **>(tex + 0x14);
                 mip[0x14] = 1;
                 *reinterpret_cast<UInt16 *>(mip + 0x28) = 0;
@@ -271,7 +264,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
             }
         }
         if (retry) {
-            if (callAcceleratorVtable0x528(accel, tex) == 0 &&
+            if (accelerator->allocate_texture(reinterpret_cast<VendorTextureBuffer *>(tex)) == 0 &&
                 accelerator->freeToAllocTextureVRAM(
                     *reinterpret_cast<IOATIR500Surface **>(self + 0x290),
                     reinterpret_cast<VendorTextureBuffer **>(self + 0x2a4), 0x2a, texture) == 0 &&
@@ -350,20 +343,11 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
 
 /*
  * Three more real IOATIR500Surface vtable calls compact_current_textures
- * makes - real names UNKNOWN, called through raw vtable-offset casts.
+ * makes - RESOLVED, issue #18: dealloc_surface/invalidate/
+ * alloc_surface_buffer (see Headers/IOATIR500Surface.h). Called directly
+ * via ordinary virtual dispatch below rather than the raw vtable-offset
+ * casts this project previously used here.
  */
-static inline void callSurfaceVtable0x5cc(void *surfaceObj, UInt32 arg) {
-    typedef void (*Fn)(void *, UInt32);
-    (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(surfaceObj) + (0x5cc / 4)))(surfaceObj, arg);
-}
-static inline void callSurfaceVtable0x5c4(void *surfaceObj) {
-    typedef void (*Fn)(void *);
-    (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(surfaceObj) + (0x5c4 / 4)))(surfaceObj);
-}
-static inline UInt32 callSurfaceVtable0x5d0(void *surfaceObj, void *surfaceBuffer) {
-    typedef UInt32 (*Fn)(void *, void *);
-    return (*reinterpret_cast<Fn *>(*reinterpret_cast<void ***>(surfaceObj) + (0x5d0 / 4)))(surfaceObj, surfaceBuffer);
-}
 
 /*
  * A real, shared eviction-scan sub-routine compact_current_textures
@@ -374,10 +358,11 @@ static inline UInt32 callSurfaceVtable0x5d0(void *surfaceObj, void *surfaceBuffe
  * gating condition holds (a mix of `surface+0xc14 == 0xffff`, an index
  * range check, `entry+8 != 0`, and a `surface+0xbd0` high-word/pointer-
  * identity check), either moves it to backing store or calls the real
- * vtable+0x5cc method with a "reason" code - then, after the whole
- * scan, calls the real vtable+0x5c4 method once. Extracted here as a
- * named helper purely for this reconstruction's own readability - the
- * real binary has it inlined at both real call sites, not factored out.
+ * `dealloc_surface` method with a "reason" code - then, after the whole
+ * scan, calls the real `invalidate` method once (both RESOLVED, issue
+ * #18). Extracted here as a named helper purely for this
+ * reconstruction's own readability - the real binary has it inlined at
+ * both real call sites, not factored out.
  */
 static void evictSurfaceBuffers(IOATIR500Surface *surface, UInt32 reasonCode) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(surface);
@@ -392,11 +377,11 @@ static void evictSurfaceBuffers(IOATIR500Surface *surface, UInt32 reasonCode) {
             if (*reinterpret_cast<UInt32 *>(surf + 0xd48) == 0) {
                 surface->move_buffer_to_backing_store(reinterpret_cast<ATIR500SurfaceBuffer *>(entry));
             } else {
-                callSurfaceVtable0x5cc(surf, reasonCode);
+                surface->dealloc_surface(reasonCode);
             }
         }
     }
-    callSurfaceVtable0x5c4(surf);
+    surface->invalidate();
 }
 
 /*
@@ -440,7 +425,7 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
             IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(boundTex + 0x50);
             evictSurfaceBuffers(surface, i);
         } else {
-            callAcceleratorVtable0x524(accel);
+            accelerator->deallocate_texture();
         }
 
         UInt8 *mip = *reinterpret_cast<UInt8 **>(boundTex + 0x14);
@@ -489,12 +474,11 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
     *reinterpret_cast<UInt32 *>(self + 0x28c) = ringSlot;
     UInt8 *ringBase = self + ringSlot * 0x18;
 
-    /* real: accumulates a completion-stamp delta via a real accelerator
-     * vtable call at +0x54c, same call restore_state_destroyed_by_pageoff
-     * makes (Sources/ATIR500GLContext_RestoreState.cpp) */
-    typedef UInt32 (*StampFn)(void *, UInt32);
-    UInt32 stampDelta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<void ***>(accel) + (0x54c / 4)))(
-        accel, *reinterpret_cast<UInt32 *>(ringBase + 0x11c));
+    /* real: accumulates a completion-stamp delta via
+     * ATIRadeonX1000::waitForTimeStamp (RESOLVED, issue #19), same call
+     * restore_state_destroyed_by_pageoff makes
+     * (Sources/ATIR500GLContext_RestoreState.cpp) */
+    UInt32 stampDelta = accelerator->waitForTimeStamp(*reinterpret_cast<UInt32 *>(ringBase + 0x11c));
     *reinterpret_cast<UInt32 *>(accel + 0x780) += stampDelta;
 
     UInt32 *outBuf = reinterpret_cast<UInt32 *>(*reinterpret_cast<UInt32 *>(ringBase + 0x120) + 0x20);
@@ -511,10 +495,10 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
                 UInt32 idx = surface->surface_buffer_idx_mask(*reinterpret_cast<UInt32 *>(boundTex + 0x58), mask);
                 UInt8 *entry = reinterpret_cast<UInt8 *>(surface) + idx * 4 + 0xb70;
                 UInt8 *surfaceBuffer = *reinterpret_cast<UInt8 **>(entry);
-                callSurfaceVtable0x5d0(surface, surfaceBuffer);
+                surface->alloc_surface_buffer(reinterpret_cast<ATIR500SurfaceBuffer *>(surfaceBuffer));
                 surface->copy_buffer_from_backing_store(reinterpret_cast<ATIR500SurfaceBuffer *>(surfaceBuffer));
             } else {
-                if (callAcceleratorVtable0x528(accel, boundTex) != 0) {
+                if (accelerator->allocate_texture(reinterpret_cast<VendorTextureBuffer *>(boundTex)) != 0) {
                     load_texture(reinterpret_cast<VendorTextureBuffer *>(boundTex));
                 }
             }
@@ -548,13 +532,13 @@ IOReturn ATIR500GLContext::compact_current_textures(VendorTextureBuffer *texture
         IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(tex + 0x50);
         UInt32 idx = surface->surface_buffer_idx_mask(*reinterpret_cast<UInt32 *>(tex + 0x58), mask);
         UInt8 *surfaceBuffer = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(surface) + idx * 4 + 0xb70);
-        if (callSurfaceVtable0x5d0(surface, surfaceBuffer) != 0 &&
+        if (surface->alloc_surface_buffer(reinterpret_cast<ATIR500SurfaceBuffer *>(surfaceBuffer)) != 0 &&
             surface->copy_buffer_from_backing_store(reinterpret_cast<ATIR500SurfaceBuffer *>(surfaceBuffer)) != 0) {
             return 1;
         }
         return 0;
     }
-    return static_cast<IOReturn>(callAcceleratorVtable0x528(accel, tex));
+    return static_cast<IOReturn>(accelerator->allocate_texture(reinterpret_cast<VendorTextureBuffer *>(tex)));
 }
 
 /*
@@ -625,9 +609,8 @@ void ATIR500GLContext::submit_context_buffer() {
         *reinterpret_cast<UInt32 *>(self + 0x28c) = ringSlot;
         ringBase = self + ringSlot * 0x18;
 
-        typedef UInt32 (*StampFn)(void *, UInt32);
-        UInt32 stampDelta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<void ***>(accel) + (0x54c / 4)))(
-            accel, *reinterpret_cast<UInt32 *>(ringBase + 0x11c));
+        /* real: ATIRadeonX1000::waitForTimeStamp (RESOLVED, issue #19) */
+        UInt32 stampDelta = accelerator->waitForTimeStamp(*reinterpret_cast<UInt32 *>(ringBase + 0x11c));
         *reinterpret_cast<UInt32 *>(accel + 0x780) += stampDelta;
 
         UInt32 *headerSrc = reinterpret_cast<UInt32 *>(pendingQueue);
@@ -733,8 +716,8 @@ void ATIR500GLContext::submit_context_buffer() {
  *    unlink pattern as `FUN_0002a864` above - different address, same real
  *    shape, opaque call).
  *
- * 4. Real completion-stamp accumulation via accelerator vtable+0x54c
- *    (accelerator+0x744 += stamp(mip+0xc)) - the SAME real vtable call
+ * 4. Real completion-stamp accumulation via ATIRadeonX1000::waitForTimeStamp
+ *    (RESOLVED, issue #19; accelerator+0x744 += stamp(mip+0xc)) - the SAME real call
  *    `compact_current_textures`/`restore_state_destroyed_by_pageoff` make
  *    against a different accumulator field (+0x780); this one is specific
  *    to texture loads. `record` (the PM4 burst output buffer) is then
@@ -927,9 +910,8 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
     }
 
     /* Real completion-stamp accumulation - see header comment. */
-    typedef UInt32 (*StampFn)(void *, UInt32);
-    UInt32 stampDelta = (*reinterpret_cast<StampFn *>(*reinterpret_cast<void ***>(accel) + (0x54c / 4)))(
-        accel, *reinterpret_cast<UInt32 *>(mip + 0xc));
+    /* real: ATIRadeonX1000::waitForTimeStamp (RESOLVED, issue #19) */
+    UInt32 stampDelta = accelerator->waitForTimeStamp(*reinterpret_cast<UInt32 *>(mip + 0xc));
     UInt32 *record = hwInfo + 0x280; /* real: hwInfo + 0xa00 bytes */
     *reinterpret_cast<UInt32 *>(accel + 0x744) += stampDelta;
     tileXBase += *reinterpret_cast<SInt32 *>(accel + 0x8a4);

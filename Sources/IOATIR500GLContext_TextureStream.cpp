@@ -16,6 +16,7 @@
 
 #include "../Headers/IOATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
+#include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Surface.h"
 
 namespace {
@@ -34,8 +35,8 @@ inline UInt8 &U8At(void *base, int offset) {
  * remove_texture_from_stream - CONFIRMED, fully transcribed (real kext
  * offset 0x71b0). Real per-type-discriminant cleanup: type 6 (chained
  * sub-buffer) decrements a nested refcount and returns; type 0
- * (surface-backed) calls two real vtable methods (0x5b4/0x5bc) with a
- * generation tag and returns; type 1 (alias) walks to the next real
+ * (surface-backed) calls `update_ref_stamps`/`decrement_refcounts`
+ * (RESOLVED, issue #18) with a generation tag and returns; type 1 (alias) walks to the next real
  * texture in the chain and loops; type 8 decrements a refcount and
  * stores the current generation tag.
  */
@@ -55,11 +56,11 @@ void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture
             return;
         }
         if (kind == 0) {
-            void *vtableOwner = reinterpret_cast<void *>(U32At(texture, 0x50));
+            IOATIR500Surface *vtableOwner = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
             if (vtableOwner == nullptr) return;
-            UInt32 *vtable = *reinterpret_cast<UInt32 **>(vtableOwner);
-            reinterpret_cast<void (*)(void *, UInt32, UInt32)>(vtable[0x5b4 / 4])(vtableOwner, generation, 3);
-            reinterpret_cast<void (*)(void *, UInt32)>(vtable[0x5bc / 4])(vtableOwner, 3);
+            /* real: update_ref_stamps/decrement_refcounts - RESOLVED, issue #18 */
+            vtableOwner->update_ref_stamps(generation, 3);
+            vtableOwner->decrement_refcounts(3);
             return;
         }
         if (kind == 1) {
@@ -114,10 +115,9 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
             U32At(reinterpret_cast<void *>(U32At(sub, 0x34)), 0x38) = reinterpret_cast<UInt32>(sub);
         }
     } else if (kind == 0) {
-        void *vtableOwner = reinterpret_cast<void *>(U32At(texture, 0x50));
+        IOATIR500Surface *vtableOwner = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
         if (vtableOwner != nullptr) {
-            UInt32 *vtable = *reinterpret_cast<UInt32 **>(vtableOwner);
-            reinterpret_cast<void (*)(void *, UInt32)>(vtable[0x5b8 / 4])(vtableOwner, 3);
+            vtableOwner->increment_refcounts(3); /* RESOLVED, issue #18 */
         }
     } else if (kind == 1) {
         VendorTextureBuffer *chained = reinterpret_cast<VendorTextureBuffer *>(U32At(texture, 0x50));
@@ -134,16 +134,16 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
 
 /*
  * map_transfer_to_GART - CONFIRMED, fully transcribed (real kext offset
- * 0x79d0). Real, simple: a real vtable call (offset 0x5a8) checks
- * something (UNKNOWN real meaning - "is GART already mapped?" is the
- * obvious guess given the gate shape, not independently confirmed), and
- * if it reports "not yet mapped," delegates the actual mapping decision
- * to the accelerator's freeToAllocGART sweep (this project's fully
- * decoded GART reclamation mechanism - IOATIR500Accelerator.h).
+ * 0x79d0). Real, simple: `ATIRadeonX1000::addTransferToGART` (RESOLVED,
+ * issue #19; real name known, own body not independently decompiled)
+ * checks something (UNKNOWN real meaning - "is GART already mapped?" is
+ * the obvious guess given the gate shape, not independently confirmed),
+ * and if it reports "not yet mapped," delegates the actual mapping
+ * decision to the accelerator's freeToAllocGART sweep (this project's
+ * fully decoded GART reclamation mechanism - IOATIR500Accelerator.h).
  */
 void IOATIR500GLContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
-    UInt32 *vtable = *reinterpret_cast<UInt32 **>(accelerator);
-    UInt32 result = reinterpret_cast<UInt32 (*)(void *)>(vtable[0x5a8 / 4])(accelerator);
+    UInt32 result = accelerator->addTransferToGART();
     if (result == 0) {
         void *sharedAllocator = reinterpret_cast<void *>(U32At(this, 0x88)); /* real: *(IOATIR500Shared**)(this+0x88) */
         accelerator->freeToAllocGART(nullptr, nullptr, this, boundSurface,

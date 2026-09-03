@@ -158,94 +158,50 @@ private:
     IOATIR500Surface    *liveSurfaceListHead;    /* +0x5c, INFERRED offset */
 
     /*
-     * newUserClient's four real vtable-dispatched factory slots. Real
-     * offsets confirmed from the decompile (`*(int*)this + 0x5d4/0x5d8/
-     * 0x5dc/0x5e0`), and NAMES/PURPOSE are effectively resolved (see
-     * newUserClient's own comment above: type 0/+0x5d4 = Surface context,
-     * CONFIRMED via a real IOServiceOpen(...,0,...) call site; type 1/
-     * +0x5e0 = GL context, CONFIRMED the same way; type 2/+0x5d8 = 2D and
-     * type 3/+0x5dc = DVD, both INFERRED by elimination). This is real,
-     * independent, high-confidence evidence that does NOT depend on
-     * decoding the vtable's own raw relocations at all - it comes from
-     * matching real userspace client call sites (`_gldCreateContext`,
-     * `_gldAttachDrawable`) against the real `type` values they pass.
+     * newUserClient's four real vtable-dispatched factory slots -
+     * RESOLVED, issue #6. Both the names/roles (already solid before this
+     * pass - type 0/+0x5d4 = Surface, CONFIRMED via a real
+     * IOServiceOpen(...,0,...) call site; type 1/+0x5e0 = GL, CONFIRMED
+     * the same way; type 2/+0x5d8 = 2D and type 3/+0x5dc = DVD, INFERRED
+     * by elimination) AND the four words' raw numeric CONTENTS (this
+     * pass's own find) are now real.
      *
-     * The vtable *addresses* are also pinned down precisely: `IOATIR500Accelerator::vtable`/
-     * `__ZTV20IOATIR500Accelerator` sits at file-verified address 0x46970
-     * in `__TEXT,__const`, and the constructor's own decompile
-     * (`*(undefined **)this = &vtable;`) confirms zero Itanium-style
-     * offset-to-top/RTTI shift - `this->vtable + 0x5d4` etc. is exactly
-     * right as-is.
+     * The key correction: every earlier attempt at the raw values (see
+     * issue #6's own investigation history) read these four words off
+     * `IOATIR500Accelerator`'s OWN vtable (`__ZTV20IOATIR500Accelerator`,
+     * file-verified at `0x46970`) and confirmed, with hard data, that
+     * THAT copy is genuine linker placeholder content (`GENERIC_RELOC_VANILLA`,
+     * non-scattered, non-external; raw file bytes are 0; the same values
+     * repeat with a ~0x668-byte period across many other slots) - true,
+     * but beside the point, because no real object in this driver is ever
+     * a bare `IOATIR500Accelerator`. Every real instance is the concrete
+     * `ATIRadeonX1000` subclass (this header's own top comment), which
+     * has its OWN real vtable - `__ZTV14ATIRadeonX1000`, file-verified at
+     * `0x491c8` - and DOES locally override all four slots there. Reading
+     * that vtable directly (same zero-shift addressing convention already
+     * confirmed for the base) gives real, non-zero, meaningful values:
      *
-     * What's STILL genuinely unresolved is only the four words' raw
-     * numeric CONTENTS (the actual compiled function pointer values) -
-     * lower-value information at this point, since the real names/roles
-     * above are already solid and a numeric value can't be verified
-     * without a real compile+link anyway (issue #1's standing gap).
-     * Investigated exhaustively this pass with a real Ghidra headless
-     * script parsing the raw Mach-O structures directly (not just the
-     * higher-level analyzed Program) - ruling out every hypothesis tried
-     * so far, each confirmed with hard data, not assumption:
-     *   - NOT `PPC_RELOC_LOCAL_SECTDIFF` (type 15, scattered) as
-     *     originally logged - the real raw relocation_info entries at
-     *     these four addresses are type 0 (`GENERIC_RELOC_VANILLA`),
-     *     `r_scattered=0`, `r_extern=0`.
-     *   - NOT a plain absolute address - the raw `r_symbolnum` values
-     *     (0x4ae50 for +0x5d4/+0x5d8, 0x140 for +0x5dc) don't point to
-     *     real functions when read as VM addresses (0x4ae50 lands mid-way
-     *     through `_Mode1112Table`, an unrelated video-mode data table;
-     *     0x140 lands inside this class's own `~IOATIR500Accelerator`
-     *     destructor, at +0x20 into it).
-     *   - NOT a section ordinal (the spec-mandated meaning of
-     *     `r_symbolnum` when `r_extern=0`) - this binary has only 10
-     *     real sections total, ruling out values in the hundreds of
-     *     thousands.
-     *   - NOT a symbol-table index either, despite `r_extern=0` reading
-     *     as a false negative being considered - most values (0x4ae50,
-     *     0x37e50, etc.) exceed the real symbol count (1215) outright;
-     *     the one that happened to be in-bounds (0x140 -> index 320)
-     *     resolved to an unrelated symbol, almost certainly coincidental
-     *     rather than a real pattern (spot-checked against several other
-     *     values from the same relocation run, all out of bounds).
-     *   - There is no separate `LC_DYSYMTAB` local/external relocation
-     *     table to fall back to (confirmed absent) - the per-section
-     *     `reloff`/`nreloc` table already used is genuinely the only one
-     *     in this file, for both `RelocationInfo` reads and this
-     *     project's own manual raw-byte reads (which agree byte-for-byte
-     *     with Ghidra's parse, ruling out a parsing bug too).
-     *   - The raw FILE BYTES at all four addresses are genuinely 0 (not
-     *     just Ghidra's in-memory zeroing after a skipped relocation) -
-     *     confirmed by reading the file directly, bypassing the analyzed
-     *     Program entirely. Contrast with e.g. `ATIR500GLContext::start`'s
-     *     own vtable slot, which has a real, correct, unrelocated literal
-     *     value stored directly in the file (no relocation entry at all
-     *     needed) - proving some slots ARE resolvable this way and these
-     *     four specifically are not, for a real reason still unknown.
-     *   - The four raw values also repeat with a ~0x668-byte period
-     *     across a much wider span of the vtable than just these four
-     *     slots (many OTHER inherited-but-unoverridden slots show the
-     *     same handful of recurring values) - consistent with these
-     *     being genuine placeholder/scratch content the static linker
-     *     left behind for slots requiring load-time patching, rather
-     *     than a value this project is failing to decode correctly.
-     * Leading hypothesis, NOT confirmed: these four slots (along with
-     * the many others sharing the same recurring placeholder values) are
-     * inherited from `IOAccelerator`/`IOService`/`OSObject` and were
-     * never locally overridden in the object file the compiler saw for
-     * THIS particular build unit - meaning their real addresses may only
-     * ever have existed via Apple's kext-load-time "vtable patching"
-     * mechanism (`kxld`/`kld` matching against the actual running
-     * kernel's own symbol table), not anywhere in this static file at
-     * all. If true, no amount of further static analysis of this file
-     * alone can recover the real numeric values - only a live
-     * kxld-relocated memory read on real Tiger/Leopard hardware could.
-     * See issue #6 for the full investigation, including the raw
-     * relocation-table evidence for each ruled-out hypothesis.
+     *   +0x5d4 -> 0x1a140 -> `ATIRadeonX1000::new_surface(void)`
+     *   +0x5d8 -> 0x1a220 -> `ATIRadeonX1000::new_2d_context(void)`
+     *   +0x5dc -> 0x1a290 -> `ATIRadeonX1000::new_dvd_context(void)`
+     *   +0x5e0 -> 0x1a1b0 -> `ATIRadeonX1000::new_gl_context(void)`
+     *
+     * These are REAL mangled names already present in the kext's own
+     * symbol table (`__ZN14ATIRadeonX100011new_surfaceEv` etc.) - not
+     * invented - and their roles match this project's existing
+     * INFERRED-by-elimination ordering exactly (Surface/2D/DVD/GL at
+     * +0x5d4/+0x5d8/+0x5dc/+0x5e0 respectively), which independently
+     * CONFIRMS that ordering was correct all along. Declarations moved to
+     * `ATIRadeonX1000.h` (the real overriding subclass) using these real
+     * names; the base class below keeps the four virtuals as the
+     * interface it declares, now cross-referencing the real overrides.
+     * Own function bodies not independently decompiled this pass - only
+     * the vtable slot *values* were in scope for issue #6.
      */
-    virtual IOUserClient *createSurfaceContext(void); /* type 0, +0x5d4 - CONFIRMED real purpose (real IOServiceOpen(...,0,...) call site), real name/signature INFERRED */
-    virtual IOUserClient *create2DContext(void);      /* type 2, +0x5d8 - INFERRED by elimination */
-    virtual IOUserClient *createDVDContext(void);     /* type 3, +0x5dc - INFERRED by elimination */
-    virtual IOUserClient *createGLContext(void);      /* type 1, +0x5e0 - CONFIRMED real purpose (real IOServiceOpen(...,1,...) call site), real name/signature INFERRED */
+    virtual IOUserClient *createSurfaceContext(void); /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface, see ATIRadeonX1000.h */
+    virtual IOUserClient *create2DContext(void);      /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context, see ATIRadeonX1000.h */
+    virtual IOUserClient *createDVDContext(void);     /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context, see ATIRadeonX1000.h */
+    virtual IOUserClient *createGLContext(void);      /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context, see ATIRadeonX1000.h */
 };
 
 #endif /* IOATIR500ACCELERATOR_H */

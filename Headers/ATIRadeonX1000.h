@@ -43,6 +43,7 @@
 
 class IOWorkLoop;
 class IOMemoryDescriptor;
+struct GLKMemoryElement; /* real mangled type name (16GLKMemoryElement), layout UNKNOWN - only used opaquely as a pointer by tmpAllocVRAM/tmpDeallocVRAM below */
 
 class ATIRadeonX1000 : public IOATIR500Accelerator {
     OSDeclareDefaultStructors(ATIRadeonX1000)
@@ -154,12 +155,65 @@ public:
      */
     IOReturn waitForRetiredTimeStamp(UInt32 tag);
     IOReturn waitForTimeStampNoLock(UInt32 tag);
-    IOReturn waitForConsumedIDCTTimeStamp(UInt32 tag);
+    IOReturn waitForConsumedIDCTTimeStamp(UInt32 tag); /* real vtable slot +0x5ec on this class's own vtable, real addr 0x254e0 - CONFIRMED (issue #19), see ATIR500DVDContext_ProcessCommandBuffer.cpp's own EngineKickFn call sites */
 
     /*
      * External-method selector 9 on the GL context, CONFIRMED to be
      * exactly wait_for_stamp - see ATIR500GLContext.h.
      */
+
+    /*
+     * The four real `IOATIR500Accelerator::createXContext` factory
+     * virtuals' real overrides - RESOLVED, issue #6. Real names/addresses
+     * found by reading THIS class's own vtable (`__ZTV14ATIRadeonX1000`,
+     * file-verified at `0x491c8`) directly rather than the base class's -
+     * see `IOATIR500Accelerator.h`'s own updated note for the full
+     * account of why the base class's copy of these same four slots reads
+     * as genuine placeholder content while this one doesn't. Own bodies
+     * not independently decompiled this pass - only the vtable slot
+     * values were in scope for issue #6.
+     */
+    virtual IOUserClient *new_surface(void);     /* +0x5d4 on this class's own vtable, real addr 0x1a140 - real override of createSurfaceContext */
+    virtual IOUserClient *new_2d_context(void);  /* +0x5d8, real addr 0x1a220 - real override of create2DContext */
+    virtual IOUserClient *new_dvd_context(void); /* +0x5dc, real addr 0x1a290 - real override of createDVDContext */
+    virtual IOUserClient *new_gl_context(void);  /* +0x5e0, real addr 0x1a1b0 - real override of createGLContext */
+
+    /*
+     * Five more real vtable slots this project had called through raw
+     * offset casts with no name attached - RESOLVED, issue #19. Same
+     * "read the concrete ATIRadeonX1000 vtable, not the base class's own
+     * copy" technique that resolved issue #6 above. `waitForTimeStamp`/
+     * `sleepForTimeStamp` extend the already-declared
+     * waitFor.../sleepFor... fence-wait family above (this binary has a
+     * real 8-member family total: Retired/NoLock/Consumed-IDCT already
+     * known, these two are the plain, non-"NoLock"/non-IDCT-specific
+     * pair). `allocate_texture`/`deallocate_texture` and
+     * `addTransferToGART` are new real names, own bodies not yet
+     * independently decompiled. Real signatures below are taken directly
+     * from each real call site's own typedef (already transcribed
+     * elsewhere in this project, real parameter counts/types CONFIRMED
+     * from those call sites, not guessed) - notably `deallocate_texture`
+     * and `addTransferToGART` take NO extra parameters beyond `this`,
+     * contrary to what their names alone might suggest.
+     */
+    IOReturn allocate_texture(VendorTextureBuffer *texture);      /* +0x528 on this class's own vtable, real addr 0x1a800 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp's own callAcceleratorVtable0x528) */
+    void     deallocate_texture(void);                            /* +0x524, real addr 0x1a620 - CONFIRMED signature, no texture parameter (ATIR500GLContext_TextureLoad.cpp's own callAcceleratorVtable0x524) */
+    UInt32   setup3D(void);                                       /* +0x530, real addr 0x2610 - real return value IS checked at its one real call site (IOATIR500GLContext::start(), "if (iVar3 == 0) goto failure") - previously only a comment there, never actually wired in; now wired in, see that file */
+    UInt32   waitForTimeStamp(UInt32 tag);                        /* +0x54c, real addr 0x251e0 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp/ATIR500GLContext_RestoreState.cpp's own StampFn/VTableCall0x54c typedefs) */
+    UInt32   sleepForTimeStamp(UInt32 tag);                       /* +0x558, real addr 0x25960 - CONFIRMED signature (IOATIR500Surface_LockShape.cpp's own StampFn/Fn0x558 typedefs) */
+    UInt32   addTransferToGART(void);                             /* +0x5a8, real addr 0x1a4d0 - CONFIRMED signature, no buffer parameter; gates map_transfer_to_GART's real mapping decision, see IOATIR500GLContext_TextureStream.cpp */
+
+    /*
+     * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED, issue #19 (found while
+     * wiring in the rest of that issue - two more real vtable slots
+     * `IOATIR500Surface::set_shape_backing_length_ext`
+     * (`Sources/IOATIR500Surface_LockShape.cpp`) calls through raw
+     * `Fn0x540`/`Fn0x544` casts, same real gap regardless of not being in
+     * that issue's original enumeration). Own bodies not independently
+     * decompiled this pass.
+     */
+    void *tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 */
+    void  tmpDeallocVRAM(GLKMemoryElement *elem);                              /* +0x544, real addr 0x1ab20 */
 };
 
 #endif /* ATIRADEONX1000_H */

@@ -32,16 +32,23 @@
  * base class.
  *
  * Also confirmed on the subclass from the same symbol sweep, but
- * deliberately NOT added below since this project never declared or
- * decompiled either before this issue (real scope of issue #16 is
- * re-homing already-declared members correctly, not new decompilation):
+ * deliberately NOT added below (real scope of issue #16 was re-homing
+ * already-declared members correctly, not new decompilation):
  * `getTargetAndMethodForIndex` (real kext offset `0x3ac80` - the
  * external-method dispatch function itself, matching the same real
- * subclass-owns-dispatch pattern GL/DVD/2D already established) and
- * `invalidate` (real kext offset `0x3acb0` - the same real per-context
- * dirty-bit override every sibling class already has, per `invalidate`'s
- * own existing header note on `ATIR500GLContext.h`). Both real addresses
- * are recorded here for whoever picks up a future decompile pass.
+ * subclass-owns-dispatch pattern GL/DVD/2D already established) - real
+ * address recorded here for whoever picks up a future decompile pass.
+ * `invalidate` (real kext offset `0x3acb0`) - the OTHER method noted
+ * here at issue #16 time - IS now declared as of issue #18, but on
+ * `IOATIR500Surface` (the base), not here: every real call site reaches
+ * it through a base-typed pointer/virtual dispatch, not a
+ * subclass-typed one, so C++ requires the declaration live on the base
+ * for those call sites to compile, even though the base's own copy of
+ * this vtable slot is genuine placeholder content and only this
+ * subclass provides a real override. See `IOATIR500Surface.h`'s own
+ * updated note for the full account, and four more real subclass
+ * overrides (`dealloc_surface`/`alloc_surface_buffer`/`prepare_vram`/
+ * `complete_vram`) found and declared there the same way.
  */
 
 #ifndef ATIR500SURFACE_H
