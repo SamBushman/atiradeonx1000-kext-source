@@ -398,7 +398,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 7 opcodes remain)
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 3 opcodes remain)
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -585,15 +585,28 @@ comparison, REAL, IDENTICAL setup code (0x44 reaches the exact same real merge p
 fall-through does, via an explicit `goto` in the raw decompile) - a genuine driver/compiler artifact, not
 a transcription shortcut. Transcribed as one shared handler, `handle_opcode_43_44`.
 
+**LATER CONTINUATION, same pass**: four more real opcodes transcribed and wired - 0x14 (a dense 6-way-branch,
+3-output multi-plane YUV/tiling burst), 0x16 (the densest opcode transcribed this pass: a 12-way branch
+producing FIVE real output values from two independent per-mip records), 0x18 (a real two-transfer-buffer
+fetch setup, each independently GART-mapped/spliced), and 0x15 (structurally unique in this whole cluster -
+the only opcode that does NOT index a per-`record[N]` mip array; it reads a real FIXED sub-record embedded
+in `boundSurface` at `+0x7b0`, transcribed via direct PPC instruction decoding since no matching
+decompiled-C region for it could be found in the raw decompile output this project has on hand - a real
+gap in Ghidra's own C rendering for that address range). One more real logic bug caught and fixed in THIS
+PASS'S OWN draft before committing (not a stale earlier bug): an early draft of the opcode 0x16 handler
+used `rowSize` instead of the real `blendedBase` in two of its twelve branches' `outE` formula - caught by
+re-checking every branch individually against the raw decompile.
+
 **Still open, real disassembly-verified addresses on record** (in the dispatcher's own explicit
 not-yet-transcribed `case` block, so a future pass can go straight to decompiling without re-deriving the
-mapping): opcode 0x12 (`0x35c04`, ~750 real lines - the single largest remaining gap in this function,
-comparable in scale to GL's own opcode 0x2d), 0x14 (`0x36a14`), 0x15 (`0x378e0`), 0x16 (`0x36e08`), 0x17
-(`0x372b4`), 0x18 (`0x38a0c`), 0x3d (`0x364c0`) - the latter six each ~250-400 real lines of dense
-per-plane YUV/tiling math. This dispatcher explicitly falls through to the natural-distance default for
-all seven, with a loud comment - a KNOWN GAP, not a confirmed real no-op; do not trust it for these seven
-opcode values on real hardware. Genuinely a large remaining undertaking, same scope note this section has
-carried since DVD's skeleton was first mapped - not a small residual item.
+mapping) - down to three opcodes from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
+single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d), 0x17
+(`0x372b4` - its opening instructions closely mirror opcode 0x16's own real shape, likely a similarly
+dense multi-plane burst, not independently confirmed), and 0x3d (`0x364c0`, ~341 real lines - own body
+already located in the raw decompile, a real double 5-field `0x1150`-`0x1154` burst, but not yet
+transcribed). This dispatcher explicitly falls through to the natural-distance default for all three, with
+a loud comment - a KNOWN GAP, not a confirmed real no-op; do not trust it for these three opcode values on
+real hardware. Genuinely still a nontrivial remaining item, though much reduced from the original ~18.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 
