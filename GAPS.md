@@ -1074,3 +1074,23 @@ unresolved GART-handle-object mystery, see above), and the `waitForTimeStamp`/`s
 `waitForConsumedIDCTTimeStamp` family (all three share one real polling-loop algorithm against a real
 hardware timestamp counter, differing only in which register/offset they read and which real timing-helper
 stub addresses they call - a clean, economical transcription once done, just not done yet).
+
+## 19. `map_transfer_to_GART`'s real gating condition - RESOLVED (as much as possible), issue #26
+
+Filed after fixing `addTransferToGART`'s signature (gap 18) surfaced a genuine, then-unresolved question:
+does `addTransferToGART` (and by extension `map_transfer_to_GART`'s own gate around `freeToAllocGART`)
+ever produce a real, meaningful return value, or is the previous transcription's captured "result" a
+calling-convention artifact?
+
+Decompiled `IOATIR500Accelerator`'s own `+0x5a0` vtable slot - a real, already-named symbol,
+`addToGART(IOMemoryDescriptor*, unsigned long*)`, real addr `0x5220` (base) / `0x1a480` (subclass, a
+trivial pass-through override with no added logic). Both levels are CONFIRMED genuinely `void` - neither
+ever sets a real return value in its own control flow. `addToGART`'s own real body makes one further
+delegating call, to a standard Apple `IOMemoryDescriptor` vtable slot (`+0x590`) - a real, well-known Apple
+base class this project doesn't reverse-engineer, so its own real behavior stays formally unconfirmed.
+
+This is strong (not airtight) confirmation that no real signal exists anywhere in the
+`map_transfer_to_GART` → `addTransferToGART` → `addToGART` chain - the conservative unconditional fix
+already applied to `map_transfer_to_GART` is the correct final transcription, not a placeholder. See
+`Sources/ATIRadeonX1000_VtableSlotBodies.cpp` and `Headers/IOATIR500Accelerator.h`'s own header comments
+for the full account.

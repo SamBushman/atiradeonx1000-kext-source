@@ -156,13 +156,15 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
  *    to leave in the return register - NOT a confirmed real signal, per
  *    this project's own established caveat about this exact category of
  *    artifact elsewhere (e.g. `ATIR500GLContext_TextureLoad.cpp`'s
- *    `load_texture` note). Not resolved with certainty either way this
- *    pass - the real gate condition (if any) would require decompiling
- *    a further vtable slot (`IOATIR500Accelerator`'s own `+0x5a0`,
- *    itself unidentified) to settle. Conservatively made unconditional
- *    here (never skip the GART-mapping decision) rather than guess at a
- *    condition this project can't currently confirm - see issue #23's
- *    own tracking for whoever investigates `+0x5a0` next.
+ *    `load_texture` note). SETTLED (issue #26): decompiling the further
+ *    slot `addTransferToGART` itself calls (`IOATIR500Accelerator`'s own
+ *    `+0x5a0`, real name `addToGART`, `Headers/IOATIR500Accelerator.h`)
+ *    shows it is ALSO genuinely void at both class levels - strong (not
+ *    airtight; the deepest call, on Apple's own standard
+ *    `IOMemoryDescriptor`, is out of this project's scope) confirmation
+ *    that no real signal exists anywhere in this chain. The
+ *    unconditional call below is the correct final transcription, not a
+ *    placeholder.
  */
 void IOATIR500GLContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
     accelerator->addTransferToGART(buffer);

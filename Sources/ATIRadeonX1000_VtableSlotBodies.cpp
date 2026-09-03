@@ -8,6 +8,16 @@
  * are tracked separately - substantial real functions in their own
  * right, deferred to a dedicated follow-up pass rather than rushed here.
  *
+ * addToGART - RESOLVED, issue #26 (a follow-up filed after fixing
+ * addTransferToGART's own real signature below surfaced this real,
+ * previously-uninvestigated `+0x5a0` vtable slot and a genuine
+ * uncertainty about whether it - and by extension addTransferToGART -
+ * ever produces a real return value). Both class levels' real bodies are
+ * CONFIRMED genuinely void, settling that question (as much as possible
+ * without reverse-engineering Apple's own standard `IOMemoryDescriptor`
+ * class) - see `Headers/IOATIR500Accelerator.h`'s own header comment for
+ * the full account.
+ *
  * setup3D - RESOLVED. CORRECTED, issue #23: real vtable slot has the
  * IDENTICAL address on both `IOATIR500Accelerator`'s own vtable and
  * `ATIRadeonX1000`'s - i.e. NOT actually overridden by the subclass,
@@ -93,21 +103,33 @@ void ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement *elem) {
 
 void IOATIR500Accelerator::addTransferToGART(VendorTransferBuffer *buffer) {
     UInt8 *bufBytes = reinterpret_cast<UInt8 *>(buffer);
-    /* real: (**(code**)(*this + 0x5a0))(this, *(undefined4*)(buffer+8), buffer+4) - a further,
-     * still-unidentified vtable slot on this class, own real target/role not investigated. */
-    typedef void (*Fn0x5a0)(void *, UInt32, void *);
-    UInt32 *vtable = *reinterpret_cast<UInt32 **>(this);
-    (*reinterpret_cast<Fn0x5a0 *>(vtable + (0x5a0 / 4)))(this, *reinterpret_cast<UInt32 *>(bufBytes + 8), bufBytes + 4);
+    addToGART(reinterpret_cast<IOMemoryDescriptor *>(*reinterpret_cast<UInt32 *>(bufBytes + 8)),
+              reinterpret_cast<UInt32 *>(bufBytes + 4));
+}
+
+void IOATIR500Accelerator::addToGART(IOMemoryDescriptor *descriptor, UInt32 * /* real: unused */) {
+    /* real: (**(code**)(*descriptor + 0x590))(); - a standard Apple IOMemoryDescriptor vtable
+     * slot, real target/role not identified (external Apple ABI fact, not this project's own
+     * code) - RESOLVED (as much as possible), issue #26. See Headers/IOATIR500Accelerator.h's
+     * own header comment for the full account, including why this settles (not airtight, but
+     * strong) map_transfer_to_GART's own gating-condition question. */
+    typedef void (*Fn0x590)(void *);
+    UInt32 *vtable = *reinterpret_cast<UInt32 **>(descriptor);
+    (*reinterpret_cast<Fn0x590 *>(vtable + (0x590 / 4)))(descriptor);
+}
+
+void ATIRadeonX1000::addToGART(IOMemoryDescriptor *descriptor, UInt32 *result) {
+    /* CONFIRMED real trivial pass-through - no added logic. */
+    IOATIR500Accelerator::addToGART(descriptor, result);
 }
 
 void ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
     IOATIR500Accelerator::addTransferToGART(buffer);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     /* real: `iVar1 = base_call(...); if ((iVar1 != 0) && (this[0x85] != 0)) { this+0x8a0 = 1; }` -
-     * the base call's own real return value is genuinely uncertain (see this file's own header
-     * comment) so the gate is transcribed here on the byte at this+0x85 alone; a real compiler
-     * would also gate on the base call's own success, not modeled since that value isn't
-     * confirmed real. */
+     * the base call's own real return value is CONFIRMED (issue #26) to not exist - addToGART is
+     * genuinely void at both class levels - so the gate is transcribed here on the byte at
+     * this+0x85 alone, matching the base call's own real (lack of a) return value. */
     if (self[0x85] != 0) {
         *reinterpret_cast<UInt32 *>(self + 0x8a0) = 1;
     }

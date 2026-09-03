@@ -25,6 +25,7 @@ class IOATIR500DVDContext;
 class IOATIR500GLContext;
 class IOATIR500Surface;
 class IOATIR500Shared;
+class IOMemoryDescriptor;
 struct VendorTransferBuffer;
 struct VendorCommandBuffer; /* real, distinct mangled type name (19VendorCommandBuffer) -
                               * NOT the same as VendorCommandBufferHeader (25 chars) already in
@@ -102,13 +103,46 @@ public:
      * takes a `VendorTransferBuffer*` parameter (confirmed from this
      * function's own real decompile, which unconditionally dereferences
      * it) - this project's earlier transcription (issue #19) had it
-     * taking no parameters. Real body delegates to a further, still
-     * unidentified vtable slot (`+0x5a0` on this class) with two derived
-     * values from the buffer - own body of THAT slot not investigated.
-     * `ATIRadeonX1000`'s own override (`ATIRadeonX1000.h`) calls this
-     * base version explicitly, then adds its own extra bookkeeping.
+     * taking no parameters. Real body delegates to `addToGART` below with
+     * two derived values from the buffer. `ATIRadeonX1000`'s own override
+     * (`ATIRadeonX1000.h`) calls this base version explicitly, then adds
+     * its own extra bookkeeping.
      */
     virtual void addTransferToGART(VendorTransferBuffer *buffer);
+
+    /*
+     * addToGART - RESOLVED, issue #26 (real vtable slot +0x5a0, real addr
+     * 0x5220 on this class, real name already present in the kext's own
+     * symbol table). Real params: this class's own isolated decompile of
+     * this function never references `this` inside its own trivial body,
+     * so Ghidra's own signature inference dropped it and named the next
+     * two real registers `param_1`/`param_2` as if they were the first -
+     * the real call site (`addTransferToGART`'s own body) confirms the
+     * true 3-register shape is `(this, IOMemoryDescriptor *descriptor,
+     * UInt32 *result)`, matching a real transfer buffer's own `+8`
+     * (its IOMemoryDescriptor) and `+4` (an output slot) fields. Real
+     * body is a single further delegating call, to a standard Apple
+     * `IOMemoryDescriptor` vtable slot (`+0x590` on `descriptor`) - a
+     * real, well-known Apple base class this project doesn't
+     * reverse-engineer; own real target/role not identified (would
+     * require the real IOKit `IOMemoryDescriptor` vtable layout for this
+     * OS/architecture, an external fact, not something recoverable from
+     * this binary alone).
+     *
+     * SETTLES issue #26's own real question: this function, and its own
+     * one real subclass override (`ATIRadeonX1000::addToGART`,
+     * `ATIRadeonX1000.h` - a trivial pass-through with no added logic),
+     * are BOTH genuinely `void` - neither ever sets a real return value
+     * in its own decompiled control flow. This is strong (not airtight -
+     * the deeper `IOMemoryDescriptor+0x590` call's own real behavior is
+     * still unknown) confirmation that `addTransferToGART`'s own
+     * previously-captured "return value" was a real calling-convention
+     * artifact, not a meaningful signal - the conservative unconditional
+     * fix already applied to `map_transfer_to_GART`
+     * (`IOATIR500GLContext_TextureStream.cpp`) is the correct final
+     * answer, not just a placeholder.
+     */
+    virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result);
 
     /* allocOneDataBuffer / freeOneDataBuffer / allocDataBufferBacking -
      * CONFIRMED to exist and be real (every context's get_data_buffer

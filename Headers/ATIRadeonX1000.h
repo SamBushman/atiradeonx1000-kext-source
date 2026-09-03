@@ -217,6 +217,7 @@ public:
     UInt32   waitForTimeStamp(UInt32 tag);                        /* +0x54c, real addr 0x251e0 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp/ATIR500GLContext_RestoreState.cpp's own StampFn/VTableCall0x54c typedefs) */
     UInt32   sleepForTimeStamp(UInt32 tag);                       /* +0x558, real addr 0x25960 - CONFIRMED signature (IOATIR500Surface_LockShape.cpp's own StampFn/Fn0x558 typedefs) */
     virtual void addTransferToGART(VendorTransferBuffer *buffer); /* +0x5a8 on this class's own vtable, real addr 0x1a4d0 - real override of IOATIR500Accelerator::addTransferToGART, see that header */
+    virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 on this class's own vtable, real addr 0x1a480 - RESOLVED, issue #26: a trivial pass-through override, calls IOATIR500Accelerator::addToGART with no added logic, see that header */
 
     /*
      * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED, issue #19 (found while
