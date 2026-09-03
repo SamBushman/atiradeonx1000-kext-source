@@ -178,7 +178,11 @@
  * `FUN_0003911c` (a real refcount-style helper - every call site gates
  * `delete_texture` on it returning exactly 1, "this was the last
  * reference") and `FUN_0003913c` (the same real "ensure GART-mapped"
- * idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called opaquely.
+ * idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called opaquely -
+ * RESOLVED, issue #15: both, and `FUN_000390dc` below, are real
+ * lazy-binding external stubs with no local body in this binary at all
+ * (not a "left un-decompiled" gap) - see the comprehensive finding at
+ * the end of `Headers/ATIRadeonX1000Registers.h`.
  * `FUN_000390dc` is called with a literal `0xffff0001` first argument -
  * the exact same bit pattern as the real atomic packed-counter update
  * this project independently verified via raw PPC disassembly in GL's

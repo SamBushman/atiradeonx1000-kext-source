@@ -59,8 +59,12 @@ public:
      * this+0x3f0 (stride 0x78) to real defaults (blend/format bits),
      * initializes four swap-chain-related fields, sets the special
      * selector-20 methodDescs pointer described above, and finally calls
-     * FUN_000286dc/ec (a lock-pair, real name UNKNOWN) around the base
-     * class's own start(). stop() UNKNOWN - not decompiled this project.
+     * FUN_000286dc/ec (a lock-pair) around the base class's own start() -
+     * RESOLVED, issue #15: real lazy-binding external stubs with no local
+     * body in this binary, real names UNKNOWN and unrecoverable without
+     * live kxld resolution - see the comprehensive finding at the end of
+     * `Headers/ATIRadeonX1000Registers.h`. stop() UNKNOWN - not decompiled
+     * this project.
      */
     virtual bool start(IOService *provider) override;
     virtual void stop(IOService *provider) override;

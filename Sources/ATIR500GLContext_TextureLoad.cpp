@@ -144,9 +144,10 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
  * list (accelerator+0x6d0 head / +0x69c sentinel - the SAME real
  * circular-doubly-linked-list shape get_texture uses on the texture
  * list at +0x600/+0x5dc, just a different instance for transfer
- * buffers). Real address 0x2a864; not independently decompiled this
- * pass - called opaquely, like the raw vtable calls elsewhere in this
- * function.
+ * buffers). Real address 0x2a864. RESOLVED, issue #15: a real
+ * lazy-binding external stub with no local body in this binary at all -
+ * see the comprehensive finding at the end of
+ * Headers/ATIRadeonX1000Registers.h.
  */
 extern void FUN_0002a864(void *transferBuffer);
 
@@ -865,8 +866,10 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
 
     /* Own copy (real address 0x29da8) of the same unlink-then-splice-into-
      * accelerator-transfer-list pattern alloc_and_load_texture's
-     * FUN_0002a864/spliceIntoTransferList already use - not independently
-     * decompiled, called opaquely like that one. */
+     * FUN_0002a864/spliceIntoTransferList already use. RESOLVED, issue
+     * #15: a real lazy-binding external stub with no local body in this
+     * binary - see the comprehensive finding at the end of
+     * Headers/ATIRadeonX1000Registers.h. */
     extern void FUN_00029da8(void *node);
     auto spliceIntoAccelTransferList = [&](UInt8 *node) {
         FUN_00029da8(node + 0x2c);

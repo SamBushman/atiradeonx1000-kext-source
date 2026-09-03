@@ -97,9 +97,11 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
         U8At(rec, 0x14) |= U8At(subRec, 0x14);
 
         if (U32At(sub, 4) != 0) {
-            /* FUN_00007424(sub + 0x2c) - real function, name UNKNOWN,
-             * likely a list-unlink helper/lock acquire for the node about
-             * to be relinked below. */
+            /* FUN_00007424(sub + 0x2c) - likely a list-unlink helper/lock
+             * acquire for the node about to be relinked below. RESOLVED,
+             * issue #15: a real lazy-binding external stub with no local
+             * body in this binary - see the comprehensive finding at the
+             * end of Headers/ATIRadeonX1000Registers.h. Real name UNKNOWN. */
             void *accel = accelerator;
             UInt32 oldPrev = U32At(sub, 0x34);
             UInt32 oldNext = U32At(sub, 0x38);

@@ -292,4 +292,77 @@ extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
  */
 extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
 
+/*
+ * ============================================================================
+ * The ~24 opaque FUN_XXXXXXXX helpers - RESOLVED (issue #15), with a real
+ * structural finding that changes what "resolved" means for this group.
+ * ============================================================================
+ *
+ * Every one of the 23 real kext-local `FUN_XXXXXXXX` symbols this project
+ * had called opaquely throughout (`FUN_00007424`, `FUN_000147f0`,
+ * `FUN_00014810`, `FUN_00014820`, `FUN_00014850`, `FUN_00015870`,
+ * `FUN_000158b0`, `FUN_000158c0`, `FUN_000158d0`, `FUN_000158e0`,
+ * `FUN_00015a84`, `FUN_00015aa4`, `FUN_000286dc`, `FUN_00029da8`,
+ * `FUN_0002a864`, `FUN_000314c4`, `FUN_000334cc`, `FUN_0003577c`,
+ * `FUN_000357ac`, `FUN_000390dc`, `FUN_0003911c`, `FUN_0003913c`,
+ * `FUN_00044868`) is, in the real kext binary, a REAL LAZY-BINDING STUB
+ * TRAMPOLINE - not a local function this project failed to decompile.
+ * Each one's real body is exactly the same real 4-instruction sequence
+ * (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`), with LITERAL
+ * ZERO immediates in the static binary - a real external-symbol call
+ * stub whose actual target gets patched in only when the kext is loaded
+ * onto real hardware (by Apple's `kxld` linker, resolving against
+ * whatever kernel/companion-kext symbol table exists at boot time), the
+ * SAME real category of "genuinely not present in this static file"
+ * limitation issue #6 already established for the accelerator's own
+ * four context-factory vtable words.
+ *
+ * FOUND, not assumed: this project's original issue #15 filing expected
+ * ~24 small internal functions with real, if opaque, bodies to
+ * decompile. Direct inspection (every one of the 23 addresses has a
+ * function defined, `bodySize=16` bytes, `params=0`) immediately showed
+ * the trampoline shape; CONFIRMED it's a genuine unresolved-external
+ * case (not just an un-analyzed local call) via three independent
+ * checks, matching the same rigor issue #6 already used: (1) this
+ * binary has NO `LC_DYSYMTAB` at all (an older, Tiger/Leopard-era kext
+ * format lacking the dynamic-linking load command modern Mach-O
+ * binaries use for lazy stubs - a real, confirmed structural fact about
+ * this specific file, not an analysis gap); (2) the `__text` section's
+ * own per-section relocation table (`nreloc=11622`) was read directly
+ * and did NOT resolve to any real symbol name at these specific
+ * addresses; (3) Ghidra's own original full-analysis import (not just
+ * this pass's own read-only re-checks) recorded ZERO real references
+ * from any of these 23 stub addresses - the same tool that correctly
+ * resolves thousands of other real internal calls throughout this same
+ * binary found nothing to resolve here either.
+ *
+ * A twenty-fourth symbol from this project's own original issue #15
+ * filing, `FUN_0002c790`, is REMOVED from this list - a real
+ * miscategorization caught during this investigation: that address
+ * belongs to a completely different, out-of-scope binary
+ * (`ATIRadeonX1000GLDriver.bundle`, a userspace driver - see
+ * `ATIRadeonX1000Types.h`'s own `VendorCommandBufferHeader` comment for
+ * the original citation), not this kext at all - no function is defined
+ * there in this kext's own Ghidra project, correctly, since it was
+ * never really part of this binary.
+ *
+ * This project's own earlier ROLE-LEVEL inferences (derived from real
+ * call-site signature/usage analysis, independent of ever seeing these
+ * functions' own bodies) remain the real, standing understanding for
+ * each - lock/unlock pairs, an alloc/free pair, transfer-buffer
+ * GART-mapping helpers, atomic packed-counter/refcount helpers, and the
+ * blit-state-packet template-copy helper (see each symbol's own
+ * declaration site for its specific role) - satisfying this issue's own
+ * stated alternate success criterion ("confirmed to be a real,
+ * well-understood standard-library-style primitive... reasonable to
+ * keep calling opaquely by name once identified"). What's now CLOSED
+ * OUT rather than merely inferred is WHY no further static decompilation
+ * work will ever recover more than this: there is no more to decompile
+ * in this file. Recovering each stub's exact real symbol name (e.g.
+ * confirming `FUN_000147f0` really is `IOLockLock` or equivalent) would
+ * require either live kxld-resolved memory on real hardware, or a real
+ * kernel/IOKit KPI export-symbol list to cross-reference against by
+ * address - neither available in this sandboxed environment.
+ */
+
 #endif /* ATIRADEONX1000_REGISTERS_H */

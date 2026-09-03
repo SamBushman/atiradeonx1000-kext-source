@@ -69,8 +69,12 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
  * FUN_000286dc/ec and discard_command_buffer's own lock pair: each
  * real caller gets its own small lock/unlock function taking the real
  * commandLock pointer (this+0xd50's own +0x840 here) as sole argument,
- * rather than one shared helper. Not independently decompiled - real
- * names UNKNOWN.
+ * rather than one shared helper. RESOLVED (issue #15): both are real
+ * lazy-binding external stubs with no local body in this binary at all -
+ * see the comprehensive finding at the end of
+ * `Headers/ATIRadeonX1000Registers.h` for the full account (real names
+ * still UNKNOWN, unrecoverable without live kxld resolution or a kernel
+ * export-symbol list - this is not a decompilation gap).
  */
 extern void FUN_00015aa4(void *lockPtr);
 extern void FUN_00015a84(void *lockPtr);
@@ -206,10 +210,11 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * Confidence: CONFIRMED for the overall control flow and every real
  * offset/constant (all read directly from a fresh complete decompile,
  * cross-checked against the real disassembly for the parameter-count
- * question above). Dense enough, and peripheral enough to this project's
- * compute-acceleration goal (per issue #8's own framing), that the four
- * opaque helper calls above were deliberately left un-decompiled rather
- * than chased further this pass.
+ * question above). RESOLVED (issue #15): the four opaque helper calls
+ * below are all real lazy-binding external stubs with no local body in
+ * this binary at all, not a "left un-decompiled" gap - see the
+ * comprehensive finding at the end of
+ * `Headers/ATIRadeonX1000Registers.h`.
  */
 extern void FUN_00014850(void *lockPtr);
 extern void FUN_000147f0(void *lockPtr);
@@ -520,6 +525,9 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  * on any single bit position here, same caveat this project already
  * gives its other densest functions.
  */
+/* RESOLVED (issue #15): all five below are real lazy-binding external
+ * stubs with no local body in this binary - see the comprehensive
+ * finding at the end of `Headers/ATIRadeonX1000Registers.h`. */
 extern void FUN_000158e0(void *lockPtr);
 extern void FUN_000158d0(void *lockPtr, void *accel, UInt32 zero);
 extern void *FUN_000158c0(UInt32 size, UInt32 align);
