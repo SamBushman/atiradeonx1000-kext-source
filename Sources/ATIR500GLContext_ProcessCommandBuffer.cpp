@@ -1151,18 +1151,20 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
 }
 
 /*
- * Opcode 0x31: CONFIRMED the richest single opcode in the language - a
- * full state-restore blit reusing the EXACT SAME 0x2f4-byte
- * _g_r500_3d_blit_state_packet template as
- * restore_state_destroyed_by_pageoff, for TWO surfaces (main + FSAA-resolve
- * target), followed by a complete textured full-quad draw with real
- * floating-point NDC/viewport math and US-block shader headers - the
- * second independent confirmed real example (after
- * _radeon3DCopySetup/_radeon3DFillSetup) of this driver generation's
- * "blit via textured quad" technique. FULLY transcribed, literally,
- * in Sources/ATIR500GLContext_FSAAResolveBlit.cpp (see that file for the
- * transcription method and an honest caveat about the two real, open
- * integration/precision gaps it documents).
+ * Opcode 0x31: **KNOWN BUG, see issue #12 / GAPS.md section 2** - this is
+ * NOT actually opcode 0x31's real handler. A fresh Ghidra re-decompile
+ * (this pass) shows the real `if (uVar34 == 0x31000000)` branch in
+ * process_command_buffer is a short, purely-integer handler calling
+ * `ATIR500Surface::decompress_and_flush_depth_buffer` once or twice and
+ * ending in a completely ordinary `goto LAB_00031340;` - nothing like the
+ * ~500-line floating-point/tile-blit content actually in
+ * Sources/ATIR500GLContext_FSAAResolveBlit.cpp below. That file's content
+ * was ALSO confirmed NOT to be `ATIR500Surface::resolve_fsaa_buffer`
+ * (opcode 0x30's real callee) via a direct decompile of that real symbol -
+ * so what this file actually contains is genuinely unidentified for now.
+ * Real opcode 0x31 has never been transcribed; this dispatch entry is
+ * calling the wrong code until that's fixed. Do not trust this case at
+ * runtime.
  */
 extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record);
 

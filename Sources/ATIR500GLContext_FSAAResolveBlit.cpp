@@ -1,6 +1,30 @@
 /*
  * ATIR500GLContext_FSAAResolveBlit.cpp
  *
+ * **KNOWN MISATTRIBUTION, see issue #12 / GAPS.md section 2** (found via a
+ * fresh Ghidra re-decompile pass): this file is titled/labeled "opcode
+ * 0x31," but a direct decompile of process_command_buffer's real
+ * `if (uVar34 == 0x31000000)` branch is short, purely integer, and calls
+ * `ATIR500Surface::decompress_and_flush_depth_buffer` - nothing like the
+ * content below. This file's content was ALSO checked directly against
+ * the real `ATIR500Surface::resolve_fsaa_buffer` symbol (the other
+ * working hypothesis, since opcode 0x30 really does call that function) -
+ * also does not match; that real function uses HyperZ memory helpers and
+ * Surface-relative offsets (`this+0xb94` etc.), not the GL-context
+ * offsets (`self+0x290` etc.) this file uses throughout.
+ *
+ * The content below is real, careful, internally-consistent transcription
+ * of SOME real function in this kext - just not either function it's
+ * currently wired to/named after. Left in place rather than deleted,
+ * since the work itself still has value once its true identity is found,
+ * but **do not trust the `case 0x31000000` dispatch wiring or the
+ * `resolve_fsaa_buffer` identification** until this is resolved. See
+ * GAPS.md for what's been ruled out and suggested next steps.
+ *
+ * Original header follows, describing this content AS IF it were opcode
+ * 0x31 - kept for the transcription methodology notes, which remain
+ * accurate regardless of the misattribution:
+ *
  * Opcode 0x31 - the full, real state-restore-and-resolve blit. CONFIRMED,
  * transcribed literally from the complete real decompile (kext offset
  * range covering the tail of process_command_buffer's dispatch chain -

@@ -224,12 +224,12 @@ findings:
   warrant an independent spot-check - or live hardware verification - before fully trusting any single bit
   position. See the function's own header comment for the exact caveat.
 
-**Also found, not yet resolved**: opcode 0x29's real execute-path handler was cross-checked against
-`discard_command_buffer`'s independent trace of the same opcode, and both agree on the 8-case switch table
-- but one open question remains unconfirmed: whether the EXECUTE-path handler processes a fixed 4 slots
-(as the discard path does) or the dynamic `record[1]` attachment count opcode 0x41 uses for its own,
-separate per-attachment loop. A fresh, targeted re-read of opcode 0x29's real loop-bound computation would
-settle this.
+~~**Also found, not yet resolved**: opcode 0x29's real execute-path handler...~~ **RESOLVED (issue #12.2)**:
+a fresh, targeted re-decompile of `process_command_buffer` (via a real Ghidra headless script, not a
+narrative excerpt) shows the real handler initializes its loop counter to a literal `4` and decrements it
+exactly 4 times (`iVar55 = 4; do { ...; iVar55 = iVar55 + -1; } while (iVar55 != 0);`) - a genuinely FIXED
+4-slot loop, matching `discard_command_buffer`'s independent trace exactly. NOT the dynamic `record[1]`
+attachment-count pattern opcode 0x41 uses. Confirmed directly from the real decompile, not inferred.
 
 **Also found, not yet resolved**: `discard_command_buffer`'s own handling of opcode 0x3b (query-buffer
 bind's cleanup/discard-path counterpart) is explicitly deferred in that file's own comment - it correctly
@@ -241,14 +241,38 @@ independent of - and does not block - opcode 0x3b's real EXECUTE-path body, whic
 ~~**A real, unnamed virtual method** at vtable offset `+0x5a4`...~~ **RESOLVED (issue #12.1)**: it's
 `ATIR500GLContext::invalidate()` - see section 6 and `Headers/ATIR500GLContext.h`.
 
-**A real, open opcode-0x31 tail-integration question** (found finishing the opcode language this pass):
-opcode 0x31's handler (`ATIR500GLContext_handle_fsaa_resolve_blit`) is the one confirmed opcode whose real
-ending returns an explicitly-computed next-record pointer rather than relying on the header's own encoded
-distance field (every other opcode in the language does the latter). The dispatch loop's `if (next !=
-record)` branch advances straight to that pointer without running the tail's real "is the buffer now fully
-consumed" exit-descriptor-write check, but the real decompile shows this opcode's real ending DOES fall
-into that same shared check. Whether this ever actually diverges from real hardware behavior is
-unconfirmed - see that function's own updated header comment.
+**UPGRADED to a confirmed dispatch-table bug** (was "an open tail-integration question" - re-investigated
+this pass with a real Ghidra headless script decompiling `process_command_buffer` and
+`ATIR500Surface::resolve_fsaa_buffer` directly, not narrative excerpts): `ATIR500GLContext_ProcessCommandBuffer.cpp`'s
+dispatch table wires `case 0x31000000` to `ATIR500GLContext_handle_fsaa_resolve_blit` (the content of
+`Sources/ATIR500GLContext_FSAAResolveBlit.cpp`) - but this is wrong on two independently-confirmed counts:
+
+1. **The real opcode 0x31 is NOT that content.** A fresh decompile of `process_command_buffer`'s real
+   `if (uVar34 == 0x31000000)` branch shows a short (~180-line), purely-integer handler that remaps an
+   attachment-type selector, picks a surface/scratch-buffer pair depending on `this+0x3bc`, calls the
+   already-declared `ATIR500Surface::decompress_and_flush_depth_buffer` once or twice, and ends with a
+   completely ordinary `goto LAB_00031340;` - no special tail handling, no divergence from the shared
+   exit check at all. This real opcode 0x31 body has never been transcribed anywhere in this repo.
+2. **`Sources/ATIR500GLContext_FSAAResolveBlit.cpp`'s content is also NOT `ATIR500Surface::resolve_fsaa_buffer`**,
+   despite that being its other working hypothesis (the two share a superficial FSAA theme and a `_g_r500_3d_blit_state_packet`
+   copy, which is what made the misattribution plausible). A fresh, direct decompile of the real
+   `ATIR500Surface::resolve_fsaa_buffer` symbol (kext offset 0x43e60, confirmed via `nm`) is a
+   completely different, shorter (~260-line) function using HyperZ memory helpers
+   (`HZMEM_GetBlockOffset`/`HZMEM_GetBlockCount`) and Surface-relative field offsets (`this+0xb94`,
+   `this+0xb70`, `this+0xd50`) - none of which appear anywhere in `FSAAResolveBlit.cpp`, which instead
+   uses GL-context-relative offsets (`self+0x290`, `self+0xac`, `self+0x3bc`) throughout.
+
+**What `FSAAResolveBlit.cpp`'s ~500 lines of careful, real, internally-consistent transcription actually
+describes is still genuinely unidentified** - it is real code from somewhere in this kext (too specific
+and internally consistent to be fabricated), just not either of the two functions it's currently
+associated with. Deliberately not guessing a third attribution here after getting the first two wrong;
+this needs a fresh, systematic search (e.g. grep the full binary's decompiled functions for the
+`_g_r500_3d_blit_state_packet` + floating-point-NDC-sort combination, or for the specific literal
+constants `0x1150`/`0x1120`/`0xc0033500` this file's second per-tile loop writes) rather than more
+pattern-matching from narrative excerpts. Until resolved: `resolve_fsaa_buffer` is genuinely
+UNKNOWN/opaque again (its header comment already correctly says so), the real opcode 0x31 needs fresh
+transcription from scratch, and `case 0x31000000` in the dispatch table is calling code that doesn't
+belong there - a real, live bug in the current source tree, not just a documentation gap.
 
 ## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
 
