@@ -398,7 +398,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD skeleton-mapped
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 7 opcodes remain)
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -540,6 +540,60 @@ structure produced two real opcode-boundary mistakes this session that needed co
 carried into the "remaining" list, as above). A future pass should cross-check routing against the real
 compiled branch instructions (raw disassembly) before trusting an opcode boundary inferred from decompiled
 C brace nesting alone, especially for the deepest-nested parts of this function.
+
+**MAJOR PROGRESS, later pass: `process_command_buffer` is now ASSEMBLED AND WIRED as a real dispatcher**
+(`ATIR500DVDContext::process_command_buffer`, declared in the header and implemented in
+`Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp`) - previously the transcribed handlers existed only
+as free functions with nothing calling them. Eight more real opcodes/groups transcribed this pass: 0x13
+(a texture-fetch setup previously not even catalogued as a gap - an earlier pass's opcode inventory had
+skipped it entirely), and 0x3e/0x3f/0x42/0x43+0x44 (one real shared handler, see below)/0x46/0x47 - all
+in the smaller-opcode end of the previously-"remaining ~18" list. The methodology note above was acted on
+directly this pass: every opcode boundary (transcribed or still-open) was verified via direct PPC
+branch-instruction tracing of a fresh disassembly dump, not decompiled-C brace nesting - which caught a
+THIRD ambiguous region (around opcodes 0x14/0x15) before it could become a third mistake, and gave every
+still-open opcode a real, disassembly-confirmed target address (recorded directly in the dispatcher's own
+source, so a future pass never has to re-derive the mapping - see below).
+
+**Three real corrections to this project's own opcode accounting**, all found via that same disassembly
+tracing:
+1. Opcode 0x2d is really part of the UNBIND family (`LAB_00037880`), not BIND (`LAB_00037620`) as an
+   earlier pass's prose had listed - caught before ever being wired into committed code (no dispatcher
+   existed yet), not fixed after the fact.
+2. Opcode 0x35 is ALSO a real unbind opcode - previously not catalogued in either list at all.
+3. Opcode 0x31 was already correctly known to be a real unbind opcode (present in an earlier pass's
+   "remaining opcodes" list) but had never actually been wired to `handle_texture_unbind` in any
+   dispatcher - fixed by simply including it; no new decompile work needed.
+
+**Two real logic bugs caught and fixed in the ALREADY-COMMITTED handlers**, found while working out the
+dispatcher's own shared state:
+1. `handle_texture_bind`'s real bounds/null-lookup failure target is the HARD-ABORT path
+   (`LAB_00039030` - the whole walk's running position resets to 0), not a plain single-opcode skip as
+   originally modeled (a bare `return;`, silently equivalent to "use the natural distance"). Fixed by
+   changing its return type to `bool`, matching `handle_opcode_0a`/`0b`'s own established convention.
+2. `local_64`/`local_58` (read by opcodes 0xa/0xb respectively, and now also `local_60`/`local_5c` for
+   opcode 0x46) are real FUNCTION-SCOPE `process_command_buffer` variables - zero-initialized ONCE before
+   the dispatch loop starts, NOT fresh per-call locals. Each one's own self-referential update
+   (`local_X = (new bits) | (local_X & mask)`) means it genuinely persists, masked, across every real call
+   to its opcode within one `process_command_buffer` invocation - a command buffer containing the same
+   opcode more than once would have later occurrences see bits left behind by earlier ones. An earlier
+   pass modeled each as a fresh `UInt32 local_X = 0;` local to its own handler function every call, losing
+   this real persistence - now threaded through as real shared dispatcher state (by-reference parameters)
+   instead.
+
+**Real, notable structural finding**: opcodes 0x43 and 0x44 are, per a direct byte-for-byte disassembly
+comparison, REAL, IDENTICAL setup code (0x44 reaches the exact same real merge point 0x43's own natural
+fall-through does, via an explicit `goto` in the raw decompile) - a genuine driver/compiler artifact, not
+a transcription shortcut. Transcribed as one shared handler, `handle_opcode_43_44`.
+
+**Still open, real disassembly-verified addresses on record** (in the dispatcher's own explicit
+not-yet-transcribed `case` block, so a future pass can go straight to decompiling without re-deriving the
+mapping): opcode 0x12 (`0x35c04`, ~750 real lines - the single largest remaining gap in this function,
+comparable in scale to GL's own opcode 0x2d), 0x14 (`0x36a14`), 0x15 (`0x378e0`), 0x16 (`0x36e08`), 0x17
+(`0x372b4`), 0x18 (`0x38a0c`), 0x3d (`0x364c0`) - the latter six each ~250-400 real lines of dense
+per-plane YUV/tiling math. This dispatcher explicitly falls through to the natural-distance default for
+all seven, with a loud comment - a KNOWN GAP, not a confirmed real no-op; do not trust it for these seven
+opcode values on real hardware. Genuinely a large remaining undertaking, same scope note this section has
+carried since DVD's skeleton was first mapped - not a small residual item.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 

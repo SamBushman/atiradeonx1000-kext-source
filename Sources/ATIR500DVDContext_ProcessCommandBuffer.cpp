@@ -4,72 +4,121 @@
  * PARTIALLY RESOLVED (issue #7): the DVD context's own embedded
  * command-buffer opcode language. Real dispatch mechanism confirmed
  * (top-byte opcode over a `this+0xa4+0x1c`-based record stream,
- * self-consuming low-24-bit distance fields) and EIGHT real opcode
- * groups - texture bind, texture unbind, the opcode 0x2 return-code
- * setter, the opcode 0x5/0x6 texture-sampler-state pair, opcodes
- * 0xa/0xb/0xd's own per-mip YUV/tiling setup, and the opcode 0x4
- * explicit-flush - fully transcribed from complete real decompiles
- * (kext offsets within ATIR500DVDContext::process_command_buffer,
- * 0x357c0). Together these cover 41 real opcodes with genuine handlers
- * (bind: 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e-0x25, 0x26-0x2a, 0x2d;
- * unbind: 0x2b, 0x2c, 0x2e-0x30, 0x32-0x34, 0x36-0x3c; plus 0x02, 0x04,
- * 0x05, 0x06, 0x0a, 0x0b, 0x0d), plus four more (0x07, 0x08, 0x09,
- * 0x0c) confirmed to be trivial abort paths with NO real handler at
- * all - re-reading the raw decompile's brace structure precisely (not
- * just its surface `goto` targets) showed 0xc in particular was
- * wrongly assumed part of the "0xa/0xb/0xc/0xd cluster" by this
- * project's own earlier skeleton-mapping pass; corrected here.
+ * self-consuming low-24-bit distance fields), and `process_command_buffer`
+ * itself is NOW ASSEMBLED AND WIRED (this pass) - previously the
+ * transcribed handlers existed only as free functions with no real
+ * dispatcher calling them.
+ *
+ * METHODOLOGY CHANGE this pass, directly acting on the "future pass
+ * should cross-check routing against real compiled branch instructions"
+ * note this file previously carried: every opcode boundary below was
+ * verified by DIRECT PPC BRANCH-INSTRUCTION TRACING of the raw
+ * disassembly (`lis`/`cmpw`/`beq`/`bne`/`b` sequences from a fresh
+ * headless disassembly dump), not decompiled-C brace nesting - this
+ * exact function had already produced two real mistakes from the
+ * brace-nesting approach in an earlier pass (see below), and a third,
+ * new one was caught mid-pass this time before being trusted (an
+ * ambiguous C-decompile region around opcodes 0x14/0x15 that direct
+ * disassembly resolved cleanly - real target addresses now on record
+ * in the dispatcher's own comments for every opcode, transcribed or
+ * not, so a future pass never has to re-derive them).
+ *
+ * Real opcode groups now transcribed (43 real opcodes with genuine
+ * handlers): texture bind (0x19-0x1d, 0x1e-0x25, 0x26-0x2a); texture
+ * unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35, 0x36-0x3c);
+ * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush; the
+ * opcode 0x5/0x6 texture-sampler-state pair; opcodes 0xa/0xb/0xd's own
+ * per-mip YUV/tiling setup; opcode 0x13's texture-fetch setup (found
+ * this pass - previously not even catalogued as a gap, since an earlier
+ * pass's opcode inventory skipped it entirely); and opcodes 0x3e/0x3f/
+ * 0x42/0x43+0x44 (a single real shared handler - see below)/0x46/0x47,
+ * plus four more (0x07/0x08/0x09/0x0c) confirmed to be real HARD-ABORT
+ * paths (the walk's whole running position resets to 0, not a plain
+ * single-opcode skip - see the dispatcher's own `abortToZero` handling)
+ * with no other real handler.
+ *
+ * THREE REAL CORRECTIONS to this project's own earlier opcode
+ * accounting, all found via the disassembly tracing above:
+ * 1. Opcode 0x2d is really part of the UNBIND family (target
+ *    `LAB_00037880`), NOT bind (`LAB_00037620`) as an earlier pass's
+ *    prose wrongly listed - never actually wired into committed code
+ *    before now (no dispatcher existed), so this was caught before
+ *    becoming a live bug, not fixed after the fact.
+ * 2. Opcode 0x35 is ALSO a real unbind opcode - previously not
+ *    catalogued in either the bind or unbind list at all.
+ * 3. Opcode 0x31 was already correctly known to be a real unbind opcode
+ *    (listed in an earlier pass's "remaining opcodes" note), but had
+ *    never actually been wired to `handle_texture_unbind` in any
+ *    dispatcher - fixed here, simply by including it (no new decompile
+ *    work needed, it reuses the already-transcribed handler).
+ *
+ * TWO REAL LOGIC BUGS caught and fixed this pass in the ALREADY-
+ * COMMITTED handlers, found while working out the dispatcher's own
+ * shared state:
+ * 1. `handle_texture_bind`'s bounds/null-lookup failure real target is
+ *    the HARD-ABORT path (`LAB_00039030`), not a plain single-opcode
+ *    skip as originally modeled (a bare `return;`) - now returns `bool`
+ *    like `handle_opcode_0a`/`0b`, matching the real dispatcher
+ *    semantics exactly. See that function's own header note.
+ * 2. `local_64`/`local_58` (used by opcodes 0xa/0xb respectively, and
+ *    now also `local_60`/`local_5c` for opcode 0x46) are real
+ *    FUNCTION-SCOPE `process_command_buffer` variables - zero-
+ *    initialized ONCE before the dispatch loop starts, not fresh
+ *    per-call locals. Their own self-referential update
+ *    (`local_X = (new bits) | (local_X & mask)`) means they genuinely
+ *    persist, masked, across every real call to their opcode within one
+ *    `process_command_buffer` invocation - a command buffer containing
+ *    the same opcode more than once would have later occurrences see
+ *    bits left behind by earlier ones. An earlier pass modeled each as
+ *    a fresh `UInt32 local_X = 0;` local to its own handler function
+ *    every call, losing this real persistence - now threaded through as
+ *    real shared dispatcher state instead. See handle_opcode_0a's own
+ *    header note for the full explanation.
+ *
+ * Real, notable structural finding: opcodes 0x43 and 0x44 are, per a
+ * direct byte-for-byte disassembly comparison, REAL, IDENTICAL setup
+ * code (0x44 reaches the exact same real merge point 0x43's own natural
+ * fall-through does, via an explicit `goto`) - a genuine driver/
+ * compiler artifact, transcribed here as one shared handler,
+ * `handle_opcode_43_44`, rather than two separately-derived copies.
  *
  * CORRECTION to this project's own earlier opcode-range accounting:
  * DVD has NO real opcode 0x11 at all (an earlier pass's "remaining
  * opcodes" list wrongly included it, apparently carried over by
  * mistake from the UNRELATED opcode 0x11 this project already
  * resolved on the 2D context - a real, different opcode language).
- * Grepping the complete raw decompile for every real `uVar17 ==/!=
- * 0x??000000` comparison confirms DVD's own opcode 0x12 is the
- * smallest value in that neighborhood actually dispatched on.
  *
- * Real, high-value finding this pass: opcode 0x12's own real body
- * spans roughly 750+ lines of raw decompile (loop-based, multiple
- * fixed-size local arrays, dense per-plane geometry math) - comparable
- * in scale to GL's own opcode 0x2d, which this project's history
- * explicitly flagged as "the single largest remaining gap" in the
- * entire GL reconstruction (CORRECTED, issue #12 item 4: that content
- * was known as "opcode 0x31" at the time this comment was written, but
- * has since been found to really be opcode 0x2d - the REAL, separate
- * GL opcode 0x31 is much smaller, ~180 lines, and is now fully
- * transcribed - see ATIR500GLContext_ProcessCommandBuffer.cpp's
- * handle_depth_buffer_resolve). NOT attempted this pass; a correct
- * transcription needs its own dedicated pass, not a continuation of
- * this session's per-opcode cadence.
+ * STILL OPEN, real disassembly-verified target addresses on record for
+ * a future pass (see the dispatcher's own explicit not-yet-transcribed
+ * `case` block for the full list): opcode 0x12 (~750 real lines,
+ * comparable in scale to GL's own single-largest gap, opcode 0x2d -
+ * CORRECTED, issue #12 item 4: that GL content was misattributed to
+ * "opcode 0x31" when this note was first written; the real GL opcode
+ * 0x31 is much smaller and is now fully transcribed - see
+ * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve),
+ * plus six more (0x14, 0x15, 0x16, 0x17, 0x18, 0x3d), each ~250-400
+ * real lines of similarly dense per-plane YUV/tiling math. This is a
+ * genuinely large remaining undertaking, same scope note this file has
+ * carried since it was first opened - not a small residual item.
  *
- * The remaining ~18 real opcodes (0x12 [very large, see above], 0x14-
- * 0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44, 0x46-0x47) were NOT
- * transcribed this pass. Continuing reliably needs a more rigorous
- * method than this pass's manual brace-reading of the raw decompile -
- * that method already produced two real opcode-boundary mistakes this
- * session (0x1d wrongly modeled as separate from the bind family in an
- * earlier commit, and 0x11 wrongly carried into this file's own
- * "remaining" list) that needed correcting after the fact. A future
- * pass should cross-check routing against the real compiled branch
- * instructions (raw disassembly), not decompiled C brace nesting
- * alone, before trusting an opcode boundary. `process_command_buffer`
- * itself is therefore NOT yet declared/assembled as one function -
- * these handlers exist as free functions a future completed dispatcher
- * will call, matching how GL's own opcode-by-opcode effort progressed.
- *
- * Confidence: CONFIRMED for control flow and every field offset/call
- * touched in the two transcribed handlers - complete real decompiles,
- * not summarized. `FUN_0003911c` (a real refcount-style helper - every
- * call site gates `delete_texture` on it returning exactly 1, "this was
- * the last reference") and `FUN_0003913c` (the same real "ensure
- * GART-mapped" idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called
- * opaquely. `FUN_000390dc` is called with a literal `0xffff0001` first
- * argument - the exact same bit pattern as the real atomic
- * packed-counter update this project independently verified via raw
- * PPC disassembly in GL's own get_texture (issue #5); a striking match,
- * but NOT independently re-verified against DVD's own disassembly this
- * pass, so called opaquely rather than assumed identical.
+ * Confidence: CONFIRMED for control flow and every field offset/call in
+ * every transcribed handler - complete real decompiles, cross-checked
+ * against raw disassembly wherever the C decompile's own brace
+ * structure was ambiguous (which, this pass found, was more often than
+ * this file's earlier passes assumed - see the methodology note above).
+ * `FUN_0003911c` (a real refcount-style helper - every call site gates
+ * `delete_texture` on it returning exactly 1, "this was the last
+ * reference") and `FUN_0003913c` (the same real "ensure GART-mapped"
+ * idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called opaquely.
+ * `FUN_000390dc` is called with a literal `0xffff0001` first argument -
+ * the exact same bit pattern as the real atomic packed-counter update
+ * this project independently verified via raw PPC disassembly in GL's
+ * own get_texture (issue #5); a striking match, but NOT independently
+ * re-verified against DVD's own disassembly this pass, so called
+ * opaquely rather than assumed identical. The four new small per-call-
+ * site lock/alloc/free helpers this pass's opcode 0x13/0x3e/0x43+0x44
+ * transcriptions reuse (`FUN_0003913c`, already known) are likewise
+ * opaque, matching this project's established treatment of such helpers.
  */
 
 #include "../Headers/ATIR500DVDContext.h"
@@ -114,17 +163,28 @@ extern "C" void   FUN_000390dc(UInt32 magicConstant, void *counterFieldAddr);
  * 24 low bits regardless), but callers must still pass the masked
  * value for consistency with handle_texture_unbind below, where the
  * distinction is NOT equivalent.
+ *
+ * CORRECTED, issue #7 continuation: returns `bool` now - real
+ * disassembly-verified tracing (not brace-inferred) shows the real
+ * `LAB_00037620` block's own bounds/null-lookup failure goes straight to
+ * the real HARD-ABORT path (`LAB_00039030` - both the running record
+ * count AND the whole walk's distance get reset to 0), NOT a plain
+ * single-opcode skip as this project's earlier pass wrongly modeled it
+ * (a bare `return;`, treated by the (not-yet-existent) caller as "use
+ * the natural distance"). Caller must reset both its own record-count
+ * accumulator and distance to 0 when this returns `false`, matching
+ * handle_opcode_0a/0b's own established `bool`-return convention above.
  */
-static void handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record,
+static bool handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record,
                                  UInt32 &recordCount, UInt32 &byteOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt8 *shared = reinterpret_cast<UInt8 *>(ctx->sharedAllocator);
 
     UInt32 idx = record[1];
-    if (idx >= U32At(shared, 0x14)) return; /* real: falls through to the shared "no match" skip path */
+    if (idx >= U32At(shared, 0x14)) return false; /* real: falls to the shared HARD-ABORT path, not a plain skip */
     UInt8 *transferBuf = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(U32At(shared, 0x10)) + idx * 4);
-    if (transferBuf == nullptr) return;
+    if (transferBuf == nullptr) return false;
 
     UInt32 unitSlot = ((opcode + 0xe7000000u) >> 0x18) * 4;
     UInt8 *slotAddr = self + unitSlot + 0x104;
@@ -189,6 +249,7 @@ static void handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *r
     *record = 0x80000000u;
     record[1] = 0x80000000u;
     *reinterpret_cast<UInt32 *>(slotAddr) = reinterpret_cast<UInt32>(transferBuf);
+    return true;
 }
 
 /*
@@ -415,11 +476,31 @@ static void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record) {
  * handle_opcode_0b below.
  *
  * Returns `false` on the real failure path (engine-not-ready gate, or
- * the surface-field/height-delta precondition) - the caller should
- * treat this exactly like a real bounds-check failure elsewhere in
- * this file (reset to the shared trivial-abort path).
+ * the surface-field/height-delta precondition) - the real disassembly
+ * (address-verified, not brace-inferred) confirms this maps to the
+ * dispatcher's real HARD-ABORT path (both the running record-count AND
+ * the whole walk's own position get reset to 0 - LAB_00039030 - not a
+ * plain single-opcode skip), for both this failure mode and the
+ * engine-not-ready gate above.
+ *
+ * CORRECTED, issue #7 continuation: `local_64` is a real FUNCTION-SCOPE
+ * variable in `process_command_buffer` itself - declared and
+ * zero-initialized ONCE, before the dispatch loop even starts, NOT a
+ * fresh per-call local. Its own self-referential update
+ * (`local_64 = (new bits) | (local_64 & 0xfe00c001)`) means it
+ * genuinely PERSISTS, masked, across every call to this opcode within
+ * one `process_command_buffer` invocation (a command buffer containing
+ * opcode 0xa more than once would have later occurrences see bits left
+ * behind by earlier ones). An earlier pass wrongly modeled this as a
+ * fresh `UInt32 local_64 = 0;` local to this function every call -
+ * caught and fixed this pass by threading it as real shared dispatcher
+ * state instead. The "uninitialized read" honesty note below still
+ * applies to its FIRST real use ever within a given
+ * `process_command_buffer` call (where it genuinely is 0, by the real
+ * function-entry initialization) - it was never about this call
+ * boundary.
  */
-static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record) {
+static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_64) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -487,7 +568,10 @@ static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt32 div2 = 0x20u / U16At(surf, 0x136);
     UInt32 divFinal = (div2 <= div1) ? div1 : div2;
 
-    UInt32 local_64 = 0; /* real: uninitialized read in the raw decompile - see header note */
+    /* real: `local_64` is shared dispatcher state, passed by reference -
+     * see header note. Genuinely 0 the first time any opcode-0xa record
+     * in this buffer reaches here (real function-entry init), masked-
+     * persists across any later ones. */
     local_64 = ((FormatTableLookup_0x0004d2e0(formatIdx) >> 1) & 0x1e00000u) |
                ((FormatTableLookup_0x0004d2dc(formatIdx) & 0xc00u) << 9) |
                (static_cast<UInt32>(U8At(surf, 0x158) & 6u) << 16) |
@@ -503,21 +587,23 @@ static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record) {
  * plane cousin of opcode 0xa above (no Y/UV split, one base+pitch),
  * with a real per-source branch mirroring opcode 0xd's own transfer-
  * buffer-vs-boundSurface split, and the exact same real format-table
- * tiling-word computation (including the same honestly-flagged
- * uninitialized-`local_58`-read anomaly - see handle_opcode_0a's
- * header note; the same pattern recurring here independently
- * reinforces that this is a real driver/compiler artifact, not a
- * one-off transcription mistake).
+ * tiling-word computation (including the same real shared-dispatcher-
+ * state pattern as `local_64` above - `local_58` here, see
+ * handle_opcode_0a's own header note for the full correction; the same
+ * pattern recurring here independently reinforces that this is a real
+ * driver behavior, not a one-off).
  *
  * Real, notable finding: opcode 0xc (numerically adjacent, and
  * originally assumed part of this "0xa/0xb/0xc/0xd cluster" by this
  * project's own earlier skeleton-mapping pass) turns out to have NO
- * real handler at all - re-reading the raw decompile's brace structure
- * precisely shows 0xc falls straight through to the same trivial-abort
- * path as a genuinely-unrecognized opcode value. Corrected here rather
- * than left as a stale assumption.
+ * real handler at all - a fresh disassembly-level check (address-
+ * verified, not brace-inferred) confirms it unconditionally hits the
+ * real HARD-ABORT path (LAB_00039030) - CORRECTED from this project's
+ * earlier characterization as a "trivial pass-through" (that phrasing
+ * was ambiguous and this pass pins down the exact real target, not just
+ * "some no-op path").
  */
-static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record) {
+static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_58) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -571,7 +657,8 @@ static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt32 div2 = 0x20u / U16At(sourceRecord, 0x136);
     UInt32 divFinal = (div2 <= div1) ? div1 : div2;
 
-    UInt32 local_58 = 0; /* real: uninitialized read in the raw decompile - see handle_opcode_0a's header note */
+    /* real: `local_58` is shared dispatcher state, passed by reference -
+     * see handle_opcode_0a's header note for the full correction. */
     local_58 = ((FormatTableLookup_0x0004d2e0(formatIdx) >> 1) & 0x1e00000u) |
                ((FormatTableLookup_0x0004d2dc(formatIdx) & 0xc00u) << 9) |
                (static_cast<UInt32>(U8At(sourceRecord, 0x158) & 6u) << 16) |
@@ -587,6 +674,385 @@ static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record) {
  * pattern as handle_texture_bind's own flush path) and writes a plain
  * sentinel. No real per-opcode payload beyond the flush itself.
  */
+/*
+ * handle_opcode_13 - RESOLVED (issue #7), fully transcribed. Real target
+ * address (0x38884) confirmed via DIRECT PPC BRANCH-INSTRUCTION TRACING
+ * of the raw disassembly (`lis r0,0x1300; cmpw ...; beq cr7,0x00038884`),
+ * not decompiled-C brace nesting - this exact function is where an
+ * earlier pass's brace-nesting-only method produced two real mistakes
+ * (see this file's own header note), so this pass verified every
+ * opcode's real target address against the raw compiled branch tree
+ * before trusting any opcode boundary, per that note's own
+ * recommendation. Real per-mip texture-fetch/tiling setup for
+ * `boundSurface`, ending with a real pair of "magic bias" integer-to-
+ * float conversions (the same general int->float trick this project's
+ * GL side already documents as its own `BiasedIntToFloat` helper, though
+ * using a DIFFERENT real bias constant here - `4503601774854144.0`
+ * (2^52 + 2^31), not the already-named `DOUBLE_0004c3a8` (a plain 2^52) -
+ * so declared as its own local literal rather than reusing that extern).
+ * Real per-mip YUV height-delta term (`boundSurface's own +0x9a - +0x94`)
+ * matches the SAME chroma-plane-adjacent computation already confirmed
+ * on opcodes 0x5/0x6/0xa/0xb/0xd. Ends with the real natural
+ * distance-based advance (no override) - confirmed via the raw
+ * disassembly's own unconditional `b 0x0003903c` (the shared loop tail),
+ * immediately followed in memory by opcode 0x18's own real body,
+ * confirming there is no gap/hidden opcode between the two.
+ */
+static void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt8 *mip = surf + record[1] * 0x78;
+
+    UInt32 base = U32At(mip, 0x560);
+    UInt32 pitch = U16At(mip, 0x570);
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+
+    record[0] = 0x1087;
+    record[1] = ((U16At(mip, 0x576) & 0x3fffu) << 2) | (pitch << 0x11);
+    record[2] = 0x1150;
+    record[3] = base & 0xffffffe0u;
+    record[4] = 0x1393;
+    record[5] = 10;
+    record[6] = 0x138a;
+    record[7] = (base + static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1)) & 0xffffffe0u;
+    record[8] = 0x138e;
+    record[9] = ((pitch >> 2) & 0x3ffeu) | ((U8At(mip, 0x590) & 1u) << 0x10) |
+                ((U8At(mip, 0x590) & 6u) << 0x10) | ((U8At(mip, 0x591) & 3u) << 0x13) | 0xc00000u;
+
+    /* real "magic bias" int->float conversions - see header note on the
+     * bias constant. */
+    const double kBias13 = 4503601774854144.0;
+    union { double d; struct { UInt32 hi, lo; } parts; } u;
+
+    u.parts.hi = 0x43300000;
+    u.parts.lo = (pitch >> 2) ^ 0x80000000u;
+    record[0x61] = static_cast<UInt32>(static_cast<float>((u.d - kBias13) * 0.5));
+
+    u.parts.hi = 0x43300000;
+    u.parts.lo = (static_cast<UInt32>(U16At(mip, 0x576)) >> 1) ^ 0x80000000u;
+    record[0x62] = static_cast<UInt32>(static_cast<float>((u.d - kBias13) * 0.5));
+}
+
+/*
+ * handle_opcode_3f / handle_opcode_42 - RESOLVED (issue #7), fully
+ * transcribed. Real target addresses (0x38330 / 0x3841c respectively)
+ * confirmed via direct PPC branch-instruction tracing, same discipline
+ * as opcode 0x13 above. Both are real single/paired-plane texture-fetch
+ * setups for `boundSurface`'s indexed mip record, reusing the same real
+ * YUV 4:2:0 chroma-offset formula already confirmed on opcodes
+ * 0x5/0x6/0xa/0xb/0xd/0x13/0x14ish - opcode 0x42 is the real two-register
+ * (Y+UV) cousin of 0x3f's single-register form, otherwise structurally
+ * identical.
+ */
+static void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt8 *mip = surf + record[1] * 0x78;
+
+    UInt32 pitch = U16At(mip, 0x570);
+    UInt32 base;
+    if (record[2] == 0) {
+        base = U32At(mip, 0x560);
+    } else {
+        SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+        base = static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1) + U32At(mip, 0x560);
+    }
+
+    record[0] = 0x1150;
+    record[1] = (base & 0xffffffe0u) | ((U8At(mip, 0x590) & 1u) << 2) | ((U8At(mip, 0x590) & 6u) << 2);
+    record[2] = 0x1393;
+    record[3] = 10;
+    record[4] = 0x138a;
+    record[5] = U32At(surf, 0x998) & 0xffffffe0u;
+    record[6] = 0x138e;
+    record[7] = ((pitch >> 2) & 0x3ffeu) | ((U8At(surf, 0x9c9) & 3u) << 0x13) | 0xc00000u;
+}
+
+static void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt8 *mip = surf + record[1] * 0x78;
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+
+    UInt32 pitch = U16At(mip, 0x570);
+    UInt32 lumaSize = static_cast<UInt32>(heightDelta) * pitch;
+    UInt32 base;
+    if (record[2] == 0) {
+        base = lumaSize + U32At(mip, 0x560);
+    } else {
+        base = lumaSize + static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1) + U32At(mip, 0x560);
+    }
+    UInt32 basePacked = (base & 0xffffffe0u) | ((U8At(mip, 0x590) & 1u) << 2) | ((U8At(mip, 0x590) & 6u) << 2);
+
+    record[0] = 0x1150;
+    record[1] = basePacked;
+    record[2] = 0x1151;
+    record[3] = basePacked;
+    record[4] = 0x1393;
+    record[5] = 10;
+    record[6] = 0x138a;
+    record[7] = (lumaSize + U32At(surf, 0x998)) & 0xffffffe0u;
+    record[8] = 0x138e;
+    record[9] = ((pitch >> 2) & 0x3ffeu) | ((U8At(surf, 0x9c9) & 3u) << 0x13) | 0xc00000u;
+}
+
+/*
+ * handle_opcode_3e - RESOLVED (issue #7), fully transcribed. Real
+ * target address 0x37ee8, confirmed via direct branch-instruction
+ * tracing. A real three-plane (Y, UV, and a third "UV plus quarter-row"
+ * variant) transfer-buffer-fetch setup, reusing the exact same real
+ * GART-map-and-splice-into-+0x6d0/+0x69c-list pattern already fully
+ * confirmed on the bind family and opcodes 0x0d/0x12/0x43/0x44 above.
+ */
+static void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+
+    UInt32 pad = record[3];
+    UInt8 *transferBuf = *reinterpret_cast<UInt8 **>(self + record[2] * 4 + 0x104);
+    UInt8 *mip = surf + record[1] * 0x78;
+
+    if (U32At(transferBuf, 4) != 0 ||
+        (ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(transferBuf)),
+         U32At(transferBuf, 4) != 0)) {
+        FUN_0003913c(transferBuf + 0x2c);
+        void *prevNode = reinterpret_cast<void *>(U32At(transferBuf, 0x34));
+        void *nextNode = reinterpret_cast<void *>(U32At(transferBuf, 0x38));
+        U32At(prevNode, 0x38) = reinterpret_cast<UInt32>(nextNode);
+        U32At(nextNode, 0x34) = reinterpret_cast<UInt32>(prevNode);
+        U32At(transferBuf, 0x34) = U32At(accel, 0x6d0);
+        U32At(transferBuf, 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
+        U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(transferBuf);
+        void *newPrev = reinterpret_cast<void *>(U32At(transferBuf, 0x34));
+        U32At(newPrev, 0x38) = reinterpret_cast<UInt32>(transferBuf);
+    }
+
+    UInt32 shiftedBase = 0;
+    U8At(reinterpret_cast<void *>(U32At(transferBuf, 0x14)), 0x14) = 0;
+    if (U32At(transferBuf, 4) != 0) {
+        shiftedBase = (U32At(transferBuf, 4) + U32At(transferBuf, 0x50) + U32At(accel, 0x8a4)) >> 5;
+    }
+
+    UInt32 base0 = U32At(mip, 0x560);
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+    UInt32 rowDelta = static_cast<UInt32>(heightDelta) * U16At(mip, 0x570);
+    UInt32 base1 = base0 + rowDelta;
+
+    UInt32 tileBit1 = (U8At(mip, 0x590) & 1u) << 2;
+    UInt32 tileBit2 = (U8At(mip, 0x590) & 6u) << 2;
+
+    record[0] = 0x1150;
+    record[1] = (base0 & 0xffffffe0u) | tileBit1 | tileBit2;
+    record[2] = 0x1151;
+    record[3] = tileBit2 | tileBit1 | (base1 & 0xffffffe0u);
+    record[4] = 0x1152;
+    record[5] = tileBit2 | tileBit1 | ((base1 + (rowDelta >> 2)) & 0xffffffe0u);
+    record[6] = 0x1393;
+    record[7] = 10;
+    record[8] = 0x138a;
+    record[9] = shiftedBase << 5;
+    record[10] = 0x138e;
+    record[0xb] = ((pad >> 2) & 0x3ffeu) | 0xd00000u;
+}
+
+/*
+ * handle_opcode_43_44 - RESOLVED (issue #7), fully transcribed. Real
+ * target addresses 0x38094 (0x43) and 0x38130 (0x44) - CONFIRMED, via
+ * direct disassembly comparison, to be REAL, BYTE-FOR-BYTE IDENTICAL
+ * setup code (0x44 reaches the exact same real `joined_r0x000381c4`
+ * merge point as 0x43's own natural fall-through, via an explicit
+ * `goto`) - a genuine real driver/compiler artifact, not a transcription
+ * shortcut. Real per-mip Y/UV transfer-buffer fetch setup, real
+ * per-flag-bit branch on `record[4]` selecting between the mip's own
+ * plain base and `boundSurface`'s own alternate `+0x998` base for each
+ * of the two planes independently - the same "alternate mode" shape
+ * already confirmed on the GL side's own analogous fields.
+ */
+static void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt8 *mip = surf + record[1] * 0x78;
+    UInt8 *transferBuf = *reinterpret_cast<UInt8 **>(self + record[2] * 4 + 0x104);
+
+    UInt32 flags = record[4];
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+    bool hasPad = record[3] != 0;
+
+    UInt32 base, pitch;
+    if ((flags & 2u) == 0) {
+        pitch = U16At(mip, 0x570);
+        base = hasPad ? (static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1) + U32At(mip, 0x560))
+                       : U32At(mip, 0x560);
+    } else {
+        base = U32At(surf, 0x998);
+        pitch = U16At(mip, 0x570);
+    }
+
+    UInt32 uvBase;
+    if ((flags & 4u) == 0) {
+        uvBase = static_cast<UInt32>(heightDelta) * pitch + U32At(mip, 0x560);
+        if (hasPad) {
+            uvBase += static_cast<UInt32>((heightDelta * static_cast<SInt32>(pitch) * 3) >> 1);
+        }
+    } else {
+        uvBase = static_cast<UInt32>(heightDelta) * pitch + U32At(surf, 0x998);
+    }
+
+    if (U32At(transferBuf, 4) != 0 ||
+        (ctx->map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(transferBuf)),
+         U32At(transferBuf, 4) != 0)) {
+        FUN_0003913c(transferBuf + 0x2c);
+        void *prevNode = reinterpret_cast<void *>(U32At(transferBuf, 0x34));
+        void *nextNode = reinterpret_cast<void *>(U32At(transferBuf, 0x38));
+        U32At(prevNode, 0x38) = reinterpret_cast<UInt32>(nextNode);
+        U32At(nextNode, 0x34) = reinterpret_cast<UInt32>(prevNode);
+        U32At(transferBuf, 0x34) = U32At(accel, 0x6d0);
+        U32At(transferBuf, 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
+        U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(transferBuf);
+        void *newPrev = reinterpret_cast<void *>(U32At(transferBuf, 0x34));
+        U32At(newPrev, 0x38) = reinterpret_cast<UInt32>(transferBuf);
+    }
+
+    UInt32 shiftedBase = 0;
+    U8At(reinterpret_cast<void *>(U32At(transferBuf, 0x14)), 0x14) = 0;
+    if (U32At(transferBuf, 4) != 0) {
+        shiftedBase = (U32At(transferBuf, 4) + U32At(transferBuf, 0x50) + U32At(accel, 0x8a4)) >> 5;
+    }
+
+    UInt32 tileBit1 = (U8At(mip, 0x590) & 1u) << 2;
+    UInt32 tileBit2 = (U8At(mip, 0x590) & 6u) << 2;
+
+    record[0] = 0x1150;
+    record[1] = (base & 0xffffffe0u) | tileBit1 | tileBit2;
+    record[2] = 0x1151;
+    record[3] = tileBit2 | tileBit1 | (uvBase & 0xffffffe0u);
+    record[4] = 0x1393;
+    record[5] = 10;
+    record[6] = 0x138a;
+    record[7] = shiftedBase << 5;
+}
+
+/*
+ * handle_opcode_46 - RESOLVED (issue #7), fully transcribed. Real target
+ * address 0x38538. A real two-plane (Y/UV) fixed-surface tiling/format
+ * register burst directly off `boundSurface`'s own embedded plane
+ * descriptors (`+0x120`/`+0x128`/`+0x134`/`+0x136`/`+0x158`/`+0x15a`/
+ * `+0x15c` for the Y-ish plane; `+0x920`/`+0x92c`/`+0x92e`/`+0x930`/
+ * `+0x950`/`+0x952`/`+0x954` for the second, structurally-identical
+ * plane) - no transfer-buffer/mip-array indirection at all, unlike every
+ * other opcode in this cluster.
+ *
+ * CORRECTED, issue #7 continuation: `local_60`/`local_5c` are real
+ * FUNCTION-SCOPE `process_command_buffer` variables (zero-initialized
+ * once, before the dispatch loop), threaded here by reference - the
+ * exact same real cross-call-persistence correction already applied to
+ * `local_64`/`local_58` in handle_opcode_0a/0b above (see that function's
+ * header note for the full explanation).
+ */
+static void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_60, UInt32 &local_5c) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+
+    UInt32 strideDiv0 = U16At(surf, 0x136);
+    record[0] = 0x1140;
+    record[1] = (strideDiv0 == 0) ? 0 : (U16At(surf, 0x138) / strideDiv0 - 1);
+    record[2] = 0x1150;
+    UInt32 tileBit0a = U8At(surf, 0x158) & 1u;
+    UInt32 base0 = U32At(surf, 0x128) & 0xffffffe0u;
+    UInt32 tileBit0b = static_cast<UInt32>(U8At(surf, 0x158) >> 1);
+    record[3] = base0 | (tileBit0a << 2) | ((tileBit0b & 3u) << 3);
+    record[4] = 0x1141;
+
+    UInt32 strideDiv1 = U16At(surf, 0x92e);
+    record[5] = (strideDiv1 == 0) ? 0 : (U16At(surf, 0x930) / strideDiv1 - 1);
+    record[6] = 0x1151;
+    UInt32 tileBit1a = U8At(surf, 0x950) & 1u;
+    UInt32 base1 = U32At(surf, 0x920) & 0xffffffe0u;
+    UInt32 tileBit1b = static_cast<UInt32>(U8At(surf, 0x950) >> 1);
+    record[7] = base1 | (tileBit1a << 2) | ((tileBit1b & 3u) << 3);
+    record[8] = 0x1393;
+    record[9] = 10;
+    record[0xa] = 0x138a;
+    record[0xb] = base0;
+    record[0xc] = 0x138e;
+
+    UInt32 formatIdx0 = static_cast<UInt32>(U8At(surf, 0x15a)) * 0x1c;
+    UInt32 div0a = 0;
+    if ((U32At(surf, 0x15c) & 0xf00000u) != 0) {
+        div0a = U16At(surf, 0x134) / ((U32At(surf, 0x15c) >> 0x14) & 0xfu);
+    }
+    UInt32 div0b = 0x20u / strideDiv0;
+    UInt32 divFinal0 = (div0b <= div0a) ? div0a : div0b;
+    local_60 = ((FormatTableLookup_0x0004d2e0(formatIdx0) >> 1) & 0x1e00000u) |
+               ((FormatTableLookup_0x0004d2dc(formatIdx0) & 0xc00u) << 9) |
+               ((tileBit0b & 3u) << 0x11) | (tileBit0a << 0x10) |
+               (divFinal0 & 0x3ffeu) | (local_60 & 0xfe00c001u);
+    record[0xd] = local_60;
+    record[0xe] = 0x138b;
+    record[0xf] = base1;
+    record[0x10] = 0x138f;
+
+    UInt32 formatIdx1 = static_cast<UInt32>(U8At(surf, 0x952)) * 0x1c;
+    UInt32 div1a = 0;
+    if ((U32At(surf, 0x954) & 0xf00000u) != 0) {
+        div1a = U16At(surf, 0x92c) / ((U32At(surf, 0x954) >> 0x14) & 0xfu);
+    }
+    UInt32 div1b = 0x20u / strideDiv1;
+    UInt32 divFinal1 = (div1b <= div1a) ? div1a : div1b;
+    local_5c = ((FormatTableLookup_0x0004d2e0(formatIdx1) >> 1) & 0x1e00000u) |
+               ((FormatTableLookup_0x0004d2dc(formatIdx1) & 0xc00u) << 9) |
+               ((tileBit1b & 3u) << 0x11) | (tileBit1a << 0x10) |
+               (divFinal1 & 0x3ffeu) | (local_5c & 0xfe00c001u);
+    record[0x11] = local_5c;
+}
+
+/*
+ * handle_opcode_47 - RESOLVED (issue #7), fully transcribed. Real target
+ * address 0x38764. A real two-plane-index texture-fetch setup indexed
+ * directly off `record[1]`/`record[2]` (clamped to a real, unexplained
+ * `[10, 22]` valid range, defaulting to 1 when the raw value is 0 -
+ * outside that range is a real HARD ABORT, `LAB_00039030`, not a plain
+ * skip), reusing the exact same real shared tail (`LAB_00038870`:
+ * `record[9] = ... | (tail & 3) << 0x13 | 0xc00000`) opcode 0x14 also
+ * falls into - inlined here directly since 0x14 itself is not yet
+ * transcribed (see this file's own header note on remaining opcodes).
+ * `sets abortHard` on the real hard-abort path instead of returning, to
+ * match the dispatcher's own real LAB_00039030 semantics exactly.
+ */
+static void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+
+    UInt32 idxB = record[1];
+    if (idxB == 0) {
+        idxB = 1;
+    } else if (idxB - 10 > 0xcu) {
+        abortHard = true;
+        return;
+    }
+    UInt32 idxA = record[2];
+    if (idxA == 0) {
+        idxA = 1;
+    } else if (idxA - 10 > 0xcu) {
+        abortHard = true;
+        return;
+    }
+
+    UInt8 *planeA = surf + idxA * 0x78;
+    UInt8 *planeB = surf + idxB * 0x78;
+
+    record[0] = 0x1140;
+    record[1] = (U16At(planeB, 0xc0) >> 2) - 1;
+    record[2] = 0x1150;
+    record[3] = (U32At(planeB, 0xb0) & 0xffffffe0u) | ((U8At(planeB, 0xe0) & 1u) << 2) | ((U8At(planeB, 0xe0) & 6u) << 2);
+    record[4] = 0x1393;
+    record[5] = 10;
+    record[6] = 0x138a;
+    record[7] = U32At(planeA, 0xb0) & 0xffffffe0u;
+    record[8] = 0x138e;
+
+    UInt8 tail = U8At(planeA, 0xe1);
+    UInt32 packed = ((U16At(planeA, 0xc0) >> 2) & 0x3ffeu) | ((U8At(planeA, 0xe0) & 1u) << 0x10) | ((U8At(planeA, 0xe0) & 6u) << 0x10);
+    record[9] = packed | ((tail & 3u) << 0x13) | 0xc00000u; /* real: shared LAB_00038870 tail */
+}
+
 static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
@@ -603,4 +1069,181 @@ static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &rec
             reinterpret_cast<UInt32 *>(bufBase + 0x20), bufEnd + 0x20, savedCount);
     }
     *record = 0x80000000u;
+}
+
+/*
+ * process_command_buffer - RESOLVED (issue #7) for every opcode this
+ * pass has transcribed; STILL PARTIAL overall - see the explicit
+ * fallthrough case below for exactly which seven opcodes remain (real,
+ * disassembly-verified addresses given there, ready for a future pass -
+ * finding those addresses reliably, after this exact function burned
+ * two earlier brace-nesting-only attempts, was itself a real deliverable
+ * this pass).
+ *
+ * Real skeleton: a `this+0xa4`-based (`commandBufferBase`) record
+ * stream, top-byte opcode dispatch, self-consuming low-24-bit distance
+ * fields - same mechanism as GL/2D. Real shared per-buffer state,
+ * matching the raw decompile's own function-scope locals exactly (NOT
+ * per-opcode-call locals - see handle_opcode_0a's header note for why
+ * this distinction is load-bearing): `result` (real `local_68`,
+ * accumulated return value), `byteOffset` (real `local_70`),
+ * `recordCount` (real `local_6c`, initial sentinel `0xffffffff` -
+ * confirmed the same real convention 2D's own dispatcher already uses),
+ * and `local_64`/`local_60`/`local_5c`/`local_58` (real per-opcode
+ * cross-call-persistent scratch words, each read by exactly one real
+ * opcode - 0xa/0x46/0x46/0xb respectively).
+ */
+IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *descriptor) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+
+    UInt32 result = 0;                 /* real: local_68 */
+    UInt32 byteOffset = 0;             /* real: local_70 */
+    UInt32 recordCount = 0xffffffffu;  /* real: local_6c */
+    UInt32 local_64 = 0, local_60 = 0, local_5c = 0, local_58 = 0; /* real: shared cross-opcode scratch - see handle_opcode_0a's header note */
+    UInt32 *record = reinterpret_cast<UInt32 *>(U32At(self, 0xa4) + 0x1c);
+
+    do {
+        UInt32 raw = *record;
+        UInt32 opcode = raw & 0xff000000u;
+        UInt32 distance = raw & 0xffffffu; /* real default consumption - overridden per opcode below (none of the resolved opcodes below actually override it - every one uses the natural distance - but this matches 2D's own established template) */
+        bool abortToZero = false;          /* real: LAB_00039030 (recordCount=0, distance=0) */
+
+        switch (opcode) {
+        case 0x02000000u:
+            handle_opcode_02(result);
+            break;
+
+        case 0x04000000u:
+            handle_opcode_04(this, record, recordCount, byteOffset);
+            break;
+
+        case 0x05000000u:
+        case 0x06000000u:
+            handle_texture_sampler_state(this, opcode, record);
+            break;
+
+        /* Real HARD-ABORT opcodes - address-verified (not brace-inferred):
+         * 0x07/0x08/0x09 unconditionally, 0x0c unconditionally too
+         * (numerically adjacent to the 0xa/0xb/0xd cluster, but confirmed
+         * to share NO code with it - see handle_opcode_0b's header note). */
+        case 0x07000000u:
+        case 0x08000000u:
+        case 0x09000000u:
+        case 0x0c000000u:
+            abortToZero = true;
+            break;
+
+        case 0x0a000000u:
+            if (!handle_opcode_0a(this, record, local_64)) abortToZero = true;
+            break;
+
+        case 0x0b000000u:
+            handle_opcode_0b(this, record, local_58);
+            break;
+
+        case 0x0d000000u:
+            handle_opcode_0d(this, record);
+            break;
+
+        case 0x13000000u:
+            handle_opcode_13(this, record);
+            break;
+
+        /* Real "bind texture unit N" family - opcodes 0x19-0x1d, 0x1e-0x25, 0x26-0x2a. */
+        case 0x19000000u: case 0x1a000000u: case 0x1b000000u: case 0x1c000000u: case 0x1d000000u:
+        case 0x1e000000u: case 0x1f000000u: case 0x20000000u: case 0x21000000u: case 0x22000000u:
+        case 0x23000000u: case 0x24000000u: case 0x25000000u:
+        case 0x26000000u: case 0x27000000u: case 0x28000000u: case 0x29000000u: case 0x2a000000u:
+            if (!handle_texture_bind(this, opcode, record, recordCount, byteOffset)) abortToZero = true;
+            break;
+
+        /* Real "unbind texture unit N" family - opcodes 0x2b/0x2c, 0x2d,
+         * 0x2e-0x30, 0x31, 0x32-0x34, 0x35, 0x36-0x3c. `0x2d` and `0x35`
+         * are CORRECTIONS to this project's own earlier accounting; 0x31
+         * was already known to be real but had never actually been wired
+         * to a handler (it was listed as "remaining" purely because no
+         * dispatcher existed yet) - see file header note for the real
+         * disassembly evidence for all three. */
+        case 0x2b000000u: case 0x2c000000u:
+        case 0x2d000000u:
+        case 0x2e000000u: case 0x2f000000u: case 0x30000000u: case 0x31000000u:
+        case 0x32000000u: case 0x33000000u: case 0x34000000u:
+        case 0x35000000u:
+        case 0x36000000u: case 0x37000000u: case 0x38000000u: case 0x39000000u:
+        case 0x3a000000u: case 0x3b000000u: case 0x3c000000u:
+            handle_texture_unbind(this, opcode, record);
+            break;
+
+        case 0x3e000000u:
+            handle_opcode_3e(this, record);
+            break;
+
+        case 0x3f000000u:
+            handle_opcode_3f(this, record);
+            break;
+
+        case 0x42000000u:
+            handle_opcode_42(this, record);
+            break;
+
+        case 0x43000000u:
+        case 0x44000000u:
+            handle_opcode_43_44(this, record);
+            break;
+
+        case 0x46000000u:
+            handle_opcode_46(this, record, local_60, local_5c);
+            break;
+
+        case 0x47000000u:
+            handle_opcode_47(this, record, abortToZero);
+            break;
+
+        case 0x12000000u:
+        case 0x14000000u:
+        case 0x15000000u:
+        case 0x16000000u:
+        case 0x17000000u:
+        case 0x18000000u:
+        case 0x3d000000u:
+            /* NOT YET TRANSCRIBED (issue #7 remains open for these seven).
+             * Real, disassembly-verified target addresses, ready for a
+             * future pass: 0x12 -> 0x35c04 (~750 lines, the single
+             * largest remaining gap in this whole function, comparable
+             * in scale to GL's own largest opcode); 0x14 -> 0x36a14;
+             * 0x15 -> 0x378e0; 0x16 -> 0x36e08; 0x17 -> 0x372b4;
+             * 0x18 -> 0x38a0c; 0x3d -> 0x364c0. Each has REAL, DISTINCT
+             * behavior on real hardware - this fallthrough to the
+             * natural-distance default is a KNOWN GAP, not a confirmed
+             * real no-op. Do not trust this dispatcher for these seven
+             * opcode values. */
+            break;
+
+        default:
+            /* Real: an unrecognized opcode value is a plain pass-through
+             * (LAB_00039028) - just consumes the record's own natural
+             * distance, no other effect. */
+            break;
+        }
+
+        if (abortToZero) {
+            recordCount = 0;
+            distance = 0;
+        }
+
+        record += distance;
+        recordCount += distance;
+        if (distance == 0) {
+            if ((recordCount & 1) != 0) {
+                *record = 0x80000000u;
+                record += 1;
+                recordCount += 1;
+            }
+            descriptor->pendingBufferStart = reinterpret_cast<void *>((byteOffset & 0xfffffffcu) + U32At(self, 0xa4) + 0x20);
+            descriptor->pendingBufferOffset = byteOffset + U32At(self, 0x94) + 0x20;
+            descriptor->pendingDwordCount = recordCount;
+            descriptor->finalRecordCursor = record;
+            return static_cast<IOReturn>(result);
+        }
+    } while (true);
 }

@@ -54,28 +54,62 @@ public:
     bool allocAllContextBuffers(UInt32 size);
 
     /*
-     * process_command_buffer - PARTIALLY RESOLVED (issue #7): the real
-     * dispatch skeleton and eight real opcode groups (texture bind,
-     * covering opcodes 0x19/0x1a/0x1b/0x1c/0x1d/0x1e-0x25/0x26-0x2a/0x2d;
-     * texture unbind, covering 0x2b/0x2c/0x2e-0x30/0x32-0x34/0x36-0x3c;
-     * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush;
-     * the opcode 0x5/0x6 texture-sampler-state pair; and opcodes
-     * 0xa/0xb/0xd's own per-mip YUV/tiling setup - 41 real opcodes with
-     * genuine handlers) are transcribed, plus four more (0x07/0x08/
-     * 0x09/0x0c) confirmed to be trivial abort paths with no real
-     * handler - see Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp
-     * for the handler functions and GAPS.md for the full opcode-by-
-     * opcode status, including a real correction (DVD has no opcode
-     * 0x11 at all) and a flagged large remaining item (opcode 0x12,
-     * comparable in scale to GL's own single-largest gap, opcode 0x2d -
-     * CORRECTED, issue #12 item 4: that GL content was misattributed to
-     * "opcode 0x31" when this note was written; the real GL opcode 0x31
-     * is much smaller and is now fully transcribed).
-     * The remaining ~18 real opcodes are NOT yet transcribed, so this
-     * method itself is not yet declared/wired -
-     * the handlers exist as free functions a future completed
-     * dispatcher will call.
+     * process_command_buffer - PARTIALLY RESOLVED (issue #7), NOW
+     * ASSEMBLED AND WIRED (was previously just free functions awaiting a
+     * dispatcher - the dispatcher itself is now real, see
+     * Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp). Real dispatch
+     * skeleton plus real opcode groups: texture bind (0x19-0x1d,
+     * 0x1e-0x25, 0x26-0x2a - 0x2d moved OUT, see correction below);
+     * texture unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35,
+     * 0x36-0x3c); the opcode 0x2 return-code setter; the opcode 0x4
+     * explicit-flush; the opcode 0x5/0x6 texture-sampler-state pair;
+     * opcodes 0xa/0xb/0xd's own per-mip YUV/tiling setup; opcode 0x13's
+     * texture-fetch setup; and opcodes 0x3e/0x3f/0x42/0x43/0x44/0x46/0x47
+     * (43 real opcodes with genuine handlers now), plus four more
+     * (0x07/0x08/0x09/0x0c) confirmed to be real HARD-ABORT paths (not
+     * a plain skip - see the dispatcher's own comment) with no other
+     * real handler.
+     *
+     * THREE REAL CORRECTIONS to this project's own earlier opcode
+     * accounting, found via direct PPC branch-instruction tracing (not
+     * decompiled-C brace nesting, which had already produced two
+     * mistakes on this exact function in an earlier pass): opcode 0x2d
+     * is really part of the UNBIND family, not bind as earlier prose
+     * here wrongly listed; opcode 0x35 is ALSO an unbind opcode,
+     * previously not catalogued at all; opcode 0x31 was already known to
+     * be a real unbind opcode but had never actually been wired to a
+     * handler in any dispatcher (none existed yet) - now fixed, reusing
+     * the already-transcribed handler with no new decompile work. Also
+     * corrected:
+     * `handle_texture_bind`'s own bounds-check-failure path is a real
+     * HARD ABORT (not a plain skip) - see that function's own header
+     * note - and `local_64`/`local_58`/`local_60`/`local_5c` (used by
+     * opcodes 0xa/0xb/0x46) are real shared, cross-opcode-call
+     * `process_command_buffer`-scope state, not fresh per-call locals as
+     * an earlier pass modeled them - see handle_opcode_0a's header note
+     * for the full explanation of both corrections.
+     *
+     * See Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp for every
+     * handler function and GAPS.md for the full opcode-by-opcode status,
+     * including a real correction (DVD has no opcode 0x11 at all).
+     *
+     * STILL OPEN: seven real opcodes (0x12, 0x14, 0x15, 0x16, 0x17, 0x18,
+     * 0x3d) - real, disassembly-verified target addresses recorded in
+     * the dispatcher's own `switch` (the explicit not-yet-transcribed
+     * case) so a future pass can go straight to decompiling them without
+     * re-deriving the address mapping, which was itself the hard,
+     * error-prone part of this pass. Opcode 0x12 alone is ~750 lines of
+     * real dense per-plane geometry math, comparable in scale to GL's
+     * own single-largest gap (opcode 0x2d - CORRECTED, issue #12 item 4:
+     * that GL content was misattributed to "opcode 0x31" when this note
+     * was first written; the real GL opcode 0x31 is much smaller and is
+     * now fully transcribed); the other six are each ~250-400 lines of
+     * similarly dense real YUV/tiling math. This dispatcher explicitly
+     * falls through to the natural-distance default for all seven -
+     * a KNOWN GAP, not a confirmed real no-op; do not trust it for these
+     * seven opcode values on real hardware.
      */
+    IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 
 protected:
     sATIDVDIDCTInfo *idctInfo; /* +0xf8-adjacent per-context IDCT state - CONFIRMED to be reached through boundSurface's slot in the real decompile (`*(int*)(this+0xf8)`); modeled as its own field here since sATIDVDIDCTInfo (Headers/ATIRadeonX1000Types.h) IS the real struct doIDCT receives as its first argument, and this project confirmed the two are the same object (doIDCT's param_1 gets passed around identically to what setup_buffers/dvd_setup_overlay's `this+0xf8` chases). */
