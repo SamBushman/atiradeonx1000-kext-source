@@ -256,4 +256,17 @@ extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
  * two tables. Raw table content not extracted from the binary this pass. */
 extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
 
+/*
+ * SamplesTableLookup - a FOURTH real, confirmed-to-exist binary data
+ * table (`&_samplesTable` in the raw decompile), found this pass (issue
+ * #13, ATIR500Surface::resolve_fsaa_buffer). Same real byte-offset
+ * indexing convention as the three FormatTableLookup_* tables above
+ * (`(tilingDegreeBits >> 0x12) & 0x3c` - confirmed mathematically
+ * equivalent to a real 4-byte-stride/16-entry index, `x & 0x3c ==
+ * (x & 0xf) << 2`, matching `formatTableIndex * 0x1c`'s own role for the
+ * other three tables). Raw table content not extracted from the binary
+ * this pass.
+ */
+extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
+
 #endif /* ATIRADEONX1000_REGISTERS_H */

@@ -1179,13 +1179,13 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
  * followed by a real per-mip/tile register-burst write for two surface
  * records using the SAME FormatTableLookup_0x0004d2e0/_0x0004d2dc/_0x0004d2e4
  * tables opcode 0x28/0x2a and this dispatch entry's former (misattributed)
- * occupant also use. Ends in a completely ordinary fall-through - no
- * `local_d0`-style explicit next-record pointer, unlike 0x2d - which
- * answers this project's long-open "tail-integration question" for the
- * REAL opcode 0x31 with a clean NO: this opcode always uses the shared
- * generic distance-based advance, same as every other opcode in this
- * switch except 0x2d (see GAPS.md section 2 for the full resolution
- * writeup, including why the earlier misattribution happened).
+ * occupant also use. Ends in a completely ordinary fall-through - always
+ * uses the shared generic distance-based advance, same as every other
+ * opcode in this switch (RESOLVED, issue #13 item 1: opcode 0x2d does too
+ * - its own `local_d0` was never actually a distinct next-record pointer,
+ * see `ATIR500GLContext_handle_fsaa_resolve_blit`'s own header comment;
+ * this dispatch entry's `case 0x2d000000` below no longer needs the
+ * `next != record` path either).
  */
 static UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -1366,7 +1366,7 @@ static UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record
         } while (tileCount != 0);
     }
 
-    return record; /* real: falls through to the shared generic distance-based advance - unlike 0x2d, this opcode does NOT return an explicit local_d0 */
+    return record; /* real: falls through to the shared generic distance-based advance - same as opcode 0x2d (issue #13 item 1: 0x2d's own local_d0 was never a distinct next-record pointer either) */
 }
 
 extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record);
@@ -3403,7 +3403,13 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
              * had NO case for 0x2d000000 at all (it fell into the
              * reserved-noop group above by mistake) while 0x31000000
              * wrongly called this same real handler instead. See
-             * handle_depth_buffer_resolve's header comment above. */
+             * handle_depth_buffer_resolve's header comment above.
+             * RESOLVED, issue #13 item 1: the handler always returns
+             * `record` unchanged now (its own `local_d0` is real but
+             * purely internal - see its own header comment), so `next`
+             * always equals `record` here and the shared tail's
+             * `next != record` branch is never taken for this opcode -
+             * same as every other opcode in this switch. */
             case 0x2d000000: next = ATIR500GLContext_handle_fsaa_resolve_blit(this, record); break;
             case 0x2f000000: next = handle_hyperz_commit(this, record); break;
             case 0x30000000: next = handle_fsaa_resolve_setup(this, record); break;
@@ -3469,15 +3475,27 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
          * IMPORTANT: `next == record` (this project's established signal
          * for "no explicit alternate pointer") is what selects the natural-
          * distance path below; every currently-transcribed opcode uses this
-         * path (verified: none currently returns a distinct pointer), but
-         * the `next != record` branch is kept for any future opcode that
-         * genuinely needs one - unexercised so far, flagged accordingly.
+         * path, CONFIRMED (not just assumed) for all of them, including
+         * opcode 0x2d - RESOLVED, issue #13 item 1: an earlier pass here
+         * believed 0x2d genuinely needed the `next != record` branch
+         * (returning its own internal `local_d0`), but a direct
+         * disassembly trace of that opcode's real ~600-instruction body
+         * proved `record`/the real advance/exit registers are never
+         * touched there - `local_d0` is real but purely internal to that
+         * opcode's own trailing self-pad step, never fed back as a
+         * distinct next-record pointer. See
+         * `ATIR500GLContext_handle_fsaa_resolve_blit`'s own header comment
+         * for the full trace. The `next != record` branch below is kept
+         * for any future opcode that genuinely needs one - unexercised by
+         * every currently-transcribed opcode, now including 0x2d.
          */
         if (next != record) {
             /* Not currently exercised by any transcribed opcode - see note
-             * above. If this is ever hit, re-verify against the real tail:
-             * this project has not confirmed any real opcode bypasses
-             * LAB_00031340's own exit-check entirely. */
+             * above (this includes opcode 0x2d, previously believed to be
+             * the one exception - see issue #13 item 1). If this is ever
+             * hit, re-verify against the real tail: this project has not
+             * confirmed any real opcode bypasses LAB_00031340's own
+             * exit-check entirely. */
             record = next;
             continue;
         }

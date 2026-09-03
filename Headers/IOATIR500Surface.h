@@ -199,11 +199,11 @@ public:
     IOReturn alloc_surfaces(bool retry);
     IOReturn alloc_surfaces_retry(UInt32 flags, UInt32 param2);
 
-    /* flush_surface / resolve_fsaa_buffer / set_scaling / set_volatile_state /
-     * set_surface_blocking - CONFIRMED real names from various call sites
-     * across this project (stage4's opcode 0x30 trace for
-     * resolve_fsaa_buffer; the GL context's scale_surface for
-     * set_scaling/set_volatile_state). Bodies UNKNOWN beyond their roles. */
+    /* flush_surface / set_scaling / set_volatile_state / set_surface_blocking -
+     * CONFIRMED real names from various call sites across this project (the
+     * GL context's scale_surface for set_scaling/set_volatile_state). Bodies
+     * UNKNOWN beyond their roles. resolve_fsaa_buffer's own body is now
+     * RESOLVED (issue #13 item 2) - see Sources/ATIR500Surface_ResolveFSAABuffer.cpp. */
     void     flush_surface(UInt32 param1, UInt32 param2);
     void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlock,
                                   bool clearFlag, UInt32 param5, UInt32 param6, UInt32 param7,
@@ -278,6 +278,19 @@ public:
 
 protected:
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
+
+    /* Both found this pass (issue #13, ATIR500Surface::resolve_fsaa_buffer)
+     * - real per-attachment `ATIR500SurfaceBuffer*` pointers, the same
+     * struct restore_state_destroyed_by_pageoff's own per-mip array
+     * already established (ATIRadeonX1000Types.h). Neither offset was
+     * previously documented anywhere in this class. `surfaceBuffersByFormat`
+     * is real base address `this+0xb70`, indexed `[formatCode]` (real
+     * element count not independently confirmed - declared as a pointer
+     * to the base rather than a fixed-size array for that reason; real
+     * access is `surfaceBuffersByFormat[formatCode]`, matching the real
+     * `*(int*)(this + formatCode*4 + 0xb70)` decompile expression). */
+    ATIR500SurfaceBuffer **surfaceBuffersByFormat; /* +0xb70, CONFIRMED base address */
+    ATIR500SurfaceBuffer *fixedSurfaceBuffer;       /* +0xb94, CONFIRMED: a single real `ATIR500SurfaceBuffer*`, always read regardless of the caller's own format-code argument - the "primary"/depth-or-stencil-style attachment resolve_fsaa_buffer treats as fixed rather than per-format-code. */
 };
 
 #endif /* IOATIR500SURFACE_H */

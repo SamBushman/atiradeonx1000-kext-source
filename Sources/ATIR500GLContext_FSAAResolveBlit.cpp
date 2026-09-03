@@ -147,9 +147,15 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
 } // namespace
 
 /*
- * Returns the real dword pointer where this opcode's handler ends
- * (matching the real decompile's own `puVar42`/`puVar65+...` end state)
- * for process_command_buffer's shared dispatch loop to continue from.
+ * RESOLVED (issue #13 item 1): this handler always returns `puVar65`
+ * (`record`) unchanged - the real generic-advance signal every other
+ * opcode in this file also uses - NOT `local_d0`. See this function's
+ * own trailing comment (right before the `return`) for the direct
+ * disassembly trace that settled this; this project's earlier model
+ * (returning `local_d0`, with the dispatch loop's own `next != record`
+ * branch treating it as an alternate "next record" pointer) was a real
+ * bug, now fixed both here and at the dispatcher's own `case 0x2d000000`
+ * in `ATIR500GLContext_ProcessCommandBuffer.cpp`.
  */
 UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *puVar65) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
@@ -570,36 +576,47 @@ UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 
     *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(ctx->accelerator) + 0x78) = 0;
 
     /*
-     * Real, open integration note - UPDATED: a later pass fully corrected
-     * process_command_buffer's dispatch tail (`LAB_00031340`) to implement
-     * the real pause/resume mechanism (writing real pending-state fields
-     * into the caller's `VendorCommandDescriptor` and returning a real
-     * accumulated status code) - see ATIR500GLContext_ProcessCommandBuffer.cpp
-     * and GAPS.md section 2. That tail now runs correctly for every opcode
-     * that returns `record` unchanged (this file's established "use the
-     * generic distance-based advance" signal).
+     * RESOLVED (issue #13 item 1) - this was previously an open question
+     * ("does local_d0 ever coincide with buffer-fully-consumed, given the
+     * dispatch loop's `next != record` branch skips the real exit check
+     * for it?"). Settled with a direct instruction-level disassembly trace
+     * of this opcode's REAL compiled body (real target `0x2d034`-`0x2deb4`
+     * in the kext binary, GL context's `process_command_buffer`), not
+     * decompile inference: `record` (r27 in the real compiled code), and
+     * the two registers `LAB_00031340`'s own real tail actually uses to
+     * advance/exit (`r21` - added to the record pointer - and `r23` -
+     * tested for the real "distance now zero" exit condition and
+     * separately accumulated) are ALL set exactly once, at the very top of
+     * the dispatch loop's own current iteration, from the record's own
+     * standard embedded low-24-bit distance field (`record[0] & 0xffffff`)
+     * - and are PROVABLY NEVER TOUCHED anywhere in this whole ~600-real-
+     * instruction opcode body (confirmed by finding every real reference
+     * to all three registers across the opcode's full real address range -
+     * none exist outside the loop-top setup). `local_d0` (`record +
+     * record[1]`, kept live on the stack throughout this function) is
+     * real, but used PURELY INTERNALLY - only for this opcode's own
+     * trailing self-pad step above (ensuring whatever the tile loop
+     * produced is padded out to the SAME boundary the record's own
+     * standard distance field independently encodes) - never fed back
+     * into `r27`/`r21`/`r23`, and therefore never reaches the shared exit
+     * check at all. The real compiled code, after this opcode's own real
+     * body finishes, falls through to `LAB_00031340` using the exact same
+     * unmodified `record`/distance the dispatch loop's own top already
+     * set up - identical in kind to every other opcode in this file, not
+     * an exception.
      *
-     * This function (opcode 0x2d - see the header comment at the top of
-     * this file for the resolved identity) is the one confirmed EXCEPTION:
-     * it returns `local_d0`, an explicitly-computed pointer distinct from
-     * `record` (since this opcode's real tile loop consumes a
-     * data-dependent number of dwords the header's own encoded distance
-     * field cannot represent generically the way every other opcode's
-     * fixed/simple body can). The dispatch loop's own `if (next != record)`
-     * branch handles this by advancing straight to `local_d0` and
-     * re-entering the loop - but it does NOT run the tail's real
-     * exit-descriptor-write/status-return check in that case, whereas the
-     * real decompile shows this opcode's ending DOES fall into that same
-     * shared check. Whether that matters in practice depends on whether
-     * `local_d0` can ever coincide with a real "buffer now fully consumed"
-     * position - NOT independently confirmed either way. Real, concrete
-     * open item, tracked as a residual issue on this repo (issue #12 item
-     * 4's remaining open half - the misattribution itself is resolved, but
-     * this specific tail-integration question survives the re-attribution
-     * unchanged, now correctly pointed at opcode 0x2d instead of 0x31; the
-     * REAL opcode 0x31, handle_depth_buffer_resolve, was independently
-     * confirmed to have no such exception - it always falls through to the
-     * ordinary shared advance).
+     * This means this project's EARLIER model (this function returning
+     * `local_d0` as a distinct "next" pointer, with the dispatch loop's
+     * `next != record` branch advancing straight to it and skipping the
+     * real exit-descriptor-write check) was a real bug, not just an
+     * incompletely-verified caveat - now fixed here (returns `puVar65`
+     * unchanged) and at the dispatcher's own `case 0x2d000000` in
+     * `ATIR500GLContext_ProcessCommandBuffer.cpp`, which no longer needs
+     * (or should use) its `next != record` branch for this opcode. That
+     * branch is consequently unexercised by any currently-transcribed
+     * opcode again, exactly as it was before this opcode was first wired
+     * up - kept in place for any future opcode that might genuinely need
+     * it, same as before.
      */
-    return local_d0;
+    return puVar65;
 }

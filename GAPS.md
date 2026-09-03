@@ -11,7 +11,7 @@ PowerPC kext toolchain available in the environment this was written in. **Requi
 toolchain access to close.** See `README.md`'s "What to do when hardware is available again" section for
 the concrete first steps.
 
-## 2. `process_command_buffer`'s opcode handlers (GL context) - RESOLVED, two small residual items tracked in issue #13
+## 2. `process_command_buffer`'s opcode handlers (GL context) - FULLY RESOLVED (issue #13's two residual items closed)
 
 **Status: COMPLETE.** Every real opcode this driver's embedded marker language actually dispatches is now
 transcribed. This was verified mechanically, not just by inspection: grepping the complete raw decompile
@@ -342,18 +342,32 @@ new, real handler, defined in that same file). `FSAAResolveBlit.cpp`'s header co
 correct opcode 0x2d identity; its content, transcription, and open tail-integration question (below) are
 otherwise unchanged - they were already correct, just filed under the wrong opcode number.
 
-**One open item survives the re-attribution, now correctly pointed at 0x2d instead of 0x31 - tracked in
-issue #13**: opcode 0x2d's handler returns `local_d0`, an explicitly-computed pointer distinct from
-`record` (its real tile loop consumes a data-dependent dword count the header's encoded distance field
-can't represent generically). The dispatch loop's `if (next != record)` branch advances straight to
-`local_d0` but does NOT run the tail's real exit-descriptor-write/status-return check in that case, whereas
-the real decompile shows this opcode's ending DOES fall into that same shared check. Whether that matters
-in practice depends on whether `local_d0` can ever coincide with a real "buffer now fully consumed"
-position - NOT independently confirmed either way; a genuine, still-open question, now correctly scoped to
-opcode 0x2d only (the real opcode 0x31 was independently confirmed this pass to have no such exception).
+**RESOLVED (issue #13 item 1)**: the open item that survived the re-attribution, about whether opcode
+0x2d's `local_d0` (an explicitly-computed pointer distinct from `record`) ever needed the shared
+exit-descriptor-write/status-return check the dispatch loop's `next != record` branch was skipping for it.
+Settled with a direct disassembly trace of the real compiled opcode body (`0x2d034`-`0x2deb4`): `record`
+and the two real registers `LAB_00031340`'s own tail uses to advance/exit are set once at the real loop
+top (from the record's own standard embedded distance field) and are PROVABLY never touched anywhere in
+this opcode's whole ~600-instruction real body. `local_d0` is real, but purely internal - used only for
+this opcode's own trailing self-pad step, never fed back as a distinct next-record pointer. The real
+compiled code falls through to the exact same shared tail as every other opcode, using the exact same
+unmodified distance field - not an exception at all. This means this project's earlier model (returning
+`local_d0`, dispatch loop advancing straight to it and skipping the real exit check) was a real bug, not
+just an unverified caveat - fixed in both `ATIR500GLContext_handle_fsaa_resolve_blit` (now always returns
+`record` unchanged) and the dispatcher's own `case 0x2d000000`. See that function's own header comment for
+the full trace.
 
-`ATIR500Surface::resolve_fsaa_buffer` remains genuinely UNKNOWN/opaque (its header comment already
-correctly says so, and nothing this pass found bears on it) - also tracked in issue #13.
+**RESOLVED (issue #13 item 2)**: `ATIR500Surface::resolve_fsaa_buffer` is no longer opaque - fully
+transcribed (`Sources/ATIR500Surface_ResolveFSAABuffer.cpp`). Real top-level structure: a single flag-bit
+test (`this+0xbe8 & 0x700000`) selects between two entirely different real resolve strategies - a
+per-plane MSAA burst plus floating-point NDC viewport blit (flag clear), or a HyperZ-block-driven resolve
+using `HZMEM_GetBlockOffset`/`HZMEM_GetBlockCount` with a completely different real PM4 burst shape (flag
+set) - never a minor variation of one path, two genuinely distinct real mechanisms. Found and named three
+previously-undocumented real fields on `ATIR500SurfaceBuffer` (`+0x30`/`+0x36`/`+0x3c`) and two new
+`IOATIR500Surface` fields (`surfaceBuffersByFormat`/`fixedSurfaceBuffer`) along the way - see
+`ATIRadeonX1000Types.h`/`IOATIR500Surface.h`. Also declared a fourth real format-lookup table
+(`SamplesTableLookup`, `ATIRadeonX1000Registers.h`), matching the existing `FormatTableLookup_0x0004d2e0/
+dc/e4` convention.
 
 ## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
 

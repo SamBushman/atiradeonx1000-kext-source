@@ -183,14 +183,17 @@ struct ATIR500SurfaceBuffer {
     UInt16  extra1e;             /* +0x1e, CONFIRMED: paired with +0x1c in get_surface_size's non-mip branch */
     UInt8   _pad_0x20[0x28 - 0x20];
     UInt32  formatOrTilingBits;  /* +0x28, CONFIRMED: real per-mip dirty/format bitmask, checked in page_off_texture */
-    UInt8   _pad_0x2c[0x34 - 0x2c];
+    UInt8   _pad_0x2c[0x30 - 0x2c];
+    UInt32  hzBlockCountField;   /* +0x30, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): real value read directly as an operand to a `0x1385`-tagged burst slot right after an `HZMEM_GetBlockCount` call on this same struct's `formatOrTilingBits` - almost certainly a real HyperZ block-count-adjacent field, exact semantics beyond that not independently confirmed. */
     UInt8   zbBandwidthEligible; /* +0x34, CONFIRMED (compute_zb_bw_cntl): real per-surface flag - if set AND either the surface's block width (+0x16) exceeds 2 or its tiling-degree bits exceed 2, contributes bit 0x1c to ZB_BW_CNTL */
     UInt8   hyperZEligible;      /* +0x35, CONFIRMED (compute_sc_hyperz_en/compute_zb_bw_cntl): real per-surface "this surface may use HyperZ at all" master flag - both functions gate their entire real bit-contribution on this being nonzero */
-    UInt8   _pad_0x36[0x38 - 0x36];
+    UInt8   fsaaResolvedFlag;    /* +0x36, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): a DISTINCT real byte from +0x35's hyperZEligible (one byte later) - both read (gates a real burst-slot patch and the multi-tile/HZMEM_GetBlockCount path) and WRITTEN (unconditionally set to 1 at the end of that same real path) by that function; reads as a real "this surface's FSAA buffer has now been resolved at least once" one-shot flag, not independently confirmed beyond that role. */
+    UInt8   _pad_0x37;
     UInt8   tilingConfigByte0;   /* +0x38, CONFIRMED: real tiling-config byte, feeds the &1/&6/&7 bit tests throughout the capstone register-write code */
     UInt8   tilingConfigByte1;   /* +0x39, CONFIRMED: same family, &3 bit test */
     UInt8   formatTableIndex;    /* +0x3a, CONFIRMED: real index into the DAT_0004d2e0/DAT_0004d2e4-style format lookup tables (`* 0x1c` stride) */
     UInt8   _pad_0x3b;
+    UInt32  tilingDegreeBits;    /* +0x3c, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): real field previously left as unnamed padding between +0x3b and mipOffsets - a real, heavily-read bitfield: `& 0xf00000` gates several per-plane pitch/block-degree computations, `(>> 0x14) & 0xf` extracts a real 4-bit "tiling degree" divisor for `width`/`heightOrRows`. */
     UInt32  mipOffsets[16];      /* +0x40.., CONFIRMED: real per-mip-level GPU offset array, indexed by `mipIndex*4 + 0x40` throughout the capstone/blit-state-packet code */
 };
 
