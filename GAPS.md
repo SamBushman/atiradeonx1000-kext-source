@@ -22,12 +22,35 @@ side. Along the way, this pass found this project's ORIGINAL opcode inventory (b
 narrative documents, not a full mechanical sweep) had actually missed FOUR real opcodes entirely -
 `0x2d` (**CORRECTED, issue #12 item 4**: originally cataloged here as reserved/dead, same shape as the
 `0x17/0x1a/0x1d/0x20/0x23` gaps - it isn't; it's a real, large FSAA-resolve-blit handler, see the opcode
-0x31/0x2d resolution below in this section for the full writeup), `0x33` (a real inline color+Z-buffer register burst), `0x34` (a real
+0x31/0x2d resolution below in this section for the full writeup; those other five turned out to share this
+exact same real mistake too - see the later continuation paragraph below, they are not reserved/dead
+either), `0x33` (a real inline color+Z-buffer register burst), `0x34` (a real
 query/fence-slot allocator), and `0x35` (another render-target generation-stamp opcode) - plus a fifth,
 `0x32`, that WAS known by number but whose real body had never been located (a large depth-flush +
 per-tile texture-fetch-register-patch function, the closest thing in this language to opcode 0x2d's own
 tile loop - also CORRECTED from an earlier "0x31" mislabel, see the opcode 0x31/0x2d resolution below in this section). All five are now fully
 transcribed.
+
+**LATER CONTINUATION (issue #13 follow-up audit, prompted by "are there lower-confidence parts of the
+decompilation this project can now revise given other work?")**: a real fourth misattribution found and
+fixed, the exact same class of mistake as the opcode 0x31/0x2d one below - a decompile-text search for a
+literal `== 0x1X000000` match, rather than a disassembly-verified branch trace. Opcodes `0x17`/`0x1a`/
+`0x1d`/`0x20`/`0x23` were believed real, dead, reserved no-ops (`handle_reserved_noop`) because no exact
+textual match for their own opcode constant could be found anywhere in the decompile - the same reasoning
+shape that caused the 0x31/0x2d mistake. Prompted by having a fresh, complete disassembly dump of this
+whole function on hand already (captured for the issue #13 `local_d0` investigation), a direct trace of
+all sixteen real top-level comparisons for the `0x16-0x25` range showed EVERY ONE of them - the eleven
+already believed to be `handle_remove_texture_from_stream` and the five believed reserved - branches to
+the exact same real address (`0x2e820`), independently confirmed by disassembling that address directly
+to be `handle_remove_texture_from_stream`'s own real content (slot lookup, atomic refcount decrement,
+conditional delete-if-last-reference, slot cleared) - not a no-op, no gaps. `handle_reserved_noop` removed
+entirely; all sixteen values now route through the one real handler, which was already written generically
+enough (its own index formula, independently verified byte-for-byte against the real `subis`/`rlwinm`
+sequence at `0x2e820`) to need no changes itself - only the dispatch wiring was wrong. See the dispatch
+`switch`'s own range-check comment in `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp` for the full
+account. Worth noting as a reusable technique: whenever this project captures a fresh disassembly dump for
+one investigation, it's worth a quick cross-check against nearby dispatch-table claims before discarding
+it - this is the second real bug (after 0x31/0x2d) found exactly that way on this exact function.
 
 **Major structural corrections this pass** (found while transcribing the remaining opcodes, by finally
 reading the complete raw decompile rather than the excerpts used earlier): this project's model of the

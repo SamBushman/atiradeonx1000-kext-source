@@ -23,12 +23,15 @@
  * `if (uVar34 != 0x2d000000) { ...0x2b/0x2c/0x2f/0x30 handling...; goto
  * LAB_00031340; }` exclusion check. `0x2d000000` appears exactly once in
  * the whole ~3300-line decompile, so there's no remaining ambiguity. The
- * dispatch table previously had opcode 0x2d wrongly grouped into the
- * dead/reserved no-op family (see ATIR500GLContext_ProcessCommandBuffer.cpp's
- * `handle_reserved_noop` comment) while 0x31000000 wrongly called this
- * function instead - both now fixed: `case 0x2d000000` calls this
+ * dispatch table previously had opcode 0x2d wrongly grouped into a
+ * believed-dead/reserved no-op family while 0x31000000 wrongly called
+ * this function instead - both now fixed: `case 0x2d000000` calls this
  * function, `case 0x31000000` calls the real, newly-transcribed
- * `handle_depth_buffer_resolve`.
+ * `handle_depth_buffer_resolve`. That whole "reserved no-op" family
+ * itself later turned out to be a second real misattribution of the
+ * exact same kind - see the dispatch table's own range-check comment in
+ * `ATIR500GLContext_ProcessCommandBuffer.cpp` (the `handle_reserved_noop`
+ * function this comment used to cite has since been removed entirely).
  *
  * The content below is real, careful, internally-consistent transcription
  * of opcode 0x2d - correctly identified now, previously wired to the

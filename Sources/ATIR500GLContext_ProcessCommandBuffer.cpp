@@ -396,27 +396,17 @@ static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 o
 }
 
 /*
- * Opcodes 0x17, 0x1a, 0x1d, 0x20, and 0x23: CONFIRMED dead/reserved in
- * this exact kext build. The dispatch code excludes them from their
- * respective neighboring real handlers with a dedicated
- * `!= 0x1d000000`-style check each, implying the original author intended
- * distinct handling - but no corresponding body exists anywhere in the
- * real decompiled function for an exact match on any of these five
- * values. Modeled here as true no-ops, matching the real observed
- * behavior exactly (not a placeholder for missing analysis - this IS
- * what the real kext does).
- *
- * CORRECTED, issue #12 item 4: 0x2d was wrongly included in this group in
- * an earlier pass, on the mistaken belief that its own `!= 0x2d000000`
- * exclusion check had no matching real branch either. It does - see
- * `case 0x2d000000` in the dispatch switch below, and the header comment
- * on `handle_depth_buffer_resolve` above (opcode 0x31, the OTHER opcode
- * this same investigation resolved) for the full story.
+ * `handle_reserved_noop` (formerly here, covering opcodes 0x17/0x1a/0x1d/
+ * 0x20/0x23) - REMOVED, issue #13 follow-up audit: these five values are
+ * NOT reserved/dead. A direct disassembly trace proved they share the
+ * exact same real dispatch target as the rest of the 0x16-0x25 range
+ * (`0x2e820`, `handle_remove_texture_from_stream`'s own real content) -
+ * see that range check's own comment, in the dispatch `switch` below,
+ * for the full account of how the earlier "reserved" belief happened
+ * (a decompile-text search for a literal `== 0x1X000000` match, the same
+ * class of mistake already caught once on this file for opcode 0x2d,
+ * issue #12 item 4).
  */
-static UInt32 *handle_reserved_noop(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
-    (void)ctx; (void)opcode;
-    return record; /* real observed behavior: falls through, does nothing */
-}
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -3390,8 +3380,6 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x03000000: next = handle_set_return_code_2(this, record, state); break;
             case 0x04000000: next = handle_hyperz_fast_clear_setup(this, record); break;
             case 0x05000000: next = handle_hyperz_zpass_setup(this, record); break;
-            case 0x17000000: case 0x1a000000: case 0x1d000000: case 0x20000000: case 0x23000000:
-                next = handle_reserved_noop(this, opcode, record); break;
             case 0x26000000: next = handle_bind_transfer_buffer(this, record, state); break;
             case 0x27000000: next = handle_unbind_transfer_buffer(this, record); break;
             case 0x28000000: next = handle_single_rendertarget_scissor(this, record); break;
@@ -3435,14 +3423,30 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x46000000: next = handle_fast_clear(this, record); break;
             default:
                 if (opcode >= 0x16000000 && opcode <= 0x25000000) {
-                    /* the real, separate, plain unbind family - confirmed to
-                     * be ONLY opcodes 0x16/0x18/0x19/0x1b/0x1c/0x1e/0x1f/0x21/
-                     * 0x22/0x24/0x25 (11 explicit values, real reserved gaps
-                     * at 0x17/0x1a/0x1d/0x20/0x23 already excluded by their
-                     * own `case` labels above) - CORRECTED this pass, this
-                     * range previously and wrongly started at 0x06 (0x06-0x15
-                     * is the real texture-BIND range, handled before this
-                     * switch is even entered - see handle_texture_bind). */
+                    /* the real, separate, plain unbind family - CORRECTED
+                     * (issue #13 follow-up audit): ALL SIXTEEN values
+                     * 0x16-0x25 inclusive, no gaps. An earlier pass believed
+                     * five of these (0x17/0x1a/0x1d/0x20/0x23) were real
+                     * reserved/dead no-ops, reasoning from a decompile TEXT
+                     * search that found no literal `== 0x1X000000` match for
+                     * them - the exact same class of mistake already caught
+                     * once on this file (the opcode 0x31/0x2d misattribution,
+                     * issue #12 item 4: a real branch reached only via an
+                     * exclusion check's `else`, invisible to a text search
+                     * for the literal opcode constant). A direct disassembly
+                     * trace (not decompile text) of every one of the 16 real
+                     * top-level comparisons for this range - prompted by
+                     * cross-checking the dispatch table freshly captured
+                     * during the issue #13 local_d0 investigation - showed
+                     * all sixteen branch to the exact same real address
+                     * (`0x2e820`), confirmed by direct disassembly of that
+                     * address to be `handle_remove_texture_from_stream`'s own
+                     * real content (slot lookup, atomic refcount decrement,
+                     * conditional delete-if-last-reference, slot cleared) -
+                     * not a no-op. This range previously and wrongly started
+                     * at 0x06 too (0x06-0x15 is the real texture-BIND range,
+                     * handled before this switch is even entered - see
+                     * handle_texture_bind) - that part was already correct. */
                     next = handle_remove_texture_from_stream(this, opcode, record);
                 }
                 /* else: real, confirmed end-of-buffer sentinel or genuinely
