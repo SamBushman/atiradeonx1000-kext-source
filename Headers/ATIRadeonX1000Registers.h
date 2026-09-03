@@ -301,14 +301,15 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * own reopen comment for the full account of that correction.
  * ============================================================================
  *
- * Every one of the 24 real kext-local `FUN_XXXXXXXX` symbols this project
+ * Every one of the 28 real kext-local `FUN_XXXXXXXX` symbols this project
  * had called opaquely throughout (`FUN_00007424`, `FUN_000147f0`,
  * `FUN_00014810`, `FUN_00014820`, `FUN_00014850`, `FUN_00015870`,
  * `FUN_000158b0`, `FUN_000158c0`, `FUN_000158d0`, `FUN_000158e0`,
  * `FUN_00015a84`, `FUN_00015aa4`, `FUN_000286dc`, `FUN_00029da8`,
  * `FUN_0002a864`, `FUN_000314c4`, `FUN_000334cc`, `FUN_0003577c`,
  * `FUN_000357ac`, `FUN_000390dc`, `FUN_0003911c`, `FUN_0003913c`,
- * `FUN_00044868`, `FUN_00044d74`) is, in the real kext binary, a REAL
+ * `FUN_00044868`, `FUN_00044d74`, `FUN_0001a194`, `FUN_0001a274`,
+ * `FUN_0001a2e4`, `FUN_0001a204`) is, in the real kext binary, a REAL
  * LAZY-BINDING STUB TRAMPOLINE - not a local function this project failed
  * to decompile. (`FUN_00044d74` added by the issue #17 investigation -
  * `ATIR500Surface::back_resolve_fsaa_buffer`'s own call-site instance of
@@ -316,7 +317,14 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
  * have the identical 4-instruction shape - almost certainly the same real
  * external target as `FUN_00044868`, just this call site's own distinct
  * per-reference stub symbol; does not change this issue's own open
- * status.)
+ * status. `FUN_0001a194`/`FUN_0001a274`/`FUN_0001a2e4`/`FUN_0001a204`
+ * added by the issue #21 investigation - `ATIRadeonX1000`'s four
+ * context-factory methods' own real allocator calls, each its own
+ * per-call-site stub instance, almost certainly all resolving to
+ * `operator new(unsigned long)` rather than the same external target as
+ * the other 24 - a real, distinct external symbol from this catalog's
+ * other entries, still genuinely unidentified either way; does not
+ * change this issue's own open status.)
  * Each one's real body is exactly the same real 4-instruction sequence
  * (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`), with LITERAL
  * ZERO immediates in the static binary - a real external-symbol call

@@ -349,8 +349,8 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
                 U32At(self, 0xbf8) &= 0xdfffffffu;
                 if (sizeOrHandle != 0) {
                     UInt32 scratch[4] = {0, 0, 0, 0}; /* real: local_38/local_34/local_30/local_2c */
-                    void *mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), sizeOrHandle, 0x1000); /* RESOLVED, issue #19 */
-                    if (mapped == nullptr) {
+                    bool mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), sizeOrHandle, 0x1000); /* RESOLVED, issue #19/#21/#23 - real return type bool, not a pointer */
+                    if (!mapped) {
                         result = 0xe00002be;
                         U32At(self, 0xbf8) |= 0x20000000u;
                     } else {
@@ -670,9 +670,9 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32
             } else {
                 if (needsRetag) {
                     UInt32 scratch[4] = {0, 0, 0, 0}; /* real: local_48/local_44/local_40/local_3c */
-                    void *mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), /* RESOLVED, issue #19 */
+                    bool mapped = accelerator->tmpAllocVRAM(reinterpret_cast<GLKMemoryElement *>(scratch), /* RESOLVED, issue #19/#21/#23 - real return type bool, not a pointer */
                         *reinterpret_cast<SInt32 *>(*reinterpret_cast<UInt32 *>(self + 0xb70) + 0x10), 0x1000);
-                    if (mapped == nullptr) {
+                    if (!mapped) {
                         result = 0xe00002be;
                         U32At(self, 0xbf8) |= 0x20000000u;
                         goto shared_tail;

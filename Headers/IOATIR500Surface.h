@@ -289,18 +289,23 @@ public:
      */
     /*
      * update_ref_stamps / increment_refcounts / decrement_refcounts -
-     * RESOLVED, issue #18. Three more real vtable slots, called from
+     * RESOLVED, issue #18/#22. Three more real vtable slots, called from
      * `IOATIR500GLContext::remove_texture_from_stream`/
      * `add_texture_to_stream` (`Sources/IOATIR500GLContext_TextureStream.cpp`)
      * against a texture's own `+0x50`-field Surface pointer. Unlike the
      * five below, these are NOT subclass overrides - `ATIR500Surface`'s
      * own vtable has the identical addresses at these three slots as the
      * base, confirming this base class's own bodies are what every real
-     * caller reaches either way.
+     * caller reaches either way. Real bodies (issue #22) CONFIRMED to be
+     * genuine NO-OPS - real, previously-unknown finding, matching the
+     * same "real empty stub" pattern already found for the overlay
+     * family (`Sources/ATIR500Surface_Overlay.cpp`). `update_ref_stamps`
+     * still has a real, non-void return type (returns its own second
+     * argument verbatim) even though neither real caller uses it.
      */
-    virtual void   update_ref_stamps(UInt32 generation, UInt32 tag); /* +0x5b4, real addr 0x13fe0 */
-    virtual void   increment_refcounts(UInt32 tag);                  /* +0x5b8, real addr 0x13ff0 */
-    virtual void   decrement_refcounts(UInt32 tag);                  /* +0x5bc, real addr 0x14000 */
+    virtual UInt32 update_ref_stamps(UInt32 generation, UInt32 tag); /* +0x5b4, real addr 0x13fe0 - CONFIRMED real no-op, returns tag verbatim */
+    virtual void   increment_refcounts(UInt32 tag);                  /* +0x5b8, real addr 0x13ff0 - CONFIRMED real no-op */
+    virtual void   decrement_refcounts(UInt32 tag);                  /* +0x5bc, real addr 0x14000 - CONFIRMED real no-op */
 
     virtual void   invalidate();                                   /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only) */
     virtual void   dealloc_surface(UInt32 surfaceIndex);            /* +0x5cc, real addr 0x12580 (base) / 0x3df70 (subclass override) - real mangled param type confirmed `unsigned long` */

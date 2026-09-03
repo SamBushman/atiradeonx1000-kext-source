@@ -133,20 +133,40 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
 }
 
 /*
- * map_transfer_to_GART - CONFIRMED, fully transcribed (real kext offset
- * 0x79d0). Real, simple: `ATIRadeonX1000::addTransferToGART` (RESOLVED,
- * issue #19; real name known, own body not independently decompiled)
- * checks something (UNKNOWN real meaning - "is GART already mapped?" is
- * the obvious guess given the gate shape, not independently confirmed),
- * and if it reports "not yet mapped," delegates the actual mapping
- * decision to the accelerator's freeToAllocGART sweep (this project's
- * fully decoded GART reclamation mechanism - IOATIR500Accelerator.h).
+ * map_transfer_to_GART - real kext offset 0x79d0. CORRECTED, issue #23:
+ * decompiling `ATIRadeonX1000::addTransferToGART`'s own real body turned
+ * up two real problems with this function's earlier transcription, both
+ * fixed here:
+ *
+ * 1. Real signature mismatch: `addTransferToGART` (both the
+ *    `ATIRadeonX1000` override and the `IOATIR500Accelerator` base it
+ *    calls) is CONFIRMED, from each real decompile, to take a real
+ *    `VendorTransferBuffer*` parameter - the previous transcription
+ *    called it with NO arguments at all. Since the real callee
+ *    unconditionally dereferences that parameter (`param_1+8`/`param_1+4`
+ *    at the base level), calling it without `buffer` would be a real
+ *    crash risk - fixed by passing `buffer`.
+ * 2. Real return-value uncertainty: BOTH `addTransferToGART` levels
+ *    (`ATIRadeonX1000`'s own override and the `IOATIR500Accelerator`
+ *    base it calls) decompile as genuinely `void` - neither ever sets a
+ *    real return value in its own control flow. The earlier
+ *    transcription's `if (result == 0) { ... }` gate around the
+ *    `freeToAllocGART` call was capturing whatever the real compiled
+ *    call site's indirect-call-with-unknown-prototype artifact happened
+ *    to leave in the return register - NOT a confirmed real signal, per
+ *    this project's own established caveat about this exact category of
+ *    artifact elsewhere (e.g. `ATIR500GLContext_TextureLoad.cpp`'s
+ *    `load_texture` note). Not resolved with certainty either way this
+ *    pass - the real gate condition (if any) would require decompiling
+ *    a further vtable slot (`IOATIR500Accelerator`'s own `+0x5a0`,
+ *    itself unidentified) to settle. Conservatively made unconditional
+ *    here (never skip the GART-mapping decision) rather than guess at a
+ *    condition this project can't currently confirm - see issue #23's
+ *    own tracking for whoever investigates `+0x5a0` next.
  */
 void IOATIR500GLContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
-    UInt32 result = accelerator->addTransferToGART();
-    if (result == 0) {
-        void *sharedAllocator = reinterpret_cast<void *>(U32At(this, 0x88)); /* real: *(IOATIR500Shared**)(this+0x88) */
-        accelerator->freeToAllocGART(nullptr, nullptr, this, boundSurface,
-                                      reinterpret_cast<IOATIR500Shared *>(sharedAllocator), buffer);
-    }
+    accelerator->addTransferToGART(buffer);
+    void *sharedAllocator = reinterpret_cast<void *>(U32At(this, 0x88)); /* real: *(IOATIR500Shared**)(this+0x88) */
+    accelerator->freeToAllocGART(nullptr, nullptr, this, boundSurface,
+                                  reinterpret_cast<IOATIR500Shared *>(sharedAllocator), buffer);
 }

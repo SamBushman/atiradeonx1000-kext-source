@@ -96,6 +96,20 @@ public:
                               IOATIR500Shared *excludeShared, VendorTransferBuffer *needed,
                               bool aggressive);
 
+    /*
+     * addTransferToGART - RESOLVED, issue #19/#23 (real vtable slot
+     * +0x5a8, real addr 0x34b0). CORRECTED, issue #23: real signature
+     * takes a `VendorTransferBuffer*` parameter (confirmed from this
+     * function's own real decompile, which unconditionally dereferences
+     * it) - this project's earlier transcription (issue #19) had it
+     * taking no parameters. Real body delegates to a further, still
+     * unidentified vtable slot (`+0x5a0` on this class) with two derived
+     * values from the buffer - own body of THAT slot not investigated.
+     * `ATIRadeonX1000`'s own override (`ATIRadeonX1000.h`) calls this
+     * base version explicitly, then adds its own extra bookkeeping.
+     */
+    virtual void addTransferToGART(VendorTransferBuffer *buffer);
+
     /* allocOneDataBuffer / freeOneDataBuffer / allocDataBufferBacking -
      * CONFIRMED to exist and be real (every context's get_data_buffer
      * calls these), signatures INFERRED from call-site shape. */
@@ -191,17 +205,37 @@ private:
      * invented - and their roles match this project's existing
      * INFERRED-by-elimination ordering exactly (Surface/2D/DVD/GL at
      * +0x5d4/+0x5d8/+0x5dc/+0x5e0 respectively), which independently
-     * CONFIRMS that ordering was correct all along. Declarations moved to
-     * `ATIRadeonX1000.h` (the real overriding subclass) using these real
-     * names; the base class below keeps the four virtuals as the
-     * interface it declares, now cross-referencing the real overrides.
-     * Own function bodies not independently decompiled this pass - only
-     * the vtable slot *values* were in scope for issue #6.
+     * CONFIRMS that ordering was correct all along.
+     *
+     * RENAMED here (issue #21) from this project's own earlier invented
+     * placeholder names (`createSurfaceContext`/`create2DContext`/
+     * `createDVDContext`/`createGLContext`) to the real names below - a
+     * real C++ override must share its base virtual's exact name (only
+     * the return type may covary), so once `ATIRadeonX1000`'s real
+     * override names were known (`new_surface` etc., `ATIRadeonX1000.h`),
+     * keeping the old invented names here would have made the two
+     * declarations two unrelated functions instead of a real override
+     * pair. This class's own copy of each slot is genuine placeholder
+     * content (raw 0, issue #6) - no local body to decompile here, only
+     * the interface declaration.
      */
-    virtual IOUserClient *createSurfaceContext(void); /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface, see ATIRadeonX1000.h */
-    virtual IOUserClient *create2DContext(void);      /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context, see ATIRadeonX1000.h */
-    virtual IOUserClient *createDVDContext(void);     /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context, see ATIRadeonX1000.h */
-    virtual IOUserClient *createGLContext(void);      /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context, see ATIRadeonX1000.h */
+    virtual IOUserClient *new_surface(void);     /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface (covariant return ATIR500Surface*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_2d_context(void);  /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context (covariant return ATIR5002DContext*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_dvd_context(void); /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context (covariant return ATIR500DVDContext*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_gl_context(void);  /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context (covariant return ATIR500GLContext*), see ATIRadeonX1000.h */
+
+    /*
+     * setup3D - RESOLVED, issue #19/#23 (real vtable slot +0x530, real
+     * addr 0x2610). Declared HERE, not on `ATIRadeonX1000.h` as issue
+     * #19 originally had it - CORRECTED, issue #23: this class's own
+     * vtable and `ATIRadeonX1000`'s own vtable have the IDENTICAL
+     * address at this slot, meaning it is genuinely NOT overridden by
+     * the subclass, only declared/implemented here on the base. Real
+     * body: a single real call, `allocMoreCommandBuffers(this, 0,
+     * 0x20000)` - a new, previously-unknown real function this project
+     * hasn't investigated (own body not decompiled this pass).
+     */
+    virtual UInt32 setup3D(void);
 };
 
 #endif /* IOATIR500ACCELERATOR_H */

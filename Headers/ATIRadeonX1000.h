@@ -40,6 +40,10 @@
 
 #include "IOATIR500Accelerator.h"
 #include "ATIRadeonX1000Types.h"
+#include "ATIR500Surface.h"
+#include "ATIR5002DContext.h"
+#include "ATIR500DVDContext.h"
+#include "ATIR500GLContext.h"
 
 class IOWorkLoop;
 class IOMemoryDescriptor;
@@ -163,20 +167,28 @@ public:
      */
 
     /*
-     * The four real `IOATIR500Accelerator::createXContext` factory
-     * virtuals' real overrides - RESOLVED, issue #6. Real names/addresses
-     * found by reading THIS class's own vtable (`__ZTV14ATIRadeonX1000`,
-     * file-verified at `0x491c8`) directly rather than the base class's -
-     * see `IOATIR500Accelerator.h`'s own updated note for the full
-     * account of why the base class's copy of these same four slots reads
-     * as genuine placeholder content while this one doesn't. Own bodies
-     * not independently decompiled this pass - only the vtable slot
-     * values were in scope for issue #6.
+     * The four real `IOATIR500Accelerator` factory virtuals' real
+     * overrides - names/addresses RESOLVED issue #6, bodies RESOLVED
+     * issue #21. Each real body is trivially uniform: allocate a fixed
+     * real byte size via a real lazy-binding stub (almost certainly
+     * `operator new(unsigned long)` - same 4-instruction trampoline
+     * shape as issue #15's 24-stub catalog, a distinct per-call-site
+     * instance each), placement-construct the real concrete class if the
+     * allocation succeeded, return it (or null). Real covariant return
+     * types below (the base class's own declaration,
+     * `IOATIR500Accelerator.h`, keeps the generic `IOUserClient*`
+     * interface type, which remains valid C++ for the base) - the real
+     * compiled return type on THIS class is the concrete subclass,
+     * confirmed directly from each real decompile. Real per-class
+     * allocation sizes, also a new real finding this pass:
+     * `ATIR500Surface` `0xdbc` bytes, `ATIR5002DContext` `300` (`0x12c`)
+     * bytes, `ATIR500DVDContext` `0x1e0` bytes, `ATIR500GLContext`
+     * `0x690` bytes.
      */
-    virtual IOUserClient *new_surface(void);     /* +0x5d4 on this class's own vtable, real addr 0x1a140 - real override of createSurfaceContext */
-    virtual IOUserClient *new_2d_context(void);  /* +0x5d8, real addr 0x1a220 - real override of create2DContext */
-    virtual IOUserClient *new_dvd_context(void); /* +0x5dc, real addr 0x1a290 - real override of createDVDContext */
-    virtual IOUserClient *new_gl_context(void);  /* +0x5e0, real addr 0x1a1b0 - real override of createGLContext */
+    virtual ATIR500Surface    *new_surface(void);     /* +0x5d4 on this class's own vtable, real addr 0x1a140 - allocates 0xdbc bytes via FUN_0001a194 (real lazy-binding stub) */
+    virtual ATIR5002DContext  *new_2d_context(void);  /* +0x5d8, real addr 0x1a220 - allocates 300 (0x12c) bytes via FUN_0001a274 (real lazy-binding stub) */
+    virtual ATIR500DVDContext *new_dvd_context(void); /* +0x5dc, real addr 0x1a290 - allocates 0x1e0 bytes via FUN_0001a2e4 (real lazy-binding stub) */
+    virtual ATIR500GLContext  *new_gl_context(void);  /* +0x5e0, real addr 0x1a1b0 - allocates 0x690 bytes via FUN_0001a204 (real lazy-binding stub) */
 
     /*
      * Five more real vtable slots this project had called through raw
@@ -187,21 +199,24 @@ public:
      * waitFor.../sleepFor... fence-wait family above (this binary has a
      * real 8-member family total: Retired/NoLock/Consumed-IDCT already
      * known, these two are the plain, non-"NoLock"/non-IDCT-specific
-     * pair). `allocate_texture`/`deallocate_texture` and
-     * `addTransferToGART` are new real names, own bodies not yet
-     * independently decompiled. Real signatures below are taken directly
-     * from each real call site's own typedef (already transcribed
-     * elsewhere in this project, real parameter counts/types CONFIRMED
-     * from those call sites, not guessed) - notably `deallocate_texture`
-     * and `addTransferToGART` take NO extra parameters beyond `this`,
-     * contrary to what their names alone might suggest.
+     * pair).
+     *
+     * CORRECTED, issue #23 (decompiling the real bodies): `setup3D`'s
+     * real vtable slot has the IDENTICAL address on both this class's
+     * own vtable and the base's - i.e. it is NOT actually overridden
+     * here, only declared on the base (`IOATIR500Accelerator.h`); moved
+     * there. `addTransferToGART` real signature takes a
+     * `VendorTransferBuffer*` parameter (this project's issue #19 filing
+     * had it taking none) - the base class declares the virtual
+     * (`IOATIR500Accelerator.h`); THIS class provides a real, genuinely
+     * different override (explicitly calls the base version, then adds
+     * its own bookkeeping) - both declared as their own class's owner.
      */
     IOReturn allocate_texture(VendorTextureBuffer *texture);      /* +0x528 on this class's own vtable, real addr 0x1a800 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp's own callAcceleratorVtable0x528) */
     void     deallocate_texture(void);                            /* +0x524, real addr 0x1a620 - CONFIRMED signature, no texture parameter (ATIR500GLContext_TextureLoad.cpp's own callAcceleratorVtable0x524) */
-    UInt32   setup3D(void);                                       /* +0x530, real addr 0x2610 - real return value IS checked at its one real call site (IOATIR500GLContext::start(), "if (iVar3 == 0) goto failure") - previously only a comment there, never actually wired in; now wired in, see that file */
     UInt32   waitForTimeStamp(UInt32 tag);                        /* +0x54c, real addr 0x251e0 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp/ATIR500GLContext_RestoreState.cpp's own StampFn/VTableCall0x54c typedefs) */
     UInt32   sleepForTimeStamp(UInt32 tag);                       /* +0x558, real addr 0x25960 - CONFIRMED signature (IOATIR500Surface_LockShape.cpp's own StampFn/Fn0x558 typedefs) */
-    UInt32   addTransferToGART(void);                             /* +0x5a8, real addr 0x1a4d0 - CONFIRMED signature, no buffer parameter; gates map_transfer_to_GART's real mapping decision, see IOATIR500GLContext_TextureStream.cpp */
+    virtual void addTransferToGART(VendorTransferBuffer *buffer); /* +0x5a8 on this class's own vtable, real addr 0x1a4d0 - real override of IOATIR500Accelerator::addTransferToGART, see that header */
 
     /*
      * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED, issue #19 (found while
@@ -212,8 +227,8 @@ public:
      * that issue's original enumeration). Own bodies not independently
      * decompiled this pass.
      */
-    void *tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 */
-    void  tmpDeallocVRAM(GLKMemoryElement *elem);                              /* +0x544, real addr 0x1ab20 */
+    bool tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 - RETURN TYPE CORRECTED, issue #21/#23: real body is a thin wrapper around ATIR500Memory::alloc's own real bool success/failure return, not a pointer as this project's call sites had inferred (Ghidra's own isolated decompile of this trivial wrapper mislabeled it void; the real callee's own decompiled body proves the real value in r3 is a real, meaningful boolean) */
+    void tmpDeallocVRAM(GLKMemoryElement *elem);                              /* +0x544, real addr 0x1ab20 - real return value (ATIR500Memory::dealloc's own bool) is never used at either real call site, so void is a safe, correct declaration despite the callee itself returning a value */
 };
 
 #endif /* ATIRADEONX1000_H */

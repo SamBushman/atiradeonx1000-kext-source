@@ -1014,3 +1014,63 @@ symbol, `__ZTVN15IOATIR500Shared9MetaClassE` at `0x49000`) - so `+0x14c` (the th
 own texture-adjacent object calls) is mathematically OUT OF BOUNDS for this class's vtable. This rules
 out `IOATIR500Shared` as that object's real class - it is confirmed to be a DIFFERENT, still-unidentified,
 longer-vtable class. Real identity of that object (reached via `texture+0x54`, then `+8`) remains open.
+
+**New cross-reference (issue #23's `allocate_texture` decompile)**: the SAME real `+0x14c`/`+0xd0`/`+0x18`
+pattern this issue already flagged also appears in `ATIRadeonX1000::allocate_texture`, called on a
+texture's own `+8` field (not `+0x54+8` as the Surface-side call sites use) with the exact same real
+argument shape (`_ASICSupportsAGP, 0, 1, 0, 0`) already documented in `ATIR500GLContext_TextureLoad.cpp`/
+`ATIR500GLContext_DiscardBuffer.cpp`. New data point, not a resolution: the object returned by `+0x14c`
+has its own real `+0xd0` method returning something with a readable `+0x20` field, and is released via
+`+0x18` immediately after use - real class identity for either object still not determined.
+
+## 18. Bodies for the 25 vtable-slot methods issues #6/#18/#19/#20 only named - PARTIAL PROGRESS, issues #21-24
+
+Filed as 4 follow-up issues (#21 accelerator factory methods, #22 Surface vtable slots, #23 accelerator
+vtable slots, #24 `IOATIR500Shared::init`/GART-handle-object identity) after confirming those earlier
+issues only added declarations, never decompiled bodies.
+
+**Fully resolved this pass** (issue #21, CLOSED): all 4 real context-factory bodies
+(`ATIRadeonX1000_ContextFactories.cpp`) - trivially uniform allocate-then-placement-construct pattern,
+real per-class allocation sizes found as a bonus (`ATIR500Surface` `0xdbc`, `ATIR5002DContext` `0x12c`,
+`ATIR500DVDContext` `0x1e0`, `ATIR500GLContext` `0x690` bytes). Real covariant return types corrected
+(concrete subclass pointers, not the placeholder `IOUserClient*`). Real allocator calls confirmed to be 4
+more instances of the same lazy-binding-stub pattern issue #15 catalogs - added there.
+
+**Small/simple members resolved this pass** (issues #22/#23/#24, PARTIAL): `update_ref_stamps`/
+`increment_refcounts`/`decrement_refcounts` (real, previously-unknown finding: a genuine no-op trio,
+matching the overlay family's own "real empty stub" pattern), `invalidate` (Surface), `prepare_vram`/
+`complete_vram` base bodies (trivial), `is_flip_allowed`/`is_surface_size_supported` (both base and
+subclass, full), `setup3D`, `tmpAllocVRAM`/`tmpDeallocVRAM`, `addTransferToGART` (base and subclass),
+`IOATIR500Shared::init`/`alloc_handles` (declared, `init`'s own body transcribed).
+
+**Three real bugs caught and fixed along the way**, all from cross-checking a fresh decompile against
+already-committed code from earlier in this same session:
+1. `setup3D` was declared on the wrong class (`ATIRadeonX1000`, the subclass) - its own vtable slot has
+   the IDENTICAL address on the base class too, meaning it's genuinely not overridden; moved to
+   `IOATIR500Accelerator.h`.
+2. `addTransferToGART`'s real signature takes a `VendorTransferBuffer*` parameter at both the base and
+   subclass level - issue #19's own filing had it taking none, and the one real call site
+   (`map_transfer_to_GART`) was passing nothing at all, a real crash risk against the real callee's own
+   unconditional pointer dereferences. Fixed; that same investigation also surfaced a genuine, unresolved
+   uncertainty about whether `map_transfer_to_GART`'s own gating condition on the call's "return value" is
+   real or a calling-convention artifact (neither `addTransferToGART` level ever sets a real return value
+   in its own decompiled body) - left open, conservatively made unconditional rather than guessed at.
+3. `tmpAllocVRAM`'s real return type is a real, meaningful `bool` (confirmed via decompiling the new
+   `ATIR500Memory::alloc` class it delegates to, which has genuine `return 1;`/`return 0;` control flow) -
+   not the `void*` this project's original issue #19 filing and both real call sites had assumed.
+
+**New, substantial, previously-unknown real class found**: `ATIR500Memory` (own real vtable, at least a
+dozen real methods, a genuine free-list VRAM/GART pool allocator) - only 2 of its own methods decompiled
+(the ones needed to fix the bug above), left as its own minimal shell (`Headers/ATIR500Memory.h`) rather
+than fully investigated; worth its own future issue.
+
+**Still deferred, substantial real functions** (issues #22/#23 stay open for these): `dealloc_surface`'s
+subclass override, `alloc_surface_buffer`, `prepare_vram`'s subclass override, `resetFullScreen`'s
+subclass override (which itself surfaced ANOTHER real, uncatalogued Surface vtable slot, `+0x5e0`, called
+with real arguments `id, 0, 1` - not investigated), `shape_surface` (a real outlier, ~19KB of raw
+decompile - by far the largest single function this project has ever decompiled), `allocate_texture`/
+`deallocate_texture` (both real and dense, `allocate_texture` also cross-referencing issue #20's own
+unresolved GART-handle-object mystery, see above), and the `waitForTimeStamp`/`sleepForTimeStamp`/
+`waitForConsumedIDCTTimeStamp` family (all three share one real polling-loop algorithm against a real
+hardware timestamp counter, differing only in which register/offset they read and which real timing-helper
+stub addresses they call - a clean, economical transcription once done, just not done yet).
