@@ -398,7 +398,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 2 opcodes remain)
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 1 opcode remains)
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -615,16 +615,37 @@ machine code performs. (Real evidence, incidentally, that `record[6]`/`burst2Off
 NOT subject to the same issue - it's captured into a real stack local, `local_74`, BEFORE the self-consume
 runs, confirmed via the same disassembly pass.)
 
-**Still open, real disassembly-verified addresses on record** (in the dispatcher's own explicit
-not-yet-transcribed `case` block, so a future pass can go straight to decompiling without re-deriving the
-mapping) - down to TWO opcodes from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
-single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d), and 0x17
-(`0x372b4` - its opening instructions closely mirror opcode 0x16's own real shape, likely a similarly
-dense multi-plane burst, not independently confirmed - own body not yet located in the raw decompile).
-This dispatcher explicitly falls through to the natural-distance default for both, with a loud comment - a
-KNOWN GAP, not a confirmed real no-op; do not trust it for these two opcode values on real hardware.
-Genuinely still a nontrivial remaining item for 0x12 specifically, though much reduced from the original
-~18.
+**STILL LATER CONTINUATION (a fresh session resuming this same pass)**: opcode 0x17 transcribed and wired -
+the last real gap this section used to list alongside 0x12. An earlier continuation had attempted this
+exact opcode and deliberately stopped mid-branch: like 0x15, it has no matching region anywhere in
+Ghidra's own C decompile of the enclosing giant function (confirmed by grepping for its own distinctive
+offset constant, same negative result 0x15 got), and partway through hand-decoding one branch from raw
+disassembly a register appeared to hold an unexplained value with no traceable origin - correctly judged
+too risky to guess at, so that attempt was abandoned and documented rather than committed. Resuming from
+this opcode's real function entry (`0x372b4`) rather than mid-function (where the earlier attempt had
+started reading) resolved it cleanly: the "unexplained" register was simply `rowSize`
+(`heightDelta * pitch`), computed once in real shared setup, in the exact same role as `handle_opcode_14`'s
+own `rowSize` local - the ambiguity was an artifact of where the reading had started, not a real gap in
+the trace. Real structure: a 3-output analog of `handle_opcode_14`'s own 6-way branch (same
+`record[5] != 1` / `record[1]` mode / `record[4]` altFlag split, same `rowSize`/`blendedBase` YUV 4:2:0
+formula, same shared `LAB_00038870` tail), verified instruction-by-instruction against `handle_opcode_14`'s
+own already-committed tail-construction code and found to match exactly (same mask constants throughout).
+One genuinely interesting, directly-confirmed real asymmetry (not smoothed over): for the "mode is neither
+2 nor 3" case, the real `altFlag == 0`/`altFlag != 0` formulas are swapped between the `record[5] != 1` and
+`record[5] == 1` outer branches - independently derived from four separate, non-adjacent instruction
+addresses, so transcribed as observed rather than "corrected" toward the more intuitive symmetric mapping.
+Also tried, and abandoned as unhelpful, a Ghidra experiment to decompile just 0x17's address range as an
+isolated function (via `createFunction` in a read-only headless pass) - PPC flow-following just pulled in
+the entire shared-tail network again, producing an even larger, no cleaner result than the existing giant
+decompile; direct disassembly tracing remained the only real path for this opcode.
+
+**Still open, real disassembly-verified address on record** (in the dispatcher's own explicit
+not-yet-transcribed `case`, so a future pass can go straight to decompiling without re-deriving the
+mapping) - down to ONE opcode from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
+single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d). This
+dispatcher explicitly falls through to the natural-distance default for it, with a loud comment - a KNOWN
+GAP, not a confirmed real no-op; do not trust it for this opcode value on real hardware. Genuinely still a
+nontrivial remaining item, though the cluster is now down to just this one from the original ~18.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 

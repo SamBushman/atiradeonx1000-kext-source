@@ -73,10 +73,16 @@ public:
      * producing TWO 5-plane PM4 bursts, with a real 32-bit-overflow
      * pointer-arithmetic subtlety this project caught and worked around
      * rather than reproducing via undefined behavior - see that
-     * function's own header comment) (48 real opcodes with genuine
-     * handlers now), plus four more (0x07/0x08/0x09/0x0c) confirmed to be
-     * real HARD-ABORT paths (not a plain skip - see the dispatcher's own
-     * comment) with no other real handler.
+     * function's own header comment), and 0x17 (a 3-output analog of
+     * 0x14's own 6-way branch, transcribed in a still-later continuation
+     * after an earlier attempt at it was deliberately abandoned
+     * mid-branch on a register whose value looked unexplained -
+     * resolved by re-reading from the real function entry rather than
+     * mid-function; see handle_opcode_17's own header comment) (49 real
+     * opcodes with genuine handlers now), plus four more
+     * (0x07/0x08/0x09/0x0c) confirmed to be real HARD-ABORT paths (not a
+     * plain skip - see the dispatcher's own comment) with no other real
+     * handler.
      *
      * THREE REAL CORRECTIONS to this project's own earlier opcode
      * accounting, found via direct PPC branch-instruction tracing (not
@@ -101,22 +107,20 @@ public:
      * handler function and GAPS.md for the full opcode-by-opcode status,
      * including a real correction (DVD has no opcode 0x11 at all).
      *
-     * STILL OPEN: two real opcodes (0x12, 0x17) - down from seven after
-     * this pass's later continuations. Real, disassembly-verified target
-     * addresses recorded in the dispatcher's own `switch` (the explicit
-     * not-yet-transcribed case) so a future pass can go straight to
-     * decompiling them without re-deriving the address mapping, which
-     * was itself the hard, error-prone part of this pass. Opcode 0x12 is
-     * ~750 lines of real dense per-plane geometry math, comparable in
-     * scale to GL's own single-largest gap (opcode 0x2d - CORRECTED,
-     * issue #12 item 4: that GL content was misattributed to
-     * "opcode 0x31" when this note was first written; the real GL opcode
-     * 0x31 is much smaller and is now fully transcribed); 0x17's own body
-     * was not located this pass (its opening instructions closely mirror
-     * opcode 0x16's real shape). This dispatcher explicitly falls through
-     * to the natural-distance default for both - a KNOWN GAP, not a
-     * confirmed real no-op; do not trust it for these two opcode values
-     * on real hardware.
+     * STILL OPEN: one real opcode (0x12) - down from seven at the start
+     * of this pass. Real, disassembly-verified target address recorded
+     * in the dispatcher's own `switch` (the explicit not-yet-transcribed
+     * case) so a future pass can go straight to decompiling it without
+     * re-deriving the address mapping, which was itself the hard,
+     * error-prone part of this pass. Opcode 0x12 is ~750 lines of real
+     * dense per-plane geometry math, comparable in scale to GL's own
+     * single-largest gap (opcode 0x2d - CORRECTED, issue #12 item 4:
+     * that GL content was misattributed to "opcode 0x31" when this note
+     * was first written; the real GL opcode 0x31 is much smaller and is
+     * now fully transcribed). This dispatcher explicitly falls through
+     * to the natural-distance default for it - a KNOWN GAP, not a
+     * confirmed real no-op; do not trust it for this opcode value on
+     * real hardware.
      */
     IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 

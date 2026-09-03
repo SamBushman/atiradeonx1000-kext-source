@@ -23,7 +23,7 @@
  * in the dispatcher's own comments for every opcode, transcribed or
  * not, so a future pass never has to re-derive them).
  *
- * Real opcode groups now transcribed (48 real opcodes with genuine
+ * Real opcode groups now transcribed (49 real opcodes with genuine
  * handlers): texture bind (0x19-0x1d, 0x1e-0x25, 0x26-0x2a); texture
  * unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35, 0x36-0x3c);
  * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush; the
@@ -122,22 +122,33 @@
  * mistake from the UNRELATED opcode 0x11 this project already
  * resolved on the 2D context - a real, different opcode language).
  *
- * STILL OPEN, real disassembly-verified target addresses on record for
- * a future pass (see the dispatcher's own explicit not-yet-transcribed
- * `case` block for the full list - down to TWO opcodes from the original
- * seven, after this pass's later continuations): opcode 0x12 (~750 real
+ * LATER CONTINUATION: opcode 0x17 (real target `0x372b4`-`0x37604`)
+ * transcribed in a further continuation of this same pass, closing the
+ * last gap this file's own "STILL OPEN" note used to list alongside
+ * 0x12. Like 0x15, it has no matching region anywhere in Ghidra's own C
+ * decompile of the enclosing giant function - transcribed entirely via
+ * direct PPC instruction decoding. A first attempt at this opcode, in
+ * an earlier continuation, was deliberately abandoned mid-branch on a
+ * register whose value looked unexplained; re-reading from the real
+ * function entry (rather than mid-function, where the earlier attempt
+ * had started) showed it was simply `rowSize`, computed once in shared
+ * setup - see `handle_opcode_17`'s own header comment for the full
+ * account, including a directly-confirmed real asymmetry (not smoothed
+ * over) between how its `altFlag` polarity maps to output formulas
+ * across its two outer branches.
+ *
+ * STILL OPEN, real disassembly-verified target address on record for a
+ * future pass (see the dispatcher's own explicit not-yet-transcribed
+ * `case` for the current text - down to ONE opcode from the original
+ * seven, after this pass's continuations): opcode 0x12 (~750 real
  * lines, comparable in scale to GL's own single-largest gap, opcode
  * 0x2d - CORRECTED, issue #12 item 4: that GL content was misattributed
  * to "opcode 0x31" when this note was first written; the real GL opcode
  * 0x31 is much smaller and is now fully transcribed - see
- * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve);
- * and 0x17 (its opening instructions closely mirror opcode 0x16's own
- * real shape - likely a similarly-dense multi-plane burst, not
- * independently confirmed - own body not yet located in the raw
- * decompile). This is a genuinely large remaining undertaking for 0x12
- * specifically, same scope note this file has carried since it was first
- * opened - not
- * a small residual item.
+ * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve).
+ * This is a genuinely large remaining undertaking - same scope note
+ * this file has carried since it was first opened - not a small
+ * residual item.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call in
  * every transcribed handler - complete real decompiles, cross-checked
@@ -1792,6 +1803,177 @@ static void handle_opcode_14(ATIR500DVDContext *ctx, UInt32 *record) {
 }
 
 /*
+ * handle_opcode_17 - RESOLVED (issue #7). Real target address 0x372b4,
+ * body ends at 0x37604 (`b 0x00038870`, the same real shared tail
+ * opcodes 0x14/0x47 above also reach). This one had no matching region
+ * anywhere in Ghidra's own C decompile of the enclosing giant function
+ * (confirmed by grepping for its own distinctive offset constant -
+ * same negative result opcode 0x15 got) - transcribed entirely via
+ * direct PPC instruction decoding, not decompile cross-reference.
+ *
+ * An earlier attempt at this same opcode, in an earlier session, was
+ * deliberately abandoned mid-branch: a register appeared to hold an
+ * unexplained "blended" value with no traceable origin within the
+ * branch being read at the time. Re-reading from this opcode's real
+ * function entry (0x372b4) all the way through resolved it cleanly:
+ * that register is just `rowSize` (`heightDelta * pitch`), computed
+ * ONCE in this opcode's own real shared setup - identical in role to
+ * `handle_opcode_14`'s own `rowSize` local - well before any branch is
+ * taken. The earlier attempt had started reading mid-function, past
+ * that assignment, without having traced back to it; reading the whole
+ * function's entry sequence removed the ambiguity entirely. Recorded
+ * here as a reminder: for this project's dense PPC handlers, always
+ * trace a register all the way back to its real defining instruction
+ * before treating it as unexplained.
+ *
+ * Real structure is a 3-output analog of `handle_opcode_14`'s own
+ * 6-way branch (`record[5] != 1`, then `record[1]` being 2/3/other,
+ * then `record[4]` altFlag) - same three outputs (`outA`/`outB`/`outC`),
+ * same `rowSize`/`blendedBase` YUV 4:2:0 chroma formula, same
+ * `packedLow`/tile-bit/tail-byte packing into the shared
+ * `LAB_00038870` tail, verified instruction-by-instruction against
+ * `handle_opcode_14`'s own already-committed tail-construction code
+ * (identical mask constants throughout: `0xffffffe0` for `outA`/`outC`,
+ * no mask combination for `outB`, `0x3ffe`/`0x10`/`0x11`/`0x13` for the
+ * packed low dword) - this opcode's own real tail is a separate inlined
+ * copy of that same construction, not a shared subroutine call, so the
+ * two functions' tail code is independently transcribed but expected
+ * (and confirmed) to match exactly.
+ *
+ * Real per-source-record indirection (a second mip pointer, indexed by
+ * `record[3]`, computed unconditionally in the real shared setup
+ * whenever `record[5] != 1`) is, exactly as `handle_opcode_14`
+ * documents for its own case, never actually read by any of this
+ * opcode's real branches either - confirmed by checking every one of
+ * the six real leaf blocks individually, not assumed by analogy. Kept
+ * here as the same kind of real-but-dead computation for fidelity.
+ *
+ * One genuinely interesting, directly-confirmed (not smoothed-over)
+ * asymmetry: for the `mode == other` (neither 2 nor 3) case, the real
+ * `altFlag == 0` and `altFlag != 0` formulas are swapped between the
+ * `record[5] != 1` and `record[5] == 1` branches - i.e.
+ * `record[5]!=1,altFlag==0` matches `record[5]==1,altFlag!=0` exactly,
+ * and vice versa. This was independently derived from four separate,
+ * non-adjacent instruction addresses (0x3748c, 0x3749c, 0x37348,
+ * 0x37360), not copy-pasted from one into the other - the real
+ * compiled code just happens to produce this swap, so it is
+ * transcribed as observed rather than "corrected" toward the more
+ * intuitive symmetric mapping.
+ */
+static void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt32 mode = record[1];
+    UInt32 altFlag = record[4];
+    UInt8 *mipB = surf + record[2] * 0x78;
+
+    UInt32 pitch = U16At(mipB, 0x570);
+    UInt32 pitchAsUInt = pitch;
+    UInt32 base0 = U32At(mipB, 0x560);
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+    UInt32 rowSize = static_cast<UInt32>(heightDelta) * pitchAsUInt;
+    UInt32 blendedBase = base0 + ((rowSize * 3) >> 1);
+
+    UInt32 packedLow, outA, outB, outC;
+
+    if (record[5] != 1) {
+        /* real: second-mip-record override computed here but never read
+         * in any of this opcode's branches - see header note. */
+        (void)(surf + record[3] * 0x78);
+
+        if (mode == 2) {
+            packedLow = pitch >> 2;
+            if (altFlag == 0) {
+                UInt32 tmp = base0 + rowSize;
+                outA = tmp + (pitch >> 1);
+                outB = pitchAsUInt + rowSize + blendedBase;
+                outC = tmp + ((pitchAsUInt * 3) >> 1);
+            } else {
+                outA = base0 + rowSize;
+                outB = rowSize + blendedBase + (pitch >> 1);
+                outC = pitchAsUInt + outA;
+            }
+        } else if (mode == 3) {
+            packedLow = pitch >> 2;
+            UInt32 fifthTerm = (rowSize * 5) >> 2;
+            if (altFlag == 0) {
+                UInt32 tmp = base0 + fifthTerm;
+                outA = tmp + (pitch >> 1);
+                outB = pitchAsUInt + blendedBase + fifthTerm;
+                outC = tmp + ((pitchAsUInt * 3) >> 1);
+            } else {
+                outA = base0 + fifthTerm;
+                outB = blendedBase + fifthTerm + (pitch >> 1);
+                outC = pitchAsUInt + outA;
+            }
+        } else {
+            packedLow = (pitch >> 1) & 0x7ffeu;
+            if (altFlag == 0) {
+                outA = base0 + pitchAsUInt;
+                outB = blendedBase + pitchAsUInt * 2;
+                outC = base0 + pitchAsUInt * 3;
+            } else {
+                outA = base0; /* real: NOT reassigned on this specific sub-branch */
+                outB = pitchAsUInt + blendedBase;
+                outC = base0 + pitchAsUInt * 2;
+            }
+        }
+    } else if (mode == 2) {
+        packedLow = pitch >> 2;
+        if (altFlag == 0) {
+            outA = rowSize + base0;
+            outB = rowSize + blendedBase + (pitch >> 1);
+            outC = pitch + outA;
+        } else {
+            UInt32 tmp = rowSize + base0;
+            outA = tmp + (pitch >> 1);
+            outB = pitchAsUInt + rowSize + blendedBase;
+            outC = tmp + ((pitch * 3) >> 1);
+        }
+    } else if (mode == 3) {
+        packedLow = pitch >> 2;
+        UInt32 fifthTerm = (rowSize * 5) >> 2;
+        if (altFlag == 0) {
+            outA = fifthTerm + base0;
+            outB = blendedBase + fifthTerm + (pitch >> 1);
+            outC = pitch + outA;
+        } else {
+            UInt32 tmp = fifthTerm + base0;
+            outA = tmp + (pitch >> 1);
+            outB = pitchAsUInt + blendedBase + fifthTerm;
+            outC = tmp + ((pitch * 3) >> 1);
+        }
+    } else {
+        packedLow = (pitch >> 1) & 0x7ffeu;
+        if (altFlag == 0) {
+            outA = base0; /* real: NOT reassigned on this specific sub-branch */
+            outB = pitchAsUInt + blendedBase;
+            outC = base0 + pitch * 2;
+        } else {
+            outA = base0 + pitch;
+            outB = blendedBase + pitchAsUInt * 2;
+            outC = base0 + pitch * 3;
+        }
+    }
+
+    record[0] = 0x1150;
+    UInt32 tileBit0 = U8At(mipB, 0x590) & 1u;
+    UInt32 tileBit1 = static_cast<UInt32>(U8At(mipB, 0x590) >> 1);
+    UInt32 tileBitsHi = (tileBit1 & 3u) << 3;
+    UInt32 tileBitsLo = tileBit0 << 2;
+    record[1] = (outA & 0xffffffe0u) | tileBitsLo | tileBitsHi;
+    record[2] = 0x1151;
+    record[3] = tileBitsHi | tileBitsLo | (outC & 0xffffffe0u);
+    record[4] = 0x1393;
+    record[5] = 10;
+    record[6] = 0x138a;
+    record[7] = outB & 0xffffffe0u;
+    record[8] = 0x138e;
+    UInt8 tail = U8At(mipB, 0x591);
+    UInt32 packed = (packedLow & 0x3ffeu) | (tileBit0 << 0x10) | ((tileBit1 & 3u) << 0x11);
+    record[9] = packed | ((tail & 3u) << 0x13) | 0xc00000u; /* real: shared LAB_00038870 tail */
+}
+
+/*
  * process_command_buffer - RESOLVED (issue #7) for every opcode this
  * pass has transcribed; STILL PARTIAL overall - see the explicit
  * fallthrough case below for exactly which seven opcodes remain (real,
@@ -1939,22 +2121,22 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             handle_opcode_3d(this, record);
             break;
 
-        case 0x12000000u:
         case 0x17000000u:
-            /* NOT YET TRANSCRIBED (issue #7 remains open for these two -
-             * down from seven earlier this same pass; 0x14/0x15/0x16/0x18/
-             * 0x3d are now done, see their own handlers above). Real,
-             * disassembly-verified target addresses, ready for a future
-             * pass: 0x12 -> 0x35c04 (~750 lines, the single largest
-             * remaining gap in this whole function, comparable in scale
-             * to GL's own largest opcode); 0x17 -> 0x372b4 (its opening
-             * instructions are near-identical to opcode 0x16's own real
-             * shape above - likely a similarly-dense multi-plane burst,
-             * not independently confirmed - see this file's own header
-             * note). Both have REAL, DISTINCT behavior on real hardware -
-             * this fallthrough to the natural-distance default is a
-             * KNOWN GAP, not a confirmed real no-op. Do not trust this
-             * dispatcher for these two opcode values. */
+            handle_opcode_17(this, record);
+            break;
+
+        case 0x12000000u:
+            /* NOT YET TRANSCRIBED (issue #7's one remaining opcode - down
+             * from seven at the start of this pass; every other opcode
+             * this cluster has, including 0x17 just above, is now done -
+             * see the handlers above). Real, disassembly-verified target
+             * address, ready for a future pass: 0x35c04, ~750 lines - the
+             * single largest remaining gap in this whole function,
+             * comparable in scale to GL's own largest opcode. Has REAL,
+             * DISTINCT behavior on real hardware - this fallthrough to the
+             * natural-distance default is a KNOWN GAP, not a confirmed
+             * real no-op. Do not trust this dispatcher for this opcode
+             * value. */
             break;
 
         default:
