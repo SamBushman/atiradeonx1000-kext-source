@@ -23,7 +23,7 @@
  * in the dispatcher's own comments for every opcode, transcribed or
  * not, so a future pass never has to re-derive them).
  *
- * Real opcode groups now transcribed (47 real opcodes with genuine
+ * Real opcode groups now transcribed (48 real opcodes with genuine
  * handlers): texture bind (0x19-0x1d, 0x1e-0x25, 0x26-0x2a); texture
  * unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35, 0x36-0x3c);
  * the opcode 0x2 return-code setter; the opcode 0x4 explicit-flush; the
@@ -35,23 +35,41 @@
  * in a later continuation of this same pass, opcodes 0x14/0x16 (dense
  * real multi-plane YUV/tiling bursts, 3 and 5 real output values
  * respectively, across a 6-way and 12-way branch), 0x18 (a real
- * two-transfer-buffer fetch setup), and 0x15 (the one opcode in this
- * whole cluster that does NOT index a per-`record[N]` mip array - it
- * reads a real FIXED sub-record embedded in `boundSurface` at `+0x7b0`,
+ * two-transfer-buffer fetch setup), 0x15 (the one opcode in this whole
+ * cluster that does NOT index a per-`record[N]` mip array - it reads a
+ * real FIXED sub-record embedded in `boundSurface` at `+0x7b0`,
  * transcribed via direct PPC instruction decoding since no matching
  * decompiled-C region for it was found in the raw decompile output this
- * project has on hand). Plus four more (0x07/0x08/0x09/0x0c) confirmed
- * to be real HARD-ABORT paths (the walk's whole running position resets
- * to 0, not a plain single-opcode skip - see the dispatcher's own
+ * project has on hand), and - in a STILL LATER continuation - opcode
+ * 0x3d, the densest opcode transcribed this whole pass (a real
+ * self-consuming record producing TWO separate 5-plane PM4 bursts
+ * across a 4-way branch with 9 tracked output values; see that
+ * function's own header comment for a real, verified 32-bit-overflow
+ * pointer-arithmetic subtlety this project caught and worked around
+ * rather than reproducing via undefined behavior). Plus four more
+ * (0x07/0x08/0x09/0x0c) confirmed to be real HARD-ABORT paths (the
+ * walk's whole running position resets to 0, not a plain single-opcode
+ * skip - see the dispatcher's own
  * `abortToZero` handling) with no other real handler.
  *
- * One more real logic bug caught and fixed in THIS PASS'S OWN draft
- * before committing (not a stale earlier-pass bug like the two below):
+ * Two more real logic bugs caught and fixed in THIS PASS'S OWN draft
+ * before committing (not stale earlier-pass bugs like the ones below):
  * an early draft of `handle_opcode_16` used `rowSize` instead of the
  * real `blendedBase` in two of its twelve branches' `outE` formula -
  * caught by re-checking every branch individually against the raw
  * decompile rather than trusting the first pass through such a dense
- * function.
+ * function; and an early draft of `handle_opcode_3d` computed its first
+ * PM4 burst's destination pointer as `record + record[5]` using C++
+ * pointer arithmetic directly on the record's own already-self-consumed
+ * (zeroed to `0x80000000`) `record[5]` field - real, verified (via
+ * direct disassembly of the exact `lwz`/`rlwinm`/`add` sequence) to
+ * numerically equal `record` itself once real 32-bit address-arithmetic
+ * overflow is accounted for, but NOT safe to express that way in C++,
+ * since pointer arithmetic that overflows the array's bounds is
+ * undefined behavior rather than the well-defined modular arithmetic
+ * the real machine code performs - rewritten to assign `record` to that
+ * pointer directly instead, with the real derivation documented in that
+ * function's own header comment rather than silently "simplified away."
  *
  * THREE REAL CORRECTIONS to this project's own earlier opcode
  * accounting, all found via the disassembly tracing above:
@@ -106,19 +124,19 @@
  *
  * STILL OPEN, real disassembly-verified target addresses on record for
  * a future pass (see the dispatcher's own explicit not-yet-transcribed
- * `case` block for the full list - down to three opcodes from the
- * original seven, after this pass's later continuation): opcode 0x12
- * (~750 real lines, comparable in scale to GL's own single-largest gap,
- * opcode 0x2d - CORRECTED, issue #12 item 4: that GL content was
- * misattributed to "opcode 0x31" when this note was first written; the
- * real GL opcode 0x31 is much smaller and is now fully transcribed - see
+ * `case` block for the full list - down to TWO opcodes from the original
+ * seven, after this pass's later continuations): opcode 0x12 (~750 real
+ * lines, comparable in scale to GL's own single-largest gap, opcode
+ * 0x2d - CORRECTED, issue #12 item 4: that GL content was misattributed
+ * to "opcode 0x31" when this note was first written; the real GL opcode
+ * 0x31 is much smaller and is now fully transcribed - see
  * ATIR500GLContext_ProcessCommandBuffer.cpp's handle_depth_buffer_resolve);
- * 0x17 (its opening instructions closely mirror opcode 0x16's own real
- * shape - likely a similarly-dense multi-plane burst, not independently
- * confirmed); and 0x3d (~341 real lines, own body already located in the
- * raw decompile - a real double 5-field `0x1150`-`0x1154` burst - but
- * not yet transcribed). This is a genuinely large remaining undertaking,
- * same scope note this file has carried since it was first opened - not
+ * and 0x17 (its opening instructions closely mirror opcode 0x16's own
+ * real shape - likely a similarly-dense multi-plane burst, not
+ * independently confirmed - own body not yet located in the raw
+ * decompile). This is a genuinely large remaining undertaking for 0x12
+ * specifically, same scope note this file has carried since it was first
+ * opened - not
  * a small residual item.
  *
  * Confidence: CONFIRMED for control flow and every field offset/call in
@@ -1126,6 +1144,233 @@ static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &rec
  * has on hand - a real gap in Ghidra's own C rendering for this
  * particular address range, not something this project chose to skip).
  */
+/*
+ * handle_opcode_3d - RESOLVED (issue #7), fully transcribed. Real target
+ * address 0x364c0, confirmed via direct branch-instruction tracing. The
+ * densest opcode transcribed this pass: a real self-consuming record
+ * (its own leading 7 dwords, `record[0..6]`, get overwritten to
+ * `0x80000000` before any output is written - the same real "consume my
+ * own header" idiom this project already documents elsewhere) followed
+ * by TWO separate real 5-plane `0x1150`-`0x1154` PM4 bursts, written to
+ * TWO explicitly-computed destinations WITHIN the record buffer itself
+ * (`record + record[5]` for the first, `record + record[6]` for the
+ * second - real explicit relative addressing, not simply the next
+ * sequential slot), each burst gated by the SAME real 4-way branch
+ * (`record[4] != 1` combined with `record[3] == 0`) across TWO real
+ * source records - `mipA` (`boundSurface + record[1]*0x78`) and `mipB`
+ * (`boundSurface + record[2]*0x78`) - plus a real THIRD, non-indexed
+ * source: `boundSurface`'s own fixed `+0x7b0` sub-record (the SAME real
+ * "plane descriptor" opcode 0x15 above already established, at the same
+ * real `+0x7b8`/`+0x7c8` fields, plus two more of its own fields here,
+ * `+0x7e8`/`+0x7e9`, not touched by opcode 0x15).
+ *
+ * Real, notable structural detail: the second burst's own 4-way branch
+ * REUSES several real intermediate values the first burst's matching
+ * branch already computed (`planeBase`, `planePitch`, `pitchB`, `baseB`)
+ * rather than re-deriving them - real evidence the two bursts' branches,
+ * while textually separate real `if` chains in the decompile, are a
+ * single real continuous computation per real branch taken, not two
+ * independent ones. Transcribed accordingly: each of the four real
+ * branches below computes both bursts' output values together, in the
+ * real decompile's own exact assignment order (several outputs feed
+ * later ones within the same branch - order is load-bearing here).
+ *
+ * Confidence: CONFIRMED structure and every real offset/constant from a
+ * complete real decompile. Given the real density (9 distinct tracked
+ * output values across two bursts and four branches), transcribed with
+ * literal per-branch scoping rather than cross-branch simplification -
+ * worth an independent spot-check before trusting any single bit
+ * position, same caveat already given to this pass's other densest
+ * functions (e.g. handle_opcode_16 above, where exactly this kind of
+ * check caught a real transcription bug before it was committed).
+ */
+static void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record) {
+    UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
+    UInt32 selB = record[3];  /* real: uVar35 */
+    UInt32 selA = record[4];  /* real: uVar30 - NOT record[4]'s later reuse as an opcode; a real per-record selector */
+    UInt8 *mipA = surf + record[1] * 0x78;
+    UInt8 *mipB = surf + record[2] * 0x78;
+    UInt32 burst2Off = record[6];
+
+    SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
+    UInt32 pitchA = U16At(mipA, 0x570);
+    UInt32 pitchAw = pitchA;
+    UInt32 baseA = U32At(mipA, 0x560);
+    UInt32 rowSizeA = static_cast<UInt32>(heightDelta) * pitchAw;
+    UInt32 blendedA = baseA + ((rowSizeA * 3) >> 1);
+
+    /* real: self-consume this record's own leading 7 dwords */
+    for (int i = 0; i < 7; i++) record[i] = 0x80000000u;
+
+    UInt32 planePitch = U16At(surf, 0x7c8);          /* real: uVar33, the SAME +0x7b0-relative "pitch" field opcode 0x15 uses */
+    /*
+     * real: `puVar23 = puVar37 + puVar37[5];` in the raw decompile - but
+     * VERIFIED via direct disassembly that the real machine code loads
+     * `record[5]`'s value HERE, AFTER the self-consuming zero-out above
+     * already overwrote it to exactly `0x80000000`, not before (unlike
+     * `record[6]`/`burst2Off`, captured safely into a stack slot BEFORE
+     * the zero-out - real, deliberate asymmetry, not a transcription
+     * inconsistency). Real C-style pointer arithmetic scales that value
+     * by `sizeof(UInt32)` (4) before adding it to `record` - and
+     * `0x80000000 * 4`, computed in real 32-bit address arithmetic,
+     * overflows exactly back to 0 (confirmed via the raw disassembly's
+     * own `rlwinm r2,r2,0x2,...` scale-by-4 immediately followed by
+     * `add r7,r30,r2`). So `burst1` is real, always, exactly `record`
+     * itself - written directly here rather than as `record +
+     * record[5]`, which would rely on the SAME 32-bit overflow
+     * wraparound C++ does not guarantee (unlike the real machine code's
+     * plain modular address arithmetic) - mathematically identical
+     * result, without relying on undefined pointer-overflow behavior.
+     */
+    UInt32 *burst1 = record;
+    UInt32 tailPacked2Src = planePitch >> 1;           /* real: uVar14 before its own later reuse */
+
+    UInt32 out1E = baseA;      /* real: uVar8 default */
+    UInt32 out1G = blendedA;   /* real: uVar18 default */
+    UInt32 out1_altG = blendedA; /* real: uVar16 default (a SEPARATE default slot from out1G, despite sharing the same initial value) */
+
+    UInt32 out1A, out1B, out1C, out1D;   /* burst 1: uVar38/uVar26/uVar10/uVar27 */
+    UInt32 out2A, out2B, out2C, out2D, out2E, out2G, out2I; /* burst 2: uVar18/uVar29/uVar30/uVar31/uVar28/uVar16/uVar32 */
+    UInt32 planeBase, pitchB, baseB; /* real: uVar29/uVar36/uVar31 - shared across both bursts' branches */
+
+    if (selA != 1) {
+        if (selB == 0) {
+            planeBase = U32At(surf, 0x7b8);
+            baseB = U32At(mipB, 0x560);
+            out1_altG = pitchAw + blendedA;
+            out1C = baseA + pitchAw;
+            pitchB = U16At(mipB, 0x570);
+            out1B = planeBase + planePitch;
+            out1A = planeBase;
+            out1D = baseB;
+
+            out2G = rowSizeA + blendedA;
+            out2I = pitchAw + out2G;
+            out2A = planePitch * static_cast<UInt32>(heightDelta) + planeBase;
+            out2E = baseA + rowSizeA;
+            out2D = static_cast<UInt32>(heightDelta) * pitchB + baseB;
+            out2B = planePitch + out2A;
+            out2C = pitchAw + out2E;
+        } else {
+            pitchB = U16At(mipB, 0x570);
+            planeBase = U32At(surf, 0x7b8);
+            baseB = U32At(mipB, 0x560);
+            out1C = baseA; /* real: `uVar10 = uVar28;` - explicit self-assign-shaped, still a real distinct write */
+            out1A = planeBase + planePitch;
+            out1B = planeBase;
+            out1G = pitchAw + blendedA;
+            out1E = baseA + pitchAw;
+            out1D = pitchB + baseB;
+
+            out2I = rowSizeA + blendedA;
+            out2C = baseA + rowSizeA;
+            out2B = static_cast<UInt32>(heightDelta) * planePitch + planeBase;
+            out2G = pitchAw + out2I;
+            out2E = pitchAw + out2C;
+            out2A = planePitch + out2B;
+            out2D = pitchB + static_cast<UInt32>(heightDelta) * pitchB + baseB;
+        }
+    } else if (selB == 0) {
+        pitchB = U16At(mipB, 0x570);
+        baseB = U32At(mipB, 0x560);
+        planeBase = U32At(surf, 0x7b8);
+        out1C = baseB;
+        out1A = planeBase + planePitch;
+        out1B = planeBase;
+        out1G = pitchAw + blendedA;
+        out1E = baseA + pitchAw;
+        out1D = baseB + pitchB;
+
+        out2I = rowSizeA + blendedA;
+        out2G = pitchAw + out2I;
+        out2B = planePitch * static_cast<UInt32>(heightDelta) + planeBase;
+        out2C = static_cast<UInt32>(heightDelta) * pitchB + baseB;
+        out2A = planePitch + out2B;
+        out2E = pitchAw + baseA + rowSizeA;
+        out2D = pitchB + out2C;
+    } else {
+        pitchB = U16At(mipB, 0x570);
+        baseB = U32At(mipB, 0x560);
+        planeBase = U32At(surf, 0x7b8);
+        out1C = baseB + pitchB;
+        out1A = planeBase;
+        out1B = planeBase + planePitch;
+        out1D = baseB;
+        out1_altG = pitchAw + blendedA;
+
+        out2G = rowSizeA + blendedA;
+        out2I = pitchAw + out2G;
+        out2A = planePitch * static_cast<UInt32>(heightDelta) + planeBase;
+        out2E = baseA + rowSizeA;
+        out2D = static_cast<UInt32>(heightDelta) * pitchB + baseB;
+        out2B = planePitch + out2A;
+        out2C = pitchB + out2D;
+    }
+
+    UInt32 tileA0 = U8At(mipA, 0x590) & 1u;
+    UInt32 tileA1 = static_cast<UInt32>(U8At(mipA, 0x590) >> 1);
+    UInt32 tileAHi = (tileA1 & 3u) << 3;
+    UInt32 tileALo = tileA0 << 2;
+    UInt32 tileB0 = (U8At(mipB, 0x590) & 1u) << 2;
+    UInt32 tileB1 = (U8At(mipB, 0x590) & 6u) << 2;
+
+    UInt32 tailPacked1 = ((pitchA >> 1) & 0x3ffeu) | (tileA0 << 0x10) | ((tileA1 & 3u) << 0x11) |
+                          ((U8At(mipA, 0x591) & 3u) << 0x13) | 0xc00000u;
+    UInt32 tailPacked2 = (tailPacked2Src & 0x3ffeu) | ((U8At(surf, 0x7e8) & 1u) << 0x10) |
+                          ((U8At(surf, 0x7e8) & 6u) << 0x10) | ((U8At(surf, 0x7e9) & 3u) << 0x13) | 0xc00000u;
+
+    burst1[0] = 0x1150;
+    burst1[1] = (out1A & 0xffffffe0u) | tileALo | tileAHi;
+    burst1[2] = 0x1151;
+    burst1[3] = tileAHi | tileALo | (out1B & 0xffffffe0u);
+    burst1[4] = 0x1152;
+    burst1[5] = tileAHi | tileALo | (out1C & 0xffffffe0u);
+    burst1[6] = 0x1153;
+    burst1[7] = (out1D & 0xffffffe0u) | tileB0 | tileB1;
+    burst1[8] = 0x1154;
+    burst1[9] = tileB1 | tileB0 | (out1E & 0xffffffe0u);
+    burst1[10] = 0x1393;
+    burst1[0xb] = 10;
+    burst1[0xc] = 0x138e;
+    burst1[0xd] = tailPacked1;
+    burst1[0xe] = 0x138a;
+    burst1[0xf] = out1G & 0xffffffe0u;
+    burst1[0x10] = 0x138f;
+    burst1[0x11] = tailPacked1;
+    burst1[0x12] = 0x138b;
+    burst1[0x13] = out1_altG & 0xffffffe0u;
+    burst1[0x14] = 0x1390;
+    burst1[0x15] = tailPacked2;
+    burst1[0x16] = 0x138c;
+    burst1[0x17] = out1A & 0xffffffe0u;
+
+    UInt32 *burst2 = record + burst2Off;
+    burst2[0] = 0x1150;
+    burst2[1] = tileAHi | tileALo | (out2A & 0xffffffe0u);
+    burst2[2] = 0x1151;
+    burst2[3] = tileAHi | tileALo | (out2B & 0xffffffe0u);
+    burst2[4] = 0x1152;
+    burst2[5] = tileAHi | tileALo | (out2C & 0xffffffe0u);
+    burst2[6] = 0x1153;
+    burst2[7] = tileB1 | tileB0 | (out2D & 0xffffffe0u);
+    burst2[8] = 0x1154;
+    burst2[9] = tileB1 | tileB0 | (out2E & 0xffffffe0u);
+    burst2[10] = 0x1393;
+    burst2[0xb] = 10;
+    burst2[0xc] = 0x138e;
+    burst2[0xd] = tailPacked1;
+    burst2[0xe] = 0x138a;
+    burst2[0xf] = out2G & 0xffffffe0u;
+    burst2[0x10] = 0x138f;
+    burst2[0x11] = tailPacked1;
+    burst2[0x12] = 0x138b;
+    burst2[0x13] = out2I & 0xffffffe0u;
+    burst2[0x14] = 0x1390;
+    burst2[0x15] = tailPacked2;
+    burst2[0x16] = 0x138c;
+    burst2[0x17] = out2A & 0xffffffe0u;
+}
+
 static void handle_opcode_15(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
@@ -1690,26 +1935,26 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *desc
             handle_opcode_47(this, record, abortToZero);
             break;
 
+        case 0x3d000000u:
+            handle_opcode_3d(this, record);
+            break;
+
         case 0x12000000u:
         case 0x17000000u:
-        case 0x3d000000u:
-            /* NOT YET TRANSCRIBED (issue #7 remains open for these three -
-             * down from seven earlier this same pass; 0x14/0x15/0x16/0x18
-             * are now done, see their own handlers above). Real,
+            /* NOT YET TRANSCRIBED (issue #7 remains open for these two -
+             * down from seven earlier this same pass; 0x14/0x15/0x16/0x18/
+             * 0x3d are now done, see their own handlers above). Real,
              * disassembly-verified target addresses, ready for a future
              * pass: 0x12 -> 0x35c04 (~750 lines, the single largest
              * remaining gap in this whole function, comparable in scale
              * to GL's own largest opcode); 0x17 -> 0x372b4 (its opening
              * instructions are near-identical to opcode 0x16's own real
              * shape above - likely a similarly-dense multi-plane burst,
-             * not independently confirmed); 0x3d -> 0x364c0 (~341 lines,
-             * a real double 5-field 0x1150-0x1154 burst, own body already
-             * located in the raw decompile but not yet transcribed - see
-             * this file's own header note). Each has REAL, DISTINCT
-             * behavior on real hardware - this fallthrough to the
-             * natural-distance default is a KNOWN GAP, not a confirmed
-             * real no-op. Do not trust this dispatcher for these three
-             * opcode values. */
+             * not independently confirmed - see this file's own header
+             * note). Both have REAL, DISTINCT behavior on real hardware -
+             * this fallthrough to the natural-distance default is a
+             * KNOWN GAP, not a confirmed real no-op. Do not trust this
+             * dispatcher for these two opcode values. */
             break;
 
         default:

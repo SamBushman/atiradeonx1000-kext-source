@@ -65,10 +65,15 @@ public:
      * explicit-flush; the opcode 0x5/0x6 texture-sampler-state pair;
      * opcodes 0xa/0xb/0xd's own per-mip YUV/tiling setup; opcode 0x13's
      * texture-fetch setup; opcodes 0x3e/0x3f/0x42/0x43/0x44/0x46/0x47; and,
-     * in a later continuation of this same pass, opcodes 0x14/0x16 (dense
+     * in later continuations of this same pass, opcodes 0x14/0x16 (dense
      * multi-plane YUV/tiling bursts), 0x18 (a two-transfer-buffer fetch),
-     * and 0x15 (a real FIXED `boundSurface+0x7b0` sub-record, unlike
-     * every other opcode in this cluster) (47 real opcodes with genuine
+     * 0x15 (a real FIXED `boundSurface+0x7b0` sub-record, unlike every
+     * other opcode in this cluster), and 0x3d (the densest opcode
+     * transcribed this whole pass - a real self-consuming record
+     * producing TWO 5-plane PM4 bursts, with a real 32-bit-overflow
+     * pointer-arithmetic subtlety this project caught and worked around
+     * rather than reproducing via undefined behavior - see that
+     * function's own header comment) (48 real opcodes with genuine
      * handlers now), plus four more (0x07/0x08/0x09/0x0c) confirmed to be
      * real HARD-ABORT paths (not a plain skip - see the dispatcher's own
      * comment) with no other real handler.
@@ -96,23 +101,22 @@ public:
      * handler function and GAPS.md for the full opcode-by-opcode status,
      * including a real correction (DVD has no opcode 0x11 at all).
      *
-     * STILL OPEN: three real opcodes (0x12, 0x17, 0x3d) - down from seven
-     * after this pass's later continuation. Real, disassembly-verified
-     * target addresses recorded in the dispatcher's own `switch` (the
-     * explicit not-yet-transcribed case) so a future pass can go straight
-     * to decompiling them without re-deriving the address mapping, which
+     * STILL OPEN: two real opcodes (0x12, 0x17) - down from seven after
+     * this pass's later continuations. Real, disassembly-verified target
+     * addresses recorded in the dispatcher's own `switch` (the explicit
+     * not-yet-transcribed case) so a future pass can go straight to
+     * decompiling them without re-deriving the address mapping, which
      * was itself the hard, error-prone part of this pass. Opcode 0x12 is
      * ~750 lines of real dense per-plane geometry math, comparable in
      * scale to GL's own single-largest gap (opcode 0x2d - CORRECTED,
      * issue #12 item 4: that GL content was misattributed to
      * "opcode 0x31" when this note was first written; the real GL opcode
-     * 0x31 is much smaller and is now fully transcribed); 0x3d is
-     * ~341 lines (own body already located in the raw decompile, not yet
-     * transcribed); 0x17's own body was not located this pass (its
-     * opening instructions closely mirror opcode 0x16's real shape).
-     * This dispatcher explicitly falls through to the natural-distance
-     * default for all three - a KNOWN GAP, not a confirmed real no-op;
-     * do not trust it for these three opcode values on real hardware.
+     * 0x31 is much smaller and is now fully transcribed); 0x17's own body
+     * was not located this pass (its opening instructions closely mirror
+     * opcode 0x16's real shape). This dispatcher explicitly falls through
+     * to the natural-distance default for both - a KNOWN GAP, not a
+     * confirmed real no-op; do not trust it for these two opcode values
+     * on real hardware.
      */
     IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 

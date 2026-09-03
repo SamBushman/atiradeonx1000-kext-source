@@ -398,7 +398,7 @@ see the new minimal `Headers/IOATIR500Shared.h`), and `IOATIR500Accelerator::liv
 surfaced a brand new field: `IOATIR500GLContext::nextLiveContext` (`+0x80`), the intrusive "next" link for
 the accelerator's live-GL-context list.
 
-## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 3 opcodes remain)
+## 7. The 2D and DVD contexts' own embedded command-buffer languages - 2D RESOLVED, DVD MOSTLY RESOLVED (dispatcher assembled, 2 opcodes remain)
 
 `ATIR5002DContext`/`ATIR500DVDContext` both have a real, confirmed, extensive `process_command_buffer` of
 their own (same underlying mechanism as GL's - top-byte opcode dispatch over a `this+0xa4+0x1c`-based
@@ -597,16 +597,34 @@ PASS'S OWN draft before committing (not a stale earlier bug): an early draft of 
 used `rowSize` instead of the real `blendedBase` in two of its twelve branches' `outE` formula - caught by
 re-checking every branch individually against the raw decompile.
 
+**STILL LATER CONTINUATION, same pass**: opcode 0x3d transcribed and wired - the densest opcode this whole
+pass produced. A real self-consuming record (its own leading 7 dwords zeroed before any output is written)
+producing TWO separate 5-plane `0x1150`-`0x1154` PM4 bursts across a real 4-way branch with 9 tracked
+output values, plus a real THIRD source beyond the usual two per-mip records: `boundSurface`'s own fixed
+`+0x7b0` sub-record (the SAME real "plane descriptor" opcode 0x15 already established, confirmed reused by
+a second opcode at the same real `+0x7b8`/`+0x7c8` fields, plus two more fields of its own,
+`+0x7e8`/`+0x7e9`). One more real logic bug caught and fixed in THIS PASS'S OWN draft before committing: an
+early draft computed the first burst's destination pointer as `record + record[5]` using ordinary C++
+pointer arithmetic directly on `record[5]`'s value - but real, direct disassembly verification (the exact
+`lwz`/`rlwinm`/`add` instruction sequence) showed the real machine code reads `record[5]` AFTER it has
+already been self-consumed to `0x80000000`, then scales it by 4 for pointer arithmetic, which overflows
+real 32-bit address arithmetic exactly back to 0 - meaning the real destination is always just `record`
+itself. Rewritten to assign `record` directly (mathematically identical to the real behavior) rather than
+relying on the same overflow in C++, which is undefined behavior rather than the modular arithmetic real
+machine code performs. (Real evidence, incidentally, that `record[6]`/`burst2Off` for the SECOND burst is
+NOT subject to the same issue - it's captured into a real stack local, `local_74`, BEFORE the self-consume
+runs, confirmed via the same disassembly pass.)
+
 **Still open, real disassembly-verified addresses on record** (in the dispatcher's own explicit
 not-yet-transcribed `case` block, so a future pass can go straight to decompiling without re-deriving the
-mapping) - down to three opcodes from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
-single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d), 0x17
+mapping) - down to TWO opcodes from the original seven: opcode 0x12 (`0x35c04`, ~750 real lines - the
+single largest remaining gap in this function, comparable in scale to GL's own opcode 0x2d), and 0x17
 (`0x372b4` - its opening instructions closely mirror opcode 0x16's own real shape, likely a similarly
-dense multi-plane burst, not independently confirmed), and 0x3d (`0x364c0`, ~341 real lines - own body
-already located in the raw decompile, a real double 5-field `0x1150`-`0x1154` burst, but not yet
-transcribed). This dispatcher explicitly falls through to the natural-distance default for all three, with
-a loud comment - a KNOWN GAP, not a confirmed real no-op; do not trust it for these three opcode values on
-real hardware. Genuinely still a nontrivial remaining item, though much reduced from the original ~18.
+dense multi-plane burst, not independently confirmed - own body not yet located in the raw decompile).
+This dispatcher explicitly falls through to the natural-distance default for both, with a loud comment - a
+KNOWN GAP, not a confirmed real no-op; do not trust it for these two opcode values on real hardware.
+Genuinely still a nontrivial remaining item for 0x12 specifically, though much reduced from the original
+~18.
 
 ## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 
