@@ -804,3 +804,37 @@ opened yet. Reading it resolved this AND corrected two bigger things:
   `ATIUseTearingWideBlit`, plausibly relevant to the already-analyzed blit opcodes - nobody has traced
   which function reads them) and real GPU sensor-properties (thermal monitoring, low priority for this
   project's goals but a genuine new fact).
+
+## 11. Real binary data tables/constants never pulled from the kext - issue #14
+
+Several real, confirmed-to-exist data tables and float/double constants are referenced throughout by real
+kext address and real usage convention, but their actual raw content was never extracted from
+`ATIRadeonX1000.kext.bin`: `FormatTableLookup_0x0004d2dc/e0/e4`, `SamplesTableLookup`, the
+`_g_r500_3d_blit_state_packet` template's per-field breakdown (only its `0x2f4`-byte size is confirmed),
+and `FLOAT_0004c370/374/37c/380`/`DOUBLE_0004c3a8/3b0/3b8` in `ATIR500GLContext_FSAAResolveBlit.cpp`.
+Every consumer of these is itself CONFIRMED - only the literal data bytes are missing. Mechanical, not a
+decompilation task; can be done without hardware by reading the already-imported Ghidra project's own
+data sections at these addresses.
+
+## 12. ~24 opaque `FUN_XXXXXXXX` helper functions, never independently decompiled - issue #15
+
+Real, confirmed call sites and signatures exist for roughly two dozen small internal helpers across this
+project (lock/unlock pairs, an alloc/free pair, transfer-buffer GART-mapping helpers, atomic refcount
+helpers, the blit-state-packet template-copy helper, and a few with no inferred role at all) - but none of
+their own bodies were ever independently decompiled. Full list and role groupings in issue #15. Can be
+done without hardware access.
+
+## 13. `IOATIR500Surface` was never split into a real base/subclass pair - issue #16
+
+Unlike GL/DVD/2D (each a real `IOATIR500XContext`/`ATIR500XContext` base/subclass pair matching this
+driver's actual Darwin/IOKit convention), Surface remains a single unified class. At least one method
+(`resolve_fsaa_buffer`, issue #13) is directly decompile-confirmed to belong on the subclass side - every
+other already-transcribed Surface method needs its own real receiver-type check to determine which side
+of a real split it falls on. Can be done without hardware access.
+
+## 14. `back_resolve_fsaa_buffer` - a real function found but never investigated - issue #17
+
+A real, named function (`back_resolve_fsaa_buffer`, kext offset `0x44880`, 1260 bytes) sits in the
+binary's own symbol table immediately next to `resolve_fsaa_buffer` (issue #13) but was only just noticed
+(during an unrelated Ghidra symbol sweep) and has never been decompiled or otherwise investigated. Likely
+some inverse/companion operation given the name, not confirmed. Can be done without hardware access.
