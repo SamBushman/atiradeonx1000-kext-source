@@ -27,6 +27,7 @@
 
 class ATIRadeonX1000;
 class IOATIR500GLContext;
+class IOTextureBuffer; /* real, opaque backing-store handle type - forward declared only, not reconstructed (Apple's own real type, same policy as IOAccelSurfaceData etc. below) */
 
 /*
  * IOAccelSurfaceReadData / IOAccelSurfaceData / IOAccelSurfaceScaling -
@@ -64,11 +65,13 @@ public:
      *   - set_scale: real 2nd param is `IOAccelSurfaceScaling*` (a real
      *     scaling-parameters struct), not raw `UInt32 xScale, UInt32
      *     yScale` - this project had guessed the wrong shape entirely.
-     * set_id_mode and set_shape_backing/set_shape_backing_length remain
-     * declared-but-deferred (see below and GAPS.md) - set_id_mode's
-     * real body is large and dense; the shape-backing pair both tail-
-     * call a shared, also-large `set_shape_backing_length_ext` helper
-     * this pass found but did not fully transcribe.
+     * RESOLVED, issue #8, in a later pass: set_id_mode and
+     * set_shape_backing/set_shape_backing_length (plus the shared
+     * set_shape_backing_length_ext they both tail-call) are now ALSO
+     * fully transcribed - see Sources/IOATIR500Surface_LockShape.cpp
+     * for all four. Issue #8 is now fully closed - every one of
+     * Surface's 19 real external methods has real decompiled content
+     * behind it.
      */
     IOReturn surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 0 */
     IOReturn surface_read_unlock_options(void);                                /* 1 */
@@ -79,15 +82,22 @@ public:
     /*
      * set_shape_backing / set_id_mode / set_scale / set_shape /
      * set_shape_backing_length - real signatures CORRECTED to match the
-     * real mangled symbols (found this pass); bodies for set_shape_backing,
-     * set_id_mode, and set_shape_backing_length remain deferred - see
-     * GAPS.md. set_shape_backing/set_shape_backing_length are thin
-     * conditional forwards to the also-deferred set_shape_backing_length_ext
-     * (real kext offset 0x152d0, a real 7-parameter function).
+     * real mangled symbols. RESOLVED, issue #8: set_shape_backing and
+     * set_shape_backing_length are real, unconditional thin forwards
+     * into `set_shape_backing_length_ext` (real kext offset 0x152d0) -
+     * "conditional" in this project's earlier note was wrong for
+     * set_shape_backing (always forwards) and imprecise for
+     * set_shape_backing_length (the "condition" is a real size-vs-region
+     * validation gate that can reject BEFORE ever reaching the forward,
+     * not a choice between two different forward targets). See
+     * Sources/IOATIR500Surface_LockShape.cpp for all bodies, resolved by
+     * direct disassembly (Ghidra's own no-analysis decompile mis-numbers
+     * these functions' parameters - confirmed and corrected via the raw
+     * PPC register trace, not trusted blindly).
      */
     void     set_shape_backing(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
-                                IOAccelDeviceRegion *region, UInt32 param6);    /* 6, body deferred */
-    IOReturn set_id_mode(UInt32 mode, UInt32 modeBits);                       /* 7, body deferred */
+                                IOAccelDeviceRegion *region, UInt32 param6);    /* 6, RESOLVED (issue #8) */
+    IOReturn set_id_mode(UInt32 mode, UInt32 modeBits);                       /* 7, RESOLVED (issue #8) */
     IOReturn set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3); /* 8, RESOLVED this pass - see Sources/IOATIR500Surface_LockShape.cpp */
     IOReturn set_shape(void);                                                  /* 9, CONFIRMED body (stage10): a real one-line forward to set_shape_backing_length_ext (not itself a distinct external method - an internal helper name this project happened to see via the decompile) */
     IOReturn surface_flush(UInt32 param1, UInt32 param2);                      /* 10, CONFIRMED body (stage10): real - alloc_surfaces_retry then flush_surface, plus real completion-counter bookkeeping via a vtable call at offset 0x54c */
@@ -98,8 +108,44 @@ public:
     void     surface_write_unlock(void);                                     /* 15, RESOLVED this pass */
     IOReturn surface_control(UInt32 selector, UInt32 param2, UInt32 *inOut);   /* 16, CONFIRMED body (stage10): real dispatcher - param2==1 -> set_surface_blocking, param2==4 -> set_volatile_state, else kIOReturnBadArgument */
     IOReturn set_shape_backing_length(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
-                                       UInt32 param5, IOAccelDeviceRegion *region); /* 17, body deferred */
+                                       UInt32 param5, IOAccelDeviceRegion *region); /* 17, RESOLVED (issue #8) */
     IOReturn surface_control_alias(UInt32 selector, UInt32 param2, UInt32 *inOut); /* 18, CONFIRMED to be a real, deliberate alias of selector 16 - same function address, not two implementations */
+
+    /*
+     * set_shape_backing_length_ext - RESOLVED, issue #8, real name/
+     * signature (real mangled symbol
+     * __ZN16IOATIR500Surface28set_shape_backing_length_extE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionmm,
+     * real kext offset 0x152d0) - NOT itself one of Surface's 19 real
+     * external methods (no selector number), an internal helper
+     * `set_shape_backing`/`set_shape_backing_length`/`set_shape` (selector
+     * 9) all tail-call. Real 2nd parameter (`id` here) is CONFIRMED, from
+     * this pass's own decompile, to be a real per-surface "shape/ID slot"
+     * index - the SAME real accelerator-owned `+0xe8`/`+0xcc`-bounded ID
+     * table `set_id_mode` uses, and the SAME `id*8+0xd60/+0xd64` per-ID
+     * tracking-record array and `id*0x94+0xcac`/`id*0x78+0x142` per-ID
+     * arrays that function also touches - genuinely the same "ID"
+     * concept in both functions, not a coincidental same-looking
+     * parameter. See Sources/IOATIR500Surface_LockShape.cpp for the full
+     * transcription.
+     */
+    IOReturn set_shape_backing_length_ext(UInt32 shapeBits, UInt32 id, UInt32 param3, UInt32 param4,
+                                           IOAccelDeviceRegion *region, UInt32 param6, UInt32 param7);
+
+    /*
+     * reset_req_bits / reset_access / prune_buffers / update_contexts /
+     * delete_buffer_backing - RESOLVED, issue #8: real names/signatures
+     * (real mangled symbols, all already-existing real methods on this
+     * class found via real call sites in set_id_mode/
+     * set_shape_backing_length_ext) - own bodies NOT independently
+     * decompiled this pass (peripheral to those two functions' own real
+     * structure, consistent with this project's treatment of similar
+     * small opaque helper calls elsewhere).
+     */
+    void reset_req_bits(void);
+    void reset_access(void);
+    void prune_buffers(void);
+    void update_contexts(void);
+    void delete_buffer_backing(IOTextureBuffer *buffer);
 
     /*
      * surface_lock_options / surface_unlock_options - CONFIRMED real

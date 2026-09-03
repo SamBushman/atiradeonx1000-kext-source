@@ -541,13 +541,13 @@ carried into the "remaining" list, as above). A future pass should cross-check r
 compiled branch instructions (raw disassembly) before trusting an opcode boundary inferred from decompiled
 C brace nesting alone, especially for the deepest-nested parts of this function.
 
-## 8. `IOATIR500Surface`'s remaining lock/shape methods - MOSTLY RESOLVED
+## 8. `IOATIR500Surface`'s remaining lock/shape methods - FULLY RESOLVED
 
 Of the 19 real selectors, only the video-relevant overlay family (5 methods) and a handful of others
 sampled for confirmation (`surface_control`, `surface_flush`, `get_state`, `set_shape`, `surface_read`,
 `surface_query_lock`, one lock/unlock pair) had any real decompiled content behind them. Of the remaining
-~9, **6 are now RESOLVED this pass**: `surface_read_lock_options`, `surface_write_lock_options`,
-`surface_write_unlock_options`, `surface_write_lock`, `surface_write_unlock`, `set_scale` are all fully
+~9, an earlier pass resolved 6: `surface_read_lock_options`, `surface_write_lock_options`,
+`surface_write_unlock_options`, `surface_write_lock`, `surface_write_unlock`, `set_scale` - all fully
 transcribed from complete real decompiles - see `Sources/IOATIR500Surface_LockShape.cpp`. Real signature
 corrections found along the way: several of these had the wrong parameter count or return type
 (`IOReturn` vs real `void`); `set_scale` in particular had a completely wrong shape - this project had
@@ -557,10 +557,48 @@ struct pointer. Also formally declared the two shared internal helpers these all
 real, previously-undeclared internal helpers found as their own real functions:
 `surface_write_lock_int`/`surface_write_unlock_int`.
 
-**Still deferred, given their size/density**: `set_id_mode` (~184 lines) and `set_shape_backing`/
-`set_shape_backing_length` (thin forwards into a shared, also-large `set_shape_backing_length_ext`, ~236
-lines) - real signatures corrected to match the real mangled symbols, but bodies not transcribed. See
-`Headers/IOATIR500Surface.h`.
+**RESOLVED, this pass: the final 3 (`set_id_mode`, `set_shape_backing`, `set_shape_backing_length`), plus
+the shared `set_shape_backing_length_ext` (~236 lines) they tail-call - issue #8 is now fully closed, every
+one of Surface's 19 real external methods has real decompiled content behind it.** See
+`Sources/IOATIR500Surface_LockShape.cpp` for all four (each with its own detailed header comment).
+
+Real, notable findings:
+- `set_id_mode`'s real parameter count (2, not 3) had to be independently confirmed via direct disassembly
+  of its own prologue - Ghidra's own no-analysis decompile mislabeled its second parameter "param_3" for
+  unrelated internal reasons, which would have led this project to declare a phantom 3rd parameter had it
+  been trusted blindly.
+- `set_shape_backing`/`set_shape_backing_length`'s real argument setup couldn't be recovered from a
+  no-analysis decompile at all (Ghidra rendered both as bare, argument-less tail calls) - both were
+  instead transcribed directly from the raw PPC disassembly's own register moves, cross-checked against
+  the real PPC32 SysV/Darwin calling convention. `set_shape_backing_length` turned out to have a real,
+  previously-undocumented validation gate of its own (a real size-vs-region check, rejecting BEFORE ever
+  reaching `set_shape_backing_length_ext`) - not just a bare forward as this project's earlier note
+  assumed.
+- `set_id_mode` and `set_shape_backing_length_ext` share several real fields (`+0xbe8`/`+0xc14`/`+0xc1c`/
+  `+0xbf8`, the accelerator's own `id*8+0xd60/+0xd64`/`id*0x94+0xcac`/`id*0x78+...` per-ID arrays, and the
+  same real accelerator vtable+0x540/+0x544 allocate/commit pair) - genuinely the same "surface ID slot"
+  concept in both functions, confirmed by direct cross-reference, not assumed from similar-looking code.
+- **Two real transcription bugs caught and fixed during this project's own re-review**, before ever
+  committing: (1) a swapped parameter pair in `set_shape_backing_length_ext` - Ghidra's own no-analysis
+  parameter numbering (`param_2`..`param_8`, skipping `param_1` for the implicit `this`) had to be mapped
+  onto the real 7-parameter mangled signature by hand, and an early draft of this mapping mixed up which
+  local corresponded to which real parameter in two spots (a boolean flag testing the wrong parameter, and
+  a region-normalization block writing zero into the wrong pair of parameters) - caught by re-deriving the
+  mapping from the mangled name and cross-checking every use site individually, not by any tooling. (2) A
+  dword-index-vs-byte-offset scaling bug on a completion-stamp accumulator (`accelerator+0x1f0` written
+  instead of the real `accelerator+0x1f0*4 = accelerator+0x7c0`) - the SAME class of mistake already found
+  and fixed once in issue #12 item 6, caught this time before it was ever committed by specifically
+  checking every `int*`-typed local's indexing for this exact pattern.
+- A fourth, previously-unknown completion-stamp accumulator field found: `accelerator+0x7c0`, alongside
+  the already-known `+0x704`/`+0x780`/`+0x7bc` - all via the same real accelerator vtable+0x54c/+0x558
+  family of calls, each accumulating into its own distinct field per caller.
+- Honest, unreconstructed gap acknowledged rather than guessed around: this project has not reconstructed
+  Apple's own real `IOAccelDeviceRegion` struct layout (a real, forward-declared-only Apple type - see
+  `Headers/IOATIR500Surface.h`'s own top note). `set_shape_backing_length_ext`'s dense per-rect copy loop
+  and its region-relative field reads are transcribed via raw byte offsets rather than a guessed struct
+  layout; one specific field (`region+8`) is read as BOTH a 16-bit and a 32-bit value at different points,
+  consistent with a real packed 32-bit field rather than a transcription error - see that function's own
+  header comment for the full argument.
 
 ## 9. This reconstruction covers the kext only, not the userspace binaries
 
