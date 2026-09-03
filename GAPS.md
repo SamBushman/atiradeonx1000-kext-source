@@ -11,7 +11,7 @@ PowerPC kext toolchain available in the environment this was written in. **Requi
 toolchain access to close.** See `README.md`'s "What to do when hardware is available again" section for
 the concrete first steps.
 
-## 2. `process_command_buffer`'s opcode handlers - the largest reconstruction gap
+## 2. `process_command_buffer`'s opcode handlers (GL context) - RESOLVED, two small residual items tracked in issue #13
 
 **Status: COMPLETE.** Every real opcode this driver's embedded marker language actually dispatches is now
 transcribed. This was verified mechanically, not just by inspection: grepping the complete raw decompile
@@ -75,9 +75,11 @@ kept for the record of what was found and corrected along the way:
 - ~~Opcode `0x28` (single render-target + scissor)~~ RESOLVED - fully transcribed via `RTOffsetTilingBurst`.
 - ~~Opcode `0x29` (vertex-format switch table)~~ RESOLVED - the real 8-case enum-remapping switch was
   confirmed and transcribed via `discard_command_buffer`'s independent trace of the same opcode (see
-  section 5's discovery of opcode `0x36`, found the same way). One real open item remains: whether this
-  main execute-path handler processes a fixed 4 slots (as `discard_command_buffer` does) or the dynamic
-  `attachmentCount` - not independently re-confirmed for this exact function.
+  section 5's discovery of opcode `0x36`, found the same way). ~~One real open item remains: whether this
+  main execute-path handler processes a fixed 4 slots...~~ **RESOLVED (issue #12 item 2)**: a fresh,
+  complete re-decompile of `process_command_buffer` confirmed the real handler initializes its loop
+  counter to a literal `4` and decrements it exactly 4 times - genuinely a fixed 4-slot loop, matching
+  `discard_command_buffer`'s independent trace exactly. Confirmed, not inferred.
 - ~~Opcode `0x2a` (render-target-pair + scissor)~~ RESOLVED - fully transcribed (`RTOffsetTilingBurst`
   reused twice, real duplicated scissor-Y write into two record slots).
 - ~~Opcode `0x2b` (explicit flush)~~ RESOLVED - fully transcribed, threaded through
@@ -96,11 +98,18 @@ kept for the record of what was found and corrected along the way:
 - ~~Opcode `0x30` (FSAA resolve setup)~~ RESOLVED - fully transcribed. Found and fixed a real bug in this
   project's own `IOATIR500Surface::resolve_fsaa_buffer` declaration while doing so: it was missing one of
   four real trailing dword parameters the actual call site passes.
-- **Opcode `0x31` (FSAA resolve blit) - entirely stubbed.** This is the single largest remaining gap in
-  the whole file: a complete textured-quad draw with real floating-point NDC/viewport math and US-block
-  shader headers, reusing the same `_g_r500_3d_blit_state_packet` template as
-  `restore_state_destroyed_by_pageoff`. Full real trace already exists in
-  `g5-h264-gpu-decode`'s `promo4-client/reveng/stage4-opcode-range-0x02-0x31-traced.md`.
+- ~~Opcode `0x31` (FSAA resolve blit) - entirely stubbed.~~ **RESOLVED, but via a real identity
+  correction, not a direct fill-in of this stub (issue #12 item 4, commit `2236b56`)**: the ~500-line
+  textured-quad content this bullet originally described (real floating-point NDC/viewport math, US-block
+  shader headers, the `_g_r500_3d_blit_state_packet` template) turned out to be a misattributed real
+  handler for opcode `0x2d`, not `0x31` - confirmed by tracing its own `FUN_000314c4(...)` call back to a
+  real `if (uVar34 != 0x2d000000)` exclusion check's `else` branch, the literal-once-in-the-whole-decompile
+  `0x2d000000` constant leaving no ambiguity. The REAL opcode `0x31` was then transcribed fresh, as
+  `handle_depth_buffer_resolve`: a short, purely-integer handler (attachment-index remap, normal/alternate
+  surface-pair selection, one or two `decompress_and_flush_depth_buffer` calls, a per-mip/tile
+  register-burst write). This correction rippled into several files' stale cross-references
+  (`ATIR500GLContext.h`, `ATIRadeonX1000Registers.h`, `ATIR500DVDContext.h`/`.cpp`), all swept and fixed at
+  the same time. One small residual question survived this re-attribution and is tracked in issue #13.
 - ~~Opcodes `0x37`/`0x38`/`0x39`~~ RESOLVED - all three fully transcribed (deferred texture/render-target
   offset patch, address fixup, vertex-attribute binding). Both `0x37`'s and `0x38`'s open low-confidence
   flags are now RESOLVED (issue #12 item 5, see below):
@@ -157,7 +166,7 @@ kept for the record of what was found and corrected along the way:
   `0x46` re-verified against a fresh, complete read of its real call site (`process_kATIGLStreamFastClearColor(this,puVar65)`,
   no extra arguments) - the existing handler was already correct.
 
-## 3. Register-state serialization: mostly done, one open question, two functions still bodies-empty
+## 3. Register-state serialization - FULLY RESOLVED
 
 `write_kernel_context_buffer_regs` and `build_scissor` in `Sources/ATIR500GLContext_RegisterState.cpp`
 have now been fully transcribed from a complete real decompile (not just summarized) - real per-mip
@@ -272,9 +281,10 @@ specific to `get_texture` - then the real vtable+0x14c call (on `newTex+0x54`'s 
 block, and the real four-field zero (`+0x210/+0x218/+0x21c/+0x220`) within THAT block at a
 `record[3]*0x20` byte offset (not a fixed object, as this project's earlier partial note implied).
 
-Real, honestly-flagged anomaly found and left unresolved: the raw decompile's final step - releasing the
-mapping handle via vtable+0x18 - is UNCONDITIONAL, running even along the control-flow path where the
-local holding that handle was never assigned away from a literal null (when `newTex+0x54 == 0`, or when
+Real, honestly-flagged anomaly, accepted as-is when issue #12 item 3 closed rather than a still-open
+question: the raw decompile's final step - releasing the mapping handle via vtable+0x18 - is UNCONDITIONAL,
+running even along the control-flow path where the local holding that handle was never assigned away from
+a literal null (when `newTex+0x54 == 0`, or when
 the vtable+0x14c call itself returns null). A real vtable call through a definitely-null pointer would
 crash; transcribed exactly as found rather than silently "fixed," since this project cannot confirm
 whether some real invariant elsewhere in the kext guarantees this can't actually happen. Worth a live
@@ -332,18 +342,18 @@ new, real handler, defined in that same file). `FSAAResolveBlit.cpp`'s header co
 correct opcode 0x2d identity; its content, transcription, and open tail-integration question (below) are
 otherwise unchanged - they were already correct, just filed under the wrong opcode number.
 
-**One open item survives the re-attribution, now correctly pointed at 0x2d instead of 0x31**: opcode 0x2d's
-handler returns `local_d0`, an explicitly-computed pointer distinct from `record` (its real tile loop
-consumes a data-dependent dword count the header's encoded distance field can't represent generically).
-The dispatch loop's `if (next != record)` branch advances straight to `local_d0` but does NOT run the
-tail's real exit-descriptor-write/status-return check in that case, whereas the real decompile shows this
-opcode's ending DOES fall into that same shared check. Whether that matters in practice depends on whether
-`local_d0` can ever coincide with a real "buffer now fully consumed" position - NOT independently confirmed
-either way; a genuine, still-open question, now correctly scoped to opcode 0x2d only (the real opcode 0x31
-was independently confirmed this pass to have no such exception).
+**One open item survives the re-attribution, now correctly pointed at 0x2d instead of 0x31 - tracked in
+issue #13**: opcode 0x2d's handler returns `local_d0`, an explicitly-computed pointer distinct from
+`record` (its real tile loop consumes a data-dependent dword count the header's encoded distance field
+can't represent generically). The dispatch loop's `if (next != record)` branch advances straight to
+`local_d0` but does NOT run the tail's real exit-descriptor-write/status-return check in that case, whereas
+the real decompile shows this opcode's ending DOES fall into that same shared check. Whether that matters
+in practice depends on whether `local_d0` can ever coincide with a real "buffer now fully consumed"
+position - NOT independently confirmed either way; a genuine, still-open question, now correctly scoped to
+opcode 0x2d only (the real opcode 0x31 was independently confirmed this pass to have no such exception).
 
 `ATIR500Surface::resolve_fsaa_buffer` remains genuinely UNKNOWN/opaque (its header comment already
-correctly says so, and nothing this pass found bears on it).
+correctly says so, and nothing this pass found bears on it) - also tracked in issue #13.
 
 ## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
 
