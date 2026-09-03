@@ -57,6 +57,7 @@
 #include "../Headers/ATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
 #include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIR500Surface.h"
 
 #define PM4_TYPE2_FILLER 0x80000000u
 
@@ -1124,13 +1125,12 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
     }
 
     /* Real decompile types this as `ATIR500Surface *` (a subclass-qualified
-     * call, `ATIR500Surface::resolve_fsaa_buffer`) - this project's
-     * IOATIR500Surface.h has never been split into base/subclass the way
-     * GL/2D/DVD were (see GAPS.md section 8), so IOATIR500Surface is used
-     * here as the closest currently-declared type; if Surface ever gets a
-     * real base/subclass split, resolve_fsaa_buffer likely belongs on the
-     * subclass side along with this call. */
-    IOATIR500Surface *boundSurface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
+     * call, `ATIR500Surface::resolve_fsaa_buffer`) - RESOLVED, issue #16:
+     * Surface now has a real base/subclass split matching GL/2D/DVD (see
+     * Headers/ATIR500Surface.h), so this uses the real subclass type
+     * directly rather than the base-class stand-in this project used
+     * before that split existed. */
+    ATIR500Surface *boundSurface = reinterpret_cast<ATIR500Surface *>(U32At(self, 0x290));
     UInt32 *puVar42 = reinterpret_cast<UInt32 *>(
         boundSurface->resolve_fsaa_buffer(static_cast<UInt32>(U16At(self, 0xac)), uVar58,
                                            puVar65, puVar65[3] == 0 ? false : true,
@@ -1216,7 +1216,7 @@ static UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record
         pAVar72 = reinterpret_cast<ATIR500SurfaceBuffer *>(self + U16At(self, 0x3b2) * 0x78 + 0x3c0);
     }
 
-    IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(pAVar39);
+    ATIR500Surface *surface = reinterpret_cast<ATIR500Surface *>(pAVar39);
     UInt32 flushResult = surface->decompress_and_flush_depth_buffer(pAVar41, 0, record);
 
     if (U32At(self, 0x3bc) == 0 && attachIdx != U16At(self, 0xae) && U8At(pAVar72, 0x34) != 0) {
@@ -2578,7 +2578,7 @@ static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *
             }
 
             UInt32 *backRecord = puVar65 - uVar55;
-            IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(pAVar43);
+            ATIR500Surface *surface = reinterpret_cast<ATIR500Surface *>(pAVar43);
             UInt32 flushResult = surface->decompress_and_flush_depth_buffer(pAVar45, 0, backRecord);
             UInt32 uVar73b = 0x80000000u;
             if (uVar55 - flushResult != 1) {
@@ -3234,7 +3234,7 @@ static UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 *puVar65 = record;
     void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
-    IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
+    ATIR500Surface *surface = reinterpret_cast<ATIR500Surface *>(U32At(self, 0x290));
 
     UInt32 uVar38 = puVar65[3];
     UInt32 uVar73 = puVar65[1];

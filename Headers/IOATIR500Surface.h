@@ -1,21 +1,21 @@
 /*
  * IOATIR500Surface.h
  *
- * The shared display-surface bookkeeping class - window-server-style
+ * The base display-surface bookkeeping class - window-server-style
  * lock/shape/backing-store management, referenced by every other context
- * class when a surface is bound. Real dispatch shape
- * (ATIR500Surface::getTargetAndMethodForIndex, kext offset 0x3ac80): a
- * single flat 19-entry table (selectors 0-18) at this+0xd5c - the simplest
- * dispatch shape of the four context classes (no special/extra split).
+ * class when a surface is bound. RESOLVED (issue #16): this project now
+ * has a real base/subclass split for Surface, matching the other three
+ * context classes - see `Headers/ATIR500Surface.h` for the concrete
+ * subclass (`getTargetAndMethodForIndex`, the real dispatch function
+ * itself, and the overlay/`resolve_fsaa_buffer`/
+ * `decompress_and_flush_depth_buffer` family all live there, not here -
+ * every method still declared below was individually confirmed, via its
+ * own real mangled symbol name, to genuinely be a base-class member).
  *
  * Confidence: selector numbers/names/addresses CONFIRMED from raw kext
- * bytes. Bodies for the video-relevant subset (dvd_setup_overlay,
- * enable_overlay/disable_overlay, showbuffer, enable_deint,
- * dvd_setup_subpicture) CONFIRMED via direct decompilation
- * (stage8-dvd-overlay-and-2d-acceleration-decoded.md) - this is where
- * this project found the significant "hardware overlay path is mostly
- * vestigial" result. The remaining lock/shape family was sampled, not
- * exhaustively decompiled (stage10-ga-plugin-full-interface-and-va-driver-confirmed.md).
+ * bytes. The lock/shape family was sampled, not exhaustively decompiled
+ * (stage10-ga-plugin-full-interface-and-va-driver-confirmed.md) before
+ * issue #8 later filled in every real external method's own body.
  */
 
 #ifndef IOATIR500SURFACE_H
@@ -176,20 +176,11 @@ public:
     void surface_write_lock_int(UInt32 bufferIndex, UInt32 *outParam2, UInt32 *outParam3);
     void surface_write_unlock_int(UInt32 bufferIndex);
 
-    /*
-     * ---- Video/overlay-adjacent real methods, called from
-     * IOATIR500DVDContext, NOT external methods of this class themselves ----
-     * CONFIRMED bodies, stage8-dvd-overlay-and-2d-acceleration-decoded.md.
-     * This is where this project found its most significant unexpected
-     * result for the H.264 project: three of these five are REAL, EMPTY
-     * NO-OPS in this exact kext build.
-     */
-    void     disable_overlay(void);   /* CONFIRMED: real empty no-op */
-    void     enable_overlay(void);    /* CONFIRMED: real empty no-op */
-    void     showbuffer(UInt32 bufferIndex, UInt32 param2); /* CONFIRMED: real empty no-op */
-    void     dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3); /* CONFIRMED: real empty no-op */
-    void     dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h); /* CONFIRMED: the one real, non-stub member of this family - stores x/y/w/h into this+0x94/0x96/0x98/0x9a and sets a dirty flag at this+0xd94 */
-    void     enable_deint(UInt32 mode); /* CONFIRMED: real, stores mode into this+0xdac; nothing this project decompiled reads it back */
+    /* RE-HOMED (issue #16): the overlay/subpicture/deinterlace family
+     * (disable_overlay/enable_overlay/showbuffer/dvd_setup_subpicture/
+     * dvd_setup_overlay/enable_deint) moved to the real subclass,
+     * Headers/ATIR500Surface.h - real mangled symbols confirm they're
+     * ATIR500Surface:: receivers, not this base class. */
 
     /*
      * alloc_surfaces / alloc_surfaces_retry - CONFIRMED real names, called
@@ -202,32 +193,21 @@ public:
     /* flush_surface / set_scaling / set_volatile_state / set_surface_blocking -
      * CONFIRMED real names from various call sites across this project (the
      * GL context's scale_surface for set_scaling/set_volatile_state). Bodies
-     * UNKNOWN beyond their roles. resolve_fsaa_buffer's own body is now
-     * RESOLVED (issue #13 item 2) - see Sources/ATIR500Surface_ResolveFSAABuffer.cpp. */
+     * UNKNOWN beyond their roles. */
     void     flush_surface(UInt32 param1, UInt32 param2);
-    void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlock,
-                                  bool clearFlag, UInt32 param5, UInt32 param6, UInt32 param7,
-                                  UInt32 param8);
     /* FIXED this pass: the real opcode 0x30 call site
      * (ATIR500GLContext_ProcessCommandBuffer.cpp's handle_fsaa_resolve_setup)
      * passes FOUR trailing dwords (puVar65[4..7]) after clearFlag, not
-     * three - this signature previously dropped one parameter. */
+     * three - this signature previously dropped one parameter. RE-HOMED
+     * (issue #16): resolve_fsaa_buffer itself moved to the real subclass,
+     * Headers/ATIR500Surface.h. */
     IOReturn set_scaling(UInt32 flags, IOAccelSurfaceScaling *scaling);
     void     set_volatile_state(UInt32 *state);
     IOReturn set_surface_blocking(UInt32 blockingMode);
 
-    /*
-     * decompress_and_flush_depth_buffer - CONFIRMED real name, found this
-     * pass (opcode 0x45's real body, kext offset in the 0x2ee.. range).
-     * Real call shape: `decompress_and_flush_depth_buffer(surface,
-     * surfaceBufferScratch, 0, record)` returning a real UInt32 (used as a
-     * record-dword count/index in the caller). Same real subclass-
-     * qualification note as `resolve_fsaa_buffer`/`surface_buffer_idx_mask`
-     * above (real decompile types the receiver as the `ATIR500Surface`
-     * subclass; declared here on the unified `IOATIR500Surface` per this
-     * project's current, not-yet-split model - see GAPS.md section 8).
-     */
-    UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
+    /* RE-HOMED (issue #16): decompress_and_flush_depth_buffer moved to
+     * the real subclass, Headers/ATIR500Surface.h - real mangled symbol
+     * confirms it's an ATIR500Surface:: receiver, not this base class. */
 
     /* add_gl_context_to_list / remove_gl_context_from_list - CONFIRMED
      * real names (a surface tracks which GL contexts currently reference

@@ -12,24 +12,30 @@
  *
  * Confidence: CONFIRMED. These bodies are not simplified or abridged -
  * this genuinely is everything the real functions do.
+ *
+ * RE-HOMED (issue #16): these six real mangled symbols all name
+ * `ATIR500Surface::` (the concrete subclass) as their receiver, not
+ * `IOATIR500Surface::` (the base class) this file previously used -
+ * bodies unchanged, only the class qualifier moved. See
+ * Headers/ATIR500Surface.h for the real base/subclass split account.
  */
 
-#include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIR500Surface.h"
 
-void IOATIR500Surface::disable_overlay(void) {
+void ATIR500Surface::disable_overlay(void) {
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void IOATIR500Surface::enable_overlay(void) {
+void ATIR500Surface::enable_overlay(void) {
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void IOATIR500Surface::showbuffer(UInt32 bufferIndex, UInt32 param2) {
+void ATIR500Surface::showbuffer(UInt32 bufferIndex, UInt32 param2) {
     (void)bufferIndex; (void)param2;
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void IOATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3) {
+void ATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3) {
     (void)param1; (void)param2; (void)param3;
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
@@ -41,7 +47,7 @@ void IOATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32
  * function) also writes via a different call path, confirming a single
  * shared geometry record.
  */
-void IOATIR500Surface::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h) {
+void ATIR500Surface::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     *reinterpret_cast<UInt16 *>(self + 0x94) = static_cast<UInt16>(x);
     *reinterpret_cast<UInt16 *>(self + 0x96) = static_cast<UInt16>(h); /* CONFIRMED real param order: h before w at these offsets */
@@ -54,6 +60,6 @@ void IOATIR500Surface::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h)
  * enable_deint - CONFIRMED real, stores the mode; nothing this project
  * decompiled anywhere reads this field back.
  */
-void IOATIR500Surface::enable_deint(UInt32 mode) {
+void ATIR500Surface::enable_deint(UInt32 mode) {
     *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xdac) = mode;
 }

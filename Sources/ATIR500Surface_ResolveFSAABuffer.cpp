@@ -121,7 +121,7 @@
  * raw decompile instead.
  */
 
-#include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 #include "../Headers/ATIRadeonX1000Registers.h"
 
@@ -142,7 +142,7 @@ const double kBias = 4503601774854144.0;
 
 } // namespace
 
-void *IOATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlockV,
+void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlockV,
                                              bool clearFlag, UInt32 param5, UInt32 param6,
                                              UInt32 param7, UInt32 param8) {
     UInt32 *paramBlock = reinterpret_cast<UInt32 *>(paramBlockV);

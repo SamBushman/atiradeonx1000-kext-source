@@ -886,13 +886,37 @@ bar** - role-level inference existed before this pass too; what this pass actual
 proof that no further static decompilation can ever recover more than that, not an identification. Full
 account and complete symbol list in the comprehensive note at the end of `Headers/ATIRadeonX1000Registers.h`.
 
-## 13. `IOATIR500Surface` was never split into a real base/subclass pair - issue #16
+## 13. `IOATIR500Surface` was never split into a real base/subclass pair - RESOLVED, issue #16
 
-Unlike GL/DVD/2D (each a real `IOATIR500XContext`/`ATIR500XContext` base/subclass pair matching this
-driver's actual Darwin/IOKit convention), Surface remains a single unified class. At least one method
-(`resolve_fsaa_buffer`, issue #13) is directly decompile-confirmed to belong on the subclass side - every
-other already-transcribed Surface method needs its own real receiver-type check to determine which side
-of a real split it falls on. Can be done without hardware access.
+Now matches GL/DVD/2D's real `IOATIR500XContext`/`ATIR500XContext` base/subclass pattern:
+`Headers/ATIR500Surface.h` is the new concrete subclass, `Headers/IOATIR500Surface.h` stays the base.
+
+Every method this project had already declared on the old unified class was checked against its own
+real mangled symbol name in the kext's symbol table (the same ground-truth source used to establish
+every other base/subclass boundary in this project) - not guessed. Eight real `ATIR500Surface::`
+(subclass) receivers were found and re-homed:
+
+- The whole overlay/subpicture/deinterlace family - `disable_overlay`, `enable_overlay`, `showbuffer`,
+  `dvd_setup_subpicture`, `dvd_setup_overlay`, `enable_deint` (`Sources/ATIR500Surface_Overlay.cpp`).
+  Previously-unknown finding from this sweep: this whole family belongs on the subclass, not the base
+  as this project's earlier unified-class model had it.
+- `resolve_fsaa_buffer` (already known subclass, issue #13) - now formally reflected in the hierarchy.
+- `decompress_and_flush_depth_buffer` - confirmed subclass receiver; own body still not independently
+  decompiled (unchanged standing gap, only the class placement changed).
+
+Every other already-declared method (~37: lock/shape family, `get_state`, `surface_control` family,
+buffer-backing-store family, etc.) was checked and confirmed to remain real `IOATIR500Surface::` (base)
+receivers - no guessing involved either way.
+
+Also confirmed real subclass members from the same symbol sweep, but deliberately left undeclared
+(out of this issue's scope - re-homing already-declared members, not new decompilation):
+`getTargetAndMethodForIndex` (real kext offset `0x3ac80`) and `invalidate` (`0x3acb0`), matching the
+same subclass-owns-dispatch pattern GL/DVD/2D already established. Addresses recorded in
+`Headers/ATIR500Surface.h`'s header comment for a future decompile pass.
+
+All 6 real call sites of the re-homed methods (all in `Sources/ATIR500GLContext_ProcessCommandBuffer.cpp`)
+verified to use the correct `ATIR500Surface *` pointer type; swept the rest of the codebase and confirmed
+no other file calls any of the 8 re-homed methods.
 
 ## 14. `back_resolve_fsaa_buffer` - a real function found but never investigated - issue #17
 
