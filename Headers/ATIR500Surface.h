@@ -88,6 +88,17 @@ public:
      * class placement changed.
      */
     UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
+
+    /*
+     * back_resolve_fsaa_buffer - RESOLVED (issue #17). Full real body in
+     * Sources/ATIR500Surface_BackResolveFSAABuffer.cpp - see that file for
+     * the complete transcription and header comment. Real signature: the
+     * first parameter is real but genuinely unused; the second indexes
+     * `surfaceBuffersByFormat`, matching `resolve_fsaa_buffer`'s own
+     * `formatCode` parameter; the third is the same real output record
+     * pointer convention `resolve_fsaa_buffer` uses.
+     */
+    void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, void *paramBlock);
 };
 
 #endif /* ATIR500SURFACE_H */

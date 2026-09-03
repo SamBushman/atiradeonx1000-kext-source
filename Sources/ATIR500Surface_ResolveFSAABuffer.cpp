@@ -8,6 +8,30 @@
  * name already present in the binary's own symbol table - not a guess).
  * Full decompile obtained fresh this pass and transcribed completely.
  *
+ * CORRECTED (issue #17 investigation): decompiling the sibling function
+ * `back_resolve_fsaa_buffer` (`ATIR500Surface_BackResolveFSAABuffer.cpp`)
+ * turned up two real transcription bugs in THIS file's original pass,
+ * both now fixed:
+ *   1. The top-level Block A/B selector flag is real `*(uint*)(this+0xbe8)`
+ *      - a field on the SURFACE OBJECT ITSELF (already independently
+ *      confirmed elsewhere as a real Surface mode/state-bits field -
+ *      `IOATIR500Surface_LockShape.cpp`, `ATIR500GLContext_RegisterState.cpp`,
+ *      `ATIR500GLContext_ProcessCommandBuffer.cpp` all read/write the same
+ *      `this+0xbe8`/`self+0xbe8`/`boundSurface+0xbe8` offset) - NOT
+ *      `accelerator+0xbe8` as this file originally had it. `accel` and
+ *      `this` are different pointers; the original code silently read the
+ *      wrong object at this one site only (every other `accel`-based read
+ *      in this file is correct, cross-checked and unaffected).
+ *   2. The two `paramBlock[0x9a]`/`paramBlock[0xa0]` base-address
+ *      computations read a real distinct struct field at `+0x20`
+ *      (`basePitch`, `ATIRadeonX1000Types.h`), not `bytesPerRow` (`+0x16`)
+ *      as originally transcribed - `back_resolve_fsaa_buffer` reads the
+ *      exact same `+0x20` offset in the same base-address-computation role
+ *      for both its own surface sources, which is what surfaced the
+ *      mismatch on a fresh re-read of this file's own raw decompile.
+ * Every other line in this file was re-checked against the original raw
+ * decompile during this correction pass and found accurate.
+ *
  * Real signature, matching this project's existing declaration exactly
  * (`Headers/IOATIR500Surface.h`): called from opcode 0x30's handler
  * (`handle_fsaa_resolve_setup`, `ATIR500GLContext_ProcessCommandBuffer.cpp`)
@@ -155,11 +179,11 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
      * see this file's own header comment. */
     paramBlock[0xb] = U32At(accel, 0xb74);
 
-    if ((U32At(accel, 0xbe8) & 0x700000u) == 0) {
+    if ((U32At(this, 0xbe8) & 0x700000u) == 0) {
         /* ---- Block A: MSAA burst + floating-point NDC viewport blit ---- */
         UInt32 uVar15 = 0;
         UInt32 tableOffA = static_cast<UInt32>(surfA->formatTableIndex) * 0x1cu;
-        paramBlock[0x9a] = (static_cast<UInt32>(surfA->bytesPerRow) * surfA->mipOffsets[0] /* real: *(int*)(iVar18+0x40) - see note below */
+        paramBlock[0x9a] = (static_cast<UInt32>(surfA->basePitch) * surfA->mipOffsets[0] /* real: *(int*)(iVar18+0x40) - see note below */
                             + surfA->gpuBaseAddress) & 0xffffffe0u;
         if ((surfA->tilingDegreeBits & 0xf00000u) != 0) {
             uVar15 = static_cast<UInt32>(surfA->width) / ((surfA->tilingDegreeBits >> 0x14) & 0xfu);
@@ -192,7 +216,7 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
 
         UInt8 bVar5 = surfB->formatTableIndex;
         paramBlock[0xa0] = ((surfB->tilingConfigByte0 & 7u) << 2) |
-                            ((static_cast<UInt32>(surfB->bytesPerRow) * surfB->mipOffsets[0] + surfB->gpuBaseAddress) & 0xffffffe0u);
+                            ((static_cast<UInt32>(surfB->basePitch) * surfB->mipOffsets[0] + surfB->gpuBaseAddress) & 0xffffffe0u);
         if (((surfB->tilingDegreeBits & 0xf00000u) == 0) ||
             (uVar12 = static_cast<UInt32>(surfB->heightOrRows) / ((surfB->tilingDegreeBits >> 0x14) & 0xfu),
              uVar15 = uVar12 - 1, uVar12 == 0)) {

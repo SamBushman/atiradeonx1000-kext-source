@@ -181,7 +181,8 @@ struct ATIR500SurfaceBuffer {
     UInt8   _pad_0x18[0x1c - 0x18];
     UInt16  heightOrRows;        /* +0x1c, CONFIRMED: used identically to width in scissor/clip clamping */
     UInt16  extra1e;             /* +0x1e, CONFIRMED: paired with +0x1c in get_surface_size's non-mip branch */
-    UInt8   _pad_0x20[0x28 - 0x20];
+    UInt16  basePitch;           /* +0x20, CONFIRMED (issue #17, ATIR500Surface::back_resolve_fsaa_buffer): real field, distinct from `bytesPerRow` (+0x16) despite the superficially similar name - read via `basePitch * mipOffsets[0] + gpuBaseAddress` (masked `& 0xffffffe0`) to form a base address, in BOTH `resolve_fsaa_buffer` (issue #13; that file's own committed transcription wrongly aliased this read to `bytesPerRow` at two call sites - CORRECTED, see that file's own header comment) and this function - two independent real functions agreeing on this exact offset/role is what promoted it out of the surrounding padding. Real semantic distinction from `bytesPerRow` beyond "used in the base-address multiply instead of the block-count divide" not independently confirmed. */
+    UInt8   _pad_0x22[0x28 - 0x22];
     UInt32  formatOrTilingBits;  /* +0x28, CONFIRMED: real per-mip dirty/format bitmask, checked in page_off_texture */
     UInt8   _pad_0x2c[0x30 - 0x2c];
     UInt32  hzBlockCountField;   /* +0x30, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): real value read directly as an operand to a `0x1385`-tagged burst slot right after an `HZMEM_GetBlockCount` call on this same struct's `formatOrTilingBits` - almost certainly a real HyperZ block-count-adjacent field, exact semantics beyond that not independently confirmed. */

@@ -918,9 +918,33 @@ All 6 real call sites of the re-homed methods (all in `Sources/ATIR500GLContext_
 verified to use the correct `ATIR500Surface *` pointer type; swept the rest of the codebase and confirmed
 no other file calls any of the 8 re-homed methods.
 
-## 14. `back_resolve_fsaa_buffer` - a real function found but never investigated - issue #17
+## 14. `back_resolve_fsaa_buffer` - RESOLVED, issue #17
 
-A real, named function (`back_resolve_fsaa_buffer`, kext offset `0x44880`, 1260 bytes) sits in the
-binary's own symbol table immediately next to `resolve_fsaa_buffer` (issue #13) but was only just noticed
-(during an unrelated Ghidra symbol sweep) and has never been decompiled or otherwise investigated. Likely
-some inverse/companion operation given the name, not confirmed. Can be done without hardware access.
+Full real decompile obtained and transcribed (`Sources/ATIR500Surface_BackResolveFSAABuffer.cpp`). Real
+signature: first parameter genuinely unused, second indexes `surfaceBuffersByFormat` (same real
+per-format-code array `resolve_fsaa_buffer` uses), third is the same output-record-pointer convention.
+
+Real structural relationship to `resolve_fsaa_buffer` (issue #13) - confirmed NOT simply that function run
+backwards: same two `ATIR500SurfaceBuffer*` sources (`fixedSurfaceBuffer`/`surfaceBuffersByFormat[idx]`)
+but their slot-group roles are SWAPPED; no top-level HyperZ-vs-float-blit branch (`this+0xbe8`'s flag
+survives only as one extra register write); no HyperZ block machinery at all; the float tail computes a
+single per-axis half-extent from the surface's own dimensions rather than a caller-supplied rectangle, and
+branches on a real PER-SURFACE tiling check (not the top-level flag) to pick between a plain and a
+sign-flipped magic-bias conversion.
+
+No real internal caller found - a full Ghidra cross-reference sweep for this function's address found only
+one hit, typed "Entry Point (EXTERNAL)" with no containing function.
+
+**Real bug found and fixed in `resolve_fsaa_buffer` (issue #13) along the way**: cross-checking this
+function's real `+0x20` field read and real `this+0xbe8` top-level flag read against `resolve_fsaa_buffer`'s
+already-committed transcription surfaced two real misattributions there - a `bytesPerRow` field wrongly
+aliased onto a distinct real `+0x20` field (now named `basePitch`, `ATIRadeonX1000Types.h`), and an
+`accelerator+0xbe8` read that should have been `this+0xbe8` (confirmed via three other already-committed
+files - `IOATIR500Surface_LockShape.cpp`, `ATIR500GLContext_RegisterState.cpp`,
+`ATIR500GLContext_ProcessCommandBuffer.cpp` - all independently agreeing `+0xbe8` is a real Surface-object
+field, not accelerator-owned). Both fixed in `Sources/ATIR500Surface_ResolveFSAABuffer.cpp`; the rest of
+that file was re-verified line-by-line against its own raw decompile and found accurate.
+
+Also found: `FUN_00044d74` (this function's blit-state-packet-template-copy call) is a real, separate
+lazy-binding stub instance - added to issue #15's stub catalog (`ATIRadeonX1000Registers.h`); does not
+change that issue's own open status.
