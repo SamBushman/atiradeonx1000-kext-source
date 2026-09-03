@@ -805,16 +805,42 @@ opened yet. Reading it resolved this AND corrected two bigger things:
   which function reads them) and real GPU sensor-properties (thermal monitoring, low priority for this
   project's goals but a genuine new fact).
 
-## 11. Real binary data tables/constants never pulled from the kext - issue #14
+## 11. Real binary data tables/constants never pulled from the kext - RESOLVED, issue #14
 
-Several real, confirmed-to-exist data tables and float/double constants are referenced throughout by real
-kext address and real usage convention, but their actual raw content was never extracted from
-`ATIRadeonX1000.kext.bin`: `FormatTableLookup_0x0004d2dc/e0/e4`, `SamplesTableLookup`, the
-`_g_r500_3d_blit_state_packet` template's per-field breakdown (only its `0x2f4`-byte size is confirmed),
-and `FLOAT_0004c370/374/37c/380`/`DOUBLE_0004c3a8/3b0/3b8` in `ATIR500GLContext_FSAAResolveBlit.cpp`.
-Every consumer of these is itself CONFIRMED - only the literal data bytes are missing. Mechanical, not a
-decompilation task; can be done without hardware by reading the already-imported Ghidra project's own
-data sections at these addresses.
+**RESOLVED.** All four items' real raw content read directly from `ATIRadeonX1000.kext.bin`'s own data
+sections via a Ghidra headless script against the already-imported project - see
+`Sources/ATIRadeonX1000_DataTables.cpp` for all of it.
+
+Real structural finding along the way: `FormatTableLookup_0x0004d2dc/e0/e4` are NOT three independent
+tables - they're three adjacent `UInt32` fields (`+0xc`/`+0x10`/`+0x14`) within ONE real, named struct
+array this project found directly in the kext's own symbol table, `_ati_format_info_table` (real base
+`0x4d2d0` - twelve bytes before what this project's own historical field-offset-derived naming assumed
+was the table's start). Real, disassembly-confirmed exactly 48 entries: a self-index field
+(`entry[0] == index << 24`) increments cleanly for all 48 and then breaks completely at a 49th slot, which
+real kext symbols immediately beyond (`out_fmt`/`rb3d_dst_format`/`texture_type`/`gMetaClass`) confirm is
+unrelated data. All 48 entries' full 7-field content now backs the three accessors, indexing convention
+unchanged for every existing call site.
+
+`SamplesTableLookup`'s real table (`_samplesTable`, kext address `0x4c268`) - real content extracted for
+its whole real used range: every entry is 0 except two (values `2` and `3`). Caught a real mix-up risk
+before it happened: a *different*, unrelated local static also named `samplesTable` exists in the kext
+(`ATIR500Surface::load_3d_blit`-local, address `0x4c2f4`) - confirmed which one this project's own
+`resolve_fsaa_buffer` transcription actually references before extracting either.
+
+`_g_r500_3d_blit_state_packet`'s real address (`0x4c768`) and all 189 real dwords now extracted and
+captured - satisfies the issue's own stated "at minimum the raw bytes" bar. Per-field semantic naming
+(walking all 189 dwords against the capstone register-map doc, the same way `register_tracking_state` was)
+remains a real, still-open, separate task - not pursued this pass, flagged in the struct's own header
+comment for whoever picks it up.
+
+`FLOAT_0004c370/374/37c/380`/`DOUBLE_0004c3a8/3b0/3b8` - all seven real IEEE-754 values now known exactly
+(all clean, "designed" values: `0.0f`/`1.0f`/`6.0f`/`0.5f`, and the two magic-bias doubles at
+`4503601774854144.0`/`4503599627370496.0` plus a third `0.5` double). Two real corrections to this
+project's own earlier guesses: `FLOAT_0004c374` is a true reciprocal numerator (`1.0f`), not "a fixed
+texture-space extent" as guessed; `FLOAT_0004c37c` is `6.0f`, not the guessed `16.0f` for R5xx 12.4
+fixed-point. `DOUBLE_0004c3a8`'s real value also directly cross-confirms the literal
+`4503601774854144.0` magic-bias constant this project's DVD-context and `resolve_fsaa_buffer`
+transcriptions had already independently derived and used inline elsewhere - a nice convergent check.
 
 ## 12. ~24 opaque `FUN_XXXXXXXX` helper functions, never independently decompiled - issue #15
 

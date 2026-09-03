@@ -198,6 +198,30 @@ struct ATIR500SurfaceBuffer {
 };
 
 /*
+ * AtiFormatInfoEntry - RESOLVED (issue #14). The real, named per-format
+ * struct backing `_ati_format_info_table` (real kext symbol, address
+ * `0x4d2d0`, exactly 48 real entries) - see
+ * `FormatTableLookup_0x0004d2dc/e0/e4`'s own header comment
+ * (`ATIRadeonX1000Registers.h`) for the full real discovery account.
+ * Field names below reflect only what's independently confirmed: which
+ * three fields this project's own existing accessors expose
+ * (`fieldDC`/`fieldE0`/`fieldE4`, matching their real historical naming),
+ * plus the two real constants shared identically by all 48 entries and
+ * the self-index field that let this project bound the table's real
+ * length with certainty. `field08`'s own real role is UNKNOWN - no
+ * current caller in this project reads it.
+ */
+struct AtiFormatInfoEntry {
+    UInt32 selfIndex;     /* +0x00, real value == (entry index) << 24 for every one of the 48 real entries */
+    UInt32 sharedConst1;  /* +0x04, real value 0x00045a14 for every one of the 48 real entries - role UNKNOWN */
+    UInt32 field08;        /* +0x08, real per-format value - role UNKNOWN, no current caller reads this field */
+    UInt32 fieldDC;        /* +0x0c, real per-format value - the field `FormatTableLookup_0x0004d2dc` returns */
+    UInt32 fieldE0;        /* +0x10, real per-format value - the field `FormatTableLookup_0x0004d2e0` returns */
+    UInt32 fieldE4;        /* +0x14, real per-format value - the field `FormatTableLookup_0x0004d2e4` returns */
+    UInt32 sharedConst2;  /* +0x18, real value 0xff000000 for every one of the 48 real entries - role UNKNOWN */
+};
+
+/*
  * register_tracking_state - CONFIRMED field-by-field against the capstone
  * register map (see stage4-complete-register-tracking-state-map.md). This
  * is Apple's own "everything that must survive a VRAM eviction" snapshot -
@@ -268,10 +292,29 @@ struct register_tracking_state {
  * buffer of dwords this project knows how to interpret index-by-index") was
  * never reconstructed as clean named members - represented honestly as a
  * raw buffer here rather than guessed at member-by-member.
+ *
+ * RESOLVED (issue #14): the real template's raw content is now extracted
+ * directly from the kext binary (real symbol `_g_r500_3d_blit_state_packet`,
+ * kext offset `0x4c768`) - see `_g_r500_3d_blit_state_packet`'s own real
+ * definition in `Sources/ATIRadeonX1000_DataTables.cpp`. Confirms the
+ * "(register-index, value) pair" structure above directly: every even dword
+ * is a real, already-independently-confirmed register/opcode constant this
+ * project established elsewhere (`0x1393`/`0x13c6`/`0x5c8`/`0x1380`/
+ * `0x1150`/`0x1100`-`0x1140` etc.), and every odd dword is that register's
+ * real initial value. Per-field member names still not assigned (the
+ * pairing itself, not individual field semantics, is what's now confirmed) -
+ * a real, still-open task for a future pass would be walking the whole
+ * array and naming each pair against the capstone register-map doc, the
+ * same way `register_tracking_state` above already was.
  */
 struct r500_3d_blit_state_packet_struct {
-    UInt32 dwords[0x2f4 / 4];  /* CONFIRMED total size; UNKNOWN per-dword field breakdown beyond what stage4's capstone doc already indexes by raw offset */
+    UInt32 dwords[0x2f4 / 4];  /* CONFIRMED total size AND real content - see kAtiFormatInfoTable's sibling constant, kBlitStatePacketTemplate, in Sources/ATIRadeonX1000_DataTables.cpp. Per-dword field NAMES still not assigned. */
 };
+
+/* Real global template instance - CONFIRMED real content, issue #14. Real
+ * definition (the actual 189 dwords read directly from the kext binary) in
+ * Sources/ATIRadeonX1000_DataTables.cpp. */
+extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
 
 /*
  * r500_zdecompress_restore_add_on_packet_struct - UNKNOWN layout beyond

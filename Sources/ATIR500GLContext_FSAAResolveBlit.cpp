@@ -100,14 +100,13 @@
  *      file).
  *
  * Confidence: CONFIRMED for every literal constant and the complete
- * control flow. The FLOAT_0004c37x/74/80 and DOUBLE_0004c3a8/0x3b0
- * constants are real values at fixed kext data addresses this
- * reconstruction pass did not read out of the binary's __literal4/
- * __literal8 sections - declared as `extern` with documented probable
- * roles; a real build must supply their real numeric values (a
- * mechanical, non-hardware task - read them directly from the kext
- * binary's data section at the addresses named in comments) before this
- * file produces numerically correct output. See GAPS.md.
+ * control flow. The `FLOAT_0004c370/374/37c/380` and `DOUBLE_0004c3a8/
+ * 0x3b0` constants' real numeric values - RESOLVED, issue #14 - are now
+ * known exactly (real values `0.0f`/`1.0f`/`6.0f`/`0.5f` and the two
+ * magic-bias doubles respectively; see `Headers/ATIRadeonX1000Registers.h`'s
+ * own declaration comments for the full account, including two real
+ * corrections to this file's own earlier guesses for `FLOAT_0004c374`/
+ * `FLOAT_0004c37c`) and defined in `Sources/ATIRadeonX1000_DataTables.cpp`.
  *
  * VERIFICATION METHOD: no C++ compiler was available in the sandboxed
  * environment this was written in (no internet access to install one,

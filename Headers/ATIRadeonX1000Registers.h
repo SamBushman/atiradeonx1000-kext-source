@@ -189,13 +189,26 @@
  * since both real call sites need them. Values UNKNOWN - not read out of
  * the binary's __literal4/__literal8 sections this pass; see GAPS.md.
  */
-extern "C" const double DOUBLE_0004c3a8; /* kext offset 0x4c3a8 - CONFIRMED role: 2^52, the standard "magic bias" for software int-to-double conversion */
-extern "C" const double DOUBLE_0004c3b0; /* kext offset 0x4c3b0 - CONFIRMED role: a second bias constant, used for one specific operand pair in each real call site - not independently verified whether numerically identical to DOUBLE_0004c3a8 */
-extern "C" const double DOUBLE_0004c3b8; /* kext offset 0x4c3b8 - CONFIRMED real, distinct THIRD constant, found in opcode 0x04's real HyperZ fast-clear trace - used as a real multiplicative scale factor (not a bias subtracted before use, unlike the other two) */
-extern "C" const float  FLOAT_0004c370;  /* kext offset 0x4c370 - role UNKNOWN, used as the zero-case fallback for reciprocal scale factors (plausibly 0.0f or 1.0f) */
-extern "C" const float  FLOAT_0004c374;  /* kext offset 0x4c374 - role UNKNOWN, real numerator in per-axis reciprocal-scale divisions (plausibly a fixed texture-space extent) */
-extern "C" const float  FLOAT_0004c37c;  /* kext offset 0x4c37c - role UNKNOWN, real subpixel/fixed-point scale applied to coordinate DELTAS (plausibly 16.0f for R5xx's 12.4 fixed-point vertex format) */
-extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - role UNKNOWN, real scale applied to coordinate SUMS (plausibly 0.5f for a midpoint, or a texture-space normalization constant) */
+/* RESOLVED (issue #14): all seven real values read directly from the kext
+ * binary's own data section. `DOUBLE_0004c3a8` is exactly 2^52+2^31
+ * (0x4330000080000000) - the magic-bias constant WITH the sign-flip XOR
+ * already folded in, for converting an already-`^0x80000000`'d value
+ * (signed int-to-double). `DOUBLE_0004c3b0` is exactly 2^52
+ * (0x4330000000000000) - the plain bias, for values used WITHOUT the XOR
+ * (unsigned int-to-double) - confirmed numerically DISTINCT from
+ * `DOUBLE_0004c3a8`, resolving the "not independently verified" caveat
+ * below. Both match the literal `4503601774854144.0`/`4503599627370496.0`
+ * constants this project's DVD-context and `resolve_fsaa_buffer`
+ * transcriptions had already independently derived and used inline
+ * elsewhere (`ATIR500DVDContext_ProcessCommandBuffer.cpp`,
+ * `ATIR500Surface_ResolveFSAABuffer.cpp`) - a real cross-confirmation. */
+extern "C" const double DOUBLE_0004c3a8; /* kext offset 0x4c3a8 - CONFIRMED real value 4503601774854144.0 (0x4330000080000000): the "magic bias" for signed (pre-XORed) int-to-double conversion */
+extern "C" const double DOUBLE_0004c3b0; /* kext offset 0x4c3b0 - CONFIRMED real value 4503599627370496.0 (0x4330000000000000): the plain 2^52 bias for unsigned int-to-double conversion - confirmed numerically distinct from DOUBLE_0004c3a8 */
+extern "C" const double DOUBLE_0004c3b8; /* kext offset 0x4c3b8 - CONFIRMED real value 0.5: a real multiplicative scale factor (not a bias subtracted before use, unlike the other two) */
+extern "C" const float  FLOAT_0004c370;  /* kext offset 0x4c370 - CONFIRMED real value 0.0f: the zero-case fallback for reciprocal scale factors, exactly as guessed */
+extern "C" const float  FLOAT_0004c374;  /* kext offset 0x4c374 - CONFIRMED real value 1.0f: a true reciprocal numerator (`1.0f / x`), not a fixed texture-space extent as this project's earlier guess had it - REVISES that guess */
+extern "C" const float  FLOAT_0004c37c;  /* kext offset 0x4c37c - CONFIRMED real value 6.0f - REVISES this project's earlier guess of 16.0f for R5xx 12.4 fixed-point; real role still not independently pinned down beyond "a coordinate-delta scale factor" */
+extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - CONFIRMED real value 0.5f: a real midpoint-averaging scale (`(a+b)*0.5f`), exactly as guessed */
 
 /*
  * _HZDATA / HZMEM_GetBlockOffset - CONFIRMED real, named HiZ memory-
@@ -231,41 +244,51 @@ extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt3
 extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, UInt32 chainFlag, UInt32 tileDim, UInt32 size);
 
 /*
- * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 -
- * INFERRED helper wrapping this project's own naming for two real,
- * confirmed-to-exist binary data tables (`DAT_0004d2dc`/`DAT_0004d2e0` in
- * the raw decompile) indexed by `ATIR500SurfaceBuffer::formatTableIndex * 0x1c`
- * throughout build_scissor, write_kernel_context_buffer_regs, and the
- * opcode 0x37 trace. These are real pixel-FORMAT DESCRIPTOR tables (not
- * code) - their raw bytes were never extracted from the binary into this
- * reconstruction. A real implementation should read them directly out of
- * the kext's __const section at those addresses rather than guess at
- * their content structurally.
+ * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 /
+ * FormatTableLookup_0x0004d2e4 - RESOLVED (issue #14). These are NOT three
+ * independent tables - real structural finding: they're three adjacent
+ * `UInt32` FIELDS (`+0xc`/`+0x10`/`+0x14`) within ONE real, named,
+ * 7-dword/28-byte-stride struct array this project found directly in the
+ * kext's own symbol table: `_ati_format_info_table` (real base address
+ * `0x4d2d0`, NOT `0x4d2dc` - this project's own field-offset-derived
+ * naming for these three accessors predates knowing the real struct
+ * base, hence the "misaligned by 0xc" addresses baked into their names).
+ * Real, disassembly-confirmed EXACTLY 48 entries (indices 0-47) - bounded
+ * with certainty by a real self-index field (`entry[0] == index << 24`)
+ * that increments cleanly for all 48 real entries and then breaks
+ * completely at a 49th slot, which real kext symbols
+ * (`out_fmt`/`rb3d_dst_format`/`texture_type`/`gMetaClass`) immediately
+ * beyond confirm is unrelated data, not a 49th format. Real per-entry
+ * layout (`AtiFormatInfoEntry`, `ATIRadeonX1000Types.h`): self-index,
+ * a constant shared by all 48 entries (`0x00045a14`), a per-format field
+ * no current caller in this project reads, the three fields these
+ * accessors expose, and a second all-48-entries constant (`0xff000000`).
+ * Real content (all 48 entries, all 7 fields) now backs these three
+ * accessors - see `kAtiFormatInfoTable` in
+ * `Sources/ATIRadeonX1000_DataTables.cpp`. Indexing convention unchanged
+ * for every existing call site (`formatTableIndex * 0x1c` still
+ * addresses the right entry's own base; these functions internally
+ * account for the real `0xc` struct-base correction).
  */
 extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
-/* FormatTableLookup_0x0004d2e4 - a THIRD real, confirmed-to-exist format
- * table (`DAT_0004d2e4` in the raw decompile), originally found in what
- * was then believed to be opcode 0x31's real trace
- * (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) - CORRECTED, issue #12
- * item 4: that content is really opcode 0x2d's. This table is genuinely
- * used by BOTH opcodes though - the REAL opcode 0x31
- * (handle_depth_buffer_resolve, Sources/ATIR500GLContext_ProcessCommandBuffer.cpp,
- * found resolving this same issue) independently uses it too, for the
- * SAME real indexing convention (`formatTableIndex * 0x1c`) as the other
- * two tables. Raw table content not extracted from the binary this pass. */
 extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
 
 /*
- * SamplesTableLookup - a FOURTH real, confirmed-to-exist binary data
- * table (`&_samplesTable` in the raw decompile), found this pass (issue
- * #13, ATIR500Surface::resolve_fsaa_buffer). Same real byte-offset
- * indexing convention as the three FormatTableLookup_* tables above
- * (`(tilingDegreeBits >> 0x12) & 0x3c` - confirmed mathematically
- * equivalent to a real 4-byte-stride/16-entry index, `x & 0x3c ==
- * (x & 0xf) << 2`, matching `formatTableIndex * 0x1c`'s own role for the
- * other three tables). Raw table content not extracted from the binary
- * this pass.
+ * SamplesTableLookup - RESOLVED (issue #14). Real table (`_samplesTable`,
+ * kext address `0x4c268`) content now extracted for its whole real used
+ * range (byte offsets `0x00`-`0x3c`, 16 real `UInt32` entries) - see
+ * `kSamplesTable` in `Sources/ATIRadeonX1000_DataTables.cpp`. Real
+ * content: every entry is 0 except index 4 (byte offset `0x10`, value
+ * `2`) and index 6 (byte offset `0x18`, value `3`) - consistent with a
+ * real "raw hardware sample-count field -> normalized 0-3 sample-mode"
+ * remap table where only two raw bit patterns this driver actually emits
+ * map to a non-zero mode. CAUTION found while extracting: a real,
+ * different, unrelated local static also named `samplesTable` exists in
+ * the kext (mangled `ATIR500Surface::load_3d_blit`-local, kext address
+ * `0x4c2f4`) - confirmed NOT the same symbol as this one (`_samplesTable`
+ * at `0x4c268`, the one this project's own `resolve_fsaa_buffer`
+ * transcription actually references) before trusting either.
  */
 extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
 
