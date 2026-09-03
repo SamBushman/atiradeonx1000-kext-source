@@ -20,11 +20,14 @@ exact same opcode set this project's dispatch `switch` now handles (either via a
 one of the two confirmed opcode-range checks, `0x06-0x15` and `0x16-0x25`) - nothing left over on either
 side. Along the way, this pass found this project's ORIGINAL opcode inventory (built earlier from staged
 narrative documents, not a full mechanical sweep) had actually missed FOUR real opcodes entirely -
-`0x2d` (reserved/dead, same shape as the already-known `0x17/0x1a/0x1d/0x20/0x23` gaps), `0x33` (a real
-inline color+Z-buffer register burst), `0x34` (a real query/fence-slot allocator), and `0x35` (another
-render-target generation-stamp opcode) - plus a fifth, `0x32`, that WAS known by number but whose real body
-had never been located (a large depth-flush + per-tile texture-fetch-register-patch function, the closest
-thing in this language to opcode 0x31's own tile loop). All five are now fully transcribed.
+`0x2d` (**CORRECTED, issue #12 item 4**: originally cataloged here as reserved/dead, same shape as the
+`0x17/0x1a/0x1d/0x20/0x23` gaps - it isn't; it's a real, large FSAA-resolve-blit handler, see the opcode
+0x31/0x2d resolution below in this section for the full writeup), `0x33` (a real inline color+Z-buffer register burst), `0x34` (a real
+query/fence-slot allocator), and `0x35` (another render-target generation-stamp opcode) - plus a fifth,
+`0x32`, that WAS known by number but whose real body had never been located (a large depth-flush +
+per-tile texture-fetch-register-patch function, the closest thing in this language to opcode 0x2d's own
+tile loop - also CORRECTED from an earlier "0x31" mislabel, see the opcode 0x31/0x2d resolution below in this section). All five are now fully
+transcribed.
 
 **Major structural corrections this pass** (found while transcribing the remaining opcodes, by finally
 reading the complete raw decompile rather than the excerpts used earlier): this project's model of the
@@ -120,9 +123,11 @@ kept for the record of what was found and corrected along the way:
   (`-0x10000`, used by `0x3e`/`0x43`, alongside the already-known `-1` and `-0xffff`); `0x40` is the one
   variant in this family that does NOT call `restore_state_destroyed_by_pageoff` even when gated on;
   `0x3f` reuses the same format table five times in a real cascading bit-patch sequence into one register
-  slot, the densest single-register patch outside opcode 0x31; `0x40` uses a third, previously-unused
-  format table (`FormatTableLookup_0x0004d2e4`).
-- ~~Opcode `0x41`~~ RESOLVED - fully transcribed, the largest single opcode after 0x31. Real per-color-
+  slot, the densest single-register patch outside opcode 0x2d/0x31 (**CORRECTED, issue #12 item 4**: this
+  cascading idiom turns out to appear at BOTH real opcodes 0x2d and 0x31, not just the one then labeled
+  "0x31" - see the opcode 0x31/0x2d resolution earlier in this section); `0x40` uses a third, previously-unused format table (`FormatTableLookup_0x0004d2e4`).
+- ~~Opcode `0x41`~~ RESOLVED - fully transcribed, the largest single opcode after 0x2d (**CORRECTED, issue
+  #12 item 4**: was "0x31" - see the opcode 0x31/0x2d resolution earlier in this section). Real per-color-
   attachment loop populating the `this+0x3b2` alternate-mode table (the SAME table opcodes
   0x02-0x05/0x28/0x29/0x2a/0x2c read), a separate depth-attachment bind with real HyperZ block auto-
   allocation (`HZMEM_Alloc`, newly declared this pass), and a separate stencil-attachment bind that reuses
@@ -241,38 +246,63 @@ independent of - and does not block - opcode 0x3b's real EXECUTE-path body, whic
 ~~**A real, unnamed virtual method** at vtable offset `+0x5a4`...~~ **RESOLVED (issue #12.1)**: it's
 `ATIR500GLContext::invalidate()` - see section 6 and `Headers/ATIR500GLContext.h`.
 
-**UPGRADED to a confirmed dispatch-table bug** (was "an open tail-integration question" - re-investigated
-this pass with a real Ghidra headless script decompiling `process_command_buffer` and
-`ATIR500Surface::resolve_fsaa_buffer` directly, not narrative excerpts): `ATIR500GLContext_ProcessCommandBuffer.cpp`'s
-dispatch table wires `case 0x31000000` to `ATIR500GLContext_handle_fsaa_resolve_blit` (the content of
-`Sources/ATIR500GLContext_FSAAResolveBlit.cpp`) - but this is wrong on two independently-confirmed counts:
+**RESOLVED (issue #12 item 4)** - was "UPGRADED to a confirmed dispatch-table bug" in an earlier pass of
+this same investigation (that pass found the bug but not the fix - the two paragraphs immediately below
+are that earlier state's own writeup, preserved for the record):
 
-1. **The real opcode 0x31 is NOT that content.** A fresh decompile of `process_command_buffer`'s real
-   `if (uVar34 == 0x31000000)` branch shows a short (~180-line), purely-integer handler that remaps an
-   attachment-type selector, picks a surface/scratch-buffer pair depending on `this+0x3bc`, calls the
-   already-declared `ATIR500Surface::decompress_and_flush_depth_buffer` once or twice, and ends with a
-   completely ordinary `goto LAB_00031340;` - no special tail handling, no divergence from the shared
-   exit check at all. This real opcode 0x31 body has never been transcribed anywhere in this repo.
-2. **`Sources/ATIR500GLContext_FSAAResolveBlit.cpp`'s content is also NOT `ATIR500Surface::resolve_fsaa_buffer`**,
-   despite that being its other working hypothesis (the two share a superficial FSAA theme and a `_g_r500_3d_blit_state_packet`
-   copy, which is what made the misattribution plausible). A fresh, direct decompile of the real
-   `ATIR500Surface::resolve_fsaa_buffer` symbol (kext offset 0x43e60, confirmed via `nm`) is a
-   completely different, shorter (~260-line) function using HyperZ memory helpers
-   (`HZMEM_GetBlockOffset`/`HZMEM_GetBlockCount`) and Surface-relative field offsets (`this+0xb94`,
-   `this+0xb70`, `this+0xd50`) - none of which appear anywhere in `FSAAResolveBlit.cpp`, which instead
-   uses GL-context-relative offsets (`self+0x290`, `self+0xac`, `self+0x3bc`) throughout.
+> `ATIR500GLContext_ProcessCommandBuffer.cpp`'s dispatch table wires `case 0x31000000` to
+> `ATIR500GLContext_handle_fsaa_resolve_blit` (the content of `Sources/ATIR500GLContext_FSAAResolveBlit.cpp`)
+> - but this is wrong on two independently-confirmed counts: (1) the real opcode 0x31 is NOT that content -
+> a fresh decompile of `process_command_buffer`'s real `if (uVar34 == 0x31000000)` branch shows a short
+> (~180-line), purely-integer handler ending with a completely ordinary `goto LAB_00031340;`, nothing like
+> `FSAAResolveBlit.cpp`'s ~500 lines; (2) `FSAAResolveBlit.cpp`'s content is also NOT
+> `ATIR500Surface::resolve_fsaa_buffer` (opcode 0x30's real callee, the other working hypothesis) - a fresh
+> decompile of that real symbol (kext offset 0x43e60) is a completely different, Surface-relative-offset
+> function. What `FSAAResolveBlit.cpp` actually contains was, at that point, genuinely unidentified.
 
-**What `FSAAResolveBlit.cpp`'s ~500 lines of careful, real, internally-consistent transcription actually
-describes is still genuinely unidentified** - it is real code from somewhere in this kext (too specific
-and internally consistent to be fabricated), just not either of the two functions it's currently
-associated with. Deliberately not guessing a third attribution here after getting the first two wrong;
-this needs a fresh, systematic search (e.g. grep the full binary's decompiled functions for the
-`_g_r500_3d_blit_state_packet` + floating-point-NDC-sort combination, or for the specific literal
-constants `0x1150`/`0x1120`/`0xc0033500` this file's second per-tile loop writes) rather than more
-pattern-matching from narrative excerpts. Until resolved: `resolve_fsaa_buffer` is genuinely
-UNKNOWN/opaque again (its header comment already correctly says so), the real opcode 0x31 needs fresh
-transcription from scratch, and `case 0x31000000` in the dispatch table is calling code that doesn't
-belong there - a real, live bug in the current source tree, not just a documentation gap.
+**The fix, found this pass**: `FSAAResolveBlit.cpp`'s own header comments cite the specific helper call its
+content makes - `FUN_000314c4(puVar65, &_g_r500_3d_blit_state_packet, 0x2f4)`. Grepping a fresh, complete
+`process_command_buffer` decompile for that exact call surfaced its real location: the `else` branch of a
+real `if (uVar34 != 0x2d000000) { ...0x2b/0x2c/0x2f/0x30 handling...; goto LAB_00031340; }` exclusion check
+further down the function. **`FSAAResolveBlit.cpp`'s content is opcode 0x2d's real handler**, not 0x31's -
+confirmed unambiguous by grepping the whole ~3300-line decompile for `0x2d000000`, which appears exactly
+once (this one branch). This also retroactively corrects section 2's earlier catalog entry, which had
+listed `0x2d` as "reserved/dead, same shape as 0x17/0x1a/0x1d/0x20/0x23" - it isn't; that earlier check
+(`0x2d`'s own exclusion-check search) missed that the real branch is an inverted `!=` condition's `else`,
+not a `case`/`==` match, which is why the earlier sweep didn't find it.
+
+With `FSAAResolveBlit.cpp`'s true identity settled, **the real opcode 0x31 was transcribed fresh** from the
+actual `if (uVar34 == 0x31000000)` branch, exactly matching the ~180-line purely-integer shape the earlier
+pass had already characterized: a real attachment-index remap (`{7,10}->7`, `{8,11}->8`, else `6`, gated by
+a `self+0x8c & 0x80` capability bit), a real surface/scratch-buffer pair selection depending on
+`self+0x3bc` (normal vs. alternate mode, the same two-mode pattern used throughout this class), one or two
+calls to the already-declared `ATIR500Surface::decompress_and_flush_depth_buffer`, then a real per-mip/tile
+register-burst write for both surface records (reusing `FormatTableLookup_0x0004d2e0`/`_0x0004d2dc`/`_0x0004d2e4`,
+including the SAME 5-step cascading-mask idiom already found in opcode 0x3f - now confirmed to appear at
+three real sites, not two), and a real per-tile texture-offset patch loop with the same self-referential
+read-before-write pattern (`slot[1]` read as an operand in the same statement that overwrites it) already
+flagged in `FSAAResolveBlit.cpp`. Ends in a completely ordinary fall-through - confirms the earlier pass's
+finding that the REAL opcode 0x31 has no special tail handling, unlike opcode 0x2d (see below).
+
+**Both fixed in the source tree**: `ATIR500GLContext_ProcessCommandBuffer.cpp` now has
+`case 0x2d000000: next = ATIR500GLContext_handle_fsaa_resolve_blit(this, record); break;` (removed from the
+reserved-noop group) and `case 0x31000000: next = handle_depth_buffer_resolve(this, record); break;` (the
+new, real handler, defined in that same file). `FSAAResolveBlit.cpp`'s header comment is updated to the
+correct opcode 0x2d identity; its content, transcription, and open tail-integration question (below) are
+otherwise unchanged - they were already correct, just filed under the wrong opcode number.
+
+**One open item survives the re-attribution, now correctly pointed at 0x2d instead of 0x31**: opcode 0x2d's
+handler returns `local_d0`, an explicitly-computed pointer distinct from `record` (its real tile loop
+consumes a data-dependent dword count the header's encoded distance field can't represent generically).
+The dispatch loop's `if (next != record)` branch advances straight to `local_d0` but does NOT run the
+tail's real exit-descriptor-write/status-return check in that case, whereas the real decompile shows this
+opcode's ending DOES fall into that same shared check. Whether that matters in practice depends on whether
+`local_d0` can ever coincide with a real "buffer now fully consumed" position - NOT independently confirmed
+either way; a genuine, still-open question, now correctly scoped to opcode 0x2d only (the real opcode 0x31
+was independently confirmed this pass to have no such exception).
+
+`ATIR500Surface::resolve_fsaa_buffer` remains genuinely UNKNOWN/opaque (its header comment already
+correctly says so, and nothing this pass found bears on it).
 
 ## 5. `IOATIR500Accelerator`'s four context-factory vtable slots - NAMES RESOLVED, raw values still open
 
@@ -451,9 +481,11 @@ neighborhood.
 
 **Real, high-value finding this pass**: opcode 0x12's own real body spans roughly 750+ lines of raw
 decompile (loop-based, multiple fixed-size local arrays, dense per-plane geometry math) - comparable in
-scale to GL's own opcode 0x31, which this project's history (section 2 above) explicitly flagged as "the
-single largest remaining gap" in the entire GL reconstruction. NOT attempted this pass; needs its own
-dedicated pass, not a continuation of this session's per-opcode cadence.
+scale to GL's own opcode 0x2d, which this project's history (section 2 above) explicitly flagged as "the
+single largest remaining gap" in the entire GL reconstruction (**CORRECTED, issue #12 item 4**: was
+"0x31" at the time this note was written; see the opcode 0x31/0x2d resolution in section 2 above - the real GL opcode 0x31
+is much smaller and is now fully transcribed). NOT attempted this pass; needs its own dedicated pass, not
+a continuation of this session's per-opcode cadence.
 
 Still open: ~18 real opcodes (0x12 [very large, see above], 0x14-0x18, 0x31, 0x35, 0x3d-0x3f, 0x42-0x44,
 0x46-0x47) - the rest are dense per-mip YUV/tiling math comparable in density to GL's own richest opcodes

@@ -294,7 +294,7 @@ protected:
     void   *secondaryTextureSlotA; /* +0x338, CONFIRMED to exist as a distinct per-unit slot field (opcode 0x3b family), role beyond that UNKNOWN */
     void   *secondaryTextureSlotB; /* +0x348, CONFIRMED to exist (opcode 0x3f family), same caveat as above */
     UInt16  attachmentCount;       /* +0x3a8, CONFIRMED: real count tracked by opcode 0x29's render-target/vertex-format attachment enumeration */
-    UInt16  someUnitIndex;         /* +0x35c, CONFIRMED referenced in opcode 0x31's two-surface (main + FSAA-resolve) mip computation */
+    UInt16  someUnitIndex;         /* +0x35c, CONFIRMED referenced in opcode 0x2d's two-surface (main + FSAA-resolve) mip computation (CORRECTED, issue #12 item 4 - previously misattributed to opcode 0x31) */
     UInt16  altUnitSelector;       /* +0x3b2, CONFIRMED referenced alongside +0x3aa in the per-context texture-unit array init in start() */
     UInt16  altUnitFormat;         /* +0x3aa, CONFIRMED, same init call as altUnitSelector */
     void   *perUnitTextureArray;   /* +0x3f0, stride 0x78, 6 real entries, CONFIRMED initialized in start() with real default blend/format bits */

@@ -67,7 +67,10 @@ public:
      * for the handler functions and GAPS.md for the full opcode-by-
      * opcode status, including a real correction (DVD has no opcode
      * 0x11 at all) and a flagged large remaining item (opcode 0x12,
-     * comparable in scale to GL's own single-largest gap, opcode 0x31).
+     * comparable in scale to GL's own single-largest gap, opcode 0x2d -
+     * CORRECTED, issue #12 item 4: that GL content was misattributed to
+     * "opcode 0x31" when this note was written; the real GL opcode 0x31
+     * is much smaller and is now fully transcribed).
      * The remaining ~18 real opcodes are NOT yet transcribed, so this
      * method itself is not yet declared/wired -
      * the handlers exist as free functions a future completed

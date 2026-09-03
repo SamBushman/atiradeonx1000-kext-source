@@ -152,7 +152,9 @@ static UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, P
  * (`surfaceRecord+0x28 == 0x3ff00000`-ish bit pattern) to choose between
  * a trivial fast-clear header and a real, dense HZMEM-block-offset-
  * driven partial-clear burst (real float math for the partial case, via
- * the same "magic bias" trick as opcode 0x31). Ends with a real call to
+ * the same "magic bias" trick as opcode 0x2d - CORRECTED, issue #12 item
+ * 4: this trick appears in the real FSAA-resolve-blit content, not the
+ * real integer-only opcode 0x31). Ends with a real call to
  * invalidate() (RESOLVED issue #12.1 - the real name of vtable+0x5a4,
  * the same slot opcode 0x2f's HyperZ commit handler also calls - see
  * Headers/ATIR500GLContext.h).
@@ -217,7 +219,8 @@ static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *rec
             UInt32 iStack_1b4 = uVar15 + uVar38c;
             record[uVar55 + 1] = (static_cast<UInt32>(iVar48 * (uVar15 - uVar38c)) >> 1) | (record[uVar55 + 1] & 0xffff0000u);
             /* real: `(float)((double)CONCAT44(0x43300000,iStack_1b4) - DOUBLE_0004c3b0) * dVar31` -
-             * the SAME magic-bias trick as opcode 0x31, unsigned this time (no XOR 0x80000000). */
+             * the SAME magic-bias trick as opcode 0x2d (CORRECTED, issue
+             * #12 item 4), unsigned this time (no XOR 0x80000000). */
             union { double d; struct { UInt32 hi, lo; } parts; } u;
             u.parts.hi = 0x43300000; u.parts.lo = iStack_1b4;
             float biased = static_cast<float>(u.d - DOUBLE_0004c3b0);
@@ -393,17 +396,22 @@ static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 o
 }
 
 /*
- * Opcodes 0x17, 0x1a, 0x1d, 0x20, 0x23, and (found this pass) 0x2d:
- * CONFIRMED dead/reserved in this exact kext build. The dispatch code
- * excludes them from their respective neighboring real handlers with a
- * dedicated `!= 0x1d000000`-style check each, implying the original author
- * intended distinct handling - but no corresponding body exists anywhere
- * in the real decompiled function for an exact match on any of these six
- * values (0x2d's own exclusion check - `if (uVar38 != 0x2d000000) {...}` -
- * has no matching `== 0x2d000000` branch anywhere in the whole function).
- * Modeled here as true no-ops, matching the real observed behavior exactly
- * (not a placeholder for missing analysis - this IS what the real kext
- * does).
+ * Opcodes 0x17, 0x1a, 0x1d, 0x20, and 0x23: CONFIRMED dead/reserved in
+ * this exact kext build. The dispatch code excludes them from their
+ * respective neighboring real handlers with a dedicated
+ * `!= 0x1d000000`-style check each, implying the original author intended
+ * distinct handling - but no corresponding body exists anywhere in the
+ * real decompiled function for an exact match on any of these five
+ * values. Modeled here as true no-ops, matching the real observed
+ * behavior exactly (not a placeholder for missing analysis - this IS
+ * what the real kext does).
+ *
+ * CORRECTED, issue #12 item 4: 0x2d was wrongly included in this group in
+ * an earlier pass, on the mistaken belief that its own `!= 0x2d000000`
+ * exclusion check had no matching real branch either. It does - see
+ * `case 0x2d000000` in the dispatch switch below, and the header comment
+ * on `handle_depth_buffer_resolve` above (opcode 0x31, the OTHER opcode
+ * this same investigation resolved) for the full story.
  */
 static UInt32 *handle_reserved_noop(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
     (void)ctx; (void)opcode;
@@ -1151,21 +1159,216 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
 }
 
 /*
- * Opcode 0x31: **KNOWN BUG, see issue #12 / GAPS.md section 2** - this is
- * NOT actually opcode 0x31's real handler. A fresh Ghidra re-decompile
- * (this pass) shows the real `if (uVar34 == 0x31000000)` branch in
- * process_command_buffer is a short, purely-integer handler calling
- * `ATIR500Surface::decompress_and_flush_depth_buffer` once or twice and
- * ending in a completely ordinary `goto LAB_00031340;` - nothing like the
- * ~500-line floating-point/tile-blit content actually in
- * Sources/ATIR500GLContext_FSAAResolveBlit.cpp below. That file's content
- * was ALSO confirmed NOT to be `ATIR500Surface::resolve_fsaa_buffer`
- * (opcode 0x30's real callee) via a direct decompile of that real symbol -
- * so what this file actually contains is genuinely unidentified for now.
- * Real opcode 0x31 has never been transcribed; this dispatch entry is
- * calling the wrong code until that's fixed. Do not trust this case at
- * runtime.
+ * Opcode 0x31: RESOLVED, issue #12 item 4. This project's earlier content
+ * at this dispatch entry (ATIR500GLContext_handle_fsaa_resolve_blit,
+ * defined in Sources/ATIR500GLContext_FSAAResolveBlit.cpp) is a real,
+ * careful transcription of a genuine kext function - just not this one.
+ * A fresh Ghidra re-decompile traced the exact
+ * `FUN_000314c4(...,&_g_r500_3d_blit_state_packet,0x2f4)` call that
+ * file's own header comments cite back to its TRUE location: the `else`
+ * branch of a `uVar34 != 0x2d000000` exclusion check further down in this
+ * same function - i.e. that ~500-line floating-point/tile-blit content is
+ * opcode 0x2d's real handler (see the newly-added `case 0x2d000000` below),
+ * not 0x31's. `0x2d000000` appears exactly once in the whole decompile, so
+ * there's no remaining ambiguity.
+ *
+ * This function below is opcode 0x31's real, separate, much shorter
+ * handler - a purely-integer attachment-index remap into a real
+ * depth/HyperZ resolve via ATIR500Surface::decompress_and_flush_depth_buffer
+ * (called once, or twice when a paired attachment also needs flushing),
+ * followed by a real per-mip/tile register-burst write for two surface
+ * records using the SAME FormatTableLookup_0x0004d2e0/_0x0004d2dc/_0x0004d2e4
+ * tables opcode 0x28/0x2a and this dispatch entry's former (misattributed)
+ * occupant also use. Ends in a completely ordinary fall-through - no
+ * `local_d0`-style explicit next-record pointer, unlike 0x2d - which
+ * answers this project's long-open "tail-integration question" for the
+ * REAL opcode 0x31 with a clean NO: this opcode always uses the shared
+ * generic distance-based advance, same as every other opcode in this
+ * switch except 0x2d (see GAPS.md section 2 for the full resolution
+ * writeup, including why the earlier misattribution happened).
  */
+static UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
+    UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
+
+    UInt32 distance = record[1];       /* real: uVar69 */
+    UInt32 attachSel = record[2];      /* real: uVar34, pre-remap */
+    SInt32 tileCount = static_cast<SInt32>(record[3]); /* real: uVar51 */
+
+    /* real attachment-enum remap: {7,10}->7, {8,11}->8, else->6 - same
+     * general shape as opcode 0x2a's/convertIOGLBufferToBufIdx's switches,
+     * a distinct mapping table though - not the same values. */
+    UInt32 attachIdx;
+    switch (attachSel) {
+        case 7:
+        case 10: attachIdx = 7; break;
+        case 8:
+        case 0xb: attachIdx = 8; break;
+        default: attachIdx = 6; break;
+    }
+    /* real capability gate: this class's `self+0x8c & 0x80` bit - the SAME
+     * raw-offset gate used in IOATIR500GLContext::start's body (see the
+     * style reference a few hundred lines up) and in
+     * ATIR500GLContext_DiscardBuffer.cpp - no established symbolic name
+     * for this flag yet. */
+    if ((U32At(self, 0x8c) & 0x80) == 0) {
+        attachIdx = 6;
+    }
+
+    void *pAVar39 = reinterpret_cast<void *>(U32At(self, 0x290)); /* real: boundSurface */
+    ATIR500SurfaceBuffer *pAVar41; /* real: primary mip/attachment record */
+    ATIR500SurfaceBuffer *pAVar72; /* real: paired unit's mip record */
+    if (U32At(self, 0x3bc) == 0) {
+        pAVar41 = reinterpret_cast<ATIR500SurfaceBuffer *>(U32At(pAVar39, attachIdx * 4 + 0xb70));
+        pAVar72 = reinterpret_cast<ATIR500SurfaceBuffer *>(reinterpret_cast<UInt8 *>(pAVar39) + U16At(self, 0xae) * 0x78 + 0xa8);
+    } else {
+        pAVar41 = reinterpret_cast<ATIR500SurfaceBuffer *>(self + 0x5a0);
+        pAVar72 = reinterpret_cast<ATIR500SurfaceBuffer *>(self + U16At(self, 0x3b2) * 0x78 + 0x3c0);
+    }
+
+    IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(pAVar39);
+    UInt32 flushResult = surface->decompress_and_flush_depth_buffer(pAVar41, 0, record);
+
+    if (U32At(self, 0x3bc) == 0 && attachIdx != U16At(self, 0xae) && U8At(pAVar72, 0x34) != 0) {
+        flushResult = surface->decompress_and_flush_depth_buffer(pAVar72, flushResult, record);
+    }
+    U8At(pAVar72, 0x35) = 0;
+    U8At(pAVar72, 0x34) = 0;
+
+    if (flushResult < distance) {
+        UInt32 pad = 0x80000000u;
+        if (distance - flushResult != 1) {
+            pad = (((distance - flushResult) - 2) * 0x10000u) | 0xc0001000u;
+        }
+        record[flushResult] = pad;
+    }
+
+    /* ---- real per-mip register burst for pAVar72 (the paired unit) ---- */
+    UInt32 fmtIdxA = U8At(pAVar72, 0x3a);
+    UInt32 tableOffA = fmtIdxA * 0x1c;
+    record[distance + 0x9a] = (U16At(pAVar72, 0x20) * U32At(pAVar72, 0x40) + U32At(pAVar72, 8)) & 0xffffffe0u;
+
+    UInt32 mipCountA = 0;
+    if ((U32At(pAVar72, 0x3c) & 0xf00000u) != 0) {
+        mipCountA = U16At(pAVar72, 0x14) / ((U32At(pAVar72, 0x3c) >> 0x14) & 0xf);
+    }
+    UInt32 minTileA = 0x20 / U16At(pAVar72, 0x16);
+    UInt32 tileValA = (minTileA <= mipCountA) ? mipCountA : minTileA;
+
+    record[distance + 0x9c] = (tileValA & 0x3ffe) | ((U8At(pAVar72, 0x38) & 1u) << 0x10) | ((U8At(pAVar72, 0x38) & 6u) << 0x10) |
+        ((U8At(pAVar72, 0x39) & 3u) << 0x13) | ((FormatTableLookup_0x0004d2e0(tableOffA) >> 1) & 0x1e00000u);
+
+    /* real: 5-step progressive register-burst, each step re-lists every
+     * previously-computed field bit alongside a strictly narrower mask on
+     * the record slot's ORIGINAL pre-existing value - preserved literally
+     * (not simplified to accumulate-and-mask) since the masks clear each
+     * field's own bit range too, which would silently drop earlier fields
+     * under naive accumulation. */
+    UInt32 burst = record[distance + 0x8a];
+    UInt32 f0 = (FormatTableLookup_0x0004d2e0(tableOffA) >> 0x11) & 0x1f;
+    burst = f0 | (burst & 0xffffffe0u);
+    record[distance + 0x8a] = burst;
+    UInt32 f1 = (FormatTableLookup_0x0004d2e0(tableOffA) >> 7) & 0x300;
+    burst = f1 | f0 | (burst & 0xfffffce0u);
+    record[distance + 0x8a] = burst;
+    UInt32 f2 = (FormatTableLookup_0x0004d2e0(tableOffA) >> 3) & 0xc00;
+    burst = f2 | f1 | f0 | (burst & 0xfffff0e0u);
+    record[distance + 0x8a] = burst;
+    UInt32 f3 = (FormatTableLookup_0x0004d2e0(tableOffA) & 0x1800) << 1;
+    burst = f3 | f2 | f1 | f0 | (burst & 0xffffc0e0u);
+    record[distance + 0x8a] = burst;
+    record[distance + 0x8a] = ((FormatTableLookup_0x0004d2e0(tableOffA) & 0x600) << 5) | f3 | f2 | f1 | f0 | (burst & 0xffff00e0u);
+
+    UInt32 mipIdxA;
+    if ((U32At(pAVar72, 0x3c) & 0xf00000u) == 0) {
+        mipIdxA = 0;
+    } else {
+        UInt32 div = U16At(pAVar72, 0x1c) / ((U32At(pAVar72, 0x3c) >> 0x14) & 0xf);
+        mipIdxA = (div == 0) ? 0 : div - 1;
+    }
+    UInt32 mipIdxA2 = (U16At(pAVar72, 0x1e) != 0) ? (U16At(pAVar72, 0x1e) - 1u) : 0;
+    record[distance + 0xb3] = (mipIdxA & 0x1fff) | ((mipIdxA2 & 0x1fff) << 0xd);
+
+    /* ---- real per-mip register burst for pAVar41 (the primary unit) ---- */
+    UInt32 fmtIdxB = U8At(pAVar41, 0x3a);
+    UInt32 tableOffB = fmtIdxB * 0x1c;
+    UInt32 mipStride = U32At(pAVar41, 0x40);
+    UInt16 mipDim = U16At(pAVar41, 0x20);
+    UInt8 fmtFlagsB = U8At(pAVar41, 0x38);
+    UInt32 mipBase = U32At(pAVar41, 8);
+
+    record[distance + 0xa0] = ((fmtFlagsB & 7u) << 2) | ((mipDim * mipStride + mipBase) & 0xffffffe0u);
+
+    UInt32 mipIdxB;
+    if ((U32At(pAVar41, 0x3c) & 0xf00000u) == 0) {
+        mipIdxB = 0;
+    } else {
+        UInt32 div = U16At(pAVar41, 0x1c) / ((U32At(pAVar41, 0x3c) >> 0x14) & 0xf);
+        mipIdxB = (div == 0) ? 0 : div - 1;
+    }
+    UInt32 mipIdxB2 = (U16At(pAVar41, 0x1e) != 0) ? (U16At(pAVar41, 0x1e) - 1u) : 0;
+    record[distance + 0xa6] = (mipIdxB & 0x7ff) | ((mipIdxB2 & 0x7ff) << 0xb) | 0x80000000u;
+
+    UInt32 fmtValE4 = FormatTableLookup_0x0004d2e4(tableOffB);
+    record[distance + 0xa8] = ((fmtValE4 >> 0x13) & 0x1f) | ((fmtValE4 & 0x40) << 0x10) | ((fmtValE4 >> 7) & 0xe00) |
+        ((fmtValE4 >> 1) & 0x7000) | ((fmtValE4 & 0x1c00) << 5) | ((fmtValE4 & 0x380) << 0xb);
+
+    /* real: SAME "clamp to at-least 0x20/stride" tile-count formula as
+     * pAVar72's tileValA above, re-derived from pAVar41's own fields (the
+     * decompile recomputes this a THIRD time later, purely as a decompiler
+     * SSA artifact of the intervening record[0xb]/AVar12 writes below -
+     * numerically identical each time since none of pAVar41's fields
+     * change in between, so this project computes it once and reuses it
+     * rather than transcribing three syntactically-separate but
+     * mathematically-identical copies). */
+    bool noMipsB = (U32At(pAVar41, 0x3c) & 0xf00000u) == 0;
+    UInt32 mipCountB = noMipsB ? 0 : (U16At(pAVar41, 0x14) / ((U32At(pAVar41, 0x3c) >> 0x14) & 0xf));
+    UInt32 minTileB = 0x20 / U16At(pAVar41, 0x16);
+    UInt32 tileValB = (minTileB <= mipCountB) ? mipCountB : minTileB;
+
+    UInt32 mipIdxC;
+    if (noMipsB) {
+        mipIdxC = 0;
+    } else {
+        UInt32 div = U16At(pAVar41, 0x1c) / ((U32At(pAVar41, 0x3c) >> 0x14) & 0xf);
+        mipIdxC = (div == 0) ? 0 : div - 1;
+    }
+    UInt32 mipIdxC2 = (U16At(pAVar41, 0x1e) != 0) ? (U16At(pAVar41, 0x1e) - 1u) : 0;
+    record[distance + 0xaa] = ((tileValB - 1u) & 0x3fff) | ((mipIdxC & 0x800) << 4) | ((mipIdxC2 & 0x800) << 5);
+
+    record[distance + 0xb] = U32At(accel, 0xb74);
+
+    /* ---- real per-tile texture-offset patch loop, tileCount from record[3] ----
+     * real: `puVar65[1]` (here `slot[1]`) is read as an operand in the same
+     * statement that overwrites it - a real, easy-to-miss self-referential
+     * pattern, the SAME kind this project already flagged in opcode 0x2d's
+     * handler (see ATIR500GLContext_FSAAResolveBlit.cpp) - preserved here,
+     * not a transcription error. */
+    if (tileCount > 0) {
+        UInt32 *slot = record + distance + 0xbd;
+        do {
+            UInt32 tableValDC = FormatTableLookup_0x0004d2dc(tableOffB);
+            SInt32 rowShift = static_cast<SInt32>((tableValDC >> 0xc) & 7);
+            SInt32 rowBias = ((fmtFlagsB >> 1) == 0) ? 0 : -static_cast<SInt32>((tableValDC >> 8) & 3);
+            SInt32 rowOff = static_cast<SInt32>(*slot) >> (((rowBias - rowShift) + 5) & 0x3f);
+            rowOff = ((fmtFlagsB & 1) == 0) ? (rowOff << 5) : ((rowOff << 0xc) >> 3);
+
+            *slot = 0x1150;
+            slot[1] = ((mipDim * mipStride + mipBase + rowOff + ((tileValB * slot[1]) << rowShift)) & 0xffffffe0u) |
+                      (((fmtFlagsB >> 1) & 3u) << 3) | ((fmtFlagsB & 1u) << 2);
+            UInt32 prevSize = slot[2];
+            UInt32 aReg = record[distance + 0xa6];
+            slot[2] = 0x1120;
+            slot[3] = (((slot[3] - 1) * 0x800u) & 0x3ff800u) | ((prevSize - 1u) & 0x7ffu) | (aReg & 0xffc00000u);
+
+            slot += 0x10;
+            tileCount--;
+        } while (tileCount != 0);
+    }
+
+    return record; /* real: falls through to the shared generic distance-based advance - unlike 0x2d, this opcode does NOT return an explicit local_d0 */
+}
+
 extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record);
 
 /*
@@ -1931,7 +2134,14 @@ static UInt32 *handle_rt0_texture_commit(ATIR500GLContext *ctx, UInt32 *record, 
  * more field extracted from the same table entry into the SAME embedded
  * slot `puVar65[0x8e]`, progressively narrowing which of the previous
  * write's bits survive via the mask operand) - the densest single-register
- * patch sequence this project has found outside opcode 0x31. Falls into
+ * patch sequence this project has found outside opcode 0x2d (CORRECTED,
+ * issue #12 item 4 - this comment originally said "0x31," from before
+ * that content's real identity was resolved; the SAME cascading formula
+ * also independently appears in the REAL opcode 0x31,
+ * handle_depth_buffer_resolve, at its own `record[distance+0x8a]` slot -
+ * apparently a shared bit-packing formula the real driver reuses at
+ * multiple opcodes for the same kind of tiling/format register, not a
+ * transcription accident on this project's part). Falls into
  * the SAME `LAB_00030964` shared cleanup tail as opcode 0x40 (a real `-1`
  * magnitude decrement this time, unlike 0x3e/0x43's `-0x10000`).
  */
@@ -2277,7 +2487,15 @@ static UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt
  * mechanism, called directly here) with a real per-tile texture-fetch
  * register-patch loop (16-dword-stride tile records, real format-table-
  * driven shift math) - structurally the closest thing in this whole
- * opcode language to opcode 0x31's own tile loop, after 0x31 itself.
+ * opcode language to opcode 0x2d's own tile loop (CORRECTED, issue #12
+ * item 4 - this comment originally said "0x31," from before that
+ * content's real identity was resolved). Notably, the REAL opcode 0x31
+ * (handle_depth_buffer_resolve, found resolving this same issue) turns
+ * out to have an equally close 16-dword-stride, format-table-driven tile
+ * loop of its own - so this structural family may be three-wide (0x2d,
+ * 0x31, 0x32), not the two originally thought (0x2d/0x31 conflated as
+ * one, plus 0x32) - not independently re-verified against 0x2d's exact
+ * loop shape this pass, noted here rather than left silently stale.
  *
  * Real, structurally unique detail found here: this opcode's OWN record
  * header is NOT at `record` itself - it is `record - record[2]` dwords
@@ -3149,7 +3367,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x03000000: next = handle_set_return_code_2(this, record, state); break;
             case 0x04000000: next = handle_hyperz_fast_clear_setup(this, record); break;
             case 0x05000000: next = handle_hyperz_zpass_setup(this, record); break;
-            case 0x17000000: case 0x1a000000: case 0x1d000000: case 0x20000000: case 0x23000000: case 0x2d000000:
+            case 0x17000000: case 0x1a000000: case 0x1d000000: case 0x20000000: case 0x23000000:
                 next = handle_reserved_noop(this, opcode, record); break;
             case 0x26000000: next = handle_bind_transfer_buffer(this, record, state); break;
             case 0x27000000: next = handle_unbind_transfer_buffer(this, record); break;
@@ -3158,9 +3376,15 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
             case 0x2a000000: next = handle_rendertarget_pair_scissor(this, record); break;
             case 0x2b000000: next = handle_explicit_flush(this, record, state); break;
             case 0x2c000000: next = handle_mip_scissor_intersect(this, record); break;
+            /* RESOLVED, issue #12 item 4: this dispatch entry previously
+             * had NO case for 0x2d000000 at all (it fell into the
+             * reserved-noop group above by mistake) while 0x31000000
+             * wrongly called this same real handler instead. See
+             * handle_depth_buffer_resolve's header comment above. */
+            case 0x2d000000: next = ATIR500GLContext_handle_fsaa_resolve_blit(this, record); break;
             case 0x2f000000: next = handle_hyperz_commit(this, record); break;
             case 0x30000000: next = handle_fsaa_resolve_setup(this, record); break;
-            case 0x31000000: next = ATIR500GLContext_handle_fsaa_resolve_blit(this, record); break;
+            case 0x31000000: next = handle_depth_buffer_resolve(this, record); break;
             case 0x35000000: next = handle_rt0_generation_stamp(this, record); break;
             case 0x36000000: next = handle_transfer_buffer_bind_and_fixup(this, record); break;
             case 0x37000000: next = handle_deferred_offset_patch(this, record); break;

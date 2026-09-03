@@ -1,39 +1,54 @@
 /*
  * ATIR500GLContext_FSAAResolveBlit.cpp
  *
- * **KNOWN MISATTRIBUTION, see issue #12 / GAPS.md section 2** (found via a
- * fresh Ghidra re-decompile pass): this file is titled/labeled "opcode
- * 0x31," but a direct decompile of process_command_buffer's real
- * `if (uVar34 == 0x31000000)` branch is short, purely integer, and calls
+ * **RESOLVED, issue #12 item 4** (previously an open "KNOWN
+ * MISATTRIBUTION" - see GAPS.md section 2 for the full history): this
+ * file was originally titled/labeled "opcode 0x31," but a direct
+ * decompile of process_command_buffer's real `if (uVar34 == 0x31000000)`
+ * branch is short, purely integer, and calls
  * `ATIR500Surface::decompress_and_flush_depth_buffer` - nothing like the
- * content below. This file's content was ALSO checked directly against
- * the real `ATIR500Surface::resolve_fsaa_buffer` symbol (the other
- * working hypothesis, since opcode 0x30 really does call that function) -
- * also does not match; that real function uses HyperZ memory helpers and
+ * content below (that real opcode 0x31 handler is now transcribed as
+ * `handle_depth_buffer_resolve` in ATIR500GLContext_ProcessCommandBuffer.cpp).
+ * This file's content was ALSO checked directly against the real
+ * `ATIR500Surface::resolve_fsaa_buffer` symbol (an earlier working
+ * hypothesis, since opcode 0x30 really does call that function) - does
+ * not match either; that real function uses HyperZ memory helpers and
  * Surface-relative offsets (`this+0xb94` etc.), not the GL-context
  * offsets (`self+0x290` etc.) this file uses throughout.
  *
+ * TRUE IDENTITY, found by tracing this file's own cited
+ * `FUN_000314c4(...,&_g_r500_3d_blit_state_packet,0x2f4)` call back to its
+ * real location in a fresh process_command_buffer decompile: this is
+ * opcode **0x2d**'s real handler - the `else` branch of a real
+ * `if (uVar34 != 0x2d000000) { ...0x2b/0x2c/0x2f/0x30 handling...; goto
+ * LAB_00031340; }` exclusion check. `0x2d000000` appears exactly once in
+ * the whole ~3300-line decompile, so there's no remaining ambiguity. The
+ * dispatch table previously had opcode 0x2d wrongly grouped into the
+ * dead/reserved no-op family (see ATIR500GLContext_ProcessCommandBuffer.cpp's
+ * `handle_reserved_noop` comment) while 0x31000000 wrongly called this
+ * function instead - both now fixed: `case 0x2d000000` calls this
+ * function, `case 0x31000000` calls the real, newly-transcribed
+ * `handle_depth_buffer_resolve`.
+ *
  * The content below is real, careful, internally-consistent transcription
- * of SOME real function in this kext - just not either function it's
- * currently wired to/named after. Left in place rather than deleted,
- * since the work itself still has value once its true identity is found,
- * but **do not trust the `case 0x31000000` dispatch wiring or the
- * `resolve_fsaa_buffer` identification** until this is resolved. See
- * GAPS.md for what's been ruled out and suggested next steps.
+ * of opcode 0x2d - correctly identified now, previously wired to the
+ * wrong dispatch entry. Every "opcode 0x31" reference in the methodology
+ * notes below is now known to mean opcode 0x2d; left as originally
+ * written (not renumbered throughout) since the transcription methodology
+ * itself is unaffected by which opcode number it turned out to be.
  *
- * Original header follows, describing this content AS IF it were opcode
- * 0x31 - kept for the transcription methodology notes, which remain
- * accurate regardless of the misattribution:
+ * Original header follows, describing this content as opcode 0x31 - now
+ * known to be opcode 0x2d instead, see above:
  *
- * Opcode 0x31 - the full, real state-restore-and-resolve blit. CONFIRMED,
- * transcribed literally from the complete real decompile (kext offset
- * range covering the tail of process_command_buffer's dispatch chain -
- * this is the LAST opcode handled before the function's shared exit
- * tail). Source re-read in full, twice, for this transcription (an
- * earlier attempt at this file contained a fabricated placeholder
- * function call and an unwired loop-trip-count variable - both real
- * mistakes, caught on review and fixed by re-reading the source and
- * rewriting this file from scratch).
+ * Opcode 0x2d (originally mislabeled 0x31) - the full, real
+ * state-restore-and-resolve blit. CONFIRMED, transcribed literally from
+ * the complete real decompile (kext offset range covering the tail of
+ * process_command_buffer's dispatch chain - this is the LAST opcode
+ * handled before the function's shared exit tail). Source re-read in
+ * full, twice, for this transcription (an earlier attempt at this file
+ * contained a fabricated placeholder function call and an unwired
+ * loop-trip-count variable - both real mistakes, caught on review and
+ * fixed by re-reading the source and rewriting this file from scratch).
  *
  * TRANSCRIPTION METHOD, stated explicitly because it matters for
  * checkability: this file uses the EXACT SAME flat variable names as the
@@ -564,19 +579,27 @@ UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 
      * that returns `record` unchanged (this file's established "use the
      * generic distance-based advance" signal).
      *
-     * This function is the one confirmed EXCEPTION: it returns `local_d0`,
-     * an explicitly-computed pointer distinct from `record` (since this
-     * opcode's real tile loop consumes a data-dependent number of dwords
-     * the header's own encoded distance field cannot represent generically
-     * the way every other opcode's fixed/simple body can). The dispatch
-     * loop's own `if (next != record)` branch handles this by advancing
-     * straight to `local_d0` and re-entering the loop - but it does NOT run
-     * the tail's real exit-descriptor-write/status-return check in that
-     * case, whereas the real decompile shows this opcode's ending DOES fall
-     * into that same shared check. Whether that matters in practice depends
-     * on whether `local_d0` can ever coincide with a real "buffer now fully
-     * consumed" position - NOT independently confirmed either way. Real,
-     * concrete open item, tracked as a residual issue on this repo.
+     * This function (opcode 0x2d - see the header comment at the top of
+     * this file for the resolved identity) is the one confirmed EXCEPTION:
+     * it returns `local_d0`, an explicitly-computed pointer distinct from
+     * `record` (since this opcode's real tile loop consumes a
+     * data-dependent number of dwords the header's own encoded distance
+     * field cannot represent generically the way every other opcode's
+     * fixed/simple body can). The dispatch loop's own `if (next != record)`
+     * branch handles this by advancing straight to `local_d0` and
+     * re-entering the loop - but it does NOT run the tail's real
+     * exit-descriptor-write/status-return check in that case, whereas the
+     * real decompile shows this opcode's ending DOES fall into that same
+     * shared check. Whether that matters in practice depends on whether
+     * `local_d0` can ever coincide with a real "buffer now fully consumed"
+     * position - NOT independently confirmed either way. Real, concrete
+     * open item, tracked as a residual issue on this repo (issue #12 item
+     * 4's remaining open half - the misattribution itself is resolved, but
+     * this specific tail-integration question survives the re-attribution
+     * unchanged, now correctly pointed at opcode 0x2d instead of 0x31; the
+     * REAL opcode 0x31, handle_depth_buffer_resolve, was independently
+     * confirmed to have no such exception - it always falls through to the
+     * ordinary shared advance).
      */
     return local_d0;
 }

@@ -180,12 +180,14 @@
 
 /*
  * Real float/double data constants at fixed kext addresses, used by
- * opcode 0x31's (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) and
- * opcode 0x04's (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp)
- * real floating-point math. Centralized here (rather than declared
- * separately in each .cpp) since both real call sites need them.
- * Values UNKNOWN - not read out of the binary's __literal4/__literal8
- * sections this pass; see GAPS.md.
+ * opcode 0x2d's (Sources/ATIR500GLContext_FSAAResolveBlit.cpp -
+ * CORRECTED, issue #12 item 4: this file's content was previously
+ * misattributed to opcode 0x31, which has no floating-point math at all -
+ * see that file's header comment) and opcode 0x04's
+ * (Sources/ATIR500GLContext_ProcessCommandBuffer.cpp) real floating-point
+ * math. Centralized here (rather than declared separately in each .cpp)
+ * since both real call sites need them. Values UNKNOWN - not read out of
+ * the binary's __literal4/__literal8 sections this pass; see GAPS.md.
  */
 extern "C" const double DOUBLE_0004c3a8; /* kext offset 0x4c3a8 - CONFIRMED role: 2^52, the standard "magic bias" for software int-to-double conversion */
 extern "C" const double DOUBLE_0004c3b0; /* kext offset 0x4c3b0 - CONFIRMED role: a second bias constant, used for one specific operand pair in each real call site - not independently verified whether numerically identical to DOUBLE_0004c3a8 */
@@ -243,10 +245,15 @@ extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, 
 extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
 /* FormatTableLookup_0x0004d2e4 - a THIRD real, confirmed-to-exist format
- * table (`DAT_0004d2e4` in the raw decompile), found this pass in opcode
- * 0x31's real trace (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) -
- * same real indexing convention (`formatTableIndex * 0x1c`) as the other
- * two. Raw table content not extracted from the binary this pass. */
+ * table (`DAT_0004d2e4` in the raw decompile), originally found in what
+ * was then believed to be opcode 0x31's real trace
+ * (Sources/ATIR500GLContext_FSAAResolveBlit.cpp) - CORRECTED, issue #12
+ * item 4: that content is really opcode 0x2d's. This table is genuinely
+ * used by BOTH opcodes though - the REAL opcode 0x31
+ * (handle_depth_buffer_resolve, Sources/ATIR500GLContext_ProcessCommandBuffer.cpp,
+ * found resolving this same issue) independently uses it too, for the
+ * SAME real indexing convention (`formatTableIndex * 0x1c`) as the other
+ * two tables. Raw table content not extracted from the binary this pass. */
 extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
 
 #endif /* ATIRADEONX1000_REGISTERS_H */

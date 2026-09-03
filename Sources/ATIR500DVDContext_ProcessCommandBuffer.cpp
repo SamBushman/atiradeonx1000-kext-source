@@ -32,9 +32,14 @@
  * Real, high-value finding this pass: opcode 0x12's own real body
  * spans roughly 750+ lines of raw decompile (loop-based, multiple
  * fixed-size local arrays, dense per-plane geometry math) - comparable
- * in scale to GL's own opcode 0x31, which this project's history
+ * in scale to GL's own opcode 0x2d, which this project's history
  * explicitly flagged as "the single largest remaining gap" in the
- * entire GL reconstruction. NOT attempted this pass; a correct
+ * entire GL reconstruction (CORRECTED, issue #12 item 4: that content
+ * was known as "opcode 0x31" at the time this comment was written, but
+ * has since been found to really be opcode 0x2d - the REAL, separate
+ * GL opcode 0x31 is much smaller, ~180 lines, and is now fully
+ * transcribed - see ATIR500GLContext_ProcessCommandBuffer.cpp's
+ * handle_depth_buffer_resolve). NOT attempted this pass; a correct
  * transcription needs its own dedicated pass, not a continuation of
  * this session's per-opcode cadence.
  *
