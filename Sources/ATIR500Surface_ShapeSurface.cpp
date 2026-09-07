@@ -84,9 +84,14 @@
  *     the function itself.
  *   - The real per-framebuffer array at `this+0xd60` (`this+0xd50`'s
  *     accelerator field sits immediately before it) and the real record
- *     it points to (`+0x0`/`+0x4`/`+0x12` sanity-checked before
+ *     it points to (`+0x0`/`+0x10`/`+0x12` sanity-checked before
  *     `setup_overlay()`) - real shape/roles UNKNOWN, transcribed as
- *     literal raw offsets.
+ *     literal raw offsets. (The middle offset is real raw `piVar11 + 4`
+ *     on a real Ghidra-typed `int*` local, i.e. already word-scaled to
+ *     byte offset `+0x10`, NOT `+4` - this project's own known `int*`-
+ *     scaling trap; the transcription itself already gets this right
+ *     via `fbRec + 4` on an equally `SInt32*`-typed local, this comment
+ *     just corrects its own prose to match.)
  *   - The real compiled-in constant table `C_146` (copied via a real,
  *     not-independently-decompiled `0x38`-byte memcpy-style helper,
  *     `FUN_0003cf24` - same opaque-helper category as this project's
@@ -146,6 +151,53 @@
  * secondary fields (`+0xb8`/`+0xc0`/`+0xe4`/`+0xca`/`200`/`+0xe8`) that
  * were transcribed as literal `rec+<raw literal>` without first
  * subtracting the record's own `+0xa8` base, double-counting it.
+ *
+ * INDEPENDENT SECOND REVIEW (issue #22 - separate session, re-derived the
+ * decompile fresh from Ghidra rather than trusting the file/dump above)
+ * found and fixed four further real, narrow bugs the first pass missed,
+ * confirmed line-by-line against the raw decompile:
+ *   - Pass 1's `packedCfg`/`tilingDegreeBits` write had `sx`/`sy` SWAPPED
+ *     relative to the real raw operands (`(uVar28 & 0xf) << 0xc | iVar9
+ *     << 0x10` is `sy << 0xc | sx << 0x10`, and the sibling `0x700000`
+ *     branch is `iVar9 << 0x14` = `sx`, not `sy`) - caught by cross-
+ *     checking against Pass 2's OWN analogous `packedCfg9` computation
+ *     (`(local_58 & 0xf) << 0xc | iVar23 << 0x10` /
+ *     `iVar23 << 0x14`, i.e. `sampleCountY`/`sampleCountX` in that
+ *     order), which this second pass confirmed was ALREADY correct and
+ *     used as the cross-check baseline.
+ *   - Pass 1's `heightOrRows` write used the CACHED pre-call `baseW`
+ *     instead of a fresh `this+0xbd4` re-read; the raw decompile shows
+ *     this specific field write (unlike every other field in the same
+ *     block) is a literal fresh dereference AFTER the `free_buffer_
+ *     backing_store`/`dealloc_surface` calls, matching the sibling
+ *     `extra1e` write's own already-correct fresh `this+0xbd6` read one
+ *     line below it - the file already got the `extra1e` half of this
+ *     pair right, just not the `heightOrRows` half.
+ *   - Pass 3's tiled-mip branch computed `rowByteBase` (the row-pitch
+ *     value later stored at `rec+0x18` and divided into `buf->width` for
+ *     every general color slot) WITHOUT the real 0x100-boundary
+ *     round-up the raw decompile applies immediately after the initial
+ *     `mainBlockShift * w` product (`if ((uVar8 & 0xff) != 0) uVar24 =
+ *     (uVar8 & 0xffffff00) + 0x100;`) - the first draft's own comment
+ *     ("uVar24 = uVar8's initial value") only quoted the ASSIGNMENT,
+ *     missing the very next line that immediately overwrites it.
+ *   - The `overlayFormatSel` selector's `this+0xbd6 < 0x10` height check
+ *     had its two branches (0 vs 1) SWAPPED, traced to a misread of the
+ *     raw decompile's `(AVar12 = 1, height < 0x10) || ...` comma-operator
+ *     `goto`: the `AVar12 = 1` side effect fires whenever the right `||`
+ *     operand is evaluated at all, but gets unconditionally overwritten
+ *     back to 0 by the `goto` target whenever `height < 0x10` is ALSO
+ *     true - so real net behavior is 0 for `height < 0x10`, 1 only when
+ *     `height >= 0x10` (falls through with the side-effect value intact)
+ *     - the exact opposite of the swapped first draft.
+ * Also corrected: a header-comment-only inaccuracy (not a code bug) that
+ * described the per-framebuffer sanity-check record's middle field as
+ * real raw offset `+0x4`; it is real raw `piVar11 + 4` on a Ghidra `int*`
+ * local, i.e. already word-scaled to byte offset `+0x10` - this project's
+ * own known `int*`-scaling trap - and the CODE already had this right
+ * (`fbRec + 4` on an equally `SInt32*`-typed local); only the prose was
+ * wrong. No other discrepancies found in a full line-by-line offset/
+ * cast/loop-bound/branch re-derivation covering every pass.
  */
 
 #include "../Headers/ATIR500Surface.h"
@@ -307,7 +359,7 @@ void ATIR500Surface::shape_surface() {
                 buf->width = (dsBlockShift == 0) ? 0 : static_cast<UInt16>(rowBytes / dsBlockShift);
                 *reinterpret_cast<UInt16 *>(rec + 0x18) = static_cast<UInt16>(rowBytes);
                 buf->bytesPerRow = static_cast<UInt16>(dsBlockShift);
-                buf->heightOrRows = static_cast<UInt16>(sx * baseW);
+                buf->heightOrRows = static_cast<UInt16>(sx * S16At(self, 0xbd4));
                 buf->extra1e = static_cast<UInt16>(sy * S16At(self, 0xbd6));
             }
             buf->formatTableIndex = static_cast<UInt8>(dsFormatIndex);
@@ -325,10 +377,10 @@ void ATIR500Surface::shape_surface() {
                 if ((U32At(self, 0xbe8) & 0xc0000) == 0) {
                     packedCfg = (packedCfg & 0xff000fffu) | 0x111000u;
                 } else {
-                    packedCfg = ((sx & 0xfu) << 0xc) | (sy << 0x10) | (packedCfg & 0xff000fffu) | 0x100000u;
+                    packedCfg = ((sy & 0xfu) << 0xc) | (sx << 0x10) | (packedCfg & 0xff000fffu) | 0x100000u;
                 }
             } else {
-                packedCfg = (sy << 0x14) | (packedCfg & 0xff000fffu) | 0x11000u;
+                packedCfg = (sx << 0x14) | (packedCfg & 0xff000fffu) | 0x11000u;
             }
             packedCfg |= 0x800u;
 
@@ -347,10 +399,10 @@ void ATIR500Surface::shape_surface() {
                 goto haveOverlayFormatSel;
             }
             if (S16At(self, 0xbd6) < 0x10) {
-                overlayFormatSel = 1;
+                overlayFormatSel = 0;
                 goto haveOverlayFormatSel;
             }
-            overlayFormatSel = 0;
+            overlayFormatSel = 1;
         } else {
             overlayFormatSel = static_cast<UInt8>((0xf < S16At(self, 0xbd6)) + 2);
         }
@@ -462,8 +514,15 @@ haveOverlayFormatSel:
     } else {
         /* Real per-mip-level tile-alignment accumulation loop. */
         UInt32 w = static_cast<UInt32>(S16At(self, 0xbd4));
-        rowByteBase = mainBlockShift * w; /* real: set once here (uVar24 = uVar8's initial value), never reassigned again in this branch */
-        UInt32 rowBytes = rowByteBase;
+        UInt32 rowBytes = mainBlockShift * w;
+        rowByteBase = RoundUpPitch(rowBytes, 0x100); /* real: uVar24 = uVar8's initial value, THEN rounded to a 0x100
+                                                        * boundary right here (raw: `if ((uVar8 & 0xff) != 0) uVar24 =
+                                                        * (uVar8 & 0xffffff00) + 0x100;`) - a first draft of this fix
+                                                        * missed that rounding and left rowByteBase raw/unaligned,
+                                                        * corrupting `buf->width` and the stored row-pitch field
+                                                        * (rec+0x18) for every general color slot whenever the tiled
+                                                        * (0x70000000) path is taken; set once here, never reassigned
+                                                        * again in this branch. */
         UInt32 h = static_cast<UInt32>(S16At(self, 0xbd6));
         SInt16 heightSigned = S16At(self, 0xbd6);
         mipLevelCount = (shapeBits >> 0x18) & 0xf;
