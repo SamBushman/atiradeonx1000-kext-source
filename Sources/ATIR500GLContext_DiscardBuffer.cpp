@@ -206,10 +206,13 @@ void ATIR500GLContext::discard_command_buffer(void) {
              * already established on this identical field shape (a mip
              * record's own +0x10) - CONFIRMS that idiom is a general "mark
              * this texture outstanding" mechanism, not specific to
-             * get_texture. Then a real vtable+0x14c call on a related
-             * object (newTex+0x54, one more indirection through +8) to
-             * (re)establish a GART/memory-descriptor-shaped mapping handle -
-             * the SAME real vtable slot ATIR500GLContext::load_texture's
+             * get_texture. Then a real vtable+0x14c call on `newTex+0x54`'s
+             * own `linkedBuffer` (`ATIRadeonX1000Types.h`, RESOLVED issue
+             * #20/#24 - a real companion `VendorTextureBuffer`-shaped
+             * record whose own `+8` is, like every other `VendorTextureBuffer`,
+             * a real Apple `IOMemoryDescriptor`), one more indirection
+             * through +8, to (re)establish a GART/memory-descriptor-shaped
+             * mapping handle - the SAME real vtable slot ATIR500GLContext::load_texture's
              * own step 2 independently calls (see that function's header
              * comment) - on success, looks up a real per-record hardware-
              * info block via vtable+0xd0 and zeros a 4-field cluster within

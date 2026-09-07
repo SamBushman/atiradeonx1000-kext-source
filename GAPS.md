@@ -1001,27 +1001,31 @@ All declarations added to `Headers/ATIRadeonX1000.h`. Real parameter/return type
 call site's own existing typedef where this project's earlier guesses (in the issue's own filing) turned
 out wrong (e.g. `waitForTimeStamp`/`sleepForTimeStamp` return `UInt32`, not `IOReturn`).
 
-## 17. `IOATIR500Shared` / the texture-adjacent GART-handle object - PARTIAL PROGRESS, issue #20 still open
+## 17. `IOATIR500Shared` / the texture-adjacent GART-handle object - GART-handle identity RESOLVED (issues #20/#24), `IOATIR500Shared`'s own `+0x18` stays hardware-blocked
 
-`init` (`+0x48`) resolved via the same base/subclass-vtable-read technique - real addr `0x16aa0`.
-`+0x18`/`+0xd0` on `IOATIR500Shared`'s own vtable (`__ZTV15IOATIR500Shared`, `0x48f28`) confirmed genuine
-placeholder content (raw 0), the SAME real category issue #6 established for the accelerator's factory
-slots - `IOATIR500Shared` has no known subclass in this project (unlike Surface/Accelerator), so this is
-the concrete vtable and there is no further subclass to check.
+`init` (`+0x48`) resolved via the same base/subclass-vtable-read technique - real addr `0x16aa0`, own body
+also since decompiled (issue #24, see `Sources/IOATIR500Shared_Init.cpp`). `+0x18` on `IOATIR500Shared`'s
+own vtable (`__ZTV15IOATIR500Shared`, `0x48f28`) confirmed genuine placeholder content (raw 0), the SAME
+real category issue #6 established for the accelerator's factory slots - `IOATIR500Shared` has no known
+subclass in this project (unlike Surface/Accelerator), so this specific slot needs a live kxld-resolved
+hardware read and **stays open**.
 
-**New finding**: `IOATIR500Shared`'s own vtable is only `0xd8` bytes long (`0x48f28` to the next real
-symbol, `__ZTVN15IOATIR500Shared9MetaClassE` at `0x49000`) - so `+0x14c` (the third offset this issue's
-own texture-adjacent object calls) is mathematically OUT OF BOUNDS for this class's vtable. This rules
-out `IOATIR500Shared` as that object's real class - it is confirmed to be a DIFFERENT, still-unidentified,
-longer-vtable class. Real identity of that object (reached via `texture+0x54`, then `+8`) remains open.
-
-**New cross-reference (issue #23's `allocate_texture` decompile)**: the SAME real `+0x14c`/`+0xd0`/`+0x18`
-pattern this issue already flagged also appears in `ATIRadeonX1000::allocate_texture`, called on a
-texture's own `+8` field (not `+0x54+8` as the Surface-side call sites use) with the exact same real
-argument shape (`_ASICSupportsAGP, 0, 1, 0, 0`) already documented in `ATIR500GLContext_TextureLoad.cpp`/
-`ATIR500GLContext_DiscardBuffer.cpp`. New data point, not a resolution: the object returned by `+0x14c`
-has its own real `+0xd0` method returning something with a readable `+0x20` field, and is released via
-`+0x18` immediately after use - real class identity for either object still not determined.
+**GART-handle object identity RESOLVED**: confirmed to be Apple's own external `IOMemoryDescriptor` - the
+SAME real class this project had already independently named as `VendorTextureBuffer::memoryDescriptor`
+(`texture+0x08`, `ATIRadeonX1000Types.h`, retain/release at +0x14/+0x18). `IOATIR500Shared`'s own vtable
+being only `0xd8` bytes (too short to reach `+0x14c`) correctly ruled it out - the real object was never a
+kext-internal class at all, which is also why no vtable-data sweep of this binary could pin an exact
+address for `+0x14c`/`+0xd0`: `IOMemoryDescriptor`'s own vtable lives in Apple's own IOKit code, external to
+this kext, resolved only at kxld load time (the same category of limitation as issue #6's original
+"factory slot" mystery, before subclass-resolution rescued those specific slots). The `texture+0x54, then
++8` route (Surface-side call sites) reaches the SAME real class via a newly-named field,
+`VendorTextureBuffer::linkedBuffer` (`+0x54`, RESOLVED this pass) - a real pointer to a SECOND, companion
+`VendorTextureBuffer`-shaped record whose own `+8` is, like every other `VendorTextureBuffer`, its own
+`IOMemoryDescriptor`. `allocate_texture`'s own direct `texture+8` route (no `+0x54` indirection) reaches the
+exact same real class directly off the top-level buffer. `+0x14c`/`+0xd0` remain real, unnamed
+`IOMemoryDescriptor` methods (plausibly `prepare()`-family and a physical-segment/hardware-info accessor
+respectively, given the surrounding GART-mapping-prep context) - not further identified, but no longer an
+open "whose class is this" question.
 
 ## 18. Bodies for the 25 vtable-slot methods issues #6/#18/#19/#20 only named - PARTIAL PROGRESS, issues #21-24
 

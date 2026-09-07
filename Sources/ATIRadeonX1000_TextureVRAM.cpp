@@ -15,10 +15,11 @@
  * apparent real "always attempt a (possibly zero-size) allocation
  * unless this is a type-8 texture" design). Real strategy selection:
  * checks a real "is AGP available" signal by calling through the SAME
- * still-unidentified real object this project's issue #20/#24 already
- * flagged (`texture+8`, real `+0x14c`/`+0xd0`/`+0x18` call chain,
- * `_ASICSupportsAGP` - the same real global TextureLoad.cpp/
- * DiscardBuffer.cpp already reference) - if AGP is unavailable or the
+ * real object issues #20/#24 tracked (`texture+8`, i.e. `memoryDescriptor`,
+ * `ATIRadeonX1000Types.h` - RESOLVED, a real Apple `IOMemoryDescriptor`),
+ * real `+0x14c`/`+0xd0`/`+0x18` call chain, `_ASICSupportsAGP` - the same
+ * real global TextureLoad.cpp/DiscardBuffer.cpp already reference) - if
+ * AGP is unavailable or the
  * accelerator's own VRAM budget (`this+0x84c`) already equals its cap
  * (`this+0x9c`), allocates from a real "overflow" region instead
  * (`this+0xd0`-gated choice of two different real `ATIR500Memory::alloc`
@@ -35,7 +36,8 @@
  * release call on a per-texture handle object at `texture+0x10`
  * (`+0x18` slot - the same real ABI-fixed-looking release pattern this
  * project has seen on several DIFFERENT real classes, not claimed to be
- * the same object as issue #20/#24's own mystery object), or delegates
+ * the same object as issue #20/#24's own now-resolved `IOMemoryDescriptor`
+ * object), or delegates
  * to the already-known `IOATIR500Accelerator::pageOffDataBuffer`),
  * followed by a real shared tail every discriminant value reaches: two
  * `HZMEM_Free` calls (already-known function) gated on real per-texture
@@ -94,8 +96,8 @@ IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
     bool skipD0Check = false;
 
     if (used != U32At(self, 0x9c)) {
-        /* real: AGP-overflow-first path, gated on a real check through the still-unidentified
-         * object at texture+8 (issue #20/#24's own tracked mystery) */
+        /* real: AGP-overflow-first path, gated on a real check through texture's own
+         * memoryDescriptor (a real Apple IOMemoryDescriptor, RESOLVED issue #20/#24) at texture+8 */
         typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
         void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
         void *piVar2 = (*reinterpret_cast<PrepareMappingFn *>(*reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(

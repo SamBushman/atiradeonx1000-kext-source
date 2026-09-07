@@ -122,7 +122,8 @@ struct VendorTextureBuffer {
     UInt32          transferBufferFlag;  /* +0x48, CONFIRMED: nonzero gates a distinct "transfer buffer" code path vs. plain texture in multiple functions (get_data_buffer, purge_texture) */
     UInt8           _pad_0x4c[0x50 - 0x4c];
     UInt32          poolSizeClass;       /* +0x50, CONFIRMED: compared against the accelerator's current buffer-size threshold (this+0x5d8 on IOATIR500Accelerator) in get_data_buffer to decide whether to recycle or reallocate */
-    UInt8           _pad_0x54[0x5c - 0x54];
+    VendorTextureBuffer *linkedBuffer;   /* +0x54, RESOLVED issue #20/#24: a real, previously-unnamed pointer to ANOTHER VendorTextureBuffer-shaped record - CONFIRMED by ATIR500GLContext_DiscardBuffer.cpp's opcode 0x3b handler, which dereferences this field then reads ITS OWN +0x8 the exact same way load_texture reads the top-level texture's own memoryDescriptor at +0x08 (same real +0x14c/+0xd0/+0x18 vtable call chain, same _ASICSupportsAGP argument shape). Real role INFERRED as a linked companion/secondary buffer (candidates: an associated query-result buffer, a secondary mip-chain entry) - exact real relationship to the owning buffer not further investigated. */
+    UInt8           _pad_0x58[0x5c - 0x58];
     UInt32          generationTag;       /* +0x5c, CONFIRMED: stamped with the requesting context's generation counter in get_data_buffer, read back in wait_image/wait-for-stamp style functions */
     /* UNKNOWN: real total struct size not established beyond +0x5c plus
      * whatever padding the field at +0x54 (byte "pVVar1[0x54] = 1/0" seen

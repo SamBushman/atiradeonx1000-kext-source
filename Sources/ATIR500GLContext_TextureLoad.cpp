@@ -19,8 +19,14 @@
  * #18/#19) to real named methods - see ATIRadeonX1000.h/ATIR500Surface.h.
  * Two more used only by load_texture at +0x14c/+0xd0/+0x18 on a real
  * "memory-descriptor-shaped" object (see
- * ATIR500GLContext_DiscardBuffer.cpp's matching cross-reference) remain
- * genuinely UNKNOWN - real class identity still open, issue #20.
+ * ATIR500GLContext_DiscardBuffer.cpp's matching cross-reference) - real
+ * class identity RESOLVED, issues #20/#24: this is the texture's own
+ * `memoryDescriptor` field (`tex+8`, `ATIRadeonX1000Types.h`), already
+ * independently CONFIRMED elsewhere in this project to be Apple's own
+ * external `IOMemoryDescriptor` (retain/release at +0x14/+0x18) - +0x14c/
+ * +0xd0 are real (unnamed) `IOMemoryDescriptor` methods this project has
+ * not further identified, but the RECEIVER's own class is no longer in
+ * question.
  * get_texture's atomic decrement loop was verified against raw PPC
  * disassembly (lwarx/stwcx.), not just Ghidra's decompile, since the
  * decompiler couldn't fully resolve it into clean C on its own.
