@@ -1059,10 +1059,19 @@ already-committed code from earlier in this same session:
    `ATIR500Memory::alloc` class it delegates to, which has genuine `return 1;`/`return 0;` control flow) -
    not the `void*` this project's original issue #19 filing and both real call sites had assumed.
 
-**New, substantial, previously-unknown real class found**: `ATIR500Memory` (own real vtable, at least a
-dozen real methods, a genuine free-list VRAM/GART pool allocator) - only 2 of its own methods decompiled
-(the ones needed to fix the bug above), left as its own minimal shell (`Headers/ATIR500Memory.h`) rather
-than fully investigated; worth its own future issue.
+**`ATIR500Memory` - RESOLVED (issue #25)**: the real free-list VRAM/GART pool allocator class found here
+(own real vtable, a real address-ordered doubly-linked `BoundaryNode` free list with real boundary-tag
+merge/split logic) is now fully reconstructed - every real method (constructor, `init`, both `init_pool`
+overloads, `free`, `add_to_stack`, both `alloc` overloads, `reserve`, `dealloc`, `total_free`) decompiled
+and transcribed, see `Sources/ATIR500Memory_*.cpp` and `Headers/ATIR500Memory.h`'s own field-layout
+comment. Real, previously-undocumented finding along the way: the caller-owned `GLKMemoryElement` itself
+doubles as a `BoundaryNode`-shaped record while a block is allocated - `alloc`/`reserve` splice it directly
+into the free list, and `dealloc` reads its neighbor pointers back out to merge it away. Two real gaps
+remain, left open per this project's own standard (real progress, not full closure): the exact real
+bootstrap topology `init_pool`'s own chunk-carving builds (transcribed as literal raw offset arithmetic,
+not fully resolved into named fields) and the real target of the class's own unidentified vtable `+0x48`/
+`+0x4c` slots (`init`/`free`'s own gate, matching the `IOATIR500Shared`/issue #20 category of unresolved
+vtable-indirect calls).
 
 **Also resolved since** (issue #23): `waitForTimeStamp`/`sleepForTimeStamp`/`waitForConsumedIDCTTimeStamp`
 (`Sources/ATIRadeonX1000_TimeStampWait.cpp`) - three real, independently-compiled instances of one real
