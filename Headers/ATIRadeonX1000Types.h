@@ -183,7 +183,8 @@ struct ATIR500SurfaceBuffer {
     UInt16  heightOrRows;        /* +0x1c, CONFIRMED: used identically to width in scissor/clip clamping */
     UInt16  extra1e;             /* +0x1e, CONFIRMED: paired with +0x1c in get_surface_size's non-mip branch */
     UInt16  basePitch;           /* +0x20, CONFIRMED (issue #17, ATIR500Surface::back_resolve_fsaa_buffer): real field, distinct from `bytesPerRow` (+0x16) despite the superficially similar name - read via `basePitch * mipOffsets[0] + gpuBaseAddress` (masked `& 0xffffffe0`) to form a base address, in BOTH `resolve_fsaa_buffer` (issue #13; that file's own committed transcription wrongly aliased this read to `bytesPerRow` at two call sites - CORRECTED, see that file's own header comment) and this function - two independent real functions agreeing on this exact offset/role is what promoted it out of the surrounding padding. Real semantic distinction from `bytesPerRow` beyond "used in the base-address multiply instead of the block-count divide" not independently confirmed. */
-    UInt8   _pad_0x22[0x28 - 0x22];
+    UInt8   _pad_0x22[0x24 - 0x22];
+    UInt32  backingStoreHandle;  /* +0x24, CONFIRMED (issue #22, ATIR500Surface::shape_surface): real nonzero-means-allocated gate this project's own transcription of `free_buffer_backing_store`'s real call sites already treats generically as "record has a real allocated backing" (own body still not decompiled) - `shape_surface` is the first ALREADY-decompiled real function to read this exact field, at this exact offset, on every one of this class's own per-slot records (the `this+idx*0x78+0xa8`-based ones AND the fixed buffer at `this+0x4e0`), confirming the offset. */
     UInt32  formatOrTilingBits;  /* +0x28, CONFIRMED: real per-mip dirty/format bitmask, checked in page_off_texture */
     UInt8   _pad_0x2c[0x30 - 0x2c];
     UInt32  hzBlockCountField;   /* +0x30, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): real value read directly as an operand to a `0x1385`-tagged burst slot right after an `HZMEM_GetBlockCount` call on this same struct's `formatOrTilingBits` - almost certainly a real HyperZ block-count-adjacent field, exact semantics beyond that not independently confirmed. */
@@ -194,7 +195,7 @@ struct ATIR500SurfaceBuffer {
     UInt8   tilingConfigByte0;   /* +0x38, CONFIRMED: real tiling-config byte, feeds the &1/&6/&7 bit tests throughout the capstone register-write code */
     UInt8   tilingConfigByte1;   /* +0x39, CONFIRMED: same family, &3 bit test */
     UInt8   formatTableIndex;    /* +0x3a, CONFIRMED: real index into the DAT_0004d2e0/DAT_0004d2e4-style format lookup tables (`* 0x1c` stride) */
-    UInt8   _pad_0x3b;
+    UInt8   formatSubShift;      /* +0x3b, CONFIRMED (issue #22, ATIR500Surface::shape_surface): real per-format sub-field, `(FormatTableLookup_0x0004d2dc(formatTableIndex*0x1c) >> 3) & 0x1f` - written alongside `formatTableIndex` at every one of this project's own real `shape_surface` reshape sites, never independently read back anywhere this project has decompiled so far. */
     UInt32  tilingDegreeBits;    /* +0x3c, CONFIRMED (issue #13, ATIR500Surface::resolve_fsaa_buffer): real field previously left as unnamed padding between +0x3b and mipOffsets - a real, heavily-read bitfield: `& 0xf00000` gates several per-plane pitch/block-degree computations, `(>> 0x14) & 0xf` extracts a real 4-bit "tiling degree" divisor for `width`/`heightOrRows`. */
     UInt32  mipOffsets[16];      /* +0x40.., CONFIRMED: real per-mip-level GPU offset array, indexed by `mipIndex*4 + 0x40` throughout the capstone/blit-state-packet code */
 };

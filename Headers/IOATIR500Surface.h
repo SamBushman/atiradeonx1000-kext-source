@@ -229,6 +229,15 @@ public:
     UInt32   surface_buffer_idx_mask(UInt32 param1, UInt32 *outParam);
 
     /*
+     * copy_buffer_to_backing_store - CONFIRMED real name (found issue
+     * #22, ATIR500Surface::shape_surface's own deinterlace-plane reshape
+     * path - same family/role as free_buffer_backing_store above, real
+     * receiver/signature by direct analogy, own body NOT decompiled this
+     * pass).
+     */
+    void copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer);
+
+    /*
      * alloc_surfaces_keep - CONFIRMED real name/signature, found this
      * pass as a real call site in ATIR500GLContext::alloc_and_load_texture
      * (issue #5) - see Sources/ATIR500GLContext_TextureLoad.cpp. Real
@@ -343,7 +352,7 @@ public:
      * `is_surface_size_supported`'s real mangled parameter types are
      * `short` (not the `SInt32` this project's call site had inferred).
      */
-    virtual void   shape_surface();                                          /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) */
+    virtual void   shape_surface();                                          /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) - RESOLVED (own body, issue #22): see Sources/ATIR500Surface_ShapeSurface.cpp */
     virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
 
     /*

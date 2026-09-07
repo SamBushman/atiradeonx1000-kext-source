@@ -1109,8 +1109,17 @@ nested if/else in `resetFullScreen`, a base-vs-virtual dispatch mixup on an `is_
 dereferenced-pointer-vs-raw-offset mixup (`*(int*)(accel+0x860)` is a pointer VALUE, not the address
 `accel+0x860` itself).
 
-**Still deferred**: `shape_surface` (a real outlier, ~19KB of raw decompile - by far the largest single
-function this project has ever decompiled) - issue #22 stays open for this alone.
+**`shape_surface` - RESOLVED, issue #22 CLOSED.** The real outlier (~19KB of raw decompile, by far the
+largest single function this project has ever decompiled) is now fully transcribed
+(`Sources/ATIR500Surface_ShapeSurface.cpp`) - a real four-pass reshape of this class's own per-slot
+`ATIR500SurfaceBuffer` records (HyperZ depth/stencil slots, the fixed slot, general color slots, and
+deinterlace/subpicture-plane slots) whenever the surface's own format/dimensions change. Two new real
+`ATIR500SurfaceBuffer` fields found and named (`backingStoreHandle`/+0x24, `formatSubShift`/+0x3b -
+`Headers/ATIRadeonX1000Types.h`); the vtable slot `+0x5cc` an earlier pass on this issue flagged as an
+unidentified "notify resize" method is CONFIRMED to be the already-known `dealloc_surface`. Several real
+self-caught bugs from this function's own record-addressing complexity (pass 4 walks a differently-based
+record pointer than passes 1-3; several secondary fields were transcribed with a double-counted `+0xa8`
+base) were found and fixed before commit - see that file's own header comment for the full account.
 
 ## 19. `map_transfer_to_GART`'s real gating condition - RESOLVED (as much as possible), issue #26
 
