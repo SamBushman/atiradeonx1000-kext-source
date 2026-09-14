@@ -232,11 +232,13 @@ public:
     /*
      * copy_buffer_to_backing_store - CONFIRMED real name (found issue
      * #22, ATIR500Surface::shape_surface's own deinterlace-plane reshape
-     * path - same family/role as free_buffer_backing_store above, real
-     * receiver/signature by direct analogy, own body NOT decompiled this
-     * pass).
+     * path). Own body RESOLVED, issue #36 - see
+     * Sources/IOATIR500Surface_CopyBufferToBackingStore.cpp. REAL RETURN
+     * TYPE CORRECTED there: the real decompile returns a genuine `1`/`0`
+     * result (not `void` as this project had previously assumed by
+     * analogy with `free_buffer_backing_store`).
      */
-    void copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer);
+    bool copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer);
 
     /*
      * alloc_surfaces_keep - CONFIRMED real name/signature, found this
@@ -388,7 +390,8 @@ public:
      * init_swap_buffer_header - RESOLVED, issue #28 (real mangled symbol
      * __ZN16IOATIR500Surface23init_swap_buffer_headerEP22VendorSwapBufferHeaderm,
      * real addr 0x10b40), found decompiling `allocAllSlaveSwapBuffers`
-     * below. Own body not independently decompiled.
+     * below. Own body RESOLVED, issue #37 - see
+     * Sources/IOATIR500Surface_InitSwapBufferHeader.cpp.
      */
     void init_swap_buffer_header(VendorSwapBufferHeader *header, UInt32 size);
 
