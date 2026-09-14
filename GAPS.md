@@ -1097,14 +1097,19 @@ nothing at all; fixed. Two more new real functions found and declared as a side 
 (`Sources/ATIR500Surface_VRAM.cpp`), `prepare_vram`/`complete_vram`'s subclass overrides
 (`Sources/ATIR500Surface_PrepareCompleteVRAM.cpp`), `alloc_surface_buffer`
 (`Sources/ATIR500Surface_AllocSurfaceBuffer.cpp`), and `resetFullScreen` base+subclass
-(`Sources/ATIR500Surface_ResetFullScreen.cpp`, which itself surfaced ANOTHER real, uncatalogued Surface
-vtable slot, `+0x5e0`, called with real arguments `id, 0, 1` - still not investigated). **Real return-type
+(`Sources/ATIR500Surface_ResetFullScreen.cpp`, which itself surfaced ANOTHER real Surface vtable slot,
+`+0x5e0` - RESOLVED, issue #29: `ATIR500Surface::submit_flip_buffer`, real addr `0x3e5c0`, found via the
+subclass-vtable technique). **Real return-type
 bug caught and fixed**: `prepare_vram`/`complete_vram` were both originally declared `void` - both real
 bodies (base and subclass, all four) return a real, checked `UInt32`. Two more new real functions found
-along the way (own bodies not decompiled): `IOATIR500Surface::allocAllSlaveSwapBuffers`,
-`IOATIR500Surface::map_transfer_to_GART` (a real, DIFFERENT function from
-`IOATIR500GLContext::map_transfer_to_GART`, same name/different receiver class, confirmed via Ghidra's own
-class-qualified decompile naming), and the real symbol `enforceInOrderExecutionIO`. Several real
+along the way, both RESOLVED, issue #28: `IOATIR500Surface::allocAllSlaveSwapBuffers` (see
+`Sources/IOATIR500Surface_AllocAllSlaveSwapBuffers.cpp` - includes an honestly-flagged real uncertainty
+about its own failure path's termination) and `IOATIR500Surface::map_transfer_to_GART` (a real, DIFFERENT
+function from `IOATIR500GLContext::map_transfer_to_GART`, same name/different receiver class, confirmed via
+Ghidra's own class-qualified decompile naming - see `Sources/MapTransferToGART_RemainingContexts.cpp`).
+`enforceInOrderExecutionIO` needs no further resolution - it's a real, already-fully-identified external
+Apple/XNU PPC I/O memory-barrier primitive, same category as this project's other external Apple calls.
+Several real
 transcription mistakes were self-caught and fixed BEFORE commit this pass via careful line-by-line
 re-verification against each raw decompile - an `int*`-scaled pointer-arithmetic trap
 (`*(char*)((int*)accel+0x20)` is `accel+0x80`, not `accel+0x20`) that affected two functions, an inverted
@@ -1143,3 +1148,38 @@ This is strong (not airtight) confirmation that no real signal exists anywhere i
 already applied to `map_transfer_to_GART` is the correct final transcription, not a placeholder. See
 `Sources/ATIRadeonX1000_VtableSlotBodies.cpp` and `Headers/IOATIR500Accelerator.h`'s own header comments
 for the full account.
+
+## 20. Post-#15/#20 audit findings - RESOLVED, issues #27/#28/#29
+
+A systematic sweep for every remaining "UNKNOWN"/"opaque"/"not decompiled"/"INFERRED" marker in this
+project, done immediately after closing #15/#20, turned up three more real, previously-untracked gaps -
+all now closed in the same session:
+
+**Issue #27 - ATIR500Memory's own opaque helpers (10 addresses).** A whole family of lazy-binding stubs in
+`ATIR500Memory`'s own constructor/lifecycle/pool code, plus one in `shape_surface`'s `C_146` table-copy
+helper, that were never added to issue #15's original sweep. All 10 confirmed stub-shaped via on-disk
+disassembly and resolved via the same live kxld-resolved memory read: two real metaclass-association calls
+(`OSObject::OSObject(OSMetaClass const*)` / `OSMetaClass::instanceConstructed() const`), `IOFreeAligned`,
+`IOMallocAligned` (x3 sites), and `memmove` - every one confirming this project's own prior role-level
+inference exactly.
+
+**Issue #28 - 8 real, named/addressed function bodies never independently transcribed**, decompiled via the
+same local Ghidra headless pipeline issue #25 used: `IOATIR500Shared::alloc_handles` (a real growable
+handle-table allocator, surfacing 4 MORE opaque stubs along the way - `IOMalloc`/`memset`/`memmove`/`IOFree`
+- also resolved via live memory read), `HZMEM_Free` (transcribed from RAW DISASSEMBLY, not Ghidra's own C
+decompile, after `_HZDATA`'s intentionally-opaque type caused a real misattribution in an earlier draft -
+see that file's own header comment), `IOATIR500Accelerator::pageOffDataBuffer` (also surfaced a real,
+pre-existing inconsistency: `ATIRadeonX1000.h` claimed the base class declared `deallocate_texture` virtual,
+but it never actually did - fixed), `IOATIR500Surface::allocAllSlaveSwapBuffers` (transcribed as literally
+as possible, including an honestly-flagged real uncertainty about its own failure path's termination - see
+that file's own header comment), the 3 remaining `map_transfer_to_GART` bodies (Surface/2D/DVD - all
+structurally identical to the already-resolved GL version), and `IOATIR500Accelerator::allocMoreCommandBuffers`
+(also a real signature correction: it's a member function, not the free function with an explicit
+accelerator parameter this project had declared, plus a new real counterpart, `freeCommandBuffer`, found in
+its own rollback path).
+
+**Issue #29 - IOATIR500Surface's uncatalogued `+0x5e0` vtable slot**, found during the `shape_surface` pass
+and never followed up. Resolved instantly via the established subclass-vtable technique (base placeholder,
+subclass real): `ATIR500Surface::submit_flip_buffer(unsigned long, IOATIR500GLContext*, unsigned long)`.
+
+See each issue's own GitHub comments and the referenced source files for full technical detail.

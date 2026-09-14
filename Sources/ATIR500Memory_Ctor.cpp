@@ -14,15 +14,21 @@
  * Confidence: CONFIRMED for control flow - both real decompiled bodies
  * are trivial and identical in shape. The two called real helper pairs
  * (`FUN_00018c60`/`FUN_00018c50`, `FUN_00018d40`/`FUN_00018d30`) are
- * left opaque - own real identity unresolved, matching this project's
- * standing "OSMetaClassBase association" category for every other
- * class's own constructor helpers.
+ * RESOLVED, issue #27 (live kxld-resolved memory read on real G5/Tiger
+ * hardware, cross-referenced against the running kernel's own symbol
+ * table): `OSObject::OSObject(OSMetaClass const*)` (the real base-class
+ * constructor call) followed by `OSMetaClass::instanceConstructed()
+ * const` (real IOKit bookkeeping every OSObject-derived class's
+ * constructor makes) - both pairs (`0x18c60`/`0x18c50` and
+ * `0x18d40`/`0x18d30`) resolve to the exact same two real targets,
+ * confirming they really are the same logical constructor's two ABI
+ * variants, not two different real call sequences.
  */
 
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void FUN_00018c60(void *self, void *metaClass); /* real external-looking helper */
-extern "C" void FUN_00018c50(void *metaClass);              /* real external-looking helper */
+extern "C" void FUN_00018c60(void *self, void *metaClass) asm("__ZN8OSObjectC2EPK11OSMetaClass"); /* real target: OSObject::OSObject(OSMetaClass const*) */
+extern "C" void FUN_00018c50(void *metaClass) asm("__ZNK11OSMetaClass19instanceConstructedEv");    /* real target: OSMetaClass::instanceConstructed() const */
 extern void *ATIR500Memory_gMetaClass; /* real global data symbol (Ghidra's own "gMetaClass" label) - own real identity unresolved, same category as every other class's own metaclass global in this project */
 
 ATIR500Memory::ATIR500Memory() {

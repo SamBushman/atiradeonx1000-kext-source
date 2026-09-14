@@ -86,16 +86,15 @@ class ATIR500Memory {
 public:
     /*
      * Two real constructor bodies exist (real addrs `0x18c00`/`0x18ce0`),
-     * nearly identical - each calls a real, distinct pair of unidentified
-     * external-looking helpers (`FUN_00018c60`/`FUN_00018c50` vs
-     * `FUN_00018d40`/`FUN_00018d30`) before stamping the real vtable
-     * pointer, matching the same real "metaclass association" idiom this
-     * project's already-transcribed constructors use elsewhere (e.g.
-     * `IOATIR500Shared`'s own ctor) - almost certainly the GCC PPC ABI's
-     * real complete-object vs base-object constructor pair for the same
-     * logical constructor, not two genuinely different overloads. Real
-     * own object size CONFIRMED 0x28 bytes (allocation-site cross-check,
-     * issue #23).
+     * nearly identical - each calls a real, distinct pair of helpers
+     * (`FUN_00018c60`/`FUN_00018c50` vs `FUN_00018d40`/`FUN_00018d30`) -
+     * RESOLVED, issue #27: both pairs resolve to the exact same two real
+     * XNU/IOKit symbols, `OSObject::OSObject(OSMetaClass const*)` then
+     * `OSMetaClass::instanceConstructed() const`, confirming the GCC PPC
+     * ABI complete-object/base-object constructor-pair theory exactly -
+     * this really is one logical constructor, not two different
+     * overloads. Real own object size CONFIRMED 0x28 bytes
+     * (allocation-site cross-check, issue #23).
      */
     ATIR500Memory();
 
@@ -105,9 +104,8 @@ public:
      * this class's real entry points shares - same real vtable-indirect
      * call convention as `IOATIR500Shared::init`, issue #24) - if that
      * succeeds, walks and frees the real `chunkList` (this+0x10) via the
-     * real per-chunk free helper (`FUN_00018de8`, own body not
-     * decompiled this pass, same "opaque kernel free wrapper" role as
-     * issue #15's own alloc/free pair), leaving the pool's OWN top-level
+     * real per-chunk free helper (`FUN_00018de8` - RESOLVED, issue #27:
+     * real target `IOFreeAligned`), leaving the pool's OWN top-level
      * bookkeeping fields otherwise untouched. Real return: bool
      * success/failure, mirroring the vtable call's own.
      *
@@ -143,10 +141,10 @@ public:
      *     real per-node data as the pool's total real extent).
      * Both real bodies: call this class's own real vtable `+0x48` gate
      * first (same as `init`, above); on success, allocate the pool's
-     * first real 0x204-byte chunk via the real opaque kernel allocator
-     * (`FUN_00018f44`/`FUN_00019108`, own bodies not decompiled - same
-     * role as issue #15's own alloc/free pair) if `chunkList` is still
-     * empty; then hand-carve the chunk's own memory into the real
+     * first real 0x204-byte chunk via the real kernel allocator
+     * (`FUN_00018f44`/`FUN_00019108` - RESOLVED, issue #27: real target
+     * `IOMallocAligned`) if `chunkList` is still empty; then hand-carve
+     * the chunk's own memory into the real
      * `poolHeadSlot`/sentinel/first-region `BoundaryNode` triple and a
      * real run of additional free `BoundaryNode` records threaded onto
      * `spareNodeStack`, terminated by a real zero sentinel at the
@@ -167,9 +165,9 @@ public:
 
     /*
      * free - CONFIRMED real body, real addr 0x19120. Walks and frees the
-     * real `chunkList` (this+0x10) via the same real opaque per-chunk
-     * free helper `init()` uses (`FUN_00019198`, own body not decompiled,
-     * issue #15-style opaque allocator wrapper), then calls this object's
+     * real `chunkList` (this+0x10) via the same real per-chunk free
+     * helper `init()` uses (`FUN_00019198` - RESOLVED, issue #27: real
+     * target `IOFreeAligned`), then calls this object's
      * own real vtable `+0x4c` slot (own target/role unresolved - a real
      * "free self"/teardown-continuation call, own body not investigated
      * this pass) as its final real action.

@@ -9,13 +9,14 @@
  * unresolved (this class's base/hierarchy was never established - left
  * as a raw vtable-indirect call, matching this project's own "Fn0xNNN"
  * convention for unidentified vtable slots elsewhere, e.g.
- * `ATIR500Surface_ResetFullScreen.cpp`'s own `+0x5e0` call) - then walk
- * and free the real `chunkList` (see `Headers/ATIR500Memory.h`) via a
- * real opaque per-chunk kernel-free wrapper (own body not decompiled,
- * same category as issue #15's own alloc/free pair; `init` and `free`
- * each call a DIFFERENT real address for this, `FUN_00018de8` vs
- * `FUN_00019198` - two distinct real stubs, not the same function
- * reused). `free()` additionally calls this object's own real vtable
+ * `ATIR500Surface_ResetFullScreen.cpp`'s own former `+0x5e0` call, now
+ * RESOLVED, issue #29) - then walk and free the real `chunkList` (see
+ * `Headers/ATIR500Memory.h`) via a real per-chunk kernel-free wrapper -
+ * RESOLVED, issue #27: real target `IOFreeAligned`, same real category
+ * issue #15 established for the alloc/free pair elsewhere; `init` and
+ * `free` each call their own distinct per-call-site stub instance
+ * (`FUN_00018de8`/`FUN_00019198`) resolving to the same real target.
+ * `free()` additionally calls this object's own real vtable
  * slot `+0x4c` (own target/role unresolved) as its final action - a
  * real "continue teardown"/self-free call, consistent with `+0x48`/
  * `+0x4c` being a real init/free virtual pair on this class's own base.
@@ -33,8 +34,8 @@
 
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void FUN_00018de8(void *chunk, UInt32 size); /* real opaque per-chunk free wrapper, init()'s own */
-extern "C" void FUN_00019198(void *chunk, UInt32 size); /* real opaque per-chunk free wrapper, free()'s own (distinct real address) */
+extern "C" void FUN_00018de8(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* init()'s own stub instance */
+extern "C" void FUN_00019198(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* free()'s own stub instance (distinct real address, same real target) */
 
 bool ATIR500Memory::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

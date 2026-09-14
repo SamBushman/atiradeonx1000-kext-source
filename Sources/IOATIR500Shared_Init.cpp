@@ -12,8 +12,9 @@
  * IOKit base-class call every real `init()` override makes first. If
  * that succeeds, zeroes five real, previously-undocumented fields
  * (`this+0x10`/`+0x14`/`+0x18`/`+0x1c`/`+0x24`), calls the already-known
- * real `alloc_handles` (real addr `0x16910`, own body not decompiled
- * this pass), then zeroes a sixth field (`this+0x20`). Real return value
+ * real `alloc_handles` (real addr `0x16910`, own body RESOLVED, issue
+ * #28 - see `Sources/IOATIR500Shared_AllocHandles.cpp`), then zeroes a
+ * sixth field (`this+0x20`). Real return value
  * is the same success/failure boolean the external base-class call
  * produced.
  *

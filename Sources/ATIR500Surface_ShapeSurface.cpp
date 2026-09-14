@@ -92,13 +92,13 @@
  *     scaling trap; the transcription itself already gets this right
  *     via `fbRec + 4` on an equally `SInt32*`-typed local, this comment
  *     just corrects its own prose to match.)
- *   - The real compiled-in constant table `C_146` (copied via a real,
- *     not-independently-decompiled `0x38`-byte memcpy-style helper,
- *     `FUN_0003cf24` - same opaque-helper category as this project's
- *     existing `FUN_000314c4`/`FUN_00044868` blit-template-copy family,
- *     issue #15's own catalog, at a different real address) - real
- *     content/field meaning UNKNOWN, used opaquely as "the default
- *     14-entry mip-offset table" per its own real call-site role.
+ *   - The real compiled-in constant table `C_146` (copied via a
+ *     `0x38`-byte memcpy-style helper, `FUN_0003cf24` - RESOLVED, issue
+ *     #27: real target `memmove`, the same real target as this
+ *     project's `FUN_000314c4`/`FUN_00044868` blit-template-copy family,
+ *     issue #15) - real content/field meaning UNKNOWN, used opaquely as
+ *     "the default 14-entry mip-offset table" per its own real call-site
+ *     role.
  *   - The apparent real field-reuse tension between this function's own
  *     `this+0x94`/`0x96`/`0x98`/`0x9a` reads (used here as if they were
  *     two opposite rect corners, `w-x`/`y-h`) and
@@ -246,8 +246,8 @@ extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits);
 extern "C" UInt32 getFramebufferIndex(IOATIR500Surface *surface);
 extern "C" UInt32 alloc_overlay(IOATIR500Surface *surface);
 extern "C" void   setup_overlay();
-/* real, not independently decompiled - same opaque-helper category as issue #15's own FUN_000314c4/FUN_00044868 blit-template-copy family, at a different real address */
-extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCount);
+/* RESOLVED, issue #27: real target memmove, same real target as issue #15's FUN_000314c4/FUN_00044868 */
+extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCount) asm("_memmove");
 extern const UInt32 kShapeSurfaceDefaultMipTable[14]; /* real: shape_surface()::C_146, real content not extracted this pass */
 
 void ATIR500Surface::shape_surface() {

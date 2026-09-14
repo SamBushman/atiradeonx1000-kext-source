@@ -37,9 +37,10 @@ public:
     IOReturn check_stamps(UInt32 checkMain, UInt32 checkIDCT, UInt32 *outBothDone); /* 20, CONFIRMED body (stage5): non-blocking poll counterpart to wait_for_stamps */
     IOReturn setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags); /* 21, CONFIRMED body (stage5): real per-plane geometry setup for the IDCT working surface, writes a control dword combining caller flags with a fixed 0x20000002 base */
 
-    /* map_transfer_to_GART - CONFIRMED real name (called directly by
-     * doIDCT), shared architecture with every other context's own
-     * override of the same real name. Body UNKNOWN beyond role. */
+    /* map_transfer_to_GART - RESOLVED, issue #28. Same real structure as
+     * every other class's own copy: calls `addTransferToGART` then
+     * unconditionally `freeToAllocGART` - see
+     * Sources/MapTransferToGART_RemainingContexts.cpp. */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
     /*

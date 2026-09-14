@@ -29,6 +29,7 @@ class ATIRadeonX1000;
 class IOATIR500GLContext;
 class IOTextureBuffer; /* real, opaque backing-store handle type - forward declared only, not reconstructed (Apple's own real type, same policy as IOAccelSurfaceData etc. below) */
 struct VendorTransferBuffer;
+struct VendorSwapBufferHeader; /* real type name (Ghidra's own symbol), own real layout not reconstructed - issue #28 */
 
 /*
  * IOAccelSurfaceReadData / IOAccelSurfaceData / IOAccelSurfaceScaling -
@@ -342,6 +343,23 @@ public:
     virtual SInt32 is_flip_allowed();                                /* +0x5dc, real addr 0x13f60 (base) / 0x3ae30 (subclass override) */
 
     /*
+     * submit_flip_buffer - RESOLVED, issue #29. `resetFullScreen`'s own
+     * `+0x5e0` call (flagged "still-uncatalogued" when found during the
+     * `shape_surface` pass, issue #22) - resolved via the same
+     * concrete-subclass-vtable technique that closed issues #6/#18/#19:
+     * the BASE class's own `+0x5e0` slot is genuine placeholder content
+     * (raw 0), but the concrete `ATIR500Surface` subclass's own vtable
+     * has a real override at the same offset, real addr `0x3e5c0`, real
+     * mangled symbol `__ZN14ATIR500Surface18submit_flip_bufferEmP18IOATIR500GLContextm`.
+     * Declared on the base since the real call site (`resetFullScreen`,
+     * below) uses a base-typed pointer with ordinary virtual dispatch,
+     * matching this project's established convention for this exact
+     * situation. Own body not independently decompiled - own real
+     * behavior UNKNOWN beyond the real signature confirmed here.
+     */
+    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag); /* +0x5e0, real addr UNKNOWN (base, placeholder) / 0x3e5c0 (subclass override) */
+
+    /*
      * shape_surface / is_surface_size_supported - RESOLVED, issue #18
      * (found while wiring in the rest of that issue -
      * `set_shape_backing_length_ext` calls both through raw
@@ -356,24 +374,30 @@ public:
     virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
 
     /*
-     * map_transfer_to_GART - CONFIRMED real, distinct method on THIS
-     * class (real mangled receiver `IOATIR500Surface`, own real body NOT
-     * decompiled this pass) - found (issue #22) as a real call site in
-     * `ATIR500Surface::dealloc_surface`. A DIFFERENT real function from
-     * the already-fully-transcribed `IOATIR500GLContext::map_transfer_to_GART`
-     * (`Headers/IOATIR500GLContext.h`) - same real name, different real
-     * receiver class, confirmed via Ghidra's own class-qualified
-     * decompile naming for each, not assumed.
+     * map_transfer_to_GART - RESOLVED, issue #28. A DIFFERENT real
+     * function from `IOATIR500GLContext::map_transfer_to_GART` (same
+     * real name, different real receiver class - confirmed via Ghidra's
+     * own class-qualified decompile naming, not assumed), but
+     * structurally identical: calls `addTransferToGART` then
+     * unconditionally `freeToAllocGART` - see
+     * `Sources/MapTransferToGART_RemainingContexts.cpp`.
      */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
     /*
-     * allocAllSlaveSwapBuffers - CONFIRMED real name/address (real
-     * mangled symbol __ZN16IOATIR500Surface24allocAllSlaveSwapBuffersEmm,
-     * kext offset 0x11e50, found in this project's own earlier symbol
-     * sweep but never declared until now - issue #22). Own body NOT
-     * decompiled this pass; real return type INFERRED (checked against 0
-     * at its one known real call site, `dealloc_surface`).
+     * init_swap_buffer_header - RESOLVED, issue #28 (real mangled symbol
+     * __ZN16IOATIR500Surface23init_swap_buffer_headerEP22VendorSwapBufferHeaderm,
+     * real addr 0x10b40), found decompiling `allocAllSlaveSwapBuffers`
+     * below. Own body not independently decompiled.
+     */
+    void init_swap_buffer_header(VendorSwapBufferHeader *header, UInt32 size);
+
+    /*
+     * allocAllSlaveSwapBuffers - RESOLVED, issue #28, real addr 0x11e50 -
+     * see `Sources/IOATIR500Surface_AllocAllSlaveSwapBuffers.cpp` for the
+     * full transcription, including an honestly-flagged real uncertainty
+     * about the failure-path's own eventual termination (transcribed
+     * literally rather than guessed at).
      */
     UInt32 allocAllSlaveSwapBuffers(UInt32 param1, UInt32 param2);
 

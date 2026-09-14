@@ -24,10 +24,10 @@
  * only declared/implemented on the base (`Headers/IOATIR500Accelerator.h`
  * updated to match - this project's issue #19 filing had it on
  * `ATIRadeonX1000.h`). Real body: a single real call,
- * `allocMoreCommandBuffers(this, 0, 0x20000)` - a new, previously-
- * unknown real function this project hasn't investigated (own body not
- * decompiled this pass; declared here as an opaque extern per this
- * project's no-invented-names standard).
+ * `allocMoreCommandBuffers(0, 0x20000)` - RESOLVED, issue #28, see
+ * `Headers/IOATIR500Accelerator.h` for the full account and the real
+ * signature correction (it's a member function, not the free function
+ * with an explicit accelerator parameter this project had declared).
  *
  * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED. Both are thin real wrappers
  * delegating to a NEW, previously-unknown, substantial real class this
@@ -84,11 +84,49 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void allocMoreCommandBuffers(IOATIR500Accelerator *accel, UInt32 param2, UInt32 param3); /* real name, own body not decompiled this pass */
-
 UInt32 IOATIR500Accelerator::setup3D(void) {
-    allocMoreCommandBuffers(this, 0, 0x20000);
+    allocMoreCommandBuffers(0, 0x20000);
     return 1; /* real: no explicit return in the raw decompile's own void-typed body; matches the "success" side of this class's own established boolean-return convention elsewhere. Real return value not independently confirmed - see this file's own header comment on the setup3D/tmpAllocVRAM calling-convention-artifact family. */
+}
+
+namespace {
+inline UInt8 *ByteAt(void *base, int offset) { return reinterpret_cast<UInt8 *>(base) + offset; }
+} // namespace
+
+bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 size) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt32 blockOffset = recordIndex * 0x1c4;
+
+    UInt16 oldCount = *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x402));
+    if (oldCount == 0x10) {
+        return false;
+    }
+
+    UInt32 newCount = (oldCount == 0) ? 1 : (static_cast<UInt32>(oldCount) << 1);
+
+    if (oldCount < newCount) {
+        VendorCommandBuffer *slot = reinterpret_cast<VendorCommandBuffer *>(ByteAt(self, oldCount * 0x1c + blockOffset + 0x240));
+        UInt32 idx = oldCount;
+        while (idx != newCount) {
+            if (!allocCommandBuffer(slot, size)) {
+                /* real: roll back every newly-allocated slot, in reverse order, down to (but not including) oldCount */
+                if (static_cast<SInt32>(idx) - 1 >= static_cast<SInt32>(oldCount)) {
+                    VendorCommandBuffer *rollback = reinterpret_cast<VendorCommandBuffer *>(ByteAt(self, (idx - 1) * 0x1c + blockOffset + 0x240));
+                    for (SInt32 i = static_cast<SInt32>(idx) - 1; i >= static_cast<SInt32>(oldCount); i--) {
+                        freeCommandBuffer(rollback);
+                        rollback = reinterpret_cast<VendorCommandBuffer *>(ByteAt(rollback, -0x1c));
+                    }
+                }
+                return false;
+            }
+            idx++;
+            slot = reinterpret_cast<VendorCommandBuffer *>(ByteAt(slot, 0x1c));
+        }
+    }
+
+    *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x402)) = static_cast<UInt16>(newCount);
+    *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x400)) = oldCount;
+    return true;
 }
 
 bool ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment) {

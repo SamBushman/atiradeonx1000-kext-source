@@ -49,14 +49,10 @@ public:
     IOReturn set_macrovision(UInt32 enable);                                                              /* 15, CONFIRMED body (stage9): real and functioning - iterates every active display connection, calls a vtable method (opcode 0x92) on each */
 
     /*
-     * map_transfer_to_GART - CONFIRMED real name/signature (real mangled
-     * symbol __ZN18IOATIR5002DContext20map_transfer_to_GARTEP20VendorTransferBuffer),
-     * found this pass as a real call site in ATIR5002DContext::
-     * process_command_buffer (issue #7) - see
-     * Sources/ATIR5002DContext_ProcessCommandBuffer.cpp. Same real role
-     * as the identically-named methods on IOATIR500GLContext/
-     * IOATIR500DVDContext. Own body NOT independently decompiled this
-     * pass.
+     * map_transfer_to_GART - RESOLVED, issue #28. Same real structure as
+     * every other class's own copy: calls `addTransferToGART` then
+     * unconditionally `freeToAllocGART` - see
+     * Sources/MapTransferToGART_RemainingContexts.cpp.
      */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 

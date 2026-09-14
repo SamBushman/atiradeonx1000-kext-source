@@ -14,11 +14,9 @@
  * Then calls the already-resolved `is_flip_allowed` (RESOLVED, issue
  * #22 - this file's own cross-reference, not a new finding); if true
  * AND a real per-ID bit is set in the accelerator's own `+0xd0`
- * bitmask, calls a real, still-uncatalogued vtable slot (`+0x5e0` on
- * this object) with real args `(this, id, 0, 1)` and increments a real
- * accelerator statistics field (`accelerator+0x74c`). `+0x5e0`'s own
- * real target NOT investigated this pass - noted for a future issue,
- * same as issue #22's own earlier finding of this exact slot.
+ * bitmask, calls `submit_flip_buffer` (RESOLVED, issue #29 - see
+ * `Headers/IOATIR500Surface.h`) with real args `(id, nullptr, 1)` and
+ * increments a real accelerator statistics field (`accelerator+0x74c`).
  *
  * Subclass: real per-panel-side (`this+0xc14`, the SAME real ID-slot
  * field `set_id_mode`/`is_flip_allowed` already established) mirroring
@@ -76,9 +74,7 @@ void IOATIR500Surface::resetFullScreen() {
     if (is_flip_allowed() != 0) {
         UInt32 id = U32At(self, 0xc14);
         if ((U32At(accel, 0xd0) & (1u << (id & 0x3f))) != 0) {
-            typedef void (*Fn0x5e0)(void *, UInt32, UInt32, UInt32);
-            UInt32 *vtable = *reinterpret_cast<UInt32 **>(self);
-            (*reinterpret_cast<Fn0x5e0 *>(vtable + (0x5e0 / 4)))(self, id, 0, 1);
+            submit_flip_buffer(id, nullptr, 1); /* +0x5e0, RESOLVED issue #29: ATIR500Surface::submit_flip_buffer */
             U32At(accel, 0x74c) += 1;
         }
     }

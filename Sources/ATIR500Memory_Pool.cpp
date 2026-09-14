@@ -8,11 +8,10 @@
  * All three chunk-carving functions (`init_pool` x2, `add_to_stack`)
  * gate on this class's own real vtable slot `+0x48` where applicable
  * (see `ATIR500Memory_Lifecycle.cpp`'s own header comment for that
- * slot's role) and allocate raw `0x204`-byte chunks via a real opaque
- * kernel allocator wrapper - THREE distinct real call addresses
- * (`FUN_00018f44`/`FUN_00019108`/`FUN_00019260`), not the same function
- * reused, matching this project's own issue #15 category of opaque
- * allocator wrappers.
+ * slot's role) and allocate raw `0x204`-byte chunks via a real kernel
+ * allocator wrapper - THREE distinct per-call-site stub addresses
+ * (`FUN_00018f44`/`FUN_00019108`/`FUN_00019260`), all RESOLVED, issue
+ * #27, to the same real target, `IOMallocAligned`.
  *
  * The two `init_pool` overloads carve their first chunk into this
  * class's real sentinel/first-region `BoundaryNode` bootstrap (see
@@ -44,9 +43,9 @@
 
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void *FUN_00018f44(UInt32 size, UInt32 align); /* real opaque kernel allocator, init_pool(1-param)'s own */
-extern "C" void *FUN_00019108(UInt32 size, UInt32 align); /* real opaque kernel allocator, init_pool(3-param)'s own (distinct real address) */
-extern "C" void *FUN_00019260(UInt32 size, UInt32 align); /* real opaque kernel allocator, add_to_stack's own (distinct real address) */
+extern "C" void *FUN_00018f44(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* init_pool(1-param)'s own stub instance */
+extern "C" void *FUN_00019108(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* init_pool(3-param)'s own stub instance */
+extern "C" void *FUN_00019260(UInt32 size, UInt32 align) asm("_IOMallocAligned"); /* add_to_stack's own stub instance */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

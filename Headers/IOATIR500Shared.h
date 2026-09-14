@@ -55,12 +55,17 @@ public:
     bool init();
 
     /*
-     * alloc_handles - CONFIRMED real name (real mangled symbol
-     * __ZN15IOATIR500Shared13alloc_handlesEv, kext offset 0x16910),
-     * called unconditionally from `init()` above. Own body not
-     * independently decompiled this pass.
+     * alloc_handles - RESOLVED, issue #28. Real mangled symbol
+     * __ZN15IOATIR500Shared13alloc_handlesEv, kext offset 0x16910,
+     * called unconditionally from `init()` above (return value discarded
+     * there). Real body: grows a combined handle-array+bitmap allocation,
+     * doubling capacity each call - see
+     * `Sources/IOATIR500Shared_AllocHandles.cpp` for the full
+     * transcription. REAL RETURN TYPE CORRECTED to `bool` (was declared
+     * `void`) - the real decompiled body returns a real success/failure
+     * boolean, simply never checked at its one known call site.
      */
-    void alloc_handles();
+    bool alloc_handles();
 
     /*
      * delete_texture - CONFIRMED real name/signature (real mangled

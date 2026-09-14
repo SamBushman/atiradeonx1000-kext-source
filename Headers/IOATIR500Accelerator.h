@@ -152,12 +152,36 @@ public:
     bool                 allocDataBufferBacking(VendorTextureBuffer *buffer);
 
     /*
-     * pageOffDataBuffer - CONFIRMED real name (real mangled class-qualified
-     * decompile, found this pass - issue #23 - as a real call site in
-     * `ATIRadeonX1000::deallocate_texture`'s own body,
-     * `Sources/ATIRadeonX1000_TextureVRAM.cpp`). Own body not
-     * independently decompiled this pass; real signature INFERRED from
-     * that one real call site's own shape.
+     * deallocate_texture - RESOLVED, issue #28 addendum: a real,
+     * pre-existing inconsistency caught while wiring in
+     * `pageOffDataBuffer` below. `ATIRadeonX1000.h`'s own declaration
+     * comment already claimed "the base class declares the virtual", but
+     * this declaration never actually existed here - `pageOffDataBuffer`
+     * calls it through a base-typed `this` (raw vtable-offset cast on
+     * `IOATIR500Accelerator*`), which only works as real virtual dispatch
+     * if the base actually declares it. Added here to match
+     * `ATIRadeonX1000::deallocate_texture`'s own real override signature.
+     */
+    virtual void deallocate_texture(VendorTextureBuffer *texture); /* +0x524 */
+
+    /*
+     * pageOffDataBuffer - RESOLVED, issue #28. Real mangled symbol
+     * __ZN20IOATIR500Accelerator17pageOffDataBufferEP19VendorTextureBuffer,
+     * real addr 0x3140. Real body: tries `allocDataBufferBacking`; on
+     * failure, falls back to `deallocate_texture` (virtual dispatch,
+     * base-typed - see above) instead. On success: calls this object's
+     * own already-known `+0x524`... texture unbind via
+     * `freeOneDataBuffer`-adjacent list splice (uses the SAME real
+     * `+0x10` doubly-linked-list field pattern as other texture lists in
+     * this project), then real GART-mapping prepare/get-info/release
+     * sequence on the texture's own memoryDescriptor (`+0x08`) - the SAME
+     * real `+0x14c`/`+0xd0`/`+0x18` vtable chain `load_texture` already
+     * establishes - copying real per-word data from `this+0xe4`
+     * (accelerator-owned) into the mapped hardware buffer, then splicing
+     * the texture back into a real per-buffer list a second time with a
+     * different real argument. See
+     * `Sources/IOATIR500Accelerator_PageOffDataBuffer.cpp` for the full
+     * transcription.
      */
     void pageOffDataBuffer(VendorTextureBuffer *buffer);
 
@@ -189,6 +213,41 @@ public:
      */
     bool getVRAMDescriptors(void);
     bool allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size);
+
+    /*
+     * freeCommandBuffer - RESOLVED, issue #28. A real, previously-unknown
+     * counterpart to `allocCommandBuffer`, found decompiling
+     * `allocMoreCommandBuffers`'s own rollback-on-failure path below.
+     * Own body not independently decompiled - real signature INFERRED
+     * from that one real call site's own shape (mirrors
+     * `allocCommandBuffer`'s own single-buffer-pointer convention).
+     */
+    void freeCommandBuffer(VendorCommandBuffer *buffer);
+
+    /*
+     * allocMoreCommandBuffers - RESOLVED, issue #28 (real mangled symbol
+     * __ZN20IOATIR500Accelerator23allocMoreCommandBuffersEmm, real addr
+     * 0x24a0). REAL SIGNATURE CORRECTED: this project had previously
+     * declared it as a free function taking an explicit accelerator
+     * parameter (`allocMoreCommandBuffers(IOATIR500Accelerator*, UInt32,
+     * UInt32)`) - the real mangled symbol is a genuine MEMBER function
+     * taking two `unsigned long` parameters, `this` implicit. `setup3D`'s
+     * own call site (`Sources/ATIRadeonX1000_VtableSlotBodies.cpp`)
+     * updated to match.
+     *
+     * Real body: doubles a per-record-block command-buffer array
+     * (`this+recordIndex*0x1c4+0x402`, a real `UInt16` current-capacity
+     * field, capped at `0x10`) via `allocCommandBuffer`, one real
+     * `VendorCommandBuffer`-sized (`0x1c` bytes) slot at a time
+     * (`this+recordIndex*0x1c4+0x240`, stride `0x1c`); on any single
+     * allocation failure, rolls back every newly-allocated slot from
+     * this call via `freeCommandBuffer` (in reverse order) and returns
+     * `false`, leaving the array at its original capacity. On success,
+     * stores the new capacity and - into a real, previously-unnamed
+     * field `this+recordIndex*0x1c4+0x400` - the OLD capacity (role
+     * beyond "backup of the previous count" UNKNOWN).
+     */
+    bool allocMoreCommandBuffers(UInt32 recordIndex, UInt32 size);
 
     /* setup_stereo - CONFIRMED real name (IOATIR500GLContext::set_stereo
      * calls it), signature INFERRED. */
