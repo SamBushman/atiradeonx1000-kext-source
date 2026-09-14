@@ -241,8 +241,9 @@ inline UInt32 RoundUpHeight32(SInt16 heightVal) {
 }
 } // namespace
 
-/* real name/role UNKNOWN beyond call-site usage - own body not decompiled
- * this pass. RESOLVED linkage: real symbol is C++-mangled
+/* RESOLVED, issue #35 - real body (a simple format-code switch) now
+ * decompiled, see Sources/ATIRadeonX1000_WindowModeToATIFormat.cpp.
+ * RESOLVED linkage: real symbol is C++-mangled
  * (`__Z25window_mode_to_ati_formatm`), a plain `extern "C"` declaration
  * with no `asm()` alias would never have linked against it - fixed. */
 extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
