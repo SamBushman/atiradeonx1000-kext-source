@@ -269,17 +269,28 @@ public:
 
     /*
      * Four real, already-named (via their own real mangled symbols)
-     * methods `pageoff_dirty_texture` calls into - found this same pass
-     * but their own bodies NOT decompiled (a genuinely new subsystem,
-     * out of scope for the field-naming question that led here). Real
+     * methods `pageoff_dirty_texture` calls into. Own bodies RESOLVED,
+     * issue #30 - see Sources/ATIRadeonX1000_TexturePageoff.cpp. Real
      * addrs: pageoff_linear_buffer 0x217a0, pageoff_dirty_texture_with_gpu
      * 0x210f0, prepare_texture_for_pageoff_with_cpu 0x20d30,
-     * pageoff_dirty_texture_with_cpu 0x1e500.
+     * pageoff_dirty_texture_with_cpu 0x1e500. REAL RETURN TYPE CORRECTED:
+     * `pageoff_dirty_texture_with_cpu` is genuinely `void` (this
+     * project's earlier placeholder declaration had it returning
+     * `UInt32` by analogy with its siblings - its own real decompile
+     * never returns a value).
      */
     UInt32 pageoff_linear_buffer(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
     UInt32 pageoff_dirty_texture_with_gpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
     UInt32 prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
-    UInt32 pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
+    void   pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
+
+    /*
+     * freeToAllocTextureCPUVisibleVRAM - CONFIRMED real name/addr
+     * (0x1e320, via `nm`), found this pass as `prepare_texture_for_
+     * pageoff_with_cpu`'s own real fallback call when a direct
+     * `ATIR500Memory::alloc` fails. Own body not decompiled this pass.
+     */
+    UInt32 freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *texture, UInt32 size);
 
     /*
      * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED, issue #19 (found while
