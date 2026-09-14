@@ -217,9 +217,23 @@ extern "C" const float  FLOAT_0004c380;  /* kext offset 0x4c380 - CONFIRMED real
  * this project). Real signature INFERRED from call-site shape
  * (`HZMEM_GetBlockOffset(&accel->hizDataAt0x870, surfaceRecordField0x28, blockKind)`).
  * `_HZDATA`'s own internal layout was never decompiled - opaque here.
+ *
+ * LINKAGE FIXED this pass (issue #40): all five real functions in this
+ * family are genuine C++ functions, not C ones - their real kext symbols
+ * are mangled (`__Z20HZMEM_GetBlockOffsetP7_HZDATAmm` etc., confirmed via
+ * `nm`), so a bare `extern "C"` declaration here would NOT produce a
+ * symbol matching the real binary if this project is ever compiled and
+ * diffed against it. Pinned via `asm(...)` to the real mangled name,
+ * same technique already used for `window_mode_to_ati_format` elsewhere
+ * in this project - the local `extern "C"` name/call sites are
+ * unaffected, only the emitted symbol changes.
+ *
+ * Own bodies RESOLVED, issue #40 - see
+ * `Sources/ATIRadeonX1000_HZMEMQueries.cpp` (GetBlockOffset/GetBlockCount/
+ * IsPartial) and `Sources/ATIRadeonX1000_HZMEMAlloc.cpp` (Alloc).
  */
 struct _HZDATA;
-extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z20HZMEM_GetBlockOffsetP7_HZDATAmm");
 /*
  * FIXED this pass: HZMEM_GetBlockCount/HZMEM_IsPartial were already being
  * called throughout ATIR500GLContext_ProcessCommandBuffer.cpp and
@@ -228,20 +242,24 @@ extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, 
  * declared anywhere in this project's headers - a real gap that would have
  * failed to compile. Same real signature shape as HZMEM_GetBlockOffset.
  */
-extern "C" UInt32 HZMEM_GetBlockCount(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
-extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+extern "C" UInt32 HZMEM_GetBlockCount(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z19HZMEM_GetBlockCountP7_HZDATAmm");
+extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z15HZMEM_IsPartialP7_HZDATAmm");
 /*
  * HZMEM_Alloc - CONFIRMED real, found this pass in opcode 0x41's real
- * body (real depth/stencil HyperZ block auto-allocation). Real signature
- * INFERRED from its two real call-site shapes:
- *   HZMEM_Alloc(hizData, 0xffffffff, 0, tileDim, size)       - fresh alloc
- *   HZMEM_Alloc(hizData, existingBlockHandle, 1, tileDim, size) - a second,
- *     related allocation given an already-allocated block (stencil
- *     following depth) - the real meaning of the second/third parameters
- *     is INFERRED (a "previous block" handle and a "chain to it" flag),
- *     not independently confirmed against HZMEM_Alloc's own body.
+ * body (real depth/stencil HyperZ block auto-allocation). REAL SIGNATURE
+ * CORRECTED, issue #40: the 2nd/3rd parameters are NOT
+ * "existingBlockOrSentinel"/"chainFlag" - decompiling the real body
+ * showed the 2nd parameter is the SAME rolling `surfaceHzField` bitfield
+ * value every sibling function above takes, and the 3rd is the SAME
+ * `blockKind` selector (0/1/2), confirmed by this function's own real
+ * final bit-packing step matching the siblings' exactly. Real two-call
+ * shape (opcode 0x41's body):
+ *   HZMEM_Alloc(hizData, 0xffffffff, 0, tileDim, size)       - fresh alloc, blockKind 0
+ *   HZMEM_Alloc(hizData, <result of the first call>, 1, tileDim, size) - a second,
+ *     related allocation (stencil following depth) into blockKind 1 of
+ *     the SAME rolling bitfield, preserving the first call's bits.
  */
-extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, UInt32 chainFlag, UInt32 tileDim, UInt32 size);
+extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind, UInt32 tileDim, UInt32 size) asm("__Z11HZMEM_AllocP7_HZDATAmmmm");
 
 /*
  * HZMEM_Free - RESOLVED, issue #23 (found in `ATIRadeonX1000::deallocate_texture`'s own real
@@ -249,10 +267,12 @@ extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, 
  * `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial` above - the inverse operation, freeing a
  * real HyperZ block back to the pool. Own body RESOLVED, issue #28 (transcribed from raw PPC
  * disassembly, not Ghidra's own C decompile, after `_HZDATA`'s intentionally-opaque type
- * caused a real misattribution in an early draft) - see Sources/ATIRadeonX1000_HZMEMFree.cpp.
- * `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial`/`Alloc` above remain genuinely undecompiled.
+ * caused a real misattribution in an early draft) - see Sources/ATIRadeonX1000_HZMEMFree.cpp
+ * (which also documents a SECOND real transcription bug this project's own issue #40 sweep
+ * found and fixed in that same body). `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial`/`Alloc`
+ * above are now RESOLVED too, issue #40.
  */
-extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
+extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z10HZMEM_FreeP7_HZDATAmm");
 
 /*
  * FormatTableLookup_0x0004d2dc / FormatTableLookup_0x0004d2e0 /
