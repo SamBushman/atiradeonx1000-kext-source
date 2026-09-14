@@ -508,9 +508,12 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  * rather than reinterpreted into named fields, consistent with this
  * project's practice for genuinely dense, semantically-uncertain
  * real code (see e.g. Sources/ATIR500GLContext_FSAAResolveBlit.cpp's
- * own methodology note) - worth an independent spot-check before relying
- * on any single bit position here, same caveat this project already
- * gives its other densest functions.
+ * own methodology note). INDEPENDENT SPOT-CHECK COMPLETE: re-decompiled
+ * fresh from Ghidra and compared line-by-line against this committed
+ * transcription, including every `int*`-scaled pointer expression
+ * (`piVar12[3]`/`piVar12+4`/`piVar12+2`/`param_6[2]`, etc.) - zero
+ * discrepancies found. This function's transcription is CONFIRMED
+ * byte-accurate, not just structurally plausible.
  */
 /* RESOLVED, issue #15 (live kxld-resolved memory read on real G5/Tiger
  * hardware, cross-referenced against the running kernel's own symbol

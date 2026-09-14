@@ -805,17 +805,24 @@ void ATIR500GLContext::submit_context_buffer() {
  *    Finally releases the GART-mapping handle from step 2 via vtable+0x18.
  *
  * Confidence: CONFIRMED for the overall structure, every real offset and
- * cross-referenced field, and both submit_buffer call sites. The Path A/
- * Path B per-tile register-burst payloads themselves (which exact bits go
- * where in the output PM4 stream) are transcribed faithfully from the real
- * decompile but, like `write_kernel_context_buffer_regs` and
- * `restore_state_destroyed_by_pageoff` elsewhere in this project, are
- * dense enough (particularly Path B's per-level hwShiftA/hwShiftB
- * recurrence) that a systematic line-by-line spot-check against the real
- * decompile - or, ideally, live hardware behavior - is worth doing before
- * fully trusting any single bit position here. Real per-tile struct field
- * names beyond what's cross-referenced above are UNKNOWN; kept as raw byte
- * offsets rather than invented names, per this project's standard.
+ * cross-referenced field, and both submit_buffer call sites.
+ * INDEPENDENT SPOT-CHECK COMPLETE: re-decompiled fresh from Ghidra and
+ * compared line-by-line against this committed transcription, including
+ * Path A's LOD-bias formula (a real operator-precedence trap - the raw
+ * `>> 10 |` chain only parses correctly if `>>` binds every preceding
+ * `+`/`*` term together before the `|`s apply, exactly as this
+ * transcription's explicit parenthesization already had it) and Path B's
+ * per-level `hwShiftA`/`hwShiftB` recurrence (a real two-step reassignment
+ * where the SAME raw variable is read at an intermediate value before its
+ * own final reassignment - also already correct here). ONE REAL BUG FOUND
+ * AND FIXED: Path B's per-tile output-slot offset was `tile + 0x18`,
+ * should be `tile + 0x58` (`*(ushort*)(hwInfo + tileIndex*8 + 0x16)` on an
+ * `int*`-typed local - real byte offset `tileIndex*0x20 + 0x58`, not
+ * `+0x18` - a real instance of this project's own documented
+ * `int*`-scaling trap that slipped through the original transcription).
+ * Real per-tile struct field names beyond what's cross-referenced above
+ * are UNKNOWN; kept as raw byte offsets rather than invented names, per
+ * this project's standard.
  */
 void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -1050,7 +1057,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
                 for (UInt32 level = baseLevel; level <= lastLevel; level++) {
                     UInt32 tileIndex = face * 0xd + level;
                     UInt8 *tile = hwInfoBytes + tileIndex * 0x20;
-                    UInt32 *dst = record + *reinterpret_cast<UInt16 *>(tile + 0x18);
+                    UInt32 *dst = record + *reinterpret_cast<UInt16 *>(tile + 0x58); /* real: CORRECTED from +0x18 to +0x58 via a follow-up spot-check re-verification against a fresh decompile - the raw expression is `*(ushort*)(hwInfo + tileIndex*8 + 0x16)` on an `int*`-typed local, real byte offset (tileIndex*8+0x16)*4 = tileIndex*0x20+0x58 = tile+0x58, not tile+0x18 as this project's own earlier transcription had it */
 
                     if ((fullMipFlags & 4) != 0) {
                         SInt32 shifted = static_cast<SInt32>(
