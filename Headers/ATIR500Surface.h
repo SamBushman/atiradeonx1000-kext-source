@@ -110,9 +110,8 @@ public:
      * receiver class, RE-HOMED (issue #16). Real call shape:
      * `decompress_and_flush_depth_buffer(surface, surfaceBufferScratch,
      * 0, record)` returning a real UInt32 (used as a record-dword
-     * count/index at every real call site). Own body NOT independently
-     * decompiled - same standing gap as before this issue, only the
-     * class placement changed.
+     * count/index at every real call site). Own body RESOLVED, issue
+     * #38 - see Sources/ATIR500Surface_DecompressAndFlushDepthBuffer.cpp.
      */
     UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
 
