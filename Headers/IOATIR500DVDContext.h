@@ -66,6 +66,19 @@ public:
     void add_texture_to_stream(VendorTextureBuffer *texture);
     void remove_texture_from_stream(VendorTextureBuffer *texture);
 
+    /*
+     * allocAllContextBuffers - REAL-CLASS-PLACEMENT FIXED, issue #33
+     * sweep: this project had declared it on `ATIR500DVDContext` (the
+     * SUBCLASS), but that declaration's own comment already said the
+     * real mangled symbol is `__ZN19IOATIR500DVDContext22allocAllContextBuffersEm`
+     * - THIS base class, not the subclass. Moved here to match. Own body
+     * RESOLVED, issue #33 - see
+     * Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp (real addr
+     * 0xeab0).
+     */
+    bool allocAllContextBuffers(UInt32 size);
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xe7d0 - own body not decompiled this pass */
+
 protected:
     ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
     IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */

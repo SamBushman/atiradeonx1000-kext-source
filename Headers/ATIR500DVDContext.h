@@ -44,15 +44,18 @@ public:
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
     /*
-     * submit_context_buffer / allocAllContextBuffers - CONFIRMED real
-     * names/signatures (real mangled symbols
-     * __ZN17ATIR500DVDContext21submit_context_bufferEv /
-     * __ZN19IOATIR500DVDContext22allocAllContextBuffersEm), the same
-     * real per-context-type pattern GL has its own versions of (issue
-     * #5). Neither independently decompiled this pass.
+     * submit_context_buffer - CONFIRMED real name/signature (real
+     * mangled symbol __ZN17ATIR500DVDContext21submit_context_bufferEv).
+     * Own body NOT independently decompiled this pass.
+     *
+     * allocAllContextBuffers - REAL-CLASS-PLACEMENT FIXED, issue #33
+     * sweep: this was wrongly declared here - its own real mangled
+     * symbol (__ZN19IOATIR500DVDContext22allocAllContextBuffersEm) is a
+     * member of the BASE class, `IOATIR500DVDContext`, not this
+     * subclass. Moved to Headers/IOATIR500DVDContext.h; own body
+     * RESOLVED there, issue #33.
      */
     void submit_context_buffer(void);
-    bool allocAllContextBuffers(UInt32 size);
 
     /*
      * process_command_buffer - PARTIALLY RESOLVED (issue #7), NOW

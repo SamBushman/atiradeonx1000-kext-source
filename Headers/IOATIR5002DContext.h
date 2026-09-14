@@ -57,6 +57,17 @@ public:
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
     /*
+     * allocAllContextBuffers - CONFIRMED to exist and be a real member of
+     * this class (mangled __ZN18IOATIR5002DContext22allocAllContextBuffersEm,
+     * kext offset 0xbee0), a real gap this project's header set had never
+     * declared before this pass despite GL/DVD's own equivalents already
+     * being documented. Own body RESOLVED, issue #33 - see
+     * Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp.
+     */
+    bool allocAllContextBuffers(UInt32 size);
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xbaf0 - own body not decompiled this pass */
+
+    /*
      * NOTE on selectors 16-18: real decompiled signatures for read_regs/
      * write_regs/write_2_regs are `ATIR5002DContext::` (the SUBCLASS),
      * not `IOATIR5002DContext::` (this base class) - matching the exact

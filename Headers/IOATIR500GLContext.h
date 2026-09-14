@@ -107,9 +107,22 @@ public:
      * kext offset 0x74d0; IOATIR5002DContext and IOATIR500DVDContext each
      * have their own same-named, same-signature method too - a real
      * per-context-type pattern). Called from start() with a fixed size
-     * argument (0x8000 for GL); not independently decompiled itself.
+     * argument (0x8000 for GL). Own body RESOLVED, issue #33 - see
+     * Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp.
      */
     bool allocAllContextBuffers(UInt32 size);
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR500GLContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0x7490 - own body not decompiled this pass */
+
+    /*
+     * freeCommandBuffer - RESOLVED, issue #34. A real, previously
+     * entirely untracked NO-ARGUMENT method (real mangled symbol
+     * __ZN18IOATIR500GLContext17freeCommandBufferEv, real addr 0x7e70) -
+     * genuinely distinct from `IOATIR500Accelerator::freeCommandBuffer
+     * (VendorCommandBuffer*)` above, which this project had previously
+     * assumed was the only real "freeCommandBuffer". See
+     * Sources/ATIRadeonX1000_FreeCommandBuffer.cpp.
+     */
+    void freeCommandBuffer();
 
     /*
      * add_texture_to_stream / remove_texture_from_stream / map_transfer_to_GART -
