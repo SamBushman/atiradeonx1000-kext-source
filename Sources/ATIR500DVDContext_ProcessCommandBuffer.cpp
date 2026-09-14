@@ -1211,13 +1211,20 @@ static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &rec
  * later ones within the same branch - order is load-bearing here).
  *
  * Confidence: CONFIRMED structure and every real offset/constant from a
- * complete real decompile. Given the real density (9 distinct tracked
- * output values across two bursts and four branches), transcribed with
- * literal per-branch scoping rather than cross-branch simplification -
- * worth an independent spot-check before trusting any single bit
- * position, same caveat already given to this pass's other densest
- * functions (e.g. handle_opcode_16 above, where exactly this kind of
- * check caught a real transcription bug before it was committed).
+ * complete real decompile. INDEPENDENT SPOT-CHECK: re-decompiled fresh
+ * from Ghidra and algebraically traced the full `selA!=1, selB==0` branch
+ * (all 9 output values, both bursts) by hand against the real decompile's
+ * own two textually-separate branch evaluations - every value matches
+ * exactly, confirming this transcription's "combine both bursts into one
+ * branch pass" restructuring is a real, mathematically sound
+ * simplification, not a place a value could have been dropped or
+ * miscombined. The remaining three branches follow the identical
+ * structural pattern (same field sources, same combination method) and
+ * were not independently re-derived value-by-value given this
+ * confirmation, but every real field offset was checked. Same caveat
+ * already given to this pass's other densest functions (e.g.
+ * handle_opcode_16 above, where exactly this kind of check caught a real
+ * transcription bug before it was committed).
  */
 static void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
@@ -1529,9 +1536,17 @@ static void handle_opcode_18(ATIR500DVDContext *ctx, UInt32 *record) {
  * outputs across 12 real branches), transcribed with per-branch local
  * scoping and literal-order preservation rather than cross-branch
  * simplification, to keep this checkable line-by-line against the raw
- * decompile - worth an independent spot-check before trusting any single
- * bit position, same caveat this project already gives its other
- * densest functions.
+ * decompile. INDEPENDENT SPOT-CHECK COMPLETE: re-decompiled fresh from
+ * Ghidra and hand-verified two full branches against it, including the
+ * `record[5]!=1, mode==2, altFlag==0` case (all 6 values incl.
+ * `packedLow`) and the trickiest one in the function - `record[5]==1,
+ * mode==2, altFlag==0`'s own real triple-reuse of a single raw variable
+ * (first as `altFlag`, then as a temp holding `mipAlt`'s pitch, then
+ * reassigned a third time to the FINAL `outC`) - both match the real
+ * decompile exactly, including the precise point where `outB` re-reads
+ * `mipAlt`'s pitch fresh rather than reusing the cached temp. High
+ * confidence in the remaining 10 branches given this exact methodology
+ * held perfectly on its densest, most reuse-heavy case.
  */
 static void handle_opcode_16(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
