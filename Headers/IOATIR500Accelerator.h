@@ -250,11 +250,28 @@ public:
      * mangled symbol __ZN20IOATIR500Accelerator22freeToAllocTextureVRAMEP16IOATIR500SurfacePP19VendorTextureBufferlS3_),
      * found this pass as a real call site in ATIR500GLContext::
      * alloc_and_load_texture / compact_current_textures (issue #5) -
-     * see Sources/ATIR500GLContext_TextureLoad.cpp. Own body NOT
-     * independently decompiled this pass.
+     * see Sources/ATIR500GLContext_TextureLoad.cpp. Own body RESOLVED,
+     * issue #31 - see Sources/IOATIR500Accelerator_VRAMReclaim.cpp.
      */
     UInt32 freeToAllocTextureVRAM(IOATIR500Surface *surface, VendorTextureBuffer **excludeList,
                                    SInt32 excludeCount, VendorTextureBuffer *needed);
+
+    /*
+     * freeToAllocSurfaceVRAM / tossSurfacesForVRAM - CONFIRMED real
+     * names/signatures via `nm` (real mangled symbols
+     * __ZN20IOATIR500Accelerator22freeToAllocSurfaceVRAMEP16IOATIR500SurfaceS1_PP19VendorTextureBufferlP20ATIR500SurfaceBuffer /
+     * __ZN20IOATIR500Accelerator19tossSurfacesForVRAMEP16IOATIR500SurfacePP19VendorTextureBufferlS3_b),
+     * found this pass as `setup_stereo`'s own real fallback calls
+     * (`Sources/IOATIR500Accelerator_SetupStereo.cpp` - that file's own
+     * earlier placeholder declared `freeToAllocSurfaceVRAM` as a free
+     * function taking an explicit accelerator pointer; fixed to call
+     * through as a real member here). Own bodies RESOLVED, issue #31 -
+     * see Sources/IOATIR500Accelerator_VRAMReclaim.cpp.
+     */
+    UInt32 freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, IOATIR500Surface *excludeB,
+                                   VendorTextureBuffer **excludeList, SInt32 excludeCount, ATIR500SurfaceBuffer *needed);
+    UInt32 tossSurfacesForVRAM(IOATIR500Surface *excludeSurface, VendorTextureBuffer **excludeList,
+                                SInt32 excludeCount, VendorTextureBuffer *needed, bool skipExcludeCheck);
 
     /*
      * getVRAMDescriptors - RESOLVED. Real body: loops calling a real,
@@ -265,7 +282,7 @@ public:
      * afterward. See Sources/IOATIR500Accelerator_DataBufferPool.cpp.
      */
     bool getVRAMDescriptors(void);
-    UInt32 getVRAMDescriptor(UInt32 index); /* real addr 0x290, own body not decompiled this pass */
+    UInt32 getVRAMDescriptor(UInt32 index); /* real addr 0x290, own body RESOLVED issue #31 - see Sources/IOATIR500Accelerator_DataBufferPool.cpp */
 
     /*
      * allocCommandBuffer - RESOLVED. Real body: allocates via
@@ -276,7 +293,7 @@ public:
      * Sources/IOATIR500Accelerator_DataBufferPool.cpp.
      */
     bool allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size);
-    void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size); /* real name, own body not decompiled this pass */
+    void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size); /* real name, own body RESOLVED issue #31 - see Sources/IOATIR500Accelerator_DataBufferPool.cpp */
 
     /*
      * freeCommandBuffer - RESOLVED, issue #28 (found decompiling

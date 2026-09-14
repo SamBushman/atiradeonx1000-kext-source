@@ -31,12 +31,15 @@
  * one with the confirmed real infinite-loop bug in its own failure path).
  *
  * Confidence: CONFIRMED for control flow and every real offset - a real,
- * complete, standalone decompile. `freeToAllocSurfaceVRAM`,
- * `freeAllSwapBuffers`, `allocMasterSwapBuffer`, and the real `+0x56c`/
- * `+0x5cc` vtable slot identities are real, found-but-not-decompiled
- * this pass (see the follow-up issue this pass filed). No C++ compiler
- * was available in the sandboxed environment this was written in (same
- * standing limitation as every other file in this project).
+ * complete, standalone decompile. `freeToAllocSurfaceVRAM` (RESOLVED,
+ * issue #31, and its own call here FIXED from a placeholder free
+ * function taking an explicit accelerator pointer to a real member call
+ * - see Sources/IOATIR500Accelerator_VRAMReclaim.cpp),
+ * `freeAllSwapBuffers`/`allocMasterSwapBuffer` (also RESOLVED, issue #31
+ * - see Sources/IOATIR500Surface_SwapBuffers.cpp), and the real `+0x56c`/
+ * `+0x5cc` vtable slot identities remain otherwise as documented. No C++
+ * compiler was available in the sandboxed environment this was written
+ * in (same standing limitation as every other file in this project).
  */
 
 #include "../Headers/IOATIR500Accelerator.h"
@@ -45,8 +48,6 @@
 #include "../Headers/ATIR500Memory.h"
 
 extern "C" void FUN_000056f8(void *dest, void *src, UInt32 size); /* real memset/memmove-shaped helper, own real identity not investigated */
-extern "C" UInt32 freeToAllocSurfaceVRAM(void *accel, IOATIR500Surface *excludeA, IOATIR500Surface *excludeB,
-                                          VendorTextureBuffer **excludeList, SInt32 excludeCount, void *needed); /* real name/addr 0x45a0, own body not decompiled this pass */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -83,7 +84,7 @@ SInt32 IOATIR500Accelerator::setup_stereo(UInt32 param1, UInt32 param2) {
             SInt32 result = (*reinterpret_cast<Fn0x56c *>(vtable + (0x56c / 4)))(
                 self, reinterpret_cast<ATIR500SurfaceBuffer *>(scratch));
             if (result == 0) {
-                result = freeToAllocSurfaceVRAM(self, nullptr, nullptr, nullptr, 0,
+                result = freeToAllocSurfaceVRAM(nullptr, nullptr, nullptr, 0,
                                                  reinterpret_cast<ATIR500SurfaceBuffer *>(scratch));
                 if (result == 0) {
                     return -0x1ffffd43; /* real: literal SInt32 error constant */
@@ -122,8 +123,8 @@ store_and_notify:
         if (surf != nullptr) {
             IOATIR500Surface *head = surf;
             do {
-                surf->freeAllSwapBuffers(param1); /* real name, own body not decompiled this pass */
-                surf->allocMasterSwapBuffer(param1, 0x9000); /* real name, own body not decompiled this pass */
+                surf->freeAllSwapBuffers(param1); /* RESOLVED, issue #31 */
+                surf->allocMasterSwapBuffer(param1, 0x9000); /* RESOLVED, issue #31 */
                 surf->allocAllSlaveSwapBuffers(param1, 0x9000); /* RESOLVED, issue #28 */
                 surf = *reinterpret_cast<IOATIR500Surface **>(reinterpret_cast<UInt8 *>(surf) + 0x9c);
             } while (surf != head);

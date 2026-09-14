@@ -35,11 +35,27 @@
  * `IOBufferMemoryDescriptor::withOptions`, stores the real requested
  * size at `outBuffer+0x18`, gets a real hardware-mappable header via
  * vtable`+0x1cc` into `outBuffer+0x14`, then calls a real, previously-
- * unknown function, `IOATIR500Accelerator::init_command_buffer_header`
- * (own body not decompiled this pass - a real, already-demangled name
- * Ghidra's own symbol table already carried).
+ * unknown function, `IOATIR500Accelerator::init_command_buffer_header`.
  *
- * Confidence: CONFIRMED for control flow and every real offset - four
+ * RESOLVED, issue #31: `getVRAMDescriptor` (singular, real addr 0x290)
+ * and `init_command_buffer_header` (real addr 0x2350) own bodies added
+ * below. `getVRAMDescriptor`: real per-index 0x20-byte-stride record at
+ * `this+index*0x20+0xdc`; if not already populated, gets a real
+ * descriptor via a real per-index "provider" object's own vtable
+ * `+0x5d0` (stored at `+0xd4`), then - if that succeeded - a real
+ * memory map of it via vtable `+0x150` (arg `0x101`, stored at `+0xe0`);
+ * on a failed map, releases the descriptor and clears the slot; on
+ * success, stores a real virtual-address-shaped value from the map's own
+ * vtable `+0xd0` (the SAME real accessor shape this project's `pageoff_
+ * dirty_texture_with_cpu` also uses on a GART mapping, issue #30) at
+ * `+0xe4`. `init_command_buffer_header`: zeroes a real 0x20-byte header,
+ * calls a real, UNNAMED vtable `+0x564` on `header+0x20`, then stores a
+ * real dword-count (`(size-0x20)/4`, the same real convention `init_
+ * swap_buffer_header`/`init_context_buffer_header` use) at `+0x10` and a
+ * real stamp value (`this+0x50 - 1`, matching `waitForTimeStamp`'s own
+ * argument convention elsewhere) at `+0x18`.
+ *
+ * Confidence: CONFIRMED for control flow and every real offset - six
  * real, complete, standalone decompiles. No C++ compiler was available
  * in the sandboxed environment this was written in (same standing
  * limitation as every other file in this project).
@@ -101,6 +117,54 @@ bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UI
     typedef VendorCommandBufferHeader *(*GetHeaderFn)(void *);
     VendorCommandBufferHeader *header = (*reinterpret_cast<GetHeaderFn *>(*reinterpret_cast<void ***>(memHandle) + (0x1cc / 4)))(memHandle);
     *reinterpret_cast<VendorCommandBufferHeader **>(buf + 0x14) = header;
-    init_command_buffer_header(header, size); /* real name, own body not decompiled this pass */
+    init_command_buffer_header(header, size);
     return true;
+}
+
+UInt32 IOATIR500Accelerator::getVRAMDescriptor(UInt32 index) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *rec = self + index * 0x20;
+
+    if (U32At(rec, 0xdc) != 0) {
+        return 1;
+    }
+
+    typedef void *(*GetProviderDescFn)(void *);
+    void *provider = *reinterpret_cast<void **>(rec + 0xd4);
+    void **providerVtable = *reinterpret_cast<void ***>(provider);
+    void *desc = reinterpret_cast<GetProviderDescFn>(providerVtable[0x5d0 / 4])(provider);
+    U32At(rec, 0xdc) = reinterpret_cast<UInt32>(desc);
+    if (desc == nullptr) {
+        return 0;
+    }
+
+    typedef void *(*MapFn)(void *, UInt32);
+    void **descVtable = *reinterpret_cast<void ***>(desc);
+    void *map = reinterpret_cast<MapFn>(descVtable[0x150 / 4])(desc, 0x101);
+    U32At(rec, 0xe0) = reinterpret_cast<UInt32>(map);
+    if (map == nullptr) {
+        typedef void (*ReleaseFn)(void *);
+        reinterpret_cast<ReleaseFn>((*reinterpret_cast<void ***>(desc))[0x18 / 4])(desc);
+        U32At(rec, 0xdc) = 0;
+        return 0;
+    }
+
+    typedef UInt32 (*GetVAddrFn)(void *);
+    void **mapVtable = *reinterpret_cast<void ***>(map);
+    UInt32 vaddr = reinterpret_cast<GetVAddrFn>(mapVtable[0xd0 / 4])(map);
+    U32At(rec, 0xe4) = vaddr;
+    return 1;
+}
+
+void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *h = reinterpret_cast<UInt8 *>(header);
+    for (int off = 0; off < 0x20; off += 4) {
+        U32At(h, off) = 0;
+    }
+    typedef void (*Fn0x564)(void *, void *);
+    void **vtable = *reinterpret_cast<void ***>(self);
+    reinterpret_cast<Fn0x564>(vtable[0x564 / 4])(self, h + 0x20);
+    U32At(h, 0x10) = (size - 0x20) / 4;
+    U32At(h, 0x18) = U32At(self, 0x50) - 1;
 }

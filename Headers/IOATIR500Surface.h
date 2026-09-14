@@ -405,6 +405,17 @@ public:
      */
     UInt32 allocAllSlaveSwapBuffers(UInt32 param1, UInt32 param2);
 
+    /*
+     * freeAllSwapBuffers / allocMasterSwapBuffer - CONFIRMED real names
+     * (found alongside `allocAllSlaveSwapBuffers` in `setup_stereo`'s own
+     * real live-surface notification loop,
+     * `Sources/IOATIR500Accelerator_SetupStereo.cpp`). Own bodies
+     * RESOLVED, issue #31 - see Sources/IOATIR500Surface_SwapBuffers.cpp
+     * (real addrs 0x10860/0x118e0).
+     */
+    void freeAllSwapBuffers(UInt32 param1);
+    bool allocMasterSwapBuffer(UInt32 param1, UInt32 param2);
+
 protected:
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
 
