@@ -1,12 +1,12 @@
 /*
  * IOATIR500Surface_AllocAllSlaveSwapBuffers.cpp
  *
- * RESOLVED (issue #28): `IOATIR500Surface::allocAllSlaveSwapBuffers`'s
- * real body, real addr 0x11e50. By far the densest of issue #28's
- * targets - transcribed as literally as possible (preserving the real
- * decompile's own `goto`s rather than force-restructuring it) because
- * this project could NOT fully verify one part of its own control flow
- * with confidence - see the honest flag below.
+ * RESOLVED (issue #28), failure-path infinite loop CONFIRMED as a real
+ * driver bug (follow-up investigation): `IOATIR500Surface::
+ * allocAllSlaveSwapBuffers`'s real body, real addr 0x11e50. By far the
+ * densest of issue #28's targets - transcribed as literally as possible
+ * (preserving the real decompile's own `goto`s rather than
+ * force-restructuring it).
  *
  * Real per-panel-side (`param_1`) slave-swap-buffer allocation: for each
  * of up to 4 buffers, allocates a real `IOBufferMemoryDescriptor` (via
@@ -36,28 +36,36 @@
  * as success" tolerance this project has not seen an explanation for
  * beyond the literal decompile).
  *
- * HONEST FLAG, not resolved this pass: after the cleanup block's own
- * inner loop finishes, the real disassembly shows the ARRAY POINTERS
- * being decremented by `0x1c` and control jumping BACK to re-test the
- * exact same `+0x114` condition that gated entry to this whole cleanup
- * block in the first place - a real address this project has no
- * evidence changes between iterations (transcribed as reached via
- * `goto retest_condition` below). Read completely literally, this looks
- * like it could re-enter indefinitely; this project could not fully
- * confirm from static analysis alone whether some real per-call state
- * this transcription hasn't identified actually bounds it, or whether
- * this is a genuine real quirk of the compiled code. Transcribed exactly
- * as decompiled rather than "corrected" into a guessed-safe shape -
- * worth a targeted live-hardware trace before relying on this function's
- * exact failure-path behavior.
+ * FOLLOW-UP INVESTIGATION, CONFIRMED: the apparent infinite loop at the
+ * end of the cleanup block is real, not a transcription error. Traced
+ * the complete raw PPC instruction sequence from function entry through
+ * every register (`r27`=`boundBase` and `r11`=`accel`, the two operands
+ * of the re-tested `+0x114` condition, are EACH set exactly once - `r27`
+ * at function entry, `r11` from `this+0xd50` - and NOTHING in this
+ * function's own code, including the entire cleanup block, ever writes
+ * to memory at `accel+boundBase+0x114`). The decrement-and-jump-back at
+ * the end of the cleanup block (`goto retest_condition` below) has NO
+ * conditional guard at all in the real disassembly - a bare unconditional
+ * branch. Since the re-tested condition is provably invariant within a
+ * single call, this is a genuine infinite loop in Apple's own compiled
+ * driver whenever this exact failure path is reached (`FUN_00012034`/
+ * `IOBufferMemoryDescriptor::withOptions` returning null) - almost
+ * certainly a real, latent bug that goes untriggered in practice because
+ * this specific allocation call essentially never fails for real
+ * callers (kernel buffer-descriptor allocation failure paths are a
+ * well-known under-tested corner in shipped drivers generally). This
+ * project transcribes the real compiled behavior faithfully rather than
+ * "fixing" a bug that was never ours to fix - if this function is ever
+ * exercised on real hardware with a forced allocation failure, expect a
+ * real hang, matching the vendor driver's own real behavior.
  *
- * Confidence: CONFIRMED for the real success-path control flow and every
- * real field offset/array stride (cross-checked against raw PPC
- * disassembly, not just Ghidra's own C decompile, given this function's
- * density). The failure/cleanup path's own eventual termination is
- * UNKNOWN - see the honest flag above. No C++ compiler was available in
- * the sandboxed environment this was written in (same standing
- * limitation as every other file in this project).
+ * Confidence: CONFIRMED for the ENTIRE function, including the
+ * failure/cleanup path's own real (non-)termination - cross-checked
+ * against raw PPC disassembly instruction-by-instruction, not just
+ * Ghidra's own C decompile, given this function's density and the
+ * seriousness of the anomaly. No C++ compiler was available in the
+ * sandboxed environment this was written in (same standing limitation as
+ * every other file in this project).
  */
 
 #include "../Headers/IOATIR500Surface.h"

@@ -32,25 +32,27 @@
  * `HZMEM_Alloc` - real block-size computation (a shared real formula,
  * used up to three times) reuses the same real per-tiling-degree/pitch
  * arithmetic this project has already independently transcribed in
- * `resolve_fsaa_buffer`/`back_resolve_fsaa_buffer`. A real, previously
- * undocumented WRINKLE: this function reads/writes
- * `ATIR500SurfaceBuffer+0x28` as an `HZMEM_Alloc` block-handle slot -
- * the SAME offset this project's own struct (`ATIRadeonX1000Types.h`)
- * already names `formatOrTilingBits` from an unrelated real function
- * (`page_off_texture`). NOT resolved this pass whether that's a real
- * dual-purpose field or a naming/offset error in one of the two
- * findings - accessed here via raw offset rather than the named field,
- * to avoid asserting either reading without more evidence; worth a
- * dedicated cross-check in a future pass.
+ * `resolve_fsaa_buffer`/`back_resolve_fsaa_buffer`. This function reads/
+ * writes `ATIR500SurfaceBuffer+0x28` as an `HZMEM_Alloc` block-handle
+ * slot - RESOLVED via a targeted follow-up cross-check: this IS that
+ * field's real, sole role (now named `hzBlockField`,
+ * `ATIRadeonX1000Types.h`). The earlier `formatOrTilingBits` naming was a
+ * real scope error in this project's own prior documentation - decompiling
+ * `page_off_texture` directly (it had never actually been transcribed)
+ * showed its own "+0x28" read is on an entirely different struct (a
+ * per-face mip sub-record's already-known `loadedBits` field), not this
+ * one at all. `ATIR500Surface_ResolveFSAABuffer.cpp`'s own already-
+ * committed usage of the same field independently confirms the real
+ * bit-layout matches `HZMEM_Free`'s (issue #28) exactly.
  *
  * Confidence: CONFIRMED for control flow and every field offset/literal
  * constant - a real, complete decompile, not summarized. `this+0x10`
- * (the real size/count passed to `ATIR500Memory::alloc`), `this+0x90`
- * (the real strategy-selection flag), and the `+0x28` wrinkle noted
- * above are transcribed as raw offsets rather than promoted to named
- * struct fields - neither this pass nor any earlier one has
- * independently corroborated their real roles beyond what's visible in
- * this function alone. No C++ compiler was available in the sandboxed
+ * (the real size/count passed to `ATIR500Memory::alloc`) and `this+0x90`
+ * (the real strategy-selection flag) are transcribed as raw offsets
+ * rather than promoted to named struct fields - neither this pass nor
+ * any earlier one has independently corroborated their real roles beyond
+ * what's visible in this function alone. No C++ compiler was available
+ * in the sandboxed
  * environment this was written in (same standing limitation as every
  * other file in this project) - checked by careful, repeated manual
  * re-reading against the raw decompile instead.
@@ -143,8 +145,8 @@ allocFallback:
         UInt32 alignedHeight = extra1e;
         if ((extra1e & 0x1f) != 0) alignedHeight = (extra1e & 0xffffffe0u) + 0x20;
 
-        UInt32 hzResult = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), U32At(buf, 0x28), 2, blockSize, alignedHeight);
-        U32At(buf, 0x28) = hzResult;
+        UInt32 hzResult = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), buffer->hzBlockField, 2, blockSize, alignedHeight);
+        buffer->hzBlockField = hzResult;
         return 1;
     }
 
@@ -169,8 +171,8 @@ allocFallback:
     UInt32 alignedHeight1 = extra1e1;
     if ((extra1e1 & 0x1f) != 0) alignedHeight1 = (extra1e1 & 0xffffffe0u) + 0x20;
 
-    UInt32 hzResult1 = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), U32At(buf, 0x28), 0, blockSize1, alignedHeight1);
-    U32At(buf, 0x28) = hzResult1;
+    UInt32 hzResult1 = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), buffer->hzBlockField, 0, blockSize1, alignedHeight1);
+    buffer->hzBlockField = hzResult1;
 
     UInt32 tb2;
     if (U16At(buf, 0x16) == 2) {
@@ -202,6 +204,6 @@ allocFallback:
     if ((extra1e2 & 0x1f) != 0) alignedHeight2 = (extra1e2 & 0xffffffe0u) + 0x20;
 
     UInt32 hzResult2 = HZMEM_Alloc(reinterpret_cast<_HZDATA *>(accel + 0x870), hzResult1, 1, blockSize2, alignedHeight2);
-    U32At(buf, 0x28) = hzResult2;
+    buffer->hzBlockField = hzResult2;
     return 1;
 }

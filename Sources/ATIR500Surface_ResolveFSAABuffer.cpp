@@ -73,7 +73,9 @@
  * already-declared struct, `ATIRadeonX1000Types.h`) - confirmed by a
  * field-by-field match against every already-CONFIRMED field in that
  * struct (`+0x08` base, `+0x14`/`+0x16` width/pitch, `+0x1c`/`+0x1e`
- * height pair, `+0x28` format bits, `+0x38`/`+0x39`/`+0x3a` tiling/format
+ * height pair, `+0x28` HZMEM block field (`hzBlockField`, RENAMED from a
+ * real naming/scope error - see that field's own declaration comment),
+ * `+0x38`/`+0x39`/`+0x3a` tiling/format
  * bytes, `+0x40..` mip offsets). This function also reads three real
  * fields the struct didn't have names for yet - `+0x30`, `+0x36`, and
  * `+0x3c` - all three now added to the struct's own declaration with
@@ -295,7 +297,7 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
                         ((surfA->tilingConfigByte0 & 6u) << 0x10) | ((surfB->tilingConfigByte1 & 3u) << 0x13) |
                         ((FormatTableLookup_0x0004d2e0(static_cast<UInt32>(surfB->formatTableIndex) * 0x1cu) >> 1) & 0x1e00000u);
 
-    if (((surfB->formatOrTilingBits & 0x3ff00000u) == 0x3ff00000u) || (surfB->fsaaResolvedFlag == 0)) {
+    if (((surfB->hzBlockField & 0x3ff00000u) == 0x3ff00000u) || (surfB->fsaaResolvedFlag == 0)) {
         paramBlock[0x20] = 0;
     } else {
         paramBlock[0x20] = 0x600;
@@ -332,7 +334,7 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     paramBlock[0xb3] = (uVar15 & 0x1fffu) | ((uVar12 & 0x1fffu) << 0xd);
 
     void *hzData = accel + 0x870;
-    UInt32 uVar14 = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(hzData), surfB->formatOrTilingBits, 2);
+    UInt32 uVar14 = HZMEM_GetBlockOffset(reinterpret_cast<_HZDATA *>(hzData), surfB->hzBlockField, 2);
 
     uVar15 = 0;
     if ((surfB->tilingDegreeBits & 0xf00000u) != 0) {
@@ -367,7 +369,7 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     paramBlock[200] = (param7 * 0x60000u) | (param8 * 6u & 0xffffu);
     paramBlock[0xc6] = uVar8 & 0x3ffeu;
 
-    bool wantExtraSlot = ((surfB->formatOrTilingBits & 0x3ff00000u) != 0x3ff00000u) &&
+    bool wantExtraSlot = ((surfB->hzBlockField & 0x3ff00000u) != 0x3ff00000u) &&
                           (surfB->fsaaResolvedFlag != 0) && (surfA->tilingConfigByte0 < 2);
     if (wantExtraSlot) {
         puVar17 = paramBlock + 0xcb;
@@ -390,8 +392,8 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     }
     puVar17 = puVar20;
 
-    if (clearFlag && ((surfB->formatOrTilingBits & 0x3ff00000u) != 0x3ff00000u)) {
-        UInt32 blockCount = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(hzData), surfB->formatOrTilingBits, 2);
+    if (clearFlag && ((surfB->hzBlockField & 0x3ff00000u) != 0x3ff00000u)) {
+        UInt32 blockCount = HZMEM_GetBlockCount(reinterpret_cast<_HZDATA *>(hzData), surfB->hzBlockField, 2);
         *puVar20 = 0x1385;
         puVar17 = puVar20 + 6;
         UInt32 uVar16b = surfB->hzBlockCountField;

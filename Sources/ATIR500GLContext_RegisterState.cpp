@@ -478,8 +478,11 @@ UInt32 ATIR500GLContext::compute_sc_hyperz_en(UInt32 requested) {
  * bit 0x1c (HZ_MIN-area, per ATIRadeonX1000Registers.h's ZB_BW_CNTL
  * note) is set when the surface's `zbBandwidthEligible` flag is set AND
  * either its block width (+0x16) exceeds 2 texels or its tiling-degree
- * bits (a real 4-bit field inside `formatOrTilingBits`, bits 20-23)
- * exceed 2. Real bit 0x1 is set when `hyperZEligible` is set AND the
+ * bits (`tilingDegreeBits`, +0x3c, bits 20-23 - CORRECTED: this comment
+ * previously misattributed the real read to `formatOrTilingBits`/+0x28,
+ * a field that never actually existed here; the real code has always
+ * correctly read +0x3c) exceed 2. Real bit 0x1 is set when
+ * `hyperZEligible` is set AND the
  * caller requested bit 0 - the same condition compute_sc_hyperz_en uses.
  */
 UInt32 ATIR500GLContext::compute_zb_bw_cntl(UInt32 requested) {

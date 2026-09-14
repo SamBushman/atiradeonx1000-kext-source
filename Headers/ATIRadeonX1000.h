@@ -48,6 +48,7 @@
 class IOWorkLoop;
 class IOMemoryDescriptor;
 struct GLKMemoryElement; /* real mangled type name (16GLKMemoryElement), layout UNKNOWN - only used opaquely as a pointer by tmpAllocVRAM/tmpDeallocVRAM below */
+struct ATITextureBufferHeader; /* real mangled type name (22ATITextureBufferHeader), found via pageoff_dirty_texture's own real callees - layout UNKNOWN, used opaquely as a pointer */
 
 class ATIRadeonX1000 : public IOATIR500Accelerator {
     OSDeclareDefaultStructors(ATIRadeonX1000)
@@ -218,6 +219,55 @@ public:
     UInt32   sleepForTimeStamp(UInt32 tag);                       /* +0x558, real addr 0x25960 - CONFIRMED signature (IOATIR500Surface_LockShape.cpp's own StampFn/Fn0x558 typedefs) */
     virtual void addTransferToGART(VendorTransferBuffer *buffer); /* +0x5a8 on this class's own vtable, real addr 0x1a4d0 - real override of IOATIR500Accelerator::addTransferToGART, see that header */
     virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 on this class's own vtable, real addr 0x1a480 - RESOLVED, issue #26: a trivial pass-through override, calls IOATIR500Accelerator::addToGART with no added logic, see that header */
+
+    /*
+     * pageoff_dirty_texture - RESOLVED via the concrete-subclass-vtable
+     * technique (this class's own `+0x52c` slot is a real override; the
+     * base `IOATIR500Accelerator`'s own copy is genuine placeholder
+     * content) - real addr `0x21c60`, found while decompiling
+     * `IOATIR500GLContext::page_off_texture`
+     * (`Sources/IOATIR500GLContext_PageOffTexture.cpp`). Real body:
+     * prepares a real GART mapping on the texture's `memoryDescriptor`
+     * (the same `+0x14c`/`+0xd0` chain established elsewhere), then reads
+     * a real hardware-info flag word (`+0x20` on the resulting handle,
+     * bits `0x20000000`/`0x40000000`) to choose between three further
+     * real, previously-unknown functions this pass did NOT chase down
+     * (found via their own already-demangled real names, but their own
+     * bodies not decompiled): `pageoff_linear_buffer`,
+     * `pageoff_dirty_texture_with_gpu`,
+     * `prepare_texture_for_pageoff_with_cpu` +
+     * `pageoff_dirty_texture_with_cpu` (real addrs `0x217a0`, `0x210f0`,
+     * `0x20d30`, `0x1e500` respectively - all real methods on THIS class,
+     * all taking `(VendorTextureBuffer*, ATITextureBufferHeader*)` - a
+     * new, previously-undocumented real type this pass found but did not
+     * reconstruct). Real HONEST FLAG: Ghidra's own `-noanalysis` decompile
+     * of THIS function renders its own parameter list ambiguously
+     * (`VendorTextureBuffer*, long, long` per its raw signature line, but
+     * the body's own field accesses and its own onward `(ATIRadeonX1000*)`
+     * casts strongly suggest the REAL first param is `this`, mistyped by
+     * Ghidra, with the real explicit `VendorTextureBuffer*` in the SECOND
+     * slot) - own body transcribed as a real 3-real-parameter method here
+     * on that reading, but NOT independently disassembly-verified; the
+     * call site in `page_off_texture` passes `0` for both trailing `long`
+     * arguments since this function's own body never references either
+     * one (so the real values, whatever they are, do not affect real
+     * behavior even if this parameter-mapping reading is wrong).
+     */
+    void pageoff_dirty_texture(VendorTextureBuffer *texture, long param2, long param3);
+
+    /*
+     * Four real, already-named (via their own real mangled symbols)
+     * methods `pageoff_dirty_texture` calls into - found this same pass
+     * but their own bodies NOT decompiled (a genuinely new subsystem,
+     * out of scope for the field-naming question that led here). Real
+     * addrs: pageoff_linear_buffer 0x217a0, pageoff_dirty_texture_with_gpu
+     * 0x210f0, prepare_texture_for_pageoff_with_cpu 0x20d30,
+     * pageoff_dirty_texture_with_cpu 0x1e500.
+     */
+    UInt32 pageoff_linear_buffer(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
+    UInt32 pageoff_dirty_texture_with_gpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
+    UInt32 prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
+    UInt32 pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo);
 
     /*
      * tmpAllocVRAM / tmpDeallocVRAM - RESOLVED, issue #19 (found while

@@ -395,9 +395,10 @@ public:
     /*
      * allocAllSlaveSwapBuffers - RESOLVED, issue #28, real addr 0x11e50 -
      * see `Sources/IOATIR500Surface_AllocAllSlaveSwapBuffers.cpp` for the
-     * full transcription, including an honestly-flagged real uncertainty
-     * about the failure-path's own eventual termination (transcribed
-     * literally rather than guessed at).
+     * full transcription. Follow-up investigation CONFIRMED (not just
+     * suspected) a real infinite loop in Apple's own driver on this
+     * function's allocation-failure path - a genuine, latent vendor bug,
+     * not a transcription gap.
      */
     UInt32 allocAllSlaveSwapBuffers(UInt32 param1, UInt32 param2);
 

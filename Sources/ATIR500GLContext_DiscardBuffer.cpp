@@ -38,9 +38,11 @@
  *   independently calls), and zeroes a real four-field cluster
  *   (+0x210/+0x218/+0x21c/+0x220) within the resulting hardware-info block
  *   before releasing the mapping handle. See that opcode's own branch below
- *   for the full transcription and an honestly-flagged real anomaly (an
- *   apparently-unconditional release call through a pointer that can be
- *   null on the raw decompile's own control-flow shape).
+ *   for the full transcription - an apparently-unconditional release call
+ *   through a pointer that looked like it could be null on the raw
+ *   decompile's own control-flow shape, CONFIRMED SAFE via a follow-up
+ *   cross-reference against the real `IOATIR500Shared` texture-constructor
+ *   family (no live hardware needed).
  */
 
 #include "../Headers/ATIR500GLContext.h"
@@ -221,22 +223,44 @@ void ATIR500GLContext::discard_command_buffer(void) {
              * cluster - now placed correctly, on the hwInfo block, not a
              * fixed object).
              *
-             * Real, honestly-flagged anomaly, NOT resolved: the raw
-             * decompile's FINAL step - releasing the handle via vtable+0x18 -
-             * is UNCONDITIONAL, running even when `newTex+0x54` was zero or
-             * the vtable+0x14c call itself returned null, in which case the
-             * local holding the handle was never assigned away from a
-             * literal null. A real vtable call through a definitely-null
-             * pointer would crash. Transcribed exactly as found rather than
-             * "fixed" with a defensive null check this project cannot
-             * confirm the real driver actually has - plausibly some real
-             * invariant elsewhere in this kext guarantees `newTex+0x54` is
-             * always nonzero by the time a discard can reach this opcode
-             * (e.g. always set by this same opcode's execute-path bind
-             * before a matching discard could ever be issued), but that is
-             * NOT independently confirmed. Worth a live hardware/
-             * disassembly check if this path is ever exercised with
-             * `newTex+0x54 == 0`. Also NOTE: the raw decompile renders the
+             * Real anomaly, NOW RESOLVED via follow-up investigation: the
+             * raw decompile's FINAL step - releasing the handle via
+             * vtable+0x18 - is UNCONDITIONAL, running even when
+             * `newTex+0x54` was zero or the vtable+0x14c call itself
+             * returned null. A real vtable call through a definitely-null
+             * pointer would crash - but decompiling the real
+             * `IOATIR500Shared` texture-constructor family
+             * (`new_agp_texture`/`new_agpref_texture`/`new_global_texture`/
+             * `new_surface_texture`/`new_texture`, real addrs
+             * `0x17150`/`0x17df0`/`0x17740`/`0x17520`/`0x18060`) and their
+             * real caller `IOATIR500GLContext::new_texture`
+             * (real addr `0x9320`) CONFIRMS `newTex+0x54` can never
+             * actually be null for a texture this opcode can legally
+             * reach: `new_agpref_texture` (the REAL constructor for type-6
+             * "agpref" - i.e. query-companion - textures, real addr
+             * `0x17df0`) either returns null outright (nothing gets
+             * registered anywhere a discard could later reference) or, on
+             * its one success path, unconditionally sets the new record's
+             * own `+0x54` to the underlying AGP texture before ever
+             * exposing the record to a caller. Airtight direct
+             * confirmation: `IOATIR500GLContext::new_texture`'s own type-6
+             * case dereferences `iVar1+0x54` (`*(iVar1+0x54)+0x58`)
+             * IMMEDIATELY after `new_agpref_texture` returns non-null,
+             * with no null check in between - the real driver's own code
+             * trusts this field unconditionally the instant creation
+             * succeeds. Since opcode 0x3b's discard path can only ever
+             * reference a texture already registered in the shared
+             * allocator's lookup table, and registration for this
+             * specific opcode's real intended texture type (query/agpref)
+             * only happens via this exact success path, `newTex+0x54==0`
+             * is unreachable for the driver's real intended usage. A
+             * crash would only be possible if opcode 0x3b were issued for
+             * a texture ID that was never actually created as a type-6
+             * query texture - a driver-internal opcode/texture-type
+             * mismatch this function has no way to defend against and
+             * isn't responsible for. No live hardware trace needed - this
+             * is now settled by direct static cross-reference. Also NOTE:
+             * the raw decompile renders the
              * vtable+0xd0 call with zero arguments, unlike load_texture's
              * own vtable+0xd0 call (which does pass the receiver) - treated
              * here as the same Ghidra calling-convention-inference artifact
