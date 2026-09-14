@@ -74,11 +74,14 @@
  * names (the mangled decompile signature names both), called twice at
  * the top of restore_state_destroyed_by_pageoff on two real (start, end)
  * pointer pairs read from register_tracking_state itself (+0x134/+0x138
- * and +0x13c/+0x140) - real role UNKNOWN beyond "track a range of
- * registers written via PM4," not independently decompiled this pass.
+ * and +0x13c/+0x140). Own body RESOLVED, issue #39 - see
+ * Sources/ATIRadeonX1000_TrackRegsWrittenByPM4.cpp (real addr 0x1b180).
+ * LINKAGE FIXED there too: the real symbol is mangled
+ * (`__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_`), pinned
+ * via `asm(...)` per this project's established convention.
  */
 struct tracked_register_set;
-extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd);
+extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd) asm("__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_");
 
 void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_state *param1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
