@@ -177,21 +177,22 @@
  * this file's earlier passes assumed - see the methodology note above).
  * `FUN_0003911c` (a real refcount-style helper - every call site gates
  * `delete_texture` on it returning exactly 1, "this was the last
- * reference") and `FUN_0003913c` (the same real "ensure GART-mapped"
- * idiom as GL's FUN_0002a864/2D's FUN_000334cc) are called opaquely -
- * CONFIRMED (issue #15 investigation, issue still open): both, and `FUN_000390dc` below, are real
- * lazy-binding external stubs with no local body in this binary at all
- * (not a "left un-decompiled" gap) - see the comprehensive finding at
- * the end of `Headers/ATIRadeonX1000Registers.h`.
+ * reference") - RESOLVED, issue #15: the real target is
+ * `OSDecrementAtomic`, confirming the refcount-style role inference
+ * exactly. `FUN_0003913c` - RESOLVED, issue #15: the real target is
+ * `IOGetTime`, NOT a GART-mapping helper as previously guessed (the same
+ * real correction as GL's FUN_0002a864/2D's FUN_000334cc). Both, and
+ * `FUN_000390dc` below, were identified via a live kxld-resolved memory
+ * read on real G5/Tiger hardware, cross-referenced against the running
+ * kernel's own symbol table - see `Headers/ATIRadeonX1000Registers.h`.
  * `FUN_000390dc` is called with a literal `0xffff0001` first argument -
  * the exact same bit pattern as the real atomic packed-counter update
  * this project independently verified via raw PPC disassembly in GL's
- * own get_texture (issue #5); a striking match, but NOT independently
- * re-verified against DVD's own disassembly this pass, so called
- * opaquely rather than assumed identical. The four new small per-call-
- * site lock/alloc/free helpers this pass's opcode 0x13/0x3e/0x43+0x44
- * transcriptions reuse (`FUN_0003913c`, already known) are likewise
- * opaque, matching this project's established treatment of such helpers.
+ * own get_texture (issue #5); RESOLVED, issue #15: real target
+ * `OSAddAtomic`, confirming that match exactly. The four new small
+ * per-call-site helpers this pass's opcode 0x13/0x3e/0x43+0x44
+ * transcriptions reuse (`FUN_0003913c`, already known) resolve the same
+ * way.
  */
 
 #include "../Headers/ATIR500DVDContext.h"
@@ -203,9 +204,9 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 
-extern "C" UInt32 FUN_0003911c(void *refcountFieldAddr);
-extern "C" void   FUN_0003913c(void *transferBufferPlus0x2c);
-extern "C" void   FUN_000390dc(UInt32 magicConstant, void *counterFieldAddr);
+extern "C" UInt32 FUN_0003911c(void *refcountFieldAddr) asm("_OSDecrementAtomic");
+extern "C" void   FUN_0003913c(void *timestampField) asm("_IOGetTime");
+extern "C" void   FUN_000390dc(UInt32 magicConstant, void *counterFieldAddr) asm("_OSAddAtomic");
 
 /*
  * handle_texture_bind - RESOLVED (issue #7), fully transcribed. Covers

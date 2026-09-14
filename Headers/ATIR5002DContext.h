@@ -80,10 +80,11 @@ public:
      *     `+0x6d0`/`+0x69c`) this project already fully reconstructed
      *     for GL (issue #5) - directly reused understanding, not
      *     re-derived from scratch.
-     *   - `FUN_000334cc` is the SAME real "ensure GART-mapped" pattern
-     *     as GL's `FUN_0002a864` and DVD's `FUN_0003913c` - a real,
-     *     per-class-compiled instance of the identical idiom, not
-     *     independently decompiled this pass.
+     *   - `FUN_000334cc` - RESOLVED, issue #15: the real target is
+     *     `IOGetTime`, a per-node timestamp stamp, NOT a GART-mapping
+     *     helper (a real correction to this project's earlier call-site
+     *     inference). Same real target as GL's `FUN_0002a864` and DVD's
+     *     `FUN_0003913c`.
      */
     IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 

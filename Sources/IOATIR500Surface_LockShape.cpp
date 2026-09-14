@@ -70,15 +70,15 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
  * FUN_000286dc/ec and discard_command_buffer's own lock pair: each
  * real caller gets its own small lock/unlock function taking the real
  * commandLock pointer (this+0xd50's own +0x840 here) as sole argument,
- * rather than one shared helper. CONFIRMED (issue #15 investigation, issue still open): both are real
- * lazy-binding external stubs with no local body in this binary at all -
- * see the comprehensive finding at the end of
- * `Headers/ATIRadeonX1000Registers.h` for the full account (real names
- * still UNKNOWN, unrecoverable without live kxld resolution or a kernel
- * export-symbol list - this is not a decompilation gap).
+ * rather than one shared helper. RESOLVED, issue #15 (live kxld-resolved
+ * memory read on real G5/Tiger hardware, cross-referenced against the
+ * running kernel's own symbol table - see
+ * `Headers/ATIRadeonX1000Registers.h`): both are real external XNU
+ * kernel primitives, `mutex_lock`/`mutex_unlock_rwcmb`, aliased below via
+ * their real symbol names.
  */
-extern void FUN_00015aa4(void *lockPtr);
-extern void FUN_00015a84(void *lockPtr);
+extern "C" void FUN_00015aa4(void *lockPtr) asm("_mutex_lock");
+extern "C" void FUN_00015a84(void *lockPtr) asm("_mutex_unlock_rwcmb");
 
 IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3) {
     if (param3 != 0 && param3 != 0x2c) {
@@ -171,15 +171,14 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * lock `set_scale` already uses - see this file's earlier comment), via
  * ANOTHER real per-call-site lock/unlock trampoline pair
  * (FUN_00014850/FUN_000147f0, same established pattern as
- * FUN_00015aa4/FUN_00015a84 for `set_scale` - real names UNKNOWN, not
- * independently decompiled, consistent with this project's existing
- * treatment of that pattern).
+ * FUN_00015aa4/FUN_00015a84 for `set_scale` - RESOLVED, issue #15:
+ * `mutex_lock`/`mutex_unlock_rwcmb`, same real pair).
  *
- * Two more real, opaque helper calls found and left un-decompiled for the
- * same reason (small, real, not independently named): FUN_00014820(size,
- * align) - a real allocator, called with literal args `(0xc, 0x20)` -
- * and FUN_00014810(ptr, size) - its matching real deallocator, called on
- * the OLD record before it's replaced.
+ * Two more real helper calls, RESOLVED issue #15: FUN_00014820(size,
+ * align) is the real kernel allocator `IOMallocAligned`, called with
+ * literal args `(0xc, 0x20)` - and FUN_00014810(ptr, size) is its
+ * matching real deallocator `IOFreeAligned`, called on the OLD record
+ * before it's replaced.
  *
  * Real, honestly-flagged ambiguity: `this+0xa4` is written from a value
  * (`idOrComplement` below, real decompile's `uVar7`) that holds TWO
@@ -202,16 +201,17 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * Confidence: CONFIRMED for the overall control flow and every real
  * offset/constant (all read directly from a fresh complete decompile,
  * cross-checked against the real disassembly for the parameter-count
- * question above). CONFIRMED (issue #15 investigation, issue still open): the four opaque helper calls
- * below are all real lazy-binding external stubs with no local body in
- * this binary at all, not a "left un-decompiled" gap - see the
- * comprehensive finding at the end of
+ * question above). RESOLVED, issue #15: the four helper calls below are
+ * real external XNU kernel primitives (`mutex_lock`/`mutex_unlock_rwcmb`/
+ * `IOMallocAligned`/`IOFreeAligned`), identified via a live kxld-resolved
+ * memory read on real G5/Tiger hardware, cross-referenced against the
+ * running kernel's own symbol table - see
  * `Headers/ATIRadeonX1000Registers.h`.
  */
-extern void FUN_00014850(void *lockPtr);
-extern void FUN_000147f0(void *lockPtr);
-extern void *FUN_00014820(UInt32 size, UInt32 align);
-extern void FUN_00014810(void *ptr, UInt32 size);
+extern "C" void FUN_00014850(void *lockPtr) asm("_mutex_lock");
+extern "C" void FUN_000147f0(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void *FUN_00014820(UInt32 size, UInt32 align) asm("_IOMallocAligned");
+extern "C" void FUN_00014810(void *ptr, UInt32 size) asm("_IOFreeAligned");
 
 IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
     if ((modeBits & 0xffff7fc0u) != 0) {
@@ -399,11 +399,11 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  *  3. Real accelerator commandLock acquire (this+0xd50's own +0x840,
  *     same lock every other function in this file uses) via ANOTHER
  *     real per-call-site lock trampoline (FUN_000158e0, matching the
- *     already-established FUN_00014850-style pattern, real name
- *     UNKNOWN). If `shapeBits & 0x80` is set, real spin-wait on
+ *     already-established FUN_00014850-style pattern - RESOLVED, issue
+ *     #15: `mutex_lock`). If `shapeBits & 0x80` is set, real spin-wait on
  *     `accelerator+0x80` (a byte flag) via a real 3-arg wait primitive
- *     (FUN_000158d0(lockPtr, accelerator, 0) - plausibly a real
- *     IOLockSleep-shaped call, not independently decompiled) until that
+ *     (FUN_000158d0(lockPtr, accelerator, 0) - RESOLVED, issue #15:
+ *     `IOLockSleep`, confirming the prior guess exactly) until that
  *     flag goes nonzero.
  *  4. Real busy-gate check (this+0xbd0, the SAME field set_id_mode also
  *     gates on) and a real requirement that this+0xbe8's own bit 0x20
@@ -512,14 +512,17 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  * on any single bit position here, same caveat this project already
  * gives its other densest functions.
  */
-/* CONFIRMED (issue #15 investigation, issue still open): all five below are real lazy-binding external
- * stubs with no local body in this binary - see the comprehensive
- * finding at the end of `Headers/ATIRadeonX1000Registers.h`. */
-extern void FUN_000158e0(void *lockPtr);
-extern void FUN_000158d0(void *lockPtr, void *accel, UInt32 zero);
-extern void *FUN_000158c0(UInt32 size, UInt32 align);
-extern void FUN_000158b0(void *ptr, UInt32 size);
-extern void FUN_00015870(void *lockPtr);
+/* RESOLVED, issue #15 (live kxld-resolved memory read on real G5/Tiger
+ * hardware, cross-referenced against the running kernel's own symbol
+ * table - see `Headers/ATIRadeonX1000Registers.h`): all five below are
+ * real external XNU kernel primitives. FUN_000158d0's real target is
+ * `IOLockSleep`, confirming the "plausibly a real IOLockSleep-shaped
+ * call" guess above exactly. */
+extern "C" void FUN_000158e0(void *lockPtr) asm("_mutex_lock");
+extern "C" void FUN_000158d0(void *lockPtr, void *accel, UInt32 zero) asm("_IOLockSleep");
+extern "C" void *FUN_000158c0(UInt32 size, UInt32 align) asm("_IOMallocAligned");
+extern "C" void FUN_000158b0(void *ptr, UInt32 size) asm("_IOFreeAligned");
+extern "C" void FUN_00015870(void *lockPtr) asm("_mutex_unlock_rwcmb");
 
 IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32 id, UInt32 param3,
                                                           UInt32 param4, IOAccelDeviceRegion *regionArg,

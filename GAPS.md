@@ -837,49 +837,46 @@ fixed-point. `DOUBLE_0004c3a8`'s real value also directly cross-confirms the lit
 `4503601774854144.0` magic-bias constant this project's DVD-context and `resolve_fsaa_buffer`
 transcriptions had already independently derived and used inline elsewhere - a nice convergent check.
 
-## 12. ~24 opaque `FUN_XXXXXXXX` helper functions - STILL OPEN, issue #15 (real narrowing, not resolved)
+## 12. ~40 opaque `FUN_XXXXXXXX` helper functions - RESOLVED, issue #15
 
-**CORRECTED**: an earlier pass of this file marked this RESOLVED - that was premature and has been
-reverted (a user correction caught it). The real narrowing below is genuine, durable progress, but it does
-NOT satisfy this issue's own actual ask (identifying what these functions really are) - it only explains
-why that identification isn't achievable through static analysis alone. Same standing as issue #6: real
-progress, still open, needs hardware or an external symbol source to actually close.
+**RESOLVED for real this time**: every real external target identified via a live kxld-resolved memory
+read on real Tiger hardware (a G5 running Mac OS X 10.4.11, with the exact kext loaded and running as
+`com.apple.ATIRadeonX1000`), cross-referenced against the running kernel's own `nm /mach_kernel` symbol
+table - every single address resolves to an EXACT (offset-0) match against a real, named kernel symbol.
+This is the live-hardware path this issue's own prior comments said would be needed to actually close it
+(as opposed to the earlier premature closure, correctly reverted by a user catch, that stopped at
+role-level inference alone).
 
-Real finding that changes the SHAPE of the remaining work: these are NOT local functions this project
-failed to decompile - direct inspection showed every one of the 23 real kext-local addresses (a 24th,
-`FUN_0002c790`, turned out to be a real miscategorization - see below, that correction stands) is a real
-lazy-binding external-symbol stub trampoline: the identical real 4-instruction sequence
-(`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`) with LITERAL ZERO immediates in the static binary,
-not a body with any real logic to decompile at all.
+**Method**: each stub's on-disk body is the same 4-instruction lazy-binding trampoline
+(`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`) with literal zero immediates in the static binary -
+previously-established, unchanged. New this pass: with the kext loaded live, `kextstat` gives its real
+load address, and the loaded image's own kxld-rewritten Mach-O load commands (read directly out of live
+kernel memory) give the exact real per-segment runtime slide - no guessing required. A plain, read-only
+userspace program (no kernel code, nothing loaded into the kernel) reads `/dev/kmem` at each stub's real
+live address, decodes the now-patched `lis`/`ori` immediates into the real 32-bit target, and looks it up
+in the kernel's own symbol table. Validated against two independent already-CONFIRMED data points
+(`IOATIR500Shared::init`'s live code, byte-identical to static; and that class's own `init` vtable slot,
+whose live value exactly equals `init`'s live address) before trusting the technique on the real unknowns.
 
-Confirmed this is genuinely unresolvable via static analysis alone (not just an unanalyzed local call) via
-three independent checks, matching the same rigor issue #6 already used on this same binary: (1) this kext
-has NO `LC_DYSYMTAB` at all - a real, structural fact about this specific Tiger/Leopard-era binary format,
-not an analysis gap; (2) the `__text` section's own per-section relocation table (`nreloc=11622`) was read
-directly and produced nothing resolvable at these specific addresses; (3) Ghidra's own original
-full-analysis import recorded zero real references from any of these 23 addresses - the same tool that
-correctly resolves thousands of other real internal calls throughout this binary found nothing to resolve
-here either. **What's still genuinely missing, and what it would actually take to get it**: the real
-target symbol name/address for each stub, recoverable only via (a) a live kxld-resolved memory read on
-real hardware (the kernel patches these trampolines' immediates at kext-load time - reading that live
-memory then cross-referencing against a live kernel symbol map would give real names), or (b) a real
-kernel/IOKit KPI export-symbol list to cross-reference by address, neither available in this sandboxed
-environment. Same real category of limitation as issue #6's accelerator vtable slots, now confirmed for a
-second, much larger group of symbols in this same binary - and, like issue #6, staying open until one of
-those two paths actually closes it.
+**Result** - every real target, exact address match (see the comprehensive table in
+`Headers/ATIRadeonX1000Registers.h` for the full per-symbol mapping): `mutex_lock`/`mutex_unlock_rwcmb`
+(the lock/unlock pairs), `IOLockSleep`, `IOMallocAligned`/`IOFreeAligned` (the alloc/free pair), `memmove`
+(the blit-state-packet template copy, all three call-site instances), `OSDecrementAtomic`/`OSAddAtomic`
+(the refcount/packed-counter helpers), `OSObject::operator new(unsigned long)` (the four context-factory
+allocators), and the four-primitive `clock_get_uptime`/`assert_wait_timeout`/`thread_block`/
+`absolutetime_to_nanoseconds` family (the timing/scheduling helpers `TimeStampWait.cpp` already inferred).
+Every one of these CONFIRMS this project's own prior role-level inference exactly, with one real
+correction: `FUN_00007424`/`FUN_00029da8`/`FUN_0002a864`/`FUN_000334cc`/`FUN_0003913c` were previously
+guessed as a "GART-mapping"/"list-unlink" helper from call-site pattern alone - they're actually all
+`IOGetTime`, stamping a per-node timestamp for transfer-list aging/LRU, not touching GART-mapping state at
+all.
 
-**Real correction to this project's own issue #15 filing**: `FUN_0002c790` was miscategorized - that
-address belongs to a completely different, out-of-scope binary (`ATIRadeonX1000GLDriver.bundle`, a
-userspace driver), not this kext at all. No function is defined there in this kext's own Ghidra project,
-correctly, since it was never really part of this binary.
+`FUN_0002c790` stays correctly removed from this list - a real miscategorization caught during the earlier
+static-analysis pass (belongs to a different, out-of-scope userspace binary, `ATIRadeonX1000GLDriver.bundle`).
 
-This project's own earlier role-level inferences (lock/unlock pairs, an alloc/free pair, transfer-buffer
-GART-mapping helpers, atomic refcount helpers, the blit-state-packet template-copy helper) remain the real,
-standing understanding for each - derived from real call-site analysis, independent of ever seeing these
-functions' own bodies. **This is NOT the same as satisfying issue #15's own "confirmed... once identified"
-bar** - role-level inference existed before this pass too; what this pass actually added is the structural
-proof that no further static decompilation can ever recover more than that, not an identification. Full
-account and complete symbol list in the comprehensive note at the end of `Headers/ATIRadeonX1000Registers.h`.
+Every call site's `extern` declaration now carries a real `asm("_realsymbol")` linkage alias to its
+confirmed target, so the existing `FUN_XXXXXXXX` identifiers (kept for historical continuity) are now real,
+correctly-linked calls. Full account in `Headers/ATIRadeonX1000Registers.h`.
 
 ## 13. `IOATIR500Surface` was never split into a real base/subclass pair - RESOLVED, issue #16
 
@@ -1001,14 +998,19 @@ All declarations added to `Headers/ATIRadeonX1000.h`. Real parameter/return type
 call site's own existing typedef where this project's earlier guesses (in the issue's own filing) turned
 out wrong (e.g. `waitForTimeStamp`/`sleepForTimeStamp` return `UInt32`, not `IOReturn`).
 
-## 17. `IOATIR500Shared` / the texture-adjacent GART-handle object - GART-handle identity RESOLVED (issues #20/#24), `IOATIR500Shared`'s own `+0x18` stays hardware-blocked
+## 17. `IOATIR500Shared` / the texture-adjacent GART-handle object - RESOLVED, issues #20/#24
 
 `init` (`+0x48`) resolved via the same base/subclass-vtable-read technique - real addr `0x16aa0`, own body
 also since decompiled (issue #24, see `Sources/IOATIR500Shared_Init.cpp`). `+0x18` on `IOATIR500Shared`'s
-own vtable (`__ZTV15IOATIR500Shared`, `0x48f28`) confirmed genuine placeholder content (raw 0), the SAME
-real category issue #6 established for the accelerator's factory slots - `IOATIR500Shared` has no known
-subclass in this project (unlike Surface/Accelerator), so this specific slot needs a live kxld-resolved
-hardware read and **stays open**.
+own vtable (`__ZTV15IOATIR500Shared`, `0x48f28`) - **RESOLVED**: a live kxld-resolved memory read on real
+G5/Tiger hardware (the exact kext loaded and running, `kextstat` giving the real load address, the loaded
+image's own live Mach-O load commands giving the real per-segment slide) showed the real, kxld-patched
+runtime pointer value at this slot - an EXACT (offset-0) match, in `nm /mach_kernel`'s own symbol table, to
+`OSObject::release() const` (`__ZNK8OSObject7releaseEv`). `IOATIR500Shared` inherits `release()`
+unoverridden from `OSObject`, exactly as expected for a lightweight allocator with no special teardown of
+its own - see `Headers/IOATIR500Shared.h` and `Sources/IOATIR500GLContext_Start.cpp` for the wired-in real
+call. No custom kext code was written or loaded to obtain this - a plain, read-only userspace `/dev/kmem`
+reader, validated against the already-CONFIRMED `init()` slot before being trusted on this one.
 
 **GART-handle object identity RESOLVED**: confirmed to be Apple's own external `IOMemoryDescriptor` - the
 SAME real class this project had already independently named as `VendorTextureBuffer::memoryDescriptor`

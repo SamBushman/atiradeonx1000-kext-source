@@ -104,12 +104,13 @@
  * function. Used directly here rather than left as an unresolved extern.
  *
  * `FUN_00044868` (the real `0x2f4`-byte blit-state-packet template copy,
- * called once at the very top before either block runs) is called
- * opaquely, matching this project's established treatment of the
- * identical real copy `FSAAResolveBlit.cpp`/`RestoreState.cpp` already
- * document (`_g_r500_3d_blit_state_packet`, `ATIRadeonX1000Types.h`) -
- * not re-modeled as a raw memcpy here since the template's own real
- * per-field content was never extracted from the binary either place.
+ * called once at the very top before either block runs) - RESOLVED,
+ * issue #15: real target `memmove`, the same real copy
+ * `FSAAResolveBlit.cpp`/`RestoreState.cpp` already document
+ * (`_g_r500_3d_blit_state_packet`, `ATIRadeonX1000Types.h`) - not
+ * re-modeled as a direct `memmove` call here since the template's own
+ * real per-field content was never extracted from the binary either
+ * place.
  *
  * `&_samplesTable` (real binary data, indexed via a real byte offset
  * `(tilingDegreeBits >> 0x12) & 0x3c` - a real up-to-16-entry `UInt32`

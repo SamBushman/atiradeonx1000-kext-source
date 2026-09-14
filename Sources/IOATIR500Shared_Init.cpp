@@ -17,8 +17,9 @@
  * is the same success/failure boolean the external base-class call
  * produced.
  *
- * The paired real `+0x18` (release-like) vtable call issue #20 already
- * confirmed as genuinely unresolvable statically stays that way - this
+ * The paired real `+0x18` (release-like) vtable call is RESOLVED, issue
+ * #20 (live kxld-resolved memory read on real hardware): real target
+ * `OSObject::release() const` - see `Headers/IOATIR500Shared.h`. This
  * function's own body doesn't touch it.
  *
  * Confidence: CONFIRMED for control flow and every field offset - a

@@ -151,12 +151,17 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
  * list (accelerator+0x6d0 head / +0x69c sentinel - the SAME real
  * circular-doubly-linked-list shape get_texture uses on the texture
  * list at +0x600/+0x5dc, just a different instance for transfer
- * buffers). Real address 0x2a864. CONFIRMED (issue #15 investigation, issue still open): a real
- * lazy-binding external stub with no local body in this binary at all -
- * see the comprehensive finding at the end of
- * Headers/ATIRadeonX1000Registers.h.
+ * buffers). Real address 0x2a864. RESOLVED, issue #15 (live
+ * kxld-resolved memory read on real G5/Tiger hardware, cross-referenced
+ * against the running kernel's own symbol table): the real target is
+ * `IOGetTime(mach_timespec_t *)`, NOT a GART-mapping helper as this
+ * project's earlier call-site-pattern inference guessed (a real
+ * correction) - it stamps the current time into the node's own `+0x2c`
+ * field, consistent with a per-node timestamp for transfer-list
+ * aging/LRU. Same real target as 2D's FUN_000334cc and DVD's
+ * FUN_0003913c below.
  */
-extern void FUN_0002a864(void *transferBuffer);
+extern "C" void FUN_0002a864(void *timestampField) asm("_IOGetTime");
 
 /*
  * Two more real accelerator vtable calls alloc_and_load_texture makes -
@@ -188,9 +193,9 @@ extern void FUN_0002a864(void *transferBuffer);
  *   - 1 (chained/aliased reference): real, direct RECURSION - calls
  *     itself on the real linked texture at +0x50 (confirms this
  *     project's earlier characterization of type 1 as "recursive").
- *   - 2, 6, 8: near-identical real "ensure GART-mapped, then splice
- *     into the accelerator's transfer-buffer list" bodies (via the real
- *     but unresolved FUN_0002a864 helper above).
+ *   - 2, 6, 8: near-identical real "timestamp, then splice into the
+ *     accelerator's transfer-buffer list" bodies (via the real
+ *     FUN_0002a864/`IOGetTime` helper above, RESOLVED issue #15).
  *   - 3, 7: real "free VRAM for this texture, then compact" paths -
  *     type 7 additionally handles a real "already pending eviction" bit
  *     (texture's mip-record byte, bit 1) before retrying.
@@ -722,10 +727,9 @@ void ATIR500GLContext::submit_context_buffer() {
  *    `payloadByteLen` and an initial `tileXBase` value - types 3 and 7 both
  *    real-splice a transfer buffer into the accelerator's transfer-buffer
  *    list (accelerator+0x6d0/+0x69c, the SAME list alloc_and_load_texture's
- *    `spliceIntoTransferList` uses) via a SEPARATE, not-independently-
- *    decompiled small helper at real address 0x29da8 (own copy of the same
- *    unlink pattern as `FUN_0002a864` above - different address, same real
- *    shape, opaque call).
+ *    `spliceIntoTransferList` uses) via a SEPARATE small helper at real
+ *    address 0x29da8 - RESOLVED, issue #15: `IOGetTime` (own per-call-site
+ *    stub instance of the same real target as `FUN_0002a864` above).
  *
  * 4. Real completion-stamp accumulation via ATIRadeonX1000::waitForTimeStamp
  *    (RESOLVED, issue #19; accelerator+0x744 += stamp(mip+0xc)) - the SAME real call
@@ -861,10 +865,10 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
     /* Own copy (real address 0x29da8) of the same unlink-then-splice-into-
      * accelerator-transfer-list pattern alloc_and_load_texture's
      * FUN_0002a864/spliceIntoTransferList already use. RESOLVED, issue
-     * #15: a real lazy-binding external stub with no local body in this
-     * binary - see the comprehensive finding at the end of
-     * Headers/ATIRadeonX1000Registers.h. */
-    extern void FUN_00029da8(void *node);
+     * #15 (live kxld-resolved memory read on real G5/Tiger hardware): the
+     * real target is `IOGetTime`, the same real correction as
+     * FUN_0002a864 above - see Headers/ATIRadeonX1000Registers.h. */
+    extern "C" void FUN_00029da8(void *timestampField) asm("_IOGetTime");
     auto spliceIntoAccelTransferList = [&](UInt8 *node) {
         FUN_00029da8(node + 0x2c);
         UInt8 *prevNode = *reinterpret_cast<UInt8 **>(node + 0x34);

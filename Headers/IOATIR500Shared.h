@@ -37,13 +37,20 @@ public:
      * `Sources/IOATIR500Shared_Init.cpp` for the full transcription.
      *
      * The paired real `+0x18` (release-like) vtable call this class's
-     * own real constructor-site failure path also makes is STILL
-     * genuinely unresolved - confirmed genuine placeholder content
-     * (raw 0) on this class's own vtable, the SAME real category issue
-     * #6 established for the accelerator's factory slots. This class has
-     * no known subclass in this project (unlike Surface/Accelerator), so
-     * there is no further subclass vtable to check - issue #20 stays
-     * open for this slot.
+     * own real constructor-site failure path also makes is RESOLVED,
+     * issue #20: a live kxld-resolved memory read on real G5/Tiger
+     * hardware (the exact kext loaded and running, `kextstat` giving the
+     * real load address, the loaded image's own live Mach-O load
+     * commands giving the real per-segment slide) showed the real,
+     * kxld-patched runtime pointer value at this slot - an EXACT
+     * (offset-0) match, in `nm /mach_kernel`'s own symbol table, to
+     * `OSObject::release() const` (`__ZNK8OSObject7releaseEv`). This
+     * class inherits `release()` unoverridden from `OSObject`, exactly
+     * as expected for a lightweight IOKit-derived allocator with no
+     * special teardown of its own. No custom kext code was written or
+     * loaded to obtain this - a plain, read-only userspace `/dev/kmem`
+     * reader, validated against the already-CONFIRMED `init()` slot
+     * before being trusted on this one.
      */
     bool init();
 

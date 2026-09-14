@@ -129,18 +129,18 @@ bool IOATIR500GLContext::start(IOService *provider) {
         return false;
     }
 
-    /* Real vtable call at +0x48 RESOLVED (issue #20 partial): `init()`
-     * (see IOATIR500Shared.h). The +0x18 (release) call remains a raw
-     * vtable-offset cast - CONFIRMED genuinely unresolvable statically
-     * (issue #20), not merely un-named. Its real decompile shows it
-     * called with NO visible argument at all - almost certainly a
-     * decompiler artifact (a real release/free vtable call needs its own
-     * `this`), so it's passed here for correctness. Flagged as INFERRED,
-     * not a literal transcription. */
-    typedef void (*ShareReleaseFn)(IOATIR500Shared *);
-    void **shareVtable = *reinterpret_cast<void ***>(clientHandle);
+    /* Real vtable call at +0x48 RESOLVED (issue #20): `init()` (see
+     * IOATIR500Shared.h). The +0x18 (release) call is likewise RESOLVED,
+     * issue #20 (live kxld-resolved memory read on real G5/Tiger
+     * hardware - exact match to `OSObject::release() const` in the
+     * running kernel's own symbol table) - called directly below via its
+     * real mangled symbol rather than a raw vtable-offset cast. Its real
+     * decompile showed it called with NO visible argument at all - a
+     * decompiler artifact (a real `release()` needs its own `this`),
+     * passed here for correctness, same as before. */
+    extern "C" void IOATIR500Shared_release(IOATIR500Shared *) asm("__ZNK8OSObject7releaseEv");
     if (clientHandle->init() == 0) {
-        reinterpret_cast<ShareReleaseFn>(shareVtable[0x18 / 4])(clientHandle); /* INFERRED argument - see above */
+        IOATIR500Shared_release(clientHandle);
         clientHandle = nullptr;
         stop(provider);
         return false;

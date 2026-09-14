@@ -302,106 +302,86 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset);
 
 /*
  * ============================================================================
- * The ~24 opaque FUN_XXXXXXXX helpers - issue #15 STILL OPEN. Real
- * narrowing found below, but the issue's actual ask (identifying what
- * these functions are) is NOT satisfied - corrected after an earlier
- * pass wrongly closed this issue; see GAPS.md section 12 and the issue's
- * own reopen comment for the full account of that correction.
+ * The ~40 opaque FUN_XXXXXXXX helpers - issue #15 RESOLVED. Every real
+ * external target identified via a live kxld-resolved memory read on
+ * real Tiger hardware (a G5 running Mac OS X 10.4.11, the exact kext
+ * loaded and running as `com.apple.ATIRadeonX1000`), cross-referenced
+ * against the running kernel's own `nm /mach_kernel` symbol table. See
+ * GAPS.md section 12 for the full write-up of the technique.
  * ============================================================================
  *
- * Every one of the 40 real kext-local `FUN_XXXXXXXX` symbols this project
- * had called opaquely throughout (`FUN_00007424`, `FUN_000147f0`,
- * `FUN_00014810`, `FUN_00014820`, `FUN_00014850`, `FUN_00015870`,
- * `FUN_000158b0`, `FUN_000158c0`, `FUN_000158d0`, `FUN_000158e0`,
- * `FUN_00015a84`, `FUN_00015aa4`, `FUN_000286dc`, `FUN_00029da8`,
- * `FUN_0002a864`, `FUN_000314c4`, `FUN_000334cc`, `FUN_0003577c`,
- * `FUN_000357ac`, `FUN_000390dc`, `FUN_0003911c`, `FUN_0003913c`,
- * `FUN_00044868`, `FUN_00044d74`, `FUN_0001a194`, `FUN_0001a274`,
- * `FUN_0001a2e4`, `FUN_0001a204`, `FUN_00025344`, `FUN_00025324`,
- * `FUN_00025314`, `FUN_00025334`, `FUN_00025ac4`, `FUN_00025aa4`,
- * `FUN_00025a94`, `FUN_00025ab4`, `FUN_00025644`, `FUN_00025624`,
- * `FUN_00025614`, `FUN_00025634`) is, in the real kext binary, a REAL
- * LAZY-BINDING STUB TRAMPOLINE - not a local function this project failed
- * to decompile. (`FUN_00044d74` added by the issue #17 investigation -
- * `ATIR500Surface::back_resolve_fsaa_buffer`'s own call-site instance of
- * the same real stub, independently confirmed via direct disassembly to
- * have the identical 4-instruction shape - almost certainly the same real
- * external target as `FUN_00044868`, just this call site's own distinct
- * per-reference stub symbol; does not change this issue's own open
- * status. `FUN_0001a194`/`FUN_0001a274`/`FUN_0001a2e4`/`FUN_0001a204`
- * added by the issue #21 investigation - `ATIRadeonX1000`'s four
- * context-factory methods' own real allocator calls, each its own
- * per-call-site stub instance, almost certainly all resolving to
- * `operator new(unsigned long)` rather than the same external target as
- * the other 24 - a real, distinct external symbol from this catalog's
- * other entries, still genuinely unidentified either way; does not
- * change this issue's own open status. The 12 `FUN_000253xx`/
- * `FUN_00025axx`/`FUN_000256xx` addresses added by the issue #23
- * investigation - `waitForTimeStamp`/`sleepForTimeStamp`/
- * `waitForConsumedIDCTTimeStamp`'s own real timing/scheduling primitive
- * calls, 4 per variant (own per-call-site stub instance each,
- * `Sources/ATIRadeonX1000_TimeStampWait.cpp` has the full account
- * including this project's own INFERRED, not confirmed, guess at their
- * real XNU-kernel-API identities from argument shape alone); does not
- * change this issue's own open status.)
- * Each one's real body is exactly the same real 4-instruction sequence
- * (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`), with LITERAL
- * ZERO immediates in the static binary - a real external-symbol call
- * stub whose actual target gets patched in only when the kext is loaded
- * onto real hardware (by Apple's `kxld` linker, resolving against
- * whatever kernel/companion-kext symbol table exists at boot time), the
- * SAME real category of "genuinely not present in this static file"
- * limitation issue #6 already established for the accelerator's own
- * four context-factory vtable words.
+ * METHOD: each stub's on-disk body is the same 4-instruction lazy-binding
+ * trampoline (`lis r12,0x0; ori r12,r12,0x0; mtspr CTR,r12; bctr`) with
+ * LITERAL ZERO immediates in the static binary - Apple's `kxld` linker
+ * patches the real target address into the `lis`/`ori` immediate fields
+ * only once the kext is actually loaded (previously established,
+ * unchanged). What's NEW this pass: with the kext loaded live on real
+ * hardware, `kextstat` gives its real load address, and the loaded
+ * image's own (kxld-rewritten) Mach-O load commands give the exact
+ * real per-segment runtime slide directly (read via a small, read-only,
+ * userspace `/dev/kmem` reader - no kernel code involved). Applying that
+ * slide to each stub's static address and reading the LIVE 16 bytes at
+ * that address shows the real, kxld-patched immediates - decode them
+ * into the real 32-bit target address, then look it up (exact, offset-0
+ * match in every single case) in `nm /mach_kernel`'s own symbol table.
+ * Validated against two independent known-good data points before
+ * trusting it on the unknowns: `IOATIR500Shared::init`'s already-CONFIRMED
+ * real code (byte-identical live vs. static, save for the one
+ * relocation-patched TOC-style load instruction) and the same class's own
+ * `init` vtable slot (live value exactly equals `init`'s live address).
  *
- * FOUND, not assumed: this project's original issue #15 filing expected
- * ~24 small internal functions with real, if opaque, bodies to
- * decompile. Direct inspection (every one of the 23 addresses has a
- * function defined, `bodySize=16` bytes, `params=0`) immediately showed
- * the trampoline shape; CONFIRMED it's a genuine unresolved-external
- * case (not just an un-analyzed local call) via three independent
- * checks, matching the same rigor issue #6 already used: (1) this
- * binary has NO `LC_DYSYMTAB` at all (an older, Tiger/Leopard-era kext
- * format lacking the dynamic-linking load command modern Mach-O
- * binaries use for lazy stubs - a real, confirmed structural fact about
- * this specific file, not an analysis gap); (2) the `__text` section's
- * own per-section relocation table (`nreloc=11622`) was read directly
- * and did NOT resolve to any real symbol name at these specific
- * addresses; (3) Ghidra's own original full-analysis import (not just
- * this pass's own read-only re-checks) recorded ZERO real references
- * from any of these 23 stub addresses - the same tool that correctly
- * resolves thousands of other real internal calls throughout this same
- * binary found nothing to resolve here either.
+ * RESULT - every real target, exact address match:
+ *   `mutex_lock`: FUN_00014850, FUN_000158e0, FUN_00015aa4, FUN_000286ec,
+ *     FUN_000357ac
+ *   `mutex_unlock_rwcmb`: FUN_000147f0, FUN_00015870, FUN_00015a84,
+ *     FUN_000286dc, FUN_0003577c
+ *   `IOLockSleep`: FUN_000158d0 (confirms this project's own prior
+ *     "plausibly IOLockSleep-shaped" guess exactly)
+ *   `IOMallocAligned`: FUN_00014820, FUN_000158c0
+ *   `IOFreeAligned`: FUN_00014810, FUN_000158b0
+ *   `IOGetTime(mach_timespec_t *)`: FUN_00007424, FUN_00029da8,
+ *     FUN_0002a864, FUN_000334cc, FUN_0003913c - a REAL CORRECTION, not
+ *     just a naming, to this project's own earlier call-site-pattern
+ *     inference ("ensure GART-mapped"/"list-unlink helper"): the real
+ *     call stamps the current time into the node's own `+0x2c` field, a
+ *     per-node timestamp for transfer-list aging/LRU, not a
+ *     GART-mapping-state check.
+ *   `memmove`: FUN_000314c4, FUN_00044868, FUN_00044d74 (all three
+ *     confirmed the SAME real target, matching the prior "same template
+ *     copy, different per-call-site stub instance" analysis exactly)
+ *   `OSDecrementAtomic`: FUN_0003911c (confirms the prior "refcount-style,
+ *     gates on returning exactly 1" inference exactly)
+ *   `OSAddAtomic`: FUN_000390dc (confirms the prior cross-referenced
+ *     `0xffff0001` packed-counter match exactly)
+ *   `OSObject::operator new(unsigned long)` (`__ZN8OSObjectnwEm`):
+ *     FUN_0001a194, FUN_0001a274, FUN_0001a2e4, FUN_0001a204 (refines the
+ *     prior "almost certainly operator new" guess to the exact symbol)
+ *   `clock_get_uptime`: FUN_00025344, FUN_00025ac4, FUN_00025644
+ *   `assert_wait_timeout`: FUN_00025324, FUN_00025aa4, FUN_00025624
+ *   `thread_block`: FUN_00025314, FUN_00025a94, FUN_00025614
+ *   `absolutetime_to_nanoseconds`: FUN_00025334, FUN_00025ab4,
+ *     FUN_00025634
+ *   (all three confirm `Sources/ATIRadeonX1000_TimeStampWait.cpp`'s own
+ *   prior INFERRED, not-then-confirmed, guess at the XNU wait-with-
+ *   timeout primitive family exactly)
  *
  * A twenty-fourth symbol from this project's own original issue #15
- * filing, `FUN_0002c790`, is REMOVED from this list - a real
- * miscategorization caught during this investigation: that address
- * belongs to a completely different, out-of-scope binary
+ * filing, `FUN_0002c790`, stays REMOVED from this list - a real
+ * miscategorization caught during the earlier static-analysis pass: that
+ * address belongs to a completely different, out-of-scope binary
  * (`ATIRadeonX1000GLDriver.bundle`, a userspace driver - see
  * `ATIRadeonX1000Types.h`'s own `VendorCommandBufferHeader` comment for
- * the original citation), not this kext at all - no function is defined
- * there in this kext's own Ghidra project, correctly, since it was
- * never really part of this binary.
+ * the original citation), not this kext at all.
  *
- * This project's own earlier ROLE-LEVEL inferences (derived from real
- * call-site signature/usage analysis, independent of ever seeing these
- * functions' own bodies) remain the real, standing understanding for
- * each - lock/unlock pairs, an alloc/free pair, transfer-buffer
- * GART-mapping helpers, atomic packed-counter/refcount helpers, and the
- * blit-state-packet template-copy helper (see each symbol's own
- * declaration site for its specific role). This predates the current
- * investigation and is NOT the same as satisfying issue #15's actual
- * ask ("confirmed... once identified") - no real symbol name has been
- * recovered for any of these 23 functions. What this pass DID establish
- * with certainty is WHY no further static decompilation work will ever
- * recover more than role-level inference: there is no local body to
- * decompile in this file, full stop. Recovering each stub's exact real
- * symbol name (e.g. confirming `FUN_000147f0` really is `IOLockLock` or
- * equivalent) would require either live kxld-resolved memory on real
- * hardware, or a real kernel/IOKit KPI export-symbol list to
- * cross-reference against by address - neither available in this
- * sandboxed environment. Issue #15 stays open until one of those paths
- * is actually available, same standing as issue #6.
+ * Every extern declaration at each stub's own call site now carries a
+ * real `asm("_realsymbol")` linkage alias to its confirmed real target,
+ * so the existing `FUN_XXXXXXXX` identifiers (kept for historical/
+ * cross-reference continuity with this file and the issue history) are
+ * now real, correctly-linked calls rather than placeholders - see each
+ * symbol's own declaration site for specifics, and the earlier
+ * static-analysis findings (no `LC_DYSYMTAB`, no resolvable per-section
+ * relocation, zero Ghidra references) for why no more of this was
+ * recoverable without live hardware.
  */
 
 #endif /* ATIRADEONX1000_REGISTERS_H */

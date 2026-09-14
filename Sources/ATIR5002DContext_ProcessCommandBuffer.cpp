@@ -18,9 +18,16 @@
  * distinguished only by a leftover comparison-variable value) are
  * expressed here as explicit per-opcode branches instead - behaviorally
  * identical, just not a literal reproduction of that particular
- * compiler artifact. `FUN_000334cc` (a real "ensure GART-mapped"
- * helper, same idiom as GL's FUN_0002a864 and DVD's FUN_0003913c) is
- * called opaquely - not independently decompiled this pass.
+ * compiler artifact. `FUN_000334cc` - RESOLVED, issue #15 (live
+ * kxld-resolved memory read on real G5/Tiger hardware, cross-referenced
+ * against the running kernel's own symbol table): the real target is
+ * `IOGetTime(mach_timespec_t *)`, NOT a GART-mapping helper as this
+ * project's earlier call-site-pattern inference guessed (a real
+ * correction, not just a naming) - it stamps the current time into the
+ * node's own `+0x2c` field, consistent with `+0x2c` being a real
+ * per-node timestamp used for transfer-list aging/LRU rather than a
+ * GART-mapping-state field. Same real target as GL's FUN_0002a864 and
+ * DVD's FUN_0003913c, both also corrected below/elsewhere.
  */
 
 #include "../Headers/ATIR5002DContext.h"
@@ -32,7 +39,7 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 
-extern void FUN_000334cc(void *transferBuffer);
+extern "C" void FUN_000334cc(void *timestampField) asm("_IOGetTime");
 
 /*
  * Real, shared "splice into accelerator+0x600/+0x5dc texture list"

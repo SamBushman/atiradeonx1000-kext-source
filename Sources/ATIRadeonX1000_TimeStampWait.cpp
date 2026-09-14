@@ -32,33 +32,28 @@
  *     IDCT-specific hardware counter, matching this method's own real
  *     name.
  *
- * Real per-call-site stub instances (all CONFIRMED, via direct
- * disassembly, to be the same 4-instruction lazy-binding trampoline
- * shape already documented for the other real stubs - added to issue
- * #15's catalog, `ATIRadeonX1000Registers.h`, without changing that
- * issue's own open status):
+ * Real per-call-site stub instances - RESOLVED, issue #15, via a live
+ * kxld-resolved memory read on real G5/Tiger hardware, cross-referenced
+ * against the running kernel's own symbol table (every address below is
+ * an EXACT match, offset 0, confirming this file's own prior INFERENCEs
+ * from argument shape almost exactly):
  *   - "get current time" (called twice per real invocation, start and
  *     end): `waitForTimeStamp`/`sleepForTimeStamp` share `0x25344`;
  *     `waitForConsumedIDCTTimeStamp` uses `0x25644`;
- *     `sleepForTimeStamp` alone uses a separate instance, `0x25ac4`.
- *     Real call shape (one pointer argument, fills a real two-word
- *     `{int sec, uint frac}`-shaped pair at that address) strongly
- *     resembles the standard XNU `clock_get_uptime`-family API - a
- *     real, plausible INFERENCE from argument shape and this driver's
- *     own real usage pattern, NOT a confirmed real name (this project
- *     has no way to verify the real external symbol these lazy-binding
- *     stubs resolve to, per issue #15's own standing limitation).
+ *     `sleepForTimeStamp` alone uses a separate instance, `0x25ac4`. All
+ *     three resolve to the real XNU kernel symbol `clock_get_uptime`,
+ *     confirming the prior guess exactly.
  *   - "arm a timeout and block" pair, called together inside the real
  *     retry loop: `waitForTimeStamp` uses `0x25324`/`0x25314`;
  *     `sleepForTimeStamp` uses `0x25aa4`/`0x25a94`;
- *     `waitForConsumedIDCTTimeStamp` uses `0x25624`/`0x25614`. Real call
- *     shape (`(event*, 0, 100, 1000)` then `(0)`) strongly resembles the
- *     standard XNU `assert_wait_timeout`/`thread_block` pair - same
- *     INFERRED, not confirmed, caveat as above.
+ *     `waitForConsumedIDCTTimeStamp` uses `0x25624`/`0x25614`. All three
+ *     pairs resolve to the real XNU kernel symbols
+ *     `assert_wait_timeout`/`thread_block`, confirming the prior guess
+ *     exactly.
  *   - "convert elapsed (sec,frac) into an accumulator delta":
  *     `waitForTimeStamp` uses `0x25334`; `sleepForTimeStamp` uses
- *     `0x25ab4`; `waitForConsumedIDCTTimeStamp` uses `0x25634`. Same
- *     INFERRED/not-confirmed caveat.
+ *     `0x25ab4`; `waitForConsumedIDCTTimeStamp` uses `0x25634`. All three
+ *     resolve to the real XNU kernel symbol `absolutetime_to_nanoseconds`.
  *
  * Real, previously-undocumented global: `_gl_assert_wait_timeout_event`
  * - a real event/wait-channel object all three real variants share,
@@ -162,9 +157,9 @@ SInt32 PollForTimeStamp(void *self, UInt32 tag, UInt32 cacheOffset,
 } // namespace
 
 extern "C" {
-void FUN_00025344(void *); void FUN_00025324(void *, UInt32, UInt32, UInt32); void FUN_00025314(UInt32); void FUN_00025334(UInt32, UInt32, void *);
-void FUN_00025ac4(void *); void FUN_00025aa4(void *, UInt32, UInt32, UInt32); void FUN_00025a94(UInt32); void FUN_00025ab4(UInt32, UInt32, void *);
-void FUN_00025644(void *); void FUN_00025624(void *, UInt32, UInt32, UInt32); void FUN_00025614(UInt32); void FUN_00025634(UInt32, UInt32, void *);
+void FUN_00025344(void *) asm("_clock_get_uptime"); void FUN_00025324(void *, UInt32, UInt32, UInt32) asm("_assert_wait_timeout"); void FUN_00025314(UInt32) asm("_thread_block"); void FUN_00025334(UInt32, UInt32, void *) asm("_absolutetime_to_nanoseconds");
+void FUN_00025ac4(void *) asm("_clock_get_uptime"); void FUN_00025aa4(void *, UInt32, UInt32, UInt32) asm("_assert_wait_timeout"); void FUN_00025a94(UInt32) asm("_thread_block"); void FUN_00025ab4(UInt32, UInt32, void *) asm("_absolutetime_to_nanoseconds");
+void FUN_00025644(void *) asm("_clock_get_uptime"); void FUN_00025624(void *, UInt32, UInt32, UInt32) asm("_assert_wait_timeout"); void FUN_00025614(UInt32) asm("_thread_block"); void FUN_00025634(UInt32, UInt32, void *) asm("_absolutetime_to_nanoseconds");
 }
 
 namespace {

@@ -6,13 +6,14 @@
  * resolved (issue #6); this pass decompiled the actual function bodies.
  *
  * All four are structurally identical and trivially simple: allocate a
- * fixed real byte size via a real lazy-binding stub (almost certainly
- * `operator new(unsigned long)` - CONFIRMED via direct disassembly to
- * have the same 4-instruction trampoline shape already documented for
- * the 24 real stubs in issue #15's catalog, `ATIRadeonX1000Registers.h`;
- * `FUN_0001a194`/`FUN_0001a274`/`FUN_0001a2e4`/`FUN_0001a204`, a separate
- * per-call-site stub instance each - does not change issue #15's own
- * open status), and if the allocation succeeded, placement-construct the
+ * fixed real byte size via a real lazy-binding stub - RESOLVED, issue #15
+ * (live kxld-resolved memory read on real G5/Tiger hardware): the real
+ * target is `OSObject::operator new(unsigned long)`
+ * (`__ZN8OSObjectnwEm`), refining the prior "almost certainly
+ * `operator new`" guess to the exact real symbol.
+ * `FUN_0001a194`/`FUN_0001a274`/`FUN_0001a2e4`/`FUN_0001a204` are each
+ * their own per-call-site stub instance, all resolving to the same real
+ * target - and if the allocation succeeded, placement-construct the
  * real concrete class and return it - otherwise return null.
  *
  * Real per-class allocation sizes (a new real finding this pass, not

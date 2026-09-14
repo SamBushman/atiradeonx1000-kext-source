@@ -39,10 +39,9 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, sATIDVDIDCTParams *par
         return kIOReturnNotOpen;
     }
 
-    /* lock(accel) - real function FUN_000357ac. CONFIRMED (issue #15 investigation, issue still open): a
-     * real lazy-binding external stub with no local body in this binary -
-     * see the comprehensive finding at the end of
-     * Headers/ATIRadeonX1000Registers.h. Real name still UNKNOWN. */
+    /* lock(accel) - real function FUN_000357ac. RESOLVED, issue #15
+     * (live kxld-resolved memory read on real G5/Tiger hardware): real
+     * target `mutex_lock` - see Headers/ATIRadeonX1000Registers.h. */
 
     UInt8 *surfaceInfo = reinterpret_cast<UInt8 *>(info->surfaceInfo);
     UInt32 fieldHeight = static_cast<SInt16>(*reinterpret_cast<UInt16 *>(surfaceInfo + 0x9a))
@@ -125,8 +124,9 @@ IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, sATIDVDIDCTParams *par
                 info->lastConsumedTagLuma = info->lastSubmittedTag;
             }
             /* unlock(accel) - real function FUN_0003577c. RESOLVED, issue
-             * #15: a real lazy-binding external stub with no local body -
-             * see Headers/ATIRadeonX1000Registers.h. Real name UNKNOWN. */
+             * #15 (live kxld-resolved memory read on real G5/Tiger
+             * hardware): real target `mutex_unlock_rwcmb` - see
+             * Headers/ATIRadeonX1000Registers.h. */
             return kIOReturnSuccess;
         }
     }

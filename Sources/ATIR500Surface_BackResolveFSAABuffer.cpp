@@ -87,15 +87,11 @@
  *
  * `FUN_00044d74` (the real `0x2f4`-byte blit-state-packet template copy,
  * called once at the very top, same role as `resolve_fsaa_buffer`'s own
- * `FUN_00044868`) is a SEPARATE real lazy-binding stub instance - CONFIRMED
- * via direct disassembly (`bodySize=16`, `params=0`, the exact same
- * `lis/ori/mtspr/bctr` trampoline shape already documented for
- * `FUN_00044868` and the other ~23 real stubs, `ATIRadeonX1000Registers.h`,
- * issue #15) - almost certainly the same real external target
- * (`bcopy`/`memcpy`-shaped) as `FUN_00044868`, just this call site's own
- * distinct per-reference stub symbol. Does not change issue #15's own
- * open status; noted here as a data point for whoever eventually resolves
- * that issue.
+ * `FUN_00044868`) is a SEPARATE real lazy-binding stub instance - RESOLVED,
+ * issue #15 (live kxld-resolved memory read on real G5/Tiger hardware):
+ * confirmed the SAME real external target as `FUN_00044868`, `_memmove`,
+ * just this call site's own distinct per-reference stub symbol - see
+ * `ATIRadeonX1000Registers.h`.
  *
  * TRANSCRIPTION METHOD: same as `ATIR500Surface_ResolveFSAABuffer.cpp`
  * (flat decompile-derived naming kept close to the original rather than

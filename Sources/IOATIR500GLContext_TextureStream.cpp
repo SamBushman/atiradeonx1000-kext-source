@@ -98,11 +98,14 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
         U8At(rec, 0x14) |= U8At(subRec, 0x14);
 
         if (U32At(sub, 4) != 0) {
-            /* FUN_00007424(sub + 0x2c) - likely a list-unlink helper/lock
-             * acquire for the node about to be relinked below. RESOLVED,
-             * issue #15: a real lazy-binding external stub with no local
-             * body in this binary - see the comprehensive finding at the
-             * end of Headers/ATIRadeonX1000Registers.h. Real name UNKNOWN. */
+            /* FUN_00007424(sub + 0x2c) - RESOLVED, issue #15 (live
+             * kxld-resolved memory read on real G5/Tiger hardware): the
+             * real target is `IOGetTime`, NOT a list-unlink/lock helper
+             * as previously guessed - stamps the current time into the
+             * node's own +0x2c field, same real correction as
+             * FUN_0002a864/FUN_000334cc/FUN_00029da8/FUN_0003913c
+             * elsewhere in this project - see
+             * Headers/ATIRadeonX1000Registers.h. */
             void *accel = accelerator;
             UInt32 oldPrev = U32At(sub, 0x34);
             UInt32 oldNext = U32At(sub, 0x38);
