@@ -1082,9 +1082,10 @@ vtable-indirect calls).
 **Also resolved since** (issue #23): `waitForTimeStamp`/`sleepForTimeStamp`/`waitForConsumedIDCTTimeStamp`
 (`Sources/ATIRadeonX1000_TimeStampWait.cpp`) - three real, independently-compiled instances of one real
 hardware-fence busy-wait-with-periodic-block algorithm, differing only in which hardware timestamp they
-poll and which real per-call-site lazy-binding stub instances (12 more added to issue #15's catalog) they
-call for the shared timing/scheduling primitives (real identities INFERRED from argument shape and
-standard XNU convention, not confirmed). And `allocate_texture`/`deallocate_texture`
+poll and which real per-call-site lazy-binding stub instances (12 more added to issue #15's catalog, now
+RESOLVED to real XNU kernel symbols `clock_get_uptime`/`assert_wait_timeout`/`thread_block`/
+`absolutetime_to_nanoseconds` - see gap 12 above) they call for the shared timing/scheduling primitives.
+And `allocate_texture`/`deallocate_texture`
 (`Sources/ATIRadeonX1000_TextureVRAM.cpp`) - both real and dense, `allocate_texture` also cross-referencing
 issue #20's own unresolved GART-handle-object mystery (new data posted there). **Real signature bug caught
 and fixed**: `deallocate_texture`'s real body takes a `VendorTextureBuffer*` parameter - issue #19's own
