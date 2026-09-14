@@ -19,15 +19,16 @@
  * raw decompile), advances a real 2-bit rotating slot index
  * (`this+0xcae`, mod 4) into a real 4-entry per-surface swap-record
  * array (stride `0x1c`, base `this+0xc3c`) and either allocates a fresh
- * real "slave swap buffer" set (`allocAllSlaveSwapBuffers`, own body not
- * decompiled) if the slot's own record is empty, or accumulates a real
+ * real "slave swap buffer" set (`allocAllSlaveSwapBuffers`, RESOLVED,
+ * issue #28) if the slot's own record is empty, or accumulates a real
  * completion-stamp delta via `ATIRadeonX1000::waitForTimeStamp`
  * (RESOLVED, issue #23) into a real accelerator field
  * (`accelerator+0x788`, word-indexed `[0x1e2]`). Either way, if the
  * slot's own `+4`-offset gate is clear, maps the resulting real transfer
  * buffer into GART via `IOATIR500Surface::map_transfer_to_GART` (a
  * DIFFERENT real function from `IOATIR500GLContext`'s own same-named
- * method - own body not decompiled this pass).
+ * method - RESOLVED, issue #28, see
+ * Sources/MapTransferToGART_RemainingContexts.cpp).
  *
  * If a real transfer buffer resulted, flushes the real depth buffer via
  * the already-known `decompress_and_flush_depth_buffer` (RE-HOMED,

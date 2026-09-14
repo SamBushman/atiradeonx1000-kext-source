@@ -375,9 +375,9 @@ private:
      * vtable and `ATIRadeonX1000`'s own vtable have the IDENTICAL
      * address at this slot, meaning it is genuinely NOT overridden by
      * the subclass, only declared/implemented here on the base. Real
-     * body: a single real call, `allocMoreCommandBuffers(this, 0,
-     * 0x20000)` - a new, previously-unknown real function this project
-     * hasn't investigated (own body not decompiled this pass).
+     * body: a single real call, `allocMoreCommandBuffers(0, 0x20000)` -
+     * RESOLVED, issue #28 (also required a real signature correction -
+     * see that method's own declaration below).
      */
     virtual UInt32 setup3D(void);
 };

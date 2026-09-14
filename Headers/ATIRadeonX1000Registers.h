@@ -247,7 +247,10 @@ extern "C" UInt32 HZMEM_Alloc(_HZDATA *hizData, UInt32 existingBlockOrSentinel, 
  * HZMEM_Free - RESOLVED, issue #23 (found in `ATIRadeonX1000::deallocate_texture`'s own real
  * body, `Sources/ATIRadeonX1000_TextureVRAM.cpp`). Same real 3-argument shape as
  * `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial` above - the inverse operation, freeing a
- * real HyperZ block back to the pool. Own body not independently decompiled this pass.
+ * real HyperZ block back to the pool. Own body RESOLVED, issue #28 (transcribed from raw PPC
+ * disassembly, not Ghidra's own C decompile, after `_HZDATA`'s intentionally-opaque type
+ * caused a real misattribution in an early draft) - see Sources/ATIRadeonX1000_HZMEMFree.cpp.
+ * `HZMEM_GetBlockOffset`/`GetBlockCount`/`IsPartial`/`Alloc` above remain genuinely undecompiled.
  */
 extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind);
 
