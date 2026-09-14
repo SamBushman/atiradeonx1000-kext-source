@@ -241,11 +241,14 @@ inline UInt32 RoundUpHeight32(SInt16 heightVal) {
 }
 } // namespace
 
-/* real name/role UNKNOWN beyond call-site usage - own body not decompiled this pass */
-extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits);
-extern "C" UInt32 getFramebufferIndex(IOATIR500Surface *surface);
-extern "C" UInt32 alloc_overlay(IOATIR500Surface *surface);
-extern "C" void   setup_overlay();
+/* real name/role UNKNOWN beyond call-site usage - own body not decompiled
+ * this pass. RESOLVED linkage: real symbol is C++-mangled
+ * (`__Z25window_mode_to_ati_formatm`), a plain `extern "C"` declaration
+ * with no `asm()` alias would never have linked against it - fixed. */
+extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
+/* getFramebufferIndex/alloc_overlay/setup_overlay - RESOLVED, now real
+ * member declarations on Headers/ATIR500Surface.h - see that header's
+ * own comment for the real linkage bug this replaced. */
 /* RESOLVED, issue #27: real target memmove, same real target as issue #15's FUN_000314c4/FUN_00044868 */
 extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCount) asm("_memmove");
 extern const UInt32 kShapeSurfaceDefaultMipTable[14]; /* real: shape_surface()::C_146, real content not extracted this pass */
@@ -784,13 +787,13 @@ haveOverlayFormatSel:
 
     if (U32At(self, 0xda4) != 0) {
         if (this[0xbf0] == static_cast<ATIR500Surface>(0)) {
-            this[0xbf0] = static_cast<ATIR500Surface>(alloc_overlay(this));
+            this[0xbf0] = static_cast<ATIR500Surface>(alloc_overlay());
         }
     }
     if (this[0xbf0] == static_cast<ATIR500Surface>(0)) {
         return;
     }
-    UInt32 fbIndex = getFramebufferIndex(this);
+    UInt32 fbIndex = getFramebufferIndex();
     SInt32 *fbRec = *reinterpret_cast<SInt32 **>(self + fbIndex * 8 + 0xd60);
     if (fbRec[0] != 0 && *reinterpret_cast<SInt16 *>(fbRec + 4) != 0 &&
         *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(fbRec) + 0x12) != 0) {

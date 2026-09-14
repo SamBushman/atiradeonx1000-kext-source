@@ -77,6 +77,26 @@ public:
     void     enable_deint(UInt32 mode); /* CONFIRMED: real, stores mode into this+0xdac */
 
     /*
+     * getFramebufferIndex / alloc_overlay / setup_overlay - RESOLVED
+     * (real linkage fix): all three are real member functions on THIS
+     * class taking no explicit parameters (implicit `this` only) - real
+     * mangled symbols confirmed via `nm`
+     * (`__ZN14ATIR500Surface19getFramebufferIndexEv`/
+     * `13alloc_overlayEv`/`13setup_overlayEv`). Previously declared in
+     * `Sources/ATIR500Surface_ShapeSurface.cpp` as plain `extern "C"`
+     * free functions taking an explicit surface pointer - a real linkage
+     * bug (the true symbols are C++-mangled member functions, not plain
+     * C names; an `extern "C"` declaration with no `asm()` alias would
+     * never have linked against the real symbol) caught while resolving
+     * an unrelated question (`ATIR500DVDContext::set_macrovision`'s own
+     * call to this exact function). Own bodies still NOT independently
+     * decompiled.
+     */
+    UInt32   getFramebufferIndex(void);
+    UInt32   alloc_overlay(void);
+    void     setup_overlay(void);
+
+    /*
      * resolve_fsaa_buffer - RESOLVED (issue #13), RE-HOMED (issue #16).
      * Full real body in Sources/ATIR500Surface_ResolveFSAABuffer.cpp -
      * see that file for the complete transcription and header comment.

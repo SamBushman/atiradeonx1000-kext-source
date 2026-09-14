@@ -1,0 +1,133 @@
+/*
+ * IOATIR500Accelerator_SetupStereo.cpp
+ *
+ * RESOLVED: `IOATIR500Accelerator::setup_stereo`'s real body, real addr
+ * 0x5460. Real per-panel (`param1`) stereo-mode state machine.
+ *
+ * Real structure: if a real "already initialized" flag (`this+0x81`,
+ * a single byte) is set, just stores the new mode bits into a real
+ * per-panel array (`this+param1*4+0x124`) and returns - a real
+ * fast-path once the subsystem is up. Otherwise: no-ops if the new mode
+ * already equals the current one (`this+param1*4+0x11c`). If the
+ * requested mode doesn't have its own real "stereo enabled" bit (bit 0)
+ * clear... [bit 1 gets force-cleared]; if it DOES have bit 0 set and a
+ * real per-panel scratch record (`this+param1*0x78+0x1ac`) isn't already
+ * allocated, zero-initializes it (`FUN_000056f8`, own body not
+ * decompiled - a real memset-shaped helper given its `(dest, src, 0x78)`
+ * argument shape) and allocates real backing VRAM for it via a real
+ * vtable `+0x56c` call then `freeToAllocSurfaceVRAM` (own body not
+ * decompiled this pass, real addr `0x45a0`) as a fallback. If the real
+ * "stereo bit" of old vs. new mode differs, calls `waitForTimeStamp`
+ * then a real vtable `+0x5cc` method (own identity UNKNOWN - not the
+ * already-resolved `IOATIR500Surface::+0x5cc`, a DIFFERENT class's
+ * vtable); on failure, force-clears stereo mode and frees the scratch
+ * record's VRAM via `ATIR500Memory::dealloc` (RESOLVED elsewhere).
+ * Finally, if the real per-panel STATE (not just requested mode) changed,
+ * walks every live surface (`liveSurfaceListHead`, `+0x5c`) calling three
+ * real, already-named-but-undecompiled methods:
+ * `IOATIR500Surface::freeAllSwapBuffers`,
+ * `IOATIR500Surface::allocMasterSwapBuffer`,
+ * `IOATIR500Surface::allocAllSlaveSwapBuffers` (RESOLVED, issue #28 - the
+ * one with the confirmed real infinite-loop bug in its own failure path).
+ *
+ * Confidence: CONFIRMED for control flow and every real offset - a real,
+ * complete, standalone decompile. `freeToAllocSurfaceVRAM`,
+ * `freeAllSwapBuffers`, `allocMasterSwapBuffer`, and the real `+0x56c`/
+ * `+0x5cc` vtable slot identities are real, found-but-not-decompiled
+ * this pass (see the follow-up issue this pass filed). No C++ compiler
+ * was available in the sandboxed environment this was written in (same
+ * standing limitation as every other file in this project).
+ */
+
+#include "../Headers/IOATIR500Accelerator.h"
+#include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIRadeonX1000Types.h"
+#include "../Headers/ATIR500Memory.h"
+
+extern "C" void FUN_000056f8(void *dest, void *src, UInt32 size); /* real memset/memmove-shaped helper, own real identity not investigated */
+extern "C" UInt32 freeToAllocSurfaceVRAM(void *accel, IOATIR500Surface *excludeA, IOATIR500Surface *excludeB,
+                                          VendorTextureBuffer **excludeList, SInt32 excludeCount, void *needed); /* real name/addr 0x45a0, own body not decompiled this pass */
+
+namespace {
+inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
+} // namespace
+
+SInt32 IOATIR500Accelerator::setup_stereo(UInt32 param1, UInt32 param2) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    void **vtable = *reinterpret_cast<void ***>(self);
+
+    if (U8At(self, 0x81) != 0) {
+        U32At(self, param1 * 4 + 0x124) = param2;
+        return 0;
+    }
+
+    UInt32 stateOff = param1 * 4;
+    if (U32At(self, stateOff + 0x11c) == param2) {
+        return 0;
+    }
+
+    UInt32 oldState = U32At(self, stateOff + 0x114);
+    if ((param2 & 1) == 0) {
+        param2 &= 0xfffffffdu;
+    } else {
+        UInt8 *scratch = self + param1 * 0x78 + 0x1a4;
+        if (U32At(self, param1 * 0x78 + 0x1ac) == 0) {
+            FUN_000056f8(scratch, self + param1 * 0x78 + 300, 0x78);
+            U32At(self, param1 * 0x78 + 0x1b0) = 0;
+            U32At(self, param1 * 0x78 + 0x1a4) = 0;
+            U32At(self, param1 * 0x78 + 0x1a8) = 0;
+            U32At(self, param1 * 0x78 + 0x1ac) = 0;
+
+            typedef SInt32 (*Fn0x56c)(void *, ATIR500SurfaceBuffer *);
+            SInt32 result = (*reinterpret_cast<Fn0x56c *>(vtable + (0x56c / 4)))(
+                self, reinterpret_cast<ATIR500SurfaceBuffer *>(scratch));
+            if (result == 0) {
+                result = freeToAllocSurfaceVRAM(self, nullptr, nullptr, nullptr, 0,
+                                                 reinterpret_cast<ATIR500SurfaceBuffer *>(scratch));
+                if (result == 0) {
+                    return -0x1ffffd43; /* real: literal SInt32 error constant */
+                }
+            }
+        }
+        U32At(self, stateOff + 0x114) = 2;
+    }
+
+    SInt32 result;
+    if (((param2 ^ U32At(self, stateOff + 0x11c)) & 2) == 0) {
+        result = 0;
+        if ((param2 & 1) != 0) goto store_and_notify;
+    } else {
+        waitForTimeStamp(U32At(self, 0x50) - 1);
+        typedef SInt32 (*Fn0x5cc)(void *, UInt32, UInt32);
+        result = (*reinterpret_cast<Fn0x5cc *>(vtable + (0x5cc / 4)))(self, param1, param2);
+        if (result != 0) {
+            param2 = 0;
+        } else {
+            if ((param2 & 1) != 0) goto store_and_notify;
+        }
+    }
+    if (U32At(self, param1 * 0x78 + 0x1ac) != 0) {
+        /* real: ATIR500Memory::dealloc on the accelerator's own "main" GART pool */
+        reinterpret_cast<ATIR500Memory *>(*reinterpret_cast<void **>(self + 0x7c))->dealloc(
+            reinterpret_cast<GLKMemoryElement *>(self + param1 * 0x78 + 0x1a4));
+    }
+    U32At(self, stateOff + 0x114) = 1;
+
+store_and_notify:
+    U32At(self, stateOff + 0x11c) = param2;
+
+    if (oldState != U32At(self, stateOff + 0x114)) {
+        IOATIR500Surface *surf = *reinterpret_cast<IOATIR500Surface **>(self + 0x5c);
+        if (surf != nullptr) {
+            IOATIR500Surface *head = surf;
+            do {
+                surf->freeAllSwapBuffers(param1); /* real name, own body not decompiled this pass */
+                surf->allocMasterSwapBuffer(param1, 0x9000); /* real name, own body not decompiled this pass */
+                surf->allocAllSlaveSwapBuffers(param1, 0x9000); /* RESOLVED, issue #28 */
+                surf = *reinterpret_cast<IOATIR500Surface **>(reinterpret_cast<UInt8 *>(surf) + 0x9c);
+            } while (surf != head);
+        }
+    }
+    return result;
+}

@@ -144,11 +144,41 @@ public:
      */
     virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result);
 
-    /* allocOneDataBuffer / freeOneDataBuffer / allocDataBufferBacking -
-     * CONFIRMED to exist and be real (every context's get_data_buffer
-     * calls these), signatures INFERRED from call-site shape. */
+    /*
+     * allocOneDataBuffer / freeOneDataBuffer - RESOLVED (real bodies
+     * decompiled), but with a real, HONESTLY-FLAGGED open question: both
+     * call real vtable slots `+0x570`/`+0x574`/`+0x5ac`/`+0x56c` that
+     * resolve on THIS class's own (base) vtable to real, sensible,
+     * exactly-matching-signature names -
+     * `allocVendorTextureBuffer(unsigned long)` (+0x570),
+     * `releaseVendorTextureBuffer(VendorTextureBuffer*, unsigned long)`
+     * (+0x574), `makeGARTEntry(unsigned long)` (+0x5ac),
+     * `alloc_surface_buffer(ATIR500SurfaceBuffer*)` (+0x56c, a real,
+     * DIFFERENT function from the already-resolved
+     * `ATIR500Surface::alloc_surface_buffer`, issue #22 - same name,
+     * different real class). BUT: reading the concrete `ATIRadeonX1000`
+     * subclass's own vtable at `+0x570` (the established technique that
+     * resolved issues #6/#18/#19/#20/#29 cleanly every other time) gives
+     * `ATIRadeonX1000::writePerformanceStats(OSDictionary*)` - a
+     * completely different, non-matching real signature. This is
+     * UNRESOLVED and NOT force-explained here: either the subclass
+     * genuinely overrides this slot with an unrelated method (unlikely
+     * for a slot this specific base body clearly uses for texture-buffer
+     * allocation) or this project's vtable-offset bookkeeping has a real
+     * error somewhere in this specific region that hasn't been found.
+     * Transcribed via raw vtable-offset casts (not named calls) pending
+     * that resolution - see Sources/IOATIR500Accelerator_DataBufferPool.cpp.
+     */
     VendorTextureBuffer *allocOneDataBuffer(UInt32 sizeClass, bool forWrite);
     void                 freeOneDataBuffer(VendorTextureBuffer *buffer);
+
+    /*
+     * allocDataBufferBacking - RESOLVED. Real body: allocates via
+     * `IOBufferMemoryDescriptor::inTaskWithOptions` (RESOLVED, this pass,
+     * via live kxld-resolved memory read), stores the result at the
+     * buffer's own `memoryDescriptor` field. See
+     * Sources/IOATIR500Accelerator_DataBufferPool.cpp.
+     */
     bool                 allocDataBufferBacking(VendorTextureBuffer *buffer);
 
     /*
@@ -185,8 +215,11 @@ public:
      */
     void pageOffDataBuffer(VendorTextureBuffer *buffer);
 
-    /* find_surface_for_id - CONFIRMED real name (IOATIR500GLContext::
-     * get_surface_info calls it), signature INFERRED. */
+    /* find_surface_for_id - RESOLVED. Real body: a linear walk of the
+     * live-surface circular list (`liveSurfaceListHead`, `+0x5c`),
+     * matching each surface's own real `+0xa4` ID field (the same real
+     * "ID slot" field `set_id_mode` establishes) - see
+     * Sources/IOATIR500Accelerator_DataBufferPool.cpp. */
     void *find_surface_for_id(UInt32 surfaceID);
 
     /*
@@ -201,18 +234,26 @@ public:
                                    SInt32 excludeCount, VendorTextureBuffer *needed);
 
     /*
-     * getVRAMDescriptors / allocCommandBuffer - CONFIRMED real names and
-     * to be real methods of this class (both are real, mangled, exported
-     * symbols - __ZN20IOATIR500Accelerator18getVRAMDescriptorsEv at kext
-     * offset 0x4d20, __ZN20IOATIR500Accelerator18allocCommandBufferEP19VendorCommandBufferm
-     * at 0x23e0), found this pass as real call sites in
-     * IOATIR500GLContext::start (see IOATIR500GLContext.h). Signatures
-     * INFERRED from that one call site
-     * (`getVRAMDescriptors(accel)`, `allocCommandBuffer(accel, &this[0xcc], 0x20000)`);
-     * neither has been independently decompiled itself.
+     * getVRAMDescriptors - RESOLVED. Real body: loops calling a real,
+     * previously-unknown per-index local method, `getVRAMDescriptor`
+     * (singular, real addr 0x290 - own body not decompiled this pass),
+     * once per index up to `this+0xcc`'s own count; real success gate
+     * checks that count and `this+0xe4` are both still nonzero
+     * afterward. See Sources/IOATIR500Accelerator_DataBufferPool.cpp.
      */
     bool getVRAMDescriptors(void);
+    UInt32 getVRAMDescriptor(UInt32 index); /* real addr 0x290, own body not decompiled this pass */
+
+    /*
+     * allocCommandBuffer - RESOLVED. Real body: allocates via
+     * `IOBufferMemoryDescriptor::withOptions`, stores the requested size,
+     * gets a real hardware-mappable header via vtable+0x1cc, then calls
+     * a real, previously-unknown method, `init_command_buffer_header`
+     * (own body not decompiled this pass). See
+     * Sources/IOATIR500Accelerator_DataBufferPool.cpp.
+     */
     bool allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size);
+    void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size); /* real name, own body not decompiled this pass */
 
     /*
      * freeCommandBuffer - RESOLVED, issue #28. A real, previously-unknown
