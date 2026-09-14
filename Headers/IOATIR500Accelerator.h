@@ -145,32 +145,41 @@ public:
     virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result);
 
     /*
-     * allocOneDataBuffer / freeOneDataBuffer - RESOLVED (real bodies
-     * decompiled), but with a real, HONESTLY-FLAGGED open question: both
-     * call real vtable slots `+0x570`/`+0x574`/`+0x5ac`/`+0x56c` that
-     * resolve on THIS class's own (base) vtable to real, sensible,
-     * exactly-matching-signature names -
-     * `allocVendorTextureBuffer(unsigned long)` (+0x570),
-     * `releaseVendorTextureBuffer(VendorTextureBuffer*, unsigned long)`
-     * (+0x574), `makeGARTEntry(unsigned long)` (+0x5ac),
-     * `alloc_surface_buffer(ATIR500SurfaceBuffer*)` (+0x56c, a real,
-     * DIFFERENT function from the already-resolved
-     * `ATIR500Surface::alloc_surface_buffer`, issue #22 - same name,
-     * different real class). BUT: reading the concrete `ATIRadeonX1000`
-     * subclass's own vtable at `+0x570` (the established technique that
-     * resolved issues #6/#18/#19/#20/#29 cleanly every other time) gives
-     * `ATIRadeonX1000::writePerformanceStats(OSDictionary*)` - a
-     * completely different, non-matching real signature. This is
-     * UNRESOLVED and NOT force-explained here: either the subclass
-     * genuinely overrides this slot with an unrelated method (unlikely
-     * for a slot this specific base body clearly uses for texture-buffer
-     * allocation) or this project's vtable-offset bookkeeping has a real
-     * error somewhere in this specific region that hasn't been found.
-     * Transcribed via raw vtable-offset casts (not named calls) pending
-     * that resolution - see Sources/IOATIR500Accelerator_DataBufferPool.cpp.
+     * allocOneDataBuffer / freeOneDataBuffer - RESOLVED, including the
+     * real identity of every vtable call each makes. An earlier pass
+     * this same session reported a real anomaly here (subclass vtable
+     * read for `+0x570` appearing to give a non-matching signature) -
+     * that was CORRECTED on a careful re-verification: it was a real
+     * arithmetic slip in that pass's own by-hand row reading (misread a
+     * table row 8 bytes/2 words off in two separate places), not a real
+     * codebase issue. Freshly re-verified via direct `nm` cross-check on
+     * every value (not by-hand hex row arithmetic) - all four slots are
+     * real, clean, exactly-matching-signature overrides on both the base
+     * and the concrete `ATIRadeonX1000` subclass:
+     *   `+0x56c` -> `alloc_surface_buffer(ATIR500SurfaceBuffer*)` (a
+     *     real, DIFFERENT function from the already-resolved
+     *     `ATIR500Surface::alloc_surface_buffer`, issue #22 - same name,
+     *     different real class; NOT overridden by the subclass - base
+     *     and subclass vtables hold the identical address)
+     *   `+0x570` -> `allocVendorTextureBuffer(unsigned long)` (real
+     *     subclass override, different real address, identical
+     *     signature)
+     *   `+0x574` -> `releaseVendorTextureBuffer(VendorTextureBuffer*,
+     *     unsigned long)` (real subclass override, identical signature)
+     *   `+0x5ac` -> `removeTransferFromGART(VendorTransferBuffer*)`
+     *     (real subclass override, identical signature - this project's
+     *     own PRIOR draft of this comment mislabeled this slot
+     *     `makeGARTEntry`, the SAME kind of by-hand row-reading slip -
+     *     also corrected)
+     * See Sources/IOATIR500Accelerator_DataBufferPool.cpp for the now
+     * cleanly-named call sites.
      */
     VendorTextureBuffer *allocOneDataBuffer(UInt32 sizeClass, bool forWrite);
     void                 freeOneDataBuffer(VendorTextureBuffer *buffer);
+    virtual SInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer); /* +0x56c - real, DIFFERENT function from ATIR500Surface::alloc_surface_buffer (issue #22); real return type confirmed SInt32 status from its own call site in setup_stereo; NOT overridden by ATIRadeonX1000 (identical address on both vtables) */
+    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size); /* +0x570 - real subclass override, different address */
+    virtual void                 releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 - real subclass override, different address */
+    virtual void                 removeTransferFromGART(VendorTransferBuffer *buffer); /* +0x5ac - real subclass override, different address */
 
     /*
      * allocDataBufferBacking - RESOLVED. Real body: allocates via

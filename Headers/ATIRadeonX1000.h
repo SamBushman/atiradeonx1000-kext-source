@@ -221,6 +221,18 @@ public:
     virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 on this class's own vtable, real addr 0x1a480 - RESOLVED, issue #26: a trivial pass-through override, calls IOATIR500Accelerator::addToGART with no added logic, see that header */
 
     /*
+     * allocVendorTextureBuffer / releaseVendorTextureBuffer /
+     * removeTransferFromGART - real overrides confirmed via `nm`
+     * cross-check (own bodies not decompiled) - see
+     * `IOATIR500Accelerator.h`'s own declaration comments for the full
+     * account (including a real by-hand arithmetic slip in an earlier
+     * pass this session, now corrected).
+     */
+    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size); /* +0x570, real addr 0x1a560 */
+    virtual void                 releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574, real addr 0x1a590 */
+    virtual void                 removeTransferFromGART(VendorTransferBuffer *buffer); /* +0x5ac, real addr 0x1a530 */
+
+    /*
      * pageoff_dirty_texture - RESOLVED via the concrete-subclass-vtable
      * technique (this class's own `+0x52c` slot is a real override; the
      * base `IOATIR500Accelerator`'s own copy is genuine placeholder
