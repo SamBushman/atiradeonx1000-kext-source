@@ -1,0 +1,138 @@
+/*
+ * ATIRadeonX1000_FreeCommandBuffer.cpp
+ *
+ * RESOLVED (issue #34): two DISTINCT real functions this project had
+ * been tracking as a single "freeCommandBuffer" gap - decompiling
+ * confirmed they are genuinely different methods on different classes,
+ * not one function seen from two call sites:
+ *
+ *   - `IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer*)`
+ *     (real addr 0x1f10) - the real counterpart to `allocCommandBuffer`/
+ *     `allocMoreCommandBuffers` (`Headers/IOATIR500Accelerator.h`),
+ *     already declared there.
+ *   - `IOATIR500GLContext::freeCommandBuffer()` (real addr 0x7e70, NO
+ *     arguments) - a real, previously entirely untracked method, newly
+ *     declared below.
+ *
+ * `IOATIR500Accelerator::freeCommandBuffer` real body: if the buffer's
+ * own `+4` field is set, calls the already-RESOLVED `waitForTimeStamp`
+ * (`+0x54c`) on its own `+0x10` field, then the already-RESOLVED
+ * `removeTransferFromGART` (`+0x5ac`) on the buffer itself (same real
+ * `VendorTransferBuffer`/`VendorCommandBuffer` shape-overlap convention
+ * this project already relies on elsewhere). Always releases a nested
+ * object at the buffer's own `+8` field (vtable `+0x18` -
+ * `OSObject::release()`), then resets the buffer's own real fields to
+ * their "empty" state (`+0xc`=`1`, `+0xe`=`0`, `+0x18`=`0`, `+0`=`0`,
+ * `+4`=`0`, `+8`=`0`, `+0x10`=`0`, `+0x14`=`0` - the same real 0x1c-byte
+ * `VendorCommandBuffer` shape `allocMoreCommandBuffers`'s own comment
+ * already documents).
+ *
+ * `IOATIR500GLContext::freeCommandBuffer` real body (a genuinely
+ * different, more involved function - NOT a thin wrapper around the
+ * accelerator's version): if `this+0xd4` (a real per-context handle -
+ * role UNKNOWN beyond this use) is set, walks TWO real singly-linked
+ * lists rooted on the accelerator (`accel+0x60` - this project's
+ * already-CONFIRMED `liveGLContextListHead`, walked via the
+ * already-established `nextLiveContext` field, `+0x80` -
+ * `Headers/IOATIR500GLContext.h`; and `accel+0x68`, a real, DIFFERENT,
+ * not-previously-documented list head walked the identical way - real
+ * role UNKNOWN, a plausible sibling "live DVD/2D context" list given
+ * the parallel structure, not confirmed). For each live context node,
+ * looks up an entry via a real, UNNAMED helper (`FUN_00007f8c`, real
+ * addr not resolved this pass, called as `(node, this+0xd4)`) and, if
+ * found, releases it (vtable `+0x18`). While walking the FIRST list,
+ * also tracks a real accelerator-owned "high water mark" (`accel+0x5c8`,
+ * raised to each node's own `+0xb0` field if larger); while walking the
+ * SECOND list, the same `accel+0x5c8` field is instead raised to a fixed
+ * literal `0x80000` (transcribed exactly as decompiled - not assumed to
+ * mirror the first list's per-node value).
+ *
+ * Confidence: CONFIRMED for control flow and every real offset in the
+ * `IOATIR500Accelerator` variant (a simple, already-well-understood
+ * field shape). CONFIRMED for control flow/offsets in the
+ * `IOATIR500GLContext` variant too, but several real fields/helpers
+ * (`this+0xd4`, `accel+0x68`'s list, `FUN_00007f8c`) have no established
+ * name/role beyond what's directly inferable from this one call site -
+ * flagged UNKNOWN above rather than guessed. No C++ compiler was
+ * available in the sandboxed environment this was written in (same
+ * standing limitation as every other file in this project).
+ */
+
+#include "../Headers/IOATIR500Accelerator.h"
+#include "../Headers/IOATIR500GLContext.h"
+#include "../Headers/ATIRadeonX1000Types.h"
+
+namespace {
+inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+
+inline void ReleaseObj(void *obj) {
+    typedef void (*ReleaseFn)(void *);
+    void **vtable = *reinterpret_cast<void ***>(obj);
+    reinterpret_cast<ReleaseFn>(vtable[0x18 / 4])(obj);
+}
+} // namespace
+
+void IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer *buffer) {
+    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
+    if (U32At(buf, 4) != 0) {
+        waitForTimeStamp(U32At(buf, 0x10));
+        removeTransferFromGART(reinterpret_cast<VendorTransferBuffer *>(buffer));
+    }
+    ReleaseObj(*reinterpret_cast<void **>(buf + 8));
+    U16At(buf, 0xc) = 1;
+    U16At(buf, 0xe) = 0;
+    U32At(buf, 0x18) = 0;
+    U32At(buf, 0) = 0;
+    U32At(buf, 4) = 0;
+    U32At(buf, 8) = 0;
+    U32At(buf, 0x10) = 0;
+    U32At(buf, 0x14) = 0;
+}
+
+/* real name/existence CONFIRMED, real behavior not decompiled this pass */
+extern "C" void *FUN_00007f8c(void *liveContextNode, UInt32 handle);
+
+void IOATIR500GLContext::freeCommandBuffer() {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    if (U32At(self, 0xd4) == 0) {
+        return;
+    }
+    UInt32 handle = U32At(self, 0xd4);
+    UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 200);
+
+    UInt8 *node = *reinterpret_cast<UInt8 **>(accel + 0x60); /* liveGLContextListHead */
+    if (node != nullptr) {
+        do {
+            if (U32At(accel, 0x5c8) < U32At(node, 0xb0)) {
+                U32At(accel, 0x5c8) = U32At(node, 0xb0);
+            }
+            void *found = FUN_00007f8c(node, handle);
+            if (found != nullptr) {
+                ReleaseObj(found);
+            }
+            node = *reinterpret_cast<UInt8 **>(node + 0x80); /* nextLiveContext */
+            if (node != nullptr) {
+                accel = *reinterpret_cast<UInt8 **>(self + 200);
+            }
+        } while (node != nullptr);
+        accel = *reinterpret_cast<UInt8 **>(self + 200);
+    }
+
+    UInt8 *node2 = *reinterpret_cast<UInt8 **>(accel + 0x68); /* real, not-previously-documented second list */
+    if (node2 != nullptr) {
+        do {
+            if (U32At(accel, 0x5c8) < 0x80000) {
+                U32At(accel, 0x5c8) = 0x80000;
+            }
+            void *found = FUN_00007f8c(node2, handle);
+            if (found != nullptr) {
+                ReleaseObj(found);
+            }
+            node2 = *reinterpret_cast<UInt8 **>(node2 + 0x80);
+            if (node2 != nullptr) {
+                accel = *reinterpret_cast<UInt8 **>(self + 200);
+            }
+        } while (node2 != nullptr);
+    }
+}

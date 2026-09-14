@@ -180,6 +180,20 @@ public:
     virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size); /* +0x570 - real subclass override, different address */
     virtual void                 releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 - real subclass override, different address */
     virtual void                 removeTransferFromGART(VendorTransferBuffer *buffer); /* +0x5ac - real subclass override, different address */
+    /*
+     * allocate_texture / waitForTimeStamp - REAL MISSING-DECLARATION BUG
+     * FIXED, issue #34 sweep: the SAME "pre-existing inconsistency" class
+     * as `deallocate_texture` below - `Sources/
+     * IOATIR500Accelerator_OneDataBuffer.cpp`'s own `allocOneDataBuffer`/
+     * `freeOneDataBuffer` bodies (an `IOATIR500Accelerator::` method)
+     * already called both of these completely unqualified, which only
+     * compiles as real virtual dispatch if THIS base class declares them
+     * - it never did (only `ATIRadeonX1000.h`'s subclass declaration
+     * existed). Added here to match; signatures/addresses per that
+     * subclass declaration (`+0x528`/`+0x54c`).
+     */
+    virtual IOReturn allocate_texture(VendorTextureBuffer *texture); /* +0x528 */
+    virtual UInt32   waitForTimeStamp(UInt32 tag);                  /* +0x54c */
 
     /*
      * allocDataBufferBacking - RESOLVED. Real body: allocates via
@@ -265,12 +279,13 @@ public:
     void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size); /* real name, own body not decompiled this pass */
 
     /*
-     * freeCommandBuffer - RESOLVED, issue #28. A real, previously-unknown
-     * counterpart to `allocCommandBuffer`, found decompiling
-     * `allocMoreCommandBuffers`'s own rollback-on-failure path below.
-     * Own body not independently decompiled - real signature INFERRED
-     * from that one real call site's own shape (mirrors
-     * `allocCommandBuffer`'s own single-buffer-pointer convention).
+     * freeCommandBuffer - RESOLVED, issue #28 (found decompiling
+     * `allocMoreCommandBuffers`'s own rollback-on-failure path below).
+     * Own body RESOLVED, issue #34 - see
+     * Sources/ATIRadeonX1000_FreeCommandBuffer.cpp. NOTE: a real,
+     * completely DIFFERENT, previously-untracked `IOATIR500GLContext::
+     * freeCommandBuffer()` (no arguments) also exists - see
+     * Headers/IOATIR500GLContext.h - do not confuse the two.
      */
     void freeCommandBuffer(VendorCommandBuffer *buffer);
 
