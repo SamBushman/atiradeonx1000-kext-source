@@ -61,6 +61,16 @@ class ATIR500Surface : public IOATIR500Surface {
 
 public:
     /*
+     * stop - CONFIRMED to exist (real mangled
+     * __ZN14ATIR500Surface4stopEP9IOService, real addr 0x3b0c0) - found
+     * while resolving issue #52 (a partial decompile of this function is
+     * what independently confirmed `ATIRadeonX1000::scratchHeader`/
+     * `pendingTimeStamp`, see `Headers/ATIRadeonX1000.h`). Own body NOT
+     * fully transcribed this pass - filed as its own issue.
+     */
+    virtual void stop(IOService *provider) override;
+
+    /*
      * ---- Real overlay/subpicture/deinterlace family - RE-HOMED, issue
      * #16. Bodies unchanged (still fully transcribed, CONFIRMED), moved
      * here from the base class purely because that's where their real

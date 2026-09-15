@@ -36,11 +36,12 @@
  * the raw decompile - an `int*`-scaled pointer addition, NOT a byte
  * offset of `0x20`, a real trap this project's own transcription caught
  * and corrected before commit). If clear, both functions return after
- * only managing the ID pool. If set, both reach through a real
- * accelerator-owned pointer at `accelerator+0x238` (word-indexed
- * `piVar4[0x8e]` in the raw decompile - a real "extended command ring"
- * object, own real identity/type not investigated) to build and submit
- * a real PM4 burst there.
+ * only managing the ID pool. If set, both reach through
+ * `accelerator->scratchHeader` (word-indexed `piVar4[0x8e]` in the raw
+ * decompile - RESOLVED, issue #52, via pure static analysis: the
+ * accelerator's own default/scratch `VendorCommandBuffer`'s real
+ * hardware-mappable header, `Headers/ATIRadeonX1000.h`) to build and
+ * submit a real PM4 burst there.
  *
  * `prepare_vram`'s burst: a real per-format lookup picks a real
  * "swizzle/tile mode" constant from the buffer's own tiling-config byte
@@ -62,14 +63,18 @@
  * pattern, called once.
  *
  * Confidence: CONFIRMED for control flow and every field offset/literal
- * constant - two real, complete decompiles, not summarized. The real
- * "extended command ring" object at `accelerator+0x238` and its own
- * internal field offsets (`+0x120`, `+0x124`, etc.), and the real
- * per-format lookup table indices/constants in `prepare_vram`'s own
- * burst, are transcribed as raw offsets/literals rather than promoted to
- * named fields - neither this pass nor any earlier one has independently
- * corroborated their real roles beyond what's visible in these two
- * functions alone. No C++ compiler was available in the sandboxed
+ * constant - two real, complete decompiles, not summarized.
+ * `scratchHeader`'s own real identity is now RESOLVED (issue #52) and
+ * independently cross-validated against a THIRD real usage site
+ * (`ATIR500Surface::stop`, kext offset 0x3b0c0) that agrees exactly on
+ * both this field and `pendingTimeStamp` - see `Headers/ATIRadeonX1000.h`'s
+ * own comment for the full account. Its own internal field offsets
+ * (`+0x120`, `+0x124`, etc. - past the 0x20-byte `VendorContextBufferHeader`
+ * proper, within the buffer's own larger 0x1000-byte allocation) and the
+ * real per-format lookup table indices/constants in `prepare_vram`'s own
+ * burst remain transcribed as raw offsets/literals rather than promoted
+ * to named fields - not independently corroborated beyond what's visible
+ * in these two functions alone. No C++ compiler was available in the sandboxed
  * environment this was written in (same standing limitation as every
  * other file in this project) - checked by careful, repeated manual
  * re-reading against each raw decompile instead.
@@ -118,7 +123,7 @@ UInt32 ATIR500Surface::prepare_vram(ATIR500SurfaceBuffer *buffer) {
         return 1; /* real: no extended command-ring burst needed */
     }
 
-    UInt8 *ring = reinterpret_cast<UInt8 *>(U32At(accel, 0x238)); /* real: piVar4[0x8e], word-indexed */
+    UInt8 *ring = reinterpret_cast<UInt8 *>(accelerator->scratchHeader); /* RESOLVED, issue #52 - real: piVar4[0x8e], word-indexed */
     UInt32 idByteOffset = id * 4;
     UInt32 mipOffset = *reinterpret_cast<UInt32 *>(buf + 8);
     UInt32 *record = reinterpret_cast<UInt32 *>(ring + 0x120);
@@ -143,7 +148,7 @@ noTileMode:
     }
 
     UInt8 stencilBits = U8At(buf, 0x39);
-    accelerator->waitForTimeStamp(U32At(accel, 0x234));
+    accelerator->waitForTimeStamp(accelerator->pendingTimeStamp);
 
     *record = idByteOffset + 0x2c1;
     *reinterpret_cast<UInt32 *>(ring + 0x124) = mipOffset;
@@ -178,9 +183,9 @@ noTileMode:
     }
 
     IOReturn submitResult = accelerator->submit_buffer(record, U32At(accel, 0x228) + 0x120, finalCount);
-    U32At(accel, 0x234) = static_cast<UInt32>(submitResult);
+    accelerator->pendingTimeStamp = static_cast<UInt32>(submitResult);
 
-    accelerator->waitForTimeStamp(U32At(accel, 0x234));
+    accelerator->waitForTimeStamp(accelerator->pendingTimeStamp);
     return 1;
 }
 
@@ -205,11 +210,11 @@ UInt32 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer *buffer) {
         return 1; /* real: no extended command-ring burst needed */
     }
 
-    UInt8 *ring = reinterpret_cast<UInt8 *>(U32At(accel, 0x238)); /* real: piVar5[0x8e], word-indexed */
+    UInt8 *ring = reinterpret_cast<UInt8 *>(accelerator->scratchHeader); /* RESOLVED, issue #52 - real: piVar5[0x8e], word-indexed */
     UInt32 idByteOffset = id * 4;
     UInt32 *record = reinterpret_cast<UInt32 *>(ring + 0x120);
 
-    accelerator->waitForTimeStamp(U32At(accel, 0x234));
+    accelerator->waitForTimeStamp(accelerator->pendingTimeStamp);
     *record = idByteOffset + 0x2c1;
     *reinterpret_cast<UInt32 *>(ring + 0x124) = 0;
     *reinterpret_cast<UInt32 *>(ring + 0x128) = idByteOffset + 0x2c2;
@@ -218,7 +223,7 @@ UInt32 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer *buffer) {
     *reinterpret_cast<UInt32 *>(ring + 0x134) = 0;
 
     IOReturn submitResult = accelerator->submit_buffer(record, U32At(accel, 0x228) + 0x120, 6);
-    U32At(accel, 0x234) = static_cast<UInt32>(submitResult);
+    accelerator->pendingTimeStamp = static_cast<UInt32>(submitResult);
 
     return 1;
 }

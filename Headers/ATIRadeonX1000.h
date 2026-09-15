@@ -77,7 +77,40 @@ public:
      */
     UInt8   _pad_before_active[0x80];
     UInt8   deviceActiveFlag;         /* +0x80, CONFIRMED: a real byte gate checked before nearly every hardware operation in every context class, and directly read/written by 6 independent ATIRadeonX1000:: methods (callPlatformFunction, submit_empty_buffer, start_promo4_engine/stop_promo4_engine, GPUSensorFunc, system_will_change_speed) - always as a single byte, never contradicted */
-    UInt8   _pad_0x81[0x840 - 0x81];
+    UInt8   _pad_0x81[0x224 - 0x81];
+
+    /*
+     * The accelerator's own default/scratch command buffer - RESOLVED,
+     * issue #52, via pure static analysis (no live hardware needed): a
+     * real 0x18-byte `VendorCommandBuffer`-shaped record (the SAME real
+     * shape this project already established for the GL/2D/DVD contexts'
+     * own per-buffer records - `Sources/ATIRadeonX1000_
+     * AllocAllContextBuffers.cpp`/`Sources/IOATIR500GLContext_
+     * FreeAllContextBuffers.cpp`), allocated via `allocCommandBuffer(this,
+     * (VendorCommandBuffer*)(this+0x224), 0x1000)` in `ATIRadeonX1000::
+     * start` (kext offset 0x2650 - a separate, large, still-not-fully-
+     * transcribed function; only this specific field-init/allocation
+     * region was decompiled to answer this question). CONFIRMED via THREE
+     * independent real usage sites: this same zero-init/allocation region
+     * in `start`; both already-committed `ATIR500Surface::prepare_vram`/
+     * `complete_vram` real reads of `scratchHeader`
+     * (`Sources/ATIR500Surface_PrepareCompleteVRAM.cpp`, previously
+     * described only as an unidentified "extended command ring" object);
+     * and a fresh decompile of `ATIR500Surface::stop` (kext offset
+     * 0x3b0c0, own body not otherwise transcribed this pass), which reads
+     * this exact same field, passes `scratchHeader+0x120`/`+0x124` to
+     * `ATIRadeonX1000::submit_buffer`, and calls `waitForTimeStamp` on
+     * `pendingTimeStamp` (below) - all three sites agree exactly on both
+     * fields' real roles and relative offsets.
+     */
+    UInt32  _unknown_0x224;           /* +0x224, real field, own role UNKNOWN beyond being this record's own first dword (matches this project's own established per-buffer-record shape, e.g. `VendorCommandBuffer`'s own +0 field) */
+    UInt32  _unknown_0x228;           /* +0x228, real field - used in `ATIR500Surface::stop` as a base value added to `0x120` for `submit_buffer`'s own destination-offset argument; plausibly a real GPU-mapped base address for this buffer, not independently confirmed as such */
+    void *  _unknown_0x22c;           /* +0x22c, real pointer field - dereferenced for its OWN vtable `+0x144` slot in `ATIRadeonX1000::start` (called with argument `3`); real object identity UNKNOWN, own vtable slot number distinct from this project's usual `+0x18` "release" convention, so likely not a simple releasable handle */
+    UInt8   _pad_0x230[0x234 - 0x230]; /* +0x230 (UInt16, set to 1 in `start`) / +0x232 (UInt16) - real fields, own roles UNKNOWN, matching this project's own established per-buffer-record "u16 pair" shape */
+    UInt32  pendingTimeStamp;         /* +0x234, CONFIRMED: real "tag" value passed to `ATIRadeonX1000::waitForTimeStamp` by both `ATIR500Surface::prepare_vram`/`complete_vram` and `ATIR500Surface::stop` - matches this project's own established per-buffer-record "+0x10 tag" shape exactly */
+    VendorContextBufferHeader *scratchHeader; /* +0x238, CONFIRMED (issue #52): the real hardware-mappable header pointer for this same scratch command buffer - matches this project's own already-resolved `VendorContextBufferHeader` type (issue #46) and the identical "+0x14 header" shape already established for the GL/2D/DVD contexts' own primary buffers. Used as a small ad-hoc PM4 "ring" by `prepare_vram`/`complete_vram`/`stop` (real fields at `scratchHeader+0x120`/`+0x124`, well within the buffer's own 0x1000-byte allocation, past the 0x20-byte `VendorContextBufferHeader` proper) - explains this project's prior "extended command ring" naming, which was a reasonable guess given only the usage site, not the allocation site. */
+
+    UInt8   _pad_0x23c[0x840 - 0x23c];
     void *  commandLock;              /* +0x840, CONFIRMED: passed to lock/unlock helper pairs (FUN_xxxx(this+0x840)) bracketing nearly every external method body across all four context classes, and loaded directly in 6 independent ATIRadeonX1000:: methods (GPUSensorFunc, system_did_change_speed, system_will_change_speed, SWDSFunc, display_mode_did_change, display_mode_will_change) - always as a single word, never contradicted */
     UInt8   _pad_0x844[0x854 - 0x844];
     UInt32  idctSubmitBaseCounter;    /* +0x854, CONFIRMED: read at the top of doIDCT, compared against submit_idct_buffer_consumed's return value */
