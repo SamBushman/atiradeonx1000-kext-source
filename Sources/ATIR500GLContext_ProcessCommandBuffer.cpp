@@ -58,6 +58,7 @@
 #include "../Headers/IOATIR500Accelerator.h"
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIR500Surface.h"
+#include "../Headers/ATIRadeonX1000.h"
 
 #define PM4_TYPE2_FILLER 0x80000000u
 
@@ -85,23 +86,33 @@ static inline UInt32 EMBEDDED_OPCODE(UInt32 v) { return v & 0xff000000u; }
  * shortcut.
  */
 struct ProcessCommandBufferState {
-    UInt32 local_cc = 0;
+    /* FIXED (issue #1, first build attempt): these were all C++11
+     * in-class default member initializers, which gcc-4.0.1 (2005,
+     * pre-C++11) does not support for non-const, non-static members -
+     * real syntax errors (its diagnostic confusingly describes them as
+     * "making X static"). Moved to a real constructor's member-
+     * initializer list below instead - same real initial values. */
+    UInt32 local_cc;
     /* CORRECTED: real initial value is 0xffffffff, not 0 (kext_process_cmd_buf.txt
      * line 166: `local_384 = 0xffffffff;`). Every real read site only ever tests
      * `local_384 != 0`, so this doesn't change observed behavior at any site found
      * so far, but the literal value is preserved for fidelity per the no-shortcuts
      * standard - if a future opcode ever reads the exact magnitude, this matters. */
-    UInt32 local_384 = 0xffffffffu;
-    UInt32 local_388 = 0;
-    UInt32 local_380 = 0;
-    void  *local_378 = nullptr;
+    UInt32 local_384;
+    UInt32 local_388;
+    UInt32 local_380;
+    void  *local_378;
     /* Real shared scratch buffer (`arStack_2fc`, a `register_tracking_state[24]`)
      * passed to every real call site of restore_state_destroyed_by_pageoff -
      * CONFIRMED to be a single function-wide local, not a per-opcode temp, since
      * multiple distinct opcode bodies (0x06-0x15's bind handler, 0x39's vertex-
      * attribute bind loop) each call restore_state_destroyed_by_pageoff with the
      * same stack slot. */
-    register_tracking_state scratchState[24] = {};
+    register_tracking_state scratchState[24];
+
+    ProcessCommandBufferState()
+        : local_cc(0), local_384(0xffffffffu), local_388(0), local_380(0),
+          local_378(nullptr), scratchState(), forceTerminate(false) {}
     /*
      * CONFIRMED real, distinct control-flow signal this pass found, NOT
      * present in this project's earlier model: `goto LAB_00030d40` (a real
@@ -119,10 +130,21 @@ struct ProcessCommandBufferState {
      * signal). See the main dispatch loop's own tail logic for how this
      * flag is consumed.
      */
-    bool forceTerminate = false;
+    bool forceTerminate;
 };
 
 /* ---- Per-opcode handlers, in real opcode order ---- */
+/*
+ * FIXED (issue #1, first build attempt): these were all declared `static`
+ * (translation-unit-local linkage). They also need to be individually
+ * `friend`ed by IOATIR500GLContext/ATIR500GLContext (see those headers'
+ * own comments) to reach `accelerator`/`scissorX`/`scissorY` - and a
+ * `friend` declaration always gives a not-otherwise-declared function
+ * external linkage, which conflicts with a `static` definition of the
+ * same function. Dropped `static` from all of them for this reason; each
+ * name is specific enough (`handle_<opcode-description>`) that a real
+ * link-time collision elsewhere in this kext is not a practical concern.
+ */
 
 /*
  * Opcodes 0x02/0x03: CONFIRMED, fully transcribed - genuinely trivial,
@@ -134,12 +156,12 @@ struct ProcessCommandBufferState {
  * generic distance-based advance (this function's own dispatch loop)
  * handles cursor movement.
  */
-static UInt32 *handle_set_return_code_3(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_set_return_code_3(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     (void)ctx;
     state.local_cc = 3;
     return record;
 }
-static UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     (void)ctx;
     state.local_cc = 2;
     return record;
@@ -160,7 +182,7 @@ static UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, P
  * the same slot opcode 0x2f's HyperZ commit handler also calls - see
  * Headers/ATIR500GLContext.h).
  */
-static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     void *pAVar77;
     if (*reinterpret_cast<UInt32 *>(self + 0x3bc) == 0) {
@@ -246,7 +268,7 @@ static UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *rec
  * alternate mode - real, direct evidence of cross-context HiZ state
  * sharing this project had not previously documented.
  */
-static UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     void *pAVar77 = self + 0x5a0;
@@ -353,7 +375,7 @@ static UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record) 
  * offset within the this+0x2a4-based per-unit slot array (textureSlotArray
  * in ATIR500GLContext.h).
  */
-static UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
+UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 unitIndex = (opcode + 0xea000000u) >> 0x16;
     VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(self + unitIndex + 0x2a4);
@@ -478,7 +500,7 @@ UInt32 RTOffsetTilingBurst(void *pAVar77, UInt32 unitIndex, UInt32 nextIndex, UI
  * `unitIndex = ((header's top byte) - 6) * 4`, a plain byte offset into
  * the same `this+0x2a4`-based per-unit slot array.
  */
-static UInt32 *handle_texture_bind(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_texture_bind(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 unitByteOffset = ((opcode >> 0x18) - 6) * 4;
@@ -633,7 +655,7 @@ static UInt32 *handle_texture_bind(ATIR500GLContext *ctx, UInt32 opcode, UInt32 
  * Self-consumes into a real two-dword `0x80000000` pair plus a real
  * "attach cookie" write at `record[5]`.
  */
-static UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
 
@@ -705,7 +727,7 @@ static UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record
  * simple `record[0] = 0x80000000` self-erasure the plain texture-unbind
  * family uses (`LAB_0002eae8` in the raw decompile).
  */
-static UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     void *bound = reinterpret_cast<void *>(U32At(self, 0x328));
     if (bound != nullptr) {
@@ -730,7 +752,7 @@ static UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *reco
  * apply the generic advance" rule reads `header` captured BEFORE this
  * handler runs, not `*record` afterward.
  */
-static UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     void *pAVar77;
     UInt32 unitIndex, nextIndex, mipFraction;
@@ -766,7 +788,7 @@ static UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 
  * earlier fixed-4-slots assumption, and confirmation this opcode really
  * does call build_scissor()/write_kernel_context_buffer_regs() directly.
  */
-static UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
 
     if (U32At(self, 0x3bc) != 0) U32At(self, 0x3bc) = 0;
@@ -822,7 +844,7 @@ static UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *re
  * `record[4]` (real - not a copy-paste artifact, the raw decompile writes
  * the same value twice).
  */
-static UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
 
     UInt32 attachEnum = record[1];
@@ -884,7 +906,7 @@ static UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *r
  * stamp tail as 0x35's sibling 0x3e (an accidental real code-sharing this
  * project has now seen twice).
  */
-static UInt32 *handle_rt0_generation_stamp(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_rt0_generation_stamp(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -952,7 +974,7 @@ static UInt32 *handle_rt0_generation_stamp(ATIR500GLContext *ctx, UInt32 *record
  * cleanup-only pass) the additional real address-fixup work this
  * execute-path body also does.
  */
-static UInt32 *handle_transfer_buffer_bind_and_fixup(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_transfer_buffer_bind_and_fixup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -1007,7 +1029,7 @@ static UInt32 *handle_transfer_buffer_bind_and_fixup(ATIR500GLContext *ctx, UInt
  * this driver, this is a *named* marker - a real glFlush-equivalent
  * expressed in the marker language.
  */
-static UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     if (state.local_384 != 0) {
         U32At(ctx->accelerator, 0x704) += state.local_384 * 4;
@@ -1042,7 +1064,7 @@ static UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record, Proc
  * must write this+0x354), but it is real evidence the two fields really are
  * a coordinate pair, not unrelated values.
  */
-static UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 *puVar65 = record;
     UInt32 iVar33, iVar59, iVar48;
@@ -1091,7 +1113,7 @@ static UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *recor
  * afterward (line 2767's `goto LAB_00031340;` closes the whole
  * `0x2c / 0x2f / 0x30` if-chain), so this returns `record` unchanged
  * rather than a hardcoded length. */
-static UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record) {
     record[0] = PM4_TYPE2_FILLER;
     record[2] = ctx->compute_sc_hyperz_en(record[2]);
     record[4] = ctx->compute_zb_bw_cntl(record[4]);
@@ -1110,7 +1132,7 @@ static UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record) {
  * `0x80000000` filler (if fewer than 4 real dwords of room remain) or a
  * real Type-3 NOP-with-count word into the leftover space. Falls through to
  * the shared generic advance afterward, same as 0x2c/0x2f. */
-static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 *puVar65 = record;
     UInt32 uVar55 = puVar65[1];
@@ -1177,7 +1199,7 @@ static UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) 
  * this dispatch entry's `case 0x2d000000` below no longer needs the
  * `next != record` path either).
  */
-static UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -1402,7 +1424,7 @@ extern UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, 
  * plausible-looking shape but was not the real source. Now transcribed
  * exactly, no remaining ambiguity.
  */
-static UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -1553,7 +1575,7 @@ LAB_0002f978_37:
  * original value before the overwrite, matching opcode 0x3d's own
  * unambiguous pattern.
  */
-static UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -1624,7 +1646,7 @@ static UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record) {
  * 1 byte, the same "wrong-but-byte-granular" pattern already seen
  * elsewhere in this file).
  */
-static UInt32 *handle_bind_vertex_attributes(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_bind_vertex_attributes(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -1851,7 +1873,7 @@ static UInt32 *handle_bind_vertex_attributes(ATIR500GLContext *ctx, UInt32 *reco
  * loop-bound comparison that could never terminate) - see
  * ATIR500GLContext_DiscardBuffer.cpp's own corrected comment.
  */
-static UInt32 *handle_clear_vertex_attribute_slots(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_clear_vertex_attribute_slots(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     for (UInt8 *p = self + 0x2e4; p <= self + 0x2e4 + 0x40; p += 4) {
         VendorTextureBuffer **slot = reinterpret_cast<VendorTextureBuffer **>(p);
@@ -1880,7 +1902,7 @@ static UInt32 *handle_clear_vertex_attribute_slots(ATIR500GLContext *ctx, UInt32
  * either a real 4-dword `0x80000000` block (match) or a real 2-dword
  * block (no match).
  */
-static UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 *puVar65 = record;
     if (puVar65[1] == 0x132) {
@@ -1914,7 +1936,7 @@ static UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *reco
  * the first place this project has found `local_380` actually incremented
  * (every other confirmed use only ever READS or RESETS it).
  */
-static UInt32 *handle_query_fence_alloc(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_query_fence_alloc(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -1951,7 +1973,7 @@ static UInt32 *handle_query_fence_alloc(ATIR500GLContext *ctx, UInt32 *record, P
  * offsets, then the SAME real packed dual-counter update and
  * `+0x600`/`+0x5dc` list re-insertion `handle_texture_bind` already uses.
  */
-static UInt32 *handle_query_buffer_bind(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_query_buffer_bind(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2057,7 +2079,7 @@ static UInt32 *handle_query_buffer_bind(ATIR500GLContext *ctx, UInt32 *record, P
  * call - the THIRD distinct real decrement magnitude this project has
  * found, after `-1` and `-0xffff`; see this function's own note).
  */
-static UInt32 *handle_rt0_texture_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_rt0_texture_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2158,7 +2180,7 @@ static UInt32 *handle_rt0_texture_commit(ATIR500GLContext *ctx, UInt32 *record, 
  * the SAME `LAB_00030964` shared cleanup tail as opcode 0x40 (a real `-1`
  * magnitude decrement this time, unlike 0x3e/0x43's `-0x10000`).
  */
-static UInt32 *handle_rendertarget_tiling_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_rendertarget_tiling_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2282,7 +2304,7 @@ static UInt32 *handle_rendertarget_tiling_commit(ATIR500GLContext *ctx, UInt32 *
  * (`_0x0004d2e0`, via the shared per-mip table lookup pattern). Falls into
  * the SAME `LAB_00030964` shared cleanup tail as opcode 0x3f.
  */
-static UInt32 *handle_index_buffer_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_index_buffer_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2398,7 +2420,7 @@ static UInt32 *handle_index_buffer_commit(ATIR500GLContext *ctx, UInt32 *record,
  * the SAME `LAB_00030318` shared cleanup tail as opcode 0x3e (the `-0x10000`
  * decrement magnitude, checked against exactly `0x10000`).
  */
-static UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2545,7 +2567,7 @@ static bool convertIOGLBufferToBufIdx(UInt32 glBufferEnum, UInt32 *outIndex) {
     }
 }
 
-static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2721,7 +2743,7 @@ static UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *
     return record;
 }
 
-static UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -2884,7 +2906,7 @@ static UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *
  *      vtable+0x5a4 slot), and a final `write_kernel_context_buffer_regs`
  *      call over the per-color-attachment record range.
  */
-static UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -3163,7 +3185,7 @@ LAB_0002e114_41:
  * into the SAME trivial `LAB_000300b8` header-rewrite tail as 0x3e when
  * there is no valid render target.
  */
-static UInt32 *handle_transfer_gart_completion(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_transfer_gart_completion(ATIR500GLContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt32 *puVar65 = record;
@@ -3230,7 +3252,7 @@ static UInt32 *handle_transfer_gart_completion(ATIR500GLContext *ctx, UInt32 *re
  * dword-count tally and skips straight to the trailing "did we emit fewer
  * dwords than reserved" patch.
  */
-static UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
+UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 *puVar65 = record;
     void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
@@ -3298,7 +3320,7 @@ static UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *
 }
 
 /* Opcode 0x46: CONFIRMED real fast-clear (process_kATIGLStreamFastClearColor). */
-static UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record) {
+UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record) {
     ctx->process_kATIGLStreamFastClearColor(record);
     return record;
 }

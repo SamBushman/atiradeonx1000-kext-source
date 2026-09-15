@@ -49,12 +49,21 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
+/* FIXED (issue #1, first build attempt): these were all local
+ * (function-scope) `extern "C" ...` declarations. gcc-4.0.1's C++03
+ * grammar does not allow a linkage-specification as a block-declaration
+ * at all (only specific declaration forms are permitted inside a
+ * function body, and `extern "C"` isn't one of them) - a real syntax
+ * error ("expected unqualified-id before string constant"), not a
+ * portability nit. Hoisted to file scope, same real targets. */
+extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
+extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" int _ASICSupportsAGP;
+
 IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, UInt32 param3, UInt32 /*param4, real: confirmed unused*/) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     void *commandLock = *reinterpret_cast<void **>(accel + 0x840);
-    extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
-    extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
     GLContext_mutex_lock(commandLock);
 
     IOReturn result;
@@ -141,7 +150,6 @@ IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFac
  * every other file in this project).
  */
 void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *texture, long /*param2, real: confirmed unused*/, long /*param3, real: confirmed unused*/) {
-    extern "C" int _ASICSupportsAGP;
     UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
 
     if (U32At(tex, 0x48) == 0) {

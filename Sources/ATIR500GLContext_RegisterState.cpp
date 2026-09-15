@@ -104,7 +104,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32 *outputBuffer, 
     outputBuffer[param2 + 5]  = 10;
     outputBuffer[param2 + 6]  = 0x1006;
     UInt32 local58 = param2 + 8;
-    UInt8 *accel = static_cast<UInt8 *>(this->accelerator); /* this+200 */
+    UInt8 *accel = reinterpret_cast<UInt8 *>(this->accelerator); /* this+200 - FIXED (issue #1, first build attempt): was static_cast, invalid between unrelated pointer types (ATIRadeonX1000* -> UInt8*); every other file in this project uses reinterpret_cast for this exact same idiom */
     outputBuffer[param2 + 7]  = *reinterpret_cast<UInt32 *>(accel + 0xb74); /* real accelerator-relative constant this project never independently named */
 
     /* ---- Real per-mip render-target offset/tiling computation for mip 0 ---- */

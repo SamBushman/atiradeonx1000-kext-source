@@ -132,10 +132,15 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
     for (int i = 0; i < 8; ++i) dstHeader[i] = srcHeader[i];
 
     UInt8 *pkt = reinterpret_cast<UInt8 *>(dstHeader) + 0x20; /* prVar11 in the real decompile */
-    auto W = [&](int offset, UInt32 value) {
-        *reinterpret_cast<UInt32 *>(pkt - 0x20 + offset) = value;
-    };
-    auto Src = [&](int offset) -> UInt32 { return *reinterpret_cast<UInt32 *>(p1 + offset); };
+    /* FIXED (issue #1, first build attempt): these were both declared as
+     * C++11 `auto`+lambda locals, which gcc-4.0.1 (2005, pre-C++11) does
+     * not support at all - real syntax errors, not a portability nit.
+     * Converted to function-scope macros with the exact same by-
+     * reference-capture semantics (`[&]` captured `pkt`/`p1` by
+     * reference, which is exactly what a macro expanding at each call
+     * site already does), undef'd before the function ends below. */
+#define W(offset, value) (*reinterpret_cast<UInt32 *>(pkt - 0x20 + (offset)) = (value))
+#define Src(offset) (*reinterpret_cast<UInt32 *>(p1 + (offset)))
 
     /* ---- The real, dense register-tracking-state serialization ----
      * Left-hand side is the destination packet offset (relative to
@@ -253,4 +258,6 @@ void ATIR500GLContext::restore_state_destroyed_by_pageoff(register_tracking_stat
         *reinterpret_cast<UInt32 *>(*reinterpret_cast<UInt32 *>(slotRecord + 0x120) + 0x14));
     *reinterpret_cast<UInt32 *>(slotRecord + 0x11c) = newTag;
     *reinterpret_cast<UInt32 *>(self + 0x7c) = newTag;
+#undef W
+#undef Src
 }

@@ -24,11 +24,48 @@
 #include "ATIRadeonX1000Types.h"
 
 class ATIRadeonX1000;
+class ATIR500DVDContext;
 class IOATIR500Surface;
+class ATIR500Surface;
+struct VendorTransferBuffer;
 class IOATIR500Shared;
 
 class IOATIR500DVDContext : public IOUserClient {
     OSDeclareDefaultStructors(IOATIR500DVDContext)
+
+    /*
+     * FIXED (issue #1, first build attempt): ATIR500DVDContext_
+     * ProcessCommandBuffer.cpp's own per-opcode-handler split (this
+     * project's own readability refactor, not part of the real
+     * decompiled driver) turned inline member-function code into free
+     * helper functions taking a raw `ATIR500DVDContext *ctx` parameter.
+     * Those functions still need real access to this class's protected
+     * `accelerator`/`sharedAllocator`/`boundSurface` fields exactly as a
+     * real member function would - friended individually here rather
+     * than weakening those fields to public, matching the same fix
+     * already applied to IOATIR500GLContext.h/ATIR500GLContext.h.
+     */
+    friend bool handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset);
+    friend void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record);
+    friend void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record);
+    friend void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record);
+    friend bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_64);
+    friend void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_58);
+    friend void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_60, UInt32 &local_5c);
+    friend void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard);
+    friend void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset);
+    friend void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_15(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard);
+    friend void handle_opcode_18(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_16(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_14(ATIR500DVDContext *ctx, UInt32 *record);
+    friend void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record);
+    friend bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record);
 
 public:
     /* ---- Base table, selectors 0-9 ---- */
@@ -89,6 +126,19 @@ public:
      */
     void freeAllContextBuffers();
 
+    /*
+     * map_transfer_to_GART - RESOLVED, issue #28. Same real structure as
+     * every other class's own copy: calls `addTransferToGART` then
+     * unconditionally `freeToAllocGART` - see
+     * Sources/MapTransferToGART_RemainingContexts.cpp. FIXED (issue #1,
+     * first build attempt): that file already defines
+     * `IOATIR500DVDContext::map_transfer_to_GART`, but this class never
+     * actually declared it - a real gap that would never have compiled
+     * (matches IOATIR5002DContext's own already-correct copy of this
+     * exact declaration).
+     */
+    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+
 protected:
     /*
      * FIXED (issue #56): these seven fields were declared in discovery
@@ -111,7 +161,7 @@ protected:
     UInt32 lastSubmitResult;   /* +0xa0, CONFIRMED: stores ATIRadeonX1000::submit_buffer's real return value - mirrors GL's this+0xdc/0x7c, 2D's this+0xa8 role. */
     UInt32 commandBufferBase;  /* +0xa4, CONFIRMED: real command-buffer base process_command_buffer reads records from (+0x1c offset to the first record) and submit_buffer's own base-address argument - mirrors GL's this+0xe0/2D's this+0xac role. */
     UInt8 _pad_0xa8[0xf8 - 0xa8];
-    IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */
+    ATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through. CORRECTED to the concrete ATIR500Surface type (issue #1, first build attempt; was IOATIR500Surface*) - same real reasoning already established for `accelerator` elsewhere: real DVD-bound surfaces need subclass-only methods (e.g. `getFramebufferIndex`, `set_macrovision`'s own call), matching this project's own established "every real object here is the concrete subclass" convention. */
 };
 
 #endif /* IOATIR500DVDCONTEXT_H */

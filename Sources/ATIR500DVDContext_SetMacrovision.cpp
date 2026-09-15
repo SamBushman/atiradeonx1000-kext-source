@@ -42,6 +42,7 @@
 #include "../Headers/ATIR500DVDContext.h"
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIR500Surface.h"
 
 extern "C" void DVD_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void DVD_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");

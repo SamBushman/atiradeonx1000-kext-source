@@ -249,7 +249,14 @@ extern "C" void   FUN_000390dc(UInt32 magicConstant, void *counterFieldAddr) asm
  * accumulator and distance to 0 when this returns `false`, matching
  * handle_opcode_0a/0b's own established `bool`-return convention above.
  */
-static bool handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record,
+/* FIXED (issue #1, first build attempt): these opcode handlers were all
+ * declared `static` (translation-unit-local linkage). They also need to
+ * be individually `friend`ed by IOATIR500DVDContext (see that header's
+ * comment) to reach `accelerator`/`sharedAllocator`/`boundSurface` - and
+ * a `friend` declaration always gives a not-otherwise-declared function
+ * external linkage, which conflicts with a `static` definition of the
+ * same function. Dropped `static` from all of them for this reason. */
+bool handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record,
                                  UInt32 &recordCount, UInt32 &byteOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
@@ -343,7 +350,7 @@ static bool handle_texture_bind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *r
  * passing the raw unmasked record dword here would be a real bug
  * whenever a record's real distance value is >= 0x400000.
  */
-static void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record) {
+void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt32 unitSlot = (opcode + 0xd5000000u) >> 0x16;
     UInt8 *slotAddr = self + unitSlot + 0x104;
@@ -367,7 +374,7 @@ static void handle_texture_unbind(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 
  * equivalent return value to 1. Real, deliberate per-class difference,
  * not a transcription error. Natural distance applies (no override).
  */
-static void handle_opcode_02(UInt32 &result) {
+void handle_opcode_02(UInt32 &result) {
     result = 3;
 }
 
@@ -390,7 +397,7 @@ static void handle_opcode_02(UInt32 &result) {
  * (real evidence it targets the position PAST the luma plane, versus
  * opcode 0x5's own plain "plane base" role).
  */
-static void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record) {
+void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt8 *mip = surf + record[1] * 0x78;
@@ -457,7 +464,7 @@ static void handle_texture_sampler_state(ATIR500DVDContext *ctx, UInt32 opcode, 
  * pass) feed record[7]/[8] - the same `this+0x158` opcodes 0x5/0x6
  * also reference, now confirmed used identically here.
  */
-static void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -574,7 +581,7 @@ static void handle_opcode_0d(ATIR500DVDContext *ctx, UInt32 *record) {
  * function-entry initialization) - it was never about this call
  * boundary.
  */
-static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_64) {
+bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_64) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -676,7 +683,7 @@ static bool handle_opcode_0a(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &loc
  * was ambiguous and this pass pins down the exact real target, not just
  * "some no-op path").
  */
-static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_58) {
+void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_58) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -771,7 +778,7 @@ static void handle_opcode_0b(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &loc
  * immediately followed in memory by opcode 0x18's own real body,
  * confirming there is no gap/hidden opcode between the two.
  */
-static void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt8 *mip = surf + record[1] * 0x78;
 
@@ -816,7 +823,7 @@ static void handle_opcode_13(ATIR500DVDContext *ctx, UInt32 *record) {
  * (Y+UV) cousin of 0x3f's single-register form, otherwise structurally
  * identical.
  */
-static void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt8 *mip = surf + record[1] * 0x78;
 
@@ -839,7 +846,7 @@ static void handle_opcode_3f(ATIR500DVDContext *ctx, UInt32 *record) {
     record[7] = ((pitch >> 2) & 0x3ffeu) | ((U8At(surf, 0x9c9) & 3u) << 0x13) | 0xc00000u;
 }
 
-static void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt8 *mip = surf + record[1] * 0x78;
     SInt32 heightDelta = static_cast<SInt16>(U16At(surf, 0x9a)) - static_cast<SInt16>(U16At(surf, 0x94));
@@ -874,7 +881,7 @@ static void handle_opcode_42(ATIR500DVDContext *ctx, UInt32 *record) {
  * GART-map-and-splice-into-+0x6d0/+0x69c-list pattern already fully
  * confirmed on the bind family and opcodes 0x0d/0x12/0x43/0x44 above.
  */
-static void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
@@ -939,7 +946,7 @@ static void handle_opcode_3e(ATIR500DVDContext *ctx, UInt32 *record) {
  * of the two planes independently - the same "alternate mode" shape
  * already confirmed on the GL side's own analogous fields.
  */
-static void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
@@ -1021,7 +1028,7 @@ static void handle_opcode_43_44(ATIR500DVDContext *ctx, UInt32 *record) {
  * `local_64`/`local_58` in handle_opcode_0a/0b above (see that function's
  * header note for the full explanation).
  */
-static void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_60, UInt32 &local_5c) {
+void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &local_60, UInt32 &local_5c) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
 
     UInt32 strideDiv0 = U16At(surf, 0x136);
@@ -1090,7 +1097,7 @@ static void handle_opcode_46(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &loc
  * `sets abortHard` on the real hard-abort path instead of returning, to
  * match the dispatcher's own real LAB_00039030 semantics exactly.
  */
-static void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
+void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
 
     UInt32 idxB = record[1];
@@ -1126,7 +1133,7 @@ static void handle_opcode_47(ATIR500DVDContext *ctx, UInt32 *record, bool &abort
     record[9] = packed | ((tail & 3u) << 0x13) | 0xc00000u; /* real: shared LAB_00038870 tail */
 }
 
-static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset) {
+void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &recordCount, UInt32 &byteOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
 
@@ -1226,7 +1233,7 @@ static void handle_opcode_04(ATIR500DVDContext *ctx, UInt32 *record, UInt32 &rec
  * handle_opcode_16 above, where exactly this kind of check caught a real
  * transcription bug before it was committed).
  */
-static void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt32 selB = record[3];  /* real: uVar35 */
     UInt32 selA = record[4];  /* real: uVar30 - NOT record[4]'s later reuse as an opcode; a real per-record selector */
@@ -1413,7 +1420,7 @@ static void handle_opcode_3d(ATIR500DVDContext *ctx, UInt32 *record) {
     burst2[0x17] = out2A & 0xffffffe0u;
 }
 
-static void handle_opcode_15(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
+void handle_opcode_15(ATIR500DVDContext *ctx, UInt32 *record, bool &abortHard) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt32 origRecord1 = record[1];
@@ -1450,7 +1457,7 @@ static void handle_opcode_15(ATIR500DVDContext *ctx, UInt32 *record, bool &abort
     record[0xf] = 0x10000;
 }
 
-static void handle_opcode_18(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_18(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
@@ -1548,7 +1555,7 @@ static void handle_opcode_18(ATIR500DVDContext *ctx, UInt32 *record) {
  * confidence in the remaining 10 branches given this exact methodology
  * held perfectly on its densest, most reuse-heavy case.
  */
-static void handle_opcode_16(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_16(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt32 mode = record[1];
     UInt32 altFlag = record[4];
@@ -1728,7 +1735,7 @@ static void handle_opcode_16(ATIR500DVDContext *ctx, UInt32 *record) {
  * Ends via the same real shared tail (`LAB_00038870`) opcode 0x47 above
  * also reaches.
  */
-static void handle_opcode_14(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_14(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt32 mode = record[1];
     UInt32 altFlag = record[4];
@@ -1899,7 +1906,7 @@ static void handle_opcode_14(ATIR500DVDContext *ctx, UInt32 *record) {
  * transcribed as observed rather than "corrected" toward the more
  * intuitive symmetric mapping.
  */
-static void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record) {
+void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);
     UInt32 mode = record[1];
     UInt32 altFlag = record[4];
@@ -2106,7 +2113,7 @@ static void handle_opcode_17(ATIR500DVDContext *ctx, UInt32 *record) {
  * extracted this iteration's real `opcode`/`distance` pair from the
  * ORIGINAL `record[0]` value before this handler ever runs.
  */
-static bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record) {
+bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record) {
     UInt8 *self = reinterpret_cast<UInt8 *>(ctx);
     UInt8 *accel = reinterpret_cast<UInt8 *>(ctx->accelerator);
     UInt8 *surf = reinterpret_cast<UInt8 *>(ctx->boundSurface);

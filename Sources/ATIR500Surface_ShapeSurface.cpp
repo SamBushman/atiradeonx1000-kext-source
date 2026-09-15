@@ -252,6 +252,16 @@ extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25win
 extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCount) asm("_memmove");
 extern const UInt32 kShapeSurfaceDefaultMipTable[14]; /* real: shape_surface()::C_146, real content not extracted this pass */
 
+/* FIXED (issue #1, first build attempt): this function previously wrote
+ * raw byte offsets as `this[N] = static_cast<ATIR500Surface>(...)`. Since
+ * `this` is `ATIR500Surface *`, `this[N]` is pointer arithmetic SCALED by
+ * `sizeof(ATIR500Surface)` and treats the target as a WHOLE object of
+ * that type, not a single byte at byte-offset N - a real, silently-wrong
+ * transcription (not merely a build error the old sandbox couldn't
+ * catch: on this exact class the confusion is total, since `sizeof
+ * (ATIR500Surface)` isn't even 1). Converted to this file's own existing
+ * `U8At(self, N)` byte-accessor helper, matching every other raw-offset
+ * access in this file. */
 void ATIR500Surface::shape_surface() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
@@ -458,10 +468,10 @@ haveOverlayFormatSel:
             buf9->heightOrRows = static_cast<UInt16>(sampleCountX * S16At(self, 0xbd4));
             buf9->extra1e = static_cast<UInt16>(sampleCountY * S16At(self, 0xbd6));
         }
-        this[0x518] = static_cast<ATIR500Surface>(overlayFormatSel);
-        this[0x519] = static_cast<ATIR500Surface>(mainTileClass);
-        this[0x51b] = static_cast<ATIR500Surface>(mainSubShift);
-        this[0x51a] = static_cast<ATIR500Surface>(static_cast<UInt8>(mainFormatIdx));
+        U8At(self, 0x518) = static_cast<UInt8>(overlayFormatSel);
+        U8At(self, 0x519) = static_cast<UInt8>(mainTileClass);
+        U8At(self, 0x51b) = static_cast<UInt8>(mainSubShift);
+        U8At(self, 0x51a) = static_cast<UInt8>(static_cast<UInt8>(mainFormatIdx));
         UInt32 &packedCfg9 = buf9->tilingDegreeBits; /* real: this+0x51c == rec9+0x3c */
         if ((U32At(self, 0xbe8) & 0x700000) == 0) {
             if ((U32At(self, 0xbe8) & 0xc0000) == 0) {
@@ -636,7 +646,7 @@ haveOverlayFormatSel:
         totalBytes3 = rowByteBase * rectHRounded;
         U16At(self, 0xbe0) = customW;
         U16At(self, 0xbe2) = customH;
-        self[0xbec] = static_cast<ATIR500Surface>(1);
+        self[0xbec] = static_cast<UInt8>(1); /* FIXED (issue #1, first build attempt): was static_cast<ATIR500Surface>(1) - self is already UInt8*, so indexing was correct, but the cast target type was wrong (same underlying transcription slip as this file's other `this[N] = static_cast<ATIR500Surface>(...)` sites, just against the byte pointer instead of `this` itself). */
         U16At(self, 0xbd4) = customW;
         U16At(self, 0xbd6) = customH;
         slotCount = 2;
@@ -740,14 +750,14 @@ haveOverlayFormatSel:
             buf->extra1e = chosenHeight; /* real: pAVar15+0x576 -> rec+0x1e */
 
             if (slot == 0x11) {
-                this[0x8da] = static_cast<ATIR500Surface>(0x2e);
+                U8At(self, 0x8da) = static_cast<UInt8>(0x2e);
             } else if (slot == 0x10) {
                 U16At(self, 0x844) = 0x2d0;
                 U16At(self, 0x846) = (rectSpan4 == 0x240 || rectSpan4 == 0x120) ? 0x240 : 0x1e0;
-                this[0x862] = static_cast<ATIR500Surface>(0xb);
+                U8At(self, 0x862) = static_cast<UInt8>(0xb);
             } else if (slot == 0x12) {
                 S16At(self, 0x936) = static_cast<SInt16>(rectSpan4);
-                this[0x952] = static_cast<ATIR500Surface>(0xb);
+                U8At(self, 0x952) = static_cast<UInt8>(0xb);
             } else {
                 buf->formatTableIndex = 0x2d; /* real: pAVar15[0x592] -> rec+0x3a */
             }
@@ -769,7 +779,7 @@ haveOverlayFormatSel:
             }
 
             if (slot == 0x12) {
-                this[0x950] = static_cast<ATIR500Surface>(swizzleMode);
+                U8At(self, 0x950) = static_cast<UInt8>(swizzleMode);
             } else {
                 buf->tilingConfigByte0 = 0; /* real: pAVar15[0x590] -> rec+0x38 */
             }
@@ -785,11 +795,11 @@ haveOverlayFormatSel:
     }
 
     if (U32At(self, 0xda4) != 0) {
-        if (this[0xbf0] == static_cast<ATIR500Surface>(0)) {
-            this[0xbf0] = static_cast<ATIR500Surface>(alloc_overlay());
+        if (U8At(self, 0xbf0) == static_cast<UInt8>(0)) {
+            U8At(self, 0xbf0) = static_cast<UInt8>(alloc_overlay());
         }
     }
-    if (this[0xbf0] == static_cast<ATIR500Surface>(0)) {
+    if (U8At(self, 0xbf0) == static_cast<UInt8>(0)) {
         return;
     }
     UInt32 fbIndex = getFramebufferIndex();

@@ -172,6 +172,16 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
 void IOATIR500GLContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
     accelerator->addTransferToGART(buffer);
     void *sharedAllocator = reinterpret_cast<void *>(U32At(this, 0x88)); /* real: *(IOATIR500Shared**)(this+0x88) */
-    accelerator->freeToAllocGART(nullptr, nullptr, this, boundSurface,
+    /* FIXED (issue #1, first build attempt): `boundSurface` is declared
+     * on the SUBCLASS (ATIR500GLContext, +0x290), not this base class -
+     * a real compile error (`boundSurface` genuinely doesn't exist by
+     * that name at this scope). Since every real GL context object in
+     * this driver is the concrete ATIR500GLContext subclass (this
+     * project's own established convention - see e.g. ATIRadeonX1000.h's
+     * context-pointer notes), reads it via the same raw offset this
+     * file's own `U32At` idiom already uses elsewhere, rather than the
+     * by-name subclass access this base-class method can't perform. */
+    void *boundSurfaceRaw = reinterpret_cast<void *>(U32At(this, 0x290));
+    accelerator->freeToAllocGART(nullptr, nullptr, this, reinterpret_cast<IOATIR500Surface *>(boundSurfaceRaw),
                                   reinterpret_cast<IOATIR500Shared *>(sharedAllocator), buffer);
 }

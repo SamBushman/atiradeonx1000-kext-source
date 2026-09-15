@@ -423,6 +423,7 @@ private:
     virtual IOUserClient *new_dvd_context(void); /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context (covariant return ATIR500DVDContext*), see ATIRadeonX1000.h */
     virtual IOUserClient *new_gl_context(void);  /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context (covariant return ATIR500GLContext*), see ATIRadeonX1000.h */
 
+public:
     /*
      * setup3D - RESOLVED, issue #19/#23 (real vtable slot +0x530, real
      * addr 0x2610). Declared HERE, not on `ATIRadeonX1000.h` as issue
@@ -433,6 +434,14 @@ private:
      * body: a single real call, `allocMoreCommandBuffers(0, 0x20000)` -
      * RESOLVED, issue #28 (also required a real signature correction -
      * see that method's own declaration below).
+     *
+     * FIXED (issue #1, first build attempt): moved from `private:` to
+     * `public:` - real call site `IOATIR500GLContext::start()` invokes
+     * this through its own `accelerator` pointer, an unrelated class,
+     * so `private` couldn't have compiled against that real, confirmed
+     * call. `new_surface`/`new_2d_context`/`new_dvd_context`/
+     * `new_gl_context` just above stay `private` - their only real
+     * caller is this class's own `newUserClient`.
      */
     virtual UInt32 setup3D(void);
 };

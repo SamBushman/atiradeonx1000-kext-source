@@ -218,8 +218,16 @@ bool ATIR500Memory::init_pool(UInt32 regionOffset, UInt32 regionSize, UInt32 poo
 
     if (chunkEnd != spareHead) {
         UInt32 *p = node + 0x12;
+        /* FIXED (issue #1, first build attempt): `next` was declared
+         * INSIDE the loop body, so it went out of scope before the
+         * `while` condition below could read it - a real, would-never-
+         * have-compiled scoping bug. The loop clearly intends `next` to
+         * be loop-carried (each iteration both uses the PREVIOUS
+         * iteration's `spareHead` and computes the NEXT one, then tests
+         * against it) - hoisted the declaration above the loop. */
+        UInt32 *next;
         do {
-            UInt32 *next = spareHead + 4;
+            next = spareHead + 4;
             *p = 0;
             p[1] = 0;
             p[-1] = 0;

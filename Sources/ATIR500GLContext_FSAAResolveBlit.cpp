@@ -281,9 +281,19 @@ UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 
     puVar65[0xaa] = ((uVar35 - 1) & 0x3fffu) | ((uVar37 & 0x800u) << 4) | ((uVar53 & 0x800u) << 5);
 
     uVar55 = *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(ctx->accelerator) + 0xb74);
-    for (int off : {0xaf, 0x11, 0x13, 0x15, 0x1d, 0x2d, 0x2f}) puVar65[off] = 0xc0001000;
+    /* FIXED (issue #1, first build attempt): these were both C++11
+     * range-based for loops over a braced-init-list, which gcc-4.0.1
+     * (2005, pre-C++11) does not support at all - converted to a plain
+     * array + indexed loop, same real offsets/order. */
+    {
+        static const int offs[] = {0xaf, 0x11, 0x13, 0x15, 0x1d, 0x2d, 0x2f};
+        for (unsigned i = 0; i < sizeof(offs) / sizeof(offs[0]); ++i) puVar65[offs[i]] = 0xc0001000;
+    }
     puVar65[0xb] = uVar55;
-    for (int off : {0x31, 0x33, 0x35, 0xad}) puVar65[off] = 0xc0001000;
+    {
+        static const int offs[] = {0x31, 0x33, 0x35, 0xad};
+        for (unsigned i = 0; i < sizeof(offs) / sizeof(offs[0]); ++i) puVar65[offs[i]] = 0xc0001000;
+    }
     puVar65[0xb1] = 0xc0011000;
     puVar65[0xa2] = (puVar65[0xa2] & 0xffffe600u) | 0x11b6u;
 

@@ -20,6 +20,23 @@
 
 #include "../Headers/IOATIR500GLContext.h"
 #include "../Headers/ATIR500GLContext.h"
+#include <libkern/c++/OSMetaClass.h>
+
+/*
+ * FIXED (issue #1, first build attempt): every entry below was a plain
+ * C-style `(void *)&Class::method` cast. `-fapple-kext` explicitly
+ * rejects a raw pointer-to-member-function -> void* conversion ("Use
+ * OSMemberFunctionCast() instead") since a plain reinterpret of a
+ * pointer-to-member's bit pattern is not reliably callable as a plain
+ * function pointer on every real ABI this flag supports (notably when
+ * the member is virtual). `OSMemberFunctionCast` is Apple's own real
+ * macro for exactly this real kext idiom (`libkern/c++/OSMetaClass.h`);
+ * passing a null pointer of the receiver's static type as `self` is the
+ * standard convention for a static, target-less method table like this
+ * one (the real `target` field is 0 here too, patched live at runtime -
+ * see this file's own header comment) - `self` is only ever dereferenced
+ * to resolve a VIRTUAL member's vtable slot, and none of these are.
+ */
 
 /*
  * The 20-entry regular table (selectors 0-19), base class
@@ -29,26 +46,26 @@
  * directly, matching the real decompile.
  */
 const VendorExternalMethod kGLRegularMethods[20] = {
-    /*  0 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_surface,                 4, 4, 0 },
-    /*  1 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_swap_rect,               4, 4, 0 },
-    /*  2 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_swap_interval,           4, 2, 0 },
-    /*  3 */ { 0, 0xffff, (void *)&IOATIR500GLContext::get_config,                  0, 0, 3 },
-    /*  4 */ { 0, 0xffff, (void *)&IOATIR500GLContext::get_status,                  0, 0, 1 },
-    /*  5 */ { 0, 0xffff, (void *)&IOATIR500GLContext::get_surface_size,            0, 0, 4 },
-    /*  6 */ { 0, 0xffff, (void *)&IOATIR500GLContext::get_surface_info,            0, 1, 3 },
-    /*  7 */ { 0, 0xffff, (void *)&IOATIR500GLContext::read_buffer,                 3, 0xffffffff, 0 },
-    /*  8 */ { 0, 0xffff, (void *)&IOATIR500GLContext::finish,                      4, 0, 0 },
-    /*  9 */ { 0, 0xffff, (void *)&IOATIR500GLContext::wait_for_stamp,              4, 1, 0 }, /* CONFIRMED == the fence-wait selector found client-side in stage3-fence-mechanism.md */
-    /* 10 */ { 0, 0xffff, (void *)&IOATIR500GLContext::new_texture,                 3, 0xffffffff, 0xffffffff },
-    /* 11 */ { 0, 0xffff, (void *)&IOATIR500GLContext::delete_texture,              4, 1, 0 },
-    /* 12 */ { 0, 0xffff, (void *)&IOATIR500GLContext::become_global_shared,        4, 1, 0 },
-    /* 13 */ { 0, 0xffff, (void *)&IOATIR500GLContext::page_off_texture,            4, 2, 0 },
-    /* 14 */ { 0, 0xffff, (void *)&IOATIR500GLContext::scale_surface,               4, 3, 0 },
-    /* 15 */ { 0, 0xffff, (void *)&IOATIR500GLContext::purge_texture,               4, 1, 0 },
-    /* 16 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_surface_volatile_state,  4, 1, 0 },
-    /* 17 */ { 0, 0xffff, (void *)&IOATIR500GLContext::reclaim_resources,           4, 0, 0 },
-    /* 18 */ { 0, 0xffff, (void *)&IOATIR500GLContext::get_data_buffer,             0, 0, 2 },
-    /* 19 */ { 0, 0xffff, (void *)&IOATIR500GLContext::set_stereo,                  4, 2, 0 },
+    /*  0 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_surface),                 4, 4, 0 },
+    /*  1 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_swap_rect),               4, 4, 0 },
+    /*  2 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_swap_interval),           4, 2, 0 },
+    /*  3 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::get_config),                  0, 0, 3 },
+    /*  4 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::get_status),                  0, 0, 1 },
+    /*  5 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::get_surface_size),            0, 0, 4 },
+    /*  6 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::get_surface_info),            0, 1, 3 },
+    /*  7 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::read_buffer),                 3, 0xffffffff, 0 },
+    /*  8 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::finish),                      4, 0, 0 },
+    /*  9 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::wait_for_stamp),              4, 1, 0 }, /* CONFIRMED == the fence-wait selector found client-side in stage3-fence-mechanism.md */
+    /* 10 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::new_texture),                 3, 0xffffffff, 0xffffffff },
+    /* 11 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::delete_texture),              4, 1, 0 },
+    /* 12 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::become_global_shared),        4, 1, 0 },
+    /* 13 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::page_off_texture),            4, 2, 0 },
+    /* 14 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::scale_surface),               4, 3, 0 },
+    /* 15 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::purge_texture),               4, 1, 0 },
+    /* 16 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_surface_volatile_state),  4, 1, 0 },
+    /* 17 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::reclaim_resources),           4, 0, 0 },
+    /* 18 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::get_data_buffer),             0, 0, 2 },
+    /* 19 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_stereo),                  4, 2, 0 },
 };
 
 /*
@@ -65,7 +82,7 @@ const VendorExternalMethod kGLRegularMethods[20] = {
  * shared-memory write-pointer update).
  */
 static const VendorExternalMethod kGLSpecialMethod20 = {
-    0, 0xffff, (void *)&ATIR500GLContext::get_hw_info, 0, 0, 5
+    0, 0xffff, OSMemberFunctionCast(void *, static_cast<ATIR500GLContext *>(0), &ATIR500GLContext::get_hw_info), 0, 0, 5
 };
 
 /*

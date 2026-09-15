@@ -48,8 +48,16 @@ UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *texture, bool for
     } else if (kind == 0) {
         IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
         if (surface != nullptr) {
-            UInt32 scratch[8];
-            UInt32 mipIndex = surface->surface_buffer_idx_mask(); /* real signature also takes (surfaceBufferField0x58, &scratch) per the decompile - simplified here, see GAPS.md */
+            UInt32 scratch[8] = {};
+            /* FIXED (issue #1, first build attempt): was called with zero
+             * arguments against a real 2-parameter member function
+             * (IOATIR500Surface.h) - every other real call site in this
+             * project (ATIR500GLContext_ProcessCommandBuffer.cpp/
+             * TextureLoad.cpp) passes the texture's own +0x58 field plus
+             * an output scratch array, matching this project's own
+             * previously-established real signature; this call site had
+             * been left "simplified" instead of matching it. */
+            UInt32 mipIndex = surface->surface_buffer_idx_mask(U32At(texture, 0x58), scratch);
             UInt8 *mipRecord = reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(
                 reinterpret_cast<UInt8 *>(surface) + mipIndex * 4 + 0xb70));
             (void)scratch;

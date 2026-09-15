@@ -19,6 +19,16 @@
 #ifndef ATIRADEONX1000_REGISTERS_H
 #define ATIRADEONX1000_REGISTERS_H
 
+/* FIXED (issue #1, first build attempt): this header declares real
+ * `UInt32`-typed extern functions (HZMEM_*) further down but never
+ * brought in a definition of `UInt32` itself - it happened to compile
+ * only when some other header (ATIRadeonX1000Types.h, or its own
+ * <IOKit/IOTypes.h>) was included first by whatever .cpp file included
+ * this one. Several real source files include this header BEFORE
+ * ATIRadeonX1000Types.h, which failed with "'UInt32' does not name a
+ * type". Self-sufficient now regardless of include order. */
+#include <IOKit/IOTypes.h>
+
 /* ---- Command processor / ring buffer ---- */
 #define CP_RB_WPTR                 0x0714  /* main 3D ring write pointer; write-only, real bit-packing confirmed in submit_ring_data: (v<<0x18)|((v&0x700)<<8) */
 #define IDCT_RING_WPTR             0x1fa0  /* INFERRED name: the independent IDCT engine's own ring write pointer - same bit-packing formula as CP_RB_WPTR, confirmed structurally distinct (stage4-real-hardware-idct-engine-found.md); official register name unknown */

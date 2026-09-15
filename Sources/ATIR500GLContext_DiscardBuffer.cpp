@@ -47,6 +47,7 @@
 
 #include "../Headers/ATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
+#include <libkern/OSAtomic.h>
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) {
@@ -300,10 +301,15 @@ void ATIR500GLContext::discard_command_buffer(void) {
                 /* real atomic add of -0xffff on newTex's mip record +0x10 -
                  * SAME packed dual-counter idiom as get_texture's own
                  * atomic decrement-by-0xffff on the identical field shape -
-                 * see ATIR500GLContext_TextureLoad.cpp's header comment. */
+                 * see ATIR500GLContext_TextureLoad.cpp's header comment.
+                 * FIXED (issue #1, first build attempt): was
+                 * `__sync_fetch_and_add` (a GCC/Clang builtin not
+                 * available until GCC 4.1 - not in this project's real
+                 * gcc-4.0.1 kext-capable compiler) - replaced with
+                 * Apple's own real kernel atomic API for this,
+                 * `OSAddAtomic` (`<libkern/OSAtomic.h>`). */
                 void *newRec = reinterpret_cast<void *>(U32At(newTex, 0x14));
-                __sync_fetch_and_add(reinterpret_cast<SInt32 *>(reinterpret_cast<UInt8 *>(newRec) + 0x10),
-                                      static_cast<SInt32>(-0xffff));
+                OSAddAtomic(-0xffff, reinterpret_cast<SInt32 *>(reinterpret_cast<UInt8 *>(newRec) + 0x10));
 
                 U32At(self, 0x32c) = reinterpret_cast<UInt32>(newTex);
 

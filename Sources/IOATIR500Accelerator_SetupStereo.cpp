@@ -57,7 +57,13 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-SInt32 IOATIR500Accelerator::setup_stereo(UInt32 param1, UInt32 param2) {
+/* FIXED (issue #1, first build attempt): return type was SInt32,
+ * mismatching the header's own declared IOReturn - on this exact
+ * toolchain/SDK the two are distinct underlying types (kern_return_t vs
+ * SInt32), so gcc treated this as a second, non-overloadable
+ * declaration rather than the same function's definition. Matched to
+ * the header's real declared type. */
+IOReturn IOATIR500Accelerator::setup_stereo(UInt32 param1, UInt32 param2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     void **vtable = *reinterpret_cast<void ***>(self);
 

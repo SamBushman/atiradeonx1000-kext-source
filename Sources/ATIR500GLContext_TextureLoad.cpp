@@ -43,6 +43,7 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
+#include <libkern/OSAtomic.h>
 
 /*
  * get_texture - CONFIRMED, fully transcribed (real kext offset 0x2b5f0).
@@ -125,11 +126,15 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
      * Real atomic add of -0xffff (i.e. -0x10000+1: decrement a count
      * packed in the high 16 bits, increment one in the low 16 bits) on
      * mip+0x10 - a real PPC lwarx/add/stwcx.-with-retry sequence
-     * (0x2b768-0x2b77c in the raw disassembly), expressed here via the
-     * equivalent GCC/Clang atomic-fetch-add builtin rather than hand-
-     * unrolling the retry loop.
+     * (0x2b768-0x2b77c in the raw disassembly). FIXED (issue #1, first
+     * build attempt): was `__sync_fetch_and_add`, a GCC/Clang builtin
+     * not available until GCC 4.1 - this project's real gcc-4.0.1
+     * kext-capable compiler doesn't have it. Apple's own kernel provides
+     * exactly this real lwarx/stwcx retry sequence as `OSAddAtomic`
+     * (`<libkern/OSAtomic.h>`), the real, idiomatic kext API for this -
+     * almost certainly what the genuine shipped kext itself called here.
      */
-    __sync_fetch_and_add(reinterpret_cast<SInt32 *>(mip + 0x10), static_cast<SInt32>(-0xffff));
+    OSAddAtomic(-0xffff, reinterpret_cast<SInt32 *>(mip + 0x10));
 
     if (*reinterpret_cast<UInt32 *>(tex + 0x48) != 0) {
         UInt8 *prevNode = *reinterpret_cast<UInt8 **>(tex + 0x24);
@@ -162,6 +167,13 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
  * FUN_0003913c below.
  */
 extern "C" void FUN_0002a864(void *timestampField) asm("_IOGetTime");
+/* Same real target, second distinct decompiled call site (real address
+ * 0x29da8) - see load_texture's own use below. Declared here at file
+ * scope rather than locally inside that function: gcc-4.0.1 (FIXED,
+ * issue #1, first build attempt) does not accept an asm-label rename on
+ * a local `extern` declaration inside a function body - only at file
+ * scope, matching FUN_0002a864 immediately above. */
+extern "C" void FUN_00029da8(void *timestampField) asm("_IOGetTime");
 
 /*
  * Two more real accelerator vtable calls alloc_and_load_texture makes -
@@ -209,18 +221,24 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     UInt32 discriminant = *reinterpret_cast<UInt32 *>(tex + 0x20);
 
-    auto spliceIntoTransferList = [&](UInt8 *node) {
-        FUN_0002a864(node + 0x2c);
-        UInt8 *prevNode = *reinterpret_cast<UInt8 **>(node + 0x34);
-        UInt8 *nextNode = *reinterpret_cast<UInt8 **>(node + 0x38);
-        *reinterpret_cast<UInt32 *>(prevNode + 0x38) = reinterpret_cast<UInt32>(nextNode);
-        *reinterpret_cast<UInt32 *>(nextNode + 0x34) = reinterpret_cast<UInt32>(prevNode);
-        *reinterpret_cast<UInt32 *>(node + 0x34) = *reinterpret_cast<UInt32 *>(accel + 0x6d0);
-        *reinterpret_cast<UInt32 *>(node + 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
-        *reinterpret_cast<UInt32 *>(accel + 0x6d0) = reinterpret_cast<UInt32>(node);
-        UInt8 *newPrev = *reinterpret_cast<UInt8 **>(node + 0x34);
-        *reinterpret_cast<UInt32 *>(newPrev + 0x38) = reinterpret_cast<UInt32>(node);
-    };
+    /* FIXED (issue #1, first build attempt): was a C++11 `auto`+lambda
+     * local, which gcc-4.0.1 (2005, pre-C++11) does not support at all -
+     * a real syntax error, not a portability nit. Converted to a
+     * function-scope macro (do/while(0)-wrapped) with the exact same
+     * by-reference-capture semantics `[&]` already had for `accel`;
+     * undef'd before the function ends below. */
+#define spliceIntoTransferList(node) do { \
+        FUN_0002a864((node) + 0x2c); \
+        UInt8 *prevNode = *reinterpret_cast<UInt8 **>((node) + 0x34); \
+        UInt8 *nextNode = *reinterpret_cast<UInt8 **>((node) + 0x38); \
+        *reinterpret_cast<UInt32 *>(prevNode + 0x38) = reinterpret_cast<UInt32>(nextNode); \
+        *reinterpret_cast<UInt32 *>(nextNode + 0x34) = reinterpret_cast<UInt32>(prevNode); \
+        *reinterpret_cast<UInt32 *>((node) + 0x34) = *reinterpret_cast<UInt32 *>(accel + 0x6d0); \
+        *reinterpret_cast<UInt32 *>((node) + 0x38) = reinterpret_cast<UInt32>(accel + 0x69c); \
+        *reinterpret_cast<UInt32 *>(accel + 0x6d0) = reinterpret_cast<UInt32>(node); \
+        UInt8 *newPrev = *reinterpret_cast<UInt8 **>((node) + 0x34); \
+        *reinterpret_cast<UInt32 *>(newPrev + 0x38) = reinterpret_cast<UInt32>(node); \
+    } while (0)
 
     if (discriminant == 3) {
         if (*reinterpret_cast<UInt32 *>(tex + 0x48) == 0 &&
@@ -355,6 +373,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
     }
 
     /* default: real no-op for any other discriminant value */
+#undef spliceIntoTransferList
 }
 
 /*
@@ -874,20 +893,27 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
      * FUN_0002a864/spliceIntoTransferList already use. RESOLVED, issue
      * #15 (live kxld-resolved memory read on real G5/Tiger hardware): the
      * real target is `IOGetTime`, the same real correction as
-     * FUN_0002a864 above - see Headers/ATIRadeonX1000Registers.h. */
-    extern "C" void FUN_00029da8(void *timestampField) asm("_IOGetTime");
-    auto spliceIntoAccelTransferList = [&](UInt8 *node) {
-        FUN_00029da8(node + 0x2c);
-        UInt8 *prevNode = *reinterpret_cast<UInt8 **>(node + 0x34);
-        UInt8 *nextNode = *reinterpret_cast<UInt8 **>(node + 0x38);
-        *reinterpret_cast<UInt32 *>(prevNode + 0x38) = reinterpret_cast<UInt32>(nextNode);
-        *reinterpret_cast<UInt32 *>(nextNode + 0x34) = reinterpret_cast<UInt32>(prevNode);
-        *reinterpret_cast<UInt32 *>(node + 0x34) = *reinterpret_cast<UInt32 *>(accel + 0x6d0);
-        *reinterpret_cast<UInt32 *>(node + 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
-        *reinterpret_cast<UInt32 *>(accel + 0x6d0) = reinterpret_cast<UInt32>(node);
-        UInt8 *newPrev = *reinterpret_cast<UInt8 **>(node + 0x34);
-        *reinterpret_cast<UInt32 *>(newPrev + 0x38) = reinterpret_cast<UInt32>(node);
-    };
+     * FUN_0002a864 above - see Headers/ATIRadeonX1000Registers.h. Now
+     * declared at file scope (top of this file) - see that declaration's
+     * own note on why. */
+    /* FIXED (issue #1, first build attempt): was a C++11 `auto`+lambda
+     * local, which gcc-4.0.1 (2005, pre-C++11) does not support at all -
+     * a real syntax error, not a portability nit. Converted to a
+     * function-scope macro (do/while(0)-wrapped) with the exact same
+     * by-reference-capture semantics `[&]` already had for `accel`;
+     * undef'd before the function ends below. */
+#define spliceIntoAccelTransferList(node) do { \
+        FUN_00029da8((node) + 0x2c); \
+        UInt8 *prevNode = *reinterpret_cast<UInt8 **>((node) + 0x34); \
+        UInt8 *nextNode = *reinterpret_cast<UInt8 **>((node) + 0x38); \
+        *reinterpret_cast<UInt32 *>(prevNode + 0x38) = reinterpret_cast<UInt32>(nextNode); \
+        *reinterpret_cast<UInt32 *>(nextNode + 0x34) = reinterpret_cast<UInt32>(prevNode); \
+        *reinterpret_cast<UInt32 *>((node) + 0x34) = *reinterpret_cast<UInt32 *>(accel + 0x6d0); \
+        *reinterpret_cast<UInt32 *>((node) + 0x38) = reinterpret_cast<UInt32>(accel + 0x69c); \
+        *reinterpret_cast<UInt32 *>(accel + 0x6d0) = reinterpret_cast<UInt32>(node); \
+        UInt8 *newPrev = *reinterpret_cast<UInt8 **>((node) + 0x34); \
+        *reinterpret_cast<UInt32 *>(newPrev + 0x38) = reinterpret_cast<UInt32>(node); \
+    } while (0)
 
     UInt32 discriminant = *reinterpret_cast<UInt32 *>(tex + 0x20);
     UInt32 payloadByteLen; /* real: local_54 */
@@ -1143,4 +1169,5 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
 
     typedef void (*ReleaseFn)(void *);
     (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
+#undef spliceIntoAccelTransferList
 }

@@ -580,7 +580,11 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
                         for (SInt32 sub = 0; sub < static_cast<SInt32>(blockCount); sub++) {
                             UInt8 *cpuPtr;
                             if (B(tex, 0x20) == 7) {
-                                void *desc = *reinterpret_cast<void **>(*reinterpret_cast<void **>(tex + 0x58) + 8);
+                                /* FIXED (issue #1, first build attempt): added a UInt8*
+                                 * cast before the `+ 8` - a bare `void *` doesn't support
+                                 * pointer arithmetic in standard C++ (only as a GNU
+                                 * extension this exact compiler doesn't allow here). */
+                                void *desc = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(tex + 0x58)) + 8);
                                 typedef void *(*MapFn)(void *, int, int, UInt32, int, int);
                                 gartHandle = (*reinterpret_cast<MapFn *>(*reinterpret_cast<void ***>(desc) + (0x14c / 4)))(
                                     desc, _ASICSupportsAGP, 0, 1, 0, 0);

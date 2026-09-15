@@ -25,12 +25,65 @@
 #include "ATIRadeonX1000Types.h"
 
 class ATIRadeonX1000;
+class ATIR500GLContext;
 class IOATIR500Shared;
 struct VendorTextureBuffer;
 struct VendorTransferBuffer;
+struct ProcessCommandBufferState;
 
 class IOATIR500GLContext : public IOUserClient {
     OSDeclareDefaultStructors(IOATIR500GLContext)
+
+    /*
+     * FIXED (issue #1, first build attempt): ATIR500GLContext_
+     * ProcessCommandBuffer.cpp's own per-opcode-handler split (this
+     * project's own readability refactor - see that file's header
+     * comment; NOT part of the real decompiled driver) turned inline
+     * member-function code into free helper functions taking a raw
+     * `ATIR500GLContext *ctx` parameter. Those functions still need real
+     * access to this class's protected `accelerator` field exactly as
+     * a real member function would - friended individually here (and
+     * again in ATIR500GLContext.h for that subclass's own protected
+     * fields) rather than weakening `accelerator` to public, since nothing
+     * about the real field's actual encapsulation changed, just how this
+     * project chose to split up the one real function that touches it.
+     */
+    friend UInt32 *handle_set_return_code_3(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_set_return_code_2(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_hyperz_fast_clear_setup(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_hyperz_zpass_setup(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_remove_texture_from_stream(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record);
+    friend UInt32 *handle_texture_bind(ATIR500GLContext *ctx, UInt32 opcode, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_bind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_unbind_transfer_buffer(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_single_rendertarget_scissor(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_vertex_format_and_commit(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_rendertarget_pair_scissor(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_rt0_generation_stamp(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_transfer_buffer_bind_and_fixup(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_explicit_flush(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_mip_scissor_intersect(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_hyperz_commit(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_depth_buffer_resolve(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_deferred_offset_patch(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_address_fixup(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_bind_vertex_attributes(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_clear_vertex_attribute_slots(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_query_fence_alloc(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_query_buffer_bind(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_rt0_texture_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_rendertarget_tiling_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_index_buffer_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_texture_commit_with_generation(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_depth_flush_and_tile_patch(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_color_and_z_register_burst(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_rendertarget_commit(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_transfer_gart_completion(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *handle_build_surface_from_texture(ATIR500GLContext *ctx, UInt32 *record, ProcessCommandBufferState &state);
+    friend UInt32 *handle_fast_clear(ATIR500GLContext *ctx, UInt32 *record);
+    friend UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 *record);
 
 public:
     /* ---- The 20 real external methods, selectors 0-19 ---- */

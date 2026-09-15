@@ -95,30 +95,37 @@ IOReturn ATIR5002DContext::process_command_buffer(VendorCommandDescriptor *descr
      * map_transfer_to_GART) appears at SIX real call sites in this
      * function's raw decompile; factored out here for readability.
      */
-    auto reloadTexture = [&](VendorTextureBuffer *texture) {
-        if (recordCount != 0) { /* real: literal `!= 0` test, initial 0xffffffff sentinel intentionally not special-cased - matches GL's own established convention */
-            U32At(accel, 0x700) += recordCount * 4;
-            UInt32 bufBase = byteOffset + U32At(self, 0xac);
-            UInt32 bufEnd = byteOffset + U32At(self, 0x9c);
-            byteOffset += recordCount * 4;
-            U32At(self, 0xa8) = accelerator->submit_buffer(
-                reinterpret_cast<UInt32 *>(bufBase + 0x20), bufEnd + 0x20, recordCount);
-        }
-        recordCount = 0;
-        alloc_and_load_image(texture);
-        if (U32At(self, 0x9c) == 0) {
-            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(self + 0x98));
-        }
-    };
+    /* FIXED (issue #1, first build attempt): both of these were declared
+     * as C++11 `auto`+lambda locals, which gcc-4.0.1 (2005, pre-C++11)
+     * does not support at all - real syntax errors, not a portability
+     * nit. Converted to function-scope macros (do/while(0)-wrapped so
+     * they behave like a single statement at every call site) with the
+     * exact same by-reference-capture semantics `[&]` already had;
+     * undef'd before the function ends below. */
+#define reloadTexture(texture) do { \
+        if (recordCount != 0) { /* real: literal `!= 0` test, initial 0xffffffff sentinel intentionally not special-cased - matches GL's own established convention */ \
+            U32At(accel, 0x700) += recordCount * 4; \
+            UInt32 bufBase = byteOffset + U32At(self, 0xac); \
+            UInt32 bufEnd = byteOffset + U32At(self, 0x9c); \
+            byteOffset += recordCount * 4; \
+            U32At(self, 0xa8) = accelerator->submit_buffer( \
+                reinterpret_cast<UInt32 *>(bufBase + 0x20), bufEnd + 0x20, recordCount); \
+        } \
+        recordCount = 0; \
+        alloc_and_load_image(texture); \
+        if (U32At(self, 0x9c) == 0) { \
+            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(self + 0x98)); \
+        } \
+    } while (0)
 
     /* Real: flush/clear this+0x114's currently-bound texture. */
-    auto releaseLastBound = [&]() {
-        if (U32At(self, 0x114) != 0) {
-            U32At(reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(self, 0x114)), 0x14)), 8) =
-                U32At(accel, 0x50);
-            U32At(self, 0x114) = 0;
-        }
-    };
+#define releaseLastBound() do { \
+        if (U32At(self, 0x114) != 0) { \
+            U32At(reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(self, 0x114)), 0x14)), 8) = \
+                U32At(accel, 0x50); \
+            U32At(self, 0x114) = 0; \
+        } \
+    } while (0)
 
     do {
         UInt32 raw = *record;
@@ -485,4 +492,6 @@ IOReturn ATIR5002DContext::process_command_buffer(VendorCommandDescriptor *descr
             return static_cast<IOReturn>(result);
         }
     } while (true);
+#undef reloadTexture
+#undef releaseLastBound
 }

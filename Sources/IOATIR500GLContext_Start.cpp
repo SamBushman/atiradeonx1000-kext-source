@@ -32,6 +32,13 @@
 #include "../Headers/IOATIR500Shared.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
+/* FIXED (issue #1, first build attempt): was a local (function-scope)
+ * `extern "C" ...` declaration. gcc-4.0.1's C++03 grammar does not
+ * allow a linkage-specification as a block-declaration at all - a real
+ * syntax error, not a portability nit. Hoisted to file scope, same real
+ * target. */
+extern "C" void IOATIR500Shared_release(IOATIR500Shared *) asm("__ZNK8OSObject7releaseEv");
+
 bool IOATIR500GLContext::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
@@ -138,7 +145,6 @@ bool IOATIR500GLContext::start(IOService *provider) {
      * decompile showed it called with NO visible argument at all - a
      * decompiler artifact (a real `release()` needs its own `this`),
      * passed here for correctness, same as before. */
-    extern "C" void IOATIR500Shared_release(IOATIR500Shared *) asm("__ZNK8OSObject7releaseEv");
     if (clientHandle->init() == 0) {
         IOATIR500Shared_release(clientHandle);
         clientHandle = nullptr;

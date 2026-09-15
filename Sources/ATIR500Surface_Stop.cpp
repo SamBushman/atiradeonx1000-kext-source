@@ -147,9 +147,16 @@ void ATIR500Surface::stop(IOService *provider) {
         U32At(accel, 0x234) = static_cast<UInt32>(submitResult);
     }
 
-    if (this[0xbf0] != static_cast<ATIR500Surface>(0)) {
+    /* FIXED (issue #1, first build attempt): was `this[0xbf0] != static_
+     * cast<ATIR500Surface>(0)` - since `this` is `ATIR500Surface *`,
+     * `this[N]` is pointer arithmetic SCALED by `sizeof(ATIR500Surface)`
+     * and treats the target as a whole object of that type, not a
+     * single byte at byte-offset N. Converted to this file's own
+     * existing `U8At(self, N)` byte-accessor helper (see
+     * ATIR500Surface_ShapeSurface.cpp's identical fix). */
+    if (U8At(self, 0xbf0) != 0) {
         free_overlay();
-        this[0xbf0] = static_cast<ATIR500Surface>(0);
+        U8At(self, 0xbf0) = 0;
     }
 
     if (U32At(accel, 0x8b8) != 0) {

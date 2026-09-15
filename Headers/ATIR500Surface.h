@@ -160,6 +160,33 @@ public:
      * pointer convention `resolve_fsaa_buffer` uses.
      */
     void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, void *paramBlock);
+
+    /*
+     * FIXED (issue #1, first build attempt): these nine are all real
+     * subclass overrides of base-declared virtuals (see
+     * IOATIR500Surface.h's own notes on each - `invalidate`/
+     * `dealloc_surface`/`alloc_surface_buffer`/`prepare_vram`/
+     * `complete_vram`/`resetFullScreen`/`is_flip_allowed`/
+     * `shape_surface`/`is_surface_size_supported`), but this class never
+     * redeclared them - a prior session's reasoning ("every real call
+     * site reaches it through a base-typed pointer, so C++ doesn't need
+     * the subclass declaration") is true for CALL sites, but doesn't
+     * apply to DEFINING the override's own body: an out-of-line
+     * `ATIR500Surface::method() {...}` definition requires `method` to
+     * be declared in `ATIR500Surface`'s own class body regardless of how
+     * callers reach it - real compile errors ("no such member function
+     * declared in class") on every one of these until redeclared here.
+     * Signatures copied exactly from the base's own declarations.
+     */
+    virtual void   invalidate();
+    virtual UInt32 dealloc_surface(UInt32 surfaceIndex);
+    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer);
+    virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);
+    virtual UInt32 complete_vram(ATIR500SurfaceBuffer *buffer);
+    virtual void   resetFullScreen();
+    virtual SInt32 is_flip_allowed();
+    virtual void   shape_surface();
+    virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);
 };
 
 #endif /* ATIR500SURFACE_H */
