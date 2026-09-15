@@ -77,7 +77,7 @@ public:
      * 0xeab0).
      */
     bool allocAllContextBuffers(UInt32 size);
-    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xe7d0 - own body not decompiled this pass */
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xe7d0 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
 protected:
     ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */

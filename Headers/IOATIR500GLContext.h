@@ -111,7 +111,7 @@ public:
      * Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp.
      */
     bool allocAllContextBuffers(UInt32 size);
-    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR500GLContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0x7490 - own body not decompiled this pass */
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR500GLContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0x7490 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
     /*
      * freeCommandBuffer - RESOLVED, issue #34. A real, previously

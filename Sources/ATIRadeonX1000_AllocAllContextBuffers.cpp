@@ -34,7 +34,8 @@
  * real hardware-mappable header via vtable `+0x1cc` (already-established
  * real slot, matches `allocCommandBuffer`'s own use of it -
  * `Headers/IOATIR500Accelerator.h`), calls the real, per-class
- * `init_context_buffer_header` (own body not decompiled this pass) to
+ * `init_context_buffer_header` (own body RESOLVED, issue #46 - see
+ * `Sources/ATIRadeonX1000_InitContextBufferHeader.cpp`) to
  * initialize it, then repeats the SAME allocate+header-init pattern a
  * real fixed number of additional times into a per-class array (stride
  * `0x18` real bytes per entry: buffer pointer, header pointer, plus a
@@ -71,7 +72,7 @@
  * Confidence: CONFIRMED for control flow and every real offset/loop
  * bound (all three independently decompiled and cross-checked against
  * each other for consistency). `init_context_buffer_header`'s own real
- * per-class body remains a genuine gap (declared, not decompiled). No
+ * per-class body is now RESOLVED too (issue #46). No
  * C++ compiler was available in the sandboxed environment this was
  * written in (same standing limitation as every other file in this
  * project).

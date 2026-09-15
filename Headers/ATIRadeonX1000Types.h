@@ -86,15 +86,38 @@ struct VendorCommandBufferHeader {
 };
 
 /*
- * VendorContextBufferHeader - UNKNOWN layout.
+ * VendorContextBufferHeader - RESOLVED (issue #46) via `init_context_
+ * buffer_header`'s three real per-class bodies (`IOATIR500GLContext`
+ * 0x7490, `IOATIR5002DContext` 0xbaf0, `IOATIR500DVDContext` 0xe7d0),
+ * all cross-checked against each other and against raw disassembly
+ * (all three share the exact same real shape - CONFIRMED via
+ * `stwx r0,rHeader,rOffset` in a real 8-iteration `bdnz` loop, so the
+ * zeroed span really is a flat 0x20-byte BYTE range, not scaled by any
+ * assumed pointee size).
  *
- * Real decompiled signature: init_context_buffer_header(VendorContextBufferHeader*, unsigned long).
- * Never decompiled beyond its name and argument count this project.
- * TODO: decompile IOATIR500GLContext::init_context_buffer_header (kext
- * offset 0x7490) to fill this in.
+ * Real size CONFIRMED as 0x20 (32) bytes: the whole struct is zeroed
+ * (offsets 0x00-0x1c inclusive, one word at a time) before exactly two
+ * fields get a real value written over the just-zeroed bytes.
+ *
+ * `capacityField` (+0x10) role is INFERRED, not confirmed by any other
+ * reader in this project yet (nothing else in the codebase reads this
+ * struct's fields so far) - real computed value is
+ * `((size - 0x20) >> 2) - K`, a real per-CALLING-CLASS constant `K`
+ * (GL 0x91, 2D 4, DVD 0x16 - see the three real bodies in
+ * `Sources/ATIRadeonX1000_InitContextBufferHeader.cpp`). Shape (size
+ * minus header overhead, divided into 4-byte units, minus a fixed
+ * per-class reservation) strongly suggests a real descriptor/ring
+ * capacity count, but no confirmed reader exists to verify the name.
+ *
+ * `formatTag` (+0x1c) role is INFERRED - real value is always the
+ * literal `1` across all three classes; semantics beyond "a real
+ * constant tag/version field" not established.
  */
 struct VendorContextBufferHeader {
-    UInt8 _opaque[4];  /* UNKNOWN size - placeholder only */
+    UInt8 _reserved[0x10];   /* CONFIRMED zeroed by init_context_buffer_header; no other content established */
+    UInt32 capacityField;    /* +0x10, CONFIRMED value/offset, INFERRED role - see comment above */
+    UInt8 _reserved2[8];     /* +0x14, CONFIRMED zeroed by init_context_buffer_header; no other content established */
+    UInt32 formatTag;        /* +0x1c, CONFIRMED value (always 1)/offset, INFERRED role */
 };
 
 /*

@@ -65,7 +65,7 @@ public:
      * Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp.
      */
     bool allocAllContextBuffers(UInt32 size);
-    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xbaf0 - own body not decompiled this pass */
+    void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xbaf0 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
     /*
      * NOTE on selectors 16-18: real decompiled signatures for read_regs/
