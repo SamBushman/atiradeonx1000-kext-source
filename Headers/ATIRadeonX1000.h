@@ -110,7 +110,40 @@ public:
     UInt32  pendingTimeStamp;         /* +0x234, CONFIRMED: real "tag" value passed to `ATIRadeonX1000::waitForTimeStamp` by both `ATIR500Surface::prepare_vram`/`complete_vram` and `ATIR500Surface::stop` - matches this project's own established per-buffer-record "+0x10 tag" shape exactly */
     VendorContextBufferHeader *scratchHeader; /* +0x238, CONFIRMED (issue #52): the real hardware-mappable header pointer for this same scratch command buffer - matches this project's own already-resolved `VendorContextBufferHeader` type (issue #46) and the identical "+0x14 header" shape already established for the GL/2D/DVD contexts' own primary buffers. Used as a small ad-hoc PM4 "ring" by `prepare_vram`/`complete_vram`/`stop` (real fields at `scratchHeader+0x120`/`+0x124`, well within the buffer's own 0x1000-byte allocation, past the 0x20-byte `VendorContextBufferHeader` proper) - explains this project's prior "extended command ring" naming, which was a reasonable guess given only the usage site, not the allocation site. */
 
-    UInt8   _pad_0x23c[0x840 - 0x23c];
+    UInt8   _pad_0x23c[0x5c8 - 0x23c];
+
+    /*
+     * GART/data-buffer pool bookkeeping - CONFIRMED from
+     * IOATIR500Accelerator's own freeToAllocGART/freeWaitToAllocGART and
+     * every context's get_data_buffer/reclaim_resources (they all reach
+     * these same fields through their own accelerator pointer).
+     *
+     * REORDERED (build fixup, issue #1): this whole block was previously
+     * placed textually AFTER `mmioBase`/`mainRingCursor`/`idctRingCursor`
+     * (real offsets 0x860-0x930), even though its own real offsets
+     * (0x5c8-0x710) are smaller - real gcc (correctly) lays out non-
+     * virtual data members in strict declaration order, so the old
+     * ordering silently produced a WRONG struct layout (every field from
+     * `cachedBufferSizeThreshold` onward would have compiled at some
+     * offset near 0x934+, not its own real confirmed offset) even though
+     * it happened to build without an error via the `_pad_0x934[0x5c8 -
+     * 0x934]` typo-fix that preceded this discovery. Moved to its real
+     * position between `scratchHeader` (+0x238) and `commandLock`
+     * (+0x840), where all of its own real offsets actually fit.
+     */
+    UInt32  cachedBufferSizeThreshold;   /* +0x5c8, CONFIRMED: reclaim_resources sets this to 0x20000 on cleanup */
+    void *  freeBufferListHead;          /* +0x5cc, CONFIRMED: real singly-linked free-list head, walked by freeToAllocGART's transfer-buffer ring sweep */
+    void *  freeBufferListTail;          /* +0x5d0, CONFIRMED */
+    UInt32  freeBufferListCount;         /* +0x5d4, CONFIRMED: compared against a real cap of 16 entries in reclaim_resources */
+    UInt32  cachedBufferSizeThresholdB;  /* +0x5d8, CONFIRMED: reclaim_resources sets a second threshold to 0x10000; get_data_buffer compares/ratchets this one up */
+    UInt8   _pad_0x5dc[0x600 - 0x5dc];
+    void *  dirtyTextureListHead;        /* +0x600, CONFIRMED: real doubly-linked list head for "textures with a pending dirty flush" (get_data_buffer/purge_texture insert here) */
+    UInt8   _pad_0x604[0x69c - 0x604];
+    void *  secondDirtyListHead;         /* +0x69c, CONFIRMED: a second, distinct doubly-linked list head with the identical insert pattern - real purpose (a second dirty class, e.g. read-vs-write) not established */
+    UInt8   _pad_0x6a0[0x70c - 0x6a0];
+    UInt32  dataBufferByteAccumulator;   /* +0x70c, CONFIRMED: real running total accumulated in get_data_buffer, used to decide when to grow the cache threshold */
+    UInt8   _pad_0x710[0x840 - 0x710];
+
     void *  commandLock;              /* +0x840, CONFIRMED: passed to lock/unlock helper pairs (FUN_xxxx(this+0x840)) bracketing nearly every external method body across all four context classes, and loaded directly in 6 independent ATIRadeonX1000:: methods (GPUSensorFunc, system_did_change_speed, system_will_change_speed, SWDSFunc, display_mode_did_change, display_mode_will_change) - always as a single word, never contradicted */
     UInt8   _pad_0x844[0x854 - 0x844];
     UInt32  idctSubmitBaseCounter;    /* +0x854, CONFIRMED: read at the top of doIDCT, compared against submit_idct_buffer_consumed's return value */
@@ -121,25 +154,7 @@ public:
     UInt8   _pad_0x8dc[0x918 - 0x8dc];
     UInt32  mainRingCursor;           /* +0x918, INFERRED offset (this project confirmed the field's existence and role - the real write-cursor submit_ring_data advances - via the same +0x1600-relative-to-userspace reasoning as the client-side cursor fields, not from a from-zero decompile of this exact byte) */
     UInt32  idctRingCursor;           /* +0x930, CONFIRMED distinct from mainRingCursor: submit_idct_buffer_consumed writes IDCT_RING_WPTR using a value derived from this field, not this+0x918 */
-    UInt8   _pad_0x934[0x5c8 - 0x934]; /* UNKNOWN: large unverified gap - FIXED (build fixup, issue #1): was `0x5a4 - 0x934` (negative size, real gcc rejects it outright as an invalid array bound) - the next real named field below is `cachedBufferSizeThreshold` at +0x5c8, so the gap must span up to there, not down to a smaller address */
-
-    /*
-     * GART/data-buffer pool bookkeeping - CONFIRMED from
-     * IOATIR500Accelerator's own freeToAllocGART/freeWaitToAllocGART and
-     * every context's get_data_buffer/reclaim_resources (they all reach
-     * these same fields through their own accelerator pointer).
-     */
-    UInt32  cachedBufferSizeThreshold;   /* +0x5c8, CONFIRMED: reclaim_resources sets this to 0x20000 on cleanup */
-    UInt32  cachedBufferSizeThresholdB;  /* +0x5d8, CONFIRMED: reclaim_resources sets a second threshold to 0x10000; get_data_buffer compares/ratchets this one up */
-    void *  freeBufferListHead;          /* +0x5cc, CONFIRMED: real singly-linked free-list head, walked by freeToAllocGART's transfer-buffer ring sweep */
-    void *  freeBufferListTail;          /* +0x5d0, CONFIRMED */
-    UInt32  freeBufferListCount;         /* +0x5d4, CONFIRMED: compared against a real cap of 16 entries in reclaim_resources */
-    UInt8   _pad_0x5dc[0x600 - 0x5dc];
-    void *  dirtyTextureListHead;        /* +0x600, CONFIRMED: real doubly-linked list head for "textures with a pending dirty flush" (get_data_buffer/purge_texture insert here) */
-    UInt8   _pad_0x604[0x69c - 0x604];
-    void *  secondDirtyListHead;         /* +0x69c, CONFIRMED: a second, distinct doubly-linked list head with the identical insert pattern - real purpose (a second dirty class, e.g. read-vs-write) not established */
-    UInt8   _pad_0x6a0[0x70c - 0x6a0];
-    UInt32  dataBufferByteAccumulator;   /* +0x70c, CONFIRMED: real running total accumulated in get_data_buffer, used to decide when to grow the cache threshold */
+    UInt8   _pad_0x934[0xc00 - 0x934]; /* UNKNOWN: large unverified gap - real upper bound NOT confirmed; sized to comfortably cover the largest real accelerator-relative offset referenced anywhere else in this project's own code (0xbe8, in IOATIR500Surface_LockShape.cpp) plus margin, NOT a confirmed real boundary - a genuine placeholder, flagged honestly rather than guessed precisely. Revisit once more of this class's own tail fields are independently decompiled. */
 
     /*
      * The two real, software-only IOInterruptEventSource callbacks this
