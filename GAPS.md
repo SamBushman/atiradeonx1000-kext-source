@@ -1029,7 +1029,7 @@ exact same real class directly off the top-level buffer. `+0x14c`/`+0xd0` remain
 respectively, given the surrounding GART-mapping-prep context) - not further identified, but no longer an
 open "whose class is this" question.
 
-## 18. Bodies for the 25 vtable-slot methods issues #6/#18/#19/#20 only named - PARTIAL PROGRESS, issues #21-24
+## 18. Bodies for the 25 vtable-slot methods issues #6/#18/#19/#20 only named - RESOLVED, issues #21-24
 
 Filed as 4 follow-up issues (#21 accelerator factory methods, #22 Surface vtable slots, #23 accelerator
 vtable slots, #24 `IOATIR500Shared::init`/GART-handle-object identity) after confirming those earlier
@@ -1072,12 +1072,12 @@ overloads, `free`, `add_to_stack`, both `alloc` overloads, `reserve`, `dealloc`,
 and transcribed, see `Sources/ATIR500Memory_*.cpp` and `Headers/ATIR500Memory.h`'s own field-layout
 comment. Real, previously-undocumented finding along the way: the caller-owned `GLKMemoryElement` itself
 doubles as a `BoundaryNode`-shaped record while a block is allocated - `alloc`/`reserve` splice it directly
-into the free list, and `dealloc` reads its neighbor pointers back out to merge it away. Two real gaps
-remain, left open per this project's own standard (real progress, not full closure): the exact real
-bootstrap topology `init_pool`'s own chunk-carving builds (transcribed as literal raw offset arithmetic,
-not fully resolved into named fields) and the real target of the class's own unidentified vtable `+0x48`/
-`+0x4c` slots (`init`/`free`'s own gate, matching the `IOATIR500Shared`/issue #20 category of unresolved
-vtable-indirect calls).
+into the free list, and `dealloc` reads its neighbor pointers back out to merge it away. One real gap
+remained open per this project's own standard (real progress, not full closure): the exact real bootstrap
+topology `init_pool`'s own chunk-carving builds (transcribed as literal raw offset arithmetic, not fully
+resolved into named fields) - still open. The class's own unidentified vtable `+0x48`/`+0x4c` slots
+(`init`/`free`'s own gate) are now RESOLVED, issue #52: both are Apple's own standard `OSObject::
+_RESERVEDOSObject0/1()` reserved-for-future-use no-ops, not a custom init/free pair - see section 24.
 
 **Also resolved since** (issue #23): `waitForTimeStamp`/`sleepForTimeStamp`/`waitForConsumedIDCTTimeStamp`
 (`Sources/ATIRadeonX1000_TimeStampWait.cpp`) - three real, independently-compiled instances of one real
@@ -1181,5 +1181,119 @@ its own rollback path).
 **Issue #29 - IOATIR500Surface's uncatalogued `+0x5e0` vtable slot**, found during the `shape_surface` pass
 and never followed up. Resolved instantly via the established subclass-vtable technique (base placeholder,
 subclass real): `ATIR500Surface::submit_flip_buffer(unsigned long, IOATIR500GLContext*, unsigned long)`.
+
+## 21. Texture page-off subsystem, VRAM/swap-buffer family, and a batch of named-but-undecompiled functions - RESOLVED, issues #30/#31/#33-40
+
+A second systematic sweep, done after issues #27/#28/#29 closed, for every remaining "real name/address
+confirmed via `nm`, body never decompiled" gap. All ten issues closed:
+
+- **#30** - the texture page-off subsystem's four real functions (`pageoff_linear_buffer`,
+  `pageoff_dirty_texture_with_gpu`, `prepare_texture_for_pageoff_with_cpu`, `pageoff_dirty_texture_with_cpu`
+  - `Sources/ATIRadeonX1000_TexturePageoff.cpp`). Fixed a real bug in this project's own prior placeholder:
+  `pageoff_dirty_texture_with_cpu` genuinely returns `void`, not `UInt32`.
+- **#31** - six more real functions (`getVRAMDescriptor`/`init_command_buffer_header` -
+  `Sources/IOATIR500Accelerator_DataBufferPool.cpp`; `freeToAllocTextureVRAM`/`freeToAllocSurfaceVRAM`/
+  `tossSurfacesForVRAM` - `Sources/IOATIR500Accelerator_VRAMReclaim.cpp`, by far the densest three, comparable
+  to `allocAllSlaveSwapBuffers`; `freeAllSwapBuffers`/`allocMasterSwapBuffer` -
+  `Sources/IOATIR500Surface_SwapBuffers.cpp`). `freeToAllocTextureVRAM` surfaced a previously-undocumented
+  family of accelerator-owned statistics counters (`this+0x7cc`..`0x7f4`). Fixed a real bug: `setup_stereo`
+  was calling `freeToAllocSurfaceVRAM` as a placeholder free function with an explicit accelerator pointer
+  instead of a real member call. The `+0x570` vtable anomaly this issue also tracked (a subclass-vtable read
+  returning a completely non-matching signature, `writePerformanceStats`, where every other use of that
+  technique cleanly resolved) had already been fixed separately before this pass, in commit `0153eb9`.
+- **#33** - `allocAllContextBuffers`'s three real per-class bodies (GL/2D/DVD -
+  `Sources/ATIRadeonX1000_AllocAllContextBuffers.cpp`). Fixed a real misplaced declaration:
+  `IOATIR500DVDContext::allocAllContextBuffers` was declared on the subclass instead of the base its own
+  comment already named.
+- **#34** - `freeCommandBuffer` turned out to be TWO distinct real functions, not one seen from two call
+  sites: `IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer*)` and a real, previously entirely
+  untracked `IOATIR500GLContext::freeCommandBuffer()` (no arguments) - `Sources/ATIRadeonX1000_FreeCommandBuffer.cpp`.
+- **#35** - `window_mode_to_ati_format` (`Sources/ATIRadeonX1000_WindowModeToATIFormat.cpp`) - a simple
+  pixel-format-selector switch, no pointer arithmetic.
+- **#36** - `IOATIR500Surface::copy_buffer_to_backing_store` (`Sources/IOATIR500Surface_CopyBufferToBackingStore.cpp`).
+  Real return type corrected from `void` to `bool`.
+- **#37** - `IOATIR500Surface::init_swap_buffer_header` (`Sources/IOATIR500Surface_InitSwapBufferHeader.cpp`) -
+  simple, unambiguous byte-offset arithmetic on the intentionally-opaque `VendorSwapBufferHeader`.
+- **#38** - `ATIR500Surface::decompress_and_flush_depth_buffer` (`Sources/ATIR500Surface_DecompressAndFlushDepthBuffer.cpp`) -
+  either writes a fixed 6-dword PM4 "no-op flush" packet, or delegates to `load_3d_blit` (real name/address
+  found via `nm` this pass, body resolved later - see section 23).
+- **#39** - `track_regs_written_by_pm4` (`Sources/ATIRadeonX1000_TrackRegsWrittenByPM4.cpp`) - a real PM4
+  stream walker handling all 4 real packet types, including a type-1 (paired register write) shape this
+  project hadn't transcribed before. Found and fixed the same class of missing-`asm()`-alias linkage bug as
+  #40 below.
+- **#40** - the four remaining `HZMEM_*` bodies (`GetBlockOffset`/`GetBlockCount`/`IsPartial`/`Alloc` -
+  `Sources/ATIRadeonX1000_HZMEMQueries.cpp`, `Sources/ATIRadeonX1000_HZMEMAlloc.cpp`). Found and fixed a real
+  bug in the already-closed issue #28's `HZMEM_Free`: the per-index record array actually starts at
+  `table+0x14`, not `table+0` - caught via a three-way independent cross-check against these new siblings.
+
+## 22. `allocAllSlaveSwapBuffers`'s real infinite-loop bug - OPEN, issue #32 (correctly left, not a gap in this project)
+
+Root-caused via a full raw-PPC-instruction trace (not just Ghidra's C decompile, given the seriousness): the
+real compiled failure/cleanup path in Apple's own driver re-tests a provably-invariant condition and branches
+back unconditionally, with no exit. This is a genuine vendor bug, not a transcription artifact - see
+`Sources/IOATIR500Surface_AllocAllSlaveSwapBuffers.cpp`'s own header comment for the full trace. Left open to
+track verification on real hardware (forcing the allocation-failure path and confirming the real hang, or
+confirming this specific allocation call never actually fails for real callers) - not something this
+reconstruction should "fix" by correcting Apple's own compiled behavior.
+
+## 23. Final decompile-gap sweep - RESOLVED, issues #46-51 (issue #52 partial, see section 24)
+
+A third systematic sweep for every remaining declared-but-bodyless function and unverified vtable-slot claim:
+
+- **#46** - `init_context_buffer_header`'s three real per-class bodies (GL/2D/DVD -
+  `Sources/ATIRadeonX1000_InitContextBufferHeader.cpp`), promoting `VendorContextBufferHeader` from a 4-byte
+  placeholder to a real 32-byte struct with two named (if role-INFERRED) fields.
+- **#47** - three unrelated residual functions: `freeToAllocTextureCPUVisibleVRAM`
+  (`Sources/ATIRadeonX1000_FreeToAllocTextureCPUVisibleVRAM.cpp` - a doubly-linked-list eviction walk over a
+  newly-identified accelerator-owned "live CPU-visible texture" list; two honest uncertainties flagged rather
+  than silently resolved), `load_3d_blit` (`Sources/ATIR500Surface_Load3DBlit.cpp` - a dense PM4 "3D blit
+  state" builder; caught and fixed two real width/height field mixups against the raw decompile before
+  committing, and promoted a previously-unnamed padding field to `hzBlockExtra`), and `store_reg`
+  (`Sources/ATIRadeonX1000_StoreReg.cpp` - a PM4 register-index dispatch, transcribed as an equivalent
+  `switch` with register names annotated from `ATIRadeonX1000Registers.h`).
+- **#48** - `getFramebufferIndex`/`alloc_overlay`/`setup_overlay` (`Sources/ATIR500Surface_Overlay2.cpp`) -
+  all three small; confirms `setup_overlay()` really is a genuine zero-argument no-op, not a decompiler
+  artifact as this project had previously speculated.
+- **#49** - `ATIR500GLContext::stop`/`IOATIR500GLContext::stop` (`Sources/IOATIR500GLContext_Stop.cpp`) - the
+  base class's own `stop` (a real gap this project hadn't even declared before this pass) does essentially
+  all the real teardown work. Surfaced a whole new 3-class function family, `freeAllContextBuffers` - see
+  issue #54, section 25.
+- **#50** - the six remaining unresolved lazy-binding stub targets, via a live kxld-resolved `/dev/kmem` read
+  on the real G5 (the standing technique from section 20, reapplied here with a wrinkle: this exact kext
+  binary needs only one overall load slide, and `kextstat`'s reported address is one page short of the real
+  segment start - see the issue's own closing comment for the full method note). All six resolved to
+  well-known Apple/libkern symbols (`_memmove` x3, `_mutex_lock`/`_lck_mtx_unlock`,
+  `IOUserClient::removeMappingForDescriptor`). Corrected two real prior misreadings along the way: a
+  speculated "zero-init" that's really a template copy, and a commandLock "acquire/release" labeling that
+  was backwards (the real order is unlock-then-relock, matching the same idiom already documented for
+  `ATIR500GLContext::start`'s own lock pair).
+- **#51** - independently re-verified, by direct compiled-vtable read, that `IOATIR500Surface::
+  submit_flip_buffer`'s base-class vtable slot is a genuine null - the prior claim (issue #29) had never
+  actually been checked, only assumed.
+
+## 24. `ATIR500Memory`'s `+0x4c` vtable slot and `accelerator+0x238`'s object type - PARTIAL PROGRESS, issue #52 (open)
+
+The `+0x4c` (and `+0x48`) vtable slots are RESOLVED, via the same live `/dev/kmem` technique as section 23 -
+both are Apple's own standard `OSObject::_RESERVEDOSObject0/1()` reserved-for-future-use no-ops, not a custom
+init/free virtual pair as this project's prior account had speculated (this explains `init()`'s own
+"success" check, which never actually gates on anything real). `accelerator+0x238`'s own real object type
+remains OPEN - identifying it needs a *live accelerator instance's* own runtime address (to read its `+0x238`
+field, then identify what the pointed-to object's own vtable belongs to), a fundamentally different problem
+from reading static kext data; `ioreg` doesn't expose raw kernel addresses. Left genuinely open rather than
+forcing a broader, riskier kernel-memory pattern-scan for what the issue itself already flagged as
+lowest-priority.
+
+## 25. `freeAllContextBuffers` (GL/2D/DVD) - OPEN, issue #54
+
+A whole new 3-class function family (the real inverse of `allocAllContextBuffers`), found as `stop`'s own
+real fallback call while resolving issue #49 (section 23). Real names/addresses confirmed via `nm`; bodies
+not yet decompiled. Filed separately rather than folded into #49's own scope.
+
+## 26. Driver testing process, once a real build exists - OPEN, issues #41-45
+
+Not started - blocked on issue #1 (first build attempt). Once a compiled driver exists: define the testing
+process itself (including safe install/rollback to the existing Tiger driver, #41), then write and run
+feature-completeness (#42), stability (#43), and performance (#44) tests against it, iterating to parity
+(#45).
 
 See each issue's own GitHub comments and the referenced source files for full technical detail.
