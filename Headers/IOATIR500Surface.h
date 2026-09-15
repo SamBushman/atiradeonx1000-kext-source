@@ -162,7 +162,16 @@ public:
      * only now formally declared.
      */
     IOReturn surface_lock_options(UInt32 lockType, UInt32 param2, IOAccelSurfaceData *data, UInt32 size);
-    void     surface_unlock_options(UInt32 lockType, UInt32 param2);
+    IOReturn surface_unlock_options(UInt32 lockType, UInt32 param2); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real IOReturn status. */
+
+    /*
+     * free_buffer_backing_orphans - CONFIRMED to exist (real call site
+     * in surface_unlock_options, issue #1 get-it-linking pass) - the
+     * real "drain the single pending-eviction slot at +0xd8c"
+     * counterpart `free_buffer_backing_store` defers into. Own body
+     * NOT independently decompiled this pass.
+     */
+    void     free_buffer_backing_orphans(void);
 
     /*
      * surface_write_lock_int / surface_write_unlock_int - RESOLVED
@@ -204,7 +213,7 @@ public:
      * (issue #16): resolve_fsaa_buffer itself moved to the real subclass,
      * Headers/ATIR500Surface.h. */
     IOReturn set_scaling(UInt32 flags, IOAccelSurfaceScaling *scaling);
-    void     set_volatile_state(UInt32 *state);
+    void     set_volatile_state(UInt32 state); /* SIGNATURE CORRECTED (issue #1, get-it-linking pass): was `UInt32 *state` (a pointer) - the real confirmed body takes the state value directly (real mangled type `eSurfaceVolatileState`, a plain enum/int), never dereferences a pointer. */
     IOReturn set_surface_blocking(UInt32 blockingMode);
 
     /* RE-HOMED (issue #16): decompress_and_flush_depth_buffer moved to

@@ -1910,12 +1910,11 @@ UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record) {
         *puVar65 = 0x80000000u; puVar65[1] = 0x80000000u; puVar65[2] = 0x80000000u; puVar65[3] = 0x80000000u;
         IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(self, 0x290));
         if (surface != nullptr) {
-            /* real: `uVar55` (record[2]) is passed BY VALUE, not by
-             * reference - it must itself already be a real pointer value
-             * (a client-supplied address) embedded in the command stream,
-             * matching set_volatile_state's declared `UInt32 *state`
-             * parameter. */
-            surface->set_volatile_state(reinterpret_cast<UInt32 *>(uVar55));
+            /* real: `uVar55` (record[2]) is passed straight through as the
+             * real state value - set_volatile_state's real confirmed
+             * signature (issue #1, get-it-linking pass) takes a plain
+             * UInt32 value, not a pointer. */
+            surface->set_volatile_state(uVar55);
         }
     } else {
         *puVar65 = 0x80000000u; puVar65[1] = 0x80000000u;

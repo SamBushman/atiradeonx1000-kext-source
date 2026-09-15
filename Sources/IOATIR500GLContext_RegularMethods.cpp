@@ -102,14 +102,20 @@ IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 tag) {
 /*
  * set_surface_volatile_state - CONFIRMED, simple: stores the raw bits
  * at this+0xc4, then forwards to the bound surface's own
- * set_volatile_state if one is bound.
+ * set_volatile_state if one is bound. Real decompile shows the forward
+ * call with zero visible arguments (the same real Ghidra calling-
+ * convention-inference artifact this project documents elsewhere) -
+ * `set_volatile_state`'s own real confirmed signature takes the state
+ * value directly (issue #1, get-it-linking pass - see
+ * IOATIR500Surface.h's own signature correction), so `state` itself is
+ * the natural, obvious argument passed through here.
  */
 IOReturn IOATIR500GLContext::set_surface_volatile_state(UInt32 state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     U32At(self, 0xc4) = state;
     IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
     if (surface != nullptr) {
-        surface->set_volatile_state(reinterpret_cast<UInt32 *>(self + 0xc4));
+        surface->set_volatile_state(state);
     }
     return 0;
 }
