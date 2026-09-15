@@ -5,21 +5,32 @@
  * real addrs `0x18d50`/`0x19120`.
  *
  * Both gate on this class's own real vtable slot `+0x48` (`init`) - a
- * genuine virtual call through `this`'s own vtable, own real target
- * unresolved (this class's base/hierarchy was never established - left
- * as a raw vtable-indirect call, matching this project's own "Fn0xNNN"
- * convention for unidentified vtable slots elsewhere, e.g.
- * `ATIR500Surface_ResetFullScreen.cpp`'s own former `+0x5e0` call, now
- * RESOLVED, issue #29) - then walk and free the real `chunkList` (see
- * `Headers/ATIR500Memory.h`) via a real per-chunk kernel-free wrapper -
- * RESOLVED, issue #27: real target `IOFreeAligned`, same real category
- * issue #15 established for the alloc/free pair elsewhere; `init` and
- * `free` each call their own distinct per-call-site stub instance
- * (`FUN_00018de8`/`FUN_00019198`) resolving to the same real target.
- * `free()` additionally calls this object's own real vtable
- * slot `+0x4c` (own target/role unresolved) as its final action - a
- * real "continue teardown"/self-free call, consistent with `+0x48`/
- * `+0x4c` being a real init/free virtual pair on this class's own base.
+ * genuine virtual call through `this`'s own vtable. `free()` additionally
+ * calls this object's own real vtable slot `+0x4c` as its final action.
+ *
+ * Both slots RESOLVED, issue #52 (live kxld-resolved `/dev/kmem` read on
+ * real G5/Tiger hardware, cross-referenced against the running kernel's
+ * own symbol table - this class has no known subclass in this project to
+ * fall back on for the usual static subclass-vtable technique, so this
+ * genuinely needed live hardware): `+0x48` = `OSObject::
+ * _RESERVEDOSObject0()`, `+0x4c` = `OSObject::_RESERVEDOSObject1()` -
+ * both genuine standard IOKit reserved-for-future-binary-compatibility
+ * slots, real signature `virtual void _RESERVEDOSObjectN()` (no real
+ * return value), inherited unmodified since `ATIR500Memory` never
+ * overrides either. NOT a real custom init/free virtual pair as this
+ * project's own prior (pre-#52) account had speculated - both are
+ * genuine no-ops. `init()`'s own `bool ok = ...` read of the `+0x48`
+ * call's result is almost certainly a decompiler/ABI artifact (the
+ * "implicit self-return, r3 still holds `this`" pattern already
+ * documented elsewhere in this project) rather than a real signal, since
+ * a real no-op never touches r3.
+ *
+ * Then walk and free the real `chunkList` (see `Headers/ATIR500Memory.h`)
+ * via a real per-chunk kernel-free wrapper - RESOLVED, issue #27: real
+ * target `IOFreeAligned`, same real category issue #15 established for
+ * the alloc/free pair elsewhere; `init` and `free` each call their own
+ * distinct per-call-site stub instance (`FUN_00018de8`/`FUN_00019198`)
+ * resolving to the same real target.
  *
  * `init()`'s real behavior (tearing down `chunkList` rather than
  * building it) is a genuine oddity - see `Headers/ATIR500Memory.h`'s
@@ -40,6 +51,8 @@ extern "C" void FUN_00019198(void *chunk, UInt32 size) asm("_IOFreeAligned"); /*
 bool ATIR500Memory::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
+    /* +0x48 = OSObject::_RESERVEDOSObject0(), RESOLVED issue #52 - a real
+       no-op; `ok` is effectively always true (implicit self-return artifact). */
     typedef bool (*Fn0x48)(void *);
     void **vtable = *reinterpret_cast<void ***>(self);
     bool ok = reinterpret_cast<Fn0x48>(vtable[0x48 / 4])(this);
@@ -68,6 +81,7 @@ void ATIR500Memory::free() {
         chunk = nextChunk;
     }
 
+    /* +0x4c = OSObject::_RESERVEDOSObject1(), RESOLVED issue #52 - a real no-op. */
     typedef void (*Fn0x4c)(void *);
     void **vtable = *reinterpret_cast<void ***>(self);
     reinterpret_cast<Fn0x4c>(vtable[0x4c / 4])(this);

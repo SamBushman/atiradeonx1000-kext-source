@@ -109,19 +109,30 @@ public:
      * bookkeeping fields otherwise untouched. Real return: bool
      * success/failure, mirroring the vtable call's own.
      *
+     * `+0x48` RESOLVED, issue #52 (live kxld-resolved `/dev/kmem` read on
+     * the real G5/Tiger hardware, cross-referenced against the running
+     * kernel's own symbol table): real target is Apple's own
+     * `OSObject::_RESERVEDOSObject0()` - a genuine standard IOKit
+     * reserved-for-future-binary-compatibility slot, real signature
+     * `virtual void _RESERVEDOSObject0()` (no real return value at all).
+     * This means the real "gate" this function's own `bool ok = ...`
+     * read is checking is almost certainly a decompiler/ABI artifact
+     * (the same "implicit self-return, r3 still holds `this`" pattern
+     * already documented elsewhere in this project, e.g.
+     * `ATIR500Surface_Overlay2.cpp`'s `alloc_overlay`) rather than a
+     * real, meaningful success/failure signal - `_RESERVEDOSObject0`
+     * does nothing, so `ok` is effectively always true in practice.
+     *
      * NOTE: this is a genuinely odd real body for a method named
-     * `init` - it FREES the chunk list rather than allocating one. Real
-     * behavior only makes sense as a "reset/reinit" path: whatever the
-     * real `+0x48` vtable call does first (own body unresolved, matches
-     * `IOATIR500Shared::init`'s equivalent kxld-patched external call,
-     * issue #20/#24's own precedent) apparently re-establishes the pool
-     * state that this function then walks and tears back down. No real
-     * call site for this specific method exists anywhere else in this
-     * project's own reconstruction (only `init_pool`'s two overloads are
-     * ever actually called, from `ATIRadeonX1000::allocate_texture`-
-     * family code per issue #23) - left exactly as decompiled rather
-     * than reinterpreted, since no real caller context is available to
-     * confirm a better story.
+     * `init` - it FREES the chunk list rather than allocating one. Given
+     * `+0x48` is now confirmed a real no-op, this function's ONLY real
+     * effect is tearing the chunk list down - a genuine "reset" method,
+     * not the "re-establish then tear down" story this project's own
+     * prior (pre-#52) account had speculated. No real call site for this
+     * specific method exists anywhere else in this project's own
+     * reconstruction (only `init_pool`'s two overloads are ever actually
+     * called, from `ATIRadeonX1000::allocate_texture`-family code per
+     * issue #23).
      */
     bool init();
 
@@ -140,7 +151,9 @@ public:
      *     third parameter, `poolSize`, is stored into the region's own
      *     real per-node data as the pool's total real extent).
      * Both real bodies: call this class's own real vtable `+0x48` gate
-     * first (same as `init`, above); on success, allocate the pool's
+     * first (real target RESOLVED, issue #52 - `OSObject::
+     * _RESERVEDOSObject0()`, a real no-op, see `init`'s own comment
+     * above); on success, allocate the pool's
      * first real 0x204-byte chunk via the real kernel allocator
      * (`FUN_00018f44`/`FUN_00019108` - RESOLVED, issue #27: real target
      * `IOMallocAligned`) if `chunkList` is still empty; then hand-carve
@@ -168,9 +181,14 @@ public:
      * real `chunkList` (this+0x10) via the same real per-chunk free
      * helper `init()` uses (`FUN_00019198` - RESOLVED, issue #27: real
      * target `IOFreeAligned`), then calls this object's
-     * own real vtable `+0x4c` slot (own target/role unresolved - a real
-     * "free self"/teardown-continuation call, own body not investigated
-     * this pass) as its final real action.
+     * own real vtable `+0x4c` slot as its final real action - RESOLVED,
+     * issue #52 (same live kxld-resolved `/dev/kmem` read as `+0x48`
+     * above): real target is Apple's own `OSObject::
+     * _RESERVEDOSObject1()`, the very next standard IOKit reserved slot
+     * after `_RESERVEDOSObject0`. NOT a real "free self"/teardown-
+     * continuation call as this project's own prior (pre-#52) account
+     * had speculated - a genuine no-op this class never overrides,
+     * inherited unmodified from `OSObject`.
      */
     void free();
 
