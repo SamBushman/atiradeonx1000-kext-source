@@ -429,10 +429,26 @@ struct sATIDVDIDCTParams {
     UInt32  fieldFlag;       /* +0x04, CONFIRMED: gates which of two address-computation branches runs */
     UInt32  destPlaneIndex;  /* +0x08, CONFIRMED: used as a mip/plane-table index (`*8 * 0x78 + ...`) in the luma (chromaFlag==0... actually fieldFlag==0) branch */
     UInt32  planeSelector;   /* +0x0c, CONFIRMED: 0 => luma plane (uses lumaBufferA/B), 1 => chroma plane (uses chromaBufferA/B); any other value => kIOReturnBadArgument */
-    UInt8   _pad_0x10[0x1c - 0x10];
+    /*
+     * dmaByteCount / idctCoeffAddr14 / idctCoeffAddr18 - RESOLVED (issue
+     * #1, get-it-linking pass), found decompiling `submit_idct_buffer_
+     * consumed`. `dmaByteCount` is read twice for two apparently
+     * distinct real roles: once as a real dword count (multiplied by 4)
+     * sizing that function's own cache-flush range over the caller's
+     * ring buffer, and later written verbatim as one of the eight real
+     * per-plane coefficient-address ring dwords - both real, faithfully
+     * transcribed, dual role not further explained. `idctCoeffAddr14`/
+     * `idctCoeffAddr18` are each written verbatim as one more of those
+     * same eight coefficient-address dwords. Exact hardware semantics
+     * beyond "a real per-submission address/count the caller
+     * precomputes" UNKNOWN for all three.
+     */
+    UInt32  dmaByteCount;     /* +0x10 */
+    UInt32  idctCoeffAddr14;  /* +0x14 */
+    UInt32  idctCoeffAddr18;  /* +0x18 */
     UInt32  computedStride;  /* +0x1c, CONFIRMED: real computed (height * strideOrDoubled - 1) value */
     UInt32  computedChromaStride; /* +0x20, CONFIRMED: real computed (strideOrDoubled * (height>>1) - 1) value, chroma-plane-shaped */
-    UInt8   _pad_0x24[0x28 - 0x24];
+    UInt32  idctCoeffAddr24; /* +0x24, RESOLVED (issue #1) - same family as idctCoeffAddr14/18 above, one more verbatim coefficient-address ring dword. */
     UInt32  strideBroadcast; /* +0x28, CONFIRMED: real (stride | stride<<16) packed value - REORDERED (build fixup, issue #1): this field is genuinely accessed by name (ATIR500DVDContext_IDCT.cpp writes `params->strideBroadcast`), so its previous declaration position (after destEndAddress, real offset +0x30) produced a WRONG compiler-computed offset - a real functional bug, not just a documentation ordering nit. */
     UInt32  destBaseAddress; /* +0x2c, CONFIRMED: real computed destination base address (luma or chroma plane) */
     UInt32  destEndAddress;  /* +0x30, CONFIRMED: real computed destination end address */

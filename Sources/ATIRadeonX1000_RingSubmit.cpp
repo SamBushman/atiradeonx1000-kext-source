@@ -290,6 +290,159 @@ fifoTimedOut : {
 }
 }
 
+UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringOffset, sATIDVDIDCTInfo *info) {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    /* real: the decompile itself treats this third argument as
+     * `sATIDVDIDCTParams*` (a type-punned cast, already established and
+     * documented at this function's own real call site in
+     * ATIR500DVDContext_IDCT.cpp) - not as `sATIDVDIDCTInfo*` despite
+     * the declared parameter type. */
+    sATIDVDIDCTParams *params = reinterpret_cast<sATIDVDIDCTParams *>(info);
+
+    UInt32 idctPending = U32At(self, 0x8a4);
+
+    if ((U32At(self, 0x98) & 0x80u) == 0) {
+        sync(0);
+        instructionSynchronize();
+    } else {
+        UInt32 lineSize = U8At(self, 0x84);
+        UInt32 base = (~lineSize + 1) & reinterpret_cast<UInt32>(ringPtr);
+        SInt32 off = 0;
+        SInt32 span = static_cast<SInt32>((static_cast<UInt32>(params->dmaByteCount) * 4 +
+                                            (reinterpret_cast<UInt32>(ringPtr) & (lineSize - 1))) - lineSize);
+        if (span > 0) {
+            do {
+                dataCacheBlockStore(base + off);
+                off += lineSize;
+            } while (off < span);
+        }
+        sync(0);
+        instructionSynchronize();
+        dataCacheBlockFlush(base + off);
+        sync(0);
+        instructionSynchronize();
+        instructionSynchronize();
+    }
+
+    if (U32At(self, 0x8a0) != 0) {
+        submit_empty_buffer();
+    }
+
+    if (U32At(self, 0x8bc) == 0) {
+        return U32At(self, 0x854) - 1;
+    }
+
+    UInt32 cursor = U32At(self, 0x930);
+    UInt32 tries = 0;
+    static UInt32 u32Dummy = 0;
+    while ((((ReadLE16(reinterpret_cast<UInt8 *>(U32At(self, 0x928)) + U32At(self, 0x92c)) - cursor) - 1) & 0x7ff) < 0x20) {
+        tries++;
+        if (tries == 0xf4241) {
+            DumpASICHangState();
+            return U32At(self, 0x854) - 1;
+        }
+        do {
+            u32Dummy++;
+        } while ((u32Dummy & 0xf) != 0);
+    }
+
+    UInt32 *ring = reinterpret_cast<UInt32 *>(U32At(self, 0x91c));
+    UInt32 c3, c7;
+
+    ring[cursor] = 0x80001fe0;
+    c3 = (cursor + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->destBaseAddress;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001fe4;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->destEndAddress;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001fec;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->computedStride;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001ff0;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->computedChromaStride;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001f8c;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->dmaByteCount;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001ffc;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->idctCoeffAddr24;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001ff8;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->strideBroadcast;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = (ringOffset + idctPending) >> 1 & 0x7ffffff0u;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->idctCoeffAddr14;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001fa8;
+    UInt32 savedStamp = U32At(self, 0x854);
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = savedStamp;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001fac;
+    c3 = (c7 + 1) & 0x7ff; c7 = c3 + 1; U32At(self, 0x930) = c7;
+    ring[c3] = params->idctCoeffAddr18;
+    c7 &= 0x7ff; U32At(self, 0x930) = c7;
+
+    ring[c7] = 0x80001fb4;
+    UInt32 c = (c7 + 1) & 0x7ff; U32At(self, 0x930) = c;
+    for (int i = 0; i < 5; i++) {
+        ring[c] = 0;
+        c = (c + 1) & 0x7ff; U32At(self, 0x930) = c;
+        ring[c] = 0x80001fb4;
+        c = (c + 1) & 0x7ff; U32At(self, 0x930) = c;
+    }
+    ring[c] = 0;
+    c = c + 1;
+    U32At(self, 0x930) = c & 0x7ff;
+    c &= 0x7ff;
+
+    if ((U32At(self, 0x98) & 0x80u) == 0) {
+        sync(0);
+        instructionSynchronize();
+    } else {
+        UInt32 lineSize2 = U8At(self, 0x84);
+        UInt32 spanBase = idctPending * 4 + reinterpret_cast<UInt32>(ring);
+        UInt32 base2 = (~lineSize2 + 1) & spanBase;
+        SInt32 off2 = 0;
+        SInt32 span2 = static_cast<SInt32>(((spanBase & (lineSize2 - 1)) + 0x80u) - lineSize2);
+        if (span2 > 0) {
+            do {
+                dataCacheBlockStore(base2 + off2);
+                off2 += lineSize2;
+            } while (off2 < span2);
+        }
+        sync(0);
+        instructionSynchronize();
+        dataCacheBlockFlush(base2 + off2);
+        sync(0);
+        instructionSynchronize();
+        instructionSynchronize();
+    }
+
+    UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
+    U32At(mmio, IDCT_RING_WPTR) = (c << 0x18) | ((c & 0x700u) << 8);
+    enforceInOrderExecutionIO();
+    U32At(self, 0x854) = savedStamp + 1;
+    return savedStamp;
+}
+
 void ATIRadeonX1000::submit_empty_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     if (U8At(self, 0x80) == 0) {

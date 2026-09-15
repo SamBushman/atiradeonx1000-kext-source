@@ -270,12 +270,36 @@ public:
     void disable_GPUSensor();
 
     /*
-     * submit_idct_buffer_consumed - CONFIRMED real name and behavior
-     * (stage5-iouserclient-external-method-api-complete.md's doIDCT trace).
-     * Writes the 8 real (register,value) coefficient-address pairs plus
-     * six IDCT_TRIGGER_PULSE strobes directly into the main ring, then
-     * advances IDCT_RING_WPTR via idctRingCursor. Returns the new
-     * completion tag.
+     * submit_idct_buffer_consumed - RESOLVED (issue #1, get-it-linking
+     * pass), real addr 0x1eb30. CORRECTED from the prior "8 pairs"
+     * count: real body writes exactly 10 real (register-or-address,
+     * value) pairs (20 dwords: `sATIDVDIDCTParams`'s own destBaseAddress/
+     * destEndAddress/computedStride/computedChromaStride/dmaByteCount/
+     * idctCoeffAddr24/strideBroadcast/idctCoeffAddr14/idctCoeffAddr18,
+     * a real computed DMA address derived from the caller's own buffer
+     * pointer/count, and this class's own separate IDCT completion
+     * stamp at `this+0x854`) into a SEPARATE, previously-uncatalogued
+     * IDCT-only ring at `this+0x91c` (own name not established - a
+     * distinct ring base from the main ring's `this+0x900`), followed
+     * by six real (0x80001fb4, 0) "trigger pulse" pairs (12 more
+     * dwords) - 32 dwords total, matching the real FIFO-space
+     * requirement (`< 0x20` free slots) the real decompile itself waits
+     * for. Real body also performs real cache maintenance over the
+     * caller's own buffer (same `this+0x98` bit-0x80 gate as
+     * `submit_buffer`), optionally flushes a pending
+     * `submit_empty_buffer` first, and busy-waits (a real static-local
+     * spin counter, NOT a delay call - CONFIRMED distinct from
+     * `submit_buffer`'s own `FUN_00020cc4`-based wait) for a real
+     * separate IDCT FIFO status register pair (`this+0x928`/`+0x92c`)
+     * before writing. On success, advances the already-established
+     * `IDCT_RING_WPTR` via the same bit-packing formula as
+     * `submit_ring_data`'s `CP_RB_WPTR`, and returns the OLD value of
+     * the real `this+0x854` completion-stamp counter (post-
+     * incrementing it) - NOT the `this+0x50` stamp `submit_buffer`
+     * uses, a genuinely separate counter. On a real total FIFO-wait
+     * timeout, calls `DumpASICHangState` and returns `this+0x854 - 1`
+     * unincremented, mirroring `submit_buffer`'s own timeout-return
+     * shape.
      */
     UInt32 submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringOffset, sATIDVDIDCTInfo *info);
 
