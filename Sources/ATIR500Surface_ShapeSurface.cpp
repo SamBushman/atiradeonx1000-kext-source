@@ -72,16 +72,14 @@
  * Real gaps left explicitly flagged, not resolved this pass (per this
  * project's own confidence tiers - narrowed as far as static analysis
  * from THIS function alone allows, not guessed):
- *   - `window_mode_to_ati_format`, `getFramebufferIndex`, `alloc_overlay`,
- *     `setup_overlay`, `copy_buffer_to_backing_store` - real names
- *     (Ghidra's own resolved symbols, not `FUN_` addresses), but none of
- *     their own bodies were decompiled this pass; declared with their
- *     real call-site signatures only.
- *   - `setup_overlay()` is real-called with NO arguments at all in the
- *     raw decompile - transcribed literally; this may be a genuine
- *     zero-argument real function, or a decompiler artifact hiding an
- *     implicit argument this project can't recover without decompiling
- *     the function itself.
+ *   - `window_mode_to_ati_format` (RESOLVED separately, issue #35),
+ *     `getFramebufferIndex`/`alloc_overlay`/`setup_overlay` (RESOLVED,
+ *     issue #48 - see `Sources/ATIR500Surface_Overlay2.cpp`, which also
+ *     confirms `setup_overlay()` really is a genuine zero-argument
+ *     no-op, not a decompiler artifact hiding an implicit argument),
+ *     `copy_buffer_to_backing_store` - real names (Ghidra's own resolved
+ *     symbols, not `FUN_` addresses); `copy_buffer_to_backing_store`
+ *     alone remains undecompiled as of this writing.
  *   - The real per-framebuffer array at `this+0xd60` (`this+0xd50`'s
  *     accelerator field sits immediately before it) and the real record
  *     it points to (`+0x0`/`+0x10`/`+0x12` sanity-checked before

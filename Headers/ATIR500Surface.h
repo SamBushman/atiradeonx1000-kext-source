@@ -89,8 +89,8 @@ public:
      * C names; an `extern "C"` declaration with no `asm()` alias would
      * never have linked against the real symbol) caught while resolving
      * an unrelated question (`ATIR500DVDContext::set_macrovision`'s own
-     * call to this exact function). Own bodies still NOT independently
-     * decompiled.
+     * call to this exact function). Own bodies RESOLVED, issue #48 - see
+     * Sources/ATIR500Surface_Overlay2.cpp.
      */
     UInt32   getFramebufferIndex(void);
     UInt32   alloc_overlay(void);
