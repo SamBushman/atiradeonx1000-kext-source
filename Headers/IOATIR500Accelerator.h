@@ -197,8 +197,8 @@ public:
      * existed). Added here to match; signatures/addresses per that
      * subclass declaration (`+0x528`/`+0x54c`).
      */
-    virtual IOReturn allocate_texture(VendorTextureBuffer *texture); /* +0x528 */
-    virtual UInt32   waitForTimeStamp(UInt32 tag);                  /* +0x54c */
+    virtual IOReturn allocate_texture(VendorTextureBuffer *texture) = 0; /* +0x528 FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
+    virtual UInt32   waitForTimeStamp(UInt32 tag) = 0;                  /* +0x54c FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
 
     /*
      * allocDataBufferBacking - RESOLVED. Real body: allocates via
@@ -220,7 +220,7 @@ public:
      * if the base actually declares it. Added here to match
      * `ATIRadeonX1000::deallocate_texture`'s own real override signature.
      */
-    virtual void deallocate_texture(VendorTextureBuffer *texture); /* +0x524 */
+    virtual void deallocate_texture(VendorTextureBuffer *texture) = 0; /* +0x524 FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
 
     /*
      * pageOffDataBuffer - RESOLVED, issue #28. Real mangled symbol
@@ -418,10 +418,10 @@ private:
      * content (raw 0, issue #6) - no local body to decompile here, only
      * the interface declaration.
      */
-    virtual IOUserClient *new_surface(void);     /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface (covariant return ATIR500Surface*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_2d_context(void);  /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context (covariant return ATIR5002DContext*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_dvd_context(void); /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context (covariant return ATIR500DVDContext*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_gl_context(void);  /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context (covariant return ATIR500GLContext*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_surface(void) = 0;     /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface (covariant return ATIR500Surface*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_2d_context(void) = 0;  /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context (covariant return ATIR5002DContext*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_dvd_context(void) = 0; /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context (covariant return ATIR500DVDContext*), see ATIRadeonX1000.h */
+    virtual IOUserClient *new_gl_context(void) = 0;  /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context (covariant return ATIR500GLContext*), see ATIRadeonX1000.h */
 
 public:
     /*

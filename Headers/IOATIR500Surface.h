@@ -320,9 +320,9 @@ public:
     virtual void   increment_refcounts(UInt32 tag);                  /* +0x5b8, real addr 0x13ff0 - CONFIRMED real no-op */
     virtual void   decrement_refcounts(UInt32 tag);                  /* +0x5bc, real addr 0x14000 - CONFIRMED real no-op */
 
-    virtual void   invalidate();                                   /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only) */
+    virtual void   invalidate() = 0;                                /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only). FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
     virtual UInt32 dealloc_surface(UInt32 surfaceIndex);            /* +0x5cc, real addr 0x12580 (base) / 0x3df70 (subclass override) - real mangled param type confirmed `unsigned long`. RETURN TYPE CORRECTED (issue #1, first build attempt): the subclass override's own real decompiled body (Sources/ATIR500Surface_VRAM.cpp) ends with `return 1;` from a real `UInt32`-returning function - was declared `void` here, missing the same issue #22 "RETURN TYPE CORRECTED" treatment already applied to prepare_vram/complete_vram just below. */
-    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer); /* +0x5d0, real addr 0x3e230 on ATIR500Surface (subclass-only) - real mangled param type confirmed */
+    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) = 0; /* +0x5d0, real addr 0x3e230 on ATIR500Surface (subclass-only) - real mangled param type confirmed. FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
     virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);      /* +0x5fc, real addr 0x110e0 (base) / 0x3dc50 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: real return type is a real, checked UInt32 (0/1), not void - both real bodies' own decompiles show explicit `return` statements with real values. */
     virtual UInt32 complete_vram(ATIR500SurfaceBuffer *buffer);     /* +0x600, real addr 0x110f0 (base) / 0x3c000 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: same real non-void finding as prepare_vram above. */
 
@@ -390,7 +390,7 @@ public:
      * `is_surface_size_supported`'s real mangled parameter types are
      * `short` (not the `SInt32` this project's call site had inferred).
      */
-    virtual void   shape_surface();                                          /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) - RESOLVED (own body, issue #22): see Sources/ATIR500Surface_ShapeSurface.cpp */
+    virtual void   shape_surface() = 0;                                       /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) - RESOLVED (own body, issue #22): see Sources/ATIR500Surface_ShapeSurface.cpp. FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
     virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
 
     /*

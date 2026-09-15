@@ -37,7 +37,17 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIR500Surface.h"
 
-OSDefineMetaClassAndStructors(IOATIR500Accelerator, IOService)
+/*
+ * IOATIR500Accelerator and IOATIR500Surface use the "AndAbstractStructors"
+ * variant (issue #1, get-it-linking pass): both now declare real pure
+ * virtuals (confirmed genuine base-class placeholder slots - no real
+ * base body exists, only the concrete subclass overrides), which makes
+ * them genuinely abstract - the plain `OSDefineMetaClassAndStructors`
+ * macro generates a real `MetaClass::alloc()` that calls `new
+ * ClassName()`, which cannot compile against an abstract class. This is
+ * Apple's own real, standard IOKit macro for exactly this situation.
+ */
+OSDefineMetaClassAndAbstractStructors(IOATIR500Accelerator, IOService)
 OSDefineMetaClassAndStructors(ATIRadeonX1000, IOATIR500Accelerator)
 
 OSDefineMetaClassAndStructors(IOATIR500GLContext, IOUserClient)
@@ -49,5 +59,5 @@ OSDefineMetaClassAndStructors(ATIR5002DContext, IOATIR5002DContext)
 OSDefineMetaClassAndStructors(IOATIR500DVDContext, IOUserClient)
 OSDefineMetaClassAndStructors(ATIR500DVDContext, IOATIR500DVDContext)
 
-OSDefineMetaClassAndStructors(IOATIR500Surface, IOUserClient)
+OSDefineMetaClassAndAbstractStructors(IOATIR500Surface, IOUserClient)
 OSDefineMetaClassAndStructors(ATIR500Surface, IOATIR500Surface)
