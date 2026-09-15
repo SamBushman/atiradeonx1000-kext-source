@@ -235,8 +235,8 @@ public:
      * throughout the 2D/GL texture-transfer paths (create_transfer,
      * delete_image, opcode 0x37's surface-backed branch). Bodies UNKNOWN
      * beyond their roles. */
-    IOReturn connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 param2, UInt32 param3);
-    void     free_buffer_backing_store(ATIR500SurfaceBuffer *buffer);
+    bool     connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 param2, UInt32 param3); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was IOReturn, but the real confirmed body is a plain bool __thiscall function. */
+    UInt32   free_buffer_backing_store(ATIR500SurfaceBuffer *buffer); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body ends with `return 1;` from a real UInt32-returning function. */
     void     attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
                                           UInt32 param3, UInt32 alignedPitch);
     UInt32   surface_buffer_idx_mask(UInt32 param1, UInt32 *outParam);
@@ -274,7 +274,7 @@ public:
      * site (a success/failure indicator). Neither body independently
      * decompiled this pass.
      */
-    void   move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer);
+    bool   move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns copy_buffer_to_backing_store's own real bool result. */
     UInt32 copy_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer);
     /* FIXED this pass: real call site (opcodes 0x06-0x15's texture-bind
      * handler, ATIR500GLContext_ProcessCommandBuffer.cpp) passes TWO
@@ -389,7 +389,7 @@ public:
      * reachable in practice - no placeholder body is needed, and no live
      * hardware read was required to settle this.
      */
-    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag); /* +0x5e0, real addr CONFIRMED null/0 (base, genuine placeholder - issue #51) / 0x3e5c0 (subclass override) */
+    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag) = 0; /* +0x5e0, real addr CONFIRMED null/0 (base, genuine placeholder - issue #51) / 0x3e5c0 (subclass override). FIXED (issue #1, get-it-linking pass): declared pure virtual - confirmed no real base body exists; the concrete ATIR500Surface subclass provides the real override. Previously left non-pure with no redeclaration on the subclass, which would have compiled `resetFullScreen`'s own unqualified `submit_flip_buffer(...)` call against THIS placeholder slot instead of the real subclass override - see ATIR500Surface.h's own new redeclaration. */
 
     /*
      * shape_surface / is_surface_size_supported - RESOLVED, issue #18

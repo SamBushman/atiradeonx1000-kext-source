@@ -187,6 +187,15 @@ public:
     virtual SInt32 is_flip_allowed();
     virtual void   shape_surface();
     virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);
+
+    /*
+     * submit_flip_buffer - real subclass override, real addr 0x3e5c0
+     * (issue #1, get-it-linking pass - see IOATIR500Surface.h's own
+     * updated note: the base's own copy is a confirmed genuine
+     * placeholder, pure virtual). Own body: see
+     * Sources/ATIR500Surface_SubmitFlipBuffer.cpp.
+     */
+    virtual void submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag);
 };
 
 #endif /* ATIR500SURFACE_H */

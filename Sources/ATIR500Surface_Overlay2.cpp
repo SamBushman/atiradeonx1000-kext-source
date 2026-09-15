@@ -80,3 +80,20 @@ UInt32 ATIR500Surface::alloc_overlay(void) {
 void ATIR500Surface::setup_overlay(void) {
     /* real: genuinely empty. */
 }
+
+/*
+ * free_overlay - RESOLVED (issue #1, get-it-linking pass), real addr
+ * 0x391a0, the real inverse of `alloc_overlay` above - found while
+ * resolving issue #55 (`stop`'s own real call, already committed).
+ * Real body: clears the overlay handle at +0xd94 if set (WITHOUT
+ * releasing it through a vtable call - transcribed exactly as
+ * decompiled) and clears bit 0x2 of +0xd70, the exact inverse of
+ * `alloc_overlay`'s own real `|= 2`.
+ */
+void ATIR500Surface::free_overlay() {
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    if (W(self, 0xd94) != 0) {
+        W(self, 0xd94) = 0;
+    }
+    W(self, 0xd70) &= 0xfffffffd;
+}

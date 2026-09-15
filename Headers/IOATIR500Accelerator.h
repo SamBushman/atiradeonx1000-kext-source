@@ -36,6 +36,7 @@ struct VendorCommandBufferHeader; /* real struct, defined in ATIRadeonX1000Types
                                      * others below, pointer-only, without ever including that file) */
 struct VendorTextureBuffer;       /* real struct, defined in ATIRadeonX1000Types.h - see above */
 struct ATIR500SurfaceBuffer;      /* real struct, defined in ATIRadeonX1000Types.h - see above */
+class IOTextureBuffer;            /* real, opaque Apple type - see IOATIR500Surface.h's own note */
 
 class IOATIR500Accelerator : public IOService {
     OSDeclareDefaultStructors(IOATIR500Accelerator)
@@ -343,6 +344,15 @@ public:
     /* freeOrphanTexture - CONFIRMED real name, called from both
      * garbage_collector and freeWaitToAllocGART. */
     void freeOrphanTexture(bool aggressive);
+
+    /*
+     * addOrphanTexture - CONFIRMED to exist (real call site in
+     * IOATIR500Surface::delete_buffer_backing, issue #1 get-it-linking
+     * pass - the real inverse of freeOrphanTexture above). Real
+     * signature INFERRED from that call site; own body NOT
+     * independently decompiled this pass.
+     */
+    void addOrphanTexture(IOTextureBuffer *buffer);
 
 private:
     /*
