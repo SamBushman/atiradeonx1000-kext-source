@@ -21,7 +21,7 @@
  *     hadn't transcribed before (every other PM4 consumer in this
  *     project only handles type 0/2/3). Both register/value pairs are
  *     forwarded to `store_reg` (real name, real addr 0x1abe0 - a local/
- *     non-exported symbol, own body NOT decompiled this pass).
+ *     non-exported symbol, own body RESOLVED, issue #47).
  * - Type 0 (sequential register write, `header>>30==0`): a real base
  *   register index (`header&0x1fff`) and a real dword count
  *   (`(header>>16)&0x3fff`, `0xffffffff`/all-ones meaning "empty/skip",
@@ -52,9 +52,10 @@
  * this project's own `int*`-scaling trap), and the one place the real
  * code needs a genuine BYTE offset (the type-3 skip) casts through
  * `(int)` explicitly in the real decompile, removing any ambiguity.
- * `store_reg`'s own body remains genuinely undecompiled - its real role
+ * `store_reg`'s own body is now RESOLVED too (issue #47) - its real role
  * ("write one register/value pair into a `tracked_register_set`") is
- * inferred from this call site alone. No C++ compiler was available in
+ * confirmed by that decompile, not just inferred from this call site.
+ * No C++ compiler was available in
  * the sandboxed environment this was written in (same standing
  * limitation as every other file in this project).
  */
@@ -62,7 +63,7 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 
 struct tracked_register_set;
-extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 value) asm("__Z9store_regP20tracked_register_setmm"); /* real name/addr (0x1abe0, local symbol) - own body not decompiled this pass */
+extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 value) asm("__Z9store_regP20tracked_register_setmm"); /* real name/addr (0x1abe0, local symbol) - RESOLVED, issue #47, see Sources/ATIRadeonX1000_StoreReg.cpp */
 
 extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd) asm("__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_");
 

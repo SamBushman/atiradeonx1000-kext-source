@@ -286,9 +286,10 @@ public:
 
     /*
      * freeToAllocTextureCPUVisibleVRAM - CONFIRMED real name/addr
-     * (0x1e320, via `nm`), found this pass as `prepare_texture_for_
+     * (0x1e320, via `nm`), found as `prepare_texture_for_
      * pageoff_with_cpu`'s own real fallback call when a direct
-     * `ATIR500Memory::alloc` fails. Own body not decompiled this pass.
+     * `ATIR500Memory::alloc` fails. Own body RESOLVED, issue #47 - see
+     * Sources/ATIRadeonX1000_FreeToAllocTextureCPUVisibleVRAM.cpp.
      */
     UInt32 freeToAllocTextureCPUVisibleVRAM(VendorTextureBuffer *texture, UInt32 size);
 

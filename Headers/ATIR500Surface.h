@@ -116,6 +116,18 @@ public:
     UInt32 decompress_and_flush_depth_buffer(ATIR500SurfaceBuffer *scratch, UInt32 param2, UInt32 *record);
 
     /*
+     * load_3d_blit - CONFIRMED real name/signature (mangled
+     * `__ZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBuffer`,
+     * real addr 0x3d4c0), only real caller `decompress_and_flush_depth_
+     * buffer` above. Own body RESOLVED, issue #47 - see
+     * Sources/ATIR500Surface_Load3DBlit.cpp.
+     * Real return value is the real BYTE pointer one past the last dword
+     * this function wrote (`dest + 0x72` dwords, always) - the caller's
+     * own `(end - record) >> 2` conversion already established this.
+     */
+    UInt32 *load_3d_blit(UInt32 *dest, ATIR500SurfaceBuffer *scratch);
+
+    /*
      * back_resolve_fsaa_buffer - RESOLVED (issue #17). Full real body in
      * Sources/ATIR500Surface_BackResolveFSAABuffer.cpp - see that file for
      * the complete transcription and header comment. Real signature: the
