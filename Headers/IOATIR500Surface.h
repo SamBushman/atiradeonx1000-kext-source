@@ -358,8 +358,26 @@ public:
      * matching this project's established convention for this exact
      * situation. Own body not independently decompiled - own real
      * behavior UNKNOWN beyond the real signature confirmed here.
+     *
+     * INDEPENDENTLY RE-CONFIRMED, issue #51: the "genuine placeholder
+     * content (raw 0)" claim above had never actually been verified by a
+     * direct read of the base vtable - re-checked this pass by reading
+     * the compiled `__ZTV16IOATIR500Surface` vtable directly (real kext
+     * address `0x486d8`; real function-pointer array starts 8 bytes past
+     * the mangled symbol per the standard Itanium ABI layout, matching
+     * this project's own `vtable[N/4]` convention). CONFIRMED: the real
+     * byte content at `+0x5e0` is exactly `0` - cross-validated in the
+     * same read by also fetching the immediately-neighboring, already-
+     * known-correct slots `resetFullScreen` (`+0x5a8`, read back exactly
+     * `0x139d0`) and `is_flip_allowed` (`+0x5dc`, read back exactly
+     * `0x13f60`), both exact matches, confirming the offset arithmetic
+     * before trusting the previously-unverified `+0x5e0` read. Since
+     * every real object in this driver is the concrete `ATIR500Surface`
+     * subclass (issue #16), this base-only null is never actually
+     * reachable in practice - no placeholder body is needed, and no live
+     * hardware read was required to settle this.
      */
-    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag); /* +0x5e0, real addr UNKNOWN (base, placeholder) / 0x3e5c0 (subclass override) */
+    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag); /* +0x5e0, real addr CONFIRMED null/0 (base, genuine placeholder - issue #51) / 0x3e5c0 (subclass override) */
 
     /*
      * shape_surface / is_surface_size_supported - RESOLVED, issue #18
