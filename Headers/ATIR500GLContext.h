@@ -46,11 +46,15 @@ public:
      * getTargetAndMethodForIndex - CONFIRMED, transcribed directly from
      * the real decompile (kext offset 0x26db0) in
      * Sources/IOATIR500GLContext_ExternalMethods.cpp. Real signature
-     * returns `int` (the raw table-entry address); reconstructed here to
-     * return a typed pointer into the real static tables that source file
-     * defines, which is the same real information expressed more safely.
+     * returns `int` (the raw table-entry address). RETURN TYPE
+     * CORRECTED (build fixup, issue #1): declared here as the real base
+     * class's own exact return type (`IOExternalMethod *`, non-const) -
+     * this project's own richer `VendorExternalMethod` struct is not
+     * covariant with it (different real field order/size), so real gcc
+     * rejected the original `const VendorExternalMethod *` declaration
+     * as an invalid override. See the .cpp file's own header comment.
      */
-    virtual const VendorExternalMethod *getTargetAndMethodForIndex(IOService **target, UInt32 selector);
+    virtual IOExternalMethod *getTargetAndMethodForIndex(IOService **target, UInt32 selector);
 
     /*
      * start / stop - CONFIRMED real behavior for start() (kext offset

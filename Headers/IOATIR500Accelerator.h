@@ -31,6 +31,11 @@ struct VendorCommandBuffer; /* real, distinct mangled type name (19VendorCommand
                               * NOT the same as VendorCommandBufferHeader (25 chars) already in
                               * ATIRadeonX1000Types.h; found this pass via allocCommandBuffer's
                               * real signature, layout not yet independently decompiled */
+struct VendorCommandBufferHeader; /* real struct, defined in ATIRadeonX1000Types.h - forward-declared
+                                     * here (build fixup, issue #1: this header uses it, and several
+                                     * others below, pointer-only, without ever including that file) */
+struct VendorTextureBuffer;       /* real struct, defined in ATIRadeonX1000Types.h - see above */
+struct ATIR500SurfaceBuffer;      /* real struct, defined in ATIRadeonX1000Types.h - see above */
 
 class IOATIR500Accelerator : public IOService {
     OSDeclareDefaultStructors(IOATIR500Accelerator)

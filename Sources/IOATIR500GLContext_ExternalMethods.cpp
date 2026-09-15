@@ -80,15 +80,28 @@ static const VendorExternalMethod kGLSpecialMethod20 = {
  *     }
  *
  * Reconstructed below operating on the real named table instead of raw
- * offsets.
+ * offsets. REAL RETURN TYPE CORRECTED (build fixup, issue #1): the real
+ * compiled function just returns a raw `int` address - this project's
+ * own `const VendorExternalMethod *` return was a reconstruction choice
+ * for readability, but it isn't actually covariant with the REAL base
+ * class declaration this genuinely overrides
+ * (`IOUserClient::getTargetAndMethodForIndex`, real signature
+ * `IOExternalMethod *(IOService**, UInt32)`, non-const, Apple's own
+ * smaller/differently-ordered struct) - real gcc rejects it as an
+ * invalid covariant return type. Returns the real base-compatible
+ * pointer type instead; `kGLRegularMethods`/`kGLSpecialMethod20` remain
+ * this project's own real, richer `VendorExternalMethod`-shaped data
+ * (their true compiled layout, confirmed from the raw memory dump) -
+ * callers who need those extra fields cast back, exactly matching how
+ * the real compiled code never had genuine C++ type safety here either.
  */
-const VendorExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService **target, UInt32 selector) {
+IOExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService **target, UInt32 selector) {
     *target = this;
     if (selector < 20) {
-        return &kGLRegularMethods[selector];
+        return const_cast<IOExternalMethod *>(reinterpret_cast<const IOExternalMethod *>(&kGLRegularMethods[selector]));
     }
     if (selector != 20) {
         return nullptr;
     }
-    return &kGLSpecialMethod20;
+    return const_cast<IOExternalMethod *>(reinterpret_cast<const IOExternalMethod *>(&kGLSpecialMethod20));
 }

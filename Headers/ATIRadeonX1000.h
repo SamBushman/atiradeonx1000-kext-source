@@ -121,7 +121,7 @@ public:
     UInt8   _pad_0x8dc[0x918 - 0x8dc];
     UInt32  mainRingCursor;           /* +0x918, INFERRED offset (this project confirmed the field's existence and role - the real write-cursor submit_ring_data advances - via the same +0x1600-relative-to-userspace reasoning as the client-side cursor fields, not from a from-zero decompile of this exact byte) */
     UInt32  idctRingCursor;           /* +0x930, CONFIRMED distinct from mainRingCursor: submit_idct_buffer_consumed writes IDCT_RING_WPTR using a value derived from this field, not this+0x918 */
-    UInt8   _pad_0x934[0x5a4 - 0x934]; /* UNKNOWN: large unverified gap */
+    UInt8   _pad_0x934[0x5c8 - 0x934]; /* UNKNOWN: large unverified gap - FIXED (build fixup, issue #1): was `0x5a4 - 0x934` (negative size, real gcc rejects it outright as an invalid array bound) - the next real named field below is `cachedBufferSizeThreshold` at +0x5c8, so the gap must span up to there, not down to a smaller address */
 
     /*
      * GART/data-buffer pool bookkeeping - CONFIRMED from
