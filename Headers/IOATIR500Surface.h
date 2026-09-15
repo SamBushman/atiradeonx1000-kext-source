@@ -246,8 +246,8 @@ public:
      * beyond their roles. */
     bool     connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 param2, UInt32 param3); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was IOReturn, but the real confirmed body is a plain bool __thiscall function. */
     UInt32   free_buffer_backing_store(ATIR500SurfaceBuffer *buffer); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body ends with `return 1;` from a real UInt32-returning function. */
-    void     attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
-                                          UInt32 param3, UInt32 alignedPitch);
+    UInt32   attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
+                                          UInt32 param3, UInt32 alignedPitch); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real UInt32 (0 or 1). */
     UInt32   surface_buffer_idx_mask(UInt32 param1, UInt32 *outParam);
 
     /*
