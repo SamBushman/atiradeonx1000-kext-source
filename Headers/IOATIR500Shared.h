@@ -18,6 +18,19 @@
 
 #include "ATIRadeonX1000Types.h"
 
+/*
+ * sIOClientShared - a real, previously-unnamed 0x40-byte per-handle
+ * record shape `alloc_client_shared` (below) carves out of its own
+ * 0x2000-byte mapped chunks. Own field layout genuinely UNKNOWN beyond
+ * the handful of byte offsets `alloc_client_shared`'s own real body
+ * zeroes/initializes (see Sources/IOATIR500Shared_TextureAlloc.cpp) -
+ * left forward-declared-only (never defined), matching this project's
+ * established convention of not inventing an interface it hasn't
+ * actually decompiled. Every real user only ever holds a raw pointer to
+ * one.
+ */
+class sIOClientShared;
+
 class IOATIR500Shared {
 public:
     /*
@@ -122,6 +135,41 @@ public:
     VendorTextureBuffer *new_global_texture(UInt32 param2, UInt32 *outParam);
     VendorTextureBuffer *new_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 param5, UInt32 *out1, UInt32 *out2);
     VendorTextureBuffer *new_agpref_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
+
+    /*
+     * new_agp_texture / alloc_buf_handle / free_buf_handle /
+     * alloc_client_shared - RESOLVED (issue #1 gap-fill pass), real
+     * previously-undeclared helpers found decompiling the texture-alloc
+     * family above. All four bodies transcribed in
+     * `Sources/IOATIR500Shared_TextureAlloc.cpp` - see that file's own
+     * header comment for full detail (real addrs 0x17150/0x16bb0/0x16cf0/
+     * 0x16d50).
+     *
+     * `new_agp_texture` real addr 0x17150: the shared AGP-texture
+     * allocator `new_texture`/`new_agpref_texture` both call through -
+     * real signature INFERRED from those two real call sites.
+     *
+     * `alloc_buf_handle`/`free_buf_handle` real addrs 0x16bb0/0x16cf0: a
+     * real growable bitmap-based handle table living in the SAME
+     * `this+0x10`/`+0x14`/`+0x18` fields `alloc_handles()` (issue #28)
+     * already established - `alloc_buf_handle` finds/marks a free bit
+     * (growing via `alloc_handles()` if none free) and stores `record` at
+     * that index; `free_buf_handle` clears the bit if `record` still
+     * matches what's stored there.
+     *
+     * `alloc_client_shared` real addr 0x16d50: a real growable linked
+     * list of 0x2000-byte "shared chunk" nodes (`this+0x20`), each
+     * subdivided into 0x80 client-visible 0x40-byte `sIOClientShared`
+     * slots, mapped once into the owning client task and once into the
+     * kernel task (real `IOBufferMemoryDescriptor::inTaskWithOptions` +
+     * `IOMemoryDescriptor::map` pair) - grows by allocating another
+     * 0x2000-byte chunk/mapping pair when every existing chunk's 0x80
+     * slots are already assigned.
+     */
+    VendorTextureBuffer *new_agp_texture(UInt32 param1, UInt32 param2, UInt32 *outParam);
+    bool alloc_buf_handle(void *record, UInt32 *outHandle);
+    void free_buf_handle(void *record, UInt32 handle);
+    bool alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, UInt32 *outUserAddr);
 };
 
 #endif /* IOATIR500SHARED_H */
