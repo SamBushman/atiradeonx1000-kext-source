@@ -139,6 +139,15 @@ public:
      */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
+    /*
+     * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x3c74/0xe8a0. Same real structure as IOATIR5002DContext's
+     * own copy - three candidate slots (`+0xac`/`+0xbc`, `+0x90`/
+     * `+0xa0`, then a fixed 2-element array at `+0xc4`/`+0xd4` stride
+     * 0x18) tried in order via `freeTransferToAllocGART`.
+     */
+    bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
+
 protected:
     /*
      * FIXED (issue #56): these seven fields were declared in discovery

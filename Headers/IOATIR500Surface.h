@@ -227,14 +227,48 @@ public:
     void remove_gl_context_from_list(IOATIR500GLContext *context);
 
     /*
-     * alloc_surfaces_pageq / convert_surface_bits / sleep_blocked -
-     * CONFIRMED to exist (real call sites in
-     * IOATIR500GLContext::clientMemoryForType, issue #1 get-it-linking
-     * pass). Real signatures INFERRED from those call sites' own
-     * argument shapes; own bodies NOT independently decompiled this
-     * pass - genuine gap, tracked for follow-up.
+     * invalidate_contexts - RESOLVED (issue #1, get-it-linking pass),
+     * real addr 0x12050. Zeroes the accelerator's own `+0x78` field
+     * (real role unconfirmed), then walks two singly-linked context
+     * lists (`this+0x8c`, `this+0x88` - next pointer at each node's own
+     * `+0x84`) calling each node's own vtable `+0x5a4` (the already-
+     * established `invalidate()` slot on `ATIR500GLContext`; other real
+     * node types at this same raw offset/slot not independently
+     * confirmed), then the same call on a single node at `this+0x90` if
+     * non-null.
      */
-    UInt32 alloc_surfaces_pageq(UInt32 mask, bool flag);
+    void invalidate_contexts(void);
+
+    /*
+     * alloc_surfaces_pageq - RESOLVED (issue #1, get-it-linking pass),
+     * real addr 0x12110. SECOND PARAMETER TYPE CORRECTED from `bool` to
+     * `UInt32`: the real decompile ANDs it directly against a per-bit
+     * `1 << bitIndex` mask (a real `CONCAT31` register-reconstruction
+     * artifact around it - Ghidra's own hint that the real caller
+     * passes a full 32-bit value, not a true 0/1 boolean) when deciding
+     * each page-queue bit's own "force" sub-flag - a real bitmask
+     * intersected bit-by-bit against `mask`'s own selected bits, not a
+     * single global boolean. Existing call sites (`alloc_surfaces_
+     * retry`) already only ever pass literal `false`/0, so this
+     * correction doesn't change their behavior.
+     *
+     * Real body: invalidates every bound context via
+     * `invalidate_contexts()`, then tries an unnamed real vtable
+     * `+0x5f4` slot for every bit `mask` shares with this surface's own
+     * `+0xbf8` state-bits field (own identity NOT independently
+     * confirmed - referenced only by raw offset in the real decompile).
+     * If every tried bit succeeds, returns 0 (nothing more to do). If
+     * any bit fails, first bails with 1 if any live surface in the
+     * accelerator's own surface list (`accelerator+0x5c`) has its own
+     * `+0xbd0` field set; otherwise walks this surface's own 23-entry
+     * buffer array (`this+0xa8`, stride 0x78) moving every buffer whose
+     * own `+8` flag is set to backing store via
+     * `move_buffer_to_backing_store`, then retries the same `+0x5f4`
+     * bit sweep once more if anything was actually moved. Returns 2 if
+     * the retry (or the original attempt, when nothing needed moving)
+     * still didn't fully succeed.
+     */
+    UInt32 alloc_surfaces_pageq(UInt32 mask, UInt32 flag);
     bool   convert_surface_bits(UInt32 param2);
     void   sleep_blocked(void);
 
@@ -424,6 +458,21 @@ public:
      * `Sources/MapTransferToGART_RemainingContexts.cpp`.
      */
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
+
+    /*
+     * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x10c60. Iterates every accelerator-wide "surface swap
+     * buffer" slot (`accelerator+0xcc` count, `accelerator+0x114+idx*4`
+     * per-surface-index gating, this surface's own `+idx*0x94+0xc30`/
+     * `+idx*0x94+0xc20`/`+idx*0x94+0xc3c`/`+idx*0x94+0xc4c` nested
+     * arrays - own exact field semantics beyond "candidate transfer
+     * buffer slot" not independently investigated this pass), then a
+     * final flat array walk at `this+0xcc` (stride 0x78, arg via the
+     * node's own `clientShared+8`, matching the established
+     * `VendorTextureBuffer+0x14` clientShared-pointer convention), all
+     * via `IOATIR500Accelerator::freeTransferToAllocGART`.
+     */
+    bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
 
     /*
      * init_swap_buffer_header - RESOLVED, issue #28 (real mangled symbol

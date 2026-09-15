@@ -137,6 +137,19 @@ public:
     VendorTextureBuffer *new_agpref_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
 
     /*
+     * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x17060. Walks this shared allocator's own texture list
+     * (`this+0x24`, same list `delete_texture` above already
+     * establishes), and for every kind-4 (own AGP-mapped buffer, marks
+     * a real "pending release" flag at `clientShared+0x14`) or kind-3/7
+     * (per-format cleanup kinds) entry, tries
+     * `IOATIR500Accelerator::freeTransferToAllocGART` with the
+     * clientShared's own `+8`/`+0xc` field as the per-candidate arg -
+     * stopping at the first success.
+     */
+    bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
+
+    /*
      * new_agp_texture / alloc_buf_handle / free_buf_handle /
      * alloc_client_shared - RESOLVED (issue #1 gap-fill pass), real
      * previously-undeclared helpers found decompiling the texture-alloc

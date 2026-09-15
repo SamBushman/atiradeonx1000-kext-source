@@ -219,6 +219,19 @@ public:
     void remove_texture_from_stream(VendorTextureBuffer *texture);
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
+    /*
+     * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x3c64/0x7a50. Same real "try candidates in order" structure
+     * as the other context classes' own copies, but larger: two fixed
+     * slots (`+0xf4`/`+0x104`, `+0xcc`/`+0xdc`), a 16-element ring array
+     * (`+0x10c`/`+0x11c`, stride 0x18 - matches this class's own
+     * established power-of-two ring-pool convention), then a singly-
+     * linked list walk (`+0xe8`, next via `+0x3c`, arg via the node's
+     * own `+0x5c` - the same `generationTag` shape `ATIRadeonX1000Types.h`
+     * already establishes on `VendorTextureBuffer`).
+     */
+    bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
+
 protected:
     /*
      * FIXED (issue #56): these four fields were declared in discovery

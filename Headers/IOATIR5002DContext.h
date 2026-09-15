@@ -57,6 +57,19 @@ public:
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
     /*
+     * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x3c84/0xbbc0. This context's own small set of candidate
+     * transfer-buffer slots (`+0xb4`/`+0xc4`, `+0x98`/`+0xa8`, then a
+     * fixed 2-element array at `+0xcc`/`+0xdc` stride 0x18) tried in
+     * order via `IOATIR500Accelerator::freeTransferToAllocGART`,
+     * stopping at the first one that succeeds - called from
+     * `IOATIR500Accelerator::freeWaitToAllocGART`'s own global GART
+     * reclamation sweep. Real field roles beyond "candidate transfer
+     * buffer slot" not independently investigated this pass.
+     */
+    bool freeToAllocGART(VendorTransferBuffer *needed, bool aggressive);
+
+    /*
      * allocAllContextBuffers - CONFIRMED to exist and be a real member of
      * this class (mangled __ZN18IOATIR5002DContext22allocAllContextBuffersEm,
      * kext offset 0xbee0), a real gap this project's header set had never

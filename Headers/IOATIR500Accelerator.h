@@ -104,6 +104,32 @@ public:
                               bool aggressive);
 
     /*
+     * freeTransferToAllocGART - RESOLVED (issue #1, get-it-linking
+     * pass), real addr 0x3580. The real per-candidate leaf of the whole
+     * GART-reclaim sweep: bails (returns 0) if `candidate` has no real
+     * backing descriptor (`+4`==0) or is still referenced by a live
+     * stream (`+0xe`!=0); otherwise, in the non-aggressive pass, first
+     * confirms via the already-established `+0x554` slot that the
+     * candidate is really free before touching it (aggressive pass
+     * skips this check and instead accumulates a real freed-byte-count
+     * stat at `this+0x790` via the already-named `waitForTimeStamp`
+     * `+0x54c` slot - HONEST FLAG: that slot's real argument is dropped
+     * entirely in this specific real decompile, transcribed as `0`),
+     * then unconditionally unmaps `candidate` (`removeTransferFromGART`,
+     * already established) and maps `needed` in its place
+     * (`addTransferToGART`, already established). RETURN TYPE CORRECTED
+     * to `bool`: the real decompile propagates `addTransferToGART`'s own
+     * "return value" as this function's result, but `addTransferToGART`
+     * is already CONFIRMED real `void` - the same real Ghidra return-
+     * value-dropped artifact this project already documents elsewhere
+     * (e.g. `allocVendorTextureBuffer`). Since every step up to that
+     * final call already succeeded by the time it runs, `true` is the
+     * correct, honest transcription of the intended value.
+     */
+    bool freeTransferToAllocGART(VendorTransferBuffer *candidate, VendorTransferBuffer *needed,
+                                  UInt32 arg, bool aggressive);
+
+    /*
      * addTransferToGART - RESOLVED, issue #19/#23 (real vtable slot
      * +0x5a8, real addr 0x34b0). CORRECTED, issue #23: real signature
      * takes a `VendorTransferBuffer*` parameter (confirmed from this

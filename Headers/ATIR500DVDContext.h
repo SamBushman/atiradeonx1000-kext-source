@@ -37,11 +37,19 @@ public:
     IOReturn check_stamps(UInt32 checkMain, UInt32 checkIDCT, UInt32 *outBothDone); /* 20, CONFIRMED body (stage5): non-blocking poll counterpart to wait_for_stamps */
     IOReturn setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags); /* 21, CONFIRMED body (stage5): real per-plane geometry setup for the IDCT working surface, writes a control dword combining caller flags with a fixed 0x20000002 base */
 
-    /* map_transfer_to_GART - RESOLVED, issue #28. Same real structure as
-     * every other class's own copy: calls `addTransferToGART` then
-     * unconditionally `freeToAllocGART` - see
-     * Sources/MapTransferToGART_RemainingContexts.cpp. */
-    void map_transfer_to_GART(VendorTransferBuffer *buffer);
+    /*
+     * map_transfer_to_GART - FIXED (issue #1, get-it-linking pass): this
+     * redeclaration was a real header bug, not a genuine gap. A direct
+     * Ghidra symbol-table check (`__ZN17ATIR500DVDContext20map_transfer_
+     * to_GARTEP20VendorTransferBuffer`) found NO such mangled symbol
+     * anywhere in the real binary - this subclass never actually
+     * overrides the method at all; it simply inherits the base
+     * `IOATIR500DVDContext::map_transfer_to_GART` unchanged (already
+     * fully implemented, see Sources/MapTransferToGART_
+     * RemainingContexts.cpp). Removed the phantom redeclaration, which
+     * was creating an undefined-symbol link error for a function the
+     * real binary never actually defines.
+     */
 
     /*
      * submit_context_buffer - CONFIRMED real name/signature (real

@@ -353,6 +353,19 @@ public:
      */
     bool tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 - RETURN TYPE CORRECTED, issue #21/#23: real body is a thin wrapper around ATIR500Memory::alloc's own real bool success/failure return, not a pointer as this project's call sites had inferred (Ghidra's own isolated decompile of this trivial wrapper mislabeled it void; the real callee's own decompiled body proves the real value in r3 is a real, meaningful boolean) */
     void tmpDeallocVRAM(GLKMemoryElement *elem);                              /* +0x544, real addr 0x1ab20 - real return value (ATIR500Memory::dealloc's own bool) is never used at either real call site, so void is a safe, correct declaration despite the callee itself returning a value */
+
+    /*
+     * getNumPipes / getChipID / getChipRev / getNumZPipes - RESOLVED
+     * (issue #1 gap-fill pass), real addrs 0x1aba0/0x1abb0/0x1abc0/
+     * 0x1abd0. Four genuinely trivial real accessors, each a single raw
+     * field read (own field names not otherwise established elsewhere
+     * in this project) - found as `ATIR500GLContext::get_hw_info`'s own
+     * real call targets, see Sources/ATIR500GLContext_GetHwInfo.cpp.
+     */
+    UInt32 getNumPipes();
+    UInt32 getChipID();
+    UInt32 getChipRev();
+    UInt32 getNumZPipes();
 };
 
 #endif /* ATIRADEONX1000_H */

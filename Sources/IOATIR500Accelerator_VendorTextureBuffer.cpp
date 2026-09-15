@@ -122,3 +122,13 @@ void ATIRadeonX1000::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UIn
 void ATIRadeonX1000::removeTransferFromGART(VendorTransferBuffer *buffer) {
     IOATIR500Accelerator::removeTransferFromGART(buffer);
 }
+
+/*
+ * alloc_surface_buffer - RESOLVED (issue #1, get-it-linking pass), real
+ * addr 0x4590. A real, genuine placeholder: unconditionally returns 0
+ * (not overridden by the subclass - identical address on both vtables,
+ * matching this project's own already-established header comment).
+ */
+SInt32 IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
+    return 0;
+}
