@@ -102,6 +102,38 @@ public:
     virtual bool start(IOService *provider) override;
 
     /*
+     * stop - CONFIRMED real name/signature/receiver class, real addr
+     * 0x7fa0 - previously not even declared here at all (a real gap one
+     * level up from the subclass's own already-flagged-UNKNOWN `stop`,
+     * ATIR500GLContext.h). Own body RESOLVED, issue #49 - see
+     * Sources/IOATIR500GLContext_Stop.cpp. Reverses most, but not all, of
+     * what `start()` set up: unlinks from the accelerator's live-context
+     * list (`nextLiveContext`/`liveGLContextListHead`), releases this
+     * context's own command buffer and all context buffers, returns this
+     * context's own pooled data buffers to the accelerator's shared
+     * free-list (capped at 16, matching `freeOneDataBuffer`'s own already-
+     * established convention), releases every live cached texture in
+     * `textureSlotArray`, unregisters from the owning `ATIR500Surface`
+     * (`remove_gl_context_from_list`/`prune_buffers`), then tail-calls
+     * `IOUserClient::stop`.
+     */
+    virtual void stop(IOService *provider) override;
+
+    /*
+     * freeAllContextBuffers - CONFIRMED to exist (real mangled
+     * `__ZN18IOATIR500GLContext21freeAllContextBuffersEv`, real addr
+     * 0x7000) with the same real per-class family shape as
+     * `allocAllContextBuffers`/`init_context_buffer_header`
+     * (IOATIR5002DContext/IOATIR500DVDContext each have their own real
+     * same-named sibling) - found as `stop`'s own real fallback call
+     * (issue #49) when this class's own primary context-buffer pointer
+     * (`this+0xfc`) is set. Own body NOT decompiled this pass - filed as
+     * its own issue (a new 3-class family, same size/shape as issue #46)
+     * rather than folded into #49's own scope.
+     */
+    void freeAllContextBuffers();
+
+    /*
      * allocAllContextBuffers - CONFIRMED to exist and be a real member of
      * this class (mangled __ZN18IOATIR500GLContext22allocAllContextBuffersEm,
      * kext offset 0x74d0; IOATIR5002DContext and IOATIR500DVDContext each

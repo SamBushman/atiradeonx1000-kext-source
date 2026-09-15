@@ -64,8 +64,13 @@ public:
      * G5/Tiger hardware, cross-referenced against the running kernel's
      * own symbol table): the real pair is `mutex_unlock_rwcmb`/
      * `mutex_lock`, the same real pair used throughout this project - see
-     * `Headers/ATIRadeonX1000Registers.h`. stop() UNKNOWN - not decompiled
-     * this project.
+     * `Headers/ATIRadeonX1000Registers.h`. stop() RESOLVED, issue #49 -
+     * see Sources/IOATIR500GLContext_Stop.cpp: real addr 0x28700, a tiny
+     * real body - locks the accelerator's own mutex (`accel+0x840`, the
+     * same real `_mutex_lock`/`_mutex_unlock` pair
+     * `ATIR500DVDContext::set_macrovision` already established) around a
+     * single call to the BASE class's `IOATIR500GLContext::stop`, where
+     * essentially all the real teardown work actually lives.
      */
     virtual bool start(IOService *provider) override;
     virtual void stop(IOService *provider) override;
