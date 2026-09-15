@@ -18,6 +18,9 @@
 
 #include "ATIRadeonX1000Types.h"
 
+class IOATIR500Accelerator;
+class IOTextureBuffer;
+
 /*
  * sIOClientShared - a real, previously-unnamed 0x40-byte per-handle
  * record shape `alloc_client_shared` (below) carves out of its own
@@ -183,6 +186,26 @@ public:
     bool alloc_buf_handle(void *record, UInt32 *outHandle);
     void free_buf_handle(void *record, UInt32 handle);
     bool alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, UInt32 *outUserAddr);
+
+    /*
+     * free_texvert - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x18710. A real STATIC method (the real decompile calls it
+     * as `IOATIR500Shared::free_texvert(accel, texture)` with an
+     * explicit accelerator argument, never through an instance) - the
+     * accelerator's own orphan-texture teardown leaf, called from
+     * `IOATIR500Accelerator::freeOrphanTexture`. Unlinks `texture` from
+     * its own doubly-linked list (`+0x24`/`+0x28`, the same shape
+     * `delete_texture` already establishes), releases its GART mapping
+     * via the accelerator's own `removeTransferFromGART` if it has a
+     * real backing descriptor (`+4`!=0), frees its handle via its own
+     * owner's `free_buf_handle` if it has one (`+0x1c`), releases its
+     * `memoryDescriptor` (`+8`) for kind values 3-7 inclusive, then
+     * returns it to the accelerator's own pool via
+     * `releaseVendorTextureBuffer` - real size argument `0xc0` for
+     * kind==5, `0x80` otherwise (the first place this project has found
+     * a texture-family record sized larger than the usual 0x80).
+     */
+    static void free_texvert(IOATIR500Accelerator *accel, IOTextureBuffer *texture);
 };
 
 #endif /* IOATIR500SHARED_H */

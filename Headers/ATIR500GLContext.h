@@ -180,15 +180,47 @@ public:
     void restore_state_destroyed_by_pageoff(register_tracking_state *savedState);
 
     /*
-     * write_r500_3d_blit_state_packet - CONFIRMED to exist and be called
-     * by restore_state_destroyed_by_pageoff; further internal processing
-     * beyond the register-write shape already captured by the capstone
-     * doc was never independently re-derived for this reconstruction.
+     * write_r500_3d_blit_state_packet - RESOLVED (issue #1, get-it-
+     * linking pass), real addr 0x2ac10. Real body: picks a source
+     * `ATIR500SurfaceBuffer` record two different ways depending on a
+     * real mode flag at `this+0x3bc` - zero selects the currently-bound
+     * surface's own per-format buffer-pointer table
+     * (`boundSurface+0xb70`, indexed by `this+0xac`) combined with the
+     * inline per-slot array at `boundSurface+0xa8` (stride 0x78,
+     * indexed the same way - the SAME array shape
+     * `alloc_surfaces_pageq` already establishes on `IOATIR500Surface`);
+     * nonzero selects a second, previously-uncatalogued INLINE
+     * `ATIR500SurfaceBuffer` array on THIS class itself
+     * (`this+0x3c0`, stride 0x78, indexed by `this+0x3b2` - the
+     * already-named `altUnitSelector`, confirming that field's role
+     * extends to indexing this array too). Computes a real GPU base-
+     * address dword from the selected buffer's own `mipOffsets`/
+     * `basePitch`/`gpuBaseAddress` fields, five real `FormatTableLookup_
+     * 0x0004d2e0`-derived bitfields packed into the packet's own
+     * `+0x228` dword, a real HyperZ-eligibility gated dword at `+0x80`,
+     * and a real texture-offset dword at `+0x280` via the already-
+     * established `GetTextureOffset` - see
+     * `Sources/ATIR500GLContext_WriteR500BlitStatePacket.cpp` for the
+     * full transcription.
      */
     void write_r500_3d_blit_state_packet(r500_3d_blit_state_packet_struct *packet);
 
-    /* write_r500_zdecompress_restore_add_on_packet - UNKNOWN body, real
-     * name/signature only. */
+    /*
+     * write_r500_zdecompress_restore_add_on_packet - RESOLVED (issue
+     * #1, get-it-linking pass), real addr 0x28780. Real body: picks a
+     * source `ATIR500SurfaceBuffer` record the same two-way `this+0x3bc`
+     * mode switch as `write_r500_3d_blit_state_packet` uses, except the
+     * nonzero-mode source here is a single fixed record at `this+0x5a0`
+     * (NOT the `altUnitSelector`-indexed array that function uses) and
+     * the zero-mode index comes from `this+0xae` (a distinct field from
+     * that function's own `this+0xac`). Writes five real dwords
+     * (`+4`/`+0xc`/`+0x10`/`+0x18`/`+0x20`/`+0x28`) - RESOLVED the real
+     * struct's own minimum size from this (see `ATIRadeonX1000Types.h`'s
+     * own header comment, a real struct-size bug fix). `+4`'s own
+     * bizarre real bit-trick (`-(formatTableIndex^0x10) >> 30 & 2`)
+     * simplified to its verified-equivalent direct form,
+     * `formatTableIndex != 0x10 ? 2 : 0`.
+     */
     void write_r500_zdecompress_restore_add_on_packet(r500_zdecompress_restore_add_on_packet_struct *packet);
 
     /*

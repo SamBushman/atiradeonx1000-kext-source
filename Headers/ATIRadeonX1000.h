@@ -170,25 +170,104 @@ public:
     /* ---- Real, confirmed methods ---- */
 
     /*
-     * submit_ring_data - CONFIRMED. Advances CP_RB_WPTR using the real
-     * bit-packing formula this project found and re-confirmed identically
-     * in submit_idct_buffer_consumed:
-     *     mmio[CP_RB_WPTR] = (wptr << 24) | ((wptr & 0x700) << 8);
-     * Exact parameter list not re-derived for this reconstruction (the
-     * original decompile was read for its MMIO-write shape, not transcribed
-     * argument-by-argument) - modeled with a plausible signature.
+     * submit_ring_data - RESOLVED (issue #1, get-it-linking pass), real
+     * addr 0x1f030. SIGNATURE CORRECTED: real body takes NO explicit
+     * parameter (confirmed from `submit_buffer`'s own real call site,
+     * `submit_ring_data(this)` with nothing else) - it reads the real
+     * pending ring-write cursor itself from `this+0x914` (own name not
+     * established - a distinct field from the already-named
+     * `mainRingCursor`/`+0x918`, which this function treats as the
+     * "last committed" cursor and updates at the very end). Real body:
+     * pads the ring to the next 8-dword boundary with NOP tokens
+     * (0x80000000) if needed, performs real PowerPC cache-maintenance
+     * (`dataCacheBlockStore`/`dataCacheBlockFlush`/`sync`/
+     * `instructionSynchronize`) over exactly the newly-written ring
+     * range UNLESS a real "write-combined, no maintenance needed" flag
+     * (`this+0x98` bit `0x400000`... structurally same bit-test shape as
+     * `this+0x98` bit `0x80` elsewhere - own exact bit CONFIRMED from
+     * this function's own decompile) is set, handling the real ring-
+     * wraparound case as two separate flush passes, then writes the
+     * already-established `CP_RB_WPTR` bit-packing formula, calls
+     * `enforceInOrderExecutionIO`, and commits the new cursor to
+     * `mainRingCursor`. A real no-op early-return when the pending and
+     * committed cursors already match.
      */
-    void submit_ring_data(UInt32 wptr);
+    void submit_ring_data();
 
     /*
-     * submit_buffer / submit_buffer_retired - CONFIRMED to exist and to be
-     * the real indirect-buffer submission path every context's deferred/
-     * "flush if nearly full" logic calls (distinct from submit_ring_data's
-     * direct-ring path). Exact signature INFERRED from the many real call
-     * sites this project read (e.g. ATIR5002DContext::process_command_buffer's
-     * `ATIRadeonX1000::submit_buffer(accel, ptr1, ptr2, count)` shape).
+     * submit_buffer / submit_buffer_retired - RESOLVED (issue #1, get-
+     * it-linking pass), real addr 0x20980. RETURN TYPE CORRECTED to
+     * `UInt32`: the real decompile returns a real monotonic submission
+     * stamp (`this+0x50`, the SAME already-heavily-used real "current
+     * stamp" counter this project references throughout as a raw
+     * offset, e.g. `waitForTimeStamp(U32At(accel,0x50)-1)`), not an
+     * IOReturn error code - post-incrementing it exactly like every
+     * other real stamp-issuing call site in this project. Real body:
+     * NOP-pads the caller's own buffer to an 8-dword boundary, waits
+     * (spinning up to 1000 times, `FUN_00020cc4`-shaped short delay
+     * between attempts - real identity unconfirmed) for real ring FIFO
+     * space via the same bit-packed RBBM read-pointer shape
+     * `wait_for_rb_space`'s own log message names, performs real cache
+     * maintenance over the caller's buffer if needed (same `this+0x98`
+     * bit-0x80 gate as `submit_ring_data`), optionally flushes a
+     * pending `submit_empty_buffer` first, then waits again for space
+     * to write six real ring dwords (an `INDIRECT_BUFFER` PM4 packet:
+     * opcode `0x101ce`, the caller's own buffer address/dword-count,
+     * framed by two `NOP`-shaped `0x57f`/`0x578` tokens) via
+     * `submit_ring_data`. On a real, total FIFO-wait timeout, logs a
+     * real diagnostic (`FUN_00020c94`, real shape matches `IOLog`) and
+     * calls `DumpASICHangState` before returning the stamp counter
+     * unincremented (`this+0x50 - 1`).
      */
-    IOReturn submit_buffer(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount);
+    UInt32 submit_buffer(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount);
+
+    /*
+     * submit_empty_buffer - RESOLVED (issue #1, get-it-linking pass),
+     * real addr 0x1bca0. Real body: no-ops if `deviceActiveFlag`
+     * (`+0x80`) is clear. Otherwise performs a real indexed-register
+     * round-trip handshake through `mmioBase+0x30`(index)/`+0x34`(data)
+     * - writes a real byte-swapped config value (`this+0xbbc`, own
+     * identity unconfirmed) twice with different byte-swap patterns,
+     * then polls (up to 0x2711 times) a real 4-byte MMIO field at
+     * `mmioBase+0x34..0x37` for an all-zero result, each iteration
+     * re-issuing the same indexed writes. Real purpose beyond "a real
+     * indirect-register write/verify handshake" not independently
+     * confirmed.
+     */
+    void submit_empty_buffer();
+
+    /*
+     * DumpASICHangState - RESOLVED (issue #1, get-it-linking pass),
+     * real addr 0x1d480. A real, purely-diagnostic register dump only
+     * ever reached from `submit_buffer`'s own fatal ring-space-timeout
+     * path (the GPU has already failed to free FIFO space after 1000+
+     * retries by the time this runs) - disables the GPU sensor, waits
+     * (via the real Mach `assert_wait_timeout`/`thread_block` pair) for
+     * a real MMIO scratch-register value to change (confirming the ASIC
+     * is genuinely wedged, not just slow) for up to 0x186a1 iterations,
+     * then logs ~10 real 4-register-wide hex dumps plus a full 0x400-
+     * byte ring-buffer-adjacent memory region (`mmioBase+0x7f0..`,
+     * 4 bytes at a time) via a real varargs logger (`FUN_0001d7dc`,
+     * shape matches `IOLog`) with a real small delay
+     * (`FUN_0001d7ec`, shape matches `IODelay`) after every line.
+     */
+    void DumpASICHangState();
+
+    /*
+     * enable_GPUSensor / disable_GPUSensor - RESOLVED (issue #1, get-
+     * it-linking pass), real addrs 0x19f30/0x19fd0. A real timer/event-
+     * source object at `this+0x9a8` (own exact Apple type unconfirmed -
+     * plausibly an `IOTimerEventSource`) gets armed (`enable`: zeroes
+     * two real fields at `+0x9a0`/`+0x99c`, then calls a real vtable
+     * `+300`(0x12c)-slot "arm" method with a real interval argument at
+     * `+0x998`, then a real `+0xec` "enable"-shaped call) or disarmed
+     * (`disable`: real `+0x158`/`+0xf0` vtable calls) - both no-op if
+     * the event source is null. Exact Apple virtual-method identities
+     * for all four vtable slots UNKNOWN, referenced only by raw offset
+     * in the real decompile.
+     */
+    void enable_GPUSensor();
+    void disable_GPUSensor();
 
     /*
      * submit_idct_buffer_consumed - CONFIRMED real name and behavior

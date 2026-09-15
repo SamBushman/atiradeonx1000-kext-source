@@ -369,12 +369,21 @@ struct r500_3d_blit_state_packet_struct {
 extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
 
 /*
- * r500_zdecompress_restore_add_on_packet_struct - UNKNOWN layout beyond
- * its name and the fact write_r500_zdecompress_restore_add_on_packet takes
- * a pointer to one. Never decompiled this project.
+ * r500_zdecompress_restore_add_on_packet_struct - RESOLVED (issue #1,
+ * get-it-linking pass): `write_r500_zdecompress_restore_add_on_packet`
+ * writes real dwords up through `+0x28`, so the real struct is AT LEAST
+ * 0x2c bytes (rounded up to 0x30 for dword alignment) - FIXED (a real
+ * struct-layout bug, not a cosmetic one: the previous 4-byte placeholder
+ * would have let every real caller allocate/treat this as a 4-byte
+ * object while the real decompiled writer function scribbles up to
+ * 0x2c bytes past it, a genuine heap-corruption risk). Per-field names
+ * not assigned (this project has only ever seen ONE real writer of this
+ * struct, and no real reader) - modeled honestly as a raw, correctly-
+ * sized buffer rather than guessing field semantics beyond what that
+ * one writer's own real offsets establish.
  */
 struct r500_zdecompress_restore_add_on_packet_struct {
-    UInt8 _opaque[4]; /* UNKNOWN size - placeholder only */
+    UInt8 _opaque[0x30];
 };
 
 /*
