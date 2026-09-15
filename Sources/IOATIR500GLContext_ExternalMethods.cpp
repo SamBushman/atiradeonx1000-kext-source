@@ -81,7 +81,12 @@ const VendorExternalMethod kGLRegularMethods[20] = {
  * external method anywhere in this driver; ring submission is a pure
  * shared-memory write-pointer update).
  */
-static const VendorExternalMethod kGLSpecialMethod20 = {
+/* External linkage (not `static`, issue #1 get-it-linking pass) so
+ * ATIR500GLContext::start (Sources/ATIR500GLContext_Start.cpp) can
+ * point this class's own `+0x360` extended-method-table field at it
+ * directly, matching the real decompile - same fix already applied to
+ * kGLRegularMethods above for the same reason. */
+const VendorExternalMethod kGLSpecialMethod20 = {
     0, 0xffff, OSMemberFunctionCast(void *, static_cast<ATIR500GLContext *>(0), &ATIR500GLContext::get_hw_info), 0, 0, 5
 };
 
