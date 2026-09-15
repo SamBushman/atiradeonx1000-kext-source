@@ -90,17 +90,28 @@ public:
     void freeAllContextBuffers();
 
 protected:
-    ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
-    IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */
+    /*
+     * FIXED (issue #56): these seven fields were declared in discovery
+     * order with no padding scaffolding at all - reordered into true
+     * ascending real-offset order with a leading pad from this class's
+     * own start (IOUserClient is the real base) and a pad array in
+     * every real gap. Same shape as 2D's own equivalent fix.
+     */
+    UInt8 _pad_0x00[0x84];
     IOATIR500Shared *sharedAllocator; /* +0x84, CONFIRMED (issue #7): owns the real texture-lookup-by-index table (own +0x10/+0x14 fields) the bind/unbind opcode families bounds-check and index into - the same real layout independently confirmed on GL and 2D's own equivalents this session. */
-
+    UInt8 _pad_0x88[0x8c - 0x88];
+    ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
+    UInt8  pendingTransferBuffer[1]; /* +0x90, CONFIRMED to exist (passed to map_transfer_to_GART as `this+0x90`) - real size/type UNKNOWN, modeled as a byte anchor only. */
+    UInt8 _pad_0x91[0x94 - 0x91];
+    UInt32 ringSlotZeroCheck;  /* +0x94, CONFIRMED: mirrors GL's this+0xd0/2D's this+0x9c role - zero-checked to decide whether to GART-map the pending transfer buffer. */
+    UInt8 _pad_0x98[0xa0 - 0x98];
     /* Real fields found this pass (issue #7), via
      * ATIR500DVDContext::process_command_buffer's bind/unbind opcode
      * families: */
-    UInt32 commandBufferBase;  /* +0xa4, CONFIRMED: real command-buffer base process_command_buffer reads records from (+0x1c offset to the first record) and submit_buffer's own base-address argument - mirrors GL's this+0xe0/2D's this+0xac role. */
-    UInt32 ringSlotZeroCheck;  /* +0x94, CONFIRMED: mirrors GL's this+0xd0/2D's this+0x9c role - zero-checked to decide whether to GART-map the pending transfer buffer. */
-    UInt8  pendingTransferBuffer[1]; /* +0x90, CONFIRMED to exist (passed to map_transfer_to_GART as `this+0x90`) - real size/type UNKNOWN, modeled as a byte anchor only. */
     UInt32 lastSubmitResult;   /* +0xa0, CONFIRMED: stores ATIRadeonX1000::submit_buffer's real return value - mirrors GL's this+0xdc/0x7c, 2D's this+0xa8 role. */
+    UInt32 commandBufferBase;  /* +0xa4, CONFIRMED: real command-buffer base process_command_buffer reads records from (+0x1c offset to the first record) and submit_buffer's own base-address argument - mirrors GL's this+0xe0/2D's this+0xac role. */
+    UInt8 _pad_0xa8[0xf8 - 0xa8];
+    IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */
 };
 
 #endif /* IOATIR500DVDCONTEXT_H */

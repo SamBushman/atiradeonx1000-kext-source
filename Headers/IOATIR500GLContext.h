@@ -167,9 +167,19 @@ public:
     void map_transfer_to_GART(VendorTransferBuffer *buffer);
 
 protected:
-    ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
-    IOATIR500Shared       *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers. Concrete type CONFIRMED this pass - IOATIR500GLContext::start allocates it via `new IOATIR500Shared` and stores the result here directly (was `void*`; IOATIR500Shared itself remains a real but not-yet-reconstructed class - see IOATIR500Accelerator.h). */
+    /*
+     * FIXED (issue #56): these four fields were declared in discovery
+     * order with no padding scaffolding - reordered to true ascending
+     * real-offset order with a leading pad from this class's own start
+     * (IOUserClient is the real base here) and pads between each gap.
+     */
+    UInt8   _pad_0x00[0x80];
     IOATIR500GLContext    *nextLiveContext; /* +0x80, CONFIRMED, NEW finding this pass: the intrusive "next" link for the accelerator's live-GL-context singly-linked list (see start()'s real head-insertion push into accelerator+0x60 / liveGLContextListHead). Not previously documented. */
+    UInt8   _pad_0x84[0x88 - 0x84];
+    IOATIR500Shared       *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers. Concrete type CONFIRMED this pass - IOATIR500GLContext::start allocates it via `new IOATIR500Shared` and stores the result here directly (was `void*`; IOATIR500Shared itself remains a real but not-yet-reconstructed class - see IOATIR500Accelerator.h). */
+    UInt8   _pad_0x8c[0xc8 - 0x8c];
+    ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
+    UInt8   _pad_0xcc[0x2a0 - 0xcc];
     /*
      * The regular external-method table pointer - CONFIRMED to exist at
      * this offset (ATIR500GLContext::getTargetAndMethodForIndex:

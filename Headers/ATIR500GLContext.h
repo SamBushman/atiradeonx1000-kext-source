@@ -292,6 +292,18 @@ public:
 
 protected:
     /*
+     * FIXED (issue #56): these thirteen fields were declared in
+     * roughly-discovery order, not ascending real-offset order, with no
+     * padding scaffolding between them - reordered into true ascending
+     * real-offset order with a leading pad from this class's own start
+     * and a pad array in every real gap. None of these fields are ever
+     * accessed by their C++ name anywhere in this project's own `.cpp`
+     * files (every real access goes through raw pointer arithmetic at
+     * the literal offset, e.g. `U16At(self, 0x35c)`), so there was no
+     * live functional bug from this today - but `sizeof(ATIR500GLContext)`
+     * was far smaller than the real object, which matters for this
+     * class's own real `OSTypeAlloc` allocation size.
+     *
      * Real, confirmed per-instance field offsets used throughout
      * process_command_buffer and the register-write functions. Every
      * offset here was read directly off real decompiled code this
@@ -299,18 +311,28 @@ protected:
      * cross-referenced in comments for the exact function each was
      * confirmed in.
      */
-    void   *textureSlotArray;      /* +0x2a4, base of a 20-entry (16 fragment-texture + 4 vertex-attribute) per-unit slot array, stride 4 bytes - CONFIRMED (0x06-0x15/0x16-0x25 unbind families, opcode 0x39's vertex-attribute binding at index>=16) */
-    void   *transferBufferSlot;    /* +0x328, a single distinct texture-tracking slot separate from textureSlotArray - CONFIRMED (opcodes 0x26/0x27's bind/unbind pair) */
+    UInt8   _pad_0x00[0x290];
     void   *boundSurface;          /* +0x290, CONFIRMED: the currently-bound render surface, read throughout get_config/get_status/get_surface_size/scale_surface/read_buffer */
+    UInt8   _pad_0x294[0x29c - 0x294];
     SInt32  mipLevel;              /* +0x29c, CONFIRMED: current mip level index, used in per-mip offset computations throughout */
+    UInt8   _pad_0x2a0[0x2a4 - 0x2a0];
+    void   *textureSlotArray;      /* +0x2a4, base of a 20-entry (16 fragment-texture + 4 vertex-attribute) per-unit slot array, stride 4 bytes - CONFIRMED (0x06-0x15/0x16-0x25 unbind families, opcode 0x39's vertex-attribute binding at index>=16) */
+    UInt8   _pad_0x2a8[0x328 - 0x2a8];
+    void   *transferBufferSlot;    /* +0x328, a single distinct texture-tracking slot separate from textureSlotArray - CONFIRMED (opcodes 0x26/0x27's bind/unbind pair) */
+    UInt8   _pad_0x32c[0x338 - 0x32c];
+    void   *secondaryTextureSlotA; /* +0x338, CONFIRMED to exist as a distinct per-unit slot field (opcode 0x3b family), role beyond that UNKNOWN */
+    UInt8   _pad_0x33c[0x348 - 0x33c];
+    void   *secondaryTextureSlotB; /* +0x348, CONFIRMED to exist (opcode 0x3f family), same caveat as above */
+    UInt8   _pad_0x34c[0x354 - 0x34c];
     UInt32  scissorY;              /* +0x354, CONFIRMED: live scissor rectangle Y (build_scissor's output, embedded verbatim by opcodes 0x28/0x29/0x2a) */
     UInt32  scissorX;              /* +0x358, CONFIRMED: live scissor rectangle X, same family as scissorY */
-    void   *secondaryTextureSlotA; /* +0x338, CONFIRMED to exist as a distinct per-unit slot field (opcode 0x3b family), role beyond that UNKNOWN */
-    void   *secondaryTextureSlotB; /* +0x348, CONFIRMED to exist (opcode 0x3f family), same caveat as above */
-    UInt16  attachmentCount;       /* +0x3a8, CONFIRMED: real count tracked by opcode 0x29's render-target/vertex-format attachment enumeration */
     UInt16  someUnitIndex;         /* +0x35c, CONFIRMED referenced in opcode 0x2d's two-surface (main + FSAA-resolve) mip computation (CORRECTED, issue #12 item 4 - previously misattributed to opcode 0x31) */
-    UInt16  altUnitSelector;       /* +0x3b2, CONFIRMED referenced alongside +0x3aa in the per-context texture-unit array init in start() */
+    UInt8   _pad_0x35e[0x3a8 - 0x35e];
+    UInt16  attachmentCount;       /* +0x3a8, CONFIRMED: real count tracked by opcode 0x29's render-target/vertex-format attachment enumeration */
     UInt16  altUnitFormat;         /* +0x3aa, CONFIRMED, same init call as altUnitSelector */
+    UInt8   _pad_0x3ac[0x3b2 - 0x3ac];
+    UInt16  altUnitSelector;       /* +0x3b2, CONFIRMED referenced alongside +0x3aa in the per-context texture-unit array init in start() */
+    UInt8   _pad_0x3b4[0x3f0 - 0x3b4];
     void   *perUnitTextureArray;   /* +0x3f0, stride 0x78, 6 real entries, CONFIRMED initialized in start() with real default blend/format bits */
 };
 

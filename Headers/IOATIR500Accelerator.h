@@ -350,16 +350,25 @@ private:
      * exist (freeWaitToAllocGART walks all three via
      * `*(T**)(this+N)` / `next = *(T**)(ctx+0x80)` chains), exact base
      * offsets INFERRED from the decompile's own literal constants.
+     *
+     * FIXED (issue #56): these four fields were declared in discovery
+     * order with no padding scaffolding, not ascending real-offset
+     * order - reordered to true ascending order with a leading pad from
+     * this class's own start (following the same convention already
+     * used and hardware-validated for ATIRadeonX1000's own
+     * `_pad_before_active`) and a pad between liveGLContextListHead and
+     * live2DContextListHead.
      */
-    IOATIR5002DContext  *live2DContextListHead;  /* +0x64, INFERRED offset */
-    IOATIR500DVDContext *liveDVDContextListHead; /* +0x68, INFERRED offset */
+    UInt8   _pad_0x00[0x5c];
+    IOATIR500Surface    *liveSurfaceListHead;    /* +0x5c, INFERRED offset */
     IOATIR500GLContext  *liveGLContextListHead;  /* +0x60, CONFIRMED this pass: IOATIR500GLContext::start's
                                                     * real decompile does `piVar4[0x18] = this` on the accelerator
                                                     * pointer (piVar4 = *(int**)(this+200)), i.e. accelerator+0x60
                                                     * word-indexed - an independent, direct confirmation of this
                                                     * offset from the writer side, not just freeWaitToAllocGART's
                                                     * reader side. See IOATIR500GLContext.h's start() note. */
-    IOATIR500Surface    *liveSurfaceListHead;    /* +0x5c, INFERRED offset */
+    IOATIR5002DContext  *live2DContextListHead;  /* +0x64, INFERRED offset */
+    IOATIR500DVDContext *liveDVDContextListHead; /* +0x68, INFERRED offset */
 
     /*
      * newUserClient's four real vtable-dispatched factory slots -

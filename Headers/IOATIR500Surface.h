@@ -435,7 +435,13 @@ public:
     bool allocMasterSwapBuffer(UInt32 param1, UInt32 param2);
 
 protected:
-    ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
+    /*
+     * FIXED (issue #56): these three fields were declared in discovery
+     * order with no padding scaffolding - reordered into true ascending
+     * real-offset order with a leading pad from this class's own start
+     * (IOUserClient is the real base) and a pad array in every real gap.
+     */
+    UInt8 _pad_0x00[0xb70];
 
     /* Both found this pass (issue #13, ATIR500Surface::resolve_fsaa_buffer)
      * - real per-attachment `ATIR500SurfaceBuffer*` pointers, the same
@@ -448,7 +454,10 @@ protected:
      * access is `surfaceBuffersByFormat[formatCode]`, matching the real
      * `*(int*)(this + formatCode*4 + 0xb70)` decompile expression). */
     ATIR500SurfaceBuffer **surfaceBuffersByFormat; /* +0xb70, CONFIRMED base address */
+    UInt8 _pad_0xb74[0xb94 - 0xb74];
     ATIR500SurfaceBuffer *fixedSurfaceBuffer;       /* +0xb94, CONFIRMED: a single real `ATIR500SurfaceBuffer*`, always read regardless of the caller's own format-code argument - the "primary"/depth-or-stencil-style attachment resolve_fsaa_buffer treats as fixed rather than per-format-code. */
+    UInt8 _pad_0xb98[0xd50 - 0xb98];
+    ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
 };
 
 #endif /* IOATIR500SURFACE_H */

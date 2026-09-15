@@ -127,7 +127,23 @@ public:
     IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 
 protected:
-    sATIDVDIDCTInfo *idctInfo; /* +0xf8-adjacent per-context IDCT state - CONFIRMED to be reached through boundSurface's slot in the real decompile (`*(int*)(this+0xf8)`); modeled as its own field here since sATIDVDIDCTInfo (Headers/ATIRadeonX1000Types.h) IS the real struct doIDCT receives as its first argument, and this project confirmed the two are the same object (doIDCT's param_1 gets passed around identically to what setup_buffers/dvd_setup_overlay's `this+0xf8` chases). */
+    /*
+     * FIXED (issue #56): `idctInfo` was declared as its OWN data member
+     * here, which is wrong - it is not a distinct field, it is the SAME
+     * real storage as the base class's own `boundSurface` (both are
+     * `*(int*)(this+0xf8)` in the real decompile; this project already
+     * confirmed the two are literally the same object, just viewed
+     * through two different pointer types depending on what the
+     * surrounding code is doing - see MapTransferToGART_
+     * RemainingContexts.cpp's own note on this same ambiguity).
+     * Declaring it as a second field would have silently added 4 bytes
+     * of nonexistent storage after the real object and left boundSurface
+     * and idctInfo permanently out of sync. Replaced with an accessor
+     * that reinterprets the existing `boundSurface` storage instead -
+     * not accessed by name anywhere in this project's own `.cpp` files
+     * today (grep-confirmed), so this doesn't change any call site.
+     */
+    sATIDVDIDCTInfo *idctInfo() const { return reinterpret_cast<sATIDVDIDCTInfo *>(boundSurface); }
 };
 
 #endif /* ATIR500DVDCONTEXT_H */
