@@ -259,6 +259,7 @@ struct register_tracking_state {
     UInt32 sc_screendoor;            /* +0x04 -> SC_SCREENDOOR (0x43e8) */
     UInt32 field_0x08;
     UInt32 gb_aa_config;             /* +0x0c -> GB_AA_CONFIG (0x4020) */
+    UInt8  _pad_0x10[0x14 - 0x10]; /* FIXED (issue #57): 4-byte gap had no padding array, so every field from sc_hyperz_en onward compiled 4 bytes low */
     UInt32 sc_hyperz_en;             /* +0x14 -> SC_HYPERZ_EN (0x43a4), compute_sc_hyperz_en's output slot */
     UInt32 zb_bw_cntl;               /* +0x18 -> ZB_BW_CNTL (0x4f1c), compute_zb_bw_cntl's output slot */
     UInt32 zb_zstencilcntl;          /* +0x1c -> ZB_ZSTENCILCNTL (0x4f04) */
@@ -267,6 +268,7 @@ struct register_tracking_state {
     UInt32 vap_vte_cntl;             /* +0x28 -> VAP_VTE_CNTL (0x20b0) */
     UInt32 su_cull_mode;             /* +0x2c -> SU_CULL_MODE (0x42b8) */
     UInt32 rb3d_dither_ctl;          /* +0x30 -> RB3D_DITHER_CTL (0x4e50) */
+    UInt8  _pad_0x34[0x3c - 0x34]; /* FIXED (issue #57): 8-byte gap had no padding array */
     UInt32 vap_out_vtx_fmt_0;        /* +0x3c -> VAP_OUT_VTX_FMT_0 (0x2090) */
     UInt32 vap_out_vtx_fmt_1;        /* +0x40 -> VAP_OUT_VTX_FMT_1 (0x2094) */
     UInt32 vap_vtx_size;             /* +0x44 -> VAP_VTX_SIZE (0x20b4) */
@@ -278,14 +280,31 @@ struct register_tracking_state {
     UInt32 ga_poly_mode;             /* +0x5c -> GA_POLY_MODE (0x4288) */
     UInt32 rb3d_blendcntl;           /* +0x60 -> RB3D_BLENDCNTL (0x4e04) */
     UInt32 ga_color_control;         /* +0x64 -> GA_COLOR_CONTROL (0x4278) */
+    UInt8  _pad_0x68[0x6c - 0x68]; /* FIXED (issue #57): 4-byte gap had no padding array */
     UInt32 tx_enable;                /* +0x6c -> TX_ENABLE (0x4104) */
     UInt32 gb_ps3_enable;            /* +0x70 -> GB:PS3_ENABLE (0x4118) */
-    UInt32 ga_us_vector[11];         /* +0x74.. -> GA_US_VECTOR_INDEX/DATA (0x4250/0x4254) burst, shader instruction words */
-    UInt32 ga_color_control_ps3;     /* real field within/adjacent to the vector burst above -> GA_COLOR_CONTROL_PS3 (0x4258) - exact sub-offset not independently isolated, see stage4 capstone doc */
-    UInt32 us_out_fmt_1;             /* -> US_OUT_FMT_1 (0x46a8) */
-    UInt32 us_out_fmt_2;             /* -> US_OUT_FMT_2 (0x46ac) */
-    UInt32 us_out_fmt_3;             /* -> US_OUT_FMT_3 (0x46b0) */
-    UInt32 rs_count;                 /* -> RS_COUNT (0x4300) */
+    UInt32 ga_us_vector[5];          /* +0x74-0x84 -> GA_US_VECTOR_INDEX/DATA (0x4250/0x4254) burst, shader instruction words.
+                                       * FIXED (issue #57): was declared as [11] (0x2c bytes), which pushed every
+                                       * field after it wrong by 0x2c bytes (us_fc_ctrl would compute at +0xb4
+                                       * instead of its own confirmed +0x88). Re-checked against every real
+                                       * Src(N) read in Sources/ATIR500GLContext_RestoreState.cpp between this
+                                       * field and the next confirmed one: only Src(0x74)/Src(0x78)/Src(0x7c)/
+                                       * Src(0x80)/Src(0x84) exist before Src(0x88) (us_fc_ctrl) - exactly 5
+                                       * dwords, not 11. */
+    /*
+     * ga_color_control_ps3 (GA_COLOR_CONTROL_PS3, 0x4258), us_out_fmt_1
+     * (US_OUT_FMT_1, 0x46a8), us_out_fmt_2 (US_OUT_FMT_2, 0x46ac),
+     * us_out_fmt_3 (US_OUT_FMT_3, 0x46b0), and rs_count (RS_COUNT, 0x4300)
+     * are real registers this state snapshot must restore somewhere, but
+     * they do NOT fit in the +0x74-0x84 span (see ga_us_vector's note
+     * above) - they were previously fabricated into that span only to pad
+     * out an incorrectly-sized array, with no real evidence placing them
+     * there. Removed rather than left in a byte position we know is
+     * wrong; their real struct offset is unconfirmed, matching this
+     * struct's own existing OFFSETOF_rb3d_color_channel_mask /
+     * OFFSETOF_rb3d_ropcntl precedent below for "confirmed register,
+     * unconfirmed struct position."
+     */
     UInt32 us_fc_ctrl;               /* +0x88 -> US_FC_CTRL (0x4624) */
     UInt32 us_pixsize;               /* +0x8c -> US_PIXSIZE (0x4604) */
     UInt32 us_code_range;            /* +0x90 -> US_CODE_RANGE (0x4634) */
@@ -300,8 +319,15 @@ struct register_tracking_state {
      * at +0xd0 and RB3D_ROPCNTL at +0xd8 are confirmed to exist per the
      * capstone doc but their exact byte gap from tx_offset[] here wasn't
      * independently re-derived for this reconstruction - left as a
-     * trailer rather than guessed at.) */
-    UInt8  _trailer_unconfirmed[0x40];
+     * trailer rather than guessed at. ga_color_control_ps3/us_out_fmt_1/
+     * us_out_fmt_2/us_out_fmt_3/rs_count - see the note above
+     * ga_us_vector - also live somewhere in this trailer.
+     * WIDENED (issue #57): the real capstone function reads Src(0x12c)
+     * and Src(0x130), both past this trailer's old [0x40] end (0xec+0x40
+     * = 0x12c, i.e. one dword short of covering Src(0x12c) and two short
+     * of Src(0x130)) - grown to [0x48] so the real total confirmed size
+     * (through +0x134) is actually covered. */
+    UInt8  _trailer_unconfirmed[0x48];
 };
 #define OFFSETOF_rb3d_color_channel_mask 0xd0   /* CONFIRMED address, UNKNOWN exact struct member split */
 #define OFFSETOF_rb3d_ropcntl            0xd8   /* CONFIRMED address, UNKNOWN exact struct member split */
@@ -358,6 +384,7 @@ struct r500_zdecompress_restore_add_on_packet_struct {
 struct sATIDVDIDCTInfo {
     UInt8   _pad_0x00[0x7c];
     UInt32  submitCookie;        /* +0x7c, CONFIRMED: passed straight through to a vtable call at the very top of doIDCT */
+    UInt8   _pad_0x80[0x8c - 0x80]; /* FIXED (issue #57): 0xc-byte gap had no padding array, so hwAccelerator and every field after it compiled 0xc bytes low */
     UInt32  hwAccelerator;       /* +0x8c, CONFIRMED: real ATIRadeonX1000* pointer, used for every field-access/vtable-call in doIDCT */
     UInt8   _pad_0x90[0xf8 - 0x90];
     UInt32  surfaceInfo;         /* +0xf8, CONFIRMED: real surface-geometry pointer, fields +0x94/+0x9a read as field heights */
@@ -396,9 +423,10 @@ struct sATIDVDIDCTParams {
     UInt8   _pad_0x10[0x1c - 0x10];
     UInt32  computedStride;  /* +0x1c, CONFIRMED: real computed (height * strideOrDoubled - 1) value */
     UInt32  computedChromaStride; /* +0x20, CONFIRMED: real computed (strideOrDoubled * (height>>1) - 1) value, chroma-plane-shaped */
+    UInt8   _pad_0x24[0x28 - 0x24];
+    UInt32  strideBroadcast; /* +0x28, CONFIRMED: real (stride | stride<<16) packed value - REORDERED (build fixup, issue #1): this field is genuinely accessed by name (ATIR500DVDContext_IDCT.cpp writes `params->strideBroadcast`), so its previous declaration position (after destEndAddress, real offset +0x30) produced a WRONG compiler-computed offset - a real functional bug, not just a documentation ordering nit. */
     UInt32  destBaseAddress; /* +0x2c, CONFIRMED: real computed destination base address (luma or chroma plane) */
     UInt32  destEndAddress;  /* +0x30, CONFIRMED: real computed destination end address */
-    UInt32  strideBroadcast; /* +0x28, CONFIRMED: real (stride | stride<<16) packed value */
 };
 
 /*
@@ -427,7 +455,17 @@ struct sIOGLNewTextureReturnData {
     /* UNKNOWN beyond this point */
 };
 struct sIOGLContextReadBufferData {
-    UInt32 x, y, w, h;      /* +0x00/+0x04/+0x08/+0x0c, CONFIRMED: real clipped-rect geometry in read_buffer */
+    /* Split from a single `UInt32 x, y, w, h;` comma-declaration (issue
+     * #57) - the real layout here was already correct (each field's own
+     * comment already documented its true offset with no actual gap),
+     * but the multi-name declaration form wasn't parsed by this
+     * project's byte-accurate layout audit script, which made this
+     * struct look broken by omission. Splitting into one field per line
+     * doesn't change the layout, only makes it auditable. */
+    UInt32 x;                /* +0x00, CONFIRMED: real clipped-rect geometry in read_buffer */
+    UInt32 y;                /* +0x04, CONFIRMED */
+    UInt32 w;                /* +0x08, CONFIRMED */
+    UInt32 h;                /* +0x0c, CONFIRMED */
     UInt32 sourceSelector;  /* +0x10, CONFIRMED: real switch discriminant selecting which of 9 real source buffers (front/back/aux, matching the same 0/1/2/3/4/7/8/10/11-style enum family seen in opcode 0x2a/0x29's attachment tables) */
     UInt32 destOffset;      /* +0x14, CONFIRMED: real destination-buffer byte offset */
     UInt32 destPitchOrRowBytes; /* +0x18, CONFIRMED: real destination row stride */

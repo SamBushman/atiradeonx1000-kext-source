@@ -153,6 +153,7 @@ public:
     void *  clientMemoryDescriptorType0; /* +0x8d8, CONFIRMED: the real IOMemoryDescriptor returned by every context's clientMemoryForType(0, ...) */
     UInt8   _pad_0x8dc[0x918 - 0x8dc];
     UInt32  mainRingCursor;           /* +0x918, INFERRED offset (this project confirmed the field's existence and role - the real write-cursor submit_ring_data advances - via the same +0x1600-relative-to-userspace reasoning as the client-side cursor fields, not from a from-zero decompile of this exact byte) */
+    UInt8   _pad_0x91c[0x930 - 0x91c]; /* FIXED (issue #57): a real 0x14-byte gap between mainRingCursor and idctRingCursor had no padding array at all, so idctRingCursor was compiling at +0x91c instead of its own documented +0x930. */
     UInt32  idctRingCursor;           /* +0x930, CONFIRMED distinct from mainRingCursor: submit_idct_buffer_consumed writes IDCT_RING_WPTR using a value derived from this field, not this+0x918 */
     UInt8   _pad_0x934[0xc00 - 0x934]; /* UNKNOWN: large unverified gap - real upper bound NOT confirmed; sized to comfortably cover the largest real accelerator-relative offset referenced anywhere else in this project's own code (0xbe8, in IOATIR500Surface_LockShape.cpp) plus margin, NOT a confirmed real boundary - a genuine placeholder, flagged honestly rather than guessed precisely. Revisit once more of this class's own tail fields are independently decompiled. */
 
