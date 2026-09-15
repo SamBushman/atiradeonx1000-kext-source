@@ -24,19 +24,30 @@
  *   object's own UNNAMED vtable slot `+0xdc` with a real in/out
  *   parameter (passed in as `2`); if it returns `0` AND the out-param
  *   came back `4`:
- *   - if the buffer record's own `+4` field is nonzero: acquires the
- *     accelerator's real `commandLock` (`accel+0x840`, CONFIRMED field -
- *     see `Headers/ATIRadeonX1000.h`) via `FUN_00011410`, updates a real
- *     accelerator-owned counter at `accel+0x7b4` (`piVar2[0x1ed]` on a
- *     real `int*`-typed local - DWORD-indexed, `0x1ed*4=0x7b4`, NOT a
- *     raw `0x1ed` byte offset - this project's own well-known
+ *   - if the buffer record's own `+4` field is nonzero: real
+ *     `commandLock` (`accel+0x840`, CONFIRMED field - see
+ *     `Headers/ATIRadeonX1000.h`) sequence RESOLVED, issue #50 (live
+ *     kxld-resolved `/dev/kmem` read on real G5/Tiger hardware) as
+ *     `_lck_mtx_unlock`/`_mutex_unlock_rwcmb` (`FUN_00011410`) THEN
+ *     `_mutex_lock`/`_lck_mtx_lock` (`FUN_00011400`) - the REVERSE of
+ *     this project's own prior "acquire then release" assumption for
+ *     these two calls (their names/roles were never independently
+ *     confirmed before this pass). Real order is a genuine "drop an
+ *     already-held lock, update the counter below, then reacquire it"
+ *     idiom - the SAME real unlock-then-lock shape this project already
+ *     documented for `ATIR500GLContext::start`'s own `FUN_000286dc/ec`
+ *     pair (`Headers/ATIR500GLContext.h`), now confirmed to recur here
+ *     with a completely different pair of local stub addresses. Updates
+ *     a real accelerator-owned counter at `accel+0x7b4` (`piVar2[0x1ed]`
+ *     on a real `int*`-typed local - DWORD-indexed, `0x1ed*4=0x7b4`, NOT
+ *     a raw `0x1ed` byte offset - this project's own well-known
  *     `int*`-scaling trap, applied correctly here) by a real delta
  *     returned from another UNNAMED accelerator vtable slot (`+0x55c`,
- *     called with `this+0x7c`), releases `commandLock` via
- *     `FUN_00011400`, then calls the accelerator's real, ALREADY-NAMED
- *     `removeTransferFromGART` (`+0x5ac`, RESOLVED issue #33/OneDataBuffer
- *     work) on the buffer record itself, clears the record's own `+4`
- *     field, and re-reads `buffer+0x24` once more.
+ *     called with `this+0x7c`) BETWEEN the unlock and the relock, then
+ *     (now back under the lock) calls the accelerator's real, ALREADY-
+ *     NAMED `removeTransferFromGART` (`+0x5ac`, RESOLVED issue
+ *     #33/OneDataBuffer work) on the buffer record itself, clears the
+ *     record's own `+4` field, and re-reads `buffer+0x24` once more.
  *   - either way, updates the buffer record's own `+0x54`/`+0x58`
  *     "generation stamp" fields against `this+0x7c` (the same real
  *     per-surface stamp counter this project has seen govern similar
@@ -75,18 +86,14 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
-/* real addrs 0x11400/0x11410 - CONFIRMED genuine external lazy-bind stub
-   trampolines (the same 4-instruction lis/ori/mtspr/bctr pattern with
-   literal zero immediates on disk this project already relies on to
-   distinguish real external kxld-patched symbols from local call thunks -
-   see the issue #15 writeup in Headers/ATIRadeonX1000Registers.h), used
-   here as this call site's own commandLock acquire/release pair. Real
-   external target NOT resolved this pass (would need a fresh live
-   kxld-memory read, out of scope for issue #36) - left as opaque helpers,
-   same convention this project uses for other not-yet-chased-down FUN_xxxx
-   targets. */
-extern "C" void FUN_00011410(void *lockPtr);
-extern "C" void FUN_00011400(void *lockPtr);
+/* real addrs 0x11400/0x11410 - RESOLVED, issue #50 (live kxld-resolved
+   /dev/kmem read on real G5/Tiger hardware, cross-referenced against the
+   running kernel's own symbol table): FUN_00011410 = _lck_mtx_unlock
+   (aka _mutex_unlock_rwcmb), FUN_00011400 = _mutex_lock (aka
+   _lck_mtx_lock) - the REVERSE of this project's own prior "acquire/
+   release" labels, see this function's own header comment above. */
+extern "C" void FUN_00011410(void *lockPtr) asm("_lck_mtx_unlock");
+extern "C" void FUN_00011400(void *lockPtr) asm("_mutex_lock");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -120,13 +127,13 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer
                 bufferRecord = *reinterpret_cast<UInt8 **>(buf + 0x24);
                 if (U32At(bufferRecord, 4) != 0) {
                     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-                    FUN_00011410(*reinterpret_cast<void **>(accel + 0x840)); /* real commandLock acquire */
+                    FUN_00011410(*reinterpret_cast<void **>(accel + 0x840)); /* real: unlocks commandLock (issue #50 identity correction) */
                     SInt32 prevCounter = *reinterpret_cast<SInt32 *>(accel + 0x7b4);
                     typedef SInt32 (*Fn1)(void *, UInt32);
                     void **accelVtable = *reinterpret_cast<void ***>(accel);
                     SInt32 delta = reinterpret_cast<Fn1>(accelVtable[0x55c / 4])(accel, U32At(self, 0x7c));
                     *reinterpret_cast<SInt32 *>(accel + 0x7b4) = prevCounter + delta;
-                    FUN_00011400(*reinterpret_cast<void **>(accel + 0x840)); /* real commandLock release */
+                    FUN_00011400(*reinterpret_cast<void **>(accel + 0x840)); /* real: re-locks commandLock (issue #50 identity correction) */
                     reinterpret_cast<ATIRadeonX1000 *>(accel)->removeTransferFromGART(
                         reinterpret_cast<VendorTransferBuffer *>(bufferRecord));
                     U32At(bufferRecord, 4) = 0;

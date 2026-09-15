@@ -30,17 +30,24 @@
  * `IOATIR500GLContext::freeCommandBuffer` real body (a genuinely
  * different, more involved function - NOT a thin wrapper around the
  * accelerator's version): if `this+0xd4` (a real per-context handle -
- * role UNKNOWN beyond this use) is set, walks TWO real singly-linked
- * lists rooted on the accelerator (`accel+0x60` - this project's
- * already-CONFIRMED `liveGLContextListHead`, walked via the
- * already-established `nextLiveContext` field, `+0x80` -
- * `Headers/IOATIR500GLContext.h`; and `accel+0x68`, a real, DIFFERENT,
- * not-previously-documented list head walked the identical way - real
- * role UNKNOWN, a plausible sibling "live DVD/2D context" list given
- * the parallel structure, not confirmed). For each live context node,
- * looks up an entry via a real, UNNAMED helper (`FUN_00007f8c`, real
- * addr not resolved this pass, called as `(node, this+0xd4)`) and, if
- * found, releases it (vtable `+0x18`). While walking the FIRST list,
+ * now CONFIRMED, issue #50, to be an `IOMemoryDescriptor*`, given what
+ * it's passed to below - real broader role still UNKNOWN beyond this
+ * use) is set, walks TWO real singly-linked lists rooted on the
+ * accelerator (`accel+0x60` - this project's already-CONFIRMED
+ * `liveGLContextListHead`, walked via the already-established
+ * `nextLiveContext` field, `+0x80` - `Headers/IOATIR500GLContext.h`; and
+ * `accel+0x68`, a real, DIFFERENT, not-previously-documented list head
+ * walked the identical way - real role UNKNOWN, a plausible sibling
+ * "live DVD/2D context" list given the parallel structure, not
+ * confirmed). For each live context node, calls the REAL, previously-
+ * unnamed `IOUserClient::removeMappingForDescriptor(IOMemoryDescriptor*)`
+ * (`FUN_00007f8c` - RESOLVED, issue #50, live kxld-resolved `/dev/kmem`
+ * read on real G5/Tiger hardware, cross-referenced against the running
+ * kernel's own symbol table; called non-virtually here even though the
+ * real Apple method is declared virtual - each live context node is the
+ * real implicit `this` receiver, `this+0xd4` the real `mem` argument)
+ * and, if it returns a real non-null `IOMemoryMap*`, releases it (vtable
+ * `+0x18`). While walking the FIRST list,
  * also tracks a real accelerator-owned "high water mark" (`accel+0x5c8`,
  * raised to each node's own `+0xb0` field if larger); while walking the
  * SECOND list, the same `accel+0x5c8` field is instead raised to a fixed
@@ -50,9 +57,9 @@
  * Confidence: CONFIRMED for control flow and every real offset in the
  * `IOATIR500Accelerator` variant (a simple, already-well-understood
  * field shape). CONFIRMED for control flow/offsets in the
- * `IOATIR500GLContext` variant too, but several real fields/helpers
- * (`this+0xd4`, `accel+0x68`'s list, `FUN_00007f8c`) have no established
- * name/role beyond what's directly inferable from this one call site -
+ * `IOATIR500GLContext` variant too; `FUN_00007f8c` is now RESOLVED
+ * (issue #50) but `accel+0x68`'s list still has no established broader
+ * role beyond what's directly inferable from this one call site -
  * flagged UNKNOWN above rather than guessed. No C++ compiler was
  * available in the sandboxed environment this was written in (same
  * standing limitation as every other file in this project).
@@ -90,8 +97,11 @@ void IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer *buffer) {
     U32At(buf, 0x14) = 0;
 }
 
-/* real name/existence CONFIRMED, real behavior not decompiled this pass */
-extern "C" void *FUN_00007f8c(void *liveContextNode, UInt32 handle);
+/* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read on real
+   G5/Tiger hardware): real target IOUserClient::removeMappingForDescriptor
+   (IOMemoryDescriptor*), called non-virtually with liveContextNode as the
+   implicit `this` and `handle` (really an IOMemoryDescriptor*) as `mem`. */
+extern "C" void *FUN_00007f8c(void *liveContextNode, UInt32 handle) asm("__ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDescriptor");
 
 void IOATIR500GLContext::freeCommandBuffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

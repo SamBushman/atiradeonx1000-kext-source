@@ -12,9 +12,12 @@
  * requested mode doesn't have its own real "stereo enabled" bit (bit 0)
  * clear... [bit 1 gets force-cleared]; if it DOES have bit 0 set and a
  * real per-panel scratch record (`this+param1*0x78+0x1ac`) isn't already
- * allocated, zero-initializes it (`FUN_000056f8`, own body not
- * decompiled - a real memset-shaped helper given its `(dest, src, 0x78)`
- * argument shape) and allocates real backing VRAM for it via a real
+ * allocated, copies a real per-panel default template into it
+ * (`FUN_000056f8`, RESOLVED issue #50 via live kxld-resolved `/dev/kmem`
+ * read - real target `_memmove`/`_memcpy`; NOT a zero-init as this
+ * project's prior account had guessed from the call shape alone - the
+ * real second argument is a source POINTER, `self+param1*0x78+300`, not
+ * a fill value) and allocates real backing VRAM for it via a real
  * vtable `+0x56c` call then `freeToAllocSurfaceVRAM` (own body not
  * decompiled this pass, real addr `0x45a0`) as a fallback. If the real
  * "stereo bit" of old vs. new mode differs, calls `waitForTimeStamp`
@@ -47,7 +50,7 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 #include "../Headers/ATIR500Memory.h"
 
-extern "C" void FUN_000056f8(void *dest, void *src, UInt32 size); /* real memset/memmove-shaped helper, own real identity not investigated */
+extern "C" void FUN_000056f8(void *dest, const void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
