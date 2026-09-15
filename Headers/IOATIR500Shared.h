@@ -102,7 +102,26 @@ public:
      * comments: new_agp_texture/new_texture - the same real allocator
      * GL/2D's declare_image/create_image call through.
      */
-    void delete_texture(VendorTextureBuffer *texture);
+    IOReturn delete_texture(VendorTextureBuffer *texture); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was declared void, but the real confirmed call site (IOATIR500GLContext::delete_texture) assigns and returns its result - a real, checked IOReturn value, not void. */
+
+    /*
+     * new_surface_texture / new_global_texture / new_texture /
+     * new_agpref_texture - CONFIRMED to exist (real call sites in
+     * IOATIR500GLContext::new_texture, issue #1 get-it-linking pass -
+     * this class's own real allocator family, anticipated but not
+     * previously declared - see delete_texture's own comment above).
+     * Real signatures INFERRED from their call sites' own argument
+     * shapes (own bodies NOT independently decompiled this pass -
+     * genuine gap, tracked for follow-up, not guessed at beyond what
+     * the call sites themselves establish). All four return what the
+     * real call sites treat as a `VendorTextureBuffer*`-shaped handle
+     * (non-null on success, passed straight into further vtable calls
+     * taking that exact type elsewhere in this project).
+     */
+    VendorTextureBuffer *new_surface_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
+    VendorTextureBuffer *new_global_texture(UInt32 param2, UInt32 *outParam);
+    VendorTextureBuffer *new_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 param5, UInt32 *out1, UInt32 *out2);
+    VendorTextureBuffer *new_agpref_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
 };
 
 #endif /* IOATIR500SHARED_H */

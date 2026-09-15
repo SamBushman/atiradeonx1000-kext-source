@@ -217,6 +217,18 @@ public:
     void add_gl_context_to_list(IOATIR500GLContext *context);
     void remove_gl_context_from_list(IOATIR500GLContext *context);
 
+    /*
+     * alloc_surfaces_pageq / convert_surface_bits / sleep_blocked -
+     * CONFIRMED to exist (real call sites in
+     * IOATIR500GLContext::clientMemoryForType, issue #1 get-it-linking
+     * pass). Real signatures INFERRED from those call sites' own
+     * argument shapes; own bodies NOT independently decompiled this
+     * pass - genuine gap, tracked for follow-up.
+     */
+    UInt32 alloc_surfaces_pageq(UInt32 mask, bool flag);
+    bool   convert_surface_bits(UInt32 param2);
+    void   sleep_blocked(void);
+
     /* connect_buffer_backing_store / free_buffer_backing_store /
      * attach_buffer_backing_store / surface_buffer_idx_mask - CONFIRMED
      * real names, the real per-surface-buffer backing-store lifecycle used
