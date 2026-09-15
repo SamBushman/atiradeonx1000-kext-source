@@ -20,8 +20,30 @@
 
 class IOATIR500Shared {
 public:
-    IOATIR500Shared();
-    /* Real size CONFIRMED (0x28 bytes, from its allocation site). */
+    /*
+     * FIXED (issue #1, first real link attempt): was declared with no
+     * definition anywhere - a real undefined-symbol link error the
+     * moment anything (IOATIR500GLContext::start) actually instantiated
+     * one. Defined inline as empty: this class's own real field layout
+     * is genuinely UNKNOWN (see class header comment) so there is
+     * nothing honest to initialize by name; `init()` (below) is the
+     * real function that does the real work, matching the real
+     * decompile's own two-step alloc-then-init IOKit pattern.
+     */
+    IOATIR500Shared() {}
+    /*
+     * Real size CONFIRMED (0x28 bytes, from its allocation site). FIXED
+     * (issue #1): this class declares zero real C++ data members (every
+     * real field is accessed by raw offset elsewhere, not by name - see
+     * Sources/IOATIR500Shared_Init.cpp/_AllocHandles.cpp), which without
+     * this trailing pad would make `sizeof(IOATIR500Shared)` far smaller
+     * than the real 0x28-byte object - a real heap-corruption risk the
+     * moment `init()`'s own raw writes up to `self+0x24` ran against an
+     * undersized `new`allocation. Matches this project's own established
+     * "confirmed size, unconfirmed field breakdown" pad convention
+     * (e.g. ATIRadeonX1000Types.h's `_trailer_unconfirmed`).
+     */
+    UInt8 _pad_confirmed_size[0x28];
 
     /*
      * init - RESOLVED, issue #20/#24. Real vtable slot `+0x48`, real
