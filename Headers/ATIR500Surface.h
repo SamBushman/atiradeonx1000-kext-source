@@ -65,8 +65,8 @@ public:
      * __ZN14ATIR500Surface4stopEP9IOService, real addr 0x3b0c0) - found
      * while resolving issue #52 (a partial decompile of this function is
      * what independently confirmed `ATIRadeonX1000::scratchHeader`/
-     * `pendingTimeStamp`, see `Headers/ATIRadeonX1000.h`). Own body NOT
-     * fully transcribed this pass - filed as its own issue.
+     * `pendingTimeStamp`, see `Headers/ATIRadeonX1000.h`). Own body
+     * RESOLVED, issue #55 - see Sources/ATIR500Surface_Stop.cpp.
      */
     virtual void stop(IOService *provider) override;
 
@@ -105,6 +105,19 @@ public:
     UInt32   getFramebufferIndex(void);
     UInt32   alloc_overlay(void);
     void     setup_overlay(void);
+
+    /*
+     * free_overlay - CONFIRMED to exist (real mangled
+     * __ZN14ATIR500Surface12free_overlayEv, real addr 0x391a0), the real
+     * inverse of `alloc_overlay` above - found while resolving issue #55
+     * (`stop`'s own real call). Own body RESOLVED, issue #55 - see
+     * Sources/ATIR500Surface_Stop.cpp: clears the overlay handle at
+     * `this+0xd94` if set (without releasing it through a vtable call -
+     * transcribed exactly as decompiled) and clears bit `0x2` of
+     * `this+0xd70`, the exact inverse of `alloc_overlay`'s own real
+     * `|= 2`.
+     */
+    void     free_overlay(void);
 
     /*
      * resolve_fsaa_buffer - RESOLVED (issue #13), RE-HOMED (issue #16).
