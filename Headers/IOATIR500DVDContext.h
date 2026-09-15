@@ -79,6 +79,16 @@ public:
     bool allocAllContextBuffers(UInt32 size);
     void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xe7d0 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
+    /*
+     * freeAllContextBuffers - CONFIRMED to exist (real mangled
+     * __ZN19IOATIR500DVDContext21freeAllContextBuffersEv, real addr
+     * 0xe270), the real per-class sibling `IOATIR500GLContext::
+     * freeAllContextBuffers` (Headers/IOATIR500GLContext.h) already
+     * declares. Own body RESOLVED, issue #54 - see
+     * Sources/IOATIR500GLContext_FreeAllContextBuffers.cpp.
+     */
+    void freeAllContextBuffers();
+
 protected:
     ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
     IOATIR500Surface *boundSurface; /* +0xf8, CONFIRMED: the bound surface every overlay/IDCT/deint method above operates through */

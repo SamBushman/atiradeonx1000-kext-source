@@ -68,6 +68,18 @@ public:
     void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0xbaf0 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
     /*
+     * freeAllContextBuffers - CONFIRMED to exist (real mangled
+     * __ZN18IOATIR5002DContext21freeAllContextBuffersEv, real addr
+     * 0xb6c0), the real per-class sibling `IOATIR500GLContext::
+     * freeAllContextBuffers` (Headers/IOATIR500GLContext.h) already
+     * declares. Own body RESOLVED, issue #54 - see
+     * Sources/IOATIR500GLContext_FreeAllContextBuffers.cpp (kept with
+     * the GL sibling despite the class, matching this project's own
+     * per-class-family file convention).
+     */
+    void freeAllContextBuffers();
+
+    /*
      * NOTE on selectors 16-18: real decompiled signatures for read_regs/
      * write_regs/write_2_regs are `ATIR5002DContext::` (the SUBCLASS),
      * not `IOATIR5002DContext::` (this base class) - matching the exact

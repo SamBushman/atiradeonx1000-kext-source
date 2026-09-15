@@ -127,9 +127,8 @@ public:
      * (IOATIR5002DContext/IOATIR500DVDContext each have their own real
      * same-named sibling) - found as `stop`'s own real fallback call
      * (issue #49) when this class's own primary context-buffer pointer
-     * (`this+0xfc`) is set. Own body NOT decompiled this pass - filed as
-     * its own issue (a new 3-class family, same size/shape as issue #46)
-     * rather than folded into #49's own scope.
+     * (`this+0xfc`) is set. Own body RESOLVED, issue #54 - see
+     * Sources/IOATIR500GLContext_FreeAllContextBuffers.cpp.
      */
     void freeAllContextBuffers();
 
