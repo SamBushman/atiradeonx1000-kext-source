@@ -269,7 +269,20 @@ public:
      * still didn't fully succeed.
      */
     UInt32 alloc_surfaces_pageq(UInt32 mask, UInt32 flag);
-    bool   convert_surface_bits(UInt32 param2);
+
+    /*
+     * convert_surface_bits - RESOLVED (issue #1, get-it-linking pass),
+     * real addr 0x12320. RETURN TYPE CORRECTED from `bool` to `UInt32`:
+     * the real decompile returns a real accumulated bitmask, not a
+     * true/false value - this project's own prior inference (from call
+     * sites alone, before this pass independently decompiled the real
+     * body) was wrong. Its real result feeds directly into
+     * `alloc_surfaces_pageq`'s own `flag` parameter (itself already
+     * corrected from `bool` to `UInt32` this same pass, for the
+     * identical reason) - see `Sources/
+     * IOATIR500Surface_ConvertSurfaceBits.cpp` for the full real body.
+     */
+    UInt32 convert_surface_bits(UInt32 selectorBits);
     void   sleep_blocked(void);
 
     /* connect_buffer_backing_store / free_buffer_backing_store /

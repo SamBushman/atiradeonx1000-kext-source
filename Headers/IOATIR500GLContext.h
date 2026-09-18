@@ -198,6 +198,27 @@ public:
     void init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size); /* real mangled __ZN18IOATIR500GLContext26init_context_buffer_headerEP25VendorContextBufferHeaderm, real addr 0x7490 - RESOLVED, issue #46, see Sources/ATIRadeonX1000_InitContextBufferHeader.cpp */
 
     /*
+     * init_command_buffer_header - RESOLVED (issue #1, get-it-linking
+     * pass), real mangled `__ZN18IOATIR500GLContext26init_command_
+     * buffer_headerEP25VendorCommandBufferHeadermm`, real addr 0x7440.
+     * A real, DISTINCT function from `IOATIR500Accelerator::init_
+     * command_buffer_header` (same name, genuinely different real class
+     * and real field layout - confirmed via Ghidra's own raw symbol
+     * table, not assumed) - `IOATIR5002DContext`/`IOATIR500DVDContext`
+     * each have their own real same-named sibling too. Real body:
+     * zeroes the header's own first 0x20 bytes, then sets `+0x10`
+     * (dword count, `(size-0x20)/4` - the SAME convention the
+     * accelerator's own sibling function uses), `+0x14` (verbatim
+     * caller-supplied value), `+0x18` (this context's own generation
+     * stamp, `this+0x7c`), `+0x1c` (fixed `1`), `+0x20` (fixed
+     * `0x1000000`). Transcribed via raw offsets rather than promoted
+     * onto the existing (differently-angled, possibly incomplete)
+     * `VendorCommandBufferHeader` struct - reconciling the two real
+     * field-offset findings was not attempted this pass.
+     */
+    void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size, UInt32 extra);
+
+    /*
      * freeCommandBuffer - RESOLVED, issue #34. A real, previously
      * entirely untracked NO-ARGUMENT method (real mangled symbol
      * __ZN18IOATIR500GLContext17freeCommandBufferEv, real addr 0x7e70) -
