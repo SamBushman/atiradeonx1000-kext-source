@@ -2,7 +2,7 @@
  * Tests/main.c
  *
  * Entry point for the issue #42 feature-parity test harness. Covers all
- * 78 real external methods across the 4 context classes with real,
+ * 81 real external methods across the 4 context classes with real,
  * call-site-verified (or honestly-flagged-unverified) shapes; only a
  * deliberately-selected safe subset is actually invoked live - see
  * Tests/common.h's top-of-file safety note and Tests/README.md for the
@@ -14,6 +14,7 @@
 int g_testsRun = 0;
 int g_testsUnexpected = 0;
 int g_testsSkipped = 0;
+int g_testsRecorded = 0;
 
 int main(void) {
     io_service_t service = find_accelerator_service();
@@ -29,7 +30,7 @@ int main(void) {
 
     IOObjectRelease(service);
 
-    printf("\n%d calls made, %d unexpected result(s), %d skipped (shape-known, not live-tested)\n",
-           g_testsRun, g_testsUnexpected, g_testsSkipped);
+    printf("\n%d calls made (%d asserted, %d recorded-only), %d unexpected result(s), %d skipped (shape-known, not live-tested)\n",
+           g_testsRun, g_testsRun - g_testsRecorded, g_testsRecorded, g_testsUnexpected, g_testsSkipped);
     return g_testsUnexpected == 0 ? 0 : 1;
 }

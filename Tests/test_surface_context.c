@@ -63,7 +63,7 @@
  * values in the output. */
 static void test_surface_read_lock_options(io_connect_t connect) {
     kern_return_t rid = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 0, 0x4);
-    report("Surface set_id_mode(0,0x4) [precondition]", rid, NULL);
+    report("Surface set_id_mode(0,0x4) [precondition]", rid, kExpectSuccess);
     if (rid != TEST_kIOReturnSuccess) {
         report_skipped("Surface surface_read_lock_options(sel 0)", "precondition did not succeed this run");
         return;
@@ -172,8 +172,8 @@ static void test_surface_read(io_connect_t connect) {
 static void test_set_shape_backing(io_connect_t connect) {
     kern_return_t rid1 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x0);
     kern_return_t rid2 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x20);
-    report("Surface set_id_mode(1,0x0) [precondition: allocate record]", rid1, NULL);
-    report("Surface set_id_mode(1,0x20) [precondition: set bit 0x20, keep record]", rid2, NULL);
+    report("Surface set_id_mode(1,0x0) [precondition: allocate record]", rid1, kExpectSuccess);
+    report("Surface set_id_mode(1,0x20) [precondition: set bit 0x20, keep record]", rid2, kExpectSuccess);
     if (rid1 != TEST_kIOReturnSuccess || rid2 != TEST_kIOReturnSuccess) {
         report_skipped("Surface set_shape_backing(sel 6)", "precondition sequence did not succeed this run - not attempting the shape call itself");
         return;
@@ -235,7 +235,7 @@ static void test_set_id_mode(io_connect_t connect) {
  * evidence) being safely rejected before the (traced-safe) body runs. */
 static void test_set_scale(io_connect_t connect) {
     kern_return_t rid = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 0, 0x4);
-    report("Surface set_id_mode(0,0x4) [precondition: id=0 record + prune_buffers]", rid, NULL);
+    report("Surface set_id_mode(0,0x4) [precondition: id=0 record + prune_buffers]", rid, kExpectSuccess);
     if (rid != TEST_kIOReturnSuccess) {
         report_skipped("Surface set_scale(sel 8)", "precondition did not succeed this run - not attempting the scale call itself");
         return;
@@ -349,8 +349,8 @@ static void test_surface_control(io_connect_t connect) {
 static void test_set_shape_backing_length(io_connect_t connect) {
     kern_return_t rid1 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x0);
     kern_return_t rid2 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x20);
-    report("Surface set_id_mode(1,0x0) [precondition, idempotent]", rid1, NULL);
-    report("Surface set_id_mode(1,0x20) [precondition, idempotent]", rid2, NULL);
+    report("Surface set_id_mode(1,0x0) [precondition, idempotent]", rid1, kExpectSuccess);
+    report("Surface set_id_mode(1,0x20) [precondition, idempotent]", rid2, kExpectSuccess);
     if (rid1 != TEST_kIOReturnSuccess || rid2 != TEST_kIOReturnSuccess) {
         report_skipped("Surface set_shape_backing_length(sel 17)", "precondition sequence did not succeed this run");
         return;
@@ -378,7 +378,13 @@ static void test_surface_control_alias(io_connect_t connect) {
     report_skipped("Surface surface_control_alias(sel 18)", "deliberate alias of selector 16 - same real dispatcher");
 }
 
-void run_surface_context_tests(io_service_t service) {
+/* Each live Surface test gets its OWN fresh connection. They previously shared one:
+ * surface_read_lock_options (sel 0) takes a lock that is never released, so every
+ * later set_id_mode precondition returned kIOReturnCannotLock and the three
+ * set_shape_backing/set_scale/set_shape_backing_length scenarios silently never ran
+ * (while still printing "OK", since expectations were NULL). Closing the connection
+ * tears down the per-connection Surface object and its lock state. */
+static void run_isolated(io_service_t service, void (*test)(io_connect_t)) {
     io_connect_t connect = IO_OBJECT_NULL;
     kern_return_t kr = open_user_client(service, CLIENT_TYPE_SURFACE, &connect);
     if (kr != TEST_kIOReturnSuccess) {
@@ -386,25 +392,30 @@ void run_surface_context_tests(io_service_t service) {
         g_testsUnexpected++;
         return;
     }
-    printf("-- Surface context (type=0), all 19 selectors --\n");
-    test_surface_read_lock_options(connect);
-    test_surface_read_unlock_options(connect);
-    test_get_state(connect);
-    test_surface_write_lock_options(connect);
-    test_surface_write_unlock_options(connect);
-    test_surface_read(connect);
-    test_set_shape_backing(connect);
-    test_set_id_mode(connect);
-    test_set_scale(connect);
-    test_set_shape(connect);
-    test_surface_flush(connect);
-    test_surface_query_lock(connect);
-    test_surface_read_lock(connect);
-    test_surface_read_unlock(connect);
-    test_surface_write_lock(connect);
-    test_surface_write_unlock(connect);
-    test_surface_control(connect);
-    test_set_shape_backing_length(connect);
-    test_surface_control_alias(connect);
+    test(connect);
     IOServiceClose(connect);
+}
+
+void run_surface_context_tests(io_service_t service) {
+    printf("-- Surface context (type=0), all 19 selectors --\n");
+    run_isolated(service, test_surface_read_lock_options);
+    run_isolated(service, test_surface_read_unlock_options);
+    run_isolated(service, test_get_state);
+    /* the rest that never touch the connection (skipped) get none */
+    test_surface_write_lock_options(IO_OBJECT_NULL);
+    test_surface_write_unlock_options(IO_OBJECT_NULL);
+    test_surface_read(IO_OBJECT_NULL);
+    run_isolated(service, test_set_shape_backing);
+    run_isolated(service, test_set_id_mode);
+    run_isolated(service, test_set_scale);
+    test_set_shape(IO_OBJECT_NULL);
+    test_surface_flush(IO_OBJECT_NULL);
+    run_isolated(service, test_surface_query_lock);
+    test_surface_read_lock(IO_OBJECT_NULL);
+    test_surface_read_unlock(IO_OBJECT_NULL);
+    test_surface_write_lock(IO_OBJECT_NULL);
+    test_surface_write_unlock(IO_OBJECT_NULL);
+    test_surface_control(IO_OBJECT_NULL);
+    run_isolated(service, test_set_shape_backing_length);
+    test_surface_control_alias(IO_OBJECT_NULL);
 }

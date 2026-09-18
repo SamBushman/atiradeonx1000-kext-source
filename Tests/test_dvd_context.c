@@ -192,7 +192,7 @@ static void test_dvd_setup_subpicture(io_connect_t connect) {
  * hardware-facing side effect either way - skip. */
 static void test_set_macrovision(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD set_macrovision(sel 16)", "real display side effect (signature discrepancy now resolved as argument-dropped, see #42)");
+    report_skipped("DVD set_macrovision(sel 16)", "PANICS the stock driver on a fresh connection: derefs the unbound surface (this+0xf8 == NULL) in getFramebufferIndex - the real #43 crash (corrected diagnosis). Needs set_surface first");
 }
 
 /* selector 17 (dvd_enable_deint) - CONFIRMED: scalarO, in=1/out=0.

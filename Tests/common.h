@@ -100,6 +100,12 @@
 extern int g_testsRun;
 extern int g_testsUnexpected;
 extern int g_testsSkipped;
+extern int g_testsRecorded; /* calls with no assertion: outcome recorded only */
+
+/* For calls that MUST succeed for the rest of a test to mean anything (e.g. a
+ * set_id_mode precondition). A failure here is counted UNEXPECTED, so a silently
+ * unmet precondition can no longer hide behind an unconditional "OK". */
+static const kern_return_t kExpectSuccess[] = { TEST_kIOReturnSuccess, (kern_return_t)-1 };
 
 static const char *ioreturn_name(kern_return_t r) {
     switch ((unsigned int)r) {
@@ -150,7 +156,11 @@ static void report(const char *testName, kern_return_t result, const kern_return
     int i;
     g_testsRun++;
     if (expectedOneOf == NULL) {
-        ok = 1; /* no specific expectation recorded yet for this call */
+        /* no assertion for this call: it is RECORDED, not passed. The stock-driver
+         * baseline (Tests/baseline/) is what these outcomes are compared against. */
+        g_testsRecorded++;
+        printf("[REC] %s -> 0x%08x (%s)\n", testName, (unsigned int)result, ioreturn_name(result));
+        return;
     } else {
         for (i = 0; expectedOneOf[i] != (kern_return_t)-1; i++) {
             if (result == expectedOneOf[i]) {

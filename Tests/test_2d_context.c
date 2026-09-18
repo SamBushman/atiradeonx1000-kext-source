@@ -85,7 +85,7 @@ static void test_lock_memory(io_connect_t connect) {
  * crashed the stock driver in #43 - skip unconditionally. */
 static void test_unlock_memory(io_connect_t connect) {
     (void)connect;
-    report_skipped("2D unlock_memory(sel 6)", "drives submit_swap_buffer on negative lock type - THE #43 crash path, never run without valid setup");
+    report_skipped("2D unlock_memory(sel 6)", "negative lock type drives the swap path; unverified. (NB the real #43 panic was DVD set_macrovision -> getFramebufferIndex(NULL), see #43 correction)");
 }
 
 /* selector 7: header declares finish(void) (0 params), but the one real
