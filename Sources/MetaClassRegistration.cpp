@@ -36,6 +36,8 @@
 #include "../Headers/ATIR500DVDContext.h"
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIR500Surface.h"
+#include "../Headers/IOATIR500Shared.h"
+#include "../Headers/ATIR500Memory.h"
 
 /*
  * IOATIR500Accelerator and IOATIR500Surface use the "AndAbstractStructors"
@@ -61,3 +63,11 @@ OSDefineMetaClassAndStructors(ATIR500DVDContext, IOATIR500DVDContext)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR500Surface, IOUserClient)
 OSDefineMetaClassAndStructors(ATIR500Surface, IOATIR500Surface)
+
+/*
+ * IOATIR500Shared and ATIR500Memory are plain OSObject subclasses (issue #58
+ * follow-up: previously modelled as non-OSObject classes, which left their
+ * metaclass globals and OSObject constructor/init calls unresolved).
+ */
+OSDefineMetaClassAndStructors(IOATIR500Shared, OSObject)
+OSDefineMetaClassAndStructors(ATIR500Memory, OSObject)

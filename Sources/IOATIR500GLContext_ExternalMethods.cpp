@@ -45,7 +45,7 @@
  * IOATIR500GLContext_Start.cpp) can point regularMethodTable at it
  * directly, matching the real decompile.
  */
-const VendorExternalMethod kGLRegularMethods[20] = {
+extern const VendorExternalMethod kGLRegularMethods[20] = {
     /*  0 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_surface),                 4, 4, 0 },
     /*  1 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_swap_rect),               4, 4, 0 },
     /*  2 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500GLContext *>(0), &IOATIR500GLContext::set_swap_interval),           4, 2, 0 },
@@ -86,7 +86,7 @@ const VendorExternalMethod kGLRegularMethods[20] = {
  * point this class's own `+0x360` extended-method-table field at it
  * directly, matching the real decompile - same fix already applied to
  * kGLRegularMethods above for the same reason. */
-const VendorExternalMethod kGLSpecialMethod20 = {
+extern const VendorExternalMethod kGLSpecialMethod20 = {
     0, 0xffff, OSMemberFunctionCast(void *, static_cast<ATIR500GLContext *>(0), &ATIR500GLContext::get_hw_info), 0, 0, 5
 };
 

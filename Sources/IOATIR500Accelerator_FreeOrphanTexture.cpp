@@ -22,9 +22,8 @@
  * `waitForTimeStamp` `+0x54c` slot (same real argument-dropped
  * situation this project already documents for
  * `freeTransferToAllocGART`). Between iterations after the first, calls
- * a real, address-pinned, unconfirmed single-arg external
- * (`FUN_000037dc`, real arg `0` - plausibly `IODelay`/`IOSleep` by
- * shape, not confirmed) before tearing the node down via
+ * a single-arg external (`FUN_000037dc`, real arg `0`, RESOLVED in
+ * issue #58 follow-up as `thread_block(0)` via live kxld read) before tearing the node down via
  * `IOATIR500Shared::free_texvert`.
  *
  * Confidence: CONFIRMED for control flow and every real offset/literal
@@ -44,10 +43,9 @@ typedef bool (*ScheduleFn)(void *, UInt32);
 typedef UInt32 (*ReleaseFn)(void *);
 } // namespace
 
-/* real, address-pinned - own identity NOT independently confirmed;
- * plausibly IODelay/IOSleep by its single-UInt32-arg, no-return shape
- * and its use as a between-iterations yield. */
-extern "C" void FUN_000037dc(UInt32 arg);
+/* FUN_000037dc: kxld-patched stub, live target 0x32eec = thread_block
+ * (exact nm match); a plain yield between iterations. */
+extern "C" void FreeOrphan_thread_block(UInt32 continuation) asm("_thread_block");
 
 void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -90,7 +88,7 @@ void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
         }
 
         if (notFirst) {
-            FUN_000037dc(0);
+            FreeOrphan_thread_block(0);
         }
         IOATIR500Shared::free_texvert(this, reinterpret_cast<IOTextureBuffer *>(node));
 

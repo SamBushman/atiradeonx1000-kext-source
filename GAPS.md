@@ -1076,8 +1076,8 @@ into the free list, and `dealloc` reads its neighbor pointers back out to merge 
 remained open per this project's own standard (real progress, not full closure): the exact real bootstrap
 topology `init_pool`'s own chunk-carving builds (transcribed as literal raw offset arithmetic, not fully
 resolved into named fields) - still open. The class's own unidentified vtable `+0x48`/`+0x4c` slots
-(`init`/`free`'s own gate) are now RESOLVED, issue #52: both are Apple's own standard `OSObject::
-_RESERVEDOSObject0/1()` reserved-for-future-use no-ops, not a custom init/free pair - see section 24.
+(`init`/`free`) are `ATIR500Memory::init()`/`free()` themselves (the class's own custom init/free virtual
+pair) - CORRECTED, issue #58 follow-up: issue #52's "reserved no-ops" reading was wrong; see section 24.
 
 **Also resolved since** (issue #23): `waitForTimeStamp`/`sleepForTimeStamp`/`waitForConsumedIDCTTimeStamp`
 (`Sources/ATIRadeonX1000_TimeStampWait.cpp`) - three real, independently-compiled instances of one real
@@ -1273,10 +1273,16 @@ A third systematic sweep for every remaining declared-but-bodyless function and 
 
 ## 24. `ATIR500Memory`'s `+0x4c` vtable slot and `accelerator+0x238`'s object type - PARTIAL PROGRESS, issue #52 (open)
 
-The `+0x4c` (and `+0x48`) vtable slots are RESOLVED, via the same live `/dev/kmem` technique as section 23 -
-both are Apple's own standard `OSObject::_RESERVEDOSObject0/1()` reserved-for-future-use no-ops, not a custom
-init/free virtual pair as this project's prior account had speculated (this explains `init()`'s own
-"success" check, which never actually gates on anything real). `accelerator+0x238`'s own real object type
+The `+0x4c` (and `+0x48`) vtable slots were reported RESOLVED (issue #52) as `OSObject::_RESERVEDOSObject0/1()`
+no-ops. **That was WRONG - CORRECTED, issue #58 follow-up.** The class's own vtable (`__ZTV13ATIR500Memory`, 0x49078;
+its entries are named by the Mach-O relocation table, no hardware needed) has `+0x48` = `ATIR500Memory::init()`
+(0x18d50) and `+0x4c` = `ATIR500Memory::free()` (0x19120) - a genuine custom init/free virtual pair, as this
+project's original account had it; `_RESERVEDOSObject0/1` are the entries at +0x50/+0x54. The issue #52 read
+landed two slots too far. Inside those functions, the `(*pcRam00000048)()` / `(*pcRam0000004c)(this)` calls are the
+qualified base calls `OSObject::init()` / `OSObject::free()` (relocations against `__ZTV8OSObject`; slots +0x48/+0x4c
+of the kernel's OSObject vtable, read statically from /mach_kernel). See Sources/ATIR500Memory_Lifecycle.cpp.
+
+`accelerator+0x238`'s own real object type
 remains OPEN - identifying it needs a *live accelerator instance's* own runtime address (to read its `+0x238`
 field, then identify what the pointed-to object's own vtable belongs to), a fundamentally different problem
 from reading static kext data; `ioreg` doesn't expose raw kernel addresses. Left genuinely open rather than

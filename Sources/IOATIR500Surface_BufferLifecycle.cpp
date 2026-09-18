@@ -81,7 +81,10 @@ UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, V
  * throughout (e.g. every `resolve`-shaped vtable call elsewhere in
  * this file set) - modeled as the literal `0x1000` here instead.
  */
-extern "C" void *FUN_000128ec(UInt32 options, UInt32 size, UInt32 type, void *owningTask);
+/* FUN_000128ec: RESOLVED (issue #58 follow-up) - live kxld target 0x2d617c,
+ * IOMemoryDescriptor::withAddress(unsigned long, unsigned long, IODirection,
+ * task*). Parameters below renamed from the earlier guesses to the real ones. */
+extern "C" void *FUN_000128ec(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
 
 bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 options, UInt32 rowMultiplier) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

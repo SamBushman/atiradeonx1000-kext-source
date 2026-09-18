@@ -316,10 +316,10 @@ void ATIR500GLContext::discard_command_buffer(void) {
                 void *memHandle = nullptr;
                 if (U32At(newTex, 0x54) != 0) {
                     void *relatedObj = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(newTex, 0x54)), 8));
-                    extern int _ASICSupportsAGP;
+                    extern int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
                     typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
                     memHandle = (*reinterpret_cast<PrepareMappingFn *>(
-                        *reinterpret_cast<void ***>(relatedObj) + (0x14c / 4)))(relatedObj, _ASICSupportsAGP, 0, 1, 0, 0);
+                        *reinterpret_cast<void ***>(relatedObj) + (0x14c / 4)))(relatedObj, kernelTaskRef, 0, 1, 0, 0);
                     if (memHandle != nullptr) {
                         typedef UInt32 *(*GetHwInfoFn)(void *);
                         UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(

@@ -72,7 +72,7 @@
 #include "../Headers/ATIRadeonX1000.h"
 
 extern "C" void *FUN_00012034(UInt32 options, UInt32 capacity, int task) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 namespace {
 inline UInt8 *ByteAt(void *base, int offset) { return reinterpret_cast<UInt8 *>(base) + offset; }
@@ -99,7 +99,7 @@ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 param1, UInt32 param2) 
             UInt8 *ptrSlot = self + slotBase + 0xc44;
             UInt8 *hdrSlot = self + slotBase + 0xc50;
             do {
-                memHandle = FUN_00012034(U32At(accel, 0x82c) | 0x10023, param2, _ASICSupportsAGP);
+                memHandle = FUN_00012034(U32At(accel, 0x82c) | 0x10023, param2, kernelPageSize);
                 U32At(ptrSlot, 0) = reinterpret_cast<UInt32>(memHandle);
                 if (memHandle == nullptr) {
                     if (successCount > 3) {

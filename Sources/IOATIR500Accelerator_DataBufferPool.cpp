@@ -66,14 +66,14 @@
 
 extern "C" void *FUN_inTaskWithOptions(void *task, UInt32 options, UInt32 capacity, int align) asm("__ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj");
 extern "C" void *FUN_withOptions(UInt32 options, UInt32 capacity, int align) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
 bool IOATIR500Accelerator::allocDataBufferBacking(VendorTextureBuffer *buffer) {
-    void *desc = FUN_inTaskWithOptions(nullptr, 0x10422, buffer->poolSizeClass, _ASICSupportsAGP);
+    void *desc = FUN_inTaskWithOptions(nullptr, 0x10422, buffer->poolSizeClass, kernelPageSize);
     buffer->memoryDescriptor = desc;
     return desc != nullptr;
 }
@@ -108,7 +108,7 @@ bool IOATIR500Accelerator::getVRAMDescriptors(void) {
 
 bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size) {
     UInt8 *buf = reinterpret_cast<UInt8 *>(outBuffer);
-    void *memHandle = FUN_withOptions(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x82c) | 0x10022, size, _ASICSupportsAGP);
+    void *memHandle = FUN_withOptions(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x82c) | 0x10022, size, kernelPageSize);
     *reinterpret_cast<void **>(buf + 8) = memHandle;
     if (memHandle == nullptr) {
         return false;

@@ -70,12 +70,11 @@
  * object references the real named kernel symbol, not that it
  * replicates the original's internal stub chain).
  *
- * One helper's real identity is NOT confirmed even by inference:
  * `FUN_00017508` (single pointer in, pointer out, gates a "reuse
  * existing AGP companion vs. treat as invalidated" branch in
- * `new_agp_texture`) - left as a real, address-pinned, honestly-
- * unconfirmed extern, matching this project's established convention
- * for exactly this situation (e.g. `FUN_00004ea8`).
+ * `new_agp_texture`) - RESOLVED (issue #58 follow-up): live kxld read shows
+ * it targets `IOMemoryDescriptor::withPersistentMemoryDescriptor(
+ * IOMemoryDescriptor*)` (kernel 0x2d6514, exact nm match).
  *
  * One faithfully-preserved real-binary oddity: `new_texture`'s failed-
  * map (`+0x14c` returns null) failure path frees the buf handle and
@@ -110,11 +109,10 @@ extern "C" UInt32 OSDecrementAtomic_TexAlloc(void *addr) asm("_OSDecrementAtomic
 extern "C" UInt32 OSIncrementAtomic_TexAlloc(void *addr) asm("_OSIncrementAtomic");
 extern "C" void *IOMalloc_TexAlloc(UInt32 size) asm("_IOMalloc");
 extern "C" void IOFree_TexAlloc(void *ptr, UInt32 size) asm("_IOFree");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
+extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value (alloc_client_shared's map() task argument) */
 
-/* real, address-pinned - own identity NOT independently confirmed; see
- * this file's own header comment. */
-extern "C" void *FUN_00017508(void *obj);
+extern "C" void *FUN_00017508(void *obj) asm("__ZN18IOMemoryDescriptor30withPersistentMemoryDescriptorEPS_");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -259,7 +257,7 @@ bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared **outKer
             return false;
         }
         node[1] = reinterpret_cast<UInt32>(
-            FUN_inTaskWithOptions(*reinterpret_cast<void **>(self + 8), 0x10022, 0x2000, _ASICSupportsAGP));
+            FUN_inTaskWithOptions(*reinterpret_cast<void **>(self + 8), 0x10022, 0x2000, kernelPageSize));
         if (node[1] == 0) {
             goto releaseNode;
         }
@@ -271,7 +269,7 @@ bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared **outKer
                 reinterpret_cast<void *>(node[2]));
             node[3] = reinterpret_cast<UInt32>(
                 (*reinterpret_cast<MapFn *>(*reinterpret_cast<void ***>(node[1]) + (0x14c / 4)))(
-                    reinterpret_cast<void *>(node[1]), reinterpret_cast<void *>(_ASICSupportsAGP), 0, 1, 0, 0));
+                    reinterpret_cast<void *>(node[1]), reinterpret_cast<void *>(kernelTaskRef), 0, 1, 0, 0));
             if (node[3] != 0) {
                 UInt8 *owner = *reinterpret_cast<UInt8 **>(self + 0xc);
                 if (owner != nullptr) {
@@ -619,10 +617,10 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(UInt32 param1, UInt32 para
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
     void **accelVtable = *reinterpret_cast<void ***>(accel);
 
-    UInt32 pageOffset = (static_cast<UInt32>(_ASICSupportsAGP) - 1) & param1;
-    UInt32 pageBase = param1 & static_cast<UInt32>(-_ASICSupportsAGP);
-    UInt32 roundedSize = static_cast<UInt32>(-_ASICSupportsAGP) &
-                          ((static_cast<UInt32>(_ASICSupportsAGP) + pageOffset + param2) - 1);
+    UInt32 pageOffset = (static_cast<UInt32>(kernelPageSize) - 1) & param1;
+    UInt32 pageBase = param1 & static_cast<UInt32>(-kernelPageSize);
+    UInt32 roundedSize = static_cast<UInt32>(-kernelPageSize) &
+                          ((static_cast<UInt32>(kernelPageSize) + pageOffset + param2) - 1);
 
     if (roundedSize > (U32At(accel, 0x830) * 0xc00) >> 2) {
         return nullptr;
@@ -631,7 +629,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(UInt32 param1, UInt32 para
     void *memDesc = nullptr;
     if (pageBase == 0) {
         memDesc = FUN_inTaskWithOptions(reinterpret_cast<void *>(U32At(self, 8)),
-                                         U32At(accel, 0x82c) | 0x10022, roundedSize, _ASICSupportsAGP);
+                                         U32At(accel, 0x82c) | 0x10022, roundedSize, kernelPageSize);
         if (memDesc == nullptr) {
             return nullptr;
         }
@@ -757,8 +755,8 @@ VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, 
         kind = 7; baseSize = 0xa00;
     }
 
-    UInt32 roundedSize = (baseSize + param1 + static_cast<UInt32>(_ASICSupportsAGP) + 7) &
-                          static_cast<UInt32>(-_ASICSupportsAGP);
+    UInt32 roundedSize = (baseSize + param1 + static_cast<UInt32>(kernelPageSize) + 7) &
+                          static_cast<UInt32>(-kernelPageSize);
     UInt8 *tex = nullptr;
     void *memDesc = nullptr;
 
@@ -771,7 +769,7 @@ VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, 
             return nullptr;
         }
         memDesc = FUN_inTaskWithOptions(reinterpret_cast<void *>(U32At(self, 8)),
-                                         U32At(accel, 0x82c) | 0x10022, roundedSize, _ASICSupportsAGP);
+                                         U32At(accel, 0x82c) | 0x10022, roundedSize, kernelPageSize);
         if (memDesc != nullptr) {
             U32At(tex, 8) = reinterpret_cast<UInt32>(memDesc);
             UInt32 handle;

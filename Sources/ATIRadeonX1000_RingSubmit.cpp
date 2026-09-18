@@ -10,12 +10,9 @@
  * for the full real-structure summary.
  *
  * Real external symbols used here:
- *   `FUN_00020cc4`/`FUN_0001d7ec` - real, address-pinned, single-
- *   UInt32-arg, no-return short-delay helpers between poll iterations -
- *   own exact identity NOT independently confirmed (plausibly
- *   `IODelay`, matching this project's own already-documented
- *   `FUN_000037dc` precedent in `IOATIR500Accelerator_
- *   FreeOrphanTexture.cpp`), but NOT asserted as such here.
+ *   `FUN_00020cc4`/`FUN_0001d7ec` - RESOLVED (issue #58 follow-up): both
+ *   are kxld-patched stubs whose live target is `IOSleep` (kernel
+ *   0x2b255c, exact nm match); the real args (1 and 10) are milliseconds.
  *   `FUN_00020c94`/`FUN_0001d7dc` - real varargs logging calls (format-
  *   string-plus-values shape) - declared here as `IOLog` by strong
  *   shape match (Apple's standard kernel varargs logger), consistent
@@ -34,6 +31,7 @@
 
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Registers.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h" /* dcbf/dcbst/eieio/isync, see that header */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -48,17 +46,10 @@ inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(r
 inline UInt32 ReadLE16(void *addr) { return static_cast<UInt32>(U8At(addr, 0)) | (static_cast<UInt32>(U8At(addr, 1)) << 8); }
 } // namespace
 
-extern "C" void enforceInOrderExecutionIO(void);
-extern "C" void dataCacheBlockStore(UInt32 addr);
-extern "C" void dataCacheBlockFlush(UInt32 addr);
 extern "C" void sync(int);
-extern "C" void instructionSynchronize(void);
 
-/* real, address-pinned - own identity NOT independently confirmed;
- * plausibly IODelay by shape (single UInt32 arg, no return, used as a
- * short between-poll-iterations yield). */
-extern "C" void RingSubmit_FUN_00020cc4(UInt32 arg);
-extern "C" void RingSubmit_FUN_0001d7ec(UInt32 arg);
+/* FUN_00020cc4 and FUN_0001d7ec: two separate stubs, same target. */
+extern "C" void RingSubmit_IOSleep(UInt32 milliseconds) asm("_IOSleep");
 
 /* real varargs logger - shape (format string + values, no return used)
  * matches Apple's standard kernel IOLog exactly. */
@@ -68,7 +59,7 @@ extern "C" void RingSubmit_IOLog(const char *fmt, ...) asm("_IOLog");
  * published API. */
 extern "C" void RingSubmit_assert_wait_timeout(void *event, int interruptible, UInt32 interval, UInt32 scaleFactor) asm("_assert_wait_timeout");
 extern "C" void RingSubmit_thread_block(void *continuation) asm("_thread_block");
-extern "C" void *_gl_assert_wait_timeout_event;
+extern "C" UInt32 _gl_assert_wait_timeout_event;
 
 void ATIRadeonX1000::submit_ring_data() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -170,7 +161,7 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32 *bufferStart, UInt32 bufferOffsetOrE
         UInt32 tries = 0;
         do {
             tries++;
-            RingSubmit_FUN_00020cc4(1);
+            RingSubmit_IOSleep(1);
             mmio = reinterpret_cast<UInt8 *>(U32At(self, 0x90c));
             mmioOff = reinterpret_cast<UInt8 *>(U32At(self, 0x910));
             wptr = U32At(self, 0x914);
@@ -222,7 +213,7 @@ haveFifoSpace:
         UInt32 tries2 = 0;
         do {
             tries2++;
-            RingSubmit_FUN_00020cc4(1);
+            RingSubmit_IOSleep(1);
             wptr = U32At(self, 0x914);
             fifoMargin = static_cast<SInt32>(((ReadLE16(reinterpret_cast<UInt8 *>(U32At(self, 0x90c)) + U32At(self, 0x910)) - wptr) - 1) & 0x7ff) - 7;
             if (fifoMargin > 4) {
@@ -519,10 +510,10 @@ void ATIRadeonX1000::DumpASICHangState() {
     } while (tries != 0x186a1);
 
     UInt8 hi = U8At(mmio2, 0x5003), lo = U8At(mmio2, 0x5002);
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
     UInt32 header = (static_cast<UInt32>(hi) << 8 | static_cast<UInt32>(lo)) | 0x1000000;
     RingSubmit_IOLog("** ASIC Hang Log Start **\n");
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     UInt8 *m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     U32At(m, 0x30) = 0x21000000; enforceInOrderExecutionIO();
@@ -531,7 +522,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 v2 = (static_cast<UInt32>(U8At(m, 0x37)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x36)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x35)) << 8) | U8At(m, 0x34);
     UInt32 v3 = (static_cast<UInt32>(U8At(m, 0x7ff)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x7fe)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x7fd)) << 8) | U8At(m, 0x7fc);
     RingSubmit_IOLog("0x%08lx %08lx %08lx %08lx\n", static_cast<unsigned long>(header), static_cast<unsigned long>(v1), static_cast<unsigned long>(v2), static_cast<unsigned long>(v3));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     UInt32 v4 = (static_cast<UInt32>(U8At(m, 0x7fb)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x7fa)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x7f9)) << 8) | U8At(m, 0x7f8);
@@ -539,7 +530,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 v6 = (static_cast<UInt32>(U8At(m, 0x793)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x792)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x791)) << 8) | U8At(m, 0x790);
     UInt32 v7 = (static_cast<UInt32>(U8At(m, 0x7b3)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x7b2)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x7b1)) << 8) | U8At(m, 0x7b0);
     RingSubmit_IOLog("0x%08lx %08lx %08lx %08lx\n", static_cast<unsigned long>(v4), static_cast<unsigned long>(v5), static_cast<unsigned long>(v6), static_cast<unsigned long>(v7));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     U32At(m, 0x30) = 0x10000000; enforceInOrderExecutionIO();
@@ -553,7 +544,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 v10 = (static_cast<UInt32>(U8At(m, 0xe7f)) << 0x18) | (static_cast<UInt32>(U8At(m, 0xe7e)) << 0x10) | (static_cast<UInt32>(U8At(m, 0xe7d)) << 8) | U8At(m, 0xe7c);
     UInt32 v11 = (static_cast<UInt32>(U8At(m, 0xe43)) << 0x18) | (static_cast<UInt32>(U8At(m, 0xe42)) << 0x10) | (static_cast<UInt32>(U8At(m, 0xe41)) << 8) | U8At(m, 0xe40);
     RingSubmit_IOLog("0x%08lx %08lx %08lx %08lx\n", static_cast<unsigned long>(v8), static_cast<unsigned long>(v9), static_cast<unsigned long>(v10), static_cast<unsigned long>(v11));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     UInt32 v12 = (static_cast<UInt32>(U8At(m, 0x2143)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x2142)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x2141)) << 8) | U8At(m, 0x2140);
@@ -562,7 +553,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 v14 = (static_cast<UInt32>(U8At(m, 0x4f)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x4e)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x4d)) << 8) | U8At(m, 0x4c);
     UInt32 v15 = (static_cast<UInt32>(U8At(m, 0x743)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x742)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x741)) << 8) | U8At(m, 0x740);
     RingSubmit_IOLog("0x%08lx %08lx %08lx %08lx\n", static_cast<unsigned long>(v12), static_cast<unsigned long>(v13), static_cast<unsigned long>(v14), static_cast<unsigned long>(v15));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     UInt32 v16 = (static_cast<UInt32>(U8At(m, 0x7d3)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x7d2)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x7d1)) << 8) | U8At(m, 2000);
@@ -571,7 +562,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 v18 = (static_cast<UInt32>(U8At(m, 0x37)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x36)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x35)) << 8) | U8At(m, 0x34);
     UInt32 v19 = (static_cast<UInt32>(U8At(m, 0x133)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x132)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x131)) << 8) | U8At(m, 0x130);
     RingSubmit_IOLog("0x%08lx %08lx %08lx %08lx\n", static_cast<unsigned long>(v16), static_cast<unsigned long>(v17), static_cast<unsigned long>(v18), static_cast<unsigned long>(v19));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     m = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
     UInt32 v20 = (static_cast<UInt32>(U8At(m, 0x1727)) << 0x18) | (static_cast<UInt32>(U8At(m, 0x1726)) << 0x10) | (static_cast<UInt32>(U8At(m, 0x1725)) << 8) | U8At(m, 0x1724);
@@ -581,7 +572,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 total = header + v1 + v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12 + v13 + v14 + v15 + v16 + v17 + v18 + v19 + v20 + v21 + v22;
 
     RingSubmit_IOLog("0x%08lx %08lx %08lx\n", static_cast<unsigned long>(v20), static_cast<unsigned long>(v21), static_cast<unsigned long>(v22));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 
     UInt32 idx = 0;
     do {
@@ -592,14 +583,14 @@ void ATIRadeonX1000::DumpASICHangState() {
                       (static_cast<UInt32>(U8At(m2, 0x7f5)) << 8) | U8At(m2, 0x7f4);
         total += word;
         RingSubmit_IOLog("%ld:0x%08lx\n", static_cast<long>(idx >> 2), static_cast<unsigned long>(word));
-        RingSubmit_FUN_0001d7ec(10);
+        RingSubmit_IOSleep(10);
         bool cont = (idx != 0xffc);
         idx += 4;
         if (!cont) break;
     } while (true);
 
     RingSubmit_IOLog("0x%08lx\n", static_cast<unsigned long>(total));
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
     RingSubmit_IOLog("** ASIC Hang Log End **\n");
-    RingSubmit_FUN_0001d7ec(10);
+    RingSubmit_IOSleep(10);
 }

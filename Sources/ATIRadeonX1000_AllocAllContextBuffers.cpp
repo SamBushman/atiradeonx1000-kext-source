@@ -89,7 +89,7 @@
    all resolve to - see Sources/IOATIR500Accelerator_DataBufferPool.cpp
    for the original resolution. */
 extern "C" void *FUN_withOptions(UInt32 options, UInt32 capacity, int align) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -138,7 +138,7 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt32 flags = 0x10023 | U32At(*reinterpret_cast<UInt8 **>(self + 200), 0x82c);
 
-    void *primaryBuf = FUN_withOptions(flags, size, _ASICSupportsAGP);
+    void *primaryBuf = FUN_withOptions(flags, size, kernelPageSize);
     *reinterpret_cast<void **>(self + 0xfc) = primaryBuf;
     if (primaryBuf == nullptr) {
         return false;
@@ -152,7 +152,7 @@ bool IOATIR500GLContext::allocAllContextBuffers(UInt32 size) {
     int count = 0;
     for (;;) {
         UInt32 flags2 = 0x10023 | U32At(*reinterpret_cast<UInt8 **>(self + 200), 0x82c);
-        void *buf = FUN_withOptions(flags2, size, _ASICSupportsAGP);
+        void *buf = FUN_withOptions(flags2, size, kernelPageSize);
         *reinterpret_cast<void **>(entry) = buf;
         if (buf == nullptr) {
             ReleaseAndZeroEntries(self + 0x114, 0x18, count);
@@ -182,7 +182,7 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt32 flags = 0x10023 | U32At(*reinterpret_cast<UInt8 **>(self + 0x94), 0x82c);
 
-    void *primaryBuf = FUN_withOptions(flags, size, _ASICSupportsAGP);
+    void *primaryBuf = FUN_withOptions(flags, size, kernelPageSize);
     *reinterpret_cast<void **>(self + 0xbc) = primaryBuf;
     if (primaryBuf == nullptr) {
         return false;
@@ -196,7 +196,7 @@ bool IOATIR5002DContext::allocAllContextBuffers(UInt32 size) {
     int count = 0;
     for (;;) {
         UInt32 flags2 = 0x10023 | U32At(*reinterpret_cast<UInt8 **>(self + 0x94), 0x82c);
-        void *buf = FUN_withOptions(flags2, size, _ASICSupportsAGP);
+        void *buf = FUN_withOptions(flags2, size, kernelPageSize);
         *reinterpret_cast<void **>(entry) = buf;
         if (buf == nullptr) {
             ReleaseAndZeroEntries(self + 0xd4, 0x18, count);
@@ -227,7 +227,7 @@ bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 size) {
 
     /* real: DVD, unlike GL/2D, passes the plain literal 0x10023 with NO
        per-accelerator flag OR - transcribed exactly as decompiled. */
-    void *primaryBuf = FUN_withOptions(0x10023, size, _ASICSupportsAGP);
+    void *primaryBuf = FUN_withOptions(0x10023, size, kernelPageSize);
     *reinterpret_cast<void **>(self + 0xb4) = primaryBuf;
     if (primaryBuf == nullptr) {
         return false;
@@ -240,7 +240,7 @@ bool IOATIR500DVDContext::allocAllContextBuffers(UInt32 size) {
     UInt8 *entry = self + 0xcc;
     int count = 0;
     for (;;) {
-        void *buf = FUN_withOptions(0x10023, size, _ASICSupportsAGP);
+        void *buf = FUN_withOptions(0x10023, size, kernelPageSize);
         *reinterpret_cast<void **>(entry) = buf;
         if (buf == nullptr) {
             ReleaseAndZeroEntries(self + 0xcc, 0x18, count);

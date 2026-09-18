@@ -250,7 +250,10 @@ extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25win
  * own comment for the real linkage bug this replaced. */
 /* RESOLVED, issue #27: real target memmove, same real target as issue #15's FUN_000314c4/FUN_00044868 */
 extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCount) asm("_memmove");
-extern const UInt32 kShapeSurfaceDefaultMipTable[14]; /* real: shape_surface()::C_146, real content not extracted this pass */
+/* shape_surface()::C.146 - real addr 0x4c284 in __const, 0x38 bytes. Extracted from the binary (issue #58
+ * follow-up): all 14 words are zero (and no relocations overlap the range), i.e. the compiler's
+ * copy of an all-zero initialiser for the local `localMipOffsets[14]`. */
+extern const UInt32 kShapeSurfaceDefaultMipTable[14] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 /* FIXED (issue #1, first build attempt): this function previously wrote
  * raw byte offsets as `this[N] = static_cast<ATIR500Surface>(...)`. Since

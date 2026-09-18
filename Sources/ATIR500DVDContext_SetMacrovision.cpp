@@ -47,7 +47,11 @@
 extern "C" void DVD_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void DVD_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
 extern "C" void *FUN_safeMetaCast(void *obj, void *metaClass) asm("__ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass");
-extern "C" int _ASICSupportsAGP;
+/* CORRECTED (issue #58 follow-up): the Ghidra label "_ASICSupportsAGP" here hid a relocation whose
+ * real target (from the Mach-O relocation table; site 0x35060 is `lis/lwz`, a VALUE load) is
+ * `IONDRVFramebuffer::metaClass` - i.e. this is `OSDynamicCast(IONDRVFramebuffer, tableEntry)`.
+ * The old transcription passed the ADDRESS of a page-size variable. */
+extern "C" void *IONDRVFramebuffer_metaClass asm("__ZN17IONDRVFramebuffer9metaClassE");
 
 IOReturn ATIR500DVDContext::set_macrovision(UInt32 enable) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -60,7 +64,7 @@ IOReturn ATIR500DVDContext::set_macrovision(UInt32 enable) {
     } else {
         UInt32 fbIndex = boundSurface->getFramebufferIndex();
         void *tableEntry = *reinterpret_cast<void **>(accel + fbIndex * 0x20 + 0xd4);
-        void *casted = FUN_safeMetaCast(tableEntry, reinterpret_cast<void *>(&_ASICSupportsAGP));
+        void *casted = FUN_safeMetaCast(tableEntry, IONDRVFramebuffer_metaClass);
         *reinterpret_cast<void **>(self + 0x160) = casted;
         if (casted == nullptr) {
             result = 0xe00002c0;

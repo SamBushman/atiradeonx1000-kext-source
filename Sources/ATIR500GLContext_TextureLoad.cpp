@@ -875,12 +875,12 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
      * `_ASICSupportsAGP` is Ghidra's own (plausibly misleading - it's used
      * elsewhere as a raw shift count, not just a boolean) auto-name for a
      * real global this project has not independently investigated. */
-    extern int _ASICSupportsAGP;
+    extern int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
     typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
     void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
     void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
         *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-        memoryDescriptor, _ASICSupportsAGP, 0,
+        memoryDescriptor, kernelTaskRef, 0,
         *reinterpret_cast<UInt32 *>(accel + 0x82c) | 1, 0, 0);
     if (memHandle == nullptr) return;
 

@@ -60,14 +60,17 @@ typedef UInt32 (*Fn0x55c)(void *, UInt32);
 extern "C" void ClientMem_mutex_lock(void *lockPtr) asm("_mutex_lock");
 extern "C" void ClientMem_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
 extern "C" void ClientMem_IOLockSleep(void *lockPtr, void *event, UInt32 zero) asm("_IOLockSleep");
-extern "C" void *ClientMem_FUN_0000aee8(UInt32 options, UInt32 capacity, int align);
-extern "C" void ClientMem_FUN_0000aed8(void *dest, void *src, UInt32 size);
-/* real, address-pinned - own identity NOT independently confirmed;
- * called as a pair immediately after unlocking in a retry loop,
- * plausibly a yield/short-delay pair. */
-extern "C" void ClientMem_FUN_0000af98(UInt32 arg);
-extern "C" void ClientMem_FUN_0000af88(UInt32 arg);
-extern "C" int _ASICSupportsAGP;
+/* RESOLVED (issue #58 follow-up): the four former FUN_0000aee8/aed8/af98/af88
+ * lazy-binding stubs, resolved via live kxld read (slide 0x589000; exact
+ * offset-0 matches in nm /mach_kernel). aed8 targets 0xacbe0, where _memcpy
+ * and _memmove are aliases of the same code - memmove chosen (overlap-safe). */
+extern "C" void *ClientMem_IOBufferMemoryDescriptor_withOptions(UInt32 options, UInt32 capacity, UInt32 alignment) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
+extern "C" void ClientMem_memmove(void *dest, const void *src, UInt32 size) asm("_memmove");
+/* called as a pair immediately after unlocking in a retry loop: a
+ * thread_block(0) yield followed by a 1 ms IOSleep. */
+extern "C" void ClientMem_thread_block(UInt32 continuation) asm("_thread_block");
+extern "C" void ClientMem_IOSleep(UInt32 milliseconds) asm("_IOSleep");
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 void IOATIR500GLContext::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size, UInt32 extra) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -119,8 +122,8 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
     }
     case 4: {
         if (U32At(self, 0xb8) == 0) {
-            U32At(self, 0xbc) = _ASICSupportsAGP;
-            UInt8 *desc = reinterpret_cast<UInt8 *>(ClientMem_FUN_0000aee8(0x10023, _ASICSupportsAGP, _ASICSupportsAGP));
+            U32At(self, 0xbc) = kernelPageSize;
+            UInt8 *desc = reinterpret_cast<UInt8 *>(ClientMem_IOBufferMemoryDescriptor_withOptions(0x10023, kernelPageSize, kernelPageSize));
             U32At(self, 0xb8) = reinterpret_cast<UInt32>(desc);
             if (desc != nullptr) {
                 typedef UInt32 (*Fn0x1cc)(void *);
@@ -134,11 +137,11 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
             }
         } else {
             UInt32 oldSize = U32At(self, 0xbc);
-            UInt8 *desc = reinterpret_cast<UInt8 *>(ClientMem_FUN_0000aee8(0x10023, oldSize << 1, _ASICSupportsAGP));
+            UInt8 *desc = reinterpret_cast<UInt8 *>(ClientMem_IOBufferMemoryDescriptor_withOptions(0x10023, oldSize << 1, kernelPageSize));
             if (desc != nullptr) {
                 typedef UInt32 (*Fn0x1cc)(void *);
                 UInt32 va = (*reinterpret_cast<Fn0x1cc *>(*reinterpret_cast<void ***>(desc) + (0x1cc / 4)))(desc);
-                ClientMem_FUN_0000aed8(reinterpret_cast<void *>(va), reinterpret_cast<void *>(U32At(self, 0xc0)), oldSize);
+                ClientMem_memmove(reinterpret_cast<void *>(va), reinterpret_cast<void *>(U32At(self, 0xc0)), oldSize);
                 UInt8 *oldDesc = reinterpret_cast<UInt8 *>(U32At(self, 0xb8));
                 (*reinterpret_cast<VoidFn *>(*reinterpret_cast<void ***>(oldDesc) + (0x18 / 4)))(oldDesc);
                 U32At(self, 0xb8) = reinterpret_cast<UInt32>(desc);
@@ -246,8 +249,8 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
                     if (retries != 1000) {
                         retries++;
                         ClientMem_mutex_unlock(*reinterpret_cast<void **>(accel + 0x840));
-                        ClientMem_FUN_0000af98(0);
-                        ClientMem_FUN_0000af88(1);
+                        ClientMem_thread_block(0);
+                        ClientMem_IOSleep(1);
                         goto retryFromTop;
                     }
                 forceRetry:
@@ -324,7 +327,7 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
                 }
 
                 UInt8 *ctxHeader = reinterpret_cast<UInt8 *>(U32At(self, 0xe0));
-                if (static_cast<UInt32>(U32At(ctxHeader, 0x10) * 4 - _ASICSupportsAGP) <
+                if (static_cast<UInt32>(U32At(ctxHeader, 0x10) * 4 - kernelPageSize) <
                     static_cast<UInt32>(local5c - reinterpret_cast<UInt32>(ctxHeader + 0x20)) &&
                     U32At(self, 0xb0) < 0x80000) {
                     U32At(self, 0xb0) <<= 1;

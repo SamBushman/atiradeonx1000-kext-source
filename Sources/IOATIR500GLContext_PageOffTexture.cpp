@@ -58,7 +58,7 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
  * portability nit. Hoisted to file scope, same real targets. */
 extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -160,7 +160,7 @@ void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *texture, long /*
     typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
     void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
         *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-        memoryDescriptor, _ASICSupportsAGP, 0, 1, 0, 0);
+        memoryDescriptor, kernelTaskRef, 0, 1, 0, 0);
     if (memHandle == nullptr) {
         return;
     }

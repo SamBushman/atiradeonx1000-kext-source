@@ -55,7 +55,7 @@
 #include "../Headers/IOATIR500Accelerator.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 void IOATIR500Accelerator::pageOffDataBuffer(VendorTextureBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -86,7 +86,7 @@ void IOATIR500Accelerator::pageOffDataBuffer(VendorTextureBuffer *buffer) {
     void *memoryDescriptor = buffer->memoryDescriptor;
     void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
         *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-        memoryDescriptor, _ASICSupportsAGP, 0, 0x401, 0, 0);
+        memoryDescriptor, kernelTaskRef, 0, 0x401, 0, 0);
     if (memHandle != nullptr) {
         typedef UInt32 *(*GetHwInfoFn)(void *);
         UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);

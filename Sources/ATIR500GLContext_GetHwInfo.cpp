@@ -22,7 +22,7 @@
 #include "../Headers/ATIRadeonX1000.h"
 
 extern "C" void GetHwInfo_mutex_lock(void *lockPtr) asm("_mutex_lock");
-extern "C" void GetHwInfo_mutex_unlock(void *lockPtr) asm("_mutex_unlock");
+extern "C" void GetHwInfo_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
 
 UInt32 ATIRadeonX1000::getNumPipes() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xb98); }
 UInt32 ATIRadeonX1000::getChipID() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xc50); }

@@ -63,7 +63,7 @@
 #include "../Headers/ATIR500Memory.h"
 #include "../Headers/ATIRadeonX1000Registers.h"
 
-extern "C" int _ASICSupportsAGP; /* real global, already referenced elsewhere in this project (ATIR500GLContext_TextureLoad.cpp) */
+extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -101,7 +101,7 @@ IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
         typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
         void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
         void *piVar2 = (*reinterpret_cast<PrepareMappingFn *>(*reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-            memoryDescriptor, _ASICSupportsAGP, 0, 1, 0, 0);
+            memoryDescriptor, kernelTaskRef, 0, 1, 0, 0);
         if (piVar2 != nullptr) {
             typedef UInt32 *(*GetHwInfoFn)(void *);
             UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(piVar2) + (0xd0 / 4)))(piVar2);

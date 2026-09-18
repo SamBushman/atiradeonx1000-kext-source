@@ -52,8 +52,8 @@
 
 #include "../Headers/ATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h" /* dcbf/dcbst/eieio/isync, see that header */
 
-extern "C" void enforceInOrderExecutionIO(void); /* real name, found this pass (issue #22) - a real, already-mangled-free (plain C symbol) call in the raw decompile, almost certainly Apple's standard PPC I/O memory barrier primitive of the same public name; not previously referenced anywhere in this project */
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

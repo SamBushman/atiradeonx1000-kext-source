@@ -145,3 +145,37 @@ extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet =
     0x00000000, 0x000110f8, 0x00000000, 0x00000000, 0xc0001000, 0x00000000, 0xc0031000, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x0000082c, 0x00000000,
 } };
+
+/*
+ * ---------------------------------------------------------------------------
+ * Literal-pool constants (issue #14 extracted the values; issue #58 follow-up
+ * adds the DEFINITIONS - Registers.h only ever declared them, so every use
+ * was an unresolved symbol). Values re-read directly from the kext's
+ * __literal4 (0x4c370..) and __literal8 (0x4c3a8..) sections:
+ *   0x4c370 0x00000000 = 0.0f      0x4c374 0x3f800000 = 1.0f
+ *   0x4c37c 0x40c00000 = 6.0f      0x4c380 0x3f000000 = 0.5f
+ *   0x4c3a8 0x4330000080000000 = 2^52 + 2^31  (signed int->double bias)
+ *   0x4c3b0 0x4330000000000000 = 2^52         (unsigned int->double bias)
+ *   0x4c3b8 0x3fe0000000000000 = 0.5
+ * (0x4c378 = 4096.0f and 0x4c384 = 0.015625f also live in __literal4 but no
+ * transcribed function references them by label.)
+ */
+extern "C" const double DOUBLE_0004c3a8 = 4503601774854144.0;
+extern "C" const double DOUBLE_0004c3b0 = 4503599627370496.0;
+extern "C" const double DOUBLE_0004c3b8 = 0.5;
+extern "C" const float  FLOAT_0004c370  = 0.0f;
+extern "C" const float  FLOAT_0004c374  = 1.0f;
+extern "C" const float  FLOAT_0004c37c  = 6.0f;
+extern "C" const float  FLOAT_0004c380  = 0.5f;
+
+/*
+ * Kext-internal zero-initialised globals (real addresses in the kext's own
+ * __bss/__common: 0x4d970 and 0x4d8f4). Declared `extern "C"` at their use
+ * sites but never defined anywhere until now.
+ *   _gl_assert_wait_timeout_event - only its ADDRESS is used, as the event
+ *     handle for assert_wait_timeout().
+ *   _global_dummy_read_back_a_register - a sink that a register read-back is
+ *     stored into to force the preceding register write to post.
+ */
+extern "C" UInt32 _gl_assert_wait_timeout_event = 0;
+extern "C" UInt32 _global_dummy_read_back_a_register = 0;

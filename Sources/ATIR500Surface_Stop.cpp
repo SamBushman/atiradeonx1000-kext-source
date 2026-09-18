@@ -22,10 +22,9 @@
  * Real body, in order:
  * 1. Locks `provider`'s own `commandLock` (`+0x840`) - real stub
  *    addresses `0x3b2fc`/`0x3b2cc` for lock/unlock, presumed
- *    `_mutex_lock`/`_mutex_unlock` by the same established precedent as
- *    every other real `commandLock` bracket in this project (e.g.
- *    `ATIR500DVDContext::set_macrovision`), not independently re-verified
- *    via a fresh live read this pass.
+ *    `_mutex_lock`/`_mutex_unlock_rwcmb` (verified, issue #58 follow-up; see
+ *    the declarations below) like every other real `commandLock` bracket
+ *    in this project (e.g. `ATIR500DVDContext::set_macrovision`).
  * 2. Walks the real 23-entry `ATIR500SurfaceBuffer` array at `this+0xa8`
  *    (stride `0x78` - the SAME array `shape_surface` reshapes), calling
  *    the already-resolved `complete_vram` (vtable `+0x600`) on every slot
@@ -103,12 +102,13 @@ inline void ReleaseObj(void *obj) {
 }
 } // namespace
 
-/* real addrs 0x3b2fc/0x3b2cc - presumed _mutex_lock/_mutex_unlock on
-   provider's own commandLock (+0x840), by the same established precedent
-   as every other real commandLock bracket in this project - not
-   independently re-verified via a fresh live read this pass. */
+/* real addrs 0x3b2fc/0x3b2cc - VERIFIED (issue #58 follow-up), both by live kxld read and by the
+   Mach-O relocation table (`IOLockLock`/`IOLockUnlock`, which kxld resolves to
+   `mutex_lock`/`mutex_unlock_rwcmb`). CORRECTED: this file (and two others) previously aliased the
+   unlock to `_mutex_unlock`, a different kernel function (0xa49c0) than the real target
+   (`_mutex_unlock_rwcmb`, 0xa4b20). */
 extern "C" void FUN_0003b2fc(void *lockPtr) asm("_mutex_lock");
-extern "C" void FUN_0003b2cc(void *lockPtr) asm("_mutex_unlock");
+extern "C" void FUN_0003b2cc(void *lockPtr) asm("_mutex_unlock_rwcmb");
 
 void ATIR500Surface::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

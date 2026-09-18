@@ -30,8 +30,10 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
 
 extern "C" void GLSurfaceRetry_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void GLSurfaceRetry_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
-extern "C" void FUN_000149f4(UInt32); /* real, address-pinned, own identity NOT independently confirmed - a real "yield" step inside this retry loop */
-extern "C" void FUN_000149e4(UInt32); /* real, address-pinned, same real retry-loop role as above, different literal argument */
+/* RESOLVED (issue #58 follow-up): FUN_000149f4 = thread_block (0x32eec),
+ * FUN_000149e4 = IOSleep (0x2b255c) - a yield then a 1 ms sleep, live kxld read. */
+extern "C" void GLSurfaceRetry_thread_block(UInt32 continuation) asm("_thread_block");
+extern "C" void GLSurfaceRetry_IOSleep(UInt32 milliseconds) asm("_IOSleep");
 
 /*
  * alloc_surfaces_retry - CONFIRMED, transcribed faithfully. Real body:
@@ -98,8 +100,8 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, UInt32 lockTy
         {
             UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
             GLSurfaceRetry_mutex_unlock(*reinterpret_cast<void **>(accel + 0x840));
-            FUN_000149f4(0);
-            FUN_000149e4(1);
+            GLSurfaceRetry_thread_block(0);
+            GLSurfaceRetry_IOSleep(1);
             accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
             GLSurfaceRetry_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));
         }

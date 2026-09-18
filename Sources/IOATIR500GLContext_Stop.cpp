@@ -89,8 +89,8 @@
  *    20-entry array of the same name; this is the BASE class's own,
  *    numerically larger block `start()` already zero-initializes as an
  *    "UNKNOWN 0x2a-word block") via a real atomic
- *    decrement-and-check-for-zero helper (`FUN_00008340`, own body NOT
- *    decompiled this pass - same real shape as this project's own
+ *    decrement-and-check-for-zero helper (`FUN_00008340`, since resolved as
+ *    `OSDecrementAtomic`; body not decompiled this pass - same real shape as this project's own
  *    already-named `DecrementRefAndWasLast`/`ReleaseBoundTextureSlot`,
  *    `Sources/ATIR500GLContext_DiscardBuffer.cpp`, but a genuinely
  *    separate compiled subroutine, not that same one), calling
@@ -103,8 +103,8 @@
  * the raw Ghidra decompile for both functions (both short enough, and
  * the base's own size made a full independent raw-disassembly re-check
  * impractical this pass - treat individual literal offsets as CONFIRMED-
- * from-decompile). `FUN_00008340`'s and the accelerator's `+0x538`
- * vtable slot's own real bodies are UNKNOWN. No C++ compiler was
+ * from-decompile). the accelerator's `+0x538`
+ * vtable slot's own real body is UNKNOWN. No C++ compiler was
  * available in the sandboxed environment this was written in (same
  * standing limitation as every other file in this project).
  */
@@ -129,10 +129,12 @@ inline void ReleaseObj(void *obj) {
 /* real, still-undecompiled atomic-decrement-and-check-for-zero helper -
    see file header comment for how this differs from this project's own
    ReleaseBoundTextureSlot/DecrementRefAndWasLast. */
-extern "C" UInt32 FUN_00008340(void *countField);
+/* FUN_00008340: RESOLVED (issue #58 follow-up) - live kxld target 0x30a840 = OSDecrementAtomic,
+ * which returns the PREVIOUS value (so "was last" is old == 1, as the call site tests). */
+extern "C" SInt32 FUN_00008340(void *countField) asm("_OSDecrementAtomic");
 
 extern "C" void GLStop_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLStop_mutex_unlock(void *) asm("_mutex_unlock");
+extern "C" void GLStop_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
 
 void ATIR500GLContext::stop(IOService *provider) {
     void *mtx = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(provider) + 0x840);

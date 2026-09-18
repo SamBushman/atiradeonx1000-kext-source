@@ -36,7 +36,6 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
 
 extern "C" void SurfExtM2_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void SurfExtM2_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
-extern "C" int _ASICSupportsAGP;
 
 /*
  * surface_read_lock - CONFIRMED, real addr 0x164c0. A real, complete,

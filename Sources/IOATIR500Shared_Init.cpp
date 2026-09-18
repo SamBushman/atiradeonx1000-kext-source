@@ -2,14 +2,12 @@
  * IOATIR500Shared_Init.cpp
  *
  * RESOLVED (issue #24, partial): `IOATIR500Shared::init`'s real body.
- * Real kext offset 0x16aa0. Calls a real, unidentified external symbol
- * first (a real kxld-patched call site, same real-address-only-at-
- * load-time category this project already established for the
- * accelerator's own factory slots, issue #6, before those were resolved
- * via the concrete-subclass-vtable technique - no subclass exists for
- * this class to try that technique on, so this one really does look
- * external) - almost certainly `OSObject::init()`, the conventional
- * IOKit base-class call every real `init()` override makes first. If
+ * Real kext offset 0x16aa0. Calls `OSObject::init()` first - RESOLVED (issue
+ * #58 follow-up): the call is an indirect one through the OSObject vtable
+ * symbol (the Mach-O relocation at 0x16aa4 targets `__ZTV8OSObject`; slot
+ * +0x48 of the real kernel's OSObject vtable, read statically from
+ * /mach_kernel, is `OSObject::init()`), the conventional IOKit base-class call
+ * every real `init()` override makes first. If
  * that succeeds, zeroes five real, previously-undocumented fields
  * (`this+0x10`/`+0x14`/`+0x18`/`+0x1c`/`+0x24`), calls the already-known
  * real `alloc_handles` (real addr `0x16910`, own body RESOLVED, issue
@@ -32,11 +30,12 @@
 
 #include "../Headers/IOATIR500Shared.h"
 
-extern "C" bool IOATIR500Shared_super_init(void *self); /* real external call, almost certainly OSObject::init() - own real target unresolved, matches issue #6's pre-resolution category (kxld-patched, no local body) */
+/* real object size, from its allocation site (issue #24); catches any drift in the OSObject base + pad layout */
+static_assert(sizeof(IOATIR500Shared) == 0x28, "IOATIR500Shared must be 0x28 bytes");
 
 bool IOATIR500Shared::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    bool ok = IOATIR500Shared_super_init(this);
+    bool ok = OSObject::init(); /* real: qualified base call (relocation at 0x16aa4 -> __ZTV8OSObject, slot +0x48 = OSObject::init()) */
     if (ok) {
         *reinterpret_cast<UInt32 *>(self + 0x24) = 0;
         *reinterpret_cast<UInt32 *>(self + 0x10) = 0;

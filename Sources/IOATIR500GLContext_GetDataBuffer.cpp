@@ -60,7 +60,7 @@ typedef UInt32 (*Fn0xd0)(void *);
 
 extern "C" void GetDataBuffer_mutex_lock(void *lockPtr) asm("_mutex_lock");
 extern "C" void GetDataBuffer_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
 IOReturn IOATIR500GLContext::get_data_buffer(UInt32 *outHandle, UInt32 *outAddress) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -70,7 +70,7 @@ IOReturn IOATIR500GLContext::get_data_buffer(UInt32 *outHandle, UInt32 *outAddre
     UInt8 *pendingTail = reinterpret_cast<UInt8 *>(U32At(self, 0xec));
     if (pendingTail != nullptr) {
         UInt32 neededBytes = U32At(reinterpret_cast<void *>(U32At(self, 0x108)), 0xc) * 4;
-        if (static_cast<UInt32>(static_cast<SInt32>(U32At(pendingTail, 0x50)) - _ASICSupportsAGP) < neededBytes &&
+        if (static_cast<UInt32>(static_cast<SInt32>(U32At(pendingTail, 0x50)) - kernelPageSize) < neededBytes &&
             U32At(self, 0xb4) < 0x80000) {
             U32At(self, 0xb4) <<= 1;
         }

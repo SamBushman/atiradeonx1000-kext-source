@@ -4,26 +4,16 @@
  * RESOLVED (issue #25): `ATIR500Memory::init()`/`free()`'s real bodies,
  * real addrs `0x18d50`/`0x19120`.
  *
- * Both gate on this class's own real vtable slot `+0x48` (`init`) - a
- * genuine virtual call through `this`'s own vtable. `free()` additionally
- * calls this object's own real vtable slot `+0x4c` as its final action.
- *
- * Both slots RESOLVED, issue #52 (live kxld-resolved `/dev/kmem` read on
- * real G5/Tiger hardware, cross-referenced against the running kernel's
- * own symbol table - this class has no known subclass in this project to
- * fall back on for the usual static subclass-vtable technique, so this
- * genuinely needed live hardware): `+0x48` = `OSObject::
- * _RESERVEDOSObject0()`, `+0x4c` = `OSObject::_RESERVEDOSObject1()` -
- * both genuine standard IOKit reserved-for-future-binary-compatibility
- * slots, real signature `virtual void _RESERVEDOSObjectN()` (no real
- * return value), inherited unmodified since `ATIR500Memory` never
- * overrides either. NOT a real custom init/free virtual pair as this
- * project's own prior (pre-#52) account had speculated - both are
- * genuine no-ops. `init()`'s own `bool ok = ...` read of the `+0x48`
- * call's result is almost certainly a decompiler/ABI artifact (the
- * "implicit self-return, r3 still holds `this`" pattern already
- * documented elsewhere in this project) rather than a real signal, since
- * a real no-op never touches r3.
+ * CORRECTED (issue #58 follow-up; supersedes the issue #52 account): `init()`
+ * begins with the qualified base-class call `OSObject::init()` and `free()`
+ * ends with `OSObject::free()`. The raw decompile shows them as
+ * `(*pcRam00000048)()` / `(*pcRam0000004c)(this)` - indirect calls through the
+ * OSObject vtable symbol (Mach-O relocations at 0x18d54/0x1916c both target
+ * `__ZTV8OSObject`; `-fapple-kext` compiles qualified base calls this way).
+ * Slot +0x48 of the real kernel's OSObject vtable, read statically from
+ * /mach_kernel, is `OSObject::init()`, and +0x4c is `OSObject::free()`. The
+ * earlier issue #52 reading (`_RESERVEDOSObject0/1`, "genuine no-ops", "`ok` is
+ * a decompiler artifact") was wrong - those reserved slots are +0x50/+0x54.
  *
  * Then walk and free the real `chunkList` (see `Headers/ATIR500Memory.h`)
  * via a real per-chunk kernel-free wrapper - RESOLVED, issue #27: real
@@ -32,12 +22,9 @@
  * distinct per-call-site stub instance (`FUN_00018de8`/`FUN_00019198`)
  * resolving to the same real target.
  *
- * `init()`'s real behavior (tearing down `chunkList` rather than
- * building it) is a genuine oddity - see `Headers/ATIR500Memory.h`'s
- * own header comment for this project's best real account. No real
- * caller of `init()` exists anywhere else in this project's own
- * reconstruction; only `init_pool`'s two overloads
- * (`ATIR500Memory_Pool.cpp`) are ever actually called.
+ * `init()`'s post-super behavior (tearing down any existing `chunkList`) is a
+ * re-initialisation reset. `init_pool`'s two overloads
+ * (`ATIR500Memory_Pool.cpp`) call it virtually through `this` first.
  *
  * Confidence: CONFIRMED for control flow and every field offset - both
  * real, complete, standalone decompiles.
@@ -45,18 +32,17 @@
 
 #include "../Headers/ATIR500Memory.h"
 
+/* real object size, from its allocation site (issue #23) */
+static_assert(sizeof(ATIR500Memory) == 0x28, "ATIR500Memory must be 0x28 bytes");
+
 extern "C" void FUN_00018de8(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* init()'s own stub instance */
 extern "C" void FUN_00019198(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* free()'s own stub instance (distinct real address, same real target) */
 
 bool ATIR500Memory::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-    /* +0x48 = OSObject::_RESERVEDOSObject0(), RESOLVED issue #52 - a real
-       no-op; `ok` is effectively always true (implicit self-return artifact). */
-    typedef bool (*Fn0x48)(void *);
-    void **vtable = *reinterpret_cast<void ***>(self);
-    bool ok = reinterpret_cast<Fn0x48>(vtable[0x48 / 4])(this);
-    if (!ok) {
+    /* real: OSObject::init() (raw decompile: `(*pcRam00000048)()`, see header comment) */
+    if (!OSObject::init()) {
         return false;
     }
 
@@ -81,8 +67,6 @@ void ATIR500Memory::free() {
         chunk = nextChunk;
     }
 
-    /* +0x4c = OSObject::_RESERVEDOSObject1(), RESOLVED issue #52 - a real no-op. */
-    typedef void (*Fn0x4c)(void *);
-    void **vtable = *reinterpret_cast<void ***>(self);
-    reinterpret_cast<Fn0x4c>(vtable[0x4c / 4])(this);
+    /* real: OSObject::free() (raw decompile: `(*pcRam0000004c)(this)`, see header comment) */
+    OSObject::free();
 }

@@ -77,17 +77,14 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 #include "../Headers/ATIR500Memory.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h" /* dcbf/dcbst/eieio/isync, see that header */
 
-extern "C" void enforceInOrderExecutionIO(void); /* real name, already established - Sources/ATIR500Surface_ResetFullScreen.cpp */
-extern "C" void dataCacheBlockStore(UInt32 addr);
-extern "C" void dataCacheBlockFlush(UInt32 addr);
 extern "C" void sync(int);
-extern "C" void instructionSynchronize(void);
 extern "C" UInt32 _global_dummy_read_back_a_register; /* real: a genuine global this function reads INTO after a register write - a real "force the write to actually land before continuing" pattern, distinct from the explicit barrier intrinsics also present */
 
 extern "C" void FUN_000210d8(void *dest, void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read) */
 extern "C" void FUN_0001eb18(void *dest, SInt32 byteOffset, UInt32 byteCount) asm("_memmove"); /* RESOLVED, issue #50 - same real target as FUN_000210d8; the real second argument (`byteOffset`, an SInt32 here rather than a pointer type) is passed through unchanged - this project's own prior "running byte offset" reading of this parameter is presumably really a raw VRAM-mapped address the caller already computed, not a plain relative offset, though that caller-side semantic question is unchanged by this linkage fix. */
-extern "C" int _ASICSupportsAGP;
+extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 namespace {
 inline UInt8  &B(void *p, int o)  { return *(reinterpret_cast<UInt8 *>(p) + o); }
@@ -587,7 +584,7 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
                                 void *desc = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(tex + 0x58)) + 8);
                                 typedef void *(*MapFn)(void *, int, int, UInt32, int, int);
                                 gartHandle = (*reinterpret_cast<MapFn *>(*reinterpret_cast<void ***>(desc) + (0x14c / 4)))(
-                                    desc, _ASICSupportsAGP, 0, 1, 0, 0);
+                                    desc, kernelTaskRef, 0, 1, 0, 0);
                                 if (gartHandle == nullptr) {
                                     return;
                                 }

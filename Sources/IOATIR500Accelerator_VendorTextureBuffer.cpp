@@ -40,12 +40,14 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-extern "C" void *FUN_00004ea8(UInt32 size); /* real, address-pinned local allocator - own identity NOT independently confirmed (a generic fixed/caller-sized allocator, not specific to VendorTextureBuffer despite this class's own naming) */
-extern "C" void FUN_00004f04(void *record, UInt32 size); /* real, address-pinned local deallocator, the real inverse of FUN_00004ea8 above */
+/* FUN_00004ea8 / FUN_00004f04: RESOLVED (issue #58 follow-up) - kxld-patched stubs whose
+ * live targets are IOMalloc (0x2b1b50) and IOFree (0x2b1b94), exact nm matches. */
+extern "C" void *VendorTexBuf_IOMalloc(UInt32 size) asm("_IOMalloc");
+extern "C" void VendorTexBuf_IOFree(void *ptr, UInt32 size) asm("_IOFree");
 
 VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 *rec = reinterpret_cast<UInt32 *>(FUN_00004ea8(size));
+    UInt32 *rec = reinterpret_cast<UInt32 *>(VendorTexBuf_IOMalloc(size));
     U32At(self, 0x808) += size;
     U16At(rec, 0xc) = 4; /* real: `*(undefined2*)(puVar1+3) = 4` - puVar1+3 elements = byte 0xc */
     rec[0] = 0; rec[1] = 0; rec[2] = 0;
@@ -73,7 +75,7 @@ VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 size)
 
 void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    FUN_00004f04(buffer, size);
+    VendorTexBuf_IOFree(buffer, size);
     U32At(self, 0x808) -= size;
 }
 

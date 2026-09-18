@@ -16,6 +16,7 @@
 #ifndef IOATIR500SHARED_H
 #define IOATIR500SHARED_H
 
+#include <libkern/c++/OSObject.h>
 #include "ATIRadeonX1000Types.h"
 
 class IOATIR500Accelerator;
@@ -34,19 +35,21 @@ class IOTextureBuffer;
  */
 class sIOClientShared;
 
-class IOATIR500Shared {
+/*
+ * CORRECTED (issue #58 follow-up): this class IS an OSObject subclass in the
+ * real kext (real symbols `IOATIR500Shared::MetaClass`, `gMetaClass`,
+ * `getMetaClass`, `MetaClass::alloc`, `init` at vtable slot +0x48 = the
+ * OSObject::init() override slot), but was modelled as a plain class with no
+ * vptr: the object's first word was never a vtable, so the `+0x18`
+ * (`OSObject::release() const`) call the driver makes through it would have
+ * jumped through garbage, and the OSObject::init() the real `init()` calls
+ * first (`IOATIR500Shared_super_init`) had no definition. Now generated via
+ * OSDeclareDefaultStructors/OSDefineMetaClassAndStructors
+ * (Sources/MetaClassRegistration.cpp). Real size 0x28 = sizeof(OSObject) (8) + pad.
+ */
+class IOATIR500Shared : public OSObject {
+    OSDeclareDefaultStructors(IOATIR500Shared)
 public:
-    /*
-     * FIXED (issue #1, first real link attempt): was declared with no
-     * definition anywhere - a real undefined-symbol link error the
-     * moment anything (IOATIR500GLContext::start) actually instantiated
-     * one. Defined inline as empty: this class's own real field layout
-     * is genuinely UNKNOWN (see class header comment) so there is
-     * nothing honest to initialize by name; `init()` (below) is the
-     * real function that does the real work, matching the real
-     * decompile's own two-step alloc-then-init IOKit pattern.
-     */
-    IOATIR500Shared() {}
     /*
      * Real size CONFIRMED (0x28 bytes, from its allocation site). FIXED
      * (issue #1): this class declares zero real C++ data members (every
@@ -57,20 +60,20 @@ public:
      * moment `init()`'s own raw writes up to `self+0x24` ran against an
      * undersized `new`allocation. Matches this project's own established
      * "confirmed size, unconfirmed field breakdown" pad convention
-     * (e.g. ATIRadeonX1000Types.h's `_trailer_unconfirmed`).
+     * (e.g. ATIRadeonX1000Types.h's `_trailer_unconfirmed`). Now 0x20 because
+     * the OSObject base supplies the first 8 bytes (vptr + retainCount).
      */
-    UInt8 _pad_confirmed_size[0x28];
+    UInt8 _pad_confirmed_size[0x20];
 
     /*
      * init - RESOLVED, issue #20/#24. Real vtable slot `+0x48`, real
      * addr `0x16aa0` - found by reading this class's own vtable
      * (`__ZTV15IOATIR500Shared`, `0x48f28`) directly, the same technique
      * that resolved issues #6/#18/#19. Real body (issue #24): calls a
-     * real external symbol first (almost certainly `OSObject::init()`,
-     * conventional for a real IOKit `init()` override - own real target
-     * unresolved, same kxld-patched-at-load-time category issue #6
-     * established before ITS OWN resolution, except this class has no
-     * known subclass to try that same fix on), then zeroes six real
+     * `OSObject::init()`
+     * first (RESOLVED, issue #58 follow-up: a qualified base call compiled as
+     * an indirect call through the OSObject vtable symbol; slot +0x48 of the
+     * real kernel's OSObject vtable is `OSObject::init()`), then zeroes six real
      * fields and calls `alloc_handles()` - see
      * `Sources/IOATIR500Shared_Init.cpp` for the full transcription.
      *
@@ -90,7 +93,18 @@ public:
      * reader, validated against the already-CONFIRMED `init()` slot
      * before being trusted on this one.
      */
-    bool init();
+    virtual bool init();
+
+    /*
+     * free / free_handles - RESOLVED (issue #58 follow-up), real addrs
+     * 0x184d0 / 0x16b30. `free` (OSObject::free override, vtable slot +0x4c)
+     * deletes every live texture on the shared list, unhooks itself from its
+     * owning accelerator, frees the accelerator's orphan textures, releases and
+     * frees the client-shared chunk list, calls `free_handles`, then
+     * `OSObject::free()`. See Sources/IOATIR500Shared_Free.cpp.
+     */
+    virtual void free();
+    void free_handles();
 
     /*
      * alloc_handles - RESOLVED, issue #28. Real mangled symbol

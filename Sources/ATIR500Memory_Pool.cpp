@@ -5,10 +5,8 @@
  * addrs `0x18e00`/`0x18f60`), `add_to_stack` (real addr `0x191b0`), and
  * `total_free` (real addr `0x19910`).
  *
- * All three chunk-carving functions (`init_pool` x2, `add_to_stack`)
- * gate on this class's own real vtable slot `+0x48` where applicable
- * (see `ATIR500Memory_Lifecycle.cpp`'s own header comment for that
- * slot's role) and allocate raw `0x204`-byte chunks via a real kernel
+ * Both `init_pool` overloads first call this object's own virtual `init()`
+ * (slot +0x48 of its vtable; see `ATIR500Memory_Lifecycle.cpp`) and allocate raw `0x204`-byte chunks via a real kernel
  * allocator wrapper - THREE distinct per-call-site stub addresses
  * (`FUN_00018f44`/`FUN_00019108`/`FUN_00019260`), all RESOLVED, issue
  * #27, to the same real target, `IOMallocAligned`.
@@ -66,9 +64,9 @@ inline UInt32 *FirstSearchNode(UInt8 *self) {
 bool ATIR500Memory::init_pool(UInt32 poolSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-    typedef bool (*Fn0x48)(void *);
-    void **vtable = *reinterpret_cast<void ***>(self);
-    if (!reinterpret_cast<Fn0x48>(vtable[0x48 / 4])(this)) {
+    /* real: virtual call through this's own vtable, slot +0x48 = ATIR500Memory::init()
+     * (decompile: `(**(code **)(*(int *)this + 0x48))()`) */
+    if (!init()) {
         return false;
     }
 
@@ -142,9 +140,9 @@ bool ATIR500Memory::init_pool(UInt32 poolSize) {
 bool ATIR500Memory::init_pool(UInt32 regionOffset, UInt32 regionSize, UInt32 poolSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-    typedef bool (*Fn0x48)(void *);
-    void **vtable = *reinterpret_cast<void ***>(self);
-    if (!reinterpret_cast<Fn0x48>(vtable[0x48 / 4])(this)) {
+    /* real: virtual call through this's own vtable, slot +0x48 = ATIR500Memory::init()
+     * (decompile: `(**(code **)(*(int *)this + 0x48))()`) */
+    if (!init()) {
         return false;
     }
 
