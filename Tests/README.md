@@ -31,6 +31,20 @@ precondition return `CannotLock` while still printing "OK"). Calls that must suc
 (`baseline/stock_4.1.9_g5_tiger.txt`, two identical runs); `compare_to_baseline.sh` diffs a new run
 against it. The harness has **not** been run against this project's rebuilt kext (not yet loaded).
 
+**The dispatch tables are the authoritative wire shapes** (correction to the note further down that
+they "can't be read positionally"). Each entry is a standard `IOExternalMethod` `{flags, count0,
+count1}` (flags 0 = scalarI/scalarO, 2 = scalarI/structO, 3 = structI/structO, 4 = scalarI/structI;
+`0xffffffff` = variable size). `../Tools/dump_method_tables.py` extracts all of them from the shipped
+kext (`method_shapes.txt`) and `--audit Tests` checks every harness call against them: it flags
+exactly the 14 live calls the stock kernel rejected with `BadArgument` (GL 2/9/19, 2D 1/7,
+DVD 1/3/7/12/15/19, Surface 1/6/8) and nothing else. Correcting those shapes would execute
+their bodies for the first time, so it needs a per-call safety trace first: DVD methods that read
+the still-unbound surface are the #43 panic.
+
+**Implementation completeness is a separate, larger gap** - see #59 and `function_coverage.md`: 214 of 470
+shipped methods have no body in the rebuild, including all of the 2D and DVD contexts' external
+methods and dispatch. The harness can only exercise what exists.
+
 Not started: PM4 opcode-level coverage and the real-consumer scenarios (WindowServer, GL apps, DVD
 playback) from the issue's success criteria.
 
