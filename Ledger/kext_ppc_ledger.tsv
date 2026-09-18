@@ -1,0 +1,2116 @@
+00000000	8	method	MISSING	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
+00000010	68	generated	DONE	IOATIR500Accelerator::IOATIR500Accelerator	__ZN20IOATIR500AcceleratorC2EPK11OSMetaClass
+00000054	16	stub	n/a	FUN_00000054	
+00000070	68	generated	DONE	IOATIR500Accelerator::IOATIR500Accelerator	__ZN20IOATIR500AcceleratorC1EPK11OSMetaClass
+000000b4	16	stub	n/a	FUN_000000b4	
+000000d0	60	generated	DONE	IOATIR500Accelerator::~IOATIR500Accelerator	__ZN20IOATIR500AcceleratorD2Ev
+0000010c	16	stub	n/a	FUN_0000010c	
+00000120	72	generated	DONE	IOATIR500Accelerator::~IOATIR500Accelerator	__ZN20IOATIR500AcceleratorD0Ev
+00000168	16	stub	n/a	FUN_00000168	
+00000178	16	stub	n/a	FUN_00000178	
+00000190	12	generated	DONE	IOATIR500Accelerator::getMetaClass	__ZNK20IOATIR500Accelerator12getMetaClassEv
+000001a0	88	generated	DONE	IOATIR500Accelerator::MetaClass::MetaClass	__ZN20IOATIR500Accelerator9MetaClassC1Ev
+000001f8	16	stub	n/a	FUN_000001f8	
+00000210	88	generated	DONE	IOATIR500Accelerator::MetaClass::MetaClass	__ZN20IOATIR500Accelerator9MetaClassC2Ev
+00000268	16	stub	n/a	FUN_00000268	
+00000280	8	generated	DONE	IOATIR500Accelerator::MetaClass::alloc	__ZNK20IOATIR500Accelerator9MetaClass5allocEv
+00000290	216	method	DONE	IOATIR500Accelerator::getVRAMDescriptor	__ZN20IOATIR500Accelerator17getVRAMDescriptorEm
+00000370	368	method	MISSING	IOATIR500Accelerator::display_change_handler	__ZN20IOATIR500Accelerator22display_change_handlerEP8OSObjectPvP13IOFramebufferlS2_
+00000514	16	stub	n/a	FUN_00000514	
+00000524	16	stub	n/a	FUN_00000524	
+00000534	16	stub	n/a	FUN_00000534	
+00000550	476	method	MISSING	IOATIR500Accelerator::foundFramebuffer	__ZN20IOATIR500Accelerator16foundFramebufferEP13IOFramebuffer
+00000744	16	stub	n/a	FUN_00000744	
+00000754	16	stub	n/a	FUN_00000754	
+00000770	544	method	MISSING	IOATIR500Accelerator::findFramebuffers	__ZN20IOATIR500Accelerator16findFramebuffersEv
+000009b4	16	stub	n/a	IOATIR500Accelerator::foundFramebuffer	
+000009c4	16	stub	n/a	FUN_000009c4	
+000009d4	16	stub	n/a	FUN_000009d4	
+000009f0	168	method	MISSING	IOATIR500Accelerator::serializePerformanceStats	__ZN20IOATIR500Accelerator25serializePerformanceStatsEPvS0_P11OSSerialize
+00000a98	16	stub	n/a	FUN_00000a98	
+00000aa8	16	stub	n/a	FUN_00000aa8	
+00000ac0	5176	method	MISSING	IOATIR500Accelerator::writePerformanceStats	__ZN20IOATIR500Accelerator21writePerformanceStatsEP12OSDictionary
+00001ef8	16	stub	n/a	FUN_00001ef8	
+00001f10	180	method	DONE	IOATIR500Accelerator::freeCommandBuffer	__ZN20IOATIR500Accelerator17freeCommandBufferEP19VendorCommandBuffer
+00001fd0	144	method	MISSING	IOATIR500Accelerator::freeAllCommandBuffers	__ZN20IOATIR500Accelerator21freeAllCommandBuffersEm
+00002060	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+00002070	628	method	DONE	IOATIR500Accelerator::newUserClient	__ZN20IOATIR500Accelerator13newUserClientEP4taskPvmPP12IOUserClient
+000022fc	16	stub	n/a	FUN_000022fc	
+00002310	36	method	MISSING	IOATIR500Accelerator::teardown2D	__ZN20IOATIR500Accelerator10teardown2DEv
+00002334	16	stub	n/a	IOATIR500Accelerator::freeAllCommandBuffers	
+00002350	132	method	DONE	IOATIR500Accelerator::init_command_buffer_header	__ZN20IOATIR500Accelerator26init_command_buffer_headerEP25VendorCommandBufferHeaderm
+000023e0	148	method	DONE	IOATIR500Accelerator::allocCommandBuffer	__ZN20IOATIR500Accelerator18allocCommandBufferEP19VendorCommandBufferm
+00002474	16	stub	n/a	IOATIR500Accelerator::init_command_buffer_header	
+00002484	16	stub	n/a	FUN_00002484	
+000024a0	260	method	DONE	IOATIR500Accelerator::allocMoreCommandBuffers	__ZN20IOATIR500Accelerator23allocMoreCommandBuffersEmm
+000025a4	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+000025b4	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+000025d0	40	method	MISSING	IOATIR500Accelerator::setup2D	__ZN20IOATIR500Accelerator7setup2DEv
+000025f8	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
+00002610	40	method	DONE	IOATIR500Accelerator::setup3D	__ZN20IOATIR500Accelerator7setup3DEv
+00002638	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
+00002650	2456	method	MISSING	IOATIR500Accelerator::start	__ZN20IOATIR500Accelerator5startEP9IOService
+00002fe8	16	stub	n/a	IOATIR500Accelerator::findFramebuffers	
+00002ff8	16	stub	n/a	FUN_00002ff8	
+00003008	16	stub	n/a	FUN_00003008	
+00003018	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+00003028	16	stub	n/a	ATIR500Memory::ATIR500Memory	
+00003038	16	stub	n/a	FUN_00003038	
+00003048	16	stub	n/a	FUN_00003048	
+00003058	16	stub	n/a	FUN_00003058	
+00003068	16	stub	n/a	FUN_00003068	
+00003078	16	stub	n/a	FUN_00003078	
+00003088	16	stub	n/a	FUN_00003088	
+00003098	16	stub	n/a	FUN_00003098	
+000030a8	16	stub	n/a	FUN_000030a8	
+000030b8	16	stub	n/a	FUN_000030b8	
+000030d0	88	method	DONE	IOATIR500Accelerator::allocDataBufferBacking	__ZN20IOATIR500Accelerator22allocDataBufferBackingEP19VendorTextureBuffer
+00003128	16	stub	n/a	FUN_00003128	
+00003140	372	method	DONE	IOATIR500Accelerator::pageOffDataBuffer	__ZN20IOATIR500Accelerator17pageOffDataBufferEP19VendorTextureBuffer
+000032b4	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
+000032d0	308	method	DONE	IOATIR500Accelerator::freeOneDataBuffer	__ZN20IOATIR500Accelerator17freeOneDataBufferEP19VendorTextureBuffer
+00003410	112	method	MISSING	IOATIR500Accelerator::freeAllDataBuffers	__ZN20IOATIR500Accelerator18freeAllDataBuffersEv
+00003484	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
+000034a0	4	method	MISSING	IOATIR500Accelerator::pageoff_dirty_texture	__ZN20IOATIR500Accelerator21pageoff_dirty_textureEP19VendorTextureBufferll
+000034b0	60	method	DONE	IOATIR500Accelerator::addTransferToGART	__ZN20IOATIR500Accelerator17addTransferToGARTEP20VendorTransferBuffer
+000034f0	136	method	DONE	IOATIR500Accelerator::removeTransferFromGART	__ZN20IOATIR500Accelerator22removeTransferFromGARTEP20VendorTransferBuffer
+00003580	212	method	DONE	IOATIR500Accelerator::freeTransferToAllocGART	__ZN20IOATIR500Accelerator23freeTransferToAllocGARTEP20VendorTransferBufferS1_mb
+00003670	8	method	MISSING	IOATIR500Accelerator::makeGARTEntry	__ZN20IOATIR500Accelerator13makeGARTEntryEm
+00003680	328	method	DONE	IOATIR500Accelerator::freeOrphanTexture	__ZN20IOATIR500Accelerator17freeOrphanTextureEb
+000037cc	16	stub	n/a	IOATIR500Shared::free_texvert	
+000037dc	16	stub	n/a	FUN_000037dc	
+000037f0	1108	method	DONE	IOATIR500Accelerator::freeWaitToAllocGART	__ZN20IOATIR500Accelerator19freeWaitToAllocGARTEP18IOATIR5002DContextP19IOATIR500DVDContextP18IOATIR500GLContextP16IOATIR500SurfaceP15IOATIR500SharedP20VendorTransferBufferb
+00003c44	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+00003c54	16	stub	n/a	IOATIR500Surface::freeToAllocGART	
+00003c64	16	stub	n/a	IOATIR500GLContext::freeToAllocGART	
+00003c74	16	stub	n/a	IOATIR500DVDContext::freeToAllocGART	
+00003c84	16	stub	n/a	IOATIR5002DContext::freeToAllocGART	
+00003c94	16	stub	n/a	IOATIR500Shared::freeToAllocGART	
+00003ca4	16	stub	n/a	IOATIR500Accelerator::freeOrphanTexture	
+00003cc0	140	method	DONE	IOATIR500Accelerator::freeToAllocGART	__ZN20IOATIR500Accelerator15freeToAllocGARTEP18IOATIR5002DContextP19IOATIR500DVDContextP18IOATIR500GLContextP16IOATIR500SurfaceP15IOATIR500SharedP20VendorTransferBuffer
+00003d4c	16	stub	n/a	IOATIR500Accelerator::freeWaitToAllocGART	
+00003d60	488	method	DONE	IOATIR500Accelerator::tossSurfacesForVRAM	__ZN20IOATIR500Accelerator19tossSurfacesForVRAMEP16IOATIR500SurfacePP19VendorTextureBufferlS3_b
+00003f48	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+00003f60	1500	method	DONE	IOATIR500Accelerator::freeToAllocTextureVRAM	__ZN20IOATIR500Accelerator22freeToAllocTextureVRAMEP16IOATIR500SurfacePP19VendorTextureBufferlS3_
+00004574	16	stub	n/a	IOATIR500Accelerator::tossSurfacesForVRAM	
+00004590	8	method	DONE	IOATIR500Accelerator::alloc_surface_buffer	__ZN20IOATIR500Accelerator20alloc_surface_bufferEP20ATIR500SurfaceBuffer
+000045a0	988	method	DONE	IOATIR500Accelerator::freeToAllocSurfaceVRAM	__ZN20IOATIR500Accelerator22freeToAllocSurfaceVRAMEP16IOATIR500SurfaceS1_PP19VendorTextureBufferlP20ATIR500SurfaceBuffer
+000049b0	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+000049c0	144	method	DONE	IOATIR500Accelerator::addOrphanTexture	__ZN20IOATIR500Accelerator16addOrphanTextureEP15IOTextureBuffer
+00004a50	64	method	MISSING	IOATIR500Accelerator::garbage_collector_timer	__ZN20IOATIR500Accelerator23garbage_collector_timerEP8OSObjectP18IOTimerEventSource
+00004a90	516	method	MISSING	IOATIR500Accelerator::free_gart_wirings	__ZN20IOATIR500Accelerator17free_gart_wiringsEv
+00004cac	16	stub	n/a	FUN_00004cac	
+00004cbc	16	stub	n/a	FUN_00004cbc	
+00004ccc	16	stub	n/a	FUN_00004ccc	
+00004ce0	64	method	MISSING	IOATIR500Accelerator::gart_collector_timer	__ZN20IOATIR500Accelerator20gart_collector_timerEP8OSObjectP18IOTimerEventSource
+00004d20	136	method	DONE	IOATIR500Accelerator::getVRAMDescriptors	__ZN20IOATIR500Accelerator18getVRAMDescriptorsEv
+00004da8	16	stub	n/a	FUN_00004da8	
+00004dc0	232	method	DONE	IOATIR500Accelerator::allocVendorTextureBuffer	__ZN20IOATIR500Accelerator24allocVendorTextureBufferEm
+00004ea8	16	stub	n/a	FUN_00004ea8	
+00004ec0	68	method	DONE	IOATIR500Accelerator::releaseVendorTextureBuffer	__ZN20IOATIR500Accelerator26releaseVendorTextureBufferEP19VendorTextureBufferm
+00004f04	16	stub	n/a	FUN_00004f04	
+00004f20	148	method	MISSING	IOATIR500Accelerator::mapVendorTransferBuffer	__ZN20IOATIR500Accelerator23mapVendorTransferBufferEP20VendorTransferBuffer
+00004fe0	144	method	MISSING	IOATIR500Accelerator::unmapVendorTransferBuffer	__ZN20IOATIR500Accelerator25unmapVendorTransferBufferEP20VendorTransferBuffer
+00005090	188	method	MISSING	IOATIR500Accelerator::teardownAGP	__ZN20IOATIR500Accelerator11teardownAGPEP9IOService
+0000514c	16	stub	n/a	FUN_0000514c	
+00005160	48	method	MISSING	IOATIR500Accelerator::commitAGPMemory	__ZN20IOATIR500Accelerator15commitAGPMemoryEP18IOMemoryDescriptormm
+00005190	48	method	MISSING	IOATIR500Accelerator::releaseAGPMemory	__ZN20IOATIR500Accelerator16releaseAGPMemoryEP18IOMemoryDescriptormm
+000051c0	60	method	MISSING	IOATIR500Accelerator::reserveInGART	__ZN20IOATIR500Accelerator13reserveInGARTEm
+00005200	32	method	MISSING	IOATIR500Accelerator::clearInGART	__ZN20IOATIR500Accelerator11clearInGARTEm
+00005220	76	method	DONE	IOATIR500Accelerator::addToGART	__ZN20IOATIR500Accelerator9addToGARTEP18IOMemoryDescriptorPm
+00005270	356	method	MISSING	IOATIR500Accelerator::removeFromGART	__ZN20IOATIR500Accelerator14removeFromGARTEP18IOMemoryDescriptorm
+000053e0	4	method	MISSING	IOATIR500Accelerator::synchronizeGART	__ZN20IOATIR500Accelerator15synchronizeGARTEmm
+000053f0	4	method	MISSING	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEP18IOMemoryDescriptormm
+00005400	4	method	MISSING	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEP18IOMemoryDescriptormm
+00005410	52	method	MISSING	IOATIR500Accelerator::is_idle	__ZN20IOATIR500Accelerator7is_idleEv
+00005450	12	method	MISSING	IOATIR500Accelerator::set_stereo	__ZN20IOATIR500Accelerator10set_stereoEmm
+00005460	572	method	DONE	IOATIR500Accelerator::setup_stereo	__ZN20IOATIR500Accelerator12setup_stereoEmm
+000056a8	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+000056b8	16	stub	n/a	IOATIR500Surface::allocMasterSwapBuffer	
+000056c8	16	stub	n/a	IOATIR500Surface::freeAllSwapBuffers	
+000056d8	16	stub	n/a	ATIR500Memory::dealloc	
+000056e8	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
+000056f8	16	stub	n/a	FUN_000056f8	
+00005710	320	method	MISSING	IOATIR500Accelerator::disp_mode_did_change	__ZN20IOATIR500Accelerator20disp_mode_did_changeEv
+00005850	16	stub	n/a	FUN_00005850	
+00005860	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+00005870	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
+00005880	16	stub	n/a	IOATIR500Surface::reset_access	
+00005890	148	method	MISSING	IOATIR500Accelerator::teardown3D	__ZN20IOATIR500Accelerator10teardown3DEv
+00005924	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
+00005934	16	stub	n/a	IOATIR500Accelerator::freeAllDataBuffers	
+00005944	16	stub	n/a	IOATIR500Accelerator::freeAllCommandBuffers	
+00005960	84	method	MISSING	IOATIR500Accelerator::system_did_wake	__ZN20IOATIR500Accelerator15system_did_wakeEv
+000059b4	16	stub	n/a	FUN_000059b4	
+000059c4	16	stub	n/a	FUN_000059c4	
+000059e0	48	method	DONE	IOATIR500Accelerator::find_surface_for_id	__ZN20IOATIR500Accelerator19find_surface_for_idEm
+00005a10	8	method	MISSING	IOATIR500Accelerator::getAccelCapsBits	__ZN20IOATIR500Accelerator16getAccelCapsBitsEv
+00005a20	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+00005aa0	16	stub	n/a	FUN_00005aa0	
+00005ab0	60	generated	DONE	IOATIR500Accelerator::MetaClass::~MetaClass	__ZN20IOATIR500Accelerator9MetaClassD0Ev
+00005aec	16	stub	n/a	FUN_00005aec	
+00005b2c	16	stub	n/a	__static_initialization_and_destruction_0	
+00005b6c	16	stub	n/a	__static_initialization_and_destruction_0	
+00005b80	1048	method	MISSING	IOATIR500Accelerator::configureAGP	__ZN20IOATIR500Accelerator12configureAGPEP9IOService
+00005fa8	16	stub	n/a	FUN_00005fa8	
+00005fb8	16	stub	n/a	FUN_00005fb8	
+00005fc8	16	stub	n/a	FUN_00005fc8	
+00005fe0	636	method	MISSING	IOATIR500Accelerator::addToMinMaxGART	__ZN20IOATIR500Accelerator15addToMinMaxGARTEP18IOMemoryDescriptorPmmm
+00006270	80	method	MISSING	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEPKvm
+000062c0	96	method	MISSING	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEPKvm
+00006320	88	method	MISSING	IOATIR500Accelerator::requestProbe	__ZN20IOATIR500Accelerator12requestProbeEm
+00006380	16	stub	n/a	FUN_00006380	
+00006390	16	stub	n/a	IOATIR500Accelerator::findFramebuffers	
+000063a0	16	stub	n/a	FUN_000063a0	
+000063b0	84	method	MISSING	IOATIR500Accelerator::garbage_collector	__ZN20IOATIR500Accelerator17garbage_collectorEP8OSObjectP22IOInterruptEventSourcei
+00006404	16	stub	n/a	FUN_00006404	
+00006414	16	stub	n/a	IOATIR500Accelerator::freeOrphanTexture	
+00006424	16	stub	n/a	FUN_00006424	
+00006440	188	method	MISSING	IOATIR500Accelerator::gart_collector	__ZN20IOATIR500Accelerator14gart_collectorEP8OSObjectP22IOInterruptEventSourcei
+00006504	16	stub	n/a	FUN_00006504	
+00006514	16	stub	n/a	IOATIR500Accelerator::free_gart_wirings	
+00006524	16	stub	n/a	FUN_00006524	
+00006540	84	method	MISSING	IOATIR500Accelerator::system_will_sleep	__ZN20IOATIR500Accelerator17system_will_sleepEv
+00006594	16	stub	n/a	FUN_00006594	
+000065a4	16	stub	n/a	FUN_000065a4	
+000065c0	840	method	MISSING	IOATIR500Accelerator::stop	__ZN20IOATIR500Accelerator4stopEP9IOService
+00006908	16	stub	n/a	FUN_00006908	
+00006918	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+00006928	16	stub	n/a	IOATIR500Accelerator::freeAllDataBuffers	
+00006938	16	stub	n/a	IOATIR500Accelerator::freeAllCommandBuffers	
+00006948	16	stub	n/a	IOATIR500Shared::free_texvert	
+00006960	344	method	DONE	IOATIR500Accelerator::allocOneDataBuffer	__ZN20IOATIR500Accelerator18allocOneDataBufferEmb
+00006ab8	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
+00006ad0	636	method	MISSING	IOATIR500Accelerator::disp_mode_will_change	__ZN20IOATIR500Accelerator21disp_mode_will_changeEl
+00006d4c	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+00006d5c	16	stub	n/a	IOATIR500Shared::free_texvert	
+00006d6c	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
+00006d80	68	generated	DONE	IOATIR500GLContext::IOATIR500GLContext	__ZN18IOATIR500GLContextC2EPK11OSMetaClass
+00006dc4	16	stub	n/a	FUN_00006dc4	
+00006de0	68	generated	DONE	IOATIR500GLContext::IOATIR500GLContext	__ZN18IOATIR500GLContextC1EPK11OSMetaClass
+00006e24	16	stub	n/a	FUN_00006e24	
+00006e40	60	generated	DONE	IOATIR500GLContext::~IOATIR500GLContext	__ZN18IOATIR500GLContextD2Ev
+00006e7c	16	stub	n/a	FUN_00006e7c	
+00006e90	72	generated	DONE	IOATIR500GLContext::~IOATIR500GLContext	__ZN18IOATIR500GLContextD0Ev
+00006ed8	16	stub	n/a	FUN_00006ed8	
+00006ee8	16	stub	n/a	FUN_00006ee8	
+00006f00	12	generated	DONE	IOATIR500GLContext::getMetaClass	__ZNK18IOATIR500GLContext12getMetaClassEv
+00006f10	88	generated	DONE	IOATIR500GLContext::MetaClass::MetaClass	__ZN18IOATIR500GLContext9MetaClassC1Ev
+00006f68	16	stub	n/a	FUN_00006f68	
+00006f80	88	generated	DONE	IOATIR500GLContext::MetaClass::MetaClass	__ZN18IOATIR500GLContext9MetaClassC2Ev
+00006fd8	16	stub	n/a	FUN_00006fd8	
+00006ff0	8	generated	DONE	IOATIR500GLContext::MetaClass::alloc	__ZNK18IOATIR500GLContext9MetaClass5allocEv
+00007000	292	method	DONE	IOATIR500GLContext::freeAllContextBuffers	__ZN18IOATIR500GLContext21freeAllContextBuffersEv
+00007130	116	method	MISSING	IOATIR500GLContext::clientClose	__ZN18IOATIR500GLContext11clientCloseEv
+000071b0	240	method	DONE	IOATIR500GLContext::remove_texture_from_stream	__ZN18IOATIR500GLContext26remove_texture_from_streamEP19VendorTextureBuffer
+000072c0	328	method	DONE	IOATIR500GLContext::add_texture_to_stream	__ZN18IOATIR500GLContext21add_texture_to_streamEP19VendorTextureBuffer
+00007414	16	stub	n/a	IOATIR500GLContext::add_texture_to_stream	
+00007424	16	stub	n/a	FUN_00007424	
+00007440	72	method	DONE	IOATIR500GLContext::init_command_buffer_header	__ZN18IOATIR500GLContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
+00007490	56	method	DONE	IOATIR500GLContext::init_context_buffer_header	__ZN18IOATIR500GLContext26init_context_buffer_headerEP25VendorContextBufferHeaderm
+000074d0	408	method	DONE	IOATIR500GLContext::allocAllContextBuffers	__ZN18IOATIR500GLContext22allocAllContextBuffersEm
+00007668	16	stub	n/a	IOATIR500GLContext::init_context_buffer_header	
+00007678	16	stub	n/a	FUN_00007678	
+00007690	724	method	DONE	IOATIR500GLContext::start	__ZN18IOATIR500GLContext5startEP9IOService
+00007964	16	stub	n/a	IOATIR500GLContext::allocAllContextBuffers	
+00007974	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+00007984	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
+00007994	16	stub	n/a	IOATIR500Shared::IOATIR500Shared	
+000079a4	16	stub	n/a	FUN_000079a4	
+000079c0	12	method	MISSING	IOATIR500GLContext::remove_surface	__ZN18IOATIR500GLContext14remove_surfaceEv
+000079d0	112	method	DONE	IOATIR500GLContext::map_transfer_to_GART	__ZN18IOATIR500GLContext20map_transfer_to_GARTEP20VendorTransferBuffer
+00007a40	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+00007a50	260	method	DONE	IOATIR500GLContext::freeToAllocGART	__ZN18IOATIR500GLContext15freeToAllocGARTEP20VendorTransferBufferb
+00007b54	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+00007b70	36	method	MISSING	IOATIR500GLContext::setCompatibleSurfaceMode	__ZN18IOATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
+00007ba0	84	method	DONE	IOATIR500GLContext::set_swap_rect	__ZN18IOATIR500GLContext13set_swap_rectEllll
+00007c00	76	method	DONE	IOATIR500GLContext::set_swap_interval	__ZN18IOATIR500GLContext17set_swap_intervalEll
+00007c50	56	method	DONE	IOATIR500GLContext::set_surface_volatile_state	__ZN18IOATIR500GLContext26set_surface_volatile_stateEm
+00007c88	16	stub	n/a	IOATIR500Surface::set_volatile_state	
+00007ca0	168	method	DONE	IOATIR500GLContext::get_surface_size	__ZN18IOATIR500GLContext16get_surface_sizeEPlS0_S0_S0_
+00007d60	120	method	DONE	IOATIR500GLContext::finish	__ZN18IOATIR500GLContext6finishEv
+00007de0	116	method	DONE	IOATIR500GLContext::wait_for_stamp	__ZN18IOATIR500GLContext14wait_for_stampEm
+00007e60	4	method	MISSING	IOATIR500GLContext::set_texture_flags	__ZN18IOATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
+00007e70	272	method	DONE	IOATIR500GLContext::freeCommandBuffer	__ZN18IOATIR500GLContext17freeCommandBufferEv
+00007f8c	16	stub	n/a	FUN_00007f8c	
+00007fa0	904	method	DONE	IOATIR500GLContext::stop	__ZN18IOATIR500GLContext4stopEP9IOService
+00008330	16	stub	n/a	IOATIR500Shared::delete_texture	
+00008340	16	stub	n/a	FUN_00008340	
+00008350	16	stub	n/a	IOATIR500Surface::prune_buffers	
+00008360	16	stub	n/a	IOATIR500Surface::remove_gl_context_from_list	
+00008370	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+00008380	16	stub	n/a	IOATIR500GLContext::freeAllContextBuffers	
+00008390	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
+000083a0	16	stub	n/a	IOATIR500GLContext::freeCommandBuffer	
+000083b0	4	method	MISSING	IOATIR500GLContext::add_vendor_surface_required_bits	__ZN18IOATIR500GLContext32add_vendor_surface_required_bitsE20eIOGLContextModeBits
+000083c0	368	method	DONE	IOATIR500GLContext::reclaim_resources	__ZN18IOATIR500GLContext17reclaim_resourcesEv
+00008540	16	stub	n/a	FUN_00008540	
+00008550	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
+00008560	16	stub	n/a	FUN_00008560	
+00008570	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+000085f0	16	stub	n/a	IOATIR500GLContext::MetaClass::MetaClass	
+00008600	60	generated	DONE	IOATIR500GLContext::MetaClass::~MetaClass	__ZN18IOATIR500GLContext9MetaClassD0Ev
+0000863c	16	stub	n/a	FUN_0000863c	
+0000867c	16	stub	n/a	__static_initialization_and_destruction_0	
+000086bc	16	stub	n/a	__static_initialization_and_destruction_0	
+000086d0	172	method	DONE	IOATIR500GLContext::connectClient	__ZN18IOATIR500GLContext13connectClientEP12IOUserClient
+00008784	16	stub	n/a	FUN_00008784	
+00008794	16	stub	n/a	FUN_00008794	
+000087b0	864	method	SIG?	IOATIR500GLContext::set_surface	__ZN18IOATIR500GLContext11set_surfaceEm20eIOGLContextModeBitsmm
+00008b34	16	stub	n/a	FUN_00008b34	
+00008b44	16	stub	n/a	IOATIR500Surface::add_gl_context_to_list	
+00008b54	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00008b64	16	stub	n/a	IOATIR500Surface::prune_buffers	
+00008b74	16	stub	n/a	IOATIR500Surface::remove_gl_context_from_list	
+00008b84	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+00008b94	16	stub	n/a	FUN_00008b94	
+00008bb0	276	method	DONE	IOATIR500GLContext::get_surface_info	__ZN18IOATIR500GLContext16get_surface_infoEmPlS0_S0_
+00008cd4	16	stub	n/a	FUN_00008cd4	
+00008ce4	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+00008cf4	16	stub	n/a	FUN_00008cf4	
+00008d10	1168	method	DONE	IOATIR500GLContext::read_buffer	__ZN18IOATIR500GLContext11read_bufferEP26sIOGLContextReadBufferDatam
+000091d8	16	stub	n/a	FUN_000091d8	
+000091e8	16	stub	n/a	FUN_000091e8	
+000091f8	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
+00009208	16	stub	n/a	FUN_00009208	
+00009218	16	stub	n/a	FUN_00009218	
+00009230	180	method	DONE	IOATIR500GLContext::scale_surface	__ZN18IOATIR500GLContext13scale_surfaceEmmm
+000092ec	16	stub	n/a	FUN_000092ec	
+000092fc	16	stub	n/a	IOATIR500Surface::set_scaling	
+0000930c	16	stub	n/a	FUN_0000930c	
+00009320	428	method	DONE	IOATIR500GLContext::new_texture	__ZN18IOATIR500GLContext11new_textureEP19sIOGLNewTextureDataP25sIOGLNewTextureReturnDatamPm
+00009504	16	stub	n/a	FUN_00009504	
+00009514	16	stub	n/a	IOATIR500Shared::new_global_texture	
+00009524	16	stub	n/a	IOATIR500Shared::new_surface_texture	
+00009534	16	stub	n/a	IOATIR500Shared::new_agpref_texture	
+00009544	16	stub	n/a	IOATIR500Shared::new_texture	
+00009554	16	stub	n/a	FUN_00009554	
+00009570	152	method	DONE	IOATIR500GLContext::delete_texture	__ZN18IOATIR500GLContext14delete_textureEm
+0000960c	16	stub	n/a	FUN_0000960c	
+0000961c	16	stub	n/a	IOATIR500Shared::delete_texture	
+0000962c	16	stub	n/a	FUN_0000962c	
+00009640	208	method	DONE	IOATIR500GLContext::become_global_shared	__ZN18IOATIR500GLContext20become_global_sharedEm
+00009718	16	stub	n/a	FUN_00009718	
+00009728	16	stub	n/a	FUN_00009728	
+00009740	224	method	SIG?	IOATIR500GLContext::page_off_texture	__ZN18IOATIR500GLContext16page_off_textureEmmjj
+00009820	16	stub	n/a	FUN_00009820	
+00009830	16	stub	n/a	FUN_00009830	
+00009840	320	method	DONE	IOATIR500GLContext::purge_texture	__ZN18IOATIR500GLContext13purge_textureEm
+00009980	16	stub	n/a	FUN_00009980	
+00009990	16	stub	n/a	FUN_00009990	
+000099a0	96	method	DONE	IOATIR500GLContext::set_stereo	__ZN18IOATIR500GLContext10set_stereoEmm
+00009a00	16	stub	n/a	FUN_00009a00	
+00009a10	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
+00009a20	16	stub	n/a	FUN_00009a20	
+00009a30	1724	method	SIG?	IOATIR500GLContext::get_data_buffer	__ZN18IOATIR500GLContext15get_data_bufferEPjPm
+0000a10c	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
+0000a11c	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
+0000a12c	16	stub	n/a	FUN_0000a12c	
+0000a13c	16	stub	n/a	IOATIR500Accelerator::allocOneDataBuffer	
+0000a14c	16	stub	n/a	FUN_0000a14c	
+0000a160	3396	method	DONE	IOATIR500GLContext::clientMemoryForType	__ZN18IOATIR500GLContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+0000aed8	16	stub	n/a	FUN_0000aed8	
+0000aee8	16	stub	n/a	FUN_0000aee8	
+0000aef8	16	stub	n/a	IOATIR500GLContext::init_context_buffer_header	
+0000af08	16	stub	n/a	IOATIR500GLContext::init_command_buffer_header	
+0000af18	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+0000af28	16	stub	n/a	IOATIR500GLContext::freeCommandBuffer	
+0000af38	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+0000af48	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
+0000af58	16	stub	n/a	IOATIR500GLContext::remove_texture_from_stream	
+0000af68	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0000af78	16	stub	n/a	IOATIR500GLContext::add_texture_to_stream	
+0000af88	16	stub	n/a	FUN_0000af88	
+0000af98	16	stub	n/a	FUN_0000af98	
+0000afa8	16	stub	n/a	IOATIR500Surface::alloc_surfaces_pageq	
+0000afb8	16	stub	n/a	IOATIR500Surface::convert_surface_bits	
+0000afc8	16	stub	n/a	IOATIR500Surface::sleep_blocked	
+0000afd8	16	stub	n/a	FUN_0000afd8	
+0000afe8	16	stub	n/a	FUN_0000afe8	
+0000aff8	16	stub	n/a	FUN_0000aff8	
+0000b010	520	method	DONE	IOATIR500GLContext::get_config	__ZN18IOATIR500GLContext10get_configEPmS0_S0_
+0000b218	16	stub	n/a	FUN_0000b218	
+0000b228	16	stub	n/a	FUN_0000b228	
+0000b238	16	stub	n/a	FUN_0000b238	
+0000b250	448	method	DONE	IOATIR500GLContext::get_status	__ZN18IOATIR500GLContext10get_statusEPm
+0000b410	16	stub	n/a	FUN_0000b410	
+0000b420	16	stub	n/a	FUN_0000b420	
+0000b430	16	stub	n/a	FUN_0000b430	
+0000b440	68	generated	DONE	IOATIR5002DContext::IOATIR5002DContext	__ZN18IOATIR5002DContextC2EPK11OSMetaClass
+0000b484	16	stub	n/a	FUN_0000b484	
+0000b4a0	68	generated	DONE	IOATIR5002DContext::IOATIR5002DContext	__ZN18IOATIR5002DContextC1EPK11OSMetaClass
+0000b4e4	16	stub	n/a	FUN_0000b4e4	
+0000b500	60	generated	DONE	IOATIR5002DContext::~IOATIR5002DContext	__ZN18IOATIR5002DContextD2Ev
+0000b53c	16	stub	n/a	FUN_0000b53c	
+0000b550	72	generated	DONE	IOATIR5002DContext::~IOATIR5002DContext	__ZN18IOATIR5002DContextD0Ev
+0000b598	16	stub	n/a	FUN_0000b598	
+0000b5a8	16	stub	n/a	FUN_0000b5a8	
+0000b5c0	12	generated	DONE	IOATIR5002DContext::getMetaClass	__ZNK18IOATIR5002DContext12getMetaClassEv
+0000b5d0	88	generated	DONE	IOATIR5002DContext::MetaClass::MetaClass	__ZN18IOATIR5002DContext9MetaClassC1Ev
+0000b628	16	stub	n/a	FUN_0000b628	
+0000b640	88	generated	DONE	IOATIR5002DContext::MetaClass::MetaClass	__ZN18IOATIR5002DContext9MetaClassC2Ev
+0000b698	16	stub	n/a	FUN_0000b698	
+0000b6b0	8	generated	DONE	IOATIR5002DContext::MetaClass::alloc	__ZNK18IOATIR5002DContext9MetaClass5allocEv
+0000b6c0	292	method	DONE	IOATIR5002DContext::freeAllContextBuffers	__ZN18IOATIR5002DContext21freeAllContextBuffersEv
+0000b7f0	476	method	MISSING	IOATIR5002DContext::stop	__ZN18IOATIR5002DContext4stopEP9IOService
+0000b9dc	16	stub	n/a	IOATIR500Surface::prune_buffers	
+0000b9ec	16	stub	n/a	IOATIR500Surface::remove_2d_context_from_list	
+0000b9fc	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+0000ba0c	16	stub	n/a	IOATIR5002DContext::freeAllContextBuffers	
+0000ba1c	16	stub	n/a	FUN_0000ba1c	
+0000ba30	116	method	MISSING	IOATIR5002DContext::clientClose	__ZN18IOATIR5002DContext11clientCloseEv
+0000bab0	64	method	MISSING	IOATIR5002DContext::init_command_buffer_header	__ZN18IOATIR5002DContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
+0000baf0	56	method	DONE	IOATIR5002DContext::init_context_buffer_header	__ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm
+0000bb30	12	method	MISSING	IOATIR5002DContext::remove_surface	__ZN18IOATIR5002DContext14remove_surfaceEv
+0000bb40	112	method	DONE	IOATIR5002DContext::map_transfer_to_GART	__ZN18IOATIR5002DContext20map_transfer_to_GARTEP20VendorTransferBuffer
+0000bbb0	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+0000bbc0	184	method	DONE	IOATIR5002DContext::freeToAllocGART	__ZN18IOATIR5002DContext15freeToAllocGARTEP20VendorTransferBufferb
+0000bc78	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+0000bc90	192	method	DONE	IOATIR5002DContext::create_shared	__ZN18IOATIR5002DContext13create_sharedEv
+0000bd68	16	stub	n/a	IOATIR500Shared::IOATIR500Shared	
+0000bd78	16	stub	n/a	FUN_0000bd78	
+0000bd90	36	method	DONE	IOATIR5002DContext::get_config	__ZN18IOATIR5002DContext10get_configEPmS0_
+0000bdc0	244	method	DONE	IOATIR5002DContext::finish	__ZN18IOATIR5002DContext6finishEm
+0000bee0	408	method	DONE	IOATIR5002DContext::allocAllContextBuffers	__ZN18IOATIR5002DContext22allocAllContextBuffersEm
+0000c078	16	stub	n/a	IOATIR5002DContext::init_context_buffer_header	
+0000c088	16	stub	n/a	FUN_0000c088	
+0000c0a0	488	method	MISSING	IOATIR5002DContext::start	__ZN18IOATIR5002DContext5startEP9IOService
+0000c288	16	stub	n/a	IOATIR5002DContext::allocAllContextBuffers	
+0000c298	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+0000c2a8	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
+0000c2c0	12	method	SIG?	IOATIR5002DContext::set_surface_paging_options	__ZN18IOATIR5002DContext26set_surface_paging_optionsEP32IOSurfacePagingControlInfoStructS1_mPm
+0000c2d0	12	method	SIG?	IOATIR5002DContext::set_surface_vsync_options	__ZN18IOATIR5002DContext25set_surface_vsync_optionsEP31IOSurfaceVsyncControlInfoStructS1_mPm
+0000c2e0	236	method	MISSING	IOATIR5002DContext::set_macrovision	__ZN18IOATIR5002DContext15set_macrovisionEm
+0000c3e0	16	stub	n/a	FUN_0000c3e0	
+0000c3f0	16	stub	n/a	FUN_0000c3f0	
+0000c400	16	stub	n/a	FUN_0000c400	
+0000c410	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+0000c490	16	stub	n/a	IOATIR5002DContext::MetaClass::MetaClass	
+0000c4a0	60	generated	DONE	IOATIR5002DContext::MetaClass::~MetaClass	__ZN18IOATIR5002DContext9MetaClassD0Ev
+0000c4dc	16	stub	n/a	FUN_0000c4dc	
+0000c51c	16	stub	n/a	__static_initialization_and_destruction_0	
+0000c55c	16	stub	n/a	__static_initialization_and_destruction_0	
+0000c570	596	method	MISSING	IOATIR5002DContext::set_surface	__ZN18IOATIR5002DContext11set_surfaceEm18eIOContextModeBitsPvPm
+0000c7e0	16	stub	n/a	FUN_0000c7e0	
+0000c7f0	16	stub	n/a	IOATIR500Surface::add_2d_context_to_list	
+0000c800	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+0000c810	16	stub	n/a	IOATIR500Surface::prune_buffers	
+0000c820	16	stub	n/a	IOATIR500Surface::remove_2d_context_from_list	
+0000c830	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+0000c840	16	stub	n/a	FUN_0000c840	
+0000c850	212	method	MISSING	IOATIR5002DContext::get_surface_info	__ZN18IOATIR5002DContext16get_surface_infoEm18eIOContextModeBitsPvPm
+0000c930	16	stub	n/a	FUN_0000c930	
+0000c940	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+0000c950	16	stub	n/a	FUN_0000c950	
+0000c960	432	method	MISSING	IOATIR5002DContext::swap_surface	__ZN18IOATIR5002DContext12swap_surfaceEmPm
+0000cb14	16	stub	n/a	IOATIR500Surface::flush_surface	
+0000cb24	16	stub	n/a	FUN_0000cb24	
+0000cb34	16	stub	n/a	FUN_0000cb34	
+0000cb44	16	stub	n/a	FUN_0000cb44	
+0000cb54	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+0000cb64	16	stub	n/a	FUN_0000cb64	
+0000cb74	16	stub	n/a	FUN_0000cb74	
+0000cb90	180	method	DONE	IOATIR5002DContext::scale_surface	__ZN18IOATIR5002DContext13scale_surfaceEmmm
+0000cc4c	16	stub	n/a	FUN_0000cc4c	
+0000cc5c	16	stub	n/a	IOATIR500Surface::set_scaling	
+0000cc6c	16	stub	n/a	FUN_0000cc6c	
+0000cc80	576	method	MISSING	IOATIR5002DContext::lock_memory	__ZN18IOATIR5002DContext11lock_memoryEmPjPm
+0000cec4	16	stub	n/a	IOATIR500Surface::surface_write_lock_int	
+0000ced4	16	stub	n/a	FUN_0000ced4	
+0000cee4	16	stub	n/a	FUN_0000cee4	
+0000cef4	16	stub	n/a	FUN_0000cef4	
+0000cf04	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+0000cf14	16	stub	n/a	FUN_0000cf14	
+0000cf30	176	method	MISSING	IOATIR5002DContext::unlock_memory	__ZN18IOATIR5002DContext13unlock_memoryEmPm
+0000cfe0	16	stub	n/a	IOATIR5002DContext::swap_surface	
+0000cff0	16	stub	n/a	FUN_0000cff0	
+0000d000	16	stub	n/a	IOATIR500Surface::surface_write_unlock_int	
+0000d010	16	stub	n/a	FUN_0000d010	
+0000d020	196	method	SIG?	IOATIR5002DContext::declare_image	__ZN18IOATIR5002DContext13declare_imageEmjmPj
+0000d0ec	16	stub	n/a	FUN_0000d0ec	
+0000d0fc	16	stub	n/a	IOATIR500Shared::new_agp_texture	
+0000d10c	16	stub	n/a	IOATIR5002DContext::create_shared	
+0000d11c	16	stub	n/a	FUN_0000d11c	
+0000d130	216	method	SIG?	IOATIR5002DContext::create_image	__ZN18IOATIR5002DContext12create_imageEmmPjS0_
+0000d214	16	stub	n/a	FUN_0000d214	
+0000d224	16	stub	n/a	IOATIR500Shared::new_texture	
+0000d234	16	stub	n/a	IOATIR5002DContext::create_shared	
+0000d244	16	stub	n/a	FUN_0000d244	
+0000d260	368	method	MISSING	IOATIR5002DContext::create_transfer	__ZN18IOATIR5002DContext15create_transferEmmPjS0_
+0000d3e4	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
+0000d3f4	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+0000d404	16	stub	n/a	FUN_0000d404	
+0000d414	16	stub	n/a	IOATIR500Shared::new_agp_texture	
+0000d424	16	stub	n/a	IOATIR5002DContext::create_shared	
+0000d434	16	stub	n/a	FUN_0000d434	
+0000d450	288	method	DONE	IOATIR5002DContext::delete_image	__ZN18IOATIR5002DContext12delete_imageEm
+0000d580	16	stub	n/a	IOATIR500Shared::delete_texture	
+0000d590	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+0000d5a0	16	stub	n/a	FUN_0000d5a0	
+0000d5b0	16	stub	n/a	FUN_0000d5b0	
+0000d5c0	248	method	DONE	IOATIR5002DContext::wait_image	__ZN18IOATIR5002DContext10wait_imageEm
+0000d6c8	16	stub	n/a	FUN_0000d6c8	
+0000d6d8	16	stub	n/a	FUN_0000d6d8	
+0000d6f0	2080	method	MISSING	IOATIR5002DContext::clientMemoryForType	__ZN18IOATIR5002DContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+0000df34	16	stub	n/a	IOATIR5002DContext::init_context_buffer_header	
+0000df44	16	stub	n/a	IOATIR5002DContext::init_command_buffer_header	
+0000df54	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
+0000df64	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
+0000df74	16	stub	n/a	FUN_0000df74	
+0000df84	16	stub	n/a	FUN_0000df84	
+0000df94	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+0000dfa4	16	stub	n/a	IOATIR500Surface::sleep_blocked	
+0000dfb4	16	stub	n/a	FUN_0000dfb4	
+0000dfc4	16	stub	n/a	FUN_0000dfc4	
+0000dfd4	16	stub	n/a	FUN_0000dfd4	
+0000dff0	68	generated	DONE	IOATIR500DVDContext::IOATIR500DVDContext	__ZN19IOATIR500DVDContextC2EPK11OSMetaClass
+0000e034	16	stub	n/a	FUN_0000e034	
+0000e050	68	generated	DONE	IOATIR500DVDContext::IOATIR500DVDContext	__ZN19IOATIR500DVDContextC1EPK11OSMetaClass
+0000e094	16	stub	n/a	FUN_0000e094	
+0000e0b0	60	generated	DONE	IOATIR500DVDContext::~IOATIR500DVDContext	__ZN19IOATIR500DVDContextD2Ev
+0000e0ec	16	stub	n/a	FUN_0000e0ec	
+0000e100	72	generated	DONE	IOATIR500DVDContext::~IOATIR500DVDContext	__ZN19IOATIR500DVDContextD0Ev
+0000e148	16	stub	n/a	FUN_0000e148	
+0000e158	16	stub	n/a	FUN_0000e158	
+0000e170	12	generated	DONE	IOATIR500DVDContext::getMetaClass	__ZNK19IOATIR500DVDContext12getMetaClassEv
+0000e180	88	generated	DONE	IOATIR500DVDContext::MetaClass::MetaClass	__ZN19IOATIR500DVDContext9MetaClassC1Ev
+0000e1d8	16	stub	n/a	FUN_0000e1d8	
+0000e1f0	88	generated	DONE	IOATIR500DVDContext::MetaClass::MetaClass	__ZN19IOATIR500DVDContext9MetaClassC2Ev
+0000e248	16	stub	n/a	FUN_0000e248	
+0000e260	8	generated	DONE	IOATIR500DVDContext::MetaClass::alloc	__ZNK19IOATIR500DVDContext9MetaClass5allocEv
+0000e270	292	method	DONE	IOATIR500DVDContext::freeAllContextBuffers	__ZN19IOATIR500DVDContext21freeAllContextBuffersEv
+0000e3a0	680	method	MISSING	IOATIR500DVDContext::stop	__ZN19IOATIR500DVDContext4stopEP9IOService
+0000e660	16	stub	n/a	IOATIR500Shared::delete_texture	
+0000e670	16	stub	n/a	FUN_0000e670	
+0000e680	16	stub	n/a	IOATIR500Surface::prune_buffers	
+0000e690	16	stub	n/a	IOATIR500Surface::remove_dvd_context	
+0000e6a0	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+0000e6b0	16	stub	n/a	IOATIR500DVDContext::freeAllContextBuffers	
+0000e6c0	16	stub	n/a	FUN_0000e6c0	
+0000e6d0	116	method	MISSING	IOATIR500DVDContext::clientClose	__ZN19IOATIR500DVDContext11clientCloseEv
+0000e750	32	method	DONE	IOATIR500DVDContext::remove_texture_from_stream	__ZN19IOATIR500DVDContext26remove_texture_from_streamEP19VendorTextureBuffer
+0000e770	16	method	DONE	IOATIR500DVDContext::add_texture_to_stream	__ZN19IOATIR500DVDContext21add_texture_to_streamEP19VendorTextureBuffer
+0000e780	72	method	MISSING	IOATIR500DVDContext::init_command_buffer_header	__ZN19IOATIR500DVDContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
+0000e7d0	56	method	DONE	IOATIR500DVDContext::init_context_buffer_header	__ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm
+0000e810	12	method	MISSING	IOATIR500DVDContext::remove_surface	__ZN19IOATIR500DVDContext14remove_surfaceEv
+0000e820	112	method	DONE	IOATIR500DVDContext::map_transfer_to_GART	__ZN19IOATIR500DVDContext20map_transfer_to_GARTEP20VendorTransferBuffer
+0000e890	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+0000e8a0	184	method	DONE	IOATIR500DVDContext::freeToAllocGART	__ZN19IOATIR500DVDContext15freeToAllocGARTEP20VendorTransferBufferb
+0000e958	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+0000e970	8	method	MISSING	IOATIR500DVDContext::setCompatibleSurfaceMode	__ZN19IOATIR500DVDContext24setCompatibleSurfaceModeEPl21eIODVDContextModeBits
+0000e980	36	method	DONE	IOATIR500DVDContext::get_config	__ZN19IOATIR500DVDContext10get_configEPmS0_
+0000e9b0	44	method	DONE	IOATIR500DVDContext::get_status	__ZN19IOATIR500DVDContext10get_statusEPm
+0000e9e0	64	method	DONE	IOATIR500DVDContext::get_surface_size	__ZN19IOATIR500DVDContext16get_surface_sizeEPlS0_
+0000ea30	120	method	DONE	IOATIR500DVDContext::finish	__ZN19IOATIR500DVDContext6finishEv
+0000eab0	392	method	DONE	IOATIR500DVDContext::allocAllContextBuffers	__ZN19IOATIR500DVDContext22allocAllContextBuffersEm
+0000ec38	16	stub	n/a	IOATIR500DVDContext::init_context_buffer_header	
+0000ec48	16	stub	n/a	FUN_0000ec48	
+0000ec60	464	method	MISSING	IOATIR500DVDContext::start	__ZN19IOATIR500DVDContext5startEP9IOService
+0000ee30	16	stub	n/a	IOATIR500DVDContext::allocAllContextBuffers	
+0000ee40	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+0000ee50	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
+0000ee60	192	method	DONE	IOATIR500DVDContext::create_shared	__ZN19IOATIR500DVDContext13create_sharedEv
+0000ef38	16	stub	n/a	IOATIR500Shared::IOATIR500Shared	
+0000ef48	16	stub	n/a	FUN_0000ef48	
+0000ef60	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+0000efe0	16	stub	n/a	IOATIR500DVDContext::MetaClass::MetaClass	
+0000eff0	60	generated	DONE	IOATIR500DVDContext::MetaClass::~MetaClass	__ZN19IOATIR500DVDContext9MetaClassD0Ev
+0000f02c	16	stub	n/a	FUN_0000f02c	
+0000f06c	16	stub	n/a	__static_initialization_and_destruction_0	
+0000f0ac	16	stub	n/a	__static_initialization_and_destruction_0	
+0000f0c0	2152	method	MISSING	IOATIR500DVDContext::clientMemoryForType	__ZN19IOATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+0000f944	16	stub	n/a	IOATIR500DVDContext::init_context_buffer_header	
+0000f954	16	stub	n/a	IOATIR500DVDContext::init_command_buffer_header	
+0000f964	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+0000f974	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+0000f984	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
+0000f994	16	stub	n/a	IOATIR500DVDContext::remove_texture_from_stream	
+0000f9a4	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	
+0000f9b4	16	stub	n/a	IOATIR500DVDContext::add_texture_to_stream	
+0000f9c4	16	stub	n/a	FUN_0000f9c4	
+0000f9d4	16	stub	n/a	FUN_0000f9d4	
+0000f9e4	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+0000f9f4	16	stub	n/a	IOATIR500Surface::sleep_blocked	
+0000fa04	16	stub	n/a	FUN_0000fa04	
+0000fa14	16	stub	n/a	FUN_0000fa14	
+0000fa24	16	stub	n/a	FUN_0000fa24	
+0000fa40	552	method	SIG?	IOATIR500DVDContext::set_surface	__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi
+0000fc8c	16	stub	n/a	FUN_0000fc8c	
+0000fc9c	16	stub	n/a	IOATIR500Surface::set_dvd_context	
+0000fcac	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+0000fcbc	16	stub	n/a	IOATIR500Surface::prune_buffers	
+0000fccc	16	stub	n/a	IOATIR500Surface::remove_dvd_context	
+0000fcdc	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+0000fcec	16	stub	n/a	FUN_0000fcec	
+0000fd00	424	method	MISSING	IOATIR500DVDContext::lock_all_buffers	__ZN19IOATIR500DVDContext16lock_all_buffersEmP27sIODVDContextLockBufferData
+0000fec4	16	stub	n/a	FUN_0000fec4	
+0000fed4	16	stub	n/a	FUN_0000fed4	
+0000fee4	16	stub	n/a	FUN_0000fee4	
+0000fef4	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
+0000ff04	16	stub	n/a	FUN_0000ff04	
+0000ff20	148	method	DONE	IOATIR500DVDContext::unlock_memory	__ZN19IOATIR500DVDContext13unlock_memoryEmPm
+0000ffc0	16	stub	n/a	FUN_0000ffc0	
+0000ffd0	16	stub	n/a	FUN_0000ffd0	
+0000ffe0	940	method	SIG?	IOATIR500DVDContext::write_buffer	__ZN19IOATIR500DVDContext12write_bufferEP28sIODVDContextWriteBufferDatam
+00010398	16	stub	n/a	FUN_00010398	
+000103a8	16	stub	n/a	FUN_000103a8	
+000103b8	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
+000103c8	16	stub	n/a	FUN_000103c8	
+000103e0	196	method	SIG?	IOATIR500DVDContext::declare_image	__ZN19IOATIR500DVDContext13declare_imageEmjmPj
+000104ac	16	stub	n/a	FUN_000104ac	
+000104bc	16	stub	n/a	IOATIR500Shared::new_agp_texture	
+000104cc	16	stub	n/a	IOATIR500DVDContext::create_shared	
+000104dc	16	stub	n/a	FUN_000104dc	
+000104f0	184	method	DONE	IOATIR500DVDContext::delete_image	__ZN19IOATIR500DVDContext12delete_imageEm
+000105ac	16	stub	n/a	IOATIR500Shared::delete_texture	
+000105bc	16	stub	n/a	FUN_000105bc	
+000105cc	16	stub	n/a	FUN_000105cc	
+000105e0	68	generated	DONE	IOATIR500Surface::IOATIR500Surface	__ZN16IOATIR500SurfaceC2EPK11OSMetaClass
+00010624	16	stub	n/a	FUN_00010624	
+00010640	68	generated	DONE	IOATIR500Surface::IOATIR500Surface	__ZN16IOATIR500SurfaceC1EPK11OSMetaClass
+00010684	16	stub	n/a	FUN_00010684	
+000106a0	60	generated	DONE	IOATIR500Surface::~IOATIR500Surface	__ZN16IOATIR500SurfaceD2Ev
+000106dc	16	stub	n/a	FUN_000106dc	
+000106f0	72	generated	DONE	IOATIR500Surface::~IOATIR500Surface	__ZN16IOATIR500SurfaceD0Ev
+00010738	16	stub	n/a	FUN_00010738	
+00010748	16	stub	n/a	FUN_00010748	
+00010760	12	generated	DONE	IOATIR500Surface::getMetaClass	__ZNK16IOATIR500Surface12getMetaClassEv
+00010770	88	generated	DONE	IOATIR500Surface::MetaClass::MetaClass	__ZN16IOATIR500Surface9MetaClassC1Ev
+000107c8	16	stub	n/a	FUN_000107c8	
+000107e0	88	generated	DONE	IOATIR500Surface::MetaClass::MetaClass	__ZN16IOATIR500Surface9MetaClassC2Ev
+00010838	16	stub	n/a	FUN_00010838	
+00010850	8	generated	DONE	IOATIR500Surface::MetaClass::alloc	__ZNK16IOATIR500Surface9MetaClass5allocEv
+00010860	496	method	DONE	IOATIR500Surface::freeAllSwapBuffers	__ZN16IOATIR500Surface18freeAllSwapBuffersEm
+00010a50	88	method	MISSING	IOATIR500Surface::free	__ZN16IOATIR500Surface4freeEv
+00010aa8	16	stub	n/a	FUN_00010aa8	
+00010ac0	116	method	MISSING	IOATIR500Surface::clientClose	__ZN16IOATIR500Surface11clientCloseEv
+00010b40	52	method	DONE	IOATIR500Surface::init_swap_buffer_header	__ZN16IOATIR500Surface23init_swap_buffer_headerEP22VendorSwapBufferHeaderm
+00010b80	32	method	DONE	IOATIR500Surface::add_gl_context_to_list	__ZN16IOATIR500Surface22add_gl_context_to_listEP18IOATIR500GLContext
+00010ba0	32	method	MISSING	IOATIR500Surface::add_2d_context_to_list	__ZN16IOATIR500Surface22add_2d_context_to_listEP18IOATIR5002DContext
+00010bc0	24	method	DONE	IOATIR500Surface::set_dvd_context	__ZN16IOATIR500Surface15set_dvd_contextEP19IOATIR500DVDContext
+00010be0	112	method	DONE	IOATIR500Surface::map_transfer_to_GART	__ZN16IOATIR500Surface20map_transfer_to_GARTEP20VendorTransferBuffer
+00010c50	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+00010c60	356	method	DONE	IOATIR500Surface::freeToAllocGART	__ZN16IOATIR500Surface15freeToAllocGARTEP20VendorTransferBufferb
+00010dc8	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+00010de0	324	method	DONE	IOATIR500Surface::reset_access	__ZN16IOATIR500Surface12reset_accessEv
+00010f30	100	method	SIG?	IOATIR500Surface::get_state	__ZN16IOATIR500Surface9get_stateEP24eIOAccelSurfaceStateBits
+00010fa0	320	method	DONE	IOATIR500Surface::flush_surface	__ZN16IOATIR500Surface13flush_surfaceEmm
+000110e0	8	method	DONE	IOATIR500Surface::prepare_vram	__ZN16IOATIR500Surface12prepare_vramEP20ATIR500SurfaceBuffer
+000110f0	8	method	DONE	IOATIR500Surface::complete_vram	__ZN16IOATIR500Surface13complete_vramEP20ATIR500SurfaceBuffer
+00011100	16	method	MISSING	IOATIR500Surface::set_access	__ZN16IOATIR500Surface10set_accessEv
+00011110	752	method	DONE	IOATIR500Surface::copy_buffer_to_backing_store	__ZN16IOATIR500Surface28copy_buffer_to_backing_storeEP20ATIR500SurfaceBuffer
+00011400	16	stub	n/a	FUN_00011400	
+00011410	16	stub	n/a	FUN_00011410	
+00011420	100	method	DONE	IOATIR500Surface::move_buffer_to_backing_store	__ZN16IOATIR500Surface28move_buffer_to_backing_storeEP20ATIR500SurfaceBuffer
+00011484	16	stub	n/a	IOATIR500Surface::copy_buffer_to_backing_store	
+000114a0	148	method	DONE	IOATIR500Surface::surface_write_lock_int	__ZN16IOATIR500Surface22surface_write_lock_intEmPmS0_
+00011540	64	method	DONE	IOATIR500Surface::surface_write_unlock_int	__ZN16IOATIR500Surface24surface_write_unlock_intEm
+00011580	184	method	DONE	IOATIR500Surface::update_contexts	__ZN16IOATIR500Surface15update_contextsEv
+00011640	468	method	DONE	IOATIR500Surface::set_scaling	__ZN16IOATIR500Surface11set_scalingEmP21IOAccelSurfaceScaling
+00011824	16	stub	n/a	IOATIR500Surface::update_contexts	
+00011840	108	method	MISSING	IOATIR500Surface::sleep_blocked	__ZN16IOATIR500Surface13sleep_blockedEv
+000118ac	16	stub	n/a	FUN_000118ac	
+000118bc	16	stub	n/a	FUN_000118bc	
+000118cc	16	stub	n/a	FUN_000118cc	
+000118e0	236	method	DONE	IOATIR500Surface::allocMasterSwapBuffer	__ZN16IOATIR500Surface21allocMasterSwapBufferEmm
+000119d0	16	stub	n/a	IOATIR500Surface::init_swap_buffer_header	
+000119e0	16	stub	n/a	FUN_000119e0	
+000119f0	1048	method	DONE	IOATIR500Surface::start	__ZN16IOATIR500Surface5startEP9IOService
+00011e08	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
+00011e18	16	stub	n/a	IOATIR500Surface::allocMasterSwapBuffer	
+00011e28	16	stub	n/a	FUN_00011e28	
+00011e38	16	stub	n/a	FUN_00011e38	
+00011e50	468	method	DONE	IOATIR500Surface::allocAllSlaveSwapBuffers	__ZN16IOATIR500Surface24allocAllSlaveSwapBuffersEmm
+00012024	16	stub	n/a	IOATIR500Surface::init_swap_buffer_header	
+00012034	16	stub	n/a	FUN_00012034	
+00012050	184	method	DONE	IOATIR500Surface::invalidate_contexts	__ZN16IOATIR500Surface19invalidate_contextsEv
+00012110	484	method	SIG?	IOATIR500Surface::alloc_surfaces_pageq	__ZN16IOATIR500Surface20alloc_surfaces_pageqEmmb
+000122f4	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+00012304	16	stub	n/a	IOATIR500Surface::invalidate_contexts	
+00012320	308	method	DONE	IOATIR500Surface::convert_surface_bits	__ZN16IOATIR500Surface20convert_surface_bitsEm
+00012470	40	method	MISSING	IOATIR500Surface::alloc_surfaces	__ZN16IOATIR500Surface14alloc_surfacesEmb
+00012498	16	stub	n/a	IOATIR500Surface::alloc_surfaces_pageq	
+000124b0	196	method	DONE	IOATIR500Surface::alloc_surfaces_keep	__ZN16IOATIR500Surface19alloc_surfaces_keepEPS_PP19VendorTextureBufferlm
+00012580	168	method	DONE	IOATIR500Surface::dealloc_surface	__ZN16IOATIR500Surface15dealloc_surfaceEm
+00012628	16	stub	n/a	ATIR500Memory::dealloc	
+00012640	436	method	DONE	IOATIR500Surface::attach_buffer_backing_store	__ZN16IOATIR500Surface27attach_buffer_backing_storeEP20ATIR500SurfaceBufferP18IOMemoryDescriptormm
+00012800	220	method	SIG?	IOATIR500Surface::connect_buffer_backing_store	__ZN16IOATIR500Surface28connect_buffer_backing_storeEP20ATIR500SurfaceBufferjm
+000128dc	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
+000128ec	16	stub	n/a	FUN_000128ec	
+00012900	216	method	MISSING	IOATIR500Surface::alloc_buffer_backing_store	__ZN16IOATIR500Surface26alloc_buffer_backing_storeEP20ATIR500SurfaceBuffer
+000129e0	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
+000129f0	16	stub	n/a	FUN_000129f0	
+00012a00	548	method	DONE	IOATIR500Surface::copy_buffer_from_backing_store	__ZN16IOATIR500Surface30copy_buffer_from_backing_storeEP20ATIR500SurfaceBuffer
+00012c30	276	method	DONE	IOATIR500Surface::delete_buffer_backing	__ZN16IOATIR500Surface21delete_buffer_backingEP15IOTextureBuffer
+00012d44	16	stub	n/a	IOATIR500Accelerator::addOrphanTexture	
+00012d60	116	method	DONE	IOATIR500Surface::free_buffer_backing_orphans	__ZN16IOATIR500Surface27free_buffer_backing_orphansEv
+00012dd4	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
+00012df0	112	method	DONE	IOATIR500Surface::free_buffer_backing_store	__ZN16IOATIR500Surface25free_buffer_backing_storeEP20ATIR500SurfaceBuffer
+00012e64	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
+00012e80	780	method	DONE	IOATIR500Surface::prune_buffers	__ZN16IOATIR500Surface13prune_buffersEv
+00013194	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+000131b0	64	method	MISSING	IOATIR500Surface::move_buffer_from_backing_store	__ZN16IOATIR500Surface30move_buffer_from_backing_storeEP20ATIR500SurfaceBuffer
+000131f0	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+00013200	16	stub	n/a	IOATIR500Surface::copy_buffer_from_backing_store	
+00013210	272	method	MISSING	IOATIR500Surface::alloc_surface_keep	__ZN16IOATIR500Surface18alloc_surface_keepEPS_PP19VendorTextureBufferlm
+00013328	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+00013338	16	stub	n/a	IOATIR500Surface::move_buffer_from_backing_store	
+00013348	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
+00013360	280	method	MISSING	IOATIR500Surface::alloc_surface	__ZN16IOATIR500Surface13alloc_surfaceEmb
+00013478	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+00013488	16	stub	n/a	IOATIR500Surface::move_buffer_from_backing_store	
+00013498	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
+000134b0	960	method	MISSING	IOATIR500Surface::stop	__ZN16IOATIR500Surface4stopEP9IOService
+00013884	16	stub	n/a	FUN_00013884	
+00013894	16	stub	n/a	IOATIR500Surface::freeAllSwapBuffers	
+000138a4	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
+000138b4	16	stub	n/a	IOATIR500DVDContext::remove_surface	
+000138c4	16	stub	n/a	IOATIR5002DContext::remove_surface	
+000138d4	16	stub	n/a	IOATIR500GLContext::remove_surface	
+000138e4	16	stub	n/a	IOATIR500Surface::free_buffer_backing_orphans	
+00013900	196	method	MISSING	IOATIR500Surface::setupFullScreen	__ZN16IOATIR500Surface15setupFullScreenEv
+000139d0	228	method	DONE	IOATIR500Surface::resetFullScreen	__ZN16IOATIR500Surface15resetFullScreenEv
+00013ac0	348	method	DONE	IOATIR500Surface::surface_buffer_idx_mask	__ZN16IOATIR500Surface23surface_buffer_idx_maskEmPm
+00013c70	336	method	DONE	IOATIR500Surface::reset_req_bits	__ZN16IOATIR500Surface14reset_req_bitsEv
+00013dc8	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
+00013de0	52	method	DONE	IOATIR500Surface::remove_dvd_context	__ZN16IOATIR500Surface18remove_dvd_contextEP19IOATIR500DVDContext
+00013e14	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00013e30	100	method	MISSING	IOATIR500Surface::remove_2d_context_from_list	__ZN16IOATIR500Surface27remove_2d_context_from_listEP18IOATIR5002DContext
+00013ea4	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00013ec0	100	method	DONE	IOATIR500Surface::remove_gl_context_from_list	__ZN16IOATIR500Surface27remove_gl_context_from_listEP18IOATIR500GLContext
+00013f34	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00013f50	8	method	MISSING	IOATIR500Surface::surface_req_bits	__ZN16IOATIR500Surface16surface_req_bitsEv
+00013f60	72	method	DONE	IOATIR500Surface::is_flip_allowed	__ZN16IOATIR500Surface15is_flip_allowedEv
+00013fb0	40	method	DONE	IOATIR500Surface::is_surface_size_supported	__ZN16IOATIR500Surface25is_surface_size_supportedEss
+00013fe0	8	method	DONE	IOATIR500Surface::update_ref_stamps	__ZN16IOATIR500Surface17update_ref_stampsEmm
+00013ff0	4	method	DONE	IOATIR500Surface::increment_refcounts	__ZN16IOATIR500Surface19increment_refcountsEm
+00014000	4	method	DONE	IOATIR500Surface::decrement_refcounts	__ZN16IOATIR500Surface19decrement_refcountsEm
+00014010	64	method	MISSING	IOATIR500Surface::buffer_map_offset	__ZN16IOATIR500Surface17buffer_map_offsetEP20ATIR500SurfaceBuffermmPlS2_S2_
+00014050	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+000140d0	16	stub	n/a	IOATIR500Surface::MetaClass::MetaClass	
+000140e0	60	generated	DONE	IOATIR500Surface::MetaClass::~MetaClass	__ZN16IOATIR500Surface9MetaClassD0Ev
+0001411c	16	stub	n/a	FUN_0001411c	
+0001415c	16	stub	n/a	__static_initialization_and_destruction_0	
+0001419c	16	stub	n/a	__static_initialization_and_destruction_0	
+000141b0	188	method	MISSING	IOATIR500Surface::clientMemoryForType	__ZN16IOATIR500Surface19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+00014274	16	stub	n/a	IOATIR500Surface::init_swap_buffer_header	
+00014284	16	stub	n/a	FUN_00014284	
+00014294	16	stub	n/a	FUN_00014294	
+000142b0	1284	method	SIG?	IOATIR500Surface::set_id_mode	__ZN16IOATIR500Surface11set_id_modeEm18eIOSurfaceModeBits
+000147f0	16	stub	n/a	FUN_000147f0	
+00014800	16	stub	n/a	IOATIR500Surface::prune_buffers	
+00014810	16	stub	n/a	FUN_00014810	
+00014820	16	stub	n/a	FUN_00014820	
+00014830	16	stub	n/a	IOATIR500Surface::reset_access	
+00014840	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00014850	16	stub	n/a	FUN_00014850	
+00014860	348	method	SIG?	IOATIR500Surface::alloc_surfaces_retry	__ZN16IOATIR500Surface20alloc_surfaces_retryEm9eLockType
+000149d4	16	stub	n/a	FUN_000149d4	
+000149e4	16	stub	n/a	FUN_000149e4	
+000149f4	16	stub	n/a	FUN_000149f4	
+00014a04	16	stub	n/a	FUN_00014a04	
+00014a14	16	stub	n/a	IOATIR500Surface::alloc_surfaces_pageq	
+00014a30	1008	method	DONE	IOATIR500Surface::surface_read	__ZN16IOATIR500Surface12surface_readEP22IOAccelSurfaceReadDatam
+00014e28	16	stub	n/a	FUN_00014e28	
+00014e38	16	stub	n/a	FUN_00014e38	
+00014e48	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
+00014e58	16	stub	n/a	FUN_00014e58	
+00014e70	168	method	DONE	IOATIR500Surface::surface_flush	__ZN16IOATIR500Surface13surface_flushEmm
+00014f18	16	stub	n/a	FUN_00014f18	
+00014f28	16	stub	n/a	IOATIR500Surface::flush_surface	
+00014f38	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
+00014f48	16	stub	n/a	FUN_00014f48	
+00014f60	260	method	SIG?	IOATIR500Surface::surface_unlock_options	__ZN16IOATIR500Surface22surface_unlock_optionsE9eLockTypem
+00015070	16	stub	n/a	FUN_00015070	
+00015080	16	stub	n/a	IOATIR500Surface::free_buffer_backing_orphans	
+00015090	16	stub	n/a	FUN_00015090	
+000150a0	40	method	DONE	IOATIR500Surface::surface_write_unlock	__ZN16IOATIR500Surface20surface_write_unlockEv
+000150c8	16	stub	n/a	IOATIR500Surface::surface_unlock_options	
+000150e0	40	method	DONE	IOATIR500Surface::surface_write_unlock_options	__ZN16IOATIR500Surface28surface_write_unlock_optionsEm
+00015108	16	stub	n/a	IOATIR500Surface::surface_unlock_options	
+00015120	40	method	DONE	IOATIR500Surface::surface_read_unlock	__ZN16IOATIR500Surface19surface_read_unlockEv
+00015148	16	stub	n/a	IOATIR500Surface::surface_unlock_options	
+00015160	40	method	DONE	IOATIR500Surface::surface_read_unlock_options	__ZN16IOATIR500Surface27surface_read_unlock_optionsEm
+00015188	16	stub	n/a	IOATIR500Surface::surface_unlock_options	
+000151a0	260	method	DONE	IOATIR500Surface::surface_query_lock	__ZN16IOATIR500Surface18surface_query_lockEv
+000152a4	16	stub	n/a	FUN_000152a4	
+000152b4	16	stub	n/a	FUN_000152b4	
+000152d0	1416	method	SIG?	IOATIR500Surface::set_shape_backing_length_ext	__ZN16IOATIR500Surface28set_shape_backing_length_extE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionmm
+00015870	16	stub	n/a	FUN_00015870	
+00015880	16	stub	n/a	IOATIR500Surface::connect_buffer_backing_store	
+00015890	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
+000158a0	16	stub	n/a	IOATIR500Surface::update_contexts	
+000158b0	16	stub	n/a	FUN_000158b0	
+000158c0	16	stub	n/a	FUN_000158c0	
+000158d0	16	stub	n/a	FUN_000158d0	
+000158e0	16	stub	n/a	FUN_000158e0	
+000158f0	80	method	SIG?	IOATIR500Surface::set_shape_backing_length	__ZN16IOATIR500Surface24set_shape_backing_lengthE24eIOAccelSurfaceShapeBitsmjmmP19IOAccelDeviceRegion
+00015948	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
+00015960	36	method	SIG?	IOATIR500Surface::set_shape_backing	__ZN16IOATIR500Surface17set_shape_backingE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionm
+00015984	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
+000159a0	52	method	SIG?	IOATIR500Surface::set_shape	__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm
+000159d4	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
+000159f0	148	method	DONE	IOATIR500Surface::set_scale	__ZN16IOATIR500Surface9set_scaleEmP21IOAccelSurfaceScalingm
+00015a84	16	stub	n/a	FUN_00015a84	
+00015a94	16	stub	n/a	IOATIR500Surface::set_scaling	
+00015aa4	16	stub	n/a	FUN_00015aa4	
+00015ac0	128	method	DONE	IOATIR500Surface::set_surface_blocking	__ZN16IOATIR500Surface20set_surface_blockingEm
+00015b40	16	stub	n/a	FUN_00015b40	
+00015b50	16	stub	n/a	FUN_00015b50	
+00015b60	16	stub	n/a	FUN_00015b60	
+00015b70	272	method	SIG?	IOATIR500Surface::set_volatile_state	__ZN16IOATIR500Surface18set_volatile_stateE21eSurfaceVolatileState
+00015c84	16	stub	n/a	FUN_00015c84	
+00015c94	16	stub	n/a	FUN_00015c94	
+00015cb0	84	method	SIG?	IOATIR500Surface::surface_control	__ZN16IOATIR500Surface15surface_controlEmmPm
+00015d10	16	stub	n/a	IOATIR500Surface::set_volatile_state	
+00015d20	16	stub	n/a	IOATIR500Surface::set_surface_blocking	
+00015d30	1636	method	SIG?	IOATIR500Surface::surface_lock_options	__ZN16IOATIR500Surface20surface_lock_optionsE9eLockTypemP18IOAccelSurfaceDatam
+000163c4	16	stub	n/a	FUN_000163c4	
+000163d4	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+000163e4	16	stub	n/a	IOATIR500Surface::copy_buffer_to_backing_store	
+000163f4	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
+00016404	16	stub	n/a	FUN_00016404	
+00016414	16	stub	n/a	FUN_00016414	
+00016430	48	method	DONE	IOATIR500Surface::surface_write_lock	__ZN16IOATIR500Surface18surface_write_lockEP18IOAccelSurfaceDatam
+00016460	16	stub	n/a	IOATIR500Surface::surface_lock_options	
+00016470	52	method	DONE	IOATIR500Surface::surface_write_lock_options	__ZN16IOATIR500Surface26surface_write_lock_optionsEmP18IOAccelSurfaceDatam
+000164a4	16	stub	n/a	IOATIR500Surface::surface_lock_options	
+000164c0	48	method	DONE	IOATIR500Surface::surface_read_lock	__ZN16IOATIR500Surface17surface_read_lockEP18IOAccelSurfaceDatam
+000164f0	16	stub	n/a	IOATIR500Surface::surface_lock_options	
+00016500	52	method	DONE	IOATIR500Surface::surface_read_lock_options	__ZN16IOATIR500Surface25surface_read_lock_optionsEmP18IOAccelSurfaceDatam
+00016534	16	stub	n/a	IOATIR500Surface::surface_lock_options	
+00016550	68	generated	DONE	IOATIR500Shared::IOATIR500Shared	__ZN15IOATIR500SharedC2EPK11OSMetaClass
+00016594	16	stub	n/a	FUN_00016594	
+000165b0	68	generated	DONE	IOATIR500Shared::IOATIR500Shared	__ZN15IOATIR500SharedC1EPK11OSMetaClass
+000165f4	16	stub	n/a	FUN_000165f4	
+00016610	60	generated	DONE	IOATIR500Shared::~IOATIR500Shared	__ZN15IOATIR500SharedD2Ev
+0001664c	16	stub	n/a	FUN_0001664c	
+00016660	72	generated	DONE	IOATIR500Shared::~IOATIR500Shared	__ZN15IOATIR500SharedD0Ev
+000166a8	16	stub	n/a	FUN_000166a8	
+000166b8	16	stub	n/a	FUN_000166b8	
+000166d0	12	generated	DONE	IOATIR500Shared::getMetaClass	__ZNK15IOATIR500Shared12getMetaClassEv
+000166e0	88	generated	DONE	IOATIR500Shared::MetaClass::MetaClass	__ZN15IOATIR500Shared9MetaClassC1Ev
+00016738	16	stub	n/a	FUN_00016738	
+00016750	88	generated	DONE	IOATIR500Shared::MetaClass::MetaClass	__ZN15IOATIR500Shared9MetaClassC2Ev
+000167a8	16	stub	n/a	FUN_000167a8	
+000167c0	80	generated	DONE	IOATIR500Shared::IOATIR500Shared	__ZN15IOATIR500SharedC1Ev
+00016810	16	stub	n/a	FUN_00016810	
+00016820	16	stub	n/a	FUN_00016820	
+00016830	68	generated	DONE	IOATIR500Shared::MetaClass::alloc	__ZNK15IOATIR500Shared9MetaClass5allocEv
+00016874	16	stub	n/a	IOATIR500Shared::IOATIR500Shared	
+00016884	16	stub	n/a	FUN_00016884	
+000168a0	80	generated	DONE	IOATIR500Shared::IOATIR500Shared	__ZN15IOATIR500SharedC2Ev
+000168f0	16	stub	n/a	FUN_000168f0	
+00016900	16	stub	n/a	FUN_00016900	
+00016910	300	method	DONE	IOATIR500Shared::alloc_handles	__ZN15IOATIR500Shared13alloc_handlesEv
+00016a58	16	stub	n/a	FUN_00016a58	
+00016a68	16	stub	n/a	FUN_00016a68	
+00016a78	16	stub	n/a	FUN_00016a78	
+00016a88	16	stub	n/a	FUN_00016a88	
+00016aa0	116	method	DONE	IOATIR500Shared::init	__ZN15IOATIR500Shared4initEv
+00016b14	16	stub	n/a	IOATIR500Shared::alloc_handles	
+00016b30	112	method	DONE	IOATIR500Shared::free_handles	__ZN15IOATIR500Shared12free_handlesEv
+00016ba0	16	stub	n/a	FUN_00016ba0	
+00016bb0	292	method	DONE	IOATIR500Shared::alloc_buf_handle	__ZN15IOATIR500Shared16alloc_buf_handleEPvPm
+00016cd4	16	stub	n/a	IOATIR500Shared::alloc_handles	
+00016cf0	92	method	DONE	IOATIR500Shared::free_buf_handle	__ZN15IOATIR500Shared15free_buf_handleEPvm
+00016d50	704	method	SIG?	IOATIR500Shared::alloc_client_shared	__ZN15IOATIR500Shared19alloc_client_sharedEmPP15sIOClientSharedPj
+00017028	16	stub	n/a	FUN_00017028	
+00017038	16	stub	n/a	FUN_00017038	
+00017048	16	stub	n/a	FUN_00017048	
+00017060	212	method	DONE	IOATIR500Shared::freeToAllocGART	__ZN15IOATIR500Shared15freeToAllocGARTEP20VendorTransferBufferb
+00017138	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
+00017150	856	method	SIG?	IOATIR500Shared::new_agp_texture	__ZN15IOATIR500Shared15new_agp_textureEjmPj
+000174b8	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+000174c8	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
+000174d8	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
+000174e8	16	stub	n/a	FUN_000174e8	
+000174f8	16	stub	n/a	FUN_000174f8	
+00017508	16	stub	n/a	FUN_00017508	
+00017520	432	method	SIG?	IOATIR500Shared::new_surface_texture	__ZN15IOATIR500Shared19new_surface_textureEmmmPj
+000176dc	16	stub	n/a	IOATIR500Surface::prune_buffers	
+000176ec	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+000176fc	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+0001770c	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
+0001771c	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
+0001772c	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+00017740	456	method	SIG?	IOATIR500Shared::new_global_texture	__ZN15IOATIR500Shared18new_global_textureEmPj
+00017908	16	stub	n/a	FUN_00017908	
+00017918	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+00017928	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
+00017938	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
+00017950	1012	method	DONE	IOATIR500Shared::delete_texture	__ZN15IOATIR500Shared14delete_textureEP19VendorTextureBuffer
+00017d84	16	stub	n/a	IOATIR500Accelerator::addOrphanTexture	
+00017d94	16	stub	n/a	IOATIR500Surface::prune_buffers	
+00017da4	16	stub	n/a	IOATIR500Surface::reset_req_bits	
+00017db4	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+00017dc4	16	stub	n/a	IOATIR500Shared::delete_texture	
+00017dd4	16	stub	n/a	FUN_00017dd4	
+00017df0	504	method	SIG?	IOATIR500Shared::new_agpref_texture	__ZN15IOATIR500Shared18new_agpref_textureEjjmPj
+00017ff8	16	stub	n/a	FUN_00017ff8	
+00018008	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+00018018	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
+00018028	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
+00018038	16	stub	n/a	IOATIR500Shared::delete_texture	
+00018048	16	stub	n/a	IOATIR500Shared::new_agp_texture	
+00018060	924	method	SIG?	IOATIR500Shared::new_texture	__ZN15IOATIR500Shared11new_textureEmmjmPjS0_
+00018458	16	stub	n/a	FUN_00018458	
+00018468	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+00018478	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
+00018488	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
+00018498	16	stub	n/a	FUN_00018498	
+000184a8	16	stub	n/a	IOATIR500Shared::delete_texture	
+000184b8	16	stub	n/a	IOATIR500Shared::new_agp_texture	
+000184d0	496	method	DONE	IOATIR500Shared::free	__ZN15IOATIR500Shared4freeEv
+000186c4	16	stub	n/a	IOATIR500Shared::free_handles	
+000186d4	16	stub	n/a	FUN_000186d4	
+000186e4	16	stub	n/a	IOATIR500Accelerator::freeOrphanTexture	
+000186f4	16	stub	n/a	IOATIR500Shared::delete_texture	
+00018710	260	method	DONE	IOATIR500Shared::free_texvert	__ZN15IOATIR500Shared12free_texvertEP20IOATIR500AcceleratorP15IOTextureBuffer
+00018814	16	stub	n/a	IOATIR500Shared::free_buf_handle	
+00018830	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+000188b0	16	stub	n/a	IOATIR500Shared::MetaClass::MetaClass	
+000188c0	60	generated	DONE	IOATIR500Shared::MetaClass::~MetaClass	__ZN15IOATIR500Shared9MetaClassD0Ev
+000188fc	16	stub	n/a	FUN_000188fc	
+0001893c	16	stub	n/a	__static_initialization_and_destruction_0	
+0001897c	16	stub	n/a	__static_initialization_and_destruction_0	
+00018990	68	generated	DONE	ATIR500Memory::ATIR500Memory	__ZN13ATIR500MemoryC2EPK11OSMetaClass
+000189d4	16	stub	n/a	FUN_000189d4	
+000189f0	68	generated	DONE	ATIR500Memory::ATIR500Memory	__ZN13ATIR500MemoryC1EPK11OSMetaClass
+00018a34	16	stub	n/a	FUN_00018a34	
+00018a50	60	generated	DONE	ATIR500Memory::~ATIR500Memory	__ZN13ATIR500MemoryD2Ev
+00018a8c	16	stub	n/a	FUN_00018a8c	
+00018aa0	72	generated	DONE	ATIR500Memory::~ATIR500Memory	__ZN13ATIR500MemoryD0Ev
+00018ae8	16	stub	n/a	FUN_00018ae8	
+00018af8	16	stub	n/a	FUN_00018af8	
+00018b10	12	generated	DONE	ATIR500Memory::getMetaClass	__ZNK13ATIR500Memory12getMetaClassEv
+00018b20	88	generated	DONE	ATIR500Memory::MetaClass::MetaClass	__ZN13ATIR500Memory9MetaClassC1Ev
+00018b78	16	stub	n/a	FUN_00018b78	
+00018b90	88	generated	DONE	ATIR500Memory::MetaClass::MetaClass	__ZN13ATIR500Memory9MetaClassC2Ev
+00018be8	16	stub	n/a	FUN_00018be8	
+00018c00	80	generated	DONE	ATIR500Memory::ATIR500Memory	__ZN13ATIR500MemoryC1Ev
+00018c50	16	stub	n/a	FUN_00018c50	
+00018c60	16	stub	n/a	FUN_00018c60	
+00018c70	68	generated	DONE	ATIR500Memory::MetaClass::alloc	__ZNK13ATIR500Memory9MetaClass5allocEv
+00018cb4	16	stub	n/a	ATIR500Memory::ATIR500Memory	
+00018cc4	16	stub	n/a	FUN_00018cc4	
+00018ce0	80	generated	DONE	ATIR500Memory::ATIR500Memory	__ZN13ATIR500MemoryC2Ev
+00018d30	16	stub	n/a	FUN_00018d30	
+00018d40	16	stub	n/a	FUN_00018d40	
+00018d50	132	method	DONE	ATIR500Memory::init	__ZN13ATIR500Memory4initEv
+00018de8	16	stub	n/a	FUN_00018de8	
+00018e00	324	method	DONE	ATIR500Memory::init_pool	__ZN13ATIR500Memory9init_poolEm
+00018f44	16	stub	n/a	FUN_00018f44	
+00018f60	424	method	DONE	ATIR500Memory::init_pool	__ZN13ATIR500Memory9init_poolEmmm
+00019108	16	stub	n/a	FUN_00019108	
+00019120	116	method	DONE	ATIR500Memory::free	__ZN13ATIR500Memory4freeEv
+00019198	16	stub	n/a	FUN_00019198	
+000191b0	176	method	DONE	ATIR500Memory::add_to_stack	__ZN13ATIR500Memory12add_to_stackEv
+00019260	16	stub	n/a	FUN_00019260	
+00019270	396	method	DONE	ATIR500Memory::reserve	__ZN13ATIR500Memory7reserveEP16GLKMemoryElementmm
+00019414	16	stub	n/a	ATIR500Memory::add_to_stack	
+00019430	412	method	DONE	ATIR500Memory::alloc	__ZN13ATIR500Memory5allocEP16GLKMemoryElementmm
+000195d4	16	stub	n/a	ATIR500Memory::add_to_stack	
+000195f0	436	method	DONE	ATIR500Memory::alloc	__ZN13ATIR500Memory5allocEP16GLKMemoryElementmmmm
+000197b4	16	stub	n/a	ATIR500Memory::add_to_stack	
+000197d0	276	method	DONE	ATIR500Memory::dealloc	__ZN13ATIR500Memory7deallocEP16GLKMemoryElement
+000198f4	16	stub	n/a	ATIR500Memory::add_to_stack	
+00019910	72	method	DONE	ATIR500Memory::total_free	__ZN13ATIR500Memory10total_freeEv
+00019970	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+000199f0	16	stub	n/a	ATIR500Memory::MetaClass::MetaClass	
+00019a00	60	generated	DONE	ATIR500Memory::MetaClass::~MetaClass	__ZN13ATIR500Memory9MetaClassD0Ev
+00019a3c	16	stub	n/a	FUN_00019a3c	
+00019a7c	16	stub	n/a	__static_initialization_and_destruction_0	
+00019abc	16	stub	n/a	__static_initialization_and_destruction_0	
+00019ad0	8	method	MISSING	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
+00019ae0	68	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C2EPK11OSMetaClass
+00019b24	16	stub	n/a	FUN_00019b24	
+00019b40	68	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C1EPK11OSMetaClass
+00019b84	16	stub	n/a	FUN_00019b84	
+00019ba0	60	generated	DONE	ATIRadeonX1000::~ATIRadeonX1000	__ZN14ATIRadeonX1000D2Ev
+00019bdc	16	stub	n/a	FUN_00019bdc	
+00019bf0	72	generated	DONE	ATIRadeonX1000::~ATIRadeonX1000	__ZN14ATIRadeonX1000D0Ev
+00019c38	16	stub	n/a	FUN_00019c38	
+00019c48	16	stub	n/a	FUN_00019c48	
+00019c60	12	generated	DONE	ATIRadeonX1000::getMetaClass	__ZNK14ATIRadeonX100012getMetaClassEv
+00019c70	88	generated	DONE	ATIRadeonX1000::MetaClass::MetaClass	__ZN14ATIRadeonX10009MetaClassC1Ev
+00019cc8	16	stub	n/a	FUN_00019cc8	
+00019ce0	88	generated	DONE	ATIRadeonX1000::MetaClass::MetaClass	__ZN14ATIRadeonX10009MetaClassC2Ev
+00019d38	16	stub	n/a	FUN_00019d38	
+00019d50	80	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C1Ev
+00019da0	16	stub	n/a	FUN_00019da0	
+00019db0	16	stub	n/a	FUN_00019db0	
+00019dc0	68	generated	DONE	ATIRadeonX1000::MetaClass::alloc	__ZNK14ATIRadeonX10009MetaClass5allocEv
+00019e04	16	stub	n/a	ATIRadeonX1000::ATIRadeonX1000	
+00019e14	16	stub	n/a	FUN_00019e14	
+00019e30	80	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C2Ev
+00019e80	16	stub	n/a	FUN_00019e80	
+00019e90	16	stub	n/a	FUN_00019e90	
+00019ea0	108	method	MISSING	ATIRadeonX1000::getPeriodValue	__ZN14ATIRadeonX100014getPeriodValueEPc
+00019f14	16	stub	n/a	FUN_00019f14	
+00019f30	112	method	DONE	ATIRadeonX1000::enable_GPUSensor	__ZN14ATIRadeonX100016enable_GPUSensorEv
+00019fa0	44	method	MISSING	ATIRadeonX1000::free	__ZN14ATIRadeonX10004freeEv
+00019fd0	104	method	DONE	ATIRadeonX1000::disable_GPUSensor	__ZN14ATIRadeonX100017disable_GPUSensorEv
+0001a040	200	method	MISSING	ATIRadeonX1000::callPlatformFunction	__ZN14ATIRadeonX100020callPlatformFunctionEPK8OSSymbolbPvS3_S3_S3_
+0001a118	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
+0001a128	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
+0001a140	68	method	DONE	ATIRadeonX1000::new_surface	__ZN14ATIRadeonX100011new_surfaceEv
+0001a184	16	stub	n/a	ATIR500Surface::ATIR500Surface	
+0001a194	16	stub	n/a	FUN_0001a194	
+0001a1b0	68	method	DONE	ATIRadeonX1000::new_gl_context	__ZN14ATIRadeonX100014new_gl_contextEv
+0001a1f4	16	stub	n/a	ATIR500GLContext::ATIR500GLContext	
+0001a204	16	stub	n/a	FUN_0001a204	
+0001a220	68	method	DONE	ATIRadeonX1000::new_2d_context	__ZN14ATIRadeonX100014new_2d_contextEv
+0001a264	16	stub	n/a	ATIR5002DContext::ATIR5002DContext	
+0001a274	16	stub	n/a	FUN_0001a274	
+0001a290	68	method	DONE	ATIRadeonX1000::new_dvd_context	__ZN14ATIRadeonX100015new_dvd_contextEv
+0001a2d4	16	stub	n/a	ATIR500DVDContext::ATIR500DVDContext	
+0001a2e4	16	stub	n/a	FUN_0001a2e4	
+0001a300	156	method	MISSING	ATIRadeonX1000::writePerformanceStats	__ZN14ATIRadeonX100021writePerformanceStatsEP12OSDictionary
+0001a39c	16	stub	n/a	FUN_0001a39c	
+0001a3ac	16	stub	n/a	ATIR500Memory::total_free	
+0001a3c0	44	method	MISSING	ATIRadeonX1000::configureAGP	__ZN14ATIRadeonX100012configureAGPEP9IOService
+0001a3f0	44	method	MISSING	ATIRadeonX1000::teardownAGP	__ZN14ATIRadeonX100011teardownAGPEP9IOService
+0001a420	44	method	MISSING	ATIRadeonX1000::commitAGPMemory	__ZN14ATIRadeonX100015commitAGPMemoryEP18IOMemoryDescriptormm
+0001a450	44	method	MISSING	ATIRadeonX1000::releaseAGPMemory	__ZN14ATIRadeonX100016releaseAGPMemoryEP18IOMemoryDescriptormm
+0001a480	44	method	DONE	ATIRadeonX1000::addToGART	__ZN14ATIRadeonX10009addToGARTEP18IOMemoryDescriptorPm
+0001a4b0	20	method	MISSING	ATIRadeonX1000::makeGARTEntry	__ZN14ATIRadeonX100013makeGARTEntryEm
+0001a4d0	88	method	DONE	ATIRadeonX1000::addTransferToGART	__ZN14ATIRadeonX100017addTransferToGARTEP20VendorTransferBuffer
+0001a530	44	method	DONE	ATIRadeonX1000::removeTransferFromGART	__ZN14ATIRadeonX100022removeTransferFromGARTEP20VendorTransferBuffer
+0001a560	44	method	DONE	ATIRadeonX1000::allocVendorTextureBuffer	__ZN14ATIRadeonX100024allocVendorTextureBufferEm
+0001a590	44	method	DONE	ATIRadeonX1000::releaseVendorTextureBuffer	__ZN14ATIRadeonX100026releaseVendorTextureBufferEP19VendorTextureBufferm
+0001a5c0	44	method	MISSING	ATIRadeonX1000::mapVendorTransferBuffer	__ZN14ATIRadeonX100023mapVendorTransferBufferEP20VendorTransferBuffer
+0001a5f0	44	method	MISSING	ATIRadeonX1000::unmapVendorTransferBuffer	__ZN14ATIRadeonX100025unmapVendorTransferBufferEP20VendorTransferBuffer
+0001a620	420	method	DONE	ATIRadeonX1000::deallocate_texture	__ZN14ATIRadeonX100018deallocate_textureEP19VendorTextureBuffer
+0001a7d0	16	stub	n/a	ATIR500Memory::dealloc	
+0001a7e0	16	stub	n/a	HZMEM_Free	
+0001a7f0	16	stub	n/a	IOATIR500Accelerator::pageOffDataBuffer	
+0001a800	408	method	DONE	ATIRadeonX1000::allocate_texture	__ZN14ATIRadeonX100016allocate_textureEP19VendorTextureBuffer
+0001a9ac	16	stub	n/a	ATIR500Memory::alloc	
+0001a9c0	4	method	MISSING	ATIRadeonX1000::pageOffPCIeGART	__ZN14ATIRadeonX100015pageOffPCIeGARTEv
+0001a9d0	36	method	MISSING	ATIRadeonX1000::SWDSIsRequired	__ZN14ATIRadeonX100014SWDSIsRequiredEv
+0001aa00	168	method	MISSING	ATIRadeonX1000::SWDSEnableCLUT	__ZN14ATIRadeonX100014SWDSEnableCLUTEm
+0001aaa8	16	stub	n/a	FUN_0001aaa8	
+0001aab8	16	stub	n/a	FUN_0001aab8	
+0001aad0	52	method	DONE	ATIRadeonX1000::tmpAllocVRAM	__ZN14ATIRadeonX100012tmpAllocVRAMEP16GLKMemoryElementmm
+0001ab04	16	stub	n/a	ATIR500Memory::alloc	
+0001ab20	36	method	DONE	ATIRadeonX1000::tmpDeallocVRAM	__ZN14ATIRadeonX100014tmpDeallocVRAMEP16GLKMemoryElement
+0001ab44	16	stub	n/a	ATIR500Memory::dealloc	
+0001ab60	36	method	MISSING	ATIRadeonX1000::tmpTotalVRAM	__ZN14ATIRadeonX100012tmpTotalVRAMEv
+0001ab84	16	stub	n/a	ATIR500Memory::total_free	
+0001aba0	8	method	DONE	ATIRadeonX1000::getNumPipes	__ZN14ATIRadeonX100011getNumPipesEv
+0001abb0	8	method	DONE	ATIRadeonX1000::getChipID	__ZN14ATIRadeonX10009getChipIDEv
+0001abc0	8	method	DONE	ATIRadeonX1000::getChipRev	__ZN14ATIRadeonX100010getChipRevEv
+0001abd0	8	method	DONE	ATIRadeonX1000::getNumZPipes	__ZN14ATIRadeonX100012getNumZPipesEv
+0001abe0	1348	method	DONE	store_reg	__Z9store_regP20tracked_register_setmm
+0001b180	344	method	DONE	track_regs_written_by_pm4	__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_
+0001b2ec	16	stub	n/a	store_reg	
+0001b300	8	method	MISSING	ATIRadeonX1000::getAccelCapsBits	__ZN14ATIRadeonX100016getAccelCapsBitsEv
+0001b310	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+0001b390	16	stub	n/a	ATIRadeonX1000::MetaClass::MetaClass	
+0001b3a0	60	generated	DONE	ATIRadeonX1000::MetaClass::~MetaClass	__ZN14ATIRadeonX10009MetaClassD0Ev
+0001b3dc	16	stub	n/a	FUN_0001b3dc	
+0001b41c	16	stub	n/a	__static_initialization_and_destruction_0	
+0001b45c	16	stub	n/a	__static_initialization_and_destruction_0	
+0001b470	136	method	MISSING	DumpPCIeGART	__Z12DumpPCIeGARTPmmm
+0001b514	16	stub	n/a	FUN_0001b514	
+0001b524	16	stub	n/a	FUN_0001b524	
+0001b540	344	method	MISSING	ATIRadeonX1000::removeFromPCIeGART	__ZN14ATIRadeonX100018removeFromPCIeGARTEP18IOMemoryDescriptorm
+0001b6a0	32	method	MISSING	ATIRadeonX1000::removeFromGART	__ZN14ATIRadeonX100014removeFromGARTEP18IOMemoryDescriptorm
+0001b6c0	16	stub	n/a	ATIRadeonX1000::removeFromPCIeGART	
+0001b6d0	252	method	MISSING	ATIRadeonX1000::reserveInGART	__ZN14ATIRadeonX100013reserveInGARTEm
+0001b7d8	16	stub	n/a	FUN_0001b7d8	
+0001b7f0	172	method	MISSING	ATIRadeonX1000::clearInGART	__ZN14ATIRadeonX100011clearInGARTEm
+0001b8a0	992	method	MISSING	dump_registers	__Z14dump_registersP14ATIRadeonX1000
+0001bc80	16	stub	n/a	FUN_0001bc80	
+0001bc90	16	stub	n/a	FUN_0001bc90	
+0001bca0	116	method	DONE	ATIRadeonX1000::submit_empty_buffer	__ZN14ATIRadeonX100019submit_empty_bufferEv
+0001bd20	988	method	MISSING	ATIRadeonX1000::setupR520Pipes	__ZN14ATIRadeonX100014setupR520PipesEv
+0001c104	16	stub	n/a	FUN_0001c104	
+0001c120	2384	method	MISSING	ATIRadeonX1000::set_display_mode_and_vram	__ZN14ATIRadeonX100025set_display_mode_and_vramEv
+0001caac	16	stub	n/a	FUN_0001caac	
+0001cabc	16	stub	n/a	FUN_0001cabc	
+0001cacc	16	stub	n/a	ATIR500Memory::reserve	
+0001cadc	16	stub	n/a	ATIR500Memory::init_pool	
+0001caec	16	stub	n/a	ATIR500Memory::init_pool	
+0001cb00	524	method	MISSING	ATIRadeonX1000::stop_promo4_engine	__ZN14ATIRadeonX100018stop_promo4_engineEv
+0001cd14	16	stub	n/a	FUN_0001cd14	
+0001cd30	88	method	MISSING	ATIRadeonX1000::load_promo4_micro_code	__ZN14ATIRadeonX100022load_promo4_micro_codeEv
+0001cd90	428	method	MISSING	ATIRadeonX1000::start_promo4_engine	__ZN14ATIRadeonX100019start_promo4_engineEm
+0001cf44	16	stub	n/a	FUN_0001cf44	
+0001cf54	16	stub	n/a	ATIRadeonX1000::load_promo4_micro_code	
+0001cf70	928	method	MISSING	ATIRadeonX1000::setup_R500_internal_space	__ZN14ATIRadeonX100025setup_R500_internal_spaceEv
+0001d350	284	method	MISSING	ATIRadeonX1000::SWDSShutdown	__ZN14ATIRadeonX100012SWDSShutdownEv
+0001d470	16	stub	n/a	ATIR500Memory::dealloc	
+0001d480	844	method	DONE	ATIRadeonX1000::DumpASICHangState	__ZN14ATIRadeonX100017DumpASICHangStateEv
+0001d7cc	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
+0001d7dc	16	stub	n/a	FUN_0001d7dc	
+0001d7ec	16	stub	n/a	FUN_0001d7ec	
+0001d7fc	16	stub	n/a	FUN_0001d7fc	
+0001d80c	16	stub	n/a	FUN_0001d80c	
+0001d81c	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
+0001d830	920	method	MISSING	ATIRadeonX1000::startupPCIeGART	__ZN14ATIRadeonX100015startupPCIeGARTEv
+0001dbd4	16	stub	n/a	FUN_0001dbd4	
+0001dbe4	16	stub	n/a	FUN_0001dbe4	
+0001dbf4	16	stub	n/a	FUN_0001dbf4	
+0001dc10	164	method	MISSING	ATIRadeonX1000::shutdownPCIeGART	__ZN14ATIRadeonX100016shutdownPCIeGARTEv
+0001dcb4	16	stub	n/a	ATIR500Memory::dealloc	
+0001dcd0	168	method	MISSING	ATIRadeonX1000::pageOnPCIeGART	__ZN14ATIRadeonX100014pageOnPCIeGARTEv
+0001dd80	576	method	MISSING	ATIRadeonX1000::addToPCIeGART	__ZN14ATIRadeonX100013addToPCIeGARTEP18IOMemoryDescriptorPmmm
+0001dfd0	32	method	MISSING	ATIRadeonX1000::addToMinMaxGART	__ZN14ATIRadeonX100015addToMinMaxGARTEP18IOMemoryDescriptorPmmm
+0001dff0	16	stub	n/a	ATIRadeonX1000::addToPCIeGART	
+0001e000	40	method	MISSING	ATIRadeonX1000::noop_buffer	__ZN14ATIRadeonX100011noop_bufferEPm
+0001e030	48	method	MISSING	ATIRadeonX1000::checkForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029checkForConsumedIDCTTimeStampEm
+0001e060	48	method	MISSING	ATIRadeonX1000::checkForRetiredTimeStamp	__ZN14ATIRadeonX100024checkForRetiredTimeStampEm
+0001e090	48	method	MISSING	ATIRadeonX1000::checkForTimeStamp	__ZN14ATIRadeonX100017checkForTimeStampEm
+0001e0c0	56	method	MISSING	ATIRadeonX1000::initialize_GUI	__ZN14ATIRadeonX100014initialize_GUIEv
+0001e100	232	method	MISSING	ATIRadeonX1000::GPUSensorFunc	__ZN14ATIRadeonX100013GPUSensorFuncEP8OSObjectP18IOTimerEventSource
+0001e1e8	16	stub	n/a	FUN_0001e1e8	
+0001e1f8	16	stub	n/a	FUN_0001e1f8	
+0001e210	204	method	MISSING	ATIRadeonX1000::system_did_change_speed	__ZN14ATIRadeonX100023system_did_change_speedEv
+0001e2dc	16	stub	n/a	FUN_0001e2dc	
+0001e2ec	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
+0001e2fc	16	stub	n/a	ATIRadeonX1000::getPeriodValue	
+0001e30c	16	stub	n/a	FUN_0001e30c	
+0001e320	428	method	DONE	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM	__ZN14ATIRadeonX100032freeToAllocTextureCPUVisibleVRAMEP19VendorTextureBufferm
+0001e4e4	16	stub	n/a	ATIR500Memory::alloc	
+0001e500	1492	method	DONE	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	__ZN14ATIRadeonX100030pageoff_dirty_texture_with_cpuEP19VendorTextureBufferP22ATITextureBufferHeader
+0001eb18	16	stub	n/a	FUN_0001eb18	
+0001eb30	1244	method	DONE	ATIRadeonX1000::submit_idct_buffer_consumed	__ZN14ATIRadeonX100027submit_idct_buffer_consumedEPmmP15sATIDVDIDCTInfo
+0001f010	16	stub	n/a	ATIRadeonX1000::DumpASICHangState	
+0001f020	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
+0001f030	420	method	DONE	ATIRadeonX1000::submit_ring_data	__ZN14ATIRadeonX100016submit_ring_dataEv
+0001f1e0	376	method	MISSING	ATIRadeonX1000::system_will_change_speed	__ZN14ATIRadeonX100024system_will_change_speedEv
+0001f364	16	stub	n/a	FUN_0001f364	
+0001f374	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
+0001f384	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
+0001f394	16	stub	n/a	FUN_0001f394	
+0001f3a4	16	stub	n/a	FUN_0001f3a4	
+0001f3c0	764	method	MISSING	ATIRadeonX1000::initialize_hardware	__ZN14ATIRadeonX100019initialize_hardwareEv
+0001f6c8	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
+0001f6d8	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
+0001f6e8	16	stub	n/a	FUN_0001f6e8	
+0001f6f8	16	stub	n/a	ATIRadeonX1000::set_display_mode_and_vram	
+0001f708	16	stub	n/a	ATIRadeonX1000::start_promo4_engine	
+0001f718	16	stub	n/a	ATIRadeonX1000::initialize_GUI	
+0001f728	16	stub	n/a	ATIRadeonX1000::setup_R500_internal_space	
+0001f738	16	stub	n/a	ATIRadeonX1000::setupR520Pipes	
+0001f750	3692	method	MISSING	ATIRadeonX1000::start	__ZN14ATIRadeonX10005startEP9IOService
+000205d8	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
+000205e8	16	stub	n/a	ATIRadeonX1000::getPeriodValue	
+000205f8	16	stub	n/a	FUN_000205f8	
+00020608	16	stub	n/a	ATIRadeonX1000::initialize_hardware	
+00020618	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+00020628	16	stub	n/a	FUN_00020628	
+00020638	16	stub	n/a	FUN_00020638	
+00020648	16	stub	n/a	HZMEM_Init	
+00020658	16	stub	n/a	FUN_00020658	
+00020668	16	stub	n/a	FUN_00020668	
+00020678	16	stub	n/a	FUN_00020678	
+00020688	16	stub	n/a	ATIRadeonX1000::startupPCIeGART	
+00020698	16	stub	n/a	ATIRadeonX1000::setupR520Pipes	
+000206a8	16	stub	n/a	FUN_000206a8	
+000206b8	16	stub	n/a	ATIR500Memory::ATIR500Memory	
+000206c8	16	stub	n/a	FUN_000206c8	
+000206d8	16	stub	n/a	FUN_000206d8	
+000206e8	16	stub	n/a	ATIR500Memory::init_pool	
+00020700	572	method	MISSING	ATIRadeonX1000::submit_buffer_retired	__ZN14ATIRadeonX100021submit_buffer_retiredEPmmm
+00020944	16	stub	n/a	ATIRadeonX1000::DumpASICHangState	
+00020954	16	stub	n/a	FUN_00020954	
+00020964	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
+00020980	756	method	DONE	ATIRadeonX1000::submit_buffer	__ZN14ATIRadeonX100013submit_bufferEPmmm
+00020c84	16	stub	n/a	ATIRadeonX1000::DumpASICHangState	
+00020c94	16	stub	n/a	FUN_00020c94	
+00020ca4	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
+00020cb4	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
+00020cc4	16	stub	n/a	FUN_00020cc4	
+00020ce0	56	method	MISSING	ATIRadeonX1000::submit_commands	__ZN14ATIRadeonX100015submit_commandsEP23VendorCommandDescriptor
+00020d18	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00020d30	872	method	DONE	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	__ZN14ATIRadeonX100036prepare_texture_for_pageoff_with_cpuEP19VendorTextureBufferP22ATITextureBufferHeader
+00021098	16	stub	n/a	ATIR500Memory::dealloc	
+000210a8	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+000210b8	16	stub	n/a	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM	
+000210c8	16	stub	n/a	ATIR500Memory::alloc	
+000210d8	16	stub	n/a	FUN_000210d8	
+000210f0	1672	method	DONE	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	__ZN14ATIRadeonX100030pageoff_dirty_texture_with_gpuEP19VendorTextureBufferP22ATITextureBufferHeader
+0002177c	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0002178c	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+000217a0	1172	method	DONE	ATIRadeonX1000::pageoff_linear_buffer	__ZN14ATIRadeonX100021pageoff_linear_bufferEP19VendorTextureBufferP22ATITextureBufferHeader
+00021c40	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00021c50	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
+00021c60	380	method	DONE	ATIRadeonX1000::pageoff_dirty_texture	__ZN14ATIRadeonX100021pageoff_dirty_textureEP19VendorTextureBufferll
+00021dec	16	stub	n/a	ATIRadeonX1000::pageoff_dirty_texture_with_cpu	
+00021dfc	16	stub	n/a	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	
+00021e0c	16	stub	n/a	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	
+00021e1c	16	stub	n/a	ATIRadeonX1000::pageoff_linear_buffer	
+00021e30	5260	method	MISSING	pcl_CopyPix	__Z11pcl_CopyPixPmP16pcl_ParamsR500_tbb
+00023308	16	stub	n/a	FUN_00023308	
+00023320	4040	method	MISSING	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	__ZN14ATIRadeonX100021SWDSWriteBlitToCmdBufEPmmbm
+0002431c	16	stub	n/a	FUN_0002431c	
+0002432c	16	stub	n/a	pcl_CopyPix	
+00024340	708	method	MISSING	ATIRadeonX1000::SWDSFunc	__ZN14ATIRadeonX10008SWDSFuncEP8OSObjectP18IOTimerEventSource
+00024628	16	stub	n/a	FUN_00024628	
+00024638	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00024648	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
+00024658	16	stub	n/a	FUN_00024658	
+00024670	1884	method	MISSING	ATIRadeonX1000::SWDSInit	__ZN14ATIRadeonX10008SWDSInitEv
+00024df8	16	stub	n/a	ATIR500Memory::dealloc	
+00024e08	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00024e18	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
+00024e28	16	stub	n/a	ATIR500Memory::reserve	
+00024e40	376	method	MISSING	ATIRadeonX1000::display_mode_did_change	__ZN14ATIRadeonX100023display_mode_did_changeEv
+00024fc4	16	stub	n/a	FUN_00024fc4	
+00024fd4	16	stub	n/a	IOATIR500Accelerator::disp_mode_did_change	
+00024fe4	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
+00024ff4	16	stub	n/a	ATIRadeonX1000::getPeriodValue	
+00025004	16	stub	n/a	ATIRadeonX1000::SWDSEnableCLUT	
+00025014	16	stub	n/a	ATIRadeonX1000::SWDSInit	
+00025024	16	stub	n/a	ATIRadeonX1000::SWDSIsRequired	
+00025034	16	stub	n/a	ATIRadeonX1000::initialize_hardware	
+00025044	16	stub	n/a	ATIRadeonX1000::pageOnPCIeGART	
+00025054	16	stub	n/a	ATIRadeonX1000::startupPCIeGART	
+00025064	16	stub	n/a	FUN_00025064	
+00025080	268	method	MISSING	ATIRadeonX1000::waitForRetiredTimeStamp	__ZN14ATIRadeonX100023waitForRetiredTimeStampEm
+00025194	16	stub	n/a	FUN_00025194	
+000251a4	16	stub	n/a	FUN_000251a4	
+000251b4	16	stub	n/a	FUN_000251b4	
+000251c4	16	stub	n/a	FUN_000251c4	
+000251e0	304	method	DONE	ATIRadeonX1000::waitForTimeStamp	__ZN14ATIRadeonX100016waitForTimeStampEm
+00025314	16	stub	n/a	FUN_00025314	
+00025324	16	stub	n/a	FUN_00025324	
+00025334	16	stub	n/a	FUN_00025334	
+00025344	16	stub	n/a	FUN_00025344	
+00025360	304	method	MISSING	ATIRadeonX1000::waitForTimeStampNoLock	__ZN14ATIRadeonX100022waitForTimeStampNoLockEm
+00025494	16	stub	n/a	FUN_00025494	
+000254a4	16	stub	n/a	FUN_000254a4	
+000254b4	16	stub	n/a	FUN_000254b4	
+000254c4	16	stub	n/a	FUN_000254c4	
+000254e0	304	method	DONE	ATIRadeonX1000::waitForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100028waitForConsumedIDCTTimeStampEm
+00025614	16	stub	n/a	FUN_00025614	
+00025624	16	stub	n/a	FUN_00025624	
+00025634	16	stub	n/a	FUN_00025634	
+00025644	16	stub	n/a	FUN_00025644	
+00025660	304	method	MISSING	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029sleepForConsumedIDCTTimeStampEm
+00025794	16	stub	n/a	FUN_00025794	
+000257a4	16	stub	n/a	FUN_000257a4	
+000257b4	16	stub	n/a	FUN_000257b4	
+000257c4	16	stub	n/a	FUN_000257c4	
+000257e0	304	method	MISSING	ATIRadeonX1000::sleepForRetiredTimeStamp	__ZN14ATIRadeonX100024sleepForRetiredTimeStampEm
+00025914	16	stub	n/a	FUN_00025914	
+00025924	16	stub	n/a	FUN_00025924	
+00025934	16	stub	n/a	FUN_00025934	
+00025944	16	stub	n/a	FUN_00025944	
+00025960	304	method	DONE	ATIRadeonX1000::sleepForTimeStamp	__ZN14ATIRadeonX100017sleepForTimeStampEm
+00025a94	16	stub	n/a	FUN_00025a94	
+00025aa4	16	stub	n/a	FUN_00025aa4	
+00025ab4	16	stub	n/a	FUN_00025ab4	
+00025ac4	16	stub	n/a	FUN_00025ac4	
+00025ae0	304	method	MISSING	ATIRadeonX1000::sleepForTimeStampNoLock	__ZN14ATIRadeonX100023sleepForTimeStampNoLockEm
+00025c14	16	stub	n/a	FUN_00025c14	
+00025c24	16	stub	n/a	FUN_00025c24	
+00025c34	16	stub	n/a	FUN_00025c34	
+00025c44	16	stub	n/a	FUN_00025c44	
+00025c60	368	method	MISSING	ATIRadeonX1000::start_xdct_engine	__ZN14ATIRadeonX100017start_xdct_engineEv
+00025dd0	16	stub	n/a	FUN_00025dd0	
+00025de0	16	stub	n/a	FUN_00025de0	
+00025df0	236	method	MISSING	ATIRadeonX1000::stop_xdct_engine	__ZN14ATIRadeonX100016stop_xdct_engineEv
+00025edc	16	stub	n/a	FUN_00025edc	
+00025eec	16	stub	n/a	FUN_00025eec	
+00025f00	640	method	MISSING	ATIRadeonX1000::display_mode_will_change	__ZN14ATIRadeonX100024display_mode_will_changeEl
+0002618c	16	stub	n/a	FUN_0002618c	
+0002619c	16	stub	n/a	ATIR500Memory::init_pool	
+000261ac	16	stub	n/a	ATIRadeonX1000::stop_xdct_engine	
+000261bc	16	stub	n/a	ATIR500Memory::dealloc	
+000261cc	16	stub	n/a	ATIRadeonX1000::shutdownPCIeGART	
+000261dc	16	stub	n/a	ATIRadeonX1000::stop_promo4_engine	
+000261ec	16	stub	n/a	FUN_000261ec	
+000261fc	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
+0002620c	16	stub	n/a	ATIRadeonX1000::SWDSShutdown	
+0002621c	16	stub	n/a	IOATIR500Accelerator::disp_mode_will_change	
+0002622c	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
+0002623c	16	stub	n/a	FUN_0002623c	
+00026250	1620	method	MISSING	ATIRadeonX1000::stop	__ZN14ATIRadeonX10004stopEP9IOService
+000268a8	16	stub	n/a	ATIRadeonX1000::shutdownPCIeGART	
+000268b8	16	stub	n/a	FUN_000268b8	
+000268c8	16	stub	n/a	HZMEM_Destroy	
+000268d8	16	stub	n/a	ATIRadeonX1000::stop_promo4_engine	
+000268e8	16	stub	n/a	ATIRadeonX1000::stop_xdct_engine	
+000268f8	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+00026908	16	stub	n/a	ATIR500Memory::dealloc	
+00026920	68	generated	DONE	ATIR500GLContext::ATIR500GLContext	__ZN16ATIR500GLContextC2EPK11OSMetaClass
+00026964	16	stub	n/a	IOATIR500GLContext::IOATIR500GLContext	
+00026980	68	generated	DONE	ATIR500GLContext::ATIR500GLContext	__ZN16ATIR500GLContextC1EPK11OSMetaClass
+000269c4	16	stub	n/a	IOATIR500GLContext::IOATIR500GLContext	
+000269e0	60	generated	DONE	ATIR500GLContext::~ATIR500GLContext	__ZN16ATIR500GLContextD2Ev
+00026a1c	16	stub	n/a	IOATIR500GLContext::~IOATIR500GLContext	
+00026a30	72	generated	DONE	ATIR500GLContext::~ATIR500GLContext	__ZN16ATIR500GLContextD0Ev
+00026a78	16	stub	n/a	FUN_00026a78	
+00026a88	16	stub	n/a	IOATIR500GLContext::~IOATIR500GLContext	
+00026aa0	12	generated	DONE	ATIR500GLContext::getMetaClass	__ZNK16ATIR500GLContext12getMetaClassEv
+00026ab0	88	generated	DONE	ATIR500GLContext::MetaClass::MetaClass	__ZN16ATIR500GLContext9MetaClassC1Ev
+00026b08	16	stub	n/a	FUN_00026b08	
+00026b20	88	generated	DONE	ATIR500GLContext::MetaClass::MetaClass	__ZN16ATIR500GLContext9MetaClassC2Ev
+00026b78	16	stub	n/a	FUN_00026b78	
+00026b90	80	generated	DONE	ATIR500GLContext::ATIR500GLContext	__ZN16ATIR500GLContextC1Ev
+00026be0	16	stub	n/a	FUN_00026be0	
+00026bf0	16	stub	n/a	IOATIR500GLContext::IOATIR500GLContext	
+00026c00	68	generated	DONE	ATIR500GLContext::MetaClass::alloc	__ZNK16ATIR500GLContext9MetaClass5allocEv
+00026c44	16	stub	n/a	ATIR500GLContext::ATIR500GLContext	
+00026c54	16	stub	n/a	FUN_00026c54	
+00026c70	80	generated	DONE	ATIR500GLContext::ATIR500GLContext	__ZN16ATIR500GLContextC2Ev
+00026cc0	16	stub	n/a	FUN_00026cc0	
+00026cd0	16	stub	n/a	IOATIR500GLContext::IOATIR500GLContext	
+00026ce0	164	method	DONE	convertIOGLBufferToBufIdx	__Z25convertIOGLBufferToBufIdxmPm
+00026db0	52	method	DONE	ATIR500GLContext::getTargetAndMethodForIndex	__ZN16ATIR500GLContext26getTargetAndMethodForIndexEPP9IOServicem
+00026df0	80	method	DONE	ATIR500GLContext::compute_sc_hyperz_en	__ZN16ATIR500GLContext20compute_sc_hyperz_enEm
+00026e40	132	method	DONE	ATIR500GLContext::compute_zb_bw_cntl	__ZN16ATIR500GLContext18compute_zb_bw_cntlEm
+00026ed0	124	method	DONE	ATIR500GLContext::GetVertexArrayOffset	__ZN16ATIR500GLContext20GetVertexArrayOffsetEP19VendorTextureBufferm
+00026f60	72	method	DONE	ATIR500GLContext::GetQueryOffset	__ZN16ATIR500GLContext14GetQueryOffsetEP19VendorTextureBuffermm
+00026fb0	20	method	DONE	ATIR500GLContext::invalidate	__ZN16ATIR500GLContext10invalidateEv
+00026fd0	48	method	MISSING	ATIR500GLContext::set_texture_flags	__ZN16ATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
+00027000	152	method	MISSING	ATIR500GLContext::clientMemoryForType	__ZN16ATIR500GLContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+000270a0	324	method	MISSING	ATIR500GLContext::setCompatibleSurfaceMode	__ZN16ATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
+00027210	148	method	DONE	ATIR500GLContext::get_hw_info	__ZN16ATIR500GLContext11get_hw_infoEPmS0_S0_S0_S0_
+000272a4	16	stub	n/a	FUN_000272a4	
+000272b4	16	stub	n/a	ATIRadeonX1000::getNumZPipes	
+000272c4	16	stub	n/a	ATIRadeonX1000::getChipRev	
+000272d4	16	stub	n/a	ATIRadeonX1000::getChipID	
+000272e4	16	stub	n/a	ATIRadeonX1000::getNumPipes	
+000272f4	16	stub	n/a	FUN_000272f4	
+00027310	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+00027390	16	stub	n/a	ATIR500GLContext::MetaClass::MetaClass	
+000273a0	60	generated	DONE	ATIR500GLContext::MetaClass::~MetaClass	__ZN16ATIR500GLContext9MetaClassD0Ev
+000273dc	16	stub	n/a	FUN_000273dc	
+0002741c	16	stub	n/a	__static_initialization_and_destruction_0	
+0002745c	16	stub	n/a	__static_initialization_and_destruction_0	
+00027470	244	method	DONE	ATIR500GLContext::WriteVertexArrayOffset	__ZN16ATIR500GLContext22WriteVertexArrayOffsetEPmm
+00027564	16	stub	n/a	ATIR500GLContext::GetVertexArrayOffset	
+00027580	2228	method	DONE	ATIR500GLContext::discard_command_buffer	__ZN16ATIR500GLContext22discard_command_bufferEv
+00027ebc	16	stub	n/a	IOATIR500Shared::delete_texture	
+00027ecc	16	stub	n/a	IOATIR500Surface::set_volatile_state	
+00027ee0	228	method	DONE	ATIR500GLContext::build_scissor	__ZN16ATIR500GLContext13build_scissorEv
+00027fd0	196	method	MISSING	ATIR500GLContext::update_surface	__ZN16ATIR500GLContext14update_surfaceEv
+000280ac	16	stub	n/a	ATIR500GLContext::build_scissor	
+000280c0	264	method	DONE	ATIR500GLContext::GetTextureOffset	__ZN16ATIR500GLContext16GetTextureOffsetEP19VendorTextureBufferb
+000281e4	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
+00028200	492	method	DONE	ATIR500GLContext::build_surface_from_texture	__ZN16ATIR500GLContext26build_surface_from_textureEP19VendorTextureBufferP20ATIR500SurfaceBuffertthmt
+00028404	16	stub	n/a	ATIR500GLContext::GetTextureOffset	
+00028420	260	method	DONE	ATIR500GLContext::WriteTextureOffset	__ZN16ATIR500GLContext18WriteTextureOffsetEmPmmP19VendorTextureBuffer
+00028524	16	stub	n/a	ATIR500GLContext::GetTextureOffset	
+00028540	404	method	DONE	ATIR500GLContext::start	__ZN16ATIR500GLContext5startEP9IOService
+000286dc	16	stub	n/a	FUN_000286dc	
+000286ec	16	stub	n/a	FUN_000286ec	
+00028700	88	method	DONE	ATIR500GLContext::stop	__ZN16ATIR500GLContext4stopEP9IOService
+00028758	16	stub	n/a	FUN_00028758	
+00028768	16	stub	n/a	FUN_00028768	
+00028780	324	method	DONE	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	__ZN16ATIR500GLContext44write_r500_zdecompress_restore_add_on_packetEP45r500_zdecompress_restore_add_on_packet_struct
+000288c4	16	stub	n/a	HZMEM_GetBlockOffset	
+000288e0	2396	method	DONE	ATIR500GLContext::write_kernel_context_buffer_regs	__ZN16ATIR500GLContext32write_kernel_context_buffer_regsEPmmmm
+00029268	16	stub	n/a	ATIR500GLContext::compute_sc_hyperz_en	
+00029278	16	stub	n/a	ATIR500GLContext::compute_zb_bw_cntl	
+00029288	16	stub	n/a	HZMEM_GetBlockOffset	
+000292a0	476	method	DONE	ATIR500GLContext::process_kATIGLStreamFastClearColor	__ZN16ATIR500GLContext34process_kATIGLStreamFastClearColorEPm
+00029480	2312	method	DONE	ATIR500GLContext::load_texture	__ZN16ATIR500GLContext12load_textureEP19VendorTextureBuffer
+00029d98	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00029da8	16	stub	n/a	FUN_00029da8	
+00029db8	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+00029dd0	1396	method	DONE	ATIR500GLContext::compact_current_textures	__ZN16ATIR500GLContext24compact_current_texturesEP19VendorTextureBuffer
+0002a344	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0002a354	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0002a364	16	stub	n/a	ATIR500GLContext::WriteVertexArrayOffset	
+0002a374	16	stub	n/a	ATIR500GLContext::WriteTextureOffset	
+0002a384	16	stub	n/a	ATIR500GLContext::load_texture	
+0002a394	16	stub	n/a	IOATIR500Surface::copy_buffer_from_backing_store	
+0002a3a4	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
+0002a3b4	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
+0002a3d0	1068	method	DONE	ATIR500GLContext::alloc_and_load_texture	__ZN16ATIR500GLContext22alloc_and_load_textureEP19VendorTextureBuffer
+0002a814	16	stub	n/a	ATIR500GLContext::alloc_and_load_texture	
+0002a824	16	stub	n/a	IOATIR500Surface::alloc_surfaces_keep	
+0002a834	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
+0002a844	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+0002a854	16	stub	n/a	ATIR500GLContext::load_texture	
+0002a864	16	stub	n/a	FUN_0002a864	
+0002a874	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0002a884	16	stub	n/a	ATIR500GLContext::compact_current_textures	
+0002a894	16	stub	n/a	IOATIR500Accelerator::freeToAllocTextureVRAM	
+0002a8b0	768	method	DONE	ATIR500GLContext::submit_context_buffer	__ZN16ATIR500GLContext21submit_context_bufferEv
+0002abb0	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0002abc0	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0002abd0	16	stub	n/a	ATIR500GLContext::WriteVertexArrayOffset	
+0002abe0	16	stub	n/a	ATIR500GLContext::WriteTextureOffset	
+0002abf0	16	stub	n/a	ATIR500GLContext::write_kernel_context_buffer_regs	
+0002ac00	16	stub	n/a	ATIR500GLContext::alloc_and_load_texture	
+0002ac10	704	method	DONE	ATIR500GLContext::write_r500_3d_blit_state_packet	__ZN16ATIR500GLContext31write_r500_3d_blit_state_packetEP32r500_3d_blit_state_packet_struct
+0002aee0	16	stub	n/a	ATIR500GLContext::GetTextureOffset	
+0002aef0	16	stub	n/a	ATIR500GLContext::compute_zb_bw_cntl	
+0002af00	16	stub	n/a	ATIR500GLContext::compute_sc_hyperz_en	
+0002af10	1672	method	DONE	ATIR500GLContext::restore_state_destroyed_by_pageoff	__ZN16ATIR500GLContext34restore_state_destroyed_by_pageoffEP23register_tracking_state
+0002b598	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0002b5a8	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0002b5b8	16	stub	n/a	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet	
+0002b5c8	16	stub	n/a	ATIR500GLContext::write_r500_3d_blit_state_packet	
+0002b5d8	16	stub	n/a	track_regs_written_by_pm4	
+0002b5f0	492	method	DONE	ATIR500GLContext::get_texture	__ZN16ATIR500GLContext11get_textureEPmP19VendorTextureBufferS0_S0_S0_P23register_tracking_state
+0002b7dc	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+0002b7ec	16	stub	n/a	ATIR500GLContext::restore_state_destroyed_by_pageoff	
+0002b7fc	16	stub	n/a	ATIR500GLContext::alloc_and_load_texture	
+0002b80c	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0002b820	23196	method	DONE	ATIR500GLContext::process_command_buffer	__ZN16ATIR500GLContext22process_command_bufferEP23VendorCommandDescriptor
+00031404	16	stub	n/a	ATIR500GLContext::process_kATIGLStreamFastClearColor	
+00031414	16	stub	n/a	IOATIR500Surface::set_volatile_state	
+00031424	16	stub	n/a	ATIR500GLContext::GetQueryOffset	
+00031434	16	stub	n/a	ATIR500GLContext::GetTextureOffset	
+00031444	16	stub	n/a	convertIOGLBufferToBufIdx	
+00031454	16	stub	n/a	ATIR500Surface::decompress_and_flush_depth_buffer	
+00031464	16	stub	n/a	ATIR500Surface::resolve_fsaa_buffer	
+00031474	16	stub	n/a	ATIR500GLContext::write_kernel_context_buffer_regs	
+00031484	16	stub	n/a	ATIR500GLContext::build_scissor	
+00031494	16	stub	n/a	HZMEM_Alloc	
+000314a4	16	stub	n/a	ATIR500GLContext::build_surface_from_texture	
+000314b4	16	stub	n/a	ATIR500GLContext::get_texture	
+000314c4	16	stub	n/a	FUN_000314c4	
+000314d4	16	stub	n/a	HZMEM_IsPartial	
+000314e4	16	stub	n/a	HZMEM_GetBlockCount	
+000314f4	16	stub	n/a	HZMEM_GetBlockOffset	
+00031504	16	stub	n/a	ATIR500GLContext::GetVertexArrayOffset	
+00031514	16	stub	n/a	ATIR500GLContext::WriteTextureOffset	
+00031524	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
+00031534	16	stub	n/a	IOATIR500GLContext::map_transfer_to_GART	
+00031544	16	stub	n/a	ATIR500GLContext::restore_state_destroyed_by_pageoff	
+00031554	16	stub	n/a	ATIR500GLContext::alloc_and_load_texture	
+00031564	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00031574	16	stub	n/a	IOATIR500GLContext::add_texture_to_stream	
+00031584	16	stub	n/a	IOATIR500Shared::delete_texture	
+00031594	16	stub	n/a	IOATIR500GLContext::remove_texture_from_stream	
+000315a4	16	stub	n/a	ATIR500GLContext::compute_zb_bw_cntl	
+000315b4	16	stub	n/a	ATIR500GLContext::compute_sc_hyperz_en	
+000315d0	68	generated	DONE	ATIR5002DContext::ATIR5002DContext	__ZN16ATIR5002DContextC2EPK11OSMetaClass
+00031614	16	stub	n/a	IOATIR5002DContext::IOATIR5002DContext	
+00031630	68	generated	DONE	ATIR5002DContext::ATIR5002DContext	__ZN16ATIR5002DContextC1EPK11OSMetaClass
+00031674	16	stub	n/a	IOATIR5002DContext::IOATIR5002DContext	
+00031690	60	generated	DONE	ATIR5002DContext::~ATIR5002DContext	__ZN16ATIR5002DContextD2Ev
+000316cc	16	stub	n/a	IOATIR5002DContext::~IOATIR5002DContext	
+000316e0	72	generated	DONE	ATIR5002DContext::~ATIR5002DContext	__ZN16ATIR5002DContextD0Ev
+00031728	16	stub	n/a	FUN_00031728	
+00031738	16	stub	n/a	IOATIR5002DContext::~IOATIR5002DContext	
+00031750	12	generated	DONE	ATIR5002DContext::getMetaClass	__ZNK16ATIR5002DContext12getMetaClassEv
+00031760	88	generated	DONE	ATIR5002DContext::MetaClass::MetaClass	__ZN16ATIR5002DContext9MetaClassC1Ev
+000317b8	16	stub	n/a	FUN_000317b8	
+000317d0	88	generated	DONE	ATIR5002DContext::MetaClass::MetaClass	__ZN16ATIR5002DContext9MetaClassC2Ev
+00031828	16	stub	n/a	FUN_00031828	
+00031840	80	generated	DONE	ATIR5002DContext::ATIR5002DContext	__ZN16ATIR5002DContextC1Ev
+00031890	16	stub	n/a	FUN_00031890	
+000318a0	16	stub	n/a	IOATIR5002DContext::IOATIR5002DContext	
+000318b0	68	generated	DONE	ATIR5002DContext::MetaClass::alloc	__ZNK16ATIR5002DContext9MetaClass5allocEv
+000318f4	16	stub	n/a	ATIR5002DContext::ATIR5002DContext	
+00031904	16	stub	n/a	FUN_00031904	
+00031920	80	generated	DONE	ATIR5002DContext::ATIR5002DContext	__ZN16ATIR5002DContextC2Ev
+00031970	16	stub	n/a	FUN_00031970	
+00031980	16	stub	n/a	IOATIR5002DContext::IOATIR5002DContext	
+00031990	64	method	MISSING	ATIR5002DContext::getTargetAndMethodForIndex	__ZN16ATIR5002DContext26getTargetAndMethodForIndexEPP9IOServicem
+000319d0	308	method	MISSING	ATIR5002DContext::get_buffer_info	__ZN16ATIR5002DContext15get_buffer_infoEP16IOATIR500SurfacemPvPm
+00031b10	68	method	MISSING	ATIR5002DContext::set_destination	__ZN16ATIR5002DContext15set_destinationEPvPm
+00031b60	4	method	MISSING	ATIR5002DContext::load_image	__ZN16ATIR5002DContext10load_imageEP19VendorTextureBuffer
+00031b70	356	method	DONE	ATIR5002DContext::alloc_and_load_image	__ZN16ATIR5002DContext20alloc_and_load_imageEP19VendorTextureBuffer
+00031cd8	16	stub	n/a	IOATIR500Accelerator::freeToAllocTextureVRAM	
+00031ce8	16	stub	n/a	FUN_00031ce8	
+00031cf8	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
+00031d10	20	method	MISSING	ATIR5002DContext::invalidate	__ZN16ATIR5002DContext10invalidateEv
+00031d30	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+00031db0	16	stub	n/a	ATIR5002DContext::MetaClass::MetaClass	
+00031dc0	60	generated	DONE	ATIR5002DContext::MetaClass::~MetaClass	__ZN16ATIR5002DContext9MetaClassD0Ev
+00031dfc	16	stub	n/a	FUN_00031dfc	
+00031e3c	16	stub	n/a	__static_initialization_and_destruction_0	
+00031e7c	16	stub	n/a	__static_initialization_and_destruction_0	
+00031e90	1780	method	MISSING	ATIR5002DContext::submit_context_buffer	__ZN16ATIR5002DContext21submit_context_bufferEv
+00032594	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+000325a4	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
+000325b4	16	stub	n/a	ATIR5002DContext::alloc_and_load_image	
+000325d0	200	method	DONE	ATIR5002DContext::write_2_regs	__ZN16ATIR5002DContext12write_2_regsEmmPmm
+000326a4	16	stub	n/a	FUN_000326a4	
+000326b4	16	stub	n/a	FUN_000326b4	
+000326d0	3516	method	DONE	ATIR5002DContext::process_command_buffer	__ZN16ATIR5002DContext22process_command_bufferEP23VendorCommandDescriptor
+000334ac	16	stub	n/a	IOATIR500Surface::alloc_surfaces_keep	
+000334bc	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
+000334cc	16	stub	n/a	FUN_000334cc	
+000334dc	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
+000334ec	16	stub	n/a	ATIR5002DContext::alloc_and_load_image	
+000334fc	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00033510	168	method	MISSING	ATIR5002DContext::start	__ZN16ATIR5002DContext5startEP9IOService
+000335c0	16	stub	n/a	FUN_000335c0	
+000335d0	16	stub	n/a	FUN_000335d0	
+000335e0	88	method	MISSING	ATIR5002DContext::stop	__ZN16ATIR5002DContext4stopEP9IOService
+00033638	16	stub	n/a	FUN_00033638	
+00033648	16	stub	n/a	FUN_00033648	
+00033660	188	method	DONE	ATIR5002DContext::read_regs	__ZN16ATIR5002DContext9read_regsEPmS0_mS0_
+00033720	16	stub	n/a	FUN_00033720	
+00033730	16	stub	n/a	FUN_00033730	
+00033740	176	method	DONE	ATIR5002DContext::write_regs	__ZN16ATIR5002DContext10write_regsEPmm
+00033804	16	stub	n/a	FUN_00033804	
+00033814	16	stub	n/a	FUN_00033814	
+00033830	68	generated	DONE	ATIR500DVDContext::ATIR500DVDContext	__ZN17ATIR500DVDContextC2EPK11OSMetaClass
+00033874	16	stub	n/a	IOATIR500DVDContext::IOATIR500DVDContext	
+00033890	68	generated	DONE	ATIR500DVDContext::ATIR500DVDContext	__ZN17ATIR500DVDContextC1EPK11OSMetaClass
+000338d4	16	stub	n/a	IOATIR500DVDContext::IOATIR500DVDContext	
+000338f0	60	generated	DONE	ATIR500DVDContext::~ATIR500DVDContext	__ZN17ATIR500DVDContextD2Ev
+0003392c	16	stub	n/a	IOATIR500DVDContext::~IOATIR500DVDContext	
+00033940	72	generated	DONE	ATIR500DVDContext::~ATIR500DVDContext	__ZN17ATIR500DVDContextD0Ev
+00033988	16	stub	n/a	FUN_00033988	
+00033998	16	stub	n/a	IOATIR500DVDContext::~IOATIR500DVDContext	
+000339b0	12	generated	DONE	ATIR500DVDContext::getMetaClass	__ZNK17ATIR500DVDContext12getMetaClassEv
+000339c0	88	generated	DONE	ATIR500DVDContext::MetaClass::MetaClass	__ZN17ATIR500DVDContext9MetaClassC1Ev
+00033a18	16	stub	n/a	FUN_00033a18	
+00033a30	88	generated	DONE	ATIR500DVDContext::MetaClass::MetaClass	__ZN17ATIR500DVDContext9MetaClassC2Ev
+00033a88	16	stub	n/a	FUN_00033a88	
+00033aa0	80	generated	DONE	ATIR500DVDContext::ATIR500DVDContext	__ZN17ATIR500DVDContextC1Ev
+00033af0	16	stub	n/a	FUN_00033af0	
+00033b00	16	stub	n/a	IOATIR500DVDContext::IOATIR500DVDContext	
+00033b10	68	generated	DONE	ATIR500DVDContext::MetaClass::alloc	__ZNK17ATIR500DVDContext9MetaClass5allocEv
+00033b54	16	stub	n/a	ATIR500DVDContext::ATIR500DVDContext	
+00033b64	16	stub	n/a	FUN_00033b64	
+00033b80	80	generated	DONE	ATIR500DVDContext::ATIR500DVDContext	__ZN17ATIR500DVDContextC2Ev
+00033bd0	16	stub	n/a	FUN_00033bd0	
+00033be0	16	stub	n/a	IOATIR500DVDContext::IOATIR500DVDContext	
+00033bf0	64	method	MISSING	ATIR500DVDContext::getTargetAndMethodForIndex	__ZN17ATIR500DVDContext26getTargetAndMethodForIndexEPP9IOServicem
+00033c30	916	method	MISSING	ATIR500DVDContext::discard_command_buffer	__ZN17ATIR500DVDContext22discard_command_bufferEv
+00033fe8	16	stub	n/a	FUN_00033fe8	
+00033ff8	16	stub	n/a	IOATIR500Shared::delete_texture	
+00034008	16	stub	n/a	FUN_00034008	
+00034020	56	method	MISSING	ATIR500DVDContext::build_scissor	__ZN17ATIR500DVDContext13build_scissorEv
+00034060	44	method	MISSING	ATIR500DVDContext::update_surface	__ZN17ATIR500DVDContext14update_surfaceEv
+0003408c	16	stub	n/a	ATIR500DVDContext::build_scissor	
+000340a0	88	method	MISSING	ATIR500DVDContext::finish	__ZN17ATIR500DVDContext6finishEv
+00034100	20	method	MISSING	ATIR500DVDContext::invalidate	__ZN17ATIR500DVDContext10invalidateEv
+00034120	124	method	DONE	ATIR500DVDContext::wait_for_stamps	__ZN17ATIR500DVDContext15wait_for_stampsEmm
+000341a0	180	method	DONE	ATIR500DVDContext::check_stamps	__ZN17ATIR500DVDContext12check_stampsEmmPm
+00034260	116	method	DONE	ATIR500DVDContext::setup_buffers	__ZN17ATIR500DVDContext13setup_buffersEmmmmm
+000342e0	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+00034360	16	stub	n/a	ATIR500DVDContext::MetaClass::MetaClass	
+00034370	60	generated	DONE	ATIR500DVDContext::MetaClass::~MetaClass	__ZN17ATIR500DVDContext9MetaClassD0Ev
+000343ac	16	stub	n/a	FUN_000343ac	
+000343ec	16	stub	n/a	__static_initialization_and_destruction_0	
+0003442c	16	stub	n/a	__static_initialization_and_destruction_0	
+00034440	1000	method	MISSING	ATIR500DVDContext::submit_context_buffer	__ZN17ATIR500DVDContext21submit_context_bufferEv
+00034828	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+00034838	16	stub	n/a	FUN_00034838	
+00034848	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	
+00034860	508	method	MISSING	ATIR500DVDContext::start	__ZN17ATIR500DVDContext5startEP9IOService
+00034a64	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
+00034a74	16	stub	n/a	ATIRadeonX1000::start_xdct_engine	
+00034a84	16	stub	n/a	FUN_00034a84	
+00034a94	16	stub	n/a	FUN_00034a94	
+00034aa4	16	stub	n/a	FUN_00034aa4	
+00034ac0	196	method	MISSING	ATIR500DVDContext::stop	__ZN17ATIR500DVDContext4stopEP9IOService
+00034b84	16	stub	n/a	FUN_00034b84	
+00034b94	16	stub	n/a	ATIRadeonX1000::stop_xdct_engine	
+00034ba4	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
+00034bb4	16	stub	n/a	FUN_00034bb4	
+00034bd0	144	method	SIG?	ATIR500DVDContext::show_buffer	__ZN17ATIR500DVDContext11show_bufferEii
+00034c60	16	stub	n/a	FUN_00034c60	
+00034c70	16	stub	n/a	ATIR500Surface::showbuffer	
+00034c80	16	stub	n/a	FUN_00034c80	
+00034c90	144	method	SIG?	ATIR500DVDContext::dvd_enable_deint	__ZN17ATIR500DVDContext16dvd_enable_deintEi
+00034d20	16	stub	n/a	FUN_00034d20	
+00034d30	16	stub	n/a	ATIR500Surface::enable_deint	
+00034d40	16	stub	n/a	FUN_00034d40	
+00034d50	208	method	SIG?	ATIR500DVDContext::dvd_setup_overlay	__ZN17ATIR500DVDContext17dvd_setup_overlayEiiiii
+00034e20	16	stub	n/a	FUN_00034e20	
+00034e30	16	stub	n/a	ATIR500Surface::dvd_setup_overlay	
+00034e40	16	stub	n/a	FUN_00034e40	
+00034e50	176	method	SIG?	ATIR500DVDContext::dvd_setup_subpicture	__ZN17ATIR500DVDContext20dvd_setup_subpictureEiiii
+00034f00	16	stub	n/a	FUN_00034f00	
+00034f10	16	stub	n/a	ATIR500Surface::dvd_setup_subpicture	
+00034f20	16	stub	n/a	FUN_00034f20	
+00034f30	160	method	SIG?	ATIR500DVDContext::dvd_enable_overlay	__ZN17ATIR500DVDContext18dvd_enable_overlayEi
+00034fd0	16	stub	n/a	FUN_00034fd0	
+00034fe0	16	stub	n/a	ATIR500Surface::disable_overlay	
+00034ff0	16	stub	n/a	ATIR500Surface::enable_overlay	
+00035000	16	stub	n/a	FUN_00035000	
+00035010	208	method	SIG?	ATIR500DVDContext::set_macrovision	__ZN17ATIR500DVDContext15set_macrovisionEmm
+000350e0	16	stub	n/a	FUN_000350e0	
+000350f0	16	stub	n/a	FUN_000350f0	
+00035100	16	stub	n/a	ATIR500Surface::getFramebufferIndex	
+00035110	16	stub	n/a	FUN_00035110	
+00035120	188	method	DONE	ATIR500DVDContext::read_regs	__ZN17ATIR500DVDContext9read_regsEPmS0_mS0_
+000351e0	16	stub	n/a	FUN_000351e0	
+000351f0	16	stub	n/a	FUN_000351f0	
+00035200	116	method	DONE	ATIR500DVDContext::write_regs	__ZN17ATIR500DVDContext10write_regsEmm
+0003527c	16	stub	n/a	FUN_0003527c	
+0003528c	16	stub	n/a	FUN_0003528c	
+000352a0	612	method	MISSING	ATIR500DVDContext::clientMemoryForType	__ZN17ATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+00035504	16	stub	n/a	FUN_00035504	
+00035514	16	stub	n/a	IOATIR500DVDContext::init_command_buffer_header	
+00035524	16	stub	n/a	FUN_00035524	
+00035540	560	method	SIG?	ATIR500DVDContext::doIDCT	__ZN17ATIR500DVDContext6doIDCTEP15sATIDVDIDCTInfom
+0003577c	16	stub	n/a	FUN_0003577c	
+0003578c	16	stub	n/a	ATIRadeonX1000::submit_idct_buffer_consumed	
+0003579c	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	
+000357ac	16	stub	n/a	FUN_000357ac	
+000357c0	14508	method	DONE	ATIR500DVDContext::process_command_buffer	__ZN17ATIR500DVDContext22process_command_bufferEP23VendorCommandDescriptor
+000390dc	16	stub	n/a	FUN_000390dc	
+000390ec	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+000390fc	16	stub	n/a	IOATIR500DVDContext::add_texture_to_stream	
+0003910c	16	stub	n/a	IOATIR500Shared::delete_texture	
+0003911c	16	stub	n/a	FUN_0003911c	
+0003912c	16	stub	n/a	IOATIR500DVDContext::remove_texture_from_stream	
+0003913c	16	stub	n/a	FUN_0003913c	
+0003914c	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	
+00039160	40	method	DONE	ATIR500Surface::alloc_overlay	__ZN14ATIR500Surface13alloc_overlayEv
+00039190	4	method	DONE	ATIR500Surface::disable_overlay	__ZN14ATIR500Surface15disable_overlayEv
+000391a0	36	method	DONE	ATIR500Surface::free_overlay	__ZN14ATIR500Surface12free_overlayEv
+000391d0	4	method	DONE	ATIR500Surface::enable_overlay	__ZN14ATIR500Surface14enable_overlayEv
+000391e0	4	method	DONE	ATIR500Surface::setup_overlay	__ZN14ATIR500Surface13setup_overlayEv
+000391f0	4	method	MISSING	ATIR500Surface::setup_overlay_reg	__ZN14ATIR500Surface17setup_overlay_regEP18OverlaySurfaceInfoP20OverlayBandwidthInfoP16OverlayRegisters
+00039200	376	method	MISSING	ATIR500Surface::filter_init	__ZN14ATIR500Surface11filter_initEffmmmPmPf
+000393a0	756	method	MISSING	ATIR500Surface::real_to_hex	__ZN14ATIR500Surface11real_to_hexEmf
+000396b0	528	method	MISSING	ATIR500Surface::set_linear_transform	__ZN14ATIR500Surface20set_linear_transformEiP21OverlayPictureControlP16OverlayRegisters
+000398c0	16	stub	n/a	ATIR500Surface::real_to_hex	
+000398d0	4	method	MISSING	ATIR500Surface::set_gamma_coefficient	__ZN14ATIR500Surface21set_gamma_coefficientEP16OverlayRegisters
+000398e0	4	method	MISSING	ATIR500Surface::get_surface_info	__ZN14ATIR500Surface16get_surface_infoEmP18OverlaySurfaceInfoP20OverlayBandwidthInfo
+000398f0	444	method	MISSING	ATIR500Surface::filter_setup	__ZN14ATIR500Surface12filter_setupEmP16OverlayRegisters
+00039ab0	1076	method	MISSING	ATIR500Surface::calc_h_inc_step_by	__ZN14ATIR500Surface18calc_h_inc_step_byEifiiiPmS0_S0_S0_S0_S0_S0_S0_S0_
+00039f20	4	method	MISSING	ATIR500Surface::query_BIOS_for_bandwidth_info	__ZN14ATIR500Surface29query_BIOS_for_bandwidth_infoEP20OverlayBandwidthInfo
+00039f30	1184	method	MISSING	ATIR500Surface::get_surf_desc_regs	__ZN14ATIR500Surface18get_surf_desc_regsEP18OverlaySurfaceInfoPm
+0003a410	568	method	MISSING	ATIR500Surface::calc_h_scaler_blank	__ZN14ATIR500Surface19calc_h_scaler_blankEP18OverlaySurfaceInfoP20OverlayBandwidthInfommffPmS4_S4_
+0003a6a0	4	method	MISSING	ATIR500Surface::blast_key_color	__ZN14ATIR500Surface15blast_key_colorEP13IOAccelBoundsm
+0003a6b0	4	method	MISSING	ATIR500Surface::debug_read_reg_dump	__ZN14ATIR500Surface19debug_read_reg_dumpEv
+0003a6c0	4	method	MISSING	ATIR500Surface::debug_reg_dump	__ZN14ATIR500Surface14debug_reg_dumpEP16OverlayRegisters
+0003a6d0	4	method	SIG?	ATIR500Surface::showbuffer	__ZN14ATIR500Surface10showbufferEii
+0003a6e0	28	method	SIG?	ATIR500Surface::dvd_setup_overlay	__ZN14ATIR500Surface17dvd_setup_overlayEiiii
+0003a700	4	method	SIG?	ATIR500Surface::dvd_setup_subpicture	__ZN14ATIR500Surface20dvd_setup_subpictureEiiii
+0003a710	128	method	MISSING	ATIR500Surface::bad_panel	__ZN14ATIR500Surface9bad_panelEv
+0003a790	4	method	MISSING	ATIR500Surface::move_overlay_xy	__ZN14ATIR500Surface15move_overlay_xyEv
+0003a7a0	88	method	DONE	ATIR500Surface::getFramebufferIndex	__ZN14ATIR500Surface19getFramebufferIndexEv
+0003a800	8	method	SIG?	ATIR500Surface::enable_deint	__ZN14ATIR500Surface12enable_deintEi
+0003a810	132	method	DONE	window_mode_to_ati_format	__Z25window_mode_to_ati_formatm
+0003a8c0	68	generated	DONE	ATIR500Surface::ATIR500Surface	__ZN14ATIR500SurfaceC2EPK11OSMetaClass
+0003a904	16	stub	n/a	IOATIR500Surface::IOATIR500Surface	
+0003a920	68	generated	DONE	ATIR500Surface::ATIR500Surface	__ZN14ATIR500SurfaceC1EPK11OSMetaClass
+0003a964	16	stub	n/a	IOATIR500Surface::IOATIR500Surface	
+0003a980	60	generated	DONE	ATIR500Surface::~ATIR500Surface	__ZN14ATIR500SurfaceD2Ev
+0003a9bc	16	stub	n/a	IOATIR500Surface::~IOATIR500Surface	
+0003a9d0	72	generated	DONE	ATIR500Surface::~ATIR500Surface	__ZN14ATIR500SurfaceD0Ev
+0003aa18	16	stub	n/a	FUN_0003aa18	
+0003aa28	16	stub	n/a	IOATIR500Surface::~IOATIR500Surface	
+0003aa40	12	generated	DONE	ATIR500Surface::getMetaClass	__ZNK14ATIR500Surface12getMetaClassEv
+0003aa50	88	generated	DONE	ATIR500Surface::MetaClass::MetaClass	__ZN14ATIR500Surface9MetaClassC1Ev
+0003aaa8	16	stub	n/a	FUN_0003aaa8	
+0003aac0	88	generated	DONE	ATIR500Surface::MetaClass::MetaClass	__ZN14ATIR500Surface9MetaClassC2Ev
+0003ab18	16	stub	n/a	FUN_0003ab18	
+0003ab30	80	generated	DONE	ATIR500Surface::ATIR500Surface	__ZN14ATIR500SurfaceC1Ev
+0003ab80	16	stub	n/a	FUN_0003ab80	
+0003ab90	16	stub	n/a	IOATIR500Surface::IOATIR500Surface	
+0003aba0	68	generated	DONE	ATIR500Surface::MetaClass::alloc	__ZNK14ATIR500Surface9MetaClass5allocEv
+0003abe4	16	stub	n/a	ATIR500Surface::ATIR500Surface	
+0003abf4	16	stub	n/a	FUN_0003abf4	
+0003ac10	80	generated	DONE	ATIR500Surface::ATIR500Surface	__ZN14ATIR500SurfaceC2Ev
+0003ac60	16	stub	n/a	FUN_0003ac60	
+0003ac70	16	stub	n/a	IOATIR500Surface::IOATIR500Surface	
+0003ac80	36	method	DONE	ATIR500Surface::getTargetAndMethodForIndex	__ZN14ATIR500Surface26getTargetAndMethodForIndexEPP9IOServicem
+0003acb0	76	method	DONE	ATIR500Surface::invalidate	__ZN14ATIR500Surface10invalidateEv
+0003ad00	264	method	MISSING	get_offset_of_sample_0	__Z22get_offset_of_sample_0P20ATIR500SurfaceBufferii
+0003ae30	184	method	DONE	ATIR500Surface::is_flip_allowed	__ZN14ATIR500Surface15is_flip_allowedEv
+0003aef0	100	method	DONE	ATIR500Surface::is_surface_size_supported	__ZN14ATIR500Surface25is_surface_size_supportedEss
+0003af60	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
+0003afe0	16	stub	n/a	ATIR500Surface::MetaClass::MetaClass	
+0003aff0	60	generated	DONE	ATIR500Surface::MetaClass::~MetaClass	__ZN14ATIR500Surface9MetaClassD0Ev
+0003b02c	16	stub	n/a	FUN_0003b02c	
+0003b06c	16	stub	n/a	__static_initialization_and_destruction_0	
+0003b0ac	16	stub	n/a	__static_initialization_and_destruction_0	
+0003b0c0	524	method	DONE	ATIR500Surface::stop	__ZN14ATIR500Surface4stopEP9IOService
+0003b2cc	16	stub	n/a	FUN_0003b2cc	
+0003b2dc	16	stub	n/a	ATIR500Surface::free_overlay	
+0003b2ec	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003b2fc	16	stub	n/a	FUN_0003b2fc	
+0003b310	1804	method	MISSING	ATIR500Surface::submit_swap_buffer	__ZN14ATIR500Surface18submit_swap_bufferEm7eDoSwapP18IOATIR500GLContext
+0003ba3c	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003ba4c	16	stub	n/a	IOATIR500Surface::map_transfer_to_GART	
+0003ba5c	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
+0003ba6c	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+0003ba80	1308	method	MISSING	ATIR500Surface::submit_swap_buffer	__ZN14ATIR500Surface18submit_swap_bufferEmm
+0003bfb4	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003bfc4	16	stub	n/a	IOATIR500Surface::map_transfer_to_GART	
+0003bfd4	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
+0003bfe4	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+0003c000	280	method	DONE	ATIR500Surface::complete_vram	__ZN14ATIR500Surface13complete_vramEP20ATIR500SurfaceBuffer
+0003c11c	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003c130	3484	method	DONE	ATIR500Surface::shape_surface	__ZN14ATIR500Surface13shape_surfaceEv
+0003cee4	16	stub	n/a	ATIR500Surface::setup_overlay	
+0003cef4	16	stub	n/a	ATIR500Surface::getFramebufferIndex	
+0003cf04	16	stub	n/a	ATIR500Surface::alloc_overlay	
+0003cf14	16	stub	n/a	IOATIR500Surface::copy_buffer_to_backing_store	
+0003cf24	16	stub	n/a	FUN_0003cf24	
+0003cf34	16	stub	n/a	window_mode_to_ati_format	
+0003cf44	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
+0003cf60	472	method	DONE	ATIR500Surface::resetFullScreen	__ZN14ATIR500Surface15resetFullScreenEv
+0003d150	172	method	MISSING	ATIR500Surface::buffer_map_offset	__ZN14ATIR500Surface17buffer_map_offsetEP20ATIR500SurfaceBuffermmPlS2_S2_
+0003d200	476	method	MISSING	ATIR500Surface::setupFullScreen	__ZN14ATIR500Surface15setupFullScreenEv
+0003d3f0	168	method	DONE	ATIR500Surface::start	__ZN14ATIR500Surface5startEP9IOService
+0003d4a0	16	stub	n/a	FUN_0003d4a0	
+0003d4b0	16	stub	n/a	FUN_0003d4b0	
+0003d4c0	1608	method	DONE	ATIR500Surface::load_3d_blit	__ZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBuffer
+0003db30	16	stub	n/a	HZMEM_GetBlockOffset	
+0003db40	232	method	DONE	ATIR500Surface::decompress_and_flush_depth_buffer	__ZN14ATIR500Surface33decompress_and_flush_depth_bufferEP20ATIR500SurfaceBuffermPm
+0003dc34	16	stub	n/a	ATIR500Surface::load_3d_blit	
+0003dc50	704	method	DONE	ATIR500Surface::prepare_vram	__ZN14ATIR500Surface12prepare_vramEP20ATIR500SurfaceBuffer
+0003df44	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003df54	16	stub	n/a	ATIR500Surface::decompress_and_flush_depth_buffer	
+0003df70	608	method	DONE	ATIR500Surface::dealloc_surface	__ZN14ATIR500Surface15dealloc_surfaceEm
+0003e1d4	16	stub	n/a	HZMEM_Free	
+0003e1e4	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003e1f4	16	stub	n/a	ATIR500Surface::decompress_and_flush_depth_buffer	
+0003e204	16	stub	n/a	IOATIR500Surface::map_transfer_to_GART	
+0003e214	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+0003e230	868	method	DONE	ATIR500Surface::alloc_surface_buffer	__ZN14ATIR500Surface20alloc_surface_bufferEP20ATIR500SurfaceBuffer
+0003e598	16	stub	n/a	HZMEM_Alloc	
+0003e5a8	16	stub	n/a	ATIR500Memory::alloc	
+0003e5c0	2184	method	DONE	ATIR500Surface::submit_flip_buffer	__ZN14ATIR500Surface18submit_flip_bufferEmP18IOATIR500GLContextm
+0003ee84	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+0003ee94	16	stub	n/a	IOATIR500Surface::map_transfer_to_GART	
+0003eea4	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+0003eec0	8704	method	MISSING	ATIR500Surface::build_swap	__ZN14ATIR500Surface10build_swapEv
+00041134	16	stub	n/a	FUN_00041134	
+00041150	6360	method	MISSING	write_3dtexquad_cmds_for_copy_buffer_using_DMA	__Z46write_3dtexquad_cmds_for_copy_buffer_using_DMAP14ATIRadeonX1000Pmmmmmmmmmhmmmmmmhllllmmb
+00042a68	16	stub	n/a	FUN_00042a68	
+00042a80	2052	method	MISSING	ATIR500Surface::copy_buffer_using_DMA	__ZN14ATIR500Surface21copy_buffer_using_DMAEllllmmP20ATIR500SurfaceBufferP20VendorTransferBuffermm11IODirectionm
+000432c8	16	stub	n/a	ATIRadeonX1000::submit_buffer	
+000432d8	16	stub	n/a	write_3dtexquad_cmds_for_copy_buffer_using_DMA	
+000432e8	16	stub	n/a	ATIR500Surface::decompress_and_flush_depth_buffer	
+000432f8	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
+00043308	16	stub	n/a	IOATIR500Surface::map_transfer_to_GART	
+00043318	16	stub	n/a	IOATIR500Accelerator::flush_memory_for_in	
+00043328	16	stub	n/a	IOATIR500Accelerator::flush_memory_for_out	
+00043340	972	method	MISSING	ATIR500Surface::copy_to_buffer	__ZN14ATIR500Surface14copy_to_bufferEllllmmP20ATIR500SurfaceBuffermP20VendorTransferBuffermmm
+00043720	16	stub	n/a	ATIR500Surface::copy_buffer_using_DMA	
+00043730	1776	method	MISSING	ATIR500Surface::copy_from_buffer	__ZN14ATIR500Surface16copy_from_bufferEllllmmP20ATIR500SurfaceBuffermP20VendorTransferBuffermmm
+00043e40	16	stub	n/a	get_offset_of_sample_0	
+00043e50	16	stub	n/a	ATIR500Surface::copy_buffer_using_DMA	
+00043e60	2496	method	SIG?	ATIR500Surface::resolve_fsaa_buffer	__ZN14ATIR500Surface19resolve_fsaa_bufferEmmPmbllll
+00044848	16	stub	n/a	HZMEM_GetBlockCount	
+00044858	16	stub	n/a	HZMEM_GetBlockOffset	
+00044868	16	stub	n/a	FUN_00044868	
+00044880	1260	method	SIG?	ATIR500Surface::back_resolve_fsaa_buffer	__ZN14ATIR500Surface24back_resolve_fsaa_bufferEmmPm
+00044d74	16	stub	n/a	FUN_00044d74	
+00044d90	876	method	MISSING	HZMEM_InitMemResource	__Z21HZMEM_InitMemResourceP7_HZDATAmmm
+00045140	16	stub	n/a	FUN_00045140	
+00045150	16	stub	n/a	FUN_00045150	
+00045160	136	method	MISSING	HZMEM_InitAllocationTable	__Z25HZMEM_InitAllocationTableP7_HZDATA
+000451e8	16	stub	n/a	FUN_000451e8	
+00045200	76	method	MISSING	HZMEM_Init	__Z10HZMEM_InitP7_HZDATAmmm
+00045258	16	stub	n/a	HZMEM_InitAllocationTable	
+00045268	16	stub	n/a	HZMEM_InitMemResource	
+00045280	164	method	MISSING	HZMEM_Destroy	__Z13HZMEM_DestroyP7_HZDATA
+00045324	16	stub	n/a	FUN_00045324	
+00045334	16	stub	n/a	FUN_00045334	
+00045350	792	method	DONE	HZMEM_Alloc	__Z11HZMEM_AllocP7_HZDATAmmmm
+00045680	252	method	DONE	HZMEM_Free	__Z10HZMEM_FreeP7_HZDATAmm
+00045790	116	method	DONE	HZMEM_GetBlockOffset	__Z20HZMEM_GetBlockOffsetP7_HZDATAmm
+00045810	116	method	DONE	HZMEM_GetBlockCount	__Z19HZMEM_GetBlockCountP7_HZDATAmm
+00045890	132	method	DONE	HZMEM_IsPartial	__Z15HZMEM_IsPartialP7_HZDATAmm
+00045914	108	toolchain	n/a	__start	
+00045980	16	stub	n/a	FUN_00045980	
+000459fc	16	stub	n/a	FUN_000459fc	
+0004f800	1	external	n/a	<EXTERNAL>::IOWorkLoop::workLoop	
+0004fb00	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass0	
+0004fc00	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass1	
+0004fd00	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass2	
+0004fe00	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass3	
+0004ff00	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass4	
+00050000	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass5	
+00050100	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass6	
+00050200	1	external	n/a	<EXTERNAL>::OSMetaClass::_RESERVEDOSMetaClass7	
+00050300	1	external	n/a	<EXTERNAL>::OSMetaClass::OSMetaClass	
+00050400	1	external	n/a	<EXTERNAL>::OSMetaClass::~OSMetaClass	
+00050500	1	external	n/a	<EXTERNAL>::IOUserClient::clientDied	
+00050700	1	external	n/a	<EXTERNAL>::IOUserClient::getService	
+00050800	1	external	n/a	<EXTERNAL>::IOUserClient::initWithTask	
+00050900	1	external	n/a	<EXTERNAL>::IOUserClient::initWithTask	
+00050a00	1	external	n/a	<EXTERNAL>::IOUserClient::connectClient	
+00050b00	1	external	n/a	<EXTERNAL>::IOUserClient::mapClientMemory	
+00050c00	1	external	n/a	<EXTERNAL>::IOUserClient::exportObjectToClient	
+00050d00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient0	
+00050e00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient1	
+00050f00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient2	
+00051000	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient3	
+00051100	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient4	
+00051200	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient5	
+00051300	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient6	
+00051400	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient7	
+00051500	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient8	
+00051600	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient9	
+00051700	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient10	
+00051800	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient11	
+00051900	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient12	
+00051a00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient13	
+00051b00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient14	
+00051c00	1	external	n/a	<EXTERNAL>::IOUserClient::_RESERVEDIOUserClient15	
+00051d00	1	external	n/a	<EXTERNAL>::IOUserClient::getExternalTrapForIndex	
+00051e00	1	external	n/a	<EXTERNAL>::IOUserClient::getNotificationSemaphore	
+00051f00	1	external	n/a	<EXTERNAL>::IOUserClient::getTargetAndTrapForIndex	
+00052000	1	external	n/a	<EXTERNAL>::IOUserClient::registerNotificationPort	
+00052100	1	external	n/a	<EXTERNAL>::IOUserClient::getExternalMethodForIndex	
+00052200	1	external	n/a	<EXTERNAL>::IOUserClient::getTargetAndMethodForIndex	
+00052300	1	external	n/a	<EXTERNAL>::IOUserClient::removeMappingForDescriptor	
+00052400	1	external	n/a	<EXTERNAL>::IOUserClient::getExternalAsyncMethodForIndex	
+00052500	1	external	n/a	<EXTERNAL>::IOUserClient::getAsyncTargetAndMethodForIndex	
+00052600	1	external	n/a	<EXTERNAL>::IOUserClient::free	
+00052700	1	external	n/a	<EXTERNAL>::IOUserClient::init	
+00052800	1	external	n/a	<EXTERNAL>::IOUserClient::init	
+00052900	1	external	n/a	<EXTERNAL>::IOUserClient::IOUserClient	
+00052a00	1	external	n/a	<EXTERNAL>::IOUserClient::~IOUserClient	
+00052b00	1	external	n/a	<EXTERNAL>::OSDictionary::withCapacity	
+00052d00	1	external	n/a	<EXTERNAL>::OSSerializer::forTarget	
+00052f00	1	external	n/a	<EXTERNAL>::IOAccelerator::IOAccelerator	
+00053000	1	external	n/a	<EXTERNAL>::IOAccelerator::~IOAccelerator	
+00053100	1	external	n/a	<EXTERNAL>::IOFramebuffer::addFramebufferNotification	
+00053300	1	external	n/a	<EXTERNAL>::ATIRadeonX1000::system_did_wake	
+00053400	1	external	n/a	<EXTERNAL>::ATIRadeonX1000::system_will_sleep	
+00053500	1	external	n/a	<EXTERNAL>::IORegistryEntry::detachAbove	
+00053600	1	external	n/a	<EXTERNAL>::IORegistryEntry::setLocation	
+00053700	1	external	n/a	<EXTERNAL>::IORegistryEntry::setLocation	
+00053800	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053900	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053c00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053d00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053e00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperty	
+00053f00	1	external	n/a	<EXTERNAL>::IORegistryEntry::attachToChild	
+00054000	1	external	n/a	<EXTERNAL>::IORegistryEntry::childFromPath	
+00054100	1	external	n/a	<EXTERNAL>::IORegistryEntry::setProperties	
+00054200	1	external	n/a	<EXTERNAL>::IORegistryEntry::attachToParent	
+00054300	1	external	n/a	<EXTERNAL>::IORegistryEntry::removeProperty	
+00054400	1	external	n/a	<EXTERNAL>::IORegistryEntry::removeProperty	
+00054500	1	external	n/a	<EXTERNAL>::IORegistryEntry::removeProperty	
+00054600	1	external	n/a	<EXTERNAL>::IORegistryEntry::detachFromChild	
+00054700	1	external	n/a	<EXTERNAL>::IORegistryEntry::getRegistryRoot	
+00054800	1	external	n/a	<EXTERNAL>::IORegistryEntry::detachFromParent	
+00054900	1	external	n/a	<EXTERNAL>::IORegistryEntry::setPropertyTable	
+00054a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::matchPathLocation	
+00054b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::runPropertyAction	
+00054c00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getChildFromComponent	
+00054d00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry6	
+00054e00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry7	
+00054f00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry8	
+00055000	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry9	
+00055100	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry10	
+00055200	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry11	
+00055300	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry12	
+00055400	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry13	
+00055500	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry14	
+00055600	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry15	
+00055700	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry16	
+00055800	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry17	
+00055900	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry18	
+00055a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry19	
+00055b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry20	
+00055c00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry21	
+00055d00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry22	
+00055e00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry23	
+00055f00	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry24	
+00056000	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry25	
+00056100	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry26	
+00056200	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry27	
+00056300	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry28	
+00056400	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry29	
+00056500	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry30	
+00056600	1	external	n/a	<EXTERNAL>::IORegistryEntry::_RESERVEDIORegistryEntry31	
+00056700	1	external	n/a	<EXTERNAL>::IORegistryEntry::init	
+00056800	1	external	n/a	<EXTERNAL>::IORegistryEntry::init	
+00056900	1	external	n/a	<EXTERNAL>::IORegistryEntry::setName	
+00056a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::setName	
+00056b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::detachAll	
+00056c00	1	external	n/a	<EXTERNAL>::OSMetaClassBase::safeMetaCast	
+00056d00	1	external	n/a	<EXTERNAL>::OSMetaClassBase::_RESERVEDOSMetaClassBase3	
+00056e00	1	external	n/a	<EXTERNAL>::OSMetaClassBase::_RESERVEDOSMetaClassBase4	
+00056f00	1	external	n/a	<EXTERNAL>::OSMetaClassBase::_RESERVEDOSMetaClassBase5	
+00057000	1	external	n/a	<EXTERNAL>::OSMetaClassBase::_RESERVEDOSMetaClassBase6	
+00057100	1	external	n/a	<EXTERNAL>::OSMetaClassBase::_RESERVEDOSMetaClassBase7	
+00057300	1	external	n/a	<EXTERNAL>::IOMemoryDescriptor::withAddress	
+00057400	1	external	n/a	<EXTERNAL>::IOMemoryDescriptor::withAddress	
+00057500	1	external	n/a	<EXTERNAL>::IOMemoryDescriptor::withPersistentMemoryDescriptor	
+00057600	1	external	n/a	<EXTERNAL>::IOTimerEventSource::timerEventSource	
+00057700	1	external	n/a	<EXTERNAL>::IOInterruptEventSource::interruptEventSource	
+00057800	1	external	n/a	<EXTERNAL>::IOBufferMemoryDescriptor::withOptions	
+00057900	1	external	n/a	<EXTERNAL>::IOBufferMemoryDescriptor::inTaskWithOptions	
+00057c00	1	external	n/a	<EXTERNAL>::OSNumber::withNumber	
+00057f00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject0	
+00058000	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject1	
+00058100	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject2	
+00058200	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject3	
+00058300	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject4	
+00058400	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject5	
+00058500	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject6	
+00058600	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject7	
+00058700	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject8	
+00058800	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject9	
+00058900	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject10	
+00058a00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject11	
+00058b00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject12	
+00058c00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject13	
+00058d00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject14	
+00058e00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject15	
+00058f00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject16	
+00059000	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject17	
+00059100	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject18	
+00059200	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject19	
+00059300	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject20	
+00059400	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject21	
+00059500	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject22	
+00059600	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject23	
+00059700	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject24	
+00059800	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject25	
+00059900	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject26	
+00059a00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject27	
+00059b00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject28	
+00059c00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject29	
+00059d00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject30	
+00059e00	1	external	n/a	<EXTERNAL>::OSObject::_RESERVEDOSObject31	
+00059f00	1	external	n/a	<EXTERNAL>::OSObject::init	
+0005a000	1	external	n/a	<EXTERNAL>::OSObject::OSObject	
+0005a100	1	external	n/a	<EXTERNAL>::OSObject::~OSObject	
+0005a200	1	external	n/a	<EXTERNAL>::OSObject::operator.delete	
+0005a300	1	external	n/a	<EXTERNAL>::OSObject::operator.new	
+0005a500	1	external	n/a	<EXTERNAL>::OSSymbol::withCString	
+0005a600	1	external	n/a	<EXTERNAL>::OSSymbol::withCStringNoCopy	
+0005a700	1	external	n/a	<EXTERNAL>::IOService::adjustBusy	
+0005a800	1	external	n/a	<EXTERNAL>::IOService::handleOpen	
+0005a900	1	external	n/a	<EXTERNAL>::IOService::joinPMtree	
+0005aa00	1	external	n/a	<EXTERNAL>::IOService::makeUsable	
+0005ab00	1	external	n/a	<EXTERNAL>::IOService::systemWake	
+0005ac00	1	external	n/a	<EXTERNAL>::IOService::youAreRoot	
+0005ad00	1	external	n/a	<EXTERNAL>::IOService::handleClose	
+0005ae00	1	external	n/a	<EXTERNAL>::IOService::clampPowerOn	
+0005af00	1	external	n/a	<EXTERNAL>::IOService::didTerminate	
+0005b000	1	external	n/a	<EXTERNAL>::IOService::getBusyState	
+0005b100	1	external	n/a	<EXTERNAL>::IOService::getResources	
+0005b200	1	external	n/a	<EXTERNAL>::IOService::passiveMatch	
+0005b300	1	external	n/a	<EXTERNAL>::IOService::requestProbe	
+0005b400	1	external	n/a	<EXTERNAL>::IOService::tellChangeUp	
+0005b500	1	external	n/a	<EXTERNAL>::IOService::waitForState	
+0005b600	1	external	n/a	<EXTERNAL>::IOService::addPowerChild	
+0005b700	1	external	n/a	<EXTERNAL>::IOService::askChangeDown	
+0005b800	1	external	n/a	<EXTERNAL>::IOService::checkResource	
+0005b900	1	external	n/a	<EXTERNAL>::IOService::getPMworkloop	
+0005ba00	1	external	n/a	<EXTERNAL>::IOService::matchLocation	
+0005bb00	1	external	n/a	<EXTERNAL>::IOService::messageClient	
+0005bc00	1	external	n/a	<EXTERNAL>::IOService::newUserClient	
+0005bd00	1	external	n/a	<EXTERNAL>::IOService::newUserClient	
+0005be00	1	external	n/a	<EXTERNAL>::IOService::setPowerState	
+0005bf00	1	external	n/a	<EXTERNAL>::IOService::startMatching	
+0005c000	1	external	n/a	<EXTERNAL>::IOService::willTerminate	
+0005c100	1	external	n/a	<EXTERNAL>::IOService::activityTickle	
+0005c200	1	external	n/a	<EXTERNAL>::IOService::applyToClients	
+0005c300	1	external	n/a	<EXTERNAL>::IOService::causeInterrupt	
+0005c400	1	external	n/a	<EXTERNAL>::IOService::checkResources	
+0005c500	1	external	n/a	<EXTERNAL>::IOService::doServiceMatch	
+0005c600	1	external	n/a	<EXTERNAL>::IOService::messageClients	
+0005c700	1	external	n/a	<EXTERNAL>::IOService::newTemperature	
+0005c800	1	external	n/a	<EXTERNAL>::IOService::setPowerParent	
+0005c900	1	external	n/a	<EXTERNAL>::IOService::startCandidate	
+0005ca00	1	external	n/a	<EXTERNAL>::IOService::tellChangeDown	
+0005cb00	1	external	n/a	<EXTERNAL>::IOService::compareProperty	
+0005cc00	1	external	n/a	<EXTERNAL>::IOService::compareProperty	
+0005cd00	1	external	n/a	<EXTERNAL>::IOService::enableInterrupt	
+0005ce00	1	external	n/a	<EXTERNAL>::IOService::errnoFromReturn	
+0005cf00	1	external	n/a	<EXTERNAL>::IOService::getDeviceMemory	
+0005d000	1	external	n/a	<EXTERNAL>::IOService::lookupInterrupt	
+0005d100	1	external	n/a	<EXTERNAL>::IOService::nextIdleTimeout	
+0005d200	1	external	n/a	<EXTERNAL>::IOService::powerChangeDone	
+0005d300	1	external	n/a	<EXTERNAL>::IOService::probeCandidates	
+0005d400	1	external	n/a	<EXTERNAL>::IOService::registerService	
+0005d500	1	external	n/a	<EXTERNAL>::IOService::setDeviceMemory	
+0005d600	1	external	n/a	<EXTERNAL>::IOService::terminateClient	
+0005d700	1	external	n/a	<EXTERNAL>::IOService::allowPowerChange	
+0005d800	1	external	n/a	<EXTERNAL>::IOService::applyToProviders	
+0005d900	1	external	n/a	<EXTERNAL>::IOService::command_received	
+0005da00	1	external	n/a	<EXTERNAL>::IOService::didYouWakeSystem	
+0005db00	1	external	n/a	<EXTERNAL>::IOService::disableInterrupt	
+0005dc00	1	external	n/a	<EXTERNAL>::IOService::getInterruptType	
+0005dd00	1	external	n/a	<EXTERNAL>::IOService::registerInterest	
+0005de00	1	external	n/a	<EXTERNAL>::IOService::removePowerChild	
+0005df00	1	external	n/a	<EXTERNAL>::IOService::requestTerminate	
+0005e000	1	external	n/a	<EXTERNAL>::IOService::resolveInterrupt	
+0005e100	1	external	n/a	<EXTERNAL>::IOService::stringFromReturn	
+0005e200	1	external	n/a	<EXTERNAL>::IOService::tellNoChangeDown	
+0005e300	1	external	n/a	<EXTERNAL>::IOService::addNeededResource	
+0005e400	1	external	n/a	<EXTERNAL>::IOService::applyToInterested	
+0005e500	1	external	n/a	<EXTERNAL>::IOService::cancelPowerChange	
+0005e600	1	external	n/a	<EXTERNAL>::IOService::compareProperties	
+0005e700	1	external	n/a	<EXTERNAL>::IOService::currentCapability	
+0005e800	1	external	n/a	<EXTERNAL>::IOService::getAggressiveness	
+0005e900	1	external	n/a	<EXTERNAL>::IOService::registerInterrupt	
+0005ea00	1	external	n/a	<EXTERNAL>::IOService::setAggressiveness	
+0005eb00	1	external	n/a	<EXTERNAL>::IOService::changePowerStateTo	
+0005ec00	1	external	n/a	<EXTERNAL>::IOService::doServiceTerminate	
+0005ed00	1	external	n/a	<EXTERNAL>::IOService::lockForArbitration	
+0005ee00	1	external	n/a	<EXTERNAL>::IOService::matchPropertyTable	
+0005ef00	1	external	n/a	<EXTERNAL>::IOService::matchPropertyTable	
+0005f000	1	external	n/a	<EXTERNAL>::IOService::setIdleTimerPeriod	
+0005f100	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService4	
+0005f200	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService5	
+0005f300	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService6	
+0005f400	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService7	
+0005f500	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService8	
+0005f600	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService9	
+0005f700	1	external	n/a	<EXTERNAL>::IOService::deliverNotification	
+0005f800	1	external	n/a	<EXTERNAL>::IOService::registerPowerDriver	
+0005f900	1	external	n/a	<EXTERNAL>::IOService::start_PM_idle_timer	
+0005fa00	1	external	n/a	<EXTERNAL>::IOService::unregisterInterrupt	
+0005fb00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService10	
+0005fc00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService11	
+0005fd00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService12	
+0005fe00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService13	
+0005ff00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService14	
+00060000	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService15	
+00060100	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService16	
+00060200	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService17	
+00060300	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService18	
+00060400	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService19	
+00060500	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService20	
+00060600	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService21	
+00060700	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService22	
+00060800	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService23	
+00060900	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService24	
+00060a00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService25	
+00060b00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService26	
+00060c00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService27	
+00060d00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService28	
+00060e00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService29	
+00060f00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService30	
+00061000	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService31	
+00061100	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService32	
+00061200	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService33	
+00061300	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService34	
+00061400	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService35	
+00061500	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService36	
+00061600	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService37	
+00061700	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService38	
+00061800	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService39	
+00061900	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService40	
+00061a00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService41	
+00061b00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService42	
+00061c00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService43	
+00061d00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService44	
+00061e00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService45	
+00061f00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService46	
+00062000	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService47	
+00062100	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService48	
+00062200	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService49	
+00062300	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService50	
+00062400	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService51	
+00062500	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService52	
+00062600	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService53	
+00062700	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService54	
+00062800	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService55	
+00062900	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService56	
+00062a00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService57	
+00062b00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService58	
+00062c00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService59	
+00062d00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService60	
+00062e00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService61	
+00062f00	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService62	
+00063000	1	external	n/a	<EXTERNAL>::IOService::_RESERVEDIOService63	
+00063100	1	external	n/a	<EXTERNAL>::IOService::callPlatformFunction	
+00063200	1	external	n/a	<EXTERNAL>::IOService::callPlatformFunction	
+00063300	1	external	n/a	<EXTERNAL>::IOService::getDeviceMemoryCount	
+00063400	1	external	n/a	<EXTERNAL>::IOService::unlockForArbitration	
+00063500	1	external	n/a	<EXTERNAL>::IOService::getClientWithCategory	
+00063600	1	external	n/a	<EXTERNAL>::IOService::powerStateDidChangeTo	
+00063700	1	external	n/a	<EXTERNAL>::IOService::temporaryPowerClampOn	
+00063800	1	external	n/a	<EXTERNAL>::IOService::unregisterAllInterest	
+00063900	1	external	n/a	<EXTERNAL>::IOService::PM_Clamp_Timer_Expired	
+00063a00	1	external	n/a	<EXTERNAL>::IOService::acknowledgePowerChange	
+00063b00	1	external	n/a	<EXTERNAL>::IOService::powerStateWillChangeTo	
+00063c00	1	external	n/a	<EXTERNAL>::IOService::acknowledgeNotification	
+00063d00	1	external	n/a	<EXTERNAL>::IOService::currentPowerConsumption	
+00063e00	1	external	n/a	<EXTERNAL>::IOService::requestPowerDomainState	
+00063f00	1	external	n/a	<EXTERNAL>::IOService::PM_idle_timer_expiration	
+00064000	1	external	n/a	<EXTERNAL>::IOService::acknowledgeSetPowerState	
+00064100	1	external	n/a	<EXTERNAL>::IOService::getDeviceMemoryWithIndex	
+00064200	1	external	n/a	<EXTERNAL>::IOService::mapDeviceMemoryWithIndex	
+00064300	1	external	n/a	<EXTERNAL>::IOService::powerStateForDomainState	
+00064400	1	external	n/a	<EXTERNAL>::IOService::registerInterestedDriver	
+00064500	1	external	n/a	<EXTERNAL>::IOService::deRegisterInterestedDriver	
+00064600	1	external	n/a	<EXTERNAL>::IOService::temperatureCriticalForZone	
+00064700	1	external	n/a	<EXTERNAL>::IOService::maxCapabilityForDomainState	
+00064800	1	external	n/a	<EXTERNAL>::IOService::initialPowerStateForDomainState	
+00064900	1	external	n/a	<EXTERNAL>::IOService::free	
+00064a00	1	external	n/a	<EXTERNAL>::IOService::open	
+00064b00	1	external	n/a	<EXTERNAL>::IOService::close	
+00064c00	1	external	n/a	<EXTERNAL>::IOService::probe	
+00064d00	1	external	n/a	<EXTERNAL>::IOService::PMinit	
+00064e00	1	external	n/a	<EXTERNAL>::IOService::PMstop	
+00064f00	1	external	n/a	<EXTERNAL>::IOService::attach	
+00065000	1	external	n/a	<EXTERNAL>::IOService::detach	
+00065100	1	external	n/a	<EXTERNAL>::IOService::message	
+00065200	1	external	n/a	<EXTERNAL>::IOService::finalize	
+00065400	1	external	n/a	<EXTERNAL>::IOService::terminate	
+00065500	1	external	n/a	<EXTERNAL>::IOService::waitQuiet	
+00065600	1	external	n/a	<EXTERNAL>::IOService::IOService	
+00065800	1	external	n/a	<EXTERNAL>::OSMetaClass::getMetaClass	
+00065900	1	external	n/a	<EXTERNAL>::OSMetaClass::taggedRetain	
+00065a00	1	external	n/a	<EXTERNAL>::OSMetaClass::taggedRelease	
+00065b00	1	external	n/a	<EXTERNAL>::OSMetaClass::taggedRelease	
+00065c00	1	external	n/a	<EXTERNAL>::OSMetaClass::getRetainCount	
+00065d00	1	external	n/a	<EXTERNAL>::OSMetaClass::instanceConstructed	
+00065e00	1	external	n/a	<EXTERNAL>::OSMetaClass::retain	
+00065f00	1	external	n/a	<EXTERNAL>::OSMetaClass::release	
+00066000	1	external	n/a	<EXTERNAL>::OSMetaClass::release	
+00066100	1	external	n/a	<EXTERNAL>::OSMetaClass::serialize	
+00066200	1	external	n/a	<EXTERNAL>::IORegistryEntry::compareName	
+00066300	1	external	n/a	<EXTERNAL>::IORegistryEntry::getLocation	
+00066400	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066500	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066600	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066700	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066800	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066900	1	external	n/a	<EXTERNAL>::IORegistryEntry::getProperty	
+00066a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::compareNames	
+00066b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyLocation	
+00066c00	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00066d00	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00066e00	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00066f00	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00067000	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00067100	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyProperty	
+00067200	1	external	n/a	<EXTERNAL>::IORegistryEntry::getChildEntry	
+00067300	1	external	n/a	<EXTERNAL>::IORegistryEntry::applyToParents	
+00067400	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyChildEntry	
+00067500	1	external	n/a	<EXTERNAL>::IORegistryEntry::getParentEntry	
+00067600	1	external	n/a	<EXTERNAL>::IORegistryEntry::applyToChildren	
+00067700	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyParentEntry	
+00067800	1	external	n/a	<EXTERNAL>::IORegistryEntry::getChildIterator	
+00067900	1	external	n/a	<EXTERNAL>::IORegistryEntry::getPathComponent	
+00067a00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getParentIterator	
+00067b00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getChildSetReference	
+00067c00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getParentSetReference	
+00067d00	1	external	n/a	<EXTERNAL>::IORegistryEntry::dictionaryWithProperties	
+00067e00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getName	
+00067f00	1	external	n/a	<EXTERNAL>::IORegistryEntry::getPath	
+00068000	1	external	n/a	<EXTERNAL>::IORegistryEntry::inPlane	
+00068100	1	external	n/a	<EXTERNAL>::IORegistryEntry::isChild	
+00068200	1	external	n/a	<EXTERNAL>::IORegistryEntry::copyName	
+00068300	1	external	n/a	<EXTERNAL>::IORegistryEntry::getDepth	
+00068400	1	external	n/a	<EXTERNAL>::IORegistryEntry::hasAlias	
+00068500	1	external	n/a	<EXTERNAL>::IORegistryEntry::isParent	
+00068600	1	external	n/a	<EXTERNAL>::OSMetaClassBase::isEqualTo	
+00068700	1	external	n/a	<EXTERNAL>::OSObject::taggedRetain	
+00068800	1	external	n/a	<EXTERNAL>::OSObject::taggedRelease	
+00068900	1	external	n/a	<EXTERNAL>::OSObject::taggedRelease	
+00068a00	1	external	n/a	<EXTERNAL>::OSObject::getRetainCount	
+00068b00	1	external	n/a	<EXTERNAL>::OSObject::retain	
+00068c00	1	external	n/a	<EXTERNAL>::OSObject::release	
+00068d00	1	external	n/a	<EXTERNAL>::OSObject::release	
+00068e00	1	external	n/a	<EXTERNAL>::OSObject::serialize	
+00068f00	1	external	n/a	<EXTERNAL>::IOService::getProvider	
+00069000	1	external	n/a	<EXTERNAL>::IOService::getWorkLoop	
+00069100	1	external	n/a	<EXTERNAL>::IOService::handleIsOpen	
+00069200	1	external	n/a	<EXTERNAL>::IOService::getClientIterator	
+00069300	1	external	n/a	<EXTERNAL>::IOService::getProviderIterator	
+00069400	1	external	n/a	<EXTERNAL>::IOService::serializeProperties	
+00069500	1	external	n/a	<EXTERNAL>::IOService::getOpenClientIterator	
+00069600	1	external	n/a	<EXTERNAL>::IOService::getOpenProviderIterator	
+00069700	1	external	n/a	<EXTERNAL>::IOService::isOpen	
+00069800	1	external	n/a	<EXTERNAL>::IOService::getState	
+00069900	1	external	n/a	<EXTERNAL>::IOService::getClient	
