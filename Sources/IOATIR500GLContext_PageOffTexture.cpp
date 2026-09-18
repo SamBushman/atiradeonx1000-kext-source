@@ -60,7 +60,7 @@ extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
 extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
 extern "C" int _ASICSupportsAGP;
 
-IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, UInt32 param3, UInt32 /*param4, real: confirmed unused*/) {
+IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     void *commandLock = *reinterpret_cast<void **>(accel + 0x840);

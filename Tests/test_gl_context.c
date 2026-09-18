@@ -166,15 +166,16 @@ static void test_become_global_shared(io_connect_t connect) {
     report_skipped("GL become_global_shared(sel 12)", "mutates shared-texture state on a synthetic ID");
 }
 
-/* selector 13: page_off_texture(UInt32,UInt32,UInt32,UInt32) per the
- * class header - but REAL call-site evidence shows only 2 real scalar
- * inputs are actually sent (structureI, in=2, struct=0), not 4. Evidence:
- * GL bundle offset 0x1e13c (_gldPageoffBuffer), r6=2. This is a genuine
- * correction candidate for the header's declared signature - worth its
- * own follow-up, not chased further here. */
+/* selector 13: page_off_texture(UInt32 textureID, UInt32 mipAndFace) -
+ * RESOLVED (issue #42 test-harness pass): real signature CORRECTED from a
+ * guessed 4-param shape to the real 2-param one - the function's own real
+ * body (Sources/IOATIR500GLContext_PageOffTexture.cpp) never referenced
+ * the 3rd/4th params at all, matching the real call-site evidence exactly
+ * (GL bundle offset 0x1e13c, r6=2 real scalar inputs). No longer an open
+ * discrepancy. Still a texture-paging operation on a synthetic ID - skip. */
 static void test_page_off_texture(io_connect_t connect) {
     (void)connect;
-    report_skipped("GL page_off_texture(sel 13)", "texture paging on a synthetic ID; also has a signature/real-arg-count mismatch worth a follow-up");
+    report_skipped("GL page_off_texture(sel 13)", "texture paging on a synthetic ID (signature now resolved, see #42)");
 }
 
 /* selector 14: scale_surface(UInt32,UInt32,UInt32) - CONFIRMED:

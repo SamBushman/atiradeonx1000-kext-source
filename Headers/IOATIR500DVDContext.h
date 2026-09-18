@@ -69,7 +69,7 @@ class IOATIR500DVDContext : public IOUserClient {
 
 public:
     /* ---- Base table, selectors 0-9 ---- */
-    IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, UInt32 param3, UInt32 param4); /* 0 */
+    IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32 flagCount); /* 0, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the previous 4-param guess (by analogy with the GL context's own set_surface) was never independently decompiled and contradicted real wire-shape evidence (VA bundle, offset 0x27f4, only 3 real scalar inputs). Now RESOLVED via a real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp) AND the real mangled symbol itself (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi, 3 real params: unsigned long, a real Apple enum `eIODVDContextModeBits` - not reconstructed by name, kept as UInt32-shaped `modeBits` - and a real `int`). Real 3rd param is a count consumed by a real bit-accumulation loop (see this+0x88's own new `surfaceFlagsBitmask` field), not a generic "param3"/"param4" pair. */
     IOReturn get_config(UInt32 *out0, UInt32 *out1, UInt32 *out2);                            /* 1 */
     IOReturn get_status(UInt32 *out0);                                                         /* 2 */
     IOReturn get_surface_size(SInt32 *outW, SInt32 *outH, SInt32 *outX, SInt32 *outY);         /* 3 */
@@ -158,7 +158,7 @@ protected:
      */
     UInt8 _pad_0x00[0x84];
     IOATIR500Shared *sharedAllocator; /* +0x84, CONFIRMED (issue #7): owns the real texture-lookup-by-index table (own +0x10/+0x14 fields) the bind/unbind opcode families bounds-check and index into - the same real layout independently confirmed on GL and 2D's own equivalents this session. */
-    UInt8 _pad_0x88[0x8c - 0x88];
+    UInt32 surfaceFlagsBitmask; /* +0x88, FIXED (issue #42 test-harness pass, "fix real layout bugs found" policy): this was wrongly counted as padding - real decompile of IOATIR500DVDContext::set_surface (Sources/IOATIR500DVDContext_SetSurface.cpp) shows it's a real, actively read-and-written UInt32 accumulator bitmask, OR'd with `0x400 << (n & 0x3f)` for each of `param3` (set_surface's own 3rd real parameter) iterations. Exact real semantic role beyond "a per-call accumulated bit-per-count mask" UNKNOWN - transcribed honestly by real offset/behavior, not guessed at by name. */
     ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
     UInt8  pendingTransferBuffer[1]; /* +0x90, CONFIRMED to exist (passed to map_transfer_to_GART as `this+0x90`) - real size/type UNKNOWN, modeled as a byte anchor only. */
     UInt8 _pad_0x91[0x94 - 0x91];

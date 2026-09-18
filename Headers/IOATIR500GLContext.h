@@ -101,7 +101,7 @@ public:
                          UInt32 structSize, UInt32 *sizeOut);                                          /* 10 */
     IOReturn delete_texture(UInt32 textureID);                                                          /* 11 */
     IOReturn become_global_shared(UInt32 makeShared);                                                   /* 12 */
-    IOReturn page_off_texture(UInt32 textureID, UInt32 mipAndFace, UInt32 param3, UInt32 param4);       /* 13 */
+    IOReturn page_off_texture(UInt32 textureID, UInt32 mipAndFace);       /* 13, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the class's own real body (Sources/IOATIR500GLContext_PageOffTexture.cpp) never references any 3rd/4th parameter, and real wire-shape evidence (GL bundle call site, offset 0x1e13c) confirms only 2 real scalar inputs are ever sent - this project's own byte-dumped external-method table (Sources/IOATIR500GLContext_ExternalMethods.cpp) already said the same (real scalarInputCount 2), the header's own declared C++ signature was simply never corrected to match. */
     IOReturn scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale);                                 /* 14 */
     IOReturn purge_texture(UInt32 textureID);                                                            /* 15 */
     IOReturn set_surface_volatile_state(UInt32 state);                                                  /* 16 */

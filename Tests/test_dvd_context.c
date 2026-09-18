@@ -15,15 +15,20 @@
 
 #include "common.h"
 
-/* selector 0: set_surface(UInt32,UInt32,UInt32,UInt32) per header (4
- * params), but real evidence (VA bundle offset 0x27f4/0x32d4/0x4540/
- * 0x51a0, function _AVAGetRendererInfo) shows only 3 real scalar inputs
- * via structureI (in=3, struct=0) - a genuine signature/real-arg-count
- * mismatch worth its own follow-up. Mutates bound surface regardless -
- * skip. */
+/* selector 0: set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32
+ * flagCount) - RESOLVED (issue #42 test-harness pass): real signature
+ * CORRECTED from a guessed 4-param shape to the real 3-param one, via
+ * both the real mangled symbol
+ * (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi) and
+ * a full real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp),
+ * matching the real wire-shape evidence (3 real scalar inputs, VA bundle
+ * offset 0x27f4) exactly - no longer an open discrepancy. Real body
+ * rebinds this context to a surface (real requirement-bits/ownership
+ * bookkeeping, two unnamed vtable calls) - a genuine surface-binding
+ * mutation regardless of the now-resolved signature - skip. */
 static void test_set_surface(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD set_surface(sel 0)", "mutates bound surface; also has a real-arg-count mismatch vs. the declared 4-param signature (real evidence: 3), see #42");
+    report_skipped("DVD set_surface(sel 0)", "real surface-binding mutation (signature now resolved, see #42)");
 }
 
 /* selector 1: get_config(UInt32*,UInt32*,UInt32*) - real evidence: VA
@@ -177,14 +182,17 @@ static void test_dvd_setup_subpicture(io_connect_t connect) {
     report("DVD dvd_setup_subpicture(sel 15, confirmed no-op body)", r, NULL);
 }
 
-/* selector 16 (set_macrovision) per header (1 param, "INFERRED... not
- * independently re-decompiled"), but real evidence (VA bundle offset
- * 0x52b8, _AVAGetRendererInfo) shows scalarO with in=2 - a real
- * discrepancy against the header's own already-hedged guess. Real
+/* selector 16 (set_macrovision) - RESOLVED (issue #42 test-harness
+ * pass): the header's own 1-param signature is CORRECT for what the real
+ * body actually uses (Sources/ATIR500DVDContext_SetMacrovision.cpp) - the
+ * apparent mismatch against real wire evidence (VA bundle offset 0x52b8,
+ * 2 real scalar inputs) is this project's own well-established
+ * "argument-dropped" decompiler artifact (the wire sends 2, the compiled
+ * body only ever reads the first), not a signature error. Real
  * hardware-facing side effect either way - skip. */
 static void test_set_macrovision(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD set_macrovision(sel 16)", "real display side effect; also a real-arg-count mismatch (header guessed 1, evidence shows 2), see #42");
+    report_skipped("DVD set_macrovision(sel 16)", "real display side effect (signature discrepancy now resolved as argument-dropped, see #42)");
 }
 
 /* selector 17 (dvd_enable_deint) - CONFIRMED: scalarO, in=1/out=0.

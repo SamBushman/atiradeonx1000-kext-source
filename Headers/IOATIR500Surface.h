@@ -27,6 +27,7 @@
 
 class ATIRadeonX1000;
 class IOATIR500GLContext;
+class IOATIR500DVDContext; /* real mangled-symbol evidence for set_dvd_context/remove_dvd_context below confirms this is the BASE class (19-char "IOATIR500DVDContext"), not the ATIR500DVDContext subclass */
 class IOTextureBuffer; /* real, opaque backing-store handle type - forward declared only, not reconstructed (Apple's own real type, same policy as IOAccelSurfaceData etc. below) */
 struct VendorTransferBuffer;
 struct VendorSwapBufferHeader; /* real type name (Ghidra's own symbol), own real layout not reconstructed - issue #28 */
@@ -46,6 +47,15 @@ struct IOAccelDeviceRegion;
 
 class IOATIR500Surface : public IOUserClient {
     OSDeclareDefaultStructors(IOATIR500Surface)
+
+    /* IOATIR500DVDContext::set_surface (Sources/IOATIR500DVDContext_
+     * SetSurface.cpp) needs real access to this class's own protected
+     * contextListHeadA/contextListHeadB/boundDVDContext fields exactly as
+     * a real member function would - friended here rather than weakening
+     * those fields to public, matching this project's already-established
+     * pattern for the same situation elsewhere (see e.g. ATIR500DVDContext.h's
+     * own friend declarations for its opcode-handler free functions). */
+    friend class IOATIR500DVDContext;
 
 public:
     /*
@@ -148,6 +158,20 @@ public:
     void prune_buffers(void);
     void update_contexts(void);
     void delete_buffer_backing(IOTextureBuffer *buffer);
+
+    /*
+     * set_dvd_context / remove_dvd_context - RESOLVED (issue #42
+     * test-harness pass), real names/signatures confirmed via real
+     * mangled symbols (__ZN16IOATIR500Surface15set_dvd_contextEP19IOATIR500DVDContext
+     * @ 0x10bc0, __ZN16IOATIR500Surface18remove_dvd_contextEP19IOATIR500DVDContext
+     * @ 0x13de0), found while decompiling IOATIR500DVDContext::
+     * set_surface (Sources/IOATIR500DVDContext_SetSurface.cpp) to resolve
+     * a real wire-shape discrepancy. Own bodies NOT independently
+     * decompiled this pass (peripheral helpers, same treatment as the
+     * other small opaque helpers just above).
+     */
+    void set_dvd_context(IOATIR500DVDContext *context);
+    void remove_dvd_context(IOATIR500DVDContext *context);
 
     /*
      * surface_lock_options / surface_unlock_options - CONFIRMED real
@@ -524,7 +548,34 @@ protected:
      * real-offset order with a leading pad from this class's own start
      * (IOUserClient is the real base) and a pad array in every real gap.
      */
-    UInt8 _pad_0x00[0xb70];
+    UInt8 _pad_0x00[0x88];
+
+    /* contextListHeadA/B - FIXED (issue #42 test-harness pass, "fix real
+     * layout bugs found" policy): these two offsets were previously
+     * buried in the opaque `_pad_0x00` blob, but `reset_req_bits`/
+     * `update_contexts` (Sources/IOATIR500Surface_ContextTracking.cpp)
+     * already walk both as real singly-linked lists (next-link at each
+     * node's own +0x84, a real "requirement bits" field at +0x8c) -
+     * almost certainly one per-GL-context and one per-2D-context
+     * reference list (a surface can be bound to multiple GL/2D contexts
+     * simultaneously, unlike DVD's single-owner binding below), but which
+     * is which is NOT independently confirmed - named generically rather
+     * than guessed. Real node type also not reconstructed (declared as
+     * `void*`, matching this project's established treatment of other
+     * not-fully-typed opaque linked-list nodes). */
+    void *contextListHeadA; /* +0x88 */
+    void *contextListHeadB; /* +0x8c */
+
+    /* boundDVDContext - FIXED (issue #42 test-harness pass): CONFIRMED
+     * via real decompile of IOATIR500DVDContext::set_surface (Sources/
+     * IOATIR500DVDContext_SetSurface.cpp), which reads/writes this
+     * surface's own `this+0x90` as a plain `IOATIR500DVDContext*` - the
+     * single currently-bound DVD context (DVD binding is real 1:1, unlike
+     * the GL/2D linked lists just above), set via `set_dvd_context`/
+     * cleared via `remove_dvd_context`. */
+    IOATIR500DVDContext *boundDVDContext; /* +0x90 */
+
+    UInt8 _pad_0x94[0xb70 - 0x94];
 
     /* Both found this pass (issue #13, ATIR500Surface::resolve_fsaa_buffer)
      * - real per-attachment `ATIR500SurfaceBuffer*` pointers, the same
