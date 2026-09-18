@@ -63,6 +63,26 @@ best-available shape via `report_skipped()` and never called. See
 real, valid setup sequence** (an actually-created/bound surface, etc.) -
 that is exactly what the #43 incident was missing.
 
+**The established, safe way to upgrade a skipped test (2026-09-18,
+user-authorized after full code tracing, see `Tests/test_surface_context.c`'s
+`test_set_shape_backing` and `Tests/probe_set_id_mode.c`/
+`probe_shape_backing.c` for a worked example):** trace the FULL real code
+path in this project's own reconstructed source for the target method
+first - not the class header's one-line signature, the actual function
+body, including every helper it calls - and identify exactly what real
+object state (allocated records, flag bits, non-null pointers) it assumes
+already exists. Verify each precondition is satisfiable via already-proven
+calls (here: `set_id_mode`'s slow path allocates a real per-ID record,
+then its fast path can set a required flag bit WITHOUT disturbing that
+record - both individually already-safe, already-tested calls). Only once
+every precondition in the trace is satisfied by real, verified state
+should the target call itself be attempted, and even then as a single,
+deliberate, individually-reasoned call - never a sweep. A resulting
+`kIOReturnBadArgument` is still useful signal (most likely an unverified
+wire-shape guess being rejected safely by the kernel's own argument-count
+check, not a precondition failure) - record it honestly rather than
+declaring victory or treating it as a dead end.
+
 ## Confidence tiers (load-bearing for interpreting results)
 
 - **GL context**: all 21 selectors have real, call-site-CONFIRMED wire
