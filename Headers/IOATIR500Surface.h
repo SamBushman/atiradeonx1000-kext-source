@@ -86,7 +86,7 @@ public:
      * behind it.
      */
     IOReturn surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 0 */
-    IOReturn surface_read_unlock_options(void);                                /* 1 */
+    IOReturn surface_read_unlock_options(UInt32 param1);                       /* 1, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real mangled symbol (__ZN16IOATIR500Surface27surface_read_unlock_optionsEm) confirms 1 real param, not 0. Ghidra's own decompile displays this as `void`, but the real raw disassembly is a pure tail branch into surface_unlock_options with no r3 postprocessing at all - real wire behavior DOES propagate surface_unlock_options' own real IOReturn result (a display/type-inference artifact for a discarded-looking tail call, not genuine void - kept IOReturn, matching this selector's own real byte-dumped table output count). CONFIRMED real one-line forward to surface_unlock_options(this, 1, param1). */
     IOReturn get_state(UInt32 *outStateBits);                                  /* 2, CONFIRMED body (stage10): real vtable call at offset 0x520, maps to 0/1 */
     void     surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 3 */
     void     surface_write_unlock_options(UInt32 options);                     /* 4 */
@@ -111,17 +111,17 @@ public:
                                 IOAccelDeviceRegion *region, UInt32 param6);    /* 6, RESOLVED (issue #8) */
     IOReturn set_id_mode(UInt32 mode, UInt32 modeBits);                       /* 7, RESOLVED (issue #8) */
     IOReturn set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3); /* 8, RESOLVED this pass - see Sources/IOATIR500Surface_LockShape.cpp */
-    IOReturn set_shape(void);                                                  /* 9, CONFIRMED body (stage10): a real one-line forward to set_shape_backing_length_ext (not itself a distinct external method - an internal helper name this project happened to see via the decompile) */
+    IOReturn set_shape(UInt32 shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4); /* 9, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real mangled symbol (__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm) confirms 4 real params, not 0 as previously declared - Ghidra's own decompile hid the real forwarding args entirely (the same "calling-convention-inference artifact" already catalogued elsewhere in this project), resolved via the real raw PPC register moves instead (Sources/IOATIR500Surface_ExternalMethods2.cpp): real forward is set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffff, region, param4, 0) - the SAME real 0xffffffff sentinel set_shape_backing_length's own forward uses. Real disassembly is a pure tail branch with no r3 postprocessing - kept IOReturn (propagating the real ext call's result) rather than trusting Ghidra's own "void" display for what is really an unthreaded passthrough, matching this selector's own real byte-dumped table output count (unlike set_shape_backing, which genuinely discards the result via its own distinct real code path). */
     IOReturn surface_flush(UInt32 param1, UInt32 param2);                      /* 10, CONFIRMED body (stage10): real - alloc_surfaces_retry then flush_surface, plus real completion-counter bookkeeping via a vtable call at offset 0x54c */
     IOReturn surface_query_lock(void);                                        /* 11, CONFIRMED body (stage10): real availability check without acquiring, using the same pending-GPU-flush bits as lock_memory */
     IOReturn surface_read_lock(IOAccelSurfaceData *data, UInt32 size);         /* 12, CONFIRMED body (stage10): thin forward to surface_lock_options(this, 1, 2, data, size) */
     IOReturn surface_read_unlock(void);                                       /* 13, CONFIRMED body (stage10): thin forward to surface_unlock_options(this, 1, 2) */
     void     surface_write_lock(IOAccelSurfaceData *data, UInt32 size);       /* 14, RESOLVED this pass */
     void     surface_write_unlock(void);                                     /* 15, RESOLVED this pass */
-    IOReturn surface_control(UInt32 selector, UInt32 param2, UInt32 *inOut);   /* 16, CONFIRMED body (stage10): real dispatcher - param2==1 -> set_surface_blocking, param2==4 -> set_volatile_state, else kIOReturnBadArgument */
+    IOReturn surface_control(UInt32 selector, UInt32 *inOut);   /* 16, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real decompile (Sources/IOATIR500Surface_ExternalMethods2.cpp) shows only 2 real explicit params - what this project had labeled "selector" (the first explicit param, dispatched on ==1/==4) plus "inOut" - Ghidra's own raw dump for this specific function additionally showed NO separate "this" at all in its signature (an `__stdcall`-inferred artifact; the real body clearly uses its own first param exactly where `this` would be used, e.g. passing it on to set_surface_blocking/set_volatile_state), meaning the previously-declared middle "param2" never really existed as a distinct argument - real dispatcher: selector==1 -> set_surface_blocking, selector==4 -> set_volatile_state, else kIOReturnBadArgument. Matches the real byte-dumped external-method table's own count1=2 (Sources/ATIR500Surface_ExternalMethods.cpp). */
     IOReturn set_shape_backing_length(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
                                        UInt32 param5, IOAccelDeviceRegion *region); /* 17, RESOLVED (issue #8) */
-    IOReturn surface_control_alias(UInt32 selector, UInt32 param2, UInt32 *inOut); /* 18, CONFIRMED to be a real, deliberate alias of selector 16 - same function address, not two implementations */
+    IOReturn surface_control_alias(UInt32 selector, UInt32 *inOut); /* 18, CONFIRMED to be a real, deliberate alias of selector 16 - same function address, not two implementations. Signature corrected alongside surface_control's own correction (issue #42 test-harness pass) - see that method's own comment. */
 
     /*
      * set_shape_backing_length_ext - RESOLVED, issue #8, real name/
@@ -600,6 +600,31 @@ protected:
     ATIR500SurfaceBuffer *fixedSurfaceBuffer;       /* +0xb94, CONFIRMED: a single real `ATIR500SurfaceBuffer*`, always read regardless of the caller's own format-code argument - the "primary"/depth-or-stencil-style attachment resolve_fsaa_buffer treats as fixed rather than per-format-code. */
     UInt8 _pad_0xb98[0xd50 - 0xb98];
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
+
+    /*
+     * lastFlipFlag/vramInitSucceeded/methodTable - FIXED (issue #42
+     * test-harness pass): three real fields found via `IOATIR500Surface::
+     * start`'s own real decompile (real addr 0x119f0 - the base class's
+     * OWN start, distinct from the subclass ATIR500Surface::start which
+     * calls it via vtable; this base start() is itself a large,
+     * substantial real function - real VRAM-descriptor/master-swap-buffer
+     * setup plus ~80 other field initializations - NOT fully transcribed
+     * this pass, tracked as its own real gap, see issue filed for it).
+     * `lastFlipFlag` (+0xd54) is ALSO independently referenced in
+     * Sources/ATIR500Surface_SubmitFlipBuffer.cpp (a real "compare
+     * against caller's flag, update if different" pattern) - real
+     * semantic role beyond that UNKNOWN. `vramInitSucceeded` (+0xd58) is
+     * set to 1 only on start()'s own real VRAM-descriptor-setup success
+     * path. `methodTable` (+0xd5c) is THE real external-method dispatch
+     * table pointer `ATIR500Surface::getTargetAndMethodForIndex`
+     * (Headers/ATIR500Surface.h) reads - CONFIRMED via the real
+     * instruction `stw r2,0xd5c(r31)` in start() setting it to the real
+     * static table's own absolute address (0x48d60) - see
+     * Sources/ATIR500Surface_ExternalMethods.cpp.
+     */
+    UInt32 lastFlipFlag;      /* +0xd54 */
+    UInt32 vramInitSucceeded; /* +0xd58 */
+    void   *methodTable;      /* +0xd5c */
 };
 
 #endif /* IOATIR500SURFACE_H */

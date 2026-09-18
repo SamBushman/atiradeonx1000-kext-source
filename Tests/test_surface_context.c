@@ -41,12 +41,44 @@
 
 #include "common.h"
 
-/* selector 0: surface_read_lock_options(UInt32,IOAccelSurfaceData*,UInt32)
- * - real Apple struct type, layout not reconstructed. Lock-family call
- * regardless - skip. */
+/* selector 0: surface_read_lock_options(UInt32 lockOptions,
+ * IOAccelSurfaceData *data, UInt32 size) - the real Apple struct type is
+ * still not fully reconstructed, but this project's own full trace of
+ * surface_lock_options' real body (Sources/IOATIR500Surface_LockOptions.cpp)
+ * gives a byte-exact PARTIAL layout for exactly what this call writes -
+ * see that file's own header comment. REQUIRES id=0's record + self+0xb70
+ * to be valid (set_id_mode(0, 0x4), already established - see
+ * test_set_scale's own precondition). lockOptions=0 is the simplest real
+ * path traced: reaches the "granted-pending, no allocation" tail without
+ * calling alloc_surfaces_retry/prepare_vram/any GART-mapping code.
+ *
+ * Real wire shape from the byte-dumped table (Sources/
+ * ATIR500Surface_ExternalMethods.cpp): scalarInputCount=1, structureO
+ * with the struct as OUTPUT (not input) - matches the real C++ signature
+ * exactly (lockOptions in, data out, size unused/dropped).
+ *
+ * CONFIRMED SUCCESS, live, no incident (2026-09-18, user-authorized):
+ * returned kIOReturnSuccess with real structSize=68 (0x44, matching the
+ * derived layout exactly) and real, plausible hardware address/pitch
+ * values in the output. */
 static void test_surface_read_lock_options(io_connect_t connect) {
-    (void)connect;
-    report_skipped("Surface surface_read_lock_options(sel 0)", "lock family + real Apple struct type unreconstructed");
+    kern_return_t rid = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 0, 0x4);
+    report("Surface set_id_mode(0,0x4) [precondition]", rid, NULL);
+    if (rid != TEST_kIOReturnSuccess) {
+        report_skipped("Surface surface_read_lock_options(sel 0)", "precondition did not succeed this run");
+        return;
+    }
+    unsigned char data[0x44];
+    memset(data, 0xAA, sizeof(data));
+    IOByteCount structSize = sizeof(data);
+    UInt32 lockOptions = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureO(connect, 0, 1, &structSize, lockOptions, data);
+    report("Surface surface_read_lock_options(sel 0, lockOptions=0)", r, NULL);
+    if (r == TEST_kIOReturnSuccess) {
+        UInt32 *d = (UInt32 *)data;
+        printf("    structSize=%u data[0..4]={0x%x,0x%x,0x%x,0x%x,0x%x}\n",
+               (unsigned int)structSize, d[0], d[1], d[2], d[3], d[4]);
+    }
 }
 
 /* selector 1: surface_read_unlock_options(void) - already manually

@@ -31,13 +31,18 @@
  * in the class hierarchy instead of living as an inline caveat on the
  * base class.
  *
- * Also confirmed on the subclass from the same symbol sweep, but
- * deliberately NOT added below (real scope of issue #16 was re-homing
- * already-declared members correctly, not new decompilation):
- * `getTargetAndMethodForIndex` (real kext offset `0x3ac80` - the
- * external-method dispatch function itself, matching the same real
- * subclass-owns-dispatch pattern GL/DVD/2D already established) - real
- * address recorded here for whoever picks up a future decompile pass.
+ * `getTargetAndMethodForIndex` (real kext offset `0x3ac80`) - flagged
+ * here at issue #16 time as deliberately deferred, now RESOLVED (issue
+ * #42 test-harness pass, see this class's own declaration below) - this
+ * was a real, previously-uncaught gap: without it, and without the base
+ * class's own `start()` setting up the real method-table pointer it
+ * reads, this project's rebuilt kext had NO working external-method
+ * dispatch for ANY of Surface's 19 real methods at all, despite every
+ * one of those 19 methods already having a real, decompiled body -
+ * confirmed by a full clean rebuild linking successfully (0 project-own
+ * undefined symbols) with the dispatch function simply absent, since
+ * nothing in the rebuilt kext's own code took its address without a
+ * real method table to populate.
  * `invalidate` (real kext offset `0x3acb0`) - the OTHER method noted
  * here at issue #16 time - IS now declared as of issue #18, but on
  * `IOATIR500Surface` (the base), not here: every real call site reaches
@@ -69,6 +74,26 @@ public:
      * RESOLVED, issue #55 - see Sources/ATIR500Surface_Stop.cpp.
      */
     virtual void stop(IOService *provider) override;
+
+    /*
+     * getTargetAndMethodForIndex - RESOLVED (issue #42 test-harness
+     * pass): the real external-method dispatch function this file's own
+     * top comment already flagged as a known, deliberately-deferred gap
+     * (real addr 0x3ac80). Real body: `*target = this; if (selector >
+     * 0x12) return 0; return selector*0x18 + this->methodTable;` -
+     * exactly the same real shape as GL/2D/DVD's own dispatch functions,
+     * confirmed valid for all 19 real selectors (0-18, matching Surface's
+     * own real 19-method table). `methodTable` (Headers/IOATIR500Surface.h,
+     * `this+0xd5c`) is set by the base class's own `start()` to the real
+     * static table's absolute address - see
+     * Sources/ATIR500Surface_ExternalMethods.cpp for both the dispatch
+     * function and the real, byte-dumped table itself (real addr
+     * 0x48d60, CONFIRMED via direct memory read - every one of the 19
+     * real function-pointer entries resolves to this project's own
+     * already-established real method, by real symbol name, not
+     * guessed).
+     */
+    virtual IOExternalMethod *getTargetAndMethodForIndex(IOService **target, UInt32 selector);
 
     /*
      * ---- Real overlay/subpicture/deinterlace family - RE-HOMED, issue
