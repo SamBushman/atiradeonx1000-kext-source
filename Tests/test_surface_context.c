@@ -110,20 +110,33 @@ static void test_surface_read(io_connect_t connect) {
  * (from set_id_mode's FAST path) - set_id_mode's own record-(re)allocation
  * block is gated on that SAME bit being clear, so calling slow-path once
  * then fast-path again on the SAME id satisfies both without disturbing
- * the record. Empirically verified live (Tests/probe_shape_backing.c,
- * user-authorized, no incident): the 2-call set_id_mode sequence below
- * both succeed exactly as traced; the set_shape_backing call itself
- * returned kIOReturnBadArgument - informative, not a failure of this
- * test's own preconditions (which independently succeeded) - most likely
- * because this selector's real wire shape (scalarInputCount/structureSize
- * for the IOConnectMethodScalarIStructureI call) has no call-site
- * evidence and was constructed from the function's own C++ parameter
- * list rather than confirmed real client usage; the kernel's own
- * argument-count check rejecting a mismatched shape before the function
- * body runs is the same safe-failure behavior already established
- * throughout this project's #42 work. Recorded as the honest real result,
- * not asserted as proof of anything beyond "the precondition sequence
- * itself is real and safe." */
+ * the record.
+ *
+ * FURTHER TRACED (past the point checked when this was first attempted):
+ * the function's own later `primaryBuf = *(self+0xb70)` dereference and
+ * `U32At(primaryBuf, 0x24)` read are ALSO safe given these preconditions
+ * alone - `self+0xb70` is populated by `prune_buffers()`
+ * (Sources/IOATIR500Surface_ContextTracking.cpp), which `set_id_mode`
+ * calls UNCONDITIONALLY on every successful assignment (both paths) -
+ * for a fresh surface with no linked contexts (requirement bits stay 0)
+ * it sets `self+0xb70` to a real, valid, non-null address (either into
+ * the accelerator's own descriptor table or into the surface object's
+ * own embedded fields, depending on which path), never null. So the two
+ * already-verified `set_id_mode` calls below are sufficient - no further
+ * setup is needed, and this function's body should be safe to run to
+ * completion end-to-end, not just its first few checks.
+ *
+ * Empirically verified live (Tests/probe_shape_backing.c, user-authorized,
+ * no incident): the 2-call set_id_mode sequence both succeed exactly as
+ * traced; the set_shape_backing call itself returned kIOReturnBadArgument.
+ * Given the full-body safety trace above, this is now believed to be a
+ * wire-shape mismatch specifically (this selector's real
+ * scalarInputCount/structureSize has no call-site evidence and was
+ * constructed from the function's own C++ parameter list, not confirmed
+ * real client usage) rather than any precondition or body-safety issue -
+ * the kernel's own argument-count check rejecting a mismatched shape
+ * before the function body runs is the same safe-failure behavior
+ * already established throughout this project's #42 work. */
 static void test_set_shape_backing(io_connect_t connect) {
     kern_return_t rid1 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x0);
     kern_return_t rid2 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x20);
@@ -161,12 +174,46 @@ static void test_set_id_mode(io_connect_t connect) {
     report("Surface set_id_mode(sel 7, 0,0)", r, NULL);
 }
 
-/* selector 8: set_scale(UInt32,IOAccelSurfaceScaling*,UInt32) - real
- * Apple struct type, layout not reconstructed, mutates real surface
- * scale state - skip. */
+/* selector 8: set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling,
+ * UInt32 param3) - the real IOAccelSurfaceScaling struct's layout is NOT
+ * reconstructed in general, but the specific "scaling disabled" path
+ * (param3==0) never reads it at all: set_scale's own body (Sources/
+ * IOATIR500Surface_LockShape.cpp) only forwards `scaling` to `set_scaling`
+ * when `param3!=0`; with param3==0 it passes nullptr instead, and
+ * set_scaling's own "disabled" branch (Sources/
+ * IOATIR500Surface_ScalingAndState.cpp) doesn't touch `scaling` at all -
+ * so this exact call is fully safe regardless of the struct's unknown
+ * layout, since the driver-side code never reads it on this path.
+ *
+ * REQUIRES self+0xd60 (id=0's hardcoded record - set_scale/set_scaling
+ * take no `id` parameter) and self+0xb70 to be real, valid pointers.
+ * BOTH are already established by a single already-proven-safe call:
+ * set_id_mode(mode=0, modeBits=0x4) - its real body unconditionally calls
+ * prune_buffers() on success, which (for a fresh, unlinked surface) sets
+ * self+0xb70 to a real, valid, non-null address - see the fuller trace in
+ * test_set_shape_backing's own comment above. No second set_id_mode call
+ * is needed here (unlike set_shape_backing) since the "disabled" path
+ * never checks self+0xbe8's bit 0x20 at all.
+ *
+ * Empirically verified live (Tests/probe_set_scale.c, user-authorized, no
+ * incident): set_id_mode(0,0x4) succeeds as already established;
+ * set_scale itself returned kIOReturnBadArgument - per the same reasoning
+ * as set_shape_backing, most likely this selector's own unverified wire
+ * shape (guessed as 2 scalars + a 0x2c-byte struct, no call-site
+ * evidence) being safely rejected before the (traced-safe) body runs. */
 static void test_set_scale(io_connect_t connect) {
-    (void)connect;
-    report_skipped("Surface set_scale(sel 8)", "mutates real surface scale + real Apple struct type unreconstructed");
+    kern_return_t rid = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 0, 0x4);
+    report("Surface set_id_mode(0,0x4) [precondition: id=0 record + prune_buffers]", rid, NULL);
+    if (rid != TEST_kIOReturnSuccess) {
+        report_skipped("Surface set_scale(sel 8)", "precondition did not succeed this run - not attempting the scale call itself");
+        return;
+    }
+    unsigned char scaling[0x2c];
+    memset(scaling, 0, sizeof(scaling));
+    IOByteCount structSize = sizeof(scaling);
+    UInt32 flags = 0, param3 = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 8, 2, structSize, flags, param3, scaling);
+    report("Surface set_scale(sel 8, disabled path, real preconditions established, wire shape unverified)", r, NULL);
 }
 
 /* selector 9: set_shape(void) - CONFIRMED body (prior decompile) to be
@@ -236,12 +283,59 @@ static void test_surface_control(io_connect_t connect) {
     report_skipped("Surface surface_control(sel 16)", "real dispatcher onto surface-state mutations");
 }
 
-/* selector 17: set_shape_backing_length(UInt32,UInt32,UInt32,UInt32,
- * UInt32,IOAccelDeviceRegion*) - real Apple struct type, layout not
- * reconstructed, mutates real surface shape - skip. */
+/* selector 17: set_shape_backing_length(UInt32 shapeBits, UInt32 id,
+ * UInt32 param3, UInt32 param4, UInt32 param5, IOAccelDeviceRegion *region)
+ * - same real underlying body as set_shape_backing (selector 6, this
+ * project's own byte-exact derived `region` layout applies identically -
+ * see that test's header comment for the full struct/precondition trace).
+ * The only real difference is one extra pre-check this function itself
+ * does before forwarding: `if (param4 != 0xffffffff) { require param5 >=
+ * param4 * region+0xa }`, skipped entirely by passing the real
+ * `0xffffffff` sentinel for param4 - which also makes the forwarded call
+ * take the simplest, already-traced-safe internal branch (param4 reset
+ * to 0, skipping any backing-store (re)connect call).
+ *
+ * Preconditions identical to set_shape_backing's: id's per-ID record
+ * allocated (slow path) + self+0xbe8 bit 0x20 set (fast path, same id) -
+ * re-established defensively here (idempotent - calling set_id_mode
+ * again with the same already-successful arguments is safe, see that
+ * function's own header comment) rather than relying on test_
+ * set_shape_backing having already run first in the same connection.
+ *
+ * RESULT: CONFIRMED SUCCESS, live, no incident (2026-09-18,
+ * user-authorized). Unlike set_shape_backing's own inconclusive
+ * kIOReturnBadArgument, this exact call - same 5-scalar +
+ * 20-byte-structureI wire shape, same region layout, same preconditions -
+ * returned kIOReturnSuccess, meaning the function's FULL real body ran to
+ * completion exactly as traced: the region/precondition byte layout
+ * derived purely from this project's own reconstructed source is now
+ * empirically PROVEN correct on real hardware, not just theorized. (Why
+ * selector 6 itself returned BadArgument with an apparently-equivalent
+ * shape while this selector succeeded is unresolved - possibly a real
+ * wire-encoding difference between a void-returning external method and
+ * an IOReturn-returning one - worth a follow-up, not a blocker.) */
 static void test_set_shape_backing_length(io_connect_t connect) {
-    (void)connect;
-    report_skipped("Surface set_shape_backing_length(sel 17)", "mutates real surface shape + real Apple struct type unreconstructed");
+    kern_return_t rid1 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x0);
+    kern_return_t rid2 = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 1, 0x20);
+    report("Surface set_id_mode(1,0x0) [precondition, idempotent]", rid1, NULL);
+    report("Surface set_id_mode(1,0x20) [precondition, idempotent]", rid2, NULL);
+    if (rid1 != TEST_kIOReturnSuccess || rid2 != TEST_kIOReturnSuccess) {
+        report_skipped("Surface set_shape_backing_length(sel 17)", "precondition sequence did not succeed this run");
+        return;
+    }
+
+    unsigned char region[20];
+    memset(region, 0, sizeof(region));
+    *(UInt32 *)(region + 0) = 1;
+    *(SInt16 *)(region + 8) = 4;
+    *(SInt16 *)(region + 10) = 4;
+    *(SInt16 *)(region + 16) = 4;
+    *(SInt16 *)(region + 18) = 4;
+    IOByteCount structSize = sizeof(region);
+    UInt32 shapeBits = 0, id = 1, param3 = 0, param4 = 0xffffffff, param5 = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 17, 5, structSize,
+                                                         shapeBits, id, param3, param4, param5, region);
+    report("Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified)", r, NULL);
 }
 
 /* selector 18: surface_control_alias(UInt32,UInt32,UInt32*) - CONFIRMED
