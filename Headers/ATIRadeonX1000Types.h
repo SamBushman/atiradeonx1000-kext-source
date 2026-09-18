@@ -523,26 +523,46 @@ struct sIOGLContextReadBufferData {
  *                  for every method in this driver).
  *   [2] function - CONFIRMED real function pointer, resolved to a real
  *                  symbol for every entry this project dumped.
- *   [3] count0   - CONFIRMED small integer, by call-site cross-reference
- *                  (stage7's IOServiceOpen-caller confirmation) this is
- *                  the real scalar/structure INPUT count.
- *   [4] count1   - CONFIRMED small integer; by the same cross-reference,
- *                  the real scalar/structure OUTPUT count for most
- *                  entries, though a few entries (e.g. GL selector 6)
- *                  show a real call site treating a different field as
- *                  the output count - see the per-table source files for
- *                  entry-by-entry notes where this project's confidence
- *                  is lower.
- *   [5] count2   - CONFIRMED small integer, present in every entry;
- *                  UNKNOWN precise meaning (a third count - plausibly a
- *                  structure-output *size* distinct from a scalar-output
- *                  *count* - not independently confirmed).
+ *   [3] count0, [4] count1, [5] count2 - CONFIRMED small integers (raw
+ *                  bytes correctly read off the real binary for every
+ *                  entry) - but CORRECTED (2026-09-18, see issue #43's
+ *                  comment thread and the Tests/ harness): this
+ *                  project's earlier claim that count0/count1 reliably
+ *                  mean "the real scalar/structure INPUT count" /
+ *                  "OUTPUT count" in that fixed positional order was
+ *                  WRONG, discovered when a test harness built on that
+ *                  assumption got `kIOReturnBadArgument` from the live
+ *                  driver on every single GL call, regardless of which
+ *                  count permutation was tried. The real client-visible
+ *                  shape (how many scalar inputs/outputs vs. how many
+ *                  structure input/output BYTES a given selector really
+ *                  takes, and which of the four `IOConnectMethod*`
+ *                  wire formats applies) is NOT reliably recoverable
+ *                  from this table's field positions alone - it must be
+ *                  established per-selector via real CALL-SITE
+ *                  evidence (disassembling the vendor userspace bundles
+ *                  and reading the literal register values passed to
+ *                  the raw `io_connect_method_*` MIG stubs - see
+ *                  `Tests/common.h` and `Tests/test_gl_context.c` for
+ *                  the technique and the resulting real, per-selector
+ *                  shapes for all 21 GL methods). This does NOT mean
+ *                  the raw bytes below are wrong - they are a faithful,
+ *                  correct transcription of the real binary, and the
+ *                  REBUILT KEXT that ships them is unaffected (the real
+ *                  kernel-side dispatcher that interprets these bytes
+ *                  is Apple's own unmodified code, identical for the
+ *                  stock driver and this project's rebuild) - only this
+ *                  project's own confident-but-wrong semantic LABELING
+ *                  of what count0/count1/count2 mean was the error.
  *
  * 0xffffffff appears in several `count0`/`count1` slots (e.g. GL
  * selector 7's `read_buffer`, selector 10's `new_texture`) - CONFIRMED
- * real (read directly off the raw bytes), INFERRED to mean "variable
- * size" (the classic IOKit `kIOUCVariableStructureSize` sentinel is
- * `0xffffffff` in real Apple headers from this era, which matches).
+ * real (read directly off the raw bytes), and still plausibly a
+ * "variable size" sentinel (`kIOUCVariableStructureSize` is `0xffffffff`
+ * in real Apple headers from this era) - both of those selectors are
+ * now real-evidence-CONFIRMED to be structure-based (structureIO) calls,
+ * consistent with that reading, though the exact field-to-role mapping
+ * that makes this literally true is still not nailed down.
  */
 struct VendorExternalMethod {
     UInt32 target;    /* always 0 in the static template */
