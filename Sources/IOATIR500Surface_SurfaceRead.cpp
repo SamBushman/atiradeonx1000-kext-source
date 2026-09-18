@@ -18,7 +18,9 @@
  * unsigned long, IODirection, task*)` - the same symbol
  * `IOATIR500GLContext::read_buffer` and `IOATIR500Shared`'s texture
  * allocator already call. The two lock stubs used here were re-verified the
- * same way (0x14e58 -> `mutex_lock`, 0x14e38 -> `mutex_unlock_rwcmb`).
+ * same way (0x14e58 -> `mutex_lock`, 0x14e38 -> `mutex_unlock_rwcmb`); they are
+ * imported BY NAME as `IOLockLock`/`IOLockUnlock` (like the shipped kext), since
+ * `mutex_unlock_rwcmb` is not an exported symbol and kld rejects it.
  * Slide used: this kext is a single unnamed LC_SEGMENT at vmaddr 0; the
  * live Mach-O header (read at kextstat's address 0x588000) reports
  * vmaddr 0x589000, i.e. live = 0x589000 + Ghidra address. Validated first
@@ -44,8 +46,8 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 
-extern "C" void SurfRead_mutex_lock(void *lockPtr) asm("_mutex_lock");
-extern "C" void SurfRead_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void SurfRead_mutex_lock(void *lockPtr) asm("_IOLockLock");
+extern "C" void SurfRead_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 extern "C" void *SurfRead_withAddress(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 

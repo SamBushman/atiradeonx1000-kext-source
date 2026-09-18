@@ -42,8 +42,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-extern "C" void Start3D_mutex_lock(void *lockPtr) asm("_mutex_lock");
-extern "C" void Start3D_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void Start3D_mutex_lock(void *lockPtr) asm("_IOLockLock");
+extern "C" void Start3D_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 extern const VendorExternalMethod kGLSpecialMethod20;
 
 bool ATIR500GLContext::start(IOService *provider) {

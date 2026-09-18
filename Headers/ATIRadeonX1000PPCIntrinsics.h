@@ -12,6 +12,7 @@
  *   dataCacheBlockStore(ea)       ->  dcbst  (write a cache block back)
  *   enforceInOrderExecutionIO()   ->  eieio  (order device-memory accesses)
  *   instructionSynchronize()      ->  isync  (context-synchronise)
+ *   sync(0)                       ->  sync   (heavyweight memory barrier; SLEIGH `sync L`, L=0)
  *
  * The C++ names are kept so existing call sites read the same as the raw
  * decompile they were transcribed from.
@@ -25,6 +26,7 @@
 static inline void dataCacheBlockFlush(UInt32 addr) { __asm__ __volatile__("dcbf 0,%0" : : "r"(addr) : "memory"); }
 static inline void dataCacheBlockStore(UInt32 addr) { __asm__ __volatile__("dcbst 0,%0" : : "r"(addr) : "memory"); }
 static inline void enforceInOrderExecutionIO(void) { __asm__ __volatile__("eieio" : : : "memory"); }
+static inline void ppcSync(void) { __asm__ __volatile__("sync" : : : "memory"); }
 static inline void instructionSynchronize(void) { __asm__ __volatile__("isync" : : : "memory"); }
 
 #endif /* ATIRADEONX1000PPCINTRINSICS_H */

@@ -54,8 +54,8 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 
-extern "C" void SurfFlushBlk_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void SurfFlushBlk_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void SurfFlushBlk_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void SurfFlushBlk_mutex_unlock(void *) asm("_IOLockUnlock");
 extern "C" void SurfFlushBlk_IOLockSleep(void *lockPtr, void *event, UInt32 interruptible) asm("_IOLockSleep");
 
 namespace {

@@ -44,8 +44,8 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIR500Surface.h"
 
-extern "C" void DVD_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void DVD_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void DVD_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void DVD_mutex_unlock(void *) asm("_IOLockUnlock");
 extern "C" void *FUN_safeMetaCast(void *obj, void *metaClass) asm("__ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass");
 /* CORRECTED (issue #58 follow-up): the Ghidra label "_ASICSupportsAGP" here hid a relocation whose
  * real target (from the Mach-O relocation table; site 0x35060 is `lis/lwz`, a VALUE load) is

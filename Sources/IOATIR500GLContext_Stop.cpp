@@ -133,8 +133,8 @@ inline void ReleaseObj(void *obj) {
  * which returns the PREVIOUS value (so "was last" is old == 1, as the call site tests). */
 extern "C" SInt32 FUN_00008340(void *countField) asm("_OSDecrementAtomic");
 
-extern "C" void GLStop_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLStop_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLStop_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLStop_mutex_unlock(void *) asm("_IOLockUnlock");
 
 void ATIR500GLContext::stop(IOService *provider) {
     void *mtx = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(provider) + 0x840);

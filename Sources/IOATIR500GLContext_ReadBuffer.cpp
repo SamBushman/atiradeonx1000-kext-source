@@ -76,8 +76,8 @@ struct ReadBufferXferRecord {
 };
 } // namespace
 
-extern "C" void ReadBuffer_mutex_lock(void *lockPtr) asm("_mutex_lock");
-extern "C" void ReadBuffer_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void ReadBuffer_mutex_lock(void *lockPtr) asm("_IOLockLock");
+extern "C" void ReadBuffer_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 extern "C" void ReadBuffer_IOLockSleep(void *lockPtr, void *event, UInt32 zero) asm("_IOLockSleep");
 extern "C" void *ReadBuffer_withAddress(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */

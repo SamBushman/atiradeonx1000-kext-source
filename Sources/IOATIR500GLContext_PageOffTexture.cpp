@@ -56,8 +56,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
  * function body, and `extern "C"` isn't one of them) - a real syntax
  * error ("expected unqualified-id before string constant"), not a
  * portability nit. Hoisted to file scope, same real targets. */
-extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLContext_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
 IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace) {

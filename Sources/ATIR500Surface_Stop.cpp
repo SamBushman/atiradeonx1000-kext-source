@@ -104,11 +104,11 @@ inline void ReleaseObj(void *obj) {
 
 /* real addrs 0x3b2fc/0x3b2cc - VERIFIED (issue #58 follow-up), both by live kxld read and by the
    Mach-O relocation table (`IOLockLock`/`IOLockUnlock`, which kxld resolves to
-   `mutex_lock`/`mutex_unlock_rwcmb`). CORRECTED: this file (and two others) previously aliased the
-   unlock to `_mutex_unlock`, a different kernel function (0xa49c0) than the real target
-   (`_mutex_unlock_rwcmb`, 0xa4b20). */
-extern "C" void FUN_0003b2fc(void *lockPtr) asm("_mutex_lock");
-extern "C" void FUN_0003b2cc(void *lockPtr) asm("_mutex_unlock_rwcmb");
+   `mutex_lock`/`mutex_unlock_rwcmb`, and imported by those KPI names - `mutex_unlock_rwcmb` itself is
+   not exported). CORRECTED: this file (and two others) previously aliased the unlock to `_mutex_unlock`, a
+   different kernel function (0xa49c0) than the real target (0xa4b20). */
+extern "C" void FUN_0003b2fc(void *lockPtr) asm("_IOLockLock");
+extern "C" void FUN_0003b2cc(void *lockPtr) asm("_IOLockUnlock");
 
 void ATIR500Surface::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

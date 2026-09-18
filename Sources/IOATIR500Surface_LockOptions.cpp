@@ -75,8 +75,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-extern "C" void GLSurfaceLock_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLSurfaceLock_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLSurfaceLock_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLSurfaceLock_mutex_unlock(void *) asm("_IOLockUnlock");
 
 IOReturn IOATIR500Surface::surface_lock_options(UInt32 lockType, UInt32 flags, IOAccelSurfaceData *data,
                                                  UInt32 /*size, real: confirmed unused*/) {

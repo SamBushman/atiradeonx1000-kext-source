@@ -46,7 +46,6 @@ inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(r
 inline UInt32 ReadLE16(void *addr) { return static_cast<UInt32>(U8At(addr, 0)) | (static_cast<UInt32>(U8At(addr, 1)) << 8); }
 } // namespace
 
-extern "C" void sync(int);
 
 /* FUN_00020cc4 and FUN_0001d7ec: two separate stubs, same target. */
 extern "C" void RingSubmit_IOSleep(UInt32 milliseconds) asm("_IOSleep");
@@ -83,7 +82,7 @@ void ATIRadeonX1000::submit_ring_data() {
     UInt8 *ringBase = reinterpret_cast<UInt8 *>(U32At(self, 0x900));
 
     if ((U32At(self, 0x98) & 0x80u) == 0) {
-        sync(0);
+        ppcSync();
         instructionSynchronize();
     } else if (committed < pending) {
         UInt32 base = (~static_cast<UInt32>(lineSize) + 1) & (reinterpret_cast<UInt32>(ringBase) + committed * 4);
@@ -95,10 +94,10 @@ void ATIRadeonX1000::submit_ring_data() {
                 off += lineSize;
             } while (off < span);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(base + off);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
     } else {
@@ -112,10 +111,10 @@ void ATIRadeonX1000::submit_ring_data() {
                 off += lineSize;
             } while (off < tailSpan);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(tailBase + off);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
 
@@ -128,10 +127,10 @@ void ATIRadeonX1000::submit_ring_data() {
                 off += lineSize;
             } while (off < headSpan);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(headBase + off);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
     }
@@ -177,7 +176,7 @@ haveFifoSpace:
     U32At(self, 0x6fc) += dwordCount * 4;
 
     if ((U32At(self, 0x98) & 0x80u) == 0) {
-        sync(0);
+        ppcSync();
         instructionSynchronize();
     } else {
         UInt32 lineSize = U8At(self, 0x84);
@@ -190,10 +189,10 @@ haveFifoSpace:
                 off += lineSize;
             } while (off < span);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(base + off);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
     }
@@ -293,7 +292,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringO
     UInt32 idctPending = U32At(self, 0x8a4);
 
     if ((U32At(self, 0x98) & 0x80u) == 0) {
-        sync(0);
+        ppcSync();
         instructionSynchronize();
     } else {
         UInt32 lineSize = U8At(self, 0x84);
@@ -307,10 +306,10 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringO
                 off += lineSize;
             } while (off < span);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(base + off);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
     }
@@ -405,7 +404,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringO
     c &= 0x7ff;
 
     if ((U32At(self, 0x98) & 0x80u) == 0) {
-        sync(0);
+        ppcSync();
         instructionSynchronize();
     } else {
         UInt32 lineSize2 = U8At(self, 0x84);
@@ -419,10 +418,10 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringO
                 off2 += lineSize2;
             } while (off2 < span2);
         }
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         dataCacheBlockFlush(base2 + off2);
-        sync(0);
+        ppcSync();
         instructionSynchronize();
         instructionSynchronize();
     }

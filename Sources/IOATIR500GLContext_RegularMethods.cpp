@@ -51,8 +51,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * for the full note (gcc-4.0.1 rejects a local `extern "C"`, so this
  * lives at file scope, redeclared here rather than shared via a header
  * since it's a tiny, self-contained real-symbol pin). */
-extern "C" void GLContext_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLContext_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLContext_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
 
 /*
  * finish - CONFIRMED. Real body: a single real accelerator vtable call

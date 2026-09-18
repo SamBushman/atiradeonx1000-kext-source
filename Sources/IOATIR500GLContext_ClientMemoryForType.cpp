@@ -57,8 +57,8 @@ typedef UInt32 (*Fn0x54c)(void *, UInt32);
 typedef UInt32 (*Fn0x55c)(void *, UInt32);
 } // namespace
 
-extern "C" void ClientMem_mutex_lock(void *lockPtr) asm("_mutex_lock");
-extern "C" void ClientMem_mutex_unlock(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void ClientMem_mutex_lock(void *lockPtr) asm("_IOLockLock");
+extern "C" void ClientMem_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 extern "C" void ClientMem_IOLockSleep(void *lockPtr, void *event, UInt32 zero) asm("_IOLockSleep");
 /* RESOLVED (issue #58 follow-up): the four former FUN_0000aee8/aed8/af98/af88
  * lazy-binding stubs, resolved via live kxld read (slide 0x589000; exact

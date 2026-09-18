@@ -92,8 +92,8 @@
    (aka _mutex_unlock_rwcmb), FUN_00011400 = _mutex_lock (aka
    _lck_mtx_lock) - the REVERSE of this project's own prior "acquire/
    release" labels, see this function's own header comment above. */
-extern "C" void FUN_00011410(void *lockPtr) asm("_lck_mtx_unlock");
-extern "C" void FUN_00011400(void *lockPtr) asm("_mutex_lock");
+extern "C" void FUN_00011410(void *lockPtr) asm("_IOLockUnlock");
+extern "C" void FUN_00011400(void *lockPtr) asm("_IOLockLock");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

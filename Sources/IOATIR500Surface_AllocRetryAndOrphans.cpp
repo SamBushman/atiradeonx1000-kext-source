@@ -28,8 +28,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-extern "C" void GLSurfaceRetry_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLSurfaceRetry_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLSurfaceRetry_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLSurfaceRetry_mutex_unlock(void *) asm("_IOLockUnlock");
 /* RESOLVED (issue #58 follow-up): FUN_000149f4 = thread_block (0x32eec),
  * FUN_000149e4 = IOSleep (0x2b255c) - a yield then a 1 ms sleep, live kxld read. */
 extern "C" void GLSurfaceRetry_thread_block(UInt32 continuation) asm("_thread_block");

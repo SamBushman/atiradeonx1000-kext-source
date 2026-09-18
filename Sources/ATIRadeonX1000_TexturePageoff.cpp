@@ -79,7 +79,6 @@
 #include "../Headers/ATIR500Memory.h"
 #include "../Headers/ATIRadeonX1000PPCIntrinsics.h" /* dcbf/dcbst/eieio/isync, see that header */
 
-extern "C" void sync(int);
 extern "C" UInt32 _global_dummy_read_back_a_register; /* real: a genuine global this function reads INTO after a register write - a real "force the write to actually land before continuing" pattern, distinct from the explicit barrier intrinsics also present */
 
 extern "C" void FUN_000210d8(void *dest, void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read) */
@@ -662,10 +661,10 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
                                                 off += cacheLine;
                                             } while (off < span);
                                         }
-                                        sync(0);
+                                        ppcSync();
                                         instructionSynchronize();
                                         dataCacheBlockFlush((reinterpret_cast<UInt32>(cpuPtr) & ~(cacheLine - 1)) + off);
-                                        sync(0);
+                                        ppcSync();
                                         instructionSynchronize();
                                     } else {
                                         shiftVal = B(hw, 0x1a);

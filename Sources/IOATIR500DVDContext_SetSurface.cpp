@@ -88,8 +88,8 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 
-extern "C" void DVDSetSurface_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void DVDSetSurface_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void DVDSetSurface_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void DVDSetSurface_mutex_unlock(void *) asm("_IOLockUnlock");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

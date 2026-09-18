@@ -111,8 +111,8 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
  * declared `UInt32 *state` - the real confirmed body takes the state
  * value directly, never dereferences a pointer.
  */
-extern "C" void GLSurface_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void GLSurface_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void GLSurface_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void GLSurface_mutex_unlock(void *) asm("_IOLockUnlock");
 
 void IOATIR500Surface::set_volatile_state(UInt32 state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

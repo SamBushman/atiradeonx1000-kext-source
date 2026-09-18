@@ -77,8 +77,8 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
  * kernel primitives, `mutex_lock`/`mutex_unlock_rwcmb`, aliased below via
  * their real symbol names.
  */
-extern "C" void FUN_00015aa4(void *lockPtr) asm("_mutex_lock");
-extern "C" void FUN_00015a84(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void FUN_00015aa4(void *lockPtr) asm("_IOLockLock");
+extern "C" void FUN_00015a84(void *lockPtr) asm("_IOLockUnlock");
 
 IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3) {
     if (param3 != 0 && param3 != 0x2c) {
@@ -208,8 +208,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * running kernel's own symbol table - see
  * `Headers/ATIRadeonX1000Registers.h`.
  */
-extern "C" void FUN_00014850(void *lockPtr) asm("_mutex_lock");
-extern "C" void FUN_000147f0(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void FUN_00014850(void *lockPtr) asm("_IOLockLock");
+extern "C" void FUN_000147f0(void *lockPtr) asm("_IOLockUnlock");
 extern "C" void *FUN_00014820(UInt32 size, UInt32 align) asm("_IOMallocAligned");
 extern "C" void FUN_00014810(void *ptr, UInt32 size) asm("_IOFreeAligned");
 
@@ -521,11 +521,11 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
  * real external XNU kernel primitives. FUN_000158d0's real target is
  * `IOLockSleep`, confirming the "plausibly a real IOLockSleep-shaped
  * call" guess above exactly. */
-extern "C" void FUN_000158e0(void *lockPtr) asm("_mutex_lock");
+extern "C" void FUN_000158e0(void *lockPtr) asm("_IOLockLock");
 extern "C" void FUN_000158d0(void *lockPtr, void *accel, UInt32 zero) asm("_IOLockSleep");
 extern "C" void *FUN_000158c0(UInt32 size, UInt32 align) asm("_IOMallocAligned");
 extern "C" void FUN_000158b0(void *ptr, UInt32 size) asm("_IOFreeAligned");
-extern "C" void FUN_00015870(void *lockPtr) asm("_mutex_unlock_rwcmb");
+extern "C" void FUN_00015870(void *lockPtr) asm("_IOLockUnlock");
 
 IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32 id, UInt32 param3,
                                                           UInt32 param4, IOAccelDeviceRegion *regionArg,

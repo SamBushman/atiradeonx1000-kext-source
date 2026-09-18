@@ -34,8 +34,8 @@ inline SInt16 &S16At(void *base, int offset) { return *reinterpret_cast<SInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-extern "C" void SurfExtM2_mutex_lock(void *) asm("_mutex_lock");
-extern "C" void SurfExtM2_mutex_unlock(void *) asm("_mutex_unlock_rwcmb");
+extern "C" void SurfExtM2_mutex_lock(void *) asm("_IOLockLock");
+extern "C" void SurfExtM2_mutex_unlock(void *) asm("_IOLockUnlock");
 
 /*
  * surface_read_lock - CONFIRMED, real addr 0x164c0. A real, complete,
