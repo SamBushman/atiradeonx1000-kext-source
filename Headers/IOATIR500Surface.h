@@ -59,6 +59,18 @@ class IOATIR500Surface : public IOUserClient {
 
 public:
     /*
+     * start - RESOLVED (issue #58, completing the external-method
+     * dispatch chain issue #42 started). Real addr 0x119f0. THE real
+     * function that populates `methodTable` (`this+0xd5c`,
+     * `getTargetAndMethodForIndex`'s own real dispatch table pointer -
+     * see `Headers/ATIR500Surface.h`) - without this, that dispatch
+     * mechanism (however correct in isolation) would read an
+     * uninitialized/zero pointer at runtime. See
+     * Sources/IOATIR500Surface_Start.cpp for the full real transcription.
+     */
+    virtual bool start(IOService *provider) override;
+
+    /*
      * RESOLVED this pass (issue #8): surface_read_lock_options,
      * surface_write_lock_options, surface_write_unlock_options,
      * surface_write_lock, surface_write_unlock, set_scale all now fully

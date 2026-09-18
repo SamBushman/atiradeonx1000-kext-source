@@ -76,6 +76,17 @@ public:
     virtual void stop(IOService *provider) override;
 
     /*
+     * start - RESOLVED (issue #58). Real addr 0x3d3f0. A real, thin
+     * wrapper: takes the accelerator's own real commandLock, calls the
+     * base class's own real `IOATIR500Surface::start` (via a real vtable
+     * pointer in the raw decompile, `PTR_start_00048a20` - an ordinary
+     * C++ `IOATIR500Surface::start(provider)` call here), and on success
+     * zeroes 7 more real subclass-only fields plus sets a real "started"
+     * flag (`+0xdb8`). See Sources/ATIR500Surface_Start.cpp.
+     */
+    virtual bool start(IOService *provider) override;
+
+    /*
      * getTargetAndMethodForIndex - RESOLVED (issue #42 test-harness
      * pass): the real external-method dispatch function this file's own
      * top comment already flagged as a known, deliberately-deferred gap
