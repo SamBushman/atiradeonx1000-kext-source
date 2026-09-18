@@ -86,8 +86,11 @@ static void test_surface_read_lock_options(io_connect_t connect) {
  * consistent with "no prior lock held") without incident. 0 in / 0 out,
  * global (no ID/struct), safe. */
 static void test_surface_read_unlock_options(io_connect_t connect) {
-    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 0, 0);
-    report("Surface surface_read_unlock_options(sel 1) [no prior lock]", r, NULL);
+    /* dispatch table: flags 0, 1 scalar in, 0 out (the old call passed 0 scalars: rejected). Stock body is
+     * surface_unlock_options(this, 1, param): with no read lock held (+0xbd0 == 0) it returns
+     * kIOReturnCannotLock without touching anything. Runs on its own fresh connection, so no lock is held. */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 1, 0, 0);
+    report("Surface surface_read_unlock_options(sel 1) [no prior lock]", r, kExpectCannotLock);
 }
 
 /* selector 2: get_state(UInt32*) - already manually verified live
@@ -187,10 +190,15 @@ static void test_set_shape_backing(io_connect_t connect) {
     *(SInt16 *)(region + 16) = 4;
     *(SInt16 *)(region + 18) = 4;
     IOByteCount structSize = sizeof(region);
-    UInt32 shapeBits = 0, id = 1, param3 = 0, param4 = 0, param6 = 0;
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 6, 5, structSize,
-                                                         shapeBits, id, param3, param4, param6, region);
-    report("Surface set_shape_backing(sel 6, real preconditions established, wire shape unverified)", r, NULL);
+    /* dispatch table: flags 4, 4 scalars, variable struct (the old call passed 5 scalars: rejected).
+     * set_shape_backing(shapeBits,id,param3,param4,region,size) tail-calls set_shape_backing_length_ext
+     * with the register state unchanged, so the ext's 7th argument (r10) is whatever the kernel's
+     * dispatcher left there. That argument is only read when param4 != 0xffffffff, so param4 is the
+     * sentinel here - exactly the values set_shape_backing_length (sel 17) already ran successfully with. */
+    UInt32 shapeBits = 0, id = 1, param3 = 0, param4 = 0xffffffff;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 6, 4, structSize,
+                                                         shapeBits, id, param3, param4, region);
+    report("Surface set_shape_backing(sel 6, real preconditions established)", r, kExpectSuccess);
 }
 
 /* selector 7: set_id_mode(UInt32 mode, UInt32 modeBits) - CONFIRMED via
@@ -240,12 +248,14 @@ static void test_set_scale(io_connect_t connect) {
         report_skipped("Surface set_scale(sel 8)", "precondition did not succeed this run - not attempting the scale call itself");
         return;
     }
-    unsigned char scaling[0x2c];
-    memset(scaling, 0, sizeof(scaling));
-    IOByteCount structSize = sizeof(scaling);
-    UInt32 flags = 0, param3 = 0;
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 8, 2, structSize, flags, param3, scaling);
-    report("Surface set_scale(sel 8, disabled path, real preconditions established, wire shape unverified)", r, NULL);
+    /* dispatch table: flags 4, 1 scalar (flags), variable struct. The C++ signature's THIRD parameter
+     * is the struct's SIZE (the kernel appends it), not a separate scalar: stock set_scale accepts 0 or
+     * 0x2c and only reads the struct when it is 0x2c. The old call passed 2 scalars and a 0x2c struct
+     * (rejected; had it been accepted it would have taken the ENABLED path). Disabled path = struct
+     * size 0, which calls set_scaling(flags, NULL). */
+    UInt32 flags = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 8, 1, 0, flags, NULL);
+    report("Surface set_scale(sel 8, disabled path: struct size 0)", r, kExpectSuccessOrNoResources);
 }
 
 /* selector 9: set_shape(void) - CONFIRMED body (prior decompile) to be

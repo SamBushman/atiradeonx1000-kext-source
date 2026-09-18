@@ -37,10 +37,11 @@ static void test_set_surface(io_connect_t connect) {
  * allowed). Already manually verified live earlier this session without
  * incident. Global query, safe. */
 static void test_get_config(io_connect_t connect) {
-    int out0 = -1, out1 = -1, out2 = -1;
-    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 0, 3, &out0, &out1, &out2);
-    report("DVD get_config(sel 1)", r, NULL);
-    if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d,%d}\n", out0, out1, out2);
+    int out0 = -1, out1 = -1;
+    /* dispatch table: flags 0, 0 in, 2 out (stock body reads two accelerator fields only) */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 0, 2, &out0, &out1);
+    report("DVD get_config(sel 1)", r, kExpectSuccess);
+    if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d}\n", out0, out1);
 }
 
 /* selector 2: get_status(UInt32*) - already manually verified live
@@ -61,10 +62,12 @@ static void test_get_status(io_connect_t connect) {
  * call-site-CONFIRMED get_surface_size shape and equally global/
  * ID-less - safe to try. */
 static void test_get_surface_size(io_connect_t connect) {
-    int d0 = -1, d1 = -1, d2 = -1, d3 = -1;
-    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 3, 0, 4, &d0, &d1, &d2, &d3);
-    report("DVD get_surface_size(sel 3, shape unverified but low-risk)", r, NULL);
-    if (r == TEST_kIOReturnSuccess) printf("    dims={%d,%d,%d,%d}\n", d0, d1, d2, d3);
+    int d0 = -1, d1 = -1;
+    /* dispatch table: flags 0, 0 in, 2 out. Stock body checks this+0xf8 (the bound surface) for NULL
+     * first and returns kIOReturnError, so on a fresh connection it is safe (unlike set_macrovision). */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 3, 0, 2, &d0, &d1);
+    report("DVD get_surface_size(sel 3, unbound surface)", r, kExpectUnboundGuard);
+    if (r == TEST_kIOReturnSuccess) printf("    dims={%d,%d}\n", d0, d1);
 }
 
 /* selector 4: lock_all_buffers(UInt32,UInt32*,UInt32*) per header (1 in
@@ -101,8 +104,9 @@ static void test_write_buffer(io_connect_t connect) {
  * global 0-in/0-out call made before any real DVD context setup)
  * without incident. Global call, safe. */
 static void test_finish(io_connect_t connect) {
-    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 7, 0, 0);
-    report("DVD finish(sel 7)", r, NULL);
+    /* dispatch table: IOATIR500DVDContext::finish(), flags 4 (scalarI/structI), 0 scalars, size 0 */
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 7, 0, 0, NULL);
+    report("DVD finish(sel 7)", r, kExpectSuccess);
 }
 
 /* selector 8: declare_image(UInt32,UInt32,UInt32,UInt32*) - CONFIRMED:
@@ -148,9 +152,11 @@ static void test_dvd_setup_overlay(io_connect_t connect) {
  * of input - a wrong scalar count is safely rejected by the kernel's
  * own argument-count check before the (no-op) body would run anyway. */
 static void test_dvd_enable_overlay(io_connect_t connect) {
-    UInt32 enable = 0;
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 12, 0, sizeof(enable), &enable);
-    report("DVD dvd_enable_overlay(sel 12, confirmed no-op body)", r, NULL);
+    /* dispatch table: flags 0 (scalarI/scalarO), 1 in, 0 out. Stock wrapper takes the command lock, then
+     * returns NotReady if the accelerator is not up, or Error if no surface is bound (this+0xf8 == NULL)
+     * BEFORE it reaches the (no-op) overlay code, so it is safe on a fresh connection. */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 12, 1, 0, 0);
+    report("DVD dvd_enable_overlay(sel 12, unbound surface)", r, kExpectUnboundGuard);
 }
 
 /* selector 13 (read_regs) - real hardware register read (same shape
@@ -177,9 +183,9 @@ static void test_write_regs(io_connect_t connect) {
  * UNVERIFIED via call site, but same reasoning as selector 12 applies -
  * safe to try regardless of input since the body is a confirmed no-op. */
 static void test_dvd_setup_subpicture(io_connect_t connect) {
-    UInt32 args[3] = {0, 0, 0};
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 15, 0, sizeof(args), args);
-    report("DVD dvd_setup_subpicture(sel 15, confirmed no-op body)", r, NULL);
+    /* dispatch table: flags 0, 4 in, 0 out. Same unbound-surface guard as selector 12. */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 15, 4, 0, 0, 0, 0, 0);
+    report("DVD dvd_setup_subpicture(sel 15, unbound surface)", r, kExpectUnboundGuard);
 }
 
 /* selector 16 (set_macrovision) - RESOLVED (issue #42 test-harness
@@ -225,9 +231,10 @@ static void test_do_idct(io_connect_t connect) {
  * GL's confirmed-safe wait_for_stamp - waiting on stamp/tag 0 is always
  * already-reached, safe to run. */
 static void test_wait_for_stamps(io_connect_t connect) {
-    UInt32 args[2] = {0, 0};
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 19, 0, sizeof(args), args);
-    report("DVD wait_for_stamps(sel 19, 0,0)", r, NULL);
+    /* dispatch table: flags 4, 2 scalars, struct size 0. Stock body only waits for a non-zero argument,
+     * so (0,0) makes no call at all. */
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 19, 2, 0, 0, 0, NULL);
+    report("DVD wait_for_stamps(sel 19, 0,0)", r, kExpectSuccess);
 }
 
 /* selector 20: check_stamps(UInt32,UInt32,UInt32*) - CONFIRMED: scalarO,

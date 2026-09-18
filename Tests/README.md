@@ -17,12 +17,10 @@ application, built with the stock system `gcc` and linked against
 `test_gl_context.c`/`test_2d_context.c`/`test_dvd_context.c`/`test_surface_context.c`, each with a
 real-shape citation or an explicit unverified flag.
 
-**Live coverage is much smaller than "81" or "27" suggests:** 34 calls run live against the stock
-driver (7 of them asserted preconditions), but **12 of the 25 real calls return `kIOReturnBadArgument`**
-- the kernel rejected the wire shape before reaching any method body - leaving only ~13 that execute
-real code. Three of those (GL `set_swap_interval`, `wait_for_stamp`, `set_stereo`) contradict the
-call-site evidence quoted in their own comments (the harness passes the scalars as a struct / with a
-zero count). 53 methods are skipped by policy.
+**Live coverage (after the shape-correction pass):** 33 calls run live against the stock driver and every
+one reaches its method body (18 `Success`, 5 `kIOReturnError`, 2 `kIOReturnCannotLock`, plus the
+asserted preconditions). Before the pass, 14 of the 27 live calls were rejected `kIOReturnBadArgument`
+because their wire shapes did not match the dispatch tables. 54 methods remain skipped by policy.
 
 **Checks are mostly recorded, not asserted.** `report(..., NULL)` now prints `[REC]` (it used to print
 "OK" unconditionally, which hid a real bug: a lock that was never released made every later Surface
@@ -35,11 +33,14 @@ against it. The harness has **not** been run against this project's rebuilt kext
 they "can't be read positionally"). Each entry is a standard `IOExternalMethod` `{flags, count0,
 count1}` (flags 0 = scalarI/scalarO, 2 = scalarI/structO, 3 = structI/structO, 4 = scalarI/structI;
 `0xffffffff` = variable size). `../Tools/dump_method_tables.py` extracts all of them from the shipped
-kext (`method_shapes.txt`) and `--audit Tests` checks every harness call against them: it flags
-exactly the 14 live calls the stock kernel rejected with `BadArgument` (GL 2/9/19, 2D 1/7,
-DVD 1/3/7/12/15/19, Surface 1/6/8) and nothing else. Correcting those shapes would execute
-their bodies for the first time, so it needs a per-call safety trace first: DVD methods that read
-the still-unbound surface are the #43 panic.
+kext (`method_shapes.txt`), and `--audit Tests` checks every harness call against them; it now reports
+0 mismatches. The 14 calls that were rejected were each corrected only after tracing the stock body
+(GL 2/9, 2D 1/7, DVD 1/3/7/12/15/19, Surface 1/6/8; GL 19 `set_stereo` was corrected but stays skipped
+because it writes global accelerator state). Each call's comment records the trace. Notable findings:
+`set_scale`'s C++ third parameter is the struct SIZE (the "disabled path" is size 0);
+`set_shape_backing`'s dispatcher-supplied 7th argument is only read when `param4 != 0xffffffff`; and the
+DVD methods that were candidates for the #43 panic all check `boundSurface == NULL` first and return
+`kIOReturnError`, unlike `set_macrovision`.
 
 **Implementation completeness is a separate, larger gap** - see #59 and `function_coverage.md`: 214 of 470
 shipped methods have no body in the rebuild, including all of the 2D and DVD contexts' external

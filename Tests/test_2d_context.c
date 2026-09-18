@@ -32,10 +32,11 @@ static void test_set_surface(io_connect_t connect) {
  * the only sane value for a 3-output getter with no ID param, matching
  * GL/DVD's own get_config shape). Global query, safe. */
 static void test_get_config(io_connect_t connect) {
-    int out0 = -1, out1 = -1, out2 = -1;
-    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 0, 3, &out0, &out1, &out2);
-    report("2D get_config(sel 1)", r, NULL);
-    if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d,%d}\n", out0, out1, out2);
+    int out0 = -1, out1 = -1;
+    /* dispatch table: flags 0, 0 in, 2 out (the old call asked for 3 outputs: rejected) */
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 1, 0, 2, &out0, &out1);
+    report("2D get_config(sel 1)", r, kExpectSuccess);
+    if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d}\n", out0, out1);
 }
 
 /* selector 2: get_surface_info(UInt32,SInt32*,SInt32*,SInt32*) - real
@@ -103,9 +104,11 @@ static void test_unlock_memory(io_connect_t connect) {
  * as trying any other candidate shape - it does NOT touch surface/swap
  * state either way. */
 static void test_finish_or_wait(io_connect_t connect) {
-    UInt32 stampOrTag = 0;
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 7, 0, sizeof(stampOrTag), &stampOrTag);
-    report("2D finish-or-wait(sel 7, real name uncertain, tried as wait(0))", r, NULL);
+    /* dispatch table: IOATIR5002DContext::finish(unsigned long), flags 4, 1 scalar, struct size 0.
+     * Stock body: 0 = wait on this context's own stamp (same path as GL finish), 1/2 = other waits,
+     * else BadArgument. The scalar 0 takes the same path GL finish already runs successfully. */
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 7, 1, 0, 0, NULL);
+    report("2D finish(sel 7, mode 0)", r, kExpectSuccess);
 }
 
 /* selector 8: declare_image(UInt32,UInt32,UInt32,UInt32*) - CONFIRMED:

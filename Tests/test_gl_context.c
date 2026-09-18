@@ -52,8 +52,9 @@ static void test_set_swap_rect(io_connect_t connect) {
  * (_gldFinish), r6=2,r8=0. A plain interval setter, no surface/texture
  * ID involved - safe to run. */
 static void test_set_swap_interval(io_connect_t connect) {
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 2, 0, 0, NULL);
-    report("GL set_swap_interval(sel 2, 0 real scalar inputs via structI path)", r, NULL);
+    /* shape per dispatch table: flags 4 (scalarI/structI), 2 scalars, struct size 0 */
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 2, 2, 0, 0, 0, NULL);
+    report("GL set_swap_interval(sel 2, 0,0)", r, kExpectSuccess);
 }
 
 /* selector 3: get_config(UInt32*,UInt32*,UInt32*) - CONFIRMED: scalarO,
@@ -129,9 +130,9 @@ static void test_finish(io_connect_t connect) {
  * GL bundle offset 0x7bf0 (_gldFinishObject), r6=1,r8=0. stamp=0 is
  * always already-reached (monotonic counter starts above 0), safe. */
 static void test_wait_for_stamp(io_connect_t connect) {
-    UInt32 stamp = 0;
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 9, 0, sizeof(stamp), &stamp);
-    report("GL wait_for_stamp(sel 9, stamp=0)", r, NULL);
+    /* shape per dispatch table: flags 4, 1 scalar, struct size 0 (was passed as a 4-byte struct: rejected) */
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 9, 1, 0, 0, NULL);
+    report("GL wait_for_stamp(sel 9, stamp=0)", r, kExpectSuccess);
 }
 
 /* selector 10: new_texture(...) - CONFIRMED real wire shape:
@@ -225,9 +226,14 @@ static void test_get_data_buffer(io_connect_t connect) {
  * struct=0. Evidence: GL bundle offset 0x5a18 (_gldSetInteger). A plain
  * global mode setter, no surface/texture ID - safe to run. */
 static void test_set_stereo(io_connect_t connect) {
-    UInt32 args[2] = {0, 0};
-    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 19, 0, sizeof(args), args);
-    report("GL set_stereo(sel 19, 0,0)", r, NULL);
+    (void)connect;
+    /* CORRECT wire shape per the dispatch table: flags 4, 2 scalars, struct size 0, i.e.
+     *   IOConnectMethodScalarIStructureI(connect, 19, 2, 0, 0, 0, NULL)
+     * (the old call passed the two values as an 8-byte struct and was rejected BadArgument).
+     * NOT run: with the right shape it executes IOATIR500Accelerator::setup_stereo(0,0), which writes
+     * GLOBAL accelerator state (the per-panel stereo mode). It is a no-op only if stereo is currently
+     * off, which the harness cannot check, so it stays skipped. */
+    report_skipped("GL set_stereo(sel 19, 0,0)", "shape corrected (2 scalars) but mutates global accelerator stereo state");
 }
 
 /* selector 20 (special, ATIR500GLContext::get_hw_info): 5 real scalar
