@@ -110,6 +110,12 @@ static const kern_return_t kExpectCannotLock[] = { TEST_kIOReturnCannotLock, (ke
 /* DVD methods that check the bound surface first: Error when unbound, NotReady (0xe00002d8) if the accelerator flag is clear */
 static const kern_return_t kExpectUnboundGuard[] = { TEST_kIOReturnError, (kern_return_t)0xe00002d8, (kern_return_t)-1 };
 static const kern_return_t kExpectSuccessOrNoResources[] = { TEST_kIOReturnSuccess, TEST_kIOReturnNoResources, (kern_return_t)-1 };
+static const kern_return_t kExpectBadArgument[]  = { TEST_kIOReturnBadArgument, (kern_return_t)-1 };
+static const kern_return_t kExpectUnsupported[]  = { TEST_kIOReturnUnsupported, (kern_return_t)-1 };
+static const kern_return_t kExpectNoResources[]  = { TEST_kIOReturnNoResources, (kern_return_t)-1 };
+static const kern_return_t kExpectNotFound[]     = { TEST_kIOReturnNotFound, (kern_return_t)-1 };
+static const kern_return_t kExpectBadArgOrSuccess[] = { TEST_kIOReturnBadArgument, TEST_kIOReturnSuccess, (kern_return_t)-1 };
+static const kern_return_t kExpectSuccessOrCannotLock[] = { TEST_kIOReturnSuccess, TEST_kIOReturnCannotLock, (kern_return_t)-1 };
 static const kern_return_t kExpectSuccess[] = { TEST_kIOReturnSuccess, (kern_return_t)-1 };
 
 static const char *ioreturn_name(kern_return_t r) {

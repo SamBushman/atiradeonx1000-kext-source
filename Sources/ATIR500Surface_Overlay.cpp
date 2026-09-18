@@ -35,8 +35,8 @@ void ATIR500Surface::showbuffer(UInt32 bufferIndex, UInt32 param2) {
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void ATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3) {
-    (void)param1; (void)param2; (void)param3;
+void ATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4) {
+    (void)param1; (void)param2; (void)param3; (void)param4;
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 

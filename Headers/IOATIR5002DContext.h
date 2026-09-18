@@ -32,13 +32,14 @@ class IOATIR5002DContext : public IOUserClient {
 public:
     /* ---- Base table, selectors 0-15 ---- */
     IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, UInt32 param3, UInt32 param4);          /* 0, INFERRED shape by analogy with the GL context's own set_surface */
-    IOReturn get_config(UInt32 *out0, UInt32 *out1, UInt32 *out2);                                     /* 1 */
+    IOReturn get_config(UInt32 *out0, UInt32 *out1);                                                    /* 1, REAL SIGNATURE CORRECTED (issue #42 pass): the shipped mangled symbol (get_configEPmS0_) and its dispatch-table entry (0 in / 2 out) have TWO outputs, not three. Body: Sources/IOATIR5002DContext_ExternalMethods.cpp */
     IOReturn get_surface_info(UInt32 surfaceID, SInt32 *outFlags, SInt32 *outW, SInt32 *outH);         /* 2 */
     IOReturn swap_surface(UInt32 lockType, UInt32 *outTag);                                             /* 3, CONFIRMED body (stage9): real retry loop (up to 1000 attempts) calling IOATIR500Surface::alloc_surfaces on demand, flush_surface, real present/flip via unlock_memory's negative-lock-type path */
     IOReturn scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale);                                 /* 4 */
     IOReturn lock_memory(UInt32 lockType, UInt32 *outAddress, UInt32 *outSize);                          /* 5, CONFIRMED body (stage9): real retry loop with alloc_surfaces fallback, real pending-GPU-flush detection before granting a CPU lock */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                             /* 6, CONFIRMED body (stage9): triggers swap_surface for negative lock-type values - the real present/flip mechanism */
-    IOReturn finish(void);                                                                               /* 7 */
+    IOReturn finish(UInt32 mode);                                                                        /* 7, REAL SIGNATURE CORRECTED (issue #42 pass): mangled symbol is finish(unsigned long), table = 1 scalar in. 0 = wait on this context's stamp, 1/2 = wait on the accelerator's pending stamp, else BadArgument. */
+    bool     create_shared(void);                                                                        /* helper, real addr 0xbc90: new IOATIR500Shared + init, wired to the accelerator and task */
     IOReturn declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle);   /* 8, CONFIRMED body (stage9): real IOATIR500Shared::new_agp_texture call, same shared allocator as GL */
     IOReturn create_image(UInt32 param1, UInt32 param2, UInt32 *outLow, UInt32 *outHigh);                /* 9, CONFIRMED body (stage9): real IOATIR500Shared::new_texture call */
     IOReturn create_transfer(UInt32 param1, UInt32 sizeInBytes, UInt32 *outHandle, UInt32 *outAddress);  /* 10, CONFIRMED body (stage9): real AGP-backed transfer-buffer alloc + real backing-store swap if a surface is bound */

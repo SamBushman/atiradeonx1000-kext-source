@@ -11,9 +11,9 @@ It is the **oracle** for parity: most calls are recorded (`[REC]`) rather than a
 in the rebuild or a deliberately preserved/changed vendor behaviour that needs an explanation.
 
 Read it with these caveats (details in ../README.md):
-- No live call returns `kIOReturnBadArgument` any more: all 33 live calls reach their method body.
-  20 are asserted against results predicted by tracing the stock bodies (the harness prints `[OK]`
-  and would print `[UNEXPECTED]` on a different code); 13 are recorded only (`[REC]`).
+- 87 live calls, 74 asserted against results predicted by tracing the stock bodies (`[OK]`; a different code
+  would print `[UNEXPECTED]`) and 13 recorded only (`[REC]`). Some `BadArgument`/`CannotLock`/`Error`/`NoResources`
+  results are the METHOD's own validation results (the wire shape matches the dispatch table); each test says which.
 - Expected non-success results are meaningful, not failures: DVD calls that need a bound surface
   return `kIOReturnError` on a fresh connection (the stock body checks for it), and reading unlock
   with no lock held returns `kIOReturnCannotLock`.

@@ -15,20 +15,12 @@
 
 #include "common.h"
 
-/* selector 0: set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32
- * flagCount) - RESOLVED (issue #42 test-harness pass): real signature
- * CORRECTED from a guessed 4-param shape to the real 3-param one, via
- * both the real mangled symbol
- * (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi) and
- * a full real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp),
- * matching the real wire-shape evidence (3 real scalar inputs, VA bundle
- * offset 0x27f4) exactly - no longer an open discrepancy. Real body
- * rebinds this context to a surface (real requirement-bits/ownership
- * bookkeeping, two unnamed vtable calls) - a genuine surface-binding
- * mutation regardless of the now-resolved signature - skip. */
+/* selector 0: set_surface(id, modeBits, flagCount) - table: flags 4, 3 scalars, struct 0. Surface id 0 = "detach":
+ * no surface is found or bound, this context's surface pointer stays NULL, and ATIR500DVDContext::update_surface
+ * (guarded by a bound-surface check) does nothing. Binding a real surface is NOT tested. */
 static void test_set_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD set_surface(sel 0)", "real surface-binding mutation (signature now resolved, see #42)");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 0, 3, 0, 0, 0, 0, NULL);
+    report("DVD set_surface(sel 0, id 0 = detach)", r, kExpectSuccess);
 }
 
 /* selector 1: get_config(UInt32*,UInt32*,UInt32*) - real evidence: VA
@@ -70,33 +62,35 @@ static void test_get_surface_size(io_connect_t connect) {
     if (r == TEST_kIOReturnSuccess) printf("    dims={%d,%d}\n", d0, d1);
 }
 
-/* selector 4: lock_all_buffers(UInt32,UInt32*,UInt32*) per header (1 in
- * / 2 out), but real evidence (VA bundle offset 0x3300,
- * _AVAGetRendererInfo) shows a structureO call with scalarInputCount=1
- * and a 256-BYTE output buffer - drastically more than 2 plain UInt32
- * outputs (8 bytes). Real shape clearly does not match the header's
- * assumed simple-scalar-output signature. This is a lock/buffer
- * operation regardless - skip unconditionally. */
+/* selector 4: lock_all_buffers(param, *out) - table: flags 2, 1 scalar in, struct-out 256 bytes. Stock body with no
+ * bound surface: takes the lock, zero-fills the first 0x68 bytes of the output (kernel-side; not observable on an
+ * error return), returns CannotLock. (With a bound
+ * surface it allocates VRAM and retries up to 1000 times: NOT tested.) */
 static void test_lock_all_buffers(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD lock_all_buffers(sel 4)", "lock family + real shape is a 256-byte structureO, not simple scalars - see #43 and #42");
+    unsigned char out[256];
+    memset(out, 0xAA, sizeof(out));
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodScalarIStructureO(connect, 4, 1, &outSize, 0, out);
+    report("DVD lock_all_buffers(sel 4, no surface bound)", r, kExpectCannotLock);
 }
 
-/* selector 5: unlock_memory(UInt32,UInt32*) - no direct call site found
- * in this bundle for the DVD variant specifically, but this is the same
- * named method that (on the 2D side) drives submit_swap_buffer via its
- * negative-lock-type path - never run without valid setup. */
+/* selector 5: unlock_memory(lockType, *outTag) - table: flags 0, 1 in, 1 out. No bound surface -> BadArgument (the
+ * METHOD's own result; outTag = 0 kernel-side, not observable on an error return). */
 static void test_unlock_memory(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD unlock_memory(sel 5)", "lock/swap family - see #43");
+    int out = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 5, 1, 1, 0, &out);
+    report("DVD unlock_memory(sel 5, no surface bound)", r, kExpectBadArgument);
+    (void)out;
 }
 
-/* selector 6: write_buffer(UInt32*,UInt32 byteCount) - no call site
- * found in this bundle; header signature used, UNVERIFIED. Writes real
- * buffer contents - skip. */
+/* selector 6: write_buffer(sIODVDContextWriteBufferData*, size) - table: flags 3, struct-in variable. NEVER RUN on a
+ * connection with no bound surface: the stock body loads boundSurface+0xb70+off BEFORE it checks boundSurface for
+ * NULL, so on a fresh connection it is a kernel NULL dereference - it panics the stock driver exactly like DVD
+ * set_macrovision does (#43). Found by reading the stock decompile; reproduced faithfully in
+ * Sources/IOATIR500DVDContext_ExternalMethods.cpp. Testable only after a real set_surface bound a surface. */
 static void test_write_buffer(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD write_buffer(sel 6)", "writes real buffer contents; shape unverified");
+    report_skipped("DVD write_buffer(sel 6)", "PANICS the stock driver when no surface is bound (derefs boundSurface+0xb70 before its NULL check) - second instance of the #43 bug");
 }
 
 /* selector 7: finish(void) - already manually verified live earlier
@@ -109,40 +103,33 @@ static void test_finish(io_connect_t connect) {
     report("DVD finish(sel 7)", r, kExpectSuccess);
 }
 
-/* selector 8: declare_image(UInt32,UInt32,UInt32,UInt32*) - CONFIRMED:
- * scalarO, in=3/out=1 (matches signature exactly). Evidence: VA bundle
- * offset 0x35c0 (_AVAGetRendererInfo). Allocates a real resource - skip. */
+/* selector 8: declare_image(p1, size/format, bytes, *outHandle) - table: flags 0, 3 in, 1 out. Zero size or bytes ->
+ * BadArgument before the lock or any allocation. */
 static void test_declare_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD declare_image(sel 8)", "real resource allocation - see #43");
+    int out = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 8, 3, 1, 0, 0, 0, &out);
+    report("DVD declare_image(sel 8, zero size)", r, kExpectBadArgument);
 }
 
-/* selector 9: delete_image(UInt32) - CONFIRMED: structureI, in=1,
- * struct=0 (matches signature exactly). Evidence: VA bundle offset
- * 0x2978 (_AVAGetRendererInfo). Deletes a real resource by ID - skip. */
+/* selector 9: delete_image(id) - table: flags 4, 1 scalar. Shared allocator not yet created on a fresh connection
+ * -> NoResources. */
 static void test_delete_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD delete_image(sel 9)", "real resource deletion, bogus ID - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 9, 1, 0, 0x7fff, NULL);
+    report("DVD delete_image(sel 9, no allocator yet)", r, kExpectNoResources);
 }
 
-/* selector 10 (subclass show_buffer) - body is CONFIRMED (prior
- * decompile) to be a thin lock wrapper delegating to a REAL EMPTY NO-OP
- * (ATIR500Surface::showbuffer). No call site found for its wire shape
- * in this bundle; header signature used (2 params), UNVERIFIED. Still a
- * lock-wrapper regardless of the no-op body - skip for shape/lock
- * reasons rather than relying on the no-op body being unconditional. */
+/* selector 10: show_buffer(index, p2) - table: flags 0, 2 in, 0 out. Guarded wrapper: hardware not up -> NotReady,
+ * no bound surface -> Error, before reaching the (no-op) surface method. */
 static void test_show_buffer(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD show_buffer(sel 10)", "lock wrapper; shape unverified");
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 10, 2, 0, 0, 0);
+    report("DVD show_buffer(sel 10, no surface bound)", r, kExpectUnboundGuard);
 }
 
-/* selector 11 (dvd_setup_overlay) - body is CONFIRMED real (stores
- * geometry into shared surface fields, not a no-op). No call site found
- * for its wire shape; header signature used (5 params), UNVERIFIED.
- * Mutates real shared surface state - skip. */
+/* selector 11: dvd_setup_overlay(x,y,w,h,p5) - table: flags 0, 5 in, 0 out. Same guard as selector 10 (the write to
+ * the surface's overlay geometry happens only after the guard passes). */
 static void test_dvd_setup_overlay(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD dvd_setup_overlay(sel 11)", "mutates real shared surface geometry; shape unverified");
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 11, 5, 0, 0, 0, 0, 0, 0);
+    report("DVD dvd_setup_overlay(sel 11, no surface bound)", r, kExpectUnboundGuard);
 }
 
 /* selector 12 (dvd_enable_overlay) - body is CONFIRMED to be a REAL
@@ -159,23 +146,24 @@ static void test_dvd_enable_overlay(io_connect_t connect) {
     report("DVD dvd_enable_overlay(sel 12, unbound surface)", r, kExpectUnboundGuard);
 }
 
-/* selector 13 (read_regs) - real hardware register read (same shape
- * family as 2D's own read_regs). No call site found in this bundle;
- * header signature used, UNVERIFIED encoding - skip (real register
- * reads with an unconfirmed input encoding are exactly the kind of call
- * this policy exists to avoid). */
+/* selector 13: ATIR500DVDContext::read_regs - table: flags 3, struct-in and struct-out variable. Same validation as
+ * 2D read_regs: sizes differ -> BadArgument; size 0 -> zero registers read. */
 static void test_read_regs(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD read_regs(sel 13)", "real hardware register read, input encoding unconfirmed");
+    IOByteCount outSize = 0;
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 13, 0, &outSize, NULL, NULL);
+    report("DVD read_regs(sel 13, zero registers)", r, kExpectSuccess);
+    UInt32 in = 0;
+    outSize = 0;
+    r = IOConnectMethodStructureIStructureO(connect, 13, sizeof(in), &outSize, &in, NULL);
+    report("DVD read_regs(sel 13, in/out sizes differ)", r, kExpectBadArgument);
 }
 
-/* selector 14 (write_regs, DVD's own 2-scalar-param variant per the
- * header's own note that it differs from 2D's array-based version) -
- * writes a real hardware register - skip unconditionally regardless of
- * shape confidence. */
+/* selector 14: write_regs(offset, value) - table: flags 0, 2 in, 0 out. NOT run: the stock body writes ONE hardware
+ * register unconditionally (once the accelerator is up) with no argument validation at all, so there is no
+ * zero-length or rejected form to test. */
 static void test_write_regs(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD write_regs(sel 14)", "writes a real hardware register - never fuzz this");
+    report_skipped("DVD write_regs(sel 14)", "writes one real hardware register with no validation; no side-effect-free form exists");
 }
 
 /* selector 15 (dvd_setup_subpicture) - body is CONFIRMED to be a REAL
@@ -188,41 +176,26 @@ static void test_dvd_setup_subpicture(io_connect_t connect) {
     report("DVD dvd_setup_subpicture(sel 15, unbound surface)", r, kExpectUnboundGuard);
 }
 
-/* selector 16 (set_macrovision) - RESOLVED (issue #42 test-harness
- * pass): the header's own 1-param signature is CORRECT for what the real
- * body actually uses (Sources/ATIR500DVDContext_SetMacrovision.cpp) - the
- * apparent mismatch against real wire evidence (VA bundle offset 0x52b8,
- * 2 real scalar inputs) is this project's own well-established
- * "argument-dropped" decompiler artifact (the wire sends 2, the compiled
- * body only ever reads the first), not a signature error. Real
- * hardware-facing side effect either way - skip. */
+/* selector 16: set_macrovision(enable, p2) - table: flags 0, 2 in, 0 out. NEVER RUN on a connection with no bound
+ * surface: it calls getFramebufferIndex() on the NULL bound surface and panics the stock driver (#43). The
+ * reproduction lives in Sources/ATIR500DVDContext_SetMacrovision.cpp. */
 static void test_set_macrovision(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD set_macrovision(sel 16)", "PANICS the stock driver on a fresh connection: derefs the unbound surface (this+0xf8 == NULL) in getFramebufferIndex - the real #43 crash (corrected diagnosis). Needs set_surface first");
+    report_skipped("DVD set_macrovision(sel 16)", "PANICS the stock driver when no surface is bound: getFramebufferIndex(NULL) (#43); also a real display side effect");
 }
 
-/* selector 17 (dvd_enable_deint) - CONFIRMED: scalarO, in=1/out=0.
- * Evidence: VA bundle offset 0x31ec (_AVAGetRendererInfo). Body is
- * CONFIRMED real (stores a mode into a real surface field, not a
- * no-op) - a real side effect, though a narrow one (nothing reads the
- * field back per this project's own decompile). Skipped out of caution
- * since it's a real, non-no-op state mutation. */
+/* selector 17: dvd_enable_deint(mode) - table: flags 0, 1 in, 0 out. Same guard as selectors 10/11. */
 static void test_dvd_enable_deint(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD dvd_enable_deint(sel 17)", "real (non-no-op) surface-field mutation");
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 17, 1, 0, 0);
+    report("DVD dvd_enable_deint(sel 17, no surface bound)", r, kExpectUnboundGuard);
 }
 
-/* selector 18: doIDCT(sATIDVDIDCTInfo*,sATIDVDIDCTParams*) - CONFIRMED:
- * structureIO, structureInputSize=56 bytes (matches this project's
- * earlier-established finding). Evidence: VA bundle offset 0x60f4
- * (_AVAGetRendererInfo). Drives the real, independent IDCT hardware
- * engine from a synthetic all-zero 56-byte struct - exactly the kind of
- * call this safety policy exists to prevent (unknown real field
- * layout, real hardware engine, same risk class as #43). Never run
- * live without a decoded field layout and valid state. */
+/* selector 18: doIDCT(sATIDVDIDCTInfo*, sATIDVDIDCTParams*) - table: flags 3, struct-in variable, struct-out 0.
+ * NOT run: drives the real IDCT hardware from a 56-byte info struct and needs a bound surface plus IDCT working
+ * buffers set up by setup_buffers/set_surface. The 1000-line body has not been traced for a safe minimal input. */
 static void test_do_idct(io_connect_t connect) {
     (void)connect;
-    report_skipped("DVD doIDCT(sel 18)", "drives real IDCT hardware from an unknown 56-byte struct layout - see #43");
+    report_skipped("DVD doIDCT(sel 18)", "drives real IDCT hardware; body not traced for a safe minimal input");
 }
 
 /* selector 19: wait_for_stamps(UInt32,UInt32) - CONFIRMED: structureI,
@@ -248,14 +221,12 @@ static void test_check_stamps(io_connect_t connect) {
     if (r == TEST_kIOReturnSuccess) printf("    outBothDone=%d\n", outBothDone);
 }
 
-/* selector 21: setup_buffers(UInt32,UInt32,UInt32,UInt32,UInt32) -
- * CONFIRMED: scalarO, in=5/out=0 (matches signature exactly). Evidence:
- * VA bundle offset 0x328c/0x44f8(dup)/0x5158(dup) (_AVAGetRendererInfo).
- * Real per-plane IDCT-surface geometry setup - a real mutation of IDCT
- * working-buffer state from synthetic zero geometry - skip. */
+/* selector 21: setup_buffers(top,left,bottom,right,flags) - table: flags 0, 5 in, 0 out. Stock body writes the
+ * bound surface's geometry only if a surface is bound AND the hardware is up, otherwise returns NotReady
+ * (0xe00002d8). Not under the lock. */
 static void test_setup_buffers(io_connect_t connect) {
-    (void)connect;
-    report_skipped("DVD setup_buffers(sel 21)", "real IDCT working-buffer geometry setup - see #43");
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 21, 5, 0, 0, 0, 0, 0, 0);
+    report("DVD setup_buffers(sel 21, no surface bound)", r, kExpectUnboundGuard);
 }
 
 void run_dvd_context_tests(io_service_t service) {

@@ -18,12 +18,24 @@
 
 #include "common.h"
 
-/* selector 0: set_surface(UInt32,UInt32,UInt32,UInt32) - no real call
- * site found in this bundle; header's own signature used (4 in / 0 out),
- * UNVERIFIED. Mutates bound surface regardless - skip. */
+/* selector 0: set_surface(panel/id, modeBits, *out, *outSize) - table: flags 2, 2 scalars in, struct-out variable.
+ * With mode bit 0x800 CLEAR the stock body binds the context to a display PANEL (no surface object): it records
+ * the panel index (if in range and enabled) in this context, then calls set_destination -> get_buffer_info, which
+ * (for an output size of exactly 0x30) only reads accelerator panel fields into the output. Only this per-connection
+ * state changes. Binding a real SURFACE (bit 0x800 set) is NOT tested. Runs LAST in this file so the panel binding
+ * cannot affect the other 2D tests. */
 static void test_set_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D set_surface(sel 0)", "mutates bound surface state; shape unverified - see #43");
+    unsigned char out[0x30];
+    memset(out, 0xAA, sizeof(out));
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodScalarIStructureO(connect, 0, 2, &outSize, 0, 0, out);
+    report("2D set_surface(sel 0, panel 0, no surface)", r, kExpectSuccess);
+    if (r == TEST_kIOReturnSuccess) {
+        UInt32 *d = (UInt32 *)out;
+        printf("    outSize=%u info[0..11]={", (unsigned int)outSize);
+        { int i; for (i = 0; i < 12; i++) printf("%s0x%x", i ? "," : "", d[i]); }
+        printf("}\n");
+    }
 }
 
 /* selector 1: get_config(UInt32*,UInt32*,UInt32*) - real evidence: GA
@@ -39,54 +51,64 @@ static void test_get_config(io_connect_t connect) {
     if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d}\n", out0, out1);
 }
 
-/* selector 2: get_surface_info(UInt32,SInt32*,SInt32*,SInt32*) - real
- * evidence: GA plugin offset 0x565c (_radeonCopyRegion), structureO
- * shape (scalarInputCount=2, structureOutputSize capacity=48 bytes) -
- * this CONTRADICTS the header's assumed plain-3-scalar-output shape
- * entirely (48 bytes >> 3 words). Real selector-to-name attribution
- * here needs re-verification, not just the count - flagged, not
- * asserted. NOT run live either way (ID-indexed + shape uncertain). */
+/* selector 2: get_surface_info(id/panel, modeBits, *out, *outSize) - table: flags 2, 2 scalars in, struct-out
+ * variable. Stock body (mode bit 0x800 clear): a panel index >= the accelerator's panel count -> BadArgument
+ * without any call; with bit 0x800 set it looks the id up in the accelerator's live-surface list and returns
+ * NotFound for an unknown id. A valid panel index calls ATIR5002DContext::get_buffer_info, which - if the
+ * output size is exactly 0x30 - only READS accelerator panel fields into the output struct. */
 static void test_get_surface_info(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D get_surface_info(sel 2)", "real evidence conflicts with assumed shape - needs re-verification, see #42");
+    unsigned char out[0x30];
+    memset(out, 0xAA, sizeof(out));
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodScalarIStructureO(connect, 2, 2, &outSize, 0x7fff, 0, out);
+    report("2D get_surface_info(sel 2, panel index out of range)", r, kExpectBadArgument);
+    outSize = sizeof(out);
+    r = IOConnectMethodScalarIStructureO(connect, 2, 2, &outSize, 0x7fff, 0x800, out);
+    report("2D get_surface_info(sel 2, unknown surface id)", r, kExpectNotFound);
+    outSize = sizeof(out);
+    r = IOConnectMethodScalarIStructureO(connect, 2, 2, &outSize, 0, 0, out);
+    report("2D get_surface_info(sel 2, panel 0: read-only buffer info)", r, kExpectSuccess);
+    if (r == TEST_kIOReturnSuccess) {
+        UInt32 *d = (UInt32 *)out;
+        printf("    outSize=%u info[0..11]={", (unsigned int)outSize);
+        { int i; for (i = 0; i < 12; i++) printf("%s0x%x", i ? "," : "", d[i]); }
+        printf("}\n");
+    }
 }
 
-/* selector 3: swap_surface(UInt32,UInt32*) - CONFIRMED: scalarO, in=1/
- * out=1. Evidence: GA plugin offset 0x1924 (_SwapSurface). This IS the
- * real present/flip mechanism - directly in the family that crashed the
- * stock driver in #43 (drives the same submit_swap_buffer path via
- * unlock_memory's negative-lock-type route). Never run live without a
- * real, validly-created and populated surface. */
+/* selector 3: swap_surface(lockType, *outTag) - table: flags 0, 1 in, 1 out. Stock body: with no bound surface
+ * (this+0x100 == NULL) it returns NoResources (and zeroes the output kernel-side) BEFORE reading anything else. (Outputs of an error return are NOT copied back to the caller by IOKit, so they are not observable here.) */
 static void test_swap_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D swap_surface(sel 3)", "real present/flip path - see #43, do not run without valid surface setup");
+    int out = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 3, 1, 1, 0, &out);
+    report("2D swap_surface(sel 3, no surface bound)", r, kExpectNoResources);
+    (void)out;
 }
 
-/* selector 4: scale_surface(UInt32,UInt32,UInt32) - real evidence: GA
- * plugin offset 0x27e8 (_AllocateSurface), scalarO in=3 (output
- * capacity unresolved). Surface-state mutation - skip. */
+/* selector 4: scale_surface(flags, x, y) - table: flags 0, 3 in, 0 out. No bound surface -> Unsupported. */
 static void test_scale_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D scale_surface(sel 4)", "surface-state mutation - see #43");
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 4, 3, 0, 0, 0, 0);
+    report("2D scale_surface(sel 4, no surface bound)", r, kExpectUnsupported);
 }
 
-/* selector 5: lock_memory(UInt32,UInt32*,UInt32*) - CONFIRMED: scalarO,
- * in=1/out=2 (matches signature exactly). Evidence: GA plugin offset
- * 0x17e4 (_LockSurface). Named explicitly in the safety policy's
- * danger family - skip. */
+/* selector 5: lock_memory(lockType, *outAddress, *outSize) - table: flags 0, 1 in, 2 out. Stock body: no bound
+ * surface -> CannotLock; kernel-side the first output is set to the sentinel 0xdeadbeef, but (Outputs of an error return are NOT copied back to the caller by IOKit, so they are not observable here.) */
 static void test_lock_memory(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D lock_memory(sel 5)", "lock/swap family - see #43");
+    int out0 = 0, out1 = 0x55555555;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 5, 1, 2, 0, &out0, &out1);
+    report("2D lock_memory(sel 5, no surface bound)", r, kExpectCannotLock);
+    (void)out0; (void)out1;
 }
 
-/* selector 6: unlock_memory(UInt32,UInt32*) - CONFIRMED: scalarO, in=1/
- * out=1 (matches signature exactly). Evidence: GA plugin offset 0x1894
- * (_UnlockSurface). This is the call whose negative-lock-type variant
- * triggers swap_surface -> submit_swap_buffer, the exact function that
- * crashed the stock driver in #43 - skip unconditionally. */
+/* selector 6: unlock_memory(lockType, *outTag) - table: flags 0, 1 in, 1 out. Stock body: no bound surface ->
+ * BadArgument (the METHOD's own result; outTag is set to 0 kernel-side, not observable on an error return). It only calls swap_surface for a NEGATIVE lockType when
+ * the unlock itself succeeded, which needs a bound surface, so lockType 0 here cannot reach it. The negative-type
+ * path is NOT tested. */
 static void test_unlock_memory(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D unlock_memory(sel 6)", "negative lock type drives the swap path; unverified. (NB the real #43 panic was DVD set_macrovision -> getFramebufferIndex(NULL), see #43 correction)");
+    int out = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 6, 1, 1, 0, &out);
+    report("2D unlock_memory(sel 6, lockType 0, no surface bound)", r, kExpectBadArgument);
+    (void)out;
 }
 
 /* selector 7: header declares finish(void) (0 params), but the one real
@@ -111,110 +133,103 @@ static void test_finish_or_wait(io_connect_t connect) {
     report("2D finish(sel 7, mode 0)", r, kExpectSuccess);
 }
 
-/* selector 8: declare_image(UInt32,UInt32,UInt32,UInt32*) - CONFIRMED:
- * scalarO, in=3/out=1 (matches signature exactly). Evidence: GA plugin
- * offset 0x2984 (_AllocateSurface). Allocates a real resource - skip. */
+/* selector 8: declare_image(p1, size/format, bytes, *outHandle) - table: flags 0, 3 in, 1 out. Stock body rejects a
+ * zero size or byte count with BadArgument before touching the lock or the allocator. A non-zero call would
+ * allocate a real AGP texture and is NOT tested. */
 static void test_declare_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D declare_image(sel 8)", "real resource allocation - see #43");
+    int out = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 8, 3, 1, 0, 0, 0, &out);
+    report("2D declare_image(sel 8, zero size)", r, kExpectBadArgument);
 }
 
-/* selector 9: create_image(UInt32,UInt32,UInt32*,UInt32*) - CONFIRMED:
- * scalarO, in=2/out=2 (matches signature exactly). Evidence: GA plugin
- * offset 0x2a78 (_AllocateSurface). Allocates a real resource - skip. */
+/* selector 9: create_image(p1, p2, *outLow, *outHigh) - table: flags 0, 2 in, 2 out. p1 == 0 -> BadArgument before
+ * any allocation. */
 static void test_create_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D create_image(sel 9)", "real resource allocation - see #43");
+    int o0 = -1, o1 = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 9, 2, 2, 0, 0, &o0, &o1);
+    report("2D create_image(sel 9, p1 = 0)", r, kExpectBadArgument);
 }
 
-/* selector 10: create_transfer(UInt32,UInt32,UInt32*,UInt32*) -
- * CONFIRMED: scalarO, in=2/out=2 (matches signature exactly). Evidence:
- * GA plugin offset 0x2884 (_AllocateSurface). Allocates a real
- * AGP-backed buffer - skip. */
+/* selector 10: create_transfer(p1, bytes, *outHandle, *outAddr) - table: flags 0, 2 in, 2 out. bytes == 0 ->
+ * BadArgument before any allocation. */
 static void test_create_transfer(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D create_transfer(sel 10)", "real GART-backed allocation - see #43");
+    int o0 = -1, o1 = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 10, 2, 2, 0, 0, &o0, &o1);
+    report("2D create_transfer(sel 10, bytes = 0)", r, kExpectBadArgument);
 }
 
-/* selector 11: delete_image(UInt32) - CONFIRMED: structureI, in=1,
- * struct=0. Evidence: GA plugin offset 0x3fe4 (_FreeSurface). Deletes a
- * real resource by ID - skip. */
+/* selector 11: delete_image(id) - table: flags 4, 1 scalar. This context's shared allocator is created lazily by
+ * the first allocation, so on a fresh connection it is NULL and the stock body returns NoResources. */
 static void test_delete_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D delete_image(sel 11)", "real resource deletion, bogus ID - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 11, 1, 0, 0x7fff, NULL);
+    report("2D delete_image(sel 11, no allocator yet)", r, kExpectNoResources);
 }
 
-/* selector 12: wait_image(UInt32) - CONFIRMED: structureI, in=1,
- * struct=0. Evidence: GA plugin offset 0x410c/0x4364
- * (_createTextureBuffer/_createOffscreenBuffer). Unlike GL's
- * wait_for_stamp (a raw monotonic counter value), this takes a real
- * textureID that indexes per-texture bookkeeping - same ID-indexed-
- * lookup risk as #43, skip. */
+/* selector 12: wait_image(id) - table: flags 4, 1 scalar. Shared allocator NULL on a fresh connection ->
+ * NoResources before any wait. */
 static void test_wait_image(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D wait_image(sel 12)", "ID-indexed fence wait on a bogus texture ID - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 12, 1, 0, 0x7fff, NULL);
+    report("2D wait_image(sel 12, no allocator yet)", r, kExpectNoResources);
 }
 
-/* selector 13: set_surface_paging_options(void*,void*,UInt32,UInt32*) -
- * body is CONFIRMED (this project's own prior decompile) to
- * unconditionally return kIOReturnUnsupported with no real logic at
- * all, so it's genuinely safe regardless of input - but no real
- * call-site evidence exists for its wire shape (struct-based per the
- * signature, exact structureI/O layout unconfirmed), so it can't be
- * called correctly. Skipped for shape-uncertainty, not safety. */
+/* selector 13: set_surface_paging_options - table: flags 3, struct-in 12 bytes, struct-out 12 bytes. The stock
+ * body ignores its arguments and returns kIOReturnUnsupported (a deliberate stub). */
 static void test_set_surface_paging_options(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D set_surface_paging_options(sel 13)", "known-safe stub body, but real wire shape unverified");
+    UInt32 in[3] = {0, 0, 0}, out[3] = {0, 0, 0};
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 13, sizeof(in), &outSize, in, out);
+    report("2D set_surface_paging_options(sel 13)", r, kExpectUnsupported);
 }
 
-/* selector 14: set_surface_vsync_options(...) - same deliberate-stub
- * pattern and same shape-uncertainty as selector 13. */
+/* selector 14: set_surface_vsync_options - same shape and same deliberate Unsupported stub as selector 13. */
 static void test_set_surface_vsync_options(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D set_surface_vsync_options(sel 14)", "known-safe stub body, but real wire shape unverified");
+    UInt32 in[3] = {0, 0, 0}, out[3] = {0, 0, 0};
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 14, sizeof(in), &outSize, in, out);
+    report("2D set_surface_vsync_options(sel 14)", r, kExpectUnsupported);
 }
 
-/* selector 15: set_macrovision(UInt32) - body is CONFIRMED (prior
- * decompile) to iterate real display connections and toggle a real
- * copy-protection signal - not memory-unsafe, but a real side effect on
- * physical display output, and no call-site evidence exists in this
- * bundle for its exact shape. Skipped for shape-uncertainty and to
- * avoid an unwanted real-hardware side effect. */
+/* selector 15: set_macrovision(enable) - table: flags 4, 1 scalar. NOT run: the stock body walks every active
+ * framebuffer, casts it to IONDRVFramebuffer and calls a display-driver method (code 0x92) on it - a real TV-out
+ * / display side effect. */
 static void test_set_macrovision(io_connect_t connect) {
     (void)connect;
-    report_skipped("2D set_macrovision(sel 15)", "real display-output side effect + unverified shape");
+    report_skipped("2D set_macrovision(sel 15)", "calls the display driver on every active framebuffer (macrovision / TV-out)");
 }
 
-/* selector 16 (subclass ATIR5002DContext::read_regs) -
- * (UInt32*,UInt32*,UInt32,UInt32*) - real evidence: GA plugin offset
- * 0x2244, function named _GetBeamPosition - a real hardware-register
- * read (beam position, used for vsync timing), structureIO shape with
- * structureInputSize=4 bytes / structureOutputSize capacity=4 bytes.
- * Plausible name match (reading a register) but not touching surface/
- * swap/buffer bookkeeping the way the crash family does - however the
- * exact 4-byte input encoding (which register) is unconfirmed, so a
- * synthetic all-zero payload's effect on real register-read code is
- * unverified. Skipped out of the same "don't call what you can't reason
- * about" caution as the ID-indexed methods above. */
+/* selector 16: ATIR5002DContext::read_regs(offsets, outValues, inSize, *outSize) - table: flags 3, struct-in and
+ * struct-out variable. Stock body: (*outSize != inSize) or a size not a multiple of 4 -> BadArgument BEFORE the
+ * lock; otherwise it reads outSize/4 hardware registers through the MMIO window. Both tests here read ZERO
+ * registers (size 0) or are rejected (sizes differ), so no register is touched. */
 static void test_read_regs(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D read_regs(sel 16)", "real hardware register read, input encoding unconfirmed");
+    IOByteCount outSize = 0;
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 16, 0, &outSize, NULL, NULL);
+    report("2D read_regs(sel 16, zero registers)", r, kExpectSuccess);
+    UInt32 in = 0;
+    outSize = 0;
+    r = IOConnectMethodStructureIStructureO(connect, 16, sizeof(in), &outSize, &in, NULL);
+    report("2D read_regs(sel 16, in/out sizes differ)", r, kExpectBadArgument);
 }
 
-/* selector 17 (subclass write_regs) - no real call site found in this
- * bundle; header signature used (2 params), UNVERIFIED. Writes hardware
- * registers - skip unconditionally regardless of shape confidence. */
+/* selector 17: ATIR5002DContext::write_regs(pairs, byteCount) - table: flags 4, 0 scalars, struct variable. A byte
+ * count that is not a multiple of 8 -> BadArgument before the lock; a count of 0 -> takes the lock, writes nothing,
+ * returns Success. NO register is written by either test. (A real write is never tested.) */
 static void test_write_regs(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D write_regs(sel 17)", "writes real hardware registers - never fuzz this");
+    UInt32 in = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 17, 0, sizeof(in), &in);
+    report("2D write_regs(sel 17, 4 bytes: not a multiple of 8)", r, kExpectBadArgument);
+    r = IOConnectMethodScalarIStructureI(connect, 17, 0, 0, NULL);
+    report("2D write_regs(sel 17, zero pairs)", r, kExpectSuccess);
 }
 
-/* selector 18 (subclass write_2_regs) - same as write_regs: no call
- * site found, header signature UNVERIFIED, writes hardware registers -
- * skip unconditionally. */
+/* selector 18: write_2_regs(off1, off2, pairs, byteCount) - table: flags 4, 2 scalars, struct variable. Same
+ * validation as write_regs: byte count not a multiple of 8 -> BadArgument; 0 -> Success with no register written. */
 static void test_write_2_regs(io_connect_t connect) {
-    (void)connect;
-    report_skipped("2D write_2_regs(sel 18)", "writes real hardware registers - never fuzz this");
+    UInt32 in = 0;
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 18, 2, sizeof(in), 0, 0, &in);
+    report("2D write_2_regs(sel 18, 4 bytes: not a multiple of 8)", r, kExpectBadArgument);
+    r = IOConnectMethodScalarIStructureI(connect, 18, 2, 0, 0, 0, NULL);
+    report("2D write_2_regs(sel 18, zero pairs)", r, kExpectSuccess);
 }
 
 void run_2d_context_tests(io_service_t service) {
@@ -226,7 +241,6 @@ void run_2d_context_tests(io_service_t service) {
         return;
     }
     printf("-- 2D context (type=2), all 19 selectors --\n");
-    test_set_surface(connect);
     test_get_config(connect);
     test_get_surface_info(connect);
     test_swap_surface(connect);
@@ -245,5 +259,6 @@ void run_2d_context_tests(io_service_t service) {
     test_read_regs(connect);
     test_write_regs(connect);
     test_write_2_regs(connect);
+    test_set_surface(connect); /* last: binds a display panel on this connection */
     IOServiceClose(connect);
 }

@@ -25,25 +25,21 @@
 
 #include "common.h"
 
-/* selector 0: IOATIR500GLContext::set_surface(UInt32,UInt32,UInt32,UInt32)
- * - real shape CONFIRMED: structureI, scalarInputCount=4, structSize=0
- *   bytes (all 4 args go through the raw scalar_input array, matching
- *   the C++ signature exactly - no hidden args). Real evidence: GL
- *   bundle offset 0x72c0/0x749c/0x77cc (_gldAttachDrawable), r6=4,r8=0.
- * NOT run live: mutates bound-surface state - exactly the family that
- * crashed the stock driver via #43's incident (submit_swap_buffer is
- * reached indirectly through surface state this call establishes). */
+/* selector 0: set_surface(id, modeBits, p3, p4) - table: flags 4, 4 scalars, struct 0. RESOLVED (#42 skipped-method pass):
+ * surface id 0 means "detach": the stock body finds no surface to bind, leaves this context's surface
+ * pointers NULL, clears the accelerator's "last hardware context" marker if it is this context, then calls
+ * ATIR500GLContext::update_surface (a no-op when no surface is bound) and returns 0. A real surface id
+ * would bind a surface and is NOT tested. */
 static void test_set_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL set_surface(sel 0)", "mutates bound surface state - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 0, 4, 0, 0, 0, 0, 0, NULL);
+    report("GL set_surface(sel 0, id 0 = detach)", r, kExpectSuccess);
 }
 
-/* selector 1: IOATIR500GLContext::set_swap_rect(UInt32,UInt32,UInt32,UInt32)
- * - CONFIRMED: structureI, scalarInputCount=4, structSize=0. Evidence:
- *   GL bundle offset 0x5770/0x57e8 (_gldSetInteger), r6=4,r8=0. */
+/* selector 1: set_swap_rect(x,y,w,h) - table: flags 4, 4 scalars. Stock body stores four halfwords in this
+ * context and calls the bound surface's invalidate ONLY if one is bound; none is on a fresh connection. */
 static void test_set_swap_rect(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL set_swap_rect(sel 1)", "swap-rect/surface family - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 1, 4, 0, 0, 0, 0, 0, NULL);
+    report("GL set_swap_rect(sel 1, 0,0,0,0)", r, kExpectSuccess);
 }
 
 /* selector 2: IOATIR500GLContext::set_swap_interval(SInt32,SInt32) -
@@ -89,27 +85,29 @@ static void test_get_surface_size(io_connect_t connect) {
     if (r == TEST_kIOReturnSuccess) printf("    dims={%d,%d,%d,%d}\n", d0, d1, d2, d3);
 }
 
-/* selector 6: get_surface_info(UInt32 surfaceID,SInt32*,SInt32*,SInt32*)
- * - CONFIRMED: scalarO, in=1/out=3. Evidence: GL bundle offset
- * 0x5c0c (_gldGetInteger), 0x7198 (_gldAttachDrawable), 0x2fb20
- * (_gldGetQueryInfo), r6=1, capacity=3. NOT run live: takes a
- * caller-supplied surfaceID that indexes into per-surface bookkeeping -
- * the same ID-indexed-lookup shape as the code path that crashed in
- * #43, even though this one is nominally read-only. */
+/* selector 6: get_surface_info(id, *flags, *w, *h) - table: flags 0, 1 in, 3 out. Stock body: id 0 (or an id
+ * with no live surface) returns BadArgument (it zeroes the three outputs kernel-side) and never dereferences anything.
+ * (This BadArgument is the METHOD's own result: the wire shape matches the table.) (Outputs of an error return are NOT copied back to the caller by IOKit, so they are not observable here.) */
 static void test_get_surface_info(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL get_surface_info(sel 6)", "ID-indexed surface lookup - see #43");
+    int o0 = -1, o1 = -1, o2 = -1;
+    kern_return_t r = IOConnectMethodScalarIScalarO(connect, 6, 1, 3, 0, &o0, &o1, &o2);
+    report("GL get_surface_info(sel 6, id 0)", r, kExpectBadArgument);
+    (void)o0; (void)o1; (void)o2;
 }
 
-/* selector 7: read_buffer(sIOGLContextReadBufferData*,UInt32 structSize)
- * - CONFIRMED real wire shape: structureIO, structureInputSize=28 bytes,
- * structureOutputSize capacity observed up to 84 bytes (variable, since
- * it's a real pixel-readback call). Evidence: GL bundle offset 0x29ba4
- * (_gldInitDispatch), r6=28, r8=stackaddr(84). NOT run live: pixel
- * readback against a bound surface/buffer we never validly created. */
+/* selector 7: read_buffer(sIOGLContextReadBufferData*, size) - table: flags 3, struct-in variable, struct-out 0.
+ * Input {x,y,w,h,kind,destBase,stride} = 28 bytes. Stock body: kinds other than 0-4/7/8/10/11 return
+ * BadArgument before the lock; a valid kind with no bound surface returns CannotLock (the surface NULL check
+ * precedes every dereference - unlike DVD write_buffer). Two safe cases; a real readback is NOT tested. */
 static void test_read_buffer(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL read_buffer(sel 7)", "reads real surface/buffer contents - needs valid setup");
+    UInt32 in[7] = {0, 0, 1, 1, 5, 0, 0};
+    IOByteCount outSize = 0;
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 7, sizeof(in), &outSize, in, NULL);
+    report("GL read_buffer(sel 7, invalid kind 5)", r, kExpectBadArgument);
+    in[4] = 0;
+    outSize = 0;
+    r = IOConnectMethodStructureIStructureO(connect, 7, sizeof(in), &outSize, in, NULL);
+    report("GL read_buffer(sel 7, valid kind 0, no surface bound)", r, kExpectCannotLock);
 }
 
 /* selector 8: finish(void) - CONFIRMED: structureI, scalarInputCount=0,
@@ -135,71 +133,62 @@ static void test_wait_for_stamp(io_connect_t connect) {
     report("GL wait_for_stamp(sel 9, stamp=0)", r, kExpectSuccess);
 }
 
-/* selector 10: new_texture(...) - CONFIRMED real wire shape:
- * structureIO, structureInputSize=20 bytes, structureOutputSize
- * capacity=8 bytes. Evidence: GL bundle offset 0x6508/0x664c
- * (_gldDestroyBuffer), 0x9dc8/0xae48/0xb0a0/etc (_gldCreateQuery/
- * _gldDestroyQuery/_gldDestroyVertexArray/_gldAllocVertexBuffer), r6=20,
- * r8 capacity=8. NOT run live: allocates a real GPU resource from a
- * synthetic 20-byte all-zero descriptor - unknown real field layout,
- * same risk class as #43. */
+/* selector 10: new_texture(sIOGLNewTextureData*, sIOGLNewTextureReturnData*, ...) - table: flags 3, struct-in and
+ * struct-out both variable. The stock body switches on the first word (the texture kind); kinds 0-3/6/7 allocate a
+ * real GPU resource (NOT tested), any other kind returns NoResources with both output words zeroed. */
 static void test_new_texture(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL new_texture(sel 10)", "real GPU resource allocation from unknown struct fields");
+    UInt32 in[5] = {5, 0, 0, 0, 0};
+    UInt32 out[2] = {0xaaaaaaaa, 0xaaaaaaaa};
+    IOByteCount outSize = sizeof(out);
+    kern_return_t r = IOConnectMethodStructureIStructureO(connect, 10, sizeof(in), &outSize, in, out);
+    report("GL new_texture(sel 10, invalid kind 5)", r, kExpectNoResources);
+    (void)out; (void)outSize;
 }
 
-/* selector 11: delete_texture(UInt32) - CONFIRMED: structureI, in=1,
- * struct=0. Evidence: GL bundle offset 0x62f4/0x63e0/0x6588/etc (many
- * _gldDestroy / _gldReclaim functions), r6=1,r8=0. NOT run live: deletes
- * a real GPU resource by ID - a bogus ID on the stock driver's own
- * resource-management path is close enough to #43's failure family to
- * skip out of caution until a real, validly-created texture exists to
- * delete instead. */
+/* selector 11: delete_texture(id) - table: flags 4, 1 scalar. Stock body indexes this context's texture table
+ * (allocated at start, so never NULL on an open connection): an id past the table or an empty slot returns
+ * BadArgument. */
 static void test_delete_texture(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL delete_texture(sel 11)", "resource-management path, bogus ID - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 11, 1, 0, 0x7fff, NULL);
+    report("GL delete_texture(sel 11, unallocated id)", r, kExpectBadArgument);
 }
 
-/* selector 12: become_global_shared(UInt32) - CONFIRMED: structureI,
- * in=1, struct=0. Evidence: GL bundle offset 0x58f0 (_gldSetInteger). */
+/* selector 12: become_global_shared(flag) - table: flags 4, 1 scalar. flag 0 = "stop being the global shared
+ * context": the stock body only clears the accelerator's global-shared pointer if it is THIS context's
+ * allocator, otherwise returns CannotLock. On a fresh connection it is not, so CannotLock. (flag != 0 would
+ * make this context the global shared one - NOT tested.) */
 static void test_become_global_shared(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL become_global_shared(sel 12)", "mutates shared-texture state on a synthetic ID");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 12, 1, 0, 0, NULL);
+    report("GL become_global_shared(sel 12, 0)", r, kExpectCannotLock);
 }
 
-/* selector 13: page_off_texture(UInt32 textureID, UInt32 mipAndFace) -
- * RESOLVED (issue #42 test-harness pass): real signature CORRECTED from a
- * guessed 4-param shape to the real 2-param one - the function's own real
- * body (Sources/IOATIR500GLContext_PageOffTexture.cpp) never referenced
- * the 3rd/4th params at all, matching the real call-site evidence exactly
- * (GL bundle offset 0x1e13c, r6=2 real scalar inputs). No longer an open
- * discrepancy. Still a texture-paging operation on a synthetic ID - skip. */
+/* selector 13: page_off_texture(textureID, level) - table: flags 4, 2 scalars. Stock body: if the accelerator
+ * is up, an id past this context's texture table (or an empty slot) returns BadArgument; if it is not up,
+ * returns 0. Either is harmless here. */
 static void test_page_off_texture(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL page_off_texture(sel 13)", "texture paging on a synthetic ID (signature now resolved, see #42)");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 13, 2, 0, 0x7fff, 0, NULL);
+    report("GL page_off_texture(sel 13, unallocated id)", r, kExpectBadArgument);
 }
 
-/* selector 14: scale_surface(UInt32,UInt32,UInt32) - CONFIRMED:
- * structureI, in=3, struct=0. Evidence: GL bundle offset 0x72f0
- * (_gldAttachDrawable), r6=3. */
+/* selector 14: scale_surface(flags, x, y) - table: flags 4, 3 scalars. No bound surface (or flag bit 0 clear)
+ * -> kIOReturnUnsupported before anything else happens. */
 static void test_scale_surface(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL scale_surface(sel 14)", "surface-scaling mutation - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 14, 3, 0, 0, 0, 0, NULL);
+    report("GL scale_surface(sel 14, no surface bound)", r, kExpectUnsupported);
 }
 
-/* selector 15: purge_texture(UInt32) - CONFIRMED: structureI, in=1,
- * struct=0. Evidence: GL bundle offset 0x5a64 (_gldSetInteger). */
+/* selector 15: purge_texture(id) - table: flags 4, 1 scalar. Same table lookup as delete_texture: an
+ * unallocated id returns BadArgument. */
 static void test_purge_texture(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL purge_texture(sel 15)", "resource-management path, bogus ID - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 15, 1, 0, 0x7fff, NULL);
+    report("GL purge_texture(sel 15, unallocated id)", r, kExpectBadArgument);
 }
 
-/* selector 16: set_surface_volatile_state(UInt32) - CONFIRMED:
- * structureI, in=1, struct=0. Evidence: GL bundle offset 0x731c
- * (_gldAttachDrawable). */
+/* selector 16: set_surface_volatile_state(state) - table: flags 4, 1 scalar. Stock body stores the value in this
+ * context and forwards to the bound surface only if one is bound. */
 static void test_set_surface_volatile_state(io_connect_t connect) {
-    (void)connect;
-    report_skipped("GL set_surface_volatile_state(sel 16)", "surface-state mutation - see #43");
+    kern_return_t r = IOConnectMethodScalarIStructureI(connect, 16, 1, 0, 0, NULL);
+    report("GL set_surface_volatile_state(sel 16, 0)", r, kExpectSuccess);
 }
 
 /* selector 17: reclaim_resources(void) - CONFIRMED: structureI, in=0,

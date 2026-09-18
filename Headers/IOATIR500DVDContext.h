@@ -70,15 +70,16 @@ class IOATIR500DVDContext : public IOUserClient {
 public:
     /* ---- Base table, selectors 0-9 ---- */
     IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32 flagCount); /* 0, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the previous 4-param guess (by analogy with the GL context's own set_surface) was never independently decompiled and contradicted real wire-shape evidence (VA bundle, offset 0x27f4, only 3 real scalar inputs). Now RESOLVED via a real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp) AND the real mangled symbol itself (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi, 3 real params: unsigned long, a real Apple enum `eIODVDContextModeBits` - not reconstructed by name, kept as UInt32-shaped `modeBits` - and a real `int`). Real 3rd param is a count consumed by a real bit-accumulation loop (see this+0x88's own new `surfaceFlagsBitmask` field), not a generic "param3"/"param4" pair. */
-    IOReturn get_config(UInt32 *out0, UInt32 *out1, UInt32 *out2);                            /* 1 */
+    IOReturn get_config(UInt32 *out0, UInt32 *out1);                                           /* 1, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_configEPmS0_ / table = 0 in, 2 out */
     IOReturn get_status(UInt32 *out0);                                                         /* 2 */
-    IOReturn get_surface_size(SInt32 *outW, SInt32 *outH, SInt32 *outX, SInt32 *outY);         /* 3 */
+    IOReturn get_surface_size(SInt32 *outW, SInt32 *outH);                                       /* 3, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_surface_sizeEPlS0_ / table = 0 in, 2 out. Returns kIOReturnError if no surface is bound. */
     IOReturn lock_all_buffers(UInt32 param1, UInt32 *outAddress, UInt32 *outSize);              /* 4 */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                    /* 5 */
     IOReturn write_buffer(UInt32 *data, UInt32 byteCount);                                       /* 6 */
     IOReturn finish(void);                                                                       /* 7 */
     IOReturn declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle); /* 8 */
     IOReturn delete_image(UInt32 textureID);                                                     /* 9 */
+    bool     create_shared(void);                                                                /* helper, real addr 0xee60 */
 
     /*
      * NOTE on selectors 10-21: real decompiled signatures for all twelve

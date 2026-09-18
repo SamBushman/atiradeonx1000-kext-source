@@ -14,9 +14,15 @@
 
 #include "../Headers/ATIR5002DContext.h"
 
-/* Real byte-swap helper - CONFIRMED shape (`b3<<24|b2<<16|b1<<8|b0`-style
- * reconstruction in both read_regs and write_regs) - the card's registers
- * are little-endian, the PowerPC kext is big-endian. */
+/* CORRECTED (issue #42 pass, against the stock decompiles at 0x33660/0x33740/0x325d0):
+ *  1. All three take the accelerator's command lock (IOLockLock/IOLockUnlock at accelerator+0x840)
+ *     around the register access; the earlier transcription omitted it ("lock names unknown").
+ *  2. The write loops advance their counter by 2 per iteration but compare it with byteCount>>3, so
+ *     they perform ceil((byteCount>>3)/2) iterations, NOT byteCount>>3: a request for 2 or more
+ *     pairs writes only about half of them. That is a quirk of the shipped code; reproduced as is. */
+extern "C" void RawRegs2D_lock(void *) asm("_IOLockLock");
+extern "C" void RawRegs2D_unlock(void *) asm("_IOLockUnlock");
+
 static inline UInt32 SwapLE32(UInt32 v) {
     return ((v & 0x000000ffu) << 24) | ((v & 0x0000ff00u) << 8) |
            ((v & 0x00ff0000u) >> 8)  | ((v & 0xff000000u) >> 24);
@@ -24,82 +30,77 @@ static inline UInt32 SwapLE32(UInt32 v) {
 
 IOReturn ATIR5002DContext::read_regs(UInt32 *offsets, UInt32 *outValues,
                                       UInt32 requestedByteCount, UInt32 *actualByteCount) {
-    /* CONFIRMED: real caller-size-vs-actual-size validation, plus a real
-     * 4-byte-alignment check, BEFORE the lock is even taken. */
-    if (*actualByteCount != requestedByteCount || (*actualByteCount & 3) != 0) {
-        return kIOReturnBadArgument; /* real value 0xe00002c2 */
+    UInt8 *accel = reinterpret_cast<UInt8 *>(this->accelerator);
+    UInt32 count = *actualByteCount;
+    UInt8 *mmioBase = *reinterpret_cast<UInt8 **>(accel + 0x860);
+    /* real caller-size-vs-actual-size validation plus 4-byte alignment, BEFORE the lock */
+    if (count != requestedByteCount || (count & 3) != 0) {
+        return kIOReturnBadArgument; /* 0xe00002c2 */
     }
-
-    UInt8 *mmioBase = static_cast<UInt8 *>(this->accelerator ? *reinterpret_cast<void **>(
-        reinterpret_cast<UInt8 *>(this->accelerator) + 0x860) : nullptr);
-
-    /* lock(accelerator) - CONFIRMED bracketing pattern, real lock/unlock
-     * function names UNKNOWN (referenced only as FUN_xxxx in the
-     * decompile). */
-
-    if (!*reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(this->accelerator) + 0x80)) {
-        /* unlock(accelerator) */
-        return kIOReturnNotOpen; /* real value 0xe00002d8 */
+    RawRegs2D_lock(*reinterpret_cast<void **>(accel + 0x840));
+    IOReturn result;
+    if (*(accel + 0x80) == 0) {
+        result = kIOReturnNotOpen; /* 0xe00002d8 */
+    } else {
+        for (UInt32 i = 0; i < (count >> 2); ++i) {
+            UInt8 *reg = mmioBase + (offsets[i] & REGISTER_ACCESS_WINDOW_MASK);
+            outValues[i] = SwapLE32(*reinterpret_cast<UInt32 *>(reg));
+        }
+        result = kIOReturnSuccess;
     }
-
-    UInt32 count = *actualByteCount >> 2;
-    for (UInt32 i = 0; i < count; ++i) {
-        UInt8 *reg = mmioBase + (offsets[i] & REGISTER_ACCESS_WINDOW_MASK);
-        outValues[i] = SwapLE32(*reinterpret_cast<UInt32 *>(reg));
-    }
-
-    /* unlock(accelerator) */
-    return kIOReturnSuccess;
+    RawRegs2D_unlock(*reinterpret_cast<void **>(accel + 0x840));
+    return result;
 }
 
 IOReturn ATIR5002DContext::write_regs(UInt32 *offsetValuePairs, UInt32 pairByteCount) {
-    /* CONFIRMED: real 8-byte (one offset dword + one value dword per
-     * pair) alignment check. */
+    UInt8 *accel = reinterpret_cast<UInt8 *>(this->accelerator);
+    UInt8 *mmioBase = *reinterpret_cast<UInt8 **>(accel + 0x860);
     if ((pairByteCount & 7) != 0) {
         return kIOReturnBadArgument;
     }
-
-    UInt8 *mmioBase = static_cast<UInt8 *>(*reinterpret_cast<void **>(
-        reinterpret_cast<UInt8 *>(this->accelerator) + 0x860));
-
-    if (!*reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(this->accelerator) + 0x80)) {
-        return kIOReturnNotOpen;
+    RawRegs2D_lock(*reinterpret_cast<void **>(accel + 0x840));
+    IOReturn result;
+    if (*(accel + 0x80) == 0) {
+        result = kIOReturnNotOpen;
+    } else {
+        /* real loop shape: counter += 2 per iteration, compared with byteCount>>3 (see note above) */
+        UInt32 *pair = offsetValuePairs;
+        for (UInt32 counter = 0; (pairByteCount >> 3) != 0; ) {
+            UInt8 *reg = mmioBase + (pair[0] & REGISTER_ACCESS_WINDOW_MASK);
+            *reinterpret_cast<UInt32 *>(reg) = SwapLE32(pair[1]);
+            counter += 2;
+            pair += 2;
+            if (!(counter < (pairByteCount >> 3))) break;
+        }
+        result = kIOReturnSuccess;
     }
-
-    UInt32 pairCount = pairByteCount >> 3;
-    for (UInt32 i = 0; i < pairCount; ++i) {
-        UInt32 offset = offsetValuePairs[i * 2 + 0];
-        UInt32 value  = offsetValuePairs[i * 2 + 1];
-        UInt8 *reg = mmioBase + (offset & REGISTER_ACCESS_WINDOW_MASK);
-        *reinterpret_cast<UInt32 *>(reg) = SwapLE32(value);
-    }
-
-    return kIOReturnSuccess;
+    RawRegs2D_unlock(*reinterpret_cast<void **>(accel + 0x840));
+    return result;
 }
 
 IOReturn ATIR5002DContext::write_2_regs(UInt32 offset1, UInt32 offset2, UInt32 *values, UInt32 byteCount) {
-    /* CONFIRMED: same 8-byte alignment check as write_regs, but here each
-     * "pair" of dwords in `values` is written to the SAME two fixed
-     * offsets (offset1, offset2) every iteration - a real batch-write
-     * variant, not a per-pair-addressed write like write_regs. */
+    UInt8 *accel = reinterpret_cast<UInt8 *>(this->accelerator);
+    UInt8 *mmioBase = *reinterpret_cast<UInt8 **>(accel + 0x860);
     if ((byteCount & 7) != 0) {
         return kIOReturnBadArgument;
     }
-
-    UInt8 *mmioBase = static_cast<UInt8 *>(*reinterpret_cast<void **>(
-        reinterpret_cast<UInt8 *>(this->accelerator) + 0x860));
-
-    if (!*reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(this->accelerator) + 0x80)) {
-        return kIOReturnNotOpen;
+    RawRegs2D_lock(*reinterpret_cast<void **>(accel + 0x840));
+    IOReturn result;
+    if (*(accel + 0x80) == 0) {
+        result = kIOReturnNotOpen;
+    } else {
+        /* every iteration writes the SAME two registers (offset1, offset2) with the next pair of values;
+         * same counter += 2 loop shape as write_regs */
+        UInt32 *pair = values;
+        for (UInt32 counter = 0; (byteCount >> 3) != 0; ) {
+            *reinterpret_cast<UInt32 *>(mmioBase + (offset1 & REGISTER_ACCESS_WINDOW_MASK)) = SwapLE32(pair[0]);
+            *reinterpret_cast<UInt32 *>(mmioBase + (offset2 & REGISTER_ACCESS_WINDOW_MASK)) = SwapLE32(pair[1]);
+            counter += 2;
+            pair += 2;
+            if (!(counter < (byteCount >> 3))) break;
+        }
+        result = kIOReturnSuccess;
     }
-
-    UInt32 iterations = byteCount >> 3;
-    UInt8 *reg1 = mmioBase + (offset1 & REGISTER_ACCESS_WINDOW_MASK);
-    UInt8 *reg2 = mmioBase + (offset2 & REGISTER_ACCESS_WINDOW_MASK);
-    for (UInt32 i = 0; i < iterations; ++i) {
-        *reinterpret_cast<UInt32 *>(reg1) = SwapLE32(values[i * 2 + 0]);
-        *reinterpret_cast<UInt32 *>(reg2) = SwapLE32(values[i * 2 + 1]);
-    }
-
-    return kIOReturnSuccess;
+    RawRegs2D_unlock(*reinterpret_cast<void **>(accel + 0x840));
+    return result;
 }

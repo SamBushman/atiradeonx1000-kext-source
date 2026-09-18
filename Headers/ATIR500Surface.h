@@ -118,7 +118,7 @@ public:
     void     disable_overlay(void);   /* CONFIRMED: real empty no-op */
     void     enable_overlay(void);    /* CONFIRMED: real empty no-op */
     void     showbuffer(UInt32 bufferIndex, UInt32 param2); /* CONFIRMED: real empty no-op */
-    void     dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3); /* CONFIRMED: real empty no-op */
+    void     dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4); /* CONFIRMED: real empty no-op (real symbol takes 4 ints, issue #42 pass) */
     void     dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h); /* CONFIRMED: the one real, non-stub member of this family */
     void     enable_deint(UInt32 mode); /* CONFIRMED: real, stores mode into this+0xdac */
 

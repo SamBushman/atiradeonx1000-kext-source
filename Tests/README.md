@@ -17,10 +17,18 @@ application, built with the stock system `gcc` and linked against
 `test_gl_context.c`/`test_2d_context.c`/`test_dvd_context.c`/`test_surface_context.c`, each with a
 real-shape citation or an explicit unverified flag.
 
-**Live coverage (after the shape-correction pass):** 33 calls run live against the stock driver and every
-one reaches its method body (18 `Success`, 5 `kIOReturnError`, 2 `kIOReturnCannotLock`, plus the
-asserted preconditions). Before the pass, 14 of the 27 live calls were rejected `kIOReturnBadArgument`
-because their wire shapes did not match the dispatch tables. 54 methods remain skipped by policy.
+**Live coverage (after the skipped-method pass):** 87 calls run live against the stock driver (74 asserted, 13
+recorded-only), 0 unexpected, two byte-identical runs. Only **10 of the 81 methods remain skipped**, each for a
+documented reason: GL `set_stereo` (global stereo state), 2D `set_macrovision` (display driver call), DVD
+`write_buffer` and `set_macrovision` (**both panic the stock driver when no surface is bound**), DVD `write_regs`
+(unconditional hardware write), DVD `doIDCT` (real IDCT hardware), and the Surface lock family / `surface_flush`
+(paths that allocate VRAM and are not traced for a safe input). Every other method now has at least one call that
+reaches its real body on a fresh connection, chosen by decompiling the stock body first: mostly the
+validation / NULL-guard / "nothing bound" paths, which is what a fresh connection can safely reach. Real
+resource-allocating and hardware-writing paths are NOT exercised; they need a bound surface and a deliberate setup.
+
+**IOKit copies outputs back to the caller only on success**, so outputs of an error return (e.g. the 0xdeadbeef
+sentinel `lock_memory` writes) are not observable from userspace.
 
 **Checks are mostly recorded, not asserted.** `report(..., NULL)` now prints `[REC]` (it used to print
 "OK" unconditionally, which hid a real bug: a lock that was never released made every later Surface

@@ -1,76 +1,85 @@
 -- GL context (type=1), all 21 selectors --
-[SKIP] GL set_surface(sel 0) -- not run live: mutates bound surface state - see #43
-[SKIP] GL set_swap_rect(sel 1) -- not run live: swap-rect/surface family - see #43
+[OK] GL set_surface(sel 0, id 0 = detach) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL set_swap_rect(sel 1, 0,0,0,0) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL set_swap_interval(sel 2, 0,0) -> 0x00000000 (kIOReturnSuccess)
 [REC] GL get_config(sel 3) -> 0x00000000 (kIOReturnSuccess)
     out={8454208,259817472,268435456}
 [REC] GL get_status(sel 4) -> 0x00000000 (kIOReturnSuccess)
     status=0x0
 [REC] GL get_surface_size(sel 5) -> 0xe00002bc (kIOReturnError)
-[SKIP] GL get_surface_info(sel 6) -- not run live: ID-indexed surface lookup - see #43
-[SKIP] GL read_buffer(sel 7) -- not run live: reads real surface/buffer contents - needs valid setup
+[OK] GL get_surface_info(sel 6, id 0) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] GL read_buffer(sel 7, invalid kind 5) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] GL read_buffer(sel 7, valid kind 0, no surface bound) -> 0xe00002cc (kIOReturnCannotLock)
 [REC] GL finish(sel 8) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL wait_for_stamp(sel 9, stamp=0) -> 0x00000000 (kIOReturnSuccess)
-[SKIP] GL new_texture(sel 10) -- not run live: real GPU resource allocation from unknown struct fields
-[SKIP] GL delete_texture(sel 11) -- not run live: resource-management path, bogus ID - see #43
-[SKIP] GL become_global_shared(sel 12) -- not run live: mutates shared-texture state on a synthetic ID
-[SKIP] GL page_off_texture(sel 13) -- not run live: texture paging on a synthetic ID (signature now resolved, see #42)
-[SKIP] GL scale_surface(sel 14) -- not run live: surface-scaling mutation - see #43
-[SKIP] GL purge_texture(sel 15) -- not run live: resource-management path, bogus ID - see #43
-[SKIP] GL set_surface_volatile_state(sel 16) -- not run live: surface-state mutation - see #43
+[OK] GL new_texture(sel 10, invalid kind 5) -> 0xe00002be (kIOReturnNoResources)
+[OK] GL delete_texture(sel 11, unallocated id) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] GL become_global_shared(sel 12, 0) -> 0xe00002cc (kIOReturnCannotLock)
+[OK] GL page_off_texture(sel 13, unallocated id) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] GL scale_surface(sel 14, no surface bound) -> 0xe00002c7 (kIOReturnUnsupported)
+[OK] GL purge_texture(sel 15, unallocated id) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] GL set_surface_volatile_state(sel 16, 0) -> 0x00000000 (kIOReturnSuccess)
 [REC] GL reclaim_resources(sel 17) -> 0x00000000 (kIOReturnSuccess)
 [REC] GL get_data_buffer(sel 18) -> 0x00000000 (kIOReturnSuccess)
-    out={0xc000,0x10000}
+    out={0xd000,0x10000}
 [SKIP] GL set_stereo(sel 19, 0,0) -- not run live: shape corrected (2 scalars) but mutates global accelerator stereo state
 [OK] GL get_hw_info(sel 20) -> 0x00000000 (kIOReturnSuccess)
     hw={0x3,0x7240,0xc,0x1,0x0}
 -- 2D context (type=2), all 19 selectors --
-[SKIP] 2D set_surface(sel 0) -- not run live: mutates bound surface state; shape unverified - see #43
 [OK] 2D get_config(sel 1) -> 0x00000000 (kIOReturnSuccess)
     out={8454208,268435456}
-[SKIP] 2D get_surface_info(sel 2) -- not run live: real evidence conflicts with assumed shape - needs re-verification, see #42
-[SKIP] 2D swap_surface(sel 3) -- not run live: real present/flip path - see #43, do not run without valid surface setup
-[SKIP] 2D scale_surface(sel 4) -- not run live: surface-state mutation - see #43
-[SKIP] 2D lock_memory(sel 5) -- not run live: lock/swap family - see #43
-[SKIP] 2D unlock_memory(sel 6) -- not run live: negative lock type drives the swap path; unverified. (NB the real #43 panic was DVD set_macrovision -> getFramebufferIndex(NULL), see #43 correction)
+[OK] 2D get_surface_info(sel 2, panel index out of range) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D get_surface_info(sel 2, unknown surface id) -> 0xe00002f0 (kIOReturnNotFound)
+[OK] 2D get_surface_info(sel 2, panel 0: read-only buffer info) -> 0x00000000 (kIOReturnSuccess)
+    outSize=48 info[0..11]={0x0,0x7800438,0x780,0x438,0x780,0x0,0x0,0x4,0x2,0x6,0x2,0xb}
+[OK] 2D swap_surface(sel 3, no surface bound) -> 0xe00002be (kIOReturnNoResources)
+[OK] 2D scale_surface(sel 4, no surface bound) -> 0xe00002c7 (kIOReturnUnsupported)
+[OK] 2D lock_memory(sel 5, no surface bound) -> 0xe00002cc (kIOReturnCannotLock)
+[OK] 2D unlock_memory(sel 6, lockType 0, no surface bound) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] 2D finish(sel 7, mode 0) -> 0x00000000 (kIOReturnSuccess)
-[SKIP] 2D declare_image(sel 8) -- not run live: real resource allocation - see #43
-[SKIP] 2D create_image(sel 9) -- not run live: real resource allocation - see #43
-[SKIP] 2D create_transfer(sel 10) -- not run live: real GART-backed allocation - see #43
-[SKIP] 2D delete_image(sel 11) -- not run live: real resource deletion, bogus ID - see #43
-[SKIP] 2D wait_image(sel 12) -- not run live: ID-indexed fence wait on a bogus texture ID - see #43
-[SKIP] 2D set_surface_paging_options(sel 13) -- not run live: known-safe stub body, but real wire shape unverified
-[SKIP] 2D set_surface_vsync_options(sel 14) -- not run live: known-safe stub body, but real wire shape unverified
-[SKIP] 2D set_macrovision(sel 15) -- not run live: real display-output side effect + unverified shape
-[SKIP] 2D read_regs(sel 16) -- not run live: real hardware register read, input encoding unconfirmed
-[SKIP] 2D write_regs(sel 17) -- not run live: writes real hardware registers - never fuzz this
-[SKIP] 2D write_2_regs(sel 18) -- not run live: writes real hardware registers - never fuzz this
+[OK] 2D declare_image(sel 8, zero size) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D create_image(sel 9, p1 = 0) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D create_transfer(sel 10, bytes = 0) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D delete_image(sel 11, no allocator yet) -> 0xe00002be (kIOReturnNoResources)
+[OK] 2D wait_image(sel 12, no allocator yet) -> 0xe00002be (kIOReturnNoResources)
+[OK] 2D set_surface_paging_options(sel 13) -> 0xe00002c7 (kIOReturnUnsupported)
+[OK] 2D set_surface_vsync_options(sel 14) -> 0xe00002c7 (kIOReturnUnsupported)
+[SKIP] 2D set_macrovision(sel 15) -- not run live: calls the display driver on every active framebuffer (macrovision / TV-out)
+[OK] 2D read_regs(sel 16, zero registers) -> 0x00000000 (kIOReturnSuccess)
+[OK] 2D read_regs(sel 16, in/out sizes differ) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D write_regs(sel 17, 4 bytes: not a multiple of 8) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D write_regs(sel 17, zero pairs) -> 0x00000000 (kIOReturnSuccess)
+[OK] 2D write_2_regs(sel 18, 4 bytes: not a multiple of 8) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] 2D write_2_regs(sel 18, zero pairs) -> 0x00000000 (kIOReturnSuccess)
+[OK] 2D set_surface(sel 0, panel 0, no surface) -> 0x00000000 (kIOReturnSuccess)
+    outSize=48 info[0..11]={0x0,0x7800438,0x780,0x438,0x780,0x0,0x0,0x4,0x2,0x6,0x2,0xb}
 -- DVD context (type=3), all 22 selectors --
-[SKIP] DVD set_surface(sel 0) -- not run live: real surface-binding mutation (signature now resolved, see #42)
+[OK] DVD set_surface(sel 0, id 0 = detach) -> 0x00000000 (kIOReturnSuccess)
 [OK] DVD get_config(sel 1) -> 0x00000000 (kIOReturnSuccess)
     out={8454208,268435456}
 [REC] DVD get_status(sel 2) -> 0x00000000 (kIOReturnSuccess)
     out0=0
 [OK] DVD get_surface_size(sel 3, unbound surface) -> 0xe00002bc (kIOReturnError)
-[SKIP] DVD lock_all_buffers(sel 4) -- not run live: lock family + real shape is a 256-byte structureO, not simple scalars - see #43 and #42
-[SKIP] DVD unlock_memory(sel 5) -- not run live: lock/swap family - see #43
-[SKIP] DVD write_buffer(sel 6) -- not run live: writes real buffer contents; shape unverified
+[OK] DVD lock_all_buffers(sel 4, no surface bound) -> 0xe00002cc (kIOReturnCannotLock)
+[OK] DVD unlock_memory(sel 5, no surface bound) -> 0xe00002c2 (kIOReturnBadArgument)
+[SKIP] DVD write_buffer(sel 6) -- not run live: PANICS the stock driver when no surface is bound (derefs boundSurface+0xb70 before its NULL check) - second instance of the #43 bug
 [OK] DVD finish(sel 7) -> 0x00000000 (kIOReturnSuccess)
-[SKIP] DVD declare_image(sel 8) -- not run live: real resource allocation - see #43
-[SKIP] DVD delete_image(sel 9) -- not run live: real resource deletion, bogus ID - see #43
-[SKIP] DVD show_buffer(sel 10) -- not run live: lock wrapper; shape unverified
-[SKIP] DVD dvd_setup_overlay(sel 11) -- not run live: mutates real shared surface geometry; shape unverified
+[OK] DVD declare_image(sel 8, zero size) -> 0xe00002c2 (kIOReturnBadArgument)
+[OK] DVD delete_image(sel 9, no allocator yet) -> 0xe00002be (kIOReturnNoResources)
+[OK] DVD show_buffer(sel 10, no surface bound) -> 0xe00002bc (kIOReturnError)
+[OK] DVD dvd_setup_overlay(sel 11, no surface bound) -> 0xe00002bc (kIOReturnError)
 [OK] DVD dvd_enable_overlay(sel 12, unbound surface) -> 0xe00002bc (kIOReturnError)
-[SKIP] DVD read_regs(sel 13) -- not run live: real hardware register read, input encoding unconfirmed
-[SKIP] DVD write_regs(sel 14) -- not run live: writes a real hardware register - never fuzz this
+[OK] DVD read_regs(sel 13, zero registers) -> 0x00000000 (kIOReturnSuccess)
+[OK] DVD read_regs(sel 13, in/out sizes differ) -> 0xe00002c2 (kIOReturnBadArgument)
+[SKIP] DVD write_regs(sel 14) -- not run live: writes one real hardware register with no validation; no side-effect-free form exists
 [OK] DVD dvd_setup_subpicture(sel 15, unbound surface) -> 0xe00002bc (kIOReturnError)
-[SKIP] DVD set_macrovision(sel 16) -- not run live: PANICS the stock driver on a fresh connection: derefs the unbound surface (this+0xf8 == NULL) in getFramebufferIndex - the real #43 crash (corrected diagnosis). Needs set_surface first
-[SKIP] DVD dvd_enable_deint(sel 17) -- not run live: real (non-no-op) surface-field mutation
-[SKIP] DVD doIDCT(sel 18) -- not run live: drives real IDCT hardware from an unknown 56-byte struct layout - see #43
+[SKIP] DVD set_macrovision(sel 16) -- not run live: PANICS the stock driver when no surface is bound: getFramebufferIndex(NULL) (#43); also a real display side effect
+[OK] DVD dvd_enable_deint(sel 17, no surface bound) -> 0xe00002bc (kIOReturnError)
+[SKIP] DVD doIDCT(sel 18) -- not run live: drives real IDCT hardware; body not traced for a safe minimal input
 [OK] DVD wait_for_stamps(sel 19, 0,0) -> 0x00000000 (kIOReturnSuccess)
 [REC] DVD check_stamps(sel 20, 0,0) -> 0x00000000 (kIOReturnSuccess)
     outBothDone=1
-[SKIP] DVD setup_buffers(sel 21) -- not run live: real IDCT working-buffer geometry setup - see #43
+[OK] DVD setup_buffers(sel 21, no surface bound) -> 0xe00002d8 (???)
 -- Surface context (type=0), all 19 selectors --
 [OK] Surface set_id_mode(0,0x4) [precondition] -> 0x00000000 (kIOReturnSuccess)
 [REC] Surface surface_read_lock_options(sel 0, lockOptions=0) -> 0x00000000 (kIOReturnSuccess)
@@ -79,25 +88,28 @@
 [REC] Surface get_state(sel 2) -> 0x00000000 (kIOReturnSuccess)
     outState=0x1
 [SKIP] Surface surface_write_lock_options(sel 3) -- not run live: lock family + real Apple struct type unreconstructed
-[SKIP] Surface surface_write_unlock_options(sel 4) -- not run live: lock/unlock family - see #43
-[SKIP] Surface surface_read(sel 5) -- not run live: reads real surface contents + real Apple struct type unreconstructed
+[OK] Surface surface_write_unlock_options(sel 4) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
+[OK] Surface set_id_mode(0,0x4) [precondition for surface_read] -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface surface_read(sel 5, rectangle entirely off-surface) -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x0) [precondition: allocate record] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x20) [precondition: set bit 0x20, keep record] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_shape_backing(sel 6, real preconditions established) -> 0x00000000 (kIOReturnSuccess)
 [REC] Surface set_id_mode(sel 7, 0,0) -> 0xe00002bc (kIOReturnError)
 [OK] Surface set_id_mode(0,0x4) [precondition: id=0 record + prune_buffers] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_scale(sel 8, disabled path: struct size 0) -> 0x00000000 (kIOReturnSuccess)
-[SKIP] Surface set_shape(sel 9) -- not run live: real forward into shape-mutation code, not a no-op
-[SKIP] Surface surface_flush(sel 10) -- not run live: real alloc/flush path adjacent to #43's crash family
+[OK] Surface set_id_mode(1,0x0) [precondition for set_shape] -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface set_id_mode(1,0x20) [precondition for set_shape] -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface set_shape(sel 9, real preconditions established) -> 0x00000000 (kIOReturnSuccess)
+[SKIP] Surface surface_flush(sel 10) -- not run live: calls alloc_surfaces_retry (VRAM allocation + sleep-retry loop), not traced for a safe input
 [REC] Surface surface_query_lock(sel 11) -> 0xe00002cc (kIOReturnCannotLock)
-[SKIP] Surface surface_read_lock(sel 12) -- not run live: forwards into lock_options - see selector 0
-[SKIP] Surface surface_read_unlock(sel 13) -- not run live: real unlock mutation - see #43
-[SKIP] Surface surface_write_lock(sel 14) -- not run live: lock family + real Apple struct type unreconstructed
-[SKIP] Surface surface_write_unlock(sel 15) -- not run live: real unlock mutation - see #43
-[SKIP] Surface surface_control(sel 16) -- not run live: real dispatcher onto surface-state mutations
+[SKIP] Surface surface_read_lock(sel 12) -- not run live: lockOptions=2 reaches VRAM allocation / prepare_vram; only lockOptions=0 (sel 0) is traced
+[OK] Surface surface_read_unlock(sel 13) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
+[SKIP] Surface surface_write_lock(sel 14) -- not run live: write-lock path with lockOptions=1 is not traced
+[OK] Surface surface_write_unlock(sel 15) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
+[OK] Surface surface_control(sel 16, selector 0 -> BadArgument) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] Surface set_id_mode(1,0x0) [precondition, idempotent] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x20) [precondition, idempotent] -> 0x00000000 (kIOReturnSuccess)
 [REC] Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified) -> 0x00000000 (kIOReturnSuccess)
-[SKIP] Surface surface_control_alias(sel 18) -- not run live: deliberate alias of selector 16 - same real dispatcher
+[OK] Surface surface_control_alias(sel 18, selector 0 -> BadArgument) -> 0xe00002c2 (kIOReturnBadArgument)
 
-33 calls made (20 asserted, 13 recorded-only), 0 unexpected result(s), 54 skipped (shape-known, not live-tested)
+87 calls made (74 asserted, 13 recorded-only), 0 unexpected result(s), 10 skipped (shape-known, not live-tested)
