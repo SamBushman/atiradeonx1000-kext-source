@@ -181,9 +181,17 @@ public:
      * shared internal helpers every real lock/unlock external method
      * above forwards into (lockType 1=read, 2=write). `eLockType`
      * modeled as `UInt32` (a real Apple IOAcceleratorFamily enum, not
-     * reconstructed here). Bodies NOT independently decompiled this
-     * pass - referenced by name in this project's comments for a while,
-     * only now formally declared.
+     * reconstructed here). STALE COMMENT FIXED (issue #42 test-harness
+     * pass): this used to say "bodies NOT independently decompiled this
+     * pass" - both real, complete bodies were already decompiled and
+     * committed in the original get-it-linking pass (see
+     * Sources/IOATIR500Surface_LockOptions.cpp) well before this
+     * comment was last touched; the claim was simply never updated
+     * afterward. `surface_lock_options`'s own real body also gives a
+     * byte-exact PARTIAL layout for Apple's own `IOAccelSurfaceData`
+     * (still forward-declared only, not fully reconstructed) - see that
+     * source file's own header comment for the real per-offset writes,
+     * including real pixel-format FourCC codes ('yuvs'/'2vuy').
      */
     IOReturn surface_lock_options(UInt32 lockType, UInt32 param2, IOAccelSurfaceData *data, UInt32 size);
     IOReturn surface_unlock_options(UInt32 lockType, UInt32 param2); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real IOReturn status. */

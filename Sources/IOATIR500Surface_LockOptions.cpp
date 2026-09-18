@@ -34,6 +34,34 @@
  * +0x558 "release/flush timestamp" slot (seen 3 times, always on the
  * accelerator) is not independently named and is called via this
  * project's established raw vtable-cast idiom.
+ *
+ * ADDED (issue #42 test-harness pass): a real, byte-exact PARTIAL layout
+ * for Apple's own `IOAccelSurfaceData` (`out`/`data` above), read directly
+ * off every real write this function makes into it - useful for building
+ * a same-shape scratch buffer to call this method's external-method
+ * wrappers live, even though the struct is still not fully reconstructed:
+ *   +0x00 (UInt32): a real computed base address (buffer's own `+8` field
+ *          plus this surface's own `+0xc0c`, OR a resolved backing-store
+ *          handle's own address plus a real `+0x50` halfword, depending
+ *          which real path was taken)
+ *   +0x10 (UInt32, UInt16-sourced): buffer's own `+0x18`, or a
+ *          backing-store record's own `+0x52` - plausibly pitch/stride,
+ *          not confirmed
+ *   +0x14 (UInt32, UInt16-sourced): buffer's own `+0x1c` - plausibly width
+ *   +0x18 (UInt32, UInt16-sourced): buffer's own `+0x1e` - plausibly height
+ *   +0x1c (UInt32): a real pixel-format code derived from this surface's
+ *          own `+0xbe8` mode-bits (`& 0xf`) - value 6 maps to the real
+ *          FourCC `'yuvs'` (0x79757673), value 9 to `'2vuy'` (0x32767579,
+ *          the real, industry-standard UYVY-422 FourCC), value 10 to the
+ *          small integer 4, anything else passed through raw
+ *   +0x20/+0x34/+0x38/+0x3c/+0x40 (UInt32 each): copies of this surface's
+ *          own `+0xd70`/`+0xd74`/`+0xd78`/`+0xd7c`/`+0xd80`
+ *   +0x24 (UInt32): a real fixed literal constant, `0x1cccc`
+ * Bytes 0x04-0x0f and 0x28-0x33 are real (part of the same zeroed 0x44-byte
+ * struct) but never written by this function - either genuinely always
+ * zero here, or populated by some other real caller this project hasn't
+ * decompiled. A real, byte-exact PARTIAL layout, not a complete Apple
+ * struct reconstruction.
  */
 
 #include "../Headers/IOATIR500Surface.h"
