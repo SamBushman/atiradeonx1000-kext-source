@@ -32,10 +32,9 @@
  * set_surface_blocking real body: acquires the accelerator's real
  * commandLock AND a second, real per-surface lock object at this
  * surface's own `+0xc04` (a real lock/queue handle allocated by the
- * base class's own `start()` via `FUN_00011e38` - NOT independently
- * decompiled this pass, tracked as part of the same `start()` gap -
- * this function only USES the already-allocated handle, it doesn't
- * create it). Stores the real blocking-enabled flag (`+0xbf6`), and - if
+ * base class's own `start()` via `FUN_00011e38`, since RESOLVED (issue
+ * #58) as `IOLockAlloc` - this function only USES the already-allocated
+ * handle, it doesn't create it). Stores the real blocking-enabled flag (`+0xbf6`), and - if
  * disabling blocking - calls a real 3-argument primitive on the same
  * lock object matching this project's own already-established
  * `IOLockSleep(lock, event, interruptible)` shape exactly (trusted by

@@ -61,6 +61,19 @@ inline SInt16 &S16At(void *base, int offset) { return *reinterpret_cast<SInt16 *
 inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 typedef void (*BlitTileFn)(void *, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, void *, UInt32, UInt32, UInt32, UInt32, UInt32);
 typedef void (*ReleaseFn)(void *);
+
+/* the real 16-byte on-stack record handed to the tile-blit slot (+0x5e8) and,
+ * if the blit flags it, released via accelerator vtable +0x5ac. Real layout
+ * per raw decompile (local_48/local_44/local_40/local_3c/local_3a, contiguous):
+ * {word0=0, needsRelease=0, memDesc, u16 kind=3, u16 0}. Corrected in issue
+ * #58's cross-check against surface_read (same record). */
+struct ReadBufferXferRecord {
+    UInt32 word0;
+    UInt32 needsRelease;
+    void *memDesc;
+    UInt16 kind;
+    UInt16 pad;
+};
 } // namespace
 
 extern "C" void ReadBuffer_mutex_lock(void *lockPtr) asm("_mutex_lock");
@@ -207,12 +220,17 @@ haveGeometry:
             UInt8 *boundSurf = reinterpret_cast<UInt8 *>(U32At(self, 0x290));
             UInt32 stampBefore = *reinterpret_cast<UInt32 *>(boundSurf + 0x7c);
             void **vtable = *reinterpret_cast<void ***>(boundSurf);
-            UInt32 memDescOut = 0;
+            ReadBufferXferRecord xfer;
+            xfer.word0 = 0;
+            xfer.needsRelease = 0;
+            xfer.memDesc = memDesc;
+            xfer.kind = 3;
+            xfer.pad = 0;
             (*reinterpret_cast<BlitTileFn *>(vtable + (0x5e8 / 4)))(
                 boundSurf, static_cast<UInt32>(clipX), static_cast<UInt32>(clipY),
                 static_cast<UInt32>(clipW), static_cast<UInt32>(clipH),
                 U32At(self, 0x298), U32At(self, 0x29c), bufRec, U32At(self, 0x7c),
-                reinterpret_cast<UInt32>(&memDescOut), addrLow, static_cast<UInt32>(destStride), 2);
+                reinterpret_cast<UInt32>(&xfer), addrLow, static_cast<UInt32>(destStride), 2);
 
             UInt8 *slotBase = boundSurf + 0xa0;
             for (int i = 0x17; i != 0; i--) {
@@ -223,12 +241,9 @@ haveGeometry:
                 slotBase += 0x78;
             }
 
-            /* real: a boolean local ("local_44" in the raw decompile) - the
-             * real body never sets it to a nonzero value on any path this
-             * function's own decompile shows, so this real cleanup branch
-             * is dead code in this build. Preserved for fidelity. */
-            bool releaseTransferBuffer = false;
-            if (releaseTransferBuffer) {
+            /* real: local_44 - set by the blit slot when a transfer buffer
+             * must be handed back; live, not dead (corrected, issue #58). */
+            if (xfer.needsRelease != 0) {
                 ReadBuffer_mutex_unlock(commandLock);
                 UInt8 *accel2 = reinterpret_cast<UInt8 *>(U32At(self, 0xc8));
                 void **accelVtable = *reinterpret_cast<void ***>(accel2);
@@ -237,7 +252,7 @@ haveGeometry:
                 SInt32 delta = (*reinterpret_cast<Fn0x55c *>(accelVtable + (0x55c / 4)))(accel2, U32At(boundSurf, 0x7c));
                 *reinterpret_cast<SInt32 *>(accel2 + 0x7b4) = prevCounter + delta;
                 ReadBuffer_mutex_lock(commandLock);
-                (*reinterpret_cast<void (**)(void *, void *)>(accelVtable + (0x5ac / 4)))(accel2, &memDescOut);
+                (*reinterpret_cast<void (**)(void *, void *)>(accelVtable + (0x5ac / 4)))(accel2, &xfer);
             }
 
             result = 0;

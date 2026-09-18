@@ -81,14 +81,13 @@ extern "C" void *SurfStart_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMa
 /* real table, Sources/ATIR500Surface_ExternalMethods.cpp */
 extern const VendorExternalMethod kSurfaceMethods[19];
 
-/* FUN_00011e38 - real, unresolved allocator (creates this surface's own
- * per-object lock at +0xc04, later used by set_surface_blocking). Real
- * target not recoverable from static analysis alone - see issue #58 for
- * the full account (same class of gap as surface_read's own missing
- * helper). Deliberately left as a genuine undefined external reference
- * rather than a fabricated stand-in - this file will not link until
- * issue #58 resolves it, which is the honest state to leave it in. */
-extern "C" void *SurfStart_UnresolvedLockAlloc(void);
+/* FUN_00011e38 - RESOLVED (issue #58): a kxld-patched lazy-binding stub
+ * whose live target is `IOLockAlloc` (kernel 0x2b2704, exact offset-0 match
+ * in `nm /mach_kernel`). Creates this surface's own per-object lock at
+ * +0xc04, later used by set_surface_blocking. Resolved via the live
+ * per-segment-slide read of the loaded kext (slide validated first against
+ * `get_state`, whose live bytes match the static file exactly). */
+extern "C" void *SurfStart_IOLockAlloc(void) asm("_IOLockAlloc");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -110,7 +109,7 @@ bool IOATIR500Surface::start(IOService *provider) {
     U32At(self, 0x80) = 0;
     U32At(self, 0x84) = 0;
     *reinterpret_cast<SInt32 *>(self + 0x7c) = static_cast<SInt32>(providerField50) - 0x3fffffff;
-    void *lockHandle = SurfStart_UnresolvedLockAlloc(); /* FUN_00011e38, real gap - see issue #58 */
+    void *lockHandle = SurfStart_IOLockAlloc(); /* FUN_00011e38 = IOLockAlloc */
     U32At(self, 0xd4c) = 0;
     U32At(self, 0x88) = 0;
     U32At(self, 0xc04) = reinterpret_cast<UInt32>(lockHandle);
