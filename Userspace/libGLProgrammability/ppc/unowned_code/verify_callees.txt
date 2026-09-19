@@ -1,0 +1,5 @@
+SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
+LOWCOUNT: 1 functions where stock calls some callee more often than the recompile (info)
+   orph_97c1ddfc {'rest_world_eh_r7r8': (1, 0)}
+1839 functions compared, 1 with functions whose callee SETS differ (0 skipped; 30 more differ only through shared tail code)
+1 orph_97c1ddfc STOCK-ONLY {'rest_world_eh_r7r8': 1} OURS-ONLY {}

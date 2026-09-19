@@ -1,0 +1,13 @@
+SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
+LOWCOUNT: 8 functions where stock calls some callee more often than the recompile (info)
+   orph_9930 {'orph_9968': (1, 0)}
+   orph_9954 {'orph_9998': (1, 0)}
+   orph_99a8 {'orph_99e0': (1, 0)}
+   orph_99cc {'orph_9a10': (1, 0)}
+   orph_c71d0 {'orph_cd154': (1, 0)}
+   orph_da880 {'memset': (1, 0)}
+   orph_1ce61c {'orph_1ce678': (1, 0)}
+   orph_1d8df8 {'func_0x0019ef4c': (1, 0)}
+4528 functions compared, 2 with functions whose callee SETS differ (30 skipped; 53 more differ only through shared tail code)
+1 orph_da880 STOCK-ONLY {'memset': 1} OURS-ONLY {}
+1 orph_1d8df8 STOCK-ONLY {'func_0x0019ef4c': 1} OURS-ONLY {}

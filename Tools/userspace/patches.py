@@ -30,5 +30,5 @@ PATCHES = {
 
 # functions whose text is complete except for stated, understood gaps (recorded in the ledger status column)
 NOTES = {
-    '_ShCompile': 'converted (4 constant-selector EH dispatch `bctr` sites at 0x97ba14bc/15e0/17ac/1854 are shown as indirect calls: Ghidra\'s decompiler process dies when their landing-pad targets join the flow; target blocks are listed in unowned_blocks.tsv)',
+    '_ShCompile': 'converted (four constant-selector switch `bctr` sites rewritten as direct `b` in the analysed copy so the decompiler follows them; see gs/PatchConstSwitch.java)',
 }

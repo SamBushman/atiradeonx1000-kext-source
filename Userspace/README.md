@@ -51,17 +51,33 @@ tail-call edge itself. `LOWCOUNT` (informational) lists functions where the stoc
 * an undeclared global typed `unsigned` made gcc delete an `x < 0` branch (`___cxa_get_globals`): undeclared globals now default to signed.
 * AltiVec (`vec16`, `vectorPermute`, `vectorConditionalSelect`) in the GLDriver memcpy/blit helpers.
 
+### Code that no function owns - now transcribed too
+
+After the first pass, `unowned_blocks.tsv` listed everything in `__text` that no Ghidra function claims. Two kinds were real code and are now
+transcribed as companion functions (each compiles as C and passes the same callee check):
+
+* `landing_pads/` - C++ exception landing pads (blocks that end in `_Unwind_Resume`; only the unwinder reaches them, so no decompile of the owner
+  contains them). 566 in GLDriver, 44 in libGLProgrammability, named `eh_pad_<addr>`. Entry points come from the binary's own exception tables:
+  `Tools/userspace/lsda.py` decodes `__eh_frame` + `__gcc_except_tab` into `eh_callsites.tsv` (which call ranges of which function jump to which
+  pad, and whether it is a cleanup or a catch). Every landing pad in those tables is now covered (567 / 40). A pad runs in its owner's frame, so it
+  shows `unaff_r*` pseudo-registers for the owner's saved registers. `pad_owners.tsv` names the owner.
+* `unowned_code/` - code reached only through data (indirect leaf functions such as GLDriver's 40 `mulli/addi/stw/blr` accessors, case-like
+  blocks): 525 in GLDriver, 40 in libGLProgrammability, named `orph_<addr>`.
+
+What is still unowned (`unowned_blocks.tsv`): alignment padding, embedded switch offset tables (data), register save/restore millicode entry points
+(compiler prologue/epilogue helpers, nothing to write in C) and `switch-code`: case bodies of switches Ghidra recovered, which are inside the
+owner's decompile even though the owner's recorded body does not list them (the check for callees lost there reports 0).
+
+`_ShCompile` (libGLProgrammability) is complete: its four constant-selector dispatch `bctr`s are rewritten as direct `b` in the analysed copy of the
+binary (`gs/PatchConstSwitch.java`; the stock file is untouched). The earlier decompiler crash was a JumpTable override left under the patched
+instruction, not the target code.
+
 ### Known residuals (explained, not hidden)
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
-* libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`), name aliases
-  (`__register_frame_table`, `std::__default_alloc_template<true,0>::_Lock`), and two libstdc++ throw paths (`std::operator+`, `_ShCompile`
-  `__throw_length_error`) that Ghidra proved unreachable.
-* `libGLProgrammability` `_ShCompile`: four constant-selector EH-dispatch sites are left as indirect calls - Ghidra's decompiler process crashes
-  when their landing-pad targets join the flow (ledger status says so; the target blocks are in `unowned_blocks.tsv`).
-* C++ exception landing pads (blocks ending in `_Unwind_Resume`, 328 in GLDriver / 32 in libGLProgrammability) are reachable only through the
-  unwinder, so no decompile contains them. They are enumerated, with their owner function and callees, in `unowned_blocks.tsv` next to
-  `switch-code` (case blocks after a table), `table`, `millicode` and `padding` blocks; `coverage.txt` is the same accounting by bytes.
+* libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`, a `memset` in one orphan), name aliases
+  (`__register_frame_table`, `std::__default_alloc_template<true,0>::_Lock`), a call to a bare `blr` stub, and two libstdc++ range checks Ghidra
+  proved unreachable (`_ShCompile`: `if (0 > max_size) __throw_length_error`; `std::operator+`: `if (0 > size()) __throw_out_of_range`).
 
 ### Caveats of any machine transcription
 

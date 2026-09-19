@@ -12,6 +12,18 @@ public class PatchConstSwitch extends GhidraScript {
     @Override
     public void run() throws Exception {
         Pattern lwzc = Pattern.compile("^(0x[0-9a-fA-F]+|-?\\d+)\\((r\\d+)\\)$");
+        // a JumpTable override under a patched (no longer indirect) instruction kills the decompiler process: drop the function's overrides first
+        java.util.HashSet<String> done = new java.util.HashSet<>();
+        for (String arg : getScriptArgs()) {
+            Address a0 = currentProgram.getAddressFactory().getDefaultAddressSpace().getAddress(arg.replace("0x", ""));
+            ghidra.program.model.listing.Function f0 = getFunctionContaining(a0);
+            if (f0 == null || !done.add(f0.getEntryPoint().toString())) continue;
+            java.util.ArrayList<ghidra.program.model.symbol.Symbol> del = new java.util.ArrayList<>();
+            ghidra.program.model.symbol.SymbolIterator it = currentProgram.getSymbolTable().getChildren(f0.getSymbol());
+            while (it.hasNext()) { ghidra.program.model.symbol.Symbol s = it.next(); if (s.getName().equals("override")) del.add(s); }
+            for (ghidra.program.model.symbol.Symbol s : del) { ghidra.program.model.symbol.SymbolIterator i2 = currentProgram.getSymbolTable().getChildren(s); java.util.ArrayList<ghidra.program.model.symbol.Symbol> k = new java.util.ArrayList<>(); while (i2.hasNext()) k.add(i2.next()); for (ghidra.program.model.symbol.Symbol c : k) { ghidra.program.model.symbol.SymbolIterator i3 = currentProgram.getSymbolTable().getChildren(c); java.util.ArrayList<ghidra.program.model.symbol.Symbol> g = new java.util.ArrayList<>(); while (i3.hasNext()) g.add(i3.next()); for (ghidra.program.model.symbol.Symbol x : g) x.delete(); c.delete(); } s.delete(); }
+            println("removed override namespaces of " + f0.getName() + ": " + del.size());
+        }
         for (String arg : getScriptArgs()) {
             Address bctr = currentProgram.getAddressFactory().getDefaultAddressSpace().getAddress(arg.replace("0x", ""));
             Instruction bi = getInstructionAt(bctr);

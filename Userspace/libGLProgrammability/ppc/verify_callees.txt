@@ -1,5 +1,4 @@
-SWITCH-GAPS: 1 jump-table functions with a callee in their unowned case blocks that the recompile never calls
-   _ShCompile {'sprintf': 1, 'string': 1}
+SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
 LOWCOUNT: 7 functions where stock calls some callee more often than the recompile (info)
    yy_flex_alloc {'malloc': (1, 0)}
    yy_flex_realloc {'realloc': (1, 0)}
