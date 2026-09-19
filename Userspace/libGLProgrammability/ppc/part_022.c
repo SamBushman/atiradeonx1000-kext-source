@@ -1,5 +1,767 @@
 #include "decls.h"
 
+/* std__string__rfind_97c15b28 @ 0x97c15b28 (92 bytes) */
+int std__string__rfind_97c15b28(this, param_1, param_2)
+  unsigned char * this;
+  int param_1;
+  ulong param_2;
+{
+  bool bVar1;
+  int iVar2;
+  uint uVar3;
+  
+  iVar2 = *(int *)(*(int *)this + -0xc);
+  if (iVar2 != 0) {
+    uVar3 = iVar2 - 1;
+    if (param_2 < uVar3) {
+      uVar3 = param_2;
+    }
+    if (uVar3 != 0xffffffff) {
+      do {
+        if (*(char *)(*(int *)this + uVar3) == param_1) {
+          return uVar3;
+        }
+        bVar1 = uVar3 != 0;
+        uVar3 = uVar3 - 1;
+      } while (bVar1);
+    }
+  }
+  return 0xffffffff;
+}
+
+/* std__string__find_first_of @ 0x97c15b84 (12 bytes) */
+int std__string__find_first_of(this, param_1, param_2)
+  unsigned char * this;
+  unsigned char * param_1;
+  ulong param_2;
+{
+  find_first_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
+  return;
+}
+
+/* std__string__find_first_of_97c15b90 @ 0x97c15b90 (152 bytes) */
+int std__string__find_first_of_97c15b90(this, param_1, param_2, param_3)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+  ulong param_3;
+{
+  int iVar1;
+  void *pvVar2;
+  
+  if ((param_3 != 0) && (iVar1 = *(int *)this, param_2 < *(uint *)(iVar1 + -0xc))) {
+    do {
+      pvVar2 = _memchr(param_1,(int)*(char *)(iVar1 + param_2),param_3);
+      if (pvVar2 != (void *)0x0) {
+        return param_2;
+      }
+      param_2 = param_2 + 1;
+      iVar1 = *(int *)this;
+    } while (param_2 < *(uint *)(iVar1 + -0xc));
+  }
+  return 0xffffffff;
+}
+
+/* std__string__find_first_of_97c15c28 @ 0x97c15c28 (72 bytes) */
+int std__string__find_first_of_97c15c28(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+{
+  size_t sVar1;
+  
+  sVar1 = _strlen(param_1);
+  find_first_of(this,param_1,param_2,sVar1);
+  return;
+}
+
+/* std__string__find_first_of_97c15c70 @ 0x97c15c70 (4 bytes) */
+int std__string__find_first_of_97c15c70(this, param_1, param_2)
+  unsigned char * this;
+  int param_1;
+  ulong param_2;
+{
+  find(this,param_1,param_2);
+  return;
+}
+
+/* std__string__find_last_of @ 0x97c15c74 (12 bytes) */
+int std__string__find_last_of(this, param_1, param_2)
+  unsigned char * this;
+  unsigned char * param_1;
+  ulong param_2;
+{
+  find_last_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
+  return;
+}
+
+/* std__string__find_last_of_97c15c80 @ 0x97c15c80 (144 bytes) */
+int std__string__find_last_of_97c15c80(this, param_1, param_2, param_3)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+  ulong param_3;
+{
+  bool bVar1;
+  int iVar2;
+  void *pvVar3;
+  uint uVar4;
+  
+  iVar2 = *(int *)this;
+  if ((*(int *)(iVar2 + -0xc) == 0) || (param_3 == 0)) {
+LAB_97c15cf8:
+    uVar4 = 0xffffffff;
+  }
+  else {
+    uVar4 = *(int *)(iVar2 + -0xc) - 1;
+    if (param_2 < uVar4) {
+      uVar4 = param_2;
+    }
+    while (pvVar3 = _memchr(param_1,(int)*(char *)(iVar2 + uVar4),param_3), pvVar3 == (void *)0x0) {
+      bVar1 = uVar4 == 0;
+      uVar4 = uVar4 - 1;
+      if (bVar1) goto LAB_97c15cf8;
+      iVar2 = *(int *)this;
+    }
+  }
+  return uVar4;
+}
+
+/* std__string__find_last_of_97c15d10 @ 0x97c15d10 (72 bytes) */
+int std__string__find_last_of_97c15d10(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+{
+  size_t sVar1;
+  
+  sVar1 = _strlen(param_1);
+  find_last_of(this,param_1,param_2,sVar1);
+  return;
+}
+
+/* std__string__find_last_of_97c15d58 @ 0x97c15d58 (4 bytes) */
+int std__string__find_last_of_97c15d58(this, param_1, param_2)
+  unsigned char * this;
+  int param_1;
+  ulong param_2;
+{
+  rfind(this,param_1,param_2);
+  return;
+}
+
+/* std__string__find_first_not_of @ 0x97c15d5c (12 bytes) */
+int std__string__find_first_not_of(this, param_1, param_2)
+  unsigned char * this;
+  unsigned char * param_1;
+  ulong param_2;
+{
+  find_first_not_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
+  return;
+}
+
+/* std__string__find_first_not_of_97c15d68 @ 0x97c15d68 (124 bytes) */
+int std__string__find_first_not_of_97c15d68(this, param_1, param_2, param_3)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+  ulong param_3;
+{
+  int iVar1;
+  void *pvVar2;
+  
+  iVar1 = *(int *)this;
+  if (param_2 < *(uint *)(iVar1 + -0xc)) {
+    do {
+      pvVar2 = _memchr(param_1,(int)*(char *)(iVar1 + param_2),param_3);
+      if (pvVar2 == (void *)0x0) {
+        return param_2;
+      }
+      iVar1 = *(int *)this;
+      param_2 = param_2 + 1;
+    } while (param_2 < *(uint *)(iVar1 + -0xc));
+  }
+  return 0xffffffff;
+}
+
+/* std__string__find_first_not_of_97c15de4 @ 0x97c15de4 (72 bytes) */
+int std__string__find_first_not_of_97c15de4(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+{
+  size_t sVar1;
+  
+  sVar1 = _strlen(param_1);
+  find_first_not_of(this,param_1,param_2,sVar1);
+  return;
+}
+
+/* std__string__find_first_not_of_97c15e2c @ 0x97c15e2c (68 bytes) */
+int std__string__find_first_not_of_97c15e2c(this, param_1, param_2)
+  unsigned char * this;
+  int param_1;
+  ulong param_2;
+{
+  while( true ) {
+    if (*(uint *)(*(int *)this + -0xc) <= param_2) {
+      return 0xffffffff;
+    }
+    if (*(char *)(*(int *)this + param_2) != param_1) break;
+    param_2 = param_2 + 1;
+  }
+  return param_2;
+}
+
+/* std__string__find_last_not_of @ 0x97c15e70 (12 bytes) */
+int std__string__find_last_not_of(this, param_1, param_2)
+  unsigned char * this;
+  unsigned char * param_1;
+  ulong param_2;
+{
+  find_last_not_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
+  return;
+}
+
+/* std__string__find_last_not_of_97c15e7c @ 0x97c15e7c (136 bytes) */
+int std__string__find_last_not_of_97c15e7c(this, param_1, param_2, param_3)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+  ulong param_3;
+{
+  bool bVar1;
+  int iVar2;
+  void *pvVar3;
+  uint uVar4;
+  
+  iVar2 = *(int *)this;
+  if (*(int *)(iVar2 + -0xc) == 0) {
+LAB_97c15eec:
+    uVar4 = 0xffffffff;
+  }
+  else {
+    uVar4 = *(int *)(iVar2 + -0xc) - 1;
+    if (param_2 < uVar4) {
+      uVar4 = param_2;
+    }
+    while (pvVar3 = _memchr(param_1,(int)*(char *)(iVar2 + uVar4),param_3), pvVar3 != (void *)0x0) {
+      bVar1 = uVar4 == 0;
+      uVar4 = uVar4 - 1;
+      if (bVar1) goto LAB_97c15eec;
+      iVar2 = *(int *)this;
+    }
+  }
+  return uVar4;
+}
+
+/* std__string__find_last_not_of_97c15f04 @ 0x97c15f04 (72 bytes) */
+int std__string__find_last_not_of_97c15f04(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+{
+  size_t sVar1;
+  
+  sVar1 = _strlen(param_1);
+  find_last_not_of(this,param_1,param_2,sVar1);
+  return;
+}
+
+/* std__string__find_last_not_of_97c15f4c @ 0x97c15f4c (84 bytes) */
+int std__string__find_last_not_of_97c15f4c(this, param_1, param_2)
+  unsigned char * this;
+  int param_1;
+  ulong param_2;
+{
+  bool bVar1;
+  int iVar2;
+  uint uVar3;
+  
+  iVar2 = *(int *)(*(int *)this + -0xc);
+  if (iVar2 != 0) {
+    uVar3 = iVar2 - 1;
+    if (param_2 < uVar3) {
+      uVar3 = param_2;
+    }
+    do {
+      if (*(char *)(*(int *)this + uVar3) != param_1) {
+        return uVar3;
+      }
+      bVar1 = uVar3 != 0;
+      uVar3 = uVar3 - 1;
+    } while (bVar1);
+  }
+  return 0xffffffff;
+}
+
+/* std__string__substr @ 0x97c15fa0 (112 bytes) */
+int std__string__substr(param_1, param_2)
+  ulong param_1;
+  ulong param_2;
+{
+  uint in_r5;
+  ulong in_r6;
+  
+  if (*(uint *)(*(int *)param_2 + -0xc) < in_r5) {
+    std____throw_out_of_range("basic_string__substr");
+  }
+  string((unsigned char *)param_1,(unsigned char *)param_2,in_r5,in_r6);
+  return param_1;
+}
+
+/* std__string__compare @ 0x97c16010 (96 bytes) */
+int std__string__compare(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  int iVar1;
+  uint *puVar2;
+  uint uVar3;
+  uint uVar4;
+  uint local_20;
+  uint local_1c [4];
+  
+  puVar2 = local_1c;
+  uVar3 = *(uint *)((int)*(void **)this + -0xc);
+  local_20 = uVar3;
+  uVar4 = *(uint *)((int)*(void **)param_1 + -0xc);
+  local_1c[0] = uVar4;
+  if (uVar3 <= uVar4) {
+    puVar2 = &local_20;
+  }
+  iVar1 = _memcmp(*(void **)this,*(void **)param_1,*puVar2);
+  if (iVar1 == 0) {
+    iVar1 = uVar3 - uVar4;
+  }
+  return iVar1;
+}
+
+/* std__string__compare_97c16070 @ 0x97c16070 (188 bytes) */
+int std__string__compare_97c16070(this, param_1, param_2, param_3)
+  unsigned char * this;
+  ulong param_1;
+  ulong param_2;
+  unsigned char * param_3;
+{
+  uint uVar1;
+  uint *puVar2;
+  int iVar3;
+  void *pvVar4;
+  uint uVar5;
+  ulong uStack00000020;
+  uint local_30;
+  uint local_2c;
+  uint local_28 [5];
+  
+  iVar3 = *(int *)this;
+  uVar5 = *(uint *)(iVar3 + -0xc);
+  pvVar4 = *(void **)param_3;
+  local_28[0] = *(uint *)((int)pvVar4 + -0xc);
+  uStack00000020 = param_2;
+  if (uVar5 < param_1) {
+    std____throw_out_of_range("basic_string__compare");
+    iVar3 = *(int *)this;
+    pvVar4 = *(void **)param_3;
+  }
+  uVar1 = local_28[0];
+  local_30 = uVar5 - param_1;
+  puVar2 = &STACKARG(0x20);
+  if (local_30 <= uStack00000020) {
+    puVar2 = &local_30;
+  }
+  uVar5 = *puVar2;
+  puVar2 = local_28;
+  local_2c = uVar5;
+  if (uVar5 <= local_28[0]) {
+    puVar2 = &local_2c;
+  }
+  iVar3 = _memcmp((void *)(iVar3 + param_1),pvVar4,*puVar2);
+  if (iVar3 == 0) {
+    iVar3 = uVar5 - uVar1;
+  }
+  return iVar3;
+}
+
+/* std__string__compare_97c1612c @ 0x97c1612c (240 bytes) */
+int std__string__compare_97c1612c(this, param_1, param_2, param_3, param_4, param_5)
+  unsigned char * this;
+  ulong param_1;
+  ulong param_2;
+  unsigned char * param_3;
+  ulong param_4;
+  ulong param_5;
+{
+  uint *puVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  ulong uStack00000020;
+  ulong uStack0000002c;
+  uint local_30;
+  uint local_2c;
+  uint local_28;
+  uint local_24 [2];
+  
+  iVar2 = *(int *)this;
+  uVar5 = *(uint *)(iVar2 + -0xc);
+  iVar3 = *(int *)param_3;
+  uVar4 = *(uint *)(iVar3 + -0xc);
+  uStack00000020 = param_2;
+  uStack0000002c = param_5;
+  if ((uVar5 < param_1) || (uVar4 < param_4)) {
+    std____throw_out_of_range("basic_string__compare");
+    iVar2 = *(int *)this;
+    iVar3 = *(int *)param_3;
+  }
+  local_30 = uVar5 - param_1;
+  puVar1 = &STACKARG(0x20);
+  if (local_30 <= uStack00000020) {
+    puVar1 = &local_30;
+  }
+  local_2c = uVar4 - param_4;
+  uVar4 = *puVar1;
+  local_28 = uVar4;
+  puVar1 = &STACKARG(0x2c);
+  if (local_2c <= uStack0000002c) {
+    puVar1 = &local_2c;
+  }
+  uVar5 = *puVar1;
+  puVar1 = local_24;
+  local_24[0] = uVar5;
+  if (uVar4 <= uVar5) {
+    puVar1 = &local_28;
+  }
+  iVar2 = _memcmp((void *)(iVar2 + param_1),(void *)(iVar3 + param_4),*puVar1);
+  if (iVar2 == 0) {
+    iVar2 = uVar4 - uVar5;
+  }
+  return iVar2;
+}
+
+/* std__string__compare_97c1621c @ 0x97c1621c (112 bytes) */
+int std__string__compare_97c1621c(this, param_1)
+  unsigned char * this;
+  char *param_1;
+{
+  size_t sVar1;
+  int iVar2;
+  size_t *psVar3;
+  void *pvVar4;
+  uint uVar5;
+  uint local_30;
+  size_t local_2c [6];
+  
+  pvVar4 = *(void **)this;
+  uVar5 = *(uint *)((int)pvVar4 + -0xc);
+  local_30 = uVar5;
+  sVar1 = _strlen(param_1);
+  psVar3 = local_2c;
+  local_2c[0] = sVar1;
+  if (uVar5 <= sVar1) {
+    psVar3 = &local_30;
+  }
+  iVar2 = _memcmp(pvVar4,param_1,*psVar3);
+  if (iVar2 == 0) {
+    iVar2 = uVar5 - sVar1;
+  }
+  return iVar2;
+}
+
+/* std__string__compare_97c1628c @ 0x97c1628c (188 bytes) */
+int std__string__compare_97c1628c(this, param_1, param_2, param_3)
+  unsigned char * this;
+  ulong param_1;
+  ulong param_2;
+  char *param_3;
+{
+  uint *puVar1;
+  size_t sVar2;
+  size_t *psVar3;
+  int iVar4;
+  uint uVar5;
+  ulong uStack00000020;
+  uint local_30;
+  uint local_2c;
+  size_t local_28 [4];
+  
+  iVar4 = *(int *)this;
+  uVar5 = *(uint *)(iVar4 + -0xc);
+  uStack00000020 = param_2;
+  if (uVar5 < param_1) {
+    std____throw_out_of_range("basic_string__compare");
+    iVar4 = *(int *)this;
+  }
+  sVar2 = _strlen(param_3);
+  local_30 = uVar5 - param_1;
+  local_28[0] = sVar2;
+  puVar1 = &STACKARG(0x20);
+  if (local_30 <= uStack00000020) {
+    puVar1 = &local_30;
+  }
+  uVar5 = *puVar1;
+  psVar3 = local_28;
+  local_2c = uVar5;
+  if (uVar5 <= sVar2) {
+    psVar3 = &local_2c;
+  }
+  iVar4 = _memcmp((void *)(iVar4 + param_1),param_3,*psVar3);
+  if (iVar4 == 0) {
+    iVar4 = uVar5 - sVar2;
+  }
+  return iVar4;
+}
+
+/* std__string__compare_97c16348 @ 0x97c16348 (220 bytes) */
+int std__string__compare_97c16348(this, param_1, param_2, param_3, param_4)
+  unsigned char * this;
+  ulong param_1;
+  ulong param_2;
+  char *param_3;
+  ulong param_4;
+{
+  size_t *psVar1;
+  uint *puVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  ulong uStack00000020;
+  ulong uStack00000028;
+  size_t local_30;
+  uint local_2c;
+  uint local_28;
+  uint local_24 [3];
+  
+  iVar3 = *(int *)this;
+  uVar4 = *(uint *)(iVar3 + -0xc);
+  uStack00000020 = param_2;
+  uStack00000028 = param_4;
+  if (uVar4 < param_1) {
+    std____throw_out_of_range("basic_string__compare");
+    iVar3 = *(int *)this;
+  }
+  local_30 = _strlen(param_3);
+  psVar1 = &STACKARG(0x28);
+  if (local_30 <= uStack00000028) {
+    psVar1 = &local_30;
+  }
+  local_2c = uVar4 - param_1;
+  uVar4 = *psVar1;
+  local_24[0] = uVar4;
+  puVar2 = &STACKARG(0x20);
+  if (local_2c <= uStack00000020) {
+    puVar2 = &local_2c;
+  }
+  uVar5 = *puVar2;
+  puVar2 = local_24;
+  local_28 = uVar5;
+  if (uVar5 <= uVar4) {
+    puVar2 = &local_28;
+  }
+  iVar3 = _memcmp((void *)(iVar3 + param_1),param_3,*puVar2);
+  if (iVar3 == 0) {
+    iVar3 = uVar5 - uVar4;
+  }
+  return iVar3;
+}
+
+/* std__string___Rep__operator__ @ 0x97c16424 (12 bytes) */
+int std__string___Rep__operator__(this, param_1)
+  unsigned char * this;
+  ulong param_1;
+{
+  return this + param_1 + 0xc;
+}
+
+/* std__string___Rep___S_create @ 0x97c16430 (384 bytes) */
+int std__string___Rep___S_create(param_1, param_2)
+  ulong param_1;
+  unsigned char * param_2;
+{
+  undefined4 uVar1;
+  undefined *puVar2;
+  uint uVar3;
+  undefined4 *puVar4;
+  char *pcVar5;
+  int iVar6;
+  ulong uVar7;
+  char in_RESERVE;
+  byte in_cr0;
+  
+  if (0x3ffffffc < param_1) {
+    std____throw_length_error("basic_string___S_create");
+  }
+  puVar2 = PTR__S_force_new_a7b7c0e8;
+  uVar3 = param_1 + 0x1d;
+  uVar7 = param_1 + 0xd;
+  if (uVar3 < 0x1001) {
+    if (uVar7 < 0x81) goto LAB_97c164a4;
+    uVar3 = 0x80 - (uVar3 & 0x7f) & 0x7f;
+  }
+  else {
+    uVar3 = 0x1000 - (uVar3 & 0xfff) & 0xfff;
+  }
+  param_1 = param_1 + uVar3;
+  uVar7 = param_1 + 0xd;
+LAB_97c164a4:
+  puVar4 = (undefined4 *)0x0;
+  if (uVar7 != 0) {
+    if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
+      pcVar5 = _getenv("GLIBCPP_FORCE_NEW");
+      if (pcVar5 == (char *)0x0) {
+        do {
+          if (in_RESERVE != '\0') {
+            uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
+            *(undefined4 *)puVar2 = uVar1;
+            in_cr0 = 2;
+          }
+        } while (!(bool)(in_cr0 >> 1 & 1));
+      }
+      else {
+        do {
+          if (in_RESERVE != '\0') {
+            uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + 1,0,puVar2);
+            *(undefined4 *)puVar2 = uVar1;
+            in_cr0 = 2;
+          }
+        } while (!(bool)(in_cr0 >> 1 & 1));
+      }
+    }
+    puVar2 = PTR__S_free_list_a7b7c0e4;
+    if ((uVar7 < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
+      iVar6 = (uVar7 + 7 >> 1 & 0x7ffffffc) - 4;
+      _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
+      puVar4 = *(undefined4 **)(puVar2 + iVar6);
+      if (puVar4 == (undefined4 *)0x0) {
+        puVar4 = (undefined4 *)
+                 std____default_alloc_template_true_0____S_refill(uVar7 + 7 & 0xfffffff8);
+      }
+      else {
+        *(undefined4 *)(puVar2 + iVar6) = *puVar4;
+      }
+      if (puVar4 == (undefined4 *)0x0) {
+        std____throw_bad_alloc();
+      }
+      _pthread_mutex_unlock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
+    }
+    else {
+      puVar4 = ((int (*)())operator_new)(uVar7);
+    }
+  }
+  puVar4[1] = param_1;
+  *puVar4 = 0;
+  puVar4[2] = 0;
+  return;
+}
+
+/* std__string___Rep___M_destroy @ 0x97c165cc (152 bytes) */
+int std__string___Rep___M_destroy(param_1)
+  unsigned char * param_1;
+{
+  undefined *puVar1;
+  undefined *puVar2;
+  int iVar3;
+  
+  puVar2 = PTR__S_free_list_a7b7c0e4;
+  puVar1 = PTR__S_node_allocator_lock_a7b7c0e0;
+  if ((*(int *)(param_1 + 4) + 0xdU < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
+    iVar3 = (*(int *)(param_1 + 4) + 0x14U >> 1 & 0x7ffffffc) - 4;
+    _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
+    *(undefined4 *)param_1 = *(undefined4 *)(puVar2 + iVar3);
+    *(unsigned char **)(puVar2 + iVar3) = param_1;
+    _pthread_mutex_unlock((pthread_mutex_t *)puVar1);
+  }
+  else {
+    operator_delete(param_1);
+  }
+  return;
+}
+
+/* std__string___Rep___M_clone @ 0x97c16674 (148 bytes) */
+int std__string___Rep___M_clone(this, param_1, param_2)
+  unsigned char * this;
+  unsigned char * param_1;
+  ulong param_2;
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  undefined4 uVar4;
+  uint uVar3;
+  
+  uVar1 = *(int *)this + param_2;
+  uVar3 = uVar1;
+  if (((*(uint *)(this + 4) < uVar1) && (0xfe3 < uVar1)) &&
+     (uVar3 = *(uint *)(this + 4) << 1, uVar3 < uVar1)) {
+    uVar3 = uVar1;
+  }
+  puVar2 = (undefined4 *)_S_create(uVar3,param_1);
+  uVar4 = 0;
+  if (*(size_t *)this != 0) {
+    _memcpy(puVar2 + 3,this + 0xc,*(size_t *)this);
+    uVar4 = *(undefined4 *)this;
+  }
+  *puVar2 = uVar4;
+  return puVar2 + 3;
+}
+
+/* std__operator_ @ 0x97c16708 (164 bytes) */
+int std__operator_(param_1, param_2)
+  char *param_1;
+  unsigned char * param_2;
+{
+  size_t sVar1;
+  unsigned char * in_r5;
+  undefined4 local_30;
+  undefined4 local_2c;
+  
+  sVar1 = _strlen((char *)param_2);
+  string__string((unsigned char *)param_1);
+  string__reserve((unsigned char *)param_1,sVar1 + *(int *)(*(int *)in_r5 + -0xc));
+  string___M_iend();
+  string___M_iend();
+  string__replace((unsigned char *)param_1,local_30,local_2c,param_2,param_2 + sVar1);
+  string__append((unsigned char *)param_1,in_r5);
+  return param_1;
+}
+
+/* std__operator__97c167c4 @ 0x97c167c4 (108 bytes) */
+int std__operator__97c167c4(param_1, param_2)
+  int param_1;
+  unsigned char * param_2;
+{
+  undefined3 in_register_0000000c;
+  unsigned char * this;
+  unsigned char * in_r5;
+  
+  this = (unsigned char *)CONCAT31(in_register_0000000c,param_1);
+  string__string(this);
+  string__reserve(this,*(int *)(*(int *)in_r5 + -0xc) + 1);
+  string__append(this,1,(char)param_2);
+  string__append(this,in_r5);
+  return this;
+}
+
+/* std__operator__97c16848 @ 0x97c16848 (68 bytes) */
+int std__operator__97c16848(param_1, param_2)
+  unsigned char * param_1;
+  unsigned char * param_2;
+{
+  unsigned char * in_r5;
+  
+  string__string(param_1,param_2);
+  string__append(param_1,in_r5);
+  return param_1;
+}
+
+/* __gnu_cxx__operator__ @ 0x97c168a4 (24 bytes) */
+int __gnu_cxx__operator__(param_1, param_2)
+  unsigned char * param_1;
+  unsigned char * param_2;
+{
+  return *(int *)param_1 == *(int *)param_2;
+}
+
 /* __gnu_cxx__operator___97c168bc @ 0x97c168bc (24 bytes) */
 int __gnu_cxx__operator___97c168bc(param_1, param_2)
   unsigned char * param_1;
@@ -173,8 +935,8 @@ int std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__(par
   undefined4 local_2c;
   
   string___gnu_cxx____normal_iterator_char__std__string__(asStack_50,param_4,param_5,auStack_40);
-  _M_ibegin();
-  _M_iend();
+  std__string___M_ibegin();
+  std__string___M_iend();
   psVar1 = _M_replace_safe___gnu_cxx____normal_iterator_char__std__string__
                      (asStack_50,param_2,param_3,local_30,local_2c);
   ~string(asStack_50);
@@ -197,8 +959,8 @@ int std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string
   
   string___gnu_cxx____normal_iterator_char_const__std__string__
             (asStack_50,param_4,param_5,auStack_40);
-  _M_ibegin();
-  _M_iend();
+  std__string___M_ibegin();
+  std__string___M_iend();
   psVar1 = _M_replace_safe___gnu_cxx____normal_iterator_char__std__string__
                      (asStack_50,param_2,param_3,local_30,local_2c);
   ~string(asStack_50);
@@ -220,8 +982,8 @@ int std__string___M_replace_char__(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_2c;
   
   string_char__(asStack_50,param_4,param_5,aaStack_40);
-  _M_ibegin();
-  _M_iend();
+  std__string___M_ibegin();
+  std__string___M_iend();
   psVar1 = _M_replace_safe___gnu_cxx____normal_iterator_char__std__string__
                      (asStack_50,param_2,param_3,local_30,local_2c);
   ~string(asStack_50);
@@ -243,8 +1005,8 @@ int std__string___M_replace_char_const__(param_1, param_2, param_3, param_4, par
   undefined4 local_2c;
   
   string_char_const__(asStack_50,param_4,param_5,aaStack_40);
-  _M_ibegin();
-  _M_iend();
+  std__string___M_ibegin();
+  std__string___M_iend();
   psVar1 = _M_replace_safe___gnu_cxx____normal_iterator_char__std__string__
                      (asStack_50,param_2,param_3,local_30,local_2c);
   ~string(asStack_50);
@@ -266,7 +1028,7 @@ int std__string___M_replace_safe___gnu_cxx____normal_iterator_char__std__string_
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string___M_replace");
   }
-  _M_ibegin();
+  std__string___M_ibegin();
   _M_mutate(this,param_2 - local_30,param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     _S_copy_chars(*(int *)this + (param_2 - local_30),param_4,param_5);
@@ -289,7 +1051,7 @@ int std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__s
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string___M_replace");
   }
-  _M_ibegin();
+  std__string___M_ibegin();
   _M_mutate(this,param_2 - local_30,param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     _S_copy_chars(*(int *)this + (param_2 - local_30),param_4,param_5);
@@ -312,7 +1074,7 @@ int std__string___M_replace_safe_char__(this, param_2, param_3, param_4, param_5
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string___M_replace");
   }
-  _M_ibegin();
+  std__string___M_ibegin();
   _M_mutate(this,param_2 - local_30,param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     _memcpy((void *)(*(int *)this + (param_2 - local_30)),param_4,uVar1);
@@ -335,7 +1097,7 @@ int std__string___M_replace_safe_char_const__(this, param_2, param_3, param_4, p
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string___M_replace");
   }
-  _M_ibegin();
+  std__string___M_ibegin();
   _M_mutate(this,param_2 - local_30,param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     _memcpy((void *)(*(int *)this + (param_2 - local_30)),param_4,uVar1);
@@ -529,369 +1291,6 @@ int ___cxa_pure_virtual()
   if (pvVar1 != (void *)0x0) {
     _free(pvVar1);
   }
-  return;
-}
-
-/* operator_delete @ 0x97c1734c (40 bytes) */
-int operator_delete(param_1)
-  void *param_1;
-{
-  if (param_1 != (void *)0x0) {
-    _free(param_1);
-  }
-  return;
-}
-
-/* std__allocator_char___allocator @ 0x97c17374 (4 bytes) */
-int std__allocator_char___allocator()
-{
-  return;
-}
-
-/* std__allocator_char___allocator_97c17378 @ 0x97c17378 (4 bytes) */
-int std__allocator_char___allocator_97c17378()
-{
-  return;
-}
-
-/* std__allocator_char___allocator_97c1737c @ 0x97c1737c (4 bytes) */
-int std__allocator_char___allocator_97c1737c()
-{
-  return;
-}
-
-/* std__allocator_char___allocator_97c17380 @ 0x97c17380 (4 bytes) */
-int std__allocator_char___allocator_97c17380(param_1)
-  unsigned char * param_1;
-{
-  return;
-}
-
-/* std__allocator_char___allocator_97c17384 @ 0x97c17384 (4 bytes) */
-int std__allocator_char___allocator_97c17384(param_1)
-  unsigned char * param_1;
-{
-  return;
-}
-
-/* std__allocator_char___allocator_97c17388 @ 0x97c17388 (4 bytes) */
-int std__allocator_char___allocator_97c17388(param_1)
-  unsigned char * param_1;
-{
-  return;
-}
-
-/* std__allocator_char____allocator @ 0x97c1738c (8 bytes) */
-int std__allocator_char____allocator(this)
-  unsigned char * this;
-{
-  ~allocator(this);
-  return;
-}
-
-/* std__allocator_char____allocator_97c17394 @ 0x97c17394 (8 bytes) */
-int std__allocator_char____allocator_97c17394(this)
-  unsigned char * this;
-{
-  ~allocator(this);
-  return;
-}
-
-/* std__allocator_char____allocator_97c1739c @ 0x97c1739c (4 bytes) */
-int std__allocator_char____allocator_97c1739c(this)
-  unsigned char * this;
-{
-  return;
-}
-
-/* std__allocator_char___address @ 0x97c173a0 (8 bytes) */
-int std__allocator_char___address(this, param_1)
-  unsigned char * this;
-  char *param_1;
-{
-  return param_1;
-}
-
-/* std__allocator_char___address_97c173a8 @ 0x97c173a8 (8 bytes) */
-int std__allocator_char___address_97c173a8(this, param_1)
-  unsigned char * this;
-  char *param_1;
-{
-  return param_1;
-}
-
-/* std__allocator_char___max_size @ 0x97c173b0 (8 bytes) */
-int std__allocator_char___max_size()
-{
-  return 0xffffffff;
-}
-
-/* std____default_alloc_template_true_0____S_freelist_index @ 0x97c173b8 (16 bytes) */
-int std____default_alloc_template_true_0____S_freelist_index(param_1)
-  ulong param_1;
-{
-  return (param_1 + 7 >> 3) - 1;
-}
-
-/* std____default_alloc_template_true_0____Lock___Lock @ 0x97c173c8 (4 bytes) */
-int std____default_alloc_template_true_0____Lock___Lock(this)
-  unsigned char * this;
-{
-  _Lock(this);
-  return;
-}
-
-/* std____default_alloc_template_true_0____Lock___Lock_97c173cc @ 0x97c173cc (4 bytes) */
-int std____default_alloc_template_true_0____Lock___Lock_97c173cc(this)
-  unsigned char * this;
-{
-  _Lock(this);
-  return;
-}
-
-/* std____default_alloc_template_true_0____Lock___Lock_97c173d0 @ 0x97c173d0 (28 bytes) */
-int std____default_alloc_template_true_0____Lock___Lock_97c173d0(this)
-  unsigned char * this;
-{
-  _pthread_mutex_lock((pthread_mutex_t *)&_S_node_allocator_lock);
-  return;
-}
-
-/* std____default_alloc_template_true_0____Lock____Lock @ 0x97c173ec (8 bytes) */
-int std____default_alloc_template_true_0____Lock____Lock(this)
-  unsigned char * this;
-{
-  ~_Lock(this);
-  return;
-}
-
-/* std____default_alloc_template_true_0____Lock____Lock_97c173f4 @ 0x97c173f4 (8 bytes) */
-int std____default_alloc_template_true_0____Lock____Lock_97c173f4(this)
-  unsigned char * this;
-{
-  ~_Lock(this);
-  return;
-}
-
-/* std____default_alloc_template_true_0____Lock____Lock_97c173fc @ 0x97c173fc (28 bytes) */
-int std____default_alloc_template_true_0____Lock____Lock_97c173fc(this)
-  unsigned char * this;
-{
-  _pthread_mutex_unlock((pthread_mutex_t *)&_S_node_allocator_lock);
-  return;
-}
-
-/* std____default_alloc_template_true_0____S_round_up @ 0x97c17418 (12 bytes) */
-int std____default_alloc_template_true_0____S_round_up(param_1)
-  ulong param_1;
-{
-  return param_1 + 7 & 0xfffffff8;
-}
-
-/* std____default_alloc_template_true_0___allocate @ 0x97c17424 (264 bytes) */
-int std____default_alloc_template_true_0___allocate(param_1)
-  ulong param_1;
-{
-  uint uVar1;
-  char *pcVar2;
-  undefined4 *puVar3;
-  char in_RESERVE;
-  byte in_cr0;
-  unsigned char a_Stack_30 [28];
-  
-  if (_S_force_new == 0) {
-    pcVar2 = _getenv("GLIBCPP_FORCE_NEW");
-    if (pcVar2 == (char *)0x0) {
-      do {
-        if (in_RESERVE != '\0') {
-          _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
-          in_cr0 = 2;
-        }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-    }
-    else {
-      do {
-        if (in_RESERVE != '\0') {
-          _S_force_new = storeWordConditionalIndexed(_S_force_new + 1,0,0xa7b7c00c);
-          in_cr0 = 2;
-        }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-    }
-  }
-  if ((param_1 < 0x81) && (_S_force_new < 1)) {
-    uVar1 = param_1 + 7 >> 1 & 0x7ffffffc;
-    _Lock___Lock(a_Stack_30);
-    puVar3 = *(undefined4 **)(&DAT_a7b7bf90 + uVar1);
-    if (puVar3 == (undefined4 *)0x0) {
-      puVar3 = (undefined4 *)std____default_alloc_template_true_0____S_refill(param_1 + 7 & 0xfffffff8);
-    }
-    else {
-      *(undefined4 *)(&DAT_a7b7bf90 + uVar1) = *puVar3;
-    }
-    if (puVar3 == (undefined4 *)0x0) {
-      std____throw_bad_alloc();
-    }
-    _Lock____Lock(a_Stack_30);
-  }
-  else {
-    puVar3 = ((int (*)())operator_new)(param_1);
-  }
-  return puVar3;
-}
-
-/* std__allocator_char___allocate @ 0x97c17544 (272 bytes) */
-int std__allocator_char___allocate(param_1, param_2)
-  ulong param_1;
-  void *param_2;
-{
-  uint uVar1;
-  undefined4 *puVar2;
-  char *pcVar3;
-  char in_RESERVE;
-  byte bVar4;
-  unsigned char a_Stack_30 [28];
-  
-  bVar4 = (param_2 == (void *)0x0) << 1;
-  puVar2 = (undefined4 *)0x0;
-  if (param_2 != (void *)0x0) {
-    if (__default_alloc_template_true_0____S_force_new == 0) {
-      pcVar3 = _getenv("GLIBCPP_FORCE_NEW");
-      if (pcVar3 == (char *)0x0) {
-        do {
-          if (in_RESERVE != '\0') {
-            __default_alloc_template_true_0____S_force_new =
-                 storeWordConditionalIndexed
-                           (__default_alloc_template_true_0____S_force_new + -1,0,0xa7b7c00c);
-            bVar4 = 2;
-          }
-        } while (!(bool)(bVar4 >> 1 & 1));
-      }
-      else {
-        do {
-          if (in_RESERVE != '\0') {
-            __default_alloc_template_true_0____S_force_new =
-                 storeWordConditionalIndexed
-                           (__default_alloc_template_true_0____S_force_new + 1,0,0xa7b7c00c);
-            bVar4 = 2;
-          }
-        } while (!(bool)(bVar4 >> 1 & 1));
-      }
-    }
-    if ((param_2 < (void *)0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
-      uVar1 = (int)param_2 + 7U >> 1 & 0x7ffffffc;
-      __default_alloc_template_true_0____Lock___Lock(a_Stack_30);
-      puVar2 = *(undefined4 **)(&DAT_a7b7bf90 + uVar1);
-      if (puVar2 == (undefined4 *)0x0) {
-        puVar2 = (undefined4 *)
-                 __default_alloc_template_true_0____S_refill((int)param_2 + 7U & 0xfffffff8);
-      }
-      else {
-        *(undefined4 *)(&DAT_a7b7bf90 + uVar1) = *puVar2;
-      }
-      if (puVar2 == (undefined4 *)0x0) {
-        std____throw_bad_alloc();
-      }
-      __default_alloc_template_true_0____Lock____Lock(a_Stack_30);
-    }
-    else {
-      puVar2 = ((int (*)())operator_new)((ulong)param_2);
-    }
-  }
-  return puVar2;
-}
-
-/* std____default_alloc_template_true_0___deallocate @ 0x97c1766c (136 bytes) */
-int std____default_alloc_template_true_0___deallocate(param_1, param_2)
-  void *param_1;
-  ulong param_2;
-{
-  uint uVar1;
-  unsigned char a_Stack_30 [28];
-  
-  if ((param_2 < 0x81) && (_S_force_new < 1)) {
-    uVar1 = param_2 + 7 >> 1 & 0x7ffffffc;
-    _Lock___Lock(a_Stack_30);
-    *(undefined4 *)param_1 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
-    *(void **)(&DAT_a7b7bf90 + uVar1) = param_1;
-    _Lock____Lock(a_Stack_30);
-  }
-  else {
-    ((int (*)())operator_delete)(param_1);
-  }
-  return;
-}
-
-/* std__allocator_char___deallocate @ 0x97c176f4 (140 bytes) */
-int std__allocator_char___deallocate(this, param_1, param_2)
-  unsigned char * this;
-  char *param_1;
-  ulong param_2;
-{
-  uint uVar1;
-  unsigned char a_Stack_30 [28];
-  
-  if ((param_2 < 0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
-    uVar1 = param_2 + 7 >> 1 & 0x7ffffffc;
-    __default_alloc_template_true_0____Lock___Lock(a_Stack_30);
-    *(undefined4 *)param_1 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
-    *(char **)(&DAT_a7b7bf90 + uVar1) = param_1;
-    __default_alloc_template_true_0____Lock____Lock(a_Stack_30);
-  }
-  else {
-    ((int (*)())operator_delete)(param_1);
-  }
-  return;
-}
-
-/* std__allocator_char___construct @ 0x97c17780 (20 bytes) */
-int std__allocator_char___construct(this, param_1, param_2)
-  unsigned char * this;
-  char *param_1;
-  char *param_2;
-{
-  if (param_1 == (char *)0x0) {
-    return;
-  }
-  *param_1 = *param_2;
-  return;
-}
-
-/* std__allocator_char___destroy @ 0x97c17794 (4 bytes) */
-int std__allocator_char___destroy(param_1)
-  char *param_1;
-{
-  return;
-}
-
-/* std__allocator_wchar_t___allocator @ 0x97c17798 (4 bytes) */
-int std__allocator_wchar_t___allocator()
-{
-  return;
-}
-
-/* std__allocator_wchar_t___allocator_97c1779c @ 0x97c1779c (4 bytes) */
-int std__allocator_wchar_t___allocator_97c1779c()
-{
-  return;
-}
-
-/* std__allocator_wchar_t___allocator_97c177a0 @ 0x97c177a0 (4 bytes) */
-int std__allocator_wchar_t___allocator_97c177a0()
-{
-  return;
-}
-
-/* std__allocator_wchar_t___allocator_97c177a4 @ 0x97c177a4 (4 bytes) */
-int std__allocator_wchar_t___allocator_97c177a4(param_1)
-  unsigned char * param_1;
-{
-  return;
-}
-
-/* std__allocator_wchar_t___allocator_97c177a8 @ 0x97c177a8 (4 bytes) */
-int std__allocator_wchar_t___allocator_97c177a8(param_1)
-  unsigned char * param_1;
-{
   return;
 }
 

@@ -1,5 +1,29 @@
 #include "decls.h"
 
+/* _glTexCoord3d @ 0x92f317b4 (160 bytes) */
+int _glTexCoord3d(param_1, param_2, param_3)
+  undefined8 param_1;
+  undefined8 param_2;
+  undefined8 param_3;
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  undefined1 *local_70 [28];
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
+  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = local_70;
+  }
+                    
+                    
+  (*(code *)puVar2[0x112])(param_1,param_2,param_3,*puVar2);
+  return;
+}
+
 /* _glTexCoord3dv @ 0x92f31854 (124 bytes) */
 int _glTexCoord3dv(param_1)
   undefined8 param_1;
@@ -1434,30 +1458,6 @@ int _glGetColorTableParameterfv(param_1, param_2, param_3)
                     
                     
   (*(code *)puVar2[0x19c])(*puVar2,param_1,param_2,param_3);
-  return;
-}
-
-/* _glGetColorTableParameteriv @ 0x92f338f0 (140 bytes) */
-int _glGetColorTableParameteriv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined1 *local_60 [24];
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
-  }
-                    
-                    
-  (*(code *)puVar2[0x19d])(*puVar2,param_1,param_2,param_3);
   return;
 }
 

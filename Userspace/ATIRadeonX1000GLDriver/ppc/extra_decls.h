@@ -1,1 +1,1 @@
-extern unsigned int NAN;
+extern int NAN;

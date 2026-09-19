@@ -1,5 +1,27 @@
 #include "decls.h"
 
+/* _glDeleteShader @ 0x92f39bb0 (124 bytes) */
+int _glDeleteShader(param_1)
+  undefined8 param_1;
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  undefined1 *local_60 [24];
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
+  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = local_60;
+  }
+                    
+                    
+  (*(code *)puVar2[0x250])(*puVar2,param_1);
+  return;
+}
+
 /* _glDetachShader @ 0x92f39c2c (132 bytes) */
 int _glDetachShader(param_1, param_2)
   undefined8 param_1;
@@ -1401,31 +1423,6 @@ int _glVertexAttrib3sARB(param_1, param_2, param_3, param_4)
                     
                     
   (*(code *)puVar2[0x1e2])(*puVar2,param_1,param_2,param_3,param_4);
-  return;
-}
-
-/* _glVertexAttrib3fARB @ 0x92f3bc98 (172 bytes) */
-int _glVertexAttrib3fARB(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined1 *local_70 [28];
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
-  }
-                    
-                    
-  (*(code *)puVar2[0x1e3])(param_1,param_2,param_3,*puVar2,param_4);
   return;
 }
 

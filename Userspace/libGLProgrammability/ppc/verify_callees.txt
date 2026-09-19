@@ -1,0 +1,23 @@
+SWITCH-GAPS: 1 jump-table functions with a callee in their unowned case blocks that the recompile never calls
+   _ShCompile {'sprintf': 1, 'string': 1}
+LOWCOUNT: 7 functions where stock calls some callee more often than the recompile (info)
+   yy_flex_alloc {'malloc': (1, 0)}
+   yy_flex_realloc {'realloc': (1, 0)}
+   yy_flex_free {'free': (1, 0)}
+   _glpPPShaderToProgramString {'ncpy': (32, 31)}
+   FUN_97c19934 {'parse_lsda_header': (2, 1), 'base_of_encoded_value': (5, 4)}
+   ___register_frame_table {'register_frame_info_table': (1, 0)}
+   eh_rest_world_r10 {'rest_world_eh_r7r8': (1, 0)}
+1789 functions compared, 12 with functions whose callee SETS differ (10 skipped; 94 more differ only through shared tail code)
+2 std____default_alloc_template_true_0____Lock____Lock_97c173f4 STOCK-ONLY {'Lock': 1} OURS-ONLY {'ock': 1}
+2 std____default_alloc_template_true_0____Lock____Lock STOCK-ONLY {'Lock': 1} OURS-ONLY {'ock': 1}
+2 std____default_alloc_template_true_0____Lock___Lock_97c173cc STOCK-ONLY {'Lock': 1} OURS-ONLY {'ock': 1}
+2 std____default_alloc_template_true_0____Lock___Lock STOCK-ONLY {'Lock': 1} OURS-ONLY {'ock': 1}
+1 yy_flex_realloc STOCK-ONLY {'realloc': 1} OURS-ONLY {}
+1 yy_flex_free STOCK-ONLY {'free': 1} OURS-ONLY {}
+1 yy_flex_alloc STOCK-ONLY {'malloc': 1} OURS-ONLY {}
+1 std__operator__97c32b88 STOCK-ONLY {'throw_out_of_range': 1} OURS-ONLY {}
+1 eh_rest_world_r10 STOCK-ONLY {'rest_world_eh_r7r8': 1} OURS-ONLY {}
+1 ___register_frame_table STOCK-ONLY {'register_frame_info_table': 1} OURS-ONLY {}
+1 _ShCompile STOCK-ONLY {'throw_length_error': 1} OURS-ONLY {}
+1 TIntermAggregate__addToPragmaTable STOCK-ONLY {'operator_': 1} OURS-ONLY {}

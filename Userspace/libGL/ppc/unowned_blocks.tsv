@@ -1,0 +1,4 @@
+start	end	kind	owner	instructions	calls
+92f27b1c	92f27b4c	millicode	_CGLGetCurrentContext	12	
+92f27f90	92f27fc0	millicode	_glClearColor	12	
+92f2aae4	92f2aaec	other	_glTextureRangeAPPLE	2	

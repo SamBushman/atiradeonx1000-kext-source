@@ -1,5 +1,27 @@
 #include "decls.h"
 
+/* _glVertexBlendARB @ 0x92f3dd7c (124 bytes) */
+int _glVertexBlendARB(param_1)
+  undefined8 param_1;
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  undefined1 *local_60 [24];
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
+  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = local_60;
+  }
+                    
+                    
+  (*(code *)puVar2[0x237])(*puVar2,param_1);
+  return;
+}
+
 /* _glClientActiveTextureARB @ 0x92f3ddf8 (124 bytes) */
 int _glClientActiveTextureARB(param_1)
   undefined8 param_1;
@@ -1424,28 +1446,6 @@ int _glWindowPos3fARB(param_1, param_2, param_3)
                     
                     
   (*(code *)puVar2[0x244])(param_1,param_2,param_3,*puVar2);
-  return;
-}
-
-/* _glWindowPos3fvARB @ 0x92f3fee4 (124 bytes) */
-int _glWindowPos3fvARB(param_1)
-  undefined8 param_1;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined1 *local_60 [24];
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
-  }
-                    
-                    
-  (*(code *)puVar2[0x245])(*puVar2,param_1);
   return;
 }
 

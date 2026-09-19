@@ -1,5 +1,27 @@
 #include "decls.h"
 
+/* _glLoadTransposeMatrixf @ 0x92f35a90 (124 bytes) */
+int _glLoadTransposeMatrixf(param_1)
+  undefined8 param_1;
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  undefined1 *local_60 [24];
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
+  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = local_60;
+  }
+                    
+                    
+  (*(code *)puVar2[0x179])(*puVar2,param_1);
+  return;
+}
+
 /* _glMultTransposeMatrixd @ 0x92f35b0c (124 bytes) */
 int _glMultTransposeMatrixd(param_1)
   undefined8 param_1;
@@ -1399,29 +1421,6 @@ int _glIsQuery(param_1)
     puVar2[0x2ac] = local_50;
   }
   (*(code *)puVar2[0x27d])(*puVar2,param_1);
-  return;
-}
-
-/* _glBeginQuery @ 0x92f37b38 (132 bytes) */
-int _glBeginQuery(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined1 *local_60 [24];
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
-  }
-                    
-                    
-  (*(code *)puVar2[0x27e])(*puVar2,param_1,param_2);
   return;
 }
 

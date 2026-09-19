@@ -1,5 +1,29 @@
 #include "decls.h"
 
+/* _glGetUniformfvARB @ 0x92f41f3c (140 bytes) */
+int _glGetUniformfvARB(param_1, param_2, param_3)
+  undefined8 param_1;
+  undefined8 param_2;
+  undefined8 param_3;
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  undefined1 *local_60 [24];
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
+  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = local_60;
+  }
+                    
+                    
+  (*(code *)puVar2[0x274])(*puVar2,param_1,param_2,param_3);
+  return;
+}
+
 /* _glGetUniformivARB @ 0x92f41fc8 (140 bytes) */
 int _glGetUniformivARB(param_1, param_2, param_3)
   undefined8 param_1;
@@ -1393,31 +1417,6 @@ int _glFramebufferRenderbufferEXT(param_1, param_2, param_3, param_4)
                     
                     
   (*(code *)puVar2[0x2a8])(*puVar2,param_1,param_2,param_3,param_4);
-  return;
-}
-
-/* _glGetFramebufferAttachmentParameterivEXT @ 0x92f43fc8 (148 bytes) */
-int _glGetFramebufferAttachmentParameterivEXT(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined1 *local_60 [24];
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
-  }
-                    
-                    
-  (*(code *)puVar2[0x2a9])(*puVar2,param_1,param_2,param_3,param_4);
   return;
 }
 

@@ -14,19 +14,57 @@ accesses -> typed loads/stores at a byte offset; `stack0x..`/`xStack..` incoming
 constants Ghidra labels as data addresses inside code (`&DAT_0000271e`) -> literals; labels shared with another function ->
 absolute-address tail calls; K&R definitions so mismatched call arities compile.
 Names are Ghidra's (`FUN_<addr>` unless the binary exports a symbol). Nothing is skipped: the ledger row count equals the
-Ghidra function count minus its thunks/imports.
+Ghidra function count minus its thunks/imports. Ghidra's EXTERNAL-block placeholders for dyld imports (1 byte, no code in the binary) are
+recorded in `externals.tsv`, not transcribed. Ledger status `converted (...)` carries the one function-level caveat where a caveat exists.
 
-## Status (2026-09-19)
+## Status (2026-09-19) - PowerPC slices, the ones that matter for the G5
 
-| binary | arch | functions | compile-clean | notes |
-|---|---|---|---|---|
-| ATIRadeonX1000GLDriver | ppc | 3484 | all | |
-| ATIRadeonX1000GLDriver | i386 | 4489 | all | |
-| ATIRadeonX1000GA | ppc, i386 | 46 each | all | |
-| ATIRadeonX1000VADriver | ppc / i386 | 70 / 88 | all | |
-| libGL | ppc | 896 | all | |
-| libGLProgrammability | ppc | 2005 | 1960 | 45 C++-template/EH functions kept verbatim under `#if 0`, ledger status `DECOMPILE-ONLY` |
+The functions below are ALL functions Ghidra 12.1.3 finds after an extra discovery pass (`gs/FindMoreFuncs.java`: code between functions that a
+`bl` reaches but analysis did not turn into a function). Every one is transcribed, compiles as C (gcc 4.0.1, Tiger G5), and has been checked
+against the shipped binary with the callee comparison described below.
 
-libGL.dylib and libGLProgrammability.dylib are PowerPC (big-endian) binaries. "Compile-clean" means gcc accepts the text; it does not
-prove behavioural equivalence. Data-symbol types are inferred from use; `in_*` / `unaff_*` pseudo-registers (x86) and
-`LOCK()/UNLOCK()` are declared/no-op so the text builds. The kext's i386 slice is not yet transcribed (see the kext notes).
+| binary | functions | compile-clean | callee check vs stock (`verify_callees.txt`) |
+|---|---|---|---|
+| ATIRadeonX1000GLDriver ppc | 4033 | all | 3982 compared (51 = PIC import stubs / register-save millicode skipped): **1 residual**, explained |
+| ATIRadeonX1000GA ppc | 80 | all | 52 compared (28 PIC stubs skipped): **0 differences** |
+| ATIRadeonX1000VADriver ppc | 120 | all | 92 compared (28 stubs skipped): **0 differences** |
+| libGL ppc | 897 | all | 894 compared: **0 differences** |
+| libGLProgrammability ppc | 1799 (+242 external placeholders) | all - no `#if 0`, no DECOMPILE-ONLY | 1789 compared: 12 residuals, all explained (below) |
+
+i386 slices: not extended. The i386 directories are the earlier generation (fewer functions, no callee check); the i386 code is not required.
+
+### What "callee check" means
+
+`Tools/userspace/verify_corpus.sh` regenerates the corpus with one translation unit per function, compiles it -O0 on the G5, disassembles
+both the stock binary and the recompile, and compares each function's *set of callees* (direct calls by name, dyld stubs by import name,
+`bctrl` counted separately) - `Tools/userspace/callee_compare_c.py`. A decompile that dropped a branch, a switch body, or a call shows up as
+a callee the stock function makes and the recompile never does. Handled so it is not noise: PIC/import stubs, register save/restore millicode,
+compiler helper calls, shared tail code (a plain `b` into another function's body, fall-through, and switch-case blocks no function owns),
+mangled-vs-demangled names, alias names (`bzero`->`memset`...). A stock callee missing from the recompile is only accepted when it is the
+tail-call edge itself. `LOWCOUNT` (informational) lists functions where the stock calls a callee more often than the recompile.
+
+### Real defects this check found and fixed
+
+* `libGLProgrammability`: 123 (+3 in GLDriver) Darwin embedded jump tables (`lwz/lwzx; add; mtctr; bctr` + offset words) that Ghidra's decompiler
+  gives up on ("Could not recover jumptable ... Too many branches"), losing whole function bodies (e.g. `_CPPWarningToInfoLog`).
+  `gs/FixSwitches.java` writes the JumpTable overrides; the affected functions were re-decompiled (`gs/RedumpContaining.java`).
+* an undeclared global typed `unsigned` made gcc delete an `x < 0` branch (`___cxa_get_globals`): undeclared globals now default to signed.
+* AltiVec (`vec16`, `vectorPermute`, `vectorConditionalSelect`) in the GLDriver memcpy/blit helpers.
+
+### Known residuals (explained, not hidden)
+
+* GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
+* libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`), name aliases
+  (`__register_frame_table`, `std::__default_alloc_template<true,0>::_Lock`), and two libstdc++ throw paths (`std::operator+`, `_ShCompile`
+  `__throw_length_error`) that Ghidra proved unreachable.
+* `libGLProgrammability` `_ShCompile`: four constant-selector EH-dispatch sites are left as indirect calls - Ghidra's decompiler process crashes
+  when their landing-pad targets join the flow (ledger status says so; the target blocks are in `unowned_blocks.tsv`).
+* C++ exception landing pads (blocks ending in `_Unwind_Resume`, 328 in GLDriver / 32 in libGLProgrammability) are reachable only through the
+  unwinder, so no decompile contains them. They are enumerated, with their owner function and callees, in `unowned_blocks.tsv` next to
+  `switch-code` (case blocks after a table), `table`, `millicode` and `padding` blocks; `coverage.txt` is the same accounting by bytes.
+
+### Caveats of any machine transcription
+
+"Compile-clean" plus "same callees" is strong evidence, not proof, of equivalence. Data-symbol types are inferred from use (sized by the access,
+signed unless used unsigned); struct/class pointer types are `unsigned char *`; x86 `in_*`/`unaff_*` pseudo-registers and `LOCK()/UNLOCK()` are
+declared/no-op so the text builds. Function text is Ghidra's; a Ghidra decompiler bug survives into the corpus.

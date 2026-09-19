@@ -95,6 +95,7 @@ extern int _glTexSubImage2D();
 extern int _glTexCoord3f();
 extern int _glTextureRangeAPPLE();
 extern int __dyld_func_lookup();
+extern int ___initialize_Cplusplus();
 extern int FUN_92f2ab64();
 extern int _glAccum();
 extern int _glAreTexturesResident();
@@ -898,6 +899,7 @@ extern int _glCombinerStageParameterfvNV();
 extern int _glGetCombinerStageParameterfvNV();
 extern int _pthread_getspecific();
 extern int _pthread_setspecific();
+extern unsigned char PTR___mh_dylib_header_a2f27018;
 extern unsigned char PTR__gll_cc_a2f27020;
 extern unsigned char PTR__gll_pkey_a2f2701c;
 #include "extra_decls.h"

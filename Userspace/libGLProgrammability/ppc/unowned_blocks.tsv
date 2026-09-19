@@ -1,0 +1,353 @@
+start	end	kind	owner	instructions	calls
+97b7c138	97b7c30c	table	_PPParserPreprocessString	117	
+97b7c7c4	97b7c998	table	_PPParserPreprocessString	117	
+97b80cc4	97b80ce4	table	_testAttribMatch	8	
+97b814a8	97b81648	switch-code	_PPParserParseOperation	104	
+97b82074	97b82078	millicode	_PPParserParseSourceVar	1	
+97b82434	97b82464	table	_PPStreamChunkGetStream	12	
+97b825f8	97b82628	table	_GetChunkAllocationSize	12	
+97b82c88	97b82cb8	table	_PPStreamChunkListGetMaxIndex	12	
+97b8313c	97b83260	table	_PPEmulatorProgramConvertFromPPStream	73	
+97b832a4	97b83404	table	_PPEmulatorProgramConvertFromPPStream	88	
+97b83934	97b8395c	table	_PPEmulatorProgramConvertFromPPStream	10	
+97b83b38	97b83c6c	table	_PPEmulatorProgramConvertFromPPStream	77	
+97b83c98	97b83ce0	table	_PPEmulatorProgramConvertFromPPStream	18	
+97b83e24	97b83e54	table	_PPStreamChunkListChunkAtIndex	12	
+97b844d0	97b84538	table	_PPParserParseSourceSwizzle	26	
+97b846b4	97b8471c	table	_PPParserParseDestinationMask	26	
+97b85148	97b85274	table	_PPParserParseSwizzleCode	75	
+97b853f0	97b853f8	other	_PPParserParseSwizzleCode	2	
+97b85cd8	97b85cdc	millicode	_GetReversedAtom	1	
+97b86c5c	97b86c7c	other	_op_shl	8	
+97b86c98	97b86ca0	other	_op_pos	2	
+97b87cdc	97b87ce0	millicode	_eof_scan	1	
+97b8892c	97b88930	millicode	_mem_AddCleanup	1	
+97b889a4	97b889a8	millicode	_InitScanner	1	
+97b88a8c	97b88a90	millicode	_str_getch	1	
+97b88fd0	97b891c8	switch-code	_byte_scan	126	
+97b89f00	97b89f04	millicode	_check_EOF	1	
+97b8acb0	97b8acb4	millicode	_ReadFromTokenStream	1	
+97b8ae04	97b8ae38	table	_DumpTokenStream	13	
+97b8cd40	97b8cda8	table	TIntermediate::addBinaryMath	26	
+97b8daf0	97b8dc14	switch-code	TIntermediate::addUnaryMath	73	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b8ea90	97b8eaa8	table	TIntermediate::addConversion	6	
+97b8ebc4	97b8ebdc	table	TIntermediate::addConversion	6	
+97b8ed24	97b8ed3c	table	TIntermediate::addConversion	6	
+97b8ed78	97b8ed90	table	TIntermediate::addConversion	6	
+97b8ef20	97b8ef38	table	TIntermediate::addConversion	6	
+97b8efa8	97b8efc0	table	TIntermediate::addConversion	6	
+97b8f030	97b8f048	table	TIntermediate::addConversion	6	
+97b8f084	97b8f1a4	switch-code	TIntermediate::addConversion	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b909e4	97b90b98	table	TIntermBinary::promote	109	
+97b90e00	97b90f10	switch-code	TIntermBinary::promote	68	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9116c	97b9128c	switch-code	TIntermBinary::promote	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b91838	97b918a0	table	TIntermConstantUnion::fold	26	
+97b91990	97b919a8	table	TIntermConstantUnion::fold	6	
+97b91abc	97b91b8c	switch-code	TIntermConstantUnion::fold	52	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b91cdc	97b91cf4	table	TIntermConstantUnion::fold	6	
+97b91df0	97b91f1c	switch-code	TIntermConstantUnion::fold	75	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b91f80	97b920a8	switch-code	TIntermConstantUnion::fold	74	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9210c	97b92238	switch-code	TIntermConstantUnion::fold	75	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b92294	97b923bc	switch-code	TIntermConstantUnion::fold	74	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b92408	97b92420	table	TIntermConstantUnion::fold	6	
+97b92520	97b92538	table	TIntermConstantUnion::fold	6	
+97b9260c	97b92624	table	TIntermConstantUnion::fold	6	
+97b92744	97b92830	switch-code	TIntermConstantUnion::fold	59	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b92890	97b9297c	switch-code	TIntermConstantUnion::fold	59	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b92b44	97b92c54	table	TIntermConstantUnion::fold	68	
+97b92d3c	97b92dd4	switch-code	TIntermConstantUnion::fold	38	__ZN13TInfoSinkBase6appendEPKc,_sprintf
+97b92f10	97b92fa8	switch-code	TIntermConstantUnion::fold	38	__ZN13TInfoSinkBase6appendEPKc,_sprintf
+97b930d8	97b93170	switch-code	TIntermConstantUnion::fold	38	__ZN13TInfoSinkBase6appendEPKc,_sprintf
+97b93224	97b93314	switch-code	TIntermConstantUnion::fold	60	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b934ac	97b934c4	table	TIntermConstantUnion::fold	6	
+97b9351c	97b9363c	switch-code	TIntermConstantUnion::fold	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9369c	97b936b4	table	TIntermConstantUnion::fold	6	
+97b93704	97b93824	switch-code	TIntermConstantUnion::fold	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9386c	97b93884	table	TIntermConstantUnion::fold	6	
+97b938f8	97b93910	table	TIntermConstantUnion::fold	6	
+97b93a74	97b93b40	switch-code	TIntermConstantUnion::fold	51	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b93cbc	97b93cd4	table	TIntermConstantUnion::fold	6	
+97b93da8	97b93dc0	table	TIntermConstantUnion::fold	6	
+97b93ed8	97b93fc0	switch-code	TIntermConstantUnion::fold	58	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b94184	97b9419c	table	TIntermConstantUnion::fold	6	
+97b94344	97b943d4	switch-code	TIntermConstantUnion::fold	36	__ZN13TInfoSinkBase6appendEPKc,_sprintf
+97b94568	97b94650	switch-code	TIntermConstantUnion::fold	58	__ZN13TInfoSinkBase6appendEPKc,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b948f8	97b94940	table	TIntermConstantUnion::fold	18	
+97b94998	97b94ac4	switch-code	TIntermConstantUnion::fold	75	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b94d24	97b94d6c	switch-code	TIntermConstantUnion::fold	18	
+97b94dcc	97b94ef4	switch-code	TIntermConstantUnion::fold	74	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b95284	97b9529c	table	TIntermConstantUnion::fold	6	
+97b95438	97b95544	switch-code	TIntermConstantUnion::fold	67	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b95644	97b9565c	table	TIntermConstantUnion::fold	6	
+97b956e0	97b956f8	table	TIntermConstantUnion::fold	6	
+97b958f4	97b9590c	table	TIntermConstantUnion::fold	6	
+97b95a98	97b95bb4	switch-code	TIntermConstantUnion::fold	71	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b960f4	97b9610c	table	TIntermediate::promoteConstantUnion	6	
+97b961b0	97b961c8	table	TIntermediate::promoteConstantUnion	6	
+97b962a0	97b962b8	table	TIntermediate::promoteConstantUnion	6	
+97b962f4	97b9641c	switch-code	TIntermediate::promoteConstantUnion	74	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b97308	97b9737c	switch-code	OutputAggregate	29	__ZN13TInfoSinkBase6appendEPKc
+97b978c8	97b979e0	switch-code	OutputConstantUnion	70	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b985ec	97b986fc	switch-code	ParseSymbol	68	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9885c	97b98984	switch-code	ParseSymbol	74	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b98af0	97b98b08	table	ParseSymbol	6	
+97b98ba8	97b98bc0	table	ParseSymbol	6	
+97b98c68	97b98c80	table	ParseSymbol	6	
+97b98cbc	97b98dd8	switch-code	ParseSymbol	71	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b98efc	97b99028	switch-code	ParseBinary	75	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b99064	97b9907c	table	ParseBinary	6	
+97b99088	97b990b4	other	FUN_97b9907c	11	
+97b9925c	97b99274	table	ParseUnary	6	
+97b99280	97b992ac	other	FUN_97b99274	11	
+97b99480	97b995a0	switch-code	ParseAggregate	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b99884	97b9989c	table	ParseSelection	6	
+97b998a8	97b998d4	other	FUN_97b9989c	11	
+97b99ea0	97b99eb8	table	ParseLoop	6	
+97b99ec4	97b99ef0	other	FUN_97b99eb8	11	
+97b9a034	97b9a04c	table	ParseBranch	6	
+97b9a058	97b9a084	other	FUN_97b9a04c	11	
+97b9a408	97b9a470	table	TParseContext::parseVectorFields	26	
+97b9a82c	97b9a844	table	TParseContext::error	6	
+97b9a850	97b9a87c	other	FUN_97b9a844	11	
+97b9ace8	97b9ad30	table	TParseContext::lValueErrorCheck	18	
+97b9b22c	97b9b26c	table	TParseContext::constructorErrorCheck	16	
+97b9cdd0	97b9cef0	switch-code	TParseContext::arraySetMaxSize	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9d6c4	97b9d884	switch-code	TParseContext::extensionErrorCheck	112	__ZN13TInfoSinkBase6appendEPKc,__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97b9ee34	97b9ee70	table	TParseContext::constructBuiltIn	15	
+97b9f1cc	97b9f2f8	switch-code	TParseContext::addConstVectorNode	75	__ZN13TInfoSinkBase6appendEPKc,__ZN13TParseContext7recoverEv,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97ba09a0	97ba09a4	millicode	_ShConstructCompiler	1	
+97ba0d70	97ba0e18	switch-code	initializeSymbolTable	42	__ZN13TInfoSinkBase6appendEPKc
+97ba0eac	97ba0fd8	switch-code	initializeSymbolTable	75	_FinalizePreprocessor,__ZN13TInfoSinkBase6appendEPKc,__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_,__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE8_M_eraseEPSt13_Rb_tree_nodeIS8_E,__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_S4_ESt10_Select1stIS7_ESt4lessIS4_ES2_IS7_EE8_M_eraseEPSt13_Rb_tree_nodeIS7_E
+97ba14c0	97ba1538	switch-code	_ShCompile	30	__ZN13TInfoSinkBase6appendEPKc
+97ba15e4	97ba16c4	switch-code	_ShCompile	56	__Z22GetGlobalPoolAllocatorv,__ZN13TInfoSinkBase6appendEPKc,__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE,__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_,__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_,_sprintf
+97ba17b0	97ba1828	switch-code	_ShCompile	30	__ZN13TInfoSinkBase6appendEPKc
+97ba1858	97ba18cc	switch-code	_ShCompile	29	__ZN13TInfoSinkBase6appendEPKc
+97ba1b34	97ba1b4c	table	_ShLink	6	
+97ba1ba0	97ba1c18	switch-code	_ShLink	30	__ZN13TInfoSinkBase6appendEPKc
+97ba2710	97ba274c	table	TType::buildMangledName	15	
+97ba39cc	97ba3d2c	table	yyparse	216	
+97bac350	97bac5a0	table	yylex	148	
+97bae338	97bae350	table	_CPPWarningToInfoLog	6	
+97bae35c	97bae388	other	_CPPWarningToInfoLog	11	
+97baf1c8	97baf2e4	switch-code	_updateExtensionBehavior	71	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
+97baf4e4	97baf514	table	PrintAttribute	12	
+97baf5f4	97baf608	table	PrintAttribute	5	
+97baf6f0	97baf73c	table	PrintParam	19	
+97baf7bc	97baf7dc	table	PrintParam	8	
+97baf924	97baf93c	table	PrintParam	6	
+97bafb28	97bafb40	table	PrintParam	6	
+97bafc58	97bafc84	table	PrintOutput	11	
+97bb211c	97bb2194	switch-code	TGenericLinker::FindChunkDelta	30	__ZN13TInfoSinkBase6appendEPKc
+97bb22a4	97bb231c	switch-code	TGenericLinker::MergeCompilers	30	__ZN13TInfoSinkBase6appendEPKc
+97bb2824	97bb28a0	switch-code	TGenericLinker::MergeCompilers	31	__ZN13TInfoSinkBase6appendEPKc
+97bb2994	97bb29ac	table	TGenericLinker::MergeCompilers	6	
+97bb2a2c	97bb2ab0	switch-code	TGenericLinker::MergeCompilers	33	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb2c78	97bb2cf8	switch-code	TGenericLinker::MergeCompilers	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb3324	97bb33a4	switch-code	TGenericLinker::CreateFromStreamWithSymbolTableUpdate	32	_PPStreamFree,__ZN13TInfoSinkBase6appendEPKc
+97bb359c	97bb3618	switch-code	TGenericLinker::RemoveUnreachableFunctions	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb3714	97bb3790	switch-code	TGenericLinker::RemoveUnreachableFunctions	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb3c70	97bb3cec	switch-code	TGenericLinker::RemoveExtraVertexOutputs	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb4454	97bb44d0	switch-code	TGenericLinker::OptimizeFunctionIO	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb4c20	97bb4ca0	switch-code	TGenericLinker::AddAttribBinding	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb4cdc	97bb4d50	switch-code	TGenericLinker::AddAttribBinding	29	__ZN13TInfoSinkBase6appendEPKc
+97bb4e44	97bb4ec4	switch-code	TGenericLinker::CollectClientAttributeBindings	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb4f34	97bb4fb0	switch-code	TGenericLinker::CollectClientAttributeBindings	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb5034	97bb50c4	switch-code	TGenericLinker::CollectClientAttributeBindings	36	__ZN12BindingTable24NextAttribRequestBindingEP7Binding,__ZN13TInfoSinkBase6appendEPKc,_free
+97bb5588	97bb560c	switch-code	TGenericLinker::RemapVertexAttributes	33	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb58a8	97bb592c	switch-code	TGenericLinker::AllocateTextureUnitsForVaryings	33	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb66ac	97bb6720	switch-code	TGenericLinker::AllocateTextureUnitsForVaryings	29	__ZN13TInfoSinkBase6appendEPKc
+97bb67f4	97bb680c	table	TGenericLinker::AllocateTextureUnitsForVaryings	6	
+97bb6884	97bb689c	table	TGenericLinker::AllocateTextureUnitsForVaryings	6	
+97bb68f4	97bb6970	switch-code	TGenericLinker::AllocateTextureUnitsForVaryings	31	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb6a94	97bb6b14	switch-code	TGenericLinker::AllocateTextureUnitsForVaryings	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb6ea0	97bb6f20	switch-code	TGenericLinker::BuildUniformRemapTables	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb6fd8	97bb7058	switch-code	TGenericLinker::BuildUniformRemapTables	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb7140	97bb71b8	switch-code	TGenericLinker::BuildUniformRemapTables	30	__ZN13TInfoSinkBase6appendEPKc
+97bb71ec	97bb7264	switch-code	TGenericLinker::BuildUniformRemapTables	30	__ZN13TInfoSinkBase6appendEPKc
+97bb7400	97bb7480	switch-code	TGenericLinker::InsertUniformBindingFromSymbol	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb776c	97bb77f4	switch-code	TGenericLinker::CreateFunctionTable	34	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb7a58	97bb7ad8	switch-code	TGenericLinker::CreateFunctionTable	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb7c5c	97bb7c74	table	TGenericLinker::BuildSymbolTableList	6	
+97bb7c9c	97bb7cb4	table	TGenericLinker::BuildSymbolTableList	6	
+97bb7cdc	97bb7d54	switch-code	TGenericLinker::BuildSymbolTableList	30	__ZN13TInfoSinkBase6appendEPKc
+97bb7df8	97bb7e10	table	TGenericLinker::BuildSymbolTableList	6	
+97bb7e7c	97bb7efc	switch-code	TGenericLinker::BuildSymbolTableList	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb89b0	97bb8a30	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8ae4	97bb8b64	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8bc8	97bb8c48	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8cac	97bb8d2c	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8d90	97bb8e10	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8e74	97bb8ef4	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb8f78	97bb8ff8	switch-code	TGenericLinker::link	32	__ZN13TInfoSinkBase6appendEPKc,_free
+97bb9a98	97bb9ad8	table	getOpenGLTypeFromTType	16	
+97bba644	97bba684	table	ParseSymbol::ResolveOpenGLType	16	
+97bbbe84	97bbbed4	table	ParseOperand::isWriteable	20	
+97bbf668	97bbf688	table	TIntermUnary::compileNode	8	
+97bc0090	97bc0320	table	TIntermAggregate::compileNode	164	
+97bc03e0	97bc0670	table	TIntermAggregate::compileNode	164	
+97bc0f08	97bc0f50	table	TIntermAggregate::compileNode	18	
+97bc0f98	97bc1000	table	TIntermAggregate::compileNode	26	
+97bc7900	97bc7934	table	TPPStreamCompiler::constructFromOperand	13	
+97bcc76c	97bcc7a0	table	GetChunkForSymbol	13	
+97bcdcb0	97bcdcd0	table	_InterpreterTestCR	8	
+97bd059c	97bd0760	table	_InterpreterEmulateOp	113	
+97bd35f8	97bd35fc	millicode	_InterpreterTextureSamplerInitialise	1	
+97bd3c20	97bd3c28	other	_InterpreterTextureSamplerSampleTexel3D	2	
+97bd58b8	97bd58bc	millicode	_InterpreterNoiseGeneratorInitialise	1	
+97bd63b0	97bd63b4	millicode	_InterpreterNoiseGeneratorCalculate3D	1	
+97bd6400	97bd6404	millicode	_InterpreterRasterOpMachineInitialise	1	
+97bd6470	97bd6490	table	_InterpreterRasterOpMachine_DepthTest	8	
+97bd65f8	97bd6618	table	_InterpreterRasterOpMachine_DepthAndStencilTest	8	
+97bd6714	97bd6734	table	_InterpreterRasterOpMachine_DepthAndStencilTest	8	
+97bd6928	97bd6948	table	_InterpreterRasterOpMachine_AlphaTest	8	
+97bd6dc4	97bd6de4	table	_InterpreterRasterOpMachine_AlphaTest	8	
+97bd712c	97bd7140	table	_InterpreterRasterOpMachine_Blending	5	
+97bd72ec	97bd7300	table	_InterpreterRasterOpMachine_Blending	5	
+97bd7608	97bd7630	table	_InterpreterRasterOpMachine_LogicOp	10	
+97bd7928	97bd7964	table	_InterpreterRasterOpMachineCalculateBlendingFactors	15	
+97bd7bfc	97bd7c1c	table	_InterpreterRasterOpMachineUpdateStencilBuffer	8	
+97bdb244	97bdb264	table	_PPCRuntimeCompilerTestConditionRegisterAV	8	
+97bdce00	97bdcf70	table	_PPCRuntimeCompilerCompileNO	92	
+97bdd300	97bdd32c	table	_PPCRuntimeCompilerCompileNO	11	
+97bdd420	97bdd44c	table	_PPCRuntimeCompilerCompileNO	11	
+97bdd540	97bdd56c	table	_PPCRuntimeCompilerCompileNO	11	
+97bdd660	97bdd68c	table	_PPCRuntimeCompilerCompileNO	11	
+97bdfa30	97bdfbf4	table	_PPCRuntimeCompilerCompileAV	113	
+97bdfc3c	97bdfe00	switch-code	_PPCRuntimeCompilerCompileAV	113	
+97be0670	97be069c	table	_PPCRuntimeCompilerCompileAV	11	
+97be0ba8	97be0bd4	table	_PPCRuntimeCompilerCompileAV	11	
+97be0fec	97be1018	table	_PPCRuntimeCompilerCompileAV	11	
+97be136c	97be1398	table	_PPCRuntimeCompilerCompileAV	11	
+97be1c04	97be1c08	millicode	_PPCTextureSamplerInitialise	1	
+97be2c54	97be2c58	millicode	_PPCTextureSamplerSampleTexel3DRTCAV	1	
+97be4084	97be4088	millicode	_PPCNoiseGeneratorInitialise	1	
+97be43b8	97be43bc	millicode	_PPCRasterOpMachineInitialise	1	
+97be4468	97be4488	table	_PPCRasterOpMachine_DepthTestRTCAV	8	
+97be45dc	97be45fc	table	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	8	
+97be4788	97be47a8	table	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	8	
+97be4bbc	97be4bdc	table	_PPCRasterOpMachine_AlphaTestRTCAV	8	
+97be4e60	97be4e74	table	_PPCRasterOpMachine_BlendingRTCAV	5	
+97be4f3c	97be4f50	table	_PPCRasterOpMachine_BlendingRTCAV	5	
+97be5108	97be513c	table	_PPCRasterOpMachine_LogicOpRTCAV	13	
+97be5338	97be5374	table	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	15	
+97be550c	97be552c	table	_PPCRasterOpMachineUpdateStencilBufferRTCAV	8	
+97be56fc	97be5700	millicode	_PPCConstantsAndScratchCreate	1	
+97be60cc	97be60e0	table	_glpWriteSizeTypePrecision	5	
+97be654c	97be6560	table	_glpWriteSizeType	5	
+97be6e14	97be6e6c	switch-code	_glpWriteDestinationOperand	22	
+97be742c	97be7440	table	_glpWriteSourceOperandType	5	
+97be7d18	97be7d44	table	_glpWriteSourceOperandExtendedSwizzle	11	
+97be81f8	97be8218	table	_glpWriteBranchOperand	8	
+97be8580	97be85a0	table	_glpWriteTextureOperand	8	
+97be8898	97be8a5c	table	_glpDisassemble1Op	113	
+97be8b08	97be8b28	table	_glpDisassemble1Op	8	
+97be9a24	97be9aa8	table	_glpDisassemble1Op	33	
+97bea03c	97bea074	table	_glpPPDisassemble	14	
+97beaef8	97beaf28	table	_glpPPDisassemble	12	
+97beb3dc	97beb3f0	table	_glpPPDisassemble	5	
+97bebb90	97bebbdc	table	_glpPPDisassemble	19	
+97bebddc	97bebdfc	table	_glpPPDisassemble	8	
+97bec348	97bec360	table	_glpPPDisassemble	6	
+97becad8	97becaf0	table	_glpPPDisassemble	6	
+97becf80	97becf94	table	_glpPPDisassemble	5	
+97bed6f8	97bed724	table	_glpPPDisassemble	11	
+97bee2f4	97bee310	table	_glpPPDisassemble	7	
+97bee380	97bee39c	table	_glpPPDisassemble	7	
+97bee644	97bee660	table	_glpPPDisassemble	7	
+97bee898	97bee8b8	table	_glpPPDisassemble	8	
+97beeaf0	97beeb10	table	_glpPPDisassemble	8	
+97beed48	97beed68	table	_glpPPDisassemble	8	
+97beeffc	97bef018	table	_glpPPDisassemble	7	
+97bef248	97bef25c	table	_glpPPDisassemble	5	
+97bef3ec	97bef400	table	_glpPPDisassemble	5	
+97bef590	97bef5cc	table	_glpPPDisassemble	15	
+97bef98c	97bef9c8	table	_glpPPDisassemble	15	
+97befd88	97befdc4	table	_glpPPDisassemble	15	
+97bf0184	97bf01c0	table	_glpPPDisassemble	15	
+97bf05b0	97bf05f0	switch-code	_glpPPDisassemble	16	
+97bf0e60	97bf0e90	table	_PPStreamChunkCompare	12	
+97bf1fd8	97bf205c	table	_renumberTargets	33	
+97bf2640	97bf2670	table	_PPStreamFindDuplicateChunk	12	
+97bf38d4	97bf38f4	table	_handleDigit	8	
+97bf3c08	97bf3dcc	table	_glpDisassemble2Op	113	
+97c01d24	97c01d54	table	_glpPPShaderToProgramString	12	
+97c02210	97c02224	table	_glpPPShaderToProgramString	5	
+97c02908	97c02954	table	_glpPPShaderToProgramString	19	
+97c02b54	97c02b74	table	_glpPPShaderToProgramString	8	
+97c030c0	97c030d8	table	_glpPPShaderToProgramString	6	
+97c03850	97c03868	table	_glpPPShaderToProgramString	6	
+97c03cf8	97c03d0c	table	_glpPPShaderToProgramString	5	
+97c04354	97c04380	table	_glpPPShaderToProgramString	11	
+97c05e1c	97c05ea0	table	_AddOpToJumpTable	33	
+97c08028	97c08030	other	_GetStreamArray	2	
+97c08fcc	97c08fe0	table	_GetRegister	5	
+97c09d30	97c09d44	table	_RegistersCleanup	5	
+97c0a13c	97c0a1c8	table	_InstructionAdd	35	
+97c0ac74	97c0acf8	table	_Blockify	33	
+97c0adb0	97c0ae34	table	_Blockify	33	
+97c0af00	97c0af84	table	_Blockify	33	
+97c0b31c	97c0b398	table	_FlattenIfs	31	
+97c0b4a4	97c0b4ac	millicode	_FlattenIfs	2	
+97c0b74c	97c0b760	table	_GetRegisterTypeInfo	5	
+97c0caec	97c0ccb0	table	_EmulateOp	113	
+97c0d888	97c0d9c8	table	_EmulateOp	80	
+97c0e7dc	97c0e894	table	_EmulateOp	46	
+97c0eee8	97c0ef6c	table	_EmulateOp	33	
+97c0f018	97c0f074	table	_UpdateScope	23	
+97c0fc8c	97c0fd08	table	_UnrollConstantLoopsSimple	31	
+97c102ec	97c102f4	other	_instructionIndexHashFunction	2	
+97c10924	97c1092c	other	_glpDCBAlloc	2	
+97c12020	97c12118	switch-code	_PPParserBuildErrorString	62	
+97c12dfc	97c12e00	eh-pad	std::__throw_logic_error	1	__Unwind_Resume
+97c12e84	97c12e88	eh-pad	std::__throw_domain_error	1	__Unwind_Resume
+97c12f0c	97c12f10	eh-pad	std::__throw_invalid_argument	1	__Unwind_Resume
+97c12f94	97c12f98	eh-pad	std::__throw_length_error	1	__Unwind_Resume
+97c1301c	97c13020	eh-pad	std::__throw_out_of_range	1	__Unwind_Resume
+97c130a4	97c130a8	eh-pad	std::__throw_runtime_error	1	__Unwind_Resume
+97c1312c	97c13130	eh-pad	std::__throw_range_error	1	__Unwind_Resume
+97c131b4	97c131b8	eh-pad	std::__throw_overflow_error	1	__Unwind_Resume
+97c1323c	97c13240	eh-pad	std::__throw_underflow_error	1	__Unwind_Resume
+97c13588	97c1358c	eh-pad	std::string::_M_mutate	1	__Unwind_Resume
+97c13804	97c13808	eh-pad	std::string::_Rep::_M_grab	1	__Unwind_Resume
+97c13888	97c1388c	eh-pad	std::string::_Rep::_M_grab	1	__Unwind_Resume
+97c146b4	97c146b8	eh-pad	std::string::reserve	1	__Unwind_Resume
+97c14bc8	97c14bcc	eh-pad	std::string::append	1	__Unwind_Resume
+97c1657c	97c1658c	other	std::string::_Rep::_S_create	4	_pthread_mutex_unlock
+97c1659c	97c165a8	eh-pad	std::string::_Rep::_S_create	3	__Unwind_Resume
+97c16650	97c16660	eh-pad	std::string::_Rep::_M_destroy	4	__Unwind_Resume,___cxa_call_unexpected
+97c16794	97c167ac	eh-pad	std::operator+	6	__Unwind_Resume,__ZNSsD4Ev
+97c16818	97c16830	eh-pad	std::operator+	6	__Unwind_Resume,__ZNSsD4Ev
+97c16874	97c1688c	eh-pad	std::operator+	6	__Unwind_Resume,__ZNSsD4Ev
+97c16a68	97c16a6c	millicode	std::string::_M_replace<__gnu_cxx::__normal_iterator<char*,std::string>>	1	
+97c16aa4	97c16abc	eh-pad	std::string::_M_replace<__gnu_cxx::__normal_iterator<char*,std::string>>	6	__Unwind_Resume,__ZNSsD4Ev
+97c16b18	97c16b1c	millicode	std::string::_M_replace<__gnu_cxx::__normal_iterator<char_const*,std::string>>	1	
+97c16b54	97c16b6c	eh-pad	std::string::_M_replace<__gnu_cxx::__normal_iterator<char_const*,std::string>>	6	__Unwind_Resume,__ZNSsD4Ev
+97c16bc8	97c16bcc	millicode	std::string::_M_replace<char*>	1	
+97c16c04	97c16c1c	eh-pad	std::string::_M_replace<char*>	6	__Unwind_Resume,__ZNSsD4Ev
+97c16c78	97c16c7c	millicode	std::string::_M_replace<char_const*>	1	
+97c16cb4	97c16ccc	eh-pad	std::string::_M_replace<char_const*>	6	__Unwind_Resume,__ZNSsD4Ev
+97c172f8	97c17308	eh-pad	operator.new	4	__Unwind_Resume,___cxa_call_unexpected
+97c17508	97c17520	eh-pad	std::__default_alloc_template<true,0>::allocate	6	__Unwind_Resume,__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev
+97c17630	97c17648	eh-pad	std::allocator<char>::allocate	6	__Unwind_Resume,__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev
+97c17b44	97c17b54	eh-pad	operator.new[]	4	__Unwind_Resume,___cxa_call_unexpected
+97c17ba4	97c17bb8	eh-pad	std::logic_error::logic_error	5	__Unwind_Resume,__ZNSt9exceptionD2Ev
+97c17e0c	97c17e20	eh-pad	std::runtime_error::runtime_error	5	__Unwind_Resume,__ZNSt9exceptionD2Ev
+97c19094	97c190a4	eh-pad	std::set_new_handler	4	__Unwind_Resume,___cxa_call_unexpected
+97c19134	97c1913c	millicode	std::bad_alloc::~bad_alloc	2	
+97c195ec	97c19620	table	read_encoded_value_with_base	13	
+97c1992c	97c19934	other	get_ttype_entry	2	
+97c19cfc	97c19d00	millicode	get_ttype_entry	1	
+97c19e04	97c19e08	other	__cxxabiv1::__terminate	1	___cxa_begin_catch
+97c19ee0	97c19ef0	eh-pad	std::set_terminate	4	__Unwind_Resume,___cxa_call_unexpected
+97c19f54	97c19f64	eh-pad	std::set_unexpected	4	__Unwind_Resume,___cxa_call_unexpected
+97c1a224	97c1a23c	millicode	get_globals_init_once	6	
+97c1a274	97c1a28c	millicode	get_globals_init_once	6	
+97c1a4d4	97c1a508	table	_read_encoded_value_with_base	13	
+97c1a7ec	97c1aa3c	table	_execute_stack_op	148	
+97c1ad34	97c1ad88	table	_execute_stack_op	21	
+97c1afc4	97c1b084	table	_execute_cfa_program	48	
+97c1c504	97c1c538	table	_read_encoded_value_with_base	13	
+97c1c838	97c1c83c	millicode	___deregister_frame_info_bases	1	
+97c1ddfc	97c1de10	other	save_world	5	
+97c32138	97c32188	table	getQualifierString	20	
+97c322a0	97c322dc	table	TType::getBasicString	15	

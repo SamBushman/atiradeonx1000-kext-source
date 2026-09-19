@@ -1,0 +1,6 @@
+text 1711844 bytes, uncovered 85036 (5.0%) in 3399 gaps: padding 2427 gaps/19584 bytes, table 302 gaps/23192 bytes, other 670 gaps/42260 bytes
+  OTHER 2b38-5610 10968 bytes ['0x14', '0x744', '0x1068', '0x22c8']
+  OTHER 98d8-9b70 664 bytes ['0x1c4b0240', '0x384228d0', '0x90450000', '0x4e800020']
+  OTHER 7ebc0-7ede4 548 bytes ['0x20', '0x28', '0x30', '0x38']
+  OTHER 7ee18-7f03c 548 bytes ['0x20', '0x28', '0x30', '0x38']
+  OTHER 7f070-7f294 548 bytes ['0x20', '0x28', '0x30', '0x38']

@@ -1,0 +1,4 @@
+text 50320 bytes, uncovered 836 (1.7%) in 99 gaps: padding 95 gaps/752 bytes, table 1 gaps/44 bytes, other 3 gaps/40 bytes
+  OTHER 5594-55a4 16 bytes ['0x60000000', '0x60000000', '0x60000000', '0x7c400026']
+  OTHER c948-c954 12 bytes ['0xd9c1ff70', '0xd9e1ff78', '0xda01ff80']
+  OTHER c998-c9a4 12 bytes ['0xc9c1ff70', '0xc9e1ff78', '0xca01ff80']

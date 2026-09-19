@@ -11,10 +11,14 @@ for arg in sys.argv[4:]:
     lo, hi = arg.split('-'); text_ranges.append((int(lo, 16), int(hi, 16)))
 def in_text(hexaddr): return any(lo <= int(hexaddr, 16) < hi for lo, hi in text_ranges)
 os.makedirs(out, exist_ok=True)
+for _f in os.listdir(out):   # stale output of an earlier (different) function set must not survive
+    if re.match(r"part_\d+\.c$|extra_decls\.h$|externals\.tsv$", _f): os.remove(os.path.join(out, _f))
 def sanitize_scoped(t):
     """C++ names (A::b, A<int,B<C> >::d, ~E, operator...) -> C identifiers; angle brackets are matched, so templates nest."""
     t = re.sub(r'::[ \t]*\n[ \t]*', '::', t)
     t = re.sub(r'\n[ \t]*::', '::', t)
+    # a function-local static prints as `func(argtypes)::var`: treat as the scoped name `func::var`
+    t = re.sub(r'((?:(?<![\w:])|::)~?[A-Za-z_]\w*(?:::~?[A-Za-z_]\w*)*)\([^()]*\)::(?=[A-Za-z_])', r'\1::', t)
     t = re.sub(r'(?<![\w>])::(?=[~A-Za-z_])', '', t)
     out = []; i = 0; n = len(t)
     idr = re.compile(r'~?[A-Za-z_]\w*')
@@ -49,12 +53,15 @@ def sanitize_scoped(t):
     return ''.join(out)
 
 idx = []
+externals = []
 name_map = {}   # original (C++ demangled) Ghidra name -> C identifier (first function of that name)
 short_map = collections.defaultdict(set)
 first_san = {}
 used = set(); orig_of = {}
 for l in open(os.path.join(src, 'INDEX.tsv')):
     a, sz, name = l.rstrip('\n').split('\t')
+    if text_ranges and not in_text(a):   # Ghidra's EXTERNAL-block placeholders for dyld imports (1 byte, no code): recorded, not transcribed
+        externals.append((a, name)); continue
     san = re.sub(r'[^A-Za-z0-9_]', '_', name)
     if san in used: san = san + '_' + a[2:]
     used.add(san); orig_of[a] = name
@@ -63,10 +70,11 @@ for l in open(os.path.join(src, 'INDEX.tsv')):
         short_map[name.split('::')[-1]].add(san)
     idx.append((a, int(sz), san))
 name_map = {k: v for k, v in first_san.items() if k != v}
-short_unique = {k: list(v)[0] for k, v in short_map.items() if len(v) == 1 and re.match(r'^~?[A-Za-z_]\w*$', k)}
+plain_names = {n for n in first_san if '::' not in n}   # a real free function of that name exists: the short name must not be redirected
+short_unique = {k: list(v)[0] for k, v in short_map.items() if len(v) == 1 and re.match(r'^~?[A-Za-z_]\w*$', k) and k not in plain_names}
 idx.sort(key=lambda r: int(r[0], 16))
 kw = {'if', 'while', 'for', 'switch', 'return', 'sizeof', 'do', 'else', 'case', 'goto', 'const', 'struct', 'union', 'enum', 'typedef', 'extern', 'static'}
-PRIM = set('FILE sbyte word va_list section GhidraMachOSection segment_command load_command GhidraMachOCommand pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
+PRIM = set('_Unwind_Exception dwarf_eh_bases vec16 FILE sbyte word va_list section GhidraMachOSection segment_command load_command GhidraMachOCommand pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
 bodies = {}; defined = {}
 for a, sz, name in idx:
     t = open(os.path.join(src, a + '.txt')).read()
@@ -80,7 +88,9 @@ for a, sz, name in idx:
         # definition header: the function's own (address-unique) name
         san_self = [n for a2, sz2, n in idx if a2 == a][0]
         if oname:
-            i0 = body.find('{'); hd = body[:i0]; k = hd.rfind(oname)
+            i0 = body.find('{'); hd = body[:i0]
+            hd = re.sub(r'::[ \t]*\n[ \t]*', '::', hd); hd = re.sub(r'\n[ \t]*::', '::', hd)   # a scoped name Ghidra wrapped across lines
+            k = hd.rfind(oname)
             if k >= 0: hd = hd[:k] + san_self + hd[k + len(oname):]
             body = hd + body[i0:]
         body = _name_rx.sub(lambda m: name_map[m.group(0)], body)
@@ -105,6 +115,10 @@ def ret_type(body, name):
 TYPE = r'[A-Za-z_][\w]*(?:::[~A-Za-z_]\w*)*(?:<[^;(){}]*?>)?(?:::[~A-Za-z_]\w*)*'
 def fix_types(s):
     """class/struct-typed types Ghidra invented -> unsigned char (pointers stay pointers; only in type positions)"""
+    # AltiVec 128-bit registers: Ghidra's `undefined1 auVarN [16]` locals are assigned from vector loads and passed to
+    # vectorPermute(); model them as a 16-byte struct (assignable) instead of an array
+    s = re.sub(r'undefined1 (auVar\d+) \[16\];', r'vec16 \1;', s)
+    s = s.replace('(undefined1 (*) [16])', '(vec16 *)')
     def base(t): return re.split(r'[<:]', t)[0]
     def isty(t): return base(t) not in PRIM and base(t) not in kw and t not in PRIM
     ib = s.find('{')
@@ -149,7 +163,7 @@ for a, sz, name in idx:
     h = split_header(b, name)
     if not h: continue
     rt, params = h
-    exact = bool(re.search(r'\b(float|double)\b(?!\s*\*)', rt + ' ' + params))
+    exact = bool(re.search(r'\b(float|double)\b(?!\s*\*)', rt + ' ' + params)) and not os.environ.get('LOOSE')   # LOOSE: verification build, callee sets only (float ABI irrelevant)
     if exact: proto[a] = (fix_types(rt + ' ').strip(), fix_types(params + ' ').strip(), True)
     else:
         nrt = 'int' if not re.search(r'\b(longlong|ulonglong|undefined8)\b(?!\s*\*)', rt) else fix_types(rt + ' ').strip()
@@ -159,6 +173,7 @@ for a, sz, name in idx:
         i = b.index('{')
         pl = [] if nparams in ('void', '') else split_params(fix_types(nparams + ' ').strip())
         names = []; decl = []
+        pl = [q_ for q_ in pl if q_.strip() != '...']   # variadic: a K&R definition accepts the extra arguments anyway
         for p_ in pl:
             mm = re.match(r'^(.*?)(\w+)((?:\s*\[[^\]]*\])*)$', p_.strip())
             if not mm: names = None; break
@@ -171,7 +186,8 @@ for a, sz, name in idx:
     if a in proto:
         rt, params, exact = proto[a]
         decls.append('extern %s %s(%s);' % (rt, name, params) if exact else 'extern %s %s();' % (rt, name))
-for n in imports: decls.append('extern int %s();' % n)
+for n in imports:
+    if n not in ('vectorPermute', 'vectorConditionalSelect'): decls.append('extern int %s();' % n)   # vectorPermute is declared (returning vec16) in ghidra_c.h
 called_data = set(re.findall(r'\(\s*\*\s*\(?\s*(?:\(code \*\))?\s*([A-Za-z_]\w*)\s*\)\s*\)?\s*\(', allbody))
 deref = set(re.findall(r'(?<![\w)\]])\*\s*\(?\s*([A-Za-z_]\w*)\b', allbody)) | set(re.findall(r'\b([A-Za-z_]\w*)\s*\[', allbody)) | set(re.findall(r'\(\s*[\w ]+\*+\s*\)\s*\*\s*([A-Za-z_]\w*)', allbody))
 tables = {t for t in re.findall(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', allbody) if re.match(r'^(?:_?(?:DAT|UNK|PTR|EXT)_|PTR_|FLOAT_|DOUBLE_|switchdataD_|s_|u_)', t)}
@@ -250,8 +266,9 @@ led = []
 import importlib.util
 _pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'patches.py')
 PATCHES = {}
+NOTES = {}
 if os.path.exists(_pp):
-    _spec = importlib.util.spec_from_file_location('patches', _pp); _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m); PATCHES = _m.PATCHES
+    _spec = importlib.util.spec_from_file_location('patches', _pp); _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m); PATCHES = _m.PATCHES; NOTES = getattr(_m, 'NOTES', {})
 funcs = [(a, sz, name) for a, sz, name in idx]
 for pi in range(0, len(funcs), part):
     chunk = funcs[pi:pi + part]; pn = 'part_%03d' % (pi // part)
@@ -309,7 +326,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\((STACKARG\(0x[0-9a-f]+\))\)\s*\[', r'((unsigned int *)\1)[', b)
             b = re.sub(r'\b([A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*)\._(\d+)_(\d+)_', lambda m: '(*(%s *)((unsigned char *)&(%s) + %s))' % ({'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(3), 'unsigned int'), m.group(1), m.group(2)), b)
             k_ = b.index('{'); head_, rest_ = b[:k_], b[k_:]
-            for nm in ([] if os.environ.get('NOCAST') else exact_fns):
+            for nm in ([] if (os.environ.get('NOCAST') and not os.environ.get('CASTEXACT')) else exact_fns):
                 if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (proto[exact_fns[nm]][0], nm), rest_)
             for nm in ([] if os.environ.get('NOCAST') else samepart):
                 if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
@@ -319,8 +336,11 @@ for pi in range(0, len(funcs), part):
             f.write(conv + '\n')
             if os.environ.get('SINGLE'):
                 os.makedirs(os.path.join(out, 'single'), exist_ok=True)
-                open(os.path.join(out, 'single', name + '.c'), 'w').write('#include "../decls.h"\n\n' + conv + '\n')
-            led.append((a, sz, name, pn, 'converted'))
+                open(os.path.join(out, 'single', (name if len(name) < 100 else name[:80] + '_' + a[2:]) + '.c'), 'w').write('#include "../decls.h"\n\n' + conv + '\n')
+            led.append((a, sz, name, pn, NOTES.get(name, 'converted')))
 with open(os.path.join(out, 'ledger.tsv'), 'w') as f:
     for r in led: f.write('\t'.join(map(str, r)) + '\n')
+if externals:
+    with open(os.path.join(out, 'externals.tsv'), 'w') as f:
+        for a_, n_ in externals: f.write('%s\t%s\texternal (dyld import placeholder, no code in this binary)\n' % (a_, n_))
 print(len(funcs), 'functions,', len(imports), 'imports,', len(data_syms), 'data symbols,', (len(funcs) + part - 1) // part, 'parts')

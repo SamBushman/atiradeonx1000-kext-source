@@ -1,5 +1,40 @@
 #include "decls.h"
 
+/* _GetChunkAllocationSize @ 0x97b825bc (124 bytes) */
+int _GetChunkAllocationSize(param_1, param_2)
+  undefined4 param_1;
+  int param_2;
+{
+  switch(param_1) {
+  case 0:
+  case 3:
+  case 10:
+    return 0x10;
+  case 1:
+    return 4;
+  case 2:
+  case 4:
+  case 5:
+  case 6:
+  case 7:
+  case 9:
+    return 8;
+  case 8:
+    break;
+  case 0xb:
+    if (param_2 != 0) {
+      return param_2 + 9;
+    }
+    return 8;
+  default:
+    return 0;
+  }
+  if (param_2 != 0) {
+    return param_2 + 0x39;
+  }
+  return 0x38;
+}
+
 /* _PPStreamChunkListSort @ 0x97b82668 (156 bytes) */
 int _PPStreamChunkListSort(param_1)
   int *param_1;
@@ -1437,7 +1472,7 @@ int _PPParserParseTextureSourceVar(param_1, param_2)
           if (iVar2 != 0) {
             uVar4 = *(uint *)(param_1 + 0x34);
             uVar5 = *(uint *)(param_1 + 0x38);
-            ___lshrdi3(uVar4,uVar5,local_40[0] << 2);
+            ((int (*)())___lshrdi3)(uVar4,uVar5,local_40[0] << 2);
             iVar2 = _memcmp(local_140,"CUBE",5);
             uVar6 = 0;
             if (iVar2 != 0) {
@@ -1473,12 +1508,12 @@ int _PPParserParseTextureSourceVar(param_1, param_2)
             }
             if ((extraout_r4 & 0xf) == 0xf) {
               iVar2 = uVar1 << 2;
-              uVar7 = ___ashldi3(0,0xf,iVar2);
+              uVar7 = ((int (*)())___ashldi3)(0,0xf,iVar2);
               uVar4 = uVar4 & ~(uint)((ulonglong)uVar7 >> 0x20);
               uVar5 = uVar5 & ~(uint)uVar7;
               *(uint *)(param_1 + 0x34) = uVar4;
               *(uint *)(param_1 + 0x38) = uVar5;
-              uVar7 = ___ashldi3(0,uVar6,iVar2);
+              uVar7 = ((int (*)())___ashldi3)(0,uVar6,iVar2);
               *(uint *)(param_1 + 0x34) = uVar4 | (uint)((ulonglong)uVar7 >> 0x20);
               *(uint *)(param_1 + 0x38) = uVar5 | (uint)uVar7;
             }
@@ -1493,6 +1528,54 @@ int _PPParserParseTextureSourceVar(param_1, param_2)
     }
   }
   return iVar3;
+}
+
+/* ___lshrdi3 @ 0x97b84af0 (96 bytes) */
+undefined8 ___lshrdi3(param_1, param_2, param_3)
+  uint param_1;
+  uint param_2;
+  uint param_3;
+{
+  uint uVar1;
+  undefined4 uStack_30;
+  
+  if (param_3 == 0) {
+    return CONCAT44(param_2,param_1);
+  }
+  uVar1 = 0x20 - param_3;
+  if ((int)uVar1 < 1) {
+    param_1 = param_1 >> (-uVar1 & 0x3f);
+    uStack_30 = 0;
+  }
+  else {
+    uStack_30 = param_1 >> (param_3 & 0x3f);
+    param_1 = param_2 >> (param_3 & 0x3f) | param_1 << (uVar1 & 0x3f);
+  }
+  return CONCAT44(param_1,uStack_30);
+}
+
+/* ___ashldi3 @ 0x97b84b50 (96 bytes) */
+undefined8 ___ashldi3(param_1, param_2, param_3)
+  int param_1;
+  uint param_2;
+  uint param_3;
+{
+  uint uVar1;
+  undefined4 uStack_2c;
+  
+  if (param_3 == 0) {
+    return CONCAT44(param_2,param_1);
+  }
+  uVar1 = 0x20 - param_3;
+  if ((int)uVar1 < 1) {
+    param_2 = param_2 << (-uVar1 & 0x3f);
+    uStack_2c = 0;
+  }
+  else {
+    uStack_2c = param_2 << (param_3 & 0x3f);
+    param_2 = param_1 << (param_3 & 0x3f) | param_2 >> (uVar1 & 0x3f);
+  }
+  return CONCAT44(uStack_2c,param_2);
 }
 
 /* _PPStreamGetTexOperationCount @ 0x97b84bb0 (60 bytes) */
@@ -1847,6 +1930,18 @@ int __dyld_func_lookup()
   return;
 }
 
+/* ___initialize_Cplusplus @ 0x97b85418 (88 bytes) */
+int ___initialize_Cplusplus()
+{
+  code *apcStack_28 [9];
+  
+  ((int (*)())__dyld_func_lookup)("__dyld_call_module_initializers_for_dylib",apcStack_28);
+  if (apcStack_28[0] != (code *)0x0) {
+    (*apcStack_28[0])(PTR___mh_dylib_header_a7b7c0a0);
+  }
+  return;
+}
+
 /* FUN_97b85470 @ 0x97b85470 (32 bytes) */
 int FUN_97b85470()
 {
@@ -2160,7 +2255,7 @@ int _IncreaseHashTableSize(param_1)
   int local_20;
   
   _memcpy(local_50,param_1,0x38);
-  iVar1 = ((int (*)())_InitAtomTable)(param_1,local_40 * 2 + 1);
+  iVar1 = _InitAtomTable(param_1,local_40 * 2 + 1);
   uVar2 = 0;
   if (iVar1 != 0) {
     iVar1 = *(int *)((int)param_1 + 0x30);
@@ -2168,7 +2263,7 @@ int _IncreaseHashTableSize(param_1)
       do {
         iVar4 = local_50[0] + *(int *)(iVar1 * 4 + local_28);
         iVar3 = ((int (*)())_FindHashLoc)(local_50,iVar4);
-        ((int (*)())_AddAtomFixed)(param_1,iVar4,*(undefined4 *)(iVar3 * 8 + local_44 + 4));
+        _AddAtomFixed(param_1,iVar4,*(undefined4 *)(iVar3 * 8 + local_44 + 4));
         iVar1 = iVar1 + 1;
       } while (iVar1 < local_20);
     }
@@ -2250,142 +2345,5 @@ int _GetReversedAtom(param_1, param_2)
     return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 0x2c));
   }
   return 0;
-}
-
-/* _AddAtomFixed @ 0x97b85cdc (196 bytes) */
-int _AddAtomFixed(param_1, param_2, param_3)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-{
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  
-  iVar1 = ((int (*)())_LookUpAddStringHash)();
-  iVar3 = *(int *)(param_1 + 0x34);
-  if ((iVar3 <= *(int *)(param_1 + 0x30)) || (iVar3 <= param_3)) {
-    iVar3 = iVar3 << 1;
-    if (iVar3 <= param_3) {
-      iVar3 = param_3 + 1;
-    }
-    ((int (*)())_GrowAtomTable)(param_1,iVar3);
-  }
-  *(undefined4 *)(param_3 * 4 + *(int *)(param_1 + 0x28)) =
-       *(undefined4 *)(iVar1 * 8 + *(int *)(param_1 + 0xc));
-  *(int *)(iVar1 * 8 + *(int *)(param_1 + 0xc) + 4) = param_3;
-  iVar3 = *(int *)(param_1 + 0x30);
-  while (iVar3 <= param_3) {
-    uVar2 = ((int (*)())_lReverse)(iVar3);
-    *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = uVar2;
-    iVar3 = *(int *)(param_1 + 0x30) + 1;
-    *(int *)(param_1 + 0x30) = iVar3;
-  }
-  return param_3;
-}
-
-/* _InitAtomTable @ 0x97b85da0 (368 bytes) */
-int _InitAtomTable(param_1, param_2)
-  int param_1;
-  int param_2;
-{
-  undefined4 *puVar1;
-  char cVar2;
-  char cVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  undefined4 uVar6;
-  char *pcVar7;
-  int iVar8;
-  char local_20;
-  undefined1 local_1f;
-  
-  if (param_2 < 1) {
-    param_2 = 0x7ff;
-  }
-  iVar5 = ((int (*)())_InitStringTable)();
-  uVar6 = 0;
-  if (iVar5 != 0) {
-    iVar5 = ((int (*)())_InitHashTable)(param_1 + 0xc,param_2);
-    uVar6 = 0;
-    if (iVar5 != 0) {
-      *(undefined4 *)(param_1 + 0x34) = 0;
-      *(undefined4 *)(param_1 + 0x30) = 0;
-      *(undefined4 *)(param_1 + 0x28) = 0;
-      ((int (*)())_GrowAtomTable)(param_1,0x400);
-      uVar6 = 0;
-      if (*(int *)(param_1 + 0x28) != 0) {
-        ((int (*)())_AddAtomFixed)(param_1,"<undefined>",0);
-        iVar8 = 0x121;
-        iVar5 = 0;
-        do {
-          (*(undefined4 **)(param_1 + 0x28))[iVar5] = **(undefined4 **)(param_1 + 0x28);
-          iVar8 = iVar8 + -1;
-          iVar5 = iVar5 + 1;
-        } while (iVar8 != 0);
-        pcVar7 = "~!%^&*()-+=|,.<>/?;:[]{}#";
-        local_1f = 0;
-        cVar3 = s___________________________97c23e68[0];
-        cVar2 = local_20;
-        while (local_20 = cVar3, local_20 != '\0') {
-          ((int (*)())_AddAtomFixed)(param_1,&local_20,(int)local_20);
-          pcVar7 = pcVar7 + 1;
-          cVar2 = local_20;
-          cVar3 = *pcVar7;
-        }
-        puVar4 = &_tokens;
-        local_20 = cVar2;
-        do {
-          puVar1 = puVar4 + 1;
-          uVar6 = *puVar4;
-          puVar4 = puVar4 + 2;
-          ((int (*)())_AddAtomFixed)(param_1,*puVar1,uVar6);
-        } while (puVar4 < &UNK_a7b7ce41);
-        if (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 8) != 0) {
-          ((int (*)())_AddAtomFixed)(param_1,"error",0x10a);
-        }
-        _AddAtom(param_1,"<*** end fixed atoms ***>");
-        uVar6 = 1;
-      }
-    }
-  }
-  return uVar6;
-}
-
-/* _PrintAtomTable @ 0x97b85f10 (208 bytes) */
-int _PrintAtomTable(param_1)
-  int *param_1;
-{
-  int *piVar1;
-  int iVar2;
-  char acStack_e0 [212];
-  
-  iVar2 = 0;
-  if (0 < param_1[0xc]) {
-    do {
-      _sprintf(acStack_e0,"%d: \"%s\"",iVar2,*param_1 + *(int *)(iVar2 * 4 + param_1[10]));
-      _CPPDebugLogMsg(acStack_e0);
-      iVar2 = iVar2 + 1;
-    } while (iVar2 < param_1[0xc]);
-  }
-  piVar1 = param_1 + 6;
-  _sprintf(acStack_e0,"Hash table: size=%d, entries=%d, collisions=",param_1[4],param_1[5]);
-  _CPPDebugLogMsg(acStack_e0);
-  iVar2 = 2;
-  do {
-    _sprintf(acStack_e0," %d",*piVar1);
-    _CPPDebugLogMsg(acStack_e0);
-    iVar2 = iVar2 + -1;
-    piVar1 = piVar1 + 1;
-  } while (-1 < iVar2);
-  return;
-}
-
-/* _GetStringOfAtom @ 0x97b85fe0 (24 bytes) */
-int _GetStringOfAtom(param_1, param_2)
-  int *param_1;
-  int param_2;
-{
-  return *param_1 + *(int *)(param_2 * 4 + param_1[10]);
 }
 

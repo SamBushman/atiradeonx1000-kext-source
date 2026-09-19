@@ -44,7 +44,9 @@ if und:
         for n in sorted(und):
             if re.search(r'\(\s*\*\s*%s\s*\)\s*\(' % re.escape(n), allsrc): f.write('extern int (*%s)();\n' % n)
             elif re.search(r'(?:\*\s*|\b)%s\s*\[' % re.escape(n), allsrc): f.write('extern unsigned char *%s;\n' % n)
-            else: f.write('extern unsigned int %s;\n' % n)
+            elif any(not re.search(r'[\w)\]]\s*$', allsrc[max(0, m_.start() - 40):m_.start()]) for m_ in re.finditer(r'\*\s*%s\b' % re.escape(n), allsrc)): f.write('extern unsigned char *%s;\n' % n)   # dereferenced (a unary `*`, not a multiplication): a pointer
+            elif re.search(r'\(\s*(?:uint|ulong|unsigned int|undefined4)\s*\)\s*%s\b' % re.escape(n), allsrc) and not re.search(r'\b%s\s*[<>]=?\s*-?0\b' % re.escape(n), allsrc): f.write('extern unsigned int %s;\n' % n)
+            else: f.write('extern int %s;\n' % n)   # signedness comes from use (`x < 0`, no unsigned casts); a wrongly unsigned global makes gcc delete `x < 0` branches
     with open(os.path.join(out, 'decls.h'), 'a') as f: f.write('#include "extra_decls.h"\n')
     subprocess.run('rm -rf %s/corpus && cp -r %s %s/corpus && tar czf %s.tgz -C %s corpus && scp -q %s.tgz G5:/tmp/bc.tgz' % (tmp, out, tmp, tmp, tmp, tmp), shell=True, check=True)
     r = subprocess.run(['ssh', 'G5', script], capture_output=True, text=True); print('2nd pass:', r.stdout.strip())

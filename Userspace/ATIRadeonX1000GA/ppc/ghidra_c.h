@@ -13,6 +13,8 @@ typedef unsigned long ulong;
 typedef unsigned short ushort;
 typedef unsigned char uchar;
 typedef unsigned char byte;
+typedef signed char sbyte;
+typedef unsigned short word;
 typedef unsigned char bool;
 typedef long long longlong;
 typedef unsigned long long ulonglong;
@@ -35,7 +37,33 @@ typedef unsigned long pthread_key_t;
 typedef struct { long __sig; char __opaque[4]; } pthread_once_t;
 typedef struct { unsigned char opaque[8]; } pthread_mutexattr_t;
 typedef struct { unsigned int magic, cputype, cpusubtype, filetype, ncmds, sizeofcmds, flags; } MACH_HEADER_t;
-#define NAN __builtin_nanf("")
+#define NAN(x) __builtin_isnan(x)
+typedef long double longdouble;
+typedef char *va_list;
+typedef struct { unsigned char opaque[88]; } FILE;
+typedef struct { char sectname[16]; char segname[16]; unsigned int addr, size, offset, align, reloff, nreloc, flags, reserved1, reserved2; } GhidraMachOSection;
+typedef GhidraMachOSection section;
+typedef struct { unsigned int cmd, cmdsize; char segname[16]; unsigned int vmaddr, vmsize, fileoff, filesize, maxprot, initprot, nsects, flags; } GhidraMachOCommand;
+typedef GhidraMachOCommand segment_command;
+typedef GhidraMachOCommand load_command;
+#define CARRY4(a, b) (((unsigned int)(a) + (unsigned int)(b)) < (unsigned int)(a))
+#define CARRY2(a, b) (((unsigned short)((a) + (b))) < (unsigned short)(a))
+#define CARRY1(a, b) (((unsigned char)((a) + (b))) < (unsigned char)(a))
+#define SCARRY4(a, b) ((((int)(a) >= 0) == ((int)(b) >= 0)) && (((int)(a) >= 0) != (((int)(a) + (int)(b)) >= 0)))
+#define SCARRY2(a, b) 0
+#define SCARRY1(a, b) 0
+#define SBORROW4(a, b) ((((int)(a) >= 0) != ((int)(b) >= 0)) && (((int)(a) >= 0) != (((int)(a) - (int)(b)) >= 0)))
+#define SBORROW2(a, b) 0
+#define SBORROW1(a, b) 0
+#define LOCK() ((void)0)
+#define UNLOCK() ((void)0)
+#define ROUND(x) ((int)((x) + 0.5))
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+#define INT2FLOAT(x) ((double)(x))
+#define FLOAT2FLOAT(x) ((double)(x))
+#define TRUNC(x) ((int)(x))
+#define POPCOUNT(x) __builtin_popcount(x)
+#define BREAK() __builtin_trap()
 #define STACKARG(off) (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + (off)))
 typedef unsigned long long uint64_t_g;
 #define true 1
@@ -48,10 +76,12 @@ typedef unsigned long long uint64_t_g;
 #define CONCAT21(a, b) ((((unsigned int)(unsigned short)(a)) << 8) | (unsigned char)(b))
 #define CONCAT11(a, b) ((((unsigned short)(unsigned char)(a)) << 8) | (unsigned char)(b))
 #define CONCAT71(a, b) ((((ulonglong)(a)) << 8) | (unsigned char)(b))
+#define CONCAT42(a, b) ((((ulonglong)(unsigned int)(a)) << 16) | (unsigned short)(b))
+#define CONCAT62(a, b) ((((ulonglong)(a)) << 16) | (unsigned short)(b))
 #define CONCAT26(a, b) ((((ulonglong)(unsigned short)(a)) << 48) | ((ulonglong)(b) & 0xffffffffffffULL))
-#define GBITS(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), float), ({ union { float f; unsigned int u; } _gu; _gu.f = (x); _gu.u; }), (x))
-#define SUB41(x, n) ((unsigned char)(GBITS(x) >> (8 * (n))))
-#define SUB42(x, n) ((unsigned short)(GBITS(x) >> (8 * (n))))
+#define GBITS(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), float), ({ __typeof__(x) _gv = (x); *(unsigned int *)&_gv; }), (x))
+#define SUB41(x, n) ((unsigned char)(((unsigned long)GBITS(x)) >> (8 * (n))))
+#define SUB42(x, n) ((unsigned short)(((unsigned long)GBITS(x)) >> (8 * (n))))
 #define SUB84(x, n) ((unsigned int)((x) >> (8 * (n))))
 #define SUB81(x, n) ((unsigned char)((x) >> (8 * (n))))
 #define SUB21(x, n) ((unsigned char)((x) >> (8 * (n))))
@@ -59,6 +89,12 @@ typedef unsigned long long uint64_t_g;
 #define ZEXT14(x) ((unsigned int)(unsigned char)(x))
 #define ZEXT24(x) ((unsigned int)(unsigned short)(x))
 #define ZEXT12(x) ((unsigned short)(unsigned char)(x))
+/* libgcc/libstdc++ unwinder types Ghidra's own type archive supplies (layouts derived from the disassembly: sizeof(_Unwind_Exception)==32,
+   `param[-2].reserved[2]` is __cxa_exception::terminateHandler) */
+typedef struct _Unwind_Exception { unsigned long long exception_class; void (*exception_cleanup)(); unsigned long private_1, private_2; unsigned long reserved[3]; } __attribute__((aligned(16))) _Unwind_Exception;
+typedef struct dwarf_eh_bases { void *tbase, *dbase, *func; } dwarf_eh_bases;
+typedef struct { unsigned char v[16]; } vec16;   /* AltiVec 128-bit register */
+extern vec16 vectorPermute(), vectorConditionalSelect();
 #define ZEXT816(x) (x)
 #define SEXT48(x) ((longlong)(int)(x))
 #define sync(n) __asm__ __volatile__("sync" ::: "memory")

@@ -1,5 +1,368 @@
 #include "decls.h"
 
+/* operator_delete @ 0x97c1734c (40 bytes) */
+int operator_delete(param_1)
+  void *param_1;
+{
+  if (param_1 != (void *)0x0) {
+    _free(param_1);
+  }
+  return;
+}
+
+/* std__allocator_char___allocator @ 0x97c17374 (4 bytes) */
+int std__allocator_char___allocator()
+{
+  return;
+}
+
+/* std__allocator_char___allocator_97c17378 @ 0x97c17378 (4 bytes) */
+int std__allocator_char___allocator_97c17378()
+{
+  return;
+}
+
+/* std__allocator_char___allocator_97c1737c @ 0x97c1737c (4 bytes) */
+int std__allocator_char___allocator_97c1737c()
+{
+  return;
+}
+
+/* std__allocator_char___allocator_97c17380 @ 0x97c17380 (4 bytes) */
+int std__allocator_char___allocator_97c17380(param_1)
+  unsigned char * param_1;
+{
+  return;
+}
+
+/* std__allocator_char___allocator_97c17384 @ 0x97c17384 (4 bytes) */
+int std__allocator_char___allocator_97c17384(param_1)
+  unsigned char * param_1;
+{
+  return;
+}
+
+/* std__allocator_char___allocator_97c17388 @ 0x97c17388 (4 bytes) */
+int std__allocator_char___allocator_97c17388(param_1)
+  unsigned char * param_1;
+{
+  return;
+}
+
+/* std__allocator_char____allocator @ 0x97c1738c (8 bytes) */
+int std__allocator_char____allocator(this)
+  unsigned char * this;
+{
+  ~allocator(this);
+  return;
+}
+
+/* std__allocator_char____allocator_97c17394 @ 0x97c17394 (8 bytes) */
+int std__allocator_char____allocator_97c17394(this)
+  unsigned char * this;
+{
+  ~allocator(this);
+  return;
+}
+
+/* std__allocator_char____allocator_97c1739c @ 0x97c1739c (4 bytes) */
+int std__allocator_char____allocator_97c1739c(this)
+  unsigned char * this;
+{
+  return;
+}
+
+/* std__allocator_char___address @ 0x97c173a0 (8 bytes) */
+int std__allocator_char___address(this, param_1)
+  unsigned char * this;
+  char *param_1;
+{
+  return param_1;
+}
+
+/* std__allocator_char___address_97c173a8 @ 0x97c173a8 (8 bytes) */
+int std__allocator_char___address_97c173a8(this, param_1)
+  unsigned char * this;
+  char *param_1;
+{
+  return param_1;
+}
+
+/* std__allocator_char___max_size @ 0x97c173b0 (8 bytes) */
+int std__allocator_char___max_size()
+{
+  return 0xffffffff;
+}
+
+/* std____default_alloc_template_true_0____S_freelist_index @ 0x97c173b8 (16 bytes) */
+int std____default_alloc_template_true_0____S_freelist_index(param_1)
+  ulong param_1;
+{
+  return (param_1 + 7 >> 3) - 1;
+}
+
+/* std____default_alloc_template_true_0____Lock___Lock @ 0x97c173c8 (4 bytes) */
+int std____default_alloc_template_true_0____Lock___Lock(this)
+  unsigned char * this;
+{
+  _Lock(this);
+  return;
+}
+
+/* std____default_alloc_template_true_0____Lock___Lock_97c173cc @ 0x97c173cc (4 bytes) */
+int std____default_alloc_template_true_0____Lock___Lock_97c173cc(this)
+  unsigned char * this;
+{
+  _Lock(this);
+  return;
+}
+
+/* std____default_alloc_template_true_0____Lock___Lock_97c173d0 @ 0x97c173d0 (28 bytes) */
+int std____default_alloc_template_true_0____Lock___Lock_97c173d0(this)
+  unsigned char * this;
+{
+  _pthread_mutex_lock((pthread_mutex_t *)&_S_node_allocator_lock);
+  return;
+}
+
+/* std____default_alloc_template_true_0____Lock____Lock @ 0x97c173ec (8 bytes) */
+int std____default_alloc_template_true_0____Lock____Lock(this)
+  unsigned char * this;
+{
+  ~_Lock(this);
+  return;
+}
+
+/* std____default_alloc_template_true_0____Lock____Lock_97c173f4 @ 0x97c173f4 (8 bytes) */
+int std____default_alloc_template_true_0____Lock____Lock_97c173f4(this)
+  unsigned char * this;
+{
+  ~_Lock(this);
+  return;
+}
+
+/* std____default_alloc_template_true_0____Lock____Lock_97c173fc @ 0x97c173fc (28 bytes) */
+int std____default_alloc_template_true_0____Lock____Lock_97c173fc(this)
+  unsigned char * this;
+{
+  _pthread_mutex_unlock((pthread_mutex_t *)&_S_node_allocator_lock);
+  return;
+}
+
+/* std____default_alloc_template_true_0____S_round_up @ 0x97c17418 (12 bytes) */
+int std____default_alloc_template_true_0____S_round_up(param_1)
+  ulong param_1;
+{
+  return param_1 + 7 & 0xfffffff8;
+}
+
+/* std____default_alloc_template_true_0___allocate @ 0x97c17424 (264 bytes) */
+int std____default_alloc_template_true_0___allocate(param_1)
+  ulong param_1;
+{
+  uint uVar1;
+  char *pcVar2;
+  undefined4 *puVar3;
+  char in_RESERVE;
+  byte in_cr0;
+  unsigned char a_Stack_30 [28];
+  
+  if (_S_force_new == 0) {
+    pcVar2 = _getenv("GLIBCPP_FORCE_NEW");
+    if (pcVar2 == (char *)0x0) {
+      do {
+        if (in_RESERVE != '\0') {
+          _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+    }
+    else {
+      do {
+        if (in_RESERVE != '\0') {
+          _S_force_new = storeWordConditionalIndexed(_S_force_new + 1,0,0xa7b7c00c);
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+    }
+  }
+  if ((param_1 < 0x81) && (_S_force_new < 1)) {
+    uVar1 = param_1 + 7 >> 1 & 0x7ffffffc;
+    _Lock___Lock(a_Stack_30);
+    puVar3 = *(undefined4 **)(&DAT_a7b7bf90 + uVar1);
+    if (puVar3 == (undefined4 *)0x0) {
+      puVar3 = (undefined4 *)((int (*)())std____default_alloc_template_true_0____S_refill)(param_1 + 7 & 0xfffffff8);
+    }
+    else {
+      *(undefined4 *)(&DAT_a7b7bf90 + uVar1) = *puVar3;
+    }
+    if (puVar3 == (undefined4 *)0x0) {
+      std____throw_bad_alloc();
+    }
+    _Lock____Lock(a_Stack_30);
+  }
+  else {
+    puVar3 = operator_new(param_1);
+  }
+  return puVar3;
+}
+
+/* std__allocator_char___allocate @ 0x97c17544 (272 bytes) */
+int std__allocator_char___allocate(param_1, param_2)
+  ulong param_1;
+  void *param_2;
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  char *pcVar3;
+  char in_RESERVE;
+  byte bVar4;
+  unsigned char a_Stack_30 [28];
+  
+  bVar4 = (param_2 == (void *)0x0) << 1;
+  puVar2 = (undefined4 *)0x0;
+  if (param_2 != (void *)0x0) {
+    if (__default_alloc_template_true_0____S_force_new == 0) {
+      pcVar3 = _getenv("GLIBCPP_FORCE_NEW");
+      if (pcVar3 == (char *)0x0) {
+        do {
+          if (in_RESERVE != '\0') {
+            __default_alloc_template_true_0____S_force_new =
+                 storeWordConditionalIndexed
+                           (__default_alloc_template_true_0____S_force_new + -1,0,0xa7b7c00c);
+            bVar4 = 2;
+          }
+        } while (!(bool)(bVar4 >> 1 & 1));
+      }
+      else {
+        do {
+          if (in_RESERVE != '\0') {
+            __default_alloc_template_true_0____S_force_new =
+                 storeWordConditionalIndexed
+                           (__default_alloc_template_true_0____S_force_new + 1,0,0xa7b7c00c);
+            bVar4 = 2;
+          }
+        } while (!(bool)(bVar4 >> 1 & 1));
+      }
+    }
+    if ((param_2 < (void *)0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
+      uVar1 = (int)param_2 + 7U >> 1 & 0x7ffffffc;
+      __default_alloc_template_true_0____Lock___Lock(a_Stack_30);
+      puVar2 = *(undefined4 **)(&DAT_a7b7bf90 + uVar1);
+      if (puVar2 == (undefined4 *)0x0) {
+        puVar2 = (undefined4 *)
+                 __default_alloc_template_true_0____S_refill((int)param_2 + 7U & 0xfffffff8);
+      }
+      else {
+        *(undefined4 *)(&DAT_a7b7bf90 + uVar1) = *puVar2;
+      }
+      if (puVar2 == (undefined4 *)0x0) {
+        std____throw_bad_alloc();
+      }
+      __default_alloc_template_true_0____Lock____Lock(a_Stack_30);
+    }
+    else {
+      puVar2 = operator_new((ulong)param_2);
+    }
+  }
+  return puVar2;
+}
+
+/* std____default_alloc_template_true_0___deallocate @ 0x97c1766c (136 bytes) */
+int std____default_alloc_template_true_0___deallocate(param_1, param_2)
+  void *param_1;
+  ulong param_2;
+{
+  uint uVar1;
+  unsigned char a_Stack_30 [28];
+  
+  if ((param_2 < 0x81) && (_S_force_new < 1)) {
+    uVar1 = param_2 + 7 >> 1 & 0x7ffffffc;
+    _Lock___Lock(a_Stack_30);
+    *(undefined4 *)param_1 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
+    *(void **)(&DAT_a7b7bf90 + uVar1) = param_1;
+    _Lock____Lock(a_Stack_30);
+  }
+  else {
+    ((int (*)())operator_delete)(param_1);
+  }
+  return;
+}
+
+/* std__allocator_char___deallocate @ 0x97c176f4 (140 bytes) */
+int std__allocator_char___deallocate(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  ulong param_2;
+{
+  uint uVar1;
+  unsigned char a_Stack_30 [28];
+  
+  if ((param_2 < 0x81) && (__default_alloc_template_true_0____S_force_new < 1)) {
+    uVar1 = param_2 + 7 >> 1 & 0x7ffffffc;
+    __default_alloc_template_true_0____Lock___Lock(a_Stack_30);
+    *(undefined4 *)param_1 = *(undefined4 *)(&DAT_a7b7bf90 + uVar1);
+    *(char **)(&DAT_a7b7bf90 + uVar1) = param_1;
+    __default_alloc_template_true_0____Lock____Lock(a_Stack_30);
+  }
+  else {
+    ((int (*)())operator_delete)(param_1);
+  }
+  return;
+}
+
+/* std__allocator_char___construct @ 0x97c17780 (20 bytes) */
+int std__allocator_char___construct(this, param_1, param_2)
+  unsigned char * this;
+  char *param_1;
+  char *param_2;
+{
+  if (param_1 == (char *)0x0) {
+    return;
+  }
+  *param_1 = *param_2;
+  return;
+}
+
+/* std__allocator_char___destroy @ 0x97c17794 (4 bytes) */
+int std__allocator_char___destroy(param_1)
+  char *param_1;
+{
+  return;
+}
+
+/* std__allocator_wchar_t___allocator @ 0x97c17798 (4 bytes) */
+int std__allocator_wchar_t___allocator()
+{
+  return;
+}
+
+/* std__allocator_wchar_t___allocator_97c1779c @ 0x97c1779c (4 bytes) */
+int std__allocator_wchar_t___allocator_97c1779c()
+{
+  return;
+}
+
+/* std__allocator_wchar_t___allocator_97c177a0 @ 0x97c177a0 (4 bytes) */
+int std__allocator_wchar_t___allocator_97c177a0()
+{
+  return;
+}
+
+/* std__allocator_wchar_t___allocator_97c177a4 @ 0x97c177a4 (4 bytes) */
+int std__allocator_wchar_t___allocator_97c177a4(param_1)
+  unsigned char * param_1;
+{
+  return;
+}
+
+/* std__allocator_wchar_t___allocator_97c177a8 @ 0x97c177a8 (4 bytes) */
+int std__allocator_wchar_t___allocator_97c177a8(param_1)
+  unsigned char * param_1;
+{
+  return;
+}
+
 /* std__allocator_wchar_t___allocator_97c177ac @ 0x97c177ac (4 bytes) */
 int std__allocator_wchar_t___allocator_97c177ac(param_1)
   unsigned char * param_1;
@@ -126,7 +489,6 @@ int std____default_alloc_template_true_0____S_refill(param_1)
 }
 
 /* std____default_alloc_template_true_0____S_chunk_alloc @ 0x97c178f4 (368 bytes) */
-#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int std____default_alloc_template_true_0____S_chunk_alloc(param_1, param_2)
   ulong param_1;
   int *param_2;
@@ -177,7 +539,6 @@ LAB_97c1791c:
     _S_heap_size = _S_heap_size + uVar4;
   } while( true );
 }
-#endif
 
 /* std____default_alloc_template_true_0___reallocate @ 0x97c17a64 (172 bytes) */
 int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
@@ -207,7 +568,7 @@ int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
 int operator_delete__(param_1)
   void *param_1;
 {
-  operator_delete(param_1);
+  ((int (*)())operator_delete)(param_1);
   return;
 }
 
@@ -302,7 +663,7 @@ int std__logic_error___logic_error_97c17be4(this)
   }
   std__exception___exception((unsigned char *)this);
   if ((in_r4 & 1) != 0) {
-    operator_delete(this);
+    ((int (*)())operator_delete)(this);
   }
   return;
 }
@@ -350,322 +711,6 @@ int std__invalid_argument__invalid_argument(this, param_1)
   unsigned char * param_1;
 {
   invalid_argument(this,param_1);
-  return;
-}
-
-/* std__invalid_argument__invalid_argument_97c17cec @ 0x97c17cec (4 bytes) */
-int std__invalid_argument__invalid_argument_97c17cec(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  invalid_argument(this,param_1);
-  return;
-}
-
-/* std__invalid_argument__invalid_argument_97c17cf0 @ 0x97c17cf0 (68 bytes) */
-int std__invalid_argument__invalid_argument_97c17cf0(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  logic_error__logic_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__invalid_argument_a7b7dec0;
-  return;
-}
-
-/* std__length_error__length_error @ 0x97c17d34 (4 bytes) */
-int std__length_error__length_error(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  length_error(this,param_1);
-  return;
-}
-
-/* std__length_error__length_error_97c17d38 @ 0x97c17d38 (4 bytes) */
-int std__length_error__length_error_97c17d38(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  length_error(this,param_1);
-  return;
-}
-
-/* std__length_error__length_error_97c17d3c @ 0x97c17d3c (68 bytes) */
-int std__length_error__length_error_97c17d3c(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  logic_error__logic_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__length_error_a7b7dea8;
-  return;
-}
-
-/* std__out_of_range__out_of_range @ 0x97c17d80 (4 bytes) */
-int std__out_of_range__out_of_range(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  out_of_range(this,param_1);
-  return;
-}
-
-/* std__out_of_range__out_of_range_97c17d84 @ 0x97c17d84 (4 bytes) */
-int std__out_of_range__out_of_range_97c17d84(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  out_of_range(this,param_1);
-  return;
-}
-
-/* std__out_of_range__out_of_range_97c17d88 @ 0x97c17d88 (68 bytes) */
-int std__out_of_range__out_of_range_97c17d88(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  logic_error__logic_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__out_of_range_a7b7de90;
-  return;
-}
-
-/* std__runtime_error__runtime_error @ 0x97c17dcc (4 bytes) */
-int std__runtime_error__runtime_error(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  *(int *)this = DAT_a7b7c010 + 8;
-  std__string__string((unsigned char *)(this + 4),param_1);
-  return;
-}
-
-/* std__runtime_error__runtime_error_97c17dd0 @ 0x97c17dd0 (4 bytes) */
-int std__runtime_error__runtime_error_97c17dd0(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  runtime_error(this,param_1);
-  return;
-}
-
-/* std__runtime_error__runtime_error_97c17dd4 @ 0x97c17dd4 (76 bytes) */
-int std__runtime_error__runtime_error_97c17dd4(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  *(int *)this = DAT_a7b7c010 + 8;
-  std__string__string((unsigned char *)(this + 4),param_1);
-  return;
-}
-
-/* std__runtime_error___runtime_error @ 0x97c17e34 (8 bytes) */
-int std__runtime_error___runtime_error(this)
-  unsigned char * this;
-{
-  ~runtime_error(this);
-  return;
-}
-
-/* std__runtime_error___runtime_error_97c17e3c @ 0x97c17e3c (8 bytes) */
-int std__runtime_error___runtime_error_97c17e3c(this)
-  unsigned char * this;
-{
-  ~runtime_error(this);
-  return;
-}
-
-/* std__runtime_error___runtime_error_97c17e44 @ 0x97c17e44 (8 bytes) */
-int std__runtime_error___runtime_error_97c17e44(this)
-  unsigned char * this;
-{
-  ~runtime_error(this);
-  return;
-}
-
-/* std__runtime_error___runtime_error_97c17e4c @ 0x97c17e4c (136 bytes) */
-int std__runtime_error___runtime_error_97c17e4c(this)
-  unsigned char * this;
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  uint in_r4;
-  int iVar4;
-  char in_RESERVE;
-  byte in_cr0;
-  
-  iVar4 = *(int *)(this + 4);
-  *(int *)this = DAT_a7b7c010 + 8;
-  piVar2 = (int *)(iVar4 + -4);
-  do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(iVar4 + -0xc));
-  }
-  std__exception___exception((unsigned char *)this);
-  if ((in_r4 & 1) != 0) {
-    operator_delete(this);
-  }
-  return;
-}
-
-/* std__runtime_error__what @ 0x97c17ed4 (48 bytes) */
-int std__runtime_error__what(this)
-  unsigned char * this;
-{
-  *(undefined *)(*(int *)(this + 4) + *(int *)(*(int *)(this + 4) + -0xc)) =
-       *PTR__S_terminal_a7b7c0b8;
-  return *(undefined4 *)(this + 4);
-}
-
-/* std__range_error__range_error @ 0x97c17f04 (4 bytes) */
-int std__range_error__range_error(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  range_error(this,param_1);
-  return;
-}
-
-/* std__range_error__range_error_97c17f08 @ 0x97c17f08 (4 bytes) */
-int std__range_error__range_error_97c17f08(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  range_error(this,param_1);
-  return;
-}
-
-/* std__range_error__range_error_97c17f0c @ 0x97c17f0c (68 bytes) */
-int std__range_error__range_error_97c17f0c(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  runtime_error__runtime_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__range_error_a7b7de78;
-  return;
-}
-
-/* std__overflow_error__overflow_error @ 0x97c17f50 (4 bytes) */
-int std__overflow_error__overflow_error(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  overflow_error(this,param_1);
-  return;
-}
-
-/* std__overflow_error__overflow_error_97c17f54 @ 0x97c17f54 (4 bytes) */
-int std__overflow_error__overflow_error_97c17f54(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  overflow_error(this,param_1);
-  return;
-}
-
-/* std__overflow_error__overflow_error_97c17f58 @ 0x97c17f58 (68 bytes) */
-int std__overflow_error__overflow_error_97c17f58(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  runtime_error__runtime_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__overflow_error_a7b7de60;
-  return;
-}
-
-/* std__underflow_error__underflow_error @ 0x97c17f9c (4 bytes) */
-int std__underflow_error__underflow_error(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  underflow_error(this,param_1);
-  return;
-}
-
-/* std__underflow_error__underflow_error_97c17fa0 @ 0x97c17fa0 (4 bytes) */
-int std__underflow_error__underflow_error_97c17fa0(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  underflow_error(this,param_1);
-  return;
-}
-
-/* std__underflow_error__underflow_error_97c17fa4 @ 0x97c17fa4 (68 bytes) */
-int std__underflow_error__underflow_error_97c17fa4(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
-{
-  runtime_error__runtime_error((unsigned char *)this,param_1);
-  *(undefined ***)this = &PTR__underflow_error_a7b7de48;
-  return;
-}
-
-/* std__type_info___type_info @ 0x97c17fe8 (8 bytes) */
-int std__type_info___type_info(this)
-  unsigned char * this;
-{
-  ~type_info(this);
-  return;
-}
-
-/* std__type_info___type_info_97c17ff0 @ 0x97c17ff0 (8 bytes) */
-int std__type_info___type_info_97c17ff0(this)
-  unsigned char * this;
-{
-  ~type_info(this);
-  return;
-}
-
-/* std__type_info___type_info_97c17ff8 @ 0x97c17ff8 (8 bytes) */
-int std__type_info___type_info_97c17ff8(this)
-  unsigned char * this;
-{
-  ~type_info(this);
-  return;
-}
-
-/* std__type_info___type_info_97c18000 @ 0x97c18000 (44 bytes) */
-int std__type_info___type_info_97c18000(this)
-  unsigned char * this;
-{
-  uint in_r4;
-  
-  *(int *)this = DAT_a7b7c02c + 8;
-  if ((in_r4 & 1) == 0) {
-    return;
-  }
-  operator_delete(this);
-  return;
-}
-
-/* std__bad_cast___bad_cast @ 0x97c1802c (8 bytes) */
-int std__bad_cast___bad_cast(this)
-  unsigned char * this;
-{
-  ~bad_cast(this);
-  return;
-}
-
-/* std__bad_cast___bad_cast_97c18034 @ 0x97c18034 (8 bytes) */
-int std__bad_cast___bad_cast_97c18034(this)
-  unsigned char * this;
-{
-  ~bad_cast(this);
-  return;
-}
-
-/* std__bad_cast___bad_cast_97c1803c @ 0x97c1803c (8 bytes) */
-int std__bad_cast___bad_cast_97c1803c(this)
-  unsigned char * this;
-{
-  ~bad_cast(this);
   return;
 }
 

@@ -1,5 +1,608 @@
 #include "decls.h"
 
+/* _ShGetInfoLog @ 0x97ba1c6c (244 bytes) */
+int _ShGetInfoLog(param_1)
+  int *param_1;
+{
+  undefined *puVar1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  
+  iVar4 = 0;
+  if (param_1 != (int *)0x0) {
+    iVar2 = (**(code **)(*param_1 + 8))();
+    if (iVar2 == 0) {
+      iVar2 = (**(code **)(*param_1 + 0xc))(param_1);
+      if (iVar2 == 0) {
+        return 0;
+      }
+      iVar2 = (**(code **)(*param_1 + 0xc))(param_1);
+      piVar3 = *(int **)(iVar2 + 0x84);
+    }
+    else {
+      piVar3 = (int *)(**(code **)(*param_1 + 8))(param_1);
+      piVar3 = (int *)(**(code **)(*piVar3 + 0x10))();
+    }
+    puVar1 = PTR__S_terminal_a7b7c0b8;
+    if (piVar3 != (int *)0x0) {
+      *(undefined *)(piVar3[2] + *(int *)(piVar3[2] + -0xc)) = *PTR__S_terminal_a7b7c0b8;
+      TInfoSinkBase__append((char *)piVar3);
+      *(undefined *)(*piVar3 + *(int *)(*piVar3 + -0xc)) = *puVar1;
+      iVar4 = *piVar3;
+    }
+  }
+  return iVar4;
+}
+
+/* _ShGetPPStream @ 0x97ba1d60 (96 bytes) */
+int _ShGetPPStream(param_1)
+  int *param_1;
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) &&
+     (piVar1 = (int *)(**(code **)(*param_1 + 8))(), piVar1 != (int *)0x0)) {
+    uVar2 = (**(code **)(*piVar1 + 0x1c))();
+  }
+  return uVar2;
+}
+
+/* _ShGetShaderLocalParamRemapTable @ 0x97ba1dc0 (92 bytes) */
+int _ShGetShaderLocalParamRemapTable(param_1, param_2)
+  int *param_1;
+  undefined4 param_2;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getShaderLocalParamRemapTable(iVar1,param_2);
+  }
+  return uVar2;
+}
+
+/* _ShGetNumShaderLocalParams @ 0x97ba1e1c (92 bytes) */
+int _ShGetNumShaderLocalParams(param_1, param_2)
+  int *param_1;
+  undefined4 param_2;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getNumShaderLocalParams(iVar1,param_2);
+  }
+  return uVar2;
+}
+
+/* _ShAttributeBindingRequest @ 0x97ba1e78 (104 bytes) */
+int _ShAttributeBindingRequest(param_1, param_2)
+  int *param_1;
+  char *param_2;
+{
+  ulong uVar1;
+  
+  if ((param_1 != (int *)0x0) && (uVar1 = (**(code **)(*param_1 + 0xc))(), uVar1 != 0)) {
+    TGenericLinker__attributeBindingRequest(uVar1,param_2);
+    return;
+  }
+  return;
+}
+
+/* _ShGetNumActiveAttributes @ 0x97ba1ee0 (104 bytes) */
+int _ShGetNumActiveAttributes(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) &&
+     (uVar2 = 0, *(int *)(iVar1 + 4) != 0)) {
+    uVar2 = BindingTable__GetNumActiveAttributeBindings();
+  }
+  return uVar2;
+}
+
+/* _ShGetNumActiveUniforms @ 0x97ba1f48 (104 bytes) */
+int _ShGetNumActiveUniforms(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) &&
+     (uVar2 = 0, *(int *)(iVar1 + 4) != 0)) {
+    uVar2 = BindingTable__GetNumActiveUniformBindings();
+  }
+  return uVar2;
+}
+
+/* _ShGetActiveUserUniformsSize @ 0x97ba1fb0 (104 bytes) */
+int _ShGetActiveUserUniformsSize(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) &&
+     (uVar2 = 0, *(int *)(iVar1 + 4) != 0)) {
+    uVar2 = BindingTable__GetSizeActiveUserUniforms();
+  }
+  return uVar2;
+}
+
+/* _ShGetMaxAttributeLength @ 0x97ba2018 (104 bytes) */
+int _ShGetMaxAttributeLength(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) &&
+     (uVar2 = 0, *(int *)(iVar1 + 4) != 0)) {
+    uVar2 = BindingTable__GetMaxAttributeLength();
+  }
+  return uVar2;
+}
+
+/* _ShGetMaxUniformLength @ 0x97ba2080 (104 bytes) */
+int _ShGetMaxUniformLength(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if (((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) &&
+     (uVar2 = 0, *(int *)(iVar1 + 4) != 0)) {
+    uVar2 = BindingTable__GetMaxUniformLength();
+  }
+  return uVar2;
+}
+
+/* _ShGetActiveUniform @ 0x97ba20e8 (132 bytes) */
+int _ShGetActiveUniform(param_1, param_2, param_3, param_4, param_5, param_6)
+  int *param_1;
+  long param_2;
+  long *param_3;
+  long *param_4;
+  ulong *param_5;
+  char *param_6;
+{
+  ulong uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (uVar1 = (**(code **)(*param_1 + 0xc))(), uVar1 != 0)) {
+    uVar2 = TGenericLinker__getActiveUniform(uVar1,param_2,param_3,param_4,param_5,param_6);
+  }
+  return uVar2;
+}
+
+/* _ShGetUniformTypeInfo @ 0x97ba216c (116 bytes) */
+int _ShGetUniformTypeInfo(param_1, param_2, param_3, param_4)
+  int *param_1;
+  long *param_2;
+  ulong *param_3;
+  uchar *param_4;
+{
+  long lVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (lVar1 = (**(code **)(*param_1 + 0xc))(), lVar1 != 0)) {
+    uVar2 = TGenericLinker__getUniformTypeInfo(lVar1,param_2,param_3,param_4);
+  }
+  return uVar2;
+}
+
+/* _ShGetActiveAttrib @ 0x97ba21e0 (132 bytes) */
+int _ShGetActiveAttrib(param_1, param_2, param_3, param_4, param_5, param_6)
+  int *param_1;
+  long param_2;
+  long *param_3;
+  long *param_4;
+  ulong *param_5;
+  char *param_6;
+{
+  ulong uVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (uVar1 = (**(code **)(*param_1 + 0xc))(), uVar1 != 0)) {
+    uVar2 = TGenericLinker__getActiveAttrib(uVar1,param_2,param_3,param_4,param_5,param_6);
+  }
+  return uVar2;
+}
+
+/* _ShGetAttribLocation @ 0x97ba2264 (112 bytes) */
+int _ShGetAttribLocation(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0xffffffff;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = 0xffffffff;
+    if (*(char **)(iVar1 + 4) != (char *)0x0) {
+      uVar2 = BindingTable__FindAttribBindingLocationByName(*(char **)(iVar1 + 4));
+    }
+  }
+  return uVar2;
+}
+
+/* _ShGetUniformLocation @ 0x97ba22d4 (112 bytes) */
+int _ShGetUniformLocation(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0xffffffff;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = 0xffffffff;
+    if (*(char **)(iVar1 + 4) != (char *)0x0) {
+      uVar2 = BindingTable__FindClientUniformBindingLocationByName(*(char **)(iVar1 + 4));
+    }
+  }
+  return uVar2;
+}
+
+/* _ShGetPPStreamManager @ 0x97ba2344 (92 bytes) */
+int _ShGetPPStreamManager(param_1, param_2)
+  int *param_1;
+  undefined4 param_2;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getPPStreamManager(iVar1,param_2);
+  }
+  return uVar2;
+}
+
+/* _ShGetLinkerStats @ 0x97ba23a0 (84 bytes) */
+int _ShGetLinkerStats(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getStatsString();
+  }
+  return uVar2;
+}
+
+/* _ShGetCompilerStats @ 0x97ba23f4 (96 bytes) */
+int _ShGetCompilerStats(param_1)
+  int *param_1;
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) &&
+     (piVar1 = (int *)(**(code **)(*param_1 + 8))(), piVar1 != (int *)0x0)) {
+    uVar2 = (**(code **)(*piVar1 + 0x24))();
+  }
+  return uVar2;
+}
+
+/* _ShGetLinkerPPStream @ 0x97ba2454 (84 bytes) */
+int _ShGetLinkerPPStream(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getPPStreamString();
+  }
+  return uVar2;
+}
+
+/* _ShGetCompilerPPStream @ 0x97ba24a8 (96 bytes) */
+int _ShGetCompilerPPStream(param_1)
+  int *param_1;
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) &&
+     (piVar1 = (int *)(**(code **)(*param_1 + 8))(), piVar1 != (int *)0x0)) {
+    uVar2 = (**(code **)(*piVar1 + 0x28))();
+  }
+  return uVar2;
+}
+
+/* _ShGetLinkerShaderToProgramString @ 0x97ba2508 (84 bytes) */
+int _ShGetLinkerShaderToProgramString(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getShaderToProgramString();
+  }
+  return uVar2;
+}
+
+/* _ShGetCompilerShaderToProgramString @ 0x97ba255c (96 bytes) */
+int _ShGetCompilerShaderToProgramString(param_1)
+  int *param_1;
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) &&
+     (piVar1 = (int *)(**(code **)(*param_1 + 8))(), piVar1 != (int *)0x0)) {
+    uVar2 = (**(code **)(*piVar1 + 0x2c))();
+  }
+  return uVar2;
+}
+
+/* _ShGetLinkerBindingTable @ 0x97ba25bc (84 bytes) */
+int _ShGetLinkerBindingTable(param_1)
+  int *param_1;
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) && (iVar1 = (**(code **)(*param_1 + 0xc))(), iVar1 != 0)) {
+    uVar2 = TGenericLinker__getTableString();
+  }
+  return uVar2;
+}
+
+/* _ShGetCompilerSymbolTable @ 0x97ba2610 (96 bytes) */
+int _ShGetCompilerSymbolTable(param_1)
+  int *param_1;
+{
+  int *piVar1;
+  undefined4 uVar2;
+  
+  uVar2 = 0;
+  if ((param_1 != (int *)0x0) &&
+     (piVar1 = (int *)(**(code **)(*param_1 + 8))(), piVar1 != (int *)0x0)) {
+    uVar2 = (**(code **)(*piVar1 + 0x30))();
+  }
+  return uVar2;
+}
+
+/* TType__buildMangledName @ 0x97ba2670 (688 bytes) */
+int TType__buildMangledName(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  int iVar1;
+  char *pcVar2;
+  uint uVar3;
+  char acStack_20 [16];
+  
+  iVar1 = (**(code **)(*(int *)this + 0x34))();
+  if ((iVar1 != 0) || (iVar1 = (**(code **)(*(int *)this + 0x3c))(this), iVar1 != 0)) {
+    std__string__append((ulong)param_1,'\x01');
+  }
+  switch(*(uint *)(this + 0x24) >> 0x13 & 0x3f) {
+  default:
+    goto switchD_97ba270c_caseD_0;
+  case 1:
+    goto LAB_97ba2778;
+  case 2:
+    goto LAB_97ba2778;
+  case 3:
+LAB_97ba2778:
+    std__string__append((ulong)param_1,'\x01');
+    goto switchD_97ba270c_caseD_0;
+  case 5:
+    pcVar2 = "s1";
+    _strlen("s1");
+    break;
+  case 6:
+    pcVar2 = "s2";
+    _strlen("s2");
+    break;
+  case 7:
+    pcVar2 = "s3";
+    _strlen("s3");
+    break;
+  case 8:
+    pcVar2 = "sC";
+    _strlen("sC");
+    break;
+  case 9:
+    pcVar2 = "sS1";
+    _strlen("sS1");
+    break;
+  case 10:
+    pcVar2 = "sS2";
+    _strlen("sS2");
+    break;
+  case 0xb:
+    pcVar2 = "sR2";
+    _strlen("sR2");
+    break;
+  case 0xc:
+    pcVar2 = "sSR2";
+    _strlen("sSR2");
+    break;
+  case 0xe:
+    _strlen("struct-");
+    std__string__append((char *)param_1,0x97c29ef8);
+    if (*(int *)(this + 0x10) != 0) {
+      std__string__append(param_1);
+    }
+    for (uVar3 = 0;
+        uVar3 < (uint)(*(int *)(*(int *)(this + 8) + 8) - *(int *)(*(int *)(this + 8) + 4) >> 3);
+        uVar3 = uVar3 + 1) {
+      std__string__append((ulong)param_1,'\x01');
+      ((int (*)())TType__buildMangledName)(*(unsigned char **)(*(int *)(*(int *)(this + 8) + 4) + uVar3 * 8),param_1);
+    }
+    goto switchD_97ba270c_caseD_0;
+  }
+  std__string__append((char *)param_1,(ulong)pcVar2);
+switchD_97ba270c_caseD_0:
+  (**(code **)(*(int *)this + 0x2c))(this);
+  std__string__append((ulong)param_1,'\x01');
+  iVar1 = (**(code **)(*(int *)this + 0x38))(this);
+  if (iVar1 != 0) {
+    _sprintf(acStack_20,"%d",*(undefined4 *)(this + 4));
+    std__string__append((ulong)param_1,'\x01');
+    _strlen(acStack_20);
+    std__string__append((char *)param_1,(ulong)acStack_20);
+    std__string__append((ulong)param_1,'\x01');
+  }
+  return;
+}
+
+/* TVariable__dump @ 0x97ba295c (220 bytes) */
+int TVariable__dump(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  unsigned char * pTVar1;
+  
+  pTVar1 = param_1 + 8;
+  *(undefined1 *)
+   (*(int *)(*(int *)(this + 4) + 4) + *(int *)(*(int *)(*(int *)(this + 4) + 4) + -0xc)) =
+       *DAT_a7b7ba80;
+  TInfoSinkBase__append((char *)pTVar1);
+  TInfoSinkBase__append((char *)pTVar1);
+  getQualifierString(*(uint *)(this + 0x30) >> 0x19);
+  TInfoSinkBase__append((char *)pTVar1);
+  TInfoSinkBase__append((char *)pTVar1);
+  TType__getBasicString(*(uint *)(this + 0x30) >> 0x13 & 0x3f);
+  TInfoSinkBase__append((char *)pTVar1);
+  if ((*(uint *)(this + 0x30) & 0x200) != 0) {
+    TInfoSinkBase__append((char *)pTVar1);
+  }
+  TInfoSinkBase__append((char *)pTVar1);
+  return;
+}
+
+/* TFunction__dump @ 0x97ba2a38 (216 bytes) */
+int TFunction__dump(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  undefined1 *puVar1;
+  int iVar2;
+  unsigned char * pTVar3;
+  
+  puVar1 = DAT_a7b7ba80;
+  pTVar3 = param_1 + 8;
+  *(undefined1 *)
+   (*(int *)(*(int *)(this + 4) + 4) + *(int *)(*(int *)(*(int *)(this + 4) + 4) + -0xc)) =
+       *DAT_a7b7ba80;
+  TInfoSinkBase__append((char *)pTVar3);
+  TInfoSinkBase__append((char *)pTVar3);
+  TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
+  TInfoSinkBase__append((char *)pTVar3);
+  TInfoSinkBase__append((char *)pTVar3);
+  iVar2 = (**(code **)(*(int *)this + 8))(this);
+  *(undefined1 *)(*(int *)(iVar2 + 4) + *(int *)(*(int *)(iVar2 + 4) + -0xc)) = *puVar1;
+  TInfoSinkBase__append((char *)pTVar3);
+  TInfoSinkBase__append((char *)pTVar3);
+  return;
+}
+
+/* TSymbolTableLevel__dump @ 0x97ba2b10 (112 bytes) */
+int TSymbolTableLevel__dump(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  
+  iVar3 = *(int *)(this + 4);
+  iVar1 = *(int *)(iVar3 + 8);
+  while (iVar1 != iVar3) {
+    piVar2 = *(int **)(iVar1 + 0x18);
+    (**(code **)(*piVar2 + 0x14))(piVar2,param_1);
+    std___Rb_tree_base_iterator___M_increment();
+    iVar3 = *(int *)(this + 4);
+  }
+  return;
+}
+
+/* TSymbolTable__dump @ 0x97ba2b80 (268 bytes) */
+int TSymbolTable__dump(this, param_1)
+  unsigned char * this;
+  unsigned char * param_1;
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  unsigned char * psVar4;
+  int iVar5;
+  char in_RESERVE;
+  byte bVar6;
+  undefined4 local_70;
+  int local_6c;
+  char acStack_60 [16];
+  undefined4 local_50 [4];
+  undefined4 local_40;
+  
+  iVar5 = (*(int *)(this + 4) - *(int *)this >> 2) + -1;
+  if (-1 < iVar5) {
+    psVar4 = (unsigned char *)(param_1 + 8);
+    do {
+      bVar6 = (iVar5 == 0) << 1;
+      TInfoSinkBase__append((char *)psVar4);
+      _sprintf(acStack_60,"%d",iVar5);
+      local_50[0] = GetGlobalPoolAllocator();
+      std__string__string((unsigned char *)&local_70,acStack_60,(unsigned char *)local_50);
+      TInfoSinkBase__append(psVar4);
+      piVar2 = (int *)(local_6c + -4);
+      local_40 = local_70;
+      do {
+        iVar3 = *piVar2;
+        if (in_RESERVE != '\0') {
+          iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
+          *piVar2 = iVar1;
+          bVar6 = 2;
+        }
+      } while (!(bool)(bVar6 >> 1 & 1));
+      if (iVar3 < 1) {
+        std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
+      }
+      TInfoSinkBase__append((char *)psVar4);
+      ((int (*)())TSymbolTableLevel__dump)(*(unsigned char **)(*(int *)this + iVar5 * 4),param_1);
+      iVar5 = iVar5 + -1;
+    } while (-1 < iVar5);
+  }
+  return;
+}
+
+/* TFunction___TFunction @ 0x97ba2c8c (8 bytes) */
+int TFunction___TFunction(this)
+  unsigned char * this;
+{
+  ~TFunction(this);
+  return;
+}
+
 /* TFunction___TFunction_97ba2c94 @ 0x97ba2c94 (8 bytes) */
 int TFunction___TFunction_97ba2c94(this)
   unsigned char * this;
@@ -1195,7 +1798,7 @@ LAB_97ba3784:
     iVar6 = (int)psVar51 - (int)psVar49 >> 1;
     iVar58 = iVar6 + 1;
     if (9999 < iVar45) {
-      ((int (*)())yyerror)("parser stack overflow");
+      yyerror("parser stack overflow");
       return 2;
     }
     iVar45 = local_60;
@@ -1261,7 +1864,7 @@ LAB_97ba3784:
   if (iVar55 != 0) goto LAB_97ba3970;
 LAB_97bac03c:
   if (iVar47 == 0) {
-    ((int (*)())yyerror)("parse error");
+    yyerror("parse error");
   }
 LAB_97bac050:
   if (iVar47 == 3) {
@@ -2340,7 +2943,7 @@ LAB_97ba5e64:
         psVar18 = psVar16;
       }
       *(unsigned char **)(psVar4 + 0x14) = psVar18;
-      TType__buildMangledName(psVar4);
+      ((int (*)())TType__buildMangledName)(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
     std__operator_((unsigned char *)&local_840,(unsigned char *)(uVar59 + 0x44));
@@ -2398,7 +3001,7 @@ LAB_97ba5e64:
         psVar18 = psVar16;
       }
       *(unsigned char **)(psVar4 + 0x14) = psVar18;
-      TType__buildMangledName(psVar4);
+      ((int (*)())TType__buildMangledName)(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
     std__operator_((unsigned char *)&local_840,(unsigned char *)(uVar59 + 0x44));
@@ -4005,7 +4608,7 @@ LAB_97ba86ec:
         psVar18 = psVar16;
       }
       *(unsigned char **)(psVar4 + 0x14) = psVar18;
-      TType__buildMangledName(psVar4);
+      ((int (*)())TType__buildMangledName)(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
     std__operator_((unsigned char *)&local_850,(unsigned char *)(uVar59 + 0x44));
@@ -4072,7 +4675,7 @@ LAB_97ba8824:
         psVar18 = psVar16;
       }
       *(unsigned char **)(psVar4 + 0x14) = psVar18;
-      TType__buildMangledName(psVar4);
+      ((int (*)())TType__buildMangledName)(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
     std__operator_((unsigned char *)&local_850,(unsigned char *)(uVar59 + 0x44));
@@ -6450,7 +7053,6 @@ LAB_97ba5548:
 }
 
 /* yylex @ 0x97bac120 (4128 bytes) */
-#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yylex(param_1, param_2)
   unsigned char * param_1;
   void *param_2;
@@ -6733,167 +7335,167 @@ LAB_97bac330:
     *(char **)param_1 = _yylineno;
     break;
   case 0x2d:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x2e:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x2f:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x30:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x31:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x32:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x33:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x34:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x35:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x36:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x37:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x38:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x39:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3a:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3b:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3c:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3d:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3e:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x3f:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x40:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x41:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x42:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x43:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x44:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x45:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x46:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x47:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x48:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x49:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4a:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4b:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4c:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4d:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4e:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x4f:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x50:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x51:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x52:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x53:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x54:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x55:
-    ((int (*)())PaReservedWord)();
+    PaReservedWord();
     uVar7 = 0;
     break;
   case 0x56:
@@ -6908,7 +7510,7 @@ LAB_97bac330:
       psVar3 = psVar6;
     }
     *(unsigned char **)(param_1 + 4) = psVar3;
-    uVar7 = ((int (*)())PaIdentOrType)(psVar3,param_2,(unsigned char **)(param_1 + 8));
+    uVar7 = PaIdentOrType(psVar3,param_2,(unsigned char **)(param_1 + 8));
     break;
   case 0x57:
     *(char **)param_1 = _yylineno;
@@ -6953,7 +7555,7 @@ LAB_97bac330:
     *(float *)(param_1 + 4) = (float)dVar14;
     break;
   case 0x5e:
-    iVar11 = ((int (*)())PaParseComment)((int *)param_1,param_2);
+    iVar11 = PaParseComment((int *)param_1,param_2);
     uVar7 = 0;
     if (iVar11 != 0) goto switchD_97bac34c_caseD_1;
     break;
@@ -7205,11 +7807,11 @@ LAB_97bac330:
   case 0x92:
   case 0x93:
     *(undefined4 *)((int)param_2 + 0x60) = 1;
-    ((int (*)())yy_delete_buffer)(_yy_current_buffer);
+    yy_delete_buffer(_yy_current_buffer);
     uVar7 = 0;
     break;
   default:
-    ((int (*)())yy_fatal_error)("fatal flex scanner internal error--no action found");
+    yy_fatal_error("fatal flex scanner internal error--no action found");
     goto switchD_97bac34c_caseD_1;
   }
   return uVar7;
@@ -7229,7 +7831,6 @@ LAB_97bad2c8:
   pbVar10 = _yytext;
   goto LAB_97bac2e4;
 }
-#endif
 
 /* yy_get_next_buffer @ 0x97bad390 (656 bytes) */
 int yy_get_next_buffer()
@@ -7248,7 +7849,7 @@ int yy_get_next_buffer()
   puVar9 = _yytext;
   puVar8 = *(undefined1 **)(_yy_current_buffer + 4);
   if (puVar8 + (int)(_yy_n_chars + 1) < _yy_c_buf_p) {
-    ((int (*)())yy_fatal_error)("fatal flex scanner internal error--end of buffer missed");
+    yy_fatal_error("fatal flex scanner internal error--end of buffer missed");
   }
   if (*(int *)(_yy_current_buffer + 0x20) == 0) {
     iVar3 = 2 - (uint)((int)_yy_c_buf_p - (int)_yytext == 1);
@@ -7284,12 +7885,12 @@ int yy_get_next_buffer()
             iVar3 = uVar6 + (uVar6 >> 3);
           }
           *(int *)(iVar2 + 0xc) = iVar3;
-          uVar5 = ((int (*)())yy_flex_realloc)(pvVar4,*(int *)(iVar2 + 0xc) + 2);
+          uVar5 = yy_flex_realloc(pvVar4,*(int *)(iVar2 + 0xc) + 2);
           *(undefined4 *)(iVar2 + 4) = uVar5;
         }
         iVar3 = *(int *)(iVar2 + 4);
         if (iVar3 == 0) {
-          ((int (*)())yy_fatal_error)("fatal error - scanner input buffer overflow");
+          yy_fatal_error("fatal error - scanner input buffer overflow");
           iVar3 = *(int *)(iVar2 + 4);
         }
         puVar9 = puVar9 + (iVar3 - (int)pvVar4);
@@ -7302,7 +7903,7 @@ int yy_get_next_buffer()
       _yy_n_chars = (undefined1 *)_yylex_CPP(puVar7 + *(int *)(iVar2 + 4),iVar3);
       if (_yy_n_chars != (undefined1 *)0x0) {
         if (iVar3 <= (int)_yy_n_chars) {
-          ((int (*)())yy_fatal_error)("input buffer overflow, can\'t enlarge buffer because scanner uses REJECT")
+          yy_fatal_error("input buffer overflow, can\'t enlarge buffer because scanner uses REJECT")
           ;
         }
         puVar7[(int)_yy_n_chars + *(int *)(_yy_current_buffer + 4)] = 0x20;
@@ -7391,7 +7992,6 @@ int yy_try_NUL_trans(param_1)
 }
 
 /* yyinput @ 0x97bad7f0 (272 bytes) */
-#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yyinput()
 {
   byte *pbVar1;
@@ -7430,7 +8030,6 @@ int yyinput()
   _yy_hold_char = *pbVar1;
   return (uint)bVar2;
 }
-#endif
 
 /* yyrestart @ 0x97bad900 (104 bytes) */
 int yyrestart(param_1)
@@ -7439,13 +8038,12 @@ int yyrestart(param_1)
   if (_yy_current_buffer == (unsigned char *)0x0) {
     _yy_current_buffer = (unsigned char *)((int (*)())yy_create_buffer)(_yyin,0x4000);
   }
-  ((int (*)())yy_init_buffer)(_yy_current_buffer,param_1);
+  yy_init_buffer(_yy_current_buffer,param_1);
   ((int (*)())yy_load_buffer_state)();
   return;
 }
 
 /* yy_switch_to_buffer @ 0x97bad968 (148 bytes) */
-#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yy_switch_to_buffer(param_1)
   unsigned char * param_1;
 {
@@ -7461,10 +8059,8 @@ int yy_switch_to_buffer(param_1)
   }
   return;
 }
-#endif
 
 /* yy_load_buffer_state @ 0x97bad9fc (88 bytes) */
-#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yy_load_buffer_state()
 {
   _yy_n_chars = _yy_current_buffer[4];
@@ -7474,7 +8070,6 @@ int yy_load_buffer_state()
   _yy_hold_char = *_yy_c_buf_p;
   return;
 }
-#endif
 
 /* yy_create_buffer @ 0x97bada54 (140 bytes) */
 int yy_create_buffer(param_1, param_2)
@@ -7484,771 +8079,18 @@ int yy_create_buffer(param_1, param_2)
   unsigned char * pyVar1;
   int iVar2;
   
-  pyVar1 = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
+  pyVar1 = (unsigned char *)yy_flex_alloc(0x28);
   if (pyVar1 == (unsigned char *)0x0) {
-    ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_create_buffer)()");
+    yy_fatal_error("out of dynamic memory in ((int (*)())yy_create_buffer)()");
   }
   *(int *)(pyVar1 + 0xc) = param_2;
-  iVar2 = ((int (*)())yy_flex_alloc)(param_2 + 2);
+  iVar2 = yy_flex_alloc(param_2 + 2);
   *(int *)(pyVar1 + 4) = iVar2;
   if (iVar2 == 0) {
-    ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_create_buffer)()");
+    yy_fatal_error("out of dynamic memory in ((int (*)())yy_create_buffer)()");
   }
   *(undefined4 *)(pyVar1 + 0x14) = 1;
-  ((int (*)())yy_init_buffer)(pyVar1,param_1);
+  yy_init_buffer(pyVar1,param_1);
   return pyVar1;
-}
-
-/* yy_delete_buffer @ 0x97badae0 (124 bytes) */
-int yy_delete_buffer(param_1)
-  unsigned char * param_1;
-{
-  if (param_1 != (unsigned char *)0x0) {
-    if (param_1 == _yy_current_buffer) {
-      _yy_current_buffer = (unsigned char *)0x0;
-    }
-    if (*(int *)(param_1 + 0x14) != 0) {
-      ((int (*)())yy_flex_free)(*(void **)(param_1 + 4));
-    }
-    ((int (*)())yy_flex_free)(param_1);
-    return;
-  }
-  return;
-}
-
-/* yy_init_buffer @ 0x97badb5c (68 bytes) */
-int yy_init_buffer(param_1, param_2)
-  unsigned char * param_1;
-  unsigned char * param_2;
-{
-  ((int (*)())yy_flush_buffer)(param_1);
-  *(undefined4 *)(param_1 + 0x18) = 0;
-  *(undefined4 *)(param_1 + 0x20) = 1;
-  *(unsigned char **)param_1 = param_2;
-  return;
-}
-
-/* yy_flush_buffer @ 0x97badba0 (88 bytes) */
-int yy_flush_buffer(param_1)
-  unsigned char * param_1;
-{
-  if (param_1 == (unsigned char *)0x0) {
-    return;
-  }
-  *(undefined4 *)(param_1 + 0x10) = 0;
-  **(undefined1 **)(param_1 + 4) = 0;
-  *(undefined1 *)(*(int *)(param_1 + 4) + 1) = 0;
-  *(undefined4 *)(param_1 + 0x1c) = 1;
-  *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_1 + 4);
-  *(undefined4 *)(param_1 + 0x24) = 0;
-  if (param_1 != _yy_current_buffer) {
-    return;
-  }
-  ((int (*)())yy_load_buffer_state)();
-  return;
-}
-
-/* yy_scan_buffer @ 0x97badbf8 (192 bytes) */
-int yy_scan_buffer(param_1, param_2)
-  char *param_1;
-  uint param_2;
-{
-  unsigned char * pyVar1;
-  
-  if (((param_2 < 2) || (param_1[param_2 - 2] != '\0')) || (param_1[param_2 - 1] != '\0')) {
-    pyVar1 = (unsigned char *)0x0;
-  }
-  else {
-    pyVar1 = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
-    if (pyVar1 == (unsigned char *)0x0) {
-      ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_scan_buffer)()");
-    }
-    *(char **)(pyVar1 + 8) = param_1;
-    *(uint *)(pyVar1 + 0x10) = param_2 - 2;
-    *(undefined4 *)(pyVar1 + 0x1c) = 1;
-    *(undefined4 *)(pyVar1 + 0x24) = 0;
-    *(uint *)(pyVar1 + 0xc) = param_2 - 2;
-    *(char **)(pyVar1 + 4) = param_1;
-    *(undefined4 *)(pyVar1 + 0x14) = 0;
-    *(undefined4 *)pyVar1 = 0;
-    *(undefined4 *)(pyVar1 + 0x18) = 0;
-    *(undefined4 *)(pyVar1 + 0x20) = 0;
-    ((int (*)())yy_switch_to_buffer)(pyVar1);
-  }
-  return pyVar1;
-}
-
-/* yy_scan_string @ 0x97badcb8 (44 bytes) */
-int yy_scan_string(param_1)
-  char *param_1;
-{
-  char cVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  cVar1 = *param_1;
-  while (cVar1 != '\0') {
-    iVar2 = iVar2 + 1;
-    cVar1 = param_1[iVar2];
-  }
-  ((int (*)())yy_scan_bytes)(param_1,iVar2);
-  return;
-}
-
-/* yy_scan_bytes @ 0x97badce4 (176 bytes) */
-int yy_scan_bytes(param_1, param_2)
-  char *param_1;
-  int param_2;
-{
-  int iVar1;
-  char *pcVar2;
-  int iVar3;
-  
-  pcVar2 = (char *)((int (*)())yy_flex_alloc)(param_2 + 2U);
-  if (pcVar2 == (char *)0x0) {
-    ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_scan_bytes)()");
-  }
-  iVar1 = 0;
-  iVar3 = param_2;
-  if (0 < param_2) {
-    do {
-      pcVar2[iVar1] = param_1[iVar1];
-      iVar1 = iVar1 + 1;
-      iVar3 = iVar3 + -1;
-    } while (iVar3 != 0);
-  }
-  pcVar2[param_2 + 1] = '\0';
-  pcVar2[param_2] = '\0';
-  iVar3 = ((int (*)())yy_scan_buffer)(pcVar2,param_2 + 2U);
-  if (iVar3 == 0) {
-    ((int (*)())yy_fatal_error)("bad buffer in ((int (*)())yy_scan_bytes)()");
-  }
-  *(undefined4 *)(iVar3 + 0x14) = 1;
-  return iVar3;
-}
-
-/* yy_fatal_error @ 0x97badd94 (60 bytes) */
-int yy_fatal_error(param_1)
-  char *param_1;
-{
-  _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),"%s\n",param_1);
-                    
-  _exit(2);
-}
-
-/* yy_flex_alloc @ 0x97baddd0 (4 bytes) */
-int yy_flex_alloc(param_1)
-  uint param_1;
-{
-                    
-                    
-  (*(code *)PTR_LAB_a7b7c1c8)();
-  return;
-}
-
-/* yy_flex_realloc @ 0x97baddd4 (4 bytes) */
-int yy_flex_realloc(param_1, param_2)
-  void *param_1;
-  uint param_2;
-{
-                    
-                    
-  (*(code *)PTR_LAB_a7b7c1b4)();
-  return;
-}
-
-/* yy_flex_free @ 0x97baddd8 (4 bytes) */
-int yy_flex_free(param_1)
-  void *param_1;
-{
-                    
-                    
-  (*(code *)PTR_LAB_a7b7c1c4)();
-  return;
-}
-
-/* PaParseStrings @ 0x97badddc (452 bytes) */
-int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
-  char **param_1;
-  int *param_2;
-  int param_3;
-  int param_4;
-  unsigned char * param_5;
-{
-  undefined *puVar1;
-  undefined *puVar2;
-  char **ppcVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  size_t local_30 [4];
-  
-  _ScanFromString(*param_1);
-  uVar4 = 1;
-  *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = param_5;
-  if (param_3 != 0) {
-    iVar6 = 0;
-    ppcVar3 = param_1;
-    if (0 < param_3) {
-      do {
-        if (*ppcVar3 == (char *)0x0) {
-          TParseContext__error((int)param_5,(char *)0x0,"Null shader source string","","");
-          TParseContext__recover();
-          goto LAB_97badf80;
-        }
-        iVar6 = iVar6 + 1;
-        ppcVar3 = ppcVar3 + 1;
-      } while (iVar6 < param_3);
-    }
-    if (param_2 == (int *)0x0) {
-      param_2 = (int *)local_30;
-      local_30[0] = _strlen(*param_1);
-    }
-    ((int (*)())yyrestart)((unsigned char *)0x0);
-    puVar1 = PTR__cpp_a7b7c0a4;
-    uVar4 = 0;
-    *(undefined4 *)(param_5 + 0x60) = 0;
-    *(undefined4 *)(*(int *)puVar1 + 0x144) = 0;
-    *(char ***)(*(int *)puVar1 + 0x150) = param_1;
-    *(int *)(*(int *)puVar1 + 0x14c) = param_3;
-    *(int **)(*(int *)puVar1 + 0x148) = param_2;
-    *(undefined4 *)(*(int *)puVar1 + 0x28) = 0;
-    _yylineno = 1;
-    if ((-1 < **(int **)(*(int *)puVar1 + 0x148)) &&
-       (((((int (*)())yyparse)(param_5), puVar2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)puVar1 + 0x140) == 1 ||
-         (*(int *)(param_5 + 0x14) != 0)) || (uVar4 = 0, 0 < *(int *)(param_5 + 0x18))))) {
-      if (param_4 != 0) {
-        iVar6 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
-        while (iVar6 != 0) {
-          iVar6 = *(int *)puVar2;
-          puVar5 = *(undefined4 **)(iVar6 + 0x20);
-          *(undefined4 *)(iVar6 + 0x20) = *puVar5;
-          _free(puVar5);
-          iVar6 = *(int *)(*(int *)puVar2 + 0x20);
-        }
-      }
-LAB_97badf80:
-      uVar4 = 1;
-    }
-  }
-  return uVar4;
-}
-
-/* yyerror @ 0x97badfa0 (184 bytes) */
-int yyerror(param_1)
-  char *param_1;
-{
-  int iVar1;
-  char *pcVar2;
-  
-  iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-  pcVar2 = _yytext;
-  if (*(int *)(iVar1 + 0x60) != 0) {
-    if (-1 < *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x154)) {
-      return;
-    }
-    pcVar2 = "pre-mature EOF";
-  }
-  TParseContext__error(iVar1,_yylineno,"syntax error",pcVar2,param_1,"");
-  TParseContext__recover();
-  return;
-}
-
-/* PaReservedWord @ 0x97bae058 (108 bytes) */
-int PaReservedWord()
-{
-  TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"Reserved word.",_yytext,"","");
-  TParseContext__recover();
-  return;
-}
-
-/* PaIdentOrType @ 0x97bae0c4 (228 bytes) */
-int PaIdentOrType(param_1, param_2, param_3)
-  unsigned char * param_1;
-  unsigned char * param_2;
-  unsigned char ** param_3;
-{
-  unsigned char * pTVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int *piVar4;
-  int iVar5;
-  int local_30 [5];
-  
-  piVar4 = *(int **)(param_2 + 4);
-  iVar3 = *piVar4;
-  iVar5 = (piVar4[1] - iVar3 >> 2) + -1;
-  while( true ) {
-    iVar3 = *(int *)(iVar3 + iVar5 * 4);
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30);
-    pTVar1 = (unsigned char *)0x0;
-    if (local_30[0] != *(int *)(iVar3 + 4)) {
-      pTVar1 = *(unsigned char **)(local_30[0] + 0x18);
-    }
-    iVar5 = iVar5 + -1;
-    if ((pTVar1 != (unsigned char *)0x0) || (iVar5 < 0)) break;
-    iVar3 = *piVar4;
-  }
-  *param_3 = pTVar1;
-  if ((((*(int *)(param_2 + 0x1c) != 0) || (pTVar1 == (unsigned char *)0x0)) ||
-      (iVar3 = (**(code **)(*(int *)pTVar1 + 0x10))(), iVar3 == 0)) ||
-     (*(int *)(*param_3 + 0x34) == 0)) {
-    uVar2 = 0x12a;
-  }
-  else {
-    uVar2 = 299;
-    *(undefined4 *)(param_2 + 0x1c) = 1;
-  }
-  return uVar2;
-}
-
-/* PaParseComment @ 0x97bae1a8 (228 bytes) */
-int PaParseComment(param_1, param_2)
-  int *param_1;
-  unsigned char * param_2;
-{
-  int iVar1;
-  int iVar2;
-  
-  iVar2 = 0;
-  do {
-    while( true ) {
-      iVar1 = ((int (*)())yyinput)();
-      if (iVar1 == 10) {
-        *param_1 = *param_1 + 1;
-      }
-      if (iVar1 != 0x2a) break;
-      iVar2 = 1;
-    }
-    if (iVar1 < 0x2b) {
-      if (iVar1 == -1) {
-        TParseContext__error
-                  ((int)param_2,_yylineno,"End of shader found before end of comment.","","","");
-        TParseContext__recover();
-        return 0;
-      }
-LAB_97bae268:
-      iVar2 = 0;
-    }
-    else {
-      if (iVar1 != 0x2f) goto LAB_97bae268;
-      if (iVar2 == 1) {
-        return 1;
-      }
-    }
-    if (iVar2 == 2) {
-      return 1;
-    }
-  } while( true );
-}
-
-/* _CPPDebugLogMsg @ 0x97bae28c (92 bytes) */
-int _CPPDebugLogMsg()
-{
-  char *pcVar1;
-  
-  pcVar1 = (char *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8) + 8);
-  TInfoSinkBase__append(pcVar1);
-  TInfoSinkBase__append(pcVar1);
-  return;
-}
-
-/* _CPPWarningToInfoLog @ 0x97bae2e8 (316 bytes) */
-int _CPPWarningToInfoLog()
-{
-                    
-                    
-  (*(code *)(((unsigned char *)0x97bae338) + (*(unsigned char *)0x97bae33c)))();
-  return;
-}
-
-/* _CPPShInfoLogMsg @ 0x97bae468 (100 bytes) */
-int _CPPShInfoLogMsg(param_1)
-  undefined4 param_1;
-{
-  TParseContext__error(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",param_1,"");
-  TParseContext__recover();
-  return;
-}
-
-/* _CPPErrorToInfoLog @ 0x97bae4cc (104 bytes) */
-int _CPPErrorToInfoLog(param_1)
-  undefined4 param_1;
-{
-  TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",param_1,"");
-  TParseContext__recover();
-  return;
-}
-
-/* _SetLineNumber @ 0x97bae534 (44 bytes) */
-int _SetLineNumber(param_1)
-  uint param_1;
-{
-  _yylineno = _yylineno & 0xffff0000 | param_1;
-  return;
-}
-
-/* _SetStringNumber @ 0x97bae560 (44 bytes) */
-int _SetStringNumber(param_1)
-  int param_1;
-{
-  _yylineno = param_1 << 0x10 | (uint)(*(unsigned short *)((unsigned char *)&(_yylineno) + 2));
-  return;
-}
-
-/* _GetStringNumber @ 0x97bae58c (32 bytes) */
-int _GetStringNumber()
-{
-  return _yylineno >> 0x10;
-}
-
-/* _GetLineNumber @ 0x97bae5ac (32 bytes) */
-int _GetLineNumber()
-{
-  return _yylineno & 0xffff;
-}
-
-/* _IncLineNumber @ 0x97bae5cc (52 bytes) */
-int _IncLineNumber()
-{
-  if (0xffff < (_yylineno & 0xffff)) {
-    return;
-  }
-  _yylineno = _yylineno + 1;
-  return;
-}
-
-/* _DecLineNumber @ 0x97bae600 (52 bytes) */
-int _DecLineNumber()
-{
-  if ((_yylineno & 0xffff) == 0) {
-    return;
-  }
-  _yylineno = _yylineno - 1;
-  return;
-}
-
-/* _HandlePragma @ 0x97bae634 (576 bytes) */
-int _HandlePragma(param_1, param_2)
-  undefined4 *param_1;
-  int param_2;
-{
-  int iVar1;
-  char *pcVar2;
-  void *pvVar3;
-  
-  pvVar3 = (void *)*param_1;
-  iVar1 = _memcmp(pvVar3,"optimize",9);
-  if (iVar1 == 0) {
-    if (param_2 == 4) {
-      iVar1 = _memcmp((void *)param_1[1],"(",2);
-      if (iVar1 == 0) {
-        pvVar3 = (void *)param_1[2];
-        iVar1 = _memcmp(pvVar3,"on",3);
-        if (iVar1 == 0) {
-          *(undefined4 *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x40) = 1;
-        }
-        else {
-          iVar1 = _memcmp(pvVar3,"off",4);
-          if (iVar1 != 0) {
-            pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
-            goto LAB_97bae84c;
-          }
-          *(undefined4 *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x40) = 0;
-        }
-        iVar1 = _memcmp((void *)param_1[3],")",2);
-        if (iVar1 == 0) {
-          return;
-        }
-        pcVar2 = "\")\" expected to end \'optimize\' pragma";
-      }
-      else {
-        pcVar2 = "\"(\" expected after \'optimize\' keyword";
-      }
-    }
-    else {
-      pcVar2 = "optimize pragma syntax is incorrect";
-    }
-  }
-  else {
-    iVar1 = _memcmp(pvVar3,"debug",6);
-    if (iVar1 != 0) {
-      return;
-    }
-    if (param_2 == 4) {
-      iVar1 = _memcmp((void *)param_1[1],"(",2);
-      if (iVar1 == 0) {
-        pvVar3 = (void *)param_1[2];
-        iVar1 = _memcmp(pvVar3,"on",3);
-        if (iVar1 == 0) {
-          *(undefined4 *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x44) = 1;
-        }
-        else {
-          iVar1 = _memcmp(pvVar3,"off",4);
-          if (iVar1 != 0) {
-            pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
-            goto LAB_97bae84c;
-          }
-          *(undefined4 *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x44) = 0;
-        }
-        iVar1 = _memcmp((void *)param_1[3],")",2);
-        if (iVar1 == 0) {
-          return;
-        }
-        pcVar2 = "\")\" expected to end \'debug\' pragma";
-      }
-      else {
-        pcVar2 = "\"(\" expected after \'debug\' keyword";
-      }
-    }
-    else {
-      pcVar2 = "debug pragma syntax is incorrect";
-    }
-  }
-LAB_97bae84c:
-  ((int (*)())_CPPShInfoLogMsg)(pcVar2);
-  return;
-}
-
-/* _StoreStr @ 0x97bae874 (448 bytes) */
-int _StoreStr(param_1)
-  char *param_1;
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  unsigned char * psVar4;
-  char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_c0;
-  int local_bc;
-  undefined4 local_b0;
-  undefined4 local_a0;
-  int local_9c;
-  undefined4 local_90 [4];
-  undefined4 local_80;
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_60;
-  int local_5c;
-  undefined4 local_50;
-  undefined4 local_40;
-  undefined4 local_30;
-  
-  iVar3 = DAT_a7b7baa8;
-  piVar2 = (int *)(DAT_a7b7baa8 + 8);
-  do {
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  local_c0 = GetGlobalPoolAllocator();
-  local_bc = iVar3 + 0xc;
-  local_b0 = local_c0;
-  local_90[0] = GetGlobalPoolAllocator();
-  std__string__string((unsigned char *)&local_a0,param_1,(unsigned char *)local_90);
-  std__string__assign((unsigned char *)&local_c0);
-  piVar2 = (int *)(local_9c + -4);
-  local_80 = local_a0;
-  do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_9c + -0xc));
-  }
-  psVar4 = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
-  std__string__string((unsigned char *)&local_60,psVar4);
-  _strlen(" ");
-  std__string__append((char *)&local_60,0x97c291c0);
-  std__operator_((unsigned char *)&local_70,(unsigned char *)&local_60);
-  std__string__assign(psVar4);
-  piVar2 = (int *)(local_6c + -4);
-  local_50 = local_70;
-  do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
-  }
-  piVar2 = (int *)(local_5c + -4);
-  local_40 = local_60;
-  do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_5c + -0xc));
-  }
-  piVar2 = (int *)(local_bc + -4);
-  local_30 = local_c0;
-  do {
-    iVar3 = *piVar2;
-    if (in_RESERVE != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
-      in_cr0 = 2;
-    }
-  } while (!(bool)(in_cr0 >> 1 & 1));
-  if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_bc + -0xc));
-  }
-  return;
-}
-
-/* _GetStrfromTStr @ 0x97baea34 (80 bytes) */
-int _GetStrfromTStr()
-{
-  undefined *puVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  
-  puVar1 = PTR__cpp_a7b7c0a4;
-  iVar2 = *(int *)PTR__cpp_a7b7c0a4;
-  iVar3 = *(int *)(iVar2 + 0x2c);
-  iVar4 = *(int *)(iVar3 + 0x5c);
-  *(undefined1 *)(iVar4 + *(int *)(iVar4 + -0xc)) = *DAT_a7b7baa4;
-  *(undefined4 *)(iVar2 + 0x13c) = *(undefined4 *)(iVar3 + 0x5c);
-  return *(undefined4 *)(*(int *)puVar1 + 0x13c);
-}
-
-/* _ResetTString @ 0x97baea84 (252 bytes) */
-int _ResetTString()
-{
-  int iVar1;
-  size_t sVar2;
-  char *pcVar3;
-  
-  iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-  sVar2 = _strlen("");
-  if (0x3ffffffc < sVar2) {
-    std____throw_length_error("basic_string__assign");
-  }
-  pcVar3 = *(char **)(iVar1 + 0x5c);
-  if (((0 < *(int *)(pcVar3 + -4)) || ("" <= pcVar3)) || (pcVar3 + *(int *)(pcVar3 + -0xc) <= "")) {
-    std__string___M_replace_safe_char_const__
-              (pcVar3,pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + sVar2);
-    return;
-  }
-  if ((uint)((int)"" + -(int)pcVar3) < sVar2) {
-    if (-(int)pcVar3 == 0x683dc294) goto LAB_97baeb5c;
-    _memmove(pcVar3,"",sVar2);
-  }
-  else {
-    _memcpy(pcVar3,"",sVar2);
-  }
-  pcVar3 = *(char **)(iVar1 + 0x5c);
-LAB_97baeb5c:
-  *(size_t *)(pcVar3 + -0xc) = sVar2;
-  *(undefined1 *)(*(int *)(iVar1 + 0x5c) + sVar2) = 0;
-  return;
-}
-
-/* _GetBehavior @ 0x97baeb80 (484 bytes) */
-int _GetBehavior(param_1)
-  char *param_1;
-{
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_80;
-  int local_7c;
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_60;
-  int local_5c;
-  undefined4 local_50 [4];
-  undefined4 local_40;
-  undefined4 local_30;
-  undefined4 local_20;
-  
-  iVar3 = _memcmp("require",param_1,8);
-  uVar4 = 0;
-  if (iVar3 != 0) {
-    iVar3 = _memcmp("enable",param_1,7);
-    uVar4 = 1;
-    if (iVar3 != 0) {
-      iVar3 = _memcmp("disable",param_1,8);
-      uVar4 = 3;
-      if (iVar3 != 0) {
-        iVar3 = _memcmp("warn",param_1,5);
-        uVar4 = 2;
-        if (iVar3 != 0) {
-          local_50[0] = GetGlobalPoolAllocator();
-          std__string__string((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
-          std__string__string((unsigned char *)&local_70,(unsigned char *)&local_60);
-          _strlen(param_1);
-          std__string__append((char *)&local_70,(ulong)param_1);
-          std__string__string((unsigned char *)&local_80,(unsigned char *)&local_70);
-          _strlen("\' is not supported");
-          std__string__append((char *)&local_80,0x97c2aa10);
-          *(undefined1 *)(local_7c + *(int *)(local_7c + -0xc)) = *DAT_a7b7baa4;
-          ((int (*)())_CPPShInfoLogMsg)(local_7c);
-          piVar2 = (int *)(local_7c + -4);
-          local_40 = local_80;
-          do {
-            iVar3 = *piVar2;
-            if (in_RESERVE != '\0') {
-              iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-              *piVar2 = iVar1;
-              in_cr0 = 2;
-            }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_7c + -0xc));
-          }
-          piVar2 = (int *)(local_6c + -4);
-          local_30 = local_70;
-          do {
-            iVar3 = *piVar2;
-            if (in_RESERVE != '\0') {
-              iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-              *piVar2 = iVar1;
-              in_cr0 = 2;
-            }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
-          }
-          piVar2 = (int *)(local_5c + -4);
-          local_20 = local_60;
-          do {
-            iVar3 = *piVar2;
-            if (in_RESERVE != '\0') {
-              iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-              *piVar2 = iVar1;
-              in_cr0 = 2;
-            }
-          } while (!(bool)(in_cr0 >> 1 & 1));
-          if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_5c + -0xc));
-          }
-          uVar4 = 3;
-        }
-      }
-    }
-  }
-  return uVar4;
 }
 

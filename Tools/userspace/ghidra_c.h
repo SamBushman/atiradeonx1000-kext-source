@@ -76,8 +76,10 @@ typedef unsigned long long uint64_t_g;
 #define CONCAT21(a, b) ((((unsigned int)(unsigned short)(a)) << 8) | (unsigned char)(b))
 #define CONCAT11(a, b) ((((unsigned short)(unsigned char)(a)) << 8) | (unsigned char)(b))
 #define CONCAT71(a, b) ((((ulonglong)(a)) << 8) | (unsigned char)(b))
+#define CONCAT42(a, b) ((((ulonglong)(unsigned int)(a)) << 16) | (unsigned short)(b))
+#define CONCAT62(a, b) ((((ulonglong)(a)) << 16) | (unsigned short)(b))
 #define CONCAT26(a, b) ((((ulonglong)(unsigned short)(a)) << 48) | ((ulonglong)(b) & 0xffffffffffffULL))
-#define GBITS(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), float), ({ union { float f; unsigned int u; } _gu; _gu.f = (x); _gu.u; }), (x))
+#define GBITS(x) __builtin_choose_expr(__builtin_types_compatible_p(__typeof__(x), float), ({ __typeof__(x) _gv = (x); *(unsigned int *)&_gv; }), (x))
 #define SUB41(x, n) ((unsigned char)(((unsigned long)GBITS(x)) >> (8 * (n))))
 #define SUB42(x, n) ((unsigned short)(((unsigned long)GBITS(x)) >> (8 * (n))))
 #define SUB84(x, n) ((unsigned int)((x) >> (8 * (n))))
@@ -87,6 +89,12 @@ typedef unsigned long long uint64_t_g;
 #define ZEXT14(x) ((unsigned int)(unsigned char)(x))
 #define ZEXT24(x) ((unsigned int)(unsigned short)(x))
 #define ZEXT12(x) ((unsigned short)(unsigned char)(x))
+/* libgcc/libstdc++ unwinder types Ghidra's own type archive supplies (layouts derived from the disassembly: sizeof(_Unwind_Exception)==32,
+   `param[-2].reserved[2]` is __cxa_exception::terminateHandler) */
+typedef struct _Unwind_Exception { unsigned long long exception_class; void (*exception_cleanup)(); unsigned long private_1, private_2; unsigned long reserved[3]; } __attribute__((aligned(16))) _Unwind_Exception;
+typedef struct dwarf_eh_bases { void *tbase, *dbase, *func; } dwarf_eh_bases;
+typedef struct { unsigned char v[16]; } vec16;   /* AltiVec 128-bit register */
+extern vec16 vectorPermute(), vectorConditionalSelect();
 #define ZEXT816(x) (x)
 #define SEXT48(x) ((longlong)(int)(x))
 #define sync(n) __asm__ __volatile__("sync" ::: "memory")

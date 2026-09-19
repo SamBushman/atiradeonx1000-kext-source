@@ -4066,6 +4066,42 @@ int _PPParserParseSourceVar(param_1, param_2, param_3, param_4)
   return 0;
 }
 
+/* FUN_97b82078 @ 0x97b82078 (216 bytes) */
+int FUN_97b82078(param_1, param_2, param_3, param_4)
+  int param_1;
+  void *param_2;
+  void *param_3;
+  int param_4;
+{
+  uint uVar1;
+  int iVar2;
+  undefined1 *puVar3;
+  size_t sVar4;
+  
+  sVar4 = *(size_t *)((int)param_2 + 0x34);
+  iVar2 = 0x38;
+  if (sVar4 != 0) {
+    iVar2 = sVar4 + 0x39;
+  }
+  puVar3 = _calloc(iVar2 + 0xc,1);
+  *puVar3 = 8;
+  _memcpy(puVar3 + 0xc,param_2,0x38);
+  if ((sVar4 != 0) && (param_3 != (void *)0x0)) {
+    _memmove(puVar3 + 0x44,param_3,sVar4);
+    puVar3[sVar4 + 0x44] = 0;
+  }
+  if (param_4 == 0) {
+    iVar2 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 0x20));
+    uVar1 = iVar2 + 1U & 0x3ffff | *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+  }
+  else {
+    uVar1 = *(uint *)(puVar3 + 0xc) & 0xfffc0000;
+  }
+  *(uint *)(puVar3 + 0xc) = uVar1;
+  ((int (*)())_PPStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x20),puVar3);
+  return;
+}
+
 /* _PPParserParseEnd @ 0x97b82150 (136 bytes) */
 int _PPParserParseEnd(param_1)
   undefined4 param_1;
@@ -4282,46 +4318,11 @@ int _PPStreamChunkCreateFromChunk(param_1)
   else if (cVar1 == '\v') {
     uVar4 = *(undefined4 *)(param_1 + 0x10);
   }
-  iVar2 = ((int (*)())_GetChunkAllocationSize)(cVar1,uVar4);
+  iVar2 = _GetChunkAllocationSize(cVar1,uVar4);
   pvVar3 = _calloc(iVar2 + 0xcU,1);
   _memmove(pvVar3,param_1,iVar2 + 0xcU);
   *(undefined4 *)((int)pvVar3 + 4) = 0;
   *(undefined4 *)((int)pvVar3 + 8) = 0;
   return pvVar3;
-}
-
-/* _GetChunkAllocationSize @ 0x97b825bc (124 bytes) */
-int _GetChunkAllocationSize(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
-{
-  switch(param_1) {
-  case 0:
-  case 3:
-  case 10:
-    return 0x10;
-  case 1:
-    return 4;
-  case 2:
-  case 4:
-  case 5:
-  case 6:
-  case 7:
-  case 9:
-    return 8;
-  case 8:
-    break;
-  case 0xb:
-    if (param_2 != 0) {
-      return param_2 + 9;
-    }
-    return 8;
-  default:
-    return 0;
-  }
-  if (param_2 != 0) {
-    return param_2 + 0x39;
-  }
-  return 0x38;
 }
 
