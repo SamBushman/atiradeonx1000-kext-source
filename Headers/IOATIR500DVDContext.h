@@ -30,8 +30,11 @@ class ATIR500Surface;
 struct VendorTransferBuffer;
 class IOATIR500Shared;
 
+struct sIODVDContextLockBufferData;    /* real struct names (they appear in the mangled symbols) */
+struct sIODVDContextWriteBufferData;
+
 class IOATIR500DVDContext : public IOUserClient {
-    OSDeclareDefaultStructors(IOATIR500DVDContext)
+    OSDeclareAbstractStructors(IOATIR500DVDContext)
 
     /*
      * FIXED (issue #1, first build attempt): ATIR500DVDContext_
@@ -68,14 +71,32 @@ class IOATIR500DVDContext : public IOUserClient {
     friend bool handle_opcode_12(ATIR500DVDContext *ctx, UInt32 *record);
 
 public:
+    /*
+     * Virtual slots in the stock vtable's order (Ledger/kext_ppc_vtables.txt): start +0x348, stop +0x34c,
+     * clientClose +0x568, clientMemoryForType +0x580, then +0x5a4..+0x5b8, of which only setCompatibleSurfaceMode
+     * (+0x5ac) has a body in this class; the rest ATIR500DVDContext overrides.
+     */
+    virtual bool     start(IOService *provider) override;                                              /* +0x348, real addr 0xec60 */
+    virtual void     stop(IOService *provider) override;                                               /* +0x34c, real addr 0xe3a0 */
+    virtual IOReturn clientClose() override;                                                           /* +0x568, real addr 0xe6d0 */
+    virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) override; /* +0x580, real addr 0xf0c0 */
+    virtual void     invalidate() = 0;                                                                 /* +0x5a4 */
+    virtual void     update_surface() = 0;                                                             /* +0x5a8 */
+    virtual bool     setCompatibleSurfaceMode(SInt32 *modeBits, eIODVDContextModeBits requested);      /* +0x5ac, real addr 0xe970: returns 1 */
+    virtual void     submit_context_buffer() = 0;                                                      /* +0x5b0 */
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor) = 0;                  /* +0x5b4 */
+    virtual void     discard_command_buffer() = 0;                                                     /* +0x5b8 */
+
+    void init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size, UInt32 flags);     /* real addr 0xe780 */
+
     /* ---- Base table, selectors 0-9 ---- */
-    IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32 flagCount); /* 0, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the previous 4-param guess (by analogy with the GL context's own set_surface) was never independently decompiled and contradicted real wire-shape evidence (VA bundle, offset 0x27f4, only 3 real scalar inputs). Now RESOLVED via a real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp) AND the real mangled symbol itself (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi, 3 real params: unsigned long, a real Apple enum `eIODVDContextModeBits` - not reconstructed by name, kept as UInt32-shaped `modeBits` - and a real `int`). Real 3rd param is a count consumed by a real bit-accumulation loop (see this+0x88's own new `surfaceFlagsBitmask` field), not a generic "param3"/"param4" pair. */
+    IOReturn set_surface(UInt32 surfaceID, eIODVDContextModeBits modeBits, int flagCount); /* 0, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the previous 4-param guess (by analogy with the GL context's own set_surface) was never independently decompiled and contradicted real wire-shape evidence (VA bundle, offset 0x27f4, only 3 real scalar inputs). Now RESOLVED via a real decompile (Sources/IOATIR500DVDContext_SetSurface.cpp) AND the real mangled symbol itself (__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi, 3 real params: unsigned long, a real Apple enum `eIODVDContextModeBits` - not reconstructed by name, kept as UInt32-shaped `modeBits` - and a real `int`). Real 3rd param is a count consumed by a real bit-accumulation loop (see this+0x88's own new `surfaceFlagsBitmask` field), not a generic "param3"/"param4" pair. */
     IOReturn get_config(UInt32 *out0, UInt32 *out1);                                           /* 1, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_configEPmS0_ / table = 0 in, 2 out */
     IOReturn get_status(UInt32 *out0);                                                         /* 2 */
     IOReturn get_surface_size(SInt32 *outW, SInt32 *outH);                                       /* 3, REAL SIGNATURE CORRECTED (issue #42 pass): shipped symbol get_surface_sizeEPlS0_ / table = 0 in, 2 out. Returns kIOReturnError if no surface is bound. */
-    IOReturn lock_all_buffers(UInt32 param1, UInt32 *outAddress, UInt32 *outSize);              /* 4 */
+    IOReturn lock_all_buffers(UInt32 param1, sIODVDContextLockBufferData *out);              /* 4 */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                    /* 5 */
-    IOReturn write_buffer(UInt32 *data, UInt32 byteCount);                                       /* 6 */
+    IOReturn write_buffer(sIODVDContextWriteBufferData *data, UInt32 byteCount);                                       /* 6 */
     IOReturn finish(void);                                                                       /* 7 */
     IOReturn declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle); /* 8 */
     IOReturn delete_image(UInt32 textureID);                                                     /* 9 */

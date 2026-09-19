@@ -153,9 +153,9 @@ IOReturn IOATIR500DVDContext::delete_image(UInt32 textureID) {
 /* write_buffer(data, byteCount): the DVD context's clipped framebuffer WRITE-back into a caller-supplied
  * userspace range - the same shape as GL read_buffer / Surface surface_read, keyed off bound-surface
  * buffer index 0xf or 0x10. data layout: {x,y,w,h, kindFlag, destBase, stride}. */
-IOReturn IOATIR500DVDContext::write_buffer(UInt32 *dataWords, UInt32 byteCount) {
+IOReturn IOATIR500DVDContext::write_buffer(sIODVDContextWriteBufferData *dataIn, UInt32 byteCount) {
     (void)byteCount;
-    UInt8 *data = reinterpret_cast<UInt8 *>(dataWords);
+    UInt8 *data = reinterpret_cast<UInt8 *>(dataIn);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
 

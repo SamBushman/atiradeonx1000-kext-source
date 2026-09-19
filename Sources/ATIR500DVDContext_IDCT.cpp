@@ -22,115 +22,88 @@
 #include "../Headers/ATIR500DVDContext.h"
 #include "../Headers/ATIRadeonX1000.h"
 
-IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *info, sATIDVDIDCTParams *params) {
-    ATIRadeonX1000 *accel = reinterpret_cast<ATIRadeonX1000 *>(info->hwAccelerator);
+extern "C" void IDCT_lock(void *) asm("_IOLockLock");
+extern "C" void IDCT_unlock(void *) asm("_IOLockUnlock");
 
-    /* CONFIRMED: real vtable call at offset 0x54c, real argument is
-     * info->submitCookie - UNKNOWN real virtual method name. */
-    // accel->vtable_0x54c(info->submitCookie);
+namespace {
+inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
+inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
+} // namespace
 
-    if (info->surfaceInfo == 0 || !accel->deviceActiveFlag) {
-        return kIOReturnNotOpen; /* real value 0xe00002d8 */
+/*
+ * CORRECTED (ledger pass): the shipped signature is doIDCT(sATIDVDIDCTInfo *info, unsigned long size) - a real
+ * member function. The stock decompile shows `this` typed as the first parameter, and the earlier transcription of
+ * this file therefore treated `info` (the caller's parameter block, layout sATIDVDIDCTParams here) as the context
+ * object and the object's own fields as a parameter block. Rewritten with `this` as the context and `info` as the
+ * caller's block. Also restored: the initial waitForTimeStamp(this+0x7c), the accelerator command lock around the
+ * body, and the shipped code's own lock LEAK: a planeSelector other than 0/1 returns kIOReturnBadArgument with the
+ * command lock still held (faithful; the next locker of that accelerator will block).
+ */
+IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *infoIn, UInt32 infoSize) {
+    (void)infoSize;
+    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *p = reinterpret_cast<UInt8 *>(infoIn);   /* caller's block, layout sATIDVDIDCTParams */
+    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
+
+    accelerator->waitForTimeStamp(U32At(self, 0x7c));
+    if (boundSurface == nullptr || U8At(accel, 0x80) == 0 || U32At(accel, 0x8bc) == 0) {
+        return 0xe00002d8;
     }
-    /* CONFIRMED: a real third gate this project never named -
-     * `*(int*)(accelBase+0x8bc) != 0` - UNKNOWN real meaning, modeled as
-     * a raw offset check to stay faithful. */
-    if (*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(accel) + 0x8bc) == 0) {
-        return kIOReturnNotOpen;
-    }
+    IDCT_lock(reinterpret_cast<void *>(U32At(accel, 0x840)));
 
-    /* lock(accel) - real function FUN_000357ac. RESOLVED, issue #15
-     * (live kxld-resolved memory read on real G5/Tiger hardware): real
-     * target `mutex_lock` - see Headers/ATIRadeonX1000Registers.h. */
-
-    UInt8 *surfaceInfo = reinterpret_cast<UInt8 *>(info->surfaceInfo);
-    UInt32 fieldHeight = static_cast<SInt16>(*reinterpret_cast<UInt16 *>(surfaceInfo + 0x9a))
-                        - static_cast<SInt16>(*reinterpret_cast<UInt16 *>(surfaceInfo + 0x94));
-
-    UInt8 *planeGeometry;
-    VendorTransferBuffer *destBuffer;
-
-    if (params->planeSelector == 0) {
-        /* luma plane: real ping-pong between lumaBufferA/lumaBufferB */
-        destBuffer = reinterpret_cast<VendorTransferBuffer *>(&info->lumaBufferA);
-        if (info->lumaBufferAField_0x164 != 0) {
-            destBuffer = reinterpret_cast<VendorTransferBuffer *>(&info->lumaBufferB);
+    UInt8 *surface = reinterpret_cast<UInt8 *>(boundSurface);
+    SInt32 fieldHeight = static_cast<SInt32>(static_cast<SInt16>(U16At(surface, 0x9a))) -
+                         static_cast<SInt32>(static_cast<SInt16>(U16At(surface, 0x94)));
+    UInt8 *buffer;
+    UInt8 *plane;
+    if (U32At(p, 0xc) == 0) {
+        buffer = self + 0x168;
+        if (U32At(self, 0x164) != 0) {
+            buffer = self + 0x184;
         }
-        planeGeometry = surfaceInfo + 0x558 + params->destPlaneIndex * 0x78; /* CONFIRMED real mip/plane-table indexing */
-    } else if (params->planeSelector == 1) {
-        /* chroma plane: real ping-pong between chromaBufferA/chromaBufferB */
-        destBuffer = reinterpret_cast<VendorTransferBuffer *>(&info->chromaBufferA);
-        if (info->chromaBufferAField_0x1a0 != 0) {
-            destBuffer = reinterpret_cast<VendorTransferBuffer *>(&info->chromaBufferB);
+        plane = surface + U32At(p, 8) * 0x78 + 0x558;
+    } else {
+        if (U32At(p, 0xc) != 1) {
+            return 0xe00002c2;
         }
-        planeGeometry = surfaceInfo + 0x8a0; /* CONFIRMED real fixed chroma-plane geometry offset */
-    } else {
-        return kIOReturnBadArgument; /* real value 0xe00002c2 */
-    }
-
-    UInt16 planePitch = *reinterpret_cast<UInt16 *>(planeGeometry + 0x18);
-    UInt32 lumaStride, effectiveStride;
-    if (params->chromaFlag == 0) {
-        lumaStride = planePitch;
-        effectiveStride = planePitch;
-    } else {
-        lumaStride = planePitch;
-        effectiveStride = lumaStride << 1; /* CONFIRMED: real doubled stride for the chroma-flag case */
-    }
-
-    UInt32 planeBase = *reinterpret_cast<UInt32 *>(planeGeometry + 8);
-    if (params->fieldFlag == 0) {
-        params->destBaseAddress = planeBase;
-        params->destEndAddress  = fieldHeight * planePitch + planeBase;
-    } else {
-        params->destBaseAddress = lumaStride + planeBase;
-        params->destEndAddress  = planePitch + fieldHeight * planePitch + planeBase;
-    }
-
-    params->computedStride       = effectiveStride * fieldHeight - 1;
-    params->strideBroadcast      = effectiveStride | (effectiveStride << 16);
-    params->computedChromaStride = effectiveStride * (fieldHeight >> 1) - 1;
-
-    if (params->destBaseAddress != 0) {
-        /* CONFIRMED real field at VendorTransferBuffer+4 (realBackingFlag) */
-        if (destBuffer->realBackingFlag == 0) {
-            map_transfer_to_GART(destBuffer);
+        buffer = self + 0x1a4;
+        if (U32At(self, 0x1a0) != 0) {
+            buffer = self + 0x1c0;
         }
-        UInt32 priorConsumedTag = accel->idctSubmitBaseCounter;
-        UInt32 *ringPtr = reinterpret_cast<UInt32 *>(
-            reinterpret_cast<UInt8 *>(destBuffer->gartMappedPointer) + 0x20);
-        /*
-         * CONFIRMED real type-punning cast, preserved faithfully: the
-         * real decompile passes the PARAMS block itself
-         * (`(sATIDVDIDCTInfo *)param_2`), not the per-context `info`
-         * object, as submit_idct_buffer_consumed's third argument -
-         * submit_idct_buffer_consumed's own real per-plane
-         * coefficient-address field reads (+0x10/+0x14/.../+0x30, see
-         * stage4-real-hardware-idct-engine-found.md) line up exactly with
-         * sATIDVDIDCTParams's real confirmed fields, confirming this is
-         * the intended argument despite the declared type.
-         */
-        UInt32 newTag = accel->submit_idct_buffer_consumed(
-            ringPtr, destBuffer->realBackingFlag + 0x20,
-            reinterpret_cast<sATIDVDIDCTInfo *>(params));
-        info->lastSubmittedTag = newTag;
-
-        if (priorConsumedTag <= newTag) {
-            /* CONFIRMED: real field at VendorTransferBuffer+0x10 - a
-             * "last-submitted tag" cache this project did not add to
-             * VendorTransferBuffer's confirmed field list this pass. */
-            *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(destBuffer) + 0x10) = newTag;
-            if (params->planeSelector == 0) {
-                info->lastConsumedTagLuma = info->lastSubmittedTag;
+        plane = surface + 0x8a0;
+    }
+    UInt32 pitch = U16At(plane, 0x18);
+    UInt32 stride = (U32At(p, 0) == 0) ? pitch : pitch << 1;
+    if (U32At(p, 4) == 0) {
+        U32At(p, 0x2c) = U32At(plane, 8);
+        U32At(p, 0x30) = fieldHeight * U16At(plane, 0x18) + U32At(plane, 8);
+    } else {
+        U32At(p, 0x2c) = pitch + U32At(plane, 8);
+        U32At(p, 0x30) = U16At(plane, 0x18) + fieldHeight * U16At(plane, 0x18) + U32At(plane, 8);
+    }
+    U32At(p, 0x1c) = stride * fieldHeight - 1;
+    U32At(p, 0x28) = stride | (stride << 16);
+    U32At(p, 0x20) = stride * (static_cast<UInt32>(fieldHeight) >> 1) - 1;
+    if (U32At(p, 0x2c) != 0) {
+        UInt32 gart = U32At(buffer, 4);
+        if (gart == 0) {
+            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(buffer));
+            gart = U32At(buffer, 4);
+        }
+        UInt32 priorConsumed = U32At(accel, 0x854);
+        UInt32 tag = accelerator->submit_idct_buffer_consumed(
+            reinterpret_cast<UInt32 *>(U32At(buffer, 0x14) + 0x20), gart + 0x20, infoIn);
+        U32At(self, 0x150) = tag;
+        if (priorConsumed <= tag) {
+            U32At(buffer, 0x10) = tag;
+            if (U32At(p, 0xc) == 0) {
+                U32At(self, 0x154) = U32At(self, 0x150);
             }
-            /* unlock(accel) - real function FUN_0003577c. RESOLVED, issue
-             * #15 (live kxld-resolved memory read on real G5/Tiger
-             * hardware): real target `mutex_unlock_rwcmb` - see
-             * Headers/ATIRadeonX1000Registers.h. */
-            return kIOReturnSuccess;
+            IDCT_unlock(reinterpret_cast<void *>(U32At(accel, 0x840)));
+            return 0;
         }
     }
-
-    /* unlock(accel) */
-    return kIOReturnNotOpen; /* real value 0xe00002d8, same as the top-of-function gate failure */
+    IDCT_unlock(reinterpret_cast<void *>(U32At(accel, 0x840)));
+    return 0xe00002d8;
 }

@@ -17,14 +17,33 @@ class ATIR500DVDContext : public IOATIR500DVDContext {
     OSDeclareDefaultStructors(ATIR500DVDContext)
 
 public:
-    IOReturn show_buffer(UInt32 bufferIndex, UInt32 param2); /* 10, CONFIRMED body (stage8): thin lock wrapper delegating to ATIR500Surface::showbuffer, which is a REAL EMPTY NO-OP in this exact kext build */
-    IOReturn dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h, UInt32 param5); /* 11, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_overlay - real, stores geometry into the surface's shared this+0x94/0x96/0x98/0x9a fields plus a dirty flag at +0xd94 */
-    IOReturn dvd_enable_overlay(UInt32 enable); /* 12, CONFIRMED body (stage8): delegates to ATIR500Surface::enable_overlay/disable_overlay, BOTH real empty no-ops in this exact kext build */
+    /*
+     * Virtual slots in the stock vtable's order (Ledger/kext_ppc_vtables.txt): start +0x348, stop +0x34c,
+     * clientMemoryForType +0x580, getTargetAndMethodForIndex +0x594, invalidate +0x5a4, update_surface +0x5a8,
+     * (setCompatibleSurfaceMode +0x5ac is the base class's), submit_context_buffer +0x5b0,
+     * process_command_buffer +0x5b4, discard_command_buffer +0x5b8.
+     */
+    virtual bool     start(IOService *provider) override;                                     /* +0x348, real addr 0x34860 */
+    virtual void     stop(IOService *provider) override;                                      /* +0x34c, real addr 0x34ac0 */
+    virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) override; /* +0x580, real addr 0x352a0 */
+    virtual IOExternalMethod *getTargetAndMethodForIndex(IOService **target, UInt32 selector); /* +0x594, real addr 0x33bf0 */
+    virtual void     invalidate() override;                                                   /* +0x5a4, real addr 0x34100 */
+    virtual void     update_surface() override;                                               /* +0x5a8, real addr 0x34060 */
+    virtual void     submit_context_buffer() override;                                        /* +0x5b0, real addr 0x34440 */
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor) override;    /* +0x5b4, real addr 0x357c0 */
+    virtual void     discard_command_buffer() override;                                        /* +0x5b8, real addr 0x33c30 */
+
+    void     build_scissor(void);                                                             /* real addr 0x34020 */
+    IOReturn finish(void);                                                                    /* real addr 0x340a0: shadows the base class's finish() */
+
+    IOReturn show_buffer(int bufferIndex, int param2); /* 10, CONFIRMED body (stage8): thin lock wrapper delegating to ATIR500Surface::showbuffer, which is a REAL EMPTY NO-OP in this exact kext build */
+    IOReturn dvd_setup_overlay(int x, int y, int w, int h, int param5); /* 11, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_overlay - real, stores geometry into the surface's shared this+0x94/0x96/0x98/0x9a fields plus a dirty flag at +0xd94 */
+    IOReturn dvd_enable_overlay(int enable); /* 12, CONFIRMED body (stage8): delegates to ATIR500Surface::enable_overlay/disable_overlay, BOTH real empty no-ops in this exact kext build */
     IOReturn read_regs(UInt32 *offsets, UInt32 *outValues, UInt32 byteCount, UInt32 *inOutCount); /* 13, CONFIRMED body: identical masking/validation shape to the 2D context's read_regs - see Sources/ATIR500DVDContext_RawRegs.cpp */
     IOReturn write_regs(UInt32 offset, UInt32 value); /* 14, CONFIRMED body: this DVD variant's real decompiled signature takes a single scalar (offset, value) pair, not an array like the 2D context's write_regs */
-    IOReturn dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4); /* REAL SIGNATURE CORRECTED (issue #42 pass): the shipped symbol has FOUR ints and the dispatch table says 4 scalars; the 4th is passed straight through to ATIR500Surface::dvd_setup_subpicture (also 4 ints, all unused). */ /* /* 15, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_subpicture, a REAL EMPTY NO-OP in this exact kext build */
-    IOReturn set_macrovision(UInt32 enable); /* 16, RESOLVED - real body confirms this project's own prior inference (Sources/ATIR500DVDContext_SetMacrovision.cpp), no longer just inferred from the 2D context's own version. Real wire-shape evidence (VA bundle, offset 0x52b8) shows the client actually sends 2 real scalar inputs, not 1 - the real decompiled body itself only ever reads the first (`enable`), matching this project's own well-established "argument-dropped" decompiler artifact (see e.g. GL's finish()/wait_for_stamp() and page_off_texture) rather than being a signature error: the C++ signature here correctly reflects what the function actually uses, the wire's 2nd scalar is real but silently unused by the compiled body. */
-    IOReturn dvd_enable_deint(UInt32 mode); /* 17, CONFIRMED body (stage8): delegates to ATIR500Surface::enable_deint - real, stores the mode into the surface's +0xdac field; nothing observed reading it back anywhere this project decompiled */
+    IOReturn dvd_setup_subpicture(int param1, int param2, int param3, int param4); /* REAL SIGNATURE CORRECTED (issue #42 pass): the shipped symbol has FOUR ints and the dispatch table says 4 scalars; the 4th is passed straight through to ATIR500Surface::dvd_setup_subpicture (also 4 ints, all unused). */ /* /* 15, CONFIRMED body (stage8): delegates to ATIR500Surface::dvd_setup_subpicture, a REAL EMPTY NO-OP in this exact kext build */
+    IOReturn set_macrovision(UInt32 attribute, UInt32 value); /* 16, RESOLVED - real body confirms this project's own prior inference (Sources/ATIR500DVDContext_SetMacrovision.cpp), no longer just inferred from the 2D context's own version. Real wire-shape evidence (VA bundle, offset 0x52b8) shows the client actually sends 2 real scalar inputs, not 1 - the real decompiled body itself only ever reads the first (`enable`), matching this project's own well-established "argument-dropped" decompiler artifact (see e.g. GL's finish()/wait_for_stamp() and page_off_texture) rather than being a signature error: the C++ signature here correctly reflects what the function actually uses, the wire's 2nd scalar is real but silently unused by the compiled body. */
+    IOReturn dvd_enable_deint(int mode); /* 17, CONFIRMED body (stage8): delegates to ATIR500Surface::enable_deint - real, stores the mode into the surface's +0xdac field; nothing observed reading it back anywhere this project decompiled */
 
     /*
      * doIDCT - CONFIRMED, fully decoded (real kext offset 0x35540). THE
@@ -32,7 +51,7 @@ public:
      * relevant to this project's H.264 goal. Full reconstruction in
      * Sources/ATIR500DVDContext_IDCT.cpp.
      */
-    IOReturn doIDCT(sATIDVDIDCTInfo *info, sATIDVDIDCTParams *ioctlParams);   /* 18 */
+    IOReturn doIDCT(sATIDVDIDCTInfo *info, UInt32 infoSize);   /* 18 */
     IOReturn wait_for_stamps(UInt32 waitMain, UInt32 waitIDCT);                /* 19, CONFIRMED body (stage5): calls two distinct vtable methods (0x5fc/0x558) depending on which flags are set - mirrors the GL side's fence pair, confirming the IDCT path uses the same stamp architecture */
     IOReturn check_stamps(UInt32 checkMain, UInt32 checkIDCT, UInt32 *outBothDone); /* 20, CONFIRMED body (stage5): non-blocking poll counterpart to wait_for_stamps */
     IOReturn setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags); /* 21, CONFIRMED body (stage5): real per-plane geometry setup for the IDCT working surface, writes a control dword combining caller flags with a fixed 0x20000002 base */
@@ -63,77 +82,6 @@ public:
      * subclass. Moved to Headers/IOATIR500DVDContext.h; own body
      * RESOLVED there, issue #33.
      */
-    void submit_context_buffer(void);
-
-    /*
-     * process_command_buffer - PARTIALLY RESOLVED (issue #7), NOW
-     * ASSEMBLED AND WIRED (was previously just free functions awaiting a
-     * dispatcher - the dispatcher itself is now real, see
-     * Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp). Real dispatch
-     * skeleton plus real opcode groups: texture bind (0x19-0x1d,
-     * 0x1e-0x25, 0x26-0x2a - 0x2d moved OUT, see correction below);
-     * texture unbind (0x2b/0x2c, 0x2d, 0x2e-0x30, 0x31, 0x32-0x34, 0x35,
-     * 0x36-0x3c); the opcode 0x2 return-code setter; the opcode 0x4
-     * explicit-flush; the opcode 0x5/0x6 texture-sampler-state pair;
-     * opcodes 0xa/0xb/0xd's own per-mip YUV/tiling setup; opcode 0x13's
-     * texture-fetch setup; opcodes 0x3e/0x3f/0x42/0x43/0x44/0x46/0x47; and,
-     * in later continuations of this same pass, opcodes 0x14/0x16 (dense
-     * multi-plane YUV/tiling bursts), 0x18 (a two-transfer-buffer fetch),
-     * 0x15 (a real FIXED `boundSurface+0x7b0` sub-record, unlike every
-     * other opcode in this cluster), and 0x3d (the densest opcode
-     * transcribed this whole pass - a real self-consuming record
-     * producing TWO 5-plane PM4 bursts, with a real 32-bit-overflow
-     * pointer-arithmetic subtlety this project caught and worked around
-     * rather than reproducing via undefined behavior - see that
-     * function's own header comment), and 0x17 (a 3-output analog of
-     * 0x14's own 6-way branch, transcribed in a still-later continuation
-     * after an earlier attempt at it was deliberately abandoned
-     * mid-branch on a register whose value looked unexplained -
-     * resolved by re-reading from the real function entry rather than
-     * mid-function; see handle_opcode_17's own header comment), and
-     * FINALLY 0x12 (the single largest item in this whole issue, closing
-     * it out - two independent real transfer buffers each GART-mapped
-     * via the exact same real sequence `handle_opcode_18` already
-     * transcribes, feeding an 8-entry stride table split across two
-     * near-mirror 30-slot PM4 bursts, each ending in a real caller-data-
-     * driven variable-length trailing loop using the exact same real
-     * 32-bit-address-arithmetic-overflow idiom `handle_opcode_3d`
-     * documents, independently re-confirmed here via direct disassembly
-     * tracing; see handle_opcode_12's own header comment for a real
-     * false lead this project chased and ruled out while locating this
-     * opcode's true body) (50 real opcodes with genuine handlers now),
-     * plus four more (0x07/0x08/0x09/0x0c) confirmed to be real
-     * HARD-ABORT paths (not a plain skip - see the dispatcher's own
-     * comment) with no other real handler.
-     *
-     * THREE REAL CORRECTIONS to this project's own earlier opcode
-     * accounting, found via direct PPC branch-instruction tracing (not
-     * decompiled-C brace nesting, which had already produced two
-     * mistakes on this exact function in an earlier pass): opcode 0x2d
-     * is really part of the UNBIND family, not bind as earlier prose
-     * here wrongly listed; opcode 0x35 is ALSO an unbind opcode,
-     * previously not catalogued at all; opcode 0x31 was already known to
-     * be a real unbind opcode but had never actually been wired to a
-     * handler in any dispatcher (none existed yet) - now fixed, reusing
-     * the already-transcribed handler with no new decompile work. Also
-     * corrected:
-     * `handle_texture_bind`'s own bounds-check-failure path is a real
-     * HARD ABORT (not a plain skip) - see that function's own header
-     * note - and `local_64`/`local_58`/`local_60`/`local_5c` (used by
-     * opcodes 0xa/0xb/0x46) are real shared, cross-opcode-call
-     * `process_command_buffer`-scope state, not fresh per-call locals as
-     * an earlier pass modeled them - see handle_opcode_0a's header note
-     * for the full explanation of both corrections.
-     *
-     * See Sources/ATIR500DVDContext_ProcessCommandBuffer.cpp for every
-     * handler function and GAPS.md for the full opcode-by-opcode status,
-     * including a real correction (DVD has no opcode 0x11 at all).
-     *
-     * FULLY RESOLVED: issue #7 is closed. Every real DVD opcode this
-     * project found now has a genuine handler wired into the dispatcher.
-     */
-    IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
-
 protected:
     /*
      * FIXED (issue #56): `idctInfo` was declared as its OWN data member

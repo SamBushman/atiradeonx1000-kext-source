@@ -50,7 +50,7 @@ inline IOReturn GuardCheck(void *accel, void *surface) {
 }
 } // namespace
 
-IOReturn ATIR500DVDContext::show_buffer(UInt32 bufferIndex, UInt32 param2) {
+IOReturn ATIR500DVDContext::show_buffer(int bufferIndex, int param2) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
     IOReturn result = GuardCheck(accelerator, boundSurface);
@@ -61,7 +61,7 @@ IOReturn ATIR500DVDContext::show_buffer(UInt32 bufferIndex, UInt32 param2) {
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h, UInt32 param5) {
+IOReturn ATIR500DVDContext::dvd_setup_overlay(int x, int y, int w, int h, int param5) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
     IOReturn result = GuardCheck(accelerator, boundSurface);
@@ -78,7 +78,7 @@ IOReturn ATIR500DVDContext::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_enable_overlay(UInt32 enable) {
+IOReturn ATIR500DVDContext::dvd_enable_overlay(int enable) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
     IOReturn result = GuardCheck(accelerator, boundSurface);
@@ -93,7 +93,7 @@ IOReturn ATIR500DVDContext::dvd_enable_overlay(UInt32 enable) {
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4) {
+IOReturn ATIR500DVDContext::dvd_setup_subpicture(int param1, int param2, int param3, int param4) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
     IOReturn result = GuardCheck(accelerator, boundSurface);
@@ -104,7 +104,7 @@ IOReturn ATIR500DVDContext::dvd_setup_subpicture(UInt32 param1, UInt32 param2, U
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_enable_deint(UInt32 mode) {
+IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
     IOReturn result = GuardCheck(accelerator, boundSurface);

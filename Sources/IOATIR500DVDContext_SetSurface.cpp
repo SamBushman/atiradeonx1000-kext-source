@@ -95,7 +95,8 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, UInt32 modeBits, SInt32 flagCount) {
+IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBits modeBitsEnum, int flagCount) {
+    UInt32 modeBits = static_cast<UInt32>(modeBitsEnum);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     DVDSetSurface_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));

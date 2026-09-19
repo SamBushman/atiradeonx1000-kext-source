@@ -479,7 +479,7 @@
 0000e248	16	stub	n/a	FUN_0000e248	
 0000e260	8	generated	DONE	IOATIR500DVDContext::MetaClass::alloc	__ZNK19IOATIR500DVDContext9MetaClass5allocEv
 0000e270	292	method	DONE	IOATIR500DVDContext::freeAllContextBuffers	__ZN19IOATIR500DVDContext21freeAllContextBuffersEv
-0000e3a0	680	method	MISSING	IOATIR500DVDContext::stop	__ZN19IOATIR500DVDContext4stopEP9IOService
+0000e3a0	680	method	DONE	IOATIR500DVDContext::stop	__ZN19IOATIR500DVDContext4stopEP9IOService
 0000e660	16	stub	n/a	IOATIR500Shared::delete_texture	
 0000e670	16	stub	n/a	FUN_0000e670	
 0000e680	16	stub	n/a	IOATIR500Surface::prune_buffers	
@@ -487,17 +487,17 @@
 0000e6a0	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 0000e6b0	16	stub	n/a	IOATIR500DVDContext::freeAllContextBuffers	
 0000e6c0	16	stub	n/a	FUN_0000e6c0	
-0000e6d0	116	method	MISSING	IOATIR500DVDContext::clientClose	__ZN19IOATIR500DVDContext11clientCloseEv
+0000e6d0	116	method	DONE	IOATIR500DVDContext::clientClose	__ZN19IOATIR500DVDContext11clientCloseEv
 0000e750	32	method	DONE	IOATIR500DVDContext::remove_texture_from_stream	__ZN19IOATIR500DVDContext26remove_texture_from_streamEP19VendorTextureBuffer
 0000e770	16	method	DONE	IOATIR500DVDContext::add_texture_to_stream	__ZN19IOATIR500DVDContext21add_texture_to_streamEP19VendorTextureBuffer
-0000e780	72	method	MISSING	IOATIR500DVDContext::init_command_buffer_header	__ZN19IOATIR500DVDContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
+0000e780	72	method	DONE	IOATIR500DVDContext::init_command_buffer_header	__ZN19IOATIR500DVDContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
 0000e7d0	56	method	DONE	IOATIR500DVDContext::init_context_buffer_header	__ZN19IOATIR500DVDContext26init_context_buffer_headerEP25VendorContextBufferHeaderm
-0000e810	12	method	MISSING	IOATIR500DVDContext::remove_surface	__ZN19IOATIR500DVDContext14remove_surfaceEv
+0000e810	12	method	DONE	IOATIR500DVDContext::remove_surface	__ZN19IOATIR500DVDContext14remove_surfaceEv
 0000e820	112	method	DONE	IOATIR500DVDContext::map_transfer_to_GART	__ZN19IOATIR500DVDContext20map_transfer_to_GARTEP20VendorTransferBuffer
 0000e890	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
 0000e8a0	184	method	DONE	IOATIR500DVDContext::freeToAllocGART	__ZN19IOATIR500DVDContext15freeToAllocGARTEP20VendorTransferBufferb
 0000e958	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
-0000e970	8	method	MISSING	IOATIR500DVDContext::setCompatibleSurfaceMode	__ZN19IOATIR500DVDContext24setCompatibleSurfaceModeEPl21eIODVDContextModeBits
+0000e970	8	method	DONE	IOATIR500DVDContext::setCompatibleSurfaceMode	__ZN19IOATIR500DVDContext24setCompatibleSurfaceModeEPl21eIODVDContextModeBits
 0000e980	36	method	DONE	IOATIR500DVDContext::get_config	__ZN19IOATIR500DVDContext10get_configEPmS0_
 0000e9b0	44	method	DONE	IOATIR500DVDContext::get_status	__ZN19IOATIR500DVDContext10get_statusEPm
 0000e9e0	64	method	DONE	IOATIR500DVDContext::get_surface_size	__ZN19IOATIR500DVDContext16get_surface_sizeEPlS0_
@@ -505,7 +505,7 @@
 0000eab0	392	method	DONE	IOATIR500DVDContext::allocAllContextBuffers	__ZN19IOATIR500DVDContext22allocAllContextBuffersEm
 0000ec38	16	stub	n/a	IOATIR500DVDContext::init_context_buffer_header	
 0000ec48	16	stub	n/a	FUN_0000ec48	
-0000ec60	464	method	MISSING	IOATIR500DVDContext::start	__ZN19IOATIR500DVDContext5startEP9IOService
+0000ec60	464	method	DONE	IOATIR500DVDContext::start	__ZN19IOATIR500DVDContext5startEP9IOService
 0000ee30	16	stub	n/a	IOATIR500DVDContext::allocAllContextBuffers	
 0000ee40	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
 0000ee50	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
@@ -518,7 +518,7 @@
 0000f02c	16	stub	n/a	FUN_0000f02c	
 0000f06c	16	stub	n/a	__static_initialization_and_destruction_0	
 0000f0ac	16	stub	n/a	__static_initialization_and_destruction_0	
-0000f0c0	2152	method	MISSING	IOATIR500DVDContext::clientMemoryForType	__ZN19IOATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+0000f0c0	2152	method	DONE	IOATIR500DVDContext::clientMemoryForType	__ZN19IOATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
 0000f944	16	stub	n/a	IOATIR500DVDContext::init_context_buffer_header	
 0000f954	16	stub	n/a	IOATIR500DVDContext::init_command_buffer_header	
 0000f964	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
@@ -534,7 +534,7 @@
 0000fa04	16	stub	n/a	FUN_0000fa04	
 0000fa14	16	stub	n/a	FUN_0000fa14	
 0000fa24	16	stub	n/a	FUN_0000fa24	
-0000fa40	552	method	SIG?	IOATIR500DVDContext::set_surface	__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi
+0000fa40	552	method	DONE	IOATIR500DVDContext::set_surface	__ZN19IOATIR500DVDContext11set_surfaceEm21eIODVDContextModeBitsi
 0000fc8c	16	stub	n/a	FUN_0000fc8c	
 0000fc9c	16	stub	n/a	IOATIR500Surface::set_dvd_context	
 0000fcac	16	stub	n/a	IOATIR500Surface::reset_req_bits	
@@ -542,7 +542,7 @@
 0000fccc	16	stub	n/a	IOATIR500Surface::remove_dvd_context	
 0000fcdc	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
 0000fcec	16	stub	n/a	FUN_0000fcec	
-0000fd00	424	method	MISSING	IOATIR500DVDContext::lock_all_buffers	__ZN19IOATIR500DVDContext16lock_all_buffersEmP27sIODVDContextLockBufferData
+0000fd00	424	method	DONE	IOATIR500DVDContext::lock_all_buffers	__ZN19IOATIR500DVDContext16lock_all_buffersEmP27sIODVDContextLockBufferData
 0000fec4	16	stub	n/a	FUN_0000fec4	
 0000fed4	16	stub	n/a	FUN_0000fed4	
 0000fee4	16	stub	n/a	FUN_0000fee4	
@@ -551,7 +551,7 @@
 0000ff20	148	method	DONE	IOATIR500DVDContext::unlock_memory	__ZN19IOATIR500DVDContext13unlock_memoryEmPm
 0000ffc0	16	stub	n/a	FUN_0000ffc0	
 0000ffd0	16	stub	n/a	FUN_0000ffd0	
-0000ffe0	940	method	SIG?	IOATIR500DVDContext::write_buffer	__ZN19IOATIR500DVDContext12write_bufferEP28sIODVDContextWriteBufferDatam
+0000ffe0	940	method	DONE	IOATIR500DVDContext::write_buffer	__ZN19IOATIR500DVDContext12write_bufferEP28sIODVDContextWriteBufferDatam
 00010398	16	stub	n/a	FUN_00010398	
 000103a8	16	stub	n/a	FUN_000103a8	
 000103b8	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
@@ -1471,16 +1471,16 @@
 00033b80	80	generated	DONE	ATIR500DVDContext::ATIR500DVDContext	__ZN17ATIR500DVDContextC2Ev
 00033bd0	16	stub	n/a	FUN_00033bd0	
 00033be0	16	stub	n/a	IOATIR500DVDContext::IOATIR500DVDContext	
-00033bf0	64	method	MISSING	ATIR500DVDContext::getTargetAndMethodForIndex	__ZN17ATIR500DVDContext26getTargetAndMethodForIndexEPP9IOServicem
-00033c30	916	method	MISSING	ATIR500DVDContext::discard_command_buffer	__ZN17ATIR500DVDContext22discard_command_bufferEv
+00033bf0	64	method	DONE	ATIR500DVDContext::getTargetAndMethodForIndex	__ZN17ATIR500DVDContext26getTargetAndMethodForIndexEPP9IOServicem
+00033c30	916	method	DONE	ATIR500DVDContext::discard_command_buffer	__ZN17ATIR500DVDContext22discard_command_bufferEv
 00033fe8	16	stub	n/a	FUN_00033fe8	
 00033ff8	16	stub	n/a	IOATIR500Shared::delete_texture	
 00034008	16	stub	n/a	FUN_00034008	
-00034020	56	method	MISSING	ATIR500DVDContext::build_scissor	__ZN17ATIR500DVDContext13build_scissorEv
-00034060	44	method	MISSING	ATIR500DVDContext::update_surface	__ZN17ATIR500DVDContext14update_surfaceEv
+00034020	56	method	DONE	ATIR500DVDContext::build_scissor	__ZN17ATIR500DVDContext13build_scissorEv
+00034060	44	method	DONE	ATIR500DVDContext::update_surface	__ZN17ATIR500DVDContext14update_surfaceEv
 0003408c	16	stub	n/a	ATIR500DVDContext::build_scissor	
-000340a0	88	method	MISSING	ATIR500DVDContext::finish	__ZN17ATIR500DVDContext6finishEv
-00034100	20	method	MISSING	ATIR500DVDContext::invalidate	__ZN17ATIR500DVDContext10invalidateEv
+000340a0	88	method	DONE	ATIR500DVDContext::finish	__ZN17ATIR500DVDContext6finishEv
+00034100	20	method	DONE	ATIR500DVDContext::invalidate	__ZN17ATIR500DVDContext10invalidateEv
 00034120	124	method	DONE	ATIR500DVDContext::wait_for_stamps	__ZN17ATIR500DVDContext15wait_for_stampsEmm
 000341a0	180	method	DONE	ATIR500DVDContext::check_stamps	__ZN17ATIR500DVDContext12check_stampsEmmPm
 00034260	116	method	DONE	ATIR500DVDContext::setup_buffers	__ZN17ATIR500DVDContext13setup_buffersEmmmmm
@@ -1490,43 +1490,43 @@
 000343ac	16	stub	n/a	FUN_000343ac	
 000343ec	16	stub	n/a	__static_initialization_and_destruction_0	
 0003442c	16	stub	n/a	__static_initialization_and_destruction_0	
-00034440	1000	method	MISSING	ATIR500DVDContext::submit_context_buffer	__ZN17ATIR500DVDContext21submit_context_bufferEv
+00034440	1000	method	DONE	ATIR500DVDContext::submit_context_buffer	__ZN17ATIR500DVDContext21submit_context_bufferEv
 00034828	16	stub	n/a	ATIRadeonX1000::submit_buffer	
 00034838	16	stub	n/a	FUN_00034838	
 00034848	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	
-00034860	508	method	MISSING	ATIR500DVDContext::start	__ZN17ATIR500DVDContext5startEP9IOService
+00034860	508	method	DONE	ATIR500DVDContext::start	__ZN17ATIR500DVDContext5startEP9IOService
 00034a64	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
 00034a74	16	stub	n/a	ATIRadeonX1000::start_xdct_engine	
 00034a84	16	stub	n/a	FUN_00034a84	
 00034a94	16	stub	n/a	FUN_00034a94	
 00034aa4	16	stub	n/a	FUN_00034aa4	
-00034ac0	196	method	MISSING	ATIR500DVDContext::stop	__ZN17ATIR500DVDContext4stopEP9IOService
+00034ac0	196	method	DONE	ATIR500DVDContext::stop	__ZN17ATIR500DVDContext4stopEP9IOService
 00034b84	16	stub	n/a	FUN_00034b84	
 00034b94	16	stub	n/a	ATIRadeonX1000::stop_xdct_engine	
 00034ba4	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 00034bb4	16	stub	n/a	FUN_00034bb4	
-00034bd0	144	method	SIG?	ATIR500DVDContext::show_buffer	__ZN17ATIR500DVDContext11show_bufferEii
+00034bd0	144	method	DONE	ATIR500DVDContext::show_buffer	__ZN17ATIR500DVDContext11show_bufferEii
 00034c60	16	stub	n/a	FUN_00034c60	
 00034c70	16	stub	n/a	ATIR500Surface::showbuffer	
 00034c80	16	stub	n/a	FUN_00034c80	
-00034c90	144	method	SIG?	ATIR500DVDContext::dvd_enable_deint	__ZN17ATIR500DVDContext16dvd_enable_deintEi
+00034c90	144	method	DONE	ATIR500DVDContext::dvd_enable_deint	__ZN17ATIR500DVDContext16dvd_enable_deintEi
 00034d20	16	stub	n/a	FUN_00034d20	
 00034d30	16	stub	n/a	ATIR500Surface::enable_deint	
 00034d40	16	stub	n/a	FUN_00034d40	
-00034d50	208	method	SIG?	ATIR500DVDContext::dvd_setup_overlay	__ZN17ATIR500DVDContext17dvd_setup_overlayEiiiii
+00034d50	208	method	DONE	ATIR500DVDContext::dvd_setup_overlay	__ZN17ATIR500DVDContext17dvd_setup_overlayEiiiii
 00034e20	16	stub	n/a	FUN_00034e20	
 00034e30	16	stub	n/a	ATIR500Surface::dvd_setup_overlay	
 00034e40	16	stub	n/a	FUN_00034e40	
-00034e50	176	method	SIG?	ATIR500DVDContext::dvd_setup_subpicture	__ZN17ATIR500DVDContext20dvd_setup_subpictureEiiii
+00034e50	176	method	DONE	ATIR500DVDContext::dvd_setup_subpicture	__ZN17ATIR500DVDContext20dvd_setup_subpictureEiiii
 00034f00	16	stub	n/a	FUN_00034f00	
 00034f10	16	stub	n/a	ATIR500Surface::dvd_setup_subpicture	
 00034f20	16	stub	n/a	FUN_00034f20	
-00034f30	160	method	SIG?	ATIR500DVDContext::dvd_enable_overlay	__ZN17ATIR500DVDContext18dvd_enable_overlayEi
+00034f30	160	method	DONE	ATIR500DVDContext::dvd_enable_overlay	__ZN17ATIR500DVDContext18dvd_enable_overlayEi
 00034fd0	16	stub	n/a	FUN_00034fd0	
 00034fe0	16	stub	n/a	ATIR500Surface::disable_overlay	
 00034ff0	16	stub	n/a	ATIR500Surface::enable_overlay	
 00035000	16	stub	n/a	FUN_00035000	
-00035010	208	method	SIG?	ATIR500DVDContext::set_macrovision	__ZN17ATIR500DVDContext15set_macrovisionEmm
+00035010	208	method	DONE	ATIR500DVDContext::set_macrovision	__ZN17ATIR500DVDContext15set_macrovisionEmm
 000350e0	16	stub	n/a	FUN_000350e0	
 000350f0	16	stub	n/a	FUN_000350f0	
 00035100	16	stub	n/a	ATIR500Surface::getFramebufferIndex	
@@ -1537,11 +1537,11 @@
 00035200	116	method	DONE	ATIR500DVDContext::write_regs	__ZN17ATIR500DVDContext10write_regsEmm
 0003527c	16	stub	n/a	FUN_0003527c	
 0003528c	16	stub	n/a	FUN_0003528c	
-000352a0	612	method	MISSING	ATIR500DVDContext::clientMemoryForType	__ZN17ATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+000352a0	612	method	DONE	ATIR500DVDContext::clientMemoryForType	__ZN17ATIR500DVDContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
 00035504	16	stub	n/a	FUN_00035504	
 00035514	16	stub	n/a	IOATIR500DVDContext::init_command_buffer_header	
 00035524	16	stub	n/a	FUN_00035524	
-00035540	560	method	SIG?	ATIR500DVDContext::doIDCT	__ZN17ATIR500DVDContext6doIDCTEP15sATIDVDIDCTInfom
+00035540	560	method	DONE	ATIR500DVDContext::doIDCT	__ZN17ATIR500DVDContext6doIDCTEP15sATIDVDIDCTInfom
 0003577c	16	stub	n/a	FUN_0003577c	
 0003578c	16	stub	n/a	ATIRadeonX1000::submit_idct_buffer_consumed	
 0003579c	16	stub	n/a	IOATIR500DVDContext::map_transfer_to_GART	

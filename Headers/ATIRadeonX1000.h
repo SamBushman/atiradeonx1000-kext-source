@@ -313,6 +313,8 @@ public:
     IOReturn waitForRetiredTimeStamp(UInt32 tag);
     IOReturn waitForTimeStampNoLock(UInt32 tag);
     IOReturn waitForConsumedIDCTTimeStamp(UInt32 tag); /* real vtable slot +0x5ec on this class's own vtable, real addr 0x254e0 - CONFIRMED (issue #19), see ATIR500DVDContext_ProcessCommandBuffer.cpp's own EngineKickFn call sites */
+    void start_xdct_engine(void);                       /* real addr 0x25c60: powers up the IDCT engine when the first DVD context starts */
+    void stop_xdct_engine(void);                        /* real addr in ledger: the matching shut-down from ATIR500DVDContext::stop */
 
     /*
      * External-method selector 9 on the GL context, CONFIRMED to be
