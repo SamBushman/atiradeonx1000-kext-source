@@ -81,38 +81,12 @@ IOReturn IOATIR500DVDContext::finish() {
     return 0;
 }
 
-IOReturn IOATIR500DVDContext::unlock_memory(UInt32 lockType, UInt32 *outTag) {
-    (void)lockType;
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDBase_lock(lock);
-    IOReturn result;
-    if (boundSurface == nullptr) {
-        result = 0xe00002c2;
-    } else {
-        result = 0;
-        U16At(boundSurface, 0xbd2) -= 1;
-    }
-    DVDBase_unlock(lock);
-    *outTag = 0; /* real: both branches of the decompile store 0 */
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_unlock_memory_Port.cpp) */
+
 
 /* create_shared: see IOATIR5002DContext::create_shared - same body, this class's own offsets (+0x84, +0x8c) */
-bool IOATIR500DVDContext::create_shared() {
-    IOATIR500Shared *shared = new IOATIR500Shared();
-    sharedAllocator = shared;
-    if (shared == nullptr) {
-        return false;
-    }
-    if (!shared->init()) {
-        shared->release();
-        sharedAllocator = nullptr;
-        return false;
-    }
-    U32At(shared, 0xc) = U32At(this, 0x8c);
-    U32At(shared, 0x8) = U32At(this, 0x78);
-    return true;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_create_shared_Port.cpp) */
+
 
 IOReturn IOATIR500DVDContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
     (void)param1;

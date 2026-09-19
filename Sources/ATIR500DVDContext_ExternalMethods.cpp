@@ -116,20 +116,8 @@ IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
 }
 
 /* setup_buffers: NOT under the lock in the shipped driver. */
-IOReturn ATIR500DVDContext::setup_buffers(UInt32 topHeight, UInt32 leftWidth, UInt32 bottomHeight, UInt32 rightWidth, UInt32 controlFlags) {
-    if (boundSurface != nullptr && U8At(accelerator, 0x80) != 0) {
-        UInt8 *surface = reinterpret_cast<UInt8 *>(boundSurface);
-        U8At(surface, 0xbed) = 1;
-        U8At(surface, 0xbee) = 1;
-        U16At(surface, 0x94) = static_cast<UInt16>(topHeight);
-        U16At(surface, 0x9a) = static_cast<UInt16>(bottomHeight);
-        U16At(surface, 0x96) = static_cast<UInt16>(rightWidth);
-        U16At(surface, 0x98) = static_cast<UInt16>(leftWidth);
-        U32At(this, 0x88) = (controlFlags & 0xfffffc00u) | 0x20000002u;
-        return 0;
-    }
-    return 0xe00002d8;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_setup_buffers_Port.cpp) */
+
 
 IOReturn ATIR500DVDContext::read_regs(UInt32 *offsets, UInt32 *outValues, UInt32 requestedByteCount, UInt32 *actualByteCount) {
     UInt32 count = *actualByteCount;

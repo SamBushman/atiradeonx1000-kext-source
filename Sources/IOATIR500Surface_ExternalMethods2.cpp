@@ -78,15 +78,8 @@ IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
  * real output param) with no further arguments, translated into a real
  * 0/1 output. Always returns kIOReturnSuccess.
  */
-IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *outStateBitsE) {
-    UInt32 *outStateBits = reinterpret_cast<UInt32 *>(outStateBitsE);
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    typedef SInt32 (*Fn0x520)(void *);
-    void *accel = *reinterpret_cast<void **>(self + 0xd50);
-    SInt32 active = (*reinterpret_cast<Fn0x520 *>(*reinterpret_cast<void ***>(accel) + (0x520 / 4)))(accel);
-    *outStateBits = (active == 0) ? 0u : 1u;
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500Surface_get_state_Port.cpp) */
+
 
 /*
  * set_shape - RESOLVED, real addr 0x159a0. Real signature CORRECTED (4

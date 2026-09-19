@@ -121,60 +121,8 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, eLockType loc
  * "set cache mode" vtable call (+0xdc, mode 2, the same real shape
  * already established for `connect_buffer_backing_store`).
  */
-UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
-                                                      UInt32 param3, UInt32 alignedPitch) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    ATIRadeonX1000 *accel = *reinterpret_cast<ATIRadeonX1000 **>(self + 0xd50);
-    VendorTextureBuffer *rec = accel->allocVendorTextureBuffer(0xc0);
-    UInt32 result = 0;
-    if (rec != nullptr) {
-        UInt8 *recBytes = reinterpret_cast<UInt8 *>(rec);
-        U32At(buf, 0x24) = reinterpret_cast<UInt32>(recBytes);
-        U32At(recBytes, 0x80) = 0;
-        U32At(recBytes, 0x14) = reinterpret_cast<UInt32>(recBytes + 0x80);
-        UInt8 *sub = recBytes + 0x80;
-        U32At(sub, 0) = 0;
-        U32At(sub, 4) = 0;
-        U32At(sub, 8) = 0;
-        U16At(sub, 0x1c) = 0;
-        U16At(sub, 0x1e) = 0;
-        U16At(sub, 0x20) = 0;
-        U16At(sub, 0x22) = 0;
-        U16At(sub, 0x24) = 0;
-        U16At(sub, 0x26) = 0;
-        U16At(sub, 0x28) = 0;
-        U16At(sub, 0x2a) = 0;
-        U16At(sub, 0x2c) = 0;
-        U16At(sub, 0x2e) = 0;
-        U16At(sub, 0x30) = 0;
-        U16At(sub, 0x32) = 0;
-        U8At(sub, 0x14) = 1;
-        U8At(sub, 0x15) = 0;
-        U8At(sub, 0x16) = 5;
-        U8At(sub, 0x34) = 0;
-        U8At(sub, 0x35) = 0;
-        U8At(sub, 0x17) = 0;
-        U16At(sub, 0x36) = 0;
-        *reinterpret_cast<IOMemoryDescriptor **>(recBytes + 8) = memory;
-        U8At(recBytes, 0x20) = 5;
-        *reinterpret_cast<SInt16 *>(recBytes + 0x50) = static_cast<SInt16>(param3);
-        *reinterpret_cast<SInt16 *>(recBytes + 0x52) = static_cast<SInt16>(alignedPitch);
-        U8At(recBytes, 0x58) = 1;
-        U32At(recBytes, 0x54) = U32At(self, 0x7c);
+/* (re-ported mechanically: see IOATIR500Surface_attach_buffer_backing_store_Port.cpp) */
 
-        void *innerDesc = nullptr;
-        if (U8At(self, 0xbf7) != 0 && U32At(buf, 0x24) != 0) {
-            innerDesc = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(buf + 0x24)) + 8);
-        }
-        if (innerDesc != nullptr) {
-            typedef void (*Fn0xdc)(void *, UInt32, UInt32);
-            (*reinterpret_cast<Fn0xdc *>(*reinterpret_cast<void ***>(innerDesc) + (0xdc / 4)))(innerDesc, 2, 0);
-        }
-        result = 1;
-    }
-    return result;
-}
 
 /*
  * free_buffer_backing_orphans - CONFIRMED, simple: releases the

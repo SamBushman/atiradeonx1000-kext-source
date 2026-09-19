@@ -85,22 +85,8 @@ IOReturn IOATIR5002DContext::scale_surface(UInt32 flags, UInt32 xScale, UInt32 y
 
 /* create_shared: allocate and init this context's IOATIR500Shared, and wire it to the accelerator (+0xc)
  * and the owning task (+8). Real: `init()` is the vtable +0x48 call (IOATIR500Shared::init). */
-bool IOATIR5002DContext::create_shared() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Shared *shared = new IOATIR500Shared();
-    sharedAllocator = shared;
-    if (shared == nullptr) {
-        return false;
-    }
-    if (!shared->init()) {
-        shared->release();
-        sharedAllocator = nullptr;
-        return false;
-    }
-    U32At(shared, 0xc) = U32At(self, 0x94);
-    U32At(shared, 0x8) = U32At(self, 0x78);
-    return true;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_create_shared_Port.cpp) */
+
 
 IOReturn IOATIR5002DContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
     (void)param1;

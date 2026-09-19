@@ -6,10 +6,10 @@ Extra port_fn options can be given as  ADDR:opt1:opt2 (e.g. 0x9a30:this=param_1)
 import sys, re, subprocess, os, glob, collections
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 SP = os.environ.get('SCRATCH', '/tmp/claude-1000/-var-home-sam/2670b33a-ea5f-4e43-81c2-8b3a797b033b/scratchpad')
-led = {}
+led = {}; sizes = {}
 for l in open(ROOT + '/Ledger/kext_ppc_ledger.tsv'):
     f = l.rstrip('\n').split('\t')
-    if len(f) >= 6 and f[2] == 'method': led[int(f[0], 16)] = (f[4], f[5])
+    if len(f) >= 6 and f[2] == 'method': led[int(f[0], 16)] = (f[4], f[5]); sizes[int(f[0], 16)] = int(f[1])
 TY = [('unsigned long', 'UInt32'), ('unsigned short', 'UInt16'), ('unsigned char', 'UInt8'), ('long', 'SInt32')]   # `unsigned int` / `int` stay: UInt32 is `unsigned long` here, so they mangle differently
 def project_type(t):
     t = t.strip()
@@ -105,6 +105,16 @@ for arg in sys.argv[1:]:
     # assemble the port into its own source file (common fixes applied)
     if r.returncode == 0 and os.path.exists(out):
         src = open(out).read()
+        if not asicall and '_ASICSupportsAGP' in src:
+            # resolve the mislabelled zero-immediate data relocs from the kext relocation table
+            szs = {v: k for k, v in []}
+            fs = subprocess.run(['python3', HERE + '/func_relocs.py', os.path.expanduser('~/Documents/ATI-X1900-Decomp/tiger-hd-pull/ATIRadeonX1000.kext.bin'), hex(a), hex(a + int(sizes.get(a, 0x1000)))], capture_output=True, text=True).stdout
+            syms = {l.split()[2] for l in fs.split('\n') if len(l.split()) >= 3 and l.split()[1] in ('HA16', 'LO16') and not l.split()[2] == 'local' and not l.split()[2].startswith('scattered')}
+            known = {'_page_size': 'GH_page_size', '_page_shift': 'GH_page_shift', '_kernel_task': 'GH_kernel_task', '_gIOServicePlane': 'GH_gIOServicePlane', '_gIODTPlane': 'GH_gIODTPlane'}
+            cand = [known[x] for x in syms if x in known]
+            others = [x for x in syms if x not in known and '::' not in x and '(' not in x]
+            if len(cand) == 1 and not others: src = src.replace('_ASICSupportsAGP', cand[0]); print('   asic ->', cand[0])
+            else: print('   ASIC NEEDS MANUAL:', sorted(syms))
         if asicall: src = src.replace('_ASICSupportsAGP', asicall[0])
         pre, *funcs = re.split(r'(?m)^(?=/\* real addr )', src)
         names = set()

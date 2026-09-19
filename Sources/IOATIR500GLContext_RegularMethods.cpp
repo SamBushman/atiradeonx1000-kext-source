@@ -204,40 +204,8 @@ IOReturn IOATIR500GLContext::become_global_shared(UInt32 claim) {
  * unlinks it from whichever doubly-linked list it's currently on
  * (+0x24/+0x28 real prev/next pointers, self-linked to mark empty).
  */
-IOReturn IOATIR500GLContext::purge_texture(UInt32 textureID) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    void *shared = *reinterpret_cast<void **>(self + 0x88);
-    if (textureID < U32At(shared, 0x14)) {
-        VendorTextureBuffer *texture = *reinterpret_cast<VendorTextureBuffer **>(
-            reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(shared) + 0x10)) + textureID * 4);
-        if (texture != nullptr) {
-            UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-            if (U32At(tex, 0x48) != 0) {
-                reinterpret_cast<ATIRadeonX1000 *>(accel)->deallocate_texture(texture);
-                UInt8 *mip = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(tex + 0x14));
-                U8At(mip, 0x14) = 1;
-                U16At(mip, 0x28) = 0;
-                U16At(mip, 0x2a) = 0;
-                U16At(mip, 0x2c) = 0;
-                U16At(mip, 0x2e) = 0;
-                U16At(mip, 0x30) = 0;
-                U16At(mip, 0x32) = 0;
-            }
-            void *prev = *reinterpret_cast<void **>(tex + 0x24);
-            void *next = *reinterpret_cast<void **>(tex + 0x28);
-            U32At(prev, 0x28) = *reinterpret_cast<UInt32 *>(tex + 0x28);
-            U32At(next, 0x24) = *reinterpret_cast<UInt32 *>(tex + 0x24);
-            *reinterpret_cast<UInt32 *>(tex + 0x24) = reinterpret_cast<UInt32>(texture);
-            *reinterpret_cast<UInt32 *>(tex + 0x28) = reinterpret_cast<UInt32>(texture);
-            GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-            return 0;
-        }
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return 0xe00002c2;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_purge_texture_Port.cpp) */
+
 
 /*
  * scale_surface - CONFIRMED. Real body: forwards to the bound surface's
