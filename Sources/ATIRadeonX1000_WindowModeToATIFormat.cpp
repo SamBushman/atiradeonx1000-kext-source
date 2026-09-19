@@ -11,7 +11,7 @@
  * mapping a real "window pixel format" selector to a real ATI hardware
  * surface-format code (the same real numbering space this project's
  * other format tables use elsewhere, e.g.
- * `ATIRadeonX1000_DataTables.cpp`'s `_ati_format_info_table`) - not
+ * `ATIRadeonX1000_DataTables.cpp`'s `ati_format_info_table`) - not
  * cross-referenced against that table's own entries this pass (their
  * real numeric agreement, if any, is a genuine open question, not
  * assumed). Every case value and its real hardware format code below is

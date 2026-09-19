@@ -18,7 +18,7 @@
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
 
-extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerator, UInt32 *param_2, UInt32 param_3,
     UInt32 param_4, UInt32 param_5, UInt32 param_6, UInt32 param_7, UInt32 param_8, UInt32 param_9, UInt32 param_10,
@@ -258,7 +258,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   local_334 = param_4;
   uStack_294 = param_7;
   uStack_28c = param_8;
-  GCopy(puVar41,(&_g_r500_3d_blit_state_packet),0x2f4);
+  GCopy(puVar41,(&g_r500_3d_blit_state_packet),0x2f4);
   puVar41[0xaa] = local_354;
   puVar41[0xa0] = local_360;
   iVar30 = 0xbd;

@@ -7,7 +7,7 @@
  * when the scratch buffer's real `+0x34` byte is nonzero - emits a real,
  * dense sequence of PM4 register-index/value pairs (a "3D blit state"
  * setup, matching this project's own already-resolved GLOBAL template
- * `_g_r500_3d_blit_state_packet`, issue #14,
+ * `g_r500_3d_blit_state_packet`, issue #14,
  * `Sources/ATIRadeonX1000_DataTables.cpp` - the two share several
  * leading literal dwords exactly, e.g. `0x1393`/`10`/`0x13c6`/`3`/
  * `0x5c8`/`0x20000`, a real independent cross-check that this

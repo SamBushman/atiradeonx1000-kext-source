@@ -1176,7 +1176,7 @@ UInt32 *handle_fsaa_resolve_setup(ATIR500GLContext *ctx, UInt32 *record) {
  * defined in Sources/ATIR500GLContext_FSAAResolveBlit.cpp) is a real,
  * careful transcription of a genuine kext function - just not this one.
  * A fresh Ghidra re-decompile traced the exact
- * `FUN_000314c4(...,&_g_r500_3d_blit_state_packet,0x2f4)` call that
+ * `FUN_000314c4(...,&g_r500_3d_blit_state_packet,0x2f4)` call that
  * file's own header comments cite back to its TRUE location: the `else`
  * branch of a `uVar34 != 0x2d000000` exclusion check further down in this
  * same function - i.e. that ~500-line floating-point/tile-blit content is

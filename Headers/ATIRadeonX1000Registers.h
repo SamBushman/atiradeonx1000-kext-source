@@ -290,7 +290,7 @@ extern "C" UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blo
  * independent tables - real structural finding: they're three adjacent
  * `UInt32` FIELDS (`+0xc`/`+0x10`/`+0x14`) within ONE real, named,
  * 7-dword/28-byte-stride struct array this project found directly in the
- * kext's own symbol table: `_ati_format_info_table` (real base address
+ * kext's own symbol table: `ati_format_info_table` (real base address
  * `0x4d2d0`, NOT `0x4d2dc` - this project's own field-offset-derived
  * naming for these three accessors predates knowing the real struct
  * base, hence the "misaligned by 0xc" addresses baked into their names).

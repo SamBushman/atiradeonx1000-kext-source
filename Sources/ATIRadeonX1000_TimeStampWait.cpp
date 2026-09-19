@@ -55,7 +55,7 @@
  *     `0x25ab4`; `waitForConsumedIDCTTimeStamp` uses `0x25634`. All three
  *     resolve to the real XNU kernel symbol `absolutetime_to_nanoseconds`.
  *
- * Real, previously-undocumented global: `_gl_assert_wait_timeout_event`
+ * Real, previously-undocumented global: `gl_assert_wait_timeout_event`
  * - a real event/wait-channel object all three real variants share,
  * passed to the "arm a timeout" call.
  *
@@ -86,7 +86,7 @@
 
 #include "../Headers/ATIRadeonX1000.h"
 
-extern "C" UInt32 _gl_assert_wait_timeout_event; /* real global, real identity/purpose beyond "a wait-channel object" not independently confirmed */
+extern "C" UInt32 gl_assert_wait_timeout_event; /* real global, real identity/purpose beyond "a wait-channel object" not independently confirmed */
 
 namespace {
 
@@ -130,7 +130,7 @@ SInt32 PollForTimeStamp(void *self, UInt32 tag, UInt32 cacheOffset,
     if (static_cast<SInt32>(tag - current) > 0) {
         iterations = 1;
         do {
-            armTimeout(&_gl_assert_wait_timeout_event, 0, 100, 1000);
+            armTimeout(&gl_assert_wait_timeout_event, 0, 100, 1000);
             block(0);
             current = readTimestamp(self);
             *cache = current;

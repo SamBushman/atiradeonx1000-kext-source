@@ -58,7 +58,7 @@ extern "C" void RingSubmit_IOLog(const char *fmt, ...) asm("_IOLog");
  * published API. */
 extern "C" void RingSubmit_assert_wait_timeout(void *event, int interruptible, UInt32 interval, UInt32 scaleFactor) asm("_assert_wait_timeout");
 extern "C" void RingSubmit_thread_block(void *continuation) asm("_thread_block");
-extern "C" UInt32 _gl_assert_wait_timeout_event;
+extern "C" UInt32 gl_assert_wait_timeout_event;
 
 void ATIRadeonX1000::submit_ring_data() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -494,7 +494,7 @@ void ATIRadeonX1000::DumpASICHangState() {
     UInt32 tries = 0;
     UInt8 *mmio2;
     do {
-        RingSubmit_assert_wait_timeout(&_gl_assert_wait_timeout_event, 0, 100, 1000);
+        RingSubmit_assert_wait_timeout(&gl_assert_wait_timeout_event, 0, 100, 1000);
         RingSubmit_thread_block(nullptr);
         mmio2 = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
         UInt32 cur = (static_cast<UInt32>(U8At(mmio2, 0x7fb)) << 0x18) | (static_cast<UInt32>(U8At(mmio2, 0x7fa)) << 0x10) |

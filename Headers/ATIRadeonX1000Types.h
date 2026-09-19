@@ -227,7 +227,7 @@ struct ATIR500SurfaceBuffer {
 
 /*
  * AtiFormatInfoEntry - RESOLVED (issue #14). The real, named per-format
- * struct backing `_ati_format_info_table` (real kext symbol, address
+ * struct backing `ati_format_info_table` (real kext symbol, address
  * `0x4d2d0`, exactly 48 real entries) - see
  * `FormatTableLookup_0x0004d2dc/e0/e4`'s own header comment
  * (`ATIRadeonX1000Registers.h`) for the full real discovery account.
@@ -338,7 +338,7 @@ struct register_tracking_state {
  * r500_3d_blit_state_packet_struct - CONFIRMED to be ~0x2f4 bytes
  * (write_r500_3d_blit_state_packet / restore_state_destroyed_by_pageoff
  * both memcpy a global template of exactly this size,
- * `FUN_000314c4(dest, &_g_r500_3d_blit_state_packet, 0x2f4)`), and to be
+ * `FUN_000314c4(dest, &g_r500_3d_blit_state_packet, 0x2f4)`), and to be
  * laid out as a real, dense array of (register-index, value) Type-0-style
  * PM4 pairs matching everything in register_tracking_state above plus the
  * TX_FILTER/TX_FORMAT arrays and SC_CLIP_RULE/RB3D_CCTL literals from the
@@ -348,8 +348,8 @@ struct register_tracking_state {
  * raw buffer here rather than guessed at member-by-member.
  *
  * RESOLVED (issue #14): the real template's raw content is now extracted
- * directly from the kext binary (real symbol `_g_r500_3d_blit_state_packet`,
- * kext offset `0x4c768`) - see `_g_r500_3d_blit_state_packet`'s own real
+ * directly from the kext binary (real symbol `g_r500_3d_blit_state_packet`,
+ * kext offset `0x4c768`) - see `g_r500_3d_blit_state_packet`'s own real
  * definition in `Sources/ATIRadeonX1000_DataTables.cpp`. Confirms the
  * "(register-index, value) pair" structure above directly: every even dword
  * is a real, already-independently-confirmed register/opcode constant this
@@ -368,7 +368,7 @@ struct r500_3d_blit_state_packet_struct {
 /* Real global template instance - CONFIRMED real content, issue #14. Real
  * definition (the actual 189 dwords read directly from the kext binary) in
  * Sources/ATIRadeonX1000_DataTables.cpp. */
-extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 /*
  * r500_zdecompress_restore_add_on_packet_struct - RESOLVED (issue #1,

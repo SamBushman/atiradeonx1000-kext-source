@@ -10,7 +10,7 @@
  * declaration comment (`Headers/ATIRadeonX1000Types.h`,
  * `Headers/ATIRadeonX1000Registers.h`) for the discovery account.
  *
- * `_ati_format_info_table` and `_g_r500_3d_blit_state_packet` are real
+ * `ati_format_info_table` and `g_r500_3d_blit_state_packet` are real
  * symbol names this project found directly in the kext's own symbol
  * table - not this project's invention. `_samplesTable` is likewise real
  * (confirmed distinct from an unrelated, differently-scoped local static
@@ -23,7 +23,7 @@
 #include "../Headers/ATIRadeonX1000Registers.h"
 
 /*
- * _ati_format_info_table - real kext address 0x4d2d0, exactly 48 entries
+ * ati_format_info_table - real kext address 0x4d2d0, exactly 48 entries
  * (indices 0-47), each a real AtiFormatInfoEntry (ATIRadeonX1000Types.h).
  */
 static const AtiFormatInfoEntry kAtiFormatInfoTable[48] = {
@@ -117,12 +117,12 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset) {
 }
 
 /*
- * _g_r500_3d_blit_state_packet - real kext address 0x4c768, real content
+ * g_r500_3d_blit_state_packet - real kext address 0x4c768, real content
  * for all 0x2f4 bytes (189 UInt32 dwords). Real (register-index, value)
  * Type-0-style PM4 pairs throughout, per this struct's own header
  * comment (ATIRadeonX1000Types.h).
  */
-extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet = { {
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet = { {
     0x00001393, 0x0000000a, 0x000013c6, 0x00000003, 0x000005c8, 0x00020000, 0x000010ea, 0x2da49525,
     0x000010fa, 0x00ffffff, 0x00001006, 0x00000000, 0x00011004, 0x66666666, 0x06666666, 0x00001008,
     0x00000000, 0x000010e9, 0x00000000, 0x000013c7, 0x00000000, 0x000013c1, 0x00000000, 0x00000850,
@@ -194,10 +194,10 @@ extern "C" const double DOUBLE_0004c400 = 4096.0;
  * Kext-internal zero-initialised globals (real addresses in the kext's own
  * __bss/__common: 0x4d970 and 0x4d8f4). Declared `extern "C"` at their use
  * sites but never defined anywhere until now.
- *   _gl_assert_wait_timeout_event - only its ADDRESS is used, as the event
+ *   gl_assert_wait_timeout_event - only its ADDRESS is used, as the event
  *     handle for assert_wait_timeout().
- *   _global_dummy_read_back_a_register - a sink that a register read-back is
+ *   global_dummy_read_back_a_register - a sink that a register read-back is
  *     stored into to force the preceding register write to post.
  */
-extern "C" UInt32 _gl_assert_wait_timeout_event = 0;
-extern "C" UInt32 _global_dummy_read_back_a_register = 0;
+extern "C" UInt32 gl_assert_wait_timeout_event = 0;
+extern "C" UInt32 global_dummy_read_back_a_register = 0;

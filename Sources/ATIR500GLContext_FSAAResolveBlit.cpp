@@ -17,7 +17,7 @@
  * offsets (`self+0x290` etc.) this file uses throughout.
  *
  * TRUE IDENTITY, found by tracing this file's own cited
- * `FUN_000314c4(...,&_g_r500_3d_blit_state_packet,0x2f4)` call back to its
+ * `FUN_000314c4(...,&g_r500_3d_blit_state_packet,0x2f4)` call back to its
  * real location in a fresh process_command_buffer decompile: this is
  * opcode **0x2d**'s real handler - the `else` branch of a real
  * `if (uVar34 != 0x2d000000) { ...0x2b/0x2c/0x2f/0x30 handling...; goto
@@ -77,7 +77,7 @@
  *      0/4/5/6/2/3/7/8), same shape as opcode 0x2a's.
  *   2. Real per-mip offset/tiling computation for TWO surfaces (main
  *      target `pAVar77`, FSAA-resolve source `pAVar72`) into the SAME
- *      real 0x2f4-byte `_g_r500_3d_blit_state_packet` template
+ *      real 0x2f4-byte `g_r500_3d_blit_state_packet` template
  *      restore_state_destroyed_by_pageoff uses.
  *   3. Real floating-point viewport/NDC setup using the classic "magic
  *      double bias" integer-to-float trick (`BiasedIntToFloat`).
@@ -199,7 +199,7 @@ UInt32 *ATIR500GLContext_handle_fsaa_resolve_blit(ATIR500GLContext *ctx, UInt32 
     }
 
     UInt32 *puVar42 = puVar65 + 0xbd;
-    /* real: FUN_000314c4(puVar65, &_g_r500_3d_blit_state_packet, 0x2f4) -
+    /* real: FUN_000314c4(puVar65, &g_r500_3d_blit_state_packet, 0x2f4) -
      * the SAME real template restore_state_destroyed_by_pageoff copies -
      * see Sources/ATIR500GLContext_RestoreState.cpp. */
 

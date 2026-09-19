@@ -109,7 +109,7 @@
  * called once at the very top before either block runs) - RESOLVED,
  * issue #15: real target `memmove`, the same real copy
  * `FSAAResolveBlit.cpp`/`RestoreState.cpp` already document
- * (`_g_r500_3d_blit_state_packet`, `ATIRadeonX1000Types.h`) - not
+ * (`g_r500_3d_blit_state_packet`, `ATIRadeonX1000Types.h`) - not
  * re-modeled as a direct `memmove` call here since the template's own
  * real per-field content was never extracted from the binary either
  * place.
@@ -179,7 +179,7 @@ void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode
     ATIR500SurfaceBuffer *surfB = fixedSurfaceBuffer;                    /* real: iVar19 */
     ATIR500SurfaceBuffer *surfA = surfaceBuffersByFormat[formatCode];    /* real: iVar18 */
 
-    /* real: FUN_00044868(paramBlock, &_g_r500_3d_blit_state_packet, 0x2f4) -
+    /* real: FUN_00044868(paramBlock, &g_r500_3d_blit_state_packet, 0x2f4) -
      * see this file's own header comment. */
     paramBlock[0xb] = U32At(accel, 0xb74);
 

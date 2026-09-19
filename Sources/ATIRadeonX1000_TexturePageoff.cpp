@@ -79,7 +79,7 @@
 #include "../Headers/ATIR500Memory.h"
 #include "../Headers/ATIRadeonX1000PPCIntrinsics.h" /* dcbf/dcbst/eieio/isync, see that header */
 
-extern "C" UInt32 _global_dummy_read_back_a_register; /* real: a genuine global this function reads INTO after a register write - a real "force the write to actually land before continuing" pattern, distinct from the explicit barrier intrinsics also present */
+extern "C" UInt32 global_dummy_read_back_a_register; /* real: a genuine global this function reads INTO after a register write - a real "force the write to actually land before continuing" pattern, distinct from the explicit barrier intrinsics also present */
 
 extern "C" void FUN_000210d8(void *dest, void *src, UInt32 size) asm("_memmove"); /* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read) */
 extern "C" void FUN_0001eb18(void *dest, SInt32 byteOffset, UInt32 byteCount) asm("_memmove"); /* RESOLVED, issue #50 - same real target as FUN_000210d8; the real second argument (`byteOffset`, an SInt32 here rather than a pointer type) is passed through unchanged - this project's own prior "running byte offset" reading of this parameter is presumably really a raw VRAM-mapped address the caller already computed, not a plain relative offset, though that caller-side semantic question is unchanged by this linkage fix. */
@@ -643,7 +643,7 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *texture
                                forcing the write above to actually land on real MMIO
                                hardware before continuing) - the exact bit pattern stored
                                into it cannot affect real behavior either way. */
-                            _global_dummy_read_back_a_register = W(mmio + regOffsetC, 0);
+                            global_dummy_read_back_a_register = W(mmio + regOffsetC, 0);
 
                             if (subCount >= 1) {
                                 UInt32 shiftVal = B(hw, 0x1a);

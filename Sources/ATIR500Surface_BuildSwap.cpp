@@ -28,7 +28,7 @@ extern "C" UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2e0(UInt32 byteOffset);
 extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset);
-extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 void ATIR500Surface::build_swap() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -161,7 +161,7 @@ void ATIR500Surface::build_swap() {
       else {
         *puVar39 = 0xd0b;
         M<UInt32>(iVar44 + 0x24) = 5;
-        GCopy(iVar44 + 0x28,(&_g_r500_3d_blit_state_packet),0x2f4);
+        GCopy(iVar44 + 0x28,(&g_r500_3d_blit_state_packet),0x2f4);
         iVar26 = (iVar44 + 0x31c) - (SInt32)puVar39 >> 2;
         iVar28 = (UInt32)(UInt8)self[0xe2] * 0x1c;
         uVar29 = 0;
@@ -458,7 +458,7 @@ LAB_0003f654:
           dVar59 = (double)(float)(dVar57 / dVar65);
         }
         iVar26 = 0xbd;
-        GCopy(puVar45,(&_g_r500_3d_blit_state_packet),0x2f4);
+        GCopy(puVar45,(&g_r500_3d_blit_state_packet),0x2f4);
         uVar38 = puVar45[0xa2];
         puVar45[0xa0] = (bVar7 & 7) << 2 | (UInt32)uVar14 * iVar32 + iVar33 & 0xffffffe0;
         puVar45[0xa6] = uVar23 & 0x7ff | (uVar22 & 0x7ff) << 0xb | 0x80000000;

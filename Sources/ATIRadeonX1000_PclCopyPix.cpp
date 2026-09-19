@@ -18,7 +18,7 @@
 #include "../Headers/GhidraLiterals.h"
 
 struct pcl_ParamsR500_t;
-extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet;
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
 UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, bool param_4) {
     UInt8 *param_2 = reinterpret_cast<UInt8 *>(params);
@@ -89,7 +89,7 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
   if (dVar50 != dVar48) {
     dVar48 = (double)(float)((double)FLOAT_0004c374 / dVar50);
   }
-  GCopy(param_1,(&_g_r500_3d_blit_state_packet),0x2f4);
+  GCopy(param_1,(&g_r500_3d_blit_state_packet),0x2f4);
   uVar38 = param_1[0xa2];
   iVar31 = 0xbd;
   param_1[0xa0] = M<UInt32>(param_2);

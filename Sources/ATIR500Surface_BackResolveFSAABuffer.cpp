@@ -137,7 +137,7 @@ void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 /* real: unused */, UInt32
     ATIR500SurfaceBuffer *fixedBuf  = fixedSurfaceBuffer;                 /* real: iVar14 */
     ATIR500SurfaceBuffer *formatBuf = surfaceBuffersByFormat[formatCode]; /* real: iVar13 */
 
-    /* real: FUN_00044d74(paramBlock, &_g_r500_3d_blit_state_packet, 0x2f4) -
+    /* real: FUN_00044d74(paramBlock, &g_r500_3d_blit_state_packet, 0x2f4) -
      * see this file's own header comment. */
     paramBlock[0xb] = U32At(accel, 0xb74);
 

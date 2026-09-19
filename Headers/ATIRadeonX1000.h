@@ -78,7 +78,7 @@ public:
     virtual UInt32   sleepForTimeStamp(UInt32 tag);                             /* +0x558, real addr 0x25960 */
     virtual UInt32   sleepForTimeStampNoLock(UInt32 tag);                       /* +0x55c, real addr 0x25ae0 */
     virtual UInt32   submit_commands(VendorCommandDescriptor *descriptor);      /* +0x560, real addr 0x20ce0 */
-    virtual void     noop_buffer(UInt32 *buffer);                               /* +0x564, real addr 0x1e000 */
+    virtual UInt32   noop_buffer(UInt32 *buffer);                            /* +0x564, real addr 0x1e000 */
     virtual void     writePerformanceStats(OSDictionary *dictionary);           /* +0x568, real addr 0x1a300 */
     virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size);         /* +0x570 */
     virtual void     releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 */
@@ -116,21 +116,21 @@ public:
 
     /* Non-virtual members added by the ledger pass */
     UInt32 SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, bool flag, UInt32 panel); /* real addr 0x23320 */
-    void   start_xdct_engine(void);                       /* real addr 0x25c60 */
-    void   stop_xdct_engine(void);                        /* real addr 0x25df0 */
-    UInt32 getPeriodValue(char *name);                    /* real addr 0x19ea0 */
+    bool   start_xdct_engine(void);                       /* real addr 0x25c60 */
+    bool   stop_xdct_engine(void);                        /* real addr 0x25df0 */
+    void  *getPeriodValue(char *name);                    /* real addr 0x19ea0 */
     void   pageOffPCIeGART(void);                         /* real addr 0x1a9c0: empty */
     bool   SWDSIsRequired(void);                          /* real addr 0x1a9d0 */
-    void   SWDSEnableCLUT(UInt32 enable);                 /* real addr 0x1aa00 */
+    bool   SWDSEnableCLUT(UInt32 index);                  /* real addr 0x1aa00 */
     void   removeFromPCIeGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset); /* real addr 0x1b540 */
     void   setupR520Pipes(void);                          /* real addr 0x1bd20 */
     bool   set_display_mode_and_vram(void);               /* real addr 0x1c120 */
-    void   stop_promo4_engine(void);                      /* real addr 0x1cb00 */
+    bool   stop_promo4_engine(void);                      /* real addr 0x1cb00 */
     void   load_promo4_micro_code(void);                  /* real addr 0x1cd30 */
-    void   start_promo4_engine(UInt32 mode);              /* real addr 0x1cd90 */
+    bool   start_promo4_engine(UInt32 mode);              /* real addr 0x1cd90 */
     void   setup_R500_internal_space(void);               /* real addr 0x1cf70 */
-    void   SWDSShutdown(void);                            /* real addr 0x1d350 */
-    bool   startupPCIeGART(void);                         /* real addr 0x1d830 */
+    bool   SWDSShutdown(void);                            /* real addr 0x1d350 */
+    SInt32 startupPCIeGART(void);                         /* real addr 0x1d830 */
     void   shutdownPCIeGART(void);                        /* real addr 0x1dc10 */
     void   pageOnPCIeGART(void);                          /* real addr 0x1dcd0 */
     IOReturn addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset); /* real addr 0x1dd80 */
