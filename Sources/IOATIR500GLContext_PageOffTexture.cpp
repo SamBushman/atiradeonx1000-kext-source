@@ -60,7 +60,8 @@ extern "C" void GLContext_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
-IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace) {
+IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, unsigned int structPtr, unsigned int structSize) {
+    (void)structPtr; (void)structSize; /* the dispatcher appends the (unused, size 0) struct pointer and size to every scalarI/structI call */
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
     void *commandLock = *reinterpret_cast<void **>(accel + 0x840);

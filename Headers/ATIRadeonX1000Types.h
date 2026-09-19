@@ -13,6 +13,8 @@
 #ifndef ATIRADEONX1000_TYPES_H
 #define ATIRADEONX1000_TYPES_H
 
+#include "ATIRadeonX1000Enums.h"
+
 #include <IOKit/IOTypes.h>
 
 /*

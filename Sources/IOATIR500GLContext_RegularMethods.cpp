@@ -697,7 +697,8 @@ done:
  * IOATIR500Surface's) - called via this project's established raw
  * vtable-cast idiom, flagged honestly rather than guessed at.
  */
-IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, UInt32 modeBits, UInt32 param3, UInt32 param4) {
+IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits modeBitsEnum, UInt32 param3, UInt32 param4) {
+    UInt32 modeBits = static_cast<UInt32>(modeBitsEnum);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     typedef SInt32 (*Fn0x5ac)(void *, UInt32 *, UInt32);
     typedef void (*Fn0x5a8)(void *);

@@ -1,0 +1,282 @@
+# IOATIR500Accelerator vtable @ 0x46970 (__const)
+0x008 IOATIR500Accelerator::~IOATIR500Accelerator()
+0x020 IOATIR500Accelerator::getMetaClass() const
+0x348 IOATIR500Accelerator::start(IOService*)
+0x34c IOATIR500Accelerator::stop(IOService*)
+0x400 IOATIR500Accelerator::requestProbe(unsigned long)
+0x428 IOATIR500Accelerator::newUserClient(task*, void*, unsigned long, IOUserClient**)
+0x520 IOATIR500Accelerator::is_idle()
+0x524 ___cxa_pure_virtual
+0x528 ___cxa_pure_virtual
+0x52c IOATIR500Accelerator::pageoff_dirty_texture(VendorTextureBuffer*, long, long)
+0x530 IOATIR500Accelerator::setup3D()
+0x534 IOATIR500Accelerator::setup2D()
+0x538 IOATIR500Accelerator::teardown3D()
+0x53c IOATIR500Accelerator::teardown2D()
+0x540 ___cxa_pure_virtual
+0x544 ___cxa_pure_virtual
+0x548 ___cxa_pure_virtual
+0x54c ___cxa_pure_virtual
+0x550 ___cxa_pure_virtual
+0x554 ___cxa_pure_virtual
+0x558 ___cxa_pure_virtual
+0x55c ___cxa_pure_virtual
+0x560 ___cxa_pure_virtual
+0x564 ___cxa_pure_virtual
+0x568 IOATIR500Accelerator::writePerformanceStats(OSDictionary*)
+0x56c IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer*)
+0x570 IOATIR500Accelerator::allocVendorTextureBuffer(unsigned long)
+0x574 IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer*, unsigned long)
+0x578 IOATIR500Accelerator::mapVendorTransferBuffer(VendorTransferBuffer*)
+0x57c IOATIR500Accelerator::unmapVendorTransferBuffer(VendorTransferBuffer*)
+0x580 IOATIR500Accelerator::configureAGP(IOService*)
+0x584 IOATIR500Accelerator::teardownAGP(IOService*)
+0x588 IOATIR500Accelerator::commitAGPMemory(IOMemoryDescriptor*, unsigned long, unsigned long)
+0x58c IOATIR500Accelerator::releaseAGPMemory(IOMemoryDescriptor*, unsigned long, unsigned long)
+0x590 IOATIR500Accelerator::addToMinMaxGART(IOMemoryDescriptor*, unsigned long*, unsigned long, unsigned long)
+0x594 IOATIR500Accelerator::reserveInGART(unsigned long)
+0x598 IOATIR500Accelerator::clearInGART(unsigned long)
+0x59c IOATIR500Accelerator::synchronizeGART(unsigned long, unsigned long)
+0x5a0 IOATIR500Accelerator::addToGART(IOMemoryDescriptor*, unsigned long*)
+0x5a4 IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*, unsigned long)
+0x5a8 IOATIR500Accelerator::addTransferToGART(VendorTransferBuffer*)
+0x5ac IOATIR500Accelerator::removeTransferFromGART(VendorTransferBuffer*)
+0x5b0 IOATIR500Accelerator::makeGARTEntry(unsigned long)
+0x5b4 ___cxa_pure_virtual
+0x5b8 ___cxa_pure_virtual
+0x5bc IOATIR500Accelerator::system_will_sleep()
+0x5c0 IOATIR500Accelerator::system_did_wake()
+0x5c4 ___cxa_pure_virtual
+0x5c8 ___cxa_pure_virtual
+0x5cc IOATIR500Accelerator::set_stereo(unsigned long, unsigned long)
+0x5d0 IOATIR500Accelerator::getAccelCapsBits()
+0x5d4 ___cxa_pure_virtual
+0x5d8 ___cxa_pure_virtual
+0x5dc ___cxa_pure_virtual
+0x5e0 ___cxa_pure_virtual
+# ATIRadeonX1000 vtable @ 0x491c8 (__const)
+0x008 ATIRadeonX1000::~ATIRadeonX1000()
+0x020 ATIRadeonX1000::getMetaClass() const
+0x04c ATIRadeonX1000::free()
+0x348 ATIRadeonX1000::start(IOService*)
+0x34c ATIRadeonX1000::stop(IOService*)
+0x3c8 ATIRadeonX1000::callPlatformFunction(OSSymbol const*, bool, void*, void*, void*, void*)
+0x400 IOATIR500Accelerator::requestProbe(unsigned long)
+0x428 IOATIR500Accelerator::newUserClient(task*, void*, unsigned long, IOUserClient**)
+0x520 IOATIR500Accelerator::is_idle()
+0x524 ATIRadeonX1000::deallocate_texture(VendorTextureBuffer*)
+0x528 ATIRadeonX1000::allocate_texture(VendorTextureBuffer*)
+0x52c ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer*, long, long)
+0x530 IOATIR500Accelerator::setup3D()
+0x534 IOATIR500Accelerator::setup2D()
+0x538 IOATIR500Accelerator::teardown3D()
+0x53c IOATIR500Accelerator::teardown2D()
+0x540 ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement*, unsigned long, unsigned long)
+0x544 ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement*)
+0x548 ATIRadeonX1000::tmpTotalVRAM()
+0x54c ATIRadeonX1000::waitForTimeStamp(unsigned long)
+0x550 ATIRadeonX1000::waitForTimeStampNoLock(unsigned long)
+0x554 ATIRadeonX1000::checkForTimeStamp(unsigned long)
+0x558 ATIRadeonX1000::sleepForTimeStamp(unsigned long)
+0x55c ATIRadeonX1000::sleepForTimeStampNoLock(unsigned long)
+0x560 ATIRadeonX1000::submit_commands(VendorCommandDescriptor*)
+0x564 ATIRadeonX1000::noop_buffer(unsigned long*)
+0x568 ATIRadeonX1000::writePerformanceStats(OSDictionary*)
+0x56c IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer*)
+0x570 ATIRadeonX1000::allocVendorTextureBuffer(unsigned long)
+0x574 ATIRadeonX1000::releaseVendorTextureBuffer(VendorTextureBuffer*, unsigned long)
+0x578 ATIRadeonX1000::mapVendorTransferBuffer(VendorTransferBuffer*)
+0x57c ATIRadeonX1000::unmapVendorTransferBuffer(VendorTransferBuffer*)
+0x580 ATIRadeonX1000::configureAGP(IOService*)
+0x584 ATIRadeonX1000::teardownAGP(IOService*)
+0x588 ATIRadeonX1000::commitAGPMemory(IOMemoryDescriptor*, unsigned long, unsigned long)
+0x58c ATIRadeonX1000::releaseAGPMemory(IOMemoryDescriptor*, unsigned long, unsigned long)
+0x590 ATIRadeonX1000::addToMinMaxGART(IOMemoryDescriptor*, unsigned long*, unsigned long, unsigned long)
+0x594 ATIRadeonX1000::reserveInGART(unsigned long)
+0x598 ATIRadeonX1000::clearInGART(unsigned long)
+0x59c IOATIR500Accelerator::synchronizeGART(unsigned long, unsigned long)
+0x5a0 ATIRadeonX1000::addToGART(IOMemoryDescriptor*, unsigned long*)
+0x5a4 ATIRadeonX1000::removeFromGART(IOMemoryDescriptor*, unsigned long)
+0x5a8 ATIRadeonX1000::addTransferToGART(VendorTransferBuffer*)
+0x5ac ATIRadeonX1000::removeTransferFromGART(VendorTransferBuffer*)
+0x5b0 ATIRadeonX1000::makeGARTEntry(unsigned long)
+0x5b4 ATIRadeonX1000::display_mode_will_change(long)
+0x5b8 ATIRadeonX1000::display_mode_did_change()
+0x5bc ATIRadeonX1000::system_will_sleep()
+0x5c0 ATIRadeonX1000::system_did_wake()
+0x5c4 ATIRadeonX1000::system_will_change_speed()
+0x5c8 ATIRadeonX1000::system_did_change_speed()
+0x5cc IOATIR500Accelerator::set_stereo(unsigned long, unsigned long)
+0x5d0 ATIRadeonX1000::getAccelCapsBits()
+0x5d4 ATIRadeonX1000::new_surface()
+0x5d8 ATIRadeonX1000::new_2d_context()
+0x5dc ATIRadeonX1000::new_dvd_context()
+0x5e0 ATIRadeonX1000::new_gl_context()
+0x5e8 ATIRadeonX1000::waitForRetiredTimeStamp(unsigned long)
+0x5ec ATIRadeonX1000::waitForConsumedIDCTTimeStamp(unsigned long)
+0x5f0 ATIRadeonX1000::checkForRetiredTimeStamp(unsigned long)
+0x5f4 ATIRadeonX1000::checkForConsumedIDCTTimeStamp(unsigned long)
+0x5f8 ATIRadeonX1000::sleepForRetiredTimeStamp(unsigned long)
+0x5fc ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(unsigned long)
+# IOATIR500GLContext vtable @ 0x46fd8 (__const)
+0x008 IOATIR500GLContext::~IOATIR500GLContext()
+0x020 IOATIR500GLContext::getMetaClass() const
+0x348 IOATIR500GLContext::start(IOService*)
+0x34c IOATIR500GLContext::stop(IOService*)
+0x568 IOATIR500GLContext::clientClose()
+0x57c IOATIR500GLContext::connectClient(IOUserClient*)
+0x580 IOATIR500GLContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x5a4 ___cxa_pure_virtual
+0x5a8 ___cxa_pure_virtual
+0x5ac IOATIR500GLContext::setCompatibleSurfaceMode(long*, eIOGLContextModeBits, long)
+0x5b0 ___cxa_pure_virtual
+0x5b4 ___cxa_pure_virtual
+0x5b8 ___cxa_pure_virtual
+0x5bc IOATIR500GLContext::add_vendor_surface_required_bits(eIOGLContextModeBits)
+0x5c0 IOATIR500GLContext::set_texture_flags(VendorTextureBuffer*)
+# ATIR500GLContext vtable @ 0x49848 (__const)
+0x008 ATIR500GLContext::~ATIR500GLContext()
+0x020 ATIR500GLContext::getMetaClass() const
+0x348 ATIR500GLContext::start(IOService*)
+0x34c ATIR500GLContext::stop(IOService*)
+0x568 IOATIR500GLContext::clientClose()
+0x57c IOATIR500GLContext::connectClient(IOUserClient*)
+0x580 ATIR500GLContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x594 ATIR500GLContext::getTargetAndMethodForIndex(IOService**, unsigned long)
+0x5a4 ATIR500GLContext::invalidate()
+0x5a8 ATIR500GLContext::update_surface()
+0x5ac ATIR500GLContext::setCompatibleSurfaceMode(long*, eIOGLContextModeBits, long)
+0x5b0 ATIR500GLContext::submit_context_buffer()
+0x5b4 ATIR500GLContext::process_command_buffer(VendorCommandDescriptor*)
+0x5b8 ATIR500GLContext::discard_command_buffer()
+0x5bc IOATIR500GLContext::add_vendor_surface_required_bits(eIOGLContextModeBits)
+0x5c0 ATIR500GLContext::set_texture_flags(VendorTextureBuffer*)
+# IOATIR5002DContext vtable @ 0x477f8 (__const)
+0x008 IOATIR5002DContext::~IOATIR5002DContext()
+0x020 IOATIR5002DContext::getMetaClass() const
+0x348 IOATIR5002DContext::start(IOService*)
+0x34c IOATIR5002DContext::stop(IOService*)
+0x568 IOATIR5002DContext::clientClose()
+0x580 IOATIR5002DContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x5a4 ___cxa_pure_virtual
+0x5a8 ___cxa_pure_virtual
+0x5ac ___cxa_pure_virtual
+0x5b0 ___cxa_pure_virtual
+0x5b4 ___cxa_pure_virtual
+# ATIR5002DContext vtable @ 0x49ea0 (__const)
+0x008 ATIR5002DContext::~ATIR5002DContext()
+0x020 ATIR5002DContext::getMetaClass() const
+0x348 ATIR5002DContext::start(IOService*)
+0x34c ATIR5002DContext::stop(IOService*)
+0x568 IOATIR5002DContext::clientClose()
+0x580 IOATIR5002DContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x594 ATIR5002DContext::getTargetAndMethodForIndex(IOService**, unsigned long)
+0x5a4 ATIR5002DContext::invalidate()
+0x5a8 ATIR5002DContext::submit_context_buffer()
+0x5ac ATIR5002DContext::process_command_buffer(VendorCommandDescriptor*)
+0x5b0 ATIR5002DContext::set_destination(void*, unsigned long*)
+0x5b4 ATIR5002DContext::get_buffer_info(IOATIR500Surface*, unsigned long, void*, unsigned long*)
+# IOATIR500DVDContext vtable @ 0x47fb0 (__const)
+0x008 IOATIR500DVDContext::~IOATIR500DVDContext()
+0x020 IOATIR500DVDContext::getMetaClass() const
+0x348 IOATIR500DVDContext::start(IOService*)
+0x34c IOATIR500DVDContext::stop(IOService*)
+0x568 IOATIR500DVDContext::clientClose()
+0x580 IOATIR500DVDContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x5a4 ___cxa_pure_virtual
+0x5a8 ___cxa_pure_virtual
+0x5ac IOATIR500DVDContext::setCompatibleSurfaceMode(long*, eIODVDContextModeBits)
+0x5b0 ___cxa_pure_virtual
+0x5b4 ___cxa_pure_virtual
+0x5b8 ___cxa_pure_virtual
+# ATIR500DVDContext vtable @ 0x4a520 (__const)
+0x008 ATIR500DVDContext::~ATIR500DVDContext()
+0x020 ATIR500DVDContext::getMetaClass() const
+0x348 ATIR500DVDContext::start(IOService*)
+0x34c ATIR500DVDContext::stop(IOService*)
+0x568 IOATIR500DVDContext::clientClose()
+0x580 ATIR500DVDContext::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x594 ATIR500DVDContext::getTargetAndMethodForIndex(IOService**, unsigned long)
+0x5a4 ATIR500DVDContext::invalidate()
+0x5a8 ATIR500DVDContext::update_surface()
+0x5ac IOATIR500DVDContext::setCompatibleSurfaceMode(long*, eIODVDContextModeBits)
+0x5b0 ATIR500DVDContext::submit_context_buffer()
+0x5b4 ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor*)
+0x5b8 ATIR500DVDContext::discard_command_buffer()
+# IOATIR500Surface vtable @ 0x486d8 (__const)
+0x008 IOATIR500Surface::~IOATIR500Surface()
+0x020 IOATIR500Surface::getMetaClass() const
+0x04c IOATIR500Surface::free()
+0x348 IOATIR500Surface::start(IOService*)
+0x34c IOATIR500Surface::stop(IOService*)
+0x568 IOATIR500Surface::clientClose()
+0x580 IOATIR500Surface::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x5a4 IOATIR500Surface::setupFullScreen()
+0x5a8 IOATIR500Surface::resetFullScreen()
+0x5ac IOATIR500Surface::surface_req_bits()
+0x5b0 IOATIR500Surface::is_surface_size_supported(short, short)
+0x5b4 IOATIR500Surface::update_ref_stamps(unsigned long, unsigned long)
+0x5b8 IOATIR500Surface::increment_refcounts(unsigned long)
+0x5bc IOATIR500Surface::decrement_refcounts(unsigned long)
+0x5c0 ___cxa_pure_virtual
+0x5c4 ___cxa_pure_virtual
+0x5c8 ___cxa_pure_virtual
+0x5cc IOATIR500Surface::dealloc_surface(unsigned long)
+0x5d0 ___cxa_pure_virtual
+0x5d4 ___cxa_pure_virtual
+0x5d8 ___cxa_pure_virtual
+0x5dc IOATIR500Surface::is_flip_allowed()
+0x5e0 ___cxa_pure_virtual
+0x5e4 IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer*)
+0x5e8 ___cxa_pure_virtual
+0x5ec ___cxa_pure_virtual
+0x5f0 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer*, unsigned long, unsigned long, long*, long*, long*)
+0x5f4 IOATIR500Surface::alloc_surface(unsigned long, bool)
+0x5f8 IOATIR500Surface::alloc_surface_keep(IOATIR500Surface*, VendorTextureBuffer**, long, unsigned long)
+0x5fc IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer*)
+0x600 IOATIR500Surface::complete_vram(ATIR500SurfaceBuffer*)
+0x604 IOATIR500Surface::set_access()
+# ATIR500Surface vtable @ 0x4bbe0 (__const)
+0x008 ATIR500Surface::~ATIR500Surface()
+0x020 ATIR500Surface::getMetaClass() const
+0x04c IOATIR500Surface::free()
+0x348 ATIR500Surface::start(IOService*)
+0x34c ATIR500Surface::stop(IOService*)
+0x568 IOATIR500Surface::clientClose()
+0x580 IOATIR500Surface::clientMemoryForType(unsigned long, unsigned long*, IOMemoryDescriptor**)
+0x594 ATIR500Surface::getTargetAndMethodForIndex(IOService**, unsigned long)
+0x5a4 ATIR500Surface::setupFullScreen()
+0x5a8 ATIR500Surface::resetFullScreen()
+0x5ac IOATIR500Surface::surface_req_bits()
+0x5b0 ATIR500Surface::is_surface_size_supported(short, short)
+0x5b4 IOATIR500Surface::update_ref_stamps(unsigned long, unsigned long)
+0x5b8 IOATIR500Surface::increment_refcounts(unsigned long)
+0x5bc IOATIR500Surface::decrement_refcounts(unsigned long)
+0x5c0 ATIR500Surface::build_swap()
+0x5c4 ATIR500Surface::invalidate()
+0x5c8 ATIR500Surface::shape_surface()
+0x5cc ATIR500Surface::dealloc_surface(unsigned long)
+0x5d0 ATIR500Surface::alloc_surface_buffer(ATIR500SurfaceBuffer*)
+0x5d4 ATIR500Surface::submit_swap_buffer(unsigned long, unsigned long)
+0x5d8 ATIR500Surface::submit_swap_buffer(unsigned long, eDoSwap, IOATIR500GLContext*)
+0x5dc ATIR500Surface::is_flip_allowed()
+0x5e0 ATIR500Surface::submit_flip_buffer(unsigned long, IOATIR500GLContext*, unsigned long)
+0x5e4 IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer*)
+0x5e8 ATIR500Surface::copy_from_buffer(long, long, long, long, unsigned long, unsigned long, ATIR500SurfaceBuffer*, unsigned long, VendorTransferBuffer*, unsigned long, unsigned long, unsigned long)
+0x5ec ATIR500Surface::copy_to_buffer(long, long, long, long, unsigned long, unsigned long, ATIR500SurfaceBuffer*, unsigned long, VendorTransferBuffer*, unsigned long, unsigned long, unsigned long)
+0x5f0 ATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer*, unsigned long, unsigned long, long*, long*, long*)
+0x5f4 IOATIR500Surface::alloc_surface(unsigned long, bool)
+0x5f8 IOATIR500Surface::alloc_surface_keep(IOATIR500Surface*, VendorTextureBuffer**, long, unsigned long)
+0x5fc ATIR500Surface::prepare_vram(ATIR500SurfaceBuffer*)
+0x600 ATIR500Surface::complete_vram(ATIR500SurfaceBuffer*)
+0x604 IOATIR500Surface::set_access()
+# IOATIR500Shared vtable @ 0x48f28 (__const)
+0x008 IOATIR500Shared::~IOATIR500Shared()
+0x020 IOATIR500Shared::getMetaClass() const
+0x048 IOATIR500Shared::init()
+0x04c IOATIR500Shared::free()
+# ATIR500Memory vtable @ 0x49078 (__const)
+0x008 ATIR500Memory::~ATIR500Memory()
+0x020 ATIR500Memory::getMetaClass() const
+0x048 ATIR500Memory::init()
+0x04c ATIR500Memory::free()

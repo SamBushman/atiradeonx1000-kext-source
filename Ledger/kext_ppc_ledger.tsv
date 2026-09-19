@@ -201,7 +201,7 @@
 00006fd8	16	stub	n/a	FUN_00006fd8	
 00006ff0	8	generated	DONE	IOATIR500GLContext::MetaClass::alloc	__ZNK18IOATIR500GLContext9MetaClass5allocEv
 00007000	292	method	DONE	IOATIR500GLContext::freeAllContextBuffers	__ZN18IOATIR500GLContext21freeAllContextBuffersEv
-00007130	116	method	MISSING	IOATIR500GLContext::clientClose	__ZN18IOATIR500GLContext11clientCloseEv
+00007130	116	method	DONE	IOATIR500GLContext::clientClose	__ZN18IOATIR500GLContext11clientCloseEv
 000071b0	240	method	DONE	IOATIR500GLContext::remove_texture_from_stream	__ZN18IOATIR500GLContext26remove_texture_from_streamEP19VendorTextureBuffer
 000072c0	328	method	DONE	IOATIR500GLContext::add_texture_to_stream	__ZN18IOATIR500GLContext21add_texture_to_streamEP19VendorTextureBuffer
 00007414	16	stub	n/a	IOATIR500GLContext::add_texture_to_stream	
@@ -217,12 +217,12 @@
 00007984	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
 00007994	16	stub	n/a	IOATIR500Shared::IOATIR500Shared	
 000079a4	16	stub	n/a	FUN_000079a4	
-000079c0	12	method	MISSING	IOATIR500GLContext::remove_surface	__ZN18IOATIR500GLContext14remove_surfaceEv
+000079c0	12	method	DONE	IOATIR500GLContext::remove_surface	__ZN18IOATIR500GLContext14remove_surfaceEv
 000079d0	112	method	DONE	IOATIR500GLContext::map_transfer_to_GART	__ZN18IOATIR500GLContext20map_transfer_to_GARTEP20VendorTransferBuffer
 00007a40	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
 00007a50	260	method	DONE	IOATIR500GLContext::freeToAllocGART	__ZN18IOATIR500GLContext15freeToAllocGARTEP20VendorTransferBufferb
 00007b54	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
-00007b70	36	method	MISSING	IOATIR500GLContext::setCompatibleSurfaceMode	__ZN18IOATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
+00007b70	36	method	DONE	IOATIR500GLContext::setCompatibleSurfaceMode	__ZN18IOATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
 00007ba0	84	method	DONE	IOATIR500GLContext::set_swap_rect	__ZN18IOATIR500GLContext13set_swap_rectEllll
 00007c00	76	method	DONE	IOATIR500GLContext::set_swap_interval	__ZN18IOATIR500GLContext17set_swap_intervalEll
 00007c50	56	method	DONE	IOATIR500GLContext::set_surface_volatile_state	__ZN18IOATIR500GLContext26set_surface_volatile_stateEm
@@ -230,7 +230,7 @@
 00007ca0	168	method	DONE	IOATIR500GLContext::get_surface_size	__ZN18IOATIR500GLContext16get_surface_sizeEPlS0_S0_S0_
 00007d60	120	method	DONE	IOATIR500GLContext::finish	__ZN18IOATIR500GLContext6finishEv
 00007de0	116	method	DONE	IOATIR500GLContext::wait_for_stamp	__ZN18IOATIR500GLContext14wait_for_stampEm
-00007e60	4	method	MISSING	IOATIR500GLContext::set_texture_flags	__ZN18IOATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
+00007e60	4	method	DONE	IOATIR500GLContext::set_texture_flags	__ZN18IOATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
 00007e70	272	method	DONE	IOATIR500GLContext::freeCommandBuffer	__ZN18IOATIR500GLContext17freeCommandBufferEv
 00007f8c	16	stub	n/a	FUN_00007f8c	
 00007fa0	904	method	DONE	IOATIR500GLContext::stop	__ZN18IOATIR500GLContext4stopEP9IOService
@@ -242,7 +242,7 @@
 00008380	16	stub	n/a	IOATIR500GLContext::freeAllContextBuffers	
 00008390	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
 000083a0	16	stub	n/a	IOATIR500GLContext::freeCommandBuffer	
-000083b0	4	method	MISSING	IOATIR500GLContext::add_vendor_surface_required_bits	__ZN18IOATIR500GLContext32add_vendor_surface_required_bitsE20eIOGLContextModeBits
+000083b0	4	method	DONE	IOATIR500GLContext::add_vendor_surface_required_bits	__ZN18IOATIR500GLContext32add_vendor_surface_required_bitsE20eIOGLContextModeBits
 000083c0	368	method	DONE	IOATIR500GLContext::reclaim_resources	__ZN18IOATIR500GLContext17reclaim_resourcesEv
 00008540	16	stub	n/a	FUN_00008540	
 00008550	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
@@ -256,7 +256,7 @@
 000086d0	172	method	DONE	IOATIR500GLContext::connectClient	__ZN18IOATIR500GLContext13connectClientEP12IOUserClient
 00008784	16	stub	n/a	FUN_00008784	
 00008794	16	stub	n/a	FUN_00008794	
-000087b0	864	method	SIG?	IOATIR500GLContext::set_surface	__ZN18IOATIR500GLContext11set_surfaceEm20eIOGLContextModeBitsmm
+000087b0	864	method	DONE	IOATIR500GLContext::set_surface	__ZN18IOATIR500GLContext11set_surfaceEm20eIOGLContextModeBitsmm
 00008b34	16	stub	n/a	FUN_00008b34	
 00008b44	16	stub	n/a	IOATIR500Surface::add_gl_context_to_list	
 00008b54	16	stub	n/a	IOATIR500Surface::reset_req_bits	
@@ -292,7 +292,7 @@
 00009640	208	method	DONE	IOATIR500GLContext::become_global_shared	__ZN18IOATIR500GLContext20become_global_sharedEm
 00009718	16	stub	n/a	FUN_00009718	
 00009728	16	stub	n/a	FUN_00009728	
-00009740	224	method	SIG?	IOATIR500GLContext::page_off_texture	__ZN18IOATIR500GLContext16page_off_textureEmmjj
+00009740	224	method	DONE	IOATIR500GLContext::page_off_texture	__ZN18IOATIR500GLContext16page_off_textureEmmjj
 00009820	16	stub	n/a	FUN_00009820	
 00009830	16	stub	n/a	FUN_00009830	
 00009840	320	method	DONE	IOATIR500GLContext::purge_texture	__ZN18IOATIR500GLContext13purge_textureEm
@@ -302,7 +302,7 @@
 00009a00	16	stub	n/a	FUN_00009a00	
 00009a10	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
 00009a20	16	stub	n/a	FUN_00009a20	
-00009a30	1724	method	SIG?	IOATIR500GLContext::get_data_buffer	__ZN18IOATIR500GLContext15get_data_bufferEPjPm
+00009a30	1724	method	DONE	IOATIR500GLContext::get_data_buffer	__ZN18IOATIR500GLContext15get_data_bufferEPjPm
 0000a10c	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
 0000a11c	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
 0000a12c	16	stub	n/a	FUN_0000a12c	
@@ -1267,9 +1267,9 @@
 00026ed0	124	method	DONE	ATIR500GLContext::GetVertexArrayOffset	__ZN16ATIR500GLContext20GetVertexArrayOffsetEP19VendorTextureBufferm
 00026f60	72	method	DONE	ATIR500GLContext::GetQueryOffset	__ZN16ATIR500GLContext14GetQueryOffsetEP19VendorTextureBuffermm
 00026fb0	20	method	DONE	ATIR500GLContext::invalidate	__ZN16ATIR500GLContext10invalidateEv
-00026fd0	48	method	MISSING	ATIR500GLContext::set_texture_flags	__ZN16ATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
-00027000	152	method	MISSING	ATIR500GLContext::clientMemoryForType	__ZN16ATIR500GLContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
-000270a0	324	method	MISSING	ATIR500GLContext::setCompatibleSurfaceMode	__ZN16ATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
+00026fd0	48	method	DONE	ATIR500GLContext::set_texture_flags	__ZN16ATIR500GLContext17set_texture_flagsEP19VendorTextureBuffer
+00027000	152	method	DONE	ATIR500GLContext::clientMemoryForType	__ZN16ATIR500GLContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+000270a0	324	method	DONE	ATIR500GLContext::setCompatibleSurfaceMode	__ZN16ATIR500GLContext24setCompatibleSurfaceModeEPl20eIOGLContextModeBitsl
 00027210	148	method	DONE	ATIR500GLContext::get_hw_info	__ZN16ATIR500GLContext11get_hw_infoEPmS0_S0_S0_S0_
 000272a4	16	stub	n/a	FUN_000272a4	
 000272b4	16	stub	n/a	ATIRadeonX1000::getNumZPipes	
@@ -1289,7 +1289,7 @@
 00027ebc	16	stub	n/a	IOATIR500Shared::delete_texture	
 00027ecc	16	stub	n/a	IOATIR500Surface::set_volatile_state	
 00027ee0	228	method	DONE	ATIR500GLContext::build_scissor	__ZN16ATIR500GLContext13build_scissorEv
-00027fd0	196	method	MISSING	ATIR500GLContext::update_surface	__ZN16ATIR500GLContext14update_surfaceEv
+00027fd0	196	method	DONE	ATIR500GLContext::update_surface	__ZN16ATIR500GLContext14update_surfaceEv
 000280ac	16	stub	n/a	ATIR500GLContext::build_scissor	
 000280c0	264	method	DONE	ATIR500GLContext::GetTextureOffset	__ZN16ATIR500GLContext16GetTextureOffsetEP19VendorTextureBufferb
 000281e4	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	

@@ -62,7 +62,7 @@ extern "C" void GetDataBuffer_mutex_lock(void *lockPtr) asm("_IOLockLock");
 extern "C" void GetDataBuffer_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
-IOReturn IOATIR500GLContext::get_data_buffer(UInt32 *outHandle, UInt32 *outAddress) {
+IOReturn IOATIR500GLContext::get_data_buffer(unsigned int *outHandle, UInt32 *outAddress) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc8));
     GetDataBuffer_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));

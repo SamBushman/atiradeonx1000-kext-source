@@ -52,7 +52,7 @@
 OSDefineMetaClassAndAbstractStructors(IOATIR500Accelerator, IOService)
 OSDefineMetaClassAndStructors(ATIRadeonX1000, IOATIR500Accelerator)
 
-OSDefineMetaClassAndStructors(IOATIR500GLContext, IOUserClient)
+OSDefineMetaClassAndAbstractStructors(IOATIR500GLContext, IOUserClient)
 OSDefineMetaClassAndStructors(ATIR500GLContext, IOATIR500GLContext)
 
 OSDefineMetaClassAndStructors(IOATIR5002DContext, IOUserClient)

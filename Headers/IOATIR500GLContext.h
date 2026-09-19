@@ -87,7 +87,7 @@ class IOATIR500GLContext : public IOUserClient {
 
 public:
     /* ---- The 20 real external methods, selectors 0-19 ---- */
-    IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, UInt32 param3, UInt32 param4);          /* 0 */
+    IOReturn set_surface(UInt32 surfaceID, eIOGLContextModeBits modeBits, UInt32 param3, UInt32 param4);          /* 0 */
     IOReturn set_swap_rect(SInt32 x, SInt32 y, SInt32 w, SInt32 h);                                    /* 1 */
     IOReturn set_swap_interval(SInt32 numerator, SInt32 denominator);                                  /* 2 */
     IOReturn get_config(UInt32 *out0, UInt32 *out1, UInt32 *out2);                                     /* 3 */
@@ -101,12 +101,12 @@ public:
                          UInt32 structSize, UInt32 *sizeOut);                                          /* 10 */
     IOReturn delete_texture(UInt32 textureID);                                                          /* 11 */
     IOReturn become_global_shared(UInt32 makeShared);                                                   /* 12 */
-    IOReturn page_off_texture(UInt32 textureID, UInt32 mipAndFace);       /* 13, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the class's own real body (Sources/IOATIR500GLContext_PageOffTexture.cpp) never references any 3rd/4th parameter, and real wire-shape evidence (GL bundle call site, offset 0x1e13c) confirms only 2 real scalar inputs are ever sent - this project's own byte-dumped external-method table (Sources/IOATIR500GLContext_ExternalMethods.cpp) already said the same (real scalarInputCount 2), the header's own declared C++ signature was simply never corrected to match. */
+    IOReturn page_off_texture(UInt32 textureID, UInt32 mipAndFace, unsigned int structPtr, unsigned int structSize);       /* 13, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): the class's own real body (Sources/IOATIR500GLContext_PageOffTexture.cpp) never references any 3rd/4th parameter, and real wire-shape evidence (GL bundle call site, offset 0x1e13c) confirms only 2 real scalar inputs are ever sent - this project's own byte-dumped external-method table (Sources/IOATIR500GLContext_ExternalMethods.cpp) already said the same (real scalarInputCount 2), the header's own declared C++ signature was simply never corrected to match. */
     IOReturn scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale);                                 /* 14 */
     IOReturn purge_texture(UInt32 textureID);                                                            /* 15 */
     IOReturn set_surface_volatile_state(UInt32 state);                                                  /* 16 */
     IOReturn reclaim_resources(void);                                                                    /* 17 */
-    IOReturn get_data_buffer(UInt32 *outHandle, UInt32 *outAddress);                                     /* 18 */
+    IOReturn get_data_buffer(unsigned int *outHandle, UInt32 *outAddress);                                     /* 18 */
     IOReturn set_stereo(UInt32 leftOrRight, UInt32 param2);                                              /* 19 */
 
     /*
@@ -117,6 +117,9 @@ public:
      * accelerator's command lock.
      */
     virtual IOReturn connectClient(IOUserClient *client) override;
+
+    /* clientClose - real addr 0x7130, vtable +0x568 (IOUserClient::clientClose override). */
+    virtual IOReturn clientClose() override;
 
     /*
      * clientMemoryForType - CONFIRMED real behavior (kext offset 0xa160).
@@ -184,6 +187,21 @@ public:
      * Sources/IOATIR500GLContext_FreeAllContextBuffers.cpp.
      */
     void freeAllContextBuffers();
+
+    /*
+     * The virtual slots this class introduces (stock vtable +0x5a4..+0x5c0, Ledger/kext_ppc_vtables.txt). The
+     * base class leaves five of them pure virtual (the subclass ATIR500GLContext implements them); the other
+     * three have real base-class bodies. Order here IS the vtable order - do not reorder.
+     */
+    virtual void   invalidate() = 0;                                   /* +0x5a4 */
+    virtual void   update_surface() = 0;                               /* +0x5a8 */
+    virtual bool   setCompatibleSurfaceMode(SInt32 *modeBits, eIOGLContextModeBits mode, SInt32 flags); /* +0x5ac, real addr 0x7b70 */
+    virtual void   submit_context_buffer() = 0;                        /* +0x5b0 */
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor) = 0; /* +0x5b4 */
+    virtual void   discard_command_buffer() = 0;                       /* +0x5b8 */
+    virtual void   add_vendor_surface_required_bits(eIOGLContextModeBits mode); /* +0x5bc, real addr 0x83b0: empty */
+    virtual void   set_texture_flags(VendorTextureBuffer *texture);    /* +0x5c0, real addr 0x7e60: empty */
+    void           remove_surface();                                   /* real addr 0x79c0 (non-virtual) */
 
     /*
      * allocAllContextBuffers - CONFIRMED to exist and be a real member of

@@ -142,6 +142,13 @@ public:
      */
     virtual void invalidate();
 
+    /* Overrides of the base class's other virtual slots (stock vtable +0x580/+0x5a8/+0x5ac/+0x5c0). Bodies:
+     * Sources/ATIR500GLContext_SmallMethods.cpp. */
+    virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) override; /* +0x580, addr 0x27000 */
+    virtual void update_surface();                                                    /* +0x5a8, addr 0x27fd0 */
+    virtual bool setCompatibleSurfaceMode(SInt32 *modeBits, eIOGLContextModeBits mode, SInt32 flags); /* +0x5ac, addr 0x270a0 */
+    virtual void set_texture_flags(VendorTextureBuffer *texture);                    /* +0x5c0, addr 0x26fd0 */
+
     /*
      * process_command_buffer - THE central function of this entire
      * project. CONFIRMED, opcode-by-opcode, for the full real range
@@ -156,7 +163,7 @@ public:
      * for this reconstruction is a debuggable/modifiable driver, not a
      * byte-exact decompile).
      */
-    IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
 
     /*
      * write_kernel_context_buffer_regs - CONFIRMED, fully decoded
@@ -362,8 +369,8 @@ public:
      * calls. submit_context_buffer RESOLVED (issue #5) - fully
      * transcribed, see Sources/ATIR500GLContext_TextureLoad.cpp. Return
      * type CORRECTED to real `void` (was declared `IOReturn`). */
-    void submit_context_buffer(void);
-    void discard_command_buffer(void);
+    virtual void submit_context_buffer(void);
+    virtual void discard_command_buffer(void);
 
 protected:
     /*
