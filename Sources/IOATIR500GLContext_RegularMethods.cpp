@@ -155,23 +155,8 @@ IOReturn IOATIR500GLContext::set_swap_interval(SInt32 a, SInt32 b) {
  * context class's own texture lookups already use), then forwards to
  * IOATIR500Shared::delete_texture.
  */
-IOReturn IOATIR500GLContext::delete_texture(UInt32 textureID) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(*reinterpret_cast<UInt8 **>(self + 0xc8) + 0x840));
-    IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
-    UInt8 *sharedBytes = reinterpret_cast<UInt8 *>(shared);
-    if (textureID < U32At(sharedBytes, 0x14)) {
-        VendorTextureBuffer *texture = *reinterpret_cast<VendorTextureBuffer **>(
-            reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(sharedBytes + 0x10)) + textureID * 4);
-        if (texture != nullptr) {
-            IOReturn result = shared->delete_texture(texture);
-            GLContext_mutex_unlock(*reinterpret_cast<void **>(*reinterpret_cast<UInt8 **>(self + 0xc8) + 0x840));
-            return result;
-        }
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(*reinterpret_cast<UInt8 **>(self + 0xc8) + 0x840));
-    return 0xe00002c2;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_delete_texture_Port.cpp) */
+
 
 /*
  * become_global_shared - CONFIRMED. Real body: a real mutual-exclusion
@@ -697,123 +682,8 @@ done:
  * IOATIR500Surface's) - called via this project's established raw
  * vtable-cast idiom, flagged honestly rather than guessed at.
  */
-IOReturn IOATIR500GLContext::set_surface(UInt32 surfaceID, eIOGLContextModeBits modeBitsEnum, UInt32 param3, UInt32 param4) {
-    UInt32 modeBits = static_cast<UInt32>(modeBitsEnum);
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    typedef SInt32 (*Fn0x5ac)(void *, UInt32 *, UInt32);
-    typedef void (*Fn0x5a8)(void *);
-    typedef void (*Fn0x5bc)(void *, UInt32);
+/* (re-ported mechanically: see IOATIR500GLContext_set_surface_Port.cpp) */
 
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-
-    IOReturn result;
-    IOATIR500Surface *newSurface;
-    bool unbinding;
-    if (surfaceID == 0) {
-        result = 0;
-        newSurface = nullptr;
-        unbinding = true;
-    } else {
-        newSurface = reinterpret_cast<IOATIR500Surface *>(
-            reinterpret_cast<IOATIR500Accelerator *>(accel)->find_surface_for_id(surfaceID));
-        unbinding = (newSurface == nullptr);
-        result = unbinding ? static_cast<IOReturn>(0xe00002c2) : static_cast<IOReturn>(0);
-    }
-
-    IOATIR500Surface *oldSurface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
-    if (oldSurface != nullptr) {
-        oldSurface->remove_gl_context_from_list(reinterpret_cast<IOATIR500GLContext *>(self));
-        if (newSurface != oldSurface) {
-            oldSurface->prune_buffers();
-        }
-    }
-
-    if (unbinding) {
-        *reinterpret_cast<IOATIR500Surface **>(self + 0x29c) = newSurface;
-        *reinterpret_cast<IOATIR500Surface **>(self + 0x290) = newSurface;
-        *reinterpret_cast<IOATIR500Surface **>(self + 0x298) = newSurface;
-    } else {
-        UInt8 *newSurf = reinterpret_cast<UInt8 *>(newSurface);
-        UInt32 config = U32At(newSurf, 0xbe8);
-        if (newSurface != oldSurface) {
-            newSurface->reset_req_bits();
-        }
-        bool fastPath;
-        if (U32At(newSurf, 0x90) == 0 && U32At(newSurf, 0x8c) == 0 &&
-            (*reinterpret_cast<IOATIR500GLContext **>(newSurf + 0x88) == nullptr ||
-             (reinterpret_cast<UInt8 *>(*reinterpret_cast<IOATIR500GLContext **>(newSurf + 0x88)) == self &&
-              U32At(self, 0x84) == 0))) {
-            config = (config & 0x803f) | (modeBits & 0xffffc03f);
-            fastPath = true;
-        } else {
-            fastPath = false;
-        }
-        if (!fastPath) {
-            bool hyperzGate = (U32At(newSurf, 0xc18) & 4) != 0 &&
-                               (modeBits & 0x300) != 0 &&
-                               (((U32At(newSurf, 0xc18) >> 7) & 1) != ((modeBits >> 0xd) & 1));
-            SInt32 accepted = hyperzGate ? 0 : (*reinterpret_cast<Fn0x5ac *>(*reinterpret_cast<void ***>(self) + (0x5ac / 4)))(self, &config, modeBits);
-            if (hyperzGate || accepted == 0) {
-                if (newSurface == oldSurface) {
-                    newSurface->prune_buffers();
-                }
-                U32At(self, 0x290) = 0;
-                result = 0xe00002c2;
-                goto tail;
-            }
-        }
-        U32At(newSurf, 0xbe8) = config;
-        UInt32 renderCfg = 0x20000000;
-        if ((modeBits & 0x400) != 0) {
-            renderCfg = 0x20000002;
-        }
-        if ((modeBits & 0x800) != 0) {
-            renderCfg |= 1;
-        }
-        if ((U32At(newSurf, 0xbe8) & 0x10) != 0) {
-            if ((renderCfg & 1) != 0) renderCfg |= 0x20;
-            if ((renderCfg & 2) != 0) renderCfg |= 0x10;
-        }
-        /* real: `uVar3 = (**(code**)(*(int*)this_00 + 0x5ac))(this_00);` - this_00's own +0x5ac
-         * (IOATIR500Surface's own removeTransferFromGART-shaped slot is NOT this - Surface's
-         * +0x5ac is a DIFFERENT, not-yet-independently-named slot on THIS class; reusing the
-         * project's raw-cast idiom rather than the (wrong) Accelerator identity). */
-        {
-            typedef UInt32 (*SurfFn0x5ac)(void *);
-            renderCfg |= (*reinterpret_cast<SurfFn0x5ac *>(*reinterpret_cast<void ***>(newSurf) + (0x5ac / 4)))(newSurf);
-        }
-        U32At(self, 0x8c) = renderCfg;
-        if ((modeBits & 0x40) != 0) {
-            U32At(self, 0x8c) = renderCfg | 0x40;
-        }
-        if ((modeBits & 0x1000) != 0) {
-            U32At(self, 0x8c) |= 0x200;
-        }
-        if ((modeBits & 0x300) > 0xff) {
-            bool bit2000 = (modeBits & 0x2000) != 0;
-            U32At(self, 0x8c) |= 4;
-            if (bit2000) U32At(self, 0x8c) |= 0x80;
-            if ((modeBits & 0x300) > 0x1ff) {
-                U32At(self, 0x8c) |= 8;
-                if (bit2000) U32At(self, 0x8c) |= 0x100;
-            }
-        }
-        (*reinterpret_cast<Fn0x5bc *>(*reinterpret_cast<void ***>(self) + (0x5bc / 4)))(self, modeBits);
-        newSurface->add_gl_context_to_list(reinterpret_cast<IOATIR500GLContext *>(self));
-        U32At(self, 0x290) = reinterpret_cast<UInt32>(newSurface);
-        newSurface->prune_buffers();
-    }
-tail:
-    if (reinterpret_cast<UInt8 *>(self) == reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8)) + 0x78))) {
-        U32At(*reinterpret_cast<void **>(self + 0xc8), 0x78) = 0;
-    }
-    U32At(self, 0x298) = param3;
-    U32At(self, 0x29c) = param4;
-    (*reinterpret_cast<Fn0x5a8 *>(*reinterpret_cast<void ***>(self) + (0x5a8 / 4)))(self);
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8)) + 0x840));
-    return result;
-}
 
 /*
  * new_texture - CONFIRMED real dispatch shape (switch on the input
@@ -833,74 +703,5 @@ tail:
  * that exact situation elsewhere (e.g. `pageoff_dirty_texture`'s own
  * trailing `long` parameters).
  */
-IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *inData, sIOGLNewTextureReturnData *outData,
-                                          UInt32 /*param3, real: confirmed unused*/, UInt32 * /*param4, real: confirmed unused*/) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
+/* (re-ported mechanically: see IOATIR500GLContext_new_texture_Port.cpp) */
 
-    UInt8 *in = reinterpret_cast<UInt8 *>(inData);
-    UInt8 *out = reinterpret_cast<UInt8 *>(outData);
-    IOATIR500Shared *shared = *reinterpret_cast<IOATIR500Shared **>(self + 0x88);
-    VendorTextureBuffer *texture = nullptr;
-    IOReturn result;
-
-    switch (U32At(in, 0)) {
-    case 0:
-        texture = shared->new_surface_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc),
-                                               reinterpret_cast<unsigned int *>(out + 4));
-        U32At(out, 0) = 0;
-        break;
-    case 1:
-        texture = shared->new_global_texture(U32At(in, 4), reinterpret_cast<unsigned int *>(out + 4));
-        U32At(out, 0) = 0;
-        break;
-    case 2:
-        texture = shared->new_texture(U32At(in, 4), 0, 0, 0, reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
-        break;
-    case 3:
-        texture = shared->new_texture(U32At(in, 4), U32At(in, 8), 0, 0, reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
-        break;
-    case 6: {
-        texture = shared->new_agpref_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc), reinterpret_cast<unsigned int *>(out + 4));
-        if (texture == nullptr) {
-            U32At(out, 0) = 0;
-            result = 0xe00002be;
-            GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-            return result;
-        }
-        /* real: `*param_3 = *(undefined4 *)(*(int *)(iVar1 + 0x54) + 0x58);` - a real nested
-         * dereference through the newly-allocated texture's own +0x54/+0x58
-         * fields, not the plain handle-out-param write the other cases use;
-         * then falls straight into the same commit path as every other
-         * non-null case below (real decompile's own `goto`), skipping the
-         * shared `texture == nullptr` recheck since it's already known
-         * non-null here. */
-        U32At(out, 0) = U32At(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(texture) + 0x54), 0x58);
-        set_texture_flags(texture);
-        GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-        return 0;
-    }
-    case 7:
-        texture = shared->new_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc), U32At(in, 0x10),
-                                       reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
-        break;
-    default:
-        U32At(out, 0) = 0;
-        U32At(out, 4) = 0;
-        GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-        return 0xe00002be;
-    }
-
-    if (texture == nullptr) {
-        result = 0xe00002be;
-    } else {
-        result = 0;
-        /* real: `(**(code **)(*(int *)param_1 + 0x5c0))(param_1,iVar1)` - vtable +0x5c0 on `this` (the stock decompile
-         * names `this` param_1; an earlier transcription of this file took it for the input struct and dispatched
-         * through that struct's vtable pointer). +0x5c0 is set_texture_flags(VendorTextureBuffer*). */
-        set_texture_flags(texture);
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return result;
-}

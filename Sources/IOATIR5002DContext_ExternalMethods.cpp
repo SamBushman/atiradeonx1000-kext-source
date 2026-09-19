@@ -133,41 +133,8 @@ IOReturn IOATIR5002DContext::create_image(UInt32 param1, UInt32 param2, unsigned
     return texture == nullptr ? 0xe00002bd : 0;
 }
 
-IOReturn IOATIR5002DContext::delete_image(UInt32 textureID) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    Ctx2D_lock(lock);
-    IOATIR500Shared *shared = sharedAllocator;
-    IOReturn result;
-    if (shared == nullptr) {
-        result = 0xe00002be;
-    } else {
-        UInt8 *sharedBytes = reinterpret_cast<UInt8 *>(shared);
-        UInt8 *tex = nullptr;
-        if (textureID < U32At(sharedBytes, 0x14)) {
-            tex = reinterpret_cast<UInt8 **>(U32At(sharedBytes, 0x10))[textureID];
-        }
-        if (tex == nullptr) {
-            result = 0xe00002c2;
-        } else {
-            if (reinterpret_cast<UInt8 *>(U32At(self, 0x114)) == tex) {
-                U32At(self, 0x114) = 0;
-            }
-            if (boundSurface != nullptr) {
-                ATIR500SurfaceBuffer *buf = reinterpret_cast<ATIR500SurfaceBuffer *>(U32At(boundSurface, 0xb70)); /* surfaceBuffersByFormat[0] */
-                UInt8 *backing = reinterpret_cast<UInt8 *>(U32At(buf, 0x24));
-                if (backing != nullptr && U32At(backing, 8) == U32At(tex, 8)) {
-                    U8At(backing, 0x59) = 0;
-                    boundSurface->free_buffer_backing_store(buf);
-                    shared = sharedAllocator;
-                }
-            }
-            result = shared->delete_texture(reinterpret_cast<VendorTextureBuffer *>(tex));
-        }
-    }
-    Ctx2D_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_delete_image_Port.cpp) */
+
 
 IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);

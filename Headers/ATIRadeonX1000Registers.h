@@ -254,6 +254,8 @@ extern "C" UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, 
  */
 extern "C" UInt32 HZMEM_GetBlockCount(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z19HZMEM_GetBlockCountP7_HZDATAmm");
 extern "C" UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) asm("__Z15HZMEM_IsPartialP7_HZDATAmm");
+/* the HZMEM setup/teardown functions (C++ linkage, exact mangled names) */
+UInt32 HZMEM_InitMemResource(_HZDATA *hz, UInt32 param_2, UInt32 param_3, UInt32 param_4);
 /*
  * HZMEM_Alloc - CONFIRMED real, found this pass in opcode 0x41's real
  * body (real depth/stencil HyperZ block auto-allocation). REAL SIGNATURE

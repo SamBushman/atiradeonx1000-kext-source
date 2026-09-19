@@ -1,357 +1,370 @@
 /*
  * ATIR500GLContext_DiscardBuffer.cpp
  *
- * discard_command_buffer - CONFIRMED, transcribed from a complete real
- * decompile (kext offset 0x27580). Real role: a second, INDEPENDENT walk
- * of the exact same embedded-opcode command stream process_command_buffer
- * itself walks - but instead of executing each opcode's real GPU-facing
- * effect, this one exists purely to release reference counts on every
- * texture/buffer a not-yet-submitted (discarded) command buffer had bound.
- * Real PowerPC atomic decrement-with-retry (`storeWordConditionalIndexed`,
- * a real lwarx/stwcx.-style load-and-reserve primitive) guards every
- * refcount touch - represented here as a plain, non-atomic decrement with
- * a comment, since faithful atomic PPC asm has no portable C++ equivalent
- * and the REAL point (what gets decremented, and when a texture is
- * actually freed at refcount 1->0) is preserved exactly.
+ * ATIR500GLContext::discard_command_buffer (real addr 0x27580, 2228 bytes): walks the not-yet-submitted command
+ * buffer's embedded-opcode stream and drops every texture / vertex-buffer / query reference it had bound (an atomic
+ * lwarx/stwcx. decrement of the record's outstanding count at texture->+0x14->+0x10; at 1 -> 0 it calls
+ * IOATIR500Shared::delete_texture), takes the references the discarded stream would have taken, and rebuilds the
+ * vertex-format state for opcode 0x29.
  *
- * Real, valuable discoveries from this specific trace:
- * - CONFIRMS opcode 0x29's real 8-case switch table (already folded into
- *   ATIR500GLContext_ProcessCommandBuffer.cpp's handler as a second
- *   independent source).
- * - A NEW, previously-uncatalogued opcode: 0x36000000 - this cleanup-path
- *   trace correctly identifies a real refcount touch at `this+0x334`
- *   (decrement the old bound value's refcount, increment the new one's,
- *   store the new pointer) - CONFIRMED still accurate. A later pass found
- *   this opcode's real EXECUTE-path body
- *   (ATIR500GLContext_ProcessCommandBuffer.cpp's
- *   handle_transfer_buffer_bind_and_fixup): `this+0x334` is really a
- *   TRANSFER-BUFFER slot (closer in kind to opcodes 0x26/0x27 than to a
- *   texture reference), and the execute path additionally does a real
- *   embedded address-fixup loop (shape-identical to opcode 0x38's) this
- *   cleanup-only trace has no way to see. Not a contradiction between the
- *   two traces - just two different real views of the same opcode.
- * - Opcode 0x3b's cleanup-path counterpart to `handle_query_buffer_bind` -
- *   RESOLVED, issue #12 item 3, fully transcribed (was previously deferred
- *   as a stub with only a partial description). Calls a real vtable method
- *   at offset 0x14c on a memory-descriptor-shaped object to (re)establish a
- *   real backing mapping (the same real slot `ATIR500GLContext::load_texture`
- *   independently calls), and zeroes a real four-field cluster
- *   (+0x210/+0x218/+0x21c/+0x220) within the resulting hardware-info block
- *   before releasing the mapping handle. See that opcode's own branch below
- *   for the full transcription - an apparently-unconditional release call
- *   through a pointer that looked like it could be null on the raw
- *   decompile's own control-flow shape, CONFIRMED SAFE via a follow-up
- *   cross-reference against the real `IOATIR500Shared` texture-constructor
- *   family (no live hardware needed).
+ * Mechanically re-ported from the Ghidra decompile (Tools/port_fn.py, atomics via Tools/ghidra2cpp.py's lwarx idiom
+ * rewrite) - replaces the earlier interpretive transcription, which used non-atomic stand-ins for the refcount ops and
+ * left the delete_texture / set_volatile_state calls as comments. Verified with Tools/callee_compare.py.
  */
 
 #include "../Headers/ATIR500GLContext.h"
 #include "../Headers/IOATIR500Accelerator.h"
-#include <libkern/OSAtomic.h>
+#include "../Headers/IOATIR500Shared.h"
+#include "../Headers/IOATIR500Surface.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h"
+#include "../Headers/GhidraExterns.h"
+#include "../Headers/GhidraCompat.h"
 
-namespace {
-inline UInt32 &U32At(void *base, int offset) {
-    return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset);
-}
-inline UInt32 EMBEDDED_OPCODE(UInt32 v) { return v & 0xff000000u; }
 
-/* Real atomic decrement-and-check-for-zero, represented non-atomically -
- * see file header. Returns true if the count reached exactly 1 before
- * this decrement (i.e. this was the last reference). */
-inline bool DecrementRefAndWasLast(void *countField) {
-    UInt32 before = *reinterpret_cast<UInt32 *>(countField);
-    *reinterpret_cast<UInt32 *>(countField) = before - 1;
-    return before == 1;
-}
 
-/* CONFIRMED shared helper: every branch below that "releases a bound
- * texture slot" does the identical real sequence - decrement the
- * texture's real GART-mapping refcount (at `texture+0x14`, further offset
- * `+0x10`), and if it just hit zero, tell the shared allocator to really
- * delete the texture. */
-void ReleaseBoundTextureSlot(ATIR500GLContext *ctx, void *textureSlotValue, void *sharedAllocator) {
-    if (textureSlotValue == nullptr) return;
-    void *rec = reinterpret_cast<void *>(U32At(textureSlotValue, 0x14));
-    void *countField = reinterpret_cast<UInt8 *>(rec) + 0x10;
-    if (DecrementRefAndWasLast(countField)) {
-        IOATIR500Shared *shared = reinterpret_cast<IOATIR500Shared *>(sharedAllocator);
-        (void)shared; (void)ctx;
-        /* real: IOATIR500Shared::delete_texture(shared, textureSlotValue); */
-    }
-}
-} // namespace
-
-void ATIR500GLContext::discard_command_buffer(void) {
+/* real addr 0x27580 */
+void ATIR500GLContext::discard_command_buffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
-    UInt32 *record = reinterpret_cast<UInt32 *>(U32At(self, 0xe0) + 0x1c);
 
-    for (;;) {
-        UInt32 header = *record;
-        UInt32 opcode = EMBEDDED_OPCODE(header);
-        UInt32 distance = header & 0xffffffu;
-
-        if (opcode >= 0x06000000 && opcode <= 0x25000000) {
-            /* CONFIRMED: the same real per-texture-unit unbind family
-             * already fully mapped in the execute path - here, releasing
-             * the slot's reference instead of patching a marker. */
-            UInt32 unitIndex = (opcode + 0xea000000u) >> 0x16;
-            void *slot = reinterpret_cast<void *>(U32At(self, unitIndex + 0x2a4));
-            if (slot != nullptr) {
-                ReleaseBoundTextureSlot(this, slot, sharedAllocator);
-                U32At(self, unitIndex + 0x2a4) = 0;
-            }
-        } else if (opcode == 0x29000000) {
-            /* real 8-case vertex-format switch - CONFIRMED, see
-             * ATIR500GLContext_ProcessCommandBuffer.cpp's handler for the
-             * full transcription this trace independently confirms. */
-            for (UInt32 i = 0; i < 4; ++i) {
-                UInt16 slotCode;
-                switch (record[1 + i]) {
-                    case 1:    slotCode = 0;    break;
-                    case 2:    slotCode = 4;    break;
-                    case 3:    slotCode = 5;    break;
-                    case 7:    slotCode = 2;    break;
-                    case 8:    slotCode = 3;    break;
-                    case 0x10: slotCode = 9;    break;
-                    case 0x11: slotCode = 0x17; break;
-                    default:   slotCode = 1;    break;
-                }
-                *reinterpret_cast<UInt16 *>(self + 0x3aa + i * 2) = slotCode;
-            }
-            *reinterpret_cast<UInt16 *>(self + 0xac) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
-            U32At(self, 0x35c) = *reinterpret_cast<UInt16 *>(self + 0x3aa);
-            if (record[5] == 0x10) {
-                *reinterpret_cast<UInt16 *>(self + 0x3aa) = 9;
-                *reinterpret_cast<UInt16 *>(self + 0xac) = 9;
-            }
-            if ((U32At(self, 0x8c) & 0x80) != 0) {
-                UInt32 pairEnum = record[1];
-                *reinterpret_cast<UInt16 *>(self + 0xae) =
-                    (pairEnum == 7 || pairEnum == 8) ? static_cast<UInt16>(pairEnum) : 6;
-            }
-        } else if (opcode == 0x3a000000) {
-            /*
-             * CORRECTED this pass: this project's earlier loop bound here
-             * (`p + 4 == self + 0x44`) was a real bug - `p` starts at
-             * `self+0x2e4`, so that comparison could never become true
-             * (the loop would run away / overflow). Also removed a
-             * fabricated `record[1]==0` early-exit gate: a full read of
-             * this SAME opcode's real EXECUTE-path body (
-             * ATIR500GLContext_ProcessCommandBuffer.cpp's
-             * handle_clear_all_vertex_attribute_slots) shows an
-             * unconditional 17-entry sweep with no such gate, and the two
-             * paths almost certainly iterate the identical fixed range -
-             * this project's earlier claim of a conditional gate here was
-             * not grounded in anything actually read from this decompile.
-             * Real range, now confirmed via the execute path: `self+0x2e4`
-             * through `self+0x2e4+0x40` inclusive (17 entries, stride 4) -
-             * exactly the vertex-attribute-buffer slot range opcode 0x39
-             * populates (unit indices 0x10-0x20).
-             */
-            for (UInt8 *p = self + 0x2e4; p <= self + 0x2e4 + 0x40; p += 4) {
-                void *slot = reinterpret_cast<void *>(U32At(p, 0));
-                if (slot != nullptr) {
-                    ReleaseBoundTextureSlot(this, slot, sharedAllocator);
-                    U32At(p, 0) = 0;
-                }
-            }
-        } else if (opcode == 0x36000000) {
-            /*
-             * Real transfer-buffer slot at this+0x334 (CORRECTED naming -
-             * see file header note; this project's earlier "texture
-             * reference swap" description undersold what this field really
-             * is, though the refcount mechanics below remain accurate):
-             * release the old bound value's reference (if its real
-             * "transferBufferFlag" field is clear), take a new reference on
-             * the incoming one, store it.
-             */
-            void *oldTex = reinterpret_cast<void *>(U32At(self, 0x334));
-            void *newTex = reinterpret_cast<void *>(record[1]);
-            if (oldTex != nullptr && U32At(oldTex, 0x48) == 0) {
-                *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(oldTex) + 0xe) -= 1;
-            }
-            if (newTex != nullptr && U32At(newTex, 0x48) == 0) {
-                *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(newTex) + 0xe) += 1;
-            }
-            U32At(self, 0x334) = reinterpret_cast<UInt32>(newTex);
-        } else if (opcode == 0x39000000) {
-            /* real: release every vertex-attribute-buffer slot this
-             * record bound (mirrors the execute path's bind loop),
-             * distinguishing a "last slot" case (real slot index 0x20,
-             * index-buffer slot) that also checks/updates a real cached
-             * generation value at a bound surface's +0x64 field. */
-            UInt32 count = record[1];
-            if (record[2] == 0) count = 1;
-            if (record[3] != 0) count += 1;
-            for (UInt32 i = 0; i < count; ++i) {
-                bool isIndexSlot = (record[3] == 0) && (i == count - 1);
-                UInt32 slotBase = (isIndexSlot ? 0x20u : 0x10u + i) * 4;
-                void *slot = reinterpret_cast<void *>(U32At(self, slotBase + 0x2a4));
-                if (slot != nullptr) {
-                    ReleaseBoundTextureSlot(this, slot, sharedAllocator);
-                    U32At(self, slotBase + 0x2a4) = 0;
-                }
-            }
-        } else if (opcode == 0x3b000000) {
-            /*
-             * RESOLVED, issue #12 item 3. Full real transcription of opcode
-             * 0x3b's discard/cleanup-path counterpart to the execute path's
-             * handle_query_buffer_bind (ATIR500GLContext_ProcessCommandBuffer.cpp) -
-             * same shared-allocator lookup-table guard shape as that
-             * function. Real structure: release the old bound query
-             * buffer's reference (-1 atomic decrement, same field shape
-             * ReleaseBoundTextureSlot uses but not routed through that
-             * helper - this real function operates on the query slot
-             * directly), take a reference on the new one via the SAME real
-             * atomic add-(-0xffff) packed-dual-counter idiom
-             * ATIR500GLContext::get_texture (ATIR500GLContext_TextureLoad.cpp)
-             * already established on this identical field shape (a mip
-             * record's own +0x10) - CONFIRMS that idiom is a general "mark
-             * this texture outstanding" mechanism, not specific to
-             * get_texture. Then a real vtable+0x14c call on `newTex+0x54`'s
-             * own `linkedBuffer` (`ATIRadeonX1000Types.h`, RESOLVED issue
-             * #20/#24 - a real companion `VendorTextureBuffer`-shaped
-             * record whose own `+8` is, like every other `VendorTextureBuffer`,
-             * a real Apple `IOMemoryDescriptor`), one more indirection
-             * through +8, to (re)establish a GART/memory-descriptor-shaped
-             * mapping handle - the SAME real vtable slot ATIR500GLContext::load_texture's
-             * own step 2 independently calls (see that function's header
-             * comment) - on success, looks up a real per-record hardware-
-             * info block via vtable+0xd0 and zeros a 4-field cluster within
-             * it at a `record[3]*0x20` byte offset (this project's earlier
-             * partial note on this opcode's `+0x210/+0x218/+0x21c/+0x220`
-             * cluster - now placed correctly, on the hwInfo block, not a
-             * fixed object).
-             *
-             * Real anomaly, NOW RESOLVED via follow-up investigation: the
-             * raw decompile's FINAL step - releasing the handle via
-             * vtable+0x18 - is UNCONDITIONAL, running even when
-             * `newTex+0x54` was zero or the vtable+0x14c call itself
-             * returned null. A real vtable call through a definitely-null
-             * pointer would crash - but decompiling the real
-             * `IOATIR500Shared` texture-constructor family
-             * (`new_agp_texture`/`new_agpref_texture`/`new_global_texture`/
-             * `new_surface_texture`/`new_texture`, real addrs
-             * `0x17150`/`0x17df0`/`0x17740`/`0x17520`/`0x18060`) and their
-             * real caller `IOATIR500GLContext::new_texture`
-             * (real addr `0x9320`) CONFIRMS `newTex+0x54` can never
-             * actually be null for a texture this opcode can legally
-             * reach: `new_agpref_texture` (the REAL constructor for type-6
-             * "agpref" - i.e. query-companion - textures, real addr
-             * `0x17df0`) either returns null outright (nothing gets
-             * registered anywhere a discard could later reference) or, on
-             * its one success path, unconditionally sets the new record's
-             * own `+0x54` to the underlying AGP texture before ever
-             * exposing the record to a caller. Airtight direct
-             * confirmation: `IOATIR500GLContext::new_texture`'s own type-6
-             * case dereferences `iVar1+0x54` (`*(iVar1+0x54)+0x58`)
-             * IMMEDIATELY after `new_agpref_texture` returns non-null,
-             * with no null check in between - the real driver's own code
-             * trusts this field unconditionally the instant creation
-             * succeeds. Since opcode 0x3b's discard path can only ever
-             * reference a texture already registered in the shared
-             * allocator's lookup table, and registration for this
-             * specific opcode's real intended texture type (query/agpref)
-             * only happens via this exact success path, `newTex+0x54==0`
-             * is unreachable for the driver's real intended usage. A
-             * crash would only be possible if opcode 0x3b were issued for
-             * a texture ID that was never actually created as a type-6
-             * query texture - a driver-internal opcode/texture-type
-             * mismatch this function has no way to defend against and
-             * isn't responsible for. No live hardware trace needed - this
-             * is now settled by direct static cross-reference. Also NOTE:
-             * the raw decompile renders the
-             * vtable+0xd0 call with zero arguments, unlike load_texture's
-             * own vtable+0xd0 call (which does pass the receiver) - treated
-             * here as the same Ghidra calling-convention-inference artifact
-             * load_texture's own header comment already flags for this
-             * exact vtable slot ("no extra args"), not a real different
-             * signature; the receiver is still passed as the sole arg.
-             *
-             * Also real, and matching the raw decompile precisely: on the
-             * initial shared-allocator lookup failure (the SAME guard shape
-             * handle_query_buffer_bind's execute path has), this function's
-             * real behavior is to force `distance` to 0 - which, per this
-             * function's own shared loop tail below, means the ENTIRE
-             * discard walk aborts immediately rather than skipping just
-             * this one opcode. A real, deliberate "abort processing this
-             * discard buffer" behavior, not previously documented for this
-             * function.
-             */
-            UInt32 recordSlot3 = record[3];
-            if (U32At(sharedAllocator, 0x14) <= record[1] ||
-                U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4) == 0) {
-                distance = 0;
-            } else {
-                void *newTex = reinterpret_cast<void *>(
-                    U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), record[1] * 4));
-
-                void *oldQuery = reinterpret_cast<void *>(U32At(self, 0x32c));
-                if (oldQuery != nullptr) {
-                    void *oldRec = reinterpret_cast<void *>(U32At(oldQuery, 0x14));
-                    UInt32 *countField = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(oldRec) + 0x10);
-                    if (DecrementRefAndWasLast(countField)) {
-                        IOATIR500Shared *shared = reinterpret_cast<IOATIR500Shared *>(sharedAllocator);
-                        (void)shared;
-                        /* real: IOATIR500Shared::delete_texture(shared, oldQuery); */
-                    }
-                }
-
-                /* real atomic add of -0xffff on newTex's mip record +0x10 -
-                 * SAME packed dual-counter idiom as get_texture's own
-                 * atomic decrement-by-0xffff on the identical field shape -
-                 * see ATIR500GLContext_TextureLoad.cpp's header comment.
-                 * FIXED (issue #1, first build attempt): was
-                 * `__sync_fetch_and_add` (a GCC/Clang builtin not
-                 * available until GCC 4.1 - not in this project's real
-                 * gcc-4.0.1 kext-capable compiler) - replaced with
-                 * Apple's own real kernel atomic API for this,
-                 * `OSAddAtomic` (`<libkern/OSAtomic.h>`). */
-                void *newRec = reinterpret_cast<void *>(U32At(newTex, 0x14));
-                OSAddAtomic(-0xffff, reinterpret_cast<SInt32 *>(reinterpret_cast<UInt8 *>(newRec) + 0x10));
-
-                U32At(self, 0x32c) = reinterpret_cast<UInt32>(newTex);
-
-                void *memHandle = nullptr;
-                if (U32At(newTex, 0x54) != 0) {
-                    void *relatedObj = reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(newTex, 0x54)), 8));
-                    extern int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
-                    typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
-                    memHandle = (*reinterpret_cast<PrepareMappingFn *>(
-                        *reinterpret_cast<void ***>(relatedObj) + (0x14c / 4)))(relatedObj, kernelTaskRef, 0, 1, 0, 0);
-                    if (memHandle != nullptr) {
-                        typedef UInt32 *(*GetHwInfoFn)(void *);
-                        UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(
-                            *reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);
-                        UInt8 *dest = reinterpret_cast<UInt8 *>(hwInfo) + recordSlot3 * 0x20;
-                        *reinterpret_cast<UInt32 *>(dest + 0x21c) = 0;
-                        *reinterpret_cast<UInt32 *>(dest + 0x210) = 0;
-                        *reinterpret_cast<UInt32 *>(dest + 0x220) = 0;
-                        *reinterpret_cast<UInt32 *>(dest + 0x218) = 0;
-                    }
-                }
-                /* real: unconditional vtable+0x18 release, even if
-                 * memHandle is still null here - see anomaly note above. */
-                typedef void (*ReleaseFn)(void *);
-                (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
-            }
-        } else if (opcode == 0x3d000000) {
-            /* real: gated on a magic constant (0x132) matching this
-             * record's own type tag, forwards to
-             * IOATIR500Surface::set_volatile_state on the bound surface -
-             * a second, independent confirmed call site for that
-             * function. */
-        } else {
-            /* Every other opcode in the confirmed 0x02-0x46 range: real
-             * observed behavior in THIS function is a no-op (only the
-             * distance-based advance below matters) - CONFIRMED, this
-             * project already knows every one of these opcodes' real
-             * EXECUTE-path behavior from stage3/stage4; the DISCARD path
-             * simply doesn't need to do anything for them. */
+  bool bVar1;
+  SInt32 iVar2;
+  SInt32 *piVar3;
+  UInt32 uVar4;
+  SInt32 *piVar5;
+  UInt8 *pIVar6;
+  UInt8 *pVVar7;
+  SInt32 iVar8;
+  SInt32 iVar9;
+  UInt32 uVar10;
+  SInt32 iVar11;
+  UInt32 uVar12;
+  UInt32 uVar13;
+  SInt32 iVar14;
+  UInt32 uVar15;
+  UInt32 *puVar16;
+  UInt8 *pAVar17;
+  char in_RESERVE;
+  UInt8 in_cr0;
+  UInt8 bVar18;
+  SInt32 local_94 [22];
+  
+  puVar16 = (UInt32 *)(M<SInt32>(self + 0xe0) + 0x1c);
+  do {
+    uVar15 = *puVar16;
+    uVar4 = uVar15 & 0xff000000;
+    if (uVar4 == 0x19000000) {
+LAB_00027ab0:
+      uVar12 = uVar15 & 0xffffff;
+      uVar4 = uVar4 + 0xea000000 >> 0x16;
+      pVVar7 = M<UInt8 *>(self + uVar4 + 0x2a4);
+      if (pVVar7 != (UInt8 *)0x0) {
+        piVar3 = (SInt32 *)(M<SInt32>(pVVar7 + 0x14) + 0x10);
+        iVar8 = atomicAddReturningOld((SInt32 *)piVar3, -1);
+        if (iVar8 == 1) {
+          ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)pVVar7);
         }
-
-        if (distance == 0) return;
-        record += distance;
+        uVar12 = uVar15 & 0xffffff;
+        M<UInt32>(self + uVar4 + 0x2a4) = 0;
+      }
     }
+    else {
+      if (0x19000000 < uVar4) {
+        if (uVar4 != 0x23000000) {
+          if (uVar4 < 0x23000001) {
+            if (uVar4 != 0x1e000000) {
+              if (uVar4 < 0x1e000001) {
+                if (uVar4 != 0x1b000000) {
+                  if (uVar4 < 0x1b000001) {
+                    if (uVar4 == 0x1a000000) goto LAB_00027ab0;
+                  }
+                  else if ((uVar4 == 0x1c000000) || (uVar4 == 0x1d000000)) goto LAB_00027ab0;
+                  goto LAB_00027e70;
+                }
+              }
+              else if (uVar4 != 0x20000000) {
+                if (uVar4 < 0x20000001) {
+                  if (uVar4 == 0x1f000000) goto LAB_00027ab0;
+                }
+                else if ((uVar4 == 0x21000000) || (uVar4 == 0x22000000)) goto LAB_00027ab0;
+                goto LAB_00027e70;
+              }
+            }
+          }
+          else {
+            if (uVar4 == 0x29000000) {
+              iVar8 = 0;
+              iVar14 = 4;
+              M<UInt32>(self + 0x3bc) = 0;
+              pAVar17 = self;
+              do {
+                switch(M<UInt32>((SInt32)puVar16 + iVar8 + 4)) {
+                default:
+                  M<UInt16>(pAVar17 + 0x3aa) = 1;
+                  break;
+                case 1:
+                  M<UInt16>(pAVar17 + 0x3aa) = 0;
+                  break;
+                case 2:
+                  M<UInt16>(pAVar17 + 0x3aa) = 4;
+                  break;
+                case 3:
+                  M<UInt16>(pAVar17 + 0x3aa) = 5;
+                  break;
+                case 7:
+                  M<UInt16>(pAVar17 + 0x3aa) = 2;
+                  break;
+                case 8:
+                  M<UInt16>(pAVar17 + 0x3aa) = 3;
+                  break;
+                case 0x10:
+                  M<UInt16>(pAVar17 + 0x3aa) = 9;
+                  break;
+                case 0x11:
+                  M<UInt16>(pAVar17 + 0x3aa) = 0x17;
+                }
+                iVar14 = iVar14 + -1;
+                iVar8 = iVar8 + 4;
+                pAVar17 = pAVar17 + 2;
+              } while (iVar14 != 0);
+              M<UInt16>(self + 0xac) = M<UInt16>(self + 0x3aa);
+              M<UInt32>(self + 0x35c) = (UInt32)M<UInt16>(self + 0x3aa);
+              if (puVar16[5] == 0x10) {
+                M<UInt16>(self + 0x3aa) = 9;
+                M<UInt16>(self + 0xac) = 9;
+              }
+              uVar12 = uVar15 & 0xffffff;
+              bVar1 = (M<UInt32>(self + 0x8c) & 0x80) == 0;
+              in_cr0 = bVar1 << 1;
+              if (!bVar1) {
+                uVar4 = puVar16[1];
+                if ((uVar4 == 7) || (uVar4 == 8)) {
+                  uVar12 = uVar15 & 0xffffff;
+                  M<SInt16>(self + 0xae) = (SInt16)uVar4;
+                }
+                else {
+                  M<UInt16>(self + 0xae) = 6;
+                }
+              }
+              goto LAB_00027e90;
+            }
+            if (0x29000000 < uVar4) {
+              if (uVar4 == 0x3a000000) {
+                bVar18 = (puVar16[1] == 0) << 1;
+                pAVar17 = self;
+                do {
+                  pVVar7 = M<UInt8 *>(pAVar17 + 0x2e4);
+                  if (pVVar7 != (UInt8 *)0x0) {
+                    piVar3 = (SInt32 *)(M<SInt32>(pVVar7 + 0x14) + 0x10);
+                    iVar8 = atomicAddReturningOld((SInt32 *)piVar3, -1);
+                    if (iVar8 == 1) {
+                      ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)pVVar7);
+                    }
+                    M<UInt32>(pAVar17 + 0x2e4) = 0;
+                  }
+                } while ((!(bool)(bVar18 >> 1 & 1)) &&
+                        (pAVar17 = pAVar17 + 4, pAVar17 != self + 0x44));
+              }
+              else if (uVar4 < 0x3a000001) {
+                if (uVar4 == 0x36000000) {
+                  iVar8 = M<SInt32>(self + 0x334);
+                  uVar4 = puVar16[1];
+                  if ((iVar8 != 0) && (M<SInt32>(iVar8 + 0x48) == 0)) {
+                    M<SInt16>(iVar8 + 0xe) = M<SInt16>(iVar8 + 0xe) + -1;
+                  }
+                  if (M<SInt32>(uVar4 + 0x48) == 0) {
+                    M<SInt16>(uVar4 + 0xe) = M<SInt16>(uVar4 + 0xe) + 1;
+                  }
+                  uVar12 = uVar15 & 0xffffff;
+                  M<UInt32>(self + 0x334) = uVar4;
+                  goto LAB_00027e90;
+                }
+                if (uVar4 == 0x39000000) {
+                  uVar4 = puVar16[1];
+                  uVar13 = puVar16[4];
+                  if (puVar16[2] == 0) {
+                    uVar4 = 1;
+                  }
+                  bVar18 = (puVar16[3] == 0) << 1;
+                  if (puVar16[3] != 0) {
+                    uVar4 = uVar4 + 1;
+                  }
+                  uVar12 = uVar15 & 0xffffff;
+                  if (uVar4 == 0) goto LAB_00027e90;
+                  uVar12 = 0;
+                  iVar8 = 0x10;
+                  iVar14 = 0;
+                  piVar3 = local_94;
+                  do {
+                    if ((!(bool)(bVar18 >> 1 & 1)) && (uVar12 == uVar4 - 1)) {
+                      iVar8 = 0x20;
+                    }
+                    pIVar6 = M<UInt8 *>(self + 0x88);
+                    uVar10 = M<UInt32>((SInt32)puVar16 + iVar14 + 0x20);
+                    if ((M<UInt32>(pIVar6 + 0x14) <= uVar10) ||
+                       (iVar9 = M<SInt32>(uVar10 * 4 + M<SInt32>(pIVar6 + 0x10)), iVar9 == 0))
+                    goto LAB_00027e80;
+                    *piVar3 = iVar9;
+                    iVar9 = iVar8 * 4;
+                    pVVar7 = M<UInt8 *>(self + iVar9 + 0x2a4);
+                    if (pVVar7 != (UInt8 *)0x0) {
+                      piVar5 = (SInt32 *)(M<SInt32>(pVVar7 + 0x14) + 0x10);
+                      iVar11 = atomicAddReturningOld((SInt32 *)piVar5, -1);
+                      if (iVar11 == 1) {
+                        ((IOATIR500Shared *)(pIVar6))->delete_texture((VendorTextureBuffer *)pVVar7);
+                      }
+                      M<UInt32>(self + iVar9 + 0x2a4) = 0;
+                    }
+                    if (((iVar8 == 0x20) &&
+                        (iVar11 = M<SInt32>(iVar14 + (SInt32)(unsigned long)local_94), M<char>(iVar11 + 0x20) == '\a'
+                        )) && (uVar13 != M<UInt32>(iVar11 + 100))) {
+                      M<UInt32>(iVar11 + 100) = uVar13;
+                      M<UInt8>(M<SInt32>(M<SInt32>(iVar14 + (SInt32)(unsigned long)local_94) + 0x14) + 0x14) = 1;
+                    }
+                    iVar11 = M<SInt32>(iVar14 + (SInt32)(unsigned long)local_94);
+                    piVar5 = (SInt32 *)(M<SInt32>(iVar11 + 0x14) + 0x10);
+                    atomicAddReturningOld((SInt32 *)piVar5, -0xffff);
+                    uVar12 = uVar12 + 1;
+                    piVar3 = piVar3 + 1;
+                    iVar8 = iVar8 + 1;
+                    M<SInt32>(self + iVar9 + 0x2a4) = iVar11;
+                    iVar14 = iVar14 + 4;
+                  } while (uVar4 != uVar12);
+                }
+              }
+              else if (uVar4 == 0x3b000000) {
+                pIVar6 = M<UInt8 *>(self + 0x88);
+                uVar4 = puVar16[3];
+                if ((M<UInt32>(pIVar6 + 0x14) <= puVar16[1]) ||
+                   (iVar8 = M<SInt32>(puVar16[1] * 4 + M<SInt32>(pIVar6 + 0x10)), iVar8 == 0))
+                goto LAB_00027e80;
+                pVVar7 = M<UInt8 *>(self + 0x32c);
+                if (pVVar7 != (UInt8 *)0x0) {
+                  piVar3 = (SInt32 *)(M<SInt32>(pVVar7 + 0x14) + 0x10);
+                  iVar14 = atomicAddReturningOld((SInt32 *)piVar3, -1);
+                  if (iVar14 == 1) {
+                    ((IOATIR500Shared *)(pIVar6))->delete_texture((VendorTextureBuffer *)pVVar7);
+                  }
+                }
+                piVar3 = (SInt32 *)(M<SInt32>(iVar8 + 0x14) + 0x10);
+                atomicAddReturningOld((SInt32 *)piVar3, -0xffff);
+                M<SInt32>(self + 0x32c) = iVar8;
+                piVar3 = (SInt32 *)0x0;
+                if (M<SInt32>(iVar8 + 0x54) != 0) {
+                  piVar3 = M<SInt32 *>(M<SInt32>(iVar8 + 0x54) + 8);
+                  piVar3 = (SInt32 *)VCALL(*piVar3, 0x14c)(piVar3,GH_kernel_task,0,1,0,0);
+                  in_cr0 = (piVar3 == (SInt32 *)0x0) << 1;
+                  if (piVar3 != (SInt32 *)0x0) {
+                    iVar8 = VCALL(*piVar3, 0xd0)(piVar3);
+                    iVar8 = uVar4 * 0x20 + iVar8;
+                    M<UInt32>(iVar8 + 0x21c) = 0;
+                    M<UInt32>(iVar8 + 0x210) = 0;
+                    M<UInt32>(iVar8 + 0x220) = 0;
+                    M<UInt32>(iVar8 + 0x218) = 0;
+                  }
+                }
+                VCALL(*piVar3, 0x18)(piVar3);
+              }
+              else if (uVar4 == 0x3d000000) {
+                uVar12 = uVar15 & 0xffffff;
+                if (puVar16[1] == 0x132) {
+                  if (M<UInt8 *>(self + 0x290) != (UInt8 *)0x0) {
+                    ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_volatile_state((eSurfaceVolatileState)puVar16[2]);
+                    goto LAB_00027e70;
+                  }
+                }
+                goto LAB_00027e90;
+              }
+              goto LAB_00027e70;
+            }
+            if (uVar4 != 0x25000000) {
+              if (0x25000000 < uVar4) {
+                if (uVar4 == 0x26000000) {
+                  if ((M<UInt32>(M<SInt32>(self + 0x88) + 0x14) <= puVar16[1]) ||
+                     (iVar8 = M<SInt32>(puVar16[1] * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
+                     iVar8 == 0)) goto LAB_00027e80;
+                  uVar12 = uVar15 & 0xffffff;
+                  M<SInt32>(self + 0x328) = iVar8;
+                }
+                else {
+                  if (uVar4 != 0x27000000) goto LAB_00027e70;
+                  uVar12 = uVar15 & 0xffffff;
+                  M<UInt32>(self + 0x328) = 0;
+                }
+                goto LAB_00027e90;
+              }
+              if (uVar4 != 0x24000000) goto LAB_00027e70;
+            }
+          }
+        }
+        goto LAB_00027ab0;
+      }
+      if (uVar4 != 0xf000000) {
+        if (uVar4 < 0xf000001) {
+          if (uVar4 != 0xa000000) {
+            if (uVar4 < 0xa000001) {
+              if (uVar4 != 0x7000000) {
+                if (uVar4 < 0x7000001) {
+                  if (uVar4 != 0x6000000) {
+LAB_00027e70:
+                    uVar12 = uVar15 & 0xffffff;
+                    goto LAB_00027e90;
+                  }
+                }
+                else if ((uVar4 != 0x8000000) && (uVar4 != 0x9000000)) goto LAB_00027e70;
+              }
+            }
+            else if (uVar4 != 0xc000000) {
+              if (uVar4 < 0xc000001) {
+                if (uVar4 != 0xb000000) goto LAB_00027e70;
+              }
+              else if ((uVar4 != 0xd000000) && (uVar4 != 0xe000000)) goto LAB_00027e70;
+            }
+          }
+        }
+        else if (uVar4 != 0x14000000) {
+          if (0x14000000 < uVar4) {
+            if (uVar4 == 0x16000000) goto LAB_00027ab0;
+            if (uVar4 < 0x16000001) {
+              if (uVar4 == 0x15000000) goto LAB_00027a00;
+            }
+            else if ((uVar4 == 0x17000000) || (uVar4 == 0x18000000)) goto LAB_00027ab0;
+            goto LAB_00027e70;
+          }
+          if (uVar4 != 0x11000000) {
+            if (uVar4 < 0x11000001) {
+              if (uVar4 != 0x10000000) goto LAB_00027e70;
+            }
+            else if ((uVar4 != 0x12000000) && (uVar4 != 0x13000000)) goto LAB_00027e70;
+          }
+        }
+      }
+LAB_00027a00:
+      pIVar6 = M<UInt8 *>(self + 0x88);
+      if ((puVar16[1] < M<UInt32>(pIVar6 + 0x14)) &&
+         (iVar8 = M<SInt32>(puVar16[1] * 4 + M<SInt32>(pIVar6 + 0x10)), iVar8 != 0)) {
+        iVar14 = (uVar4 + 0xfa000000 >> 0x18) * 4;
+        pVVar7 = M<UInt8 *>(self + iVar14 + 0x2a4);
+        if (pVVar7 != (UInt8 *)0x0) {
+          piVar3 = (SInt32 *)(M<SInt32>(pVVar7 + 0x14) + 0x10);
+          iVar9 = atomicAddReturningOld((SInt32 *)piVar3, -1);
+          if (iVar9 == 1) {
+            ((IOATIR500Shared *)(pIVar6))->delete_texture((VendorTextureBuffer *)pVVar7);
+          }
+        }
+        piVar3 = (SInt32 *)(M<SInt32>(iVar8 + 0x14) + 0x10);
+        atomicAddReturningOld((SInt32 *)piVar3, -0xffff);
+        uVar12 = uVar15 & 0xffffff;
+        M<SInt32>(self + iVar14 + 0x2a4) = iVar8;
+      }
+      else {
+LAB_00027e80:
+        uVar12 = 0;
+      }
+    }
+LAB_00027e90:
+    puVar16 = puVar16 + uVar12;
+    if (uVar12 == 0) {
+      return;
+    }
+  } while( true );
 }

@@ -43,6 +43,7 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
+#include "../Headers/ATIRadeonX1000PPCIntrinsics.h"
 #include <libkern/OSAtomic.h>
 
 /*
@@ -134,7 +135,7 @@ void ATIR500GLContext::get_texture(UInt32 *record, VendorTextureBuffer *texture,
      * (`<libkern/OSAtomic.h>`), the real, idiomatic kext API for this -
      * almost certainly what the genuine shipped kext itself called here.
      */
-    OSAddAtomic(-0xffff, reinterpret_cast<SInt32 *>(mip + 0x10));
+    atomicAddReturningOld(reinterpret_cast<SInt32 *>(mip + 0x10), -0xffff);   /* the shipped code inlines the lwarx/stwcx. loop */
 
     if (*reinterpret_cast<UInt32 *>(tex + 0x48) != 0) {
         UInt8 *prevNode = *reinterpret_cast<UInt8 **>(tex + 0x24);

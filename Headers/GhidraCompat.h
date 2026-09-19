@@ -40,6 +40,7 @@ extern "C" void *memcpy(void *, const void *, unsigned long);
 template <class T> inline void GCopy(T dst, const void *src, UInt32 n) { memcpy((void *)(dst), src, n); }
 inline UInt16 CONCAT11(UInt8 hi, UInt8 lo) { return static_cast<UInt16>((static_cast<UInt16>(hi) << 8) | lo); }
 inline UInt32 CONCAT22(UInt16 hi, UInt16 lo) { return (static_cast<UInt32>(hi) << 16) | lo; }
+#define SUB21(x, n) (static_cast<UInt16>((x) >> (8 * (n))))
 #define SUB41m(x, n) (static_cast<UInt8>((x) >> (8 * (n))))
 
 #endif

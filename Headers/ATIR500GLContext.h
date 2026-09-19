@@ -20,6 +20,7 @@
 
 struct r500_3d_blit_state_packet_struct;
 struct register_tracking_state;
+UInt32 convertIOGLBufferToBufIdx(UInt32 bufferKind, UInt32 *outIndex);   /* real addr 0x26ce0 (free function, C++ linkage) */
 struct r500_zdecompress_restore_add_on_packet_struct;
 
 class ATIR500GLContext : public IOATIR500GLContext {

@@ -95,84 +95,8 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-IOReturn IOATIR500DVDContext::set_surface(UInt32 surfaceID, eIODVDContextModeBits modeBitsEnum, int flagCount) {
-    UInt32 modeBits = static_cast<UInt32>(modeBitsEnum);
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    DVDSetSurface_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));
+/* (re-ported mechanically: see IOATIR500DVDContext_set_surface_Port.cpp) */
 
-    IOReturn result;
-    IOATIR500Surface *targetSurface;
-    bool lookupFailed;
-
-    if (surfaceID == 0) {
-        result = 0;
-        targetSurface = nullptr;
-        lookupFailed = true;
-    } else {
-        targetSurface = reinterpret_cast<IOATIR500Surface *>(accelerator->find_surface_for_id(surfaceID));
-        lookupFailed = (targetSurface == nullptr);
-        result = lookupFailed ? 0xe00002c2 : 0;
-    }
-
-    IOATIR500Surface *oldBoundSurface = reinterpret_cast<IOATIR500Surface *>(boundSurface);
-    if (oldBoundSurface != nullptr) {
-        oldBoundSurface->remove_dvd_context(this);
-        if (targetSurface != oldBoundSurface) {
-            oldBoundSurface->prune_buffers();
-        }
-    }
-
-    if (lookupFailed ||
-        (targetSurface->boundDVDContext != nullptr && this != targetSurface->boundDVDContext)) {
-        boundSurface = nullptr;
-    } else {
-        UInt32 localModeBits = U32At(targetSurface, 0xbe8);
-        if (targetSurface != oldBoundSurface) {
-            targetSurface->reset_req_bits();
-        }
-        if (targetSurface->contextListHeadA == nullptr && targetSurface->contextListHeadB == nullptr) {
-            localModeBits = (localModeBits & 0x803f) | (modeBits & 0xffffbfff);
-        } else {
-            typedef SInt32 (*Fn0x5ac)(void *, UInt32 *, UInt32);
-            void **selfVtable = *reinterpret_cast<void ***>(self);
-            SInt32 renegotiated = (*reinterpret_cast<Fn0x5ac *>(selfVtable + (0x5ac / 4)))(this, &localModeBits, modeBits);
-            if (renegotiated == 0) {
-                if (targetSurface == oldBoundSurface) {
-                    targetSurface->prune_buffers();
-                }
-                boundSurface = nullptr;
-                result = 0xe00002c2;
-                goto sharedTail;
-            }
-        }
-        U32At(targetSurface, 0xbe8) = localModeBits;
-        if (flagCount > 0) {
-            UInt32 bits = U32At(self, 0x88);
-            UInt32 n = 0;
-            do {
-                bits |= 0x400u << (n & 0x3f);
-                n++;
-                flagCount--;
-            } while (flagCount != 0);
-            U32At(self, 0x88) = bits;
-        }
-        targetSurface->set_dvd_context(this);
-        boundSurface = reinterpret_cast<ATIR500Surface *>(targetSurface);
-        targetSurface->prune_buffers();
-    }
-
-sharedTail:
-    if (this == *reinterpret_cast<IOATIR500DVDContext **>(accel + 0x78)) {
-        *reinterpret_cast<IOATIR500DVDContext **>(accel + 0x78) = nullptr;
-    }
-    typedef void (*Fn0x5a8)(void *);
-    void **selfVtable2 = *reinterpret_cast<void ***>(self);
-    (*reinterpret_cast<Fn0x5a8 *>(selfVtable2 + (0x5a8 / 4)))(this);
-
-    DVDSetSurface_mutex_unlock(*reinterpret_cast<void **>(accel + 0x840));
-    return result;
-}
 
 /*
  * set_dvd_context / remove_dvd_context - RESOLVED (issue #42

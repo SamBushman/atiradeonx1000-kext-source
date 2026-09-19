@@ -37,53 +37,8 @@ extern "C" UInt32 GH_ZN8OSSymbol11withCStringEPKc(...) asm("__ZN8OSSymbol11withC
 extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 /* real addr 0x370 */
-IOReturn IOATIR500Accelerator::display_change_handler(OSObject *real_param_1, void *param_2, IOFramebuffer *param_3, SInt32 param_4, void *param_5) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+/* (re-ported mechanically: see IOATIR500Accelerator_display_change_handler_Port.cpp) */
 
-  SInt32 iVar1;
-  
-  ACCEL(real_param_1)->getVRAMDescriptor((UInt32)param_2);
-  switch(param_4) {
-  default:
-    goto LAB_00000500;
-  case 1:
-    goto switchD_000003b0_caseD_1;
-  case 3:
-    if (param_5 != (void *)0x0) {
-      VCALL(M<SInt32>(param_1), 0x5bc)(param_1);
-      return 0;
-    }
-switchD_000003b0_caseD_1:
-    iVar1 = GH_OSIncrementAtomic(param_1 + 200);
-    if (iVar1 == 0) {
-      iVar1 = VCALL(M<SInt32>(param_1), 0x5b4)(param_1,param_4);
-joined_r0x000004a0:
-      if (iVar1 == 0) {
-LAB_00000500:
-        return 0xe00002bc;
-      }
-    }
-    return 0;
-  case 4:
-    if (param_5 != (void *)0x0) {
-      VCALL(M<SInt32>(param_1), 0x5c0)(param_1);
-      return 0;
-    }
-  case 2:
-    iVar1 = GH_OSDecrementAtomic(param_1 + 200);
-    if (iVar1 != 1) {
-      return 0;
-    }
-    iVar1 = VCALL(M<SInt32>(param_1), 0x5b8)(param_1);
-    goto joined_r0x000004a0;
-  case 9:
-    VCALL(M<SInt32>(param_1), 0x5c4)(param_1);
-    return 0;
-  case 10:
-    VCALL(M<SInt32>(param_1), 0x5c8)(param_1);
-    return 0;
-  }
-}
 
 /* real addr 0x550 */
 bool IOATIR500Accelerator::foundFramebuffer(IOFramebuffer *real_param_1) {
@@ -266,83 +221,8 @@ void IOATIR500Accelerator::freeAllDataBuffers() {
 }
 
 /* real addr 0x4a90 */
-void IOATIR500Accelerator::free_gart_wirings() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see IOATIR500Accelerator_free_gart_wirings_Port.cpp) */
 
-  UInt8 IVar1;
-  bool bVar2;
-  SInt32 iVar3;
-  UInt32 uVar4;
-  UInt8 *pIVar5;
-  UInt8 *pIVar6;
-  UInt32 local_38;
-  SInt32 local_34;
-  
-  GH_IOGetTime(&local_38);
-  local_34 = local_34 - M<SInt32>(self + 0x94);
-  if (local_34 < 0) {
-    local_34 = local_34 + 1000000000;
-    local_38 = local_38 - 1;
-  }
-  pIVar6 = M<UInt8 *>(self + 0x6d4);
-  pIVar5 = self + 0x69c;
-  local_38 = local_38 - M<SInt32>(self + 0x90);
-  if (pIVar6 != pIVar5) {
-    bVar2 = false;
-    do {
-      if (M<UInt8 *>(pIVar6 + 0x34) != pIVar5) {
-        GH_IOPanic("transfer buffer poorly linked\n");
-      }
-      if (M<SInt32>(pIVar6 + 4) == 0) {
-        GH_IOPanic("transfer on list but not in GART");
-      }
-      if (M<UInt16>(pIVar6 + 0xc) == 4) {
-        IVar1 = pIVar6[0x20];
-        if ((IVar1 == 0x3) || (IVar1 == 0x7)) {
-          uVar4 = M<UInt32>(M<SInt32>(pIVar6 + 0x14) + 0xc);
-        }
-        else {
-          if (((IVar1 != 0x4) && (IVar1 != 0x2)) &&
-             (IVar1 != 0x5)) {
-            return;
-          }
-          uVar4 = M<UInt32>(M<SInt32>(pIVar6 + 0x14) + 8);
-        }
-        iVar3 = VCALL(M<SInt32>(self), 0x554)(self,uVar4);
-        if (iVar3 == 0) {
-          self[0x89] = 0x1;
-          return;
-        }
-        if (M<SInt16>(pIVar6 + 0xe) != 0) {
-          return;
-        }
-        if ((local_38 < M<UInt32>(pIVar6 + 0x2c)) ||
-           ((local_38 <= M<UInt32>(pIVar6 + 0x2c) && (0 < M<SInt32>(pIVar6 + 0x30) - local_34)))) {
-          self[0x89] = 0x1;
-          return;
-        }
-        if (pIVar6[0x20] == 0x4) {
-          M<UInt8>(M<SInt32>(pIVar6 + 0x14) + 0x14) = 1;
-        }
-        if (bVar2) {
-          GH_thread_block(0);
-        }
-        bVar2 = true;
-        if (M<SInt32>(pIVar6 + 4) != 0) {
-          VCALL(M<SInt32>(self), 0x5ac)(self,pIVar6);
-        }
-      }
-      else if (M<UInt16>(pIVar6 + 0xc) < 5) {
-        GH_IOPanic("non texture transfer buffer found in gart garbage collection list\n");
-      }
-      else {
-        GH_IOPanic("vendor private transfer buffer found in gart garbage collection list\n");
-      }
-      pIVar6 = M<UInt8 *>(self + 0x6d4);
-    } while (pIVar6 != pIVar5);
-  }
-  return;
-}
 
 /* real addr 0x4f20 */
 bool IOATIR500Accelerator::mapVendorTransferBuffer(VendorTransferBuffer *real_param_1) {

@@ -29,7 +29,7 @@ KEXT_ID=${KEXT_ID:-com.apple.ATIRadeonX1000}
 KEXT_VERSION=${KEXT_VERSION:-4.1.9}
 KFW=/System/Library/Frameworks/Kernel.framework/Headers
 GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
-COMMON="-arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW -w"
+COMMON="$OPT -arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW -w"
 CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0 -Dstatic_assert(a,b)="
 
 rm -rf "$OUT"; mkdir -p "$OUT/obj"

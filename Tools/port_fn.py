@@ -76,6 +76,8 @@ for row in spec:
             cmd += ['--fun', o[4:]]
         elif o.startswith('sym:'):
             cmd += ['--sym', o[4:]]
+        elif o == 'exact':
+            cmd += ['--exact-types']
         elif o.startswith('asic:'):
             cmd += ['--asic', o[5:]]
         elif o.startswith('cast:'):

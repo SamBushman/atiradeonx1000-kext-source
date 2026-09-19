@@ -244,30 +244,8 @@ bool IOATIR500Accelerator::freeToAllocGART(IOATIR5002DContext *exclude2D, IOATIR
     return freeWaitToAllocGART(exclude2D, excludeDVD, excludeGL, excludeSurface, excludeShared, needed, true);
 }
 
-bool IOATIR500Shared::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Accelerator *accel = *reinterpret_cast<IOATIR500Accelerator **>(self + 0xc);
+/* (re-ported mechanically: see IOATIR500Shared_freeToAllocGART_Port.cpp) */
 
-    for (UInt8 *tex = reinterpret_cast<UInt8 *>(U32At(self, 0x24)); tex != nullptr;
-         tex = reinterpret_cast<UInt8 *>(U32At(tex, 0x3c))) {
-        UInt8 kind = U8At(tex, 0x20);
-        if (kind == 4) {
-            UInt8 *clientShared = reinterpret_cast<UInt8 *>(U32At(tex, 0x14));
-            clientShared[0x14] = 1;
-            if (accel->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(tex), needed,
-                                                U32At(clientShared, 8), aggressive)) {
-                return true;
-            }
-        } else if (kind == 7 || kind == 3) {
-            UInt8 *clientShared = reinterpret_cast<UInt8 *>(U32At(tex, 0x14));
-            if (accel->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(tex), needed,
-                                                U32At(clientShared, 0xc), aggressive)) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

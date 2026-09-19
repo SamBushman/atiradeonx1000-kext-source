@@ -106,20 +106,5 @@ void IOATIR500Surface::flush_surface(UInt32 formatMask, UInt32 flushArg) {
     U32At(accel, 0x78) = 0;
 }
 
-IOReturn IOATIR500Surface::set_surface_blocking(UInt32 blockingMode) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xd50);
-    void *surfaceLock = *reinterpret_cast<void **>(self + 0xc04);
+/* (re-ported mechanically: see IOATIR500Surface_set_surface_blocking_Port.cpp) */
 
-    SurfFlushBlk_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    SurfFlushBlk_mutex_lock(surfaceLock);
-
-    U8At(self, 0xbf6) = (blockingMode != 0) ? 1 : 0;
-    if (blockingMode == 0) {
-        SurfFlushBlk_IOLockSleep(surfaceLock, this, 0);
-    }
-
-    SurfFlushBlk_mutex_unlock(surfaceLock);
-    SurfFlushBlk_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50)) + 0x840));
-    return 0;
-}

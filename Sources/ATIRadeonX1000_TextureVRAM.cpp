@@ -71,67 +71,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 discriminant = U32At(tex, 0x20);
-    UInt32 requestedSize;
+/* (re-ported mechanically: see ATIRadeonX1000_allocate_texture_Port.cpp) */
 
-    if (discriminant != 3 && discriminant != 7) {
-        if (discriminant == 8) {
-            return 0; /* real: type 8 never allocates VRAM here */
-        }
-        requestedSize = 0;
-    } else {
-        requestedSize = U32At(tex, 0x50);
-    }
-
-    ATIR500Memory *pool = *reinterpret_cast<ATIR500Memory **>(self + 0x7c);
-    UInt32 used = U32At(self, 0x84c);
-    /* real: set only when arriving at the fallback allocation below via the "overflow alloc
-     * itself failed" path (real goto LAB_0001a980) - that path always uses the (0, used)
-     * variant regardless of this+0xd0, skipping the check every OTHER path into the fallback
-     * performs. Transcribed with this flag rather than restructuring, to avoid silently
-     * merging two real, distinct control-flow paths into one. */
-    bool skipD0Check = false;
-
-    if (used != U32At(self, 0x9c)) {
-        /* real: AGP-overflow-first path, gated on a real check through texture's own
-         * memoryDescriptor (a real Apple IOMemoryDescriptor, RESOLVED issue #20/#24) at texture+8 */
-        typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
-        void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
-        void *piVar2 = (*reinterpret_cast<PrepareMappingFn *>(*reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-            memoryDescriptor, kernelTaskRef, 0, 1, 0, 0);
-        if (piVar2 != nullptr) {
-            typedef UInt32 *(*GetHwInfoFn)(void *);
-            UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(piVar2) + (0xd0 / 4)))(piVar2);
-            UInt32 flags = U32At(hwInfo, 0x20);
-            typedef void (*ReleaseFn)(void *);
-            (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(piVar2) + (0x18 / 4)))(piVar2);
-            used = U32At(self, 0x84c);
-            if (((flags ^ 0x40000000u) >> 0x1e & 1) == 0) {
-                UInt32 overflowResult = pool->alloc(reinterpret_cast<GLKMemoryElement *>(tex + 0x40), requestedSize, 0x1000,
-                                                     used, U32At(self, 0x9c) - used);
-                if (overflowResult != 0) {
-                    return 1; /* real: falls straight through to success, skipping the fallback entirely */
-                }
-                used = U32At(self, 0x84c);
-                skipD0Check = true;
-            }
-        } else {
-            used = U32At(self, 0x84c);
-        }
-    }
-
-    UInt32 fallbackResult;
-    if (skipD0Check || U32At(self, 0xd0) != 0) {
-        fallbackResult = pool->alloc(reinterpret_cast<GLKMemoryElement *>(tex + 0x40), requestedSize, 0x1000, 0, used);
-    } else {
-        fallbackResult = pool->alloc(reinterpret_cast<GLKMemoryElement *>(tex + 0x40), requestedSize, 0x1000, 0x10000, used - 0x10000);
-    }
-    if (fallbackResult == 0) return 0;
-    return 1;
-}
 
 void ATIRadeonX1000::deallocate_texture(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

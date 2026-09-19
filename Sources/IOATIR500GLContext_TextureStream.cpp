@@ -87,53 +87,8 @@ void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture
  * list at +0x6d0/+0x69c - the same list get_data_buffer/purge_texture
  * already use).
  */
-void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
-    UInt32 kind = U32At(texture, 0x20);
+/* (re-ported mechanically: see IOATIR500GLContext_add_texture_to_stream_Port.cpp) */
 
-    if (kind == 6) {
-        void *sub = reinterpret_cast<void *>(U32At(texture, 0x54));
-        void *rec = reinterpret_cast<void *>(U32At(texture, 0x14));
-        void *subRec = reinterpret_cast<void *>(U32At(sub, 0x14));
-        S16At(sub, 0xe) += 1;
-        U8At(rec, 0x14) |= U8At(subRec, 0x14);
-
-        if (U32At(sub, 4) != 0) {
-            /* FUN_00007424(sub + 0x2c) - RESOLVED, issue #15 (live
-             * kxld-resolved memory read on real G5/Tiger hardware): the
-             * real target is `IOGetTime`, NOT a list-unlink/lock helper
-             * as previously guessed - stamps the current time into the
-             * node's own +0x2c field, same real correction as
-             * FUN_0002a864/FUN_000334cc/FUN_00029da8/FUN_0003913c
-             * elsewhere in this project - see
-             * Headers/ATIRadeonX1000Registers.h. */
-            void *accel = accelerator;
-            UInt32 oldPrev = U32At(sub, 0x34);
-            UInt32 oldNext = U32At(sub, 0x38);
-            U32At(reinterpret_cast<void *>(oldPrev), 0x38) = oldNext;
-            U32At(reinterpret_cast<void *>(oldNext), 0x34) = oldPrev;
-
-            U32At(sub, 0x34) = U32At(accel, 0x6d0);
-            U32At(sub, 0x38) = reinterpret_cast<UInt32>(reinterpret_cast<UInt8 *>(accel) + 0x69c);
-            U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(sub);
-            U32At(reinterpret_cast<void *>(U32At(sub, 0x34)), 0x38) = reinterpret_cast<UInt32>(sub);
-        }
-    } else if (kind == 0) {
-        IOATIR500Surface *vtableOwner = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
-        if (vtableOwner != nullptr) {
-            vtableOwner->increment_refcounts(3); /* RESOLVED, issue #18 */
-        }
-    } else if (kind == 1) {
-        VendorTextureBuffer *chained = reinterpret_cast<VendorTextureBuffer *>(U32At(texture, 0x50));
-        if (chained != nullptr) {
-            add_texture_to_stream(chained);
-            void *rec = reinterpret_cast<void *>(U32At(texture, 0x14));
-            void *chainedRec = reinterpret_cast<void *>(U32At(chained, 0x14));
-            U8At(rec, 0x14) |= U8At(chainedRec, 0x14);
-        }
-    } else if (kind == 8 && U32At(texture, 0x48) == 0) {
-        S16At(texture, 0xe) += 1;
-    }
-}
 
 /*
  * map_transfer_to_GART - real kext offset 0x79d0. CORRECTED, issue #23:

@@ -42,41 +42,5 @@ inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(r
  * field. */
 extern "C" void AllocAndLoadImage_IOGetTime(void *timestampField) asm("_IOGetTime");
 
-void ATIR5002DContext::alloc_and_load_image(VendorTextureBuffer *texture) {
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-    UInt8 kind = U8At(tex, 0x20);
+/* (re-ported mechanically: see ATIR5002DContext_alloc_and_load_image_Port.cpp) */
 
-    if (kind == 3 || kind == 4) {
-        bool mapped = (U32At(tex, 4) != 0);
-        if (!mapped) {
-            map_transfer_to_GART(reinterpret_cast<VendorTransferBuffer *>(texture));
-            mapped = (U32At(tex, 4) != 0);
-        }
-        if (mapped) {
-            AllocAndLoadImage_IOGetTime(tex + 0x2c);
-
-            UInt8 *oldPrev = reinterpret_cast<UInt8 *>(U32At(tex, 0x34));
-            UInt8 *oldNext = reinterpret_cast<UInt8 *>(U32At(tex, 0x38));
-            U32At(oldPrev, 0x38) = reinterpret_cast<UInt32>(oldNext);
-            U32At(oldNext, 0x34) = reinterpret_cast<UInt32>(oldPrev);
-
-            UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-            U32At(tex, 0x34) = U32At(accel, 0x6d0);
-            U32At(tex, 0x38) = reinterpret_cast<UInt32>(accel + 0x69c);
-            U32At(accel, 0x6d0) = reinterpret_cast<UInt32>(tex);
-            U32At(reinterpret_cast<void *>(U32At(tex, 0x34)), 0x38) = reinterpret_cast<UInt32>(tex);
-        }
-
-        if (kind == 3) {
-            if (U32At(tex, 0x48) == 0 &&
-                accelerator->allocate_texture(texture) == 0 &&
-                accelerator->freeToAllocTextureVRAM(boundSurface, &lastBoundTexture, 1, texture) == 0) {
-                return;
-            }
-        }
-    } else {
-        return;
-    }
-
-    U8At(reinterpret_cast<void *>(U32At(tex, 0x14)), 0x14) = 0;
-}

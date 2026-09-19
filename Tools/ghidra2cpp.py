@@ -28,10 +28,19 @@ ap.add_argument('--class', dest='cls', default='')
 ap.add_argument('--fun', action='append', default=[])
 ap.add_argument('--sym', action='append', default=[])
 ap.add_argument('--keep-header', action='store_true')
+ap.add_argument('--exact-types', action='store_true', help='Ghidra uint -> unsigned int, int -> int (they mangle differently from UInt32/SInt32 = unsigned long/long here)')
 ap.add_argument('--asic', default='', help='comma list: replacements for successive `_ASICSupportsAGP` occurrences (Ghidra labels every zero-immediate data reloc that way)')
 args = ap.parse_args()
 
+# PPC lwarx/stwcx. loops: Ghidra prints them as a do/while around storeWordConditionalIndexed - rewrite to the intrinsic
+_A = re.compile(r"do \{\s*(?P<x>\w+) = \*(?P<p>\w+);\s*if \(in_RESERVE != '\\0'\) \{\s*(?P<y>\w+) = storeWordConditionalIndexed\((?P=x) \+ (?P<k>-?(?:0x[0-9a-f]+|\d+)),0,(?P=p)\);\s*\*(?P=p) = (?P=y);\s*in_cr0 = 2;\s*\}\s*\} while \(!\(bool\)\(in_cr0 >> 1 & 1\)\);")
+_B = re.compile(r"do \{\s*if \(in_RESERVE != '\\0'\) \{\s*(?P<y>\w+) = storeWordConditionalIndexed\(\*(?P<p>\w+) \+ (?P<k>-?(?:0x[0-9a-f]+|\d+)),0,(?P=p)\);\s*\*(?P=p) = (?P=y);\s*in_cr0 = 2;\s*\}\s*\} while \(!\(bool\)\(in_cr0 >> 1 & 1\)\);")
+def _atom_a(m): return '%s = atomicAddReturningOld((SInt32 *)%s, %s);' % (m.group('x'), m.group('p'), m.group('k'))
+def _atom_b(m): return 'atomicAddReturningOld((SInt32 *)%s, %s);' % (m.group('p'), m.group('k'))
 text = open(args.src).read()
+text = _A.sub(_atom_a, text)
+text = _B.sub(_atom_b, text)
+assert 'storeWordConditionalIndexed' not in text, 'unhandled lwarx/stwcx. idiom in ' + args.src
 # strip comments and the dump header
 text = re.sub(r'/\*.*?\*/', '', text, flags=re.S)
 text = '\n'.join(l for l in text.split('\n') if not l.startswith('//'))
@@ -152,7 +161,7 @@ def conv_mem(s):
         pos = m.start() + 2
 
 # 3. qualified member calls  Class::m(obj, rest)  and unqualified own-class calls
-CLASSES = set('OSObject IOService IOFramebuffer IOMemoryDescriptor IOInterruptEventSource IOTimerEventSource IOWorkLoop OSDictionary OSSerialize IOMemoryMap OSSymbol OSString OSNumber OSData IOBufferMemoryDescriptor IOEventSource IOCommandGate IOPCIDevice IORegistryEntry IOUserClient IOTextureBuffer VendorCommandBuffer VendorTextureBuffer ATIR500Memory pcl_ParamsR500_t _HZDATA ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
+CLASSES = set('ATIR500SurfaceBuffer ATITextureBufferHeader IOAccelSurfaceReadData sIOGLNewTextureData sIOGLNewTextureReturnData GLKMemoryElement OSObject IOService IOFramebuffer IOMemoryDescriptor IOInterruptEventSource IOTimerEventSource IOWorkLoop OSDictionary OSSerialize IOMemoryMap OSSymbol OSString OSNumber OSData IOBufferMemoryDescriptor IOEventSource IOCommandGate IOPCIDevice IORegistryEntry IOUserClient IOTextureBuffer VendorCommandBuffer VendorTextureBuffer ATIR500Memory pcl_ParamsR500_t _HZDATA ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
 def conv_calls(s):
     pat = re.compile(r'\b(' + '|'.join(sorted(CLASSES, key=len, reverse=True)) + r')::(\w+)\(')
     pos = 0
@@ -212,9 +221,11 @@ body = conv_calls(body)
 body = conv_mem(body)
 # primitive type names in declarations and casts
 def prim(m):
+    if args.exact_types and m.group(0) == 'uint': return 'unsigned int'
     return PRIM[m.group(0)]
 body = re.sub(r'\b(undefined8|undefined3|undefined4|undefined2|undefined1|undefined|uint|ushort|ulong|byte|longlong|ulonglong|uchar)\b', prim, body)
-body = re.sub(r'(?<![\w])int(?![\w])(?!\s*\()', 'SInt32', body)            # int -> SInt32 (not `int(`)
+if not args.exact_types:
+    body = re.sub(r'(?<![\w])int(?![\w])(?!\s*\()', 'SInt32', body)            # int -> SInt32 (not `int(`)
 body = re.sub(r'(?<![\w])short(?![\w])', 'SInt16', body)
 # the decompile's `this`
 body = re.sub(r'(?<![\w])' + re.escape(args.selfname) + r'(?![\w])', 'self', body)
@@ -226,7 +237,8 @@ def fstore(m):
     return '%s= FBITS(%s);' % (lhs, rhs)
 body = re.sub(r'([^\n;{}=<>!]*?(?:\[[^\]]*\]|M<[^;=]*?>\([^;=]*?\)|\*\w+))\s*=\s*(\(float\)[^;]*);', lambda m: m.group(1) + ' = FBITS(' + m.group(2) + ');', body)
 for dat in ('d2d8', 'd2dc', 'd2e0', 'd2e4'):
-    body = re.sub(r'M<UInt32>\(&DAT_0004%s \+ ' % dat, 'FormatTableLookup_0x0004%s(' % dat, body)
+    body = re.sub(r'M<(?:UInt32|unsigned int)>\(&DAT_0004%s \+ ' % dat, 'FormatTableLookup_0x0004%s(' % dat, body)
 body = re.sub(r'CONCAT31\(in_register_\w+,\s*(\w+)\)', r'((UInt32)\1)', body)
 body = body.replace('CONCAT44(', 'CONCAT44d(').replace('SUB41(', 'SUB41m(')
+body = re.sub(r'(LAB_\w+:)(\s*\})', r'\1 ;\2', body)   # a label must be followed by a statement
 sys.stdout.write(body)

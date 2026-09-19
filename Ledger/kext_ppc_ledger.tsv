@@ -946,12 +946,12 @@
 00019e30	80	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C2Ev
 00019e80	16	stub	n/a	FUN_00019e80	
 00019e90	16	stub	n/a	FUN_00019e90	
-00019ea0	108	method	MISSING	ATIRadeonX1000::getPeriodValue	__ZN14ATIRadeonX100014getPeriodValueEPc
+00019ea0	108	method	DONE	ATIRadeonX1000::getPeriodValue	__ZN14ATIRadeonX100014getPeriodValueEPc
 00019f14	16	stub	n/a	FUN_00019f14	
 00019f30	112	method	DONE	ATIRadeonX1000::enable_GPUSensor	__ZN14ATIRadeonX100016enable_GPUSensorEv
-00019fa0	44	method	MISSING	ATIRadeonX1000::free	__ZN14ATIRadeonX10004freeEv
+00019fa0	44	method	DONE	ATIRadeonX1000::free	__ZN14ATIRadeonX10004freeEv
 00019fd0	104	method	DONE	ATIRadeonX1000::disable_GPUSensor	__ZN14ATIRadeonX100017disable_GPUSensorEv
-0001a040	200	method	MISSING	ATIRadeonX1000::callPlatformFunction	__ZN14ATIRadeonX100020callPlatformFunctionEPK8OSSymbolbPvS3_S3_S3_
+0001a040	200	method	DONE	ATIRadeonX1000::callPlatformFunction	__ZN14ATIRadeonX100020callPlatformFunctionEPK8OSSymbolbPvS3_S3_S3_
 0001a118	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
 0001a128	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
 0001a140	68	method	DONE	ATIRadeonX1000::new_surface	__ZN14ATIRadeonX100011new_surfaceEv
@@ -966,37 +966,37 @@
 0001a290	68	method	DONE	ATIRadeonX1000::new_dvd_context	__ZN14ATIRadeonX100015new_dvd_contextEv
 0001a2d4	16	stub	n/a	ATIR500DVDContext::ATIR500DVDContext	
 0001a2e4	16	stub	n/a	FUN_0001a2e4	
-0001a300	156	method	MISSING	ATIRadeonX1000::writePerformanceStats	__ZN14ATIRadeonX100021writePerformanceStatsEP12OSDictionary
+0001a300	156	method	DONE	ATIRadeonX1000::writePerformanceStats	__ZN14ATIRadeonX100021writePerformanceStatsEP12OSDictionary
 0001a39c	16	stub	n/a	FUN_0001a39c	
 0001a3ac	16	stub	n/a	ATIR500Memory::total_free	
-0001a3c0	44	method	MISSING	ATIRadeonX1000::configureAGP	__ZN14ATIRadeonX100012configureAGPEP9IOService
-0001a3f0	44	method	MISSING	ATIRadeonX1000::teardownAGP	__ZN14ATIRadeonX100011teardownAGPEP9IOService
-0001a420	44	method	MISSING	ATIRadeonX1000::commitAGPMemory	__ZN14ATIRadeonX100015commitAGPMemoryEP18IOMemoryDescriptormm
-0001a450	44	method	MISSING	ATIRadeonX1000::releaseAGPMemory	__ZN14ATIRadeonX100016releaseAGPMemoryEP18IOMemoryDescriptormm
+0001a3c0	44	method	DONE	ATIRadeonX1000::configureAGP	__ZN14ATIRadeonX100012configureAGPEP9IOService
+0001a3f0	44	method	DONE	ATIRadeonX1000::teardownAGP	__ZN14ATIRadeonX100011teardownAGPEP9IOService
+0001a420	44	method	DONE	ATIRadeonX1000::commitAGPMemory	__ZN14ATIRadeonX100015commitAGPMemoryEP18IOMemoryDescriptormm
+0001a450	44	method	DONE	ATIRadeonX1000::releaseAGPMemory	__ZN14ATIRadeonX100016releaseAGPMemoryEP18IOMemoryDescriptormm
 0001a480	44	method	DONE	ATIRadeonX1000::addToGART	__ZN14ATIRadeonX10009addToGARTEP18IOMemoryDescriptorPm
-0001a4b0	20	method	MISSING	ATIRadeonX1000::makeGARTEntry	__ZN14ATIRadeonX100013makeGARTEntryEm
+0001a4b0	20	method	DONE	ATIRadeonX1000::makeGARTEntry	__ZN14ATIRadeonX100013makeGARTEntryEm
 0001a4d0	88	method	DONE	ATIRadeonX1000::addTransferToGART	__ZN14ATIRadeonX100017addTransferToGARTEP20VendorTransferBuffer
 0001a530	44	method	DONE	ATIRadeonX1000::removeTransferFromGART	__ZN14ATIRadeonX100022removeTransferFromGARTEP20VendorTransferBuffer
 0001a560	44	method	DONE	ATIRadeonX1000::allocVendorTextureBuffer	__ZN14ATIRadeonX100024allocVendorTextureBufferEm
 0001a590	44	method	DONE	ATIRadeonX1000::releaseVendorTextureBuffer	__ZN14ATIRadeonX100026releaseVendorTextureBufferEP19VendorTextureBufferm
-0001a5c0	44	method	MISSING	ATIRadeonX1000::mapVendorTransferBuffer	__ZN14ATIRadeonX100023mapVendorTransferBufferEP20VendorTransferBuffer
-0001a5f0	44	method	MISSING	ATIRadeonX1000::unmapVendorTransferBuffer	__ZN14ATIRadeonX100025unmapVendorTransferBufferEP20VendorTransferBuffer
+0001a5c0	44	method	DONE	ATIRadeonX1000::mapVendorTransferBuffer	__ZN14ATIRadeonX100023mapVendorTransferBufferEP20VendorTransferBuffer
+0001a5f0	44	method	DONE	ATIRadeonX1000::unmapVendorTransferBuffer	__ZN14ATIRadeonX100025unmapVendorTransferBufferEP20VendorTransferBuffer
 0001a620	420	method	DONE	ATIRadeonX1000::deallocate_texture	__ZN14ATIRadeonX100018deallocate_textureEP19VendorTextureBuffer
 0001a7d0	16	stub	n/a	ATIR500Memory::dealloc	
 0001a7e0	16	stub	n/a	HZMEM_Free	
 0001a7f0	16	stub	n/a	IOATIR500Accelerator::pageOffDataBuffer	
 0001a800	408	method	DONE	ATIRadeonX1000::allocate_texture	__ZN14ATIRadeonX100016allocate_textureEP19VendorTextureBuffer
 0001a9ac	16	stub	n/a	ATIR500Memory::alloc	
-0001a9c0	4	method	MISSING	ATIRadeonX1000::pageOffPCIeGART	__ZN14ATIRadeonX100015pageOffPCIeGARTEv
-0001a9d0	36	method	MISSING	ATIRadeonX1000::SWDSIsRequired	__ZN14ATIRadeonX100014SWDSIsRequiredEv
-0001aa00	168	method	MISSING	ATIRadeonX1000::SWDSEnableCLUT	__ZN14ATIRadeonX100014SWDSEnableCLUTEm
+0001a9c0	4	method	DONE	ATIRadeonX1000::pageOffPCIeGART	__ZN14ATIRadeonX100015pageOffPCIeGARTEv
+0001a9d0	36	method	DONE	ATIRadeonX1000::SWDSIsRequired	__ZN14ATIRadeonX100014SWDSIsRequiredEv
+0001aa00	168	method	DONE	ATIRadeonX1000::SWDSEnableCLUT	__ZN14ATIRadeonX100014SWDSEnableCLUTEm
 0001aaa8	16	stub	n/a	FUN_0001aaa8	
 0001aab8	16	stub	n/a	FUN_0001aab8	
 0001aad0	52	method	DONE	ATIRadeonX1000::tmpAllocVRAM	__ZN14ATIRadeonX100012tmpAllocVRAMEP16GLKMemoryElementmm
 0001ab04	16	stub	n/a	ATIR500Memory::alloc	
 0001ab20	36	method	DONE	ATIRadeonX1000::tmpDeallocVRAM	__ZN14ATIRadeonX100014tmpDeallocVRAMEP16GLKMemoryElement
 0001ab44	16	stub	n/a	ATIR500Memory::dealloc	
-0001ab60	36	method	MISSING	ATIRadeonX1000::tmpTotalVRAM	__ZN14ATIRadeonX100012tmpTotalVRAMEv
+0001ab60	36	method	DONE	ATIRadeonX1000::tmpTotalVRAM	__ZN14ATIRadeonX100012tmpTotalVRAMEv
 0001ab84	16	stub	n/a	ATIR500Memory::total_free	
 0001aba0	8	method	DONE	ATIRadeonX1000::getNumPipes	__ZN14ATIRadeonX100011getNumPipesEv
 0001abb0	8	method	DONE	ATIRadeonX1000::getChipID	__ZN14ATIRadeonX10009getChipIDEv
@@ -1005,7 +1005,7 @@
 0001abe0	1348	method	DONE	store_reg	__Z9store_regP20tracked_register_setmm
 0001b180	344	method	DONE	track_regs_written_by_pm4	__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_
 0001b2ec	16	stub	n/a	store_reg	
-0001b300	8	method	MISSING	ATIRadeonX1000::getAccelCapsBits	__ZN14ATIRadeonX100016getAccelCapsBitsEv
+0001b300	8	method	DONE	ATIRadeonX1000::getAccelCapsBits	__ZN14ATIRadeonX100016getAccelCapsBitsEv
 0001b310	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
 0001b390	16	stub	n/a	ATIRadeonX1000::MetaClass::MetaClass	
 0001b3a0	60	generated	DONE	ATIRadeonX1000::MetaClass::~MetaClass	__ZN14ATIRadeonX10009MetaClassD0Ev
@@ -1015,32 +1015,32 @@
 0001b470	136	method	DONE	DumpPCIeGART	__Z12DumpPCIeGARTPmmm
 0001b514	16	stub	n/a	FUN_0001b514	
 0001b524	16	stub	n/a	FUN_0001b524	
-0001b540	344	method	MISSING	ATIRadeonX1000::removeFromPCIeGART	__ZN14ATIRadeonX100018removeFromPCIeGARTEP18IOMemoryDescriptorm
-0001b6a0	32	method	MISSING	ATIRadeonX1000::removeFromGART	__ZN14ATIRadeonX100014removeFromGARTEP18IOMemoryDescriptorm
+0001b540	344	method	DONE	ATIRadeonX1000::removeFromPCIeGART	__ZN14ATIRadeonX100018removeFromPCIeGARTEP18IOMemoryDescriptorm
+0001b6a0	32	method	DONE	ATIRadeonX1000::removeFromGART	__ZN14ATIRadeonX100014removeFromGARTEP18IOMemoryDescriptorm
 0001b6c0	16	stub	n/a	ATIRadeonX1000::removeFromPCIeGART	
-0001b6d0	252	method	MISSING	ATIRadeonX1000::reserveInGART	__ZN14ATIRadeonX100013reserveInGARTEm
+0001b6d0	252	method	DONE	ATIRadeonX1000::reserveInGART	__ZN14ATIRadeonX100013reserveInGARTEm
 0001b7d8	16	stub	n/a	FUN_0001b7d8	
-0001b7f0	172	method	MISSING	ATIRadeonX1000::clearInGART	__ZN14ATIRadeonX100011clearInGARTEm
+0001b7f0	172	method	DONE	ATIRadeonX1000::clearInGART	__ZN14ATIRadeonX100011clearInGARTEm
 0001b8a0	992	method	DONE	dump_registers	__Z14dump_registersP14ATIRadeonX1000
 0001bc80	16	stub	n/a	FUN_0001bc80	
 0001bc90	16	stub	n/a	FUN_0001bc90	
 0001bca0	116	method	DONE	ATIRadeonX1000::submit_empty_buffer	__ZN14ATIRadeonX100019submit_empty_bufferEv
-0001bd20	988	method	MISSING	ATIRadeonX1000::setupR520Pipes	__ZN14ATIRadeonX100014setupR520PipesEv
+0001bd20	988	method	DONE	ATIRadeonX1000::setupR520Pipes	__ZN14ATIRadeonX100014setupR520PipesEv
 0001c104	16	stub	n/a	FUN_0001c104	
-0001c120	2384	method	MISSING	ATIRadeonX1000::set_display_mode_and_vram	__ZN14ATIRadeonX100025set_display_mode_and_vramEv
+0001c120	2384	method	DONE	ATIRadeonX1000::set_display_mode_and_vram	__ZN14ATIRadeonX100025set_display_mode_and_vramEv
 0001caac	16	stub	n/a	FUN_0001caac	
 0001cabc	16	stub	n/a	FUN_0001cabc	
 0001cacc	16	stub	n/a	ATIR500Memory::reserve	
 0001cadc	16	stub	n/a	ATIR500Memory::init_pool	
 0001caec	16	stub	n/a	ATIR500Memory::init_pool	
-0001cb00	524	method	MISSING	ATIRadeonX1000::stop_promo4_engine	__ZN14ATIRadeonX100018stop_promo4_engineEv
+0001cb00	524	method	DONE	ATIRadeonX1000::stop_promo4_engine	__ZN14ATIRadeonX100018stop_promo4_engineEv
 0001cd14	16	stub	n/a	FUN_0001cd14	
-0001cd30	88	method	MISSING	ATIRadeonX1000::load_promo4_micro_code	__ZN14ATIRadeonX100022load_promo4_micro_codeEv
-0001cd90	428	method	MISSING	ATIRadeonX1000::start_promo4_engine	__ZN14ATIRadeonX100019start_promo4_engineEm
+0001cd30	88	method	DONE	ATIRadeonX1000::load_promo4_micro_code	__ZN14ATIRadeonX100022load_promo4_micro_codeEv
+0001cd90	428	method	DONE	ATIRadeonX1000::start_promo4_engine	__ZN14ATIRadeonX100019start_promo4_engineEm
 0001cf44	16	stub	n/a	FUN_0001cf44	
 0001cf54	16	stub	n/a	ATIRadeonX1000::load_promo4_micro_code	
-0001cf70	928	method	MISSING	ATIRadeonX1000::setup_R500_internal_space	__ZN14ATIRadeonX100025setup_R500_internal_spaceEv
-0001d350	284	method	MISSING	ATIRadeonX1000::SWDSShutdown	__ZN14ATIRadeonX100012SWDSShutdownEv
+0001cf70	928	method	DONE	ATIRadeonX1000::setup_R500_internal_space	__ZN14ATIRadeonX100025setup_R500_internal_spaceEv
+0001d350	284	method	DONE	ATIRadeonX1000::SWDSShutdown	__ZN14ATIRadeonX100012SWDSShutdownEv
 0001d470	16	stub	n/a	ATIR500Memory::dealloc	
 0001d480	844	method	DONE	ATIRadeonX1000::DumpASICHangState	__ZN14ATIRadeonX100017DumpASICHangStateEv
 0001d7cc	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
@@ -1049,25 +1049,25 @@
 0001d7fc	16	stub	n/a	FUN_0001d7fc	
 0001d80c	16	stub	n/a	FUN_0001d80c	
 0001d81c	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
-0001d830	920	method	MISSING	ATIRadeonX1000::startupPCIeGART	__ZN14ATIRadeonX100015startupPCIeGARTEv
+0001d830	920	method	DONE	ATIRadeonX1000::startupPCIeGART	__ZN14ATIRadeonX100015startupPCIeGARTEv
 0001dbd4	16	stub	n/a	FUN_0001dbd4	
 0001dbe4	16	stub	n/a	FUN_0001dbe4	
 0001dbf4	16	stub	n/a	FUN_0001dbf4	
-0001dc10	164	method	MISSING	ATIRadeonX1000::shutdownPCIeGART	__ZN14ATIRadeonX100016shutdownPCIeGARTEv
+0001dc10	164	method	DONE	ATIRadeonX1000::shutdownPCIeGART	__ZN14ATIRadeonX100016shutdownPCIeGARTEv
 0001dcb4	16	stub	n/a	ATIR500Memory::dealloc	
-0001dcd0	168	method	MISSING	ATIRadeonX1000::pageOnPCIeGART	__ZN14ATIRadeonX100014pageOnPCIeGARTEv
-0001dd80	576	method	MISSING	ATIRadeonX1000::addToPCIeGART	__ZN14ATIRadeonX100013addToPCIeGARTEP18IOMemoryDescriptorPmmm
-0001dfd0	32	method	MISSING	ATIRadeonX1000::addToMinMaxGART	__ZN14ATIRadeonX100015addToMinMaxGARTEP18IOMemoryDescriptorPmmm
+0001dcd0	168	method	DONE	ATIRadeonX1000::pageOnPCIeGART	__ZN14ATIRadeonX100014pageOnPCIeGARTEv
+0001dd80	576	method	DONE	ATIRadeonX1000::addToPCIeGART	__ZN14ATIRadeonX100013addToPCIeGARTEP18IOMemoryDescriptorPmmm
+0001dfd0	32	method	DONE	ATIRadeonX1000::addToMinMaxGART	__ZN14ATIRadeonX100015addToMinMaxGARTEP18IOMemoryDescriptorPmmm
 0001dff0	16	stub	n/a	ATIRadeonX1000::addToPCIeGART	
-0001e000	40	method	MISSING	ATIRadeonX1000::noop_buffer	__ZN14ATIRadeonX100011noop_bufferEPm
-0001e030	48	method	MISSING	ATIRadeonX1000::checkForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029checkForConsumedIDCTTimeStampEm
-0001e060	48	method	MISSING	ATIRadeonX1000::checkForRetiredTimeStamp	__ZN14ATIRadeonX100024checkForRetiredTimeStampEm
-0001e090	48	method	MISSING	ATIRadeonX1000::checkForTimeStamp	__ZN14ATIRadeonX100017checkForTimeStampEm
-0001e0c0	56	method	MISSING	ATIRadeonX1000::initialize_GUI	__ZN14ATIRadeonX100014initialize_GUIEv
-0001e100	232	method	MISSING	ATIRadeonX1000::GPUSensorFunc	__ZN14ATIRadeonX100013GPUSensorFuncEP8OSObjectP18IOTimerEventSource
+0001e000	40	method	DONE	ATIRadeonX1000::noop_buffer	__ZN14ATIRadeonX100011noop_bufferEPm
+0001e030	48	method	DONE	ATIRadeonX1000::checkForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029checkForConsumedIDCTTimeStampEm
+0001e060	48	method	DONE	ATIRadeonX1000::checkForRetiredTimeStamp	__ZN14ATIRadeonX100024checkForRetiredTimeStampEm
+0001e090	48	method	DONE	ATIRadeonX1000::checkForTimeStamp	__ZN14ATIRadeonX100017checkForTimeStampEm
+0001e0c0	56	method	DONE	ATIRadeonX1000::initialize_GUI	__ZN14ATIRadeonX100014initialize_GUIEv
+0001e100	232	method	DONE	ATIRadeonX1000::GPUSensorFunc	__ZN14ATIRadeonX100013GPUSensorFuncEP8OSObjectP18IOTimerEventSource
 0001e1e8	16	stub	n/a	FUN_0001e1e8	
 0001e1f8	16	stub	n/a	FUN_0001e1f8	
-0001e210	204	method	MISSING	ATIRadeonX1000::system_did_change_speed	__ZN14ATIRadeonX100023system_did_change_speedEv
+0001e210	204	method	DONE	ATIRadeonX1000::system_did_change_speed	__ZN14ATIRadeonX100023system_did_change_speedEv
 0001e2dc	16	stub	n/a	FUN_0001e2dc	
 0001e2ec	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
 0001e2fc	16	stub	n/a	ATIRadeonX1000::getPeriodValue	
@@ -1080,13 +1080,13 @@
 0001f010	16	stub	n/a	ATIRadeonX1000::DumpASICHangState	
 0001f020	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
 0001f030	420	method	DONE	ATIRadeonX1000::submit_ring_data	__ZN14ATIRadeonX100016submit_ring_dataEv
-0001f1e0	376	method	MISSING	ATIRadeonX1000::system_will_change_speed	__ZN14ATIRadeonX100024system_will_change_speedEv
+0001f1e0	376	method	DONE	ATIRadeonX1000::system_will_change_speed	__ZN14ATIRadeonX100024system_will_change_speedEv
 0001f364	16	stub	n/a	FUN_0001f364	
 0001f374	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
 0001f384	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
 0001f394	16	stub	n/a	FUN_0001f394	
 0001f3a4	16	stub	n/a	FUN_0001f3a4	
-0001f3c0	764	method	MISSING	ATIRadeonX1000::initialize_hardware	__ZN14ATIRadeonX100019initialize_hardwareEv
+0001f3c0	764	method	DONE	ATIRadeonX1000::initialize_hardware	__ZN14ATIRadeonX100019initialize_hardwareEv
 0001f6c8	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
 0001f6d8	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
 0001f6e8	16	stub	n/a	FUN_0001f6e8	
@@ -1095,7 +1095,7 @@
 0001f718	16	stub	n/a	ATIRadeonX1000::initialize_GUI	
 0001f728	16	stub	n/a	ATIRadeonX1000::setup_R500_internal_space	
 0001f738	16	stub	n/a	ATIRadeonX1000::setupR520Pipes	
-0001f750	3692	method	MISSING	ATIRadeonX1000::start	__ZN14ATIRadeonX10005startEP9IOService
+0001f750	3692	method	DONE	ATIRadeonX1000::start	__ZN14ATIRadeonX10005startEP9IOService
 000205d8	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
 000205e8	16	stub	n/a	ATIRadeonX1000::getPeriodValue	
 000205f8	16	stub	n/a	FUN_000205f8	
@@ -1114,7 +1114,7 @@
 000206c8	16	stub	n/a	FUN_000206c8	
 000206d8	16	stub	n/a	FUN_000206d8	
 000206e8	16	stub	n/a	ATIR500Memory::init_pool	
-00020700	572	method	MISSING	ATIRadeonX1000::submit_buffer_retired	__ZN14ATIRadeonX100021submit_buffer_retiredEPmmm
+00020700	572	method	DONE	ATIRadeonX1000::submit_buffer_retired	__ZN14ATIRadeonX100021submit_buffer_retiredEPmmm
 00020944	16	stub	n/a	ATIRadeonX1000::DumpASICHangState	
 00020954	16	stub	n/a	FUN_00020954	
 00020964	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
@@ -1124,7 +1124,7 @@
 00020ca4	16	stub	n/a	ATIRadeonX1000::submit_ring_data	
 00020cb4	16	stub	n/a	ATIRadeonX1000::submit_empty_buffer	
 00020cc4	16	stub	n/a	FUN_00020cc4	
-00020ce0	56	method	MISSING	ATIRadeonX1000::submit_commands	__ZN14ATIRadeonX100015submit_commandsEP23VendorCommandDescriptor
+00020ce0	56	method	DONE	ATIRadeonX1000::submit_commands	__ZN14ATIRadeonX100015submit_commandsEP23VendorCommandDescriptor
 00020d18	16	stub	n/a	ATIRadeonX1000::submit_buffer	
 00020d30	872	method	DONE	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	__ZN14ATIRadeonX100036prepare_texture_for_pageoff_with_cpuEP19VendorTextureBufferP22ATITextureBufferHeader
 00021098	16	stub	n/a	ATIR500Memory::dealloc	
@@ -1145,20 +1145,20 @@
 00021e1c	16	stub	n/a	ATIRadeonX1000::pageoff_linear_buffer	
 00021e30	5260	method	DONE	pcl_CopyPix	__Z11pcl_CopyPixPmP16pcl_ParamsR500_tbb
 00023308	16	stub	n/a	FUN_00023308	
-00023320	4040	method	MISSING	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	__ZN14ATIRadeonX100021SWDSWriteBlitToCmdBufEPmmbm
+00023320	4040	method	DONE	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	__ZN14ATIRadeonX100021SWDSWriteBlitToCmdBufEPmmbm
 0002431c	16	stub	n/a	FUN_0002431c	
 0002432c	16	stub	n/a	pcl_CopyPix	
-00024340	708	method	MISSING	ATIRadeonX1000::SWDSFunc	__ZN14ATIRadeonX10008SWDSFuncEP8OSObjectP18IOTimerEventSource
+00024340	708	method	DONE	ATIRadeonX1000::SWDSFunc	__ZN14ATIRadeonX10008SWDSFuncEP8OSObjectP18IOTimerEventSource
 00024628	16	stub	n/a	FUN_00024628	
 00024638	16	stub	n/a	ATIRadeonX1000::submit_buffer	
 00024648	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
 00024658	16	stub	n/a	FUN_00024658	
-00024670	1884	method	MISSING	ATIRadeonX1000::SWDSInit	__ZN14ATIRadeonX10008SWDSInitEv
+00024670	1884	method	DONE	ATIRadeonX1000::SWDSInit	__ZN14ATIRadeonX10008SWDSInitEv
 00024df8	16	stub	n/a	ATIR500Memory::dealloc	
 00024e08	16	stub	n/a	ATIRadeonX1000::submit_buffer	
 00024e18	16	stub	n/a	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	
 00024e28	16	stub	n/a	ATIR500Memory::reserve	
-00024e40	376	method	MISSING	ATIRadeonX1000::display_mode_did_change	__ZN14ATIRadeonX100023display_mode_did_changeEv
+00024e40	376	method	DONE	ATIRadeonX1000::display_mode_did_change	__ZN14ATIRadeonX100023display_mode_did_changeEv
 00024fc4	16	stub	n/a	FUN_00024fc4	
 00024fd4	16	stub	n/a	IOATIR500Accelerator::disp_mode_did_change	
 00024fe4	16	stub	n/a	ATIRadeonX1000::enable_GPUSensor	
@@ -1170,7 +1170,7 @@
 00025044	16	stub	n/a	ATIRadeonX1000::pageOnPCIeGART	
 00025054	16	stub	n/a	ATIRadeonX1000::startupPCIeGART	
 00025064	16	stub	n/a	FUN_00025064	
-00025080	268	method	MISSING	ATIRadeonX1000::waitForRetiredTimeStamp	__ZN14ATIRadeonX100023waitForRetiredTimeStampEm
+00025080	268	method	DONE	ATIRadeonX1000::waitForRetiredTimeStamp	__ZN14ATIRadeonX100023waitForRetiredTimeStampEm
 00025194	16	stub	n/a	FUN_00025194	
 000251a4	16	stub	n/a	FUN_000251a4	
 000251b4	16	stub	n/a	FUN_000251b4	
@@ -1180,7 +1180,7 @@
 00025324	16	stub	n/a	FUN_00025324	
 00025334	16	stub	n/a	FUN_00025334	
 00025344	16	stub	n/a	FUN_00025344	
-00025360	304	method	MISSING	ATIRadeonX1000::waitForTimeStampNoLock	__ZN14ATIRadeonX100022waitForTimeStampNoLockEm
+00025360	304	method	DONE	ATIRadeonX1000::waitForTimeStampNoLock	__ZN14ATIRadeonX100022waitForTimeStampNoLockEm
 00025494	16	stub	n/a	FUN_00025494	
 000254a4	16	stub	n/a	FUN_000254a4	
 000254b4	16	stub	n/a	FUN_000254b4	
@@ -1190,12 +1190,12 @@
 00025624	16	stub	n/a	FUN_00025624	
 00025634	16	stub	n/a	FUN_00025634	
 00025644	16	stub	n/a	FUN_00025644	
-00025660	304	method	MISSING	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029sleepForConsumedIDCTTimeStampEm
+00025660	304	method	DONE	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp	__ZN14ATIRadeonX100029sleepForConsumedIDCTTimeStampEm
 00025794	16	stub	n/a	FUN_00025794	
 000257a4	16	stub	n/a	FUN_000257a4	
 000257b4	16	stub	n/a	FUN_000257b4	
 000257c4	16	stub	n/a	FUN_000257c4	
-000257e0	304	method	MISSING	ATIRadeonX1000::sleepForRetiredTimeStamp	__ZN14ATIRadeonX100024sleepForRetiredTimeStampEm
+000257e0	304	method	DONE	ATIRadeonX1000::sleepForRetiredTimeStamp	__ZN14ATIRadeonX100024sleepForRetiredTimeStampEm
 00025914	16	stub	n/a	FUN_00025914	
 00025924	16	stub	n/a	FUN_00025924	
 00025934	16	stub	n/a	FUN_00025934	
@@ -1205,18 +1205,18 @@
 00025aa4	16	stub	n/a	FUN_00025aa4	
 00025ab4	16	stub	n/a	FUN_00025ab4	
 00025ac4	16	stub	n/a	FUN_00025ac4	
-00025ae0	304	method	MISSING	ATIRadeonX1000::sleepForTimeStampNoLock	__ZN14ATIRadeonX100023sleepForTimeStampNoLockEm
+00025ae0	304	method	DONE	ATIRadeonX1000::sleepForTimeStampNoLock	__ZN14ATIRadeonX100023sleepForTimeStampNoLockEm
 00025c14	16	stub	n/a	FUN_00025c14	
 00025c24	16	stub	n/a	FUN_00025c24	
 00025c34	16	stub	n/a	FUN_00025c34	
 00025c44	16	stub	n/a	FUN_00025c44	
-00025c60	368	method	MISSING	ATIRadeonX1000::start_xdct_engine	__ZN14ATIRadeonX100017start_xdct_engineEv
+00025c60	368	method	DONE	ATIRadeonX1000::start_xdct_engine	__ZN14ATIRadeonX100017start_xdct_engineEv
 00025dd0	16	stub	n/a	FUN_00025dd0	
 00025de0	16	stub	n/a	FUN_00025de0	
-00025df0	236	method	MISSING	ATIRadeonX1000::stop_xdct_engine	__ZN14ATIRadeonX100016stop_xdct_engineEv
+00025df0	236	method	DONE	ATIRadeonX1000::stop_xdct_engine	__ZN14ATIRadeonX100016stop_xdct_engineEv
 00025edc	16	stub	n/a	FUN_00025edc	
 00025eec	16	stub	n/a	FUN_00025eec	
-00025f00	640	method	MISSING	ATIRadeonX1000::display_mode_will_change	__ZN14ATIRadeonX100024display_mode_will_changeEl
+00025f00	640	method	DONE	ATIRadeonX1000::display_mode_will_change	__ZN14ATIRadeonX100024display_mode_will_changeEl
 0002618c	16	stub	n/a	FUN_0002618c	
 0002619c	16	stub	n/a	ATIR500Memory::init_pool	
 000261ac	16	stub	n/a	ATIRadeonX1000::stop_xdct_engine	
@@ -1229,7 +1229,7 @@
 0002621c	16	stub	n/a	IOATIR500Accelerator::disp_mode_will_change	
 0002622c	16	stub	n/a	ATIRadeonX1000::disable_GPUSensor	
 0002623c	16	stub	n/a	FUN_0002623c	
-00026250	1620	method	MISSING	ATIRadeonX1000::stop	__ZN14ATIRadeonX10004stopEP9IOService
+00026250	1620	method	DONE	ATIRadeonX1000::stop	__ZN14ATIRadeonX10004stopEP9IOService
 000268a8	16	stub	n/a	ATIRadeonX1000::shutdownPCIeGART	
 000268b8	16	stub	n/a	FUN_000268b8	
 000268c8	16	stub	n/a	HZMEM_Destroy	
