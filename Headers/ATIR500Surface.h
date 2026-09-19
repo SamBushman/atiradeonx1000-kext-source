@@ -60,12 +60,12 @@
 #define ATIR500SURFACE_H
 
 #include "IOATIR500Surface.h"
+#include <IOKit/graphics/IOAccelTypes.h>
 
 struct OverlaySurfaceInfo;        /* real struct names from the mangled symbols; layouts never recovered */
 struct OverlayBandwidthInfo;
 struct OverlayRegisters;
 struct OverlayPictureControl;
-struct IOAccelBounds;
 
 class ATIR500Surface : public IOATIR500Surface {
     OSDeclareDefaultStructors(ATIR500Surface)

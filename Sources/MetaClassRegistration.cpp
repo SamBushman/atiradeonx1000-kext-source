@@ -49,7 +49,7 @@
  * ClassName()`, which cannot compile against an abstract class. This is
  * Apple's own real, standard IOKit macro for exactly this situation.
  */
-OSDefineMetaClassAndAbstractStructors(IOATIR500Accelerator, IOService)
+OSDefineMetaClassAndAbstractStructors(IOATIR500Accelerator, IOAccelerator)
 OSDefineMetaClassAndStructors(ATIRadeonX1000, IOATIR500Accelerator)
 
 OSDefineMetaClassAndAbstractStructors(IOATIR500GLContext, IOUserClient)

@@ -85,8 +85,9 @@
 #include "../Headers/ATIR500Memory.h"
 
 UInt32 IOATIR500Accelerator::setup3D(void) {
-    allocMoreCommandBuffers(0, 0x20000);
-    return 1; /* real: no explicit return in the raw decompile's own void-typed body; matches the "success" side of this class's own established boolean-return convention elsewhere. Real return value not independently confirmed - see this file's own header comment on the setup3D/tmpAllocVRAM calling-convention-artifact family. */
+    /* CORRECTED (ledger pass): the shipped body is `bl allocMoreCommandBuffers; blr` - the call's result is returned
+     * unchanged (the decompile's void typing hid it). Callers (the GL/DVD start) treat 0 as failure. */
+    return allocMoreCommandBuffers(0, 0x20000);
 }
 
 namespace {

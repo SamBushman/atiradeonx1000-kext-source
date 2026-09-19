@@ -19,6 +19,7 @@ template <class T> inline T &M(long address) { return *reinterpret_cast<T *>(add
 template <class T> inline T &M(unsigned long address) { return *reinterpret_cast<T *>(address); }
 
 typedef UInt32 (*GhidraVFn)(...);
+typedef UInt32 code(...);   /* Ghidra's `code` (a function of unknown signature): `code *p` is a pointer to a variadic function */
 #define VCALL(vt, off) ((GhidraVFn)(*reinterpret_cast<UInt32 *>(static_cast<UInt32>((vt)) + (off))))
 
 inline double CONCAT44d(UInt32 hi, UInt32 lo) {

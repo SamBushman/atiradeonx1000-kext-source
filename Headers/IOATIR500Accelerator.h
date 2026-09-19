@@ -18,6 +18,7 @@
 #define IOATIR500ACCELERATOR_H
 
 #include <IOKit/IOService.h>
+#include <IOKit/graphics/IOAccelerator.h>
 
 class ATIRadeonX1000;
 class IOATIR5002DContext;
@@ -26,6 +27,13 @@ class IOATIR500GLContext;
 class IOATIR500Surface;
 class IOATIR500Shared;
 class IOMemoryDescriptor;
+class OSDictionary;
+class OSSerialize;
+class IOFramebuffer;
+class IOTimerEventSource;
+class IOInterruptEventSource;
+struct GLKMemoryElement;
+struct VendorCommandDescriptor;
 struct VendorTransferBuffer;
 struct VendorCommandBuffer; /* real, distinct mangled type name (19VendorCommandBuffer) -
                               * NOT the same as VendorCommandBufferHeader (25 chars) already in
@@ -38,10 +46,85 @@ struct VendorTextureBuffer;       /* real struct, defined in ATIRadeonX1000Types
 struct ATIR500SurfaceBuffer;      /* real struct, defined in ATIRadeonX1000Types.h - see above */
 class IOTextureBuffer;            /* real, opaque Apple type - see IOATIR500Surface.h's own note */
 
-class IOATIR500Accelerator : public IOService {
+class IOATIR500Accelerator : public IOAccelerator {
     OSDeclareDefaultStructors(IOATIR500Accelerator)
 
 public:
+
+    /*
+     * Virtual slots, in the stock vtable's own order (Ledger/kext_ppc_vtables.txt); "= 0" marks the slots the stock base
+     * class leaves pure (ATIRadeonX1000 implements them). Real slot offsets in the comments.
+     */
+    virtual bool     start(IOService *provider) override;                       /* +0x348, real addr 0x2650 */
+    virtual void     stop(IOService *provider) override;                        /* +0x34c, real addr 0x65c0 */
+    virtual IOReturn requestProbe(UInt32 options) override;                     /* +0x400, real addr 0x6320 */
+    virtual IOReturn newUserClient(task *owningTask, void *securityID, UInt32 type,
+                                   IOUserClient **handler) override;            /* +0x428 */
+    virtual bool     is_idle();                                                 /* +0x520, real addr 0x5410 */
+    virtual void     deallocate_texture(VendorTextureBuffer *texture) = 0;      /* +0x524 */
+    virtual IOReturn allocate_texture(VendorTextureBuffer *texture) = 0;        /* +0x528 */
+    virtual void     pageoff_dirty_texture(VendorTextureBuffer *texture, SInt32 param2, SInt32 param3); /* +0x52c, real addr 0x34a0: empty */
+    virtual UInt32   setup3D(void);                                             /* +0x530 */
+    virtual UInt32   setup2D(void);                                             /* +0x534, real addr 0x25d0 */
+    virtual void     teardown3D(void);                                          /* +0x538, real addr 0x5890 */
+    virtual void     teardown2D(void);                                          /* +0x53c, real addr 0x2310 */
+    virtual bool     tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment) = 0; /* +0x540 */
+    virtual void     tmpDeallocVRAM(GLKMemoryElement *element) = 0;             /* +0x544 */
+    virtual UInt32   tmpTotalVRAM(void) = 0;                                    /* +0x548 */
+    virtual UInt32   waitForTimeStamp(UInt32 tag) = 0;                          /* +0x54c */
+    virtual UInt32   waitForTimeStampNoLock(UInt32 tag) = 0;                    /* +0x550 */
+    virtual bool     checkForTimeStamp(UInt32 tag) = 0;                         /* +0x554 */
+    virtual UInt32   sleepForTimeStamp(UInt32 tag) = 0;                         /* +0x558 */
+    virtual UInt32   sleepForTimeStampNoLock(UInt32 tag) = 0;                   /* +0x55c */
+    virtual UInt32   submit_commands(VendorCommandDescriptor *descriptor) = 0;  /* +0x560 */
+    virtual void     noop_buffer(UInt32 *buffer) = 0;                           /* +0x564 */
+    virtual IOReturn writePerformanceStats(OSDictionary *dictionary);           /* +0x568, real addr 0xac0 */
+    virtual SInt32   alloc_surface_buffer(ATIR500SurfaceBuffer *buffer);        /* +0x56c */
+    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size);         /* +0x570 */
+    virtual void     releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 */
+    virtual bool     mapVendorTransferBuffer(VendorTransferBuffer *buffer);     /* +0x578, real addr 0x4f20 */
+    virtual void     unmapVendorTransferBuffer(VendorTransferBuffer *buffer);   /* +0x57c, real addr 0x4fe0 */
+    virtual bool     configureAGP(IOService *provider);                         /* +0x580, real addr 0x5b80 */
+    virtual void     teardownAGP(IOService *provider);                          /* +0x584, real addr 0x5090 */
+    virtual IOReturn commitAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options);  /* +0x588, real addr 0x5160 */
+    virtual IOReturn releaseAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options); /* +0x58c, real addr 0x5190 */
+    virtual IOReturn addToMinMaxGART(IOMemoryDescriptor *memory, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset); /* +0x590, real addr 0x5fe0 */
+    virtual bool     reserveInGART(UInt32 gartOffset);                          /* +0x594, real addr 0x51c0 */
+    virtual void     clearInGART(UInt32 gartOffset);                            /* +0x598, real addr 0x5200 */
+    virtual void     synchronizeGART(UInt32 offset, UInt32 length);             /* +0x59c, real addr 0x53e0: empty */
+    virtual void     addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 */
+    virtual void     removeFromGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset); /* +0x5a4, real addr 0x5270 */
+    virtual void     addTransferToGART(VendorTransferBuffer *buffer);           /* +0x5a8 */
+    virtual void     removeTransferFromGART(VendorTransferBuffer *buffer);      /* +0x5ac */
+    virtual UInt32   makeGARTEntry(UInt32 physicalAddress);                     /* +0x5b0, real addr 0x3670: returns its argument */
+    virtual bool     display_mode_will_change(SInt32 mode) = 0;                 /* +0x5b4 */
+    virtual bool     display_mode_did_change() = 0;                             /* +0x5b8 */
+    virtual void     system_will_sleep();                                       /* +0x5bc, real addr 0x6540 */
+    virtual void     system_did_wake();                                         /* +0x5c0, real addr 0x5960 */
+    virtual void     system_will_change_speed() = 0;                            /* +0x5c4 */
+    virtual void     system_did_change_speed() = 0;                             /* +0x5c8 */
+    virtual IOReturn set_stereo(UInt32 param1, UInt32 param2);                  /* +0x5cc, real addr 0x5450 */
+    virtual UInt32   getAccelCapsBits();                                        /* +0x5d0, real addr 0x5a10 */
+    virtual IOUserClient *new_surface(void) = 0;                                /* +0x5d4, type 0 */
+    virtual IOUserClient *new_2d_context(void) = 0;                             /* +0x5d8, type 2 */
+    virtual IOUserClient *new_dvd_context(void) = 0;                            /* +0x5dc, type 3 */
+    virtual IOUserClient *new_gl_context(void) = 0;                             /* +0x5e0, type 1 */
+    virtual bool     ASICSupportsAGP();                                         /* +0x5e4, real addr 0x0 (a second copy of the same body sits at 0x19ad0): returns true */
+
+    /* Non-virtual members added by the ledger pass (bodies in Sources/IOATIR500Accelerator_*.cpp) */
+    static IOReturn display_change_handler(OSObject *owner, void *ref, IOFramebuffer *framebuffer, SInt32 event, void *info); /* real addr 0x370 */
+    static bool     serializePerformanceStats(void *target, void *ref, OSSerialize *serializer);  /* real addr 0x9f0 */
+    static void     garbage_collector_timer(OSObject *owner, IOTimerEventSource *source);         /* real addr 0x4a50 */
+    static void     gart_collector_timer(OSObject *owner, IOTimerEventSource *source);            /* real addr 0x4ce0 */
+    static void     garbage_collector(OSObject *owner, IOInterruptEventSource *source, int count);/* real addr 0x63b0 */
+    static void     gart_collector(OSObject *owner, IOInterruptEventSource *source, int count);   /* real addr 0x6440 */
+    bool     foundFramebuffer(IOFramebuffer *framebuffer);                      /* real addr 0x550 */
+    bool     findFramebuffers();                                                /* real addr 0x770 */
+    void     freeAllCommandBuffers(UInt32 recordIndex);                         /* real addr 0x1fd0 */
+    void     freeAllDataBuffers();                                              /* real addr 0x3410 */
+    void     free_gart_wirings();                                               /* real addr 0x4a90 */
+    bool     disp_mode_did_change();                                            /* real addr 0x5710 */
+    bool     disp_mode_will_change(SInt32 mode);                                /* real addr 0x6ad0 */
     /*
      * newUserClient - CONFIRMED real dispatcher for IOServiceOpen(...,
      * type, ...). Real decoded switch (see
@@ -82,8 +165,6 @@ public:
      * exact virtual-method names for those three UNKNOWN (referenced only
      * by vtable slot in the decompile, never independently named).
      */
-    virtual IOReturn newUserClient(task *owningTask, void *securityID, UInt32 type,
-                                    IOUserClient **handler) override;
 
     /*
      * freeToAllocGART / freeWaitToAllocGART - CONFIRMED, fully decoded
@@ -140,7 +221,6 @@ public:
      * (`ATIRadeonX1000.h`) calls this base version explicitly, then adds
      * its own extra bookkeeping.
      */
-    virtual void addTransferToGART(VendorTransferBuffer *buffer);
 
     /*
      * addToGART - RESOLVED, issue #26 (real vtable slot +0x5a0, real addr
@@ -174,7 +254,6 @@ public:
      * (`IOATIR500GLContext_TextureStream.cpp`) is the correct final
      * answer, not just a placeholder.
      */
-    virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result);
 
     /*
      * allocOneDataBuffer / freeOneDataBuffer - RESOLVED, including the
@@ -208,10 +287,6 @@ public:
      */
     VendorTextureBuffer *allocOneDataBuffer(UInt32 sizeClass, bool forWrite);
     void                 freeOneDataBuffer(VendorTextureBuffer *buffer);
-    virtual SInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer); /* +0x56c - real, DIFFERENT function from ATIR500Surface::alloc_surface_buffer (issue #22); real return type confirmed SInt32 status from its own call site in setup_stereo; NOT overridden by ATIRadeonX1000 (identical address on both vtables) */
-    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size); /* +0x570 - real subclass override, different address */
-    virtual void                 releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 - real subclass override, different address */
-    virtual void                 removeTransferFromGART(VendorTransferBuffer *buffer); /* +0x5ac - real subclass override, different address */
     /*
      * allocate_texture / waitForTimeStamp - REAL MISSING-DECLARATION BUG
      * FIXED, issue #34 sweep: the SAME "pre-existing inconsistency" class
@@ -224,8 +299,6 @@ public:
      * existed). Added here to match; signatures/addresses per that
      * subclass declaration (`+0x528`/`+0x54c`).
      */
-    virtual IOReturn allocate_texture(VendorTextureBuffer *texture) = 0; /* +0x528 FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
-    virtual UInt32   waitForTimeStamp(UInt32 tag) = 0;                  /* +0x54c FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
 
     /*
      * allocDataBufferBacking - RESOLVED. Real body: allocates via
@@ -247,7 +320,6 @@ public:
      * if the base actually declares it. Added here to match
      * `ATIRadeonX1000::deallocate_texture`'s own real override signature.
      */
-    virtual void deallocate_texture(VendorTextureBuffer *texture) = 0; /* +0x524 FIXED (issue #1, get-it-linking pass): declared pure virtual - this base class's own vtable slot is confirmed genuine placeholder content (no real base body exists to decompile; every real object is the concrete ATIRadeonX1000 subclass, which already has a real, committed override) - `= 0` is the correct C++ representation of that already-established fact, not a guess. */
 
     /*
      * pageOffDataBuffer - RESOLVED, issue #28. Real mangled symbol
@@ -462,10 +534,6 @@ private:
      * content (raw 0, issue #6) - no local body to decompile here, only
      * the interface declaration.
      */
-    virtual IOUserClient *new_surface(void) = 0;     /* type 0, +0x5d4 - real override: ATIRadeonX1000::new_surface (covariant return ATIR500Surface*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_2d_context(void) = 0;  /* type 2, +0x5d8 - real override: ATIRadeonX1000::new_2d_context (covariant return ATIR5002DContext*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_dvd_context(void) = 0; /* type 3, +0x5dc - real override: ATIRadeonX1000::new_dvd_context (covariant return ATIR500DVDContext*), see ATIRadeonX1000.h */
-    virtual IOUserClient *new_gl_context(void) = 0;  /* type 1, +0x5e0 - real override: ATIRadeonX1000::new_gl_context (covariant return ATIR500GLContext*), see ATIRadeonX1000.h */
 
 public:
     /*
@@ -487,7 +555,6 @@ public:
      * `new_gl_context` just above stay `private` - their only real
      * caller is this class's own `newUserClient`.
      */
-    virtual UInt32 setup3D(void);
 };
 
 #endif /* IOATIR500ACCELERATOR_H */

@@ -28,6 +28,7 @@ ap.add_argument('--class', dest='cls', default='')
 ap.add_argument('--fun', action='append', default=[])
 ap.add_argument('--sym', action='append', default=[])
 ap.add_argument('--keep-header', action='store_true')
+ap.add_argument('--asic', default='', help='comma list: replacements for successive `_ASICSupportsAGP` occurrences (Ghidra labels every zero-immediate data reloc that way)')
 args = ap.parse_args()
 
 text = open(args.src).read()
@@ -88,7 +89,21 @@ def conv_vcalls(s):
             i += 1
             continue
         vt, off = m.group(1), m.group(2)
-        s = s[:i] + 'VCALL(%s, %s)' % (vt, off) + s[after+1:]
+        rest = s[after+1:]
+        if rest.startswith('()'):
+            # Ghidra prints no arguments for an indirect call whose prototype it does not know; the callee still gets the
+            # object (whose vtable was read) in r3, so pass it explicitly
+            if vt.startswith('**('):
+                obj = vt[1:]
+            elif vt.startswith('*(int *)'):
+                obj = vt[len('*(int *)'):]
+            elif re.match(r'^\*[A-Za-z_]\w*$', vt):
+                obj = vt[1:]
+            else:
+                obj = None
+            if obj is not None:
+                rest = '(' + obj + ')' + rest[2:]
+        s = s[:i] + 'VCALL(%s, %s)' % (vt, off) + rest
         i += 1
 
 # 2. *(T *)(EXPR) / *(T *)name -> M<T *>(EXPR)
@@ -137,7 +152,7 @@ def conv_mem(s):
         pos = m.start() + 2
 
 # 3. qualified member calls  Class::m(obj, rest)  and unqualified own-class calls
-CLASSES = set('pcl_ParamsR500_t _HZDATA ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
+CLASSES = set('OSObject IOService IOFramebuffer IOMemoryDescriptor IOInterruptEventSource IOTimerEventSource IOWorkLoop OSDictionary OSSerialize IOMemoryMap OSSymbol OSString OSNumber OSData IOBufferMemoryDescriptor IOEventSource IOCommandGate IOPCIDevice IORegistryEntry IOUserClient IOTextureBuffer VendorCommandBuffer VendorTextureBuffer ATIR500Memory pcl_ParamsR500_t _HZDATA ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
 def conv_calls(s):
     pat = re.compile(r'\b(' + '|'.join(sorted(CLASSES, key=len, reverse=True)) + r')::(\w+)\(')
     pos = 0
@@ -181,15 +196,20 @@ for f in args.sym:
     a, b = f.split('=>', 1) if '=>' in f else f.split('=', 1)
     body = body.replace(a, b)
 
+if args.asic:
+    reps = args.asic.split(',')
+    parts = body.split('_ASICSupportsAGP')
+    assert len(parts) - 1 == len(reps), 'asic occurrences %d vs %d given' % (len(parts) - 1, len(reps))
+    body = parts[0] + ''.join(reps[i] + parts[i + 1] for i in range(len(reps)))
 body = conv_vcalls(body)
-body = conv_calls(body)
-body = conv_mem(body)
 
 # class-typed pointers -> UInt8 *, class casts on literals dropped
 cls_alt = '|'.join(sorted(CLASSES, key=len, reverse=True))
-body = re.sub(r'\b(' + cls_alt + r')( \*)', r'UInt8\2', body)
+body = re.sub(r'(?<![\w:])(' + cls_alt + r')( \*)', r'UInt8\2', body)
 body = re.sub(r'\(\s*(?:' + cls_alt + r')\s*\)\s*(?=0x|\d|\w)', '', body)
-body = re.sub(r'\b(?:' + cls_alt + r') (\w+);', r'UInt8 \1;', body)   # `ATIR500Surface AVar5;` (a byte-sized object)
+body = re.sub(r'(?<![\w:])(?:' + cls_alt + r') (\w+);', r'UInt8 \1;', body)   # `ATIR500Surface AVar5;` (a byte-sized object)
+body = conv_calls(body)
+body = conv_mem(body)
 # primitive type names in declarations and casts
 def prim(m):
     return PRIM[m.group(0)]

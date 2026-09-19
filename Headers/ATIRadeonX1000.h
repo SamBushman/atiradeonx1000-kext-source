@@ -46,6 +46,7 @@
 #include "ATIR500GLContext.h"
 
 class IOWorkLoop;
+class OSSymbol;
 class IOMemoryDescriptor;
 struct GLKMemoryElement; /* real mangled type name (16GLKMemoryElement), layout UNKNOWN - only used opaquely as a pointer by tmpAllocVRAM/tmpDeallocVRAM below */
 struct ATITextureBufferHeader; /* real mangled type name (22ATITextureBufferHeader), found via pageoff_dirty_texture's own real callees - layout UNKNOWN, used opaquely as a pointer */
@@ -54,6 +55,91 @@ class ATIRadeonX1000 : public IOATIR500Accelerator {
     OSDeclareDefaultStructors(ATIRadeonX1000)
 
 public:
+
+    /*
+     * Virtual slots, in the stock vtable's own order (Ledger/kext_ppc_vtables.txt). Slots this class inherits from
+     * IOATIR500Accelerator (is_idle 0x520, setup3D..teardown2D 0x530-0x53c, alloc_surface_buffer 0x56c, synchronizeGART
+     * 0x59c, set_stereo 0x5cc, ASICSupportsAGP 0x5e4) are not repeated.
+     */
+    virtual void     free() override;                                           /* +0x04c, real addr 0x19fa0 */
+    virtual bool     start(IOService *provider) override;                       /* +0x348, real addr 0x1f750 */
+    virtual void     stop(IOService *provider) override;                        /* +0x34c, real addr 0x26250 */
+    virtual IOReturn callPlatformFunction(const OSSymbol *function, bool waitForFunction, void *param1, void *param2,
+                                          void *param3, void *param4) override; /* +0x3c8, real addr 0x1a040 */
+    virtual void     deallocate_texture(VendorTextureBuffer *texture);          /* +0x524, real addr 0x1a620 */
+    virtual IOReturn allocate_texture(VendorTextureBuffer *texture);            /* +0x528, real addr 0x1a800 */
+    virtual void     pageoff_dirty_texture(VendorTextureBuffer *texture, SInt32 param2, SInt32 param3); /* +0x52c */
+    virtual bool     tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 */
+    virtual void     tmpDeallocVRAM(GLKMemoryElement *element);                 /* +0x544, real addr 0x1ab20 */
+    virtual UInt32   tmpTotalVRAM(void);                                        /* +0x548, real addr 0x1ab60 */
+    virtual UInt32   waitForTimeStamp(UInt32 tag);                              /* +0x54c, real addr 0x251e0 */
+    virtual UInt32   waitForTimeStampNoLock(UInt32 tag);                        /* +0x550, real addr 0x25360 */
+    virtual bool     checkForTimeStamp(UInt32 tag);                             /* +0x554, real addr 0x1e090 */
+    virtual UInt32   sleepForTimeStamp(UInt32 tag);                             /* +0x558, real addr 0x25960 */
+    virtual UInt32   sleepForTimeStampNoLock(UInt32 tag);                       /* +0x55c, real addr 0x25ae0 */
+    virtual UInt32   submit_commands(VendorCommandDescriptor *descriptor);      /* +0x560, real addr 0x20ce0 */
+    virtual void     noop_buffer(UInt32 *buffer);                               /* +0x564, real addr 0x1e000 */
+    virtual IOReturn writePerformanceStats(OSDictionary *dictionary);           /* +0x568, real addr 0x1a300 */
+    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size);         /* +0x570 */
+    virtual void     releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 */
+    virtual bool     mapVendorTransferBuffer(VendorTransferBuffer *buffer);     /* +0x578, real addr 0x1a5c0 */
+    virtual void     unmapVendorTransferBuffer(VendorTransferBuffer *buffer);   /* +0x57c, real addr 0x1a5f0 */
+    virtual bool     configureAGP(IOService *provider);                         /* +0x580, real addr 0x1a3c0 */
+    virtual void     teardownAGP(IOService *provider);                          /* +0x584, real addr 0x1a3f0 */
+    virtual IOReturn commitAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options);  /* +0x588, real addr 0x1a420 */
+    virtual IOReturn releaseAGPMemory(IOMemoryDescriptor *memory, UInt32 agpOffset, UInt32 options); /* +0x58c, real addr 0x1a450 */
+    virtual IOReturn addToMinMaxGART(IOMemoryDescriptor *memory, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset); /* +0x590, real addr 0x1dfd0 */
+    virtual bool     reserveInGART(UInt32 gartOffset);                          /* +0x594, real addr 0x1b6d0 */
+    virtual void     clearInGART(UInt32 gartOffset);                            /* +0x598, real addr 0x1b7f0 */
+    virtual void     addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 */
+    virtual void     removeFromGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset); /* +0x5a4, real addr 0x1b6a0 */
+    virtual void     addTransferToGART(VendorTransferBuffer *buffer);           /* +0x5a8 */
+    virtual void     removeTransferFromGART(VendorTransferBuffer *buffer);      /* +0x5ac */
+    virtual UInt32   makeGARTEntry(UInt32 physicalAddress);                     /* +0x5b0, real addr 0x1a4b0 */
+    virtual bool     display_mode_will_change(SInt32 mode);                     /* +0x5b4, real addr 0x25f00 */
+    virtual bool     display_mode_did_change();                                 /* +0x5b8, real addr 0x24e40 */
+    virtual void     system_will_sleep();                                       /* +0x5bc */
+    virtual void     system_did_wake();                                         /* +0x5c0 */
+    virtual void     system_will_change_speed();                                /* +0x5c4, real addr 0x1f1e0 */
+    virtual void     system_did_change_speed();                                 /* +0x5c8, real addr 0x1e210 */
+    virtual UInt32   getAccelCapsBits();                                        /* +0x5d0, real addr 0x1b300 */
+    virtual ATIR500Surface    *new_surface(void);                               /* +0x5d4, real addr 0x1a140 */
+    virtual ATIR5002DContext  *new_2d_context(void);                            /* +0x5d8, real addr 0x1a220 */
+    virtual ATIR500DVDContext *new_dvd_context(void);                           /* +0x5dc, real addr 0x1a290 */
+    virtual ATIR500GLContext  *new_gl_context(void);                            /* +0x5e0, real addr 0x1a1b0 */
+    virtual IOReturn waitForRetiredTimeStamp(UInt32 tag);                       /* +0x5e8, real addr 0x25080 */
+    virtual IOReturn waitForConsumedIDCTTimeStamp(UInt32 tag);                  /* +0x5ec, real addr 0x254e0 */
+    virtual bool     checkForRetiredTimeStamp(UInt32 tag);                      /* +0x5f0, real addr 0x1e060 */
+    virtual bool     checkForConsumedIDCTTimeStamp(UInt32 tag);                 /* +0x5f4, real addr 0x1e030 */
+    virtual UInt32   sleepForRetiredTimeStamp(UInt32 tag);                      /* +0x5f8, real addr 0x257e0 */
+    virtual UInt32   sleepForConsumedIDCTTimeStamp(UInt32 tag);                 /* +0x5fc, real addr 0x25660 */
+
+    /* Non-virtual members added by the ledger pass */
+    UInt32 SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, bool flag, UInt32 panel); /* real addr 0x23320 */
+    void   start_xdct_engine(void);                       /* real addr 0x25c60 */
+    void   stop_xdct_engine(void);                        /* real addr 0x25df0 */
+    UInt32 getPeriodValue(char *name);                    /* real addr 0x19ea0 */
+    void   pageOffPCIeGART(void);                         /* real addr 0x1a9c0: empty */
+    bool   SWDSIsRequired(void);                          /* real addr 0x1a9d0 */
+    void   SWDSEnableCLUT(UInt32 enable);                 /* real addr 0x1aa00 */
+    void   removeFromPCIeGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset); /* real addr 0x1b540 */
+    void   setupR520Pipes(void);                          /* real addr 0x1bd20 */
+    bool   set_display_mode_and_vram(void);               /* real addr 0x1c120 */
+    void   stop_promo4_engine(void);                      /* real addr 0x1cb00 */
+    void   load_promo4_micro_code(void);                  /* real addr 0x1cd30 */
+    void   start_promo4_engine(UInt32 mode);              /* real addr 0x1cd90 */
+    void   setup_R500_internal_space(void);               /* real addr 0x1cf70 */
+    void   SWDSShutdown(void);                            /* real addr 0x1d350 */
+    bool   startupPCIeGART(void);                         /* real addr 0x1d830 */
+    void   shutdownPCIeGART(void);                        /* real addr 0x1dc10 */
+    void   pageOnPCIeGART(void);                          /* real addr 0x1dcd0 */
+    IOReturn addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset); /* real addr 0x1dd80 */
+    void   initialize_GUI(void);                          /* real addr 0x1e0c0 */
+    static void GPUSensorFunc(OSObject *owner, IOTimerEventSource *source); /* real addr 0x1e100 */
+    bool   initialize_hardware(void);                     /* real addr 0x1f3c0 */
+    UInt32 submit_buffer_retired(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount); /* real addr 0x20700 */
+    static void SWDSFunc(OSObject *owner, IOTimerEventSource *source);      /* real addr 0x24340 */
+    bool   SWDSInit(void);                                /* real addr 0x24670 */
     /*
      * Real, confirmed field offsets (from this base pointer, as reached
      * via each context class's own "this+N" accelerator pointer - e.g.
@@ -164,8 +250,6 @@ public:
      * Declared here as real static method pointers matching their
      * confirmed signature.
      */
-    static void garbage_collector(OSObject *owner, class IOInterruptEventSource *source, int count);
-    static void gart_collector(OSObject *owner, class IOInterruptEventSource *source, int count);
 
     /* ---- Real, confirmed methods ---- */
 
@@ -310,12 +394,6 @@ public:
      * waitForConsumedIDCTTimeStamp - CONFIRMED distinct IDCT-specific
      * counterpart (stage4-real-hardware-idct-engine-found.md).
      */
-    IOReturn waitForRetiredTimeStamp(UInt32 tag);
-    IOReturn waitForTimeStampNoLock(UInt32 tag);
-    IOReturn waitForConsumedIDCTTimeStamp(UInt32 tag); /* real vtable slot +0x5ec on this class's own vtable, real addr 0x254e0 - CONFIRMED (issue #19), see ATIR500DVDContext_ProcessCommandBuffer.cpp's own EngineKickFn call sites */
-    UInt32 SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, bool flag, UInt32 panel); /* real addr 0x23320: appends the software-dual-screen blit packets to a swap command buffer, returns the new word count */
-    void start_xdct_engine(void);                       /* real addr 0x25c60: powers up the IDCT engine when the first DVD context starts */
-    void stop_xdct_engine(void);                        /* real addr in ledger: the matching shut-down from ATIR500DVDContext::stop */
 
     /*
      * External-method selector 9 on the GL context, CONFIRMED to be
@@ -341,10 +419,6 @@ public:
      * bytes, `ATIR500DVDContext` `0x1e0` bytes, `ATIR500GLContext`
      * `0x690` bytes.
      */
-    virtual ATIR500Surface    *new_surface(void);     /* +0x5d4 on this class's own vtable, real addr 0x1a140 - allocates 0xdbc bytes via FUN_0001a194 (real lazy-binding stub) */
-    virtual ATIR5002DContext  *new_2d_context(void);  /* +0x5d8, real addr 0x1a220 - allocates 300 (0x12c) bytes via FUN_0001a274 (real lazy-binding stub) */
-    virtual ATIR500DVDContext *new_dvd_context(void); /* +0x5dc, real addr 0x1a290 - allocates 0x1e0 bytes via FUN_0001a2e4 (real lazy-binding stub) */
-    virtual ATIR500GLContext  *new_gl_context(void);  /* +0x5e0, real addr 0x1a1b0 - allocates 0x690 bytes via FUN_0001a204 (real lazy-binding stub) */
 
     /*
      * Five more real vtable slots this project had called through raw
@@ -368,12 +442,6 @@ public:
      * different override (explicitly calls the base version, then adds
      * its own bookkeeping) - both declared as their own class's owner.
      */
-    virtual IOReturn allocate_texture(VendorTextureBuffer *texture);      /* +0x528 on this class's own vtable, real addr 0x1a800 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp's own callAcceleratorVtable0x528). `virtual` ADDED, issue #34 sweep - base declaration was missing (see IOATIR500Accelerator.h). */
-    void     deallocate_texture(VendorTextureBuffer *texture);    /* +0x524, real addr 0x1a620 - CORRECTED, issue #23: real body takes a real VendorTextureBuffer* parameter, confirmed from its own real decompile which unconditionally reads texture+0x20 etc. - this project's issue #19 filing had it taking none, matching a real call-site bug in ATIR500GLContext_TextureLoad.cpp (fixed there too) */
-    virtual UInt32   waitForTimeStamp(UInt32 tag);                        /* +0x54c, real addr 0x251e0 - CONFIRMED signature (ATIR500GLContext_TextureLoad.cpp/ATIR500GLContext_RestoreState.cpp's own StampFn/VTableCall0x54c typedefs). `virtual` ADDED, issue #34 sweep - base declaration was missing (see IOATIR500Accelerator.h). */
-    UInt32   sleepForTimeStamp(UInt32 tag);                       /* +0x558, real addr 0x25960 - CONFIRMED signature (IOATIR500Surface_LockShape.cpp's own StampFn/Fn0x558 typedefs) */
-    virtual void addTransferToGART(VendorTransferBuffer *buffer); /* +0x5a8 on this class's own vtable, real addr 0x1a4d0 - real override of IOATIR500Accelerator::addTransferToGART, see that header */
-    virtual void addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 on this class's own vtable, real addr 0x1a480 - RESOLVED, issue #26: a trivial pass-through override, calls IOATIR500Accelerator::addToGART with no added logic, see that header */
 
     /*
      * allocVendorTextureBuffer / releaseVendorTextureBuffer /
@@ -383,9 +451,6 @@ public:
      * account (including a real by-hand arithmetic slip in an earlier
      * pass this session, now corrected).
      */
-    virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size); /* +0x570, real addr 0x1a560 */
-    virtual void                 releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574, real addr 0x1a590 */
-    virtual void                 removeTransferFromGART(VendorTransferBuffer *buffer); /* +0x5ac, real addr 0x1a530 */
 
     /*
      * pageoff_dirty_texture - RESOLVED via the concrete-subclass-vtable
@@ -420,7 +485,6 @@ public:
      * one (so the real values, whatever they are, do not affect real
      * behavior even if this parameter-mapping reading is wrong).
      */
-    void pageoff_dirty_texture(VendorTextureBuffer *texture, long param2, long param3);
 
     /*
      * Four real, already-named (via their own real mangled symbols)
@@ -457,8 +521,6 @@ public:
      * that issue's original enumeration). Own bodies not independently
      * decompiled this pass.
      */
-    bool tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 - RETURN TYPE CORRECTED, issue #21/#23: real body is a thin wrapper around ATIR500Memory::alloc's own real bool success/failure return, not a pointer as this project's call sites had inferred (Ghidra's own isolated decompile of this trivial wrapper mislabeled it void; the real callee's own decompiled body proves the real value in r3 is a real, meaningful boolean) */
-    void tmpDeallocVRAM(GLKMemoryElement *elem);                              /* +0x544, real addr 0x1ab20 - real return value (ATIR500Memory::dealloc's own bool) is never used at either real call site, so void is a safe, correct declaration despite the callee itself returning a value */
 
     /*
      * getNumPipes / getChipID / getChipRev / getNumZPipes - RESOLVED

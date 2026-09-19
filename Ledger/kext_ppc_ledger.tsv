@@ -1012,7 +1012,7 @@
 0001b3dc	16	stub	n/a	FUN_0001b3dc	
 0001b41c	16	stub	n/a	__static_initialization_and_destruction_0	
 0001b45c	16	stub	n/a	__static_initialization_and_destruction_0	
-0001b470	136	method	MISSING	DumpPCIeGART	__Z12DumpPCIeGARTPmmm
+0001b470	136	method	DONE	DumpPCIeGART	__Z12DumpPCIeGARTPmmm
 0001b514	16	stub	n/a	FUN_0001b514	
 0001b524	16	stub	n/a	FUN_0001b524	
 0001b540	344	method	MISSING	ATIRadeonX1000::removeFromPCIeGART	__ZN14ATIRadeonX100018removeFromPCIeGARTEP18IOMemoryDescriptorm
@@ -1021,7 +1021,7 @@
 0001b6d0	252	method	MISSING	ATIRadeonX1000::reserveInGART	__ZN14ATIRadeonX100013reserveInGARTEm
 0001b7d8	16	stub	n/a	FUN_0001b7d8	
 0001b7f0	172	method	MISSING	ATIRadeonX1000::clearInGART	__ZN14ATIRadeonX100011clearInGARTEm
-0001b8a0	992	method	MISSING	dump_registers	__Z14dump_registersP14ATIRadeonX1000
+0001b8a0	992	method	DONE	dump_registers	__Z14dump_registersP14ATIRadeonX1000
 0001bc80	16	stub	n/a	FUN_0001bc80	
 0001bc90	16	stub	n/a	FUN_0001bc90	
 0001bca0	116	method	DONE	ATIRadeonX1000::submit_empty_buffer	__ZN14ATIRadeonX100019submit_empty_bufferEv
@@ -1143,7 +1143,7 @@
 00021dfc	16	stub	n/a	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu	
 00021e0c	16	stub	n/a	ATIRadeonX1000::pageoff_dirty_texture_with_gpu	
 00021e1c	16	stub	n/a	ATIRadeonX1000::pageoff_linear_buffer	
-00021e30	5260	method	MISSING	pcl_CopyPix	__Z11pcl_CopyPixPmP16pcl_ParamsR500_tbb
+00021e30	5260	method	DONE	pcl_CopyPix	__Z11pcl_CopyPixPmP16pcl_ParamsR500_tbb
 00023308	16	stub	n/a	FUN_00023308	
 00023320	4040	method	MISSING	ATIRadeonX1000::SWDSWriteBlitToCmdBuf	__ZN14ATIRadeonX100021SWDSWriteBlitToCmdBufEPmmbm
 0002431c	16	stub	n/a	FUN_0002431c	
@@ -1691,15 +1691,15 @@
 00044868	16	stub	n/a	FUN_00044868	
 00044880	1260	method	DONE	ATIR500Surface::back_resolve_fsaa_buffer	__ZN14ATIR500Surface24back_resolve_fsaa_bufferEmmPm
 00044d74	16	stub	n/a	FUN_00044d74	
-00044d90	876	method	MISSING	HZMEM_InitMemResource	__Z21HZMEM_InitMemResourceP7_HZDATAmmm
+00044d90	876	method	DONE	HZMEM_InitMemResource	__Z21HZMEM_InitMemResourceP7_HZDATAmmm
 00045140	16	stub	n/a	FUN_00045140	
 00045150	16	stub	n/a	FUN_00045150	
-00045160	136	method	MISSING	HZMEM_InitAllocationTable	__Z25HZMEM_InitAllocationTableP7_HZDATA
+00045160	136	method	DONE	HZMEM_InitAllocationTable	__Z25HZMEM_InitAllocationTableP7_HZDATA
 000451e8	16	stub	n/a	FUN_000451e8	
-00045200	76	method	MISSING	HZMEM_Init	__Z10HZMEM_InitP7_HZDATAmmm
+00045200	76	method	DONE	HZMEM_Init	__Z10HZMEM_InitP7_HZDATAmmm
 00045258	16	stub	n/a	HZMEM_InitAllocationTable	
 00045268	16	stub	n/a	HZMEM_InitMemResource	
-00045280	164	method	MISSING	HZMEM_Destroy	__Z13HZMEM_DestroyP7_HZDATA
+00045280	164	method	DONE	HZMEM_Destroy	__Z13HZMEM_DestroyP7_HZDATA
 00045324	16	stub	n/a	FUN_00045324	
 00045334	16	stub	n/a	FUN_00045334	
 00045350	792	method	DONE	HZMEM_Alloc	__Z11HZMEM_AllocP7_HZDATAmmmm

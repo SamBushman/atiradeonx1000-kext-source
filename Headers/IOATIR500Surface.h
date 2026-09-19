@@ -41,9 +41,8 @@ struct VendorSwapBufferHeader; /* real type name (Ghidra's own symbol), own real
  * rather than rely on this forward declaration. Declared here only so
  * this header is self-contained for reading/review purposes.
  */
-struct IOAccelSurfaceReadData;
+#include <IOKit/graphics/IOAccelTypes.h>   /* IOAccelSurfaceReadData, IOAccelSurfaceScaling, IOAccelBounds ... */
 struct IOAccelSurfaceData;
-struct IOAccelSurfaceScaling;
 struct IOAccelDeviceRegion;
 
 class IOATIR500Surface : public IOUserClient {
