@@ -209,7 +209,7 @@ void IOATIR500Shared::free_buf_handle(void *record, UInt32 handle) {
 /* alloc_client_shared - real addr 0x16d50.                            */
 /* ------------------------------------------------------------------ */
 
-bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, UInt32 *outUserAddr) {
+bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, unsigned int *outUserAddr) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt32 *prevNode = nullptr;
     UInt32 *node = *reinterpret_cast<UInt32 **>(self + 0x20);
@@ -475,7 +475,7 @@ IOReturn IOATIR500Shared::delete_texture(VendorTextureBuffer *texture) {
 /* new_surface_texture - real addr 0x17520.                            */
 /* ------------------------------------------------------------------ */
 
-VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceID, UInt32 param2, UInt32 param3, UInt32 *outParam) {
+VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceID, UInt32 param2, UInt32 param3, unsigned int *outParam) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
     void **accelVtable = *reinterpret_cast<void ***>(accel);
@@ -498,7 +498,7 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceID, UInt
         return nullptr;
     }
     sIOClientShared *clientShared;
-    UInt32 userAddr;
+    unsigned int userAddr;
     if (!alloc_client_shared(handle, &clientShared, &userAddr)) {
         free_buf_handle(tex, handle);
         (*reinterpret_cast<ReleaseVendorBufFn *>(accelVtable + (0x574 / 4)))(accel, tex, 0x80);
@@ -541,7 +541,7 @@ VendorTextureBuffer *IOATIR500Shared::new_surface_texture(UInt32 surfaceID, UInt
 /* new_global_texture - real addr 0x17740.                             */
 /* ------------------------------------------------------------------ */
 
-VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 param2, UInt32 *outParam) {
+VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 param2, unsigned int *outParam) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     if (param2 == 0) {
         return nullptr;
@@ -570,7 +570,7 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 param2, UInt32 *
             return nullptr;
         }
         sIOClientShared *clientShared;
-        UInt32 userAddr;
+        unsigned int userAddr;
         if (!alloc_client_shared(handle, &clientShared, &userAddr)) {
             (*reinterpret_cast<ReleaseVendorBufFn *>(accelVtable + (0x574 / 4)))(accel, tex, 0x80);
             return nullptr;
@@ -612,7 +612,7 @@ VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 param2, UInt32 *
 /* new_agp_texture - real addr 0x17150.                                */
 /* ------------------------------------------------------------------ */
 
-VendorTextureBuffer *IOATIR500Shared::new_agp_texture(UInt32 param1, UInt32 param2, UInt32 *outParam) {
+VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int param1, UInt32 param2, unsigned int *outParam) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
     void **accelVtable = *reinterpret_cast<void ***>(accel);
@@ -692,7 +692,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(UInt32 param1, UInt32 para
         return nullptr;
     }
     sIOClientShared *clientShared;
-    UInt32 userAddr;
+    unsigned int userAddr;
     if (!alloc_client_shared(handle, &clientShared, &userAddr)) {
         free_buf_handle(tex, handle);
         (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memDesc) + (0x18 / 4)))(memDesc);
@@ -735,7 +735,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agp_texture(UInt32 param1, UInt32 para
 /* new_texture - real addr 0x18060.                                    */
 /* ------------------------------------------------------------------ */
 
-VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *out1, UInt32 *out2) {
+VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, unsigned int param3, UInt32 param4, unsigned int *out1, unsigned int *out2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
     void **accelVtable = *reinterpret_cast<void ***>(accel);
@@ -747,7 +747,7 @@ VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, 
         if (param2 == 0) { kind = 2; baseSize = 0x80; }
         else { kind = 3; baseSize = 0xa00; }
     } else {
-        UInt32 companionOut;
+        unsigned int companionOut;
         companion = reinterpret_cast<UInt8 *>(new_agp_texture(param3, param4, &companionOut));
         if (companion == nullptr) {
             return nullptr;
@@ -775,7 +775,7 @@ VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param1, UInt32 param2, 
             UInt32 handle;
             if (alloc_buf_handle(tex, &handle)) {
                 sIOClientShared *clientShared;
-                UInt32 userAddr;
+                unsigned int userAddr;
                 if (alloc_client_shared(handle, &clientShared, &userAddr)) {
                     UInt8 *cs = reinterpret_cast<UInt8 *>(clientShared);
                     U32At(tex, 0x14) = reinterpret_cast<UInt32>(cs);
@@ -849,12 +849,12 @@ companionCleanupOnly:
 /* new_agpref_texture - real addr 0x17df0.                             */
 /* ------------------------------------------------------------------ */
 
-VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 *outParam) {
+VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(unsigned int param1, unsigned int param2, UInt32 param3, unsigned int *outParam) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
     void **accelVtable = *reinterpret_cast<void ***>(accel);
 
-    UInt32 companionOut;
+    unsigned int companionOut;
     UInt8 *companion = reinterpret_cast<UInt8 *>(new_agp_texture(param2, param3, &companionOut));
     if (companion == nullptr) {
         return nullptr;
@@ -871,7 +871,7 @@ VendorTextureBuffer *IOATIR500Shared::new_agpref_texture(UInt32 param1, UInt32 p
     UInt32 handle;
     if (alloc_buf_handle(tex, &handle)) {
         sIOClientShared *clientShared;
-        UInt32 userAddr;
+        unsigned int userAddr;
         if (alloc_client_shared(handle, &clientShared, &userAddr)) {
             UInt8 *cs = reinterpret_cast<UInt8 *>(clientShared);
             U32At(tex, 0x14) = reinterpret_cast<UInt32>(cs);

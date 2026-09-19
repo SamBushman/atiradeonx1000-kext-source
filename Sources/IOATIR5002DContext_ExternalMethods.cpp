@@ -8,11 +8,9 @@
  *   create_image (0xd130)  delete_image (0xd450)  wait_image (0xd5c0)  create_shared (0xbc90)
  *   set_surface_paging_options (0xc2c0)  set_surface_vsync_options (0xc2d0)
  *
- * Still to do (they depend on this class's not-yet-reconstructed virtual slots +0x5a4/+0x5b0/+0x5b4 =
- * ATIR5002DContext::invalidate/set_destination/get_buffer_info, and on IOATIR500Surface::
- * add/remove_2d_context_from_list and alloc_surfaces, all on #59): set_surface, get_surface_info,
- * swap_surface, lock_memory, unlock_memory, create_transfer, set_macrovision. Their decompiles are in
- * raw-decompile-dumps/ and were used to trace the #42 harness expectations.
+ * The remaining members of the table (set_surface, get_surface_info, swap_surface, lock_memory, unlock_memory,
+ * create_transfer, set_macrovision) are in IOATIR5002DContext_Surface.cpp; the table itself is in
+ * IOATIR5002DContext_MethodTables.cpp.
  *
  * Field offsets used: this+0x7c (current stamp tag), +0x88 (shared allocator), +0x94 (accelerator),
  * +0x100 (bound surface), +0x114 (last bound texture); accelerator+0x80 (hardware up), +0x840
@@ -104,7 +102,7 @@ bool IOATIR5002DContext::create_shared() {
     return true;
 }
 
-IOReturn IOATIR5002DContext::declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle) {
+IOReturn IOATIR5002DContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
     (void)param1;
     if (sizeInBytes == 0 || formatOrSize == 0) {
         return 0xe00002c2;
@@ -120,7 +118,7 @@ IOReturn IOATIR5002DContext::declare_image(UInt32 param1, UInt32 formatOrSize, U
     return texture == nullptr ? 0xe00002bd : 0;
 }
 
-IOReturn IOATIR5002DContext::create_image(UInt32 param1, UInt32 param2, UInt32 *outLow, UInt32 *outHigh) {
+IOReturn IOATIR5002DContext::create_image(UInt32 param1, UInt32 param2, unsigned int *outLow, unsigned int *outHigh) {
     if (param1 == 0) {
         return 0xe00002c2;
     }
@@ -199,12 +197,12 @@ IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
 }
 
 /* set_surface_paging_options / set_surface_vsync_options: deliberate stubs in the shipped driver */
-IOReturn IOATIR5002DContext::set_surface_paging_options(void *inStruct, void *outStruct, UInt32 structSize, UInt32 *outTag) {
+IOReturn IOATIR5002DContext::set_surface_paging_options(IOSurfacePagingControlInfoStruct *inStruct, IOSurfacePagingControlInfoStruct *outStruct, UInt32 structSize, UInt32 *outTag) {
     (void)inStruct; (void)outStruct; (void)structSize; (void)outTag;
     return 0xe00002c7; /* kIOReturnUnsupported */
 }
 
-IOReturn IOATIR5002DContext::set_surface_vsync_options(void *inStruct, void *outStruct, UInt32 structSize, UInt32 *outTag) {
+IOReturn IOATIR5002DContext::set_surface_vsync_options(IOSurfaceVsyncControlInfoStruct *inStruct, IOSurfaceVsyncControlInfoStruct *outStruct, UInt32 structSize, UInt32 *outTag) {
     (void)inStruct; (void)outStruct; (void)structSize; (void)outTag;
     return 0xe00002c7; /* kIOReturnUnsupported */
 }

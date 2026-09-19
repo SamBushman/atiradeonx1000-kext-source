@@ -848,21 +848,21 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *inData, sIOGLNewTe
     switch (U32At(in, 0)) {
     case 0:
         texture = shared->new_surface_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc),
-                                               reinterpret_cast<UInt32 *>(out + 4));
+                                               reinterpret_cast<unsigned int *>(out + 4));
         U32At(out, 0) = 0;
         break;
     case 1:
-        texture = shared->new_global_texture(U32At(in, 4), reinterpret_cast<UInt32 *>(out + 4));
+        texture = shared->new_global_texture(U32At(in, 4), reinterpret_cast<unsigned int *>(out + 4));
         U32At(out, 0) = 0;
         break;
     case 2:
-        texture = shared->new_texture(U32At(in, 4), 0, 0, 0, reinterpret_cast<UInt32 *>(out), reinterpret_cast<UInt32 *>(out + 4));
+        texture = shared->new_texture(U32At(in, 4), 0, 0, 0, reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
         break;
     case 3:
-        texture = shared->new_texture(U32At(in, 4), U32At(in, 8), 0, 0, reinterpret_cast<UInt32 *>(out), reinterpret_cast<UInt32 *>(out + 4));
+        texture = shared->new_texture(U32At(in, 4), U32At(in, 8), 0, 0, reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
         break;
     case 6: {
-        texture = shared->new_agpref_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc), reinterpret_cast<UInt32 *>(out + 4));
+        texture = shared->new_agpref_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc), reinterpret_cast<unsigned int *>(out + 4));
         if (texture == nullptr) {
             U32At(out, 0) = 0;
             result = 0xe00002be;
@@ -877,14 +877,13 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *inData, sIOGLNewTe
          * shared `texture == nullptr` recheck since it's already known
          * non-null here. */
         U32At(out, 0) = U32At(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(texture) + 0x54), 0x58);
-        typedef void (*Fn0x5c0)(void *, VendorTextureBuffer *);
-        (*reinterpret_cast<Fn0x5c0 *>(*reinterpret_cast<void ***>(in) + (0x5c0 / 4)))(in, texture);
+        set_texture_flags(texture);
         GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
         return 0;
     }
     case 7:
         texture = shared->new_texture(U32At(in, 4), U32At(in, 8), U32At(in, 0xc), U32At(in, 0x10),
-                                       reinterpret_cast<UInt32 *>(out), reinterpret_cast<UInt32 *>(out + 4));
+                                       reinterpret_cast<unsigned int *>(out), reinterpret_cast<unsigned int *>(out + 4));
         break;
     default:
         U32At(out, 0) = 0;
@@ -897,14 +896,10 @@ IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *inData, sIOGLNewTe
         result = 0xe00002be;
     } else {
         result = 0;
-        /* real: `(**(code **)(*(int *)param_1 + 0x5c0))(param_1,iVar1)` - called
-         * through the INPUT struct's own vtable (`param_2` in the raw
-         * decompile, real `inData` here), not through `this` - transcribed
-         * exactly as decompiled even though a vtable on a plain data
-         * struct is unusual; this project's established practice is to
-         * trust the raw decompile over an a priori expectation. */
-        typedef void (*Fn0x5c0)(void *, VendorTextureBuffer *);
-        (*reinterpret_cast<Fn0x5c0 *>(*reinterpret_cast<void ***>(in) + (0x5c0 / 4)))(in, texture);
+        /* real: `(**(code **)(*(int *)param_1 + 0x5c0))(param_1,iVar1)` - vtable +0x5c0 on `this` (the stock decompile
+         * names `this` param_1; an earlier transcription of this file took it for the input struct and dispatched
+         * through that struct's vtable pointer). +0x5c0 is set_texture_flags(VendorTextureBuffer*). */
+        set_texture_flags(texture);
     }
     GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
     return result;

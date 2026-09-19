@@ -24,6 +24,22 @@ class ATIR5002DContext : public IOATIR5002DContext {
 
 public:
     /*
+     * Virtual slots in the stock vtable's order (Ledger/kext_ppc_vtables.txt): start +0x348, stop +0x34c,
+     * getTargetAndMethodForIndex +0x594, then the five slots the base class leaves pure (+0x5a4..+0x5b4).
+     */
+    virtual bool     start(IOService *provider) override;                                     /* +0x348, real addr 0x33510 */
+    virtual void     stop(IOService *provider) override;                                      /* +0x34c, real addr 0x335e0 */
+    virtual IOExternalMethod *getTargetAndMethodForIndex(IOService **target, UInt32 selector); /* +0x594, real addr 0x31990 */
+    virtual void     invalidate() override;                                                   /* +0x5a4, real addr 0x31d10 */
+    virtual void     submit_context_buffer() override;                                        /* +0x5a8, real addr 0x31e90 */
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor) override;    /* +0x5ac, real addr 0x326d0 */
+    virtual IOReturn set_destination(void *info, UInt32 *infoSize) override;                 /* +0x5b0, real addr 0x31b10 */
+    virtual IOReturn get_buffer_info(IOATIR500Surface *surface, UInt32 index, void *info, UInt32 *infoSize) override; /* +0x5b4, real addr 0x319d0 */
+
+    /* load_image (real addr 0x31b60): an empty body in the shipped kext. */
+    void load_image(VendorTextureBuffer *texture);
+
+    /*
      * read_regs - CONFIRMED, fully decoded (real kext offset 0x33660).
      * Real behavior, transcribed faithfully below: validates the caller's
      * claimed transfer size against the actual requested size AND
@@ -86,7 +102,7 @@ public:
      *     inference). Same real target as GL's `FUN_0002a864` and DVD's
      *     `FUN_0003913c`.
      */
-    IOReturn process_command_buffer(VendorCommandDescriptor *descriptor);
+    /* (virtual declaration lives in the slot-ordered block above) */
 
     /*
      * alloc_and_load_image - CONFIRMED real name/signature (real mangled

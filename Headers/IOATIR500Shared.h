@@ -148,10 +148,10 @@ public:
      * (non-null on success, passed straight into further vtable calls
      * taking that exact type elsewhere in this project).
      */
-    VendorTextureBuffer *new_surface_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
-    VendorTextureBuffer *new_global_texture(UInt32 param2, UInt32 *outParam);
-    VendorTextureBuffer *new_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 param5, UInt32 *out1, UInt32 *out2);
-    VendorTextureBuffer *new_agpref_texture(UInt32 param2, UInt32 param3, UInt32 param4, UInt32 *outParam);
+    VendorTextureBuffer *new_surface_texture(UInt32 param2, UInt32 param3, UInt32 param4, unsigned int *outParam);
+    VendorTextureBuffer *new_global_texture(UInt32 param2, unsigned int *outParam);
+    VendorTextureBuffer *new_texture(UInt32 param2, UInt32 param3, unsigned int param4, UInt32 param5, unsigned int *out1, unsigned int *out2);
+    VendorTextureBuffer *new_agpref_texture(unsigned int param2, unsigned int param3, UInt32 param4, unsigned int *outParam);
 
     /*
      * freeToAllocGART - RESOLVED (issue #1, get-it-linking pass), real
@@ -196,10 +196,10 @@ public:
      * 0x2000-byte chunk/mapping pair when every existing chunk's 0x80
      * slots are already assigned.
      */
-    VendorTextureBuffer *new_agp_texture(UInt32 param1, UInt32 param2, UInt32 *outParam);
+    VendorTextureBuffer *new_agp_texture(unsigned int param1, UInt32 param2, unsigned int *outParam);
     bool alloc_buf_handle(void *record, UInt32 *outHandle);
     void free_buf_handle(void *record, UInt32 handle);
-    bool alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, UInt32 *outUserAddr);
+    bool alloc_client_shared(UInt32 index, sIOClientShared **outKernelPtr, unsigned int *outUserAddr);
 
     /*
      * free_texvert - RESOLVED (issue #1, get-it-linking pass), real

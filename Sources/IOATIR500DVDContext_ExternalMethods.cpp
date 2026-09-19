@@ -114,7 +114,7 @@ bool IOATIR500DVDContext::create_shared() {
     return true;
 }
 
-IOReturn IOATIR500DVDContext::declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle) {
+IOReturn IOATIR500DVDContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
     (void)param1;
     if (sizeInBytes == 0 || formatOrSize == 0) {
         return 0xe00002c2;

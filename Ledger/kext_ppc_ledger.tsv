@@ -352,16 +352,16 @@
 0000b698	16	stub	n/a	FUN_0000b698	
 0000b6b0	8	generated	DONE	IOATIR5002DContext::MetaClass::alloc	__ZNK18IOATIR5002DContext9MetaClass5allocEv
 0000b6c0	292	method	DONE	IOATIR5002DContext::freeAllContextBuffers	__ZN18IOATIR5002DContext21freeAllContextBuffersEv
-0000b7f0	476	method	MISSING	IOATIR5002DContext::stop	__ZN18IOATIR5002DContext4stopEP9IOService
+0000b7f0	476	method	DONE	IOATIR5002DContext::stop	__ZN18IOATIR5002DContext4stopEP9IOService
 0000b9dc	16	stub	n/a	IOATIR500Surface::prune_buffers	
 0000b9ec	16	stub	n/a	IOATIR500Surface::remove_2d_context_from_list	
 0000b9fc	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 0000ba0c	16	stub	n/a	IOATIR5002DContext::freeAllContextBuffers	
 0000ba1c	16	stub	n/a	FUN_0000ba1c	
-0000ba30	116	method	MISSING	IOATIR5002DContext::clientClose	__ZN18IOATIR5002DContext11clientCloseEv
-0000bab0	64	method	MISSING	IOATIR5002DContext::init_command_buffer_header	__ZN18IOATIR5002DContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
+0000ba30	116	method	DONE	IOATIR5002DContext::clientClose	__ZN18IOATIR5002DContext11clientCloseEv
+0000bab0	64	method	DONE	IOATIR5002DContext::init_command_buffer_header	__ZN18IOATIR5002DContext26init_command_buffer_headerEP25VendorCommandBufferHeadermm
 0000baf0	56	method	DONE	IOATIR5002DContext::init_context_buffer_header	__ZN18IOATIR5002DContext26init_context_buffer_headerEP25VendorContextBufferHeaderm
-0000bb30	12	method	MISSING	IOATIR5002DContext::remove_surface	__ZN18IOATIR5002DContext14remove_surfaceEv
+0000bb30	12	method	DONE	IOATIR5002DContext::remove_surface	__ZN18IOATIR5002DContext14remove_surfaceEv
 0000bb40	112	method	DONE	IOATIR5002DContext::map_transfer_to_GART	__ZN18IOATIR5002DContext20map_transfer_to_GARTEP20VendorTransferBuffer
 0000bbb0	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
 0000bbc0	184	method	DONE	IOATIR5002DContext::freeToAllocGART	__ZN18IOATIR5002DContext15freeToAllocGARTEP20VendorTransferBufferb
@@ -374,13 +374,13 @@
 0000bee0	408	method	DONE	IOATIR5002DContext::allocAllContextBuffers	__ZN18IOATIR5002DContext22allocAllContextBuffersEm
 0000c078	16	stub	n/a	IOATIR5002DContext::init_context_buffer_header	
 0000c088	16	stub	n/a	FUN_0000c088	
-0000c0a0	488	method	MISSING	IOATIR5002DContext::start	__ZN18IOATIR5002DContext5startEP9IOService
+0000c0a0	488	method	DONE	IOATIR5002DContext::start	__ZN18IOATIR5002DContext5startEP9IOService
 0000c288	16	stub	n/a	IOATIR5002DContext::allocAllContextBuffers	
 0000c298	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
 0000c2a8	16	stub	n/a	IOATIR500Accelerator::getVRAMDescriptors	
-0000c2c0	12	method	SIG?	IOATIR5002DContext::set_surface_paging_options	__ZN18IOATIR5002DContext26set_surface_paging_optionsEP32IOSurfacePagingControlInfoStructS1_mPm
-0000c2d0	12	method	SIG?	IOATIR5002DContext::set_surface_vsync_options	__ZN18IOATIR5002DContext25set_surface_vsync_optionsEP31IOSurfaceVsyncControlInfoStructS1_mPm
-0000c2e0	236	method	MISSING	IOATIR5002DContext::set_macrovision	__ZN18IOATIR5002DContext15set_macrovisionEm
+0000c2c0	12	method	DONE	IOATIR5002DContext::set_surface_paging_options	__ZN18IOATIR5002DContext26set_surface_paging_optionsEP32IOSurfacePagingControlInfoStructS1_mPm
+0000c2d0	12	method	DONE	IOATIR5002DContext::set_surface_vsync_options	__ZN18IOATIR5002DContext25set_surface_vsync_optionsEP31IOSurfaceVsyncControlInfoStructS1_mPm
+0000c2e0	236	method	DONE	IOATIR5002DContext::set_macrovision	__ZN18IOATIR5002DContext15set_macrovisionEm
 0000c3e0	16	stub	n/a	FUN_0000c3e0	
 0000c3f0	16	stub	n/a	FUN_0000c3f0	
 0000c400	16	stub	n/a	FUN_0000c400	
@@ -390,7 +390,7 @@
 0000c4dc	16	stub	n/a	FUN_0000c4dc	
 0000c51c	16	stub	n/a	__static_initialization_and_destruction_0	
 0000c55c	16	stub	n/a	__static_initialization_and_destruction_0	
-0000c570	596	method	MISSING	IOATIR5002DContext::set_surface	__ZN18IOATIR5002DContext11set_surfaceEm18eIOContextModeBitsPvPm
+0000c570	596	method	DONE	IOATIR5002DContext::set_surface	__ZN18IOATIR5002DContext11set_surfaceEm18eIOContextModeBitsPvPm
 0000c7e0	16	stub	n/a	FUN_0000c7e0	
 0000c7f0	16	stub	n/a	IOATIR500Surface::add_2d_context_to_list	
 0000c800	16	stub	n/a	IOATIR500Surface::reset_req_bits	
@@ -398,11 +398,11 @@
 0000c820	16	stub	n/a	IOATIR500Surface::remove_2d_context_from_list	
 0000c830	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
 0000c840	16	stub	n/a	FUN_0000c840	
-0000c850	212	method	MISSING	IOATIR5002DContext::get_surface_info	__ZN18IOATIR5002DContext16get_surface_infoEm18eIOContextModeBitsPvPm
+0000c850	212	method	DONE	IOATIR5002DContext::get_surface_info	__ZN18IOATIR5002DContext16get_surface_infoEm18eIOContextModeBitsPvPm
 0000c930	16	stub	n/a	FUN_0000c930	
 0000c940	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
 0000c950	16	stub	n/a	FUN_0000c950	
-0000c960	432	method	MISSING	IOATIR5002DContext::swap_surface	__ZN18IOATIR5002DContext12swap_surfaceEmPm
+0000c960	432	method	DONE	IOATIR5002DContext::swap_surface	__ZN18IOATIR5002DContext12swap_surfaceEmPm
 0000cb14	16	stub	n/a	IOATIR500Surface::flush_surface	
 0000cb24	16	stub	n/a	FUN_0000cb24	
 0000cb34	16	stub	n/a	FUN_0000cb34	
@@ -414,29 +414,29 @@
 0000cc4c	16	stub	n/a	FUN_0000cc4c	
 0000cc5c	16	stub	n/a	IOATIR500Surface::set_scaling	
 0000cc6c	16	stub	n/a	FUN_0000cc6c	
-0000cc80	576	method	MISSING	IOATIR5002DContext::lock_memory	__ZN18IOATIR5002DContext11lock_memoryEmPjPm
+0000cc80	576	method	DONE	IOATIR5002DContext::lock_memory	__ZN18IOATIR5002DContext11lock_memoryEmPjPm
 0000cec4	16	stub	n/a	IOATIR500Surface::surface_write_lock_int	
 0000ced4	16	stub	n/a	FUN_0000ced4	
 0000cee4	16	stub	n/a	FUN_0000cee4	
 0000cef4	16	stub	n/a	FUN_0000cef4	
 0000cf04	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
 0000cf14	16	stub	n/a	FUN_0000cf14	
-0000cf30	176	method	MISSING	IOATIR5002DContext::unlock_memory	__ZN18IOATIR5002DContext13unlock_memoryEmPm
+0000cf30	176	method	DONE	IOATIR5002DContext::unlock_memory	__ZN18IOATIR5002DContext13unlock_memoryEmPm
 0000cfe0	16	stub	n/a	IOATIR5002DContext::swap_surface	
 0000cff0	16	stub	n/a	FUN_0000cff0	
 0000d000	16	stub	n/a	IOATIR500Surface::surface_write_unlock_int	
 0000d010	16	stub	n/a	FUN_0000d010	
-0000d020	196	method	SIG?	IOATIR5002DContext::declare_image	__ZN18IOATIR5002DContext13declare_imageEmjmPj
+0000d020	196	method	DONE	IOATIR5002DContext::declare_image	__ZN18IOATIR5002DContext13declare_imageEmjmPj
 0000d0ec	16	stub	n/a	FUN_0000d0ec	
 0000d0fc	16	stub	n/a	IOATIR500Shared::new_agp_texture	
 0000d10c	16	stub	n/a	IOATIR5002DContext::create_shared	
 0000d11c	16	stub	n/a	FUN_0000d11c	
-0000d130	216	method	SIG?	IOATIR5002DContext::create_image	__ZN18IOATIR5002DContext12create_imageEmmPjS0_
+0000d130	216	method	DONE	IOATIR5002DContext::create_image	__ZN18IOATIR5002DContext12create_imageEmmPjS0_
 0000d214	16	stub	n/a	FUN_0000d214	
 0000d224	16	stub	n/a	IOATIR500Shared::new_texture	
 0000d234	16	stub	n/a	IOATIR5002DContext::create_shared	
 0000d244	16	stub	n/a	FUN_0000d244	
-0000d260	368	method	MISSING	IOATIR5002DContext::create_transfer	__ZN18IOATIR5002DContext15create_transferEmmPjS0_
+0000d260	368	method	DONE	IOATIR5002DContext::create_transfer	__ZN18IOATIR5002DContext15create_transferEmmPjS0_
 0000d3e4	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
 0000d3f4	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
 0000d404	16	stub	n/a	FUN_0000d404	
@@ -451,7 +451,7 @@
 0000d5c0	248	method	DONE	IOATIR5002DContext::wait_image	__ZN18IOATIR5002DContext10wait_imageEm
 0000d6c8	16	stub	n/a	FUN_0000d6c8	
 0000d6d8	16	stub	n/a	FUN_0000d6d8	
-0000d6f0	2080	method	MISSING	IOATIR5002DContext::clientMemoryForType	__ZN18IOATIR5002DContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+0000d6f0	2080	method	DONE	IOATIR5002DContext::clientMemoryForType	__ZN18IOATIR5002DContext19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
 0000df34	16	stub	n/a	IOATIR5002DContext::init_context_buffer_header	
 0000df44	16	stub	n/a	IOATIR5002DContext::init_command_buffer_header	
 0000df54	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
@@ -556,7 +556,7 @@
 000103a8	16	stub	n/a	FUN_000103a8	
 000103b8	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
 000103c8	16	stub	n/a	FUN_000103c8	
-000103e0	196	method	SIG?	IOATIR500DVDContext::declare_image	__ZN19IOATIR500DVDContext13declare_imageEmjmPj
+000103e0	196	method	DONE	IOATIR500DVDContext::declare_image	__ZN19IOATIR500DVDContext13declare_imageEmjmPj
 000104ac	16	stub	n/a	FUN_000104ac	
 000104bc	16	stub	n/a	IOATIR500Shared::new_agp_texture	
 000104cc	16	stub	n/a	IOATIR500DVDContext::create_shared	
@@ -814,27 +814,27 @@
 00016bb0	292	method	DONE	IOATIR500Shared::alloc_buf_handle	__ZN15IOATIR500Shared16alloc_buf_handleEPvPm
 00016cd4	16	stub	n/a	IOATIR500Shared::alloc_handles	
 00016cf0	92	method	DONE	IOATIR500Shared::free_buf_handle	__ZN15IOATIR500Shared15free_buf_handleEPvm
-00016d50	704	method	SIG?	IOATIR500Shared::alloc_client_shared	__ZN15IOATIR500Shared19alloc_client_sharedEmPP15sIOClientSharedPj
+00016d50	704	method	DONE	IOATIR500Shared::alloc_client_shared	__ZN15IOATIR500Shared19alloc_client_sharedEmPP15sIOClientSharedPj
 00017028	16	stub	n/a	FUN_00017028	
 00017038	16	stub	n/a	FUN_00017038	
 00017048	16	stub	n/a	FUN_00017048	
 00017060	212	method	DONE	IOATIR500Shared::freeToAllocGART	__ZN15IOATIR500Shared15freeToAllocGARTEP20VendorTransferBufferb
 00017138	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
-00017150	856	method	SIG?	IOATIR500Shared::new_agp_texture	__ZN15IOATIR500Shared15new_agp_textureEjmPj
+00017150	856	method	DONE	IOATIR500Shared::new_agp_texture	__ZN15IOATIR500Shared15new_agp_textureEjmPj
 000174b8	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 000174c8	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
 000174d8	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
 000174e8	16	stub	n/a	FUN_000174e8	
 000174f8	16	stub	n/a	FUN_000174f8	
 00017508	16	stub	n/a	FUN_00017508	
-00017520	432	method	SIG?	IOATIR500Shared::new_surface_texture	__ZN15IOATIR500Shared19new_surface_textureEmmmPj
+00017520	432	method	DONE	IOATIR500Shared::new_surface_texture	__ZN15IOATIR500Shared19new_surface_textureEmmmPj
 000176dc	16	stub	n/a	IOATIR500Surface::prune_buffers	
 000176ec	16	stub	n/a	IOATIR500Surface::reset_req_bits	
 000176fc	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 0001770c	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
 0001771c	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
 0001772c	16	stub	n/a	IOATIR500Accelerator::find_surface_for_id	
-00017740	456	method	SIG?	IOATIR500Shared::new_global_texture	__ZN15IOATIR500Shared18new_global_textureEmPj
+00017740	456	method	DONE	IOATIR500Shared::new_global_texture	__ZN15IOATIR500Shared18new_global_textureEmPj
 00017908	16	stub	n/a	FUN_00017908	
 00017918	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 00017928	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
@@ -846,14 +846,14 @@
 00017db4	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 00017dc4	16	stub	n/a	IOATIR500Shared::delete_texture	
 00017dd4	16	stub	n/a	FUN_00017dd4	
-00017df0	504	method	SIG?	IOATIR500Shared::new_agpref_texture	__ZN15IOATIR500Shared18new_agpref_textureEjjmPj
+00017df0	504	method	DONE	IOATIR500Shared::new_agpref_texture	__ZN15IOATIR500Shared18new_agpref_textureEjjmPj
 00017ff8	16	stub	n/a	FUN_00017ff8	
 00018008	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 00018018	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
 00018028	16	stub	n/a	IOATIR500Shared::alloc_buf_handle	
 00018038	16	stub	n/a	IOATIR500Shared::delete_texture	
 00018048	16	stub	n/a	IOATIR500Shared::new_agp_texture	
-00018060	924	method	SIG?	IOATIR500Shared::new_texture	__ZN15IOATIR500Shared11new_textureEmmjmPjS0_
+00018060	924	method	DONE	IOATIR500Shared::new_texture	__ZN15IOATIR500Shared11new_textureEmmjmPjS0_
 00018458	16	stub	n/a	FUN_00018458	
 00018468	16	stub	n/a	IOATIR500Shared::free_buf_handle	
 00018478	16	stub	n/a	IOATIR500Shared::alloc_client_shared	
@@ -1407,22 +1407,22 @@
 00031920	80	generated	DONE	ATIR5002DContext::ATIR5002DContext	__ZN16ATIR5002DContextC2Ev
 00031970	16	stub	n/a	FUN_00031970	
 00031980	16	stub	n/a	IOATIR5002DContext::IOATIR5002DContext	
-00031990	64	method	MISSING	ATIR5002DContext::getTargetAndMethodForIndex	__ZN16ATIR5002DContext26getTargetAndMethodForIndexEPP9IOServicem
-000319d0	308	method	MISSING	ATIR5002DContext::get_buffer_info	__ZN16ATIR5002DContext15get_buffer_infoEP16IOATIR500SurfacemPvPm
-00031b10	68	method	MISSING	ATIR5002DContext::set_destination	__ZN16ATIR5002DContext15set_destinationEPvPm
-00031b60	4	method	MISSING	ATIR5002DContext::load_image	__ZN16ATIR5002DContext10load_imageEP19VendorTextureBuffer
+00031990	64	method	DONE	ATIR5002DContext::getTargetAndMethodForIndex	__ZN16ATIR5002DContext26getTargetAndMethodForIndexEPP9IOServicem
+000319d0	308	method	DONE	ATIR5002DContext::get_buffer_info	__ZN16ATIR5002DContext15get_buffer_infoEP16IOATIR500SurfacemPvPm
+00031b10	68	method	DONE	ATIR5002DContext::set_destination	__ZN16ATIR5002DContext15set_destinationEPvPm
+00031b60	4	method	DONE	ATIR5002DContext::load_image	__ZN16ATIR5002DContext10load_imageEP19VendorTextureBuffer
 00031b70	356	method	DONE	ATIR5002DContext::alloc_and_load_image	__ZN16ATIR5002DContext20alloc_and_load_imageEP19VendorTextureBuffer
 00031cd8	16	stub	n/a	IOATIR500Accelerator::freeToAllocTextureVRAM	
 00031ce8	16	stub	n/a	FUN_00031ce8	
 00031cf8	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
-00031d10	20	method	MISSING	ATIR5002DContext::invalidate	__ZN16ATIR5002DContext10invalidateEv
+00031d10	20	method	DONE	ATIR5002DContext::invalidate	__ZN16ATIR5002DContext10invalidateEv
 00031d30	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
 00031db0	16	stub	n/a	ATIR5002DContext::MetaClass::MetaClass	
 00031dc0	60	generated	DONE	ATIR5002DContext::MetaClass::~MetaClass	__ZN16ATIR5002DContext9MetaClassD0Ev
 00031dfc	16	stub	n/a	FUN_00031dfc	
 00031e3c	16	stub	n/a	__static_initialization_and_destruction_0	
 00031e7c	16	stub	n/a	__static_initialization_and_destruction_0	
-00031e90	1780	method	MISSING	ATIR5002DContext::submit_context_buffer	__ZN16ATIR5002DContext21submit_context_bufferEv
+00031e90	1780	method	DONE	ATIR5002DContext::submit_context_buffer	__ZN16ATIR5002DContext21submit_context_bufferEv
 00032594	16	stub	n/a	ATIRadeonX1000::submit_buffer	
 000325a4	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
 000325b4	16	stub	n/a	ATIR5002DContext::alloc_and_load_image	
@@ -1436,10 +1436,10 @@
 000334dc	16	stub	n/a	IOATIR5002DContext::map_transfer_to_GART	
 000334ec	16	stub	n/a	ATIR5002DContext::alloc_and_load_image	
 000334fc	16	stub	n/a	ATIRadeonX1000::submit_buffer	
-00033510	168	method	MISSING	ATIR5002DContext::start	__ZN16ATIR5002DContext5startEP9IOService
+00033510	168	method	DONE	ATIR5002DContext::start	__ZN16ATIR5002DContext5startEP9IOService
 000335c0	16	stub	n/a	FUN_000335c0	
 000335d0	16	stub	n/a	FUN_000335d0	
-000335e0	88	method	MISSING	ATIR5002DContext::stop	__ZN16ATIR5002DContext4stopEP9IOService
+000335e0	88	method	DONE	ATIR5002DContext::stop	__ZN16ATIR5002DContext4stopEP9IOService
 00033638	16	stub	n/a	FUN_00033638	
 00033648	16	stub	n/a	FUN_00033648	
 00033660	188	method	DONE	ATIR5002DContext::read_regs	__ZN16ATIR5002DContext9read_regsEPmS0_mS0_

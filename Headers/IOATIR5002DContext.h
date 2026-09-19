@@ -26,29 +26,53 @@ class ATIRadeonX1000;
 class IOATIR500Shared;
 class IOATIR500Surface;
 
+struct IOSurfacePagingControlInfoStruct;   /* real struct names (they appear in the mangled symbols); layouts never recovered */
+struct IOSurfaceVsyncControlInfoStruct;
+
 class IOATIR5002DContext : public IOUserClient {
-    OSDeclareDefaultStructors(IOATIR5002DContext)
+    OSDeclareAbstractStructors(IOATIR5002DContext)
 
 public:
-    /* ---- Base table, selectors 0-15 ---- */
-    IOReturn set_surface(UInt32 surfaceID, UInt32 modeBits, UInt32 param3, UInt32 param4);          /* 0, INFERRED shape by analogy with the GL context's own set_surface */
-    IOReturn get_config(UInt32 *out0, UInt32 *out1);                                                    /* 1, REAL SIGNATURE CORRECTED (issue #42 pass): the shipped mangled symbol (get_configEPmS0_) and its dispatch-table entry (0 in / 2 out) have TWO outputs, not three. Body: Sources/IOATIR5002DContext_ExternalMethods.cpp */
-    IOReturn get_surface_info(UInt32 surfaceID, SInt32 *outFlags, SInt32 *outW, SInt32 *outH);         /* 2 */
-    IOReturn swap_surface(UInt32 lockType, UInt32 *outTag);                                             /* 3, CONFIRMED body (stage9): real retry loop (up to 1000 attempts) calling IOATIR500Surface::alloc_surfaces on demand, flush_surface, real present/flip via unlock_memory's negative-lock-type path */
-    IOReturn scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale);                                 /* 4 */
-    IOReturn lock_memory(UInt32 lockType, UInt32 *outAddress, UInt32 *outSize);                          /* 5, CONFIRMED body (stage9): real retry loop with alloc_surfaces fallback, real pending-GPU-flush detection before granting a CPU lock */
-    IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                             /* 6, CONFIRMED body (stage9): triggers swap_surface for negative lock-type values - the real present/flip mechanism */
-    IOReturn finish(UInt32 mode);                                                                        /* 7, REAL SIGNATURE CORRECTED (issue #42 pass): mangled symbol is finish(unsigned long), table = 1 scalar in. 0 = wait on this context's stamp, 1/2 = wait on the accelerator's pending stamp, else BadArgument. */
+    /*
+     * Virtual slots, in the stock vtable's own order (Ledger/kext_ppc_vtables.txt: start +0x348, stop +0x34c,
+     * clientClose +0x568, clientMemoryForType +0x580, then the five pure slots +0x5a4..+0x5b4 that
+     * ATIR5002DContext overrides).
+     */
+    virtual bool     start(IOService *provider) override;                                              /* +0x348, real addr 0xc0a0 */
+    virtual void     stop(IOService *provider) override;                                               /* +0x34c, real addr 0xb7f0 */
+    virtual IOReturn clientClose() override;                                                           /* +0x568, real addr 0xba30 */
+    virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) override; /* +0x580, real addr 0xd6f0 */
+    virtual void     invalidate() = 0;                                                                 /* +0x5a4 */
+    virtual void     submit_context_buffer() = 0;                                                      /* +0x5a8 */
+    virtual IOReturn process_command_buffer(VendorCommandDescriptor *descriptor) = 0;                  /* +0x5ac */
+    virtual IOReturn set_destination(void *info, UInt32 *infoSize) = 0;                               /* +0x5b0 */
+    virtual IOReturn get_buffer_info(IOATIR500Surface *surface, UInt32 index, void *info, UInt32 *infoSize) = 0; /* +0x5b4 */
+
+    /* ---- Base table, selectors 0-15 (Sources/IOATIR5002DContext_MethodTables.cpp). Every signature below is the
+     * exact stock mangling (the eIOContextModeBits enum, `unsigned int*` vs `unsigned long*` outputs, and the two
+     * option-struct pointers all appear in the symbols). ---- */
+    IOReturn set_surface(UInt32 surfaceID, eIOContextModeBits modeBits, void *info, UInt32 *infoSize);      /* 0, real addr 0xc570 */
+    IOReturn get_config(UInt32 *out0, UInt32 *out1);                                                        /* 1, real addr 0xbd90 */
+    IOReturn get_surface_info(UInt32 surfaceID, eIOContextModeBits modeBits, void *info, UInt32 *infoSize); /* 2, real addr 0xc850 */
+    IOReturn swap_surface(UInt32 lockType, UInt32 *outTag);                                                 /* 3, real addr 0xc960 */
+    IOReturn scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale);                                     /* 4, real addr 0xcb90 */
+    IOReturn lock_memory(UInt32 lockType, unsigned int *outAddress, UInt32 *outSize);                        /* 5, real addr 0xcc80 */
+    IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                                 /* 6, real addr 0xcf30 */
+    IOReturn finish(UInt32 mode);                                                                            /* 7, real addr 0xbdc0 */
+    IOReturn declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle); /* 8, real addr 0xd020 */
+    IOReturn create_image(UInt32 param1, UInt32 param2, unsigned int *outLow, unsigned int *outHigh);       /* 9, real addr 0xd130 */
+    IOReturn create_transfer(UInt32 param1, UInt32 sizeInBytes, unsigned int *outHandle, unsigned int *outAddress); /* 10, real addr 0xd260 */
+    IOReturn delete_image(UInt32 textureID);                                                                 /* 11, real addr 0xd450 */
+    IOReturn wait_image(UInt32 textureID);                                                                   /* 12, real addr 0xd5c0 */
+    IOReturn set_surface_paging_options(IOSurfacePagingControlInfoStruct *in, IOSurfacePagingControlInfoStruct *out,
+                                        UInt32 structSize, UInt32 *outTag);                                  /* 13, real addr 0xc2c0: returns kIOReturnUnsupported */
+    IOReturn set_surface_vsync_options(IOSurfaceVsyncControlInfoStruct *in, IOSurfaceVsyncControlInfoStruct *out,
+                                       UInt32 structSize, UInt32 *outTag);                                   /* 14, real addr 0xc2d0: returns kIOReturnUnsupported */
+    IOReturn set_macrovision(UInt32 enable);                                                                 /* 15, real addr 0xc2e0 */
+
     void     remove_surface(void);  /* real addr 0xbb30: clears the bound-surface pointer (+0x100) */
     bool     create_shared(void);                                                                        /* helper, real addr 0xbc90: new IOATIR500Shared + init, wired to the accelerator and task */
-    IOReturn declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle);   /* 8, CONFIRMED body (stage9): real IOATIR500Shared::new_agp_texture call, same shared allocator as GL */
-    IOReturn create_image(UInt32 param1, UInt32 param2, UInt32 *outLow, UInt32 *outHigh);                /* 9, CONFIRMED body (stage9): real IOATIR500Shared::new_texture call */
-    IOReturn create_transfer(UInt32 param1, UInt32 sizeInBytes, UInt32 *outHandle, UInt32 *outAddress);  /* 10, CONFIRMED body (stage9): real AGP-backed transfer-buffer alloc + real backing-store swap if a surface is bound */
-    IOReturn delete_image(UInt32 textureID);                                                             /* 11, CONFIRMED body (stage9): real bounds-checked lookup + refcounted cleanup */
-    IOReturn wait_image(UInt32 textureID);                                                               /* 12, CONFIRMED body (stage9): real fence wait via a vtable call at offset 0x550, shares the fence architecture with GL's wait_for_stamp */
-    IOReturn set_surface_paging_options(void *inStruct, void *outStruct, UInt32 structSize, UInt32 *outTag); /* 13, CONFIRMED body (stage9): unconditionally returns 0xe00002c7 (kIOReturnUnsupported) - a deliberate stub in this build */
-    IOReturn set_surface_vsync_options(void *inStruct, void *outStruct, UInt32 structSize, UInt32 *outTag);  /* 14, CONFIRMED body (stage9): same deliberate-stub pattern as set_surface_paging_options */
-    IOReturn set_macrovision(UInt32 enable);                                                              /* 15, CONFIRMED body (stage9): real and functioning - iterates every active display connection, calls a vtable method (opcode 0x92) on each */
+    void     init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size, UInt32 flags);   /* real addr 0xbab0 */
 
     /*
      * map_transfer_to_GART - RESOLVED, issue #28. Same real structure as
