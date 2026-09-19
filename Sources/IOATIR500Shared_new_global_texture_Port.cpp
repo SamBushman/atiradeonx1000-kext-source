@@ -30,7 +30,7 @@ extern "C" UInt32 GH_OSIncrementAtomic(...) asm("_OSIncrementAtomic");
 /* real addr 0x17740 */
 VendorTextureBuffer *IOATIR500Shared::new_global_texture(UInt32 param_1, unsigned int *real_param_2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    unsigned int *param_2 = reinterpret_cast<unsigned int *>(real_param_2);
 
   UInt8 *pIVar1;
   int *piVar2;

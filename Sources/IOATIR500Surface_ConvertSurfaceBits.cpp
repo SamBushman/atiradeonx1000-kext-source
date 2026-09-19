@@ -30,39 +30,5 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-UInt32 IOATIR500Surface::convert_surface_bits(UInt32 selectorBits) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 result = 0;
-    if (selectorBits == 0) {
-        return result;
-    }
+/* (re-ported mechanically: see IOATIR500Surface_convert_surface_bits_Port.cpp) */
 
-    UInt32 bit = 1;
-    do {
-        if ((bit & selectorBits) != 0) {
-            int idx = -1;
-            switch (bit) {
-                case 0x1: idx = 1; break;
-                case 0x2: idx = 0; break;
-                case 0x4: idx = 4; break;
-                case 0x8: idx = 5; break;
-                case 0x10: idx = 6; break;
-                case 0x80: idx = 2; break;
-                case 0x100: idx = 3; break;
-                case 0x400: idx = 7; break;
-                case 0x800: idx = 8; break;
-                case 0x10000: idx = 9; break;
-                default: break;
-            }
-            if (idx >= 0) {
-                UInt32 bufPtr = U32At(self, idx * 4 + 0xb70);
-                UInt32 slotIndex = (bufPtr - reinterpret_cast<UInt32>(self + 0xa8)) / 0x78;
-                result |= 1u << (slotIndex & 0x3f);
-            }
-        }
-        bit <<= 1;
-        if (selectorBits < bit) {
-            return result;
-        }
-    } while (true);
-}

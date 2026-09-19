@@ -60,62 +60,8 @@ inline void ResetRefcount(UInt8 *tex) {
 }
 } // namespace
 
-void IOATIR500Shared::free() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see IOATIR500Shared_free_Port.cpp) */
 
-    UInt8 *tex = reinterpret_cast<UInt8 *>(U32At(self, 0x24));
-    UInt32 head = 0;
-    if (tex != nullptr) {
-        do {
-            UInt8 *next;
-            if (U8At(tex, 0x20) == 4) {
-                next = reinterpret_cast<UInt8 *>(U32At(tex, 0x3c));
-            } else {
-                next = reinterpret_cast<UInt8 *>(U32At(tex, 0x3c));
-                if (next != nullptr) {
-                    UInt8 kind = U8At(next, 0x20);
-                    while (kind == 4 && (next = reinterpret_cast<UInt8 *>(U32At(next, 0x3c)), next != nullptr)) {
-                        kind = U8At(next, 0x20);
-                    }
-                }
-                ResetRefcount(tex);
-                delete_texture(reinterpret_cast<VendorTextureBuffer *>(tex));
-            }
-            tex = next;
-        } while (tex != nullptr);
-        head = U32At(self, 0x24);
-    }
-    while (head != 0) {
-        ResetRefcount(reinterpret_cast<UInt8 *>(head));
-        delete_texture(reinterpret_cast<VendorTextureBuffer *>(U32At(self, 0x24)));
-        head = U32At(self, 0x24);
-    }
-
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-    if (this == reinterpret_cast<IOATIR500Shared *>(U32At(accel, 0x6c))) {
-        U32At(accel, 0x6c) = 0;
-        U32At(reinterpret_cast<void *>(U32At(self, 0xc)), 0x70) = 0;
-        accel = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-    }
-    reinterpret_cast<IOATIR500Accelerator *>(accel)->freeOrphanTexture(true);
-
-    UInt32 *node = reinterpret_cast<UInt32 *>(U32At(self, 0x20));
-    while (node != nullptr) {
-        UInt32 *next = reinterpret_cast<UInt32 *>(node[0]);
-        ReleaseObj(reinterpret_cast<void *>(node[3]));
-        ReleaseObj(reinterpret_cast<void *>(node[2]));
-        ReleaseObj(reinterpret_cast<void *>(node[1]));
-        IOATIR500Shared_IOFree(node, 0x1c);
-        UInt8 *owner = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-        node = next;
-        if (owner != nullptr) {
-            U32At(owner, 0x808) -= 0x1c;
-        }
-    }
-
-    free_handles();
-    OSObject::free();
-}
 
 void IOATIR500Shared::free_handles() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

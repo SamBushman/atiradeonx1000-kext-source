@@ -121,40 +121,8 @@ bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UI
     return true;
 }
 
-UInt32 IOATIR500Accelerator::getVRAMDescriptor(UInt32 index) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *rec = self + index * 0x20;
+/* (re-ported mechanically: see IOATIR500Accelerator_getVRAMDescriptor_Port.cpp) */
 
-    if (U32At(rec, 0xdc) != 0) {
-        return 1;
-    }
-
-    typedef void *(*GetProviderDescFn)(void *);
-    void *provider = *reinterpret_cast<void **>(rec + 0xd4);
-    void **providerVtable = *reinterpret_cast<void ***>(provider);
-    void *desc = reinterpret_cast<GetProviderDescFn>(providerVtable[0x5d0 / 4])(provider);
-    U32At(rec, 0xdc) = reinterpret_cast<UInt32>(desc);
-    if (desc == nullptr) {
-        return 0;
-    }
-
-    typedef void *(*MapFn)(void *, UInt32);
-    void **descVtable = *reinterpret_cast<void ***>(desc);
-    void *map = reinterpret_cast<MapFn>(descVtable[0x150 / 4])(desc, 0x101);
-    U32At(rec, 0xe0) = reinterpret_cast<UInt32>(map);
-    if (map == nullptr) {
-        typedef void (*ReleaseFn)(void *);
-        reinterpret_cast<ReleaseFn>((*reinterpret_cast<void ***>(desc))[0x18 / 4])(desc);
-        U32At(rec, 0xdc) = 0;
-        return 0;
-    }
-
-    typedef UInt32 (*GetVAddrFn)(void *);
-    void **mapVtable = *reinterpret_cast<void ***>(map);
-    UInt32 vaddr = reinterpret_cast<GetVAddrFn>(mapVtable[0xd0 / 4])(map);
-    U32At(rec, 0xe4) = vaddr;
-    return 1;
-}
 
 void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

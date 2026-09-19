@@ -74,38 +74,8 @@ UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *buffer)
  * `releaseVendorTextureBuffer` (+0x574, already named elsewhere in
  * this project) to give the raw VendorTextureBuffer storage back.
  */
-void IOATIR500Surface::delete_buffer_backing(IOTextureBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    IOATIR500Accelerator *accel = *reinterpret_cast<IOATIR500Accelerator **>(self + 0xd50);
-    UInt8 *accelBytes = reinterpret_cast<UInt8 *>(accel);
+/* (re-ported mechanically: see IOATIR500Surface_delete_buffer_backing_Port.cpp) */
 
-    if (U32At(buf, 4) != 0) {
-        typedef SInt32 (*Fn0x554)(void *, UInt32);
-        SInt32 stillLive = (*reinterpret_cast<Fn0x554 *>(*reinterpret_cast<void ***>(accelBytes) + (0x554 / 4)))(
-            accelBytes, U32At(*reinterpret_cast<void **>(buf + 0x14), 8));
-        if (stillLive == 0) {
-            accel->addOrphanTexture(reinterpret_cast<IOTextureBuffer *>(buffer));
-            if (U8At(buf, 0x20) != 0) {
-                return;
-            }
-            UInt8 *prev = *reinterpret_cast<UInt8 **>(buf + 0x24);
-            UInt8 *next = *reinterpret_cast<UInt8 **>(buf + 0x28);
-            U32At(prev, 0x28) = reinterpret_cast<UInt32>(next);
-            U32At(next, 0x24) = reinterpret_cast<UInt32>(prev);
-            *reinterpret_cast<UInt8 **>(buf + 0x28) = buf;
-            *reinterpret_cast<UInt8 **>(buf + 0x24) = buf;
-            return;
-        }
-        if (U32At(buf, 4) != 0) {
-            accel->removeTransferFromGART(reinterpret_cast<VendorTransferBuffer *>(buffer));
-        }
-    }
-    typedef void (*ReleaseFn)(void *);
-    void *desc = *reinterpret_cast<void **>(buf + 8);
-    (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(desc) + (0x18 / 4)))(desc);
-    accel->releaseVendorTextureBuffer(reinterpret_cast<VendorTextureBuffer *>(buffer), 0xc0);
-}
 
 /*
  * move_buffer_to_backing_store - CONFIRMED, simple: copies the

@@ -61,22 +61,8 @@ IOReturn ATIR500DVDContext::show_buffer(int bufferIndex, int param2) {
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_setup_overlay(int x, int y, int w, int h, int param5) {
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result = GuardCheck(accelerator, boundSurface);
-    if (result == 0) {
-        UInt8 *surface = reinterpret_cast<UInt8 *>(boundSurface);
-        U32At(surface, 0xda4) = param5;
-        if (param5 == 0) {
-            U8At(surface, 0xbed) = 1;
-            U8At(surface, 0xbee) = 1;
-        }
-        boundSurface->dvd_setup_overlay(x, y, w, h);
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_dvd_setup_overlay_Port.cpp) */
+
 
 /* (re-ported mechanically: see ATIR500DVDContext_dvd_enable_overlay_Port.cpp) */
 

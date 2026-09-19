@@ -31,8 +31,8 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 /* real addr 0x18060 */
 VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param_1, UInt32 param_2, unsigned int param_3, UInt32 param_4, unsigned int *real_param_5, unsigned int *real_param_6) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_5 = reinterpret_cast<UInt8 *>(real_param_5);
-    UInt8 *param_6 = reinterpret_cast<UInt8 *>(real_param_6);
+    unsigned int *param_5 = real_param_5;
+    unsigned int *param_6 = real_param_6;
 
   int iVar1;
   UInt8 *pVVar2;

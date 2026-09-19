@@ -48,66 +48,8 @@ extern "C" void GLSurfaceRetry_IOSleep(UInt32 milliseconds) asm("_IOSleep");
  * retries, falls back to a real last-resort attempt against just this
  * surface's own persistent bits (+0xc1c & 3).
  */
-IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, eLockType lockTypeE) {
-    UInt32 lockType = static_cast<UInt32>(lockTypeE);
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 isWrite = static_cast<UInt8>((lockType == 0) << 1);
-    UInt8 isType2 = static_cast<UInt8>((lockType == 2) << 1);
-    UInt8 isType1 = static_cast<UInt8>((lockType == 1) << 1);
-    SInt32 retries = 0x3e9;
+/* (re-ported mechanically: see IOATIR500Surface_alloc_surfaces_retry_Port.cpp) */
 
-    for (;;) {
-        if ((isWrite >> 1 & 1) != 0) {
-            if (U8At(*reinterpret_cast<void **>(self + 0xd50), 0x80) == 0) {
-                return static_cast<IOReturn>(0xe00002be);
-            }
-        } else {
-            UInt8 slot;
-            if ((isType1 >> 1 & 1) != 0) {
-                slot = U8At(self, 0xbd0);
-            } else if ((isType2 >> 1 & 1) != 0) {
-                slot = U8At(self, 0xbd1);
-            } else {
-                goto checkEmptyMask;
-            }
-            if (slot != 0) {
-                return static_cast<IOReturn>(0xe00002cc);
-            }
-        }
-    checkEmptyMask:
-        if ((U32At(self, 0xbf8) & 0x20000000) != 0) {
-            return static_cast<IOReturn>(0xe00002cc);
-        }
-        if ((U32At(self, 0xbf8) & formatMask) == 0) {
-            return 0;
-        }
-        if ((isWrite >> 1 & 1) == 0 && U8At(*reinterpret_cast<void **>(self + 0xd50), 0x80) == 0) {
-            return static_cast<IOReturn>(0xe00002be);
-        }
-        {
-            SInt32 pageqResult = alloc_surfaces_pageq(formatMask, 0, false);
-            if (pageqResult == 0) {
-                return 0;
-            }
-            if (pageqResult == 2) {
-                return static_cast<IOReturn>(0xe00002cc);
-            }
-        }
-        retries -= 1;
-        if (retries == 0) {
-            SInt32 lastResort = alloc_surfaces_pageq(U32At(self, 0xc1c) & 3, 0, false);
-            return (lastResort == 0) ? static_cast<IOReturn>(0) : static_cast<IOReturn>(0xe00002cc);
-        }
-        {
-            UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-            GLSurfaceRetry_mutex_unlock(*reinterpret_cast<void **>(accel + 0x840));
-            GLSurfaceRetry_thread_block(0);
-            GLSurfaceRetry_IOSleep(1);
-            accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-            GLSurfaceRetry_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));
-        }
-    }
-}
 
 /*
  * attach_buffer_backing_store - CONFIRMED, transcribed faithfully.

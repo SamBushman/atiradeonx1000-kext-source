@@ -60,84 +60,8 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-void IOATIR500Surface::resetFullScreen() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
+/* (re-ported mechanically: see IOATIR500Surface_resetFullScreen_Port.cpp) */
 
-    if (U32At(self, 0xb70) == reinterpret_cast<UInt32>(self + 0x120)) {
-        U32At(self, 0xb74) = U32At(self, 0xb70);
-        U32At(self, 0xb80) = reinterpret_cast<UInt32>(self + 0x288);
-        U32At(self, 0xb84) = reinterpret_cast<UInt32>(self + 0x300);
-        U32At(self, 0xb70) = U32At(self, 0xc14) * 0x78 + reinterpret_cast<UInt32>(accel) + 300;
-    }
 
-    if (is_flip_allowed() != 0) {
-        UInt32 id = U32At(self, 0xc14);
-        if ((U32At(accel, 0xd0) & (1u << (id & 0x3f))) != 0) {
-            submit_flip_buffer(id, nullptr, 1); /* +0x5e0, RESOLVED issue #29: ATIR500Surface::submit_flip_buffer */
-            U32At(accel, 0x74c) += 1;
-        }
-    }
-}
+/* (re-ported mechanically: see ATIR500Surface_resetFullScreen_Port.cpp) */
 
-void ATIR500Surface::resetFullScreen() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-
-    UInt8 sideValue = U8At(self, 0xdbb);
-    UInt32 id = U32At(self, 0xc14);
-    U8At(accel + id * 0x78, 0x164) = sideValue;
-    U8At(self, id + 0xdb6) = 0;
-
-    /* real: transcribed to precisely match the raw decompile's own nested if/else - the two
-     * branches are NOT symmetric (real "which side" and "which fields" differ), not simplified. */
-    if (U8At(accel, 0x9b0) != 0) {
-        if (U32At(accel + id * 0x18, 0xb10) == 0) {
-            UInt32 otherId = (id == 0) ? 1u : 0u;
-            if (U32At(accel, 0x894) != 0 && U32At(accel + otherId * 0x18, 0xb10) != 0) {
-                UInt8 *otherRec = accel + otherId * 0x78;
-                U8At(otherRec, 0x9f4) = sideValue;
-                U8At(otherRec, 0x164) = sideValue;
-            }
-        } else {
-            U8At(accel + id * 0x78, 0x9f4) = sideValue;
-            if (U32At(accel, 0x894) != 0) {
-                UInt32 otherId = (id == 0) ? 1u : 0u;
-                if (U32At(accel + otherId * 0x18, 0xb10) == 0) {
-                    U8At(accel + otherId * 0x78, 0x164) = sideValue;
-                } else {
-                    U8At(accel + otherId * 0x78, 0x164) = sideValue;
-                    U8At(accel + otherId * 0x78, 0x9f4) = sideValue;
-                }
-            }
-        }
-    }
-
-    /* real: a genuine raw vtable-indirect call (not a base-qualified call) - ordinary virtual
-     * dispatch, which for this real object type resolves to THIS class's own composite
-     * is_flip_allowed() override, not the base's simpler check. CORRECTED before commit - an
-     * earlier draft of this file wrongly base-qualified this call. */
-    if (is_flip_allowed() == 0) {
-        UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(accel, 0x860)); /* real: *(int*)(accel+0x860) is a pointer VALUE, not accel+0x860 itself */
-        UInt8 b7 = U8At(mmio, 0x6107);
-        UInt8 b5 = U8At(mmio, 0x6105);
-        UInt8 b4 = U8At(mmio, 0x6104);
-        UInt32 field6 = (U8At(mmio, 0x6106) & 0xffcfu) << 0x10;
-        UInt8 sideAtId = U8At(accel + id * 0x78, 0x164);
-        UInt32 bit1 = (sideAtId & 1u) << 0x15;
-        UInt32 bit2 = (sideAtId > 1) ? 0x100000u : 0u;
-        UInt32 regOffset = (id == 0) ? 0x6104u : 0x6904u;
-        U32At(mmio, regOffset) = (static_cast<UInt32>(b4) << 0x18) | (static_cast<UInt32>(b5) << 0x10) |
-                                  (((bit2 | field6 | bit1) >> 8)) | static_cast<UInt32>(b7);
-        enforceInOrderExecutionIO();
-
-        if (U32At(accel, 0x894) != 0) {
-            UInt32 otherRegOffset = (id == 0) ? 0x6904u : 0x6104u;
-            U32At(mmio, otherRegOffset) = (static_cast<UInt32>(b4) << 0x18) | (static_cast<UInt32>(b5) << 0x10) |
-                                           (((bit2 | field6 | bit1) >> 8)) | static_cast<UInt32>(b7);
-            enforceInOrderExecutionIO();
-        }
-    }
-
-    IOATIR500Surface::resetFullScreen();
-}

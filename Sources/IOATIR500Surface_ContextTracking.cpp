@@ -59,50 +59,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * this project already established elsewhere, e.g.
  * ATIR500GLContext_TextureLoad.cpp).
  */
-void IOATIR500Surface::reset_access() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 prevTag = U32At(self, 0xc00);
+/* (re-ported mechanically: see IOATIR500Surface_reset_access_Port.cpp) */
 
-    typedef void (*Fn0x604)(void *);
-    (*reinterpret_cast<Fn0x604 *>(*reinterpret_cast<void ***>(self) + (0x604 / 4)))(self);
-
-    if (prevTag == U32At(self, 0xc00)) {
-        return;
-    }
-
-    typedef void (*ReleaseFn)(void *);
-    void *oldA = *reinterpret_cast<void **>(self + 0xd84);
-    if (oldA != nullptr) {
-        (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(oldA) + (0x18 / 4)))(oldA);
-    }
-    void *oldB = *reinterpret_cast<void **>(self + 0xd88);
-    if (oldB != nullptr) {
-        (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(oldB) + (0x18 / 4)))(oldB);
-    }
-    U32At(self, 0xc0c) = 0;
-    U32At(self, 0xc10) = 0;
-
-    typedef void *(*Fn0x150)(void *, UInt32);
-    void *accel = *reinterpret_cast<void **>(self + 0xc00);
-    void *descB = (*reinterpret_cast<Fn0x150 *>(*reinterpret_cast<void ***>(accel) + (0x150 / 4)))(accel, 1);
-    *reinterpret_cast<void **>(self + 0xd88) = descB;
-    if (descB != nullptr) {
-        typedef UInt32 (*Fn0xd0)(void *);
-        U32At(self, 0xc10) = (*reinterpret_cast<Fn0xd0 *>(*reinterpret_cast<void ***>(descB) + (0xd0 / 4)))(descB);
-    }
-
-    if (U8At(self, 0xbf4) != 0) {
-        typedef void *(*Fn0x14c)(void *, UInt32, UInt32, UInt32, UInt32, UInt32);
-        accel = *reinterpret_cast<void **>(self + 0xc00);
-        void *descA = (*reinterpret_cast<Fn0x14c *>(*reinterpret_cast<void ***>(accel) + (0x14c / 4)))(
-            accel, U32At(self, 0x78), 0, 1, 0, 0);
-        *reinterpret_cast<void **>(self + 0xd84) = descA;
-        if (descA != nullptr) {
-            typedef UInt32 (*Fn0xd0)(void *);
-            U32At(self, 0xc0c) = (*reinterpret_cast<Fn0xd0 *>(*reinterpret_cast<void ***>(descA) + (0xd0 / 4)))(descA);
-        }
-    }
-}
 
 /*
  * reset_req_bits - CONFIRMED. Real body: rebuilds this surface's own
@@ -118,36 +76,8 @@ void IOATIR500Surface::reset_access() {
  * project, and finally folds in one more real "primary" reference's
  * own +0x88 field if set.
  */
-void IOATIR500Surface::reset_req_bits() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 bits = U32At(self, 0xc1c) & 0x30000020;
-    U32At(self, 0xc1c) = bits;
-    U32At(self, 0xc18) = bits;
-    for (void *node = *reinterpret_cast<void **>(self + 0x88); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x84)) {
-        bits |= U32At(node, 0x8c);
-        U32At(self, 0xc18) = bits;
-    }
-    for (void *node = *reinterpret_cast<void **>(self + 0x8c); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x84)) {
-        bits |= U32At(node, 0x8c);
-        U32At(self, 0xc18) = bits;
-    }
-    for (void *node = *reinterpret_cast<void **>(self + 0xbcc); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x54)) {
-        if (U32At(node, 0x58) == 0x11) {
-            if ((U32At(self, 0xbf8) & 2) == 0 || U32At(self, 0x144) != 0) {
-                U32At(self, 0xc18) |= 2;
-            } else if ((U32At(self, 0xbf8) & 1) == 0 || U32At(self, 0xcc) != 0) {
-                U32At(self, 0xc18) |= 1;
-            }
-        } else {
-            UInt32 mask[8] = {};
-            surface_buffer_idx_mask(U32At(node, 0x58), mask);
-            U32At(self, 0xc18) |= mask[0];
-        }
-    }
-    if (U32At(self, 0x90) != 0) {
-        U32At(self, 0xc18) |= U32At(*reinterpret_cast<void **>(self + 0x90), 0x88);
-    }
-}
+/* (re-ported mechanically: see IOATIR500Surface_reset_req_bits_Port.cpp) */
+
 
 /*
  * prune_buffers - CONFIRMED, transcribed faithfully preserving the
@@ -168,111 +98,5 @@ void IOATIR500Surface::reset_req_bits() {
  * `this`-own +0x5a4 vtable slot (NOT the same as GL's own +0x5a4
  * `invalidate` - a different class, a different real vtable).
  */
-void IOATIR500Surface::prune_buffers() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 reqBits;
-    UInt32 persistBits = 0;
+/* (re-ported mechanically: see IOATIR500Surface_prune_buffers_Port.cpp) */
 
-    if ((U32At(self, 0xbe8) & 0x20) == 0) {
-        reqBits = U32At(self, 0xc18);
-        if ((reqBits & 2) == 0) {
-            *reinterpret_cast<UInt8 **>(self + 0xb84) = self + 0x300;
-            *reinterpret_cast<UInt8 **>(self + 0xb80) = self + 0x300;
-            UInt8 *rec = *reinterpret_cast<UInt8 **>(self + 0xd50) + U32At(self, 0xc14) * 0x78 + 300;
-            *reinterpret_cast<UInt8 **>(self + 0xb70) = rec;
-            *reinterpret_cast<UInt8 **>(self + 0xb74) = rec;
-        } else if (U32At(self, 0xb74) == U32At(self, 0xb70)) {
-            *reinterpret_cast<UInt8 **>(self + 0xb74) = self + 0x120;
-            *reinterpret_cast<UInt8 **>(self + 0xb80) = self + 0x288;
-        }
-        goto sweep;
-    }
-
-    reqBits = U32At(self, 0xc18);
-    if ((reqBits & 1) == 0) {
-        if ((reqBits & 2) == 0) {
-            persistBits = U32At(self, 0xbf8);
-            if ((persistBits & 2) != 0) {
-                U32At(self, 0xc1c) |= 1;
-                goto merge;
-            }
-        } else {
-            persistBits = U32At(self, 0xbf8);
-        }
-        U32At(self, 0xc1c) |= 2;
-    } else {
-        persistBits = U32At(self, 0xbf8);
-        U32At(self, 0xc1c) |= 1;
-    }
-merge:
-    reqBits |= U32At(self, 0xc1c);
-    U32At(self, 0xc18) = reqBits;
-    *reinterpret_cast<UInt8 **>(self + 0xb70) = self + ((reqBits & 1) == 0 ? 0x120 : 0xa8);
-    *reinterpret_cast<UInt8 **>(self + 0xb74) = self + ((reqBits & 2) == 0 ? 0xa8 : 0x120);
-    if ((U32At(self, 0xbe8) & 0x10) != 0) {
-        *reinterpret_cast<UInt8 **>(self + 0xb84) = self + ((reqBits & 0x20) == 0 ? 0x288 : 0x300);
-        *reinterpret_cast<UInt8 **>(self + 0xb80) = self + ((reqBits & 0x10) == 0 ? 0x300 : 0x288);
-    }
-    U32At(self, 0xbf8) = persistBits | 0x10000000;
-
-sweep:
-    UInt32 slotIdx = 0;
-    UInt8 *rec = self;
-    for (;;) {
-        if (((1u << (slotIdx & 0x3f)) & reqBits) == 0) {
-            dealloc_surface(slotIdx);
-            if (U32At(rec, 0xcc) != 0) {
-                free_buffer_backing_store(reinterpret_cast<ATIR500SurfaceBuffer *>(self + slotIdx * 0x78 + 0xa8));
-            }
-            if (U32At(rec, 0xb8) != 0) {
-                U16At(rec, 0xbc) = 0;
-                U16At(rec, 0xbe) = 0;
-                U16At(rec, 0xc0) = 0;
-                U16At(rec, 0xc4) = 0;
-                U8At(rec, 0xe4) = 0;
-                U8At(rec, 0xdc) = 0;
-                U8At(rec, 0xdd) = 0;
-                U8At(rec, 0xde) = 0;
-                U8At(rec, 0xe0) = 0;
-                U8At(rec, 0xe1) = 0;
-                U8At(rec, 0xdf) = 0xff;
-                U16At(rec, 0xc6) = 0;
-                U16At(rec, 0xc8) = 1;
-                U16At(rec, 0xca) = 1;
-                U32At(rec, 0xa8) = 0;
-                U32At(rec, 0xac) = 0;
-                U32At(rec, 0xb0) = 0;
-                U32At(rec, 0xb4) = 0;
-                U32At(rec, 0xb8) = 0;
-                U32At(rec, 0xcc) = 0;
-                U32At(rec, 0xd0) = 0xffffffff;
-                U32At(rec, 0xd4) = 0;
-                U32At(rec, 0xd8) = 0;
-                U8At(rec, 0xe3) = 6;
-                U32At(self + slotIdx * 0x78, 0xe4) = (U32At(self + slotIdx * 0x78, 0xe4) & 0xff0007ff) | 0x111000;
-                U32At(rec, 0xec) = 0;
-                U32At(rec, 0xe8) = 0;
-            }
-        }
-        bool atEnd = (slotIdx == 0x16);
-        rec += 0x78;
-        slotIdx += 1;
-        if (atEnd) break;
-        reqBits = U32At(self, 0xc18);
-    }
-
-    shape_surface();
-
-    UInt8 *accel;
-    if (U16At(self, 0xc14) == 0xffff) {
-        accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-    } else {
-        accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-        if (reinterpret_cast<UInt8 *>(this) == *reinterpret_cast<UInt8 **>(accel + U16At(self, 0xc14) * 0x20 + 0xe8)) {
-            typedef void (*Fn0x5a4)(void *);
-            (*reinterpret_cast<Fn0x5a4 *>(*reinterpret_cast<void ***>(self) + (0x5a4 / 4)))(self);
-            accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-        }
-    }
-    U32At(accel, 0x78) = 0;
-}

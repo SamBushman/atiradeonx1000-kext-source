@@ -46,27 +46,8 @@ IOReturn IOATIR5002DContext::get_config(UInt32 *out0, UInt32 *out1) {
 
 /* finish(mode): 0 = wait on this context's own stamp (same slot GL finish uses, +0x55c); 1 / 2 = wait on
  * the accelerator's own pending stamp (-1) via slot +0x55c / +0x558; anything else = BadArgument. */
-IOReturn IOATIR5002DContext::finish(UInt32 mode) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = accelerator;
-    if (mode == 0) {
-        SInt32 delta = CallAccelWait(accel, 0x55c, U32At(self, 0x7c));
-        if (delta == -1) {
-            return 0xe00002d6;
-        }
-        U32At(accelerator, 0x7a4) += delta;
-        return 0;
-    }
-    if (mode != 1 && mode != 2) {
-        return 0xe00002c2;
-    }
-    SInt32 delta = CallAccelWait(accel, mode == 1 ? 0x55c : 0x558, U32At(accel, 0x50) - 1);
-    if (delta == -1) {
-        return 0xe00002d6;
-    }
-    U32At(accelerator, 0x7a0) += delta;
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_finish_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR5002DContext_scale_surface_Port.cpp) */
 
@@ -79,50 +60,14 @@ IOReturn IOATIR5002DContext::finish(UInt32 mode) {
 /* (re-ported mechanically: see IOATIR5002DContext_declare_image_Port.cpp) */
 
 
-IOReturn IOATIR5002DContext::create_image(UInt32 param1, UInt32 param2, unsigned int *outLow, unsigned int *outHigh) {
-    if (param1 == 0) {
-        return 0xe00002c2;
-    }
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    Ctx2D_lock(lock);
-    if (sharedAllocator == nullptr && !create_shared()) {
-        Ctx2D_unlock(lock);
-        return 0xe00002be;
-    }
-    void *texture = sharedAllocator->new_texture(param1, param2, 0, 0, outLow, outHigh);
-    Ctx2D_unlock(lock);
-    return texture == nullptr ? 0xe00002bd : 0;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_create_image_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR5002DContext_delete_image_Port.cpp) */
 
 
-IOReturn IOATIR5002DContext::wait_image(UInt32 textureID) {
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    Ctx2D_lock(lock);
-    IOATIR500Shared *shared = sharedAllocator;
-    if (shared == nullptr) {
-        Ctx2D_unlock(lock);
-        return 0xe00002be;
-    }
-    UInt8 *sharedBytes = reinterpret_cast<UInt8 *>(shared);
-    UInt8 *tex = nullptr;
-    if (textureID < U32At(sharedBytes, 0x14)) {
-        tex = reinterpret_cast<UInt8 **>(U32At(sharedBytes, 0x10))[textureID];
-    }
-    if (tex == nullptr) {
-        Ctx2D_unlock(lock);
-        return 0xe00002c2;
-    }
-    Ctx2D_unlock(lock);
-    /* real: wait on the texture record's own stamp (record+8) via accelerator slot +0x550 */
-    SInt32 delta = CallAccelWait(accelerator, 0x550, U32At(reinterpret_cast<void *>(U32At(tex, 0x14)), 8));
-    if (delta == -1) {
-        return 0xe00002d6;
-    }
-    U32At(accelerator, 0x75c) += delta;
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_wait_image_Port.cpp) */
+
 
 /* set_surface_paging_options / set_surface_vsync_options: deliberate stubs in the shipped driver */
 IOReturn IOATIR5002DContext::set_surface_paging_options(IOSurfacePagingControlInfoStruct *inStruct, IOSurfacePagingControlInfoStruct *outStruct, UInt32 structSize, UInt32 *outTag) {

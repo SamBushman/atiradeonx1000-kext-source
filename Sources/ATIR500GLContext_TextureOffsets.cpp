@@ -32,42 +32,8 @@ inline UInt32 &U32At(void *base, int offset) {
  *     ATIR500SurfaceBuffer::mipOffsets[]/pitch fields
  *   anything else: 0
  */
-UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *texture, bool forWrite) {
-    UInt32 kind = U32At(texture, 0x20);
+/* (re-ported mechanically: see ATIR500GLContext_GetTextureOffset_Port.cpp) */
 
-    if (kind == 3 || kind == 7) {
-        UInt32 writeOffset = forWrite ? 0 : U32At(texture, 0x60);
-        return writeOffset + U32At(texture, 0x48);
-    }
-    if (kind == 6) {
-        void *sub = reinterpret_cast<void *>(U32At(texture, 0x54));
-        if (U32At(sub, 4) != 0) {
-            UInt32 writeOffset = forWrite ? 0 : U32At(texture, 0x60);
-            return U32At(sub, 4) + writeOffset + U32At(texture, 0x50) + U32At(accelerator, 0x8a4);
-        }
-    } else if (kind == 0) {
-        IOATIR500Surface *surface = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
-        if (surface != nullptr) {
-            UInt32 scratch[8] = {};
-            /* FIXED (issue #1, first build attempt): was called with zero
-             * arguments against a real 2-parameter member function
-             * (IOATIR500Surface.h) - every other real call site in this
-             * project (ATIR500GLContext_ProcessCommandBuffer.cpp/
-             * TextureLoad.cpp) passes the texture's own +0x58 field plus
-             * an output scratch array, matching this project's own
-             * previously-established real signature; this call site had
-             * been left "simplified" instead of matching it. */
-            UInt32 mipIndex = surface->surface_buffer_idx_mask(U32At(texture, 0x58), scratch);
-            UInt8 *mipRecord = reinterpret_cast<UInt8 *>(*reinterpret_cast<UInt32 *>(
-                reinterpret_cast<UInt8 *>(surface) + mipIndex * 4 + 0xb70));
-            (void)scratch;
-            return static_cast<UInt32>(*reinterpret_cast<UInt16 *>(mipRecord + 0x20)) *
-                       *reinterpret_cast<UInt32 *>(mipRecord + U32At(texture, 0x60) * 4 + 0x40) +
-                   *reinterpret_cast<UInt32 *>(mipRecord + 8);
-        }
-    }
-    return 0;
-}
 
 /*
  * WriteTextureOffset - CONFIRMED. Walks past any real type-1 (alias)
@@ -77,33 +43,8 @@ UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *texture, bool for
  * convention this project has seen throughout the opcode 0x37/0x39
  * family, gated on a real per-texture format-flags dword at `+0x68`.
  */
-UInt32 ATIR500GLContext::WriteTextureOffset(UInt32 param1, UInt32 *outputBuffer, UInt32 index,
-                                              VendorTextureBuffer *texture) {
-    while (U32At(texture, 0x20) == 1) {
-        texture = reinterpret_cast<VendorTextureBuffer *>(U32At(texture, 0x50));
-        if (texture == nullptr) return 0;
-    }
+/* (re-ported mechanically: see ATIR500GLContext_WriteTextureOffset_Port.cpp) */
 
-    UInt8 formatBits = *reinterpret_cast<UInt8 *>(reinterpret_cast<UInt8 *>(U32At(texture, 0x14)) + 0x15);
-    UInt32 offset = GetTextureOffset(texture, false);
-    UInt32 patched = (formatBits & 0x1f) | (offset & 0xffffffe0u);
-
-    outputBuffer[index] = param1 + 0x1150;
-    outputBuffer[index + 1] = patched;
-
-    UInt32 formatFlags = U32At(texture, 0x68);
-    if ((formatFlags & 0xc0000000) == 0) {
-        outputBuffer[index + 2] = 0x80000000; /* real Type-2 filler */
-        return 3;
-    }
-    if (param1 < 8) {
-        outputBuffer[index + 2] = param1 + 0x1158;
-        outputBuffer[index + 3] = patched + (formatFlags & 0x3fffff) * 0x20;
-        return 4;
-    }
-    outputBuffer[index + 2] = 0xc0001000; /* real Type-3 NOP */
-    return 4;
-}
 
 /*
  * GetVertexArrayOffset - CONFIRMED. The vertex-attribute-buffer analog of
@@ -152,49 +93,5 @@ UInt32 ATIR500GLContext::GetQueryOffset(VendorTextureBuffer *buffer, UInt32 para
  * the `this+0x364`/`this+0x368` fields they reference was not
  * independently re-derived this pass (see GAPS.md).
  */
-UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32 *outputBuffer, UInt32 startIndex) {
-    UInt32 headerBase = 0x832;
-    UInt32 oddSlot = 1;
-    bool useFixedSlots = (U32At(this, 0x364) == 0);
+/* (re-ported mechanically: see ATIR500GLContext_WriteVertexArrayOffset_Port.cpp) */
 
-    UInt8 *cursorA = reinterpret_cast<UInt8 *>(this) + 4;
-    UInt8 *cursorB = reinterpret_cast<UInt8 *>(this);
-    UInt32 outOffsetOdd = startIndex * 4 + 4;
-    UInt32 outOffsetEven = startIndex * 4 + 8;
-    UInt32 index = startIndex;
-
-    for (;;) {
-        UInt32 slotA, slotB;
-        if (useFixedSlots) {
-            slotA = 0x10;
-            slotB = 0x10;
-        } else {
-            slotA = oddSlot + 0xf;
-            slotB = oddSlot + 0x10;
-        }
-
-        outputBuffer[index] = headerBase | 0x10000;
-
-        VendorTextureBuffer *bufA = *reinterpret_cast<VendorTextureBuffer **>(
-            reinterpret_cast<UInt8 *>(this) + slotA * 4 + 0x2a4);
-        UInt32 offsetA = GetVertexArrayOffset(bufA, U32At(cursorB, 0x368));
-        *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(outputBuffer) + outOffsetOdd) = offsetA;
-        index += 3;
-        outOffsetOdd += 0xc;
-
-        VendorTextureBuffer *bufB = *reinterpret_cast<VendorTextureBuffer **>(
-            reinterpret_cast<UInt8 *>(this) + slotB * 4 + 0x2a4);
-        UInt32 offsetB = GetVertexArrayOffset(bufB, U32At(cursorA, 0x368));
-        *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(outputBuffer) + outOffsetEven) = offsetB;
-
-        bool more = (oddSlot != 0xf);
-        cursorA += 8 * 4;
-        cursorB += 8 * 4;
-        headerBase += 3;
-        oddSlot += 2;
-        outOffsetEven += 0xc;
-        if (!more) break;
-    }
-
-    return 0x18; /* real fixed return value - total dwords written */
-}

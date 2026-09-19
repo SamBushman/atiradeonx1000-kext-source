@@ -60,49 +60,8 @@ extern "C" void GLContext_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
-IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, unsigned int structPtr, unsigned int structSize) {
-    (void)structPtr; (void)structSize; /* the dispatcher appends the (unused, size 0) struct pointer and size to every scalarI/structI call */
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    void *commandLock = *reinterpret_cast<void **>(accel + 0x840);
-    GLContext_mutex_lock(commandLock);
+/* (re-ported mechanically: see IOATIR500GLContext_page_off_texture_Port.cpp) */
 
-    IOReturn result;
-    void *sharedAllocator = reinterpret_cast<void *>(U32At(self, 0x88));
-    if (textureID < U32At(sharedAllocator, 0x14)) {
-        VendorTextureBuffer *texture = reinterpret_cast<VendorTextureBuffer *>(
-            U32At(reinterpret_cast<void *>(U32At(sharedAllocator, 0x10)), textureID * 4));
-        if (texture != nullptr) {
-            UInt8 *faceMip = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(texture) + 0x14)
-                              + (mipAndFace >> 0x10) * 2;
-            UInt16 dirtyBits = U16At(faceMip, 0x1c);
-            UInt16 loadedBits = U16At(faceMip, 0x28);
-            if (((static_cast<UInt32>(dirtyBits) & ~static_cast<UInt32>(loadedBits)) >> (mipAndFace & 0x3f)) & 1) {
-                /* real: vtable+0x52c call rendered with ZERO visible
-                 * arguments in the raw decompile (the same "Ghidra
-                 * calling-convention-inference artifact" category this
-                 * project already documents elsewhere, e.g. OSObject::
-                 * release()'s own call sites) - NOT independently
-                 * confirmed which of `texture`/`param3`/something else
-                 * maps to the real target's own `(VendorTextureBuffer*,
-                 * long, long)` parameter list. `texture` as the first
-                 * (pointer) argument is the only sane reading; the two
-                 * real `long` arguments are UNCONFIRMED - passed as 0
-                 * here rather than guessed at, since `pageoff_dirty_
-                 * texture`'s own decompiled body (see ATIRadeonX1000.h)
-                 * never references its own trailing `long` parameter(s)
-                 * at all, meaning their real values provably do not
-                 * affect real behavior even if this guess is wrong. */
-                accelerator->pageoff_dirty_texture(texture, 0, 0);
-            }
-            GLContext_mutex_unlock(commandLock);
-            return 0;
-        }
-    }
-    result = 0xe00002c2;
-    GLContext_mutex_unlock(commandLock);
-    return result;
-}
 
 /*
  * ATIRadeonX1000::pageoff_dirty_texture - see this function's own
@@ -150,53 +109,5 @@ IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFac
  * sandboxed environment this was written in (same standing limitation as
  * every other file in this project).
  */
-void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *texture, long /*param2, real: confirmed unused*/, long /*param3, real: confirmed unused*/) {
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
+/* (re-ported mechanically: see ATIRadeonX1000_pageoff_dirty_texture_Port.cpp) */
 
-    if (U32At(tex, 0x48) == 0) {
-        return;
-    }
-
-    void *memoryDescriptor = *reinterpret_cast<void **>(tex + 8);
-    typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
-    void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
-        *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-        memoryDescriptor, kernelTaskRef, 0, 1, 0, 0);
-    if (memHandle == nullptr) {
-        return;
-    }
-
-    typedef ATITextureBufferHeader *(*GetHwInfoFn)(void *);
-    ATITextureBufferHeader *hwInfo =
-        (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);
-
-    UInt32 flags = U32At(hwInfo, 0x20);
-    if ((flags & 0x20000000u) == 0) {
-        if ((flags & 0x40000000u) != 0) {
-            pageoff_linear_buffer(texture, hwInfo);
-        } else {
-            bool gpuHandled = pageoff_dirty_texture_with_gpu(texture, hwInfo) != 0;
-            if (!gpuHandled) {
-                bool cpuReady = prepare_texture_for_pageoff_with_cpu(texture, hwInfo) != 0;
-                if (cpuReady) {
-                    pageoff_dirty_texture_with_cpu(texture, hwInfo);
-                }
-            }
-        }
-
-        UInt8 *mip = *reinterpret_cast<UInt8 **>(tex + 0x14);
-        if (*reinterpret_cast<UInt16 *>(mip + 0x36) == 0) {
-            UInt32 faceCount = *reinterpret_cast<UInt8 *>(mip + 0x34);
-            if (faceCount != 0) {
-                for (UInt32 face = 0; face < faceCount; face++) {
-                    UInt8 *faceMip = mip + face * 2;
-                    U16At(faceMip, 0x1c) |= U16At(faceMip, 0x28);
-                    mip = *reinterpret_cast<UInt8 **>(tex + 0x14);
-                }
-            }
-        }
-    }
-
-    typedef void (*ReleaseFn)(void *);
-    (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
-}

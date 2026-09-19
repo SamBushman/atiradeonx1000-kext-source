@@ -57,28 +57,5 @@ extern "C" void *IONDRVFramebuffer_metaClass asm("__ZN17IONDRVFramebuffer9metaCl
  * and the vtable +0x70c call is (display, attribute, &value) - the second scalar's ADDRESS is passed. The earlier
  * transcription passed a scratch local and described the second scalar as "silently unused". The 2D context's
  * set_macrovision (IOATIR5002DContext_Surface.cpp) has the same shape with the attribute fixed at 0x92. */
-IOReturn ATIR500DVDContext::set_macrovision(UInt32 attribute, UInt32 value) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    DVD_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));
+/* (re-ported mechanically: see ATIR500DVDContext_set_macrovision_Port.cpp) */
 
-    IOReturn result;
-    if (*reinterpret_cast<SInt8 *>(accel + 0x80) == 0) {
-        result = 0xe00002d8;
-    } else {
-        UInt32 fbIndex = boundSurface->getFramebufferIndex();
-        void *tableEntry = *reinterpret_cast<void **>(accel + fbIndex * 0x20 + 0xd4);
-        void *casted = FUN_safeMetaCast(tableEntry, IONDRVFramebuffer_metaClass);
-        *reinterpret_cast<void **>(self + 0x160) = casted;
-        if (casted == nullptr) {
-            result = 0xe00002c0;
-        } else {
-            typedef IOReturn (*Fn0x70c)(void *, UInt32, UInt32 *);
-            result = (*reinterpret_cast<Fn0x70c *>(*reinterpret_cast<void ***>(casted) + (0x70c / 4)))(
-                casted, attribute, &value);
-        }
-    }
-
-    DVD_mutex_unlock(*reinterpret_cast<void **>(accel + 0x840));
-    return result;
-}

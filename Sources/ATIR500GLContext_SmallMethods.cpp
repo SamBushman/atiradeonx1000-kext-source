@@ -41,49 +41,8 @@ void ATIR500GLContext::set_texture_flags(VendorTextureBuffer *texture) {
 /* Real: the base class's own check first; if the modes are not already compatible, try to merge the per-context
  * bits (0x30000 = stereo/quad bits, 0x700000 / 0xc0000 = multisample fields) into *modeBits, failing (false) if
  * two different non-zero values collide. */
-bool ATIR500GLContext::setCompatibleSurfaceMode(SInt32 *modeBits, eIOGLContextModeBits modeEnum, SInt32 flagsIn) {
-    UInt32 mode = static_cast<UInt32>(modeEnum);
-    UInt32 flags = static_cast<UInt32>(flagsIn);
-    if (IOATIR500GLContext::setCompatibleSurfaceMode(modeBits, modeEnum, flagsIn)) {
-        return true;
-    }
-    UInt32 cur = static_cast<UInt32>(*modeBits);
-    UInt32 merged = cur & 0xffff7fc0u;
-    if ((flags & 0x40) == 0) {
-        merged = (mode & 0x30000u) | (cur & 0xfffc7fc0u);
-    } else {
-        UInt32 want = mode & 0x30000u;
-        if ((cur & 0x30000u) != want) {
-            if ((cur & 0x30000u) != 0 && want != 0) {
-                return false;
-            }
-            merged |= want;
-        }
-    }
-    if ((flags & 0x200) == 0) {
-        merged = (mode & 0x7c0000u) | (merged & 0xff83ffffu);
-    } else {
-        UInt32 want = mode & 0x700000u;
-        if ((merged & 0x700000u) != want) {
-            if ((merged & 0x700000u) != 0 && want != 0) {
-                return false;
-            }
-            merged |= want;
-        }
-        want = mode & 0xc0000u;
-        if ((merged & 0xc0000u) != want) {
-            if ((merged & 0xc0000u) != 0 && want != 0) {
-                return false;
-            }
-            merged |= want;
-        }
-    }
-    if ((merged & 0xfffcffffu) == (mode & 0xfffcc03fu)) {
-        *modeBits = static_cast<SInt32>(merged | (cur & 0x803fu) | (mode & 0x30000u));
-        return true;
-    }
-    return true;
-}
+/* (re-ported mechanically: see ATIR500GLContext_setCompatibleSurfaceMode_Port.cpp) */
+
 
 /* Real: recompute the two effective-mode halfwords (this+0x3aa / this+0xac) from this context's mode word
  * (+0x35c) and the bound surface's mode bits, rebuild the scissor, then invalidate and clear the accelerator's

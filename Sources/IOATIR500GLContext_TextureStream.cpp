@@ -40,43 +40,8 @@ inline UInt8 &U8At(void *base, int offset) {
  * texture in the chain and loops; type 8 decrements a refcount and
  * stores the current generation tag.
  */
-void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture) {
-    UInt32 generation = U32At(accelerator, 0x50);
+/* (re-ported mechanically: see IOATIR500GLContext_remove_texture_from_stream_Port.cpp) */
 
-    while (texture != nullptr) {
-        void *rec = reinterpret_cast<void *>(U32At(texture, 0x14));
-        U32At(rec, 8) = generation;
-        UInt32 kind = U32At(texture, 0x20);
-
-        if (kind == 6) {
-            void *sub = reinterpret_cast<void *>(U32At(texture, 0x54));
-            void *subRec = reinterpret_cast<void *>(U32At(sub, 0x14));
-            U32At(subRec, 8) = generation;
-            S16At(sub, 0xe) -= 1;
-            return;
-        }
-        if (kind == 0) {
-            IOATIR500Surface *vtableOwner = reinterpret_cast<IOATIR500Surface *>(U32At(texture, 0x50));
-            if (vtableOwner == nullptr) return;
-            /* real: update_ref_stamps/decrement_refcounts - RESOLVED, issue #18 */
-            vtableOwner->update_ref_stamps(generation, 3);
-            vtableOwner->decrement_refcounts(3);
-            return;
-        }
-        if (kind == 1) {
-            texture = reinterpret_cast<VendorTextureBuffer *>(U32At(texture, 0x50));
-            continue; /* real: loop back with the chained texture */
-        }
-        if (kind == 8) {
-            if (U32At(texture, 0x48) == 0) {
-                S16At(texture, 0xe) -= 1;
-            }
-            U32At(texture, 0x5c) = generation; /* generationTag */
-            return;
-        }
-        return; /* any other real discriminant value: no-op, CONFIRMED */
-    }
-}
 
 /*
  * add_texture_to_stream - CONFIRMED, fully transcribed (real kext offset

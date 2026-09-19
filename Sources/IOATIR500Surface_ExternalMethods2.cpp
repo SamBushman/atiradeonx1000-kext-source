@@ -155,39 +155,5 @@ IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 value, UInt32
  * or kIOReturnCannotLock, never actually acquiring anything - matching
  * this project's own already-established header comment exactly.
  */
-IOReturn IOATIR500Surface::surface_query_lock() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xd50);
-    SurfExtM2_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
+/* (re-ported mechanically: see IOATIR500Surface_surface_query_lock_Port.cpp) */
 
-    IOReturn result;
-    UInt8 *primaryBuf = *reinterpret_cast<UInt8 **>(self + 0xb70);
-    if ((U32At(self, 0xbd0) & 0xffff0000u) == 0 && U32At(primaryBuf, 0x10) != 0) {
-        if ((U32At(self, 0xbf8) & 0x20000000u) == 0) {
-            UInt32 bits = U32At(self, 0xbf8) & U32At(self, 0xc1c);
-            if ((bits & 3) != 0) {
-                UInt32 otherSlot = (bits & 1) ^ 1;
-                UInt8 *slotBase = self + otherSlot * 0x78;
-                if (U32At(slotBase, 0xb8) != 0 && U32At(slotBase, 0xb0) == 0) {
-                    typedef SInt32 (*Fn0x5d0)(void *);
-                    void **selfVtable = *reinterpret_cast<void ***>(self);
-                    SInt32 attempted = (*reinterpret_cast<Fn0x5d0 *>(selfVtable + (0x5d0 / 4)))(this);
-                    if (attempted != 0) {
-                        result = 0;
-                        dealloc_surface(otherSlot);
-                        goto tail;
-                    }
-                    result = 0xe00002cc;
-                    goto tail;
-                }
-            }
-            result = 0;
-            goto tail;
-        }
-    }
-    result = 0xe00002cc;
-
-tail:
-    SurfExtM2_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50)) + 0x840));
-    return result;
-}

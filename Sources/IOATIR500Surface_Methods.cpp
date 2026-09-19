@@ -133,26 +133,8 @@ SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 
     return 1;
 }
 
-bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *rec = reinterpret_cast<UInt8 *>(buffer);
-    UInt32 page = static_cast<UInt32>(kernelPageSize);
-    UInt32 size = (page + U32At(rec, 0x10) - 1u) & static_cast<UInt32>(-kernelPageSize);
-    void *desc = SurfM_inTaskWithOptions(reinterpret_cast<void *>(U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x220)), 0x10063, size, 0);
-    if (desc != nullptr) {
-        U8At(self, 0xbf7) = 1;
-        attach_buffer_backing_store(buffer, reinterpret_cast<IOMemoryDescriptor *>(desc), 0, U16At(rec, 0x18));
-        UInt8 *backing = reinterpret_cast<UInt8 *>(U32At(rec, 0x24));
-        U8At(backing, 0x59) = 0;
-        U32At(backing, 0x54) = U32At(self, 0x7c) - 1;
-    } else {
-        UInt32 index = static_cast<UInt32>((static_cast<SInt32>(reinterpret_cast<UInt32>(rec)) -
-                                            static_cast<SInt32>(reinterpret_cast<UInt32>(self + 0xa8))) >> 3) *
-                       static_cast<UInt32>(-0x11111111);
-        dealloc_surface(index);
-    }
-    return desc != nullptr;
-}
+/* (re-ported mechanically: see IOATIR500Surface_alloc_buffer_backing_store_Port.cpp) */
+
 
 UInt32 IOATIR500Surface::move_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer) {
     copy_buffer_from_backing_store(buffer);
@@ -165,61 +147,11 @@ static inline void ClearPendingBit(UInt8 *self, UInt32 index) {
     U32At(self, 0xbf8) &= ~(1u << (index & 0x1f));
 }
 
-bool IOATIR500Surface::alloc_surface_keep(IOATIR500Surface *other, VendorTextureBuffer **texture, SInt32 param3, UInt32 index) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    ATIR500SurfaceBuffer *rec = reinterpret_cast<ATIR500SurfaceBuffer *>(self + index * 0x78 + 0xa8);
-    if (U32At(self, index * 0x78 + 0xb8) == 0 || U32At(self, index * 0x78 + 0xb0) != 0) {
-        if (U32At(self, index * 0x78 + 0xcc) != 0) {
-            free_buffer_backing_store(rec);
-        }
-    } else {
-        UInt32 ok = alloc_surface_buffer(rec);
-        if (ok == 0) {
-            ok = reinterpret_cast<ATIRadeonX1000 *>(U32At(self, 0xd50))->freeToAllocSurfaceVRAM(this, other, texture, param3, rec);
-            if (ok == 0) {
-                return false;
-            }
-        }
-        if (((3u >> (index & 0x3f)) & 1) != 0) {
-            U32At(self, 0xbf8) |= 0x10000000;
-        }
-        if (U32At(self, index * 0x78 + 0xcc) != 0) {
-            move_buffer_from_backing_store(rec);
-        }
-    }
-    ClearPendingBit(self, index);
-    return true;
-}
+/* (re-ported mechanically: see IOATIR500Surface_alloc_surface_keep_Port.cpp) */
 
-bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    ATIR500SurfaceBuffer *rec = reinterpret_cast<ATIR500SurfaceBuffer *>(self + index * 0x78 + 0xa8);
-    if (U32At(self, index * 0x78 + 0xb8) == 0 || U32At(self, index * 0x78 + 0xb0) != 0) {
-        if (U32At(self, index * 0x78 + 0xcc) != 0) {
-            free_buffer_backing_store(rec);
-        }
-    } else {
-        UInt32 ok = alloc_surface_buffer(rec);
-        if (ok == 0) {
-            ok = reinterpret_cast<ATIRadeonX1000 *>(U32At(self, 0xd50))->freeToAllocSurfaceVRAM(this, nullptr, nullptr, 0, rec);
-            if (ok == 0) {
-                return false;
-            }
-        }
-        if (((3u >> (index & 0x3f)) & 1) != 0) {
-            U32At(self, 0xbf8) |= 0x10000000;
-        }
-        if (U32At(self, index * 0x78 + 0xcc) != 0) {
-            if (moveFromBacking) {
-                move_buffer_from_backing_store(rec);
-            } else {
-                free_buffer_backing_store(rec);
-            }
-        }
-    }
-    ClearPendingBit(self, index);
-    return true;
-}
+
+/* (re-ported mechanically: see IOATIR500Surface_alloc_surface_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500Surface_setupFullScreen_Port.cpp) */
 
@@ -227,125 +159,5 @@ bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
 /* (re-ported mechanically: see IOATIR500Surface_clientMemoryForType_Port.cpp) */
 
 
-void IOATIR500Surface::stop(IOService *provider) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(self, 0xd58) = 0;
+/* (re-ported mechanically: see IOATIR500Surface_stop_Port.cpp) */
 
-    UInt8 *prev = reinterpret_cast<UInt8 *>(U32At(self, 0x9c));
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    U32At(prev, 0xa0) = U32At(self, 0xa0);
-    U32At(reinterpret_cast<void *>(U32At(self, 0xa0)), 0x9c) = reinterpret_cast<UInt32>(prev);
-    if (reinterpret_cast<UInt8 *>(this) == reinterpret_cast<UInt8 *>(U32At(accel, 0x5c))) {
-        if (reinterpret_cast<UInt8 *>(this) == reinterpret_cast<UInt8 *>(U32At(self, 0x9c))) {
-            U32At(accel, 0x5c) = 0;
-        } else {
-            U32At(accel, 0x5c) = U32At(self, 0x9c);
-        }
-        accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    }
-    U32At(accel, 0x730) -= 1;
-    if (U32At(self, 0xd48) != 0) {
-        UInt32 count = U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x21c);
-        if (count != 0) {
-            U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x21c) = count - 1;
-        }
-    }
-
-    /* release the orphaned-texture chain (next pointer at texture+0x54) */
-    UInt8 *orphan = reinterpret_cast<UInt8 *>(U32At(self, 0xbcc));
-    while (orphan != nullptr) {
-        U32At(orphan, 0x50) = 0;
-        U8At(reinterpret_cast<void *>(U32At(orphan, 0x14)), 0x14) = 1;
-        U32At(self, 0xbcc) = U32At(orphan, 0x54);
-        U32At(orphan, 0x54) = 0;
-        orphan = reinterpret_cast<UInt8 *>(U32At(self, 0xbcc));
-    }
-
-    /* give back the full-screen panel this surface owns, if any */
-    if (U32At(self, 0xc14) != 0xffff) {
-        UInt8 *acc = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-        if (reinterpret_cast<UInt8 *>(this) == reinterpret_cast<UInt8 *>(U32At(acc, U32At(self, 0xc14) * 0x20 + 0xe8))) {
-            resetFullScreen();
-            U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), U32At(self, 0xc14) * 0x20 + 0xe8) = 0;
-            U32At(self, 0xc14) = 0xffff;
-        }
-    }
-
-    UInt8 lockState = U8At(self, 0xbd0);
-    if (lockState != 0) {
-        if (lockState == 3) {
-            UInt8 *bufRec = reinterpret_cast<UInt8 *>(U32At(self, 0xb70));
-            if (U32At(self, 0xd8c) == 0) {
-                UInt8 *backing = reinterpret_cast<UInt8 *>(U32At(bufRec, 0x24));
-                if (backing != nullptr && U32At(backing, 0x10) != 0) {
-                    ReleaseObj(reinterpret_cast<void *>(U32At(backing, 0x10)));
-                    U32At(reinterpret_cast<void *>(U32At(bufRec, 0x24)), 0x10) = 0;
-                }
-            } else {
-                free_buffer_backing_orphans();
-            }
-        } else if (lockState == 1) {
-            complete_vram(reinterpret_cast<ATIR500SurfaceBuffer *>(U32At(self, 0xb70)));
-        }
-        U8At(self, 0xbd0) = 0;
-    }
-
-    if (U32At(self, 0xd84) != 0) {
-        ReleaseObj(reinterpret_cast<void *>(U32At(self, 0xd84)));
-        U32At(self, 0xd84) = 0;
-    }
-    if (U32At(self, 0xd88) != 0) {
-        ReleaseObj(reinterpret_cast<void *>(U32At(self, 0xd88)));
-        U32At(self, 0xd88) = 0;
-    }
-
-    /* detach every context still bound to this surface */
-    IOATIR500GLContext *gl = reinterpret_cast<IOATIR500GLContext *>(U32At(self, 0x88));
-    while (gl != nullptr) {
-        gl->remove_surface();
-        IOATIR500GLContext *next = reinterpret_cast<IOATIR500GLContext *>(U32At(gl, 0x84));
-        U32At(gl, 0x84) = 0;
-        gl = next;
-    }
-    IOATIR5002DContext *ctx2d = reinterpret_cast<IOATIR5002DContext *>(U32At(self, 0x8c));
-    while (ctx2d != nullptr) {
-        ctx2d->remove_surface();
-        IOATIR5002DContext *next = reinterpret_cast<IOATIR5002DContext *>(U32At(ctx2d, 0x84));
-        U32At(ctx2d, 0x84) = 0;
-        ctx2d = next;
-    }
-    if (U32At(self, 0x90) != 0) {
-        reinterpret_cast<IOATIR500DVDContext *>(U32At(self, 0x90))->remove_surface();
-    }
-
-    for (UInt32 i = 0; i <= 0x16; i++) {
-        dealloc_surface(i);
-        UInt8 *rec = self + i * 0x78;
-        if (U32At(rec, 0xcc) != 0) {
-            delete_buffer_backing(reinterpret_cast<IOTextureBuffer *>(U32At(rec, 0xcc)));
-            U32At(rec, 0xcc) = 0;
-        }
-    }
-
-    UInt8 *acc = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    if (U32At(acc, 0xcc) != 0) {
-        for (UInt32 idx = 0; idx < U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0xcc); idx++) {
-            if (U32At(self, idx * 0x94 + 0xc28) != 0) {
-                freeAllSwapBuffers(idx);
-            }
-            if (U32At(self, idx * 8 + 0xd60) != 0) {
-                SurfM_IOFree(reinterpret_cast<void *>(U32At(self, idx * 8 + 0xd60)), U32At(self, idx * 8 + 0xd64));
-                UInt8 *owner = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-                if (owner != nullptr) {
-                    U32At(owner, 0x804) = U32At(owner, 0x804) - U32At(self, idx * 8 + 0xd64);
-                }
-                U32At(self, idx * 8 + 0xd64) = 0;
-                U32At(self, idx * 8 + 0xd60) = 0;
-            }
-        }
-    }
-    if (U32At(self, 0xd8c) != 0) {
-        free_buffer_backing_orphans();
-    }
-    IOUserClient::stop(provider);
-}

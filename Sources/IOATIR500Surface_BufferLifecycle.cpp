@@ -63,26 +63,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * task*). Parameters below renamed from the earlier guesses to the real ones. */
 extern "C" void *FUN_000128ec(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
 
-bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, unsigned int options, UInt32 rowMultiplier) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    const UInt32 kPageSize = 0x1000;
+/* (re-ported mechanically: see IOATIR500Surface_connect_buffer_backing_store_Port.cpp) */
 
-    UInt32 remainder = (kPageSize - 1) & options;
-    UInt32 size = (~(kPageSize - 1)) & (kPageSize + U16At(buf, 0x1e) * rowMultiplier + remainder - 1);
-    if (U32At(self, 0xd4c) != 0) {
-        size = U32At(self, 0xd4c);
-    }
-    IOMemoryDescriptor *descriptor = reinterpret_cast<IOMemoryDescriptor *>(
-        FUN_000128ec(options & ~(kPageSize - 1), size, 0x10003, *reinterpret_cast<void **>(self + 0x78)));
-    if (descriptor != nullptr) {
-        typedef void (*Fn0xdc)(void *, UInt32, UInt32);
-        (*reinterpret_cast<Fn0xdc *>(*reinterpret_cast<void ***>(descriptor) + (0xdc / 4)))(descriptor, 2, 0);
-        attach_buffer_backing_store(buffer, descriptor, remainder, rowMultiplier);
-        U8At(*reinterpret_cast<void **>(buf + 0x24), 0x59) = 1;
-    }
-    return descriptor != nullptr;
-}
 
 /*
  * copy_buffer_from_backing_store - CONFIRMED. Real body: only actually
@@ -103,62 +85,5 @@ bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer
  * `connect_buffer_backing_store` above already establishes, mode 3
  * instead of 2.
  */
-UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
+/* (re-ported mechanically: see IOATIR500Surface_copy_buffer_from_backing_store_Port.cpp) */
 
-    if (U32At(*reinterpret_cast<void **>(buf + 0x24), 0x54) == U32At(self, 0x7c)) {
-        void *accel = *reinterpret_cast<void **>(self + 0xd50);
-        U32At(accel, 0x724) += U32At(buf, 0x10);
-
-        UInt32 cols = U16At(buf, 0x20);
-        UInt32 currentTag = U32At(self, 0x7c);
-        UInt32 mipLevel = U32At(*reinterpret_cast<void **>(self + 0xd50), 0x50);
-        if (cols != 0) {
-            UInt16 rows = U16At(buf, 0x22);
-            UInt32 col = 0;
-            do {
-                if (rows != 0) {
-                    UInt32 row = 0;
-                    do {
-                        UInt32 tileAddr = 0;
-                        UInt32 tileInfo[6] = {};
-                        typedef void (*Fn0x5f0)(void *, ATIR500SurfaceBuffer *, UInt32, UInt32, UInt32 *, UInt32 *, UInt32);
-                        (*reinterpret_cast<Fn0x5f0 *>(*reinterpret_cast<void ***>(self) + (0x5f0 / 4)))(
-                            self, buffer, col, row, &tileAddr, tileInfo, 0);
-                        UInt32 nextRow = row + 1;
-                        typedef void (*Fn0x5ec)(void *, UInt32, UInt32, UInt32, UInt32, UInt32, UInt32, ATIR500SurfaceBuffer *, UInt32, UInt32, UInt32, UInt32, UInt32);
-                        (*reinterpret_cast<Fn0x5ec *>(*reinterpret_cast<void ***>(self) + (0x5ec / 4)))(
-                            self, 0, 0, tileAddr, tileInfo[0], col, row, buffer, mipLevel - 1, 0, 0, 0, 1);
-                        U32At(*reinterpret_cast<void **>(buf + 0x24), 8) = currentTag;
-                        rows = U16At(buf, 0x22);
-                        row = nextRow;
-                        if (row >= rows) break;
-                    } while (true);
-                    cols = U16At(buf, 0x20);
-                }
-                col += 1;
-            } while (col < cols);
-        }
-
-        UInt8 *rec = self + 0xcc;
-        for (SInt32 i = 0x17; i != 0; --i) {
-            void *recPtr = *reinterpret_cast<void **>(rec);
-            rec += 0x78;
-            if (recPtr != nullptr && currentTag == U32At(recPtr, 0x54)) {
-                U32At(recPtr, 0x54) = U32At(self, 0x7c);
-            }
-        }
-    }
-
-    if (U8At(self, 0xc09) == 0 && (U32At(self, 0xbd0) & 0xffff0000) == 0 && U8At(self, 0xc08) == 0 &&
-        U8At(self, 0xbf7) != 0 && U32At(buf, 0x24) != 0) {
-        void *backing = *reinterpret_cast<void **>(buf + 0x24);
-        void *desc = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(backing) + 8);
-        if (desc != nullptr) {
-            typedef void (*Fn0xdc)(void *, UInt32, UInt32);
-            (*reinterpret_cast<Fn0xdc *>(*reinterpret_cast<void ***>(desc) + (0xdc / 4)))(desc, 3, 0);
-        }
-    }
-    return 1;
-}

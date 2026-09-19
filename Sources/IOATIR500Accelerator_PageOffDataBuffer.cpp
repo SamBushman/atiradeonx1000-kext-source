@@ -57,54 +57,5 @@
 
 extern "C" int kernelTaskRef asm("_kernel_task"); /* kernel_task pointer value; the Ghidra label "_ASICSupportsAGP" hid this real relocation target (issue #58 follow-up) */
 
-void IOATIR500Accelerator::pageOffDataBuffer(VendorTextureBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see IOATIR500Accelerator_pageOffDataBuffer_Port.cpp) */
 
-    if (!allocDataBufferBacking(buffer)) {
-        deallocate_texture(buffer);
-
-        /* real: unconditional, no null checks in the raw decompile - this
-         * is a real circular doubly-linked list (an unlinked node points
-         * to itself, never to null), consistent with every other such
-         * list in this project. */
-        VendorTextureBuffer *prev = reinterpret_cast<VendorTextureBuffer *>(buffer->surfaceOrFormatInfo);
-        VendorTextureBuffer *next = reinterpret_cast<VendorTextureBuffer *>(buffer->listNext);
-        prev->listNext = next;
-        buffer->listNext = buffer;
-        next->surfaceOrFormatInfo = prev;
-        buffer->surfaceOrFormatInfo = buffer;
-        return;
-    }
-
-    typedef void (*Fn0xf0)(void *, UInt32, UInt32, UInt32);
-    void *gartMapping = buffer->gartMapping;
-    if (gartMapping != nullptr) {
-        (*reinterpret_cast<Fn0xf0 *>(*reinterpret_cast<void ***>(gartMapping) + (0xf0 / 4)))(gartMapping, 0, 0x400, 0);
-    }
-
-    typedef void *(*PrepareMappingFn)(void *, int, int, UInt32, int, int);
-    void *memoryDescriptor = buffer->memoryDescriptor;
-    void *memHandle = (*reinterpret_cast<PrepareMappingFn *>(
-        *reinterpret_cast<void ***>(memoryDescriptor) + (0x14c / 4)))(
-        memoryDescriptor, kernelTaskRef, 0, 0x401, 0, 0);
-    if (memHandle != nullptr) {
-        typedef UInt32 *(*GetHwInfoFn)(void *);
-        UInt32 *hwInfo = (*reinterpret_cast<GetHwInfoFn *>(*reinterpret_cast<void ***>(memHandle) + (0xd0 / 4)))(memHandle);
-        UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
-
-        if ((buffer->poolSizeClass >> 2) != 0) {
-            UInt8 *src = *reinterpret_cast<UInt8 **>(self + 0xe4) + buffer->transferBufferFlag;
-            UInt32 count = buffer->poolSizeClass >> 2;
-            for (UInt32 i = 0; i < count; i++) {
-                *reinterpret_cast<UInt32 *>(hwInfoBytes + i * 4) = *reinterpret_cast<UInt32 *>(src + i * 4);
-            }
-        }
-
-        typedef void (*ReleaseFn)(void *);
-        (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(memHandle) + (0x18 / 4)))(memHandle);
-    }
-
-    if (gartMapping != nullptr) {
-        (*reinterpret_cast<Fn0xf0 *>(*reinterpret_cast<void ***>(gartMapping) + (0xf0 / 4)))(gartMapping, reinterpret_cast<UInt32>(memoryDescriptor), 0x400, 0);
-    }
-}

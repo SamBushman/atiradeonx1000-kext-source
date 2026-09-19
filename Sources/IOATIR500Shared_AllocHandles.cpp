@@ -48,56 +48,5 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-bool IOATIR500Shared::alloc_handles() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see IOATIR500Shared_alloc_handles_Port.cpp) */
 
-    UInt32 oldCount = U32At(self, 0x14);
-    UInt32 newCount, newPrimarySize, newBitmapSize;
-    if (oldCount == 0) {
-        newCount = 0x400;
-        newPrimarySize = 0x1000;
-        newBitmapSize = 0x80;
-    } else {
-        newCount = oldCount << 1;
-        newPrimarySize = oldCount << 3;   /* = newCount * 4 */
-        newBitmapSize = oldCount >> 2;    /* = newCount / 8 */
-    }
-    UInt32 newTotalSize = newPrimarySize + newBitmapSize;
-
-    UInt8 *oldBuffer = reinterpret_cast<UInt8 *>(U32At(self, 0x10));
-    UInt32 oldBitmapBase = U32At(self, 0x18);
-
-    UInt8 *newBuffer = reinterpret_cast<UInt8 *>(FUN_00016a88(newTotalSize));
-    U32At(self, 0x10) = reinterpret_cast<UInt32>(newBuffer);
-    if (newBuffer == nullptr) {
-        U32At(self, 0x10) = reinterpret_cast<UInt32>(oldBuffer);
-        return false;
-    }
-
-    UInt8 *owner = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-    if (owner != nullptr) {
-        U32At(owner, 0x808) += newTotalSize;
-    }
-
-    U32At(self, 0x14) = newCount;
-    U32At(self, 0x18) = reinterpret_cast<UInt32>(newBuffer + newPrimarySize);
-
-    FUN_00016a78(newBuffer, 0, newTotalSize);
-
-    if (oldBuffer != nullptr) {
-        UInt32 oldPrimarySize = oldCount * 4;
-        UInt32 oldBitmapSize = oldCount >> 3;
-        UInt32 oldTotalSize = oldPrimarySize + oldBitmapSize;
-
-        FUN_00016a68(newBuffer, oldBuffer, oldPrimarySize);
-        FUN_00016a68(reinterpret_cast<void *>(U32At(self, 0x18)), reinterpret_cast<void *>(oldBitmapBase), oldBitmapSize);
-        FUN_00016a58(oldBuffer, oldTotalSize);
-
-        UInt8 *owner2 = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-        if (owner2 != nullptr) {
-            U32At(owner2, 0x808) -= oldTotalSize;
-            return true;
-        }
-    }
-    return true;
-}

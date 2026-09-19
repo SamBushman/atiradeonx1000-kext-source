@@ -67,41 +67,4 @@ extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 v
 
 extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd) asm("__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_");
 
-extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd) {
-    while (rangeStart < rangeEnd) {
-        UInt32 header = *rangeStart;
-        UInt32 type = header >> 30;
-
-        if (type == 1) {
-            store_reg(state, header & 0x7ff, rangeStart[1]);
-            store_reg(state, (header >> 11) & 0x7ff, rangeStart[2]);
-            rangeStart += 3;
-        } else if (type == 0) {
-            UInt32 baseReg = header & 0x1fff;
-            UInt32 count = (header >> 16) & 0x3fff;
-            rangeStart += 1;
-            if (header & 0x8000) {
-                /* real: same register index repeated for every dword in the range */
-                if (count != 0xffffffff) {
-                    for (UInt32 n = 0; n != count + 1; n++) {
-                        store_reg(state, baseReg, *rangeStart);
-                        rangeStart += 1;
-                    }
-                }
-            } else {
-                /* real: register index increments once per written dword */
-                if (count != 0xffffffff) {
-                    for (UInt32 n = 0; n != count + 1; n++) {
-                        store_reg(state, baseReg, *rangeStart);
-                        rangeStart += 1;
-                        baseReg += 1;
-                    }
-                }
-            }
-        } else if (type == 2) {
-            rangeStart += 1;
-        } else { /* type == 3 */
-            rangeStart = reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(rangeStart) + ((header >> 14) & 0xfffc) + 8);
-        }
-    }
-}
+/* (re-ported mechanically: see track_regs_written_by_pm4_Port.cpp) */

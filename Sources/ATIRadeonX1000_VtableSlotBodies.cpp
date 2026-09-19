@@ -94,41 +94,8 @@ namespace {
 inline UInt8 *ByteAt(void *base, int offset) { return reinterpret_cast<UInt8 *>(base) + offset; }
 } // namespace
 
-bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 size) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 blockOffset = recordIndex * 0x1c4;
+/* (re-ported mechanically: see IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp) */
 
-    UInt16 oldCount = *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x402));
-    if (oldCount == 0x10) {
-        return false;
-    }
-
-    UInt32 newCount = (oldCount == 0) ? 1 : (static_cast<UInt32>(oldCount) << 1);
-
-    if (oldCount < newCount) {
-        VendorCommandBuffer *slot = reinterpret_cast<VendorCommandBuffer *>(ByteAt(self, oldCount * 0x1c + blockOffset + 0x240));
-        UInt32 idx = oldCount;
-        while (idx != newCount) {
-            if (!allocCommandBuffer(slot, size)) {
-                /* real: roll back every newly-allocated slot, in reverse order, down to (but not including) oldCount */
-                if (static_cast<SInt32>(idx) - 1 >= static_cast<SInt32>(oldCount)) {
-                    VendorCommandBuffer *rollback = reinterpret_cast<VendorCommandBuffer *>(ByteAt(self, (idx - 1) * 0x1c + blockOffset + 0x240));
-                    for (SInt32 i = static_cast<SInt32>(idx) - 1; i >= static_cast<SInt32>(oldCount); i--) {
-                        freeCommandBuffer(rollback);
-                        rollback = reinterpret_cast<VendorCommandBuffer *>(ByteAt(rollback, -0x1c));
-                    }
-                }
-                return false;
-            }
-            idx++;
-            slot = reinterpret_cast<VendorCommandBuffer *>(ByteAt(slot, 0x1c));
-        }
-    }
-
-    *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x402)) = static_cast<UInt16>(newCount);
-    *reinterpret_cast<UInt16 *>(ByteAt(self, blockOffset + 0x400)) = oldCount;
-    return true;
-}
 
 bool ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment) {
     ATIR500Memory *pool = *reinterpret_cast<ATIR500Memory **>(reinterpret_cast<UInt8 *>(this) + 0x93c);

@@ -166,33 +166,8 @@ IOReturn IOATIR500GLContext::set_swap_interval(SInt32 a, SInt32 b) {
  * it if free (and clear). The paired accelerator "generation" flag at
  * +0x70 mirrors which state (claimed/free) is current.
  */
-IOReturn IOATIR500GLContext::become_global_shared(UInt32 claim) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    IOReturn result;
-    if (claim == 0) {
-        void *held = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x6c);
-        if (held != nullptr && held == *reinterpret_cast<void **>(self + 0x88) &&
-            U32At(held, 0x24) == 0) {
-            U32At(accel, 0x6c) = 0;
-            U32At(accel, 0x70) = 0;
-            result = 0;
-        } else {
-            result = 0xe00002cc;
-        }
-    } else {
-        if (U32At(accel, 0x6c) == 0 && U32At(*reinterpret_cast<void **>(self + 0x88), 0x24) == 0) {
-            U32At(accel, 0x6c) = *reinterpret_cast<UInt32 *>(self + 0x88);
-            U32At(accel, 0x70) = 1;
-            result = 0;
-        } else {
-            result = 0xe00002cc;
-        }
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_become_global_shared_Port.cpp) */
+
 
 /*
  * purge_texture - CONFIRMED. Real body: bounds-checked texture lookup
@@ -230,57 +205,8 @@ IOReturn IOATIR500GLContext::become_global_shared(UInt32 claim) {
  * drains the free list itself back down to the 0x10 threshold via
  * `freeOneDataBuffer` too.
  */
-IOReturn IOATIR500GLContext::reclaim_resources() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    ATIRadeonX1000 *accel = *reinterpret_cast<ATIRadeonX1000 **>(self + 0xc8);
-    UInt8 *accelBytes = reinterpret_cast<UInt8 *>(accel);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(accelBytes + 0x840));
-    U32At(accelBytes, 0x5c8) = 0x20000;
-    U32At(accelBytes, 0x5d8) = 0x10000;
+/* (re-ported mechanically: see IOATIR500GLContext_reclaim_resources_Port.cpp) */
 
-    VendorTextureBuffer *node = *reinterpret_cast<VendorTextureBuffer **>(self + 0xe8);
-    while (node != nullptr) {
-        UInt8 *nodeBytes = reinterpret_cast<UInt8 *>(node);
-        accel = *reinterpret_cast<ATIRadeonX1000 **>(self + 0xc8);
-        accelBytes = reinterpret_cast<UInt8 *>(accel);
-        VendorTextureBuffer *next = *reinterpret_cast<VendorTextureBuffer **>(nodeBytes + 0x3c);
-        if (U32At(accelBytes, 0x5d4) < 0x10) {
-            if (U32At(accelBytes, 0x5d0) == 0) {
-                *reinterpret_cast<VendorTextureBuffer **>(accelBytes + 0x5cc) = node;
-            } else {
-                void *tail = *reinterpret_cast<void **>(accelBytes + 0x5d0);
-                U32At(tail, 0x3c) = reinterpret_cast<UInt32>(node);
-            }
-            U32At(accelBytes, 0x5d0) = reinterpret_cast<UInt32>(node);
-            U32At(nodeBytes, 0x3c) = 0;
-            U32At(accelBytes, 0x5d4) += 1;
-            U8At(nodeBytes, 0x54) = 0;
-            void *desc = *reinterpret_cast<void **>(nodeBytes + 0x10);
-            if (desc != nullptr) {
-                typedef void (*ReleaseFn)(void *);
-                (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(desc) + (0x18 / 4)))(desc);
-                U32At(nodeBytes, 0x10) = 0;
-            }
-        } else {
-            accel->freeOneDataBuffer(node);
-        }
-        node = next;
-    }
-
-    UInt8 *accel2 = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8));
-    U32At(self, 0xf0) = 0;
-    U32At(self, 0xe8) = 0;
-    U32At(self, 0xec) = 0;
-    while (U32At(accel2, 0x5d4) > 0xf) {
-        VendorTextureBuffer *freeNode = *reinterpret_cast<VendorTextureBuffer **>(accel2 + 0x5cc);
-        U32At(accel2, 0x5cc) = U32At(reinterpret_cast<UInt8 *>(freeNode), 0x3c);
-        U32At(accel2, 0x5d4) -= 1;
-        reinterpret_cast<ATIRadeonX1000 *>(*reinterpret_cast<void **>(self + 0xc8))->freeOneDataBuffer(freeNode);
-        accel2 = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8));
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(accel2 + 0x840));
-    return 0;
-}
 
 /*
  * set_stereo - CONFIRMED, simple forward to
@@ -340,43 +266,8 @@ IOReturn IOATIR500GLContext::set_stereo(UInt32 param1, UInt32 param2) {
  * base UInt16 record at `*(surface+0xb70)+0x1c/+0x1e`, else real
  * SInt16 fields directly at +0xbd8/+0xbda).
  */
-IOReturn IOATIR500GLContext::get_surface_info(UInt32 surfaceID, SInt32 *outConfig, SInt32 *outW, SInt32 *outH) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Accelerator *accel = *reinterpret_cast<IOATIR500Accelerator **>(self + 0xc8);
-    UInt8 *accelBytes = reinterpret_cast<UInt8 *>(accel);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(accelBytes + 0x840));
-    IOReturn result;
-    if (surfaceID != 0) {
-        void *surface = accel->find_surface_for_id(surfaceID);
-        if (surface != nullptr) {
-            UInt8 *surf = reinterpret_cast<UInt8 *>(surface);
-            UInt32 config = U32At(surf, 0xbe8);
-            if ((U32At(surf, 0xc18) & 8) != 0) {
-                config |= 0x200;
-            } else if ((U32At(surf, 0xc18) & 4) != 0) {
-                config |= 0x100;
-            }
-            *outConfig = static_cast<SInt32>(config);
-            if (U32At(surf, 0xbd8) == U32At(surf, 0xbd4)) {
-                void *baseRec = *reinterpret_cast<void **>(surf + 0xb70);
-                *outW = static_cast<SInt32>(U16At(baseRec, 0x1c));
-                *outH = static_cast<SInt32>(U16At(baseRec, 0x1e));
-            } else {
-                *outW = S16At(surf, 0xbd8);
-                *outH = S16At(surf, 0xbda);
-            }
-            result = 0;
-            goto done;
-        }
-    }
-    result = 0xe00002c2;
-    *outConfig = 0;
-    *outW = 0;
-    *outH = 0;
-done:
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(accelBytes + 0x840));
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_get_surface_info_Port.cpp) */
+
 
 /*
  * get_config / get_status - CONFIRMED, transcribed faithfully
@@ -398,84 +289,8 @@ done:
  * pass walks backwards from the scan's own stopping point calling a
  * real vtable +0x544 "commit" call for every unit that was dirty.
  */
-IOReturn IOATIR500GLContext::get_config(UInt32 *outA, UInt32 *outStatus, UInt32 *outB) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    typedef SInt32 (*Fn0x548)(void *);
-    typedef SInt32 (*Fn0x540)(void *, void *, UInt32, UInt32);
-    typedef void (*Fn0x544)(void *, void *);
+/* (re-ported mechanically: see IOATIR500GLContext_get_config_Port.cpp) */
 
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-
-    void *surface = *reinterpret_cast<void **>(self + 0x290);
-    if (surface != nullptr && U32At(surface, 0xa4) > 0xff) {
-        UInt8 *accelBytes = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8));
-        if (U8At(accelBytes, 0x80) == 0) {
-            do {
-                /* real: a direct (non-vtable) call, same shape (lock, self,
-                 * 0) at several distinct real addresses throughout this
-                 * project's raw decompile (Ghidra assigns each call site
-                 * its own stub name) - matches IOKit's own real
-                 * IOLockSleep(IOLock*, void*, UInt32) exactly. */
-                IOLockSleep(reinterpret_cast<IOLock *>(*reinterpret_cast<void **>(accelBytes + 0x840)), accelBytes, 0);
-            } while (U8At(reinterpret_cast<void *>(*reinterpret_cast<void **>(self + 0xc8)), 0x80) == 0);
-        }
-    }
-    accel = *reinterpret_cast<void **>(self + 0xc8);
-    *outA = U32At(accel, 0x98);
-    *outB = U32At(accel, 0x9c);
-
-    UInt32 status;
-    if (surface == nullptr) {
-        status = static_cast<UInt32>((*reinterpret_cast<Fn0x548 *>(*reinterpret_cast<void ***>(accel) + (0x548 / 4)))(accel));
-    } else {
-        UInt32 record[4 * 23] = {};
-        UInt32 unitIdx = 0;
-        SInt32 byteOff = 0;
-        SInt32 stopAt = 0x16;
-        bool shortCircuit = false;
-        for (;;) {
-            if ((1u << (unitIdx & 0x3f)) & U32At(self, 0x8c)) {
-                UInt32 *slot = record + unitIdx * 4;
-                slot[0] = slot[1] = slot[2] = slot[3] = 0;
-                SInt32 resolveResult = (*reinterpret_cast<Fn0x540 *>(*reinterpret_cast<void ***>(accel) + (0x540 / 4)))(
-                    accel, slot, U32At(reinterpret_cast<UInt8 *>(surface) + byteOff, 0xb8), 0x1000);
-                if (resolveResult == 0) {
-                    stopAt = static_cast<SInt32>(unitIdx) - 1;
-                    status = 0;
-                    shortCircuit = true;
-                    if (stopAt < 0) {
-                        goto writeStatus;
-                    }
-                    break;
-                }
-            }
-            if (unitIdx == 0x16) break;
-            byteOff += 0x78;
-            unitIdx += 1;
-        }
-        if (!shortCircuit) {
-            stopAt = 0x16;
-            status = static_cast<UInt32>((*reinterpret_cast<Fn0x548 *>(*reinterpret_cast<void ***>(accel) + (0x548 / 4)))(accel));
-        }
-        {
-            SInt32 recIdx = stopAt << 4;
-            SInt32 i = 0;
-            do {
-                if ((1u << ((stopAt - i) & 0x3f)) & U32At(self, 0x8c)) {
-                    (*reinterpret_cast<Fn0x544 *>(*reinterpret_cast<void ***>(accel) + (0x544 / 4)))(
-                        accel, reinterpret_cast<UInt8 *>(record) + recIdx);
-                }
-                i += 1;
-                recIdx -= 0x10;
-            } while (i != stopAt + 1);
-        }
-    }
-writeStatus:
-    *outStatus = status;
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8)) + 0x840));
-    return 0;
-}
 
 /*
  * get_status - CONFIRMED, same real shape as get_config immediately
@@ -483,80 +298,8 @@ writeStatus:
  * own +0xbf8 field gates whether the scan even runs at all here,
  * unlike get_config), same real wait/resolve/commit vtable slots.
  */
-IOReturn IOATIR500GLContext::get_status(UInt32 *outStatus) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    typedef SInt32 (*Fn0x540)(void *, void *, UInt32, UInt32);
-    typedef void (*Fn0x544)(void *, void *);
+/* (re-ported mechanically: see IOATIR500GLContext_get_status_Port.cpp) */
 
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-
-    void *surface = *reinterpret_cast<void **>(self + 0x290);
-    if (surface != nullptr) {
-        if (U32At(surface, 0xa4) > 0xff) {
-            UInt8 *accelBytes = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8));
-            if (U8At(accelBytes, 0x80) == 0) {
-                do {
-                    IOLockSleep(reinterpret_cast<IOLock *>(*reinterpret_cast<void **>(accelBytes + 0x840)), accelBytes, 0);
-                } while (U8At(reinterpret_cast<void *>(*reinterpret_cast<void **>(self + 0xc8)), 0x80) == 0);
-                surface = *reinterpret_cast<void **>(self + 0x290);
-                if (surface == nullptr) {
-                    goto noSurface;
-                }
-            }
-        }
-        if ((U32At(surface, 0xbf8) & 0x20000000) == 0) {
-            accel = *reinterpret_cast<void **>(self + 0xc8);
-            UInt32 record[4 * 23] = {};
-            UInt32 unitIdx = 0;
-            SInt32 byteOff = 0;
-            SInt32 stopAt = 0x16;
-            bool shortCircuit = false;
-            for (;;) {
-                if ((1u << (unitIdx & 0x3f)) & U32At(self, 0x8c)) {
-                    UInt32 *slot = record + unitIdx * 4;
-                    slot[0] = slot[1] = slot[2] = slot[3] = 0;
-                    SInt32 resolveResult = (*reinterpret_cast<Fn0x540 *>(*reinterpret_cast<void ***>(accel) + (0x540 / 4)))(
-                        accel, slot, U32At(reinterpret_cast<UInt8 *>(surface) + byteOff, 0xb8), 0x1000);
-                    if (resolveResult == 0) {
-                        stopAt = static_cast<SInt32>(unitIdx) - 1;
-                        *outStatus = 0;
-                        shortCircuit = true;
-                        if (stopAt < 0) {
-                            goto done;
-                        }
-                        break;
-                    }
-                }
-                if (unitIdx == 0x16) break;
-                byteOff += 0x78;
-                unitIdx += 1;
-            }
-            if (!shortCircuit) {
-                stopAt = 0x16;
-                *outStatus = 1;
-            }
-            {
-                SInt32 recIdx = stopAt << 4;
-                SInt32 i = 0;
-                do {
-                    if ((1u << ((stopAt - i) & 0x3f)) & U32At(self, 0x8c)) {
-                        (*reinterpret_cast<Fn0x544 *>(*reinterpret_cast<void ***>(accel) + (0x544 / 4)))(
-                            accel, reinterpret_cast<UInt8 *>(record) + recIdx);
-                    }
-                    i += 1;
-                    recIdx -= 0x10;
-                } while (i != stopAt + 1);
-            }
-            goto done;
-        }
-    }
-noSurface:
-    *outStatus = 0;
-done:
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xc8)) + 0x840));
-    return 0;
-}
 
 /*
  * set_surface - CONFIRMED, transcribed faithfully. Real body: looks up

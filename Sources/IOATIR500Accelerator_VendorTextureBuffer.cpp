@@ -45,33 +45,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 extern "C" void *VendorTexBuf_IOMalloc(UInt32 size) asm("_IOMalloc");
 extern "C" void VendorTexBuf_IOFree(void *ptr, UInt32 size) asm("_IOFree");
 
-VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 size) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 *rec = reinterpret_cast<UInt32 *>(VendorTexBuf_IOMalloc(size));
-    U32At(self, 0x808) += size;
-    U16At(rec, 0xc) = 4; /* real: `*(undefined2*)(puVar1+3) = 4` - puVar1+3 elements = byte 0xc */
-    rec[0] = 0; rec[1] = 0; rec[2] = 0;
-    U16At(rec, 0xe) = 0;
-    rec[4] = 0; rec[5] = 0; rec[6] = 0; rec[7] = 0;
-    U16At(rec, 0x22) = 0;
-    rec[0xb] = 0; rec[0xc] = 0;
-    rec[0xf] = 0; rec[0x10] = 0; rec[0x11] = 0; rec[0x12] = 0; rec[0x13] = 0;
-    rec[0x14] = 0; rec[0x15] = 0; rec[0x16] = 0;
-    rec[0x18] = 0; rec[0x19] = 0;
-    U16At(rec, 0x1c * 4) = 0;
-    U16At(rec, 0x72) = 0;
-    rec[9] = reinterpret_cast<UInt32>(rec);
-    rec[10] = reinterpret_cast<UInt32>(rec);
-    rec[0xd] = reinterpret_cast<UInt32>(rec);
-    rec[0xe] = reinterpret_cast<UInt32>(rec);
-    rec[0x1b] = 0xffffffff;
-    rec[0x1a] = 0;
-    rec[0x1d] = 0;
-    U16At(rec, 0x1e * 4) = 0;
-    U16At(rec, 0x7a) = 0;
-    rec[0x1f] = 0;
-    return reinterpret_cast<VendorTextureBuffer *>(rec);
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_allocVendorTextureBuffer_Port.cpp) */
+
 
 void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

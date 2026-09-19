@@ -89,46 +89,5 @@ inline void ReleaseObj(void *obj) {
    implicit `this` and `handle` (really an IOMemoryDescriptor*) as `mem`. */
 extern "C" void *FUN_00007f8c(void *liveContextNode, UInt32 handle) asm("__ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDescriptor");
 
-void IOATIR500GLContext::freeCommandBuffer() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U32At(self, 0xd4) == 0) {
-        return;
-    }
-    UInt32 handle = U32At(self, 0xd4);
-    UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 200);
+/* (re-ported mechanically: see IOATIR500GLContext_freeCommandBuffer_Port.cpp) */
 
-    UInt8 *node = *reinterpret_cast<UInt8 **>(accel + 0x60); /* liveGLContextListHead */
-    if (node != nullptr) {
-        do {
-            if (U32At(accel, 0x5c8) < U32At(node, 0xb0)) {
-                U32At(accel, 0x5c8) = U32At(node, 0xb0);
-            }
-            void *found = FUN_00007f8c(node, handle);
-            if (found != nullptr) {
-                ReleaseObj(found);
-            }
-            node = *reinterpret_cast<UInt8 **>(node + 0x80); /* nextLiveContext */
-            if (node != nullptr) {
-                accel = *reinterpret_cast<UInt8 **>(self + 200);
-            }
-        } while (node != nullptr);
-        accel = *reinterpret_cast<UInt8 **>(self + 200);
-    }
-
-    UInt8 *node2 = *reinterpret_cast<UInt8 **>(accel + 0x68); /* real, not-previously-documented second list */
-    if (node2 != nullptr) {
-        do {
-            if (U32At(accel, 0x5c8) < 0x80000) {
-                U32At(accel, 0x5c8) = 0x80000;
-            }
-            void *found = FUN_00007f8c(node2, handle);
-            if (found != nullptr) {
-                ReleaseObj(found);
-            }
-            node2 = *reinterpret_cast<UInt8 **>(node2 + 0x80);
-            if (node2 != nullptr) {
-                accel = *reinterpret_cast<UInt8 **>(self + 200);
-            }
-        } while (node2 != nullptr);
-    }
-}

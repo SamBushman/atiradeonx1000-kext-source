@@ -63,48 +63,8 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-void IOATIR500Surface::flush_surface(UInt32 formatMask, UInt32 flushArg) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50));
+/* (re-ported mechanically: see IOATIR500Surface_flush_surface_Port.cpp) */
 
-    bool needsFlush = (U8At(self, 0xbed) != 0);
-    if (!needsFlush) {
-        typedef SInt32 (*Fn0x554)(void *, UInt32);
-        void **accelVtable = *reinterpret_cast<void ***>(accel);
-        SInt32 pending = (*reinterpret_cast<Fn0x554 *>(accelVtable + (0x554 / 4)))(accel, U32At(self, 0x80));
-        if (pending == 0) {
-            return;
-        }
-    }
-
-    if ((U32At(self, 0xbf8) & U32At(self, 0xc1c) & 0x10000000u) != 0) {
-        typedef void (*Fn0x5c0)(void *);
-        void **selfVtable = *reinterpret_cast<void ***>(self);
-        (*reinterpret_cast<Fn0x5c0 *>(selfVtable + (0x5c0 / 4)))(this);
-        U32At(self, 0xbf8) &= 0xefffffffu;
-    }
-
-    accel = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50));
-    U32At(self, 0x84) = U32At(self, 0x80);
-
-    if (U32At(accel, 0xcc) != 0) {
-        UInt32 index = 0;
-        UInt8 *slot = self;
-        do {
-            if (((1u << (index & 0x3f)) & formatMask) != 0 && U8At(slot, 0xcac) != 0) {
-                typedef void (*Fn0x5d4)(void *, UInt32, UInt32);
-                void **selfVtable = *reinterpret_cast<void ***>(self);
-                (*reinterpret_cast<Fn0x5d4 *>(selfVtable + (0x5d4 / 4)))(this, index, flushArg);
-                U32At(accel, 0x74c) += 1;
-                accel = reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50));
-            }
-            index++;
-            slot += 0x94;
-        } while (index < U32At(accel, 0xcc));
-    }
-
-    U32At(accel, 0x78) = 0;
-}
 
 /* (re-ported mechanically: see IOATIR500Surface_set_surface_blocking_Port.cpp) */
 
