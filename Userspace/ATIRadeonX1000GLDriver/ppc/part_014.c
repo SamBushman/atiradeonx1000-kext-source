@@ -2461,7 +2461,7 @@ int FUN_000ddbcc(param_1)
   case 0x7e:
     FUN_000da9fc(param_1,param_1[0x87],"dcl_input");
     if ((uVar14 & 0x7c000) != 0x14000) {
-      FUN_000da904(param_1,*(undefined4 *)((int)&PTR_s__position_001dc3f4 + (uVar14 >> 0xc & 0x7c)))
+      FUN_000da904(param_1,*(undefined4 *)((int)PTR_s__position_001dc3f4 + (uVar14 >> 0xc & 0x7c)))
       ;
     }
     switch(uVar14 >> 0x13 & 7) {

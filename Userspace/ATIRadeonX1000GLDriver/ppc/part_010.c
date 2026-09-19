@@ -1024,7 +1024,7 @@ int FUN_0009f0b0()
   undefined4 local_110;
   uint uStack_10c;
   float local_108;
-  float local_104[0];
+  float local_104;
   float local_100;
   float local_fc;
   float local_f8;
@@ -1220,7 +1220,7 @@ int FUN_0009f0b0()
         local_100 = fVar17 * fVar26 + (fVar13 * local_108 - fVar14 * fVar25);
         fVar24 = fVar12 * fVar9 - fVar16 * fVar6;
         fVar4 = fVar5 * fVar15 - fVar13 * fVar18;
-        local_104[0] = -(fVar13 * fVar23 - (fVar14 * fVar22 - fVar15 * fVar26));
+        local_104 = -(fVar13 * fVar23 - (fVar14 * fVar22 - fVar15 * fVar26));
         local_fc = -(fVar13 * fVar24 - (fVar15 * fVar25 - fVar17 * fVar22));
         local_f8 = fVar17 * fVar23 + (fVar14 * fVar24 - fVar15 * local_108);
         fVar19 = *(float *)(iVar36 + 0x130);
@@ -1230,7 +1230,7 @@ int FUN_0009f0b0()
         fVar2 = fVar5 * fVar14 - fVar13 * fVar20;
         fVar13 = fVar20 * fVar17 - fVar14 * fVar19;
         fVar14 = fVar18 * fVar17 - fVar15 * fVar19;
-        local_f4 = fVar5 * local_f8 + fVar20 * local_fc + fVar19 * local_104[0] + fVar18 * local_100;
+        local_f4 = fVar5 * local_f8 + fVar20 * local_fc + fVar19 * local_104 + fVar18 * local_100;
         local_f0 = fVar13 * fVar16;
         if (local_f4 != FLOAT_001aa0d4) {
           local_120 = FLOAT_001aa0e8 / local_f4;
@@ -1246,7 +1246,7 @@ int FUN_0009f0b0()
           local_134 = local_120 * -(fVar5 * local_108 - (fVar20 * fVar25 - fVar19 * fVar26));
           local_13c = (fVar4 * fVar6 + (fVar14 * fVar11 - fVar3 * fVar12)) * local_120;
           local_124 = local_120 * (fVar18 * fVar26 + (fVar5 * fVar23 - fVar20 * fVar22));
-          local_128 = local_104[0] * local_120;
+          local_128 = local_104 * local_120;
           local_12c = -(fVar13 * fVar11 - (fVar3 * fVar8 - fVar2 * fVar6)) * local_120;
           local_130 = (fVar2 * fVar9 + (fVar13 * fVar10 - fVar3 * fVar7)) * local_120;
           local_120 = -(fVar1 * fVar10 - (fVar4 * fVar7 - fVar2 * fVar16)) * local_120;
@@ -1914,7 +1914,7 @@ switchD_000a0718_caseD_8811:
         *param_4 = *(uint *)(((unsigned char *)0x00001208) + param_1);
         return;
       case 0x880d:
-        *param_4 = *(uint *)(((unsigned char *)0x0000120c) + param_1);
+        *param_4 = *(uint *)((*(unsigned char *)0x0000120c) + param_1);
         return;
       case 0x880e:
         *param_4 = *(uint *)(((unsigned char *)0x00001210) + param_1);
@@ -3341,7 +3341,7 @@ int FUN_000a2e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined1 auStack_94 [4];
   int local_90;
   int local_8c;
-  uint local_88[0];
+  uint local_88;
   uint local_84;
   undefined4 local_80;
   undefined1 auStack_7c [16];
@@ -3350,7 +3350,7 @@ int FUN_000a2e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int local_4c;
   int local_48;
   
-  ((int (*)())FUN_000a27f0)(((unsigned char *)0x00001134) + param_1,param_2,&local_98,auStack_94);
+  ((int (*)())FUN_000a27f0)((*(unsigned char *)0x00001134) + param_1,param_2,&local_98,auStack_94);
   if ((((((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
            (local_98 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) &&
           (param_4 - 0x8961U < 0xc)) &&
@@ -3381,7 +3381,7 @@ int FUN_000a2e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       *(int *)(param_2 + 8) = local_4c + 1;
       local_80 = 0;
       local_8c = param_5;
-      local_88[0] = param_6;
+      local_88 = param_6;
       local_84 = param_7;
       local_48 = param_3;
       (**(code **)(((unsigned char *)0x00001344) + param_1))
@@ -3422,7 +3422,7 @@ int FUN_000a3160(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int local_94;
   int local_90;
   int local_8c;
-  undefined4 local_88[0];
+  undefined4 local_88;
   uint local_84;
   undefined4 local_80;
   undefined1 auStack_7c [16];
@@ -3431,7 +3431,7 @@ int FUN_000a3160(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int local_4c;
   int local_48;
   
-  ((int (*)())FUN_000a27f0)(((unsigned char *)0x00001134) + param_1,param_2,auStack_98,&local_94);
+  ((int (*)())FUN_000a27f0)((*(unsigned char *)0x00001134) + param_1,param_2,auStack_98,&local_94);
   if (((((((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
             (local_94 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) &&
            (param_4 - 0x8961U < 0xc)) &&
@@ -3464,7 +3464,7 @@ int FUN_000a3160(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     local_4c = *(int *)(param_2 + 8);
     *(int *)(param_2 + 8) = local_4c + 1;
     local_80 = 0;
-    local_88[0] = 0;
+    local_88 = 0;
     local_8c = param_5;
     local_84 = param_6;
     local_48 = param_3;

@@ -12,26 +12,52 @@ for arg in sys.argv[4:]:
 def in_text(hexaddr): return any(lo <= int(hexaddr, 16) < hi for lo, hi in text_ranges)
 os.makedirs(out, exist_ok=True)
 idx = []
+name_map = {}   # original (C++ demangled) Ghidra name -> C identifier (first function of that name)
+short_map = collections.defaultdict(set)
+used = set(); orig_of = {}
 for l in open(os.path.join(src, 'INDEX.tsv')):
-    a, sz, name = l.rstrip('\n').split('\t'); idx.append((a, int(sz), name))
+    a, sz, name = l.rstrip('\n').split('\t')
+    san = re.sub(r'[^A-Za-z0-9_]', '_', name)
+    if san in used: san = san + '_' + a[2:]
+    used.add(san); orig_of[a] = name
+    if (re.sub(r'[^A-Za-z0-9_]', '_', name) != name or san != re.sub(r'[^A-Za-z0-9_]', '_', name)) and name not in name_map: name_map[name] = san
+    if '::' in name:
+        short_map[name.split('::')[-1]].add(san)
+    idx.append((a, int(sz), san))
+short_unique = {k: list(v)[0] for k, v in short_map.items() if len(v) == 1 and re.match(r'^~?[A-Za-z_]\w*$', k)}
 idx.sort(key=lambda r: int(r[0], 16))
 kw = {'if', 'while', 'for', 'switch', 'return', 'sizeof', 'do', 'else', 'case', 'goto', 'const', 'struct', 'union', 'enum', 'typedef', 'extern', 'static'}
-PRIM = set('pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
+PRIM = set('FILE sbyte word va_list section GhidraMachOSection segment_command load_command GhidraMachOCommand pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
 bodies = {}; defined = {}
 for a, sz, name in idx:
     t = open(os.path.join(src, a + '.txt')).read()
     lines = t.split('\n')
     body = '\n'.join(l for l in lines if not l.startswith('//'))
+    if name_map:
+        _names = sorted(name_map, key=len, reverse=True)
+        if '_name_rx' not in globals(): _name_rx = re.compile('|'.join(re.escape(n) for n in _names))
+        oname = orig_of.get(a)
+        body = re.sub(r'\b(?:__thiscall|__stdcall|__cdecl|__fastcall)\b', '', body)
+        # definition header: the function's own (address-unique) name
+        san_self = [n for a2, sz2, n in idx if a2 == a][0]
+        if oname and oname in name_map or (oname and re.sub(r'[^A-Za-z0-9_]', '_', oname) != oname):
+            i0 = body.find('{'); hd = body[:i0]; k = hd.rfind(oname)
+            if k >= 0: hd = hd[:k] + san_self + hd[k + len(oname):]
+            body = hd + body[i0:]
+        body = _name_rx.sub(lambda m: name_map[m.group(0)], body)
+        for sh, sn in short_unique.items():
+            body = re.sub(r'(?<![\w:.>])%s\s*\(' % re.escape(sh), sn + '(', body)
     body = re.sub(r'/\*.*?\*/', lambda m: '', body, flags=re.S)
+    body = re.sub(r'\b(?:switchD_[0-9a-f]+)::(switchdataD_[0-9a-f]+)', r'\1', body)
     if '!! decompile failed' in body: bodies[a] = None; continue
     bodies[a] = body.strip('\n') + '\n'
 # collect referenced tokens
 defined_names = {name for a, sz, name in idx}
 allbody = '\n'.join(b for b in bodies.values() if b)
-data_syms = sorted(set(re.findall(r'(?<![A-Za-z0-9])_?(?:DAT|UNK|PTR|EXT)_[0-9a-f]{8}\b|\b(?:PTR_)?(?:s|u|PTR)_[A-Za-z_0-9]*_[0-9a-f]{8}\b|\bPTR_[A-Za-z_0-9]+_[0-9a-f]{8}\b', allbody)))
-data_syms = [d for d in data_syms if not (re.search(r'_([0-9a-f]{8})$', d) and in_text(re.search(r'_([0-9a-f]{8})$', d).group(1)) and not d.startswith('PTR_'))]
+data_syms = sorted(set(re.findall(r'\bswitchdataD_[0-9a-f]{8}\b|(?<![A-Za-z0-9])_?(?:DAT|UNK|PTR|EXT)_[0-9a-f]{8}\b|\b(?:PTR_)?(?:s|u|PTR)_[A-Za-z_0-9]*_[0-9a-f]{8}\b|\bPTR_[A-Za-z_0-9]+_[0-9a-f]{8}\b', allbody)))
+data_syms = [d for d in data_syms if not (re.search(r'_([0-9a-f]{8})$', d) and in_text(re.search(r'_([0-9a-f]{8})$', d).group(1)) and not d.startswith(('PTR_', 'switchdataD_')))]
 calls = set(re.findall(r'\b([A-Za-z_][A-Za-z_0-9]*)\s*\(', allbody))
-imports = sorted(c for c in calls if c not in kw and c not in defined_names and c not in PRIM and not re.match(r'^(CONCAT|SUB|ZEXT|SEXT|sync|instructionSynchronize|dataCache|enforce|trap|halt)', c) and c not in data_syms)
+imports = sorted(c for c in calls if c not in kw and c not in defined_names and c not in PRIM and not re.match(r'^(CONCAT|SUB|ZEXT|SEXT|sync|instructionSynchronize|dataCache|enforce|trap|halt|CARRY|SCARRY|SBORROW|LOCK|UNLOCK|NAN|ROUND|ABS|INT2FLOAT|FLOAT2FLOAT|TRUNC|POPCOUNT|BREAK|GBITS)', c) and c not in data_syms)
 # return types of defined functions: text before the name on its definition line(s)
 def ret_type(body, name):
     m = re.search(r'^(.*?)\b' + re.escape(name) + r'\s*\(', body, flags=re.M | re.S)
@@ -39,8 +65,16 @@ def ret_type(body, name):
 def fix_types(s):
     """class/struct-typed pointer types Ghidra invented -> unsigned char * (only in type positions: casts, declarations, params)"""
     def isty(t): return t not in PRIM and t not in kw
+    _hi = s.find('{')
+    if _hi > 0:
+        _h = re.sub(r'(?m)^(\s+)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)\s*;', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) + ';' if isty(m.group(2)) else m.group(0), s[:_hi])
+        s = _h + s[_hi:]
     s = re.sub(r'\(\s*(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)\s*\)', lambda m: '(unsigned char' + m.group(2) + ')' if isty(m.group(1)) else m.group(0), s)
-    s = re.sub(r'(?m)^(\s*)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) if isty(m.group(2)) else m.group(0), s)
+    ib = s.find('{')
+    ie = s.find('\n\n', ib) if ib >= 0 else -1
+    if ib >= 0 and ie > ib:
+        blk = re.sub(r'(?m)^(\s*)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) if isty(m.group(2)) else m.group(0), s[ib:ie])
+        s = s[:ib] + blk + s[ie:]
     s = re.sub(r'([(,]\s*)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)(?=\s*[,)\[])', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) if isty(m.group(2)) else m.group(0), s)
     return s
 SMALL = re.compile(r'\b(byte|uchar|char|short|ushort|bool|undefined1|undefined2|undefined)\b(?!\s*\*)')
@@ -91,13 +125,17 @@ for a, sz, name in idx:
 for n in imports: decls.append('extern int %s();' % n)
 called_data = set(re.findall(r'\(\s*\*\s*\(?\s*(?:\(code \*\))?\s*([A-Za-z_]\w*)\s*\)\s*\)?\s*\(', allbody))
 deref = set(re.findall(r'(?<![\w)\]])\*\s*\(?\s*([A-Za-z_]\w*)\b', allbody)) | set(re.findall(r'\b([A-Za-z_]\w*)\s*\[', allbody)) | set(re.findall(r'\(\s*[\w ]+\*+\s*\)\s*\*\s*([A-Za-z_]\w*)', allbody))
-tables = set(re.findall(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', allbody))
+tables = {t for t in re.findall(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', allbody) if re.match(r'^(?:_?(?:DAT|UNK|PTR|EXT)_|PTR_|FLOAT_|DOUBLE_|switchdataD_|s_|u_)', t)}
 for d in data_syms:
-    if d in tables: decls.append('extern unsigned char *%s[];' % d)
+    if d.startswith('switchdataD_'): decls.append('extern int %s[];' % d)
+    elif d in tables: decls.append('extern unsigned char *%s[];' % d if d.startswith('PTR_') else 'extern unsigned char %s[];' % d)
     elif d in called_data: decls.append('extern int (*%s)();' % d)
     elif d in deref: decls.append('extern unsigned char *%s;' % d)
     else: decls.append('extern unsigned char %s;' % d)
 if re.search(r'\bMACH_HEADER\b', allbody): decls.append('extern MACH_HEADER_t MACH_HEADER;')
+for sm in sorted(set(re.findall(r'\b(section_[0-9a-f]{8})\b', allbody))): decls.append('extern GhidraMachOSection %s;' % sm)
+for cm in sorted(set(re.findall(r'\b(\w+_command_[0-9a-f]{8})\b', allbody))): decls.append('extern GhidraMachOCommand %s;' % cm)
+for mh in sorted(set(re.findall(r'\b(__mh_\w+_header)\b', allbody))): decls.append('extern MACH_HEADER_t %s;' % mh)
 ftab = set(re.findall(r'\(\s*((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\)\s*\[', allbody)) | set(re.findall(r'\b((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\[', allbody)) | tables
 for f in sorted(set(re.findall(r'\bFLOAT_[0-9a-f]{8}\b', allbody))): decls.append('extern float %s%s;' % (f, '[]' if f in ftab else ''))
 for f in sorted(set(re.findall(r'\bDOUBLE_[0-9a-f]{8}\b', allbody))): decls.append('extern double %s%s;' % (f, '[]' if f in ftab else ''))
@@ -113,7 +151,7 @@ def fix_arrays(b):
         ty = m.group(1).strip()
         if ty not in ('undefined4', 'uint', 'int', 'ulong', 'long', 'undefined *', 'undefined **', 'code *', 'float', 'unsigned int'): continue
         rest = b[:m.start()] + b[m.end():]
-        ix = re.findall(r'(?<![&\w.])\(?\s*%s\s*\)?\s*\[\s*([^\]]+)\]' % re.escape(nm), rest)
+        ix = re.findall(r'(?<![&\w.])(?:\(\s*%s\s*\)|%s)\s*\[\s*([^\]]+)\]' % (re.escape(nm), re.escape(nm)), rest)
         lit_over = any(re.fullmatch(r'\d+|0x[0-9a-f]+', i.strip()) and int(i.strip(), 0) >= cnt for i in ix)
         var_idx = any(not re.fullmatch(r'\d+|0x[0-9a-f]+', i.strip()) for i in ix)
         if not ix or not (lit_over or (var_idx and cnt == 1)): continue
@@ -160,6 +198,11 @@ def fix_arrays(b):
     return b
 
 led = []
+import importlib.util
+_pp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'patches.py')
+PATCHES = {}
+if os.path.exists(_pp):
+    _spec = importlib.util.spec_from_file_location('patches', _pp); _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m); PATCHES = _m.PATCHES
 funcs = [(a, sz, name) for a, sz, name in idx]
 for pi in range(0, len(funcs), part):
     chunk = funcs[pi:pi + part]; pn = 'part_%03d' % (pi // part)
@@ -177,6 +220,8 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'(?m)^(\s*(?:LAB_[0-9a-f]+|switchD_\w+):)(\s*\n\s*\})', r'\1 ;\2', b)
             b = re.sub(r'(?m)^(\s*(?:case [^:\n]+|default):)(\s*\n\s*\})', r'\1 ;\2', b)
             b = re.sub(r'\(code\)', '(code *)', b)
+            b = re.sub(r'\((\w+(?: \*)+)\)((?:FLOAT|DOUBLE)_[0-9a-f]{8})\b', r'(\1)&\2', b)
+            b = re.sub(r'(?m)^(\s*)(auVar\d+) = ZEXT816\(0\) << 0x20;', r'\1_memset(\2, 0, 16);', b)
             for tn in ftab: b = re.sub(r'(?<![\w&])%s\b(?!\s*\[)(?!\s*\)\s*\[)' % tn, '%s[0]' % tn, b)
             b = re.sub(r'(?m)^(\s*)char (ac\w+)\s*\[\s*\d+\s*\];(?=(?:.|\n)*^\s*\2 = (?:ac|&)\w+;)', r'\1char *\2;', b)
             b = re.sub(r'\b_(local_[0-9a-f]+)\b', r'\1', b)
@@ -191,7 +236,7 @@ for pi in range(0, len(funcs), part):
                 pass
             for sm in re.finditer(r'(?m)^\s*(unsigned char|char|byte|undefined1|undefined2|undefined4|undefined8|uint|int|ushort|short|ulong|long|float|double|longlong|ulonglong|undefined)\s+(\w*(?:local|Stack)_([0-9a-f]+))\s*;', b):
                 nm = sm.group(2)
-                if re.search(r'(?<![\w.])\(?\s*%s\s*\)?\s*\[' % re.escape(nm), b):
+                if re.search(r'(?<![\w.])(?:\(\s*%s\s*\)|%s)\s*\[' % (re.escape(nm), re.escape(nm)), b):
                     o = int(sm.group(3), 16)
                     others = [int(x, 16) for x in re.findall(r'\b\w*(?:local|Stack)_([0-9a-f]+)\b', b) if int(x, 16) < o]
                     gap = (o - max(others)) if others else 64
@@ -199,7 +244,8 @@ for pi in range(0, len(funcs), part):
                     cnt = max(1, gap // esz)
                     b = re.sub(r'(?m)^(\s*)%s\s+%s\s*;' % (re.escape(sm.group(1)), re.escape(nm)), r'\1%s %s[%d];' % (sm.group(1), nm, cnt), b, count=1)
             b = re.sub(r'\(\s*(?:undefined1|char|byte|undefined|uchar)\s+\[(\d)\]\s*\)', lambda m: '(%s)' % {'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(1), 'unsigned int'), b)
-            b = re.sub(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', lambda m: '(%s)[' % m.group(1) if m.group(1) in tables else m.group(0), b)
+            b = re.sub(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', lambda m: '(%s)[' % m.group(1) if (m.group(1) in tables or m.group(1).startswith('switchdataD_')) else m.group(0), b)
+            b = re.sub(r'&\s*([A-Za-z_]\w*)\b(?!\s*\))', lambda m: m.group(1) if (m.group(1) in tables and not m.group(1).startswith(('FLOAT_','DOUBLE_'))) else m.group(0), b)
             b = re.sub(r'\b([a-z]{1,2})Ram([0-9a-f]{8})\b', lambda m: '(*(%s *)0x%s)' % ({'u': 'unsigned int', 'i': 'int', 'b': 'unsigned char', 'c': 'char', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long', 'ul': 'unsigned long long'}.get(m.group(1), 'unsigned int'), m.group(2)), b)
             b = re.sub(r'\bregister0x[0-9a-f]{8}\b', '((unsigned int)__builtin_frame_address(0))', b)
             b = re.sub(r'&\s*(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '((unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) else m.group(0), b)
@@ -219,7 +265,9 @@ for pi in range(0, len(funcs), part):
             for nm in samepart:
                 if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
             b = head_ + rest_
-            f.write(fix_arrays(fix_types(b)) + '\n')
+            conv = fix_arrays(fix_types(b))
+            if name in PATCHES: conv = PATCHES[name](b, conv)
+            f.write(conv + '\n')
             led.append((a, sz, name, pn, 'converted'))
 with open(os.path.join(out, 'ledger.tsv'), 'w') as f:
     for r in led: f.write('\t'.join(map(str, r)) + '\n')

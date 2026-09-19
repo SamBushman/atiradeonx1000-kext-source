@@ -1866,7 +1866,7 @@ LAB_0011047c:
       } while ((int)uVar26 < (int)uVar7);
     }
     iVar8 = 0;
-    piVar24 = &DAT_001fc1f8;
+    piVar24 = DAT_001fc1f8;
     do {
       if (*piVar24 == 0) {
         puVar30 = (uint *)piVar24[1];

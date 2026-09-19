@@ -1,0 +1,14 @@
+extern int (*_funcptr)();
+extern unsigned int _offscreenBuffer;
+extern unsigned int _offscreenBufferBytes;
+extern unsigned int _offscreenBufferHeight;
+extern unsigned int _offscreenBufferSize;
+extern unsigned int _offscreenBufferWidth;
+extern unsigned int _our_atexit;
+extern unsigned int _radeonGAInterface;
+extern unsigned int _textureBuffer;
+extern unsigned int _textureBufferBytes;
+extern unsigned int _textureBufferHeight;
+extern unsigned int _textureBufferSize;
+extern unsigned int _textureBufferWidth;
+extern int (*dyld_func_lookup_pointer)();

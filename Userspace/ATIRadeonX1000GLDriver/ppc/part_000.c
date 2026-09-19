@@ -2532,7 +2532,7 @@ int _gldChoosePixelFormat(param_1, param_2)
   undefined1 local_166;
   undefined1 local_165;
   uint local_164;
-  uint local_88[0];
+  uint local_88;
   uint local_84;
   int local_80;
   int local_7c;
@@ -2581,8 +2581,8 @@ int _gldChoosePixelFormat(param_1, param_2)
     if (*puVar10 == 0) {
       local_84 = ((int (*)())FUN_00007ec0)();
       local_84 = local_84 & 0x1ffff;
-      local_88[0] = ((int (*)())FUN_00007ec0)(uVar19);
-      local_88[0] = local_88[0] & 0x1ffff;
+      local_88 = ((int (*)())FUN_00007ec0)(uVar19);
+      local_88 = local_88 & 0x1ffff;
       uVar22 = uVar21 + uVar20 + uVar22;
       if ((int)uVar13 < (int)uVar22) {
         uVar13 = uVar22;
@@ -2647,7 +2647,7 @@ LAB_00008798:
                 local_172 = (undefined2)local_7c;
                 local_174 = (undefined2)local_80;
                 local_178 = local_84;
-                local_17c = local_88[0];
+                local_17c = local_88;
                 local_18c = uVar30;
                 if ((uVar20 & uVar20 - 1) != 0) {
                   local_18c = uVar30 | 0x200;

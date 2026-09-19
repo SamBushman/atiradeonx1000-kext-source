@@ -1447,7 +1447,7 @@ int FUN_001971f8(param_1, param_2, param_3)
   int *piVar13;
   int *piVar14;
   code *pcVar15;
-  int local_88[0];
+  int local_88;
   undefined1 auStack_84 [60];
   undefined4 local_48 [2];
   
@@ -1464,7 +1464,7 @@ int FUN_001971f8(param_1, param_2, param_3)
     iVar11 = param_1[3];
     if (**(int **)(iVar11 + 0x6c4) == 0) {
       piVar12 = (int *)FUN_000e3b88(param_1[4],param_2,piVar14,&local_88);
-      if ((piVar12 == (int *)0x0) || (local_88[0] == 0)) {
+      if ((piVar12 == (int *)0x0) || (local_88 == 0)) {
         iVar11 = param_1[3];
       }
       else {
@@ -2025,7 +2025,7 @@ int FUN_001981ac(param_1, param_2)
   undefined4 local_a8;
   undefined4 local_9c;
   undefined4 local_98;
-  int local_88[0];
+  int local_88;
   uint local_84;
   int *local_80;
   int local_7c;
@@ -2086,7 +2086,7 @@ LAB_00198290:
         iVar11 = FUN_001054ec(param_2,iVar25);
         iVar20 = *(int *)(iVar11 + 0x10);
         FUN_000f2bdc(&local_88,uVar17,iVar20);
-        iVar11 = local_88[0];
+        iVar11 = local_88;
         piVar12 = (int *)FUN_00105594(local_80,1);
         FUN_00106004(param_2,iVar25,piVar12,0,param_1[3]);
         if (iVar25 == 0) {

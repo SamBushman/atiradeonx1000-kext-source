@@ -2014,7 +2014,7 @@ int FUN_0005b010(param_1, param_2, param_3)
   int local_94;
   undefined4 local_90;
   undefined4 local_8c;
-  undefined4 local_88[0];
+  undefined4 local_88;
   undefined4 local_84;
   undefined1 local_80;
   undefined4 local_7c;
@@ -2054,7 +2054,7 @@ int FUN_0005b010(param_1, param_2, param_3)
   local_98 = 3;
   local_90 = 1;
   local_8c = 0;
-  local_88[0] = 0;
+  local_88 = 0;
   local_84 = 0;
   local_80 = 0;
   local_94 = iVar8;
@@ -2067,7 +2067,7 @@ int FUN_0005b010(param_1, param_2, param_3)
   local_98 = 3;
   local_90 = 1;
   local_8c = 1;
-  local_88[0] = 1;
+  local_88 = 1;
   local_84 = 1;
   local_80 = 0;
   local_94 = iVar8;
@@ -2086,7 +2086,7 @@ int FUN_0005b010(param_1, param_2, param_3)
   local_98 = 3;
   local_90 = 1;
   local_8c = 1;
-  local_88[0] = 1;
+  local_88 = 1;
   local_80 = 0;
   local_94 = uVar3;
   ((int (*)())FUN_00056f20)(param_1,param_2,&local_98,iVar9 + 0x20,6,0,0);
@@ -2415,7 +2415,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
   int local_94;
   undefined4 local_90;
   undefined4 local_8c;
-  undefined4 local_88[0];
+  undefined4 local_88;
   undefined4 local_84;
   undefined1 local_80;
   undefined4 local_7c;
@@ -2455,7 +2455,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_84 = 1;
     local_90 = 1;
     local_8c = 1;
-    local_88[0] = 1;
+    local_88 = 1;
     local_94 = uVar4;
     ((int (*)())FUN_00056f20)(param_1,param_2,&local_98,iVar3,2,0,0);
     ((int (*)())FUN_00057340)(param_2,piVar5,iVar6,iVar3 + 4,0);
@@ -2531,7 +2531,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_98 = 3;
     local_90 = 1;
     local_8c = 1;
-    local_88[0] = 1;
+    local_88 = 1;
     local_84 = 1;
     local_94 = iVar10;
     ((int (*)())FUN_00056f20)(param_1,param_2,&local_98,iVar9,3,0,0);
@@ -2544,7 +2544,7 @@ int FUN_0005bf60(param_1, param_2, param_3)
     local_98 = 3;
     local_90 = 1;
     local_8c = 1;
-    local_88[0] = 1;
+    local_88 = 1;
     local_94 = uVar4;
     ((int (*)())FUN_00056f20)(param_1,param_2,&local_98,iVar9 + 0x10,2,0,0);
     local_74 = 0x87d7;
@@ -2980,7 +2980,7 @@ int FUN_0005e0d0(param_1, param_2, param_3)
   uint local_94;
   undefined1 local_90;
   undefined4 local_8c;
-  uint local_88[0];
+  uint local_88;
   undefined4 local_84;
   undefined4 local_80;
   undefined4 local_7c;
@@ -3000,7 +3000,7 @@ int FUN_0005e0d0(param_1, param_2, param_3)
   local_a4 = ((int (*)())FUN_00057b80)();
   *param_3 = (local_a4 & 0x7f) << 0xd | *param_3 & 0xfff010ff | 0x100000;
   sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar5);
-  local_88[0] = local_a4;
+  local_88 = local_a4;
   local_6c = uVar2;
   if (sVar1 == 0x801) {
     iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);

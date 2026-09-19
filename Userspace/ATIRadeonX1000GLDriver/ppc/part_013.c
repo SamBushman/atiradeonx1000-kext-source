@@ -715,7 +715,7 @@ int FUN_000d10dc(param_1, param_2)
   char local_8c;
   char local_8b;
   undefined1 local_8a;
-  undefined4 local_88[0];
+  undefined4 local_88;
   uint uStack_84;
   longlong local_80;
   undefined4 local_78;
@@ -724,7 +724,7 @@ int FUN_000d10dc(param_1, param_2)
   uint uStack_6c;
   longlong local_68;
   undefined4 local_60;
-  uint uStack_5c[0];
+  uint uStack_5c;
   longlong local_58;
   float local_50;
   
@@ -764,7 +764,7 @@ int FUN_000d10dc(param_1, param_2)
             local_98[0] = '+';
           }
           local_50 = (float)dVar10;
-          local_88[0] = 0x43300000;
+          local_88 = 0x43300000;
           uStack_84 = ((uint)local_50 >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
           _pow(DOUBLE_001aa2a0,(double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
           dVar11 = (double)_log();
@@ -791,9 +791,9 @@ int FUN_000d10dc(param_1, param_2)
           iVar5 = 3;
           local_98[1] = (char)uVar6 + '0';
           do {
-            uStack_5c[0] = uVar6 ^ 0x80000000;
+            uStack_5c = uVar6 ^ 0x80000000;
             local_60 = 0x43300000;
-            dVar12 = (dVar12 - ((double)CONCAT44(0x43300000,uStack_5c[0]) - dVar3)) * dVar4;
+            dVar12 = (dVar12 - ((double)CONCAT44(0x43300000,uStack_5c) - dVar3)) * dVar4;
             dVar10 = (double)_floor(dVar12);
             bVar1 = iVar5 != 9;
             uVar6 = (uint)dVar10;
@@ -1128,7 +1128,7 @@ int FUN_000d183c(param_1, param_2, param_3)
   uint local_c4;
   uint local_c0;
   uint local_bc;
-  uint local_b8[0];
+  uint local_b8;
   uint local_b4;
   uint local_b0;
   uint local_ac;
@@ -1140,7 +1140,7 @@ int FUN_000d183c(param_1, param_2, param_3)
   uint local_94;
   uint local_90;
   uint local_8c;
-  uint local_88[0];
+  uint local_88;
   uint local_84;
   uint local_80;
   int local_7c;
@@ -1377,7 +1377,7 @@ LAB_000d3b80:
           uVar19 = (uint)*(byte *)((int)puVar38 + 0x3a);
           local_b0 = (uint)*(byte *)((int)puVar38 + 0x2d);
           local_b4 = (uint)*(byte *)((int)puVar38 + 0x2e);
-          local_b8[0] = (uint)*(byte *)((int)puVar38 + 0x2f);
+          local_b8 = (uint)*(byte *)((int)puVar38 + 0x2f);
           local_bc = (uint)*(byte *)(puVar38 + 0xf);
           local_c0 = (uint)*(byte *)((int)puVar38 + 0x3d);
           local_c4 = (uint)*(byte *)((int)puVar38 + 0x3e);
@@ -2136,7 +2136,7 @@ LAB_000d1afc:
           cVar6 = *(char *)((int)piVar37 + 0x37);
           local_80 = (uint)*(byte *)((int)piVar37 + 0x2d);
           local_84 = (uint)*(byte *)((int)piVar37 + 0x2e);
-          local_88[0] = (uint)*(byte *)((int)piVar37 + 0x2f);
+          local_88 = (uint)*(byte *)((int)piVar37 + 0x2f);
           local_8c = (uint)*(byte *)(piVar37 + 0xf);
           local_90 = (uint)*(byte *)((int)piVar37 + 0x3d);
           local_94 = (uint)*(byte *)((int)piVar37 + 0x3e);

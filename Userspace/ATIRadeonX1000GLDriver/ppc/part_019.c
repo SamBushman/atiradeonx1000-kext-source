@@ -191,7 +191,7 @@ int FUN_000f3470(param_1, param_2)
     bVar2 = true;
     iVar8 = 1;
     do {
-      uVar7 = (uint)((unsigned int *)STACKARG(0x1c))[iVar8];
+      uVar7 = (uint)(&STACKARG(0x1c))[iVar8];
       iVar9 = iVar8;
       if ((uVar7 != 4) && (iVar9 = iVar8 + 1, uVar4 = uVar7, iVar9 < 4)) {
         iVar5 = 4 - iVar9;
@@ -1531,9 +1531,9 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   do {
     if ((int)uVar7 < param_2) {
       *(byte *)(param_1[10] + 0x15c) = (byte)(1 << (uVar7 & 0x3f)) | *(byte *)(param_1[10] + 0x15c);
-      uVar1 = *(undefined4 *)((int)local_88[0] + iVar6);
+      uVar1 = *(undefined4 *)((int)local_88 + iVar6);
       iVar2 = iVar6 + 0x10 + param_1[10];
-      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88[0] + iVar6 + 4);
+      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88 + iVar6 + 4);
       *(undefined4 *)(iVar2 + 0xc) = uVar1;
     }
     else {
@@ -1574,8 +1574,8 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     do {
       if ((int)uVar7 < param_2) {
         *(byte *)(puVar4 + 0x58) = (byte)(1 << (uVar7 & 0x3f)) | *(byte *)(puVar4 + 0x58);
-        uVar1 = *(undefined4 *)((int)local_88[0] + iVar6);
-        puVar8[4] = *(undefined4 *)((int)local_88[0] + iVar6 + 4);
+        uVar1 = *(undefined4 *)((int)local_88 + iVar6);
+        puVar8[4] = *(undefined4 *)((int)local_88 + iVar6 + 4);
         puVar8[3] = uVar1;
       }
       else {
@@ -2667,7 +2667,7 @@ int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 local_110;
   undefined4 local_10c;
   undefined4 local_108;
-  undefined4 local_104[0];
+  undefined4 local_104;
   undefined4 local_100;
   undefined4 local_fc;
   undefined4 local_f8;
@@ -2686,7 +2686,7 @@ int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 local_c4;
   undefined4 local_c0;
   undefined4 local_bc;
-  undefined4 local_b8[0];
+  undefined4 local_b8;
   undefined4 local_b4;
   undefined4 local_b0;
   undefined4 local_ac;
@@ -2698,7 +2698,7 @@ int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 local_94;
   undefined4 local_90;
   undefined4 local_8c;
-  undefined4 local_88[0];
+  undefined4 local_88;
   undefined4 local_84;
   undefined4 local_80;
   undefined4 local_7c;
@@ -2876,7 +2876,7 @@ LAB_000f73f0:
             local_94 = *local_270[3];
             local_90 = local_270[3][1];
             local_8c = local_270[3][2];
-            local_88[0] = local_270[3][3];
+            local_88 = local_270[3][3];
             local_80 = local_270[3][5];
             local_84 = local_270[3][4];
             local_a8 = local_270[4][1];
@@ -2886,7 +2886,7 @@ LAB_000f73f0:
             local_98 = local_270[4][5];
             local_9c = local_270[4][4];
             local_bc = local_270[5][2];
-            local_b8[0] = local_270[5][3];
+            local_b8 = local_270[5][3];
             local_c4 = *local_270[5];
             local_c0 = local_270[5][1];
             local_b0 = local_270[5][5];
@@ -2907,7 +2907,7 @@ LAB_000f73f0:
             local_f4 = *local_270[4];
             local_e0 = local_270[4][5];
             local_e4 = local_270[4][4];
-            local_104[0] = local_270[5][2];
+            local_104 = local_270[5][2];
             local_100 = local_270[5][3];
             local_10c = *local_270[5];
             local_108 = local_270[5][1];

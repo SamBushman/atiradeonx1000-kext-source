@@ -1044,10 +1044,10 @@ int FUN_0017b12c(param_1)
   undefined1 local_120 [4];
   int local_11c [4];
   undefined4 local_10c [4];
-  undefined4 uStack_fc[0];
+  undefined4 uStack_fc;
   undefined4 local_f8 [5];
   undefined4 local_e4 [23];
-  float local_88[0];
+  float local_88;
   int local_84;
   int *local_80;
   undefined1 *local_7c;
@@ -1238,7 +1238,7 @@ int FUN_0017b12c(param_1)
                   }
                   uVar5 = ((float * (*)())FUN_0010b93c)(&local_88,*(undefined4 *)(param_1 + 0xb0),iVar15,*pfVar10,
                                        *(undefined4 *)(param_1 + 0x238));
-                  dVar23 = (double)local_88[0];
+                  dVar23 = (double)local_88;
                   uVar24 = ((int (*)())FUN_00176474)(dVar23,uVar5,local_70,iVar15);
                   iVar8 = (int)((ulonglong)uVar24 >> 0x20);
                   if (*piVar13 < iVar8) {
@@ -1272,7 +1272,7 @@ int FUN_0017b12c(param_1)
       iVar15 = local_138[iVar22];
       if (iVar15 != 0) {
         *(int *)(iVar15 + 0x9c) = local_11c[iVar6 + 4];
-        uVar5 = (uStack_fc)[iVar22];
+        uVar5 = (&uStack_fc)[iVar22];
         iVar6 = FUN_001054ec(iVar15,1);
         *(undefined4 *)(iVar6 + 0x10) = uVar5;
         FUN_0010c37c(iVar15,*(undefined4 *)(param_1 + 0x238));

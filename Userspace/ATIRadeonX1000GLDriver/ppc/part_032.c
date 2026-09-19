@@ -274,11 +274,11 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
       iVar8 = 4;
       do {
         local_50 = fVar1;
-        *(float *)(iVar7 + (int)local_b8[0]) = fVar1;
+        *(float *)(iVar7 + (int)local_b8) = fVar1;
         iVar7 = iVar7 + 4;
         iVar8 = iVar8 + -1;
       } while (iVar8 != 0);
-      iVar7 = FUN_000f6a04(param_2,local_b8[0],DAT_001aff9c);
+      iVar7 = FUN_000f6a04(param_2,local_b8,DAT_001aff9c);
     }
     else {
       iVar7 = FUN_000f6a04(param_2,param_3,*param_4);
@@ -295,7 +295,7 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
          (param_3[1] == FLOAT_001aa0e8)) &&
         ((param_3[2] == FLOAT_001aa0d4 && (param_3[3] == FLOAT_001aa0d4)))) &&
        (*param_4 == DAT_001aff9c)) {
-      FUN_000f4a24(param_3,local_b8[0]);
+      FUN_000f4a24(param_3,local_b8);
       iVar7 = FUN_000f5248(uVar6);
       return iVar7;
     }
