@@ -2,7 +2,7 @@
 
 /* TGenericLinker___TGenericLinker_97bb8240 @ 0x97bb8240 (8 bytes) */
 int TGenericLinker___TGenericLinker_97bb8240(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TGenericLinker(this);
   return;
@@ -10,7 +10,7 @@ int TGenericLinker___TGenericLinker_97bb8240(this)
 
 /* TGenericLinker___TGenericLinker_97bb8248 @ 0x97bb8248 (244 bytes) */
 int TGenericLinker___TGenericLinker_97bb8248(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   int *piVar2;
@@ -18,7 +18,7 @@ int TGenericLinker___TGenericLinker_97bb8248(this)
   uint in_r4;
   int iVar4;
   int *piVar5;
-  BindingTable *this_00;
+  unsigned char * this_00;
   char in_RESERVE;
   byte in_cr0;
   
@@ -54,7 +54,7 @@ int TGenericLinker___TGenericLinker_97bb8248(this)
     }
     operator_delete(piVar5);
   }
-  this_00 = *(BindingTable **)(this + 4);
+  this_00 = *(unsigned char **)(this + 4);
   if (this_00 != (unsigned char *)0x0) {
     BindingTable___BindingTable(this_00);
     operator_delete(this_00);
@@ -68,7 +68,7 @@ int TGenericLinker___TGenericLinker_97bb8248(this)
 
 /* TGenericLinker__getShaderLocalParamRemapTable @ 0x97bb833c (40 bytes) */
 int TGenericLinker__getShaderLocalParamRemapTable(this, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {
@@ -82,7 +82,7 @@ int TGenericLinker__getShaderLocalParamRemapTable(this, param_2)
 
 /* TGenericLinker__getNumShaderLocalParams @ 0x97bb8364 (40 bytes) */
 int TGenericLinker__getNumShaderLocalParams(this, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {
@@ -95,13 +95,14 @@ int TGenericLinker__getNumShaderLocalParams(this, param_2)
 }
 
 /* TGenericLinker__attributeBindingRequest @ 0x97bb838c (196 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int TGenericLinker__attributeBindingRequest(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   char *param_2;
 {
   int iVar1;
-  Binding *this_00;
+  unsigned char * this_00;
   
   iVar1 = _memcmp(param_2,"gl_",3);
   if (iVar1 != 0) {
@@ -110,7 +111,7 @@ int TGenericLinker__attributeBindingRequest(this, param_1, param_2)
     Binding__SetName((char *)this_00);
     Binding__SetLocation((int)this_00);
     Binding__SetClientRequest(SUB41(this_00,0));
-    iVar1 = BindingTable__InsertAttribRequestBinding(*(Binding **)(this + 4));
+    iVar1 = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4));
     if ((iVar1 == 0) && (this_00 != (unsigned char *)0x0)) {
       Binding___Binding(this_00);
       operator_delete(this_00);
@@ -119,10 +120,11 @@ int TGenericLinker__attributeBindingRequest(this, param_1, param_2)
   }
   return;
 }
+#endif
 
 /* TGenericLinker__getActiveUniform @ 0x97bb8450 (192 bytes) */
 int TGenericLinker__getActiveUniform(this, param_1, param_2, param_3, param_4, param_5, param_6)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   long param_2;
   long *param_3;
@@ -167,7 +169,7 @@ int TGenericLinker__getActiveUniform(this, param_1, param_2, param_3, param_4, p
 
 /* TGenericLinker__getUniformTypeInfo @ 0x97bb8510 (172 bytes) */
 int TGenericLinker__getUniformTypeInfo(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   long param_1;
   long *param_2;
   ulong *param_3;
@@ -204,7 +206,7 @@ int TGenericLinker__getUniformTypeInfo(this, param_1, param_2, param_3, param_4)
 
 /* TGenericLinker__getActiveAttrib @ 0x97bb85bc (188 bytes) */
 int TGenericLinker__getActiveAttrib(this, param_1, param_2, param_3, param_4, param_5, param_6)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   long param_2;
   long *param_3;
@@ -247,7 +249,7 @@ int TGenericLinker__getActiveAttrib(this, param_1, param_2, param_3, param_4, pa
 
 /* TGenericLinker__getPPStreamManager @ 0x97bb8678 (40 bytes) */
 int TGenericLinker__getPPStreamManager(this, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {
@@ -261,11 +263,11 @@ int TGenericLinker__getPPStreamManager(this, param_2)
 
 /* TGenericLinker__reset @ 0x97bb86a0 (412 bytes) */
 int TGenericLinker__reset(this)
-  unsigned char *this;
+  unsigned char * this;
 {
-  ParseSymbolTable *this_00;
-  FunctionTable *this_01;
-  TGenericLinker *pTVar1;
+  unsigned char * this_00;
+  unsigned char * this_01;
+  unsigned char * pTVar1;
   
   if (*(void **)(this + 0x50) != (void *)0x0) {
     _free(*(void **)(this + 0x50));
@@ -288,13 +290,13 @@ int TGenericLinker__reset(this)
     if (*(int *)(pTVar1 + 0x30) != 0) {
       _PPStreamFree();
     }
-    this_00 = *(ParseSymbolTable **)(pTVar1 + 0x28);
+    this_00 = *(unsigned char **)(pTVar1 + 0x28);
     *(undefined4 *)(pTVar1 + 0x30) = 0;
     if (this_00 != (unsigned char *)0x0) {
       ParseSymbolTable___ParseSymbolTable(this_00);
       operator_delete(this_00);
     }
-    this_01 = *(FunctionTable **)(pTVar1 + 0x38);
+    this_01 = *(unsigned char **)(pTVar1 + 0x38);
     *(undefined4 *)(pTVar1 + 0x28) = 0;
     if (this_01 != (unsigned char *)0x0) {
       FunctionTable___FunctionTable(this_01);
@@ -342,7 +344,7 @@ int TGenericLinker__reset(this)
 
 /* TGenericLinker__link @ 0x97bb883c (1244 bytes) */
 int TGenericLinker__link(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   void **param_1;
   int param_2;
 {
@@ -354,7 +356,7 @@ int TGenericLinker__link(this, param_1, param_2)
   char *pcVar6;
   undefined4 uVar7;
   int iVar8;
-  TGenericLinker *pTVar9;
+  unsigned char * pTVar9;
   
   iVar8 = 1;
   if (0 < param_2) {
@@ -517,7 +519,7 @@ int TGenericLinker__link(this, param_1, param_2)
 
 /* TGenericLinker__getStatsString @ 0x97bb9098 (104 bytes) */
 int TGenericLinker__getStatsString(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   size_t sVar2;
@@ -536,7 +538,7 @@ int TGenericLinker__getStatsString(this)
 
 /* TGenericLinker__getPPStreamString @ 0x97bb9100 (604 bytes) */
 int TGenericLinker__getPPStreamString(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   bool bVar1;
   size_t sVar2;
@@ -620,7 +622,7 @@ int TGenericLinker__getPPStreamString(this)
 
 /* TGenericLinker__getShaderToProgramString @ 0x97bb935c (768 bytes) */
 int TGenericLinker__getShaderToProgramString(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   bool bVar1;
   size_t sVar2;
@@ -726,7 +728,7 @@ int TGenericLinker__getShaderToProgramString(this)
 
 /* TGenericLinker__getTableString @ 0x97bb965c (68 bytes) */
 int TGenericLinker__getTableString(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -935,7 +937,7 @@ int GetScalerWidthForType(param_1)
 
 /* getOpenGLTypeFromTType @ 0x97bb9a20 (676 bytes) */
 int getOpenGLTypeFromTType(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   int iVar1;
   undefined4 uVar2;
@@ -1050,7 +1052,7 @@ int getOpenGLTypeFromTType(param_1)
 
 /* AddressTempAllocator__AddressTempAllocator @ 0x97bb9d04 (4 bytes) */
 int AddressTempAllocator__AddressTempAllocator(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 4) = 0;
   *(undefined4 *)this = 0;
@@ -1059,7 +1061,7 @@ int AddressTempAllocator__AddressTempAllocator(this)
 
 /* AddressTempAllocator__AddressTempAllocator_97bb9d08 @ 0x97bb9d08 (4 bytes) */
 int AddressTempAllocator__AddressTempAllocator_97bb9d08(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   AddressTempAllocator(this);
   return;
@@ -1067,7 +1069,7 @@ int AddressTempAllocator__AddressTempAllocator_97bb9d08(this)
 
 /* AddressTempAllocator__AddressTempAllocator_97bb9d0c @ 0x97bb9d0c (16 bytes) */
 int AddressTempAllocator__AddressTempAllocator_97bb9d0c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 4) = 0;
   *(undefined4 *)this = 0;
@@ -1076,7 +1078,7 @@ int AddressTempAllocator__AddressTempAllocator_97bb9d0c(this)
 
 /* AddressTempAllocator___AddressTempAllocator @ 0x97bb9d1c (8 bytes) */
 int AddressTempAllocator___AddressTempAllocator(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~AddressTempAllocator(this);
   return;
@@ -1084,7 +1086,7 @@ int AddressTempAllocator___AddressTempAllocator(this)
 
 /* AddressTempAllocator___AddressTempAllocator_97bb9d24 @ 0x97bb9d24 (8 bytes) */
 int AddressTempAllocator___AddressTempAllocator_97bb9d24(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~AddressTempAllocator(this);
   return;
@@ -1092,7 +1094,7 @@ int AddressTempAllocator___AddressTempAllocator_97bb9d24(this)
 
 /* AddressTempAllocator___AddressTempAllocator_97bb9d2c @ 0x97bb9d2c (16 bytes) */
 int AddressTempAllocator___AddressTempAllocator_97bb9d2c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)this == (void *)0x0) {
     return;
@@ -1103,7 +1105,7 @@ int AddressTempAllocator___AddressTempAllocator_97bb9d2c(this)
 
 /* AddressTempAllocator__getTemporary @ 0x97bb9d3c (316 bytes) */
 int AddressTempAllocator__getTemporary(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   int iVar2;
@@ -1172,7 +1174,7 @@ LAB_97bb9e58:
 
 /* AddressTempAllocator__releaseTemporary @ 0x97bb9e78 (20 bytes) */
 int AddressTempAllocator__releaseTemporary(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   *(undefined4 *)(param_1 * 4 + *(int *)this) = 0;
@@ -1181,7 +1183,7 @@ int AddressTempAllocator__releaseTemporary(this, param_1)
 
 /* TemporaryAllocator__TemporaryAllocator @ 0x97bb9e8c (4 bytes) */
 int TemporaryAllocator__TemporaryAllocator(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -1197,7 +1199,7 @@ int TemporaryAllocator__TemporaryAllocator(this)
 
 /* TemporaryAllocator__TemporaryAllocator_97bb9e90 @ 0x97bb9e90 (4 bytes) */
 int TemporaryAllocator__TemporaryAllocator_97bb9e90(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   TemporaryAllocator(this);
   return;
@@ -1205,7 +1207,7 @@ int TemporaryAllocator__TemporaryAllocator_97bb9e90(this)
 
 /* TemporaryAllocator__TemporaryAllocator_97bb9e94 @ 0x97bb9e94 (32 bytes) */
 int TemporaryAllocator__TemporaryAllocator_97bb9e94(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -1221,7 +1223,7 @@ int TemporaryAllocator__TemporaryAllocator_97bb9e94(this)
 
 /* TemporaryAllocator___TemporaryAllocator @ 0x97bb9eb4 (8 bytes) */
 int TemporaryAllocator___TemporaryAllocator(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TemporaryAllocator(this);
   return;
@@ -1229,7 +1231,7 @@ int TemporaryAllocator___TemporaryAllocator(this)
 
 /* TemporaryAllocator___TemporaryAllocator_97bb9ebc @ 0x97bb9ebc (8 bytes) */
 int TemporaryAllocator___TemporaryAllocator_97bb9ebc(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TemporaryAllocator(this);
   return;
@@ -1237,10 +1239,10 @@ int TemporaryAllocator___TemporaryAllocator_97bb9ebc(this)
 
 /* TemporaryAllocator___TemporaryAllocator_97bb9ec4 @ 0x97bb9ec4 (72 bytes) */
 int TemporaryAllocator___TemporaryAllocator_97bb9ec4(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   void *pvVar1;
-  TemporaryAllocator *pTVar2;
+  unsigned char * pTVar2;
   
   pTVar2 = this + 0x60;
   do {
@@ -1255,7 +1257,7 @@ int TemporaryAllocator___TemporaryAllocator_97bb9ec4(this)
 
 /* TemporaryAllocator__getTemporary @ 0x97bb9f0c (408 bytes) */
 int TemporaryAllocator__getTemporary(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   int iVar1;
@@ -1333,7 +1335,7 @@ int TemporaryAllocator__getTemporary(this, param_1)
 
 /* TemporaryAllocator__releaseTemporary @ 0x97bba0a4 (100 bytes) */
 int TemporaryAllocator__releaseTemporary(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -1363,7 +1365,7 @@ int TemporaryAllocator__releaseTemporary(this, param_1, param_2)
 
 /* ParseSymbol__ClearName @ 0x97bba108 (72 bytes) */
 int ParseSymbol__ClearName(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)(this + 0x14) != (void *)0x0) {
     _free(*(void **)(this + 0x14));
@@ -1376,7 +1378,7 @@ int ParseSymbol__ClearName(this)
 
 /* ParseSymbol__ClearDirectIndex @ 0x97bba150 (68 bytes) */
 int ParseSymbol__ClearDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)(this + 0x18) != (void *)0x0) {
     _free(*(void **)(this + 0x18));
@@ -1388,7 +1390,7 @@ int ParseSymbol__ClearDirectIndex(this)
 
 /* ParseSymbol__ParseSymbol @ 0x97bba194 (4 bytes) */
 int ParseSymbol__ParseSymbol(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 8) = 0;
   *(undefined2 *)(this + 0x2c) = 0;
@@ -1421,7 +1423,7 @@ int ParseSymbol__ParseSymbol(this)
 
 /* ParseSymbol__ParseSymbol_97bba198 @ 0x97bba198 (4 bytes) */
 int ParseSymbol__ParseSymbol_97bba198(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 8) = 0;
   *(undefined2 *)(this + 0x2c) = 0;
@@ -1454,7 +1456,7 @@ int ParseSymbol__ParseSymbol_97bba198(this)
 
 /* ParseSymbol__ParseSymbol_97bba19c @ 0x97bba19c (124 bytes) */
 int ParseSymbol__ParseSymbol_97bba19c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 8) = 0;
   *(undefined2 *)(this + 0x2c) = 0;
@@ -1487,7 +1489,7 @@ int ParseSymbol__ParseSymbol_97bba19c(this)
 
 /* ParseSymbol___ParseSymbol @ 0x97bba218 (8 bytes) */
 int ParseSymbol___ParseSymbol(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseSymbol(this);
   return;
@@ -1495,7 +1497,7 @@ int ParseSymbol___ParseSymbol(this)
 
 /* ParseSymbol___ParseSymbol_97bba220 @ 0x97bba220 (8 bytes) */
 int ParseSymbol___ParseSymbol_97bba220(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseSymbol(this);
   return;
@@ -1503,7 +1505,7 @@ int ParseSymbol___ParseSymbol_97bba220(this)
 
 /* ParseSymbol___ParseSymbol_97bba228 @ 0x97bba228 (116 bytes) */
 int ParseSymbol___ParseSymbol_97bba228(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)(this + 0x14) != (void *)0x0) {
     _free(*(void **)(this + 0x14));
@@ -1520,14 +1522,14 @@ int ParseSymbol___ParseSymbol_97bba228(this)
 
 /* ParseSymbol__ParseSymbol_97bba29c @ 0x97bba29c (4 bytes) */
 int ParseSymbol__ParseSymbol_97bba29c(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
   uint uVar4;
-  TType *pTVar5;
+  unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
   undefined4 uVar8;
@@ -1542,7 +1544,7 @@ int ParseSymbol__ParseSymbol_97bba29c(this, param_1)
   uVar11 = *(undefined4 *)(param_1 + 0x28);
   uVar14 = 0;
   uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(TType **)(param_1 + 0xc);
+  pTVar5 = *(unsigned char **)(param_1 + 0xc);
   *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
   *(undefined2 *)(this + 0x2c) = uVar2;
   *(undefined4 *)(this + 0x28) = uVar11;
@@ -1594,14 +1596,14 @@ int ParseSymbol__ParseSymbol_97bba29c(this, param_1)
 
 /* ParseSymbol__ParseSymbol_97bba2a0 @ 0x97bba2a0 (4 bytes) */
 int ParseSymbol__ParseSymbol_97bba2a0(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
   uint uVar4;
-  TType *pTVar5;
+  unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
   undefined4 uVar8;
@@ -1616,7 +1618,7 @@ int ParseSymbol__ParseSymbol_97bba2a0(this, param_1)
   uVar11 = *(undefined4 *)(param_1 + 0x28);
   uVar14 = 0;
   uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(TType **)(param_1 + 0xc);
+  pTVar5 = *(unsigned char **)(param_1 + 0xc);
   *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
   *(undefined2 *)(this + 0x2c) = uVar2;
   *(undefined4 *)(this + 0x28) = uVar11;
@@ -1668,14 +1670,14 @@ int ParseSymbol__ParseSymbol_97bba2a0(this, param_1)
 
 /* ParseSymbol__ParseSymbol_97bba2a4 @ 0x97bba2a4 (296 bytes) */
 int ParseSymbol__ParseSymbol_97bba2a4(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   undefined2 uVar2;
   int iVar3;
   uint uVar4;
-  TType *pTVar5;
+  unsigned char * pTVar5;
   char *pcVar6;
   undefined4 uVar7;
   undefined4 uVar8;
@@ -1690,7 +1692,7 @@ int ParseSymbol__ParseSymbol_97bba2a4(this, param_1)
   uVar11 = *(undefined4 *)(param_1 + 0x28);
   uVar14 = 0;
   uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(TType **)(param_1 + 0xc);
+  pTVar5 = *(unsigned char **)(param_1 + 0xc);
   *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
   *(undefined2 *)(this + 0x2c) = uVar2;
   *(undefined4 *)(this + 0x28) = uVar11;
@@ -1742,15 +1744,15 @@ int ParseSymbol__ParseSymbol_97bba2a4(this, param_1)
 
 /* ParseSymbol__operator_ @ 0x97bba3cc (328 bytes) */
 int ParseSymbol__operator_(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   undefined2 uVar2;
   undefined4 uVar3;
   uint uVar4;
   char *pcVar5;
-  TType *pTVar6;
+  unsigned char * pTVar6;
   undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
@@ -1777,7 +1779,7 @@ int ParseSymbol__operator_(this, param_1)
         uVar14 = uVar14 + 1;
       } while (uVar14 < *(uint *)(param_1 + 0x24));
     }
-    pTVar6 = *(TType **)(param_1 + 0xc);
+    pTVar6 = *(unsigned char **)(param_1 + 0xc);
     *(undefined4 *)(this + 0x28) = *(undefined4 *)(param_1 + 0x28);
     ((int (*)())ParseSymbol__SetParseTreeType)(this,pTVar6);
     uVar3 = *(undefined4 *)(param_1 + 0x48);
@@ -1815,8 +1817,8 @@ int ParseSymbol__operator_(this, param_1)
 
 /* operator___97bba514 @ 0x97bba514 (148 bytes) */
 int operator___97bba514(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   int iVar1;
   undefined4 uVar2;
@@ -1836,7 +1838,7 @@ int operator___97bba514(param_1, param_2)
 
 /* ParseSymbol__ResolveOpenGLType @ 0x97bba5a8 (616 bytes) */
 int ParseSymbol__ResolveOpenGLType(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   bool bVar1;
   undefined2 uVar2;
@@ -1977,13 +1979,13 @@ switchD_97bba640_caseD_0:
 
 /* ParseSymbol__SetParseTreeType @ 0x97bba850 (120 bytes) */
 int ParseSymbol__SetParseTreeType(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   int iVar2;
   
-  *(TType **)(this + 0xc) = param_1;
+  *(unsigned char **)(this + 0xc) = param_1;
   if (param_1 != (unsigned char *)0x0) {
     iVar2 = (**(code **)(*(int *)param_1 + 0x38))(param_1);
     uVar1 = 1;
@@ -1999,20 +2001,20 @@ int ParseSymbol__SetParseTreeType(this, param_1)
 
 /* ParseSymbol__SetChunk @ 0x97bba8c8 (84 bytes) */
 int ParseSymbol__SetChunk(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if ((*(void **)this != (void *)0x0) && (*(int *)(this + 0x44) != 0)) {
     _free(*(void **)this);
   }
-  *(_PPStreamChunk **)this = param_1;
+  *(unsigned char **)this = param_1;
   *(undefined4 *)(this + 0x44) = 1;
   return;
 }
 
 /* ParseSymbol__SetArrayPositionFromLastIndex @ 0x97bba91c (56 bytes) */
 int ParseSymbol__SetArrayPositionFromLastIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined2 uVar1;
   
@@ -2023,7 +2025,7 @@ int ParseSymbol__SetArrayPositionFromLastIndex(this)
 
 /* ParseSymbol__CatName @ 0x97bba954 (208 bytes) */
 int ParseSymbol__CatName(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   char *pcVar1;
@@ -2062,7 +2064,7 @@ int ParseSymbol__CatName(this, param_1)
 
 /* ParseSymbol__SetName @ 0x97bbaa24 (156 bytes) */
 int ParseSymbol__SetName(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   int iVar1;
@@ -2092,7 +2094,7 @@ int ParseSymbol__SetName(this, param_1)
 
 /* ParseSymbol__RemoveNameBackToChar @ 0x97bbaac0 (132 bytes) */
 int ParseSymbol__RemoveNameBackToChar(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   char *pcVar1;
@@ -2203,7 +2205,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2)
 
 /* ParseSymbol__RemoveArrayIndex @ 0x97bbacec (36 bytes) */
 int ParseSymbol__RemoveArrayIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(char *)(*(int *)(this + 0x14) + *(int *)(this + 0x20) + -1) != ']') {
     return;
@@ -2214,7 +2216,7 @@ int ParseSymbol__RemoveArrayIndex(this)
 
 /* ParseSymbol__TrimNameToBase @ 0x97bbad10 (156 bytes) */
 int ParseSymbol__TrimNameToBase(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   char cVar1;
   char *pcVar2;

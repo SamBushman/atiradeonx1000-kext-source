@@ -63,8 +63,8 @@ int _PPCTextureSamplerSampleTexelRECTRTCNO(param_1, param_2, param_3)
       param_1[5] = param_2;
       param_1[6] = 2;
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexPrepareCoords4CCRTC,param_3);
-    iVar5 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSampleRTC,param_3 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexPrepareCoords4CCRTC,param_3);
+    iVar5 = _glpRTCAddAChunk(&_glpOpTexSampleRTC,param_3 + iVar6);
     param_3 = param_3 + iVar6 + iVar5;
   }
   return param_3;
@@ -91,7 +91,7 @@ int _PPCTextureSamplerWrapCoordinates1DRTCAV(param_1, param_2)
   else {
     puVar3 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar4 = _glpRTCAddAChunk_97be1c2c(puVar3,param_2);
+  iVar4 = _glpRTCAddAChunk(puVar3,param_2);
   return param_2 + iVar4 * 4;
 }
 
@@ -130,7 +130,7 @@ int _PPCTextureSamplerWrapCoordinates2DRTCAV(param_1, param_2)
   else {
     puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar3 = _glpRTCAddAChunk_97be1c2c(puVar2,param_2);
+  iVar3 = _glpRTCAddAChunk(puVar2,param_2);
   return param_2 + iVar3 * 4;
 }
 
@@ -190,7 +190,7 @@ int _PPCTextureSamplerWrapCoordinates3DRTCAV(param_1, param_2)
   else {
     puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  iVar3 = _glpRTCAddAChunk_97be1c2c(puVar2,param_2);
+  iVar3 = _glpRTCAddAChunk(puVar2,param_2);
   return param_2 + iVar3 * 4;
 }
 
@@ -223,7 +223,7 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexCalculateLambda1DAVRTC,param_3 + 7);
+    iVar2 = _glpRTCAddAChunk(&_glpOpTexCalculateLambda1DAVRTC,param_3 + 7);
     puVar1 = param_3 + 7 + iVar2;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
@@ -313,7 +313,7 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexCalculateLambda2DAVRTC,param_3 + 7);
+    iVar2 = _glpRTCAddAChunk(&_glpOpTexCalculateLambda2DAVRTC,param_3 + 7);
     puVar1 = param_3 + 7 + iVar2;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
@@ -403,7 +403,7 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
     param_3[4] = 0x7c2c78ce;
     param_3[5] = 0x39ef00c0;
     param_3[6] = 0x7c4c78ce;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexCalculateLambda3DAVRTC,param_3 + 7);
+    iVar2 = _glpRTCAddAChunk(&_glpOpTexCalculateLambda3DAVRTC,param_3 + 7);
     puVar1 = param_3 + 7 + iVar2;
     *puVar1 = 0x39e00040;
     puVar1[1] = 0x7c9178ce;
@@ -556,12 +556,12 @@ LAB_97be2d14:
   if (uVar3 == 0x2700) {
 LAB_97be2ebc:
     if (param_1[8] != 0) {
-      iVar5 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar5 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar5;
     }
-    iVar5 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar5 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
     iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + iVar5);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample1DAVRTC,iVar5);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample1DAVRTC,iVar5);
     puVar10 = (undefined4 *)(iVar5 + iVar7 * 4);
     *puVar10 = 0x10431c84;
   }
@@ -582,20 +582,20 @@ LAB_97be2eb4:
       }
     }
     if (param_1[8] != 0) {
-      iVar5 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar5 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar5;
     }
-    iVar5 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    iVar5 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[iVar5] = 0x10c00484;
     iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,param_3 + iVar5 + 1);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample1DAVRTC,iVar5);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample1DAVRTC,iVar5);
     puVar10 = (undefined4 *)(iVar5 + iVar7 * 4);
     *puVar10 = 0x1020228c;
     puVar10[1] = 0x104138ee;
     puVar10[2] = 0x100a4b2c;
     puVar10[3] = 0x10060780;
     iVar5 = ((int (*)())_PPCTextureSamplerWrapCoordinates1DRTCAV)(param_1,puVar10 + 4);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample1DAVRTC,iVar5);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample1DAVRTC,iVar5);
     puVar10 = (undefined4 *)(iVar5 + iVar7 * 4);
     *puVar10 = 0x10202a8c;
     puVar10 = puVar10 + 1;
@@ -699,12 +699,12 @@ LAB_97be30f0:
   if (uVar4 == 0x2700) {
 LAB_97be32a0:
     if (param_1[8] != 0) {
-      iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar6 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar6;
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + iVar6);
-    iVar8 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,iVar6);
+    iVar8 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x10431c84;
   }
@@ -725,13 +725,13 @@ LAB_97be3298:
       }
     }
     if (param_1[8] != 0) {
-      iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar6 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar6;
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[iVar6] = 0x10c00484;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,param_3 + iVar6 + 1);
-    iVar8 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,iVar6);
+    iVar8 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021392e;
@@ -740,7 +740,7 @@ LAB_97be3298:
     puVar11[4] = 0x100a4a2c;
     puVar11[5] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,puVar11 + 6);
-    iVar8 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,iVar6);
+    iVar8 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021392e;
@@ -749,7 +749,7 @@ LAB_97be3298:
     puVar11[4] = 0x100a4b2c;
     puVar11[5] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,puVar11 + 6);
-    iVar8 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,iVar6);
+    iVar8 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021396e;
@@ -758,7 +758,7 @@ LAB_97be3298:
     puVar11[4] = 0x1003528c;
     puVar11[5] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates2DRTCAV)(param_1,puVar11 + 6);
-    iVar8 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,iVar6);
+    iVar8 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar8 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021396e;
@@ -868,12 +868,12 @@ LAB_97be359c:
   if (uVar4 == 0x2700) {
 LAB_97be376c:
     if (param_1[8] != 0) {
-      iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar6 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar6;
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedAVRTC,param_3);
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + iVar6);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x10431c84;
   }
@@ -894,13 +894,13 @@ LAB_97be3764:
       }
     }
     if (param_1[8] != 0) {
-      iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexProjectCoordinatesAVRTC,param_3);
+      iVar6 = _glpRTCAddAChunk(&_glpOpTexProjectCoordinatesAVRTC,param_3);
       param_3 = param_3 + iVar6;
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC,param_3);
     param_3[iVar6] = 0x10c00484;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,param_3 + iVar6 + 1);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021392e;
@@ -911,7 +911,7 @@ LAB_97be3764:
     puVar11[6] = 0x100a4a2c;
     puVar11[7] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 8);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021392e;
@@ -922,7 +922,7 @@ LAB_97be3764:
     puVar11[6] = 0x100a4b2c;
     puVar11[7] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 8);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021396e;
@@ -934,7 +934,7 @@ LAB_97be3764:
     puVar11[7] = 0x10004a2c;
     puVar11[8] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 9);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021396e;
@@ -945,7 +945,7 @@ LAB_97be3764:
     puVar11[6] = 0x100a492c;
     puVar11[7] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 8);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021392e;
@@ -957,7 +957,7 @@ LAB_97be3764:
     puVar11[7] = 0x1009032c;
     puVar11[8] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 9);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021392e;
@@ -970,7 +970,7 @@ LAB_97be3764:
     puVar11[8] = 0x1000022c;
     puVar11[9] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 10);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1024492c;
     puVar11[1] = 0x1021396e;
@@ -981,7 +981,7 @@ LAB_97be3764:
     puVar11[6] = 0x1003528c;
     puVar11[7] = 0x10060780;
     iVar6 = ((int (*)())_PPCTextureSamplerWrapCoordinates3DRTCAV)(param_1,puVar11 + 8);
-    iVar9 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample3DAVRTC,iVar6);
+    iVar9 = _glpRTCAddAChunk(&_glpOpTexSample3DAVRTC,iVar6);
     puVar11 = (undefined4 *)(iVar6 + iVar9 * 4);
     *puVar11 = 0x1025492c;
     puVar11[1] = 0x1021396e;
@@ -1070,10 +1070,10 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(param_1, param_2, param_3)
   uVar4 = *(ushort *)(iVar6 + 0x16);
   if (uVar4 == 0x2700) {
 LAB_97be3d34:
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntDenormalisedAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntDenormalisedAVRTC,param_3);
     param_3 = param_3 + iVar6;
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexWrapCoordsCCCAVRTC,param_3);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,param_3 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexWrapCoordsCCCAVRTC,param_3);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,param_3 + iVar6);
     puVar9 = param_3 + iVar6 + iVar7;
     *puVar9 = 0x10431c84;
   }
@@ -1093,12 +1093,12 @@ LAB_97be3d2c:
         goto LAB_97be3d2c;
       }
     }
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,param_3);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,param_3);
     param_3 = param_3 + iVar6;
     *param_3 = 0x10c00484;
     param_3 = param_3 + 1;
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexWrapCoordsCCCAVRTC,param_3);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,param_3 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexWrapCoordsCCCAVRTC,param_3);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,param_3 + iVar6);
     puVar9 = param_3 + iVar6 + iVar7;
     *puVar9 = 0x1024492c;
     puVar9[1] = 0x1021392e;
@@ -1107,8 +1107,8 @@ LAB_97be3d2c:
     puVar9[4] = 0x100a4a2c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
     puVar9 = puVar9 + iVar6 + iVar7;
     *puVar9 = 0x1025492c;
     puVar9[1] = 0x1021392e;
@@ -1117,8 +1117,8 @@ LAB_97be3d2c:
     puVar9[4] = 0x100a4b2c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
     puVar9 = puVar9 + iVar6 + iVar7;
     *puVar9 = 0x1024492c;
     puVar9[1] = 0x1021396e;
@@ -1127,8 +1127,8 @@ LAB_97be3d2c:
     puVar9[4] = 0x1003528c;
     puVar9[5] = 0x10060780;
     puVar9 = puVar9 + 6;
-    iVar6 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
-    iVar7 = _glpRTCAddAChunk_97be1c2c(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
+    iVar6 = _glpRTCAddAChunk(&_glpOpTexWrapCoordsCCCAVRTC,puVar9);
+    iVar7 = _glpRTCAddAChunk(&_glpOpTexSample2DAVRTC,puVar9 + iVar6);
     puVar9 = puVar9 + iVar6 + iVar7;
     *puVar9 = 0x1025492c;
     puVar9[1] = 0x1021396e;
@@ -1201,8 +1201,9 @@ int _PPCNoiseGeneratorInitialise(param_1)
 }
 
 /* _glpRTCAddAChunk_97be4088 @ 0x97be4088 (48 bytes) */
-int _glpRTCAddAChunk_97be1c2c_97be4088(int *param_1,int *param_2)
-
+int _glpRTCAddAChunk_97be4088(param_1, param_2)
+  int *param_1;
+  int *param_2;
 {
   int iVar1;
   int iVar2;
@@ -1235,8 +1236,8 @@ int _PPCNoiseGeneratorCalculate1DAVRTC(param_1, param_2)
   uVar4 = 0;
   do {
     uVar4 = uVar4 + 1;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpFirstStageAVRTC,param_2);
-    iVar3 = _glpRTCAddAChunk_97be1c2c(&_glpOpSecondStage1DAVRTC,param_2 + iVar2);
+    iVar2 = _glpRTCAddAChunk(&_glpOpFirstStageAVRTC,param_2);
+    iVar3 = _glpRTCAddAChunk(&_glpOpSecondStage1DAVRTC,param_2 + iVar2);
     puVar1 = param_2 + iVar2 + iVar3;
     *puVar1 = 0x1122486e;
     puVar1[1] = 0x10003b6e;
@@ -1266,8 +1267,8 @@ int _PPCNoiseGeneratorCalculate2DAVRTC(param_1, param_2)
   uVar4 = 0;
   do {
     uVar4 = uVar4 + 1;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpFirstStageAVRTC,param_2);
-    iVar3 = _glpRTCAddAChunk_97be1c2c(&_glpOpSecondStage2DAVRTC,param_2 + iVar2);
+    iVar2 = _glpRTCAddAChunk(&_glpOpFirstStageAVRTC,param_2);
+    iVar3 = _glpRTCAddAChunk(&_glpOpSecondStage2DAVRTC,param_2 + iVar2);
     puVar1 = param_2 + iVar2 + iVar3;
     *puVar1 = 0x1122486e;
     puVar1[1] = 0x10003b6e;
@@ -1297,8 +1298,8 @@ int _PPCNoiseGeneratorCalculate3DAVRTC(param_1, param_2)
   uVar4 = 0;
   do {
     uVar4 = uVar4 + 1;
-    iVar2 = _glpRTCAddAChunk_97be1c2c(&_glpOpFirstStageAVRTC,param_2);
-    iVar3 = _glpRTCAddAChunk_97be1c2c(&_glpOpSecondStage3DAVRTC,param_2 + iVar2);
+    iVar2 = _glpRTCAddAChunk(&_glpOpFirstStageAVRTC,param_2);
+    iVar3 = _glpRTCAddAChunk(&_glpOpSecondStage3DAVRTC,param_2 + iVar2);
     puVar1 = param_2 + iVar2 + iVar3;
     *puVar1 = 0x1122486e;
     puVar1[1] = 0x10003b6e;
@@ -1611,8 +1612,8 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
       uVar5 = 0xfc094000;
     }
     else {
-      fVar1 = TAllocation::guardBlockSize;
-      if ((fVar3 < TAllocation::guardBlockSize) || (fVar1 = FLOAT_97c3acd8, FLOAT_97c3acd8 < fVar3))
+      fVar1 = TAllocation__guardBlockSize;
+      if ((fVar3 < TAllocation__guardBlockSize) || (fVar1 = FLOAT_97c3acd8, FLOAT_97c3acd8 < fVar3))
       {
         fVar3 = fVar1;
       }
@@ -2499,8 +2500,9 @@ int _PPEmulatorVariableMaskFromSwizzle(param_1)
 }
 
 /* _ncpy @ 0x97be5f58 (144 bytes) */
-char * _ncpy_97bf2850(char *param_1,int param_2)
-
+int _ncpy(param_1, param_2)
+  char *param_1;
+  int param_2;
 {
   int iVar1;
   char *local_20 [4];
@@ -2513,7 +2515,7 @@ char * _ncpy_97bf2850(char *param_1,int param_2)
   }
   iVar1 = param_2 / 10;
   if (iVar1 != 0) {
-    _handleDigit_97c05b70(local_20,iVar1);
+    _handleDigit(local_20,iVar1);
   }
   *local_20[0] = (char)param_2 + (char)iVar1 * -10 + '0';
   return local_20[0] + (1 - (int)param_1);
@@ -2539,7 +2541,7 @@ int _glpWriteSizeTypePrecision(param_1, param_2, param_3, param_4, param_5)
     cVar1 = ":"[iVar2 + 1];
     iVar2 = iVar2 + 1;
   }
-  iVar3 = _ncpy_97bf2850(param_1 + iVar2,param_2 + 1);
+  iVar3 = ((int (*)())_ncpy)(param_1 + iVar2,param_2 + 1);
   iVar3 = param_1 + iVar2 + iVar3;
   if (param_3 == 1) {
     iVar2 = 0;
@@ -2549,7 +2551,7 @@ int _glpWriteSizeTypePrecision(param_1, param_2, param_3, param_4, param_5)
       cVar1 = ":"[iVar2 + 1];
       iVar2 = iVar2 + 1;
     }
-    iVar4 = _ncpy_97bf2850(iVar3 + iVar2,param_2 + 1);
+    iVar4 = ((int (*)())_ncpy)(iVar3 + iVar2,param_2 + 1);
     iVar3 = iVar3 + iVar2 + iVar4;
   }
   switch(param_4) {
@@ -2695,7 +2697,7 @@ int _glpWriteOperandSize(param_1, param_2, param_3)
       cVar1 = ":"[iVar2 + 1];
       iVar2 = iVar2 + 1;
     }
-    iVar3 = _ncpy_97bf2850(param_1 + iVar2,param_2 + 1);
+    iVar3 = ((int (*)())_ncpy)(param_1 + iVar2,param_2 + 1);
     param_1 = param_1 + iVar2 + iVar3;
     if (param_3 == 1) {
       iVar2 = 0;
@@ -2705,7 +2707,7 @@ int _glpWriteOperandSize(param_1, param_2, param_3)
         cVar1 = ":"[iVar2 + 1];
         iVar2 = iVar2 + 1;
       }
-      iVar3 = _ncpy_97bf2850(param_1 + iVar2,param_2 + 1);
+      iVar3 = ((int (*)())_ncpy)(param_1 + iVar2,param_2 + 1);
       param_1 = param_1 + iVar2 + iVar3;
     }
   }
@@ -2731,7 +2733,7 @@ int _glpWriteSizeType(param_1, param_2, param_3, param_4)
     cVar1 = ":"[iVar2 + 1];
     iVar2 = iVar2 + 1;
   }
-  iVar3 = _ncpy_97bf2850(param_1 + iVar2,param_2 + 1);
+  iVar3 = ((int (*)())_ncpy)(param_1 + iVar2,param_2 + 1);
   iVar3 = param_1 + iVar2 + iVar3;
   if (param_3 != 0) {
     iVar2 = 0;
@@ -2741,7 +2743,7 @@ int _glpWriteSizeType(param_1, param_2, param_3, param_4)
       cVar1 = ":"[iVar2 + 1];
       iVar2 = iVar2 + 1;
     }
-    iVar4 = _ncpy_97bf2850(iVar3 + iVar2,param_2 + 1);
+    iVar4 = ((int (*)())_ncpy)(iVar3 + iVar2,param_2 + 1);
     iVar3 = iVar3 + iVar2 + iVar4;
   }
   switch(param_4) {
@@ -2832,9 +2834,13 @@ int _glpWriteClampSat(param_1, param_2, param_3, param_4)
 }
 
 /* _glpWriteDestinationOperand @ 0x97be6730 (2328 bytes) */
-char * _glpWriteDestinationOperand_97bf3658
-                 (int param_1,char *param_2,int param_3,int param_4,int param_5,int param_6)
-
+int _glpWriteDestinationOperand(param_1, param_2, param_3, param_4, param_5, param_6)
+  int param_1;
+  char *param_2;
+  int param_3;
+  int param_4;
+  int param_5;
+  int param_6;
 {
   char cVar1;
   undefined2 uVar2;
@@ -2859,7 +2865,7 @@ char * _glpWriteDestinationOperand_97bf3658
       uVar2 = *(undefined2 *)(param_5 + param_1 + 6);
       goto LAB_97be68f4;
     }
-    iVar4 = _ncpy_97bf2850(param_2,*(undefined4 *)(param_3 + (uint)*(ushort *)(param_5 + param_1 + 6) * 4));
+    iVar4 = ((int (*)())_ncpy)(param_2,*(undefined4 *)(param_3 + (uint)*(ushort *)(param_5 + param_1 + 6) * 4));
     param_2 = param_2 + iVar4;
     if (((param_4 != 0) && (uVar3 = *(uint *)(param_5 + param_1 + 4), -1 < (int)uVar3)) &&
        (*(int *)(param_4 + (uVar3 & 0xffff) * 4) != -1)) {
@@ -2871,7 +2877,7 @@ char * _glpWriteDestinationOperand_97bf3658
         iVar4 = iVar4 + 1;
       }
       param_2 = param_2 + iVar4;
-      iVar6 = _ncpy_97bf2850(param_2,*(undefined4 *)(param_4 + (uint)*(ushort *)(param_5 + param_1 + 6) * 4))
+      iVar6 = ((int (*)())_ncpy)(param_2,*(undefined4 *)(param_4 + (uint)*(ushort *)(param_5 + param_1 + 6) * 4))
       ;
       iVar4 = 0;
       cVar1 = s___97c2d770[0];
@@ -2894,7 +2900,7 @@ char * _glpWriteDestinationOperand_97bf3658
     param_2 = param_2 + iVar4;
     uVar2 = *(undefined2 *)(param_5 + param_1 + 6);
 LAB_97be68f4:
-    iVar4 = _ncpy_97bf2850(param_2,uVar2);
+    iVar4 = ((int (*)())_ncpy)(param_2,uVar2);
     param_2 = param_2 + iVar4;
   }
   if (param_6 == 0) {
@@ -2959,7 +2965,7 @@ LAB_97be68f4:
         cVar1 = "[adr"[iVar4 + 1];
         iVar4 = iVar4 + 1;
       }
-      iVar5 = _ncpy_97bf2850(param_2 + iVar4,*(uint *)(param_5 + param_1 + 4) >> 0x1e & 1);
+      iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,*(uint *)(param_5 + param_1 + 4) >> 0x1e & 1);
       param_2 = param_2 + iVar4 + iVar5;
       uVar3 = *(uint *)(param_5 + param_1 + 4) >> 0x1c & 3;
       if (uVar3 == 1) {
@@ -3025,7 +3031,7 @@ LAB_97be6a78:
           }
           param_2 = param_2 + iVar4;
         }
-        iVar4 = _ncpy_97bf2850(param_2,iVar6);
+        iVar4 = ((int (*)())_ncpy)(param_2,iVar6);
         param_2 = param_2 + iVar4;
       }
       iVar4 = 0;
@@ -3193,7 +3199,7 @@ int _glpWriteAddressOperand(param_1, param_2, param_3, param_4)
       cVar1 = "adr"[iVar2 + 1];
       iVar2 = iVar2 + 1;
     }
-    iVar3 = _ncpy_97bf2850(param_2 + iVar2,*(undefined2 *)(param_3 + param_1 + 6));
+    iVar3 = ((int (*)())_ncpy)(param_2 + iVar2,*(undefined2 *)(param_3 + param_1 + 6));
     param_2 = param_2 + iVar2 + iVar3;
   }
   if ((*(uint *)(param_3 + param_1) & 0x1e000) != 0x1e000) {
@@ -3300,9 +3306,14 @@ int _glpWriteAddressOperand(param_1, param_2, param_3, param_4)
 }
 
 /* _glpWriteSourceOperandType @ 0x97be73d4 (1476 bytes) */
-int _glpWriteSourceOperand_97bf30b8Type
-              (int param_1,int param_2,int param_3,int param_4,int param_5,int param_6,int param_7)
-
+int _glpWriteSourceOperandType(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+  int param_1;
+  int param_2;
+  int param_3;
+  int param_4;
+  int param_5;
+  int param_6;
+  int param_7;
 {
   char cVar1;
   uint uVar2;
@@ -3335,7 +3346,7 @@ int _glpWriteSourceOperand_97bf30b8Type
     else {
       uVar2 = *(uint *)(param_5 + (uint)*(ushort *)(param_7 + param_1 + 6) * 4);
     }
-    iVar5 = _ncpy_97bf2850(param_2 + iVar4,uVar2);
+    iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,uVar2);
     param_2 = param_2 + iVar4 + iVar5;
     if (((param_6 != 0) && (-1 < *(int *)(param_7 + param_1))) &&
        (*(int *)(param_6 + (uint)*(ushort *)(param_7 + param_1 + 6) * 4) != -1)) {
@@ -3346,7 +3357,7 @@ int _glpWriteSourceOperand_97bf30b8Type
         cVar1 = "["[iVar4 + 1];
         iVar4 = iVar4 + 1;
       }
-      iVar5 = _ncpy_97bf2850(param_2 + iVar4,
+      iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,
                     *(undefined4 *)(param_6 + (uint)*(ushort *)(param_7 + param_1 + 6) * 4));
       iVar5 = param_2 + iVar4 + iVar5;
       param_2 = 0;
@@ -3368,7 +3379,7 @@ LAB_97be7698:
       cVar1 = "prm"[iVar4 + 1];
       iVar4 = iVar4 + 1;
     }
-    iVar5 = _ncpy_97bf2850(param_2 + iVar4,
+    iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,
                   *(undefined4 *)(param_3 + (uint)*(ushort *)(param_7 + param_1 + 6) * 4));
     param_2 = param_2 + iVar4 + iVar5;
     if ((-1 < *(int *)(param_7 + param_1)) &&
@@ -3380,7 +3391,7 @@ LAB_97be7698:
         cVar1 = "["[iVar4 + 1];
         iVar4 = iVar4 + 1;
       }
-      iVar5 = _ncpy_97bf2850(param_2 + iVar4,
+      iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,
                     *(undefined4 *)(param_4 + (uint)*(ushort *)(param_7 + param_1 + 6) * 4));
       iVar5 = param_2 + iVar4 + iVar5;
       param_2 = 0;
@@ -3411,7 +3422,7 @@ LAB_97be7698:
       iVar4 = iVar4 + 1;
     }
 LAB_97be770c:
-    iVar5 = _ncpy_97bf2850(param_2 + iVar4,*(undefined2 *)(param_7 + param_1 + 6));
+    iVar5 = ((int (*)())_ncpy)(param_2 + iVar4,*(undefined2 *)(param_7 + param_1 + 6));
     param_2 = param_2 + iVar4 + iVar5;
   }
   if (-1 < *(int *)(param_7 + param_1)) {
@@ -3425,7 +3436,7 @@ LAB_97be770c:
     cVar1 = "[adr"[iVar4 + 1];
     iVar4 = iVar4 + 1;
   }
-  iVar3 = _ncpy_97bf2850(param_2 + iVar4,*(uint *)(param_7 + param_1) >> 0x1e & 1);
+  iVar3 = ((int (*)())_ncpy)(param_2 + iVar4,*(uint *)(param_7 + param_1) >> 0x1e & 1);
   iVar3 = param_2 + iVar4 + iVar3;
   uVar2 = *(uint *)(param_7 + param_1) >> 0x1c & 3;
   if (uVar2 == 1) {
@@ -3486,7 +3497,7 @@ LAB_97be7894:
       }
       iVar3 = iVar3 + iVar5;
     }
-    iVar4 = _ncpy_97bf2850(iVar3,iVar4);
+    iVar4 = ((int (*)())_ncpy)(iVar3,iVar4);
     iVar3 = iVar3 + iVar4;
   }
   iVar4 = 0;
@@ -3500,8 +3511,11 @@ LAB_97be7894:
 }
 
 /* _glpWriteSourceOperandSwizzle @ 0x97be79ac (488 bytes) */
-char * _glpWriteSourceOperand_97bf30b8Swizzle(int param_1,char *param_2,int param_3,int param_4)
-
+int _glpWriteSourceOperandSwizzle(param_1, param_2, param_3, param_4)
+  int param_1;
+  char *param_2;
+  int param_3;
+  int param_4;
 {
   char cVar1;
   int iVar2;
@@ -3567,8 +3581,10 @@ char * _glpWriteSourceOperand_97bf30b8Swizzle(int param_1,char *param_2,int para
 }
 
 /* _glpWriteSourceOperandExtendedSwizzle @ 0x97be7b94 (1024 bytes) */
-void _glpWriteSourceOperand_97bf30b8ExtendedSwizzle(int param_1,int param_2,int param_3)
-
+int _glpWriteSourceOperandExtendedSwizzle(param_1, param_2, param_3)
+  int param_1;
+  int param_2;
+  int param_3;
 {
   char cVar1;
   int iVar2;
@@ -3741,8 +3757,9 @@ switchD_97be7d14_default:
 }
 
 /* _glpWriteSourceOperand @ 0x97be7fc0 (380 bytes) */
-int _glpWriteSourceOperand_97bf30b8(int param_1,int param_2)
-
+int _glpWriteSourceOperand(param_1, param_2)
+  int param_1;
+  int param_2;
 {
   char cVar1;
   int iVar2;
@@ -3772,13 +3789,13 @@ int _glpWriteSourceOperand_97bf30b8(int param_1,int param_2)
     }
     param_2 = param_2 + iVar3;
   }
-  iVar3 = _glpWriteSourceOperand_97bf30b8Type(param_1,param_2);
+  iVar3 = ((int (*)())_glpWriteSourceOperandType)(param_1,param_2);
   if ((*(uint *)(iVar2 + param_1) >> 0x17 & 7) != 4) {
     if (in_stack_00000038 == 0) {
-      iVar3 = _glpWriteSourceOperand_97bf30b8Swizzle(param_1,iVar3,in_r9,in_r10);
+      iVar3 = ((int (*)())_glpWriteSourceOperandSwizzle)(param_1,iVar3,in_r9,in_r10);
     }
     else {
-      iVar3 = _glpWriteSourceOperand_97bf30b8ExtendedSwizzle(param_1,iVar3,in_r9 + 1,in_r10);
+      iVar3 = ((int (*)())_glpWriteSourceOperandExtendedSwizzle)(param_1,iVar3,in_r9 + 1,in_r10);
     }
   }
   if (in_r10 != 0) {
@@ -3920,8 +3937,9 @@ switchD_97be81f4_default:
 }
 
 /* _glpWriteTextureOperand @ 0x97be8478 (736 bytes) */
-int _glpWriteTextureOperand_97bf37b4(int param_1,int param_2)
-
+int _glpWriteTextureOperand(param_1, param_2)
+  int param_1;
+  int param_2;
 {
   char cVar1;
   int iVar2;
@@ -3938,11 +3956,11 @@ int _glpWriteTextureOperand_97bf37b4(int param_1,int param_2)
   param_2 = param_2 + iVar2;
   if (in_r10 == 0) {
     in_r9 = in_r9 * 8;
-    iVar2 = _ncpy_97bf2850(param_2,*(uint *)(in_r9 + param_1) & 0x1f);
+    iVar2 = ((int (*)())_ncpy)(param_2,*(uint *)(in_r9 + param_1) & 0x1f);
     param_2 = param_2 + iVar2;
   }
   else {
-    param_2 = _glpWriteSourceOperand_97bf30b8(param_1,param_2);
+    param_2 = ((int (*)())_glpWriteSourceOperand)(param_1,param_2);
     in_r9 = (in_r9 + 1) * 8;
   }
   iVar2 = 0;
@@ -4158,7 +4176,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4167,8 +4185,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar13 = 2;
     if (uVar1 >> 0x1d != 2) break;
     iVar14 = 0;
@@ -4224,7 +4241,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4233,8 +4250,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar13 = 2;
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
@@ -4267,7 +4283,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4275,7 +4291,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4285,8 +4301,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
     }
     iVar13 = 3;
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4309,7 +4324,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4318,8 +4333,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar13 = 3;
     break;
   case 0x42:
@@ -4337,7 +4351,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4345,7 +4359,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar10 = 2;
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
@@ -4372,7 +4386,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4380,7 +4394,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4389,8 +4403,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              _glpWriteTextureOperand_97bf37b4
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+              ((int (*)())_glpWriteTextureOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
     iVar13 = 3 - ((int)-uVar12 >> 0x1f);
     if (uVar12 == 0) break;
     iVar14 = 0;
@@ -4403,8 +4416,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
 LAB_97be9620:
     iVar13 = iVar13 + 1;
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8
-                        (param_1,puVar15 + iVar14,param_5,param_6,param_7,param_8,iVar13,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,puVar15 + iVar14,param_5,param_6,param_7,param_8,iVar13,uVar12);
     break;
   case 0x48:
   case 0x49:
@@ -4595,7 +4607,7 @@ LAB_97be9988:
     puVar15 = puVar15 + iVar14;
 LAB_97be99b4:
     puVar15 = (undefined1 *)
-              _glpWriteSourceOperand_97bf30b8(param_1,puVar15,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand)(param_1,puVar15,param_5,param_6,param_7,param_8,2,uVar12);
     iVar13 = 2;
     break;
   case 0x62:
@@ -4612,7 +4624,7 @@ LAB_97be99b4:
       cVar2 = " "[iVar9 + 1];
       iVar9 = iVar9 + 1;
     }
-    iVar9 = _glpWriteDestinationOperand_97bf3658(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
+    iVar9 = ((int (*)())_glpWriteDestinationOperand)(param_1,iVar14 + iVar9,param_7,param_8,1,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4620,7 +4632,7 @@ LAB_97be99b4:
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4628,7 +4640,7 @@ LAB_97be99b4:
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4637,7 +4649,7 @@ LAB_97be99b4:
       iVar14 = iVar14 + 1;
     }
     iVar10 = 4;
-    iVar9 = _glpWriteSourceOperand_97bf30b8(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,4,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,4,uVar12);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -4647,8 +4659,7 @@ LAB_97be99b4:
     }
 LAB_97be9848:
     puVar15 = (undefined1 *)
-              _glpWriteTextureOperand_97bf37b4
-                        (param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,iVar10 + 1,uVar12);
+              ((int (*)())_glpWriteTextureOperand)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,iVar10 + 1,uVar12);
     iVar13 = (iVar10 + 1) - ((int)-uVar12 >> 0x1f);
   }
   iVar14 = 0;
@@ -4713,8 +4724,10 @@ int _isTempArrayStart(param_1, param_2, param_3)
 }
 
 /* _isParamArrayStart @ 0x97be9b80 (96 bytes) */
-undefined4 _isParamArrayStart_97c017c0(int param_1,uint param_2,uint *param_3)
-
+int _isParamArrayStart(param_1, param_2, param_3)
+  int param_1;
+  uint param_2;
+  uint *param_3;
 {
   int iVar1;
   int iVar2;
@@ -4807,8 +4820,10 @@ int _InsertLabel(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _adjustAllocation @ 0x97be9cb4 (124 bytes) */
-undefined4 _adjustAllocation_97bf27d4(size_t *param_1,int *param_2,int *param_3)
-
+int _adjustAllocation(param_1, param_2, param_3)
+  size_t *param_1;
+  int *param_2;
+  int *param_3;
 {
   int iVar1;
   void *pvVar2;

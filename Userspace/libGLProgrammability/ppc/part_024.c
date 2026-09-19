@@ -2,7 +2,7 @@
 
 /* std__bad_cast___bad_cast_97c18044 @ 0x97c18044 (88 bytes) */
 int std__bad_cast___bad_cast_97c18044(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
@@ -16,7 +16,7 @@ int std__bad_cast___bad_cast_97c18044(this)
 
 /* std__bad_typeid___bad_typeid @ 0x97c1809c (8 bytes) */
 int std__bad_typeid___bad_typeid(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_typeid(this);
   return;
@@ -24,7 +24,7 @@ int std__bad_typeid___bad_typeid(this)
 
 /* std__bad_typeid___bad_typeid_97c180a4 @ 0x97c180a4 (8 bytes) */
 int std__bad_typeid___bad_typeid_97c180a4(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_typeid(this);
   return;
@@ -32,7 +32,7 @@ int std__bad_typeid___bad_typeid_97c180a4(this)
 
 /* std__bad_typeid___bad_typeid_97c180ac @ 0x97c180ac (8 bytes) */
 int std__bad_typeid___bad_typeid_97c180ac(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_typeid(this);
   return;
@@ -40,7 +40,7 @@ int std__bad_typeid___bad_typeid_97c180ac(this)
 
 /* std__bad_typeid___bad_typeid_97c180b4 @ 0x97c180b4 (88 bytes) */
 int std__bad_typeid___bad_typeid_97c180b4(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
@@ -54,8 +54,8 @@ int std__bad_typeid___bad_typeid_97c180b4(this)
 
 /* std__type_info__operator__ @ 0x97c1810c (76 bytes) */
 int std__type_info__operator__(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   undefined4 uVar2;
@@ -82,7 +82,7 @@ int std__type_info____is_function_p()
 
 /* std__type_info____do_catch @ 0x97c18168 (4 bytes) */
 int std__type_info____do_catch(param_1, param_2, param_3)
-  unsigned char *param_1;
+  unsigned char * param_1;
   void **param_2;
   uint param_3;
 {
@@ -92,7 +92,7 @@ int std__type_info____do_catch(param_1, param_2, param_3)
 
 /* std__type_info____do_upcast @ 0x97c1816c (8 bytes) */
 int std__type_info____do_upcast(param_1, param_2)
-  unsigned char *param_1;
+  unsigned char * param_1;
   void **param_2;
 {
   return 0;
@@ -100,7 +100,7 @@ int std__type_info____do_upcast(param_1, param_2)
 
 /* __cxxabiv1____class_type_info_____class_type_info @ 0x97c18174 (8 bytes) */
 int __cxxabiv1____class_type_info_____class_type_info(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__class_type_info(this);
   return;
@@ -108,7 +108,7 @@ int __cxxabiv1____class_type_info_____class_type_info(this)
 
 /* __cxxabiv1____class_type_info_____class_type_info_97c1817c @ 0x97c1817c (8 bytes) */
 int __cxxabiv1____class_type_info_____class_type_info_97c1817c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__class_type_info(this);
   return;
@@ -116,7 +116,7 @@ int __cxxabiv1____class_type_info_____class_type_info_97c1817c(this)
 
 /* __cxxabiv1____class_type_info_____class_type_info_97c18184 @ 0x97c18184 (8 bytes) */
 int __cxxabiv1____class_type_info_____class_type_info_97c18184(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__class_type_info(this);
   return;
@@ -124,7 +124,7 @@ int __cxxabiv1____class_type_info_____class_type_info_97c18184(this)
 
 /* __cxxabiv1____class_type_info_____class_type_info_97c1818c @ 0x97c1818c (104 bytes) */
 int __cxxabiv1____class_type_info_____class_type_info_97c1818c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
@@ -139,7 +139,7 @@ int __cxxabiv1____class_type_info_____class_type_info_97c1818c(this)
 
 /* __cxxabiv1____si_class_type_info_____si_class_type_info @ 0x97c181f4 (8 bytes) */
 int __cxxabiv1____si_class_type_info_____si_class_type_info(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__si_class_type_info(this);
   return;
@@ -147,7 +147,7 @@ int __cxxabiv1____si_class_type_info_____si_class_type_info(this)
 
 /* __cxxabiv1____si_class_type_info_____si_class_type_info_97c181fc @ 0x97c181fc (8 bytes) */
 int __cxxabiv1____si_class_type_info_____si_class_type_info_97c181fc(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__si_class_type_info(this);
   return;
@@ -155,7 +155,7 @@ int __cxxabiv1____si_class_type_info_____si_class_type_info_97c181fc(this)
 
 /* __cxxabiv1____si_class_type_info_____si_class_type_info_97c18204 @ 0x97c18204 (8 bytes) */
 int __cxxabiv1____si_class_type_info_____si_class_type_info_97c18204(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__si_class_type_info(this);
   return;
@@ -163,12 +163,12 @@ int __cxxabiv1____si_class_type_info_____si_class_type_info_97c18204(this)
 
 /* __cxxabiv1____si_class_type_info_____si_class_type_info_97c1820c @ 0x97c1820c (104 bytes) */
 int __cxxabiv1____si_class_type_info_____si_class_type_info_97c1820c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
   *(int *)this = DAT_a7b7c01c + 8;
-  __class_type_info::~__class_type_info((unsigned char *)this);
+  __class_type_info_____class_type_info((unsigned char *)this);
   if ((in_r4 & 1) != 0) {
     operator_delete(this);
     return;
@@ -178,7 +178,7 @@ int __cxxabiv1____si_class_type_info_____si_class_type_info_97c1820c(this)
 
 /* __cxxabiv1____vmi_class_type_info_____vmi_class_type_info @ 0x97c18274 (8 bytes) */
 int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__vmi_class_type_info(this);
   return;
@@ -186,7 +186,7 @@ int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info(this)
 
 /* __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1827c @ 0x97c1827c (8 bytes) */
 int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1827c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__vmi_class_type_info(this);
   return;
@@ -194,7 +194,7 @@ int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1827c(this)
 
 /* __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c18284 @ 0x97c18284 (8 bytes) */
 int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c18284(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~__vmi_class_type_info(this);
   return;
@@ -202,12 +202,12 @@ int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c18284(this)
 
 /* __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1828c @ 0x97c1828c (104 bytes) */
 int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1828c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
   *(int *)this = DAT_a7b7c018 + 8;
-  __class_type_info::~__class_type_info((unsigned char *)this);
+  __class_type_info_____class_type_info((unsigned char *)this);
   if ((in_r4 & 1) != 0) {
     operator_delete(this);
     return;
@@ -217,8 +217,8 @@ int __cxxabiv1____vmi_class_type_info_____vmi_class_type_info_97c1828c(this)
 
 /* __cxxabiv1____class_type_info____do_catch @ 0x97c182f4 (124 bytes) */
 int __cxxabiv1____class_type_info____do_catch(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   void **param_2;
   uint param_3;
 {
@@ -238,8 +238,8 @@ int __cxxabiv1____class_type_info____do_catch(this, param_1, param_2, param_3)
 
 /* __cxxabiv1____class_type_info____do_upcast @ 0x97c18370 (120 bytes) */
 int __cxxabiv1____class_type_info____do_upcast(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   void **param_2;
 {
   bool bVar1;
@@ -262,10 +262,10 @@ int __cxxabiv1____class_type_info____do_upcast(this, param_1, param_2)
 
 /* __cxxabiv1____class_type_info____do_find_public_src @ 0x97c183e8 (20 bytes) */
 int __cxxabiv1____class_type_info____do_find_public_src(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   void *param_4;
 {
   if (param_4 == param_2) {
@@ -276,10 +276,10 @@ int __cxxabiv1____class_type_info____do_find_public_src(this, param_1, param_2, 
 
 /* __cxxabiv1____si_class_type_info____do_find_public_src @ 0x97c183fc (136 bytes) */
 int __cxxabiv1____si_class_type_info____do_find_public_src(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   void *param_4;
 {
   int iVar1;
@@ -298,16 +298,16 @@ int __cxxabiv1____si_class_type_info____do_find_public_src(this, param_1, param_
 
 /* __cxxabiv1____vmi_class_type_info____do_find_public_src @ 0x97c18484 (248 bytes) */
 int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   void *param_4;
 {
   bool bVar1;
   uint uVar2;
   int iVar3;
-  __vmi_class_type_info *p_Var4;
+  unsigned char * p_Var4;
   
   if ((param_2 == param_4) &&
      (iVar3 = ((int (*)())std__type_info__operator__)((unsigned char *)this,(unsigned char *)param_3), iVar3 != 0)) {
@@ -342,12 +342,12 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_1, param
 
 /* __cxxabiv1____class_type_info____do_dyncast @ 0x97c1857c (128 bytes) */
 int __cxxabiv1____class_type_info____do_dyncast(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  unsigned char *this;
+  unsigned char * this;
   undefined4 param_2;
   int param_3;
-  unsigned char *param_4;
+  unsigned char * param_4;
   int param_5;
-  unsigned char *param_6;
+  unsigned char * param_6;
   int param_7;
   int *param_8;
 {
@@ -370,12 +370,12 @@ int __cxxabiv1____class_type_info____do_dyncast(this, param_2, param_3, param_4,
 
 /* __cxxabiv1____si_class_type_info____do_dyncast @ 0x97c185fc (244 bytes) */
 int __cxxabiv1____si_class_type_info____do_dyncast(this, param_1, param_3, param_4, param_5, param_6, param_7, param_8)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_3;
-  unsigned char *param_4;
+  unsigned char * param_4;
   int param_5;
-  unsigned char *param_6;
+  unsigned char * param_6;
   int param_7;
   int *param_8;
 {
@@ -414,12 +414,12 @@ LAB_97c1866c:
 
 /* __cxxabiv1____vmi_class_type_info____do_dyncast @ 0x97c186f0 (1092 bytes) */
 int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_1, param_3, param_4, param_5, param_6, param_7, param_8)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_3;
-  unsigned char *param_4;
+  unsigned char * param_4;
   int *param_5;
-  unsigned char *param_6;
+  unsigned char * param_6;
   int *param_7;
   int *param_8;
 {
@@ -431,7 +431,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_1, param_3, para
   int iVar6;
   uint uVar7;
   uint uVar8;
-  __vmi_class_type_info *p_Var9;
+  unsigned char * p_Var9;
   int local_60;
   uint local_5c;
   uint local_58;
@@ -617,10 +617,10 @@ LAB_97c187a0:
 
 /* __cxxabiv1____class_type_info____do_upcast_97c18b34 @ 0x97c18b34 (84 bytes) */
 int __cxxabiv1____class_type_info____do_upcast_97c18b34(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   int iVar1;
   
@@ -635,15 +635,15 @@ int __cxxabiv1____class_type_info____do_upcast_97c18b34(this, param_1, param_2, 
 
 /* __cxxabiv1____si_class_type_info____do_upcast @ 0x97c18b88 (116 bytes) */
 int __cxxabiv1____si_class_type_info____do_upcast(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = __class_type_info::__do_upcast((unsigned char *)this,param_1,param_2,param_3);
+  iVar1 = __class_type_info____do_upcast((unsigned char *)this,param_1,param_2,param_3);
   if (iVar1 == 0) {
                     
                     
@@ -655,25 +655,25 @@ int __cxxabiv1____si_class_type_info____do_upcast(this, param_1, param_2, param_
 
 /* __cxxabiv1____vmi_class_type_info____do_upcast @ 0x97c18bfc (556 bytes) */
 int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   void *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   uint uVar1;
   int iVar2;
   int iVar3;
-  type_info *ptVar4;
+  unsigned char * ptVar4;
   void *pvVar5;
   uint uVar6;
-  __vmi_class_type_info *p_Var7;
+  unsigned char * p_Var7;
   bool bVar8;
   int local_40;
   uint local_3c;
   uint local_38;
-  type_info *local_34;
+  unsigned char * local_34;
   
-  iVar3 = __class_type_info::__do_upcast((unsigned char *)this,param_1,param_2,param_3);
+  iVar3 = __class_type_info____do_upcast((unsigned char *)this,param_1,param_2,param_3);
   bVar8 = true;
   if (iVar3 == 0) {
     uVar6 = *(uint *)(param_3 + 8);
@@ -703,16 +703,16 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, param_1, param_2, param
                             (*(int **)(p_Var7 + 0x10),param_1,pvVar5,&local_40);
           if (iVar2 != 0) {
             if ((local_34 == (unsigned char *)0x8) && ((uVar1 & 1) != 0)) {
-              local_34 = *(type_info **)(p_Var7 + 0x10);
+              local_34 = *(unsigned char **)(p_Var7 + 0x10);
             }
             if ((3 < (int)local_3c) && (!bVar8)) {
               local_3c = local_3c & 0xfffffffd;
             }
-            ptVar4 = *(type_info **)(param_3 + 0xc);
+            ptVar4 = *(unsigned char **)(param_3 + 0xc);
             if (ptVar4 == (unsigned char *)0x0) {
               *(uint *)(param_3 + 8) = local_38;
               *(int *)param_3 = local_40;
-              *(type_info **)(param_3 + 0xc) = local_34;
+              *(unsigned char **)(param_3 + 0xc) = local_34;
               *(uint *)(param_3 + 4) = local_3c;
               if ((int)local_3c < 4) {
                 return true;
@@ -808,7 +808,7 @@ int ___dynamic_cast(param_1, param_2, param_3, param_4)
 
 /* std__exception___exception @ 0x97c18f70 (8 bytes) */
 int std__exception___exception(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~exception(this);
   return;
@@ -816,7 +816,7 @@ int std__exception___exception(this)
 
 /* std__exception___exception_97c18f78 @ 0x97c18f78 (8 bytes) */
 int std__exception___exception_97c18f78(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~exception(this);
   return;
@@ -824,7 +824,7 @@ int std__exception___exception_97c18f78(this)
 
 /* std__exception___exception_97c18f80 @ 0x97c18f80 (8 bytes) */
 int std__exception___exception_97c18f80(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~exception(this);
   return;
@@ -832,7 +832,7 @@ int std__exception___exception_97c18f80(this)
 
 /* std__exception___exception_97c18f88 @ 0x97c18f88 (72 bytes) */
 int std__exception___exception_97c18f88(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
@@ -845,7 +845,7 @@ int std__exception___exception_97c18f88(this)
 
 /* std__bad_exception___bad_exception @ 0x97c18fd0 (8 bytes) */
 int std__bad_exception___bad_exception(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_exception(this);
   return;
@@ -853,7 +853,7 @@ int std__bad_exception___bad_exception(this)
 
 /* std__bad_exception___bad_exception_97c18fd8 @ 0x97c18fd8 (8 bytes) */
 int std__bad_exception___bad_exception_97c18fd8(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_exception(this);
   return;
@@ -861,7 +861,7 @@ int std__bad_exception___bad_exception_97c18fd8(this)
 
 /* std__bad_exception___bad_exception_97c18fe0 @ 0x97c18fe0 (8 bytes) */
 int std__bad_exception___bad_exception_97c18fe0(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_exception(this);
   return;
@@ -869,12 +869,12 @@ int std__bad_exception___bad_exception_97c18fe0(this)
 
 /* std__bad_exception___bad_exception_97c18fe8 @ 0x97c18fe8 (88 bytes) */
 int std__bad_exception___bad_exception_97c18fe8(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
   *(int *)this = DAT_a7b7c030 + 8;
-  exception::~exception((unsigned char *)this);
+  exception___exception((unsigned char *)this);
   if ((in_r4 & 1) != 0) {
     operator_delete(this);
   }
@@ -883,14 +883,14 @@ int std__bad_exception___bad_exception_97c18fe8(this)
 
 /* std__exception__what @ 0x97c19040 (16 bytes) */
 int std__exception__what(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(undefined4 *)(*(int *)(*(int *)this + -4) + 4);
 }
 
 /* std__set_new_handler @ 0x97c19050 (100 bytes) */
 int std__set_new_handler(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   int iVar1;
   
@@ -905,7 +905,7 @@ int std__set_new_handler(param_1)
 
 /* std__bad_alloc___bad_alloc @ 0x97c190c4 (8 bytes) */
 int std__bad_alloc___bad_alloc(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_alloc(this);
   return;
@@ -913,7 +913,7 @@ int std__bad_alloc___bad_alloc(this)
 
 /* std__bad_alloc___bad_alloc_97c190cc @ 0x97c190cc (8 bytes) */
 int std__bad_alloc___bad_alloc_97c190cc(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_alloc(this);
   return;
@@ -921,7 +921,7 @@ int std__bad_alloc___bad_alloc_97c190cc(this)
 
 /* std__bad_alloc___bad_alloc_97c190d4 @ 0x97c190d4 (8 bytes) */
 int std__bad_alloc___bad_alloc_97c190d4(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~bad_alloc(this);
   return;
@@ -929,7 +929,7 @@ int std__bad_alloc___bad_alloc_97c190d4(this)
 
 /* std__bad_alloc___bad_alloc_97c190dc @ 0x97c190dc (88 bytes) */
 int std__bad_alloc___bad_alloc_97c190dc(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   uint in_r4;
   
@@ -959,12 +959,13 @@ int ___cxa_free_exception(param_1)
 }
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int __gxx_exception_cleanup(param_1, param_2)
-  _Unwind_Reason_Code param_1;
-  unsigned char *param_2;
+  unsigned char param_1;
+  unsigned char * param_2;
 {
-  _Unwind_Exception *extraout_r4;
-  uintptr_t *puVar1;
+  unsigned char * extraout_r4;
+  unsigned char * puVar1;
   
   puVar1 = &param_2[-2].private_2;
   if (_URC_FOREIGN_EXCEPTION_CAUGHT < param_1) {
@@ -977,6 +978,7 @@ int __gxx_exception_cleanup(param_1, param_2)
   ((int (*)())___cxa_free_exception)(param_2 + 1);
   return;
 }
+#endif
 
 /* ___cxa_throw @ 0x97c19308 (216 bytes) */
 int ___cxa_throw(param_1, param_2, param_3)
@@ -1042,8 +1044,8 @@ LAB_97c19440:
 }
 
 /* size_of_encoded_value @ 0x97c193e0 (120 bytes) */
-undefined4 size_of_encoded_value_a7b7f370(uchar param_1)
-
+int size_of_encoded_value(param_1)
+  int param_1;
 {
   byte bVar1;
   undefined4 uVar2;
@@ -1075,13 +1077,14 @@ LAB_97c19440:
 }
 
 /* base_of_encoded_value @ 0x97c19458 (172 bytes) */
-uintptr_t base_of_encoded_value_a7b7f374(uchar param_1,unsigned char *param_2)
-
+int base_of_encoded_value(param_1, param_2)
+  int param_1;
+  unsigned char * param_2;
 {
   bool bVar1;
   byte bVar2;
   undefined3 in_register_0000000c;
-  uintptr_t uVar3;
+  unsigned char uVar3;
   
   if (CONCAT31(in_register_0000000c,param_1) != 0xff) {
     bVar2 = param_1 & 0x70;
@@ -1119,8 +1122,9 @@ LAB_97c194ec:
 }
 
 /* read_uleb128 @ 0x97c19504 (48 bytes) */
-void read_uleb128_a7b7f378(uchar *param_1,uint *param_2)
-
+int read_uleb128(param_1, param_2)
+  uchar *param_1;
+  uint *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -1141,8 +1145,9 @@ void read_uleb128_a7b7f378(uchar *param_1,uint *param_2)
 }
 
 /* read_sleb128 @ 0x97c19534 (76 bytes) */
-void read_sleb128_a7b7f37c(uchar *param_1,int *param_2)
-
+int read_sleb128(param_1, param_2)
+  uchar *param_1;
+  int *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -1166,8 +1171,11 @@ void read_sleb128_a7b7f37c(uchar *param_1,int *param_2)
 }
 
 /* read_encoded_value_with_base @ 0x97c19580 (312 bytes) */
-uint * read_encoded_value_with_base_a7b7f380(uchar param_1,uint param_2,uchar *param_3,uint *param_4)
-
+int read_encoded_value_with_base(param_1, param_2, param_3, param_4)
+  int param_1;
+  uint param_2;
+  uchar *param_3;
+  uint *param_4;
 {
   undefined3 in_register_0000000c;
   uint *puVar1;
@@ -1187,7 +1195,7 @@ uint * read_encoded_value_with_base_a7b7f380(uchar param_1,uint param_2,uchar *p
     puVar1 = (uint *)(param_3 + 4);
     break;
   case 1:
-    puVar1 = (uint *)read_uleb128_a7b7f378(param_3,(uint *)&local_30);
+    puVar1 = (uint *)((int (*)())read_uleb128)(param_3,(uint *)&local_30);
     local_2c[0] = local_30;
     break;
   case 2:
@@ -1204,7 +1212,7 @@ uint * read_encoded_value_with_base_a7b7f380(uchar param_1,uint param_2,uchar *p
                     
     _abort();
   case 9:
-    puVar1 = (uint *)read_sleb128_a7b7f37c(param_3,(int *)local_2c);
+    puVar1 = (uint *)((int (*)())read_sleb128)(param_3,(int *)local_2c);
     break;
   case 10:
     local_2c[0] = (uint *)(int)*(short *)param_3;
@@ -1227,16 +1235,16 @@ LAB_97c196cc:
 
 /* parse_lsda_header @ 0x97c196ec (216 bytes) */
 int parse_lsda_header(param_1, param_2, param_3)
-  unsigned char *param_1;
+  unsigned char * param_1;
   uchar *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   uchar uVar1;
-  uintptr_t uVar2;
+  unsigned char uVar2;
   uint uVar3;
   int iVar4;
-  lsda_header_info *plVar5;
-  lsda_header_info *plVar6;
+  unsigned char * plVar5;
+  unsigned char * plVar6;
   uint local_30 [7];
   
   if (param_1 == (unsigned char *)0x0) {
@@ -1252,42 +1260,42 @@ int parse_lsda_header(param_1, param_2, param_3)
     *(unsigned char *)(param_3 + 4) = uVar2;
   }
   else {
-    uVar3 = base_of_encoded_value_a7b7f374(uVar1,param_1);
+    uVar3 = ((int (*)())base_of_encoded_value)(uVar1,param_1);
     plVar5 = (unsigned char *)
-             read_encoded_value_with_base_a7b7f380(uVar1,uVar3,(uchar *)plVar5,(uint *)(param_3 + 4));
+             ((int (*)())read_encoded_value_with_base)(uVar1,uVar3,(uchar *)plVar5,(uint *)(param_3 + 4));
   }
   plVar6 = plVar5 + 1;
   param_3[0x14] = *plVar5;
   plVar5 = (unsigned char *)0x0;
-  if (param_3[0x14] != (lsda_header_info)0xff) {
-    plVar6 = (unsigned char *)read_uleb128_a7b7f378((uchar *)plVar6,local_30);
+  if (param_3[0x14] != 0xff) {
+    plVar6 = (unsigned char *)((int (*)())read_uleb128)((uchar *)plVar6,local_30);
     plVar5 = plVar6 + local_30[0];
   }
-  *(lsda_header_info **)(param_3 + 0xc) = plVar5;
+  *(unsigned char **)(param_3 + 0xc) = plVar5;
   param_3[0x15] = *plVar6;
-  iVar4 = read_uleb128_a7b7f378((uchar *)(plVar6 + 1),local_30);
+  iVar4 = ((int (*)())read_uleb128)((uchar *)(plVar6 + 1),local_30);
   *(uint *)(param_3 + 0x10) = iVar4 + local_30[0];
   return;
 }
 
 /* get_ttype_entry @ 0x97c197c4 (84 bytes) */
-uint get_ttype_entry_a7b7f384(unsigned char *param_1,uint param_2)
-
+int get_ttype_entry(param_1, param_2)
+  unsigned char * param_1;
+  uint param_2;
 {
   int iVar1;
   uint local_20 [4];
   
-  iVar1 = size_of_encoded_value_a7b7f370((uchar)param_1[0x14]);
-  read_encoded_value_with_base_a7b7f380
-            ((uchar)param_1[0x14],*(uint *)(param_1 + 8),
+  iVar1 = ((int (*)())size_of_encoded_value)((uchar)param_1[0x14]);
+  ((int (*)())read_encoded_value_with_base)((uchar)param_1[0x14],*(uint *)(param_1 + 8),
              (uchar *)(*(int *)(param_1 + 0xc) - param_2 * iVar1),local_20);
   return local_20[0];
 }
 
 /* get_adjusted_ptr @ 0x97c19818 (152 bytes) */
 int get_adjusted_ptr(param_1, param_2, param_3)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
   void **param_3;
 {
   int iVar1;
@@ -1307,12 +1315,12 @@ int get_adjusted_ptr(param_1, param_2, param_3)
 
 /* check_exception_spec @ 0x97c198b0 (124 bytes) */
 int check_exception_spec(param_1, param_2, param_3, param_4)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
   void *param_3;
   int param_4;
 {
-  type_info *ptVar1;
+  unsigned char * ptVar1;
   int iVar2;
   uchar *puVar3;
   void *pvStack00000020;
@@ -1321,11 +1329,11 @@ int check_exception_spec(param_1, param_2, param_3, param_4)
   puVar3 = (uchar *)((*(int *)(param_1 + 0xc) - param_4) + -1);
   pvStack00000020 = param_3;
   do {
-    puVar3 = (uchar *)read_uleb128_a7b7f378(puVar3,local_20);
+    puVar3 = (uchar *)((int (*)())read_uleb128)(puVar3,local_20);
     if (local_20[0] == 0) {
       return 0;
     }
-    ptVar1 = (unsigned char *)get_ttype_entry_a7b7f384(param_1,local_20[0]);
+    ptVar1 = (unsigned char *)((int (*)())get_ttype_entry)(param_1,local_20[0]);
     iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,param_2,&STACKARG(0x20));
   } while (iVar2 == 0);
   return 1;

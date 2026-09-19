@@ -24,7 +24,7 @@ int _InitCPP()
 {
   undefined *puVar1;
   size_t sVar2;
-  __darwin_ct_rune_t _Var3;
+  unsigned char _Var3;
   uint uVar4;
   int iVar5;
   char *pcVar6;

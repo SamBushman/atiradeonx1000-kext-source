@@ -65,3 +65,22 @@ with open(os.path.join(out, 'compile_status.txt'), 'w') as f:
     for k, v in fail.items(): f.write('%s %s %d %s | %s\n' % (k[0], k[1], len(v), v[0][1], v[0][2]))
 print(len(fail), 'failing functions'); 
 for k, v in list(fail.items())[:60]: print(k, len(v), v[0][1], '|', v[0][2])
+
+# functions that still do not compile as C are kept verbatim under `#if 0` and flagged in the ledger (never silently dropped)
+if fail and os.environ.get('WRAP_FAILING'):
+    ledger = os.path.join(out, 'ledger.tsv')
+    rows = [l.rstrip('\n').split('\t') for l in open(ledger)]
+    names = {fn for (_, fn) in fail}
+    for part in {p for (p, _) in fail}:
+        pf = os.path.join(out, part + '.c'); txt = open(pf).read()
+        chunks = re.split(r'(?m)^(?=/\* \S+ @ \S+ \(\d+ bytes\) \*/$)', txt)
+        for i, c in enumerate(chunks):
+            m = re.match(r'/\* (\S+) @', c)
+            if m and (part, m.group(1)) in fail:
+                chunks[i] = c.split('\n', 1)[0] + '\n#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */\n' + c.split('\n', 1)[1].rstrip('\n') + '\n#endif\n\n'
+        open(pf, 'w').write(''.join(chunks))
+    with open(ledger, 'w') as f:
+        for r in rows:
+            if r[2] in names: r[4] = 'DECOMPILE-ONLY (does not compile as C)'
+            f.write('\t'.join(r) + '\n')
+    print('wrapped', len(fail), 'failing functions under #if 0')

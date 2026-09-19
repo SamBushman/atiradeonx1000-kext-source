@@ -189,7 +189,7 @@
 0x97b8b118	4	TBuiltIns__initialize_97b8b118	part_003	converted
 0x97b8b11c	5284	IdentifyBuiltIns	part_003	converted
 0x97b8c5c0	600	IdentifyBuiltIns_97b8c5c0	part_003	converted
-0x97b8c818	28	GetPreprocessorBuiltinString	part_003	converted
+0x97b8c818	28	GetPreprocessorBuiltinString	part_003	DECOMPILE-ONLY (does not compile as C)
 0x97b8c834	196	TInfoSinkBase__append	part_003	converted
 0x97b8c8f8	180	TInfoSinkBase__append_97b8c8f8	part_003	converted
 0x97b8c9ac	204	TInfoSinkBase__append_97b8c9ac	part_003	converted
@@ -245,7 +245,7 @@
 0x97b980c0	388	TIntermSelection__traverse	part_004	converted
 0x97b98244	388	TIntermLoop__traverse	part_004	converted
 0x97b983c8	216	TIntermBranch__traverse	part_004	converted
-0x97b984a0	1480	ParseSymbol	part_004	converted
+0x97b984a0	1480	ParseSymbol	part_004	DECOMPILE-ONLY (does not compile as C)
 0x97b98e04	308	ParseBinary	part_004	converted
 0x97b99198	196	ParseUnary	part_004	converted
 0x97b99398	884	ParseAggregate	part_004	converted
@@ -257,7 +257,7 @@
 0x97b9a31c	612	TParseContext__parseVectorFields	part_004	converted
 0x97b9a5e8	464	TParseContext__parseMatrixFields	part_004	converted
 0x97b9a7b8	12	TParseContext__recover	part_004	converted
-0x97b9a7c4	104	TParseContext__error	part_004	converted
+0x97b9a7c4	104	TParseContext__error	part_004	DECOMPILE-ONLY (does not compile as C)
 0x97b9a9b4	96	TParseContext__assignError	part_004	converted
 0x97b9aa14	84	TParseContext__unaryOpError	part_004	converted
 0x97b9aa68	104	TParseContext__binaryOpError	part_004	converted
@@ -310,21 +310,21 @@
 0x97ba0478	156	QualifierWritten	part_005	converted
 0x97ba0514	76	AliveSymbol	part_005	converted
 0x97ba0560	16	AliveSelection	part_005	converted
-0x97ba0570	24	RemoveSymbol	part_005	converted
+0x97ba0570	24	RemoveSymbol	part_005	DECOMPILE-ONLY (does not compile as C)
 0x97ba0588	56	RemoveBinary	part_005	converted
 0x97ba05c0	56	RemoveUnary	part_005	converted
 0x97ba05f8	56	RemoveAggregate	part_005	converted
 0x97ba0630	56	RemoveSelection	part_005	converted
 0x97ba0668	24	RemoveConstantUnion	part_005	converted
 0x97ba0680	168	RemoveAllTreeNodes	part_005	converted
-0x97ba0728	132	GetSymbolTable	part_005	converted
-0x97ba07ac	108	GetResources	part_005	converted
+0x97ba0728	132	GetSymbolTable	part_005	DECOMPILE-ONLY (does not compile as C)
+0x97ba07ac	108	GetResources	part_005	DECOMPILE-ONLY (does not compile as C)
 0x97ba0818	360	_ShInitialize	part_005	converted
 0x97ba0980	32	_ShConstructCompiler	part_005	converted
 0x97ba09a4	200	_ShDestruct	part_005	converted
 0x97ba0a6c	112	_ShFinalize	part_005	converted
 0x97ba0adc	112	generateBuiltInSymbolTable	part_005	converted
-0x97ba0b4c	936	initializeSymbolTable	part_005	converted
+0x97ba0b4c	936	initializeSymbolTable	part_005	DECOMPILE-ONLY (does not compile as C)
 0x97ba10c8	1888	_ShCompile	part_005	converted
 0x97ba1a6c	364	_ShLink	part_005	converted
 0x97ba1c68	4	ShSetEncryptionMethod	part_005	converted
@@ -379,14 +379,14 @@
 0x97ba33f0	352	TSymbolTableLevel__clone	part_006	converted
 0x97ba3550	492	TSymbolTable__copyTable	part_006	converted
 0x97ba373c	34436	yyparse	part_006	converted
-0x97bac120	4128	yylex	part_006	converted
+0x97bac120	4128	yylex	part_006	DECOMPILE-ONLY (does not compile as C)
 0x97bad390	656	yy_get_next_buffer	part_006	converted
 0x97bad620	280	yy_get_previous_state	part_006	converted
 0x97bad738	184	yy_try_NUL_trans	part_006	converted
-0x97bad7f0	272	yyinput	part_006	converted
+0x97bad7f0	272	yyinput	part_006	DECOMPILE-ONLY (does not compile as C)
 0x97bad900	104	yyrestart	part_006	converted
-0x97bad968	148	yy_switch_to_buffer	part_006	converted
-0x97bad9fc	88	yy_load_buffer_state	part_006	converted
+0x97bad968	148	yy_switch_to_buffer	part_006	DECOMPILE-ONLY (does not compile as C)
+0x97bad9fc	88	yy_load_buffer_state	part_006	DECOMPILE-ONLY (does not compile as C)
 0x97bada54	140	yy_create_buffer	part_006	converted
 0x97badae0	124	yy_delete_buffer	part_006	converted
 0x97badb5c	68	yy_init_buffer	part_006	converted
@@ -508,7 +508,7 @@
 0x97bb1eb8	24	DeleteLinker	part_008	converted
 0x97bb1ed0	504	UpdateOperations	part_008	converted
 0x97bb20c8	156	TGenericLinker__FindChunkDelta	part_008	converted
-0x97bb21dc	3076	TGenericLinker__MergeCompilers	part_008	converted
+0x97bb21dc	3076	TGenericLinker__MergeCompilers	part_008	DECOMPILE-ONLY (does not compile as C)
 0x97bb2ff0	844	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	part_008	converted
 0x97bb33bc	840	TGenericLinker__RemoveUnreachableFunctions	part_008	converted
 0x97bb37fc	40	TGenericLinker__RenumberLabels	part_008	converted
@@ -521,14 +521,14 @@
 0x97bb4a14	152	TGenericLinker__GetFullTableString	part_008	converted
 0x97bb4aac	4	TGenericLinker__ReportStats	part_008	converted
 0x97bb4ab0	92	TGenericLinker__InsertClientAttribBinding	part_008	converted
-0x97bb4b0c	364	TGenericLinker__AddAttribBinding	part_008	converted
+0x97bb4b0c	364	TGenericLinker__AddAttribBinding	part_008	DECOMPILE-ONLY (does not compile as C)
 0x97bb4d6c	484	TGenericLinker__CollectClientAttributeBindings	part_008	converted
 0x97bb50dc	996	TGenericLinker__CollectAttributeBindings	part_008	converted
 0x97bb54c0	400	TGenericLinker__RemapVertexAttributes	part_008	converted
 0x97bb56d4	4688	TGenericLinker__AllocateTextureUnitsForVaryings	part_008	converted
 0x97bb6b48	484	TGenericLinker__CoalesceCommonUniforms	part_008	converted
 0x97bb6d2c	864	TGenericLinker__BuildUniformRemapTables	part_008	converted
-0x97bb727c	412	TGenericLinker__InsertUniformBindingFromSymbol	part_008	converted
+0x97bb727c	412	TGenericLinker__InsertUniformBindingFromSymbol	part_008	DECOMPILE-ONLY (does not compile as C)
 0x97bb7498	296	TGenericLinker__CollectUniformBindings	part_008	converted
 0x97bb75c0	1156	TGenericLinker__CreateFunctionTable	part_008	converted
 0x97bb7b4c	968	TGenericLinker__BuildSymbolTableList	part_008	converted
@@ -542,7 +542,7 @@
 0x97bb8248	244	TGenericLinker___TGenericLinker_97bb8248	part_009	converted
 0x97bb833c	40	TGenericLinker__getShaderLocalParamRemapTable	part_009	converted
 0x97bb8364	40	TGenericLinker__getNumShaderLocalParams	part_009	converted
-0x97bb838c	196	TGenericLinker__attributeBindingRequest	part_009	converted
+0x97bb838c	196	TGenericLinker__attributeBindingRequest	part_009	DECOMPILE-ONLY (does not compile as C)
 0x97bb8450	192	TGenericLinker__getActiveUniform	part_009	converted
 0x97bb8510	172	TGenericLinker__getUniformTypeInfo	part_009	converted
 0x97bb85bc	188	TGenericLinker__getActiveAttrib	part_009	converted
@@ -660,16 +660,16 @@
 0x97bbe138	84	ParseSymbolTable__Dump	part_010	converted
 0x97bbe18c	992	ParseSymbolTable__GetString	part_011	converted
 0x97bbe56c	304	TIntermSymbol__compileNode	part_011	converted
-0x97bbe69c	340	TIntermConstantUnion__compileNode	part_011	converted
-0x97bbe7f0	3444	TIntermBinary__compileNode	part_011	converted
-0x97bbf564	1824	TIntermUnary__compileNode	part_011	converted
-0x97bbfca4	4308	TIntermAggregate__compileNode	part_011	converted
+0x97bbe69c	340	TIntermConstantUnion__compileNode	part_011	DECOMPILE-ONLY (does not compile as C)
+0x97bbe7f0	3444	TIntermBinary__compileNode	part_011	DECOMPILE-ONLY (does not compile as C)
+0x97bbf564	1824	TIntermUnary__compileNode	part_011	DECOMPILE-ONLY (does not compile as C)
+0x97bbfca4	4308	TIntermAggregate__compileNode	part_011	DECOMPILE-ONLY (does not compile as C)
 0x97bc1348	2232	TIntermSelection__compileNode	part_011	converted
 0x97bc1c00	3000	TIntermLoop__compileNode	part_011	converted
 0x97bc27b8	1420	TIntermBranch__compileNode	part_011	converted
 0x97bc2d44	312	TIntermSymbol__indirectNode	part_011	converted
-0x97bc2e7c	340	TIntermConstantUnion__indirectNode	part_011	converted
-0x97bc2fd0	1000	TIntermBinary__indirectNode	part_011	converted
+0x97bc2e7c	340	TIntermConstantUnion__indirectNode	part_011	DECOMPILE-ONLY (does not compile as C)
+0x97bc2fd0	1000	TIntermBinary__indirectNode	part_011	DECOMPILE-ONLY (does not compile as C)
 0x97bc33b8	112	TIntermUnary__indirectNode	part_011	converted
 0x97bc3428	232	TIntermAggregate__indirectNode	part_011	converted
 0x97bc3510	204	TIntermSelection__indirectNode	part_011	converted
@@ -718,11 +718,11 @@
 0x97bc4340	272	TPPStreamCompiler__newAddressTemp	part_011	converted
 0x97bc4450	352	TPPStreamCompiler__newReturnValue	part_011	converted
 0x97bc45b0	408	TPPStreamCompiler__newParam	part_011	converted
-0x97bc4748	2092	TPPStreamCompiler__newIndirectOperandFromConstant	part_012	converted
-0x97bc4f74	2416	TPPStreamCompiler__equalOperands	part_012	converted
-0x97bc58e4	636	TPPStreamCompiler__duplicateDestinationSource	part_012	converted
-0x97bc5b60	1892	TPPStreamCompiler__assignOperands	part_012	converted
-0x97bc62c4	404	TPPStreamCompiler__getArrayOffset	part_012	converted
+0x97bc4748	2092	TPPStreamCompiler__newIndirectOperandFromConstant	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc4f74	2416	TPPStreamCompiler__equalOperands	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc58e4	636	TPPStreamCompiler__duplicateDestinationSource	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc5b60	1892	TPPStreamCompiler__assignOperands	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc62c4	404	TPPStreamCompiler__getArrayOffset	part_012	DECOMPILE-ONLY (does not compile as C)
 0x97bc6458	640	TPPStreamCompiler__constructReplicate	part_012	converted
 0x97bc66d8	1452	TPPStreamCompiler__constructDiagonal	part_012	converted
 0x97bc6c84	1744	TPPStreamCompiler__constructElement	part_012	converted
@@ -739,10 +739,10 @@
 0x97bc8314	472	TPPStreamCompiler__getNewConstantSourceVar	part_012	converted
 0x97bc84ec	1296	TPPStreamCompiler__getConstantAsSourceVar	part_012	converted
 0x97bc89fc	256	TPPStreamCompiler__generateAddressLoad	part_012	converted
-0x97bc8afc	76	TPPStreamCompiler__getOperandAsDestVar	part_012	converted
-0x97bc8b48	420	TPPStreamCompiler__getOperandAsSourceVar	part_012	converted
+0x97bc8afc	76	TPPStreamCompiler__getOperandAsDestVar	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc8b48	420	TPPStreamCompiler__getOperandAsSourceVar	part_012	DECOMPILE-ONLY (does not compile as C)
 0x97bc8cec	544	TPPStreamCompiler__removeOrphanedCompilerTemp	part_012	converted
-0x97bc8f0c	1476	TPPStreamCompiler__copyPropagateCompilerTemp	part_012	converted
+0x97bc8f0c	1476	TPPStreamCompiler__copyPropagateCompilerTemp	part_012	DECOMPILE-ONLY (does not compile as C)
 0x97bc94d0	480	TPPStreamCompiler__parseIntermediateTree	part_012	converted
 0x97bc96b0	4	TPPStreamCompiler__TPPStreamCompiler	part_012	converted
 0x97bc96b4	4	TPPStreamCompiler__TPPStreamCompiler_97bc96b4	part_012	converted
@@ -751,8 +751,8 @@
 0x97bc97dc	8	TPPStreamCompiler___TPPStreamCompiler_97bc97dc	part_012	converted
 0x97bc97e4	8	TPPStreamCompiler___TPPStreamCompiler_97bc97e4	part_012	converted
 0x97bc97ec	536	TPPStreamCompiler___TPPStreamCompiler_97bc97ec	part_012	converted
-0x97bc9a04	304	TPPStreamCompiler__error	part_012	converted
-0x97bc9b34	296	TPPStreamCompiler__warning	part_012	converted
+0x97bc9a04	304	TPPStreamCompiler__error	part_012	DECOMPILE-ONLY (does not compile as C)
+0x97bc9b34	296	TPPStreamCompiler__warning	part_012	DECOMPILE-ONLY (does not compile as C)
 0x97bc9c5c	196	TPPStreamCompiler__getSymbolTableString	part_012	converted
 0x97bc9d20	220	TPPStreamCompiler__dumpSymbolTableInfo	part_012	converted
 0x97bc9dfc	4	TPPStreamCompiler__reportStats	part_012	converted
@@ -1390,7 +1390,7 @@
 0x97c17844	20	std__allocator_wchar_t___construct	part_023	converted
 0x97c17858	4	std__allocator_wchar_t___destroy	part_023	converted
 0x97c1785c	152	std____default_alloc_template_true_0____S_refill	part_023	converted
-0x97c178f4	368	std____default_alloc_template_true_0____S_chunk_alloc	part_023	converted
+0x97c178f4	368	std____default_alloc_template_true_0____S_chunk_alloc	part_023	DECOMPILE-ONLY (does not compile as C)
 0x97c17a64	172	std____default_alloc_template_true_0___reallocate	part_023	converted
 0x97c17b10	32	operator_delete__	part_023	converted
 0x97c17b30	36	operator_new__	part_023	converted
@@ -1487,7 +1487,7 @@
 0x97c190d4	8	std__bad_alloc___bad_alloc_97c190d4	part_024	converted
 0x97c190dc	88	std__bad_alloc___bad_alloc_97c190dc	part_024	converted
 0x97c19218	152	___cxa_free_exception	part_024	converted
-0x97c192b0	88	__gxx_exception_cleanup	part_024	converted
+0x97c192b0	88	__gxx_exception_cleanup	part_024	DECOMPILE-ONLY (does not compile as C)
 0x97c19308	216	___cxa_throw	part_024	converted
 0x97c193e0	120	size_of_encoded_value	part_024	converted
 0x97c19458	172	base_of_encoded_value	part_024	converted
@@ -1498,9 +1498,9 @@
 0x97c197c4	84	get_ttype_entry	part_024	converted
 0x97c19818	152	get_adjusted_ptr	part_024	converted
 0x97c198b0	124	check_exception_spec	part_024	converted
-0x97c19de8	32	__cxxabiv1____terminate	part_025	converted
+0x97c19de8	32	__cxxabiv1____terminate	part_025	DECOMPILE-ONLY (does not compile as C)
 0x97c19e0c	56	std__terminate	part_025	converted
-0x97c19e44	28	__cxxabiv1____unexpected	part_025	converted
+0x97c19e44	28	__cxxabiv1____unexpected	part_025	DECOMPILE-ONLY (does not compile as C)
 0x97c19e60	56	std__unexpected	part_025	converted
 0x97c19e98	100	std__set_terminate	part_025	converted
 0x97c19f0c	100	std__set_unexpected	part_025	converted
@@ -1523,7 +1523,7 @@
 0x97c1a468	312	_read_encoded_value_with_base	part_025	converted
 0x97c1a5d4	8	__Unwind_GetLanguageSpecificData	part_025	converted
 0x97c1a5dc	8	__Unwind_GetRegionStart	part_025	converted
-0x97c1a5e4	56	__Unwind_FindEnclosingFunction	part_025	converted
+0x97c1a5e4	56	__Unwind_FindEnclosingFunction	part_025	DECOMPILE-ONLY (does not compile as C)
 0x97c1a61c	8	__Unwind_GetDataRelBase	part_025	converted
 0x97c1a624	8	__Unwind_GetTextRelBase	part_025	converted
 0x97c1a62c	348	_extract_cie_info	part_025	converted
@@ -1540,7 +1540,7 @@
 0x97c1bc88	260	__Unwind_ForcedUnwind_Phase2	part_025	converted
 0x97c1bd8c	148	__Unwind_ForcedUnwind	part_025	converted
 0x97c1be20	152	__Unwind_Resume	part_025	converted
-0x97c1beb8	20	__Unwind_DeleteException	part_025	converted
+0x97c1beb8	20	__Unwind_DeleteException	part_025	DECOMPILE-ONLY (does not compile as C)
 0x97c1becc	16	__Unwind_GetGR	part_025	converted
 0x97c1bedc	16	__Unwind_SetGR	part_025	converted
 0x97c1beec	8	__Unwind_GetIP	part_025	converted
@@ -1563,7 +1563,7 @@
 0x97c1ca84	188	_fde_mixed_encoding_compare	part_026	converted
 0x97c1cb40	568	_frame_heapsort	part_026	converted
 0x97c1cd78	308	_classify_object_over_fdes	part_026	converted
-0x97c1ceac	332	_add_fdes	part_026	converted
+0x97c1ceac	332	_add_fdes	part_026	DECOMPILE-ONLY (does not compile as C)
 0x97c1cff8	352	_linear_search_fdes	part_026	converted
 0x97c1d158	624	_search_object	part_026	converted
 0x97c1d3c8	356	__Unwind_Find_registered_FDE	part_026	converted
@@ -1609,7 +1609,7 @@
 0x97c31774	96	std__vector_TIntermNode__pool_allocator_TIntermNode_____erase	part_026	converted
 0x97c317d4	152	std__vector_TIntermNode__pool_allocator_TIntermNode_____insert	part_026	converted
 0x97c3186c	424	std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____	part_026	converted
-0x97c31a14	280	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_	part_026	converted
+0x97c31a14	280	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_	part_026	DECOMPILE-ONLY (does not compile as C)
 0x97c31b2c	280	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy	part_026	converted
 0x97c31c44	284	TType__setStructSize	part_026	converted
 0x97c31d60	8	TIntermNode__getLine	part_026	converted
@@ -1685,7 +1685,7 @@
 0x97c32b18	112	std__string__compare_97c32b18	part_028	converted
 0x97c32b88	340	std__operator__97c32b88	part_028	converted
 0x97c32cdc	176	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound	part_028	converted
-0x97c32d8c	568	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique	part_028	converted
+0x97c32d8c	568	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique	part_028	DECOMPILE-ONLY (does not compile as C)
 0x97c32fc4	112	std__string__append_97c32fc4	part_028	converted
 0x97c33034	116	std__string__append_97c33034	part_028	converted
 0x97c330a8	176	std__string___S_construct___gnu_cxx____normal_iterator_char__std__string___97c330a8	part_028	converted
@@ -1693,7 +1693,7 @@
 0x97c33230	152	std__string___M_replace_safe_char_const___97c33230	part_028	converted
 0x97c332c8	172	std__string___M_replace_char_const___97c332c8	part_028	converted
 0x97c33374	356	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_insert	part_028	converted
-0x97c334d8	388	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique_97c334d8	part_028	converted
+0x97c334d8	388	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique_97c334d8	part_028	DECOMPILE-ONLY (does not compile as C)
 0x97c3365c	152	std__string___M_replace_safe___gnu_cxx____normal_iterator_char__std__string___97c3365c	part_028	converted
 0x97c336f4	344	std__string___M_mutate_97c336f4	part_028	converted
 0x97c3384c	4	std__string__string_char_const___97c3384c	part_028	converted
@@ -1882,7 +1882,7 @@
 0xa7b7f1a0	1	std__string__operator___a7b7f1a0	part_031	converted
 0xa7b7f1a4	1	std__string__operator___a7b7f1a4	part_031	converted
 0xa7b7f1a8	1	std____destroy_aux_std__string___a7b7f1a8	part_031	converted
-0xa7b7f1ac	1	operator_delete_a7b7f1ac	part_031	converted
+0xa7b7f1ac	1	operator_delete_a7b7f1ac	part_031	DECOMPILE-ONLY (does not compile as C)
 0xa7b7f1b0	1	std__allocator_char___address_a7b7f1b0	part_031	converted
 0xa7b7f1b4	1	std__allocator_char___address_a7b7f1b4	part_031	converted
 0xa7b7f1b8	1	std__allocator_char___max_size_a7b7f1b8	part_031	converted
@@ -1917,10 +1917,10 @@
 0xa7b7f22c	1	std____default_alloc_template_true_0____Lock___Lock_a7b7f22c	part_031	converted
 0xa7b7f230	1	std____default_alloc_template_true_0____Lock___Lock_a7b7f230	part_031	converted
 0xa7b7f234	1	std____default_alloc_template_true_0____Lock___Lock_a7b7f234	part_031	converted
-0xa7b7f238	1	std____default_alloc_template_true_0____Lock____Lock_a7b7f238	part_031	converted
+0xa7b7f238	1	std____default_alloc_template_true_0____Lock____Lock_a7b7f238	part_031	DECOMPILE-ONLY (does not compile as C)
 0xa7b7f23c	1	std____default_alloc_template_true_0____Lock____Lock_a7b7f23c	part_032	converted
 0xa7b7f240	1	std____default_alloc_template_true_0____Lock____Lock_a7b7f240	part_032	converted
-0xa7b7f244	1	operator_delete___a7b7f244	part_032	converted
+0xa7b7f244	1	operator_delete___a7b7f244	part_032	DECOMPILE-ONLY (does not compile as C)
 0xa7b7f248	1	std__logic_error__what_a7b7f248	part_032	converted
 0xa7b7f24c	1	std__runtime_error__what_a7b7f24c	part_032	converted
 0xa7b7f250	1	std__logic_error__logic_error_a7b7f250	part_032	converted
@@ -1977,7 +1977,7 @@
 0xa7b7f31c	1	std__bad_cast___bad_cast_a7b7f31c	part_032	converted
 0xa7b7f320	1	std__bad_cast___bad_cast_a7b7f320	part_032	converted
 0xa7b7f324	1	std__bad_cast___bad_cast_a7b7f324	part_032	converted
-0xa7b7f328	1	std__bad_cast___bad_cast_a7b7f328	part_032	converted
+0xa7b7f328	1	std__bad_cast___bad_cast_a7b7f328	part_032	DECOMPILE-ONLY (does not compile as C)
 0xa7b7f32c	1	std__type_info___type_info_a7b7f32c	part_033	converted
 0xa7b7f330	1	std__type_info___type_info_a7b7f330	part_033	converted
 0xa7b7f334	1	std__type_info___type_info_a7b7f334	part_033	converted

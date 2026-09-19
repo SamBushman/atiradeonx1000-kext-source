@@ -2,8 +2,8 @@
 
 /* TIntermConstantUnion__traverse @ 0x97b97d54 (20 bytes) */
 int TIntermConstantUnion__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if (*(code **)(param_1 + 4) == (code *)0x0) {
     return;
@@ -16,8 +16,8 @@ int TIntermConstantUnion__traverse(this, param_1)
 
 /* TIntermBinary__traverse @ 0x97b97d68 (324 bytes) */
 int TIntermBinary__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
@@ -58,8 +58,8 @@ int TIntermBinary__traverse(this, param_1)
 
 /* TIntermUnary__traverse @ 0x97b97eac (240 bytes) */
 int TIntermUnary__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   
@@ -80,8 +80,8 @@ int TIntermUnary__traverse(this, param_1)
 
 /* TIntermAggregate__traverse @ 0x97b97f9c (292 bytes) */
 int TIntermAggregate__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   undefined4 *puVar2;
@@ -115,8 +115,8 @@ int TIntermAggregate__traverse(this, param_1)
 
 /* TIntermSelection__traverse @ 0x97b980c0 (388 bytes) */
 int TIntermSelection__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
@@ -165,8 +165,8 @@ LAB_97b981d4:
 
 /* TIntermLoop__traverse @ 0x97b98244 (388 bytes) */
 int TIntermLoop__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
@@ -215,8 +215,8 @@ int TIntermLoop__traverse(this, param_1)
 
 /* TIntermBranch__traverse @ 0x97b983c8 (216 bytes) */
 int TIntermBranch__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   
@@ -241,9 +241,10 @@ int TIntermBranch__traverse(this, param_1)
 }
 
 /* ParseSymbol @ 0x97b984a0 (1480 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int ParseSymbol(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   bool bVar1;
   int *piVar2;
@@ -320,9 +321,7 @@ int ParseSymbol(param_1, param_2)
     while( true ) {
       iVar12 = *(int *)(iVar7 + iVar13 * 4);
       iVar7 = 0;
-      std::
-      _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-      ::find((unsigned char *)local_60);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_60);
       if (local_60[0] != *(int *)(iVar12 + 4)) {
         iVar7 = *(int *)(local_60[0] + 0x18);
       }
@@ -445,12 +444,13 @@ LAB_97b98c80:
   }
   return;
 }
+#endif
 
 /* ParseBinary @ 0x97b98e04 (308 bytes) */
 int ParseBinary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
@@ -498,8 +498,8 @@ int ParseBinary(param_1, param_2, param_3)
 /* ParseUnary @ 0x97b99198 (196 bytes) */
 int ParseUnary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
@@ -537,8 +537,8 @@ int ParseUnary(param_1, param_2, param_3)
 /* ParseAggregate @ 0x97b99398 (884 bytes) */
 int ParseAggregate(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   bool bVar2;
@@ -652,8 +652,8 @@ int ParseAggregate(param_1, param_2, param_3)
 /* ParseSelection @ 0x97b9982c (88 bytes) */
 int ParseSelection(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   (*(code *)**(undefined4 **)param_2)(param_2);
                     
@@ -664,8 +664,8 @@ int ParseSelection(param_1, param_2, param_3)
 
 /* ParseConstantUnion @ 0x97b999c0 (1160 bytes) */
 int ParseConstantUnion(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   bool bVar1;
   bool bVar2;
@@ -872,8 +872,8 @@ LAB_97b99d78:
 /* ParseLoop @ 0x97b99e48 (88 bytes) */
 int ParseLoop(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   (*(code *)**(undefined4 **)param_2)(param_2);
                     
@@ -885,8 +885,8 @@ int ParseLoop(param_1, param_2, param_3)
 /* ParseBranch @ 0x97b99fdc (88 bytes) */
 int ParseBranch(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   (*(code *)**(undefined4 **)param_2)(param_2);
                     
@@ -897,7 +897,7 @@ int ParseBranch(param_1, param_2, param_3)
 
 /* TIntermediate__parseConstTree @ 0x97b9a170 (428 bytes) */
 int TIntermediate__parseConstTree(this, param_2_00, param_2, param_3, param_5, param_6, param_7, param_8)
-  unsigned char *this;
+  unsigned char * this;
   undefined4 param_2_00;
   int *param_2;
   undefined4 param_3;
@@ -992,10 +992,10 @@ int TIntermediate__parseConstTree(this, param_2_00, param_2, param_3, param_5, p
 
 /* TParseContext__parseVectorFields @ 0x97b9a31c (612 bytes) */
 int TParseContext__parseVectorFields(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   int param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   int param_4;
 {
   undefined1 uVar1;
@@ -1122,10 +1122,10 @@ LAB_97b9a560:
 
 /* TParseContext__parseMatrixFields @ 0x97b9a5e8 (464 bytes) */
 int TParseContext__parseMatrixFields(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   int param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   int param_4;
 {
   char cVar1;
@@ -1187,13 +1187,14 @@ LAB_97b9a790:
 
 /* TParseContext__recover @ 0x97b9a7b8 (12 bytes) */
 int TParseContext__recover(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 0x14) = 1;
   return;
 }
 
 /* TParseContext__error @ 0x97b9a7c4 (104 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int TParseContext__error(int param_1,char *param_2,char *param_3,char *param_4,...)
 
 {
@@ -1215,10 +1216,11 @@ int TParseContext__error(int param_1,char *param_2,char *param_3,char *param_4,.
   (*(code *)(((unsigned char *)0x97b9a82c) + (*(unsigned char *)0x97b9a834)))(*(undefined4 *)(param_1 + 8));
   return;
 }
+#endif
 
 /* TParseContext__assignError @ 0x97b9a9b4 (96 bytes) */
 int TParseContext__assignError(this, param_1, param_2, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   char *param_2;
   int param_4;
@@ -1238,7 +1240,7 @@ int TParseContext__assignError(this, param_1, param_2, param_4, param_5)
 
 /* TParseContext__unaryOpError @ 0x97b9aa14 (84 bytes) */
 int TParseContext__unaryOpError(this, param_1, param_2, param_4)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   char *param_2;
   int param_4;
@@ -1252,7 +1254,7 @@ int TParseContext__unaryOpError(this, param_1, param_2, param_4)
 
 /* TParseContext__binaryOpError @ 0x97b9aa68 (104 bytes) */
 int TParseContext__binaryOpError(this, param_1, param_2, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   char *param_2;
   int param_4;
@@ -1273,16 +1275,16 @@ int TParseContext__binaryOpError(this, param_1, param_2, param_4, param_5)
 
 /* TParseContext__lValueErrorCheck @ 0x97b9aad0 (944 bytes) */
 int TParseContext__lValueErrorCheck(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   bool bVar1;
   int iVar2;
   int *piVar3;
   int *piVar4;
-  TIntermTyped *pTVar5;
+  unsigned char * pTVar5;
   int iVar6;
   undefined4 uVar7;
   char *pcVar8;
@@ -1404,8 +1406,8 @@ LAB_97b9aea4:
 
 /* TParseContext__constErrorCheck @ 0x97b9aec8 (140 bytes) */
 int TParseContext__constErrorCheck(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   char *pcVar2;
@@ -1420,8 +1422,8 @@ int TParseContext__constErrorCheck(this, param_1)
 
 /* TParseContext__integerErrorCheck @ 0x97b9af54 (172 bytes) */
 int TParseContext__integerErrorCheck(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   char *param_2;
 {
   int iVar1;
@@ -1438,7 +1440,7 @@ int TParseContext__integerErrorCheck(this, param_1, param_2)
 
 /* TParseContext__globalErrorCheck @ 0x97b9b000 (84 bytes) */
 int TParseContext__globalErrorCheck(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
   char *param_3;
@@ -1455,9 +1457,9 @@ int TParseContext__globalErrorCheck(this, param_1, param_2, param_3)
 
 /* TParseContext__reservedErrorCheck @ 0x97b9b054 (376 bytes) */
 int TParseContext__reservedErrorCheck(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   int iVar1;
   int iVar2;
@@ -1532,7 +1534,7 @@ int TParseContext__reservedErrorCheck(this, param_1, param_2)
 
 /* TParseContext__constructorErrorCheck @ 0x97b9b1cc (2036 bytes) */
 int TParseContext__constructorErrorCheck(this, param_1, param_2, param_3, param_5, param_6)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   int *param_2;
   int param_3;
@@ -1545,7 +1547,7 @@ int TParseContext__constructorErrorCheck(this, param_1, param_2, param_3, param_
   bool bVar4;
   bool bVar5;
   int *piVar6;
-  string *psVar7;
+  unsigned char * psVar7;
   ulong uVar8;
   int iVar9;
   int iVar10;
@@ -1561,7 +1563,7 @@ int TParseContext__constructorErrorCheck(this, param_1, param_2, param_3, param_
   int local_bc;
   int local_b8;
   int local_b4;
-  string *local_b0;
+  unsigned char * local_b0;
   int local_ac;
   int local_a8;
   int local_a4;
@@ -1839,10 +1841,10 @@ LAB_97b9b9dc:
 
 /* TParseContext__voidErrorCheck @ 0x97b9ba00 (120 bytes) */
 int TParseContext__voidErrorCheck(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   
@@ -1856,9 +1858,9 @@ int TParseContext__voidErrorCheck(this, param_1, param_2, param_3)
 
 /* TParseContext__boolErrorCheck @ 0x97b9ba78 (208 bytes) */
 int TParseContext__boolErrorCheck(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   int iVar1;
   
@@ -1874,9 +1876,9 @@ int TParseContext__boolErrorCheck(this, param_1, param_2)
 
 /* TParseContext__boolErrorCheck_97b9bb48 @ 0x97b9bb48 (132 bytes) */
 int TParseContext__boolErrorCheck_97b9bb48(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   undefined4 uVar1;
   
@@ -1890,9 +1892,9 @@ int TParseContext__boolErrorCheck_97b9bb48(this, param_1, param_2)
 
 /* TParseContext__samplerErrorCheck @ 0x97b9bbcc (184 bytes) */
 int TParseContext__samplerErrorCheck(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   char *param_3;
 {
   int iVar1;
@@ -1901,7 +1903,7 @@ int TParseContext__samplerErrorCheck(this, param_1, param_2, param_3)
   
   iVar1 = *(int *)param_2;
   if (iVar1 == 0xe) {
-    iVar1 = ((int (*)())TParseContext__containsSampler)(this,*(TType **)(param_2 + 0x14));
+    iVar1 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(param_2 + 0x14));
     if (iVar1 == 0) {
       return 0;
     }
@@ -1921,9 +1923,9 @@ int TParseContext__samplerErrorCheck(this, param_1, param_2, param_3)
 
 /* TParseContext__structQualifierErrorCheck @ 0x97b9bc84 (172 bytes) */
 int TParseContext__structQualifierErrorCheck(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   int iVar1;
   char *pcVar2;
@@ -1947,7 +1949,7 @@ int TParseContext__structQualifierErrorCheck(this, param_1, param_2)
 
 /* TParseContext__parameterSamplerErrorCheck @ 0x97b9bd30 (184 bytes) */
 int TParseContext__parameterSamplerErrorCheck(this, param_1, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   int param_3;
   int *param_4;
@@ -1970,8 +1972,8 @@ int TParseContext__parameterSamplerErrorCheck(this, param_1, param_3, param_4)
 
 /* TParseContext__containsSampler @ 0x97b9bde8 (180 bytes) */
 int TParseContext__containsSampler(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   undefined4 uVar2;
@@ -1986,7 +1988,7 @@ int TParseContext__containsSampler(this, param_1)
       iVar1 = *(int *)(param_1 + 8);
       for (uVar4 = 0; iVar3 = *(int *)(iVar1 + 4), uVar4 < (uint)(*(int *)(iVar1 + 8) - iVar3 >> 3);
           uVar4 = uVar4 + 1) {
-        iVar3 = ((int (*)())TParseContext__containsSampler)(this,*(TType **)(iVar3 + uVar4 * 8));
+        iVar3 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(iVar3 + uVar4 * 8));
         if (iVar3 != 0) {
           return 1;
         }
@@ -1999,7 +2001,7 @@ int TParseContext__containsSampler(this, param_1)
 
 /* TParseContext__insertBuiltInArrayAtGlobalLevel @ 0x97b9be9c (740 bytes) */
 int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined1 uVar1;
   uint uVar2;
@@ -2009,7 +2011,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   undefined *puVar6;
   uint uVar7;
   ulong uVar8;
-  string *psVar9;
+  unsigned char * psVar9;
   int *piVar10;
   char *pcVar11;
   int iVar12;
@@ -2018,7 +2020,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   int iVar15;
   int iVar16;
   int iVar17;
-  string *psVar18;
+  unsigned char * psVar18;
   int iVar19;
   int iVar20;
   int iVar21;
@@ -2050,9 +2052,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   iVar19 = (piVar22[1] - iVar16 >> 2) + -1;
   while( true ) {
     iVar16 = *(int *)(iVar16 + iVar19 * 4);
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::find((unsigned char *)local_70);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_70);
     iVar20 = 0;
     if (local_70[0] != *(int *)(iVar16 + 4)) {
       iVar20 = *(int *)(local_70[0] + 0x18);
@@ -2114,9 +2114,7 @@ LAB_97b9c154:
   psVar9 = (unsigned char *)(**(code **)(*piVar10 + 8))();
   std__string__string((unsigned char *)&local_40,psVar9);
   local_38 = piVar10;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-  ::insert_unique((unsigned char *)&local_50);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_50);
   local_60 = local_50;
   piVar22 = (int *)(local_3c + -4);
   local_5c = local_4c;
@@ -2145,9 +2143,9 @@ LAB_97b9c154:
 
 /* TParseContext__arrayErrorCheck @ 0x97b9c180 (2552 bytes) */
 int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  unsigned char *param_1;
+  unsigned char * param_1;
   char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   uint param_4;
   uint param_5;
   uint param_6;
@@ -2164,8 +2162,8 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   uint uVar8;
   int iVar9;
   ulong uVar10;
-  string *psVar11;
-  string *psVar12;
+  unsigned char * psVar11;
+  unsigned char * psVar12;
   char cVar13;
   int iVar14;
   char *pcVar15;
@@ -2182,15 +2180,15 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   int *in_stack_00000038;
   undefined4 in_stack_0000003c;
   int *in_stack_00000040;
-  string *local_130;
+  unsigned char * local_130;
   char *local_12c;
   int local_128;
   char *local_124;
-  string *local_120;
+  unsigned char * local_120;
   char *local_11c;
   char *local_118;
   char *local_114;
-  string *local_110;
+  unsigned char * local_110;
   uint local_10c;
   undefined4 local_108;
   undefined4 local_104;
@@ -2214,7 +2212,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   int *local_bc;
   undefined4 local_b8;
   undefined4 local_b0 [4];
-  string *local_a0;
+  unsigned char * local_a0;
   int local_90 [4];
   undefined4 local_80 [4];
   undefined4 local_70;
@@ -2243,9 +2241,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
       iVar9 = (piVar17[1] - iVar14 >> 2) + -1;
       while( true ) {
         iVar14 = *(int *)(iVar14 + iVar9 * 4);
-        std::
-        _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-        ::find((unsigned char *)local_90);
+        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_90);
         piVar16 = (int *)0x0;
         if (local_90[0] != *(int *)(iVar14 + 4)) {
           piVar16 = *(int **)(local_90[0] + 0x18);
@@ -2349,9 +2345,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
         psVar12 = (unsigned char *)(**(code **)(*piVar17 + 8))(piVar17);
         std__string__string((unsigned char *)&local_70,psVar12);
         local_68 = piVar17;
-        std::
-        _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-        ::insert_unique((unsigned char *)&local_120);
+        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_120);
         local_130 = local_120;
         piVar7 = (int *)(local_6c + -4);
         local_12c = local_11c;
@@ -2562,9 +2556,9 @@ LAB_97b9cb40:
 
 /* TParseContext__arraySetMaxSize @ 0x97b9cb78 (848 bytes) */
 int TParseContext__arraySetMaxSize(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
   int param_4;
   int param_5;
@@ -2595,9 +2589,7 @@ int TParseContext__arraySetMaxSize(this, param_1, param_2, param_3, param_4, par
   while( true ) {
     iVar7 = *(int *)(iVar5 + iVar1 * 4);
     iVar5 = 0;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::find((unsigned char *)local_e0);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_e0);
     if (local_e0[0] != *(int *)(iVar7 + 4)) {
       iVar5 = *(int *)(local_e0[0] + 0x18);
     }
@@ -2610,7 +2602,7 @@ int TParseContext__arraySetMaxSize(this, param_1, param_2, param_3, param_4, par
   }
   if (iVar5 != 0) {
     *(undefined4 *)(param_2 + 0x20) = *(undefined4 *)(iVar5 + 0x3c);
-    *(TType **)(iVar5 + 0x3c) = param_2;
+    *(unsigned char **)(iVar5 + 0x3c) = param_2;
     pcVar2 = (char *)(**(code **)(*(int *)param_1 + 0x60))(param_1);
     iVar1 = std__string__compare(pcVar2);
     if (iVar1 == 0) {
@@ -2622,9 +2614,7 @@ int TParseContext__arraySetMaxSize(this, param_1, param_2, param_3, param_4, par
       while( true ) {
         iVar8 = *(int *)(iVar7 + iVar1 * 4);
         iVar7 = 0;
-        std::
-        _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-        ::find((unsigned char *)local_e0);
+        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_e0);
         if (local_e0[0] != *(int *)(iVar8 + 4)) {
           iVar7 = *(int *)(local_e0[0] + 0x18);
         }
@@ -2691,10 +2681,10 @@ LAB_97b9cf84:
 
 /* TParseContext__nonInitErrorCheck @ 0x97b9cfe8 (1008 bytes) */
 int TParseContext__nonInitErrorCheck(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   uint uVar2;
@@ -2707,16 +2697,16 @@ int TParseContext__nonInitErrorCheck(this, param_1, param_2, param_3)
   ulong uVar9;
   int *piVar10;
   int iVar11;
-  string *this_00;
-  string *psVar12;
+  unsigned char * this_00;
+  unsigned char * psVar12;
   char *pcVar13;
   char in_RESERVE;
   byte in_cr0;
-  string *local_d0;
+  unsigned char * local_d0;
   int local_cc;
   int local_c8;
   int local_c4;
-  string *local_c0;
+  unsigned char * local_c0;
   int local_bc;
   int local_b8;
   int local_b4;
@@ -2829,9 +2819,7 @@ int TParseContext__nonInitErrorCheck(this, param_1, param_2, param_3)
   psVar12 = (unsigned char *)(**(code **)(*piVar10 + 8))(piVar10);
   std__string__string((unsigned char *)&local_50,psVar12);
   local_48 = piVar10;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-  ::insert_unique((unsigned char *)&local_c0);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_c0);
   local_d0 = local_c0;
   piVar7 = (int *)(local_4c + -4);
   local_cc = local_bc;
@@ -2870,7 +2858,7 @@ int TParseContext__nonInitErrorCheck(this, param_1, param_2, param_3)
 
 /* TParseContext__paramErrorCheck @ 0x97b9d3d8 (216 bytes) */
 int TParseContext__paramErrorCheck(this, param_1, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   int param_3;
   int param_4;
@@ -2908,7 +2896,7 @@ LAB_97b9d48c:
 
 /* TParseContext__extensionErrorCheck @ 0x97b9d4b0 (920 bytes) */
 int TParseContext__extensionErrorCheck(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   char *param_2;
 {
@@ -2937,7 +2925,7 @@ int TParseContext__extensionErrorCheck(this, param_1, param_2)
   int local_160 [4];
   undefined4 local_150;
   undefined4 local_140;
-  string asStack_130 [16];
+  unsigned char asStack_130 [16];
   undefined4 local_120 [40];
   undefined4 local_80 [4];
   undefined4 local_70;
@@ -2952,9 +2940,7 @@ int TParseContext__extensionErrorCheck(this, param_1, param_2)
   
   local_1c0[0] = ((int (*)())GetGlobalPoolAllocator)();
   std__string__string((unsigned char *)&local_1d0,param_2,(unsigned char *)local_1c0);
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-  ::lower_bound((unsigned char *)&local_1b0);
+  std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound((unsigned char *)&local_1b0);
   iVar7 = local_1b0;
   local_1a0[0] = *(int *)(this + 0x34);
   if (local_1b0 == local_1a0[0]) {
@@ -2963,9 +2949,7 @@ LAB_97b9d574:
     std__string__string((unsigned char *)&local_170,(unsigned char *)&local_1d0);
     local_168 = 0;
     local_160[0] = local_180[0];
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-    ::insert_unique(local_190,this + 0x30,local_160,(unsigned char *)&local_170);
+    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique(local_190,this + 0x30,local_160,(unsigned char *)&local_170);
     piVar3 = (int *)(local_16c + -4);
     local_1b0 = local_190[0];
     local_150 = local_170;
@@ -3029,9 +3013,7 @@ LAB_97b9d574:
   }
   local_80[0] = ((int (*)())GetGlobalPoolAllocator)();
   std__string__string((unsigned char *)&local_1d0,param_2,(unsigned char *)local_80);
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-  ::lower_bound((unsigned char *)local_1c0);
+  std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound((unsigned char *)local_1c0);
   iVar7 = local_1c0[0];
   local_1b0 = *(int *)(this + 0x34);
   if (local_1c0[0] != local_1b0) {
@@ -3054,9 +3036,7 @@ LAB_97b9d574:
   std__string__string((unsigned char *)&local_70,(unsigned char *)&local_1d0);
   local_68 = 0;
   local_180[0] = local_190[0];
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-  ::insert_unique(local_1a0,this + 0x30,local_180,(unsigned char *)&local_70);
+  std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique(local_1a0,this + 0x30,local_180,(unsigned char *)&local_70);
   piVar3 = (int *)(local_6c + -4);
   local_1c0[0] = local_1a0[0];
   local_60 = local_70;
@@ -3097,9 +3077,9 @@ LAB_97b9d98c:
 
 /* TParseContext__findFunction @ 0x97b9da08 (356 bytes) */
 int TParseContext__findFunction(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   bool *param_3;
 {
   undefined1 uVar1;
@@ -3117,9 +3097,7 @@ int TParseContext__findFunction(this, param_1, param_2, param_3)
   iVar2 = (piVar6[1] - iVar4 >> 2) + -1;
   while( true ) {
     iVar4 = *(int *)(iVar4 + iVar2 * 4);
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::find((unsigned char *)local_40);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_40);
     piVar7 = (int *)0x0;
     if (local_40[0] != *(int *)(iVar4 + 4)) {
       piVar7 = *(int **)(local_40[0] + 0x18);
@@ -3156,12 +3134,12 @@ int TParseContext__findFunction(this, param_1, param_2, param_3)
 
 /* TParseContext__executeInitializer @ 0x97b9db6c (3572 bytes) */
 int TParseContext__executeInitializer(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
-  unsigned char *param_4;
-  TIntermNode **param_5;
+  unsigned char * param_2;
+  unsigned char * param_3;
+  unsigned char * param_4;
+  unsigned char ** param_5;
 {
   uint uVar1;
   uint uVar2;
@@ -3171,11 +3149,11 @@ int TParseContext__executeInitializer(this, param_1, param_2, param_3, param_4, 
   int iVar6;
   ulong uVar7;
   int *piVar8;
-  string *psVar9;
-  string *psVar10;
+  unsigned char * psVar9;
+  unsigned char * psVar10;
   uint uVar11;
   undefined4 uVar12;
-  TIntermNode *pTVar13;
+  unsigned char * pTVar13;
   char *pcVar14;
   undefined4 uVar15;
   undefined4 uVar16;
@@ -3188,11 +3166,11 @@ int TParseContext__executeInitializer(this, param_1, param_2, param_3, param_4, 
   char *pcVar23;
   char in_RESERVE;
   byte bVar24;
-  string *local_150;
+  unsigned char * local_150;
   uint local_14c;
   uint local_148;
   uint local_144;
-  string *local_140;
+  unsigned char * local_140;
   uint local_13c;
   uint local_138;
   uint local_134;
@@ -3221,9 +3199,9 @@ int TParseContext__executeInitializer(this, param_1, param_2, param_3, param_4, 
   undefined4 local_a0 [4];
   undefined4 local_90 [4];
   int local_80 [4];
-  string *local_70;
-  string *local_60;
-  string *local_50;
+  unsigned char * local_70;
+  unsigned char * local_60;
+  unsigned char * local_50;
   
   iVar6 = ((int (*)())TParseContext__reservedErrorCheck)(this,param_1,param_2);
   if (iVar6 != 0) {
@@ -3314,9 +3292,7 @@ int TParseContext__executeInitializer(this, param_1, param_2, param_3, param_4, 
   psVar10 = (unsigned char *)(**(code **)(*piVar8 + 8))(piVar8);
   std__string__string((unsigned char *)&local_d0,psVar10);
   local_c8 = piVar8;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-  ::insert_unique((unsigned char *)&local_140);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_140);
   local_150 = local_140;
   piVar5 = (int *)(local_cc + -4);
   local_14c = local_13c;
@@ -3567,9 +3543,7 @@ LAB_97b9e6d8:
     iVar19 = (piVar21[1] - iVar6 >> 2) + -1;
     while( true ) {
       iVar22 = *(int *)(iVar6 + iVar19 * 4);
-      std::
-      _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-      ::find((unsigned char *)local_80);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_80);
       iVar6 = 0;
       if (local_80[0] != *(int *)(iVar22 + 4)) {
         iVar6 = *(int *)(local_80[0] + 0x18);
@@ -3667,8 +3641,8 @@ LAB_97b9e850:
 
 /* TParseContext__canNodeBeRemoved @ 0x97b9e960 (204 bytes) */
 int TParseContext__canNodeBeRemoved(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
   int *piVar2;
@@ -3701,9 +3675,9 @@ int TParseContext__canNodeBeRemoved(this, param_1)
 
 /* TParseContext__addConstructor @ 0x97b9ea2c (944 bytes) */
 int TParseContext__addConstructor(this, param_1, param_2, param_4, param_5, param_6)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_4;
   int param_5;
   char *param_6;
@@ -3711,16 +3685,16 @@ int TParseContext__addConstructor(this, param_1, param_2, param_4, param_5, para
   bool bVar1;
   int *piVar2;
   int iVar3;
-  TType *pTVar4;
+  unsigned char * pTVar4;
   undefined4 uVar5;
-  TIntermNode *pTVar6;
+  unsigned char * pTVar6;
   undefined4 *puVar7;
   int iVar8;
   undefined4 *puVar9;
   undefined1 auStack_40 [4];
   int local_3c;
   undefined4 *local_38;
-  TIntermNode *local_34;
+  unsigned char * local_34;
   
   if (param_1 == (unsigned char *)0x0) {
     return (unsigned char *)0x0;
@@ -3755,7 +3729,7 @@ int TParseContext__addConstructor(this, param_1, param_2, param_4, param_5, para
       piVar2 = (int *)(**(code **)(*(int *)pTVar4 + 0x1c))(pTVar4);
       iVar8 = (**(code **)(*piVar2 + 100))();
       (**(code **)(*(int *)**(undefined4 **)(iVar8 + 4) + 0x1c))();
-      pTVar4 = (unsigned char *)TIntermediate__removeChildNode(*(TIntermTyped **)this,pTVar4,param_2);
+      pTVar4 = (unsigned char *)TIntermediate__removeChildNode(*(unsigned char **)this,pTVar4,param_2);
       return pTVar4;
     }
     if (*(int *)(iVar8 + 8) - *(int *)(iVar8 + 4) >> 3 == 1) {
@@ -3787,7 +3761,7 @@ int TParseContext__addConstructor(this, param_1, param_2, param_4, param_5, para
             if (iVar8 == 0) goto LAB_97b9ed60;
             (**(code **)(*(int *)pTVar6 + 0x1c))(pTVar6);
             TIntermediate__removeChildNode
-                      (*(TVector **)this,pTVar4,(int *)param_2,(unsigned char *)&local_3c,
+                      (*(unsigned char **)this,pTVar4,(int *)param_2,(unsigned char *)&local_3c,
                        (unsigned char *)&local_38);
           }
         }
@@ -3818,7 +3792,7 @@ LAB_97b9ed60:
 
 /* TParseContext__constructBuiltIn @ 0x97b9eddc (408 bytes) */
 int TParseContext__constructBuiltIn(this, param_1, param_3, param_4, param_5, param_6)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   undefined4 param_3;
   int *param_4;
@@ -3888,9 +3862,9 @@ LAB_97b9ef08:
 
 /* TParseContext__constructStruct @ 0x97b9efb0 (392 bytes) */
 int TParseContext__constructStruct(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
   int param_4;
   int param_5;
@@ -3939,9 +3913,9 @@ int TParseContext__constructStruct(this, param_1, param_2, param_3, param_4, par
 
 /* TParseContext__addConstVectorNode @ 0x97b9f138 (924 bytes) */
 int TParseContext__addConstVectorNode(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   int iVar1;
@@ -3950,7 +3924,7 @@ int TParseContext__addConstVectorNode(this, param_1, param_2, param_3)
   undefined4 uVar4;
   int *piVar5;
   ulong uVar6;
-  TType *pTVar7;
+  unsigned char * pTVar7;
   int iVar8;
   int iVar9;
   undefined **local_90 [9];
@@ -4028,15 +4002,15 @@ LAB_97b9f4c4:
     } while (iVar9 < *(int *)(param_1 + 0x10));
   }
   (**(code **)(*(int *)param_2 + 0x38))(local_90,param_2);
-  uVar4 = TIntermediate__addConstantUnion(*(constUnion **)this,pTVar7,(int)local_90);
+  uVar4 = TIntermediate__addConstantUnion(*(unsigned char **)this,pTVar7,(int)local_90);
   return uVar4;
 }
 
 /* TParseContext__addConstMatrixNode @ 0x97b9f600 (904 bytes) */
 int TParseContext__addConstMatrixNode(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   int param_3;
 {
   int *piVar1;
@@ -4065,7 +4039,7 @@ int TParseContext__addConstMatrixNode(this, param_1, param_2, param_3)
     local_60[0] = &PTR__TType_a7b7d4d0;
     (**(code **)(*piVar1 + 0x38))(local_60,piVar1);
     uVar3 = TIntermediate__addConstantUnion
-                      (*(constUnion **)this,
+                      (*(unsigned char **)this,
                        (unsigned char *)(iVar7 + ((int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18) * iVar6
                                          * 4),(int)local_60);
     return uVar3;
@@ -4105,7 +4079,7 @@ LAB_97b9f8f4:
   if (iVar5 == 0) {
     (**(code **)(*piVar2 + 0x38))(local_60,piVar2);
     uVar3 = TIntermediate__addConstantUnion
-                      (*(constUnion **)this,
+                      (*(unsigned char **)this,
                        (unsigned char *)(iVar7 + ((int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18) * iVar6
                                          * 4),(int)local_60);
   }
@@ -4114,15 +4088,15 @@ LAB_97b9f8f4:
 
 /* TParseContext__addConstStruct @ 0x97b9f988 (848 bytes) */
 int TParseContext__addConstStruct(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   int iVar1;
   int *piVar2;
   int *piVar3;
-  TVector *pTVar4;
+  unsigned char * pTVar4;
   ulong uVar5;
   undefined4 uVar6;
   uint *puVar7;
@@ -4157,7 +4131,7 @@ int TParseContext__addConstStruct(this, param_1, param_2, param_3)
       iVar11 = uVar12 - uVar10;
     }
     if (iVar11 == 0) break;
-    pTVar4 = *(TVector **)(*(int *)(local_78 + 4) + uVar9 * 8);
+    pTVar4 = *(unsigned char **)(*(int *)(local_78 + 4) + uVar9 * 8);
     if (*(int *)(pTVar4 + 8) == 0) {
       iVar11 = (**(code **)(*(int *)pTVar4 + 0x30))();
     }
@@ -4208,13 +4182,13 @@ LAB_97b9fc00:
 LAB_97b9fc60:
   (**(code **)(iVar1 + 0x38))(local_80,piVar3);
   uVar6 = TIntermediate__addConstantUnion
-                    (*(constUnion **)this,(unsigned char *)(iVar11 + iVar8 * 4),(int)local_80);
+                    (*(unsigned char **)this,(unsigned char *)(iVar11 + iVar8 * 4),(int)local_80);
   return uVar6;
 }
 
 /* TParseContext__initializeExtensionBehavior @ 0x97b9fcd8 (380 bytes) */
 int TParseContext__initializeExtensionBehavior(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int *piVar1;
   int iVar2;
@@ -4242,9 +4216,7 @@ int TParseContext__initializeExtensionBehavior(this)
   
   local_c0[0] = ((int (*)())GetGlobalPoolAllocator)();
   std__string__string((unsigned char *)&local_d0,"GL_ARB_texture_rectangle",(unsigned char *)local_c0);
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-  ::lower_bound((unsigned char *)local_b0);
+  std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____lower_bound((unsigned char *)local_b0);
   iVar2 = local_b0[0];
   local_a0 = *(int *)(this + 0x34);
   if (local_b0[0] != local_a0) {
@@ -4267,9 +4239,7 @@ int TParseContext__initializeExtensionBehavior(this)
   std__string__string((unsigned char *)&local_70,(unsigned char *)&local_d0);
   local_68 = 0;
   local_60[0] = local_80;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-  ::insert_unique(local_90,this + 0x30,local_60,(unsigned char *)&local_70);
+  std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____insert_unique(local_90,this + 0x30,local_60,(unsigned char *)&local_70);
   piVar1 = (int *)(local_6c + -4);
   local_b0[0] = local_90[0];
   local_50 = local_70;
@@ -4307,7 +4277,7 @@ LAB_97b9fe04:
 /* InitializeGlobalPools @ 0x97b9fe54 (144 bytes) */
 int InitializeGlobalPools()
 {
-  TPoolAllocator *this;
+  unsigned char * this;
   
   if (_gPollAllocThreadData == (undefined4 *)0x0) {
     this = operator_new(0x34);
@@ -4325,7 +4295,7 @@ int InitializeGlobalPools()
 /* FreeGlobalPools @ 0x97b9fee4 (112 bytes) */
 int FreeGlobalPools()
 {
-  TPoolAllocator *pTVar1;
+  unsigned char * pTVar1;
   
   if (_gPollAllocThreadData != (void *)0x0) {
     pTVar1 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -4349,7 +4319,7 @@ int GetGlobalPoolAllocator()
 
 /* SetGlobalPoolAllocatorPtr @ 0x97b9ff74 (32 bytes) */
 int SetGlobalPoolAllocatorPtr(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   *_gPollAllocThreadData = param_1;
   return;
@@ -4363,7 +4333,7 @@ int GetCompilerPoolAllocator()
 
 /* TPoolAllocator__TPoolAllocator @ 0x97b9ffb4 (4 bytes) */
 int TPoolAllocator__TPoolAllocator(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
   int param_3;
@@ -4403,7 +4373,7 @@ int TPoolAllocator__TPoolAllocator(this, param_1, param_2, param_3)
 
 /* TPoolAllocator__TPoolAllocator_97b9ffb8 @ 0x97b9ffb8 (4 bytes) */
 int TPoolAllocator__TPoolAllocator_97b9ffb8(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
   int param_3;
@@ -4443,7 +4413,7 @@ int TPoolAllocator__TPoolAllocator_97b9ffb8(this, param_1, param_2, param_3)
 
 /* TPoolAllocator__TPoolAllocator_97b9ffbc @ 0x97b9ffbc (152 bytes) */
 int TPoolAllocator__TPoolAllocator_97b9ffbc(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
   int param_3;

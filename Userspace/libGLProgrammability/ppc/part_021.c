@@ -2,7 +2,7 @@
 
 /* std__string__insert_97c150bc @ 0x97c150bc (72 bytes) */
 int std__string__insert_97c150bc(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   char *param_2;
 {
@@ -15,7 +15,7 @@ int std__string__insert_97c150bc(this, param_1, param_2)
 
 /* std__string__insert_97c15104 @ 0x97c15104 (92 bytes) */
 int std__string__insert_97c15104(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   int param_3;
@@ -31,7 +31,7 @@ int std__string__insert_97c15104(this, param_1, param_2, param_3)
 /* std__string__insert_97c15160 @ 0x97c15160 (148 bytes) */
 int std__string__insert_97c15160(param_1, param_2, param_3, param_4)
   int *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   int param_3;
   undefined4 param_4;
 {
@@ -50,7 +50,7 @@ int std__string__insert_97c15160(param_1, param_2, param_3, param_4)
 /* std__string__erase_97c151f4 @ 0x97c151f4 (128 bytes) */
 int std__string__erase_97c151f4(param_1, param_2, param_3)
   int *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   int param_3;
 {
   _M_ibegin();
@@ -64,7 +64,7 @@ int std__string__erase_97c151f4(param_1, param_2, param_3)
 /* std__string__erase_97c15274 @ 0x97c15274 (132 bytes) */
 int std__string__erase_97c15274(param_1, param_2, param_3, param_4)
   undefined4 *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
   undefined4 param_3;
   undefined4 param_4;
 {
@@ -78,10 +78,10 @@ int std__string__erase_97c15274(param_1, param_2, param_3, param_4)
 
 /* std__string__replace_97c152f8 @ 0x97c152f8 (12 bytes) */
 int std__string__replace_97c152f8(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   replace(this,param_1,param_2,*(char **)param_3,*(ulong *)(*(char **)param_3 + -0xc));
   return;
@@ -89,10 +89,10 @@ int std__string__replace_97c152f8(this, param_1, param_2, param_3)
 
 /* std__string__replace_97c15304 @ 0x97c15304 (136 bytes) */
 int std__string__replace_97c15304(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   ulong param_4;
   ulong param_5;
 {
@@ -102,7 +102,7 @@ int std__string__replace_97c15304(this, param_1, param_2, param_3, param_4, para
   iVar1 = *(int *)param_3;
   uVar2 = *(uint *)(iVar1 + -0xc);
   if (uVar2 < param_4) {
-    std____throw_out_of_range("basic_string::replace");
+    std____throw_out_of_range("basic_string__replace");
     iVar1 = *(int *)param_3;
   }
   uVar2 = uVar2 - param_4;
@@ -115,7 +115,7 @@ int std__string__replace_97c15304(this, param_1, param_2, param_3, param_4, para
 
 /* std__string__replace_97c1538c @ 0x97c1538c (80 bytes) */
 int std__string__replace_97c1538c(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   char *param_3;
@@ -129,7 +129,7 @@ int std__string__replace_97c1538c(this, param_1, param_2, param_3)
 
 /* std__string__replace_97c153dc @ 0x97c153dc (120 bytes) */
 int std__string__replace_97c153dc(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   ulong param_3;
@@ -147,7 +147,7 @@ int std__string__replace_97c153dc(this, param_1, param_2, param_3, param_4)
 
 /* std__string__replace_97c15454 @ 0x97c15454 (96 bytes) */
 int std__string__replace_97c15454(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   char *param_4;
@@ -162,7 +162,7 @@ int std__string__replace_97c15454(this, param_2, param_3, param_4, param_5)
 
 /* std__string__replace_97c154b4 @ 0x97c154b4 (96 bytes) */
 int std__string__replace_97c154b4(this, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   undefined4 *param_4;
@@ -180,7 +180,7 @@ int std__string__replace_97c154b4(this, param_2, param_3, param_4)
 
 /* std__string__replace_97c15514 @ 0x97c15514 (80 bytes) */
 int std__string__replace_97c15514(this, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   undefined4 param_2;
   undefined4 param_3;
   char *param_4;
@@ -194,7 +194,7 @@ int std__string__replace_97c15514(this, param_2, param_3, param_4)
 
 /* std__string__replace_97c15564 @ 0x97c15564 (180 bytes) */
 int std__string__replace_97c15564(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   uint param_4;
@@ -204,7 +204,7 @@ int std__string__replace_97c15564(this, param_2, param_3, param_4, param_5)
   
   _M_ibegin();
   if (0x3ffffffcU - (*(int *)(*(int *)this + -0xc) - (param_3 - param_2)) <= param_4) {
-    std____throw_length_error("basic_string::replace");
+    std____throw_length_error("basic_string__replace");
   }
   _M_mutate(this,param_2 - local_30,param_3 - param_2,param_4);
   if (param_4 != 0) {
@@ -215,7 +215,7 @@ int std__string__replace_97c15564(this, param_2, param_3, param_4, param_5)
 
 /* std__string__replace_97c15618 @ 0x97c15618 (96 bytes) */
 int std__string__replace_97c15618(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   char *param_4;
@@ -230,7 +230,7 @@ int std__string__replace_97c15618(this, param_2, param_3, param_4, param_5)
 
 /* std__string__replace_97c15678 @ 0x97c15678 (96 bytes) */
 int std__string__replace_97c15678(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   char *param_4;
@@ -245,7 +245,7 @@ int std__string__replace_97c15678(this, param_2, param_3, param_4, param_5)
 
 /* std__string__replace_97c156d8 @ 0x97c156d8 (96 bytes) */
 int std__string__replace_97c156d8(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int param_3;
   char *param_4;
@@ -262,7 +262,7 @@ int std__string__replace_97c156d8(this, param_2, param_3, param_4, param_5)
 int std__string___S_construct(param_1, param_2, param_3)
   ulong param_1;
   int param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   ulong *puVar1;
   ulong *puVar2;
@@ -276,7 +276,7 @@ int std__string___S_construct(param_1, param_2, param_3)
     puVar1 = (ulong *)&DAT_a7b7bf90;
   }
   else {
-    puVar2 = (ulong *)_Rep::_S_create(param_1,param_3);
+    puVar2 = (ulong *)_Rep___S_create(param_1,param_3);
     puVar1 = puVar2 + 3;
     _memset(puVar1,CONCAT31(in_register_00000010,param_2),param_1);
     *puVar2 = param_1;
@@ -287,7 +287,7 @@ int std__string___S_construct(param_1, param_2, param_3)
 
 /* std__string__copy @ 0x97c157c4 (132 bytes) */
 int std__string__copy(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -297,7 +297,7 @@ int std__string__copy(this, param_1, param_2, param_3)
   
   iVar2 = *(int *)this;
   if (*(uint *)(iVar2 + -0xc) < param_3) {
-    std____throw_out_of_range("basic_string::copy");
+    std____throw_out_of_range("basic_string__copy");
     iVar2 = *(int *)this;
   }
   uVar1 = *(int *)(iVar2 + -0xc) - param_3;
@@ -310,8 +310,8 @@ int std__string__copy(this, param_1, param_2, param_3)
 
 /* std__string__swap @ 0x97c15848 (140 bytes) */
 int std__string__swap(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
   
@@ -331,22 +331,22 @@ int std__string__swap(this, param_1)
 
 /* std__string__c_str @ 0x97c158d4 (48 bytes) */
 int std__string__c_str(this)
-  unsigned char *this;
+  unsigned char * this;
 {
-  *(undefined1 *)(*(int *)this + *(int *)(*(int *)this + -0xc)) = _Rep::_S_terminal;
+  *(undefined1 *)(*(int *)this + *(int *)(*(int *)this + -0xc)) = _Rep___S_terminal;
   return *(undefined4 *)this;
 }
 
 /* std__string__data @ 0x97c15904 (8 bytes) */
 int std__string__data(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(undefined4 *)this;
 }
 
 /* std__string__find @ 0x97c1590c (128 bytes) */
 int std__string__find(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -375,8 +375,8 @@ int std__string__find(this, param_1, param_2, param_3)
 
 /* std__string__find_97c1598c @ 0x97c1598c (12 bytes) */
 int std__string__find_97c1598c(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   find(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -385,7 +385,7 @@ int std__string__find_97c1598c(this, param_1, param_2)
 
 /* std__string__find_97c15998 @ 0x97c15998 (72 bytes) */
 int std__string__find_97c15998(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -398,7 +398,7 @@ int std__string__find_97c15998(this, param_1, param_2)
 
 /* std__string__find_97c159e0 @ 0x97c159e0 (96 bytes) */
 int std__string__find_97c159e0(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -420,8 +420,8 @@ int std__string__find_97c159e0(this, param_1, param_2)
 
 /* std__string__rfind @ 0x97c15a40 (12 bytes) */
 int std__string__rfind(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   rfind(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -430,7 +430,7 @@ int std__string__rfind(this, param_1, param_2)
 
 /* std__string__rfind_97c15a4c @ 0x97c15a4c (148 bytes) */
 int std__string__rfind_97c15a4c(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -465,7 +465,7 @@ int std__string__rfind_97c15a4c(this, param_1, param_2, param_3)
 
 /* std__string__rfind_97c15ae0 @ 0x97c15ae0 (72 bytes) */
 int std__string__rfind_97c15ae0(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -478,7 +478,7 @@ int std__string__rfind_97c15ae0(this, param_1, param_2)
 
 /* std__string__rfind_97c15b28 @ 0x97c15b28 (92 bytes) */
 int std__string__rfind_97c15b28(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -507,8 +507,8 @@ int std__string__rfind_97c15b28(this, param_1, param_2)
 
 /* std__string__find_first_of @ 0x97c15b84 (12 bytes) */
 int std__string__find_first_of(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   find_first_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -517,7 +517,7 @@ int std__string__find_first_of(this, param_1, param_2)
 
 /* std__string__find_first_of_97c15b90 @ 0x97c15b90 (152 bytes) */
 int std__string__find_first_of_97c15b90(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -540,7 +540,7 @@ int std__string__find_first_of_97c15b90(this, param_1, param_2, param_3)
 
 /* std__string__find_first_of_97c15c28 @ 0x97c15c28 (72 bytes) */
 int std__string__find_first_of_97c15c28(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -553,7 +553,7 @@ int std__string__find_first_of_97c15c28(this, param_1, param_2)
 
 /* std__string__find_first_of_97c15c70 @ 0x97c15c70 (4 bytes) */
 int std__string__find_first_of_97c15c70(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -563,8 +563,8 @@ int std__string__find_first_of_97c15c70(this, param_1, param_2)
 
 /* std__string__find_last_of @ 0x97c15c74 (12 bytes) */
 int std__string__find_last_of(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   find_last_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -573,7 +573,7 @@ int std__string__find_last_of(this, param_1, param_2)
 
 /* std__string__find_last_of_97c15c80 @ 0x97c15c80 (144 bytes) */
 int std__string__find_last_of_97c15c80(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -605,7 +605,7 @@ LAB_97c15cf8:
 
 /* std__string__find_last_of_97c15d10 @ 0x97c15d10 (72 bytes) */
 int std__string__find_last_of_97c15d10(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -618,7 +618,7 @@ int std__string__find_last_of_97c15d10(this, param_1, param_2)
 
 /* std__string__find_last_of_97c15d58 @ 0x97c15d58 (4 bytes) */
 int std__string__find_last_of_97c15d58(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -628,8 +628,8 @@ int std__string__find_last_of_97c15d58(this, param_1, param_2)
 
 /* std__string__find_first_not_of @ 0x97c15d5c (12 bytes) */
 int std__string__find_first_not_of(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   find_first_not_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -638,7 +638,7 @@ int std__string__find_first_not_of(this, param_1, param_2)
 
 /* std__string__find_first_not_of_97c15d68 @ 0x97c15d68 (124 bytes) */
 int std__string__find_first_not_of_97c15d68(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -662,7 +662,7 @@ int std__string__find_first_not_of_97c15d68(this, param_1, param_2, param_3)
 
 /* std__string__find_first_not_of_97c15de4 @ 0x97c15de4 (72 bytes) */
 int std__string__find_first_not_of_97c15de4(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -675,7 +675,7 @@ int std__string__find_first_not_of_97c15de4(this, param_1, param_2)
 
 /* std__string__find_first_not_of_97c15e2c @ 0x97c15e2c (68 bytes) */
 int std__string__find_first_not_of_97c15e2c(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -691,8 +691,8 @@ int std__string__find_first_not_of_97c15e2c(this, param_1, param_2)
 
 /* std__string__find_last_not_of @ 0x97c15e70 (12 bytes) */
 int std__string__find_last_not_of(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   find_last_not_of(this,*(char **)param_1,param_2,*(ulong *)(*(char **)param_1 + -0xc));
@@ -701,7 +701,7 @@ int std__string__find_last_not_of(this, param_1, param_2)
 
 /* std__string__find_last_not_of_97c15e7c @ 0x97c15e7c (136 bytes) */
 int std__string__find_last_not_of_97c15e7c(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
   ulong param_3;
@@ -733,7 +733,7 @@ LAB_97c15eec:
 
 /* std__string__find_last_not_of_97c15f04 @ 0x97c15f04 (72 bytes) */
 int std__string__find_last_not_of_97c15f04(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
 {
@@ -746,7 +746,7 @@ int std__string__find_last_not_of_97c15f04(this, param_1, param_2)
 
 /* std__string__find_last_not_of_97c15f4c @ 0x97c15f4c (84 bytes) */
 int std__string__find_last_not_of_97c15f4c(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   ulong param_2;
 {
@@ -780,7 +780,7 @@ int std__string__substr(param_1, param_2)
   ulong in_r6;
   
   if (*(uint *)(*(int *)param_2 + -0xc) < in_r5) {
-    std____throw_out_of_range("basic_string::substr");
+    std____throw_out_of_range("basic_string__substr");
   }
   string((unsigned char *)param_1,(unsigned char *)param_2,in_r5,in_r6);
   return param_1;
@@ -788,8 +788,8 @@ int std__string__substr(param_1, param_2)
 
 /* std__string__compare @ 0x97c16010 (96 bytes) */
 int std__string__compare(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   uint *puVar2;
@@ -815,10 +815,10 @@ int std__string__compare(this, param_1)
 
 /* std__string__compare_97c16070 @ 0x97c16070 (188 bytes) */
 int std__string__compare_97c16070(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
   uint uVar1;
   uint *puVar2;
@@ -836,7 +836,7 @@ int std__string__compare_97c16070(this, param_1, param_2, param_3)
   local_28[0] = *(uint *)((int)pvVar4 + -0xc);
   uStack00000020 = param_2;
   if (uVar5 < param_1) {
-    std____throw_out_of_range("basic_string::compare");
+    std____throw_out_of_range("basic_string__compare");
     iVar3 = *(int *)this;
     pvVar4 = *(void **)param_3;
   }
@@ -861,10 +861,10 @@ int std__string__compare_97c16070(this, param_1, param_2, param_3)
 
 /* std__string__compare_97c1612c @ 0x97c1612c (240 bytes) */
 int std__string__compare_97c1612c(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   ulong param_4;
   ulong param_5;
 {
@@ -887,7 +887,7 @@ int std__string__compare_97c1612c(this, param_1, param_2, param_3, param_4, para
   uStack00000020 = param_2;
   uStack0000002c = param_5;
   if ((uVar5 < param_1) || (uVar4 < param_4)) {
-    std____throw_out_of_range("basic_string::compare");
+    std____throw_out_of_range("basic_string__compare");
     iVar2 = *(int *)this;
     iVar3 = *(int *)param_3;
   }
@@ -918,7 +918,7 @@ int std__string__compare_97c1612c(this, param_1, param_2, param_3, param_4, para
 
 /* std__string__compare_97c1621c @ 0x97c1621c (112 bytes) */
 int std__string__compare_97c1621c(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   size_t sVar1;
@@ -947,7 +947,7 @@ int std__string__compare_97c1621c(this, param_1)
 
 /* std__string__compare_97c1628c @ 0x97c1628c (188 bytes) */
 int std__string__compare_97c1628c(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   char *param_3;
@@ -966,7 +966,7 @@ int std__string__compare_97c1628c(this, param_1, param_2, param_3)
   uVar5 = *(uint *)(iVar4 + -0xc);
   uStack00000020 = param_2;
   if (uVar5 < param_1) {
-    std____throw_out_of_range("basic_string::compare");
+    std____throw_out_of_range("basic_string__compare");
     iVar4 = *(int *)this;
   }
   sVar2 = _strlen(param_3);
@@ -991,7 +991,7 @@ int std__string__compare_97c1628c(this, param_1, param_2, param_3)
 
 /* std__string__compare_97c16348 @ 0x97c16348 (220 bytes) */
 int std__string__compare_97c16348(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   char *param_3;
@@ -1014,7 +1014,7 @@ int std__string__compare_97c16348(this, param_1, param_2, param_3, param_4)
   uStack00000020 = param_2;
   uStack00000028 = param_4;
   if (uVar4 < param_1) {
-    std____throw_out_of_range("basic_string::compare");
+    std____throw_out_of_range("basic_string__compare");
     iVar3 = *(int *)this;
   }
   local_30 = _strlen(param_3);
@@ -1044,7 +1044,7 @@ int std__string__compare_97c16348(this, param_1, param_2, param_3, param_4)
 
 /* std__string___Rep__operator__ @ 0x97c16424 (12 bytes) */
 int std__string___Rep__operator__(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
 {
   return this + param_1 + 0xc;
@@ -1053,7 +1053,7 @@ int std__string___Rep__operator__(this, param_1)
 /* std__string___Rep___S_create @ 0x97c16430 (384 bytes) */
 int std__string___Rep___S_create(param_1, param_2)
   ulong param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   undefined4 uVar1;
   undefined *puVar2;
@@ -1066,7 +1066,7 @@ int std__string___Rep___S_create(param_1, param_2)
   byte in_cr0;
   
   if (0x3ffffffc < param_1) {
-    std____throw_length_error("basic_string::_S_create");
+    std____throw_length_error("basic_string___S_create");
   }
   puVar2 = PTR__S_force_new_a7b7c0e8;
   uVar3 = param_1 + 0x1d;
@@ -1133,7 +1133,7 @@ LAB_97c164a4:
 
 /* std__string___Rep___M_destroy @ 0x97c165cc (152 bytes) */
 int std__string___Rep___M_destroy(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   undefined *puVar1;
   undefined *puVar2;
@@ -1145,7 +1145,7 @@ int std__string___Rep___M_destroy(param_1)
     iVar3 = (*(int *)(param_1 + 4) + 0x14U >> 1 & 0x7ffffffc) - 4;
     _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
     *(undefined4 *)param_1 = *(undefined4 *)(puVar2 + iVar3);
-    *(allocator **)(puVar2 + iVar3) = param_1;
+    *(unsigned char **)(puVar2 + iVar3) = param_1;
     _pthread_mutex_unlock((pthread_mutex_t *)puVar1);
   }
   else {
@@ -1156,8 +1156,8 @@ int std__string___Rep___M_destroy(param_1)
 
 /* std__string___Rep___M_clone @ 0x97c16674 (148 bytes) */
 int std__string___Rep___M_clone(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
 {
   uint uVar1;
@@ -1184,56 +1184,56 @@ int std__string___Rep___M_clone(this, param_1, param_2)
 /* std__operator_ @ 0x97c16708 (164 bytes) */
 int std__operator_(param_1, param_2)
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   size_t sVar1;
-  string *in_r5;
+  unsigned char * in_r5;
   undefined4 local_30;
   undefined4 local_2c;
   
   sVar1 = _strlen((char *)param_2);
-  string::string((unsigned char *)param_1);
-  string::reserve((unsigned char *)param_1,sVar1 + *(int *)(*(int *)in_r5 + -0xc));
-  string::_M_iend();
-  string::_M_iend();
-  string::replace((unsigned char *)param_1,local_30,local_2c,param_2,param_2 + sVar1);
-  string::append((unsigned char *)param_1,in_r5);
+  string__string((unsigned char *)param_1);
+  string__reserve((unsigned char *)param_1,sVar1 + *(int *)(*(int *)in_r5 + -0xc));
+  string___M_iend();
+  string___M_iend();
+  string__replace((unsigned char *)param_1,local_30,local_2c,param_2,param_2 + sVar1);
+  string__append((unsigned char *)param_1,in_r5);
   return param_1;
 }
 
 /* std__operator__97c167c4 @ 0x97c167c4 (108 bytes) */
 int std__operator__97c167c4(param_1, param_2)
   int param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   undefined3 in_register_0000000c;
-  string *this;
-  string *in_r5;
+  unsigned char * this;
+  unsigned char * in_r5;
   
   this = (unsigned char *)CONCAT31(in_register_0000000c,param_1);
-  string::string(this);
-  string::reserve(this,*(int *)(*(int *)in_r5 + -0xc) + 1);
-  string::append(this,1,(char)param_2);
-  string::append(this,in_r5);
+  string__string(this);
+  string__reserve(this,*(int *)(*(int *)in_r5 + -0xc) + 1);
+  string__append(this,1,(char)param_2);
+  string__append(this,in_r5);
   return this;
 }
 
 /* std__operator__97c16848 @ 0x97c16848 (68 bytes) */
 int std__operator__97c16848(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
-  string *in_r5;
+  unsigned char * in_r5;
   
-  string::string(param_1,param_2);
-  string::append(param_1,in_r5);
+  string__string(param_1,param_2);
+  string__append(param_1,in_r5);
   return param_1;
 }
 
 /* __gnu_cxx__operator__ @ 0x97c168a4 (24 bytes) */
 int __gnu_cxx__operator__(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   return *(int *)param_1 == *(int *)param_2;
 }

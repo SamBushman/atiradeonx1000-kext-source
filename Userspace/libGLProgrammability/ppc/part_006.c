@@ -2,7 +2,7 @@
 
 /* TFunction___TFunction_97ba2c94 @ 0x97ba2c94 (8 bytes) */
 int TFunction___TFunction_97ba2c94(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TFunction(this);
   return;
@@ -10,7 +10,7 @@ int TFunction___TFunction_97ba2c94(this)
 
 /* TFunction___TFunction_97ba2c9c @ 0x97ba2c9c (8 bytes) */
 int TFunction___TFunction_97ba2c9c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TFunction(this);
   return;
@@ -18,7 +18,7 @@ int TFunction___TFunction_97ba2c9c(this)
 
 /* TFunction___TFunction_97ba2ca4 @ 0x97ba2ca4 (236 bytes) */
 int TFunction___TFunction_97ba2ca4(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   int iVar2;
@@ -59,7 +59,7 @@ int TFunction___TFunction_97ba2ca4(this)
 
 /* TSymbolTableLevel___TSymbolTableLevel @ 0x97ba2d90 (8 bytes) */
 int TSymbolTableLevel___TSymbolTableLevel(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TSymbolTableLevel(this);
   return;
@@ -67,7 +67,7 @@ int TSymbolTableLevel___TSymbolTableLevel(this)
 
 /* TSymbolTableLevel___TSymbolTableLevel_97ba2d98 @ 0x97ba2d98 (8 bytes) */
 int TSymbolTableLevel___TSymbolTableLevel_97ba2d98(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TSymbolTableLevel(this);
   return;
@@ -75,7 +75,7 @@ int TSymbolTableLevel___TSymbolTableLevel_97ba2d98(this)
 
 /* TSymbolTableLevel___TSymbolTableLevel_97ba2da0 @ 0x97ba2da0 (184 bytes) */
 int TSymbolTableLevel___TSymbolTableLevel_97ba2da0(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   int iVar2;
@@ -92,9 +92,7 @@ int TSymbolTableLevel___TSymbolTableLevel_97ba2da0(this)
     iVar1 = *(int *)(this + 4);
   }
   if (*(int *)(this + 8) != 0) {
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::_M_erase((unsigned char *)this);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase((unsigned char *)this);
     *(int *)(*(int *)(this + 4) + 8) = *(int *)(this + 4);
     *(undefined4 *)(*(int *)(this + 4) + 4) = 0;
     *(int *)(*(int *)(this + 4) + 0xc) = *(int *)(this + 4);
@@ -105,7 +103,7 @@ int TSymbolTableLevel___TSymbolTableLevel_97ba2da0(this)
 
 /* TSymbolTableLevel__relateToOperator @ 0x97ba2e58 (168 bytes) */
 int TSymbolTableLevel__relateToOperator(this, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -132,13 +130,13 @@ int TSymbolTableLevel__relateToOperator(this, param_2, param_3)
 
 /* TSymbol__TSymbol @ 0x97ba2f00 (4 bytes) */
 int TSymbol__TSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
-  string *psVar2;
+  unsigned char * psVar2;
   ulong uVar3;
-  string *this_00;
+  unsigned char * this_00;
   int iVar4;
   int iVar5;
   char *pcVar6;
@@ -158,20 +156,20 @@ int TSymbol__TSymbol(this, param_1)
     psVar2 = this_00;
   }
   uVar1 = *(undefined4 *)(param_1 + 8);
-  *(string **)(this + 4) = psVar2;
+  *(unsigned char **)(this + 4) = psVar2;
   *(undefined4 *)(this + 8) = uVar1;
   return;
 }
 
 /* TSymbol__TSymbol_97ba2f04 @ 0x97ba2f04 (4 bytes) */
 int TSymbol__TSymbol_97ba2f04(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
-  string *psVar2;
+  unsigned char * psVar2;
   ulong uVar3;
-  string *this_00;
+  unsigned char * this_00;
   int iVar4;
   int iVar5;
   char *pcVar6;
@@ -191,20 +189,20 @@ int TSymbol__TSymbol_97ba2f04(this, param_1)
     psVar2 = this_00;
   }
   uVar1 = *(undefined4 *)(param_1 + 8);
-  *(string **)(this + 4) = psVar2;
+  *(unsigned char **)(this + 4) = psVar2;
   *(undefined4 *)(this + 8) = uVar1;
   return;
 }
 
 /* TSymbol__TSymbol_97ba2f08 @ 0x97ba2f08 (164 bytes) */
 int TSymbol__TSymbol_97ba2f08(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
-  string *psVar2;
+  unsigned char * psVar2;
   ulong uVar3;
-  string *this_00;
+  unsigned char * this_00;
   int iVar4;
   int iVar5;
   char *pcVar6;
@@ -224,16 +222,16 @@ int TSymbol__TSymbol_97ba2f08(this, param_1)
     psVar2 = this_00;
   }
   uVar1 = *(undefined4 *)(param_1 + 8);
-  *(string **)(this + 4) = psVar2;
+  *(unsigned char **)(this + 4) = psVar2;
   *(undefined4 *)(this + 8) = uVar1;
   return;
 }
 
 /* TVariable__TVariable @ 0x97ba2fac (4 bytes) */
 int TVariable__TVariable(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   uint uVar1;
   int iVar2;
@@ -308,9 +306,9 @@ LAB_97ba314c:
 
 /* TVariable__TVariable_97ba2fb0 @ 0x97ba2fb0 (4 bytes) */
 int TVariable__TVariable_97ba2fb0(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   uint uVar1;
   int iVar2;
@@ -385,9 +383,9 @@ LAB_97ba314c:
 
 /* TVariable__TVariable_97ba2fb4 @ 0x97ba2fb4 (432 bytes) */
 int TVariable__TVariable_97ba2fb4(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   uint uVar1;
   int iVar2;
@@ -462,11 +460,11 @@ LAB_97ba314c:
 
 /* TVariable__clone @ 0x97ba3164 (76 bytes) */
 int TVariable__clone(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   ulong uVar1;
-  TVariable *this_00;
+  unsigned char * this_00;
   
   uVar1 = GetGlobalPoolAllocator();
   this_00 = (unsigned char *)TPoolAllocator__allocate(uVar1);
@@ -476,17 +474,17 @@ int TVariable__clone(this, param_1)
 
 /* TFunction__TFunction @ 0x97ba31b0 (4 bytes) */
 int TFunction__TFunction(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined1 *puVar1;
   int *piVar2;
-  string *psVar3;
+  unsigned char * psVar3;
   undefined4 uVar4;
   ulong uVar5;
-  string *this_00;
-  TType *pTVar6;
+  unsigned char * this_00;
+  unsigned char * pTVar6;
   int iVar7;
   undefined4 *puVar8;
   int iVar9;
@@ -494,7 +492,7 @@ int TFunction__TFunction(this, param_1, param_2)
   int iVar11;
   uint uVar12;
   char *pcVar13;
-  map *pmVar14;
+  unsigned char * pmVar14;
   char in_RESERVE;
   byte in_cr0;
   undefined4 uStack_60;
@@ -552,13 +550,13 @@ int TFunction__TFunction(this, param_1, param_2)
       std__string__string(this_00,pcVar13,(unsigned char *)auStack_50);
       psVar3 = this_00;
     }
-    *(string **)(iVar9 + -8) = psVar3;
-    pmVar14 = *(map **)(iVar7 + uVar12 * 8 + 4);
+    *(unsigned char **)(iVar9 + -8) = psVar3;
+    pmVar14 = *(unsigned char **)(iVar7 + uVar12 * 8 + 4);
     uVar5 = GetGlobalPoolAllocator();
     pTVar6 = (unsigned char *)TPoolAllocator__allocate(uVar5);
     *(undefined ***)pTVar6 = &PTR__TType_a7b7d590;
     TType__copyType(pTVar6,pmVar14);
-    *(TType **)(iVar9 + -4) = pTVar6;
+    *(unsigned char **)(iVar9 + -4) = pTVar6;
   }
   TType__copyType((unsigned char *)(this + 0x1c),(unsigned char *)(param_1 + 0x1c));
   std__string__assign((unsigned char *)(this + 0x44));
@@ -570,17 +568,17 @@ int TFunction__TFunction(this, param_1, param_2)
 
 /* TFunction__TFunction_97ba31b4 @ 0x97ba31b4 (4 bytes) */
 int TFunction__TFunction_97ba31b4(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined1 *puVar1;
   int *piVar2;
-  string *psVar3;
+  unsigned char * psVar3;
   undefined4 uVar4;
   ulong uVar5;
-  string *this_00;
-  TType *pTVar6;
+  unsigned char * this_00;
+  unsigned char * pTVar6;
   int iVar7;
   undefined4 *puVar8;
   int iVar9;
@@ -588,7 +586,7 @@ int TFunction__TFunction_97ba31b4(this, param_1, param_2)
   int iVar11;
   uint uVar12;
   char *pcVar13;
-  map *pmVar14;
+  unsigned char * pmVar14;
   char in_RESERVE;
   byte in_cr0;
   undefined4 uStack_60;
@@ -646,13 +644,13 @@ int TFunction__TFunction_97ba31b4(this, param_1, param_2)
       std__string__string(this_00,pcVar13,(unsigned char *)auStack_50);
       psVar3 = this_00;
     }
-    *(string **)(iVar9 + -8) = psVar3;
-    pmVar14 = *(map **)(iVar7 + uVar12 * 8 + 4);
+    *(unsigned char **)(iVar9 + -8) = psVar3;
+    pmVar14 = *(unsigned char **)(iVar7 + uVar12 * 8 + 4);
     uVar5 = GetGlobalPoolAllocator();
     pTVar6 = (unsigned char *)TPoolAllocator__allocate(uVar5);
     *(undefined ***)pTVar6 = &PTR__TType_a7b7d590;
     TType__copyType(pTVar6,pmVar14);
-    *(TType **)(iVar9 + -4) = pTVar6;
+    *(unsigned char **)(iVar9 + -4) = pTVar6;
   }
   TType__copyType((unsigned char *)(this + 0x1c),(unsigned char *)(param_1 + 0x1c));
   std__string__assign((unsigned char *)(this + 0x44));
@@ -664,17 +662,17 @@ int TFunction__TFunction_97ba31b4(this, param_1, param_2)
 
 /* TFunction__TFunction_97ba31b8 @ 0x97ba31b8 (492 bytes) */
 int TFunction__TFunction_97ba31b8(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined1 *puVar1;
   int *piVar2;
-  string *psVar3;
+  unsigned char * psVar3;
   undefined4 uVar4;
   ulong uVar5;
-  string *this_00;
-  TType *pTVar6;
+  unsigned char * this_00;
+  unsigned char * pTVar6;
   int iVar7;
   undefined4 *puVar8;
   int iVar9;
@@ -682,7 +680,7 @@ int TFunction__TFunction_97ba31b8(this, param_1, param_2)
   int iVar11;
   uint uVar12;
   char *pcVar13;
-  map *pmVar14;
+  unsigned char * pmVar14;
   char in_RESERVE;
   byte in_cr0;
   undefined4 local_60;
@@ -740,13 +738,13 @@ int TFunction__TFunction_97ba31b8(this, param_1, param_2)
       std__string__string(this_00,pcVar13,(unsigned char *)local_50);
       psVar3 = this_00;
     }
-    *(string **)(iVar9 + -8) = psVar3;
-    pmVar14 = *(map **)(iVar7 + uVar12 * 8 + 4);
+    *(unsigned char **)(iVar9 + -8) = psVar3;
+    pmVar14 = *(unsigned char **)(iVar7 + uVar12 * 8 + 4);
     uVar5 = GetGlobalPoolAllocator();
     pTVar6 = (unsigned char *)TPoolAllocator__allocate(uVar5);
     *(undefined ***)pTVar6 = &PTR__TType_a7b7d590;
     TType__copyType(pTVar6,pmVar14);
-    *(TType **)(iVar9 + -4) = pTVar6;
+    *(unsigned char **)(iVar9 + -4) = pTVar6;
   }
   TType__copyType((unsigned char *)(this + 0x1c),(unsigned char *)(param_1 + 0x1c));
   std__string__assign((unsigned char *)(this + 0x44));
@@ -758,11 +756,11 @@ int TFunction__TFunction_97ba31b8(this, param_1, param_2)
 
 /* TFunction__clone @ 0x97ba33a4 (76 bytes) */
 int TFunction__clone(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   ulong uVar1;
-  TFunction *this_00;
+  unsigned char * this_00;
   
   uVar1 = GetGlobalPoolAllocator();
   this_00 = (unsigned char *)TPoolAllocator__allocate(uVar1);
@@ -772,8 +770,8 @@ int TFunction__clone(this, param_1)
 
 /* TSymbolTableLevel__clone @ 0x97ba33f0 (352 bytes) */
 int TSymbolTableLevel__clone(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int iVar2;
@@ -782,10 +780,10 @@ int TSymbolTableLevel__clone(this, param_1)
   ulong *puVar5;
   undefined4 *puVar6;
   int *piVar7;
-  string *psVar8;
+  unsigned char * psVar8;
   char in_RESERVE;
   byte in_cr0;
-  pair local_60 [16];
+  unsigned char local_60 [16];
   undefined4 local_50;
   int local_4c;
   int *local_48;
@@ -811,9 +809,7 @@ int TSymbolTableLevel__clone(this, param_1)
       psVar8 = (unsigned char *)(**(code **)(*piVar7 + 8))();
       std__string__string((unsigned char *)&local_50,psVar8);
       local_48 = piVar7;
-      std::
-      _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-      ::insert_unique(local_60);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique(local_60);
       piVar7 = (int *)(local_4c + -4);
       local_40 = local_50;
       do {
@@ -835,8 +831,8 @@ int TSymbolTableLevel__clone(this, param_1)
 
 /* TSymbolTable__copyTable @ 0x97ba3550 (492 bytes) */
 int TSymbolTable__copyTable(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 uVar1;
   undefined *puVar2;
@@ -899,7 +895,7 @@ int TSymbolTable__copyTable(this, param_1)
   *(undefined4 *)(this + 0xc) = *(undefined4 *)(param_1 + 0xc);
   local_60 = puVar5;
   for (uVar6 = 0; uVar6 < (uint)(*(int *)(param_1 + 4) - *(int *)param_1 >> 2); uVar6 = uVar6 + 1) {
-    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(TSymbolTableLevel **)(*(int *)param_1 + uVar6 * 4),(unsigned char *)&local_60);
+    local_30[0] = ((int (*)())TSymbolTableLevel__clone)(*(unsigned char **)(*(int *)param_1 + uVar6 * 4),(unsigned char *)&local_60);
     puVar5 = *(undefined4 **)(this + 4);
     if (puVar5 == *(undefined4 **)(this + 8)) {
       std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux
@@ -915,9 +911,7 @@ int TSymbolTable__copyTable(this, param_1)
     }
   }
   if (local_5c != 0) {
-    std::
-    _Rb_tree<TVector<TTypeLine>*,std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>,std::_Select1st<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>,std::less<TVector<TTypeLine>*>,std::allocator<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>>
-    ::_M_erase((unsigned char *)&local_60);
+    std___Rb_tree_TVector_TTypeLine___std__pair_TVector_TTypeLine__const_TVector_TTypeLine____std___Select1st_std__pair_TVector_TTypeLine__const_TVector_TTypeLine_____std__less_TVector_TTypeLine____std__allocator_std__pair_TVector_TTypeLine__const_TVector_TTypeLine________M_erase((unsigned char *)&local_60);
     local_60[2] = local_60;
     local_60[1] = 0;
     local_60[3] = local_60;
@@ -932,37 +926,37 @@ int yyparse(param_1)
   void *param_1;
 {
   short sVar1;
-  string *psVar2;
+  unsigned char * psVar2;
   uint uVar3;
-  string *psVar4;
+  unsigned char * psVar4;
   undefined4 *puVar5;
   int iVar6;
   undefined *puVar7;
   int iVar8;
-  TVectorFields *pTVar9;
-  TMatrixFields *pTVar10;
-  TType *pTVar11;
-  constUnion *pcVar12;
+  unsigned char * pTVar9;
+  unsigned char * pTVar10;
+  unsigned char * pTVar11;
+  unsigned char * pcVar12;
   bool *pbVar13;
-  allocator *paVar14;
-  TVector *pTVar15;
-  string *psVar16;
-  TPublicType *pTVar17;
-  string *psVar18;
+  unsigned char * paVar14;
+  unsigned char * pTVar15;
+  unsigned char * psVar16;
+  unsigned char * pTVar17;
+  unsigned char * psVar18;
   undefined4 uVar19;
   ulong uVar20;
   ulong *puVar21;
   undefined4 *puVar22;
-  TIntermNode *pTVar23;
+  unsigned char * pTVar23;
   int *piVar24;
-  TSymbolTableLevel *pTVar25;
-  TMap *pTVar26;
+  unsigned char * pTVar25;
+  unsigned char * pTVar26;
   uint *puVar27;
-  TIntermNode *pTVar28;
-  TIntermTyped *pTVar29;
+  unsigned char * pTVar28;
+  unsigned char * pTVar29;
   undefined4 uVar30;
   int iVar31;
-  TIntermTyped *pTVar32;
+  unsigned char * pTVar32;
   char *pcVar33;
   int iVar34;
   undefined1 uVar37;
@@ -1000,51 +994,51 @@ int yyparse(param_1)
   short sStack_2ca2;
   short local_2ca0 [200];
   uint auStack_2b10 [2200];
-  YYSTYPE aYStack_8b0 [48];
+  unsigned char aYStack_8b0 [48];
   uint local_880;
   undefined4 local_87c;
-  string *local_878;
+  unsigned char * local_878;
   uint local_874;
-  string *local_870;
-  string *local_86c;
-  string *local_868;
-  string *local_864;
-  string *local_860;
-  string *local_85c;
-  string *local_858;
-  string *local_850;
-  string *local_84c;
-  string *local_848;
-  string *local_844;
-  string *local_840;
-  string *local_83c;
-  string *local_838;
-  string *local_834;
-  string *local_830;
-  string *local_82c;
-  string *local_828;
-  string *local_824;
-  string *local_820;
-  string *local_81c;
-  string *local_818;
-  string *local_814;
-  string *local_810;
-  string *local_80c;
-  string *local_808;
-  string *local_804;
-  string *local_800;
-  string *local_7fc;
-  string *local_7f8;
-  string *local_7f4;
-  string *local_7f0;
-  string *local_7ec;
-  string *local_7e8;
-  string *local_7e4;
-  string *local_7e0;
-  string *local_7dc;
-  string *local_7d8;
-  string *local_7d4;
-  string *local_7d0;
+  unsigned char * local_870;
+  unsigned char * local_86c;
+  unsigned char * local_868;
+  unsigned char * local_864;
+  unsigned char * local_860;
+  unsigned char * local_85c;
+  unsigned char * local_858;
+  unsigned char * local_850;
+  unsigned char * local_84c;
+  unsigned char * local_848;
+  unsigned char * local_844;
+  unsigned char * local_840;
+  unsigned char * local_83c;
+  unsigned char * local_838;
+  unsigned char * local_834;
+  unsigned char * local_830;
+  unsigned char * local_82c;
+  unsigned char * local_828;
+  unsigned char * local_824;
+  unsigned char * local_820;
+  unsigned char * local_81c;
+  unsigned char * local_818;
+  unsigned char * local_814;
+  unsigned char * local_810;
+  unsigned char * local_80c;
+  unsigned char * local_808;
+  unsigned char * local_804;
+  unsigned char * local_800;
+  unsigned char * local_7fc;
+  unsigned char * local_7f8;
+  unsigned char * local_7f4;
+  unsigned char * local_7f0;
+  unsigned char * local_7ec;
+  unsigned char * local_7e8;
+  unsigned char * local_7e4;
+  unsigned char * local_7e0;
+  unsigned char * local_7dc;
+  unsigned char * local_7d8;
+  unsigned char * local_7d4;
+  unsigned char * local_7d0;
   uint local_7cc;
   undefined4 local_7c0;
   uint local_7bc;
@@ -1053,102 +1047,102 @@ int yyparse(param_1)
   int local_780;
   int local_77c;
   int local_764;
-  string *local_750 [4];
-  string *local_740;
+  unsigned char * local_750 [4];
+  unsigned char * local_740;
   undefined4 local_720 [4];
   int local_710;
   undefined4 local_700;
-  string *local_6f0;
-  string *local_6e0;
-  string *local_6d0;
-  string *local_6c0;
+  unsigned char * local_6f0;
+  unsigned char * local_6e0;
+  unsigned char * local_6d0;
+  unsigned char * local_6c0;
   undefined4 local_6b0 [4];
-  string *local_6a0;
+  unsigned char * local_6a0;
   undefined4 local_690 [4];
-  string *local_680;
+  unsigned char * local_680;
   undefined4 local_670 [4];
   int local_660;
-  string *local_650;
+  unsigned char * local_650;
   int local_640;
   int local_630;
   int local_620;
-  string *local_610;
-  string *local_600;
-  string *local_5f0;
-  string *local_5e0;
-  string *local_5d0;
-  string *local_5c0;
-  string *local_5b0;
-  string *local_5a0;
-  string *local_590;
-  string *local_580;
-  string *local_570;
-  string *local_560;
-  string *local_550;
-  string *local_540;
-  string *local_530;
-  string *local_520;
-  string *local_510;
-  string *local_500;
-  string *local_4f0;
-  string *local_4e0;
-  string *local_4d0;
-  string *local_4c0;
-  string *local_4b0;
-  string *local_4a0;
-  string *local_490;
-  string *local_480;
-  string *local_470;
-  string *local_460;
-  string *local_450;
-  string *local_440;
-  string *local_430;
-  string *local_420;
-  string *local_410;
-  string *local_400;
-  string *local_3f0;
-  string *local_3e0;
-  string *local_3d0;
-  string *local_3c0;
-  string *local_3b0;
-  string *local_3a0;
-  string *local_390;
-  string *local_380;
-  string *local_370;
-  string *local_360;
-  string *local_350;
-  string *local_340;
-  string *local_330;
+  unsigned char * local_610;
+  unsigned char * local_600;
+  unsigned char * local_5f0;
+  unsigned char * local_5e0;
+  unsigned char * local_5d0;
+  unsigned char * local_5c0;
+  unsigned char * local_5b0;
+  unsigned char * local_5a0;
+  unsigned char * local_590;
+  unsigned char * local_580;
+  unsigned char * local_570;
+  unsigned char * local_560;
+  unsigned char * local_550;
+  unsigned char * local_540;
+  unsigned char * local_530;
+  unsigned char * local_520;
+  unsigned char * local_510;
+  unsigned char * local_500;
+  unsigned char * local_4f0;
+  unsigned char * local_4e0;
+  unsigned char * local_4d0;
+  unsigned char * local_4c0;
+  unsigned char * local_4b0;
+  unsigned char * local_4a0;
+  unsigned char * local_490;
+  unsigned char * local_480;
+  unsigned char * local_470;
+  unsigned char * local_460;
+  unsigned char * local_450;
+  unsigned char * local_440;
+  unsigned char * local_430;
+  unsigned char * local_420;
+  unsigned char * local_410;
+  unsigned char * local_400;
+  unsigned char * local_3f0;
+  unsigned char * local_3e0;
+  unsigned char * local_3d0;
+  unsigned char * local_3c0;
+  unsigned char * local_3b0;
+  unsigned char * local_3a0;
+  unsigned char * local_390;
+  unsigned char * local_380;
+  unsigned char * local_370;
+  unsigned char * local_360;
+  unsigned char * local_350;
+  unsigned char * local_340;
+  unsigned char * local_330;
   int local_320 [4];
   undefined4 local_310;
   int local_30c;
-  string *local_308;
+  unsigned char * local_308;
   undefined4 local_300;
   undefined4 local_2f0 [4];
-  string *local_2e0;
+  unsigned char * local_2e0;
   undefined4 local_2d0 [4];
-  string *local_2c0;
+  unsigned char * local_2c0;
   undefined4 local_2b0 [4];
   int local_2a0;
   undefined4 local_290 [4];
   undefined4 local_280 [4];
-  string *local_270;
+  unsigned char * local_270;
   undefined4 local_260 [4];
   undefined4 local_250 [4];
   undefined4 local_240 [4];
-  string *local_230;
+  unsigned char * local_230;
   undefined4 local_220 [4];
   undefined4 local_210 [4];
-  string *local_200;
-  string *local_1f0;
+  unsigned char * local_200;
+  unsigned char * local_1f0;
   undefined4 local_1e0;
   int local_1dc;
   int *local_1d8;
   undefined4 local_1d0;
   undefined4 local_1c0 [4];
   undefined4 local_1b0 [4];
-  string *local_1a0;
-  string *local_190;
+  unsigned char * local_1a0;
+  unsigned char * local_190;
   int local_180;
   ulong local_170;
   ulong *local_160 [4];
@@ -1163,9 +1157,9 @@ int yyparse(param_1)
   int *local_e8;
   undefined4 local_e0;
   undefined4 local_d0 [4];
-  string *local_c0;
+  unsigned char * local_c0;
   undefined4 local_b0 [4];
-  string *local_a0;
+  unsigned char * local_a0;
   uint local_90;
   uint local_8c;
   int local_88;
@@ -1343,14 +1337,14 @@ LAB_97ba3970:
       *(undefined ***)(psVar18 + 0xc) = &PTR__TType_a7b7d640;
       *(uint *)(psVar18 + 4) = uVar59;
       *(undefined **)psVar18 = puVar7;
-      *(string **)(psVar18 + 0x10) = local_84c;
-      *(string **)(psVar18 + 0x14) = local_848;
-      *(string **)(psVar18 + 0x18) = local_844;
-      *(string **)(psVar18 + 0x1c) = local_840;
-      *(string **)(psVar18 + 0x20) = local_83c;
-      *(string **)(psVar18 + 0x24) = local_838;
-      *(string **)(psVar18 + 0x28) = local_834;
-      *(string **)(psVar18 + 0x2c) = local_830;
+      *(unsigned char **)(psVar18 + 0x10) = local_84c;
+      *(unsigned char **)(psVar18 + 0x14) = local_848;
+      *(unsigned char **)(psVar18 + 0x18) = local_844;
+      *(unsigned char **)(psVar18 + 0x1c) = local_840;
+      *(unsigned char **)(psVar18 + 0x20) = local_83c;
+      *(unsigned char **)(psVar18 + 0x24) = local_838;
+      *(unsigned char **)(psVar18 + 0x28) = local_834;
+      *(unsigned char **)(psVar18 + 0x2c) = local_830;
       uVar3 = *(uint *)(psVar18 + 0x30);
       uVar54 = (uint)local_82c & 0xfe000000;
       *(uint *)(psVar18 + 0x30) = uVar54 | uVar3 & 0x1ffffff;
@@ -1372,9 +1366,7 @@ LAB_97ba3970:
       psVar4 = (unsigned char *)(**(code **)(*(int *)psVar18 + 8))();
       std__string__string((unsigned char *)&local_800,psVar4);
       local_7f8 = psVar18;
-      std::
-      _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-      ::insert_unique((unsigned char *)&local_810);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_810);
       local_820 = local_810;
       psVar4 = local_7fc + -4;
       local_81c = local_80c;
@@ -1409,21 +1401,21 @@ LAB_97ba3970:
     if (iVar55 != 2) {
       psVar4 = (unsigned char *)
                TIntermediate__addSymbol
-                         (*(int *)param_1,*(string **)(psVar4 + 8),*(TType **)(psVar4 + 4),
+                         (*(int *)param_1,*(unsigned char **)(psVar4 + 8),*(unsigned char **)(psVar4 + 4),
                           (int)(psVar4 + 0xc));
       psVar18 = local_7f0;
       psVar16 = local_750;
       break;
     }
-    local_84c = *(string **)(psVar4 + 0x10);
-    local_844 = *(string **)(psVar4 + 0x18);
-    local_840 = *(string **)(psVar4 + 0x1c);
-    local_848 = *(string **)(psVar4 + 0x14);
-    local_83c = *(string **)(psVar4 + 0x20);
-    local_838 = *(string **)(psVar4 + 0x24);
-    local_834 = *(string **)(psVar4 + 0x28);
-    local_830 = *(string **)(psVar4 + 0x2c);
-    pTVar11 = *(TType **)(psVar4 + 0x38);
+    local_84c = *(unsigned char **)(psVar4 + 0x10);
+    local_844 = *(unsigned char **)(psVar4 + 0x18);
+    local_840 = *(unsigned char **)(psVar4 + 0x1c);
+    local_848 = *(unsigned char **)(psVar4 + 0x14);
+    local_83c = *(unsigned char **)(psVar4 + 0x20);
+    local_838 = *(unsigned char **)(psVar4 + 0x24);
+    local_834 = *(unsigned char **)(psVar4 + 0x28);
+    local_830 = *(unsigned char **)(psVar4 + 0x2c);
+    pTVar11 = *(unsigned char **)(psVar4 + 0x38);
     local_82c = (unsigned char *)
                 ((*(uint *)(psVar4 + 0x30) >> 9 & 1) << 9 |
                 (*(uint *)(psVar4 + 0x30) >> 10 & 1) << 10 |
@@ -1432,7 +1424,7 @@ LAB_97ba3970:
                 *(uint *)(psVar4 + 0x30) & 0xfe000000 | (uint)local_82c & 0x1ff);
 LAB_97ba4158:
     local_850 = (unsigned char *)&PTR__TType_a7b7d640;
-    pcVar12 = *(constUnion **)param_1;
+    pcVar12 = *(unsigned char **)param_1;
     goto LAB_97ba7d0c;
   case 2:
   case 7:
@@ -1675,7 +1667,7 @@ LAB_97ba47fc:
       local_838 = psVar4;
       local_834 = psVar4;
       local_830 = psVar4;
-      pcVar12 = *(constUnion **)param_1;
+      pcVar12 = *(unsigned char **)param_1;
       goto LAB_97ba7d0c;
     }
     iVar55 = (**(code **)(*(int *)puVar52[-0x1f] + 0x54))();
@@ -1906,7 +1898,7 @@ LAB_97ba4bc0:
         local_5c = -0x5847c8b4;
         iVar55 = (**(code **)(*(int *)puVar52[-0x14] + 0x48))();
         psVar16 = (unsigned char *)(local_5c - 0x610c);
-        *(string **)pTVar11 = local_848 + (int)local_844 * iVar55;
+        *(unsigned char **)pTVar11 = local_848 + (int)local_844 * iVar55;
         local_81c = (unsigned char *)((uint)local_81c & 0x1ff | 0x4100800);
         local_83c = psVar18;
         local_838 = psVar18;
@@ -1917,7 +1909,7 @@ LAB_97ba4bc0:
         local_824 = psVar18;
         local_820 = psVar18;
         local_840 = psVar16;
-        uVar19 = TIntermediate__addConstantUnion(*(constUnion **)param_1,pTVar11,(int)&local_840);
+        uVar19 = TIntermediate__addConstantUnion(*(unsigned char **)param_1,pTVar11,(int)&local_840);
         local_840 = psVar16;
         local_878 = (unsigned char *)
                     TIntermediate__addIndex
@@ -1957,7 +1949,7 @@ LAB_97ba4bc0:
         local_828 = psVar4;
         local_824 = psVar4;
         local_820 = psVar4;
-        uVar19 = TIntermediate__addConstantUnion(*(constUnion **)param_1,pTVar11,(int)&local_840);
+        uVar19 = TIntermediate__addConstantUnion(*(unsigned char **)param_1,pTVar11,(int)&local_840);
         local_840 = (unsigned char *)&PTR__TType_a7b7d640;
         local_878 = (unsigned char *)
                     TIntermediate__addIndex
@@ -2025,7 +2017,7 @@ LAB_97ba50cc:
     if (local_840 == (unsigned char *)0x1) {
       uVar20 = GetGlobalPoolAllocator();
       pTVar11 = (unsigned char *)TPoolAllocator__allocate(uVar20);
-      *(string **)pTVar11 = local_850;
+      *(unsigned char **)pTVar11 = local_850;
       local_7dc = (unsigned char *)((uint)local_7dc & 0x1ff | 0x4100800);
       local_7fc = (unsigned char *)0x0;
       local_7f8 = (unsigned char *)0x0;
@@ -2036,7 +2028,7 @@ LAB_97ba50cc:
       local_7e4 = (unsigned char *)0x0;
       local_7e0 = (unsigned char *)0x0;
       local_800 = psVar18;
-      uVar19 = TIntermediate__addConstantUnion(*(constUnion **)param_1,pTVar11,(int)&local_800);
+      uVar19 = TIntermediate__addConstantUnion(*(unsigned char **)param_1,pTVar11,(int)&local_800);
       local_800 = psVar18;
       local_878 = (unsigned char *)
                   TIntermediate__addIndex
@@ -2047,7 +2039,7 @@ LAB_97ba50cc:
       goto LAB_97ba50cc;
     }
     std__string__string((unsigned char *)&local_800,(unsigned char *)puVar52[1]);
-    uVar19 = TIntermediate__addSwizzle(*(TVectorFields **)param_1,(int)&local_850);
+    uVar19 = TIntermediate__addSwizzle(*(unsigned char **)param_1,(int)&local_850);
     local_878 = (unsigned char *)
                 TIntermediate__addIndex
                           (*(undefined4 *)param_1,0x30,puVar52[-0x14],uVar19,puVar52[-0xb]);
@@ -2195,7 +2187,7 @@ switchD_97ba39c8_caseD_6:
       local_834 = psVar4;
       local_830 = psVar4;
       local_878 = (unsigned char *)
-                  TIntermediate__addConstantUnion(*(constUnion **)param_1,pTVar11,(int)&local_850);
+                  TIntermediate__addConstantUnion(*(unsigned char **)param_1,pTVar11,(int)&local_850);
       local_850 = (unsigned char *)&PTR__TType_a7b7d640;
       TParseContext__recover();
       goto LAB_97ba5e28;
@@ -2258,7 +2250,7 @@ switchD_97ba39c8_caseD_6:
         local_64 = -0x5847c8b4;
         TType__getCompleteString();
         psVar4 = local_84c;
-        local_84c[*(int *)(local_84c + -0xc)] = **(string **)(local_64 + -0x7cc4);
+        local_84c[*(int *)(local_84c + -0xc)] = **(unsigned char **)(local_64 + -0x7cc4);
         pcVar64 = (char *)(*(code *)**(undefined4 **)puVar52[2])();
         TParseContext__error
                   ((int)param_1,pcVar64," wrong operand type","Internal Error",
@@ -2347,7 +2339,7 @@ LAB_97ba5e64:
         std__string__string(psVar16,"",(unsigned char *)local_6b0);
         psVar18 = psVar16;
       }
-      *(string **)(psVar4 + 0x14) = psVar18;
+      *(unsigned char **)(psVar4 + 0x14) = psVar18;
       TType__buildMangledName(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
@@ -2405,7 +2397,7 @@ LAB_97ba5e64:
         std__string__string(psVar16,"",(unsigned char *)local_690);
         psVar18 = psVar16;
       }
-      *(string **)(psVar4 + 0x14) = psVar18;
+      *(unsigned char **)(psVar4 + 0x14) = psVar18;
       TType__buildMangledName(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
@@ -2425,7 +2417,7 @@ LAB_97ba5e64:
       std__string___Rep___M_destroy((unsigned char *)(local_83c + -0xc));
     }
     local_870 = (unsigned char *)puVar52[-0x12];
-    pTVar23 = *(TIntermNode **)param_1;
+    pTVar23 = *(unsigned char **)param_1;
     pTVar28 = (unsigned char *)puVar52[-0x14];
     uVar59 = puVar52[2];
 LAB_97ba97d8:
@@ -2489,7 +2481,7 @@ LAB_97ba97d8:
     uVar60 = puVar52[9];
     uVar53 = puVar52[1];
     *(undefined **)psVar18 = PTR_vtable_a7b7c0f4 + 8;
-    *(string **)(psVar18 + 4) = (unsigned char *)&local_850;
+    *(unsigned char **)(psVar18 + 4) = (unsigned char *)&local_850;
     local_660 = GetGlobalPoolAllocator();
     *(int *)(psVar18 + 0x18) = 0;
     *(int *)(psVar18 + 0x10) = 0;
@@ -2563,21 +2555,21 @@ LAB_97ba97d8:
     psVar18 = (unsigned char *)TPoolAllocator__allocate(uVar20);
     psVar4 = (unsigned char *)puVar52[1];
     *(undefined **)psVar18 = PTR_vtable_a7b7c0f4 + 8;
-    *(string **)(psVar18 + 4) = psVar4;
+    *(unsigned char **)(psVar18 + 4) = psVar4;
     local_620 = GetGlobalPoolAllocator();
     *(int *)(psVar18 + 0x18) = 0;
     *(int *)(psVar18 + 0x10) = 0;
     *(int *)(psVar18 + 0x14) = 0;
     *(int *)(psVar18 + 0xc) = local_620;
-    *(string **)(psVar18 + 0x20) = local_84c;
-    *(string **)(psVar18 + 0x24) = local_848;
-    *(string **)(psVar18 + 0x28) = local_844;
-    *(string **)(psVar18 + 0x2c) = local_840;
-    *(string **)(psVar18 + 0x30) = local_83c;
-    *(string **)(psVar18 + 0x34) = local_838;
+    *(unsigned char **)(psVar18 + 0x20) = local_84c;
+    *(unsigned char **)(psVar18 + 0x24) = local_848;
+    *(unsigned char **)(psVar18 + 0x28) = local_844;
+    *(unsigned char **)(psVar18 + 0x2c) = local_840;
+    *(unsigned char **)(psVar18 + 0x30) = local_83c;
+    *(unsigned char **)(psVar18 + 0x34) = local_838;
     *(undefined ***)(psVar18 + 0x1c) = &PTR__TType_a7b7d640;
-    *(string **)(psVar18 + 0x38) = local_834;
-    *(string **)(psVar18 + 0x3c) = local_830;
+    *(unsigned char **)(psVar18 + 0x38) = local_834;
+    *(unsigned char **)(psVar18 + 0x3c) = local_830;
     uVar3 = *(uint *)(psVar18 + 0x40);
     uVar54 = (uint)local_82c & 0xfe000000;
     *(uint *)(psVar18 + 0x40) = uVar54 | uVar3 & 0x1ffffff;
@@ -3630,12 +3622,12 @@ LAB_97ba7c8c:
     TParseContext__recover();
     uVar20 = GetGlobalPoolAllocator();
     pTVar11 = (unsigned char *)TPoolAllocator__allocate(uVar20);
-    *(string **)pTVar11 = psVar4;
+    *(unsigned char **)pTVar11 = psVar4;
     local_82c = (unsigned char *)
                 (((uint)psVar4 & 1) << 9 |
                 ((uint)psVar4 & 1) << 10 | (uint)local_82c & 0x1801ff | 0x4180800);
     local_850 = (unsigned char *)&PTR__TType_a7b7d640;
-    pcVar12 = *(constUnion **)param_1;
+    pcVar12 = *(unsigned char **)param_1;
     local_84c = psVar4;
     local_848 = psVar4;
     local_844 = psVar4;
@@ -3696,7 +3688,7 @@ LAB_97ba7d0c:
     }
     local_878 = (unsigned char *)
                 TIntermediate__addSelection
-                          (*(TIntermTyped **)param_1,(unsigned char *)puVar52[-0x2a],
+                          (*(unsigned char **)param_1,(unsigned char *)puVar52[-0x2a],
                            (unsigned char *)puVar52[-0x14],puVar52[2]);
     (**(code **)(*(int *)puVar52[-0x14] + 0x38))(&local_850);
     (**(code **)(*(int *)puVar52[2] + 0x38))(&local_820);
@@ -3894,7 +3886,7 @@ LAB_97ba7d0c:
   case 0x5e:
     local_878 = (unsigned char *)
                 TIntermediate__addComma
-                          (*(TIntermTyped **)param_1,(unsigned char *)puVar52[-0x14],puVar52[2]);
+                          (*(unsigned char **)param_1,(unsigned char *)puVar52[-0x14],puVar52[2]);
     psVar4 = local_878;
     psVar18 = local_7f0;
     psVar16 = local_750;
@@ -4012,7 +4004,7 @@ LAB_97ba86ec:
         std__string__string(psVar16,"",(unsigned char *)local_2f0);
         psVar18 = psVar16;
       }
-      *(string **)(psVar4 + 0x14) = psVar18;
+      *(unsigned char **)(psVar4 + 0x14) = psVar18;
       TType__buildMangledName(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
@@ -4079,7 +4071,7 @@ LAB_97ba8824:
         std__string__string(psVar16,"",(unsigned char *)local_2d0);
         psVar18 = psVar16;
       }
-      *(string **)(psVar4 + 0x14) = psVar18;
+      *(unsigned char **)(psVar4 + 0x14) = psVar18;
       TType__buildMangledName(psVar4);
       std__string__append(*(ulong *)(psVar4 + 0x14),'\x01');
     }
@@ -4145,7 +4137,7 @@ LAB_97ba8824:
     local_7ec = local_80c;
     local_7e8 = local_808;
     if (local_80c != (unsigned char *)0x0) {
-      local_848 = *(string **)(local_80c + 8);
+      local_848 = *(unsigned char **)(local_80c + 8);
       local_64 = -0x5847c8b4;
       local_838 = (unsigned char *)TType__setStructSize((unsigned char *)&local_850);
       iVar55 = (**(code **)(*(int *)local_7ec + 0x18))(local_7ec);
@@ -4167,22 +4159,22 @@ LAB_97ba8824:
     psVar18 = (unsigned char *)TPoolAllocator__allocate(uVar20);
     psVar4 = (unsigned char *)puVar52[-10];
     *(undefined **)psVar18 = PTR_vtable_a7b7c0f4 + 8;
-    *(string **)(psVar18 + 4) = psVar4;
+    *(unsigned char **)(psVar18 + 4) = psVar4;
     local_2a0 = GetGlobalPoolAllocator();
     *(int *)(psVar18 + 0x18) = 0;
     *(int *)(psVar18 + 0x10) = 0;
     *(int *)(psVar18 + 0x14) = 0;
     *(int *)(psVar18 + 0xc) = local_2a0;
-    *(string **)(psVar18 + 0x20) = local_84c;
+    *(unsigned char **)(psVar18 + 0x20) = local_84c;
     psVar16 = (unsigned char *)(local_5c - 0x610c);
-    *(string **)(psVar18 + 0x24) = local_848;
-    *(string **)(psVar18 + 0x28) = local_844;
-    *(string **)(psVar18 + 0x2c) = local_840;
-    *(string **)(psVar18 + 0x30) = local_83c;
-    *(string **)(psVar18 + 0x34) = local_838;
-    *(string **)(psVar18 + 0x1c) = psVar16;
-    *(string **)(psVar18 + 0x38) = local_834;
-    *(string **)(psVar18 + 0x3c) = local_830;
+    *(unsigned char **)(psVar18 + 0x24) = local_848;
+    *(unsigned char **)(psVar18 + 0x28) = local_844;
+    *(unsigned char **)(psVar18 + 0x2c) = local_840;
+    *(unsigned char **)(psVar18 + 0x30) = local_83c;
+    *(unsigned char **)(psVar18 + 0x34) = local_838;
+    *(unsigned char **)(psVar18 + 0x1c) = psVar16;
+    *(unsigned char **)(psVar18 + 0x38) = local_834;
+    *(unsigned char **)(psVar18 + 0x3c) = local_830;
     uVar3 = *(uint *)(psVar18 + 0x40);
     uVar54 = (uint)local_82c & 0xfe000000;
     *(uint *)(psVar18 + 0x40) = uVar54 | uVar3 & 0x1ffffff;
@@ -4275,7 +4267,7 @@ LAB_97ba8824:
         std__string__string(psVar18,pcVar64,(unsigned char *)local_290);
         psVar4 = psVar18;
       }
-      *(string **)(pTVar15 + 0x10) = psVar4;
+      *(unsigned char **)(pTVar15 + 0x10) = psVar4;
     }
     local_850 = local_840;
     local_880 = *puVar52;
@@ -4322,7 +4314,7 @@ LAB_97ba8824:
       local_7dc = local_7fc;
       local_7d8 = local_7f8;
       if (local_7fc != (unsigned char *)0x0) {
-        local_838 = *(string **)(local_7fc + 8);
+        local_838 = *(unsigned char **)(local_7fc + 8);
         local_828 = (unsigned char *)TType__setStructSize((unsigned char *)&local_840);
         iVar55 = (**(code **)(*(int *)local_7dc + 0x18))(local_7dc);
         *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
@@ -4340,7 +4332,7 @@ LAB_97ba8824:
       }
       local_830 = psVar4;
       TType__getCompleteString();
-      local_84c[*(int *)(local_84c + -0xc)] = **(string **)(local_64 + -0x7cc4);
+      local_84c[*(int *)(local_84c + -0xc)] = **(unsigned char **)(local_64 + -0x7cc4);
       TParseContext__error
                 ((int)param_1,(char *)puVar52[-0x16],"cannot declare arrays of this type",
                  (char *)local_84c,"");
@@ -4419,7 +4411,7 @@ LAB_97ba8824:
         std__string__string(psVar18,pcVar64,(unsigned char *)local_260);
         psVar4 = psVar18;
       }
-      *(string **)(pTVar15 + 0x10) = psVar4;
+      *(unsigned char **)(pTVar15 + 0x10) = psVar4;
     }
     iVar55 = (**(code **)(*(int *)puVar52[-9] + 0x18))();
     if (iVar55 != 0) {
@@ -4536,7 +4528,7 @@ LAB_97bab5f4:
         std__string__string(psVar18,pcVar64,(unsigned char *)local_250);
         psVar4 = psVar18;
       }
-      *(string **)(pTVar15 + 0x10) = psVar4;
+      *(unsigned char **)(pTVar15 + 0x10) = psVar4;
     }
     local_870 = local_840;
     local_850 = local_840;
@@ -4582,7 +4574,7 @@ LAB_97bab5f4:
       local_7dc = local_7fc;
       local_7d8 = local_7f8;
       if (local_7fc != (unsigned char *)0x0) {
-        local_838 = *(string **)(local_7fc + 8);
+        local_838 = *(unsigned char **)(local_7fc + 8);
         local_828 = (unsigned char *)TType__setStructSize((unsigned char *)&local_840);
         iVar55 = (**(code **)(*(int *)local_7dc + 0x18))(local_7dc);
         *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
@@ -4600,7 +4592,7 @@ LAB_97bab5f4:
       }
       local_830 = psVar4;
       TType__getCompleteString();
-      local_84c[*(int *)(local_84c + -0xc)] = **(string **)(local_64 + -0x7cc4);
+      local_84c[*(int *)(local_84c + -0xc)] = **(unsigned char **)(local_64 + -0x7cc4);
       TParseContext__error
                 ((int)param_1,(char *)puVar52[-0x16],"cannot declare arrays of this type",
                  (char *)local_84c,"");
@@ -4675,7 +4667,7 @@ LAB_97bab5f4:
         std__string__string(psVar18,pcVar64,(unsigned char *)local_220);
         psVar4 = psVar18;
       }
-      *(string **)(pTVar15 + 0x10) = psVar4;
+      *(unsigned char **)(pTVar15 + 0x10) = psVar4;
     }
     iVar55 = (**(code **)(*(int *)puVar52[-9] + 0x18))();
     if (iVar55 != 0) {
@@ -4725,7 +4717,7 @@ LAB_97bab5f4:
     }
     iVar55 = TParseContext__executeInitializer
                        ((int)param_1,(unsigned char *)puVar52[-0x16],(unsigned char *)puVar52[-0x15],
-                        (unsigned char *)(puVar52 + -0x28),(TIntermNode **)puVar52[2]);
+                        (unsigned char *)(puVar52 + -0x28),(unsigned char **)puVar52[2]);
     if (iVar55 == 0) {
       if (local_80 == 0) {
         psVar4 = (unsigned char *)puVar52[-0x2a];
@@ -4733,7 +4725,7 @@ LAB_97bab5f4:
         psVar16 = local_750;
         break;
       }
-      pTVar23 = *(TIntermNode **)param_1;
+      pTVar23 = *(unsigned char **)param_1;
       pTVar28 = (unsigned char *)puVar52[-0x2a];
       uVar59 = local_80;
       goto LAB_97ba97d8;
@@ -4846,10 +4838,10 @@ LAB_97ba9a08:
     }
     iVar55 = TParseContext__executeInitializer
                        ((int)param_1,(unsigned char *)puVar52[-0x16],(unsigned char *)puVar52[-0x15],
-                        (unsigned char *)(puVar52 + -0x1d),(TIntermNode **)puVar52[2]);
+                        (unsigned char *)(puVar52 + -0x1d),(unsigned char **)puVar52[2]);
     if (iVar55 != 0) goto LAB_97bab1f4;
     if (local_7c != 0) {
-      pTVar23 = *(TIntermNode **)param_1;
+      pTVar23 = *(unsigned char **)param_1;
       uVar59 = local_7c;
       goto LAB_97bab0ec;
     }
@@ -5297,7 +5289,7 @@ LAB_97baa46c:
       std__string__string(psVar16,(char *)psVar4,(unsigned char *)local_210);
       psVar18 = psVar16;
     }
-    *(string **)(pTVar15 + 0x10) = psVar18;
+    *(unsigned char **)(pTVar15 + 0x10) = psVar18;
     psVar4 = local_83c + -4;
     local_200 = local_840;
     do {
@@ -5367,9 +5359,7 @@ LAB_97baa46c:
     psVar4 = (unsigned char *)(**(code **)(*piVar63 + 8))();
     std__string__string((unsigned char *)&local_1e0,psVar4);
     local_1d8 = piVar63;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_840);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840);
     local_850 = local_840;
     piVar63 = (int *)(local_1dc + -4);
     local_84c = local_83c;
@@ -5449,7 +5439,7 @@ LAB_97baa46c:
       std__string__string(psVar16,(char *)psVar4,(unsigned char *)local_1b0);
       psVar18 = psVar16;
     }
-    *(string **)(pTVar15 + 0x10) = psVar18;
+    *(unsigned char **)(pTVar15 + 0x10) = psVar18;
     psVar4 = local_83c + -4;
     local_1a0 = local_840;
     do {
@@ -5710,7 +5700,7 @@ LAB_97baadbc:
   case 0xb2:
     piVar63 = *(int **)((int)param_1 + 4);
     iVar55 = piVar63[1];
-    pTVar25 = *(TSymbolTableLevel **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
+    pTVar25 = *(unsigned char **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
     if (pTVar25 != (unsigned char *)0x0) {
       ((int (*)())TSymbolTableLevel___TSymbolTableLevel)(pTVar25);
       iVar55 = piVar63[1];
@@ -5731,7 +5721,7 @@ LAB_97baadbc:
     }
     break;
   case 0xb8:
-    pTVar23 = *(TIntermNode **)param_1;
+    pTVar23 = *(unsigned char **)param_1;
     uVar59 = puVar52[2];
 LAB_97bab0ec:
     psVar4 = (unsigned char *)TIntermediate__makeAggregate(pTVar23,uVar59);
@@ -5739,7 +5729,7 @@ LAB_97bab0ec:
     psVar16 = local_750;
     break;
   case 0xb9:
-    pTVar23 = *(TIntermNode **)param_1;
+    pTVar23 = *(unsigned char **)param_1;
     pTVar28 = (unsigned char *)puVar52[-9];
     uVar59 = puVar52[2];
     goto LAB_97ba97d8;
@@ -5780,7 +5770,7 @@ LAB_97bab0ec:
     }
     iVar55 = TParseContext__executeInitializer
                        ((int)param_1,(unsigned char *)puVar52[-0x16],(unsigned char *)puVar52[-0x15],
-                        (unsigned char *)(puVar52 + -0x1d),(TIntermNode **)puVar52[2]);
+                        (unsigned char *)(puVar52 + -0x1d),(unsigned char **)puVar52[2]);
     if (iVar55 == 0) goto switchD_97ba39c8_caseD_2;
 LAB_97bab1f4:
     TParseContext__recover();
@@ -5798,14 +5788,14 @@ LAB_97bab1f4:
   case 0xc2:
     piVar63 = *(int **)((int)param_1 + 4);
     iVar55 = piVar63[1];
-    pTVar25 = *(TSymbolTableLevel **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
+    pTVar25 = *(unsigned char **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
     if (pTVar25 != (unsigned char *)0x0) {
       ((int (*)())TSymbolTableLevel___TSymbolTableLevel)(pTVar25);
       iVar55 = piVar63[1];
     }
     piVar63[1] = iVar55 + -4;
     iVar55 = 1;
-    pTVar23 = *(TIntermNode **)param_1;
+    pTVar23 = *(unsigned char **)param_1;
     pTVar29 = (unsigned char *)puVar52[2];
     pTVar32 = (unsigned char *)puVar52[-0x14];
     goto LAB_97bab2b4;
@@ -5816,7 +5806,7 @@ LAB_97bab1f4:
     if (iVar55 != 0) {
       TParseContext__recover();
     }
-    pTVar23 = *(TIntermNode **)param_1;
+    pTVar23 = *(unsigned char **)param_1;
     pTVar29 = (unsigned char *)puVar52[-0x35];
     iVar55 = 0;
     pTVar32 = (unsigned char *)puVar52[-0x14];
@@ -5867,19 +5857,19 @@ LAB_97bab410:
   case 0xc6:
     piVar63 = *(int **)((int)param_1 + 4);
     iVar55 = piVar63[1];
-    pTVar25 = *(TSymbolTableLevel **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
+    pTVar25 = *(unsigned char **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
     if (pTVar25 != (unsigned char *)0x0) {
       ((int (*)())TSymbolTableLevel___TSymbolTableLevel)(pTVar25);
       iVar55 = piVar63[1];
     }
     piVar63[1] = iVar55 + -4;
-    local_878 = (unsigned char *)TIntermediate__makeAggregate(*(TIntermNode **)param_1,puVar52[-0x1f]);
+    local_878 = (unsigned char *)TIntermediate__makeAggregate(*(unsigned char **)param_1,puVar52[-0x1f]);
     iVar55 = TIntermediate__addLoop
-                       (*(TIntermNode **)param_1,(unsigned char *)puVar52[2],
+                       (*(unsigned char **)param_1,(unsigned char *)puVar52[2],
                         (unsigned char *)puVar52[-0x14],SUB41(puVar52[-0x13],0),1);
     local_878 = (unsigned char *)
                 TIntermediate__growAggregate
-                          (*(TIntermNode **)param_1,(unsigned char *)local_878,iVar55);
+                          (*(unsigned char **)param_1,(unsigned char *)local_878,iVar55);
     piVar63 = (int *)(**(code **)(*(int *)local_878 + 0x1c))();
     (**(code **)(*piVar63 + 0x60))(piVar63,1);
     iVar55 = *(int *)((int)param_1 + 0x20);
@@ -5932,7 +5922,7 @@ LAB_97bab424:
       (**(code **)(*(int *)puVar52[-9] + 0x38))(&local_850);
       bVar40 = false;
       if (((*(uint *)(iVar55 + 0x24) & 0x1fffe00) == ((uint)local_82c & 0x1fffe00)) &&
-         (*(string **)(iVar55 + 8) == local_848)) {
+         (*(unsigned char **)(iVar55 + 8) == local_848)) {
         bVar40 = true;
       }
       local_5c = -0x5847c8b4;
@@ -5969,9 +5959,9 @@ LAB_97bab644:
   case 0xd3:
     psVar4 = (unsigned char *)
              TIntermediate__growAggregate
-                       (*(TIntermNode **)param_1,(unsigned char *)puVar52[-9],puVar52[2]);
+                       (*(unsigned char **)param_1,(unsigned char *)puVar52[-9],puVar52[2]);
 LAB_97bab674:
-    *(string **)((int)param_1 + 0x10) = psVar4;
+    *(unsigned char **)((int)param_1 + 0x10) = psVar4;
     psVar18 = local_7f0;
     psVar16 = local_750;
     break;
@@ -5984,9 +5974,7 @@ LAB_97bab674:
     while( true ) {
       iVar62 = *(int *)(iVar55 + iVar6 * 4);
       iVar55 = 0;
-      std::
-      _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-      ::find((unsigned char *)local_320);
+      std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_320);
       if (local_320[0] != *(int *)(iVar62 + 4)) {
         iVar55 = *(int *)(local_320[0] + 0x18);
       }
@@ -6118,7 +6106,7 @@ LAB_97bab674:
     *(undefined4 *)(pTVar23 + 0x5c) = 0;
     *(undefined4 *)(pTVar23 + 0x54) = local_100;
     local_54 = -0x5847c8b4;
-    local_68 = &TType::vtable;
+    local_68 = &TType__vtable;
     for (iVar55 = 0; iVar55 < local_58[2] - local_58[1] >> 3; iVar55 = iVar55 + 1) {
       iVar62 = piVar63[4];
       iVar6 = iVar55 * 8;
@@ -6129,7 +6117,7 @@ LAB_97bab674:
                           (*(int *)param_1,(unsigned char *)0x0,(unsigned char *)&local_850,
                            *(int *)(iVar62 + iVar6 + 4));
         pTVar23 = (unsigned char *)
-                  TIntermediate__growAggregate(*(TIntermNode **)param_1,pTVar23,iVar6);
+                  TIntermediate__growAggregate(*(unsigned char **)param_1,pTVar23,iVar6);
         psVar4 = local_84c + -4;
         local_c0 = local_850;
         do {
@@ -6189,9 +6177,7 @@ LAB_97bab674:
         psVar4 = (unsigned char *)(**(code **)(*piVar24 + 8))();
         std__string__string((unsigned char *)&local_f0,psVar4);
         local_e8 = piVar24;
-        std::
-        _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-        ::insert_unique((unsigned char *)&local_840);
+        std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840);
         local_850 = local_840;
         piVar56 = (int *)(local_ec + -4);
         local_84c = local_83c;
@@ -6221,7 +6207,7 @@ LAB_97bab674:
                           (*(int *)param_1,(unsigned char *)piVar24[2],(unsigned char *)piVar24[1],
                            (int)(piVar24 + 3));
         pTVar23 = (unsigned char *)
-                  TIntermediate__growAggregate(*(TIntermNode **)param_1,pTVar23,iVar6);
+                  TIntermediate__growAggregate(*(unsigned char **)param_1,pTVar23,iVar6);
       }
     }
     TIntermediate__setAggregateOperator(*(undefined4 *)param_1,pTVar23,4,*puVar52);
@@ -6245,7 +6231,7 @@ LAB_97bab674:
     }
     piVar63 = *(int **)((int)param_1 + 4);
     iVar55 = piVar63[1];
-    pTVar25 = *(TSymbolTableLevel **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
+    pTVar25 = *(unsigned char **)(*piVar63 + ((iVar55 - *piVar63 & 0xfffffffcU) - 4));
     if (pTVar25 != (unsigned char *)0x0) {
       ((int (*)())TSymbolTableLevel___TSymbolTableLevel)(pTVar25);
       iVar55 = piVar63[1];
@@ -6253,7 +6239,7 @@ LAB_97bab674:
     piVar63[1] = iVar55 + -4;
     local_878 = (unsigned char *)
                 TIntermediate__growAggregate
-                          (*(TIntermNode **)param_1,(unsigned char *)puVar52[-0x14],puVar52[2]);
+                          (*(unsigned char **)param_1,(unsigned char *)puVar52[-0x14],puVar52[2]);
     TIntermediate__setAggregateOperator(*(undefined4 *)param_1,local_878,3,puVar52[-0x16]);
     iVar55 = (**(code **)(*(int *)puVar52[-0x12] + 8))();
     *(undefined1 *)(*(int *)(iVar55 + 4) + *(int *)(*(int *)(iVar55 + 4) + -0xc)) =
@@ -6314,9 +6300,7 @@ switchD_97ba39c8_caseD_0:
 LAB_97ba8338:
   iVar62 = *(int *)(iVar55 + iVar6 * 4);
   iVar55 = 0;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-  ::find((unsigned char *)local_320);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_320);
   if (local_320[0] != *(int *)(iVar62 + 4)) {
     iVar55 = *(int *)(local_320[0] + 0x18);
   }
@@ -6368,9 +6352,7 @@ LAB_97ba84b0:
   psVar4 = (unsigned char *)(**(code **)(*(int *)psVar18 + 8))(psVar18);
   std__string__string((unsigned char *)&local_310,psVar4);
   local_308 = psVar18;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-  ::insert_unique((unsigned char *)&local_840);
+  std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_840);
   paVar14 = (unsigned char *)(local_30c + -0xc);
   local_850 = local_840;
   piVar63 = (int *)(local_30c + -4);
@@ -6438,7 +6420,7 @@ LAB_97ba55dc:
     local_804 = (unsigned char *)0x0;
     local_800 = (unsigned char *)0x0;
     local_820 = psVar4;
-    uVar19 = TIntermediate__addConstantUnion(*(constUnion **)param_1,pTVar11,(int)&local_820);
+    uVar19 = TIntermediate__addConstantUnion(*(unsigned char **)param_1,pTVar11,(int)&local_820);
     local_820 = psVar4;
     psVar4 = (unsigned char *)
              TIntermediate__addIndex
@@ -6468,16 +6450,17 @@ LAB_97ba5548:
 }
 
 /* yylex @ 0x97bac120 (4128 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yylex(param_1, param_2)
-  unsigned char *param_1;
+  unsigned char * param_1;
   void *param_2;
 {
   int iVar1;
   byte *pbVar2;
-  string *psVar3;
+  unsigned char * psVar3;
   long lVar4;
   ulong uVar5;
-  string *psVar6;
+  unsigned char * psVar6;
   undefined4 uVar7;
   int iVar8;
   uint uVar9;
@@ -6924,8 +6907,8 @@ LAB_97bac330:
       std__string__string(psVar6,(char *)pbVar10,(unsigned char *)local_70);
       psVar3 = psVar6;
     }
-    *(string **)(param_1 + 4) = psVar3;
-    uVar7 = ((int (*)())PaIdentOrType)(psVar3,param_2,(TSymbol **)(param_1 + 8));
+    *(unsigned char **)(param_1 + 4) = psVar3;
+    uVar7 = ((int (*)())PaIdentOrType)(psVar3,param_2,(unsigned char **)(param_1 + 8));
     break;
   case 0x57:
     *(char **)param_1 = _yylineno;
@@ -7175,7 +7158,7 @@ LAB_97bac330:
       std__string__string(psVar6,(char *)pbVar10,(unsigned char *)local_60);
       psVar3 = psVar6;
     }
-    *(string **)(param_1 + 4) = psVar3;
+    *(unsigned char **)(param_1 + 4) = psVar3;
     uVar7 = 0x12f;
     break;
   case 0x8f:
@@ -7192,7 +7175,7 @@ LAB_97bac330:
     *pbVar13 = _yy_hold_char;
     if (*(int *)(_yy_current_buffer + 0x24) == 0) {
       _yy_n_chars = *(int *)(_yy_current_buffer + 0x10);
-      *(__sFILE **)_yy_current_buffer = _yyin;
+      *(unsigned char **)_yy_current_buffer = _yyin;
       *(int *)(_yy_current_buffer + 0x24) = 1;
     }
     if (_yy_c_buf_p <= (byte *)(*(int *)(_yy_current_buffer + 4) + _yy_n_chars)) {
@@ -7246,6 +7229,7 @@ LAB_97bad2c8:
   pbVar10 = _yytext;
   goto LAB_97bac2e4;
 }
+#endif
 
 /* yy_get_next_buffer @ 0x97bad390 (656 bytes) */
 int yy_get_next_buffer()
@@ -7407,6 +7391,7 @@ int yy_try_NUL_trans(param_1)
 }
 
 /* yyinput @ 0x97bad7f0 (272 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yyinput()
 {
   byte *pbVar1;
@@ -7445,10 +7430,11 @@ int yyinput()
   _yy_hold_char = *pbVar1;
   return (uint)bVar2;
 }
+#endif
 
 /* yyrestart @ 0x97bad900 (104 bytes) */
 int yyrestart(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   if (_yy_current_buffer == (unsigned char *)0x0) {
     _yy_current_buffer = (unsigned char *)((int (*)())yy_create_buffer)(_yyin,0x4000);
@@ -7459,8 +7445,9 @@ int yyrestart(param_1)
 }
 
 /* yy_switch_to_buffer @ 0x97bad968 (148 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yy_switch_to_buffer(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   if (_yy_current_buffer != param_1) {
     if (_yy_current_buffer != (unsigned char *)0x0) {
@@ -7474,8 +7461,10 @@ int yy_switch_to_buffer(param_1)
   }
   return;
 }
+#endif
 
 /* yy_load_buffer_state @ 0x97bad9fc (88 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int yy_load_buffer_state()
 {
   _yy_n_chars = _yy_current_buffer[4];
@@ -7485,13 +7474,14 @@ int yy_load_buffer_state()
   _yy_hold_char = *_yy_c_buf_p;
   return;
 }
+#endif
 
 /* yy_create_buffer @ 0x97bada54 (140 bytes) */
 int yy_create_buffer(param_1, param_2)
-  unsigned char *param_1;
+  unsigned char * param_1;
   int param_2;
 {
-  yy_buffer_state *pyVar1;
+  unsigned char * pyVar1;
   int iVar2;
   
   pyVar1 = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
@@ -7511,7 +7501,7 @@ int yy_create_buffer(param_1, param_2)
 
 /* yy_delete_buffer @ 0x97badae0 (124 bytes) */
 int yy_delete_buffer(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   if (param_1 != (unsigned char *)0x0) {
     if (param_1 == _yy_current_buffer) {
@@ -7528,19 +7518,19 @@ int yy_delete_buffer(param_1)
 
 /* yy_init_buffer @ 0x97badb5c (68 bytes) */
 int yy_init_buffer(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   ((int (*)())yy_flush_buffer)(param_1);
   *(undefined4 *)(param_1 + 0x18) = 0;
   *(undefined4 *)(param_1 + 0x20) = 1;
-  *(__sFILE **)param_1 = param_2;
+  *(unsigned char **)param_1 = param_2;
   return;
 }
 
 /* yy_flush_buffer @ 0x97badba0 (88 bytes) */
 int yy_flush_buffer(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   if (param_1 == (unsigned char *)0x0) {
     return;
@@ -7563,7 +7553,7 @@ int yy_scan_buffer(param_1, param_2)
   char *param_1;
   uint param_2;
 {
-  yy_buffer_state *pyVar1;
+  unsigned char * pyVar1;
   
   if (((param_2 < 2) || (param_1[param_2 - 2] != '\0')) || (param_1[param_2 - 1] != '\0')) {
     pyVar1 = (unsigned char *)0x0;
@@ -7683,7 +7673,7 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
   int *param_2;
   int param_3;
   int param_4;
-  unsigned char *param_5;
+  unsigned char * param_5;
 {
   undefined *puVar1;
   undefined *puVar2;
@@ -7695,7 +7685,7 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
   
   _ScanFromString(*param_1);
   uVar4 = 1;
-  *(TParseContext **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = param_5;
+  *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = param_5;
   if (param_3 != 0) {
     iVar6 = 0;
     ppcVar3 = param_1;
@@ -7775,11 +7765,11 @@ int PaReservedWord()
 
 /* PaIdentOrType @ 0x97bae0c4 (228 bytes) */
 int PaIdentOrType(param_1, param_2, param_3)
-  unsigned char *param_1;
-  unsigned char *param_2;
-  TSymbol **param_3;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char ** param_3;
 {
-  TSymbol *pTVar1;
+  unsigned char * pTVar1;
   undefined4 uVar2;
   int iVar3;
   int *piVar4;
@@ -7791,12 +7781,10 @@ int PaIdentOrType(param_1, param_2, param_3)
   iVar5 = (piVar4[1] - iVar3 >> 2) + -1;
   while( true ) {
     iVar3 = *(int *)(iVar3 + iVar5 * 4);
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::find((unsigned char *)local_30);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30);
     pTVar1 = (unsigned char *)0x0;
     if (local_30[0] != *(int *)(iVar3 + 4)) {
-      pTVar1 = *(TSymbol **)(local_30[0] + 0x18);
+      pTVar1 = *(unsigned char **)(local_30[0] + 0x18);
     }
     iVar5 = iVar5 + -1;
     if ((pTVar1 != (unsigned char *)0x0) || (iVar5 < 0)) break;
@@ -7818,7 +7806,7 @@ int PaIdentOrType(param_1, param_2, param_3)
 /* PaParseComment @ 0x97bae1a8 (228 bytes) */
 int PaParseComment(param_1, param_2)
   int *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   int iVar1;
   int iVar2;
@@ -8031,7 +8019,7 @@ int _StoreStr(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  string *psVar4;
+  unsigned char * psVar4;
   char in_RESERVE;
   byte in_cr0;
   undefined4 local_c0;
@@ -8152,7 +8140,7 @@ int _ResetTString()
   iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
   sVar2 = _strlen("");
   if (0x3ffffffc < sVar2) {
-    std____throw_length_error("basic_string::assign");
+    std____throw_length_error("basic_string__assign");
   }
   pcVar3 = *(char **)(iVar1 + 0x5c);
   if (((0 < *(int *)(pcVar3 + -4)) || ("" <= pcVar3)) || (pcVar3 + *(int *)(pcVar3 + -0xc) <= "")) {

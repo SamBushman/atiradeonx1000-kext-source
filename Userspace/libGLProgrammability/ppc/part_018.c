@@ -2109,14 +2109,14 @@ int _EmulateOp(param_1, param_2, param_3)
     *pfVar21 = 1.0;
     fVar7 = *pfVar22;
     fVar3 = fVar7;
-    if (fVar7 <= TAllocation::guardBlockSize) {
+    if (fVar7 <= TAllocation__guardBlockSize) {
       fVar7 = 0.0;
       fVar3 = local_60;
     }
     local_60 = fVar3;
     *(float *)((int)pvVar14 + 0x1c) = fVar7;
-    fVar7 = TAllocation::guardBlockSize;
-    if (TAllocation::guardBlockSize < *pfVar22) {
+    fVar7 = TAllocation__guardBlockSize;
+    if (TAllocation__guardBlockSize < *pfVar22) {
       dVar25 = (double)_pow((double)pfVar22[1],(double)pfVar22[3]);
       fVar7 = (float)dVar25;
     }
@@ -2166,8 +2166,8 @@ LAB_97c0d000:
     bVar6 = true;
     goto LAB_97c0d82c;
   case 7:
-    if (*pfVar22 <= TAllocation::guardBlockSize) {
-      if (TAllocation::guardBlockSize <= *pfVar22) {
+    if (*pfVar22 <= TAllocation__guardBlockSize) {
+      if (TAllocation__guardBlockSize <= *pfVar22) {
         fVar7 = 0.0;
       }
       else {
@@ -2178,8 +2178,8 @@ LAB_97c0d000:
       fVar7 = 1.0;
     }
     *pfVar21 = fVar7;
-    if (pfVar22[1] <= TAllocation::guardBlockSize) {
-      if (TAllocation::guardBlockSize <= pfVar22[1]) {
+    if (pfVar22[1] <= TAllocation__guardBlockSize) {
+      if (TAllocation__guardBlockSize <= pfVar22[1]) {
         uVar8 = 0;
       }
       else {
@@ -2190,8 +2190,8 @@ LAB_97c0d000:
       uVar8 = 0x3f800000;
     }
     *(undefined4 *)((int)pvVar14 + 0x1c) = uVar8;
-    if (pfVar22[2] <= TAllocation::guardBlockSize) {
-      if (TAllocation::guardBlockSize <= pfVar22[2]) {
+    if (pfVar22[2] <= TAllocation__guardBlockSize) {
+      if (TAllocation__guardBlockSize <= pfVar22[2]) {
         uVar8 = 0;
       }
       else {
@@ -2202,23 +2202,23 @@ LAB_97c0d000:
       uVar8 = 0x3f800000;
     }
     *(undefined4 *)((int)pvVar14 + 0x20) = uVar8;
-    if (TAllocation::guardBlockSize < pfVar22[3]) goto LAB_97c0d000;
-    if (TAllocation::guardBlockSize <= pfVar22[3]) goto LAB_97c0d124;
+    if (TAllocation__guardBlockSize < pfVar22[3]) goto LAB_97c0d000;
+    if (TAllocation__guardBlockSize <= pfVar22[3]) goto LAB_97c0d124;
     uVar8 = 0xbf800000;
     goto LAB_97c0d128;
   case 8:
-    if (((*pfVar22 == TAllocation::guardBlockSize) && (pfVar22[1] == TAllocation::guardBlockSize))
-       && (pfVar22[2] == TAllocation::guardBlockSize)) {
+    if (((*pfVar22 == TAllocation__guardBlockSize) && (pfVar22[1] == TAllocation__guardBlockSize))
+       && (pfVar22[2] == TAllocation__guardBlockSize)) {
 LAB_97c0d078:
       uStack_8c = 0;
-      if (pfVar22[3] == TAllocation::guardBlockSize) goto LAB_97c0d088;
+      if (pfVar22[3] == TAllocation__guardBlockSize) goto LAB_97c0d088;
     }
     uStack_8c = 1;
     goto LAB_97c0d088;
   case 9:
     uStack_8c = 0;
-    if (((*pfVar22 != TAllocation::guardBlockSize) && (pfVar22[1] != TAllocation::guardBlockSize))
-       && (pfVar22[2] != TAllocation::guardBlockSize)) goto LAB_97c0d078;
+    if (((*pfVar22 != TAllocation__guardBlockSize) && (pfVar22[1] != TAllocation__guardBlockSize))
+       && (pfVar22[2] != TAllocation__guardBlockSize)) goto LAB_97c0d078;
 LAB_97c0d088:
     uStack_8c = uStack_8c ^ 0x80000000;
     local_90 = 0x43300000;
@@ -2228,22 +2228,22 @@ LAB_97c0d214:
     goto LAB_97c0d71c;
   case 10:
     fVar7 = 1.0;
-    if (*pfVar22 != TAllocation::guardBlockSize) {
+    if (*pfVar22 != TAllocation__guardBlockSize) {
       fVar7 = 0.0;
     }
     *pfVar21 = fVar7;
     uVar8 = 0x3f800000;
-    if (pfVar22[1] != TAllocation::guardBlockSize) {
+    if (pfVar22[1] != TAllocation__guardBlockSize) {
       uVar8 = 0;
     }
     *(undefined4 *)((int)pvVar14 + 0x1c) = uVar8;
     uVar8 = 0x3f800000;
-    if (pfVar22[2] != TAllocation::guardBlockSize) {
+    if (pfVar22[2] != TAllocation__guardBlockSize) {
       uVar8 = 0;
     }
     *(undefined4 *)((int)pvVar14 + 0x20) = uVar8;
     uVar8 = 0x3f800000;
-    if (pfVar22[3] != TAllocation::guardBlockSize) {
+    if (pfVar22[3] != TAllocation__guardBlockSize) {
 LAB_97c0d124:
       uVar8 = 0;
     }
@@ -2282,7 +2282,7 @@ LAB_97c0d128:
     fVar7 = FLOAT_97c3ace0;
     if ((fVar3 <= FLOAT_97c3acdc) &&
        ((FLOAT_97c3ace0 <= fVar3 ||
-        (((fVar7 = FLOAT_97c3acdc, fVar3 < TAllocation::guardBlockSize &&
+        (((fVar7 = FLOAT_97c3acdc, fVar3 < TAllocation__guardBlockSize &&
           (fVar7 = FLOAT_97c3ace8, fVar3 <= FLOAT_97c3ace4)) &&
          (fVar7 = FLOAT_97c3ace4, FLOAT_97c3ace8 <= fVar3)))))) {
       fVar7 = FLOAT_97c3acd8 / fVar3;
@@ -2309,7 +2309,7 @@ LAB_97c0d128:
     dVar25 = (double)_exp2((double)pfVar22[3]);
     goto LAB_97c0d51c;
   case 0x12:
-    dVar25 = (double)TAllocation::guardBlockSize;
+    dVar25 = (double)TAllocation__guardBlockSize;
     uVar9 = *(uint *)(param_2 + 0x10) >> 0x1a & 3;
     if (uVar9 != 0xffffffff) {
       iVar18 = uVar9 + 1;
@@ -2333,32 +2333,32 @@ LAB_97c0d71c:
   case 0x13:
     if (1 < *param_1 - 0x8b30U) {
       dVar25 = (double)pfVar22[3];
-      if ((double)pfVar22[3] < (double)TAllocation::guardBlockSize) {
+      if ((double)pfVar22[3] < (double)TAllocation__guardBlockSize) {
         dVar25 = DOUBLE_97c30a48;
       }
       dVar25 = (double)_log2(dVar25);
       goto LAB_97c0d718;
     }
     dVar25 = (double)*pfVar22;
-    if ((double)*pfVar22 < (double)TAllocation::guardBlockSize) {
+    if ((double)*pfVar22 < (double)TAllocation__guardBlockSize) {
       dVar25 = DOUBLE_97c30a48;
     }
     dVar25 = (double)_log2(dVar25);
-    dVar23 = (double)TAllocation::guardBlockSize;
+    dVar23 = (double)TAllocation__guardBlockSize;
     *pfVar21 = (float)dVar25;
     dVar25 = (double)pfVar22[1];
     if ((double)pfVar22[1] < dVar23) {
       dVar25 = DOUBLE_97c30a48;
     }
     dVar25 = (double)_log2(dVar25);
-    dVar23 = (double)TAllocation::guardBlockSize;
+    dVar23 = (double)TAllocation__guardBlockSize;
     *(float *)((int)pvVar14 + 0x1c) = (float)dVar25;
     dVar25 = (double)pfVar22[2];
     if ((double)pfVar22[2] < dVar23) {
       dVar25 = DOUBLE_97c30a48;
     }
     dVar25 = (double)_log2(dVar25);
-    dVar23 = (double)TAllocation::guardBlockSize;
+    dVar23 = (double)TAllocation__guardBlockSize;
     *(float *)((int)pvVar14 + 0x20) = (float)dVar25;
     dVar25 = (double)pfVar22[3];
     if ((double)pfVar22[3] < dVar23) {
@@ -2372,7 +2372,7 @@ LAB_97c0d71c:
     dVar23 = (double)_floor();
     *pfVar21 = (float)dVar23;
     dVar24 = (double)_exp2((double)(float)dVar23);
-    dVar23 = (double)TAllocation::guardBlockSize;
+    dVar23 = (double)TAllocation__guardBlockSize;
     *(float *)((int)pvVar14 + 0x1c) = (float)(dVar25 / dVar24);
     if (dVar25 < dVar23) {
       dVar25 = DOUBLE_97c30a48;
@@ -2383,7 +2383,7 @@ LAB_97c0d51c:
     *(float *)((int)pvVar14 + 0x20) = (float)dVar25;
     goto LAB_97c0d82c;
   case 0x15:
-    dVar25 = (double)TAllocation::guardBlockSize;
+    dVar25 = (double)TAllocation__guardBlockSize;
     uVar9 = *(uint *)(param_2 + 0x10) >> 0x1a & 3;
     if (uVar9 != 0xffffffff) {
       iVar18 = uVar9 + 1;
@@ -2506,22 +2506,22 @@ LAB_97c0d600:
     if ((*(int *)((int)pvVar14 + 0xc) == 4) &&
        ((*(int *)(local_d0[0] + 0xc) == 1 || (*(int *)(local_d0[0] + 0xc) == 3)))) {
       fVar7 = 1.0;
-      if (*pfVar22 == TAllocation::guardBlockSize) {
+      if (*pfVar22 == TAllocation__guardBlockSize) {
         fVar7 = 0.0;
       }
       *pfVar21 = fVar7;
       uVar8 = 0x3f800000;
-      if (pfVar22[1] == TAllocation::guardBlockSize) {
+      if (pfVar22[1] == TAllocation__guardBlockSize) {
         uVar8 = 0;
       }
       *(undefined4 *)((int)pvVar14 + 0x1c) = uVar8;
       uVar8 = 0x3f800000;
-      if (pfVar22[2] == TAllocation::guardBlockSize) {
+      if (pfVar22[2] == TAllocation__guardBlockSize) {
         uVar8 = 0;
       }
       *(undefined4 *)((int)pvVar14 + 0x20) = uVar8;
       uVar8 = 0x3f800000;
-      if (pfVar22[3] == TAllocation::guardBlockSize) goto LAB_97c0d124;
+      if (pfVar22[3] == TAllocation__guardBlockSize) goto LAB_97c0d124;
       goto LAB_97c0d128;
     }
     goto switchD_97c0cae8_caseD_0;
@@ -2545,7 +2545,7 @@ LAB_97c0d600:
   }
   *(float *)((int)pvVar14 + 0x24) = (float)dVar25;
 LAB_97c0d82c:
-  fVar7 = TAllocation::guardBlockSize;
+  fVar7 = TAllocation__guardBlockSize;
   dVar25 = DOUBLE_97c30a78;
   if (!bVar6) goto LAB_97c0eea8;
   bVar6 = false;
@@ -2587,19 +2587,19 @@ LAB_97c0d82c:
     goto LAB_97c0e6f8;
   case 0x24:
     uVar9 = 0;
-    if ((*pfVar22 != TAllocation::guardBlockSize) && (*pfVar19 != TAllocation::guardBlockSize)) {
+    if ((*pfVar22 != TAllocation__guardBlockSize) && (*pfVar19 != TAllocation__guardBlockSize)) {
       uVar9 = 1;
     }
     uVar11 = 0;
     *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar3 = TAllocation::guardBlockSize;
+    fVar3 = TAllocation__guardBlockSize;
     if ((pfVar22[1] != fVar7) && (pfVar19[1] != fVar7)) {
       uVar11 = 1;
     }
     uVar9 = 0;
     *(float *)((int)pvVar14 + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar7 = TAllocation::guardBlockSize;
+    fVar7 = TAllocation__guardBlockSize;
     if ((pfVar22[2] != fVar3) && (pfVar19[2] != fVar3)) {
       uVar9 = 1;
     }
@@ -2614,19 +2614,19 @@ LAB_97c0de28:
     goto LAB_97c0de48;
   case 0x25:
     uVar9 = 0;
-    if ((*pfVar22 != TAllocation::guardBlockSize) || (*pfVar19 != TAllocation::guardBlockSize)) {
+    if ((*pfVar22 != TAllocation__guardBlockSize) || (*pfVar19 != TAllocation__guardBlockSize)) {
       uVar9 = 1;
     }
     uVar11 = 0;
     *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar3 = TAllocation::guardBlockSize;
+    fVar3 = TAllocation__guardBlockSize;
     if ((pfVar22[1] != fVar7) || (pfVar19[1] != fVar7)) {
       uVar11 = 1;
     }
     uVar9 = 0;
     *(float *)((int)pvVar14 + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar7 = TAllocation::guardBlockSize;
+    fVar7 = TAllocation__guardBlockSize;
     if ((pfVar22[2] != fVar3) || (pfVar19[2] != fVar3)) {
       uVar9 = 1;
     }
@@ -2638,16 +2638,16 @@ LAB_97c0de44:
     goto LAB_97c0de48;
   case 0x26:
     uVar9 = 0;
-    if (*pfVar22 == TAllocation::guardBlockSize) {
-      if (*pfVar19 != TAllocation::guardBlockSize) {
+    if (*pfVar22 == TAllocation__guardBlockSize) {
+      if (*pfVar19 != TAllocation__guardBlockSize) {
 LAB_97c0dd24:
         uVar9 = 1;
       }
     }
-    else if (*pfVar19 == TAllocation::guardBlockSize) goto LAB_97c0dd24;
+    else if (*pfVar19 == TAllocation__guardBlockSize) goto LAB_97c0dd24;
     uVar11 = 0;
     *pfVar21 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar3 = TAllocation::guardBlockSize;
+    fVar3 = TAllocation__guardBlockSize;
     if (pfVar22[1] == fVar7) {
       if (pfVar19[1] != fVar7) {
 LAB_97c0dd84:
@@ -2658,7 +2658,7 @@ LAB_97c0dd84:
     uVar9 = 0;
     *(float *)((int)pvVar14 + 0x1c) =
          (float)((double)CONCAT44(0x43300000,uVar11 ^ 0x80000000) - DOUBLE_97c30a58);
-    fVar7 = TAllocation::guardBlockSize;
+    fVar7 = TAllocation__guardBlockSize;
     if (pfVar22[2] == fVar3) {
       if (pfVar19[2] != fVar3) {
 LAB_97c0dde4:
@@ -2702,7 +2702,7 @@ LAB_97c0e4e0:
   case 0x2b:
     if (*param_1 - 0x8b30U < 2) {
       iVar18 = 0;
-      fVar7 = TAllocation::guardBlockSize;
+      fVar7 = TAllocation__guardBlockSize;
       for (iVar13 = (*(uint *)(param_2 + 0x10) >> 0x1a & 3) + 1; iVar13 != 0; iVar13 = iVar13 + -1)
       {
         fVar7 = (float)((double)(pfVar22[iVar18] - pfVar19[iVar18]) *
@@ -2777,7 +2777,7 @@ LAB_97c0e090:
     break;
   case 0x2f:
     iVar18 = 0;
-    fVar7 = TAllocation::guardBlockSize;
+    fVar7 = TAllocation__guardBlockSize;
     for (iVar13 = (*(uint *)(param_2 + 0x10) >> 0x1a & 3) + 1; iVar13 != 0; iVar13 = iVar13 + -1) {
       fVar7 = pfVar22[iVar18] * pfVar19[iVar18] + fVar7;
       iVar18 = iVar18 + 1;
@@ -3041,7 +3041,7 @@ LAB_97c0e6f8:
   }
 LAB_97c0e77c:
   fVar3 = FLOAT_97c3acd8;
-  fVar7 = TAllocation::guardBlockSize;
+  fVar7 = TAllocation__guardBlockSize;
   if (bVar6) goto LAB_97c0eea8;
   bVar2 = false;
   if ((((iVar12 != 3) || (bVar1)) || (pfVar22 == (float *)0x0)) ||
@@ -3054,7 +3054,7 @@ LAB_97c0e77c:
       fVar7 = pfVar15[iVar12] * pfVar19[iVar12] + fVar7;
       iVar12 = iVar12 + 1;
     }
-    if (TAllocation::guardBlockSize <= fVar7) {
+    if (TAllocation__guardBlockSize <= fVar7) {
       *pfVar21 = -*pfVar22;
       *(float *)((int)pvVar14 + 0x1c) = -pfVar22[1];
       *(float *)((int)pvVar14 + 0x20) = -pfVar22[2];
@@ -3159,7 +3159,7 @@ LAB_97c0eb30:
     dVar25 = (double)((*pfVar15 - *pfVar22) / (*pfVar19 - *pfVar22));
     if ((dVar25 <= DOUBLE_97c30a48) || (dVar25 < DOUBLE_97c30a60)) {
       if (dVar25 <= DOUBLE_97c30a48) {
-        dVar25 = (double)TAllocation::guardBlockSize;
+        dVar25 = (double)TAllocation__guardBlockSize;
       }
     }
     else {
@@ -3169,7 +3169,7 @@ LAB_97c0eb30:
     dVar25 = (double)((pfVar15[1] - pfVar22[1]) / (pfVar19[1] - pfVar22[1]));
     if ((dVar25 <= DOUBLE_97c30a48) || (dVar25 < DOUBLE_97c30a60)) {
       if (dVar25 <= DOUBLE_97c30a48) {
-        dVar25 = (double)TAllocation::guardBlockSize;
+        dVar25 = (double)TAllocation__guardBlockSize;
       }
     }
     else {
@@ -3180,7 +3180,7 @@ LAB_97c0eb30:
     dVar25 = (double)((pfVar15[2] - pfVar22[2]) / (pfVar19[2] - pfVar22[2]));
     if ((dVar25 <= DOUBLE_97c30a48) || (dVar25 < DOUBLE_97c30a60)) {
       if (dVar25 <= DOUBLE_97c30a48) {
-        dVar25 = (double)TAllocation::guardBlockSize;
+        dVar25 = (double)TAllocation__guardBlockSize;
       }
     }
     else {
@@ -3191,7 +3191,7 @@ LAB_97c0eb30:
     dVar25 = (double)((pfVar15[3] - pfVar22[3]) / (pfVar19[3] - pfVar22[3]));
     if ((dVar25 <= DOUBLE_97c30a48) || (dVar25 < DOUBLE_97c30a60)) {
       if (dVar25 <= DOUBLE_97c30a48) {
-        dVar25 = (double)TAllocation::guardBlockSize;
+        dVar25 = (double)TAllocation__guardBlockSize;
       }
     }
     else {
@@ -3207,7 +3207,7 @@ LAB_97c0ee74:
     goto LAB_97c0ee80;
   case 0x68:
     iVar12 = 0;
-    fVar3 = TAllocation::guardBlockSize;
+    fVar3 = TAllocation__guardBlockSize;
     for (iVar18 = (*(uint *)(param_2 + 0x10) >> 0x1a & 3) + 1; iVar18 != 0; iVar18 = iVar18 + -1) {
       fVar3 = pfVar22[iVar12] * pfVar19[iVar12] + fVar3;
       iVar12 = iVar12 + 1;
@@ -3215,7 +3215,7 @@ LAB_97c0ee74:
     fVar4 = *pfVar15;
     dVar25 = (double)(float)-((double)(fVar4 * fVar4) * (DOUBLE_97c30a60 - (double)(fVar3 * fVar3))
                              - DOUBLE_97c30a60);
-    if ((double)TAllocation::guardBlockSize <= dVar25) {
+    if ((double)TAllocation__guardBlockSize <= dVar25) {
       dVar25 = (double)_sqrt(dVar25);
       fVar7 = (float)((double)(fVar4 * fVar3) + dVar25);
       *pfVar21 = *pfVar15 * *pfVar22 - fVar7 * *pfVar19;
@@ -3224,7 +3224,7 @@ LAB_97c0ee74:
       fVar7 = *pfVar15 * pfVar22[3] - fVar7 * pfVar19[3];
       goto LAB_97c0ee74;
     }
-    *(float *)((int)pvVar14 + 0x24) = TAllocation::guardBlockSize;
+    *(float *)((int)pvVar14 + 0x24) = TAllocation__guardBlockSize;
     *pfVar21 = fVar7;
     *(float *)((int)pvVar14 + 0x1c) = fVar7;
     *(float *)((int)pvVar14 + 0x20) = fVar7;

@@ -21,7 +21,7 @@ int std__string__find_a7b7f060(param_1, param_2, param_3)
 
 /* std__string__find_a7b7f064 @ 0xa7b7f064 (1 bytes) */
 int std__string__find_a7b7f064(param_1, param_2)
-  unsigned char *param_1;
+  unsigned char * param_1;
   ulong param_2;
 {
                     
@@ -93,7 +93,7 @@ int std__string__rfind_a7b7f084(param_1, param_2, param_3)
 
 /* std__string__rfind_a7b7f088 @ 0xa7b7f088 (1 bytes) */
 int std__string__rfind_a7b7f088(param_1, param_2)
-  unsigned char *param_1;
+  unsigned char * param_1;
   ulong param_2;
 {
                     
@@ -163,7 +163,7 @@ int std__string__compare_a7b7f0a8(param_1)
 
 /* std__string__compare_a7b7f0ac @ 0xa7b7f0ac (1 bytes) */
 int std__string__compare_a7b7f0ac(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
                     
   halt_baddata();
@@ -200,9 +200,9 @@ int std__string__operator___a7b7f0bc(param_1)
 
 /* std__string___Alloc_hider___Alloc_hider_a7b7f0c0 @ 0xa7b7f0c0 (1 bytes) */
 int std__string___Alloc_hider___Alloc_hider_a7b7f0c0(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
                     
   halt_baddata();
@@ -210,9 +210,9 @@ int std__string___Alloc_hider___Alloc_hider_a7b7f0c0(this, param_1, param_2)
 
 /* std__string___Alloc_hider___Alloc_hider_a7b7f0c4 @ 0xa7b7f0c4 (1 bytes) */
 int std__string___Alloc_hider___Alloc_hider_a7b7f0c4(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
                     
   halt_baddata();
@@ -220,9 +220,9 @@ int std__string___Alloc_hider___Alloc_hider_a7b7f0c4(this, param_1, param_2)
 
 /* std__string___Alloc_hider___Alloc_hider_a7b7f0c8 @ 0xa7b7f0c8 (1 bytes) */
 int std__string___Alloc_hider___Alloc_hider_a7b7f0c8(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
                     
   halt_baddata();
@@ -271,7 +271,7 @@ int std__string___S_copy_chars_a7b7f0dc(param_1, param_2, param_3)
 
 /* std__string___Rep___M_dispose_a7b7f0e0 @ 0xa7b7f0e0 (1 bytes) */
 int std__string___Rep___M_dispose_a7b7f0e0(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
                     
   halt_baddata();
@@ -307,8 +307,8 @@ int std__string___Rep___M_set_sharable_a7b7f0f0()
 
 /* std__string___Rep___M_grab_a7b7f0f4 @ 0xa7b7f0f4 (1 bytes) */
 int std__string___Rep___M_grab_a7b7f0f4(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
                     
   halt_baddata();
@@ -324,7 +324,7 @@ int std__string___Rep__operator___a7b7f0f8(param_1)
 
 /* std__string__swap_a7b7f0fc @ 0xa7b7f0fc (1 bytes) */
 int std__string__swap_a7b7f0fc(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
                     
   halt_baddata();
@@ -405,7 +405,7 @@ int std__string__replace_a7b7f120(param_1, param_2, param_3)
 int std__string__replace_a7b7f124(param_1, param_2, param_3)
   ulong param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
                     
   halt_baddata();
@@ -413,9 +413,9 @@ int std__string__replace_a7b7f124(param_1, param_2, param_3)
 
 /* std__string__string_a7b7f128 @ 0xa7b7f128 (1 bytes) */
 int std__string__string_a7b7f128(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
                     
   halt_baddata();
@@ -423,10 +423,10 @@ int std__string__string_a7b7f128(this, param_1, param_2)
 
 /* std__string__string_a7b7f12c @ 0xa7b7f12c (1 bytes) */
 int std__string__string_a7b7f12c(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
   ulong param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
                     
   halt_baddata();
@@ -434,8 +434,8 @@ int std__string__string_a7b7f12c(this, param_1, param_2, param_3)
 
 /* std__string__string_a7b7f130 @ 0xa7b7f130 (1 bytes) */
 int std__string__string_a7b7f130(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
                     
   halt_baddata();
@@ -443,8 +443,8 @@ int std__string__string_a7b7f130(this, param_1)
 
 /* std__string__string_a7b7f134 @ 0xa7b7f134 (1 bytes) */
 int std__string__string_a7b7f134(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
                     
   halt_baddata();
@@ -452,8 +452,8 @@ int std__string__string_a7b7f134(this, param_1)
 
 /* std__string__string_a7b7f138 @ 0xa7b7f138 (1 bytes) */
 int std__string__string_a7b7f138(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
   ulong param_3;
 {
@@ -463,11 +463,11 @@ int std__string__string_a7b7f138(this, param_1, param_2, param_3)
 
 /* std__string__string_a7b7f13c @ 0xa7b7f13c (1 bytes) */
 int std__string__string_a7b7f13c(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
   ulong param_3;
-  unsigned char *param_4;
+  unsigned char * param_4;
 {
                     
   halt_baddata();
@@ -475,10 +475,10 @@ int std__string__string_a7b7f13c(this, param_1, param_2, param_3, param_4)
 
 /* std__string__string_a7b7f140 @ 0xa7b7f140 (1 bytes) */
 int std__string__string_a7b7f140(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   int param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
 {
                     
   halt_baddata();
@@ -486,7 +486,7 @@ int std__string__string_a7b7f140(this, param_1, param_2, param_3)
 
 /* std__string__string_a7b7f144 @ 0xa7b7f144 (1 bytes) */
 int std__string__string_a7b7f144(this)
-  unsigned char *this;
+  unsigned char * this;
 {
                     
   halt_baddata();

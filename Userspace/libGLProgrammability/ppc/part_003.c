@@ -99,7 +99,7 @@ switchD_97b8ae00_caseD_10b:
 
 /* TBuiltIns__getNumStringArrays @ 0x97b8aed4 (20 bytes) */
 int TBuiltIns__getNumStringArrays(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return 6 - (uint)(param_1 == 1);
@@ -107,7 +107,7 @@ int TBuiltIns__getNumStringArrays(this, param_1)
 
 /* TBuiltIns__getStringArray @ 0x97b8aee8 (204 bytes) */
 int TBuiltIns__getStringArray(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -156,7 +156,7 @@ int TBuiltIns__getStringArray(this, param_1, param_2)
 
 /* TBuiltIns__getStringSizeArray @ 0x97b8afb4 (204 bytes) */
 int TBuiltIns__getStringSizeArray(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -205,7 +205,7 @@ int TBuiltIns__getStringSizeArray(this, param_1, param_2)
 
 /* TBuiltIns__getNumStrings @ 0x97b8b080 (148 bytes) */
 int TBuiltIns__getNumStrings(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -260,14 +260,15 @@ int TBuiltIns__initialize()
 
 /* TBuiltIns__initialize_97b8b118 @ 0x97b8b118 (4 bytes) */
 int TBuiltIns__initialize_97b8b118(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   return;
 }
 
 /* IdentifyBuiltIns @ 0x97b8b11c (5284 bytes) */
-void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
-
+int IdentifyBuiltIns(param_1, param_2)
+  int param_1;
+  undefined4 *param_2;
 {
   int iVar1;
   char *pcVar2;
@@ -276,8 +277,8 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
   int iVar5;
   ulong uVar6;
   int *piVar7;
-  string *psVar8;
-  string *psVar9;
+  unsigned char * psVar8;
+  unsigned char * psVar9;
   undefined4 uVar10;
   undefined4 uVar11;
   undefined *puVar12;
@@ -469,9 +470,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_150,psVar9);
     local_148 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_160);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_160);
     local_170 = local_160;
     piVar7 = (int *)(local_14c + -4);
     local_16c = local_15c;
@@ -538,9 +537,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_d0,psVar9);
     local_c8 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_e0);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_e0);
     local_f0 = local_e0;
     piVar7 = (int *)(local_cc + -4);
     local_ec = local_dc;
@@ -608,9 +605,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_50,psVar9);
     local_48 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_60);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_60);
     local_70 = local_60;
     piVar7 = (int *)(local_4c + -4);
     local_6c = local_5c;
@@ -680,9 +675,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_350,psVar9);
     local_348 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_360);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_360);
     local_370 = local_360;
     piVar7 = (int *)(local_34c + -4);
     local_36c = local_35c;
@@ -750,9 +743,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_2d0,psVar9);
     local_2c8 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_2e0);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_2e0);
     local_2f0 = local_2e0;
     piVar7 = (int *)(local_2cc + -4);
     local_2ec = local_2dc;
@@ -820,9 +811,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_250,psVar9);
     local_248 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_260);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_260);
     local_270 = local_260;
     piVar7 = (int *)(local_24c + -4);
     local_26c = local_25c;
@@ -889,9 +878,7 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
     psVar9 = (unsigned char *)(**(code **)(*piVar7 + 8))(piVar7);
     std__string__string((unsigned char *)&local_1d0,psVar9);
     local_1c8 = piVar7;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_1e0);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_1e0);
     local_1f0 = local_1e0;
     piVar7 = (int *)(local_1cc + -4);
     local_1ec = local_1dc;
@@ -1057,16 +1044,18 @@ void IdentifyBuiltIns_97b8c5c0(int param_1,undefined4 *param_2)
 }
 
 /* IdentifyBuiltIns_97b8c5c0 @ 0x97b8c5c0 (600 bytes) */
-void IdentifyBuiltIns_97b8c5c0_97b8c5c0(int param_1,int param_2,int param_3)
-
+int IdentifyBuiltIns_97b8c5c0(param_1, param_2, param_3)
+  int param_1;
+  int param_2;
+  int param_3;
 {
   int iVar1;
   char *pcVar2;
   uint uVar3;
   ulong uVar4;
   int *piVar5;
-  string *this;
-  string *psVar6;
+  unsigned char * this;
+  unsigned char * psVar6;
   int iVar7;
   char in_RESERVE;
   byte bVar8;
@@ -1121,9 +1110,7 @@ void IdentifyBuiltIns_97b8c5c0_97b8c5c0(int param_1,int param_2,int param_3)
     psVar6 = (unsigned char *)(**(code **)(*piVar5 + 8))(piVar5);
     std__string__string((unsigned char *)&local_40,psVar6);
     local_38 = piVar5;
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>
-    ::insert_unique((unsigned char *)&local_50);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&local_50);
     local_60 = local_50;
     piVar5 = (int *)(local_3c + -4);
     local_5c = local_4c;
@@ -1144,14 +1131,16 @@ void IdentifyBuiltIns_97b8c5c0_97b8c5c0(int param_1,int param_2,int param_3)
 }
 
 /* GetPreprocessorBuiltinString @ 0x97b8c818 (28 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int GetPreprocessorBuiltinString()
 {
-  return ((int (*)())GetPreprocessorBuiltinString)()::PreprocessorBuiltinString;
+  return ((int (*)())GetPreprocessorBuiltinString)()PreprocessorBuiltinString;
 }
+#endif
 
 /* TInfoSinkBase__append @ 0x97b8c834 (196 bytes) */
 int TInfoSinkBase__append(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   uint uVar1;
@@ -1176,7 +1165,7 @@ int TInfoSinkBase__append(this, param_1)
 
 /* TInfoSinkBase__append_97b8c8f8 @ 0x97b8c8f8 (180 bytes) */
 int TInfoSinkBase__append_97b8c8f8(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
 {
@@ -1200,8 +1189,8 @@ int TInfoSinkBase__append_97b8c8f8(this, param_1, param_2)
 
 /* TInfoSinkBase__append_97b8c9ac @ 0x97b8c9ac (204 bytes) */
 int TInfoSinkBase__append_97b8c9ac(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined *puVar1;
   uint uVar2;
@@ -1226,8 +1215,8 @@ int TInfoSinkBase__append_97b8c9ac(this, param_1)
 
 /* TInfoSinkBase__append_97b8ca78 @ 0x97b8ca78 (244 bytes) */
 int TInfoSinkBase__append_97b8ca78(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined *puVar1;
   uint uVar2;
@@ -1259,10 +1248,10 @@ int TInfoSinkBase__append_97b8ca78(this, param_1)
 
 /* TIntermediate__addSymbol @ 0x97b8cb6c (376 bytes) */
 int TIntermediate__addSymbol(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
   int param_4;
 {
   uint uVar1;
@@ -1339,12 +1328,12 @@ int TIntermediate__addSymbol(this, param_1, param_2, param_3, param_4)
 
 /* TIntermediate__addBinaryMath @ 0x97b8cce4 (2288 bytes) */
 int TIntermediate__addBinaryMath(this, param_2, param_3, param_4, param_5, param_6)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int *param_3;
   int *param_4;
   int param_5;
-  unsigned char *param_6;
+  unsigned char * param_6;
 {
   bool bVar1;
   bool bVar2;
@@ -1357,12 +1346,12 @@ int TIntermediate__addBinaryMath(this, param_2, param_3, param_4, param_5, param
   int *piVar9;
   int iVar10;
   int iVar11;
-  TIntermConstantUnion *pTVar12;
+  unsigned char * pTVar12;
   int *piVar13;
-  TIntermConstantUnion *pTVar14;
-  TIntermAggregate *pTVar15;
-  TIntermConstantUnion *pTVar16;
-  TIntermConstantUnion *pTVar17;
+  unsigned char * pTVar14;
+  unsigned char * pTVar15;
+  unsigned char * pTVar16;
+  unsigned char * pTVar17;
   undefined4 uVar18;
   undefined4 uVar19;
   code *pcVar20;
@@ -1659,7 +1648,7 @@ LAB_97b8d618:
 
 /* TIntermediate__addAssign @ 0x97b8d63c (640 bytes) */
 int TIntermediate__addAssign(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int *param_3;
   int *param_4;
@@ -1670,7 +1659,7 @@ int TIntermediate__addAssign(this, param_2, param_3, param_4, param_5)
   ulong uVar3;
   int *piVar4;
   int iVar5;
-  TIntermConstantUnion *pTVar6;
+  unsigned char * pTVar6;
   int *piVar7;
   undefined **local_50;
   undefined4 local_4c;
@@ -1789,11 +1778,11 @@ int TIntermediate__addIndex(param_1, param_2, param_3, param_4, param_5)
 
 /* TIntermediate__addUnaryMath @ 0x97b8da88 (1548 bytes) */
 int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int *param_3;
   int param_4;
-  unsigned char *param_5;
+  unsigned char * param_5;
 {
   bool bVar1;
   bool bVar2;
@@ -1805,8 +1794,8 @@ int TIntermediate__addUnaryMath(this, param_2, param_3, param_4, param_5)
   uint uVar8;
   uint uVar9;
   int iVar10;
-  TIntermConstantUnion *pTVar11;
-  TIntermAggregate *pTVar12;
+  unsigned char * pTVar11;
+  unsigned char * pTVar12;
   int *piVar13;
   ulong uVar14;
   int *piVar15;
@@ -2149,7 +2138,7 @@ int TIntermediate__setAggregateOperator(param_1_00, param_1, param_3, param_4)
 
 /* TIntermediate__addConversion @ 0x97b8e624 (2944 bytes) */
 int TIntermediate__addConversion(this, param_2, param_3, param_4)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
   int *param_3;
   int *param_4;
@@ -2160,7 +2149,7 @@ int TIntermediate__addConversion(this, param_2, param_3, param_4)
   uint uVar4;
   int *piVar5;
   ulong uVar6;
-  constUnion *pcVar7;
+  unsigned char * pcVar7;
   int iVar8;
   undefined4 uVar9;
   uint uVar10;
@@ -2488,9 +2477,9 @@ LAB_97b8f048:
 
 /* TIntermediate__growAggregate @ 0x97b8f36c (760 bytes) */
 int TIntermediate__growAggregate(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   undefined *puVar1;
@@ -2503,8 +2492,8 @@ int TIntermediate__growAggregate(this, param_1, param_2, param_3)
   undefined4 *puVar8;
   char in_RESERVE;
   byte in_cr0;
-  TIntermNode *pTStack0000001c;
-  TIntermNode *pTStack00000020;
+  unsigned char * pTStack0000001c;
+  unsigned char * pTStack00000020;
   
   if ((param_1 == (unsigned char *)0x0) && (param_2 == (unsigned char *)0x0)) {
     return (int *)0x0;
@@ -2603,8 +2592,8 @@ LAB_97b8f5cc:
 
 /* TIntermediate__makeAggregate @ 0x97b8f664 (632 bytes) */
 int TIntermediate__makeAggregate(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   int param_2;
 {
   undefined *puVar1;
@@ -2618,7 +2607,7 @@ int TIntermediate__makeAggregate(this, param_1, param_2)
   code *pcVar9;
   char in_RESERVE;
   byte in_cr0;
-  TIntermNode *pTStack0000001c;
+  unsigned char * pTStack0000001c;
   
   piVar4 = (int *)0x0;
   if (param_1 != (unsigned char *)0x0) {
@@ -2763,13 +2752,13 @@ int TIntermediate__addSelection(param_1, param_2, param_3, param_4, param_5)
 
 /* TIntermediate__addComma @ 0x97b8fae0 (348 bytes) */
 int TIntermediate__addComma(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   bool bVar1;
-  TIntermTyped *pTVar2;
+  unsigned char * pTVar2;
   int *piVar3;
   undefined **local_b0 [9];
   uint local_8c;
@@ -2802,10 +2791,10 @@ int TIntermediate__addComma(this, param_1, param_2, param_3)
 
 /* TIntermediate__addSelection_97b8fc3c @ 0x97b8fc3c (628 bytes) */
 int TIntermediate__addSelection_97b8fc3c(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char * param_3;
   int param_4;
 {
   uint uVar1;
@@ -2814,10 +2803,10 @@ int TIntermediate__addSelection_97b8fc3c(this, param_1, param_2, param_3, param_
   uint uVar4;
   undefined *puVar5;
   uint uVar6;
-  TIntermTyped *pTVar7;
+  unsigned char * pTVar7;
   int iVar8;
   ulong uVar9;
-  TIntermTyped *pTVar10;
+  unsigned char * pTVar10;
   undefined **local_60;
   int local_5c;
   int local_58;
@@ -2870,10 +2859,10 @@ int TIntermediate__addSelection_97b8fc3c(this, param_1, param_2, param_3, param_
     puVar5 = PTR_vtable_a7b7c0cc;
     *(uint *)(pTVar10 + 0x2c) =
          (local_3c >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar6 & 0x1ff;
-    *(TIntermTyped **)(pTVar10 + 0x30) = param_1;
+    *(unsigned char **)(pTVar10 + 0x30) = param_1;
     *(undefined **)pTVar10 = puVar5 + 8;
-    *(TIntermTyped **)(pTVar10 + 0x34) = param_2;
-    *(TIntermTyped **)(pTVar10 + 0x38) = pTVar7;
+    *(unsigned char **)(pTVar10 + 0x34) = param_2;
+    *(unsigned char **)(pTVar10 + 0x38) = pTVar7;
     local_60 = &PTR__TType_a7b7cff8;
     (**(code **)(*(int *)pTVar10 + 4))(pTVar10,param_4);
   }
@@ -2889,9 +2878,9 @@ int TIntermediate__addSelection_97b8fc3c(this, param_1, param_2, param_3, param_
 
 /* TIntermediate__addConstantUnion @ 0x97b8feb0 (300 bytes) */
 int TIntermediate__addConstantUnion(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   uint uVar1;
@@ -2954,8 +2943,8 @@ int TIntermediate__addConstantUnion(this, param_1, param_2, param_3)
 
 /* TIntermediate__addSwizzle @ 0x97b8ffdc (744 bytes) */
 int TIntermediate__addSwizzle(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   int param_2;
 {
   undefined *puVar1;
@@ -2965,11 +2954,11 @@ int TIntermediate__addSwizzle(this, param_1, param_2)
   ulong uVar5;
   int *piVar6;
   int iVar7;
-  constUnion *pcVar8;
+  unsigned char * pcVar8;
   undefined4 *puVar9;
   code *pcVar10;
   int iVar11;
-  TVectorFields *pTVar12;
+  unsigned char * pTVar12;
   char in_RESERVE;
   byte in_cr0;
   undefined **local_b0;
@@ -3086,10 +3075,10 @@ int TIntermediate__addSwizzle(this, param_1, param_2)
 
 /* TIntermediate__addLoop @ 0x97b902c4 (140 bytes) */
 int TIntermediate__addLoop(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char * param_3;
   int param_4;
   int param_5;
 {
@@ -3115,7 +3104,7 @@ int TIntermediate__addLoop(this, param_1, param_2, param_3, param_4, param_5)
 
 /* TIntermediate__addBranch @ 0x97b90350 (12 bytes) */
 int TIntermediate__addBranch(this, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -3164,8 +3153,8 @@ int TIntermediate__postProcess(param_1, param_2)
 
 /* TIntermediate__remove @ 0x97b90438 (12 bytes) */
 int TIntermediate__remove(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if (param_1 == (unsigned char *)0x0) {
     return;
@@ -3176,7 +3165,7 @@ int TIntermediate__remove(this, param_1)
 
 /* TIntermOperator__modifiesState @ 0x97b90444 (48 bytes) */
 int TIntermOperator__modifiesState(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -3189,14 +3178,14 @@ int TIntermOperator__modifiesState(this)
 
 /* TIntermOperator__isConstructor @ 0x97b90474 (24 bytes) */
 int TIntermOperator__isConstructor(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(int *)(this + 0x30) - 0x66U < 0x10;
 }
 
 /* TIntermUnary__promote @ 0x97b9048c (304 bytes) */
 int TIntermUnary__promote(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   bool bVar1;
   int iVar2;
@@ -3244,8 +3233,8 @@ LAB_97b90544:
 
 /* TIntermBinary__promote @ 0x97b905bc (3124 bytes) */
 int TIntermBinary__promote(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   bool bVar1;
   undefined4 uVar2;
@@ -3576,9 +3565,9 @@ switchD_97b909e0_caseD_18:
 
 /* compareStructure @ 0x97b915d4 (336 bytes) */
 int compareStructure(param_1, param_2, param_3, param_4)
-  unsigned char *param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char * param_3;
   int *param_4;
 {
   int iVar1;
@@ -3624,7 +3613,7 @@ LAB_97b916c8:
         else {
           if (iVar3 == 3) goto LAB_97b916a8;
           if ((iVar3 == 0xe) &&
-             (iVar3 = ((int (*)())compareStructure)(*(TType **)(*(int *)(iVar6 + 4) + iVar1),param_2,param_3,
+             (iVar3 = ((int (*)())compareStructure)(*(unsigned char **)(*(int *)(iVar6 + 4) + iVar1),param_2,param_3,
                                        param_4), iVar3 == 0)) {
             return 0;
           }
@@ -3642,9 +3631,9 @@ LAB_97b916c8:
 
 /* TIntermConstantUnion__fold @ 0x97b91724 (11632 bytes) */
 int TIntermConstantUnion__fold(this, param_2, param_3, param_4, param_5)
-  unsigned char *this;
+  unsigned char * this;
   int param_2;
-  unsigned char *param_3;
+  unsigned char * param_3;
   undefined4 param_4;
   int param_5;
 {
@@ -3655,12 +3644,12 @@ int TIntermConstantUnion__fold(this, param_2, param_3, param_4, param_5)
   float fVar5;
   uint uVar6;
   uint uVar7;
-  constUnion *pcVar8;
+  unsigned char * pcVar8;
   uint uVar9;
   undefined4 *puVar10;
   int iVar11;
   int iVar12;
-  TIntermConstantUnion *pTVar13;
+  unsigned char * pTVar13;
   int *piVar14;
   uint *puVar15;
   ulong uVar16;
@@ -3670,7 +3659,7 @@ int TIntermConstantUnion__fold(this, param_2, param_3, param_4, param_5)
   int iVar20;
   undefined *puVar21;
   float *pfVar22;
-  constUnion *pcVar23;
+  unsigned char * pcVar23;
   int iVar24;
   undefined **ppuVar25;
   int iVar26;
@@ -3723,7 +3712,7 @@ int TIntermConstantUnion__fold(this, param_2, param_3, param_4, param_5)
   int local_50;
   int local_4c;
   
-  pcVar23 = *(constUnion **)(this + 0x30);
+  pcVar23 = *(unsigned char **)(this + 0x30);
   if (param_3 == (unsigned char *)0x0) {
     iVar26 = 0;
     (**(code **)(*(int *)this + 0x4c))();
@@ -4554,7 +4543,7 @@ LAB_97b953d4:
       pTVar13 = (unsigned char *)TPoolAllocator__allocate(uVar16);
       (**(code **)(*piVar14 + 0x38))(&local_170,piVar14);
       *(undefined ***)pTVar13 = &PTR_getLine_a7b7cf90;
-      puVar21 = &TType::vtable;
+      puVar21 = &TType__vtable;
       *(int *)(pTVar13 + 4) = 0;
       goto LAB_97b946a4;
     case 0x2a:
@@ -5047,13 +5036,13 @@ LAB_97b951c0:
 
 /* TIntermediate__changeAggrToTempConst @ 0x97b95c0c (484 bytes) */
 int TIntermediate__changeAggrToTempConst(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   ulong uVar1;
-  constUnion *pcVar2;
+  unsigned char * pcVar2;
   int iVar3;
   int *piVar4;
   undefined **local_60 [15];
@@ -5092,14 +5081,14 @@ LAB_97b95d90:
 
 /* TIntermediate__copyConstUnion @ 0x97b95df0 (336 bytes) */
 int TIntermediate__copyConstUnion(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int iVar2;
   ulong uVar3;
   int iVar4;
-  TIntermConstantUnion *pTVar5;
+  unsigned char * pTVar5;
   int iVar6;
   int iVar7;
   undefined **local_b0 [9];
@@ -5149,14 +5138,14 @@ int TIntermediate__copyConstUnion(this, param_1)
 
 /* TIntermediate__promoteConstantUnion @ 0x97b95f40 (1080 bytes) */
 int TIntermediate__promoteConstantUnion(this, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   uint param_2;
   int *param_3;
 {
   int iVar1;
   uint uVar2;
   ulong uVar3;
-  constUnion *pcVar4;
+  unsigned char * pcVar4;
   int iVar5;
   int iVar6;
   double dVar7;
@@ -5303,12 +5292,12 @@ LAB_97b9641c:
 
 /* TIntermediate__removeChildNode @ 0x97b964e8 (824 bytes) */
 int TIntermediate__removeChildNode(this, param_1, param_2, param_3, param_4, param_5)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int *param_3;
-  unsigned char *param_4;
-  unsigned char *param_5;
+  unsigned char * param_4;
+  unsigned char * param_5;
 {
   uint uVar1;
   uint uVar2;
@@ -5407,8 +5396,7 @@ int TIntermediate__removeChildNode(this, param_1, param_2, param_3, param_4, par
       }
     }
     else {
-      std::vector<TIntermNode*,pool_allocator<TIntermNode*>>::
-      _M_range_insert<__gnu_cxx::__normal_iterator<TIntermNode**,std::vector<TIntermNode*,pool_allocator<TIntermNode*>>>>
+      std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____
                 (param_1,*(undefined4 *)param_4,*(int *)(iVar8 + 4),*(int *)(iVar8 + 8),0);
     }
     iVar7 = (*param_3 + (*(int *)(param_1 + 8) - *(int *)(param_1 + 4) >> 2)) -
@@ -5425,16 +5413,16 @@ int TIntermediate__removeChildNode(this, param_1, param_2, param_3, param_4, par
 
 /* TIntermediate__removeChildNode_97b96820 @ 0x97b96820 (496 bytes) */
 int TIntermediate__removeChildNode_97b96820(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   undefined4 *puVar1;
   int iVar2;
   int iVar3;
   int *piVar4;
-  TVector *pTVar5;
+  unsigned char * pTVar5;
   int iVar6;
   int iVar7;
   undefined1 auStack_30 [20];
@@ -5497,10 +5485,10 @@ int TIntermediate__removeChildNode_97b96820(this, param_1, param_2, param_3)
 
 /* TIntermediate__removeMatrixConstNode @ 0x97b96a10 (776 bytes) */
 int TIntermediate__removeMatrixConstNode(this, param_1, param_2, param_3, param_4)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
+  unsigned char * param_3;
   int param_4;
 {
   uint uVar1;
@@ -5617,11 +5605,10 @@ LAB_97b96b5c:
 
 /* TIntermAggregate__addToPragmaTable @ 0x97b96d18 (184 bytes) */
 int TIntermAggregate__addToPragmaTable(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
-  _Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>
-  *this_00;
+  unsigned char * this_00;
   ulong uVar1;
   int *piVar2;
   int iVar3;
@@ -5643,18 +5630,16 @@ int TIntermAggregate__addToPragmaTable(this, param_1)
   *(int *)(*(int *)(this_00 + 4) + 4) = iVar3;
   *(int *)(*(int *)(this_00 + 4) + 8) = *(int *)(this_00 + 4);
   *(int *)(*(int *)(this_00 + 4) + 0xc) = *(int *)(this_00 + 4);
-  *(_Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>
+  *(unsigned char
     **)(this + 0x68) = this_00;
-  std::
-  _Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>
-  ::operator=(this_00,(unsigned char *)param_1);
+  std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator=(this_00,(unsigned char *)param_1);
   return;
 }
 
 /* TType__getCompleteString @ 0x97b96dd0 (276 bytes) */
 int TType__getCompleteString()
 {
-  string *in_r3;
+  unsigned char * in_r3;
   undefined4 uVar1;
   int iVar2;
   int in_r4;
@@ -5697,8 +5682,8 @@ LAB_97b96e98:
 
 /* OutputTreeText @ 0x97b96ee4 (240 bytes) */
 int OutputTreeText(param_1, param_2, param_3)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   bool bVar1;
@@ -5710,7 +5695,7 @@ int OutputTreeText(param_1, param_2, param_3)
   byte bVar6;
   int local_80 [4];
   char acStack_70 [64];
-  allocator aaStack_30 [28];
+  unsigned char aaStack_30 [28];
   
   uVar5 = (*(code *)**(undefined4 **)param_2)(param_2);
   bVar1 = (uVar5 & 0xffff) == 0;
@@ -5746,8 +5731,8 @@ int OutputTreeText(param_1, param_2, param_3)
 
 /* OutputSymbol @ 0x97b96fd4 (268 bytes) */
 int OutputSymbol(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined1 *puVar1;
   int *piVar2;
@@ -5762,7 +5747,7 @@ int OutputSymbol(param_1, param_2)
   int local_3c;
   undefined4 local_30;
   
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_2 + 0x30),(unsigned char *)param_1,*(int *)(param_2 + 0x20));
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_2 + 0x30),(unsigned char *)param_1,*(int *)(param_2 + 0x20));
   ((int (*)())TType__getCompleteString)();
   iVar3 = local_3c;
   puVar1 = DAT_a7b7b9e0;
@@ -5792,19 +5777,19 @@ int OutputSymbol(param_1, param_2)
 /* OutputBinary @ 0x97b970e0 (248 bytes) */
 int OutputBinary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  TInfoSink *pTVar4;
-  string *psVar5;
+  unsigned char * pTVar4;
+  unsigned char * psVar5;
   char in_RESERVE;
   byte in_cr0;
   int local_2c;
   
-  pTVar4 = *(TInfoSink **)(param_3 + 0x30);
+  pTVar4 = *(unsigned char **)(param_3 + 0x30);
   ((int (*)())OutputTreeText)(pTVar4,(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   psVar5 = (unsigned char *)(pTVar4 + 8);
   ((int (*)())TInfoSinkBase__append)((char *)psVar5);
@@ -5831,19 +5816,19 @@ int OutputBinary(param_1, param_2, param_3)
 /* OutputUnary @ 0x97b971d8 (224 bytes) */
 int OutputUnary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  string *psVar4;
+  unsigned char * psVar4;
   char in_RESERVE;
   byte in_cr0;
   int local_2c;
   
-  psVar4 = (unsigned char *)(*(TInfoSink **)(param_3 + 0x30) + 8);
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  psVar4 = (unsigned char *)(*(unsigned char **)(param_3 + 0x30) + 8);
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   ((int (*)())TInfoSinkBase__append)((char *)psVar4);
   ((int (*)())TInfoSinkBase__append)((char *)psVar4);
   ((int (*)())TType__getCompleteString)();
@@ -5868,21 +5853,21 @@ int OutputUnary(param_1, param_2, param_3)
 /* OutputAggregate @ 0x97b972b8 (292 bytes) */
 int OutputAggregate(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
   undefined3 in_register_0000000c;
   undefined4 uVar4;
-  TInfoSink *pTVar5;
-  string *psVar6;
+  unsigned char * pTVar5;
+  unsigned char * psVar6;
   char in_RESERVE;
   byte in_cr0;
   int local_2c;
   
-  pTVar5 = *(TInfoSink **)(param_3 + 0x30);
+  pTVar5 = *(unsigned char **)(param_3 + 0x30);
   if (*(int *)(param_2 + 0x30) == 0) {
                     
                     
@@ -5917,19 +5902,19 @@ int OutputAggregate(param_1, param_2, param_3)
 /* OutputSelection @ 0x97b97450 (516 bytes) */
 int OutputSelection(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  string *psVar4;
+  unsigned char * psVar4;
   char in_RESERVE;
   byte in_cr0;
   int local_2c;
   
-  psVar4 = (unsigned char *)(*(TInfoSink **)(param_3 + 0x30) + 8);
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  psVar4 = (unsigned char *)(*(unsigned char **)(param_3 + 0x30) + 8);
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   ((int (*)())TInfoSinkBase__append)((char *)psVar4);
   ((int (*)())TInfoSinkBase__append)((char *)psVar4);
   ((int (*)())TType__getCompleteString)();
@@ -5949,11 +5934,11 @@ int OutputSelection(param_1, param_2, param_3)
   }
   iVar3 = *(int *)(param_3 + 0x20);
   *(int *)(param_3 + 0x20) = iVar3 + 1;
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,iVar3 + 1);
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,iVar3 + 1);
   ((int (*)())TInfoSinkBase__append)((char *)psVar4);
   piVar2 = (int *)(**(code **)(*(int *)param_2 + 0x5c))(param_2);
   (**(code **)(*piVar2 + 8))(piVar2,param_3);
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   iVar3 = (**(code **)(*(int *)param_2 + 0x60))(param_2);
   if (iVar3 == 0) {
     ((int (*)())TInfoSinkBase__append)((char *)psVar4);
@@ -5965,7 +5950,7 @@ int OutputSelection(param_1, param_2, param_3)
   }
   iVar3 = (**(code **)(*(int *)param_2 + 100))(param_2);
   if (iVar3 != 0) {
-    ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+    ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
     ((int (*)())TInfoSinkBase__append)((char *)psVar4);
     piVar2 = (int *)(**(code **)(*(int *)param_2 + 100))(param_2);
     (**(code **)(*piVar2 + 8))(piVar2,param_3);
@@ -5976,14 +5961,14 @@ int OutputSelection(param_1, param_2, param_3)
 
 /* OutputConstantUnion @ 0x97b97654 (664 bytes) */
 int OutputConstantUnion(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   int iVar1;
   uint uVar2;
   int iVar3;
-  TInfoSink *pTVar4;
-  TInfoSink *pTVar5;
+  unsigned char * pTVar4;
+  unsigned char * pTVar5;
   undefined8 uVar6;
   undefined **local_1c0 [9];
   uint local_19c;
@@ -5992,7 +5977,7 @@ int OutputConstantUnion(param_1, param_2)
   uint local_16c;
   char acStack_160 [312];
   
-  pTVar5 = *(TInfoSink **)(param_2 + 0x30);
+  pTVar5 = *(unsigned char **)(param_2 + 0x30);
   (**(code **)(*(int *)param_1 + 0x38))(local_1c0,param_1);
   local_1c0[0] = &PTR__TType_a7b7d080;
   if ((local_19c >> 0x13 & 0x3f) == 0xe) {
@@ -6055,14 +6040,14 @@ LAB_97b97890:
 /* OutputLoop @ 0x97b97a04 (400 bytes) */
 int OutputLoop(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   int iVar1;
-  TInfoSink *pTVar2;
+  unsigned char * pTVar2;
   
-  pTVar2 = *(TInfoSink **)(param_3 + 0x30) + 8;
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  pTVar2 = *(unsigned char **)(param_3 + 0x30) + 8;
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
   if (*(int *)(param_2 + 0x14) == 0) {
     ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
@@ -6070,7 +6055,7 @@ int OutputLoop(param_1, param_2, param_3)
   ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
   iVar1 = *(int *)(param_3 + 0x20);
   *(int *)(param_3 + 0x20) = iVar1 + 1;
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,iVar1 + 1);
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,iVar1 + 1);
   if (*(int *)(param_2 + 0xc) == 0) {
     ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
   }
@@ -6078,7 +6063,7 @@ int OutputLoop(param_1, param_2, param_3)
     ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
     (**(code **)(**(int **)(param_2 + 0xc) + 8))(*(int **)(param_2 + 0xc),param_3);
   }
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   if (*(int *)(param_2 + 8) == 0) {
     ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
   }
@@ -6087,7 +6072,7 @@ int OutputLoop(param_1, param_2, param_3)
     (**(code **)(**(int **)(param_2 + 8) + 8))(*(int **)(param_2 + 8),param_3);
   }
   if (*(int *)(param_2 + 0x10) != 0) {
-    ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+    ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
     ((int (*)())TInfoSinkBase__append)((char *)pTVar2);
     (**(code **)(**(int **)(param_2 + 0x10) + 8))(*(int **)(param_2 + 0x10),param_3);
   }
@@ -6098,13 +6083,13 @@ int OutputLoop(param_1, param_2, param_3)
 /* OutputBranch @ 0x97b97b94 (200 bytes) */
 int OutputBranch(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
-  TInfoSink *pTVar1;
+  unsigned char * pTVar1;
   
-  pTVar1 = *(TInfoSink **)(param_3 + 0x30) + 8;
-  ((int (*)())OutputTreeText)(*(TInfoSink **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
+  pTVar1 = *(unsigned char **)(param_3 + 0x30) + 8;
+  ((int (*)())OutputTreeText)(*(unsigned char **)(param_3 + 0x30),(unsigned char *)param_2,*(int *)(param_3 + 0x20));
   ((int (*)())TInfoSinkBase__append)((char *)pTVar1);
   if (*(int *)(param_2 + 0xc) == 0) {
     ((int (*)())TInfoSinkBase__append)((char *)pTVar1);
@@ -6120,8 +6105,8 @@ int OutputBranch(param_1, param_2, param_3)
 
 /* TIntermediate__outputTree @ 0x97b97c5c (228 bytes) */
 int TIntermediate__outputTree(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined4 local_50;
   undefined4 local_4c;
@@ -6161,8 +6146,8 @@ int TIntermediate__outputTree(this, param_1)
 
 /* TIntermSymbol__traverse @ 0x97b97d40 (20 bytes) */
 int TIntermSymbol__traverse(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if (*(code **)param_1 == (code *)0x0) {
     return;

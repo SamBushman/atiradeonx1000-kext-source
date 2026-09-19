@@ -2,7 +2,7 @@
 
 /* TPoolAllocator___TPoolAllocator @ 0x97ba0054 (8 bytes) */
 int TPoolAllocator___TPoolAllocator(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TPoolAllocator(this);
   return;
@@ -10,7 +10,7 @@ int TPoolAllocator___TPoolAllocator(this)
 
 /* TPoolAllocator___TPoolAllocator_97ba005c @ 0x97ba005c (8 bytes) */
 int TPoolAllocator___TPoolAllocator_97ba005c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TPoolAllocator(this);
   return;
@@ -18,7 +18,7 @@ int TPoolAllocator___TPoolAllocator_97ba005c(this)
 
 /* TPoolAllocator___TPoolAllocator_97ba0064 @ 0x97ba0064 (184 bytes) */
 int TPoolAllocator___TPoolAllocator_97ba0064(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 *puVar1;
   int iVar2;
@@ -60,7 +60,7 @@ int TAllocation__checkGuardBlock(param_1, param_2, param_3)
 
 /* TPoolAllocator__push @ 0x97ba0120 (136 bytes) */
 int TPoolAllocator__push(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 *puVar1;
   int iVar2;
@@ -75,8 +75,7 @@ int TPoolAllocator__push(this)
   if (puVar1 == *(undefined4 **)(this + 0x28)) {
     local_20 = local_30;
     local_1c = local_2c;
-    std::vector<TPoolAllocator::tAllocState,std::allocator<TPoolAllocator::tAllocState>>::
-    _M_insert_aux(this + 0x20,*(undefined4 *)(this + 0x24),&local_30);
+    std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux(this + 0x20,*(undefined4 *)(this + 0x24),&local_30);
   }
   else {
     iVar2 = 0;
@@ -93,7 +92,7 @@ int TPoolAllocator__push(this)
 
 /* TPoolAllocator__pop @ 0x97ba01a8 (160 bytes) */
 int TPoolAllocator__pop(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 *puVar1;
   void *pvVar2;
@@ -122,7 +121,7 @@ int TPoolAllocator__pop(this)
 
 /* TPoolAllocator__popAll @ 0x97ba0248 (76 bytes) */
 int TPoolAllocator__popAll(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   while ((uint)(*(int *)(this + 0x24) - *(int *)(this + 0x20)) >> 3 != 0) {
     pop(this);
@@ -132,7 +131,7 @@ int TPoolAllocator__popAll(this)
 
 /* TPoolAllocator__allocate @ 0x97ba0294 (328 bytes) */
 int TPoolAllocator__allocate(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
 {
   float fVar1;
@@ -144,9 +143,9 @@ int TPoolAllocator__allocate(this, param_1)
   int iVar7;
   ulong uVar8;
   
-  fVar1 = TAllocation::guardBlockSize;
+  fVar1 = TAllocation__guardBlockSize;
   iVar6 = *(int *)(this + 0x14);
-  iVar7 = param_1 + (int)TAllocation::guardBlockSize * 2;
+  iVar7 = param_1 + (int)TAllocation__guardBlockSize * 2;
   uVar3 = *(ulong *)(this + 4);
   uVar5 = iVar6 + iVar7;
   *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + 1;
@@ -179,7 +178,7 @@ int TPoolAllocator__allocate(this, param_1)
       uVar2 = *(undefined4 *)(this + 0x1c);
       puVar4[1] = 1;
       *puVar4 = uVar2;
-      iVar6 = (int)puVar4 + (int)TAllocation::guardBlockSize + *(int *)(this + 0x10);
+      iVar6 = (int)puVar4 + (int)TAllocation__guardBlockSize + *(int *)(this + 0x10);
       *(uint *)(this + 0x14) =
            *(int *)(this + 0x10) + iVar7 + *(uint *)(this + 0xc) & ~*(uint *)(this + 0xc);
       *(undefined4 **)(this + 0x1c) = puVar4;
@@ -194,7 +193,7 @@ int TPoolAllocator__allocate(this, param_1)
 
 /* TAllocation__checkAllocList @ 0x97ba03dc (156 bytes) */
 int TAllocation__checkAllocList(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   byte bVar1;
   byte bVar2;
@@ -204,7 +203,7 @@ int TAllocation__checkAllocList(this)
   fVar3 = guardBlockSize;
   bVar2 = guardBlockEndVal;
   bVar1 = guardBlockBeginVal;
-  for (; this != (unsigned char *)0x0; this = *(TAllocation **)(this + 8)) {
+  for (; this != (unsigned char *)0x0; this = *(unsigned char **)(this + 8)) {
     uVar4 = *(undefined4 *)(this + 4);
     ((int (*)())TAllocation__checkGuardBlock)((uchar *)this,(uchar)uVar4,(char *)(uint)bVar1);
     ((int (*)())TAllocation__checkGuardBlock)((uchar *)this,(uchar)uVar4 + SUB41(fVar3,0) + (char)*(undefined4 *)this,
@@ -255,8 +254,8 @@ int QualifierWritten(param_1, param_2)
 
 /* AliveSymbol @ 0x97ba0514 (76 bytes) */
 int AliveSymbol(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   int iVar1;
   
@@ -270,14 +269,15 @@ int AliveSymbol(param_1, param_2)
 /* AliveSelection @ 0x97ba0560 (16 bytes) */
 int AliveSelection(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   return *(int *)(param_3 + 0x30) == 0;
 }
 
 /* RemoveSymbol @ 0x97ba0570 (24 bytes) */
-void ParseSymbolTable__RemoveSymbol(unsigned char *param_1,unsigned char *param_2)
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
+void ParseSymbolTable__RemoveSymbol( unsigned char *param_1, unsigned char *param_2)
 
 {
   if (param_1 == (unsigned char *)0x0) {
@@ -288,12 +288,13 @@ void ParseSymbolTable__RemoveSymbol(unsigned char *param_1,unsigned char *param_
   (**(code **)(*(int *)param_1 + 0x30))();
   return;
 }
+#endif
 
 /* RemoveBinary @ 0x97ba0588 (56 bytes) */
 int RemoveBinary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   if (param_2 != (unsigned char *)0x0) {
     (**(code **)(*(int *)param_2 + 0x30))();
@@ -304,8 +305,8 @@ int RemoveBinary(param_1, param_2, param_3)
 /* RemoveUnary @ 0x97ba05c0 (56 bytes) */
 int RemoveUnary(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   if (param_2 != (unsigned char *)0x0) {
     (**(code **)(*(int *)param_2 + 0x30))();
@@ -316,8 +317,8 @@ int RemoveUnary(param_1, param_2, param_3)
 /* RemoveAggregate @ 0x97ba05f8 (56 bytes) */
 int RemoveAggregate(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   if (param_2 != (unsigned char *)0x0) {
     (**(code **)(*(int *)param_2 + 0x30))();
@@ -328,8 +329,8 @@ int RemoveAggregate(param_1, param_2, param_3)
 /* RemoveSelection @ 0x97ba0630 (56 bytes) */
 int RemoveSelection(param_1, param_2, param_3)
   int param_1;
-  unsigned char *param_2;
-  unsigned char *param_3;
+  unsigned char * param_2;
+  unsigned char * param_3;
 {
   if (param_2 != (unsigned char *)0x0) {
     (**(code **)(*(int *)param_2 + 0x30))();
@@ -339,8 +340,8 @@ int RemoveSelection(param_1, param_2, param_3)
 
 /* RemoveConstantUnion @ 0x97ba0668 (24 bytes) */
 int RemoveConstantUnion(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   if (param_1 == (unsigned char *)0x0) {
     return;
@@ -353,7 +354,7 @@ int RemoveConstantUnion(param_1, param_2)
 
 /* RemoveAllTreeNodes @ 0x97ba0680 (168 bytes) */
 int RemoveAllTreeNodes(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   undefined4 local_40;
   undefined4 local_3c;
@@ -385,14 +386,15 @@ int RemoveAllTreeNodes(param_1)
 }
 
 /* GetSymbolTable @ 0x97ba0728 (132 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int GetSymbolTable(param_1)
   int param_1;
 {
   undefined4 *puVar1;
   undefined4 *puVar2;
   
-  puVar1 = &((int (*)())GetSymbolTable)(int)::SymbolTables;
-  if (((int (*)())GetSymbolTable)(int)::SymbolTables == 0) {
+  puVar1 = &((int (*)())GetSymbolTable)(int)SymbolTables;
+  if (((int (*)())GetSymbolTable)(int)SymbolTables == 0) {
     do {
       puVar2 = operator_new(0x10);
       *puVar2 = 0;
@@ -403,10 +405,12 @@ int GetSymbolTable(param_1)
       puVar1 = puVar1 + 1;
     } while ((int)puVar1 < -0x584817f7);
   }
-  return (&((int (*)())GetSymbolTable)(int)::SymbolTables)[param_1];
+  return (&((int (*)())GetSymbolTable)(int)SymbolTables)[param_1];
 }
+#endif
 
 /* GetResources @ 0x97ba07ac (108 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int GetResources()
 {
   DAT_a7b7e838 = 4;
@@ -416,13 +420,14 @@ int GetResources()
   DAT_a7b7e828 = 0;
   DAT_a7b7e830 = 0x10;
   DAT_a7b7e834 = 0x200;
-  ((int (*)())GetResources)()::Resources = 8;
+  ((int (*)())GetResources)()Resources = 8;
   DAT_a7b7e814 = 8;
   DAT_a7b7e81c = 0x10;
   DAT_a7b7e820 = 0x200;
   DAT_a7b7e82c = 0x10;
-  return &((int (*)())GetResources)()::Resources;
+  return &((int (*)())GetResources)()Resources;
 }
+#endif
 
 /* _ShInitialize @ 0x97ba0818 (360 bytes) */
 int _ShInitialize()
@@ -430,8 +435,8 @@ int _ShInitialize()
   int iVar1;
   int *piVar2;
   int iVar3;
-  TPoolAllocator *pTVar4;
-  TPoolAllocator *this;
+  unsigned char * pTVar4;
+  unsigned char * this;
   undefined4 uVar5;
   undefined4 uVar6;
   char in_RESERVE;
@@ -518,8 +523,8 @@ int _ShDestruct(param_1)
   int *param_1;
 {
   int iVar1;
-  TCompiler *pTVar2;
-  TShHandleBase *pTVar3;
+  unsigned char * pTVar2;
+  unsigned char * pTVar3;
   
   if (param_1 != (int *)0x0) {
     _pthread_mutex_lock((pthread_mutex_t *)&_glsl_allocator_lock);
@@ -544,7 +549,7 @@ int _ShDestruct(param_1)
 /* _ShFinalize @ 0x97ba0a6c (112 bytes) */
 int _ShFinalize()
 {
-  TPoolAllocator *pTVar1;
+  unsigned char * pTVar1;
   
   if (_PerProcessGPA != (unsigned char *)0x0) {
     ((int (*)())TPoolAllocator__popAll)();
@@ -565,7 +570,7 @@ int generateBuiltInSymbolTable(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  TBuiltInResource aTStack_30 [28];
+  unsigned char aTStack_30 [28];
   
   TBuiltIns__initialize(aTStack_30);
   ((int (*)())initializeSymbolTable)(aTStack_30,0,param_2,param_1,param_3);
@@ -574,6 +579,7 @@ int generateBuiltInSymbolTable(param_1, param_2, param_3)
 }
 
 /* initializeSymbolTable @ 0x97ba0b4c (936 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int initializeSymbolTable(param_1, param_2, param_3, param_4)
   int param_1;
   uint param_2;
@@ -724,8 +730,8 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4)
       uVar11 = uVar11 + 1;
     } while (uVar11 < uVar9);
   }
-  IdentifyBuiltIns_97b8c5c0(local_124,piVar4,param_4);
-  IdentifyBuiltIns_97b8c5c0(local_124,piVar4);
+  IdentifyBuiltIns(local_124,piVar4,param_4);
+  IdentifyBuiltIns(local_124,piVar4);
   _FinalizePreprocessor();
   piVar2 = (int *)(local_d4 + -4);
   local_70 = local_d8;
@@ -741,24 +747,21 @@ int initializeSymbolTable(param_1, param_2, param_3, param_4)
     std__string___Rep___M_destroy((unsigned char *)(local_d4 + -0xc));
   }
   if (local_e0 != 0) {
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>
-    ::_M_erase((unsigned char *)&local_e8);
+    std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase((unsigned char *)&local_e8);
     local_e4[2] = local_e4;
     local_e4[1] = 0;
     local_e4[3] = local_e4;
     local_e0 = 0;
   }
   if (local_f8 != 0) {
-    std::
-    _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-    ::_M_erase((unsigned char *)&local_100);
+    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase((unsigned char *)&local_100);
     local_fc[2] = local_fc;
     local_fc[1] = 0;
     local_fc[3] = local_fc;
   }
   return 1;
 }
+#endif
 
 /* _ShCompile @ 0x97ba10c8 (1888 bytes) */
 int _ShCompile(param_1, param_2, param_3, param_4, param_5)
@@ -777,7 +780,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   int *piVar7;
   undefined4 *puVar8;
   ulong *puVar9;
-  TSymbolTableLevel *pTVar10;
+  unsigned char * pTVar10;
   ulong uVar11;
   void *pvVar12;
   uint uVar13;
@@ -1008,7 +1011,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
         TIntermediate__remove((unsigned char *)&local_40);
         pvVar12 = local_180;
         for (; iVar4 = (int)local_17c - (int)pvVar12 >> 2, iVar4 != 1; local_17c = local_17c + -1) {
-          pTVar10 = *(TSymbolTableLevel **)((int)pvVar12 + (iVar4 + -1) * 4);
+          pTVar10 = *(unsigned char **)((int)pvVar12 + (iVar4 + -1) * 4);
           if (pTVar10 != (unsigned char *)0x0) {
             TSymbolTableLevel___TSymbolTableLevel(pTVar10);
             pvVar12 = local_180;
@@ -1032,9 +1035,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
           std__string___Rep___M_destroy((unsigned char *)(local_e4 + -0xc));
         }
         if (local_f0 != 0) {
-          std::
-          _Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>
-          ::_M_erase((unsigned char *)&local_f8);
+          std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase((unsigned char *)&local_f8);
           local_f4[2] = local_f4;
           local_f4[1] = 0;
           local_f4[3] = local_f4;
@@ -1042,9 +1043,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
         }
         pvVar12 = local_180;
         if (local_108 != 0) {
-          std::
-          _Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>
-          ::_M_erase((unsigned char *)&local_110);
+          std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase((unsigned char *)&local_110);
           local_10c[2] = local_10c;
           local_10c[1] = 0;
           local_10c[3] = local_10c;
@@ -1053,7 +1052,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
         }
         for (; uVar13 = (int)local_17c - (int)pvVar12 >> 2, 1 < uVar13; local_17c = local_17c + -1)
         {
-          pTVar10 = *(TSymbolTableLevel **)((int)pvVar12 + (uVar13 - 1) * 4);
+          pTVar10 = *(unsigned char **)((int)pvVar12 + (uVar13 - 1) * 4);
           if (pTVar10 != (unsigned char *)0x0) {
             TSymbolTableLevel___TSymbolTableLevel(pTVar10);
             pvVar12 = local_180;
@@ -1519,8 +1518,8 @@ int _ShGetCompilerSymbolTable(param_1)
 
 /* TType__buildMangledName @ 0x97ba2670 (688 bytes) */
 int TType__buildMangledName(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   char *pcVar2;
@@ -1584,7 +1583,7 @@ LAB_97ba2778:
         uVar3 < (uint)(*(int *)(*(int *)(this + 8) + 8) - *(int *)(*(int *)(this + 8) + 4) >> 3);
         uVar3 = uVar3 + 1) {
       std__string__append((ulong)param_1,'\x01');
-      ((int (*)())TType__buildMangledName)(*(TType **)(*(int *)(*(int *)(this + 8) + 4) + uVar3 * 8),param_1);
+      ((int (*)())TType__buildMangledName)(*(unsigned char **)(*(int *)(*(int *)(this + 8) + 4) + uVar3 * 8),param_1);
     }
     goto switchD_97ba270c_caseD_0;
   }
@@ -1605,10 +1604,10 @@ switchD_97ba270c_caseD_0:
 
 /* TVariable__dump @ 0x97ba295c (220 bytes) */
 int TVariable__dump(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
-  TInfoSink *pTVar1;
+  unsigned char * pTVar1;
   
   pTVar1 = param_1 + 8;
   *(undefined1 *)
@@ -1630,12 +1629,12 @@ int TVariable__dump(this, param_1)
 
 /* TFunction__dump @ 0x97ba2a38 (216 bytes) */
 int TFunction__dump(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined1 *puVar1;
   int iVar2;
-  TInfoSink *pTVar3;
+  unsigned char * pTVar3;
   
   puVar1 = DAT_a7b7ba80;
   pTVar3 = param_1 + 8;
@@ -1656,8 +1655,8 @@ int TFunction__dump(this, param_1)
 
 /* TSymbolTableLevel__dump @ 0x97ba2b10 (112 bytes) */
 int TSymbolTableLevel__dump(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
@@ -1676,13 +1675,13 @@ int TSymbolTableLevel__dump(this, param_1)
 
 /* TSymbolTable__dump @ 0x97ba2b80 (268 bytes) */
 int TSymbolTable__dump(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  string *psVar4;
+  unsigned char * psVar4;
   int iVar5;
   char in_RESERVE;
   byte bVar6;
@@ -1716,7 +1715,7 @@ int TSymbolTable__dump(this, param_1)
         std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
       }
       TInfoSinkBase__append((char *)psVar4);
-      ((int (*)())TSymbolTableLevel__dump)(*(TSymbolTableLevel **)(*(int *)this + iVar5 * 4),param_1);
+      ((int (*)())TSymbolTableLevel__dump)(*(unsigned char **)(*(int *)this + iVar5 * 4),param_1);
       iVar5 = iVar5 + -1;
     } while (-1 < iVar5);
   }
@@ -1725,7 +1724,7 @@ int TSymbolTable__dump(this, param_1)
 
 /* TFunction___TFunction @ 0x97ba2c8c (8 bytes) */
 int TFunction___TFunction(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~TFunction(this);
   return;

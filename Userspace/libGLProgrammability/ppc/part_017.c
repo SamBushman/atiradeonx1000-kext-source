@@ -92,7 +92,7 @@ int _UpdateACUsingAvailableCopyTable(param_1, param_2, param_3)
                 iVar8 = iVar8 + 1;
                 iVar5 = iVar5 + -1;
               } while (iVar5 != 0);
-              uVar3 = ((int (*)())_GetStreamArray_97c08e40)(*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_1 + 0x10)
+              uVar3 = _GetStreamArray(*(undefined4 *)(param_1 + 0xc),*(undefined4 *)(param_1 + 0x10)
                                       ,param_3);
               *(undefined4 *)(param_1 + 0x44) = uVar3;
               return 1;
@@ -216,8 +216,8 @@ int _AddToAvailableCopyTable(param_1, param_2, param_3)
             iVar10 = iVar10 + -1;
           } while (iVar10 != 0);
         }
-        local_48[2] = ((int (*)())_GetStreamArray_97c08e40)(local_7c,local_78,param_3);
-        local_48[3] = ((int (*)())_GetStreamArray_97c08e40)(local_74,local_70,param_3);
+        local_48[2] = _GetStreamArray(local_7c,local_78,param_3);
+        local_48[3] = _GetStreamArray(local_74,local_70,param_3);
         if (((param_1[1] & 0x10000000) != 0) && (iVar15 == 0)) {
           local_48[1] = 1;
           iVar10 = ((int (*)())_FindMatchingAvailableCopy)(&local_80,param_2);
@@ -418,7 +418,7 @@ int _CheckRemoveAvailableCopyTable(param_1, param_2, param_3, param_4, param_5, 
   uStack00000018 = param_1;
   uStack0000001c = param_2;
   if ((int)param_2 < 0) {
-    iVar4 = ((int (*)())_GetStreamArray_97c08e40)(param_1 >> 0x11 & 7,(param_2 & 0xffff) + param_3,param_6);
+    iVar4 = _GetStreamArray(param_1 >> 0x11 & 7,(param_2 & 0xffff) + param_3,param_6);
   }
   uVar6 = *param_5;
   uVar5 = 0;
@@ -1910,8 +1910,12 @@ int _GetValidArgs(param_1)
 }
 
 /* _GetStreamArray_97c08e40 @ 0x97c08e40 (164 bytes) */
-int _GetStreamArray_97c08e40_97c08e40(int param_1,uint param_2,int param_3,uint *param_4,uint *param_5)
-
+int _GetStreamArray_97c08e40(param_1, param_2, param_3, param_4, param_5)
+  int param_1;
+  uint param_2;
+  int param_3;
+  uint *param_4;
+  uint *param_5;
 {
   int iVar1;
   int iVar2;
@@ -1956,7 +1960,7 @@ int _GetRegisterIndicies(param_1, param_2, param_3, param_4, param_5, param_6, p
   *param_2 = 0;
   *param_3 = -1;
   if (param_6 != 0) {
-    ((int (*)())_GetStreamArray_97c08e40)(param_4,param_5,param_1,param_2,param_3);
+    _GetStreamArray(param_4,param_5,param_1,param_2,param_3);
   }
   iVar1 = *param_3;
   if (((iVar1 == -1) && (param_7 != 0)) && (1 < param_8 + 1)) {

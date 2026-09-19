@@ -2325,7 +2325,7 @@ int _InitAtomTable(param_1, param_2)
         } while (iVar8 != 0);
         pcVar7 = "~!%^&*()-+=|,.<>/?;:[]{}#";
         local_1f = 0;
-        cVar3 = s_______________<>__________97c23e68[0];
+        cVar3 = s___________________________97c23e68[0];
         cVar2 = local_20;
         while (local_20 = cVar3, local_20 != '\0') {
           ((int (*)())_AddAtomFixed)(param_1,&local_20,(int)local_20);

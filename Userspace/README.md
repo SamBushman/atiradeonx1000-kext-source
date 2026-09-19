@@ -15,3 +15,18 @@ constants Ghidra labels as data addresses inside code (`&DAT_0000271e`) -> liter
 absolute-address tail calls; K&R definitions so mismatched call arities compile.
 Names are Ghidra's (`FUN_<addr>` unless the binary exports a symbol). Nothing is skipped: the ledger row count equals the
 Ghidra function count minus its thunks/imports.
+
+## Status (2026-09-19)
+
+| binary | arch | functions | compile-clean | notes |
+|---|---|---|---|---|
+| ATIRadeonX1000GLDriver | ppc | 3484 | all | |
+| ATIRadeonX1000GLDriver | i386 | 4489 | all | |
+| ATIRadeonX1000GA | ppc, i386 | 46 each | all | |
+| ATIRadeonX1000VADriver | ppc / i386 | 70 / 88 | all | |
+| libGL | ppc | 896 | all | |
+| libGLProgrammability | ppc | 2005 | 1960 | 45 C++-template/EH functions kept verbatim under `#if 0`, ledger status `DECOMPILE-ONLY` |
+
+libGL.dylib and libGLProgrammability.dylib are PowerPC (big-endian) binaries. "Compile-clean" means gcc accepts the text; it does not
+prove behavioural equivalence. Data-symbol types are inferred from use; `in_*` / `unaff_*` pseudo-registers (x86) and
+`LOCK()/UNLOCK()` are declared/no-op so the text builds. The kext's i386 slice is not yet transcribed (see the kext notes).

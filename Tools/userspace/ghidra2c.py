@@ -11,19 +11,58 @@ for arg in sys.argv[4:]:
     lo, hi = arg.split('-'); text_ranges.append((int(lo, 16), int(hi, 16)))
 def in_text(hexaddr): return any(lo <= int(hexaddr, 16) < hi for lo, hi in text_ranges)
 os.makedirs(out, exist_ok=True)
+def sanitize_scoped(t):
+    """C++ names (A::b, A<int,B<C> >::d, ~E, operator...) -> C identifiers; angle brackets are matched, so templates nest."""
+    t = re.sub(r'::[ \t]*\n[ \t]*', '::', t)
+    t = re.sub(r'\n[ \t]*::', '::', t)
+    t = re.sub(r'(?<![\w>])::(?=[~A-Za-z_])', '', t)
+    out = []; i = 0; n = len(t)
+    idr = re.compile(r'~?[A-Za-z_]\w*')
+    while i < n:
+        m = idr.match(t, i)
+        if not m or (i > 0 and (t[i - 1].isalnum() or t[i - 1] == '_')):
+            out.append(t[i]); i += 1; continue
+        j = m.end(); k = j; scoped = False
+        while True:
+            if k < n and t[k] == '<':
+                d = 0; q = k
+                while q < n:
+                    if t[q] == '<': d += 1
+                    elif t[q] == '>':
+                        d -= 1
+                        if d == 0: break
+                    elif t[q] in ';{}': q = n; break
+                    q += 1
+                if q >= n: break
+                k = q + 1; continue
+            if t.startswith('::', k):
+                m2 = idr.match(t, k + 2)
+                if not m2: break
+                k = m2.end(); scoped = True; continue
+            break
+        seg = t[i:k]
+        # a bare `x < y` comparison is not a template: only treat `<` chains that were followed by `::` or that contain no spaces
+        if scoped or ('<' in seg and re.fullmatch(r'[\w:<>,*~ &]+', seg) and '::' in seg or ('<' in seg and ' ' not in seg)):
+            out.append(re.sub(r'[^A-Za-z0-9_]', '_', seg)); i = k
+        else:
+            out.append(m.group(0)); i = j
+    return ''.join(out)
+
 idx = []
 name_map = {}   # original (C++ demangled) Ghidra name -> C identifier (first function of that name)
 short_map = collections.defaultdict(set)
+first_san = {}
 used = set(); orig_of = {}
 for l in open(os.path.join(src, 'INDEX.tsv')):
     a, sz, name = l.rstrip('\n').split('\t')
     san = re.sub(r'[^A-Za-z0-9_]', '_', name)
     if san in used: san = san + '_' + a[2:]
     used.add(san); orig_of[a] = name
-    if (re.sub(r'[^A-Za-z0-9_]', '_', name) != name or san != re.sub(r'[^A-Za-z0-9_]', '_', name)) and name not in name_map: name_map[name] = san
+    if name not in first_san: first_san[name] = san
     if '::' in name:
         short_map[name.split('::')[-1]].add(san)
     idx.append((a, int(sz), san))
+name_map = {k: v for k, v in first_san.items() if k != v}
 short_unique = {k: list(v)[0] for k, v in short_map.items() if len(v) == 1 and re.match(r'^~?[A-Za-z_]\w*$', k)}
 idx.sort(key=lambda r: int(r[0], 16))
 kw = {'if', 'while', 'for', 'switch', 'return', 'sizeof', 'do', 'else', 'case', 'goto', 'const', 'struct', 'union', 'enum', 'typedef', 'extern', 'static'}
@@ -35,18 +74,19 @@ for a, sz, name in idx:
     body = '\n'.join(l for l in lines if not l.startswith('//'))
     if name_map:
         _names = sorted(name_map, key=len, reverse=True)
-        if '_name_rx' not in globals(): _name_rx = re.compile('|'.join(re.escape(n) for n in _names))
+        if '_name_rx' not in globals(): _name_rx = re.compile(r'(?<![\w])(?:' + '|'.join(re.escape(n) for n in _names) + r')(?![\w])')
         oname = orig_of.get(a)
         body = re.sub(r'\b(?:__thiscall|__stdcall|__cdecl|__fastcall)\b', '', body)
         # definition header: the function's own (address-unique) name
         san_self = [n for a2, sz2, n in idx if a2 == a][0]
-        if oname and oname in name_map or (oname and re.sub(r'[^A-Za-z0-9_]', '_', oname) != oname):
+        if oname:
             i0 = body.find('{'); hd = body[:i0]; k = hd.rfind(oname)
             if k >= 0: hd = hd[:k] + san_self + hd[k + len(oname):]
             body = hd + body[i0:]
         body = _name_rx.sub(lambda m: name_map[m.group(0)], body)
         for sh, sn in short_unique.items():
             body = re.sub(r'(?<![\w:.>])%s\s*\(' % re.escape(sh), sn + '(', body)
+    body = sanitize_scoped(body)
     body = re.sub(r'/\*.*?\*/', lambda m: '', body, flags=re.S)
     body = re.sub(r'\b(?:switchD_[0-9a-f]+)::(switchdataD_[0-9a-f]+)', r'\1', body)
     if '!! decompile failed' in body: bodies[a] = None; continue
@@ -62,21 +102,30 @@ imports = sorted(c for c in calls if c not in kw and c not in defined_names and 
 def ret_type(body, name):
     m = re.search(r'^(.*?)\b' + re.escape(name) + r'\s*\(', body, flags=re.M | re.S)
     return (m.group(1).strip() if m else 'int') or 'int'
+TYPE = r'[A-Za-z_][\w]*(?:::[~A-Za-z_]\w*)*(?:<[^;(){}]*?>)?(?:::[~A-Za-z_]\w*)*'
 def fix_types(s):
-    """class/struct-typed pointer types Ghidra invented -> unsigned char * (only in type positions: casts, declarations, params)"""
-    def isty(t): return t not in PRIM and t not in kw
-    _hi = s.find('{')
-    if _hi > 0:
-        _h = re.sub(r'(?m)^(\s+)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)\s*;', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) + ';' if isty(m.group(2)) else m.group(0), s[:_hi])
-        s = _h + s[_hi:]
-    s = re.sub(r'\(\s*(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)\s*\)', lambda m: '(unsigned char' + m.group(2) + ')' if isty(m.group(1)) else m.group(0), s)
+    """class/struct-typed types Ghidra invented -> unsigned char (pointers stay pointers; only in type positions)"""
+    def base(t): return re.split(r'[<:]', t)[0]
+    def isty(t): return base(t) not in PRIM and base(t) not in kw and t not in PRIM
     ib = s.find('{')
-    ie = s.find('\n\n', ib) if ib >= 0 else -1
-    if ib >= 0 and ie > ib:
-        blk = re.sub(r'(?m)^(\s*)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) if isty(m.group(2)) else m.group(0), s[ib:ie])
-        s = s[:ib] + blk + s[ie:]
-    s = re.sub(r'([(,]\s*)(?:const\s+)?([A-Za-z_]\w*)((?: \*)+)([A-Za-z_]\w*)(?=\s*[,)\[])', lambda m: m.group(1) + 'unsigned char' + m.group(3) + m.group(4) if isty(m.group(2)) else m.group(0), s)
-    return s
+    head, rest = (s[:ib], s[ib:]) if ib >= 0 else ('', s)
+    # K&R parameter declarations / plain declarations (`TYPE *name;`, `TYPE name;`, `TYPE name [N];`)
+    decl = re.compile(r'(?m)^(\s+)(?:const\s+)?(' + TYPE + r')(\s*\*+\s*|\s+)([A-Za-z_]\w*)(\s*(?:\[[^\]]*\])?\s*;)')
+    def dfix(m):
+        if not isty(m.group(2)) or m.group(2) in ('return', 'goto', 'else', 'case'): return m.group(0)
+        stars = m.group(3).strip()
+        return '%sunsigned char %s%s%s' % (m.group(1), (stars + ' ') if stars else '', m.group(4), m.group(5))
+    head = decl.sub(dfix, head)
+    _m = re.search(r'\n[ \t]*\n', rest)
+    ie = _m.start() if _m else -1
+    if ie > 0:
+        blk = decl.sub(dfix, rest[:ie]); rest = blk + rest[ie:]
+    # casts to class types: `(T *)`, `(T **)` and `(T)literal`
+    rest = re.sub(r'\(\s*(?:const\s+)?(' + TYPE + r')(\s*\*+)\s*\)', lambda m: '(unsigned char' + m.group(2) + ')' if isty(m.group(1)) else m.group(0), rest)
+    rest = re.sub(r'\(\s*(' + TYPE + r')\s*\)(?=\s*(?:0x|\d|\())', lambda m: '' if isty(m.group(1)) else m.group(0), rest)
+    # parameters of call-through function types etc: `(T *param` in headers
+    head = re.sub(r'(?<=[(,])\s*(?:const\s+)?(' + TYPE + r')(\s*\*+\s*)([A-Za-z_]\w*)(?=\s*[,)])', lambda m: ' unsigned char' + m.group(2) + m.group(3) if isty(m.group(1)) else m.group(0), head)
+    return head + rest
 SMALL = re.compile(r'\b(byte|uchar|char|short|ushort|bool|undefined1|undefined2|undefined)\b(?!\s*\*)')
 def split_header(body, name):
     i = body.index('{')

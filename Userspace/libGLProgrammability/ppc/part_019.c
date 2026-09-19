@@ -1003,11 +1003,11 @@ int std____throw_logic_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  logic_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1035,11 +1035,11 @@ int std____throw_domain_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  domain_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1067,11 +1067,11 @@ int std____throw_invalid_argument(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  invalid_argument *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1099,11 +1099,11 @@ int std____throw_length_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  length_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1131,11 +1131,11 @@ int std____throw_out_of_range(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  out_of_range *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1163,11 +1163,11 @@ int std____throw_runtime_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  runtime_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1195,11 +1195,11 @@ int std____throw_range_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  range_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1227,11 +1227,11 @@ int std____throw_overflow_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  overflow_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1259,11 +1259,11 @@ int std____throw_underflow_error(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  underflow_error *this;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  allocator aaStack_30 [40];
+  unsigned char aaStack_30 [40];
   
   ((int (*)())std__string__string)((unsigned char *)local_40,param_1,aaStack_30);
   this = (unsigned char *)___cxa_allocate_exception(8);
@@ -1286,14 +1286,14 @@ int std____throw_underflow_error(param_1)
 
 /* std__string___M_data @ 0x97c13258 (8 bytes) */
 int std__string___M_data(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(undefined4 *)this;
 }
 
 /* std__string___M_data_97c13260 @ 0x97c13260 (12 bytes) */
 int std__string___M_data_97c13260(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   *(char **)this = param_1;
@@ -1302,7 +1302,7 @@ int std__string___M_data_97c13260(this, param_1)
 
 /* std__string___M_rep @ 0x97c1326c (12 bytes) */
 int std__string___M_rep(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(int *)this + -0xc;
 }
@@ -1319,7 +1319,7 @@ int std__string___M_ibegin()
 
 /* std__string__size @ 0x97c13284 (12 bytes) */
 int std__string__size(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(undefined4 *)(*(int *)this + -0xc);
 }
@@ -1336,14 +1336,14 @@ int std__string___M_iend()
 
 /* std__string___Rep___M_is_leaked @ 0x97c132a4 (12 bytes) */
 int std__string___Rep___M_is_leaked(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(uint *)(this + 8) >> 0x1f;
 }
 
 /* std__string___M_leak @ 0x97c132b0 (20 bytes) */
 int std__string___M_leak(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(int *)(*(int *)this + -4) < 0) {
     return;
@@ -1361,7 +1361,7 @@ int std__string___M_check(param_1)
   int local_20;
   
   if (*(uint *)(*in_r4 + -0xc) < in_r5) {
-    ((int (*)())std____throw_out_of_range)("basic_string::_M_check");
+    ((int (*)())std____throw_out_of_range)("basic_string___M_check");
   }
   _M_ibegin();
   *(uint *)param_1 = local_20 + in_r5;
@@ -1429,7 +1429,7 @@ int std__string___S_copy_chars_97c13404(param_1, param_2, param_3)
 
 /* std__string___Rep___M_is_shared @ 0x97c13428 (24 bytes) */
 int std__string___Rep___M_is_shared(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (0 < *(int *)(this + 8)) {
     return 1;
@@ -1439,7 +1439,7 @@ int std__string___Rep___M_is_shared(this)
 
 /* std__string__capacity @ 0x97c13440 (12 bytes) */
 int std__string__capacity(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return *(undefined4 *)(*(int *)this + -8);
 }
@@ -1452,17 +1452,17 @@ int std__string__get_allocator()
 
 /* std__string___Rep___M_refdata @ 0x97c13450 (8 bytes) */
 int std__string___Rep___M_refdata(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   return this + 0xc;
 }
 
 /* std__string___Rep___M_dispose @ 0x97c13458 (32 bytes) */
 int std__string___Rep___M_dispose(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   int iVar1;
-  allocator *paVar2;
+  unsigned char * paVar2;
   int iVar3;
   char in_RESERVE;
   byte in_cr0;
@@ -1485,7 +1485,7 @@ int std__string___Rep___M_dispose(param_1)
 
 /* std__string___Rep___M_set_sharable @ 0x97c13478 (12 bytes) */
 int std__string___Rep___M_set_sharable(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 8) = 0;
   return;
@@ -1493,7 +1493,7 @@ int std__string___Rep___M_set_sharable(this)
 
 /* std__string___M_mutate @ 0x97c13484 (340 bytes) */
 int std__string___M_mutate(this, param_1, param_2, param_3)
-  unsigned char *this;
+  unsigned char * this;
   ulong param_1;
   ulong param_2;
   ulong param_3;
@@ -1510,7 +1510,7 @@ int std__string___M_mutate(this, param_1, param_2, param_3)
   uint uVar10;
   char in_RESERVE;
   byte in_cr0;
-  allocator aaStack_40 [32];
+  unsigned char aaStack_40 [32];
   
   pvVar5 = *(void **)this;
   pvVar8 = (void *)((int)pvVar5 + param_2 + param_1);
@@ -1533,7 +1533,7 @@ int std__string___M_mutate(this, param_1, param_2, param_3)
   if (((uVar2 < uVar10) && (0xfe3 < uVar10)) && (uVar6 = uVar2 << 1, uVar2 << 1 < uVar10)) {
     uVar6 = uVar10;
   }
-  iVar7 = _Rep::_S_create(uVar6,aaStack_40);
+  iVar7 = _Rep___S_create(uVar6,aaStack_40);
   pvVar5 = (void *)(iVar7 + 0xc);
   if (param_1 != 0) {
     _memcpy(pvVar5,*(void **)this,param_1);
@@ -1552,7 +1552,7 @@ int std__string___M_mutate(this, param_1, param_2, param_3)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar4 < 1) {
-    _Rep::_M_destroy((unsigned char *)(iVar7 + -0xc));
+    _Rep___M_destroy((unsigned char *)(iVar7 + -0xc));
   }
   *(void **)this = pvVar5;
 LAB_97c135b0:
@@ -1564,7 +1564,7 @@ LAB_97c135b0:
 
 /* std__string___Rep___M_set_leaked @ 0x97c135dc (12 bytes) */
 int std__string___Rep___M_set_leaked(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 8) = 0xffffffff;
   return;
@@ -1572,7 +1572,7 @@ int std__string___Rep___M_set_leaked(this)
 
 /* std__string___M_leak_hard @ 0x97c135e8 (84 bytes) */
 int std__string___M_leak_hard(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -1593,7 +1593,7 @@ int std__string___S_empty_rep()
 
 /* std__string__string @ 0x97c13658 (4 bytes) */
 int std__string__string(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   string(this);
   return;
@@ -1601,7 +1601,7 @@ int std__string__string(this)
 
 /* std__string__string_97c1365c @ 0x97c1365c (4 bytes) */
 int std__string__string_97c1365c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   string(this);
   return;
@@ -1609,9 +1609,9 @@ int std__string__string_97c1365c(this)
 
 /* std__string___Alloc_hider___Alloc_hider @ 0x97c13660 (4 bytes) */
 int std__string___Alloc_hider___Alloc_hider(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   _Alloc_hider(this,param_1,param_2);
   return;
@@ -1619,9 +1619,9 @@ int std__string___Alloc_hider___Alloc_hider(this, param_1, param_2)
 
 /* std__string___Alloc_hider___Alloc_hider_97c13664 @ 0x97c13664 (4 bytes) */
 int std__string___Alloc_hider___Alloc_hider_97c13664(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   _Alloc_hider(this,param_1,param_2);
   return;
@@ -1629,9 +1629,9 @@ int std__string___Alloc_hider___Alloc_hider_97c13664(this, param_1, param_2)
 
 /* std__string___Alloc_hider___Alloc_hider_97c13668 @ 0x97c13668 (8 bytes) */
 int std__string___Alloc_hider___Alloc_hider_97c13668(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_2;
 {
   *(char **)this = param_1;
   return;
@@ -1639,10 +1639,10 @@ int std__string___Alloc_hider___Alloc_hider_97c13668(this, param_1, param_2)
 
 /* std__string___Rep___M_refcopy @ 0x97c13670 (28 bytes) */
 int std__string___Rep___M_refcopy(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
-  _Rep *p_Var2;
+  unsigned char * p_Var2;
   char in_RESERVE;
   byte in_cr0;
   
@@ -1659,11 +1659,11 @@ int std__string___Rep___M_refcopy(this)
 
 /* std__string__string_97c1368c @ 0x97c1368c (84 bytes) */
 int std__string__string_97c1368c(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   char in_RESERVE;
   byte in_cr0;
-  allocator aaStack_20 [28];
+  unsigned char aaStack_20 [28];
   
   do {
     if (in_RESERVE != '\0') {
@@ -1671,14 +1671,14 @@ int std__string__string_97c1368c(this)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  _Alloc_hider::_Alloc_hider((unsigned char *)this,&DAT_a7b7bf90,aaStack_20);
+  _Alloc_hider___Alloc_hider((unsigned char *)this,&DAT_a7b7bf90,aaStack_20);
   return;
 }
 
 /* std__string__string_97c136e0 @ 0x97c136e0 (4 bytes) */
 int std__string__string_97c136e0(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   string(this,param_1);
   return;
@@ -1686,8 +1686,8 @@ int std__string__string_97c136e0(this, param_1)
 
 /* std__string__string_97c136e4 @ 0x97c136e4 (4 bytes) */
 int std__string__string_97c136e4(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   string(this,param_1);
   return;
@@ -1695,20 +1695,20 @@ int std__string__string_97c136e4(this, param_1)
 
 /* std__string__string_97c136e8 @ 0x97c136e8 (76 bytes) */
 int std__string__string_97c136e8(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   char *pcVar1;
   
   pcVar1 = (char *)std__string___S_construct(0,'\0',param_1);
-  _Alloc_hider::_Alloc_hider((unsigned char *)this,pcVar1,param_1);
+  _Alloc_hider___Alloc_hider((unsigned char *)this,pcVar1,param_1);
   return;
 }
 
 /* std__string__string_97c13734 @ 0x97c13734 (4 bytes) */
 int std__string__string_97c13734(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   string(this,param_1);
   return;
@@ -1716,21 +1716,21 @@ int std__string__string_97c13734(this, param_1)
 
 /* std__string__string_97c13738 @ 0x97c13738 (4 bytes) */
 int std__string__string_97c13738(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
   char *pcVar3;
   char in_RESERVE;
   byte in_cr0;
-  allocator aaStack_50 [32];
-  allocator aaStack_30 [28];
+  unsigned char aaStack_50 [32];
+  unsigned char aaStack_30 [28];
   
   pcVar3 = *(char **)param_1;
   get_allocator();
   if (*(int *)(pcVar3 + -4) < 0) {
-    pcVar3 = (char *)_Rep::_M_clone((unsigned char *)(pcVar3 + -0xc),aaStack_50,0);
+    pcVar3 = (char *)_Rep___M_clone((unsigned char *)(pcVar3 + -0xc),aaStack_50,0);
   }
   else {
     piVar2 = (int *)(pcVar3 + -4);
@@ -1743,17 +1743,17 @@ int std__string__string_97c13738(this, param_1)
     } while (!(bool)(in_cr0 >> 1 & 1));
   }
   get_allocator();
-  _Alloc_hider::_Alloc_hider((unsigned char *)this,pcVar3,aaStack_30);
+  _Alloc_hider___Alloc_hider((unsigned char *)this,pcVar3,aaStack_30);
   return;
 }
 
 /* std__string___Rep___M_grab @ 0x97c1373c (48 bytes) */
 int std__string___Rep___M_grab(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   int iVar1;
-  allocator *paVar2;
+  unsigned char * paVar2;
   char in_RESERVE;
   byte in_cr0;
   
@@ -1774,21 +1774,21 @@ int std__string___Rep___M_grab(param_1, param_2)
 
 /* std__string__string_97c1376c @ 0x97c1376c (152 bytes) */
 int std__string__string_97c1376c(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int *piVar2;
   char *pcVar3;
   char in_RESERVE;
   byte in_cr0;
-  allocator aaStack_50 [32];
-  allocator aaStack_30 [28];
+  unsigned char aaStack_50 [32];
+  unsigned char aaStack_30 [28];
   
   pcVar3 = *(char **)param_1;
   get_allocator();
   if (*(int *)(pcVar3 + -4) < 0) {
-    pcVar3 = (char *)_Rep::_M_clone((unsigned char *)(pcVar3 + -0xc),aaStack_50,0);
+    pcVar3 = (char *)_Rep___M_clone((unsigned char *)(pcVar3 + -0xc),aaStack_50,0);
   }
   else {
     piVar2 = (int *)(pcVar3 + -4);
@@ -1801,14 +1801,14 @@ int std__string__string_97c1376c(this, param_1)
     } while (!(bool)(in_cr0 >> 1 & 1));
   }
   get_allocator();
-  _Alloc_hider::_Alloc_hider((unsigned char *)this,pcVar3,aaStack_30);
+  _Alloc_hider___Alloc_hider((unsigned char *)this,pcVar3,aaStack_30);
   return;
 }
 
 /* std__string__string_97c13808 @ 0x97c13808 (4 bytes) */
 int std__string__string_97c13808(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   ulong param_2;
   ulong param_3;
 {

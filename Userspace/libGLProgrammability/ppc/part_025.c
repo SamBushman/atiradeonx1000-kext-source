@@ -1,18 +1,20 @@
 #include "decls.h"
 
 /* __cxxabiv1____terminate @ 0x97c19de8 (32 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int __cxxabiv1____terminate(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   (*param_1)();
                     
   _abort();
 }
+#endif
 
 /* std__terminate @ 0x97c19e0c (56 bytes) */
 int std__terminate()
 {
-  _func_void *p_Var1;
+  unsigned char * p_Var1;
   
   p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(4);
   if (p_Var1 != (unsigned char *)0x0) {
@@ -23,10 +25,11 @@ int std__terminate()
 }
 
 /* __cxxabiv1____unexpected @ 0x97c19e44 (28 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int __cxxabiv1____unexpected(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
-  _func_void *p_Var1;
+  unsigned char * p_Var1;
   int iVar2;
   int iVar3;
   
@@ -45,11 +48,12 @@ int __cxxabiv1____unexpected(param_1)
   __terminate_handler = iVar2;
   return iVar3;
 }
+#endif
 
 /* std__unexpected @ 0x97c19e60 (56 bytes) */
 int std__unexpected()
 {
-  _func_void *p_Var1;
+  unsigned char * p_Var1;
   undefined4 uVar2;
   int iVar3;
   
@@ -69,7 +73,7 @@ int std__unexpected()
 
 /* std__set_terminate @ 0x97c19e98 (100 bytes) */
 int std__set_terminate(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   int iVar1;
   
@@ -84,7 +88,7 @@ int std__set_terminate(param_1)
 
 /* std__set_unexpected @ 0x97c19f0c (100 bytes) */
 int std__set_unexpected(param_1)
-  unsigned char *param_1;
+  unsigned char * param_1;
 {
   int iVar1;
   
@@ -163,8 +167,7 @@ int std__uncaught_exception()
 }
 
 /* get_globals_init_once @ 0x97c1a0a8 (32 bytes) */
-void get_globals_init_once_a7b7f394(void)
-
+int get_globals_init_once()
 {
   _use_thread_key = 1;
   return;
@@ -189,7 +192,7 @@ int ___cxa_get_globals()
   int iVar2;
   
   if ((_use_thread_key == 0) ||
-     ((_use_thread_key < 0 && (get_globals_init_once_a7b7f394(), _use_thread_key == 0)))) {
+     ((_use_thread_key < 0 && (((int (*)())get_globals_init_once)(), _use_thread_key == 0)))) {
     return (undefined4 *)&_globals_static;
   }
   puVar1 = (undefined4 *)__keymgr_get_per_thread_data(0xd);
@@ -260,8 +263,8 @@ int FUN_97c1a28c()
 }
 
 /* _size_of_encoded_value @ 0x97c1a2c8 (120 bytes) */
-undefined4 _size_of_encoded_value_97c1c3a4(uint param_1)
-
+int _size_of_encoded_value(param_1)
+  uint param_1;
 {
   undefined4 uVar1;
   
@@ -291,11 +294,12 @@ LAB_97c1a328:
 }
 
 /* _base_of_encoded_value @ 0x97c1a340 (172 bytes) */
-uintptr_t _base_of_encoded_value_a7b7f374(uint param_1,unsigned char *param_2)
-
+int _base_of_encoded_value(param_1, param_2)
+  uint param_1;
+  unsigned char * param_2;
 {
   bool bVar1;
-  uintptr_t uVar2;
+  unsigned char uVar2;
   
   if (param_1 != 0xff) {
     param_1 = param_1 & 0x70;
@@ -333,8 +337,9 @@ LAB_97c1a3d4:
 }
 
 /* _read_uleb128 @ 0x97c1a3ec (48 bytes) */
-void _read_uleb128_97c1c41c(byte *param_1,uint *param_2)
-
+int _read_uleb128(param_1, param_2)
+  byte *param_1;
+  uint *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -355,8 +360,9 @@ void _read_uleb128_97c1c41c(byte *param_1,uint *param_2)
 }
 
 /* _read_sleb128 @ 0x97c1a41c (76 bytes) */
-void _read_sleb128_97c1c44c(byte *param_1,uint *param_2)
-
+int _read_sleb128(param_1, param_2)
+  byte *param_1;
+  uint *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -380,8 +386,11 @@ void _read_sleb128_97c1c44c(byte *param_1,uint *param_2)
 }
 
 /* _read_encoded_value_with_base @ 0x97c1a468 (312 bytes) */
-uint * _read_encoded_value_with_base_97c1c498(uint param_1,uint *param_2,uint *param_3,uint *param_4)
-
+int _read_encoded_value_with_base(param_1, param_2, param_3, param_4)
+  uint param_1;
+  uint *param_2;
+  uint *param_3;
+  uint *param_4;
 {
   uint *puVar1;
   uint *local_30;
@@ -400,7 +409,7 @@ uint * _read_encoded_value_with_base_97c1c498(uint param_1,uint *param_2,uint *p
     puVar1 = param_3 + 1;
     break;
   case 1:
-    puVar1 = (uint *)((int (*)())_read_uleb128_97c1c41c)(param_3,&local_30);
+    puVar1 = (uint *)((int (*)())_read_uleb128)(param_3,&local_30);
     local_2c[0] = local_30;
     break;
   case 2:
@@ -418,7 +427,7 @@ uint * _read_encoded_value_with_base_97c1c498(uint param_1,uint *param_2,uint *p
                     
     _abort();
   case 9:
-    puVar1 = (uint *)((int (*)())_read_sleb128_97c1c44c)(param_3,local_2c);
+    puVar1 = (uint *)((int (*)())_read_sleb128)(param_3,local_2c);
     break;
   case 10:
     local_2c[0] = (uint *)(int)(short)*(ushort *)param_3;
@@ -441,25 +450,26 @@ LAB_97c1a5b4:
 
 /* __Unwind_GetLanguageSpecificData @ 0x97c1a5d4 (8 bytes) */
 int __Unwind_GetLanguageSpecificData(context)
-  unsigned char *context;
+  unsigned char * context;
 {
   return *(unsigned char *)(context + 0x1c4);
 }
 
 /* __Unwind_GetRegionStart @ 0x97c1a5dc (8 bytes) */
 int __Unwind_GetRegionStart(context)
-  unsigned char *context;
+  unsigned char * context;
 {
   return *(unsigned char *)(context + 0x1d0);
 }
 
 /* __Unwind_FindEnclosingFunction @ 0x97c1a5e4 (56 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int __Unwind_FindEnclosingFunction(pc)
   void *pc;
 {
   void *pvVar1;
   void *pvVar2;
-  dwarf_eh_bases adStack_20 [2];
+  unsigned char adStack_20 [2];
   
   pvVar1 = __Unwind_Find_FDE((void *)((int)pc + -1),adStack_20);
   pvVar2 = (void *)0x0;
@@ -468,17 +478,18 @@ int __Unwind_FindEnclosingFunction(pc)
   }
   return pvVar2;
 }
+#endif
 
 /* __Unwind_GetDataRelBase @ 0x97c1a61c (8 bytes) */
 int __Unwind_GetDataRelBase(context)
-  unsigned char *context;
+  unsigned char * context;
 {
   return *(unsigned char *)(context + 0x1cc);
 }
 
 /* __Unwind_GetTextRelBase @ 0x97c1a624 (8 bytes) */
 int __Unwind_GetTextRelBase(context)
-  unsigned char *context;
+  unsigned char * context;
 {
   return *(unsigned char *)(context + 0x1c8);
 }
@@ -510,15 +521,15 @@ int _extract_cie_info(param_1, param_2, param_3)
     pcVar9 = (char *)(param_1 + 0xb);
     *(undefined4 *)(param_3 + 0x3a0) = *(undefined4 *)pcVar1;
   }
-  uVar5 = ((int (*)())_read_uleb128_97c1c41c)(pcVar8,param_3 + 0x398);
-  puVar6 = (undefined1 *)((int (*)())_read_sleb128_97c1c44c)(uVar5,param_3 + 0x394);
+  uVar5 = ((int (*)())_read_uleb128)(pcVar8,param_3 + 0x398);
+  puVar6 = (undefined1 *)((int (*)())_read_sleb128)(uVar5,param_3 + 0x394);
   uVar2 = *puVar6;
   puVar6 = puVar6 + 1;
   *(undefined1 *)(param_3 + 0x39e) = 0xff;
   *(undefined1 *)(param_3 + 0x39c) = uVar2;
   cVar3 = *pcVar9;
   if (cVar3 == 'z') {
-    puVar6 = (undefined1 *)((int (*)())_read_uleb128_97c1c41c)(puVar6,local_30);
+    puVar6 = (undefined1 *)((int (*)())_read_uleb128)(puVar6,local_30);
     *(undefined1 *)(param_3 + 0x39f) = 1;
     pcVar9 = pcVar9 + 1;
     cVar3 = *pcVar9;
@@ -545,8 +556,8 @@ LAB_97c1a718:
         return puVar7;
       }
       uVar2 = *puVar6;
-      uVar5 = _base_of_encoded_value_a7b7f374(uVar2,param_2);
-      puVar6 = (undefined1 *)((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2,uVar5,puVar6 + 1,param_3 + 0x390);
+      uVar5 = ((int (*)())_base_of_encoded_value)(uVar2,param_2);
+      puVar6 = (undefined1 *)((int (*)())_read_encoded_value_with_base)(uVar2,uVar5,puVar6 + 1,param_3 + 0x390);
     }
     pcVar9 = pcVar9 + 1;
     cVar3 = *pcVar9;
@@ -619,7 +630,7 @@ LAB_97c1ac88:
           puVar3 = (uint *)*local_40;
         }
         else if (uVar10 == 0x23) {
-          puVar7 = (ushort *)((int (*)())_read_uleb128_97c1c41c)(puVar7,local_30);
+          puVar7 = (ushort *)((int (*)())_read_uleb128)(puVar7,local_30);
           puVar3 = (uint *)((int)local_40 + local_30[0]);
         }
         else if (uVar10 < 0x24) {
@@ -678,10 +689,10 @@ LAB_97c1acb4:
       local_40 = (uint *)(bVar1 | uVar9);
       goto LAB_97c1ae98;
     case 0x10:
-      puVar7 = (ushort *)((int (*)())_read_uleb128_97c1c41c)(puVar7,&local_40);
+      puVar7 = (ushort *)((int (*)())_read_uleb128)(puVar7,&local_40);
       goto LAB_97c1ae98;
     case 0x11:
-      puVar7 = (ushort *)((int (*)())_read_sleb128_97c1c44c)(puVar7,&local_3c);
+      puVar7 = (ushort *)((int (*)())_read_sleb128)(puVar7,&local_3c);
       puVar3 = local_3c;
       break;
     case 0x12:
@@ -918,18 +929,18 @@ LAB_97c1ae34:
     case 0x8d:
     case 0x8e:
     case 0x8f:
-      puVar7 = (ushort *)((int (*)())_read_sleb128_97c1c44c)(puVar7,&local_34);
+      puVar7 = (ushort *)((int (*)())_read_sleb128)(puVar7,&local_34);
       iVar4 = uVar10 - 0x70;
       goto LAB_97c1ab30;
     case 0x90:
-      puVar7 = (ushort *)((int (*)())_read_uleb128_97c1c41c)(puVar7,&local_38);
+      puVar7 = (ushort *)((int (*)())_read_uleb128)(puVar7,&local_38);
       iVar4 = local_38;
 LAB_97c1aaf4:
       local_40 = (uint *)**(uint **)(param_3 + iVar4 * 4);
       goto LAB_97c1aba8;
     case 0x92:
-      uVar5 = ((int (*)())_read_uleb128_97c1c41c)(puVar7,&local_38);
-      puVar7 = (ushort *)((int (*)())_read_sleb128_97c1c44c)(uVar5,&local_34);
+      uVar5 = ((int (*)())_read_uleb128)(puVar7,&local_38);
+      puVar7 = (ushort *)((int (*)())_read_sleb128)(uVar5,&local_34);
       iVar4 = local_38;
 LAB_97c1ab30:
       local_40 = (uint *)(**(int **)(param_3 + iVar4 * 4) + local_34);
@@ -998,7 +1009,7 @@ int _execute_cfa_program(param_1, param_2, param_3, param_4)
       if (bVar6 == 0x80) {
         local_2c = bVar1 & 0x3f;
 LAB_97c1b0f4:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_30);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,&local_30);
         iVar10 = *(int *)((int)param_4 + 0x394);
         iVar3 = local_30;
 LAB_97c1b10c:
@@ -1018,8 +1029,8 @@ LAB_97c1b3a0:
         break;
       case 1:
         uVar2 = *(undefined1 *)((int)param_4 + 0x39d);
-        uVar7 = _base_of_encoded_value_a7b7f374(uVar2,param_3);
-        puVar13 = (uint *)((int (*)())_read_encoded_value_with_base_97c1c498)(uVar2,uVar7,puVar13,(int)param_4 + 0x38c);
+        uVar7 = ((int (*)())_base_of_encoded_value)(uVar2,param_3);
+        puVar13 = (uint *)((int (*)())_read_encoded_value_with_base)(uVar2,uVar7,puVar13,(int)param_4 + 0x38c);
         break;
       case 2:
         uVar4 = (uint)*(byte *)puVar13;
@@ -1041,10 +1052,10 @@ LAB_97c1b0dc:
         puVar13 = (uint *)((int)param_1 + 5);
         goto LAB_97c1b0d4;
       case 5:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,&local_2c);
         goto LAB_97c1b0f4;
       case 6:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,&local_2c);
         *(undefined4 *)((int)param_4 + local_2c * 8 + 4) = 0;
         break;
       case 7:
@@ -1052,8 +1063,8 @@ LAB_97c1b0dc:
         puVar8 = &local_2c;
         goto LAB_97c1b358;
       case 9:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(uVar7,&local_28);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,&local_2c);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(uVar7,&local_28);
         *(undefined4 *)((int)param_4 + local_2c * 8 + 4) = 2;
         *(undefined4 *)((int)param_4 + local_2c * 8) = local_28;
         break;
@@ -1081,45 +1092,45 @@ LAB_97c1b0dc:
         puVar11 = puVar14;
         break;
       case 0xc:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,(int)param_4 + 0x380);
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(uVar7,&local_30);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,(int)param_4 + 0x380);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(uVar7,&local_30);
         *(int *)((int)param_4 + 0x37c) = local_30;
         *(undefined4 *)((int)param_4 + 0x388) = 1;
         break;
       case 0xd:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,(int)param_4 + 0x380);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,(int)param_4 + 0x380);
         goto LAB_97c1b2e8;
       case 0xe:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_30);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,&local_30);
         *(int *)((int)param_4 + 0x37c) = local_30;
         break;
       case 0xf:
-        iVar3 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_30);
+        iVar3 = ((int (*)())_read_uleb128)(puVar13,&local_30);
         *(int *)((int)param_4 + 900) = iVar3;
         *(undefined4 *)((int)param_4 + 0x388) = 2;
         puVar13 = (uint *)(iVar3 + local_30);
         break;
       case 0x10:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
-        iVar3 = ((int (*)())_read_uleb128_97c1c41c)(uVar7,&local_30);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,&local_2c);
+        iVar3 = ((int (*)())_read_uleb128)(uVar7,&local_30);
         *(undefined4 *)((int)param_4 + local_2c * 8 + 4) = 3;
         *(int *)((int)param_4 + local_2c * 8) = iVar3;
         puVar13 = (uint *)(iVar3 + local_30);
         break;
       case 0x11:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
-        puVar13 = (uint *)((int (*)())_read_sleb128_97c1c44c)(uVar7,&local_24);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,&local_2c);
+        puVar13 = (uint *)((int (*)())_read_sleb128)(uVar7,&local_24);
         iVar10 = *(int *)((int)param_4 + 0x394);
         iVar3 = local_24;
         goto LAB_97c1b10c;
       case 0x12:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,(int)param_4 + 0x380);
-        puVar13 = (uint *)((int (*)())_read_sleb128_97c1c44c)(uVar7,(int)param_4 + 0x37c);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,(int)param_4 + 0x380);
+        puVar13 = (uint *)((int (*)())_read_sleb128)(uVar7,(int)param_4 + 0x37c);
 LAB_97c1b2e8:
         *(undefined4 *)((int)param_4 + 0x388) = 1;
         break;
       case 0x13:
-        puVar13 = (uint *)((int (*)())_read_sleb128_97c1c44c)(puVar13,(int)param_4 + 0x37c);
+        puVar13 = (uint *)((int (*)())_read_sleb128)(puVar13,(int)param_4 + 0x37c);
         break;
       default:
                     
@@ -1136,11 +1147,11 @@ LAB_97c1b2e8:
       case 0x2e:
         puVar8 = (uint *)(param_3 + 0x1d4);
 LAB_97c1b358:
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(puVar13,puVar8);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(puVar13,puVar8);
         break;
       case 0x2f:
-        uVar7 = ((int (*)())_read_uleb128_97c1c41c)(puVar13,&local_2c);
-        puVar13 = (uint *)((int (*)())_read_uleb128_97c1c41c)(uVar7,&local_30);
+        uVar7 = ((int (*)())_read_uleb128)(puVar13,&local_2c);
+        puVar13 = (uint *)((int (*)())_read_uleb128)(uVar7,&local_30);
         iVar3 = *(int *)((int)param_4 + 0x394);
         *(undefined4 *)((int)param_4 + local_2c * 8 + 4) = 1;
         iVar3 = -(local_30 * iVar3);
@@ -1183,16 +1194,16 @@ int _uw_frame_state_for(param_1, param_2)
     if (iVar5 != 0) {
       iVar6 = 0;
       ((int (*)())_execute_cfa_program)(iVar5,iVar7 + *(int *)((int)piVar4 + (4 - iVar3)) + 4,param_1,param_2);
-      iVar3 = ((int (*)())_size_of_encoded_value_97c1c3a4)(*(undefined1 *)((int)param_2 + 0x39d));
+      iVar3 = ((int (*)())_size_of_encoded_value)(*(undefined1 *)((int)param_2 + 0x39d));
       iVar3 = (int)piVar4 + iVar3 * 2 + 8;
       if (*(char *)((int)param_2 + 0x39f) != '\0') {
-        iVar3 = ((int (*)())_read_uleb128_97c1c41c)(iVar3,local_30);
+        iVar3 = ((int (*)())_read_uleb128)(iVar3,local_30);
         iVar6 = iVar3 + local_30[0];
       }
       cVar1 = *(char *)((int)param_2 + 0x39e);
       if (cVar1 != -1) {
-        uVar2 = _base_of_encoded_value_a7b7f374(cVar1,param_1);
-        iVar3 = ((int (*)())_read_encoded_value_with_base_97c1c498)(cVar1,uVar2,iVar3,param_1 + 0x1c4);
+        uVar2 = ((int (*)())_base_of_encoded_value)(cVar1,param_1);
+        iVar3 = ((int (*)())_read_encoded_value_with_base)(cVar1,uVar2,iVar3,param_1 + 0x1c4);
       }
       if (iVar6 == 0) {
         iVar6 = iVar3;
@@ -1286,7 +1297,7 @@ int _uw_update_context_1(param_1, param_2)
                     
       _abort();
     }
-    iVar2 = ((int (*)())_read_uleb128_97c1c41c)(param_2[0xe1],&local_30);
+    iVar2 = ((int (*)())_read_uleb128)(param_2[0xe1],&local_30);
     iVar2 = ((int (*)())_execute_stack_op)(iVar2,iVar2 + local_30,param_1,0);
   }
   param_1[0x6f] = iVar2;
@@ -1301,7 +1312,7 @@ int _uw_update_context_1(param_1, param_2)
         *param_1 = aiStack_210[*param_2];
       }
       else if (iVar1 == 3) {
-        iVar1 = ((int (*)())_read_uleb128_97c1c41c)(*param_2,local_2c);
+        iVar1 = ((int (*)())_read_uleb128)(*param_2,local_2c);
         iVar1 = ((int (*)())_execute_stack_op)(iVar1,iVar1 + local_2c[0],aiStack_210,iVar2);
         *param_1 = iVar1;
       }
@@ -1518,11 +1529,11 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
 
 /* __Unwind_RaiseException @ 0x97c1bb6c (284 bytes) */
 int __Unwind_RaiseException(exception_object)
-  unsigned char *exception_object;
+  unsigned char * exception_object;
 {
   undefined4 *puVar1;
   int iVar2;
-  _Unwind_Reason_Code _Var3;
+  unsigned char _Var3;
   int in_stack_00000000;
   undefined4 in_stack_000003e0;
   code *in_stack_00000790;
@@ -1606,12 +1617,12 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
 
 /* __Unwind_ForcedUnwind @ 0x97c1bd8c (148 bytes) */
 int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter)
-  unsigned char *exception_object;
-  _Unwind_Stop_Fn stop;
+  unsigned char * exception_object;
+  unsigned char stop;
   void *stop_parameter;
 {
   int iVar1;
-  _Unwind_Reason_Code _Var2;
+  unsigned char _Var2;
   undefined8 uVar3;
   int in_stack_00000000;
   
@@ -1631,7 +1642,7 @@ int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter)
 
 /* __Unwind_Resume @ 0x97c1be20 (152 bytes) */
 int __Unwind_Resume(exception_object)
-  unsigned char *exception_object;
+  unsigned char * exception_object;
 {
   int iVar1;
   int in_stack_00000000;
@@ -1655,44 +1666,46 @@ int __Unwind_Resume(exception_object)
 }
 
 /* __Unwind_DeleteException @ 0x97c1beb8 (20 bytes) */
+#if 0   /* compile-failing as plain C: Ghidra text kept verbatim, see ledger status */
 int __Unwind_DeleteException(exception_object)
-  unsigned char *exception_object;
+  unsigned char * exception_object;
 {
                     
                     
   (*exception_object->exception_cleanup)(_URC_FOREIGN_EXCEPTION_CAUGHT,exception_object);
   return;
 }
+#endif
 
 /* __Unwind_GetGR @ 0x97c1becc (16 bytes) */
 int __Unwind_GetGR(context, index)
-  unsigned char *context;
+  unsigned char * context;
   int index;
 {
-  return **(uintptr_t **)(context + index * 4);
+  return **(unsigned char **)(context + index * 4);
 }
 
 /* __Unwind_SetGR @ 0x97c1bedc (16 bytes) */
 int __Unwind_SetGR(context, index, new_value)
-  unsigned char *context;
+  unsigned char * context;
   int index;
-  uintptr_t new_value;
+  unsigned char new_value;
 {
-  **(uintptr_t **)(context + index * 4) = new_value;
+  **(unsigned char **)(context + index * 4) = new_value;
   return;
 }
 
 /* __Unwind_GetIP @ 0x97c1beec (8 bytes) */
 int __Unwind_GetIP(context)
-  unsigned char *context;
+  unsigned char * context;
 {
   return *(unsigned char *)(context + 0x1c0);
 }
 
 /* __Unwind_SetIP @ 0x97c1bef4 (8 bytes) */
 int __Unwind_SetIP(param_1, new_value)
-  unsigned char *param_1;
-  uintptr_t new_value;
+  unsigned char * param_1;
+  unsigned char new_value;
 {
   *(unsigned char *)(param_1 + 0x1c0) = new_value;
   return;
@@ -1815,8 +1828,8 @@ int _init_dwarf_reg_size_table()
 }
 
 /* _size_of_encoded_value_97c1c3a4 @ 0x97c1c3a4 (120 bytes) */
-undefined4 _size_of_encoded_value_97c1c3a4_97c1c3a4(uint param_1)
-
+int _size_of_encoded_value_97c1c3a4(param_1)
+  uint param_1;
 {
   undefined4 uVar1;
   
@@ -1846,8 +1859,9 @@ LAB_97c1c404:
 }
 
 /* _read_uleb128_97c1c41c @ 0x97c1c41c (48 bytes) */
-void _read_uleb128_97c1c41c_97c1c41c(byte *param_1,uint *param_2)
-
+int _read_uleb128_97c1c41c(param_1, param_2)
+  byte *param_1;
+  uint *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -1868,8 +1882,9 @@ void _read_uleb128_97c1c41c_97c1c41c(byte *param_1,uint *param_2)
 }
 
 /* _read_sleb128_97c1c44c @ 0x97c1c44c (76 bytes) */
-void _read_sleb128_97c1c44c_97c1c44c(byte *param_1,uint *param_2)
-
+int _read_sleb128_97c1c44c(param_1, param_2)
+  byte *param_1;
+  uint *param_2;
 {
   byte bVar1;
   uint uVar2;
@@ -1893,8 +1908,11 @@ void _read_sleb128_97c1c44c_97c1c44c(byte *param_1,uint *param_2)
 }
 
 /* _read_encoded_value_with_base_97c1c498 @ 0x97c1c498 (312 bytes) */
-uint * _read_encoded_value_with_base_97c1c498_97c1c498(uint param_1,uint *param_2,uint *param_3,uint *param_4)
-
+int _read_encoded_value_with_base_97c1c498(param_1, param_2, param_3, param_4)
+  uint param_1;
+  uint *param_2;
+  uint *param_3;
+  uint *param_4;
 {
   uint *puVar1;
   uint *local_30;
@@ -1913,7 +1931,7 @@ uint * _read_encoded_value_with_base_97c1c498_97c1c498(uint param_1,uint *param_
     puVar1 = param_3 + 1;
     break;
   case 1:
-    puVar1 = (uint *)((int (*)())_read_uleb128_97c1c41c)(param_3,&local_30);
+    puVar1 = (uint *)((int (*)())_read_uleb128)(param_3,&local_30);
     local_2c[0] = local_30;
     break;
   case 2:
@@ -1931,7 +1949,7 @@ uint * _read_encoded_value_with_base_97c1c498_97c1c498(uint param_1,uint *param_
                     
     _abort();
   case 9:
-    puVar1 = (uint *)((int (*)())_read_sleb128_97c1c44c)(param_3,local_2c);
+    puVar1 = (uint *)((int (*)())_read_sleb128)(param_3,local_2c);
     break;
   case 10:
     local_2c[0] = (uint *)(int)(short)*(ushort *)param_3;

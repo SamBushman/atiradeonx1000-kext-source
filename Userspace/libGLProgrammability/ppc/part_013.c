@@ -2,7 +2,7 @@
 
 /* FunctionTable__setNumParams @ 0x97bccbcc (20 bytes) */
 int FunctionTable__setNumParams(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   int param_2;
 {
@@ -12,7 +12,7 @@ int FunctionTable__setNumParams(this, param_1, param_2)
 
 /* FunctionTable__setFirstOp @ 0x97bccbe0 (20 bytes) */
 int FunctionTable__setFirstOp(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -22,7 +22,7 @@ int FunctionTable__setFirstOp(this, param_1, param_2)
 
 /* FunctionTable__setLastOp @ 0x97bccbf4 (20 bytes) */
 int FunctionTable__setLastOp(this, param_1, param_2)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
   uint param_2;
 {
@@ -32,8 +32,8 @@ int FunctionTable__setLastOp(this, param_1, param_2)
 
 /* FunctionTable__updateForRemovingChunk @ 0x97bccc08 (168 bytes) */
 int FunctionTable__updateForRemovingChunk(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int iVar2;
@@ -68,7 +68,7 @@ int FunctionTable__updateForRemovingChunk(this, param_1)
 
 /* FunctionTable__findFunction @ 0x97bcccb0 (132 bytes) */
 int FunctionTable__findFunction(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
   int iVar1;
@@ -98,7 +98,7 @@ int FunctionTable__findFunction(this, param_1)
 
 /* FunctionTable__getFunctionName @ 0x97bccd34 (16 bytes) */
 int FunctionTable__getFunctionName(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this);
@@ -106,7 +106,7 @@ int FunctionTable__getFunctionName(this, param_1)
 
 /* FunctionTable__getReturnVal @ 0x97bccd44 (20 bytes) */
 int FunctionTable__getReturnVal(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this + 4);
@@ -114,7 +114,7 @@ int FunctionTable__getReturnVal(this, param_1)
 
 /* FunctionTable__getEmpty @ 0x97bccd58 (20 bytes) */
 int FunctionTable__getEmpty(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this + 8);
@@ -122,7 +122,7 @@ int FunctionTable__getEmpty(this, param_1)
 
 /* FunctionTable__getNumParams @ 0x97bccd6c (20 bytes) */
 int FunctionTable__getNumParams(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this + 0xc);
@@ -130,7 +130,7 @@ int FunctionTable__getNumParams(this, param_1)
 
 /* FunctionTable__getFirstOp @ 0x97bccd80 (20 bytes) */
 int FunctionTable__getFirstOp(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this + 0x10);
@@ -138,7 +138,7 @@ int FunctionTable__getFirstOp(this, param_1)
 
 /* FunctionTable__getLastOp @ 0x97bccd94 (20 bytes) */
 int FunctionTable__getLastOp(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   return *(undefined4 *)(param_1 * 0x18 + *(int *)this + 0x14);
@@ -236,11 +236,11 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         }
         fVar7 = *param_2 * FLOAT_97c3acc4 + FLOAT_97c3acc0;
         fVar1 = param_2[1] * FLOAT_97c3acc4 + FLOAT_97c3acc0;
-        bVar10 = TAllocation::guardBlockSize <= fVar7;
+        bVar10 = TAllocation__guardBlockSize <= fVar7;
         *param_2 = fVar7;
         param_2[1] = fVar1;
         param_2[2] = param_2[2] * fVar5 + fVar2;
-        fVar2 = TAllocation::guardBlockSize;
+        fVar2 = TAllocation__guardBlockSize;
         if (bVar10) {
           if (fVar5 < fVar7) {
             fVar7 = 31.0;
@@ -251,7 +251,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         }
         fVar5 = param_2[1];
         *param_2 = fVar7;
-        fVar7 = TAllocation::guardBlockSize;
+        fVar7 = TAllocation__guardBlockSize;
         if (fVar2 <= fVar5) {
           if (FLOAT_97c3acc4 < fVar5) {
             fVar5 = 31.0;
@@ -304,12 +304,12 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
       else {
         fVar7 = *param_2 * FLOAT_97c3acbc + FLOAT_97c3acc0;
         fVar1 = param_2[1] * FLOAT_97c3acbc + FLOAT_97c3acc0;
-        bVar10 = TAllocation::guardBlockSize <= fVar7;
+        bVar10 = TAllocation__guardBlockSize <= fVar7;
         *param_2 = fVar7;
         param_2[1] = fVar1;
         param_2[3] = param_2[3] * fVar2 + fVar5;
         param_2[2] = param_2[2] * fVar2 + fVar5;
-        fVar5 = TAllocation::guardBlockSize;
+        fVar5 = TAllocation__guardBlockSize;
         if (bVar10) {
           if (fVar2 < fVar7) {
             fVar7 = 255.0;
@@ -320,7 +320,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         }
         fVar2 = param_2[1];
         *param_2 = fVar7;
-        fVar7 = TAllocation::guardBlockSize;
+        fVar7 = TAllocation__guardBlockSize;
         if (fVar5 <= fVar2) {
           if (FLOAT_97c3acbc < fVar2) {
             fVar2 = 255.0;
@@ -331,7 +331,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         }
         fVar5 = param_2[2];
         param_2[1] = fVar2;
-        fVar2 = TAllocation::guardBlockSize;
+        fVar2 = TAllocation__guardBlockSize;
         if (fVar7 <= fVar5) {
           if (FLOAT_97c3acbc < fVar5) {
             fVar5 = 255.0;
@@ -1316,7 +1316,7 @@ int _InterpreterEmulateOp()
         ((int (*)())_InterpreterLoadSource)(piVar14,piVar15[0x1f],piVar15[0x20],piVar15[0x21],piVar15[0x22],piVar15[0x23],
                    piVar15[0x24],piVar15[0x25]);
       }
-      fVar4 = TAllocation::guardBlockSize;
+      fVar4 = TAllocation__guardBlockSize;
       dVar28 = DOUBLE_97c30a60;
       fVar8 = local_130[7];
       switch(iVar24) {
@@ -1329,9 +1329,9 @@ switchD_97bd0598_caseD_0:
         break;
       case 1:
         local_130[0] = 1.0;
-        if (local_130[4] <= TAllocation::guardBlockSize) {
+        if (local_130[4] <= TAllocation__guardBlockSize) {
           local_130[1] = 0.0;
-          local_130[2] = TAllocation::guardBlockSize;
+          local_130[2] = TAllocation__guardBlockSize;
         }
         else {
           local_70 = local_130[4];
@@ -1381,8 +1381,8 @@ switchD_97bd0598_caseD_0:
       default:
         goto switchD_97bd0598_caseD_6;
       case 7:
-        if (local_130[4] <= TAllocation::guardBlockSize) {
-          if (TAllocation::guardBlockSize <= local_130[4]) {
+        if (local_130[4] <= TAllocation__guardBlockSize) {
+          if (TAllocation__guardBlockSize <= local_130[4]) {
             local_130[0] = 0.0;
           }
           else {
@@ -1392,8 +1392,8 @@ switchD_97bd0598_caseD_0:
         else {
           local_130[0] = 1.0;
         }
-        if (local_130[5] <= TAllocation::guardBlockSize) {
-          if (TAllocation::guardBlockSize <= local_130[5]) {
+        if (local_130[5] <= TAllocation__guardBlockSize) {
+          if (TAllocation__guardBlockSize <= local_130[5]) {
             local_130[1] = 0.0;
           }
           else {
@@ -1403,8 +1403,8 @@ switchD_97bd0598_caseD_0:
         else {
           local_130[1] = 1.0;
         }
-        if (local_130[6] <= TAllocation::guardBlockSize) {
-          if (TAllocation::guardBlockSize <= local_130[6]) {
+        if (local_130[6] <= TAllocation__guardBlockSize) {
+          if (TAllocation__guardBlockSize <= local_130[6]) {
             local_130[2] = 0.0;
           }
           else {
@@ -1414,25 +1414,25 @@ switchD_97bd0598_caseD_0:
         else {
           local_130[2] = 1.0;
         }
-        if (TAllocation::guardBlockSize < local_130[7]) goto LAB_97bd1cd8;
-        if (TAllocation::guardBlockSize <= local_130[7]) goto LAB_97bd1ce0;
+        if (TAllocation__guardBlockSize < local_130[7]) goto LAB_97bd1cd8;
+        if (TAllocation__guardBlockSize <= local_130[7]) goto LAB_97bd1ce0;
         local_130[3] = -1.0;
         break;
       case 8:
-        if (((local_130[4] == TAllocation::guardBlockSize) &&
-            (local_130[5] == TAllocation::guardBlockSize)) &&
-           (local_130[6] == TAllocation::guardBlockSize)) {
+        if (((local_130[4] == TAllocation__guardBlockSize) &&
+            (local_130[5] == TAllocation__guardBlockSize)) &&
+           (local_130[6] == TAllocation__guardBlockSize)) {
 LAB_97bd0ab8:
           uVar9 = 0;
-          if (local_130[7] == TAllocation::guardBlockSize) goto LAB_97bd0ac8;
+          if (local_130[7] == TAllocation__guardBlockSize) goto LAB_97bd0ac8;
         }
         uVar9 = 1;
         goto LAB_97bd0ac8;
       case 9:
         uVar9 = 0;
-        if (((local_130[4] != TAllocation::guardBlockSize) &&
-            (local_130[5] != TAllocation::guardBlockSize)) &&
-           (local_130[6] != TAllocation::guardBlockSize)) goto LAB_97bd0ab8;
+        if (((local_130[4] != TAllocation__guardBlockSize) &&
+            (local_130[5] != TAllocation__guardBlockSize)) &&
+           (local_130[6] != TAllocation__guardBlockSize)) goto LAB_97bd0ab8;
 LAB_97bd0ac8:
         uStack_ac = uVar9 ^ 0x80000000;
         local_b0 = 0x43300000;
@@ -1445,19 +1445,19 @@ LAB_97bd0cc8:
         break;
       case 10:
         local_130[0] = 1.0;
-        if (local_130[4] != TAllocation::guardBlockSize) {
+        if (local_130[4] != TAllocation__guardBlockSize) {
           local_130[0] = 0.0;
         }
         local_130[1] = 1.0;
-        if (local_130[5] != TAllocation::guardBlockSize) {
+        if (local_130[5] != TAllocation__guardBlockSize) {
           local_130[1] = 0.0;
         }
         local_130[2] = 1.0;
-        if (local_130[6] != TAllocation::guardBlockSize) {
+        if (local_130[6] != TAllocation__guardBlockSize) {
           local_130[2] = 0.0;
         }
         local_130[3] = 1.0;
-        if (local_130[7] != TAllocation::guardBlockSize) goto LAB_97bd1ce0;
+        if (local_130[7] != TAllocation__guardBlockSize) goto LAB_97bd1ce0;
         break;
       case 0xb:
         bVar6 = *(byte *)((int)piVar15 + 5);
@@ -1515,7 +1515,7 @@ LAB_97bd0cc8:
            ((FLOAT_97c3ace0 <= local_130[7] ||
             (((local_130[0] = FLOAT_97c3acdc, local_130[1] = FLOAT_97c3acdc,
               local_130[2] = FLOAT_97c3acdc, local_130[3] = FLOAT_97c3acdc,
-              local_130[7] < TAllocation::guardBlockSize &&
+              local_130[7] < TAllocation__guardBlockSize &&
               (local_130[0] = FLOAT_97c3ace8, local_130[1] = FLOAT_97c3ace8,
               local_130[2] = FLOAT_97c3ace8, local_130[3] = FLOAT_97c3ace8,
               local_130[7] <= FLOAT_97c3ace4)) &&
@@ -1550,7 +1550,7 @@ LAB_97bd0cc8:
         goto LAB_97bd0fd4;
       case 0x12:
         uVar9 = (uint)*(byte *)((int)piVar15 + 5);
-        dVar28 = (double)TAllocation::guardBlockSize;
+        dVar28 = (double)TAllocation__guardBlockSize;
         if (uVar9 != 0) {
           pfVar12 = local_130 + 4;
           do {
@@ -1571,32 +1571,32 @@ LAB_97bd1d68:
       case 0x13:
         if (1 < *(int *)(*(int *)(iVar22 + 0xd80) + 0x38) - 0x8b30U) {
           dVar28 = (double)local_130[7];
-          if ((double)local_130[7] < (double)TAllocation::guardBlockSize) {
+          if ((double)local_130[7] < (double)TAllocation__guardBlockSize) {
             dVar28 = DOUBLE_97c30a48;
           }
           dVar28 = (double)_log2(dVar28);
           goto LAB_97bd1d68;
         }
         dVar28 = (double)local_130[4];
-        if ((double)local_130[4] < (double)TAllocation::guardBlockSize) {
+        if ((double)local_130[4] < (double)TAllocation__guardBlockSize) {
           dVar28 = DOUBLE_97c30a48;
         }
         dVar29 = (double)_log2(dVar28);
         dVar28 = (double)local_130[5];
         local_130[0] = (float)dVar29;
-        if (dVar28 < (double)TAllocation::guardBlockSize) {
+        if (dVar28 < (double)TAllocation__guardBlockSize) {
           dVar28 = DOUBLE_97c30a48;
         }
         dVar29 = (double)_log2(dVar28);
         dVar28 = (double)local_130[6];
         local_130[1] = (float)dVar29;
-        if (dVar28 < (double)TAllocation::guardBlockSize) {
+        if (dVar28 < (double)TAllocation__guardBlockSize) {
           dVar28 = DOUBLE_97c30a48;
         }
         dVar29 = (double)_log2(dVar28);
         dVar28 = (double)local_130[7];
         local_130[2] = (float)dVar29;
-        if (dVar28 < (double)TAllocation::guardBlockSize) {
+        if (dVar28 < (double)TAllocation__guardBlockSize) {
           dVar28 = DOUBLE_97c30a48;
         }
         dVar28 = (double)_log2(dVar28);
@@ -1608,7 +1608,7 @@ LAB_97bd1d68:
         local_130[0] = (float)dVar29;
         dVar29 = (double)_exp2((double)local_130[0]);
         local_130[1] = (float)(dVar28 / dVar29);
-        if (dVar28 < (double)TAllocation::guardBlockSize) {
+        if (dVar28 < (double)TAllocation__guardBlockSize) {
           dVar28 = DOUBLE_97c30a48;
         }
         dVar28 = (double)_log2(dVar28);
@@ -1618,7 +1618,7 @@ LAB_97bd0fd4:
         break;
       case 0x15:
         uVar9 = (uint)*(byte *)((int)piVar15 + 5);
-        dVar28 = (double)TAllocation::guardBlockSize;
+        dVar28 = (double)TAllocation__guardBlockSize;
         if (uVar9 != 0) {
           pfVar12 = local_130 + 4;
           do {
@@ -1790,84 +1790,84 @@ LAB_97bd1440:
         break;
       case 0x24:
         uVar9 = 0;
-        if ((local_130[4] != TAllocation::guardBlockSize) &&
-           (local_130[8] != TAllocation::guardBlockSize)) {
+        if ((local_130[4] != TAllocation__guardBlockSize) &&
+           (local_130[8] != TAllocation__guardBlockSize)) {
           uVar9 = 1;
         }
         uVar10 = 0;
         local_130[0] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if ((local_130[5] != TAllocation::guardBlockSize) &&
-           (local_130[9] != TAllocation::guardBlockSize)) {
+        if ((local_130[5] != TAllocation__guardBlockSize) &&
+           (local_130[9] != TAllocation__guardBlockSize)) {
           uVar10 = 1;
         }
         uVar9 = 0;
         local_130[1] = (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - DOUBLE_97c30a58);
-        if ((local_130[6] != TAllocation::guardBlockSize) &&
-           (local_130[10] != TAllocation::guardBlockSize)) {
+        if ((local_130[6] != TAllocation__guardBlockSize) &&
+           (local_130[10] != TAllocation__guardBlockSize)) {
           uVar9 = 1;
         }
         uVar10 = 0;
         local_130[2] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if (local_130[7] != TAllocation::guardBlockSize) {
+        if (local_130[7] != TAllocation__guardBlockSize) {
 LAB_97bd17d0:
           uVar10 = 0;
-          if (local_130[0xb] != TAllocation::guardBlockSize) goto LAB_97bd17ec;
+          if (local_130[0xb] != TAllocation__guardBlockSize) goto LAB_97bd17ec;
         }
         goto LAB_97bd17f0;
       case 0x25:
         uVar9 = 0;
-        if ((local_130[4] != TAllocation::guardBlockSize) ||
-           (local_130[8] != TAllocation::guardBlockSize)) {
+        if ((local_130[4] != TAllocation__guardBlockSize) ||
+           (local_130[8] != TAllocation__guardBlockSize)) {
           uVar9 = 1;
         }
         uVar10 = 0;
         local_130[0] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if ((local_130[5] != TAllocation::guardBlockSize) ||
-           (local_130[9] != TAllocation::guardBlockSize)) {
+        if ((local_130[5] != TAllocation__guardBlockSize) ||
+           (local_130[9] != TAllocation__guardBlockSize)) {
           uVar10 = 1;
         }
         uVar9 = 0;
         local_130[1] = (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - DOUBLE_97c30a58);
-        if ((local_130[6] != TAllocation::guardBlockSize) ||
-           (local_130[10] != TAllocation::guardBlockSize)) {
+        if ((local_130[6] != TAllocation__guardBlockSize) ||
+           (local_130[10] != TAllocation__guardBlockSize)) {
           uVar9 = 1;
         }
         local_130[2] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if (local_130[7] == TAllocation::guardBlockSize) goto LAB_97bd17d0;
+        if (local_130[7] == TAllocation__guardBlockSize) goto LAB_97bd17d0;
 LAB_97bd17ec:
         uVar10 = 1;
         goto LAB_97bd17f0;
       case 0x26:
         uVar9 = 0;
-        if (local_130[4] == TAllocation::guardBlockSize) {
-          if (local_130[8] != TAllocation::guardBlockSize) {
+        if (local_130[4] == TAllocation__guardBlockSize) {
+          if (local_130[8] != TAllocation__guardBlockSize) {
 LAB_97bd16cc:
             uVar9 = 1;
           }
         }
-        else if (local_130[8] == TAllocation::guardBlockSize) goto LAB_97bd16cc;
+        else if (local_130[8] == TAllocation__guardBlockSize) goto LAB_97bd16cc;
         uVar10 = 0;
         local_130[0] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if (local_130[5] == TAllocation::guardBlockSize) {
-          if (local_130[9] != TAllocation::guardBlockSize) {
+        if (local_130[5] == TAllocation__guardBlockSize) {
+          if (local_130[9] != TAllocation__guardBlockSize) {
 LAB_97bd172c:
             uVar10 = 1;
           }
         }
-        else if (local_130[9] == TAllocation::guardBlockSize) goto LAB_97bd172c;
+        else if (local_130[9] == TAllocation__guardBlockSize) goto LAB_97bd172c;
         uVar9 = 0;
         local_130[1] = (float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - DOUBLE_97c30a58);
-        if (local_130[6] == TAllocation::guardBlockSize) {
-          if (local_130[10] != TAllocation::guardBlockSize) {
+        if (local_130[6] == TAllocation__guardBlockSize) {
+          if (local_130[10] != TAllocation__guardBlockSize) {
 LAB_97bd178c:
             uVar9 = 1;
           }
         }
-        else if (local_130[10] == TAllocation::guardBlockSize) goto LAB_97bd178c;
+        else if (local_130[10] == TAllocation__guardBlockSize) goto LAB_97bd178c;
         uVar10 = 0;
         local_130[2] = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - DOUBLE_97c30a58);
-        if (local_130[7] == TAllocation::guardBlockSize) goto LAB_97bd17d0;
-        if (local_130[0xb] == TAllocation::guardBlockSize) goto LAB_97bd17ec;
+        if (local_130[7] == TAllocation__guardBlockSize) goto LAB_97bd17d0;
+        if (local_130[0xb] == TAllocation__guardBlockSize) goto LAB_97bd17ec;
 LAB_97bd17f0:
         uStack_ac = uVar10 ^ 0x80000000;
         local_b0 = 0x43300000;
@@ -1875,10 +1875,10 @@ LAB_97bd17f0:
         break;
       case 0x27:
         uVar9 = (uint)*(byte *)((int)piVar15 + 5);
-        local_130[0] = TAllocation::guardBlockSize;
-        local_130[1] = TAllocation::guardBlockSize;
-        local_130[2] = TAllocation::guardBlockSize;
-        local_130[3] = TAllocation::guardBlockSize;
+        local_130[0] = TAllocation__guardBlockSize;
+        local_130[1] = TAllocation__guardBlockSize;
+        local_130[2] = TAllocation__guardBlockSize;
+        local_130[3] = TAllocation__guardBlockSize;
         if (uVar9 != 0) {
           pfVar12 = local_130;
           do {
@@ -1918,7 +1918,7 @@ LAB_97bd17f0:
       case 0x2b:
         if (*(int *)(*(int *)(iVar22 + 0xd80) + 0x38) - 0x8b30U < 2) {
           uVar9 = (uint)*(byte *)((int)piVar15 + 5);
-          dVar28 = (double)TAllocation::guardBlockSize;
+          dVar28 = (double)TAllocation__guardBlockSize;
           if (uVar9 != 0) {
             pfVar12 = local_130;
             do {
@@ -2082,10 +2082,10 @@ LAB_97bd1cd8:
         local_130[3] = 1.0;
         break;
       case 0x37:
-        local_130[0] = TAllocation::guardBlockSize;
-        local_130[1] = TAllocation::guardBlockSize;
-        local_130[2] = TAllocation::guardBlockSize;
-        local_130[3] = TAllocation::guardBlockSize;
+        local_130[0] = TAllocation__guardBlockSize;
+        local_130[1] = TAllocation__guardBlockSize;
+        local_130[2] = TAllocation__guardBlockSize;
+        local_130[3] = TAllocation__guardBlockSize;
         break;
       case 0x38:
         if (1 < *(int *)(*(int *)(iVar22 + 0xd80) + 0x38) - 0x8b30U) {
@@ -2168,7 +2168,7 @@ LAB_97bd1cd8:
             uVar9 = uVar9 - 1;
           } while (uVar9 != 0);
         }
-        if (fVar4 < TAllocation::guardBlockSize) goto switchD_97bd0598_caseD_0;
+        if (fVar4 < TAllocation__guardBlockSize) goto switchD_97bd0598_caseD_0;
         local_130[0] = -local_130[4];
         local_130[1] = -local_130[5];
         local_130[2] = -local_130[6];
@@ -2245,7 +2245,7 @@ LAB_97bd1cd8:
         dVar28 = (double)((local_100[0] - local_130[4]) / (local_130[8] - local_130[4]));
         if ((dVar28 <= DOUBLE_97c30a48) || (dVar28 < DOUBLE_97c30a60)) {
           if (dVar28 <= DOUBLE_97c30a48) {
-            dVar28 = (double)TAllocation::guardBlockSize;
+            dVar28 = (double)TAllocation__guardBlockSize;
           }
         }
         else {
@@ -2256,7 +2256,7 @@ LAB_97bd1cd8:
                               (DOUBLE_97c30a80 - (dVar28 + dVar28)));
         if ((dVar29 <= DOUBLE_97c30a48) || (dVar29 < DOUBLE_97c30a60)) {
           if (dVar29 <= DOUBLE_97c30a48) {
-            dVar29 = (double)TAllocation::guardBlockSize;
+            dVar29 = (double)TAllocation__guardBlockSize;
           }
         }
         else {
@@ -2267,7 +2267,7 @@ LAB_97bd1cd8:
                               (DOUBLE_97c30a80 - (dVar29 + dVar29)));
         if ((dVar28 <= DOUBLE_97c30a48) || (dVar28 < DOUBLE_97c30a60)) {
           if (dVar28 <= DOUBLE_97c30a48) {
-            dVar28 = (double)TAllocation::guardBlockSize;
+            dVar28 = (double)TAllocation__guardBlockSize;
           }
         }
         else {
@@ -2278,7 +2278,7 @@ LAB_97bd1cd8:
                               (DOUBLE_97c30a80 - (dVar28 + dVar28)));
         if ((dVar29 <= DOUBLE_97c30a48) || (dVar29 < DOUBLE_97c30a60)) {
           if (dVar29 <= DOUBLE_97c30a48) {
-            dVar29 = (double)TAllocation::guardBlockSize;
+            dVar29 = (double)TAllocation__guardBlockSize;
           }
         }
         else {
@@ -2299,10 +2299,10 @@ LAB_97bd1cd8:
             local_130[0] = -fVar4;
           }
           else {
-            local_130[0] = TAllocation::guardBlockSize;
+            local_130[0] = TAllocation__guardBlockSize;
             if (((cVar7 != '\t') && (local_130[0] = FLOAT_97c3acd8, cVar7 != '\b')) &&
                (local_130[0] = FLOAT_97c3acec, cVar7 != '\n')) {
-              local_130[0] = TAllocation::guardBlockSize;
+              local_130[0] = TAllocation__guardBlockSize;
             }
           }
         }
@@ -2317,10 +2317,10 @@ LAB_97bd1cd8:
             local_130[1] = -fVar4;
           }
           else {
-            local_130[1] = TAllocation::guardBlockSize;
+            local_130[1] = TAllocation__guardBlockSize;
             if (((cVar7 != '\t') && (local_130[1] = FLOAT_97c3acd8, cVar7 != '\b')) &&
                (local_130[1] = FLOAT_97c3acec, cVar7 != '\n')) {
-              local_130[1] = TAllocation::guardBlockSize;
+              local_130[1] = TAllocation__guardBlockSize;
             }
           }
         }
@@ -2335,10 +2335,10 @@ LAB_97bd1cd8:
             local_130[2] = -fVar4;
           }
           else {
-            local_130[2] = TAllocation::guardBlockSize;
+            local_130[2] = TAllocation__guardBlockSize;
             if (((cVar7 != '\t') && (local_130[2] = FLOAT_97c3acd8, cVar7 != '\b')) &&
                (local_130[2] = FLOAT_97c3acec, cVar7 != '\n')) {
-              local_130[2] = TAllocation::guardBlockSize;
+              local_130[2] = TAllocation__guardBlockSize;
             }
           }
         }
@@ -2353,10 +2353,10 @@ LAB_97bd1cd8:
             local_130[3] = -fVar4;
           }
           else {
-            local_130[3] = TAllocation::guardBlockSize;
+            local_130[3] = TAllocation__guardBlockSize;
             if (((cVar7 != '\t') && (local_130[3] = FLOAT_97c3acd8, cVar7 != '\b')) &&
                (local_130[3] = FLOAT_97c3acec, cVar7 != '\n')) {
-              local_130[3] = TAllocation::guardBlockSize;
+              local_130[3] = TAllocation__guardBlockSize;
             }
           }
         }
@@ -2502,10 +2502,10 @@ switchD_97bd0598_caseD_6:
         bVar26 = false;
         break;
       case 0x55:
-        if ((((local_130[4] == TAllocation::guardBlockSize) &&
-             (local_130[5] == TAllocation::guardBlockSize)) &&
-            (local_130[6] == TAllocation::guardBlockSize)) &&
-           (local_130[7] == TAllocation::guardBlockSize)) goto switchD_97bd0598_caseD_54;
+        if ((((local_130[4] == TAllocation__guardBlockSize) &&
+             (local_130[5] == TAllocation__guardBlockSize)) &&
+            (local_130[6] == TAllocation__guardBlockSize)) &&
+           (local_130[7] == TAllocation__guardBlockSize)) goto switchD_97bd0598_caseD_54;
         break;
       case 0x68:
         uVar9 = (uint)*(byte *)((int)piVar15 + 5);
@@ -2521,7 +2521,7 @@ switchD_97bd0598_caseD_6:
         }
         dVar28 = (double)(float)-((double)(local_100[0] * local_100[0]) *
                                   (DOUBLE_97c30a60 - (double)(fVar4 * fVar4)) - DOUBLE_97c30a60);
-        if ((double)TAllocation::guardBlockSize <= dVar28) {
+        if ((double)TAllocation__guardBlockSize <= dVar28) {
           fVar4 = local_100[0] * fVar4;
           dVar28 = (double)_sqrt(dVar28);
           fVar4 = (float)((double)fVar4 + dVar28);
@@ -2531,10 +2531,10 @@ switchD_97bd0598_caseD_6:
           local_130[3] = local_100[0] * local_130[7] - fVar4 * local_130[0xb];
         }
         else {
-          local_130[3] = TAllocation::guardBlockSize;
-          local_130[0] = TAllocation::guardBlockSize;
-          local_130[1] = TAllocation::guardBlockSize;
-          local_130[2] = TAllocation::guardBlockSize;
+          local_130[3] = TAllocation__guardBlockSize;
+          local_130[0] = TAllocation__guardBlockSize;
+          local_130[1] = TAllocation__guardBlockSize;
+          local_130[2] = TAllocation__guardBlockSize;
         }
         break;
       case 0x6c:
@@ -2553,19 +2553,19 @@ LAB_97bd200c:
         if ((piVar15[9] != 4) || ((piVar15[0x13] != 1 && (piVar15[0x13] != 3))))
         goto switchD_97bd0598_caseD_0;
         local_130[0] = 1.0;
-        if (local_130[4] == TAllocation::guardBlockSize) {
+        if (local_130[4] == TAllocation__guardBlockSize) {
           local_130[0] = 0.0;
         }
         local_130[1] = 1.0;
-        if (local_130[5] == TAllocation::guardBlockSize) {
+        if (local_130[5] == TAllocation__guardBlockSize) {
           local_130[1] = 0.0;
         }
         local_130[2] = 1.0;
-        if (local_130[6] == TAllocation::guardBlockSize) {
+        if (local_130[6] == TAllocation__guardBlockSize) {
           local_130[2] = 0.0;
         }
         local_130[3] = 1.0;
-        if (local_130[7] == TAllocation::guardBlockSize) goto LAB_97bd1ce0;
+        if (local_130[7] == TAllocation__guardBlockSize) goto LAB_97bd1ce0;
         break;
       case 0x6d:
         dVar28 = (double)local_130[8];
@@ -2727,18 +2727,18 @@ LAB_97bd0310:
                    piVar15[0x1b],piVar15[0x1c]);
         if (((local_130[4] != local_130[8]) || (local_130[5] != local_130[9])) ||
            (fVar4 = FLOAT_97c3acd8, local_130[6] != local_130[10])) {
-          fVar4 = TAllocation::guardBlockSize;
+          fVar4 = TAllocation__guardBlockSize;
         }
         uVar23 = uVar23 + 1;
         *pfVar12 = fVar4;
         pfVar12 = pfVar12 + 1;
       } while (uVar23 < 3);
       uStack_ac = 0;
-      if ((local_130[0] != TAllocation::guardBlockSize) &&
-         (local_130[1] != TAllocation::guardBlockSize)) {
+      if ((local_130[0] != TAllocation__guardBlockSize) &&
+         (local_130[1] != TAllocation__guardBlockSize)) {
 LAB_97bd0194:
         uStack_ac = 0;
-        if (local_130[2] != TAllocation::guardBlockSize) {
+        if (local_130[2] != TAllocation__guardBlockSize) {
           uStack_ac = 1;
         }
       }
@@ -2758,7 +2758,7 @@ LAB_97bd01a0:
                      piVar15[0x1b],piVar15[0x1c]);
           if ((local_130[4] != local_130[8]) ||
              (fVar4 = FLOAT_97c3acd8, local_130[5] != local_130[9])) {
-            fVar4 = TAllocation::guardBlockSize;
+            fVar4 = TAllocation__guardBlockSize;
           }
           uVar23 = uVar23 + 1;
           *pfVar12 = fVar4;
@@ -2766,7 +2766,7 @@ LAB_97bd01a0:
         } while (uVar23 < 2);
         uStack_ac = 0;
         local_130[2] = local_130[1];
-        if (local_130[0] != TAllocation::guardBlockSize) goto LAB_97bd0194;
+        if (local_130[0] != TAllocation__guardBlockSize) goto LAB_97bd0194;
         goto LAB_97bd01a0;
       }
     }
@@ -2781,16 +2781,16 @@ LAB_97bd01a0:
         if ((((local_130[4] != local_130[8]) || (local_130[5] != local_130[9])) ||
             (local_130[6] != local_130[10])) ||
            (fVar4 = FLOAT_97c3acd8, local_130[7] != local_130[0xb])) {
-          fVar4 = TAllocation::guardBlockSize;
+          fVar4 = TAllocation__guardBlockSize;
         }
         uVar23 = uVar23 + 1;
         *pfVar12 = fVar4;
         pfVar12 = pfVar12 + 1;
       } while (uVar23 < 4);
       uStack_ac = 0;
-      if (((local_130[0] != TAllocation::guardBlockSize) &&
-          (local_130[1] != TAllocation::guardBlockSize)) &&
-         (bVar26 = local_130[2] != TAllocation::guardBlockSize, local_130[2] = local_130[3], bVar26)
+      if (((local_130[0] != TAllocation__guardBlockSize) &&
+          (local_130[1] != TAllocation__guardBlockSize)) &&
+         (bVar26 = local_130[2] != TAllocation__guardBlockSize, local_130[2] = local_130[3], bVar26)
          ) goto LAB_97bd0194;
       goto LAB_97bd01a0;
     }
@@ -2927,15 +2927,15 @@ int _InterpreterRun()
     dVar26 = (double)*(float *)(*(int *)(iVar17 + 0xda0) + 8);
     dVar27 = (double)*(float *)(*(int *)(iVar17 + 0xda4) + 0xc);
     dVar25 = (double)*(float *)(*(int *)(iVar17 + 0xda4) + 8);
-    fVar6 = TAllocation::guardBlockSize;
-    fVar7 = TAllocation::guardBlockSize;
-    fVar8 = TAllocation::guardBlockSize;
-    fVar9 = TAllocation::guardBlockSize;
-    fVar10 = TAllocation::guardBlockSize;
-    fVar11 = TAllocation::guardBlockSize;
+    fVar6 = TAllocation__guardBlockSize;
+    fVar7 = TAllocation__guardBlockSize;
+    fVar8 = TAllocation__guardBlockSize;
+    fVar9 = TAllocation__guardBlockSize;
+    fVar10 = TAllocation__guardBlockSize;
+    fVar11 = TAllocation__guardBlockSize;
   }
   else {
-    dVar27 = (double)TAllocation::guardBlockSize;
+    dVar27 = (double)TAllocation__guardBlockSize;
     dVar25 = dVar27;
     dVar26 = dVar27;
     dVar28 = dVar27;
@@ -2961,7 +2961,7 @@ int _InterpreterRun()
   *(undefined4 *)(iVar23 + 0xa5c) = 0;
   *(undefined4 *)(iVar23 + 0xa60) = 0;
   *(undefined4 *)(iVar23 + 0xa64) = 0;
-  fVar14 = TAllocation::guardBlockSize;
+  fVar14 = TAllocation__guardBlockSize;
   dVar13 = DOUBLE_97c30a60;
   do {
     if (iVar22 == 0) {
@@ -4801,7 +4801,7 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   
   dVar2 = DOUBLE_97c30a68;
   uStack_4c = 0;
-  fVar1 = TAllocation::guardBlockSize;
+  fVar1 = TAllocation__guardBlockSize;
   do {
     uVar3 = uStack_4c + 1;
     local_60[4] = 176.0;
@@ -4844,7 +4844,7 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   
   dVar2 = DOUBLE_97c30a68;
   uStack_4c = 0;
-  fVar1 = TAllocation::guardBlockSize;
+  fVar1 = TAllocation__guardBlockSize;
   do {
     uVar3 = uStack_4c + 1;
     local_50 = 0x43300000;
@@ -4888,7 +4888,7 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   
   dVar3 = DOUBLE_97c30a68;
   uStack_4c = 0;
-  fVar1 = TAllocation::guardBlockSize;
+  fVar1 = TAllocation__guardBlockSize;
   do {
     uVar4 = uStack_4c + 1;
     local_50 = 0x43300000;

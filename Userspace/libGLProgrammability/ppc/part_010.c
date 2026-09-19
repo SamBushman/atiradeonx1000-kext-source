@@ -2,7 +2,7 @@
 
 /* ParseSymbol__AddDirectIndex @ 0x97bbadac (196 bytes) */
 int ParseSymbol__AddDirectIndex(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   int iVar1;
@@ -41,7 +41,7 @@ int ParseSymbol__AddDirectIndex(this, param_1)
 
 /* ParseSymbol__PopDirectIndex @ 0x97bbae70 (64 bytes) */
 int ParseSymbol__PopDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   uint uVar2;
@@ -63,7 +63,7 @@ int ParseSymbol__PopDirectIndex(this)
 
 /* ParseSymbol__RemoveDirectIndex @ 0x97bbaeb0 (16 bytes) */
 int ParseSymbol__RemoveDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(int *)(this + 0x24) = *(int *)(this + 0x24) + -1;
   return;
@@ -71,7 +71,7 @@ int ParseSymbol__RemoveDirectIndex(this)
 
 /* ParseSymbol__GetDirectIndex @ 0x97bbaec0 (16 bytes) */
 int ParseSymbol__GetDirectIndex(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   return *(undefined4 *)(param_1 * 4 + *(int *)(this + 0x18));
@@ -79,7 +79,7 @@ int ParseSymbol__GetDirectIndex(this, param_1)
 
 /* ParseSymbol__GetString @ 0x97bbaed0 (724 bytes) */
 int ParseSymbol__GetString(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   byte bVar1;
@@ -178,7 +178,7 @@ LAB_97bbb0a4:
 
 /* ParseOperand__ClearDirectIndex @ 0x97bbb1a4 (68 bytes) */
 int ParseOperand__ClearDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)(this + 0x1c) != (void *)0x0) {
     _free(*(void **)(this + 0x1c));
@@ -190,7 +190,7 @@ int ParseOperand__ClearDirectIndex(this)
 
 /* ParseOperand__ParseOperand @ 0x97bbb1e8 (4 bytes) */
 int ParseOperand__ParseOperand(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 0x2c) = 0;
   *(undefined4 *)this = 0;
@@ -209,7 +209,7 @@ int ParseOperand__ParseOperand(this)
 
 /* ParseOperand__ParseOperand_97bbb1ec @ 0x97bbb1ec (4 bytes) */
 int ParseOperand__ParseOperand_97bbb1ec(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 0x2c) = 0;
   *(undefined4 *)this = 0;
@@ -228,7 +228,7 @@ int ParseOperand__ParseOperand_97bbb1ec(this)
 
 /* ParseOperand__ParseOperand_97bbb1f0 @ 0x97bbb1f0 (56 bytes) */
 int ParseOperand__ParseOperand_97bbb1f0(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)(this + 0x2c) = 0;
   *(undefined4 *)this = 0;
@@ -247,8 +247,8 @@ int ParseOperand__ParseOperand_97bbb1f0(this)
 
 /* ParseOperand__ParseOperand_97bbb228 @ 0x97bbb228 (4 bytes) */
 int ParseOperand__ParseOperand_97bbb228(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   int iVar2;
@@ -296,8 +296,8 @@ int ParseOperand__ParseOperand_97bbb228(this, param_1)
 
 /* ParseOperand__ParseOperand_97bbb22c @ 0x97bbb22c (4 bytes) */
 int ParseOperand__ParseOperand_97bbb22c(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   ParseOperand(this,param_1);
   return;
@@ -305,8 +305,8 @@ int ParseOperand__ParseOperand_97bbb22c(this, param_1)
 
 /* ParseOperand__ParseOperand_97bbb230 @ 0x97bbb230 (232 bytes) */
 int ParseOperand__ParseOperand_97bbb230(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   int iVar2;
@@ -354,7 +354,7 @@ int ParseOperand__ParseOperand_97bbb230(this, param_1)
 
 /* ParseOperand___ParseOperand @ 0x97bbb318 (8 bytes) */
 int ParseOperand___ParseOperand(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseOperand(this);
   return;
@@ -362,7 +362,7 @@ int ParseOperand___ParseOperand(this)
 
 /* ParseOperand___ParseOperand_97bbb320 @ 0x97bbb320 (8 bytes) */
 int ParseOperand___ParseOperand_97bbb320(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseOperand(this);
   return;
@@ -370,11 +370,11 @@ int ParseOperand___ParseOperand_97bbb320(this)
 
 /* ParseOperand___ParseOperand_97bbb328 @ 0x97bbb328 (232 bytes) */
 int ParseOperand___ParseOperand_97bbb328(this)
-  unsigned char *this;
+  unsigned char * this;
 {
-  ParseSymbol *this_00;
+  unsigned char * this_00;
   
-  this_00 = *(ParseSymbol **)this;
+  this_00 = *(unsigned char **)this;
   if (this_00 == (unsigned char *)0x0) goto LAB_97bbb3cc;
   if ((*(int *)(this_00 + 0x3c) == 0) || (temporaryAllocator == (unsigned char *)0x0)) {
     if ((*(int *)(this_00 + 0x58) != 0) && (addressTempAllocator != (unsigned char *)0x0)) {
@@ -386,7 +386,7 @@ int ParseOperand___ParseOperand_97bbb328(this)
     TemporaryAllocator__releaseTemporary
               (temporaryAllocator,*(ushort *)(this_00 + 0x2c),*(uint *)(this_00 + 0x28));
 LAB_97bbb3a4:
-    this_00 = *(ParseSymbol **)this;
+    this_00 = *(unsigned char **)this;
   }
   if ((*(int *)(this_00 + 0x50) == 0) && (this_00 != (unsigned char *)0x0)) {
     ParseSymbol___ParseSymbol(this_00);
@@ -405,8 +405,8 @@ LAB_97bbb3cc:
 
 /* ParseOperand__operator_ @ 0x97bbb410 (220 bytes) */
 int ParseOperand__operator_(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   undefined2 uVar1;
   undefined4 uVar2;
@@ -449,8 +449,8 @@ int ParseOperand__operator_(this, param_1)
 
 /* operator___97bbb4ec @ 0x97bbb4ec (328 bytes) */
 int operator___97bbb4ec(param_1, param_2)
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * param_1;
+  unsigned char * param_2;
 {
   int iVar1;
   int iVar2;
@@ -496,7 +496,7 @@ int operator___97bbb4ec(param_1, param_2)
 
 /* ParseOperand__Clear @ 0x97bbb634 (88 bytes) */
 int ParseOperand__Clear(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(undefined4 *)this = 0;
   *(undefined4 *)(this + 4) = 0;
@@ -513,7 +513,7 @@ int ParseOperand__Clear(this)
 
 /* ParseOperand__AddDirectIndex @ 0x97bbb68c (196 bytes) */
 int ParseOperand__AddDirectIndex(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   int iVar1;
@@ -552,7 +552,7 @@ int ParseOperand__AddDirectIndex(this, param_1)
 
 /* ParseOperand__PopDirectIndex @ 0x97bbb750 (64 bytes) */
 int ParseOperand__PopDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   uint uVar2;
@@ -574,7 +574,7 @@ int ParseOperand__PopDirectIndex(this)
 
 /* ParseOperand__RemoveDirectIndex @ 0x97bbb790 (16 bytes) */
 int ParseOperand__RemoveDirectIndex(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(int *)(this + 0x20) = *(int *)(this + 0x20) + -1;
   return;
@@ -582,7 +582,7 @@ int ParseOperand__RemoveDirectIndex(this)
 
 /* ParseOperand__GetDirectIndex @ 0x97bbb7a0 (16 bytes) */
 int ParseOperand__GetDirectIndex(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   return *(undefined4 *)(param_1 * 4 + *(int *)(this + 0x1c));
@@ -597,7 +597,7 @@ int ParseOperand__GetAsDestVar(param_1)
   short sVar4;
   uint uVar2;
   int iVar3;
-  ParseOperand *in_r4;
+  unsigned char * in_r4;
   int in_r5;
   short sVar5;
   uint uVar6;
@@ -739,7 +739,7 @@ int ParseOperand__GetAsSourceVar(param_1)
   uint *puVar3;
   ushort uVar5;
   int iVar4;
-  ParseOperand *in_r4;
+  unsigned char * in_r4;
   int in_r5;
   uint uVar6;
   ushort uVar8;
@@ -867,7 +867,7 @@ LAB_97bbbcb0:
 
 /* ParseOperand__IsMatrix @ 0x97bbbd20 (52 bytes) */
 int ParseOperand__IsMatrix(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ushort uVar1;
   
@@ -882,7 +882,7 @@ int ParseOperand__IsMatrix(this)
 
 /* ParseOperand__GetBaseSize @ 0x97bbbd54 (76 bytes) */
 int ParseOperand__GetBaseSize(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -900,7 +900,7 @@ int ParseOperand__GetBaseSize(this)
 
 /* ParseOperand__GetLogicalSize @ 0x97bbbda0 (132 bytes) */
 int ParseOperand__GetLogicalSize(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 uVar1;
   int iVar2;
@@ -926,7 +926,7 @@ int ParseOperand__GetLogicalSize(this)
 
 /* ParseOperand__isWriteable @ 0x97bbbe24 (132 bytes) */
 int ParseOperand__isWriteable(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 uVar1;
   
@@ -958,7 +958,7 @@ int ParseOperand__isWriteable(this)
 
 /* ParseOperand__AddSwizzle @ 0x97bbbef8 (184 bytes) */
 int ParseOperand__AddSwizzle(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   int param_1;
 {
   uint uVar1;
@@ -995,7 +995,7 @@ int ParseOperand__AddSwizzle(this, param_1)
 
 /* ParseOperand__RemoveSwizzle @ 0x97bbbfb0 (16 bytes) */
 int ParseOperand__RemoveSwizzle(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
   return;
@@ -1003,7 +1003,7 @@ int ParseOperand__RemoveSwizzle(this)
 
 /* ParseOperand__GetSwizzle @ 0x97bbbfc0 (12 bytes) */
 int ParseOperand__GetSwizzle(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   return *(undefined1 *)(param_1 + *(int *)(this + 0x10));
@@ -1011,7 +1011,7 @@ int ParseOperand__GetSwizzle(this, param_1)
 
 /* ParseOperand__ClearSwizzles @ 0x97bbbfcc (68 bytes) */
 int ParseOperand__ClearSwizzles(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   if (*(void **)(this + 0x10) != (void *)0x0) {
     _free(*(void **)(this + 0x10));
@@ -1023,7 +1023,7 @@ int ParseOperand__ClearSwizzles(this)
 
 /* ParseOperand__GetString @ 0x97bbc010 (584 bytes) */
 int ParseOperand__GetString(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   short sVar1;
   ushort uVar2;
@@ -1120,7 +1120,7 @@ LAB_97bbc1ec:
 
 /* ParseSymbolTable__ParseSymbolTable @ 0x97bbc258 (4 bytes) */
 int ParseSymbolTable__ParseSymbolTable(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   int iVar1;
@@ -1161,7 +1161,7 @@ int ParseSymbolTable__ParseSymbolTable(this, param_1)
 
 /* ParseSymbolTable__ParseSymbolTable_97bbc25c @ 0x97bbc25c (4 bytes) */
 int ParseSymbolTable__ParseSymbolTable_97bbc25c(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   int iVar1;
@@ -1202,7 +1202,7 @@ int ParseSymbolTable__ParseSymbolTable_97bbc25c(this, param_1)
 
 /* ParseSymbolTable__ParseSymbolTable_97bbc260 @ 0x97bbc260 (184 bytes) */
 int ParseSymbolTable__ParseSymbolTable_97bbc260(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   int iVar1;
@@ -1243,7 +1243,7 @@ int ParseSymbolTable__ParseSymbolTable_97bbc260(this, param_1)
 
 /* ParseSymbolTable___ParseSymbolTable @ 0x97bbc318 (8 bytes) */
 int ParseSymbolTable___ParseSymbolTable(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseSymbolTable(this);
   return;
@@ -1251,7 +1251,7 @@ int ParseSymbolTable___ParseSymbolTable(this)
 
 /* ParseSymbolTable___ParseSymbolTable_97bbc320 @ 0x97bbc320 (8 bytes) */
 int ParseSymbolTable___ParseSymbolTable_97bbc320(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   ~ParseSymbolTable(this);
   return;
@@ -1259,14 +1259,14 @@ int ParseSymbolTable___ParseSymbolTable_97bbc320(this)
 
 /* ParseSymbolTable___ParseSymbolTable_97bbc328 @ 0x97bbc328 (92 bytes) */
 int ParseSymbolTable___ParseSymbolTable_97bbc328(this)
-  unsigned char *this;
+  unsigned char * this;
 {
-  ParseSymbol *this_00;
-  ParseSymbol *pPVar1;
+  unsigned char * this_00;
+  unsigned char * pPVar1;
   
-  this_00 = *(ParseSymbol **)this;
+  this_00 = *(unsigned char **)this;
   while (this_00 != (unsigned char *)0x0) {
-    pPVar1 = *(ParseSymbol **)(this_00 + 8);
+    pPVar1 = *(unsigned char **)(this_00 + 8);
     ParseSymbol___ParseSymbol(this_00);
     operator_delete(this_00);
     this_00 = pPVar1;
@@ -1277,16 +1277,16 @@ int ParseSymbolTable___ParseSymbolTable_97bbc328(this)
 
 /* ParseSymbolTable__processOperand @ 0x97bbc384 (252 bytes) */
 int ParseSymbolTable__processOperand(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   bool bVar1;
-  ParseSymbol *pPVar2;
+  unsigned char * pPVar2;
   int iVar3;
-  ParseSymbol *this_00;
+  unsigned char * this_00;
   
   if (((param_1 != (unsigned char *)0x0) &&
-      (this_00 = *(ParseSymbol **)param_1, this_00 != (unsigned char *)0x0)) &&
+      (this_00 = *(unsigned char **)param_1, this_00 != (unsigned char *)0x0)) &&
      (*(int *)(this_00 + 0x50) == 0)) {
     if (*(int *)(this_00 + 0x48) == 0) {
       *(undefined2 *)(this_00 + 0x30) = 0;
@@ -1304,7 +1304,7 @@ int ParseSymbolTable__processOperand(this, param_1)
       operator_delete(this_00);
       bVar1 = false;
     }
-    if (((!bVar1) && (*(ParseSymbol **)param_1 = pPVar2, *(int *)(pPVar2 + 0x34) != 0)) &&
+    if (((!bVar1) && (*(unsigned char **)param_1 = pPVar2, *(int *)(pPVar2 + 0x34) != 0)) &&
        (iVar3 = GetBuiltInInitialSwizzle(pPVar2), iVar3 != 0)) {
       ((int (*)())ParseOperand__AddSwizzle)(param_1,(uchar)iVar3);
       return;
@@ -1315,21 +1315,21 @@ int ParseSymbolTable__processOperand(this, param_1)
 
 /* ParseSymbolTable__AddSymbol @ 0x97bbc480 (140 bytes) */
 int ParseSymbolTable__AddSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
   int iVar2;
   int iVar3;
   
   if (*(int *)(this + 4) == 0) {
-    *(ParseSymbol **)this = param_1;
+    *(unsigned char **)this = param_1;
     iVar3 = *(int *)(this + 8);
     iVar1 = (*(uint *)(param_1 + 0x1c) -
             (*(uint *)(param_1 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
   }
   else {
-    *(ParseSymbol **)(*(int *)(this + 4) + 8) = param_1;
+    *(unsigned char **)(*(int *)(this + 4) + 8) = param_1;
     iVar3 = *(int *)(this + 8);
     iVar1 = (*(uint *)(param_1 + 0x1c) -
             (*(uint *)(param_1 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4;
@@ -1339,27 +1339,27 @@ int ParseSymbolTable__AddSymbol(this, param_1)
         iVar1 = iVar2;
         iVar2 = *(int *)(iVar1 + 4);
       } while (iVar2 != 0);
-      *(ParseSymbol **)(iVar1 + 4) = param_1;
+      *(unsigned char **)(iVar1 + 4) = param_1;
       goto LAB_97bbc4f8;
     }
   }
-  *(ParseSymbol **)(iVar1 + iVar3) = param_1;
+  *(unsigned char **)(iVar1 + iVar3) = param_1;
 LAB_97bbc4f8:
-  *(ParseSymbol **)(this + 4) = param_1;
+  *(unsigned char **)(this + 4) = param_1;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
   return;
 }
 
 /* ParseSymbolTable__InsertSingleSymbol @ 0x97bbc50c (1504 bytes) */
 int ParseSymbolTable__InsertSingleSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   bool bVar1;
   byte bVar2;
   int iVar3;
   short sVar4;
-  _PPStreamChunk *p_Var5;
+  unsigned char * p_Var5;
   int iVar6;
   int *piVar7;
   uint uVar8;
@@ -1590,7 +1590,7 @@ LAB_97bbc984:
 
 /* ParseSymbolTable__FinishArrayAddition @ 0x97bbcaec (216 bytes) */
 int ParseSymbolTable__FinishArrayAddition(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   byte bVar1;
   short sVar2;
@@ -1635,13 +1635,13 @@ LAB_97bbcba4:
 
 /* ParseSymbolTable__AddTempFromOutput @ 0x97bbcbc4 (324 bytes) */
 int ParseSymbolTable__AddTempFromOutput(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   ushort uVar1;
   int iVar2;
-  ParseSymbol *this_00;
-  _PPStreamChunk *p_Var3;
+  unsigned char * this_00;
+  unsigned char * p_Var3;
   uint uVar4;
   uint uVar5;
   int iVar6;
@@ -1689,8 +1689,8 @@ int ParseSymbolTable__AddTempFromOutput(this, param_1)
 
 /* ParseSymbolTable__AddFromExternalSymbol @ 0x97bbcd08 (1028 bytes) */
 int ParseSymbolTable__AddFromExternalSymbol(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   int param_2;
   int param_3;
 {
@@ -1698,8 +1698,8 @@ int ParseSymbolTable__AddFromExternalSymbol(this, param_1, param_2, param_3)
   int iVar2;
   uint uVar3;
   short sVar4;
-  ParseSymbol *this_00;
-  _PPStreamChunk *p_Var5;
+  unsigned char * this_00;
+  unsigned char * p_Var5;
   uint uVar6;
   undefined3 in_register_00000014;
   undefined3 in_register_00000018;
@@ -1857,16 +1857,16 @@ LAB_97bbd0d4:
 
 /* ParseSymbolTable__InsertSymbol @ 0x97bbd10c (952 bytes) */
 int ParseSymbolTable__InsertSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   bool bVar1;
   undefined1 *puVar2;
   int iVar3;
   short sVar5;
   undefined4 uVar4;
-  ParseSymbol *pPVar6;
-  ParseOperand *pPVar7;
+  unsigned char * pPVar6;
+  unsigned char * pPVar7;
   int iVar8;
   undefined4 uVar9;
   uint uVar10;
@@ -1894,7 +1894,7 @@ LAB_97bbd254:
             iVar8 = (**(code **)(**(int **)(*(int *)(iVar3 + 4) + uVar11 * 8) + 0x1c))();
             *(undefined1 *)(*(int *)(iVar8 + 4) + *(int *)(*(int *)(iVar8 + 4) + -0xc)) = *puVar2;
             ParseSymbol__CatName(pPVar6,*(char **)(iVar8 + 4));
-            ParseSymbol__SetParseTreeType(pPVar6,*(TType **)(*(int *)(iVar3 + 4) + uVar11 * 8));
+            ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(*(int *)(iVar3 + 4) + uVar11 * 8));
             *(undefined4 *)(pPVar6 + 0x48) = 0;
             ParseSymbol__ResolveOpenGLType(pPVar6);
             uVar4 = 0;
@@ -1906,7 +1906,7 @@ LAB_97bbd254:
             uVar11 = uVar11 + 1;
             pPVar7 = operator_new(0x38);
             ((int (*)())ParseOperand__ParseOperand)(pPVar7);
-            *(ParseSymbol **)pPVar7 = pPVar6;
+            *(unsigned char **)pPVar7 = pPVar6;
             ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
             ((int (*)())ParseOperand___ParseOperand)(pPVar7);
             operator_delete(pPVar7);
@@ -1933,7 +1933,7 @@ LAB_97bbd254:
           *(undefined4 *)(pPVar6 + 0x3c) = 0;
           pPVar7 = operator_new(0x38);
           ((int (*)())ParseOperand__ParseOperand)(pPVar7);
-          *(ParseSymbol **)pPVar7 = pPVar6;
+          *(unsigned char **)pPVar7 = pPVar6;
           if (uVar10 == 0) {
             *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
           }
@@ -1972,7 +1972,7 @@ LAB_97bbd254:
   pPVar6 = operator_new(100);
   ParseSymbol__ParseSymbol(pPVar6,param_1);
   ParseSymbol__TrimNameToBase(pPVar6);
-  ParseSymbol__SetParseTreeType(pPVar6,*(TType **)(param_1 + 0x10));
+  ParseSymbol__SetParseTreeType(pPVar6,*(unsigned char **)(param_1 + 0x10));
   uVar9 = 0;
   if ((*(int *)(param_1 + 0x3c) != 0) || (*(int *)(param_1 + 0x40) != 0)) {
     uVar9 = 1;
@@ -1981,7 +1981,7 @@ LAB_97bbd254:
   *(undefined4 *)(pPVar6 + 0x3c) = 0;
   pPVar7 = operator_new(0x38);
   ((int (*)())ParseOperand__ParseOperand)(pPVar7);
-  *(ParseSymbol **)pPVar7 = pPVar6;
+  *(unsigned char **)pPVar7 = pPVar6;
   ((int (*)())ParseSymbolTable__processOperand)(this,pPVar7);
   ((int (*)())ParseOperand___ParseOperand)(pPVar7);
   operator_delete(pPVar7);
@@ -1992,15 +1992,15 @@ LAB_97bbd244:
 
 /* ParseSymbolTable__FindFirstElement @ 0x97bbd4c4 (624 bytes) */
 int ParseSymbolTable__FindFirstElement(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
-  ParseSymbol *pPVar1;
+  unsigned char * pPVar1;
   int iVar2;
   size_t sVar3;
   size_t sVar4;
   char *pcVar5;
-  TType *pTVar6;
+  unsigned char * pTVar6;
   undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
@@ -2064,7 +2064,7 @@ int ParseSymbolTable__FindFirstElement(this, param_1)
           uVar7 = *(undefined4 *)(param_1 + 0x3c);
           uVar9 = *(undefined4 *)(param_1 + 0x60);
           uVar8 = *(undefined4 *)(param_1 + 0x5c);
-          pTVar6 = *(TType **)(param_1 + 0xc);
+          pTVar6 = *(unsigned char **)(param_1 + 0xc);
           *(undefined4 *)(pPVar1 + 0x28) = *(undefined4 *)(param_1 + 0x28);
           *(undefined4 *)(pPVar1 + 0x40) = uVar11;
           *(undefined4 *)(pPVar1 + 0x3c) = uVar7;
@@ -2091,13 +2091,13 @@ int ParseSymbolTable__FindFirstElement(this, param_1)
 
 /* ParseSymbolTable__FindSymbol @ 0x97bbd734 (120 bytes) */
 int ParseSymbolTable__FindSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   int iVar1;
-  ParseSymbol *pPVar2;
+  unsigned char * pPVar2;
   
-  pPVar2 = *(ParseSymbol **)
+  pPVar2 = *(unsigned char **)
             ((*(uint *)(param_1 + 0x1c) -
              (*(uint *)(param_1 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
             *(int *)(this + 8));
@@ -2107,15 +2107,15 @@ int ParseSymbolTable__FindSymbol(this, param_1)
     }
     iVar1 = operator__(pPVar2,param_1);
     if (iVar1 != 0) break;
-    pPVar2 = *(ParseSymbol **)(pPVar2 + 4);
+    pPVar2 = *(unsigned char **)(pPVar2 + 4);
   }
   return pPVar2;
 }
 
 /* ParseSymbolTable__NextSymbol @ 0x97bbd7ac (24 bytes) */
 int ParseSymbolTable__NextSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if (param_1 != (unsigned char *)0x0) {
     return *(undefined4 *)(param_1 + 8);
@@ -2125,8 +2125,8 @@ int ParseSymbolTable__NextSymbol(this, param_1)
 
 /* ParseSymbolTable__NextSymbolInHash @ 0x97bbd7c4 (20 bytes) */
 int ParseSymbolTable__NextSymbolInHash(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   if (param_1 == (unsigned char *)0x0) {
     return 0;
@@ -2136,7 +2136,7 @@ int ParseSymbolTable__NextSymbolInHash(this, param_1)
 
 /* ParseSymbolTable__FirstSymbolInHash @ 0x97bbd7d8 (32 bytes) */
 int ParseSymbolTable__FirstSymbolInHash(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   uint param_1;
 {
   return *(undefined4 *)
@@ -2146,23 +2146,23 @@ int ParseSymbolTable__FirstSymbolInHash(this, param_1)
 
 /* ParseSymbolTable__FindGlobalSymbolByName @ 0x97bbd7f8 (244 bytes) */
 int ParseSymbolTable__FindGlobalSymbolByName(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
-  ParseSymbol *this_00;
+  unsigned char * this_00;
   int iVar1;
-  ParseSymbol *pPVar2;
+  unsigned char * pPVar2;
   
   if (param_1 != (char *)0x0) {
     this_00 = operator_new(100);
     ParseSymbol__ParseSymbol(this_00);
     if (this_00 != (unsigned char *)0x0) {
       ParseSymbol__SetName(this_00,param_1);
-      for (pPVar2 = *(ParseSymbol **)
+      for (pPVar2 = *(unsigned char **)
                      ((*(uint *)(this_00 + 0x1c) -
                       (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
                       * 4 + *(int *)(this + 8)); pPVar2 != (unsigned char *)0x0;
-          pPVar2 = *(ParseSymbol **)(pPVar2 + 4)) {
+          pPVar2 = *(unsigned char **)(pPVar2 + 4)) {
         if ((*(int *)(pPVar2 + 0x38) != 0) && (iVar1 = operator__(pPVar2,this_00), iVar1 != 0)) {
           ParseSymbol___ParseSymbol(this_00);
           operator_delete(this_00);
@@ -2178,23 +2178,23 @@ int ParseSymbolTable__FindGlobalSymbolByName(this, param_1)
 
 /* ParseSymbolTable__FindSymbolByName @ 0x97bbd8ec (232 bytes) */
 int ParseSymbolTable__FindSymbolByName(this, param_1)
-  unsigned char *this;
+  unsigned char * this;
   char *param_1;
 {
-  ParseSymbol *this_00;
+  unsigned char * this_00;
   int iVar1;
-  ParseSymbol *pPVar2;
+  unsigned char * pPVar2;
   
   if (param_1 != (char *)0x0) {
     this_00 = operator_new(100);
     ParseSymbol__ParseSymbol(this_00);
     if (this_00 != (unsigned char *)0x0) {
       ParseSymbol__SetName(this_00,param_1);
-      for (pPVar2 = *(ParseSymbol **)
+      for (pPVar2 = *(unsigned char **)
                      ((*(uint *)(this_00 + 0x1c) -
                       (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
                       * 4 + *(int *)(this + 8)); pPVar2 != (unsigned char *)0x0;
-          pPVar2 = *(ParseSymbol **)(pPVar2 + 4)) {
+          pPVar2 = *(unsigned char **)(pPVar2 + 4)) {
         iVar1 = operator__(pPVar2,this_00);
         if (iVar1 != 0) {
           ParseSymbol___ParseSymbol(this_00);
@@ -2211,8 +2211,8 @@ int ParseSymbolTable__FindSymbolByName(this, param_1)
 
 /* ParseSymbolTable__FindNextParamSymbolByName @ 0x97bbd9d4 (192 bytes) */
 int ParseSymbolTable__FindNextParamSymbolByName(this, param_1, param_2)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
   char *param_2;
 {
   size_t sVar1;
@@ -2242,13 +2242,13 @@ int ParseSymbolTable__FindNextParamSymbolByName(this, param_1, param_2)
 
 /* ParseSymbolTable__RemoveSymbol @ 0x97bbda94 (600 bytes) */
 int ParseSymbolTable__RemoveSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   byte bVar1;
-  ParseSymbol *pPVar2;
-  ParseSymbol *pPVar3;
-  ParseSymbol *pPVar4;
+  unsigned char * pPVar2;
+  unsigned char * pPVar3;
+  unsigned char * pPVar4;
   uint uVar5;
   int iVar6;
   uint uVar7;
@@ -2302,11 +2302,11 @@ LAB_97bbdb58:
   }
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
   pPVar2 = (unsigned char *)0x0;
-  for (pPVar3 = *(ParseSymbol **)
+  for (pPVar3 = *(unsigned char **)
                  ((*(uint *)(param_1 + 0x1c) -
                   (*(uint *)(param_1 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
                  + *(int *)(this + 8)); pPVar3 != (unsigned char *)0x0;
-      pPVar3 = *(ParseSymbol **)(pPVar3 + 4)) {
+      pPVar3 = *(unsigned char **)(pPVar3 + 4)) {
     if (pPVar3 == param_1) {
       if (pPVar2 == (unsigned char *)0x0) {
         *(undefined4 *)
@@ -2320,7 +2320,7 @@ LAB_97bbdb58:
     }
     pPVar2 = pPVar3;
   }
-  pPVar3 = *(ParseSymbol **)this;
+  pPVar3 = *(unsigned char **)this;
   pPVar2 = (unsigned char *)0x0;
   do {
     pPVar4 = pPVar3;
@@ -2336,25 +2336,25 @@ LAB_97bbdcd0:
       else {
         *(undefined4 *)(pPVar2 + 8) = *(undefined4 *)(param_1 + 8);
       }
-      if (*(ParseSymbol **)(this + 4) == pPVar4) {
-        *(ParseSymbol **)(this + 4) = pPVar2;
+      if (*(unsigned char **)(this + 4) == pPVar4) {
+        *(unsigned char **)(this + 4) = pPVar2;
       }
       goto LAB_97bbdcd0;
     }
-    pPVar3 = *(ParseSymbol **)(pPVar4 + 8);
+    pPVar3 = *(unsigned char **)(pPVar4 + 8);
     pPVar2 = pPVar4;
   } while( true );
 }
 
 /* ParseSymbolTable__RemoveEndSymbol @ 0x97bbdcec (704 bytes) */
 int ParseSymbolTable__RemoveEndSymbol(this, param_1)
-  unsigned char *this;
-  unsigned char *param_1;
+  unsigned char * this;
+  unsigned char * param_1;
 {
   byte bVar1;
-  ParseSymbol *pPVar2;
-  ParseSymbol *pPVar3;
-  ParseSymbol *pPVar4;
+  unsigned char * pPVar2;
+  unsigned char * pPVar3;
+  unsigned char * pPVar4;
   uint uVar5;
   int iVar6;
   int iVar7;
@@ -2422,11 +2422,11 @@ LAB_97bbde78:
   }
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + -1;
   pPVar2 = (unsigned char *)0x0;
-  for (pPVar3 = *(ParseSymbol **)
+  for (pPVar3 = *(unsigned char **)
                  ((*(uint *)(param_1 + 0x1c) -
                   (*(uint *)(param_1 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4
                  + *(int *)(this + 8)); pPVar3 != (unsigned char *)0x0;
-      pPVar3 = *(ParseSymbol **)(pPVar3 + 4)) {
+      pPVar3 = *(unsigned char **)(pPVar3 + 4)) {
     iVar7 = operator__(pPVar3,param_1);
     if (iVar7 != 0) {
       if (pPVar2 == (unsigned char *)0x0) {
@@ -2441,7 +2441,7 @@ LAB_97bbde78:
     }
     pPVar2 = pPVar3;
   }
-  pPVar3 = *(ParseSymbol **)this;
+  pPVar3 = *(unsigned char **)this;
   pPVar2 = (unsigned char *)0x0;
   do {
     pPVar4 = pPVar3;
@@ -2458,23 +2458,23 @@ LAB_97bbdf8c:
       else {
         *(undefined4 *)(pPVar2 + 8) = *(undefined4 *)(pPVar4 + 8);
       }
-      if (*(ParseSymbol **)(this + 4) == pPVar4) {
-        *(ParseSymbol **)(this + 4) = pPVar2;
+      if (*(unsigned char **)(this + 4) == pPVar4) {
+        *(unsigned char **)(this + 4) = pPVar2;
       }
       goto LAB_97bbdf8c;
     }
-    pPVar3 = *(ParseSymbol **)(pPVar4 + 8);
+    pPVar3 = *(unsigned char **)(pPVar4 + 8);
     pPVar2 = pPVar4;
   } while( true );
 }
 
 /* ParseSymbolTable__CopySymbolTable @ 0x97bbdfac (228 bytes) */
 int ParseSymbolTable__CopySymbolTable(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined4 uVar1;
-  ParseSymbolTable *this_00;
-  ParseSymbol *this_01;
+  unsigned char * this_00;
+  unsigned char * this_01;
   undefined4 uVar2;
   undefined4 uVar3;
   undefined4 uVar4;
@@ -2483,16 +2483,16 @@ int ParseSymbolTable__CopySymbolTable(this)
   undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
-  ParseSymbol *pPVar10;
+  unsigned char * pPVar10;
   
   this_00 = operator_new(0x54);
   ParseSymbolTable(this_00,0x80);
-  for (pPVar10 = *(ParseSymbol **)this; pPVar10 != (unsigned char *)0x0;
-      pPVar10 = *(ParseSymbol **)(pPVar10 + 8)) {
+  for (pPVar10 = *(unsigned char **)this; pPVar10 != (unsigned char *)0x0;
+      pPVar10 = *(unsigned char **)(pPVar10 + 8)) {
     this_01 = operator_new(100);
     ParseSymbol__ParseSymbol(this_01);
     ParseSymbol__operator_(this_01,pPVar10);
-    ParseSymbol__SetChunk(this_01,*(_PPStreamChunk **)pPVar10);
+    ParseSymbol__SetChunk(this_01,*(unsigned char **)pPVar10);
     *(undefined4 *)(this_01 + 0x44) = 0;
     ((int (*)())ParseSymbolTable__AddSymbol)(this_00,this_01);
   }
@@ -2520,25 +2520,25 @@ int ParseSymbolTable__CopySymbolTable(this)
 
 /* ParseSymbolTable__ChangeChunk @ 0x97bbe090 (128 bytes) */
 int ParseSymbolTable__ChangeChunk(this, param_1, param_2, param_3)
-  unsigned char *this;
-  unsigned char *param_1;
-  unsigned char *param_2;
+  unsigned char * this;
+  unsigned char * param_1;
+  unsigned char * param_2;
   int param_3;
 {
   undefined3 in_register_00000018;
-  ParseSymbol *this_00;
+  unsigned char * this_00;
   
-  this_00 = *(ParseSymbol **)this;
+  this_00 = *(unsigned char **)this;
   if (this_00 != (unsigned char *)0x0) {
     do {
-      if (*(_PPStreamChunk **)this_00 == param_1) {
+      if (*(unsigned char **)this_00 == param_1) {
         ParseSymbol__SetChunk(this_00,param_2);
         if (CONCAT31(in_register_00000018,param_3) != 0) {
           *(undefined4 *)(this_00 + 0x44) = 0;
         }
         return 1;
       }
-      this_00 = *(ParseSymbol **)(this_00 + 8);
+      this_00 = *(unsigned char **)(this_00 + 8);
     } while (this_00 != (unsigned char *)0x0);
   }
   return 0;
@@ -2546,7 +2546,7 @@ int ParseSymbolTable__ChangeChunk(this, param_1, param_2, param_3)
 
 /* ParseSymbolTable__ClearCompilerTempData @ 0x97bbe110 (40 bytes) */
 int ParseSymbolTable__ClearCompilerTempData(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   int iVar1;
   
@@ -2564,7 +2564,7 @@ int ParseSymbolTable__ClearCompilerTempData(this)
 
 /* ParseSymbolTable__Dump @ 0x97bbe138 (84 bytes) */
 int ParseSymbolTable__Dump(this)
-  unsigned char *this;
+  unsigned char * this;
 {
   undefined *puVar1;
   int iVar2;
