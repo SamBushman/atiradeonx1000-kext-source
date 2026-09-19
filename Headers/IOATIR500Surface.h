@@ -102,7 +102,7 @@ public:
                                     UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f) = 0; /* +0x5e8 */
     virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
                                   UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f) = 0;   /* +0x5ec */
-    virtual bool   buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0, real addr 0x14010 */
+    virtual SInt32  buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0, real addr 0x14010 */
     virtual bool   alloc_surface(UInt32 index, bool moveFromBacking);          /* +0x5f4, real addr 0x13360 */
     virtual bool   alloc_surface_keep(IOATIR500Surface *other, VendorTextureBuffer **texture, SInt32 param3, UInt32 index); /* +0x5f8, real addr 0x13210 */
     virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);                 /* +0x5fc, real addr 0x110e0 */

@@ -115,7 +115,7 @@ UInt32 IOATIR500Surface::surface_req_bits() {
     return 0;
 }
 
-bool IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes) {
+SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes) {
     (void)a; (void)b;
     UInt8 *rec = reinterpret_cast<UInt8 *>(buffer);
     UInt16 pitchWords = U16At(rec, 0x14);
@@ -130,7 +130,7 @@ bool IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a,
     if (bytes != nullptr) {
         *bytes = static_cast<SInt32>(static_cast<UInt32>(bytesPerPixel) * static_cast<UInt32>(pitchWords));
     }
-    return true;
+    return 1;
 }
 
 bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer) {

@@ -129,8 +129,7 @@ const double kPlainBias = 4503599627370496.0; /* DOUBLE_0004c3b0: plain/unsigned
 
 } // namespace
 
-void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 /* real: unused */, UInt32 formatCode, void *paramBlockV) {
-    UInt32 *paramBlock = reinterpret_cast<UInt32 *>(paramBlockV);
+void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 /* real: unused */, UInt32 formatCode, UInt32 *paramBlock) {
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
 
     /* real: same two sources resolve_fsaa_buffer uses, roles SWAPPED - see

@@ -30,12 +30,12 @@ void ATIR500Surface::enable_overlay(void) {
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void ATIR500Surface::showbuffer(UInt32 bufferIndex, UInt32 param2) {
+void ATIR500Surface::showbuffer(int bufferIndex, int param2) {
     (void)bufferIndex; (void)param2;
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
 
-void ATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4) {
+void ATIR500Surface::dvd_setup_subpicture(int param1, int param2, int param3, int param4) {
     (void)param1; (void)param2; (void)param3; (void)param4;
     /* CONFIRMED: real function body is empty. Nothing here. */
 }
@@ -47,7 +47,7 @@ void ATIR500Surface::dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 p
  * function) also writes via a different call path, confirming a single
  * shared geometry record.
  */
-void ATIR500Surface::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h) {
+void ATIR500Surface::dvd_setup_overlay(int x, int y, int w, int h) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     *reinterpret_cast<UInt16 *>(self + 0x94) = static_cast<UInt16>(x);
     *reinterpret_cast<UInt16 *>(self + 0x96) = static_cast<UInt16>(h); /* CONFIRMED real param order: h before w at these offsets */
@@ -60,6 +60,6 @@ void ATIR500Surface::dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h) {
  * enable_deint - CONFIRMED real, stores the mode; nothing this project
  * decompiled anywhere reads this field back.
  */
-void ATIR500Surface::enable_deint(UInt32 mode) {
+void ATIR500Surface::enable_deint(int mode) {
     *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xdac) = mode;
 }

@@ -363,6 +363,14 @@ public:
      */
     bool allocMoreCommandBuffers(UInt32 recordIndex, UInt32 size);
 
+    /* flush_memory_for_in / flush_memory_for_out - real member functions (two overloads each: a raw range and an
+     * IOMemoryDescriptor range); cache-maintenance helpers used by the DMA copy paths. Bodies in the
+     * IOATIR500Accelerator ledger pass. */
+    void flush_memory_for_in(const void *address, UInt32 length);
+    void flush_memory_for_out(const void *address, UInt32 length);
+    void flush_memory_for_in(IOMemoryDescriptor *descriptor, UInt32 offset, UInt32 length);
+    void flush_memory_for_out(IOMemoryDescriptor *descriptor, UInt32 offset, UInt32 length);
+
     /* setup_stereo - CONFIRMED real name (IOATIR500GLContext::set_stereo
      * calls it), signature INFERRED. */
     IOReturn setup_stereo(UInt32 param1, UInt32 param2);

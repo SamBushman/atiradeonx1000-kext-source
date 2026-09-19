@@ -85,6 +85,9 @@ static const AtiFormatInfoEntry kAtiFormatInfoTable[48] = {
  * accessors' own historical naming being offset from the real struct
  * base (see this function's own header comment).
  */
+extern "C" UInt32 FormatTableLookup_0x0004d2d8(UInt32 byteOffset) {
+    return kAtiFormatInfoTable[byteOffset / 0x1c].field08;
+}
 extern "C" UInt32 FormatTableLookup_0x0004d2dc(UInt32 byteOffset) {
     return kAtiFormatInfoTable[byteOffset / 0x1c].fieldDC;
 }
@@ -160,13 +163,32 @@ extern "C" const r500_3d_blit_state_packet_struct _g_r500_3d_blit_state_packet =
  * (0x4c378 = 4096.0f and 0x4c384 = 0.015625f also live in __literal4 but no
  * transcribed function references them by label.)
  */
+/* every __literal4 / __literal8 constant of the stock image (Headers/GhidraLiterals.h) */
+extern "C" const float FLOAT_0004c370 = 0.0f;
+extern "C" const float FLOAT_0004c374 = 1.0f;
+extern "C" const float FLOAT_0004c378 = 4096.0f;
+extern "C" const float FLOAT_0004c37c = 6.0f;
+extern "C" const float FLOAT_0004c380 = 0.5f;
+extern "C" const float FLOAT_0004c384 = 0.015625f;
+extern "C" const float FLOAT_0004c388 = 10000.0f;
+extern "C" const float FLOAT_0004c38c = -64.0f;
+extern "C" const float FLOAT_0004c390 = -512.0f;
+extern "C" const float FLOAT_0004c394 = 0.25f;
+extern "C" const float FLOAT_0004c398 = 4.0f;
+extern "C" const float FLOAT_0004c39c = 0.0625f;
+extern "C" const float FLOAT_0004c3a0 = -0.0f;
 extern "C" const double DOUBLE_0004c3a8 = 4503601774854144.0;
 extern "C" const double DOUBLE_0004c3b0 = 4503599627370496.0;
 extern "C" const double DOUBLE_0004c3b8 = 0.5;
-extern "C" const float  FLOAT_0004c370  = 0.0f;
-extern "C" const float  FLOAT_0004c374  = 1.0f;
-extern "C" const float  FLOAT_0004c37c  = 6.0f;
-extern "C" const float  FLOAT_0004c380  = 0.5f;
+extern "C" const double DOUBLE_0004c3c0 = 0.0;
+extern "C" const double DOUBLE_0004c3c8 = 2147483648.0;
+extern "C" const double DOUBLE_0004c3d0 = 10000.0;
+extern "C" const double DOUBLE_0004c3d8 = 2048.0;
+extern "C" const double DOUBLE_0004c3e0 = 1023.0;
+extern "C" const double DOUBLE_0004c3e8 = 0.25;
+extern "C" const double DOUBLE_0004c3f0 = 1.0;
+extern "C" const double DOUBLE_0004c3f8 = 100.0;
+extern "C" const double DOUBLE_0004c400 = 4096.0;
 
 /*
  * Kext-internal zero-initialised globals (real addresses in the kext's own

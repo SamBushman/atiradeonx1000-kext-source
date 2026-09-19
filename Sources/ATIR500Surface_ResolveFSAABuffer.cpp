@@ -169,10 +169,11 @@ const double kBias = 4503601774854144.0;
 
 } // namespace
 
-void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlockV,
-                                             bool clearFlag, UInt32 param5, UInt32 param6,
-                                             UInt32 param7, UInt32 param8) {
-    UInt32 *paramBlock = reinterpret_cast<UInt32 *>(paramBlockV);
+void *ATIR500Surface::resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32 *paramBlock,
+                                             bool clearFlag, SInt32 param5Signed, SInt32 param6Signed,
+                                             SInt32 param7Signed, SInt32 param8Signed) {
+    UInt32 param5 = static_cast<UInt32>(param5Signed), param6 = static_cast<UInt32>(param6Signed);
+    UInt32 param7 = static_cast<UInt32>(param7Signed), param8 = static_cast<UInt32>(param8Signed);
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
 
     ATIR500SurfaceBuffer *surfB = fixedSurfaceBuffer;                    /* real: iVar19 */

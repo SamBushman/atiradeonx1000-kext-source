@@ -61,6 +61,12 @@
 
 #include "IOATIR500Surface.h"
 
+struct OverlaySurfaceInfo;        /* real struct names from the mangled symbols; layouts never recovered */
+struct OverlayBandwidthInfo;
+struct OverlayRegisters;
+struct OverlayPictureControl;
+struct IOAccelBounds;
+
 class ATIR500Surface : public IOATIR500Surface {
     OSDeclareDefaultStructors(ATIR500Surface)
 
@@ -117,10 +123,34 @@ public:
      */
     void     disable_overlay(void);   /* CONFIRMED: real empty no-op */
     void     enable_overlay(void);    /* CONFIRMED: real empty no-op */
-    void     showbuffer(UInt32 bufferIndex, UInt32 param2); /* CONFIRMED: real empty no-op */
-    void     dvd_setup_subpicture(UInt32 param1, UInt32 param2, UInt32 param3, UInt32 param4); /* CONFIRMED: real empty no-op (real symbol takes 4 ints, issue #42 pass) */
-    void     dvd_setup_overlay(UInt32 x, UInt32 y, UInt32 w, UInt32 h); /* CONFIRMED: the one real, non-stub member of this family */
-    void     enable_deint(UInt32 mode); /* CONFIRMED: real, stores mode into this+0xdac */
+    void     showbuffer(int bufferIndex, int param2); /* CONFIRMED: real empty no-op */
+    void     dvd_setup_subpicture(int param1, int param2, int param3, int param4); /* CONFIRMED: real empty no-op (real symbol takes 4 ints, issue #42 pass) */
+    void     dvd_setup_overlay(int x, int y, int w, int h); /* CONFIRMED: the one real, non-stub member of this family */
+    void     enable_deint(int mode); /* CONFIRMED: real, stores mode into this+0xdac */
+
+    /*
+     * The rest of the overlay-scaler family (Sources/ATIR500Surface_OverlayScaler.cpp; tables in
+     * ATIR500Surface_OverlayTables.cpp). Struct names are the real ones from the mangled symbols; their layouts were
+     * never recovered, so the bodies use raw offsets. Real addrs in parentheses.
+     */
+    void     setup_overlay_reg(OverlaySurfaceInfo *info, OverlayBandwidthInfo *bandwidth, OverlayRegisters *regs); /* 0x391f0: empty */
+    void     filter_init(float a, float b, UInt32 divisor, UInt32 flag, UInt32 taps, UInt32 *outIndex, float *outFraction); /* 0x39200 */
+    UInt32   real_to_hex(UInt32 mode, float value);                                                                 /* 0x393a0 */
+    void     set_linear_transform(int matrixIndex, OverlayPictureControl *control, OverlayRegisters *regs);          /* 0x396b0 */
+    void     set_gamma_coefficient(OverlayRegisters *regs);                                                         /* 0x398d0: empty */
+    void     get_surface_info(UInt32 index, OverlaySurfaceInfo *info, OverlayBandwidthInfo *bandwidth);             /* 0x398e0: empty */
+    void     filter_setup(UInt32 scale, OverlayRegisters *regs);                                                    /* 0x398f0 */
+    UInt32   calc_h_inc_step_by(int mode, float scale, int p3, int p4, int p5, UInt32 *o6, UInt32 *o7, UInt32 *o8,
+                                UInt32 *o9, UInt32 *o10, UInt32 *o11, UInt32 *o12, UInt32 *o13, UInt32 *o14);      /* 0x39ab0 */
+    void     query_BIOS_for_bandwidth_info(OverlayBandwidthInfo *bandwidth);                                        /* 0x39f20: empty */
+    void     get_surf_desc_regs(OverlaySurfaceInfo *info, UInt32 *outRegs);                                         /* 0x39f30 */
+    void     calc_h_scaler_blank(OverlaySurfaceInfo *info, OverlayBandwidthInfo *bandwidth, UInt32 p3, UInt32 p4,
+                                 float f5, float f6, UInt32 *o7, UInt32 *o8, UInt32 *o9);                            /* 0x3a410 */
+    void     blast_key_color(IOAccelBounds *bounds, UInt32 color);                                                  /* 0x3a6a0: empty */
+    void     debug_read_reg_dump(void);                                                                             /* 0x3a6b0: empty */
+    void     debug_reg_dump(OverlayRegisters *regs);                                                                /* 0x3a6c0: empty */
+    UInt32   bad_panel(void);                                                                                       /* 0x3a710 */
+    void     move_overlay_xy(void);                                                                                 /* 0x3a790: empty */
 
     /*
      * getFramebufferIndex / alloc_overlay / setup_overlay - RESOLVED
@@ -160,9 +190,9 @@ public:
      * Full real body in Sources/ATIR500Surface_ResolveFSAABuffer.cpp -
      * see that file for the complete transcription and header comment.
      */
-    void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, void *paramBlock,
-                                  bool clearFlag, UInt32 param5, UInt32 param6, UInt32 param7,
-                                  UInt32 param8);
+    void    *resolve_fsaa_buffer(UInt32 surfaceIndex, UInt32 formatCode, UInt32 *paramBlock,
+                                  bool clearFlag, SInt32 param5, SInt32 param6, SInt32 param7,
+                                  SInt32 param8);
 
     /*
      * decompress_and_flush_depth_buffer - CONFIRMED real name/signature/
@@ -195,7 +225,7 @@ public:
      * `formatCode` parameter; the third is the same real output record
      * pointer convention `resolve_fsaa_buffer` uses.
      */
-    void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, void *paramBlock);
+    void *back_resolve_fsaa_buffer(UInt32 unusedParam1, UInt32 formatCode, UInt32 *paramBlock);
 
     /*
      * FIXED (issue #1, first build attempt): these nine are all real
@@ -222,7 +252,13 @@ public:
                                     UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f); /* +0x5e8, addr 0x43730 */
     virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
                                   UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f);   /* +0x5ec, addr 0x43340 */
-    virtual bool   buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0 */
+    virtual SInt32  buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0 */
+
+    /* copy_buffer_using_DMA - real addr 0x42a80: the GPU-DMA path shared by copy_to_buffer / copy_from_buffer
+     * (Sources/ATIR500Surface_CopyBuffers.cpp); returns 1 when it submitted the copy. */
+    UInt32 copy_buffer_using_DMA(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 index, UInt32 level,
+                                 ATIR500SurfaceBuffer *buffer, VendorTransferBuffer *transfer, UInt32 offset,
+                                 UInt32 pitch, IODirection direction, UInt32 flags);
     virtual void   invalidate();
     virtual UInt32 dealloc_surface(UInt32 surfaceIndex);
     virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer);
