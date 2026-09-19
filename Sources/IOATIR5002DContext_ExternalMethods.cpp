@@ -68,41 +68,16 @@ IOReturn IOATIR5002DContext::finish(UInt32 mode) {
     return 0;
 }
 
-IOReturn IOATIR5002DContext::scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale) {
-    Ctx2D_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840));
-    IOReturn result;
-    if (boundSurface == nullptr || (flags & 1) == 0) {
-        result = 0xe00002c7;
-    } else {
-        /* real: 12-byte IOAccelSurfaceScaling built on the stack: {0,0,x,y,x,y} halfwords */
-        UInt16 scaling[6] = {0, 0, static_cast<UInt16>(xScale), static_cast<UInt16>(yScale),
-                             static_cast<UInt16>(xScale), static_cast<UInt16>(yScale)};
-        result = boundSurface->set_scaling(((flags >> 2) & 1) | (flags & 2), reinterpret_cast<IOAccelSurfaceScaling *>(scaling));
-    }
-    Ctx2D_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840));
-    return result;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_scale_surface_Port.cpp) */
+
 
 /* create_shared: allocate and init this context's IOATIR500Shared, and wire it to the accelerator (+0xc)
  * and the owning task (+8). Real: `init()` is the vtable +0x48 call (IOATIR500Shared::init). */
 /* (re-ported mechanically: see IOATIR5002DContext_create_shared_Port.cpp) */
 
 
-IOReturn IOATIR5002DContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
-    (void)param1;
-    if (sizeInBytes == 0 || formatOrSize == 0) {
-        return 0xe00002c2;
-    }
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    Ctx2D_lock(lock);
-    if (sharedAllocator == nullptr && !create_shared()) {
-        Ctx2D_unlock(lock);
-        return 0xe00002be;
-    }
-    void *texture = sharedAllocator->new_agp_texture(formatOrSize, sizeInBytes, outHandle);
-    Ctx2D_unlock(lock);
-    return texture == nullptr ? 0xe00002bd : 0;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_declare_image_Port.cpp) */
+
 
 IOReturn IOATIR5002DContext::create_image(UInt32 param1, UInt32 param2, unsigned int *outLow, unsigned int *outHigh) {
     if (param1 == 0) {

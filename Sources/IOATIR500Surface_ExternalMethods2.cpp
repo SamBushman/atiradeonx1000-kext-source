@@ -108,26 +108,8 @@ IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 
  * established for the sibling +0x558/+0x55c slots) using this surface's
  * own +0x84 field as the real argument.
  */
-IOReturn IOATIR500Surface::surface_flush(UInt32 param1, UInt32 param2) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xd50);
-    SurfExtM2_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
+/* (re-ported mechanically: see IOATIR500Surface_surface_flush_Port.cpp) */
 
-    IOReturn result = alloc_surfaces_retry(U32At(self, 0xc1c) & 3, static_cast<eLockType>(0));
-    if (result == 0) {
-        flush_surface(param1, param2);
-    }
-    UInt32 arg = U32At(self, 0x84);
-
-    SurfExtM2_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-
-    accel = *reinterpret_cast<void **>(self + 0xd50);
-    typedef SInt32 (*Fn0x54c)(void *, UInt32);
-    UInt32 before = U32At(accel, 0x798); /* real: piVar3[0x1e6], dword-indexed = byte offset 0x1e6*4 */
-    SInt32 delta = (*reinterpret_cast<Fn0x54c *>(*reinterpret_cast<void ***>(accel) + (0x54c / 4)))(accel, arg);
-    U32At(accel, 0x798) = before + delta;
-    return result;
-}
 
 /*
  * surface_control / surface_control_alias - CONFIRMED, real addr

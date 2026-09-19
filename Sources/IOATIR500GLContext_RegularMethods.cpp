@@ -213,33 +213,8 @@ IOReturn IOATIR500GLContext::become_global_shared(UInt32 claim) {
  * the caller's raw x/y-scale arguments. Requires a bound surface and
  * bit 0 of `param1` set (a real "scaling enabled" flag).
  */
-IOReturn IOATIR500GLContext::scale_surface(UInt32 param1, UInt32 xScale, UInt32 yScale) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
-    IOReturn result;
-    if (surface == nullptr || (param1 & 1) == 0) {
-        result = 0xe00002c7;
-    } else {
-        /* real: IOAccelSurfaceScaling-shaped local, 6 real UInt16 fields -
-         * this project has not independently reconstructed
-         * IOAccelSurfaceScaling's own layout (Apple's own real type, see
-         * IOATIR500Surface.h's note on it), so this is modeled as a raw
-         * byte buffer sized/packed exactly as the real decompile does. */
-        UInt16 scaling[6] = {};
-        scaling[2] = static_cast<UInt16>(xScale);
-        scaling[3] = static_cast<UInt16>(yScale);
-        scaling[0] = 0;
-        scaling[1] = 0;
-        scaling[4] = scaling[2];
-        scaling[5] = scaling[3];
-        result = surface->set_scaling((param1 >> 2 & 1) | (param1 & 2),
-                                       reinterpret_cast<IOAccelSurfaceScaling *>(scaling));
-    }
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_scale_surface_Port.cpp) */
+
 
 /*
  * reclaim_resources - CONFIRMED. Real body: resets the accelerator's
@@ -337,24 +312,8 @@ IOReturn IOATIR500GLContext::set_stereo(UInt32 param1, UInt32 param2) {
  * Apple's real vtable layout) - not independently re-confirmed via a
  * live read the way `release` was, but the standard, expected pairing.
  */
-IOReturn IOATIR500GLContext::connectClient(IOUserClient *client) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *other = reinterpret_cast<UInt8 *>(client);
-    if (U32At(self, 0x78) != U32At(other, 0x78)) {
-        return 0xe00002bc;
-    }
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    void *oldHandle = *reinterpret_cast<void **>(self + 0x88);
-    typedef void (*ReleaseFn)(void *);
-    (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(oldHandle) + (0x18 / 4)))(oldHandle);
-    void *newHandle = *reinterpret_cast<void **>(other + 0x88);
-    U32At(self, 0x88) = reinterpret_cast<UInt32>(newHandle);
-    typedef void (*RetainFn)(void *);
-    (*reinterpret_cast<RetainFn *>(*reinterpret_cast<void ***>(newHandle) + (0x14 / 4)))(newHandle);
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_connectClient_Port.cpp) */
+
 
 /*
  * get_surface_size - CONFIRMED. No bound surface -> real error
@@ -368,38 +327,8 @@ IOReturn IOATIR500GLContext::connectClient(IOUserClient *client) {
  * (+0xbd4/+0xbd6/+0xbd8/+0xbda). Real output order is NOT the same as
  * the internal compute order - transcribed exactly as decompiled.
  */
-IOReturn IOATIR500GLContext::get_surface_size(SInt32 *outA, SInt32 *outB, SInt32 *outC, SInt32 *outD) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *surface = *reinterpret_cast<void **>(self + 0x290);
-    if (surface == nullptr) {
-        return 0xe00002bc;
-    }
-    UInt8 *surf = reinterpret_cast<UInt8 *>(surface);
-    SInt32 mipLevel = *reinterpret_cast<SInt32 *>(self + 0x29c);
-    UInt32 fullW, fullH, curW, curH;
-    if (U32At(surf, 0xbd8) == U32At(surf, 0xbd4)) {
-        void *baseRec = *reinterpret_cast<void **>(surf + 0xb70);
-        UInt8 *baseBytes = reinterpret_cast<UInt8 *>(baseRec);
-        fullH = U16At(baseBytes, 0x1e);
-        fullW = U16At(baseBytes, 0x1c);
-        curW = fullW;
-        curH = fullH;
-        for (SInt32 i = 0; i < mipLevel; ++i) {
-            if (curW > 1) curW >>= 1;
-            if (curH > 1) curH >>= 1;
-        }
-    } else {
-        fullH = static_cast<UInt16>(S16At(surf, 0xbda));
-        fullW = static_cast<UInt16>(S16At(surf, 0xbd4));
-        curW = static_cast<UInt16>(S16At(surf, 0xbd8));
-        curH = static_cast<UInt16>(S16At(surf, 0xbd6));
-    }
-    *outA = static_cast<SInt32>(curW);
-    *outB = static_cast<SInt32>(fullH);
-    *outC = static_cast<SInt32>(fullW);
-    *outD = static_cast<SInt32>(curH);
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_get_surface_size_Port.cpp) */
+
 
 /*
  * get_surface_info - CONFIRMED. Real body: bounds-checked

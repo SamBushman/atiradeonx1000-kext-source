@@ -80,22 +80,8 @@ inline void ReleaseObj(void *obj) {
 }
 } // namespace
 
-void IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer *buffer) {
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    if (U32At(buf, 4) != 0) {
-        waitForTimeStamp(U32At(buf, 0x10));
-        removeTransferFromGART(reinterpret_cast<VendorTransferBuffer *>(buffer));
-    }
-    ReleaseObj(*reinterpret_cast<void **>(buf + 8));
-    U16At(buf, 0xc) = 1;
-    U16At(buf, 0xe) = 0;
-    U32At(buf, 0x18) = 0;
-    U32At(buf, 0) = 0;
-    U32At(buf, 4) = 0;
-    U32At(buf, 8) = 0;
-    U32At(buf, 0x10) = 0;
-    U32At(buf, 0x14) = 0;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_freeCommandBuffer_Port.cpp) */
+
 
 /* RESOLVED, issue #50 (live kxld-resolved /dev/kmem read on real
    G5/Tiger hardware): real target IOUserClient::removeMappingForDescriptor

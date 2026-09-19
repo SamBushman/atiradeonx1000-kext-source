@@ -88,21 +88,8 @@ IOReturn IOATIR500DVDContext::finish() {
 /* (re-ported mechanically: see IOATIR500DVDContext_create_shared_Port.cpp) */
 
 
-IOReturn IOATIR500DVDContext::declare_image(UInt32 param1, unsigned int formatOrSize, UInt32 sizeInBytes, unsigned int *outHandle) {
-    (void)param1;
-    if (sizeInBytes == 0 || formatOrSize == 0) {
-        return 0xe00002c2;
-    }
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDBase_lock(lock);
-    if (sharedAllocator == nullptr && !create_shared()) {
-        DVDBase_unlock(lock);
-        return 0xe00002be;
-    }
-    void *texture = sharedAllocator->new_agp_texture(formatOrSize, sizeInBytes, outHandle);
-    DVDBase_unlock(lock);
-    return texture == nullptr ? 0xe00002bd : 0;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_declare_image_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500DVDContext_delete_image_Port.cpp) */
 

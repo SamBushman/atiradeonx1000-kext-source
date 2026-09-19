@@ -20,23 +20,8 @@ typedef void (*InvalidateFn)(void *);
 typedef UInt32 (*Fn0x5f4)(void *, UInt32, UInt32);
 } // namespace
 
-void IOATIR500Surface::invalidate_contexts(void) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(accelerator, 0x78) = 0;
+/* (re-ported mechanically: see IOATIR500Surface_invalidate_contexts_Port.cpp) */
 
-    for (UInt8 *node = reinterpret_cast<UInt8 *>(U32At(self, 0x8c)); node != nullptr;
-         node = reinterpret_cast<UInt8 *>(U32At(node, 0x84))) {
-        (*reinterpret_cast<InvalidateFn *>(*reinterpret_cast<void ***>(node) + (0x5a4 / 4)))(node);
-    }
-    for (UInt8 *node = reinterpret_cast<UInt8 *>(U32At(self, 0x88)); node != nullptr;
-         node = reinterpret_cast<UInt8 *>(U32At(node, 0x84))) {
-        (*reinterpret_cast<InvalidateFn *>(*reinterpret_cast<void ***>(node) + (0x5a4 / 4)))(node);
-    }
-    UInt8 *single = reinterpret_cast<UInt8 *>(U32At(self, 0x90));
-    if (single != nullptr) {
-        (*reinterpret_cast<InvalidateFn *>(*reinterpret_cast<void ***>(single) + (0x5a4 / 4)))(single);
-    }
-}
 
 UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 flag, bool unusedRetry) {
     (void)unusedRetry; /* real third parameter: never read */

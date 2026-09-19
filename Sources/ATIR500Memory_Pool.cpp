@@ -239,39 +239,8 @@ bool ATIR500Memory::init_pool(UInt32 regionOffset, UInt32 regionSize, UInt32 poo
     return true;
 }
 
-bool ATIR500Memory::add_to_stack() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see ATIR500Memory_add_to_stack_Port.cpp) */
 
-    UInt32 *chunk = reinterpret_cast<UInt32 *>(FUN_00019260(0x204, 0x20));
-    if (chunk == 0) {
-        return false;
-    }
-
-    UInt32 *node = chunk + 1;
-    chunk[0] = *reinterpret_cast<UInt32 *>(self + 0x10);
-    *reinterpret_cast<UInt32 **>(self + 0xc) = node;
-    *reinterpret_cast<UInt32 **>(self + 0x10) = chunk;
-    node[1] = 0;
-    node[2] = 0;
-    node[3] = 0;
-
-    if (node != chunk + 0x7d) {
-        UInt32 *p = chunk + 7;
-        int count = 0x1f;
-        do {
-            *p = 0;
-            p[1] = 0;
-            p[-1] = 0;
-            *node = reinterpret_cast<UInt32>(node + 4);
-            p += 4;
-            count--;
-            node += 4;
-        } while (count != 0);
-    }
-
-    chunk[0x7d] = 0;
-    return true;
-}
 
 int ATIR500Memory::total_free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

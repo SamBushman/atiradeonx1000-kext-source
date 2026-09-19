@@ -34,21 +34,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * allocator (+0x7c). Always marks the format's own "empty" bit in
  * +0xbf8 before returning success.
  */
-UInt32 IOATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *rec = self + surfaceIndex * 0x78;
-    if (U32At(rec, 0xb0) != 0) {
-        if (((3u >> (surfaceIndex & 0x3f)) & 1) != 0) {
-            for (void *node = *reinterpret_cast<void **>(self + 0xbcc); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x54)) {
-                U8At(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x14), 0x14) = 1;
-            }
-        }
-        ATIR500Memory *pool = *reinterpret_cast<ATIR500Memory **>(reinterpret_cast<UInt8 *>(*reinterpret_cast<void **>(self + 0xd50)) + 0x7c);
-        pool->dealloc(reinterpret_cast<GLKMemoryElement *>(rec + 0xa8));
-    }
-    U32At(self, 0xbf8) |= (1u << (surfaceIndex & 0x3f));
-    return 1;
-}
+/* (re-ported mechanically: see IOATIR500Surface_dealloc_surface_Port.cpp) */
+
 
 /*
  * free_buffer_backing_store - CONFIRMED. Real body: if the buffer's

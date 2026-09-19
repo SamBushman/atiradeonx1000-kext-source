@@ -78,31 +78,11 @@ IOReturn ATIR500DVDContext::dvd_setup_overlay(int x, int y, int w, int h, int pa
     return result;
 }
 
-IOReturn ATIR500DVDContext::dvd_enable_overlay(int enable) {
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result = GuardCheck(accelerator, boundSurface);
-    if (result == 0) {
-        if (enable == 0) {
-            boundSurface->disable_overlay();
-        } else {
-            boundSurface->enable_overlay();
-        }
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_dvd_enable_overlay_Port.cpp) */
 
-IOReturn ATIR500DVDContext::dvd_setup_subpicture(int param1, int param2, int param3, int param4) {
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result = GuardCheck(accelerator, boundSurface);
-    if (result == 0) {
-        boundSurface->dvd_setup_subpicture(param1, param2, param3, param4);
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+
+/* (re-ported mechanically: see ATIR500DVDContext_dvd_setup_subpicture_Port.cpp) */
+
 
 IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
@@ -119,26 +99,8 @@ IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
 /* (re-ported mechanically: see ATIR500DVDContext_setup_buffers_Port.cpp) */
 
 
-IOReturn ATIR500DVDContext::read_regs(UInt32 *offsets, UInt32 *outValues, UInt32 requestedByteCount, UInt32 *actualByteCount) {
-    UInt32 count = *actualByteCount;
-    UInt8 *mmio = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(accelerator) + 0x860);
-    if (count != requestedByteCount || (count & 3) != 0) {
-        return 0xe00002c2;
-    }
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result;
-    if (U8At(accelerator, 0x80) == 0) {
-        result = 0xe00002d8;
-    } else {
-        for (UInt32 i = 0; i < (count >> 2); i++) {
-            outValues[i] = SwapLE32(*reinterpret_cast<UInt32 *>(mmio + (offsets[i] & 0x1ffcu)));
-        }
-        result = 0;
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_read_regs_Port.cpp) */
+
 
 /* write_regs(offset, value): one register write, byte-swapped to little-endian, under the command lock. */
 IOReturn ATIR500DVDContext::write_regs(UInt32 offset, UInt32 value) {
@@ -169,15 +131,5 @@ IOReturn ATIR500DVDContext::wait_for_stamps(UInt32 waitMain, UInt32 waitIDCT) {
     return 0;
 }
 
-IOReturn ATIR500DVDContext::check_stamps(UInt32 checkMain, UInt32 checkIDCT, UInt32 *outBothDone) {
-    SInt32 mainDone = 1;
-    if (checkMain != 0) {
-        mainDone = CallAccel(accelerator, 0x5f4, checkMain);
-    }
-    SInt32 idctDone = 1;
-    if (checkIDCT != 0) {
-        idctDone = CallAccel(accelerator, 0x554, checkIDCT);
-    }
-    *outBothDone = (mainDone == 0 || idctDone == 0) ? 0 : 1;
-    return 0;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_check_stamps_Port.cpp) */
+

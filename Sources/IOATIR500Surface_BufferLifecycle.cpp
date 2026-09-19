@@ -35,31 +35,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * (real early-return `2`, "some format's allocation attempt failed")
  * once every bit has been tried.
  */
-UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, VendorTextureBuffer **excludeList,
-                                              SInt32 param3, UInt32 formatMask) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    typedef UInt32 (*Fn0x5f8)(void *, IOATIR500Surface *, VendorTextureBuffer **, SInt32, UInt32);
-    UInt32 idx = 0;
-    UInt32 allOk = 1;
-    UInt32 emptyMask = U32At(self, 0xbf8);
-    for (;;) {
-        if ((formatMask & emptyMask & (1u << (idx & 0x3f))) != 0) {
-            UInt32 ok = (*reinterpret_cast<Fn0x5f8 *>(*reinterpret_cast<void ***>(self) + (0x5f8 / 4)))(
-                self, excludeSurface, excludeList, param3, idx);
-            allOk &= ok;
-        }
-        bool atEnd = (idx == 0x16);
-        idx += 1;
-        if (atEnd) break;
-        if (allOk == 0) {
-            return 2;
-        }
-    }
-    if (allOk == 0) {
-        return 2;
-    }
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500Surface_alloc_surfaces_keep_Port.cpp) */
+
 
 /*
  * connect_buffer_backing_store - CONFIRMED. Real body: computes a

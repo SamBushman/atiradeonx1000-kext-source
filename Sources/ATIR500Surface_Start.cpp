@@ -26,23 +26,5 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-bool ATIR500Surface::start(IOService *provider) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
+/* (re-ported mechanically: see ATIR500Surface_start_Port.cpp) */
 
-    ATIR500SurfStart_mutex_lock(*reinterpret_cast<void **>(providerBytes + 0x840));
-    bool ok = IOATIR500Surface::start(provider);
-    if (ok) {
-        U16At(self, 0xdb4) = 0;
-        U8At(self, 0xdb7) = 0;
-        U8At(self, 0xdb6) = 0;
-        U32At(self, 0xd90) = 0;
-        U32At(self, 0xd94) = 0;
-        U32At(self, 0xda4) = 0;
-        U32At(self, 0xda8) = 0;
-        U32At(self, 0xdac) = 0;
-        U32At(self, 0xdb8) = 1;
-    }
-    ATIR500SurfStart_mutex_unlock(*reinterpret_cast<void **>(providerBytes + 0x840));
-    return ok;
-}

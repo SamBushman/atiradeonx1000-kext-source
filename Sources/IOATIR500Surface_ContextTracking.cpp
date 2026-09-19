@@ -43,24 +43,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * +0x5a8), and finally a single extra "primary" reference at +0x90 if
  * set (same +0x5a8 slot).
  */
-void IOATIR500Surface::update_contexts() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(*reinterpret_cast<void **>(self + 0xd50), 0x78) = 0;
+/* (re-ported mechanically: see IOATIR500Surface_update_contexts_Port.cpp) */
 
-    typedef void (*Fn0x5a4)(void *);
-    typedef void (*Fn0x5a8)(void *);
-
-    for (void *node = *reinterpret_cast<void **>(self + 0x8c); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x84)) {
-        (*reinterpret_cast<Fn0x5a4 *>(*reinterpret_cast<void ***>(node) + (0x5a4 / 4)))(node);
-    }
-    for (void *node = *reinterpret_cast<void **>(self + 0x88); node != nullptr; node = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(node) + 0x84)) {
-        (*reinterpret_cast<Fn0x5a8 *>(*reinterpret_cast<void ***>(node) + (0x5a8 / 4)))(node);
-    }
-    void *primary = *reinterpret_cast<void **>(self + 0x90);
-    if (primary != nullptr) {
-        (*reinterpret_cast<Fn0x5a8 *>(*reinterpret_cast<void ***>(primary) + (0x5a8 / 4)))(primary);
-    }
-}
 
 /*
  * reset_access - CONFIRMED. Real body: re-derives this surface's own

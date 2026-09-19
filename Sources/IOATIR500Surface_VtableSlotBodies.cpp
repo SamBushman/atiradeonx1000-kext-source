@@ -116,29 +116,8 @@ SInt32 IOATIR500Surface::is_flip_allowed() {
     return 1;
 }
 
-SInt32 ATIR500Surface::is_flip_allowed() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    SInt32 uVar2 = IOATIR500Surface::is_flip_allowed();
-    UInt32 idSlot = U32At(self, 0xc14);
-    /* real: transcribed to precisely preserve the raw decompile's own
-     * goto-based early exits, which leave uVar2 unchanged (keeping the
-     * base call's own result) rather than the more obvious-looking
-     * "zero it out" - only reached if every real gate below passes. */
-    if (*(accel + 0x9b0) != 0) {
-        if (U32At(accel, idSlot * 0x18 + 0xb10) != 0) {
-            uVar2 = 0;
-        } else if (U32At(accel, 0x894) != 0) {
-            UInt32 slotOff = (idSlot != 0) ? 0xb00 : 0xb18; /* real: idSlot!=0 -> 0xb00, idSlot==0 -> 0xb18 */
-            if (U32At(accel, slotOff + 0x10) != 0) {
-                uVar2 = 0;
-            }
-        }
-    }
-    SInt32 result = 0;
-    if (U32At(self, 0xbe8) < 0x80000000u) result = uVar2; /* real: sign-bit test on this+0xbe8 */
-    return result;
-}
+/* (re-ported mechanically: see ATIR500Surface_is_flip_allowed_Port.cpp) */
+
 
 SInt32 IOATIR500Surface::is_surface_size_supported(SInt16 width, SInt16 height) {
     UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);

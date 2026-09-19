@@ -290,48 +290,11 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
     return false;
 }
 
-bool IOATIR5002DContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (accelerator->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(self + 0xb4), needed,
-                                              U32At(self, 0xc4), aggressive)) {
-        return true;
-    }
-    if (accelerator->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(self + 0x98), needed,
-                                              U32At(self, 0xa8), aggressive)) {
-        return true;
-    }
-    for (int i = 0; i < 2; i++) {
-        UInt8 *slot = self + 0xcc + i * 0x18;
-        UInt8 *argSlot = self + 0xdc + i * 0x18;
-        if (accelerator->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(slot), needed,
-                                                  U32At(argSlot, 0), aggressive)) {
-            return true;
-        }
-    }
-    return false;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_freeToAllocGART_Port.cpp) */
 
-bool IOATIR500DVDContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Accelerator *accel = *reinterpret_cast<IOATIR500Accelerator **>(self + 0x8c);
-    if (accel->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(self + 0xac), needed,
-                                        U32At(self, 0xbc), aggressive)) {
-        return true;
-    }
-    if (accel->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(self + 0x90), needed,
-                                        U32At(self, 0xa0), aggressive)) {
-        return true;
-    }
-    for (int i = 0; i < 2; i++) {
-        UInt8 *slot = self + 0xc4 + i * 0x18;
-        UInt8 *argSlot = self + 0xd4 + i * 0x18;
-        if (accel->freeTransferToAllocGART(reinterpret_cast<VendorTransferBuffer *>(slot), needed,
-                                            U32At(argSlot, 0), aggressive)) {
-            return true;
-        }
-    }
-    return false;
-}
+
+/* (re-ported mechanically: see IOATIR500DVDContext_freeToAllocGART_Port.cpp) */
+
 
 bool IOATIR500GLContext::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

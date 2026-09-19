@@ -309,14 +309,17 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\((STACKARG\(0x[0-9a-f]+\))\)\s*\[', r'((unsigned int *)\1)[', b)
             b = re.sub(r'\b([A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*)\._(\d+)_(\d+)_', lambda m: '(*(%s *)((unsigned char *)&(%s) + %s))' % ({'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(3), 'unsigned int'), m.group(1), m.group(2)), b)
             k_ = b.index('{'); head_, rest_ = b[:k_], b[k_:]
-            for nm in exact_fns:
+            for nm in ([] if os.environ.get('NOCAST') else exact_fns):
                 if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (proto[exact_fns[nm]][0], nm), rest_)
-            for nm in samepart:
+            for nm in ([] if os.environ.get('NOCAST') else samepart):
                 if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
             b = head_ + rest_
             conv = fix_arrays(fix_types(b))
             if name in PATCHES: conv = PATCHES[name](b, conv)
             f.write(conv + '\n')
+            if os.environ.get('SINGLE'):
+                os.makedirs(os.path.join(out, 'single'), exist_ok=True)
+                open(os.path.join(out, 'single', name + '.c'), 'w').write('#include "../decls.h"\n\n' + conv + '\n')
             led.append((a, sz, name, pn, 'converted'))
 with open(os.path.join(out, 'ledger.tsv'), 'w') as f:
     for r in led: f.write('\t'.join(map(str, r)) + '\n')

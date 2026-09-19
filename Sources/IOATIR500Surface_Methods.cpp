@@ -221,38 +221,11 @@ bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     return true;
 }
 
-void IOATIR500Surface::setupFullScreen() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (is_flip_allowed() != 0) {
-        UInt32 panel = U32At(self, 0xc14);
-        UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-        if (((1u << (panel & 0x3f)) & U32At(accel, 0xd0)) != 0) {
-            U16At(self, panel * 0x94 + 0xcae) = static_cast<UInt16>((U16At(self, panel * 0x94 + 0xcae) + 1u) & 3);
-            /* real: virtual slot +0x5e0 = submit_flip_buffer(panel, NULL context, 0) */
-            submit_flip_buffer(U32At(self, 0xc14), nullptr, 0);
-            U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0x74c) += 1;
-        }
-    }
-}
+/* (re-ported mechanically: see IOATIR500Surface_setupFullScreen_Port.cpp) */
 
-IOReturn IOATIR500Surface::clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    void *lock = *reinterpret_cast<void **>(accel + 0x840);
-    SurfM_IOLockLock(lock);
-    if (type < U32At(accel, 0xcc)) {
-        void *desc = reinterpret_cast<void *>(U32At(self, type * 0x94 + 0xc28));
-        void **vtable = *reinterpret_cast<void ***>(desc);
-        (*reinterpret_cast<RetainFn *>(vtable + (0x14 / 4)))(desc);
-        *options = 0;
-        *memory = reinterpret_cast<IOMemoryDescriptor *>(desc);
-        init_swap_buffer_header(reinterpret_cast<VendorSwapBufferHeader *>(U32At(self, type * 0x94 + 0xc34)), U32At(self, type * 0x94 + 0xcb0));
-        SurfM_IOLockUnlock(lock);
-        return 0;
-    }
-    SurfM_IOLockUnlock(lock);
-    return 0xe00002c2;
-}
+
+/* (re-ported mechanically: see IOATIR500Surface_clientMemoryForType_Port.cpp) */
+
 
 void IOATIR500Surface::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);

@@ -128,6 +128,20 @@ for arg in sys.argv[1:]:
             body = re.sub(r'(?<![\w>.:])%s\s*\(self\)' % n, 'this->' + n + '()', body)
             body = re.sub(r'(?<![\w>.:])%s\s*\(\s*(?:\(UInt8 \*\))?self,\s*' % n, 'this->' + n + '(', body)
         body = body.replace('sync(0);', 'ppcSync();')
+        def qual_call(mm):
+            ptr = int(mm.group(2), 16)
+            r = subprocess.run(['python3', HERE + '/const_ptr.py', os.path.expanduser('~/Documents/ATI-X1900-Decomp/tiger-hd-pull/ATIRadeonX1000.kext.bin'), hex(ptr)], capture_output=True, text=True).stdout
+            m3 = re.search(r'local 0x([0-9a-f]+)', r)
+            if not m3: return mm.group(0)
+            tgt = int(m3.group(1), 16)
+            if tgt not in led: return mm.group(0)
+            qn = led[tgt][0]
+            args = mm.group(3).strip()
+            if args.startswith('self,'): args = args[5:].strip()
+            elif args == 'self': args = ''
+            elif not args: args = ', '.join(re.findall(r'(\w+)(?=\s*[,)])', decl_params.replace('*', ' ')) and [re.sub(r'^real_', '', x.split()[-1].lstrip('*')) for x in dp])
+            return '%s(%s)' % (qn, args)
+        body = re.sub(r'\(M<code>\(PTR_(\w+?)_([0-9a-f]{8})\)\)\(([^;]*?)\)(?=[;,)]| *\))', qual_call, body)
         KC = ['ATIR500Memory', 'IOATIR500Shared', 'IOATIR500Surface', 'IOATIR500Accelerator', 'ATIRadeonX1000', 'IOATIR500GLContext', 'IOATIR5002DContext', 'IOATIR500DVDContext', 'ATIR500Surface', 'ATIR500GLContext', 'ATIR5002DContext', 'ATIR500DVDContext']
         def conv_static(txt):
             pat = re.compile(r'\b(' + '|'.join(KC) + r')::(\w+)\s*\(')
@@ -237,6 +251,7 @@ for arg in sys.argv[1:]:
         pre = pre.replace('#include "../Headers/GhidraCompat.h"\n', '')
         hdr = ''.join('#include "../Headers/%s"\n' % h for h in ['ATIRadeonX1000.h', 'IOATIR500Accelerator.h', 'IOATIR500GLContext.h', 'IOATIR5002DContext.h', 'IOATIR500DVDContext.h', 'IOATIR500Surface.h', 'IOATIR500Shared.h', 'ATIR500Surface.h', 'ATIR500GLContext.h', 'ATIR5002DContext.h', 'ATIR500DVDContext.h', 'ATIR500Memory.h', 'ATIRadeonX1000PPCIntrinsics.h', 'ATIRadeonX1000Registers.h', 'GhidraExterns.h', 'GhidraCompat.h'])
         dst = ROOT + '/Sources/%s_Port.cpp' % (qual.replace('::', '_'))
+        if os.path.exists(dst) and ('re-ported' not in open(dst).read(2000) or ('0x%x' % a) not in open(dst).read(600)): dst = dst[:-4] + '_%x.cpp' % a
         doc = '/*\n * %s\n *\n * %s (real addr %s, %s bytes) - mechanically ported from the Ghidra decompile of the shipped kext (Tools/replace_fn.py /\n * Tools/port_fn.py); replaces the earlier hand-written body, which the callee/atomics comparison (Tools/callee_compare.py) showed had\n * dropped or simplified parts of the original.\n */\n\n' % (os.path.basename(dst), qual, hex(a), dm.count('') and str(next((sz for aa, sz in [(0, 0)]), 0)))
         open(dst, 'w').write(doc + hdr + pre + '\n' + body)
         print('   ->', os.path.basename(dst))
