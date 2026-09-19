@@ -206,7 +206,7 @@ body = conv_vcalls(body)
 # class-typed pointers -> UInt8 *, class casts on literals dropped
 cls_alt = '|'.join(sorted(CLASSES, key=len, reverse=True))
 body = re.sub(r'(?<![\w:])(' + cls_alt + r')( \*)', r'UInt8\2', body)
-body = re.sub(r'\(\s*(?:' + cls_alt + r')\s*\)\s*(?=0x|\d|\w)', '', body)
+body = re.sub(r'\(\s*(?:' + cls_alt + r')\s*\)\s*(?=0x|\d|\w|\()', '', body)
 body = re.sub(r'(?<![\w:])(?:' + cls_alt + r') (\w+);', r'UInt8 \1;', body)   # `ATIR500Surface AVar5;` (a byte-sized object)
 body = conv_calls(body)
 body = conv_mem(body)

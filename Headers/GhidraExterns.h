@@ -6,13 +6,18 @@
 #ifndef GHIDRAEXTERNS_H
 #define GHIDRAEXTERNS_H
 
-extern "C" void *GH_IOFramebuffer_metaClass asm("__ZN13IOFramebuffer9metaClassE");
-extern "C" void *GH_IOService_metaClass asm("__ZN9IOService9metaClassE");
-extern "C" void *GH_IOAGPDevice_metaClass asm("__ZN12IOAGPDevice9metaClassE");
-extern "C" void *GH_OSNumber_metaClass asm("__ZN8OSNumber9metaClassE");
-extern "C" void *GH_IONDRVFramebuffer_metaClass asm("__ZN17IONDRVFramebuffer9metaClassE");
-extern "C" void *GH_gIODTPlane asm("_gIODTPlane");
-extern "C" void *GH_gIOServicePlane asm("_gIOServicePlane");
+#include "ATIRadeonX1000Types.h"
+
+extern "C" UInt32 GH_IOFramebuffer_metaClass asm("__ZN13IOFramebuffer9metaClassE");
+extern "C" UInt32 GH_IOService_metaClass asm("__ZN9IOService9metaClassE");
+extern "C" UInt32 GH_IOAGPDevice_metaClass asm("__ZN12IOAGPDevice9metaClassE");
+extern "C" UInt32 GH_OSNumber_metaClass asm("__ZN8OSNumber9metaClassE");
+extern "C" UInt32 GH_IONDRVFramebuffer_metaClass asm("__ZN17IONDRVFramebuffer9metaClassE");
+extern "C" UInt32 GH_gIODTPlane asm("_gIODTPlane");
+extern "C" UInt32 GH_gIOServicePlane asm("_gIOServicePlane");
+extern "C" UInt32 GH_IOPCIDevice_metaClass asm("__ZN11IOPCIDevice9metaClassE");
+extern "C" UInt32 GH_OSString_metaClass asm("__ZN8OSString9metaClassE");
+extern "C" UInt32 GH_OSData_metaClass asm("__ZN6OSData9metaClassE");
 extern "C" int GH_page_shift asm("_page_shift");
 extern "C" int GH_page_size asm("_page_size");
 extern "C" int GH_kernel_task asm("_kernel_task");

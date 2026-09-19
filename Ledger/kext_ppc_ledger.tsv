@@ -1,4 +1,4 @@
-00000000	8	method	MISSING	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
+00000000	8	method	DONE	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
 00000010	68	generated	DONE	IOATIR500Accelerator::IOATIR500Accelerator	__ZN20IOATIR500AcceleratorC2EPK11OSMetaClass
 00000054	16	stub	n/a	FUN_00000054	
 00000070	68	generated	DONE	IOATIR500Accelerator::IOATIR500Accelerator	__ZN20IOATIR500AcceleratorC1EPK11OSMetaClass
@@ -15,28 +15,28 @@
 00000268	16	stub	n/a	FUN_00000268	
 00000280	8	generated	DONE	IOATIR500Accelerator::MetaClass::alloc	__ZNK20IOATIR500Accelerator9MetaClass5allocEv
 00000290	216	method	DONE	IOATIR500Accelerator::getVRAMDescriptor	__ZN20IOATIR500Accelerator17getVRAMDescriptorEm
-00000370	368	method	MISSING	IOATIR500Accelerator::display_change_handler	__ZN20IOATIR500Accelerator22display_change_handlerEP8OSObjectPvP13IOFramebufferlS2_
+00000370	368	method	DONE	IOATIR500Accelerator::display_change_handler	__ZN20IOATIR500Accelerator22display_change_handlerEP8OSObjectPvP13IOFramebufferlS2_
 00000514	16	stub	n/a	FUN_00000514	
 00000524	16	stub	n/a	FUN_00000524	
 00000534	16	stub	n/a	FUN_00000534	
-00000550	476	method	MISSING	IOATIR500Accelerator::foundFramebuffer	__ZN20IOATIR500Accelerator16foundFramebufferEP13IOFramebuffer
+00000550	476	method	DONE	IOATIR500Accelerator::foundFramebuffer	__ZN20IOATIR500Accelerator16foundFramebufferEP13IOFramebuffer
 00000744	16	stub	n/a	FUN_00000744	
 00000754	16	stub	n/a	FUN_00000754	
-00000770	544	method	MISSING	IOATIR500Accelerator::findFramebuffers	__ZN20IOATIR500Accelerator16findFramebuffersEv
+00000770	544	method	DONE	IOATIR500Accelerator::findFramebuffers	__ZN20IOATIR500Accelerator16findFramebuffersEv
 000009b4	16	stub	n/a	IOATIR500Accelerator::foundFramebuffer	
 000009c4	16	stub	n/a	FUN_000009c4	
 000009d4	16	stub	n/a	FUN_000009d4	
-000009f0	168	method	MISSING	IOATIR500Accelerator::serializePerformanceStats	__ZN20IOATIR500Accelerator25serializePerformanceStatsEPvS0_P11OSSerialize
+000009f0	168	method	DONE	IOATIR500Accelerator::serializePerformanceStats	__ZN20IOATIR500Accelerator25serializePerformanceStatsEPvS0_P11OSSerialize
 00000a98	16	stub	n/a	FUN_00000a98	
 00000aa8	16	stub	n/a	FUN_00000aa8	
-00000ac0	5176	method	MISSING	IOATIR500Accelerator::writePerformanceStats	__ZN20IOATIR500Accelerator21writePerformanceStatsEP12OSDictionary
+00000ac0	5176	method	DONE	IOATIR500Accelerator::writePerformanceStats	__ZN20IOATIR500Accelerator21writePerformanceStatsEP12OSDictionary
 00001ef8	16	stub	n/a	FUN_00001ef8	
 00001f10	180	method	DONE	IOATIR500Accelerator::freeCommandBuffer	__ZN20IOATIR500Accelerator17freeCommandBufferEP19VendorCommandBuffer
-00001fd0	144	method	MISSING	IOATIR500Accelerator::freeAllCommandBuffers	__ZN20IOATIR500Accelerator21freeAllCommandBuffersEm
+00001fd0	144	method	DONE	IOATIR500Accelerator::freeAllCommandBuffers	__ZN20IOATIR500Accelerator21freeAllCommandBuffersEm
 00002060	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 00002070	628	method	DONE	IOATIR500Accelerator::newUserClient	__ZN20IOATIR500Accelerator13newUserClientEP4taskPvmPP12IOUserClient
 000022fc	16	stub	n/a	FUN_000022fc	
-00002310	36	method	MISSING	IOATIR500Accelerator::teardown2D	__ZN20IOATIR500Accelerator10teardown2DEv
+00002310	36	method	DONE	IOATIR500Accelerator::teardown2D	__ZN20IOATIR500Accelerator10teardown2DEv
 00002334	16	stub	n/a	IOATIR500Accelerator::freeAllCommandBuffers	
 00002350	132	method	DONE	IOATIR500Accelerator::init_command_buffer_header	__ZN20IOATIR500Accelerator26init_command_buffer_headerEP25VendorCommandBufferHeaderm
 000023e0	148	method	DONE	IOATIR500Accelerator::allocCommandBuffer	__ZN20IOATIR500Accelerator18allocCommandBufferEP19VendorCommandBufferm
@@ -45,11 +45,11 @@
 000024a0	260	method	DONE	IOATIR500Accelerator::allocMoreCommandBuffers	__ZN20IOATIR500Accelerator23allocMoreCommandBuffersEmm
 000025a4	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 000025b4	16	stub	n/a	IOATIR500Accelerator::allocCommandBuffer	
-000025d0	40	method	MISSING	IOATIR500Accelerator::setup2D	__ZN20IOATIR500Accelerator7setup2DEv
+000025d0	40	method	DONE	IOATIR500Accelerator::setup2D	__ZN20IOATIR500Accelerator7setup2DEv
 000025f8	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
 00002610	40	method	DONE	IOATIR500Accelerator::setup3D	__ZN20IOATIR500Accelerator7setup3DEv
 00002638	16	stub	n/a	IOATIR500Accelerator::allocMoreCommandBuffers	
-00002650	2456	method	MISSING	IOATIR500Accelerator::start	__ZN20IOATIR500Accelerator5startEP9IOService
+00002650	2456	method	DONE	IOATIR500Accelerator::start	__ZN20IOATIR500Accelerator5startEP9IOService
 00002fe8	16	stub	n/a	IOATIR500Accelerator::findFramebuffers	
 00002ff8	16	stub	n/a	FUN_00002ff8	
 00003008	16	stub	n/a	FUN_00003008	
@@ -69,13 +69,13 @@
 00003140	372	method	DONE	IOATIR500Accelerator::pageOffDataBuffer	__ZN20IOATIR500Accelerator17pageOffDataBufferEP19VendorTextureBuffer
 000032b4	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
 000032d0	308	method	DONE	IOATIR500Accelerator::freeOneDataBuffer	__ZN20IOATIR500Accelerator17freeOneDataBufferEP19VendorTextureBuffer
-00003410	112	method	MISSING	IOATIR500Accelerator::freeAllDataBuffers	__ZN20IOATIR500Accelerator18freeAllDataBuffersEv
+00003410	112	method	DONE	IOATIR500Accelerator::freeAllDataBuffers	__ZN20IOATIR500Accelerator18freeAllDataBuffersEv
 00003484	16	stub	n/a	IOATIR500Accelerator::freeOneDataBuffer	
-000034a0	4	method	MISSING	IOATIR500Accelerator::pageoff_dirty_texture	__ZN20IOATIR500Accelerator21pageoff_dirty_textureEP19VendorTextureBufferll
+000034a0	4	method	DONE	IOATIR500Accelerator::pageoff_dirty_texture	__ZN20IOATIR500Accelerator21pageoff_dirty_textureEP19VendorTextureBufferll
 000034b0	60	method	DONE	IOATIR500Accelerator::addTransferToGART	__ZN20IOATIR500Accelerator17addTransferToGARTEP20VendorTransferBuffer
 000034f0	136	method	DONE	IOATIR500Accelerator::removeTransferFromGART	__ZN20IOATIR500Accelerator22removeTransferFromGARTEP20VendorTransferBuffer
 00003580	212	method	DONE	IOATIR500Accelerator::freeTransferToAllocGART	__ZN20IOATIR500Accelerator23freeTransferToAllocGARTEP20VendorTransferBufferS1_mb
-00003670	8	method	MISSING	IOATIR500Accelerator::makeGARTEntry	__ZN20IOATIR500Accelerator13makeGARTEntryEm
+00003670	8	method	DONE	IOATIR500Accelerator::makeGARTEntry	__ZN20IOATIR500Accelerator13makeGARTEntryEm
 00003680	328	method	DONE	IOATIR500Accelerator::freeOrphanTexture	__ZN20IOATIR500Accelerator17freeOrphanTextureEb
 000037cc	16	stub	n/a	IOATIR500Shared::free_texvert	
 000037dc	16	stub	n/a	FUN_000037dc	
@@ -97,33 +97,33 @@
 000045a0	988	method	DONE	IOATIR500Accelerator::freeToAllocSurfaceVRAM	__ZN20IOATIR500Accelerator22freeToAllocSurfaceVRAMEP16IOATIR500SurfaceS1_PP19VendorTextureBufferlP20ATIR500SurfaceBuffer
 000049b0	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
 000049c0	144	method	DONE	IOATIR500Accelerator::addOrphanTexture	__ZN20IOATIR500Accelerator16addOrphanTextureEP15IOTextureBuffer
-00004a50	64	method	MISSING	IOATIR500Accelerator::garbage_collector_timer	__ZN20IOATIR500Accelerator23garbage_collector_timerEP8OSObjectP18IOTimerEventSource
-00004a90	516	method	MISSING	IOATIR500Accelerator::free_gart_wirings	__ZN20IOATIR500Accelerator17free_gart_wiringsEv
+00004a50	64	method	DONE	IOATIR500Accelerator::garbage_collector_timer	__ZN20IOATIR500Accelerator23garbage_collector_timerEP8OSObjectP18IOTimerEventSource
+00004a90	516	method	DONE	IOATIR500Accelerator::free_gart_wirings	__ZN20IOATIR500Accelerator17free_gart_wiringsEv
 00004cac	16	stub	n/a	FUN_00004cac	
 00004cbc	16	stub	n/a	FUN_00004cbc	
 00004ccc	16	stub	n/a	FUN_00004ccc	
-00004ce0	64	method	MISSING	IOATIR500Accelerator::gart_collector_timer	__ZN20IOATIR500Accelerator20gart_collector_timerEP8OSObjectP18IOTimerEventSource
+00004ce0	64	method	DONE	IOATIR500Accelerator::gart_collector_timer	__ZN20IOATIR500Accelerator20gart_collector_timerEP8OSObjectP18IOTimerEventSource
 00004d20	136	method	DONE	IOATIR500Accelerator::getVRAMDescriptors	__ZN20IOATIR500Accelerator18getVRAMDescriptorsEv
 00004da8	16	stub	n/a	FUN_00004da8	
 00004dc0	232	method	DONE	IOATIR500Accelerator::allocVendorTextureBuffer	__ZN20IOATIR500Accelerator24allocVendorTextureBufferEm
 00004ea8	16	stub	n/a	FUN_00004ea8	
 00004ec0	68	method	DONE	IOATIR500Accelerator::releaseVendorTextureBuffer	__ZN20IOATIR500Accelerator26releaseVendorTextureBufferEP19VendorTextureBufferm
 00004f04	16	stub	n/a	FUN_00004f04	
-00004f20	148	method	MISSING	IOATIR500Accelerator::mapVendorTransferBuffer	__ZN20IOATIR500Accelerator23mapVendorTransferBufferEP20VendorTransferBuffer
-00004fe0	144	method	MISSING	IOATIR500Accelerator::unmapVendorTransferBuffer	__ZN20IOATIR500Accelerator25unmapVendorTransferBufferEP20VendorTransferBuffer
-00005090	188	method	MISSING	IOATIR500Accelerator::teardownAGP	__ZN20IOATIR500Accelerator11teardownAGPEP9IOService
+00004f20	148	method	DONE	IOATIR500Accelerator::mapVendorTransferBuffer	__ZN20IOATIR500Accelerator23mapVendorTransferBufferEP20VendorTransferBuffer
+00004fe0	144	method	DONE	IOATIR500Accelerator::unmapVendorTransferBuffer	__ZN20IOATIR500Accelerator25unmapVendorTransferBufferEP20VendorTransferBuffer
+00005090	188	method	DONE	IOATIR500Accelerator::teardownAGP	__ZN20IOATIR500Accelerator11teardownAGPEP9IOService
 0000514c	16	stub	n/a	FUN_0000514c	
-00005160	48	method	MISSING	IOATIR500Accelerator::commitAGPMemory	__ZN20IOATIR500Accelerator15commitAGPMemoryEP18IOMemoryDescriptormm
-00005190	48	method	MISSING	IOATIR500Accelerator::releaseAGPMemory	__ZN20IOATIR500Accelerator16releaseAGPMemoryEP18IOMemoryDescriptormm
-000051c0	60	method	MISSING	IOATIR500Accelerator::reserveInGART	__ZN20IOATIR500Accelerator13reserveInGARTEm
-00005200	32	method	MISSING	IOATIR500Accelerator::clearInGART	__ZN20IOATIR500Accelerator11clearInGARTEm
+00005160	48	method	DONE	IOATIR500Accelerator::commitAGPMemory	__ZN20IOATIR500Accelerator15commitAGPMemoryEP18IOMemoryDescriptormm
+00005190	48	method	DONE	IOATIR500Accelerator::releaseAGPMemory	__ZN20IOATIR500Accelerator16releaseAGPMemoryEP18IOMemoryDescriptormm
+000051c0	60	method	DONE	IOATIR500Accelerator::reserveInGART	__ZN20IOATIR500Accelerator13reserveInGARTEm
+00005200	32	method	DONE	IOATIR500Accelerator::clearInGART	__ZN20IOATIR500Accelerator11clearInGARTEm
 00005220	76	method	DONE	IOATIR500Accelerator::addToGART	__ZN20IOATIR500Accelerator9addToGARTEP18IOMemoryDescriptorPm
-00005270	356	method	MISSING	IOATIR500Accelerator::removeFromGART	__ZN20IOATIR500Accelerator14removeFromGARTEP18IOMemoryDescriptorm
-000053e0	4	method	MISSING	IOATIR500Accelerator::synchronizeGART	__ZN20IOATIR500Accelerator15synchronizeGARTEmm
-000053f0	4	method	MISSING	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEP18IOMemoryDescriptormm
-00005400	4	method	MISSING	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEP18IOMemoryDescriptormm
-00005410	52	method	MISSING	IOATIR500Accelerator::is_idle	__ZN20IOATIR500Accelerator7is_idleEv
-00005450	12	method	MISSING	IOATIR500Accelerator::set_stereo	__ZN20IOATIR500Accelerator10set_stereoEmm
+00005270	356	method	DONE	IOATIR500Accelerator::removeFromGART	__ZN20IOATIR500Accelerator14removeFromGARTEP18IOMemoryDescriptorm
+000053e0	4	method	DONE	IOATIR500Accelerator::synchronizeGART	__ZN20IOATIR500Accelerator15synchronizeGARTEmm
+000053f0	4	method	DONE	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEP18IOMemoryDescriptormm
+00005400	4	method	DONE	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEP18IOMemoryDescriptormm
+00005410	52	method	DONE	IOATIR500Accelerator::is_idle	__ZN20IOATIR500Accelerator7is_idleEv
+00005450	12	method	DONE	IOATIR500Accelerator::set_stereo	__ZN20IOATIR500Accelerator10set_stereoEmm
 00005460	572	method	DONE	IOATIR500Accelerator::setup_stereo	__ZN20IOATIR500Accelerator12setup_stereoEmm
 000056a8	16	stub	n/a	IOATIR500Surface::allocAllSlaveSwapBuffers	
 000056b8	16	stub	n/a	IOATIR500Surface::allocMasterSwapBuffer	
@@ -131,49 +131,49 @@
 000056d8	16	stub	n/a	ATIR500Memory::dealloc	
 000056e8	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
 000056f8	16	stub	n/a	FUN_000056f8	
-00005710	320	method	MISSING	IOATIR500Accelerator::disp_mode_did_change	__ZN20IOATIR500Accelerator20disp_mode_did_changeEv
+00005710	320	method	DONE	IOATIR500Accelerator::disp_mode_did_change	__ZN20IOATIR500Accelerator20disp_mode_did_changeEv
 00005850	16	stub	n/a	FUN_00005850	
 00005860	16	stub	n/a	IOATIR500Surface::alloc_surfaces	
 00005870	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
 00005880	16	stub	n/a	IOATIR500Surface::reset_access	
-00005890	148	method	MISSING	IOATIR500Accelerator::teardown3D	__ZN20IOATIR500Accelerator10teardown3DEv
+00005890	148	method	DONE	IOATIR500Accelerator::teardown3D	__ZN20IOATIR500Accelerator10teardown3DEv
 00005924	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
 00005934	16	stub	n/a	IOATIR500Accelerator::freeAllDataBuffers	
 00005944	16	stub	n/a	IOATIR500Accelerator::freeAllCommandBuffers	
-00005960	84	method	MISSING	IOATIR500Accelerator::system_did_wake	__ZN20IOATIR500Accelerator15system_did_wakeEv
+00005960	84	method	DONE	IOATIR500Accelerator::system_did_wake	__ZN20IOATIR500Accelerator15system_did_wakeEv
 000059b4	16	stub	n/a	FUN_000059b4	
 000059c4	16	stub	n/a	FUN_000059c4	
 000059e0	48	method	DONE	IOATIR500Accelerator::find_surface_for_id	__ZN20IOATIR500Accelerator19find_surface_for_idEm
-00005a10	8	method	MISSING	IOATIR500Accelerator::getAccelCapsBits	__ZN20IOATIR500Accelerator16getAccelCapsBitsEv
+00005a10	8	method	DONE	IOATIR500Accelerator::getAccelCapsBits	__ZN20IOATIR500Accelerator16getAccelCapsBitsEv
 00005a20	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
 00005aa0	16	stub	n/a	FUN_00005aa0	
 00005ab0	60	generated	DONE	IOATIR500Accelerator::MetaClass::~MetaClass	__ZN20IOATIR500Accelerator9MetaClassD0Ev
 00005aec	16	stub	n/a	FUN_00005aec	
 00005b2c	16	stub	n/a	__static_initialization_and_destruction_0	
 00005b6c	16	stub	n/a	__static_initialization_and_destruction_0	
-00005b80	1048	method	MISSING	IOATIR500Accelerator::configureAGP	__ZN20IOATIR500Accelerator12configureAGPEP9IOService
+00005b80	1048	method	DONE	IOATIR500Accelerator::configureAGP	__ZN20IOATIR500Accelerator12configureAGPEP9IOService
 00005fa8	16	stub	n/a	FUN_00005fa8	
 00005fb8	16	stub	n/a	FUN_00005fb8	
 00005fc8	16	stub	n/a	FUN_00005fc8	
-00005fe0	636	method	MISSING	IOATIR500Accelerator::addToMinMaxGART	__ZN20IOATIR500Accelerator15addToMinMaxGARTEP18IOMemoryDescriptorPmmm
-00006270	80	method	MISSING	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEPKvm
-000062c0	96	method	MISSING	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEPKvm
-00006320	88	method	MISSING	IOATIR500Accelerator::requestProbe	__ZN20IOATIR500Accelerator12requestProbeEm
+00005fe0	636	method	DONE	IOATIR500Accelerator::addToMinMaxGART	__ZN20IOATIR500Accelerator15addToMinMaxGARTEP18IOMemoryDescriptorPmmm
+00006270	80	method	DONE	IOATIR500Accelerator::flush_memory_for_in	__ZN20IOATIR500Accelerator19flush_memory_for_inEPKvm
+000062c0	96	method	DONE	IOATIR500Accelerator::flush_memory_for_out	__ZN20IOATIR500Accelerator20flush_memory_for_outEPKvm
+00006320	88	method	DONE	IOATIR500Accelerator::requestProbe	__ZN20IOATIR500Accelerator12requestProbeEm
 00006380	16	stub	n/a	FUN_00006380	
 00006390	16	stub	n/a	IOATIR500Accelerator::findFramebuffers	
 000063a0	16	stub	n/a	FUN_000063a0	
-000063b0	84	method	MISSING	IOATIR500Accelerator::garbage_collector	__ZN20IOATIR500Accelerator17garbage_collectorEP8OSObjectP22IOInterruptEventSourcei
+000063b0	84	method	DONE	IOATIR500Accelerator::garbage_collector	__ZN20IOATIR500Accelerator17garbage_collectorEP8OSObjectP22IOInterruptEventSourcei
 00006404	16	stub	n/a	FUN_00006404	
 00006414	16	stub	n/a	IOATIR500Accelerator::freeOrphanTexture	
 00006424	16	stub	n/a	FUN_00006424	
-00006440	188	method	MISSING	IOATIR500Accelerator::gart_collector	__ZN20IOATIR500Accelerator14gart_collectorEP8OSObjectP22IOInterruptEventSourcei
+00006440	188	method	DONE	IOATIR500Accelerator::gart_collector	__ZN20IOATIR500Accelerator14gart_collectorEP8OSObjectP22IOInterruptEventSourcei
 00006504	16	stub	n/a	FUN_00006504	
 00006514	16	stub	n/a	IOATIR500Accelerator::free_gart_wirings	
 00006524	16	stub	n/a	FUN_00006524	
-00006540	84	method	MISSING	IOATIR500Accelerator::system_will_sleep	__ZN20IOATIR500Accelerator17system_will_sleepEv
+00006540	84	method	DONE	IOATIR500Accelerator::system_will_sleep	__ZN20IOATIR500Accelerator17system_will_sleepEv
 00006594	16	stub	n/a	FUN_00006594	
 000065a4	16	stub	n/a	FUN_000065a4	
-000065c0	840	method	MISSING	IOATIR500Accelerator::stop	__ZN20IOATIR500Accelerator4stopEP9IOService
+000065c0	840	method	DONE	IOATIR500Accelerator::stop	__ZN20IOATIR500Accelerator4stopEP9IOService
 00006908	16	stub	n/a	FUN_00006908	
 00006918	16	stub	n/a	IOATIR500Accelerator::freeCommandBuffer	
 00006928	16	stub	n/a	IOATIR500Accelerator::freeAllDataBuffers	
@@ -181,7 +181,7 @@
 00006948	16	stub	n/a	IOATIR500Shared::free_texvert	
 00006960	344	method	DONE	IOATIR500Accelerator::allocOneDataBuffer	__ZN20IOATIR500Accelerator18allocOneDataBufferEmb
 00006ab8	16	stub	n/a	IOATIR500Accelerator::allocDataBufferBacking	
-00006ad0	636	method	MISSING	IOATIR500Accelerator::disp_mode_will_change	__ZN20IOATIR500Accelerator21disp_mode_will_changeEl
+00006ad0	636	method	DONE	IOATIR500Accelerator::disp_mode_will_change	__ZN20IOATIR500Accelerator21disp_mode_will_changeEl
 00006d4c	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
 00006d5c	16	stub	n/a	IOATIR500Shared::free_texvert	
 00006d6c	16	stub	n/a	IOATIR500Accelerator::setup_stereo	
@@ -922,7 +922,7 @@
 00019a3c	16	stub	n/a	FUN_00019a3c	
 00019a7c	16	stub	n/a	__static_initialization_and_destruction_0	
 00019abc	16	stub	n/a	__static_initialization_and_destruction_0	
-00019ad0	8	method	MISSING	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
+00019ad0	8	method	DONE	IOATIR500Accelerator::ASICSupportsAGP	__ZN20IOATIR500Accelerator15ASICSupportsAGPEv
 00019ae0	68	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C2EPK11OSMetaClass
 00019b24	16	stub	n/a	FUN_00019b24	
 00019b40	68	generated	DONE	ATIRadeonX1000::ATIRadeonX1000	__ZN14ATIRadeonX1000C1EPK11OSMetaClass

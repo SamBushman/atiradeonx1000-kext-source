@@ -79,7 +79,7 @@ public:
     virtual UInt32   sleepForTimeStampNoLock(UInt32 tag);                       /* +0x55c, real addr 0x25ae0 */
     virtual UInt32   submit_commands(VendorCommandDescriptor *descriptor);      /* +0x560, real addr 0x20ce0 */
     virtual void     noop_buffer(UInt32 *buffer);                               /* +0x564, real addr 0x1e000 */
-    virtual IOReturn writePerformanceStats(OSDictionary *dictionary);           /* +0x568, real addr 0x1a300 */
+    virtual void     writePerformanceStats(OSDictionary *dictionary);           /* +0x568, real addr 0x1a300 */
     virtual VendorTextureBuffer *allocVendorTextureBuffer(UInt32 size);         /* +0x570 */
     virtual void     releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size); /* +0x574 */
     virtual bool     mapVendorTransferBuffer(VendorTransferBuffer *buffer);     /* +0x578, real addr 0x1a5c0 */
