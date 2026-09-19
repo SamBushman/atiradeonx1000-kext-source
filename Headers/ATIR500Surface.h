@@ -214,6 +214,15 @@ public:
      * declared in class") on every one of these until redeclared here.
      * Signatures copied exactly from the base's own declarations.
      */
+    virtual void   setupFullScreen();                                          /* +0x5a4, addr 0x3d200 */
+    virtual void   build_swap();                                               /* +0x5c0, addr 0x3eec0 */
+    virtual void   submit_swap_buffer(UInt32 param1, UInt32 param2);            /* +0x5d4, addr 0x3ba80 */
+    virtual void   submit_swap_buffer(UInt32 param1, eDoSwap doSwap, IOATIR500GLContext *context); /* +0x5d8, addr 0x3b310 */
+    virtual void   copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
+                                    UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f); /* +0x5e8, addr 0x43730 */
+    virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
+                                  UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f);   /* +0x5ec, addr 0x43340 */
+    virtual bool   buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0 */
     virtual void   invalidate();
     virtual UInt32 dealloc_surface(UInt32 surfaceIndex);
     virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer);

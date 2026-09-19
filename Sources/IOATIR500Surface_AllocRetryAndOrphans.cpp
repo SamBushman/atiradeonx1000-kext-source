@@ -48,7 +48,8 @@ extern "C" void GLSurfaceRetry_IOSleep(UInt32 milliseconds) asm("_IOSleep");
  * retries, falls back to a real last-resort attempt against just this
  * surface's own persistent bits (+0xc1c & 3).
  */
-IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, UInt32 lockType) {
+IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, eLockType lockTypeE) {
+    UInt32 lockType = static_cast<UInt32>(lockTypeE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 isWrite = static_cast<UInt8>((lockType == 0) << 1);
     UInt8 isType2 = static_cast<UInt8>((lockType == 2) << 1);
@@ -84,7 +85,7 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, UInt32 lockTy
             return static_cast<IOReturn>(0xe00002be);
         }
         {
-            SInt32 pageqResult = alloc_surfaces_pageq(formatMask, false);
+            SInt32 pageqResult = alloc_surfaces_pageq(formatMask, 0, false);
             if (pageqResult == 0) {
                 return 0;
             }
@@ -94,7 +95,7 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 formatMask, UInt32 lockTy
         }
         retries -= 1;
         if (retries == 0) {
-            SInt32 lastResort = alloc_surfaces_pageq(U32At(self, 0xc1c) & 3, false);
+            SInt32 lastResort = alloc_surfaces_pageq(U32At(self, 0xc1c) & 3, 0, false);
             return (lastResort == 0) ? static_cast<IOReturn>(0) : static_cast<IOReturn>(0xe00002cc);
         }
         {

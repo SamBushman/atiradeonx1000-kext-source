@@ -115,7 +115,7 @@ IOReturn IOATIR500GLContext::set_surface_volatile_state(UInt32 state) {
     U32At(self, 0xc4) = state;
     IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
     if (surface != nullptr) {
-        surface->set_volatile_state(state);
+        surface->set_volatile_state(static_cast<eSurfaceVolatileState>(state));
     }
     return 0;
 }

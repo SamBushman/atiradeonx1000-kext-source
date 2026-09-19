@@ -27,6 +27,7 @@
 
 class ATIRadeonX1000;
 class IOATIR500GLContext;
+class IOATIR5002DContext;
 class IOATIR500DVDContext; /* real mangled-symbol evidence for set_dvd_context/remove_dvd_context below confirms this is the BASE class (19-char "IOATIR500DVDContext"), not the ATIR500DVDContext subclass */
 class IOTextureBuffer; /* real, opaque backing-store handle type - forward declared only, not reconstructed (Apple's own real type, same policy as IOAccelSurfaceData etc. below) */
 struct VendorTransferBuffer;
@@ -69,6 +70,44 @@ public:
      * Sources/IOATIR500Surface_Start.cpp for the full real transcription.
      */
     virtual bool start(IOService *provider) override;
+    virtual void stop(IOService *provider) override;                          /* +0x34c, real addr 0x134b0 */
+    virtual void free() override;                                             /* +0x04c (OSObject::free), real addr 0x10a50 */
+    virtual IOReturn clientClose() override;                                  /* +0x568, real addr 0x10ac0 */
+    virtual IOReturn clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) override; /* +0x580, real addr 0x141b0 */
+
+    /*
+     * THE VIRTUAL SLOTS THIS CLASS INTRODUCES, in stock vtable order (+0x5a4 .. +0x604; Ledger/kext_ppc_vtables.txt).
+     * The order IS the ABI: the driver calls these by raw vtable offset. The comments elsewhere in this header
+     * (issues #18/#22) describe individual slots; this block replaces the scattered declarations they annotated.
+     * "= 0" marks the slots the stock base class leaves pure virtual (ATIR500Surface implements them).
+     */
+    virtual void   setupFullScreen();                                          /* +0x5a4, real addr 0x13900 */
+    virtual void   resetFullScreen();                                          /* +0x5a8 (base has a body; ATIR500Surface overrides) */
+    virtual UInt32 surface_req_bits();                                         /* +0x5ac, real addr 0x13f50: returns 0 */
+    virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);     /* +0x5b0 */
+    virtual UInt32 update_ref_stamps(UInt32 generation, UInt32 tag);           /* +0x5b4, real addr 0x13fe0: returns tag */
+    virtual void   increment_refcounts(UInt32 tag);                            /* +0x5b8, real addr 0x13ff0: no-op */
+    virtual void   decrement_refcounts(UInt32 tag);                            /* +0x5bc, real addr 0x14000: no-op */
+    virtual void   build_swap() = 0;                                           /* +0x5c0 */
+    virtual void   invalidate() = 0;                                           /* +0x5c4 */
+    virtual void   shape_surface() = 0;                                        /* +0x5c8 */
+    virtual UInt32 dealloc_surface(UInt32 surfaceIndex);                       /* +0x5cc, real addr 0x12580 */
+    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) = 0;     /* +0x5d0 */
+    virtual void   submit_swap_buffer(UInt32 param1, UInt32 param2) = 0;       /* +0x5d4 */
+    virtual void   submit_swap_buffer(UInt32 param1, eDoSwap doSwap, IOATIR500GLContext *context) = 0; /* +0x5d8 */
+    virtual SInt32 is_flip_allowed();                                          /* +0x5dc */
+    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag) = 0; /* +0x5e0 */
+    virtual bool   alloc_buffer_backing_store(ATIR500SurfaceBuffer *buffer);   /* +0x5e4, real addr 0x12900 */
+    virtual void   copy_from_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
+                                    UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f) = 0; /* +0x5e8 */
+    virtual void   copy_to_buffer(SInt32 x, SInt32 y, SInt32 w, SInt32 h, UInt32 a, UInt32 b, ATIR500SurfaceBuffer *buffer,
+                                  UInt32 c, VendorTransferBuffer *transfer, UInt32 d, UInt32 e, UInt32 f) = 0;   /* +0x5ec */
+    virtual bool   buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes); /* +0x5f0, real addr 0x14010 */
+    virtual bool   alloc_surface(UInt32 index, bool moveFromBacking);          /* +0x5f4, real addr 0x13360 */
+    virtual bool   alloc_surface_keep(IOATIR500Surface *other, VendorTextureBuffer **texture, SInt32 param3, UInt32 index); /* +0x5f8, real addr 0x13210 */
+    virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);                 /* +0x5fc, real addr 0x110e0 */
+    virtual UInt32 complete_vram(ATIR500SurfaceBuffer *buffer);                /* +0x600, real addr 0x110f0 */
+    virtual void   set_access();                                               /* +0x604, real addr 0x11100 */
 
     /*
      * RESOLVED this pass (issue #8): surface_read_lock_options,
@@ -99,7 +138,7 @@ public:
      */
     IOReturn surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 0 */
     IOReturn surface_read_unlock_options(UInt32 param1);                       /* 1, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real mangled symbol (__ZN16IOATIR500Surface27surface_read_unlock_optionsEm) confirms 1 real param, not 0. Ghidra's own decompile displays this as `void`, but the real raw disassembly is a pure tail branch into surface_unlock_options with no r3 postprocessing at all - real wire behavior DOES propagate surface_unlock_options' own real IOReturn result (a display/type-inference artifact for a discarded-looking tail call, not genuine void - kept IOReturn, matching this selector's own real byte-dumped table output count). CONFIRMED real one-line forward to surface_unlock_options(this, 1, param1). */
-    IOReturn get_state(UInt32 *outStateBits);                                  /* 2, CONFIRMED body (stage10): real vtable call at offset 0x520, maps to 0/1 */
+    IOReturn get_state(eIOAccelSurfaceStateBits *outStateBits);                                  /* 2, CONFIRMED body (stage10): real vtable call at offset 0x520, maps to 0/1 */
     void     surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size); /* 3 */
     void     surface_write_unlock_options(UInt32 options);                     /* 4 */
     IOReturn surface_read(IOAccelSurfaceReadData *readData, UInt32 structSize); /* 5, CONFIRMED body (stage10): real clipped-readback pattern, identical shape to the GL context's read_buffer */
@@ -119,21 +158,20 @@ public:
      * these functions' parameters - confirmed and corrected via the raw
      * PPC register trace, not trusted blindly).
      */
-    void     set_shape_backing(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
+    void     set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3, UInt32 param4,
                                 IOAccelDeviceRegion *region, UInt32 param6);    /* 6, RESOLVED (issue #8) */
-    IOReturn set_id_mode(UInt32 mode, UInt32 modeBits);                       /* 7, RESOLVED (issue #8) */
+    IOReturn set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBits);                       /* 7, RESOLVED (issue #8) */
     IOReturn set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3); /* 8, RESOLVED this pass - see Sources/IOATIR500Surface_LockShape.cpp */
-    IOReturn set_shape(UInt32 shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4); /* 9, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real mangled symbol (__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm) confirms 4 real params, not 0 as previously declared - Ghidra's own decompile hid the real forwarding args entirely (the same "calling-convention-inference artifact" already catalogued elsewhere in this project), resolved via the real raw PPC register moves instead (Sources/IOATIR500Surface_ExternalMethods2.cpp): real forward is set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffff, region, param4, 0) - the SAME real 0xffffffff sentinel set_shape_backing_length's own forward uses. Real disassembly is a pure tail branch with no r3 postprocessing - kept IOReturn (propagating the real ext call's result) rather than trusting Ghidra's own "void" display for what is really an unthreaded passthrough, matching this selector's own real byte-dumped table output count (unlike set_shape_backing, which genuinely discards the result via its own distinct real code path). */
+    IOReturn set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4); /* 9, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real mangled symbol (__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm) confirms 4 real params, not 0 as previously declared - Ghidra's own decompile hid the real forwarding args entirely (the same "calling-convention-inference artifact" already catalogued elsewhere in this project), resolved via the real raw PPC register moves instead (Sources/IOATIR500Surface_ExternalMethods2.cpp): real forward is set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffff, region, param4, 0) - the SAME real 0xffffffff sentinel set_shape_backing_length's own forward uses. Real disassembly is a pure tail branch with no r3 postprocessing - kept IOReturn (propagating the real ext call's result) rather than trusting Ghidra's own "void" display for what is really an unthreaded passthrough, matching this selector's own real byte-dumped table output count (unlike set_shape_backing, which genuinely discards the result via its own distinct real code path). */
     IOReturn surface_flush(UInt32 param1, UInt32 param2);                      /* 10, CONFIRMED body (stage10): real - alloc_surfaces_retry then flush_surface, plus real completion-counter bookkeeping via a vtable call at offset 0x54c */
     IOReturn surface_query_lock(void);                                        /* 11, CONFIRMED body (stage10): real availability check without acquiring, using the same pending-GPU-flush bits as lock_memory */
     IOReturn surface_read_lock(IOAccelSurfaceData *data, UInt32 size);         /* 12, CONFIRMED body (stage10): thin forward to surface_lock_options(this, 1, 2, data, size) */
     IOReturn surface_read_unlock(void);                                       /* 13, CONFIRMED body (stage10): thin forward to surface_unlock_options(this, 1, 2) */
     void     surface_write_lock(IOAccelSurfaceData *data, UInt32 size);       /* 14, RESOLVED this pass */
     void     surface_write_unlock(void);                                     /* 15, RESOLVED this pass */
-    IOReturn surface_control(UInt32 selector, UInt32 *inOut);   /* 16, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real decompile (Sources/IOATIR500Surface_ExternalMethods2.cpp) shows only 2 real explicit params - what this project had labeled "selector" (the first explicit param, dispatched on ==1/==4) plus "inOut" - Ghidra's own raw dump for this specific function additionally showed NO separate "this" at all in its signature (an `__stdcall`-inferred artifact; the real body clearly uses its own first param exactly where `this` would be used, e.g. passing it on to set_surface_blocking/set_volatile_state), meaning the previously-declared middle "param2" never really existed as a distinct argument - real dispatcher: selector==1 -> set_surface_blocking, selector==4 -> set_volatile_state, else kIOReturnBadArgument. Matches the real byte-dumped external-method table's own count1=2 (Sources/ATIR500Surface_ExternalMethods.cpp). */
-    IOReturn set_shape_backing_length(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
+    IOReturn surface_control(UInt32 selector, UInt32 value, UInt32 *out);   /* 16, REAL SIGNATURE CORRECTED (issue #42 test-harness pass): real decompile (Sources/IOATIR500Surface_ExternalMethods2.cpp) shows only 2 real explicit params - what this project had labeled "selector" (the first explicit param, dispatched on ==1/==4) plus "inOut" - Ghidra's own raw dump for this specific function additionally showed NO separate "this" at all in its signature (an `__stdcall`-inferred artifact; the real body clearly uses its own first param exactly where `this` would be used, e.g. passing it on to set_surface_blocking/set_volatile_state), meaning the previously-declared middle "param2" never really existed as a distinct argument - real dispatcher: selector==1 -> set_surface_blocking, selector==4 -> set_volatile_state, else kIOReturnBadArgument. Matches the real byte-dumped external-method table's own count1=2 (Sources/ATIR500Surface_ExternalMethods.cpp). */
+    IOReturn set_shape_backing_length(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3, UInt32 param4,
                                        UInt32 param5, IOAccelDeviceRegion *region); /* 17, RESOLVED (issue #8) */
-    IOReturn surface_control_alias(UInt32 selector, UInt32 *inOut); /* 18, CONFIRMED to be a real, deliberate alias of selector 16 - same function address, not two implementations. Signature corrected alongside surface_control's own correction (issue #42 test-harness pass) - see that method's own comment. */
 
     /*
      * set_shape_backing_length_ext - RESOLVED, issue #8, real name/
@@ -152,7 +190,7 @@ public:
      * parameter. See Sources/IOATIR500Surface_LockShape.cpp for the full
      * transcription.
      */
-    IOReturn set_shape_backing_length_ext(UInt32 shapeBits, UInt32 id, UInt32 param3, UInt32 param4,
+    IOReturn set_shape_backing_length_ext(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, unsigned int param3, UInt32 param4,
                                            IOAccelDeviceRegion *region, UInt32 param6, UInt32 param7);
 
     /*
@@ -205,8 +243,8 @@ public:
      * source file's own header comment for the real per-offset writes,
      * including real pixel-format FourCC codes ('yuvs'/'2vuy').
      */
-    IOReturn surface_lock_options(UInt32 lockType, UInt32 param2, IOAccelSurfaceData *data, UInt32 size);
-    IOReturn surface_unlock_options(UInt32 lockType, UInt32 param2); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real IOReturn status. */
+    IOReturn surface_lock_options(eLockType lockType, UInt32 param2, IOAccelSurfaceData *data, UInt32 size);
+    IOReturn surface_unlock_options(eLockType lockType, UInt32 param2); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real IOReturn status. */
 
     /*
      * free_buffer_backing_orphans - CONFIRMED to exist (real call site
@@ -242,8 +280,8 @@ public:
      * throughout the lock/swap/read family above whenever a surface needs
      * on-demand backing allocation. Body UNKNOWN beyond that role.
      */
-    IOReturn alloc_surfaces(bool retry);
-    IOReturn alloc_surfaces_retry(UInt32 flags, UInt32 param2);
+    UInt32   alloc_surfaces(UInt32 mask, bool retry);     /* real addr 0x12470: alloc_surfaces_pageq(mask, 0, retry) */
+    IOReturn alloc_surfaces_retry(UInt32 flags, eLockType lockType);
 
     /* flush_surface / set_scaling / set_volatile_state / set_surface_blocking -
      * CONFIRMED real names from various call sites across this project (the
@@ -257,7 +295,7 @@ public:
      * (issue #16): resolve_fsaa_buffer itself moved to the real subclass,
      * Headers/ATIR500Surface.h. */
     IOReturn set_scaling(UInt32 flags, IOAccelSurfaceScaling *scaling);
-    void     set_volatile_state(UInt32 state); /* SIGNATURE CORRECTED (issue #1, get-it-linking pass): was `UInt32 *state` (a pointer) - the real confirmed body takes the state value directly (real mangled type `eSurfaceVolatileState`, a plain enum/int), never dereferences a pointer. */
+    void     set_volatile_state(eSurfaceVolatileState state); /* SIGNATURE CORRECTED (issue #1, get-it-linking pass): was `UInt32 *state` (a pointer) - the real confirmed body takes the state value directly (real mangled type `eSurfaceVolatileState`, a plain enum/int), never dereferences a pointer. */
     IOReturn set_surface_blocking(UInt32 blockingMode);
 
     /* RE-HOMED (issue #16): decompress_and_flush_depth_buffer moved to
@@ -269,6 +307,9 @@ public:
      * it). Bodies UNKNOWN beyond that role. */
     void add_gl_context_to_list(IOATIR500GLContext *context);
     void remove_gl_context_from_list(IOATIR500GLContext *context);
+    void add_2d_context_to_list(IOATIR5002DContext *context);         /* real addr 0x10ba0 */
+    void remove_2d_context_from_list(IOATIR5002DContext *context);    /* real addr 0x13e30 */
+    UInt32 move_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer); /* real addr 0x131b0 */
 
     /*
      * invalidate_contexts - RESOLVED (issue #1, get-it-linking pass),
@@ -312,7 +353,7 @@ public:
      * the retry (or the original attempt, when nothing needed moving)
      * still didn't fully succeed.
      */
-    UInt32 alloc_surfaces_pageq(UInt32 mask, UInt32 flag);
+    UInt32 alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool unused); /* REAL SIGNATURE (stock symbol): keepMask is the old `flag`; the third (bool) is never read */
 
     /*
      * convert_surface_bits - RESOLVED (issue #1, get-it-linking pass),
@@ -335,7 +376,7 @@ public:
      * throughout the 2D/GL texture-transfer paths (create_transfer,
      * delete_image, opcode 0x37's surface-backed branch). Bodies UNKNOWN
      * beyond their roles. */
-    bool     connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 param2, UInt32 param3); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was IOReturn, but the real confirmed body is a plain bool __thiscall function. */
+    bool     connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, unsigned int param2, UInt32 param3); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was IOReturn, but the real confirmed body is a plain bool __thiscall function. */
     UInt32   free_buffer_backing_store(ATIR500SurfaceBuffer *buffer); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body ends with `return 1;` from a real UInt32-returning function. */
     UInt32   attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor *memory,
                                           UInt32 param3, UInt32 alignedPitch); /* RETURN TYPE CORRECTED (issue #1, get-it-linking pass): was void, but the real confirmed body returns a real UInt32 (0 or 1). */
@@ -428,15 +469,7 @@ public:
      * still has a real, non-void return type (returns its own second
      * argument verbatim) even though neither real caller uses it.
      */
-    virtual UInt32 update_ref_stamps(UInt32 generation, UInt32 tag); /* +0x5b4, real addr 0x13fe0 - CONFIRMED real no-op, returns tag verbatim */
-    virtual void   increment_refcounts(UInt32 tag);                  /* +0x5b8, real addr 0x13ff0 - CONFIRMED real no-op */
-    virtual void   decrement_refcounts(UInt32 tag);                  /* +0x5bc, real addr 0x14000 - CONFIRMED real no-op */
 
-    virtual void   invalidate() = 0;                                /* +0x5c4, real addr 0x3acb0 on ATIR500Surface (subclass-only). FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
-    virtual UInt32 dealloc_surface(UInt32 surfaceIndex);            /* +0x5cc, real addr 0x12580 (base) / 0x3df70 (subclass override) - real mangled param type confirmed `unsigned long`. RETURN TYPE CORRECTED (issue #1, first build attempt): the subclass override's own real decompiled body (Sources/ATIR500Surface_VRAM.cpp) ends with `return 1;` from a real `UInt32`-returning function - was declared `void` here, missing the same issue #22 "RETURN TYPE CORRECTED" treatment already applied to prepare_vram/complete_vram just below. */
-    virtual UInt32 alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) = 0; /* +0x5d0, real addr 0x3e230 on ATIR500Surface (subclass-only) - real mangled param type confirmed. FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
-    virtual UInt32 prepare_vram(ATIR500SurfaceBuffer *buffer);      /* +0x5fc, real addr 0x110e0 (base) / 0x3dc50 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: real return type is a real, checked UInt32 (0/1), not void - both real bodies' own decompiles show explicit `return` statements with real values. */
-    virtual UInt32 complete_vram(ATIR500SurfaceBuffer *buffer);     /* +0x600, real addr 0x110f0 (base) / 0x3c000 (subclass override) - real mangled param type confirmed ATIR500SurfaceBuffer*, not the generic void* this project's call sites had inferred. RETURN TYPE CORRECTED, issue #22: same real non-void finding as prepare_vram above. */
 
     /*
      * resetFullScreen / is_flip_allowed - RESOLVED, issue #18 (found
@@ -453,8 +486,6 @@ public:
      * `ATIR500Surface` subclass (issue #16), so the subclass bodies
      * (`0x3cf60`/`0x3ae30`) are what real callers reach.
      */
-    virtual void   resetFullScreen();                               /* +0x5a8, real addr 0x139d0 (base) / 0x3cf60 (subclass override) */
-    virtual SInt32 is_flip_allowed();                                /* +0x5dc, real addr 0x13f60 (base) / 0x3ae30 (subclass override) */
 
     /*
      * submit_flip_buffer - RESOLVED, issue #29. `resetFullScreen`'s own
@@ -489,7 +520,6 @@ public:
      * reachable in practice - no placeholder body is needed, and no live
      * hardware read was required to settle this.
      */
-    virtual void   submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag) = 0; /* +0x5e0, real addr CONFIRMED null/0 (base, genuine placeholder - issue #51) / 0x3e5c0 (subclass override). FIXED (issue #1, get-it-linking pass): declared pure virtual - confirmed no real base body exists; the concrete ATIR500Surface subclass provides the real override. Previously left non-pure with no redeclaration on the subclass, which would have compiled `resetFullScreen`'s own unqualified `submit_flip_buffer(...)` call against THIS placeholder slot instead of the real subclass override - see ATIR500Surface.h's own new redeclaration. */
 
     /*
      * shape_surface / is_surface_size_supported - RESOLVED, issue #18
@@ -502,8 +532,6 @@ public:
      * `is_surface_size_supported`'s real mangled parameter types are
      * `short` (not the `SInt32` this project's call site had inferred).
      */
-    virtual void   shape_surface() = 0;                                       /* +0x5c8, real addr 0x3c130 on ATIR500Surface (subclass-only) - RESOLVED (own body, issue #22): see Sources/ATIR500Surface_ShapeSurface.cpp. FIXED (issue #1, get-it-linking pass): pure virtual - confirmed subclass-only real address, no real base body to decompile. */
-    virtual SInt32 is_surface_size_supported(SInt16 width, SInt16 height);   /* +0x5b0, real addr 0x13fb0 (base) / 0x3aef0 (subclass override) - real mangled param types confirmed `short` */
 
     /*
      * map_transfer_to_GART - RESOLVED, issue #28. A DIFFERENT real

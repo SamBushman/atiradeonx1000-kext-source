@@ -192,7 +192,7 @@ IOReturn IOATIR500DVDContext::write_buffer(UInt32 *dataWords, UInt32 byteCount) 
             return 0;
         }
         if (U8At(accel, 0x80) != 0 && U8At(backing, 0x58) == 0) {
-            IOReturn allocResult = boundSurface->alloc_surfaces_retry(mask, 0);
+            IOReturn allocResult = boundSurface->alloc_surfaces_retry(mask, static_cast<eLockType>(0));
             if (allocResult != 0) {
                 DVDBase_unlock(commandLock);
                 return 0xe00002cc;

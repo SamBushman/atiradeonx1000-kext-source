@@ -1914,7 +1914,7 @@ UInt32 *handle_forward_volatile_state(ATIR500GLContext *ctx, UInt32 *record) {
              * real state value - set_volatile_state's real confirmed
              * signature (issue #1, get-it-linking pass) takes a plain
              * UInt32 value, not a pointer. */
-            surface->set_volatile_state(uVar55);
+            surface->set_volatile_state(static_cast<eSurfaceVolatileState>(uVar55));
         }
     } else {
         *puVar65 = 0x80000000u; puVar65[1] = 0x80000000u;

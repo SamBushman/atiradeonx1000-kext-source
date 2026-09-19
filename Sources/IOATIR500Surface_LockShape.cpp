@@ -30,23 +30,23 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 
 void IOATIR500Surface::surface_write_unlock() {
-    surface_unlock_options(2, 2);
+    surface_unlock_options(static_cast<eLockType>(2), 2);
 }
 
 void IOATIR500Surface::surface_write_unlock_options(UInt32 options) {
-    surface_unlock_options(2, options);
+    surface_unlock_options(static_cast<eLockType>(2), options);
 }
 
 void IOATIR500Surface::surface_write_lock(IOAccelSurfaceData *data, UInt32 size) {
-    surface_lock_options(2, 1, data, size);
+    surface_lock_options(static_cast<eLockType>(2), 1, data, size);
 }
 
 void IOATIR500Surface::surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
-    surface_lock_options(2, lockOptions, data, size);
+    surface_lock_options(static_cast<eLockType>(2), lockOptions, data, size);
 }
 
 IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
-    return surface_lock_options(1, lockOptions, data, size);
+    return surface_lock_options(static_cast<eLockType>(1), lockOptions, data, size);
 }
 
 /*
@@ -213,7 +213,8 @@ extern "C" void FUN_000147f0(void *lockPtr) asm("_IOLockUnlock");
 extern "C" void *FUN_00014820(UInt32 size, UInt32 align) asm("_IOMallocAligned");
 extern "C" void FUN_00014810(void *ptr, UInt32 size) asm("_IOFreeAligned");
 
-IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, UInt32 modeBits) {
+IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBitsE) {
+    UInt32 modeBits = static_cast<UInt32>(modeBitsE);
     if ((modeBits & 0xffff7fc0u) != 0) {
         return 0xe00002c2;
     }
@@ -527,9 +528,10 @@ extern "C" void *FUN_000158c0(UInt32 size, UInt32 align) asm("_IOMallocAligned")
 extern "C" void FUN_000158b0(void *ptr, UInt32 size) asm("_IOFreeAligned");
 extern "C" void FUN_00015870(void *lockPtr) asm("_IOLockUnlock");
 
-IOReturn IOATIR500Surface::set_shape_backing_length_ext(UInt32 shapeBits, UInt32 id, UInt32 param3,
+IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits shapeBitsE, UInt32 id, unsigned int param3,
                                                           UInt32 param4, IOAccelDeviceRegion *regionArg,
                                                           UInt32 param6, UInt32 param7) {
+    UInt32 shapeBits = static_cast<UInt32>(shapeBitsE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *region = reinterpret_cast<UInt8 *>(regionArg); /* see honest layout note above - kept raw */
     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
@@ -763,7 +765,7 @@ shared_tail:
  * `region` - real evidence this project's transcription order below
  * matters and was checked, not assumed).
  */
-IOReturn IOATIR500Surface::set_shape_backing_length(UInt32 shapeBits, UInt32 param2, UInt32 param3,
+IOReturn IOATIR500Surface::set_shape_backing_length(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3,
                                                       UInt32 param4, UInt32 param5,
                                                       IOAccelDeviceRegion *region) {
     if (param4 != 0xffffffffu) {
@@ -775,7 +777,7 @@ IOReturn IOATIR500Surface::set_shape_backing_length(UInt32 shapeBits, UInt32 par
     return set_shape_backing_length_ext(shapeBits, param2, param3, param4, region, 0, param5);
 }
 
-void IOATIR500Surface::set_shape_backing(UInt32 shapeBits, UInt32 param2, UInt32 param3, UInt32 param4,
+void IOATIR500Surface::set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3, UInt32 param4,
                                           IOAccelDeviceRegion *region, UInt32 param6) {
     /* real: discards set_shape_backing_length_ext's own return value -
      * matches this function's real `void` return type (confirmed via the

@@ -49,7 +49,7 @@ extern "C" void SurfExtM2_mutex_unlock(void *) asm("_IOLockUnlock");
  * explicitly here rather than matching Ghidra's own display choice.
  */
 IOReturn IOATIR500Surface::surface_read_lock(IOAccelSurfaceData *data, UInt32 size) {
-    return surface_lock_options(1, 2, data, size);
+    return surface_lock_options(static_cast<eLockType>(1), 2, data, size);
 }
 
 /*
@@ -58,7 +58,7 @@ IOReturn IOATIR500Surface::surface_read_lock(IOAccelSurfaceData *data, UInt32 si
  * surface_read_lock above applies here too.
  */
 IOReturn IOATIR500Surface::surface_read_unlock() {
-    return surface_unlock_options(1, 2);
+    return surface_unlock_options(static_cast<eLockType>(1), 2);
 }
 
 /*
@@ -68,7 +68,7 @@ IOReturn IOATIR500Surface::surface_read_unlock() {
  * same tail-call-passthrough reasoning as surface_read_lock/unlock above.
  */
 IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
-    return surface_unlock_options(1, param1);
+    return surface_unlock_options(static_cast<eLockType>(1), param1);
 }
 
 /*
@@ -78,7 +78,8 @@ IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
  * real output param) with no further arguments, translated into a real
  * 0/1 output. Always returns kIOReturnSuccess.
  */
-IOReturn IOATIR500Surface::get_state(UInt32 *outStateBits) {
+IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *outStateBitsE) {
+    UInt32 *outStateBits = reinterpret_cast<UInt32 *>(outStateBitsE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     typedef SInt32 (*Fn0x520)(void *);
     void *accel = *reinterpret_cast<void **>(self + 0xd50);
@@ -99,7 +100,7 @@ IOReturn IOATIR500Surface::get_state(UInt32 *outStateBits) {
  * header comment for why this differs from set_shape_backing's own
  * genuinely-void real behavior.
  */
-IOReturn IOATIR500Surface::set_shape(UInt32 shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4) {
+IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4) {
     return set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffffu, region, param4, 0);
 }
 
@@ -119,7 +120,7 @@ IOReturn IOATIR500Surface::surface_flush(UInt32 param1, UInt32 param2) {
     void *accel = *reinterpret_cast<void **>(self + 0xd50);
     SurfExtM2_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
 
-    IOReturn result = alloc_surfaces_retry(U32At(self, 0xc1c) & 3, 0);
+    IOReturn result = alloc_surfaces_retry(U32At(self, 0xc1c) & 3, static_cast<eLockType>(0));
     if (result == 0) {
         flush_surface(param1, param2);
     }
@@ -145,12 +146,13 @@ IOReturn IOATIR500Surface::surface_flush(UInt32 param1, UInt32 param2) {
  * for this specific function at all, an `__stdcall`-inferred artifact -
  * see header comment).
  */
-IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 *inOut) {
+IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 value, UInt32 *out) {
+    (void)out; /* the third (output) pointer is never used */
     IOReturn result;
     if (selector == 1) {
-        result = set_surface_blocking(reinterpret_cast<UInt32>(inOut));
+        result = set_surface_blocking(value);
     } else if (selector == 4) {
-        set_volatile_state(reinterpret_cast<UInt32>(inOut));
+        set_volatile_state(static_cast<eSurfaceVolatileState>(value));
         result = 0;
     } else {
         result = 0xe00002c2;
@@ -158,9 +160,9 @@ IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 *inOut) {
     return result;
 }
 
-IOReturn IOATIR500Surface::surface_control_alias(UInt32 selector, UInt32 *inOut) {
-    return surface_control(selector, inOut);
-}
+/* NB: there is no separate surface_control_alias in the shipped kext: external-method table entry 18 is the
+ * SAME function as entry 16 (surface_control). The wrapper this project used to define had no stock counterpart
+ * and was removed (ledger pass). */
 
 /*
  * surface_query_lock - CONFIRMED, real addr 0x151a0. Real body: a

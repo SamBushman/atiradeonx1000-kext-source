@@ -39,6 +39,7 @@ public:
     IOReturn lock_memory(UInt32 lockType, UInt32 *outAddress, UInt32 *outSize);                          /* 5, CONFIRMED body (stage9): real retry loop with alloc_surfaces fallback, real pending-GPU-flush detection before granting a CPU lock */
     IOReturn unlock_memory(UInt32 lockType, UInt32 *outTag);                                             /* 6, CONFIRMED body (stage9): triggers swap_surface for negative lock-type values - the real present/flip mechanism */
     IOReturn finish(UInt32 mode);                                                                        /* 7, REAL SIGNATURE CORRECTED (issue #42 pass): mangled symbol is finish(unsigned long), table = 1 scalar in. 0 = wait on this context's stamp, 1/2 = wait on the accelerator's pending stamp, else BadArgument. */
+    void     remove_surface(void);  /* real addr 0xbb30: clears the bound-surface pointer (+0x100) */
     bool     create_shared(void);                                                                        /* helper, real addr 0xbc90: new IOATIR500Shared + init, wired to the accelerator and task */
     IOReturn declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle);   /* 8, CONFIRMED body (stage9): real IOATIR500Shared::new_agp_texture call, same shared allocator as GL */
     IOReturn create_image(UInt32 param1, UInt32 param2, UInt32 *outLow, UInt32 *outHigh);                /* 9, CONFIRMED body (stage9): real IOATIR500Shared::new_texture call */

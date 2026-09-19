@@ -78,8 +78,9 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
 extern "C" void GLSurfaceLock_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLSurfaceLock_mutex_unlock(void *) asm("_IOLockUnlock");
 
-IOReturn IOATIR500Surface::surface_lock_options(UInt32 lockType, UInt32 flags, IOAccelSurfaceData *data,
+IOReturn IOATIR500Surface::surface_lock_options(eLockType lockTypeE, UInt32 flags, IOAccelSurfaceData *data,
                                                  UInt32 /*size, real: confirmed unused*/) {
+    UInt32 lockType = static_cast<UInt32>(lockTypeE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *out = reinterpret_cast<UInt8 *>(data);
     UInt32 param3 = flags; /* real: reused/reassigned throughout, matching Ghidra's own param_3 */
@@ -147,7 +148,7 @@ IOReturn IOATIR500Surface::surface_lock_options(UInt32 lockType, UInt32 flags, I
         if ((uVar3 & uVar6) == 0) {
             iVar10 = 0;
         } else {
-            iVar10 = alloc_surfaces_retry(uVar3, lockType);
+            iVar10 = alloc_surfaces_retry(uVar3, static_cast<eLockType>(lockType));
             if (iVar10 != 0) {
             LAB_00016344:
                 bVar2 = false;
@@ -256,7 +257,7 @@ IOReturn IOATIR500Surface::surface_lock_options(UInt32 lockType, UInt32 flags, I
                     } else {
                         U8At(self, 0xbd1) = 3;
                     }
-                    iVar10 = alloc_surfaces_retry(uVar3, lockType);
+                    iVar10 = alloc_surfaces_retry(uVar3, static_cast<eLockType>(lockType));
                     if ((bVar11 >> 1 & 1) != 0) {
                         U8At(self, 0xbd0) = 0;
                     } else {
@@ -370,7 +371,8 @@ LAB_00016360:
  * `complete_vram` call (state 1, "was allocated"), clearing the state
  * byte either way.
  */
-IOReturn IOATIR500Surface::surface_unlock_options(UInt32 lockType, UInt32 /*param2, real: confirmed unused*/) {
+IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockTypeE, UInt32 /*param2, real: confirmed unused*/) {
+    UInt32 lockType = static_cast<UInt32>(lockTypeE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 slotOff = (lockType == 1) ? 0xbd0 : 0xbd1;
 

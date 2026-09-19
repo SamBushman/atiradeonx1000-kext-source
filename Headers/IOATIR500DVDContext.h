@@ -79,6 +79,7 @@ public:
     IOReturn finish(void);                                                                       /* 7 */
     IOReturn declare_image(UInt32 param1, UInt32 formatOrSize, UInt32 sizeInBytes, UInt32 *outHandle); /* 8 */
     IOReturn delete_image(UInt32 textureID);                                                     /* 9 */
+    void     remove_surface(void);  /* real addr in ledger; clears the bound-surface pointer (+0xf8) */
     bool     create_shared(void);                                                                /* helper, real addr 0xee60 */
 
     /*

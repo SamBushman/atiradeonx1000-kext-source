@@ -114,7 +114,8 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scal
 extern "C" void GLSurface_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLSurface_mutex_unlock(void *) asm("_IOLockUnlock");
 
-void IOATIR500Surface::set_volatile_state(UInt32 state) {
+void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState stateE) {
+    UInt32 state = static_cast<UInt32>(stateE);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
     GLSurface_mutex_lock(*reinterpret_cast<void **>(accel + 0x840));

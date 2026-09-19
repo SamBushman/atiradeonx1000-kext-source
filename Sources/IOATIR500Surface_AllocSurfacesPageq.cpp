@@ -38,7 +38,8 @@ void IOATIR500Surface::invalidate_contexts(void) {
     }
 }
 
-UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 flag) {
+UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 flag, bool unusedRetry) {
+    (void)unusedRetry; /* real third parameter: never read */
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     void **selfVtable = *reinterpret_cast<void ***>(self);
 

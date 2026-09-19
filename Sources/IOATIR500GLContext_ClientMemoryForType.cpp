@@ -225,7 +225,7 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
                             }
                             convertBit = reinterpret_cast<IOATIR500Surface *>(surface)->convert_surface_bits(
                                 U32At(reinterpret_cast<void *>(U32At(self, 0xe0)), 0xc));
-                            pageqResult = reinterpret_cast<IOATIR500Surface *>(surface)->alloc_surfaces_pageq(mask, convertBit);
+                            pageqResult = reinterpret_cast<IOATIR500Surface *>(surface)->alloc_surfaces_pageq(mask, convertBit, false);
                             if (pageqResult != 0) {
                                 if (pageqResult != 2) goto retryWait;
                                 goto bailInactive;
@@ -257,7 +257,7 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32 *options, I
                     {
                         UInt8 *surf2 = reinterpret_cast<UInt8 *>(U32At(self, 0x290));
                         SInt32 pageqResult2 = reinterpret_cast<IOATIR500Surface *>(surf2)->alloc_surfaces_pageq(
-                            (U32At(self, 0x8c) | U32At(surf2, 0xc1c)) & 0x7fffffu, convertBit);
+                            (U32At(self, 0x8c) | U32At(surf2, 0xc1c)) & 0x7fffffu, convertBit, false);
                         if (pageqResult2 != 0) goto bailInactive;
                         UInt8 *surf3 = reinterpret_cast<UInt8 *>(U32At(self, 0x290));
                         if ((U32At(surf3, 0xbf8) & U32At(surf3, 0xc1c) & 0x10000000u) != 0) {

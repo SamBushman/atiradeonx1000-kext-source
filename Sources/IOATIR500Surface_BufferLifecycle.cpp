@@ -86,7 +86,7 @@ UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, V
  * task*). Parameters below renamed from the earlier guesses to the real ones. */
 extern "C" void *FUN_000128ec(UInt32 address, UInt32 length, UInt32 direction, void *task) asm("__ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task");
 
-bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, UInt32 options, UInt32 rowMultiplier) {
+bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, unsigned int options, UInt32 rowMultiplier) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
     const UInt32 kPageSize = 0x1000;

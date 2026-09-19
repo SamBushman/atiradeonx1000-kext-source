@@ -103,7 +103,7 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32
             return 0;
         }
         if (U8At(xferBuf, 0x58) == 0) {
-            IOReturn allocResult = alloc_surfaces_retry(U32At(self, 0xc1c) & 3, 0);
+            IOReturn allocResult = alloc_surfaces_retry(U32At(self, 0xc1c) & 3, static_cast<eLockType>(0));
             if (allocResult != 0) {
                 SurfRead_mutex_unlock(commandLock);
                 return 0xe00002cc;

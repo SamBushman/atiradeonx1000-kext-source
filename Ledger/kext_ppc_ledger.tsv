@@ -581,23 +581,23 @@
 00010838	16	stub	n/a	FUN_00010838	
 00010850	8	generated	DONE	IOATIR500Surface::MetaClass::alloc	__ZNK16IOATIR500Surface9MetaClass5allocEv
 00010860	496	method	DONE	IOATIR500Surface::freeAllSwapBuffers	__ZN16IOATIR500Surface18freeAllSwapBuffersEm
-00010a50	88	method	MISSING	IOATIR500Surface::free	__ZN16IOATIR500Surface4freeEv
+00010a50	88	method	DONE	IOATIR500Surface::free	__ZN16IOATIR500Surface4freeEv
 00010aa8	16	stub	n/a	FUN_00010aa8	
-00010ac0	116	method	MISSING	IOATIR500Surface::clientClose	__ZN16IOATIR500Surface11clientCloseEv
+00010ac0	116	method	DONE	IOATIR500Surface::clientClose	__ZN16IOATIR500Surface11clientCloseEv
 00010b40	52	method	DONE	IOATIR500Surface::init_swap_buffer_header	__ZN16IOATIR500Surface23init_swap_buffer_headerEP22VendorSwapBufferHeaderm
 00010b80	32	method	DONE	IOATIR500Surface::add_gl_context_to_list	__ZN16IOATIR500Surface22add_gl_context_to_listEP18IOATIR500GLContext
-00010ba0	32	method	MISSING	IOATIR500Surface::add_2d_context_to_list	__ZN16IOATIR500Surface22add_2d_context_to_listEP18IOATIR5002DContext
+00010ba0	32	method	DONE	IOATIR500Surface::add_2d_context_to_list	__ZN16IOATIR500Surface22add_2d_context_to_listEP18IOATIR5002DContext
 00010bc0	24	method	DONE	IOATIR500Surface::set_dvd_context	__ZN16IOATIR500Surface15set_dvd_contextEP19IOATIR500DVDContext
 00010be0	112	method	DONE	IOATIR500Surface::map_transfer_to_GART	__ZN16IOATIR500Surface20map_transfer_to_GARTEP20VendorTransferBuffer
 00010c50	16	stub	n/a	IOATIR500Accelerator::freeToAllocGART	
 00010c60	356	method	DONE	IOATIR500Surface::freeToAllocGART	__ZN16IOATIR500Surface15freeToAllocGARTEP20VendorTransferBufferb
 00010dc8	16	stub	n/a	IOATIR500Accelerator::freeTransferToAllocGART	
 00010de0	324	method	DONE	IOATIR500Surface::reset_access	__ZN16IOATIR500Surface12reset_accessEv
-00010f30	100	method	SIG?	IOATIR500Surface::get_state	__ZN16IOATIR500Surface9get_stateEP24eIOAccelSurfaceStateBits
+00010f30	100	method	DONE	IOATIR500Surface::get_state	__ZN16IOATIR500Surface9get_stateEP24eIOAccelSurfaceStateBits
 00010fa0	320	method	DONE	IOATIR500Surface::flush_surface	__ZN16IOATIR500Surface13flush_surfaceEmm
 000110e0	8	method	DONE	IOATIR500Surface::prepare_vram	__ZN16IOATIR500Surface12prepare_vramEP20ATIR500SurfaceBuffer
 000110f0	8	method	DONE	IOATIR500Surface::complete_vram	__ZN16IOATIR500Surface13complete_vramEP20ATIR500SurfaceBuffer
-00011100	16	method	MISSING	IOATIR500Surface::set_access	__ZN16IOATIR500Surface10set_accessEv
+00011100	16	method	DONE	IOATIR500Surface::set_access	__ZN16IOATIR500Surface10set_accessEv
 00011110	752	method	DONE	IOATIR500Surface::copy_buffer_to_backing_store	__ZN16IOATIR500Surface28copy_buffer_to_backing_storeEP20ATIR500SurfaceBuffer
 00011400	16	stub	n/a	FUN_00011400	
 00011410	16	stub	n/a	FUN_00011410	
@@ -608,7 +608,7 @@
 00011580	184	method	DONE	IOATIR500Surface::update_contexts	__ZN16IOATIR500Surface15update_contextsEv
 00011640	468	method	DONE	IOATIR500Surface::set_scaling	__ZN16IOATIR500Surface11set_scalingEmP21IOAccelSurfaceScaling
 00011824	16	stub	n/a	IOATIR500Surface::update_contexts	
-00011840	108	method	MISSING	IOATIR500Surface::sleep_blocked	__ZN16IOATIR500Surface13sleep_blockedEv
+00011840	108	method	DONE	IOATIR500Surface::sleep_blocked	__ZN16IOATIR500Surface13sleep_blockedEv
 000118ac	16	stub	n/a	FUN_000118ac	
 000118bc	16	stub	n/a	FUN_000118bc	
 000118cc	16	stub	n/a	FUN_000118cc	
@@ -624,20 +624,20 @@
 00012024	16	stub	n/a	IOATIR500Surface::init_swap_buffer_header	
 00012034	16	stub	n/a	FUN_00012034	
 00012050	184	method	DONE	IOATIR500Surface::invalidate_contexts	__ZN16IOATIR500Surface19invalidate_contextsEv
-00012110	484	method	SIG?	IOATIR500Surface::alloc_surfaces_pageq	__ZN16IOATIR500Surface20alloc_surfaces_pageqEmmb
+00012110	484	method	DONE	IOATIR500Surface::alloc_surfaces_pageq	__ZN16IOATIR500Surface20alloc_surfaces_pageqEmmb
 000122f4	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
 00012304	16	stub	n/a	IOATIR500Surface::invalidate_contexts	
 00012320	308	method	DONE	IOATIR500Surface::convert_surface_bits	__ZN16IOATIR500Surface20convert_surface_bitsEm
-00012470	40	method	MISSING	IOATIR500Surface::alloc_surfaces	__ZN16IOATIR500Surface14alloc_surfacesEmb
+00012470	40	method	DONE	IOATIR500Surface::alloc_surfaces	__ZN16IOATIR500Surface14alloc_surfacesEmb
 00012498	16	stub	n/a	IOATIR500Surface::alloc_surfaces_pageq	
 000124b0	196	method	DONE	IOATIR500Surface::alloc_surfaces_keep	__ZN16IOATIR500Surface19alloc_surfaces_keepEPS_PP19VendorTextureBufferlm
 00012580	168	method	DONE	IOATIR500Surface::dealloc_surface	__ZN16IOATIR500Surface15dealloc_surfaceEm
 00012628	16	stub	n/a	ATIR500Memory::dealloc	
 00012640	436	method	DONE	IOATIR500Surface::attach_buffer_backing_store	__ZN16IOATIR500Surface27attach_buffer_backing_storeEP20ATIR500SurfaceBufferP18IOMemoryDescriptormm
-00012800	220	method	SIG?	IOATIR500Surface::connect_buffer_backing_store	__ZN16IOATIR500Surface28connect_buffer_backing_storeEP20ATIR500SurfaceBufferjm
+00012800	220	method	DONE	IOATIR500Surface::connect_buffer_backing_store	__ZN16IOATIR500Surface28connect_buffer_backing_storeEP20ATIR500SurfaceBufferjm
 000128dc	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
 000128ec	16	stub	n/a	FUN_000128ec	
-00012900	216	method	MISSING	IOATIR500Surface::alloc_buffer_backing_store	__ZN16IOATIR500Surface26alloc_buffer_backing_storeEP20ATIR500SurfaceBuffer
+00012900	216	method	DONE	IOATIR500Surface::alloc_buffer_backing_store	__ZN16IOATIR500Surface26alloc_buffer_backing_storeEP20ATIR500SurfaceBuffer
 000129e0	16	stub	n/a	IOATIR500Surface::attach_buffer_backing_store	
 000129f0	16	stub	n/a	FUN_000129f0	
 00012a00	548	method	DONE	IOATIR500Surface::copy_buffer_from_backing_store	__ZN16IOATIR500Surface30copy_buffer_from_backing_storeEP20ATIR500SurfaceBuffer
@@ -649,18 +649,18 @@
 00012e64	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
 00012e80	780	method	DONE	IOATIR500Surface::prune_buffers	__ZN16IOATIR500Surface13prune_buffersEv
 00013194	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
-000131b0	64	method	MISSING	IOATIR500Surface::move_buffer_from_backing_store	__ZN16IOATIR500Surface30move_buffer_from_backing_storeEP20ATIR500SurfaceBuffer
+000131b0	64	method	DONE	IOATIR500Surface::move_buffer_from_backing_store	__ZN16IOATIR500Surface30move_buffer_from_backing_storeEP20ATIR500SurfaceBuffer
 000131f0	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
 00013200	16	stub	n/a	IOATIR500Surface::copy_buffer_from_backing_store	
-00013210	272	method	MISSING	IOATIR500Surface::alloc_surface_keep	__ZN16IOATIR500Surface18alloc_surface_keepEPS_PP19VendorTextureBufferlm
+00013210	272	method	DONE	IOATIR500Surface::alloc_surface_keep	__ZN16IOATIR500Surface18alloc_surface_keepEPS_PP19VendorTextureBufferlm
 00013328	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
 00013338	16	stub	n/a	IOATIR500Surface::move_buffer_from_backing_store	
 00013348	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
-00013360	280	method	MISSING	IOATIR500Surface::alloc_surface	__ZN16IOATIR500Surface13alloc_surfaceEmb
+00013360	280	method	DONE	IOATIR500Surface::alloc_surface	__ZN16IOATIR500Surface13alloc_surfaceEmb
 00013478	16	stub	n/a	IOATIR500Surface::free_buffer_backing_store	
 00013488	16	stub	n/a	IOATIR500Surface::move_buffer_from_backing_store	
 00013498	16	stub	n/a	IOATIR500Accelerator::freeToAllocSurfaceVRAM	
-000134b0	960	method	MISSING	IOATIR500Surface::stop	__ZN16IOATIR500Surface4stopEP9IOService
+000134b0	960	method	DONE	IOATIR500Surface::stop	__ZN16IOATIR500Surface4stopEP9IOService
 00013884	16	stub	n/a	FUN_00013884	
 00013894	16	stub	n/a	IOATIR500Surface::freeAllSwapBuffers	
 000138a4	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
@@ -668,35 +668,35 @@
 000138c4	16	stub	n/a	IOATIR5002DContext::remove_surface	
 000138d4	16	stub	n/a	IOATIR500GLContext::remove_surface	
 000138e4	16	stub	n/a	IOATIR500Surface::free_buffer_backing_orphans	
-00013900	196	method	MISSING	IOATIR500Surface::setupFullScreen	__ZN16IOATIR500Surface15setupFullScreenEv
+00013900	196	method	DONE	IOATIR500Surface::setupFullScreen	__ZN16IOATIR500Surface15setupFullScreenEv
 000139d0	228	method	DONE	IOATIR500Surface::resetFullScreen	__ZN16IOATIR500Surface15resetFullScreenEv
 00013ac0	348	method	DONE	IOATIR500Surface::surface_buffer_idx_mask	__ZN16IOATIR500Surface23surface_buffer_idx_maskEmPm
 00013c70	336	method	DONE	IOATIR500Surface::reset_req_bits	__ZN16IOATIR500Surface14reset_req_bitsEv
 00013dc8	16	stub	n/a	IOATIR500Surface::surface_buffer_idx_mask	
 00013de0	52	method	DONE	IOATIR500Surface::remove_dvd_context	__ZN16IOATIR500Surface18remove_dvd_contextEP19IOATIR500DVDContext
 00013e14	16	stub	n/a	IOATIR500Surface::reset_req_bits	
-00013e30	100	method	MISSING	IOATIR500Surface::remove_2d_context_from_list	__ZN16IOATIR500Surface27remove_2d_context_from_listEP18IOATIR5002DContext
+00013e30	100	method	DONE	IOATIR500Surface::remove_2d_context_from_list	__ZN16IOATIR500Surface27remove_2d_context_from_listEP18IOATIR5002DContext
 00013ea4	16	stub	n/a	IOATIR500Surface::reset_req_bits	
 00013ec0	100	method	DONE	IOATIR500Surface::remove_gl_context_from_list	__ZN16IOATIR500Surface27remove_gl_context_from_listEP18IOATIR500GLContext
 00013f34	16	stub	n/a	IOATIR500Surface::reset_req_bits	
-00013f50	8	method	MISSING	IOATIR500Surface::surface_req_bits	__ZN16IOATIR500Surface16surface_req_bitsEv
+00013f50	8	method	DONE	IOATIR500Surface::surface_req_bits	__ZN16IOATIR500Surface16surface_req_bitsEv
 00013f60	72	method	DONE	IOATIR500Surface::is_flip_allowed	__ZN16IOATIR500Surface15is_flip_allowedEv
 00013fb0	40	method	DONE	IOATIR500Surface::is_surface_size_supported	__ZN16IOATIR500Surface25is_surface_size_supportedEss
 00013fe0	8	method	DONE	IOATIR500Surface::update_ref_stamps	__ZN16IOATIR500Surface17update_ref_stampsEmm
 00013ff0	4	method	DONE	IOATIR500Surface::increment_refcounts	__ZN16IOATIR500Surface19increment_refcountsEm
 00014000	4	method	DONE	IOATIR500Surface::decrement_refcounts	__ZN16IOATIR500Surface19decrement_refcountsEm
-00014010	64	method	MISSING	IOATIR500Surface::buffer_map_offset	__ZN16IOATIR500Surface17buffer_map_offsetEP20ATIR500SurfaceBuffermmPlS2_S2_
+00014010	64	method	DONE	IOATIR500Surface::buffer_map_offset	__ZN16IOATIR500Surface17buffer_map_offsetEP20ATIR500SurfaceBuffermmPlS2_S2_
 00014050	116	method	DONE	__static_initialization_and_destruction_0	__Z41__static_initialization_and_destruction_0ii
 000140d0	16	stub	n/a	IOATIR500Surface::MetaClass::MetaClass	
 000140e0	60	generated	DONE	IOATIR500Surface::MetaClass::~MetaClass	__ZN16IOATIR500Surface9MetaClassD0Ev
 0001411c	16	stub	n/a	FUN_0001411c	
 0001415c	16	stub	n/a	__static_initialization_and_destruction_0	
 0001419c	16	stub	n/a	__static_initialization_and_destruction_0	
-000141b0	188	method	MISSING	IOATIR500Surface::clientMemoryForType	__ZN16IOATIR500Surface19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
+000141b0	188	method	DONE	IOATIR500Surface::clientMemoryForType	__ZN16IOATIR500Surface19clientMemoryForTypeEmPmPP18IOMemoryDescriptor
 00014274	16	stub	n/a	IOATIR500Surface::init_swap_buffer_header	
 00014284	16	stub	n/a	FUN_00014284	
 00014294	16	stub	n/a	FUN_00014294	
-000142b0	1284	method	SIG?	IOATIR500Surface::set_id_mode	__ZN16IOATIR500Surface11set_id_modeEm18eIOSurfaceModeBits
+000142b0	1284	method	DONE	IOATIR500Surface::set_id_mode	__ZN16IOATIR500Surface11set_id_modeEm18eIOSurfaceModeBits
 000147f0	16	stub	n/a	FUN_000147f0	
 00014800	16	stub	n/a	IOATIR500Surface::prune_buffers	
 00014810	16	stub	n/a	FUN_00014810	
@@ -704,7 +704,7 @@
 00014830	16	stub	n/a	IOATIR500Surface::reset_access	
 00014840	16	stub	n/a	IOATIR500Surface::reset_req_bits	
 00014850	16	stub	n/a	FUN_00014850	
-00014860	348	method	SIG?	IOATIR500Surface::alloc_surfaces_retry	__ZN16IOATIR500Surface20alloc_surfaces_retryEm9eLockType
+00014860	348	method	DONE	IOATIR500Surface::alloc_surfaces_retry	__ZN16IOATIR500Surface20alloc_surfaces_retryEm9eLockType
 000149d4	16	stub	n/a	FUN_000149d4	
 000149e4	16	stub	n/a	FUN_000149e4	
 000149f4	16	stub	n/a	FUN_000149f4	
@@ -720,7 +720,7 @@
 00014f28	16	stub	n/a	IOATIR500Surface::flush_surface	
 00014f38	16	stub	n/a	IOATIR500Surface::alloc_surfaces_retry	
 00014f48	16	stub	n/a	FUN_00014f48	
-00014f60	260	method	SIG?	IOATIR500Surface::surface_unlock_options	__ZN16IOATIR500Surface22surface_unlock_optionsE9eLockTypem
+00014f60	260	method	DONE	IOATIR500Surface::surface_unlock_options	__ZN16IOATIR500Surface22surface_unlock_optionsE9eLockTypem
 00015070	16	stub	n/a	FUN_00015070	
 00015080	16	stub	n/a	IOATIR500Surface::free_buffer_backing_orphans	
 00015090	16	stub	n/a	FUN_00015090	
@@ -735,7 +735,7 @@
 000151a0	260	method	DONE	IOATIR500Surface::surface_query_lock	__ZN16IOATIR500Surface18surface_query_lockEv
 000152a4	16	stub	n/a	FUN_000152a4	
 000152b4	16	stub	n/a	FUN_000152b4	
-000152d0	1416	method	SIG?	IOATIR500Surface::set_shape_backing_length_ext	__ZN16IOATIR500Surface28set_shape_backing_length_extE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionmm
+000152d0	1416	method	DONE	IOATIR500Surface::set_shape_backing_length_ext	__ZN16IOATIR500Surface28set_shape_backing_length_extE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionmm
 00015870	16	stub	n/a	FUN_00015870	
 00015880	16	stub	n/a	IOATIR500Surface::connect_buffer_backing_store	
 00015890	16	stub	n/a	IOATIR500Surface::delete_buffer_backing	
@@ -744,11 +744,11 @@
 000158c0	16	stub	n/a	FUN_000158c0	
 000158d0	16	stub	n/a	FUN_000158d0	
 000158e0	16	stub	n/a	FUN_000158e0	
-000158f0	80	method	SIG?	IOATIR500Surface::set_shape_backing_length	__ZN16IOATIR500Surface24set_shape_backing_lengthE24eIOAccelSurfaceShapeBitsmjmmP19IOAccelDeviceRegion
+000158f0	80	method	DONE	IOATIR500Surface::set_shape_backing_length	__ZN16IOATIR500Surface24set_shape_backing_lengthE24eIOAccelSurfaceShapeBitsmjmmP19IOAccelDeviceRegion
 00015948	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
-00015960	36	method	SIG?	IOATIR500Surface::set_shape_backing	__ZN16IOATIR500Surface17set_shape_backingE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionm
+00015960	36	method	DONE	IOATIR500Surface::set_shape_backing	__ZN16IOATIR500Surface17set_shape_backingE24eIOAccelSurfaceShapeBitsmjmP19IOAccelDeviceRegionm
 00015984	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
-000159a0	52	method	SIG?	IOATIR500Surface::set_shape	__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm
+000159a0	52	method	DONE	IOATIR500Surface::set_shape	__ZN16IOATIR500Surface9set_shapeE24eIOAccelSurfaceShapeBitsmP19IOAccelDeviceRegionm
 000159d4	16	stub	n/a	IOATIR500Surface::set_shape_backing_length_ext	
 000159f0	148	method	DONE	IOATIR500Surface::set_scale	__ZN16IOATIR500Surface9set_scaleEmP21IOAccelSurfaceScalingm
 00015a84	16	stub	n/a	FUN_00015a84	
@@ -758,13 +758,13 @@
 00015b40	16	stub	n/a	FUN_00015b40	
 00015b50	16	stub	n/a	FUN_00015b50	
 00015b60	16	stub	n/a	FUN_00015b60	
-00015b70	272	method	SIG?	IOATIR500Surface::set_volatile_state	__ZN16IOATIR500Surface18set_volatile_stateE21eSurfaceVolatileState
+00015b70	272	method	DONE	IOATIR500Surface::set_volatile_state	__ZN16IOATIR500Surface18set_volatile_stateE21eSurfaceVolatileState
 00015c84	16	stub	n/a	FUN_00015c84	
 00015c94	16	stub	n/a	FUN_00015c94	
-00015cb0	84	method	SIG?	IOATIR500Surface::surface_control	__ZN16IOATIR500Surface15surface_controlEmmPm
+00015cb0	84	method	DONE	IOATIR500Surface::surface_control	__ZN16IOATIR500Surface15surface_controlEmmPm
 00015d10	16	stub	n/a	IOATIR500Surface::set_volatile_state	
 00015d20	16	stub	n/a	IOATIR500Surface::set_surface_blocking	
-00015d30	1636	method	SIG?	IOATIR500Surface::surface_lock_options	__ZN16IOATIR500Surface20surface_lock_optionsE9eLockTypemP18IOAccelSurfaceDatam
+00015d30	1636	method	DONE	IOATIR500Surface::surface_lock_options	__ZN16IOATIR500Surface20surface_lock_optionsE9eLockTypemP18IOAccelSurfaceDatam
 000163c4	16	stub	n/a	FUN_000163c4	
 000163d4	16	stub	n/a	IOATIR500Surface::move_buffer_to_backing_store	
 000163e4	16	stub	n/a	IOATIR500Surface::copy_buffer_to_backing_store	

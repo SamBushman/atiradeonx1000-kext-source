@@ -153,7 +153,7 @@ IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *readData, U
             return 0;
         }
         if (U8At(accel, 0x80) != 0 && U8At(reinterpret_cast<void *>(U32At(bufRec, 0x24)), 0x58) == 0) {
-            IOReturn allocResult = reinterpret_cast<IOATIR500Surface *>(surface)->alloc_surfaces_retry(mask, 0);
+            IOReturn allocResult = reinterpret_cast<IOATIR500Surface *>(surface)->alloc_surfaces_retry(mask, static_cast<eLockType>(0));
             if (allocResult != 0) {
                 ReadBuffer_mutex_unlock(commandLock);
                 return 0xe00002cc;
