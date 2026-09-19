@@ -33,6 +33,8 @@ inline UInt32 FBITS(float f) {
     u.f = f;
     return u.w;
 }
+/* a 32-bit word of a raw stack block viewed as a float (the shipped code stores floats straight into a parameter block) */
+inline float &BF(UInt32 &w) { return *reinterpret_cast<float *>(&w); }
 extern "C" void *memcpy(void *, const void *, unsigned long);
 /* the shipped code's _memcpy stub: the destination is a raw address or a pointer */
 template <class T> inline void GCopy(T dst, const void *src, UInt32 n) { memcpy((void *)(dst), src, n); }
