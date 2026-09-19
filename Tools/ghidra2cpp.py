@@ -137,7 +137,7 @@ def conv_mem(s):
         pos = m.start() + 2
 
 # 3. qualified member calls  Class::m(obj, rest)  and unqualified own-class calls
-CLASSES = set('ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
+CLASSES = set('pcl_ParamsR500_t _HZDATA ATIRadeonX1000 IOATIR500Accelerator IOATIR500Surface ATIR500Surface IOATIR500Shared IOATIR5002DContext ATIR5002DContext IOATIR500DVDContext ATIR500DVDContext IOATIR500GLContext ATIR500GLContext ATIR500Memory VendorTransferBuffer'.split())
 def conv_calls(s):
     pat = re.compile(r'\b(' + '|'.join(sorted(CLASSES, key=len, reverse=True)) + r')::(\w+)\(')
     pos = 0
@@ -175,10 +175,10 @@ def conv_calls(s):
 
 # 0. FUN_/sym substitutions first
 for f in args.fun:
-    a, b = f.split('=', 1)
+    a, b = f.split('=>', 1) if '=>' in f else f.split('=', 1)
     body = re.sub(r'\b' + re.escape(a) + r'\(', b + '(', body)
 for f in args.sym:
-    a, b = f.split('=', 1)
+    a, b = f.split('=>', 1) if '=>' in f else f.split('=', 1)
     body = body.replace(a, b)
 
 body = conv_vcalls(body)
@@ -207,5 +207,6 @@ def fstore(m):
 body = re.sub(r'([^\n;{}=<>!]*?(?:\[[^\]]*\]|M<[^;=]*?>\([^;=]*?\)|\*\w+))\s*=\s*(\(float\)[^;]*);', lambda m: m.group(1) + ' = FBITS(' + m.group(2) + ');', body)
 for dat in ('d2d8', 'd2dc', 'd2e0', 'd2e4'):
     body = re.sub(r'M<UInt32>\(&DAT_0004%s \+ ' % dat, 'FormatTableLookup_0x0004%s(' % dat, body)
+body = re.sub(r'CONCAT31\(in_register_\w+,\s*(\w+)\)', r'((UInt32)\1)', body)
 body = body.replace('CONCAT44(', 'CONCAT44d(').replace('SUB41(', 'SUB41m(')
 sys.stdout.write(body)
