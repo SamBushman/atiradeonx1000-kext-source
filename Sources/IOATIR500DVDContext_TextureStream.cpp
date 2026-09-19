@@ -28,16 +28,8 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 inline SInt16 &S16At(void *base, int offset) { return *reinterpret_cast<SInt16 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-void IOATIR500DVDContext::add_texture_to_stream(VendorTextureBuffer *texture) {
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-    S16At(tex, 0xe) += 1;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_add_texture_to_stream_Port.cpp) */
 
-void IOATIR500DVDContext::remove_texture_from_stream(VendorTextureBuffer *texture) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-    UInt8 *clientShared = reinterpret_cast<UInt8 *>(U32At(tex, 0x14));
-    UInt8 *dvdField = reinterpret_cast<UInt8 *>(U32At(self, 0x8c));
-    U32At(clientShared, 8) = U32At(dvdField, 0x50);
-    S16At(tex, 0xe) -= 1;
-}
+
+/* (re-ported mechanically: see IOATIR500DVDContext_remove_texture_from_stream_Port.cpp) */
+

@@ -84,6 +84,9 @@ typedef SInt32 (*Fn0x554)(void *, UInt32);
 /* (re-ported mechanically: see IOATIR500Accelerator_freeWaitToAllocGART_Port.cpp) */
 
 
+/* (re-ported mechanically: see IOATIR500Accelerator_freeWaitToAllocGART_Port.cpp) */
+
+
 bool IOATIR500Accelerator::freeToAllocGART(IOATIR5002DContext *exclude2D, IOATIR500DVDContext *excludeDVD,
                                              IOATIR500GLContext *excludeGL, IOATIR500Surface *excludeSurface,
                                              IOATIR500Shared *excludeShared, VendorTransferBuffer *needed) {
@@ -92,6 +95,7 @@ bool IOATIR500Accelerator::freeToAllocGART(IOATIR5002DContext *exclude2D, IOATIR
     }
     return freeWaitToAllocGART(exclude2D, excludeDVD, excludeGL, excludeSurface, excludeShared, needed, true);
 }
+
 
 /* (re-ported mechanically: see IOATIR500Shared_freeToAllocGART_Port.cpp) */
 

@@ -44,42 +44,17 @@ typedef void (*ReleaseFn)(void *);
 struct DVDWriteXfer { UInt32 word0; UInt32 needsRelease; void *memDesc; UInt16 kind; UInt16 pad; };
 } // namespace
 
-IOReturn IOATIR500DVDContext::get_config(UInt32 *out0, UInt32 *out1) {
-    *out0 = U32At(accelerator, 0x98);
-    *out1 = U32At(accelerator, 0x9c);
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_get_config_Port.cpp) */
 
-IOReturn IOATIR500DVDContext::get_status(UInt32 *out0) {
-    UInt32 status = 1;
-    if (boundSurface == nullptr || (U32At(boundSurface, 0xbf8) & 0x20000000u) != 0) {
-        status = 0;
-    }
-    *out0 = status;
-    return 0;
-}
 
-IOReturn IOATIR500DVDContext::get_surface_size(SInt32 *outW, SInt32 *outH) {
-    if (boundSurface == nullptr) {
-        return 0xe00002bc;
-    }
-    UInt8 *buf = reinterpret_cast<UInt8 *>(U32At(boundSurface, 0xb70));
-    *outW = U16At(buf, 0x1c);
-    buf = reinterpret_cast<UInt8 *>(U32At(boundSurface, 0xb70));
-    *outH = U16At(buf, 0x1e);
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500DVDContext_get_status_Port.cpp) */
 
-IOReturn IOATIR500DVDContext::finish() {
-    void *accel = accelerator;
-    void **vtable = *reinterpret_cast<void ***>(accel);
-    SInt32 delta = (*reinterpret_cast<Fn0x55c *>(vtable + (0x55c / 4)))(accel, U32At(this, 0x7c));
-    if (delta == -1) {
-        return 0xe00002d6;
-    }
-    U32At(accelerator, 0x7ac) += delta;
-    return 0;
-}
+
+/* (re-ported mechanically: see IOATIR500DVDContext_get_surface_size_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500DVDContext_finish_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500DVDContext_unlock_memory_Port.cpp) */
 

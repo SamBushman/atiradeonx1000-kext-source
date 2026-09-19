@@ -20,18 +20,8 @@ typedef void (*RetainFn)(void *);
 
 /* Real: for a plain texture (kind byte +0x20 == 0) that belongs to a surface (+0x50), copy bits 0-2 of the
  * surface's first buffer record byte +0x38, shifted left 2, into the texture record's flag byte +0x15. */
-void ATIR500GLContext::set_texture_flags(VendorTextureBuffer *texture) {
-    UInt8 *tex = reinterpret_cast<UInt8 *>(texture);
-    if (U8At(tex, 0x20) != 0) {
-        return;
-    }
-    UInt8 *surface = reinterpret_cast<UInt8 *>(U32At(tex, 0x50));
-    if (surface == nullptr) {
-        return;
-    }
-    UInt8 *bufRec = reinterpret_cast<UInt8 *>(U32At(surface, 0xb70));
-    U8At(reinterpret_cast<void *>(U32At(tex, 0x14)), 0x15) = static_cast<UInt8>((U8At(bufRec, 0x38) & 7) << 2);
-}
+/* (re-ported mechanically: see ATIR500GLContext_set_texture_flags_Port.cpp) */
+
 
 /* Real: type 0 hands out (and retains) the accelerator's shared 0x1000-byte client-memory descriptor; every other
  * type defers to the base class. */

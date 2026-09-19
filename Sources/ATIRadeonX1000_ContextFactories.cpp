@@ -52,18 +52,26 @@
 
 #include "../Headers/ATIRadeonX1000.h"
 
+
 ATIR500Surface *ATIRadeonX1000::new_surface(void) {
     return new ATIR500Surface(); /* real allocation size 0xdbc bytes - see this file's own header comment */
 }
+
+
 
 ATIR5002DContext *ATIRadeonX1000::new_2d_context(void) {
     return new ATIR5002DContext(); /* real allocation size 300 (0x12c) bytes - see this file's own header comment */
 }
 
+
+
 ATIR500DVDContext *ATIRadeonX1000::new_dvd_context(void) {
     return new ATIR500DVDContext(); /* real allocation size 0x1e0 bytes - see this file's own header comment */
 }
 
+
+
 ATIR500GLContext *ATIRadeonX1000::new_gl_context(void) {
     return new ATIR500GLContext(); /* real allocation size 0x690 bytes - see this file's own header comment */
 }
+

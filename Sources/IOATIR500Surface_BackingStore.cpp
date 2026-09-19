@@ -45,20 +45,8 @@ inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *
  * +0x10, or this surface's own +0xd8c "one pending eviction" slot is
  * already occupied) or defers it into that single-slot cache instead.
  */
-UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    UInt8 *backing = *reinterpret_cast<UInt8 **>(buf + 0x24);
-    if (U8At(backing, 0x59) == 0) {
-        if (U32At(backing, 0x10) == 0 || U32At(self, 0xd8c) != 0) {
-            delete_buffer_backing(reinterpret_cast<IOTextureBuffer *>(backing));
-        } else {
-            U32At(self, 0xd8c) = reinterpret_cast<UInt32>(backing);
-        }
-        U32At(buf, 0x24) = 0;
-    }
-    return 1;
-}
+/* (re-ported mechanically: see IOATIR500Surface_free_buffer_backing_store_Port.cpp) */
+
 
 /*
  * delete_buffer_backing - CONFIRMED. Real body: if the backing
@@ -89,10 +77,5 @@ UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *buffer)
  * constant; represented here as a plain division, semantically
  * identical and far more legible).
  */
-bool IOATIR500Surface::move_buffer_to_backing_store(ATIR500SurfaceBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    bool result = copy_buffer_to_backing_store(buffer);
-    UInt32 index = static_cast<UInt32>((reinterpret_cast<UInt8 *>(buffer) - (self + 0xa8)) / 0x78);
-    dealloc_surface(index);
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500Surface_move_buffer_to_backing_store_Port.cpp) */
+

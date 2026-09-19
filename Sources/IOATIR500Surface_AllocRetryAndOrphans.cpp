@@ -72,19 +72,8 @@ extern "C" void GLSurfaceRetry_IOSleep(UInt32 milliseconds) asm("_IOSleep");
  * set, then deletes the backing itself via `delete_buffer_backing`
  * and clears the slot.
  */
-void IOATIR500Surface::free_buffer_backing_orphans() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *pending = *reinterpret_cast<UInt8 **>(self + 0xd8c);
-    void *inner = *reinterpret_cast<void **>(pending + 0x10);
-    if (inner != nullptr) {
-        typedef void (*ReleaseFn)(void *);
-        (*reinterpret_cast<ReleaseFn *>(*reinterpret_cast<void ***>(inner) + (0x18 / 4)))(inner);
-        U32At(*reinterpret_cast<void **>(self + 0xd8c), 0x10) = 0;
-        pending = *reinterpret_cast<UInt8 **>(self + 0xd8c);
-    }
-    delete_buffer_backing(reinterpret_cast<IOTextureBuffer *>(pending));
-    U32At(self, 0xd8c) = 0;
-}
+/* (re-ported mechanically: see IOATIR500Surface_free_buffer_backing_orphans_Port.cpp) */
+
 
 /*
  * addOrphanTexture - CONFIRMED, transcribed faithfully. Real body:
@@ -97,22 +86,5 @@ void IOATIR500Surface::free_buffer_backing_orphans() {
  * accelerator's own +0xb8 provider object) with a real 100ms delay,
  * setting the flag so it isn't scheduled again until the sweep runs.
  */
-void IOATIR500Accelerator::addOrphanTexture(IOTextureBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    UInt8 *prev = *reinterpret_cast<UInt8 **>(buf + 0x24);
-    UInt8 *next = *reinterpret_cast<UInt8 **>(buf + 0x28);
-    U32At(prev, 0x28) = reinterpret_cast<UInt32>(next);
-    *reinterpret_cast<UInt8 **>(buf + 0x28) = self + 0x63c;
-    U32At(next, 0x24) = reinterpret_cast<UInt32>(prev);
-    U32At(buf, 0x24) = U32At(self, 0x660);
-    *reinterpret_cast<UInt8 **>(self + 0x660) = buf;
-    U32At(*reinterpret_cast<void **>(buf + 0x24), 0x28) = reinterpret_cast<UInt32>(buf);
+/* (re-ported mechanically: see IOATIR500Accelerator_addOrphanTexture_Port.cpp) */
 
-    if (U8At(self, 0x82) == 0) {
-        typedef void (*Fn0x12c)(void *, UInt32);
-        void *provider = *reinterpret_cast<void **>(self + 0xb8);
-        (*reinterpret_cast<Fn0x12c *>(*reinterpret_cast<void ***>(provider) + (300 / 4)))(provider, 100);
-        U8At(self, 0x82) = 1;
-    }
-}

@@ -122,15 +122,8 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
  *
  * Confidence: CONFIRMED - real, complete decompiles, no ambiguity.
  */
-void IOATIR500Surface::set_dvd_context(IOATIR500DVDContext *context) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    boundDVDContext = context;
-    U32At(self, 0xc18) |= U32At(context, 0x88);
-}
+/* (re-ported mechanically: see IOATIR500Surface_set_dvd_context_Port.cpp) */
 
-void IOATIR500Surface::remove_dvd_context(IOATIR500DVDContext *context) {
-    if (boundDVDContext == context) {
-        boundDVDContext = nullptr;
-    }
-    reset_req_bits();
-}
+
+/* (re-ported mechanically: see IOATIR500Surface_remove_dvd_context_Port.cpp) */
+

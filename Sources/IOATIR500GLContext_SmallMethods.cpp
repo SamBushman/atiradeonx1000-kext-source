@@ -17,30 +17,22 @@ inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *
 } // namespace
 
 /* Real: if the started flag is set, stop() then detach() from the accelerator (vtable +0x34c / +0x3a8). */
-IOReturn IOATIR500GLContext::clientClose() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U32At(self, 0x294) != 0) {
-        IOService *provider = *reinterpret_cast<IOService **>(self + 0xc8);
-        this->stop(provider);
-        this->detach(provider);
-    }
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_clientClose_Port.cpp) */
 
-void IOATIR500GLContext::remove_surface() {
-    U32At(this, 0x290) = 0;
-}
 
+/* (re-ported mechanically: see IOATIR500GLContext_remove_surface_Port.cpp) */
+
+
+/* Real: true iff the surface's current mode bits, ignoring the per-context bits, equal the requested mode. */
 /* Real: true iff the surface's current mode bits, ignoring the per-context bits, equal the requested mode. */
 bool IOATIR500GLContext::setCompatibleSurfaceMode(SInt32 *modeBits, eIOGLContextModeBits mode, SInt32 flags) {
     (void)flags;
     return (static_cast<UInt32>(*modeBits) & 0xffff7fc0u) == (static_cast<UInt32>(mode) & 0xffffc03fu);
 }
 
-void IOATIR500GLContext::set_texture_flags(VendorTextureBuffer *texture) {
-    (void)texture;
-}
 
-void IOATIR500GLContext::add_vendor_surface_required_bits(eIOGLContextModeBits mode) {
-    (void)mode;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_set_texture_flags_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500GLContext_add_vendor_surface_required_bits_Port.cpp) */
+

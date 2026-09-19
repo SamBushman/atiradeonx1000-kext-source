@@ -22,23 +22,17 @@
 
 #include "../Headers/ATIR500Surface.h"
 
-void ATIR500Surface::disable_overlay(void) {
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
+/* (re-ported mechanically: see ATIR500Surface_disable_overlay_Port.cpp) */
 
-void ATIR500Surface::enable_overlay(void) {
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
 
-void ATIR500Surface::showbuffer(int bufferIndex, int param2) {
-    (void)bufferIndex; (void)param2;
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
+/* (re-ported mechanically: see ATIR500Surface_enable_overlay_Port.cpp) */
 
-void ATIR500Surface::dvd_setup_subpicture(int param1, int param2, int param3, int param4) {
-    (void)param1; (void)param2; (void)param3; (void)param4;
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
+
+/* (re-ported mechanically: see ATIR500Surface_showbuffer_Port.cpp) */
+
+
+/* (re-ported mechanically: see ATIR500Surface_dvd_setup_subpicture_Port.cpp) */
+
 
 /*
  * dvd_setup_overlay - the ONE real, non-stub member of this family.
@@ -47,19 +41,12 @@ void ATIR500Surface::dvd_setup_subpicture(int param1, int param2, int param3, in
  * function) also writes via a different call path, confirming a single
  * shared geometry record.
  */
-void ATIR500Surface::dvd_setup_overlay(int x, int y, int w, int h) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    *reinterpret_cast<UInt16 *>(self + 0x94) = static_cast<UInt16>(x);
-    *reinterpret_cast<UInt16 *>(self + 0x96) = static_cast<UInt16>(h); /* CONFIRMED real param order: h before w at these offsets */
-    *reinterpret_cast<UInt16 *>(self + 0x9a) = static_cast<UInt16>(w);
-    *reinterpret_cast<UInt16 *>(self + 0x98) = static_cast<UInt16>(y);
-    *reinterpret_cast<UInt32 *>(self + 0xd94) = 1; /* CONFIRMED real dirty/enable flag */
-}
+/* (re-ported mechanically: see ATIR500Surface_dvd_setup_overlay_Port.cpp) */
+
 
 /*
  * enable_deint - CONFIRMED real, stores the mode; nothing this project
  * decompiled anywhere reads this field back.
  */
-void ATIR500Surface::enable_deint(int mode) {
-    *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xdac) = mode;
-}
+/* (re-ported mechanically: see ATIR500Surface_enable_deint_Port.cpp) */
+

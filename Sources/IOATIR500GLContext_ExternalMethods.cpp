@@ -117,13 +117,5 @@ extern const VendorExternalMethod kGLSpecialMethod20 = {
  * callers who need those extra fields cast back, exactly matching how
  * the real compiled code never had genuine C++ type safety here either.
  */
-IOExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService **target, UInt32 selector) {
-    *target = this;
-    if (selector < 20) {
-        return const_cast<IOExternalMethod *>(reinterpret_cast<const IOExternalMethod *>(&kGLRegularMethods[selector]));
-    }
-    if (selector != 20) {
-        return nullptr;
-    }
-    return const_cast<IOExternalMethod *>(reinterpret_cast<const IOExternalMethod *>(&kGLSpecialMethod20));
-}
+/* (re-ported mechanically: see ATIR500GLContext_getTargetAndMethodForIndex_Port.cpp) */
+

@@ -33,6 +33,7 @@
 /* real object size, from its allocation site (issue #24); catches any drift in the OSObject base + pad layout */
 static_assert(sizeof(IOATIR500Shared) == 0x28, "IOATIR500Shared must be 0x28 bytes");
 
+
 bool IOATIR500Shared::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     bool ok = OSObject::init(); /* real: qualified base call (relocation at 0x16aa4 -> __ZTV8OSObject, slot +0x48 = OSObject::init()) */
@@ -47,3 +48,4 @@ bool IOATIR500Shared::init() {
     }
     return ok;
 }
+

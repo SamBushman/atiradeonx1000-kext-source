@@ -47,6 +47,7 @@ inline void ReleaseObj(void *obj) {
 }
 } // namespace
 
+
 void IOATIR500Surface::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     if (U32At(self, 0xc04) != 0) {
@@ -55,92 +56,39 @@ void IOATIR500Surface::free() {
     OSObject::free();
 }
 
-IOReturn IOATIR500Surface::clientClose() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U32At(self, 0xd58) != 0) {
-        IOService *provider = *reinterpret_cast<IOService **>(self + 0xd50);
-        this->stop(provider);
-        this->detach(provider);
-    }
-    return 0;
-}
 
-void IOATIR500Surface::add_2d_context_to_list(IOATIR5002DContext *context) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(context, 0x84) = U32At(self, 0x8c);
-    U32At(self, 0x8c) = reinterpret_cast<UInt32>(context);
-    U32At(self, 0xc18) |= U32At(context, 0x8c);
-}
+/* (re-ported mechanically: see IOATIR500Surface_clientClose_Port.cpp) */
 
-void IOATIR500Surface::remove_2d_context_from_list(IOATIR5002DContext *context) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *node = reinterpret_cast<UInt8 *>(U32At(self, 0x8c));
-    if (node == reinterpret_cast<UInt8 *>(context)) {
-        U32At(self, 0x8c) = U32At(context, 0x84);
-    } else {
-        UInt8 *prev;
-        do {
-            prev = node;
-            node = reinterpret_cast<UInt8 *>(U32At(prev, 0x84));
-            if (node == nullptr) {
-                break;
-            }
-        } while (reinterpret_cast<UInt8 *>(context) != node);
-        U32At(prev, 0x84) = U32At(context, 0x84);
-    }
-    U32At(context, 0x84) = 0;
-    reset_req_bits();
-}
 
-void IOATIR500Surface::set_access() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(self, 0xc00) = U32At(reinterpret_cast<void *>(U32At(self, 0xd50)), 0xdc);
-}
+/* (re-ported mechanically: see IOATIR500Surface_add_2d_context_to_list_Port.cpp) */
 
-void IOATIR500Surface::sleep_blocked() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *lock = reinterpret_cast<void *>(U32At(self, 0xc04));
-    SurfM_IOLockLock(lock);
-    while (U8At(self, 0xbf6) != 0) {
-        SurfM_IOLockSleep(lock, this, 0);
-    }
-    SurfM_IOLockUnlock(lock);
-}
+
+/* (re-ported mechanically: see IOATIR500Surface_remove_2d_context_from_list_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_set_access_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_sleep_blocked_Port.cpp) */
+
+
 
 UInt32 IOATIR500Surface::alloc_surfaces(UInt32 mask, bool retry) {
     return alloc_surfaces_pageq(mask, 0, retry);
 }
 
-UInt32 IOATIR500Surface::surface_req_bits() {
-    return 0;
-}
 
-SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 a, UInt32 b, SInt32 *w, SInt32 *h, SInt32 *bytes) {
-    (void)a; (void)b;
-    UInt8 *rec = reinterpret_cast<UInt8 *>(buffer);
-    UInt16 pitchWords = U16At(rec, 0x14);
-    UInt16 bytesPerPixel = U16At(rec, 0x16);
-    UInt16 height = U16At(rec, 0x1e);
-    if (w != nullptr) {
-        *w = U16At(rec, 0x1c);
-    }
-    if (h != nullptr) {
-        *h = height;
-    }
-    if (bytes != nullptr) {
-        *bytes = static_cast<SInt32>(static_cast<UInt32>(bytesPerPixel) * static_cast<UInt32>(pitchWords));
-    }
-    return 1;
-}
+/* (re-ported mechanically: see IOATIR500Surface_surface_req_bits_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_buffer_map_offset_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500Surface_alloc_buffer_backing_store_Port.cpp) */
 
 
-UInt32 IOATIR500Surface::move_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer) {
-    copy_buffer_from_backing_store(buffer);
-    free_buffer_backing_store(buffer);
-    return 1;
-}
+/* (re-ported mechanically: see IOATIR500Surface_move_buffer_from_backing_store_Port.cpp) */
+
 
 /* Shared tail of alloc_surface / alloc_surface_keep: clear bit `index` of the pending-allocation mask. */
 static inline void ClearPendingBit(UInt8 *self, UInt32 index) {

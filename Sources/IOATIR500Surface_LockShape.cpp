@@ -29,25 +29,23 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIRadeonX1000Types.h"
 
-void IOATIR500Surface::surface_write_unlock() {
-    surface_unlock_options(static_cast<eLockType>(2), 2);
-}
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_unlock_Port.cpp) */
 
-void IOATIR500Surface::surface_write_unlock_options(UInt32 options) {
-    surface_unlock_options(static_cast<eLockType>(2), options);
-}
 
-void IOATIR500Surface::surface_write_lock(IOAccelSurfaceData *data, UInt32 size) {
-    surface_lock_options(static_cast<eLockType>(2), 1, data, size);
-}
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_unlock_options_Port.cpp) */
 
-void IOATIR500Surface::surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
-    surface_lock_options(static_cast<eLockType>(2), lockOptions, data, size);
-}
+
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_lock_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_lock_options_Port.cpp) */
+
+
 
 IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
     return surface_lock_options(static_cast<eLockType>(1), lockOptions, data, size);
 }
+
 
 /*
  * set_scale - CONFIRMED, fully transcribed (real kext offset 0x159f0).
@@ -80,6 +78,7 @@ IOReturn IOATIR500Surface::surface_read_lock_options(UInt32 lockOptions, IOAccel
 extern "C" void FUN_00015aa4(void *lockPtr) asm("_IOLockLock");
 extern "C" void FUN_00015a84(void *lockPtr) asm("_IOLockUnlock");
 
+
 IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3) {
     if (param3 != 0 && param3 != 0x2c) {
         return 0xe00002c2; /* real: kIOReturnBadArgument-family literal, same constant used elsewhere in this project */
@@ -94,6 +93,7 @@ IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scalin
     FUN_00015a84(*reinterpret_cast<void **>(accel + 0x840));
     return result;
 }
+
 
 /*
  * surface_write_lock_int / surface_write_unlock_int - CONFIRMED, fully
@@ -112,24 +112,11 @@ IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scalin
  * sleepForTimeStamp family - see Sources/ATIR500GLContext_TextureLoad.cpp).
  */
 
-void IOATIR500Surface::surface_write_lock_int(UInt32 bufferIndex, UInt32 *outParam2, UInt32 *outParam3) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *mip = *reinterpret_cast<UInt8 **>(self + bufferIndex * 4 + 0xb70);
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_lock_int_Port.cpp) */
 
-    prepare_vram(reinterpret_cast<ATIR500SurfaceBuffer *>(mip));
-    *outParam2 = *reinterpret_cast<UInt32 *>(mip + 8);
-    *outParam3 = *reinterpret_cast<UInt16 *>(mip + 0x18);
 
-    UInt8 *accelIsh = *reinterpret_cast<UInt8 **>(self + 0xd50);
-    UInt32 stampDelta = accelerator->sleepForTimeStamp(*reinterpret_cast<UInt32 *>(accelIsh + 0x50) - 1); /* real: piVar1[0x14], word-indexed = +0x50 */
-    *reinterpret_cast<UInt32 *>(accelIsh + 0x7bc) += stampDelta; /* real: piVar1[0x1ef] = accelIsh+0x7bc word-indexed */
-}
+/* (re-ported mechanically: see IOATIR500Surface_surface_write_unlock_int_Port.cpp) */
 
-void IOATIR500Surface::surface_write_unlock_int(UInt32 bufferIndex) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *mip = *reinterpret_cast<UInt8 **>(self + bufferIndex * 4 + 0xb70);
-    complete_vram(reinterpret_cast<ATIR500SurfaceBuffer *>(mip));
-}
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
@@ -413,6 +400,38 @@ extern "C" void FUN_00015870(void *lockPtr) asm("_IOLockUnlock");
  * `region` - real evidence this project's transcription order below
  * matters and was checked, not assumed).
  */
+/*
+ * set_shape_backing_length / set_shape_backing - RESOLVED (issue #8),
+ * both real, thin forwards into `set_shape_backing_length_ext` above
+ * (real kext offsets 0x158f0/0x15960, each reaching the real body via
+ * its own real branch-island trampoline - see that function's own header
+ * comment). Ghidra's own no-analysis decompile of both collapsed to a
+ * bare, argument-less tail call (`set_shape_backing_length_ext();`),
+ * unable to recover the real argument setup without full analysis - so
+ * this transcription is instead sourced directly from the raw PPC
+ * disassembly's own register moves at each function, cross-checked
+ * against the real PPC32 SysV/Darwin integer-argument-register
+ * convention (r3=this, r4..r10=args 1-7), not trusted to a decompile.
+ *
+ * set_shape_backing_length additionally has a real, CONFIRMED validation
+ * gate no earlier note of this project had recorded: unless its own
+ * `param4` (the pass-through for set_shape_backing_length_ext's `param4`,
+ * "structSize" - real 0xffffffff sentinel means "unset") equals
+ * `0xffffffff`, it real-multiplies `param4` by a real 16-bit field at
+ * `region+0xa` and rejects with `0xe00002bc` if the caller's own `param5`
+ * is smaller than that product - a real "is the caller's buffer big
+ * enough" check this function performs BEFORE ever reaching
+ * `set_shape_backing_length_ext`, on top of the real size/region
+ * validation that function does internally. On success (or when
+ * `param4==0xffffffff`, which skips this check entirely), forwards to
+ * `set_shape_backing_length_ext` with `param5` set to a real literal `0`
+ * and the real `region`/`param5`(caller's) values passed through -
+ * confirmed via the raw register moves (`or r8,r9,r9` moves the real
+ * `region` argument from r9 into r8; `or r10,r8,r8` saves the real
+ * caller's `param5` from r8 into r10, BEFORE r8 is overwritten with
+ * `region` - real evidence this project's transcription order below
+ * matters and was checked, not assumed).
+ */
 IOReturn IOATIR500Surface::set_shape_backing_length(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3,
                                                       UInt32 param4, UInt32 param5,
                                                       IOAccelDeviceRegion *region) {
@@ -425,6 +444,8 @@ IOReturn IOATIR500Surface::set_shape_backing_length(eIOAccelSurfaceShapeBits sha
     return set_shape_backing_length_ext(shapeBits, param2, param3, param4, region, 0, param5);
 }
 
+
+
 void IOATIR500Surface::set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3, UInt32 param4,
                                           IOAccelDeviceRegion *region, UInt32 param6) {
     /* real: discards set_shape_backing_length_ext's own return value -
@@ -434,3 +455,4 @@ void IOATIR500Surface::set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UIn
      * ignore it). */
     set_shape_backing_length_ext(shapeBits, param2, param3, param4, region, param6, 0);
 }
+

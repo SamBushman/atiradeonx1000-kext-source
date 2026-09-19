@@ -69,57 +69,14 @@ extern "C" UInt32 gl_assert_wait_timeout_event;
 /* (re-ported mechanically: see ATIRadeonX1000_submit_idct_buffer_consumed_Port.cpp) */
 
 
-void ATIRadeonX1000::submit_empty_buffer() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U8At(self, 0x80) == 0) {
-        return;
-    }
+/* (re-ported mechanically: see ATIRadeonX1000_submit_empty_buffer_Port.cpp) */
 
-    UInt32 cfg = U32At(self, 0xbbc);
-    U32At(self, 0x8a0) = 0;
-    UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(self, 0x860));
 
-    UInt32 tries = 0x2711;
-    do {
-        U32At(mmio, 0x30) = 0x10000000;
-        enforceInOrderExecutionIO();
-        U32At(mmio, 0x34) = (cfg << 0x18) | ((cfg & 0xff00u | 0x100u) << 8) | ((cfg & 0xff0000u) >> 8) | (cfg >> 0x18);
-        enforceInOrderExecutionIO();
-        U32At(mmio, 0x30) = 0x10000000;
-        enforceInOrderExecutionIO();
-        U32At(mmio, 0x34) = (cfg << 0x18) | ((cfg & 0xff00u) << 8) | ((cfg >> 8) & 0xff00u) | (cfg >> 0x18);
-        enforceInOrderExecutionIO();
-        U32At(mmio, 0x30) = 0x22000000;
-        enforceInOrderExecutionIO();
-        if (U8At(mmio, 0x37) == 0 && U8At(mmio, 0x36) == 0 && U8At(mmio, 0x35) == 0 && U8At(mmio, 0x34) == 0) {
-            return;
-        }
-        tries--;
-    } while (tries != 0);
-}
+/* (re-ported mechanically: see ATIRadeonX1000_enable_GPUSensor_Port.cpp) */
 
-void ATIRadeonX1000::enable_GPUSensor() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    U32At(self, 0x9a0) = 0;
-    U32At(self, 0x99c) = 0;
-    UInt8 *src = reinterpret_cast<UInt8 *>(U32At(self, 0x9a8));
-    if (src != nullptr) {
-        typedef void (*ArmFn)(void *, UInt32);
-        typedef void (*EnableFn)(void *);
-        (*reinterpret_cast<ArmFn *>(*reinterpret_cast<void ***>(src) + (300 / 4)))(src, U32At(self, 0x998));
-        (*reinterpret_cast<EnableFn *>(*reinterpret_cast<void ***>(src) + (0xec / 4)))(src);
-    }
-}
 
-void ATIRadeonX1000::disable_GPUSensor() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *src = reinterpret_cast<UInt8 *>(U32At(self, 0x9a8));
-    if (src != nullptr) {
-        typedef void (*DisableFn)(void *);
-        (*reinterpret_cast<DisableFn *>(*reinterpret_cast<void ***>(src) + (0x158 / 4)))(src);
-        (*reinterpret_cast<DisableFn *>(*reinterpret_cast<void ***>(src) + (0xf0 / 4)))(src);
-    }
-}
+/* (re-ported mechanically: see ATIRadeonX1000_disable_GPUSensor_Port.cpp) */
+
 
 /* (re-ported mechanically: see ATIRadeonX1000_DumpASICHangState_Port.cpp) */
 

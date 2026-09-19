@@ -38,11 +38,8 @@ inline SInt32 CallAccelWait(void *accel, int slotOffset, UInt32 tag) {
 }
 } // namespace
 
-IOReturn IOATIR5002DContext::get_config(UInt32 *out0, UInt32 *out1) {
-    *out0 = U32At(accelerator, 0x98);
-    *out1 = U32At(accelerator, 0x9c);
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_get_config_Port.cpp) */
+
 
 /* finish(mode): 0 = wait on this context's own stamp (same slot GL finish uses, +0x55c); 1 / 2 = wait on
  * the accelerator's own pending stamp (-1) via slot +0x55c / +0x558; anything else = BadArgument. */
@@ -70,12 +67,16 @@ IOReturn IOATIR5002DContext::get_config(UInt32 *out0, UInt32 *out1) {
 
 
 /* set_surface_paging_options / set_surface_vsync_options: deliberate stubs in the shipped driver */
+/* set_surface_paging_options / set_surface_vsync_options: deliberate stubs in the shipped driver */
 IOReturn IOATIR5002DContext::set_surface_paging_options(IOSurfacePagingControlInfoStruct *inStruct, IOSurfacePagingControlInfoStruct *outStruct, UInt32 structSize, UInt32 *outTag) {
     (void)inStruct; (void)outStruct; (void)structSize; (void)outTag;
     return 0xe00002c7; /* kIOReturnUnsupported */
 }
 
+
+
 IOReturn IOATIR5002DContext::set_surface_vsync_options(IOSurfaceVsyncControlInfoStruct *inStruct, IOSurfaceVsyncControlInfoStruct *outStruct, UInt32 structSize, UInt32 *outTag) {
     (void)inStruct; (void)outStruct; (void)structSize; (void)outTag;
     return 0xe00002c7; /* kIOReturnUnsupported */
 }
+

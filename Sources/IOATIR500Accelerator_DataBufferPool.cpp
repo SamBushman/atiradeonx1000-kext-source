@@ -72,27 +72,12 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-bool IOATIR500Accelerator::allocDataBufferBacking(VendorTextureBuffer *buffer) {
-    void *desc = FUN_inTaskWithOptions(nullptr, 0x10422, buffer->poolSizeClass, kernelPageSize);
-    buffer->memoryDescriptor = desc;
-    return desc != nullptr;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_allocDataBufferBacking_Port.cpp) */
 
-void *IOATIR500Accelerator::find_surface_for_id(UInt32 surfaceID) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *head = *reinterpret_cast<UInt8 **>(self + 0x5c);
-    if (head == nullptr) {
-        return nullptr;
-    }
-    UInt8 *cur = head;
-    do {
-        if (*reinterpret_cast<UInt32 *>(cur + 0xa4) == surfaceID) {
-            return cur;
-        }
-        cur = *reinterpret_cast<UInt8 **>(cur + 0x9c);
-    } while (cur != head);
-    return nullptr;
-}
+
+/* (re-ported mechanically: see IOATIR500Accelerator_find_surface_for_id_Port.cpp) */
+
+
 
 bool IOATIR500Accelerator::getVRAMDescriptors(void) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -106,33 +91,12 @@ bool IOATIR500Accelerator::getVRAMDescriptors(void) {
     return U32At(self, 0xcc) != 0 && U32At(self, 0xe4) != 0;
 }
 
-bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size) {
-    UInt8 *buf = reinterpret_cast<UInt8 *>(outBuffer);
-    void *memHandle = FUN_withOptions(*reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x82c) | 0x10022, size, kernelPageSize);
-    *reinterpret_cast<void **>(buf + 8) = memHandle;
-    if (memHandle == nullptr) {
-        return false;
-    }
-    U32At(buf, 0x18) = size;
-    typedef VendorCommandBufferHeader *(*GetHeaderFn)(void *);
-    VendorCommandBufferHeader *header = (*reinterpret_cast<GetHeaderFn *>(*reinterpret_cast<void ***>(memHandle) + (0x1cc / 4)))(memHandle);
-    *reinterpret_cast<VendorCommandBufferHeader **>(buf + 0x14) = header;
-    init_command_buffer_header(header, size);
-    return true;
-}
+
+/* (re-ported mechanically: see IOATIR500Accelerator_allocCommandBuffer_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500Accelerator_getVRAMDescriptor_Port.cpp) */
 
 
-void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *h = reinterpret_cast<UInt8 *>(header);
-    for (int off = 0; off < 0x20; off += 4) {
-        U32At(h, off) = 0;
-    }
-    typedef void (*Fn0x564)(void *, void *);
-    void **vtable = *reinterpret_cast<void ***>(self);
-    reinterpret_cast<Fn0x564>(vtable[0x564 / 4])(self, h + 0x20);
-    U32At(h, 0x10) = (size - 0x20) / 4;
-    U32At(h, 0x18) = U32At(self, 0x50) - 1;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_init_command_buffer_header_Port.cpp) */
+

@@ -132,24 +132,8 @@ typedef UInt32 (*GetVAFn)(void *);
 /* (re-ported mechanically: see IOATIR500Shared_alloc_buf_handle_Port.cpp) */
 
 
-void IOATIR500Shared::free_buf_handle(void *record, UInt32 handle) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (U32At(self, 0x14) <= handle) {
-        return;
-    }
-    UInt8 *primary = reinterpret_cast<UInt8 *>(U32At(self, 0x10));
-    if (*reinterpret_cast<void **>(primary + handle * 4) != record) {
-        return;
-    }
-    if (handle < U32At(self, 0x1c)) {
-        U32At(self, 0x1c) = handle;
-    }
-    UInt32 wordByteOff = (handle >> 3) & 0x1ffffffc;
-    *reinterpret_cast<void **>(primary + handle * 4) = nullptr;
-    UInt8 *bitmapBase = reinterpret_cast<UInt8 *>(U32At(self, 0x18));
-    UInt32 *w = reinterpret_cast<UInt32 *>(bitmapBase + wordByteOff);
-    *w &= ~(1u << (handle & 0x1f));
-}
+/* (re-ported mechanically: see IOATIR500Shared_free_buf_handle_Port.cpp) */
+
 
 /* ------------------------------------------------------------------ */
 /* alloc_client_shared - real addr 0x16d50.                            */

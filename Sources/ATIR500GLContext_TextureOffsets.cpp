@@ -53,23 +53,8 @@ inline UInt32 &U32At(void *base, int offset) {
  * attributes and fragment textures share fetch hardware). Real special-
  * case: `param2 == 0xffffffff` means "no offset," treated as 0.
  */
-UInt32 ATIR500GLContext::GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt32 param2) {
-    if (buffer == nullptr) return 0;
-    if (param2 == 0xffffffffu) param2 = 0;
+/* (re-ported mechanically: see ATIR500GLContext_GetVertexArrayOffset_Port.cpp) */
 
-    UInt32 kind = U32At(buffer, 0x20);
-    if (kind == 7) {
-        UInt32 base = U32At(buffer, 0x48);
-        return base == 0 ? 0 : base + param2;
-    }
-    if (kind == 6) {
-        void *sub = reinterpret_cast<void *>(U32At(buffer, 0x54));
-        UInt32 base = U32At(sub, 4);
-        if (base == 0) return 0;
-        return base + param2 + U32At(buffer, 0x50) + U32At(accelerator, 0x8a4);
-    }
-    return 0;
-}
 
 /*
  * GetQueryOffset - CONFIRMED (GL_ARB_occlusion_query support). Real,
@@ -77,11 +62,8 @@ UInt32 ATIR500GLContext::GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt3
  * result buffer, with a real base-offset choice (0x210 vs 0x10)
  * depending on `param3`.
  */
-UInt32 ATIR500GLContext::GetQueryOffset(VendorTextureBuffer *buffer, UInt32 param2, UInt32 param3) {
-    UInt32 base = (param3 == 0) ? (param2 * 0x20 + 0x210) : (param2 * 0x20 + 0x10);
-    void *sub = reinterpret_cast<void *>(U32At(buffer, 0x54));
-    return U32At(buffer, 0x50) + U32At(sub, 4) + base + U32At(accelerator, 0x8a4);
-}
+/* (re-ported mechanically: see ATIR500GLContext_GetQueryOffset_Port.cpp) */
+
 
 /*
  * WriteVertexArrayOffset - CONFIRMED, fully transcribed. Real, dense loop

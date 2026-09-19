@@ -50,6 +50,7 @@ inline IOReturn GuardCheck(void *accel, void *surface) {
 }
 } // namespace
 
+
 IOReturn ATIR500DVDContext::show_buffer(int bufferIndex, int param2) {
     void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
     DVDSub_lock(lock);
@@ -61,6 +62,7 @@ IOReturn ATIR500DVDContext::show_buffer(int bufferIndex, int param2) {
     return result;
 }
 
+
 /* (re-ported mechanically: see ATIR500DVDContext_dvd_setup_overlay_Port.cpp) */
 
 
@@ -70,16 +72,8 @@ IOReturn ATIR500DVDContext::show_buffer(int bufferIndex, int param2) {
 /* (re-ported mechanically: see ATIR500DVDContext_dvd_setup_subpicture_Port.cpp) */
 
 
-IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result = GuardCheck(accelerator, boundSurface);
-    if (result == 0) {
-        boundSurface->enable_deint(mode);
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_dvd_enable_deint_Port.cpp) */
+
 
 /* setup_buffers: NOT under the lock in the shipped driver. */
 /* (re-ported mechanically: see ATIR500DVDContext_setup_buffers_Port.cpp) */
@@ -89,33 +83,14 @@ IOReturn ATIR500DVDContext::dvd_enable_deint(int mode) {
 
 
 /* write_regs(offset, value): one register write, byte-swapped to little-endian, under the command lock. */
-IOReturn ATIR500DVDContext::write_regs(UInt32 offset, UInt32 value) {
-    UInt8 *mmio = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(accelerator) + 0x860);
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    DVDSub_lock(lock);
-    IOReturn result;
-    if (U8At(accelerator, 0x80) == 0) {
-        result = 0xe00002d8;
-    } else {
-        *reinterpret_cast<UInt32 *>(mmio + (offset & 0x1ffcu)) = SwapLE32(value);
-        result = 0;
-    }
-    DVDSub_unlock(lock);
-    return result;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_write_regs_Port.cpp) */
+
 
 /* wait_for_stamps / check_stamps: accelerator slots +0x5fc / +0x5f4 take (accel, waitMain) - the decompile
  * shows them with the argument register untouched, i.e. this function's own first parameter passes
  * straight through; +0x558 / +0x554 take the explicit second parameter. Zero = skip that wait/check. */
-IOReturn ATIR500DVDContext::wait_for_stamps(UInt32 waitMain, UInt32 waitIDCT) {
-    if (waitMain != 0) {
-        CallAccel(accelerator, 0x5fc, waitMain);
-    }
-    if (waitIDCT != 0) {
-        CallAccel(accelerator, 0x558, waitIDCT);
-    }
-    return 0;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_wait_for_stamps_Port.cpp) */
+
 
 /* (re-ported mechanically: see ATIR500DVDContext_check_stamps_Port.cpp) */
 

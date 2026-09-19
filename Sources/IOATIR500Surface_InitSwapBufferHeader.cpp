@@ -35,11 +35,5 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-void IOATIR500Surface::init_swap_buffer_header(VendorSwapBufferHeader *header, UInt32 size) {
-    UInt8 *h = reinterpret_cast<UInt8 *>(header);
-    for (int offset = 0; offset < 0x20; offset += 4) {
-        U32At(h, offset) = 0;
-    }
-    U32At(h, 0x1c) = 1;
-    U32At(h, 0x10) = (size - 0x20) / 4;
-}
+/* (re-ported mechanically: see IOATIR500Surface_init_swap_buffer_header_Port.cpp) */
+

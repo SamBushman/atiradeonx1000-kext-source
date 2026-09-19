@@ -63,14 +63,5 @@ inline void ResetRefcount(UInt8 *tex) {
 /* (re-ported mechanically: see IOATIR500Shared_free_Port.cpp) */
 
 
-void IOATIR500Shared::free_handles() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
+/* (re-ported mechanically: see IOATIR500Shared_free_handles_Port.cpp) */
 
-    UInt32 capacity = U32At(self, 0x14);
-    UInt32 totalSize = capacity * 4 + (capacity >> 3);
-    IOATIR500Shared_IOFree(reinterpret_cast<void *>(U32At(self, 0x10)), totalSize);
-    UInt8 *owner = reinterpret_cast<UInt8 *>(U32At(self, 0xc));
-    if (owner != nullptr) {
-        U32At(owner, 0x808) = U32At(owner, 0x808) - totalSize;
-    }
-}

@@ -52,20 +52,9 @@ namespace {
 inline UInt32 &W(void *p, int o) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(p) + o); }
 } // namespace
 
-UInt32 ATIR500Surface::getFramebufferIndex(void) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 result = 0;
-    for (UInt32 i = 0; i < 2; i++) {
-        UInt8 *entry = self + i * 8;
-        if (W(entry, 0xd64) != 0) {
-            UInt8 *rec = reinterpret_cast<UInt8 *>(W(entry, 0xd60));
-            if (*reinterpret_cast<SInt16 *>(rec + 8) != 0 && *reinterpret_cast<SInt16 *>(rec + 10) != 0) {
-                result = i;
-            }
-        }
-    }
-    return result;
-}
+/* (re-ported mechanically: see ATIR500Surface_getFramebufferIndex_Port.cpp) */
+
+
 
 UInt32 ATIR500Surface::alloc_overlay(void) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -77,9 +66,9 @@ UInt32 ATIR500Surface::alloc_overlay(void) {
     return reinterpret_cast<UInt32>(self);
 }
 
-void ATIR500Surface::setup_overlay(void) {
-    /* real: genuinely empty. */
-}
+
+/* (re-ported mechanically: see ATIR500Surface_setup_overlay_Port.cpp) */
+
 
 /*
  * free_overlay - RESOLVED (issue #1, get-it-linking pass), real addr
@@ -90,10 +79,5 @@ void ATIR500Surface::setup_overlay(void) {
  * decompiled) and clears bit 0x2 of +0xd70, the exact inverse of
  * `alloc_overlay`'s own real `|= 2`.
  */
-void ATIR500Surface::free_overlay() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (W(self, 0xd94) != 0) {
-        W(self, 0xd94) = 0;
-    }
-    W(self, 0xd70) &= 0xfffffffd;
-}
+/* (re-ported mechanically: see ATIR500Surface_free_overlay_Port.cpp) */
+

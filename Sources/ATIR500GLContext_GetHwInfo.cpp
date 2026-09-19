@@ -24,22 +24,14 @@
 extern "C" void GetHwInfo_mutex_lock(void *lockPtr) asm("_IOLockLock");
 extern "C" void GetHwInfo_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
 
-UInt32 ATIRadeonX1000::getNumPipes() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xb98); }
-UInt32 ATIRadeonX1000::getChipID() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xc50); }
-UInt32 ATIRadeonX1000::getChipRev() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xc54); }
-UInt32 ATIRadeonX1000::getNumZPipes() { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0xb9c); }
+/* (re-ported mechanically: see ATIRadeonX1000_getNumPipes_Port.cpp) */
 
-IOReturn ATIR500GLContext::get_hw_info(UInt32 *out0, UInt32 *out1, UInt32 *out2, UInt32 *out3, UInt32 *out4) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    ATIRadeonX1000 *accel = *reinterpret_cast<ATIRadeonX1000 **>(self + 0xc8);
-    void *commandLock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840);
+/* (re-ported mechanically: see ATIRadeonX1000_getChipID_Port.cpp) */
 
-    GetHwInfo_mutex_lock(commandLock);
-    *out0 = accel->getNumPipes();
-    *out1 = accel->getChipID();
-    *out2 = accel->getChipRev();
-    *out3 = accel->getNumZPipes();
-    *out4 = 0;
-    GetHwInfo_mutex_unlock(commandLock);
-    return 0;
-}
+/* (re-ported mechanically: see ATIRadeonX1000_getChipRev_Port.cpp) */
+
+/* (re-ported mechanically: see ATIRadeonX1000_getNumZPipes_Port.cpp) */
+
+
+/* (re-ported mechanically: see ATIR500GLContext_get_hw_info_Port.cpp) */
+

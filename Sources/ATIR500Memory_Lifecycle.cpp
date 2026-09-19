@@ -38,6 +38,8 @@ static_assert(sizeof(ATIR500Memory) == 0x28, "ATIR500Memory must be 0x28 bytes")
 extern "C" void FUN_00018de8(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* init()'s own stub instance */
 extern "C" void FUN_00019198(void *chunk, UInt32 size) asm("_IOFreeAligned"); /* free()'s own stub instance (distinct real address, same real target) */
 
+/* free()'s own stub instance (distinct real address, same real target) */
+
 bool ATIR500Memory::init() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
@@ -56,6 +58,8 @@ bool ATIR500Memory::init() {
     return true;
 }
 
+
+
 void ATIR500Memory::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
@@ -70,3 +74,4 @@ void ATIR500Memory::free() {
     /* real: OSObject::free() (raw decompile: `(*pcRam0000004c)(this)`, see header comment) */
     OSObject::free();
 }
+

@@ -136,12 +136,14 @@ extern "C" SInt32 FUN_00008340(void *countField) asm("_OSDecrementAtomic");
 extern "C" void GLStop_mutex_lock(void *) asm("_IOLockLock");
 extern "C" void GLStop_mutex_unlock(void *) asm("_IOLockUnlock");
 
+
 void ATIR500GLContext::stop(IOService *provider) {
     void *mtx = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(provider) + 0x840);
     GLStop_mutex_lock(mtx);
     IOATIR500GLContext::stop(provider);
     GLStop_mutex_unlock(mtx);
 }
+
 
 /* (re-ported mechanically: see IOATIR500GLContext_stop_Port.cpp) */
 

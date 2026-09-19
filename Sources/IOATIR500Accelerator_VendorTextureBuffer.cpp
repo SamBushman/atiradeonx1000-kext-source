@@ -48,11 +48,8 @@ extern "C" void VendorTexBuf_IOFree(void *ptr, UInt32 size) asm("_IOFree");
 /* (re-ported mechanically: see IOATIR500Accelerator_allocVendorTextureBuffer_Port.cpp) */
 
 
-void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    VendorTexBuf_IOFree(buffer, size);
-    U32At(self, 0x808) -= size;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_releaseVendorTextureBuffer_Port.cpp) */
+
 
 /*
  * removeTransferFromGART - CONFIRMED. Real body: if the buffer's own
@@ -65,25 +62,13 @@ void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffe
  * with the buffer's own +8/+4 fields, and clears the buffer's own +4
  * field.
  */
-void IOATIR500Accelerator::removeTransferFromGART(VendorTransferBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *buf = reinterpret_cast<UInt8 *>(buffer);
-    if (buf == nullptr) {
-        return;
-    }
-    if (*reinterpret_cast<SInt16 *>(buf + 0xc) == 4) {
-        UInt8 *prev = *reinterpret_cast<UInt8 **>(buf + 0x34);
-        UInt8 *next = *reinterpret_cast<UInt8 **>(buf + 0x38);
-        U32At(prev, 0x38) = reinterpret_cast<UInt32>(next);
-        *reinterpret_cast<UInt8 **>(buf + 0x38) = buf;
-        U32At(next, 0x34) = reinterpret_cast<UInt32>(prev);
-        *reinterpret_cast<UInt8 **>(buf + 0x34) = buf;
-    }
-    typedef void (*Fn0x5a4)(void *, UInt32, UInt32);
-    (*reinterpret_cast<Fn0x5a4 *>(*reinterpret_cast<void ***>(self) + (0x5a4 / 4)))(self, U32At(buf, 8), U32At(buf, 4));
-    U32At(buf, 4) = 0;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_removeTransferFromGART_Port.cpp) */
 
+
+/*
+ * ATIRadeonX1000's own copies - CONFIRMED (see file header note above):
+ * real, plain explicit-base-qualified forwards, not genuine overrides.
+ */
 /*
  * ATIRadeonX1000's own copies - CONFIRMED (see file header note above):
  * real, plain explicit-base-qualified forwards, not genuine overrides.
@@ -92,13 +77,18 @@ VendorTextureBuffer *ATIRadeonX1000::allocVendorTextureBuffer(UInt32 size) {
     return IOATIR500Accelerator::allocVendorTextureBuffer(size);
 }
 
+
+
 void ATIRadeonX1000::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size) {
     IOATIR500Accelerator::releaseVendorTextureBuffer(buffer, size);
 }
 
+
+
 void ATIRadeonX1000::removeTransferFromGART(VendorTransferBuffer *buffer) {
     IOATIR500Accelerator::removeTransferFromGART(buffer);
 }
+
 
 /*
  * alloc_surface_buffer - RESOLVED (issue #1, get-it-linking pass), real
@@ -106,6 +96,5 @@ void ATIRadeonX1000::removeTransferFromGART(VendorTransferBuffer *buffer) {
  * (not overridden by the subclass - identical address on both vtables,
  * matching this project's own already-established header comment).
  */
-SInt32 IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500Accelerator_alloc_surface_buffer_Port.cpp) */
+

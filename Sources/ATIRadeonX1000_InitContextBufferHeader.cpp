@@ -55,20 +55,11 @@ inline void ZeroHeader(VendorContextBufferHeader *header) {
 }
 } // namespace
 
-void IOATIR500GLContext::init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size) {
-    ZeroHeader(header);
-    header->formatTag = 1;
-    header->capacityField = ((size - 0x20) >> 2) - 0x91;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_init_context_buffer_header_Port.cpp) */
 
-void IOATIR5002DContext::init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size) {
-    ZeroHeader(header);
-    header->formatTag = 1;
-    header->capacityField = ((size - 0x20) >> 2) - 4;
-}
 
-void IOATIR500DVDContext::init_context_buffer_header(VendorContextBufferHeader *header, UInt32 size) {
-    ZeroHeader(header);
-    header->formatTag = 1;
-    header->capacityField = ((size - 0x20) >> 2) - 0x16;
-}
+/* (re-ported mechanically: see IOATIR5002DContext_init_context_buffer_header_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500DVDContext_init_context_buffer_header_Port.cpp) */
+

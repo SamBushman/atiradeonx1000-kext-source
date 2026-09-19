@@ -94,29 +94,11 @@ static bool HZMEM_ResolveRecord(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 
     return true;
 }
 
-UInt32 HZMEM_GetBlockOffset(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
-    UInt8 *record;
-    UInt32 code;
-    if (!HZMEM_ResolveRecord(hizData, surfaceHzField, blockKind, 0xfffffffe, &record, &code)) {
-        return code;
-    }
-    return U32At(record, 4);
-}
+/* (re-ported mechanically: see _HZMEM_GetBlockOffset_Port.cpp) */
 
-UInt32 HZMEM_GetBlockCount(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
-    UInt8 *record;
-    UInt32 code;
-    if (!HZMEM_ResolveRecord(hizData, surfaceHzField, blockKind, 0xfffffffe, &record, &code)) {
-        return code;
-    }
-    return U32At(record, 8);
-}
 
-UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
-    UInt8 *record;
-    UInt32 code;
-    if (!HZMEM_ResolveRecord(hizData, surfaceHzField, blockKind, 1, &record, &code)) {
-        return code;
-    }
-    return U32At(record, 8) != U32At(record, 0xc);
-}
+/* (re-ported mechanically: see _HZMEM_GetBlockCount_Port.cpp) */
+
+
+/* (re-ported mechanically: see _HZMEM_IsPartial_Port.cpp) */
+

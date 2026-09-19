@@ -84,15 +84,20 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/ATIR500Memory.h"
 
+
 UInt32 IOATIR500Accelerator::setup3D(void) {
     /* CORRECTED (ledger pass): the shipped body is `bl allocMoreCommandBuffers; blr` - the call's result is returned
      * unchanged (the decompile's void typing hid it). Callers (the GL/DVD start) treat 0 as failure. */
     return allocMoreCommandBuffers(0, 0x20000);
 }
 
+
 namespace {
 inline UInt8 *ByteAt(void *base, int offset) { return reinterpret_cast<UInt8 *>(base) + offset; }
 } // namespace
+
+/* (re-ported mechanically: see IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp) */
 
@@ -102,32 +107,23 @@ bool ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 al
     return pool->alloc(elem, size, alignment, 0, *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x84c)) != 0;
 }
 
-void ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement *elem) {
-    ATIR500Memory *pool = *reinterpret_cast<ATIR500Memory **>(reinterpret_cast<UInt8 *>(this) + 0x93c);
-    pool->dealloc(elem);
-}
 
-void IOATIR500Accelerator::addTransferToGART(VendorTransferBuffer *buffer) {
-    UInt8 *bufBytes = reinterpret_cast<UInt8 *>(buffer);
-    addToGART(reinterpret_cast<IOMemoryDescriptor *>(*reinterpret_cast<UInt32 *>(bufBytes + 8)),
-              reinterpret_cast<UInt32 *>(bufBytes + 4));
-}
+/* (re-ported mechanically: see ATIRadeonX1000_tmpDeallocVRAM_Port.cpp) */
 
-void IOATIR500Accelerator::addToGART(IOMemoryDescriptor *descriptor, UInt32 * /* real: unused */) {
-    /* real: (**(code**)(*descriptor + 0x590))(); - a standard Apple IOMemoryDescriptor vtable
-     * slot, real target/role not identified (external Apple ABI fact, not this project's own
-     * code) - RESOLVED (as much as possible), issue #26. See Headers/IOATIR500Accelerator.h's
-     * own header comment for the full account, including why this settles (not airtight, but
-     * strong) map_transfer_to_GART's own gating-condition question. */
-    typedef void (*Fn0x590)(void *);
-    UInt32 *vtable = *reinterpret_cast<UInt32 **>(descriptor);
-    (*reinterpret_cast<Fn0x590 *>(vtable + (0x590 / 4)))(descriptor);
-}
+
+/* (re-ported mechanically: see IOATIR500Accelerator_addTransferToGART_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Accelerator_addToGART_Port.cpp) */
+
+
 
 void ATIRadeonX1000::addToGART(IOMemoryDescriptor *descriptor, UInt32 *result) {
     /* CONFIRMED real trivial pass-through - no added logic. */
     IOATIR500Accelerator::addToGART(descriptor, result);
 }
+
+
 
 void ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
     IOATIR500Accelerator::addTransferToGART(buffer);
@@ -140,3 +136,4 @@ void ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
         *reinterpret_cast<UInt32 *>(self + 0x8a0) = 1;
     }
 }
+

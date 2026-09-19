@@ -38,20 +38,11 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Shared.h"
 
-void IOATIR500Surface::map_transfer_to_GART(VendorTransferBuffer *buffer) {
-    accelerator->addTransferToGART(buffer);
-    accelerator->freeToAllocGART(nullptr, nullptr, nullptr, this, nullptr, buffer);
-}
+/* (re-ported mechanically: see IOATIR500Surface_map_transfer_to_GART_Port.cpp) */
 
-void IOATIR5002DContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
-    accelerator->addTransferToGART(buffer);
-    accelerator->freeToAllocGART(this, nullptr, nullptr, boundSurface, sharedAllocator, buffer);
-}
 
-void IOATIR500DVDContext::map_transfer_to_GART(VendorTransferBuffer *buffer) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Surface *excludeSurface = *reinterpret_cast<IOATIR500Surface **>(self + 0xf8);
-    IOATIR500Shared *excludeShared = *reinterpret_cast<IOATIR500Shared **>(self + 0x84);
-    accelerator->addTransferToGART(buffer);
-    accelerator->freeToAllocGART(nullptr, this, nullptr, excludeSurface, excludeShared, buffer);
-}
+/* (re-ported mechanically: see IOATIR5002DContext_map_transfer_to_GART_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500DVDContext_map_transfer_to_GART_Port.cpp) */
+

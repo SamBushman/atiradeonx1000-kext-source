@@ -30,18 +30,4 @@
 
 extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
 
-extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) {
-    switch (windowModeBits & 0xf) {
-    case 3:  return 7;
-    case 4:  return 0xb;
-    case 6:  return 0x27;
-    case 7:  return 0x2b;
-    case 8:  return 0x2c;
-    case 9:  return 0x2a;
-    case 10: return 8;
-    case 11: return 0x18;
-    case 12: return 0x1e;
-    case 13: return 0x12;
-    default: return 0;
-    }
-}
+/* (re-ported mechanically: see window_mode_to_ati_format_Port.cpp) */

@@ -73,60 +73,33 @@ namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-UInt32 IOATIR500Surface::update_ref_stamps(UInt32 /* real: unused */, UInt32 tag) {
-    return tag;
-}
+/* (re-ported mechanically: see IOATIR500Surface_update_ref_stamps_Port.cpp) */
 
-void IOATIR500Surface::increment_refcounts(UInt32 /* real: unused */) {
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
 
-void IOATIR500Surface::decrement_refcounts(UInt32 /* real: unused */) {
-    /* CONFIRMED: real function body is empty. Nothing here. */
-}
+/* (re-ported mechanically: see IOATIR500Surface_increment_refcounts_Port.cpp) */
 
-void ATIR500Surface::invalidate() {
-    UInt8 *entry = reinterpret_cast<UInt8 *>(this) + 0xc34;
-    UInt32 count = U32At(accelerator, 0xcc);
-    for (UInt32 i = 0; i < count; i++, entry += 0x94) {
-        U32At(reinterpret_cast<void *>(U32At(entry, 0)), 0x1c) |= 1;
-    }
-}
 
-UInt32 IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer * /* real: unused */) {
-    /* CONFIRMED: real base-class body always succeeds, no side effects. RETURN TYPE
-     * CORRECTED, issue #22: real body is `return 1;`, not void. */
-    return 1;
-}
+/* (re-ported mechanically: see IOATIR500Surface_decrement_refcounts_Port.cpp) */
 
-UInt32 IOATIR500Surface::complete_vram(ATIR500SurfaceBuffer * /* real: unused */) {
-    /* CONFIRMED: real base-class body always succeeds, no side effects. RETURN TYPE
-     * CORRECTED, issue #22: real body is `return 1;`, not void. */
-    return 1;
-}
 
-SInt32 IOATIR500Surface::is_flip_allowed() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    UInt32 idSlot = U32At(self, 0xc14);
-    if ((*(accel + 0x80) == 0) || (idSlot == 0xffff) ||
-        (this != *reinterpret_cast<IOATIR500Surface **>(accel + idSlot * 0x20 + 0xe8))) {
-        return 0;
-    }
-    return 1;
-}
+/* (re-ported mechanically: see ATIR500Surface_invalidate_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_prepare_vram_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_complete_vram_Port.cpp) */
+
+
+/* (re-ported mechanically: see IOATIR500Surface_is_flip_allowed_Port.cpp) */
+
 
 /* (re-ported mechanically: see ATIR500Surface_is_flip_allowed_Port.cpp) */
 
 
-SInt32 IOATIR500Surface::is_surface_size_supported(SInt16 width, SInt16 height) {
-    UInt8 *accel = reinterpret_cast<UInt8 *>(accelerator);
-    if (static_cast<UInt16>(width) <= *reinterpret_cast<UInt16 *>(accel + 0xa8) &&
-        static_cast<UInt16>(height) <= *reinterpret_cast<UInt16 *>(accel + 0xaa)) {
-        return 1;
-    }
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500Surface_is_surface_size_supported_Port.cpp) */
+
+
 
 SInt32 ATIR500Surface::is_surface_size_supported(SInt16 width, SInt16 height) {
     SInt32 base = IOATIR500Surface::is_surface_size_supported(width, height);
@@ -135,3 +108,4 @@ SInt32 ATIR500Surface::is_surface_size_supported(SInt16 width, SInt16 height) {
     }
     return 1;
 }
+

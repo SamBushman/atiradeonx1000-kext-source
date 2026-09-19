@@ -48,10 +48,27 @@ extern "C" void SurfExtM2_mutex_unlock(void *) asm("_IOLockUnlock");
  * already-declared IOReturn return type is correct; propagated
  * explicitly here rather than matching Ghidra's own display choice.
  */
+/*
+ * surface_read_lock - CONFIRMED, real addr 0x164c0. A real, complete,
+ * one-line thin forward - already documented correctly in the header.
+ * Ghidra's own decompile shows this as `void` (discarding the inner
+ * call's result), but that's a real PPC tail-call-passthrough display
+ * artifact, not real behavior: a bare `bl` immediately followed by
+ * return leaves r3 holding the inner call's own result, which the real
+ * caller (expecting a real IOReturn) does receive - the header's own
+ * already-declared IOReturn return type is correct; propagated
+ * explicitly here rather than matching Ghidra's own display choice.
+ */
 IOReturn IOATIR500Surface::surface_read_lock(IOAccelSurfaceData *data, UInt32 size) {
     return surface_lock_options(static_cast<eLockType>(1), 2, data, size);
 }
 
+
+/*
+ * surface_read_unlock - CONFIRMED, real addr 0x15120. A real, complete,
+ * one-line thin forward - same real tail-call-passthrough note as
+ * surface_read_lock above applies here too.
+ */
 /*
  * surface_read_unlock - CONFIRMED, real addr 0x15120. A real, complete,
  * one-line thin forward - same real tail-call-passthrough note as
@@ -61,6 +78,13 @@ IOReturn IOATIR500Surface::surface_read_unlock() {
     return surface_unlock_options(static_cast<eLockType>(1), 2);
 }
 
+
+/*
+ * surface_read_unlock_options - RESOLVED, real addr 0x15160. Real
+ * signature CORRECTED (1 real param, not 0 - see header). A real,
+ * complete, one-line thin forward; real return value propagated per the
+ * same tail-call-passthrough reasoning as surface_read_lock/unlock above.
+ */
 /*
  * surface_read_unlock_options - RESOLVED, real addr 0x15160. Real
  * signature CORRECTED (1 real param, not 0 - see header). A real,
@@ -70,6 +94,7 @@ IOReturn IOATIR500Surface::surface_read_unlock() {
 IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
     return surface_unlock_options(static_cast<eLockType>(1), param1);
 }
+
 
 /*
  * get_state - CONFIRMED, real addr 0x10f30. Real body: a real vtable
@@ -93,9 +118,22 @@ IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
  * header comment for why this differs from set_shape_backing's own
  * genuinely-void real behavior.
  */
+/*
+ * set_shape - RESOLVED, real addr 0x159a0. Real signature CORRECTED (4
+ * real params, not 0 - Ghidra's own decompile hid the real forwarding
+ * args entirely; resolved via the real raw PPC register moves - see
+ * header comment). Real body: a thin forward into
+ * set_shape_backing_length_ext with the SAME real 0xffffffff sentinel
+ * set_shape_backing_length's own forward uses, and a real literal 0 for
+ * both param3 and param7. Real return value propagated (real
+ * disassembly is a pure tail branch with no r3 postprocessing) - see
+ * header comment for why this differs from set_shape_backing's own
+ * genuinely-void real behavior.
+ */
 IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4) {
     return set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffffu, region, param4, 0);
 }
+
 
 /*
  * surface_flush - CONFIRMED, real addr 0x14e70. Real body matches this
@@ -121,6 +159,16 @@ IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 
  * for this specific function at all, an `__stdcall`-inferred artifact -
  * see header comment).
  */
+/*
+ * surface_control / surface_control_alias - CONFIRMED, real addr
+ * 0x15cb0 (a real, deliberate alias - same function address for both
+ * selectors). Real signature CORRECTED (2 real params, not 3 - the
+ * function's own real first parameter fills the role of `this` itself,
+ * used directly as the receiver for set_surface_blocking/
+ * set_volatile_state - Ghidra's own raw dump showed no separate `this`
+ * for this specific function at all, an `__stdcall`-inferred artifact -
+ * see header comment).
+ */
 IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 value, UInt32 *out) {
     (void)out; /* the third (output) pointer is never used */
     IOReturn result;
@@ -134,6 +182,7 @@ IOReturn IOATIR500Surface::surface_control(UInt32 selector, UInt32 value, UInt32
     }
     return result;
 }
+
 
 /* NB: there is no separate surface_control_alias in the shipped kext: external-method table entry 18 is the
  * SAME function as entry 16 (surface_control). The wrapper this project used to define had no stock counterpart

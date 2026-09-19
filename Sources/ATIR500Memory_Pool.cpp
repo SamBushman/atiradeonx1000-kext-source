@@ -70,21 +70,5 @@ inline UInt32 *FirstSearchNode(UInt8 *self) {
 /* (re-ported mechanically: see ATIR500Memory_add_to_stack_Port.cpp) */
 
 
-int ATIR500Memory::total_free() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 *cur = FirstSearchNode(self);
-    int total = 0;
+/* (re-ported mechanically: see ATIR500Memory_total_free_Port.cpp) */
 
-    for (;;) {
-        UInt32 *node = cur;
-        UInt32 *next = reinterpret_cast<UInt32 *>(cur[0]);
-        if (next == 0) {
-            break;
-        }
-        if (static_cast<SInt32>(node[3]) < 0) {
-            total += static_cast<SInt32>(next[2] - node[2]);
-        }
-        cur = next;
-    }
-    return total;
-}

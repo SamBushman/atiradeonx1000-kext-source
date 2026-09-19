@@ -72,18 +72,8 @@ extern "C" void ClientMem_thread_block(UInt32 continuation) asm("_thread_block")
 extern "C" void ClientMem_IOSleep(UInt32 milliseconds) asm("_IOSleep");
 extern "C" int kernelPageSize asm("_page_size"); /* kernel page_size (0x1000). Ghidra labels every zero-immediate data relocation in this kext "_ASICSupportsAGP"; the real target of each site comes from the Mach-O relocation table (issue #58 follow-up) */
 
-void IOATIR500GLContext::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size, UInt32 extra) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *h = reinterpret_cast<UInt8 *>(header);
-    for (int off = 0; off < 0x20; off += 4) {
-        U32At(h, off) = 0;
-    }
-    U32At(h, 0x14) = extra;
-    U32At(h, 0x20) = 0x1000000;
-    U32At(h, 0x10) = (size - 0x20) >> 2;
-    U32At(h, 0x1c) = 1;
-    U32At(h, 0x18) = U32At(self, 0x7c);
-}
+/* (re-ported mechanically: see IOATIR500GLContext_init_command_buffer_header_Port.cpp) */
+
 
 /* (re-ported mechanically: see IOATIR500GLContext_clientMemoryForType_Port.cpp) */
 

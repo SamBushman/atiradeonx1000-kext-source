@@ -10,10 +10,5 @@
 
 #include "../Headers/ATIR500GLContext.h"
 
-void ATIR500GLContext::invalidate() {
-    /* Real: sets a dirty/invalidate bit (bit 0) on the object allocated
-     * and zeroed at this+0x108 by start() - that object's own type and
-     * the meaning of its +0x1c field are UNKNOWN. */
-    UInt8 *linked = *reinterpret_cast<UInt8 **>(reinterpret_cast<UInt8 *>(this) + 0x108);
-    *reinterpret_cast<UInt32 *>(linked + 0x1c) |= 1;
-}
+/* (re-ported mechanically: see ATIR500GLContext_invalidate_Port.cpp) */
+

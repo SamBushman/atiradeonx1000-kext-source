@@ -83,10 +83,5 @@ extern const VendorExternalMethod kSurfaceMethods[19] = {
  * `IOExternalMethod*`-shaped pointer IOUserClient's own base declaration
  * uses, not this project's own richer `VendorExternalMethod*`).
  */
-IOExternalMethod *ATIR500Surface::getTargetAndMethodForIndex(IOService **target, UInt32 selector) {
-    *target = this;
-    if (selector > 0x12) {
-        return nullptr;
-    }
-    return const_cast<IOExternalMethod *>(reinterpret_cast<const IOExternalMethod *>(&kSurfaceMethods[selector]));
-}
+/* (re-ported mechanically: see ATIR500Surface_getTargetAndMethodForIndex_Port.cpp) */
+

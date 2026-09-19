@@ -63,17 +63,8 @@ extern "C" void GLContext_mutex_unlock(void *) asm("_IOLockUnlock");
  * pattern this project already established for `waitForTimeStamp`
  * itself, just a different accelerator-relative slot).
  */
-IOReturn IOATIR500GLContext::finish() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    typedef SInt32 (*Fn0x55c)(void *, UInt32);
-    SInt32 delta = (*reinterpret_cast<Fn0x55c *>(*reinterpret_cast<void ***>(accel) + (0x55c / 4)))(accel, U32At(self, 0x7c));
-    if (delta == -1) {
-        return 0xe00002d6;
-    }
-    U32At(accel, 0x7a8) += delta;
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_finish_Port.cpp) */
+
 
 /*
  * wait_for_stamp - CONFIRMED to exist and its own real control flow -
@@ -87,18 +78,20 @@ IOReturn IOATIR500GLContext::finish() {
  * already established elsewhere in this project) is trusted over the
  * raw decompile's apparent zero-argument call, passing `tag` through.
  */
-IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 tag) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    void *accel = *reinterpret_cast<void **>(self + 0xc8);
-    typedef SInt32 (*Fn0x550)(void *, UInt32);
-    SInt32 delta = (*reinterpret_cast<Fn0x550 *>(*reinterpret_cast<void ***>(accel) + (0x550 / 4)))(accel, tag);
-    if (delta == -1) {
-        return 0xe00002d6;
-    }
-    U32At(accel, 0x768) += delta;
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_wait_for_stamp_Port.cpp) */
 
+
+/*
+ * set_surface_volatile_state - CONFIRMED, simple: stores the raw bits
+ * at this+0xc4, then forwards to the bound surface's own
+ * set_volatile_state if one is bound. Real decompile shows the forward
+ * call with zero visible arguments (the same real Ghidra calling-
+ * convention-inference artifact this project documents elsewhere) -
+ * `set_volatile_state`'s own real confirmed signature takes the state
+ * value directly (issue #1, get-it-linking pass - see
+ * IOATIR500Surface.h's own signature correction), so `state` itself is
+ * the natural, obvious argument passed through here.
+ */
 /*
  * set_surface_volatile_state - CONFIRMED, simple: stores the raw bits
  * at this+0xc4, then forwards to the bound surface's own
@@ -120,34 +113,17 @@ IOReturn IOATIR500GLContext::set_surface_volatile_state(UInt32 state) {
     return 0;
 }
 
+
 /*
  * set_swap_rect / set_swap_interval - CONFIRMED, both simple: store 4
  * (or 2) raw SInt16 fields, then invalidate() the bound surface if one
  * is bound.
  */
-IOReturn IOATIR500GLContext::set_swap_rect(SInt32 x, SInt32 y, SInt32 w, SInt32 h) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    S16At(self, 0x90) = static_cast<SInt16>(x);
-    S16At(self, 0x92) = static_cast<SInt16>(y);
-    S16At(self, 0x94) = static_cast<SInt16>(w);
-    S16At(self, 0x96) = static_cast<SInt16>(h);
-    IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
-    if (surface != nullptr) {
-        surface->invalidate();
-    }
-    return 0;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_set_swap_rect_Port.cpp) */
 
-IOReturn IOATIR500GLContext::set_swap_interval(SInt32 a, SInt32 b) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    S16At(self, 0x98) = static_cast<SInt16>(a);
-    S16At(self, 0x9a) = static_cast<SInt16>(b);
-    IOATIR500Surface *surface = *reinterpret_cast<IOATIR500Surface **>(self + 0x290);
-    if (surface != nullptr) {
-        surface->invalidate();
-    }
-    return 0;
-}
+
+/* (re-ported mechanically: see IOATIR500GLContext_set_swap_interval_Port.cpp) */
+
 
 /*
  * delete_texture - CONFIRMED: bounds-checked lookup in the client
@@ -213,14 +189,8 @@ IOReturn IOATIR500GLContext::set_swap_interval(SInt32 a, SInt32 b) {
  * IOATIR500Accelerator::setup_stereo with its own two arguments
  * swapped (real decompile: `setup_stereo(accel, param2, param1)`).
  */
-IOReturn IOATIR500GLContext::set_stereo(UInt32 param1, UInt32 param2) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    IOATIR500Accelerator *accel = *reinterpret_cast<IOATIR500Accelerator **>(self + 0xc8);
-    GLContext_mutex_lock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    IOReturn result = accel->setup_stereo(param2, param1);
-    GLContext_mutex_unlock(*reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accel) + 0x840));
-    return result;
-}
+/* (re-ported mechanically: see IOATIR500GLContext_set_stereo_Port.cpp) */
+
 
 /*
  * connectClient - CONFIRMED real behavior (kext offset 0x86d0, already
