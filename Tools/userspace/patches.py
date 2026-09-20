@@ -22,6 +22,8 @@ PATCHES = {
     # the handler argument is a function pointer Ghidra typed as a plain byte pointer
     '__cxxabiv1____terminate': _conv_with([('(*param_1)();', '((int (*)())param_1)();')]),
     '__cxxabiv1____unexpected': _conv_with([('(*param_1)();', '((int (*)())param_1)();')]),
+    # `operator=` on a long templated class: the sanitizer keeps the `=`, so the call reads as an assignment to a variable (the call is lost)
+    'TIntermAggregate__addToPragmaTable': lambda raw, conv: re.sub(r'\b(std___Rb_tree_\w+_operator)=\(', r'\1_(', conv),
     # SUB42 of a pointer argument: GBITS's (dead) float branch cannot type-check a pointer
     'FUN_000c6470': _conv_with([('SUB42(param_3,0)', 'SUB42((unsigned long)param_3,0)')]),
     # local_28 is a pointer to a record (indexed as local_28[0x26]); Ghidra declared it as a one-element array of undefined4

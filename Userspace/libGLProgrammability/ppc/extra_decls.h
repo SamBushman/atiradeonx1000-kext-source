@@ -292,5 +292,4 @@ extern int (*dyld_lazy_symbol_binding_entry_point)();
 extern int guardBlockBeginVal;
 extern int guardBlockEndVal;
 extern int guardBlockSize;
-extern int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator;
 extern int temporaryAllocator;

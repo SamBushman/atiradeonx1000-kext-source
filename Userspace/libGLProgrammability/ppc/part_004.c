@@ -2975,7 +2975,7 @@ int TIntermAggregate__addToPragmaTable(this, param_1)
   *(int *)(*(int *)(this_00 + 4) + 0xc) = *(int *)(this_00 + 4);
   *(unsigned char
     **)(this + 0x68) = this_00;
-  std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator=(this_00,(unsigned char *)param_1);
+  std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_(this_00,(unsigned char *)param_1);
   return;
 }
 

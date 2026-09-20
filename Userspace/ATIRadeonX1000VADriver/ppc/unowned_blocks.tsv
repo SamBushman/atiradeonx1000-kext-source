@@ -1,5 +1,4 @@
 start	end	kind	owner	instructions	calls
-10d0	10e8	other	FUN_000010c0	6	
 20f4	2100	padding	FUN_000020d4	3	
 2308	2310	padding	_AVACreateRenderer	2	
 2334	2340	padding	_AVACreateRenderer	3	

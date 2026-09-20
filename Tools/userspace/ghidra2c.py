@@ -198,8 +198,6 @@ for d in data_syms:
     elif d in deref: decls.append('extern unsigned char *%s;' % d)
     else: decls.append('extern unsigned char %s;' % d)
 if re.search(r'\bMACH_HEADER\b', allbody): decls.append('extern MACH_HEADER_t MACH_HEADER;')
-for sm in sorted(set(re.findall(r'\b(section_[0-9a-f]{8})\b', allbody))): decls.append('extern GhidraMachOSection %s;' % sm)
-for cm in sorted(set(re.findall(r'\b(\w+_command_[0-9a-f]{8})\b', allbody))): decls.append('extern GhidraMachOCommand %s;' % cm)
 for mh in sorted(set(re.findall(r'\b(__mh_\w+_header)\b', allbody))): decls.append('extern MACH_HEADER_t %s;' % mh)
 ftab = set(re.findall(r'\(\s*((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\)\s*\[', allbody)) | set(re.findall(r'\b((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\[', allbody)) | tables
 for f in sorted(set(re.findall(r'\bFLOAT_[0-9a-f]{8}\b', allbody))): decls.append('extern float %s%s;' % (f, '[]' if f in ftab else ''))
@@ -316,6 +314,8 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\bregister0x[0-9a-f]{8}\b', '((unsigned int)__builtin_frame_address(0))', b)
             b = re.sub(r'&\s*(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '((unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\(\s*(?:DAT|UNK)_([0-9a-f]{8})\s*\)\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
+            b = re.sub(r'\b\w+_command_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOCommand *)0x%s)' % m.group(1), b)   # a constant that lands in the Mach-O header area (e.g. 0x1c = first load command), not an object
+            b = re.sub(r'\bsection_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOSection *)0x%s)' % m.group(1), b)
             b = re.sub(r'\(float\)\(\(unsigned char \*\)(0x[0-9a-f]+)\)', r'(float)\1', b)
             b = re.sub(r'\b(?:DAT|UNK)_([0-9a-f]{8})\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)

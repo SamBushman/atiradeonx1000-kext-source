@@ -84,6 +84,30 @@ name their imported symbol; literals show the float). The generated C is re-pars
 This is a faithful *representation* of the data; it is not yet linked at the original addresses (the corpora reference data by Ghidra's `DAT_`/`PTR_`
 names, declared `extern`). `Info.plist` of each bundle sits beside it.
 
+## Linking (issue #61)
+
+`Tools/userspace/link_corpus.py CORPUS STOCK_BINARY GHIDRA_DATA.tsv OUTDIR --config Tools/userspace/link_config/<x>.json` turns a corpus into a build directory that
+`build.sh` (run on the Tiger G5) compiles and links into a dylib/bundle. Inputs: the corpus, the stock Mach-O (relocation entries, symbol/indirect tables, sections),
+and `gs/DumpData.java` output (every defined data item with Ghidra's type, plus `.syms` for plain labels). What it does:
+
+* **data symbol map** (`symbol_map.tsv` in the output dir): every `DAT_/PTR_/s_/FLOAT_/...` name the code uses -> address, section, Ghidra type, C declaration, content (pointer target or word), and where the link defines it;
+* `decls.h` with an assembler label on every extern (C name `_glClear` would otherwise be the symbol `__glClear`), scalars given Ghidra's real width, function pointers/arrays kept as the corpus uses them;
+* `data.s`: all non-code sections as assembler data, one label per referenced address (byte-precise for 16-bit tables), pointer words as `.long symbol+off` from the binary's own relocations (and Ghidra's pointer types for read-only text), symbol-pointer slots as ordinary initialised words, zerofill objects as `.zerofill`; tables with pointers move out of `__TEXT` (dyld 10.4 cannot relocate there);
+* `exports.txt` (the stock's exports), toolchain-supplied code dropped (crt atexit shim, `dyld_stub_binding_helper`, register save/restore millicode, C++ EH runtime linked from libstdc++), clipped function entries and exported entry points that fall through into a function emitted as asm next to it;
+* link-time semantic rewrites (`rewrites.py`, listed in `rewrites.txt`): the lwarx/stwcx. idiom (`in_RESERVE`/`storeWordConditionalIndexed`, 319 sites) as compare-and-swap loops; call sites Ghidra prints by short C++ name bound to the callee the stock code actually calls (`bind_calls`, leaves 27 unconfirmed same-class guesses in `rewrites.txt`); data-address literals in code symbolised; constants that Ghidra printed as function names turned back into literals.
+
+Findings that changed the corpora: **libGL, GA and VA had been imported into Ghidra as `PowerPC:BE:64:VLE-32addr`** (GLDriver and libGLProgrammability were `BE:32`); integer registers were `undefined8`/`longlong`, so a linked GA returned 0 from `window_mode_to_ati_format` (value in r4 of a register pair). They were re-imported as 32-bit PowerPC (`Tools/userspace/pipeline/regen_32bit.sh`) and the three corpora regenerated (callee check still 0 differences; VA's `FUN_000010c0` grew 24 bytes that a clipped block had held). libGL's 888 dispatch stubs lose float arguments in any Ghidra rendering (FPR-passed), so the link build regenerates them from one template with prototypes from `<OpenGL/gl.h>`; the dispatch index of every stub is checked against the stock machine code (`check_gl_stub_indices.py`, 888/888). One corpus defect fixed: `operator=` on a long templated class was sanitised into an assignment (call lost).
+
+| binary | links | loads | behavioural check (`Tests/userspace/`) |
+|---|---|---|---|
+| libGL | yes, 893 exports = stock | yes; the whole GL process runs on it | identical output to the system libGL |
+| ATIRadeonX1000GA | yes, 9 exports | yes | 0 differences over 2.16M inputs; data table identical |
+| ATIRadeonX1000VADriver | yes, 4 exports | yes | `AVAGetRendererInfo` identical |
+| libGLProgrammability | yes, 1086 exports = stock (plus libstdc++ for the EH runtime) | yes | **not equivalent yet**: the ARB program parser returns different status for `MOV`/`OUTPUT`/`PARAM` statements (`glprog_parsestatement_probe.c`); issue #60 |
+| ATIRadeonX1000GLDriver | not attempted end to end (link_corpus produces the build dir: 63 exports, 1708 data labels, 47 atomic idioms; EH-frame/crt functions still to exclude) | - | - |
+
+Limits: C++ exceptions cannot work in the recompiled images (no unwind tables for C-compiled bodies; the runtime comes from libstdc++), and "links and loads" is weaker than "behaves the same".
+
 ### Known residuals (explained, not hidden)
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.

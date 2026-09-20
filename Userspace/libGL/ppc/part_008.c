@@ -2,20 +2,18 @@
 
 /* _glBeginQuery @ 0x92f37b38 (132 bytes) */
 int _glBeginQuery(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -25,19 +23,17 @@ int _glBeginQuery(param_1, param_2)
 
 /* _glEndQuery @ 0x92f37bbc (124 bytes) */
 int _glEndQuery(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -47,21 +43,19 @@ int _glEndQuery(param_1)
 
 /* _glGetQueryiv @ 0x92f37c38 (140 bytes) */
 int _glGetQueryiv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -71,21 +65,19 @@ int _glGetQueryiv(param_1, param_2, param_3)
 
 /* _glGetQueryObjectiv @ 0x92f37cc4 (140 bytes) */
 int _glGetQueryObjectiv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -95,21 +87,19 @@ int _glGetQueryObjectiv(param_1, param_2, param_3)
 
 /* _glGetQueryObjectuiv @ 0x92f37d50 (140 bytes) */
 int _glGetQueryObjectuiv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -119,20 +109,18 @@ int _glGetQueryObjectuiv(param_1, param_2, param_3)
 
 /* _glBindBuffer @ 0x92f37ddc (132 bytes) */
 int _glBindBuffer(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -142,20 +130,18 @@ int _glBindBuffer(param_1, param_2)
 
 /* _glDeleteBuffers @ 0x92f37e60 (132 bytes) */
 int _glDeleteBuffers(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -165,20 +151,18 @@ int _glDeleteBuffers(param_1, param_2)
 
 /* _glGenBuffers @ 0x92f37ee4 (132 bytes) */
 int _glGenBuffers(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -188,19 +172,17 @@ int _glGenBuffers(param_1, param_2)
 
 /* _glIsBuffer @ 0x92f37f68 (128 bytes) */
 int _glIsBuffer(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_50 [20];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_50[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_50) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_50;
+    puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
   (*(code *)puVar2[0x286])(*puVar2,param_1);
   return;
@@ -208,22 +190,20 @@ int _glIsBuffer(param_1)
 
 /* _glBufferData @ 0x92f37fe8 (148 bytes) */
 int _glBufferData(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -233,22 +213,20 @@ int _glBufferData(param_1, param_2, param_3, param_4)
 
 /* _glBufferSubData @ 0x92f3807c (148 bytes) */
 int _glBufferSubData(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -258,22 +236,20 @@ int _glBufferSubData(param_1, param_2, param_3, param_4)
 
 /* _glGetBufferSubData @ 0x92f38110 (148 bytes) */
 int _glGetBufferSubData(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -283,20 +259,18 @@ int _glGetBufferSubData(param_1, param_2, param_3, param_4)
 
 /* _glMapBuffer @ 0x92f381a4 (132 bytes) */
 int _glMapBuffer(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -306,19 +280,17 @@ int _glMapBuffer(param_1, param_2)
 
 /* _glUnmapBuffer @ 0x92f38228 (128 bytes) */
 int _glUnmapBuffer(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_50 [20];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_50[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_50) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffb0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_50;
+    puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
   (*(code *)puVar2[0x28b])(*puVar2,param_1);
   return;
@@ -326,21 +298,19 @@ int _glUnmapBuffer(param_1)
 
 /* _glGetBufferParameteriv @ 0x92f382a8 (140 bytes) */
 int _glGetBufferParameteriv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -350,21 +320,19 @@ int _glGetBufferParameteriv(param_1, param_2, param_3)
 
 /* _glGetBufferPointerv @ 0x92f38334 (140 bytes) */
 int _glGetBufferPointerv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -374,20 +342,18 @@ int _glGetBufferPointerv(param_1, param_2, param_3)
 
 /* _glDrawBuffers @ 0x92f383c0 (132 bytes) */
 int _glDrawBuffers(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -398,19 +364,17 @@ int _glDrawBuffers(param_1, param_2)
 /* _glVertexAttrib1d @ 0x92f38444 (140 bytes) */
 int _glVertexAttrib1d(param_1, param_2)
   undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -420,20 +384,18 @@ int _glVertexAttrib1d(param_1, param_2)
 
 /* _glVertexAttrib1dv @ 0x92f384d0 (132 bytes) */
 int _glVertexAttrib1dv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -444,19 +406,17 @@ int _glVertexAttrib1dv(param_1, param_2)
 /* _glVertexAttrib1f @ 0x92f38554 (140 bytes) */
 int _glVertexAttrib1f(param_1, param_2)
   undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -466,20 +426,18 @@ int _glVertexAttrib1f(param_1, param_2)
 
 /* _glVertexAttrib1fv @ 0x92f385e0 (132 bytes) */
 int _glVertexAttrib1fv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -489,20 +447,18 @@ int _glVertexAttrib1fv(param_1, param_2)
 
 /* _glVertexAttrib1s @ 0x92f38664 (132 bytes) */
 int _glVertexAttrib1s(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -512,20 +468,18 @@ int _glVertexAttrib1s(param_1, param_2)
 
 /* _glVertexAttrib1sv @ 0x92f386e8 (132 bytes) */
 int _glVertexAttrib1sv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -537,19 +491,17 @@ int _glVertexAttrib1sv(param_1, param_2)
 int _glVertexAttrib2d(param_1, param_2, param_3)
   undefined8 param_1;
   undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -559,20 +511,18 @@ int _glVertexAttrib2d(param_1, param_2, param_3)
 
 /* _glVertexAttrib2dv @ 0x92f38808 (132 bytes) */
 int _glVertexAttrib2dv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -584,19 +534,17 @@ int _glVertexAttrib2dv(param_1, param_2)
 int _glVertexAttrib2f(param_1, param_2, param_3)
   undefined8 param_1;
   undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -606,20 +554,18 @@ int _glVertexAttrib2f(param_1, param_2, param_3)
 
 /* _glVertexAttrib2fv @ 0x92f38928 (132 bytes) */
 int _glVertexAttrib2fv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -629,21 +575,19 @@ int _glVertexAttrib2fv(param_1, param_2)
 
 /* _glVertexAttrib2s @ 0x92f389ac (140 bytes) */
 int _glVertexAttrib2s(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -653,20 +597,18 @@ int _glVertexAttrib2s(param_1, param_2, param_3)
 
 /* _glVertexAttrib2sv @ 0x92f38a38 (132 bytes) */
 int _glVertexAttrib2sv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -679,19 +621,17 @@ int _glVertexAttrib3d(param_1, param_2, param_3, param_4)
   undefined8 param_1;
   undefined8 param_2;
   undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -701,20 +641,18 @@ int _glVertexAttrib3d(param_1, param_2, param_3, param_4)
 
 /* _glVertexAttrib3dv @ 0x92f38b68 (132 bytes) */
 int _glVertexAttrib3dv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -727,19 +665,17 @@ int _glVertexAttrib3f(param_1, param_2, param_3, param_4)
   undefined8 param_1;
   undefined8 param_2;
   undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -749,20 +685,18 @@ int _glVertexAttrib3f(param_1, param_2, param_3, param_4)
 
 /* _glVertexAttrib3fv @ 0x92f38c98 (132 bytes) */
 int _glVertexAttrib3fv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -772,22 +706,20 @@ int _glVertexAttrib3fv(param_1, param_2)
 
 /* _glVertexAttrib3s @ 0x92f38d1c (148 bytes) */
 int _glVertexAttrib3s(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -797,20 +729,18 @@ int _glVertexAttrib3s(param_1, param_2, param_3, param_4)
 
 /* _glVertexAttrib3sv @ 0x92f38db0 (132 bytes) */
 int _glVertexAttrib3sv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -820,20 +750,18 @@ int _glVertexAttrib3sv(param_1, param_2)
 
 /* _glVertexAttrib4Nbv @ 0x92f38e34 (132 bytes) */
 int _glVertexAttrib4Nbv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -843,20 +771,18 @@ int _glVertexAttrib4Nbv(param_1, param_2)
 
 /* _glVertexAttrib4Niv @ 0x92f38eb8 (132 bytes) */
 int _glVertexAttrib4Niv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -866,20 +792,18 @@ int _glVertexAttrib4Niv(param_1, param_2)
 
 /* _glVertexAttrib4Nsv @ 0x92f38f3c (132 bytes) */
 int _glVertexAttrib4Nsv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -889,23 +813,21 @@ int _glVertexAttrib4Nsv(param_1, param_2)
 
 /* _glVertexAttrib4Nub @ 0x92f38fc0 (152 bytes) */
 int _glVertexAttrib4Nub(param_1, param_2, param_3, param_4, param_5)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -915,20 +837,18 @@ int _glVertexAttrib4Nub(param_1, param_2, param_3, param_4, param_5)
 
 /* _glVertexAttrib4Nubv @ 0x92f39058 (132 bytes) */
 int _glVertexAttrib4Nubv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -938,20 +858,18 @@ int _glVertexAttrib4Nubv(param_1, param_2)
 
 /* _glVertexAttrib4Nuiv @ 0x92f390dc (132 bytes) */
 int _glVertexAttrib4Nuiv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -961,20 +879,18 @@ int _glVertexAttrib4Nuiv(param_1, param_2)
 
 /* _glVertexAttrib4Nusv @ 0x92f39160 (132 bytes) */
 int _glVertexAttrib4Nusv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -984,20 +900,18 @@ int _glVertexAttrib4Nusv(param_1, param_2)
 
 /* _glVertexAttrib4bv @ 0x92f391e4 (132 bytes) */
 int _glVertexAttrib4bv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1013,42 +927,36 @@ int _glVertexAttrib4d(param_1, param_2, param_3, param_4)
   undefined8 param_4;
 {
   undefined *puVar1;
-  undefined8 uVar2;
-  undefined4 *puVar3;
+  undefined4 *puVar2;
+  undefined4 uVar3;
   undefined8 extraout_f1;
-  undefined8 uVar4;
-  undefined1 *local_80 [32];
   
-  uVar2 = FUN_92f27fc8();
+  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  uVar4 = extraout_f1;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar3[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = local_80;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar3[0x1e7])(uVar4,param_2,param_3,param_4,*puVar3,uVar2);
+  (*(code *)puVar2[0x1e7])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
   return;
 }
 
 /* _glVertexAttrib4dv @ 0x92f39300 (132 bytes) */
 int _glVertexAttrib4dv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1064,44 +972,38 @@ int _glVertexAttrib4f(param_1, param_2, param_3, param_4)
   undefined8 param_4;
 {
   undefined *puVar1;
-  undefined8 uVar2;
-  undefined4 *puVar3;
+  undefined4 *puVar2;
+  undefined4 uVar3;
   undefined8 extraout_f1;
-  undefined8 uVar4;
-  undefined1 *local_80 [32];
   
-  uVar2 = FUN_92f27fc8();
+  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  uVar4 = extraout_f1;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar3[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = local_80;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
                     
                     
-  (*(code *)puVar3[0x1e6])(uVar4,param_2,param_3,param_4,*puVar3,uVar2);
+  (*(code *)puVar2[0x1e6])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
   return;
 }
 
 /* _glVertexAttrib4fv @ 0x92f39430 (132 bytes) */
 int _glVertexAttrib4fv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1111,20 +1013,18 @@ int _glVertexAttrib4fv(param_1, param_2)
 
 /* _glVertexAttrib4iv @ 0x92f394b4 (132 bytes) */
 int _glVertexAttrib4iv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1134,23 +1034,21 @@ int _glVertexAttrib4iv(param_1, param_2)
 
 /* _glVertexAttrib4s @ 0x92f39538 (156 bytes) */
 int _glVertexAttrib4s(param_1, param_2, param_3, param_4, param_5)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -1160,20 +1058,18 @@ int _glVertexAttrib4s(param_1, param_2, param_3, param_4, param_5)
 
 /* _glVertexAttrib4sv @ 0x92f395d4 (132 bytes) */
 int _glVertexAttrib4sv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1183,20 +1079,18 @@ int _glVertexAttrib4sv(param_1, param_2)
 
 /* _glVertexAttrib4ubv @ 0x92f39658 (132 bytes) */
 int _glVertexAttrib4ubv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1206,20 +1100,18 @@ int _glVertexAttrib4ubv(param_1, param_2)
 
 /* _glVertexAttrib4uiv @ 0x92f396dc (132 bytes) */
 int _glVertexAttrib4uiv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1229,20 +1121,18 @@ int _glVertexAttrib4uiv(param_1, param_2)
 
 /* _glVertexAttrib4usv @ 0x92f39760 (132 bytes) */
 int _glVertexAttrib4usv(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1252,24 +1142,22 @@ int _glVertexAttrib4usv(param_1, param_2)
 
 /* _glVertexAttribPointer @ 0x92f397e4 (164 bytes) */
 int _glVertexAttribPointer(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -1279,19 +1167,17 @@ int _glVertexAttribPointer(param_1, param_2, param_3, param_4, param_5, param_6)
 
 /* _glEnableVertexAttribArray @ 0x92f39888 (124 bytes) */
 int _glEnableVertexAttribArray(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1301,19 +1187,17 @@ int _glEnableVertexAttribArray(param_1)
 
 /* _glDisableVertexAttribArray @ 0x92f39904 (124 bytes) */
 int _glDisableVertexAttribArray(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1323,21 +1207,19 @@ int _glDisableVertexAttribArray(param_1)
 
 /* _glGetVertexAttribdv @ 0x92f39980 (140 bytes) */
 int _glGetVertexAttribdv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1347,21 +1229,19 @@ int _glGetVertexAttribdv(param_1, param_2, param_3)
 
 /* _glGetVertexAttribfv @ 0x92f39a0c (140 bytes) */
 int _glGetVertexAttribfv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1371,21 +1251,19 @@ int _glGetVertexAttribfv(param_1, param_2, param_3)
 
 /* _glGetVertexAttribiv @ 0x92f39a98 (140 bytes) */
 int _glGetVertexAttribiv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1395,21 +1273,19 @@ int _glGetVertexAttribiv(param_1, param_2, param_3)
 
 /* _glGetVertexAttribPointerv @ 0x92f39b24 (140 bytes) */
 int _glGetVertexAttribPointerv(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     

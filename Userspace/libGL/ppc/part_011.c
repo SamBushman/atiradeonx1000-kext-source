@@ -2,19 +2,17 @@
 
 /* _glVertexBlendARB @ 0x92f3dd7c (124 bytes) */
 int _glVertexBlendARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -24,19 +22,17 @@ int _glVertexBlendARB(param_1)
 
 /* _glClientActiveTextureARB @ 0x92f3ddf8 (124 bytes) */
 int _glClientActiveTextureARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -47,19 +43,17 @@ int _glClientActiveTextureARB(param_1)
 /* _glMultiTexCoord1dARB @ 0x92f3de74 (140 bytes) */
 int _glMultiTexCoord1dARB(param_1, param_2)
   undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -69,20 +63,18 @@ int _glMultiTexCoord1dARB(param_1, param_2)
 
 /* _glMultiTexCoord1dvARB @ 0x92f3df00 (132 bytes) */
 int _glMultiTexCoord1dvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -93,19 +85,17 @@ int _glMultiTexCoord1dvARB(param_1, param_2)
 /* _glMultiTexCoord1fARB @ 0x92f3df84 (140 bytes) */
 int _glMultiTexCoord1fARB(param_1, param_2)
   undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -115,20 +105,18 @@ int _glMultiTexCoord1fARB(param_1, param_2)
 
 /* _glMultiTexCoord1fvARB @ 0x92f3e010 (132 bytes) */
 int _glMultiTexCoord1fvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -138,20 +126,18 @@ int _glMultiTexCoord1fvARB(param_1, param_2)
 
 /* _glMultiTexCoord1iARB @ 0x92f3e094 (132 bytes) */
 int _glMultiTexCoord1iARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -161,20 +147,18 @@ int _glMultiTexCoord1iARB(param_1, param_2)
 
 /* _glMultiTexCoord1ivARB @ 0x92f3e118 (132 bytes) */
 int _glMultiTexCoord1ivARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -184,20 +168,18 @@ int _glMultiTexCoord1ivARB(param_1, param_2)
 
 /* _glMultiTexCoord1sARB @ 0x92f3e19c (132 bytes) */
 int _glMultiTexCoord1sARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -207,20 +189,18 @@ int _glMultiTexCoord1sARB(param_1, param_2)
 
 /* _glMultiTexCoord1svARB @ 0x92f3e220 (132 bytes) */
 int _glMultiTexCoord1svARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -232,19 +212,17 @@ int _glMultiTexCoord1svARB(param_1, param_2)
 int _glMultiTexCoord2dARB(param_1, param_2, param_3)
   undefined8 param_1;
   undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -254,20 +232,18 @@ int _glMultiTexCoord2dARB(param_1, param_2, param_3)
 
 /* _glMultiTexCoord2dvARB @ 0x92f3e340 (132 bytes) */
 int _glMultiTexCoord2dvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -279,19 +255,17 @@ int _glMultiTexCoord2dvARB(param_1, param_2)
 int _glMultiTexCoord2fARB(param_1, param_2, param_3)
   undefined8 param_1;
   undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -301,20 +275,18 @@ int _glMultiTexCoord2fARB(param_1, param_2, param_3)
 
 /* _glMultiTexCoord2fvARB @ 0x92f3e460 (132 bytes) */
 int _glMultiTexCoord2fvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -324,21 +296,19 @@ int _glMultiTexCoord2fvARB(param_1, param_2)
 
 /* _glMultiTexCoord2iARB @ 0x92f3e4e4 (140 bytes) */
 int _glMultiTexCoord2iARB(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -348,20 +318,18 @@ int _glMultiTexCoord2iARB(param_1, param_2, param_3)
 
 /* _glMultiTexCoord2ivARB @ 0x92f3e570 (132 bytes) */
 int _glMultiTexCoord2ivARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -371,21 +339,19 @@ int _glMultiTexCoord2ivARB(param_1, param_2)
 
 /* _glMultiTexCoord2sARB @ 0x92f3e5f4 (140 bytes) */
 int _glMultiTexCoord2sARB(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -395,20 +361,18 @@ int _glMultiTexCoord2sARB(param_1, param_2, param_3)
 
 /* _glMultiTexCoord2svARB @ 0x92f3e680 (132 bytes) */
 int _glMultiTexCoord2svARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -421,19 +385,17 @@ int _glMultiTexCoord3dARB(param_1, param_2, param_3, param_4)
   undefined8 param_1;
   undefined8 param_2;
   undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -443,20 +405,18 @@ int _glMultiTexCoord3dARB(param_1, param_2, param_3, param_4)
 
 /* _glMultiTexCoord3dvARB @ 0x92f3e7b0 (132 bytes) */
 int _glMultiTexCoord3dvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -469,19 +429,17 @@ int _glMultiTexCoord3fARB(param_1, param_2, param_3, param_4)
   undefined8 param_1;
   undefined8 param_2;
   undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -491,20 +449,18 @@ int _glMultiTexCoord3fARB(param_1, param_2, param_3, param_4)
 
 /* _glMultiTexCoord3fvARB @ 0x92f3e8e0 (132 bytes) */
 int _glMultiTexCoord3fvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -514,22 +470,20 @@ int _glMultiTexCoord3fvARB(param_1, param_2)
 
 /* _glMultiTexCoord3iARB @ 0x92f3e964 (148 bytes) */
 int _glMultiTexCoord3iARB(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -539,20 +493,18 @@ int _glMultiTexCoord3iARB(param_1, param_2, param_3, param_4)
 
 /* _glMultiTexCoord3ivARB @ 0x92f3e9f8 (132 bytes) */
 int _glMultiTexCoord3ivARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -562,22 +514,20 @@ int _glMultiTexCoord3ivARB(param_1, param_2)
 
 /* _glMultiTexCoord3sARB @ 0x92f3ea7c (148 bytes) */
 int _glMultiTexCoord3sARB(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -587,20 +537,18 @@ int _glMultiTexCoord3sARB(param_1, param_2, param_3, param_4)
 
 /* _glMultiTexCoord3svARB @ 0x92f3eb10 (132 bytes) */
 int _glMultiTexCoord3svARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -616,42 +564,36 @@ int _glMultiTexCoord4dARB(param_1, param_2, param_3, param_4)
   undefined8 param_4;
 {
   undefined *puVar1;
-  undefined8 uVar2;
-  undefined4 *puVar3;
+  undefined4 *puVar2;
+  undefined4 uVar3;
   undefined8 extraout_f1;
-  undefined8 uVar4;
-  undefined1 *local_80 [32];
   
-  uVar2 = FUN_92f27fc8();
+  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  uVar4 = extraout_f1;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar3[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = local_80;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar3[0x170])(uVar4,param_2,param_3,param_4,*puVar3,uVar2);
+  (*(code *)puVar2[0x170])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
   return;
 }
 
 /* _glMultiTexCoord4dvARB @ 0x92f3ec2c (132 bytes) */
 int _glMultiTexCoord4dvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -667,44 +609,38 @@ int _glMultiTexCoord4fARB(param_1, param_2, param_3, param_4)
   undefined8 param_4;
 {
   undefined *puVar1;
-  undefined8 uVar2;
-  undefined4 *puVar3;
+  undefined4 *puVar2;
+  undefined4 uVar3;
   undefined8 extraout_f1;
-  undefined8 uVar4;
-  undefined1 *local_80 [32];
   
-  uVar2 = FUN_92f27fc8();
+  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  uVar4 = extraout_f1;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar3[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = local_80;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
                     
                     
-  (*(code *)puVar3[0x172])(uVar4,param_2,param_3,param_4,*puVar3,uVar2);
+  (*(code *)puVar2[0x172])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
   return;
 }
 
 /* _glMultiTexCoord4fvARB @ 0x92f3ed5c (132 bytes) */
 int _glMultiTexCoord4fvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -714,23 +650,21 @@ int _glMultiTexCoord4fvARB(param_1, param_2)
 
 /* _glMultiTexCoord4iARB @ 0x92f3ede0 (156 bytes) */
 int _glMultiTexCoord4iARB(param_1, param_2, param_3, param_4, param_5)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -740,20 +674,18 @@ int _glMultiTexCoord4iARB(param_1, param_2, param_3, param_4, param_5)
 
 /* _glMultiTexCoord4ivARB @ 0x92f3ee7c (132 bytes) */
 int _glMultiTexCoord4ivARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -763,23 +695,21 @@ int _glMultiTexCoord4ivARB(param_1, param_2)
 
 /* _glMultiTexCoord4sARB @ 0x92f3ef00 (156 bytes) */
 int _glMultiTexCoord4sARB(param_1, param_2, param_3, param_4, param_5)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -789,20 +719,18 @@ int _glMultiTexCoord4sARB(param_1, param_2, param_3, param_4, param_5)
 
 /* _glMultiTexCoord4svARB @ 0x92f3ef9c (132 bytes) */
 int _glMultiTexCoord4svARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -812,19 +740,17 @@ int _glMultiTexCoord4svARB(param_1, param_2)
 
 /* _glLoadTransposeMatrixdARB @ 0x92f3f020 (124 bytes) */
 int _glLoadTransposeMatrixdARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -834,19 +760,17 @@ int _glLoadTransposeMatrixdARB(param_1)
 
 /* _glLoadTransposeMatrixfARB @ 0x92f3f09c (124 bytes) */
 int _glLoadTransposeMatrixfARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -856,19 +780,17 @@ int _glLoadTransposeMatrixfARB(param_1)
 
 /* _glMultTransposeMatrixdARB @ 0x92f3f118 (124 bytes) */
 int _glMultTransposeMatrixdARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -878,19 +800,17 @@ int _glMultTransposeMatrixdARB(param_1)
 
 /* _glMultTransposeMatrixfARB @ 0x92f3f194 (124 bytes) */
 int _glMultTransposeMatrixfARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -899,87 +819,72 @@ int _glMultTransposeMatrixfARB(param_1)
 }
 
 /* _glCompressedTexImage3DARB @ 0x92f3f210 (192 bytes) */
-int _glCompressedTexImage3DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
-  undefined4 param_8;
+int _glCompressedTexImage3DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 in_stack_00000038;
-  undefined1 *local_80 [14];
-  undefined4 local_48;
-  undefined4 local_44;
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_80;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  local_44 = in_stack_00000038;
-  local_48 = param_8;
   (*(code *)puVar2[0x17c])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
 /* _glCompressedTexImage2DARB @ 0x92f3f2d0 (184 bytes) */
-int _glCompressedTexImage2DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
-  undefined4 param_8;
+int _glCompressedTexImage2DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_80 [14];
-  undefined4 local_48;
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_80;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  local_48 = param_8;
   (*(code *)puVar2[0x17d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
 /* _glCompressedTexImage1DARB @ 0x92f3f388 (172 bytes) */
 int _glCompressedTexImage1DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -988,96 +893,72 @@ int _glCompressedTexImage1DARB(param_1, param_2, param_3, param_4, param_5, para
 }
 
 /* _glCompressedTexSubImage3DARB @ 0x92f3f434 (208 bytes) */
-int _glCompressedTexSubImage3DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
-  undefined4 param_8;
+int _glCompressedTexSubImage3DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 in_stack_00000038;
-  undefined4 in_stack_0000003c;
-  undefined4 in_stack_00000040;
-  undefined1 *local_80 [14];
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_80;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  local_44 = in_stack_00000038;
-  local_3c = in_stack_00000040;
-  local_40 = in_stack_0000003c;
-  local_48 = param_8;
   (*(code *)puVar2[0x17f])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
 /* _glCompressedTexSubImage2DARB @ 0x92f3f504 (192 bytes) */
-int _glCompressedTexSubImage2DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
-  undefined4 param_8;
+int _glCompressedTexSubImage2DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 in_stack_00000038;
-  undefined1 *local_80 [14];
-  undefined4 local_48;
-  undefined4 local_44;
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_80[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_80) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_80;
+    puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  local_44 = in_stack_00000038;
-  local_48 = param_8;
   (*(code *)puVar2[0x180])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
 /* _glCompressedTexSubImage1DARB @ 0x92f3f5c4 (172 bytes) */
 int _glCompressedTexSubImage1DARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
-  undefined8 param_7;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -1087,21 +968,19 @@ int _glCompressedTexSubImage1DARB(param_1, param_2, param_3, param_4, param_5, p
 
 /* _glGetCompressedTexImageARB @ 0x92f3f670 (140 bytes) */
 int _glGetCompressedTexImageARB(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1115,15 +994,13 @@ int _glSampleCoverageARB(param_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1133,19 +1010,17 @@ int _glSampleCoverageARB(param_1)
 
 /* _glSamplePassARB @ 0x92f3f784 (124 bytes) */
 int _glSamplePassARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1156,19 +1031,17 @@ int _glSamplePassARB(param_1)
 /* _glPointParameterfARB @ 0x92f3f800 (140 bytes) */
 int _glPointParameterfARB(param_1, param_2)
   undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1178,20 +1051,18 @@ int _glPointParameterfARB(param_1, param_2)
 
 /* _glPointParameterfvARB @ 0x92f3f88c (132 bytes) */
 int _glPointParameterfvARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1206,15 +1077,13 @@ int _glWindowPos2dARB(param_1, param_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1224,19 +1093,17 @@ int _glWindowPos2dARB(param_1, param_2)
 
 /* _glWindowPos2dvARB @ 0x92f3f9a0 (124 bytes) */
 int _glWindowPos2dvARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1251,15 +1118,13 @@ int _glWindowPos2fARB(param_1, param_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1269,19 +1134,17 @@ int _glWindowPos2fARB(param_1, param_2)
 
 /* _glWindowPos2fvARB @ 0x92f3faac (124 bytes) */
 int _glWindowPos2fvARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1291,20 +1154,18 @@ int _glWindowPos2fvARB(param_1)
 
 /* _glWindowPos2iARB @ 0x92f3fb28 (132 bytes) */
 int _glWindowPos2iARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1314,19 +1175,17 @@ int _glWindowPos2iARB(param_1, param_2)
 
 /* _glWindowPos2ivARB @ 0x92f3fbac (124 bytes) */
 int _glWindowPos2ivARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1336,20 +1195,18 @@ int _glWindowPos2ivARB(param_1)
 
 /* _glWindowPos2sARB @ 0x92f3fc28 (132 bytes) */
 int _glWindowPos2sARB(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1359,19 +1216,17 @@ int _glWindowPos2sARB(param_1, param_2)
 
 /* _glWindowPos2svARB @ 0x92f3fcac (124 bytes) */
 int _glWindowPos2svARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1387,15 +1242,13 @@ int _glWindowPos3dARB(param_1, param_2, param_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     
@@ -1405,19 +1258,17 @@ int _glWindowPos3dARB(param_1, param_2, param_3)
 
 /* _glWindowPos3dvARB @ 0x92f3fdc8 (124 bytes) */
 int _glWindowPos3dvARB(param_1)
-  undefined8 param_1;
+  undefined4 param_1;
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_60 [24];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_60[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_60) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffffa0)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_60;
+    puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
                     
                     
@@ -1433,15 +1284,13 @@ int _glWindowPos3fARB(param_1, param_2, param_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined1 *local_70 [28];
   
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  local_70[0] = (undefined1 *)((unsigned int)__builtin_frame_address(0));
-  if (((puVar2[0x2ac] ^ (uint)local_70) & 0xfffff000) != 0) {
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
     puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
     *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = local_70;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
   }
                     
                     

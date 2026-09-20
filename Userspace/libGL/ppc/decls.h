@@ -1,6 +1,6 @@
 #include "ghidra_c.h"
 
-extern undefined8 _CGLSetCurrentContext();
+extern int _CGLSetCurrentContext();
 extern int dyld_stub_binding_helper();
 extern int _CGLGetCurrentContext();
 extern int FUN_92f27b4c();
