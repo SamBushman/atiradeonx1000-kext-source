@@ -166,3 +166,185 @@ def bind_calls(chunk, faddr, ledger_by_addr, short_to_c, siblings, callees, unre
     k = chunk.find('\n{')
     head, body = (chunk[:k], chunk[k:]) if k >= 0 else ('', chunk)      # the definition header is not a call
     return head + re.sub(r'(?<![\w.>])(~?[A-Za-z_]\w*)\s*\(', sub, body)
+
+
+def _addr_of_matches(body, nm):
+    """positions of a unary address-of on `nm` (not a binary `a & nm`)"""
+    res = []
+    for m in re.finditer(r'&\s*%s\b(?!\s*\[)' % re.escape(nm), body):
+        j = m.start() - 1
+        while j >= 0 and body[j] in ' \t\n':
+            j -= 1
+        if j >= 0 and (body[j].isalnum() or body[j] in '_)]'):
+            continue                         # binary and
+        res.append(m)
+    return res
+
+
+def _sub_addr_of(body, nm, repl):
+    out, last = [], 0
+    for m in _addr_of_matches(body, nm):
+        out.append(body[last:m.start()])
+        out.append(repl)
+        last = m.end()
+    out.append(body[last:])
+    return ''.join(out)
+
+
+# ------------------------------------------------------------------------------------------------ byte buffers declared as scalars
+BYTE_TYPES = ('char', 'undefined1', 'byte', 'uchar', 'undefined', 'unsigned char')
+DECL = re.compile(r'(?m)^(\s+)([A-Za-z_][\w ]*?)[\s*]+((?:local|\w+Stack)_([0-9a-f]+))(?:\s*\[\s*(\d+)\s*\])?;')
+
+
+def fix_byte_buffers(chunk):
+    """Ghidra sometimes declares a stack buffer as one byte (`char local_140; undefined1 local_13f;`) and passes `&local_140` to a routine that fills
+    a whole string; gcc lays the scalars out separately, so the routine overwrites neighbouring locals. Turn such a scalar (address taken, followed by
+    a gap up to the next declared local) into a byte array of that size. Returns (chunk, number converted)."""
+    decls = [(m, m.group(2).strip(), m.group(3), int(m.group(4), 16), m.group(5)) for m in DECL.finditer(chunk)]
+    if not decls:
+        return chunk, 0
+    k = chunk.find('\n{')
+    head, body = (chunk[:k], chunk[k:]) if k >= 0 else ('', chunk)
+    offs = sorted({d[3] for d in decls}, reverse=True)      # X descending = address ascending
+    n = 0
+    for m, ty, nm, off, cnt in decls:
+        if ty not in BYTE_TYPES or cnt is not None:
+            continue
+        if not _addr_of_matches(body, nm):
+            continue
+        lower = [o for o in offs if o < off]                 # declared locals at higher addresses
+        gap = (off - lower[0]) if lower else 0
+        # absorb following single-byte scalars of the run (off-1, off-2, ...)
+        absorbed = []
+        pos = off - 1
+        while True:
+            nxt = [d for d in decls if d[3] == pos and d[1] in BYTE_TYPES and d[4] is None]
+            if not nxt:
+                break
+            absorbed.append(nxt[0])
+            pos -= 1
+        nextoff = [o for o in offs if o < off and o not in {a[3] for a in absorbed}]
+        gap = off - nextoff[0] if nextoff else 0
+        if gap < 2 + len(absorbed) * 0:
+            continue
+        size = max(gap, 1 + len(absorbed))
+        body = _sub_addr_of(body, nm, '&%s[0]' % nm)
+        body = re.sub(r'(?<![\w.])(?<!&)%s\b(?!\s*\[)(?!\[0\])' % re.escape(nm), '%s[0]' % nm, body)      # scalar uses -> element 0
+        body = re.sub(r'&\s*%s\[0\]\[0\]' % re.escape(nm), '&%s[0]' % nm, body)
+        body = re.sub(r'(?m)^(\s+)%s\s+%s\[0\];' % (re.escape(ty), re.escape(nm)), r'\1char %s[%d];' % (nm, size), body, count=1)
+        # the declaration line itself was rewritten first, so restore it (the scalar-use rewrite above must not touch `char nm[size]`)
+        for a in absorbed:
+            body = re.sub(r'(?m)^\s+[A-Za-z_][\w ]*?\s+%s;\n' % re.escape(a[2]), '', body, count=1)
+            body = re.sub(r'(?<![\w.])%s\b(?!\s*\[)' % re.escape(a[2]), '%s[%d]' % (nm, off - a[3]), body)
+        n += 1
+    return head + body, n
+
+
+# ------------------------------------------------------------------------------------------------ stack structs declared as separate scalars
+SIZE_OF = {'char': 1, 'byte': 1, 'undefined1': 1, 'uchar': 1, 'undefined': 1, 'bool': 1, 'short': 2, 'ushort': 2, 'undefined2': 2, 'word': 2,
+           'int': 4, 'uint': 4, 'undefined4': 4, 'ulong': 4, 'long': 4, 'float': 4, 'dword': 4, 'undefined3': 4, 'size_t': 4,
+           'undefined8': 8, 'double': 8, 'longlong': 8, 'ulonglong': 8}
+CTYPE = {1: 'unsigned char', 2: 'unsigned short', 4: 'unsigned int', 8: 'unsigned long long'}
+SIGNED = {'int': 'int', 'long': 'int', 'short': 'short', 'float': 'float', 'double': 'double', 'longlong': 'long long', 'char': 'char'}
+
+
+def ctype_of(ty):
+    return SIGNED.get(ty) or CTYPE[SIZE_OF[ty]]
+
+
+def fix_struct_blocks(chunk):
+    """A stack record Ghidra shows as `undefined4 local_88; undefined4 local_84; ...` whose first member's address is passed on (`&local_88`) is one
+    contiguous object; gcc lays separate scalars out in any order. Merge the dense chain of scalar locals that follows an address-taken one into one
+    int array and rewrite the members as typed accesses at their byte offsets. Returns (chunk, number of blocks)."""
+    k = chunk.find('\n{')
+    if k < 0:
+        return chunk, 0
+    head, body = chunk[:k], chunk[k:]
+    decls = []
+    for m in DECL.finditer(body):
+        ty = m.group(2).strip()
+        cnt = m.group(5)
+        if '*' in m.group(0).split(m.group(3))[0]:      # pointer-typed local: keeps its own declaration
+            continue
+        decls.append(dict(m=m, ty=ty, nm=m.group(3), off=int(m.group(4), 16), cnt=cnt))
+    by_off = {d['off']: d for d in decls}
+    used = set()
+    blocks = 0
+    for d in sorted(decls, key=lambda d: -d['off']):
+        nm = d['nm']
+        if d['nm'] in used or d['cnt'] is not None or d['ty'] not in SIZE_OF or d['ty'] in BYTE_TYPES:
+            continue
+        if not _addr_of_matches(body, nm):
+            continue
+        # chain: members at decreasing X (increasing address): next member starts at off - size (allow up to 3 bytes of padding)
+        chain = [d]
+        cur = d
+        while True:
+            end = cur['off'] - SIZE_OF[cur['ty']]           # X of the byte just past `cur`
+            nxt = None
+            for pad in range(0, 4):
+                c = by_off.get(end - pad)
+                if c and c['cnt'] is None and c['ty'] in SIZE_OF and c['nm'] not in used:
+                    nxt = c
+                    break
+            if not nxt:
+                break
+            chain.append(nxt)
+            cur = nxt
+        if len(chain) < 2:
+            continue
+        total = d['off'] - chain[-1]['off'] + SIZE_OF[chain[-1]['ty']]
+        nwords = (total + 3) // 4
+        base = 'blk_%s' % nm
+        for c in chain:
+            used.add(c['nm'])
+        # a halfword member assigned CONCAT22(...) is really a word store over it and its neighbour
+        for c in chain:
+            if SIZE_OF[c['ty']] == 2:
+                body = re.sub(r'(?m)^(\s*)%s = (CONCAT22\()' % re.escape(c['nm']), r'\1*(unsigned int *)&%s = \2' % c['nm'], body)
+        # rewrite uses (members first: `&member` -> pointer, bare -> lvalue)
+        for c in chain:
+            delta = d['off'] - c['off']
+            t = ctype_of(c['ty'])
+            ptr = '((%s *)((char *)%s + %d))' % (t, base, delta)
+            body = _sub_addr_of(body, c['nm'], ptr)
+            body = re.sub(r'(?<![\w.])%s\b(?!\s*\[)' % re.escape(c['nm']), lambda _m, p=ptr: '(*%s)' % p, body)
+        # declarations: replace the first, drop the rest
+        first = True
+        for c in chain:
+            pat = r'(?m)^(\s+)%s\s+\(\*\(\(%s \*\)\(\(char \*\)%s \+ \d+\)\)\);\n?' % (re.escape(c['ty']), re.escape(ctype_of(c['ty'])), re.escape(base))
+            body, n = re.subn(pat, (lambda mm: '%sunsigned int %s[%d] = { 0 };   /* zeroed: Ghidra splits a stored word into separately typed halves and leaves one half unassigned */\n' % (mm.group(1), base, nwords)) if first else '', body, count=1)
+            if n:
+                first = False
+        blocks += 1
+    return head + body, blocks
+
+
+def rewrite_double_bits(text):
+    """`(double)CONCAT44(hi, lo)` is Ghidra's rendering of building a double from two words (the int->double magic-number idiom, 0x43300000 in the high
+    word): a bit-pattern reinterpretation. ghidra_c.h's CONCAT44 yields an integer, so the C cast converted it numerically (~4.5e18)."""
+    out, n = text, 0
+    out, n1 = re.subn(r'\(double\)\s*\(?\s*CONCAT44\(', 'GH_BITS_D(', out)
+    return out, n1
+
+
+def rewrite_narrow_compares(text):
+    """`bVar5 - 0x30 < 10` with a byte variable: Ghidra means the subtraction wraps in 8 bits (a digit test); C promotes to int, so any non-digit
+    below '0' compares as a small negative number and the loop runs on."""
+    n = 0
+    for m in re.finditer(r'(?m)^\s+(?:byte|uchar|undefined1|char)\s+(bVar\d+|cVar\d+);', text):
+        v = m.group(1)
+        text, k = re.subn(r'(?<![\w.])%s - (0x[0-9a-f]+|\d+) < (0x[0-9a-f]+|\d+)' % v, r'(unsigned char)(%s - \1) < \2' % v, text)
+        n += k
+    return text, n
+
+
+def rewrite_di3_calls(text):
+    """libgcc's 64-bit shift helpers return their result in r3:r4. The corpus calls them through `int (*)()`, so the high word is all a caller sees and
+    Ghidra's `extraout_r4` (the low word) is never assigned. Call them as returning a 64-bit value and assign extraout_r4 from it."""
+    n = 0
+    if 'extraout_r4' in text:
+        text, k = re.subn(r'(?m)^(\s*)\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)\((.*)\);', r'\1extraout_r4 = (unsigned int)((unsigned long long (*)())\2)(\3);', text)
+        n += k
+    text, k = re.subn(r'\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)', r'((unsigned long long (*)())\1)', text)
+    return text, n + k

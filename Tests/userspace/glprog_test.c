@@ -29,6 +29,29 @@ static const char *progs[] = {
     "!!ARBfp1.0\nOPTION ARB_precision_hint_fastest;\nMOV result.color, fragment.color;\nEND\n",
     "!!ARBvp1.0\nTEMP a, b;\nMOV a, vertex.position;\nMAD b, a, a, a;\nRSQ b.x, b.x;\nMOV result.position, b;\nEND\n",
     "!!ARBvp1.0\n# comment\nPARAM c = {1, 2, 3, 4};\nADD result.position, vertex.position, c;\nEND\n",
+    "!!ARBvp1.0\nADDRESS a0;\nPARAM tbl[4] = { program.env[0..3] };\nARL a0.x, vertex.attrib[1].x;\nMOV result.position, tbl[a0.x + 1];\nEND\n",
+    "!!ARBvp1.0\nTEMP r;\nSWZ r, vertex.position, x, y, -z, 1;\nMOV result.position, r;\nEND\n",
+    "!!ARBvp1.0\nPARAM m[4] = { state.matrix.modelview };\nDP4 result.position.x, m[0], vertex.position;\nDP4 result.position.y, m[1], vertex.position;\nDP4 result.position.z, m[2], vertex.position;\nDP4 result.position.w, m[3], vertex.position;\nEND\n",
+    "!!ARBvp1.0\nATTRIB p = vertex.position;\nOUTPUT o = result.position;\nOUTPUT c = result.color.primary;\nOUTPUT t = result.texcoord[1];\nMOV o, p;\nMOV c, vertex.color;\nMOV t, vertex.texcoord[0];\nEND\n",
+    "!!ARBvp1.0\nTEMP r;\nEX2 r, vertex.position.x;\nLG2 r.y, vertex.position.y;\nPOW r.z, vertex.position.x, vertex.position.y;\nMOV result.position, r;\nEND\n",
+    "!!ARBvp1.0\nMOV result.position, vertex.position.wzyx;\nEND\n",
+    "!!ARBvp1.0\nMOV result.position.xyzw, -vertex.position;\nEND\n",
+    "!!ARBvp1.0\nMOV result.pointsize, vertex.position.x;\nMOV result.fogcoord, vertex.position.y;\nEND\n",
+    "!!ARBfp1.0\nTEMP t;\nTEX t, fragment.texcoord[0], texture[0], CUBE;\nMOV result.color, t;\nEND\n",
+    "!!ARBfp1.0\nTEMP t;\nTEX t, fragment.texcoord[1], texture[1], 3D;\nMOV result.color, t;\nEND\n",
+    "!!ARBfp1.0\nTEMP t;\nTEX t, fragment.texcoord[0], texture[0], 1D;\nMOV result.color, t;\nEND\n",
+    "!!ARBfp1.0\nTEMP t;\nTEX t, fragment.texcoord[0], texture[0], RECT;\nMOV result.color, t;\nEND\n",
+    "!!ARBfp1.0\nTEMP t;\nTEX t, fragment.texcoord[0], texture[0], 4D;\nMOV result.color, t;\nEND\n",
+    "!!ARBfp1.0\nTEMP a, b;\nLRP a, fragment.color, fragment.texcoord[0], fragment.texcoord[1];\nCMP b, a, a, fragment.color;\nMOV_SAT result.color, b;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nDP3 a, fragment.color, fragment.color;\nRSQ a, a.x;\nMUL result.color, fragment.color, a.x;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nKIL fragment.color;\nMOV result.color, fragment.color;\nEND\n",
+    "!!ARBfp1.0\nPARAM c = { 0.5, 1.5, -2.25, 1e2 };\nMOV result.color, c;\nEND\n",
+    "!!ARBfp1.0\nPARAM c = { 0.5, 1.5, -2.25, 1e2 };\nMUL result.depth, c.x, c.y;\nMOV result.color, c;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nMOV a, program.local[3];\nMOV result.color, a;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nMOV a, fragment.position;\nMOV result.color, a;\nEND\n",
+    "!!ARBfp1.0\nMOV result.color, fragment.color.secondary;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nMOV a.w, fragment.color;\nMOV result.color, a;\nEND\n",
+    "!!ARBfp1.0\nTEMP a;\nMOV a, fragment.fogcoord;\nMOV result.color, a;\nEND\n",
     0
 };
 static const unsigned flagsets[] = { 0, 1, 0x10, 0x11, 0x2, 0x4 };
@@ -63,6 +86,7 @@ int main(int argc, char **argv) {
     int total = 0, diff = 0;
     for (int kind = 0; kind < 2; kind++)
         for (int i = 0; progs[i]; i++) {
+            if (argc > 4 && i < atoi(argv[4])) continue;
             void *pa_ = ca(kind ? 2 : 0), *pb_ = cb(kind ? 2 : 0);
             void *stA = sa_(), *stB = sb_();
             ata(pa_, stA); atb(pb_, stB);
@@ -75,7 +99,7 @@ int main(int argc, char **argv) {
                 unsigned *bufa = calloc(na, 8), *bufb = calloc(nb, 8);
                 gsa(stA, bufa, &na); gsb(stB, bufb, &nb);
                 same = memcmp(bufa, bufb, na * 8) == 0;
-                if (!same) printf("  DIFF stream bytes kind=%d prog %d (n=%u)\n", kind, i, na);
+                if (!same) { unsigned nd = 0, first = 0xffffffff; for (unsigned w = 0; w < na * 2; w++) if (bufa[w] != bufb[w]) { if (first == 0xffffffff) first = w; nd++; } printf("  DIFF stream kind=%d prog %d (n=%u): %u of %u words differ, first word %u: stock %08x rebuilt %08x\n", kind, i, na, nd, na * 2, first, bufa[first], bufb[first]); }
                 free(bufa); free(bufb);
             }
             total++; if (!same) { diff++; printf("  DIFF kind=%d prog %d: stock rc=%d n=%u rebuilt rc=%d n=%u\n", kind, i, ra, na, rb, nb); }

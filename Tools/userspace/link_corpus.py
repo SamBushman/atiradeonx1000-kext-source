@@ -265,10 +265,12 @@ def transform(lines):
             nm = mm.group(3)
             kind = data_decls[nm][0]
             t_ = c_type_for(nm, kind)
-            orig_ptr = ('*' in mm.group(2)) or kind == 'array'   # the corpus uses it as a pointer / array: keep its form, just label it
+            orig_ptr = ('*' in mm.group(2)) or kind == 'array' or nm in byte_arith   # the corpus uses it as a pointer / array, or does byte arithmetic on its address (`&X + n*8`): keep its form, just label it
             if t_ and 'MACH_HEADER' not in ln and 'Ghidra' not in ln and not orig_ptr:
                 res.append('extern %s asm("%s");' % (t_ % nm, nm))
                 typed += 1
+            elif nm in byte_arith and kind == 'scalar' and '*' not in mm.group(2):
+                res.append('extern unsigned char %s asm("%s");' % (nm, nm))      # `&X + n*8` is byte arithmetic on X's address
             else:
                 res.append('%s asm("%s");' % (ln.rstrip()[:-1], nm))
             label_of[nm] = nm
@@ -302,6 +304,12 @@ for a_, s_, n_, p_ in ledger:
     # two different local functions can carry the same Mach-O name (static functions of different source files): the corpus already made the C names unique
     ext_ = any(s2['type'] & 1 for s2 in nlist_by_addr.get(a_, []))
     fn_label[n_] = lab if lab and lab != n_ and (ext_ or _lab_count[lab] == 1) else n_
+_all_body = ''
+for _d in [''] + EXTRA_DIRS:
+    for _f in sorted(os.listdir(os.path.join(corpus, _d))):
+        if re.match(r'part_\d+\.c$', _f):
+            _all_body += open(os.path.join(corpus, _d, _f)).read()
+byte_arith = set(re.findall(r'&\s*(\w+)\s*[+-]\s', _all_body)) | set(re.findall(r'\(\s*&\s*(\w+)\s*\)\s*\[', _all_body))   # address arithmetic assumes a byte-sized object
 DROP_DECLS = set(cfg.get('drop_decls', []))
 decls = [l for l in decls if not any(re.search(r'\b%s\b' % re.escape(d), l) for d in DROP_DECLS)]
 for nm_, a_ in nlist_alias.items():       # another name (in the symbol table) of a function that has a ledger entry under a different one
@@ -604,6 +612,13 @@ for a in sorted(slot_expr):
         S.append('.globl %s' % nm)
         S.append('%s:' % nm)
         S.append('.long %s' % slot_expr[a])
+for nm_, sz_ in sorted(cfg.get('dummy_data', {}).items()):      # objects only the (never exercised) unwinder/crt paths refer to
+    S.append('.data')
+    S.append('.align 2')
+    S.append('.globl %s' % nm_)
+    S.append('%s:' % nm_)
+    S.append('.space %d' % sz_)
+    defined.add(nm_)
 open(os.path.join(out, 'data.s'), 'w').write('\n'.join(S) + '\n')
 
 # ---------------------------------------------------------------------------------------------- symbol map
@@ -634,6 +649,12 @@ patched, unpatched = [], []
 hdr = re.compile(r'^/\* (\S+) @ 0x([0-9a-f]+) \((\d+) bytes\) \*/$')
 import rewrites
 atomics_total = [0]
+bufs_total = [0]
+patches_applied = []
+di3_total = [0]
+cmp_total = [0]
+dbl_total = [0]
+blocks_total = [0]
 placed_clipped = []
 unresolved_calls = []
 bind_info = cfg.get('bind_calls')
@@ -696,6 +717,22 @@ for pdir_, f in _part_files:
             txt = '\n'.join(ch)
             txt, natom = rewrites.rewrite_atomics(txt)
             atomics_total[0] += natom
+            txt, ndbl = rewrites.rewrite_double_bits(txt)
+            dbl_total[0] += ndbl
+            if ndbl:
+                uses_link = True
+            for pt_ in cfg.get('text_patches', []):
+                if pt_['func'] == mm.group(1) and pt_['old'] in txt:
+                    txt = txt.replace(pt_['old'], pt_['new'])
+                    patches_applied.append(pt_['func'])
+            txt, ndi = rewrites.rewrite_di3_calls(txt)
+            di3_total[0] += ndi
+            txt, ncmp = rewrites.rewrite_narrow_compares(txt)
+            cmp_total[0] += ncmp
+            txt, nbuf = rewrites.fix_byte_buffers(txt)
+            bufs_total[0] += nbuf
+            txt, nblk = rewrites.fix_struct_blocks(txt)
+            blocks_total[0] += nblk
             if natom:
                 uses_link = True
             for cn_ in cfg.get('const_function_names', []):
@@ -734,10 +771,21 @@ for pdir_, f in _part_files:
     open(os.path.join(out, outname), 'w').write(src)
 with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('atomic read-modify-write idioms rewritten as compare-and-swap loops: %d\n' % atomics_total[0])
+    w.write('byte buffers Ghidra declared as scalars, turned into arrays: %d\n' % bufs_total[0])
+    w.write('(double)CONCAT44 bit-pattern constructions: %d\n' % dbl_total[0])
+    w.write('hand text patches applied (config text_patches): %s\n' % ', '.join(patches_applied))
+    w.write('64-bit shift helper calls fixed: %d\n' % di3_total[0])
+    w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])
+    w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('short C++ call names left unresolved (%d):\n' % len(unresolved_calls))
     for f_, tok, n_ in unresolved_calls:
         w.write('  in %s: %s (%d candidates)\n' % (f_, tok, n_))
 open(os.path.join(out, 'ghidra_link.h'), 'w').write('''/* ghidra_link.h - helpers the link-time rewrites (Tools/userspace/rewrites.py) call */
+static inline double GH_BITS_D(unsigned int hi, unsigned int lo) {
+    union { unsigned long long u; double d; } x;
+    x.u = ((unsigned long long)hi << 32) | lo;
+    return x.d;
+}
 static inline int ghidra_cas32(void *p, int oldv, int newv) {
     int cur;
     __asm__ __volatile__("1: lwarx %0,0,%2\\n\\tcmpw %0,%3\\n\\tbne- 2f\\n\\tstwcx. %4,0,%2\\n\\tbne- 1b\\n2:"
@@ -770,7 +818,7 @@ idl = m.id_dylib
 def ver(v):
     return '%d.%d.%d' % (v >> 16, (v >> 8) & 0xff, v & 0xff)
 def lib_flag(path):
-    mm = re.match(r'^/System/Library/Frameworks/([^/]+)\.framework/', path)
+    mm = re.match(r'^/System/Library/Frameworks/([^/]+)\.framework/Versions/[^/]+/\1$', path)
     if mm:
         return '-framework %s' % mm.group(1)
     return path

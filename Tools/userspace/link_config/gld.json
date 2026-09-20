@@ -1,0 +1,22 @@
+{
+ "toolchain_addr_ranges": [
+  [
+   "0x1740",
+   "0x27d0"
+  ]
+ ],
+ "drop_decls": [
+  "NAN"
+ ],
+ "dummy_data": {
+  "DAT_001b2eb8": 4,
+  "DAT_001b40f0": 4,
+  "DAT_001b81b8": 4,
+  "DAT_001b9d04": 4,
+  "UNK_001ba4e4": 4
+ },
+ "extra_corpora": [
+  "unowned_code"
+ ],
+ "extra_link_flags": []
+}

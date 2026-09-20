@@ -24,5 +24,12 @@
  ],
  "extra_link_flags": [
   "/usr/lib/libstdc++.6.dylib"
+ ],
+ "text_patches": [
+  {
+   "func": "_PPStreamGetStream",
+   "old": "((int (*)())_PPStreamChunkListGetMaxIndex)()",
+   "new": "((int (*)())_PPStreamChunkListGetMaxIndex)(param_1[3])"
+  }
  ]
 }
