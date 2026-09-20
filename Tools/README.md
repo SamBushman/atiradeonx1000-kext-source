@@ -15,3 +15,5 @@ Kext build and verification (run from the repo root; the G5 is `ssh G5`):
 
 `userspace/` is the userspace pipeline (Ghidra dump -> C corpus -> verification -> raw blocks -> byte-level accounting); `userspace/pipeline/README.md` is the
 ordered recipe and `Userspace/README.md` describes the results.
+
+| `userspace/link_corpus.py`, `userspace/rewrites.py`, `userspace/machoutil.py`, `userspace/fix_gl_stubs.py`, `userspace/check_gl_stub_indices.py`, `userspace/link_config/*.json`, `userspace/gs/DumpData.java`, `userspace/pipeline/regen_32bit.sh` | userspace linking (issue #61): see `Userspace/README.md`, "Linking" |

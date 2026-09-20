@@ -1,0 +1,28 @@
+{
+ "drop_decls": [
+  "NAN",
+  "_URC_FOREIGN_EXCEPTION_CAUGHT"
+ ],
+ "prelude": [
+  "#define _URC_FOREIGN_EXCEPTION_CAUGHT 1"
+ ],
+ "manual_names": {},
+ "postlude": [
+  "#undef NAN",
+  "#define NAN (__builtin_nanf(\"\"))"
+ ],
+ "symbolize_literals": true,
+ "bind_calls": {
+  "orig_index": "${SCRATCH_LINK}/glprog_INDEX.tsv",
+  "stock_dis": "${SCRATCH_LINK}/glprog.dis"
+ },
+ "label_overrides": {
+  "builtin_strncpy": "_strncpy"
+ },
+ "extra_corpora": [
+  "unowned_code"
+ ],
+ "extra_link_flags": [
+  "/usr/lib/libstdc++.6.dylib"
+ ]
+}

@@ -1,0 +1,11 @@
+{
+ "toolchain_addr_ranges": [
+  [
+   "0x1070",
+   "0x2100"
+  ]
+ ],
+ "const_function_names": [
+  "FUN_000010c0"
+ ]
+}
