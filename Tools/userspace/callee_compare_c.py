@@ -127,7 +127,7 @@ def clean(c, self_n):
     r = collections.Counter()
     for k, v in c.items():
         if k in ('cmpdi2','ucmpdi2','floatdidf','floatundidf','fixdfdi','fixunsdfdi','ashldi3','lshrdi3','ashrdi3','muldi3','divdi3','udivdi3','moddi3','umoddi3','floatdisf','fixsfdi','Unwind_Resume') or k == self_n or k in HELPERS: continue
-        if k == '<indirect>' or k in mill_names: continue
+        if k == '<indirect>' or k in mill_names or re.match(r'^(?:saveFP|restFP|savef|restf)_0x[0-9a-f]+$', k): continue   # the recompile's own register save/restore millicode calls
         mm_ = re.match(r'func_0x([0-9a-f]+)$', k)
         if mm_:   # an entry into the middle of register save/restore millicode
             t_ = int(mm_.group(1), 16); k_ = bisect.bisect_right(fstarts, t_) - 1

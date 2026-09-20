@@ -10,6 +10,8 @@ Every emitted word is checked by re-parsing the generated C against the binary."
 import sys, struct, os, re
 src, out = sys.argv[1:3]; ledger = sys.argv[3] if len(sys.argv) > 3 else None
 os.makedirs(out, exist_ok=True); d = open(src, 'rb').read()
+_cs = os.path.join(out, 'cstrings.c')
+if os.path.exists(_cs): os.remove(_cs)      # the literals are appended per section: start clean so a rerun does not duplicate them
 if struct.unpack('>I', d[:4])[0] == 0xcafebabe:
     for i in range(struct.unpack('>I', d[4:8])[0]):
         cpu, sub, off, size, al = struct.unpack('>5I', d[8 + 20 * i:28 + 20 * i])

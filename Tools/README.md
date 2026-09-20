@@ -18,3 +18,8 @@ ordered recipe and `Userspace/README.md` describes the results.
 
 | `userspace/link_corpus.py`, `userspace/rewrites.py`, `userspace/machoutil.py`, `userspace/fix_gl_stubs.py`, `userspace/check_gl_stub_indices.py`, `userspace/link_config/*.json`, `userspace/gs/DumpData.java`, `userspace/pipeline/regen_32bit.sh` | userspace linking (issue #61): see `Userspace/README.md`, "Linking" |
 | `userspace/check_symbol_map.py` | checks a link build's data symbol map against the assembled data object |
+
+### Userspace call-accuracy tools (issue #61, second pass)
+`userspace/detect_dropped_args.py` (calls printed without arguments), `userspace/detect_short_calls.py` (fewer arguments than parameters), `userspace/check_import_binding.py`
+(per-function import calls by mangled name, stock vs rebuilt image), `userspace/gs/{NopMillicode,CommitLiveSigs,RemoveExtras,UniqueNames,ThisToStdcall,CopySigToStubs}.java`
+and the drivers in `userspace/pipeline/` (Stage B2 of its README).

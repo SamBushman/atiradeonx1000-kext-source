@@ -76,7 +76,7 @@ def patch_function(chunk, name, protos):
         return chunk, 'unparsed prototype: %s' % params
     lines = chunk.split('\n')
     try:
-        hi = next(i for i, l in enumerate(lines) if re.match(r'^\w[\w \*]*\b%s\(' % re.escape(name), l))
+        hi = next(i for i, l in enumerate(lines) if re.match(r'^\w[\w \*]*\b%s(\(|\s*$)' % re.escape(name), l))   # the header may wrap after the name
     except StopIteration:
         return chunk, 'unrecognised layout'
     mm = CALL.search(chunk)

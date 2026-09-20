@@ -1,8 +1,14 @@
 #include "decls.h"
 
 /* _glWindowPos3fvARB @ 0x92f3fee4 (124 bytes) */
-int _glWindowPos3fvARB(param_1)
+int _glWindowPos3fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -21,10 +27,14 @@ int _glWindowPos3fvARB(param_1)
 }
 
 /* _glWindowPos3iARB @ 0x92f3ff60 (140 bytes) */
-int _glWindowPos3iARB(param_1, param_2, param_3)
+int _glWindowPos3iARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -43,8 +53,14 @@ int _glWindowPos3iARB(param_1, param_2, param_3)
 }
 
 /* _glWindowPos3ivARB @ 0x92f3ffec (124 bytes) */
-int _glWindowPos3ivARB(param_1)
+int _glWindowPos3ivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -63,10 +79,14 @@ int _glWindowPos3ivARB(param_1)
 }
 
 /* _glWindowPos3sARB @ 0x92f40068 (140 bytes) */
-int _glWindowPos3sARB(param_1, param_2, param_3)
+int _glWindowPos3sARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -85,8 +105,14 @@ int _glWindowPos3sARB(param_1, param_2, param_3)
 }
 
 /* _glWindowPos3svARB @ 0x92f400f4 (124 bytes) */
-int _glWindowPos3svARB(param_1)
+int _glWindowPos3svARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -105,9 +131,14 @@ int _glWindowPos3svARB(param_1)
 }
 
 /* _glGenQueriesARB @ 0x92f40170 (132 bytes) */
-int _glGenQueriesARB(param_1, param_2)
+int _glGenQueriesARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -126,9 +157,14 @@ int _glGenQueriesARB(param_1, param_2)
 }
 
 /* _glDeleteQueriesARB @ 0x92f401f4 (132 bytes) */
-int _glDeleteQueriesARB(param_1, param_2)
+int _glDeleteQueriesARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -147,8 +183,14 @@ int _glDeleteQueriesARB(param_1, param_2)
 }
 
 /* _glIsQueryARB @ 0x92f40278 (128 bytes) */
-int _glIsQueryARB(param_1)
+int _glIsQueryARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -165,9 +207,14 @@ int _glIsQueryARB(param_1)
 }
 
 /* _glBeginQueryARB @ 0x92f402f8 (132 bytes) */
-int _glBeginQueryARB(param_1, param_2)
+int _glBeginQueryARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -186,8 +233,14 @@ int _glBeginQueryARB(param_1, param_2)
 }
 
 /* _glEndQueryARB @ 0x92f4037c (124 bytes) */
-int _glEndQueryARB(param_1)
+int _glEndQueryARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -206,10 +259,14 @@ int _glEndQueryARB(param_1)
 }
 
 /* _glGetQueryivARB @ 0x92f403f8 (140 bytes) */
-int _glGetQueryivARB(param_1, param_2, param_3)
+int _glGetQueryivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -228,10 +285,14 @@ int _glGetQueryivARB(param_1, param_2, param_3)
 }
 
 /* _glGetQueryObjectivARB @ 0x92f40484 (140 bytes) */
-int _glGetQueryObjectivARB(param_1, param_2, param_3)
+int _glGetQueryObjectivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -250,10 +311,14 @@ int _glGetQueryObjectivARB(param_1, param_2, param_3)
 }
 
 /* _glGetQueryObjectuivARB @ 0x92f40510 (140 bytes) */
-int _glGetQueryObjectuivARB(param_1, param_2, param_3)
+int _glGetQueryObjectuivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -272,9 +337,14 @@ int _glGetQueryObjectuivARB(param_1, param_2, param_3)
 }
 
 /* _glBindBufferARB @ 0x92f4059c (132 bytes) */
-int _glBindBufferARB(param_1, param_2)
+int _glBindBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -293,9 +363,14 @@ int _glBindBufferARB(param_1, param_2)
 }
 
 /* _glDeleteBuffersARB @ 0x92f40620 (132 bytes) */
-int _glDeleteBuffersARB(param_1, param_2)
+int _glDeleteBuffersARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -314,9 +389,14 @@ int _glDeleteBuffersARB(param_1, param_2)
 }
 
 /* _glGenBuffersARB @ 0x92f406a4 (132 bytes) */
-int _glGenBuffersARB(param_1, param_2)
+int _glGenBuffersARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -335,8 +415,14 @@ int _glGenBuffersARB(param_1, param_2)
 }
 
 /* _glIsBufferARB @ 0x92f40728 (128 bytes) */
-int _glIsBufferARB(param_1)
+int _glIsBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -353,11 +439,14 @@ int _glIsBufferARB(param_1)
 }
 
 /* _glBufferDataARB @ 0x92f407a8 (148 bytes) */
-int _glBufferDataARB(param_1, param_2, param_3, param_4)
+int _glBufferDataARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -376,11 +465,14 @@ int _glBufferDataARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glBufferSubDataARB @ 0x92f4083c (148 bytes) */
-int _glBufferSubDataARB(param_1, param_2, param_3, param_4)
+int _glBufferSubDataARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -399,11 +491,14 @@ int _glBufferSubDataARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetBufferSubDataARB @ 0x92f408d0 (148 bytes) */
-int _glGetBufferSubDataARB(param_1, param_2, param_3, param_4)
+int _glGetBufferSubDataARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -422,9 +517,14 @@ int _glGetBufferSubDataARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glMapBufferARB @ 0x92f40964 (132 bytes) */
-int _glMapBufferARB(param_1, param_2)
+int _glMapBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -443,8 +543,14 @@ int _glMapBufferARB(param_1, param_2)
 }
 
 /* _glUnmapBufferARB @ 0x92f409e8 (128 bytes) */
-int _glUnmapBufferARB(param_1)
+int _glUnmapBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -461,10 +567,14 @@ int _glUnmapBufferARB(param_1)
 }
 
 /* _glGetBufferParameterivARB @ 0x92f40a68 (140 bytes) */
-int _glGetBufferParameterivARB(param_1, param_2, param_3)
+int _glGetBufferParameterivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -483,10 +593,14 @@ int _glGetBufferParameterivARB(param_1, param_2, param_3)
 }
 
 /* _glGetBufferPointervARB @ 0x92f40af4 (140 bytes) */
-int _glGetBufferPointervARB(param_1, param_2, param_3)
+int _glGetBufferPointervARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -505,8 +619,14 @@ int _glGetBufferPointervARB(param_1, param_2, param_3)
 }
 
 /* _glDeleteObjectARB @ 0x92f40b80 (124 bytes) */
-int _glDeleteObjectARB(param_1)
+int _glDeleteObjectARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -525,8 +645,14 @@ int _glDeleteObjectARB(param_1)
 }
 
 /* _glGetHandleARB @ 0x92f40bfc (124 bytes) */
-int _glGetHandleARB(param_1)
+int _glGetHandleARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -545,9 +671,14 @@ int _glGetHandleARB(param_1)
 }
 
 /* _glDetachObjectARB @ 0x92f40c78 (132 bytes) */
-int _glDetachObjectARB(param_1, param_2)
+int _glDetachObjectARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -566,8 +697,14 @@ int _glDetachObjectARB(param_1, param_2)
 }
 
 /* _glCreateShaderObjectARB @ 0x92f40cfc (124 bytes) */
-int _glCreateShaderObjectARB(param_1)
+int _glCreateShaderObjectARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -586,11 +723,14 @@ int _glCreateShaderObjectARB(param_1)
 }
 
 /* _glShaderSourceARB @ 0x92f40d78 (148 bytes) */
-int _glShaderSourceARB(param_1, param_2, param_3, param_4)
+int _glShaderSourceARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -609,8 +749,14 @@ int _glShaderSourceARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glCompileShaderARB @ 0x92f40e0c (124 bytes) */
-int _glCompileShaderARB(param_1)
+int _glCompileShaderARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -648,9 +794,14 @@ int _glCreateProgramObjectARB()
 }
 
 /* _glAttachObjectARB @ 0x92f40ef8 (132 bytes) */
-int _glAttachObjectARB(param_1, param_2)
+int _glAttachObjectARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -669,8 +820,14 @@ int _glAttachObjectARB(param_1, param_2)
 }
 
 /* _glLinkProgramARB @ 0x92f40f7c (124 bytes) */
-int _glLinkProgramARB(param_1)
+int _glLinkProgramARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -689,8 +846,14 @@ int _glLinkProgramARB(param_1)
 }
 
 /* _glUseProgramObjectARB @ 0x92f40ff8 (124 bytes) */
-int _glUseProgramObjectARB(param_1)
+int _glUseProgramObjectARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -709,8 +872,14 @@ int _glUseProgramObjectARB(param_1)
 }
 
 /* _glValidateProgramARB @ 0x92f41074 (124 bytes) */
-int _glValidateProgramARB(param_1)
+int _glValidateProgramARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -729,9 +898,9 @@ int _glValidateProgramARB(param_1)
 }
 
 /* _glUniform1fARB @ 0x92f410f0 (140 bytes) */
-int _glUniform1fARB(param_1, param_2)
-  undefined8 param_1;
-  undefined4 param_2;
+void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -745,15 +914,15 @@ int _glUniform1fARB(param_1, param_2)
   }
                     
                     
-  (*(code *)puVar2[0x25b])(param_1,*puVar2,param_2);
+  (*(code *)puVar2[0x25b])(fparam_1,*puVar2,param_1);
   return;
 }
 
 /* _glUniform2fARB @ 0x92f4117c (156 bytes) */
-int _glUniform2fARB(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined4 param_3;
+void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                    double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -767,16 +936,15 @@ int _glUniform2fARB(param_1, param_2, param_3)
   }
                     
                     
-  (*(code *)puVar2[0x25c])(param_1,param_2,*puVar2,param_3);
+  (*(code *)puVar2[0x25c])(fparam_1,fparam_2,*puVar2,param_1);
   return;
 }
 
 /* _glUniform3fARB @ 0x92f41218 (172 bytes) */
-int _glUniform3fARB(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined4 param_4;
+void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                    double fparam_2,double fparam_3)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -790,23 +958,19 @@ int _glUniform3fARB(param_1, param_2, param_3, param_4)
   }
                     
                     
-  (*(code *)puVar2[0x25d])(param_1,param_2,param_3,*puVar2,param_4);
+  (*(code *)puVar2[0x25d])(fparam_1,fparam_2,fparam_3,*puVar2,param_1);
   return;
 }
 
 /* _glUniform4fARB @ 0x92f412c4 (172 bytes) */
-int _glUniform4fARB(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+void _glUniform4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                    double fparam_2,double fparam_3,double fparam_4)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined8 extraout_f1;
   
-  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
   if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
@@ -816,14 +980,19 @@ int _glUniform4fARB(param_1, param_2, param_3, param_4)
   }
                     
                     
-  (*(code *)puVar2[0x25e])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
+  (*(code *)puVar2[0x25e])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1);
   return;
 }
 
 /* _glUniform1iARB @ 0x92f41370 (132 bytes) */
-int _glUniform1iARB(param_1, param_2)
+int _glUniform1iARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -842,10 +1011,14 @@ int _glUniform1iARB(param_1, param_2)
 }
 
 /* _glUniform2iARB @ 0x92f413f4 (140 bytes) */
-int _glUniform2iARB(param_1, param_2, param_3)
+int _glUniform2iARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -864,11 +1037,14 @@ int _glUniform2iARB(param_1, param_2, param_3)
 }
 
 /* _glUniform3iARB @ 0x92f41480 (148 bytes) */
-int _glUniform3iARB(param_1, param_2, param_3, param_4)
+int _glUniform3iARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -887,12 +1063,14 @@ int _glUniform3iARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glUniform4iARB @ 0x92f41514 (156 bytes) */
-int _glUniform4iARB(param_1, param_2, param_3, param_4, param_5)
+int _glUniform4iARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -911,10 +1089,14 @@ int _glUniform4iARB(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glUniform1fvARB @ 0x92f415b0 (140 bytes) */
-int _glUniform1fvARB(param_1, param_2, param_3)
+int _glUniform1fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -933,10 +1115,14 @@ int _glUniform1fvARB(param_1, param_2, param_3)
 }
 
 /* _glUniform2fvARB @ 0x92f4163c (140 bytes) */
-int _glUniform2fvARB(param_1, param_2, param_3)
+int _glUniform2fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -955,10 +1141,14 @@ int _glUniform2fvARB(param_1, param_2, param_3)
 }
 
 /* _glUniform3fvARB @ 0x92f416c8 (140 bytes) */
-int _glUniform3fvARB(param_1, param_2, param_3)
+int _glUniform3fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -977,10 +1167,14 @@ int _glUniform3fvARB(param_1, param_2, param_3)
 }
 
 /* _glUniform4fvARB @ 0x92f41754 (140 bytes) */
-int _glUniform4fvARB(param_1, param_2, param_3)
+int _glUniform4fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -999,10 +1193,14 @@ int _glUniform4fvARB(param_1, param_2, param_3)
 }
 
 /* _glUniform1ivARB @ 0x92f417e0 (140 bytes) */
-int _glUniform1ivARB(param_1, param_2, param_3)
+int _glUniform1ivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1021,10 +1219,14 @@ int _glUniform1ivARB(param_1, param_2, param_3)
 }
 
 /* _glUniform2ivARB @ 0x92f4186c (140 bytes) */
-int _glUniform2ivARB(param_1, param_2, param_3)
+int _glUniform2ivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1043,10 +1245,14 @@ int _glUniform2ivARB(param_1, param_2, param_3)
 }
 
 /* _glUniform3ivARB @ 0x92f418f8 (140 bytes) */
-int _glUniform3ivARB(param_1, param_2, param_3)
+int _glUniform3ivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1065,10 +1271,14 @@ int _glUniform3ivARB(param_1, param_2, param_3)
 }
 
 /* _glUniform4ivARB @ 0x92f41984 (140 bytes) */
-int _glUniform4ivARB(param_1, param_2, param_3)
+int _glUniform4ivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1087,11 +1297,14 @@ int _glUniform4ivARB(param_1, param_2, param_3)
 }
 
 /* _glUniformMatrix2fvARB @ 0x92f41a10 (148 bytes) */
-int _glUniformMatrix2fvARB(param_1, param_2, param_3, param_4)
+int _glUniformMatrix2fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1110,11 +1323,14 @@ int _glUniformMatrix2fvARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glUniformMatrix3fvARB @ 0x92f41aa4 (148 bytes) */
-int _glUniformMatrix3fvARB(param_1, param_2, param_3, param_4)
+int _glUniformMatrix3fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1133,11 +1349,14 @@ int _glUniformMatrix3fvARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glUniformMatrix4fvARB @ 0x92f41b38 (148 bytes) */
-int _glUniformMatrix4fvARB(param_1, param_2, param_3, param_4)
+int _glUniformMatrix4fvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1156,10 +1375,14 @@ int _glUniformMatrix4fvARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetObjectParameterfvARB @ 0x92f41bcc (140 bytes) */
-int _glGetObjectParameterfvARB(param_1, param_2, param_3)
+int _glGetObjectParameterfvARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1178,10 +1401,14 @@ int _glGetObjectParameterfvARB(param_1, param_2, param_3)
 }
 
 /* _glGetObjectParameterivARB @ 0x92f41c58 (140 bytes) */
-int _glGetObjectParameterivARB(param_1, param_2, param_3)
+int _glGetObjectParameterivARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1200,11 +1427,14 @@ int _glGetObjectParameterivARB(param_1, param_2, param_3)
 }
 
 /* _glGetInfoLogARB @ 0x92f41ce4 (148 bytes) */
-int _glGetInfoLogARB(param_1, param_2, param_3, param_4)
+int _glGetInfoLogARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1223,11 +1453,14 @@ int _glGetInfoLogARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetAttachedObjectsARB @ 0x92f41d78 (148 bytes) */
-int _glGetAttachedObjectsARB(param_1, param_2, param_3, param_4)
+int _glGetAttachedObjectsARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1246,9 +1479,14 @@ int _glGetAttachedObjectsARB(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetUniformLocationARB @ 0x92f41e0c (132 bytes) */
-int _glGetUniformLocationARB(param_1, param_2)
+int _glGetUniformLocationARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;

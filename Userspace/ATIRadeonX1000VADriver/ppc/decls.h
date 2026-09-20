@@ -81,7 +81,9 @@ extern int FUN_00005d70();
 extern int FUN_00005fd0();
 extern int FUN_00006120();
 extern int FUN_00006230();
-extern int FUN_00006d90();
+extern void FUN_00006d90(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
+                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,
+                 double fparam_10);
 extern int FUN_00007020();
 extern int FUN_00007270();
 extern int FUN_00007490();
@@ -106,7 +108,7 @@ extern int FUN_00009c80();
 extern int FUN_0000a110();
 extern int FUN_0000a4e0();
 extern int FUN_0000aa00();
-extern int FUN_0000ae80();
+extern void FUN_0000ae80(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int FUN_0000b7f0();
 extern int FUN_0000bbc0();
 extern int FUN_0000bf20();

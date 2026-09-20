@@ -1,10 +1,14 @@
 #include "decls.h"
 
 /* _glGetTexGendv @ 0x92f2d80c (140 bytes) */
-int _glGetTexGendv(param_1, param_2, param_3)
+int _glGetTexGendv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -23,10 +27,14 @@ int _glGetTexGendv(param_1, param_2, param_3)
 }
 
 /* _glGetTexGenfv @ 0x92f2d898 (140 bytes) */
-int _glGetTexGenfv(param_1, param_2, param_3)
+int _glGetTexGenfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -45,10 +53,14 @@ int _glGetTexGenfv(param_1, param_2, param_3)
 }
 
 /* _glGetTexGeniv @ 0x92f2d924 (140 bytes) */
-int _glGetTexGeniv(param_1, param_2, param_3)
+int _glGetTexGeniv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -67,12 +79,14 @@ int _glGetTexGeniv(param_1, param_2, param_3)
 }
 
 /* _glGetTexImage @ 0x92f2d9b0 (156 bytes) */
-int _glGetTexImage(param_1, param_2, param_3, param_4, param_5)
+int _glGetTexImage(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -91,11 +105,14 @@ int _glGetTexImage(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glGetTexLevelParameterfv @ 0x92f2da4c (148 bytes) */
-int _glGetTexLevelParameterfv(param_1, param_2, param_3, param_4)
+int _glGetTexLevelParameterfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -114,10 +131,14 @@ int _glGetTexLevelParameterfv(param_1, param_2, param_3, param_4)
 }
 
 /* _glGetTexParameterfv @ 0x92f2dae0 (140 bytes) */
-int _glGetTexParameterfv(param_1, param_2, param_3)
+int _glGetTexParameterfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -136,10 +157,14 @@ int _glGetTexParameterfv(param_1, param_2, param_3)
 }
 
 /* _glGetTexParameteriv @ 0x92f2db6c (140 bytes) */
-int _glGetTexParameteriv(param_1, param_2, param_3)
+int _glGetTexParameteriv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -158,8 +183,14 @@ int _glGetTexParameteriv(param_1, param_2, param_3)
 }
 
 /* _glIndexMask @ 0x92f2dbf8 (124 bytes) */
-int _glIndexMask(param_1)
+int _glIndexMask(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -178,10 +209,14 @@ int _glIndexMask(param_1)
 }
 
 /* _glIndexPointer @ 0x92f2dc74 (140 bytes) */
-int _glIndexPointer(param_1, param_2, param_3)
+int _glIndexPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -200,8 +235,8 @@ int _glIndexPointer(param_1, param_2, param_3)
 }
 
 /* _glIndexd @ 0x92f2dd00 (128 bytes) */
-int _glIndexd(param_1)
-  undefined8 param_1;
+void _glIndexd(double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -215,13 +250,19 @@ int _glIndexd(param_1)
   }
                     
                     
-  (*(code *)puVar2[0x84])(param_1,*puVar2);
+  (*(code *)puVar2[0x84])(fparam_1,*puVar2);
   return;
 }
 
 /* _glIndexdv @ 0x92f2dd80 (124 bytes) */
-int _glIndexdv(param_1)
+int _glIndexdv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -240,8 +281,8 @@ int _glIndexdv(param_1)
 }
 
 /* _glIndexf @ 0x92f2ddfc (128 bytes) */
-int _glIndexf(param_1)
-  undefined8 param_1;
+void _glIndexf(double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -255,13 +296,19 @@ int _glIndexf(param_1)
   }
                     
                     
-  (*(code *)puVar2[0x86])(param_1,*puVar2);
+  (*(code *)puVar2[0x86])(fparam_1,*puVar2);
   return;
 }
 
 /* _glIndexfv @ 0x92f2de7c (124 bytes) */
-int _glIndexfv(param_1)
+int _glIndexfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -280,8 +327,14 @@ int _glIndexfv(param_1)
 }
 
 /* _glIndexi @ 0x92f2def8 (124 bytes) */
-int _glIndexi(param_1)
+int _glIndexi(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -300,8 +353,14 @@ int _glIndexi(param_1)
 }
 
 /* _glIndexiv @ 0x92f2df74 (124 bytes) */
-int _glIndexiv(param_1)
+int _glIndexiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -320,8 +379,14 @@ int _glIndexiv(param_1)
 }
 
 /* _glIndexs @ 0x92f2dff0 (124 bytes) */
-int _glIndexs(param_1)
+int _glIndexs(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -340,8 +405,14 @@ int _glIndexs(param_1)
 }
 
 /* _glIndexsv @ 0x92f2e06c (124 bytes) */
-int _glIndexsv(param_1)
+int _glIndexsv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -360,8 +431,14 @@ int _glIndexsv(param_1)
 }
 
 /* _glIndexub @ 0x92f2e0e8 (124 bytes) */
-int _glIndexub(param_1)
+int _glIndexub(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -380,8 +457,14 @@ int _glIndexub(param_1)
 }
 
 /* _glIndexubv @ 0x92f2e164 (124 bytes) */
-int _glIndexubv(param_1)
+int _glIndexubv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -419,10 +502,14 @@ int _glInitNames()
 }
 
 /* _glInterleavedArrays @ 0x92f2e250 (140 bytes) */
-int _glInterleavedArrays(param_1, param_2, param_3)
+int _glInterleavedArrays(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -441,8 +528,14 @@ int _glInterleavedArrays(param_1, param_2, param_3)
 }
 
 /* _glIsEnabled @ 0x92f2e2dc (128 bytes) */
-int _glIsEnabled(param_1)
+int _glIsEnabled(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -459,8 +552,14 @@ int _glIsEnabled(param_1)
 }
 
 /* _glIsList @ 0x92f2e35c (128 bytes) */
-int _glIsList(param_1)
+int _glIsList(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -477,8 +576,14 @@ int _glIsList(param_1)
 }
 
 /* _glIsTexture @ 0x92f2e3dc (128 bytes) */
-int _glIsTexture(param_1)
+int _glIsTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -495,9 +600,9 @@ int _glIsTexture(param_1)
 }
 
 /* _glLightModelf @ 0x92f2e45c (140 bytes) */
-int _glLightModelf(param_1, param_2)
-  undefined8 param_1;
-  undefined4 param_2;
+void _glLightModelf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                   undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -511,14 +616,19 @@ int _glLightModelf(param_1, param_2)
   }
                     
                     
-  (*(code *)puVar2[0x93])(param_1,*puVar2,param_2);
+  (*(code *)puVar2[0x93])(fparam_1,*puVar2,param_1);
   return;
 }
 
 /* _glLightModelfv @ 0x92f2e4e8 (132 bytes) */
-int _glLightModelfv(param_1, param_2)
+int _glLightModelfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -537,9 +647,14 @@ int _glLightModelfv(param_1, param_2)
 }
 
 /* _glLightModeliv @ 0x92f2e56c (132 bytes) */
-int _glLightModeliv(param_1, param_2)
+int _glLightModeliv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -558,10 +673,9 @@ int _glLightModeliv(param_1, param_2)
 }
 
 /* _glLightf @ 0x92f2e5f0 (148 bytes) */
-int _glLightf(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+void _glLightf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+              undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -575,15 +689,19 @@ int _glLightf(param_1, param_2, param_3)
   }
                     
                     
-  (*(code *)puVar2[0x97])(param_1,*puVar2,param_2,param_3);
+  (*(code *)puVar2[0x97])(fparam_1,*puVar2,param_1,param_2);
   return;
 }
 
 /* _glLighti @ 0x92f2e684 (140 bytes) */
-int _glLighti(param_1, param_2, param_3)
+int _glLighti(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -602,10 +720,14 @@ int _glLighti(param_1, param_2, param_3)
 }
 
 /* _glLightiv @ 0x92f2e710 (140 bytes) */
-int _glLightiv(param_1, param_2, param_3)
+int _glLightiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -624,9 +746,14 @@ int _glLightiv(param_1, param_2, param_3)
 }
 
 /* _glLineStipple @ 0x92f2e79c (132 bytes) */
-int _glLineStipple(param_1, param_2)
+int _glLineStipple(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -645,8 +772,14 @@ int _glLineStipple(param_1, param_2)
 }
 
 /* _glListBase @ 0x92f2e820 (124 bytes) */
-int _glListBase(param_1)
+int _glListBase(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -665,8 +798,14 @@ int _glListBase(param_1)
 }
 
 /* _glLoadMatrixd @ 0x92f2e89c (124 bytes) */
-int _glLoadMatrixd(param_1)
+int _glLoadMatrixd(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -685,8 +824,14 @@ int _glLoadMatrixd(param_1)
 }
 
 /* _glLogicOp @ 0x92f2e918 (124 bytes) */
-int _glLogicOp(param_1)
+int _glLogicOp(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -705,10 +850,10 @@ int _glLogicOp(param_1)
 }
 
 /* _glMap1d @ 0x92f2e994 (184 bytes) */
-int _glMap1d(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined4 param_3;
+void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
+             double fparam_1,double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -720,15 +865,15 @@ int _glMap1d(param_1, param_2, param_3)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0xa3])(param_1,param_2,*puVar2,param_3);
+  (*(code *)puVar2[0xa3])(fparam_1,fparam_2,*puVar2,param_1);
   return;
 }
 
 /* _glMap1f @ 0x92f2ea4c (180 bytes) */
-int _glMap1f(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined4 param_3;
+void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+             double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -742,115 +887,39 @@ int _glMap1f(param_1, param_2, param_3)
   }
                     
                     
-  (*(code *)puVar2[0xa4])(param_1,param_2,*puVar2,param_3);
+  (*(code *)puVar2[0xa4])(fparam_1,fparam_2,*puVar2,param_1);
   return;
 }
 
 /* _glMap2d @ 0x92f2eb00 (192 bytes) */
-int _glMap2d(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+             double fparam_2,double fparam_3,double fparam_4)
+
 {
   undefined *puVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
-  undefined8 extraout_f1;
+  undefined4 *puVar2;
   
-  uVar2 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar3[0x2ac] ^ (uint)&STACKARG(0xffffff60)) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = &STACKARG(0xffffff60);
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff60)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff60);
   }
-  (*(code *)puVar3[0xa5])(extraout_f1,param_2,param_3,param_4,*puVar3,uVar2);
+  (*(code *)puVar2[0xa5])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1);
   return;
 }
 
 /* _glMap2f @ 0x92f2ebc0 (192 bytes) */
-int _glMap2f(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-{
-  undefined *puVar1;
-  undefined4 uVar2;
-  undefined4 *puVar3;
-  undefined8 extraout_f1;
-  
-  uVar2 = FUN_92f27fc8();
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar3 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar3[0x2ac] ^ (uint)&STACKARG(0xffffff70)) & 0xfffff000) != 0) {
-    puVar3 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar3;
-    puVar3[0x2ac] = &STACKARG(0xffffff70);
-  }
-  (*(code *)puVar3[0xa6])(extraout_f1,param_2,param_3,param_4,*puVar3,uVar2);
-  return;
-}
+void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
+             double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 
-/* _glMapGrid1d @ 0x92f2ec80 (156 bytes) */
-int _glMapGrid1d(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined4 param_3;
 {
   undefined *puVar1;
   undefined4 *puVar2;
   
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
-  }
-                    
-                    
-  (*(code *)puVar2[0xa7])(param_1,param_2,*puVar2,param_3);
-  return;
-}
-
-/* _glMapGrid1f @ 0x92f2ed1c (156 bytes) */
-int _glMapGrid1f(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined4 param_3;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  
-  puVar1 = PTR__gll_cc_a2f27020;
-  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
-  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
-    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
-    *(undefined4 **)puVar1 = puVar2;
-    puVar2[0x2ac] = &STACKARG(0xffffff90);
-  }
-                    
-                    
-  (*(code *)puVar2[0xa8])(param_1,param_2,*puVar2,param_3);
-  return;
-}
-
-/* _glMapGrid2d @ 0x92f2edb8 (160 bytes) */
-int _glMapGrid2d(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-{
-  undefined *puVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined8 extraout_f1;
-  
-  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
   if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff70)) & 0xfffff000) != 0) {
@@ -858,23 +927,83 @@ int _glMapGrid2d(param_1, param_2, param_3, param_4)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff70);
   }
-  (*(code *)puVar2[0xa9])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
+  (*(code *)puVar2[0xa6])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1);
+  return;
+}
+
+/* _glMapGrid1d @ 0x92f2ec80 (156 bytes) */
+void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                 double fparam_2)
+
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  }
+                    
+                    
+  (*(code *)puVar2[0xa7])(fparam_1,fparam_2,*puVar2,param_1);
+  return;
+}
+
+/* _glMapGrid1f @ 0x92f2ed1c (156 bytes) */
+void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                 double fparam_2)
+
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff90)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff90);
+  }
+                    
+                    
+  (*(code *)puVar2[0xa8])(fparam_1,fparam_2,*puVar2,param_1);
+  return;
+}
+
+/* _glMapGrid2d @ 0x92f2edb8 (160 bytes) */
+void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                 double fparam_2,double fparam_3,double fparam_4)
+
+{
+  undefined *puVar1;
+  undefined4 *puVar2;
+  
+  puVar1 = PTR__gll_cc_a2f27020;
+  puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
+  if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff70)) & 0xfffff000) != 0) {
+    puVar2 = _pthread_getspecific(*(pthread_key_t *)PTR__gll_pkey_a2f2701c);
+    *(undefined4 **)puVar1 = puVar2;
+    puVar2[0x2ac] = &STACKARG(0xffffff70);
+  }
+  (*(code *)puVar2[0xa9])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1);
   return;
 }
 
 /* _glMapGrid2f @ 0x92f2ee58 (180 bytes) */
-int _glMapGrid2f(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+void _glMapGrid2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
+                 double fparam_2,double fparam_3,double fparam_4)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined8 extraout_f1;
   
-  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
   if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
@@ -884,15 +1013,19 @@ int _glMapGrid2f(param_1, param_2, param_3, param_4)
   }
                     
                     
-  (*(code *)puVar2[0xaa])(extraout_f1,param_2,param_3,param_4,*puVar2,uVar3);
+  (*(code *)puVar2[0xaa])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2,param_1);
   return;
 }
 
 /* _glMateriali @ 0x92f2ef0c (140 bytes) */
-int _glMateriali(param_1, param_2, param_3)
+int _glMateriali(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -911,10 +1044,14 @@ int _glMateriali(param_1, param_2, param_3)
 }
 
 /* _glMaterialiv @ 0x92f2ef98 (140 bytes) */
-int _glMaterialiv(param_1, param_2, param_3)
+int _glMaterialiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -933,8 +1070,14 @@ int _glMaterialiv(param_1, param_2, param_3)
 }
 
 /* _glMultMatrixd @ 0x92f2f024 (124 bytes) */
-int _glMultMatrixd(param_1)
+int _glMultMatrixd(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -953,8 +1096,14 @@ int _glMultMatrixd(param_1)
 }
 
 /* _glMultMatrixf @ 0x92f2f0a0 (124 bytes) */
-int _glMultMatrixf(param_1)
+int _glMultMatrixf(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -973,10 +1122,14 @@ int _glMultMatrixf(param_1)
 }
 
 /* _glNormal3b @ 0x92f2f11c (140 bytes) */
-int _glNormal3b(param_1, param_2, param_3)
+int _glNormal3b(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -995,8 +1148,14 @@ int _glNormal3b(param_1, param_2, param_3)
 }
 
 /* _glNormal3bv @ 0x92f2f1a8 (124 bytes) */
-int _glNormal3bv(param_1)
+int _glNormal3bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1015,10 +1174,8 @@ int _glNormal3bv(param_1)
 }
 
 /* _glNormal3d @ 0x92f2f224 (160 bytes) */
-int _glNormal3d(param_1, param_2, param_3)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
+void _glNormal3d(double fparam_1,double fparam_2,double fparam_3)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1032,13 +1189,19 @@ int _glNormal3d(param_1, param_2, param_3)
   }
                     
                     
-  (*(code *)puVar2[0xb5])(param_1,param_2,param_3,*puVar2);
+  (*(code *)puVar2[0xb5])(fparam_1,fparam_2,fparam_3,*puVar2);
   return;
 }
 
 /* _glNormal3dv @ 0x92f2f2c4 (124 bytes) */
-int _glNormal3dv(param_1)
+int _glNormal3dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1057,8 +1220,14 @@ int _glNormal3dv(param_1)
 }
 
 /* _glNormal3fv @ 0x92f2f340 (124 bytes) */
-int _glNormal3fv(param_1)
+int _glNormal3fv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1077,10 +1246,14 @@ int _glNormal3fv(param_1)
 }
 
 /* _glNormal3i @ 0x92f2f3bc (140 bytes) */
-int _glNormal3i(param_1, param_2, param_3)
+int _glNormal3i(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1099,8 +1272,14 @@ int _glNormal3i(param_1, param_2, param_3)
 }
 
 /* _glNormal3iv @ 0x92f2f448 (124 bytes) */
-int _glNormal3iv(param_1)
+int _glNormal3iv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1119,10 +1298,14 @@ int _glNormal3iv(param_1)
 }
 
 /* _glNormal3s @ 0x92f2f4c4 (140 bytes) */
-int _glNormal3s(param_1, param_2, param_3)
+int _glNormal3s(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1141,8 +1324,14 @@ int _glNormal3s(param_1, param_2, param_3)
 }
 
 /* _glNormal3sv @ 0x92f2f550 (124 bytes) */
-int _glNormal3sv(param_1)
+int _glNormal3sv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1161,10 +1350,14 @@ int _glNormal3sv(param_1)
 }
 
 /* _glNormalPointer @ 0x92f2f5cc (140 bytes) */
-int _glNormalPointer(param_1, param_2, param_3)
+int _glNormalPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1183,19 +1376,13 @@ int _glNormalPointer(param_1, param_2, param_3)
 }
 
 /* _glOrtho @ 0x92f2f658 (156 bytes) */
-int _glOrtho(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
-  undefined8 param_5;
-  undefined8 param_6;
+void _glOrtho(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+             double fparam_6)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined8 uVar3;
   
-  uVar3 = FUN_92f27fc0();
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
   if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff60)) & 0xfffff000) != 0) {
@@ -1203,16 +1390,20 @@ int _glOrtho(param_1, param_2, param_3, param_4, param_5, param_6)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff60);
   }
-  (*(code *)puVar2[0xbe])(uVar3,param_2,param_3,param_4,param_5,param_6,*puVar2);
+  (*(code *)puVar2[0xbe])(fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,*puVar2);
   FUN_92f27b4c();
   return;
 }
 
 /* _glPixelMapfv @ 0x92f2f6f4 (140 bytes) */
-int _glPixelMapfv(param_1, param_2, param_3)
+int _glPixelMapfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1231,10 +1422,14 @@ int _glPixelMapfv(param_1, param_2, param_3)
 }
 
 /* _glPixelMapuiv @ 0x92f2f780 (140 bytes) */
-int _glPixelMapuiv(param_1, param_2, param_3)
+int _glPixelMapuiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1253,10 +1448,14 @@ int _glPixelMapuiv(param_1, param_2, param_3)
 }
 
 /* _glPixelMapusv @ 0x92f2f80c (140 bytes) */
-int _glPixelMapusv(param_1, param_2, param_3)
+int _glPixelMapusv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;

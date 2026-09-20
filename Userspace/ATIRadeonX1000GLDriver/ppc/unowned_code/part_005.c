@@ -592,16 +592,22 @@ int orph_1d0ddc(param_1, param_2)
 }
 
 /* orph_1d0de0 @ 0x1d0de0 (4 bytes) */
-int orph_1d0de0()
+int orph_1d0de0(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_001135ec();
+  FUN_001135ec(param_1,param_2,param_3);
   return;
 }
 
 /* orph_1d0de4 @ 0x1d0de4 (4 bytes) */
-int orph_1d0de4()
+int orph_1d0de4(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_001135ec();
+  FUN_001135ec(param_1,param_2,param_3);
   return;
 }
 

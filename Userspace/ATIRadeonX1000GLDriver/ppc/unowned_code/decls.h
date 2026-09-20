@@ -78,7 +78,8 @@ extern int orph_ed29c();
 extern int orph_f3bc0();
 extern int orph_f89b4();
 extern int orph_10451c();
-extern int orph_10b32c();
+extern int orph_10b32c(double param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+               undefined4 param_5,int param_6);
 extern int orph_10b3b4();
 extern int orph_10b3c0();
 extern int orph_10b3cc();

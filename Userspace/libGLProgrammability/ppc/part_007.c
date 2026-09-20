@@ -62,7 +62,7 @@ int yy_scan_buffer(param_1, param_2)
   else {
     pyVar1 = (unsigned char *)((int (*)())yy_flex_alloc)(0x28);
     if (pyVar1 == (unsigned char *)0x0) {
-      ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_scan_buffer)()");
+      ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_buffer()");
     }
     *(char **)(pyVar1 + 8) = param_1;
     *(uint *)(pyVar1 + 0x10) = param_2 - 2;
@@ -107,7 +107,7 @@ int yy_scan_bytes(param_1, param_2)
   
   pcVar2 = (char *)((int (*)())yy_flex_alloc)(param_2 + 2U);
   if (pcVar2 == (char *)0x0) {
-    ((int (*)())yy_fatal_error)("out of dynamic memory in ((int (*)())yy_scan_bytes)()");
+    ((int (*)())yy_fatal_error)("out of dynamic memory in yy_scan_bytes()");
   }
   iVar1 = 0;
   iVar3 = param_2;
@@ -122,7 +122,7 @@ int yy_scan_bytes(param_1, param_2)
   pcVar2[param_2] = '\0';
   iVar3 = ((int (*)())yy_scan_buffer)(pcVar2,param_2 + 2U);
   if (iVar3 == 0) {
-    ((int (*)())yy_fatal_error)("bad buffer in ((int (*)())yy_scan_bytes)()");
+    ((int (*)())yy_fatal_error)("bad buffer in yy_scan_bytes()");
   }
   *(undefined4 *)(iVar3 + 0x14) = 1;
   return iVar3;
@@ -178,28 +178,38 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
 {
   undefined *puVar1;
   undefined *puVar2;
-  char **ppcVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  int iVar6;
+  int iVar3;
+  char **ppcVar4;
+  undefined4 uVar5;
+  undefined4 *puVar6;
+  undefined4 extraout_r4;
+  int iVar7;
+  unsigned char * pTVar8;
+  undefined4 in_r8;
+  int iVar9;
+  undefined4 in_r10;
   size_t local_30 [4];
   
+  iVar3 = param_3;
+  iVar7 = param_4;
+  pTVar8 = param_5;
   _ScanFromString(*param_1);
-  uVar4 = 1;
+  uVar5 = 1;
   *(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) = param_5;
   if (param_3 != 0) {
-    iVar6 = 0;
-    ppcVar3 = param_1;
+    iVar9 = 0;
+    ppcVar4 = param_1;
     if (0 < param_3) {
       do {
-        if (*ppcVar3 == (char *)0x0) {
-          TParseContext__error((int)param_5,(char *)0x0,"Null shader source string","","");
-          TParseContext__recover();
+        if (*ppcVar4 == (char *)0x0) {
+          TParseContext__error
+                    ((int)param_5,(char *)0x0,"Null shader source string","","",in_r8,iVar9,in_r10);
+          TParseContext__recover(param_5);
           goto LAB_97badf80;
         }
-        iVar6 = iVar6 + 1;
-        ppcVar3 = ppcVar3 + 1;
-      } while (iVar6 < param_3);
+        iVar9 = iVar9 + 1;
+        ppcVar4 = ppcVar4 + 1;
+      } while (iVar9 < param_3);
     }
     if (param_2 == (int *)0x0) {
       param_2 = (int *)local_30;
@@ -207,7 +217,7 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
     }
     yyrestart((unsigned char *)0x0);
     puVar1 = PTR__cpp_a7b7c0a4;
-    uVar4 = 0;
+    uVar5 = 0;
     *(undefined4 *)(param_5 + 0x60) = 0;
     *(undefined4 *)(*(int *)puVar1 + 0x144) = 0;
     *(char ***)(*(int *)puVar1 + 0x150) = param_1;
@@ -216,51 +226,62 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
     *(undefined4 *)(*(int *)puVar1 + 0x28) = 0;
     _yylineno = 1;
     if ((-1 < **(int **)(*(int *)puVar1 + 0x148)) &&
-       (((yyparse(param_5), puVar2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)puVar1 + 0x140) == 1 ||
-         (*(int *)(param_5 + 0x14) != 0)) || (uVar4 = 0, 0 < *(int *)(param_5 + 0x18))))) {
+       (((yyparse(param_5,extraout_r4,iVar3,iVar7,pTVar8,in_r8,*(int **)(*(int *)puVar1 + 0x148),
+                  in_r10), puVar2 = PTR__cpp_a7b7c0a4, *(int *)(*(int *)puVar1 + 0x140) == 1 ||
+         (*(int *)(param_5 + 0x14) != 0)) || (uVar5 = 0, 0 < *(int *)(param_5 + 0x18))))) {
       if (param_4 != 0) {
-        iVar6 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
-        while (iVar6 != 0) {
-          iVar6 = *(int *)puVar2;
-          puVar5 = *(undefined4 **)(iVar6 + 0x20);
-          *(undefined4 *)(iVar6 + 0x20) = *puVar5;
-          _free(puVar5);
-          iVar6 = *(int *)(*(int *)puVar2 + 0x20);
+        iVar3 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
+        while (iVar3 != 0) {
+          iVar3 = *(int *)puVar2;
+          puVar6 = *(undefined4 **)(iVar3 + 0x20);
+          *(undefined4 *)(iVar3 + 0x20) = *puVar6;
+          _free(puVar6);
+          iVar3 = *(int *)(*(int *)puVar2 + 0x20);
         }
       }
 LAB_97badf80:
-      uVar4 = 1;
+      uVar5 = 1;
     }
   }
-  return uVar4;
+  return uVar5;
 }
 
 /* yyerror @ 0x97badfa0 (184 bytes) */
 int yyerror(param_1)
   char *param_1;
 {
-  int iVar1;
-  char *pcVar2;
+  undefined *puVar1;
+  int iVar2;
+  char *pcVar3;
+  undefined4 in_r9;
+  undefined4 in_r10;
   
-  iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-  pcVar2 = _yytext;
-  if (*(int *)(iVar1 + 0x60) != 0) {
+  puVar1 = PTR__cpp_a7b7c0a4;
+  iVar2 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
+  pcVar3 = _yytext;
+  if (*(int *)(iVar2 + 0x60) != 0) {
     if (-1 < *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x154)) {
       return;
     }
-    pcVar2 = "pre-mature EOF";
+    pcVar3 = "pre-mature EOF";
   }
-  TParseContext__error(iVar1,_yylineno,"syntax error",pcVar2,param_1,"");
-  TParseContext__recover();
+  TParseContext__error(iVar2,_yylineno,"syntax error",pcVar3,param_1,"",in_r9,in_r10);
+  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
   return;
 }
 
 /* PaReservedWord @ 0x97bae058 (108 bytes) */
 int PaReservedWord()
 {
+  undefined *puVar1;
+  undefined4 in_r9;
+  undefined4 in_r10;
+  
+  puVar1 = PTR__cpp_a7b7c0a4;
   TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"Reserved word.",_yytext,"","");
-  TParseContext__recover();
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"Reserved word.",_yytext,"","",
+             in_r9,in_r10);
+  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
   return;
 }
 
@@ -282,7 +303,7 @@ int PaIdentOrType(param_1, param_2, param_3)
   iVar5 = (piVar4[1] - iVar3 >> 2) + -1;
   while( true ) {
     iVar3 = *(int *)(iVar3 + iVar5 * 4);
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)local_30,iVar3,param_1);
     pTVar1 = (unsigned char *)0x0;
     if (local_30[0] != *(int *)(iVar3 + 4)) {
       pTVar1 = *(unsigned char **)(local_30[0] + 0x18);
@@ -310,6 +331,8 @@ int PaParseComment(param_1, param_2)
   unsigned char * param_2;
 {
   int iVar1;
+  undefined4 in_r9;
+  undefined4 in_r10;
   int iVar2;
   
   iVar2 = 0;
@@ -325,8 +348,9 @@ int PaParseComment(param_1, param_2)
     if (iVar1 < 0x2b) {
       if (iVar1 == -1) {
         TParseContext__error
-                  ((int)param_2,_yylineno,"End of shader found before end of comment.","","","");
-        TParseContext__recover();
+                  ((int)param_2,_yylineno,"End of shader found before end of comment.","","","",
+                   in_r9,in_r10);
+        TParseContext__recover(*(unsigned char **)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c));
         return 0;
       }
 LAB_97bae268:
@@ -345,37 +369,39 @@ LAB_97bae268:
 }
 
 /* _CPPDebugLogMsg @ 0x97bae28c (92 bytes) */
-int _CPPDebugLogMsg()
+int _CPPDebugLogMsg(param_1)
+  char *param_1;
 {
-  char *pcVar1;
+  void *this;
   
-  pcVar1 = (char *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8) + 8);
-  TInfoSinkBase__append(pcVar1);
-  TInfoSinkBase__append(pcVar1);
+  this = (void *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8) + 8);
+  __ZN13TInfoSinkBase6appendEPKc(this,param_1);
+  __ZN13TInfoSinkBase6appendEPKc(this,"\n");
   return;
 }
 
-/* _CPPWarningToInfoLog @ 0x97bae2e8 (316 bytes) */
-int _CPPWarningToInfoLog()
+/* _CPPWarningToInfoLog @ 0x97bae2e8 (92 bytes) */
+int _CPPWarningToInfoLog(param_1)
+  char *param_1;
 {
   bool bVar1;
   int iVar2;
   uint uVar3;
   int *piVar4;
   int iVar5;
-  char *pcVar6;
+  void *this;
   char in_RESERVE;
-  byte bVar7;
-  int local_70 [4];
+  byte bVar6;
+  char *local_70 [4];
   char acStack_60 [64];
   unsigned char aaStack_20 [16];
   
   uVar3 = _yylineno;
-  pcVar6 = *(char **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
+  this = *(void **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
                     
-  TInfoSinkBase__append(pcVar6);
+  __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
   bVar1 = (uVar3 & 0xffff) == 0;
-  bVar7 = bVar1 << 1;
+  bVar6 = bVar1 << 1;
   iVar5 = (int)uVar3 >> 0x10;
   if (bVar1) {
     _sprintf(acStack_60,"%d:? ",iVar5);
@@ -383,24 +409,24 @@ int _CPPWarningToInfoLog()
   else {
     _sprintf(acStack_60,"%d:%d",iVar5);
   }
-  std__string__string((unsigned char *)local_70,acStack_60,aaStack_20);
-  *(undefined *)(local_70[0] + *(int *)(local_70[0] + -0xc)) = *PTR__S_terminal_a7b7c0b8;
-  TInfoSinkBase__append(pcVar6);
+  __ZNSsC1EPKcRKSaIcE(local_70,acStack_60,aaStack_20);
+  local_70[0][*(int *)(local_70[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+  __ZN13TInfoSinkBase6appendEPKc(this,local_70[0]);
   piVar4 = (int *)(local_70[0] + -4);
   do {
     iVar5 = *piVar4;
     if (in_RESERVE != '\0') {
       iVar2 = storeWordConditionalIndexed(iVar5 + -1,0,piVar4);
       *piVar4 = iVar2;
-      bVar7 = 2;
+      bVar6 = 2;
     }
-  } while (!(bool)(bVar7 >> 1 & 1));
+  } while (!(bool)(bVar6 >> 1 & 1));
   if (iVar5 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_70[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_70[0] + -0xc));
   }
-  TInfoSinkBase__append(pcVar6);
-  TInfoSinkBase__append(pcVar6);
-  TInfoSinkBase__append(pcVar6);
+  __ZN13TInfoSinkBase6appendEPKc(this,": ");
+  __ZN13TInfoSinkBase6appendEPKc(this,param_1);
+  __ZN13TInfoSinkBase6appendEPKc(this,"\n");
   return;
 }
 
@@ -408,8 +434,14 @@ int _CPPWarningToInfoLog()
 int _CPPShInfoLogMsg(param_1)
   undefined4 param_1;
 {
-  TParseContext__error(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",param_1,"");
-  TParseContext__recover();
+  undefined *puVar1;
+  undefined4 in_r9;
+  undefined4 in_r10;
+  
+  puVar1 = PTR__cpp_a7b7c0a4;
+  TParseContext__error
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",param_1,"",in_r9,in_r10);
+  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
   return;
 }
 
@@ -417,9 +449,15 @@ int _CPPShInfoLogMsg(param_1)
 int _CPPErrorToInfoLog(param_1)
   undefined4 param_1;
 {
+  undefined *puVar1;
+  undefined4 in_r9;
+  undefined4 in_r10;
+  
+  puVar1 = PTR__cpp_a7b7c0a4;
   TParseContext__error
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",param_1,"");
-  TParseContext__recover();
+            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",param_1,"",in_r9
+             ,in_r10);
+  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
   return;
 }
 
@@ -436,7 +474,7 @@ int _SetStringNumber(param_1)
   int param_1;
 {
   _yylineno = param_1 << 0x10 | (uint)(*(unsigned short *)((unsigned char *)&(_yylineno) + 2));
-  return;
+  return _yylineno;
 }
 
 /* _GetStringNumber @ 0x97bae58c (32 bytes) */
@@ -560,7 +598,9 @@ int _StoreStr(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * psVar4;
+  size_t sVar4;
+  unsigned char * paVar5;
+  unsigned char * this;
   char in_RESERVE;
   byte in_cr0;
   undefined4 local_c0;
@@ -569,14 +609,14 @@ int _StoreStr(param_1)
   undefined4 local_a0;
   int local_9c;
   undefined4 local_90 [4];
-  undefined4 local_80;
+  undefined4 local_80 [4];
   undefined4 local_70;
   int local_6c;
   undefined4 local_60;
   int local_5c;
-  undefined4 local_50;
-  undefined4 local_40;
-  undefined4 local_30;
+  undefined4 local_50 [4];
+  undefined4 local_40 [4];
+  undefined4 local_30 [7];
   
   iVar3 = DAT_a7b7baa8;
   piVar2 = (int *)(DAT_a7b7baa8 + 8);
@@ -591,10 +631,11 @@ int _StoreStr(param_1)
   local_bc = iVar3 + 0xc;
   local_b0 = local_c0;
   local_90[0] = GetGlobalPoolAllocator();
-  std__string__string((unsigned char *)&local_a0,param_1,(unsigned char *)local_90);
-  std__string__assign((unsigned char *)&local_c0);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
+            ((unsigned char *)&local_a0,param_1,(unsigned char *)local_90);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_c0,(unsigned char *)&local_a0);
   piVar2 = (int *)(local_9c + -4);
-  local_80 = local_a0;
+  local_80[0] = local_a0;
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
@@ -604,16 +645,18 @@ int _StoreStr(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_9c + -0xc));
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+              ((unsigned char *)(local_9c + -0xc),local_80);
   }
-  psVar4 = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
-  std__string__string((unsigned char *)&local_60,psVar4);
-  _strlen(" ");
-  std__string__append((char *)&local_60,0x97c291c0);
-  std__operator_((unsigned char *)&local_70,(unsigned char *)&local_60);
-  std__string__assign(psVar4);
+  this = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&local_60,this);
+  sVar4 = _strlen(" ");
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_60," ",sVar4);
+  __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
+            ((unsigned char *)&local_70,(unsigned char *)&local_60,&local_c0);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this,(unsigned char *)&local_70);
   piVar2 = (int *)(local_6c + -4);
-  local_50 = local_70;
+  local_50[0] = local_70;
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
@@ -623,10 +666,11 @@ int _StoreStr(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+              ((unsigned char *)(local_6c + -0xc),local_50);
   }
   piVar2 = (int *)(local_5c + -4);
-  local_40 = local_60;
+  local_40[0] = local_60;
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
@@ -636,10 +680,12 @@ int _StoreStr(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_5c + -0xc));
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+              ((unsigned char *)(local_5c + -0xc),local_40);
   }
   piVar2 = (int *)(local_bc + -4);
-  local_30 = local_c0;
+  paVar5 = (unsigned char *)(local_bc + -0xc);
+  local_30[0] = local_c0;
   do {
     iVar3 = *piVar2;
     if (in_RESERVE != '\0') {
@@ -649,9 +695,10 @@ int _StoreStr(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_bc + -0xc));
+    paVar5 = (unsigned char *)
+             __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(paVar5,local_30);
   }
-  return;
+  return paVar5;
 }
 
 /* _GetStrfromTStr @ 0x97baea34 (80 bytes) */
@@ -677,17 +724,18 @@ int _ResetTString()
   int iVar1;
   size_t sVar2;
   char *pcVar3;
+  unsigned char * psVar4;
   
   iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
   sVar2 = _strlen("");
   if (0x3ffffffc < sVar2) {
-    std____throw_length_error("basic_string__assign");
+    std____throw_length_error("basic_string::assign");
   }
   pcVar3 = *(char **)(iVar1 + 0x5c);
   if (((0 < *(int *)(pcVar3 + -4)) || ("" <= pcVar3)) || (pcVar3 + *(int *)(pcVar3 + -0xc) <= "")) {
-    std__string___M_replace_safe_char_const__
-              (pcVar3,pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + sVar2);
-    return;
+    psVar4 = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_
+                       (pcVar3,pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + sVar2);
+    return psVar4;
   }
   if ((uint)((int)"" + -(int)pcVar3) < sVar2) {
     if (-(int)pcVar3 == 0x683dc294) goto LAB_97baeb5c;
@@ -700,7 +748,7 @@ int _ResetTString()
 LAB_97baeb5c:
   *(size_t *)(pcVar3 + -0xc) = sVar2;
   *(undefined1 *)(*(int *)(iVar1 + 0x5c) + sVar2) = 0;
-  return;
+  return (unsigned char *)pcVar3;
 }
 
 /* _GetBehavior @ 0x97baeb80 (484 bytes) */
@@ -711,6 +759,7 @@ int _GetBehavior(param_1)
   int *piVar2;
   int iVar3;
   undefined4 uVar4;
+  size_t sVar5;
   char in_RESERVE;
   byte in_cr0;
   undefined4 local_80;
@@ -720,9 +769,9 @@ int _GetBehavior(param_1)
   undefined4 local_60;
   int local_5c;
   undefined4 local_50 [4];
-  undefined4 local_40;
-  undefined4 local_30;
-  undefined4 local_20;
+  undefined4 local_40 [4];
+  undefined4 local_30 [4];
+  undefined4 local_20 [4];
   
   iVar3 = _memcmp("require",param_1,8);
   uVar4 = 0;
@@ -737,17 +786,21 @@ int _GetBehavior(param_1)
         uVar4 = 2;
         if (iVar3 != 0) {
           local_50[0] = GetGlobalPoolAllocator();
-          std__string__string((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
-          std__string__string((unsigned char *)&local_70,(unsigned char *)&local_60);
-          _strlen(param_1);
-          std__string__append((char *)&local_70,(ulong)param_1);
-          std__string__string((unsigned char *)&local_80,(unsigned char *)&local_70);
-          _strlen("\' is not supported");
-          std__string__append((char *)&local_80,0x97c2aa10);
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
+                    ((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
+                    ((unsigned char *)&local_70,(unsigned char *)&local_60);
+          sVar5 = _strlen(param_1);
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
+                    ((unsigned char *)&local_70,param_1,sVar5);
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_80,(unsigned char *)&local_70);
+          sVar5 = _strlen("\' is not supported");
+          __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
+                    (&local_80,"\' is not supported",sVar5);
           *(undefined1 *)(local_7c + *(int *)(local_7c + -0xc)) = *DAT_a7b7baa4;
           ((int (*)())_CPPShInfoLogMsg)(local_7c);
           piVar2 = (int *)(local_7c + -4);
-          local_40 = local_80;
+          local_40[0] = local_80;
           do {
             iVar3 = *piVar2;
             if (in_RESERVE != '\0') {
@@ -757,10 +810,11 @@ int _GetBehavior(param_1)
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
           if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_7c + -0xc));
+            __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                      ((unsigned char *)(local_7c + -0xc),local_40);
           }
           piVar2 = (int *)(local_6c + -4);
-          local_30 = local_70;
+          local_30[0] = local_70;
           do {
             iVar3 = *piVar2;
             if (in_RESERVE != '\0') {
@@ -770,10 +824,11 @@ int _GetBehavior(param_1)
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
           if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_6c + -0xc));
+            __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                      ((unsigned char *)(local_6c + -0xc),local_30);
           }
           piVar2 = (int *)(local_5c + -4);
-          local_20 = local_60;
+          local_20[0] = local_60;
           do {
             iVar3 = *piVar2;
             if (in_RESERVE != '\0') {
@@ -783,7 +838,8 @@ int _GetBehavior(param_1)
             }
           } while (!(bool)(in_cr0 >> 1 & 1));
           if (iVar3 < 1) {
-            std__string___Rep___M_destroy((unsigned char *)(local_5c + -0xc));
+            __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                      ((unsigned char *)(local_5c + -0xc),local_20);
           }
           uVar4 = 3;
         }
@@ -793,7 +849,7 @@ int _GetBehavior(param_1)
   return uVar4;
 }
 
-/* _updateExtensionBehavior @ 0x97baed64 (1252 bytes) */
+/* _updateExtensionBehavior @ 0x97baed64 (1124 bytes) */
 int _updateExtensionBehavior(param_1, param_2)
   char *param_1;
   undefined4 param_2;
@@ -801,14 +857,18 @@ int _updateExtensionBehavior(param_1, param_2)
   bool bVar1;
   int iVar2;
   undefined *puVar3;
-  int *piVar4;
-  uint uVar5;
-  int iVar6;
-  char *pcVar7;
+  char *pcVar4;
+  int *piVar5;
+  uint uVar6;
+  int iVar7;
+  size_t sVar8;
+  undefined4 *puVar9;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
+  int local_1f0 [4];
   undefined4 local_1e0;
-  int local_1dc;
+  char *local_1dc;
   undefined4 local_1d0;
   int local_1c0;
   int local_1b0;
@@ -816,246 +876,276 @@ int _updateExtensionBehavior(param_1, param_2)
   undefined4 local_190;
   int local_18c;
   undefined4 local_180 [4];
-  undefined4 local_170;
+  undefined4 local_170 [4];
   int local_160;
-  int local_150;
+  char *local_150;
   int local_14c;
   undefined4 local_140;
   int local_13c;
   undefined4 local_130;
   int local_12c;
   undefined4 local_120 [4];
-  int local_110;
-  undefined4 local_100;
-  undefined4 local_f0;
+  char *local_110 [4];
+  undefined4 local_100 [4];
+  undefined4 local_f0 [4];
   undefined4 local_e0;
   int local_dc;
   undefined4 local_d0 [4];
-  int local_c0;
-  undefined4 local_b0;
-  undefined4 local_a0;
+  char *local_c0 [4];
+  undefined4 local_b0 [4];
+  undefined4 local_a0 [4];
   char acStack_90 [64];
-  undefined4 local_50;
-  undefined4 local_40;
-  undefined4 local_30;
+  undefined4 local_50 [4];
+  undefined4 local_40 [4];
+  undefined4 local_30 [5];
   
-  uVar5 = ((int (*)())_GetBehavior)(param_2);
-  local_1dc = DAT_a7b7baa8;
-  piVar4 = (int *)(DAT_a7b7baa8 + 8);
+  uVar6 = ((int (*)())_GetBehavior)(param_2);
+  iVar7 = DAT_a7b7baa8;
+  piVar5 = (int *)(DAT_a7b7baa8 + 8);
   do {
     if (in_RESERVE != '\0') {
-      iVar6 = storeWordConditionalIndexed(*piVar4 + 1,0,piVar4);
-      *piVar4 = iVar6;
+      iVar2 = storeWordConditionalIndexed(*piVar5 + 1,0,piVar5);
+      *piVar5 = iVar2;
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   local_1e0 = GetGlobalPoolAllocator();
-  local_1dc = local_1dc + 0xc;
+  local_1dc = (char *)(iVar7 + 0xc);
   local_1d0 = local_1e0;
-  iVar6 = _memcmp(param_1,"all",4);
+  iVar7 = _memcmp(param_1,"all",4);
   puVar3 = PTR__cpp_a7b7c0a4;
-  if (iVar6 == 0) {
-    if (uVar5 < 2) {
-      ((int (*)())_CPPShInfoLogMsg)("extension \'all\' cannot have \'require\' or \'enable\' behavior");
-      piVar4 = (int *)(local_1dc + -4);
+  if (iVar7 == 0) {
+    if (1 < uVar6) {
+      local_1f0[0] = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
+      local_1c0 = local_1f0[0];
+      while (local_1b0 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34), local_1f0[0] != local_1b0
+            ) {
+        *(uint *)(local_1f0[0] + 0x18) = uVar6;
+        std___Rb_tree_base_iterator___M_increment((unsigned char *)local_1f0);
+      }
+LAB_97baf31c:
+      piVar5 = (int *)(local_1dc + -4);
+      local_50[0] = local_1e0;
       do {
-        iVar6 = *piVar4;
+        iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-          *piVar4 = iVar2;
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
           in_cr0 = 2;
         }
-        local_30 = local_1e0;
       } while (!(bool)(in_cr0 >> 1 & 1));
-      goto joined_r0x97baf310;
+      if (0 < iVar7) {
+        return;
+      }
+      puVar9 = local_50;
+      goto code_r0x97baf34c;
     }
-    iVar6 = *(int *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x34) + 8);
-    local_1c0 = iVar6;
-    while (local_1b0 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34), iVar6 != local_1b0) {
-      *(uint *)(iVar6 + 0x18) = uVar5;
-      std___Rb_tree_base_iterator___M_increment();
-    }
-  }
-  else {
-    local_180[0] = GetGlobalPoolAllocator();
-    std__string__string((unsigned char *)&local_190,param_1,(unsigned char *)local_180);
-    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find((unsigned char *)local_1a0);
-    piVar4 = (int *)(local_18c + -4);
-    local_170 = local_190;
+    ((int (*)())_CPPShInfoLogMsg)("extension \'all\' cannot have \'require\' or \'enable\' behavior");
+    piVar5 = (int *)(local_1dc + -4);
+    local_30[0] = local_1e0;
     do {
-      iVar6 = *piVar4;
+      iVar7 = *piVar5;
       if (in_RESERVE != '\0') {
-        iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-        *piVar4 = iVar2;
+        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = iVar2;
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar6 < 1) {
-      std__string___Rep___M_destroy((unsigned char *)(local_18c + -0xc));
+    puVar9 = local_30;
+  }
+  else {
+    iVar7 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
+    local_180[0] = GetGlobalPoolAllocator();
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
+              (&local_190,param_1,(unsigned char *)local_180);
+    std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find((unsigned char *)local_1a0,iVar7 + 0x30,&local_190);
+    local_1f0[0] = local_1a0[0];
+    piVar5 = (int *)(local_18c + -4);
+    local_170[0] = local_190;
+    do {
+      iVar7 = *piVar5;
+      if (in_RESERVE != '\0') {
+        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = iVar2;
+        in_cr0 = 2;
+      }
+    } while (!(bool)(in_cr0 >> 1 & 1));
+    if (iVar7 < 1) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                ((unsigned char *)(local_18c + -0xc),local_170);
     }
     local_160 = *(int *)(*(int *)(*(int *)puVar3 + 0x2c) + 0x34);
-    if (local_1a0[0] == local_160) {
-      if (uVar5 == 0) {
-        local_120[0] = GetGlobalPoolAllocator();
-        std__string__string((unsigned char *)&local_130,"extension \'",(unsigned char *)local_120);
-        std__string__string((unsigned char *)&local_140,(unsigned char *)&local_130);
-        _strlen(param_1);
-        std__string__append((char *)&local_140,(ulong)param_1);
-        std__string__string((unsigned char *)&local_150,(unsigned char *)&local_140);
-        _strlen("\' is not supported");
-        std__string__append((char *)&local_150,0x97c2aa10);
-        *(undefined1 *)(local_14c + *(int *)(local_14c + -0xc)) = *DAT_a7b7baa4;
-        ((int (*)())_CPPShInfoLogMsg)(local_14c);
-        piVar4 = (int *)(local_14c + -4);
-        local_110 = local_150;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_14c + -0xc));
-        }
-        piVar4 = (int *)(local_13c + -4);
-        local_100 = local_140;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_13c + -0xc));
-        }
-        piVar4 = (int *)(local_12c + -4);
-        local_f0 = local_130;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_12c + -0xc));
-        }
-      }
-      else if ((-1 < (int)uVar5) && ((int)uVar5 < 4)) {
-        local_d0[0] = GetGlobalPoolAllocator();
-        std__string__string((unsigned char *)&local_e0,"extension \'",(unsigned char *)local_d0);
-        std__string__string((unsigned char *)&local_140,(unsigned char *)&local_e0);
-        _strlen(param_1);
-        std__string__append((char *)&local_140,(ulong)param_1);
-        std__string__string((unsigned char *)&local_150,(unsigned char *)&local_140);
-        _strlen("\' is not supported");
-        std__string__append((char *)&local_150,0x97c2aa10);
-        std__string__assign((unsigned char *)&local_1e0);
-        piVar4 = (int *)(local_14c + -4);
-        local_c0 = local_150;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_14c + -0xc));
-        }
-        piVar4 = (int *)(local_13c + -4);
-        local_b0 = local_140;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_13c + -0xc));
-        }
-        piVar4 = (int *)(local_dc + -4);
-        local_a0 = local_e0;
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_dc + -0xc));
-        }
-        pcVar7 = *(char **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
-        *(undefined1 *)(local_1dc + *(int *)(local_1dc + -0xc)) = *DAT_a7b7baa4;
-        uVar5 = _yylineno;
-                    
-        TInfoSinkBase__append(pcVar7);
-        bVar1 = (uVar5 & 0xffff) == 0;
-        in_cr0 = bVar1 << 1;
-        iVar6 = (int)uVar5 >> 0x10;
-        if (bVar1) {
-          _sprintf(acStack_90,"%d:? ",iVar6);
-        }
-        else {
-          _sprintf(acStack_90,"%d:%d",iVar6);
-        }
-        std__string__string((unsigned char *)&local_150,acStack_90,(unsigned char *)&local_140);
-        *(undefined *)(local_150 + *(int *)(local_150 + -0xc)) = *PTR__S_terminal_a7b7c0b8;
-        TInfoSinkBase__append(pcVar7);
-        piVar4 = (int *)(local_150 + -4);
-        do {
-          iVar6 = *piVar4;
-          if (in_RESERVE != '\0') {
-            iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-            *piVar4 = iVar2;
-            in_cr0 = 2;
-          }
-        } while (!(bool)(in_cr0 >> 1 & 1));
-        if (iVar6 < 1) {
-          std__string___Rep___M_destroy((unsigned char *)(local_150 + -0xc));
-        }
-        TInfoSinkBase__append(pcVar7);
-        TInfoSinkBase__append(pcVar7);
-        TInfoSinkBase__append(pcVar7);
-      }
-      piVar4 = (int *)(local_1dc + -4);
+    if (local_1f0[0] != local_160) {
+      *(uint *)(local_1f0[0] + 0x18) = uVar6;
+      goto LAB_97baf31c;
+    }
+    if (uVar6 == 0) {
+      local_120[0] = GetGlobalPoolAllocator();
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
+                ((unsigned char *)&local_130,"extension \'",(unsigned char *)local_120);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
+                ((unsigned char *)&local_140,(unsigned char *)&local_130);
+      sVar8 = _strlen(param_1);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,sVar8)
+      ;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_150,(unsigned char *)&local_140);
+      sVar8 = _strlen("\' is not supported");
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
+                (&local_150,"\' is not supported",sVar8);
+      *(char *)(local_14c + *(int *)(local_14c + -0xc)) = *DAT_a7b7baa4;
+      ((int (*)())_CPPShInfoLogMsg)(local_14c);
+      piVar5 = (int *)(local_14c + -4);
+      local_110[0] = local_150;
       do {
-        iVar6 = *piVar4;
+        iVar7 = *piVar5;
         if (in_RESERVE != '\0') {
-          iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-          *piVar4 = iVar2;
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
           in_cr0 = 2;
         }
-        local_40 = local_1e0;
       } while (!(bool)(in_cr0 >> 1 & 1));
-      goto joined_r0x97baf310;
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_14c + -0xc),local_110);
+      }
+      piVar5 = (int *)(local_13c + -4);
+      local_100[0] = local_140;
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_13c + -0xc),local_100);
+      }
+      piVar5 = (int *)(local_12c + -4);
+      local_f0[0] = local_130;
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_12c + -0xc),local_f0);
+      }
     }
-    *(uint *)(local_1a0[0] + 0x18) = uVar5;
-  }
-  piVar4 = (int *)(local_1dc + -4);
-  do {
-    iVar6 = *piVar4;
-    if (in_RESERVE != '\0') {
-      iVar2 = storeWordConditionalIndexed(iVar6 + -1,0,piVar4);
-      *piVar4 = iVar2;
-      in_cr0 = 2;
+    else if ((-1 < (int)uVar6) && ((int)uVar6 < 4)) {
+      local_d0[0] = GetGlobalPoolAllocator();
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
+                ((unsigned char *)&local_e0,"extension \'",(unsigned char *)local_d0);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
+                ((unsigned char *)&local_140,(unsigned char *)&local_e0);
+      sVar8 = _strlen(param_1);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,sVar8)
+      ;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
+                ((unsigned char *)&local_150,(unsigned char *)&local_140);
+      sVar8 = _strlen("\' is not supported");
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
+                ((unsigned char *)&local_150,"\' is not supported",sVar8);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_1e0,(unsigned char *)&local_150);
+      piVar5 = (int *)(local_14c + -4);
+      local_c0[0] = local_150;
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_14c + -0xc),local_c0);
+      }
+      piVar5 = (int *)(local_13c + -4);
+      local_b0[0] = local_140;
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_13c + -0xc),local_b0);
+      }
+      piVar5 = (int *)(local_dc + -4);
+      local_a0[0] = local_e0;
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+                  ((unsigned char *)(local_dc + -0xc),local_a0);
+      }
+      pcVar4 = local_1dc;
+      this = *(void **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8);
+      local_1dc[*(int *)(local_1dc + -0xc)] = *DAT_a7b7baa4;
+      uVar6 = _yylineno;
+                    
+      __ZN13TInfoSinkBase6appendEPKc(this,"WARNING: ");
+      bVar1 = (uVar6 & 0xffff) == 0;
+      in_cr0 = bVar1 << 1;
+      iVar7 = (int)uVar6 >> 0x10;
+      if (bVar1) {
+        _sprintf(acStack_90,"%d:? ",iVar7);
+      }
+      else {
+        _sprintf(acStack_90,"%d:%d",iVar7);
+      }
+      __ZNSsC1EPKcRKSaIcE((unsigned char *)&local_150,acStack_90,(unsigned char *)&local_140);
+      local_150[*(int *)(local_150 + -0xc)] = *PTR__S_terminal_a7b7c0b8;
+      __ZN13TInfoSinkBase6appendEPKc(this,local_150);
+      piVar5 = (int *)(local_150 + -4);
+      do {
+        iVar7 = *piVar5;
+        if (in_RESERVE != '\0') {
+          iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+          *piVar5 = iVar2;
+          in_cr0 = 2;
+        }
+      } while (!(bool)(in_cr0 >> 1 & 1));
+      if (iVar7 < 1) {
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_150 + -0xc));
+      }
+      __ZN13TInfoSinkBase6appendEPKc(this,": ");
+      __ZN13TInfoSinkBase6appendEPKc(this,pcVar4);
+      __ZN13TInfoSinkBase6appendEPKc(this,"\n");
     }
-    local_50 = local_1e0;
-  } while (!(bool)(in_cr0 >> 1 & 1));
-joined_r0x97baf310:
-  if (iVar6 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_1dc + -0xc));
+    piVar5 = (int *)(local_1dc + -4);
+    local_40[0] = local_1e0;
+    do {
+      iVar7 = *piVar5;
+      if (in_RESERVE != '\0') {
+        iVar2 = storeWordConditionalIndexed(iVar7 + -1,0,piVar5);
+        *piVar5 = iVar2;
+        in_cr0 = 2;
+      }
+    } while (!(bool)(in_cr0 >> 1 & 1));
+    puVar9 = local_40;
   }
+  if (0 < iVar7) {
+    return;
+  }
+code_r0x97baf34c:
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
+            ((unsigned char *)(local_1dc + -0xc),puVar9);
   return;
 }
 
@@ -1569,102 +1659,102 @@ int Binding__ClearName(this)
   return;
 }
 
-/* Binding__Binding @ 0x97bafe58 (4 bytes) */
-int Binding__Binding(this)
-  unsigned char * this;
+/* __ZN7BindingC2Ev @ 0x97bafe58 (4 bytes) */
+int __ZN7BindingC2Ev(this)
+  void *this;
 {
-  this[0x35] = 0x0;
-  *(undefined4 *)(this + 0x20) = 0xffffffff;
-  *(undefined4 *)(this + 0x1c) = 1;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x30) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x18) = 1;
-  *(undefined2 *)(this + 0x24) = 0;
+  *(undefined1 *)((int)this + 0x35) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x1c) = 1;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x30) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x18) = 1;
+  *(undefined2 *)((int)this + 0x24) = 0;
   *(undefined4 *)this = 0;
-  this[0x34] = 0x0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
-/* Binding__Binding_97bafe5c @ 0x97bafe5c (4 bytes) */
-int Binding__Binding_97bafe5c(this)
-  unsigned char * this;
+/* __ZN7BindingC1Ev @ 0x97bafe5c (4 bytes) */
+int __ZN7BindingC1Ev(this)
+  void *this;
 {
-  this[0x35] = 0x0;
-  *(undefined4 *)(this + 0x20) = 0xffffffff;
-  *(undefined4 *)(this + 0x1c) = 1;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x30) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x18) = 1;
-  *(undefined2 *)(this + 0x24) = 0;
+  *(undefined1 *)((int)this + 0x35) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x1c) = 1;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x30) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x18) = 1;
+  *(undefined2 *)((int)this + 0x24) = 0;
   *(undefined4 *)this = 0;
-  this[0x34] = 0x0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
-/* Binding__Binding_97bafe60 @ 0x97bafe60 (76 bytes) */
-int Binding__Binding_97bafe60(this)
-  unsigned char * this;
+/* __ZN7BindingC4Ev @ 0x97bafe60 (76 bytes) */
+int __ZN7BindingC4Ev(this)
+  void *this;
 {
-  this[0x35] = 0x0;
-  *(undefined4 *)(this + 0x20) = 0xffffffff;
-  *(undefined4 *)(this + 0x1c) = 1;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x30) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x18) = 1;
-  *(undefined2 *)(this + 0x24) = 0;
+  *(undefined1 *)((int)this + 0x35) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x1c) = 1;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x30) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x18) = 1;
+  *(undefined2 *)((int)this + 0x24) = 0;
   *(undefined4 *)this = 0;
-  this[0x34] = 0x0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
-/* Binding___Binding @ 0x97bafeac (8 bytes) */
-int Binding___Binding(this)
-  unsigned char * this;
+/* __ZN7BindingD2Ev @ 0x97bafeac (8 bytes) */
+int __ZN7BindingD2Ev(this)
+  void *this;
 {
-  ~Binding(this);
+  ((int (*)())__ZN7BindingD4Ev)(this);
   return;
 }
 
-/* Binding___Binding_97bafeb4 @ 0x97bafeb4 (8 bytes) */
-int Binding___Binding_97bafeb4(this)
-  unsigned char * this;
+/* __ZN7BindingD1Ev @ 0x97bafeb4 (8 bytes) */
+int __ZN7BindingD1Ev(this)
+  void *this;
 {
-  ~Binding(this);
+  ((int (*)())__ZN7BindingD4Ev)(this);
   return;
 }
 
-/* Binding___Binding_97bafebc @ 0x97bafebc (4 bytes) */
-int Binding___Binding_97bafebc(this)
-  unsigned char * this;
+/* __ZN7BindingD4Ev @ 0x97bafebc (4 bytes) */
+int __ZN7BindingD4Ev(this)
+  void *this;
 {
-  if (*(void **)(this + 8) != (void *)0x0) {
-    _free(*(void **)(this + 8));
+  if (*(void **)((int)this + 8) != (void *)0x0) {
+    _free(*(void **)((int)this + 8));
   }
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
   return;
 }
 
-/* Binding__Binding_97bafec0 @ 0x97bafec0 (4 bytes) */
-int Binding__Binding_97bafec0(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN7BindingC2ERKS_ @ 0x97bafec0 (4 bytes) */
+int __ZN7BindingC2ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   int iVar1;
   bool bVar4;
@@ -1672,36 +1762,36 @@ int Binding__Binding_97bafec0(this, param_1)
   ulong uVar2;
   char *pcVar5;
   
-  *(undefined4 *)(this + 8) = 0;
-  pcVar5 = *(char **)(param_1 + 8);
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  SetName(this,pcVar5);
-  iVar1 = Binding__GetLocation(param_1);
+  *(undefined4 *)((int)this + 8) = 0;
+  pcVar5 = *(char **)(param_2 + 8);
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  ((int (*)())Binding__SetName)(this,pcVar5);
+  iVar1 = Binding__GetLocation(param_2);
   Binding__SetLocation(this,iVar1);
-  iVar1 = Binding__GetActiveIndex(param_1);
+  iVar1 = Binding__GetActiveIndex(param_2);
   Binding__SetActiveIndex(this,iVar1);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
   ((int (*)())Binding__SetClientRequest)(this,bVar4);
-  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
-  uVar3 = Binding__GetOpenGLType(param_1);
+  uVar3 = Binding__GetOpenGLType(param_2);
   Binding__SetOpenGLType(this,uVar3);
-  uVar2 = Binding__GetDecSize(param_1);
+  uVar2 = Binding__GetDecSize(param_2);
   Binding__SetDecSize(this,uVar2);
-  uVar2 = Binding__GetActualSize(param_1);
+  uVar2 = Binding__GetActualSize(param_2);
   Binding__SetActualSize(this,uVar2);
-  this[0x35] = 0x0;
+  *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  this[0x34] = 0x0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
-/* Binding__Binding_97bafec4 @ 0x97bafec4 (4 bytes) */
-int Binding__Binding_97bafec4(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN7BindingC1ERKS_ @ 0x97bafec4 (4 bytes) */
+int __ZN7BindingC1ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   int iVar1;
   bool bVar4;
@@ -1709,36 +1799,36 @@ int Binding__Binding_97bafec4(this, param_1)
   ulong uVar2;
   char *pcVar5;
   
-  *(undefined4 *)(this + 8) = 0;
-  pcVar5 = *(char **)(param_1 + 8);
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  SetName(this,pcVar5);
-  iVar1 = Binding__GetLocation(param_1);
+  *(undefined4 *)((int)this + 8) = 0;
+  pcVar5 = *(char **)(param_2 + 8);
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  ((int (*)())Binding__SetName)(this,pcVar5);
+  iVar1 = Binding__GetLocation(param_2);
   Binding__SetLocation(this,iVar1);
-  iVar1 = Binding__GetActiveIndex(param_1);
+  iVar1 = Binding__GetActiveIndex(param_2);
   Binding__SetActiveIndex(this,iVar1);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
   ((int (*)())Binding__SetClientRequest)(this,bVar4);
-  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
-  uVar3 = Binding__GetOpenGLType(param_1);
+  uVar3 = Binding__GetOpenGLType(param_2);
   Binding__SetOpenGLType(this,uVar3);
-  uVar2 = Binding__GetDecSize(param_1);
+  uVar2 = Binding__GetDecSize(param_2);
   Binding__SetDecSize(this,uVar2);
-  uVar2 = Binding__GetActualSize(param_1);
+  uVar2 = Binding__GetActualSize(param_2);
   Binding__SetActualSize(this,uVar2);
-  this[0x35] = 0x0;
+  *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  this[0x34] = 0x0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
-/* Binding__Binding_97bafec8 @ 0x97bafec8 (224 bytes) */
-int Binding__Binding_97bafec8(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN7BindingC4ERKS_ @ 0x97bafec8 (224 bytes) */
+int __ZN7BindingC4ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   int iVar1;
   bool bVar4;
@@ -1746,36 +1836,36 @@ int Binding__Binding_97bafec8(this, param_1)
   ulong uVar2;
   char *pcVar5;
   
-  *(undefined4 *)(this + 8) = 0;
-  pcVar5 = *(char **)(param_1 + 8);
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  SetName(this,pcVar5);
-  iVar1 = Binding__GetLocation(param_1);
+  *(undefined4 *)((int)this + 8) = 0;
+  pcVar5 = *(char **)(param_2 + 8);
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  ((int (*)())Binding__SetName)(this,pcVar5);
+  iVar1 = Binding__GetLocation(param_2);
   Binding__SetLocation(this,iVar1);
-  iVar1 = Binding__GetActiveIndex(param_1);
+  iVar1 = Binding__GetActiveIndex(param_2);
   Binding__SetActiveIndex(this,iVar1);
-  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
   ((int (*)())Binding__SetClientRequest)(this,bVar4);
-  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_1);
+  bVar4 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
   ((int (*)())Binding__SetBuiltIn)(this,bVar4);
-  uVar3 = Binding__GetOpenGLType(param_1);
+  uVar3 = Binding__GetOpenGLType(param_2);
   Binding__SetOpenGLType(this,uVar3);
-  uVar2 = Binding__GetDecSize(param_1);
+  uVar2 = Binding__GetDecSize(param_2);
   Binding__SetDecSize(this,uVar2);
-  uVar2 = Binding__GetActualSize(param_1);
+  uVar2 = Binding__GetActualSize(param_2);
   Binding__SetActualSize(this,uVar2);
-  this[0x35] = 0x0;
+  *(undefined1 *)((int)this + 0x35) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  this[0x34] = 0x0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined1 *)((int)this + 0x34) = 0;
   return;
 }
 
 /* Binding__operator_ @ 0x97baffa8 (232 bytes) */
-int Binding__operator_(this, param_1)
+int Binding__operator_(this, param_2)
   unsigned char * this;
-  unsigned char * param_1;
+  unsigned char * param_2;
 {
   unsigned char BVar1;
   int iVar2;
@@ -1783,24 +1873,24 @@ int Binding__operator_(this, param_1)
   ushort uVar4;
   ulong uVar3;
   
-  if (this != param_1) {
-    SetName(this,*(char **)(param_1 + 8));
-    iVar2 = Binding__GetLocation(param_1);
+  if (this != param_2) {
+    SetName(this,*(char **)(param_2 + 8));
+    iVar2 = Binding__GetLocation(param_2);
     Binding__SetLocation(this,iVar2);
-    iVar2 = Binding__GetActiveIndex(param_1);
+    iVar2 = Binding__GetActiveIndex(param_2);
     Binding__SetActiveIndex(this,iVar2);
-    bVar5 = (bool)((int (*)())Binding__IsClientRequest)(param_1);
+    bVar5 = (bool)((int (*)())Binding__IsClientRequest)(param_2);
     ((int (*)())Binding__SetClientRequest)(this,bVar5);
-    bVar5 = (bool)((int (*)())Binding__IsBuiltIn)(param_1);
+    bVar5 = (bool)((int (*)())Binding__IsBuiltIn)(param_2);
     ((int (*)())Binding__SetBuiltIn)(this,bVar5);
-    uVar4 = Binding__GetOpenGLType(param_1);
+    uVar4 = Binding__GetOpenGLType(param_2);
     Binding__SetOpenGLType(this,uVar4);
-    uVar3 = Binding__GetDecSize(param_1);
+    uVar3 = Binding__GetDecSize(param_2);
     Binding__SetDecSize(this,uVar3);
-    uVar3 = Binding__GetActualSize(param_1);
+    uVar3 = Binding__GetActualSize(param_2);
     Binding__SetActualSize(this,uVar3);
-    this[0x34] = param_1[0x34];
-    BVar1 = param_1[0x35];
+    this[0x34] = param_2[0x34];
+    BVar1 = param_2[0x35];
     *(undefined4 *)(this + 4) = 0;
     this[0x35] = BVar1;
     *(undefined4 *)this = 0;
@@ -1808,8 +1898,8 @@ int Binding__operator_(this, param_1)
   return this;
 }
 
-/* operator__ @ 0x97bb0090 (88 bytes) */
-int operator__(param_1, param_2)
+/* __ZeqRK7BindingS1_ @ 0x97bb0090 (88 bytes) */
+int __ZeqRK7BindingS1_(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
@@ -1825,9 +1915,9 @@ int operator__(param_1, param_2)
 }
 
 /* Binding__CatName @ 0x97bb00e8 (208 bytes) */
-int Binding__CatName(this, param_1)
+int Binding__CatName(this, param_2)
   unsigned char * this;
-  char *param_1;
+  char *param_2;
 {
   char *pcVar1;
   int iVar2;
@@ -1836,13 +1926,13 @@ int Binding__CatName(this, param_1)
   char *pcVar5;
   int iVar6;
   
-  if (param_1 != (char *)0x0) {
-    sVar4 = _strlen(param_1);
+  if (param_2 != (char *)0x0) {
+    sVar4 = _strlen(param_2);
     pcVar5 = _malloc(sVar4 + *(int *)(this + 0x10) + 1);
     if (*(char **)(this + 8) != (char *)0x0) {
       _strncpy(pcVar5,*(char **)(this + 8),*(int *)(this + 0x10) + 1);
     }
-    _strncpy(pcVar5 + *(int *)(this + 0x10),param_1,sVar4 + 1);
+    _strncpy(pcVar5 + *(int *)(this + 0x10),param_2,sVar4 + 1);
     *(size_t *)(this + 0x10) = *(int *)(this + 0x10) + sVar4;
     _free(*(void **)(this + 8));
     iVar2 = *(int *)(this + 0x10);
@@ -1864,9 +1954,9 @@ int Binding__CatName(this, param_1)
 }
 
 /* Binding__SetName @ 0x97bb01b8 (164 bytes) */
-int Binding__SetName(this, param_1)
+int Binding__SetName(this, param_2)
   unsigned char * this;
-  char *param_1;
+  char *param_2;
 {
   int iVar1;
   size_t sVar2;
@@ -1874,11 +1964,11 @@ int Binding__SetName(this, param_1)
   int iVar4;
   
   ClearName(this);
-  if ((param_1 != (char *)0x0) && (sVar2 = _strlen(param_1), 0 < (int)sVar2)) {
+  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
     *(size_t *)(this + 0x10) = sVar2;
     pcVar3 = _malloc(sVar2 + 1);
     *(char **)(this + 8) = pcVar3;
-    _strncpy(pcVar3,param_1,*(int *)(this + 0x10) + 1);
+    _strncpy(pcVar3,param_2,*(int *)(this + 0x10) + 1);
     iVar1 = *(int *)(this + 0x10);
     iVar4 = 0;
     *(undefined4 *)(this + 0xc) = 0;
@@ -1895,9 +1985,9 @@ int Binding__SetName(this, param_1)
 }
 
 /* Binding__SetNameFromArrayName @ 0x97bb025c (332 bytes) */
-int Binding__SetNameFromArrayName(this, param_1)
+int Binding__SetNameFromArrayName(this, param_2)
   unsigned char * this;
-  char *param_1;
+  char *param_2;
 {
   bool bVar1;
   size_t sVar2;
@@ -1909,11 +1999,11 @@ int Binding__SetNameFromArrayName(this, param_1)
   
   ClearName(this);
   iVar6 = 0;
-  if ((param_1 != (char *)0x0) && (sVar2 = _strlen(param_1), 0 < (int)sVar2)) {
+  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
     *(size_t *)(this + 0x10) = sVar2;
     pcVar3 = _malloc(sVar2 + 1);
     *(char **)(this + 8) = pcVar3;
-    _strncpy(pcVar3,param_1,*(int *)(this + 0x10) + 1);
+    _strncpy(pcVar3,param_2,*(int *)(this + 0x10) + 1);
     iVar4 = *(int *)(this + 8);
     iVar5 = *(int *)(this + 0x10);
     if (*(char *)(iVar4 + iVar5 + -1) == ']') {
@@ -1956,9 +2046,9 @@ LAB_97bb0358:
 }
 
 /* Binding__RemoveNameBackToChar @ 0x97bb03a8 (132 bytes) */
-int Binding__RemoveNameBackToChar(this, param_1)
+int Binding__RemoveNameBackToChar(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   char *pcVar1;
   bool bVar2;
@@ -1970,7 +2060,7 @@ int Binding__RemoveNameBackToChar(this, param_1)
   bVar2 = false;
   if (-1 < iVar3) {
     do {
-      if ((int)*(char *)(*(int *)(this + 8) + iVar3) == CONCAT31(in_register_00000010,param_1)) {
+      if ((int)*(char *)(*(int *)(this + 8) + iVar3) == CONCAT31(in_register_00000010,param_2)) {
         bVar2 = true;
       }
       *(undefined1 *)(*(int *)(this + 8) + iVar3) = 0;
@@ -1994,11 +2084,11 @@ int Binding__RemoveNameBackToChar(this, param_1)
 }
 
 /* Binding__GetHash @ 0x97bb042c (20 bytes) */
-int Binding__GetHash(this, param_1)
+int Binding__GetHash(this, param_2)
   unsigned char * this;
-  uint param_1;
+  uint param_2;
 {
-  return *(uint *)(this + 0xc) - (*(uint *)(this + 0xc) / param_1) * param_1;
+  return *(uint *)(this + 0xc) - (*(uint *)(this + 0xc) / param_2) * param_2;
 }
 
 /* Binding__IsClientRequest @ 0x97bb0440 (8 bytes) */
@@ -2009,13 +2099,13 @@ int Binding__IsClientRequest(this)
 }
 
 /* Binding__SetClientRequest @ 0x97bb0448 (8 bytes) */
-int Binding__SetClientRequest(this, param_1)
+int Binding__SetClientRequest(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   undefined3 in_register_00000010;
   
-  *(uint *)(this + 0x2c) = CONCAT31(in_register_00000010,param_1);
+  *(uint *)(this + 0x2c) = CONCAT31(in_register_00000010,param_2);
   return;
 }
 
@@ -2027,13 +2117,13 @@ int Binding__IsBuiltIn(this)
 }
 
 /* Binding__SetBuiltIn @ 0x97bb0458 (8 bytes) */
-int Binding__SetBuiltIn(this, param_1)
+int Binding__SetBuiltIn(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   undefined3 in_register_00000010;
   
-  *(uint *)(this + 0x30) = CONCAT31(in_register_00000010,param_1);
+  *(uint *)(this + 0x30) = CONCAT31(in_register_00000010,param_2);
   return;
 }
 

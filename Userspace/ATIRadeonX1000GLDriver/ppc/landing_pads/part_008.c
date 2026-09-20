@@ -76,7 +76,7 @@ int eh_pad_16a874(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_16a890 @ 0x16a890 (28 bytes) */
+/* eh_pad_16a890 @ 0x16a890 (64 bytes) */
 int eh_pad_16a890(param_1)
   _Unwind_Exception *param_1;
 {
@@ -205,7 +205,7 @@ int eh_pad_171808(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_17182c @ 0x17182c (28 bytes) */
+/* eh_pad_17182c @ 0x17182c (1440 bytes) */
 int eh_pad_17182c(param_1)
   _Unwind_Exception *param_1;
 {

@@ -74,12 +74,97 @@ plain_names = {n for n in first_san if '::' not in n}   # a real free function o
 short_unique = {k: list(v)[0] for k, v in short_map.items() if len(v) == 1 and re.match(r'^~?[A-Za-z_]\w*$', k) and k not in plain_names}
 idx.sort(key=lambda r: int(r[0], 16))
 kw = {'if', 'while', 'for', 'switch', 'return', 'sizeof', 'do', 'else', 'case', 'goto', 'const', 'struct', 'union', 'enum', 'typedef', 'extern', 'static'}
-PRIM = set('_Unwind_Exception dwarf_eh_bases vec16 FILE sbyte word va_list section GhidraMachOSection segment_command load_command GhidraMachOCommand pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
+PRIM = set('dylib lc_str _Unwind_Exception dwarf_eh_bases vec16 FILE sbyte word va_list section GhidraMachOSection segment_command load_command GhidraMachOCommand pthread_mutex_t pthread_cond_t pthread_t pthread_key_t pthread_once_t pid_t dword time_t off_t mode_t uid_t gid_t int3 uint3 MACH_HEADER_t undefined undefined1 undefined2 undefined3 undefined4 undefined8 uint ulong ushort uchar byte bool longlong ulonglong char short int long unsigned signed void float double code size_t'.split())
+# `this` of a __thiscall method call: Ghidra prints `Class::method(args)` and omits the object when it is the caller's own `this`. In C the callee's first parameter
+# is that object, so the omitted argument must be added back (the stock passes r3 through). thiscall_n: Ghidra name -> parameter counts of its definitions.
+STRING_LIT = re.compile(r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])+\'')
+def sub_outside_strings(rx, repl, text):
+    """re.sub that leaves string/char literals alone (an error message that names a function - "bad buffer in yy_scan_bytes()" - is not a call)"""
+    out, pos = [], 0
+    for m in STRING_LIT.finditer(text):
+        out.append(re.sub(rx, repl, text[pos:m.start()])); out.append(m.group(0)); pos = m.end()
+    out.append(re.sub(rx, repl, text[pos:]))
+    return ''.join(out)
+def split_params_raw(sp):
+    out, d, cur, q = [], 0, '', False
+    for ch in sp:
+        if ch == '"': q = not q
+        if not q:
+            if ch in '([<': d += 1
+            if ch in ')]>': d -= 1
+            if ch == ',' and d == 0: out.append(cur); cur = ''; continue
+        cur += ch
+    if cur.strip(): out.append(cur)
+    return out
+thiscall_n = collections.defaultdict(set)
+_raw = {}
+for a, sz, name in idx:
+    _t = open(os.path.join(src, a + '.txt')).read()
+    _raw[a] = _t
+    _b = '\n'.join(l for l in _t.split('\n') if not l.startswith('//'))
+    _i = _b.find('{')
+    if _i > 0 and '__thiscall' in _b[:_i]:
+        _hd = re.sub(r'\s+', ' ', _b[:_i])
+        _m = re.search(r'__thiscall\s+(.+?)\((.*)\)\s*$', _hd.strip())
+        if _m: thiscall_n[orig_of.get(a, name)].add(len(split_params_raw(_m.group(2))) if _m.group(2).strip() not in ('', 'void') else 0)
+def add_this(body, self_is_thiscall):
+    self_this = None
+    _ib0 = body.find('{')
+    if self_is_thiscall and _ib0 > 0:
+        _hm = re.search(r'__thiscall\s+.+?\((.*)\)\s*$', re.sub(r'\s+', ' ', body[:_ib0]).strip())
+        if _hm:
+            _pp = split_params_raw(_hm.group(1))
+            if _pp:
+                _nm = re.search(r'(\w+)\s*$', _pp[0].strip())
+                self_this = _nm.group(1) if _nm else None
+    self_is_thiscall = bool(self_this)
+    """insert the omitted object argument into calls of thiscall methods: the caller's own `this` (a method calling a method), else the object the previous
+    call to a method of the same class in this function was given (`error(obj, ...); recover();`)"""
+    if not thiscall_n: return body, 0
+    n_added = 0
+    names = sorted(set(thiscall_n) | {n_ for n_ in orig_of.values() if '::' in n_ and not n_.endswith('::~' + n_.split('::')[-1].lstrip('~'))}, key=len, reverse=True)
+    rx = re.compile(r'(?<![\w:>~])(' + '|'.join(re.escape(x) for x in names) + r')(\s*)\(')
+    out, pos = [], 0
+    hdr_end = body.find('{')
+    last_obj = {}
+    for m in rx.finditer(body):
+        if m.start() < hdr_end: continue
+        i, d, q = m.end(), 1, False
+        while i < len(body) and d:
+            ch = body[i]
+            if ch == '"' and body[i - 1] != '\\': q = not q
+            elif not q:
+                if ch == '(': d += 1
+                elif ch == ')': d -= 1
+            i += 1
+        args = body[m.end():i - 1]
+        parts = split_params_raw(args) if args.strip() else []
+        nargs = len(parts)
+        cls = m.group(1).rsplit('::', 1)[0] if '::' in m.group(1) else m.group(1)
+        if m.group(1) not in thiscall_n or nargs in thiscall_n[m.group(1)]:
+            if parts: last_obj[cls] = parts[0].strip()
+        elif (nargs + 1) in thiscall_n[m.group(1)]:
+            obj = self_this if self_is_thiscall else last_obj.get(cls)
+            if obj:
+                out.append(body[pos:m.end()]); out.append(obj + (', ' if args.strip() else '')); pos = m.end(); n_added += 1
+                last_obj[cls] = obj
+            else:
+                unresolved_this.append((m.group(1)))
+                if os.environ.get('SHOW_UNRESOLVED'): print('UNRESOLVED', m.group(1), nargs, '|', re.sub(r'\s+', ' ', body[max(0, m.start()-70):m.end()+60]))
+    out.append(body[pos:])
+    return ''.join(out), n_added
+unresolved_this = []
+this_added = 0
 bodies = {}; defined = {}
 for a, sz, name in idx:
-    t = open(os.path.join(src, a + '.txt')).read()
+    t = _raw[a]
     lines = t.split('\n')
     body = '\n'.join(l for l in lines if not l.startswith('//'))
+    _ib = body.find('{')
+    body, _n = add_this(body, _ib > 0 and '__thiscall' in body[:_ib])
+    this_added += _n
+    _lits = []
+    body = STRING_LIT.sub(lambda m: (_lits.append(m.group(0)), '__STRLIT_%d__' % (len(_lits) - 1))[1], body)   # names are rewritten below; a message that names a function is data, not a call
     if name_map:
         _names = sorted(name_map, key=len, reverse=True)
         if '_name_rx' not in globals(): _name_rx = re.compile(r'(?<![\w])(?:' + '|'.join(re.escape(n) for n in _names) + r')(?![\w])')
@@ -96,7 +181,11 @@ for a, sz, name in idx:
         body = _name_rx.sub(lambda m: name_map[m.group(0)], body)
         for sh, sn in short_unique.items():
             body = re.sub(r'(?<![\w:.>])%s\s*\(' % re.escape(sh), sn + '(', body)
+    # the address the switch jumps to (`(int)&table + table[i]`, the operand of the `bctr`): the C `switch` replaces the jump, so nothing reads it
+    body = re.sub(r'\(int\)&switchD_\w+::switchdataD_\w+\s*\+\s*\(&switchD_\w+::switchdataD_\w+\)\[[^\]]+\]', '0', body)
+    body = re.sub(r'\b(?:switchD_[0-9a-f]+)::(switchdataD_[0-9a-f]+)', r'\1', body)
     body = sanitize_scoped(body)
+    body = re.sub(r'__STRLIT_(\d+)__', lambda m: _lits[int(m.group(1))], body)
     body = re.sub(r'/\*.*?\*/', lambda m: '', body, flags=re.S)
     body = re.sub(r'\b(?:switchD_[0-9a-f]+)::(switchdataD_[0-9a-f]+)', r'\1', body)
     if '!! decompile failed' in body: bodies[a] = None; continue
@@ -180,6 +269,19 @@ for a, sz, name in idx:
             names.append(mm.group(2)); decl.append('  %s%s%s;' % (mm.group(1), mm.group(2), mm.group(3)) if not mm.group(1).strip().endswith('*') else '  %s%s%s;' % (mm.group(1), mm.group(2), mm.group(3)))
         if names is None: bodies[a] = nrt + ' ' + name + '(' + fix_types(nparams + ' ').strip() + ')\n\n' + b[i:]
         else: bodies[a] = nrt + ' ' + name + '(' + ', '.join(names) + ')\n' + '\n'.join(decl) + ('\n' if decl else '') + b[i:]
+# A function whose own decompile returns nothing (`void`) but that a caller uses the result of (`f1 = (double)f(...)`, `if (f(...) == 0)`): Ghidra models the callee as
+# leaving a value in f1/r3 it never wrote (a passed-through argument). C cannot use a void result, so such a function is given the type its callers read it as.
+_void_names = {name for a_, (rt_, pr_, ex_) in proto.items() for a2_, sz2_, name in idx if a2_ == a_ and ex_ and rt_ == 'void'}
+if _void_names:
+    _allb = '\n'.join(b_ for b_ in bodies.values() if b_)
+    for _vn in _void_names:
+        _m = re.search(r'(?:[=(,!]|==|!=|&&|\|\|)\s*(?:\(([\w ]+)\))?\s*%s\s*\(' % re.escape(_vn), _allb)
+        if not _m: continue
+        _nt = 'double' if (_m.group(1) or '').strip() in ('double', 'float') else 'int'
+        for a_, sz_, name_ in idx:
+            if name_ == _vn and bodies.get(a_):
+                bodies[a_] = re.sub(r'(?m)^void(\s+)%s\b' % re.escape(_vn), r'%s\1%s' % (_nt, _vn), bodies[a_], count=1)
+                rt_, pr_, ex_ = proto[a_]; proto[a_] = (_nt, pr_, ex_)
 decls = ['#include "ghidra_c.h"', '']
 exact_fns = {name: a for a, (rt, params, exact) in [(a, proto[a]) for a in proto] for a2, sz2, name in idx if a2 == a and exact}
 for a, sz, name in idx:
@@ -203,6 +305,7 @@ ftab = set(re.findall(r'\(\s*((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\)\s*\[', allbody)
 for f in sorted(set(re.findall(r'\bFLOAT_[0-9a-f]{8}\b', allbody))): decls.append('extern float %s%s;' % (f, '[]' if f in ftab else ''))
 for f in sorted(set(re.findall(r'\bDOUBLE_[0-9a-f]{8}\b', allbody))): decls.append('extern double %s%s;' % (f, '[]' if f in ftab else ''))
 open(os.path.join(out, 'decls.h'), 'w').write('\n'.join(decls) + '\n')
+print('thiscall arguments restored: %d (%d still without an object)' % (this_added, len(unresolved_this)))
 def fix_arrays(b):
     """Ghidra declares stack pieces as arrays but the code treats them as scalars, indexes past the declared bound (the array runs
     over the following stack variables), or stores 4-byte pieces into byte arrays."""
@@ -327,11 +430,20 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b([A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*)\._(\d+)_(\d+)_', lambda m: '(*(%s *)((unsigned char *)&(%s) + %s))' % ({'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(3), 'unsigned int'), m.group(1), m.group(2)), b)
             k_ = b.index('{'); head_, rest_ = b[:k_], b[k_:]
             for nm in ([] if (os.environ.get('NOCAST') and not os.environ.get('CASTEXACT')) else exact_fns):
-                if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (proto[exact_fns[nm]][0], nm), rest_)
+                if nm in rest_: rest_ = sub_outside_strings(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((%s (*)())%s)(' % (proto[exact_fns[nm]][0], nm), rest_)
             for nm in ([] if os.environ.get('NOCAST') else samepart):
-                if nm in rest_: rest_ = re.sub(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
+                if nm in rest_: rest_ = sub_outside_strings(r'(?<![\w.>])%s\s*\(' % re.escape(nm), '((int (*)())%s)(' % nm, rest_)
             b = head_ + rest_
             conv = fix_arrays(fix_types(b))
+            for cn_ in set(re.findall(r'(?m)^\s*code (\w+);', conv)):           # a scalar `code` local (a byte Ghidra typed as code) that is never called
+                if not re.search(r'\b%s\(|\(\*%s\)' % (cn_, cn_), conv):
+                    conv = re.sub(r'(?m)^(\s*)code %s;' % cn_, r'\1unsigned char %s;' % cn_, conv)
+            for cn_ in set(re.findall(r'(?m)^\s*code \*(\w+);', conv)):        # a `code *` local that is indexed and never called is a byte pointer
+                if re.search(r'\b%s\[' % cn_, conv) and not re.search(r'\(\*?%s\)\(|\b%s\(' % (cn_, cn_), conv):
+                    conv = re.sub(r'(?m)^(\s*)code \*%s;' % cn_, r'\1unsigned char *%s;' % cn_, conv)
+            conv = re.sub(r'\bcase \(\s*[\w ]+\*+\s*\)\s*(0x[0-9a-fA-F]+|\d+)\s*:', r'case \1:', conv)   # a pointer-typed switch: its case values are plain integers
+            conv = re.sub(r'switch\((\w+)\)', lambda m: 'switch((int)%s)' % m.group(1) if re.search(r'(?m)^\s*[\w ]+\*+\s*%s\s*;' % m.group(1), conv) else m.group(0), conv)   # a pointer-typed switch variable
+            conv = re.sub(r'(?m)^(\s*[A-Za-z_]\w*:)(\s*\n\s*\})', r'\1 ;\2', conv)   # a label needs a statement: `code_r0x...:` directly before `}` when the target is the function's end
             if name in PATCHES: conv = PATCHES[name](b, conv)
             f.write(conv + '\n')
             if os.environ.get('SINGLE'):

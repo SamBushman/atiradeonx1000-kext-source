@@ -1,3 +1,5 @@
 SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
-LOWCOUNT: 0 functions where stock calls some callee more often than the recompile (info)
-894 functions compared, 0 with functions whose callee SETS differ (3 skipped; 0 more differ only through shared tail code)
+LOWCOUNT: 2 functions where stock calls some callee more often than the recompile (info)
+894 functions compared, 2 with functions whose callee SETS differ (3 skipped; 0 more differ only through shared tail code)
+1 _glOrtho STOCK-ONLY {'FUN_92f27fc0': 1} OURS-ONLY {}
+1 _glFrustum STOCK-ONLY {'FUN_92f27fc0': 1} OURS-ONLY {}

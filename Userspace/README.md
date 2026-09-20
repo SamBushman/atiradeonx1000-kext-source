@@ -105,16 +105,57 @@ Findings that changed the corpora: **libGL, GA and VA had been imported into Ghi
 | libGL | yes, 893 exports = stock | yes; the whole GL process runs on it | identical output to the system libGL |
 | ATIRadeonX1000GA | yes, 9 exports | yes | 0 differences over 2.16M inputs; data table identical |
 | ATIRadeonX1000VADriver | yes, 4 exports | yes | `AVAGetRendererInfo` identical |
-| libGLProgrammability | yes, 1086 exports = stock (plus libstdc++ for the EH runtime) | yes, 515/515 C exports resolve | ARB program parser: 78 parses (39 programs x vertex/fragment) identical to the stock in status, stream size and every stream word - after the link-time rewrites below and one hand patch; the rest of the library is untested (#60) |
-| ATIRadeonX1000GLDriver | yes, 63 exports = stock | yes (initialisers run at `dlopen`), 63/63 exports resolve | load only (`gld_test.c`): needs the kext and a display to run; two functions are not reproduced (`FUN_00115fa0`, 34,636 bytes, Ghidra could not decompile it - linked as a stub returning 0; `func_0x001a323c`, a register-save millicode entry Ghidra printed as a call); 434 argument-less calls unverified |
+| libGLProgrammability | yes, 1086 exports = stock (plus libstdc++ for the EH runtime) | yes, 515/515 C exports resolve | ARB program parser: 78 parses (39 programs x vertex/fragment) identical to the stock in status, stream size and every stream word (re-run 2026-09-20 on the call-accurate corpus); the GLSL front end and the rest of the library are untested (#60) |
+| ATIRadeonX1000GLDriver | yes, 63 exports = stock | yes (initialisers run at `dlopen`, including `FUN_00115fa0`, the 34,636-byte static-initialiser function that used to be a stub), 63/63 exports resolve | load only (`gld_test.c`): needs the kext and a display to run; every function is transcribed (4033 + 525 orphans + 566 landing pads, none stubbed); 5 data objects that only unwinder paths read are zero placeholders (`dummy_data`, inside `__TEXT,__eh_frame`) |
 
 Semantic defects the differential test exposed in the Ghidra-derived C (all handled at link time, `rewrites.py`, counts in `rewrites.txt`; glprog / GLDriver): byte buffers declared as one-byte scalars whose address is handed to a routine that fills a string (49 / 20: the callee overwrote neighbouring locals); stack records shown as separate scalars but passed by address (107 / 309: merged into one block, zero-initialised); `(double)CONCAT44(hi, lo)` bit-pattern constructions converted numerically instead of reinterpreted (84 / 272); `byte - 0x30 < 10` digit tests that C promotes to int; libgcc 64-bit shift helpers called as `int` so the low word (`extraout_r4`) was never set (3); data symbols used with `&X + n*8` byte arithmetic declared by width instead of as bytes; halfword `= CONCAT22(...)` stores that are word stores. Not fixed in the corpora themselves yet.
 
-**Open defect class - dropped call arguments.** Ghidra prints calls to functions whose parameters it had not committed as `f()`; the stock passes registers (typically r3 = `this` or a pointer just loaded). The corpus has 349 such calls to functions that take parameters in libGLProgrammability and 434 in GLDriver (e.g. `TParseContext::recover()` x112). One such site crashed the stream extraction (`_PPStreamGetStream` calling `_PPStreamChunkListGetMaxIndex()` without `param_1[3]`); it is patched by hand in `link_config/glprog.json` (`text_patches`), the others are unverified. The principled fix is to commit Ghidra's inferred parameter signatures (Decompiler Parameter ID) and re-decompile, then regenerate the corpora.
+### Call-argument accuracy (issue #61, second pass)
+
+The first linked corpora still contained calls that Ghidra printed wrongly, found by asking "does every call pass what the machine code passes". Counted with
+`Tools/userspace/detect_dropped_args.py` (`f()` for a function that takes parameters) and `detect_short_calls.py` (fewer arguments than parameters):
+
+| corpus | argument-less calls before -> after | short calls before -> after |
+|---|---|---|
+| libGLProgrammability | 351 -> 0 | 1546 -> 9 |
+| ATIRadeonX1000GLDriver | 434 -> 0 | 1657 -> 0 |
+| ATIRadeonX1000VADriver / GA / libGL | 15 / 2 / 0 -> 0 | 21 / 4 / 0 -> 0 |
+
+The 9 remaining glprog candidates are not defects: 5 are `yy_*()` names inside error-message strings, 4 are C++ callees whose extra parameters are only forwarded
+to a variadic `error(...)` as unset registers. Root causes, each fixed in the Ghidra project copy before the dump (`Tools/userspace/pipeline/README.md`, Stage B2):
+
+* **the stored signature is what call sites print**, and it was often shorter than the function's own fresh decompile (and for calls through a dyld PIC stub it is
+  the stub's): `CommitLiveSigs.java` (register liveness from the machine code) + `CopySigToStubs.java`. FP argument registers had never been counted (`f4`'s base
+  register is the VSX register `vs4`);
+* **`__thiscall` calls print without the object** (`Class::method(args)`): `ThisToStdcall.java`;
+* **register-save millicode** (`bl` into the stfd chain) was modelled as a call that clobbers r3..r10, so a function's own arguments read back as `extraout_rN`
+  (GLDriver `FUN_000353a0` never read its first two arguments; 20 sites GLDriver, 7 glprog, 39 libGL, 8 VA/GA): `NopMillicode.java`;
+* **Ghidra prints demangled names at calls and the demangler is not injective** (the `pool_allocator` `basic_string` prints as `std::string`; overloads; same-named
+  C statics), so every call to such a name was bound to the first function of that name - a wrong overload, or the wrong class's method (`std::operator+`, every
+  pool-string call in the GLSL front end): `UniqueNames.java` gives colliding functions their mangled symbol; `check_import_binding.py` and the strict callee
+  compare check every call's target by mangled name;
+* string literals that contain a function name were rewritten by the name/cast passes (`"basic_string::_M_check"` became `"basic_string___M_check"`);
+* Apple gcc 4.0.1 turns a call of a function with a by-value `float` parameter through an unprototyped cast into `__builtin_trap` (`note: if this code is reached,
+  the program will abort` in the compile log; 3 glprog functions, ~70 sites in GLDriver): such calls are now made by prototype with the integer bit patterns
+  Ghidra shows reinterpreted as floats (`GH_ARGF/GH_ARGD`); the link builds are checked for that note;
+* a `void` function whose result a caller uses is given the type its callers read; a `switch` on a pointer-typed variable, `case (char *)0x4`, `case "":`
+  (a case value that Ghidra printed as the empty string at that address), scalar `code` locals and a Mach-O `dylib` struct fitted onto a stack record are
+  normalised; the lwarx/stwcx idiom with a computed value line is rewritten;
+* six call sites whose registers Ghidra could not show are patched by hand in `patches.py`, each derived from the machine code (`yyparse`,
+  `std::operator+`, `_RegisterCanMerge`, `removeChildNode`, GLDriver `FUN_000934f0`/`FUN_00135334`/`FUN_0014700c`/`FUN_00168468`).
+
+Consequences for the coverage claims: GLDriver `FUN_00115fa0` (34,636 bytes, "decompile failed", linked as a stub) is now transcribed (a retry with larger decompiler
+limits) and linked; `func_0x001a323c` (millicode entry) no longer appears; **no `dummy_functions` remain in any link config**. Every ledger row of every corpus is
+`converted`, every corpus is compile-clean (`compile_status.txt`), and the callee comparison is strict by mangled name for libGLProgrammability (10 residuals, all
+listed below).
 
 Limits: C++ exceptions cannot work in the recompiled images (no unwind tables for C-compiled bodies; the runtime comes from libstdc++), and "links and loads" is weaker than "behaves the same".
 
 ### Known residuals (explained, not hidden)
+
+* Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,
+  `register_frame_info_table` under an alias, two millicode entries (`FUN`), and two libstdc++ range checks Ghidra proved unreachable; GLDriver: 0 differences, 2 orphan
+  differences (`memset` and one unnamed stub call).
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
 * libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`, a `memset` in one orphan), name aliases

@@ -1,4 +1,5 @@
 import ghidra.app.decompiler.DecompInterface;
+import ghidra.app.decompiler.DecompileOptions;
 import ghidra.app.decompiler.DecompileResults;
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.listing.Function;
@@ -36,6 +37,15 @@ public class DecompAll extends GhidraScript {
                 fw.write("// Function: " + fn.getName(true) + " @ " + fn.getEntryPoint() + "\n");
                 fw.write("// Signature: " + fn.getSignature() + "\n\n");
                 DecompileResults res = decomp.decompileFunction(fn, 60, new ConsoleTaskMonitor());
+                if (res == null || !res.decompileCompleted()) {
+                    // a very large function (GLDriver FUN_00115fa0, 34 KB) exceeds the default payload/instruction limits: retry once with generous ones
+                    DecompInterface big = new DecompInterface();
+                    DecompileOptions o = new DecompileOptions();
+                    o.setMaxPayloadMBytes(256); o.setMaxInstructions(2000000);
+                    big.setOptions(o); big.openProgram(currentProgram); big.setSimplificationStyle("decompile");
+                    res = big.decompileFunction(fn, 1800, new ConsoleTaskMonitor());
+                    big.dispose();
+                }
                 if (res != null && res.decompileCompleted()) fw.write(res.getDecompiledFunction().getC());
                 else { fw.write("!! decompile failed\n"); fail++; }
             }

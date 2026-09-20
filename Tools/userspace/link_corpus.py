@@ -20,6 +20,7 @@ be linked as it stands. This tool
 import sys, os, re, json, struct, collections
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import machoutil as mo
+import rewrites
 
 args = sys.argv[1:]
 opts = {'exclude': set(), 'config': None}
@@ -115,7 +116,11 @@ def read_decl_lines(path):
 decls = read_decl_lines(os.path.join(corpus, 'decls.h'))
 for d_ in EXTRA_DIRS:
     have_ = set(decls)
-    decls += [l for l in read_decl_lines(os.path.join(corpus, d_, 'decls.h')) if l.startswith('extern') and l not in have_]
+    def _fn(l):
+        mm_ = re.match(r'^extern (?:const )?(.*?)\b([A-Za-z_][A-Za-z_0-9]*)\((.*)\);\s*$', l)
+        return mm_.group(2) if mm_ and '(*' not in l else None
+    have_fns = {_fn(l) for l in decls} - {None}      # a companion corpus only sees a callee as `extern int f();`: the main corpus's (typed) declaration wins
+    decls += [l for l in read_decl_lines(os.path.join(corpus, d_, 'decls.h')) if l.startswith('extern') and l not in have_ and _fn(l) not in have_fns]
 func_names, data_decls = [], {}
 for ln in decls:
     mm = re.match(r'^extern (?:const )?(.*?)\b([A-Za-z_][A-Za-z_0-9]*)\((.*)\);\s*$', ln)
@@ -251,6 +256,7 @@ def transform(lines):
         mm = re.match(r'^extern (const )?(.*?)\b([A-Za-z_][A-Za-z_0-9]*)\((.*)\);\s*$', ln)
         if mm and '(*' not in ln:
             nm = mm.group(3)
+            if nm in void_valued and re.match(r'^extern void\b', ln): ln = ln.replace('extern void', 'extern ' + void_valued[nm], 1)
             res.append('%s asm("%s");' % (ln.rstrip()[:-1], cfg.get('label_overrides', {}).get(nm, fn_label.get(nm, nm))))
             label_of[nm] = nm
             continue
@@ -313,6 +319,12 @@ for _d in [''] + EXTRA_DIRS:
         if re.match(r'part_\d+\.c$', _f):
             _all_body += open(os.path.join(corpus, _d, _f)).read()
 byte_arith = set(re.findall(r'&\s*(\w+)\s*[+-]\s', _all_body)) | set(re.findall(r'\(\s*&\s*(\w+)\s*\)\s*\[', _all_body))   # address arithmetic assumes a byte-sized object
+# A function whose own decompile returns nothing (`void`) but that a caller uses the result of (`x = (double)((void (*)())f)(...)`): Ghidra models the callee as
+# leaving a value in f1/r3 that it never wrote (a passed-through argument). C cannot use a void result, so give such a function the type the callers read it as.
+void_valued = {}
+for m_ in re.finditer(r'[=(,]\s*(?:\(([\w ]+)\))?\s*\(\(void \(\*\)\(\)\)(\w+)\)\(', _all_body):
+    ty_ = (m_.group(1) or 'int').strip()
+    void_valued[m_.group(2)] = 'double' if ty_ in ('double', 'float') else void_valued.get(m_.group(2), 'int')
 DROP_DECLS = set(cfg.get('drop_decls', []))
 # a dropped toolchain function that is only `import(args); return;` is a PIC stub of that import: callers reach the import itself
 stub_alias = {}
@@ -331,6 +343,8 @@ for nm_, a_ in nlist_alias.items():       # another name (in the symbol table) o
     if ln_ and nm_ not in fn_label and nm_ != ln_:
         fn_label[nm_] = fn_label.get(ln_, ln_)
 new_decls = transform(decls)
+float_protos_ = rewrites.float_protos(new_decls)
+floatargs_total = [0]
 if cfg.get('prelude'):
     new_decls = list(cfg['prelude']) + new_decls
 if cfg.get('postlude'):
@@ -666,7 +680,6 @@ with open(os.path.join(out, 'unresolved_data.txt'), 'w') as w:
 dropped = []
 patched, unpatched = [], []
 hdr = re.compile(r'^/\* (\S+) @ 0x([0-9a-f]+) \((\d+) bytes\) \*/$')
-import rewrites
 atomics_total = [0]
 bufs_total = [0]
 patches_applied = []
@@ -735,10 +748,18 @@ for pdir_, f in _part_files:
             continue
         if mm:
             txt = '\n'.join(ch)
+            for vn_, vt_ in void_valued.items():
+                if vn_ in txt:
+                    txt = txt.replace('((void (*)())%s)' % vn_, '((%s (*)())%s)' % (vt_, vn_))
+                    txt = re.sub(r'(?m)^void(\s+)%s\b' % re.escape(vn_), r'%s\1%s' % (vt_, vn_), txt)
             txt, natom = rewrites.rewrite_atomics(txt)
             atomics_total[0] += natom
             if re.search(r'\b(vectorPermute|vectorConditionalSelect|dataCacheBlockClearToZero|dataCacheBlockAllocate)\(', txt):
                 uses_link = True
+            txt, nfa = rewrites.rewrite_float_args(txt, float_protos_)
+            if nfa:
+                uses_link = True
+                floatargs_total[0] += nfa
             txt, ndbl = rewrites.rewrite_double_bits(txt)
             dbl_total[0] += ndbl
             if ndbl:
@@ -834,6 +855,7 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('hand text patches applied (config text_patches): %s\n' % ', '.join(patches_applied))
     w.write('64-bit shift helper calls fixed: %d\n' % di3_total[0])
     w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])
+    w.write('float/double call arguments given their true type (integer bit patterns reinterpreted): %d\n' % floatargs_total[0])
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('short C++ call names left unresolved (%d):\n' % len(unresolved_calls))
     for f_, tok, n_ in unresolved_calls:
@@ -844,6 +866,11 @@ static inline double GH_BITS_D(unsigned int hi, unsigned int lo) {
     x.u = ((unsigned long long)hi << 32) | lo;
     return x.d;
 }
+static inline float GH_BITS_F(unsigned int u) { union { unsigned int u; float f; } x; x.u = u; return x.f; }
+static inline double GH_BITS_DD(unsigned long long u) { union { unsigned long long u; double d; } x; x.u = u; return x.d; }
+#define GH_IS_FP(x) (__builtin_types_compatible_p(__typeof__(x), float) || __builtin_types_compatible_p(__typeof__(x), double))
+#define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), (double)(x), (double)GH_BITS_F((unsigned int)(x)))
+#define GH_ARGD(x) __builtin_choose_expr(GH_IS_FP(x), (double)(x), __builtin_choose_expr(sizeof(x) == 8, GH_BITS_DD((unsigned long long)(x)), (double)(x)))
 static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }
 static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) {
     vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));

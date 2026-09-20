@@ -37,7 +37,7 @@ int _GetRegisterTypeInfo(param_1, param_2)
     if ((*(uint *)(iVar3 + 0xc) >> 0x10 & 0x1f) == 0x11) {
       param_2[5] = 1;
       iVar3 = _PPStreamChunkListChunkAtIndex
-                        (*(undefined4 *)(param_1 + 0x2c),*(undefined2 *)(iVar3 + 0xe));
+                        (*(undefined4 *)(param_1 + 0x2c),(uint)*(ushort *)(iVar3 + 0xe));
       uVar5 = *(uint *)(iVar3 + 0x10);
       uVar1 = *(uint *)(iVar3 + 0xc);
       uVar4 = *(uint *)(iVar3 + 0x14);
@@ -608,7 +608,7 @@ int _IsBadUsage(param_1)
   uint uVar3;
   uint uVar4;
   
-  iVar1 = _GetValidArgs();
+  iVar1 = _GetValidArgs(param_1);
   uVar4 = 0;
   if (0 < iVar1) {
     puVar2 = (uint *)(param_1 + 0x1c);
@@ -2501,8 +2501,9 @@ LAB_97c0f970:
         } while (uVar8 < 9);
         iVar11 = *(int *)(iVar11 + 8);
         while (iVar15 != iVar11) {
-          iVar15 = *(int *)(iVar15 + 8);
-          _PPStreamRemoveOperation(param_1);
+          iVar10 = *(int *)(iVar15 + 8);
+          _PPStreamRemoveOperation(param_1,iVar15);
+          iVar15 = iVar10;
         }
         uVar13 = *(uint *)(iVar14 + 0x1c);
         *(uint *)(iVar14 + 0xc) = *(uint *)(iVar14 + 0xc) & 0x1c03ffff | 0x215c0000;
@@ -2818,8 +2819,8 @@ int _UnrollConstantLoopSimple(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  uint *puVar1;
-  bool bVar2;
+  bool bVar1;
+  int iVar2;
   undefined4 uVar3;
   int iVar4;
   int iVar5;
@@ -2845,14 +2846,14 @@ int _UnrollConstantLoopSimple(param_1, param_2, param_3, param_4)
                           DAT_a7b7bf74);
     do {
       iVar5 = 0;
-      bVar2 = true;
+      bVar1 = true;
       for (iVar6 = *(int *)(param_2 + 8); (iVar6 != 0 && (iVar6 != param_3));
           iVar6 = *(int *)(iVar6 + 8)) {
         iVar4 = _PPStreamInsertOperationAfterChunk(param_1,iVar6 + 0xc,0,0,iVar4);
-        if (bVar2) {
+        if (bVar1) {
           iVar5 = iVar4;
         }
-        bVar2 = bVar2 && iVar4 == 0;
+        bVar1 = bVar1 && iVar4 == 0;
         _HashTableAdd(uVar3,(*(uint *)(iVar6 + 0xc) & 0x3ffff) + 1,
                       (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
       }
@@ -2873,10 +2874,10 @@ int _UnrollConstantLoopSimple(param_1, param_2, param_3, param_4)
       iVar4 = _PPStreamInsertOperationAfterChunk(param_1,&local_80,0,0,iVar4);
       _HashTableAdd(uVar3,(*(uint *)(param_3 + 0xc) & 0x3ffff) + 1,
                     (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
-      if (bVar2) {
+      if (bVar1) {
         iVar5 = iVar4;
       }
-      if (!bVar2 || iVar4 != 0) {
+      if (!bVar1 || iVar4 != 0) {
         do {
           if (iVar5 == iVar4) break;
           iVar6 = _HashTableGet(uVar3,(*(uint *)(iVar5 + 0x10) & 0x3ffff) + 1);
@@ -2893,16 +2894,16 @@ int _UnrollConstantLoopSimple(param_1, param_2, param_3, param_4)
   iVar5 = *(int *)(param_3 + 8);
   iVar6 = *(int *)(iVar4 + 8);
   iVar4 = iVar5;
-  while (iVar4 != iVar6) {
-    puVar1 = (uint *)(iVar4 + 0xc);
-    iVar4 = *(int *)(iVar4 + 8);
-    if ((*puVar1 >> 0x12 & 0xff) == 0x6e) {
-      _PPStreamRemoveOperation(param_1);
+  while (iVar2 = iVar4, iVar2 != iVar6) {
+    iVar4 = *(int *)(iVar2 + 8);
+    if ((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) == 0x6e) {
+      _PPStreamRemoveOperation(param_1,iVar2);
     }
   }
   while (param_2 != iVar5) {
-    param_2 = *(int *)(param_2 + 8);
-    _PPStreamRemoveOperation(param_1);
+    iVar4 = *(int *)(param_2 + 8);
+    _PPStreamRemoveOperation(param_1,param_2);
+    param_2 = iVar4;
   }
   return;
 }
@@ -3102,7 +3103,7 @@ int FUN_97c1092c(param_1)
   }
   else {
     if (param_1 != 0) {
-      ((int (*)())_glpDCBFree)();
+      ((int (*)())_glpDCBFree)(param_1);
     }
     uVar3 = 0;
   }
@@ -3113,8 +3114,10 @@ int FUN_97c1092c(param_1)
 int _glpDCBFree(param_1)
   int param_1;
 {
+  undefined4 extraout_r3;
+  
   _free((void *)(param_1 - (uint)*(byte *)(param_1 + -1)));
-  return;
+  return extraout_r3;
 }
 
 /* _PPParserMacroCreateFromMacro @ 0x97c10a30 (200 bytes) */
@@ -3494,7 +3497,7 @@ int _PPParserParseAddressDeclaration(param_1)
     if (iVar1 != 0) {
       return 0x12;
     }
-    iVar1 = _PPParserIdentifierCreate(0x12);
+    iVar1 = _PPParserIdentifierCreate();
     _PPParserIdentifierSetName(iVar1,local_130);
     *(undefined4 *)(iVar1 + 0xc) = 0xffffffff;
     *(uint *)(iVar1 + 8) = *(int *)(*(int *)(param_1 + 0x44c) + 0x10) + uVar3;
@@ -3889,7 +3892,7 @@ int _PPParserParseMacroDeclaration(param_1)
     iVar1 = _PPParserGetPart(param_1,local_130,0);
     uVar2 = 0x2d;
     if (iVar1 != 0) {
-      iVar3 = _PPParserMacroCreate(0x2d);
+      iVar3 = _PPParserMacroCreate();
       _PPParserMacroSetSearchString(param_1,iVar3,local_130,iVar1);
       local_30 = param_1[3];
       local_2c = param_1[4];
@@ -4300,9 +4303,9 @@ double _glp_strtod(byte *param_1,undefined4 *param_2)
   bool bVar1;
   bool bVar2;
   bool bVar3;
-  int iVar4;
-  byte bVar5;
-  bool bVar6;
+  bool bVar4;
+  int iVar5;
+  byte bVar6;
   byte *pbVar7;
   byte *pbVar8;
   double dVar9;
@@ -4310,30 +4313,30 @@ double _glp_strtod(byte *param_1,undefined4 *param_2)
   double dVar11;
   byte *pbStack00000018;
   
+  bVar4 = false;
   bVar3 = false;
-  bVar6 = false;
   bVar2 = false;
   if (*param_1 == 0x2b) {
 LAB_97c12560:
     param_1 = param_1 + 1;
   }
   else if (*param_1 == 0x2d) {
-    bVar3 = true;
+    bVar4 = true;
     goto LAB_97c12560;
   }
-  bVar5 = *param_1;
-  bVar1 = bVar5 == 0x2e;
+  bVar6 = *param_1;
+  bVar1 = bVar6 == 0x2e;
   pbStack00000018 = param_1;
   dVar9 = DOUBLE_97c30a48;
-  if (bVar5 == 0) {
+  if (bVar6 == 0) {
 LAB_97c12644:
     if (bVar1) goto LAB_97c12648;
   }
   else {
     if (!bVar1) {
-      if ((bVar5 != 0x65) && (pbVar7 = param_1, bVar5 != 0x45)) {
-        while (bVar5 - 0x30 < 10) {
-          bVar5 = pbVar7[1];
+      if ((bVar6 != 0x65) && (pbVar7 = param_1, bVar6 != 0x45)) {
+        while (bVar6 - 0x30 < 10) {
+          bVar6 = pbVar7[1];
           pbVar7 = pbVar7 + 1;
         }
         if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
@@ -4341,30 +4344,30 @@ LAB_97c12644:
         }
         pbVar7 = pbVar7 + -1;
         if (param_1 <= pbVar7) {
-          iVar4 = (int)pbVar7 - (int)(param_1 + -1);
+          iVar5 = (int)pbVar7 - (int)(param_1 + -1);
           dVar10 = DOUBLE_97c30a60;
           do {
-            bVar5 = *pbVar7;
+            bVar6 = *pbVar7;
             pbVar7 = pbVar7 + -1;
-            dVar9 = ((double)CONCAT44(0x43300000,(int)(char)bVar5 - 0x30U ^ 0x80000000) -
+            dVar9 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) -
                     DOUBLE_97c30a58) * dVar10 + dVar9;
             dVar10 = dVar10 * DOUBLE_97c30a50;
-            iVar4 = iVar4 + -1;
-          } while (iVar4 != 0);
+            iVar5 = iVar5 + -1;
+          } while (iVar5 != 0);
         }
-        bVar5 = *pbStack00000018;
+        bVar6 = *pbStack00000018;
         bVar2 = true;
-        bVar1 = bVar5 == 0x2e;
+        bVar1 = bVar6 == 0x2e;
       }
       goto LAB_97c12644;
     }
 LAB_97c12648:
     pbVar8 = pbStack00000018 + 1;
-    bVar5 = pbStack00000018[1];
+    bVar6 = pbStack00000018[1];
     pbVar7 = pbVar8;
-    while (bVar5 - 0x30 < 10) {
+    while (bVar6 - 0x30 < 10) {
       pbVar7 = pbVar7 + 1;
-      bVar5 = *pbVar7;
+      bVar6 = *pbVar7;
     }
     dVar10 = DOUBLE_97c30a48;
     if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
@@ -4376,24 +4379,24 @@ LAB_97c12648:
                DOUBLE_97c30a58);
     }
     bVar2 = true;
-    bVar5 = *pbStack00000018;
+    bVar6 = *pbStack00000018;
     dVar9 = dVar10 * DOUBLE_97c30ab8 + dVar9;
   }
-  if ((!bVar2) || ((bVar5 != 0x65 && (bVar5 != 0x45)))) goto LAB_97c12804;
+  if ((!bVar2) || ((bVar6 != 0x65 && (bVar6 != 0x45)))) goto LAB_97c12804;
   pbVar7 = pbStack00000018 + 1;
   if (*pbVar7 == 0x2b) {
 LAB_97c12738:
     pbVar7 = pbStack00000018 + 2;
   }
   else if (*pbVar7 == 0x2d) {
-    bVar6 = true;
+    bVar3 = true;
     goto LAB_97c12738;
   }
-  bVar5 = *pbVar7;
+  bVar6 = *pbVar7;
   pbVar8 = pbVar7;
-  while (bVar5 - 0x30 < 10) {
+  while (bVar6 - 0x30 < 10) {
     pbVar8 = pbVar8 + 1;
-    bVar5 = *pbVar8;
+    bVar6 = *pbVar8;
   }
   pbStack00000018 = pbVar7;
   if (&STACKARG(0x0) != (undefined1 *)0xffffffe8) {
@@ -4402,24 +4405,24 @@ LAB_97c12738:
   pbVar8 = pbVar8 + -1;
   dVar10 = DOUBLE_97c30a48;
   if (pbVar7 <= pbVar8) {
-    iVar4 = (int)pbVar8 - (int)(pbVar7 + -1);
+    iVar5 = (int)pbVar8 - (int)(pbVar7 + -1);
     dVar11 = DOUBLE_97c30a60;
     do {
-      bVar5 = *pbVar8;
+      bVar6 = *pbVar8;
       pbVar8 = pbVar8 + -1;
-      dVar10 = ((double)CONCAT44(0x43300000,(int)(char)bVar5 - 0x30U ^ 0x80000000) - DOUBLE_97c30a58
+      dVar10 = ((double)CONCAT44(0x43300000,(int)(char)bVar6 - 0x30U ^ 0x80000000) - DOUBLE_97c30a58
                ) * dVar11 + dVar10;
       dVar11 = dVar11 * DOUBLE_97c30a50;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      iVar5 = iVar5 + -1;
+    } while (iVar5 != 0);
   }
-  if (bVar6) {
+  if (bVar3) {
     dVar10 = -dVar10;
   }
   dVar10 = (double)((double (*)())_pow_10)((int)dVar10);
   dVar9 = dVar9 * dVar10;
 LAB_97c12804:
-  if (bVar3) {
+  if (bVar4) {
     dVar9 = -dVar9;
   }
   if (param_2 != (undefined4 *)0x0) {
@@ -4429,59 +4432,59 @@ LAB_97c12804:
 }
 
 /* _glp_dtostr @ 0x97c12838 (1096 bytes) */
-char * _glp_dtostr(undefined8 param_1,double param_2,undefined4 param_3,undefined4 param_4,
-                  char *param_5,uint param_6)
+char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,
+                  double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
+                  double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
+                  double fparam_12,double fparam_13)
 
 {
   char *pcVar1;
   char cVar2;
-  int iVar3;
-  undefined4 extraout_r4;
-  char *pcVar4;
+  double dVar3;
+  int iVar4;
   char *pcVar5;
   char *pcVar6;
-  double dVar7;
+  char *pcVar7;
   double dVar8;
   double dVar9;
   double dVar10;
   double dVar11;
   uint local_50 [6];
   
-  dVar7 = (double)FUN_97c1a258();
   dVar8 = DOUBLE_97c30a48;
-  pcVar4 = param_5 + param_6;
-  if (param_2 <= DOUBLE_97c30a48) {
-    param_2 = DOUBLE_97c30ac0;
+  pcVar5 = param_3 + param_4;
+  if (fparam_2 <= DOUBLE_97c30a48) {
+    fparam_2 = DOUBLE_97c30ac0;
   }
-  if (param_6 < 2) {
+  if (param_4 < 2) {
     return (char *)0x0;
   }
-  if (dVar7 < DOUBLE_97c30a48) {
-    dVar7 = -dVar7;
-    *param_5 = '-';
-    param_5 = param_5 + 1;
+  if (fparam_1 < DOUBLE_97c30a48) {
+    fparam_1 = -fparam_1;
+    *param_3 = '-';
+    param_3 = param_3 + 1;
   }
-  dVar10 = param_2;
-  if (dVar8 < dVar7) {
-    if ((dVar7 < DOUBLE_97c30ac8) || (DOUBLE_97c30ad8 < dVar7)) {
-      _frexp(dVar7,0,extraout_r4,local_50);
+  dVar10 = fparam_2;
+  if (dVar8 < fparam_1) {
+    if ((fparam_1 < DOUBLE_97c30ac8) || (DOUBLE_97c30ad8 < fparam_1)) {
+      _frexp(fparam_1,0,param_2,local_50);
       dVar8 = (double)_round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) -
                              DOUBLE_97c30a58) * DOUBLE_97c30ad0);
       local_50[0] = (uint)dVar8;
       dVar8 = (double)((double (*)())_pow_10)(local_50[0]);
       dVar9 = (double)((double (*)())_pow_10)(-local_50[0]);
-      dVar10 = param_2 * dVar8;
-      dVar8 = dVar7 * dVar9;
+      dVar10 = fparam_2 * dVar8;
+      dVar8 = fparam_1 * dVar9;
     }
     else {
       local_50[0] = 0;
-      dVar8 = dVar7;
+      dVar8 = fparam_1;
     }
-    for (; DOUBLE_97c30a50 <= dVar8 + param_2 * DOUBLE_97c30a88; dVar8 = dVar8 * DOUBLE_97c30ab8) {
+    for (; DOUBLE_97c30a50 <= dVar8 + fparam_2 * DOUBLE_97c30a88; dVar8 = dVar8 * DOUBLE_97c30ab8) {
       local_50[0] = local_50[0] + 1;
       dVar10 = dVar10 * DOUBLE_97c30a50;
     }
-    for (; dVar8 + param_2 * DOUBLE_97c30a88 < DOUBLE_97c30a60; dVar8 = dVar8 * DOUBLE_97c30a50) {
+    for (; dVar8 + fparam_2 * DOUBLE_97c30a88 < DOUBLE_97c30a60; dVar8 = dVar8 * DOUBLE_97c30a50) {
       local_50[0] = local_50[0] - 1;
       dVar10 = dVar10 * DOUBLE_97c30ab8;
     }
@@ -4489,108 +4492,108 @@ char * _glp_dtostr(undefined8 param_1,double param_2,undefined4 param_3,undefine
     goto LAB_97c12a28;
   }
   local_50[0] = 0;
-  dVar8 = dVar7;
-  param_2 = dVar10;
+  dVar8 = fparam_1;
+  fparam_2 = dVar10;
 LAB_97c12a28:
-  dVar8 = param_2 * DOUBLE_97c30a88 + dVar8;
-  dVar7 = (double)_floor(dVar8);
-  dVar9 = DOUBLE_97c30ab8;
-  dVar10 = DOUBLE_97c30a50;
-  pcVar5 = param_5;
-  while (param_2 < dVar7) {
-    if (pcVar5 == pcVar4) {
-      return (char *)0x0;
-    }
-    dVar11 = dVar7 * dVar9;
-    dVar7 = (double)_floor(dVar11,0);
-    *pcVar5 = (char)(int)((dVar11 - dVar7) * dVar10) + '0';
-    pcVar5 = pcVar5 + 1;
-  }
-  if (param_5 < pcVar5) {
-    iVar3 = (int)pcVar5 - (int)param_5;
-    pcVar6 = pcVar5;
-    while (1 < iVar3) {
-      pcVar6 = pcVar6 + -1;
-      cVar2 = *pcVar6;
-      *pcVar6 = *param_5;
-      *param_5 = cVar2;
-      param_5 = param_5 + 1;
-      iVar3 = (int)pcVar6 - (int)param_5;
-    }
-  }
-  else {
-    *pcVar5 = '0';
-    pcVar5 = pcVar5 + 1;
-  }
+  dVar8 = fparam_2 * DOUBLE_97c30a88 + dVar8;
   dVar10 = (double)_floor(dVar8);
-  dVar7 = DOUBLE_97c30a50;
-  dVar8 = dVar8 - dVar10;
-  if (dVar8 <= param_2) {
-    if (local_50[0] == 0) {
-      if ((int)pcVar4 - (int)pcVar5 < 2) {
-        return (char *)0x0;
-      }
-      *pcVar5 = '.';
-      pcVar5[1] = '0';
-      pcVar5 = pcVar5 + 2;
+  dVar3 = DOUBLE_97c30ab8;
+  dVar9 = DOUBLE_97c30a50;
+  pcVar6 = param_3;
+  while (fparam_2 < dVar10) {
+    if (pcVar6 == pcVar5) {
+      return (char *)0x0;
+    }
+    dVar11 = dVar10 * dVar3;
+    dVar10 = (double)_floor(dVar11,0);
+    *pcVar6 = (char)(int)((dVar11 - dVar10) * dVar9) + '0';
+    pcVar6 = pcVar6 + 1;
+  }
+  if (param_3 < pcVar6) {
+    iVar4 = (int)pcVar6 - (int)param_3;
+    pcVar7 = pcVar6;
+    while (1 < iVar4) {
+      pcVar7 = pcVar7 + -1;
+      cVar2 = *pcVar7;
+      *pcVar7 = *param_3;
+      *param_3 = cVar2;
+      param_3 = param_3 + 1;
+      iVar4 = (int)pcVar7 - (int)param_3;
     }
   }
   else {
-    if (pcVar5 == pcVar4) {
-      return (char *)0x0;
-    }
-    *pcVar5 = '.';
-    pcVar5 = pcVar5 + 1;
-    do {
-      if (pcVar5 == pcVar4) {
+    *pcVar6 = '0';
+    pcVar6 = pcVar6 + 1;
+  }
+  dVar9 = (double)_floor(dVar8);
+  dVar10 = DOUBLE_97c30a50;
+  dVar8 = dVar8 - dVar9;
+  if (dVar8 <= fparam_2) {
+    if (local_50[0] == 0) {
+      if ((int)pcVar5 - (int)pcVar6 < 2) {
         return (char *)0x0;
       }
-      dVar8 = dVar8 * dVar7;
-      param_2 = param_2 * dVar7;
-      dVar10 = (double)_floor(dVar8,0);
-      dVar8 = dVar8 - dVar10;
-      *pcVar5 = (char)(int)dVar10 + '0';
-      pcVar5 = pcVar5 + 1;
-    } while (param_2 < dVar8);
+      *pcVar6 = '.';
+      pcVar6[1] = '0';
+      pcVar6 = pcVar6 + 2;
+    }
+  }
+  else {
+    if (pcVar6 == pcVar5) {
+      return (char *)0x0;
+    }
+    *pcVar6 = '.';
+    pcVar6 = pcVar6 + 1;
+    do {
+      if (pcVar6 == pcVar5) {
+        return (char *)0x0;
+      }
+      dVar8 = dVar8 * dVar10;
+      fparam_2 = fparam_2 * dVar10;
+      dVar9 = (double)_floor(dVar8,0);
+      dVar8 = dVar8 - dVar9;
+      *pcVar6 = (char)(int)dVar9 + '0';
+      pcVar6 = pcVar6 + 1;
+    } while (fparam_2 < dVar8);
   }
   if (local_50[0] != 0) {
-    if ((int)pcVar4 - (int)pcVar5 < 3) {
+    if ((int)pcVar5 - (int)pcVar6 < 3) {
       return (char *)0x0;
     }
-    *pcVar5 = 'e';
-    pcVar6 = pcVar5 + 1;
-    pcVar1 = pcVar6;
+    *pcVar6 = 'e';
+    pcVar7 = pcVar6 + 1;
+    pcVar1 = pcVar7;
     if ((int)local_50[0] < 0) {
       local_50[0] = -local_50[0];
-      *pcVar6 = '-';
-      pcVar6 = pcVar5 + 2;
-      pcVar1 = pcVar6;
+      *pcVar7 = '-';
+      pcVar7 = pcVar6 + 2;
+      pcVar1 = pcVar7;
     }
-    while (pcVar5 = pcVar1, 0 < (int)local_50[0]) {
-      if (pcVar5 == pcVar4) {
+    while (pcVar6 = pcVar1, 0 < (int)local_50[0]) {
+      if (pcVar6 == pcVar5) {
         return (char *)0x0;
       }
-      *pcVar5 = (char)local_50[0] + (char)((int)local_50[0] / 10) * -10 + '0';
+      *pcVar6 = (char)local_50[0] + (char)((int)local_50[0] / 10) * -10 + '0';
       local_50[0] = (int)local_50[0] / 10;
-      pcVar1 = pcVar5 + 1;
+      pcVar1 = pcVar6 + 1;
     }
-    iVar3 = (int)pcVar5 - (int)pcVar6;
-    pcVar1 = pcVar5;
-    while (1 < iVar3) {
+    iVar4 = (int)pcVar6 - (int)pcVar7;
+    pcVar1 = pcVar6;
+    while (1 < iVar4) {
       pcVar1 = pcVar1 + -1;
       cVar2 = *pcVar1;
-      *pcVar1 = *pcVar6;
-      *pcVar6 = cVar2;
-      pcVar6 = pcVar6 + 1;
-      iVar3 = (int)pcVar1 - (int)pcVar6;
+      *pcVar1 = *pcVar7;
+      *pcVar7 = cVar2;
+      pcVar7 = pcVar7 + 1;
+      iVar4 = (int)pcVar1 - (int)pcVar7;
     }
   }
-  pcVar6 = (char *)0x0;
-  if (pcVar5 != pcVar4) {
-    *pcVar5 = '\0';
-    pcVar6 = pcVar5;
+  pcVar7 = (char *)0x0;
+  if (pcVar6 != pcVar5) {
+    *pcVar6 = '\0';
+    pcVar7 = pcVar6;
   }
-  return pcVar6;
+  return pcVar7;
 }
 
 /* std____throw_bad_exception @ 0x97c12c80 (68 bytes) */
@@ -4602,7 +4605,7 @@ int std____throw_bad_exception()
   
   puVar3 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c180;
-  puVar1 = PTR__bad_exception_a7b7c17c;
+  puVar1 = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
   *puVar3 = PTR_vtable_a7b7c184 + 8;
                     
   ___cxa_throw(puVar3,puVar2,puVar1);
@@ -4617,7 +4620,7 @@ int std____throw_bad_alloc()
   
   puVar3 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c174;
-  puVar1 = PTR__bad_alloc_a7b7c170;
+  puVar1 = PTR___ZNSt9bad_allocD1Ev_a7b7c170;
   *puVar3 = PTR_vtable_a7b7c178 + 8;
                     
   ___cxa_throw(puVar3,puVar2,puVar1);
@@ -4632,7 +4635,7 @@ int std____throw_bad_cast()
   
   puVar3 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c168;
-  puVar1 = PTR__bad_cast_a7b7c164;
+  puVar1 = PTR___ZNSt8bad_castD1Ev_a7b7c164;
   *puVar3 = PTR_vtable_a7b7c16c + 8;
                     
   ___cxa_throw(puVar3,puVar2,puVar1);
@@ -4647,28 +4650,28 @@ int std____throw_bad_typeid()
   
   puVar3 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c15c;
-  puVar1 = PTR__bad_typeid_a7b7c158;
+  puVar1 = PTR___ZNSt10bad_typeidD1Ev_a7b7c158;
   *puVar3 = PTR_vtable_a7b7c160 + 8;
                     
   ___cxa_throw(puVar3,puVar2,puVar1);
 }
 
-/* std____throw_logic_error @ 0x97c12d90 (132 bytes) */
+/* std____throw_logic_error @ 0x97c12d90 (108 bytes) */
 int std____throw_logic_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__logic_error__logic_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt11logic_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4679,28 +4682,28 @@ int std____throw_logic_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c154,PTR__logic_error_a7b7c150);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c154,PTR___ZNSt11logic_errorD1Ev_a7b7c150);
 }
 
-/* std____throw_domain_error @ 0x97c12e18 (132 bytes) */
+/* std____throw_domain_error @ 0x97c12e18 (108 bytes) */
 int std____throw_domain_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__domain_error__domain_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt12domain_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4711,28 +4714,28 @@ int std____throw_domain_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c14c,PTR__domain_error_a7b7c148);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c14c,PTR___ZNSt12domain_errorD1Ev_a7b7c148);
 }
 
-/* std____throw_invalid_argument @ 0x97c12ea0 (132 bytes) */
+/* std____throw_invalid_argument @ 0x97c12ea0 (108 bytes) */
 int std____throw_invalid_argument(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__invalid_argument__invalid_argument(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt16invalid_argumentC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4743,28 +4746,28 @@ int std____throw_invalid_argument(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c144,PTR__invalid_argument_a7b7c140);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c144,PTR___ZNSt16invalid_argumentD1Ev_a7b7c140);
 }
 
-/* std____throw_length_error @ 0x97c12f28 (132 bytes) */
+/* std____throw_length_error @ 0x97c12f28 (108 bytes) */
 int std____throw_length_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__length_error__length_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt12length_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4775,28 +4778,28 @@ int std____throw_length_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c13c,PTR__length_error_a7b7c138);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c13c,PTR___ZNSt12length_errorD1Ev_a7b7c138);
 }
 
-/* std____throw_out_of_range @ 0x97c12fb0 (132 bytes) */
+/* std____throw_out_of_range @ 0x97c12fb0 (108 bytes) */
 int std____throw_out_of_range(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__out_of_range__out_of_range(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt12out_of_rangeC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4807,28 +4810,28 @@ int std____throw_out_of_range(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c134,PTR__out_of_range_a7b7c130);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c134,PTR___ZNSt12out_of_rangeD1Ev_a7b7c130);
 }
 
-/* std____throw_runtime_error @ 0x97c13038 (132 bytes) */
+/* std____throw_runtime_error @ 0x97c13038 (108 bytes) */
 int std____throw_runtime_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__runtime_error__runtime_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt13runtime_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4839,28 +4842,28 @@ int std____throw_runtime_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c12c,PTR__runtime_error_a7b7c128);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c12c,PTR___ZNSt13runtime_errorD1Ev_a7b7c128);
 }
 
-/* std____throw_range_error @ 0x97c130c0 (132 bytes) */
+/* std____throw_range_error @ 0x97c130c0 (108 bytes) */
 int std____throw_range_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__range_error__range_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt11range_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4871,28 +4874,28 @@ int std____throw_range_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c124,PTR__range_error_a7b7c120);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c124,PTR___ZNSt11range_errorD1Ev_a7b7c120);
 }
 
-/* std____throw_overflow_error @ 0x97c13148 (132 bytes) */
+/* std____throw_overflow_error @ 0x97c13148 (108 bytes) */
 int std____throw_overflow_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__overflow_error__overflow_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt14overflow_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4903,28 +4906,28 @@ int std____throw_overflow_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c11c,PTR__overflow_error_a7b7c118);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c11c,PTR___ZNSt14overflow_errorD1Ev_a7b7c118);
 }
 
-/* std____throw_underflow_error @ 0x97c131d0 (132 bytes) */
+/* std____throw_underflow_error @ 0x97c131d0 (108 bytes) */
 int std____throw_underflow_error(param_1)
   char *param_1;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  unsigned char * this;
+  void *this;
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
   unsigned char aaStack_30 [40];
   
-  std__string__string((unsigned char *)local_40,param_1,aaStack_30);
-  this = (unsigned char *)___cxa_allocate_exception(8);
-  std__underflow_error__underflow_error(this,(unsigned char *)local_40);
+  __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
+  this = (void *)___cxa_allocate_exception(8);
+  __ZNSt15underflow_errorC1ERKSs(this,(unsigned char *)local_40);
   piVar2 = (int *)(local_40[0] + -4);
   do {
     iVar3 = *piVar2;
@@ -4935,66 +4938,64 @@ int std____throw_underflow_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
   }
                     
-  ___cxa_throw(this,PTR_typeinfo_a7b7c114,PTR__underflow_error_a7b7c110);
+  ___cxa_throw(this,PTR_typeinfo_a7b7c114,PTR___ZNSt15underflow_errorD1Ev_a7b7c110);
 }
 
-/* std__string___M_data @ 0x97c13258 (8 bytes) */
-int std__string___M_data(this)
-  unsigned char * this;
+/* __ZNKSs7_M_dataEv @ 0x97c13258 (8 bytes) */
+int __ZNKSs7_M_dataEv(this)
+  void *this;
 {
   return *(undefined4 *)this;
 }
 
-/* std__string___M_data_97c13260 @ 0x97c13260 (12 bytes) */
-int std__string___M_data_97c13260(this, param_1)
-  unsigned char * this;
-  char *param_1;
+/* __ZNSs7_M_dataEPc @ 0x97c13260 (12 bytes) */
+int __ZNSs7_M_dataEPc(this, param_2)
+  void *this;
+  char *param_2;
 {
-  *(char **)this = param_1;
-  return param_1;
+  *(char **)this = param_2;
+  return param_2;
 }
 
-/* std__string___M_rep @ 0x97c1326c (12 bytes) */
-int std__string___M_rep(this)
-  unsigned char * this;
+/* __ZNKSs6_M_repEv @ 0x97c1326c (12 bytes) */
+int __ZNKSs6_M_repEv(this)
+  void *this;
 {
   return *(int *)this + -0xc;
 }
 
-/* std__string___M_ibegin @ 0x97c13278 (12 bytes) */
-int std__string___M_ibegin()
+/* __ZNKSs9_M_ibeginEv @ 0x97c13278 (12 bytes) */
+int __ZNKSs9_M_ibeginEv(param_1, param_2)
+  undefined4 *param_1;
+  undefined4 *param_2;
 {
-  undefined4 *in_r3;
-  undefined4 *in_r4;
-  
-  *in_r3 = *in_r4;
+  *param_1 = *param_2;
   return;
 }
 
-/* std__string__size @ 0x97c13284 (12 bytes) */
-int std__string__size(this)
-  unsigned char * this;
+/* __ZNKSs4sizeEv @ 0x97c13284 (12 bytes) */
+int __ZNKSs4sizeEv(this)
+  void *this;
 {
   return *(undefined4 *)(*(int *)this + -0xc);
 }
 
-/* std__string___M_iend @ 0x97c13290 (20 bytes) */
-int std__string___M_iend()
+/* __ZNKSs7_M_iendEv @ 0x97c13290 (20 bytes) */
+int __ZNKSs7_M_iendEv(param_1, param_2)
+  int *param_1;
+  int *param_2;
 {
-  int *in_r3;
-  int *in_r4;
-  
-  *in_r3 = *in_r4 + *(int *)(*in_r4 + -0xc);
+  *param_1 = *param_2 + *(int *)(*param_2 + -0xc);
   return;
 }
 
-/* std__string___Rep___M_is_leaked @ 0x97c132a4 (12 bytes) */
-int std__string___Rep___M_is_leaked(this)
-  unsigned char * this;
+/* __ZNKSs4_Rep12_M_is_leakedEv @ 0x97c132a4 (12 bytes) */
+int __ZNKSs4_Rep12_M_is_leakedEv(this)
+  void *this;
 {
-  return *(uint *)(this + 8) >> 0x1f;
+  return *(uint *)((int)this + 8) >> 0x1f;
 }
 

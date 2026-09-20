@@ -46,6 +46,8 @@ typedef GhidraMachOSection section;
 typedef struct { unsigned int cmd, cmdsize; char segname[16]; unsigned int vmaddr, vmsize, fileoff, filesize, maxprot, initprot, nsects, flags; } GhidraMachOCommand;
 typedef GhidraMachOCommand segment_command;
 typedef GhidraMachOCommand load_command;
+typedef struct { unsigned int offset; } lc_str;
+typedef struct { lc_str name; unsigned int timestamp, current_version, compatibility_version; } dylib;   /* Ghidra fits Mach-O types to stack records of the same size */
 #define CARRY4(a, b) (((unsigned int)(a) + (unsigned int)(b)) < (unsigned int)(a))
 #define CARRY2(a, b) (((unsigned short)((a) + (b))) < (unsigned short)(a))
 #define CARRY1(a, b) (((unsigned char)((a) + (b))) < (unsigned char)(a))

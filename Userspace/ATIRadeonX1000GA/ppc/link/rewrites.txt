@@ -4,5 +4,6 @@ byte buffers Ghidra declared as scalars, turned into arrays: 0
 hand text patches applied (config text_patches): 
 64-bit shift helper calls fixed: 0
 narrow-type subtract-and-compare idioms: 0
+float/double call arguments given their true type (integer bit patterns reinterpreted): 0
 stack records Ghidra declared as separate scalars, merged into one block: 10
 short C++ call names left unresolved (0):

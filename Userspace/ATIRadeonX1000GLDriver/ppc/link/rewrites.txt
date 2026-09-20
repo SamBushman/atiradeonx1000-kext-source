@@ -1,8 +1,9 @@
 atomic read-modify-write idioms rewritten as compare-and-swap loops: 59
 byte buffers Ghidra declared as scalars, turned into arrays: 20
-(double)CONCAT44 bit-pattern constructions: 272
+(double)CONCAT44 bit-pattern constructions: 271
 hand text patches applied (config text_patches): 
 64-bit shift helper calls fixed: 0
 narrow-type subtract-and-compare idioms: 0
+float/double call arguments given their true type (integer bit patterns reinterpreted): 1200
 stack records Ghidra declared as separate scalars, merged into one block: 309
 short C++ call names left unresolved (0):

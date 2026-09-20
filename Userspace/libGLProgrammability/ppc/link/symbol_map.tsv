@@ -4,18 +4,14 @@ s___________________________97c23e68	0x97c23e68	__TEXT,__cstring	TerminatedCStri
 s_PROFILE__97c23f9c	0x97c23f9c	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_PROFILE__97c23f9c asm("s_PROFILE__97c23f9c");	0x50524f46	data.s
 s__97c26c38	0x97c26c38	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s__97c26c38 asm("s__97c26c38");	0x0a000000	data.s
 s__97c28c28	0x97c28c28	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__97c28c28 asm("s__97c28c28");	0x20200000	data.s
-SYM_97c291c0	0x97c291c0	__TEXT,__cstring	TerminatedCString	2		0x20000000	data.s
 s__97c291c0	0x97c291c0	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s__97c291c0 asm("s__97c291c0");	0x20000000	data.s
 s___97c29860	0x97c29860	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c29860 asm("s___97c29860");	0x5b000000	data.s
-SYM_97c29948	0x97c29948	__TEXT,__cstring	TerminatedCString	15		0x20697320	data.s
-SYM_97c29ef8	0x97c29ef8	__TEXT,__cstring	TerminatedCString	8		0x73747275	data.s
 s___97c2a130	0x97c2a130	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a130 asm("s___97c2a130");	0x2e000000	data.s
 s___97c2a2d4	0x97c2a2d4	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a2d4 asm("s___97c2a2d4");	0x2d000000	data.s
 s___97c2a308	0x97c2a308	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a308 asm("s___97c2a308");	0x2b000000	data.s
 s___97c2a31c	0x97c2a31c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a31c asm("s___97c2a31c");	0x7c000000	data.s
 s___97c2a320	0x97c2a320	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a320 asm("s___97c2a320");	0x3a000000	data.s
 s___97c2a324	0x97c2a324	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a324 asm("s___97c2a324");	0x2c000000	data.s
-SYM_97c2aa10	0x97c2aa10	__TEXT,__cstring	TerminatedCString	19		0x27206973	data.s
 s_F_97c2d738	0x97c2d738	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_F_97c2d738 asm("s_F_97c2d738");	0x46000000	data.s
 s_X_97c2d73c	0x97c2d73c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_X_97c2d73c asm("s_X_97c2d73c");	0x58000000	data.s
 s_I_97c2d740	0x97c2d740	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_I_97c2d740 asm("s_I_97c2d740");	0x49000000	data.s
@@ -538,10 +534,10 @@ _yy_def	0x97c381cc	__TEXT,__const	-	-		0x00000199	data.s
 _yy_nxt	0x97c3850c	__TEXT,__const	-	-		0x00000006	data.s
 _yy_chk	0x97c38a52	__TEXT,__const	-	-		0x00000001	data.s
 DAT_97c38f98	0x97c38f98	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38f98 asm("DAT_97c38f98");	0xffffffff	data.s
-DAT_97c38fa0	0x97c38fa0	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa0 asm("DAT_97c38fa0");	0xffffffff	data.s
-DAT_97c38fa4	0x97c38fa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa4 asm("DAT_97c38fa4");	0xffffffff	data.s
-DAT_97c38fa8	0x97c38fa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa8 asm("DAT_97c38fa8");	0xffffffff	data.s
-DAT_97c38fac	0x97c38fac	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fac asm("DAT_97c38fac");	0xffffffff	data.s
+UNK_97c38fa0	0x97c38fa0	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa0 asm("UNK_97c38fa0");	0xffffffff	data.s
+UNK_97c38fa4	0x97c38fa4	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa4 asm("UNK_97c38fa4");	0xffffffff	data.s
+UNK_97c38fa8	0x97c38fa8	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fa8 asm("UNK_97c38fa8");	0xffffffff	data.s
+UNK_97c38fac	0x97c38fac	__TEXT,__const	undefined4	4	extern unsigned int UNK_97c38fac asm("UNK_97c38fac");	0xffffffff	data.s
 DAT_97c38fb0	0x97c38fb0	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38fb0 asm("DAT_97c38fb0");	0xffffffff	data.s
 DAT_97c38fb8	0x97c38fb8	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38fb8 asm("DAT_97c38fb8");	0x00000001	data.s
 _operatorToken	0x97c38fc0	__TEXT,__const	-	-		0x0000006e	data.s
@@ -727,7 +723,7 @@ DAT_97c3aaa8	0x97c3aaa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3
 DAT_97c3aaac	0x97c3aaac	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aaac asm("DAT_97c3aaac");	0x00000002	data.s
 _up_0	0x97c3aab0	__TEXT,__const	-	-		0x40240000	data.s
 _down_1	0x97c3abb0	__TEXT,__const	-	-		0x3fb99999	data.s
-_Rep___S_terminal	0x97c3acb0	__TEXT,__const	undefined1	1		0x00000000	data.s
+std__string___Rep___S_terminal	0x97c3acb0	__TEXT,__const	undefined1	1		0x00000000	data.s
 FLOAT_97c3acb4	0x97c3acb4	__TEXT,__literal4	float	4	extern float FLOAT_97c3acb4 asm("FLOAT_97c3acb4");	0x7f7fffff	data.s
 TAllocation__guardBlockSize	0x97c3acb8	__TEXT,__literal4	float	4		0x00000000	data.s
 guardBlockSize	0x97c3acb8	__TEXT,__literal4	float	4		0x00000000	data.s
@@ -792,7 +788,7 @@ FLOAT_97c3ada0	0x97c3ada0	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada0 
 FLOAT_97c3ada4	0x97c3ada4	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada4 asm("FLOAT_97c3ada4");	0x40c90fdb	data.s
 DAT_a7b7b008	0xa7b7b008	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b008 asm("DAT_a7b7b008");	pointer -> _macro_scan	data.s
 DAT_a7b7b00c	0xa7b7b00c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b00c asm("DAT_a7b7b00c");	0x97b87cdc	data.s
-DAT_a7b7b010	0xa7b7b010	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b010 asm("DAT_a7b7b010");	pointer -> _eof_scan	data.s
+DAT_a7b7b010	0xa7b7b010	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b010 asm("DAT_a7b7b010");	pointer -> _eof_scan_97b87cd4	data.s
 _cpp	0xa7b7b014	__DATA,__data	undefined4	4		0x00000000	data.s
 _eof_inputsrc	0xa7b7b018	__DATA,__data	-	-		0x00000000	data.s
 DAT_a7b7b030	0xa7b7b030	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b030 asm("DAT_a7b7b030");	0x97b88a8c	data.s
@@ -873,28 +869,33 @@ DAT_a7b7baa4	0xa7b7baa4	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b
 DAT_a7b7baa8	0xa7b7baa8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baa8 asm("DAT_a7b7baa8");	pointer -> LD_a7b7e010	data.s
 _shaderString	0xa7b7baac	__DATA,__data	undefined4	4		pointer -> LD_97c2b564	data.s
 _linkErrorString	0xa7b7bab4	__DATA,__data	undefined4	4		pointer -> LD_97c2b578	data.s
-DAT_a7b7bab8	0xa7b7bab8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bab8 asm("DAT_a7b7bab8");	pointer -> LD_97c2b608	data.s
-DAT_a7b7babc	0xa7b7babc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7babc asm("DAT_a7b7babc");	pointer -> LD_97c2b63c	data.s
-DAT_a7b7bac4	0xa7b7bac4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bac4 asm("DAT_a7b7bac4");	pointer -> LD_97c2b6b0	data.s
-DAT_a7b7bac8	0xa7b7bac8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bac8 asm("DAT_a7b7bac8");	pointer -> LD_97c2b704	data.s
-DAT_a7b7bad0	0xa7b7bad0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad0 asm("DAT_a7b7bad0");	pointer -> LD_97c2b794	data.s
-DAT_a7b7bad4	0xa7b7bad4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad4 asm("DAT_a7b7bad4");	pointer -> LD_97c2b818	data.s
+UNK_a7b7bab8	0xa7b7bab8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bab8 asm("UNK_a7b7bab8");	pointer -> LD_97c2b608	data.s
+UNK_a7b7babc	0xa7b7babc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7babc asm("UNK_a7b7babc");	pointer -> LD_97c2b63c	data.s
+UNK_a7b7bac4	0xa7b7bac4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bac4 asm("UNK_a7b7bac4");	pointer -> LD_97c2b6b0	data.s
+UNK_a7b7bac8	0xa7b7bac8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bac8 asm("UNK_a7b7bac8");	pointer -> LD_97c2b704	data.s
+UNK_a7b7bacc	0xa7b7bacc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bacc asm("UNK_a7b7bacc");	pointer -> LD_97c2b75c	data.s
+UNK_a7b7bad0	0xa7b7bad0	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bad0 asm("UNK_a7b7bad0");	pointer -> LD_97c2b794	data.s
+UNK_a7b7bad4	0xa7b7bad4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bad4 asm("UNK_a7b7bad4");	pointer -> LD_97c2b818	data.s
 DAT_a7b7bad8	0xa7b7bad8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad8 asm("DAT_a7b7bad8");	pointer -> LD_97c2b864	data.s
-DAT_a7b7badc	0xa7b7badc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7badc asm("DAT_a7b7badc");	pointer -> LD_97c2b8ac	data.s
+UNK_a7b7badc	0xa7b7badc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7badc asm("UNK_a7b7badc");	pointer -> LD_97c2b8ac	data.s
 DAT_a7b7bae0	0xa7b7bae0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae0 asm("DAT_a7b7bae0");	pointer -> LD_97c2b908	data.s
-DAT_a7b7bae4	0xa7b7bae4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae4 asm("DAT_a7b7bae4");	pointer -> LD_97c2b960	data.s
-DAT_a7b7bae8	0xa7b7bae8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae8 asm("DAT_a7b7bae8");	pointer -> LD_97c2b9e4	data.s
+UNK_a7b7bae4	0xa7b7bae4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bae4 asm("UNK_a7b7bae4");	pointer -> LD_97c2b960	data.s
+UNK_a7b7bae8	0xa7b7bae8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bae8 asm("UNK_a7b7bae8");	pointer -> LD_97c2b9e4	data.s
 DAT_a7b7baec	0xa7b7baec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baec asm("DAT_a7b7baec");	pointer -> LD_97c2ba8c	data.s
 DAT_a7b7baf0	0xa7b7baf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf0 asm("DAT_a7b7baf0");	pointer -> LD_97c2bb44	data.s
-DAT_a7b7baf4	0xa7b7baf4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf4 asm("DAT_a7b7baf4");	pointer -> LD_97c2bbfc	data.s
-DAT_a7b7baf8	0xa7b7baf8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf8 asm("DAT_a7b7baf8");	pointer -> LD_97c2bc90	data.s
-DAT_a7b7bafc	0xa7b7bafc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bafc asm("DAT_a7b7bafc");	pointer -> LD_97c2bd28	data.s
+UNK_a7b7baf4	0xa7b7baf4	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7baf4 asm("UNK_a7b7baf4");	pointer -> LD_97c2bbfc	data.s
+UNK_a7b7baf8	0xa7b7baf8	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7baf8 asm("UNK_a7b7baf8");	pointer -> LD_97c2bc90	data.s
+UNK_a7b7bafc	0xa7b7bafc	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bafc asm("UNK_a7b7bafc");	pointer -> LD_97c2bd28	data.s
 DAT_a7b7bb00	0xa7b7bb00	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb00 asm("DAT_a7b7bb00");	pointer -> LD_97c2bdac	data.s
-DAT_a7b7bb14	0xa7b7bb14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb14 asm("DAT_a7b7bb14");	pointer -> LD_97c2bf10	data.s
-DAT_a7b7bb18	0xa7b7bb18	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb18 asm("DAT_a7b7bb18");	pointer -> LD_97c2bf54	data.s
+UNK_a7b7bb04	0xa7b7bb04	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb04 asm("UNK_a7b7bb04");	pointer -> LD_97c2be10	data.s
+UNK_a7b7bb08	0xa7b7bb08	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb08 asm("UNK_a7b7bb08");	pointer -> LD_97c2be60	data.s
+DAT_a7b7bb0c	0xa7b7bb0c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb0c asm("DAT_a7b7bb0c");	pointer -> LD_97c2beb0	data.s
+UNK_a7b7bb10	0xa7b7bb10	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb10 asm("UNK_a7b7bb10");	pointer -> LD_97c2bee4	data.s
+UNK_a7b7bb14	0xa7b7bb14	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb14 asm("UNK_a7b7bb14");	pointer -> LD_97c2bf10	data.s
+UNK_a7b7bb18	0xa7b7bb18	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb18 asm("UNK_a7b7bb18");	pointer -> LD_97c2bf54	data.s
 DAT_a7b7bb1c	0xa7b7bb1c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb1c asm("DAT_a7b7bb1c");	pointer -> LD_97c2bf98	data.s
 DAT_a7b7bb20	0xa7b7bb20	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb20 asm("DAT_a7b7bb20");	pointer -> LD_97c2bfdc	data.s
-DAT_a7b7bb24	0xa7b7bb24	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb24 asm("DAT_a7b7bb24");	pointer -> LD_97c2c020	data.s
+UNK_a7b7bb24	0xa7b7bb24	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb24 asm("UNK_a7b7bb24");	pointer -> LD_97c2c020	data.s
 _linkUtilString	0xa7b7bb28	__DATA,__data	undefined4	4		pointer -> LD_97c2c058	data.s
 DAT_a7b7bb34	0xa7b7bb34	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb34 asm("DAT_a7b7bb34");	pointer -> LD_97c2c150	data.s
 DAT_a7b7bb38	0xa7b7bb38	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb38 asm("DAT_a7b7bb38");	pointer -> LD_97c2c18c	data.s
@@ -906,12 +907,17 @@ DAT_a7b7bb50	0xa7b7bb50	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bb54	0xa7b7bb54	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb54 asm("DAT_a7b7bb54");	pointer -> LD_97c2c3d4	data.s
 DAT_a7b7bb58	0xa7b7bb58	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb58 asm("DAT_a7b7bb58");	pointer -> LD_97c2c3f4	data.s
 DAT_a7b7bb5c	0xa7b7bb5c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb5c asm("DAT_a7b7bb5c");	pointer -> LD_97c2c40c	data.s
+_linkIntErrorString	0xa7b7bb60	__DATA,__data	undefined4	4		pointer -> LD_97c2c418	data.s
+DAT_a7b7bb64	0xa7b7bb64	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb64 asm("DAT_a7b7bb64");	pointer -> LD_97c2c44c	data.s
 DAT_a7b7bb68	0xa7b7bb68	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb68 asm("DAT_a7b7bb68");	pointer -> LD_97c2c478	data.s
 DAT_a7b7bb6c	0xa7b7bb6c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb6c asm("DAT_a7b7bb6c");	pointer -> LD_97c2c4b0	data.s
-DAT_a7b7bb70	0xa7b7bb70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb70 asm("DAT_a7b7bb70");	pointer -> LD_97c2c4f4	data.s
+UNK_a7b7bb70	0xa7b7bb70	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb70 asm("UNK_a7b7bb70");	pointer -> LD_97c2c4f4	data.s
 DAT_a7b7bb74	0xa7b7bb74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb74 asm("DAT_a7b7bb74");	pointer -> LD_97c2c53c	data.s
 DAT_a7b7bb7c	0xa7b7bb7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb7c asm("DAT_a7b7bb7c");	pointer -> LD_97c2c5d8	data.s
-DAT_a7b7bb90	0xa7b7bb90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb90 asm("DAT_a7b7bb90");	pointer -> LD_97c2c6d0	data.s
+DAT_a7b7bb84	0xa7b7bb84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb84 asm("DAT_a7b7bb84");	pointer -> LD_97c2c63c	data.s
+DAT_a7b7bb88	0xa7b7bb88	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb88 asm("DAT_a7b7bb88");	pointer -> LD_97c2c66c	data.s
+DAT_a7b7bb8c	0xa7b7bb8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb8c asm("DAT_a7b7bb8c");	pointer -> LD_97c2c6ac	data.s
+UNK_a7b7bb90	0xa7b7bb90	__DATA,__data	undefined4	4	extern unsigned int UNK_a7b7bb90 asm("UNK_a7b7bb90");	pointer -> LD_97c2c6d0	data.s
 DAT_a7b7bba0	0xa7b7bba0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bba0 asm("DAT_a7b7bba0");	pointer -> LD_a7b7d6e0	data.s
 _symbolUtilString	0xa7b7bba4	__DATA,__data	undefined4	4		pointer -> LD_97c2c8d8	data.s
 DAT_a7b7bba8	0xa7b7bba8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bba8 asm("DAT_a7b7bba8");	pointer -> LD_97c2c8e0	data.s
@@ -950,8 +956,8 @@ DAT_a7b7bc90	0xa7b7bc90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bce8	0xa7b7bce8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bce8 asm("DAT_a7b7bce8");	pointer -> LD_97c28f34	data.s
 DAT_a7b7bcec	0xa7b7bcec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bcec asm("DAT_a7b7bcec");	pointer -> LD_97c2ccb4	data.s
 DAT_a7b7bcf0	0xa7b7bcf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bcf0 asm("DAT_a7b7bcf0");	pointer -> LD_97c2ccbc	data.s
-temporaryAllocator	0xa7b7bcf4	__DATA,__data	undefined4	4		0x00000000	data.s
-addressTempAllocator	0xa7b7bcf8	__DATA,__data	undefined4	4		0x00000000	data.s
+ParseOperand__temporaryAllocator	0xa7b7bcf4	__DATA,__data	undefined4	4		0x00000000	data.s
+ParseOperand__addressTempAllocator	0xa7b7bcf8	__DATA,__data	undefined4	4		0x00000000	data.s
 DAT_a7b7bcfc	0xa7b7bcfc	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bcfc asm("DAT_a7b7bcfc");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7bd04	0xa7b7bd04	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd04 asm("DAT_a7b7bd04");	pointer -> LD_a7b7e00c	data.s
 DAT_a7b7bd0c	0xa7b7bd0c	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd0c asm("DAT_a7b7bd0c");	pointer -> LD_a7b7e00c	data.s
@@ -967,6 +973,9 @@ DAT_a7b7bd34	0xa7b7bd34	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bd38	0xa7b7bd38	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd38 asm("DAT_a7b7bd38");	pointer -> LD_97c2d25c	data.s
 DAT_a7b7bd3c	0xa7b7bd3c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd3c asm("DAT_a7b7bd3c");	pointer -> LD_97c2d270	data.s
 DAT_a7b7bd40	0xa7b7bd40	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd40 asm("DAT_a7b7bd40");	pointer -> LD_97c2d2c8	data.s
+_compileUtilString	0xa7b7bd44	__DATA,__data	undefined4	4		pointer -> LD_97c27e00	data.s
+DAT_a7b7bd48	0xa7b7bd48	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd48 asm("DAT_a7b7bd48");	pointer -> LD_97c2d33c	data.s
+DAT_a7b7bd4c	0xa7b7bd4c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd4c asm("DAT_a7b7bd4c");	pointer -> LD_97c2b404	data.s
 DAT_a7b7bd50	0xa7b7bd50	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd50 asm("DAT_a7b7bd50");	pointer -> LD_97c2d35c	data.s
 DAT_a7b7bd54	0xa7b7bd54	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd54 asm("DAT_a7b7bd54");	pointer -> LD_97c2d374	data.s
 DAT_a7b7bd58	0xa7b7bd58	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd58 asm("DAT_a7b7bd58");	pointer -> LD_97c2c8a4	data.s
@@ -974,6 +983,11 @@ DAT_a7b7bd5c	0xa7b7bd5c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bd60	0xa7b7bd60	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd60 asm("DAT_a7b7bd60");	pointer -> LD_97c2d3a8	data.s
 DAT_a7b7bd64	0xa7b7bd64	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd64 asm("DAT_a7b7bd64");	pointer -> LD_97c2d3bc	data.s
 DAT_a7b7bd68	0xa7b7bd68	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd68 asm("DAT_a7b7bd68");	pointer -> LD_97c2d3d8	data.s
+DAT_a7b7bd6c	0xa7b7bd6c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd6c asm("DAT_a7b7bd6c");	pointer -> LD_97c2d3f4	data.s
+DAT_a7b7bd70	0xa7b7bd70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd70 asm("DAT_a7b7bd70");	pointer -> LD_97c2d414	data.s
+DAT_a7b7bd74	0xa7b7bd74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd74 asm("DAT_a7b7bd74");	pointer -> LD_97c2d448	data.s
+DAT_a7b7bd78	0xa7b7bd78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd78 asm("DAT_a7b7bd78");	pointer -> LD_97c2d47c	data.s
+DAT_a7b7bd80	0xa7b7bd80	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd80 asm("DAT_a7b7bd80");	pointer -> LD_97c2d4a4	data.s
 DAT_a7b7bd84	0xa7b7bd84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd84 asm("DAT_a7b7bd84");	pointer -> LD_97c2c40c	data.s
 DAT_a7b7bd88	0xa7b7bd88	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd88 asm("DAT_a7b7bd88");	pointer -> LD_97c2d4d8	data.s
 DAT_a7b7bd8c	0xa7b7bd8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd8c asm("DAT_a7b7bd8c");	pointer -> LD_97c2c9dc	data.s
@@ -989,14 +1003,14 @@ DAT_a7b7bf74	0xa7b7bf74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bf78	0xa7b7bf78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf78 asm("DAT_a7b7bf78");	pointer -> _instructionIndexHashFunction	data.s
 DAT_a7b7bf7c	0xa7b7bf7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf7c asm("DAT_a7b7bf7c");	pointer -> _regEqualsFunction	data.s
 DAT_a7b7bf80	0xa7b7bf80	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf80 asm("DAT_a7b7bf80");	0x97c0b4a4	data.s
-_S_empty_rep_storage	0xa7b7bf84	__DATA,__data	undefined1	1		0x00000000	data.s
+std__string___S_empty_rep_storage	0xa7b7bf84	__DATA,__data	undefined1	1		0x00000000	data.s
 DAT_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf8c asm("DAT_a7b7bf8c");	0x00000000	data.s
 SYM_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4		0x00000000	data.s
 DAT_a7b7bf90	0xa7b7bf90	__DATA,__data	-	-	extern unsigned char DAT_a7b7bf90 asm("DAT_a7b7bf90");	0x00000000	data.s
 _S_start_free	0xa7b7bfd4	__DATA,__data	undefined4	4		0x00000000	data.s
 _S_end_free	0xa7b7bfd8	__DATA,__data	undefined4	4		0x00000000	data.s
 _S_heap_size	0xa7b7bfdc	__DATA,__data	undefined4	4		0x00000000	data.s
-_S_node_allocator_lock	0xa7b7bfe0	__DATA,__data	undefined1	1		0x32aaaba7	data.s
+std____default_alloc_template_true_0____S_node_allocator_lock	0xa7b7bfe0	__DATA,__data	undefined1	1		0x32aaaba7	data.s
 SYM_a7b7c00c	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
 _S_force_new	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
 __default_alloc_template_true_0____S_force_new	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
@@ -1053,34 +1067,34 @@ PTR_temporaryAllocator_a7b7c0fc	0xa7b7c0fc	__DATA,__nl_symbol_ptr	pointer	4	exte
 PTR_DAT_a7b7c100	0xa7b7c100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c100 asm("PTR_DAT_a7b7c100");	pointer -> __cpu_has_altivec	data.s
 PTR__InterpreterRun_a7b7c104	0xa7b7c104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__InterpreterRun_a7b7c104 asm("PTR__InterpreterRun_a7b7c104");	pointer -> _InterpreterRun	data.s
 PTR__ppstreamOpString_a7b7c108	0xa7b7c108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__ppstreamOpString_a7b7c108 asm("PTR__ppstreamOpString_a7b7c108");	pointer -> _ppstreamOpString	data.s
-PTR__underflow_error_a7b7c110	0xa7b7c110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__underflow_error_a7b7c110 asm("PTR__underflow_error_a7b7c110");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR___ZNSt15underflow_errorD1Ev_a7b7c110	0xa7b7c110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt15underflow_errorD1Ev_a7b7c110 asm("PTR___ZNSt15underflow_errorD1Ev_a7b7c110");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
 PTR_typeinfo_a7b7c114	0xa7b7c114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c114 asm("PTR_typeinfo_a7b7c114");	pointer -> LD_a7b7e098	data.s
-PTR__overflow_error_a7b7c118	0xa7b7c118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__overflow_error_a7b7c118 asm("PTR__overflow_error_a7b7c118");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR___ZNSt14overflow_errorD1Ev_a7b7c118	0xa7b7c118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt14overflow_errorD1Ev_a7b7c118 asm("PTR___ZNSt14overflow_errorD1Ev_a7b7c118");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
 PTR_typeinfo_a7b7c11c	0xa7b7c11c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c11c asm("PTR_typeinfo_a7b7c11c");	pointer -> LD_a7b7e08c	data.s
-PTR__range_error_a7b7c120	0xa7b7c120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__range_error_a7b7c120 asm("PTR__range_error_a7b7c120");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR___ZNSt11range_errorD1Ev_a7b7c120	0xa7b7c120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt11range_errorD1Ev_a7b7c120 asm("PTR___ZNSt11range_errorD1Ev_a7b7c120");	pointer -> __ZNSt11range_errorD1Ev	data.s
 PTR_typeinfo_a7b7c124	0xa7b7c124	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c124 asm("PTR_typeinfo_a7b7c124");	pointer -> LD_a7b7e080	data.s
-PTR__runtime_error_a7b7c128	0xa7b7c128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__runtime_error_a7b7c128 asm("PTR__runtime_error_a7b7c128");	pointer -> __ZNSt13runtime_errorD1Ev	data.s
+PTR___ZNSt13runtime_errorD1Ev_a7b7c128	0xa7b7c128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt13runtime_errorD1Ev_a7b7c128 asm("PTR___ZNSt13runtime_errorD1Ev_a7b7c128");	pointer -> __ZNSt13runtime_errorD1Ev	data.s
 PTR_typeinfo_a7b7c12c	0xa7b7c12c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c12c asm("PTR_typeinfo_a7b7c12c");	pointer -> LD_a7b7e074	data.s
-PTR__out_of_range_a7b7c130	0xa7b7c130	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__out_of_range_a7b7c130 asm("PTR__out_of_range_a7b7c130");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR___ZNSt12out_of_rangeD1Ev_a7b7c130	0xa7b7c130	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt12out_of_rangeD1Ev_a7b7c130 asm("PTR___ZNSt12out_of_rangeD1Ev_a7b7c130");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
 PTR_typeinfo_a7b7c134	0xa7b7c134	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c134 asm("PTR_typeinfo_a7b7c134");	pointer -> LD_a7b7e068	data.s
-PTR__length_error_a7b7c138	0xa7b7c138	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__length_error_a7b7c138 asm("PTR__length_error_a7b7c138");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR___ZNSt12length_errorD1Ev_a7b7c138	0xa7b7c138	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt12length_errorD1Ev_a7b7c138 asm("PTR___ZNSt12length_errorD1Ev_a7b7c138");	pointer -> __ZNSt12length_errorD1Ev	data.s
 PTR_typeinfo_a7b7c13c	0xa7b7c13c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c13c asm("PTR_typeinfo_a7b7c13c");	pointer -> LD_a7b7e05c	data.s
-PTR__invalid_argument_a7b7c140	0xa7b7c140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7c140 asm("PTR__invalid_argument_a7b7c140");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR___ZNSt16invalid_argumentD1Ev_a7b7c140	0xa7b7c140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt16invalid_argumentD1Ev_a7b7c140 asm("PTR___ZNSt16invalid_argumentD1Ev_a7b7c140");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
 PTR_typeinfo_a7b7c144	0xa7b7c144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c144 asm("PTR_typeinfo_a7b7c144");	pointer -> LD_a7b7e050	data.s
-PTR__domain_error_a7b7c148	0xa7b7c148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__domain_error_a7b7c148 asm("PTR__domain_error_a7b7c148");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+PTR___ZNSt12domain_errorD1Ev_a7b7c148	0xa7b7c148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt12domain_errorD1Ev_a7b7c148 asm("PTR___ZNSt12domain_errorD1Ev_a7b7c148");	pointer -> __ZNSt12domain_errorD1Ev	data.s
 PTR_typeinfo_a7b7c14c	0xa7b7c14c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c14c asm("PTR_typeinfo_a7b7c14c");	pointer -> LD_a7b7e044	data.s
-PTR__logic_error_a7b7c150	0xa7b7c150	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__logic_error_a7b7c150 asm("PTR__logic_error_a7b7c150");	pointer -> __ZNSt11logic_errorD1Ev	data.s
+PTR___ZNSt11logic_errorD1Ev_a7b7c150	0xa7b7c150	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt11logic_errorD1Ev_a7b7c150 asm("PTR___ZNSt11logic_errorD1Ev_a7b7c150");	pointer -> __ZNSt11logic_errorD1Ev	data.s
 PTR_typeinfo_a7b7c154	0xa7b7c154	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c154 asm("PTR_typeinfo_a7b7c154");	pointer -> LD_a7b7e038	data.s
-PTR__bad_typeid_a7b7c158	0xa7b7c158	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_typeid_a7b7c158 asm("PTR__bad_typeid_a7b7c158");	pointer -> __ZNSt10bad_typeidD1Ev	data.s
+PTR___ZNSt10bad_typeidD1Ev_a7b7c158	0xa7b7c158	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt10bad_typeidD1Ev_a7b7c158 asm("PTR___ZNSt10bad_typeidD1Ev_a7b7c158");	pointer -> __ZNSt10bad_typeidD1Ev	data.s
 PTR_typeinfo_a7b7c15c	0xa7b7c15c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c15c asm("PTR_typeinfo_a7b7c15c");	pointer -> LD_a7b7e0b0	data.s
 PTR_vtable_a7b7c160	0xa7b7c160	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c160 asm("PTR_vtable_a7b7c160");	pointer -> LD_a7b7df78	data.s
-PTR__bad_cast_a7b7c164	0xa7b7c164	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_cast_a7b7c164 asm("PTR__bad_cast_a7b7c164");	pointer -> __ZNSt8bad_castD1Ev	data.s
+PTR___ZNSt8bad_castD1Ev_a7b7c164	0xa7b7c164	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt8bad_castD1Ev_a7b7c164 asm("PTR___ZNSt8bad_castD1Ev_a7b7c164");	pointer -> __ZNSt8bad_castD1Ev	data.s
 PTR_typeinfo_a7b7c168	0xa7b7c168	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c168 asm("PTR_typeinfo_a7b7c168");	pointer -> LD_a7b7e0a4	data.s
 PTR_vtable_a7b7c16c	0xa7b7c16c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c16c asm("PTR_vtable_a7b7c16c");	pointer -> LD_a7b7df90	data.s
-PTR__bad_alloc_a7b7c170	0xa7b7c170	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_alloc_a7b7c170 asm("PTR__bad_alloc_a7b7c170");	pointer -> __ZNSt9bad_allocD1Ev	data.s
+PTR___ZNSt9bad_allocD1Ev_a7b7c170	0xa7b7c170	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt9bad_allocD1Ev_a7b7c170 asm("PTR___ZNSt9bad_allocD1Ev_a7b7c170");	pointer -> __ZNSt9bad_allocD1Ev	data.s
 PTR_typeinfo_a7b7c174	0xa7b7c174	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c174 asm("PTR_typeinfo_a7b7c174");	pointer -> LD_a7b7e02c	data.s
 PTR_vtable_a7b7c178	0xa7b7c178	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c178 asm("PTR_vtable_a7b7c178");	pointer -> LD_a7b7dff8	data.s
-PTR__bad_exception_a7b7c17c	0xa7b7c17c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_exception_a7b7c17c asm("PTR__bad_exception_a7b7c17c");	pointer -> __ZNSt13bad_exceptionD1Ev	data.s
+PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c	0xa7b7c17c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c asm("PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c");	pointer -> __ZNSt13bad_exceptionD1Ev	data.s
 PTR_typeinfo_a7b7c180	0xa7b7c180	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c180 asm("PTR_typeinfo_a7b7c180");	pointer -> LD_a7b7e020	data.s
 PTR_vtable_a7b7c184	0xa7b7c184	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c184 asm("PTR_vtable_a7b7c184");	pointer -> LD_a7b7dfc8	data.s
 PTR___terminate_handler_a7b7c188	0xa7b7c188	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___terminate_handler_a7b7c188 asm("PTR___terminate_handler_a7b7c188");	pointer -> LD_a7b7c070	data.s
@@ -1097,21 +1111,21 @@ DAT_a7b7cf14	0xa7b7cf14	__DATA,__const	undefined4	4	extern unsigned int DAT_a7b7
 _unop	0xa7b7cf20	__DATA,__const	-	-		0x0000002b	data.s
 UNK_a7b7cf24	0xa7b7cf24	__DATA,__const	-	-	extern unsigned char UNK_a7b7cf24 asm("UNK_a7b7cf24");	pointer -> _op_pos	data.s
 TType__vtable	0xa7b7cf40	__DATA,__const	-	-		0x00000000	data.s
-PTR__TType_a7b7cf48	0xa7b7cf48	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7cf48 asm("PTR__TType_a7b7cf48");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7cf48	0xa7b7cf48	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7cf48 asm("PTR___ZN5TTypeD1Ev_a7b7cf48");	pointer -> __ZN5TTypeD1Ev	data.s
 PTR_getLine_a7b7cf90	0xa7b7cf90	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7cf90 asm("PTR_getLine_a7b7cf90");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
-PTR__TType_a7b7cff8	0xa7b7cff8	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7cff8 asm("PTR__TType_a7b7cff8");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7cff8	0xa7b7cff8	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7cff8 asm("PTR___ZN5TTypeD1Ev_a7b7cff8");	pointer -> __ZN5TTypeD1Ev	data.s
 PTR_getLine_a7b7d040	0xa7b7d040	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d040 asm("PTR_getLine_a7b7d040");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
-PTR__TType_a7b7d080	0xa7b7d080	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d080 asm("PTR__TType_a7b7d080");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d080	0xa7b7d080	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d080 asm("PTR___ZN5TTypeD1Ev_a7b7d080");	pointer -> __ZN5TTypeD1Ev	data.s
 PTR_getLine_a7b7d1b8	0xa7b7d1b8	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d1b8 asm("PTR_getLine_a7b7d1b8");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
 PTR_getLine_a7b7d390	0xa7b7d390	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d390 asm("PTR_getLine_a7b7d390");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
 PTR_getLine_a7b7d400	0xa7b7d400	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d400 asm("PTR_getLine_a7b7d400");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
-PTR__TType_a7b7d440	0xa7b7d440	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d440 asm("PTR__TType_a7b7d440");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TType_a7b7d488	0xa7b7d488	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d488 asm("PTR__TType_a7b7d488");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TType_a7b7d4d0	0xa7b7d4d0	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d4d0 asm("PTR__TType_a7b7d4d0");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TSymbol_a7b7d568	0xa7b7d568	__DATA,__const	pointer	4	extern unsigned char *PTR__TSymbol_a7b7d568 asm("PTR__TSymbol_a7b7d568");	pointer -> __ZN7TSymbolD1Ev	data.s
-PTR__TType_a7b7d590	0xa7b7d590	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d590 asm("PTR__TType_a7b7d590");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d440	0xa7b7d440	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d440 asm("PTR___ZN5TTypeD1Ev_a7b7d440");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d488	0xa7b7d488	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d488 asm("PTR___ZN5TTypeD1Ev_a7b7d488");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d4d0	0xa7b7d4d0	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d4d0 asm("PTR___ZN5TTypeD1Ev_a7b7d4d0");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN7TSymbolD1Ev_a7b7d568	0xa7b7d568	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN7TSymbolD1Ev_a7b7d568 asm("PTR___ZN7TSymbolD1Ev_a7b7d568");	pointer -> __ZN7TSymbolD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d590	0xa7b7d590	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d590 asm("PTR___ZN5TTypeD1Ev_a7b7d590");	pointer -> __ZN5TTypeD1Ev	data.s
 PTR_getLine_a7b7d5d8	0xa7b7d5d8	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d5d8 asm("PTR_getLine_a7b7d5d8");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
-PTR__TType_a7b7d640	0xa7b7d640	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d640 asm("PTR__TType_a7b7d640");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d640	0xa7b7d640	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d640 asm("PTR___ZN5TTypeD1Ev_a7b7d640");	pointer -> __ZN5TTypeD1Ev	data.s
 _PTR_s__02d____02d____s____s__c__c_a7b7d6bc	0xa7b7d6bc	__DATA,__const	pointer	4		pointer -> LD_97c2b3bc	data.s
 PTR_s_gl__WhileBody__a7b7d6c8	0xa7b7d6c8	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileBody__a7b7d6c8 asm("PTR_s_gl__WhileBody__a7b7d6c8");	pointer -> LD_97c2c83c	data.s
 PTR_s_gl__WhileEnd__a7b7d6cc	0xa7b7d6cc	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEnd__a7b7d6cc asm("PTR_s_gl__WhileEnd__a7b7d6cc");	pointer -> LD_97c2c84c	data.s
@@ -1119,18 +1133,18 @@ PTR_s_gl__WhileStart__a7b7d6d0	0xa7b7d6d0	__DATA,__const	pointer	4	extern unsign
 PTR_s_gl__WhileEndIf__a7b7d6d4	0xa7b7d6d4	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEndIf__a7b7d6d4 asm("PTR_s_gl__WhileEndIf__a7b7d6d4");	pointer -> LD_97c2c86c	data.s
 PTR_s_gl__IfElse_a7b7d6d8	0xa7b7d6d8	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfElse_a7b7d6d8 asm("PTR_s_gl__IfElse_a7b7d6d8");	pointer -> LD_97c2c87c	data.s
 PTR_s_gl__IfEnd__a7b7d6dc	0xa7b7d6dc	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfEnd__a7b7d6dc asm("PTR_s_gl__IfEnd__a7b7d6dc");	pointer -> LD_97c2c888	data.s
-PTR__TShHandleBase_a7b7d700	0xa7b7d700	__DATA,__const	pointer	4	extern unsigned char *PTR__TShHandleBase_a7b7d700 asm("PTR__TShHandleBase_a7b7d700");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
+PTR___ZN13TShHandleBaseD1Ev_a7b7d700	0xa7b7d700	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN13TShHandleBaseD1Ev_a7b7d700 asm("PTR___ZN13TShHandleBaseD1Ev_a7b7d700");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
 PTR_s_gl__IfElse__a7b7d710	0xa7b7d710	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfElse__a7b7d710 asm("PTR_s_gl__IfElse__a7b7d710");	pointer -> LD_97c2cedc	data.s
 PTR_s_gl__IfEnd__a7b7d714	0xa7b7d714	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfEnd__a7b7d714 asm("PTR_s_gl__IfEnd__a7b7d714");	pointer -> LD_97c2c888	data.s
 PTR_s_gl__WhileBody__a7b7d718	0xa7b7d718	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileBody__a7b7d718 asm("PTR_s_gl__WhileBody__a7b7d718");	pointer -> LD_97c2c83c	data.s
 PTR_s_gl__WhileEnd__a7b7d71c	0xa7b7d71c	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEnd__a7b7d71c asm("PTR_s_gl__WhileEnd__a7b7d71c");	pointer -> LD_97c2c84c	data.s
 PTR_s_gl__WhileStart__a7b7d720	0xa7b7d720	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileStart__a7b7d720 asm("PTR_s_gl__WhileStart__a7b7d720");	pointer -> LD_97c2c85c	data.s
 PTR_s_gl__WhileEndIf__a7b7d724	0xa7b7d724	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEndIf__a7b7d724 asm("PTR_s_gl__WhileEndIf__a7b7d724");	pointer -> LD_97c2c86c	data.s
-PTR__TType_a7b7d730	0xa7b7d730	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d730 asm("PTR__TType_a7b7d730");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TType_a7b7d778	0xa7b7d778	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d778 asm("PTR__TType_a7b7d778");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TType_a7b7d808	0xa7b7d808	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d808 asm("PTR__TType_a7b7d808");	pointer -> __ZN5TTypeD1Ev	data.s
-PTR__TCompiler_a7b7d850	0xa7b7d850	__DATA,__const	pointer	4	extern unsigned char *PTR__TCompiler_a7b7d850 asm("PTR__TCompiler_a7b7d850");	pointer -> __ZN9TCompilerD1Ev	data.s
-PTR__TShHandleBase_a7b7d898	0xa7b7d898	__DATA,__const	pointer	4	extern unsigned char *PTR__TShHandleBase_a7b7d898 asm("PTR__TShHandleBase_a7b7d898");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d730	0xa7b7d730	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d730 asm("PTR___ZN5TTypeD1Ev_a7b7d730");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d778	0xa7b7d778	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d778 asm("PTR___ZN5TTypeD1Ev_a7b7d778");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN5TTypeD1Ev_a7b7d808	0xa7b7d808	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN5TTypeD1Ev_a7b7d808 asm("PTR___ZN5TTypeD1Ev_a7b7d808");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR___ZN9TCompilerD1Ev_a7b7d850	0xa7b7d850	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN9TCompilerD1Ev_a7b7d850 asm("PTR___ZN9TCompilerD1Ev_a7b7d850");	pointer -> __ZN9TCompilerD1Ev	data.s
+PTR___ZN13TShHandleBaseD1Ev_a7b7d898	0xa7b7d898	__DATA,__const	pointer	4	extern unsigned char *PTR___ZN13TShHandleBaseD1Ev_a7b7d898 asm("PTR___ZN13TShHandleBaseD1Ev_a7b7d898");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
 _OpsList_ARBvp10	0xa7b7d8a8	__DATA,__const	undefined4	4		pointer -> LD_97c2d510	data.s
 _OpsList_NVvp20	0xa7b7d988	__DATA,__const	-	-		pointer -> LD_97c2d52c	data.s
 _OpsList_NVvp30	0xa7b7da08	__DATA,__const	undefined4	4		pointer -> LD_97c2d6c8	data.s
@@ -1139,20 +1153,20 @@ _OpsList_NVfp10	0xa7b7db50	__DATA,__const	-	-		pointer -> LD_97c2d6a0	data.s
 _OpsList_NVfp20	0xa7b7dbf0	__DATA,__const	-	-		pointer -> LD_97c2d564	data.s
 _vpDclList	0xa7b7dc70	__DATA,__const	undefined4	4		pointer -> LD_97c2fec8	data.s
 _fpDclList	0xa7b7dcd8	__DATA,__const	undefined4	4		pointer -> LD_97c2fec8	data.s
-PTR__underflow_error_a7b7dd70	0xa7b7dd70	__DATA,__const	pointer	4	extern unsigned char *PTR__underflow_error_a7b7dd70 asm("PTR__underflow_error_a7b7dd70");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
-PTR__overflow_error_a7b7dd88	0xa7b7dd88	__DATA,__const	pointer	4	extern unsigned char *PTR__overflow_error_a7b7dd88 asm("PTR__overflow_error_a7b7dd88");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
-PTR__range_error_a7b7dda0	0xa7b7dda0	__DATA,__const	pointer	4	extern unsigned char *PTR__range_error_a7b7dda0 asm("PTR__range_error_a7b7dda0");	pointer -> __ZNSt11range_errorD1Ev	data.s
-PTR__out_of_range_a7b7ddb8	0xa7b7ddb8	__DATA,__const	pointer	4	extern unsigned char *PTR__out_of_range_a7b7ddb8 asm("PTR__out_of_range_a7b7ddb8");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
-PTR__length_error_a7b7ddd0	0xa7b7ddd0	__DATA,__const	pointer	4	extern unsigned char *PTR__length_error_a7b7ddd0 asm("PTR__length_error_a7b7ddd0");	pointer -> __ZNSt12length_errorD1Ev	data.s
-PTR__invalid_argument_a7b7dde8	0xa7b7dde8	__DATA,__const	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7dde8 asm("PTR__invalid_argument_a7b7dde8");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
-PTR__domain_error_a7b7de00	0xa7b7de00	__DATA,__const	pointer	4	extern unsigned char *PTR__domain_error_a7b7de00 asm("PTR__domain_error_a7b7de00");	pointer -> __ZNSt12domain_errorD1Ev	data.s
-PTR__underflow_error_a7b7de48	0xa7b7de48	__DATA,__const	pointer	4	extern unsigned char *PTR__underflow_error_a7b7de48 asm("PTR__underflow_error_a7b7de48");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
-PTR__overflow_error_a7b7de60	0xa7b7de60	__DATA,__const	pointer	4	extern unsigned char *PTR__overflow_error_a7b7de60 asm("PTR__overflow_error_a7b7de60");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
-PTR__range_error_a7b7de78	0xa7b7de78	__DATA,__const	pointer	4	extern unsigned char *PTR__range_error_a7b7de78 asm("PTR__range_error_a7b7de78");	pointer -> __ZNSt11range_errorD1Ev	data.s
-PTR__out_of_range_a7b7de90	0xa7b7de90	__DATA,__const	pointer	4	extern unsigned char *PTR__out_of_range_a7b7de90 asm("PTR__out_of_range_a7b7de90");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
-PTR__length_error_a7b7dea8	0xa7b7dea8	__DATA,__const	pointer	4	extern unsigned char *PTR__length_error_a7b7dea8 asm("PTR__length_error_a7b7dea8");	pointer -> __ZNSt12length_errorD1Ev	data.s
-PTR__invalid_argument_a7b7dec0	0xa7b7dec0	__DATA,__const	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7dec0 asm("PTR__invalid_argument_a7b7dec0");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
-PTR__domain_error_a7b7ded8	0xa7b7ded8	__DATA,__const	pointer	4	extern unsigned char *PTR__domain_error_a7b7ded8 asm("PTR__domain_error_a7b7ded8");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+PTR___ZNSt15underflow_errorD1Ev_a7b7dd70	0xa7b7dd70	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt15underflow_errorD1Ev_a7b7dd70 asm("PTR___ZNSt15underflow_errorD1Ev_a7b7dd70");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR___ZNSt14overflow_errorD1Ev_a7b7dd88	0xa7b7dd88	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt14overflow_errorD1Ev_a7b7dd88 asm("PTR___ZNSt14overflow_errorD1Ev_a7b7dd88");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR___ZNSt11range_errorD1Ev_a7b7dda0	0xa7b7dda0	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt11range_errorD1Ev_a7b7dda0 asm("PTR___ZNSt11range_errorD1Ev_a7b7dda0");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR___ZNSt12out_of_rangeD1Ev_a7b7ddb8	0xa7b7ddb8	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12out_of_rangeD1Ev_a7b7ddb8 asm("PTR___ZNSt12out_of_rangeD1Ev_a7b7ddb8");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR___ZNSt12length_errorD1Ev_a7b7ddd0	0xa7b7ddd0	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12length_errorD1Ev_a7b7ddd0 asm("PTR___ZNSt12length_errorD1Ev_a7b7ddd0");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR___ZNSt16invalid_argumentD1Ev_a7b7dde8	0xa7b7dde8	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt16invalid_argumentD1Ev_a7b7dde8 asm("PTR___ZNSt16invalid_argumentD1Ev_a7b7dde8");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR___ZNSt12domain_errorD1Ev_a7b7de00	0xa7b7de00	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12domain_errorD1Ev_a7b7de00 asm("PTR___ZNSt12domain_errorD1Ev_a7b7de00");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+PTR___ZNSt15underflow_errorD1Ev_a7b7de48	0xa7b7de48	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt15underflow_errorD1Ev_a7b7de48 asm("PTR___ZNSt15underflow_errorD1Ev_a7b7de48");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR___ZNSt14overflow_errorD1Ev_a7b7de60	0xa7b7de60	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt14overflow_errorD1Ev_a7b7de60 asm("PTR___ZNSt14overflow_errorD1Ev_a7b7de60");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR___ZNSt11range_errorD1Ev_a7b7de78	0xa7b7de78	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt11range_errorD1Ev_a7b7de78 asm("PTR___ZNSt11range_errorD1Ev_a7b7de78");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR___ZNSt12out_of_rangeD1Ev_a7b7de90	0xa7b7de90	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12out_of_rangeD1Ev_a7b7de90 asm("PTR___ZNSt12out_of_rangeD1Ev_a7b7de90");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR___ZNSt12length_errorD1Ev_a7b7dea8	0xa7b7dea8	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12length_errorD1Ev_a7b7dea8 asm("PTR___ZNSt12length_errorD1Ev_a7b7dea8");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR___ZNSt16invalid_argumentD1Ev_a7b7dec0	0xa7b7dec0	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt16invalid_argumentD1Ev_a7b7dec0 asm("PTR___ZNSt16invalid_argumentD1Ev_a7b7dec0");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR___ZNSt12domain_errorD1Ev_a7b7ded8	0xa7b7ded8	__DATA,__const	pointer	4	extern unsigned char *PTR___ZNSt12domain_errorD1Ev_a7b7ded8 asm("PTR___ZNSt12domain_errorD1Ev_a7b7ded8");	pointer -> __ZNSt12domain_errorD1Ev	data.s
 _bindAtom	0xa7b7e798	__DATA,__bss	undefined4	4			data.s
 _constAtom	0xa7b7e79c	__DATA,__bss	undefined4	4			data.s
 _defaultAtom	0xa7b7e7a0	__DATA,__bss	undefined4	4			data.s

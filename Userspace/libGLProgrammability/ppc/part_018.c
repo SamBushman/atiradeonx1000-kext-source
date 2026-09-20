@@ -679,7 +679,7 @@ int _GetRegisterIndicies(param_1, param_2, param_3, param_4, param_5, param_6, p
   *param_2 = 0;
   *param_3 = -1;
   if (param_6 != 0) {
-    _GetStreamArray(param_4,param_5,param_1,param_2,param_3);
+    ((int (*)())_GetStreamArray_97c08e40)(param_4,param_5,param_1,param_2,param_3);
   }
   iVar1 = *param_3;
   if (((iVar1 == -1) && (param_7 != 0)) && (1 < param_8 + 1)) {
@@ -1390,7 +1390,7 @@ int _RegistersCleanup(param_1)
       case 4:
         uVar3 = *(undefined4 *)(*param_1 + 0xc);
       }
-      _PPStreamChunkListRemoveChunk(uVar3);
+      _PPStreamChunkListRemoveChunk(uVar3,*(int *)(iVar6 + 0x28));
 switchD_97c09d2c_caseD_0:
       *(undefined4 *)(iVar6 + 0x28) = 0;
       *(undefined4 *)(iVar6 + 0x54) = 0;
@@ -1427,7 +1427,7 @@ int _RegisterCanMerge(param_1, param_2)
   
   uVar2 = 0;
   if (((((*(int *)(param_1 + 0x10) == param_2[4]) && (*(int *)(param_1 + 0xc) == param_2[3])) &&
-       (iVar1 = ((int (*)())_RegisterIsMergeable)(), iVar1 != 0)) &&
+       (iVar1 = ((int (*)())_RegisterIsMergeable)(param_1), iVar1 != 0)) &&
       ((iVar1 = ((int (*)())_RegisterIsMergeable)(param_2), iVar1 != 0 &&
        ((iVar1 = ((int (*)())_RegisterIsFixed)(param_1), iVar1 == 0 ||
         (iVar1 = ((int (*)())_RegisterIsFixed)(param_2), iVar1 == 0)))))) &&
@@ -1499,21 +1499,22 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar3;
   int iVar4;
   int iVar5;
+  int iVar6;
   
-  param_4 = param_4 + param_5 * 4;
-  if (*(uint *)(param_1 + 0xc) < param_4 + 4U) {
-    pvVar1 = _realloc(*(void **)(param_1 + 0x10),param_4 * 0x2c + 0xb0);
+  iVar5 = param_4 + param_5 * 4;
+  if (*(uint *)(param_1 + 0xc) < iVar5 + 4U) {
+    pvVar1 = _realloc(*(void **)(param_1 + 0x10),iVar5 * 0x2c + 0xb0);
     *(void **)(param_1 + 0x10) = pvVar1;
     _memset((void *)(*(int *)(param_1 + 0xc) * 0x2c + (int)pvVar1),0,
-            (param_4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0);
-    *(uint *)(param_1 + 0xc) = param_4 + 4U;
+            (iVar5 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0);
+    *(uint *)(param_1 + 0xc) = iVar5 + 4U;
   }
-  iVar4 = param_4 * 0x2c;
-  iVar5 = 4;
+  iVar4 = iVar5 * 0x2c;
+  iVar6 = 4;
   iVar2 = 0;
   do {
     iVar3 = *(int *)(param_1 + 0x10) + iVar4;
-    *(int *)(*(int *)(param_1 + 0x10) + iVar4) = param_4 + iVar2;
+    *(int *)(*(int *)(param_1 + 0x10) + iVar4) = iVar5 + iVar2;
     *(int *)(iVar3 + 0xc) = iVar2;
     iVar4 = iVar4 + 0x2c;
     *(undefined4 *)(iVar3 + 0x28) = param_2;
@@ -1525,8 +1526,8 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
     *(undefined4 *)(iVar3 + 0x18) = 0;
     *(undefined4 *)(iVar3 + 0x1c) = 0;
     *(undefined4 *)(iVar3 + 0x20) = 0;
-    iVar5 = iVar5 + -1;
-  } while (iVar5 != 0);
+    iVar6 = iVar6 + -1;
+  } while (iVar6 != 0);
   return 0;
 }
 
@@ -1537,7 +1538,7 @@ int _RegisterFree(param_1)
   if (*(int *)(param_1 + 8) == 0) {
     return;
   }
-  _BitSetFree();
+  _BitSetFree(*(int *)(param_1 + 8));
   return;
 }
 
@@ -1637,7 +1638,7 @@ LAB_97c0a290:
 LAB_97c0a29c:
       uVar2 = *(uint *)(iVar17 + 0x1c);
       uVar11 = uVar11 | uVar2 >> 0x1f;
-      ((int (*)())_GetRegisterIndicies)(*param_1,local_70 + 4,&local_5c,uVar2 >> 0x17 & 7,*(undefined2 *)(iVar17 + 0x22),
+      ((int (*)())_GetRegisterIndicies)(*param_1,local_70 + 4,&local_5c,uVar2 >> 0x17 & 7,(uint)*(ushort *)(iVar17 + 0x22),
                  uVar2 >> 0x1f,uVar2 >> 0xe & 1,uVar2 >> 0xc & 3);
       if ((int)local_70[4] <= local_5c) {
         uVar2 = local_70[4];
@@ -1817,19 +1818,19 @@ int _BlockFree(param_1)
     _free((void *)param_1[5]);
   }
   if (param_1[6] != 0) {
-    _BitSetFree();
+    _BitSetFree(param_1[6]);
   }
   if (param_1[7] != 0) {
-    _BitSetFree();
+    _BitSetFree(param_1[7]);
   }
   if (param_1[8] != 0) {
-    _BitSetFree();
+    _BitSetFree(param_1[8]);
   }
   if (param_1[9] != 0) {
-    _BitSetFree();
+    _BitSetFree(param_1[9]);
   }
   if (param_1[10] != 0) {
-    _BitSetFree();
+    _BitSetFree(param_1[10]);
     return;
   }
   return;
@@ -1839,23 +1840,26 @@ int _BlockFree(param_1)
 int _RegistersInitialize(param_1)
   int param_1;
 {
-  undefined4 uVar1;
-  int iVar2;
+  uint uVar1;
+  undefined4 uVar2;
   int iVar3;
-  uint uVar4;
+  int iVar4;
+  uint uVar5;
   
-  uVar4 = 0;
-  if (*(int *)(param_1 + 0xc) != 0) {
-    iVar2 = 0;
+  uVar5 = 0;
+  uVar1 = *(uint *)(param_1 + 0xc);
+  if (uVar1 != 0) {
+    iVar3 = 0;
     do {
-      iVar3 = *(int *)(param_1 + 0x10);
-      uVar1 = _BitSetNew();
-      iVar3 = iVar3 + iVar2;
-      iVar2 = iVar2 + 0x2c;
-      *(undefined4 *)(iVar3 + 8) = uVar1;
-      _BitSetSetEquals(uVar1,uVar4);
-      uVar4 = uVar4 + 1;
-    } while (uVar4 < *(uint *)(param_1 + 0xc));
+      iVar4 = *(int *)(param_1 + 0x10);
+      uVar2 = _BitSetNew(uVar1);
+      iVar4 = iVar4 + iVar3;
+      iVar3 = iVar3 + 0x2c;
+      *(undefined4 *)(iVar4 + 8) = uVar2;
+      _BitSetSetEquals(uVar2,uVar5);
+      uVar1 = *(uint *)(param_1 + 0xc);
+      uVar5 = uVar5 + 1;
+    } while (uVar5 < uVar1);
   }
   return;
 }
@@ -1865,71 +1869,72 @@ int _Registerify(param_1)
   int *param_1;
 {
   int iVar1;
-  int iVar2;
+  undefined4 uVar2;
   int iVar3;
+  int iVar4;
   
   iVar1 = param_1[3];
-  iVar2 = *param_1;
+  iVar3 = *param_1;
   param_1[7] = iVar1;
-  iVar3 = **(int **)(iVar2 + 0x1c);
-  if (iVar3 != 0) {
+  iVar4 = **(int **)(iVar3 + 0x1c);
+  if (iVar4 != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar3,3,param_1[7],*(undefined2 *)(iVar3 + 0x12),
-                   *(uint *)(iVar3 + 0xc) >> 0x1a & 7);
-      iVar3 = *(int *)(iVar3 + 8);
-    } while (iVar3 != 0);
+      ((int (*)())_RegisterAdd)(param_1,iVar4,3,param_1[7],(uint)*(ushort *)(iVar4 + 0x12),
+                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
+      iVar4 = *(int *)(iVar4 + 8);
+    } while (iVar4 != 0);
     iVar1 = param_1[3];
-    iVar2 = *param_1;
+    iVar3 = *param_1;
   }
   param_1[0xc] = iVar1;
   param_1[8] = iVar1;
-  iVar3 = **(int **)(iVar2 + 4);
-  if (iVar3 != 0) {
+  iVar4 = **(int **)(iVar3 + 4);
+  if (iVar4 != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar3,1,param_1[8],*(undefined2 *)(iVar3 + 0x12),
-                   *(uint *)(iVar3 + 0xc) >> 0x1a & 7);
-      iVar3 = *(int *)(iVar3 + 8);
-    } while (iVar3 != 0);
+      ((int (*)())_RegisterAdd)(param_1,iVar4,1,param_1[8],(uint)*(ushort *)(iVar4 + 0x12),
+                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
+      iVar4 = *(int *)(iVar4 + 8);
+    } while (iVar4 != 0);
     iVar1 = param_1[3];
-    iVar2 = *param_1;
+    iVar3 = *param_1;
   }
   param_1[0xd] = iVar1;
   param_1[9] = iVar1;
-  iVar3 = **(int **)(iVar2 + 0x18);
-  if (iVar3 != 0) {
+  iVar4 = **(int **)(iVar3 + 0x18);
+  if (iVar4 != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar3,0,param_1[9],*(undefined2 *)(iVar3 + 0x12),
-                   *(uint *)(iVar3 + 0xc) >> 0x1a & 7);
-      iVar3 = *(int *)(iVar3 + 8);
-    } while (iVar3 != 0);
+      ((int (*)())_RegisterAdd)(param_1,iVar4,0,param_1[9],(uint)*(ushort *)(iVar4 + 0x12),
+                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
+      iVar4 = *(int *)(iVar4 + 8);
+    } while (iVar4 != 0);
     iVar1 = param_1[3];
-    iVar2 = *param_1;
+    iVar3 = *param_1;
   }
   param_1[0xe] = iVar1;
   param_1[10] = iVar1;
-  iVar3 = **(int **)(iVar2 + 0x10);
-  if (iVar3 != 0) {
+  iVar4 = **(int **)(iVar3 + 0x10);
+  if (iVar4 != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar3,2,param_1[10],*(undefined2 *)(iVar3 + 0x12),
-                   *(uint *)(iVar3 + 0xc) >> 0x1a & 7);
-      iVar3 = *(int *)(iVar3 + 8);
-    } while (iVar3 != 0);
+      ((int (*)())_RegisterAdd)(param_1,iVar4,2,param_1[10],(uint)*(ushort *)(iVar4 + 0x12),
+                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
+      iVar4 = *(int *)(iVar4 + 8);
+    } while (iVar4 != 0);
     iVar1 = param_1[3];
-    iVar2 = *param_1;
+    iVar3 = *param_1;
   }
   param_1[0xf] = iVar1;
   param_1[0xb] = iVar1;
-  iVar2 = **(int **)(iVar2 + 0xc);
-  if (iVar2 != 0) {
+  iVar3 = **(int **)(iVar3 + 0xc);
+  if (iVar3 != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar2,4,param_1[0xb],*(undefined4 *)(iVar2 + 0xc),3);
-      iVar2 = *(int *)(iVar2 + 8);
-    } while (iVar2 != 0);
+      ((int (*)())_RegisterAdd)(param_1,iVar3,4,param_1[0xb],*(undefined4 *)(iVar3 + 0xc),3);
+      iVar3 = *(int *)(iVar3 + 8);
+    } while (iVar3 != 0);
     iVar1 = param_1[3];
   }
   param_1[0x10] = iVar1;
-  ((int (*)())_RegistersInitialize)(param_1);
-  return;
+  uVar2 = ((int (*)())_RegistersInitialize)(param_1);
+  return uVar2;
 }
 
 /* _RegistersFree @ 0x97c0aa50 (124 bytes) */
@@ -2375,7 +2380,7 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
-  short sVar1;
+  undefined4 uVar1;
   uint local_30;
   undefined4 local_2c;
   undefined4 local_28;
@@ -2383,9 +2388,9 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
   local_30 = 0;
   local_2c = 0;
   local_28 = 0;
-  sVar1 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
+  uVar1 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(param_1 + 4));
   local_30 = (param_4 & 3) << 0x18 | (param_3 & 7) << 0x1a | param_2 << 0x1d | local_30 & 0xffffff;
-  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),sVar1 + 1);
+  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)uVar1 + 1);
   _PPStreamAddTempUsage(param_1,&local_30);
   return local_2c & 0xffff;
 }
@@ -2397,7 +2402,7 @@ _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param
 
 {
   int iVar1;
-  short sVar2;
+  undefined4 uVar2;
   uint uVar3;
   int *piVar4;
   int iVar5;
@@ -2449,9 +2454,9 @@ _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param
   local_2c = 0;
   local_30 = 0x110000;
   local_28 = 0;
-  sVar2 = _PPStreamChunkListGetMaxIndex(piVar4);
+  uVar2 = _PPStreamChunkListGetMaxIndex(piVar4);
   uVar3 = (uint)local_30 >> 0x10;
-  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),sVar2 + 1);
+  local_2c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_2c) + 0)),(short)uVar2 + 1);
   local_30 = CONCAT22((ushort)((param_2 << 0x1d) >> 0x10) |
                       (ushort)(((param_4 & 3) << 0x18) >> 0x10) |
                       (ushort)(((param_3 & 7) << 0x1a) >> 0x10) | (ushort)uVar3 & 0xff,

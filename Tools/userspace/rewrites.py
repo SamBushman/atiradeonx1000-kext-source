@@ -13,6 +13,8 @@ import re
 ATOMIC = re.compile(
     r"(?P<ind>[ \t]*)do \{\n"
     r"(?P<ld>[ \t]*(?P<old>\w+) = (?:\([^)]*\))?\*(?:\([^)]*\))?(?P<lp>\w+);\n)?"
+    r"(?:[ \t]*\n)*"
+    r"(?P<mid>(?:[ \t]*\w+ = [^\n{}]*;\n)*)"
     r"[ \t]*if \(in_RESERVE != '\\0'\) \{\n"
     r"[ \t]*(?P<res>\w+) = (?:\([^)]*\))?storeWordConditionalIndexed\((?P<val>.*),0,(?P<ptr>[^,;]+)\);\n"
     r"(?:[ \t]*\*(?:\([^)]*\))?(?P<sp>\w+) = (?P=res);\n)?"
@@ -65,6 +67,8 @@ def rewrite_atomics(text):
         lines = [ind + '{', ind + '  int ghidra_old;', ind + '  do {', ind + '    ghidra_old = *(int *)(%s);' % pexpr]
         if old:
             lines.append(ind + '    %s = %s ghidra_old;' % (old, '(int)'))
+        if m.group('mid'):
+            lines.extend(l for l in m.group('mid').rstrip('\n').split('\n'))     # a value computed from the loaded word before the conditional store
         lines.append(ind + '    %s = %s;' % (res, val if m.group('sp') is not None or old or True else val))
         if m.group('post'):
             lines.extend(l for l in m.group('post').rstrip('\n').split('\n'))
@@ -350,3 +354,64 @@ def rewrite_di3_calls(text):
         n += k
     text, k = re.subn(r'\(\(int \(\*\)\(\)\)(___(?:lshr|ashl|ashr)di3)\)', r'((unsigned long long (*)())\1)', text)
     return text, n + k
+
+
+def _is_fp_param(p):
+    """'float' / 'double' for a by-value floating-point parameter (not a pointer to one), else ''"""
+    m = re.match(r'^(float|double)\b([^\[]*)$', p.strip())
+    return m.group(1) if m and '*' not in m.group(2) else ''
+
+
+def float_protos(decl_lines):
+    """name -> parameter type list, for the functions whose (typed) declaration has a float/double parameter"""
+    protos = {}
+    for ln in decl_lines:
+        m = re.match(r'^extern [^;(]*?\b(\w+)\(([^;]*?)\)\s*asm\(', ln.replace('\n', ' '))
+        if not m: continue
+        ps = [p.strip() for p in split_args(m.group(2))]
+        if any(_is_fp_param(p) for p in ps):
+            protos[m.group(1)] = ps
+    return protos
+
+
+def split_args(a):
+    out, d, cur, q = [], 0, '', False
+    for ch in a:
+        if ch == '"': q = not q
+        if not q:
+            if ch in '([': d += 1
+            if ch in ')]': d -= 1
+            if ch == ',' and d == 0: out.append(cur); cur = ''; continue
+        cur += ch
+    if cur.strip(): out.append(cur)
+    return out
+
+
+def rewrite_float_args(text, protos):
+    """Ghidra renders a float held as its bit pattern (`0x3f800000`, `*(undefined4 *)(p + 0x18)`) as an integer expression at a call whose callee takes a `float`
+    argument (passed in an FPR). The corpus calls such functions through an unprototyped cast, so the integer went out in a GPR and the callee read garbage from
+    the FPR (and gcc turns a call of a `float`-taking function through such a cast into a trap). GH_ARGF/GH_ARGD (ghidra_link.h) pass a float/double expression unchanged and reinterpret an integer one as the float/double it holds."""
+    n = 0
+    out, pos = [], 0
+    for m in re.finditer(r'\(\(\w[\w \*]*\(\*\)\(\)\)(\w+)\)\(', text):
+        name = m.group(1)
+        if name not in protos or m.start() < pos: continue
+        i, d, q = m.end(), 1, False
+        while i < len(text) and d:
+            ch = text[i]
+            if ch == '"' and text[i - 1] != '\\': q = not q
+            elif not q:
+                if ch == '(': d += 1
+                elif ch == ')': d -= 1
+            i += 1
+        args = split_args(text[m.end():i - 1])
+        ps = protos[name]
+        new = []
+        for k, a in enumerate(args):
+            if k < len(ps) and _is_fp_param(ps[k]) == 'float': new.append(' GH_ARGF(%s)' % a.strip()); n += 1
+            elif k < len(ps) and _is_fp_param(ps[k]) == 'double': new.append(' GH_ARGD(%s)' % a.strip()); n += 1
+            else: new.append(a)
+        head = text[pos:m.start()] + (name + '(' if any(_is_fp_param(p_) == 'float' for p_ in ps) else text[m.start():m.end()])   # a call through an unprototyped cast of a function with a float parameter is a gcc trap (float is not compatible with the K&R promotion): call it by its prototype
+        out.append(head); out.append(','.join(new).lstrip() if new else ''); out.append(')'); pos = i
+    out.append(text[pos:])
+    return ''.join(out), n

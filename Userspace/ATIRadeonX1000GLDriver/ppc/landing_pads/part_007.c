@@ -124,7 +124,7 @@ int eh_pad_13e7c8(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_13eda8 @ 0x13eda8 (28 bytes) */
+/* eh_pad_13eda8 @ 0x13eda8 (48 bytes) */
 int eh_pad_13eda8(param_1)
   _Unwind_Exception *param_1;
 {

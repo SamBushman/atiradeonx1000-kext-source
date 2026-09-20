@@ -1,67 +1,67 @@
 #include "decls.h"
 
-/* TemporaryAllocator__TemporaryAllocator_97bb9e90 @ 0x97bb9e90 (4 bytes) */
-int TemporaryAllocator__TemporaryAllocator_97bb9e90(this)
-  unsigned char * this;
+/* __ZN18TemporaryAllocatorC1Ev @ 0x97bb9e90 (4 bytes) */
+int __ZN18TemporaryAllocatorC1Ev(this)
+  void *this;
 {
-  TemporaryAllocator(this);
+  ((int (*)())__ZN18TemporaryAllocatorC4Ev)(this);
   return;
 }
 
-/* TemporaryAllocator__TemporaryAllocator_97bb9e94 @ 0x97bb9e94 (32 bytes) */
-int TemporaryAllocator__TemporaryAllocator_97bb9e94(this)
-  unsigned char * this;
+/* __ZN18TemporaryAllocatorC4Ev @ 0x97bb9e94 (32 bytes) */
+int __ZN18TemporaryAllocatorC4Ev(this)
+  void *this;
 {
   int iVar1;
   
   iVar1 = 0x19;
   do {
     *(undefined4 *)this = 0;
-    *(undefined4 *)(this + 100) = 0;
-    this = this + 4;
+    *(undefined4 *)((int)this + 100) = 0;
+    this = (void *)((int)this + 4);
     iVar1 = iVar1 + -1;
   } while (iVar1 != 0);
   return;
 }
 
-/* TemporaryAllocator___TemporaryAllocator @ 0x97bb9eb4 (8 bytes) */
-int TemporaryAllocator___TemporaryAllocator(this)
-  unsigned char * this;
+/* __ZN18TemporaryAllocatorD2Ev @ 0x97bb9eb4 (8 bytes) */
+int __ZN18TemporaryAllocatorD2Ev(this)
+  void *this;
 {
-  ~TemporaryAllocator(this);
+  ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
   return;
 }
 
-/* TemporaryAllocator___TemporaryAllocator_97bb9ebc @ 0x97bb9ebc (8 bytes) */
-int TemporaryAllocator___TemporaryAllocator_97bb9ebc(this)
-  unsigned char * this;
+/* __ZN18TemporaryAllocatorD1Ev @ 0x97bb9ebc (8 bytes) */
+int __ZN18TemporaryAllocatorD1Ev(this)
+  void *this;
 {
-  ~TemporaryAllocator(this);
+  ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
   return;
 }
 
-/* TemporaryAllocator___TemporaryAllocator_97bb9ec4 @ 0x97bb9ec4 (72 bytes) */
-int TemporaryAllocator___TemporaryAllocator_97bb9ec4(this)
-  unsigned char * this;
+/* __ZN18TemporaryAllocatorD4Ev @ 0x97bb9ec4 (72 bytes) */
+int __ZN18TemporaryAllocatorD4Ev(this)
+  void *this;
 {
   void *pvVar1;
-  unsigned char * pTVar2;
+  undefined4 *puVar2;
   
-  pTVar2 = this + 0x60;
+  puVar2 = (undefined4 *)((int)this + 0x60);
   do {
     pvVar1 = *(void **)this;
-    this = this + 4;
+    this = (void *)((int)this + 4);
     if (pvVar1 != (void *)0x0) {
       _free(pvVar1);
     }
-  } while (this <= pTVar2);
+  } while (this <= puVar2);
   return;
 }
 
 /* TemporaryAllocator__getTemporary @ 0x97bb9f0c (408 bytes) */
-int TemporaryAllocator__getTemporary(this, param_1)
+int TemporaryAllocator__getTemporary(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   int iVar1;
   int iVar2;
@@ -75,7 +75,7 @@ int TemporaryAllocator__getTemporary(this, param_1)
   int iVar9;
   uint uVar10;
   
-  iVar9 = CONCAT22(in_register_00000010,param_1);
+  iVar9 = CONCAT22(in_register_00000010,param_2);
   uVar10 = 0;
   iVar2 = 0;
   if ((iVar9 != 0x1404) && (iVar2 = 1, iVar9 != 0x1406)) {
@@ -137,16 +137,16 @@ int TemporaryAllocator__getTemporary(this, param_1)
 }
 
 /* TemporaryAllocator__releaseTemporary @ 0x97bba0a4 (100 bytes) */
-int TemporaryAllocator__releaseTemporary(this, param_1, param_2)
+int TemporaryAllocator__releaseTemporary(this, param_2, param_3)
   unsigned char * this;
-  int param_1;
-  uint param_2;
+  int param_2;
+  uint param_3;
 {
   int iVar1;
   undefined2 in_register_00000010;
   int iVar2;
   
-  iVar2 = CONCAT22(in_register_00000010,param_1);
+  iVar2 = CONCAT22(in_register_00000010,param_2);
   iVar1 = 0;
   if ((iVar2 != 0x1404) && (iVar1 = 1, iVar2 != 0x1406)) {
     if ((iVar2 + 0x74b0U & 0xffff) < 0x15) {
@@ -162,7 +162,7 @@ int TemporaryAllocator__releaseTemporary(this, param_1, param_2)
       }
     }
   }
-  *(undefined4 *)(param_2 * 4 + *(int *)(this + iVar1 * 4)) = 0;
+  *(undefined4 *)(param_3 * 4 + *(int *)(this + iVar1 * 4)) = 0;
   return;
 }
 
@@ -191,142 +191,142 @@ int ParseSymbol__ClearDirectIndex(this)
   return;
 }
 
-/* ParseSymbol__ParseSymbol @ 0x97bba194 (4 bytes) */
-int ParseSymbol__ParseSymbol(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolC2Ev @ 0x97bba194 (4 bytes) */
+int __ZN11ParseSymbolC2Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined2 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x28) = 0xffffffff;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x30) = 0;
-  *(undefined2 *)(this + 0x2e) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x34) = 0;
-  *(undefined4 *)(this + 0x38) = 0;
-  *(undefined4 *)(this + 0x3c) = 0;
-  *(undefined4 *)(this + 0x60) = 0;
-  *(undefined4 *)(this + 0x5c) = 0;
-  *(undefined4 *)(this + 0x40) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined2 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x30) = 0;
+  *(undefined2 *)((int)this + 0x2e) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x34) = 0;
+  *(undefined4 *)((int)this + 0x38) = 0;
+  *(undefined4 *)((int)this + 0x3c) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x40) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 0x48) = 0;
-  *(undefined4 *)(this + 0x4c) = 0;
-  *(undefined4 *)(this + 0x58) = 0;
-  *(undefined4 *)(this + 0x54) = 0;
-  *(undefined4 *)(this + 4) = 0;
+  *(undefined4 *)((int)this + 0x48) = 0;
+  *(undefined4 *)((int)this + 0x4c) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
   return;
 }
 
-/* ParseSymbol__ParseSymbol_97bba198 @ 0x97bba198 (4 bytes) */
-int ParseSymbol__ParseSymbol_97bba198(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolC1Ev @ 0x97bba198 (4 bytes) */
+int __ZN11ParseSymbolC1Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined2 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x28) = 0xffffffff;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x30) = 0;
-  *(undefined2 *)(this + 0x2e) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x34) = 0;
-  *(undefined4 *)(this + 0x38) = 0;
-  *(undefined4 *)(this + 0x3c) = 0;
-  *(undefined4 *)(this + 0x60) = 0;
-  *(undefined4 *)(this + 0x5c) = 0;
-  *(undefined4 *)(this + 0x40) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined2 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x30) = 0;
+  *(undefined2 *)((int)this + 0x2e) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x34) = 0;
+  *(undefined4 *)((int)this + 0x38) = 0;
+  *(undefined4 *)((int)this + 0x3c) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x40) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 0x48) = 0;
-  *(undefined4 *)(this + 0x4c) = 0;
-  *(undefined4 *)(this + 0x58) = 0;
-  *(undefined4 *)(this + 0x54) = 0;
-  *(undefined4 *)(this + 4) = 0;
+  *(undefined4 *)((int)this + 0x48) = 0;
+  *(undefined4 *)((int)this + 0x4c) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
   return;
 }
 
-/* ParseSymbol__ParseSymbol_97bba19c @ 0x97bba19c (124 bytes) */
-int ParseSymbol__ParseSymbol_97bba19c(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolC4Ev @ 0x97bba19c (124 bytes) */
+int __ZN11ParseSymbolC4Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined2 *)(this + 0x2c) = 0;
-  *(undefined4 *)(this + 0x28) = 0xffffffff;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x30) = 0;
-  *(undefined2 *)(this + 0x2e) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x34) = 0;
-  *(undefined4 *)(this + 0x38) = 0;
-  *(undefined4 *)(this + 0x3c) = 0;
-  *(undefined4 *)(this + 0x60) = 0;
-  *(undefined4 *)(this + 0x5c) = 0;
-  *(undefined4 *)(this + 0x40) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined2 *)((int)this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0xffffffff;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x30) = 0;
+  *(undefined2 *)((int)this + 0x2e) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x34) = 0;
+  *(undefined4 *)((int)this + 0x38) = 0;
+  *(undefined4 *)((int)this + 0x3c) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 0x5c) = 0;
+  *(undefined4 *)((int)this + 0x40) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 0x48) = 0;
-  *(undefined4 *)(this + 0x4c) = 0;
-  *(undefined4 *)(this + 0x58) = 0;
-  *(undefined4 *)(this + 0x54) = 0;
-  *(undefined4 *)(this + 4) = 0;
+  *(undefined4 *)((int)this + 0x48) = 0;
+  *(undefined4 *)((int)this + 0x4c) = 0;
+  *(undefined4 *)((int)this + 0x58) = 0;
+  *(undefined4 *)((int)this + 0x54) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
   return;
 }
 
-/* ParseSymbol___ParseSymbol @ 0x97bba218 (8 bytes) */
-int ParseSymbol___ParseSymbol(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolD2Ev @ 0x97bba218 (8 bytes) */
+int __ZN11ParseSymbolD2Ev(this)
+  void *this;
 {
-  ~ParseSymbol(this);
+  ((int (*)())__ZN11ParseSymbolD4Ev)(this);
   return;
 }
 
-/* ParseSymbol___ParseSymbol_97bba220 @ 0x97bba220 (8 bytes) */
-int ParseSymbol___ParseSymbol_97bba220(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolD1Ev @ 0x97bba220 (8 bytes) */
+int __ZN11ParseSymbolD1Ev(this)
+  void *this;
 {
-  ~ParseSymbol(this);
+  ((int (*)())__ZN11ParseSymbolD4Ev)(this);
   return;
 }
 
-/* ParseSymbol___ParseSymbol_97bba228 @ 0x97bba228 (116 bytes) */
-int ParseSymbol___ParseSymbol_97bba228(this)
-  unsigned char * this;
+/* __ZN11ParseSymbolD4Ev @ 0x97bba228 (116 bytes) */
+int __ZN11ParseSymbolD4Ev(this)
+  void *this;
 {
-  if (*(void **)(this + 0x14) != (void *)0x0) {
-    _free(*(void **)(this + 0x14));
+  if (*(void **)((int)this + 0x14) != (void *)0x0) {
+    _free(*(void **)((int)this + 0x14));
   }
-  if (*(void **)(this + 0x18) != (void *)0x0) {
-    _free(*(void **)(this + 0x18));
+  if (*(void **)((int)this + 0x18) != (void *)0x0) {
+    _free(*(void **)((int)this + 0x18));
   }
-  if ((*(int *)(this + 0x44) != 0) && (*(void **)this != (void *)0x0)) {
+  if ((*(int *)((int)this + 0x44) != 0) && (*(void **)this != (void *)0x0)) {
     _free(*(void **)this);
     return;
   }
   return;
 }
 
-/* ParseSymbol__ParseSymbol_97bba29c @ 0x97bba29c (4 bytes) */
-int ParseSymbol__ParseSymbol_97bba29c(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN11ParseSymbolC2ERKS_ @ 0x97bba29c (4 bytes) */
+int __ZN11ParseSymbolC2ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   undefined2 uVar2;
@@ -343,64 +343,64 @@ int ParseSymbol__ParseSymbol_97bba29c(this, param_1)
   undefined4 uVar13;
   uint uVar14;
   
-  uVar2 = *(undefined2 *)(param_1 + 0x2c);
-  uVar11 = *(undefined4 *)(param_1 + 0x28);
+  uVar2 = *(undefined2 *)(param_2 + 0x2c);
+  uVar11 = *(undefined4 *)(param_2 + 0x28);
   uVar14 = 0;
-  uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(unsigned char **)(param_1 + 0xc);
-  *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
-  *(undefined2 *)(this + 0x2c) = uVar2;
-  *(undefined4 *)(this + 0x28) = uVar11;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x2e) = uVar1;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
+  uVar1 = *(undefined2 *)(param_2 + 0x2e);
+  pTVar5 = *(unsigned char **)(param_2 + 0xc);
+  *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(param_2 + 0x30);
+  *(undefined2 *)((int)this + 0x2c) = uVar2;
+  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x2e) = uVar1;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,pTVar5);
-  uVar11 = *(undefined4 *)(param_1 + 0x48);
-  *(undefined4 *)(this + 0x10) = *(undefined4 *)(param_1 + 0x10);
-  *(undefined4 *)(this + 0x48) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x48);
+  *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(param_2 + 0x10);
+  *(undefined4 *)((int)this + 0x48) = uVar11;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(param_1 + 0x34);
-  uVar10 = *(undefined4 *)(param_1 + 0x38);
-  uVar13 = *(undefined4 *)(param_1 + 0x3c);
-  uVar12 = *(undefined4 *)(param_1 + 0x60);
-  uVar9 = *(undefined4 *)(param_1 + 0x5c);
-  uVar8 = *(undefined4 *)(param_1 + 0x58);
-  uVar7 = *(undefined4 *)(param_1 + 0x40);
-  pcVar6 = *(char **)(param_1 + 0x14);
-  *(undefined4 *)(this + 0x4c) = *(undefined4 *)(param_1 + 0x4c);
-  *(undefined4 *)(this + 0x34) = uVar11;
-  *(undefined4 *)(this + 0x38) = uVar10;
-  *(undefined4 *)(this + 0x3c) = uVar13;
-  *(undefined4 *)(this + 0x60) = uVar12;
-  *(undefined4 *)(this + 0x5c) = uVar9;
-  *(undefined4 *)(this + 0x58) = uVar8;
-  *(undefined4 *)(this + 0x40) = uVar7;
-  SetName(this,pcVar6);
-  *(undefined4 *)(this + 0x24) = 0;
-  iVar3 = *(int *)(param_1 + 0x24);
-  uVar11 = *(undefined4 *)(param_1 + 0x54);
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x54) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x34);
+  uVar10 = *(undefined4 *)(param_2 + 0x38);
+  uVar13 = *(undefined4 *)(param_2 + 0x3c);
+  uVar12 = *(undefined4 *)(param_2 + 0x60);
+  uVar9 = *(undefined4 *)(param_2 + 0x5c);
+  uVar8 = *(undefined4 *)(param_2 + 0x58);
+  uVar7 = *(undefined4 *)(param_2 + 0x40);
+  pcVar6 = *(char **)(param_2 + 0x14);
+  *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
+  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x38) = uVar10;
+  *(undefined4 *)((int)this + 0x3c) = uVar13;
+  *(undefined4 *)((int)this + 0x60) = uVar12;
+  *(undefined4 *)((int)this + 0x5c) = uVar9;
+  *(undefined4 *)((int)this + 0x58) = uVar8;
+  *(undefined4 *)((int)this + 0x40) = uVar7;
+  ((int (*)())ParseSymbol__SetName)(this,pcVar6);
+  *(undefined4 *)((int)this + 0x24) = 0;
+  iVar3 = *(int *)(param_2 + 0x24);
+  uVar11 = *(undefined4 *)(param_2 + 0x54);
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = GetDirectIndex(param_1,uVar14);
+      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(param_2,uVar14);
       uVar14 = uVar14 + 1;
-      AddDirectIndex(this,uVar4);
-    } while (uVar14 < *(uint *)(param_1 + 0x24));
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+    } while (uVar14 < *(uint *)(param_2 + 0x24));
   }
   return;
 }
 
-/* ParseSymbol__ParseSymbol_97bba2a0 @ 0x97bba2a0 (4 bytes) */
-int ParseSymbol__ParseSymbol_97bba2a0(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN11ParseSymbolC1ERKS_ @ 0x97bba2a0 (4 bytes) */
+int __ZN11ParseSymbolC1ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   undefined2 uVar2;
@@ -417,64 +417,64 @@ int ParseSymbol__ParseSymbol_97bba2a0(this, param_1)
   undefined4 uVar13;
   uint uVar14;
   
-  uVar2 = *(undefined2 *)(param_1 + 0x2c);
-  uVar11 = *(undefined4 *)(param_1 + 0x28);
+  uVar2 = *(undefined2 *)(param_2 + 0x2c);
+  uVar11 = *(undefined4 *)(param_2 + 0x28);
   uVar14 = 0;
-  uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(unsigned char **)(param_1 + 0xc);
-  *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
-  *(undefined2 *)(this + 0x2c) = uVar2;
-  *(undefined4 *)(this + 0x28) = uVar11;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x2e) = uVar1;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
+  uVar1 = *(undefined2 *)(param_2 + 0x2e);
+  pTVar5 = *(unsigned char **)(param_2 + 0xc);
+  *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(param_2 + 0x30);
+  *(undefined2 *)((int)this + 0x2c) = uVar2;
+  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x2e) = uVar1;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,pTVar5);
-  uVar11 = *(undefined4 *)(param_1 + 0x48);
-  *(undefined4 *)(this + 0x10) = *(undefined4 *)(param_1 + 0x10);
-  *(undefined4 *)(this + 0x48) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x48);
+  *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(param_2 + 0x10);
+  *(undefined4 *)((int)this + 0x48) = uVar11;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(param_1 + 0x34);
-  uVar10 = *(undefined4 *)(param_1 + 0x38);
-  uVar13 = *(undefined4 *)(param_1 + 0x3c);
-  uVar12 = *(undefined4 *)(param_1 + 0x60);
-  uVar9 = *(undefined4 *)(param_1 + 0x5c);
-  uVar8 = *(undefined4 *)(param_1 + 0x58);
-  uVar7 = *(undefined4 *)(param_1 + 0x40);
-  pcVar6 = *(char **)(param_1 + 0x14);
-  *(undefined4 *)(this + 0x4c) = *(undefined4 *)(param_1 + 0x4c);
-  *(undefined4 *)(this + 0x34) = uVar11;
-  *(undefined4 *)(this + 0x38) = uVar10;
-  *(undefined4 *)(this + 0x3c) = uVar13;
-  *(undefined4 *)(this + 0x60) = uVar12;
-  *(undefined4 *)(this + 0x5c) = uVar9;
-  *(undefined4 *)(this + 0x58) = uVar8;
-  *(undefined4 *)(this + 0x40) = uVar7;
-  SetName(this,pcVar6);
-  *(undefined4 *)(this + 0x24) = 0;
-  iVar3 = *(int *)(param_1 + 0x24);
-  uVar11 = *(undefined4 *)(param_1 + 0x54);
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x54) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x34);
+  uVar10 = *(undefined4 *)(param_2 + 0x38);
+  uVar13 = *(undefined4 *)(param_2 + 0x3c);
+  uVar12 = *(undefined4 *)(param_2 + 0x60);
+  uVar9 = *(undefined4 *)(param_2 + 0x5c);
+  uVar8 = *(undefined4 *)(param_2 + 0x58);
+  uVar7 = *(undefined4 *)(param_2 + 0x40);
+  pcVar6 = *(char **)(param_2 + 0x14);
+  *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
+  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x38) = uVar10;
+  *(undefined4 *)((int)this + 0x3c) = uVar13;
+  *(undefined4 *)((int)this + 0x60) = uVar12;
+  *(undefined4 *)((int)this + 0x5c) = uVar9;
+  *(undefined4 *)((int)this + 0x58) = uVar8;
+  *(undefined4 *)((int)this + 0x40) = uVar7;
+  ((int (*)())ParseSymbol__SetName)(this,pcVar6);
+  *(undefined4 *)((int)this + 0x24) = 0;
+  iVar3 = *(int *)(param_2 + 0x24);
+  uVar11 = *(undefined4 *)(param_2 + 0x54);
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = GetDirectIndex(param_1,uVar14);
+      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(param_2,uVar14);
       uVar14 = uVar14 + 1;
-      AddDirectIndex(this,uVar4);
-    } while (uVar14 < *(uint *)(param_1 + 0x24));
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+    } while (uVar14 < *(uint *)(param_2 + 0x24));
   }
   return;
 }
 
-/* ParseSymbol__ParseSymbol_97bba2a4 @ 0x97bba2a4 (296 bytes) */
-int ParseSymbol__ParseSymbol_97bba2a4(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN11ParseSymbolC4ERKS_ @ 0x97bba2a4 (296 bytes) */
+int __ZN11ParseSymbolC4ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   undefined2 uVar2;
@@ -491,64 +491,64 @@ int ParseSymbol__ParseSymbol_97bba2a4(this, param_1)
   undefined4 uVar13;
   uint uVar14;
   
-  uVar2 = *(undefined2 *)(param_1 + 0x2c);
-  uVar11 = *(undefined4 *)(param_1 + 0x28);
+  uVar2 = *(undefined2 *)(param_2 + 0x2c);
+  uVar11 = *(undefined4 *)(param_2 + 0x28);
   uVar14 = 0;
-  uVar1 = *(undefined2 *)(param_1 + 0x2e);
-  pTVar5 = *(unsigned char **)(param_1 + 0xc);
-  *(undefined2 *)(this + 0x30) = *(undefined2 *)(param_1 + 0x30);
-  *(undefined2 *)(this + 0x2c) = uVar2;
-  *(undefined4 *)(this + 0x28) = uVar11;
-  *(undefined4 *)(this + 0x44) = 1;
-  *(undefined2 *)(this + 0x2e) = uVar1;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
+  uVar1 = *(undefined2 *)(param_2 + 0x2e);
+  pTVar5 = *(unsigned char **)(param_2 + 0xc);
+  *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(param_2 + 0x30);
+  *(undefined2 *)((int)this + 0x2c) = uVar2;
+  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x44) = 1;
+  *(undefined2 *)((int)this + 0x2e) = uVar1;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0x50) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,pTVar5);
-  uVar11 = *(undefined4 *)(param_1 + 0x48);
-  *(undefined4 *)(this + 0x10) = *(undefined4 *)(param_1 + 0x10);
-  *(undefined4 *)(this + 0x48) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x48);
+  *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(param_2 + 0x10);
+  *(undefined4 *)((int)this + 0x48) = uVar11;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(param_1 + 0x34);
-  uVar10 = *(undefined4 *)(param_1 + 0x38);
-  uVar13 = *(undefined4 *)(param_1 + 0x3c);
-  uVar12 = *(undefined4 *)(param_1 + 0x60);
-  uVar9 = *(undefined4 *)(param_1 + 0x5c);
-  uVar8 = *(undefined4 *)(param_1 + 0x58);
-  uVar7 = *(undefined4 *)(param_1 + 0x40);
-  pcVar6 = *(char **)(param_1 + 0x14);
-  *(undefined4 *)(this + 0x4c) = *(undefined4 *)(param_1 + 0x4c);
-  *(undefined4 *)(this + 0x34) = uVar11;
-  *(undefined4 *)(this + 0x38) = uVar10;
-  *(undefined4 *)(this + 0x3c) = uVar13;
-  *(undefined4 *)(this + 0x60) = uVar12;
-  *(undefined4 *)(this + 0x5c) = uVar9;
-  *(undefined4 *)(this + 0x58) = uVar8;
-  *(undefined4 *)(this + 0x40) = uVar7;
-  SetName(this,pcVar6);
-  *(undefined4 *)(this + 0x24) = 0;
-  iVar3 = *(int *)(param_1 + 0x24);
-  uVar11 = *(undefined4 *)(param_1 + 0x54);
-  *(undefined4 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x54) = uVar11;
+  uVar11 = *(undefined4 *)(param_2 + 0x34);
+  uVar10 = *(undefined4 *)(param_2 + 0x38);
+  uVar13 = *(undefined4 *)(param_2 + 0x3c);
+  uVar12 = *(undefined4 *)(param_2 + 0x60);
+  uVar9 = *(undefined4 *)(param_2 + 0x5c);
+  uVar8 = *(undefined4 *)(param_2 + 0x58);
+  uVar7 = *(undefined4 *)(param_2 + 0x40);
+  pcVar6 = *(char **)(param_2 + 0x14);
+  *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
+  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x38) = uVar10;
+  *(undefined4 *)((int)this + 0x3c) = uVar13;
+  *(undefined4 *)((int)this + 0x60) = uVar12;
+  *(undefined4 *)((int)this + 0x5c) = uVar9;
+  *(undefined4 *)((int)this + 0x58) = uVar8;
+  *(undefined4 *)((int)this + 0x40) = uVar7;
+  ((int (*)())ParseSymbol__SetName)(this,pcVar6);
+  *(undefined4 *)((int)this + 0x24) = 0;
+  iVar3 = *(int *)(param_2 + 0x24);
+  uVar11 = *(undefined4 *)(param_2 + 0x54);
+  *(undefined4 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x54) = uVar11;
   if (iVar3 != 0) {
     do {
-      uVar4 = GetDirectIndex(param_1,uVar14);
+      uVar4 = ((int (*)())ParseSymbol__GetDirectIndex)(param_2,uVar14);
       uVar14 = uVar14 + 1;
-      AddDirectIndex(this,uVar4);
-    } while (uVar14 < *(uint *)(param_1 + 0x24));
+      ((int (*)())ParseSymbol__AddDirectIndex)(this,uVar4);
+    } while (uVar14 < *(uint *)(param_2 + 0x24));
   }
   return;
 }
 
 /* ParseSymbol__operator_ @ 0x97bba3cc (328 bytes) */
-int ParseSymbol__operator_(this, param_1)
+int ParseSymbol__operator_(this, param_2)
   unsigned char * this;
-  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   undefined2 uVar2;
@@ -565,39 +565,39 @@ int ParseSymbol__operator_(this, param_1)
   undefined4 uVar13;
   uint uVar14;
   
-  if (this != param_1) {
-    uVar1 = *(undefined2 *)(param_1 + 0x30);
-    uVar2 = *(undefined2 *)(param_1 + 0x2c);
-    pcVar5 = *(char **)(param_1 + 0x14);
-    *(undefined2 *)(this + 0x2e) = *(undefined2 *)(param_1 + 0x2e);
+  if (this != param_2) {
+    uVar1 = *(undefined2 *)(param_2 + 0x30);
+    uVar2 = *(undefined2 *)(param_2 + 0x2c);
+    pcVar5 = *(char **)(param_2 + 0x14);
+    *(undefined2 *)(this + 0x2e) = *(undefined2 *)(param_2 + 0x2e);
     *(undefined2 *)(this + 0x30) = uVar1;
     *(undefined2 *)(this + 0x2c) = uVar2;
     SetName(this,pcVar5);
     ClearDirectIndex(this);
     uVar14 = 0;
-    if (*(int *)(param_1 + 0x24) != 0) {
+    if (*(int *)(param_2 + 0x24) != 0) {
       do {
-        uVar4 = GetDirectIndex(param_1,uVar14);
+        uVar4 = GetDirectIndex(param_2,uVar14);
         AddDirectIndex(this,uVar4);
         uVar14 = uVar14 + 1;
-      } while (uVar14 < *(uint *)(param_1 + 0x24));
+      } while (uVar14 < *(uint *)(param_2 + 0x24));
     }
-    pTVar6 = *(unsigned char **)(param_1 + 0xc);
-    *(undefined4 *)(this + 0x28) = *(undefined4 *)(param_1 + 0x28);
+    pTVar6 = *(unsigned char **)(param_2 + 0xc);
+    *(undefined4 *)(this + 0x28) = *(undefined4 *)(param_2 + 0x28);
     ((int (*)())ParseSymbol__SetParseTreeType)(this,pTVar6);
-    uVar3 = *(undefined4 *)(param_1 + 0x48);
-    *(undefined4 *)(this + 0x10) = *(undefined4 *)(param_1 + 0x10);
+    uVar3 = *(undefined4 *)(param_2 + 0x48);
+    *(undefined4 *)(this + 0x10) = *(undefined4 *)(param_2 + 0x10);
     *(undefined4 *)(this + 0x48) = uVar3;
     ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-    uVar3 = *(undefined4 *)(param_1 + 0x54);
-    uVar11 = *(undefined4 *)(param_1 + 0x34);
-    uVar13 = *(undefined4 *)(param_1 + 0x38);
-    uVar12 = *(undefined4 *)(param_1 + 0x3c);
-    uVar10 = *(undefined4 *)(param_1 + 0x60);
-    uVar9 = *(undefined4 *)(param_1 + 0x5c);
-    uVar8 = *(undefined4 *)(param_1 + 0x58);
-    uVar7 = *(undefined4 *)(param_1 + 0x40);
-    *(undefined4 *)(this + 0x4c) = *(undefined4 *)(param_1 + 0x4c);
+    uVar3 = *(undefined4 *)(param_2 + 0x54);
+    uVar11 = *(undefined4 *)(param_2 + 0x34);
+    uVar13 = *(undefined4 *)(param_2 + 0x38);
+    uVar12 = *(undefined4 *)(param_2 + 0x3c);
+    uVar10 = *(undefined4 *)(param_2 + 0x60);
+    uVar9 = *(undefined4 *)(param_2 + 0x5c);
+    uVar8 = *(undefined4 *)(param_2 + 0x58);
+    uVar7 = *(undefined4 *)(param_2 + 0x40);
+    *(undefined4 *)(this + 0x4c) = *(undefined4 *)(param_2 + 0x4c);
     *(undefined4 *)(this + 0x34) = uVar11;
     *(undefined4 *)(this + 0x38) = uVar13;
     *(undefined4 *)(this + 0x3c) = uVar12;
@@ -618,8 +618,8 @@ int ParseSymbol__operator_(this, param_1)
   return this;
 }
 
-/* operator___97bba514 @ 0x97bba514 (148 bytes) */
-int operator___97bba514(param_1, param_2)
+/* __ZeqRK11ParseSymbolS1_ @ 0x97bba514 (148 bytes) */
+int __ZeqRK11ParseSymbolS1_(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
@@ -781,19 +781,19 @@ switchD_97bba640_caseD_0:
 }
 
 /* ParseSymbol__SetParseTreeType @ 0x97bba850 (120 bytes) */
-int ParseSymbol__SetParseTreeType(this, param_1)
+int ParseSymbol__SetParseTreeType(this, param_2)
   unsigned char * this;
-  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   int iVar2;
   
-  *(unsigned char **)(this + 0xc) = param_1;
-  if (param_1 != (unsigned char *)0x0) {
-    iVar2 = (**(code **)(*(int *)param_1 + 0x38))(param_1);
+  *(unsigned char **)(this + 0xc) = param_2;
+  if (param_2 != (unsigned char *)0x0) {
+    iVar2 = (**(code **)(*(int *)param_2 + 0x38))(param_2);
     uVar1 = 1;
     if (iVar2 != 0) {
-      uVar1 = *(undefined2 *)(param_1 + 6);
+      uVar1 = *(undefined2 *)(param_2 + 6);
     }
     *(undefined2 *)(this + 0x2e) = uVar1;
     ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
@@ -803,14 +803,14 @@ int ParseSymbol__SetParseTreeType(this, param_1)
 }
 
 /* ParseSymbol__SetChunk @ 0x97bba8c8 (84 bytes) */
-int ParseSymbol__SetChunk(this, param_1)
+int ParseSymbol__SetChunk(this, param_2)
   unsigned char * this;
-  unsigned char * param_1;
+  unsigned char * param_2;
 {
   if ((*(void **)this != (void *)0x0) && (*(int *)(this + 0x44) != 0)) {
     _free(*(void **)this);
   }
-  *(unsigned char **)this = param_1;
+  *(unsigned char **)this = param_2;
   *(undefined4 *)(this + 0x44) = 1;
   return;
 }
@@ -827,9 +827,9 @@ int ParseSymbol__SetArrayPositionFromLastIndex(this)
 }
 
 /* ParseSymbol__CatName @ 0x97bba954 (208 bytes) */
-int ParseSymbol__CatName(this, param_1)
+int ParseSymbol__CatName(this, param_2)
   unsigned char * this;
-  char *param_1;
+  char *param_2;
 {
   char *pcVar1;
   int iVar2;
@@ -838,13 +838,13 @@ int ParseSymbol__CatName(this, param_1)
   char *pcVar5;
   int iVar6;
   
-  if (param_1 != (char *)0x0) {
-    sVar4 = _strlen(param_1);
+  if (param_2 != (char *)0x0) {
+    sVar4 = _strlen(param_2);
     pcVar5 = _malloc(sVar4 + *(int *)(this + 0x20) + 1);
     if (*(char **)(this + 0x14) != (char *)0x0) {
       _strncpy(pcVar5,*(char **)(this + 0x14),*(int *)(this + 0x20) + 1);
     }
-    _strncpy(pcVar5 + *(int *)(this + 0x20),param_1,sVar4 + 1);
+    _strncpy(pcVar5 + *(int *)(this + 0x20),param_2,sVar4 + 1);
     *(size_t *)(this + 0x20) = *(int *)(this + 0x20) + sVar4;
     _free(*(void **)(this + 0x14));
     iVar2 = *(int *)(this + 0x20);
@@ -866,9 +866,9 @@ int ParseSymbol__CatName(this, param_1)
 }
 
 /* ParseSymbol__SetName @ 0x97bbaa24 (156 bytes) */
-int ParseSymbol__SetName(this, param_1)
+int ParseSymbol__SetName(this, param_2)
   unsigned char * this;
-  char *param_1;
+  char *param_2;
 {
   int iVar1;
   size_t sVar2;
@@ -876,11 +876,11 @@ int ParseSymbol__SetName(this, param_1)
   int iVar4;
   
   ClearName(this);
-  if ((param_1 != (char *)0x0) && (sVar2 = _strlen(param_1), 0 < (int)sVar2)) {
+  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
     *(size_t *)(this + 0x20) = sVar2;
     pcVar3 = _malloc(sVar2 + 1);
     *(char **)(this + 0x14) = pcVar3;
-    _strncpy(pcVar3,param_1,*(int *)(this + 0x20) + 1);
+    _strncpy(pcVar3,param_2,*(int *)(this + 0x20) + 1);
     iVar1 = *(int *)(this + 0x20);
     iVar4 = 0;
     if (iVar1 != 0) {
@@ -896,9 +896,9 @@ int ParseSymbol__SetName(this, param_1)
 }
 
 /* ParseSymbol__RemoveNameBackToChar @ 0x97bbaac0 (132 bytes) */
-int ParseSymbol__RemoveNameBackToChar(this, param_1)
+int ParseSymbol__RemoveNameBackToChar(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   char *pcVar1;
   bool bVar2;
@@ -910,7 +910,7 @@ int ParseSymbol__RemoveNameBackToChar(this, param_1)
   bVar2 = false;
   if (-1 < iVar3) {
     do {
-      if ((int)*(char *)(*(int *)(this + 0x14) + iVar3) == CONCAT31(in_register_00000010,param_1)) {
+      if ((int)*(char *)(*(int *)(this + 0x14) + iVar3) == CONCAT31(in_register_00000010,param_2)) {
         bVar2 = true;
       }
       *(undefined1 *)(*(int *)(this + 0x14) + iVar3) = 0;
@@ -1053,9 +1053,9 @@ int ParseSymbol__TrimNameToBase(this)
 }
 
 /* ParseSymbol__AddDirectIndex @ 0x97bbadac (196 bytes) */
-int ParseSymbol__AddDirectIndex(this, param_1)
+int ParseSymbol__AddDirectIndex(this, param_2)
   unsigned char * this;
-  uint param_1;
+  uint param_2;
 {
   int iVar1;
   uint uVar2;
@@ -1086,7 +1086,7 @@ int ParseSymbol__AddDirectIndex(this, param_1)
     }
     *(void **)(this + 0x18) = pvVar3;
   }
-  *(uint *)(uVar2 * 4 + *(int *)(this + 0x18)) = param_1;
+  *(uint *)(uVar2 * 4 + *(int *)(this + 0x18)) = param_2;
   *(int *)(this + 0x24) = *(int *)(this + 0x24) + 1;
   return;
 }
@@ -1122,17 +1122,17 @@ int ParseSymbol__RemoveDirectIndex(this)
 }
 
 /* ParseSymbol__GetDirectIndex @ 0x97bbaec0 (16 bytes) */
-int ParseSymbol__GetDirectIndex(this, param_1)
+int ParseSymbol__GetDirectIndex(this, param_2)
   unsigned char * this;
-  uint param_1;
+  uint param_2;
 {
-  return *(undefined4 *)(param_1 * 4 + *(int *)(this + 0x18));
+  return *(undefined4 *)(param_2 * 4 + *(int *)(this + 0x18));
 }
 
 /* ParseSymbol__GetString @ 0x97bbaed0 (724 bytes) */
-int ParseSymbol__GetString(this, param_1)
+int ParseSymbol__GetString(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   byte bVar1;
   char *pcVar2;
@@ -1143,7 +1143,7 @@ int ParseSymbol__GetString(this, param_1)
   char *pcVar6;
   uint uVar7;
   
-  iVar4 = CONCAT31(in_register_00000010,param_1);
+  iVar4 = CONCAT31(in_register_00000010,param_2);
   pcVar6 = (char *)0x0;
   pcVar2 = _malloc(*(int *)(this + 0x20) + 0x200);
   if (pcVar2 == (char *)0x0) {
@@ -1240,67 +1240,67 @@ int ParseOperand__ClearDirectIndex(this)
   return;
 }
 
-/* ParseOperand__ParseOperand @ 0x97bbb1e8 (4 bytes) */
-int ParseOperand__ParseOperand(this)
-  unsigned char * this;
+/* __ZN12ParseOperandC2Ev @ 0x97bbb1e8 (4 bytes) */
+int __ZN12ParseOperandC2Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined2 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x28) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined2 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0;
   return;
 }
 
-/* ParseOperand__ParseOperand_97bbb1ec @ 0x97bbb1ec (4 bytes) */
-int ParseOperand__ParseOperand_97bbb1ec(this)
-  unsigned char * this;
+/* __ZN12ParseOperandC1Ev @ 0x97bbb1ec (4 bytes) */
+int __ZN12ParseOperandC1Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined2 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x28) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined2 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0;
   return;
 }
 
-/* ParseOperand__ParseOperand_97bbb1f0 @ 0x97bbb1f0 (56 bytes) */
-int ParseOperand__ParseOperand_97bbb1f0(this)
-  unsigned char * this;
+/* __ZN12ParseOperandC4Ev @ 0x97bbb1f0 (56 bytes) */
+int __ZN12ParseOperandC4Ev(this)
+  void *this;
 {
-  *(undefined4 *)(this + 0x2c) = 0;
+  *(undefined4 *)((int)this + 0x2c) = 0;
   *(undefined4 *)this = 0;
-  *(undefined4 *)(this + 4) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined2 *)(this + 0x18) = 0;
-  *(undefined4 *)(this + 0x24) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 0x28) = 0;
+  *(undefined4 *)((int)this + 4) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined2 *)((int)this + 0x18) = 0;
+  *(undefined4 *)((int)this + 0x24) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 0x28) = 0;
   return;
 }
 
-/* ParseOperand__ParseOperand_97bbb228 @ 0x97bbb228 (4 bytes) */
-int ParseOperand__ParseOperand_97bbb228(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN12ParseOperandC2ERKS_ @ 0x97bbb228 (4 bytes) */
+int __ZN12ParseOperandC2ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   int iVar2;
@@ -1311,54 +1311,54 @@ int ParseOperand__ParseOperand_97bbb228(this, param_1)
   uint uVar7;
   
   uVar7 = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  iVar2 = *(int *)(param_1 + 0x20);
-  uVar1 = *(undefined2 *)(param_1 + 0x18);
-  uVar3 = *(undefined4 *)(param_1 + 4);
-  uVar6 = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)this = *(undefined4 *)param_1;
-  *(undefined4 *)(this + 4) = uVar3;
-  *(undefined2 *)(this + 0x18) = uVar1;
-  *(undefined4 *)(this + 0x24) = uVar6;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  iVar2 = *(int *)(param_2 + 0x20);
+  uVar1 = *(undefined2 *)(param_2 + 0x18);
+  uVar3 = *(undefined4 *)(param_2 + 4);
+  uVar6 = *(undefined4 *)(param_2 + 0x24);
+  *(undefined4 *)this = *(undefined4 *)param_2;
+  *(undefined4 *)((int)this + 4) = uVar3;
+  *(undefined2 *)((int)this + 0x18) = uVar1;
+  *(undefined4 *)((int)this + 0x24) = uVar6;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
   if (iVar2 != 0) {
     do {
-      uVar4 = GetDirectIndex(param_1,uVar7);
-      AddDirectIndex(this,uVar4);
+      uVar4 = ((int (*)())ParseOperand__GetDirectIndex)(param_2,uVar7);
+      ((int (*)())ParseOperand__AddDirectIndex)(this,uVar4);
       uVar7 = uVar7 + 1;
-    } while (uVar7 < *(uint *)(param_1 + 0x20));
+    } while (uVar7 < *(uint *)(param_2 + 0x20));
   }
   uVar7 = 0;
-  if (*(int *)(param_1 + 0x14) != 0) {
+  if (*(int *)(param_2 + 0x14) != 0) {
     do {
-      uVar5 = ParseOperand__GetSwizzle(param_1,uVar7);
+      uVar5 = ParseOperand__GetSwizzle(param_2,uVar7);
       ((int (*)())ParseOperand__AddSwizzle)(this,uVar5);
       uVar7 = uVar7 + 1;
-    } while (uVar7 < *(uint *)(param_1 + 0x14));
+    } while (uVar7 < *(uint *)(param_2 + 0x14));
   }
-  uVar3 = *(undefined4 *)(param_1 + 0x28);
-  *(undefined4 *)(this + 0x2c) = *(undefined4 *)(param_1 + 0x2c);
-  *(undefined4 *)(this + 0x28) = uVar3;
+  uVar3 = *(undefined4 *)(param_2 + 0x28);
+  *(undefined4 *)((int)this + 0x2c) = *(undefined4 *)(param_2 + 0x2c);
+  *(undefined4 *)((int)this + 0x28) = uVar3;
   return;
 }
 
-/* ParseOperand__ParseOperand_97bbb22c @ 0x97bbb22c (4 bytes) */
-int ParseOperand__ParseOperand_97bbb22c(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN12ParseOperandC1ERKS_ @ 0x97bbb22c (4 bytes) */
+int __ZN12ParseOperandC1ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
-  ParseOperand(this,param_1);
+  ((int (*)())__ZN12ParseOperandC4ERKS_)(this,param_2);
   return;
 }
 
-/* ParseOperand__ParseOperand_97bbb230 @ 0x97bbb230 (232 bytes) */
-int ParseOperand__ParseOperand_97bbb230(this, param_1)
-  unsigned char * this;
-  unsigned char * param_1;
+/* __ZN12ParseOperandC4ERKS_ @ 0x97bbb230 (232 bytes) */
+int __ZN12ParseOperandC4ERKS_(this, param_2)
+  void *this;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   int iVar2;
@@ -1369,95 +1369,99 @@ int ParseOperand__ParseOperand_97bbb230(this, param_1)
   uint uVar7;
   
   uVar7 = 0;
-  *(undefined4 *)(this + 0x20) = 0;
-  iVar2 = *(int *)(param_1 + 0x20);
-  uVar1 = *(undefined2 *)(param_1 + 0x18);
-  uVar3 = *(undefined4 *)(param_1 + 4);
-  uVar6 = *(undefined4 *)(param_1 + 0x24);
-  *(undefined4 *)this = *(undefined4 *)param_1;
-  *(undefined4 *)(this + 4) = uVar3;
-  *(undefined2 *)(this + 0x18) = uVar1;
-  *(undefined4 *)(this + 0x24) = uVar6;
-  *(undefined4 *)(this + 0x14) = 0;
-  *(undefined4 *)(this + 8) = 0;
-  *(undefined4 *)(this + 0xc) = 0;
-  *(undefined4 *)(this + 0x1c) = 0;
-  *(undefined4 *)(this + 0x10) = 0;
+  *(undefined4 *)((int)this + 0x20) = 0;
+  iVar2 = *(int *)(param_2 + 0x20);
+  uVar1 = *(undefined2 *)(param_2 + 0x18);
+  uVar3 = *(undefined4 *)(param_2 + 4);
+  uVar6 = *(undefined4 *)(param_2 + 0x24);
+  *(undefined4 *)this = *(undefined4 *)param_2;
+  *(undefined4 *)((int)this + 4) = uVar3;
+  *(undefined2 *)((int)this + 0x18) = uVar1;
+  *(undefined4 *)((int)this + 0x24) = uVar6;
+  *(undefined4 *)((int)this + 0x14) = 0;
+  *(undefined4 *)((int)this + 8) = 0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  *(undefined4 *)((int)this + 0x1c) = 0;
+  *(undefined4 *)((int)this + 0x10) = 0;
   if (iVar2 != 0) {
     do {
-      uVar4 = GetDirectIndex(param_1,uVar7);
-      AddDirectIndex(this,uVar4);
+      uVar4 = ((int (*)())ParseOperand__GetDirectIndex)(param_2,uVar7);
+      ((int (*)())ParseOperand__AddDirectIndex)(this,uVar4);
       uVar7 = uVar7 + 1;
-    } while (uVar7 < *(uint *)(param_1 + 0x20));
+    } while (uVar7 < *(uint *)(param_2 + 0x20));
   }
   uVar7 = 0;
-  if (*(int *)(param_1 + 0x14) != 0) {
+  if (*(int *)(param_2 + 0x14) != 0) {
     do {
-      uVar5 = ParseOperand__GetSwizzle(param_1,uVar7);
+      uVar5 = ParseOperand__GetSwizzle(param_2,uVar7);
       ((int (*)())ParseOperand__AddSwizzle)(this,uVar5);
       uVar7 = uVar7 + 1;
-    } while (uVar7 < *(uint *)(param_1 + 0x14));
+    } while (uVar7 < *(uint *)(param_2 + 0x14));
   }
-  uVar3 = *(undefined4 *)(param_1 + 0x28);
-  *(undefined4 *)(this + 0x2c) = *(undefined4 *)(param_1 + 0x2c);
-  *(undefined4 *)(this + 0x28) = uVar3;
+  uVar3 = *(undefined4 *)(param_2 + 0x28);
+  *(undefined4 *)((int)this + 0x2c) = *(undefined4 *)(param_2 + 0x2c);
+  *(undefined4 *)((int)this + 0x28) = uVar3;
   return;
 }
 
-/* ParseOperand___ParseOperand @ 0x97bbb318 (8 bytes) */
-int ParseOperand___ParseOperand(this)
-  unsigned char * this;
+/* __ZN12ParseOperandD2Ev @ 0x97bbb318 (8 bytes) */
+int __ZN12ParseOperandD2Ev(this)
+  void *this;
 {
-  ~ParseOperand(this);
+  ((int (*)())__ZN12ParseOperandD4Ev)(this);
   return;
 }
 
-/* ParseOperand___ParseOperand_97bbb320 @ 0x97bbb320 (8 bytes) */
-int ParseOperand___ParseOperand_97bbb320(this)
-  unsigned char * this;
+/* __ZN12ParseOperandD1Ev @ 0x97bbb320 (8 bytes) */
+int __ZN12ParseOperandD1Ev(this)
+  void *this;
 {
-  ~ParseOperand(this);
+  ((int (*)())__ZN12ParseOperandD4Ev)(this);
   return;
 }
 
-/* ParseOperand___ParseOperand_97bbb328 @ 0x97bbb328 (232 bytes) */
-int ParseOperand___ParseOperand_97bbb328(this)
-  unsigned char * this;
+/* __ZN12ParseOperandD4Ev @ 0x97bbb328 (232 bytes) */
+int __ZN12ParseOperandD4Ev(this)
+  void *this;
 {
-  unsigned char * this_00;
+  void *this_00;
   
-  this_00 = *(unsigned char **)this;
-  if (this_00 == (unsigned char *)0x0) goto LAB_97bbb3cc;
-  if ((*(int *)(this_00 + 0x3c) == 0) || (temporaryAllocator == (unsigned char *)0x0)) {
-    if ((*(int *)(this_00 + 0x58) != 0) && (addressTempAllocator != (unsigned char *)0x0)) {
-      AddressTempAllocator__releaseTemporary(addressTempAllocator,*(uint *)(this_00 + 0x28));
+  this_00 = *(void **)this;
+  if (this_00 == (void *)0x0) goto LAB_97bbb3cc;
+  if ((*(int *)((int)this_00 + 0x3c) == 0) ||
+     (ParseOperand__temporaryAllocator == (unsigned char *)0x0)) {
+    if ((*(int *)((int)this_00 + 0x58) != 0) &&
+       (ParseOperand__addressTempAllocator != (unsigned char *)0x0)) {
+      AddressTempAllocator__releaseTemporary
+                (ParseOperand__addressTempAllocator,*(uint *)((int)this_00 + 0x28));
       goto LAB_97bbb3a4;
     }
   }
   else {
-    ((int (*)())TemporaryAllocator__releaseTemporary)(temporaryAllocator,*(ushort *)(this_00 + 0x2c),*(uint *)(this_00 + 0x28));
+    ((int (*)())TemporaryAllocator__releaseTemporary)(ParseOperand__temporaryAllocator,*(ushort *)((int)this_00 + 0x2c),
+               *(uint *)((int)this_00 + 0x28));
 LAB_97bbb3a4:
-    this_00 = *(unsigned char **)this;
+    this_00 = *(void **)this;
   }
-  if ((*(int *)(this_00 + 0x50) == 0) && (this_00 != (unsigned char *)0x0)) {
-    ((int (*)())ParseSymbol___ParseSymbol)(this_00);
-    operator_delete(this_00);
+  if ((*(int *)((int)this_00 + 0x50) == 0) && (this_00 != (void *)0x0)) {
+    ((int (*)())__ZN11ParseSymbolD1Ev)(this_00);
+    __ZdlPv(this_00);
   }
 LAB_97bbb3cc:
-  if (*(void **)(this + 0x1c) != (void *)0x0) {
-    _free(*(void **)(this + 0x1c));
+  if (*(void **)((int)this + 0x1c) != (void *)0x0) {
+    _free(*(void **)((int)this + 0x1c));
   }
-  if (*(void **)(this + 0x10) != (void *)0x0) {
-    _free(*(void **)(this + 0x10));
+  if (*(void **)((int)this + 0x10) != (void *)0x0) {
+    _free(*(void **)((int)this + 0x10));
     return;
   }
   return;
 }
 
 /* ParseOperand__operator_ @ 0x97bbb410 (220 bytes) */
-int ParseOperand__operator_(this, param_1)
+int ParseOperand__operator_(this, param_2)
   unsigned char * this;
-  unsigned char * param_1;
+  unsigned char * param_2;
 {
   undefined2 uVar1;
   undefined4 uVar2;
@@ -1466,40 +1470,40 @@ int ParseOperand__operator_(this, param_1)
   undefined4 uVar5;
   uint uVar6;
   
-  if (this != param_1) {
-    uVar2 = *(undefined4 *)(param_1 + 4);
-    uVar1 = *(undefined2 *)(param_1 + 0x18);
-    uVar5 = *(undefined4 *)(param_1 + 0x24);
-    *(undefined4 *)this = *(undefined4 *)param_1;
+  if (this != param_2) {
+    uVar2 = *(undefined4 *)(param_2 + 4);
+    uVar1 = *(undefined2 *)(param_2 + 0x18);
+    uVar5 = *(undefined4 *)(param_2 + 0x24);
+    *(undefined4 *)this = *(undefined4 *)param_2;
     *(undefined4 *)(this + 4) = uVar2;
     *(undefined2 *)(this + 0x18) = uVar1;
     *(undefined4 *)(this + 0x24) = uVar5;
     ClearDirectIndex(this);
     uVar6 = 0;
-    if (*(int *)(param_1 + 0x20) != 0) {
+    if (*(int *)(param_2 + 0x20) != 0) {
       do {
-        uVar3 = GetDirectIndex(param_1,uVar6);
+        uVar3 = GetDirectIndex(param_2,uVar6);
         AddDirectIndex(this,uVar3);
         uVar6 = uVar6 + 1;
-      } while (uVar6 < *(uint *)(param_1 + 0x20));
+      } while (uVar6 < *(uint *)(param_2 + 0x20));
     }
     uVar6 = 0;
-    if (*(int *)(param_1 + 0x14) != 0) {
+    if (*(int *)(param_2 + 0x14) != 0) {
       do {
-        uVar4 = ParseOperand__GetSwizzle(param_1,uVar6);
+        uVar4 = ParseOperand__GetSwizzle(param_2,uVar6);
         ((int (*)())ParseOperand__AddSwizzle)(this,uVar4);
         uVar6 = uVar6 + 1;
-      } while (uVar6 < *(uint *)(param_1 + 0x14));
+      } while (uVar6 < *(uint *)(param_2 + 0x14));
     }
-    uVar2 = *(undefined4 *)(param_1 + 0x28);
-    *(undefined4 *)(this + 0x2c) = *(undefined4 *)(param_1 + 0x2c);
+    uVar2 = *(undefined4 *)(param_2 + 0x28);
+    *(undefined4 *)(this + 0x2c) = *(undefined4 *)(param_2 + 0x2c);
     *(undefined4 *)(this + 0x28) = uVar2;
   }
   return this;
 }
 
-/* operator___97bbb4ec @ 0x97bbb4ec (328 bytes) */
-int operator___97bbb4ec(param_1, param_2)
+/* __ZeqRK12ParseOperandS1_ @ 0x97bbb4ec (328 bytes) */
+int __ZeqRK12ParseOperandS1_(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
@@ -1563,9 +1567,9 @@ int ParseOperand__Clear(this)
 }
 
 /* ParseOperand__AddDirectIndex @ 0x97bbb68c (196 bytes) */
-int ParseOperand__AddDirectIndex(this, param_1)
+int ParseOperand__AddDirectIndex(this, param_2)
   unsigned char * this;
-  uint param_1;
+  uint param_2;
 {
   int iVar1;
   uint uVar2;
@@ -1596,7 +1600,7 @@ int ParseOperand__AddDirectIndex(this, param_1)
     }
     *(void **)(this + 0x1c) = pvVar3;
   }
-  *(uint *)(uVar2 * 4 + *(int *)(this + 0x1c)) = param_1;
+  *(uint *)(uVar2 * 4 + *(int *)(this + 0x1c)) = param_2;
   *(int *)(this + 0x20) = *(int *)(this + 0x20) + 1;
   return;
 }
@@ -1632,24 +1636,24 @@ int ParseOperand__RemoveDirectIndex(this)
 }
 
 /* ParseOperand__GetDirectIndex @ 0x97bbb7a0 (16 bytes) */
-int ParseOperand__GetDirectIndex(this, param_1)
+int ParseOperand__GetDirectIndex(this, param_2)
   unsigned char * this;
-  uint param_1;
+  uint param_2;
 {
-  return *(undefined4 *)(param_1 * 4 + *(int *)(this + 0x1c));
+  return *(undefined4 *)(param_2 * 4 + *(int *)(this + 0x1c));
 }
 
 /* ParseOperand__GetAsDestVar @ 0x97bbb7b0 (716 bytes) */
-int ParseOperand__GetAsDestVar(param_1)
+int ParseOperand__GetAsDestVar(param_1, param_2, param_3)
   int param_1;
+  unsigned char * param_2;
+  int param_3;
 {
   undefined3 in_register_0000000c;
   uint *puVar1;
   short sVar4;
   uint uVar2;
   int iVar3;
-  unsigned char * in_r4;
-  int in_r5;
   short sVar5;
   uint uVar6;
   uint uVar7;
@@ -1659,28 +1663,28 @@ int ParseOperand__GetAsDestVar(param_1)
   puVar1[1] = 0;
   sVar5 = 0;
   uVar6 = 0;
-  sVar4 = GetScalerWidthForType(*(ushort *)(*(int *)in_r4 + 0x2c));
+  sVar4 = GetScalerWidthForType(*(ushort *)(*(int *)param_2 + 0x2c));
   *puVar1 = (sVar4 + -1) * 0x400 & 0xc00U | *puVar1 & 0xfffff04f | 0x6c;
-  uVar2 = ((int (*)())ParseOperand__IsMatrix)(in_r4);
+  uVar2 = ((int (*)())ParseOperand__IsMatrix)(param_2);
   *puVar1 = (uVar2 & 1) << 0xc | *puVar1 & 0xffffefff;
-  iVar3 = ((int (*)())ParseOperand__IsMatrix)(in_r4);
+  iVar3 = ((int (*)())ParseOperand__IsMatrix)(param_2);
   sVar4 = 0;
   if (iVar3 == 0) {
 LAB_97bbb868:
     sVar5 = sVar4;
-    uVar2 = *(uint *)(in_r4 + 0x20);
+    uVar2 = *(uint *)(param_2 + 0x20);
   }
   else {
     uVar2 = 0;
-    if (*(int *)(in_r4 + 0x20) != 0) {
-      sVar4 = GetDirectIndex(in_r4,0);
+    if (*(int *)(param_2 + 0x20) != 0) {
+      sVar4 = GetDirectIndex(param_2,0);
       uVar6 = 1;
       *puVar1 = *puVar1 & 0xffffefff;
       goto LAB_97bbb868;
     }
   }
   if (uVar6 == uVar2) {
-    if (*(int *)(in_r4 + 0x14) == 0) {
+    if (*(int *)(param_2 + 0x14) == 0) {
       uVar2 = *puVar1;
       uVar6 = uVar2 >> 10 & 3;
       if (uVar6 == 1) {
@@ -1702,9 +1706,9 @@ LAB_97bbb950:
     }
     else {
       uVar2 = 0;
-      if (*(int *)(in_r4 + 0x14) != 0) {
+      if (*(int *)(param_2 + 0x14) != 0) {
         do {
-          iVar3 = ParseOperand__GetSwizzle(in_r4,uVar2);
+          iVar3 = ParseOperand__GetSwizzle(param_2,uVar2);
           if (iVar3 == 1) {
             uVar6 = (uVar2 & 3) << 6 | *puVar1 & 0xffffff3f | 0x4000;
 LAB_97bbb900:
@@ -1728,7 +1732,7 @@ LAB_97bbb900:
           }
 LAB_97bbb904:
           uVar2 = uVar2 + 1;
-        } while (uVar2 < *(uint *)(in_r4 + 0x14));
+        } while (uVar2 < *(uint *)(param_2 + 0x14));
       }
     }
   }
@@ -1736,12 +1740,12 @@ LAB_97bbb904:
     uVar7 = uVar6;
     if (uVar6 < uVar2) {
       do {
-        iVar3 = GetDirectIndex(in_r4,uVar7);
+        iVar3 = GetDirectIndex(param_2,uVar7);
         if (iVar3 == 1) {
           uVar2 = (uVar7 - uVar6) * 0x40 & 0xc0 | *puVar1 & 0xffffff3f | 0x4000;
 LAB_97bbb9ec:
           *puVar1 = uVar2;
-          uVar2 = *(uint *)(in_r4 + 0x20);
+          uVar2 = *(uint *)(param_2 + 0x20);
         }
         else {
           if (iVar3 == 0) {
@@ -1762,27 +1766,29 @@ LAB_97bbb9ec:
     }
   }
 LAB_97bbba00:
-  if (*(char *)**(undefined4 **)in_r4 == '\0') {
+  if (*(char *)**(undefined4 **)param_2 == '\0') {
     uVar2 = *puVar1;
     iVar3 = 1;
   }
   else {
-    if (*(char *)**(undefined4 **)in_r4 != '\x04') goto LAB_97bbba4c;
+    if (*(char *)**(undefined4 **)param_2 != '\x04') goto LAB_97bbba4c;
     uVar2 = *puVar1;
     iVar3 = 3;
   }
   *puVar1 = iVar3 << 0x11 | uVar2 & 0xfff1ffff;
-  *(short *)((int)puVar1 + 6) = *(short *)(**(int **)in_r4 + 0x12) + sVar5;
+  *(short *)((int)puVar1 + 6) = *(short *)(**(int **)param_2 + 0x12) + sVar5;
 LAB_97bbba4c:
-  if (in_r5 != 0) {
+  if (param_3 != 0) {
     puVar1[1] = puVar1[1] & 0x800fffff | 0x80000000;
   }
   return puVar1;
 }
 
 /* ParseOperand__GetAsSourceVar @ 0x97bbba7c (676 bytes) */
-int ParseOperand__GetAsSourceVar(param_1)
+int ParseOperand__GetAsSourceVar(param_1, param_2, param_3)
   int param_1;
+  unsigned char * param_2;
+  int param_3;
 {
   byte bVar1;
   uint uVar2;
@@ -1790,8 +1796,6 @@ int ParseOperand__GetAsSourceVar(param_1)
   uint *puVar3;
   ushort uVar5;
   int iVar4;
-  unsigned char * in_r4;
-  int in_r5;
   uint uVar6;
   ushort uVar8;
   uint uVar9;
@@ -1803,32 +1807,32 @@ int ParseOperand__GetAsSourceVar(param_1)
   puVar3[1] = 0;
   uVar6 = 0;
   sVar7 = 0;
-  uVar5 = GetScalerWidthForType(*(ushort *)(*(int *)in_r4 + 0x2c));
+  uVar5 = GetScalerWidthForType(*(ushort *)(*(int *)param_2 + 0x2c));
   uVar9 = 0;
   *puVar3 = *puVar3 & 0xff85ffff | 0xd8000;
-  uVar2 = *(uint *)(in_r4 + 0x14);
+  uVar2 = *(uint *)(param_2 + 0x14);
   if (uVar2 != 0) {
     do {
       if (uVar9 == 1) {
-        uVar2 = ParseOperand__GetSwizzle(in_r4,1);
+        uVar2 = ParseOperand__GetSwizzle(param_2,1);
         uVar2 = (uVar2 & 3) << 0x13 | *puVar3 & 0xffe7ffff;
 LAB_97bbbb6c:
         *puVar3 = uVar2;
-        uVar2 = *(uint *)(in_r4 + 0x14);
+        uVar2 = *(uint *)(param_2 + 0x14);
       }
       else {
         if (uVar9 == 0) {
-          uVar2 = ParseOperand__GetSwizzle(in_r4,0);
+          uVar2 = ParseOperand__GetSwizzle(param_2,0);
           uVar2 = (uVar2 & 3) << 0x15 | *puVar3 & 0xff9fffff;
           goto LAB_97bbbb6c;
         }
         if (uVar9 == 2) {
-          uVar2 = ParseOperand__GetSwizzle(in_r4,2);
+          uVar2 = ParseOperand__GetSwizzle(param_2,2);
           uVar2 = (uVar2 & 3) << 0x11 | *puVar3 & 0xfff9ffff;
           goto LAB_97bbbb6c;
         }
         if (uVar9 == 3) {
-          uVar2 = ParseOperand__GetSwizzle(in_r4,3);
+          uVar2 = ParseOperand__GetSwizzle(param_2,3);
           uVar2 = (uVar2 & 3) << 0xf | *puVar3 & 0xfffe7fff;
           goto LAB_97bbbb6c;
         }
@@ -1836,13 +1840,13 @@ LAB_97bbbb6c:
       uVar9 = uVar9 + 1;
     } while (uVar9 < uVar2);
   }
-  iVar4 = ((int (*)())ParseOperand__IsMatrix)(in_r4);
+  iVar4 = ((int (*)())ParseOperand__IsMatrix)(param_2);
   uVar8 = 1;
   if (iVar4 != 0) {
     uVar8 = uVar5;
   }
   if (uVar5 == 1) {
-    iVar4 = *(int *)(in_r4 + 0x20);
+    iVar4 = *(int *)(param_2 + 0x20);
     if (iVar4 == 0) {
       uVar2 = *puVar3 >> 0x15 & 3;
       *puVar3 = uVar2 << 0x13 | uVar2 << 0x11 | uVar2 << 0xf | *puVar3 & 0xffe07fff;
@@ -1851,7 +1855,7 @@ LAB_97bbbb6c:
   }
   else {
 LAB_97bbbbc4:
-    iVar4 = *(int *)(in_r4 + 0x20);
+    iVar4 = *(int *)(param_2 + 0x20);
   }
   iVar10 = iVar4;
   if (iVar4 != 0) {
@@ -1864,7 +1868,7 @@ LAB_97bbbbc4:
       else {
         uVar8 = 1;
       }
-      uVar2 = GetDirectIndex(in_r4,iVar4 - iVar10);
+      uVar2 = GetDirectIndex(param_2,iVar4 - iVar10);
       if (uVar5 < 2) {
         *puVar3 = (uVar2 & 3) << 0x15 |
                   (uVar2 & 3) << 0x13 |
@@ -1873,12 +1877,12 @@ LAB_97bbbbc4:
       }
       sVar7 = (short)uVar2;
       if (iVar10 + -1 == 0) break;
-      iVar4 = *(int *)(in_r4 + 0x20);
+      iVar4 = *(int *)(param_2 + 0x20);
       uVar6 = uVar2;
       iVar10 = iVar10 + -1;
     }
   }
-  bVar1 = *(byte *)**(undefined4 **)in_r4;
+  bVar1 = *(byte *)**(undefined4 **)param_2;
   if (bVar1 == 2) {
     uVar6 = *puVar3 & 0xfc7fffff;
   }
@@ -1900,16 +1904,16 @@ LAB_97bbbbc4:
     uVar6 = iVar4 << 0x17 | uVar6 & 0xfc7fffff;
   }
   *puVar3 = uVar6;
-  *(short *)((int)puVar3 + 6) = *(short *)(**(int **)in_r4 + 0x12) + sVar7;
+  *(short *)((int)puVar3 + 6) = *(short *)(**(int **)param_2 + 0x12) + sVar7;
 LAB_97bbbcb0:
   *puVar3 = (uint)(uVar8 != 1) * 0x4000 | *puVar3 & 0xffffbfff;
-  iVar4 = ((int (*)())ParseOperand__GetLogicalSize)(in_r4);
+  iVar4 = ((int (*)())ParseOperand__GetLogicalSize)(param_2);
   uVar9 = *puVar3;
   uVar6 = (iVar4 + -1) * 0x1000 & 0x3000;
   *puVar3 = uVar6 | uVar9 & 0xffffcfff;
-  uVar2 = (*(uint *)(in_r4 + 0x28) & 1) << 0x1b;
+  uVar2 = (*(uint *)(param_2 + 0x28) & 1) << 0x1b;
   *puVar3 = uVar2 | uVar6 | uVar9 & 0xf7ffcfff;
-  if (in_r5 != 0) {
+  if (param_3 != 0) {
     *puVar3 = uVar2 | uVar6 | uVar9 & 0x87ffcfff | 0x80000000;
     *(undefined1 *)((int)puVar3 + 3) = 0;
   }
@@ -2008,9 +2012,9 @@ int ParseOperand__isWriteable(this)
 }
 
 /* ParseOperand__AddSwizzle @ 0x97bbbef8 (184 bytes) */
-int ParseOperand__AddSwizzle(this, param_1)
+int ParseOperand__AddSwizzle(this, param_2)
   unsigned char * this;
-  int param_1;
+  int param_2;
 {
   uint uVar1;
   void *pvVar2;
@@ -2039,7 +2043,7 @@ int ParseOperand__AddSwizzle(this, param_1)
     }
     *(void **)(this + 0x10) = pvVar2;
   }
-  *(uchar *)(*(int *)(this + 0x10) + uVar1) = param_1;
+  *(uchar *)(*(int *)(this + 0x10) + uVar1) = param_2;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
   return;
 }

@@ -155,9 +155,9 @@ int eh_pad_97c1665c()
 int eh_pad_97c16794(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r30;
+  void *unaff_r30;
   
-  std__string___string(unaff_r30);
+  __ZNSsD4Ev(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -166,9 +166,9 @@ int eh_pad_97c16794(param_1)
 int eh_pad_97c16818(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r30;
+  void *unaff_r30;
   
-  std__string___string(unaff_r30);
+  __ZNSsD4Ev(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -177,9 +177,9 @@ int eh_pad_97c16818(param_1)
 int eh_pad_97c16874(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r30;
+  void *unaff_r30;
   
-  std__string___string(unaff_r30);
+  __ZNSsD4Ev(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -196,7 +196,7 @@ int eh_pad_97c16a68(param_1)
 int eh_pad_97c16aa4(param_1)
   _Unwind_Exception *param_1;
 {
-  std__string___string((unsigned char *)&STACKARG(0x40));
+  __ZNSsD4Ev(&STACKARG(0x40));
                     
   __Unwind_Resume(param_1);
 }
@@ -213,7 +213,7 @@ int eh_pad_97c16b18(param_1)
 int eh_pad_97c16b54(param_1)
   _Unwind_Exception *param_1;
 {
-  std__string___string((unsigned char *)&STACKARG(0x40));
+  __ZNSsD4Ev(&STACKARG(0x40));
                     
   __Unwind_Resume(param_1);
 }
@@ -230,7 +230,7 @@ int eh_pad_97c16bc8(param_1)
 int eh_pad_97c16c04(param_1)
   _Unwind_Exception *param_1;
 {
-  std__string___string((unsigned char *)&STACKARG(0x40));
+  __ZNSsD4Ev(&STACKARG(0x40));
                     
   __Unwind_Resume(param_1);
 }
@@ -247,7 +247,7 @@ int eh_pad_97c16c78(param_1)
 int eh_pad_97c16cb4(param_1)
   _Unwind_Exception *param_1;
 {
-  std__string___string((unsigned char *)&STACKARG(0x40));
+  __ZNSsD4Ev(&STACKARG(0x40));
                     
   __Unwind_Resume(param_1);
 }
@@ -276,9 +276,9 @@ int eh_pad_97c17304()
 int eh_pad_97c17508(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   
-  std____default_alloc_template_true_0____Lock____Lock(unaff_r27);
+  __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -287,9 +287,9 @@ int eh_pad_97c17508(param_1)
 int eh_pad_97c17630(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   
-  std____default_alloc_template_true_0____Lock____Lock(unaff_r27);
+  __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev(unaff_r27);
                     
   __Unwind_Resume(param_1);
 }
@@ -318,9 +318,9 @@ int eh_pad_97c17b50()
 int eh_pad_97c17ba4(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r30;
+  void *unaff_r30;
   
-  std__exception___exception(unaff_r30);
+  __ZNSt9exceptionD2Ev(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -329,9 +329,9 @@ int eh_pad_97c17ba4(param_1)
 int eh_pad_97c17e0c(param_1)
   _Unwind_Exception *param_1;
 {
-  unsigned char * unaff_r30;
+  void *unaff_r30;
   
-  std__exception___exception(unaff_r30);
+  __ZNSt9exceptionD2Ev(unaff_r30);
                     
   __Unwind_Resume(param_1);
 }
@@ -367,9 +367,10 @@ int eh_pad_97c190a0()
 }
 
 /* eh_pad_97c19e04 @ 0x97c19e04 (8 bytes) */
-int eh_pad_97c19e04()
+int eh_pad_97c19e04(param_1)
+  undefined4 param_1;
 {
-  ___cxa_begin_catch();
+  ___cxa_begin_catch(param_1);
                     
   _abort();
 }

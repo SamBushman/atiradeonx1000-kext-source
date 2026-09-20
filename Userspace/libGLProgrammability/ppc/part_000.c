@@ -6,7 +6,7 @@ int _PPEmulatorCreate()
   void *pvVar1;
   
   pvVar1 = _malloc(0xe00);
-  ((int (*)())_PPEmulatorInit)();
+  ((int (*)())_PPEmulatorInit)(pvVar1);
   return pvVar1;
 }
 
@@ -30,7 +30,7 @@ int _PPEmulatorInit(param_1)
   pvVar1 = _malloc(0x1010);
   *(void **)((int)param_1 + 0xd84) = pvVar1;
   _memset(pvVar1,0,0x1010);
-  _PPCConstantsAndScratchInitialise(param_1);
+  ((double (*)())_PPCConstantsAndScratchInitialise)(param_1);
   uVar2 = _InterpreterCreate();
   *(undefined4 *)((int)param_1 + 0xdf0) = uVar2;
   _InterpreterAttachEmulatorContext(uVar2,param_1);
@@ -48,7 +48,7 @@ int _PPParserCreate(param_1)
   *(undefined4 *)((int)pvVar1 + 0x48c) = param_1;
   *(undefined4 *)((int)pvVar1 + 0x34) = 0xffffffff;
   *(undefined4 *)((int)pvVar1 + 0x38) = 0xffffffff;
-  uVar2 = ((int (*)())_PPParserScopeCreate)();
+  uVar2 = ((int (*)())_PPParserScopeCreate)(pvVar1);
   ((int (*)())_PPParserAddScope)(pvVar1,uVar2);
   return pvVar1;
 }
@@ -95,8 +95,10 @@ int _PPParserScopeCreate(param_1)
 /* _PPParserMacroCreate @ 0x97b7bf1c (12 bytes) */
 int _PPParserMacroCreate()
 {
-  _calloc(0x20,1);
-  return;
+  void *pvVar1;
+  
+  pvVar1 = _calloc(0x20,1);
+  return pvVar1;
 }
 
 /* _PPParserMacroSetSearchString @ 0x97b7bf28 (116 bytes) */
@@ -140,17 +142,18 @@ int _PPParserMacroSetParamString(param_1, param_2, param_3)
   int param_2;
   char *param_3;
 {
-  size_t sVar1;
-  void *pvVar2;
-  int iVar3;
+  int iVar1;
+  size_t sVar2;
+  void *pvVar3;
+  int iVar4;
   
-  sVar1 = _strlen(param_3);
-  iVar3 = *(int *)(param_1 + 0xc);
-  pvVar2 = _malloc(sVar1 + 1);
-  param_2 = param_2 * 4;
-  *(void **)(param_2 + iVar3) = pvVar2;
-  _memmove(*(void **)(param_2 + *(int *)(param_1 + 0xc)),param_3,sVar1);
-  *(undefined1 *)(*(int *)(param_2 + *(int *)(param_1 + 0xc)) + sVar1) = 0;
+  sVar2 = _strlen(param_3);
+  iVar4 = *(int *)(param_1 + 0xc);
+  pvVar3 = _malloc(sVar2 + 1);
+  iVar1 = param_2 * 4;
+  *(void **)(iVar1 + iVar4) = pvVar3;
+  _memmove(*(void **)(iVar1 + *(int *)(param_1 + 0xc)),param_3,sVar2);
+  *(undefined1 *)(*(int *)(iVar1 + *(int *)(param_1 + 0xc)) + sVar2) = 0;
   return;
 }
 
@@ -740,8 +743,10 @@ int _PPStreamCreate()
 /* _PPStreamChunkListCreate @ 0x97b7d000 (12 bytes) */
 int _PPStreamChunkListCreate()
 {
-  _calloc(0xc,1);
-  return;
+  void *pvVar1;
+  
+  pvVar1 = _calloc(0xc,1);
+  return pvVar1;
 }
 
 /* _PPParserAttachStream @ 0x97b7d00c (100 bytes) */
@@ -753,7 +758,7 @@ int _PPParserAttachStream(param_1, param_2)
   
   iVar1 = *(int *)(param_1 + 0x448);
   if (*(int *)(param_1 + 0x1c) != 0) {
-    _PPStreamFree();
+    _PPStreamFree(*(int *)(param_1 + 0x1c));
   }
   *(undefined4 *)(param_1 + 0x1c) = param_2;
   for (; iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x20)) {
@@ -791,7 +796,7 @@ int _PPParserParse(param_1)
   
   iVar3 = 0;
   if ((*(byte *)(param_1 + 0x441) & 2) == 0) {
-    iVar3 = ((int (*)())_PPParserParseVersion)();
+    iVar3 = ((int (*)())_PPParserParseVersion)(param_1);
   }
   while (iVar3 == 0) {
     iVar3 = ((int (*)())_PPParserParseOption)(param_1);
@@ -1117,7 +1122,7 @@ LAB_97b7d8b8:
 /* _PPStreamAddOption @ 0x97b7d8d4 (80 bytes) */
 int _PPStreamAddOption(param_1, param_2)
   int param_1;
-  int param_2;
+  undefined4 param_2;
 {
   undefined1 *puVar1;
   undefined4 uVar2;
@@ -1125,7 +1130,7 @@ int _PPStreamAddOption(param_1, param_2)
   puVar1 = _calloc(0x14,1);
   uVar2 = *(undefined4 *)(param_1 + 0x30);
   *puVar1 = 7;
-  puVar1[0xf] = param_2;
+  puVar1[0xf] = (undefined1)param_2;
   ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
   return;
 }
@@ -1240,6 +1245,7 @@ int _PPParserParseStatement(param_1)
   undefined4 uVar7;
   undefined4 uVar8;
   undefined4 uVar9;
+  undefined4 in_r9;
   uint uVar10;
   int iVar11;
   int *piVar12;
@@ -1499,7 +1505,7 @@ LAB_97b7e328:
                             }
                             uVar9 = 0;
 LAB_97b7e334:
-                            iVar2 = ((int (*)())_PPParserParseOperation)(param_1,iVar2,uVar6,uVar7,uVar8,uVar9);
+                            iVar2 = ((int (*)())_PPParserParseOperation)(param_1,iVar2,uVar6,uVar7,uVar8,uVar9,in_r9);
                             return iVar2;
                           }
 LAB_97b7e11c:
@@ -1536,7 +1542,7 @@ LAB_97b7e1b4:
                             }
                             iVar2 = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(param_1 + 0x44c),acStack_140);
                             if (iVar2 != 0) {
-                              iVar2 = _PPParserExpandMacro(param_1);
+                              iVar2 = _PPParserExpandMacro(param_1,iVar2);
                               return iVar2;
                             }
                             iVar2 = _memcmp(acStack_140,"OPTION",7);
@@ -1591,7 +1597,7 @@ int _PPParserParseParameterDeclaration(param_1)
     iVar1 = ((int (*)())_PPParserValidateName)(param_1,local_130);
     iVar2 = 0x12;
     if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)(0x12);
+      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
       ((int (*)())_PPParserIdentifierSetName)(iVar1,local_130);
       *(undefined4 *)(iVar1 + 0xc) = 2;
       iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(param_1 + 0x44c),iVar1);
@@ -1864,7 +1870,7 @@ int _PPParserIdentifierCreate()
   
   pvVar1 = _calloc(0x24,1);
   *(undefined4 *)((int)pvVar1 + 4) = 1;
-  return;
+  return pvVar1;
 }
 
 /* _PPParserIdentifierSetName @ 0x97b7ea50 (124 bytes) */
@@ -2976,7 +2982,7 @@ int _PPParserParseAttributeDeclaration(param_1)
     iVar1 = ((int (*)())_PPParserValidateName)(param_1,local_110);
     iVar2 = 0x12;
     if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)(0x12);
+      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
       ((int (*)())_PPParserIdentifierSetName)(iVar1,local_110);
       *(undefined4 *)(iVar1 + 0xc) = 0;
       iVar2 = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(param_1 + 0x44c),iVar1);
@@ -3264,6 +3270,7 @@ int _testAttribMatch(param_1, param_2)
   
   uVar2 = *param_1;
   if ((uVar2 >> 0x10 & 0xf) == 9) {
+    param_1 = param_2;
     if ((*param_2 >> 0x10 & 0xf) == 9) {
       return 0;
     }
@@ -3273,33 +3280,32 @@ int _testAttribMatch(param_1, param_2)
       return 0;
     }
     uVar2 = *param_2;
-    param_2 = param_1;
   }
   switch(uVar2 & 0x1f) {
   case 0:
-    bVar1 = (*param_2 >> 0x10 & 0xf) == 1;
+    bVar1 = (*param_1 >> 0x10 & 0xf) == 1;
     break;
   case 1:
-    bVar1 = (*param_2 & 0xf001f) == 0x60000;
+    bVar1 = (*param_1 & 0xf001f) == 0x60000;
     break;
   case 2:
-    bVar1 = (*param_2 >> 0x10 & 0xf) == 4;
+    bVar1 = (*param_1 >> 0x10 & 0xf) == 4;
     break;
   case 3:
-    bVar1 = (*param_2 >> 0x10 & 0xf) == 2;
+    bVar1 = (*param_1 >> 0x10 & 0xf) == 2;
     break;
   case 4:
-    bVar1 = (*param_2 >> 0x10 & 0xf) == 3;
+    bVar1 = (*param_1 >> 0x10 & 0xf) == 3;
     break;
   case 5:
-    bVar1 = (*param_2 >> 0x10 & 0xf) == 5;
+    bVar1 = (*param_1 >> 0x10 & 0xf) == 5;
     break;
   case 6:
   case 7:
     goto switchD_97b80cc0_caseD_6;
   default:
-    if ((*param_2 >> 0x10 & 0xf) == 7) {
-      bVar1 = (*param_2 & 0x1f) == (uVar2 & 0x1f) - 8;
+    if ((*param_1 >> 0x10 & 0xf) == 7) {
+      bVar1 = (*param_1 & 0x1f) == (uVar2 & 0x1f) - 8;
       break;
     }
     goto switchD_97b80cc0_caseD_6;
@@ -3328,7 +3334,7 @@ int _PPParserParseOutputDeclaration(param_1, param_2)
     iVar1 = ((int (*)())_PPParserValidateName)(param_1,local_110);
     iVar2 = 0x12;
     if (iVar1 == 0) {
-      iVar1 = ((int (*)())_PPParserIdentifierCreate)(0x12);
+      iVar1 = ((int (*)())_PPParserIdentifierCreate)();
       ((int (*)())_PPParserIdentifierSetName)(iVar1,local_110);
       *(undefined4 *)(iVar1 + 0xc) = 3;
       *(undefined4 *)(iVar1 + 0x14) = param_2;
@@ -3556,13 +3562,14 @@ int _PPStreamAddOutputBinding(param_1, param_2)
 }
 
 /* _PPParserParseOperation @ 0x97b813c8 (1068 bytes) */
-int _PPParserParseOperation(param_1, param_2, param_3, param_4, param_5, param_6)
+int _PPParserParseOperation(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   uint param_2;
   uint param_3;
   uint param_4;
   uint param_5;
   uint param_6;
+  undefined4 param_7;
 {
   bool bVar1;
   bool bVar2;
@@ -4303,22 +4310,22 @@ int _PPStreamChunkListCreateFromChunkList(param_1)
 
 /* _PPStreamChunkCreateFromChunk @ 0x97b8253c (128 bytes) */
 int _PPStreamChunkCreateFromChunk(param_1)
-  char *param_1;
+  byte *param_1;
 {
-  char cVar1;
+  uint uVar1;
   int iVar2;
   void *pvVar3;
   undefined4 uVar4;
   
   uVar4 = 0;
-  cVar1 = *param_1;
-  if (cVar1 == '\b') {
+  uVar1 = (uint)*param_1;
+  if (uVar1 == 8) {
     uVar4 = *(undefined4 *)(param_1 + 0x40);
   }
-  else if (cVar1 == '\v') {
+  else if (uVar1 == 0xb) {
     uVar4 = *(undefined4 *)(param_1 + 0x10);
   }
-  iVar2 = _GetChunkAllocationSize(cVar1,uVar4);
+  iVar2 = _GetChunkAllocationSize(uVar1,uVar4);
   pvVar3 = _calloc(iVar2 + 0xcU,1);
   _memmove(pvVar3,param_1,iVar2 + 0xcU);
   *(undefined4 *)((int)pvVar3 + 4) = 0;

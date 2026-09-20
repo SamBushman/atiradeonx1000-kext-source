@@ -70,7 +70,9 @@ extern int _createTextureBuffer();
 extern int _createOffscreenBuffer();
 extern int __Stop();
 extern int _radeonCopy();
-extern int FUN_000055a4();
+extern int FUN_000055a4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5,
+                dword param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
+                double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern int _radeonFill();
 extern int _radeonHighlight();
 extern int _radeonSolidScanlines();

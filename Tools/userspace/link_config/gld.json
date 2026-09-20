@@ -28,10 +28,7 @@
  },
  "label_overrides": {
   "builtin_strncpy": "_strncpy",
-  "operator_delete": "__ZdlPv"
- },
- "dummy_functions": [
-  "func_0x001a323c",
-  "FUN_00115fa0"
- ]
+  "operator_delete": "__ZdlPv",
+  "FUN_00002748": "_atexit"
+ }
 }

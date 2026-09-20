@@ -1,37 +1,52 @@
 #include "decls.h"
 
 /* orph_1d0de8 @ 0x1d0de8 (4 bytes) */
-int orph_1d0de8()
+int orph_1d0de8(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_001135ec();
+  FUN_001135ec(param_1,param_2,param_3);
   return;
 }
 
 /* orph_1d0dec @ 0x1d0dec (4 bytes) */
-int orph_1d0dec()
+int orph_1d0dec(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_001135ec();
+  FUN_001135ec(param_1,param_2,param_3);
   return;
 }
 
 /* orph_1d0df0 @ 0x1d0df0 (4 bytes) */
-int orph_1d0df0()
+int orph_1d0df0(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_001135ec();
+  FUN_001135ec(param_1,param_2,param_3);
   return;
 }
 
 /* orph_1d0df4 @ 0x1d0df4 (4 bytes) */
-int orph_1d0df4()
+int orph_1d0df4(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_0011363c();
+  FUN_0011363c(param_1,param_2,param_3);
   return;
 }
 
 /* orph_1d0df8 @ 0x1d0df8 (4 bytes) */
-int orph_1d0df8()
+int orph_1d0df8(param_1, param_2, param_3)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
-  FUN_00113690();
+  FUN_00113690(param_1,param_2,param_3);
   return;
 }
 

@@ -741,7 +741,7 @@ int FUN_001d85a0(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e9134 + 8;
-  FUN_000ea270();
+  FUN_000ea270(param_1);
   if (param_1 != (undefined4 *)0x0) {
     FUN_00193cc0(param_1[-1],param_1 + -1);
     return;
@@ -754,7 +754,7 @@ int FUN_001d8608(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e9134 + 8;
-  FUN_000ea270();
+  FUN_000ea270(param_1);
   return;
 }
 

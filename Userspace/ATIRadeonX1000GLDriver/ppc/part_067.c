@@ -23,7 +23,7 @@ int FUN_001d8944(param_1)
   undefined *puVar1;
   
   puVar1 = PTR_DAT_001e90fc + 8;
-  *param_1 = &PTR_LAB_001eb328;
+  *param_1 = &PTR_DAT_001eb328;
   *param_1 = puVar1;
   if (param_1 == (undefined4 *)0x0) {
     return;
@@ -161,7 +161,7 @@ int FUN_001d8f58(param_1)
   undefined4 *param_1;
 {
   *param_1 = &PTR_FUN_001eb9a8;
-  FUN_00196dbc();
+  FUN_00196dbc(param_1);
   if (param_1 != (undefined4 *)0x0) {
     FUN_00193cc0(param_1[-1],param_1 + -1);
     return;
@@ -174,7 +174,7 @@ int FUN_001d8fc0(param_1)
   undefined4 *param_1;
 {
   *param_1 = &PTR_FUN_001eb9a8;
-  FUN_00196dbc();
+  FUN_00196dbc(param_1);
   return;
 }
 

@@ -396,7 +396,7 @@ int eh_pad_ee214(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_ee244 @ 0xee244 (28 bytes) */
+/* eh_pad_ee244 @ 0xee244 (56 bytes) */
 int eh_pad_ee244(param_1)
   _Unwind_Exception *param_1;
 {
@@ -471,7 +471,7 @@ int eh_pad_ee718(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_ee748 @ 0xee748 (28 bytes) */
+/* eh_pad_ee748 @ 0xee748 (56 bytes) */
 int eh_pad_ee748(param_1)
   _Unwind_Exception *param_1;
 {
@@ -618,7 +618,7 @@ int eh_pad_efe3c(param_1)
   __Unwind_Resume(param_1);
 }
 
-/* eh_pad_efea0 @ 0xefea0 (28 bytes) */
+/* eh_pad_efea0 @ 0xefea0 (388 bytes) */
 int eh_pad_efea0(param_1)
   _Unwind_Exception *param_1;
 {

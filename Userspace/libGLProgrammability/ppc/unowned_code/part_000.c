@@ -53,14 +53,15 @@ int orph_97b99088()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f99c));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -69,10 +70,9 @@ int orph_97b99088()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d0),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe32a4);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -83,11 +83,11 @@ int orph_97b99088()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9e0));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8de24));
   return 0;
 }
 
@@ -98,14 +98,15 @@ int orph_97b99094()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9a4));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -114,10 +115,9 @@ int orph_97b99094()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d0),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe32a4);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -128,11 +128,11 @@ int orph_97b99094()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9e0));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8de24));
   return 0;
 }
 
@@ -143,14 +143,15 @@ int orph_97b990a0()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9b8));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -159,10 +160,9 @@ int orph_97b990a0()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d0),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe32a4);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -173,11 +173,11 @@ int orph_97b990a0()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9e0));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8de24));
   return 0;
 }
 
@@ -188,14 +188,15 @@ int orph_97b990ac()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9c8));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -204,10 +205,9 @@ int orph_97b990ac()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8f9d0),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe32a4);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe32a4);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -218,11 +218,11 @@ int orph_97b990ac()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8f9e0));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x8de24));
   return 0;
 }
 
@@ -233,16 +233,16 @@ int orph_97b99280()
   int iVar2;
   int *piVar3;
   int iVar4;
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   int unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000110;
+  char *in_stack_00000110;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f608));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -251,10 +251,9 @@ int orph_97b99280()
   else {
     _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f63c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
-  *(undefined1 *)(in_stack_00000110 + *(int *)(in_stack_00000110 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2f10);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
+  in_stack_00000110[*(int *)(in_stack_00000110 + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000110);
   piVar3 = (int *)(in_stack_00000110 + -4);
   do {
     iVar4 = *piVar3;
@@ -265,11 +264,11 @@ int orph_97b99280()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000110 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000110 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f64c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8da90));
   *(undefined4 *)(unaff_r28 + 0x74) = 1;
   return 0;
 }
@@ -281,16 +280,16 @@ int orph_97b9928c()
   int iVar2;
   int *piVar3;
   int iVar4;
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   int unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000110;
+  char *in_stack_00000110;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f610));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -299,10 +298,9 @@ int orph_97b9928c()
   else {
     _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f63c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
-  *(undefined1 *)(in_stack_00000110 + *(int *)(in_stack_00000110 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2f10);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
+  in_stack_00000110[*(int *)(in_stack_00000110 + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000110);
   piVar3 = (int *)(in_stack_00000110 + -4);
   do {
     iVar4 = *piVar3;
@@ -313,11 +311,11 @@ int orph_97b9928c()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000110 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000110 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f64c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8da90));
   *(undefined4 *)(unaff_r28 + 0x74) = 1;
   return 0;
 }
@@ -329,16 +327,16 @@ int orph_97b99298()
   int iVar2;
   int *piVar3;
   int iVar4;
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   int unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000110;
+  char *in_stack_00000110;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f624));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -347,10 +345,9 @@ int orph_97b99298()
   else {
     _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f63c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
-  *(undefined1 *)(in_stack_00000110 + *(int *)(in_stack_00000110 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2f10);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
+  in_stack_00000110[*(int *)(in_stack_00000110 + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000110);
   piVar3 = (int *)(in_stack_00000110 + -4);
   do {
     iVar4 = *piVar3;
@@ -361,11 +358,11 @@ int orph_97b99298()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000110 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000110 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f64c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8da90));
   *(undefined4 *)(unaff_r28 + 0x74) = 1;
   return 0;
 }
@@ -377,16 +374,16 @@ int orph_97b992a4()
   int iVar2;
   int *piVar3;
   int iVar4;
-  unsigned char * unaff_r27;
+  void *unaff_r27;
   int unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000110;
+  char *in_stack_00000110;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f634));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -395,10 +392,9 @@ int orph_97b992a4()
   else {
     _sprintf(&STACKARG(0x130),(char *)(unaff_r31 + 0x8f63c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
-  *(undefined1 *)(in_stack_00000110 + *(int *)(in_stack_00000110 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2f10);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(unaff_r27,&STACKARG(0x130),(unsigned char *)&STACKARG(0x170));
+  in_stack_00000110[*(int *)(in_stack_00000110 + -0xc)] = **(char **)(unaff_r31 + 0xffe2f10);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000110);
   piVar3 = (int *)(in_stack_00000110 + -4);
   do {
     iVar4 = *piVar3;
@@ -409,11 +405,11 @@ int orph_97b992a4()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000110 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000110 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8f64c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8da90));
   *(undefined4 *)(unaff_r28 + 0x74) = 1;
   return 0;
 }
@@ -426,14 +422,15 @@ int orph_97b998a8()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef74));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -442,10 +439,9 @@ int orph_97b998a8()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efa8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe287c);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -456,11 +452,11 @@ int orph_97b998a8()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efb8));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8d3fc));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -473,14 +469,15 @@ int orph_97b998b4()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef7c));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -489,10 +486,9 @@ int orph_97b998b4()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efa8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe287c);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -503,11 +499,11 @@ int orph_97b998b4()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efb8));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8d3fc));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -520,14 +516,15 @@ int orph_97b998c0()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8ef90));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -536,10 +533,9 @@ int orph_97b998c0()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efa8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe287c);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -550,11 +546,11 @@ int orph_97b998c0()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efb8));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8d3fc));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -567,14 +563,15 @@ int orph_97b998cc()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efa0));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -583,10 +580,9 @@ int orph_97b998cc()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8efa8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe287c);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe287c);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -597,11 +593,11 @@ int orph_97b998cc()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8efb8));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8d3fc));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -614,14 +610,15 @@ int orph_97b99ec4()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e958));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -630,10 +627,9 @@ int orph_97b99ec4()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e98c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2260);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -644,11 +640,11 @@ int orph_97b99ec4()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e99c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cde0));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -661,14 +657,15 @@ int orph_97b99ed0()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e960));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -677,10 +674,9 @@ int orph_97b99ed0()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e98c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2260);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -691,11 +687,11 @@ int orph_97b99ed0()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e99c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cde0));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -708,14 +704,15 @@ int orph_97b99edc()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e974));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -724,10 +721,9 @@ int orph_97b99edc()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e98c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2260);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -738,11 +734,11 @@ int orph_97b99edc()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e99c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cde0));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -755,14 +751,15 @@ int orph_97b99ee8()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e984));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -771,10 +768,9 @@ int orph_97b99ee8()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e98c),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe2260);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe2260);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -785,11 +781,11 @@ int orph_97b99ee8()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e99c));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cde0));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -802,14 +798,15 @@ int orph_97b9a058()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7c4));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -818,10 +815,9 @@ int orph_97b9a058()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e7f8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe20cc);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -832,11 +828,11 @@ int orph_97b9a058()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e808));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cc4c));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -849,14 +845,15 @@ int orph_97b9a064()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7cc));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -865,10 +862,9 @@ int orph_97b9a064()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e7f8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe20cc);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -879,11 +875,11 @@ int orph_97b9a064()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e808));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cc4c));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -896,14 +892,15 @@ int orph_97b9a070()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7e0));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -912,10 +909,9 @@ int orph_97b9a070()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e7f8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe20cc);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -926,11 +922,11 @@ int orph_97b9a070()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e808));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cc4c));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
@@ -943,14 +939,15 @@ int orph_97b9a07c()
   int *piVar3;
   int iVar4;
   int unaff_r27;
+  char *unaff_r28;
   uint unaff_r29;
-  char *unaff_r30;
+  void *unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e7f0));
   bVar1 = (unaff_r29 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -959,10 +956,9 @@ int orph_97b9a07c()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x8e7f8),(int)unaff_r29 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe20cc);
-  TInfoSinkBase__append(unaff_r30);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffe20cc);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -973,33 +969,35 @@ int orph_97b9a07c()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
-  TInfoSinkBase__append(unaff_r30);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8e808));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r30,(char *)(unaff_r31 + 0x8cc4c));
   *(undefined4 *)(unaff_r27 + 0x74) = 1;
   return 0;
 }
 
 /* orph_97b9a850 @ 0x97b9a850 (324 bytes) */
 int orph_97b9a850(param_1)
-  char *param_1;
+  void *param_1;
 {
   bool bVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
+  char *unaff_r26;
+  char *unaff_r27;
   uint unaff_r28;
-  char *pcVar5;
+  void *pvVar5;
   int unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar6;
-  int in_stack_000001d0;
+  char *in_stack_000001d0;
   
-  TInfoSinkBase__append(param_1);
-  pcVar5 = *(char **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dfdc));
+  pvVar5 = *(void **)(unaff_r30 + 8);
   bVar1 = (unaff_r28 & 0xffff) == 0;
   bVar6 = bVar1 << 1;
   if (bVar1) {
@@ -1008,10 +1006,9 @@ int orph_97b9a850(param_1)
   else {
     _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e010),(int)unaff_r28 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
-  *(undefined1 *)(in_stack_000001d0 + *(int *)(in_stack_000001d0 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe18e4);
-  TInfoSinkBase__append(pcVar5);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
+  in_stack_000001d0[*(int *)(in_stack_000001d0 + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,in_stack_000001d0);
   piVar3 = (int *)(in_stack_000001d0 + -4);
   do {
     iVar4 = *piVar3;
@@ -1022,39 +1019,41 @@ int orph_97b9a850(param_1)
     }
   } while (!(bool)(bVar6 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_000001d0 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_000001d0 + -0xc));
   }
-  TInfoSinkBase__append(pcVar5);
-  pcVar5 = *(char **)(unaff_r30 + 8);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e020));
+  pvVar5 = *(void **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r27);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r26);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8c464));
   *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
   return;
 }
 
 /* orph_97b9a85c @ 0x97b9a85c (324 bytes) */
 int orph_97b9a85c(param_1)
-  char *param_1;
+  void *param_1;
 {
   bool bVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
+  char *unaff_r26;
+  char *unaff_r27;
   uint unaff_r28;
-  char *pcVar5;
+  void *pvVar5;
   int unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar6;
-  int in_stack_000001d0;
+  char *in_stack_000001d0;
   
-  TInfoSinkBase__append(param_1);
-  pcVar5 = *(char **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dfe4));
+  pvVar5 = *(void **)(unaff_r30 + 8);
   bVar1 = (unaff_r28 & 0xffff) == 0;
   bVar6 = bVar1 << 1;
   if (bVar1) {
@@ -1063,10 +1062,9 @@ int orph_97b9a85c(param_1)
   else {
     _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e010),(int)unaff_r28 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
-  *(undefined1 *)(in_stack_000001d0 + *(int *)(in_stack_000001d0 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe18e4);
-  TInfoSinkBase__append(pcVar5);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
+  in_stack_000001d0[*(int *)(in_stack_000001d0 + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,in_stack_000001d0);
   piVar3 = (int *)(in_stack_000001d0 + -4);
   do {
     iVar4 = *piVar3;
@@ -1077,39 +1075,41 @@ int orph_97b9a85c(param_1)
     }
   } while (!(bool)(bVar6 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_000001d0 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_000001d0 + -0xc));
   }
-  TInfoSinkBase__append(pcVar5);
-  pcVar5 = *(char **)(unaff_r30 + 8);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e020));
+  pvVar5 = *(void **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r27);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r26);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8c464));
   *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
   return;
 }
 
 /* orph_97b9a868 @ 0x97b9a868 (324 bytes) */
 int orph_97b9a868(param_1)
-  char *param_1;
+  void *param_1;
 {
   bool bVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
+  char *unaff_r26;
+  char *unaff_r27;
   uint unaff_r28;
-  char *pcVar5;
+  void *pvVar5;
   int unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar6;
-  int in_stack_000001d0;
+  char *in_stack_000001d0;
   
-  TInfoSinkBase__append(param_1);
-  pcVar5 = *(char **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dff8));
+  pvVar5 = *(void **)(unaff_r30 + 8);
   bVar1 = (unaff_r28 & 0xffff) == 0;
   bVar6 = bVar1 << 1;
   if (bVar1) {
@@ -1118,10 +1118,9 @@ int orph_97b9a868(param_1)
   else {
     _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e010),(int)unaff_r28 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
-  *(undefined1 *)(in_stack_000001d0 + *(int *)(in_stack_000001d0 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe18e4);
-  TInfoSinkBase__append(pcVar5);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
+  in_stack_000001d0[*(int *)(in_stack_000001d0 + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,in_stack_000001d0);
   piVar3 = (int *)(in_stack_000001d0 + -4);
   do {
     iVar4 = *piVar3;
@@ -1132,39 +1131,41 @@ int orph_97b9a868(param_1)
     }
   } while (!(bool)(bVar6 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_000001d0 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_000001d0 + -0xc));
   }
-  TInfoSinkBase__append(pcVar5);
-  pcVar5 = *(char **)(unaff_r30 + 8);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e020));
+  pvVar5 = *(void **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r27);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r26);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8c464));
   *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
   return;
 }
 
 /* orph_97b9a874 @ 0x97b9a874 (320 bytes) */
 int orph_97b9a874(param_1)
-  char *param_1;
+  void *param_1;
 {
   bool bVar1;
   int iVar2;
   int *piVar3;
   int iVar4;
+  char *unaff_r26;
+  char *unaff_r27;
   uint unaff_r28;
-  char *pcVar5;
+  void *pvVar5;
   int unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar6;
-  int in_stack_000001d0;
+  char *in_stack_000001d0;
   
-  TInfoSinkBase__append(param_1);
-  pcVar5 = *(char **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8e008));
+  pvVar5 = *(void **)(unaff_r30 + 8);
   bVar1 = (unaff_r28 & 0xffff) == 0;
   bVar6 = bVar1 << 1;
   if (bVar1) {
@@ -1173,10 +1174,9 @@ int orph_97b9a874(param_1)
   else {
     _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e010),(int)unaff_r28 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
-  *(undefined1 *)(in_stack_000001d0 + *(int *)(in_stack_000001d0 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffe18e4);
-  TInfoSinkBase__append(pcVar5);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
+  in_stack_000001d0[*(int *)(in_stack_000001d0 + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,in_stack_000001d0);
   piVar3 = (int *)(in_stack_000001d0 + -4);
   do {
     iVar4 = *piVar3;
@@ -1187,17 +1187,17 @@ int orph_97b9a874(param_1)
     }
   } while (!(bool)(bVar6 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_000001d0 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_000001d0 + -0xc));
   }
-  TInfoSinkBase__append(pcVar5);
-  pcVar5 = *(char **)(unaff_r30 + 8);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
-  TInfoSinkBase__append(pcVar5);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e020));
+  pvVar5 = *(void **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r27);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r26);
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8c464));
   *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
   return;
 }
@@ -1209,14 +1209,15 @@ int orph_97bae35c()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4c0));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -1225,10 +1226,9 @@ int orph_97bae35c()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x7a4f4),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffcddc8);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -1239,11 +1239,11 @@ int orph_97bae35c()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a504));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x78948));
   return;
 }
 
@@ -1254,14 +1254,15 @@ int orph_97bae368()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4c8));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -1270,10 +1271,9 @@ int orph_97bae368()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x7a4f4),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffcddc8);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -1284,11 +1284,11 @@ int orph_97bae368()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a504));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x78948));
   return;
 }
 
@@ -1299,14 +1299,15 @@ int orph_97bae374()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4dc));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -1315,10 +1316,9 @@ int orph_97bae374()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x7a4f4),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffcddc8);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -1329,11 +1329,11 @@ int orph_97bae374()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a504));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x78948));
   return;
 }
 
@@ -1344,14 +1344,15 @@ int orph_97bae380()
   int iVar2;
   int *piVar3;
   int iVar4;
-  char *unaff_r29;
+  char *unaff_r28;
+  void *unaff_r29;
   uint unaff_r30;
   int unaff_r31;
   char in_RESERVE;
   byte bVar5;
-  int in_stack_00000040;
+  char *in_stack_00000040;
   
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a4ec));
   bVar1 = (unaff_r30 & 0xffff) == 0;
   bVar5 = bVar1 << 1;
   if (bVar1) {
@@ -1360,10 +1361,9 @@ int orph_97bae380()
   else {
     _sprintf(&STACKARG(0x50),(char *)(unaff_r31 + 0x7a4f4),(int)unaff_r30 >> 0x10);
   }
-  std__string__string((unsigned char *)&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
-  *(undefined1 *)(in_stack_00000040 + *(int *)(in_stack_00000040 + -0xc)) =
-       **(undefined1 **)(unaff_r31 + 0xffcddc8);
-  TInfoSinkBase__append(unaff_r29);
+  __ZNSsC1EPKcRKSaIcE(&STACKARG(0x40),&STACKARG(0x50),(unsigned char *)&STACKARG(0x90));
+  in_stack_00000040[*(int *)(in_stack_00000040 + -0xc)] = **(char **)(unaff_r31 + 0xffcddc8);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,in_stack_00000040);
   piVar3 = (int *)(in_stack_00000040 + -4);
   do {
     iVar4 = *piVar3;
@@ -1374,20 +1374,23 @@ int orph_97bae380()
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar4 < 1) {
-    std__string___Rep___M_destroy((unsigned char *)(in_stack_00000040 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(in_stack_00000040 + -0xc));
   }
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
-  TInfoSinkBase__append(unaff_r29);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x7a504));
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,unaff_r28);
+  __ZN13TInfoSinkBase6appendEPKc(unaff_r29,(char *)(unaff_r31 + 0x78948));
   return;
 }
 
 /* orph_97bd3c20 @ 0x97bd3c20 (8 bytes) */
-int orph_97bd3c20(param_1, param_2)
+int orph_97bd3c20(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
-  _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1,param_2,0);
+  _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1,param_2,0,param_4,param_5);
   return;
 }
 
@@ -1422,7 +1425,7 @@ int orph_97c10924(param_1, param_2)
   
   if (param_2 < 1) {
     if (param_1 != 0) {
-      _glpDCBFree();
+      _glpDCBFree(param_1);
     }
     uVar3 = 0;
   }
@@ -1523,20 +1526,20 @@ int orph_97c1992c(param_1, param_2, param_3, param_4, param_5, param_6)
   puVar4 = (uchar *)parse_lsda_header(param_6,puVar3,(unsigned char *)&iStack_80);
   puVar11 = (uchar *)0x0;
   new_value_00 = 0;
-  uStack_78 = base_of_encoded_value(uStack_6c,param_6);
+  uStack_78 = __Z21base_of_encoded_valuehP15_Unwind_Context(uStack_6c,param_6);
   uVar5 = __Unwind_GetIP(param_6);
   if (puVar4 < puStack_70) {
     do {
       uVar2 = uStack_6b;
-      uVar6 = base_of_encoded_value(uStack_6b,(unsigned char *)0x0);
-      puVar4 = (uchar *)read_encoded_value_with_base(uVar2,uVar6,puVar4,&uStack_60);
+      uVar6 = __Z21base_of_encoded_valuehP15_Unwind_Context(uStack_6b,(unsigned char *)0x0);
+      puVar4 = (uchar *)__Z28read_encoded_value_with_basehjPKhPj(uVar2,uVar6,puVar4,&uStack_60);
       uVar2 = uStack_6b;
-      uVar6 = base_of_encoded_value(uStack_6b,(unsigned char *)0x0);
-      puVar4 = (uchar *)read_encoded_value_with_base(uVar2,uVar6,puVar4,&uStack_5c);
+      uVar6 = __Z21base_of_encoded_valuehP15_Unwind_Context(uStack_6b,(unsigned char *)0x0);
+      puVar4 = (uchar *)__Z28read_encoded_value_with_basehjPKhPj(uVar2,uVar6,puVar4,&uStack_5c);
       uVar2 = uStack_6b;
-      uVar6 = base_of_encoded_value(uStack_6b,(unsigned char *)0x0);
-      puVar4 = (uchar *)read_encoded_value_with_base(uVar2,uVar6,puVar4,&uStack_58);
-      puVar7 = (uchar *)read_uleb128(puVar4,&uStack_54);
+      uVar6 = __Z21base_of_encoded_valuehP15_Unwind_Context(uStack_6b,(unsigned char *)0x0);
+      puVar4 = (uchar *)__Z28read_encoded_value_with_basehjPKhPj(uVar2,uVar6,puVar4,&uStack_58);
+      puVar7 = (uchar *)__Z12read_uleb128PKhPj(puVar4,&uStack_54);
       puVar4 = puStack_70;
       if ((iStack_80 + uStack_60 <= uVar5 - 1) &&
          (puVar4 = puVar7, uVar5 - 1 < iStack_80 + uStack_60 + uStack_5c)) {
@@ -1589,7 +1592,7 @@ LAB_97c19c74:
   }
   if ((int)new_value_00 < 0) {
     parse_lsda_header(param_6,*(uchar **)(param_5 - 0x10),(unsigned char *)&iStack_80);
-    uVar10 = base_of_encoded_value(uStack_6c,param_6);
+    uVar10 = __Z21base_of_encoded_valuehP15_Unwind_Context(uStack_6c,param_6);
     *(undefined4 *)(param_5 - 0xc) = uVar10;
   }
   __Unwind_SetGR(param_6,3,param_5);
@@ -1597,14 +1600,15 @@ LAB_97c19c74:
   __Unwind_SetIP(param_6,new_value);
   return 7;
 LAB_97c19b58:
-  puVar4 = (uchar *)read_sleb128(puVar11,(int *)&uStack_50);
-  read_sleb128(puVar4,&iStack_4c);
+  puVar4 = (uchar *)__Z12read_sleb128PKhPi(puVar11,(int *)&uStack_50);
+  __Z12read_sleb128PKhPi(puVar4,&iStack_4c);
   if (uStack_50 == 0) {
     bVar1 = true;
   }
   else {
     if (0 < (int)uStack_50) {
-      ptVar8 = (unsigned char *)get_ttype_entry((unsigned char *)&iStack_80,uStack_50);
+      ptVar8 = (unsigned char *)
+               __Z15get_ttype_entryP16lsda_header_infoj((unsigned char *)&iStack_80,uStack_50);
       uVar6 = param_2 & 8;
       if (ptVar8 == (unsigned char *)0x0) goto joined_r0x97c19bd8;
       if ((ptVar12 == (unsigned char *)0x0) ||

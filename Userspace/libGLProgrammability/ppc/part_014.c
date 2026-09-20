@@ -1,24 +1,31 @@
 #include "decls.h"
 
 /* _InterpreterTextureSamplerAttachDerivatives @ 0x97bd3614 (12 bytes) */
-void _InterpreterTextureSamplerAttachDerivatives(double param_1,int param_2,undefined4 param_3)
+double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1)
 
 {
-  *(float *)(param_2 + 0x10) = (float)param_1;
-  *(undefined4 *)(param_2 + 0xc) = param_3;
+  *(float *)(param_1 + 0x10) = (float)fparam_1;
+  *(undefined4 *)(param_1 + 0xc) = param_2;
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel1D
-               (double param_1,int *param_2,int param_3,undefined4 param_4,undefined4 param_5,
-               float *param_6)
+double _InterpreterTextureSamplerSampleTexel1D
+               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
+               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+               double fparam_11,double fparam_12)
 
 {
   float fVar1;
   int *piVar2;
   uint uVar3;
   double dVar4;
+  double fparam_1_00;
+  double in_stack_ffffff48;
+  double in_stack_ffffff50;
+  double in_stack_ffffff58;
+  double in_stack_ffffff60;
   float local_80;
   float local_7c;
   float local_78;
@@ -31,16 +38,19 @@ void _InterpreterTextureSamplerSampleTexel1D
   longlong local_58;
   float local_40;
   
-  piVar2 = *(int **)(*param_2 + param_3 * 4);
+  piVar2 = *(int **)(*param_1 + param_2 * 4);
   if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
-    param_2[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_2,param_5,param_3);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + param_1);
+    param_1[10] = 1;
+    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+                               fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                               in_stack_ffffff58,in_stack_ffffff60);
+    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
     if (local_40 < (float)piVar2[0xc]) {
       local_40 = (float)piVar2[0xc];
     }
-    dVar4 = (double)local_40;
-    if ((double)(float)piVar2[8] < dVar4) {
+    fparam_1 = (double)local_40;
+    dVar4 = fparam_1;
+    if ((double)(float)piVar2[8] < fparam_1) {
       dVar4 = (double)(float)piVar2[8];
     }
     if (DOUBLE_97c30a78 <= dVar4) {
@@ -52,36 +62,49 @@ void _InterpreterTextureSamplerSampleTexel1D
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      ((int (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_2,param_3,uVar3,param_5,&local_80);
-      ((int (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_2,param_3,uVar3 + 1,param_5,&local_70);
+      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+                                       fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
+                                       in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
+      ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+                 fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                 in_stack_ffffff58);
       dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
                                                      DOUBLE_97c30a68));
       fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_6 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_6[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_6[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_6[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
+      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
+      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
+      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
       return;
     }
   }
   else {
     uVar3 = 0;
-    param_2[10] = 0;
+    param_1[10] = 0;
   }
-  ((int (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_2,param_3,uVar3,param_5,param_6);
+  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+             fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel2D
-               (double param_1,int *param_2,int param_3,undefined4 param_4,undefined4 param_5,
-               float *param_6)
+double _InterpreterTextureSamplerSampleTexel2D
+               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
+               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+               double fparam_11,double fparam_12,double fparam_13)
 
 {
   float fVar1;
   int *piVar2;
   uint uVar3;
   double dVar4;
+  double fparam_1_00;
+  double in_stack_ffffff48;
+  double in_stack_ffffff50;
+  double in_stack_ffffff58;
+  double in_stack_ffffff60;
+  double in_stack_ffffff68;
   float local_80;
   float local_7c;
   float local_78;
@@ -94,16 +117,19 @@ void _InterpreterTextureSamplerSampleTexel2D
   longlong local_58;
   float local_40;
   
-  piVar2 = *(int **)(*param_2 + param_3 * 4);
+  piVar2 = *(int **)(*param_1 + param_2 * 4);
   if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
-    param_2[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_2,param_5,param_3);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + param_1);
+    param_1[10] = 1;
+    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+                               fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                               in_stack_ffffff58,in_stack_ffffff60);
+    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
     if (local_40 < (float)piVar2[0xc]) {
       local_40 = (float)piVar2[0xc];
     }
-    dVar4 = (double)local_40;
-    if ((double)(float)piVar2[8] < dVar4) {
+    fparam_1 = (double)local_40;
+    dVar4 = fparam_1;
+    if ((double)(float)piVar2[8] < fparam_1) {
       dVar4 = (double)(float)piVar2[8];
     }
     if (DOUBLE_97c30a78 <= dVar4) {
@@ -115,36 +141,50 @@ void _InterpreterTextureSamplerSampleTexel2D
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      ((int (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_2,param_3,uVar3,param_5,&local_80);
-      ((int (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_2,param_3,uVar3 + 1,param_5,&local_70);
+      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+                                       fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
+                                       in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
+                                       in_stack_ffffff60,in_stack_ffffff68);
+      ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+                 fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                 in_stack_ffffff58,in_stack_ffffff60,in_stack_ffffff68);
       dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
                                                      DOUBLE_97c30a68));
       fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_6 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_6[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_6[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_6[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
+      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
+      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
+      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
       return;
     }
   }
   else {
     uVar3 = 0;
-    param_2[10] = 0;
+    param_1[10] = 0;
   }
-  ((int (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_2,param_3,uVar3,param_5,param_6);
+  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+             fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58,
+             in_stack_ffffff60,in_stack_ffffff68);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel3D
-               (double param_1,int *param_2,int param_3,undefined4 param_4,undefined4 param_5,
-               float *param_6)
+double _InterpreterTextureSamplerSampleTexel3D
+               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
+               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+               double fparam_11,double fparam_12)
 
 {
   float fVar1;
   int *piVar2;
   uint uVar3;
   double dVar4;
+  double fparam_1_00;
+  double in_stack_ffffff48;
+  double in_stack_ffffff50;
+  double in_stack_ffffff58;
+  double in_stack_ffffff60;
   float local_80;
   float local_7c;
   float local_78;
@@ -157,16 +197,19 @@ void _InterpreterTextureSamplerSampleTexel3D
   longlong local_58;
   float local_40;
   
-  piVar2 = *(int **)(*param_2 + param_3 * 4);
+  piVar2 = *(int **)(*param_1 + param_2 * 4);
   if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
-    param_2[10] = 1;
-    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_2,param_5,param_3);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + param_1);
+    param_1[10] = 1;
+    dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+                               fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                               in_stack_ffffff58,in_stack_ffffff60);
+    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
     if (local_40 < (float)piVar2[0xc]) {
       local_40 = (float)piVar2[0xc];
     }
-    dVar4 = (double)local_40;
-    if ((double)(float)piVar2[8] < dVar4) {
+    fparam_1 = (double)local_40;
+    dVar4 = fparam_1;
+    if ((double)(float)piVar2[8] < fparam_1) {
       dVar4 = (double)(float)piVar2[8];
     }
     if (DOUBLE_97c30a78 <= dVar4) {
@@ -178,23 +221,28 @@ void _InterpreterTextureSamplerSampleTexel3D
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
-      ((int (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_2,param_3,uVar3,param_5,&local_80);
-      ((int (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_2,param_3,uVar3 + 1,param_5,&local_70);
+      fparam_1_00 = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,&local_80,fparam_1,fparam_2,
+                                       fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,
+                                       in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
+      ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3 + 1,param_4,&local_70,fparam_1_00,fparam_2,fparam_3,fparam_4,
+                 fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
+                 in_stack_ffffff58);
       dVar4 = (double)(float)(dVar4 - (double)(float)((double)CONCAT44(0x43300000,uVar3) -
                                                      DOUBLE_97c30a68));
       fVar1 = (float)(DOUBLE_97c30a60 - dVar4);
-      *param_6 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
-      param_6[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
-      param_6[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
-      param_6[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
+      *param_5 = fVar1 * local_80 + (float)(dVar4 * (double)local_70);
+      param_5[3] = fVar1 * local_74 + (float)(dVar4 * (double)local_64);
+      param_5[1] = fVar1 * local_7c + (float)(dVar4 * (double)local_6c);
+      param_5[2] = fVar1 * local_78 + (float)(dVar4 * (double)local_68);
       return;
     }
   }
   else {
     uVar3 = 0;
-    param_2[10] = 0;
+    param_1[10] = 0;
   }
-  ((int (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_2,param_3,uVar3,param_5,param_6);
+  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(param_1,param_2,uVar3,param_4,param_5,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
+             fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,in_stack_ffffff58);
   return;
 }
 
@@ -323,7 +371,10 @@ LAB_97bd3e30:
 }
 
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
-double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3)
+double _InterpreterTextureSamplerCalculateLambda1D
+                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
+                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
+                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 
 {
   float fVar1;
@@ -362,7 +413,10 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,i
 }
 
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
-double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3)
+double _InterpreterTextureSamplerCalculateLambda2D
+                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
+                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
+                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 
 {
   float fVar1;
@@ -412,7 +466,9 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,i
 
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
 double _InterpreterTextureSamplerCalculateLambda3D
-                 (undefined4 param_1,undefined4 param_2,int param_3)
+                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
+                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
+                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 
 {
   float fVar1;
@@ -424,55 +480,49 @@ double _InterpreterTextureSamplerCalculateLambda3D
   float fVar7;
   float fVar8;
   int iVar9;
-  int *piVar10;
-  float *pfVar11;
-  int iVar12;
-  int iVar13;
-  double dVar14;
-  double dVar15;
-  undefined8 uVar16;
+  int iVar10;
+  int iVar11;
+  double dVar12;
+  double dVar13;
   
-  uVar16 = FUN_97c1a25c();
-  piVar10 = (int *)((ulonglong)uVar16 >> 0x20);
-  pfVar11 = (float *)uVar16;
-  fVar4 = pfVar11[3];
-  iVar12 = param_3 * 0x10 + piVar10[3];
-  iVar13 = param_3 * 0x10 + piVar10[3] + 0xc0;
-  fVar5 = *pfVar11;
-  fVar6 = pfVar11[1];
-  iVar9 = *(int *)(param_3 * 4 + *piVar10);
-  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar12 + 0x4c)));
-  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar12 + 0x4c)));
-  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar13 + 0x4c)));
-  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar13 + 0x4c)));
-  fVar8 = -((fVar6 - *(float *)(iVar12 + 0x44)) * fVar2 -
-           (fVar6 + *(float *)(iVar12 + 0x44)) * fVar1) * *(float *)(iVar9 + 0x124);
-  fVar7 = -((pfVar11[2] - *(float *)(iVar12 + 0x48)) * fVar2 -
-           (pfVar11[2] + *(float *)(iVar12 + 0x48)) * fVar1) * *(float *)(iVar9 + 0x128);
-  fVar2 = -((fVar5 - *(float *)(iVar12 + 0x40)) * fVar2 -
-           (fVar5 + *(float *)(iVar12 + 0x40)) * fVar1) * *(float *)(iVar9 + 0x120);
+  fVar4 = param_2[3];
+  iVar10 = param_3 * 0x10 + param_1[3];
+  iVar11 = param_3 * 0x10 + param_1[3] + 0xc0;
+  fVar5 = *param_2;
+  fVar6 = param_2[1];
+  iVar9 = *(int *)(param_3 * 4 + *param_1);
+  fVar1 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar10 + 0x4c)));
+  fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar10 + 0x4c)));
+  fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
+  fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
+  fVar8 = -((fVar6 - *(float *)(iVar10 + 0x44)) * fVar2 -
+           (fVar6 + *(float *)(iVar10 + 0x44)) * fVar1) * *(float *)(iVar9 + 0x124);
+  fVar7 = -((param_2[2] - *(float *)(iVar10 + 0x48)) * fVar2 -
+           (param_2[2] + *(float *)(iVar10 + 0x48)) * fVar1) * *(float *)(iVar9 + 0x128);
+  fVar2 = -((fVar5 - *(float *)(iVar10 + 0x40)) * fVar2 -
+           (fVar5 + *(float *)(iVar10 + 0x40)) * fVar1) * *(float *)(iVar9 + 0x120);
   fVar7 = fVar7 * fVar7;
-  fVar1 = -((fVar6 - *(float *)(iVar13 + 0x44)) * fVar4 -
-           (fVar6 + *(float *)(iVar13 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
-  fVar3 = -((fVar5 - *(float *)(iVar13 + 0x40)) * fVar4 -
-           (fVar5 + *(float *)(iVar13 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
-  dVar14 = (double)_sqrt((double)(fVar2 * fVar2 + fVar8 * fVar8 + fVar7));
-  dVar15 = (double)_sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar7));
-  fVar1 = (float)dVar15;
-  if ((float)dVar15 < (float)dVar14) {
-    fVar1 = (float)dVar14;
+  fVar1 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar4 -
+           (fVar6 + *(float *)(iVar11 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
+  fVar3 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar4 -
+           (fVar5 + *(float *)(iVar11 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
+  dVar12 = (double)_sqrt((double)(fVar2 * fVar2 + fVar8 * fVar8 + fVar7));
+  dVar13 = (double)_sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar7));
+  fVar1 = (float)dVar13;
+  if ((float)dVar13 < (float)dVar12) {
+    fVar1 = (float)dVar12;
   }
-  dVar14 = (double)_log2((double)(fVar1 * (float)piVar10[4]));
-  return (double)(float)dVar14;
+  dVar12 = (double)_log2((double)(fVar1 * (float)param_1[4]));
+  return (double)(float)dVar12;
 }
 
 /* _InterpreterTextureSamplerSampleTexel1DFromLevel @ 0x97bd4210 (876 bytes) */
-int _InterpreterTextureSamplerSampleTexel1DFromLevel(param_1, param_2, param_3, param_4, param_5)
-  int *param_1;
-  uint param_2;
-  int param_3;
-  float *param_4;
-  float *param_5;
+double _InterpreterTextureSamplerSampleTexel1DFromLevel
+                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
+                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+                 double fparam_11)
+
 {
   bool bVar1;
   float fVar2;
@@ -508,7 +558,7 @@ int _InterpreterTextureSamplerSampleTexel1DFromLevel(param_1, param_2, param_3, 
   }
   piVar6 = *(int **)(*param_1 + param_2 * 4);
   if (piVar6 == (int *)0x0) {
-    return;
+    return fparam_1;
   }
   param_1[1] = (int)piVar6;
   pfVar7 = (float *)(piVar6 + param_3 * 0x34 + 0x48);
@@ -538,15 +588,15 @@ LAB_97bd42d8:
     local_8c = 0;
     local_88 = 0;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_90);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(param_1,iVar8,piVar6 + iVar5,&local_90,param_5);
-    return;
+    dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(param_1,iVar8,piVar6 + iVar5,&local_90,param_5);
+    return dVar9;
   }
   if (uVar4 < 0x2701) {
     if (uVar4 == 0x2600) goto LAB_97bd42d8;
     bVar1 = uVar4 == 0x2601;
 LAB_97bd42d0:
     if (!bVar1) {
-      return;
+      return fparam_1;
     }
   }
   else {
@@ -598,21 +648,21 @@ LAB_97bd43d4:
   local_4c = local_8c;
   local_48 = local_88;
   ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_50);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel1D)(param_1,iVar5,piVar6 + iVar8,&local_50,&local_60);
+  dVar9 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel1D)(param_1,iVar5,piVar6 + iVar8,&local_50,&local_60);
   *param_5 = (float)(dVar10 * (double)local_70 + (double)(fVar2 * local_60));
   param_5[3] = (float)(dVar10 * (double)local_64 + (double)(fVar2 * local_54));
   param_5[1] = (float)(dVar10 * (double)local_6c + (double)(fVar2 * local_5c));
   param_5[2] = (float)(dVar10 * (double)local_68 + (double)(fVar2 * local_58));
-  return;
+  return dVar9;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2DFromLevel @ 0x97bd457c (1196 bytes) */
-int _InterpreterTextureSamplerSampleTexel2DFromLevel(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  float *param_4;
-  float *param_5;
+double _InterpreterTextureSamplerSampleTexel2DFromLevel
+                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
+                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+                 double fparam_11,double fparam_12,double fparam_13)
+
 {
   bool bVar1;
   float fVar2;
@@ -622,14 +672,11 @@ int _InterpreterTextureSamplerSampleTexel2DFromLevel(param_1, param_2, param_3, 
   ushort uVar6;
   int *piVar7;
   int iVar8;
-  int *piVar9;
-  float *pfVar10;
-  int iVar11;
-  byte bVar12;
+  float *pfVar9;
+  int iVar10;
+  double dVar11;
+  double dVar12;
   double dVar13;
-  double dVar14;
-  double dVar15;
-  undefined8 uVar16;
   uint local_c0;
   uint local_bc;
   int local_b8;
@@ -656,21 +703,17 @@ int _InterpreterTextureSamplerSampleTexel2DFromLevel(param_1, param_2, param_3, 
   undefined4 local_50;
   uint uStack_4c;
   
-  bVar12 = (7 < param_2) << 2;
-  uVar16 = FUN_97c1a25c();
-  piVar7 = (int *)((ulonglong)uVar16 >> 0x20);
-  iVar8 = (int)uVar16;
-  if ((bool)(bVar12 >> 2 & 1)) {
-    iVar8 = 7;
+  if (7 < param_2) {
+    param_2 = 7;
   }
-  piVar9 = *(int **)(*piVar7 + iVar8 * 4);
-  if (piVar9 == (int *)0x0) {
-    return;
+  piVar7 = *(int **)(*param_1 + param_2 * 4);
+  if (piVar7 == (int *)0x0) {
+    return fparam_1;
   }
-  piVar7[1] = (int)piVar9;
-  pfVar10 = (float *)(piVar9 + param_3 * 0x34 + 0x48);
-  piVar7[2] = (int)pfVar10;
-  if (piVar7[8] == 0) {
+  param_1[1] = (int)piVar7;
+  pfVar9 = (float *)(piVar7 + param_3 * 0x34 + 0x48);
+  param_1[2] = (int)pfVar9;
+  if (param_1[8] == 0) {
     fVar3 = param_4[1];
     fVar2 = *param_4;
   }
@@ -678,36 +721,36 @@ int _InterpreterTextureSamplerSampleTexel2DFromLevel(param_1, param_2, param_3, 
     fVar3 = param_4[1] / param_4[3];
     fVar2 = *param_4 / param_4[3];
   }
-  iVar8 = *piVar9;
+  iVar8 = *piVar7;
   uVar6 = *(ushort *)(iVar8 + 0x16);
   if (uVar6 == 0x2700) {
 LAB_97bd4648:
     if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      fVar5 = (float)piVar9[param_3 * 0x34 + 0x5c];
+      fVar5 = (float)piVar7[param_3 * 0x34 + 0x5c];
       iVar8 = param_3 * 0x34 + 100;
-      iVar11 = piVar9[param_3 * 0x34 + 0x71];
-      fVar4 = (float)piVar9[param_3 * 0x34 + 0x5d];
+      iVar10 = piVar7[param_3 * 0x34 + 0x71];
+      fVar4 = (float)piVar7[param_3 * 0x34 + 0x5d];
     }
     else {
-      fVar5 = *pfVar10;
+      fVar5 = *pfVar9;
       iVar8 = param_3 * 0x34 + 0x50;
-      iVar11 = piVar9[param_3 * 0x34 + 0x70];
-      fVar4 = (float)piVar9[param_3 * 0x34 + 0x49];
+      iVar10 = piVar7[param_3 * 0x34 + 0x70];
+      fVar4 = (float)piVar7[param_3 * 0x34 + 0x49];
     }
     local_c0 = (uint)(fVar2 * fVar5);
     local_bc = (uint)(fVar3 * fVar4);
     local_b0 = 0;
     local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_c0);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar11,piVar9 + iVar8,&local_c0,param_5);
-    return;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_c0);
+    dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar10,piVar7 + iVar8,&local_c0,param_5);
+    return dVar11;
   }
   if (uVar6 < 0x2701) {
     if (uVar6 == 0x2600) goto LAB_97bd4648;
     bVar1 = uVar6 == 0x2601;
 LAB_97bd4640:
     if (!bVar1) {
-      return;
+      return fparam_1;
     }
   }
   else {
@@ -718,80 +761,80 @@ LAB_97bd4640:
     }
   }
   if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-    fVar4 = (float)piVar9[param_3 * 0x34 + 0x5c];
-    iVar8 = piVar9[param_3 * 0x34 + 0x71];
+    fVar4 = (float)piVar7[param_3 * 0x34 + 0x5c];
+    iVar8 = piVar7[param_3 * 0x34 + 0x71];
   }
   else {
     if ((*(short *)(iVar8 + 0x10) != 0x2900) && (*(short *)(iVar8 + 0x12) != 0x2900)) {
-      fVar4 = *pfVar10;
-      iVar11 = param_3 * 0x34 + 0x50;
-      iVar8 = piVar9[param_3 * 0x34 + 0x70];
-      fVar5 = (float)piVar9[param_3 * 0x34 + 0x49];
+      fVar4 = *pfVar9;
+      iVar10 = param_3 * 0x34 + 0x50;
+      iVar8 = piVar7[param_3 * 0x34 + 0x70];
+      fVar5 = (float)piVar7[param_3 * 0x34 + 0x49];
       goto LAB_97bd479c;
     }
-    fVar4 = (float)piVar9[param_3 * 0x34 + 0x5c];
-    iVar8 = piVar9[param_3 * 0x34 + 0x72];
+    fVar4 = (float)piVar7[param_3 * 0x34 + 0x5c];
+    iVar8 = piVar7[param_3 * 0x34 + 0x72];
   }
-  iVar11 = param_3 * 0x34 + 100;
-  fVar5 = (float)piVar9[param_3 * 0x34 + 0x5d];
+  iVar10 = param_3 * 0x34 + 100;
+  fVar5 = (float)piVar7[param_3 * 0x34 + 0x5d];
 LAB_97bd479c:
-  piVar9 = piVar9 + iVar11;
+  piVar7 = piVar7 + iVar10;
   fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
-  dVar13 = DOUBLE_97c30a88 + 0.0;
+  dVar11 = DOUBLE_97c30a88 + 0.0;
   fVar3 = (float)((double)(fVar3 * fVar5) + DOUBLE_97c30a88);
-  dVar14 = (double)_floor((double)fVar2);
-  local_c0 = (uint)dVar14;
+  dVar12 = (double)_floor((double)fVar2);
+  local_c0 = (uint)dVar12;
   local_b0 = (longlong)(int)local_c0;
-  dVar14 = (double)_floor((double)fVar3);
-  local_bc = (uint)dVar14;
+  dVar12 = (double)_floor((double)fVar3);
+  local_bc = (uint)dVar12;
   local_b0 = (longlong)(int)local_bc;
-  dVar13 = (double)_floor((double)(float)dVar13);
+  dVar11 = (double)_floor((double)(float)dVar11);
   local_50 = 0x43300000;
   uStack_4c = local_bc ^ 0x80000000;
   local_5c = local_bc;
   local_60 = local_c0;
-  dVar15 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+  dVar13 = (double)(fVar2 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar14 = (double)(fVar3 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-  local_b8 = (int)dVar13;
+  dVar12 = (double)(fVar3 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
+  local_b8 = (int)dVar11;
   local_b0 = (longlong)local_b8;
-  fVar3 = (float)(dVar15 * dVar14);
-  fVar2 = (float)((double)(float)(DOUBLE_97c30a60 - dVar15) * dVar14);
-  fVar4 = (float)(dVar15 * (double)(float)(DOUBLE_97c30a60 - dVar14));
-  fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar15) *
-                 (double)(float)(DOUBLE_97c30a60 - dVar14));
+  fVar3 = (float)(dVar13 * dVar12);
+  fVar2 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
+  fVar4 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
+  fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
+                 (double)(float)(DOUBLE_97c30a60 - dVar12));
   local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar9,&local_60,&local_a0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar7,&local_60,&local_a0);
   local_60 = local_c0;
   local_5c = local_bc - 1;
   local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar9,&local_60,&local_90);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar7,&local_60,&local_90);
   local_60 = local_c0 - 1;
   local_5c = local_bc - 1;
   local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar9,&local_60,&local_70);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar7,&local_60,&local_70);
   local_60 = local_c0 - 1;
   local_5c = local_bc;
   local_58 = local_b8;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar9,&local_60,&local_80);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+  dVar11 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar7,&local_60,&local_80);
   *param_5 = fVar5 * local_70 + fVar2 * local_80 + fVar3 * local_a0 + fVar4 * local_90;
   param_5[3] = fVar5 * local_64 + fVar2 * local_74 + fVar3 * local_94 + fVar4 * local_84;
   param_5[1] = fVar5 * local_6c + fVar2 * local_7c + fVar3 * local_9c + fVar4 * local_8c;
   param_5[2] = fVar5 * local_68 + fVar2 * local_78 + fVar3 * local_98 + fVar4 * local_88;
-  return;
+  return dVar11;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
-int _InterpreterTextureSamplerSampleTexel3DFromLevel(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
-  uint param_2;
-  int param_3;
-  float *param_4;
-  float *param_5;
+double _InterpreterTextureSamplerSampleTexel3DFromLevel
+                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
+                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
+                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
+                 double fparam_11)
+
 {
   bool bVar1;
   float fVar2;
@@ -803,20 +846,17 @@ int _InterpreterTextureSamplerSampleTexel3DFromLevel(param_1, param_2, param_3, 
   float fVar8;
   float fVar9;
   ushort uVar10;
-  int *piVar11;
-  int iVar12;
-  int *piVar13;
-  float *pfVar14;
-  int iVar15;
-  byte bVar16;
+  int iVar11;
+  int *piVar12;
+  float *pfVar13;
+  int iVar14;
+  double dVar15;
+  double dVar16;
   double dVar17;
   double dVar18;
   double dVar19;
   double dVar20;
   double dVar21;
-  double dVar22;
-  double dVar23;
-  undefined8 uVar24;
   float local_130;
   float local_12c;
   float local_128;
@@ -862,21 +902,17 @@ int _InterpreterTextureSamplerSampleTexel3DFromLevel(param_1, param_2, param_3, 
   undefined4 local_70;
   uint uStack_6c;
   
-  bVar16 = (7 < param_2) << 2;
-  uVar24 = FUN_97c1a24c();
-  piVar11 = (int *)((ulonglong)uVar24 >> 0x20);
-  iVar12 = (int)uVar24;
-  if ((bool)(bVar16 >> 2 & 1)) {
-    iVar12 = 7;
+  if (7 < param_2) {
+    param_2 = 7;
   }
-  piVar13 = *(int **)(*piVar11 + iVar12 * 4);
-  if (piVar13 == (int *)0x0) {
-    return;
+  piVar12 = *(int **)(*param_1 + param_2 * 4);
+  if (piVar12 == (int *)0x0) {
+    return fparam_1;
   }
-  piVar11[1] = (int)piVar13;
-  pfVar14 = (float *)(piVar13 + param_3 * 0x34 + 0x48);
-  piVar11[2] = (int)pfVar14;
-  if (piVar11[8] == 0) {
+  param_1[1] = (int)piVar12;
+  pfVar13 = (float *)(piVar12 + param_3 * 0x34 + 0x48);
+  param_1[2] = (int)pfVar13;
+  if (param_1[8] == 0) {
     local_128 = param_4[2];
     local_130 = *param_4;
     local_12c = param_4[1];
@@ -887,39 +923,39 @@ int _InterpreterTextureSamplerSampleTexel3DFromLevel(param_1, param_2, param_3, 
     local_128 = param_4[2] / local_12c;
     local_12c = param_4[1] / local_12c;
   }
-  iVar12 = *piVar13;
-  uVar10 = *(ushort *)(iVar12 + 0x16);
+  iVar11 = *piVar12;
+  uVar10 = *(ushort *)(iVar11 + 0x16);
   if (uVar10 == 0x2700) {
 LAB_97bd4b08:
-    if (((*(short *)(iVar12 + 0x10) == -0x7ed3) || (*(short *)(iVar12 + 0x12) == -0x7ed3)) ||
-       (*(short *)(iVar12 + 0x14) == -0x7ed3)) {
-      fVar8 = (float)piVar13[param_3 * 0x34 + 0x5c];
-      iVar12 = param_3 * 0x34 + 100;
-      iVar15 = piVar13[param_3 * 0x34 + 0x71];
-      fVar9 = (float)piVar13[param_3 * 0x34 + 0x5d];
-      fVar7 = (float)piVar13[param_3 * 0x34 + 0x5e];
+    if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
+       (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
+      fVar8 = (float)piVar12[param_3 * 0x34 + 0x5c];
+      iVar11 = param_3 * 0x34 + 100;
+      iVar14 = piVar12[param_3 * 0x34 + 0x71];
+      fVar9 = (float)piVar12[param_3 * 0x34 + 0x5d];
+      fVar7 = (float)piVar12[param_3 * 0x34 + 0x5e];
     }
     else {
-      fVar8 = *pfVar14;
-      iVar12 = param_3 * 0x34 + 0x50;
-      iVar15 = piVar13[param_3 * 0x34 + 0x70];
-      fVar9 = (float)piVar13[param_3 * 0x34 + 0x49];
-      fVar7 = (float)piVar13[param_3 * 0x34 + 0x4a];
+      fVar8 = *pfVar13;
+      iVar11 = param_3 * 0x34 + 0x50;
+      iVar14 = piVar12[param_3 * 0x34 + 0x70];
+      fVar9 = (float)piVar12[param_3 * 0x34 + 0x49];
+      fVar7 = (float)piVar12[param_3 * 0x34 + 0x4a];
     }
     local_120 = (uint)(local_130 * fVar8);
     local_11c = (uint)(local_12c * fVar9);
     local_118 = (uint)(local_128 * fVar7);
     local_110 = (longlong)(int)local_118;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_120);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar15,piVar13 + iVar12,&local_120,param_5);
-    return;
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_120);
+    dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar14,piVar12 + iVar11,&local_120,param_5);
+    return dVar15;
   }
   if (uVar10 < 0x2701) {
     if (uVar10 == 0x2600) goto LAB_97bd4b08;
     bVar1 = uVar10 == 0x2601;
 LAB_97bd4b00:
     if (!bVar1) {
-      return;
+      return fparam_1;
     }
   }
   else {
@@ -929,101 +965,102 @@ LAB_97bd4b00:
       goto LAB_97bd4b00;
     }
   }
-  if (((*(short *)(iVar12 + 0x10) == -0x7ed3) || (*(short *)(iVar12 + 0x12) == -0x7ed3)) ||
-     (*(short *)(iVar12 + 0x14) == -0x7ed3)) {
-    fVar7 = (float)piVar13[param_3 * 0x34 + 0x5c];
-    iVar12 = piVar13[param_3 * 0x34 + 0x71];
+  if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
+     (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
+    fVar7 = (float)piVar12[param_3 * 0x34 + 0x5c];
+    iVar11 = piVar12[param_3 * 0x34 + 0x71];
   }
   else {
-    if (((*(short *)(iVar12 + 0x10) != 0x2900) && (*(short *)(iVar12 + 0x12) != 0x2900)) &&
-       (*(short *)(iVar12 + 0x14) != 0x2900)) {
-      fVar7 = *pfVar14;
-      iVar15 = param_3 * 0x34 + 0x50;
-      iVar12 = piVar13[param_3 * 0x34 + 0x70];
-      fVar8 = (float)piVar13[param_3 * 0x34 + 0x49];
-      fVar9 = (float)piVar13[param_3 * 0x34 + 0x4a];
+    if (((*(short *)(iVar11 + 0x10) != 0x2900) && (*(short *)(iVar11 + 0x12) != 0x2900)) &&
+       (*(short *)(iVar11 + 0x14) != 0x2900)) {
+      fVar7 = *pfVar13;
+      iVar14 = param_3 * 0x34 + 0x50;
+      iVar11 = piVar12[param_3 * 0x34 + 0x70];
+      fVar8 = (float)piVar12[param_3 * 0x34 + 0x49];
+      fVar9 = (float)piVar12[param_3 * 0x34 + 0x4a];
       goto LAB_97bd4cb4;
     }
-    fVar7 = (float)piVar13[param_3 * 0x34 + 0x5c];
-    iVar12 = piVar13[param_3 * 0x34 + 0x72];
+    fVar7 = (float)piVar12[param_3 * 0x34 + 0x5c];
+    iVar11 = piVar12[param_3 * 0x34 + 0x72];
   }
-  iVar15 = param_3 * 0x34 + 100;
-  fVar8 = (float)piVar13[param_3 * 0x34 + 0x5d];
-  fVar9 = (float)piVar13[param_3 * 0x34 + 0x5e];
+  iVar14 = param_3 * 0x34 + 100;
+  fVar8 = (float)piVar12[param_3 * 0x34 + 0x5d];
+  fVar9 = (float)piVar12[param_3 * 0x34 + 0x5e];
 LAB_97bd4cb4:
-  piVar13 = piVar13 + iVar15;
+  piVar12 = piVar12 + iVar14;
   fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
   fVar8 = (float)((double)(local_12c * fVar8) + DOUBLE_97c30a88);
   fVar9 = (float)((double)(local_128 * fVar9) + DOUBLE_97c30a88);
-  dVar17 = (double)_floor((double)fVar7);
-  local_120 = (uint)dVar17;
+  dVar15 = (double)_floor((double)fVar7);
+  local_120 = (uint)dVar15;
   local_110 = (longlong)(int)local_120;
-  dVar17 = (double)_floor((double)fVar8);
-  local_11c = (uint)dVar17;
+  dVar15 = (double)_floor((double)fVar8);
+  local_11c = (uint)dVar15;
   local_110 = (longlong)(int)local_11c;
-  dVar17 = (double)_floor((double)fVar9);
-  local_118 = (uint)dVar17;
+  dVar15 = (double)_floor((double)fVar9);
+  local_118 = (uint)dVar15;
   local_110 = (longlong)(int)local_118;
   local_70 = 0x43300000;
   uStack_6c = local_118 ^ 0x80000000;
   local_7c = local_11c;
-  dVar20 = (double)(fVar7 - (float)((double)CONCAT44(0x43300000,local_120 ^ 0x80000000) -
+  dVar18 = (double)(fVar7 - (float)((double)CONCAT44(0x43300000,local_120 ^ 0x80000000) -
                                    DOUBLE_97c30a58));
   local_80 = local_120;
-  dVar18 = (double)(fVar8 - (float)((double)CONCAT44(0x43300000,local_11c ^ 0x80000000) -
+  dVar16 = (double)(fVar8 - (float)((double)CONCAT44(0x43300000,local_11c ^ 0x80000000) -
                                    DOUBLE_97c30a58));
-  dVar17 = (double)(fVar9 - (float)((double)CONCAT44(0x43300000,uStack_6c) - DOUBLE_97c30a58));
-  dVar22 = (double)(float)(DOUBLE_97c30a60 - dVar17);
-  dVar21 = (double)(float)(dVar20 * (double)(float)(DOUBLE_97c30a60 - dVar18));
-  dVar19 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar20) * dVar18);
-  dVar23 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar20) *
-                          (double)(float)(DOUBLE_97c30a60 - dVar18));
-  fVar7 = (float)((double)(float)(dVar20 * dVar18) * dVar22);
-  fVar9 = (float)(dVar19 * dVar22);
-  fVar8 = (float)((double)(float)(dVar20 * dVar18) * dVar17);
-  fVar2 = (float)(dVar19 * dVar17);
-  fVar3 = (float)(dVar23 * dVar22);
-  fVar4 = (float)(dVar23 * dVar17);
-  fVar5 = (float)(dVar21 * dVar22);
-  fVar6 = (float)(dVar21 * dVar17);
+  dVar15 = (double)(fVar9 - (float)((double)CONCAT44(0x43300000,uStack_6c) - DOUBLE_97c30a58));
+  dVar20 = (double)(float)(DOUBLE_97c30a60 - dVar15);
+  dVar19 = (double)(float)(dVar18 * (double)(float)(DOUBLE_97c30a60 - dVar16));
+  dVar17 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) * dVar16);
+  dVar21 = (double)(float)((double)(float)(DOUBLE_97c30a60 - dVar18) *
+                          (double)(float)(DOUBLE_97c30a60 - dVar16));
+  fVar7 = (float)((double)(float)(dVar18 * dVar16) * dVar20);
+  fVar9 = (float)(dVar17 * dVar20);
+  fVar8 = (float)((double)(float)(dVar18 * dVar16) * dVar15);
+  fVar2 = (float)(dVar17 * dVar15);
+  fVar3 = (float)(dVar21 * dVar20);
+  fVar4 = (float)(dVar21 * dVar15);
+  fVar5 = (float)(dVar19 * dVar20);
+  fVar6 = (float)(dVar19 * dVar15);
   local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_100);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_100);
   local_80 = local_120;
   local_7c = local_11c - 1;
   local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_f0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_f0);
   local_80 = local_120 - 1;
   local_7c = local_11c - 1;
   local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_d0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_d0);
   local_80 = local_120 - 1;
   local_7c = local_11c;
   local_78 = local_118;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_e0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_e0);
   local_78 = local_118 - 1;
   local_80 = local_120;
   local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_c0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_c0);
   local_7c = local_11c - 1;
   local_78 = local_118 - 1;
   local_80 = local_120;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_b0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_b0);
   local_80 = local_120 - 1;
   local_7c = local_11c - 1;
   local_78 = local_118 - 1;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_90);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_90);
   local_80 = local_120 - 1;
   local_78 = local_118 - 1;
   local_7c = local_11c;
-  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar11,&local_80);
-  ((int (*)())_InterpreterTextureSamplerLoadTexel3D)(piVar11,iVar12,piVar13,&local_80,&local_a0);
+  ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_80);
+  dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar11,piVar12,&local_80,&local_a0)
+  ;
   *param_5 = fVar3 * local_90 +
              fVar9 * local_a0 +
              fVar5 * local_b0 +
@@ -1044,12 +1081,12 @@ LAB_97bd4cb4:
                fVar5 * local_a4 +
                fVar7 * local_b4 +
                fVar4 * local_c4 + fVar2 * local_d4 + fVar8 * local_f4 + fVar6 * local_e4;
-  return;
+  return dVar15;
 }
 
 /* _InterpreterTextureSamplerSampleTexelRECTFromLevel @ 0x97bd5110 (1056 bytes) */
 int _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
+  int *param_1;
   uint param_2;
   int param_3;
   float *param_4;
@@ -1064,13 +1101,10 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1, param_2, param_3
   int *piVar7;
   int iVar8;
   int *piVar9;
-  int *piVar10;
-  int iVar11;
-  byte bVar12;
+  int iVar10;
+  double dVar11;
+  double dVar12;
   double dVar13;
-  double dVar14;
-  double dVar15;
-  undefined8 uVar16;
   uint local_c0;
   uint local_bc;
   int local_b8;
@@ -1097,37 +1131,33 @@ int _InterpreterTextureSamplerSampleTexelRECTFromLevel(param_1, param_2, param_3
   undefined4 local_50;
   uint uStack_4c;
   
-  bVar12 = (7 < param_2) << 2;
-  uVar16 = FUN_97c1a25c();
-  piVar7 = (int *)((ulonglong)uVar16 >> 0x20);
-  iVar8 = (int)uVar16;
-  if ((bool)(bVar12 >> 2 & 1)) {
-    iVar8 = 7;
+  if (7 < param_2) {
+    param_2 = 7;
   }
-  piVar9 = *(int **)(*piVar7 + iVar8 * 4);
-  if (piVar9 == (int *)0x0) {
+  piVar7 = *(int **)(*param_1 + param_2 * 4);
+  if (piVar7 == (int *)0x0) {
     return;
   }
-  piVar7[1] = (int)piVar9;
-  piVar7[2] = (int)(piVar9 + param_3 * 0x34 + 0x48);
-  iVar8 = *piVar9;
+  param_1[1] = (int)piVar7;
+  param_1[2] = (int)(piVar7 + param_3 * 0x34 + 0x48);
+  iVar8 = *piVar7;
   uVar6 = *(ushort *)(iVar8 + 0x16);
   if (uVar6 == 0x2700) {
 LAB_97bd51b8:
     if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
       iVar8 = param_3 * 0x34 + 100;
-      iVar11 = piVar9[param_3 * 0x34 + 0x71];
+      iVar10 = piVar7[param_3 * 0x34 + 0x71];
     }
     else {
-      iVar11 = piVar9[param_3 * 0x34 + 0x70];
+      iVar10 = piVar7[param_3 * 0x34 + 0x70];
       iVar8 = param_3 * 0x34 + 0x50;
     }
     local_c0 = (uint)*param_4;
     local_bc = (uint)param_4[1];
     local_b0 = 0;
     local_b8 = 0;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_c0);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar11,piVar9 + iVar8,&local_c0,param_5);
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_c0);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar10,piVar7 + iVar8,&local_c0,param_5);
   }
   else {
     if (uVar6 < 0x2701) {
@@ -1146,59 +1176,59 @@ LAB_97bd51b0:
       }
     }
     if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      piVar10 = piVar9 + param_3 * 0x34 + 100;
-      iVar8 = piVar9[param_3 * 0x34 + 0x71];
+      piVar9 = piVar7 + param_3 * 0x34 + 100;
+      iVar8 = piVar7[param_3 * 0x34 + 0x71];
     }
     else if ((*(short *)(iVar8 + 0x10) == 0x2900) || (*(short *)(iVar8 + 0x12) == 0x2900)) {
-      piVar10 = piVar9 + param_3 * 0x34 + 100;
-      iVar8 = piVar9[param_3 * 0x34 + 0x72];
+      piVar9 = piVar7 + param_3 * 0x34 + 100;
+      iVar8 = piVar7[param_3 * 0x34 + 0x72];
     }
     else {
-      iVar8 = piVar9[param_3 * 0x34 + 0x70];
-      piVar10 = piVar9 + param_3 * 0x34 + 0x50;
+      iVar8 = piVar7[param_3 * 0x34 + 0x70];
+      piVar9 = piVar7 + param_3 * 0x34 + 0x50;
     }
     fVar4 = (float)((double)*param_4 + DOUBLE_97c30a88);
-    dVar13 = DOUBLE_97c30a88 + 0.0;
+    dVar11 = DOUBLE_97c30a88 + 0.0;
     fVar5 = (float)((double)param_4[1] + DOUBLE_97c30a88);
-    dVar14 = (double)_floor((double)fVar4);
-    local_c0 = (uint)dVar14;
+    dVar12 = (double)_floor((double)fVar4);
+    local_c0 = (uint)dVar12;
     local_b0 = (longlong)(int)local_c0;
-    dVar14 = (double)_floor((double)fVar5);
-    local_bc = (uint)dVar14;
+    dVar12 = (double)_floor((double)fVar5);
+    local_bc = (uint)dVar12;
     local_b0 = (longlong)(int)local_bc;
-    dVar13 = (double)_floor((double)(float)dVar13);
+    dVar11 = (double)_floor((double)(float)dVar11);
     local_50 = 0x43300000;
     uStack_4c = local_bc ^ 0x80000000;
     local_5c = local_bc;
     local_60 = local_c0;
-    dVar15 = (double)(fVar4 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
+    dVar13 = (double)(fVar4 - (float)((double)CONCAT44(0x43300000,local_c0 ^ 0x80000000) -
                                      DOUBLE_97c30a58));
-    dVar14 = (double)(fVar5 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
-    local_b8 = (int)dVar13;
+    dVar12 = (double)(fVar5 - (float)((double)CONCAT44(0x43300000,uStack_4c) - DOUBLE_97c30a58));
+    local_b8 = (int)dVar11;
     local_b0 = (longlong)local_b8;
-    fVar4 = (float)(dVar15 * dVar14);
-    fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar15) * dVar14);
-    fVar2 = (float)(dVar15 * (double)(float)(DOUBLE_97c30a60 - dVar14));
-    fVar3 = (float)((double)(float)(DOUBLE_97c30a60 - dVar15) *
-                   (double)(float)(DOUBLE_97c30a60 - dVar14));
+    fVar4 = (float)(dVar13 * dVar12);
+    fVar5 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) * dVar12);
+    fVar2 = (float)(dVar13 * (double)(float)(DOUBLE_97c30a60 - dVar12));
+    fVar3 = (float)((double)(float)(DOUBLE_97c30a60 - dVar13) *
+                   (double)(float)(DOUBLE_97c30a60 - dVar12));
     local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar10,&local_60,&local_a0);
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar9,&local_60,&local_a0);
     local_60 = local_c0;
     local_5c = local_bc - 1;
     local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar10,&local_60,&local_90);
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar9,&local_60,&local_90);
     local_60 = local_c0 - 1;
     local_5c = local_bc - 1;
     local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar10,&local_60,&local_70);
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar9,&local_60,&local_70);
     local_60 = local_c0 - 1;
     local_5c = local_bc;
     local_58 = local_b8;
-    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(piVar7,&local_60);
-    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(piVar7,iVar8,piVar10,&local_60,&local_80);
+    ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_60);
+    ((int (*)())_InterpreterTextureSamplerLoadTexel2D)(param_1,iVar8,piVar9,&local_60,&local_80);
     *param_5 = fVar3 * local_70 + fVar5 * local_80 + fVar4 * local_a0 + fVar2 * local_90;
     param_5[3] = fVar3 * local_64 + fVar5 * local_74 + fVar4 * local_94 + fVar2 * local_84;
     param_5[1] = fVar3 * local_6c + fVar5 * local_7c + fVar4 * local_9c + fVar2 * local_8c;
@@ -1358,7 +1388,7 @@ int _InterpreterNoiseGeneratorCreate()
   void *pvVar1;
   
   pvVar1 = _calloc(0xa20,1);
-  ((int (*)())_InterpreterNoiseGeneratorInitialise)();
+  ((int (*)())_InterpreterNoiseGeneratorInitialise)(pvVar1);
   return pvVar1;
 }
 
@@ -1410,7 +1440,7 @@ int _InterpreterNoiseGeneratorInitialise(param_1)
     puVar9 = puVar9 + 4;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
-  return;
+  return puVar9;
 }
 
 /* _InterpreterNoiseGeneratorSmoothHermiteCurve @ 0x97bd58bc (156 bytes) */
@@ -1812,7 +1842,7 @@ int _InterpreterRasterOpMachineCreate()
   void *pvVar1;
   
   pvVar1 = _calloc(8,1);
-  ((int (*)())_InterpreterRasterOpMachineInitialise)();
+  ((int (*)())_InterpreterRasterOpMachineInitialise)(pvVar1);
   return pvVar1;
 }
 
@@ -1895,108 +1925,108 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
   uint uVar9;
   uint uVar10;
   uint uVar11;
-  int iVar12;
-  float *pfVar13;
-  uint uVar14;
-  undefined1 uStack_2e;
+  uint uVar12;
+  int iVar13;
+  float *pfVar14;
+  uint uVar15;
   
-  uVar14 = 0;
-  iVar12 = *param_1;
-  iVar7 = *(int *)(iVar12 + 0xd80);
+  uVar15 = 0;
+  iVar13 = *param_1;
+  iVar7 = *(int *)(iVar13 + 0xd80);
   uVar6 = *(uint *)(iVar7 + 0x48);
-  uVar11 = *(uint *)(iVar7 + 0x3c);
+  uVar12 = *(uint *)(iVar7 + 0x3c);
   uVar4 = *(uint *)(iVar7 + 0x4c) >> 0x18;
-  fVar3 = *(float *)(*(int *)(iVar12 + 0xdf0) + 0xa38);
-  pfVar13 = *(float **)(iVar12 + 0xda8);
-  pbVar8 = *(byte **)(iVar12 + 0xdac);
-  bVar1 = (uVar11 >> 6 & 1) == 0;
-  uVar9 = *(uint *)(iVar7 + 0x4c) >> 8 & 0xff;
-  uVar10 = *(uint *)(*(int *)(iVar12 + 0xd80) + 0x70);
+  fVar3 = *(float *)(*(int *)(iVar13 + 0xdf0) + 0xa38);
+  pfVar14 = *(float **)(iVar13 + 0xda8);
+  pbVar8 = *(byte **)(iVar13 + 0xdac);
+  bVar1 = (uVar12 >> 6 & 1) == 0;
+  uVar10 = *(uint *)(iVar7 + 0x4c) >> 8 & 0xff;
+  uVar11 = *(uint *)(*(int *)(iVar13 + 0xd80) + 0x70);
   if (bVar1) {
-    uStack_2e = 0xff;
+    uVar9 = 0xff;
   }
   else {
-    uStack_2e = (undefined1)(uVar10 >> 8);
+    uVar9 = uVar11 >> 8 & 0xff;
   }
-  bVar5 = (uVar11 & 2) != 0;
+  bVar5 = (uVar12 & 2) != 0;
   if (bVar5) {
     switch(uVar6 >> 0xc & 7) {
     case 0:
-      uVar14 = 0;
+      uVar15 = 0;
       break;
     case 1:
-      uVar14 = (uint)((uVar4 & uVar9) < (uVar9 & *pbVar8));
+      uVar15 = (uint)((uVar4 & uVar10) < (uVar10 & *pbVar8));
       break;
     case 2:
-      uVar14 = (uint)((uVar4 & uVar9) == (uVar9 & *pbVar8));
+      uVar15 = (uint)((uVar4 & uVar10) == (uVar10 & *pbVar8));
       break;
     case 3:
-      uVar14 = (uint)((uVar4 & uVar9) <= (uVar9 & *pbVar8));
+      uVar15 = (uint)((uVar4 & uVar10) <= (uVar10 & *pbVar8));
       break;
     case 4:
-      uVar14 = (uint)((uVar9 & *pbVar8) < (uVar4 & uVar9));
+      uVar15 = (uint)((uVar10 & *pbVar8) < (uVar4 & uVar10));
       break;
     case 5:
-      uVar14 = -((*pbVar8 ^ uVar4) & uVar9) >> 0x1f;
+      uVar15 = -((*pbVar8 ^ uVar4) & uVar10) >> 0x1f;
       break;
     case 6:
-      uVar14 = (uint)((uVar9 & *pbVar8) <= (uVar4 & uVar9));
+      uVar15 = (uint)((uVar10 & *pbVar8) <= (uVar4 & uVar10));
       break;
     case 7:
-      uVar14 = 1;
+      uVar15 = 1;
     }
-    if (uVar14 == 0) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0xf & 7,uVar4,pbVar8,uStack_2e);
+    if (uVar15 == 0) {
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0xf & 7,uVar4,pbVar8,uVar9);
       return true;
     }
   }
-  if ((uVar11 & 4) == 0) {
+  if ((uVar12 & 4) == 0) {
     if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uStack_2e);
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
     }
-    return uVar14 == 0;
+    return uVar15 == 0;
   }
-  switch(*(uint *)(*(int *)(iVar12 + 0xd80) + 0x50) & 7) {
+  switch(*(uint *)(*(int *)(iVar13 + 0xd80) + 0x50) & 7) {
   case 0:
-    uVar14 = 0;
+    uVar15 = 0;
     break;
   case 1:
-    uVar14 = (uint)(fVar3 < *pfVar13);
+    uVar15 = (uint)(fVar3 < *pfVar14);
     break;
   case 2:
-    uVar14 = (uint)(fVar3 == *pfVar13);
+    uVar15 = (uint)(fVar3 == *pfVar14);
     break;
   case 3:
-    bVar2 = fVar3 <= *pfVar13;
+    bVar2 = fVar3 <= *pfVar14;
     goto LAB_97bd67ac;
   case 4:
-    uVar14 = (uint)(*pfVar13 < fVar3);
+    uVar15 = (uint)(*pfVar14 < fVar3);
     break;
   case 5:
-    uVar14 = (uint)(fVar3 != *pfVar13);
+    uVar15 = (uint)(fVar3 != *pfVar14);
     break;
   case 6:
-    bVar2 = *pfVar13 <= fVar3;
+    bVar2 = *pfVar14 <= fVar3;
 LAB_97bd67ac:
-    uVar14 = (uint)bVar2;
+    uVar15 = (uint)bVar2;
     break;
   case 7:
-    uVar14 = 1;
+    uVar15 = 1;
   }
-  if (uVar14 == 0) {
+  if (uVar15 == 0) {
     if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x12 & 7,uVar4,pbVar8,uStack_2e);
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x12 & 7,uVar4,pbVar8,uVar9);
     }
   }
   else {
     if (bVar5) {
-      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uStack_2e);
+      ((int (*)())_InterpreterRasterOpMachineUpdateStencilBuffer)(uVar6 >> 0x15 & 7,uVar4,pbVar8,uVar9);
     }
-    if ((bVar1) || ((uVar10 & 0x10000) != 0)) {
-      *pfVar13 = fVar3;
+    if ((bVar1) || ((uVar11 & 0x10000) != 0)) {
+      *pfVar14 = fVar3;
     }
   }
-  return uVar14 == 0;
+  return uVar15 == 0;
 }
 
 /* _InterpreterRasterOpMachine_AlphaTest @ 0x97bd683c (1548 bytes) */
@@ -2005,54 +2035,56 @@ int _InterpreterRasterOpMachine_AlphaTest(param_1, param_2)
   int param_2;
 {
   float fVar1;
-  uint uVar2;
-  float fVar3;
-  uint uVar4;
-  bool bVar5;
-  double dVar6;
+  int iVar2;
+  uint uVar3;
+  float fVar4;
+  uint uVar5;
+  bool bVar6;
+  double dVar7;
   
-  fVar1 = *(float *)(*(int *)(*param_1 + 0xd80) + 0x44);
-  uVar4 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x40);
-  uVar2 = _PPEmulatorFramebufferFormat();
-  bVar5 = false;
-  if ((uVar2 & 0x1c000) == 0) {
-    switch(uVar4 & 7) {
+  iVar2 = *(int *)(*param_1 + 0xd80);
+  fVar1 = *(float *)(iVar2 + 0x44);
+  uVar5 = *(uint *)(iVar2 + 0x40);
+  uVar3 = _PPEmulatorFramebufferFormat(*param_1);
+  bVar6 = false;
+  if ((uVar3 & 0x1c000) == 0) {
+    switch(uVar5 & 7) {
     case 0:
 switchD_97bd6924_caseD_0:
-      bVar5 = false;
+      bVar6 = false;
       break;
     case 1:
-      bVar5 = *(float *)(param_2 + 0xc) < fVar1;
+      bVar6 = *(float *)(param_2 + 0xc) < fVar1;
       break;
     case 2:
-      bVar5 = *(float *)(param_2 + 0xc) == fVar1;
+      bVar6 = *(float *)(param_2 + 0xc) == fVar1;
       break;
     case 3:
-      bVar5 = *(float *)(param_2 + 0xc) <= fVar1;
+      bVar6 = *(float *)(param_2 + 0xc) <= fVar1;
       break;
     case 4:
-      bVar5 = fVar1 < *(float *)(param_2 + 0xc);
+      bVar6 = fVar1 < *(float *)(param_2 + 0xc);
       break;
     case 5:
-      bVar5 = *(float *)(param_2 + 0xc) != fVar1;
+      bVar6 = *(float *)(param_2 + 0xc) != fVar1;
       break;
     case 6:
-      bVar5 = fVar1 <= *(float *)(param_2 + 0xc);
+      bVar6 = fVar1 <= *(float *)(param_2 + 0xc);
       break;
     case 7:
 switchD_97bd6924_caseD_7:
-      bVar5 = true;
+      bVar6 = true;
     }
   }
   else {
-    fVar3 = *(float *)(param_2 + 0xc);
-    if (TAllocation__guardBlockSize <= fVar3) {
-      if (FLOAT_97c3acd8 < fVar3) {
-        fVar3 = 1.0;
+    fVar4 = *(float *)(param_2 + 0xc);
+    if (TAllocation__guardBlockSize <= fVar4) {
+      if (FLOAT_97c3acd8 < fVar4) {
+        fVar4 = 1.0;
       }
     }
     else {
-      fVar3 = 0.0;
+      fVar4 = 0.0;
     }
     if (TAllocation__guardBlockSize <= fVar1) {
       if (FLOAT_97c3acd8 < fVar1) {
@@ -2062,128 +2094,128 @@ switchD_97bd6924_caseD_7:
     else {
       fVar1 = 0.0;
     }
-    switch(uVar4 & 7) {
+    switch(uVar5 & 7) {
     case 0:
       goto switchD_97bd6924_caseD_0;
     case 1:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar2 < uVar4;
+      bVar6 = uVar3 < uVar5;
       break;
     case 2:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar2 == uVar4;
+      bVar6 = uVar3 == uVar5;
       break;
     case 3:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar2 <= uVar4;
+      bVar6 = uVar3 <= uVar5;
       break;
     case 4:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar4 < uVar2;
+      bVar6 = uVar5 < uVar3;
       break;
     case 5:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar2 != uVar4;
+      bVar6 = uVar3 != uVar5;
       break;
     case 6:
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar2 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      fVar4 = fVar4 * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      dVar7 = (double)fVar4;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar2 = (uint)fVar3;
+        uVar3 = (uint)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar6 = (double)fVar1;
-      if (DOUBLE_97c30a78 <= dVar6) {
-        uVar4 = (int)(dVar6 - DOUBLE_97c30a78) ^ 0x80000000;
+      dVar7 = (double)fVar1;
+      if (DOUBLE_97c30a78 <= dVar7) {
+        uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar4 = (uint)fVar1;
+        uVar5 = (uint)fVar1;
       }
-      bVar5 = uVar4 <= uVar2;
+      bVar6 = uVar5 <= uVar3;
       break;
     case 7:
       goto switchD_97bd6924_caseD_7;
     }
   }
-  return bVar5 ^ 1;
+  return bVar6 ^ 1;
 }
 
 /* _InterpreterRasterOpMachine_Blending @ 0x97bd6e88 (1252 bytes) */
@@ -2197,9 +2229,10 @@ int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
   float fVar2;
   float fVar3;
   float fVar4;
-  uint uVar5;
+  int iVar5;
   uint uVar6;
-  int iVar7;
+  uint uVar7;
+  int iVar8;
   float local_60;
   float local_5c;
   float local_58;
@@ -2212,11 +2245,12 @@ int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
   float local_34;
   float local_30;
   
-  uVar6 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x58);
-  iVar7 = *(int *)(*(int *)(*param_1 + 0xd9c) + 0xd8) + 0x2d70;
-  uVar5 = _PPEmulatorFramebufferFormat();
+  iVar5 = *param_1;
+  uVar7 = *(uint *)(*(int *)(iVar5 + 0xd80) + 0x58);
+  iVar8 = *(int *)(*(int *)(iVar5 + 0xd9c) + 0xd8) + 0x2d70;
+  uVar6 = _PPEmulatorFramebufferFormat(iVar5);
   fVar2 = FLOAT_97c3acd8;
-  if ((uVar5 & 0x8000000) == 0) {
+  if ((uVar6 & 0x8000000) == 0) {
     fVar3 = *param_2;
     fVar4 = fVar3;
     if (FLOAT_97c3acd8 <= fVar3) {
@@ -2288,20 +2322,20 @@ int _InterpreterRasterOpMachine_Blending(param_1, param_2, param_3, param_4)
     local_30 = fVar3;
     param_2[3] = fVar4;
   }
-  if ((1 < (uVar6 >> 0x10 & 7) - 3) || (1 < (uVar6 >> 0x13 & 7) - 3)) {
-    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar6 & 0xf,param_2,param_3,iVar7,&local_60)
+  if ((1 < (uVar7 >> 0x10 & 7) - 3) || (1 < (uVar7 >> 0x13 & 7) - 3)) {
+    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 & 0xf,param_2,param_3,iVar8,&local_60)
     ;
-    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar6 >> 8 & 0xf,param_2,param_3,iVar7,&local_50);
-    if ((uVar6 & 0xf) != (uVar6 >> 4 & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar6 >> 4 & 0xf,param_2,param_3,iVar7,auStack_40);
+    ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 8 & 0xf,param_2,param_3,iVar8,&local_50);
+    if ((uVar7 & 0xf) != (uVar7 >> 4 & 0xf)) {
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 4 & 0xf,param_2,param_3,iVar8,auStack_40);
       local_54 = local_34;
     }
-    if ((uVar6 >> 8 & 0xf) != (uVar6 >> 0xc & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar6 >> 0xc & 0xf,param_2,param_3,iVar7,auStack_40);
+    if ((uVar7 >> 8 & 0xf) != (uVar7 >> 0xc & 0xf)) {
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(uVar7 >> 0xc & 0xf,param_2,param_3,iVar8,auStack_40);
       local_44 = local_34;
     }
   }
-  switch(uVar6 >> 0x10 & 7) {
+  switch(uVar7 >> 0x10 & 7) {
   case 0:
     *param_4 = *param_2 * local_60 + *param_3 * local_50;
     param_4[1] = param_2[1] * local_5c + param_3[1] * local_4c;
@@ -2363,7 +2397,7 @@ LAB_97bd72c0:
 LAB_97bd7230:
   param_4[2] = fVar2;
 switchD_97bd7128_default:
-  switch(uVar6 >> 0x13 & 7) {
+  switch(uVar7 >> 0x13 & 7) {
   case 0:
     fVar3 = param_2[3] * local_54 + param_3[3] * local_44;
     goto LAB_97bd734c;
@@ -2736,38 +2770,38 @@ LAB_97bd79e8:
 /* _InterpreterRasterOpMachineUpdateStencilBuffer @ 0x97bd7bc8 (212 bytes) */
 int _InterpreterRasterOpMachineUpdateStencilBuffer(param_1, param_2, param_3, param_4)
   undefined4 param_1;
-  int param_2;
+  undefined4 param_2;
   byte *param_3;
-  int param_4;
+  undefined4 param_4;
 {
   byte bVar1;
   byte bVar2;
   
   switch(param_1) {
   case 0:
-    bVar2 = *param_3 & ~param_4;
+    bVar2 = *param_3 & ~(byte)param_4;
     goto LAB_97bd7c38;
   case 1:
     return;
   case 2:
-    bVar2 = *param_3 & ~param_4;
+    bVar2 = *param_3 & ~(byte)param_4;
     goto LAB_97bd7c34;
   case 3:
     bVar2 = *param_3;
-    param_2 = 0xff;
+    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0xff;
     if (bVar2 != 0xff) {
-      param_2 = bVar2 + 1;
+      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 + 1;
     }
     break;
   case 4:
     bVar2 = *param_3;
-    param_2 = 0;
+    (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = 0;
     if (bVar2 != 0) {
-      param_2 = bVar2 - 1;
+      (*(unsigned char *)((unsigned char *)&(param_2) + 3)) = bVar2 - 1;
     }
     break;
   case 5:
-    *param_3 = *param_3 & ~param_4 | param_4 & ~*param_3;
+    *param_3 = *param_3 & ~(byte)param_4 | (byte)param_4 & ~*param_3;
     return;
   case 6:
     bVar2 = *param_3;
@@ -2777,21 +2811,21 @@ int _InterpreterRasterOpMachineUpdateStencilBuffer(param_1, param_2, param_3, pa
     bVar2 = *param_3;
     bVar1 = bVar2 - 1;
 LAB_97bd7c90:
-    *param_3 = bVar2 & ~param_4 | bVar1 & param_4;
+    *param_3 = bVar2 & ~(byte)param_4 | bVar1 & (byte)param_4;
     return;
   default:
     return;
   }
-  bVar2 = bVar2 & ~param_4;
+  bVar2 = bVar2 & ~(byte)param_4;
 LAB_97bd7c34:
-  bVar2 = bVar2 | param_2 & param_4;
+  bVar2 = bVar2 | (byte)param_2 & (byte)param_4;
 LAB_97bd7c38:
   *param_3 = bVar2;
   return;
 }
 
-/* _glpRTCAddAChunk @ 0x97bd7cbc (48 bytes) */
-int _glpRTCAddAChunk(param_1, param_2)
+/* _glpRTCAddAChunk_97bd7cbc @ 0x97bd7cbc (48 bytes) */
+int _glpRTCAddAChunk_97bd7cbc(param_1, param_2)
   int *param_1;
   int *param_2;
 {
@@ -2955,7 +2989,7 @@ int _PPCRuntimeCompilerAttachEmulatorContext(param_1, param_2)
   undefined4 param_2;
 {
   *(undefined4 *)(param_1 + 0xe20) = param_2;
-  _PPCRasterOpMachineAttachEmulatorContext(param_1 + 0xe14);
+  _PPCRasterOpMachineAttachEmulatorContext(param_1 + 0xe14,param_2);
   return;
 }
 
@@ -2978,12 +3012,15 @@ int _PPCRuntimeCompilerSetOptionFlags(param_1, param_2)
 }
 
 /* _PPCRuntimeCompilerCalculateIndirectAddress @ 0x97bd7f84 (224 bytes) */
-int _PPCRuntimeCompilerCalculateIndirectAddress(param_1, param_2, param_3, param_4, param_5)
+int _PPCRuntimeCompilerCalculateIndirectAddress(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
   int param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
+  undefined4 param_8;
 {
   ushort uVar1;
   uint *puVar2;
@@ -3018,16 +3055,15 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_8;
 {
   byte bVar1;
-  int iVar2;
-  uint *puVar3;
-  int iVar4;
-  uint uVar5;
-  undefined4 *puVar6;
-  uint *puVar7;
+  uint *puVar2;
+  int iVar3;
+  uint uVar4;
+  undefined4 *puVar5;
+  uint *puVar6;
+  uint uVar7;
   uint uVar8;
-  uint uVar9;
-  int iVar10;
-  int *piVar11;
+  int iVar9;
+  int *piVar10;
   uint *puStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
@@ -3037,15 +3073,12 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   char cStack00000033;
   undefined4 uStack00000034;
   int in_stack_00000038;
-  undefined4 in_stack_0000003c;
-  undefined4 in_stack_00000040;
   int in_stack_00000044;
   undefined1 auStack_40 [28];
   
-  iVar2 = in_stack_00000044;
-  uVar8 = 0;
+  uVar7 = 0;
   uStack00000028 = param_5;
-  iVar10 = 0;
+  iVar9 = 0;
   uStack0000002c = param_6;
   (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) = param_7;
   uStack00000034 = param_8;
@@ -3053,181 +3086,183 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
     param_2 = param_2 + 0x20;
   }
   param_1[param_2 * 0xe + 0xc] = param_1[0x391];
-  uVar5 = param_1[0x394];
+  uVar4 = param_1[0x394];
   param_1[0x391] = param_1[0x391] + 1;
   puStack00000020 = param_3;
   uStack00000024 = param_4;
-  if ((uVar5 & 4) != 0) {
-    uVar5 = param_2;
+  if ((uVar4 & 4) != 0) {
+    uVar4 = param_2;
     if (param_1[0x393] != 0) {
-      uVar5 = param_2 - 0x20;
+      uVar4 = param_2 - 0x20;
     }
-    iVar4 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar5,param_3,param_4,param_5,param_6,param_7,param_8);
-    if (iVar4 == 1) {
+    iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar4,param_3,param_4,param_5,param_6,param_7,param_8);
+    if (iVar3 == 1) {
       return;
     }
-    uVar5 = param_1[0x394];
+    uVar4 = param_1[0x394];
   }
   if (param_1[0x393] == 0) {
-    if ((uVar5 & 4) != 0) {
-      uVar8 = 0;
-      piVar11 = param_1;
+    if ((uVar4 & 4) != 0) {
+      uVar7 = 0;
+      piVar10 = param_1;
       do {
-        if ((*piVar11 == 0) &&
-           (iVar10 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar8,puStack00000020,uStack00000024,uStack00000028,
-                                uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034), iVar10 == 1)) {
-          if (uVar8 != param_2) {
-            puVar3 = (uint *)param_1[0x38c];
-            *puVar3 = param_2 << 0x15 | uVar8 << 0xb | 0xfc000090;
-            param_1[0x38c] = (int)(puVar3 + 1);
+        if ((*piVar10 == 0) &&
+           (iVar9 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar7,puStack00000020,uStack00000024,uStack00000028,
+                               uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034), iVar9 == 1)) {
+          if (uVar7 != param_2) {
+            puVar2 = (uint *)param_1[0x38c];
+            *puVar2 = param_2 << 0x15 | uVar7 << 0xb | 0xfc000090;
+            param_1[0x38c] = (int)(puVar2 + 1);
             ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
                        (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034);
-            piVar11[0xc] = param_1[0x391];
+            piVar10[0xc] = param_1[0x391];
             goto LAB_97bd8938;
           }
-          if (*(char *)((int)piVar11 + 0x1a) == cStack00000032) {
+          if (*(char *)((int)piVar10 + 0x1a) == cStack00000032) {
             return;
           }
         }
-        uVar8 = uVar8 + 1;
-        piVar11 = piVar11 + 0xe;
-      } while (uVar8 < 0x20);
+        uVar7 = uVar7 + 1;
+        piVar10 = piVar10 + 0xe;
+      } while (uVar7 < 0x20);
     }
     if (cStack00000033 == '\0') {
       if (((*(int *)(param_1[0x389] + 0x38) == 0x8804) ||
           (*(int *)(param_1[0x389] + 0x38) == 0x8b30)) && (uStack00000030 == 2)) {
-        puVar7 = (uint *)param_1[0x38c];
-        *puVar7 = puStack00000020[*(byte *)((int)&STACKARG(0x28) + iVar2)] & 0xffff | 0xc10d0000;
-        bVar1 = *(byte *)((int)&STACKARG(0x28) + iVar2);
-        param_1[0x38c] = (int)(puVar7 + 1);
-        uVar8 = puStack00000020[bVar1];
-        puVar3 = puVar7 + 3;
-        puVar7[2] = param_2 << 0x15 | 0xec09433a;
-        puVar7[1] = uVar8 & 0xffff | 0xc12c0000;
+        puVar6 = (uint *)param_1[0x38c];
+        *puVar6 = puStack00000020[*(byte *)((int)&STACKARG(0x28) + in_stack_00000044)] & 0xffff |
+                  0xc10d0000;
+        bVar1 = *(byte *)((int)&STACKARG(0x28) + in_stack_00000044);
+        param_1[0x38c] = (int)(puVar6 + 1);
+        uVar7 = puStack00000020[bVar1];
+        puVar2 = puVar6 + 3;
+        puVar6[2] = param_2 << 0x15 | 0xec09433a;
+        puVar6[1] = uVar7 & 0xffff | 0xc12c0000;
       }
       else {
-        puVar3 = (uint *)param_1[0x38c];
-        *puVar3 = param_2 << 0x15 | (uStack00000030 + 5) * 0x10000 |
-                  puStack00000020[*(byte *)((int)&STACKARG(0x28) + iVar2)] & 0xffff | 0xc0000000;
-        puVar3 = puVar3 + 1;
+        puVar2 = (uint *)param_1[0x38c];
+        *puVar2 = param_2 << 0x15 | (uStack00000030 + 5) * 0x10000 |
+                  puStack00000020[*(byte *)((int)&STACKARG(0x28) + in_stack_00000044)] & 0xffff |
+                  0xc0000000;
+        puVar2 = puVar2 + 1;
       }
-      param_1[0x38c] = (int)puVar3;
+      param_1[0x38c] = (int)puVar2;
     }
     else {
       ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
                  (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,in_stack_00000038);
-      puVar3 = (uint *)param_1[0x38c];
-      *puVar3 = (uint)*(byte *)((int)&STACKARG(0x28) + iVar2) << 2 | 0x82ef0000;
-      puVar3[1] = param_2 << 0x15 | (((*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
-      param_1[0x38c] = (int)(puVar3 + 2);
+      puVar2 = (uint *)param_1[0x38c];
+      *puVar2 = (uint)*(byte *)((int)&STACKARG(0x28) + in_stack_00000044) << 2 | 0x82ef0000;
+      puVar2[1] = param_2 << 0x15 | (((*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
+      param_1[0x38c] = (int)(puVar2 + 2);
     }
     ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
                (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034);
     return;
   }
-  if ((uVar5 & 4) != 0) {
-    piVar11 = param_1 + 0x1c0;
-    uVar5 = 0;
+  if ((uVar4 & 4) != 0) {
+    piVar10 = param_1 + 0x1c0;
+    uVar4 = 0;
     do {
-      uVar9 = uVar5;
-      iVar2 = *piVar11;
-      piVar11 = piVar11 + 0xe;
-      if (iVar2 == 0) {
-        iVar2 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar9,puStack00000020,uStack00000024,uStack00000028,
+      uVar8 = uVar4;
+      iVar3 = *piVar10;
+      piVar10 = piVar10 + 0xe;
+      if (iVar3 == 0) {
+        iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar8,puStack00000020,uStack00000024,uStack00000028,
                            uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034);
-        if ((iVar2 == 3) && (uStack00000030 == 0)) {
-          iVar10 = 3;
-          uVar8 = uVar9;
+        if ((iVar3 == 3) && (uStack00000030 == 0)) {
+          iVar9 = 3;
+          uVar7 = uVar8;
         }
-        else if (iVar2 - 1U < 2) break;
+        else if (iVar3 - 1U < 2) break;
       }
-      uVar5 = uVar9 + 1;
-      uVar9 = uVar8;
-      iVar2 = iVar10;
-    } while (uVar5 < 0x20);
-    if (iVar2 != 0) {
-      iVar10 = param_2 - 0x20;
-      puVar3 = (uint *)param_1[0x38c];
-      *puVar3 = iVar10 * 0x200000 | uVar9 << 0x10 | uVar9 << 0xb | 0x10000484;
-      param_1[0x38c] = (int)(puVar3 + 1);
-      iVar2 = _memcmp(param_1 + uVar9 * 0xe + 0x1c4,&STACKARG(0x28),4);
-      if (iVar2 != 0) {
+      uVar4 = uVar8 + 1;
+      uVar8 = uVar7;
+      iVar3 = iVar9;
+    } while (uVar4 < 0x20);
+    if (iVar3 != 0) {
+      iVar3 = param_2 - 0x20;
+      puVar2 = (uint *)param_1[0x38c];
+      *puVar2 = iVar3 * 0x200000 | uVar8 << 0x10 | uVar8 << 0xb | 0x10000484;
+      param_1[0x38c] = (int)(puVar2 + 1);
+      iVar9 = _memcmp(param_1 + uVar8 * 0xe + 0x1c4,&STACKARG(0x28),4);
+      if (iVar9 != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,param_1 + uVar9 * 0xe + 0x1c4,&STACKARG(0x28));
-        _PPCRuntimeCompilerSwizzleRegisterAV(param_1,iVar10,auStack_40);
+                  (auStack_40,param_1 + uVar8 * 0xe + 0x1c4,&STACKARG(0x28));
+        _PPCRuntimeCompilerSwizzleRegisterAV(param_1,iVar3,auStack_40);
       }
-      ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,iVar10,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
+      ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,iVar3,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
                  (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034);
-      param_1[uVar9 * 0xe + 0x1cc] = param_1[0x391];
+      param_1[uVar8 * 0xe + 0x1cc] = param_1[0x391];
 LAB_97bd8938:
       param_1[0x391] = param_1[0x391] + 1;
       return;
     }
   }
-  puVar3 = puStack00000020;
+  puVar2 = puStack00000020;
   if (((*(int *)(param_1[0x389] + 0x38) == 0x8804) || (*(int *)(param_1[0x389] + 0x38) == 0x8b30))
      && (uStack00000030 == 2)) {
     if ((param_1[0x394] & 8U) == 0) {
-      uVar8 = *puStack00000020;
+      uVar7 = *puStack00000020;
     }
     else {
-      uVar8 = 0;
+      uVar7 = 0;
       if (*puStack00000020 != 0) {
-        puVar3 = (uint *)param_1[0x38c];
-        *puVar3 = *puStack00000020 & 0xffff | 0x39e00000;
-        puVar3[1] = 0x10c0728c;
-        uVar8 = (param_2 - 0x20) * 0x200000;
-        puVar3[2] = 0x7c6d78ce;
-        puVar3[3] = 0x10a3728c;
-        puVar3[4] = 0x7c8c78ce;
-        puVar3[5] = uVar8 | 0x100419ae;
-        puVar3[6] = uVar8 | (param_2 - 0x20) * 0x10000 | 0x1000396e;
-        param_1[0x38c] = (int)(puVar3 + 7);
+        puVar2 = (uint *)param_1[0x38c];
+        *puVar2 = *puStack00000020 & 0xffff | 0x39e00000;
+        puVar2[1] = 0x10c0728c;
+        uVar7 = (param_2 - 0x20) * 0x200000;
+        puVar2[2] = 0x7c6d78ce;
+        puVar2[3] = 0x10a3728c;
+        puVar2[4] = 0x7c8c78ce;
+        puVar2[5] = uVar7 | 0x100419ae;
+        puVar2[6] = uVar7 | (param_2 - 0x20) * 0x10000 | 0x1000396e;
+        param_1[0x38c] = (int)(puVar2 + 7);
         goto LAB_97bd87b4;
       }
     }
-    puVar3 = (uint *)param_1[0x38c];
-    *puVar3 = uVar8 & 0xffff | 0x39e00000;
-    puVar3[1] = 0x7c6d78ce;
-    puVar3[2] = 0x7c8c78ce;
-    puVar3[3] = 0x10c0728c;
-    puVar3[4] = (param_2 - 0x20) * 0x200000 | 0x100419ae;
-    param_1[0x38c] = (int)(puVar3 + 5);
+    puVar2 = (uint *)param_1[0x38c];
+    *puVar2 = uVar7 & 0xffff | 0x39e00000;
+    puVar2[1] = 0x7c6d78ce;
+    puVar2[2] = 0x7c8c78ce;
+    puVar2[3] = 0x10c0728c;
+    puVar2[4] = (param_2 - 0x20) * 0x200000 | 0x100419ae;
+    param_1[0x38c] = (int)(puVar2 + 5);
     goto LAB_97bd87b4;
   }
   if (cStack00000033 == '\0') {
-    uVar8 = *puStack00000020;
-    if (((((uVar8 & 0xf) == 0) && (puStack00000020[1] == uVar8 + 4)) &&
-        (puStack00000020[2] == uVar8 + 8)) && (puStack00000020[3] == uVar8 + 0xc)) {
-      if (uVar8 != 0) {
-        puVar3 = (uint *)param_1[0x38c];
-        *puVar3 = uVar8 & 0xffff | 0x39e00000;
-        uVar8 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x10000 | 0x7c0078ce;
+    uVar7 = *puStack00000020;
+    if (((((uVar7 & 0xf) == 0) && (puStack00000020[1] == uVar7 + 4)) &&
+        (puStack00000020[2] == uVar7 + 8)) && (puStack00000020[3] == uVar7 + 0xc)) {
+      if (uVar7 != 0) {
+        puVar2 = (uint *)param_1[0x38c];
+        *puVar2 = uVar7 & 0xffff | 0x39e00000;
+        uVar7 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x10000 | 0x7c0078ce;
         goto LAB_97bd8640;
       }
-      puVar3 = (uint *)param_1[0x38c];
-      *puVar3 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x800 | 0x7c0000ce;
-      param_1[0x38c] = (int)(puVar3 + 1);
+      puVar2 = (uint *)param_1[0x38c];
+      *puVar2 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x800 | 0x7c0000ce;
+      param_1[0x38c] = (int)(puVar2 + 1);
     }
     else {
-      puVar3 = (uint *)param_1[0x38c];
-      *puVar3 = (uStack00000030 + 5) * 0x10000 | uVar8 & 0xffff | 0xc0000000;
-      param_1[0x38c] = (int)(puVar3 + 1);
-      puVar3[1] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 6) |
+      puVar2 = (uint *)param_1[0x38c];
+      *puVar2 = (uStack00000030 + 5) * 0x10000 | uVar7 & 0xffff | 0xc0000000;
+      param_1[0x38c] = (int)(puVar2 + 1);
+      puVar2[1] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 6) |
                   0xc0200000;
-      param_1[0x38c] = (int)(puVar3 + 2);
-      puVar3[2] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 10) |
+      param_1[0x38c] = (int)(puVar2 + 2);
+      puVar2[2] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 10) |
                   0xc0400000;
-      param_1[0x38c] = (int)(puVar3 + 3);
-      puVar3[3] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 0xe) |
+      param_1[0x38c] = (int)(puVar2 + 3);
+      puVar2[3] = (uStack00000030 + 5) * 0x10000 | (uint)*(ushort *)((int)puStack00000020 + 0xe) |
                   0xc0600000;
-      puVar3[4] = 0xd0030200;
-      puVar3[5] = 0xd0230204;
-      puVar3[6] = 0xd0430208;
-      puVar3[7] = 0xd063020c;
-      puVar3[8] = 0x39e00200;
-      puVar3[9] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
-      param_1[0x38c] = (int)(puVar3 + 10);
+      puVar2[4] = 0xd0030200;
+      puVar2[5] = 0xd0230204;
+      puVar2[6] = 0xd0430208;
+      puVar2[7] = 0xd063020c;
+      puVar2[8] = 0x39e00200;
+      puVar2[9] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
+      param_1[0x38c] = (int)(puVar2 + 10);
     }
   }
   else {
@@ -3236,48 +3271,48 @@ LAB_97bd8938:
     }
     ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),
                uStack00000034,in_stack_00000038);
-    uVar8 = *puVar3;
-    if ((((uVar8 & 0xf) == 0) && (puVar3[1] == uVar8 + 4)) &&
-       ((puVar3[2] == uVar8 + 8 && (puVar3[3] == uVar8 + 0xc)))) {
-      puVar3 = (uint *)param_1[0x38c];
-      *puVar3 = 0x82ef0000;
-      uVar8 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x10000 | 0x7c00b8ce;
+    uVar7 = *puVar2;
+    if ((((uVar7 & 0xf) == 0) && (puVar2[1] == uVar7 + 4)) &&
+       ((puVar2[2] == uVar7 + 8 && (puVar2[3] == uVar7 + 0xc)))) {
+      puVar2 = (uint *)param_1[0x38c];
+      *puVar2 = 0x82ef0000;
+      uVar7 = (param_2 - 0x20) * 0x200000 | (uStack00000030 + 5) * 0x10000 | 0x7c00b8ce;
 LAB_97bd8640:
-      puVar3[1] = uVar8;
-      param_1[0x38c] = (int)(puVar3 + 2);
+      puVar2[1] = uVar7;
+      param_1[0x38c] = (int)(puVar2 + 2);
     }
     else {
-      puVar6 = (undefined4 *)param_1[0x38c];
-      *puVar6 = 0x82ef0000;
-      puVar6[1] = (uStack00000030 + 5) * 0x10000 | 0x7c00bc2e;
-      puVar6[2] = 0x82ef0004;
-      puVar6[3] = (uStack00000030 + 5) * 0x10000 | 0x7c20bc2e;
-      puVar6[4] = 0x82ef0008;
-      puVar6[5] = (uStack00000030 + 5) * 0x10000 | 0x7c40bc2e;
-      puVar6[6] = 0x82ef000c;
-      puVar6[7] = (uStack00000030 + 5) * 0x10000 | 0x7c60bc2e;
-      puVar6[8] = 0xd0030200;
-      puVar6[9] = 0xd0230204;
-      puVar6[10] = 0xd0430208;
-      puVar6[0xb] = 0xd063020c;
-      puVar6[0xc] = 0x39e00200;
-      puVar6[0xd] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
-      param_1[0x38c] = (int)(puVar6 + 0xe);
+      puVar5 = (undefined4 *)param_1[0x38c];
+      *puVar5 = 0x82ef0000;
+      puVar5[1] = (uStack00000030 + 5) * 0x10000 | 0x7c00bc2e;
+      puVar5[2] = 0x82ef0004;
+      puVar5[3] = (uStack00000030 + 5) * 0x10000 | 0x7c20bc2e;
+      puVar5[4] = 0x82ef0008;
+      puVar5[5] = (uStack00000030 + 5) * 0x10000 | 0x7c40bc2e;
+      puVar5[6] = 0x82ef000c;
+      puVar5[7] = (uStack00000030 + 5) * 0x10000 | 0x7c60bc2e;
+      puVar5[8] = 0xd0030200;
+      puVar5[9] = 0xd0230204;
+      puVar5[10] = 0xd0430208;
+      puVar5[0xb] = 0xd063020c;
+      puVar5[0xc] = 0x39e00200;
+      puVar5[0xd] = (param_2 - 0x20) * 0x200000 | 0x7c0378ce;
+      param_1[0x38c] = (int)(puVar5 + 0xe);
     }
   }
   if (in_stack_00000038 - 3U < 2) {
-    puVar3 = (uint *)param_1[0x38c];
-    *puVar3 = (param_2 - 0x20) * 0x200000 | (param_2 - 0x20) * 0x800 | 0x1000034a;
-    param_1[0x38c] = (int)(puVar3 + 1);
+    puVar2 = (uint *)param_1[0x38c];
+    *puVar2 = (param_2 - 0x20) * 0x200000 | (param_2 - 0x20) * 0x800 | 0x1000034a;
+    param_1[0x38c] = (int)(puVar2 + 1);
   }
 LAB_97bd87b4:
   _PPCRuntimeCompilerSwizzleRegisterAV(param_1,param_2 - 0x20,&STACKARG(0x28));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2 - 0x20,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
              (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034);
-  iVar2 = _PPCRuntimeCompilerFindVariableInfo
+  iVar9 = _PPCRuntimeCompilerFindVariableInfo
                     (param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
                      (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,in_stack_00000038);
-  *(undefined4 *)(iVar2 + 4) = 0;
+  *(undefined4 *)(iVar9 + 4) = 0;
   return;
 }
 
@@ -3294,13 +3329,13 @@ int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
   undefined4 *puVar6;
   uint uVar7;
   uint *puVar8;
-  int iVar9;
-  int *piVar10;
-  uint uVar11;
-  int *piVar12;
-  uint uVar13;
-  int iVar14;
-  int *piVar15;
+  int *piVar9;
+  int iVar10;
+  int *piVar11;
+  uint uVar12;
+  int *piVar13;
+  uint uVar14;
+  int iVar15;
   int iVar16;
   uint uVar17;
   int iVar18;
@@ -3314,54 +3349,54 @@ int _PPCRuntimeCompilerBackupRegister(param_1, param_2)
   undefined4 local_4c;
   undefined4 local_48;
   
-  iVar14 = param_1[0x393];
+  iVar15 = param_1[0x393];
   uVar17 = 0;
   iVar16 = 0;
   bVar3 = false;
-  if (iVar14 != 0) {
+  if (iVar15 != 0) {
     param_2 = param_2 + 0x20;
   }
   iVar18 = param_2 * 0x38;
   if (param_1[param_2 * 0xe] == 0) {
     uVar19 = 0;
-    piVar10 = param_1;
+    piVar11 = param_1;
     do {
-      if (iVar14 == 0) {
-        if (((uVar19 != param_2) && (*piVar10 == 0)) && (piVar10[0xb] != 0)) {
-          iVar14 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
+      if (iVar15 == 0) {
+        if (((uVar19 != param_2) && (*piVar11 == 0)) && (piVar11[0xb] != 0)) {
+          iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
                               param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
                               param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7]);
-          if (iVar14 == 1) {
+          if (iVar15 == 1) {
             return;
           }
           goto LAB_97bd8c50;
         }
       }
-      else if (((uVar19 != param_2 - 0x20) && (piVar10[0x1c0] == 0)) && (piVar10[0x1cb] != 0)) {
-        iVar14 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
+      else if (((uVar19 != param_2 - 0x20) && (piVar11[0x1c0] == 0)) && (piVar11[0x1cb] != 0)) {
+        iVar15 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar19,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
                             param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
                             param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7]);
-        if (iVar14 - 1U < 2) {
+        if (iVar15 - 1U < 2) {
           return;
         }
 LAB_97bd8c50:
-        iVar14 = param_1[0x393];
+        iVar15 = param_1[0x393];
       }
       uVar19 = uVar19 + 1;
-      piVar10 = piVar10 + 0xe;
+      piVar11 = piVar11 + 0xe;
     } while (uVar19 < 0x20);
-    iVar9 = 0;
-    if (iVar14 != 0) {
+    iVar10 = 0;
+    if (iVar15 != 0) {
       uVar19 = param_2 - 0x20;
       uVar20 = 0;
-      iVar14 = uVar19 * 0x38 + 0x708;
-      piVar10 = param_1;
+      iVar15 = uVar19 * 0x38 + 0x708;
+      piVar11 = param_1;
       do {
-        if (((uVar20 != uVar19) && (piVar10[0x1c0] == 0)) &&
-           ((piVar10[0x1cb] != 0 &&
-            ((iVar9 = _memcmp((void *)piVar10[0x1c2],(void *)param_1[param_2 * 0xe + 2],0x10),
-             iVar9 == 0 && (*(short *)(piVar10 + 0x1c6) == *(short *)(param_1 + param_2 * 0xe + 6)))
-            )))) {
+        if (((uVar20 != uVar19) && (piVar11[0x1c0] == 0)) &&
+           ((piVar11[0x1cb] != 0 &&
+            ((iVar10 = _memcmp((void *)piVar11[0x1c2],(void *)param_1[param_2 * 0xe + 2],0x10),
+             iVar10 == 0 && (*(short *)(piVar11 + 0x1c6) == *(short *)(param_1 + param_2 * 0xe + 6))
+             ))))) {
           local_4c = 0x10203;
           if (((uint)param_1[uVar19 * 0xe + 0x1c4] >> 8 !=
                (param_1[uVar19 * 0xe + 0x1c4] & 0xffffffU)) &&
@@ -3377,42 +3412,42 @@ LAB_97bd8c50:
                       (&local_50,param_1 + uVar19 * 0xe + 0x1c4,&local_4c);
             _PPCRuntimeCompilerSwizzleRegisterAV(param_1,uVar19,&local_50);
             local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)
-                                                   ((int)param_1 + (uint)local_50 + iVar14 + 8),
+                                                   ((int)param_1 + (uint)local_50 + iVar15 + 8),
                                                   *(undefined1 *)
-                                                   ((int)param_1 + (uint)local_4f + iVar14 + 8)),
-                                         *(undefined1 *)((int)param_1 + (uint)local_4e + iVar14 + 8)
+                                                   ((int)param_1 + (uint)local_4f + iVar15 + 8)),
+                                         *(undefined1 *)((int)param_1 + (uint)local_4e + iVar15 + 8)
                                         ),
-                                *(undefined1 *)((int)param_1 + (uint)local_4d + iVar14 + 8));
+                                *(undefined1 *)((int)param_1 + (uint)local_4d + iVar15 + 8));
             param_1[uVar19 * 0xe + 0x1c4] = local_48;
           }
-          if (((uint)piVar10[0x1c4] >> 8 != (piVar10[0x1c4] & 0xffffffU)) &&
-             (((((*(char *)(piVar10 + 0x1c4) != '\0' && (*(char *)(piVar10 + 0x1c4) != -1)) ||
-                ((*(char *)((int)piVar10 + 0x711) != '\x01' &&
-                 (*(char *)((int)piVar10 + 0x711) != -1)))) ||
-               ((*(char *)((int)piVar10 + 0x712) != '\x02' &&
-                (*(char *)((int)piVar10 + 0x712) != -1)))) ||
-              ((*(char *)((int)piVar10 + 0x713) != '\x03' && (*(char *)((int)piVar10 + 0x713) != -1)
+          if (((uint)piVar11[0x1c4] >> 8 != (piVar11[0x1c4] & 0xffffffU)) &&
+             (((((*(char *)(piVar11 + 0x1c4) != '\0' && (*(char *)(piVar11 + 0x1c4) != -1)) ||
+                ((*(char *)((int)piVar11 + 0x711) != '\x01' &&
+                 (*(char *)((int)piVar11 + 0x711) != -1)))) ||
+               ((*(char *)((int)piVar11 + 0x712) != '\x02' &&
+                (*(char *)((int)piVar11 + 0x712) != -1)))) ||
+              ((*(char *)((int)piVar11 + 0x713) != '\x03' && (*(char *)((int)piVar11 + 0x713) != -1)
                ))))) {
-            _PPCRuntimeCompilerBuildTransferSwizzle(&local_50,piVar10 + 0x1c4,&local_4c);
+            _PPCRuntimeCompilerBuildTransferSwizzle(&local_50,piVar11 + 0x1c4,&local_4c);
             _PPCRuntimeCompilerSwizzleRegisterAV(param_1,uVar20,&local_50);
-            local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)piVar10 + local_50 + 0x710),
-                                                  *(undefined1 *)((int)piVar10 + local_4f + 0x710)),
-                                         *(undefined1 *)((int)piVar10 + local_4e + 0x710)),
-                                *(undefined1 *)((int)piVar10 + local_4d + 0x710));
-            piVar10[0x1c4] = local_48;
+            local_48 = CONCAT31(CONCAT21(CONCAT11(*(undefined1 *)((int)piVar11 + local_50 + 0x710),
+                                                  *(undefined1 *)((int)piVar11 + local_4f + 0x710)),
+                                         *(undefined1 *)((int)piVar11 + local_4e + 0x710)),
+                                *(undefined1 *)((int)piVar11 + local_4d + 0x710));
+            piVar11[0x1c4] = local_48;
           }
           local_60[3] = 0;
           iVar16 = 4;
           local_60[0] = 0;
           local_60[1] = 0;
-          piVar12 = local_60;
+          piVar13 = local_60;
           local_60[2] = 0;
           pbVar5 = (byte *)(param_1 + uVar19 * 0xe + 0x1c4);
           do {
             bVar2 = *pbVar5;
             pbVar5 = pbVar5 + 1;
             if (bVar2 < 4) {
-              piVar12[bVar2] = 1;
+              piVar13[bVar2] = 1;
             }
             iVar16 = iVar16 + -1;
           } while (iVar16 != 0);
@@ -3448,17 +3483,17 @@ LAB_97bd8c50:
             param_1[0x38c] = (int)(puVar6 + 2);
             uVar17 = 0;
             do {
-              uVar11 = uVar17 + 1;
-              if (piVar12[uVar17] != 0) {
-                uVar13 = 3 - uVar17;
-                if (uVar11 < 4) {
-                  piVar15 = piVar12 + uVar11;
-                  uVar7 = uVar11;
+              uVar12 = uVar17 + 1;
+              if (piVar13[uVar17] != 0) {
+                uVar14 = 3 - uVar17;
+                if (uVar12 < 4) {
+                  piVar9 = piVar13 + uVar12;
+                  uVar7 = uVar12;
                   do {
-                    iVar16 = *piVar15;
-                    piVar15 = piVar15 + 1;
+                    iVar16 = *piVar9;
+                    piVar9 = piVar9 + 1;
                     if (iVar16 != 0) {
-                      uVar13 = (uVar7 - uVar17) - 1;
+                      uVar14 = (uVar7 - uVar17) - 1;
                       break;
                     }
                     uVar7 = uVar7 + 1;
@@ -3467,80 +3502,80 @@ LAB_97bd8c50:
                 puVar6 = (undefined4 *)param_1[0x38c];
                 *puVar6 = 0x1063212c;
                 param_1[0x38c] = (int)(puVar6 + 1);
-                if (uVar13 != 0) {
-                  puVar6[1] = (uVar13 & 3) << 8 | 0x1063482c;
+                if (uVar14 != 0) {
+                  puVar6[1] = (uVar14 & 3) << 8 | 0x1063482c;
                   param_1[0x38c] = (int)(puVar6 + 2);
                 }
               }
-              uVar17 = uVar11;
-            } while (uVar11 < 4);
+              uVar17 = uVar12;
+            } while (uVar12 < 4);
           }
 LAB_97bd9024:
           puVar8 = (uint *)param_1[0x38c];
-          piVar10 = piVar10 + 0x1c4;
+          piVar11 = piVar11 + 0x1c4;
           *puVar8 = uVar20 << 0x15 | uVar20 << 0x10 | uVar19 * 0x800 | 0x100000ea;
           iVar16 = 4;
           param_1[0x38c] = (int)(puVar8 + 1);
-          param_1 = param_1 + uVar19 * 0xe + 0x1c4;
+          piVar9 = param_1 + uVar19 * 0xe + 0x1c4;
           do {
-            iVar14 = *piVar12;
-            piVar12 = piVar12 + 1;
-            if (iVar14 != 0) {
-              *(undefined1 *)piVar10 = *(undefined1 *)param_1;
+            iVar15 = *piVar13;
+            piVar13 = piVar13 + 1;
+            if (iVar15 != 0) {
+              *(undefined1 *)piVar11 = *(undefined1 *)piVar9;
             }
-            param_1 = (int *)((int)param_1 + 1);
-            piVar10 = (int *)((int)piVar10 + 1);
+            piVar9 = (int *)((int)piVar9 + 1);
+            piVar11 = (int *)((int)piVar11 + 1);
             iVar16 = iVar16 + -1;
           } while (iVar16 != 0);
           return;
         }
         uVar20 = uVar20 + 1;
-        piVar10 = piVar10 + 0xe;
+        piVar11 = piVar11 + 0xe;
       } while (uVar20 < 0x20);
-      iVar9 = param_1[0x393];
+      iVar10 = param_1[0x393];
     }
-    if (((iVar9 != 0) && (*(short *)(param_1 + param_2 * 0xe + 6) == 0)) &&
+    if (((iVar10 != 0) && (*(short *)(param_1 + param_2 * 0xe + 6) == 0)) &&
        ((*(char *)(param_1 + param_2 * 0xe + 4) == -1 ||
         (((*(char *)((int)param_1 + iVar18 + 0x11) == -1 ||
           (*(char *)((int)param_1 + iVar18 + 0x12) == -1)) ||
          (*(char *)((int)param_1 + iVar18 + 0x13) == -1)))))) {
-      iVar14 = _PPCRuntimeCompilerFindVariableInfo
+      iVar15 = _PPCRuntimeCompilerFindVariableInfo
                          (param_1,param_1[param_2 * 0xe + 2],param_1[param_2 * 0xe + 3],
                           param_1[param_2 * 0xe + 4],param_1[param_2 * 0xe + 5],
                           param_1[param_2 * 0xe + 6],param_1[param_2 * 0xe + 7],
                           param_1[param_2 * 0xe + 8]);
-      if (*(int *)(iVar14 + 4) != 0) {
+      if (*(int *)(iVar15 + 4) != 0) {
         ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,param_2 - 0x20);
         ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,param_2 - 0x20);
         return;
       }
-      iVar9 = param_1[0x393];
+      iVar10 = param_1[0x393];
     }
-    uVar20 = (uint)(iVar9 != 0);
+    uVar20 = (uint)(iVar10 != 0);
     uVar19 = uVar20 * 0x20;
-    if (iVar9 == 0) {
-      uVar11 = 0x20;
+    if (iVar10 == 0) {
+      uVar12 = 0x20;
     }
     else {
-      uVar11 = 0x40;
+      uVar12 = 0x40;
     }
-    if (uVar19 < uVar11) {
-      iVar14 = uVar11 + uVar20 * -0x20;
-      piVar10 = param_1 + uVar20 * 0x1c0;
+    if (uVar19 < uVar12) {
+      iVar15 = uVar12 + uVar20 * -0x20;
+      piVar11 = param_1 + uVar20 * 0x1c0;
       do {
-        if (((uVar19 != param_2) && (piVar10[0xb] != 0)) &&
-           ((iVar16 <= param_1[0x391] - piVar10[0xc] && (piVar10[0xd] == 0)))) {
+        if (((uVar19 != param_2) && (piVar11[0xb] != 0)) &&
+           ((iVar16 <= param_1[0x391] - piVar11[0xc] && (piVar11[0xd] == 0)))) {
           bVar3 = true;
-          iVar16 = param_1[0x391] - piVar10[0xc];
+          iVar16 = param_1[0x391] - piVar11[0xc];
           uVar17 = uVar19;
         }
         uVar19 = uVar19 + 1;
-        piVar10 = piVar10 + 0xe;
-        iVar14 = iVar14 + -1;
-      } while (iVar14 != 0);
+        piVar11 = piVar11 + 0xe;
+        iVar15 = iVar15 + -1;
+      } while (iVar15 != 0);
       if (bVar3) {
         if ((*(short *)(param_1 + uVar17 * 0xe + 6) == 0) && (param_1[uVar17 * 0xe] == 0)) {
-          if (iVar9 == 0) {
+          if (iVar10 == 0) {
             ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,uVar17);
           }
           else {
@@ -3552,9 +3587,9 @@ LAB_97bd9024:
                                 param_1[uVar17 * 0xe + 8]);
             *(undefined4 *)(iVar16 + 4) = 1;
           }
-          iVar9 = param_1[0x393];
+          iVar10 = param_1[0x393];
         }
-        if (iVar9 == 0) {
+        if (iVar10 == 0) {
           iVar16 = param_1[param_2 * 0xe + 7];
           uVar19 = uVar17;
         }
@@ -3580,7 +3615,7 @@ LAB_97bd9024:
       }
     }
     if (*(short *)(param_1 + param_2 * 0xe + 6) == 0) {
-      if (iVar9 != 0) {
+      if (iVar10 != 0) {
         param_2 = param_2 - 0x20;
       }
       ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(param_1,param_2);
@@ -3845,9 +3880,6 @@ int _PPCRuntimeCompilerDirtyRegistersWithData(param_1, param_2, param_3, param_4
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
-  undefined4 in_stack_00000038;
-  undefined4 in_stack_0000003c;
-  undefined4 in_stack_00000040;
   
   uVar6 = 0;
   uStack0000001c = param_2;

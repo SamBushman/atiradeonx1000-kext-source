@@ -1,3 +1,4 @@
 SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
-LOWCOUNT: 0 functions where stock calls some callee more often than the recompile (info)
-52 functions compared, 0 with functions whose callee SETS differ (28 skipped; 0 more differ only through shared tail code)
+LOWCOUNT: 1 functions where stock calls some callee more often than the recompile (info)
+52 functions compared, 1 with functions whose callee SETS differ (28 skipped; 0 more differ only through shared tail code)
+1 _radeonFill STOCK-ONLY {'FUN_0000c960': 1} OURS-ONLY {}

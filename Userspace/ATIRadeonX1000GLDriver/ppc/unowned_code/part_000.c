@@ -880,7 +880,7 @@ LAB_0001f1ac:
           *(undefined4 *)(unaff_r30 + 0x2494) = 0;
         }
         else {
-          puVar9 = (uint *)FUN_0002c180(unaff_r26);
+          puVar9 = (uint *)FUN_0002c180(unaff_r26,puVar9);
         }
         piVar21 = puVar24 + 7;
         puVar24[6] = (int)puVar9 + (4 - (int)puVar24) >> 2;
@@ -1438,7 +1438,7 @@ LAB_0001f1ac:
           *(undefined4 *)(unaff_r30 + 0x2494) = 0;
         }
         else {
-          puVar9 = (uint *)FUN_0002c180(unaff_r26);
+          puVar9 = (uint *)FUN_0002c180(unaff_r26,puVar9);
         }
         piVar21 = puVar24 + 7;
         puVar24[6] = (int)puVar9 + (4 - (int)puVar24) >> 2;
@@ -1996,7 +1996,7 @@ LAB_0001f1ac:
           *(undefined4 *)(unaff_r30 + 0x2494) = 0;
         }
         else {
-          puVar9 = (uint *)FUN_0002c180(unaff_r26);
+          puVar9 = (uint *)FUN_0002c180(unaff_r26,puVar9);
         }
         piVar21 = puVar24 + 7;
         puVar24[6] = (int)puVar9 + (4 - (int)puVar24) >> 2;
@@ -2906,11 +2906,17 @@ LAB_00041170:
 }
 
 /* orph_4c544 @ 0x4c544 (24 bytes) */
-int orph_4c544(param_1)
+int orph_4c544(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   *(undefined4 *)(param_1 + 0x1e68) = 0;
-  FUN_0004a860();
+  FUN_0004a860(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -3071,7 +3077,7 @@ int orph_7a190(param_1, param_2)
   return;
 }
 
-/* orph_c5538 @ 0xc5538 (52 bytes) */
+/* orph_c5538 @ 0xc5538 (44 bytes) */
 int orph_c5538(param_1)
   uint param_1;
 {
@@ -3086,7 +3092,7 @@ int orph_c5538(param_1)
   return;
 }
 
-/* orph_c5540 @ 0xc5540 (52 bytes) */
+/* orph_c5540 @ 0xc5540 (44 bytes) */
 int orph_c5540(param_1)
   uint param_1;
 {
@@ -3101,7 +3107,7 @@ int orph_c5540(param_1)
   return;
 }
 
-/* orph_c5548 @ 0xc5548 (52 bytes) */
+/* orph_c5548 @ 0xc5548 (44 bytes) */
 int orph_c5548(param_1)
   uint param_1;
 {
@@ -3116,7 +3122,7 @@ int orph_c5548(param_1)
   return;
 }
 
-/* orph_c5550 @ 0xc5550 (60 bytes) */
+/* orph_c5550 @ 0xc5550 (52 bytes) */
 int orph_c5550(param_1)
   uint param_1;
 {
@@ -3131,7 +3137,7 @@ int orph_c5550(param_1)
   return;
 }
 
-/* orph_c5560 @ 0xc5560 (60 bytes) */
+/* orph_c5560 @ 0xc5560 (52 bytes) */
 int orph_c5560(param_1)
   uint param_1;
 {
@@ -3146,7 +3152,7 @@ int orph_c5560(param_1)
   return;
 }
 
-/* orph_c5570 @ 0xc5570 (76 bytes) */
+/* orph_c5570 @ 0xc5570 (68 bytes) */
 int orph_c5570(param_1)
   uint param_1;
 {

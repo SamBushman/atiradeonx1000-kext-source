@@ -1,10 +1,14 @@
 #include "decls.h"
 
 /* _glColor3us @ 0x92f2b7e4 (140 bytes) */
-int _glColor3us(param_1, param_2, param_3)
+int _glColor3us(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -23,8 +27,14 @@ int _glColor3us(param_1, param_2, param_3)
 }
 
 /* _glColor3usv @ 0x92f2b870 (124 bytes) */
-int _glColor3usv(param_1)
+int _glColor3usv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -43,11 +53,14 @@ int _glColor3usv(param_1)
 }
 
 /* _glColor4b @ 0x92f2b8ec (148 bytes) */
-int _glColor4b(param_1, param_2, param_3, param_4)
+int _glColor4b(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -66,8 +79,14 @@ int _glColor4b(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4bv @ 0x92f2b980 (124 bytes) */
-int _glColor4bv(param_1)
+int _glColor4bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -86,17 +105,12 @@ int _glColor4bv(param_1)
 }
 
 /* _glColor4d @ 0x92f2b9fc (140 bytes) */
-int _glColor4d(param_1, param_2, param_3, param_4)
-  undefined8 param_1;
-  undefined8 param_2;
-  undefined8 param_3;
-  undefined8 param_4;
+void _glColor4d(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
-  undefined8 uVar3;
   
-  uVar3 = FUN_92f27fc8();
   puVar1 = PTR__gll_cc_a2f27020;
   puVar2 = *(undefined4 **)PTR__gll_cc_a2f27020;
   if (((puVar2[0x2ac] ^ (uint)&STACKARG(0xffffff80)) & 0xfffff000) != 0) {
@@ -104,13 +118,19 @@ int _glColor4d(param_1, param_2, param_3, param_4)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x24])(uVar3,param_2,param_3,param_4,*puVar2);
+  (*(code *)puVar2[0x24])(fparam_1,fparam_2,fparam_3,fparam_4,*puVar2);
   return;
 }
 
 /* _glColor4dv @ 0x92f2ba88 (124 bytes) */
-int _glColor4dv(param_1)
+int _glColor4dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -129,8 +149,14 @@ int _glColor4dv(param_1)
 }
 
 /* _glColor4fv @ 0x92f2bb04 (124 bytes) */
-int _glColor4fv(param_1)
+int _glColor4fv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -149,11 +175,14 @@ int _glColor4fv(param_1)
 }
 
 /* _glColor4i @ 0x92f2bb80 (148 bytes) */
-int _glColor4i(param_1, param_2, param_3, param_4)
+int _glColor4i(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -172,8 +201,14 @@ int _glColor4i(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4iv @ 0x92f2bc14 (124 bytes) */
-int _glColor4iv(param_1)
+int _glColor4iv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -192,11 +227,14 @@ int _glColor4iv(param_1)
 }
 
 /* _glColor4s @ 0x92f2bc90 (148 bytes) */
-int _glColor4s(param_1, param_2, param_3, param_4)
+int _glColor4s(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -215,8 +253,14 @@ int _glColor4s(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4sv @ 0x92f2bd24 (124 bytes) */
-int _glColor4sv(param_1)
+int _glColor4sv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -235,11 +279,14 @@ int _glColor4sv(param_1)
 }
 
 /* _glColor4ub @ 0x92f2bda0 (148 bytes) */
-int _glColor4ub(param_1, param_2, param_3, param_4)
+int _glColor4ub(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -258,8 +305,14 @@ int _glColor4ub(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4ubv @ 0x92f2be34 (124 bytes) */
-int _glColor4ubv(param_1)
+int _glColor4ubv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -278,11 +331,14 @@ int _glColor4ubv(param_1)
 }
 
 /* _glColor4ui @ 0x92f2beb0 (148 bytes) */
-int _glColor4ui(param_1, param_2, param_3, param_4)
+int _glColor4ui(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -301,8 +357,14 @@ int _glColor4ui(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4uiv @ 0x92f2bf44 (124 bytes) */
-int _glColor4uiv(param_1)
+int _glColor4uiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -321,11 +383,14 @@ int _glColor4uiv(param_1)
 }
 
 /* _glColor4us @ 0x92f2bfc0 (148 bytes) */
-int _glColor4us(param_1, param_2, param_3, param_4)
+int _glColor4us(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -344,8 +409,14 @@ int _glColor4us(param_1, param_2, param_3, param_4)
 }
 
 /* _glColor4usv @ 0x92f2c054 (124 bytes) */
-int _glColor4usv(param_1)
+int _glColor4usv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -364,9 +435,14 @@ int _glColor4usv(param_1)
 }
 
 /* _glColorMaterial @ 0x92f2c0d0 (132 bytes) */
-int _glColorMaterial(param_1, param_2)
+int _glColorMaterial(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -385,12 +461,14 @@ int _glColorMaterial(param_1, param_2)
 }
 
 /* _glCopyPixels @ 0x92f2c154 (156 bytes) */
-int _glCopyPixels(param_1, param_2, param_3, param_4, param_5)
+int _glCopyPixels(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -435,7 +513,7 @@ int _glCopyTexImage1D(param_1, param_2, param_3, param_4, param_5, param_6, para
 }
 
 /* _glCopyTexImage2D @ 0x92f2c29c (184 bytes) */
-int _glCopyTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int _glCopyTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -443,6 +521,7 @@ int _glCopyTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, para
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
+  undefined4 param_8;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -459,13 +538,14 @@ int _glCopyTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, para
 }
 
 /* _glCopyTexSubImage1D @ 0x92f2c354 (164 bytes) */
-int _glCopyTexSubImage1D(param_1, param_2, param_3, param_4, param_5, param_6)
+int _glCopyTexSubImage1D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -484,7 +564,7 @@ int _glCopyTexSubImage1D(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* _glCopyTexSubImage2D @ 0x92f2c3f8 (184 bytes) */
-int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -492,6 +572,7 @@ int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, p
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
+  undefined4 param_8;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -508,9 +589,8 @@ int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, p
 }
 
 /* _glDepthRange @ 0x92f2c4b0 (144 bytes) */
-int _glDepthRange(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+void _glDepthRange(double fparam_1,double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -524,13 +604,19 @@ int _glDepthRange(param_1, param_2)
   }
                     
                     
-  (*(code *)puVar2[0x3f])(param_1,param_2,*puVar2);
+  (*(code *)puVar2[0x3f])(fparam_1,fparam_2,*puVar2);
   return;
 }
 
 /* _glDisableClientState @ 0x92f2c540 (124 bytes) */
-int _glDisableClientState(param_1)
+int _glDisableClientState(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -549,8 +635,14 @@ int _glDisableClientState(param_1)
 }
 
 /* _glDrawBuffer @ 0x92f2c5bc (124 bytes) */
-int _glDrawBuffer(param_1)
+int _glDrawBuffer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -569,11 +661,14 @@ int _glDrawBuffer(param_1)
 }
 
 /* _glDrawElements @ 0x92f2c638 (148 bytes) */
-int _glDrawElements(param_1, param_2, param_3, param_4)
+int _glDrawElements(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -592,12 +687,14 @@ int _glDrawElements(param_1, param_2, param_3, param_4)
 }
 
 /* _glDrawPixels @ 0x92f2c6cc (156 bytes) */
-int _glDrawPixels(param_1, param_2, param_3, param_4, param_5)
+int _glDrawPixels(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -616,8 +713,14 @@ int _glDrawPixels(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glEdgeFlag @ 0x92f2c768 (124 bytes) */
-int _glEdgeFlag(param_1)
+int _glEdgeFlag(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -636,9 +739,14 @@ int _glEdgeFlag(param_1)
 }
 
 /* _glEdgeFlagPointer @ 0x92f2c7e4 (132 bytes) */
-int _glEdgeFlagPointer(param_1, param_2)
+int _glEdgeFlagPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -657,8 +765,14 @@ int _glEdgeFlagPointer(param_1, param_2)
 }
 
 /* _glEdgeFlagv @ 0x92f2c868 (124 bytes) */
-int _glEdgeFlagv(param_1)
+int _glEdgeFlagv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -677,8 +791,8 @@ int _glEdgeFlagv(param_1)
 }
 
 /* _glEvalCoord1d @ 0x92f2c8e4 (128 bytes) */
-int _glEvalCoord1d(param_1)
-  undefined8 param_1;
+void _glEvalCoord1d(double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -692,13 +806,19 @@ int _glEvalCoord1d(param_1)
   }
                     
                     
-  (*(code *)puVar2[0x4d])(param_1,*puVar2);
+  (*(code *)puVar2[0x4d])(fparam_1,*puVar2);
   return;
 }
 
 /* _glEvalCoord1dv @ 0x92f2c964 (124 bytes) */
-int _glEvalCoord1dv(param_1)
+int _glEvalCoord1dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -717,8 +837,8 @@ int _glEvalCoord1dv(param_1)
 }
 
 /* _glEvalCoord1f @ 0x92f2c9e0 (128 bytes) */
-int _glEvalCoord1f(param_1)
-  undefined8 param_1;
+void _glEvalCoord1f(double fparam_1)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -732,13 +852,19 @@ int _glEvalCoord1f(param_1)
   }
                     
                     
-  (*(code *)puVar2[0x4f])(param_1,*puVar2);
+  (*(code *)puVar2[0x4f])(fparam_1,*puVar2);
   return;
 }
 
 /* _glEvalCoord1fv @ 0x92f2ca60 (124 bytes) */
-int _glEvalCoord1fv(param_1)
+int _glEvalCoord1fv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -757,9 +883,8 @@ int _glEvalCoord1fv(param_1)
 }
 
 /* _glEvalCoord2d @ 0x92f2cadc (144 bytes) */
-int _glEvalCoord2d(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+void _glEvalCoord2d(double fparam_1,double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -773,13 +898,19 @@ int _glEvalCoord2d(param_1, param_2)
   }
                     
                     
-  (*(code *)puVar2[0x51])(param_1,param_2,*puVar2);
+  (*(code *)puVar2[0x51])(fparam_1,fparam_2,*puVar2);
   return;
 }
 
 /* _glEvalCoord2dv @ 0x92f2cb6c (124 bytes) */
-int _glEvalCoord2dv(param_1)
+int _glEvalCoord2dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -798,9 +929,8 @@ int _glEvalCoord2dv(param_1)
 }
 
 /* _glEvalCoord2f @ 0x92f2cbe8 (144 bytes) */
-int _glEvalCoord2f(param_1, param_2)
-  undefined8 param_1;
-  undefined8 param_2;
+void _glEvalCoord2f(double fparam_1,double fparam_2)
+
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -814,13 +944,19 @@ int _glEvalCoord2f(param_1, param_2)
   }
                     
                     
-  (*(code *)puVar2[0x53])(param_1,param_2,*puVar2);
+  (*(code *)puVar2[0x53])(fparam_1,fparam_2,*puVar2);
   return;
 }
 
 /* _glEvalCoord2fv @ 0x92f2cc78 (124 bytes) */
-int _glEvalCoord2fv(param_1)
+int _glEvalCoord2fv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -839,10 +975,14 @@ int _glEvalCoord2fv(param_1)
 }
 
 /* _glEvalMesh1 @ 0x92f2ccf4 (140 bytes) */
-int _glEvalMesh1(param_1, param_2, param_3)
+int _glEvalMesh1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -861,12 +1001,14 @@ int _glEvalMesh1(param_1, param_2, param_3)
 }
 
 /* _glEvalMesh2 @ 0x92f2cd80 (156 bytes) */
-int _glEvalMesh2(param_1, param_2, param_3, param_4, param_5)
+int _glEvalMesh2(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -885,8 +1027,14 @@ int _glEvalMesh2(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* _glEvalPoint1 @ 0x92f2ce1c (124 bytes) */
-int _glEvalPoint1(param_1)
+int _glEvalPoint1(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -905,9 +1053,14 @@ int _glEvalPoint1(param_1)
 }
 
 /* _glEvalPoint2 @ 0x92f2ce98 (132 bytes) */
-int _glEvalPoint2(param_1, param_2)
+int _glEvalPoint2(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -945,9 +1098,14 @@ int _glFinish()
 }
 
 /* _glFogiv @ 0x92f2cf8c (132 bytes) */
-int _glFogiv(param_1, param_2)
+int _glFogiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -966,9 +1124,14 @@ int _glFogiv(param_1, param_2)
 }
 
 /* _glGetClipPlane @ 0x92f2d010 (132 bytes) */
-int _glGetClipPlane(param_1, param_2)
+int _glGetClipPlane(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -987,10 +1150,14 @@ int _glGetClipPlane(param_1, param_2)
 }
 
 /* _glGetLightfv @ 0x92f2d094 (140 bytes) */
-int _glGetLightfv(param_1, param_2, param_3)
+int _glGetLightfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1009,10 +1176,14 @@ int _glGetLightfv(param_1, param_2, param_3)
 }
 
 /* _glGetLightiv @ 0x92f2d120 (140 bytes) */
-int _glGetLightiv(param_1, param_2, param_3)
+int _glGetLightiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1031,10 +1202,14 @@ int _glGetLightiv(param_1, param_2, param_3)
 }
 
 /* _glGetMapdv @ 0x92f2d1ac (140 bytes) */
-int _glGetMapdv(param_1, param_2, param_3)
+int _glGetMapdv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1053,10 +1228,14 @@ int _glGetMapdv(param_1, param_2, param_3)
 }
 
 /* _glGetMapfv @ 0x92f2d238 (140 bytes) */
-int _glGetMapfv(param_1, param_2, param_3)
+int _glGetMapfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1075,10 +1254,14 @@ int _glGetMapfv(param_1, param_2, param_3)
 }
 
 /* _glGetMapiv @ 0x92f2d2c4 (140 bytes) */
-int _glGetMapiv(param_1, param_2, param_3)
+int _glGetMapiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1097,10 +1280,14 @@ int _glGetMapiv(param_1, param_2, param_3)
 }
 
 /* _glGetMaterialfv @ 0x92f2d350 (140 bytes) */
-int _glGetMaterialfv(param_1, param_2, param_3)
+int _glGetMaterialfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1119,10 +1306,14 @@ int _glGetMaterialfv(param_1, param_2, param_3)
 }
 
 /* _glGetMaterialiv @ 0x92f2d3dc (140 bytes) */
-int _glGetMaterialiv(param_1, param_2, param_3)
+int _glGetMaterialiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1141,9 +1332,14 @@ int _glGetMaterialiv(param_1, param_2, param_3)
 }
 
 /* _glGetPixelMapfv @ 0x92f2d468 (132 bytes) */
-int _glGetPixelMapfv(param_1, param_2)
+int _glGetPixelMapfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1162,9 +1358,14 @@ int _glGetPixelMapfv(param_1, param_2)
 }
 
 /* _glGetPixelMapuiv @ 0x92f2d4ec (132 bytes) */
-int _glGetPixelMapuiv(param_1, param_2)
+int _glGetPixelMapuiv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1183,9 +1384,14 @@ int _glGetPixelMapuiv(param_1, param_2)
 }
 
 /* _glGetPixelMapusv @ 0x92f2d570 (132 bytes) */
-int _glGetPixelMapusv(param_1, param_2)
+int _glGetPixelMapusv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1204,9 +1410,14 @@ int _glGetPixelMapusv(param_1, param_2)
 }
 
 /* _glGetPointerv @ 0x92f2d5f4 (132 bytes) */
-int _glGetPointerv(param_1, param_2)
+int _glGetPointerv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1225,8 +1436,14 @@ int _glGetPointerv(param_1, param_2)
 }
 
 /* _glGetPolygonStipple @ 0x92f2d678 (124 bytes) */
-int _glGetPolygonStipple(param_1)
+int _glGetPolygonStipple(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1245,10 +1462,14 @@ int _glGetPolygonStipple(param_1)
 }
 
 /* _glGetTexEnvfv @ 0x92f2d6f4 (140 bytes) */
-int _glGetTexEnvfv(param_1, param_2, param_3)
+int _glGetTexEnvfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1267,10 +1488,14 @@ int _glGetTexEnvfv(param_1, param_2, param_3)
 }
 
 /* _glGetTexEnviv @ 0x92f2d780 (140 bytes) */
-int _glGetTexEnviv(param_1, param_2, param_3)
+int _glGetTexEnviv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined *puVar1;
   undefined4 *puVar2;

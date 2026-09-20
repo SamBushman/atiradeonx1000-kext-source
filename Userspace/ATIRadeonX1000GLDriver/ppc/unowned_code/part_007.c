@@ -350,7 +350,7 @@ int orph_1d8a00(param_1, param_2)
   undefined4 uVar1;
   
   if (*(int *)(param_2 + 0x58) == 2) {
-    uVar1 = FUN_00172514();
+    uVar1 = FUN_00172514(param_1,param_2);
     return uVar1;
   }
   return 0;

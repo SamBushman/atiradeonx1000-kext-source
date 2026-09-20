@@ -801,9 +801,11 @@ int ___cxa_atexit(param_1, param_2, param_3)
 }
 
 /* FUN_000015e8 @ 0x15e8 (32 bytes) */
-int FUN_000015e8()
+int FUN_000015e8(param_1, param_2)
+  undefined4 param_1;
+  undefined4 param_2;
 {
-  ((int (*)())_atexit_common)();
+  ((int (*)())_atexit_common)(param_1,param_2);
   return;
 }
 
@@ -824,9 +826,11 @@ int _atexit(param_1)
 }
 
 /* FUN_00001664 @ 0x1664 (32 bytes) */
-int FUN_00001664()
+int FUN_00001664(param_1, param_2)
+  undefined4 param_1;
+  undefined4 param_2;
 {
-  ((int (*)())_atexit_common)();
+  ((int (*)())_atexit_common)(param_1,param_2);
   return;
 }
 
@@ -866,11 +870,12 @@ int __SetSurface(param_1, param_2, param_3)
 }
 
 /* __SetDestination @ 0x1750 (8 bytes) */
-int __SetDestination(param_1, param_2)
+int __SetDestination(param_1, param_2, param_3)
   undefined4 param_1;
   uint param_2;
+  undefined4 param_3;
 {
-  ((int (*)())__SetSurface)(param_1,(param_2 & 1) << 0xb);
+  ((int (*)())__SetSurface)(param_1,(param_2 & 1) << 0xb,param_3);
   return;
 }
 
@@ -966,11 +971,13 @@ int __SwapSurface(param_1, param_2, param_3, param_4)
 }
 
 /* __Probe @ 0x1950 (16 bytes) */
-int __Probe()
+int __Probe(param_1, param_2, param_3, param_4)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 *param_4;
 {
-  undefined4 *in_r6;
-  
-  *in_r6 = 2000;
+  *param_4 = 2000;
   return 0;
 }
 
@@ -1351,45 +1358,46 @@ int __GetBlitter(param_1, param_2, param_3, param_4, param_5)
   uint param_4;
   undefined4 *param_5;
 {
-  code *pcVar1;
+  uint uVar1;
+  code *pcVar2;
   
-  param_4 = param_4 & 0x7ffff000;
+  uVar1 = param_4 & 0x7ffff000;
   if (param_3 == 1) {
-    if ((param_4 == 0) || (param_4 == 0x1000)) {
-      pcVar1 = _radeonCopy;
+    if ((uVar1 == 0) || (uVar1 == 0x1000)) {
+      pcVar2 = _radeonCopy;
       goto LAB_00002114;
     }
   }
   else {
     if (param_3 == 4) {
-      pcVar1 = (code *)&_radeonCopyRegion;
+      pcVar2 = (code *)&_radeonCopyRegion;
       goto LAB_00002114;
     }
     if (param_3 == 0) {
-      if (param_4 == 0x6000) {
+      if (uVar1 == 0x6000) {
 LAB_000021a0:
-        pcVar1 = _radeonFill;
+        pcVar2 = _radeonFill;
         goto LAB_00002114;
       }
     }
     else if (param_3 == 0x40000) {
-      if (param_4 == 0x6000) {
-        pcVar1 = _radeonHighlight;
+      if (uVar1 == 0x6000) {
+        pcVar2 = _radeonHighlight;
         goto LAB_00002114;
       }
     }
     else if (param_3 == 0x100) {
-      if (param_4 == 0x5000) goto LAB_000021a0;
+      if (uVar1 == 0x5000) goto LAB_000021a0;
     }
-    else if ((param_3 == 3) && (param_4 == 0x6000)) {
-      pcVar1 = _radeonSolidScanlines;
+    else if ((param_3 == 3) && (uVar1 == 0x6000)) {
+      pcVar2 = _radeonSolidScanlines;
       goto LAB_00002114;
     }
   }
-  pcVar1 = (code *)0x0;
+  pcVar2 = (code *)0x0;
 LAB_00002114:
-  *param_5 = pcVar1;
-  if (pcVar1 == (code *)0x0) {
+  *param_5 = pcVar2;
+  if (pcVar2 == (code *)0x0) {
     return 0xe00002c7;
   }
   return 0;
@@ -1542,17 +1550,24 @@ int __Start(param_1, param_2, param_3)
   undefined4 param_3;
 {
   int iVar1;
+  int iVar2;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
+  undefined4 in_r10;
   int local_a8;
   int local_a4 [2];
   undefined1 auStack_9c [144];
   
-  iVar1 = _IOAccelFindAccelerator(param_3,&local_a8,param_1 + 0x84);
+  iVar2 = param_1 + 0x84;
+  iVar1 = _IOAccelFindAccelerator(param_3,&local_a8);
   if (iVar1 == 0) {
     iVar1 = _IOObjectConformsTo(local_a8,"ATIRadeonX1000");
     if (iVar1 == 0) {
       iVar1 = _IOObjectGetClass(local_a8,auStack_9c);
       if (iVar1 == 0) {
-        _printf_LDBLStub("Unusual class (%s)\n",auStack_9c);
+        _printf_LDBLStub("Unusual class (%s)\n",auStack_9c,iVar2,in_r6,in_r7,in_r8,in_r9,in_r10);
         iVar1 = -0x1ffffd39;
       }
       else {
@@ -1566,7 +1581,7 @@ int __Start(param_1, param_2, param_3)
         *(int *)(param_1 + 0xc) = local_a4[0];
         local_a4[1] = 2;
         iVar1 = _io_connect_method_scalarI_scalarO(local_a4[0],1,0,0,param_1 + 0x88,local_a4 + 1);
-        if ((iVar1 == 0) && (iVar1 = ((int (*)())__Reset)(param_1,0), iVar1 == 0)) {
+        if ((iVar1 == 0) && (iVar1 = ((int (*)())__Reset)(param_1), iVar1 == 0)) {
           return 0;
         }
       }

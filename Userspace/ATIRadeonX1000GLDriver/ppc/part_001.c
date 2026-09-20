@@ -22,7 +22,7 @@ int _gldReclaimContext(param_1)
 {
   int iVar1;
   
-  FUN_0002cc10();
+  FUN_0002cc10(param_1);
   iVar1 = _io_connect_method_scalarI_structureI(*(undefined4 *)((int)param_1 + 4),0x11,0,0,0,0);
   if (iVar1 != 0) {
     _free(param_1);
@@ -452,7 +452,7 @@ int _gldTestObject(param_1, param_2, param_3)
       iVar3 = *param_3;
       iVar4 = *(int *)(param_1 + 0x218);
       if (*(int *)(iVar3 * 8 + iVar4 + 4) != 0) {
-        _gldFlush();
+        _gldFlush(param_1);
         iVar3 = *param_3;
         iVar4 = *(int *)(param_1 + 0x218);
       }
@@ -492,7 +492,7 @@ int _gldFinishObject(param_1, param_2, param_3)
       iVar3 = *param_3;
       iVar2 = *(int *)(param_1 + 0x218);
       if (*(int *)(iVar3 * 8 + iVar2 + 4) != 0) {
-        _gldFlush();
+        _gldFlush(param_1);
         iVar3 = *param_3;
         iVar2 = *(int *)(param_1 + 0x218);
       }
@@ -558,7 +558,7 @@ int _gldDestroyFramebuffer(param_1, param_2)
   void *param_2;
 {
   if (*(void **)(param_1 + 0x150) == param_2) {
-    FUN_0001b4b0();
+    FUN_0001b4b0(param_1);
     *(undefined4 *)(param_1 + 0x150) = 0;
   }
   _free(param_2);
@@ -566,8 +566,13 @@ int _gldDestroyFramebuffer(param_1, param_2)
 }
 
 /* FUN_00007d50 @ 0x7d50 (368 bytes) */
-int FUN_00007d50(param_1)
+int FUN_00007d50(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   bool bVar1;
   bool bVar2;
@@ -605,7 +610,7 @@ int FUN_00007d50(param_1)
       if (*(int *)(piVar6[1] + 0x1c) == 0) goto LAB_00007e28;
     }
     else {
-      iVar4 = FUN_0001b510(param_1,piVar6);
+      iVar4 = FUN_0001b510(param_1,piVar6,param_3,param_4,param_5,param_6);
       if (iVar4 != 0) goto LAB_00007e28;
     }
   }
@@ -849,7 +854,7 @@ int _gldChoosePixelFormat(param_1, param_2)
   puVar10 = param_2;
   do {
     if (*puVar10 == 0) {
-      local_84 = ((int (*)())FUN_00007ec0)();
+      local_84 = ((int (*)())FUN_00007ec0)(uVar4);
       local_84 = local_84 & 0x1ffff;
       local_88 = ((int (*)())FUN_00007ec0)(uVar19);
       local_88 = local_88 & 0x1ffff;
@@ -1226,9 +1231,15 @@ int _gldDestroyPixelFormat(param_1)
 }
 
 /* _gldGetRendererInfo @ 0x8a50 (500 bytes) */
-int _gldGetRendererInfo(param_1, param_2)
+int _gldGetRendererInfo(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   undefined4 *param_1;
   uint param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
+  undefined4 param_8;
 {
   undefined4 uVar1;
   uint uVar2;
@@ -1238,7 +1249,7 @@ int _gldGetRendererInfo(param_1, param_2)
   int iVar6;
   undefined4 local_38;
   undefined4 local_34;
-  undefined4 local_30;
+  undefined1 local_30 [4];
   undefined4 local_2c;
   undefined4 local_28;
   
@@ -1282,7 +1293,7 @@ LAB_00008ad4:
     uVar1 = 0x271f;
     if (iVar4 == 0) {
       local_38 = 3;
-      iVar4 = _io_connect_method_scalarI_scalarO(local_34,3,0,0,&local_30,&local_38);
+      iVar4 = _io_connect_method_scalarI_scalarO(local_34,3,0,0,local_30,&local_38);
       if (iVar4 == 0) {
         *param_1 = 0;
         uVar2 = FUN_00017720(iVar5);
@@ -1302,7 +1313,7 @@ LAB_00008ad4:
         param_1[5] = 0x808000;
         *(undefined1 *)((int)param_1 + 0x2a) = 0;
         param_1[7] = 0x80;
-        FUN_0001b150(param_1,local_30);
+        FUN_0001b150(param_1);
         _IOServiceClose(local_34);
         uVar1 = 0;
       }
@@ -1409,17 +1420,19 @@ int _gldCreateTexture(param_1, param_2, param_3)
 int _gldCreateTextureLevel(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_1;
   int param_2;
-  int param_3;
+  undefined4 param_3;
   int param_4;
   uint param_5;
 {
-  *(byte *)(param_2 + 0x39) = param_3 | *(byte *)(param_2 + 0x39);
-  if ((param_3 & 1) != 0) {
+  int iVar1;
+  
+  *(byte *)(param_2 + 0x39) = (byte)param_3 | *(byte *)(param_2 + 0x39);
+  if (((byte)param_3 & 1) != 0) {
     *(undefined1 *)(param_2 + 0x38) = 0;
   }
-  if ((param_3 & 7) != 0) {
-    param_2 = param_4 * 2 + param_2;
-    *(ushort *)(param_2 + 0x24) = (ushort)(1 << (param_5 & 0x3f)) | *(ushort *)(param_2 + 0x24);
+  if (((byte)param_3 & 7) != 0) {
+    iVar1 = param_4 * 2 + param_2;
+    *(ushort *)(iVar1 + 0x24) = (ushort)(1 << (param_5 & 0x3f)) | *(ushort *)(iVar1 + 0x24);
   }
   return 0;
 }
@@ -1428,9 +1441,9 @@ int _gldCreateTextureLevel(param_1, param_2, param_3, param_4, param_5)
 int _gldModifyTexture(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
-  int param_3;
+  undefined4 param_3;
 {
-  *(byte *)(param_2 + 0x39) = param_3 | *(byte *)(param_2 + 0x39);
+  *(byte *)(param_2 + 0x39) = (byte)param_3 | *(byte *)(param_2 + 0x39);
   return 0;
 }
 
@@ -1487,13 +1500,13 @@ int _gldGetTextureLevelInfo(param_1, param_2, param_3, param_4, param_5, param_6
   uint local_38;
   byte local_34;
   
-  FUN_00030f60();
+  FUN_00030f60(param_1,param_2,param_3,param_4,&local_58);
   if ((**(ushort **)(param_2 + 0x30) & 0x100) != 0) {
     uVar1 = FUN_0000a9f0(param_1,param_2);
     iVar3 = param_1;
     do {
       if (*(int *)(iVar3 + 0x18c) != 0) {
-        iVar2 = FUN_0000a9f0(param_1);
+        iVar2 = FUN_0000a9f0(param_1,*(int *)(iVar3 + 0x18c));
         uVar1 = uVar1 + iVar2;
       }
       iVar3 = iVar3 + 4;
@@ -1684,7 +1697,7 @@ int _gldDeleteTexture(param_1, param_2)
   undefined4 param_1;
   void *param_2;
 {
-  ((int (*)())_gldReclaimTexture)();
+  ((int (*)())_gldReclaimTexture)(param_1,param_2);
   _free(param_2);
   return 0;
 }
@@ -1738,9 +1751,13 @@ int _gldRelatePipelineProgram(param_1, param_2, param_3, param_4)
 }
 
 /* _gldGetPipelineProgramInfo @ 0x9540 (36 bytes) */
-int _gldGetPipelineProgramInfo()
+int _gldGetPipelineProgramInfo(param_1, param_2, param_3, param_4)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
 {
-  FUN_000269a0();
+  FUN_000269a0(param_1,param_2,param_3,param_4);
   return 0;
 }
 
@@ -1904,25 +1921,25 @@ int FUN_000096b0(param_1, param_2, param_3, param_4)
   case 7:
     break;
   case 8:
-    uVar2 = param_1 >> 5 & 7;
-    param_1 = param_1 & 0x1f;
-    if (uVar2 == 1) {
-      *param_3 = (int)(((unsigned char *)0x000039c0) + param_1 * 0x94);
+    uVar1 = param_1 >> 5 & 7;
+    uVar2 = param_1 & 0x1f;
+    if (uVar1 == 1) {
+      *param_3 = (int)(((unsigned char *)0x000039c0) + uVar2 * 0x94);
       return;
     }
-    if (uVar2 < 2) {
-      if (uVar2 == 0) {
-        *param_3 = (int)(((unsigned char *)0x0000399c) + param_1 * 0x94);
+    if (uVar1 < 2) {
+      if (uVar1 == 0) {
+        *param_3 = (int)(((unsigned char *)0x0000399c) + uVar2 * 0x94);
         return;
       }
       return;
     }
-    if (uVar2 == 2) {
-      *param_3 = (int)(((unsigned char *)0x000039e4) + param_1 * 0x94);
+    if (uVar1 == 2) {
+      *param_3 = (int)(((unsigned char *)0x000039e4) + uVar2 * 0x94);
       return;
     }
-    if (uVar2 == 3) {
-      *param_3 = (int)(((unsigned char *)0x00003a08) + param_1 * 0x94);
+    if (uVar1 == 3) {
+      *param_3 = (int)(((unsigned char *)0x00003a08) + uVar2 * 0x94);
       return;
     }
     return;
@@ -1986,25 +2003,25 @@ int FUN_000096b0(param_1, param_2, param_3, param_4)
   default:
     return;
   }
-  uVar2 = param_1 >> 5 & 7;
-  param_1 = param_1 & 0x1f;
-  if (uVar2 == 1) {
-    *param_3 = (int)(((unsigned char *)0x000039b0) + param_1 * 0x94);
+  uVar1 = param_1 >> 5 & 7;
+  uVar2 = param_1 & 0x1f;
+  if (uVar1 == 1) {
+    *param_3 = (int)(((unsigned char *)0x000039b0) + uVar2 * 0x94);
     return;
   }
-  if (uVar2 < 2) {
-    if (uVar2 == 0) {
-      *param_3 = (int)(((unsigned char *)0x0000398c) + param_1 * 0x94);
+  if (uVar1 < 2) {
+    if (uVar1 == 0) {
+      *param_3 = (int)(((unsigned char *)0x0000398c) + uVar2 * 0x94);
       return;
     }
     return;
   }
-  if (uVar2 == 2) {
-    *param_3 = (int)(((unsigned char *)0x000039d4) + param_1 * 0x94);
+  if (uVar1 == 2) {
+    *param_3 = (int)(((unsigned char *)0x000039d4) + uVar2 * 0x94);
     return;
   }
-  if (uVar2 == 3) {
-    *param_3 = (int)(((unsigned char *)0x000039f8) + param_1 * 0x94);
+  if (uVar1 == 3) {
+    *param_3 = (int)(((unsigned char *)0x000039f8) + uVar2 * 0x94);
     return;
   }
   return;
@@ -2188,36 +2205,14 @@ int FUN_00009880(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   int param_6;
 {
-  uint uVar1;
-  uint uVar2;
-  undefined4 uStack_18;
+  uint uStack_18;
   
-  uVar2 = uStack_18 >> 1 & 7;
-  uVar1 = uStack_18 & 1;
-  if (5 < uVar2) {
-    return;
-  }
+  if ((uStack_18 >> 1 & 7) < 6) {
                     
-  switch(*(int *)(uVar2 * 4 + param_6 + 0x1ec) + param_6 + 0x1ec) {
-  case 0x98c8:
-    *param_3 = uVar1 * 0x240 + 0x28c0;
-    return;
-  case 0x98d8:
-    *param_3 = uVar1 * 0x240 + 0x28d0;
-    return;
-  case 0x98e8:
-    *param_3 = uVar1 * 0x240 + 0x28e0;
-    return;
-  case 0x98f8:
-    *param_3 = uVar1 * 0x240 + 0x28f0;
-    return;
-  case 0x9908:
-    *param_3 = uVar1 * 0x240 + 0x2900;
-    return;
-  case 0x9918:
-    *param_3 = uVar1 * 0x240 + 0x2a90;
+    *param_3 = (uStack_18 & 1) * 0x240 + 0x28c0;
     return;
   }
+  return;
 }
 
 /* FUN_000098c8 @ 0x98c8 (16 bytes) */
@@ -2258,7 +2253,7 @@ int FUN_00009bd0(param_1)
   iVar2 = **(int **)(param_1 + 0x234);
   if (iVar2 != 0) {
     if ((0x1ffff < (int)*(uint *)(iVar2 + 0x10)) || ((*(uint *)(iVar2 + 0x10) & 0xffff) != 0)) {
-      _gldFlush();
+      _gldFlush(param_1);
     }
     iVar1 = FUN_0001a0d0(param_1,*(undefined4 *)(iVar2 + 8));
     if (iVar1 == 0) {
@@ -2298,7 +2293,7 @@ int FUN_00009cd0(param_1)
   
   iVar4 = **(int **)(param_1 + 0x234);
   if (iVar4 != 0) {
-    ((int (*)())FUN_00009bd0)();
+    ((int (*)())FUN_00009bd0)(param_1);
     piVar2 = (int *)(iVar4 + 0x10);
     do {
       iVar3 = *piVar2;
@@ -2510,8 +2505,14 @@ int FUN_0000a0f0(param_1)
 }
 
 /* FUN_0000a120 @ 0xa120 (92 bytes) */
-int FUN_0000a120(param_1)
+int FUN_0000a120(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   if ((param_1 & 0x400) != 0) {
     return 1;
@@ -2535,9 +2536,14 @@ int FUN_0000a120(param_1)
 }
 
 /* FUN_0000a180 @ 0xa180 (344 bytes) */
-int FUN_0000a180(param_1, param_2)
+int FUN_0000a180(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint param_1;
   undefined2 *param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined2 uVar1;
   
@@ -2608,7 +2614,7 @@ int FUN_0000a180(param_1, param_2)
     param_2[2] = 2;
     *param_2 = 3;
   }
-  uVar1 = ((int (*)())FUN_0000a120)();
+  uVar1 = ((int (*)())FUN_0000a120)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   param_2[3] = uVar1;
   return 1;
 }
