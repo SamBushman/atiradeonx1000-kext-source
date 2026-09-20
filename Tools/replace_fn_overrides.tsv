@@ -1,0 +1,18 @@
+0xfa40	IOReturn IOATIR500DVDContext::set_surface(UInt32 param_1, eIODVDContextModeBits param_3, int param_4)	
+0x87b0	IOReturn IOATIR500GLContext::set_surface(UInt32 param_1, eIOGLContextModeBits param_3, UInt32 param_4, UInt32 param_5)	
+0x14a30	IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *real_param_2, UInt32 param_3)	this=param_1 cast:param_2
+0x9320	IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *real_param_2, sIOGLNewTextureReturnData *real_param_3, UInt32 param_4, UInt32 *param_5)	this=param_1 cast:param_2 cast:param_3
+0x44d90	UInt32 HZMEM_InitMemResource(_HZDATA *real_param_1, UInt32 param_2, UInt32 param_3, UInt32 param_4)	cast:param_1
+0x45280	UInt32 HZMEM_Destroy(_HZDATA *real_param_1)	cast:param_1
+0x142b0	IOReturn IOATIR500Surface::set_id_mode(UInt32 param_1, eIOSurfaceModeBits param_3)	
+0x370	IOReturn IOATIR500Accelerator::display_change_handler(OSObject *real_param_1, void *param_2, IOFramebuffer *real_param_3, SInt32 param_4, void *param_5)	static cast:param_1 cast:param_3
+0x26ce0	UInt32 convertIOGLBufferToBufIdx(UInt32 param_1, UInt32 *param_2)	
+0x34e50	IOReturn ATIR500DVDContext::dvd_setup_subpicture(int param_2, int param_3, int param_4)	this=param_1
+0x14f60	IOReturn IOATIR500Surface::surface_unlock_options(eLockType param_2, UInt32 param_3)	this=param_1
+0x15d30	IOReturn IOATIR500Surface::surface_lock_options(eLockType param_2, UInt32 param_3, IOAccelSurfaceData *real_param_4, UInt32 param_5)	this=param_1 cast:param_4
+0x14860	IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 param_1, eLockType param_3)	
+0x15b70	void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState param_2)	
+0x152d0	IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits param_2, UInt32 param_3, unsigned int param_4, UInt32 param_5, IOAccelDeviceRegion *real_param_6, UInt32 param_7, UInt32 param_8)	cast:param_6
+0x21c60	void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *real_param_2, SInt32 param_3, SInt32 param_4)	this=param_1 cast:param_2
+0x3e5c0	void ATIR500Surface::submit_flip_buffer(UInt32 param_2, IOATIR500GLContext *real_param_3, UInt32 param_4)	this=param_1 cast:param_3
+0x12110	UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 param_2, UInt32 param_3, bool param_4)	this=param_1

@@ -66,8 +66,9 @@ def cut_old(cls, name):
             return f
     return None
 OVR = {}
-if os.path.exists('/tmp/spec/overrides.tsv'):
-    for l in open('/tmp/spec/overrides.tsv'):
+_OVR = '/tmp/spec/overrides.tsv' if os.path.exists('/tmp/spec/overrides.tsv') else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'replace_fn_overrides.tsv')
+if os.path.exists(_OVR):
+    for l in open(_OVR):
         f = l.rstrip('\n').split('\t')
         if len(f) >= 2: OVR[int(f[0], 16)] = (f[1], f[2] if len(f) > 2 else '')
 for arg in sys.argv[1:]:
