@@ -18,5 +18,20 @@
  "extra_corpora": [
   "unowned_code"
  ],
- "extra_link_flags": []
+ "extra_link_flags": [],
+ "postlude": [
+  "#undef NAN",
+  "#define NAN (__builtin_nanf(\"\"))"
+ ],
+ "data_label_overrides": {
+  "MACH_HEADER": "__mh_bundle_header"
+ },
+ "label_overrides": {
+  "builtin_strncpy": "_strncpy",
+  "operator_delete": "__ZdlPv"
+ },
+ "dummy_functions": [
+  "func_0x001a323c",
+  "FUN_00115fa0"
+ ]
 }

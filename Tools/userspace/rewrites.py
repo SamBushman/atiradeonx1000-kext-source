@@ -324,8 +324,10 @@ def rewrite_double_bits(text):
     """`(double)CONCAT44(hi, lo)` is Ghidra's rendering of building a double from two words (the int->double magic-number idiom, 0x43300000 in the high
     word): a bit-pattern reinterpretation. ghidra_c.h's CONCAT44 yields an integer, so the C cast converted it numerically (~4.5e18)."""
     out, n = text, 0
-    out, n1 = re.subn(r'\(double\)\s*\(?\s*CONCAT44\(', 'GH_BITS_D(', out)
-    return out, n1
+    # (double)(CONCAT44(hi, lo) ^ K): the xor flips bits of the low word
+    out, n0 = re.subn(r'\(double\)\(\s*CONCAT44\(([^,()]+),([^,()]+)\)\s*\^\s*(0x[0-9a-fA-F]+U?)\s*\)', r'GH_BITS_D(\1, (\2) ^ \3)', out)
+    out, n1 = re.subn(r'\(double\)\s*CONCAT44\(', 'GH_BITS_D(', out)
+    return out, n0 + n1
 
 
 def rewrite_narrow_compares(text):

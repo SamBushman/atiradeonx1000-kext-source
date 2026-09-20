@@ -1,0 +1,9 @@
+_ATIRadeonX1000GAFactory
+__LockSurface
+__Probe
+__SetDestination
+__SetSurface
+__SwapSurface
+__UnlockSurface
+_ati_format_info_table
+_window_mode_to_ati_format

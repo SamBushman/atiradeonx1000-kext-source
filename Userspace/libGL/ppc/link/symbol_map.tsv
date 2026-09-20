@@ -1,0 +1,9 @@
+name	address	section	ghidra_type	len	c_declaration	value	defined_in
+_gll_cc	0xa2f27004	__DATA,__data	undefined4	4		0x00000000	data.s
+_gll_noop	0xa2f27008	__DATA,__data	undefined4	4		0x00000000	data.s
+_gll_pkey	0xa2f2700c	__DATA,__data	undefined4	4		0x00000000	data.s
+dyld_lazy_symbol_binding_entry_point	0xa2f27010	__DATA,__dyld	undefined4	4		0x8fe01000	toolchain (crt/dyld data)
+dyld_func_lookup_pointer	0xa2f27014	__DATA,__dyld	undefined4	4		0x8fe01008	toolchain (crt/dyld data)
+PTR___mh_dylib_header_a2f27018	0xa2f27018	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___mh_dylib_header_a2f27018 asm("PTR___mh_dylib_header_a2f27018");	pointer -> __mh_dylib_header	data.s
+PTR__gll_pkey_a2f2701c	0xa2f2701c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gll_pkey_a2f2701c asm("PTR__gll_pkey_a2f2701c");	pointer -> _gll_pkey	data.s
+PTR__gll_cc_a2f27020	0xa2f27020	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__gll_cc_a2f27020 asm("PTR__gll_cc_a2f27020");	pointer -> _gll_cc	data.s

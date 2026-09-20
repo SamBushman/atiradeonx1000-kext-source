@@ -266,7 +266,10 @@ def transform(lines):
             kind = data_decls[nm][0]
             t_ = c_type_for(nm, kind)
             orig_ptr = ('*' in mm.group(2)) or kind == 'array' or nm in byte_arith   # the corpus uses it as a pointer / array, or does byte arithmetic on its address (`&X + n*8`): keep its form, just label it
-            if t_ and 'MACH_HEADER' not in ln and 'Ghidra' not in ln and not orig_ptr:
+            _lab = cfg.get('data_label_overrides', {}).get(nm, nm)
+            if nm in cfg.get('data_label_overrides', {}):
+                res.append('%s asm("%s");' % (ln.rstrip()[:-1], _lab))
+            elif t_ and 'MACH_HEADER' not in ln and 'Ghidra' not in ln and not orig_ptr:
                 res.append('extern %s asm("%s");' % (t_ % nm, nm))
                 typed += 1
             elif nm in byte_arith and kind == 'scalar' and '*' not in mm.group(2):
@@ -311,6 +314,17 @@ for _d in [''] + EXTRA_DIRS:
             _all_body += open(os.path.join(corpus, _d, _f)).read()
 byte_arith = set(re.findall(r'&\s*(\w+)\s*[+-]\s', _all_body)) | set(re.findall(r'\(\s*&\s*(\w+)\s*\)\s*\[', _all_body))   # address arithmetic assumes a byte-sized object
 DROP_DECLS = set(cfg.get('drop_decls', []))
+# a dropped toolchain function that is only `import(args); return;` is a PIC stub of that import: callers reach the import itself
+stub_alias = {}
+for _d in [''] + EXTRA_DIRS:
+    for _f in sorted(os.listdir(os.path.join(corpus, _d))):
+        if not re.match(r'part_\d+\.c$', _f):
+            continue
+        for _m in re.finditer(r'(?m)^/\* (\S+) @ 0x([0-9a-f]+) \(\d+ bytes\) \*/\n[^\n]*\n(?:[^\n{]*\n)*?\{\n\s+(_?[A-Za-z]\w*)\([^;]*\);\n\s+return;\n\}', open(os.path.join(corpus, _d, _f)).read()):
+            _n, _a, _callee = _m.group(1), int(_m.group(2), 16), _m.group(3)
+            if any(lo <= _a < hi for lo, hi in [(int(x, 16), int(y, 16)) for x, y in cfg.get('toolchain_addr_ranges', [])]) and not _callee.startswith(('FUN_', 'DAT_')):
+                stub_alias[_n] = _callee
+cfg.setdefault('label_overrides', {}).update({k: v for k, v in stub_alias.items() if k not in cfg.get('label_overrides', {})})
 decls = [l for l in decls if not any(re.search(r'\b%s\b' % re.escape(d), l) for d in DROP_DECLS)]
 for nm_, a_ in nlist_alias.items():       # another name (in the symbol table) of a function that has a ledger entry under a different one
     ln_ = fn_by_addr.get(a_)
@@ -364,7 +378,7 @@ for nm, a in sorted(needed.items()):
         continue
     sec_ = m.sec_at(a)
     zf = any(s2['addr'] <= a < s2['addr'] + s2['size'] for s2 in m.secs if (s2['flags'] & 0xff) in (1, 0xc))
-    if (sec_ is None and not zf and nm not in TOOLCHAIN_DATA and a not in nlist_by_addr) or (re.match(r'^(UINT|INT|SHORT|BYTE|LAB)_', nm) and in_code(a)):
+    if nm not in cfg.get('data_label_overrides', {}) and (sec_ is None and not zf and nm not in TOOLCHAIN_DATA and a not in nlist_by_addr) or (re.match(r'^(UINT|INT|SHORT|BYTE|LAB)_', nm) and in_code(a)):
         const_names.append(nm)
 for nm in const_names:
     needed.pop(nm, None)
@@ -402,6 +416,8 @@ for a_, ss_ in sorted(nlist_by_addr.items()):
         if nms_:
             clipped_blocks.append((nms_, [struct.unpack('>I', m.read(w, 4))[0] for w in range(ext_[0], ext_[1], 4)], fn_by_addr[ext_[1]]))
 open(os.path.join(out, 'code.s'), 'w').write('\n'.join(code_s) + '\n')
+for _n in sorted({n_ for n_ in re.findall(r'\bthunk_(FUN_[0-9a-f]+)\b', _all_body)}):
+    code_alias.append('#define thunk_%s %s' % (_n, _n))
 if code_alias:
     with open(os.path.join(out, 'decls.h'), 'a') as f:
         f.write('\n'.join(code_alias) + '\n')
@@ -554,6 +570,9 @@ for s in data_secs:
     elif s['seg'] == '__TEXT' and s['name'] in ('__const', '__const_coal') and any(a <= w_ < end for w_ in word_expr):
         # dyld 10.4 cannot apply relocations (least of all against external symbols) inside __TEXT: a table of pointers moves to the writable __DATA,__const
         S.append('.const_data')
+    elif ty == 0xb and s['name'] in ('__const_coal', '__datacoal_nt'):
+        # weak/coalesced data of the stock: one plain section here (a coalesced section needs a symbol at every atom start)
+        S.append('.const_data' if s['name'] == '__const_coal' else '.data')
     elif (s['seg'], s['name']) in DIRECTIVE:
         S.append(DIRECTIVE[(s['seg'], s['name'])])
     else:
@@ -638,7 +657,7 @@ with open(os.path.join(out, 'symbol_map.tsv'), 'w') as w:
                 val = '0x%08x' % struct.unpack('>I', m.read(a, 4))[0]
         decl = [l for l in new_decls if re.search(r'\b%s\b' % re.escape(nm), l) and l.startswith('extern')]
         w.write('%s\t0x%x\t%s\t%s\t%s\t%s\t%s\t%s\n' % (nm, a or 0, ('%s,%s' % (sec['seg'], sec['name'])) if sec else '?', g['dtype'] if g else '-', g['len'] if g else '-', decl[0] if decl else '', val, 'data.s' if nm in defined else 'NOT DEFINED'))
-undefined = [nm for nm in needed if nm not in defined and nm not in fn_by_addr.values() and nm not in TOOLCHAIN_DATA and nm not in clipped_entries and not (needed[nm] is not None and in_code(needed[nm]) and ('#define %s ' % nm) in ''.join(code_alias))]
+undefined = [nm for nm in needed if nm not in defined and nm not in fn_by_addr.values() and nm not in TOOLCHAIN_DATA and nm not in clipped_entries and nm not in cfg.get('data_label_overrides', {}) and not (needed[nm] is not None and in_code(needed[nm]) and ('#define %s ' % nm) in ''.join(code_alias))]
 with open(os.path.join(out, 'unresolved_data.txt'), 'w') as w:
     for nm in undefined:
         w.write('%s\t%s\n' % (nm, hex(needed[nm]) if needed[nm] is not None else '?'))
@@ -692,6 +711,7 @@ gl_protos = None
 if cfg.get('gl_headers'):
     import fix_gl_stubs
     gl_protos = fix_gl_stubs.parse_prototypes(cfg['gl_headers'])
+dropped_addr = {n_: a_ for a_, s_, n_, p_ in ledger if toolchain_fn(n_, a_) or toolchain_fn(fn_label.get(n_, ''))}
 _part_files = [('', f) for f in sorted(os.listdir(corpus)) if re.match(r'part_\d+\.c$', f)]
 for d_ in EXTRA_DIRS:
     _part_files += [(d_, f) for f in sorted(os.listdir(os.path.join(corpus, d_))) if re.match(r'part_\d+\.c$', f)]
@@ -717,6 +737,8 @@ for pdir_, f in _part_files:
             txt = '\n'.join(ch)
             txt, natom = rewrites.rewrite_atomics(txt)
             atomics_total[0] += natom
+            if re.search(r'\b(vectorPermute|vectorConditionalSelect|dataCacheBlockClearToZero|dataCacheBlockAllocate)\(', txt):
+                uses_link = True
             txt, ndbl = rewrites.rewrite_double_bits(txt)
             dbl_total[0] += ndbl
             if ndbl:
@@ -735,6 +757,10 @@ for pdir_, f in _part_files:
             blocks_total[0] += nblk
             if natom:
                 uses_link = True
+            for cn_, ca_ in dropped_addr.items():
+                if cn_ in txt and cn_ not in cfg.get('label_overrides', {}):
+                    # a toolchain function that is not linked in can only be a number here (a field offset that equals its address): non-call uses become literals
+                    txt = re.sub(r'(?<![\w])%s\b(?!\s*\()' % re.escape(cn_), '0x%x' % ca_, txt)
             for cn_ in cfg.get('const_function_names', []):
                 if cn_ in fn_addr_by_name:
                     # a register offset / constant that equals a function's address: Ghidra printed the function name (value use only, not a call)
@@ -769,6 +795,38 @@ for pdir_, f in _part_files:
     if uses_gl:
         src = src.replace('#include "decls.h"', '#define GL_GLEXT_PROTOTYPES 1\n#include <OpenGL/gl.h>\n#include <OpenGL/glext.h>\n#include "decls.h"', 1)
     open(os.path.join(out, outname), 'w').write(src)
+_declared = set(re.findall(r'\b(FUN_[0-9a-f]+|thunk_FUN_[0-9a-f]+)\b', open(os.path.join(out, 'decls.h')).read())) | set(re.findall(r'\b(FUN_[0-9a-f]+|thunk_FUN_[0-9a-f]+)\b', open(os.path.join(out, 'extra_decls.h')).read() if os.path.exists(os.path.join(out, 'extra_decls.h')) else ''))
+_used_fun = set()
+for f_ in os.listdir(out):
+    if re.match(r'(x_\w+_)?part_\d+\.c$', f_):
+        _used_fun |= set(re.findall(r'\b(FUN_[0-9a-f]{6,8})\b', open(os.path.join(out, f_)).read()))
+_undecl = sorted(n for n in _used_fun if n not in _declared and n not in {'FUN_' + ('%08x' % a) for a in ()})
+if _undecl:
+    with open(os.path.join(out, 'decls.h'), 'a') as f_:
+        for n in _undecl:
+            f_.write('extern int %s() asm("%s");\n' % (n, n))
+for dn_ in cfg.get('dummy_functions', []):
+    with open(os.path.join(out, 'x_dummy_part_000.c'), 'a') as f_:
+        f_.write('/* %s: not reproduced (millicode entry Ghidra printed as a call, or a function whose decompile failed); returns 0 */\nunsigned long long %s_dummy() asm("%s");\nunsigned long long %s_dummy() { return 0; }\n' % (dn_, dn_, dn_, dn_))
+# say why a mapped name has no definition in data.s
+_out_ids = set()
+for f_ in os.listdir(out):
+    if re.match(r'(x_\w+_)?part_\d+\.c$', f_):
+        _out_ids |= set(re.findall(r'[A-Za-z_][A-Za-z_0-9]*', open(os.path.join(out, f_)).read()))
+_rows = [l.rstrip('\n').split('\t') for l in open(os.path.join(out, 'symbol_map.tsv'))]
+with open(os.path.join(out, 'symbol_map.tsv'), 'w') as w_:
+    w_.write('\t'.join(_rows[0]) + '\n')
+    for r_ in _rows[1:]:
+        if r_[7] == 'NOT DEFINED':
+            if r_[0] in cfg.get('data_label_overrides', {}) or r_[0] in ('__mh_bundle_header', '__mh_dylib_header', '__mh_execute_header'):
+                r_[7] = 'linker symbol %s' % cfg.get('data_label_overrides', {}).get(r_[0], r_[0])
+            elif r_[0] in clipped_entries:
+                r_[7] = 'code entry (asm next to its function)'
+            elif r_[0] in TOOLCHAIN_DATA:
+                r_[7] = 'toolchain (crt/dyld data)'
+            elif r_[0] not in _out_ids:
+                r_[7] = 'unused (referenced only by dropped toolchain code)'
+        w_.write('\t'.join(r_) + '\n')
 with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('atomic read-modify-write idioms rewritten as compare-and-swap loops: %d\n' % atomics_total[0])
     w.write('byte buffers Ghidra declared as scalars, turned into arrays: %d\n' % bufs_total[0])
@@ -786,6 +844,21 @@ static inline double GH_BITS_D(unsigned int hi, unsigned int lo) {
     x.u = ((unsigned long long)hi << 32) | lo;
     return x.d;
 }
+static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }
+static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) {
+    vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
+    __asm__ __volatile__("lvx v0,0,%1\\n\\tlvx v1,0,%2\\n\\tlvx v2,0,%3\\n\\tvperm v0,v0,v1,v2\\n\\tstvx v0,0,%0" : : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
+    return r;
+}
+static inline vec16 GH_VSEL(vec16 a, vec16 b, vec16 c) {
+    vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
+    __asm__ __volatile__("lvx v0,0,%1\\n\\tlvx v1,0,%2\\n\\tlvx v2,0,%3\\n\\tvsel v0,v0,v1,v2\\n\\tstvx v0,0,%0" : : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
+    return r;
+}
+#define vectorPermute GH_VPERM
+#define vectorConditionalSelect GH_VSEL
+#define dataCacheBlockClearToZero(p) GH_DCBZ((unsigned int)(p))
+#define dataCacheBlockAllocate(p) ((void)0)
 static inline int ghidra_cas32(void *p, int oldv, int newv) {
     int cur;
     __asm__ __volatile__("1: lwarx %0,0,%2\\n\\tcmpw %0,%3\\n\\tbne- 2f\\n\\tstwcx. %4,0,%2\\n\\tbne- 1b\\n2:"
@@ -829,7 +902,7 @@ for c_, nm_, cur_, comp_ in m.dylibs:
         auto_flags.append(f_)
 kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
-      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc -O0 -w -fPIC -fno-common"',
+      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc -O0 -w -fPIC -fno-common -force_cpusubtype_ALL"',
       'rm -rf obj; mkdir obj',
       'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; gcc $CFLAGS -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
       'as -arch ppc -o obj/data.o data.s',

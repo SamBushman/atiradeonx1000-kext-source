@@ -10,3 +10,4 @@ Always give the rebuilt image a *different install name* (`INSTALL=/path/x.dylib
 | `va_test.c` | stock and rebuilt VA bundle: exports, `AVAGetRendererInfo` return + buffer | PASS |
 | `glprog_test.c` | stock and rebuilt libGLProgrammability loaded side by side: all 515 stock C exports resolve; ARB vertex/fragment program parser (create, attach stream, attach string, parse; status + stream size + every stream word) over 39 programs x 2 shader kinds | PASS: 78 parses, 0 differences |
 | `glprog_parsestatement_probe.c`, `glprog_strtod_probe.c` | single-function probes used to bisect the first failures (statement kinds; `glp_strtod`) | historical: the failures they found are the rewrites listed in `Userspace/README.md` |
+| `gld_test.c` | stock and rebuilt GL driver bundle side by side (static initialisers run at dlopen); all 63 stock exports resolve in both | PASS |

@@ -1,0 +1,50 @@
+name	address	section	ghidra_type	len	c_declaration	value	defined_in
+__mh_bundle_header	0x0	?	mach_header	28	extern MACH_HEADER_t __mh_bundle_header asm("__mh_bundle_header");		linker symbol __mh_bundle_header
+_radeonCopyRegion	0x55a0	__TEXT,__text	-	-		0x7c400026	code entry (asm next to its function)
+s__LDBL128_0000cfbc	0xcfbc	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s__LDBL128_0000cfbc asm("s__LDBL128_0000cfbc");	0x244c4442	data.s
+DOUBLE_0000cfd8	0xcfd8	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfd8 asm("DOUBLE_0000cfd8");	0x43300000	data.s
+DOUBLE_0000cfe0	0xcfe0	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfe0 asm("DOUBLE_0000cfe0");	0x43300000	data.s
+DOUBLE_0000cfe8	0xcfe8	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfe8 asm("DOUBLE_0000cfe8");	0x3ff00000	data.s
+DOUBLE_0000cff0	0xcff0	__TEXT,__literal8	double	8	extern double DOUBLE_0000cff0 asm("DOUBLE_0000cff0");	0x41e00000	data.s
+FLOAT_0000cff8	0xcff8	__TEXT,__literal4	float	4	extern float FLOAT_0000cff8 asm("FLOAT_0000cff8");	0x41f80000	data.s
+FLOAT_0000cffc	0xcffc	__TEXT,__literal4	float	4	extern float FLOAT_0000cffc asm("FLOAT_0000cffc");	0x437f0000	data.s
+FLOAT_0000d000	0xd000	__TEXT,__literal4	float	4	extern float FLOAT_0000d000 asm("FLOAT_0000d000");	0x3f800000	data.s
+FLOAT_0000d004	0xd004	__TEXT,__literal4	float	4	extern float FLOAT_0000d004 asm("FLOAT_0000d004");	0x45800000	data.s
+FLOAT_0000d008	0xd008	__TEXT,__literal4	float	4	extern float FLOAT_0000d008 asm("FLOAT_0000d008");	0x00000000	data.s
+FLOAT_0000d00c	0xd00c	__TEXT,__literal4	float	4	extern float FLOAT_0000d00c asm("FLOAT_0000d00c");	0x41000000	data.s
+DAT_0000e018	0xe018	__DATA,__data	-	-	extern unsigned char DAT_0000e018 asm("DAT_0000e018");	0x18000000	data.s
+_radeonGAInterface	0xe544	__DATA,__data	-	-		0x00000000	data.s
+dyld_lazy_symbol_binding_entry_point	0xe600	__DATA,__dyld	undefined4	4		0x8fe01000	toolchain (crt/dyld data)
+dyld_func_lookup_pointer	0xe604	__DATA,__dyld	undefined4	4		0x8fe01008	toolchain (crt/dyld data)
+PTR_dyld_stub_binding_helper_0000e608	0xe608	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e608)() asm("PTR_dyld_stub_binding_helper_0000e608");	pointer -> _dlopen	data.s
+PTR_dyld_stub_binding_helper_0000e60c	0xe60c	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e60c)() asm("PTR_dyld_stub_binding_helper_0000e60c");	pointer -> _malloc	data.s
+PTR_dyld_stub_binding_helper_0000e610	0xe610	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e610)() asm("PTR_dyld_stub_binding_helper_0000e610");	pointer -> __keymgr_get_and_lock_processwide_ptr	data.s
+PTR_dyld_stub_binding_helper_0000e614	0xe614	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e614)() asm("PTR_dyld_stub_binding_helper_0000e614");	pointer -> _free	data.s
+PTR_dyld_stub_binding_helper_0000e618	0xe618	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e618)() asm("PTR_dyld_stub_binding_helper_0000e618");	pointer -> __keymgr_set_and_unlock_processwide_ptr	data.s
+PTR_dyld_stub_binding_helper_0000e61c	0xe61c	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e61c)() asm("PTR_dyld_stub_binding_helper_0000e61c");	pointer -> _dlsym	data.s
+PTR_dyld_stub_binding_helper_0000e620	0xe620	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_dyld_stub_binding_helper_0000e620)() asm("PTR_dyld_stub_binding_helper_0000e620");	pointer -> _calloc	data.s
+PTR_0000e68c	0xe68c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e68c asm("PTR_0000e68c");	pointer -> ___keymgr_global	data.s
+PTR_0000e690	0xe690	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e690 asm("PTR_0000e690");	pointer -> 0x0	data.s
+PTR_0000e694	0xe694	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e694 asm("PTR_0000e694");	pointer -> _mach_task_self_	data.s
+PTR_0000e698	0xe698	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000e698 asm("PTR_0000e698");	pointer -> _kCFBooleanTrue	data.s
+_textureBufferSize	0xe69c	__DATA,__bss	undefined4	4			data.s
+_textureBufferHeight	0xe6a0	__DATA,__bss	undefined4	4			data.s
+_textureBufferWidth	0xe6a4	__DATA,__bss	undefined4	4			data.s
+_textureBufferBytes	0xe6a8	__DATA,__bss	undefined4	4			data.s
+_offscreenBufferSize	0xe6ac	__DATA,__bss	undefined4	4			data.s
+_offscreenBufferHeight	0xe6b0	__DATA,__bss	undefined4	4			data.s
+_offscreenBufferWidth	0xe6b4	__DATA,__bss	undefined4	4			data.s
+_offscreenBufferBytes	0xe6b8	__DATA,__bss	undefined4	4			data.s
+_offscreenBuffer	0xe6bc	__DATA,__bss	undefined4	4			data.s
+DAT_0000e6c0	0xe6c0	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6c0 asm("DAT_0000e6c0");		data.s
+DAT_0000e6cc	0xe6cc	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6cc asm("DAT_0000e6cc");		data.s
+DAT_0000e6d0	0xe6d0	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6d0 asm("DAT_0000e6d0");		data.s
+DAT_0000e6d4	0xe6d4	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e6d4 asm("DAT_0000e6d4");		data.s
+DAT_0000e6e4	0xe6e4	__DATA,__bss	undefined4	4	extern unsigned char *DAT_0000e6e4 asm("DAT_0000e6e4");		data.s
+_textureBuffer	0xe720	__DATA,__bss	undefined4	4			data.s
+DAT_0000e724	0xe724	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e724 asm("DAT_0000e724");		data.s
+DAT_0000e730	0xe730	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e730 asm("DAT_0000e730");		data.s
+DAT_0000e734	0xe734	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e734 asm("DAT_0000e734");		data.s
+DAT_0000e738	0xe738	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000e738 asm("DAT_0000e738");		data.s
+DAT_0000e748	0xe748	__DATA,__bss	undefined4	4	extern unsigned char *DAT_0000e748 asm("DAT_0000e748");		data.s
+_funcptr	0xe784	__DATA,__bss	undefined4	4			data.s

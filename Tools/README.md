@@ -17,3 +17,4 @@ Kext build and verification (run from the repo root; the G5 is `ssh G5`):
 ordered recipe and `Userspace/README.md` describes the results.
 
 | `userspace/link_corpus.py`, `userspace/rewrites.py`, `userspace/machoutil.py`, `userspace/fix_gl_stubs.py`, `userspace/check_gl_stub_indices.py`, `userspace/link_config/*.json`, `userspace/gs/DumpData.java`, `userspace/pipeline/regen_32bit.sh` | userspace linking (issue #61): see `Userspace/README.md`, "Linking" |
+| `userspace/check_symbol_map.py` | checks a link build's data symbol map against the assembled data object |

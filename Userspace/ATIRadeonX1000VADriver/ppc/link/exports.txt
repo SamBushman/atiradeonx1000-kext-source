@@ -1,0 +1,4 @@
+_AVACreateRenderer
+_AVACreateRendererDVDExt
+_AVACreateRendererDisplayExt
+_AVAGetRendererInfo

@@ -1,0 +1,124 @@
+name	address	section	ghidra_type	len	c_declaration	value	defined_in
+DOUBLE_0000d408	0xd408	__TEXT,__literal8	double	8	extern double DOUBLE_0000d408 asm("DOUBLE_0000d408");	0xc00921fb	data.s
+DOUBLE_0000d410	0xd410	__TEXT,__literal8	double	8	extern double DOUBLE_0000d410 asm("DOUBLE_0000d410");	0x400921fb	data.s
+DOUBLE_0000d418	0xd418	__TEXT,__literal8	double	8	extern double DOUBLE_0000d418 asm("DOUBLE_0000d418");	0x43300000	data.s
+DOUBLE_0000d420	0xd420	__TEXT,__literal8	double	8	extern double DOUBLE_0000d420 asm("DOUBLE_0000d420");	0x43300000	data.s
+FLOAT_0000d428	0xd428	__TEXT,__literal4	float	4	extern float FLOAT_0000d428 asm("FLOAT_0000d428");	0xc0490fdb	data.s
+FLOAT_0000d42c	0xd42c	__TEXT,__literal4	float	4	extern float FLOAT_0000d42c asm("FLOAT_0000d42c");	0x40490fdb	data.s
+FLOAT_0000d430	0xd430	__TEXT,__literal4	float	4	extern float FLOAT_0000d430 asm("FLOAT_0000d430");	0x00000000	data.s
+FLOAT_0000d434	0xd434	__TEXT,__literal4	float	4	extern float FLOAT_0000d434 asm("FLOAT_0000d434");	0x40400000	data.s
+FLOAT_0000d438	0xd438	__TEXT,__literal4	float	4	extern float FLOAT_0000d438 asm("FLOAT_0000d438");	0xbf800000	data.s
+FLOAT_0000d43c	0xd43c	__TEXT,__literal4	float	4	extern float FLOAT_0000d43c asm("FLOAT_0000d43c");	0x3f800000	data.s
+FLOAT_0000d440	0xd440	__TEXT,__literal4	float	4	extern float FLOAT_0000d440 asm("FLOAT_0000d440");	0x3e800000	data.s
+FLOAT_0000d444	0xd444	__TEXT,__literal4	float	4	extern float FLOAT_0000d444 asm("FLOAT_0000d444");	0x40800000	data.s
+FLOAT_0000d448	0xd448	__TEXT,__literal4	float	4	extern float FLOAT_0000d448 asm("FLOAT_0000d448");	0x3b808081	data.s
+FLOAT_0000d44c	0xd44c	__TEXT,__literal4	float	4	extern float FLOAT_0000d44c asm("FLOAT_0000d44c");	0x46fffe00	data.s
+FLOAT_0000d450	0xd450	__TEXT,__literal4	float	4	extern float FLOAT_0000d450 asm("FLOAT_0000d450");	0x41000000	data.s
+FLOAT_0000d454	0xd454	__TEXT,__literal4	float	4	extern float FLOAT_0000d454 asm("FLOAT_0000d454");	0x3fc00000	data.s
+FLOAT_0000d458	0xd458	__TEXT,__literal4	float	4	extern float FLOAT_0000d458 asm("FLOAT_0000d458");	0x40000000	data.s
+FLOAT_0000d45c	0xd45c	__TEXT,__literal4	float	4	extern float FLOAT_0000d45c asm("FLOAT_0000d45c");	0x43000000	data.s
+FLOAT_0000d460	0xd460	__TEXT,__literal4	float	4	extern float FLOAT_0000d460 asm("FLOAT_0000d460");	0x437f0000	data.s
+FLOAT_0000d464	0xd464	__TEXT,__literal4	float	4	extern float FLOAT_0000d464 asm("FLOAT_0000d464");	0x3f000000	data.s
+FLOAT_0000d468	0xd468	__TEXT,__literal4	float	4	extern float FLOAT_0000d468 asm("FLOAT_0000d468");	0x3f109091	data.s
+FLOAT_0000d46c	0xd46c	__TEXT,__literal4	float	4	extern float FLOAT_0000d46c asm("FLOAT_0000d46c");	0x3d40c0c1	data.s
+FLOAT_0000d470	0xd470	__TEXT,__literal4	float	4	extern float FLOAT_0000d470 asm("FLOAT_0000d470");	0x3e008081	data.s
+UNK_0000d474	0xd474	__TEXT,__const	-	-	extern unsigned char UNK_0000d474 asm("UNK_0000d474");	0x00028001	data.s
+UNK_0000d4ec	0xd4ec	__TEXT,__const	-	-	extern unsigned char UNK_0000d4ec asm("UNK_0000d4ec");	0x00007803	data.s
+UNK_0000d5c4	0xd5c4	__TEXT,__const	-	-	extern unsigned char UNK_0000d5c4 asm("UNK_0000d5c4");	0x00010001	data.s
+UNK_0000d7ec	0xd7ec	__TEXT,__const	-	-	extern unsigned char UNK_0000d7ec asm("UNK_0000d7ec");	0x00000016	data.s
+UNK_0000dd00	0xdd00	__TEXT,__const	-	-	extern unsigned char UNK_0000dd00 asm("UNK_0000dd00");	0x00000015	data.s
+UNK_0000e144	0xe144	__TEXT,__const	-	-	extern unsigned char UNK_0000e144 asm("UNK_0000e144");	0x00000016	data.s
+UNK_0000e658	0xe658	__TEXT,__const	-	-	extern unsigned char UNK_0000e658 asm("UNK_0000e658");	0x00000015	data.s
+DAT_0000ea9c	0xea9c	__TEXT,__const	-	-	extern unsigned char DAT_0000ea9c asm("DAT_0000ea9c");	0x00007803	data.s
+DAT_0000eafc	0xeafc	__TEXT,__const	-	-	extern unsigned char DAT_0000eafc asm("DAT_0000eafc");	0x00007803	data.s
+DAT_0000eb2c	0xeb2c	__TEXT,__const	-	-	extern unsigned char DAT_0000eb2c asm("DAT_0000eb2c");	0x437f0000	data.s
+DAT_0000eb7c	0xeb7c	__TEXT,__const	-	-	extern unsigned char DAT_0000eb7c asm("DAT_0000eb7c");	0x00007803	data.s
+DAT_0000ec24	0xec24	__TEXT,__const	-	-	extern unsigned char DAT_0000ec24 asm("DAT_0000ec24");	0x00007803	data.s
+DAT_0000ec84	0xec84	__TEXT,__const	-	-	extern unsigned char DAT_0000ec84 asm("DAT_0000ec84");	0x00007803	data.s
+DAT_0000ecb4	0xecb4	__TEXT,__const	-	-	extern unsigned char DAT_0000ecb4 asm("DAT_0000ecb4");	0x00007803	data.s
+DAT_0000ece4	0xece4	__TEXT,__const	-	-	extern unsigned char DAT_0000ece4 asm("DAT_0000ece4");	0x00007803	data.s
+DAT_0000eef4	0xeef4	__TEXT,__const	-	-	extern unsigned char DAT_0000eef4 asm("DAT_0000eef4");	0x00007803	data.s
+DAT_0000f004	0xf004	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f004 asm("DAT_0000f004");	0x3d400000	data.s
+DAT_0000f008	0xf008	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f008 asm("DAT_0000f008");	0x3d400000	data.s
+DAT_0000f00c	0xf00c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f00c asm("DAT_0000f00c");	0x3d400000	data.s
+DAT_0000f010	0xf010	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f010 asm("DAT_0000f010");	0x3d400000	data.s
+DAT_0000f014	0xf014	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f014 asm("DAT_0000f014");	0x3e800000	data.s
+DAT_0000f018	0xf018	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f018 asm("DAT_0000f018");	0x3e800000	data.s
+DAT_0000f01c	0xf01c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f01c asm("DAT_0000f01c");	0x3e800000	data.s
+DAT_0000f020	0xf020	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f020 asm("DAT_0000f020");	0x3e800000	data.s
+DAT_0000f024	0xf024	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f024 asm("DAT_0000f024");	0x00000000	data.s
+DAT_0000f028	0xf028	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f028 asm("DAT_0000f028");	0x00000000	data.s
+DAT_0000f02c	0xf02c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f02c asm("DAT_0000f02c");	0x00000000	data.s
+DAT_0000f030	0xf030	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f030 asm("DAT_0000f030");	0x00000000	data.s
+DAT_0000f034	0xf034	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f034 asm("DAT_0000f034");	0x3f800000	data.s
+DAT_0000f038	0xf038	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f038 asm("DAT_0000f038");	0x3f800000	data.s
+DAT_0000f03c	0xf03c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f03c asm("DAT_0000f03c");	0x3f800000	data.s
+DAT_0000f040	0xf040	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f040 asm("DAT_0000f040");	0x3f800000	data.s
+DAT_0000f044	0xf044	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f044 asm("DAT_0000f044");	0x00000000	data.s
+DAT_0000f048	0xf048	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f048 asm("DAT_0000f048");	0x00000000	data.s
+DAT_0000f04c	0xf04c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f04c asm("DAT_0000f04c");	0x00000000	data.s
+DAT_0000f050	0xf050	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f050 asm("DAT_0000f050");	0x00000000	data.s
+DAT_0000f054	0xf054	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f054 asm("DAT_0000f054");	0x00000000	data.s
+DAT_0000f058	0xf058	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f058 asm("DAT_0000f058");	0x00000000	data.s
+DAT_0000f05c	0xf05c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f05c asm("DAT_0000f05c");	0x00000000	data.s
+DAT_0000f060	0xf060	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f060 asm("DAT_0000f060");	0x00000000	data.s
+DAT_0000f064	0xf064	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f064 asm("DAT_0000f064");	0x00000000	data.s
+DAT_0000f068	0xf068	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f068 asm("DAT_0000f068");	0x00000000	data.s
+DAT_0000f06c	0xf06c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f06c asm("DAT_0000f06c");	0x00000000	data.s
+DAT_0000f070	0xf070	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f070 asm("DAT_0000f070");	0x00000000	data.s
+DAT_0000f074	0xf074	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f074 asm("DAT_0000f074");	0x00000000	data.s
+DAT_0000f078	0xf078	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f078 asm("DAT_0000f078");	0x00000000	data.s
+DAT_0000f07c	0xf07c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f07c asm("DAT_0000f07c");	0x00000000	data.s
+DAT_0000f080	0xf080	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f080 asm("DAT_0000f080");	0x00000000	data.s
+DAT_0000f084	0xf084	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f084 asm("DAT_0000f084");	0x00000000	data.s
+DAT_0000f088	0xf088	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f088 asm("DAT_0000f088");	0x00000000	data.s
+DAT_0000f08c	0xf08c	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f08c asm("DAT_0000f08c");	0x00000000	data.s
+DAT_0000f090	0xf090	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f090 asm("DAT_0000f090");	0x00000000	data.s
+DAT_0000f0b4	0xf0b4	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f0b4 asm("DAT_0000f0b4");	0x44340000	data.s
+DAT_0000f0b8	0xf0b8	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f0b8 asm("DAT_0000f0b8");	0x3f800000	data.s
+DAT_0000f0bc	0xf0bc	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f0bc asm("DAT_0000f0bc");	0x3f800000	data.s
+DAT_0000f0c0	0xf0c0	__DATA,__data	undefined4	4	extern unsigned int DAT_0000f0c0 asm("DAT_0000f0c0");	0x3f800000	data.s
+DAT_0000f0c4	0xf0c4	__DATA,__dyld	undefined4	4	extern int (*DAT_0000f0c4)() asm("DAT_0000f0c4");	0x8fe01000	unused (referenced only by dropped toolchain code)
+DAT_0000f0c8	0xf0c8	__DATA,__dyld	undefined4	4	extern int (*DAT_0000f0c8)() asm("DAT_0000f0c8");	0x8fe01008	unused (referenced only by dropped toolchain code)
+PTR_FUN_0000f0cc	0xf0cc	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0cc)() asm("PTR_FUN_0000f0cc");	pointer -> _dlopen	data.s
+PTR_FUN_0000f0d0	0xf0d0	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0d0)() asm("PTR_FUN_0000f0d0");	pointer -> _malloc	data.s
+PTR_FUN_0000f0d4	0xf0d4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0d4)() asm("PTR_FUN_0000f0d4");	pointer -> __keymgr_get_and_lock_processwide_ptr	data.s
+PTR_FUN_0000f0d8	0xf0d8	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0d8)() asm("PTR_FUN_0000f0d8");	pointer -> _free	data.s
+PTR_FUN_0000f0dc	0xf0dc	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0dc)() asm("PTR_FUN_0000f0dc");	pointer -> __keymgr_set_and_unlock_processwide_ptr	data.s
+PTR_FUN_0000f0e0	0xf0e0	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0e0)() asm("PTR_FUN_0000f0e0");	pointer -> _dlsym	data.s
+PTR_FUN_0000f0e4	0xf0e4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_FUN_0000f0e4)() asm("PTR_FUN_0000f0e4");	pointer -> _calloc	data.s
+PTR_0000f124	0xf124	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000f124 asm("PTR_0000f124");	pointer -> ___keymgr_global	data.s
+PTR_0000f128	0xf128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000f128 asm("PTR_0000f128");	pointer -> 0x0	data.s
+PTR_FUN_0000f12c	0xf12c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f12c asm("PTR_FUN_0000f12c");	pointer -> FUN_00004740	data.s
+PTR_FUN_0000f130	0xf130	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f130 asm("PTR_FUN_0000f130");	pointer -> FUN_00002dc0	data.s
+PTR_FUN_0000f134	0xf134	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f134 asm("PTR_FUN_0000f134");	pointer -> FUN_000038c0	data.s
+PTR_FUN_0000f138	0xf138	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f138 asm("PTR_FUN_0000f138");	pointer -> FUN_00004340	data.s
+PTR_DAT_0000f13c	0xf13c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_0000f13c asm("PTR_DAT_0000f13c");	pointer -> LD_f1b0	data.s
+PTR_FUN_0000f140	0xf140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f140 asm("PTR_FUN_0000f140");	pointer -> FUN_000052f0	data.s
+PTR_FUN_0000f144	0xf144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f144 asm("PTR_FUN_0000f144");	pointer -> FUN_00003930	data.s
+PTR_FUN_0000f148	0xf148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f148 asm("PTR_FUN_0000f148");	pointer -> FUN_00004a00	data.s
+PTR_FUN_0000f14c	0xf14c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f14c asm("PTR_FUN_0000f14c");	pointer -> FUN_000037b0	data.s
+PTR_FUN_0000f150	0xf150	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f150 asm("PTR_FUN_0000f150");	pointer -> FUN_000051f0	data.s
+PTR_FUN_0000f154	0xf154	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f154 asm("PTR_FUN_0000f154");	pointer -> FUN_000049f0	data.s
+PTR_FUN_0000f158	0xf158	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f158 asm("PTR_FUN_0000f158");	pointer -> FUN_00003630	data.s
+PTR_FUN_0000f15c	0xf15c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f15c asm("PTR_FUN_0000f15c");	pointer -> FUN_00002d00	data.s
+PTR_FUN_0000f160	0xf160	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f160 asm("PTR_FUN_0000f160");	pointer -> FUN_00004b40	data.s
+PTR_FUN_0000f164	0xf164	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f164 asm("PTR_FUN_0000f164");	pointer -> FUN_00005280	data.s
+PTR_FUN_0000f168	0xf168	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f168 asm("PTR_FUN_0000f168");	pointer -> FUN_00002b70	data.s
+PTR_FUN_0000f16c	0xf16c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f16c asm("PTR_FUN_0000f16c");	pointer -> FUN_000056a0	data.s
+PTR_FUN_0000f170	0xf170	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f170 asm("PTR_FUN_0000f170");	pointer -> FUN_00003830	data.s
+PTR_FUN_0000f174	0xf174	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f174 asm("PTR_FUN_0000f174");	pointer -> FUN_00004a10	data.s
+PTR_FUN_0000f178	0xf178	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f178 asm("PTR_FUN_0000f178");	pointer -> FUN_00002e10	data.s
+PTR_FUN_0000f17c	0xf17c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f17c asm("PTR_FUN_0000f17c");	pointer -> FUN_00004280	data.s
+PTR_FUN_0000f180	0xf180	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f180 asm("PTR_FUN_0000f180");	pointer -> FUN_00002c70	data.s
+PTR_DAT_0000f184	0xf184	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_0000f184 asm("PTR_DAT_0000f184");	pointer -> LD_f1b4	data.s
+PTR_FUN_0000f188	0xf188	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f188 asm("PTR_FUN_0000f188");	pointer -> FUN_00002e50	data.s
+PTR_FUN_0000f18c	0xf18c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f18c asm("PTR_FUN_0000f18c");	pointer -> FUN_00003fc0	data.s
+PTR_FUN_0000f190	0xf190	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f190 asm("PTR_FUN_0000f190");	pointer -> FUN_00002570	data.s
+PTR_FUN_0000f194	0xf194	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f194 asm("PTR_FUN_0000f194");	pointer -> FUN_00004fa0	data.s
+PTR_FUN_0000f198	0xf198	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_0000f198 asm("PTR_FUN_0000f198");	pointer -> FUN_00002d80	data.s
+PTR_0000f19c	0xf19c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000f19c asm("PTR_0000f19c");	pointer -> __cpu_capabilities	data.s
+PTR_0000f1a0	0xf1a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_0000f1a0 asm("PTR_0000f1a0");	pointer -> _mach_task_self_	data.s
+DAT_0000f1a4	0xf1a4	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000f1a4 asm("DAT_0000f1a4");		data.s
+DAT_0000f1a8	0xf1a8	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000f1a8 asm("DAT_0000f1a8");		data.s
+DAT_0000f1ac	0xf1ac	__DATA,__bss	undefined4	4	extern unsigned int DAT_0000f1ac asm("DAT_0000f1ac");		data.s

@@ -1,0 +1,1321 @@
+name	address	section	ghidra_type	len	c_declaration	value	defined_in
+s__97c23d6c	0x97c23d6c	__TEXT,__cstring	TerminatedCString	1	extern unsigned char *s__97c23d6c asm("s__97c23d6c");	0x00000000	data.s
+s___________________________97c23e68	0x97c23e68	__TEXT,__cstring	TerminatedCString	26	extern unsigned char *s___________________________97c23e68 asm("s___________________________97c23e68");	0x7e21255e	data.s
+s_PROFILE__97c23f9c	0x97c23f9c	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_PROFILE__97c23f9c asm("s_PROFILE__97c23f9c");	0x50524f46	data.s
+s__97c26c38	0x97c26c38	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s__97c26c38 asm("s__97c26c38");	0x0a000000	data.s
+s__97c28c28	0x97c28c28	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__97c28c28 asm("s__97c28c28");	0x20200000	data.s
+SYM_97c291c0	0x97c291c0	__TEXT,__cstring	TerminatedCString	2		0x20000000	data.s
+s__97c291c0	0x97c291c0	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s__97c291c0 asm("s__97c291c0");	0x20000000	data.s
+s___97c29860	0x97c29860	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c29860 asm("s___97c29860");	0x5b000000	data.s
+SYM_97c29948	0x97c29948	__TEXT,__cstring	TerminatedCString	15		0x20697320	data.s
+SYM_97c29ef8	0x97c29ef8	__TEXT,__cstring	TerminatedCString	8		0x73747275	data.s
+s___97c2a130	0x97c2a130	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a130 asm("s___97c2a130");	0x2e000000	data.s
+s___97c2a2d4	0x97c2a2d4	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a2d4 asm("s___97c2a2d4");	0x2d000000	data.s
+s___97c2a308	0x97c2a308	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a308 asm("s___97c2a308");	0x2b000000	data.s
+s___97c2a31c	0x97c2a31c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a31c asm("s___97c2a31c");	0x7c000000	data.s
+s___97c2a320	0x97c2a320	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a320 asm("s___97c2a320");	0x3a000000	data.s
+s___97c2a324	0x97c2a324	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2a324 asm("s___97c2a324");	0x2c000000	data.s
+SYM_97c2aa10	0x97c2aa10	__TEXT,__cstring	TerminatedCString	19		0x27206973	data.s
+s_F_97c2d738	0x97c2d738	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_F_97c2d738 asm("s_F_97c2d738");	0x46000000	data.s
+s_X_97c2d73c	0x97c2d73c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_X_97c2d73c asm("s_X_97c2d73c");	0x58000000	data.s
+s_I_97c2d740	0x97c2d740	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_I_97c2d740 asm("s_I_97c2d740");	0x49000000	data.s
+s_B_97c2d744	0x97c2d744	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_B_97c2d744 asm("s_B_97c2d744");	0x42000000	data.s
+s_32_97c2d748	0x97c2d748	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_32_97c2d748 asm("s_32_97c2d748");	0x33320000	data.s
+s_16_97c2d74c	0x97c2d74c	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_16_97c2d74c asm("s_16_97c2d74c");	0x31360000	data.s
+s_12_97c2d750	0x97c2d750	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_12_97c2d750 asm("s_12_97c2d750");	0x31320000	data.s
+s_R_97c2d754	0x97c2d754	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_R_97c2d754 asm("s_R_97c2d754");	0x52000000	data.s
+s_H_97c2d758	0x97c2d758	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_H_97c2d758 asm("s_H_97c2d758");	0x48000000	data.s
+s_C_97c2d75c	0x97c2d75c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_C_97c2d75c asm("s_C_97c2d75c");	0x43000000	data.s
+s_1_97c2d760	0x97c2d760	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_1_97c2d760 asm("s_1_97c2d760");	0x31000000	data.s
+s__SAT_97c2d764	0x97c2d764	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__SAT_97c2d764 asm("s__SAT_97c2d764");	0x5f534154	data.s
+s_tmp_97c2d76c	0x97c2d76c	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_tmp_97c2d76c asm("s_tmp_97c2d76c");	0x746d7000	data.s
+s___97c2d770	0x97c2d770	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2d770 asm("s___97c2d770");	0x5d000000	data.s
+s_res_97c2d774	0x97c2d774	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_res_97c2d774 asm("s_res_97c2d774");	0x72657300	data.s
+s__adr_97c2d778	0x97c2d778	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__adr_97c2d778 asm("s__adr_97c2d778");	0x5b616472	data.s
+s__x_97c2d780	0x97c2d780	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__x_97c2d780 asm("s__x_97c2d780");	0x2e780000	data.s
+s__y_97c2d784	0x97c2d784	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__y_97c2d784 asm("s__y_97c2d784");	0x2e790000	data.s
+s__z_97c2d788	0x97c2d788	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__z_97c2d788 asm("s__z_97c2d788");	0x2e7a0000	data.s
+s__w_97c2d78c	0x97c2d78c	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__w_97c2d78c asm("s__w_97c2d78c");	0x2e770000	data.s
+s_x_97c2d790	0x97c2d790	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_x_97c2d790 asm("s_x_97c2d790");	0x78000000	data.s
+s_y_97c2d794	0x97c2d794	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_y_97c2d794 asm("s_y_97c2d794");	0x79000000	data.s
+s_z_97c2d798	0x97c2d798	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_z_97c2d798 asm("s_z_97c2d798");	0x7a000000	data.s
+s_w_97c2d79c	0x97c2d79c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_w_97c2d79c asm("s_w_97c2d79c");	0x77000000	data.s
+s__TR_97c2d7a0	0x97c2d7a0	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__TR_97c2d7a0 asm("s__TR_97c2d7a0");	0x20285452	data.s
+s__EQ_97c2d7a8	0x97c2d7a8	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__EQ_97c2d7a8 asm("s__EQ_97c2d7a8");	0x20284551	data.s
+s__GE_97c2d7b0	0x97c2d7b0	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__GE_97c2d7b0 asm("s__GE_97c2d7b0");	0x20284745	data.s
+s__GT_97c2d7b8	0x97c2d7b8	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__GT_97c2d7b8 asm("s__GT_97c2d7b8");	0x20284754	data.s
+s__LE_97c2d7c0	0x97c2d7c0	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__LE_97c2d7c0 asm("s__LE_97c2d7c0");	0x20284c45	data.s
+s__LT_97c2d7c8	0x97c2d7c8	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__LT_97c2d7c8 asm("s__LT_97c2d7c8");	0x20284c54	data.s
+s__NE_97c2d7d0	0x97c2d7d0	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__NE_97c2d7d0 asm("s__NE_97c2d7d0");	0x20284e45	data.s
+s__FL_97c2d7d8	0x97c2d7d8	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__FL_97c2d7d8 asm("s__FL_97c2d7d8");	0x2028464c	data.s
+s_adr_97c2d7e0	0x97c2d7e0	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_adr_97c2d7e0 asm("s_adr_97c2d7e0");	0x61647200	data.s
+s_att_97c2d7e4	0x97c2d7e4	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_att_97c2d7e4 asm("s_att_97c2d7e4");	0x61747400	data.s
+s_prm_97c2d7e8	0x97c2d7e8	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_prm_97c2d7e8 asm("s_prm_97c2d7e8");	0x70726d00	data.s
+s___97c2d7ec	0x97c2d7ec	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s___97c2d7ec asm("s___97c2d7ec");	0x2c200000	data.s
+s__x_97c2d7f0	0x97c2d7f0	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__x_97c2d7f0 asm("s__x_97c2d7f0");	0x2d780000	data.s
+s__y_97c2d7f4	0x97c2d7f4	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__y_97c2d7f4 asm("s__y_97c2d7f4");	0x2d790000	data.s
+s__z_97c2d7f8	0x97c2d7f8	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__z_97c2d7f8 asm("s__z_97c2d7f8");	0x2d7a0000	data.s
+s__w_97c2d7fc	0x97c2d7fc	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__w_97c2d7fc asm("s__w_97c2d7fc");	0x2d770000	data.s
+s_0_97c2d800	0x97c2d800	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_0_97c2d800 asm("s_0_97c2d800");	0x30000000	data.s
+s__1_97c2d804	0x97c2d804	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s__1_97c2d804 asm("s__1_97c2d804");	0x2d310000	data.s
+s_texture__97c2d814	0x97c2d814	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_texture__97c2d814 asm("s_texture__97c2d814");	0x74657874	data.s
+s____97c2d820	0x97c2d820	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s____97c2d820 asm("s____97c2d820");	0x5d2c2000	data.s
+s_1D_97c2d824	0x97c2d824	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_1D_97c2d824 asm("s_1D_97c2d824");	0x31440000	data.s
+s_2D_97c2d828	0x97c2d828	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_2D_97c2d828 asm("s_2D_97c2d828");	0x32440000	data.s
+s_3D_97c2d82c	0x97c2d82c	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s_3D_97c2d82c asm("s_3D_97c2d82c");	0x33440000	data.s
+s_CUBE_97c2d830	0x97c2d830	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_CUBE_97c2d830 asm("s_CUBE_97c2d830");	0x43554245	data.s
+s_RECT_97c2d838	0x97c2d838	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_RECT_97c2d838 asm("s_RECT_97c2d838");	0x52454354	data.s
+s_SHADOWRECT_97c2d840	0x97c2d840	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_SHADOWRECT_97c2d840 asm("s_SHADOWRECT_97c2d840");	0x53484144	data.s
+s_SHADOW2D_97c2d84c	0x97c2d84c	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_SHADOW2D_97c2d84c asm("s_SHADOW2D_97c2d84c");	0x53484144	data.s
+s_SHADOW1D_97c2d858	0x97c2d858	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_SHADOW1D_97c2d858 asm("s_SHADOW1D_97c2d858");	0x53484144	data.s
+s_TR_97c2d864	0x97c2d864	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_TR_97c2d864 asm("s_TR_97c2d864");	0x20545200	data.s
+s_EQ_97c2d868	0x97c2d868	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_EQ_97c2d868 asm("s_EQ_97c2d868");	0x20455100	data.s
+s_GE_97c2d86c	0x97c2d86c	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_GE_97c2d86c asm("s_GE_97c2d86c");	0x20474500	data.s
+s_GT_97c2d870	0x97c2d870	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_GT_97c2d870 asm("s_GT_97c2d870");	0x20475400	data.s
+s_LE_97c2d874	0x97c2d874	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_LE_97c2d874 asm("s_LE_97c2d874");	0x204c4500	data.s
+s_LT_97c2d878	0x97c2d878	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_LT_97c2d878 asm("s_LT_97c2d878");	0x204c5400	data.s
+s_NE_97c2d87c	0x97c2d87c	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_NE_97c2d87c asm("s_NE_97c2d87c");	0x204e4500	data.s
+s_FL_97c2d880	0x97c2d880	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s_FL_97c2d880 asm("s_FL_97c2d880");	0x20464c00	data.s
+s___97c2d884	0x97c2d884	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2d884 asm("s___97c2d884");	0x3b000000	data.s
+s___ARBvp1_0_97c2d89c	0x97c2d89c	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___ARBvp1_0_97c2d89c asm("s___ARBvp1_0_97c2d89c");	0x21214152	data.s
+s___ARBvertexshader_97c2d8a8	0x97c2d8a8	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s___ARBvertexshader_97c2d8a8 asm("s___ARBvertexshader_97c2d8a8");	0x21214152	data.s
+s___ARBfp1_0_97c2d8bc	0x97c2d8bc	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___ARBfp1_0_97c2d8bc asm("s___ARBfp1_0_97c2d8bc");	0x21214152	data.s
+s___ARBfragmentshader_97c2d8c8	0x97c2d8c8	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s___ARBfragmentshader_97c2d8c8 asm("s___ARBfragmentshader_97c2d8c8");	0x21214152	data.s
+s_Unkown_Target__error__97c2d8e0	0x97c2d8e0	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_Unkown_Target__error__97c2d8e0 asm("s_Unkown_Target__error__97c2d8e0");	0x556e6b6f	data.s
+s___97c2d8f8	0x97c2d8f8	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s___97c2d8f8 asm("s___97c2d8f8");	0x3b0a0000	data.s
+s_OPTION_97c2d8fc	0x97c2d8fc	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_OPTION_97c2d8fc asm("s_OPTION_97c2d8fc");	0x4f505449	data.s
+s_ARB_position_invariant_97c2d904	0x97c2d904	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_ARB_position_invariant_97c2d904 asm("s_ARB_position_invariant_97c2d904");	0x4152425f	data.s
+s_ARB_fog_exp_97c2d91c	0x97c2d91c	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_ARB_fog_exp_97c2d91c asm("s_ARB_fog_exp_97c2d91c");	0x4152425f	data.s
+s_ARB_fog_exp2_97c2d928	0x97c2d928	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_ARB_fog_exp2_97c2d928 asm("s_ARB_fog_exp2_97c2d928");	0x4152425f	data.s
+s_ARB_fog_linear_97c2d938	0x97c2d938	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_ARB_fog_linear_97c2d938 asm("s_ARB_fog_linear_97c2d938");	0x4152425f	data.s
+s_ARB_precision_hint_fastest_97c2d948	0x97c2d948	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s_ARB_precision_hint_fastest_97c2d948 asm("s_ARB_precision_hint_fastest_97c2d948");	0x4152425f	data.s
+s_ARB_precision_hint_nicest_97c2d964	0x97c2d964	__TEXT,__cstring	TerminatedCString	26	extern unsigned char *s_ARB_precision_hint_nicest_97c2d964 asm("s_ARB_precision_hint_nicest_97c2d964");	0x4152425f	data.s
+s_APPLE_no_runtime_compile_97c2d980	0x97c2d980	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_APPLE_no_runtime_compile_97c2d980 asm("s_APPLE_no_runtime_compile_97c2d980");	0x4150504c	data.s
+s_APPLE_no_altivec_97c2d99c	0x97c2d99c	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_APPLE_no_altivec_97c2d99c asm("s_APPLE_no_altivec_97c2d99c");	0x4150504c	data.s
+s_NV_fragment_program_97c2d9b0	0x97c2d9b0	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_NV_fragment_program_97c2d9b0 asm("s_NV_fragment_program_97c2d9b0");	0x4e565f66	data.s
+s_NV_fragment_program2_97c2d9c4	0x97c2d9c4	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s_NV_fragment_program2_97c2d9c4 asm("s_NV_fragment_program2_97c2d9c4");	0x4e565f66	data.s
+s_ARB_fragment_program_shadow_97c2d9dc	0x97c2d9dc	__TEXT,__cstring	TerminatedCString	28	extern unsigned char *s_ARB_fragment_program_shadow_97c2d9dc asm("s_ARB_fragment_program_shadow_97c2d9dc");	0x4152425f	data.s
+s_NV_vertex_program2_97c2d9f8	0x97c2d9f8	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_NV_vertex_program2_97c2d9f8 asm("s_NV_vertex_program2_97c2d9f8");	0x4e565f76	data.s
+s_NV_vertex_program3_97c2da0c	0x97c2da0c	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_NV_vertex_program3_97c2da0c asm("s_NV_vertex_program3_97c2da0c");	0x4e565f76	data.s
+s_ARB_draw_buffers_97c2da20	0x97c2da20	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_ARB_draw_buffers_97c2da20 asm("s_ARB_draw_buffers_97c2da20");	0x4152425f	data.s
+s_ADDRESS_adr0_97c2da34	0x97c2da34	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_ADDRESS_adr0_97c2da34 asm("s_ADDRESS_adr0_97c2da34");	0x41444452	data.s
+s___adr_97c2da44	0x97c2da44	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s___adr_97c2da44 asm("s___adr_97c2da44");	0x2c206164	data.s
+s_TEMP_97c2da4c	0x97c2da4c	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_TEMP_97c2da4c asm("s_TEMP_97c2da4c");	0x54454d50	data.s
+s_LONG_TEMP_97c2da54	0x97c2da54	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_LONG_TEMP_97c2da54 asm("s_LONG_TEMP_97c2da54");	0x4c4f4e47	data.s
+s_SHORT_TEMP_97c2da60	0x97c2da60	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_SHORT_TEMP_97c2da60 asm("s_SHORT_TEMP_97c2da60");	0x53484f52	data.s
+s_ATTRIB_att_97c2da6c	0x97c2da6c	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_ATTRIB_att_97c2da6c asm("s_ATTRIB_att_97c2da6c");	0x41545452	data.s
+s___vertex__97c2da78	0x97c2da78	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s___vertex__97c2da78 asm("s___vertex__97c2da78");	0x203d2076	data.s
+s___fragment__97c2da84	0x97c2da84	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___fragment__97c2da84 asm("s___fragment__97c2da84");	0x203d2066	data.s
+s_position_97c2da94	0x97c2da94	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_position_97c2da94 asm("s_position_97c2da94");	0x706f7369	data.s
+s_color_primary_97c2daa0	0x97c2daa0	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_color_primary_97c2daa0 asm("s_color_primary_97c2daa0");	0x636f6c6f	data.s
+s_color_secondary_97c2dab0	0x97c2dab0	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_color_secondary_97c2dab0 asm("s_color_secondary_97c2dab0");	0x636f6c6f	data.s
+s_normal_97c2dac0	0x97c2dac0	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_normal_97c2dac0 asm("s_normal_97c2dac0");	0x6e6f726d	data.s
+s_fogcoord_97c2dac8	0x97c2dac8	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_fogcoord_97c2dac8 asm("s_fogcoord_97c2dac8");	0x666f6763	data.s
+s_frontfacing_97c2dad4	0x97c2dad4	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_frontfacing_97c2dad4 asm("s_frontfacing_97c2dad4");	0x66726f6e	data.s
+s_texcoord__97c2dae0	0x97c2dae0	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_texcoord__97c2dae0 asm("s_texcoord__97c2dae0");	0x74657863	data.s
+s_weight__97c2daec	0x97c2daec	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_weight__97c2daec asm("s_weight__97c2daec");	0x77656967	data.s
+s_matrixindex__97c2daf4	0x97c2daf4	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_matrixindex__97c2daf4 asm("s_matrixindex__97c2daf4");	0x6d617472	data.s
+s_attrib__97c2db04	0x97c2db04	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_attrib__97c2db04 asm("s_attrib__97c2db04");	0x61747472	data.s
+s_material__97c2db0c	0x97c2db0c	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_material__97c2db0c asm("s_material__97c2db0c");	0x6d617465	data.s
+s_front__97c2db18	0x97c2db18	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_front__97c2db18 asm("s_front__97c2db18");	0x66726f6e	data.s
+s_back__97c2db20	0x97c2db20	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_back__97c2db20 asm("s_back__97c2db20");	0x6261636b	data.s
+s_ambient_97c2db28	0x97c2db28	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_ambient_97c2db28 asm("s_ambient_97c2db28");	0x616d6269	data.s
+s_diffuse_97c2db30	0x97c2db30	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_diffuse_97c2db30 asm("s_diffuse_97c2db30");	0x64696666	data.s
+s_specular_97c2db38	0x97c2db38	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_specular_97c2db38 asm("s_specular_97c2db38");	0x73706563	data.s
+s_emission_97c2db44	0x97c2db44	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_emission_97c2db44 asm("s_emission_97c2db44");	0x656d6973	data.s
+s_shininess_97c2db50	0x97c2db50	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_shininess_97c2db50 asm("s_shininess_97c2db50");	0x7368696e	data.s
+s_PARAM_prm_97c2db5c	0x97c2db5c	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_PARAM_prm_97c2db5c asm("s_PARAM_prm_97c2db5c");	0x50415241	data.s
+s___97c2db68	0x97c2db68	__TEXT,__cstring	TerminatedCString	4	extern unsigned char *s___97c2db68 asm("s___97c2db68");	0x203d2000	data.s
+s_____97c2db6c	0x97c2db6c	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_____97c2db6c asm("s_____97c2db6c");	0x203d207b	data.s
+s__97c2db78	0x97c2db78	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s__97c2db78 asm("s__97c2db78");	0x20202020	data.s
+s_program__97c2db80	0x97c2db80	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_program__97c2db80 asm("s_program__97c2db80");	0x70726f67	data.s
+s_state__97c2db8c	0x97c2db8c	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_state__97c2db8c asm("s_state__97c2db8c");	0x73746174	data.s
+s_local__97c2db94	0x97c2db94	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_local__97c2db94 asm("s_local__97c2db94");	0x6c6f6361	data.s
+s_env__97c2db9c	0x97c2db9c	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_env__97c2db9c asm("s_env__97c2db9c");	0x656e765b	data.s
+s_light__97c2dba4	0x97c2dba4	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_light__97c2dba4 asm("s_light__97c2dba4");	0x6c696768	data.s
+s____97c2dbac	0x97c2dbac	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s____97c2dbac asm("s____97c2dbac");	0x5d2e0000	data.s
+s_spot_direction_97c2dbb0	0x97c2dbb0	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_spot_direction_97c2dbb0 asm("s_spot_direction_97c2dbb0");	0x73706f74	data.s
+s_attenuation_97c2dbc0	0x97c2dbc0	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_attenuation_97c2dbc0 asm("s_attenuation_97c2dbc0");	0x61747465	data.s
+s_half_97c2dbcc	0x97c2dbcc	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_half_97c2dbcc asm("s_half_97c2dbcc");	0x68616c66	data.s
+s_spotcutoff_97c2dbd4	0x97c2dbd4	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_spotcutoff_97c2dbd4 asm("s_spotcutoff_97c2dbd4");	0x73706f74	data.s
+s_lightprod__97c2dbe0	0x97c2dbe0	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_lightprod__97c2dbe0 asm("s_lightprod__97c2dbe0");	0x6c696768	data.s
+s_lightmodel_ambient_97c2dbec	0x97c2dbec	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_lightmodel_ambient_97c2dbec asm("s_lightmodel_ambient_97c2dbec");	0x6c696768	data.s
+s_lightmodel__97c2dc00	0x97c2dc00	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_lightmodel__97c2dc00 asm("s_lightmodel__97c2dc00");	0x6c696768	data.s
+s_scenecolor_97c2dc0c	0x97c2dc0c	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_scenecolor_97c2dc0c asm("s_scenecolor_97c2dc0c");	0x7363656e	data.s
+s_texgen__97c2dc18	0x97c2dc18	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_texgen__97c2dc18 asm("s_texgen__97c2dc18");	0x74657867	data.s
+s___eye__97c2dc20	0x97c2dc20	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s___eye__97c2dc20 asm("s___eye__97c2dc20");	0x5d2e6579	data.s
+s_s_97c2dc28	0x97c2dc28	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_s_97c2dc28 asm("s_s_97c2dc28");	0x73000000	data.s
+s_t_97c2dc2c	0x97c2dc2c	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_t_97c2dc2c asm("s_t_97c2dc2c");	0x74000000	data.s
+s_r_97c2dc30	0x97c2dc30	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_r_97c2dc30 asm("s_r_97c2dc30");	0x72000000	data.s
+s_q_97c2dc34	0x97c2dc34	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s_q_97c2dc34 asm("s_q_97c2dc34");	0x71000000	data.s
+s___object__97c2dc38	0x97c2dc38	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s___object__97c2dc38 asm("s___object__97c2dc38");	0x5d2e6f62	data.s
+s_texenv__97c2dc44	0x97c2dc44	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_texenv__97c2dc44 asm("s_texenv__97c2dc44");	0x74657865	data.s
+s___color_97c2dc4c	0x97c2dc4c	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s___color_97c2dc4c asm("s___color_97c2dc4c");	0x5d2e636f	data.s
+s_clip__97c2dc54	0x97c2dc54	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_clip__97c2dc54 asm("s_clip__97c2dc54");	0x636c6970	data.s
+s___plane_97c2dc5c	0x97c2dc5c	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s___plane_97c2dc5c asm("s___plane_97c2dc5c");	0x5d2e706c	data.s
+s_fog_color_97c2dc64	0x97c2dc64	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_fog_color_97c2dc64 asm("s_fog_color_97c2dc64");	0x666f672e	data.s
+s_fog_params_97c2dc70	0x97c2dc70	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_fog_params_97c2dc70 asm("s_fog_params_97c2dc70");	0x666f672e	data.s
+s_depth_range_97c2dc7c	0x97c2dc7c	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_depth_range_97c2dc7c asm("s_depth_range_97c2dc7c");	0x64657074	data.s
+s_point_size_97c2dc88	0x97c2dc88	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_point_size_97c2dc88 asm("s_point_size_97c2dc88");	0x706f696e	data.s
+s_point_attenuation_97c2dc94	0x97c2dc94	__TEXT,__cstring	TerminatedCString	18	extern unsigned char *s_point_attenuation_97c2dc94 asm("s_point_attenuation_97c2dc94");	0x706f696e	data.s
+s_matrix__97c2dca8	0x97c2dca8	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_matrix__97c2dca8 asm("s_matrix__97c2dca8");	0x6d617472	data.s
+s_projection__97c2dcb0	0x97c2dcb0	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_projection__97c2dcb0 asm("s_projection__97c2dcb0");	0x70726f6a	data.s
+s_mvp__97c2dcbc	0x97c2dcbc	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_mvp__97c2dcbc asm("s_mvp__97c2dcbc");	0x6d76702e	data.s
+s_color__97c2dcc4	0x97c2dcc4	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_color__97c2dcc4 asm("s_color__97c2dcc4");	0x636f6c6f	data.s
+s_modelview__97c2dccc	0x97c2dccc	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_modelview__97c2dccc asm("s_modelview__97c2dccc");	0x6d6f6465	data.s
+s_program__97c2dcd8	0x97c2dcd8	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_program__97c2dcd8 asm("s_program__97c2dcd8");	0x70726f67	data.s
+s_transpose__97c2dce4	0x97c2dce4	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_transpose__97c2dce4 asm("s_transpose__97c2dce4");	0x7472616e	data.s
+s_inverse__97c2dcf0	0x97c2dcf0	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_inverse__97c2dcf0 asm("s_inverse__97c2dcf0");	0x696e7665	data.s
+s_invtrans__97c2dcfc	0x97c2dcfc	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_invtrans__97c2dcfc asm("s_invtrans__97c2dcfc");	0x696e7674	data.s
+s_row__97c2dd08	0x97c2dd08	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_row__97c2dd08 asm("s_row__97c2dd08");	0x726f775b	data.s
+s___97c2dd10	0x97c2dd10	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2dd10 asm("s___97c2dd10");	0x7b000000	data.s
+s___97c2dd14	0x97c2dd14	__TEXT,__cstring	TerminatedCString	2	extern unsigned char *s___97c2dd14 asm("s___97c2dd14");	0x7d000000	data.s
+s_____Fixed_constant_data_not_curr_97c2dd18	0x97c2dd18	__TEXT,__cstring	TerminatedCString	52	extern unsigned char *s_____Fixed_constant_data_not_curr_97c2dd18 asm("s_____Fixed_constant_data_not_curr_97c2dd18");	0x7b2d2d20	data.s
+s_normalscale_97c2dd4c	0x97c2dd4c	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_normalscale_97c2dd4c asm("s_normalscale_97c2dd4c");	0x6e6f726d	data.s
+s____97c2dd58	0x97c2dd58	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s____97c2dd58 asm("s____97c2dd58");	0x0a7d3b0a	data.s
+s___97c2dd60	0x97c2dd60	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s___97c2dd60 asm("s___97c2dd60");	0x2c0a0000	data.s
+s_OUTPUT_res_97c2dd64	0x97c2dd64	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_OUTPUT_res_97c2dd64 asm("s_OUTPUT_res_97c2dd64");	0x4f555450	data.s
+s_LONG_OUTPUT_res_97c2dd70	0x97c2dd70	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_LONG_OUTPUT_res_97c2dd70 asm("s_LONG_OUTPUT_res_97c2dd70");	0x4c4f4e47	data.s
+s_SHORT_OUTPUT_res_97c2dd80	0x97c2dd80	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_SHORT_OUTPUT_res_97c2dd80 asm("s_SHORT_OUTPUT_res_97c2dd80");	0x53484f52	data.s
+s_result_position_97c2dd94	0x97c2dd94	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_result_position_97c2dd94 asm("s_result_position_97c2dd94");	0x72657375	data.s
+s_result_fogcoord_97c2dda4	0x97c2dda4	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_result_fogcoord_97c2dda4 asm("s_result_fogcoord_97c2dda4");	0x72657375	data.s
+s_result_pointsize_97c2ddb4	0x97c2ddb4	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_result_pointsize_97c2ddb4 asm("s_result_pointsize_97c2ddb4");	0x72657375	data.s
+s_result_color_97c2ddc8	0x97c2ddc8	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_result_color_97c2ddc8 asm("s_result_color_97c2ddc8");	0x72657375	data.s
+s__front_primary_97c2ddd8	0x97c2ddd8	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s__front_primary_97c2ddd8 asm("s__front_primary_97c2ddd8");	0x2e66726f	data.s
+s__back_primary_97c2dde8	0x97c2dde8	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s__back_primary_97c2dde8 asm("s__back_primary_97c2dde8");	0x2e626163	data.s
+s__front_secondary_97c2ddf8	0x97c2ddf8	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s__front_secondary_97c2ddf8 asm("s__front_secondary_97c2ddf8");	0x2e66726f	data.s
+s__back_secondary_97c2de0c	0x97c2de0c	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s__back_secondary_97c2de0c asm("s__back_secondary_97c2de0c");	0x2e626163	data.s
+s_result_texcoord__97c2de1c	0x97c2de1c	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_result_texcoord__97c2de1c asm("s_result_texcoord__97c2de1c");	0x72657375	data.s
+s_result_depth_97c2de30	0x97c2de30	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_result_depth_97c2de30 asm("s_result_depth_97c2de30");	0x72657375	data.s
+s_result_attrib__97c2de40	0x97c2de40	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_result_attrib__97c2de40 asm("s_result_attrib__97c2de40");	0x72657375	data.s
+s_result_eyePosition_97c2de50	0x97c2de50	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_result_eyePosition_97c2de50 asm("s_result_eyePosition_97c2de50");	0x72657375	data.s
+s_result_clipVertex_97c2de64	0x97c2de64	__TEXT,__cstring	TerminatedCString	18	extern unsigned char *s_result_clipVertex_97c2de64 asm("s_result_clipVertex_97c2de64");	0x72657375	data.s
+s_main__97c2de78	0x97c2de78	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_main__97c2de78 asm("s_main__97c2de78");	0x6d61696e	data.s
+s_label__97c2de80	0x97c2de80	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_label__97c2de80 asm("s_label__97c2de80");	0x6c616265	data.s
+s___97c2de88	0x97c2de88	__TEXT,__cstring	TerminatedCString	3	extern unsigned char *s___97c2de88 asm("s___97c2de88");	0x3a0a0000	data.s
+s_label__97c2de8c	0x97c2de8c	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_label__97c2de8c asm("s_label__97c2de8c");	0x20206c61	data.s
+s_END_97c2de98	0x97c2de98	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_END_97c2de98 asm("s_END_97c2de98");	0x454e440a	data.s
+s_STATE_97c2dea0	0x97c2dea0	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s_STATE_97c2dea0 asm("s_STATE_97c2dea0");	0x53544154	data.s
+s_ALPHA_TEST_97c2dea8	0x97c2dea8	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_ALPHA_TEST_97c2dea8 asm("s_ALPHA_TEST_97c2dea8");	0x414c5048	data.s
+s_PP_NEVER_97c2deb4	0x97c2deb4	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_PP_NEVER_97c2deb4 asm("s_PP_NEVER_97c2deb4");	0x50505f4e	data.s
+s_PP_LESS_97c2dec0	0x97c2dec0	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_PP_LESS_97c2dec0 asm("s_PP_LESS_97c2dec0");	0x50505f4c	data.s
+s_PP_EQUAL_97c2decc	0x97c2decc	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_PP_EQUAL_97c2decc asm("s_PP_EQUAL_97c2decc");	0x50505f45	data.s
+s_PP_LEQUAL_97c2ded8	0x97c2ded8	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_PP_LEQUAL_97c2ded8 asm("s_PP_LEQUAL_97c2ded8");	0x50505f4c	data.s
+s_PP_GREATER_97c2dee4	0x97c2dee4	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_PP_GREATER_97c2dee4 asm("s_PP_GREATER_97c2dee4");	0x50505f47	data.s
+s_PP_NOTEQUAL_97c2def0	0x97c2def0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_NOTEQUAL_97c2def0 asm("s_PP_NOTEQUAL_97c2def0");	0x50505f4e	data.s
+s_PP_GEQUAL_97c2df00	0x97c2df00	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_PP_GEQUAL_97c2df00 asm("s_PP_GEQUAL_97c2df00");	0x50505f47	data.s
+s_PP_ALWAYS_97c2df0c	0x97c2df0c	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s_PP_ALWAYS_97c2df0c asm("s_PP_ALWAYS_97c2df0c");	0x50505f41	data.s
+s_ref__97c2df18	0x97c2df18	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_ref__97c2df18 asm("s_ref__97c2df18");	0x7265663d	data.s
+s_STENCIL_TEST_func__97c2df20	0x97c2df20	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_STENCIL_TEST_func__97c2df20 asm("s_STENCIL_TEST_func__97c2df20");	0x5354454e	data.s
+s_opfail__97c2df34	0x97c2df34	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_opfail__97c2df34 asm("s_opfail__97c2df34");	0x6f706661	data.s
+s_PP_STENCIL_ZERO_97c2df3c	0x97c2df3c	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_PP_STENCIL_ZERO_97c2df3c asm("s_PP_STENCIL_ZERO_97c2df3c");	0x50505f53	data.s
+s_PP_STENCIL_KEEP_97c2df50	0x97c2df50	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_PP_STENCIL_KEEP_97c2df50 asm("s_PP_STENCIL_KEEP_97c2df50");	0x50505f53	data.s
+s_PP_STENCIL_REPLACE_97c2df64	0x97c2df64	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_STENCIL_REPLACE_97c2df64 asm("s_PP_STENCIL_REPLACE_97c2df64");	0x50505f53	data.s
+s_PP_STENCIL_INCR_97c2df78	0x97c2df78	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_PP_STENCIL_INCR_97c2df78 asm("s_PP_STENCIL_INCR_97c2df78");	0x50505f53	data.s
+s_PP_STENCIL_DECR_97c2df8c	0x97c2df8c	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_PP_STENCIL_DECR_97c2df8c asm("s_PP_STENCIL_DECR_97c2df8c");	0x50505f53	data.s
+s_PP_STENCIL_INVERT_97c2dfa0	0x97c2dfa0	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s_PP_STENCIL_INVERT_97c2dfa0 asm("s_PP_STENCIL_INVERT_97c2dfa0");	0x50505f53	data.s
+s_PP_STENCIL_INCR_WRAP_97c2dfb4	0x97c2dfb4	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s_PP_STENCIL_INCR_WRAP_97c2dfb4 asm("s_PP_STENCIL_INCR_WRAP_97c2dfb4");	0x50505f53	data.s
+s_PP_STENCIL_DECR_WRAP_97c2dfcc	0x97c2dfcc	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s_PP_STENCIL_DECR_WRAP_97c2dfcc asm("s_PP_STENCIL_DECR_WRAP_97c2dfcc");	0x50505f53	data.s
+s_opzfail__97c2dfe4	0x97c2dfe4	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_opzfail__97c2dfe4 asm("s_opzfail__97c2dfe4");	0x6f707a66	data.s
+s_opzpass__97c2dff0	0x97c2dff0	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_opzpass__97c2dff0 asm("s_opzpass__97c2dff0");	0x6f707a70	data.s
+s_DEPTH_TEST_func__97c2e014	0x97c2e014	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_DEPTH_TEST_func__97c2e014 asm("s_DEPTH_TEST_func__97c2e014");	0x44455054	data.s
+s_BLENDING_alpha_equ___97c2e028	0x97c2e028	__TEXT,__cstring	TerminatedCString	24	extern unsigned char *s_BLENDING_alpha_equ___97c2e028 asm("s_BLENDING_alpha_equ___97c2e028");	0x424c454e	data.s
+s_PP_FUNC_ADD_97c2e040	0x97c2e040	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_FUNC_ADD_97c2e040 asm("s_PP_FUNC_ADD_97c2e040");	0x50505f46	data.s
+s_PP_FUNC_SUBTRACT_97c2e050	0x97c2e050	__TEXT,__cstring	TerminatedCString	18	extern unsigned char *s_PP_FUNC_SUBTRACT_97c2e050 asm("s_PP_FUNC_SUBTRACT_97c2e050");	0x50505f46	data.s
+s_PP_FUNC_REVERSE_SUBTRACT_97c2e064	0x97c2e064	__TEXT,__cstring	TerminatedCString	26	extern unsigned char *s_PP_FUNC_REVERSE_SUBTRACT_97c2e064 asm("s_PP_FUNC_REVERSE_SUBTRACT_97c2e064");	0x50505f46	data.s
+s_PP_FUNC_MIN_97c2e080	0x97c2e080	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_FUNC_MIN_97c2e080 asm("s_PP_FUNC_MIN_97c2e080");	0x50505f46	data.s
+s_PP_FUNC_MAX_97c2e090	0x97c2e090	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_FUNC_MAX_97c2e090 asm("s_PP_FUNC_MAX_97c2e090");	0x50505f46	data.s
+s_rgb_equ___97c2e0a0	0x97c2e0a0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_rgb_equ___97c2e0a0 asm("s_rgb_equ___97c2e0a0");	0x0a097267	data.s
+s_src___97c2e0b0	0x97c2e0b0	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_src___97c2e0b0 asm("s_src___97c2e0b0");	0x0a097372	data.s
+s_PP_BLEND_ZERO_97c2e0bc	0x97c2e0bc	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_PP_BLEND_ZERO_97c2e0bc asm("s_PP_BLEND_ZERO_97c2e0bc");	0x50505f42	data.s
+s_PP_BLEND_ONE_97c2e0cc	0x97c2e0cc	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_PP_BLEND_ONE_97c2e0cc asm("s_PP_BLEND_ONE_97c2e0cc");	0x50505f42	data.s
+s_PP_BLEND_SRC_COLOR_97c2e0dc	0x97c2e0dc	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_BLEND_SRC_COLOR_97c2e0dc asm("s_PP_BLEND_SRC_COLOR_97c2e0dc");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_SRC_COLOR_97c2e0f0	0x97c2e0f0	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_PP_BLEND_ONE_MINUS_SRC_COLOR_97c2e0f0 asm("s_PP_BLEND_ONE_MINUS_SRC_COLOR_97c2e0f0");	0x50505f42	data.s
+s_PP_BLEND_SRC_ALPHA_97c2e110	0x97c2e110	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_BLEND_SRC_ALPHA_97c2e110 asm("s_PP_BLEND_SRC_ALPHA_97c2e110");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_SRC_ALPHA_97c2e124	0x97c2e124	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_PP_BLEND_ONE_MINUS_SRC_ALPHA_97c2e124 asm("s_PP_BLEND_ONE_MINUS_SRC_ALPHA_97c2e124");	0x50505f42	data.s
+s_PP_BLEND_DST_ALPHA_97c2e144	0x97c2e144	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_BLEND_DST_ALPHA_97c2e144 asm("s_PP_BLEND_DST_ALPHA_97c2e144");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_DST_ALPHA_97c2e158	0x97c2e158	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_PP_BLEND_ONE_MINUS_DST_ALPHA_97c2e158 asm("s_PP_BLEND_ONE_MINUS_DST_ALPHA_97c2e158");	0x50505f42	data.s
+s_PP_BLEND_CONSTANT_COLOR_97c2e178	0x97c2e178	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_PP_BLEND_CONSTANT_COLOR_97c2e178 asm("s_PP_BLEND_CONSTANT_COLOR_97c2e178");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_CONSTANT_COLO_97c2e194	0x97c2e194	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_PP_BLEND_ONE_MINUS_CONSTANT_COLO_97c2e194 asm("s_PP_BLEND_ONE_MINUS_CONSTANT_COLO_97c2e194");	0x50505f42	data.s
+s_PP_BLEND_CONSTANT_ALPHA_97c2e1b8	0x97c2e1b8	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_PP_BLEND_CONSTANT_ALPHA_97c2e1b8 asm("s_PP_BLEND_CONSTANT_ALPHA_97c2e1b8");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_CONSTANT_ALPH_97c2e1d4	0x97c2e1d4	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_PP_BLEND_ONE_MINUS_CONSTANT_ALPH_97c2e1d4 asm("s_PP_BLEND_ONE_MINUS_CONSTANT_ALPH_97c2e1d4");	0x50505f42	data.s
+s_PP_BLEND_DST_COLOR_97c2e1f8	0x97c2e1f8	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_BLEND_DST_COLOR_97c2e1f8 asm("s_PP_BLEND_DST_COLOR_97c2e1f8");	0x50505f42	data.s
+s_PP_BLEND_ONE_MINUS_DST_COLOR_97c2e20c	0x97c2e20c	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_PP_BLEND_ONE_MINUS_DST_COLOR_97c2e20c asm("s_PP_BLEND_ONE_MINUS_DST_COLOR_97c2e20c");	0x50505f42	data.s
+s_PP_BLEND_SRC_ALPHA_SATURATE_97c2e22c	0x97c2e22c	__TEXT,__cstring	TerminatedCString	29	extern unsigned char *s_PP_BLEND_SRC_ALPHA_SATURATE_97c2e22c asm("s_PP_BLEND_SRC_ALPHA_SATURATE_97c2e22c");	0x50505f42	data.s
+s_srcA___97c2e24c	0x97c2e24c	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_srcA___97c2e24c asm("s_srcA___97c2e24c");	0x0a097372	data.s
+s_dst___97c2e258	0x97c2e258	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_dst___97c2e258 asm("s_dst___97c2e258");	0x0a096473	data.s
+s_dstA___97c2e264	0x97c2e264	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_dstA___97c2e264 asm("s_dstA___97c2e264");	0x0a096473	data.s
+s_DITHERING_ENABLED_97c2e270	0x97c2e270	__TEXT,__cstring	TerminatedCString	18	extern unsigned char *s_DITHERING_ENABLED_97c2e270 asm("s_DITHERING_ENABLED_97c2e270");	0x44495448	data.s
+s_LOGIC_OP_97c2e284	0x97c2e284	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_LOGIC_OP_97c2e284 asm("s_LOGIC_OP_97c2e284");	0x4c4f4749	data.s
+s_PP_LOGIC_CLEAR_97c2e290	0x97c2e290	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_PP_LOGIC_CLEAR_97c2e290 asm("s_PP_LOGIC_CLEAR_97c2e290");	0x50505f4c	data.s
+s_PP_LOGIC_SET_97c2e2a0	0x97c2e2a0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_LOGIC_SET_97c2e2a0 asm("s_PP_LOGIC_SET_97c2e2a0");	0x50505f4c	data.s
+s_PP_LOGIC_COPY_97c2e2b0	0x97c2e2b0	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_PP_LOGIC_COPY_97c2e2b0 asm("s_PP_LOGIC_COPY_97c2e2b0");	0x50505f4c	data.s
+s_PP_LOGIC_COPY_INVERTED_97c2e2c0	0x97c2e2c0	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_PP_LOGIC_COPY_INVERTED_97c2e2c0 asm("s_PP_LOGIC_COPY_INVERTED_97c2e2c0");	0x50505f4c	data.s
+s_PP_LOGIC_NOOP_97c2e2d8	0x97c2e2d8	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_PP_LOGIC_NOOP_97c2e2d8 asm("s_PP_LOGIC_NOOP_97c2e2d8");	0x50505f4c	data.s
+s_PP_LOGIC_INVERT_97c2e2e8	0x97c2e2e8	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_PP_LOGIC_INVERT_97c2e2e8 asm("s_PP_LOGIC_INVERT_97c2e2e8");	0x50505f4c	data.s
+s_PP_LOGIC_AND_97c2e2f8	0x97c2e2f8	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_LOGIC_AND_97c2e2f8 asm("s_PP_LOGIC_AND_97c2e2f8");	0x50505f4c	data.s
+s_PP_LOGIC_NAND_97c2e308	0x97c2e308	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_PP_LOGIC_NAND_97c2e308 asm("s_PP_LOGIC_NAND_97c2e308");	0x50505f4c	data.s
+s_PP_LOGIC_OR_97c2e318	0x97c2e318	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_PP_LOGIC_OR_97c2e318 asm("s_PP_LOGIC_OR_97c2e318");	0x50505f4c	data.s
+s_PP_LOGIC_NOR_97c2e324	0x97c2e324	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_LOGIC_NOR_97c2e324 asm("s_PP_LOGIC_NOR_97c2e324");	0x50505f4c	data.s
+s_PP_LOGIC_XOR_97c2e334	0x97c2e334	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_PP_LOGIC_XOR_97c2e334 asm("s_PP_LOGIC_XOR_97c2e334");	0x50505f4c	data.s
+s_PP_LOGIC_EQUIV_97c2e344	0x97c2e344	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_PP_LOGIC_EQUIV_97c2e344 asm("s_PP_LOGIC_EQUIV_97c2e344");	0x50505f4c	data.s
+s_PP_LOGIC_AND_REVERSE_97c2e354	0x97c2e354	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s_PP_LOGIC_AND_REVERSE_97c2e354 asm("s_PP_LOGIC_AND_REVERSE_97c2e354");	0x50505f4c	data.s
+s_PP_LOGIC_AND_INVERTED_97c2e36c	0x97c2e36c	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s_PP_LOGIC_AND_INVERTED_97c2e36c asm("s_PP_LOGIC_AND_INVERTED_97c2e36c");	0x50505f4c	data.s
+s_PP_LOGIC_OR_REVERSE_97c2e384	0x97c2e384	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_PP_LOGIC_OR_REVERSE_97c2e384 asm("s_PP_LOGIC_OR_REVERSE_97c2e384");	0x50505f4c	data.s
+s_PP_LOGIC_OR_INVERTED_97c2e398	0x97c2e398	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s_PP_LOGIC_OR_INVERTED_97c2e398 asm("s_PP_LOGIC_OR_INVERTED_97c2e398");	0x50505f4c	data.s
+s_BUFFER_MASK_97c2e3b0	0x97c2e3b0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_BUFFER_MASK_97c2e3b0 asm("s_BUFFER_MASK_97c2e3b0");	0x42554646	data.s
+s_RED_MASKED_97c2e3c0	0x97c2e3c0	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_RED_MASKED_97c2e3c0 asm("s_RED_MASKED_97c2e3c0");	0x52454420	data.s
+s_GREEN_MASKED_97c2e3cc	0x97c2e3cc	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_GREEN_MASKED_97c2e3cc asm("s_GREEN_MASKED_97c2e3cc");	0x47524545	data.s
+s_BLUE_MASKED_97c2e3dc	0x97c2e3dc	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_BLUE_MASKED_97c2e3dc asm("s_BLUE_MASKED_97c2e3dc");	0x424c5545	data.s
+s_ALPHA_MASKED_97c2e3ec	0x97c2e3ec	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_ALPHA_MASKED_97c2e3ec asm("s_ALPHA_MASKED_97c2e3ec");	0x414c5048	data.s
+s_DEPTH_MASKED_97c2e3fc	0x97c2e3fc	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_DEPTH_MASKED_97c2e3fc asm("s_DEPTH_MASKED_97c2e3fc");	0x44455054	data.s
+s_FLR_scratch__97c2e420	0x97c2e420	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_FLR_scratch__97c2e420 asm("s_FLR_scratch__97c2e420");	0x464c5220	data.s
+s_MOV_97c2e430	0x97c2e430	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_MOV_97c2e430 asm("s_MOV_97c2e430");	0x4d4f5620	data.s
+s____scratch__97c2e438	0x97c2e438	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s____scratch__97c2e438 asm("s____scratch__97c2e438");	0x2c202d73	data.s
+s_ABS_scratch__97c2e448	0x97c2e448	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_ABS_scratch__97c2e448 asm("s_ABS_scratch__97c2e448");	0x41425320	data.s
+s_SLT_97c2e458	0x97c2e458	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SLT_97c2e458 asm("s_SLT_97c2e458");	0x534c5420	data.s
+s____scratch__kZERO__97c2e460	0x97c2e460	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s____scratch__kZERO__97c2e460 asm("s____scratch__kZERO__97c2e460");	0x2c202d73	data.s
+s_SLT_scratch__97c2e474	0x97c2e474	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_SLT_scratch__97c2e474 asm("s_SLT_scratch__97c2e474");	0x534c5420	data.s
+s___kZERO__97c2e484	0x97c2e484	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s___kZERO__97c2e484 asm("s___kZERO__97c2e484");	0x2c206b5a	data.s
+s_SLT_scratch1__97c2e490	0x97c2e490	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_SLT_scratch1__97c2e490 asm("s_SLT_scratch1__97c2e490");	0x534c5420	data.s
+s_ADD_scratch___scratch__scratch1__97c2e4a0	0x97c2e4a0	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_ADD_scratch___scratch__scratch1__97c2e4a0 asm("s_ADD_scratch___scratch__scratch1__97c2e4a0");	0x41444420	data.s
+s_ABS_scratch1__97c2e4c4	0x97c2e4c4	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_ABS_scratch1__97c2e4c4 asm("s_ABS_scratch1__97c2e4c4");	0x41425320	data.s
+s_FLR_scratch1__scratch1__97c2e4d4	0x97c2e4d4	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_FLR_scratch1__scratch1__97c2e4d4 asm("s_FLR_scratch1__scratch1__97c2e4d4");	0x464c5220	data.s
+s_MUL_97c2e4f0	0x97c2e4f0	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_MUL_97c2e4f0 asm("s_MUL_97c2e4f0");	0x4d554c20	data.s
+s___scratch__scratch1__97c2e4f8	0x97c2e4f8	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s___scratch__scratch1__97c2e4f8 asm("s___scratch__scratch1__97c2e4f8");	0x2c207363	data.s
+s_MUL_scratch_xy__97c2e510	0x97c2e510	__TEXT,__cstring	TerminatedCString	17	extern unsigned char *s_MUL_scratch_xy__97c2e510 asm("s_MUL_scratch_xy__97c2e510");	0x4d554c20	data.s
+s___scratch_x__scratch_y__97c2e524	0x97c2e524	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s___scratch_x__scratch_y__97c2e524 asm("s___scratch_x__scratch_y__97c2e524");	0x2c207363	data.s
+s_DP2_97c2e540	0x97c2e540	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_DP2_97c2e540 asm("s_DP2_97c2e540");	0x44503220	data.s
+s_DP3_97c2e548	0x97c2e548	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_DP3_97c2e548 asm("s_DP3_97c2e548");	0x44503320	data.s
+s_DP4_97c2e550	0x97c2e550	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_DP4_97c2e550 asm("s_DP4_97c2e550");	0x44503420	data.s
+s_MAX_scratch__97c2e558	0x97c2e558	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_MAX_scratch__97c2e558 asm("s_MAX_scratch__97c2e558");	0x4d415820	data.s
+s_MIN_97c2e568	0x97c2e568	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_MIN_97c2e568 asm("s_MIN_97c2e568");	0x4d494e20	data.s
+s___scratch__97c2e570	0x97c2e570	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___scratch__97c2e570 asm("s___scratch__97c2e570");	0x2c207363	data.s
+s_RSQ_scratch_x__97c2e57c	0x97c2e57c	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_RSQ_scratch_x__97c2e57c asm("s_RSQ_scratch_x__97c2e57c");	0x52535120	data.s
+s_RCP_97c2e58c	0x97c2e58c	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_RCP_97c2e58c asm("s_RCP_97c2e58c");	0x52435020	data.s
+s___scratch_x__97c2e594	0x97c2e594	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s___scratch_x__97c2e594 asm("s___scratch_x__97c2e594");	0x2c207363	data.s
+s_POW_97c2e5a4	0x97c2e5a4	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_POW_97c2e5a4 asm("s_POW_97c2e5a4");	0x504f5720	data.s
+s___kE__97c2e5ac	0x97c2e5ac	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s___kE__97c2e5ac asm("s___kE__97c2e5ac");	0x2c206b45	data.s
+s_LG2_scratch__97c2e5b4	0x97c2e5b4	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_LG2_scratch__97c2e5b4 asm("s_LG2_scratch__97c2e5b4");	0x4c473220	data.s
+s___scratch__k1_OVER_LOG2_E__97c2e5c4	0x97c2e5c4	__TEXT,__cstring	TerminatedCString	28	extern unsigned char *s___scratch__k1_OVER_LOG2_E__97c2e5c4 asm("s___scratch__k1_OVER_LOG2_E__97c2e5c4");	0x2c207363	data.s
+s___scratch__97c2e5e0	0x97c2e5e0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___scratch__97c2e5e0 asm("s___scratch__97c2e5e0");	0x2c207363	data.s
+s_RCP_scratch__97c2e5f0	0x97c2e5f0	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_RCP_scratch__97c2e5f0 asm("s_RCP_scratch__97c2e5f0");	0x52435020	data.s
+s_RCP_scratch__97c2e600	0x97c2e600	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_RCP_scratch__97c2e600 asm("s_RCP_scratch__97c2e600");	0x52435020	data.s
+s___scratch_x__97c2e610	0x97c2e610	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s___scratch_x__97c2e610 asm("s___scratch_x__97c2e610");	0x2c207363	data.s
+s___scratch__97c2e620	0x97c2e620	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___scratch__97c2e620 asm("s___scratch__97c2e620");	0x2c207363	data.s
+s_MUL_scratch__97c2e62c	0x97c2e62c	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_MUL_scratch__97c2e62c asm("s_MUL_scratch__97c2e62c");	0x4d554c20	data.s
+s_scratch_97c2e63c	0x97c2e63c	__TEXT,__cstring	TerminatedCString	8	extern unsigned char *s_scratch_97c2e63c asm("s_scratch_97c2e63c");	0x73637261	data.s
+s_MAD_97c2e644	0x97c2e644	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_MAD_97c2e644 asm("s_MAD_97c2e644");	0x4d414420	data.s
+s_MAD_scratch__97c2e64c	0x97c2e64c	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_MAD_scratch__97c2e64c asm("s_MAD_scratch__97c2e64c");	0x4d414420	data.s
+s___scratch_97c2e65c	0x97c2e65c	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s___scratch_97c2e65c asm("s___scratch_97c2e65c");	0x2c207363	data.s
+s_scratch__97c2e668	0x97c2e668	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s_scratch__97c2e668 asm("s_scratch__97c2e668");	0x73637261	data.s
+s_ADD_scratch1_97c2e674	0x97c2e674	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s_ADD_scratch1_97c2e674 asm("s_ADD_scratch1_97c2e674");	0x41444420	data.s
+s___scratch1__97c2e684	0x97c2e684	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___scratch1__97c2e684 asm("s___scratch1__97c2e684");	0x2c207363	data.s
+s___NV_fragment_program2_DP2_97c2e694	0x97c2e694	__TEXT,__cstring	TerminatedCString	28	extern unsigned char *s___NV_fragment_program2_DP2_97c2e694 asm("s___NV_fragment_program2_DP2_97c2e694");	0x23204e56	data.s
+s_DP2_scratch_97c2e6b0	0x97c2e6b0	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_DP2_scratch_97c2e6b0 asm("s_DP2_scratch_97c2e6b0");	0x44503220	data.s
+s_DP3_scratch_97c2e6bc	0x97c2e6bc	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_DP3_scratch_97c2e6bc asm("s_DP3_scratch_97c2e6bc");	0x44503320	data.s
+s_DP4_scratch_97c2e6c8	0x97c2e6c8	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s_DP4_scratch_97c2e6c8 asm("s_DP4_scratch_97c2e6c8");	0x44503420	data.s
+s_ADD_97c2e6d4	0x97c2e6d4	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_ADD_97c2e6d4 asm("s_ADD_97c2e6d4");	0x41444420	data.s
+s_NRM_97c2e6dc	0x97c2e6dc	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_NRM_97c2e6dc asm("s_NRM_97c2e6dc");	0x4e524d20	data.s
+s___kFLOAT__97c2e6e4	0x97c2e6e4	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s___kFLOAT__97c2e6e4 asm("s___kFLOAT__97c2e6e4");	0x2c206b46	data.s
+s___kVEC2__97c2e6f0	0x97c2e6f0	__TEXT,__cstring	TerminatedCString	10	extern unsigned char *s___kVEC2__97c2e6f0 asm("s___kVEC2__97c2e6f0");	0x2c206b56	data.s
+s_MUL_scratch_x__97c2e6fc	0x97c2e6fc	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_MUL_scratch_x__97c2e6fc asm("s_MUL_scratch_x__97c2e6fc");	0x4d554c20	data.s
+s_MUL_scratch_x__scratch_x__scratc_97c2e70c	0x97c2e70c	__TEXT,__cstring	TerminatedCString	38	extern unsigned char *s_MUL_scratch_x__scratch_x__scratc_97c2e70c asm("s_MUL_scratch_x__scratch_x__scratc_97c2e70c");	0x4d554c20	data.s
+s_DP3_scratch_x__97c2e734	0x97c2e734	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_DP3_scratch_x__97c2e734 asm("s_DP3_scratch_x__97c2e734");	0x44503320	data.s
+s_DP4_scratch_x__97c2e744	0x97c2e744	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_DP4_scratch_x__97c2e744 asm("s_DP4_scratch_x__97c2e744");	0x44503420	data.s
+s_RSQ_scratch_x__scratch_x__97c2e754	0x97c2e754	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s_RSQ_scratch_x__scratch_x__97c2e754 asm("s_RSQ_scratch_x__scratch_x__97c2e754");	0x52535120	data.s
+s_ADD_scratch__scratch__scratch__97c2e770	0x97c2e770	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_ADD_scratch__scratch__scratch__97c2e770 asm("s_ADD_scratch__scratch__scratch__97c2e770");	0x41444420	data.s
+s____scratch_97c2e790	0x97c2e790	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s____scratch_97c2e790 asm("s____scratch_97c2e790");	0x2c202d73	data.s
+s_SWZ_scratch__97c2e79c	0x97c2e79c	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_SWZ_scratch__97c2e79c asm("s_SWZ_scratch__97c2e79c");	0x53575a20	data.s
+s___x__y__0__0__97c2e7ac	0x97c2e7ac	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s___x__y__0__0__97c2e7ac asm("s___x__y__0__0__97c2e7ac");	0x2c20782c	data.s
+s_DP3_scratch_x__scratch__scratch__97c2e7bc	0x97c2e7bc	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_DP3_scratch_x__scratch__scratch__97c2e7bc asm("s_DP3_scratch_x__scratch__scratch__97c2e7bc");	0x44503320	data.s
+s_ADD_scratch__97c2e7e0	0x97c2e7e0	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_ADD_scratch__97c2e7e0 asm("s_ADD_scratch__97c2e7e0");	0x41444420	data.s
+s_SWZ_scratch__scratch__x__y__0__0_97c2e7f0	0x97c2e7f0	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_SWZ_scratch__scratch__x__y__0__0_97c2e7f0 asm("s_SWZ_scratch__scratch__x__y__0__0_97c2e7f0");	0x53575a20	data.s
+s_MUL_scratch_x__scratch_x__scratc_97c2e814	0x97c2e814	__TEXT,__cstring	TerminatedCString	38	extern unsigned char *s_MUL_scratch_x__scratch_x__scratc_97c2e814 asm("s_MUL_scratch_x__scratch_x__scratc_97c2e814");	0x4d554c20	data.s
+s_DP4_scratch_x__scratch__scratch__97c2e83c	0x97c2e83c	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_DP4_scratch_x__scratch__scratch__97c2e83c asm("s_DP4_scratch_x__scratch__scratch__97c2e83c");	0x44503420	data.s
+s_SUB_scratch1__97c2e860	0x97c2e860	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_SUB_scratch1__97c2e860 asm("s_SUB_scratch1__97c2e860");	0x53554220	data.s
+s_SUB_scratch__97c2e870	0x97c2e870	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_SUB_scratch__97c2e870 asm("s_SUB_scratch__97c2e870");	0x53554220	data.s
+s_ABS_scratch1__scratch1__97c2e880	0x97c2e880	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_ABS_scratch1__scratch1__97c2e880 asm("s_ABS_scratch1__scratch1__97c2e880");	0x41425320	data.s
+s_ADD_scratch__scratch__scratch1__97c2e89c	0x97c2e89c	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_ADD_scratch__scratch__scratch1__97c2e89c asm("s_ADD_scratch__scratch__scratch1__97c2e89c");	0x41444420	data.s
+s_ABS_scratch__scratch__97c2e8c0	0x97c2e8c0	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_ABS_scratch__scratch__97c2e8c0 asm("s_ABS_scratch__scratch__97c2e8c0");	0x41425320	data.s
+s_DP4_scratch__scratch__97c2e8d8	0x97c2e8d8	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_DP4_scratch__scratch__97c2e8d8 asm("s_DP4_scratch__scratch__97c2e8d8");	0x44503420	data.s
+s_kVEC2_97c2e8f0	0x97c2e8f0	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_kVEC2_97c2e8f0 asm("s_kVEC2_97c2e8f0");	0x6b564543	data.s
+s_kVEC3_97c2e8f8	0x97c2e8f8	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_kVEC3_97c2e8f8 asm("s_kVEC3_97c2e8f8");	0x6b564543	data.s
+s_kVEC4_97c2e900	0x97c2e900	__TEXT,__cstring	TerminatedCString	6	extern unsigned char *s_kVEC4_97c2e900 asm("s_kVEC4_97c2e900");	0x6b564543	data.s
+s_SNE_97c2e908	0x97c2e908	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SNE_97c2e908 asm("s_SNE_97c2e908");	0x534e4520	data.s
+s_____end_97c2e910	0x97c2e910	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_____end_97c2e910 asm("s_____end_97c2e910");	0x3b0a2320	data.s
+s_SGE_97c2e91c	0x97c2e91c	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SGE_97c2e91c asm("s_SGE_97c2e91c");	0x53474520	data.s
+s_SEQ_97c2e924	0x97c2e924	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SEQ_97c2e924 asm("s_SEQ_97c2e924");	0x53455120	data.s
+s_SSG_97c2e92c	0x97c2e92c	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SSG_97c2e92c asm("s_SSG_97c2e92c");	0x53534720	data.s
+s_SUB_97c2e934	0x97c2e934	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SUB_97c2e934 asm("s_SUB_97c2e934");	0x53554220	data.s
+s___scratch1__scratch__97c2e93c	0x97c2e93c	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s___scratch1__scratch__97c2e93c asm("s___scratch1__scratch__97c2e93c");	0x2c207363	data.s
+s___kONE__97c2e954	0x97c2e954	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s___kONE__97c2e954 asm("s___kONE__97c2e954");	0x2c206b4f	data.s
+s_ADD_scratch_x__97c2e960	0x97c2e960	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_ADD_scratch_x__97c2e960 asm("s_ADD_scratch_x__97c2e960");	0x41444420	data.s
+s___scratch_x__kHALF__97c2e970	0x97c2e970	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s___scratch_x__kHALF__97c2e970 asm("s___scratch_x__kHALF__97c2e970");	0x2c207363	data.s
+s_SUB_scratch_x__97c2e988	0x97c2e988	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s_SUB_scratch_x__97c2e988 asm("s_SUB_scratch_x__97c2e988");	0x53554220	data.s
+s_ABS_97c2e998	0x97c2e998	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_ABS_97c2e998 asm("s_ABS_97c2e998");	0x41425320	data.s
+s___scratch_x__97c2e9a0	0x97c2e9a0	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s___scratch_x__97c2e9a0 asm("s___scratch_x__97c2e9a0");	0x2c207363	data.s
+s___kONE__97c2e9b0	0x97c2e9b0	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s___kONE__97c2e9b0 asm("s___kONE__97c2e9b0");	0x2c206b4f	data.s
+s___57_295779513082__97c2e9bc	0x97c2e9bc	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s___57_295779513082__97c2e9bc asm("s___57_295779513082__97c2e9bc");	0x2c203537	data.s
+s___0_0174532925199__97c2e9d0	0x97c2e9d0	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s___0_0174532925199__97c2e9d0 asm("s___0_0174532925199__97c2e9d0");	0x2c20302e	data.s
+s_LRP_97c2e9e4	0x97c2e9e4	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_LRP_97c2e9e4 asm("s_LRP_97c2e9e4");	0x4c525020	data.s
+s_MUL_scratch__scratch__97c2e9ec	0x97c2e9ec	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_MUL_scratch__scratch__97c2e9ec asm("s_MUL_scratch__scratch__97c2e9ec");	0x4d554c20	data.s
+s_FLR_scratch__scratch__97c2ea04	0x97c2ea04	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_FLR_scratch__scratch__97c2ea04 asm("s_FLR_scratch__scratch__97c2ea04");	0x464c5220	data.s
+s_DP3_scratch_x__scratch__97c2ea1c	0x97c2ea1c	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_DP3_scratch_x__scratch__97c2ea1c asm("s_DP3_scratch_x__scratch__97c2ea1c");	0x44503320	data.s
+s_SLT_scratch__scratch_x__kZERO__97c2ea38	0x97c2ea38	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SLT_scratch__scratch_x__kZERO__97c2ea38 asm("s_SLT_scratch__scratch_x__kZERO__97c2ea38");	0x534c5420	data.s
+s_MAD_scratch__scratch__kTWO___kON_97c2ea58	0x97c2ea58	__TEXT,__cstring	TerminatedCString	36	extern unsigned char *s_MAD_scratch__scratch__kTWO___kON_97c2ea58 asm("s_MAD_scratch__scratch__kTWO___kON_97c2ea58");	0x4d414420	data.s
+s_RCP_scratch1_x__scratch_x__97c2ea7c	0x97c2ea7c	__TEXT,__cstring	TerminatedCString	28	extern unsigned char *s_RCP_scratch1_x__scratch_x__97c2ea7c asm("s_RCP_scratch1_x__scratch_x__97c2ea7c");	0x52435020	data.s
+s_RCP_scratch1__97c2ea98	0x97c2ea98	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_RCP_scratch1__97c2ea98 asm("s_RCP_scratch1__97c2ea98");	0x52435020	data.s
+s___scratch__97c2eaa8	0x97c2eaa8	__TEXT,__cstring	TerminatedCString	11	extern unsigned char *s___scratch__97c2eaa8 asm("s___scratch__97c2eaa8");	0x2c207363	data.s
+s_MUL_scratch__scratch__scratch1__97c2eab4	0x97c2eab4	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_MUL_scratch__scratch__scratch1__97c2eab4 asm("s_MUL_scratch__scratch__scratch1__97c2eab4");	0x4d554c20	data.s
+s_MAX_scratch__scratch__kZERO__97c2ead8	0x97c2ead8	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_MAX_scratch__scratch__kZERO__97c2ead8 asm("s_MAX_scratch__scratch__kZERO__97c2ead8");	0x4d415820	data.s
+s_MIN_scratch__scratch__kONE__97c2eaf8	0x97c2eaf8	__TEXT,__cstring	TerminatedCString	29	extern unsigned char *s_MIN_scratch__scratch__kONE__97c2eaf8 asm("s_MIN_scratch__scratch__kONE__97c2eaf8");	0x4d494e20	data.s
+s_ADD_scratch1__scratch__scratch__97c2eb18	0x97c2eb18	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_ADD_scratch1__scratch__scratch__97c2eb18 asm("s_ADD_scratch1__scratch__scratch__97c2eb18");	0x41444420	data.s
+s_SUB_scratch1__kTHREE__scratch1__97c2eb3c	0x97c2eb3c	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_SUB_scratch1__kTHREE__scratch1__97c2eb3c asm("s_SUB_scratch1__kTHREE__scratch1__97c2eb3c");	0x53554220	data.s
+s_MUL_scratch__scratch__scratch__97c2eb60	0x97c2eb60	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_MUL_scratch__scratch__scratch__97c2eb60 asm("s_MUL_scratch__scratch__scratch__97c2eb60");	0x4d554c20	data.s
+s_SIN_97c2eb80	0x97c2eb80	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_SIN_97c2eb80 asm("s_SIN_97c2eb80");	0x53494e20	data.s
+s___end_97c2eb88	0x97c2eb88	__TEXT,__cstring	TerminatedCString	7	extern unsigned char *s___end_97c2eb88 asm("s___end_97c2eb88");	0x2320656e	data.s
+s___sine__SIN__using_NV_vertex_pro_97c2eb90	0x97c2eb90	__TEXT,__cstring	TerminatedCString	46	extern unsigned char *s___sine__SIN__using_NV_vertex_pro_97c2eb90 asm("s___sine__SIN__using_NV_vertex_pro_97c2eb90");	0x23207369	data.s
+s___k2PI_RCP__kHALF__97c2ebc0	0x97c2ebc0	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s___k2PI_RCP__kHALF__97c2ebc0 asm("s___k2PI_RCP__kHALF__97c2ebc0");	0x2c206b32	data.s
+s_FRC_scratch__scratch__97c2ebd4	0x97c2ebd4	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s_FRC_scratch__scratch__97c2ebd4 asm("s_FRC_scratch__scratch__97c2ebd4");	0x46524320	data.s
+s_MAD_scratch__scratch__k2PI___kPI_97c2ebec	0x97c2ebec	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MAD_scratch__scratch__k2PI___kPI_97c2ebec asm("s_MAD_scratch__scratch__k2PI___kPI_97c2ebec");	0x4d414420	data.s
+s_SLT_scratch1__scratch__kZERO__97c2ec10	0x97c2ec10	__TEXT,__cstring	TerminatedCString	31	extern unsigned char *s_SLT_scratch1__scratch__kZERO__97c2ec10 asm("s_SLT_scratch1__scratch__kZERO__97c2ec10");	0x534c5420	data.s
+s_SUB_scratch__scratch__kHALFPI__97c2ec30	0x97c2ec30	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SUB_scratch__scratch__kHALFPI__97c2ec30 asm("s_SUB_scratch__scratch__kHALFPI__97c2ec30");	0x53554220	data.s
+s_MUL_scratch__scratch__kHALFPI_RC_97c2ec50	0x97c2ec50	__TEXT,__cstring	TerminatedCString	36	extern unsigned char *s_MUL_scratch__scratch__kHALFPI_RC_97c2ec50 asm("s_MUL_scratch__scratch__kHALFPI_RC_97c2ec50");	0x4d554c20	data.s
+s_SUB_scratch2__kTHREE__scratch__97c2ec74	0x97c2ec74	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SUB_scratch2__kTHREE__scratch__97c2ec74 asm("s_SUB_scratch2__kTHREE__scratch__97c2ec74");	0x53554220	data.s
+s_MUL_scratch2__scratch2__scratch__97c2ec94	0x97c2ec94	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MUL_scratch2__scratch2__scratch__97c2ec94 asm("s_MUL_scratch2__scratch2__scratch__97c2ec94");	0x4d554c20	data.s
+s_MAD_scratch2__scratch2___kHALF__k_97c2ecb8	0x97c2ecb8	__TEXT,__cstring	TerminatedCString	39	extern unsigned char *s_MAD_scratch2__scratch2___kHALF__k_97c2ecb8 asm("s_MAD_scratch2__scratch2___kHALF__k_97c2ecb8");	0x4d414420	data.s
+s_MAD_scratch1__scratch1___kTWO__k_97c2ece0	0x97c2ece0	__TEXT,__cstring	TerminatedCString	38	extern unsigned char *s_MAD_scratch1__scratch1___kTWO__k_97c2ece0 asm("s_MAD_scratch1__scratch1___kTWO__k_97c2ece0");	0x4d414420	data.s
+s___scratch2__scratch1__97c2ed08	0x97c2ed08	__TEXT,__cstring	TerminatedCString	23	extern unsigned char *s___scratch2__scratch1__97c2ed08 asm("s___scratch2__scratch1__97c2ed08");	0x2c207363	data.s
+s___cosine__COS__97c2ed20	0x97c2ed20	__TEXT,__cstring	TerminatedCString	16	extern unsigned char *s___cosine__COS__97c2ed20 asm("s___cosine__COS__97c2ed20");	0x2320636f	data.s
+s_COS_97c2ed30	0x97c2ed30	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_COS_97c2ed30 asm("s_COS_97c2ed30");	0x434f5320	data.s
+s___cosine__COS__using_NV_vertex_p_97c2ed38	0x97c2ed38	__TEXT,__cstring	TerminatedCString	48	extern unsigned char *s___cosine__COS__using_NV_vertex_p_97c2ed38 asm("s___cosine__COS__using_NV_vertex_p_97c2ed38");	0x2320636f	data.s
+s_SUB_scratch1__kTHREE__scratch__97c2ed68	0x97c2ed68	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SUB_scratch1__kTHREE__scratch__97c2ed68 asm("s_SUB_scratch1__kTHREE__scratch__97c2ed68");	0x53554220	data.s
+s_MUL_scratch1__scratch1__scratch__97c2ed88	0x97c2ed88	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MUL_scratch1__scratch1__scratch__97c2ed88 asm("s_MUL_scratch1__scratch1__scratch__97c2ed88");	0x4d554c20	data.s
+s___scratch1___kHALF__kONE__97c2edac	0x97c2edac	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s___scratch1___kHALF__kONE__97c2edac asm("s___scratch1___kHALF__kONE__97c2edac");	0x2c207363	data.s
+s___kPI_RCP__kHALF__97c2edc8	0x97c2edc8	__TEXT,__cstring	TerminatedCString	19	extern unsigned char *s___kPI_RCP__kHALF__97c2edc8 asm("s___kPI_RCP__kHALF__97c2edc8");	0x2c206b50	data.s
+s_MAD_scratch__scratch__kPI___kHAL_97c2eddc	0x97c2eddc	__TEXT,__cstring	TerminatedCString	38	extern unsigned char *s_MAD_scratch__scratch__kPI___kHAL_97c2eddc asm("s_MAD_scratch__scratch__kPI___kHAL_97c2eddc");	0x4d414420	data.s
+s_MUL_scratch1__scratch__scratch__97c2ee04	0x97c2ee04	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_MUL_scratch1__scratch__scratch__97c2ee04 asm("s_MUL_scratch1__scratch__scratch__97c2ee04");	0x4d554c20	data.s
+s_MUL_scratch2__scratch1__scratch__97c2ee28	0x97c2ee28	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MUL_scratch2__scratch1__scratch__97c2ee28 asm("s_MUL_scratch2__scratch1__scratch__97c2ee28");	0x4d554c20	data.s
+s_MUL_scratch3__scratch1__scratch1_97c2ee4c	0x97c2ee4c	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch3__scratch1__scratch1_97c2ee4c asm("s_MUL_scratch3__scratch1__scratch1_97c2ee4c");	0x4d554c20	data.s
+s_MAD_scratch__kTAN_K1__scratch2__s_97c2ee70	0x97c2ee70	__TEXT,__cstring	TerminatedCString	42	extern unsigned char *s_MAD_scratch__kTAN_K1__scratch2__s_97c2ee70 asm("s_MAD_scratch__kTAN_K1__scratch2__s_97c2ee70");	0x4d414420	data.s
+s_MAD_scratch2__kTAN_K2__scratch1__97c2ee9c	0x97c2ee9c	__TEXT,__cstring	TerminatedCString	40	extern unsigned char *s_MAD_scratch2__kTAN_K2__scratch1__97c2ee9c asm("s_MAD_scratch2__kTAN_K2__scratch1__97c2ee9c");	0x4d414420	data.s
+s_MAD_scratch1__kTAN_K3__scratch3__97c2eec4	0x97c2eec4	__TEXT,__cstring	TerminatedCString	44	extern unsigned char *s_MAD_scratch1__kTAN_K3__scratch3__97c2eec4 asm("s_MAD_scratch1__kTAN_K3__scratch3__97c2eec4");	0x4d414420	data.s
+s_RCP_scratch1_x__scratch1_x__97c2eef0	0x97c2eef0	__TEXT,__cstring	TerminatedCString	29	extern unsigned char *s_RCP_scratch1_x__scratch1_x__97c2eef0 asm("s_RCP_scratch1_x__scratch1_x__97c2eef0");	0x52435020	data.s
+s___scratch1__97c2ef10	0x97c2ef10	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___scratch1__97c2ef10 asm("s___scratch1__97c2ef10");	0x2c207363	data.s
+s_MUL_scratch1__97c2ef1c	0x97c2ef1c	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_MUL_scratch1__97c2ef1c asm("s_MUL_scratch1__97c2ef1c");	0x4d554c20	data.s
+s_SUB_scratch1__kONE__scratch1__97c2ef2c	0x97c2ef2c	__TEXT,__cstring	TerminatedCString	31	extern unsigned char *s_SUB_scratch1__kONE__scratch1__97c2ef2c asm("s_SUB_scratch1__kONE__scratch1__97c2ef2c");	0x53554220	data.s
+s_SGE_scratch5__kZERO__scratch1__97c2ef4c	0x97c2ef4c	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SGE_scratch5__kZERO__scratch1__97c2ef4c asm("s_SGE_scratch5__kZERO__scratch1__97c2ef4c");	0x53474520	data.s
+s_RSQ_scratch1__97c2ef6c	0x97c2ef6c	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_RSQ_scratch1__97c2ef6c asm("s_RSQ_scratch1__97c2ef6c");	0x52535120	data.s
+s_MUL_scratch2__97c2ef7c	0x97c2ef7c	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_MUL_scratch2__97c2ef7c asm("s_MUL_scratch2__97c2ef7c");	0x4d554c20	data.s
+s_ABS_scratch2__scratch2__97c2ef8c	0x97c2ef8c	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_ABS_scratch2__scratch2__97c2ef8c asm("s_ABS_scratch2__scratch2__97c2ef8c");	0x41425320	data.s
+s_SLT_scratch6__kONE__scratch2__97c2efa8	0x97c2efa8	__TEXT,__cstring	TerminatedCString	31	extern unsigned char *s_SLT_scratch6__kONE__scratch2__97c2efa8 asm("s_SLT_scratch6__kONE__scratch2__97c2efa8");	0x534c5420	data.s
+s_RCP_scratch3__97c2efc8	0x97c2efc8	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_RCP_scratch3__97c2efc8 asm("s_RCP_scratch3__97c2efc8");	0x52435020	data.s
+s___scratch2__97c2efd8	0x97c2efd8	__TEXT,__cstring	TerminatedCString	12	extern unsigned char *s___scratch2__97c2efd8 asm("s___scratch2__97c2efd8");	0x2c207363	data.s
+s_SUB_scratch3__scratch3__scratch2_97c2efe4	0x97c2efe4	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_SUB_scratch3__scratch3__scratch2_97c2efe4 asm("s_SUB_scratch3__scratch3__scratch2_97c2efe4");	0x53554220	data.s
+s_MAD_scratch2__scratch6__scratch3_97c2f008	0x97c2f008	__TEXT,__cstring	TerminatedCString	45	extern unsigned char *s_MAD_scratch2__scratch6__scratch3_97c2f008 asm("s_MAD_scratch2__scratch6__scratch3_97c2f008");	0x4d414420	data.s
+s_MUL_scratch1__scratch2__scratch2_97c2f038	0x97c2f038	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch1__scratch2__scratch2_97c2f038 asm("s_MUL_scratch1__scratch2__scratch2_97c2f038");	0x4d554c20	data.s
+s_MUL_scratch3__scratch1__scratch2_97c2f05c	0x97c2f05c	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch3__scratch1__scratch2_97c2f05c asm("s_MUL_scratch3__scratch1__scratch2_97c2f05c");	0x4d554c20	data.s
+s_MUL_scratch4__scratch1__scratch1_97c2f080	0x97c2f080	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch4__scratch1__scratch1_97c2f080 asm("s_MUL_scratch4__scratch1__scratch1_97c2f080");	0x4d554c20	data.s
+s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4	0x97c2f0a4	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4 asm("s_MUL_scratch2__kATAN_K1__scratch2_97c2f0a4");	0x4d554c20	data.s
+s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8	0x97c2f0c8	__TEXT,__cstring	TerminatedCString	45	extern unsigned char *s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8 asm("s_MAD_scratch2__kATAN_K3__scratch3_97c2f0c8");	0x4d414420	data.s
+s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8	0x97c2f0f8	__TEXT,__cstring	TerminatedCString	41	extern unsigned char *s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8 asm("s_MAD_scratch1__kATAN_K2__scratch1_97c2f0f8");	0x4d414420	data.s
+s_MAD_scratch1__kATAN_K4__scratch4_97c2f124	0x97c2f124	__TEXT,__cstring	TerminatedCString	45	extern unsigned char *s_MAD_scratch1__kATAN_K4__scratch4_97c2f124 asm("s_MAD_scratch1__kATAN_K4__scratch4_97c2f124");	0x4d414420	data.s
+s_MUL_scratch2__scratch2__scratch1_97c2f154	0x97c2f154	__TEXT,__cstring	TerminatedCString	35	extern unsigned char *s_MUL_scratch2__scratch2__scratch1_97c2f154 asm("s_MUL_scratch2__scratch2__scratch1_97c2f154");	0x4d554c20	data.s
+s_MAD_scratch1__kTWO___scratch2__k_97c2f178	0x97c2f178	__TEXT,__cstring	TerminatedCString	41	extern unsigned char *s_MAD_scratch1__kTWO___scratch2__k_97c2f178 asm("s_MAD_scratch1__kTWO___scratch2__k_97c2f178");	0x4d414420	data.s
+s_MAD_scratch2__scratch6__scratch1_97c2f1a4	0x97c2f1a4	__TEXT,__cstring	TerminatedCString	45	extern unsigned char *s_MAD_scratch2__scratch6__scratch1_97c2f1a4 asm("s_MAD_scratch2__scratch6__scratch1_97c2f1a4");	0x4d414420	data.s
+s_SUB_scratch1__kHALFPI__scratch2__97c2f1d4	0x97c2f1d4	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_SUB_scratch1__kHALFPI__scratch2__97c2f1d4 asm("s_SUB_scratch1__kHALFPI__scratch2__97c2f1d4");	0x53554220	data.s
+s_MAD_scratch2__scratch5__scratch1_97c2f1f8	0x97c2f1f8	__TEXT,__cstring	TerminatedCString	45	extern unsigned char *s_MAD_scratch2__scratch5__scratch1_97c2f1f8 asm("s_MAD_scratch2__scratch5__scratch1_97c2f1f8");	0x4d414420	data.s
+s_MAD_scratch__scratch___kTWO__kON_97c2f228	0x97c2f228	__TEXT,__cstring	TerminatedCString	36	extern unsigned char *s_MAD_scratch__scratch___kTWO__kON_97c2f228 asm("s_MAD_scratch__scratch___kTWO__kON_97c2f228");	0x4d414420	data.s
+s___scratch2__scratch__97c2f24c	0x97c2f24c	__TEXT,__cstring	TerminatedCString	22	extern unsigned char *s___scratch2__scratch__97c2f24c asm("s___scratch2__scratch__97c2f24c");	0x2c207363	data.s
+s_SGE_scratch__97c2f264	0x97c2f264	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_SGE_scratch__97c2f264 asm("s_SGE_scratch__97c2f264");	0x53474520	data.s
+s_MUL_scratch4__scratch__scratch1__97c2f274	0x97c2f274	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MUL_scratch4__scratch__scratch1__97c2f274 asm("s_MUL_scratch4__scratch__scratch1__97c2f274");	0x4d554c20	data.s
+s_SGE_scratch5___scratch__kZERO__97c2f298	0x97c2f298	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SGE_scratch5___scratch__kZERO__97c2f298 asm("s_SGE_scratch5___scratch__kZERO__97c2f298");	0x53474520	data.s
+s_MAD_scratch6__scratch___kPI__kHA_97c2f2b8	0x97c2f2b8	__TEXT,__cstring	TerminatedCString	39	extern unsigned char *s_MAD_scratch6__scratch___kPI__kHA_97c2f2b8 asm("s_MAD_scratch6__scratch___kPI__kHA_97c2f2b8");	0x4d414420	data.s
+s_MAD_scratch1__scratch5__kOFFSET__97c2f2e0	0x97c2f2e0	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MAD_scratch1__scratch5__kOFFSET__97c2f2e0 asm("s_MAD_scratch1__scratch5__kOFFSET__97c2f2e0");	0x4d414420	data.s
+s_SLT_scratch7__scratch__kZERO__97c2f304	0x97c2f304	__TEXT,__cstring	TerminatedCString	31	extern unsigned char *s_SLT_scratch7__scratch__kZERO__97c2f304 asm("s_SLT_scratch7__scratch__kZERO__97c2f304");	0x534c5420	data.s
+s_SLT_scratch8__kONE__scratch__97c2f324	0x97c2f324	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_SLT_scratch8__kONE__scratch__97c2f324 asm("s_SLT_scratch8__kONE__scratch__97c2f324");	0x534c5420	data.s
+s_SGE_scratch1___scratch__kZERO__97c2f344	0x97c2f344	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s_SGE_scratch1___scratch__kZERO__97c2f344 asm("s_SGE_scratch1___scratch__kZERO__97c2f344");	0x53474520	data.s
+s_MAD_scratch__scratch1__kOFFSET__s_97c2f364	0x97c2f364	__TEXT,__cstring	TerminatedCString	42	extern unsigned char *s_MAD_scratch__scratch1__kOFFSET__s_97c2f364 asm("s_MAD_scratch__scratch1__kOFFSET__s_97c2f364");	0x4d414420	data.s
+s_SUB_scratch1__scratch1__scratch__97c2f390	0x97c2f390	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_SUB_scratch1__scratch1__scratch__97c2f390 asm("s_SUB_scratch1__scratch1__scratch__97c2f390");	0x53554220	data.s
+s_MAD_scratch__scratch8__scratch1__97c2f3b4	0x97c2f3b4	__TEXT,__cstring	TerminatedCString	43	extern unsigned char *s_MAD_scratch__scratch8__scratch1__97c2f3b4 asm("s_MAD_scratch__scratch8__scratch1__97c2f3b4");	0x4d414420	data.s
+s_MUL_scratch__kATAN_K1__scratch__97c2f3e0	0x97c2f3e0	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_MUL_scratch__kATAN_K1__scratch__97c2f3e0 asm("s_MUL_scratch__kATAN_K1__scratch__97c2f3e0");	0x4d554c20	data.s
+s_MAD_scratch2__kATAN_K3__scratch2_97c2f404	0x97c2f404	__TEXT,__cstring	TerminatedCString	44	extern unsigned char *s_MAD_scratch2__kATAN_K3__scratch2_97c2f404 asm("s_MAD_scratch2__kATAN_K3__scratch2_97c2f404");	0x4d414420	data.s
+s_MAD_scratch__kATAN_K2__scratch1__97c2f430	0x97c2f430	__TEXT,__cstring	TerminatedCString	40	extern unsigned char *s_MAD_scratch__kATAN_K2__scratch1__97c2f430 asm("s_MAD_scratch__kATAN_K2__scratch1__97c2f430");	0x4d414420	data.s
+s_MAD_scratch__kATAN_K4__scratch3__97c2f458	0x97c2f458	__TEXT,__cstring	TerminatedCString	43	extern unsigned char *s_MAD_scratch__kATAN_K4__scratch3__97c2f458 asm("s_MAD_scratch__kATAN_K4__scratch3__97c2f458");	0x4d414420	data.s
+s_MUL_scratch1__scratch2__scratch__97c2f484	0x97c2f484	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_MUL_scratch1__scratch2__scratch__97c2f484 asm("s_MUL_scratch1__scratch2__scratch__97c2f484");	0x4d554c20	data.s
+s_MAD_scratch__kTWO___scratch1__kH_97c2f4a8	0x97c2f4a8	__TEXT,__cstring	TerminatedCString	40	extern unsigned char *s_MAD_scratch__kTWO___scratch1__kH_97c2f4a8 asm("s_MAD_scratch__kTWO___scratch1__kH_97c2f4a8");	0x4d414420	data.s
+s_MAD_scratch__scratch8__scratch__s_97c2f4d0	0x97c2f4d0	__TEXT,__cstring	TerminatedCString	43	extern unsigned char *s_MAD_scratch__scratch8__scratch__s_97c2f4d0 asm("s_MAD_scratch__scratch8__scratch__s_97c2f4d0");	0x4d414420	data.s
+s_MAD_scratch2__scratch7___kTWO__k_97c2f4fc	0x97c2f4fc	__TEXT,__cstring	TerminatedCString	38	extern unsigned char *s_MAD_scratch2__scratch7___kTWO__k_97c2f4fc asm("s_MAD_scratch2__scratch7___kTWO__k_97c2f4fc");	0x4d414420	data.s
+s_MUL_scratch__scratch__scratch2__97c2f524	0x97c2f524	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_MUL_scratch__scratch__scratch2__97c2f524 asm("s_MUL_scratch__scratch__scratch2__97c2f524");	0x4d554c20	data.s
+s_ADD_scratch__scratch__scratch4__97c2f548	0x97c2f548	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_ADD_scratch__scratch__scratch4__97c2f548 asm("s_ADD_scratch__scratch__scratch4__97c2f548");	0x41444420	data.s
+s_SUB_scratch1__scratch6__scratch__97c2f56c	0x97c2f56c	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_SUB_scratch1__scratch6__scratch__97c2f56c asm("s_SUB_scratch1__scratch6__scratch__97c2f56c");	0x53554220	data.s
+s___scratch5__scratch1__scratch__97c2f590	0x97c2f590	__TEXT,__cstring	TerminatedCString	32	extern unsigned char *s___scratch5__scratch1__scratch__97c2f590 asm("s___scratch5__scratch1__scratch__97c2f590");	0x2c207363	data.s
+s_ABS_scratch2__97c2f5b0	0x97c2f5b0	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_ABS_scratch2__97c2f5b0 asm("s_ABS_scratch2__97c2f5b0");	0x41425320	data.s
+s_ADD_scratch2__scratch2__kOFFSET__97c2f5c0	0x97c2f5c0	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_ADD_scratch2__scratch2__kOFFSET__97c2f5c0 asm("s_ADD_scratch2__scratch2__kOFFSET__97c2f5c0");	0x41444420	data.s
+s_MUL_scratch__scratch2__scratch__97c2f5e4	0x97c2f5e4	__TEXT,__cstring	TerminatedCString	33	extern unsigned char *s_MUL_scratch__scratch2__scratch__97c2f5e4 asm("s_MUL_scratch__scratch2__scratch__97c2f5e4");	0x4d554c20	data.s
+s___kHALFPI__scratch__97c2f608	0x97c2f608	__TEXT,__cstring	TerminatedCString	21	extern unsigned char *s___kHALFPI__scratch__97c2f608 asm("s___kHALFPI__scratch__97c2f608");	0x2c206b48	data.s
+s_SUB_scratch__kSEL__97c2f620	0x97c2f620	__TEXT,__cstring	TerminatedCString	20	extern unsigned char *s_SUB_scratch__kSEL__97c2f620 asm("s_SUB_scratch__kSEL__97c2f620");	0x53554220	data.s
+s_SGE_scratch___scratch__kZERO__97c2f634	0x97c2f634	__TEXT,__cstring	TerminatedCString	31	extern unsigned char *s_SGE_scratch___scratch__kZERO__97c2f634 asm("s_SGE_scratch___scratch__kZERO__97c2f634");	0x53474520	data.s
+s_SUB_scratch__kSEL_97c2f654	0x97c2f654	__TEXT,__cstring	TerminatedCString	18	extern unsigned char *s_SUB_scratch__kSEL_97c2f654 asm("s_SUB_scratch__kSEL_97c2f654");	0x53554220	data.s
+s_SUB_scratch1__kONE__scratch__97c2f668	0x97c2f668	__TEXT,__cstring	TerminatedCString	30	extern unsigned char *s_SUB_scratch1__kONE__scratch__97c2f668 asm("s_SUB_scratch1__kONE__scratch__97c2f668");	0x53554220	data.s
+s___scratch1__97c2f688	0x97c2f688	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___scratch1__97c2f688 asm("s___scratch1__97c2f688");	0x2c207363	data.s
+s_ABS_SAT_scratch__scratch__97c2f698	0x97c2f698	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s_ABS_SAT_scratch__scratch__97c2f698 asm("s_ABS_SAT_scratch__scratch__97c2f698");	0x4142535f	data.s
+s_MUL_scratch__scratch_x__scratch__97c2f6b4	0x97c2f6b4	__TEXT,__cstring	TerminatedCString	36	extern unsigned char *s_MUL_scratch__scratch_x__scratch__97c2f6b4 asm("s_MUL_scratch__scratch_x__scratch__97c2f6b4");	0x4d554c20	data.s
+s_DP3_scratch__97c2f6d8	0x97c2f6d8	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_DP3_scratch__97c2f6d8 asm("s_DP3_scratch__97c2f6d8");	0x44503320	data.s
+s_DP4_scratch__97c2f6e8	0x97c2f6e8	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_DP4_scratch__97c2f6e8 asm("s_DP4_scratch__97c2f6e8");	0x44503420	data.s
+s_MAD_scratch1__scratch___scratch__97c2f6f8	0x97c2f6f8	__TEXT,__cstring	TerminatedCString	40	extern unsigned char *s_MAD_scratch1__scratch___scratch__97c2f6f8 asm("s_MAD_scratch1__scratch___scratch__97c2f6f8");	0x4d414420	data.s
+s_MAD_scratch1__scratch2___scratch_97c2f720	0x97c2f720	__TEXT,__cstring	TerminatedCString	42	extern unsigned char *s_MAD_scratch1__scratch2___scratch_97c2f720 asm("s_MAD_scratch1__scratch2___scratch_97c2f720");	0x4d414420	data.s
+s_RSQ_scratch2__scratch1_x__97c2f74c	0x97c2f74c	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s_RSQ_scratch2__scratch1_x__97c2f74c asm("s_RSQ_scratch2__scratch1_x__97c2f74c");	0x52535120	data.s
+s_RCP_scratch2__scratch2_x__97c2f768	0x97c2f768	__TEXT,__cstring	TerminatedCString	27	extern unsigned char *s_RCP_scratch2__scratch2_x__97c2f768 asm("s_RCP_scratch2__scratch2_x__97c2f768");	0x52435020	data.s
+s_MAD_scratch2__scratch_x__97c2f784	0x97c2f784	__TEXT,__cstring	TerminatedCString	26	extern unsigned char *s_MAD_scratch2__scratch_x__97c2f784 asm("s_MAD_scratch2__scratch_x__97c2f784");	0x4d414420	data.s
+s___scratch2_x__97c2f7a0	0x97c2f7a0	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s___scratch2_x__97c2f7a0 asm("s___scratch2_x__97c2f7a0");	0x2c207363	data.s
+s____scratch2__97c2f7b0	0x97c2f7b0	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s____scratch2__97c2f7b0 asm("s____scratch2__97c2f7b0");	0x2c202d73	data.s
+s_SGE_scratch1__scratch1_x__kZERO__97c2f7c0	0x97c2f7c0	__TEXT,__cstring	TerminatedCString	34	extern unsigned char *s_SGE_scratch1__scratch1_x__kZERO__97c2f7c0 asm("s_SGE_scratch1__scratch1_x__kZERO__97c2f7c0");	0x53474520	data.s
+s_ARL_97c2f7e4	0x97c2f7e4	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_ARL_97c2f7e4 asm("s_ARL_97c2f7e4");	0x41524c20	data.s
+s_DDX_97c2f7ec	0x97c2f7ec	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_DDX_97c2f7ec asm("s_DDX_97c2f7ec");	0x44445820	data.s
+s_DDY_97c2f7f4	0x97c2f7f4	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_DDY_97c2f7f4 asm("s_DDY_97c2f7f4");	0x44445920	data.s
+s_DDX_scratch__97c2f7fc	0x97c2f7fc	__TEXT,__cstring	TerminatedCString	14	extern unsigned char *s_DDX_scratch__97c2f7fc asm("s_DDX_scratch__97c2f7fc");	0x44445820	data.s
+s_DDY_scratch1__97c2f80c	0x97c2f80c	__TEXT,__cstring	TerminatedCString	15	extern unsigned char *s_DDY_scratch1__97c2f80c asm("s_DDY_scratch1__97c2f80c");	0x44445920	data.s
+s_CMP_97c2f81c	0x97c2f81c	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_CMP_97c2f81c asm("s_CMP_97c2f81c");	0x434d5020	data.s
+s_REP_97c2f824	0x97c2f824	__TEXT,__cstring	TerminatedCString	5	extern unsigned char *s_REP_97c2f824 asm("s_REP_97c2f824");	0x52455020	data.s
+s_ENDREP__97c2f82c	0x97c2f82c	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s_ENDREP__97c2f82c asm("s_ENDREP__97c2f82c");	0x454e4452	data.s
+s___ARBvp1_0_97c2f838	0x97c2f838	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___ARBvp1_0_97c2f838 asm("s___ARBvp1_0_97c2f838");	0x21214152	data.s
+s___ARBfp1_0_97c2f848	0x97c2f848	__TEXT,__cstring	TerminatedCString	13	extern unsigned char *s___ARBfp1_0_97c2f848 asm("s___ARBfp1_0_97c2f848");	0x21214152	data.s
+s_Unknown_Target__error__97c2f858	0x97c2f858	__TEXT,__cstring	TerminatedCString	25	extern unsigned char *s_Unknown_Target__error__97c2f858 asm("s_Unknown_Target__error__97c2f858");	0x556e6b6e	data.s
+DOUBLE_97c30a48	0x97c30a48	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a48 asm("DOUBLE_97c30a48");	0x00000000	data.s
+DOUBLE_97c30a50	0x97c30a50	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a50 asm("DOUBLE_97c30a50");	0x40240000	data.s
+DOUBLE_97c30a58	0x97c30a58	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a58 asm("DOUBLE_97c30a58");	0x43300000	data.s
+DOUBLE_97c30a60	0x97c30a60	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a60 asm("DOUBLE_97c30a60");	0x3ff00000	data.s
+DOUBLE_97c30a68	0x97c30a68	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a68 asm("DOUBLE_97c30a68");	0x43300000	data.s
+DOUBLE_97c30a70	0x97c30a70	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a70 asm("DOUBLE_97c30a70");	0x3e7ad7f2	data.s
+DOUBLE_97c30a78	0x97c30a78	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a78 asm("DOUBLE_97c30a78");	0x41e00000	data.s
+DOUBLE_97c30a80	0x97c30a80	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a80 asm("DOUBLE_97c30a80");	0x40080000	data.s
+DOUBLE_97c30a88	0x97c30a88	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a88 asm("DOUBLE_97c30a88");	0x3fe00000	data.s
+DOUBLE_97c30a90	0x97c30a90	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a90 asm("DOUBLE_97c30a90");	0x3f700000	data.s
+DOUBLE_97c30a98	0x97c30a98	__TEXT,__literal8	double	8	extern double DOUBLE_97c30a98 asm("DOUBLE_97c30a98");	0x406fe000	data.s
+DOUBLE_97c30aa0	0x97c30aa0	__TEXT,__literal8	double	8	extern double DOUBLE_97c30aa0 asm("DOUBLE_97c30aa0");	0x4005bf0a	data.s
+DOUBLE_97c30aa8	0x97c30aa8	__TEXT,__literal8	double	8	extern double DOUBLE_97c30aa8 asm("DOUBLE_97c30aa8");	0x3949f623	data.s
+DOUBLE_97c30ab0	0x97c30ab0	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ab0 asm("DOUBLE_97c30ab0");	0x4693b8b5	data.s
+DOUBLE_97c30ab8	0x97c30ab8	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ab8 asm("DOUBLE_97c30ab8");	0x3fb99999	data.s
+DOUBLE_97c30ac0	0x97c30ac0	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ac0 asm("DOUBLE_97c30ac0");	0x3eb0c6f7	data.s
+DOUBLE_97c30ac8	0x97c30ac8	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ac8 asm("DOUBLE_97c30ac8");	0x3f847ae1	data.s
+DOUBLE_97c30ad0	0x97c30ad0	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ad0 asm("DOUBLE_97c30ad0");	0x3fd34413	data.s
+DOUBLE_97c30ad8	0x97c30ad8	__TEXT,__literal8	double	8	extern double DOUBLE_97c30ad8 asm("DOUBLE_97c30ad8");	0x40590000	data.s
+_sizeBuiltInFunctions	0x97c35058	__TEXT,__const	-	-		0x0000001d	data.s
+_sizeBuiltInFunctionsVertex	0x97c354ac	__TEXT,__const	-	-		0x00000012	data.s
+_sizeBuiltInFunctionsFragment	0x97c354b4	__TEXT,__const	-	-		0x00000014	data.s
+_sizeStandardVertexVaryings	0x97c354e8	__TEXT,__const	-	-		0x0000001c	data.s
+_sizeStandardFragmentVaryings	0x97c35504	__TEXT,__const	-	-		0x00000017	data.s
+_sizeStandardVertexAttributes	0x97c35518	__TEXT,__const	-	-		0x00000019	data.s
+_sizeStandardUniformConstants	0x97c35550	__TEXT,__const	-	-		0x0000001c	data.s
+_sizeStandardUniforms	0x97c35584	__TEXT,__const	-	-		0x00000021	data.s
+guardBlockBeginVal	0x97c356f8	__TEXT,__const	undefined1	1		0xfbfecd00	data.s
+guardBlockEndVal	0x97c356f9	__TEXT,__const	undefined1	1		0xfecd0000	data.s
+DAT_97c356fc	0x97c356fc	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c356fc asm("DAT_97c356fc");	0x00000000	data.s
+DAT_97c35718	0x97c35718	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35718 asm("DAT_97c35718");	0x00000000	data.s
+DAT_97c35734	0x97c35734	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35734 asm("DAT_97c35734");	0x00000000	data.s
+DAT_97c35738	0x97c35738	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35738 asm("DAT_97c35738");	0x00000004	data.s
+DAT_97c3573c	0x97c3573c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3573c asm("DAT_97c3573c");	0x00000001	data.s
+DAT_97c35740	0x97c35740	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35740 asm("DAT_97c35740");	0x00000000	data.s
+DAT_97c35744	0x97c35744	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35744 asm("DAT_97c35744");	0x00000000	data.s
+DAT_97c35748	0x97c35748	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35748 asm("DAT_97c35748");	0x00000000	data.s
+DAT_97c3574c	0x97c3574c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3574c asm("DAT_97c3574c");	0x00000000	data.s
+DAT_97c35750	0x97c35750	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35750 asm("DAT_97c35750");	0x00000000	data.s
+_yytranslate	0x97c3576c	__TEXT,__const	-	-		0x00020202	data.s
+_yyr2	0x97c35a7a	__TEXT,__const	-	-		0x00000001	data.s
+_yydefact	0x97c35c2a	__TEXT,__const	-	-		0x00000081	data.s
+DAT_97c35e08	0x97c35e08	__TEXT,__const	-	-	extern unsigned char DAT_97c35e08 asm("DAT_97c35e08");	0x00000000	data.s
+_yypact	0x97c35f5a	__TEXT,__const	undefined2	2		0x04998000	data.s
+DAT_97c36138	0x97c36138	__TEXT,__const	-	-	extern unsigned char DAT_97c36138 asm("DAT_97c36138");	0x03d103d1	data.s
+_yytable	0x97c3628a	__TEXT,__const	-	-		0x00b800c5	data.s
+_yycheck	0x97c36c6a	__TEXT,__const	-	-		0x004c005c	data.s
+_yy_accept	0x97c3764c	__TEXT,__const	-	-		0x00000000	data.s
+DAT_97c37983	0x97c37983	__TEXT,__const	-	-	extern unsigned char DAT_97c37983[] asm("DAT_97c37983");	0x00000000	data.s
+DAT_97c37d83	0x97c37d83	__TEXT,__const	-	-	extern unsigned char DAT_97c37d83[] asm("DAT_97c37d83");	0x00000000	data.s
+_yy_base	0x97c37e8c	__TEXT,__const	-	-		0x00000000	data.s
+_yy_def	0x97c381cc	__TEXT,__const	-	-		0x00000199	data.s
+_yy_nxt	0x97c3850c	__TEXT,__const	-	-		0x00000006	data.s
+_yy_chk	0x97c38a52	__TEXT,__const	-	-		0x00000001	data.s
+DAT_97c38f98	0x97c38f98	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38f98 asm("DAT_97c38f98");	0xffffffff	data.s
+DAT_97c38fa0	0x97c38fa0	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa0 asm("DAT_97c38fa0");	0xffffffff	data.s
+DAT_97c38fa4	0x97c38fa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa4 asm("DAT_97c38fa4");	0xffffffff	data.s
+DAT_97c38fa8	0x97c38fa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fa8 asm("DAT_97c38fa8");	0xffffffff	data.s
+DAT_97c38fac	0x97c38fac	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c38fac asm("DAT_97c38fac");	0xffffffff	data.s
+DAT_97c38fb0	0x97c38fb0	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38fb0 asm("DAT_97c38fb0");	0xffffffff	data.s
+DAT_97c38fb8	0x97c38fb8	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c38fb8 asm("DAT_97c38fb8");	0x00000001	data.s
+_operatorToken	0x97c38fc0	__TEXT,__const	-	-		0x0000006e	data.s
+DAT_97c39250	0x97c39250	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39250 asm("DAT_97c39250");	0x00000001	data.s
+DAT_97c39254	0x97c39254	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39254 asm("DAT_97c39254");	0x00000001	data.s
+DAT_97c39258	0x97c39258	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39258 asm("DAT_97c39258");	0x00000001	data.s
+DAT_97c3925c	0x97c3925c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3925c asm("DAT_97c3925c");	0x00000001	data.s
+DAT_97c39260	0x97c39260	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39260 asm("DAT_97c39260");	0x00000000	data.s
+DAT_97c39264	0x97c39264	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39264 asm("DAT_97c39264");	0x00000001	data.s
+DAT_97c39268	0x97c39268	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c39268 asm("DAT_97c39268");	0x00000002	data.s
+DAT_97c3926c	0x97c3926c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3926c asm("DAT_97c3926c");	0x00000003	data.s
+_glpOpLoadOneAndZeroRTC	0x97c39270	__TEXT,__const	-	-		0xc1630080	data.s
+_glpNegateSourceARTC	0x97c3927c	__TEXT,__const	-	-		0xfc000050	data.s
+_glpNegateSourceBRTC	0x97c39290	__TEXT,__const	-	-		0xfc802050	data.s
+_glpNegateSourceCRTC	0x97c392a4	__TEXT,__const	-	-		0xfe008050	data.s
+_glpOpMovRTC	0x97c392b8	__TEXT,__const	-	-		0xfe000090	data.s
+_glpOpRcpRTC	0x97c392cc	__TEXT,__const	-	-		0xee001830	data.s
+_glpOpRsqRTC	0x97c392d4	__TEXT,__const	-	-		0xfc401a10	data.s
+_glpOpAbsRTC	0x97c392e0	__TEXT,__const	-	-		0xfe000210	data.s
+_glpOpExpRTC	0x97c392f4	__TEXT,__const	-	-		0xc90301e0	data.s
+_glpOpLogRTC	0x97c39390	__TEXT,__const	-	-		0xc90301e0	data.s
+_glpOpSplatC2RTC	0x97c39414	__TEXT,__const	-	-		0xfe009090	data.s
+_glpOpSplatC0RTC	0x97c39424	__TEXT,__const	-	-		0xfe208090	data.s
+_glpOpSaveSrcBRTC	0x97c39434	__TEXT,__const	-	-		0xfd203890	data.s
+_glpOpRestoreSrcBRTC	0x97c3943c	__TEXT,__const	-	-		0xec6904b2	data.s
+_glpOpShuffleSrcRTC	0x97c39444	__TEXT,__const	-	-		0xd0030208	data.s
+_glpOpShuffleDstRTC	0x97c39458	__TEXT,__const	-	-		0xc2230208	data.s
+_glpOpFrcRTC	0x97c39480	__TEXT,__const	-	-		0xc90301e0	data.s
+_glpOpFlrRTC	0x97c39508	__TEXT,__const	-	-		0xc90301e0	data.s
+_glpOpMultRTC	0x97c39580	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpAddRTC	0x97c39594	__TEXT,__const	-	-		0xee00202a	data.s
+_glpOpSubRTC	0x97c395a8	__TEXT,__const	-	-		0xee002028	data.s
+_glpOpDot1RTC	0x97c395bc	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpDot2RTC	0x97c395c4	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpDot3RTC	0x97c395d0	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpDot4RTC	0x97c395e0	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpDphRTC	0x97c395f4	__TEXT,__const	-	-		0xee000132	data.s
+_glpOpDistRTC	0x97c39608	__TEXT,__const	-	-		0xc2030084	data.s
+_glpOpMinRTC	0x97c3961c	__TEXT,__const	-	-		0xee040028	data.s
+_glpOpMaxRTC	0x97c39640	__TEXT,__const	-	-		0xee002028	data.s
+_glpOpSetLTRTC	0x97c39664	__TEXT,__const	-	-		0xc1030084	data.s
+_glpOpSetGERTC	0x97c39690	__TEXT,__const	-	-		0xc1030080	data.s
+_glpOpXpdRTC	0x97c396bc	__TEXT,__const	-	-		0xee0500b2	data.s
+_glpOpMultAddRTC	0x97c396dc	__TEXT,__const	-	-		0xee00813a	data.s
+_glpOpLerpRTC	0x97c396f0	__TEXT,__const	-	-		0xed0a0028	data.s
+_glpOpCmpRTC	0x97c39724	__TEXT,__const	-	-		0xfe00242e	data.s
+_glpOpSaturateRTC	0x97c39738	__TEXT,__const	-	-		0xed105028	data.s
+_glpOpArlRTC	0x97c3976c	__TEXT,__const	-	-		0xfc00001c	data.s
+_glpOpClippingAVRTC	0x97c3977c	__TEXT,__const	-	-		0x1063028c	data.s
+_glpOpClippingRTC	0x97c397e0	__TEXT,__const	-	-		0x39e00001	data.s
+_glpEpilogAVRTC	0x97c398c8	__TEXT,__const	-	-		0x7c0043a6	data.s
+_glpOpMovAVRTC	0x97c398d4	__TEXT,__const	-	-		0x10400484	data.s
+_glpOpRcpAVRTC	0x97c398dc	__TEXT,__const	-	-		0x1040010a	data.s
+_glpOpRsqAVRTC	0x97c398e8	__TEXT,__const	-	-		0x10403c44	data.s
+_glpOpSqrtAVRTC	0x97c398f4	__TEXT,__const	-	-		0x10403c44	data.s
+_glpOpLength1AVRTC	0x97c39904	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpLength2AVRTC	0x97c39918	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpLength3AVRTC	0x97c39934	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpLength4AVRTC	0x97c39958	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpNormalise1AVRTC	0x97c3997c	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpNormalise2AVRTC	0x97c39990	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpNormalise3AVRTC	0x97c399ac	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpNormalise4AVRTC	0x97c399d0	__TEXT,__const	-	-		0x1040382e	data.s
+_glpOpDegreesToRadiansAVRTC	0x97c399f4	__TEXT,__const	-	-		0x39e00190	data.s
+_glpOpRadiansToDegreesAVRTC	0x97c39a04	__TEXT,__const	-	-		0x39e001a0	data.s
+_glpOpEx2AVRTC	0x97c39a14	__TEXT,__const	-	-		0x39e000f0	data.s
+_glpOpExpAVRTC	0x97c39a88	__TEXT,__const	-	-		0x1003028c	data.s
+_glpOpLg2AVRTC	0x97c39aac	__TEXT,__const	-	-		0x10004c0a	data.s
+_glpOpCosAVRTC	0x97c39b2c	__TEXT,__const	-	-		0x39e00180	data.s
+_glpOpSinAVRTC	0x97c39bc4	__TEXT,__const	-	-		0x39e00180	data.s
+_glpOpLogAVRTC	0x97c39c5c	__TEXT,__const	-	-		0x10003c44	data.s
+_glpOpMulForPowAVRTC	0x97c39c88	__TEXT,__const	-	-		0x1002386e	data.s
+_glpOpFrcAVRTC	0x97c39c90	__TEXT,__const	-	-		0x104002ca	data.s
+_glpOpFlrAVRTC	0x97c39c9c	__TEXT,__const	-	-		0x104002ca	data.s
+_glpOpCeilAVRTC	0x97c39ca4	__TEXT,__const	-	-		0x1040028a	data.s
+_glpOpSetSignAVRTC	0x97c39cac	__TEXT,__const	-	-		0x10603c04	data.s
+_glpOpAnyAVRTC	0x97c39cc0	__TEXT,__const	-	-		0x106048c6	data.s
+_glpOpAllAVRTC	0x97c39cec	__TEXT,__const	-	-		0x106048c6	data.s
+_glpOpNotAVRTC	0x97c39d18	__TEXT,__const	-	-		0x106048c6	data.s
+_glpOpLitAVRTC	0x97c39d24	__TEXT,__const	-	-		0x1080038c	data.s
+_glpOpAbsAVRTC	0x97c39d58	__TEXT,__const	-	-		0x10403c44	data.s
+_glpOpMulAVRTC	0x97c39d60	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpModAVRTC	0x97c39d68	__TEXT,__const	-	-		0x1080090a	data.s
+_glpOpLogicalAndAVRTC	0x97c39d80	__TEXT,__const	-	-		0x10400c04	data.s
+_glpOpLogicalOrAVRTC	0x97c39d88	__TEXT,__const	-	-		0x10400c84	data.s
+_glpOpLogicalXorAVRTC	0x97c39d90	__TEXT,__const	-	-		0x10400cc4	data.s
+_glpOpAddAVRTC	0x97c39d98	__TEXT,__const	-	-		0x1040080a	data.s
+_glpOpSubAVRTC	0x97c39da0	__TEXT,__const	-	-		0x10613cc4	data.s
+_glpOpDp1AVRTC	0x97c39dac	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpDp2AVRTC	0x97c39db8	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpDp3AVRTC	0x97c39dcc	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpDp4AVRTC	0x97c39de8	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpDphAVRTC	0x97c39e04	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpDistance1GLSLAVRTC	0x97c39e28	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpDistance2GLSLAVRTC	0x97c39e40	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpDistance3GLSLAVRTC	0x97c39e60	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpDistance4GLSLAVRTC	0x97c39e88	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpDistanceARBVPFPAVRTC	0x97c39eb0	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpReflect1AVRTC	0x97c39ed0	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpReflect2AVRTC	0x97c39eec	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpReflect3AVRTC	0x97c39f10	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpReflect4AVRTC	0x97c39f3c	__TEXT,__const	-	-		0x1040386e	data.s
+_glpOpMinAVRTC	0x97c39f68	__TEXT,__const	-	-		0x10400c4a	data.s
+_glpOpMaxAVRTC	0x97c39f70	__TEXT,__const	-	-		0x10400c0a	data.s
+_glpOpSltAVRTC	0x97c39f78	__TEXT,__const	-	-		0x104009c6	data.s
+_glpOpSgeAVRTC	0x97c39f84	__TEXT,__const	-	-		0x104009c6	data.s
+_glpOpSgtAVRTC	0x97c39f90	__TEXT,__const	-	-		0x10400ac6	data.s
+_glpOpSleAVRTC	0x97c39f9c	__TEXT,__const	-	-		0x10400ac6	data.s
+_glpOpSflAVRTC	0x97c39fa8	__TEXT,__const	-	-		0x10494c84	data.s
+_glpOpSetEqualToAVRTC	0x97c39fb0	__TEXT,__const	-	-		0x104008c6	data.s
+_glpOpSetAllEqualTo1AVRTC	0x97c39fbc	__TEXT,__const	-	-		0x106008c6	data.s
+_glpOpSetAllEqualTo2AVRTC	0x97c39fcc	__TEXT,__const	-	-		0x106008c6	data.s
+_glpOpSetAllEqualTo3AVRTC	0x97c39fe8	__TEXT,__const	-	-		0x106008c6	data.s
+_glpOpSetAllEqualTo4AVRTC	0x97c3a014	__TEXT,__const	-	-		0x106008c6	data.s
+_glpOpStrAVRTC	0x97c3a048	__TEXT,__const	-	-		0x10484484	data.s
+_glpOpXpdAVRTC	0x97c3a050	__TEXT,__const	-	-		0x10610b2c	data.s
+_glpOpMadAVRTC	0x97c3a078	__TEXT,__const	-	-		0x1040106e	data.s
+_glpOpLerpAVRTC	0x97c3a080	__TEXT,__const	-	-		0x1068004a	data.s
+_glpOpScalarSelectAVRTC	0x97c3a090	__TEXT,__const	-	-		0x10650b8a	data.s
+_glpOpDestinationScalarSelectAVRTC	0x97c3a0a0	__TEXT,__const	-	-		0x10650b8a	data.s
+_glpOpDivideAVRTC	0x97c3a0b4	__TEXT,__const	-	-		0x1060090a	data.s
+_glpOpIntegerDivideAVRTC	0x97c3a0c0	__TEXT,__const	-	-		0x1060090a	data.s
+_glpOpFaceForward1AVRTC	0x97c3a0d0	__TEXT,__const	-	-		0x10a138ae	data.s
+_glpOpFaceForward2AVRTC	0x97c3a0ec	__TEXT,__const	-	-		0x10a138ae	data.s
+_glpOpFaceForward3AVRTC	0x97c3a110	__TEXT,__const	-	-		0x10a138ae	data.s
+_glpOpFaceForward4AVRTC	0x97c3a13c	__TEXT,__const	-	-		0x10a138ae	data.s
+_glpOpClampAVRTC	0x97c3a168	__TEXT,__const	-	-		0x10600c0a	data.s
+_glpOpSmoothStepAVRTC	0x97c3a174	__TEXT,__const	-	-		0x1062004a	data.s
+_glpOpRefractAVRTC	0x97c3a1a8	__TEXT,__const	-	-		0x10a0386e	data.s
+_glpOpCmpAVRTC	0x97c3a1f8	__TEXT,__const	-	-		0x106049c6	data.s
+_glpOpSaturateAVRTC	0x97c3a204	__TEXT,__const	-	-		0x1042444a	data.s
+_glpOpConvertRGBAFFFFToARGB8888	0x97c3a210	__TEXT,__const	-	-		0x10635b2e	data.s
+_glpOpConvertARGB8888ToRGBAFFFF	0x97c3a22c	__TEXT,__const	-	-		0x7c6030ce	data.s
+_glpOpArlAVRTC	0x97c3a258	__TEXT,__const	-	-		0x39e00200	data.s
+_glpOpLoadOneAndZeroAVRTC	0x97c3a274	__TEXT,__const	-	-		0x1061038c	data.s
+_glpOpBuildConditionCodeAVRTC	0x97c3a2a8	__TEXT,__const	-	-		0x1080038c	data.s
+_glpOpTruncateAVRTC	0x97c3a2dc	__TEXT,__const	-	-		0x1040024a	data.s
+_glpOpSetNotEqualToZeroAVRTC	0x97c3a2e4	__TEXT,__const	-	-		0x106048c6	data.s
+_glpOpTexSampleRTC	0x97c3a338	__TEXT,__const	-	-		0x7ef791d6	data.s
+_glpOpTexPrepareCoords4CCRTC	0x97c3a35c	__TEXT,__const	-	-		0xc2030080	data.s
+_glpOpTexPrepareCoords2CCRTC	0x97c3a394	__TEXT,__const	-	-		0xc2030084	data.s
+_glpOpTexPrepareCoords2CRRTC	0x97c3a3d8	__TEXT,__const	-	-		0xc2030084	data.s
+_glpOpTexPrepareCoords2RCRTC	0x97c3a414	__TEXT,__const	-	-		0xc2030084	data.s
+_glpOpTexPrepareCoords2RRRTC	0x97c3a450	__TEXT,__const	-	-		0xc2030084	data.s
+_glpOpTexCalculateLambda1DAVRTC	0x97c3a484	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpTexCalculateLambda2DAVRTC	0x97c3a50c	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpTexCalculateLambda3DAVRTC	0x97c3a5ac	__TEXT,__const	-	-		0x1060084a	data.s
+_glpOpTexProjectCoordinatesAVRTC	0x97c3a654	__TEXT,__const	-	-		0x1063028c	data.s
+_glpOpTexFloatToIntNormalisedAVRTC	0x97c3a664	__TEXT,__const	-	-		0x10003bee	data.s
+_glpOpTexFloatToIntDenormalisedAVRTC	0x97c3a670	__TEXT,__const	-	-		0x100003ca	data.s
+_glpOpTexFloatToIntNormalisedWithLERPValuesAVRTC	0x97c3a678	__TEXT,__const	-	-		0x10605bee	data.s
+_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC	0x97c3a690	__TEXT,__const	-	-		0x1060580a	data.s
+_glpOpTexWrapCoordsCCCAVRTC	0x97c3a6a8	__TEXT,__const	-	-		0x10008382	data.s
+_glpOpTexWrapCoordsCRCAVRTC	0x97c3a6b4	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsRCCAVRTC	0x97c3a6cc	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsRRCAVRTC	0x97c3a6e4	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsCCRAVRTC	0x97c3a6f8	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsCRRAVRTC	0x97c3a70c	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsRCRAVRTC	0x97c3a724	__TEXT,__const	-	-		0x10208c04	data.s
+_glpOpTexWrapCoordsRRRAVRTC	0x97c3a73c	__TEXT,__const	-	-		0x10008c04	data.s
+_glpOpTexSample1DAVRTC	0x97c3a744	__TEXT,__const	-	-		0x39e00200	data.s
+_glpOpTexSample2DAVRTC	0x97c3a75c	__TEXT,__const	-	-		0x39e00200	data.s
+_glpOpTexSample3DAVRTC	0x97c3a780	__TEXT,__const	-	-		0x39e00200	data.s
+_glpOpFirstStageAVRTC	0x97c3a7b4	__TEXT,__const	-	-		0x39e00020	data.s
+_glpOpSecondStage1DAVRTC	0x97c3a7f4	__TEXT,__const	-	-		0x83630210	data.s
+_glpOpSecondStage2DAVRTC	0x97c3a858	__TEXT,__const	-	-		0x83630210	data.s
+_glpOpSecondStage3DAVRTC	0x97c3a8fc	__TEXT,__const	-	-		0x83630210	data.s
+DAT_97c3aa2c	0x97c3aa2c	__TEXT,__const	undefined8	8	extern unsigned long long DAT_97c3aa2c asm("DAT_97c3aa2c");	0x00000000	data.s
+DAT_97c3aa34	0x97c3aa34	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa34 asm("DAT_97c3aa34");	0x00000001	data.s
+DAT_97c3aa38	0x97c3aa38	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa38 asm("DAT_97c3aa38");	0x00000000	data.s
+DAT_97c3aa3c	0x97c3aa3c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa3c asm("DAT_97c3aa3c");	0x00000000	data.s
+DAT_97c3aa40	0x97c3aa40	__TEXT,__const	-	-	extern unsigned char DAT_97c3aa40 asm("DAT_97c3aa40");	0x0000006c	data.s
+DAT_97c3aa64	0x97c3aa64	__TEXT,__const	-	-	extern unsigned char DAT_97c3aa64 asm("DAT_97c3aa64");	0x00000001	data.s
+DAT_97c3aa88	0x97c3aa88	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa88 asm("DAT_97c3aa88");	0x00000034	data.s
+DAT_97c3aa8c	0x97c3aa8c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa8c asm("DAT_97c3aa8c");	0x00000055	data.s
+DAT_97c3aa90	0x97c3aa90	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa90 asm("DAT_97c3aa90");	0x00000054	data.s
+DAT_97c3aa94	0x97c3aa94	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa94 asm("DAT_97c3aa94");	0x00000059	data.s
+DAT_97c3aa98	0x97c3aa98	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa98 asm("DAT_97c3aa98");	0x00000020	data.s
+DAT_97c3aa9c	0x97c3aa9c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aa9c asm("DAT_97c3aa9c");	0x00000002	data.s
+DAT_97c3aaa0	0x97c3aaa0	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aaa0 asm("DAT_97c3aaa0");	0x00000001	data.s
+DAT_97c3aaa4	0x97c3aaa4	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aaa4 asm("DAT_97c3aaa4");	0x00000000	data.s
+DAT_97c3aaa8	0x97c3aaa8	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aaa8 asm("DAT_97c3aaa8");	0x00000000	data.s
+DAT_97c3aaac	0x97c3aaac	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3aaac asm("DAT_97c3aaac");	0x00000002	data.s
+_up_0	0x97c3aab0	__TEXT,__const	-	-		0x40240000	data.s
+_down_1	0x97c3abb0	__TEXT,__const	-	-		0x3fb99999	data.s
+_Rep___S_terminal	0x97c3acb0	__TEXT,__const	undefined1	1		0x00000000	data.s
+FLOAT_97c3acb4	0x97c3acb4	__TEXT,__literal4	float	4	extern float FLOAT_97c3acb4 asm("FLOAT_97c3acb4");	0x7f7fffff	data.s
+TAllocation__guardBlockSize	0x97c3acb8	__TEXT,__literal4	float	4		0x00000000	data.s
+guardBlockSize	0x97c3acb8	__TEXT,__literal4	float	4		0x00000000	data.s
+FLOAT_97c3acbc	0x97c3acbc	__TEXT,__literal4	float	4	extern float FLOAT_97c3acbc asm("FLOAT_97c3acbc");	0x437f0000	data.s
+FLOAT_97c3acc0	0x97c3acc0	__TEXT,__literal4	float	4	extern float FLOAT_97c3acc0 asm("FLOAT_97c3acc0");	0x3f000000	data.s
+FLOAT_97c3acc4	0x97c3acc4	__TEXT,__literal4	float	4	extern float FLOAT_97c3acc4 asm("FLOAT_97c3acc4");	0x41f80000	data.s
+FLOAT_97c3acc8	0x97c3acc8	__TEXT,__literal4	float	4	extern float FLOAT_97c3acc8 asm("FLOAT_97c3acc8");	0x3b808081	data.s
+FLOAT_97c3accc	0x97c3accc	__TEXT,__literal4	float	4	extern float FLOAT_97c3accc asm("FLOAT_97c3accc");	0x3d042108	data.s
+FLOAT_97c3acd0	0x97c3acd0	__TEXT,__literal4	float	4	extern float FLOAT_97c3acd0 asm("FLOAT_97c3acd0");	0x3c8efa35	data.s
+FLOAT_97c3acd4	0x97c3acd4	__TEXT,__literal4	float	4	extern float FLOAT_97c3acd4 asm("FLOAT_97c3acd4");	0x42652ee1	data.s
+FLOAT_97c3acd8	0x97c3acd8	__TEXT,__literal4	float	4	extern float FLOAT_97c3acd8 asm("FLOAT_97c3acd8");	0x3f800000	data.s
+FLOAT_97c3acdc	0x97c3acdc	__TEXT,__literal4	float	4	extern float FLOAT_97c3acdc asm("FLOAT_97c3acdc");	0x5f800000	data.s
+FLOAT_97c3ace0	0x97c3ace0	__TEXT,__literal4	float	4	extern float FLOAT_97c3ace0 asm("FLOAT_97c3ace0");	0x1f800000	data.s
+FLOAT_97c3ace4	0x97c3ace4	__TEXT,__literal4	float	4	extern float FLOAT_97c3ace4 asm("FLOAT_97c3ace4");	0x9f800000	data.s
+FLOAT_97c3ace8	0x97c3ace8	__TEXT,__literal4	float	4	extern float FLOAT_97c3ace8 asm("FLOAT_97c3ace8");	0xdf800000	data.s
+FLOAT_97c3acec	0x97c3acec	__TEXT,__literal4	float	4	extern float FLOAT_97c3acec asm("FLOAT_97c3acec");	0xbf800000	data.s
+FLOAT_97c3acf0	0x97c3acf0	__TEXT,__literal4	float	4	extern float FLOAT_97c3acf0 asm("FLOAT_97c3acf0");	0x36a7c5ac	data.s
+FLOAT_97c3acf4	0x97c3acf4	__TEXT,__literal4	float	4	extern float FLOAT_97c3acf4 asm("FLOAT_97c3acf4");	0xb6a7c5ac	data.s
+FLOAT_97c3acf8	0x97c3acf8	__TEXT,__literal4	float	4	extern float FLOAT_97c3acf8 asm("FLOAT_97c3acf8");	0x48435000	data.s
+FLOAT_97c3acfc	0x97c3acfc	__TEXT,__literal4	float	4	extern float FLOAT_97c3acfc asm("FLOAT_97c3acfc");	0xc8435000	data.s
+FLOAT_97c3ad00	0x97c3ad00	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad00 asm("FLOAT_97c3ad00");	0x3eaaaaab	data.s
+FLOAT_97c3ad04	0x97c3ad04	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad04 asm("FLOAT_97c3ad04");	0x3e2aaaab	data.s
+FLOAT_97c3ad08	0x97c3ad08	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad08 asm("FLOAT_97c3ad08");	0x3d2aaaab	data.s
+FLOAT_97c3ad0c	0x97c3ad0c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad0c asm("FLOAT_97c3ad0c");	0x3c010204	data.s
+FLOAT_97c3ad10	0x97c3ad10	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad10 asm("FLOAT_97c3ad10");	0x38000100	data.s
+FLOAT_97c3ad14	0x97c3ad14	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad14 asm("FLOAT_97c3ad14");	0x37800080	data.s
+FLOAT_97c3ad18	0x97c3ad18	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad18 asm("FLOAT_97c3ad18");	0x3fb8aa3b	data.s
+FLOAT_97c3ad1c	0x97c3ad1c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad1c asm("FLOAT_97c3ad1c");	0xbfb8aa3b	data.s
+FLOAT_97c3ad20	0x97c3ad20	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad20 asm("FLOAT_97c3ad20");	0x3f317218	data.s
+FLOAT_97c3ad24	0x97c3ad24	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad24 asm("FLOAT_97c3ad24");	0x437ffefa	data.s
+FLOAT_97c3ad28	0x97c3ad28	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad28 asm("FLOAT_97c3ad28");	0x477fffff	data.s
+FLOAT_97c3ad2c	0x97c3ad2c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad2c asm("FLOAT_97c3ad2c");	0x38d1b717	data.s
+FLOAT_97c3ad30	0x97c3ad30	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad30 asm("FLOAT_97c3ad30");	0x3c1d8c54	data.s
+FLOAT_97c3ad34	0x97c3ad34	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad34 asm("FLOAT_97c3ad34");	0xbaae1854	data.s
+FLOAT_97c3ad38	0x97c3ad38	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad38 asm("FLOAT_97c3ad38");	0x391aa7d7	data.s
+FLOAT_97c3ad3c	0x97c3ad3c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad3c asm("FLOAT_97c3ad3c");	0xb7364261	data.s
+FLOAT_97c3ad40	0x97c3ad40	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad40 asm("FLOAT_97c3ad40");	0xbf317218	data.s
+FLOAT_97c3ad44	0x97c3ad44	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad44 asm("FLOAT_97c3ad44");	0x3e75fded	data.s
+FLOAT_97c3ad48	0x97c3ad48	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad48 asm("FLOAT_97c3ad48");	0xbd6357ca	data.s
+FLOAT_97c3ad4c	0x97c3ad4c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad4c asm("FLOAT_97c3ad4c");	0x3e77adbd	data.s
+FLOAT_97c3ad50	0x97c3ad50	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad50 asm("FLOAT_97c3ad50");	0xbe0cd4fb	data.s
+FLOAT_97c3ad54	0x97c3ad54	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad54 asm("FLOAT_97c3ad54");	0x3d5541c6	data.s
+FLOAT_97c3ad58	0x97c3ad58	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad58 asm("FLOAT_97c3ad58");	0xbc188b0b	data.s
+FLOAT_97c3ad5c	0x97c3ad5c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad5c asm("FLOAT_97c3ad5c");	0x3fb8aa0e	data.s
+FLOAT_97c3ad60	0x97c3ad60	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad60 asm("FLOAT_97c3ad60");	0xbf389e52	data.s
+FLOAT_97c3ad64	0x97c3ad64	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad64 asm("FLOAT_97c3ad64");	0x3ef5162d	data.s
+FLOAT_97c3ad68	0x97c3ad68	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad68 asm("FLOAT_97c3ad68");	0xbeb1d204	data.s
+FLOAT_97c3ad6c	0x97c3ad6c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad6c asm("FLOAT_97c3ad6c");	0xbe2aaaab	data.s
+FLOAT_97c3ad70	0x97c3ad70	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad70 asm("FLOAT_97c3ad70");	0x3c088889	data.s
+FLOAT_97c3ad74	0x97c3ad74	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad74 asm("FLOAT_97c3ad74");	0xb9500d01	data.s
+FLOAT_97c3ad78	0x97c3ad78	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad78 asm("FLOAT_97c3ad78");	0x3638ef1d	data.s
+FLOAT_97c3ad7c	0x97c3ad7c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad7c asm("FLOAT_97c3ad7c");	0xb2d7322b	data.s
+FLOAT_97c3ad80	0x97c3ad80	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad80 asm("FLOAT_97c3ad80");	0x2f309231	data.s
+FLOAT_97c3ad84	0x97c3ad84	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad84 asm("FLOAT_97c3ad84");	0xab573f9f	data.s
+FLOAT_97c3ad88	0x97c3ad88	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad88 asm("FLOAT_97c3ad88");	0x274a963b	data.s
+FLOAT_97c3ad8c	0x97c3ad8c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad8c asm("FLOAT_97c3ad8c");	0xbab60b61	data.s
+FLOAT_97c3ad90	0x97c3ad90	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad90 asm("FLOAT_97c3ad90");	0x37d00d01	data.s
+FLOAT_97c3ad94	0x97c3ad94	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad94 asm("FLOAT_97c3ad94");	0xb493f27e	data.s
+FLOAT_97c3ad98	0x97c3ad98	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad98 asm("FLOAT_97c3ad98");	0x310f76c8	data.s
+FLOAT_97c3ad9c	0x97c3ad9c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad9c asm("FLOAT_97c3ad9c");	0xad49cba5	data.s
+FLOAT_97c3ada0	0x97c3ada0	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada0 asm("FLOAT_97c3ada0");	0x29573f9f	data.s
+FLOAT_97c3ada4	0x97c3ada4	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada4 asm("FLOAT_97c3ada4");	0x40c90fdb	data.s
+DAT_a7b7b008	0xa7b7b008	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b008 asm("DAT_a7b7b008");	pointer -> _macro_scan	data.s
+DAT_a7b7b00c	0xa7b7b00c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b00c asm("DAT_a7b7b00c");	0x97b87cdc	data.s
+DAT_a7b7b010	0xa7b7b010	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b010 asm("DAT_a7b7b010");	pointer -> _eof_scan	data.s
+_cpp	0xa7b7b014	__DATA,__data	undefined4	4		0x00000000	data.s
+_eof_inputsrc	0xa7b7b018	__DATA,__data	-	-		0x00000000	data.s
+DAT_a7b7b030	0xa7b7b030	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b030 asm("DAT_a7b7b030");	0x97b88a8c	data.s
+DAT_a7b7b034	0xa7b7b034	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b034 asm("DAT_a7b7b034");	pointer -> _str_getch	data.s
+DAT_a7b7b038	0xa7b7b038	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b038 asm("DAT_a7b7b038");	pointer -> _byte_scan	data.s
+_ScopeList	0xa7b7b03c	__DATA,__data	undefined4	4		0x00000000	data.s
+_CurrentScope	0xa7b7b040	__DATA,__data	undefined4	4		0x00000000	data.s
+_GlobalScope	0xa7b7b044	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7b048	0xa7b7b048	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b048 asm("DAT_a7b7b048");	0x97b89f00	data.s
+DAT_a7b7b04c	0xa7b7b04c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b04c asm("DAT_a7b7b04c");	0x97b8acb0	data.s
+DAT_a7b7b050	0xa7b7b050	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b050 asm("DAT_a7b7b050");	pointer -> _scan_token	data.s
+_strBuiltInFunctions	0xa7b7b054	__DATA,__data	-	-		pointer -> LD_97c2451c	data.s
+_strBuiltInFunctionsVertex	0xa7b7b4a8	__DATA,__data	-	-		pointer -> LD_97c26c3c	data.s
+_strBuiltInFunctionsFragment	0xa7b7b4b0	__DATA,__data	-	-		pointer -> LD_97c26c50	data.s
+_strStandardVertexVaryings	0xa7b7b4e4	__DATA,__data	-	-		pointer -> LD_97c26d70	data.s
+_strStandardFragmentVaryings	0xa7b7b500	__DATA,__data	-	-		pointer -> LD_97c26e3c	data.s
+_strStandardVertexAttributes	0xa7b7b514	__DATA,__data	-	-		pointer -> LD_97c26e78	data.s
+_strStandardUniformConstants	0xa7b7b54c	__DATA,__data	-	-		pointer -> LD_97c27030	data.s
+_strStandardUniforms	0xa7b7b580	__DATA,__data	-	-		pointer -> LD_97c27224	data.s
+_strSpecialBuiltIn	0xa7b7b6f4	__DATA,__data	undefined4	4		pointer -> LD_97c27db4	data.s
+DAT_a7b7b6f8	0xa7b7b6f8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b6f8 asm("DAT_a7b7b6f8");	pointer -> LD_97c27dc4	data.s
+DAT_a7b7b6fc	0xa7b7b6fc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b6fc asm("DAT_a7b7b6fc");	pointer -> LD_97c27dd4	data.s
+DAT_a7b7b700	0xa7b7b700	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b700 asm("DAT_a7b7b700");	pointer -> LD_97c27de4	data.s
+DAT_a7b7b704	0xa7b7b704	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b704 asm("DAT_a7b7b704");	pointer -> LD_97c27df4	data.s
+DAT_a7b7b708	0xa7b7b708	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b708 asm("DAT_a7b7b708");	pointer -> LD_97c27e00	data.s
+DAT_a7b7b70c	0xa7b7b70c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b70c asm("DAT_a7b7b70c");	pointer -> LD_97c27e0c	data.s
+DAT_a7b7b710	0xa7b7b710	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b710 asm("DAT_a7b7b710");	pointer -> LD_97c27e1c	data.s
+GetPreprocessorBuiltinString__PreprocessorBuiltinString	0xa7b7b714	__DATA,__data	undefined4	4		pointer -> LD_97c27e2c	data.s
+DAT_a7b7b718	0xa7b7b718	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b718 asm("DAT_a7b7b718");	pointer -> LD_a7b7e00c	data.s
+SYM_a7b7b71c	0xa7b7b71c	__DATA,__data	-	-		pointer -> LD_a7b7e010	data.s
+DAT_a7b7b720	0xa7b7b720	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b720 asm("DAT_a7b7b720");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7b9b8	0xa7b7b9b8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9b8 asm("DAT_a7b7b9b8");	pointer -> LD_a7b7e010	data.s
+DAT_a7b7b9c0	0xa7b7b9c0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9c0 asm("DAT_a7b7b9c0");	pointer -> __Z12OutputBranchbP13TIntermBranchP16TIntermTraverser	data.s
+DAT_a7b7b9c4	0xa7b7b9c4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9c4 asm("DAT_a7b7b9c4");	pointer -> __Z10OutputLoopbP11TIntermLoopP16TIntermTraverser	data.s
+DAT_a7b7b9c8	0xa7b7b9c8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9c8 asm("DAT_a7b7b9c8");	pointer -> __Z11OutputUnarybP12TIntermUnaryP16TIntermTraverser	data.s
+DAT_a7b7b9cc	0xa7b7b9cc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9cc asm("DAT_a7b7b9cc");	pointer -> __Z12OutputSymbolP13TIntermSymbolP16TIntermTraverser	data.s
+DAT_a7b7b9d0	0xa7b7b9d0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9d0 asm("DAT_a7b7b9d0");	pointer -> __Z15OutputSelectionbP16TIntermSelectionP16TIntermTraverser	data.s
+DAT_a7b7b9d4	0xa7b7b9d4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9d4 asm("DAT_a7b7b9d4");	pointer -> __Z19OutputConstantUnionP20TIntermConstantUnionP16TIntermTraverser	data.s
+DAT_a7b7b9d8	0xa7b7b9d8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9d8 asm("DAT_a7b7b9d8");	pointer -> __Z12OutputBinarybP13TIntermBinaryP16TIntermTraverser	data.s
+DAT_a7b7b9dc	0xa7b7b9dc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9dc asm("DAT_a7b7b9dc");	pointer -> __Z15OutputAggregatebP16TIntermAggregateP16TIntermTraverser	data.s
+DAT_a7b7b9e0	0xa7b7b9e0	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7b9e0 asm("DAT_a7b7b9e0");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7b9f0	0xa7b7b9f0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f0 asm("DAT_a7b7b9f0");	pointer -> __Z11ParseBranchbP13TIntermBranchP16TIntermTraverser	data.s
+DAT_a7b7b9f4	0xa7b7b9f4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f4 asm("DAT_a7b7b9f4");	pointer -> __Z9ParseLoopbP11TIntermLoopP16TIntermTraverser	data.s
+DAT_a7b7b9f8	0xa7b7b9f8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9f8 asm("DAT_a7b7b9f8");	pointer -> __Z10ParseUnarybP12TIntermUnaryP16TIntermTraverser	data.s
+DAT_a7b7b9fc	0xa7b7b9fc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b9fc asm("DAT_a7b7b9fc");	pointer -> __Z11ParseSymbolP13TIntermSymbolP16TIntermTraverser	data.s
+DAT_a7b7ba00	0xa7b7ba00	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba00 asm("DAT_a7b7ba00");	pointer -> __Z14ParseSelectionbP16TIntermSelectionP16TIntermTraverser	data.s
+DAT_a7b7ba04	0xa7b7ba04	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba04 asm("DAT_a7b7ba04");	pointer -> __Z18ParseConstantUnionP20TIntermConstantUnionP16TIntermTraverser	data.s
+DAT_a7b7ba08	0xa7b7ba08	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba08 asm("DAT_a7b7ba08");	pointer -> __Z11ParseBinarybP13TIntermBinaryP16TIntermTraverser	data.s
+DAT_a7b7ba0c	0xa7b7ba0c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba0c asm("DAT_a7b7ba0c");	pointer -> __Z14ParseAggregatebP16TIntermAggregateP16TIntermTraverser	data.s
+DAT_a7b7ba10	0xa7b7ba10	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba10 asm("DAT_a7b7ba10");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7ba14	0xa7b7ba14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba14 asm("DAT_a7b7ba14");	pointer -> LD_a7b7e010	data.s
+DAT_a7b7ba18	0xa7b7ba18	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba18 asm("DAT_a7b7ba18");	pointer -> LD_a7b7e00c	data.s
+_gPollAllocThreadData	0xa7b7ba1c	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7ba20	0xa7b7ba20	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba20 asm("DAT_a7b7ba20");	pointer -> __Z14AliveSelectionbP16TIntermSelectionP16TIntermTraverser	data.s
+DAT_a7b7ba24	0xa7b7ba24	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba24 asm("DAT_a7b7ba24");	pointer -> __Z11AliveSymbolP13TIntermSymbolP16TIntermTraverser	data.s
+DAT_a7b7ba28	0xa7b7ba28	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba28 asm("DAT_a7b7ba28");	pointer -> __Z11RemoveUnarybP12TIntermUnaryP16TIntermTraverser	data.s
+DAT_a7b7ba2c	0xa7b7ba2c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba2c asm("DAT_a7b7ba2c");	pointer -> __Z12RemoveSymbolP13TIntermSymbolP16TIntermTraverser	data.s
+DAT_a7b7ba30	0xa7b7ba30	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba30 asm("DAT_a7b7ba30");	pointer -> __Z15RemoveSelectionbP16TIntermSelectionP16TIntermTraverser	data.s
+DAT_a7b7ba34	0xa7b7ba34	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba34 asm("DAT_a7b7ba34");	pointer -> __Z19RemoveConstantUnionP20TIntermConstantUnionP16TIntermTraverser	data.s
+DAT_a7b7ba38	0xa7b7ba38	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba38 asm("DAT_a7b7ba38");	pointer -> __Z12RemoveBinarybP13TIntermBinaryP16TIntermTraverser	data.s
+DAT_a7b7ba3c	0xa7b7ba3c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba3c asm("DAT_a7b7ba3c");	pointer -> __Z15RemoveAggregatebP16TIntermAggregateP16TIntermTraverser	data.s
+_glsl_allocator_lock	0xa7b7ba40	__DATA,__data	-	-		0x32aaaba7	data.s
+_PerProcessGPA	0xa7b7ba6c	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7ba70	0xa7b7ba70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba70 asm("DAT_a7b7ba70");	pointer -> LD_a7b7e010	data.s
+DAT_a7b7ba74	0xa7b7ba74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba74 asm("DAT_a7b7ba74");	pointer -> LD_a7b7e010	data.s
+DAT_a7b7ba78	0xa7b7ba78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba78 asm("DAT_a7b7ba78");	pointer -> LD_a7b7d538	data.s
+DAT_a7b7ba7c	0xa7b7ba7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba7c asm("DAT_a7b7ba7c");	pointer -> LD_a7b7d510	data.s
+DAT_a7b7ba80	0xa7b7ba80	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba80 asm("DAT_a7b7ba80");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7ba84	0xa7b7ba84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7ba84 asm("DAT_a7b7ba84");	pointer -> LD_a7b7e010	data.s
+DAT_a7b7ba88	0xa7b7ba88	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7ba88 asm("DAT_a7b7ba88");	pointer -> LD_a7b7e00c	data.s
+_yyleng	0xa7b7ba8c	__DATA,__data	undefined4	4		0x00000000	data.s
+_yy_init	0xa7b7ba90	__DATA,__data	undefined4	4		0x00000001	data.s
+_yyin	0xa7b7ba94	__DATA,__data	undefined4	4		0x00000000	data.s
+_yyout	0xa7b7ba98	__DATA,__data	undefined4	4		0x00000000	data.s
+_yytext	0xa7b7ba9c	__DATA,__data	undefined4	4		0x00000000	data.s
+_yylineno	0xa7b7baa0	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7baa4	0xa7b7baa4	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7baa4 asm("DAT_a7b7baa4");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7baa8	0xa7b7baa8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baa8 asm("DAT_a7b7baa8");	pointer -> LD_a7b7e010	data.s
+_shaderString	0xa7b7baac	__DATA,__data	undefined4	4		pointer -> LD_97c2b564	data.s
+_linkErrorString	0xa7b7bab4	__DATA,__data	undefined4	4		pointer -> LD_97c2b578	data.s
+DAT_a7b7bab8	0xa7b7bab8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bab8 asm("DAT_a7b7bab8");	pointer -> LD_97c2b608	data.s
+DAT_a7b7babc	0xa7b7babc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7babc asm("DAT_a7b7babc");	pointer -> LD_97c2b63c	data.s
+DAT_a7b7bac4	0xa7b7bac4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bac4 asm("DAT_a7b7bac4");	pointer -> LD_97c2b6b0	data.s
+DAT_a7b7bac8	0xa7b7bac8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bac8 asm("DAT_a7b7bac8");	pointer -> LD_97c2b704	data.s
+DAT_a7b7bad0	0xa7b7bad0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad0 asm("DAT_a7b7bad0");	pointer -> LD_97c2b794	data.s
+DAT_a7b7bad4	0xa7b7bad4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad4 asm("DAT_a7b7bad4");	pointer -> LD_97c2b818	data.s
+DAT_a7b7bad8	0xa7b7bad8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bad8 asm("DAT_a7b7bad8");	pointer -> LD_97c2b864	data.s
+DAT_a7b7badc	0xa7b7badc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7badc asm("DAT_a7b7badc");	pointer -> LD_97c2b8ac	data.s
+DAT_a7b7bae0	0xa7b7bae0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae0 asm("DAT_a7b7bae0");	pointer -> LD_97c2b908	data.s
+DAT_a7b7bae4	0xa7b7bae4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae4 asm("DAT_a7b7bae4");	pointer -> LD_97c2b960	data.s
+DAT_a7b7bae8	0xa7b7bae8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bae8 asm("DAT_a7b7bae8");	pointer -> LD_97c2b9e4	data.s
+DAT_a7b7baec	0xa7b7baec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baec asm("DAT_a7b7baec");	pointer -> LD_97c2ba8c	data.s
+DAT_a7b7baf0	0xa7b7baf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf0 asm("DAT_a7b7baf0");	pointer -> LD_97c2bb44	data.s
+DAT_a7b7baf4	0xa7b7baf4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf4 asm("DAT_a7b7baf4");	pointer -> LD_97c2bbfc	data.s
+DAT_a7b7baf8	0xa7b7baf8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7baf8 asm("DAT_a7b7baf8");	pointer -> LD_97c2bc90	data.s
+DAT_a7b7bafc	0xa7b7bafc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bafc asm("DAT_a7b7bafc");	pointer -> LD_97c2bd28	data.s
+DAT_a7b7bb00	0xa7b7bb00	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb00 asm("DAT_a7b7bb00");	pointer -> LD_97c2bdac	data.s
+DAT_a7b7bb14	0xa7b7bb14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb14 asm("DAT_a7b7bb14");	pointer -> LD_97c2bf10	data.s
+DAT_a7b7bb18	0xa7b7bb18	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb18 asm("DAT_a7b7bb18");	pointer -> LD_97c2bf54	data.s
+DAT_a7b7bb1c	0xa7b7bb1c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb1c asm("DAT_a7b7bb1c");	pointer -> LD_97c2bf98	data.s
+DAT_a7b7bb20	0xa7b7bb20	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb20 asm("DAT_a7b7bb20");	pointer -> LD_97c2bfdc	data.s
+DAT_a7b7bb24	0xa7b7bb24	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb24 asm("DAT_a7b7bb24");	pointer -> LD_97c2c020	data.s
+_linkUtilString	0xa7b7bb28	__DATA,__data	undefined4	4		pointer -> LD_97c2c058	data.s
+DAT_a7b7bb34	0xa7b7bb34	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb34 asm("DAT_a7b7bb34");	pointer -> LD_97c2c150	data.s
+DAT_a7b7bb38	0xa7b7bb38	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb38 asm("DAT_a7b7bb38");	pointer -> LD_97c2c18c	data.s
+DAT_a7b7bb40	0xa7b7bb40	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb40 asm("DAT_a7b7bb40");	pointer -> LD_97c2c210	data.s
+DAT_a7b7bb44	0xa7b7bb44	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb44 asm("DAT_a7b7bb44");	pointer -> LD_97c2c2cc	data.s
+DAT_a7b7bb48	0xa7b7bb48	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb48 asm("DAT_a7b7bb48");	pointer -> LD_97c2c378	data.s
+DAT_a7b7bb4c	0xa7b7bb4c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb4c asm("DAT_a7b7bb4c");	pointer -> LD_97c2c398	data.s
+DAT_a7b7bb50	0xa7b7bb50	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb50 asm("DAT_a7b7bb50");	pointer -> LD_97c2c3b4	data.s
+DAT_a7b7bb54	0xa7b7bb54	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb54 asm("DAT_a7b7bb54");	pointer -> LD_97c2c3d4	data.s
+DAT_a7b7bb58	0xa7b7bb58	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb58 asm("DAT_a7b7bb58");	pointer -> LD_97c2c3f4	data.s
+DAT_a7b7bb5c	0xa7b7bb5c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb5c asm("DAT_a7b7bb5c");	pointer -> LD_97c2c40c	data.s
+DAT_a7b7bb68	0xa7b7bb68	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb68 asm("DAT_a7b7bb68");	pointer -> LD_97c2c478	data.s
+DAT_a7b7bb6c	0xa7b7bb6c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb6c asm("DAT_a7b7bb6c");	pointer -> LD_97c2c4b0	data.s
+DAT_a7b7bb70	0xa7b7bb70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb70 asm("DAT_a7b7bb70");	pointer -> LD_97c2c4f4	data.s
+DAT_a7b7bb74	0xa7b7bb74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb74 asm("DAT_a7b7bb74");	pointer -> LD_97c2c53c	data.s
+DAT_a7b7bb7c	0xa7b7bb7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb7c asm("DAT_a7b7bb7c");	pointer -> LD_97c2c5d8	data.s
+DAT_a7b7bb90	0xa7b7bb90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bb90 asm("DAT_a7b7bb90");	pointer -> LD_97c2c6d0	data.s
+DAT_a7b7bba0	0xa7b7bba0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bba0 asm("DAT_a7b7bba0");	pointer -> LD_a7b7d6e0	data.s
+_symbolUtilString	0xa7b7bba4	__DATA,__data	undefined4	4		pointer -> LD_97c2c8d8	data.s
+DAT_a7b7bba8	0xa7b7bba8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bba8 asm("DAT_a7b7bba8");	pointer -> LD_97c2c8e0	data.s
+DAT_a7b7bbac	0xa7b7bbac	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbac asm("DAT_a7b7bbac");	pointer -> LD_97c2c8e8	data.s
+DAT_a7b7bbb0	0xa7b7bbb0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbb0 asm("DAT_a7b7bbb0");	pointer -> LD_97c2c8f0	data.s
+DAT_a7b7bbb4	0xa7b7bbb4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbb4 asm("DAT_a7b7bbb4");	pointer -> LD_97c24290	data.s
+DAT_a7b7bbb8	0xa7b7bbb8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbb8 asm("DAT_a7b7bbb8");	pointer -> LD_97c2c8f8	data.s
+DAT_a7b7bbbc	0xa7b7bbbc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbbc asm("DAT_a7b7bbbc");	pointer -> LD_97c2c914	data.s
+DAT_a7b7bbc0	0xa7b7bbc0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbc0 asm("DAT_a7b7bbc0");	pointer -> LD_97c2c934	data.s
+DAT_a7b7bbc4	0xa7b7bbc4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbc4 asm("DAT_a7b7bbc4");	pointer -> LD_97c2b53c	data.s
+DAT_a7b7bbc8	0xa7b7bbc8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbc8 asm("DAT_a7b7bbc8");	pointer -> LD_97c2c950	data.s
+DAT_a7b7bbcc	0xa7b7bbcc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbcc asm("DAT_a7b7bbcc");	pointer -> LD_97c2c97c	data.s
+DAT_a7b7bbd0	0xa7b7bbd0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbd0 asm("DAT_a7b7bbd0");	pointer -> LD_97c2c980	data.s
+DAT_a7b7bbd4	0xa7b7bbd4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbd4 asm("DAT_a7b7bbd4");	pointer -> LD_97c2c98c	data.s
+DAT_a7b7bbd8	0xa7b7bbd8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbd8 asm("DAT_a7b7bbd8");	pointer -> LD_97c2c994	data.s
+DAT_a7b7bbdc	0xa7b7bbdc	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbdc asm("DAT_a7b7bbdc");	pointer -> LD_97c27e94	data.s
+DAT_a7b7bbe0	0xa7b7bbe0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbe0 asm("DAT_a7b7bbe0");	pointer -> LD_97c2c99c	data.s
+DAT_a7b7bbe8	0xa7b7bbe8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbe8 asm("DAT_a7b7bbe8");	pointer -> LD_97c2c9ac	data.s
+DAT_a7b7bbec	0xa7b7bbec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbec asm("DAT_a7b7bbec");	pointer -> LD_97c2c9b4	data.s
+DAT_a7b7bbf0	0xa7b7bbf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbf0 asm("DAT_a7b7bbf0");	pointer -> LD_97c2c9c8	data.s
+DAT_a7b7bbf4	0xa7b7bbf4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbf4 asm("DAT_a7b7bbf4");	pointer -> LD_97c2c9dc	data.s
+DAT_a7b7bbf8	0xa7b7bbf8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bbf8 asm("DAT_a7b7bbf8");	pointer -> LD_97c2b410	data.s
+DAT_a7b7bc08	0xa7b7bc08	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc08 asm("DAT_a7b7bc08");	pointer -> LD_97c2ca08	data.s
+DAT_a7b7bc0c	0xa7b7bc0c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc0c asm("DAT_a7b7bc0c");	pointer -> LD_97c26c38	data.s
+DAT_a7b7bc10	0xa7b7bc10	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc10 asm("DAT_a7b7bc10");	pointer -> LD_97c2ca1c	data.s
+DAT_a7b7bc14	0xa7b7bc14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc14 asm("DAT_a7b7bc14");	pointer -> LD_97c2ca28	data.s
+DAT_a7b7bc18	0xa7b7bc18	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc18 asm("DAT_a7b7bc18");	pointer -> LD_97c2ca34	data.s
+DAT_a7b7bc1c	0xa7b7bc1c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc1c asm("DAT_a7b7bc1c");	pointer -> LD_97c2ca40	data.s
+_glTypeNameStrings	0xa7b7bc24	__DATA,__data	undefined4	4		pointer -> LD_97c2ca9c	data.s
+DAT_a7b7bc28	0xa7b7bc28	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc28 asm("DAT_a7b7bc28");	pointer -> LD_97c2caa4	data.s
+DAT_a7b7bc80	0xa7b7bc80	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc80 asm("DAT_a7b7bc80");	pointer -> LD_97c2cc60	data.s
+DAT_a7b7bc84	0xa7b7bc84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc84 asm("DAT_a7b7bc84");	pointer -> LD_97c2cc78	data.s
+DAT_a7b7bc88	0xa7b7bc88	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc88 asm("DAT_a7b7bc88");	pointer -> LD_97c2cc8c	data.s
+_shaderTypeNameStrings	0xa7b7bc8c	__DATA,__data	undefined4	4		pointer -> LD_97c28eb4	data.s
+DAT_a7b7bc90	0xa7b7bc90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bc90 asm("DAT_a7b7bc90");	pointer -> LD_97c28eac	data.s
+DAT_a7b7bce8	0xa7b7bce8	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bce8 asm("DAT_a7b7bce8");	pointer -> LD_97c28f34	data.s
+DAT_a7b7bcec	0xa7b7bcec	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bcec asm("DAT_a7b7bcec");	pointer -> LD_97c2ccb4	data.s
+DAT_a7b7bcf0	0xa7b7bcf0	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bcf0 asm("DAT_a7b7bcf0");	pointer -> LD_97c2ccbc	data.s
+temporaryAllocator	0xa7b7bcf4	__DATA,__data	undefined4	4		0x00000000	data.s
+addressTempAllocator	0xa7b7bcf8	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7bcfc	0xa7b7bcfc	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bcfc asm("DAT_a7b7bcfc");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7bd04	0xa7b7bd04	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd04 asm("DAT_a7b7bd04");	pointer -> LD_a7b7e00c	data.s
+DAT_a7b7bd0c	0xa7b7bd0c	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd0c asm("DAT_a7b7bd0c");	pointer -> LD_a7b7e00c	data.s
+_compileErrorString	0xa7b7bd10	__DATA,__data	undefined4	4		pointer -> LD_97c2d098	data.s
+DAT_a7b7bd14	0xa7b7bd14	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd14 asm("DAT_a7b7bd14");	pointer -> LD_97c2d104	data.s
+DAT_a7b7bd18	0xa7b7bd18	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd18 asm("DAT_a7b7bd18");	pointer -> LD_97c2d170	data.s
+DAT_a7b7bd1c	0xa7b7bd1c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd1c asm("DAT_a7b7bd1c");	pointer -> LD_97c2d198	data.s
+DAT_a7b7bd20	0xa7b7bd20	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd20 asm("DAT_a7b7bd20");	pointer -> LD_97c2d1bc	data.s
+DAT_a7b7bd24	0xa7b7bd24	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd24 asm("DAT_a7b7bd24");	pointer -> LD_97c2d1d4	data.s
+DAT_a7b7bd2c	0xa7b7bd2c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd2c asm("DAT_a7b7bd2c");	pointer -> LD_97c2d1f0	data.s
+DAT_a7b7bd30	0xa7b7bd30	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd30 asm("DAT_a7b7bd30");	pointer -> LD_97c2d21c	data.s
+DAT_a7b7bd34	0xa7b7bd34	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd34 asm("DAT_a7b7bd34");	pointer -> LD_97c2d240	data.s
+DAT_a7b7bd38	0xa7b7bd38	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd38 asm("DAT_a7b7bd38");	pointer -> LD_97c2d25c	data.s
+DAT_a7b7bd3c	0xa7b7bd3c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd3c asm("DAT_a7b7bd3c");	pointer -> LD_97c2d270	data.s
+DAT_a7b7bd40	0xa7b7bd40	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd40 asm("DAT_a7b7bd40");	pointer -> LD_97c2d2c8	data.s
+DAT_a7b7bd50	0xa7b7bd50	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd50 asm("DAT_a7b7bd50");	pointer -> LD_97c2d35c	data.s
+DAT_a7b7bd54	0xa7b7bd54	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd54 asm("DAT_a7b7bd54");	pointer -> LD_97c2d374	data.s
+DAT_a7b7bd58	0xa7b7bd58	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd58 asm("DAT_a7b7bd58");	pointer -> LD_97c2c8a4	data.s
+DAT_a7b7bd5c	0xa7b7bd5c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd5c asm("DAT_a7b7bd5c");	pointer -> LD_97c2d390	data.s
+DAT_a7b7bd60	0xa7b7bd60	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd60 asm("DAT_a7b7bd60");	pointer -> LD_97c2d3a8	data.s
+DAT_a7b7bd64	0xa7b7bd64	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd64 asm("DAT_a7b7bd64");	pointer -> LD_97c2d3bc	data.s
+DAT_a7b7bd68	0xa7b7bd68	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd68 asm("DAT_a7b7bd68");	pointer -> LD_97c2d3d8	data.s
+DAT_a7b7bd84	0xa7b7bd84	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd84 asm("DAT_a7b7bd84");	pointer -> LD_97c2c40c	data.s
+DAT_a7b7bd88	0xa7b7bd88	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd88 asm("DAT_a7b7bd88");	pointer -> LD_97c2d4d8	data.s
+DAT_a7b7bd8c	0xa7b7bd8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd8c asm("DAT_a7b7bd8c");	pointer -> LD_97c2c9dc	data.s
+DAT_a7b7bd90	0xa7b7bd90	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd90 asm("DAT_a7b7bd90");	pointer -> LD_97c2b410	data.s
+DAT_a7b7bd98	0xa7b7bd98	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bd98 asm("DAT_a7b7bd98");	pointer -> LD_a7b7d7b8	data.s
+DAT_a7b7bd9c	0xa7b7bd9c	__DATA,__data	undefined4	4	extern unsigned char *DAT_a7b7bd9c asm("DAT_a7b7bd9c");	pointer -> LD_a7b7e00c	data.s
+_glpPushInstructions	0xa7b7bda0	__DATA,__data	undefined4	4		pointer -> LD_97c3a2f0	data.s
+DAT_a7b7bda4	0xa7b7bda4	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bda4 asm("DAT_a7b7bda4");	pointer -> _PPEmulatorBuild	data.s
+_ppstreamOpString	0xa7b7bda8	__DATA,__data	-	-		pointer -> LD_97c2d510	data.s
+DAT_a7b7bf6c	0xa7b7bf6c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf6c asm("DAT_a7b7bf6c");	pointer -> _defaultEqualsFunction	data.s
+DAT_a7b7bf70	0xa7b7bf70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf70 asm("DAT_a7b7bf70");	pointer -> _defaultHashFunction	data.s
+DAT_a7b7bf74	0xa7b7bf74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf74 asm("DAT_a7b7bf74");	pointer -> _instructionIndexEqualsFunction	data.s
+DAT_a7b7bf78	0xa7b7bf78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf78 asm("DAT_a7b7bf78");	pointer -> _instructionIndexHashFunction	data.s
+DAT_a7b7bf7c	0xa7b7bf7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf7c asm("DAT_a7b7bf7c");	pointer -> _regEqualsFunction	data.s
+DAT_a7b7bf80	0xa7b7bf80	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf80 asm("DAT_a7b7bf80");	0x97c0b4a4	data.s
+_S_empty_rep_storage	0xa7b7bf84	__DATA,__data	undefined1	1		0x00000000	data.s
+DAT_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf8c asm("DAT_a7b7bf8c");	0x00000000	data.s
+SYM_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7bf90	0xa7b7bf90	__DATA,__data	-	-	extern unsigned char DAT_a7b7bf90 asm("DAT_a7b7bf90");	0x00000000	data.s
+_S_start_free	0xa7b7bfd4	__DATA,__data	undefined4	4		0x00000000	data.s
+_S_end_free	0xa7b7bfd8	__DATA,__data	undefined4	4		0x00000000	data.s
+_S_heap_size	0xa7b7bfdc	__DATA,__data	undefined4	4		0x00000000	data.s
+_S_node_allocator_lock	0xa7b7bfe0	__DATA,__data	undefined1	1		0x32aaaba7	data.s
+SYM_a7b7c00c	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
+_S_force_new	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
+__default_alloc_template_true_0____S_force_new	0xa7b7c00c	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7c010	0xa7b7c010	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c010 asm("DAT_a7b7c010");	pointer -> LD_a7b7de10	data.s
+DAT_a7b7c014	0xa7b7c014	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c014 asm("DAT_a7b7c014");	pointer -> LD_a7b7de28	data.s
+DAT_a7b7c018	0xa7b7c018	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c018 asm("DAT_a7b7c018");	pointer -> LD_a7b7dee8	data.s
+DAT_a7b7c01c	0xa7b7c01c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c01c asm("DAT_a7b7c01c");	pointer -> LD_a7b7df18	data.s
+DAT_a7b7c020	0xa7b7c020	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c020 asm("DAT_a7b7c020");	pointer -> LD_a7b7df48	data.s
+DAT_a7b7c024	0xa7b7c024	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c024 asm("DAT_a7b7c024");	pointer -> LD_a7b7df78	data.s
+DAT_a7b7c028	0xa7b7c028	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c028 asm("DAT_a7b7c028");	pointer -> LD_a7b7df90	data.s
+DAT_a7b7c02c	0xa7b7c02c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c02c asm("DAT_a7b7c02c");	pointer -> LD_a7b7dfa8	data.s
+DAT_a7b7c030	0xa7b7c030	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c030 asm("DAT_a7b7c030");	pointer -> LD_a7b7dfc8	data.s
+DAT_a7b7c034	0xa7b7c034	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c034 asm("DAT_a7b7c034");	pointer -> LD_a7b7dfe0	data.s
+___new_handler	0xa7b7c038	__DATA,__data	undefined4	4		0x00000000	data.s
+DAT_a7b7c03c	0xa7b7c03c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c03c asm("DAT_a7b7c03c");	pointer -> LD_a7b7dff8	data.s
+_emergency_mutex	0xa7b7c040	__DATA,__data	-	-		0x32aaaba7	data.s
+DAT_a7b7c06c	0xa7b7c06c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c06c asm("DAT_a7b7c06c");	pointer -> __Z23__gxx_exception_cleanup19_Unwind_Reason_CodeP17_Unwind_Exception	data.s
+__cxxabiv1____terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort+2417153880	data.s
+__terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort+2417153880	data.s
+__cxxabiv1____unexpected_handler	0xa7b7c074	__DATA,__data	undefined4	4		pointer -> __ZSt9terminatev	data.s
+__unexpected_handler	0xa7b7c074	__DATA,__data	undefined4	4		pointer -> __ZSt9terminatev	data.s
+_use_thread_key	0xa7b7c078	__DATA,__data	undefined4	4		0xffffffff	data.s
+_once_regsizes_0	0xa7b7c07c	__DATA,__data	-	-		0x30b1bcba	data.s
+DAT_a7b7c084	0xa7b7c084	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c084 asm("DAT_a7b7c084");	pointer -> _init_dwarf_reg_size_table	data.s
+DAT_a7b7c088	0xa7b7c088	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c088 asm("DAT_a7b7c088");	pointer -> _live_image_destructor	data.s
+DAT_a7b7c08c	0xa7b7c08c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c08c asm("DAT_a7b7c08c");	pointer -> _fde_single_encoding_compare	data.s
+DAT_a7b7c090	0xa7b7c090	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c090 asm("DAT_a7b7c090");	pointer -> _fde_unencoded_compare	data.s
+DAT_a7b7c094	0xa7b7c094	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c094 asm("DAT_a7b7c094");	pointer -> _fde_mixed_encoding_compare	data.s
+dyld_lazy_symbol_binding_entry_point	0xa7b7c098	__DATA,__dyld	undefined4	4		0x8fe01000	toolchain (crt/dyld data)
+dyld_func_lookup_pointer	0xa7b7c09c	__DATA,__dyld	undefined4	4		0x8fe01008	toolchain (crt/dyld data)
+PTR___mh_dylib_header_a7b7c0a0	0xa7b7c0a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___mh_dylib_header_a7b7c0a0 asm("PTR___mh_dylib_header_a7b7c0a0");	pointer -> __mh_dylib_header	data.s
+PTR__cpp_a7b7c0a4	0xa7b7c0a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__cpp_a7b7c0a4 asm("PTR__cpp_a7b7c0a4");	pointer -> _cpp	data.s
+PTR_DAT_a7b7c0a8	0xa7b7c0a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c0a8 asm("PTR_DAT_a7b7c0a8");	pointer -> __DefaultRuneLocale	data.s
+PTR__atable_a7b7c0ac	0xa7b7c0ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__atable_a7b7c0ac asm("PTR__atable_a7b7c0ac");	pointer -> _atable	data.s
+PTR__operatorStrings_a7b7c0b0	0xa7b7c0b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__operatorStrings_a7b7c0b0 asm("PTR__operatorStrings_a7b7c0b0");	pointer -> _operatorStrings	data.s
+PTR_vtable_a7b7c0b4	0xa7b7c0b4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0b4 asm("PTR_vtable_a7b7c0b4");	pointer -> __ZTV9TVariable	data.s
+PTR__S_terminal_a7b7c0b8	0xa7b7c0b8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_terminal_a7b7c0b8 asm("PTR__S_terminal_a7b7c0b8");	pointer -> LD_97c3acb0	data.s
+PTR_DAT_a7b7c0bc	0xa7b7c0bc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c0bc asm("PTR_DAT_a7b7c0bc");	pointer -> ___sF	data.s
+PTR_vtable_a7b7c0c0	0xa7b7c0c0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c0 asm("PTR_vtable_a7b7c0c0");	pointer -> __ZTV13TIntermBranch	data.s
+PTR_vtable_a7b7c0c4	0xa7b7c0c4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c4 asm("PTR_vtable_a7b7c0c4");	pointer -> __ZTV11TIntermLoop	data.s
+PTR_vtable_a7b7c0c8	0xa7b7c0c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0c8 asm("PTR_vtable_a7b7c0c8");	pointer -> __ZTV20TIntermConstantUnion	data.s
+PTR_vtable_a7b7c0cc	0xa7b7c0cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0cc asm("PTR_vtable_a7b7c0cc");	pointer -> __ZTV16TIntermSelection	data.s
+PTR_vtable_a7b7c0d0	0xa7b7c0d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0d0 asm("PTR_vtable_a7b7c0d0");	pointer -> __ZTV16TIntermAggregate	data.s
+PTR_vtable_a7b7c0d4	0xa7b7c0d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0d4 asm("PTR_vtable_a7b7c0d4");	pointer -> __ZTV12TIntermUnary	data.s
+PTR_vtable_a7b7c0d8	0xa7b7c0d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0d8 asm("PTR_vtable_a7b7c0d8");	pointer -> __ZTV13TIntermBinary	data.s
+PTR_vtable_a7b7c0dc	0xa7b7c0dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0dc asm("PTR_vtable_a7b7c0dc");	pointer -> __ZTV13TIntermSymbol	data.s
+PTR__S_node_allocator_lock_a7b7c0e0	0xa7b7c0e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_node_allocator_lock_a7b7c0e0 asm("PTR__S_node_allocator_lock_a7b7c0e0");	pointer -> LD_a7b7bfe0	data.s
+PTR__S_free_list_a7b7c0e4	0xa7b7c0e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_free_list_a7b7c0e4 asm("PTR__S_free_list_a7b7c0e4");	pointer -> LD_a7b7bf94	data.s
+PTR__S_force_new_a7b7c0e8	0xa7b7c0e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_force_new_a7b7c0e8 asm("PTR__S_force_new_a7b7c0e8");	pointer -> LD_a7b7c00c	data.s
+PTR__S_empty_rep_storage_a7b7c0f0	0xa7b7c0f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__S_empty_rep_storage_a7b7c0f0 asm("PTR__S_empty_rep_storage_a7b7c0f0");	pointer -> LD_a7b7bf84	data.s
+PTR_vtable_a7b7c0f4	0xa7b7c0f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c0f4 asm("PTR_vtable_a7b7c0f4");	pointer -> __ZTV9TFunction	data.s
+PTR_addressTempAllocator_a7b7c0f8	0xa7b7c0f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_addressTempAllocator_a7b7c0f8 asm("PTR_addressTempAllocator_a7b7c0f8");	pointer -> __ZN12ParseOperand20addressTempAllocatorE	data.s
+PTR_temporaryAllocator_a7b7c0fc	0xa7b7c0fc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_temporaryAllocator_a7b7c0fc asm("PTR_temporaryAllocator_a7b7c0fc");	pointer -> __ZN12ParseOperand18temporaryAllocatorE	data.s
+PTR_DAT_a7b7c100	0xa7b7c100	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c100 asm("PTR_DAT_a7b7c100");	pointer -> __cpu_has_altivec	data.s
+PTR__InterpreterRun_a7b7c104	0xa7b7c104	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__InterpreterRun_a7b7c104 asm("PTR__InterpreterRun_a7b7c104");	pointer -> _InterpreterRun	data.s
+PTR__ppstreamOpString_a7b7c108	0xa7b7c108	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__ppstreamOpString_a7b7c108 asm("PTR__ppstreamOpString_a7b7c108");	pointer -> _ppstreamOpString	data.s
+PTR__underflow_error_a7b7c110	0xa7b7c110	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__underflow_error_a7b7c110 asm("PTR__underflow_error_a7b7c110");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR_typeinfo_a7b7c114	0xa7b7c114	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c114 asm("PTR_typeinfo_a7b7c114");	pointer -> LD_a7b7e098	data.s
+PTR__overflow_error_a7b7c118	0xa7b7c118	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__overflow_error_a7b7c118 asm("PTR__overflow_error_a7b7c118");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR_typeinfo_a7b7c11c	0xa7b7c11c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c11c asm("PTR_typeinfo_a7b7c11c");	pointer -> LD_a7b7e08c	data.s
+PTR__range_error_a7b7c120	0xa7b7c120	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__range_error_a7b7c120 asm("PTR__range_error_a7b7c120");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR_typeinfo_a7b7c124	0xa7b7c124	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c124 asm("PTR_typeinfo_a7b7c124");	pointer -> LD_a7b7e080	data.s
+PTR__runtime_error_a7b7c128	0xa7b7c128	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__runtime_error_a7b7c128 asm("PTR__runtime_error_a7b7c128");	pointer -> __ZNSt13runtime_errorD1Ev	data.s
+PTR_typeinfo_a7b7c12c	0xa7b7c12c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c12c asm("PTR_typeinfo_a7b7c12c");	pointer -> LD_a7b7e074	data.s
+PTR__out_of_range_a7b7c130	0xa7b7c130	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__out_of_range_a7b7c130 asm("PTR__out_of_range_a7b7c130");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR_typeinfo_a7b7c134	0xa7b7c134	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c134 asm("PTR_typeinfo_a7b7c134");	pointer -> LD_a7b7e068	data.s
+PTR__length_error_a7b7c138	0xa7b7c138	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__length_error_a7b7c138 asm("PTR__length_error_a7b7c138");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR_typeinfo_a7b7c13c	0xa7b7c13c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c13c asm("PTR_typeinfo_a7b7c13c");	pointer -> LD_a7b7e05c	data.s
+PTR__invalid_argument_a7b7c140	0xa7b7c140	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7c140 asm("PTR__invalid_argument_a7b7c140");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR_typeinfo_a7b7c144	0xa7b7c144	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c144 asm("PTR_typeinfo_a7b7c144");	pointer -> LD_a7b7e050	data.s
+PTR__domain_error_a7b7c148	0xa7b7c148	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__domain_error_a7b7c148 asm("PTR__domain_error_a7b7c148");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+PTR_typeinfo_a7b7c14c	0xa7b7c14c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c14c asm("PTR_typeinfo_a7b7c14c");	pointer -> LD_a7b7e044	data.s
+PTR__logic_error_a7b7c150	0xa7b7c150	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__logic_error_a7b7c150 asm("PTR__logic_error_a7b7c150");	pointer -> __ZNSt11logic_errorD1Ev	data.s
+PTR_typeinfo_a7b7c154	0xa7b7c154	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c154 asm("PTR_typeinfo_a7b7c154");	pointer -> LD_a7b7e038	data.s
+PTR__bad_typeid_a7b7c158	0xa7b7c158	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_typeid_a7b7c158 asm("PTR__bad_typeid_a7b7c158");	pointer -> __ZNSt10bad_typeidD1Ev	data.s
+PTR_typeinfo_a7b7c15c	0xa7b7c15c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c15c asm("PTR_typeinfo_a7b7c15c");	pointer -> LD_a7b7e0b0	data.s
+PTR_vtable_a7b7c160	0xa7b7c160	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c160 asm("PTR_vtable_a7b7c160");	pointer -> LD_a7b7df78	data.s
+PTR__bad_cast_a7b7c164	0xa7b7c164	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_cast_a7b7c164 asm("PTR__bad_cast_a7b7c164");	pointer -> __ZNSt8bad_castD1Ev	data.s
+PTR_typeinfo_a7b7c168	0xa7b7c168	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c168 asm("PTR_typeinfo_a7b7c168");	pointer -> LD_a7b7e0a4	data.s
+PTR_vtable_a7b7c16c	0xa7b7c16c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c16c asm("PTR_vtable_a7b7c16c");	pointer -> LD_a7b7df90	data.s
+PTR__bad_alloc_a7b7c170	0xa7b7c170	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_alloc_a7b7c170 asm("PTR__bad_alloc_a7b7c170");	pointer -> __ZNSt9bad_allocD1Ev	data.s
+PTR_typeinfo_a7b7c174	0xa7b7c174	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c174 asm("PTR_typeinfo_a7b7c174");	pointer -> LD_a7b7e02c	data.s
+PTR_vtable_a7b7c178	0xa7b7c178	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c178 asm("PTR_vtable_a7b7c178");	pointer -> LD_a7b7dff8	data.s
+PTR__bad_exception_a7b7c17c	0xa7b7c17c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR__bad_exception_a7b7c17c asm("PTR__bad_exception_a7b7c17c");	pointer -> __ZNSt13bad_exceptionD1Ev	data.s
+PTR_typeinfo_a7b7c180	0xa7b7c180	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_typeinfo_a7b7c180 asm("PTR_typeinfo_a7b7c180");	pointer -> LD_a7b7e020	data.s
+PTR_vtable_a7b7c184	0xa7b7c184	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_vtable_a7b7c184 asm("PTR_vtable_a7b7c184");	pointer -> LD_a7b7dfc8	data.s
+PTR___terminate_handler_a7b7c188	0xa7b7c188	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___terminate_handler_a7b7c188 asm("PTR___terminate_handler_a7b7c188");	pointer -> LD_a7b7c070	data.s
+PTR___unexpected_handler_a7b7c18c	0xa7b7c18c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR___unexpected_handler_a7b7c18c asm("PTR___unexpected_handler_a7b7c18c");	pointer -> LD_a7b7c074	data.s
+PTR_DAT_a7b7c190	0xa7b7c190	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_a7b7c190 asm("PTR_DAT_a7b7c190");	pointer -> ___keymgr_global	data.s
+PTR_LAB_a7b7c1b4	0xa7b7c1b4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1b4)() asm("PTR_LAB_a7b7c1b4");	pointer -> _realloc	data.s
+PTR_LAB_a7b7c1c4	0xa7b7c1c4	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c4)() asm("PTR_LAB_a7b7c1c4");	pointer -> _free	data.s
+PTR_LAB_a7b7c1c8	0xa7b7c1c8	__DATA,__la_symbol_ptr	pointer	4	extern int (*PTR_LAB_a7b7c1c8)() asm("PTR_LAB_a7b7c1c8");	pointer -> _malloc	data.s
+_tokens	0xa7b7cd58	__DATA,__const	undefined4	4		0x00000101	data.s
+UNK_a7b7ce41	0xa7b7ce41	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce41 asm("UNK_a7b7ce41");	0x00011797	data.s
+UNK_a7b7ce4c	0xa7b7ce4c	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce4c asm("UNK_a7b7ce4c");	0x00000002	data.s
+UNK_a7b7ce50	0xa7b7ce50	__DATA,__const	-	-	extern unsigned char UNK_a7b7ce50 asm("UNK_a7b7ce50");	pointer -> _op_logor	data.s
+DAT_a7b7cf14	0xa7b7cf14	__DATA,__const	undefined4	4	extern unsigned int DAT_a7b7cf14 asm("DAT_a7b7cf14");	0x00000025	data.s
+_unop	0xa7b7cf20	__DATA,__const	-	-		0x0000002b	data.s
+UNK_a7b7cf24	0xa7b7cf24	__DATA,__const	-	-	extern unsigned char UNK_a7b7cf24 asm("UNK_a7b7cf24");	pointer -> _op_pos	data.s
+TType__vtable	0xa7b7cf40	__DATA,__const	-	-		0x00000000	data.s
+PTR__TType_a7b7cf48	0xa7b7cf48	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7cf48 asm("PTR__TType_a7b7cf48");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR_getLine_a7b7cf90	0xa7b7cf90	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7cf90 asm("PTR_getLine_a7b7cf90");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR__TType_a7b7cff8	0xa7b7cff8	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7cff8 asm("PTR__TType_a7b7cff8");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR_getLine_a7b7d040	0xa7b7d040	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d040 asm("PTR_getLine_a7b7d040");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR__TType_a7b7d080	0xa7b7d080	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d080 asm("PTR__TType_a7b7d080");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR_getLine_a7b7d1b8	0xa7b7d1b8	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d1b8 asm("PTR_getLine_a7b7d1b8");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR_getLine_a7b7d390	0xa7b7d390	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d390 asm("PTR_getLine_a7b7d390");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR_getLine_a7b7d400	0xa7b7d400	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d400 asm("PTR_getLine_a7b7d400");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR__TType_a7b7d440	0xa7b7d440	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d440 asm("PTR__TType_a7b7d440");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TType_a7b7d488	0xa7b7d488	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d488 asm("PTR__TType_a7b7d488");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TType_a7b7d4d0	0xa7b7d4d0	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d4d0 asm("PTR__TType_a7b7d4d0");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TSymbol_a7b7d568	0xa7b7d568	__DATA,__const	pointer	4	extern unsigned char *PTR__TSymbol_a7b7d568 asm("PTR__TSymbol_a7b7d568");	pointer -> __ZN7TSymbolD1Ev	data.s
+PTR__TType_a7b7d590	0xa7b7d590	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d590 asm("PTR__TType_a7b7d590");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR_getLine_a7b7d5d8	0xa7b7d5d8	__DATA,__const	pointer	4	extern unsigned char *PTR_getLine_a7b7d5d8 asm("PTR_getLine_a7b7d5d8");	pointer -> __ZNK11TIntermNode7getLineEv	data.s
+PTR__TType_a7b7d640	0xa7b7d640	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d640 asm("PTR__TType_a7b7d640");	pointer -> __ZN5TTypeD1Ev	data.s
+_PTR_s__02d____02d____s____s__c__c_a7b7d6bc	0xa7b7d6bc	__DATA,__const	pointer	4		pointer -> LD_97c2b3bc	data.s
+PTR_s_gl__WhileBody__a7b7d6c8	0xa7b7d6c8	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileBody__a7b7d6c8 asm("PTR_s_gl__WhileBody__a7b7d6c8");	pointer -> LD_97c2c83c	data.s
+PTR_s_gl__WhileEnd__a7b7d6cc	0xa7b7d6cc	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEnd__a7b7d6cc asm("PTR_s_gl__WhileEnd__a7b7d6cc");	pointer -> LD_97c2c84c	data.s
+PTR_s_gl__WhileStart__a7b7d6d0	0xa7b7d6d0	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileStart__a7b7d6d0 asm("PTR_s_gl__WhileStart__a7b7d6d0");	pointer -> LD_97c2c85c	data.s
+PTR_s_gl__WhileEndIf__a7b7d6d4	0xa7b7d6d4	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEndIf__a7b7d6d4 asm("PTR_s_gl__WhileEndIf__a7b7d6d4");	pointer -> LD_97c2c86c	data.s
+PTR_s_gl__IfElse_a7b7d6d8	0xa7b7d6d8	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfElse_a7b7d6d8 asm("PTR_s_gl__IfElse_a7b7d6d8");	pointer -> LD_97c2c87c	data.s
+PTR_s_gl__IfEnd__a7b7d6dc	0xa7b7d6dc	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfEnd__a7b7d6dc asm("PTR_s_gl__IfEnd__a7b7d6dc");	pointer -> LD_97c2c888	data.s
+PTR__TShHandleBase_a7b7d700	0xa7b7d700	__DATA,__const	pointer	4	extern unsigned char *PTR__TShHandleBase_a7b7d700 asm("PTR__TShHandleBase_a7b7d700");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
+PTR_s_gl__IfElse__a7b7d710	0xa7b7d710	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfElse__a7b7d710 asm("PTR_s_gl__IfElse__a7b7d710");	pointer -> LD_97c2cedc	data.s
+PTR_s_gl__IfEnd__a7b7d714	0xa7b7d714	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__IfEnd__a7b7d714 asm("PTR_s_gl__IfEnd__a7b7d714");	pointer -> LD_97c2c888	data.s
+PTR_s_gl__WhileBody__a7b7d718	0xa7b7d718	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileBody__a7b7d718 asm("PTR_s_gl__WhileBody__a7b7d718");	pointer -> LD_97c2c83c	data.s
+PTR_s_gl__WhileEnd__a7b7d71c	0xa7b7d71c	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEnd__a7b7d71c asm("PTR_s_gl__WhileEnd__a7b7d71c");	pointer -> LD_97c2c84c	data.s
+PTR_s_gl__WhileStart__a7b7d720	0xa7b7d720	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileStart__a7b7d720 asm("PTR_s_gl__WhileStart__a7b7d720");	pointer -> LD_97c2c85c	data.s
+PTR_s_gl__WhileEndIf__a7b7d724	0xa7b7d724	__DATA,__const	pointer	4	extern unsigned char *PTR_s_gl__WhileEndIf__a7b7d724 asm("PTR_s_gl__WhileEndIf__a7b7d724");	pointer -> LD_97c2c86c	data.s
+PTR__TType_a7b7d730	0xa7b7d730	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d730 asm("PTR__TType_a7b7d730");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TType_a7b7d778	0xa7b7d778	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d778 asm("PTR__TType_a7b7d778");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TType_a7b7d808	0xa7b7d808	__DATA,__const	pointer	4	extern unsigned char *PTR__TType_a7b7d808 asm("PTR__TType_a7b7d808");	pointer -> __ZN5TTypeD1Ev	data.s
+PTR__TCompiler_a7b7d850	0xa7b7d850	__DATA,__const	pointer	4	extern unsigned char *PTR__TCompiler_a7b7d850 asm("PTR__TCompiler_a7b7d850");	pointer -> __ZN9TCompilerD1Ev	data.s
+PTR__TShHandleBase_a7b7d898	0xa7b7d898	__DATA,__const	pointer	4	extern unsigned char *PTR__TShHandleBase_a7b7d898 asm("PTR__TShHandleBase_a7b7d898");	pointer -> __ZN13TShHandleBaseD1Ev	data.s
+_OpsList_ARBvp10	0xa7b7d8a8	__DATA,__const	undefined4	4		pointer -> LD_97c2d510	data.s
+_OpsList_NVvp20	0xa7b7d988	__DATA,__const	-	-		pointer -> LD_97c2d52c	data.s
+_OpsList_NVvp30	0xa7b7da08	__DATA,__const	undefined4	4		pointer -> LD_97c2d6c8	data.s
+_OpsList_ARBfp10	0xa7b7da40	__DATA,__const	undefined4	4		pointer -> LD_97c2d510	data.s
+_OpsList_NVfp10	0xa7b7db50	__DATA,__const	-	-		pointer -> LD_97c2d6a0	data.s
+_OpsList_NVfp20	0xa7b7dbf0	__DATA,__const	-	-		pointer -> LD_97c2d564	data.s
+_vpDclList	0xa7b7dc70	__DATA,__const	undefined4	4		pointer -> LD_97c2fec8	data.s
+_fpDclList	0xa7b7dcd8	__DATA,__const	undefined4	4		pointer -> LD_97c2fec8	data.s
+PTR__underflow_error_a7b7dd70	0xa7b7dd70	__DATA,__const	pointer	4	extern unsigned char *PTR__underflow_error_a7b7dd70 asm("PTR__underflow_error_a7b7dd70");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR__overflow_error_a7b7dd88	0xa7b7dd88	__DATA,__const	pointer	4	extern unsigned char *PTR__overflow_error_a7b7dd88 asm("PTR__overflow_error_a7b7dd88");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR__range_error_a7b7dda0	0xa7b7dda0	__DATA,__const	pointer	4	extern unsigned char *PTR__range_error_a7b7dda0 asm("PTR__range_error_a7b7dda0");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR__out_of_range_a7b7ddb8	0xa7b7ddb8	__DATA,__const	pointer	4	extern unsigned char *PTR__out_of_range_a7b7ddb8 asm("PTR__out_of_range_a7b7ddb8");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR__length_error_a7b7ddd0	0xa7b7ddd0	__DATA,__const	pointer	4	extern unsigned char *PTR__length_error_a7b7ddd0 asm("PTR__length_error_a7b7ddd0");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR__invalid_argument_a7b7dde8	0xa7b7dde8	__DATA,__const	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7dde8 asm("PTR__invalid_argument_a7b7dde8");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR__domain_error_a7b7de00	0xa7b7de00	__DATA,__const	pointer	4	extern unsigned char *PTR__domain_error_a7b7de00 asm("PTR__domain_error_a7b7de00");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+PTR__underflow_error_a7b7de48	0xa7b7de48	__DATA,__const	pointer	4	extern unsigned char *PTR__underflow_error_a7b7de48 asm("PTR__underflow_error_a7b7de48");	pointer -> __ZNSt15underflow_errorD1Ev	data.s
+PTR__overflow_error_a7b7de60	0xa7b7de60	__DATA,__const	pointer	4	extern unsigned char *PTR__overflow_error_a7b7de60 asm("PTR__overflow_error_a7b7de60");	pointer -> __ZNSt14overflow_errorD1Ev	data.s
+PTR__range_error_a7b7de78	0xa7b7de78	__DATA,__const	pointer	4	extern unsigned char *PTR__range_error_a7b7de78 asm("PTR__range_error_a7b7de78");	pointer -> __ZNSt11range_errorD1Ev	data.s
+PTR__out_of_range_a7b7de90	0xa7b7de90	__DATA,__const	pointer	4	extern unsigned char *PTR__out_of_range_a7b7de90 asm("PTR__out_of_range_a7b7de90");	pointer -> __ZNSt12out_of_rangeD1Ev	data.s
+PTR__length_error_a7b7dea8	0xa7b7dea8	__DATA,__const	pointer	4	extern unsigned char *PTR__length_error_a7b7dea8 asm("PTR__length_error_a7b7dea8");	pointer -> __ZNSt12length_errorD1Ev	data.s
+PTR__invalid_argument_a7b7dec0	0xa7b7dec0	__DATA,__const	pointer	4	extern unsigned char *PTR__invalid_argument_a7b7dec0 asm("PTR__invalid_argument_a7b7dec0");	pointer -> __ZNSt16invalid_argumentD1Ev	data.s
+PTR__domain_error_a7b7ded8	0xa7b7ded8	__DATA,__const	pointer	4	extern unsigned char *PTR__domain_error_a7b7ded8 asm("PTR__domain_error_a7b7ded8");	pointer -> __ZNSt12domain_errorD1Ev	data.s
+_bindAtom	0xa7b7e798	__DATA,__bss	undefined4	4			data.s
+_constAtom	0xa7b7e79c	__DATA,__bss	undefined4	4			data.s
+_defaultAtom	0xa7b7e7a0	__DATA,__bss	undefined4	4			data.s
+_defineAtom	0xa7b7e7a4	__DATA,__bss	undefined4	4			data.s
+_definedAtom	0xa7b7e7a8	__DATA,__bss	undefined4	4			data.s
+_elseAtom	0xa7b7e7ac	__DATA,__bss	undefined4	4			data.s
+_elifAtom	0xa7b7e7b0	__DATA,__bss	undefined4	4			data.s
+_endifAtom	0xa7b7e7b4	__DATA,__bss	undefined4	4			data.s
+_ifAtom	0xa7b7e7b8	__DATA,__bss	undefined4	4			data.s
+_ifdefAtom	0xa7b7e7bc	__DATA,__bss	undefined4	4			data.s
+_ifndefAtom	0xa7b7e7c0	__DATA,__bss	undefined4	4			data.s
+_includeAtom	0xa7b7e7c4	__DATA,__bss	undefined4	4			data.s
+_lineAtom	0xa7b7e7c8	__DATA,__bss	undefined4	4			data.s
+_pragmaAtom	0xa7b7e7cc	__DATA,__bss	undefined4	4			data.s
+_texunitAtom	0xa7b7e7d0	__DATA,__bss	undefined4	4			data.s
+_undefAtom	0xa7b7e7d4	__DATA,__bss	undefined4	4			data.s
+_errorAtom	0xa7b7e7d8	__DATA,__bss	undefined4	4			data.s
+___LINE__Atom	0xa7b7e7dc	__DATA,__bss	undefined4	4			data.s
+___FILE__Atom	0xa7b7e7e0	__DATA,__bss	undefined4	4			data.s
+___VERSION__Atom	0xa7b7e7e4	__DATA,__bss	undefined4	4			data.s
+_versionAtom	0xa7b7e7e8	__DATA,__bss	undefined4	4			data.s
+_extensionAtom	0xa7b7e7ec	__DATA,__bss	undefined4	4			data.s
+_macros	0xa7b7e7f0	__DATA,__bss	undefined4	4			data.s
+_ifloc	0xa7b7e7f4	__DATA,__bss	undefined4	4			data.s
+_refCount	0xa7b7e7f8	__DATA,__bss	undefined4	4			data.s
+GetSymbolTable__SymbolTables	0xa7b7e7fc	__DATA,__bss	undefined4	4			data.s
+GetResources__Resources	0xa7b7e80c	__DATA,__bss	undefined4	4			data.s
+DAT_a7b7e810	0xa7b7e810	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e810 asm("DAT_a7b7e810");		data.s
+DAT_a7b7e814	0xa7b7e814	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e814 asm("DAT_a7b7e814");		data.s
+DAT_a7b7e818	0xa7b7e818	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e818 asm("DAT_a7b7e818");		data.s
+DAT_a7b7e81c	0xa7b7e81c	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e81c asm("DAT_a7b7e81c");		data.s
+DAT_a7b7e820	0xa7b7e820	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e820 asm("DAT_a7b7e820");		data.s
+DAT_a7b7e824	0xa7b7e824	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e824 asm("DAT_a7b7e824");		data.s
+DAT_a7b7e828	0xa7b7e828	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e828 asm("DAT_a7b7e828");		data.s
+DAT_a7b7e82c	0xa7b7e82c	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e82c asm("DAT_a7b7e82c");		data.s
+DAT_a7b7e830	0xa7b7e830	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e830 asm("DAT_a7b7e830");		data.s
+DAT_a7b7e834	0xa7b7e834	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e834 asm("DAT_a7b7e834");		data.s
+DAT_a7b7e838	0xa7b7e838	__DATA,__bss	undefined4	4	extern unsigned int DAT_a7b7e838 asm("DAT_a7b7e838");		data.s
+_yy_current_buffer	0xa7b7e83c	__DATA,__bss	undefined4	4			data.s
+_yy_hold_char	0xa7b7e840	__DATA,__bss	undefined1	1			data.s
+_yy_n_chars	0xa7b7e844	__DATA,__bss	undefined4	4			data.s
+_yy_c_buf_p	0xa7b7e848	__DATA,__bss	undefined4	4			data.s
+_yy_start	0xa7b7e84c	__DATA,__bss	undefined4	4			data.s
+_yy_did_buffer_switch_on_eof	0xa7b7e850	__DATA,__bss	undefined4	4			data.s
+_yy_last_accepting_state	0xa7b7e854	__DATA,__bss	undefined4	4			data.s
+_yy_last_accepting_cpos	0xa7b7e858	__DATA,__bss	undefined4	4			data.s
+TPPStreamCompiler__equalOperands__source0Indirect	0xa7b7e85c	__DATA,__bss	undefined4	4			data.s
+TPPStreamCompiler__equalOperands__source1Indirect	0xa7b7e860	__DATA,__bss	undefined4	4			data.s
+TPPStreamCompiler__assignOperands__destIndirect	0xa7b7e864	__DATA,__bss	undefined4	4			data.s
+TPPStreamCompiler__assignOperands__sourceIndirect	0xa7b7e868	__DATA,__bss	undefined4	4			data.s
+_emergency_buffer	0xa7b7e870	__DATA,__bss	-	-			data.s
+_emergency_used	0xa7b7ea70	__DATA,__bss	undefined4	4			data.s
+_globals_static	0xa7b7ea74	__DATA,__bss	-	-			data.s
+_dwarf_reg_size_table	0xa7b7ea7c	__DATA,__bss	undefined1	1			data.s
+DAT_a7b7ea7d	0xa7b7ea7d	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea7d asm("DAT_a7b7ea7d");		data.s
+DAT_a7b7ea7e	0xa7b7ea7e	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea7e asm("DAT_a7b7ea7e");		data.s
+DAT_a7b7ea7f	0xa7b7ea7f	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea7f asm("DAT_a7b7ea7f");		data.s
+DAT_a7b7ea80	0xa7b7ea80	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea80 asm("DAT_a7b7ea80");		data.s
+DAT_a7b7ea81	0xa7b7ea81	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea81 asm("DAT_a7b7ea81");		data.s
+DAT_a7b7ea82	0xa7b7ea82	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea82 asm("DAT_a7b7ea82");		data.s
+DAT_a7b7ea83	0xa7b7ea83	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea83 asm("DAT_a7b7ea83");		data.s
+DAT_a7b7ea84	0xa7b7ea84	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea84 asm("DAT_a7b7ea84");		data.s
+DAT_a7b7ea85	0xa7b7ea85	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea85 asm("DAT_a7b7ea85");		data.s
+DAT_a7b7ea86	0xa7b7ea86	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea86 asm("DAT_a7b7ea86");		data.s
+DAT_a7b7ea87	0xa7b7ea87	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea87 asm("DAT_a7b7ea87");		data.s
+DAT_a7b7ea88	0xa7b7ea88	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea88 asm("DAT_a7b7ea88");		data.s
+DAT_a7b7ea89	0xa7b7ea89	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea89 asm("DAT_a7b7ea89");		data.s
+DAT_a7b7ea8a	0xa7b7ea8a	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8a asm("DAT_a7b7ea8a");		data.s
+DAT_a7b7ea8b	0xa7b7ea8b	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8b asm("DAT_a7b7ea8b");		data.s
+DAT_a7b7ea8c	0xa7b7ea8c	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8c asm("DAT_a7b7ea8c");		data.s
+DAT_a7b7ea8d	0xa7b7ea8d	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8d asm("DAT_a7b7ea8d");		data.s
+DAT_a7b7ea8e	0xa7b7ea8e	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8e asm("DAT_a7b7ea8e");		data.s
+DAT_a7b7ea8f	0xa7b7ea8f	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea8f asm("DAT_a7b7ea8f");		data.s
+DAT_a7b7ea90	0xa7b7ea90	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea90 asm("DAT_a7b7ea90");		data.s
+DAT_a7b7ea91	0xa7b7ea91	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea91 asm("DAT_a7b7ea91");		data.s
+DAT_a7b7ea92	0xa7b7ea92	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea92 asm("DAT_a7b7ea92");		data.s
+DAT_a7b7ea93	0xa7b7ea93	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea93 asm("DAT_a7b7ea93");		data.s
+DAT_a7b7ea94	0xa7b7ea94	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea94 asm("DAT_a7b7ea94");		data.s
+DAT_a7b7ea95	0xa7b7ea95	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea95 asm("DAT_a7b7ea95");		data.s
+DAT_a7b7ea96	0xa7b7ea96	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea96 asm("DAT_a7b7ea96");		data.s
+DAT_a7b7ea97	0xa7b7ea97	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea97 asm("DAT_a7b7ea97");		data.s
+DAT_a7b7ea98	0xa7b7ea98	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea98 asm("DAT_a7b7ea98");		data.s
+DAT_a7b7ea99	0xa7b7ea99	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea99 asm("DAT_a7b7ea99");		data.s
+DAT_a7b7ea9a	0xa7b7ea9a	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9a asm("DAT_a7b7ea9a");		data.s
+DAT_a7b7ea9b	0xa7b7ea9b	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9b asm("DAT_a7b7ea9b");		data.s
+DAT_a7b7ea9c	0xa7b7ea9c	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9c asm("DAT_a7b7ea9c");		data.s
+DAT_a7b7ea9d	0xa7b7ea9d	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9d asm("DAT_a7b7ea9d");		data.s
+DAT_a7b7ea9e	0xa7b7ea9e	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9e asm("DAT_a7b7ea9e");		data.s
+DAT_a7b7ea9f	0xa7b7ea9f	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ea9f asm("DAT_a7b7ea9f");		data.s
+DAT_a7b7eaa0	0xa7b7eaa0	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa0 asm("DAT_a7b7eaa0");		data.s
+DAT_a7b7eaa1	0xa7b7eaa1	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa1 asm("DAT_a7b7eaa1");		data.s
+DAT_a7b7eaa2	0xa7b7eaa2	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa2 asm("DAT_a7b7eaa2");		data.s
+DAT_a7b7eaa3	0xa7b7eaa3	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa3 asm("DAT_a7b7eaa3");		data.s
+DAT_a7b7eaa4	0xa7b7eaa4	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa4 asm("DAT_a7b7eaa4");		data.s
+DAT_a7b7eaa5	0xa7b7eaa5	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa5 asm("DAT_a7b7eaa5");		data.s
+DAT_a7b7eaa6	0xa7b7eaa6	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa6 asm("DAT_a7b7eaa6");		data.s
+DAT_a7b7eaa7	0xa7b7eaa7	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa7 asm("DAT_a7b7eaa7");		data.s
+DAT_a7b7eaa8	0xa7b7eaa8	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa8 asm("DAT_a7b7eaa8");		data.s
+DAT_a7b7eaa9	0xa7b7eaa9	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaa9 asm("DAT_a7b7eaa9");		data.s
+DAT_a7b7eaaa	0xa7b7eaaa	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaaa asm("DAT_a7b7eaaa");		data.s
+DAT_a7b7eaab	0xa7b7eaab	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaab asm("DAT_a7b7eaab");		data.s
+DAT_a7b7eaac	0xa7b7eaac	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaac asm("DAT_a7b7eaac");		data.s
+DAT_a7b7eaad	0xa7b7eaad	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaad asm("DAT_a7b7eaad");		data.s
+DAT_a7b7eaae	0xa7b7eaae	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaae asm("DAT_a7b7eaae");		data.s
+DAT_a7b7eaaf	0xa7b7eaaf	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaaf asm("DAT_a7b7eaaf");		data.s
+DAT_a7b7eab0	0xa7b7eab0	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab0 asm("DAT_a7b7eab0");		data.s
+DAT_a7b7eab1	0xa7b7eab1	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab1 asm("DAT_a7b7eab1");		data.s
+DAT_a7b7eab2	0xa7b7eab2	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab2 asm("DAT_a7b7eab2");		data.s
+DAT_a7b7eab3	0xa7b7eab3	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab3 asm("DAT_a7b7eab3");		data.s
+DAT_a7b7eab4	0xa7b7eab4	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab4 asm("DAT_a7b7eab4");		data.s
+DAT_a7b7eab5	0xa7b7eab5	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab5 asm("DAT_a7b7eab5");		data.s
+DAT_a7b7eab6	0xa7b7eab6	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab6 asm("DAT_a7b7eab6");		data.s
+DAT_a7b7eab7	0xa7b7eab7	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab7 asm("DAT_a7b7eab7");		data.s
+DAT_a7b7eab8	0xa7b7eab8	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab8 asm("DAT_a7b7eab8");		data.s
+DAT_a7b7eab9	0xa7b7eab9	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eab9 asm("DAT_a7b7eab9");		data.s
+DAT_a7b7eaba	0xa7b7eaba	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaba asm("DAT_a7b7eaba");		data.s
+DAT_a7b7eabb	0xa7b7eabb	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eabb asm("DAT_a7b7eabb");		data.s
+DAT_a7b7eabc	0xa7b7eabc	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eabc asm("DAT_a7b7eabc");		data.s
+DAT_a7b7eabd	0xa7b7eabd	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eabd asm("DAT_a7b7eabd");		data.s
+DAT_a7b7eabe	0xa7b7eabe	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eabe asm("DAT_a7b7eabe");		data.s
+DAT_a7b7eabf	0xa7b7eabf	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eabf asm("DAT_a7b7eabf");		data.s
+DAT_a7b7eac0	0xa7b7eac0	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac0 asm("DAT_a7b7eac0");		data.s
+DAT_a7b7eac1	0xa7b7eac1	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac1 asm("DAT_a7b7eac1");		data.s
+DAT_a7b7eac2	0xa7b7eac2	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac2 asm("DAT_a7b7eac2");		data.s
+DAT_a7b7eac3	0xa7b7eac3	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac3 asm("DAT_a7b7eac3");		data.s
+DAT_a7b7eac4	0xa7b7eac4	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac4 asm("DAT_a7b7eac4");		data.s
+DAT_a7b7eac5	0xa7b7eac5	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac5 asm("DAT_a7b7eac5");		data.s
+DAT_a7b7eac6	0xa7b7eac6	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac6 asm("DAT_a7b7eac6");		data.s
+DAT_a7b7eac7	0xa7b7eac7	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac7 asm("DAT_a7b7eac7");		data.s
+DAT_a7b7eac8	0xa7b7eac8	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac8 asm("DAT_a7b7eac8");		data.s
+DAT_a7b7eac9	0xa7b7eac9	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eac9 asm("DAT_a7b7eac9");		data.s
+DAT_a7b7eaca	0xa7b7eaca	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eaca asm("DAT_a7b7eaca");		data.s
+DAT_a7b7eacb	0xa7b7eacb	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eacb asm("DAT_a7b7eacb");		data.s
+DAT_a7b7eacc	0xa7b7eacc	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eacc asm("DAT_a7b7eacc");		data.s
+DAT_a7b7eacd	0xa7b7eacd	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eacd asm("DAT_a7b7eacd");		data.s
+DAT_a7b7eace	0xa7b7eace	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eace asm("DAT_a7b7eace");		data.s
+DAT_a7b7eacf	0xa7b7eacf	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eacf asm("DAT_a7b7eacf");		data.s
+DAT_a7b7ead0	0xa7b7ead0	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead0 asm("DAT_a7b7ead0");		data.s
+DAT_a7b7ead1	0xa7b7ead1	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead1 asm("DAT_a7b7ead1");		data.s
+DAT_a7b7ead2	0xa7b7ead2	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead2 asm("DAT_a7b7ead2");		data.s
+DAT_a7b7ead3	0xa7b7ead3	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead3 asm("DAT_a7b7ead3");		data.s
+DAT_a7b7ead4	0xa7b7ead4	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead4 asm("DAT_a7b7ead4");		data.s
+DAT_a7b7ead5	0xa7b7ead5	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead5 asm("DAT_a7b7ead5");		data.s
+DAT_a7b7ead6	0xa7b7ead6	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead6 asm("DAT_a7b7ead6");		data.s
+DAT_a7b7ead7	0xa7b7ead7	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead7 asm("DAT_a7b7ead7");		data.s
+DAT_a7b7ead8	0xa7b7ead8	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead8 asm("DAT_a7b7ead8");		data.s
+DAT_a7b7ead9	0xa7b7ead9	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7ead9 asm("DAT_a7b7ead9");		data.s
+DAT_a7b7eada	0xa7b7eada	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eada asm("DAT_a7b7eada");		data.s
+DAT_a7b7eadb	0xa7b7eadb	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eadb asm("DAT_a7b7eadb");		data.s
+DAT_a7b7eadc	0xa7b7eadc	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eadc asm("DAT_a7b7eadc");		data.s
+DAT_a7b7eadd	0xa7b7eadd	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eadd asm("DAT_a7b7eadd");		data.s
+DAT_a7b7eade	0xa7b7eade	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eade asm("DAT_a7b7eade");		data.s
+DAT_a7b7eadf	0xa7b7eadf	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eadf asm("DAT_a7b7eadf");		data.s
+DAT_a7b7eae0	0xa7b7eae0	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae0 asm("DAT_a7b7eae0");		data.s
+DAT_a7b7eae1	0xa7b7eae1	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae1 asm("DAT_a7b7eae1");		data.s
+DAT_a7b7eae2	0xa7b7eae2	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae2 asm("DAT_a7b7eae2");		data.s
+DAT_a7b7eae3	0xa7b7eae3	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae3 asm("DAT_a7b7eae3");		data.s
+DAT_a7b7eae4	0xa7b7eae4	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae4 asm("DAT_a7b7eae4");		data.s
+DAT_a7b7eae5	0xa7b7eae5	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae5 asm("DAT_a7b7eae5");		data.s
+DAT_a7b7eae6	0xa7b7eae6	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae6 asm("DAT_a7b7eae6");		data.s
+DAT_a7b7eae7	0xa7b7eae7	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae7 asm("DAT_a7b7eae7");		data.s
+DAT_a7b7eae8	0xa7b7eae8	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae8 asm("DAT_a7b7eae8");		data.s
+DAT_a7b7eae9	0xa7b7eae9	__DATA,__bss	undefined1	1	extern unsigned char DAT_a7b7eae9 asm("DAT_a7b7eae9");		data.s
+_marker_0	0xa7b7eaec	__DATA,__bss	undefined4	4			data.s
+_unseen_objects	0xa7b7eaf0	__DATA,__bss	undefined4	4			data.s
+_seen_objects	0xa7b7eaf4	__DATA,__bss	undefined4	4			data.s
