@@ -44,6 +44,7 @@
  * getTargetAndMethodForIndex at call time), matching the same real
  * pattern GL's own table uses.
  */
+extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surface5startEP9IOServiceE11methodDescs");   /* stock: the function-local static `methodDescs` of start(IOService*) */
 extern const VendorExternalMethod kSurfaceMethods[19] = {
     /*  0 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500Surface *>(0), &IOATIR500Surface::surface_read_lock_options),   2, 1, 0xffffffff },
     /*  1 */ { 0, 0xffff, OSMemberFunctionCast(void *, static_cast<IOATIR500Surface *>(0), &IOATIR500Surface::surface_read_unlock_options),  0, 1, 0 },

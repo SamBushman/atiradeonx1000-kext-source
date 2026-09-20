@@ -23,7 +23,7 @@
 #include "../Headers/GhidraExterns.h"
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
-extern const VendorExternalMethod kGLSpecialMethod20;   /* IOATIR500GLContext_ExternalMethods.cpp */
+extern const VendorExternalMethod kGLSpecialMethod20 asm("__ZZN16ATIR500GLContext5startEP9IOServiceE11methodDescs");   /* IOATIR500GLContext_ExternalMethods.cpp */
 
 extern "C" UInt32 GH_IOLockLock(...) asm("_IOLockLock");
 extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");

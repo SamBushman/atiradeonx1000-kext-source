@@ -16,6 +16,7 @@
 #define BASE(fn) OSMemberFunctionCast(void *, static_cast<IOATIR500DVDContext *>(0), &IOATIR500DVDContext::fn)
 #define SUB(fn)  OSMemberFunctionCast(void *, static_cast<ATIR500DVDContext *>(0), &ATIR500DVDContext::fn)
 
+extern const VendorExternalMethod kDVDBaseMethods[10] asm("__ZZN19IOATIR500DVDContext5startEP9IOServiceE11methodDescs");   /* stock: the function-local static `methodDescs` of start(IOService*) */
 extern const VendorExternalMethod kDVDBaseMethods[10] = {
     /*  0 */ { 0, 0xffff, BASE(set_surface),      4, 3, 0 },
     /*  1 */ { 0, 0xffff, BASE(get_config),       0, 0, 2 },
@@ -29,6 +30,7 @@ extern const VendorExternalMethod kDVDBaseMethods[10] = {
     /*  9 */ { 0, 0xffff, BASE(delete_image),     4, 1, 0 },
 };
 
+extern const VendorExternalMethod kDVDSubMethods[12] asm("__ZZN17ATIR500DVDContext5startEP9IOServiceE11methodDescs");   /* stock: the function-local static `methodDescs` of start(IOService*) */
 extern const VendorExternalMethod kDVDSubMethods[12] = {
     /* 10 */ { 0, 0xffff, SUB(show_buffer),          0, 2, 0 },
     /* 11 */ { 0, 0xffff, SUB(dvd_setup_overlay),    0, 5, 0 },

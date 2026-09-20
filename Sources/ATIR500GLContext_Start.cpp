@@ -44,7 +44,7 @@ inline UInt8 &U8At(void *base, int offset) { return *reinterpret_cast<UInt8 *>(r
 
 extern "C" void Start3D_mutex_lock(void *lockPtr) asm("_IOLockLock");
 extern "C" void Start3D_mutex_unlock(void *lockPtr) asm("_IOLockUnlock");
-extern const VendorExternalMethod kGLSpecialMethod20;
+extern const VendorExternalMethod kGLSpecialMethod20 asm("__ZZN16ATIR500GLContext5startEP9IOServiceE11methodDescs");
 
 /* (re-ported mechanically: see ATIR500GLContext_start_Port.cpp) */
 

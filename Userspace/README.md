@@ -74,8 +74,15 @@ tail-call edge itself. `LOWCOUNT` (informational) lists functions where the stoc
 binary (`gs/PatchConstSwitch.java`; the stock file is untouched). The earlier decompiler crash was a JumpTable override left under the patched
 instruction, not the target code.
 
-Not code and not covered here: the data sections (`__cstring`, `__const`, literals, `__eh_frame`/`__gcc_except_tab`). Only the exception tables
-are decoded (`eh_callsites.tsv`).
+### Data sections
+
+`<bin>/ppc/data/` (`Tools/userspace/data_sections.py`) transcribes every non-code section: `sections.tsv` (all sections, zerofill listed by size),
+`load_commands.tsv` (dependencies, install name, segments), `cstrings.c` (one C string per string; **byte-verified** against the binary by
+`verify_cstrings.py`), and every other section (`__const`, `__data`, `__literal4/8`, `__la_symbol_ptr`, `__nl_symbol_ptr`, `__gcc_except_tab`,
+`__eh_frame`, ...) as `const unsigned int` words with a comment on each word that points at a function, string or data (lazy/non-lazy pointer slots
+name their imported symbol; literals show the float). The generated C is re-parsed against the binary word by word and compiles on the G5.
+This is a faithful *representation* of the data; it is not yet linked at the original addresses (the corpora reference data by Ghidra's `DAT_`/`PTR_`
+names, declared `extern`). `Info.plist` of each bundle sits beside it.
 
 ### Known residuals (explained, not hidden)
 

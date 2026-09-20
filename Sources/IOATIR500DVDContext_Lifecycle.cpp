@@ -21,7 +21,7 @@
 #include "../Headers/IOATIR500Surface.h"
 #include "../Headers/IOATIR500Shared.h"
 
-extern const VendorExternalMethod kDVDBaseMethods[10];
+extern const VendorExternalMethod kDVDBaseMethods[10] asm("__ZZN19IOATIR500DVDContext5startEP9IOServiceE11methodDescs");
 
 extern "C" void DVDLife_lock(void *) asm("_IOLockLock");
 extern "C" void DVDLife_unlock(void *) asm("_IOLockUnlock");

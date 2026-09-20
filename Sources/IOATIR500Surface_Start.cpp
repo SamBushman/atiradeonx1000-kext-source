@@ -79,7 +79,7 @@
 extern "C" void *SurfStart_IOMallocAligned(UInt32 size, UInt32 align) asm("_IOMallocAligned");
 
 /* real table, Sources/ATIR500Surface_ExternalMethods.cpp */
-extern const VendorExternalMethod kSurfaceMethods[19];
+extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surface5startEP9IOServiceE11methodDescs");
 
 /* FUN_00011e38 - RESOLVED (issue #58): a kxld-patched lazy-binding stub
  * whose live target is `IOLockAlloc` (kernel 0x2b2704, exact offset-0 match

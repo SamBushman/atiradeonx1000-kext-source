@@ -1,0 +1,9 @@
+SEGMENT	__TEXT vmaddr=0x92f27000 vmsize=0x1f000 fileoff=0x0 filesize=0x1f000 maxprot=7 initprot=5 sections=4
+SEGMENT	__DATA vmaddr=0xa2f27000 vmsize=0x1000 fileoff=0x1f000 filesize=0x1000 maxprot=7 initprot=3 sections=4
+SEGMENT	__LINKEDIT vmaddr=0x92f46000 vmsize=0x969c fileoff=0x20000 filesize=0x969c maxprot=7 initprot=1 sections=0
+ID_DYLIB	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGL.dylib
+LOAD_DYLIB	/usr/lib/libSystem.B.dylib
+LC_0x2	size=24
+LC_0xb	size=80
+LC_0x16	size=16
+LC_0x17	size=12

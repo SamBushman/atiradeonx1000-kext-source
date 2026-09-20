@@ -23,7 +23,7 @@
 #include "../Headers/GhidraExterns.h"
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
-extern const VendorExternalMethod kSurfaceMethods[19];   /* ATIR500Surface_ExternalMethods.cpp */
+extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surface5startEP9IOServiceE11methodDescs");   /* ATIR500Surface_ExternalMethods.cpp */
 
 extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");

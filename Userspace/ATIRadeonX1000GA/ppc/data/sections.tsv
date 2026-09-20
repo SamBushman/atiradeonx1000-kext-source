@@ -1,0 +1,12 @@
+segment	section	addr	size	fileoff	flags	transcribed_as
+__TEXT	__text	0x600	50320	1536	0x80000400	code (see part_*.c / raw/)
+__TEXT	__picsymbol_stub	0xca90	0	51856	0x80000008	code (see part_*.c / raw/)
+__TEXT	__picsymbolstub1	0xcaa0	1056	51872	0x80000408	code (see part_*.c / raw/)
+__TEXT	__cstring	0xcec0	276	52928	0x2	cstrings.c
+__TEXT	__literal8	0xcfd8	32	53208	0x4	TEXT___literal8.c
+__TEXT	__literal4	0xcff8	24	53240	0x3	TEXT___literal4.c
+__DATA	__data	0xe000	1536	57344	0x100	DATA___data.c
+__DATA	__dyld	0xe600	8	58880	0x0	DATA___dyld.c
+__DATA	__la_symbol_ptr	0xe608	132	58888	0x107	DATA___la_symbol_ptr.c
+__DATA	__nl_symbol_ptr	0xe68c	16	59020	0x6	DATA___nl_symbol_ptr.c
+__DATA	__bss	0xe69c	236	0	0x1	zerofill (size only)

@@ -14,7 +14,8 @@
 #include "../Headers/ATIRadeonX1000Types.h"
 #include "../Headers/ATIR500SurfaceOverlayTables.h"
 
-const UInt32 kMode1314Table[63] = { /* 252 bytes @ 0x4ac78 */
+extern const UInt32 kMode1314Table[63] asm("_Mode1314Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode1314Table[63] = { /* 252 bytes @ 0x4ac78 */
     0x41000000, 0x40800000, 0x40800000, 0x00000000, 0x00000000, 0x01010101, 0x00000200, 0x40800000,
     0x40800000, 0x40800000, 0x01000000, 0x01010000, 0x01010101, 0x00000400, 0x41000000, 0x40000000,
     0x40000000, 0x00000001, 0x00000101, 0x01010101, 0x00000200, 0x40800000, 0x40000000, 0x40000000,
@@ -25,7 +26,8 @@ const UInt32 kMode1314Table[63] = { /* 252 bytes @ 0x4ac78 */
     0x3f000000, 0x3e800000, 0x3e800000, 0x00000101, 0x04020402, 0x08020802, 0x02020400,
 };
 
-const UInt32 kMode1112Table[56] = { /* 224 bytes @ 0x4ad74 */
+extern const UInt32 kMode1112Table[56] asm("_Mode1112Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode1112Table[56] = { /* 224 bytes @ 0x4ad74 */
     0x41000000, 0x40800000, 0x40800000, 0x00000000, 0x00000000, 0x01010101, 0x00000200, 0x41000000,
     0x40000000, 0x40000000, 0x00000001, 0x00000101, 0x01010101, 0x00000200, 0x40800000, 0x40000000,
     0x40000000, 0x00000101, 0x01010101, 0x01010101, 0x00000400, 0x40800000, 0x3f800000, 0x3f800000,
@@ -35,7 +37,8 @@ const UInt32 kMode1112Table[56] = { /* 224 bytes @ 0x4ad74 */
     0x02020400, 0x3f000000, 0x3e800000, 0x3e800000, 0x00000101, 0x04020402, 0x08020802, 0x02020400,
 };
 
-const UInt32 kMode10Table[84] = { /* 336 bytes @ 0x4ae54 */
+extern const UInt32 kMode10Table[84] asm("_Mode10Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode10Table[84] = { /* 336 bytes @ 0x4ae54 */
     0x41000000, 0x40800000, 0x40800000, 0x00000000, 0x00000000, 0x01010101, 0x00000200, 0x40800000,
     0x40800000, 0x40800000, 0x01000000, 0x01010000, 0x01010101, 0x00000400, 0x41000000, 0x40000000,
     0x40000000, 0x00000001, 0x00000101, 0x01010101, 0x00000200, 0x40800000, 0x40000000, 0x40000000,
@@ -49,7 +52,8 @@ const UInt32 kMode10Table[84] = { /* 336 bytes @ 0x4ae54 */
     0x00000101, 0x05030503, 0x10041004, 0x02020400,
 };
 
-const UInt32 kMode9Table[84] = { /* 336 bytes @ 0x4afa4 */
+extern const UInt32 kMode9Table[84] asm("_Mode9Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode9Table[84] = { /* 336 bytes @ 0x4afa4 */
     0x41000000, 0x40000000, 0x40000000, 0x00000000, 0x00000000, 0x01010101, 0x00000200, 0x40800000,
     0x40000000, 0x40000000, 0x01000000, 0x01010000, 0x01010101, 0x00000400, 0x41000000, 0x3f800000,
     0x3f800000, 0x00000001, 0x00000101, 0x01010101, 0x00000200, 0x40800000, 0x3f800000, 0x3f800000,
@@ -63,7 +67,8 @@ const UInt32 kMode9Table[84] = { /* 336 bytes @ 0x4afa4 */
     0x00000101, 0x05030503, 0x10041004, 0x02020400,
 };
 
-const UInt32 kMode6Table[56] = { /* 224 bytes @ 0x4b0f4 */
+extern const UInt32 kMode6Table[56] asm("_Mode6Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode6Table[56] = { /* 224 bytes @ 0x4b0f4 */
     0x41000000, 0x41000000, 0x41000000, 0x00000001, 0x00000000, 0x01010101, 0x00000200, 0x40800000,
     0x40800000, 0x40800000, 0x00000101, 0x01010101, 0x01010101, 0x00000400, 0x40000000, 0x40000000,
     0x40000000, 0x00000101, 0x02010201, 0x02010201, 0x01010400, 0x40000000, 0x3f800000, 0x3f800000,
@@ -73,7 +78,8 @@ const UInt32 kMode6Table[56] = { /* 224 bytes @ 0x4b0f4 */
     0x02020400, 0x3f000000, 0x3e800000, 0x3e800000, 0x00000101, 0x05030503, 0x10041004, 0x02020400,
 };
 
-const UInt32 kMode34Table[35] = { /* 140 bytes @ 0x4b1d4 */
+extern const UInt32 kMode34Table[35] asm("_Mode34Table");   /* the shipped kext's global symbol name */
+extern const UInt32 kMode34Table[35] = { /* 140 bytes @ 0x4b1d4 */
     0x41000000, 0x00000000, 0x00000000, 0x00000101, 0x01010101, 0x01010101, 0x00000200, 0x40800000,
     0x00000000, 0x00000000, 0x00000101, 0x02020202, 0x02020202, 0x00000200, 0x40000000, 0x00000000,
     0x00000000, 0x00000101, 0x03030303, 0x04040404, 0x00000200, 0x3f800000, 0x00000000, 0x00000000,
@@ -81,7 +87,8 @@ const UInt32 kMode34Table[35] = { /* 140 bytes @ 0x4b1d4 */
     0x05050505, 0x10101010, 0x00000200,
 };
 
-const UInt32 kFilterSetupArrayOfSets[1026] = { /* 4104 bytes @ 0x4b260 */
+extern const UInt32 kFilterSetupArrayOfSets[1026] asm("_FilterSetupArrayOfSets");   /* the shipped kext's global symbol name */
+extern const UInt32 kFilterSetupArrayOfSets[1026] = { /* 4104 bytes @ 0x4b260 */
     0x3fd00000, 0x00000000, 0x07100900, 0x07100900, 0x050f0b01, 0x040f0c01, 0x030d0d03, 0x00000000,
     0x3fd0a3d7, 0x0a3d70a4, 0x07100900, 0x07100900, 0x050f0b01, 0x040f0c01, 0x030d0d03, 0x00000000,
     0x3fd147ae, 0x147ae148, 0x07100900, 0x07100900, 0x050f0b01, 0x040f0c01, 0x030d0d03, 0x00000000,

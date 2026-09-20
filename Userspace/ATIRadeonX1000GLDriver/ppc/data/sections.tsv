@@ -1,0 +1,22 @@
+segment	section	addr	size	fileoff	flags	transcribed_as
+__TEXT	__text	0x1740	1711844	5952	0x80000400	code (see part_*.c / raw/)
+__TEXT	__picsymbol_stub	0x1a3624	0	1717796	0x80000008	code (see part_*.c / raw/)
+__TEXT	__picsymbolstub1	0x1a3640	2784	1717824	0x80000408	code (see part_*.c / raw/)
+__TEXT	__cstring	0x1a4120	24492	1720608	0x2	cstrings.c
+__TEXT	__literal4	0x1aa0cc	272	1745100	0x3	TEXT___literal4.c
+__TEXT	__literal8	0x1aa1e0	208	1745376	0x4	TEXT___literal8.c
+__TEXT	__const	0x1aa2b0	35524	1745584	0x0	TEXT___const.c
+__TEXT	__eh_frame	0x1b2d74	103408	1781108	0x6800000b	TEXT___eh_frame.c
+__TEXT	__constructor	0x1cc164	0	1884516	0x0	TEXT___constructor.c
+__TEXT	__destructor	0x1cc164	0	1884516	0x0	TEXT___destructor.c
+__TEXT	__const_coal	0x1cc164	5376	1884516	0xb	TEXT___const_coal.c
+__TEXT	__textcoal_nt	0x1cd664	47488	1889892	0x8000040b	code (functions / raw blocks)
+__DATA	__data	0x1d9000	63296	1937408	0x100	DATA___data.c
+__DATA	__dyld	0x1e8740	8	2000704	0x0	DATA___dyld.c
+__DATA	__la_symbol_ptr	0x1e8748	348	2000712	0x107	DATA___la_symbol_ptr.c
+__DATA	__nl_symbol_ptr	0x1e88a4	2220	2001060	0x6	DATA___nl_symbol_ptr.c
+__DATA	__const	0x1e9150	10680	2003280	0x300	DATA___const.c
+__DATA	__gcc_except_tab	0x1ebb08	21497	2013960	0x0	DATA___gcc_except_tab.c
+__DATA	__const_coal	0x1f0f08	22232	2035464	0xb	DATA___const_coal.c
+__DATA	__bss	0x1f65e0	23556	0	0x1	zerofill (size only)
+__DATA	__common	0x1fc1f0	1980	0	0x1	zerofill (size only)

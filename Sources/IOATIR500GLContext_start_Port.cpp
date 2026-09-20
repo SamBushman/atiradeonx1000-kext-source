@@ -23,7 +23,7 @@
 #include "../Headers/GhidraExterns.h"
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
-extern const VendorExternalMethod kGLRegularMethods[20];   /* IOATIR500GLContext_ExternalMethods.cpp */
+extern const VendorExternalMethod kGLRegularMethods[20] asm("__ZZN18IOATIR500GLContext5startEP9IOServiceE11methodDescs");   /* IOATIR500GLContext_ExternalMethods.cpp */
 
 extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
 

@@ -1,0 +1,12 @@
+SEGMENT	__TEXT vmaddr=0x0 vmsize=0x1d9000 fileoff=0x0 filesize=0x1d9000 maxprot=7 initprot=5 sections=12
+SEGMENT	__DATA vmaddr=0x1d9000 vmsize=0x24000 fileoff=0x1d9000 filesize=0x1e000 maxprot=7 initprot=3 sections=9
+SEGMENT	__LINKEDIT vmaddr=0x1fd000 vmsize=0x110dc fileoff=0x1f7000 filesize=0x110dc maxprot=7 initprot=1 sections=0
+LOAD_DYLIB	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLProgrammability.dylib
+LOAD_DYLIB	/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libGLImage.dylib
+LOAD_DYLIB	/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation
+LOAD_DYLIB	/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit
+LOAD_DYLIB	/usr/lib/libstdc++.6.dylib
+LOAD_DYLIB	/usr/lib/libgcc_s.1.dylib
+LOAD_DYLIB	/usr/lib/libSystem.B.dylib
+LC_0x2	size=24
+LC_0xb	size=80

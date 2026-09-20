@@ -23,7 +23,7 @@
 #include "../Headers/ATIRadeonX1000.h"
 #include "../Headers/IOATIR500Surface.h"
 
-extern const VendorExternalMethod kTwoDBaseMethods[16];
+extern const VendorExternalMethod kTwoDBaseMethods[16] asm("__ZZN18IOATIR5002DContext5startEP9IOServiceE11methodDescs");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }

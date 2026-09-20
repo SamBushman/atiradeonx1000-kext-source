@@ -20,7 +20,7 @@
 #include "../Headers/IOATIR500Shared.h"
 #include "../Headers/ATIR500Surface.h"
 
-extern const VendorExternalMethod kDVDSubMethods[12];
+extern const VendorExternalMethod kDVDSubMethods[12] asm("__ZZN17ATIR500DVDContext5startEP9IOServiceE11methodDescs");
 
 extern "C" void DVDSubM_lock(void *) asm("_IOLockLock");
 extern "C" void DVDSubM_unlock(void *) asm("_IOLockUnlock");

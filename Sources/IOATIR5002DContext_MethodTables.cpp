@@ -19,6 +19,7 @@
 #define BASE(fn) OSMemberFunctionCast(void *, static_cast<IOATIR5002DContext *>(0), &IOATIR5002DContext::fn)
 #define REGS(fn) OSMemberFunctionCast(void *, static_cast<ATIR5002DContext *>(0), &ATIR5002DContext::fn)
 
+extern const VendorExternalMethod kTwoDBaseMethods[16] asm("__ZZN18IOATIR5002DContext5startEP9IOServiceE11methodDescs");   /* stock: the function-local static `methodDescs` of start(IOService*) */
 extern const VendorExternalMethod kTwoDBaseMethods[16] = {
     /*  0 */ { 0, 0xffff, BASE(set_surface),                 2, 2, 0xffffffff },
     /*  1 */ { 0, 0xffff, BASE(get_config),                  0, 0, 2 },
@@ -38,6 +39,7 @@ extern const VendorExternalMethod kTwoDBaseMethods[16] = {
     /* 15 */ { 0, 0xffff, BASE(set_macrovision),             4, 1, 0 },
 };
 
+extern const VendorExternalMethod kTwoDRegisterMethods[3] asm("__ZZN16ATIR5002DContext5startEP9IOServiceE11methodDescs");   /* stock: the function-local static `methodDescs` of start(IOService*) */
 extern const VendorExternalMethod kTwoDRegisterMethods[3] = {
     /* 16 */ { 0, 0xffff, REGS(read_regs),    3, 0xffffffff, 0xffffffff },
     /* 17 */ { 0, 0xffff, REGS(write_regs),   4, 0, 0xffffffff },

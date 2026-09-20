@@ -26,7 +26,8 @@
  * ati_format_info_table - real kext address 0x4d2d0, exactly 48 entries
  * (indices 0-47), each a real AtiFormatInfoEntry (ATIRadeonX1000Types.h).
  */
-static const AtiFormatInfoEntry kAtiFormatInfoTable[48] = {
+extern AtiFormatInfoEntry kAtiFormatInfoTable[48] asm("_ati_format_info_table");   /* stock: a writable global in __data */
+extern AtiFormatInfoEntry kAtiFormatInfoTable[48] = {
     { 0x00000000, 0x00045a14, 0x00000000, 0x00000000, 0x00000084, 0x18000000, 0xff000000 }, // #0
     { 0x01000000, 0x00045a14, 0x00000020, 0x00000210, 0x1642a884, 0x18050020, 0xff000000 }, // #1
     { 0x02000000, 0x00045a14, 0x00000800, 0x00000210, 0x16420084, 0x18009220, 0xff000000 }, // #2
@@ -105,7 +106,8 @@ extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) {
  * (`(tilingDegreeBits >> 0x12) & 0x3c`), so nothing beyond entry 15 is
  * ever real reachable.
  */
-static const UInt32 kSamplesTable[16] = {
+extern const UInt32 kSamplesTable[16] asm("_samplesTable");
+extern const UInt32 kSamplesTable[16] = {
     0x00000000, 0x00000000, 0x00000000, 0x00000000,
     0x00000002, 0x00000000, 0x00000003, 0x00000000,
     0x00000000, 0x00000000, 0x00000000, 0x00000000,

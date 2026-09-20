@@ -1,0 +1,3 @@
+SEGMENT	 vmaddr=0x0 vmsize=0x4d97c fileoff=0x3c4 filesize=0x4d84c maxprot=7 initprot=3 sections=10
+LC_0x2	size=24
+LC_0x5	size=176

@@ -27,7 +27,7 @@
 extern "C" void TwoDC_lock(void *) asm("_IOLockLock");
 extern "C" void TwoDC_unlock(void *) asm("_IOLockUnlock");
 
-extern const VendorExternalMethod kTwoDRegisterMethods[3];
+extern const VendorExternalMethod kTwoDRegisterMethods[3] asm("__ZZN16ATIR5002DContext5startEP9IOServiceE11methodDescs");
 
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
