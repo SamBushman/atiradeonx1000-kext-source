@@ -1,7 +1,7 @@
 atomic read-modify-write idioms rewritten as compare-and-swap loops: 59
 byte buffers Ghidra declared as scalars, turned into arrays: 20
 (double)CONCAT44 bit-pattern constructions: 271
-hand text patches applied (config text_patches): 
+hand text patches applied (config text_patches): orph_1efd0, orph_1efec, orph_1eff8
 64-bit shift helper calls fixed: 0
 narrow-type subtract-and-compare idioms: 0
 float/double call arguments given their true type (integer bit patterns reinterpreted): 1200

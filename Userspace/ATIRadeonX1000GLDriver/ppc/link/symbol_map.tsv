@@ -598,7 +598,7 @@ DAT_001b2eb8	0x1b2eb8	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b2eb8 as
 DAT_001b40f0	0x1b40f0	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b40f0 asm("DAT_001b40f0");	0x00000000	data.s
 DAT_001b81b8	0x1b81b8	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b81b8 asm("DAT_001b81b8");	0x00000014	data.s
 DAT_001b9d04	0x1b9d04	__TEXT,__eh_frame	-	-	extern unsigned char DAT_001b9d04 asm("DAT_001b9d04");	0x00040000	data.s
-UNK_001ba4e4	0x1ba4e4	__TEXT,__eh_frame	-	-	extern unsigned char UNK_001ba4e4 asm("UNK_001ba4e4");	0x000024e0	data.s
+UNK_001ba4e4	0x1ba4e4	__TEXT,__eh_frame	-	-	extern unsigned char UNK_001ba4e4 asm("UNK_001ba4e4");	0x000024e0	unused (referenced only by dropped toolchain code)
 DAT_001d91f0	0x1d91f0	__DATA,__data	-	-	extern unsigned char DAT_001d91f0 asm("DAT_001d91f0");	0x00010000	data.s
 DAT_001d92a8	0x1d92a8	__DATA,__data	-	-	extern unsigned char DAT_001d92a8 asm("DAT_001d92a8");	0x00000005	data.s
 DAT_001d9358	0x1d9358	__DATA,__data	-	-	extern unsigned char DAT_001d9358 asm("DAT_001d9358");	0x00000004	data.s

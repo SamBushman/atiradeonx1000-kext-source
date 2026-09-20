@@ -8,13 +8,6 @@
  "drop_decls": [
   "NAN"
  ],
- "dummy_data": {
-  "DAT_001b2eb8": 4,
-  "DAT_001b40f0": 4,
-  "DAT_001b81b8": 4,
-  "DAT_001b9d04": 4,
-  "UNK_001ba4e4": 4
- },
  "extra_corpora": [
   "unowned_code"
  ],
@@ -30,5 +23,42 @@
   "builtin_strncpy": "_strncpy",
   "operator_delete": "__ZdlPv",
   "FUN_00002748": "_atexit"
- }
+ },
+ "data_anchors": {
+  "DAT_001b2eb8": {
+   "base": "0x1b0050"
+  },
+  "DAT_001b40f0": {
+   "base": "0x1b0044"
+  },
+  "DAT_001b81b8": {
+   "base": "0x1b2ac0"
+  },
+  "DAT_001b9d04": {
+   "base": "0x1dbb0c"
+  },
+  "DAT_001d91c8": {
+   "base": "0x1d91c8"
+  }
+ },
+ "text_patches": [
+  {
+   "func": "orph_1efd0",
+   "old": "&UNK_001ba4e4 + unaff_r31",
+   "new": "&DAT_001d91c8"
+  },
+  {
+   "func": "orph_1efec",
+   "old": "&UNK_001ba4e4 + unaff_r31",
+   "new": "&DAT_001d91c8"
+  },
+  {
+   "func": "orph_1eff8",
+   "old": "&UNK_001ba4e4 + unaff_r31",
+   "new": "&DAT_001d91c8"
+  }
+ ],
+ "prelude": [
+  "extern unsigned char DAT_001d91c8[] asm(\"DAT_001d91c8\");"
+ ]
 }

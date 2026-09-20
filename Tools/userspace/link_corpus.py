@@ -463,6 +463,8 @@ def fn_symbol_for(addr):
     return None
 
 targets = set()        # data addresses that need a label
+for _nm, _sp in cfg.get('data_anchors', {}).items():
+    targets.add(int(_sp['base'], 16))      # the object a PIC anchor is measured from needs a label
 ghidra_ptr_words = []
 word_expr = {}         # addr -> asm expression for that word (pointer words), decided in pass 1
 def classify_target(t):
@@ -645,12 +647,15 @@ for a in sorted(slot_expr):
         S.append('.globl %s' % nm)
         S.append('%s:' % nm)
         S.append('.long %s' % slot_expr[a])
-for nm_, sz_ in sorted(cfg.get('dummy_data', {}).items()):      # objects only the (never exercised) unwinder/crt paths refer to
-    S.append('.data')
-    S.append('.align 2')
+# PIC anchors: Ghidra folds `pic_base + offset` (the compiler's `L_object - L_pic` split into addis/addi) into an address that is no object of the image (`&DAT_001b81b8`),
+# and the code then reads the real object at a displacement from it (`*(anchor - 0x56f8)`, `anchor + 4 * opcode`). The anchor is the real object's label plus the same
+# constant, so it moves with the object in the rebuilt image: `.set NAME, LD_<base> + (anchor - base)`.
+for nm_, sp_ in sorted(cfg.get('data_anchors', {}).items()):
+    base_ = int(sp_['base'], 16)
+    anchor_ = addr_of_name(nm_)
+    delta_ = anchor_ - base_
     S.append('.globl %s' % nm_)
-    S.append('%s:' % nm_)
-    S.append('.space %d' % sz_)
+    S.append('.set %s, LD_%x%s' % (nm_, base_, ('%+d' % delta_) if delta_ else ''))
     defined.add(nm_)
 open(os.path.join(out, 'data.s'), 'w').write('\n'.join(S) + '\n')
 
