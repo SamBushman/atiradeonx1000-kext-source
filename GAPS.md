@@ -10,12 +10,11 @@ tags (`CONFIRMED`/`INFERRED`/`UNKNOWN`) inside older sections describe names and
 
 | item | state |
 |---|---|
-| Load and run the rebuilt kext on the G5 | **Not done.** Never loaded. The mechanically re-ported methods (238) were verified statically only: build, ledger, vtable diff, callee comparison at -O0. Blocked on a per-step authorized live test plan (issues #41 process/rollback, #42 feature parity, #43 stability, #44 performance, #45 iterate) |
+| Load and run the rebuilt kext on the G5 | **Not done.** Never loaded. The mechanically re-ported methods (238) were verified statically only: build, ledger, vtable diff, callee comparison at -O0. Blocked on a per-step authorized live test plan (issues #59 remaining criterion, #41 process/rollback, #42 feature parity, #43 stability, #44 performance, #45 iterate) |
 | Vendor bug in `allocAllSlaveSwapBuffers` (issue #32, section 22) | Deliberately left as Apple has it; needs hardware to confirm the hang path |
-| `accelerator+0x238`'s object type (section 24) | Open: needs a live accelerator instance |
-| Userspace binaries: differential test | The recompiled GLSL compiler (libGLProgrammability) has not been run against the stock one on real shaders; callee equivalence + compilation is strong evidence, not proof (`Userspace/README.md`) |
-| Userspace binaries: linking | The corpora compile part by part and reference data by Ghidra's names; they are not linked into loadable bundles. Data sections are transcribed as data (`Userspace/<bin>/ppc/data/`) but not laid out at the original addresses |
-| Kext data leftovers | `shape_surface`'s compiler constant `C.146`, and the static in `write_3dtexquad_cmds_for_copy_buffer_using_DMA` (writable 20 bytes in stock, a const table in ours) - see `Ledger/data/README.md` |
+| Userspace binaries: differential test (issue #60) | The recompiled GLSL compiler (libGLProgrammability) has not been run against the stock one on real shaders; callee equivalence + compilation is strong evidence, not proof (`Userspace/README.md`) |
+| Userspace binaries: linking (issue #61) | The corpora compile part by part and reference data by Ghidra's names; they are not linked into loadable bundles. Data sections are transcribed as data (`Userspace/<bin>/ppc/data/`) but not laid out at the original addresses |
+| Kext data leftovers and the `accelerator+0x238` type (issue #62) | `shape_surface`'s compiler constant `C.146`, and the static in `write_3dtexquad_cmds_for_copy_buffer_using_DMA` (writable 20 bytes in stock, a const table in ours) - see `Ledger/data/README.md` |
 | i386 slices (kext and userspace) | Not transcribed; not required |
 | Ghidra limits (userspace) | C++ exception landing pads and case bodies are kept as companion functions / byte-verified asm rather than decompiled in their owners; Ghidra decompiler bugs would survive into the corpora |
 
