@@ -1,15 +1,33 @@
-# Known gaps and next steps
+# Known gaps, findings and next steps
 
-A consolidated list of every real `TODO`/`UNKNOWN` this reconstruction pass left behind, grouped by
-theme. Mirrored into GitHub issues on this repo for tracking. See `README.md` for the confidence-tier
-definitions this list uses.
+This file is the running log of what the reconstruction found and resolved (sections 2-25, each dated by its issue number and written when the work
+happened) plus the list of what is still open. **Read "Open items" first; the numbered sections are history and some of their prose describes the
+state of the code at the time.** Since 2026-09-19 every function of the shipped kext is transcribed (`Ledger/`), most bodies are mechanical ports
+(`Sources/*_Port.cpp`, see `README.md` for the provenance classes), and the userspace binaries are transcribed too (`Userspace/`). Confidence-tier
+tags (`CONFIRMED`/`INFERRED`/`UNKNOWN`) inside older sections describe names and semantics, not transcription status.
 
-## 1. Compilation has never been attempted
+## Open items (2026-09-19)
 
-The single largest gap: nothing in this repo has been built. There is no Tiger/Leopard IOKit SDK or
-PowerPC kext toolchain available in the environment this was written in. **Requires real hardware/
-toolchain access to close.** See `README.md`'s "What to do when hardware is available again" section for
-the concrete first steps.
+| item | state |
+|---|---|
+| Load and run the rebuilt kext on the G5 | **Not done.** Never loaded. The mechanically re-ported methods (238) were verified statically only: build, ledger, vtable diff, callee comparison at -O0. Blocked on a per-step authorized live test plan (issues #41 process/rollback, #42 feature parity, #43 stability, #44 performance, #45 iterate) |
+| Vendor bug in `allocAllSlaveSwapBuffers` (issue #32, section 22) | Deliberately left as Apple has it; needs hardware to confirm the hang path |
+| `accelerator+0x238`'s object type (section 24) | Open: needs a live accelerator instance |
+| Userspace binaries: differential test | The recompiled GLSL compiler (libGLProgrammability) has not been run against the stock one on real shaders; callee equivalence + compilation is strong evidence, not proof (`Userspace/README.md`) |
+| Userspace binaries: linking | The corpora compile part by part and reference data by Ghidra's names; they are not linked into loadable bundles. Data sections are transcribed as data (`Userspace/<bin>/ppc/data/`) but not laid out at the original addresses |
+| Kext data leftovers | `shape_surface`'s compiler constant `C.146`, and the static in `write_3dtexquad_cmds_for_copy_buffer_using_DMA` (writable 20 bytes in stock, a const table in ours) - see `Ledger/data/README.md` |
+| i386 slices (kext and userspace) | Not transcribed; not required |
+| Ghidra limits (userspace) | C++ exception landing pads and case bodies are kept as companion functions / byte-verified asm rather than decompiled in their owners; Ghidra decompiler bugs would survive into the corpora |
+
+Closed since the last edit of this file: compilation (the kext builds on the Tiger G5 with Apple gcc 4.0.1 - issue #1), feature completeness (issue #59: all
+470 named methods present, `Tests/function_coverage.md`), the userspace scope decision (section 9), `freeAllContextBuffers` (section 25), the base
+`start`/`stop`/factory/GART/SWDS families the old comparison listed as missing.
+
+## 1. Compilation has never been attempted - RESOLVED
+
+The kext now builds: `sh Tools/remote_build.sh` copies the tree to the Tiger G5 and builds it with Apple gcc 4.0.1 (`-fapple-kext`), and
+`Tools/link_check.sh` / `Tools/check_ledger.sh` report the link state (only the kernel/IOKit imports and stock's own two undefined
+`system_will_sleep/did_wake` remain). What is still unproven is *running* it; see "Open items".
 
 ## 2. `process_command_buffer`'s opcode handlers (GL context) - FULLY RESOLVED (issue #13's two residual items closed)
 
@@ -774,14 +792,12 @@ Real, notable findings:
   consistent with a real packed 32-bit field rather than a transcription error - see that function's own
   header comment for the full argument.
 
-## 9. This reconstruction covers the kext only, not the userspace binaries
+## 9. Scope: the kext, then the userspace binaries - RESOLVED (scope widened 2026-09-19)
 
-By design - see `README.md`. `ATIRadeonX1000GLDriver.bundle`, `ATIRadeonX1000GA.plugin`,
-`ATIRadeonX1000VADriver.bundle`, `libGLProgrammability.dylib`, `AGL.framework`, `OpenGL.framework`, and
-`libGL.dylib` are all real, separately-decompiled binaries this project's `g5-h264-gpu-decode` repo has
-extensive notes on, but none of them are userspace kernel extensions and reconstructing them as
-"compilable source" would mean a different kind of project (a from-scratch OpenGL/AGL/CFPlugIn
-implementation) - out of scope here.
+The original scope was the kext only. The scope is now every binary in the Tiger X1900 driver stack: `ATIRadeonX1000GLDriver.bundle`,
+`ATIRadeonX1000GA.plugin`, `ATIRadeonX1000VADriver.bundle`, `libGL.dylib` and `libGLProgrammability.dylib` are transcribed as machine-generated C
+corpora (`Userspace/`, PowerPC slices), not as a from-scratch OpenGL/AGL/CFPlugIn implementation. `AGL.framework` / `OpenGL.framework` are not in the
+pulled set (`ATI-X1900-Decomp/tiger-hd-pull`) and are not covered.
 
 ## 10. ~~`Info.plist`'s PCI device-ID match string is an unverified placeholder~~ RESOLVED
 
@@ -1289,17 +1305,16 @@ from reading static kext data; `ioreg` doesn't expose raw kernel addresses. Left
 forcing a broader, riskier kernel-memory pattern-scan for what the issue itself already flagged as
 lowest-priority.
 
-## 25. `freeAllContextBuffers` (GL/2D/DVD) - OPEN, issue #54
+## 25. `freeAllContextBuffers` (GL/2D/DVD) - RESOLVED (issue #54 closed; bodies in the ledger)
 
-A whole new 3-class function family (the real inverse of `allocAllContextBuffers`), found as `stop`'s own
-real fallback call while resolving issue #49 (section 23). Real names/addresses confirmed via `nm`; bodies
-not yet decompiled. Filed separately rather than folded into #49's own scope.
+The 3-class inverse of `allocAllContextBuffers`, found as `stop`'s own fallback call while resolving issue #49. Its bodies are transcribed (mechanical
+ports of the GL/2D/DVD variants, part of the 506/506 ledger).
 
-## 26. Driver testing process, once a real build exists - OPEN, issues #41-45
+## 26. Driver testing process - OPEN, issues #41-45
 
-Not started - blocked on issue #1 (first build attempt). Once a compiled driver exists: define the testing
-process itself (including safe install/rollback to the existing Tiger driver, #41), then write and run
-feature-completeness (#42), stability (#43), and performance (#44) tests against it, iterating to parity
-(#45).
+The kext builds (section 1) but has never been loaded. Once a test plan is authorized: define the process (including safe install and rollback to
+the stock driver, #41), then feature completeness (#42; the userspace harness in `Tests/` already exercises the stock driver and has a recorded
+baseline), stability (#43), performance (#44), iterating to parity (#45). Live steps need per-step authorization; no `/dev/kmem` scans, no fuzzing of
+`IOConnect*`.
 
 See each issue's own GitHub comments and the referenced source files for full technical detail.

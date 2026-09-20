@@ -1,3 +1,6 @@
+/* NOTE 2026-09-19: 2 function bodies formerly in this file have been replaced by mechanical ports from the shipped kext's decompile (Sources/*_Port.cpp; marked
+   "(re-ported mechanically: ...)" below). The analysis prose in this file describes the earlier hand-written bodies and is kept as history; see README.md,
+   "How the code was produced". */
 /*
  * IOATIR500GLContext_ClientMemoryForType.cpp
  *

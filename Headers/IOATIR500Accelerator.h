@@ -380,7 +380,7 @@ public:
     /*
      * getVRAMDescriptors - RESOLVED. Real body: loops calling a real,
      * previously-unknown per-index local method, `getVRAMDescriptor`
-     * (singular, real addr 0x290 - own body not decompiled this pass),
+     * (singular, real addr 0x290 - body transcribed since: see the declaration below),
      * once per index up to `this+0xcc`'s own count; real success gate
      * checks that count and `this+0xe4` are both still nonzero
      * afterward. See Sources/IOATIR500Accelerator_DataBufferPool.cpp.
@@ -393,7 +393,7 @@ public:
      * `IOBufferMemoryDescriptor::withOptions`, stores the requested size,
      * gets a real hardware-mappable header via vtable+0x1cc, then calls
      * a real, previously-unknown method, `init_command_buffer_header`
-     * (own body not decompiled this pass). See
+     * (body transcribed since, issue #31). See
      * Sources/IOATIR500Accelerator_DataBufferPool.cpp.
      */
     bool allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size);
@@ -455,8 +455,8 @@ public:
      * addOrphanTexture - CONFIRMED to exist (real call site in
      * IOATIR500Surface::delete_buffer_backing, issue #1 get-it-linking
      * pass - the real inverse of freeOrphanTexture above). Real
-     * signature INFERRED from that call site; own body NOT
-     * independently decompiled this pass.
+     * signature INFERRED from that call site; the body is now a
+     * mechanical port of the shipped kext's own decompile (2026-09-19).
      */
     void addOrphanTexture(IOTextureBuffer *buffer);
 

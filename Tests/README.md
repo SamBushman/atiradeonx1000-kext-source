@@ -11,6 +11,12 @@ build machinery the driver itself does - it's a normal Mac OS X
 application, built with the stock system `gcc` and linked against
 `IOKit.framework`/`CoreFoundation.framework`.
 
+## Update (2026-09-19)
+
+The rebuilt kext now has a body for every one of the 470 named methods (`function_coverage.md`, regenerated: 470/470) and builds on the Tiger G5, but it has
+**still never been loaded**: everything below ran against the *stock* driver, and "shape coverage" means call shapes are documented, not that the rebuild
+was exercised. Running this harness against a loaded rebuild is issue #42/#45 and needs a per-step authorized live test plan (#41).
+
 ## Status (2026-09-18, updated)
 
 **Shape coverage: all 81 external methods** across the 4 context classes are represented in

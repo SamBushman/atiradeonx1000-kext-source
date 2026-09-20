@@ -183,7 +183,7 @@ public:
      * (`Sources/ATIR500Surface_PrepareCompleteVRAM.cpp`, previously
      * described only as an unidentified "extended command ring" object);
      * and a fresh decompile of `ATIR500Surface::stop` (kext offset
-     * 0x3b0c0, own body not otherwise transcribed this pass), which reads
+     * 0x3b0c0; its body is now a mechanical port, 2026-09-19), which reads
      * this exact same field, passes `scratchHeader+0x120`/`+0x124` to
      * `ATIRadeonX1000::submit_buffer`, and calls `waitForTimeStamp` on
      * `pendingTimeStamp` (below) - all three sites agree exactly on both
@@ -446,7 +446,7 @@ public:
     /*
      * allocVendorTextureBuffer / releaseVendorTextureBuffer /
      * removeTransferFromGART - real overrides confirmed via `nm`
-     * cross-check (own bodies not decompiled) - see
+     * cross-check (bodies now transcribed, 2026-09-19) - see
      * `IOATIR500Accelerator.h`'s own declaration comments for the full
      * account (including a real by-hand arithmetic slip in an earlier
      * pass this session, now corrected).
@@ -465,7 +465,7 @@ public:
      * bits `0x20000000`/`0x40000000`) to choose between three further
      * real, previously-unknown functions this pass did NOT chase down
      * (found via their own already-demangled real names, but their own
-     * bodies not decompiled): `pageoff_linear_buffer`,
+     * bodies since transcribed as mechanical ports): `pageoff_linear_buffer`,
      * `pageoff_dirty_texture_with_gpu`,
      * `prepare_texture_for_pageoff_with_cpu` +
      * `pageoff_dirty_texture_with_cpu` (real addrs `0x217a0`, `0x210f0`,
