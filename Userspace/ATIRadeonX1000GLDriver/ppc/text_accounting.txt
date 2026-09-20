@@ -1,0 +1,16 @@
+__text (1711844 bytes)
+  function bodies                                                        1626832 bytes
+  companion functions (landing pads, orphans)                            14216 bytes
+  raw blocks (tables/padding as data, millicode/case code as asm)        70796 bytes
+  in none of them                                                        0 bytes
+__picsymbolstub1 (2784 bytes)
+  function bodies                                                        2784 bytes
+  companion functions (landing pads, orphans)                            0 bytes
+  raw blocks (tables/padding as data, millicode/case code as asm)        0 bytes
+  in none of them                                                        0 bytes
+__textcoal_nt (47488 bytes)
+  function bodies                                                        42624 bytes
+  companion functions (landing pads, orphans)                            4864 bytes
+  raw blocks (tables/padding as data, millicode/case code as asm)        0 bytes
+  in none of them                                                        0 bytes
+TOTAL bytes of code sections in none of them: 0

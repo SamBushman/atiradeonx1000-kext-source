@@ -1,0 +1,11 @@
+__text (124264 bytes)
+  function bodies                                                        124160 bytes
+  companion functions (landing pads, orphans)                            0 bytes
+  raw blocks (tables/padding as data, millicode/case code as asm)        104 bytes
+  in none of them                                                        0 bytes
+__picsymbolstub1 (64 bytes)
+  function bodies                                                        64 bytes
+  companion functions (landing pads, orphans)                            0 bytes
+  raw blocks (tables/padding as data, millicode/case code as asm)        0 bytes
+  in none of them                                                        0 bytes
+TOTAL bytes of code sections in none of them: 0

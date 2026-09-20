@@ -16,7 +16,10 @@ start	end	kind	owner	instructions	calls
 97b844d0	97b84538	table	_PPParserParseSourceSwizzle	26	
 97b846b4	97b8471c	table	_PPParserParseDestinationMask	26	
 97b85148	97b85274	table	_PPParserParseSwizzleCode	75	
-97b85cd8	97b85cdc	millicode	eh_pad	1	
+97b853f0	97b853f8	other	_PPParserParseSwizzleCode	2	
+97b85cd8	97b85cdc	millicode	_GetReversedAtom	1	
+97b86c5c	97b86c7c	other	_op_shl	8	
+97b86c98	97b86ca0	other	_op_pos	2	
 97b87cdc	97b87ce0	millicode	_eof_scan	1	
 97b8892c	97b88930	millicode	_mem_AddCleanup	1	
 97b889a4	97b889a8	millicode	_InitScanner	1	
@@ -93,13 +96,19 @@ start	end	kind	owner	instructions	calls
 97b98cbc	97b98dd8	switch-code	ParseSymbol	71	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
 97b98efc	97b99028	switch-code	ParseBinary	75	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
 97b99064	97b9907c	table	ParseBinary	6	
+97b99088	97b990b4	other	FUN_97b9907c	11	
 97b9925c	97b99274	table	ParseUnary	6	
+97b99280	97b992ac	other	FUN_97b99274	11	
 97b99480	97b995a0	switch-code	ParseAggregate	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
 97b99884	97b9989c	table	ParseSelection	6	
+97b998a8	97b998d4	other	FUN_97b9989c	11	
 97b99ea0	97b99eb8	table	ParseLoop	6	
+97b99ec4	97b99ef0	other	FUN_97b99eb8	11	
 97b9a034	97b9a04c	table	ParseBranch	6	
+97b9a058	97b9a084	other	FUN_97b9a04c	11	
 97b9a408	97b9a470	table	TParseContext::parseVectorFields	26	
 97b9a82c	97b9a844	table	TParseContext::error	6	
+97b9a850	97b9a87c	other	FUN_97b9a844	11	
 97b9ace8	97b9ad30	table	TParseContext::lValueErrorCheck	18	
 97b9b22c	97b9b26c	table	TParseContext::constructorErrorCheck	16	
 97b9cdd0	97b9cef0	switch-code	TParseContext::arraySetMaxSize	72	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
@@ -115,6 +124,7 @@ start	end	kind	owner	instructions	calls
 97ba39cc	97ba3d2c	table	yyparse	216	
 97bac350	97bac5a0	table	yylex	148	
 97bae338	97bae350	table	_CPPWarningToInfoLog	6	
+97bae35c	97bae388	other	_CPPWarningToInfoLog	11	
 97baf1c8	97baf2e4	switch-code	_updateExtensionBehavior	71	__ZN13TInfoSinkBase6appendEPKc,__ZNSs4_Rep10_M_destroyERKSaIcE,__ZNSsC1EPKcRKSaIcE,_sprintf
 97baf4e4	97baf514	table	PrintAttribute	12	
 97baf5f4	97baf608	table	PrintAttribute	5	
@@ -178,6 +188,7 @@ start	end	kind	owner	instructions	calls
 97bcdcb0	97bcdcd0	table	_InterpreterTestCR	8	
 97bd059c	97bd0760	table	_InterpreterEmulateOp	113	
 97bd35f8	97bd35fc	millicode	_InterpreterTextureSamplerInitialise	1	
+97bd3c20	97bd3c28	other	_InterpreterTextureSamplerSampleTexel3D	2	
 97bd58b8	97bd58bc	millicode	_InterpreterNoiseGeneratorInitialise	1	
 97bd63b0	97bd63b4	millicode	_InterpreterNoiseGeneratorCalculate3D	1	
 97bd6400	97bd6404	millicode	_InterpreterRasterOpMachineInitialise	1	
@@ -264,6 +275,7 @@ start	end	kind	owner	instructions	calls
 97c03cf8	97c03d0c	table	_glpPPShaderToProgramString	5	
 97c04354	97c04380	table	_glpPPShaderToProgramString	11	
 97c05e1c	97c05ea0	table	_AddOpToJumpTable	33	
+97c08028	97c08030	other	_GetStreamArray	2	
 97c08fcc	97c08fe0	table	_GetRegister	5	
 97c09d30	97c09d44	table	_RegistersCleanup	5	
 97c0a13c	97c0a1c8	table	_InstructionAdd	35	
@@ -279,9 +291,12 @@ start	end	kind	owner	instructions	calls
 97c0eee8	97c0ef6c	table	_EmulateOp	33	
 97c0f018	97c0f074	table	_UpdateScope	23	
 97c0fc8c	97c0fd08	table	_UnrollConstantLoopsSimple	31	
+97c102ec	97c102f4	other	_instructionIndexHashFunction	2	
+97c10924	97c1092c	other	_glpDCBAlloc	2	
 97c12020	97c12118	switch-code	_PPParserBuildErrorString	62	
 97c19134	97c1913c	millicode	std::bad_alloc::~bad_alloc	2	
 97c195ec	97c19620	table	read_encoded_value_with_base	13	
+97c1992c	97c19934	other	get_ttype_entry	2	
 97c19cfc	97c19d00	millicode	get_ttype_entry	1	
 97c1a224	97c1a23c	millicode	get_globals_init_once	6	
 97c1a274	97c1a28c	millicode	get_globals_init_once	6	
@@ -291,5 +306,6 @@ start	end	kind	owner	instructions	calls
 97c1afc4	97c1b084	table	_execute_cfa_program	48	
 97c1c504	97c1c538	table	_read_encoded_value_with_base	13	
 97c1c838	97c1c83c	millicode	___deregister_frame_info_bases	1	
+97c1ddfc	97c1de10	other	save_world	5	
 97c32138	97c32188	table	getQualifierString	20	
 97c322a0	97c322dc	table	TType::getBasicString	15	

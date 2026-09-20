@@ -1,0 +1,2 @@
+data_in_text.c: 0 runs, 0 words (plain copies of the binary)
+raw_code.c: 3 blocks assembled and compared byte-for-byte with the stock binary: 3 identical, 0 mismatched (0 written as .long+mnemonic comment, 3 as real mnemonics)

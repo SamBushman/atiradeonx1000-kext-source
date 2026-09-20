@@ -180,7 +180,7 @@ def has_jumptable(rng):
         i = bisect.bisect_left(saddr, lo); j = bisect.bisect_left(saddr, hi)
         if any(op == 'bctr' for _, op, _r in srows[i:j]): return True
     return False
-def closure(a, depth=4):
+def closure(a, depth=int(os.environ.get("CLOSURE_DEPTH", "4"))):
     """callees of the function plus, recursively, of all code it jumps into with a plain `b` (Ghidra attributes shared tails to either owner)"""
     rng0 = franges.get(a) or [(a, a + fsize.get(a, 4))]
     allc = collections.Counter(count_range(rng0)); names = set(); seen = set(); todo = [rng0]; d = 0

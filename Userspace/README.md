@@ -51,26 +51,31 @@ tail-call edge itself. `LOWCOUNT` (informational) lists functions where the stoc
 * an undeclared global typed `unsigned` made gcc delete an `x < 0` branch (`___cxa_get_globals`): undeclared globals now default to signed.
 * AltiVec (`vec16`, `vectorPermute`, `vectorConditionalSelect`) in the GLDriver memcpy/blit helpers.
 
-### Code that no function owns - now transcribed too
+### Code that no function owns - all of it is transcribed too
 
-After the first pass, `unowned_blocks.tsv` listed everything in `__text` that no Ghidra function claims. Two kinds were real code and are now
-transcribed as companion functions (each compiles as C and passes the same callee check):
+`text_accounting.txt` (per binary, `Tools/userspace/text_complete.py`) splits every byte of the code sections (`__text`, `__picsymbolstub1`,
+`__textcoal_nt`) into function bodies / companion functions / raw blocks: **0 bytes are in none of them**, in all five binaries.
 
 * `landing_pads/` - C++ exception landing pads (blocks that end in `_Unwind_Resume`; only the unwinder reaches them, so no decompile of the owner
   contains them). 566 in GLDriver, 44 in libGLProgrammability, named `eh_pad_<addr>`. Entry points come from the binary's own exception tables:
   `Tools/userspace/lsda.py` decodes `__eh_frame` + `__gcc_except_tab` into `eh_callsites.tsv` (which call ranges of which function jump to which
-  pad, and whether it is a cleanup or a catch). Every landing pad in those tables is now covered (567 / 40). A pad runs in its owner's frame, so it
-  shows `unaff_r*` pseudo-registers for the owner's saved registers. `pad_owners.tsv` names the owner.
-* `unowned_code/` - code reached only through data (indirect leaf functions such as GLDriver's 40 `mulli/addi/stw/blr` accessors, case-like
-  blocks): 525 in GLDriver, 40 in libGLProgrammability, named `orph_<addr>`.
-
-What is still unowned (`unowned_blocks.tsv`): alignment padding, embedded switch offset tables (data), register save/restore millicode entry points
-(compiler prologue/epilogue helpers, nothing to write in C) and `switch-code`: case bodies of switches Ghidra recovered, which are inside the
-owner's decompile even though the owner's recorded body does not list them (the check for callees lost there reports 0).
+  pad, cleanup or catch). Every landing pad in those tables is covered (567 / 40). A pad runs in its owner's frame, so its C shows `unaff_r*`
+  pseudo-registers for the owner's saved registers. Compile-clean and callee-verified.
+* `unowned_code/` - code reached only through data (indirect leaf functions such as GLDriver's 40 `mulli/addi/stw/blr` accessors): 525 in
+  GLDriver, 40 in libGLProgrammability, named `orph_<addr>`. Compile-clean and callee-verified.
+* `raw/data_in_text.c` - every embedded switch offset table and alignment-padding run as `const unsigned int text_data_<addr>[]` (words read
+  from the binary; each table carries its `bctr` and decoded targets in a comment).
+* `raw/raw_code.c` - register save/restore millicode, clipped function entries and jump-table case bodies (code that Ghidra's owner decompile
+  already contains when it recovered the switch, and which is kept here as the machine code itself) as top-level asm: real mnemonics wherever the
+  Tiger assembler reproduces the exact machine word (6 blocks fall back to `.long` + mnemonic comment). **Every block is assembled on the G5 and
+  compared byte-for-byte with the stock binary** (`raw/verify.txt`: GLDriver 677/677, libGLProgrammability 405/405, GA/VA/libGL 3/3 identical).
 
 `_ShCompile` (libGLProgrammability) is complete: its four constant-selector dispatch `bctr`s are rewritten as direct `b` in the analysed copy of the
 binary (`gs/PatchConstSwitch.java`; the stock file is untouched). The earlier decompiler crash was a JumpTable override left under the patched
 instruction, not the target code.
+
+Not code and not covered here: the data sections (`__cstring`, `__const`, literals, `__eh_frame`/`__gcc_except_tab`). Only the exception tables
+are decoded (`eh_callsites.tsv`).
 
 ### Known residuals (explained, not hidden)
 

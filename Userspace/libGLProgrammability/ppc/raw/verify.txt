@@ -1,0 +1,2 @@
+data_in_text.c: 270 runs, 5150 words (plain copies of the binary)
+raw_code.c: 405 blocks assembled and compared byte-for-byte with the stock binary: 405 identical, 0 mismatched (0 written as .long+mnemonic comment, 405 as real mnemonics)

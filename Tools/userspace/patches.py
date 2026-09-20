@@ -17,6 +17,8 @@ def _conv_with(subs):
     return f
 
 PATCHES = {
+    # a computed call whose base Ghidra printed as a function name: the sum is an address, call through it
+    'case_7f8f8': _conv_with([('(*(FUN_00001b34 + *(int *)(FUN_00001b34 + (iVar21 - 0x87d5U) * 4 + unaff_r31) + unaff_r31))();', '((int (*)())((unsigned char *)FUN_00001b34 + *(int *)((unsigned char *)FUN_00001b34 + (iVar21 - 0x87d5U) * 4 + unaff_r31) + unaff_r31))();')]),
     # the handler argument is a function pointer Ghidra typed as a plain byte pointer
     '__cxxabiv1____terminate': _conv_with([('(*param_1)();', '((int (*)())param_1)();')]),
     '__cxxabiv1____unexpected': _conv_with([('(*param_1)();', '((int (*)())param_1)();')]),

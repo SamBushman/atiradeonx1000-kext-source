@@ -25,7 +25,7 @@ for l in open(rng):
             if r: a, b = r.split('-'); own.append((int(a, 16), int(b, 16), f[1]))
 if extra:
     for l in open(extra):
-        a_, b_, o_ = l.rstrip('\n').split('\t'); own.append((int(a_, 16), int(b_, 16), 'eh_pad'))
+        a_, b_ = l.split('\t')[:2]; own.append((int(a_, 16), int(b_, 16), 'extra'))
 own.sort(); merged = []
 for a, b, n in own:
     if merged and a <= merged[-1][1]: merged[-1][1] = max(merged[-1][1], b)
