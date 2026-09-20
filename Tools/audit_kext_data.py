@@ -44,6 +44,9 @@ print('stock defines %d data symbols, ours %d; stock-only %d, ours-only %d, size
 for k in only_a: print('STOCK-ONLY %-70s %s %d' % (k[:70], za[k][0], za[k][1]))
 for k in only_b: print('OURS-ONLY  %-70s %s %d' % (k[:70], zb[k][0], zb[k][1]))
 for k, a, b in diff: print('SIZE %-70s stock %s %d ours %s %d' % (k[:70], a[0], a[1], b[0], b[1]))
+secdiff = [(k, za[k][0], zb[k][0]) for k in za if k in zb and za[k][0] != zb[k][0]]
+print('section differs %d' % len(secdiff))
+for k, a, b in secdiff: print('SECTION %-70s stock %s ours %s' % (k[:70], a, b))
 
 # ---- content match: is a stock-only data symbol's content present in our build under another name? (pointer words = relocations are wildcards)
 def relocwords(d, secs):
@@ -102,3 +105,18 @@ for k in only_a:
     else:
         missing += 1; print('  %-62s %5d bytes: NOT FOUND in our build' % (k[:62], sz))
 print('%d stock data symbols with content not found' % missing)
+
+# ---- content match of same-named symbols: over min(stock size, our size) bytes, relocated words are wildcards
+print('\n-- content comparison of data symbols defined by both (over the shorter of the two extents; relocated words are wildcards):')
+bad = 0; checked = 0
+for k in sorted(set(za) & set(zb)):
+    s1, n1 = za[k]; s2, n2 = zb[k]
+    if s1 not in ('__const', '__data') or s2 not in ('__const', '__data') or k not in sa or k not in sb: continue
+    n = min(n1, n2)
+    a1, b1, m1 = sba[s1]; a2, b2, m2 = sbb[s2]
+    o1 = sa[k][1] - a1; o2 = sb[k][1] - a2
+    checked += 1
+    diffs = [j for j in range(n) if not (m1[o1 + j] or m2[o2 + j]) and b1[o1 + j] != b2[o2 + j]]
+    if diffs:
+        bad += 1; print('  CONTENT DIFFERS %-60s first diff at +0x%x (%d bytes differ of %d)' % (k[:60], diffs[0], len(diffs), n))
+print('%d symbols compared, %d differ' % (checked, bad))

@@ -26,9 +26,9 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
     UInt32 param_17, unsigned char param_18, long param_19, long param_20, long param_21, long param_22,
     UInt32 param_23, UInt32 param_24, bool param_25) {
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(accelerator);
-    static const UInt32 out_fmt[5] = { 0x00000001, 0x00000000, 0x00000001, 0x00000005, 0x00000015 };
-    static const UInt32 rb3d_dst_format[5] = { 0x00000009, 0x0000000f, 0x00000006, 0x0000000a, 0x00000007 };
-    static const UInt32 texture_type[5] = { 0x00000000, 0x0000000a, 0x0000000c, 0x0000000e, 0x0000001d };
+    static UInt32 out_fmt[5] = { 0x00000001, 0x00000000, 0x00000001, 0x00000005, 0x00000015 };
+    static UInt32 rb3d_dst_format[5] = { 0x00000009, 0x0000000f, 0x00000006, 0x0000000a, 0x00000007 };
+    static UInt32 texture_type[5] = { 0x00000000, 0x0000000a, 0x0000000c, 0x0000000e, 0x0000001d };
 
   float fVar1;
   float fVar2;

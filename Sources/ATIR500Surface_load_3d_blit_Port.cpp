@@ -29,26 +29,10 @@
 /* The three real function-local statics of load_3d_blit (mangled `...load_3d_blitEPmP20ATIR500SurfaceBufferE12samplesTable`
    @ 0x4c2f4, `...11mspos0Table` @ 0x4c2d8, `...11mspos1Table` @ 0x4c2bc); real content read from the kext binary.
    NOT the same symbol as the global `_samplesTable` (0x4c268). */
-namespace {
-const UInt32 kLoad3dSamplesTable[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE12samplesTable") = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000000, 0x00000003, 0x00005b00,
-    0x00008650, 0x0000c4f0, 0x0000f040, 0x00014130,
-    0x00018910, 0x00019a50, 0x0001b3f0, 0x000273f0,
-};
-const UInt32 kLoad3dMspos0Table[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE11mspos0Table") = {
-    0x66666666, 0x66666666, 0x33393993, 0x66666666,
-    0x11a4417a, 0x66666666, 0x11951153, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000002,
-    0x00000000, 0x00000003, 0x00005b00, 0x00008650,
-};
-const UInt32 kLoad3dMspos1Table[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE11mspos1Table") = {
-    0x06666666, 0x06666666, 0x03393939, 0x06666666,
-    0x01171717, 0x06666666, 0x017b37b9, 0x66666666,
-    0x66666666, 0x33393993, 0x66666666, 0x11a4417a,
-    0x66666666, 0x11951153, 0x00000000, 0x00000000,
-};
-}
+/* Defined (contiguous, stock layout) in ATIR500Surface_ConstRun.cpp; indexed with 4-bit values, i.e. past their 28 bytes, exactly as the stock code does. */
+extern const UInt32 kLoad3dSamplesTable[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE12samplesTable");
+extern const UInt32 kLoad3dMspos0Table[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE11mspos0Table");
+extern const UInt32 kLoad3dMspos1Table[16] asm("__ZZN14ATIR500Surface12load_3d_blitEPmP20ATIR500SurfaceBufferE11mspos1Table");
 
 /* real addr 0x3d4c0 */
 UInt32 *ATIR500Surface::load_3d_blit(UInt32*param_1, ATIR500SurfaceBuffer *real_param_2) {

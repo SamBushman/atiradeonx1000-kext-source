@@ -256,7 +256,7 @@ extern "C" void   FUN_0003cf24(void *dest, const void *constTable, UInt32 byteCo
 /* shape_surface()::C.146 - real addr 0x4c284 in __const, 0x38 bytes. Extracted from the binary (issue #58
  * follow-up): all 14 words are zero (and no relocations overlap the range), i.e. the compiler's
  * copy of an all-zero initialiser for the local `localMipOffsets[14]`. */
-extern const UInt32 kShapeSurfaceDefaultMipTable[14] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+/* now defined in ATIR500Surface_ConstRun.cpp under the stock symbol name (issue #62) */
 
 /* FIXED (issue #1, first build attempt): this function previously wrote
  * raw byte offsets as `this[N] = static_cast<ATIR500Surface>(...)`. Since

@@ -106,13 +106,7 @@ extern "C" UInt32 FormatTableLookup_0x0004d2e4(UInt32 byteOffset) {
  * (`(tilingDegreeBits >> 0x12) & 0x3c`), so nothing beyond entry 15 is
  * ever real reachable.
  */
-extern const UInt32 kSamplesTable[16] asm("_samplesTable");
-extern const UInt32 kSamplesTable[16] = {
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000002, 0x00000000, 0x00000003, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-    0x00000000, 0x00000000, 0x00000000, 0x00000000,
-};
+extern const UInt32 kSamplesTable[16] asm("_samplesTable");   /* defined in ATIR500Surface_ConstRun.cpp (contiguous with its stock neighbours) */
 
 extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset) {
     return kSamplesTable[byteOffset / 4];
@@ -124,7 +118,8 @@ extern "C" UInt32 SamplesTableLookup(UInt32 byteOffset) {
  * Type-0-style PM4 pairs throughout, per this struct's own header
  * comment (ATIRadeonX1000Types.h).
  */
-extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet = { {
+extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet __attribute__((section("__DATA,__data"))) = {   /* writable __data as in the stock */
+ {
     0x00001393, 0x0000000a, 0x000013c6, 0x00000003, 0x000005c8, 0x00020000, 0x000010ea, 0x2da49525,
     0x000010fa, 0x00ffffff, 0x00001006, 0x00000000, 0x00011004, 0x66666666, 0x06666666, 0x00001008,
     0x00000000, 0x000010e9, 0x00000000, 0x000013c7, 0x00000000, 0x000013c1, 0x00000000, 0x00000850,
@@ -201,5 +196,8 @@ extern "C" const double DOUBLE_0004c400 = 4096.0;
  *   global_dummy_read_back_a_register - a sink that a register read-back is
  *     stored into to force the preceding register write to post.
  */
-extern "C" UInt32 gl_assert_wait_timeout_event = 0;
-extern "C" UInt32 global_dummy_read_back_a_register = 0;
+/* zero-filled __DATA,__bss as in the stock (a C++ definition with or without `= 0` would land in __data / __common instead) */
+asm(".globl _gl_assert_wait_timeout_event\n"
+    ".zerofill __DATA,__bss,_gl_assert_wait_timeout_event,4,2\n");
+/* a tentative (common) definition in the stock (__common); emitted as assembler .comm because -fno-common puts a C++ definition in __bss */
+asm(".comm _global_dummy_read_back_a_register,4\n");

@@ -28,7 +28,7 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 
 
 extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");
-extern const UInt32 kShapeSurfaceDefaultMipTable[14];   /* shape_surface()::C.146 (real 0x4c284, 0x38 bytes, all zero), defined in ATIR500Surface_ShapeSurface.cpp */
+extern const UInt32 kShapeSurfaceDefaultMipTable[14] asm("__ZZN14ATIR500Surface13shape_surfaceEvE5C.146");   /* shape_surface()::C.146 (real 0x4c284, 0x38 bytes, all zero), defined in ATIR500Surface_ShapeSurface.cpp */
 
 /* real addr 0x3c130 */
 void ATIR500Surface::shape_surface() {

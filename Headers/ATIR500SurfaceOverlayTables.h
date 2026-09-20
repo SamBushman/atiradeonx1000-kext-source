@@ -9,7 +9,7 @@ extern const UInt32 kMode10Table[84] asm("_Mode10Table");
 extern const UInt32 kMode9Table[84] asm("_Mode9Table");
 extern const UInt32 kMode6Table[56] asm("_Mode6Table");
 extern const UInt32 kMode34Table[35] asm("_Mode34Table");
-extern const UInt32 kFilterSetupArrayOfSets[1026] asm("_FilterSetupArrayOfSets");
+extern const UInt32 kFilterSetupArrayOfSets[608] asm("_FilterSetupArrayOfSets");
 extern "C" const double CO[14];
 
 #endif

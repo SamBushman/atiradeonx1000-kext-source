@@ -14,7 +14,6 @@ tags (`CONFIRMED`/`INFERRED`/`UNKNOWN`) inside older sections describe names and
 | Vendor bug in `allocAllSlaveSwapBuffers` (issue #32, section 22) | Deliberately left as Apple has it; needs hardware to confirm the hang path |
 | Userspace binaries: differential test (issue #60) | The recompiled GLSL compiler (libGLProgrammability) has not been run against the stock one on real shaders; callee equivalence + compilation is strong evidence, not proof (`Userspace/README.md`) |
 | Userspace binaries: linking (issue #61) | The corpora compile part by part and reference data by Ghidra's names; they are not linked into loadable bundles. Data sections are transcribed as data (`Userspace/<bin>/ppc/data/`) but not laid out at the original addresses |
-| Kext data leftovers and the `accelerator+0x238` type (issue #62) | `shape_surface`'s compiler constant `C.146`, and the static in `write_3dtexquad_cmds_for_copy_buffer_using_DMA` (writable 20 bytes in stock, a const table in ours) - see `Ledger/data/README.md` |
 | i386 slices (kext and userspace) | Not transcribed; not required |
 | Ghidra limits (userspace) | C++ exception landing pads and case bodies are kept as companion functions / byte-verified asm rather than decompiled in their owners; Ghidra decompiler bugs would survive into the corpora |
 
@@ -1286,7 +1285,7 @@ A third systematic sweep for every remaining declared-but-bodyless function and 
   submit_flip_buffer`'s base-class vtable slot is a genuine null - the prior claim (issue #29) had never
   actually been checked, only assumed.
 
-## 24. `ATIR500Memory`'s `+0x4c` vtable slot and `accelerator+0x238`'s object type - PARTIAL PROGRESS, issue #52 (open)
+## 24. `ATIR500Memory`'s `+0x4c` vtable slot and `accelerator+0x238`'s type - RESOLVED (issues #52, #62)
 
 The `+0x4c` (and `+0x48`) vtable slots were reported RESOLVED (issue #52) as `OSObject::_RESERVEDOSObject0/1()`
 no-ops. **That was WRONG - CORRECTED, issue #58 follow-up.** The class's own vtable (`__ZTV13ATIR500Memory`, 0x49078;
@@ -1297,12 +1296,19 @@ landed two slots too far. Inside those functions, the `(*pcRam00000048)()` / `(*
 qualified base calls `OSObject::init()` / `OSObject::free()` (relocations against `__ZTV8OSObject`; slots +0x48/+0x4c
 of the kernel's OSObject vtable, read statically from /mach_kernel). See Sources/ATIR500Memory_Lifecycle.cpp.
 
-`accelerator+0x238`'s own real object type
-remains OPEN - identifying it needs a *live accelerator instance's* own runtime address (to read its `+0x238`
-field, then identify what the pointed-to object's own vtable belongs to), a fundamentally different problem
-from reading static kext data; `ioreg` doesn't expose raw kernel addresses. Left genuinely open rather than
-forcing a broader, riskier kernel-memory pattern-scan for what the issue itself already flagged as
-lowest-priority.
+`accelerator+0x238` is not an object pointer - RESOLVED statically (issue #62, no live read needed). The field is `VendorCommandBuffer+0x14` of a
+`VendorCommandBuffer` (0x1c bytes) embedded in the accelerator at `+0x224`: `IOATIR500Accelerator::start` zero-initialises it (0x2860-0x2884),
+then `allocCommandBuffer(this + 0x224, 0x1000)` (call at 0x2df8; the matching `freeCommandBuffer(this + 0x224)` is at 0x67e0) fills it - the
+`IOBufferMemoryDescriptor` goes to `+8` (accelerator `+0x22c`, on which `start` calls `prepare(kIODirectionInOut)` = vtable +0x144 and `freeCommandBuffer`'s path
+`complete` = +0x148), the size to `+0x18` (`+0x23c`), and `+0x14` (`+0x238`) receives the result of that descriptor's vtable +0x1cc call, which resolves in
+`/mach_kernel`'s `__ZTV24IOBufferMemoryDescriptor` (0x34e7d0, slot +0x1cc) to `IOBufferMemoryDescriptor::getBytesNoCopy()` - the kernel virtual address of the buffer's
+bytes, then handed to `init_command_buffer_header(VendorCommandBufferHeader *, size)`. So `accelerator+0x238` is a `VendorCommandBufferHeader *` (a plain address into
+the accelerator's primary command buffer), which is why every use is address arithmetic: cache-line flush bounds in `start` (`dcbst/dcbf` on `+0x238 + 0x20`), the
+`X - accelerator[0x238] + accelerator[0x228]` virtual-to-bus conversions in `start_promo4_engine`/`start_xdct_engine`/`initialize_hardware`, and `+0x238 + 4` in `start`.
+The whole-`.text` raw search (`stw/lwz/... 0x238(rX)`, no `addi rX,rY,0x238`) finds exactly two stores: the zero-init in `IOATIR500Accelerator::start`, and one in
+`ATIR500GLContext::restore_state_destroyed_by_pageoff` that writes a register value into the command stream through a different base register (unrelated). The loads in
+`ATIR500Surface::stop/complete_vram/prepare_vram` are through the surface's accelerator pointer (`this+0xd50`) and pass `+0x234`/`+0x238` on to accelerator virtuals.
+(The roles of the embedded buffer's other words - `+0x228`, `+0x230`, `+0x234` - are not established by this; only `+8` (descriptor), `+0x14` (address) and `+0x18` (size) are.)
 
 ## 25. `freeAllContextBuffers` (GL/2D/DVD) - RESOLVED (issue #54 closed; bodies in the ledger)
 
