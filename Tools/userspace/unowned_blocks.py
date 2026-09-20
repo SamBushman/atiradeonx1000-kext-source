@@ -10,7 +10,7 @@ attributed to the function whose own span contains it (or the nearest preceding 
 Columns: start, end, kind, owner function, instruction count, calls made (names)."""
 import sys, re, bisect
 dis, rng, led, out = sys.argv[1:5]
-extra = sys.argv[5] if len(sys.argv) > 5 else None   # pad_extents.tsv: landing pads transcribed as companion functions
+extras = sys.argv[5:]   # pad_extents.tsv: landing pads transcribed as companion functions
 rows = []
 for l in open(dis):
     m = re.match(r'^([0-9a-f]{8})\t(\S+)\s*(.*)$', l)
@@ -23,7 +23,7 @@ for l in open(rng):
         names[f[0]] = f[1]
         for r in f[3].split(';'):
             if r: a, b = r.split('-'); own.append((int(a, 16), int(b, 16), f[1]))
-if extra:
+for extra in extras:
     for l in open(extra):
         a_, b_ = l.split('\t')[:2]; own.append((int(a_, 16), int(b_, 16), 'extra'))
 own.sort(); merged = []
