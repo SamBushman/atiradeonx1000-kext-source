@@ -106,6 +106,16 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    callers passed `SUB41(this,0)`. WidenParams (now matched by namespace-qualified name, so `TParseContext::error` is not touched; PIC stubs by
    their `<EXTERNAL>::` name) on the two functions and the stub, callers re-decompiled (b3/widen2_redump_glprog.txt). Found by
    `Tools/userspace/inreg_liveness.py` (Userspace/README.md, "Undeclared argument registers").
+12. Floating-point arguments and results. Darwin's PPC ABI gives every float argument a slot in the GPR sequence too (a double shadows two GPRs)
+   and passes f1..f13 in registers; Ghidra's cspec is SysV. `gs/DarwinStorage.java` lists every signature whose storage differs: only GLDriver's
+   `_ecvt(double, int, int*, int*)` had an integer in the wrong register (r3/r4/r5 instead of r5/r6/r7), so its caller FUN_000cdc3c (the driver's
+   float formatter) passed `param_2` as the decpt/sign pointers and its minus-sign / negative-exponent code was pruned as unreachable; the others
+   only move the unread fparam_9..13. FUN_000cdc3c's own value is an undeclared f1 (`in_f1`) that all 17 stock callers load - `gs/AddDoubleParams.java`
+   (found by `inreg_liveness.py ... fpr`, which classifies the 19 functions with `in_fN`: that one real, the rest forwarded garbage). The libm
+   imports had no signature, so results were read from r3 / an unassigned `extraout_f1`: `gs/SetLibmSignatures.java` gives them their prototypes
+   (GLDriver 11, glprog 17, VA 2 functions + stubs) and their callers are re-decompiled; ghidra2c also declares them with their real return type.
+   `Tests/userspace/ftoa_test.c` compares FUN_000cdc3c stock vs rebuilt on 20 values: identical (the build before step 12 died with SIGBUS; with only
+   the ecvt/f1 fixes every exponent printed as `e00`).
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

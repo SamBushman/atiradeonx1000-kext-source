@@ -1,0 +1,25 @@
+entry	function	register	class	callers setting it	first reader
+97b97654	OutputConstantUnion	f3	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97b97654	OutputConstantUnion	f4	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97b97654	OutputConstantUnion	f5	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97b97654	OutputConstantUnion	f6	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97b97654	OutputConstantUnion	f7	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97b97654	OutputConstantUnion	f8	PASS-indirect	callers set it 0/0	97b97690 bctrl 
+97bbc010	ParseOperand::GetString	f3	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97bbc010	ParseOperand::GetString	f4	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97bbc010	ParseOperand::GetString	f5	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97bbc010	ParseOperand::GetString	f6	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97bbc010	ParseOperand::GetString	f7	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97bbc010	ParseOperand::GetString	f8	PASS-no	callers set it 0/0	97bbc03c bl 0x97c1e080	; symbol stub for: _strlen
+97be9d30	_glpPPDisassemble	f3	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97be9d30	_glpPPDisassemble	f4	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97be9d30	_glpPPDisassemble	f5	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97be9d30	_glpPPDisassemble	f6	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97be9d30	_glpPPDisassemble	f7	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97be9d30	_glpPPDisassemble	f8	PASS-no	callers set it 0/0	97be9d68 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f3	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f4	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f5	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f6	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f7	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc
+97c01820	_glpPPShaderToProgramString	f8	PASS-no	callers set it 0/0	97c01870 bl 0x97c1e0c0	; symbol stub for: _malloc

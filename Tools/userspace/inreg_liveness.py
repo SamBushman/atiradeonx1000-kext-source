@@ -9,9 +9,11 @@ the function's RANGES, jump tables followed):
 For PASS the callees the value reaches are checked the same way (3 levels): PASS-yes = some callee reads it (the stock passes the caller's value on,
 the C passes an uninitialised local), PASS-no = none does (harmless), PASS-vararg = it only reaches a variadic callee's `...` slots,
 PASS-indirect / PASS-import = it reaches a call through a pointer / an import of unknown arity, PASS-deep = more than 3 levels.
-Prints one row per (function, register): entry, name, register, class, first reading instruction."""
+With a 4th argument `fpr` the same for `in_f1`..`in_f13` (calls read f1..f13 and clobber f0..f13, `blr` reads f1/f2; the PASS callee check
+and param_used do not apply). Prints one row per (function, register): entry, name, register, class, first reading instruction."""
 import sys, re, glob, bisect
 dis, rng_f, dump = sys.argv[1:4]
+FPR = len(sys.argv) > 4 and sys.argv[4] == 'fpr'   # classify `in_f1`..`in_f13` (floating-point argument registers) instead
 ins = {}; label = {}; _pl = None
 for l in open(dis, errors='replace'):
     m = re.match(r'([0-9a-f]{8})\t(\S+)\s*(.*)', l.rstrip())
@@ -31,8 +33,22 @@ STORE = re.compile(r'^(st[bhw]|stmw|stfd|stfs|stfiwx|stvx|stwcx|sthbrx|stwbrx|dc
 NODEF = ('cmpw', 'cmpwi', 'cmplw', 'cmplwi', 'mtspr', 'mtctr', 'mtlr', 'mtcrf', 'mtocrf', 'tw', 'twi', 'sync', 'isync', 'eieio', 'mtxer')
 CALL_CLOBBER = {0} | set(range(3, 13))
 def regs(s): return [int(x) for x in GPR.findall(s.split(';')[0])]
+FREG = re.compile(r'\bf(\d{1,2})\b')
+def du_f(a):
+    """du() for the floating-point registers"""
+    op, arg = ins[a]; r = [int(x) for x in FREG.findall(arg.split(';')[0])]
+    if op in ('bl', 'bl+', 'bl-', 'bctrl', 'blrl'): return set(range(0, 14)), set(), set(range(1, 14)), 'call'
+    if op == 'blr' or op.startswith('blr'): return set(), set(), {1, 2, 'ret'}, 'ret' if op == 'blr' else 'cond'
+    if op == 'b': return set(), set(), set(), 'jump'
+    if op == 'bctr': return set(), set(), set(), 'bctr'
+    if op.startswith('b'): return set(), set(), set(), 'cond'
+    if not r: return set(), set(), set(), 'seq'
+    if op.startswith('stf') or op.startswith(('fcmp', 'mtfsf')): return set(), set(r), set(), 'seq'
+    if op.startswith('lf') or op.startswith('mffs'): return {r[0]}, set(), set(), 'seq'
+    return {r[0]}, set(r[1:]), set(), 'seq'      # fadd fD,fA,fB / fmr / fmadd fD,fA,fC,fB / frsp / fctiwz ...
 def du(a):
     """(defs, real uses, call uses, successors-kind) of the instruction at a"""
+    if FPR: return du_f(a)
     op, arg = ins[a]; r = regs(arg)
     if op in ('bl', 'bl+', 'bl-', 'bctrl', 'blrl'):
         return CALL_CLOBBER, set(), set(ARGS), 'call'
@@ -80,11 +96,11 @@ def classify(ent):
         elif k == 'cond': s = [a + 4] + ([t] if t is not None else [])
         elif k == 'jump':
             if t is not None and owned(t) and t not in ENTRIES - {ent}: s = [t]
-            else: info[a] = (d, u, set(ARGS), k)   # a tail call: argument registers go to the callee
+            else: info[a] = (d, u, set(range(1, 14)) if FPR else set(ARGS), k)   # a tail call: argument registers go to the callee
         elif k == 'bctr':
             tt = [x for x in table_targets(a) if owned(x)]
             if tt: s = tt
-            else: info[a] = (d, u, set(ARGS), k)   # a tail call through ctr
+            else: info[a] = (d, u, set(range(1, 14)) if FPR else set(ARGS), k)   # a tail call through ctr
         succ[a] = [x for x in s if x in info]
     live = {k_: {a: set() for a in addrs} for k_ in ('real', 'ret', 'all')}
     changed = True
@@ -97,6 +113,7 @@ def classify(ent):
                 out = set().union(*(live[k_][x] for x in succ[a])) if succ[a] else set()
                 n = use | (out - d)
                 if n != live[k_][a]: live[k_][a] = n; changed = True
+    global LAST_LIVE; LAST_LIVE = live   # per instruction, for callers that ask about a point inside the function
     return live['real'].get(ent, set()), live['ret'].get(ent, set()), live['all'].get(ent, set()), info, succ
 def first_reader(ent, reg, info, succ, real):
     seen = set(); todo = [ent]
@@ -108,12 +125,35 @@ def first_reader(ent, reg, info, succ, real):
         if reg in d: continue
         todo.extend(succ[a])
     return None
+CALLERSET = {}
+_calls = None
+def fpr_callers(ent, reg):
+    """direct `bl ent` sites whose preceding instructions (back to the previous call / return / label target) write f<reg>: 'set N/M'"""
+    global _calls
+    if _calls is None:
+        _calls = {}
+        for a, (op, arg) in ins.items():
+            m = re.match(r'0x([0-9a-f]+)', arg)
+            if op in ('bl', 'b') and m: _calls.setdefault(int(m.group(1), 16), []).append(a)
+    sites = _calls.get(ent, []); n = 0
+    for a in sites:
+        b = a - 4
+        while b in ins and a - b < 200:
+            op, arg = ins[b]
+            if op in ('bl', 'blr', 'bctrl', 'b', 'bctr'): break
+            fr = FREG.findall(arg.split(';')[0])
+            if fr and int(fr[0]) == reg and not op.startswith(('stf', 'fcmp')): n += 1; break
+            b -= 4
+    return 'callers set it %d/%d' % (n, len(sites))
 _cache = {}
+LAST_LIVE = None
 IMPORTS = {}
 # argument words of the imports the forwarded registers reach (the C prototypes; `operator new(unsigned long)` = __Znwm)
 ARITY = {'_memset': 3, '_memcpy': 3, '_memmove': 3, '_memcmp': 3, '_malloc': 1, '_calloc': 2, '_realloc': 2, '_free': 1, '_strlen': 1,
          '_strcat': 2, '_strcpy': 2, '_strncpy': 3, '_strcmp': 2, '_strncmp': 3, '_getpid': 0, '_pthread_mutex_lock': 1, '_pthread_mutex_unlock': 1,
          '__Znwm': 1, '__Znam': 1, '__ZdlPv': 1, '__ZdaPv': 1, '_abort': 0, '_bzero': 2}
+FARITY = {'_ecvt': 1, '_fcvt': 1, '_ldexp': 1, '_frexp': 1, '_modf': 1, '_floor': 1, '_ceil': 1, '_sqrt': 1, '_fabs': 1, '_pow': 2, '_fmod': 2,
+          '_sin': 1, '_cos': 1, '_tan': 1, '_atan2': 2, '_exp': 1, '_log': 1, '_log10': 1, '_floorf': 1, '_ceilf': 1, '_sqrtf': 1, '_powf': 2}
 def cls(ent):
     if ent not in _cache: _cache[ent] = classify(ent) if ent in rows else None
     return _cache[ent]
@@ -150,8 +190,12 @@ def impact(ent, reg, info, succ, depth=3):
         if 'symbol stub for:' in arg:
             sym = arg.split('symbol stub for:')[1].strip()
             if sym in label: res.add(callee_reads(label[sym], reg, depth)); continue   # this image's own export, called through its PIC stub
-            n = ARITY.get(sym)
-            if n is not None: res.add('no' if reg >= 3 + n else 'yes'); continue      # a libSystem / libstdc++ import of known arity
+            if FPR:
+                n = FARITY.get(sym, 0 if sym in ARITY else None)
+                if n is not None: res.add('no' if reg > n else 'yes'); continue   # float arguments of the import
+            else:
+                n = ARITY.get(sym)
+                if n is not None: res.add('no' if reg >= 3 + n else 'yes'); continue      # a libSystem / libstdc++ import of known arity
             res.add('import'); IMPORTS.setdefault((ent, reg), set()).add(sym); continue
         m = re.match(r'0x([0-9a-f]+)', arg)
         t = int(m.group(1), 16) if m else label.get(arg.split()[0]) if arg else None   # an unstripped image prints `bl _name`
@@ -162,7 +206,7 @@ def impact(ent, reg, info, succ, depth=3):
     return 'no'
 for f in sorted(glob.glob(dump + '/*.txt')):
     t = open(f).read()
-    regs_ = sorted(set(int(x) for x in re.findall(r'(?m)^\s+\w[\w *]*\bin_r([3-9]|10);', t)))
+    regs_ = sorted(set(int(x) for x in re.findall(r'(?m)^\s+\w[\w *]*\bin_f(\d+);' if FPR else r'(?m)^\s+\w[\w *]*\bin_r([3-9]|10);', t)))
     if not regs_: continue
     name, addr = re.search(r'// Function: (.*) @ (\S+)', t).groups(); ent = int(addr, 16)
     if ent not in rows: continue
@@ -170,7 +214,13 @@ for f in sorted(glob.glob(dump + '/*.txt')):
     for r in regs_:
         c = 'USED' if r in lr else 'RET' if r in lt else 'PASS' if r in la else 'DEAD'
         fr = first_reader(ent, r, info, succ, c == 'USED') if c != 'DEAD' else None
+        if FPR and c in ('USED', 'PASS', 'RET'):
+            c0 = c
+            sets = fpr_callers(ent, r)
+            c = c0 + ('' if c0 != 'PASS' else '')
+            CALLERSET[(ent, r)] = sets
         if c == 'PASS':
             IMPORTS.pop((ent, r), None); c = 'PASS-' + impact(ent, r, info, succ)
             if c == 'PASS-import': fr = None; c += '\t' + ','.join(sorted(IMPORTS.get((ent, r), ())))   # -yes: some callee reads it; -no: none does; -indirect/-import: a call through a pointer / to an import
-        print('%x\t%s\tr%d\t%s\t%s' % (ent, name, r, c, ('%x %s %s' % (fr, ins[fr][0], ins[fr][1][:40])) if fr else ''))
+        if FPR: c += '\t' + CALLERSET.get((ent, r), '')
+        print('%x\t%s\t%s%d\t%s\t%s' % (ent, name, 'f' if FPR else 'r', r, c, ('%x %s %s' % (fr, ins[fr][0], ins[fr][1][:40])) if fr else ''))

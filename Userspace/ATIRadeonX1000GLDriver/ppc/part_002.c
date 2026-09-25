@@ -1431,11 +1431,10 @@ char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint par
   else {
     if ((fparam_1 < DOUBLE_001aa210) || (DOUBLE_001aa230 < fparam_1)) {
       puVar4 = local_78;
-      _frexp(fparam_1);
+      _frexp(fparam_1,puVar4);
       local_68 = 0x43300000;
       uStack_64 = local_78[0] ^ 0x80000000;
-      dVar11 = (double)_round(((double)CONCAT44(0x43300000,uStack_64) - DOUBLE_001aa1e0) *
-                              DOUBLE_001aa218);
+      dVar11 = _round(((double)CONCAT44(0x43300000,uStack_64) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
       local_78[0] = (uint)dVar11;
       local_60 = (longlong)(int)local_78[0];
       dVar12 = (double)((double (*)())FUN_0000be70)(local_78[0],extraout_r4,puVar4,param_4,in_r7,in_r8,puVar5);
@@ -1465,7 +1464,7 @@ char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint par
       dVar11 = fparam_1;
     }
   }
-  dVar10 = (double)_floor(dVar11 + dVar12);
+  dVar10 = _floor(dVar11 + dVar12);
   pcVar9 = pcVar8;
   dVar13 = dVar10;
   if (dVar10 <= fparam_2) {
@@ -1479,7 +1478,7 @@ LAB_0000c240:
         return (char *)0x0;
       }
       dVar14 = dVar13 * DOUBLE_001aa220;
-      dVar13 = (double)_floor(dVar14);
+      dVar13 = _floor(dVar14);
       iVar3 = (int)((dVar14 - dVar13) * DOUBLE_001aa238);
       local_58 = (longlong)iVar3;
       *pcVar9 = (char)iVar3 + '0';
@@ -1528,7 +1527,7 @@ LAB_0000c240:
       }
       dVar10 = dVar10 * dVar11;
       fparam_2 = fparam_2 * dVar11;
-      dVar12 = (double)_floor(dVar10);
+      dVar12 = _floor(dVar10);
       local_50 = (longlong)(int)dVar12;
       dVar10 = dVar10 - dVar12;
       *pcVar9 = (char)(int)dVar12 + '0';
@@ -8291,15 +8290,15 @@ void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 
     iStack00000024 = param_4;
     iStack00000030 = param_7;
     FUN_0002a260(iStack_b0,puStack_ac);
-    dVar26 = (double)_floor((double)(float)((double)*param_2 - fparam_1));
+    dVar26 = _floor((double)(float)((double)*param_2 - fparam_1));
     fVar8 = FLOAT_001aa114;
     fVar7 = FLOAT_001aa0e8;
     if (((unsigned char *)0x00002b7c)[param_1] == '\0') {
-      dVar27 = (double)_floor((double)(float)((double)param_2[1] - fparam_2));
+      dVar27 = _floor((double)(float)((double)param_2[1] - fparam_2));
       uVar11 = extraout_r4_00;
     }
     else {
-      dVar27 = (double)_ceil((double)((float)(fparam_2 + (double)param_2[1]) - FLOAT_001aa0e8));
+      dVar27 = _ceil((double)((float)(fparam_2 + (double)param_2[1]) - FLOAT_001aa0e8));
       uVar11 = extraout_r4;
       fVar7 = fVar8;
     }

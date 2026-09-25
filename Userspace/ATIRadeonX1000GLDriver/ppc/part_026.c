@@ -4314,7 +4314,7 @@ LAB_000fc3f4:
           piVar7 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
           uVar8 = (**(code **)(*piVar7 + 0x9c))(piVar7,pdVar28);
           pdVar17 = *(dword **)(param_1 + 8);
-          (**(code **)(*(int *)pdVar17[0xc3] + 0xa0))(&local_88);
+          (**(code **)(*(*(int * *)(pdVar17 + (0xc3))) + 0xa0))(&local_88);
           iVar13 = FUN_001054ec(iVar19,1);
           *(undefined4 *)(iVar13 + 8) = uVar8;
           *(undefined4 *)(iVar13 + 0xc) = 0x1f;
@@ -4323,7 +4323,7 @@ LAB_000fc3f4:
           pdVar16 = pdVar28;
           if (uVar21 == *param_6) {
             pdVar16 = *(dword **)(param_1 + 8);
-            uVar8 = (**(code **)(*(int *)pdVar16[0xc3] + 0xa8))((int *)pdVar16[0xc3],&local_98);
+            uVar8 = (**(code **)(*(*(int * *)(pdVar16 + (0xc3))) + 0xa8))((*(int * *)(pdVar16 + (0xc3))),&local_98);
             iVar6 = FUN_001043f0(0x31,*(undefined4 *)(param_1 + 8));
             uVar34 = FUN_000ec208(param_1,4);
             iVar13 = FUN_001054ec(iVar6,0);

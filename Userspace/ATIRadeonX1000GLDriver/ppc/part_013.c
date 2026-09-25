@@ -2981,7 +2981,7 @@ int FUN_0008ebb0(param_1, param_2, param_3, param_4)
     param_3[1] = fVar3;
     fVar5 = *(float *)(*(int *)(param_2 + 0xc) * 0x80 + iVar16 + 0x24f8) + fVar1;
     param_3[2] = fVar5;
-    dVar21 = (double)_sqrt((double)(fVar5 * fVar5 + fVar2 * fVar2 + fVar3 * fVar3));
+    dVar21 = _sqrt((double)(fVar5 * fVar5 + fVar2 * fVar2 + fVar3 * fVar3));
     param_3[3] = fVar1;
     fVar1 = fVar1 / (float)dVar21;
     param_3[2] = fVar5 * fVar1;

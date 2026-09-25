@@ -1224,8 +1224,8 @@ LAB_000a99e8:
     else {
       *(float *)(param_1 + 0x194) = FLOAT_001aa0e8 / fVar4;
     }
-    dVar13 = (double)_sqrt((double)(*(float *)(param_1 + 400) * *(float *)(param_1 + 400) +
-                                   *(float *)(param_1 + 0x194) * *(float *)(param_1 + 0x194)));
+    dVar13 = _sqrt((double)(*(float *)(param_1 + 400) * *(float *)(param_1 + 400) +
+                           *(float *)(param_1 + 0x194) * *(float *)(param_1 + 0x194)));
     fparam_1 = (double)(float)dVar13;
     *(float *)(param_1 + 0x198) = (float)dVar13;
   }

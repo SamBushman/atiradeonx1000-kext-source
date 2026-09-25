@@ -401,12 +401,11 @@ int FUN_00191efc(param_1, param_2, param_3)
   float fVar5;
   double dVar6;
   double dVar7;
-  undefined4 extraout_r4;
   uint uVar8;
   float *pfVar9;
   uint uVar10;
   float *pfVar11;
-  double extraout_f1;
+  double dVar12;
   
   FUN_00128fd0(param_1,param_2,0);
   param_1[7] = 0;
@@ -466,12 +465,10 @@ int FUN_00191efc(param_1, param_2, param_3)
         }
       }
       else {
-        param_1 = (undefined4 *)
-                  _pow(DOUBLE_001aa2a0,
-                       (double)(float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - dVar6) -
-                       dVar7,param_1,param_2);
-        param_2 = extraout_r4;
-        fVar2 = (float)extraout_f1 *
+        dVar12 = _pow(DOUBLE_001aa2a0,
+                      (double)(float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - dVar6) -
+                      dVar7);
+        fVar2 = (float)dVar12 *
                 ((float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - dVar6) * fVar4 + fVar3);
       }
       bVar1 = uVar10 != 7;
@@ -498,12 +495,11 @@ int FUN_001920e0(param_1, param_2, param_3)
   float fVar5;
   double dVar6;
   double dVar7;
-  undefined4 extraout_r4;
   uint uVar8;
   float *pfVar9;
   uint uVar10;
   float *pfVar11;
-  double extraout_f1;
+  double dVar12;
   
   FUN_00128fd0(param_1,param_2,0);
   param_1[7] = 0;
@@ -563,12 +559,10 @@ int FUN_001920e0(param_1, param_2, param_3)
         }
       }
       else {
-        param_1 = (undefined4 *)
-                  _pow(DOUBLE_001aa2a0,
-                       (double)(float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - dVar6) -
-                       dVar7,param_1,param_2);
-        param_2 = extraout_r4;
-        fVar2 = (float)extraout_f1 *
+        dVar12 = _pow(DOUBLE_001aa2a0,
+                      (double)(float)((double)CONCAT44(0x43300000,uVar8 ^ 0x80000000) - dVar6) -
+                      dVar7);
+        fVar2 = (float)dVar12 *
                 ((float)((double)CONCAT44(0x43300000,uVar10 ^ 0x80000000) - dVar6) * fVar4 + fVar3);
       }
       bVar1 = uVar10 != 7;

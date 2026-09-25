@@ -382,13 +382,13 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,i
            (fVar4 + fVar5) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar2))) * fVar7;
   fVar7 = -((fVar4 - fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 - fVar3)) -
            (fVar4 + fVar6) * (float)(DOUBLE_97c30a60 / (double)(fVar1 + fVar3))) * fVar7;
-  dVar10 = (double)_sqrt((double)(fVar2 * fVar2));
-  dVar11 = (double)_sqrt((double)(fVar7 * fVar7));
+  dVar10 = _sqrt((double)(fVar2 * fVar2));
+  dVar11 = _sqrt((double)(fVar7 * fVar7));
   fVar1 = (float)dVar11;
   if ((float)dVar11 < (float)dVar10) {
     fVar1 = (float)dVar10;
   }
-  dVar10 = (double)_log2((double)(fVar1 * (float)param_1[4]));
+  dVar10 = _log2((double)(fVar1 * (float)param_1[4]));
   return (double)(float)dVar10;
 }
 
@@ -430,13 +430,13 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,i
            (fVar5 + *(float *)(iVar12 + 0x40)) * fVar3) * fVar8;
   fVar7 = -((fVar6 - *(float *)(iVar12 + 0x44)) * fVar4 -
            (fVar6 + *(float *)(iVar12 + 0x44)) * fVar3) * fVar7;
-  dVar13 = (double)_sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
-  dVar14 = (double)_sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
+  dVar13 = _sqrt((double)(fVar1 * fVar1 + fVar9 * fVar9));
+  dVar14 = _sqrt((double)(fVar8 * fVar8 + fVar7 * fVar7));
   fVar1 = (float)dVar14;
   if ((float)dVar14 < (float)dVar13) {
     fVar1 = (float)dVar13;
   }
-  dVar13 = (double)_log2((double)(fVar1 * (float)param_1[4]));
+  dVar13 = _log2((double)(fVar1 * (float)param_1[4]));
   return (double)(float)dVar13;
 }
 
@@ -467,24 +467,24 @@ double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,i
   fVar2 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar10 + 0x4c)));
   fVar3 = (float)(DOUBLE_97c30a60 / (double)(fVar4 + *(float *)(iVar11 + 0x4c)));
   fVar4 = (float)(DOUBLE_97c30a60 / (double)(fVar4 - *(float *)(iVar11 + 0x4c)));
-  fVar8 = -((fVar6 - *(float *)(iVar10 + 0x44)) * fVar2 -
+  fVar7 = -((fVar6 - *(float *)(iVar10 + 0x44)) * fVar2 -
            (fVar6 + *(float *)(iVar10 + 0x44)) * fVar1) * *(float *)(iVar9 + 0x124);
-  fVar7 = -((param_2[2] - *(float *)(iVar10 + 0x48)) * fVar2 -
+  fVar8 = -((param_2[2] - *(float *)(iVar10 + 0x48)) * fVar2 -
            (param_2[2] + *(float *)(iVar10 + 0x48)) * fVar1) * *(float *)(iVar9 + 0x128);
   fVar2 = -((fVar5 - *(float *)(iVar10 + 0x40)) * fVar2 -
            (fVar5 + *(float *)(iVar10 + 0x40)) * fVar1) * *(float *)(iVar9 + 0x120);
-  fVar7 = fVar7 * fVar7;
+  fVar8 = fVar8 * fVar8;
   fVar1 = -((fVar6 - *(float *)(iVar11 + 0x44)) * fVar4 -
            (fVar6 + *(float *)(iVar11 + 0x44)) * fVar3) * *(float *)(iVar9 + 0x124);
   fVar3 = -((fVar5 - *(float *)(iVar11 + 0x40)) * fVar4 -
            (fVar5 + *(float *)(iVar11 + 0x40)) * fVar3) * *(float *)(iVar9 + 0x120);
-  dVar12 = (double)_sqrt((double)(fVar2 * fVar2 + fVar8 * fVar8 + fVar7));
-  dVar13 = (double)_sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar7));
+  dVar12 = _sqrt((double)(fVar2 * fVar2 + fVar7 * fVar7 + fVar8));
+  dVar13 = _sqrt((double)(fVar3 * fVar3 + fVar1 * fVar1 + fVar8));
   fVar1 = (float)dVar13;
   if ((float)dVar13 < (float)dVar12) {
     fVar1 = (float)dVar12;
   }
-  dVar12 = (double)_log2((double)(fVar1 * (float)param_1[4]));
+  dVar12 = _log2((double)(fVar1 * (float)param_1[4]));
   return (double)(float)dVar12;
 }
 
@@ -592,13 +592,13 @@ LAB_97bd43d4:
   fVar2 = (float)((double)(fVar2 * fVar3) + DOUBLE_97c30a88);
   dVar11 = DOUBLE_97c30a88 + 0.0;
   dVar9 = DOUBLE_97c30a88 + 0.0;
-  dVar10 = (double)_floor((double)fVar2);
+  dVar10 = _floor((double)fVar2);
   local_90 = (uint)dVar10;
   local_80 = (longlong)(int)local_90;
-  dVar10 = (double)_floor((double)(float)dVar11);
+  dVar10 = _floor((double)(float)dVar11);
   local_8c = (int)dVar10;
   local_80 = (longlong)local_8c;
-  dVar10 = (double)_floor((double)(float)dVar9);
+  dVar10 = _floor((double)(float)dVar9);
   dVar9 = DOUBLE_97c30a60;
   local_40 = 0x43300000;
   local_88 = (int)dVar10;
@@ -744,13 +744,13 @@ LAB_97bd479c:
   fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
   dVar11 = DOUBLE_97c30a88 + 0.0;
   fVar3 = (float)((double)(fVar3 * fVar5) + DOUBLE_97c30a88);
-  dVar12 = (double)_floor((double)fVar2);
+  dVar12 = _floor((double)fVar2);
   local_c0 = (uint)dVar12;
   local_b0 = (longlong)(int)local_c0;
-  dVar12 = (double)_floor((double)fVar3);
+  dVar12 = _floor((double)fVar3);
   local_bc = (uint)dVar12;
   local_b0 = (longlong)(int)local_bc;
-  dVar11 = (double)_floor((double)(float)dVar11);
+  dVar11 = _floor((double)(float)dVar11);
   local_50 = 0x43300000;
   uStack_4c = local_bc ^ 0x80000000;
   local_5c = local_bc;
@@ -948,13 +948,13 @@ LAB_97bd4cb4:
   fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
   fVar8 = (float)((double)(local_12c * fVar8) + DOUBLE_97c30a88);
   fVar9 = (float)((double)(local_128 * fVar9) + DOUBLE_97c30a88);
-  dVar15 = (double)_floor((double)fVar7);
+  dVar15 = _floor((double)fVar7);
   local_120 = (uint)dVar15;
   local_110 = (longlong)(int)local_120;
-  dVar15 = (double)_floor((double)fVar8);
+  dVar15 = _floor((double)fVar8);
   local_11c = (uint)dVar15;
   local_110 = (longlong)(int)local_11c;
-  dVar15 = (double)_floor((double)fVar9);
+  dVar15 = _floor((double)fVar9);
   local_118 = (uint)dVar15;
   local_110 = (longlong)(int)local_118;
   local_70 = 0x43300000;
@@ -1147,13 +1147,13 @@ LAB_97bd51b0:
     fVar4 = (float)((double)*param_4 + DOUBLE_97c30a88);
     dVar11 = DOUBLE_97c30a88 + 0.0;
     fVar5 = (float)((double)param_4[1] + DOUBLE_97c30a88);
-    dVar12 = (double)_floor((double)fVar4);
+    dVar12 = _floor((double)fVar4);
     local_c0 = (uint)dVar12;
     local_b0 = (longlong)(int)local_c0;
-    dVar12 = (double)_floor((double)fVar5);
+    dVar12 = _floor((double)fVar5);
     local_bc = (uint)dVar12;
     local_b0 = (longlong)(int)local_bc;
-    dVar11 = (double)_floor((double)(float)dVar11);
+    dVar11 = _floor((double)(float)dVar11);
     local_50 = 0x43300000;
     uStack_4c = local_bc ^ 0x80000000;
     local_5c = local_bc;
@@ -1463,12 +1463,12 @@ double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar2 = (double)_floor((double)*param_2);
+  dVar2 = _floor((double)*param_2);
   uVar1 = (uint)dVar2;
   local_30 = (longlong)(int)uVar1;
-  dVar2 = (double)_floor((double)param_2[1]);
+  dVar2 = _floor((double)param_2[1]);
   local_30 = (longlong)(int)dVar2;
-  dVar3 = (double)_floor((double)param_2[2]);
+  dVar3 = _floor((double)param_2[2]);
   local_30 = (longlong)(int)dVar3;
   local_28 = 0x43300000;
   uStack_24 = (int)dVar3 ^ 0x80000000;
@@ -1525,10 +1525,10 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar5 = (double)_floor((double)*param_2);
+  dVar5 = _floor((double)*param_2);
   uVar1 = (uint)dVar5;
   local_30 = (longlong)(int)uVar1;
-  dVar5 = (double)_floor((double)param_2[1]);
+  dVar5 = _floor((double)param_2[1]);
   uVar2 = (uint)dVar5;
   local_30 = (longlong)(int)uVar2;
   local_28 = 0x43300000;
@@ -1602,13 +1602,13 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   undefined4 local_28;
   uint uStack_24;
   
-  dVar9 = (double)_floor((double)*param_2);
+  dVar9 = _floor((double)*param_2);
   uVar5 = (uint)dVar9;
   local_30 = (longlong)(int)uVar5;
-  dVar9 = (double)_floor((double)param_2[1]);
+  dVar9 = _floor((double)param_2[1]);
   uVar7 = (uint)dVar9;
   local_30 = (longlong)(int)uVar7;
-  dVar9 = (double)_floor((double)param_2[2]);
+  dVar9 = _floor((double)param_2[2]);
   uVar1 = (uint)dVar9;
   local_30 = (longlong)(int)uVar1;
   local_28 = 0x43300000;
@@ -1683,10 +1683,10 @@ int _InterpreterNoiseGeneratorCalculate1D(param_1, param_2, param_3)
   do {
     uVar3 = uStack_4c + 1;
     local_60[4] = 176.0;
-    dVar4 = (double)_exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    dVar4 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
     local_60[4] = 176.0;
     uStack_4c = uVar3;
-    dVar5 = (double)_pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
+    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
     local_60[0] = *param_2 * (float)dVar4;
     local_60[1] = 0.0;
     local_60[2] = 0.0;
@@ -1726,10 +1726,10 @@ int _InterpreterNoiseGeneratorCalculate2D(param_1, param_2, param_3)
   do {
     uVar3 = uStack_4c + 1;
     local_50 = 0x43300000;
-    dVar4 = (double)_exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
+    dVar4 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar2));
     local_50 = 0x43300000;
     uStack_4c = uVar3;
-    dVar5 = (double)_pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
+    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar3) - dVar2);
     local_60 = *param_2 * (float)dVar4;
     local_5c = param_2[1] * (float)dVar4;
     local_58 = 0;
@@ -1770,11 +1770,11 @@ int _InterpreterNoiseGeneratorCalculate3D(param_1, param_2, param_3)
   do {
     uVar4 = uStack_4c + 1;
     local_50 = 0x43300000;
-    dVar5 = (double)_exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar3));
+    dVar5 = _exp2((double)(float)((double)CONCAT44(0x43300000,uStack_4c) - dVar3));
     local_50 = 0x43300000;
     fVar2 = (float)dVar5;
     uStack_4c = uVar4;
-    dVar5 = (double)_pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
+    dVar5 = _pow(DOUBLE_97c30a88,(double)CONCAT44(0x43300000,uVar4) - dVar3);
     local_60 = *param_2 * fVar2;
     local_5c = param_2[1] * fVar2;
     local_58 = param_2[2] * fVar2;

@@ -8823,7 +8823,7 @@ LAB_0003bef8:
       fVar7 = *(float *)(iVar16 + 0x24f4);
       fVar8 = *(float *)(iVar16 + 0x24f0);
       fVar10 = *(float *)(iVar16 + 0x24f8) + fVar6;
-      dVar29 = (double)_sqrt((double)(fVar10 * fVar10 + fVar8 * fVar8 + fVar7 * fVar7));
+      dVar29 = _sqrt((double)(fVar10 * fVar10 + fVar8 * fVar8 + fVar7 * fVar7));
       pfVar27[3] = fVar6;
       fVar6 = (float)(DOUBLE_001aa200 / dVar29);
       pfVar27[2] = fVar10 * fVar6;
@@ -9853,7 +9853,7 @@ LAB_0003dd8c:
       fVar7 = *(float *)(iVar25 + 0x24f4);
       fVar8 = *(float *)(iVar25 + 0x24f0);
       fVar10 = *(float *)(iVar25 + 0x24f8) + FLOAT_001aa0e8;
-      dVar36 = (double)_sqrt((double)(fVar10 * fVar10 + fVar8 * fVar8 + fVar7 * fVar7));
+      dVar36 = _sqrt((double)(fVar10 * fVar10 + fVar8 * fVar8 + fVar7 * fVar7));
       puVar24[6] = fVar6;
       fVar6 = (float)(DOUBLE_001aa200 / dVar36);
       puVar24[5] = fVar10 * fVar6;

@@ -1319,9 +1319,9 @@ int FUN_00178e90(param_1, param_2, param_3)
                 fVar2 = fVar3;
               }
             }
-            dVar6 = (double)_log((double)local_58[1]);
-            dVar7 = (double)_log(DOUBLE_001aa2a0);
-            dVar6 = (double)_pow(DOUBLE_001aa2a0,(double)(fVar2 * (float)(dVar6 / dVar7)));
+            dVar6 = _log((double)local_58[1]);
+            dVar7 = _log(DOUBLE_001aa2a0);
+            dVar6 = _pow(DOUBLE_001aa2a0,(double)(fVar2 * (float)(dVar6 / dVar7)));
             *param_1 = (float)dVar6;
             return param_1;
           }

@@ -3499,8 +3499,8 @@ int FUN_00009c80(param_1, param_2, param_3)
   fVar1 = *(float *)(param_1 + 300);
   fVar2 = *(float *)(param_1 + 0x138);
   fVar3 = *(float *)(param_1 + 0x130);
-  dVar13 = (double)_cos((double)fVar1);
-  dVar14 = (double)_sin((double)fVar1);
+  dVar13 = _cos((double)fVar1);
+  dVar14 = _sin((double)fVar1);
   DAT_0000f004 = (float)(dVar13 * (double)fVar2 * (double)fVar3);
   DAT_0000f024 = (float)((double)fVar3 * (double)fVar2 * -dVar14);
   DAT_0000f028 = -DAT_0000f024;

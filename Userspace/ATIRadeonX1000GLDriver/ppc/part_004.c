@@ -1891,7 +1891,7 @@ LAB_000256f4:
       fVar2 = *(float *)(iVar23 + 0x24f4);
       fVar3 = *(float *)(iVar23 + 0x24f0);
       fVar4 = *(float *)(iVar23 + 0x24f8) + FLOAT_001aa0e8;
-      fparam_1 = (double)_sqrt((double)(fVar4 * fVar4 + fVar3 * fVar3 + fVar2 * fVar2));
+      fparam_1 = _sqrt((double)(fVar4 * fVar4 + fVar3 * fVar3 + fVar2 * fVar2));
       local_84[0] = fVar6;
       fVar6 = (float)(DOUBLE_001aa200 / fparam_1);
       local_88 = fVar4 * fVar6;

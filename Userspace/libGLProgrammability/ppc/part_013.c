@@ -3826,7 +3826,7 @@ switchD_97bd0598_caseD_0:
           local_70 = local_130[4];
           fparam_2 = (double)local_130[7];
           local_130[1] = local_130[4];
-          dVar27 = (double)_pow((double)local_130[5]);
+          dVar27 = _pow((double)local_130[5],fparam_2);
           local_130[2] = (float)dVar27;
         }
         fparam_1 = (double)local_130[2];
@@ -3838,36 +3838,36 @@ switchD_97bd0598_caseD_0:
         local_130[3] = ABS(local_130[7]);
         break;
       case 3:
-        dVar27 = (double)_ceil((double)local_130[4]);
+        dVar27 = _ceil((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_ceil((double)local_130[5]);
+        dVar27 = _ceil((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_ceil((double)local_130[6]);
+        dVar27 = _ceil((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_ceil((double)local_130[7]);
+        dVar27 = _ceil((double)local_130[7]);
         goto LAB_97bd2010;
       case 4:
         dVar29 = (double)local_130[4];
-        dVar27 = (double)_floor(dVar29);
+        dVar27 = _floor(dVar29);
         dVar28 = (double)local_130[5];
         local_130[0] = (float)(dVar29 - dVar27);
-        dVar27 = (double)_floor(dVar28);
+        dVar27 = _floor(dVar28);
         dVar29 = (double)local_130[6];
         local_130[1] = (float)(dVar28 - dVar27);
-        dVar28 = (double)_floor(dVar29);
+        dVar28 = _floor(dVar29);
         dVar27 = (double)local_130[7];
         local_130[2] = (float)(dVar29 - dVar28);
-        fparam_1 = (double)_floor(dVar27);
+        fparam_1 = _floor(dVar27);
         dVar27 = dVar27 - fparam_1;
         goto LAB_97bd1440;
       case 5:
-        dVar27 = (double)_floor((double)local_130[4]);
+        dVar27 = _floor((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_floor((double)local_130[5]);
+        dVar27 = _floor((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_floor((double)local_130[6]);
+        dVar27 = _floor((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_floor((double)local_130[7]);
+        dVar27 = _floor((double)local_130[7]);
         goto LAB_97bd2010;
       default:
         goto switchD_97bd0598_caseD_6;
@@ -3974,27 +3974,27 @@ LAB_97bd0cc8:
         }
         break;
       case 0xc:
-        dVar27 = (double)_sqrt(ABS((double)local_130[4]));
+        dVar27 = _sqrt(ABS((double)local_130[4]));
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_sqrt(ABS((double)local_130[5]));
+        dVar27 = _sqrt(ABS((double)local_130[5]));
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_sqrt(ABS((double)local_130[6]));
+        dVar27 = _sqrt(ABS((double)local_130[6]));
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_sqrt(ABS((double)local_130[7]));
+        dVar27 = _sqrt(ABS((double)local_130[7]));
         goto LAB_97bd2010;
       case 0xd:
         if (*(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U < 2) {
-          dVar28 = (double)_sqrt(ABS((double)local_130[4]));
+          dVar28 = _sqrt(ABS((double)local_130[4]));
           local_130[0] = (float)(dVar27 / dVar28);
-          dVar28 = (double)_sqrt(ABS((double)local_130[5]));
+          dVar28 = _sqrt(ABS((double)local_130[5]));
           local_130[1] = (float)(dVar27 / dVar28);
-          dVar28 = (double)_sqrt(ABS((double)local_130[6]));
+          dVar28 = _sqrt(ABS((double)local_130[6]));
           local_130[2] = (float)(dVar27 / dVar28);
-          fparam_1 = (double)_sqrt(ABS((double)local_130[7]));
+          fparam_1 = _sqrt(ABS((double)local_130[7]));
           dVar27 = dVar27 / fparam_1;
           goto LAB_97bd1440;
         }
-        fparam_1 = (double)_sqrt(ABS((double)local_130[7]));
+        fparam_1 = _sqrt(ABS((double)local_130[7]));
         dVar27 = DOUBLE_97c30a60 / fparam_1;
         goto LAB_97bd0cc8;
       case 0xe:
@@ -4027,23 +4027,23 @@ LAB_97bd0cc8:
         break;
       case 0x10:
         if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          fparam_1 = (double)_exp2((double)local_130[7]);
+          fparam_1 = _exp2((double)local_130[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = (double)_exp2((double)local_130[4]);
+        dVar27 = _exp2((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_exp2((double)local_130[5]);
+        dVar27 = _exp2((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_exp2((double)local_130[6]);
+        dVar27 = _exp2((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_exp2((double)local_130[7]);
+        dVar27 = _exp2((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x11:
-        dVar27 = (double)_floor((double)local_130[7]);
-        dVar28 = (double)_exp2((double)(float)dVar27);
+        dVar27 = _floor((double)local_130[7]);
+        dVar28 = _exp2((double)(float)dVar27);
         local_130[0] = (float)dVar28;
         local_130[1] = (float)((double)local_130[7] - (double)(float)dVar27);
-        dVar27 = (double)_exp2((double)local_130[7]);
+        dVar27 = _exp2((double)local_130[7]);
         goto LAB_97bd0fd4;
       case 0x12:
         uVar24 = (uint)*(byte *)((int)param_2 + 5);
@@ -4058,7 +4058,7 @@ LAB_97bd0cc8:
           } while (uVar24 != 0);
         }
 LAB_97bd1924:
-        fparam_1 = (double)_sqrt(dVar27);
+        fparam_1 = _sqrt(dVar27);
 LAB_97bd1d68:
         local_130[0] = (float)fparam_1;
         local_130[1] = local_130[0];
@@ -4071,44 +4071,44 @@ LAB_97bd1d68:
           if ((double)local_130[7] < (double)TAllocation__guardBlockSize) {
             dVar27 = DOUBLE_97c30a48;
           }
-          fparam_1 = (double)_log2(dVar27);
+          fparam_1 = _log2(dVar27);
           goto LAB_97bd1d68;
         }
         dVar27 = (double)local_130[4];
         if ((double)local_130[4] < (double)TAllocation__guardBlockSize) {
           dVar27 = DOUBLE_97c30a48;
         }
-        dVar28 = (double)_log2(dVar27);
+        dVar28 = _log2(dVar27);
         dVar27 = (double)local_130[5];
         local_130[0] = (float)dVar28;
         if (dVar27 < (double)TAllocation__guardBlockSize) {
           dVar27 = DOUBLE_97c30a48;
         }
-        dVar28 = (double)_log2(dVar27);
+        dVar28 = _log2(dVar27);
         dVar27 = (double)local_130[6];
         local_130[1] = (float)dVar28;
         if (dVar27 < (double)TAllocation__guardBlockSize) {
           dVar27 = DOUBLE_97c30a48;
         }
-        dVar28 = (double)_log2(dVar27);
+        dVar28 = _log2(dVar27);
         dVar27 = (double)local_130[7];
         local_130[2] = (float)dVar28;
         if (dVar27 < (double)TAllocation__guardBlockSize) {
           dVar27 = DOUBLE_97c30a48;
         }
-        dVar27 = (double)_log2(dVar27);
+        dVar27 = _log2(dVar27);
         goto LAB_97bd2010;
       case 0x14:
         dVar27 = ABS((double)local_130[7]);
-        _log2(dVar27);
-        dVar28 = (double)_floor();
+        dVar28 = _log2(dVar27);
+        dVar28 = _floor(dVar28);
         local_130[0] = (float)dVar28;
-        dVar28 = (double)_exp2((double)local_130[0]);
+        dVar28 = _exp2((double)local_130[0]);
         local_130[1] = (float)(dVar27 / dVar28);
         if (dVar27 < (double)TAllocation__guardBlockSize) {
           dVar27 = DOUBLE_97c30a48;
         }
-        dVar27 = (double)_log2(dVar27);
+        dVar27 = _log2(dVar27);
 LAB_97bd0fd4:
         local_130[2] = (float)dVar27;
         fparam_1 = (double)local_130[2];
@@ -4126,7 +4126,7 @@ LAB_97bd0fd4:
             uVar24 = uVar24 - 1;
           } while (uVar24 != 0);
         }
-        fparam_1 = (double)_sqrt(dVar27);
+        fparam_1 = _sqrt(dVar27);
         uVar24 = (uint)*(byte *)((int)param_2 + 5);
         if (uVar24 != 0) {
           pfVar10 = local_130;
@@ -4149,9 +4149,9 @@ LAB_97bd109c:
         local_130[3] = local_130[7] * fVar3;
         break;
       case 0x18:
-        dVar27 = (double)_cos((double)local_130[4]);
+        dVar27 = _cos((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_sin((double)local_130[4]);
+        dVar27 = _sin((double)local_130[4]);
         local_130[1] = (float)dVar27;
         fparam_1 = (double)local_130[1];
         local_130[3] = 0.0;
@@ -4159,76 +4159,73 @@ LAB_97bd109c:
         break;
       case 0x19:
         if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          fparam_1 = (double)_sin((double)local_130[7]);
+          fparam_1 = _sin((double)local_130[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = (double)_sin((double)local_130[4]);
+        dVar27 = _sin((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_sin((double)local_130[5]);
+        dVar27 = _sin((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_sin((double)local_130[6]);
+        dVar27 = _sin((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_sin((double)local_130[7]);
+        dVar27 = _sin((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x1a:
         if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
-          fparam_1 = (double)_cos((double)local_130[7]);
+          fparam_1 = _cos((double)local_130[7]);
           goto LAB_97bd1d68;
         }
-        dVar27 = (double)_cos((double)local_130[4]);
+        dVar27 = _cos((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_cos((double)local_130[5]);
+        dVar27 = _cos((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_cos((double)local_130[6]);
+        dVar27 = _cos((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_cos((double)local_130[7]);
+        dVar27 = _cos((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x1b:
-        dVar27 = (double)_tan((double)local_130[4]);
+        dVar27 = _tan((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_tan((double)local_130[5]);
+        dVar27 = _tan((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_tan((double)local_130[6]);
+        dVar27 = _tan((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_tan((double)local_130[7]);
+        dVar27 = _tan((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x1c:
-        dVar27 = (double)_asin((double)local_130[4]);
+        dVar27 = _asin((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_asin((double)local_130[5]);
+        dVar27 = _asin((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_asin((double)local_130[6]);
+        dVar27 = _asin((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_asin((double)local_130[7]);
+        dVar27 = _asin((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x1d:
-        dVar27 = (double)_acos((double)local_130[4]);
+        dVar27 = _acos((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_acos((double)local_130[5]);
+        dVar27 = _acos((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_acos((double)local_130[6]);
+        dVar27 = _acos((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_acos((double)local_130[7]);
+        dVar27 = _acos((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x1e:
         if (param_2[0xc] == 1) {
-          dVar27 = (double)_atan((double)local_130[4]);
+          dVar27 = _atan((double)local_130[4]);
           local_130[0] = (float)dVar27;
-          dVar27 = (double)_atan((double)local_130[5]);
+          dVar27 = _atan((double)local_130[5]);
           local_130[1] = (float)dVar27;
-          dVar27 = (double)_atan((double)local_130[6]);
+          dVar27 = _atan((double)local_130[6]);
           local_130[2] = (float)dVar27;
-          dVar27 = (double)_atan((double)local_130[7]);
+          dVar27 = _atan((double)local_130[7]);
           goto LAB_97bd2010;
         }
-        dVar27 = (double)_atan2f((double)local_130[4],(double)local_130[8]);
-        local_130[0] = (float)dVar27;
-        dVar27 = (double)_atan2f((double)local_130[5],(double)local_130[9]);
-        local_130[1] = (float)dVar27;
-        dVar27 = (double)_atan2f((double)local_130[6],(double)local_130[10]);
+        local_130[0] = _atan2f(local_130[4],local_130[8]);
+        local_130[1] = _atan2f(local_130[5],local_130[9]);
+        local_130[2] = _atan2f(local_130[6],local_130[10]);
         fparam_2 = (double)local_130[0xb];
-        local_130[2] = (float)dVar27;
-        fparam_1 = (double)_atan2f((double)local_130[7]);
+        local_130[3] = _atan2f(local_130[7],local_130[0xb]);
         goto LAB_97bd2014;
       case 0x1f:
         local_130[0] = local_130[4] + local_130[8];
@@ -4246,34 +4243,34 @@ LAB_97bd109c:
         if (*(char *)((int)param_2 + 0x6d) == '\x01') {
           dVar27 = (double)local_130[4];
           dVar31 = (double)local_130[8];
-          dVar28 = (double)_floor((double)(float)(dVar27 / dVar31));
+          dVar28 = _floor((double)(float)(dVar27 / dVar31));
           dVar29 = (double)local_130[5];
           dVar30 = (double)local_130[8];
           local_130[0] = (float)-(dVar31 * dVar28 - dVar27);
-          dVar27 = (double)_floor((double)(float)(dVar29 / dVar30));
+          dVar27 = _floor((double)(float)(dVar29 / dVar30));
           dVar28 = (double)local_130[6];
           dVar31 = (double)local_130[8];
           local_130[1] = (float)-(dVar30 * dVar27 - dVar29);
-          dVar27 = (double)_floor((double)(float)(dVar28 / dVar31));
+          dVar27 = _floor((double)(float)(dVar28 / dVar31));
           fVar3 = local_130[8];
         }
         else {
           dVar27 = (double)local_130[4];
           dVar31 = (double)local_130[8];
-          dVar28 = (double)_floor((double)(float)(dVar27 / dVar31));
+          dVar28 = _floor((double)(float)(dVar27 / dVar31));
           dVar29 = (double)local_130[5];
           dVar30 = (double)local_130[9];
           local_130[0] = (float)-(dVar31 * dVar28 - dVar27);
-          dVar27 = (double)_floor((double)(float)(dVar29 / dVar30));
+          dVar27 = _floor((double)(float)(dVar29 / dVar30));
           dVar28 = (double)local_130[6];
           dVar31 = (double)local_130[10];
           local_130[1] = (float)-(dVar30 * dVar27 - dVar29);
-          dVar27 = (double)_floor((double)(float)(dVar28 / dVar31));
+          dVar27 = _floor((double)(float)(dVar28 / dVar31));
           fVar3 = local_130[0xb];
         }
         dVar29 = (double)local_130[7];
         local_130[2] = (float)-(dVar31 * dVar27 - dVar28);
-        fparam_1 = (double)_floor((double)(float)(dVar29 / (double)fVar3));
+        fparam_1 = _floor((double)(float)(dVar29 / (double)fVar3));
         dVar27 = -((double)fVar3 * fparam_1 - dVar29);
 LAB_97bd1440:
         local_130[3] = (float)dVar27;
@@ -4596,17 +4593,17 @@ LAB_97bd1cd8:
       case 0x38:
         if (1 < *(int *)(*(int *)(iVar19 + 0xd80) + 0x38) - 0x8b30U) {
           fparam_2 = (double)local_130[0xb];
-          fparam_1 = (double)_pow((double)local_130[7]);
+          fparam_1 = _pow((double)local_130[7],fparam_2);
           goto LAB_97bd1d68;
         }
-        dVar27 = (double)_pow((double)local_130[4],(double)local_130[8]);
+        dVar27 = _pow((double)local_130[4],(double)local_130[8]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_pow((double)local_130[5],(double)local_130[9]);
+        dVar27 = _pow((double)local_130[5],(double)local_130[9]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_pow((double)local_130[6],(double)local_130[10]);
+        dVar27 = _pow((double)local_130[6],(double)local_130[10]);
         fparam_2 = (double)local_130[0xb];
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_pow((double)local_130[7]);
+        dVar27 = _pow((double)local_130[7],fparam_2);
         goto LAB_97bd2010;
       case 0x39:
         dVar27 = (double)local_130[8];
@@ -4655,11 +4652,11 @@ LAB_97bd1cd8:
           local_130[3] = local_130[7] / local_130[0xb];
         }
         else if (param_2[9] == 3) {
-          dVar27 = (double)_trunc((double)(local_130[4] / local_130[8]));
+          dVar27 = _trunc((double)(local_130[4] / local_130[8]));
           local_130[0] = (float)dVar27;
-          dVar27 = (double)_trunc((double)(local_130[5] / local_130[9]));
+          dVar27 = _trunc((double)(local_130[5] / local_130[9]));
           local_130[1] = (float)dVar27;
-          dVar27 = (double)_trunc((double)(local_130[6] / local_130[10]));
+          dVar27 = _trunc((double)(local_130[6] / local_130[10]));
           fVar3 = local_130[7] / local_130[0xb];
           goto LAB_97bd200c;
         }
@@ -4948,7 +4945,7 @@ LAB_97bd29a8:
         break;
       case 0x48:
       case 0x49:
-        fparam_1 = (double)_floor((double)local_130[4]);
+        fparam_1 = _floor((double)local_130[4]);
         if (DOUBLE_97c30a78 <= fparam_1) {
           local_98 = (longlong)(int)(fparam_1 - DOUBLE_97c30a78);
           uVar24 = (int)(fparam_1 - DOUBLE_97c30a78) ^ 0x80000000;
@@ -5085,7 +5082,7 @@ switchD_97bd0598_caseD_6:
                                   (DOUBLE_97c30a60 - (double)(fVar3 * fVar3)) - DOUBLE_97c30a60);
         if ((double)TAllocation__guardBlockSize <= dVar27) {
           fVar3 = local_100[0] * fVar3;
-          fparam_1 = (double)_sqrt(dVar27);
+          fparam_1 = _sqrt(dVar27);
           dVar27 = (double)local_100[0];
           fVar3 = (float)((double)fVar3 + fparam_1);
           fparam_7 = (double)(fVar3 * local_130[0xb]);
@@ -5104,15 +5101,15 @@ switchD_97bd0598_caseD_6:
         break;
       case 0x6c:
         if ((param_2[9] == 3) && (param_2[0x13] == 1)) {
-          dVar27 = (double)_trunc((double)local_130[4]);
+          dVar27 = _trunc((double)local_130[4]);
           local_130[0] = (float)dVar27;
-          dVar27 = (double)_trunc((double)local_130[5]);
+          dVar27 = _trunc((double)local_130[5]);
           local_130[1] = (float)dVar27;
-          dVar27 = (double)_trunc((double)local_130[6]);
+          dVar27 = _trunc((double)local_130[6]);
           fVar3 = local_130[7];
 LAB_97bd200c:
           local_130[2] = (float)dVar27;
-          dVar27 = (double)_trunc((double)fVar3);
+          dVar27 = _trunc((double)fVar3);
           goto LAB_97bd2010;
         }
         if ((param_2[9] != 4) || ((param_2[0x13] != 1 && (param_2[0x13] != 3))))
@@ -5157,26 +5154,26 @@ LAB_97bd200c:
         local_130[iVar14] = local_130[iVar26 + 4];
         break;
       case 0x6f:
-        dVar27 = (double)_exp((double)local_130[4]);
+        dVar27 = _exp((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_exp((double)local_130[5]);
+        dVar27 = _exp((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_exp((double)local_130[6]);
+        dVar27 = _exp((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_exp((double)local_130[7]);
+        dVar27 = _exp((double)local_130[7]);
         goto LAB_97bd2010;
       case 0x70:
-        dVar27 = (double)_log((double)local_130[4]);
+        dVar27 = _log((double)local_130[4]);
         local_130[0] = (float)dVar27;
-        dVar27 = (double)_log((double)local_130[5]);
+        dVar27 = _log((double)local_130[5]);
         local_130[1] = (float)dVar27;
-        dVar27 = (double)_log((double)local_130[6]);
+        dVar27 = _log((double)local_130[6]);
         local_130[2] = (float)dVar27;
-        dVar27 = (double)_log((double)local_130[7]);
+        dVar27 = _log((double)local_130[7]);
 LAB_97bd2010:
-        fparam_1 = (double)(float)dVar27;
+        local_130[3] = (float)dVar27;
 LAB_97bd2014:
-        local_130[3] = (float)fparam_1;
+        fparam_1 = (double)local_130[3];
       }
       if (cVar4 != '\0') {
         if (DOUBLE_97c30a48 <= (double)local_130[0]) {

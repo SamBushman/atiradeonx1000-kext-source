@@ -3338,12 +3338,12 @@ LAB_00180a14: ;
         if (iVar6 < 0) {
           pfVar5 = (float *)FUN_00173360(*(undefined4 *)(param_1 + 0x238),iVar6);
           if (*(int *)(*(int *)(iVar15 + 0xb0) + 300) == 0) {
-            dVar28 = (double)_floor((double)*pfVar5);
+            dVar28 = _floor((double)*pfVar5);
             iVar6 = (int)dVar28;
             local_80 = (longlong)iVar6;
           }
           else {
-            dVar28 = (double)_floor((double)*pfVar5 + DOUBLE_001aa240);
+            dVar28 = _floor((double)*pfVar5 + DOUBLE_001aa240);
             iVar6 = (int)dVar28;
             local_88 = (longlong)iVar6;
           }

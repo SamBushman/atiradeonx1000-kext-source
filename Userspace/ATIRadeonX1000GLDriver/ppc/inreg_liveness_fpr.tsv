@@ -1,0 +1,75 @@
+entry	function	register	class	callers setting it	first reader
+1ecd0	FUN_0001ecd0	f1	RET	callers set it 0/0	1fcfc blr 
+1ecd0	FUN_0001ecd0	f2	RET	callers set it 0/0	1fcfc blr 
+1ecd0	FUN_0001ecd0	f3	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	FUN_0001ecd0	f4	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	FUN_0001ecd0	f5	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	FUN_0001ecd0	f6	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	FUN_0001ecd0	f7	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+1ecd0	FUN_0001ecd0	f8	PASS-indirect	callers set it 0/0	1ef5c bl 0x2cc30
+22ce0	_gldInitDispatch	f2	PASS-yes	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f3	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f4	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f5	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f6	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f7	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+22ce0	_gldInitDispatch	f8	PASS-no	callers set it 0/0	22d78 bl 0xa82c0
+2c790	FUN_0002c790	f2	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f3	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f4	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f5	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f6	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f7	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+2c790	FUN_0002c790	f8	PASS-no	callers set it 0/1	2c7c8 bl 0x1a3760	; symbol stub for: _memset
+4eba0	FUN_0004eba0	f2	PASS-yes	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f3	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f4	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f5	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f6	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f7	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4eba0	FUN_0004eba0	f8	PASS-no	callers set it 0/1	4ebf4 bl 0x1a010
+4ed90	FUN_0004ed90	f2	PASS-yes	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f3	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f4	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f5	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f6	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f7	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+4ed90	FUN_0004ed90	f8	PASS-no	callers set it 0/1	4edb4 bl 0xa3670
+82c50	FUN_00082c50	f2	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f3	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f4	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f5	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f6	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f7	PASS-indirect	callers set it 0/0	82c80 bctrl 
+82c50	FUN_00082c50	f8	PASS-indirect	callers set it 0/0	82c80 bctrl 
+a4980	FUN_000a4980	f2	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f3	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f4	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f5	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f6	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f7	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+a4980	FUN_000a4980	f8	PASS-no	callers set it 0/1	a4994 bl 0x1a3258
+cdc3c	FUN_000cdc3c	f1	PASS-yes	callers set it 17/17	cdc80 bl 0x1a3f80	; symbol stub for: _ecvt
+d13a4	FUN_000d13a4	f1	PASS-yes	callers set it 0/3	d1494 bl 0xd10a8
+d1624	FUN_000d1624	f1	PASS-no	callers set it 0/3	d172c bl 0xd10dc
+db6d4	FUN_000db6d4	f2	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f3	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f4	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f5	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f6	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f7	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+db6d4	FUN_000db6d4	f8	PASS-indirect	callers set it 0/2	db704 bl 0xda904
+dbbc0	FUN_000dbbc0	f2	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f3	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f4	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f5	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f6	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f7	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dbbc0	FUN_000dbbc0	f8	PASS-indirect	callers set it 0/2	dbbf0 bl 0xda904
+dc88c	FUN_000dc88c	f2	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f3	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f4	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f5	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f6	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f7	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c
+dc88c	FUN_000dc88c	f8	PASS-indirect	callers set it 0/1	dc8ac bl 0xdc83c

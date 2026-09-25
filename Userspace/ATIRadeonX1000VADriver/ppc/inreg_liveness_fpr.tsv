@@ -1,0 +1,11 @@
+entry	function	register	class	callers setting it	first reader
+4340	FUN_00004340	f2	RET	callers set it 0/0	4730 blr 
+4340	FUN_00004340	f3	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4340	FUN_00004340	f4	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4340	FUN_00004340	f5	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4340	FUN_00004340	f6	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4340	FUN_00004340	f7	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4340	FUN_00004340	f8	PASS-no	callers set it 0/0	440c bl 0xd040	; symbol stub for: _malloc
+4740	FUN_00004740	f2	RET	callers set it 0/2	49e0 blr 
+4740	FUN_00004740	f3	PASS-import		callers set it 0/2	
+4740	FUN_00004740	f4	PASS-import		callers set it 0/2	

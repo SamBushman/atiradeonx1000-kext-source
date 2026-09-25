@@ -310,8 +310,16 @@ for a, sz, name in idx:
     if a in proto:
         rt, params, exact = proto[a]
         decls.append('extern %s %s(%s);' % (rt, name, params) if exact else 'extern %s %s();' % (rt, name))
+# libm imports return their value in f1: declared `int` the C read r3 (GLDriver's float formatter printed every exponent as `e00`: `_log(x) /
+# _log(10)` was garbage; glprog's constant folding of sin/cos/pow...). K&R declarations with the real return type (arguments keep the default
+# promotions, as Ghidra printed them).
+_LIBM_D = {'log', 'log10', 'log2', 'pow', 'sqrt', 'sin', 'cos', 'tan', 'exp', 'exp2', 'floor', 'ceil', 'fabs', 'atof', 'strtod', 'ldexp', 'fmod',
+           'modf', 'frexp', 'atan', 'atan2', 'asin', 'acos', 'round', 'trunc', 'rint', 'hypot', 'cbrt', 'sinh', 'cosh', 'tanh', 'nearbyint'}
+_LIBM_F = {x + 'f' for x in _LIBM_D}
 for n in imports:
-    if n not in ('vectorPermute', 'vectorConditionalSelect'): decls.append('extern int %s();' % n)   # vectorPermute is declared (returning vec16) in ghidra_c.h
+    if n in ('vectorPermute', 'vectorConditionalSelect'): continue   # vectorPermute is declared (returning vec16) in ghidra_c.h
+    bn = n.lstrip('_')
+    decls.append('extern %s %s();' % ('double' if bn in _LIBM_D else 'float' if bn in _LIBM_F else 'int', n))
 called_data = set(re.findall(r'\(\s*\*\s*\(?\s*(?:\(code \*\))?\s*([A-Za-z_]\w*)\s*\)\s*\)?\s*\(', allbody))
 deref = set(re.findall(r'(?<![\w)\]])\*\s*\(?\s*([A-Za-z_]\w*)\b', allbody)) | set(re.findall(r'\b([A-Za-z_]\w*)\s*\[', allbody)) | set(re.findall(r'\(\s*[\w ]+\*+\s*\)\s*\*\s*([A-Za-z_]\w*)', allbody))
 tables = {t for t in re.findall(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', allbody) if re.match(r'^(?:_?(?:DAT|UNK|PTR|EXT)_|PTR_|FLOAT_|DOUBLE_|switchdataD_|s_|u_)', t)}
@@ -448,6 +456,11 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:DAT|UNK)_([0-9a-f]{8})\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
+            # a pointer cast of an element of a float/double cursor (`(undefined4 *)pfVar3[3]`: GLDriver FUN_000ddbcc reads three floats and then a
+            # pointer word from one stream) converts the float VALUE; the stock loads the word - reinterpret it
+            b = re.sub(r'\(([A-Za-z_]\w*(?:\s*\*)+)\)\s*(p[fd]Var\d+)\[([^\[\]]+)\]', r'(*(\1 *)(\2 + (\3)))', b)
+            # ...and the same word used as a float later (`(float)puVar14`, the fourth component of that stream): its bits are the float
+            b = re.sub(r'\(float\)\s*(p\w*Var\d+)\b(?!\s*[\[(])', r'(*(float *)&\1)', b)
             # `in_stack_000000XX` (XX >= 0) is the word at entry-sp + XX: the caller's frame (0 = back chain, 0x38+ = argument words 9+ that the
             # signature does not declare - ExtendParams.java covers the called ones). Ghidra declares it as a local, so the C read garbage; read the
             # entry stack pointer's memory instead, as for the `uStack` names below (the unwinder walks frames through in_stack_00000000).

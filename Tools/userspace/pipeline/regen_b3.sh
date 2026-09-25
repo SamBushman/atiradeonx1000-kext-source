@@ -54,3 +54,16 @@ rm -rf r32-va-ret && cp -r r32-va r32-va-ret
 run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetValueReturn.java $(cat $B/setret_va.txt)
 run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript ExtendParams.java $(cat $B/extend_va.txt)
 mkdir -p $OUT/n_va && run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/redump_va.txt)
+# step 12: Darwin float-argument storage (_ecvt: ints after a double go in r5.., not r3..), FUN_000cdc3c's undeclared double (f1, set by all 17
+# callers), and the libm imports' real prototypes (results in f1) - on further copies; callers re-decompiled
+rm -rf gld-dw && cp -r gld-sw gld-dw
+run gld-dw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript DarwinStorage.java apply
+run gld-dw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript AddDoubleParams.java 0xcdc3c:1
+run gld-dw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetLibmSignatures.java
+run gld-dw GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/darwin_redump_gld.txt) $(cat $B/libm_redump_gld.txt)
+rm -rf glprog-lm && cp -r glprog-w2 glprog-lm
+run glprog-lm GLProgProject libGLProgrammability.dylib -postScript SetLibmSignatures.java
+run glprog-lm GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/libm_redump_glprog.txt)
+rm -rf va-lm && cp -r r32-va-ret va-lm
+run va-lm Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetLibmSignatures.java
+run va-lm Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/libm_redump_va.txt)

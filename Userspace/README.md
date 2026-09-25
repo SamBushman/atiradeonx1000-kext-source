@@ -228,6 +228,21 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
   (115 GLDriver, 177 glprog). For every PASS row no stock caller sets that register before calling the function (`param_used.py`: `real=[]`), so the
   stock itself forwards whatever the register held - the rebuilt C forwards an uninitialised local instead; neither is an argument.
 
+### Floating-point arguments and results (Stage B3 step 12)
+* Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
+  style. The only signature this put an integer in the wrong register is `ecvt(double, int, int*, int*)` in GLDriver: its caller FUN_000cdc3c
+  (the driver's float formatter, used by its state dump) passed an integer parameter as ecvt's `decpt`/`sign` pointers - the rebuilt image died
+  with SIGBUS there - and the decompiler pruned the minus sign and the negative-exponent path as unreachable.
+* `in_f1`..`in_f13` (19 functions, `Userspace/<bin>/ppc/inreg_liveness_fpr.tsv`, `inreg_liveness.py ... fpr`): one real missing argument -
+  FUN_000cdc3c's value, loaded into f1 by all 17 stock callers; every other one is an FPR no stock caller sets, forwarded on.
+* libm results: the imports (sqrt, pow, floor, log, sin, cos, ... - GLDriver 11, glprog 17, VA 2) had no signature, so every caller read the result
+  from r3 or from an unassigned `extraout_f1`, and the corpus declared them `int`. They now carry their prototypes (Ghidra) and their real return
+  type (decls.h). `Tests/userspace/ftoa_test.c` (FUN_000cdc3c on 20 values, stock vs rebuilt): identical; before the libm fix every exponent
+  printed as `e00`. glprog's libm calls are in the software interpreter and the PPC runtime compiler, which no test reaches yet (the GLSL front end
+  does not fold built-ins: `Tests/userspace/glsl_libm.vert` compiles to the same ARB program on both images).
+* `extraout_f1` left after calls to driver-internal functions (6 GLDriver, 2 glprog functions): the stock caller never uses that f1 itself (FPR
+  liveness right after each call), it only forwards it to a later call - the same forwarded-garbage case as the PASS rows.
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,
