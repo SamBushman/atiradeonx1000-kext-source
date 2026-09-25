@@ -4,7 +4,9 @@ constants the caller loads into argument registers in the same basic block (`li 
 the same argument position of a call to that callee in the function's decompile. Integer arguments only (a call whose C has a float/double
 argument before the position is skipped - Darwin shifts the GPR slots). Calls are matched per (function, callee) as multisets, so the order in
 which the decompiler prints them does not matter. Prints every stock constant that no C call of that callee in that function carries at that
-position (a dropped, shifted or wrong argument), and a summary."""
+position (a dropped, shifted or wrong argument), and a summary. A constant the decompiler printed as the symbol at that address is reported
+apart: SYMBOLIZED-FUNCTION (`FUN_00001740` for the size 0x1740 - the rebuilt code passes the rebuilt function's address) is a real defect,
+a text address (`&UNK_00003754`) is harmless (ghidra2c turns it back into the number)."""
 import sys, re, glob, os, collections
 dis, dump = sys.argv[1:3]
 flt = sys.argv[3] if len(sys.argv) > 3 else None
@@ -78,7 +80,7 @@ def lit(e):
     v = imm(e.rstrip('UuLl'))
     if v is None and re.match(r"^-\d+$", e): v = int(e)
     return None if v is None else v & 0xffffffff
-tot = miss = checked = 0; out = []
+tot = miss = checked = symd = 0; out = []
 for ent, (name, rng) in sorted(rows.items()):
     if flt and flt not in name: continue
     f = os.path.join(dump, '0x%x.txt' % ent)
@@ -97,16 +99,22 @@ for ent, (name, rng) in sorted(rows.items()):
     for cal, sites in per.items():
         calls = c_calls(text, cal)
         if not calls: continue
-        have = collections.Counter()
+        have = collections.Counter(); sym = {}
         for args in calls:
             for i, e in enumerate(args):
                 if re.search(r'\((?:float|double)\)|\b(?:dVar|fVar|in_f|extraout_f|fparam_)\w*|\bDOUBLE_|\bFLOAT_', e): break   # a float argument: GPR slots shift
                 v = lit(e)
                 if v is not None: have[(i, v)] += 1
+                ms_ = re.match(r'^(?:\([^()]*\)\s*)?&?(FUN|LAB|DAT|UNK|PTR_\w*)_([0-9a-f]{8})$', e)
+                if ms_: sym[(i, int(ms_.group(2), 16))] = e   # a constant the decompiler printed as a symbol at that address
         for a, k in sites:
             for r, v in sorted(k.items()):
                 checked += 1
                 if have[(r - 3, v)] > 0: have[(r - 3, v)] -= 1; continue
+                if (r - 3, v) in sym:
+                    symd += 1
+                    kind = 'SYMBOLIZED-FUNCTION' if re.match(r'^(?:\([^()]*\)\s*)?FUN_', sym[(r - 3, v)]) else 'symbolized-text-address'
+                    out.append('%x\t%s\tcall %x %s\tr%d = %#x printed as %s (%s)' % (ent, name, a, cal, r, v, sym[(r - 3, v)], kind)); continue
                 miss += 1; out.append('%x\t%s\tcall %x %s\tr%d = %#x not at argument %d of any C call (%d C calls)' % (ent, name, a, cal, r, v, r - 3, len(calls)))
 for l in out: print(l)
-print('checked %d constant arguments, %d not found in the C' % (checked, miss))
+print('checked %d constant arguments, %d not found in the C, %d printed as a symbol at that address' % (checked, miss, symd))

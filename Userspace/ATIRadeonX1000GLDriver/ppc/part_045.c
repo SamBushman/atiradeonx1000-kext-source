@@ -3599,7 +3599,7 @@ int FUN_00172a28(param_1)
 int FUN_00172a90(param_1, param_2, param_3)
   undefined4 param_1;
   int param_2;
-  undefined4 param_3;
+  uint param_3;
 {
   undefined4 uVar1;
   

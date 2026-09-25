@@ -37,7 +37,7 @@ int FUN_0012b35c(param_1, param_2)
 int FUN_0012b3f8(param_1, param_2, param_3)
   int param_1;
   int param_2;
-  undefined4 param_3;
+  uint param_3;
 {
   uint uVar1;
   
@@ -1035,7 +1035,7 @@ LAB_0012ce40:
                     iVar3 = ((int (*)())FUN_0012b6a8)(local_84,local_88,in_r5,in_r6,in_r7,in_r8,in_r9);
                     bVar1 = bVar1 || iVar3 != 0;
                     if (iVar3 != 0) {
-                      FUN_000ed7e4(param_1,"loop_trans");
+                      FUN_000ed7e4(param_1,0x1a9e00);
                     }
                   }
                 }
@@ -2887,7 +2887,7 @@ LAB_0013037c:
       FUN_0013bd68(param_1,0);
     }
   }
-  FUN_000ed7e4(param_1,"remove_empty_graphs");
+  FUN_000ed7e4(param_1,0x1a9e18);
   return;
 }
 
@@ -3280,8 +3280,8 @@ int FUN_00130a78(param_1, param_2)
 /* FUN_00130abc @ 0x130abc (280 bytes) */
 int FUN_00130abc(param_1, param_2, param_3)
   undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  uint param_2;
+  uint param_3;
 {
   uint uVar1;
   int *a0;

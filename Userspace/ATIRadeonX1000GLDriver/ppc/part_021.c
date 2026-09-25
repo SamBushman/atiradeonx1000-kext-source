@@ -824,8 +824,8 @@ int FUN_000e280c(param_1, param_2, param_3)
 /* FUN_000e2838 @ 0xe2838 (20 bytes) */
 int FUN_000e2838(param_1, param_2, param_3)
   int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+  uint param_2;
+  uint param_3;
 {
                     
                     
@@ -1432,7 +1432,7 @@ int FUN_000e3544(param_1, param_2, param_3)
 
 /* FUN_000e36bc @ 0xe36bc (652 bytes) */
 int FUN_000e36bc(param_1, param_2, param_3)
-  int *param_1;
+  uint *param_1;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -1441,7 +1441,8 @@ int FUN_000e36bc(param_1, param_2, param_3)
   int *piVar3;
   int *piVar4;
   undefined4 *puVar5;
-  int iVar6;
+  uint uVar6;
+  int iVar7;
   undefined4 in_r8;
   undefined4 in_r9;
   undefined4 in_r10;
@@ -1474,7 +1475,7 @@ int FUN_000e36bc(param_1, param_2, param_3)
           ((int (*)())FUN_000e2ee4)(auStack_74,piVar4);
         }
       }
-      ((int (*)())FUN_000e2838)(auStack_74,piVar1,*param_1);
+      ((int (*)())FUN_000e2838)(auStack_74,(uint)piVar1,*param_1);
     }
     else {
       ((int (*)())FUN_000e280c)(piVar1,auStack_74,auStack_78);
@@ -1483,23 +1484,23 @@ int FUN_000e36bc(param_1, param_2, param_3)
     piVar1 = piVar3;
   }
   (**(code **)(*local_54 + 0x10))();
-  iVar2 = (**(code **)(*local_54 + 0x20))();
-  param_1[1] = iVar2;
+  uVar6 = (**(code **)(*local_54 + 0x20))();
+  param_1[1] = uVar6;
   ((int (*)())FUN_000e2780)(param_1,auStack_74);
   iVar2 = ((int (*)())FUN_000e284c)(auStack_74);
-  iVar6 = FUN_000e07dc(param_1[2],0x4d);
-  if (iVar6 == 0) {
+  iVar7 = FUN_000e07dc(param_1[2],0x4d);
+  if (iVar7 == 0) {
     if (iVar2 != 0) goto LAB_000e3900;
   }
   else if (iVar2 != 0) {
     if (*param_1 == 0) {
       *param_1 = 1;
-      iVar2 = param_1[1];
+      uVar6 = param_1[1];
       (**(code **)(*local_54 + 0xc))();
       ((int (*)())FUN_000e36bc)(param_1,param_2,param_3);
       ((int (*)())FUN_000e284c)(auStack_74);
-      FUN_000e0e0c(param_1[2],"Compression : size reduced from %d to %d  (%%%d)\n",iVar2,
-                   param_1[1],((iVar2 - param_1[1]) * 100) / iVar2,in_r8,in_r9,in_r10);
+      FUN_000e0e0c(param_1[2],"Compression : size reduced from %d to %d  (%%%d)\n",uVar6,
+                   param_1[1],(int)((uVar6 - param_1[1]) * 100) / (int)uVar6,in_r8,in_r9,in_r10);
       goto LAB_000e392c;
     }
 LAB_000e3900:

@@ -751,7 +751,7 @@ int FUN_0010d15c(param_1, param_2, param_3, param_4)
 /* FUN_0010d358 @ 0x10d358 (372 bytes) */
 int FUN_0010d358(param_1, param_2)
   int param_1;
-  undefined4 param_2;
+  uint param_2;
 {
   int iVar1;
   int iVar2;
@@ -783,20 +783,19 @@ int FUN_0010d358(param_1, param_2)
       }
     }
     else if (iVar2 != 0) {
-      if ((((local_54 != FLOAT_001aa0e8) && (local_54 != FLOAT_001aa114)) &&
-          (local_54 != FLOAT_001aa108)) && (local_54 != FLOAT_001aa1c8)) {
+      if ((((local_54 != 1.0) && (local_54 != -1.0)) && (local_54 != 2.0)) && (local_54 != -2.0)) {
         return;
       }
-      if (local_3c == FLOAT_001aa0e8) {
+      if (local_3c == 1.0) {
         return;
       }
-      if (local_3c == FLOAT_001aa114) {
+      if (local_3c == -1.0) {
         return;
       }
-      if (local_3c == FLOAT_001aa108) {
+      if (local_3c == 2.0) {
         return;
       }
-      if (local_3c == FLOAT_001aa1c8) {
+      if (local_3c == -2.0) {
         return;
       }
     }
@@ -1312,7 +1311,7 @@ int FUN_0010e050(param_1, param_2)
   param_1[1] = 0;
   *param_1 = puVar1 + 8;
   *param_1 = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,FUN_00001740);
+  iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a578(iVar2,param_2,1);
   }
@@ -1338,7 +1337,7 @@ int FUN_0010e114(param_1, param_2)
   param_1[1] = 0;
   *param_1 = puVar1 + 8;
   *param_1 = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,FUN_00001740);
+  iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a578(iVar2,param_2,1);
   }
@@ -1366,7 +1365,7 @@ int FUN_0010e1d8(param_1, param_2)
   *param_1 = puVar3;
   param_1[1] = 0;
   *param_1 = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,FUN_00001740);
+  iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a8bc(iVar2,param_2,1);
   }
@@ -1394,7 +1393,7 @@ int FUN_0010e2a0(param_1, param_2)
   *param_1 = puVar3;
   param_1[1] = 0;
   *param_1 = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,FUN_00001740);
+  iVar2 = FUN_000e1564(param_2,0x1740);
   if (iVar2 != 0) {
     FUN_0012a8bc(iVar2,param_2,1);
   }

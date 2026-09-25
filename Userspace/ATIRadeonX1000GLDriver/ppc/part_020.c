@@ -3910,7 +3910,7 @@ int FUN_000e1534(param_1, param_2)
 /* FUN_000e1564 @ 0xe1564 (84 bytes) */
 int FUN_000e1564(param_1, param_2)
   int param_1;
-  undefined4 param_2;
+  uint param_2;
 {
   int iVar1;
   

@@ -553,7 +553,7 @@ int FUN_001a25a8(param_1, param_2, param_3, param_4)
   int *param_1;
   int param_2;
   undefined4 param_3;
-  undefined4 param_4;
+  uint param_4;
 {
   int iVar1;
   undefined4 uVar2;
@@ -588,7 +588,7 @@ int FUN_001a25a8(param_1, param_2, param_3, param_4)
   FUN_00103d50(iVar3,2,uVar5 >> 1 & 1);
   uVar7 = 2;
   FUN_00103d50(iVar3,1,*(uint *)(param_2 + 0xd0) & 1);
-  *(undefined4 *)(iVar1 + 0x9c) = DAT_001b2d6c;
+  *(undefined4 *)(iVar1 + 0x9c) = 0x10101;
   iVar4 = FUN_001054ec(iVar1,0);
   *(undefined4 *)(iVar4 + 0xc) = 0;
   *(undefined4 *)(iVar4 + 8) = 0;
@@ -720,7 +720,7 @@ int FUN_001a2b10(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_6;
 {
   int iVar1;
-  undefined4 uVar2;
+  uint uVar2;
   int local_38 [7];
   
   local_38[0] = 0;
@@ -844,7 +844,7 @@ int FUN_001a2ee4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_7;
 {
   int *piVar1;
-  undefined4 uVar2;
+  uint uVar2;
   undefined4 uVar3;
   int iVar4;
   int iVar5;

@@ -82,6 +82,7 @@ run glprog-mv GLProgProject libGLProgrammability.dylib -readOnly -postScript Red
 rm -rf gld-fw && cp -r gld-mv gld-fw
 run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ForwardArgs.java $(cat $B/forward_args_gld.txt)
 run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetImportSignatures.java
+run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript RetypeParams.java $(cat $B/retype_forwarded_gld.txt)   # no-op with the uint ForwardArgs
 run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/forward_redump_gld.txt) $(cat $B/importsig_redump_gld.txt)
 rm -rf glprog-is && cp -r glprog-mv glprog-is
 run glprog-is GLProgProject libGLProgrammability.dylib -postScript SetImportSignatures.java

@@ -3890,7 +3890,7 @@ joined_r0x000cc708:
 int FUN_000cd05c(param_1, param_2, param_3)
   int param_1;
   int param_2;
-  undefined4 param_3;
+  uint param_3;
 {
   int a1;
   int iVar1;

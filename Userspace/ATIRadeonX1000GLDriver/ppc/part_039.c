@@ -1896,7 +1896,7 @@ int FUN_0012ab80(param_1)
   
   piVar1 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
   (**(code **)(*piVar1 + 0x74))(piVar1,param_1);
-  FUN_000ed7e4(param_1,"optimize_control_flow");
+  FUN_000ed7e4(param_1,0x1a9de8);
   return;
 }
 

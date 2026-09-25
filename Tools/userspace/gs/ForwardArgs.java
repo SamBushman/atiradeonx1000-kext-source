@@ -37,7 +37,9 @@ public class ForwardArgs extends GhidraScript {
             if (f.getParameterCount() < want) {
                 List<Parameter> ps = new ArrayList<>();
                 for (Parameter q : f.getParameters()) ps.add(new ParameterImpl(q.getName(), q.getDataType(), currentProgram, SourceType.USER_DEFINED));
-                for (int i = ps.size(); i < want; i++) ps.add(new ParameterImpl("param_" + (i + 1), Undefined4DataType.dataType, currentProgram, SourceType.USER_DEFINED));
+                // `uint`, not `undefined4`: Ghidra prints a constant argument that equals an address in an undefined4 slot as that symbol (the
+                // allocation size 0x1740 became `FUN_00001740`, the rebuilt function's address)
+                for (int i = ps.size(); i < want; i++) ps.add(new ParameterImpl("param_" + (i + 1), UnsignedIntegerDataType.dataType, currentProgram, SourceType.USER_DEFINED));
                 f.updateFunction(f.getCallingConventionName(), f.getReturn(), ps, FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS, true, SourceType.USER_DEFINED);
             }
             DecompileResults r = dec.decompileFunction(f, 600, new ConsoleTaskMonitor());

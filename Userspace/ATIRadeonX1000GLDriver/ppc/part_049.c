@@ -1192,7 +1192,7 @@ LAB_00188508:
         uVar6 = 1;
       }
     }
-    iVar1 = FUN_0015546c(param_2,param_3,param_4,param_5);
+    iVar1 = FUN_0015546c(param_2,param_3,param_4,(uint)param_5);
     if (iVar1 != 0) {
       uVar6 = 1;
       param_4 = (int *)FUN_00146610(param_2,param_3,param_4);

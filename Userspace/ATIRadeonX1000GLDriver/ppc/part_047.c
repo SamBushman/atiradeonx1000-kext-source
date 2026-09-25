@@ -1257,7 +1257,7 @@ int FUN_00178e90(param_1, param_2, param_3, param_4)
   float *param_1;
   int param_2;
   int param_3;
-  undefined4 param_4;
+  uint param_4;
 {
   float fVar1;
   float fVar2;
@@ -1281,15 +1281,15 @@ int FUN_00178e90(param_1, param_2, param_3, param_4)
       pfVar4 = (float *)FUN_00173360(*(undefined4 *)(param_2 + 0x238),
                                      *(undefined4 *)(param_2 + 0x178));
       fVar3 = *pfVar4;
-      fVar2 = fVar3;
+      fVar1 = fVar3;
       if (fVar3 < 0.0) {
-        fVar2 = FLOAT_001aa0d4;
+        fVar1 = 0.0;
       }
-      fVar1 = FLOAT_001aa0d4;
+      fVar2 = 0.0;
       if (-fVar3 < 0.0) {
-        fVar1 = fVar2;
+        fVar2 = fVar1;
       }
-      *param_1 = fVar1;
+      *param_1 = fVar2;
     }
     else {
       if (param_3 < 2) {
@@ -1305,24 +1305,24 @@ int FUN_00178e90(param_1, param_2, param_3, param_4)
           pfVar4 = (float *)FUN_00173360(*(undefined4 *)(param_2 + 0x238),
                                          *(undefined4 *)(param_2 + 0x17c));
           local_58[1] = *pfVar4;
-          if ((FLOAT_001aa0d4 < local_58[0]) && (FLOAT_001aa0d4 < local_58[1])) {
+          if ((0.0 < local_58[0]) && (0.0 < local_58[1])) {
             pfVar4 = (float *)FUN_00173360(*(undefined4 *)(param_2 + 0x238),
                                            *(undefined4 *)(param_2 + 0x184));
             local_58[3] = *pfVar4;
-            fVar2 = FLOAT_001aa1d4;
-            if (FLOAT_001aa1d4 <= local_58[3]) {
-              fVar3 = FLOAT_001aa1d8;
-              if (local_58[3] - FLOAT_001aa1d8 < 0.0) {
+            fVar1 = -128.0;
+            if (-128.0 <= local_58[3]) {
+              fVar3 = 128.0;
+              if (local_58[3] - 128.0 < 0.0) {
                 fVar3 = local_58[3];
               }
-              fVar2 = local_58[3];
-              if (-(local_58[3] - FLOAT_001aa1d8) < 0.0) {
-                fVar2 = fVar3;
+              fVar1 = local_58[3];
+              if (-(local_58[3] - 128.0) < 0.0) {
+                fVar1 = fVar3;
               }
             }
             dVar6 = _log((double)local_58[1]);
-            dVar7 = _log(DOUBLE_001aa2a0);
-            dVar6 = _pow(DOUBLE_001aa2a0,(double)(fVar2 * (float)(dVar6 / dVar7)));
+            dVar7 = _log(2.0);
+            dVar6 = _pow(2.0,(double)(fVar1 * (float)(dVar6 / dVar7)));
             *param_1 = (float)dVar6;
             return param_1;
           }

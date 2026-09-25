@@ -139,7 +139,12 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
      whose value reaches an indirect call get the parameters and at least that many arguments on their indirect calls (`gs/ForwardArgs.java`,
      b3/forward_args_gld.txt). Extending their direct callees as well (FUN_001054ec's chain into the same allocator callback) was tried and
      dropped: those callees are called from hundreds of sites that never set the registers, and Ghidra printed junk constants for them.
-   After both: 42 of 10112 GLDriver constants unmatched (was 154), glprog unchanged at 34 of 777 (no call there lost an argument).
+   After both: 29 of 10112 GLDriver constants unmatched (was 154) plus 9 printed as the text address they equal (harmless: ghidra2c turns
+   `&UNK_00003754` back into 0x3754), glprog unchanged at 34 of 777 (no call there lost an argument). The parameters ForwardArgs adds are `uint`:
+   as `undefined4` Ghidra printed FUN_000e1564's allocation size 0x1740 as `FUN_00001740` - the rebuilt function's address - at four call sites
+   (callarg_check.py reports such SYMBOLIZED-FUNCTION arguments; the dumps were produced with undefined4 and then `gs/RetypeParams.java`
+   b3/retype_forwarded_gld.txt). The redumps also inline values Ghidra now reads from `__const` / `__literal` data (glprog 308, GLDriver 5
+   declarations fewer): read-only, so equivalent.
    RedumpContaining now raises the decompiler's payload limit (FUN_00115fa0, 3500 lines, failed with "Response buffer size exceeded").
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42

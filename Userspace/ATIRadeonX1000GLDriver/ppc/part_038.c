@@ -789,10 +789,10 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
 
 /* FUN_001275a0 @ 0x1275a0 (104 bytes) */
 int FUN_001275a0(param_1, param_2, param_3, param_4)
-  undefined4 *param_1;
+  uint *param_1;
   undefined4 param_2;
   undefined4 param_3;
-  undefined4 param_4;
+  uint param_4;
 {
   undefined4 uVar1;
   undefined4 uStack0000001c;

@@ -1800,7 +1800,7 @@ LAB_00175e58:
             if ((iVar2 != 0) && (iVar2 = ((int (*)())FUN_00173cdc)(*param_4,iVar2), iVar2 != 0)) {
               iVar7 = *(int *)(*param_4 + 0xb0);
               iVar2 = FUN_00122fa4(*(undefined4 *)(iVar7 + 0xa4),*(undefined4 *)(param_1 + 0x3a0),
-                                   *(undefined4 *)(param_1 + 8));
+                                   *(uint *)(param_1 + 8));
               if ((iVar7 == *(int *)(iVar2 + 0xb0)) &&
                  (iVar2 = FUN_0011f2f8(param_1,*(undefined4 *)(*param_4 + 0xb0),param_5), iVar2 != 0
                  )) goto LAB_0017624c;
@@ -1840,7 +1840,7 @@ LAB_001760e4:
               (iVar1 = ((int (*)())FUN_0017494c)(*param_4,param_2,param_3), iVar1 != 0)))) {
             iVar2 = *(int *)(*param_4 + 0xb0);
             iVar1 = FUN_00122fa4(*(undefined4 *)(iVar2 + 0xa4),*(undefined4 *)(param_1 + 0x3a0),
-                                 *(undefined4 *)(param_1 + 8));
+                                 *(uint *)(param_1 + 8));
             if ((iVar2 == *(int *)(iVar1 + 0xb0)) &&
                (iVar1 = FUN_0011f2f8(param_1,iVar2,param_5), iVar1 != 0)) goto LAB_0017624c;
           }
