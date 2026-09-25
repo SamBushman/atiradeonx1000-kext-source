@@ -3429,6 +3429,7 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
   void *this_00;
   char in_RESERVE;
   byte in_cr0;
+  undefined1 auStack_30 [28];
   
   *(int *)this = DAT_a7b7bba0 + 8;
   ((int (*)())TGenericLinker__reset)(this);
@@ -3445,7 +3446,7 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
     if (iVar3 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
     }
     iVar4 = *piVar5;
     piVar2 = (int *)(iVar4 + -4);
@@ -3458,7 +3459,7 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
     if (iVar3 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
     }
     __ZdlPv(piVar5);
   }

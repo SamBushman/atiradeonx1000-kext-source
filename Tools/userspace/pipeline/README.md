@@ -139,8 +139,12 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
      whose value reaches an indirect call get the parameters and at least that many arguments on their indirect calls (`gs/ForwardArgs.java`,
      b3/forward_args_gld.txt). Extending their direct callees as well (FUN_001054ec's chain into the same allocator callback) was tried and
      dropped: those callees are called from hundreds of sites that never set the registers, and Ghidra printed junk constants for them.
+   glprog (hidden_params.py now resolves the unstripped image's `bl _name` calls): `std::string::_Rep::_M_destroy(const allocator&)` had only the
+   demangled allocator in r3 - which is `this` - so its real argument r4, loaded by all 4 stock callers and read further down, was dropped; and
+   `_M_replace<const char*>` forwards r8 (4/4 callers). Both extended (function and PIC stub; b3/forward_args_glprog.txt). VA's and GLDriver's
+   other hits are dyld helpers inside the toolchain ranges, not linked.
    After both: 29 of 10112 GLDriver constants unmatched (was 154) plus 9 printed as the text address they equal (harmless: ghidra2c turns
-   `&UNK_00003754` back into 0x3754), glprog unchanged at 34 of 777 (no call there lost an argument). The parameters ForwardArgs adds are `uint`:
+   `&UNK_00003754` back into 0x3754), glprog 20 of 777 (no call there lost an argument; string literals with commas had been miscounted). The parameters ForwardArgs adds are `uint`:
    as `undefined4` Ghidra printed FUN_000e1564's allocation size 0x1740 as `FUN_00001740` - the rebuilt function's address - at four call sites
    (callarg_check.py reports such SYMBOLIZED-FUNCTION arguments; the dumps were produced with undefined4 and then `gs/RetypeParams.java`
    b3/retype_forwarded_gld.txt). The redumps also inline values Ghidra now reads from `__const` / `__literal` data (glprog 308, GLDriver 5

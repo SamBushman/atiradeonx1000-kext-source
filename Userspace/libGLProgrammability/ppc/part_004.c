@@ -3370,7 +3370,7 @@ int OutputTreeText(param_1, param_2, param_3)
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_80[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_80[0] + -0xc),acStack_70);
   }
   if (0 < param_3) {
     do {

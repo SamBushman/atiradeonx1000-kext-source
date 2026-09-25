@@ -28,6 +28,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   void *pvVar5;
   char in_RESERVE;
   byte in_cr0;
+  undefined1 auStack_30 [24];
   
   *(int *)this = DAT_a7b7bd98 + 8;
   ConstantAllocationList__clear((unsigned char *)((int)this + 0x44));
@@ -90,7 +91,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
   }
   iVar4 = *(int *)((int)this + 0xb0);
   piVar2 = (int *)(iVar4 + -4);
@@ -103,7 +104,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
   }
   __ZN22ConstantAllocationListD1Ev((unsigned char *)((int)this + 0x44));
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;

@@ -123,6 +123,7 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1)
   int iVar1;
   unsigned char * paVar2;
   int iVar3;
+  uint in_r4;
   char in_RESERVE;
   byte in_cr0;
   
@@ -138,7 +139,7 @@ int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1)
   if (0 < iVar3) {
     return;
   }
-  __ZNSs4_Rep10_M_destroyERKSaIcE(param_1);
+  __ZNSs4_Rep10_M_destroyERKSaIcE(param_1,in_r4);
   return;
 }
 
@@ -209,7 +210,7 @@ int __ZNSs9_M_mutateEmmm(this, param_2, param_3, param_4)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar7 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar6 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar6 + -0xc),(uint)aaStack_40);
   }
   *(int *)this = iVar4;
 LAB_97c135b0:
@@ -726,6 +727,7 @@ int __ZNSsD4Ev(this)
   int iVar4;
   char in_RESERVE;
   byte in_cr0;
+  undefined1 auStack_20 [20];
   
   iVar4 = *(int *)this;
   ((int (*)())__ZNKSs13get_allocatorEv)();
@@ -739,7 +741,7 @@ int __ZNSsD4Ev(this)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),(uint)auStack_20);
   }
   return;
 }

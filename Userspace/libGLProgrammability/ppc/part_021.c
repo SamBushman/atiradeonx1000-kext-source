@@ -84,7 +84,7 @@ int __ZNSs7replaceEmmPKcm(this, param_2, param_3, param_4, param_5)
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
               (this,local_30 + param_2,(char *)(local_2c[0] + param_2 + param_3),param_4,
-               param_4 + param_5);
+               param_4 + param_5,0);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_30,this);
@@ -131,7 +131,8 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_(this, param_2,
     __ZNKSs9_M_ibeginEv(local_28,this);
     __ZNKSs9_M_ibeginEv(&local_2c,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,local_2c + uVar2,(char *)(local_28[0] + uVar2 + uVar3),param_4,param_4 + iVar4);
+              (this,local_2c + uVar2,(char *)(local_28[0] + uVar2 + uVar3),param_4,param_4 + iVar4,0
+              );
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_2c,this);
@@ -180,7 +181,7 @@ int __ZNSs5eraseEmm(param_1, param_2, param_3)
     __ZNKSs9_M_ibeginEv(local_30,param_1);
     __ZNKSs9_M_ibeginEv(&local_34,param_1);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (param_1,local_34 + uVar3,(char *)(local_30[0] + uVar3 + uVar4),pcVar2,pcVar2);
+              (param_1,local_34 + uVar3,(char *)(local_30[0] + uVar3 + uVar4),pcVar2,pcVar2,0);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_34,param_1);
@@ -238,7 +239,7 @@ int __ZNSs6resizeEmc(this, param_2, param_3)
       __ZNKSs9_M_ibeginEv(local_30,this);
       __ZNKSs9_M_ibeginEv(&local_34,this);
       __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-                (this,local_34 + uVar1,(char *)(local_30[0] + uVar1 + uVar5),pcVar3,pcVar3);
+                (this,local_34 + uVar1,(char *)(local_30[0] + uVar1 + uVar5),pcVar3,pcVar3,0);
     }
     else {
       __ZNKSs9_M_ibeginEv(&local_34,this);
@@ -297,7 +298,7 @@ int __ZNSs7reserveEm(this, param_2)
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
     if (iVar3 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar5 + -0xc));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar5 + -0xc),(uint)aaStack_20);
     }
     *(undefined4 *)this = uVar4;
   }

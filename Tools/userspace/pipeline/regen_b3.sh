@@ -86,6 +86,9 @@ run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript RetypeParams
 run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/forward_redump_gld.txt) $(cat $B/importsig_redump_gld.txt)
 rm -rf glprog-is && cp -r glprog-mv glprog-is
 run glprog-is GLProgProject libGLProgrammability.dylib -postScript SetImportSignatures.java
+run glprog-is GLProgProject libGLProgrammability.dylib -postScript ForwardArgs.java $(cat $B/forward_args_glprog.txt)
+run glprog-is GLProgProject libGLProgrammability.dylib -postScript ExtendParams.java $(cat $B/forward_args_glprog.txt)   # the PIC stubs too
+run glprog-is GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/forward_redump_glprog.txt)
 run glprog-is GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/importsig_redump_glprog.txt)
 rm -rf va-is && cp -r va-lm va-is
 run va-is Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetImportSignatures.java

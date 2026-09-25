@@ -3555,6 +3555,7 @@ int _ShInitialize()
   undefined4 local_3c;
   undefined *local_38;
   undefined4 local_34;
+  undefined1 auStack_30 [28];
   
   local_40 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
@@ -3604,7 +3605,7 @@ int _ShInitialize()
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_38 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_38 + -0xc),auStack_30);
   }
   piVar2 = (int *)(local_40 + -4);
   do {
@@ -3616,7 +3617,7 @@ int _ShInitialize()
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40 + -0xc),auStack_30);
   }
   return uVar6;
 }
@@ -4017,7 +4018,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   pcVar12 = (char *)*this;
   if (((*(int *)(pcVar12 + -4) < 1) && (pcVar12 <= pcVar14)) && (pcVar14 <= pcVar12 + iVar3)) {
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (this,pcVar12,pcVar12 + iVar3,pcVar14,pcVar14);
+              (this,pcVar12,pcVar12 + iVar3,pcVar14,pcVar14,0);
   }
   else {
     __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_

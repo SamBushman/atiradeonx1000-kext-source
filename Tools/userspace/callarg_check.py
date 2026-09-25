@@ -52,9 +52,16 @@ for a, (op, arg) in ins.items():
     m = re.match(r'(?:cr\d,)?0x([0-9a-f]+)', arg)
     if op.startswith('b') and m: BRANCH_TARGETS.add(int(m.group(1), 16))
 def split_args(s):
-    out = []; d = 0; cur = ''
+    out = []; d = 0; cur = ''; q = None; esc = False
     for ch in s:
-        if ch in '([': d += 1
+        if q:   # inside a string / char literal: commas and parentheses are text
+            cur += ch
+            if esc: esc = False
+            elif ch == '\\': esc = True
+            elif ch == q: q = None
+            continue
+        if ch in '"\'': q = ch
+        elif ch in '([': d += 1
         elif ch in ')]': d -= 1
         if ch == ',' and d == 0: out.append(cur.strip()); cur = ''; continue
         cur += ch
@@ -64,10 +71,15 @@ def c_calls(text, callee):
     """argument lists of every call of `callee` (by its last name component) in a decompile"""
     res = []
     for m in re.finditer(r'(?<![\w.>])(?:[\w:]*::)?_*%s\s*\(' % re.escape(callee), text):
-        i = m.end(); d = 1; j = i
+        i = m.end(); d = 1; j = i; q = None
         while j < len(text) and d:
-            if text[j] == '(': d += 1
-            elif text[j] == ')': d -= 1
+            c = text[j]
+            if q:
+                if c == '\\': j += 1
+                elif c == q: q = None
+            elif c in '"\'': q = c
+            elif c == '(': d += 1
+            elif c == ')': d -= 1
             j += 1
         res.append(split_args(text[i:j - 1]))
     return res

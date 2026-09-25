@@ -651,8 +651,9 @@ LAB_97c164a4:
 }
 
 /* __ZNSs4_Rep10_M_destroyERKSaIcE @ 0x97c165cc (132 bytes) */
-int __ZNSs4_Rep10_M_destroyERKSaIcE(param_1)
+int __ZNSs4_Rep10_M_destroyERKSaIcE(param_1, param_2)
   unsigned char * param_1;
+  uint param_2;
 {
   undefined *puVar1;
   undefined *puVar2;
@@ -984,12 +985,13 @@ int std__string___M_replace_char__(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag @ 0x97c16c44 (108 bytes) */
-int __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag(param_1, param_2, param_3, param_4, param_5)
+int __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag(param_1, param_2, param_3, param_4, param_5, param_6)
   void *param_1;
   undefined4 param_2;
   char *param_3;
   char *param_4;
   char *param_5;
+  uint param_6;
 {
   unsigned char * psVar1;
   undefined1 auStack_50 [16];

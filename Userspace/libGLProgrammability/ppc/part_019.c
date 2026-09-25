@@ -4652,7 +4652,8 @@ int std____throw_logic_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4667,7 +4668,7 @@ int std____throw_logic_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c154,PTR___ZNSt11logic_errorD1Ev_a7b7c150);
@@ -4684,7 +4685,8 @@ int std____throw_domain_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4699,7 +4701,7 @@ int std____throw_domain_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c14c,PTR___ZNSt12domain_errorD1Ev_a7b7c148);
@@ -4716,7 +4718,8 @@ int std____throw_invalid_argument(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4731,7 +4734,7 @@ int std____throw_invalid_argument(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c144,PTR___ZNSt16invalid_argumentD1Ev_a7b7c140);
@@ -4748,7 +4751,8 @@ int std____throw_length_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4763,7 +4767,7 @@ int std____throw_length_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c13c,PTR___ZNSt12length_errorD1Ev_a7b7c138);
@@ -4780,7 +4784,8 @@ int std____throw_out_of_range(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4795,7 +4800,7 @@ int std____throw_out_of_range(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c134,PTR___ZNSt12out_of_rangeD1Ev_a7b7c130);
@@ -4812,7 +4817,8 @@ int std____throw_runtime_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4827,7 +4833,7 @@ int std____throw_runtime_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c12c,PTR___ZNSt13runtime_errorD1Ev_a7b7c128);
@@ -4844,7 +4850,8 @@ int std____throw_range_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4859,7 +4866,7 @@ int std____throw_range_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c124,PTR___ZNSt11range_errorD1Ev_a7b7c120);
@@ -4876,7 +4883,8 @@ int std____throw_overflow_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4891,7 +4899,7 @@ int std____throw_overflow_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c11c,PTR___ZNSt14overflow_errorD1Ev_a7b7c118);
@@ -4908,7 +4916,8 @@ int std____throw_underflow_error(param_1)
   char in_RESERVE;
   byte in_cr0;
   int local_40 [4];
-  unsigned char aaStack_30 [40];
+  unsigned char aaStack_30 [16];
+  undefined1 auStack_20 [24];
   
   __ZNSsC1EPKcRKSaIcE(local_40,param_1,aaStack_30);
   this = (void *)___cxa_allocate_exception(8);
@@ -4923,7 +4932,7 @@ int std____throw_underflow_error(param_1)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_40[0] + -0xc),auStack_20);
   }
                     
   ___cxa_throw(this,PTR_typeinfo_a7b7c114,PTR___ZNSt15underflow_errorD1Ev_a7b7c110);

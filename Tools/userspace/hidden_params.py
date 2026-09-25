@@ -7,9 +7,12 @@ sys.argv=['x',dis,D+'/RANGES.tsv','/nonexistent']
 g=runpy.run_path(os.path.expanduser('~/Documents/ATI-X1900-Decomp/atiradeonx1000-kext-source/Tools/userspace/inreg_liveness.py'))
 G=g['classify'].__globals__; ins=G['ins']; rows=G['rows']
 calls={}
+label=G['label']   # an unstripped image prints `bl _name`
 for a,(op,arg) in ins.items():
+    if op!='bl': continue
     m=re.match(r'0x([0-9a-f]+)',arg)
-    if op=='bl' and m: calls.setdefault(int(m.group(1),16),[]).append(a)
+    t=int(m.group(1),16) if m else label.get(arg.split()[0]) if arg else None
+    if t is not None: calls.setdefault(t,[]).append(a)
 def setters(ent,r):
     n=0; sites=calls.get(ent,[])
     for a in sites:

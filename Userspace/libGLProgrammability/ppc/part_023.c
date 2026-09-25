@@ -653,6 +653,7 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
   int iVar4;
   char in_RESERVE;
   byte in_cr0;
+  undefined1 auStack_20 [20];
   
   iVar4 = *(int *)((int)this + 4);
   *(int *)this = DAT_a7b7c014 + 8;
@@ -666,7 +667,7 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_20);
   }
   __ZNSt9exceptionD2Ev(this);
   if ((param_2 & 1) != 0) {
