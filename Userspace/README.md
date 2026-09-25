@@ -235,6 +235,9 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
   differences (`memset` and one unnamed stub call).
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
+* GLDriver orphans (unowned_code/verify_callees.txt): `orph_da880` clears four words and tail-calls `memset(p + 0x10, 0, 0x200)` (0xda880..0xda8a4,
+  `b _memset` stub); the C calls the same through memset's non-lazy pointer `PTR_FUN_001e876c` with the same three arguments. `orph_1d8df8` loads
+  r4..r7 and tail-branches to 0x19ef4c, which is a lone `blr`: no store, no call, r3 returned unchanged - the C's empty body is the same.
 * Callee comparison after Stage B3 (2026-09-25): glprog 8 functions differ - `handleDigit` (self-recursion, the stock `bl` target decoded = its own
   entry), `___register_frame_table` (the stock tail-jumps to the 2-instruction thunk `register_frame_info_table` = `_bases(a, b, 0, 0)`, which the C
   calls directly), the two dead range checks below, the unwinder's `eh_rest_world_r10`, and the three rebuilt unwinder entry points, which no
