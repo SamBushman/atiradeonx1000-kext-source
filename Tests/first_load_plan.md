@@ -16,7 +16,7 @@ drawing; this has not been observed on this machine, treat a blank screen as pos
 
 1. `sh Tools/remote_build.sh` builds with a distinct identifier (`com.example.ATIRadeonX1000.linktest`, see `Tools/build_kext.sh`); output stays in `/tmp` on the G5 or under Test HD.
 2. `sh Tools/link_check.sh` (done for the current tree: only the five KPI symbols listed in `build_kext.sh` are undefined).
-3. `kextutil -t -n` (test, no load) on a copy in `/Volumes/Test HD/...`: prints undefined symbols, missing dependencies, and Info.plist problems without touching the kernel.
+3. `kextutil -t -n` (Tiger: `kextload -t -n`; test, no load) on a copy in `/Volumes/Test HD/...`: prints undefined symbols, missing dependencies, and Info.plist problems without touching the kernel.
    Record the output in the issue. Expected: dependency resolution against `IOPCIFamily`, `IOGraphicsFamily`, `IONDRVSupport`, `IOAGPFamily` as the stock kext's `OSBundleLibraries` lists.
 4. Verify the stock backup is intact before anything else: `cd /Volumes/Test\ HD/atiradeonx1000-kext-source/backups/stock-driver-2026-09-19 && md5 -r ... | diff - CHECKSUMS.md5.txt`.
 

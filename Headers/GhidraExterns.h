@@ -10,7 +10,7 @@
 
 extern "C" UInt32 GH_IOFramebuffer_metaClass asm("__ZN13IOFramebuffer9metaClassE");
 extern "C" UInt32 GH_IOService_metaClass asm("__ZN9IOService9metaClassE");
-extern "C" UInt32 GH_IOAGPDevice_metaClass asm("__ZN12IOAGPDevice9metaClassE");
+extern "C" UInt32 GH_IOAGPDevice_metaClass asm("__ZN11IOAGPDevice9metaClassE");
 extern "C" UInt32 GH_OSNumber_metaClass asm("__ZN8OSNumber9metaClassE");
 extern "C" UInt32 GH_IONDRVFramebuffer_metaClass asm("__ZN17IONDRVFramebuffer9metaClassE");
 extern "C" UInt32 GH_gIODTPlane asm("_gIODTPlane");
