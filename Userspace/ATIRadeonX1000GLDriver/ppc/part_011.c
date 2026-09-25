@@ -8685,21 +8685,21 @@ LAB_000829a0:
 }
 
 /* FUN_00082c50 @ 0x82c50 (760 bytes) */
-int FUN_00082c50(param_1, param_2)
+int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   int param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
+  undefined4 param_8;
 {
   int iVar1;
   code *UNRECOVERED_JUMPTABLE;
   undefined4 *puVar2;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
   int iVar3;
   undefined4 *puVar4;
-  undefined4 in_r10;
   uint uVar5;
   int iVar6;
   undefined4 *puVar7;
@@ -8730,9 +8730,9 @@ int FUN_00082c50(param_1, param_2)
       return;
     }
     puVar7 = *(undefined4 **)(param_2 + 0x4c);
-    ((void (*)())FUN_0009f0b0)(param_1,param_2,in_r5,in_r6,in_r7,in_r8,in_r9,in_r10,fparam_1,in_f2,in_f3,in_f4,
-                 in_f5,in_f6,in_f7,in_f8,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,
-                 in_stack_ffffffc0,in_stack_ffffffc8);
+    ((void (*)())FUN_0009f0b0)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,in_f2,
+                 in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffa8,in_stack_ffffffb0,
+                 in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
     iVar6 = *(int *)(param_2 + 0x48) * 4 + 3;
     puVar2 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,iVar6);
     *(undefined4 **)(FUN_00002748 + param_1 + 4) = puVar2;

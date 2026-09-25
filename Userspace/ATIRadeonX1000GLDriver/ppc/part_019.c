@@ -28,16 +28,16 @@ int FUN_000d4e64()
 }
 
 /* FUN_000d4e8c @ 0xd4e8c (60 bytes) */
-int FUN_000d4e8c(param_1, param_2, param_3, param_4)
+int FUN_000d4e8c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   undefined4 uVar1;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
   undefined4 in_r10;
   undefined4 local_38;
   undefined4 local_34;
@@ -46,7 +46,7 @@ int FUN_000d4e8c(param_1, param_2, param_3, param_4)
   FUN_000d4df8(&local_38);
   local_38 = param_4;
   local_34 = param_1;
-  ((int (*)())FUN_000d4e08)(&local_38,param_2,param_3,uVar1,in_r7,in_r8,in_r9,in_r10);
+  ((int (*)())FUN_000d4e08)(&local_38,param_2,param_3,uVar1,param_5,param_6,param_7,in_r10);
   return 0;
 }
 
@@ -2239,10 +2239,7 @@ int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_000d9bac @ 0xd9bac (228 bytes) */
-undefined4
-FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,
-            double fparam_1)
-
+undefined4 FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
 {
   int iVar1;
   uint uVar2;
@@ -2890,7 +2887,6 @@ code_r0x000da738:
 
 /* FUN_000da78c @ 0xda78c (244 bytes) */
 double FUN_000da78c(uint param_1,double fparam_1)
-
 {
   uint uVar1;
   uint uVar2;
@@ -3553,11 +3549,7 @@ int FUN_000db458(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000db574 @ 0xdb574 (352 bytes) */
-void FUN_000db574(undefined4 param_1,uint param_2,uint param_3,uint param_4,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                 double fparam_12)
-
+void FUN_000db574(undefined4 param_1,uint param_2,uint param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   uint uVar1;
   int iVar2;

@@ -825,7 +825,6 @@ int FUN_001293f8()
 
 /* FUN_00129408 @ 0x129408 (60 bytes) */
 undefined4 FUN_00129408(double fparam_1)
-
 {
   if ((fparam_1 != (double)FLOAT_001aa0d4) && (fparam_1 != (double)FLOAT_001aa0e8)) {
     return 0;

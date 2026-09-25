@@ -244,7 +244,7 @@ extern int TIntermOperator__isConstructor();
 extern int TIntermUnary__promote();
 extern int TIntermBinary__promote();
 extern int compareStructure();
-extern int TIntermConstantUnion__fold();
+extern unsigned char * TIntermConstantUnion__fold(unsigned char *this,int param_2,unsigned char *param_3,void *param_4,int param_5,undefined4 param_6,float param_7);
 extern int TIntermediate__changeAggrToTempConst();
 extern int TIntermediate__copyConstUnion();
 extern int TIntermediate__promoteConstantUnion();
@@ -830,59 +830,27 @@ extern int _InterpreterAttachEmulatorContext();
 extern int _InterpreterPackPixel();
 extern int _InterpreterUnpackPixel();
 extern int _InterpreterWriteDestination();
-extern double _InterpreterLoadSource(int *param_1,int *param_2,int param_3,uint param_4,undefined4 param_5,
-               undefined4 param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,
-               double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-               double fparam_8,double fparam_9,double fparam_10,double fparam_11);
+extern double _InterpreterLoadSource(int *param_1,int *param_2,int param_3,uint param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11);
 extern int _InterpreterTestCR();
-extern int * _InterpreterEmulateOp(int *param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,
-                double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern int * _InterpreterEmulateOp(int *param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int _InterpreterWriteFinalFragmentToBuffer();
-extern void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,
-                    double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                    double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                    double fparam_13);
+extern void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int _InterpreterTextureSamplerCreate();
 extern int _InterpreterTextureSamplerInitialise();
 extern int _InterpreterTextureSamplerAttachGLDContext();
 extern int _InterpreterTextureSamplerSetProjectionEnabled();
 extern int _InterpreterTextureSamplerSetLodBiasEnabled();
 extern double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1);
-extern double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12);
-extern double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12,double fparam_13);
-extern double _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12);
+extern double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern double _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
 extern int _InterpreterTextureSamplerWrapCoordinate();
-extern double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11);
-extern double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11,double fparam_12,double fparam_13);
-extern double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11);
+extern double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11);
+extern double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11);
 extern int _InterpreterTextureSamplerSampleTexelRECTFromLevel();
 extern int _InterpreterTextureSamplerLoadTexel1D();
 extern int _InterpreterTextureSamplerLoadTexel2D();
@@ -997,9 +965,7 @@ extern double _PPCConstantsAndScratchInitialise(undefined4 *param_1);
 extern int _PPEmulatorAttachProgram();
 extern int _PPEmulatorGetEmulationLevel();
 extern int _PPEmulatorFramebufferFormat();
-extern void _PPEmulatorEmulateSingleOp(int param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,
-               double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-               double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
+extern void _PPEmulatorEmulateSingleOp(int param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int _PPEmulatorRun();
 extern int _PPEmulatorBuild();
 extern int _PPEmulatorRunNoop();
@@ -1173,8 +1139,7 @@ extern int _ProgramFree();
 extern int _FlattenIfs();
 extern int _regEqualsFunction();
 extern int _AddTempRegister();
-extern undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param_5,float param_6,
-                 float param_7,float param_8);
+extern undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param_5,float param_6,float param_7,float param_8);
 extern int _GetRegisterTypeInfo();
 extern int _FlattenIf();
 extern int _IsBadUsage();
@@ -1214,10 +1179,7 @@ extern int _PPParserExpandMacro();
 extern int _PPParserBuildErrorString();
 extern double _pow_10(int param_1);
 extern double _glp_strtod(byte *param_1,undefined4 *param_2);
-extern char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,
-                  double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                  double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                  double fparam_12,double fparam_13);
+extern char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int std____throw_bad_exception();
 extern int std____throw_bad_alloc();
 extern int std____throw_bad_cast();
@@ -1950,6 +1912,7 @@ extern unsigned char DAT_97c35748;
 extern unsigned char DAT_97c3574c;
 extern unsigned char DAT_97c35750;
 extern unsigned char DAT_97c35e08;
+extern unsigned char DAT_97c35f58;
 extern unsigned char DAT_97c36138;
 extern unsigned char DAT_97c37983[];
 extern unsigned char DAT_97c37d83[];

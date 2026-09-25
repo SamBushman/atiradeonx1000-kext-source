@@ -2,7 +2,6 @@
 
 /* _InterpreterTextureSamplerAttachDerivatives @ 0x97bd3614 (12 bytes) */
 double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1)
-
 {
   *(float *)(param_1 + 0x10) = (float)fparam_1;
   *(undefined4 *)(param_1 + 0xc) = param_2;
@@ -10,12 +9,7 @@ double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel1D
-               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12)
-
+double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   int *piVar2;
@@ -88,12 +82,7 @@ double _InterpreterTextureSamplerSampleTexel1D
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel2D
-               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12,double fparam_13)
-
+double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   int *piVar2;
@@ -169,12 +158,7 @@ double _InterpreterTextureSamplerSampleTexel2D
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel3D
-               (int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-               double fparam_11,double fparam_12)
-
+double _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   int *piVar2;
@@ -371,11 +355,7 @@ LAB_97bd3e30:
 }
 
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
-double _InterpreterTextureSamplerCalculateLambda1D
-                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
-
+double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   float fVar2;
@@ -413,11 +393,7 @@ double _InterpreterTextureSamplerCalculateLambda1D
 }
 
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
-double _InterpreterTextureSamplerCalculateLambda2D
-                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
-
+double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   float fVar2;
@@ -465,11 +441,7 @@ double _InterpreterTextureSamplerCalculateLambda2D
 }
 
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
-double _InterpreterTextureSamplerCalculateLambda3D
-                 (int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
-
+double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,int param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   float fVar2;
@@ -517,12 +489,7 @@ double _InterpreterTextureSamplerCalculateLambda3D
 }
 
 /* _InterpreterTextureSamplerSampleTexel1DFromLevel @ 0x97bd4210 (876 bytes) */
-double _InterpreterTextureSamplerSampleTexel1DFromLevel
-                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11)
-
+double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   bool bVar1;
   float fVar2;
@@ -657,12 +624,7 @@ LAB_97bd43d4:
 }
 
 /* _InterpreterTextureSamplerSampleTexel2DFromLevel @ 0x97bd457c (1196 bytes) */
-double _InterpreterTextureSamplerSampleTexel2DFromLevel
-                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11,double fparam_12,double fparam_13)
-
+double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   float fVar2;
@@ -829,12 +791,7 @@ LAB_97bd479c:
 }
 
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
-double _InterpreterTextureSamplerSampleTexel3DFromLevel
-                 (int *param_1,uint param_2,int param_3,float *param_4,float *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11)
-
+double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *param_1,uint param_2,int param_3,float *param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   bool bVar1;
   float fVar2;
@@ -1481,7 +1438,6 @@ int _InterpreterNoiseGeneratorInterpolate(param_1, param_2, param_3, param_4, pa
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise1D @ 0x97bd59bc (476 bytes) */
 double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
-
 {
   uint uVar1;
   double dVar2;
@@ -1541,7 +1497,6 @@ double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise2D @ 0x97bd5b98 (544 bytes) */
 double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
-
 {
   uint uVar1;
   uint uVar2;
@@ -1614,7 +1569,6 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
 
 /* _InterpreterNoiseGeneratorInterpolatedNoise3D @ 0x97bd5db8 (784 bytes) */
 double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
-
 {
   uint uVar1;
   uint uVar2;

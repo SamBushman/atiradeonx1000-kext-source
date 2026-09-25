@@ -3002,9 +3002,7 @@ int FUN_0015df44(param_1, param_2)
 }
 
 /* FUN_0015e2f4 @ 0x15e2f4 (416 bytes) */
-undefined4
-FUN_0015e2f4(int param_1,int param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
-
+undefined4 FUN_0015e2f4(int param_1,int param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
 {
   int iVar1;
   undefined4 uVar2;

@@ -1058,7 +1058,7 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
     uVar1 = (uint)(*(int *)(param_2 + 0x1c0) == param_1[4]);
     if ((iVar3 != 0) ||
        ((local_30 != (code *)0x0 &&
-        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,param_2), iVar4 == 7 ||
+        ((iVar4 = (*local_30)(1,uVar1 << 2 | 2,*param_1,param_1[1],param_1,param_2,2), iVar4 == 7 ||
          (bVar2 = iVar4 != 8, iVar4 = 2, bVar2)))))) break;
     if (uVar1 != 0) {
                     
@@ -1073,62 +1073,62 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
 int __Unwind_RaiseException(exception_object)
   _Unwind_Exception *exception_object;
 {
-  undefined4 *extraout_r3;
+  undefined4 *a4;
   int iVar1;
-  unsigned char extraout_r3_00;
-  undefined4 uVar2;
+  unsigned char extraout_r3;
+  undefined4 extraout_r4;
+  undefined4 a2;
   undefined4 in_r6;
   undefined4 *in_r7;
   undefined1 *in_r8;
   undefined4 *in_r9;
-  undefined4 uVar3;
-  undefined8 uVar4;
+  undefined4 uVar2;
+  undefined8 uVar3;
   int in_stack_00000000;
   undefined4 in_stack_000003e0;
   code *in_stack_00000790;
   
   ((int (*)())save_world)();
   ((int (*)())_uw_init_context_1)(&STACKARG(0x40),&STACKARG(0x960),*(undefined4 *)(in_stack_00000000 + 8));
-  uVar2 = 0x1d8;
+  a2 = 0x1d8;
   _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
   do {
-    uVar4 = ((int (*)())_uw_frame_state_for)(&STACKARG(0x220),&STACKARG(0x400));
-    iVar1 = (int)((ulonglong)uVar4 >> 0x20);
-    uVar3 = (undefined4)uVar4;
+    uVar3 = ((int (*)())_uw_frame_state_for)(&STACKARG(0x220),&STACKARG(0x400));
+    iVar1 = (int)((ulonglong)uVar3 >> 0x20);
+    uVar2 = (undefined4)uVar3;
     if (iVar1 == 5) {
-      uVar4 = CONCAT44(5,uVar3);
+      uVar3 = CONCAT44(5,uVar2);
 LAB_97c1bc54:
-      uVar3 = 0;
+      uVar2 = 0;
 LAB_97c1bc84:
-      ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar4 >> 0x20),(int)uVar4,uVar2,in_r6,in_r7,in_r8,in_r9,
-                        uVar3);
-      return extraout_r3_00;
+      ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar3 >> 0x20),(int)uVar3,a2,in_r6,in_r7,in_r8,in_r9,uVar2)
+      ;
+      return extraout_r3;
     }
     if (iVar1 != 0) {
 LAB_97c1bc5c:
-      uVar4 = CONCAT44(3,uVar3);
+      uVar3 = CONCAT44(3,uVar2);
       goto LAB_97c1bc54;
     }
     if (in_stack_00000790 != (code *)0x0) {
       in_r8 = &STACKARG(0x220);
-      uVar2 = *extraout_r3;
-      in_r6 = extraout_r3[1];
-      in_r7 = extraout_r3;
-      uVar4 = (*in_stack_00000790)(1,1);
-      iVar1 = (int)((ulonglong)uVar4 >> 0x20);
-      uVar3 = (undefined4)uVar4;
+      a2 = *a4;
+      in_r6 = a4[1];
+      in_r7 = a4;
+      iVar1 = (*in_stack_00000790)(1,1,a2,in_r6,a4,in_r8);
       if (iVar1 == 6) {
-        uVar2 = 0x1d8;
-        extraout_r3[3] = 0;
-        extraout_r3[4] = in_stack_000003e0;
-        in_r9 = extraout_r3;
+        a2 = 0x1d8;
+        a4[3] = 0;
+        a4[4] = in_stack_000003e0;
+        in_r9 = a4;
         _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
-        uVar4 = ((int (*)())__Unwind_RaiseException_Phase2)(extraout_r3,&STACKARG(0x220));
-        if ((int)((ulonglong)uVar4 >> 0x20) != 7) goto LAB_97c1bc54;
-        uVar4 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
-        uVar3 = (undefined4)((ulonglong)uVar4 >> 0x20);
+        uVar3 = ((int (*)())__Unwind_RaiseException_Phase2)(a4,&STACKARG(0x220));
+        if ((int)((ulonglong)uVar3 >> 0x20) != 7) goto LAB_97c1bc54;
+        uVar3 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
+        uVar2 = (undefined4)((ulonglong)uVar3 >> 0x20);
         goto LAB_97c1bc84;
       }
+      uVar2 = extraout_r4;
       if (iVar1 != 8) goto LAB_97c1bc5c;
     }
     ((int (*)())_uw_update_context)(&STACKARG(0x220),&STACKARG(0x400));
@@ -1142,24 +1142,24 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
 {
   int iVar1;
   int iVar2;
-  undefined4 uVar3;
-  code *pcVar4;
-  undefined4 uVar5;
+  undefined4 a1;
+  code *pcVar3;
+  undefined4 a6;
   undefined1 auStack_3d0 [912];
   code *local_40;
   
-  pcVar4 = (code *)param_1[3];
-  uVar5 = param_1[4];
+  pcVar3 = (code *)param_1[3];
+  a6 = param_1[4];
   while( true ) {
     iVar1 = ((int (*)())_uw_frame_state_for)(param_2,auStack_3d0);
     if ((iVar1 != 0) && (iVar1 != 5)) {
       return 2;
     }
-    uVar3 = 10;
+    a1 = 10;
     if (iVar1 == 5) {
-      uVar3 = 0x1a;
+      a1 = 0x1a;
     }
-    iVar2 = (*pcVar4)(1,uVar3,*param_1,param_1[1],param_1,param_2,uVar5);
+    iVar2 = (*pcVar3)(1,a1,*param_1,param_1[1],param_1,param_2,a6);
     if (iVar2 != 0) break;
     if (iVar1 == 5) {
       return 5;
@@ -1179,19 +1179,19 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
 }
 
 /* __Unwind_ForcedUnwind @ 0x97c1bd8c (148 bytes) */
-int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter)
+int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter, param_4, param_5, param_6, param_7)
   _Unwind_Exception *exception_object;
   unsigned char stop;
   void *stop_parameter;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   int extraout_r3;
   unsigned char extraout_r3_00;
   undefined4 extraout_r4;
   undefined4 uVar1;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
   undefined4 uVar2;
   undefined8 uVar3;
   int in_stack_00000000;
@@ -1208,7 +1208,8 @@ int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter)
     uVar3 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
     uVar2 = (undefined4)((ulonglong)uVar3 >> 0x20);
   }
-  ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar3 >> 0x20),(int)uVar3,uVar1,in_r6,in_r7,in_r8,in_r9,uVar2);
+  ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar3 >> 0x20),(int)uVar3,uVar1,param_4,param_5,param_6,param_7
+                    ,uVar2);
   return extraout_r3_00;
 }
 
@@ -1254,7 +1255,7 @@ int __Unwind_DeleteException(exception_object)
 {
                     
                     
-  (*exception_object->exception_cleanup)(_URC_FOREIGN_EXCEPTION_CAUGHT,exception_object);
+  (*exception_object->exception_cleanup)(1,exception_object);
   return;
 }
 
@@ -1460,7 +1461,7 @@ int _read_uleb128_97c1c41c(param_1, param_2)
     uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
   } while ((bVar1 & 0x80) != 0);
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* _read_sleb128_97c1c44c @ 0x97c1c44c (76 bytes) */
@@ -1486,7 +1487,7 @@ int _read_sleb128_97c1c44c(param_1, param_2)
     uVar4 = uVar4 | -1 << (uVar3 & 0x3f);
   }
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* _read_encoded_value_with_base_97c1c498 @ 0x97c1c498 (312 bytes) */
@@ -1826,100 +1827,105 @@ int _frame_heapsort(param_1, param_2, param_3)
   int param_3;
 {
   undefined4 uVar1;
-  int iVar2;
+  undefined4 uVar2;
   int iVar3;
-  uint uVar4;
+  int iVar4;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  int iVar8;
-  uint uVar9;
+  uint uVar6;
+  int iVar7;
+  undefined4 *puVar8;
+  int iVar9;
+  uint uVar10;
   
-  uVar5 = *(uint *)(param_3 + 4);
-  puVar7 = (undefined4 *)(param_3 + 8);
-  uVar9 = uVar5;
+  uVar6 = *(uint *)(param_3 + 4);
+  puVar8 = (undefined4 *)(param_3 + 8);
+  uVar10 = uVar6;
 joined_r0x97c1cb68:
-  if (uVar9 == 0) {
+  if (uVar10 == 0) {
     do {
       do {
-        if (uVar5 < 2) {
+        if (uVar6 < 2) {
           return;
         }
-        uVar5 = uVar5 - 1;
-        uVar1 = *puVar7;
-        *puVar7 = puVar7[uVar5];
-        puVar7[uVar5] = uVar1;
-      } while (uVar5 < 2);
-      iVar6 = 0;
-      uVar9 = 0;
+        uVar6 = uVar6 - 1;
+        uVar1 = *puVar8;
+        *puVar8 = puVar8[uVar6];
+        puVar8[uVar6] = uVar1;
+      } while (uVar6 < 2);
+      iVar7 = 0;
+      uVar10 = 0;
       do {
-        uVar4 = iVar6 + 2;
-        if (uVar4 < uVar5) {
-          iVar8 = uVar9 * 8;
-          iVar2 = (*param_2)(param_1,puVar7[uVar9 * 2 + 2],puVar7[uVar9 * 2 + 1]);
-          if (iVar2 < 1) {
-            iVar2 = uVar9 << 2;
+        uVar5 = iVar7 + 2;
+        if (uVar5 < uVar6) {
+          iVar9 = uVar10 * 8;
+          iVar3 = (*param_2)(param_1,puVar8[uVar10 * 2 + 2],puVar8[uVar10 * 2 + 1],in_r6,in_r7,in_r8
+                             ,uVar1);
+          if (iVar3 < 1) {
+            iVar3 = uVar10 << 2;
             goto LAB_97c1cd10;
           }
-          iVar2 = uVar9 * 4;
-          iVar3 = (*param_2)(param_1,puVar7[uVar9 * 2 + 2],puVar7[uVar9]);
-          if (iVar3 < 1) goto LAB_97c1cd10;
-          uVar1 = puVar7[uVar9];
-          puVar7[uVar9] = puVar7[uVar9 * 2 + 2];
-          puVar7[uVar9 * 2 + 2] = uVar1;
+          iVar3 = uVar10 * 4;
+          iVar4 = (*param_2)(param_1,puVar8[uVar10 * 2 + 2],puVar8[uVar10]);
+          if (iVar4 < 1) goto LAB_97c1cd10;
+          uVar2 = puVar8[uVar10];
+          puVar8[uVar10] = puVar8[uVar10 * 2 + 2];
+          puVar8[uVar10 * 2 + 2] = uVar2;
         }
         else {
-          iVar2 = uVar9 << 2;
-          iVar8 = uVar9 << 3;
+          iVar3 = uVar10 << 2;
+          iVar9 = uVar10 << 3;
 LAB_97c1cd10:
-          iVar3 = (*param_2)(param_1,*(undefined4 *)((int)puVar7 + iVar8 + 4),
-                             *(undefined4 *)(iVar2 + (int)puVar7));
-          if (iVar3 < 1) break;
-          uVar1 = *(undefined4 *)(iVar2 + (int)puVar7);
-          uVar4 = iVar6 + 1;
-          *(undefined4 *)(iVar2 + (int)puVar7) = *(undefined4 *)((int)puVar7 + iVar8 + 4);
-          *(undefined4 *)((int)puVar7 + iVar8 + 4) = uVar1;
+          iVar4 = (*param_2)(param_1,*(undefined4 *)((int)puVar8 + iVar9 + 4),
+                             *(undefined4 *)(iVar3 + (int)puVar8));
+          if (iVar4 < 1) break;
+          uVar2 = *(undefined4 *)(iVar3 + (int)puVar8);
+          uVar5 = iVar7 + 1;
+          *(undefined4 *)(iVar3 + (int)puVar8) = *(undefined4 *)((int)puVar8 + iVar9 + 4);
+          *(undefined4 *)((int)puVar8 + iVar9 + 4) = uVar2;
         }
-        iVar6 = uVar4 * 2;
-        uVar9 = uVar4;
-      } while (iVar6 + 1U < uVar5);
+        iVar7 = uVar5 * 2;
+        uVar10 = uVar5;
+      } while (iVar7 + 1U < uVar6);
     } while( true );
   }
-  uVar9 = uVar9 - 1;
-  uVar4 = uVar9;
+  uVar10 = uVar10 - 1;
+  uVar5 = uVar10;
 joined_r0x97c1cb84:
   do {
-    iVar6 = uVar4 * 2;
-    if (uVar5 <= iVar6 + 1U) goto joined_r0x97c1cb68;
-    if (iVar6 + 2U < uVar5) {
-      iVar8 = uVar4 * 8;
-      iVar2 = (*param_2)(param_1,puVar7[uVar4 * 2 + 2],puVar7[uVar4 * 2 + 1]);
-      if (iVar2 < 1) {
-        iVar2 = uVar4 << 2;
+    iVar7 = uVar5 * 2;
+    if (uVar6 <= iVar7 + 1U) goto joined_r0x97c1cb68;
+    if (iVar7 + 2U < uVar6) {
+      iVar9 = uVar5 * 8;
+      iVar3 = (*param_2)(param_1,puVar8[uVar5 * 2 + 2],puVar8[uVar5 * 2 + 1]);
+      if (iVar3 < 1) {
+        iVar3 = uVar5 << 2;
       }
       else {
-        iVar2 = uVar4 * 4;
-        iVar3 = (*param_2)(param_1,puVar7[uVar4 * 2 + 2],puVar7[uVar4]);
-        if (0 < iVar3) {
-          uVar1 = puVar7[uVar4];
-          puVar7[uVar4] = puVar7[uVar4 * 2 + 2];
-          puVar7[uVar4 * 2 + 2] = uVar1;
-          uVar4 = iVar6 + 2U;
+        iVar3 = uVar5 * 4;
+        iVar4 = (*param_2)(param_1,puVar8[uVar5 * 2 + 2],puVar8[uVar5]);
+        if (0 < iVar4) {
+          uVar1 = puVar8[uVar5];
+          puVar8[uVar5] = puVar8[uVar5 * 2 + 2];
+          puVar8[uVar5 * 2 + 2] = uVar1;
+          uVar5 = iVar7 + 2U;
           goto joined_r0x97c1cb84;
         }
       }
     }
     else {
-      iVar2 = uVar4 << 2;
-      iVar8 = uVar4 << 3;
+      iVar3 = uVar5 << 2;
+      iVar9 = uVar5 << 3;
     }
-    iVar3 = (*param_2)(param_1,*(undefined4 *)((int)puVar7 + iVar8 + 4),
-                       *(undefined4 *)(iVar2 + (int)puVar7));
-    if (iVar3 < 1) goto joined_r0x97c1cb68;
-    uVar1 = *(undefined4 *)(iVar2 + (int)puVar7);
-    uVar4 = iVar6 + 1;
-    *(undefined4 *)(iVar2 + (int)puVar7) = *(undefined4 *)((int)puVar7 + iVar8 + 4);
-    *(undefined4 *)((int)puVar7 + iVar8 + 4) = uVar1;
+    iVar4 = (*param_2)(param_1,*(undefined4 *)((int)puVar8 + iVar9 + 4),
+                       *(undefined4 *)(iVar3 + (int)puVar8));
+    if (iVar4 < 1) goto joined_r0x97c1cb68;
+    uVar1 = *(undefined4 *)(iVar3 + (int)puVar8);
+    uVar5 = iVar7 + 1;
+    *(undefined4 *)(iVar3 + (int)puVar8) = *(undefined4 *)((int)puVar8 + iVar9 + 4);
+    *(undefined4 *)((int)puVar8 + iVar9 + 4) = uVar1;
   } while( true );
 }
 
@@ -2668,7 +2674,8 @@ int eh_rest_world_r10(param_1, param_2, param_3, param_4, param_5, param_6, para
   (**(code **)(in_stack_00000000 + 8))
             (*(undefined4 *)(in_stack_00000000 + -0x1b0),*(undefined4 *)(in_stack_00000000 + -0x1ac)
              ,*(undefined4 *)(in_stack_00000000 + -0x1a8),
-             *(undefined4 *)(in_stack_00000000 + -0x1a4));
+             *(undefined4 *)(in_stack_00000000 + -0x1a4),param_8,*(code **)(in_stack_00000000 + 8),
+             param_7,param_8);
   return;
 }
 

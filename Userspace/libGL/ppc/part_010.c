@@ -1,11 +1,7 @@
 #include "decls.h"
 
 /* _glVertexAttrib3fARB @ 0x92f3bc98 (172 bytes) */
-void _glVertexAttrib3fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3)
-
+void _glVertexAttrib3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -24,11 +20,7 @@ void _glVertexAttrib3fARB
 }
 
 /* _glVertexAttrib3dARB @ 0x92f3bd44 (172 bytes) */
-void _glVertexAttrib3dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3)
-
+void _glVertexAttrib3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -73,11 +65,7 @@ int _glVertexAttrib4sARB(param_1, param_2, param_3, param_4, param_5, param_6, p
 }
 
 /* _glVertexAttrib4fARB @ 0x92f3be8c (172 bytes) */
-void _glVertexAttrib4fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glVertexAttrib4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -96,11 +84,7 @@ void _glVertexAttrib4fARB
 }
 
 /* _glVertexAttrib4dARB @ 0x92f3bf38 (152 bytes) */
-void _glVertexAttrib4dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glVertexAttrib4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -923,11 +907,7 @@ int _glGetVertexAttribPointervARB(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _glProgramEnvParameter4dARB @ 0x92f3d014 (160 bytes) */
-void _glProgramEnvParameter4dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glProgramEnvParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -970,11 +950,7 @@ int _glProgramEnvParameter4dvARB(param_1, param_2, param_3, param_4, param_5, pa
 }
 
 /* _glProgramEnvParameter4fARB @ 0x92f3d140 (180 bytes) */
-void _glProgramEnvParameter4fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glProgramEnvParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1019,11 +995,7 @@ int _glProgramEnvParameter4fvARB(param_1, param_2, param_3, param_4, param_5, pa
 }
 
 /* _glProgramLocalParameter4dARB @ 0x92f3d280 (160 bytes) */
-void _glProgramLocalParameter4dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glProgramLocalParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1066,11 +1038,7 @@ int _glProgramLocalParameter4dvARB(param_1, param_2, param_3, param_4, param_5, 
 }
 
 /* _glProgramLocalParameter4fARB @ 0x92f3d3ac (180 bytes) */
-void _glProgramLocalParameter4fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glProgramLocalParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;

@@ -258,7 +258,6 @@ int _glGetCompressedTexImage(param_1, param_2, param_3, param_4, param_5, param_
 
 /* _glSampleCoverage @ 0x92f360f0 (136 bytes) */
 void _glSampleCoverage(undefined4 param_1,undefined4 param_2,double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -304,7 +303,6 @@ int _glSamplePass(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glFogCoordf @ 0x92f361f4 (128 bytes) */
 void _glFogCoordf(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -350,7 +348,6 @@ int _glFogCoordfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glFogCoordd @ 0x92f362f0 (128 bytes) */
 void _glFogCoordd(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -474,7 +471,6 @@ int _glSecondaryColor3bv(param_1, param_2, param_3, param_4, param_5, param_6, p
 
 /* _glSecondaryColor3d @ 0x92f36580 (160 bytes) */
 void _glSecondaryColor3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -520,7 +516,6 @@ int _glSecondaryColor3dv(param_1, param_2, param_3, param_4, param_5, param_6, p
 
 /* _glSecondaryColor3f @ 0x92f3669c (160 bytes) */
 void _glSecondaryColor3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -851,9 +846,7 @@ int _glSecondaryColorPointer(param_1, param_2, param_3, param_4, param_5, param_
 }
 
 /* _glPointParameterf @ 0x92f36d74 (140 bytes) */
-void _glPointParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPointParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1029,7 +1022,6 @@ int _glMultiDrawElements(param_1, param_2, param_3, param_4, param_5, param_6, p
 
 /* _glWindowPos2d @ 0x92f37150 (144 bytes) */
 void _glWindowPos2d(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1075,7 +1067,6 @@ int _glWindowPos2dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glWindowPos2f @ 0x92f3725c (144 bytes) */
 void _glWindowPos2f(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1225,7 +1216,6 @@ int _glWindowPos2sv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glWindowPos3d @ 0x92f37568 (160 bytes) */
 void _glWindowPos3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1271,7 +1261,6 @@ int _glWindowPos3dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glWindowPos3f @ 0x92f37684 (160 bytes) */
 void _glWindowPos3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

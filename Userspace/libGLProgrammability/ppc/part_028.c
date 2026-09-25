@@ -168,12 +168,11 @@ int TIntermAggregate__getSequence(this)
 }
 
 /* TIntermAggregate__setName @ 0x97c3254c (8 bytes) */
-int TIntermAggregate__setName(param_1)
+int TIntermAggregate__setName(param_1, param_2)
   unsigned char * param_1;
+  unsigned char * param_2;
 {
-  unsigned char * in_r4;
-  
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(param_1 + 0x54,in_r4);
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(param_1 + 0x54,param_2);
   return;
 }
 

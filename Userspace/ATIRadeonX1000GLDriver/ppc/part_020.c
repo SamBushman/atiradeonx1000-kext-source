@@ -3256,16 +3256,16 @@ int FUN_000e06d8(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_000e0740 @ 0xe0740 (80 bytes) */
-int FUN_000e0740(param_1, param_2, param_3)
+int FUN_000e0740(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   undefined4 extraout_r4;
   undefined4 uVar1;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
   
   *(undefined4 *)(param_1 + 0xc) = param_3;
   uVar1 = 0x200;
@@ -3273,7 +3273,7 @@ int FUN_000e0740(param_1, param_2, param_3)
   *(undefined4 *)(param_1 + 8) = param_2;
   _memset((void *)(param_1 + 0x10),0,0x200);
   *(undefined4 *)(param_1 + 0x218) = 0;
-  ((int (*)())FUN_000e0640)(param_1,extraout_r4,uVar1,in_r6,in_r7,in_r8);
+  ((int (*)())FUN_000e0640)(param_1,extraout_r4,uVar1,param_4,param_5,param_6);
   return;
 }
 

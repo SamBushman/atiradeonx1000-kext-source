@@ -775,43 +775,44 @@ int TType__setStructSize(this, param_2)
   unsigned char * param_2;
 {
   int iVar1;
-  unsigned char * pTVar2;
-  int iVar3;
-  int *piVar4;
+  int *a0;
+  int iVar2;
+  int *piVar3;
   
-  iVar3 = 0;
-  piVar4 = *(int **)(param_2 + 4);
+  iVar2 = 0;
+  piVar3 = *(int **)(param_2 + 4);
   do {
-    if (piVar4 == *(int **)(param_2 + 8)) {
-      *(int *)(this + 0x18) = iVar3;
-      return iVar3;
+    if (piVar3 == *(int **)(param_2 + 8)) {
+      *(int *)(this + 0x18) = iVar2;
+      return iVar2;
     }
-    iVar1 = (**(code **)(*(int *)*piVar4 + 0x38))();
+    iVar1 = (**(code **)(*(int *)*piVar3 + 0x38))((int *)*piVar3);
     if (iVar1 == 0) {
-      iVar1 = (**(code **)(*(int *)*piVar4 + 0x34))();
-      if ((iVar1 != 0) || (iVar1 = (**(code **)(*(int *)*piVar4 + 0x3c))(), iVar1 != 0)) {
-        iVar1 = (**(code **)(*(int *)*piVar4 + 0x30))();
+      iVar1 = (**(code **)(*(int *)*piVar3 + 0x34))((int *)*piVar3);
+      if ((iVar1 != 0) ||
+         (iVar1 = (**(code **)(*(int *)*piVar3 + 0x3c))((int *)*piVar3), iVar1 != 0)) {
+        iVar1 = (**(code **)(*(int *)*piVar3 + 0x30))((int *)*piVar3);
         goto LAB_97c31d28;
       }
-      if (*(unsigned char **)(*piVar4 + 8) != (unsigned char *)0x0) {
-        iVar1 = ((int (*)())TType__setStructSize)(this,*(unsigned char **)(*piVar4 + 8));
+      if (*(unsigned char **)(*piVar3 + 8) != (unsigned char *)0x0) {
+        iVar1 = ((int (*)())TType__setStructSize)(this,*(unsigned char **)(*piVar3 + 8));
         goto LAB_97c31d28;
       }
-      iVar3 = iVar3 + 1;
+      iVar2 = iVar2 + 1;
     }
     else {
-      pTVar2 = (unsigned char *)((int *)*piVar4)[2];
-      if (pTVar2 == (unsigned char *)0x0) {
-        iVar1 = (**(code **)(*(int *)*piVar4 + 0x30))();
+      a0 = (int *)*piVar3;
+      if ((unsigned char *)a0[2] == (unsigned char *)0x0) {
+        iVar1 = (**(code **)(*a0 + 0x30))(a0);
       }
       else {
-        iVar1 = ((int (*)())TType__setStructSize)(this,pTVar2);
+        iVar1 = ((int (*)())TType__setStructSize)(this,(unsigned char *)a0[2]);
       }
-      iVar1 = iVar1 * *(int *)(*piVar4 + 4);
+      iVar1 = iVar1 * *(int *)(*piVar3 + 4);
 LAB_97c31d28:
-      iVar3 = iVar3 + iVar1;
+      iVar2 = iVar2 + iVar1;
     }
-    piVar4 = piVar4 + 2;
+    piVar3 = piVar3 + 2;
   } while( true );
 }
 

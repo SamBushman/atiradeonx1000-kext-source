@@ -470,8 +470,8 @@ int _glpWriteSourceOperand_97bf30b8(param_1, param_2, param_3, param_4, param_5,
   
   uVar1 = ((int (*)())_glpSourceSign)(param_1,param_2,param_5,param_8);
   uVar1 = ((int (*)())_glpSourceType)(param_1,uVar1,param_3,param_4,param_5,param_6,param_8);
-  ((int (*)())_glpSourceComponents)(param_1,uVar1,param_5,param_7,param_8);
-  return;
+  uVar1 = ((int (*)())_glpSourceComponents)(param_1,uVar1,param_5,param_7,param_8);
+  return uVar1;
 }
 
 /* _glpWriteDestinationMask @ 0x97bf3138 (1312 bytes) */
@@ -729,6 +729,7 @@ int _glpWriteDestinationOperand_97bf3658(param_1, param_2, param_3, param_4, par
   char cVar1;
   uint uVar2;
   int iVar3;
+  undefined4 uVar4;
   
   uVar2 = *(uint *)(param_1 + 8) >> 0x11 & 7;
   if (uVar2 == 3) {
@@ -764,12 +765,12 @@ int _glpWriteDestinationOperand_97bf3658(param_1, param_2, param_3, param_4, par
 LAB_97bf3754:
   iVar3 = ((int (*)())_ncpy_97bf2850)(param_2,(uint)*(ushort *)(param_1 + 0xe) + param_3);
   if ((param_5 & 0x40) == 0) {
-    ((int (*)())_glpWriteDestinationMask)(param_1,param_2 + iVar3,param_4,param_5);
+    uVar4 = ((int (*)())_glpWriteDestinationMask)(param_1,param_2 + iVar3,param_4,param_5);
   }
   else {
-    ((int (*)())_glpSourceComponents)(param_1,param_2 + iVar3,1,param_4,param_5);
+    uVar4 = ((int (*)())_glpSourceComponents)(param_1,param_2 + iVar3,1,param_4,param_5);
   }
-  return;
+  return uVar4;
 }
 
 /* _glpWriteTextureOperand_97bf37b4 @ 0x97bf37b4 (760 bytes) */

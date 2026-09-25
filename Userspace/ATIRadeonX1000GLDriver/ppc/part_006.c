@@ -7602,7 +7602,6 @@ LAB_0004a7b4:
 
 /* FUN_0004a7d0 @ 0x4a7d0 (80 bytes) */
 uint FUN_0004a7d0(double fparam_1)
-
 {
   float fVar1;
   uint uVar2;
@@ -7622,7 +7621,6 @@ uint FUN_0004a7d0(double fparam_1)
 
 /* FUN_0004a830 @ 0x4a830 (40 bytes) */
 double FUN_0004a830(uint param_1)
-
 {
   return (double)(float)((param_1 & 0x800000) << 8 | ((param_1 >> 0x10 & 0x7f) + 0x40) * 0x800000 |
                         (param_1 & 0xffff) << 7);
@@ -7661,9 +7659,7 @@ int FUN_0004a860(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_0004a8f0 @ 0x4a8f0 (140 bytes) */
-void FUN_0004a8f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1)
-
+void FUN_0004a8f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
 {
   if ((*(uint *)(param_1 + 0x44) & 0x20000) == 0) {
     FUN_000b6580(param_1,0);

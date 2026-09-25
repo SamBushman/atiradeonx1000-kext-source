@@ -1725,7 +1725,6 @@ LAB_000f4b94:
 
 /* FUN_000f4bc8 @ 0xf4bc8 (32 bytes) */
 bool FUN_000f4bc8(float param_1,float param_2)
-
 {
   return param_2 < param_1;
 }

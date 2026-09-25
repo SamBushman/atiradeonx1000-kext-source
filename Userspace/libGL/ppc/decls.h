@@ -59,13 +59,10 @@ extern void _glTexCoord2f(double fparam_1,double fparam_2);
 extern int _glLightModeli();
 extern int _glPushAttrib();
 extern int _glTexEnvi();
-extern void _glMaterialf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glMaterialf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPopAttrib();
-extern void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
-extern void _glAlphaFunc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glAlphaFunc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glEnableClientState();
 extern int _glGetError();
 extern int _glFlush();
@@ -78,25 +75,20 @@ extern int _glTexCoordPointer();
 extern int _glDrawArrays();
 extern int _glPrioritizeTextures();
 extern int _glTexImage2D();
-extern void _glFrustum(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6);
+extern void _glFrustum(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6);
 extern int _glLoadMatrixf();
 extern void _glPassThrough(double fparam_1);
 extern int _glActiveTextureARB();
 extern void _glVertex2f(double fparam_1,double fparam_2);
-extern void _glMultiTexCoord2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2);
+extern void _glMultiTexCoord2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glDeleteTextures();
 extern int _glFeedbackBuffer();
 extern int _glRenderMode();
 extern int _glFogi();
 extern int _glFogfv();
-extern void _glFogf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-            undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glFogf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glFrontFace();
-extern void _glTexParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                     undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glTexParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glGetTexLevelParameteriv();
 extern int _glGetFloatv();
 extern int _glTexSubImage2D();
@@ -105,13 +97,10 @@ extern int _glTextureRangeAPPLE();
 extern int __dyld_func_lookup();
 extern int ___initialize_Cplusplus();
 extern int FUN_92f2ab64();
-extern void _glAccum(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glAccum(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glAreTexturesResident();
 extern int _glArrayElement();
-extern void _glBitmap(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-              undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-              double fparam_2,double fparam_3,double fparam_4);
+extern void _glBitmap(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glCallLists();
 extern void _glClearAccum(double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern void _glClearIndex(double fparam_1);
@@ -215,42 +204,24 @@ extern int _glInterleavedArrays();
 extern int _glIsEnabled();
 extern int _glIsList();
 extern int _glIsTexture();
-extern void _glLightModelf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glLightModelf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glLightModelfv();
 extern int _glLightModeliv();
-extern void _glLightf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-              undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glLightf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glLighti();
 extern int _glLightiv();
 extern int _glLineStipple();
 extern int _glListBase();
 extern int _glLoadMatrixd();
 extern int _glLogicOp();
-extern void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-             double fparam_1,double fparam_2);
-extern void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-             double fparam_2);
-extern void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-             double fparam_2,double fparam_3,double fparam_4);
-extern void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-             double fparam_1,double fparam_2,double fparam_3,double fparam_4);
-extern void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2);
-extern void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2);
-extern void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4);
-extern void _glMapGrid2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4);
+extern void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2);
+extern void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void _glMapGrid2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glMateriali();
 extern int _glMaterialiv();
 extern int _glMultMatrixd();
@@ -265,15 +236,12 @@ extern int _glNormal3iv();
 extern int _glNormal3s();
 extern int _glNormal3sv();
 extern int _glNormalPointer();
-extern void _glOrtho(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-             double fparam_6);
+extern void _glOrtho(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6);
 extern int _glPixelMapfv();
 extern int _glPixelMapuiv();
 extern int _glPixelMapusv();
-extern void _glPixelStoref(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
-extern void _glPixelTransferf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPixelStoref(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPixelTransferf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPixelTransferi();
 extern void _glPixelZoom(double fparam_1,double fparam_2);
 extern void _glPointSize(double fparam_1);
@@ -349,11 +317,9 @@ extern int _glTexCoord4s();
 extern int _glTexCoord4sv();
 extern int _glTexEnvfv();
 extern int _glTexEnviv();
-extern void _glTexGend(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glTexGend(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glTexGendv();
-extern void _glTexGenf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glTexGenf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glTexGenfv();
 extern int _glTexGeni();
 extern int _glTexGeniv();
@@ -399,8 +365,7 @@ extern int _glColorSubTable();
 extern int _glCopyColorSubTable();
 extern int _glConvolutionFilter1D();
 extern int _glConvolutionFilter2D();
-extern void _glConvolutionParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glConvolutionParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glConvolutionParameterfv();
 extern int _glConvolutionParameteri();
 extern int _glConvolutionParameteriv();
@@ -423,44 +388,32 @@ extern int _glResetHistogram();
 extern int _glResetMinmax();
 extern int _glClientActiveTexture();
 extern int _glActiveTexture();
-extern void _glMultiTexCoord1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glMultiTexCoord1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glMultiTexCoord1dv();
-extern void _glMultiTexCoord1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glMultiTexCoord1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glMultiTexCoord1fv();
 extern int _glMultiTexCoord1i();
 extern int _glMultiTexCoord1iv();
 extern int _glMultiTexCoord1s();
 extern int _glMultiTexCoord1sv();
-extern void _glMultiTexCoord2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2);
+extern void _glMultiTexCoord2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glMultiTexCoord2dv();
 extern int _glMultiTexCoord2fv();
 extern int _glMultiTexCoord2i();
 extern int _glMultiTexCoord2iv();
 extern int _glMultiTexCoord2s();
 extern int _glMultiTexCoord2sv();
-extern void _glMultiTexCoord3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3);
+extern void _glMultiTexCoord3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glMultiTexCoord3dv();
-extern void _glMultiTexCoord3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3);
+extern void _glMultiTexCoord3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glMultiTexCoord3fv();
 extern int _glMultiTexCoord3i();
 extern int _glMultiTexCoord3iv();
 extern int _glMultiTexCoord3s();
 extern int _glMultiTexCoord3sv();
-extern void _glMultiTexCoord4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3,double fparam_4);
+extern void _glMultiTexCoord4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glMultiTexCoord4dv();
-extern void _glMultiTexCoord4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3,double fparam_4);
+extern void _glMultiTexCoord4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glMultiTexCoord4fv();
 extern int _glMultiTexCoord4i();
 extern int _glMultiTexCoord4iv();
@@ -501,8 +454,7 @@ extern int _glSecondaryColor3uiv();
 extern int _glSecondaryColor3us();
 extern int _glSecondaryColor3usv();
 extern int _glSecondaryColorPointer();
-extern void _glPointParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPointParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPointParameterfv();
 extern int _glPointParameteri();
 extern int _glPointParameteriv();
@@ -545,31 +497,21 @@ extern int _glUnmapBuffer();
 extern int _glGetBufferParameteriv();
 extern int _glGetBufferPointerv();
 extern int _glDrawBuffers();
-extern void _glVertexAttrib1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glVertexAttrib1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glVertexAttrib1dv();
-extern void _glVertexAttrib1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glVertexAttrib1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glVertexAttrib1fv();
 extern int _glVertexAttrib1s();
 extern int _glVertexAttrib1sv();
-extern void _glVertexAttrib2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2);
+extern void _glVertexAttrib2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glVertexAttrib2dv();
-extern void _glVertexAttrib2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2);
+extern void _glVertexAttrib2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glVertexAttrib2fv();
 extern int _glVertexAttrib2s();
 extern int _glVertexAttrib2sv();
-extern void _glVertexAttrib3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3);
+extern void _glVertexAttrib3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glVertexAttrib3dv();
-extern void _glVertexAttrib3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3);
+extern void _glVertexAttrib3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glVertexAttrib3fv();
 extern int _glVertexAttrib3s();
 extern int _glVertexAttrib3sv();
@@ -581,13 +523,9 @@ extern int _glVertexAttrib4Nubv();
 extern int _glVertexAttrib4Nuiv();
 extern int _glVertexAttrib4Nusv();
 extern int _glVertexAttrib4bv();
-extern void _glVertexAttrib4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3,double fparam_4);
+extern void _glVertexAttrib4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glVertexAttrib4dv();
-extern void _glVertexAttrib4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3,double fparam_4);
+extern void _glVertexAttrib4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glVertexAttrib4fv();
 extern int _glVertexAttrib4iv();
 extern int _glVertexAttrib4s();
@@ -613,17 +551,10 @@ extern int _glLinkProgram();
 extern int _glUseProgram();
 extern int _glDeleteProgram();
 extern int _glValidateProgram();
-extern void _glUniform1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
-extern void _glUniform2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2);
-extern void _glUniform3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3);
-extern void _glUniform4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4);
+extern void _glUniform1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glUniform2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glUniform3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
+extern void _glUniform4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glUniform1i();
 extern int _glUniform2i();
 extern int _glUniform3i();
@@ -663,31 +594,17 @@ extern int _glDeleteProgramsARB();
 extern int _glGenProgramsARB();
 extern int _glIsProgramARB();
 extern int _glVertexAttrib1sARB();
-extern void _glVertexAttrib1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
-extern void _glVertexAttrib1dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glVertexAttrib1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glVertexAttrib1dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glVertexAttrib2sARB();
-extern void _glVertexAttrib2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2);
-extern void _glVertexAttrib2dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2);
+extern void _glVertexAttrib2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glVertexAttrib2dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glVertexAttrib3sARB();
-extern void _glVertexAttrib3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3);
-extern void _glVertexAttrib3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3);
+extern void _glVertexAttrib3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
+extern void _glVertexAttrib3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glVertexAttrib4sARB();
-extern void _glVertexAttrib4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
-extern void _glVertexAttrib4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glVertexAttrib4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void _glVertexAttrib4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glVertexAttrib4NubARB();
 extern int _glVertexAttrib1svARB();
 extern int _glVertexAttrib1fvARB();
@@ -719,21 +636,13 @@ extern int _glGetVertexAttribdvARB();
 extern int _glGetVertexAttribfvARB();
 extern int _glGetVertexAttribivARB();
 extern int _glGetVertexAttribPointervARB();
-extern void _glProgramEnvParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glProgramEnvParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glProgramEnvParameter4dvARB();
-extern void _glProgramEnvParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glProgramEnvParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glProgramEnvParameter4fvARB();
-extern void _glProgramLocalParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glProgramLocalParameter4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glProgramLocalParameter4dvARB();
-extern void _glProgramLocalParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glProgramLocalParameter4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glProgramLocalParameter4fvARB();
 extern int _glGetProgramEnvParameterdvARB();
 extern int _glGetProgramEnvParameterfvARB();
@@ -753,47 +662,33 @@ extern int _glWeightuivARB();
 extern int _glWeightPointerARB();
 extern int _glVertexBlendARB();
 extern int _glClientActiveTextureARB();
-extern void _glMultiTexCoord1dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glMultiTexCoord1dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glMultiTexCoord1dvARB();
-extern void _glMultiTexCoord1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glMultiTexCoord1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glMultiTexCoord1fvARB();
 extern int _glMultiTexCoord1iARB();
 extern int _glMultiTexCoord1ivARB();
 extern int _glMultiTexCoord1sARB();
 extern int _glMultiTexCoord1svARB();
-extern void _glMultiTexCoord2dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2);
+extern void _glMultiTexCoord2dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glMultiTexCoord2dvARB();
-extern void _glMultiTexCoord2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2);
+extern void _glMultiTexCoord2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
 extern int _glMultiTexCoord2fvARB();
 extern int _glMultiTexCoord2iARB();
 extern int _glMultiTexCoord2ivARB();
 extern int _glMultiTexCoord2sARB();
 extern int _glMultiTexCoord2svARB();
-extern void _glMultiTexCoord3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3);
+extern void _glMultiTexCoord3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glMultiTexCoord3dvARB();
-extern void _glMultiTexCoord3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3);
+extern void _glMultiTexCoord3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
 extern int _glMultiTexCoord3fvARB();
 extern int _glMultiTexCoord3iARB();
 extern int _glMultiTexCoord3ivARB();
 extern int _glMultiTexCoord3sARB();
 extern int _glMultiTexCoord3svARB();
-extern void _glMultiTexCoord4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glMultiTexCoord4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glMultiTexCoord4dvARB();
-extern void _glMultiTexCoord4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4);
+extern void _glMultiTexCoord4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glMultiTexCoord4fvARB();
 extern int _glMultiTexCoord4iARB();
 extern int _glMultiTexCoord4ivARB();
@@ -812,8 +707,7 @@ extern int _glCompressedTexSubImage1DARB();
 extern int _glGetCompressedTexImageARB();
 extern void _glSampleCoverageARB(undefined4 param_1,undefined4 param_2,double fparam_1);
 extern int _glSamplePassARB();
-extern void _glPointParameterfARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPointParameterfARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPointParameterfvARB();
 extern void _glWindowPos2dARB(double fparam_1,double fparam_2);
 extern int _glWindowPos2dvARB();
@@ -861,17 +755,10 @@ extern int _glAttachObjectARB();
 extern int _glLinkProgramARB();
 extern int _glUseProgramObjectARB();
 extern int _glValidateProgramARB();
-extern void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
-extern void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2);
-extern void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2,double fparam_3);
-extern void _glUniform4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2,double fparam_3,double fparam_4);
+extern void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3);
+extern void _glUniform4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glUniform1iARB();
 extern int _glUniform2iARB();
 extern int _glUniform3iARB();
@@ -958,18 +845,10 @@ extern int _glGenerateMipmapEXT();
 extern int _glEnableVertexAttribAPPLE();
 extern int _glDisableVertexAttribAPPLE();
 extern int _glIsVertexAttribEnabledAPPLE();
-extern void _glMapVertexAttrib1dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-               double fparam_1,double fparam_2);
-extern void _glMapVertexAttrib1fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2);
-extern void _glMapVertexAttrib2dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4);
-extern void _glMapVertexAttrib2fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3
-               ,double fparam_4);
+extern void _glMapVertexAttrib1dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2);
+extern void _glMapVertexAttrib1fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2);
+extern void _glMapVertexAttrib2dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void _glMapVertexAttrib2fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int _glGetTexParameterPointervAPPLE();
 extern int _glGenFencesAPPLE();
 extern int _glDeleteFencesAPPLE();
@@ -998,16 +877,13 @@ extern int _glBlendEquationSeparateATI();
 extern int _glStencilOpSeparateATI();
 extern int _glStencilFuncSeparateATI();
 extern int _glPNTrianglesiATI();
-extern void _glPNTrianglesfATI(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPNTrianglesfATI(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPNTrianglesiATIX();
-extern void _glPNTrianglesfATIX(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
-                        ,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glPNTrianglesfATIX(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glPointParameteriNV();
 extern int _glPointParameterivNV();
 extern int _glCombinerParameterfvNV();
-extern void _glCombinerParameterfNV(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
+extern void _glCombinerParameterfNV(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1);
 extern int _glCombinerParameterivNV();
 extern int _glCombinerParameteriNV();
 extern int _glCombinerInputNV();

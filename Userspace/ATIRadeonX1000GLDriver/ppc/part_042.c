@@ -219,7 +219,6 @@ int FUN_001396d0(param_1, param_2, param_3, param_4)
 
 /* FUN_00139838 @ 0x139838 (124 bytes) */
 undefined4 FUN_00139838(undefined4 param_1,undefined4 param_2,double fparam_1)
-
 {
   int iVar1;
   undefined4 uVar2;
@@ -6233,9 +6232,11 @@ int FUN_00143664(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
+  undefined4 uVar1;
+  
   ((int (*)())FUN_00140e7c)(param_1,param_2,param_3);
-  ((int (*)())FUN_00142fdc)(param_1,param_2,param_3,param_4,param_5);
-  return;
+  uVar1 = ((int (*)())FUN_00142fdc)(param_1,param_2,param_3,param_4,param_5);
+  return uVar1;
 }
 
 /* FUN_001436b4 @ 0x1436b4 (168 bytes) */

@@ -624,7 +624,7 @@ int __ZNSt11logic_errorC4ERKSs(this, param_2)
 int __ZNSt11logic_errorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this);
+  ((int (*)())__ZNSt11logic_errorD4Ev)(this,0);
   return;
 }
 
@@ -632,7 +632,7 @@ int __ZNSt11logic_errorD2Ev(this)
 int __ZNSt11logic_errorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this);
+  ((int (*)())__ZNSt11logic_errorD4Ev)(this,2);
   return;
 }
 
@@ -640,18 +640,18 @@ int __ZNSt11logic_errorD1Ev(this)
 int __ZNSt11logic_errorD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this);
+  ((int (*)())__ZNSt11logic_errorD4Ev)(this,3);
   return;
 }
 
 /* __ZNSt11logic_errorD4Ev @ 0x97c17be4 (136 bytes) */
-int __ZNSt11logic_errorD4Ev(this)
+int __ZNSt11logic_errorD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  uint in_r4;
   int iVar4;
   char in_RESERVE;
   byte in_cr0;
@@ -671,7 +671,7 @@ int __ZNSt11logic_errorD4Ev(this)
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
   }
   __ZNSt9exceptionD2Ev(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     ((int (*)())__ZdlPv)(this);
   }
   return;

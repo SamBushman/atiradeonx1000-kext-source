@@ -414,11 +414,7 @@ int FUN_000a8340(param_1, param_2)
 }
 
 /* FUN_000a8630 @ 0xa8630 (968 bytes) */
-double FUN_000a8630(int param_1,int param_2,uint param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                 double fparam_13)
-
+double FUN_000a8630(int param_1,int param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   double dVar1;
   float fVar2;
@@ -1084,10 +1080,7 @@ int FUN_000a9070(param_1, param_2)
 }
 
 /* FUN_000a9640 @ 0xa9640 (1116 bytes) */
-double FUN_000a9640(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,
-                   double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                   double fparam_9,double fparam_10,double fparam_11,double fparam_12)
-
+double FUN_000a9640(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   byte bVar1;
   byte bVar2;
@@ -1242,12 +1235,7 @@ LAB_000a99e8:
 }
 
 /* FUN_000a9ac0 @ 0xa9ac0 (7656 bytes) */
-void FUN_000a9ac0(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,
-                 char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                 double fparam_13)
-
+void FUN_000a9ac0(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   float fVar2;
@@ -2631,7 +2619,6 @@ int FUN_000ab9b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 
 /* FUN_000abab0 @ 0xabab0 (164 bytes) */
 void FUN_000abab0(int param_1,int param_2,undefined4 param_3,double fparam_1)
-
 {
   int iVar1;
   undefined1 auStack_70 [16];
@@ -5361,7 +5348,6 @@ LAB_000afb10:
 
 /* FUN_000afe40 @ 0xafe40 (5932 bytes) */
 undefined4 FUN_000afe40(int param_1,int param_2,undefined4 param_3,uint *param_4,double fparam_1)
-
 {
   undefined1 uVar1;
   undefined1 uVar2;
@@ -7755,10 +7741,7 @@ LAB_000b4ee0:
 }
 
 /* FUN_000b4f50 @ 0xb4f50 (180 bytes) */
-void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,int param_7,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4)
-
+void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   int iVar1;
   undefined4 uVar2;
@@ -7785,9 +7768,7 @@ void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
 }
 
 /* FUN_000b5010 @ 0xb5010 (132 bytes) */
-void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4)
-
+void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined4 in_r7;
   undefined4 in_r8;
@@ -8904,10 +8885,7 @@ LAB_000b66b8:
 }
 
 /* FUN_000b6f20 @ 0xb6f20 (928 bytes) */
-double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9)
-
+double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   float fVar1;
   float fVar2;

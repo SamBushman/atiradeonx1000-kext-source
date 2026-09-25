@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
     void *h = mk(0, 0); printf("mk=%p\n", h);
     const char *s[1] = { src };
     int rc = comp(h, s, 1, mode, dbg); printf("compile rc=%d\n", rc);
-    if (stage >= 1) { const char *l = lg(h); printf("log=%d bytes\n", l ? (int)strlen(l) : -1); }
+    if (stage >= 1) { const char *l = lg(h); printf("log=%d bytes\n%s\n", l ? (int)strlen(l) : -1, l ? l : ""); }
     void *pp = 0;
     if (stage >= 2) { pp = getpp(h); printf("pp=%p\n", pp); }
     if (stage >= 3 && pp) { printf("program string:\n%s\n", (char*)pp); }

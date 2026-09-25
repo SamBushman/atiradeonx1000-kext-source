@@ -519,11 +519,14 @@ DAT_97c35748	0x97c35748	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3
 DAT_97c3574c	0x97c3574c	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c3574c asm("DAT_97c3574c");	0x00000000	data.s
 DAT_97c35750	0x97c35750	__TEXT,__const	undefined4	4	extern unsigned int DAT_97c35750 asm("DAT_97c35750");	0x00000000	data.s
 _yytranslate	0x97c3576c	__TEXT,__const	-	-		0x00020202	data.s
+SYM_97c35888	0x97c35888	__TEXT,__const	-	-		0x1e1f2021	data.s
 _yyr2	0x97c35a7a	__TEXT,__const	-	-		0x00000001	data.s
 _yydefact	0x97c35c2a	__TEXT,__const	-	-		0x00000081	data.s
 DAT_97c35e08	0x97c35e08	__TEXT,__const	-	-	extern unsigned char DAT_97c35e08 asm("DAT_97c35e08");	0x00000000	data.s
+DAT_97c35f58	0x97c35f58	__TEXT,__const	-	-	extern unsigned char DAT_97c35f58 asm("DAT_97c35f58");	0x00300499	data.s
 _yypact	0x97c35f5a	__TEXT,__const	undefined2	2		0x04998000	data.s
 DAT_97c36138	0x97c36138	__TEXT,__const	-	-	extern unsigned char DAT_97c36138 asm("DAT_97c36138");	0x03d103d1	data.s
+_yypgoto	0x97c361f6	__TEXT,__const	-	-		0x80008000	data.s
 _yytable	0x97c3628a	__TEXT,__const	-	-		0x00b800c5	data.s
 _yycheck	0x97c36c6a	__TEXT,__const	-	-		0x004c005c	data.s
 _yy_accept	0x97c3764c	__TEXT,__const	-	-		0x00000000	data.s
@@ -787,6 +790,7 @@ FLOAT_97c3ad9c	0x97c3ad9c	__TEXT,__literal4	float	4	extern float FLOAT_97c3ad9c 
 FLOAT_97c3ada0	0x97c3ada0	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada0 asm("FLOAT_97c3ada0");	0x29573f9f	data.s
 FLOAT_97c3ada4	0x97c3ada4	__TEXT,__literal4	float	4	extern float FLOAT_97c3ada4 asm("FLOAT_97c3ada4");	0x40c90fdb	data.s
 DAT_a7b7b008	0xa7b7b008	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b008 asm("DAT_a7b7b008");	pointer -> _macro_scan	data.s
+SYM_a7b7b008	0xa7b7b008	__DATA,__data	undefined4	4		pointer -> _macro_scan	data.s
 DAT_a7b7b00c	0xa7b7b00c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b00c asm("DAT_a7b7b00c");	pointer -> _noop	data.s
 DAT_a7b7b010	0xa7b7b010	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b010 asm("DAT_a7b7b010");	pointer -> _eof_scan_97b87cd4	data.s
 _cpp	0xa7b7b014	__DATA,__data	undefined4	4		0x00000000	data.s
@@ -1029,8 +1033,8 @@ ___new_handler	0xa7b7c038	__DATA,__data	undefined4	4		0x00000000	data.s
 DAT_a7b7c03c	0xa7b7c03c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c03c asm("DAT_a7b7c03c");	pointer -> LD_a7b7dff8	data.s
 _emergency_mutex	0xa7b7c040	__DATA,__data	-	-		0x32aaaba7	data.s
 DAT_a7b7c06c	0xa7b7c06c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7c06c asm("DAT_a7b7c06c");	pointer -> __Z23__gxx_exception_cleanup19_Unwind_Reason_CodeP17_Unwind_Exception	data.s
-__cxxabiv1____terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort+2417153880	data.s
-__terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort+2417153880	data.s
+__cxxabiv1____terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort	data.s
+__terminate_handler	0xa7b7c070	__DATA,__data	undefined4	4		pointer -> _abort	data.s
 __cxxabiv1____unexpected_handler	0xa7b7c074	__DATA,__data	undefined4	4		pointer -> __ZSt9terminatev	data.s
 __unexpected_handler	0xa7b7c074	__DATA,__data	undefined4	4		pointer -> __ZSt9terminatev	data.s
 _use_thread_key	0xa7b7c078	__DATA,__data	undefined4	4		0xffffffff	data.s

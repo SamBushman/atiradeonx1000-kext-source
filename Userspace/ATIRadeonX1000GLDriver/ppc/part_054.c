@@ -1072,6 +1072,7 @@ int FUN_001a3580(param_1)
 {
   size_t sVar1;
   int iVar2;
+  undefined4 uVar3;
   char local_58 [4];
   char acStack_54 [4];
   char acStack_50 [64];
@@ -1087,8 +1088,8 @@ int FUN_001a3580(param_1)
     local_58[sVar1] = '\0';
   }
   _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
-  _NSAddressOfSymbol();
-  return;
+  uVar3 = _NSAddressOfSymbol();
+  return uVar3;
 }
 
 /* FUN_001cd7bc @ 0x1cd7bc (28 bytes) */

@@ -1343,9 +1343,7 @@ int FUN_0000bd60(param_1, param_2, param_3, param_4, param_5, param_6)
 }
 
 /* FUN_0000be70 @ 0xbe70 (272 bytes) */
-double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7)
-
+double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7)
 {
   int iVar1;
   double dVar2;
@@ -1384,9 +1382,7 @@ double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4
 }
 
 /* FUN_0000bfa0 @ 0xbfa0 (1332 bytes) */
-char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1
-                   ,double fparam_2)
-
+char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2)
 {
   char cVar1;
   int iVar2;
@@ -1592,8 +1588,7 @@ LAB_0000c440:
 }
 
 /* FUN_0000c500 @ 0xc500 (892 bytes) */
-double FUN_0000c500(char *param_1,undefined4 *param_2)
-
+double FUN_0000c500(char *param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6)
 {
   bool bVar1;
   bool bVar2;
@@ -1601,10 +1596,6 @@ double FUN_0000c500(char *param_1,undefined4 *param_2)
   char cVar5;
   char *pcVar4;
   int iVar6;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
   char *pcVar7;
   char *pcVar8;
   double dVar9;
@@ -1698,7 +1689,7 @@ LAB_0000c670:
     if (bVar2) {
       dVar9 = -dVar9;
     }
-    dVar9 = (double)((double (*)())FUN_0000be70)((int)dVar9,param_2,in_r5,in_r6,in_r7,in_r8,pcVar8);
+    dVar9 = (double)((double (*)())FUN_0000be70)((int)dVar9,param_2,param_3,param_4,param_5,param_6,pcVar8);
     dVar10 = dVar10 * dVar9;
   }
 LAB_0000c5a8:
@@ -8196,9 +8187,7 @@ LAB_00016630:
 }
 
 /* FUN_00016670 @ 0x16670 (2312 bytes) */
-void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 param_5,
-                 undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2)
-
+void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2)
 {
   bool bVar1;
   bool bVar2;

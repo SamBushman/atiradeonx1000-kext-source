@@ -5,33 +5,33 @@ int TGenericLinker__MergeCompilers(this, param_2)
   unsigned char * this;
   int param_2;
 {
-  char cVar1;
-  byte bVar2;
-  int iVar3;
-  undefined *puVar4;
+  bool bVar1;
+  char cVar2;
+  byte bVar3;
+  int iVar4;
   undefined *puVar5;
   undefined *puVar6;
   undefined *puVar7;
   undefined *puVar8;
   undefined *puVar9;
-  unsigned char * pTVar10;
+  undefined *puVar10;
   unsigned char * pTVar11;
   unsigned char * pTVar12;
-  int iVar13;
+  unsigned char * pTVar13;
   int iVar14;
-  void *pvVar15;
+  int iVar15;
   void *pvVar16;
-  undefined4 uVar17;
-  int iVar18;
-  size_t sVar19;
-  int iVar20;
-  char *pcVar21;
-  unsigned char * pPVar22;
-  size_t sVar23;
+  void *pvVar17;
+  undefined4 uVar18;
+  int iVar19;
+  size_t sVar20;
+  int iVar21;
+  char *pcVar22;
+  unsigned char * pPVar23;
   size_t sVar24;
-  unsigned char * p_Var25;
-  bool bVar26;
-  bool bVar27;
+  size_t sVar25;
+  unsigned char * p_Var26;
+  undefined4 uVar27;
   uint uVar28;
   byte *pbVar29;
   bool bVar30;
@@ -49,198 +49,198 @@ int TGenericLinker__MergeCompilers(this, param_2)
   unsigned char * local_58;
   unsigned char * local_54;
   
-  puVar9 = PTR_s_gl__IfEnd__a7b7d6dc;
-  puVar8 = PTR_s_gl__IfElse_a7b7d6d8;
-  puVar7 = PTR_s_gl__WhileEndIf__a7b7d6d4;
-  puVar6 = PTR_s_gl__WhileStart__a7b7d6d0;
-  puVar5 = PTR_s_gl__WhileEnd__a7b7d6cc;
-  puVar4 = PTR_s_gl__WhileBody__a7b7d6c8;
-  iVar3 = param_2 * 4;
-  pvVar15 = _malloc(*(int *)(this + iVar3 + 0x20) << 2);
-  pvVar16 = _malloc(*(int *)(this + iVar3 + 0x20) << 2);
+  puVar10 = PTR_s_gl__IfEnd__a7b7d6dc;
+  puVar9 = PTR_s_gl__IfElse_a7b7d6d8;
+  puVar8 = PTR_s_gl__WhileEndIf__a7b7d6d4;
+  puVar7 = PTR_s_gl__WhileStart__a7b7d6d0;
+  puVar6 = PTR_s_gl__WhileEnd__a7b7d6cc;
+  puVar5 = PTR_s_gl__WhileBody__a7b7d6c8;
+  iVar4 = param_2 * 4;
+  pvVar16 = _malloc(*(int *)(this + iVar4 + 0x20) << 2);
+  pvVar17 = _malloc(*(int *)(this + iVar4 + 0x20) << 2);
   pcVar33 = DAT_a7b7bb0c;
-  iVar13 = *(int *)(this + iVar3 + 0x20);
+  iVar14 = *(int *)(this + iVar4 + 0x20);
   local_60 = 0;
-  if (10000 < iVar13) {
+  if (10000 < iVar14) {
     pvVar35 = *(void **)(this + 0x84);
                     
     __ZN13TInfoSinkBase6appendEPKc(pvVar35,"ERROR: ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar35,pcVar33);
     __ZN13TInfoSinkBase6appendEPKc(pvVar35,"\n");
   }
-  bVar30 = 10000 >= iVar13;
+  bVar30 = 10000 >= iVar14;
   if (bVar30) {
-    uVar17 = _PPStreamCreate();
-    *(undefined4 *)(this + iVar3 + 0x30) = uVar17;
+    uVar18 = _PPStreamCreate();
+    *(undefined4 *)(this + iVar4 + 0x30) = uVar18;
     pvVar35 = operator_new(0x54);
     __ZN16ParseSymbolTableC1Ej(pvVar35,0x80);
-    *(void **)(this + iVar3 + 0x28) = pvVar35;
-    *(undefined4 *)((int)pvVar35 + 0xc) = *(undefined4 *)(this + iVar3 + 0x30);
+    *(void **)(this + iVar4 + 0x28) = pvVar35;
+    *(undefined4 *)((int)pvVar35 + 0xc) = *(undefined4 *)(this + iVar4 + 0x30);
     if (param_2 == 0) {
       **(undefined4 **)(this + 0x30) = 0x8b31;
       local_60 = 0;
       *(undefined4 *)(*(int *)(this + 0x28) + 0x3c) = 0;
     }
     else {
-      **(undefined4 **)(this + iVar3 + 0x30) = 0x8b30;
+      **(undefined4 **)(this + iVar4 + 0x30) = 0x8b30;
       local_60 = 1;
-      *(undefined4 *)(*(int *)(this + iVar3 + 0x28) + 0x3c) = 1;
+      *(undefined4 *)(*(int *)(this + iVar4 + 0x28) + 0x3c) = 1;
     }
   }
   if (bVar30) {
-    pTVar36 = this + iVar3;
-    iVar13 = 0;
+    pTVar36 = this + iVar4;
+    iVar14 = 0;
     iVar31 = 0;
-    _memset(pvVar15,0,*(int *)(pTVar36 + 0x20) << 2);
     _memset(pvVar16,0,*(int *)(pTVar36 + 0x20) << 2);
-    pTVar10 = pTVar36;
+    _memset(pvVar17,0,*(int *)(pTVar36 + 0x20) << 2);
     pTVar11 = pTVar36;
     pTVar12 = pTVar36;
+    pTVar13 = pTVar36;
     if (0 < *(int *)(pTVar36 + 0x20)) {
       do {
-        local_54 = pTVar12;
-        local_58 = pTVar11;
-        local_5c = pTVar10;
-        iVar14 = iVar13 * 4;
-        iVar34 = **(int **)(*(int *)(iVar14 + *(int *)(pTVar36 + 0x18)) + 0x20);
+        local_54 = pTVar13;
+        local_58 = pTVar12;
+        local_5c = pTVar11;
+        iVar15 = iVar14 * 4;
+        iVar34 = **(int **)(*(int *)(iVar15 + *(int *)(pTVar36 + 0x18)) + 0x20);
         while (iVar34 != 0) {
-          iVar18 = _PPStreamChunkCreateFromChunk(iVar34);
-          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(pTVar36 + 0x30) + 0x20),iVar18);
-          if (*(int *)(iVar14 + (int)pvVar15) == 0) {
-            *(int *)(iVar14 + (int)pvVar15) = iVar18;
+          iVar19 = _PPStreamChunkCreateFromChunk(iVar34);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(pTVar36 + 0x30) + 0x20),iVar19);
+          if (*(int *)(iVar15 + (int)pvVar16) == 0) {
+            *(int *)(iVar15 + (int)pvVar16) = iVar19;
           }
-          uVar28 = *(uint *)(iVar18 + 0x10);
-          *(uint *)(iVar18 + 0xc) =
-               (*(uint *)(iVar18 + 0xc) & 0x3ffff) + iVar31 & 0x3ffff |
-               *(uint *)(iVar18 + 0xc) & 0xfffc0000;
+          uVar28 = *(uint *)(iVar19 + 0x10);
+          *(uint *)(iVar19 + 0xc) =
+               (*(uint *)(iVar19 + 0xc) & 0x3ffff) + iVar31 & 0x3ffff |
+               *(uint *)(iVar19 + 0xc) & 0xfffc0000;
           if ((uVar28 & 0x3ffff) != 0) {
-            *(uint *)(iVar18 + 0x10) = (uVar28 & 0x3ffff) + iVar31 & 0x3ffff | uVar28 & 0xfffc0000;
+            *(uint *)(iVar19 + 0x10) = (uVar28 & 0x3ffff) + iVar31 & 0x3ffff | uVar28 & 0xfffc0000;
           }
-          if (*(int *)(iVar18 + 0x40) != 0) {
-            pcVar33 = (char *)(iVar18 + 0x44);
-            sVar19 = _strlen(puVar4);
-            iVar20 = _strncmp(pcVar33,puVar4,sVar19);
-            if (iVar20 != 0) {
-              sVar19 = _strlen(puVar5);
-              iVar20 = _strncmp(pcVar33,puVar5,sVar19);
-              if (iVar20 != 0) {
-                sVar19 = _strlen(puVar6);
-                iVar20 = _strncmp(pcVar33,puVar6,sVar19);
-                if (iVar20 != 0) {
-                  sVar19 = _strlen(puVar7);
-                  iVar20 = _strncmp(pcVar33,puVar7,sVar19);
-                  if (iVar20 != 0) {
-                    sVar19 = _strlen(puVar8);
-                    iVar20 = _strncmp(pcVar33,puVar8,sVar19);
-                    if (iVar20 != 0) {
-                      sVar19 = _strlen(puVar9);
-                      iVar20 = _strncmp(pcVar33,puVar9,sVar19);
-                      if (iVar20 != 0) goto code_r0x97bb257c;
+          if (*(int *)(iVar19 + 0x40) != 0) {
+            pcVar33 = (char *)(iVar19 + 0x44);
+            sVar20 = _strlen(puVar5);
+            iVar21 = _strncmp(pcVar33,puVar5,sVar20);
+            if (iVar21 != 0) {
+              sVar20 = _strlen(puVar6);
+              iVar21 = _strncmp(pcVar33,puVar6,sVar20);
+              if (iVar21 != 0) {
+                sVar20 = _strlen(puVar7);
+                iVar21 = _strncmp(pcVar33,puVar7,sVar20);
+                if (iVar21 != 0) {
+                  sVar20 = _strlen(puVar8);
+                  iVar21 = _strncmp(pcVar33,puVar8,sVar20);
+                  if (iVar21 != 0) {
+                    sVar20 = _strlen(puVar9);
+                    iVar21 = _strncmp(pcVar33,puVar9,sVar20);
+                    if (iVar21 != 0) {
+                      sVar20 = _strlen(puVar10);
+                      iVar21 = _strncmp(pcVar33,puVar10,sVar20);
+                      if (iVar21 != 0) goto code_r0x97bb257c;
                     }
                   }
                 }
               }
             }
-            _sprintf(local_70,"%04d",iVar13);
-            pcVar21 = (char *)(iVar18 + 0x44);
+            _sprintf(local_70,"%04d",iVar14);
+            pcVar22 = (char *)(iVar19 + 0x44);
             pcVar33 = local_70;
-            iVar18 = 4;
+            iVar19 = 4;
             do {
-              cVar1 = *pcVar33;
+              cVar2 = *pcVar33;
               pcVar33 = pcVar33 + 1;
-              *pcVar21 = cVar1;
-              pcVar21 = pcVar21 + 1;
-              iVar18 = iVar18 + -1;
-            } while (iVar18 != 0);
+              *pcVar22 = cVar2;
+              pcVar22 = pcVar22 + 1;
+              iVar19 = iVar19 + -1;
+            } while (iVar19 != 0);
           }
 code_r0x97bb257c:
           iVar34 = *(int *)(iVar34 + 8);
-          *(int *)(iVar14 + (int)pvVar16) = *(int *)(iVar14 + (int)pvVar16) + 1;
+          *(int *)(iVar15 + (int)pvVar17) = *(int *)(iVar15 + (int)pvVar17) + 1;
         }
-        pTVar10 = local_5c;
-        pTVar11 = local_54;
-        for (iVar34 = **(int **)(*(int *)(iVar14 + *(int *)(pTVar36 + 0x18)) + 0x24);
-            local_5c = pTVar10, local_54 = pTVar11, iVar34 != 0; iVar34 = *(int *)(iVar34 + 8)) {
-          iVar18 = _PPStreamChunkCreateFromChunk(iVar34);
-          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(pTVar36 + 0x30) + 0x24),iVar18);
-          *(int *)(iVar18 + 0xc) = *(int *)(iVar18 + 0xc) + iVar31;
-          if (*(int *)(iVar18 + 0x10) != 0) {
-            pcVar33 = (char *)(iVar18 + 0x14);
-            sVar19 = _strlen(puVar4);
-            iVar20 = _strncmp(pcVar33,puVar4,sVar19);
-            if (iVar20 != 0) {
-              sVar19 = _strlen(puVar5);
-              iVar20 = _strncmp(pcVar33,puVar5,sVar19);
-              if (iVar20 != 0) {
-                sVar19 = _strlen(puVar6);
-                iVar20 = _strncmp(pcVar33,puVar6,sVar19);
-                if (iVar20 != 0) {
-                  sVar19 = _strlen(puVar7);
-                  iVar20 = _strncmp(pcVar33,puVar7,sVar19);
-                  if (iVar20 != 0) {
-                    sVar19 = _strlen(puVar8);
-                    iVar20 = _strncmp(pcVar33,puVar8,sVar19);
-                    if (iVar20 != 0) {
-                      sVar19 = _strlen(puVar9);
-                      iVar20 = _strncmp(pcVar33,puVar9,sVar19);
-                      if (iVar20 != 0) goto code_r0x97bb26e0;
+        pTVar11 = local_5c;
+        pTVar12 = local_54;
+        for (iVar34 = **(int **)(*(int *)(iVar15 + *(int *)(pTVar36 + 0x18)) + 0x24);
+            local_5c = pTVar11, local_54 = pTVar12, iVar34 != 0; iVar34 = *(int *)(iVar34 + 8)) {
+          iVar19 = _PPStreamChunkCreateFromChunk(iVar34);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(pTVar36 + 0x30) + 0x24),iVar19);
+          *(int *)(iVar19 + 0xc) = *(int *)(iVar19 + 0xc) + iVar31;
+          if (*(int *)(iVar19 + 0x10) != 0) {
+            pcVar33 = (char *)(iVar19 + 0x14);
+            sVar20 = _strlen(puVar5);
+            iVar21 = _strncmp(pcVar33,puVar5,sVar20);
+            if (iVar21 != 0) {
+              sVar20 = _strlen(puVar6);
+              iVar21 = _strncmp(pcVar33,puVar6,sVar20);
+              if (iVar21 != 0) {
+                sVar20 = _strlen(puVar7);
+                iVar21 = _strncmp(pcVar33,puVar7,sVar20);
+                if (iVar21 != 0) {
+                  sVar20 = _strlen(puVar8);
+                  iVar21 = _strncmp(pcVar33,puVar8,sVar20);
+                  if (iVar21 != 0) {
+                    sVar20 = _strlen(puVar9);
+                    iVar21 = _strncmp(pcVar33,puVar9,sVar20);
+                    if (iVar21 != 0) {
+                      sVar20 = _strlen(puVar10);
+                      iVar21 = _strncmp(pcVar33,puVar10,sVar20);
+                      if (iVar21 != 0) goto code_r0x97bb26e0;
                     }
                   }
                 }
               }
             }
-            _sprintf(local_70,"%04d",iVar13);
-            pcVar21 = (char *)(iVar18 + 0x14);
+            _sprintf(local_70,"%04d",iVar14);
+            pcVar22 = (char *)(iVar19 + 0x14);
             pcVar33 = local_70;
-            iVar18 = 4;
+            iVar19 = 4;
             do {
-              cVar1 = *pcVar33;
+              cVar2 = *pcVar33;
               pcVar33 = pcVar33 + 1;
-              *pcVar21 = cVar1;
-              pcVar21 = pcVar21 + 1;
-              iVar18 = iVar18 + -1;
-            } while (iVar18 != 0);
+              *pcVar22 = cVar2;
+              pcVar22 = pcVar22 + 1;
+              iVar19 = iVar19 + -1;
+            } while (iVar19 != 0);
           }
 code_r0x97bb26e0:
-          pTVar10 = local_5c;
-          pTVar11 = local_54;
+          pTVar11 = local_5c;
+          pTVar12 = local_54;
         }
-        iVar18 = 0;
-        this_00 = *(unsigned char **)(*(int *)(iVar14 + *(int *)(pTVar36 + 8)) + 0x6c);
+        iVar19 = 0;
+        this_00 = *(unsigned char **)(*(int *)(iVar15 + *(int *)(pTVar36 + 8)) + 0x6c);
         iVar34 = *(int *)(this_00 + 4);
         if (0 < iVar34) {
           do {
-            iVar20 = 0;
-            if (0 < *(int *)(*(int *)(pTVar10 + 0x38) + 4)) {
+            iVar21 = 0;
+            if (0 < *(int *)(*(int *)(pTVar11 + 0x38) + 4)) {
               do {
                 pcVar33 = (char *)FunctionTable__getFunctionName
-                                            (*(unsigned char **)(pTVar11 + 0x38),iVar20);
-                pcVar21 = (char *)FunctionTable__getFunctionName(this_00,iVar18);
-                iVar34 = _strcmp(pcVar33,pcVar21);
+                                            (*(unsigned char **)(pTVar12 + 0x38),iVar21);
+                pcVar22 = (char *)FunctionTable__getFunctionName(this_00,iVar19);
+                iVar34 = _strcmp(pcVar33,pcVar22);
                 if (iVar34 == 0) {
-                  iVar34 = FunctionTable__getFirstOp(*(unsigned char **)(pTVar11 + 0x38),iVar20);
+                  iVar34 = FunctionTable__getFirstOp(*(unsigned char **)(pTVar12 + 0x38),iVar21);
                   FunctionTable__setFirstOp
-                            (*(unsigned char **)(pTVar11 + 0x38),iVar20,iVar34 + iVar31);
-                  iVar34 = FunctionTable__getLastOp(*(unsigned char **)(pTVar11 + 0x38),iVar20);
+                            (*(unsigned char **)(pTVar12 + 0x38),iVar21,iVar34 + iVar31);
+                  iVar34 = FunctionTable__getLastOp(*(unsigned char **)(pTVar12 + 0x38),iVar21);
                   FunctionTable__setLastOp
-                            (*(unsigned char **)(pTVar11 + 0x38),iVar20,iVar34 + iVar31);
+                            (*(unsigned char **)(pTVar12 + 0x38),iVar21,iVar34 + iVar31);
                 }
-                iVar20 = iVar20 + 1;
-              } while (iVar20 < *(int *)(*(int *)(pTVar11 + 0x38) + 4));
+                iVar21 = iVar21 + 1;
+              } while (iVar21 < *(int *)(*(int *)(pTVar12 + 0x38) + 4));
               iVar34 = *(int *)(this_00 + 4);
             }
-            iVar18 = iVar18 + 1;
-          } while (iVar18 < iVar34);
+            iVar19 = iVar19 + 1;
+          } while (iVar19 < iVar34);
         }
-        iVar31 = iVar31 + *(int *)(iVar14 + (int)pvVar16);
-        if (*(int *)(*(int *)(iVar14 + *(int *)(local_58 + 8)) + 0xa4) != 0) {
+        iVar31 = iVar31 + *(int *)(iVar15 + (int)pvVar17);
+        if (*(int *)(*(int *)(iVar15 + *(int *)(local_58 + 8)) + 0xa4) != 0) {
           local_60 = 1;
         }
-        iVar13 = iVar13 + 1;
-        pTVar10 = local_5c;
-        pTVar11 = local_58;
-        pTVar12 = local_54;
-      } while (iVar13 < *(int *)(local_58 + 0x20));
+        iVar14 = iVar14 + 1;
+        pTVar11 = local_5c;
+        pTVar12 = local_58;
+        pTVar13 = local_54;
+      } while (iVar14 < *(int *)(local_58 + 0x20));
     }
     pcVar33 = UNK_a7b7bb10;
     if (local_60 == 0) {
@@ -253,53 +253,53 @@ code_r0x97bb26e0:
     }
   }
   if (bVar30) {
-    iVar13 = 1;
+    iVar14 = 1;
     do {
       iVar31 = 0;
-      if (0 < *(int *)(this + iVar3 + 0x20)) {
+      if (0 < *(int *)(this + iVar4 + 0x20)) {
         do {
-          iVar14 = iVar31 * 4;
-          for (pPVar22 = (unsigned char *)
+          iVar15 = iVar31 * 4;
+          for (pPVar23 = (unsigned char *)
                          ParseSymbolTable__NextSymbol
-                                   (*(unsigned char **)(iVar14 + *(int *)(this + iVar3 + 0x10)),
-                                    (unsigned char *)0x0); pPVar22 != (unsigned char *)0x0;
-              pPVar22 = (unsigned char *)
+                                   (*(unsigned char **)(iVar15 + *(int *)(this + iVar4 + 0x10)),
+                                    (unsigned char *)0x0); pPVar23 != (unsigned char *)0x0;
+              pPVar23 = (unsigned char *)
                         ParseSymbolTable__NextSymbol
-                                  (*(unsigned char **)(iVar14 + *(int *)(this + iVar3 + 0x10)),
-                                   pPVar22)) {
-            if (iVar13 == *(int *)(pPVar22 + 0x54)) {
+                                  (*(unsigned char **)(iVar15 + *(int *)(this + iVar4 + 0x10)),
+                                   pPVar23)) {
+            if (iVar14 == *(int *)(pPVar23 + 0x54)) {
               puVar32 = (undefined4 *)0x0;
-              if (*(int *)(pPVar22 + 0x38) == 0) {
-                bVar26 = true;
+              if (*(int *)(pPVar23 + 0x38) == 0) {
+                bVar1 = true;
 code_r0x97bb2ab4:
-                if (bVar26) goto code_r0x97bb2ab8;
+                if (bVar1) goto code_r0x97bb2ab8;
               }
               else {
                 puVar32 = (undefined4 *)
                           ParseSymbolTable__FindGlobalSymbolByName
-                                    (*(unsigned char **)(this + iVar3 + 0x28),
-                                     *(char **)(pPVar22 + 0x14));
-                bVar26 = puVar32 == (undefined4 *)0x0;
-                if (!bVar26) {
-                  if (*(short *)(puVar32 + 0xb) == *(short *)(pPVar22 + 0x2c)) {
-                    if (*(short *)((int)puVar32 + 0x2e) == *(short *)(pPVar22 + 0x2e))
+                                    (*(unsigned char **)(this + iVar4 + 0x28),
+                                     *(char **)(pPVar23 + 0x14));
+                bVar1 = puVar32 == (undefined4 *)0x0;
+                if (!bVar1) {
+                  if (*(short *)(puVar32 + 0xb) == *(short *)(pPVar23 + 0x2c)) {
+                    if (*(short *)((int)puVar32 + 0x2e) == *(short *)(pPVar23 + 0x2e))
                     goto code_r0x97bb2ab4;
-                    pcVar21 = (char *)puVar32[5];
-                    sVar19 = _strlen(UNK_a7b7bb18);
-                    sVar23 = _strlen(pcVar21);
-                    sVar24 = _strlen((char *)(&_shaderString)[param_2]);
-                    pcVar33 = _malloc(sVar19 + sVar23 + sVar24 + 1);
-                    _sprintf(pcVar33,UNK_a7b7bb18,pcVar21,(&_shaderString)[param_2]);
+                    pcVar22 = (char *)puVar32[5];
+                    sVar20 = _strlen(UNK_a7b7bb18);
+                    sVar24 = _strlen(pcVar22);
+                    sVar25 = _strlen((char *)(&_shaderString)[param_2]);
+                    pcVar33 = _malloc(sVar20 + sVar24 + sVar25 + 1);
+                    _sprintf(pcVar33,UNK_a7b7bb18,pcVar22,(&_shaderString)[param_2]);
                     pvVar35 = *(void **)(this + 0x84);
                     
                   }
                   else {
-                    pcVar21 = (char *)puVar32[5];
-                    sVar19 = _strlen(UNK_a7b7bb14);
-                    sVar23 = _strlen(pcVar21);
-                    sVar24 = _strlen((char *)(&_shaderString)[param_2]);
-                    pcVar33 = _malloc(sVar19 + sVar23 + sVar24 + 1);
-                    _sprintf(pcVar33,UNK_a7b7bb14,pcVar21,(&_shaderString)[param_2]);
+                    pcVar22 = (char *)puVar32[5];
+                    sVar20 = _strlen(UNK_a7b7bb14);
+                    sVar24 = _strlen(pcVar22);
+                    sVar25 = _strlen((char *)(&_shaderString)[param_2]);
+                    pcVar33 = _malloc(sVar20 + sVar24 + sVar25 + 1);
+                    _sprintf(pcVar33,UNK_a7b7bb14,pcVar22,(&_shaderString)[param_2]);
                     pvVar35 = *(void **)(this + 0x84);
                     
                   }
@@ -311,39 +311,35 @@ code_r0x97bb2ab4:
                   goto code_r0x97bb2ab4;
                 }
 code_r0x97bb2ab8:
-                bVar26 = false;
-                bVar27 = false;
-                if ((iVar13 != 0) && (pbVar29 = *(byte **)pPVar22, pbVar29 != (byte *)0x0)) {
-                  bVar2 = *pbVar29;
-                  if (bVar2 != 2) {
-                    if (bVar2 < 3) {
-                      if ((bVar2 == 0) &&
-                         (iVar34 = **(int **)(*(int *)(iVar14 + *(int *)(this + iVar3 + 0x18)) + 8),
+                uVar18 = 0;
+                uVar27 = 0;
+                if ((iVar14 != 0) && (pbVar29 = *(byte **)pPVar23, pbVar29 != (byte *)0x0)) {
+                  bVar3 = *pbVar29;
+                  if (bVar3 != 2) {
+                    if (bVar3 < 3) {
+                      if ((bVar3 == 0) &&
+                         (iVar34 = **(int **)(*(int *)(iVar15 + *(int *)(this + iVar4 + 0x18)) + 8),
                          iVar34 != 0)) {
-                        bVar26 = false;
-                        bVar27 = false;
                         do {
                           if (*(short *)(pbVar29 + 0x12) == *(short *)(iVar34 + 0xe)) {
-                            bVar26 = true;
+                            uVar18 = 1;
                           }
                           if (*(short *)(pbVar29 + 0x12) == *(short *)(iVar34 + 0x12)) {
-                            bVar27 = true;
+                            uVar27 = 1;
                           }
                           iVar34 = *(int *)(iVar34 + 8);
                         } while (iVar34 != 0);
                       }
                     }
-                    else if ((bVar2 == 3) &&
-                            (iVar34 = **(int **)(*(int *)(iVar14 + *(int *)(this + iVar3 + 0x18)) +
+                    else if ((bVar3 == 3) &&
+                            (iVar34 = **(int **)(*(int *)(iVar15 + *(int *)(this + iVar4 + 0x18)) +
                                                 0x14), iVar34 != 0)) {
-                      bVar26 = false;
-                      bVar27 = false;
                       do {
                         if (*(short *)(pbVar29 + 0x12) == *(short *)(iVar34 + 0xe)) {
-                          bVar26 = true;
+                          uVar18 = 1;
                         }
                         if (*(short *)(pbVar29 + 0x12) == *(short *)(iVar34 + 0x12)) {
-                          bVar27 = true;
+                          uVar27 = 1;
                         }
                         iVar34 = *(int *)(iVar34 + 8);
                       } while (iVar34 != 0);
@@ -352,16 +348,16 @@ code_r0x97bb2ab8:
                 }
                 puVar32 = (undefined4 *)
                           ParseSymbolTable__AddFromExternalSymbol
-                                    (*(unsigned char **)(this + iVar3 + 0x28),pPVar22,bVar26,
-                                     bVar27);
+                                    (*(unsigned char **)(this + iVar4 + 0x28),pPVar23,uVar18,
+                                     uVar27);
               }
               if ((bVar30 != true) || (puVar32 == (undefined4 *)0x0)) {
                 if ((bVar30 == true) && (puVar32 == (undefined4 *)0x0)) {
-                  pcVar21 = *(char **)(pPVar22 + 0x14);
-                  sVar19 = _strlen(DAT_a7b7bbc0);
-                  sVar23 = _strlen(pcVar21);
-                  pcVar33 = _malloc(sVar19 + sVar23 + 1);
-                  _sprintf(pcVar33,UNK_a7b7bb90,pcVar21);
+                  pcVar22 = *(char **)(pPVar23 + 0x14);
+                  sVar20 = _strlen(DAT_a7b7bbc0);
+                  sVar24 = _strlen(pcVar22);
+                  pcVar33 = _malloc(sVar20 + sVar24 + 1);
+                  _sprintf(pcVar33,UNK_a7b7bb90,pcVar22);
                   pvVar35 = *(void **)(this + 0x84);
                     
                   __ZN13TInfoSinkBase6appendEPKc(pvVar35,"ERROR: ");
@@ -372,110 +368,110 @@ code_r0x97bb2ab8:
                 }
               }
               else {
-                iVar34 = TGenericLinker__FindChunkDelta(this,*(unsigned char **)pPVar22,(unsigned char *)*puVar32)
+                iVar34 = TGenericLinker__FindChunkDelta(this,*(unsigned char **)pPVar23,(unsigned char *)*puVar32)
                 ;
                 if (iVar34 != 0) {
-                  iVar18 = ((int (*)())GetVec4sForType)(*(ushort *)(pPVar22 + 0x2c));
-                  UpdateOperations(*(unsigned char **)(iVar14 + (int)pvVar15),
+                  iVar19 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(pPVar23 + 0x2c));
+                  UpdateOperations(*(unsigned char **)(iVar15 + (int)pvVar16),
                                    (unsigned char *)
                                    **(undefined4 **)
-                                     (*(int *)(iVar14 + *(int *)(this + iVar3 + 0x18)) + 0x20),
-                                   *(int *)(iVar14 + (int)pvVar16),*(unsigned char **)pPVar22,
-                                   iVar18,iVar34);
+                                     (*(int *)(iVar15 + *(int *)(this + iVar4 + 0x18)) + 0x20),
+                                   *(int *)(iVar15 + (int)pvVar17),*(unsigned char **)pPVar23,
+                                   iVar19,iVar34);
                 }
               }
             }
           }
           iVar31 = iVar31 + 1;
-        } while (iVar31 < *(int *)(this + iVar3 + 0x20));
+        } while (iVar31 < *(int *)(this + iVar4 + 0x20));
       }
-      iVar13 = iVar13 + -1;
-    } while (-1 < iVar13);
+      iVar14 = iVar14 + -1;
+    } while (-1 < iVar14);
     if (bVar30 == true) {
-      iVar13 = 0;
-      if (0 < *(int *)(this + iVar3 + 0x20)) {
+      iVar14 = 0;
+      if (0 < *(int *)(this + iVar4 + 0x20)) {
         do {
-          iVar31 = iVar13 * 4;
+          iVar31 = iVar14 * 4;
           for (p_Var37 = (unsigned char *)
-                         **(undefined4 **)(*(int *)(iVar31 + *(int *)(this + iVar3 + 0x18)) + 0x10);
+                         **(undefined4 **)(*(int *)(iVar31 + *(int *)(this + iVar4 + 0x18)) + 0x10);
               p_Var37 != (unsigned char *)0x0; p_Var37 = *(unsigned char **)(p_Var37 + 8)) {
             uVar28 = *(uint *)(p_Var37 + 0xc);
             if ((uVar28 & 0x1f0000) == 0x110000) {
-              iVar14 = *(int *)(*(int *)(this + iVar3 + 0x28) + 0x24);
-              *(int *)(*(int *)(this + iVar3 + 0x28) + 0x24) = iVar14 + 1;
-              p_Var25 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var37);
+              iVar15 = *(int *)(*(int *)(this + iVar4 + 0x28) + 0x24);
+              *(int *)(*(int *)(this + iVar4 + 0x28) + 0x24) = iVar15 + 1;
+              p_Var26 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var37);
               _PPStreamChunkListAddChunk
-                        (*(undefined4 *)(*(int *)(this + iVar3 + 0x30) + 0x10),p_Var25);
-              *(short *)(p_Var25 + 0x12) = (short)iVar14;
-              iVar14 = TGenericLinker__FindChunkDelta(this,p_Var37,p_Var25);
-              UpdateOperations(*(unsigned char **)(iVar31 + (int)pvVar15),
+                        (*(undefined4 *)(*(int *)(this + iVar4 + 0x30) + 0x10),p_Var26);
+              *(short *)(p_Var26 + 0x12) = (short)iVar15;
+              iVar15 = TGenericLinker__FindChunkDelta(this,p_Var37,p_Var26);
+              UpdateOperations(*(unsigned char **)(iVar31 + (int)pvVar16),
                                (unsigned char *)
                                **(undefined4 **)
-                                 (*(int *)(iVar31 + *(int *)(this + iVar3 + 0x18)) + 0x20),
-                               *(int *)(iVar31 + (int)pvVar16),p_Var37,1,iVar14);
-              *(undefined2 *)(p_Var25 + 0xe) =
-                   *(undefined2 *)(*(int *)(*(int *)(this + iVar3 + 0x30) + 0x2c) + 10);
-              iVar14 = _PPStreamChunkListChunkAtIndex
+                                 (*(int *)(iVar31 + *(int *)(this + iVar4 + 0x18)) + 0x20),
+                               *(int *)(iVar31 + (int)pvVar17),p_Var37,1,iVar15);
+              *(undefined2 *)(p_Var26 + 0xe) =
+                   *(undefined2 *)(*(int *)(*(int *)(this + iVar4 + 0x30) + 0x2c) + 10);
+              iVar15 = _PPStreamChunkListChunkAtIndex
                                  (*(undefined4 *)
-                                   (*(int *)(iVar31 + *(int *)(this + iVar3 + 0x18)) + 0x2c),
+                                   (*(int *)(iVar31 + *(int *)(this + iVar4 + 0x18)) + 0x2c),
                                   uVar28 & 0xffff);
-              _PPStreamAddConstant(*(undefined4 *)(this + iVar3 + 0x30),iVar14 + 0xc);
+              _PPStreamAddConstant(*(undefined4 *)(this + iVar4 + 0x30),iVar15 + 0xc);
             }
           }
-          iVar13 = iVar13 + 1;
-        } while (iVar13 < *(int *)(this + iVar3 + 0x20));
+          iVar14 = iVar14 + 1;
+        } while (iVar14 < *(int *)(this + iVar4 + 0x20));
       }
       iVar31 = 0;
-      iVar13 = 0;
-      if (0 < *(int *)(this + iVar3 + 0x20)) {
+      iVar14 = 0;
+      if (0 < *(int *)(this + iVar4 + 0x20)) {
         do {
-          iVar14 = 0;
-          for (iVar34 = **(int **)(*(int *)(iVar31 * 4 + *(int *)(this + iVar3 + 0x18)) + 0xc);
+          iVar15 = 0;
+          for (iVar34 = **(int **)(*(int *)(iVar31 * 4 + *(int *)(this + iVar4 + 0x18)) + 0xc);
               iVar34 != 0; iVar34 = *(int *)(iVar34 + 8)) {
-            iVar14 = iVar14 + 1;
-            if (iVar13 < iVar14) {
-              uVar17 = _PPStreamChunkCreateFromChunk(iVar34);
+            iVar15 = iVar15 + 1;
+            if (iVar14 < iVar15) {
+              uVar18 = _PPStreamChunkCreateFromChunk(iVar34);
               _PPStreamChunkListAddChunk
-                        (*(undefined4 *)(*(int *)(this + iVar3 + 0x30) + 0xc),uVar17);
-              iVar13 = iVar14;
+                        (*(undefined4 *)(*(int *)(this + iVar4 + 0x30) + 0xc),uVar18);
+              iVar14 = iVar15;
             }
           }
           iVar31 = iVar31 + 1;
-        } while (iVar31 < *(int *)(this + iVar3 + 0x20));
+        } while (iVar31 < *(int *)(this + iVar4 + 0x20));
       }
-      iVar13 = 0;
-      if (0 < *(int *)(this + iVar3 + 0x20)) {
+      iVar14 = 0;
+      if (0 < *(int *)(this + iVar4 + 0x20)) {
         do {
-          for (iVar31 = **(int **)(*(int *)(iVar13 * 4 + *(int *)(this + iVar3 + 0x18)) + 0x30);
+          for (iVar31 = **(int **)(*(int *)(iVar14 * 4 + *(int *)(this + iVar4 + 0x18)) + 0x30);
               iVar31 != 0; iVar31 = *(int *)(iVar31 + 8)) {
-            iVar14 = **(int **)(*(int *)(this + iVar3 + 0x30) + 0x30);
-            if (iVar14 != 0) {
+            iVar15 = **(int **)(*(int *)(this + iVar4 + 0x30) + 0x30);
+            if (iVar15 != 0) {
               do {
-                if (*(char *)(iVar14 + 0xf) == *(char *)(iVar31 + 0xf)) goto code_r0x97bb2f70;
-                iVar14 = *(int *)(iVar14 + 8);
-              } while (iVar14 != 0);
+                if (*(char *)(iVar15 + 0xf) == *(char *)(iVar31 + 0xf)) goto code_r0x97bb2f70;
+                iVar15 = *(int *)(iVar15 + 8);
+              } while (iVar15 != 0);
             }
-            uVar17 = _PPStreamChunkCreateFromChunk(iVar31);
-            _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(this + iVar3 + 0x30) + 0x30),uVar17)
+            uVar18 = _PPStreamChunkCreateFromChunk(iVar31);
+            _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(this + iVar4 + 0x30) + 0x30),uVar18)
             ;
 code_r0x97bb2f70: ;
           }
-          iVar13 = iVar13 + 1;
-        } while (iVar13 < *(int *)(this + iVar3 + 0x20));
+          iVar14 = iVar14 + 1;
+        } while (iVar14 < *(int *)(this + iVar4 + 0x20));
       }
     }
   }
   if (bVar30 == false) {
-    if (*(int *)(this + iVar3 + 0x30) != 0) {
-      _PPStreamFree(*(int *)(this + iVar3 + 0x30));
+    if (*(int *)(this + iVar4 + 0x30) != 0) {
+      _PPStreamFree(*(int *)(this + iVar4 + 0x30));
     }
-    pvVar15 = *(void **)(this + iVar3 + 0x28);
-    *(undefined4 *)(this + iVar3 + 0x30) = 0;
-    if (pvVar15 != (void *)0x0) {
-      __ZN16ParseSymbolTableD1Ev(pvVar15);
-      __ZdlPv(pvVar15);
+    pvVar16 = *(void **)(this + iVar4 + 0x28);
+    *(undefined4 *)(this + iVar4 + 0x30) = 0;
+    if (pvVar16 != (void *)0x0) {
+      __ZN16ParseSymbolTableD1Ev(pvVar16);
+      __ZdlPv(pvVar16);
     }
-    *(undefined4 *)(this + iVar3 + 0x28) = 0;
+    *(undefined4 *)(this + iVar4 + 0x28) = 0;
   }
   return bVar30;
 }
@@ -501,7 +497,7 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, param_2, param_3
       p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
     p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
     _PPStreamChunkListAddChunk(puVar2[1],p_Var3);
-    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,true);
+    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,1);
   }
   for (iVar6 = **(int **)(param_2 + 8); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
     uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
@@ -515,7 +511,7 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, param_2, param_3
       ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
     p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
     _PPStreamChunkListAddChunk(puVar2[4],p_Var3);
-    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,true);
+    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,1);
   }
   for (iVar6 = **(int **)(param_2 + 0x14); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
     uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
@@ -525,13 +521,13 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, param_2, param_3
       ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
     p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
     _PPStreamChunkListAddChunk(puVar2[6],p_Var3);
-    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,true);
+    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,1);
   }
   for (p_Var5 = (unsigned char *)**(undefined4 **)(param_2 + 0x1c); p_Var5 != (unsigned char *)0x0
       ; p_Var5 = *(unsigned char **)(p_Var5 + 8)) {
     p_Var3 = (unsigned char *)_PPStreamChunkCreateFromChunk(p_Var5);
     _PPStreamChunkListAddChunk(puVar2[7],p_Var3);
-    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,true);
+    ParseSymbolTable__ChangeChunk(param_3,p_Var5,p_Var3,1);
   }
   for (iVar6 = **(int **)(param_2 + 0x20); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
     uVar4 = _PPStreamChunkCreateFromChunk(iVar6);
@@ -759,8 +755,8 @@ LAB_97bb3a3c:
           pPVar4 = (unsigned char *)
                    ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
           ParseSymbolTable__RemoveSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
-          for (iVar14 = 0; iVar16 = ((int (*)())GetVec4sForType)(*(ushort *)(this_00 + 0x2c)), iVar14 < iVar16;
-              iVar14 = iVar14 + 1) {
+          for (iVar14 = 0; iVar16 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)),
+              iVar14 < iVar16; iVar14 = iVar14 + 1) {
             bVar8 = *pbVar12;
             pbVar15 = *(byte **)(pbVar12 + 8);
             if (bVar8 == 2) {
@@ -797,7 +793,7 @@ LAB_97bb3adc:
           if (bVar1) {
             do {
               iVar13 = 0;
-              while ((iVar5 = ((int (*)())GetVec4sForType)(*(ushort *)(this_00 + 0x2c)), iVar13 < iVar5 &&
+              while ((iVar5 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)), iVar13 < iVar5 &&
                      (bVar1))) {
                 iVar5 = 0;
                 uVar2 = *(uint *)(iVar14 + 0xc) >> 0x1d;
@@ -1190,7 +1186,7 @@ int TGenericLinker__OptimizeFunctionIO(this)
                          ParseSymbolTable__FindNextParamSymbolByName
                                    (*(unsigned char **)(this + iVar2 + 0x28),pPVar7,pcVar6)) {
               uVar17 = 0;
-              uVar8 = ((int (*)())GetVec4sForType)(*(ushort *)(pPVar7 + 0x2c));
+              uVar8 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(pPVar7 + 0x2c));
               iVar4 = *(int *)pPVar7;
               if (uVar8 != 0) {
                 do {
@@ -1476,8 +1472,8 @@ int TGenericLinker__InsertClientAttribBinding(param_1, param_2)
 /* TGenericLinker__AddAttribBinding @ 0x97bb4b0c (276 bytes) */
 int TGenericLinker__AddAttribBinding(param_1, param_2, param_3, param_4)
   char *param_1;
-  int param_2;
-  int param_3;
+  char *param_2;
+  undefined4 param_3;
   undefined4 param_4;
 {
   unsigned char * this;
@@ -1486,8 +1482,6 @@ int TGenericLinker__AddAttribBinding(param_1, param_2, param_3, param_4)
   size_t sVar3;
   size_t sVar4;
   char *pcVar5;
-  undefined2 in_register_00000010;
-  undefined3 in_register_00000014;
   void *pvVar6;
   
   this = operator_new(0x38);
@@ -1501,14 +1495,14 @@ int TGenericLinker__AddAttribBinding(param_1, param_2, param_3, param_4)
     __ZN13TInfoSinkBase6appendEPKc(pvVar6,"\n");
   }
   else {
-    Binding__SetName(this,(char *)CONCAT22(in_register_00000010,param_2));
+    Binding__SetName(this,param_2);
     iVar1 = BindingTable__FindAttribBinding(*(unsigned char **)(param_1 + 4),this);
     if (iVar1 == 0) {
-      Binding__SetClientRequest(this,false);
-      Binding__SetOpenGLType(this,(ushort)CONCAT31(in_register_00000014,param_3));
+      Binding__SetClientRequest(this,0);
+      Binding__SetOpenGLType(this,(*(unsigned short *)((unsigned char *)&(param_3) + 2)));
       Binding__SetDecSize(this,1);
       Binding__SetActualSize(this,1);
-      Binding__SetBuiltIn(this,(*(unsigned char *)((unsigned char *)&(param_4) + 3)));
+      Binding__SetBuiltIn(this,param_4);
       iVar1 = BindingTable__InsertAttribBinding(*(unsigned char **)(param_1 + 4),this);
       if (iVar1 != 0) {
         return iVar1;
@@ -1605,7 +1599,7 @@ int TGenericLinker__CollectClientAttributeBindings(this)
           _free(pcVar5);
           iVar6 = *(int *)(iVar2 + 0x34);
         }
-        Binding__SetBuiltIn(pBVar1,SUB41(iVar6,0));
+        Binding__SetBuiltIn(pBVar1,iVar6);
         InsertClientAttribBinding((unsigned char *)this,pBVar1);
       }
     }
@@ -1617,96 +1611,98 @@ int TGenericLinker__CollectClientAttributeBindings(this)
 int TGenericLinker__CollectAttributeBindings(this)
   unsigned char * this;
 {
-  short sVar1;
-  unsigned char * pPVar2;
+  unsigned char * pPVar1;
+  uint uVar2;
   
   if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a4)) &&
-         (*(int *)(pPVar2 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,0);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a5)) &&
-         (*(int *)(pPVar2 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,0);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a6)) &&
-         (*(int *)(pPVar2 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
+         (*(int *)(pPVar1 + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,0);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if ((((**(char **)pPVar2 == '\x02') && (sVar1 = *(short *)(pPVar2 + 0x2c), sVar1 != -0x74a4))
-          && (sVar1 != -0x74a5)) && ((sVar1 != -0x74a6 && (*(int *)(pPVar2 + 0x34) == 0)))) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),SUB21(sVar1,0),0);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if ((((**(char **)pPVar1 == '\x02') &&
+           (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) && (uVar2 != 0x8b5b)) &&
+         ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) == 0)))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,0);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a4)) &&
-         (*(int *)(pPVar2 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,1);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,1);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a5)) &&
-         (*(int *)(pPVar2 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,1);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,1);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (*(short *)(pPVar2 + 0x2c) == -0x74a6)) &&
-         (*(int *)(pPVar2 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),true,1);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
+         (*(int *)(pPVar1 + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,1);
       }
     }
-    for (pPVar2 = (unsigned char *)
+    for (pPVar1 = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar2 != (unsigned char *)0x0;
-        pPVar2 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2)) {
-      if (((**(char **)pPVar2 == '\x02') && (sVar1 = *(short *)(pPVar2 + 0x2c), sVar1 != -0x74a4))
-         && ((sVar1 != -0x74a5 && ((sVar1 != -0x74a6 && (*(int *)(pPVar2 + 0x34) != 0)))))) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,(ushort)*(undefined4 *)(pPVar2 + 0x14),SUB21(sVar1,0),1);
+        pPVar1 != (unsigned char *)0x0;
+        pPVar1 = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
+      if (((**(char **)pPVar1 == '\x02') &&
+          (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) &&
+         ((uVar2 != 0x8b5b && ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) != 0)))))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,1);
       }
     }
   }
@@ -1724,8 +1720,8 @@ int TGenericLinker__RemapVertexAttributes(this)
   size_t sVar4;
   size_t sVar5;
   int iVar6;
-  ushort uVar8;
-  uint uVar7;
+  undefined4 uVar7;
+  uint uVar8;
   char *pcVar9;
   undefined4 uVar10;
   char *pcVar11;
@@ -1773,12 +1769,12 @@ joined_r0x97bb54f0:
   goto LAB_97bb56a8;
 code_r0x97bb567c:
   while( true ) {
-    uVar8 = Binding__GetOpenGLType(this_00);
-    uVar7 = ((int (*)())GetVec4sForType)(uVar8);
-    if ((uVar7 <= uVar12) || (iVar2 == 0)) break;
-    uVar7 = iVar6 + uVar12;
+    uVar7 = Binding__GetOpenGLType(this_00);
+    uVar8 = ((int (*)())GetVec4sForType)(uVar7);
+    if ((uVar8 <= uVar12) || (iVar2 == 0)) break;
+    uVar8 = iVar6 + uVar12;
     uVar12 = uVar12 + 1;
-    *(uint *)(iVar2 + 0xc) = uVar7 & 0x1f | *(uint *)(iVar2 + 0xc) & 0xffffffe0;
+    *(uint *)(iVar2 + 0xc) = uVar8 & 0x1f | *(uint *)(iVar2 + 0xc) & 0xffffffe0;
     iVar2 = *(int *)(iVar2 + 8);
   }
 LAB_97bb56a8:
@@ -1967,13 +1963,13 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
               pPVar6 = (unsigned char *)
                        ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),pPVar6)) {
             if (((**(char **)pPVar6 == '\0') && (*(int *)(pPVar6 + 0x60) != 0)) &&
-               (uVar9 = ((int (*)())GetScalerWidthForType)(*(ushort *)(pPVar6 + 0x2c)), uVar20 == uVar9)) {
+               (uVar9 = ((int (*)())GetScalerWidthForType)((uint)*(ushort *)(pPVar6 + 0x2c)), uVar20 == uVar9)) {
               piVar10 = (int *)ParseSymbolTable__FindGlobalSymbolByName
                                          (*(unsigned char **)(this + 0x28),
                                           *(char **)(pPVar6 + 0x14));
               if (((piVar10 == (int *)0x0) ||
-                  (uVar25 = *(ushort *)(pPVar6 + 0x2c), uVar25 != *(ushort *)(piVar10 + 0xb))) ||
-                 ((*(char *)*piVar10 != '\0' || (local_60 = 0, piVar10[0x17] == 0)))) {
+                  (uVar9 = (uint)*(ushort *)(pPVar6 + 0x2c), uVar9 != *(ushort *)(piVar10 + 0xb)))
+                 || ((*(char *)*piVar10 != '\0' || (local_60 = 0, piVar10[0x17] == 0)))) {
                 uVar24 = 0;
                 if (piVar10 == (int *)0x0) {
 code_r0x97bb689c:
@@ -1992,13 +1988,13 @@ override_jmp_97bb67f0_case_0:
                     pcVar28 = *(char **)(pPVar6 + 0x14);
                     sVar7 = _strlen(UNK_a7b7bad0);
                     sVar14 = _strlen(pcVar28);
-                    pcVar8 = (char *)((int (*)())GetShaderStringForType)(*(ushort *)(piVar10 + 0xb));
+                    pcVar8 = (char *)((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar10 + 0xb));
                     sVar15 = _strlen(pcVar8);
-                    pcVar8 = (char *)((int (*)())GetShaderStringForType)(*(ushort *)(pPVar6 + 0x2c));
+                    pcVar8 = (char *)((int (*)())GetShaderStringForType)((uint)*(ushort *)(pPVar6 + 0x2c));
                     sVar16 = _strlen(pcVar8);
                     pcVar8 = _malloc(sVar7 + sVar14 + sVar15 + sVar16 + 1);
-                    uVar17 = ((int (*)())GetShaderStringForType)(*(ushort *)(pPVar6 + 0x2c));
-                    uVar18 = ((int (*)())GetShaderStringForType)(*(ushort *)(piVar10 + 0xb));
+                    uVar17 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(pPVar6 + 0x2c));
+                    uVar18 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar10 + 0xb));
                     _sprintf(pcVar8,UNK_a7b7bad0,pcVar28,uVar18,uVar17);
                     pvVar30 = *(void **)(this + 0x84);
                     
@@ -2020,7 +2016,7 @@ override_jmp_97bb67f0_case_0:
                 _free(pcVar8);
               }
               else {
-                while (uVar9 = ((int (*)())GetVec4sForType)(uVar25), local_60 < uVar9) {
+                while (uVar9 = ((int (*)())GetVec4sForType)(uVar9), local_60 < uVar9) {
                   local_d0[3] = UNK_97c38fac;
                   local_e0[3] = UNK_97c38fac;
                   local_d0[0] = UNK_97c38fa0;
@@ -2269,7 +2265,7 @@ code_r0x97bb61d0:
                     }
                   }
 code_r0x97bb6720:
-                  uVar25 = *(ushort *)(pPVar6 + 0x2c);
+                  uVar9 = (uint)*(ushort *)(pPVar6 + 0x2c);
                   local_60 = local_60 + 1;
                 }
               }
@@ -2637,7 +2633,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
   undefined4 uVar11;
   uint uVar12;
   int iVar13;
-  ushort uVar14;
+  uint uVar14;
   undefined4 uVar15;
   int iVar16;
   unsigned char * pTVar17;
@@ -2701,10 +2697,10 @@ int TGenericLinker__BuildUniformRemapTables(this)
               sVar7 = _strlen(pcVar18);
               pcVar8 = (char *)((int (*)())GetShaderStringForType)(uVar14);
               sVar9 = _strlen(pcVar8);
-              pcVar8 = (char *)((int (*)())GetShaderStringForType)(*(ushort *)(piVar5 + 0xb));
+              pcVar8 = (char *)((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar5 + 0xb));
               sVar10 = _strlen(pcVar8);
               pcVar8 = _malloc(sVar6 + sVar7 + sVar9 + sVar10 + 1);
-              uVar15 = ((int (*)())GetShaderStringForType)(*(ushort *)(piVar5 + 0xb));
+              uVar15 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(piVar5 + 0xb));
               uVar11 = ((int (*)())GetShaderStringForType)(uVar14);
               _sprintf(pcVar8,UNK_a7b7bae4,pcVar18,uVar11,uVar15);
               pvVar3 = *(void **)(this + 0x84);
@@ -2717,7 +2713,7 @@ int TGenericLinker__BuildUniformRemapTables(this)
             }
           }
           else {
-            uVar14 = *(ushort *)(piVar5 + 0xb);
+            uVar14 = (uint)*(ushort *)(piVar5 + 0xb);
             bVar1 = true;
           }
           uVar20 = (uint)*(ushort *)(*piVar5 + 0xe);
@@ -2801,11 +2797,11 @@ int TGenericLinker__InsertUniformBindingFromSymbol(this, param_2, param_3)
       Binding__SetName(this_00,*(char **)(param_2 + 0x14));
       pBVar1 = (unsigned char *)BindingTable__FindUniformBinding(*(unsigned char **)(this + 4),this_00);
       if (pBVar1 == (unsigned char *)0x0) {
-        Binding__SetClientRequest(this_00,false);
+        Binding__SetClientRequest(this_00,0);
         Binding__SetOpenGLType(this_00,*(ushort *)(param_2 + 0x2c));
         Binding__SetDecSize(this_00,(int)*(short *)(param_2 + 0x2e));
         Binding__SetActualSize(this_00,1);
-        Binding__SetBuiltIn(this_00,SUB41(*(undefined4 *)(param_2 + 0x34),0));
+        Binding__SetBuiltIn(this_00,*(undefined4 *)(param_2 + 0x34));
         if (*(short *)(param_2 + 0x2e) == 1) {
           BindingTable__InsertSingleUniform(*(unsigned char **)(this + 4),this_00,param_3);
         }
@@ -2891,154 +2887,155 @@ int TGenericLinker__CreateFunctionTable(this, param_2)
   int iVar1;
   bool bVar2;
   bool bVar3;
+  bool bVar4;
   unsigned char * this_00;
-  char *pcVar4;
   char *pcVar5;
-  int iVar6;
-  size_t sVar7;
+  char *pcVar6;
+  int iVar7;
   size_t sVar8;
   size_t sVar9;
-  bool bVar10;
-  int iVar11;
+  size_t sVar10;
+  undefined4 uVar11;
   int iVar12;
   int iVar13;
-  unsigned char * pFVar14;
+  int iVar14;
+  unsigned char * pFVar15;
   unsigned char * this_01;
-  int iVar15;
-  uint uVar16;
-  void *pvVar17;
+  int iVar16;
+  uint uVar17;
+  void *pvVar18;
   
   iVar1 = param_2 * 4;
   this_00 = operator_new(8);
-  bVar3 = false;
+  bVar4 = false;
   __ZN13FunctionTableC1Ev(this_00);
-  iVar11 = 0;
+  iVar12 = 0;
   if (0 < *(int *)(this + iVar1 + 0x20)) {
     do {
-      iVar13 = 0;
-      pFVar14 = *(unsigned char **)(*(int *)(iVar11 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
-      if (0 < *(int *)(pFVar14 + 4)) {
+      iVar14 = 0;
+      pFVar15 = *(unsigned char **)(*(int *)(iVar12 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
+      if (0 < *(int *)(pFVar15 + 4)) {
         do {
           bVar2 = false;
-          iVar12 = 0;
-          if (iVar11 < 1) {
+          iVar13 = 0;
+          if (iVar12 < 1) {
 LAB_97bb7818:
-            pcVar4 = (char *)FunctionTable__getFunctionName(pFVar14,iVar13);
-            iVar12 = FunctionTable__addFunction(this_00,pcVar4);
-            bVar10 = (bool)FunctionTable__getEmpty(pFVar14,iVar13);
-            FunctionTable__setEmpty(this_00,iVar12,bVar10);
-            bVar10 = (bool)FunctionTable__getReturnVal(pFVar14,iVar13);
-            FunctionTable__setReturnVal(this_00,iVar12,bVar10);
-            iVar15 = FunctionTable__getNumParams(pFVar14,iVar13);
-            FunctionTable__setNumParams(this_00,iVar12,iVar15);
-            uVar16 = FunctionTable__getFirstOp(pFVar14,iVar13);
-            FunctionTable__setFirstOp(this_00,iVar12,uVar16);
-            uVar16 = FunctionTable__getLastOp(pFVar14,iVar13);
-            FunctionTable__setLastOp(this_00,iVar12,uVar16);
+            pcVar5 = (char *)FunctionTable__getFunctionName(pFVar15,iVar14);
+            iVar13 = FunctionTable__addFunction(this_00,pcVar5);
+            uVar11 = FunctionTable__getEmpty(pFVar15,iVar14);
+            FunctionTable__setEmpty(this_00,iVar13,uVar11);
+            uVar11 = FunctionTable__getReturnVal(pFVar15,iVar14);
+            FunctionTable__setReturnVal(this_00,iVar13,uVar11);
+            iVar16 = FunctionTable__getNumParams(pFVar15,iVar14);
+            FunctionTable__setNumParams(this_00,iVar13,iVar16);
+            uVar17 = FunctionTable__getFirstOp(pFVar15,iVar14);
+            FunctionTable__setFirstOp(this_00,iVar13,uVar17);
+            uVar17 = FunctionTable__getLastOp(pFVar15,iVar14);
+            FunctionTable__setLastOp(this_00,iVar13,uVar17);
           }
           else {
             do {
-              iVar15 = 0;
+              iVar16 = 0;
               this_01 = *(unsigned char **)
-                         (*(int *)(iVar12 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
+                         (*(int *)(iVar13 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
               if (0 < *(int *)(this_01 + 4)) {
                 do {
-                  pcVar4 = (char *)FunctionTable__getFunctionName(this_01,iVar15);
-                  pcVar5 = (char *)FunctionTable__getFunctionName(pFVar14,iVar13);
-                  iVar6 = _strcmp(pcVar4,pcVar5);
-                  if (iVar6 == 0) {
-                    pcVar4 = (char *)FunctionTable__getFunctionName(this_01,iVar15);
-                    sVar7 = _strlen(pcVar4);
-                    pcVar4 = _malloc(sVar7 + 1);
-                    pcVar5 = (char *)FunctionTable__getFunctionName(this_01,iVar15);
-                    _strcpy(pcVar4,pcVar5);
-                    for (uVar16 = 0; sVar7 = _strlen(pcVar4), uVar16 < sVar7; uVar16 = uVar16 + 1) {
-                      if (pcVar4[uVar16] == '(') {
-                        pcVar4[uVar16] = '\0';
+                  pcVar5 = (char *)FunctionTable__getFunctionName(this_01,iVar16);
+                  pcVar6 = (char *)FunctionTable__getFunctionName(pFVar15,iVar14);
+                  iVar7 = _strcmp(pcVar5,pcVar6);
+                  if (iVar7 == 0) {
+                    pcVar5 = (char *)FunctionTable__getFunctionName(this_01,iVar16);
+                    sVar8 = _strlen(pcVar5);
+                    pcVar5 = _malloc(sVar8 + 1);
+                    pcVar6 = (char *)FunctionTable__getFunctionName(this_01,iVar16);
+                    _strcpy(pcVar5,pcVar6);
+                    for (uVar17 = 0; sVar8 = _strlen(pcVar5), uVar17 < sVar8; uVar17 = uVar17 + 1) {
+                      if (pcVar5[uVar17] == '(') {
+                        pcVar5[uVar17] = '\0';
                       }
                     }
-                    sVar7 = _strlen(DAT_a7b7bb20);
-                    sVar8 = _strlen((char *)(&_shaderString)[param_2]);
-                    sVar9 = _strlen(pcVar4);
-                    pcVar5 = _malloc(sVar7 + sVar8 + sVar9 + 1);
-                    _sprintf(pcVar5,DAT_a7b7bb20,pcVar4,(&_shaderString)[param_2]);
-                    pvVar17 = *(void **)(this + 0x84);
+                    sVar8 = _strlen(DAT_a7b7bb20);
+                    sVar9 = _strlen((char *)(&_shaderString)[param_2]);
+                    sVar10 = _strlen(pcVar5);
+                    pcVar6 = _malloc(sVar8 + sVar9 + sVar10 + 1);
+                    _sprintf(pcVar6,DAT_a7b7bb20,pcVar5,(&_shaderString)[param_2]);
+                    pvVar18 = *(void **)(this + 0x84);
                     
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"ERROR: ");
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar5);
-                    __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
+                    __ZN13TInfoSinkBase6appendEPKc(pvVar18,"ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(pvVar18,pcVar6);
+                    __ZN13TInfoSinkBase6appendEPKc(pvVar18,"\n");
+                    _free(pcVar6);
                     _free(pcVar5);
-                    _free(pcVar4);
                     bVar2 = true;
                   }
-                  iVar15 = iVar15 + 1;
-                } while (iVar15 < *(int *)(this_01 + 4));
+                  iVar16 = iVar16 + 1;
+                } while (iVar16 < *(int *)(this_01 + 4));
               }
-              iVar12 = iVar12 + 1;
-            } while (iVar12 < iVar11);
+              iVar13 = iVar13 + 1;
+            } while (iVar13 < iVar12);
             if (!bVar2) goto LAB_97bb7818;
           }
-          iVar13 = iVar13 + 1;
-          bVar3 = (bool)(bVar3 | bVar2);
-        } while (iVar13 < *(int *)(pFVar14 + 4));
+          iVar14 = iVar14 + 1;
+          bVar4 = (bool)(bVar4 | bVar2);
+        } while (iVar14 < *(int *)(pFVar15 + 4));
       }
-      for (iVar13 = **(int **)(*(int *)(iVar11 * 4 + *(int *)(this + iVar1 + 0x18)) + 0x20);
-          iVar13 != 0; iVar13 = *(int *)(iVar13 + 8)) {
-        if ((*(uint *)(iVar13 + 0xc) & 0x3fc0000) == 0x1300000) {
+      for (iVar14 = **(int **)(*(int *)(iVar12 * 4 + *(int *)(this + iVar1 + 0x18)) + 0x20);
+          iVar14 != 0; iVar14 = *(int *)(iVar14 + 8)) {
+        if ((*(uint *)(iVar14 + 0xc) & 0x3fc0000) == 0x1300000) {
           bVar2 = false;
-          iVar12 = 0;
-          pcVar4 = _malloc(*(int *)(iVar13 + 0x40) + 1);
-          _strcpy(pcVar4,(char *)(iVar13 + 0x44));
+          iVar13 = 0;
+          pcVar5 = _malloc(*(int *)(iVar14 + 0x40) + 1);
+          _strcpy(pcVar5,(char *)(iVar14 + 0x44));
           if (*(int *)(this + iVar1 + 0x20) < 1) {
-            bVar10 = true;
+            bVar3 = true;
           }
           else {
             do {
-              iVar15 = 0;
-              pFVar14 = *(unsigned char **)
-                         (*(int *)(iVar12 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
-              if (0 < *(int *)(pFVar14 + 4)) {
+              iVar16 = 0;
+              pFVar15 = *(unsigned char **)
+                         (*(int *)(iVar13 * 4 + *(int *)(this + iVar1 + 8)) + 0x6c);
+              if (0 < *(int *)(pFVar15 + 4)) {
                 do {
-                  pcVar5 = (char *)FunctionTable__getFunctionName(pFVar14,iVar15);
-                  iVar6 = _strcmp(pcVar4,pcVar5);
-                  if (iVar6 == 0) {
+                  pcVar6 = (char *)FunctionTable__getFunctionName(pFVar15,iVar16);
+                  iVar7 = _strcmp(pcVar5,pcVar6);
+                  if (iVar7 == 0) {
                     bVar2 = true;
                     break;
                   }
-                  iVar15 = iVar15 + 1;
-                } while (iVar15 < *(int *)(pFVar14 + 4));
+                  iVar16 = iVar16 + 1;
+                } while (iVar16 < *(int *)(pFVar15 + 4));
               }
-              bVar10 = !bVar2;
-              if (!bVar10) goto code_r0x97bb7ad8;
-              iVar12 = iVar12 + 1;
-            } while (iVar12 < *(int *)(this + iVar1 + 0x20));
+              bVar3 = !bVar2;
+              if (!bVar3) goto code_r0x97bb7ad8;
+              iVar13 = iVar13 + 1;
+            } while (iVar13 < *(int *)(this + iVar1 + 0x20));
           }
-          if (bVar10) {
-            for (uVar16 = 0; sVar7 = _strlen(pcVar4), uVar16 < sVar7; uVar16 = uVar16 + 1) {
-              if (pcVar4[uVar16] == '(') {
-                pcVar4[uVar16] = '\0';
+          if (bVar3) {
+            for (uVar17 = 0; sVar8 = _strlen(pcVar5), uVar17 < sVar8; uVar17 = uVar17 + 1) {
+              if (pcVar5[uVar17] == '(') {
+                pcVar5[uVar17] = '\0';
               }
             }
-            sVar7 = _strlen(UNK_a7b7bb24);
-            sVar8 = _strlen((char *)(&_shaderString)[param_2]);
-            sVar9 = _strlen(pcVar4);
-            pcVar5 = _malloc(sVar7 + sVar8 + sVar9 + 1);
-            _sprintf(pcVar5,UNK_a7b7bb24,pcVar4,(&_shaderString)[param_2]);
-            pvVar17 = *(void **)(this + 0x84);
+            sVar8 = _strlen(UNK_a7b7bb24);
+            sVar9 = _strlen((char *)(&_shaderString)[param_2]);
+            sVar10 = _strlen(pcVar5);
+            pcVar6 = _malloc(sVar8 + sVar9 + sVar10 + 1);
+            _sprintf(pcVar6,UNK_a7b7bb24,pcVar5,(&_shaderString)[param_2]);
+            pvVar18 = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar17,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar17,pcVar5);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar17,"\n");
-            _free(pcVar5);
-            bVar3 = true;
+            __ZN13TInfoSinkBase6appendEPKc(pvVar18,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(pvVar18,pcVar6);
+            __ZN13TInfoSinkBase6appendEPKc(pvVar18,"\n");
+            _free(pcVar6);
+            bVar4 = true;
           }
 code_r0x97bb7ad8:
-          _free(pcVar4);
+          _free(pcVar5);
         }
       }
-      iVar11 = iVar11 + 1;
-    } while (iVar11 < *(int *)(this + iVar1 + 0x20));
-    if (bVar3) goto code_r0x97bb7b18;
+      iVar12 = iVar12 + 1;
+    } while (iVar12 < *(int *)(this + iVar1 + 0x20));
+    if (bVar4) goto code_r0x97bb7b18;
   }
   if (*(int *)(this_00 + 4) != 0) {
     return this_00;
@@ -3059,89 +3056,104 @@ int TGenericLinker__BuildSymbolTableList(this, param_2, param_3)
 {
   bool bVar1;
   int iVar2;
-  int iVar3;
+  int *piVar3;
   int iVar4;
   size_t sVar5;
   size_t sVar6;
   char *pcVar7;
-  int *piVar8;
+  void **extraout_r4;
+  void **extraout_r4_00;
+  void **a1;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  unsigned char * pTVar8;
+  undefined4 a7;
   int iVar9;
   int iVar10;
   int iVar11;
-  void *pvVar12;
-  unsigned char * pTVar13;
+  int iVar12;
+  void *pvVar13;
   int local_50 [2];
   undefined8 local_48;
   undefined8 local_40 [2];
   
   iVar10 = 0;
+  pTVar8 = (unsigned char *)0x0;
+  a7 = 0;
   local_50[0] = 0;
   local_50[1] = 0;
   local_48 = DAT_97c38fb0;
-  iVar11 = 1;
+  iVar12 = 1;
   local_40[0] = DAT_97c38fb8;
+  a1 = param_2;
+  iVar11 = param_3;
   if (param_3 < 1) {
 LAB_97bb7d6c:
     bVar1 = false;
-    if (iVar11 == 1) {
-      iVar10 = 0;
+    if (iVar12 == 1) {
+      iVar11 = 0;
       do {
-        if ((local_50[iVar10] == 0) && (0 < *(int *)(this + iVar10 * 4 + 0x20))) {
+        if ((local_50[iVar11] == 0) && (0 < *(int *)(this + iVar11 * 4 + 0x20))) {
           sVar5 = _strlen(UNK_a7b7bab8);
-          sVar6 = _strlen((char *)(&_shaderString)[iVar10]);
+          sVar6 = _strlen((char *)(&_shaderString)[iVar11]);
           pcVar7 = _malloc(sVar5 + sVar6 + 1);
-          _sprintf(pcVar7,UNK_a7b7bab8,(&_shaderString)[iVar10]);
-          pvVar12 = *(void **)(this + 0x84);
+          _sprintf(pcVar7,UNK_a7b7bab8,(&_shaderString)[iVar11]);
+          pvVar13 = *(void **)(this + 0x84);
                     
 override_jmp_97bb7df4_case_0:
-          __ZN13TInfoSinkBase6appendEPKc(pvVar12,"ERROR: ");
-          __ZN13TInfoSinkBase6appendEPKc(pvVar12,pcVar7);
-          __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,pcVar7);
+          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
           _free(pcVar7);
-          iVar11 = 0;
+          iVar12 = 0;
         }
-        else if (1 < local_50[iVar10]) {
+        else if (1 < local_50[iVar11]) {
           sVar5 = _strlen(UNK_a7b7babc);
-          sVar6 = _strlen((char *)(&_shaderString)[iVar10]);
+          sVar6 = _strlen((char *)(&_shaderString)[iVar11]);
           pcVar7 = _malloc(sVar5 + sVar6 + 9);
-          _sprintf(pcVar7,UNK_a7b7babc,local_50[iVar10],(&_shaderString)[iVar10]);
-          pvVar12 = *(void **)(this + 0x84);
+          _sprintf(pcVar7,UNK_a7b7babc,local_50[iVar11],(&_shaderString)[iVar11]);
+          pvVar13 = *(void **)(this + 0x84);
                     
           goto override_jmp_97bb7df4_case_0;
         }
-        iVar10 = iVar10 + 1;
-      } while (iVar10 < 2);
-      bVar1 = iVar11 == 1;
+        iVar11 = iVar11 + 1;
+      } while (iVar11 < 2);
+      bVar1 = iVar12 == 1;
       if (bVar1) {
-        pTVar13 = this;
+        pTVar8 = this;
         do {
-          pvVar12 = _malloc(*(int *)(pTVar13 + 0x20) << 2);
-          *(void **)(pTVar13 + 8) = pvVar12;
-          pvVar12 = _malloc(*(int *)(pTVar13 + 0x20) << 2);
-          *(void **)(pTVar13 + 0x10) = pvVar12;
-          pvVar12 = _malloc(*(int *)(pTVar13 + 0x20) << 2);
-          *(void **)(pTVar13 + 0x18) = pvVar12;
-          pTVar13 = pTVar13 + 4;
-        } while ((int)pTVar13 <= (int)(this + 4));
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 8) = pvVar13;
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 0x10) = pvVar13;
+          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
+          *(void **)(pTVar8 + 0x18) = pvVar13;
+          pTVar8 = pTVar8 + 4;
+        } while ((int)pTVar8 <= (int)(this + 4));
       }
     }
   }
   else {
     do {
-      if (param_2[iVar10] == (int *)0x0) {
-        pvVar12 = *(void **)(this + 0x84);
+      piVar3 = param_2[iVar10];
+      if (piVar3 == (int *)0x0) {
+        pTVar8 = (unsigned char *)&_linkIntErrorString;
+        pvVar13 = *(void **)(this + 0x84);
         pcVar7 = DAT_a7b7bb64;
                     
 override_jmp_97bb7c58_case_0:
-        __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
-        __ZN13TInfoSinkBase6appendEPKc(pvVar12,pcVar7);
-        __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
-        iVar11 = 0;
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"INTERNAL ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,pcVar7);
+        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
+        iVar12 = 0;
+        a1 = extraout_r4_00;
       }
       else {
-        iVar4 = (**(code **)(*(int *)param_2[iVar10] + 8))();
+        iVar4 = (**(code **)(*piVar3 + 8))(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7);
         if (iVar4 == 0) {
-          pvVar12 = *(void **)(this + 0x84);
+          pTVar8 = (unsigned char *)&_linkIntErrorString;
+          pvVar13 = *(void **)(this + 0x84);
           pcVar7 = DAT_a7b7bb64;
                     
           goto override_jmp_97bb7c58_case_0;
@@ -3149,51 +3161,52 @@ override_jmp_97bb7c58_case_0:
         iVar2 = 0;
         if (*(int *)(iVar4 + 8) != 0) {
           if (*(int *)(iVar4 + 8) != 1) {
-            pvVar12 = *(void **)(this + 0x84);
+            pvVar13 = *(void **)(this + 0x84);
             pcVar7 = _linkIntErrorString;
                     
             goto override_jmp_97bb7c58_case_0;
           }
           iVar2 = 1;
         }
-        iVar3 = iVar2 * 4;
         if (*(int *)(iVar4 + 0xac) != 0) {
           local_50[iVar2] = local_50[iVar2] + 1;
-          *(int *)((int)local_40 + iVar3 + -8) = iVar10;
+          *(int *)((int)local_40 + iVar2 * 4 + -8) = iVar10;
         }
-        *(int *)(this + iVar3 + 0x20) = *(int *)(this + iVar3 + 0x20) + 1;
+        pTVar8 = this + iVar2 * 4;
+        *(int *)(pTVar8 + 0x20) = *(int *)(pTVar8 + 0x20) + 1;
+        a1 = extraout_r4;
       }
       iVar10 = iVar10 + 1;
       if (param_3 <= iVar10) goto LAB_97bb7d6c;
-    } while (iVar11 == 1);
+    } while (iVar12 == 1);
     bVar1 = false;
   }
-  iVar10 = 0;
+  iVar11 = 0;
   if ((0 < param_3) && (bVar1)) {
     do {
-      piVar8 = *param_2;
+      piVar3 = *param_2;
       param_2 = param_2 + 1;
-      if ((piVar8 != (int *)0x0) && (iVar4 = (**(code **)(*piVar8 + 8))(), iVar4 != 0)) {
-        iVar2 = (uint)(*(int *)(iVar4 + 8) != 0) * 4;
-        if (*(int *)((int)local_40 + iVar2 + -8) == iVar10) {
-          **(int **)(this + iVar2 + 8) = iVar4;
-          **(undefined4 **)(this + iVar2 + 0x10) = *(undefined4 *)(iVar4 + 0x68);
-          **(undefined4 **)(this + iVar2 + 0x18) = *(undefined4 *)(iVar4 + 0x70);
+      if ((piVar3 != (int *)0x0) && (iVar10 = (**(code **)(*piVar3 + 8))(piVar3), iVar10 != 0)) {
+        iVar4 = (uint)(*(int *)(iVar10 + 8) != 0) * 4;
+        if (*(int *)((int)local_40 + iVar4 + -8) == iVar11) {
+          **(int **)(this + iVar4 + 8) = iVar10;
+          **(undefined4 **)(this + iVar4 + 0x10) = *(undefined4 *)(iVar10 + 0x68);
+          **(undefined4 **)(this + iVar4 + 0x18) = *(undefined4 *)(iVar10 + 0x70);
         }
         else {
-          *(int *)(*(int *)((int)local_40 + iVar2) * 4 + *(int *)(this + iVar2 + 8)) = iVar4;
-          *(undefined4 *)(*(int *)((int)local_40 + iVar2) * 4 + *(int *)(this + iVar2 + 0x10)) =
-               *(undefined4 *)(iVar4 + 0x68);
-          iVar3 = *(int *)((int)local_40 + iVar2);
-          iVar9 = *(int *)(this + iVar2 + 0x18);
-          *(int *)((int)local_40 + iVar2) = iVar3 + 1;
-          *(undefined4 *)(iVar3 * 4 + iVar9) = *(undefined4 *)(iVar4 + 0x70);
+          *(int *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 8)) = iVar10;
+          *(undefined4 *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 0x10)) =
+               *(undefined4 *)(iVar10 + 0x68);
+          iVar2 = *(int *)((int)local_40 + iVar4);
+          iVar9 = *(int *)(this + iVar4 + 0x18);
+          *(int *)((int)local_40 + iVar4) = iVar2 + 1;
+          *(undefined4 *)(iVar2 * 4 + iVar9) = *(undefined4 *)(iVar10 + 0x70);
         }
       }
-      iVar10 = iVar10 + 1;
-    } while (iVar10 < param_3);
+      iVar11 = iVar11 + 1;
+    } while (iVar11 < param_3);
   }
-  return iVar11;
+  return iVar12;
 }
 
 /* TGenericLinker__BuildProcessingComponents @ 0x97bb8054 (200 bytes) */
@@ -3426,7 +3439,7 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
 int __ZN14TGenericLinkerD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this);
+  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,0);
   return;
 }
 
@@ -3434,7 +3447,7 @@ int __ZN14TGenericLinkerD2Ev(this)
 int __ZN14TGenericLinkerD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this);
+  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,2);
   return;
 }
 
@@ -3442,18 +3455,18 @@ int __ZN14TGenericLinkerD1Ev(this)
 int __ZN14TGenericLinkerD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this);
+  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,3);
   return;
 }
 
 /* __ZN14TGenericLinkerD4Ev @ 0x97bb8248 (244 bytes) */
-int __ZN14TGenericLinkerD4Ev(this)
+int __ZN14TGenericLinkerD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  uint in_r4;
   int iVar4;
   int *piVar5;
   void *this_00;
@@ -3498,7 +3511,7 @@ int __ZN14TGenericLinkerD4Ev(this)
     __ZdlPv(this_00);
   }
   *(undefined ***)this = &PTR___ZN13TShHandleBaseD1Ev_a7b7d700;
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -3547,7 +3560,7 @@ int TGenericLinker__attributeBindingRequest(this, param_2, param_3)
     __ZN7BindingC1Ev(this_00);
     Binding__SetName(this_00,param_3);
     Binding__SetLocation(this_00,param_2);
-    Binding__SetClientRequest(this_00,true);
+    Binding__SetClientRequest(this_00,1);
     iVar1 = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),this_00);
     if ((iVar1 == 0) && (this_00 != (unsigned char *)0x0)) {
       __ZN7BindingD1Ev(this_00);
@@ -4205,23 +4218,19 @@ int TGenericLinker__getTableString(this)
 int GetGLStringForType(param_1)
   int param_1;
 {
-  undefined2 in_register_0000000c;
-  int iVar1;
-  
-  iVar1 = CONCAT22(in_register_0000000c,param_1);
-  if (iVar1 == 0x1404) {
+  if (param_1 == 0x1404) {
     return _glTypeNameStrings;
   }
-  if (iVar1 == 0x1406) {
+  if (param_1 == 0x1406) {
     return DAT_a7b7bc28;
   }
-  if ((iVar1 + 0x74b0U & 0xffff) < 0x15) {
-    return *(undefined4 *)(iVar1 * 4 + -0x584a7114);
+  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(param_1 * 4 + -0x584a7114);
   }
-  if (iVar1 == 0x7ffe) {
+  if (param_1 == 0x7ffe) {
     return DAT_a7b7bc80;
   }
-  if (iVar1 == 0x7fff) {
+  if (param_1 == 0x7fff) {
     return DAT_a7b7bc84;
   }
   return DAT_a7b7bc88;
@@ -4231,23 +4240,19 @@ int GetGLStringForType(param_1)
 int GetShaderStringForType(param_1)
   int param_1;
 {
-  undefined2 in_register_0000000c;
-  int iVar1;
-  
-  iVar1 = CONCAT22(in_register_0000000c,param_1);
-  if (iVar1 == 0x1404) {
+  if (param_1 == 0x1404) {
     return _shaderTypeNameStrings;
   }
-  if (iVar1 == 0x1406) {
+  if (param_1 == 0x1406) {
     return DAT_a7b7bc90;
   }
-  if ((iVar1 + 0x74b0U & 0xffff) < 0x15) {
-    return *(undefined4 *)(iVar1 * 4 + -0x584a70ac);
+  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(param_1 * 4 + -0x584a70ac);
   }
-  if (iVar1 == 0x7ffe) {
+  if (param_1 == 0x7ffe) {
     return DAT_a7b7bce8;
   }
-  if (iVar1 == 0x7fff) {
+  if (param_1 == 0x7fff) {
     return DAT_a7b7bcec;
   }
   return DAT_a7b7bcf0;
@@ -4257,33 +4262,29 @@ int GetShaderStringForType(param_1)
 int GetVec4sForType(param_1)
   int param_1;
 {
-  undefined2 in_register_0000000c;
-  int iVar1;
-  
-  iVar1 = CONCAT22(in_register_0000000c,param_1);
-  if (iVar1 == 0x8b5a) {
+  if (param_1 == 0x8b5a) {
     return 2;
   }
-  if (iVar1 < 0x8b5b) {
-    if (iVar1 != 0x1406) {
-      if (iVar1 < 0x1407) {
-        if (iVar1 != 0x1404) {
+  if (param_1 < 0x8b5b) {
+    if (param_1 != 0x1406) {
+      if (param_1 < 0x1407) {
+        if (param_1 != 0x1404) {
           return 0;
         }
       }
-      else if (iVar1 < 0x8b50) {
+      else if (param_1 < 0x8b50) {
         return 0;
       }
     }
   }
   else {
-    if (iVar1 == 0x8b5c) {
+    if (param_1 == 0x8b5c) {
       return 4;
     }
-    if (iVar1 < 0x8b5c) {
+    if (param_1 < 0x8b5c) {
       return 3;
     }
-    if (0x8b64 < iVar1) {
+    if (0x8b64 < param_1) {
       return 0;
     }
   }
@@ -4294,34 +4295,30 @@ int GetVec4sForType(param_1)
 int GetPPStreamTypeForGLType(param_1)
   int param_1;
 {
-  undefined2 in_register_0000000c;
-  int iVar1;
-  
-  iVar1 = CONCAT22(in_register_0000000c,param_1);
-  if (iVar1 < 0x8b56) {
-    if (iVar1 < 0x8b53) {
-      if (iVar1 == 0x1406) {
+  if (param_1 < 0x8b56) {
+    if (param_1 < 0x8b53) {
+      if (param_1 == 0x1406) {
         return 1;
       }
-      if (iVar1 < 0x1407) {
-        if (iVar1 == 0x1404) {
+      if (param_1 < 0x1407) {
+        if (param_1 == 0x1404) {
           return 3;
         }
       }
-      else if (0x8b4f < iVar1) {
+      else if (0x8b4f < param_1) {
         return 1;
       }
       return 0;
     }
   }
   else {
-    if (iVar1 < 0x8b5d) {
-      if (0x8b59 < iVar1) {
+    if (param_1 < 0x8b5d) {
+      if (0x8b59 < param_1) {
         return 1;
       }
       return 4;
     }
-    if (0x8b64 < iVar1) {
+    if (0x8b64 < param_1) {
       return 0;
     }
   }
@@ -4332,31 +4329,27 @@ int GetPPStreamTypeForGLType(param_1)
 int GetScalerWidthForType(param_1)
   int param_1;
 {
-  undefined2 in_register_0000000c;
-  int iVar1;
-  
-  iVar1 = CONCAT22(in_register_0000000c,param_1);
-  if (iVar1 == 0x8b56) {
+  if (param_1 == 0x8b56) {
     return 1;
   }
-  if (0x8b56 < iVar1) {
-    if (iVar1 == 0x8b5a) {
+  if (0x8b56 < param_1) {
+    if (param_1 == 0x8b5a) {
       return 2;
     }
-    if (iVar1 < 0x8b5b) {
-      if (iVar1 != 0x8b58) {
-        if (iVar1 < 0x8b59) {
+    if (param_1 < 0x8b5b) {
+      if (param_1 != 0x8b58) {
+        if (param_1 < 0x8b59) {
           return 2;
         }
         return 4;
       }
     }
     else {
-      if (iVar1 == 0x8b5c) {
+      if (param_1 == 0x8b5c) {
         return 4;
       }
-      if (0x8b5b < iVar1) {
-        if (iVar1 < 0x8b65) {
+      if (0x8b5b < param_1) {
+        if (param_1 < 0x8b65) {
           return 1;
         }
         return 0;
@@ -4364,33 +4357,33 @@ int GetScalerWidthForType(param_1)
     }
     return 3;
   }
-  if (iVar1 == 0x8b51) {
+  if (param_1 == 0x8b51) {
     return 3;
   }
-  if (iVar1 < 0x8b52) {
-    if (iVar1 == 0x1406) {
+  if (param_1 < 0x8b52) {
+    if (param_1 == 0x1406) {
       return 1;
     }
-    if (iVar1 < 0x1407) {
-      if (iVar1 == 0x1404) {
+    if (param_1 < 0x1407) {
+      if (param_1 == 0x1404) {
         return 1;
       }
     }
-    else if (iVar1 == 0x8b50) {
+    else if (param_1 == 0x8b50) {
       return 2;
     }
     return 0;
   }
-  if (iVar1 == 0x8b53) {
+  if (param_1 == 0x8b53) {
     return 2;
   }
-  if (iVar1 < 0x8b53) {
+  if (param_1 < 0x8b53) {
     return 4;
   }
-  if (iVar1 == 0x8b54) {
+  if (param_1 == 0x8b54) {
     return 3;
   }
-  if (iVar1 == 0x8b55) {
+  if (param_1 == 0x8b55) {
     return 4;
   }
   return 0;
@@ -4401,108 +4394,115 @@ int getOpenGLTypeFromTType(param_1)
   unsigned char * param_1;
 {
   int iVar1;
-  undefined4 uVar2;
+  uint uVar2;
+  undefined4 a1;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   undefined4 uVar3;
   
   uVar3 = 0x1400;
-  iVar1 = (**(code **)(*(int *)param_1 + 0x38))();
+  iVar1 = (**(code **)(*(int *)param_1 + 0x38))(param_1);
   if (iVar1 == 0) {
     uVar2 = (**(code **)(*(int *)param_1 + 0x20))(param_1);
-    switch(uVar2) {
-    case 1:
-      iVar1 = (**(code **)(*(int *)param_1 + 0x34))(param_1);
-      if (iVar1 == 0) {
+    if (uVar2 < 0x10) {
+      switch(uVar2) {
+      case 1:
+        iVar1 = (**(code **)(*(int *)param_1 + 0x34))(param_1,a1,in_r5,in_r6,in_r7,in_r8,uVar2 * 4);
+        if (iVar1 == 0) {
+          iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
+          if (iVar1 == 2) {
+            uVar3 = 0x8b50;
+          }
+          else if (iVar1 < 3) {
+            if (iVar1 == 1) {
+              uVar3 = 0x1406;
+            }
+          }
+          else if (iVar1 == 3) {
+            uVar3 = 0x8b51;
+          }
+          else if (iVar1 == 4) {
+            uVar3 = 0x8b52;
+          }
+        }
+        else {
+          iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
+          if (iVar1 == 3) {
+            uVar3 = 0x8b5b;
+          }
+          else if (iVar1 < 4) {
+            if (iVar1 == 2) {
+              uVar3 = 0x8b5a;
+            }
+          }
+          else if (iVar1 == 4) {
+            uVar3 = 0x8b5c;
+          }
+        }
+        break;
+      case 2:
         iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
         if (iVar1 == 2) {
-          uVar3 = 0x8b50;
+          uVar3 = 0x8b53;
         }
         else if (iVar1 < 3) {
           if (iVar1 == 1) {
-            uVar3 = 0x1406;
+            uVar3 = 0x1404;
           }
         }
         else if (iVar1 == 3) {
-          uVar3 = 0x8b51;
+          uVar3 = 0x8b54;
         }
         else if (iVar1 == 4) {
-          uVar3 = 0x8b52;
+          uVar3 = 0x8b55;
         }
-      }
-      else {
+        break;
+      case 3:
         iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
-        if (iVar1 == 3) {
-          uVar3 = 0x8b5b;
+        if (iVar1 == 2) {
+          uVar3 = 0x8b57;
         }
-        else if (iVar1 < 4) {
-          if (iVar1 == 2) {
-            uVar3 = 0x8b5a;
+        else if (iVar1 < 3) {
+          if (iVar1 == 1) {
+            uVar3 = 0x8b56;
           }
         }
+        else if (iVar1 == 3) {
+          uVar3 = 0x8b58;
+        }
         else if (iVar1 == 4) {
-          uVar3 = 0x8b5c;
+          uVar3 = 0x8b59;
         }
+        break;
+      case 5:
+        uVar3 = 0x8b5d;
+        break;
+      case 6:
+        uVar3 = 0x8b5e;
+        break;
+      case 7:
+        uVar3 = 0x8b5f;
+        break;
+      case 8:
+        uVar3 = 0x8b60;
+        break;
+      case 9:
+        uVar3 = 0x8b61;
+        break;
+      case 10:
+        uVar3 = 0x8b62;
+        break;
+      case 0xb:
+        uVar3 = 0x8b63;
+        break;
+      case 0xc:
+        uVar3 = 0x8b64;
+        break;
+      case 0xe:
+        uVar3 = 0x7ffe;
       }
-      break;
-    case 2:
-      iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
-      if (iVar1 == 2) {
-        uVar3 = 0x8b53;
-      }
-      else if (iVar1 < 3) {
-        if (iVar1 == 1) {
-          uVar3 = 0x1404;
-        }
-      }
-      else if (iVar1 == 3) {
-        uVar3 = 0x8b54;
-      }
-      else if (iVar1 == 4) {
-        uVar3 = 0x8b55;
-      }
-      break;
-    case 3:
-      iVar1 = (**(code **)(*(int *)param_1 + 0x2c))(param_1);
-      if (iVar1 == 2) {
-        uVar3 = 0x8b57;
-      }
-      else if (iVar1 < 3) {
-        if (iVar1 == 1) {
-          uVar3 = 0x8b56;
-        }
-      }
-      else if (iVar1 == 3) {
-        uVar3 = 0x8b58;
-      }
-      else if (iVar1 == 4) {
-        uVar3 = 0x8b59;
-      }
-      break;
-    case 5:
-      uVar3 = 0x8b5d;
-      break;
-    case 6:
-      uVar3 = 0x8b5e;
-      break;
-    case 7:
-      uVar3 = 0x8b5f;
-      break;
-    case 8:
-      uVar3 = 0x8b60;
-      break;
-    case 9:
-      uVar3 = 0x8b61;
-      break;
-    case 10:
-      uVar3 = 0x8b62;
-      break;
-    case 0xb:
-      uVar3 = 0x8b63;
-      break;
-    case 0xc:
-      uVar3 = 0x8b64;
-      break;
-    case 0xe:
-      uVar3 = 0x7ffe;
     }
   }
   else {

@@ -876,19 +876,20 @@ int FUN_00106b48(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00106ba0 @ 0x106ba0 (276 bytes) */
-int FUN_00106ba0(param_1, param_2)
+int FUN_00106ba0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *param_1;
   int param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
 {
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
   int iVar4;
   int *piVar5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
   int iVar6;
   
   if (0 < param_1[0x21]) {
@@ -908,7 +909,8 @@ int FUN_00106ba0(param_1, param_2)
           if (iVar6 != 1) {
             uVar3 = FUN_00105594(param_1,iVar6);
             iVar4 = FUN_001054ec(param_1,iVar6);
-            FUN_0010453c(uVar3,param_2,*(undefined4 *)(iVar4 + 0x10),in_r6,in_r7,in_r8,in_r9);
+            FUN_0010453c(uVar3,param_2,*(undefined4 *)(iVar4 + 0x10),param_4,param_5,param_6,param_7
+                        );
           }
           piVar5 = (int *)FUN_00105594(param_1,iVar6);
           (**(code **)(*piVar5 + 0x60))();

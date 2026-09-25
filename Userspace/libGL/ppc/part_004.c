@@ -1,9 +1,7 @@
 #include "decls.h"
 
 /* _glPixelStoref @ 0x92f2f898 (140 bytes) */
-void _glPixelStoref(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPixelStoref(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -22,9 +20,7 @@ void _glPixelStoref(undefined4 param_1,undefined4 param_2,undefined4 param_3,und
 }
 
 /* _glPixelTransferf @ 0x92f2f924 (140 bytes) */
-void _glPixelTransferf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPixelTransferf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -70,7 +66,6 @@ int _glPixelTransferi(param_1, param_2, param_3, param_4, param_5, param_6, para
 
 /* _glPixelZoom @ 0x92f2fa34 (144 bytes) */
 void _glPixelZoom(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -90,7 +85,6 @@ void _glPixelZoom(double fparam_1,double fparam_2)
 
 /* _glPointSize @ 0x92f2fac4 (128 bytes) */
 void _glPointSize(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -110,7 +104,6 @@ void _glPointSize(double fparam_1)
 
 /* _glPolygonOffset @ 0x92f2fb44 (144 bytes) */
 void _glPolygonOffset(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -246,7 +239,6 @@ int _glPushName(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glRasterPos2d @ 0x92f2fe28 (144 bytes) */
 void _glRasterPos2d(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -292,7 +284,6 @@ int _glRasterPos2dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glRasterPos2f @ 0x92f2ff34 (144 bytes) */
 void _glRasterPos2f(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -442,7 +433,6 @@ int _glRasterPos2sv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glRasterPos3d @ 0x92f30240 (160 bytes) */
 void _glRasterPos3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -488,7 +478,6 @@ int _glRasterPos3dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glRasterPos3f @ 0x92f3035c (160 bytes) */
 void _glRasterPos3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -638,7 +627,6 @@ int _glRasterPos3sv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glRasterPos4d @ 0x92f30688 (140 bytes) */
 void _glRasterPos4d(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -682,7 +670,6 @@ int _glRasterPos4dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glRasterPos4f @ 0x92f30790 (160 bytes) */
 void _glRasterPos4f(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -858,7 +845,6 @@ int _glRectdv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glRectf @ 0x92f30b50 (160 bytes) */
 void _glRectf(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1008,7 +994,6 @@ int _glRectsv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glScaled @ 0x92f30ea4 (160 bytes) */
 void _glScaled(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1080,7 +1065,6 @@ int _glStencilMask(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glTexCoord1d @ 0x92f31044 (128 bytes) */
 void _glTexCoord1d(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1126,7 +1110,6 @@ int _glTexCoord1dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glTexCoord1f @ 0x92f31140 (128 bytes) */
 void _glTexCoord1f(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1276,7 +1259,6 @@ int _glTexCoord1sv(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glTexCoord2d @ 0x92f3142c (144 bytes) */
 void _glTexCoord2d(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

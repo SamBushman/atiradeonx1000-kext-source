@@ -53,10 +53,7 @@ int _glClientActiveTextureARB(param_1, param_2, param_3, param_4, param_5, param
 }
 
 /* _glMultiTexCoord1dARB @ 0x92f3de74 (140 bytes) */
-void _glMultiTexCoord1dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glMultiTexCoord1dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -101,10 +98,7 @@ int _glMultiTexCoord1dvARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord1fARB @ 0x92f3df84 (140 bytes) */
-void _glMultiTexCoord1fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glMultiTexCoord1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -253,11 +247,7 @@ int _glMultiTexCoord1svARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord2dARB @ 0x92f3e2a4 (156 bytes) */
-void _glMultiTexCoord2dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2)
-
+void _glMultiTexCoord2dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -302,11 +292,7 @@ int _glMultiTexCoord2dvARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord2fARB @ 0x92f3e3c4 (156 bytes) */
-void _glMultiTexCoord2fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2)
-
+void _glMultiTexCoord2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -455,11 +441,7 @@ int _glMultiTexCoord2svARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord3dARB @ 0x92f3e704 (172 bytes) */
-void _glMultiTexCoord3dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3)
-
+void _glMultiTexCoord3dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -504,11 +486,7 @@ int _glMultiTexCoord3dvARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord3fARB @ 0x92f3e834 (172 bytes) */
-void _glMultiTexCoord3fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3)
-
+void _glMultiTexCoord3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -657,11 +635,7 @@ int _glMultiTexCoord3svARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord4dARB @ 0x92f3eb94 (152 bytes) */
-void _glMultiTexCoord4dARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glMultiTexCoord4dARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -704,11 +678,7 @@ int _glMultiTexCoord4dvARB(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glMultiTexCoord4fARB @ 0x92f3ecb0 (172 bytes) */
-void _glMultiTexCoord4fARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2,double fparam_3,double fparam_4)
-
+void _glMultiTexCoord4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1140,7 +1110,6 @@ int _glGetCompressedTexImageARB(param_1, param_2, param_3, param_4, param_5, par
 
 /* _glSampleCoverageARB @ 0x92f3f6fc (136 bytes) */
 void _glSampleCoverageARB(undefined4 param_1,undefined4 param_2,double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1185,10 +1154,7 @@ int _glSamplePassARB(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _glPointParameterfARB @ 0x92f3f800 (140 bytes) */
-void _glPointParameterfARB
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPointParameterfARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1234,7 +1200,6 @@ int _glPointParameterfvARB(param_1, param_2, param_3, param_4, param_5, param_6,
 
 /* _glWindowPos2dARB @ 0x92f3f910 (144 bytes) */
 void _glWindowPos2dARB(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1280,7 +1245,6 @@ int _glWindowPos2dvARB(param_1, param_2, param_3, param_4, param_5, param_6, par
 
 /* _glWindowPos2fARB @ 0x92f3fa1c (144 bytes) */
 void _glWindowPos2fARB(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1430,7 +1394,6 @@ int _glWindowPos2svARB(param_1, param_2, param_3, param_4, param_5, param_6, par
 
 /* _glWindowPos3dARB @ 0x92f3fd28 (160 bytes) */
 void _glWindowPos3dARB(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1476,7 +1439,6 @@ int _glWindowPos3dvARB(param_1, param_2, param_3, param_4, param_5, param_6, par
 
 /* _glWindowPos3fARB @ 0x92f3fe44 (160 bytes) */
 void _glWindowPos3fARB(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

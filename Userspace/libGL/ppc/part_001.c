@@ -20,9 +20,7 @@ int _glPopAttrib()
 }
 
 /* _glTexEnvf @ 0x92f298bc (148 bytes) */
-void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -41,9 +39,7 @@ void _glTexEnvf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefin
 }
 
 /* _glAlphaFunc @ 0x92f29950 (140 bytes) */
-void _glAlphaFunc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glAlphaFunc(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -179,7 +175,6 @@ int _glGetDoublev(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glRectd @ 0x92f29c50 (140 bytes) */
 void _glRectd(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -351,9 +346,7 @@ int _glTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
 }
 
 /* _glFrustum @ 0x92f2a070 (156 bytes) */
-void _glFrustum(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-               double fparam_6)
-
+void _glFrustum(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -398,7 +391,6 @@ int _glLoadMatrixf(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glPassThrough @ 0x92f2a188 (128 bytes) */
 void _glPassThrough(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -444,7 +436,6 @@ int _glActiveTextureARB(param_1, param_2, param_3, param_4, param_5, param_6, pa
 
 /* _glVertex2f @ 0x92f2a284 (144 bytes) */
 void _glVertex2f(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -463,10 +454,7 @@ void _glVertex2f(double fparam_1,double fparam_2)
 }
 
 /* _glMultiTexCoord2f @ 0x92f2a314 (156 bytes) */
-void _glMultiTexCoord2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2)
-
+void _glMultiTexCoord2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -615,9 +603,7 @@ int _glFogfv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _glFogf @ 0x92f2a644 (140 bytes) */
-void _glFogf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-            undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glFogf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -662,9 +648,7 @@ int _glFrontFace(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _glTexParameterf @ 0x92f2a74c (148 bytes) */
-void _glTexParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                     undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glTexParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -761,7 +745,6 @@ int _glTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, param
 
 /* _glTexCoord3f @ 0x92f2a9b8 (160 bytes) */
 void _glTexCoord3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -834,9 +817,7 @@ int FUN_92f2ab64()
 }
 
 /* _glAccum @ 0x92f2ab84 (140 bytes) */
-void _glAccum(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glAccum(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -905,10 +886,7 @@ int _glArrayElement(param_1, param_2, param_3, param_4, param_5, param_6, param_
 }
 
 /* _glBitmap @ 0x92f2ad1c (188 bytes) */
-void _glBitmap(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-              undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-              double fparam_2,double fparam_3,double fparam_4)
-
+void _glBitmap(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -954,7 +932,6 @@ int _glCallLists(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glClearAccum @ 0x92f2ae64 (160 bytes) */
 void _glClearAccum(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -974,7 +951,6 @@ void _glClearAccum(double fparam_1,double fparam_2,double fparam_3,double fparam
 
 /* _glClearIndex @ 0x92f2af04 (128 bytes) */
 void _glClearIndex(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1098,7 +1074,6 @@ int _glColor3bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glColor3d @ 0x92f2b18c (160 bytes) */
 void _glColor3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1144,7 +1119,6 @@ int _glColor3dv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glColor3f @ 0x92f2b2a8 (160 bytes) */
 void _glColor3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

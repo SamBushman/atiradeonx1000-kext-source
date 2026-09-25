@@ -108,7 +108,7 @@ int __ZNSt13runtime_errorC4ERKSs(this, param_2)
 int __ZNSt13runtime_errorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this);
+  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,0);
   return;
 }
 
@@ -116,7 +116,7 @@ int __ZNSt13runtime_errorD2Ev(this)
 int __ZNSt13runtime_errorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this);
+  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,2);
   return;
 }
 
@@ -124,18 +124,18 @@ int __ZNSt13runtime_errorD1Ev(this)
 int __ZNSt13runtime_errorD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this);
+  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,3);
   return;
 }
 
 /* __ZNSt13runtime_errorD4Ev @ 0x97c17e4c (136 bytes) */
-int __ZNSt13runtime_errorD4Ev(this)
+int __ZNSt13runtime_errorD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
-  uint in_r4;
   int iVar4;
   char in_RESERVE;
   byte in_cr0;
@@ -155,7 +155,7 @@ int __ZNSt13runtime_errorD4Ev(this)
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc));
   }
   __ZNSt9exceptionD2Ev(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -258,7 +258,7 @@ int __ZNSt15underflow_errorC4ERKSs(this, param_2)
 int __ZNSt9type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this);
+  ((int (*)())__ZNSt9type_infoD4Ev)(this,0);
   return;
 }
 
@@ -266,7 +266,7 @@ int __ZNSt9type_infoD2Ev(this)
 int __ZNSt9type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this);
+  ((int (*)())__ZNSt9type_infoD4Ev)(this,2);
   return;
 }
 
@@ -274,18 +274,17 @@ int __ZNSt9type_infoD1Ev(this)
 int __ZNSt9type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this);
+  ((int (*)())__ZNSt9type_infoD4Ev)(this,3);
   return;
 }
 
 /* __ZNSt9type_infoD4Ev @ 0x97c18000 (44 bytes) */
-int __ZNSt9type_infoD4Ev(this)
+int __ZNSt9type_infoD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c02c + 8;
-  if ((in_r4 & 1) == 0) {
+  if ((param_2 & 1) == 0) {
     return;
   }
   __ZdlPv(this);
@@ -296,7 +295,7 @@ int __ZNSt9type_infoD4Ev(this)
 int __ZNSt8bad_castD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this);
+  ((int (*)())__ZNSt8bad_castD4Ev)(this,0);
   return;
 }
 
@@ -304,7 +303,7 @@ int __ZNSt8bad_castD2Ev(this)
 int __ZNSt8bad_castD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this);
+  ((int (*)())__ZNSt8bad_castD4Ev)(this,2);
   return;
 }
 
@@ -312,19 +311,18 @@ int __ZNSt8bad_castD1Ev(this)
 int __ZNSt8bad_castD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this);
+  ((int (*)())__ZNSt8bad_castD4Ev)(this,3);
   return;
 }
 
 /* __ZNSt8bad_castD4Ev @ 0x97c18044 (88 bytes) */
-int __ZNSt8bad_castD4Ev(this)
+int __ZNSt8bad_castD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c028 + 8;
   __ZNSt9exceptionD2Ev(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -334,7 +332,7 @@ int __ZNSt8bad_castD4Ev(this)
 int __ZNSt10bad_typeidD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this);
+  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,0);
   return;
 }
 
@@ -342,7 +340,7 @@ int __ZNSt10bad_typeidD2Ev(this)
 int __ZNSt10bad_typeidD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this);
+  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,2);
   return;
 }
 
@@ -350,19 +348,18 @@ int __ZNSt10bad_typeidD1Ev(this)
 int __ZNSt10bad_typeidD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this);
+  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,3);
   return;
 }
 
 /* __ZNSt10bad_typeidD4Ev @ 0x97c180b4 (88 bytes) */
-int __ZNSt10bad_typeidD4Ev(this)
+int __ZNSt10bad_typeidD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c024 + 8;
   __ZNSt9exceptionD2Ev(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -418,7 +415,7 @@ int __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv(param_
 int __ZN10__cxxabiv117__class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,0);
   return;
 }
 
@@ -426,7 +423,7 @@ int __ZN10__cxxabiv117__class_type_infoD2Ev(this)
 int __ZN10__cxxabiv117__class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,2);
   return;
 }
 
@@ -434,19 +431,18 @@ int __ZN10__cxxabiv117__class_type_infoD1Ev(this)
 int __ZN10__cxxabiv117__class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,3);
   return;
 }
 
 /* __ZN10__cxxabiv117__class_type_infoD4Ev @ 0x97c1818c (104 bytes) */
-int __ZN10__cxxabiv117__class_type_infoD4Ev(this)
+int __ZN10__cxxabiv117__class_type_infoD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c020 + 8;
   ((int (*)())__ZNSt9type_infoD2Ev)(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -457,7 +453,7 @@ int __ZN10__cxxabiv117__class_type_infoD4Ev(this)
 int __ZN10__cxxabiv120__si_class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,0);
   return;
 }
 
@@ -465,7 +461,7 @@ int __ZN10__cxxabiv120__si_class_type_infoD2Ev(this)
 int __ZN10__cxxabiv120__si_class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,2);
   return;
 }
 
@@ -473,19 +469,18 @@ int __ZN10__cxxabiv120__si_class_type_infoD1Ev(this)
 int __ZN10__cxxabiv120__si_class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,3);
   return;
 }
 
 /* __ZN10__cxxabiv120__si_class_type_infoD4Ev @ 0x97c1820c (104 bytes) */
-int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this)
+int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c01c + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -496,7 +491,7 @@ int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this)
 int __ZN10__cxxabiv121__vmi_class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,0);
   return;
 }
 
@@ -504,7 +499,7 @@ int __ZN10__cxxabiv121__vmi_class_type_infoD2Ev(this)
 int __ZN10__cxxabiv121__vmi_class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,2);
   return;
 }
 
@@ -512,19 +507,18 @@ int __ZN10__cxxabiv121__vmi_class_type_infoD1Ev(this)
 int __ZN10__cxxabiv121__vmi_class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this);
+  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,3);
   return;
 }
 
 /* __ZN10__cxxabiv121__vmi_class_type_infoD4Ev @ 0x97c1828c (104 bytes) */
-int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this)
+int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
-  uint in_r4;
-  
   *(int *)this = DAT_a7b7c018 + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -540,23 +534,28 @@ int __ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj(this, pa
 {
   int iVar1;
   undefined4 uVar2;
+  uint a3;
   
+  a3 = param_4;
   iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,param_2);
   uVar2 = 1;
   if ((iVar1 == 0) && (uVar2 = 0, param_4 < 4)) {
                     
                     
-    uVar2 = (**(code **)(*(int *)param_2 + 0x14))(param_2,this,param_3);
+    uVar2 = (**(code **)(*(int *)param_2 + 0x14))(param_2,this,param_3,a3);
     return uVar2;
   }
   return uVar2;
 }
 
 /* __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv @ 0x97c18370 (120 bytes) */
-int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, param_2, param_3)
+int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, param_2, param_3, param_4, param_5, param_6)
   void *this;
   unsigned char * param_2;
   void **param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   bool bVar1;
   void *local_20;
@@ -568,7 +567,7 @@ int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv(this, param_2, pa
   local_14 = 0;
   local_20 = (void *)0x0;
   local_1c = 0;
-  (**(code **)(*(int *)this + 0x18))(this,param_2,*param_3,&local_20);
+  (**(code **)(*(int *)this + 0x18))(this,param_2,*param_3,&local_20,param_5,param_6,*(int *)this);
   bVar1 = (local_1c & 6) == 6;
   if (bVar1) {
     *param_3 = local_20;

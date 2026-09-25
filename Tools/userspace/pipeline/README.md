@@ -61,6 +61,21 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    UNASSIGNED) become `undefined4` in their argument slot, for all 148 glprog functions that have them (`gs/ListStructParams.java`). Those types made the
    decompiler misattribute call arguments ("WARNING: Heritage AFTER dead removal", 42 glprog functions; `std::string(const char*)` passed
    `strlen(s)` as the string). After it, no dump file carries that warning, and six hand patches of `patches.py` were retired as superseded.
+5. `gs/OverrideIndirectCalls.java`: every indirect call (`bctrl`: virtual calls, function pointers; 1288 in glprog) gets a call-site signature: an 8-argument
+   override, then the arguments up to the last one that carries a value the caller defines (data flow; the caller's own untouched input registers
+   are dropped), bounded by the registers actually set up between the previous call and the `bctrl` (a tail `bctr` keeps the data-flow count), never
+   fewer than Ghidra printed. Ghidra had printed virtual calls without their object (`(**(code **)(*p + 8))()`) or with 2 of 5 arguments
+   (`TType::setType`).
+6. `gs/ExtendParams.java`: functions whose own decompile reads an argument register it does not declare (`in_r4`: TIntermAggregate::setName is
+   `addi r3,r3,0x54; b assign`, passing the caller's r4 on) get the parameter, when stock callers set that register before the call
+   (`Tools/userspace/param_used.py`) or, for functions reached only indirectly (virtual methods), for every register the body reads; PIC stubs
+   of the same name are extended too (callers through a stub print with the stub's signature). b3/extend_*.txt: 59 glprog, 31 GLDriver, 1 GA, 1 VA.
+7. `gs/WidenParams.java`: parameters typed narrower than their register although the function rebuilds the whole register
+   (`CONCAT31(in_register_0000000c, param_1)`): ParseOperand::GetAsSourceVar(bool) had the demangled `bool` on r3, which carries the hidden
+   struct-return pointer, and callers passed that stack address cast to bool (44 glprog functions, b3/widen_glprog.txt).
+Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
+(`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
+GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).
 
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in

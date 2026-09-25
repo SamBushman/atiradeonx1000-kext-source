@@ -4,10 +4,9 @@
 int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(this, param_2, param_3)
   void *this;
   ulong param_2;
-  int param_3;
+  undefined4 param_3;
 {
   ulong uVar1;
-  undefined3 in_register_00000014;
   int iVar2;
   
   iVar2 = *(int *)((int)this + 4);
@@ -17,7 +16,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(this, param_2, para
     iVar2 = *(int *)((int)this + 4);
   }
   iVar2 = iVar2 + *(int *)(iVar2 + -0xc);
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc)(this,iVar2,iVar2,param_2,CONCAT31(in_register_00000014,param_3));
+  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc)(this,iVar2,iVar2,param_2,param_3);
   return;
 }
 

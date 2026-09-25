@@ -129,11 +129,7 @@ int _glIsVertexAttribEnabledAPPLE(param_1, param_2, param_3, param_4, param_5, p
 }
 
 /* _glMapVertexAttrib1dAPPLE @ 0x92f44268 (192 bytes) */
-void _glMapVertexAttrib1dAPPLE
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-               double fparam_1,double fparam_2)
-
+void _glMapVertexAttrib1dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -150,11 +146,7 @@ void _glMapVertexAttrib1dAPPLE
 }
 
 /* _glMapVertexAttrib1fAPPLE @ 0x92f44328 (188 bytes) */
-void _glMapVertexAttrib1fAPPLE
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-               double fparam_2)
-
+void _glMapVertexAttrib1fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -173,11 +165,7 @@ void _glMapVertexAttrib1fAPPLE
 }
 
 /* _glMapVertexAttrib2dAPPLE @ 0x92f443e4 (200 bytes) */
-void _glMapVertexAttrib2dAPPLE
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-               double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
+void _glMapVertexAttrib2dAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -194,11 +182,7 @@ void _glMapVertexAttrib2dAPPLE
 }
 
 /* _glMapVertexAttrib2fAPPLE @ 0x92f444ac (200 bytes) */
-void _glMapVertexAttrib2fAPPLE
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3
-               ,double fparam_4)
-
+void _glMapVertexAttrib2fAPPLE(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -914,9 +898,7 @@ int _glPNTrianglesiATI(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glPNTrianglesfATI @ 0x92f45400 (140 bytes) */
-void _glPNTrianglesfATI(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPNTrianglesfATI(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -961,9 +943,7 @@ int _glPNTrianglesiATIX(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glPNTrianglesfATIX @ 0x92f45510 (140 bytes) */
-void _glPNTrianglesfATIX(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4
-                        ,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glPNTrianglesfATIX(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1060,10 +1040,7 @@ int _glCombinerParameterfvNV(param_1, param_2, param_3, param_4, param_5, param_
 }
 
 /* _glCombinerParameterfNV @ 0x92f45728 (140 bytes) */
-void _glCombinerParameterfNV
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glCombinerParameterfNV(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;

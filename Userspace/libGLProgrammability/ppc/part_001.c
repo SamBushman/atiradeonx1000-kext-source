@@ -2193,8 +2193,9 @@ int _AllocateAtom(param_1)
   *(undefined4 *)(iVar1 * 4 + *(int *)(param_1 + 0x28)) = 0xffffffff;
   uVar2 = ((int (*)())_lReverse)(*(undefined4 *)(param_1 + 0x30));
   *(undefined4 *)(*(int *)(param_1 + 0x30) * 4 + *(int *)(param_1 + 0x2c)) = uVar2;
-  *(int *)(param_1 + 0x30) = *(int *)(param_1 + 0x30) + 1;
-  return;
+  iVar1 = *(int *)(param_1 + 0x30);
+  *(int *)(param_1 + 0x30) = iVar1 + 1;
+  return iVar1;
 }
 
 /* _SetAtomValue @ 0x97b85934 (40 bytes) */

@@ -146,11 +146,9 @@ extern int _gldReclaimVertexArray();
 extern int _gldDestroyVertexArray();
 extern int FUN_0000bc60();
 extern int FUN_0000bd60();
-extern double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7);
-extern char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1
-                   ,double fparam_2);
-extern double FUN_0000c500(char *param_1,undefined4 *param_2);
+extern double FUN_0000be70(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7);
+extern char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2);
+extern double FUN_0000c500(char *param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6);
 extern int FUN_0000c8a0();
 extern int FUN_0000c930();
 extern int FUN_0000ca50();
@@ -163,8 +161,7 @@ extern int FUN_0000df50();
 extern int FUN_0000e1f0();
 extern int FUN_0000f250();
 extern int FUN_0000f620();
-extern void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 param_5,
-                 undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2);
+extern void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 param_5,undefined4 param_6,int param_7,int param_8,double fparam_1,double fparam_2);
 extern int FUN_00016fc0();
 extern int FUN_00017100();
 extern int FUN_00017160();
@@ -232,11 +229,7 @@ extern int FUN_00020b00();
 extern int FUN_00020b30();
 extern int FUN_00021c70();
 extern int FUN_00022280();
-extern uint _gldUpdateDispatch(int param_1,int param_2,uint *param_3,undefined4 param_4,undefined4 param_5,
-                       undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,
-                       double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                       double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                       double fparam_12,double fparam_13);
+extern uint _gldUpdateDispatch(int param_1,int param_2,uint *param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int _gldInitDispatch();
 extern int FUN_00022eb0();
 extern int FUN_000230d0();
@@ -245,52 +238,20 @@ extern int FUN_00023700();
 extern int FUN_00023870();
 extern int FUN_00023a24();
 extern int FUN_00024190();
-extern void FUN_000242f0(double param_1,double param_2,double param_3,double param_4,double param_5,
-                 double param_6,double param_7,double param_8,int param_9,int param_10,
-                 undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14);
-extern void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000243f0(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00024470(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000244f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00024570(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000245f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
-extern void FUN_00024670(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000246f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
-extern void FUN_00024770(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000247f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
-extern void FUN_00024870(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_000248f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00024970(int param_1,int param_2,int param_3,int param_4,undefined4 param_5,
-                 undefined *param_6,uint *param_7,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                 double fparam_9);
+extern void FUN_000242f0(double param_1,double param_2,double param_3,double param_4,double param_5,double param_6,double param_7,double param_8,int param_9,int param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14);
+extern void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000243f0(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024470(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000244f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024570(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000245f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024670(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000246f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024770(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000247f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024870(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_000248f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00024970(int param_1,int param_2,int param_3,int param_4,undefined4 param_5,undefined *param_6,uint *param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_00024fb0();
 extern int FUN_00024fc0();
 extern int FUN_00024fd0();
@@ -302,15 +263,9 @@ extern int FUN_00026440();
 extern int FUN_00026650();
 extern int FUN_000269a0();
 extern int FUN_00026bf0();
-extern void FUN_00026f80(int param_1,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
+extern void FUN_00026f80(int param_1,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_00027150();
-extern uint FUN_000273a0(int param_1,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
+extern uint FUN_000273a0(int param_1,uint *param_2,uint *param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_00027990();
 extern int FUN_00028350();
 extern int FUN_00029290();
@@ -321,13 +276,9 @@ extern int FUN_0002a3d0();
 extern int FUN_0002b3b0();
 extern int FUN_0002b3c0();
 extern int _gldGetQueryInfo();
-extern void FUN_0002b740(int param_1,int *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0002b740(int param_1,int *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0002b7f0();
-extern void FUN_0002bbc4(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0002bbc4(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0002be00();
 extern int FUN_0002be60();
 extern int FUN_0002be70();
@@ -335,10 +286,7 @@ extern int FUN_0002be80();
 extern int FUN_0002be90();
 extern int FUN_0002bea0();
 extern int FUN_0002bf30();
-extern void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                 double fparam_9);
+extern void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0002c0c0();
 extern int FUN_0002c180();
 extern int FUN_0002c230();
@@ -346,9 +294,7 @@ extern int FUN_0002c6c0();
 extern int FUN_0002c790();
 extern int FUN_0002cb40();
 extern int FUN_0002cc10();
-extern uint FUN_0002cc30(int param_1,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern uint FUN_0002cc30(int param_1,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0002cd50();
 extern int FUN_0002ce40();
 extern int FUN_0002d030();
@@ -390,36 +336,16 @@ extern int FUN_00039100();
 extern int FUN_000391d0();
 extern int _gldGetVersion();
 extern int _gldGetString();
-extern void FUN_00039330(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00039610(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00039a60(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00039d40(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003a020(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003a300(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003a5e0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003a8c0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003aba0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_0003ae80(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00039330(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00039610(int param_1,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00039a60(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00039d40(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003a020(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003a300(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003a5e0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003a8c0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003aba0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_0003ae80(int param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0003b160();
 extern int FUN_0003b280();
 extern int FUN_0003b5b0();
@@ -479,8 +405,7 @@ extern int FUN_00048da0();
 extern uint FUN_0004a7d0(double fparam_1);
 extern double FUN_0004a830(uint param_1);
 extern int FUN_0004a860();
-extern void FUN_0004a8f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1);
+extern void FUN_0004a8f0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1);
 extern int FUN_0004a990();
 extern int FUN_0004aa00();
 extern int FUN_0004aa90();
@@ -502,10 +427,8 @@ extern int FUN_0004c720();
 extern int FUN_0004cde0();
 extern int FUN_0004ce30();
 extern int FUN_0004d100();
-extern void FUN_0004d620(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1);
-extern void FUN_0004d770(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8);
+extern void FUN_0004d620(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1);
+extern void FUN_0004d770(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern int FUN_0004dac0();
 extern int FUN_0004dbe0();
 extern int FUN_0004dc30();
@@ -513,19 +436,15 @@ extern int FUN_0004dd10();
 extern int FUN_0004dd40();
 extern int FUN_0004ddc0();
 extern int FUN_0004de30();
-extern double FUN_0004def0(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9);
+extern double FUN_0004def0(int param_1,undefined4 param_2,uint param_3,undefined4 param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0004e880();
 extern int FUN_0004e990();
-extern double FUN_0004ea70(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8);
+extern double FUN_0004ea70(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern int FUN_0004eba0();
 extern int FUN_0004ed90();
 extern int FUN_0004f080();
 extern int FUN_0004f160();
-extern void FUN_0004f2e0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1);
+extern void FUN_0004f2e0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1);
 extern int FUN_0004f550();
 extern int FUN_0004f720();
 extern int FUN_0004fc80();
@@ -536,8 +455,7 @@ extern int FUN_00050300();
 extern int FUN_00050ef0();
 extern int FUN_00051010();
 extern int FUN_00051420();
-extern double FUN_000520c0(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                 double fparam_5,double fparam_6,double fparam_7,double fparam_8);
+extern double FUN_000520c0(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern int FUN_00052280();
 extern int FUN_00052cc0();
 extern int FUN_00052e60();
@@ -665,11 +583,7 @@ extern int FUN_000651e0();
 extern int FUN_00065370();
 extern int FUN_00065610();
 extern int FUN_000656b0();
-extern void FUN_000659d0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                 double fparam_12,double fparam_13);
+extern void FUN_000659d0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_00065c40();
 extern int FUN_00065c80();
 extern int FUN_00065c90();
@@ -810,14 +724,8 @@ extern int FUN_00083100();
 extern int FUN_00083110();
 extern int FUN_00083470();
 extern int FUN_000837b0();
-extern void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9);
-extern void FUN_00083c80(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00083c80(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_00083c90();
 extern int FUN_00083e10();
 extern int FUN_000840d0();
@@ -903,10 +811,7 @@ extern int FUN_0008f7f0();
 extern int FUN_0008fb70();
 extern int FUN_0008fc70();
 extern int FUN_000900a0();
-extern void FUN_00090470(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9);
+extern void FUN_00090470(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_00090840();
 extern int FUN_00090960();
 extern int FUN_00090990();
@@ -980,11 +885,7 @@ extern int FUN_0009d3b0();
 extern int FUN_0009d410();
 extern int FUN_0009eb90();
 extern int FUN_0009edd0();
-extern void FUN_0009f0b0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                 double fparam_12,double fparam_13);
+extern void FUN_0009f0b0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_000a0290();
 extern int FUN_000a0300();
 extern int FUN_000a0350();
@@ -1035,14 +936,8 @@ extern uint FUN_000a3560(int param_1,double fparam_1);
 extern int FUN_000a3610();
 extern int FUN_000a3670();
 extern int FUN_000a36b0();
-extern void FUN_000a3790(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,int *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11,double fparam_12);
-extern void FUN_000a3a60(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,uint *param_5,
-                 double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-                 double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,
-                 double fparam_11,double fparam_12,double fparam_13);
+extern void FUN_000a3790(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,int *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern void FUN_000a3a60(undefined4 param_1,undefined4 param_2,uint param_3,int param_4,uint *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_000a3be0();
 extern int FUN_000a43f0();
 extern int FUN_000a4490();
@@ -1073,23 +968,14 @@ extern int FUN_000a7ee0();
 extern int FUN_000a82c0();
 extern int FUN_000a8320();
 extern int FUN_000a8340();
-extern double FUN_000a8630(int param_1,int param_2,uint param_3,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                 double fparam_13);
+extern double FUN_000a8630(int param_1,int param_2,uint param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_000a8a00();
 extern int FUN_000a8c00();
 extern int FUN_000a8d70();
 extern int FUN_000a8e20();
 extern int FUN_000a9070();
-extern double FUN_000a9640(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,
-                   double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                   double fparam_9,double fparam_10,double fparam_11,double fparam_12);
-extern void FUN_000a9ac0(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,
-                 char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                 double fparam_13);
+extern double FUN_000a9640(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
+extern void FUN_000a9ac0(char *param_1,uint *param_2,char *param_3,undefined *param_4,uint param_5,char *param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13);
 extern int FUN_000ab900();
 extern int FUN_000ab940();
 extern int FUN_000ab9b0();
@@ -1114,11 +1000,8 @@ extern int FUN_000b3630();
 extern int FUN_000b43f0();
 extern int FUN_000b4400();
 extern int FUN_000b4cd0();
-extern void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,int param_7,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4);
-extern void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4);
+extern void FUN_000b4f50(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,int param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
+extern void FUN_000b5010(int param_1,int param_2,int *param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int FUN_000b50a0();
 extern int FUN_000b5190();
 extern int FUN_000b51a0();
@@ -1135,13 +1018,10 @@ extern int FUN_000b5f40();
 extern int FUN_000b5fb0();
 extern int FUN_000b6020();
 extern int FUN_000b6580();
-extern double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,
-                 double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-                 double fparam_8,double fparam_9);
+extern double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_000b72d0();
 extern int FUN_000b9f10();
-extern void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 double fparam_1);
+extern void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1);
 extern int FUN_000bda40();
 extern int FUN_000bde70();
 extern int FUN_000be460();
@@ -1211,8 +1091,7 @@ extern int FUN_000c87d0();
 extern int FUN_000c8910();
 extern int FUN_000c8aa0();
 extern int FUN_000c8de0();
-extern void FUN_000c8e30(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4);
+extern void FUN_000c8e30(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int FUN_000c8e50();
 extern int FUN_000cae90();
 extern int FUN_000cd05c();
@@ -1255,13 +1134,9 @@ extern int FUN_000d0488();
 extern int FUN_000d0888();
 extern int FUN_000d0b68();
 extern int FUN_000d10a8();
-extern double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-                 double fparam_1);
-extern double FUN_000d13a4(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,char *param_7,int param_8,double fparam_1);
-extern double FUN_000d1624(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,char *param_7,int param_8,double fparam_1);
+extern double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1);
+extern double FUN_000d13a4(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,char *param_7,int param_8,double fparam_1);
+extern double FUN_000d1624(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,char *param_7,int param_8,double fparam_1);
 extern int FUN_000d183c();
 extern int FUN_000d4de8();
 extern int FUN_000d4df8();
@@ -1277,8 +1152,7 @@ extern int FUN_000d6340();
 extern int FUN_000d7520();
 extern int FUN_000d8450();
 extern int FUN_000d9b58();
-extern undefined4 FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,
-            double fparam_1);
+extern undefined4 FUN_000d9bac(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1);
 extern int FUN_000d9c90();
 extern int FUN_000d9d74();
 extern int FUN_000d9e58();
@@ -1317,10 +1191,7 @@ extern int FUN_000db1c4();
 extern int FUN_000db2f4();
 extern int FUN_000db350();
 extern int FUN_000db458();
-extern void FUN_000db574(undefined4 param_1,uint param_2,uint param_3,uint param_4,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                 double fparam_12);
+extern void FUN_000db574(undefined4 param_1,uint param_2,uint param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12);
 extern int FUN_000db6d4();
 extern int FUN_000db798();
 extern int FUN_000db81c();
@@ -1444,8 +1315,7 @@ extern int FUN_000e44c4();
 extern int FUN_000e468c();
 extern int FUN_000e4710();
 extern int FUN_000e4724();
-extern void FUN_000e4780(int *param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,
-                 double fparam_4);
+extern void FUN_000e4780(int *param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int FUN_000e47f4();
 extern int FUN_000e4830();
 extern int FUN_000e4934();
@@ -1712,8 +1582,7 @@ extern int FUN_000f6a04();
 extern int FUN_000f6d14();
 extern int FUN_000f771c();
 extern int FUN_000f7870();
-extern void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4);
+extern void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4);
 extern int FUN_000f7b10();
 extern int FUN_000f7bf4();
 extern int FUN_000f7cd8();
@@ -1753,7 +1622,7 @@ extern int FUN_000fd50c();
 extern int FUN_000fd5c8();
 extern int FUN_00103d50();
 extern int FUN_00103d78(undefined4 param_1,int param_2,uint param_3,double fparam_1);
-extern double FUN_00103e54(void);
+extern double FUN_00103e54( void);
 extern int FUN_00103e70();
 extern int FUN_00103e84();
 extern int FUN_00103ebc();
@@ -1981,8 +1850,7 @@ extern void FUN_0010b118(float *param_1,int param_2,float param_3);
 extern int FUN_0010b184(int *param_1,undefined4 param_2,int *param_3,double fparam_1);
 extern void FUN_0010b284(float *param_1,int param_2,int param_3,float param_4);
 extern void FUN_0010b2dc(float *param_1,int param_2,int param_3,float param_4);
-extern int FUN_0010b334(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                int param_5,double fparam_1);
+extern int FUN_0010b334(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,int param_5,double fparam_1);
 extern int FUN_0010b498();
 extern int FUN_0010b5f8();
 extern bool FUN_0010b820(undefined4 param_1,double fparam_1,double fparam_2);
@@ -1992,8 +1860,7 @@ extern int FUN_0010bb14();
 extern int FUN_0010bb9c();
 extern int FUN_0010bc78();
 extern void FUN_0010bd50(int param_1,undefined4 param_2,int param_3,int param_4,double fparam_1);
-extern int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,
-                double fparam_1);
+extern int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,double fparam_1);
 extern int FUN_0010c010();
 extern int FUN_0010c37c();
 extern int FUN_0010c47c();

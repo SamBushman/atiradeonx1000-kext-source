@@ -277,6 +277,11 @@ int _HashSetAdd(param_1, param_2)
 {
   uint uVar1;
   int iVar2;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  uint a6;
   uint uVar3;
   void *pvVar4;
   uint uVar5;
@@ -285,9 +290,10 @@ int _HashSetAdd(param_1, param_2)
   uVar5 = 0;
   uVar3 = 0xffffffff;
   uVar1 = (*(code *)param_1[2])(param_2);
+  a6 = param_1[1];
   iVar2 = (uVar1 - (uVar1 / *param_1) * *param_1) * 8;
-  puVar6 = (uint *)(param_1[1] + iVar2);
-  if (*(int *)(param_1[1] + iVar2) == 0) {
+  puVar6 = (uint *)(a6 + iVar2);
+  if (*(int *)(a6 + iVar2) == 0) {
     pvVar4 = (void *)puVar6[1];
   }
   else {
@@ -300,7 +306,7 @@ int _HashSetAdd(param_1, param_2)
         }
       }
       else {
-        iVar2 = (*(code *)param_1[3])(iVar2,param_2);
+        iVar2 = (*(code *)param_1[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6);
         if (iVar2 == 0) {
           *(undefined4 *)((int)pvVar4 + uVar5 * 4) = param_2;
           return param_1;
@@ -330,18 +336,25 @@ int _HashSetGet(param_1, param_2)
 {
   uint uVar1;
   int iVar2;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  uint a6;
   uint *puVar3;
   uint uVar4;
   
   uVar4 = 0;
   uVar1 = (*(code *)param_1[2])(param_2);
+  a6 = param_1[1];
   iVar2 = (uVar1 - (uVar1 / *param_1) * *param_1) * 8;
-  puVar3 = (uint *)(param_1[1] + iVar2);
-  if (*(int *)(param_1[1] + iVar2) != 0) {
+  puVar3 = (uint *)(a6 + iVar2);
+  if (*(int *)(a6 + iVar2) != 0) {
     do {
       uVar1 = puVar3[1];
       iVar2 = *(int *)(uVar1 + uVar4 * 4);
-      if ((iVar2 != 0) && (iVar2 = (*(code *)param_1[3])(iVar2,param_2), iVar2 == 0)) {
+      if ((iVar2 != 0) &&
+         (iVar2 = (*(code *)param_1[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar2 == 0)) {
         return *(undefined4 *)(uVar1 + uVar4 * 4);
       }
       uVar4 = uVar4 + 1;
@@ -359,19 +372,26 @@ int _HashSetRemove(param_1, param_2)
   undefined4 uVar2;
   uint uVar3;
   int iVar4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  uint a6;
   uint *puVar5;
   uint uVar6;
   
   uVar6 = 0;
   uVar3 = (*(code *)param_1[2])(param_2);
+  a6 = param_1[1];
   iVar1 = (uVar3 - (uVar3 / *param_1) * *param_1) * 8;
-  puVar5 = (uint *)(param_1[1] + iVar1);
-  if (*(int *)(param_1[1] + iVar1) != 0) {
+  puVar5 = (uint *)(a6 + iVar1);
+  if (*(int *)(a6 + iVar1) != 0) {
     do {
       uVar3 = puVar5[1];
       iVar1 = uVar6 * 4;
       if ((*(int *)(uVar3 + iVar1) != 0) &&
-         (iVar4 = (*(code *)param_1[3])(*(int *)(uVar3 + iVar1),param_2), iVar4 == 0)) {
+         (iVar4 = (*(code *)param_1[3])(*(int *)(uVar3 + iVar1),param_2,in_r5,in_r6,in_r7,in_r8,a6),
+         iVar4 == 0)) {
         uVar2 = *(undefined4 *)(uVar3 + iVar1);
         *(undefined4 *)(uVar3 + iVar1) = 0;
         return uVar2;
@@ -492,6 +512,11 @@ int _HashTableAdd(param_1, param_2, param_3)
   uint uVar2;
   int iVar3;
   undefined4 *puVar4;
+  undefined4 a2;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  uint a6;
   uint uVar5;
   uint *puVar6;
   uint uVar7;
@@ -501,10 +526,12 @@ int _HashTableAdd(param_1, param_2, param_3)
   puVar6 = (uint *)*param_1;
   uVar7 = 0;
   uVar5 = 0xffffffff;
+  a2 = param_3;
   uVar2 = (*(code *)puVar6[2])(param_2);
+  a6 = puVar6[1];
   iVar1 = (uVar2 - (uVar2 / *puVar6) * *puVar6) * 8;
-  puVar9 = (uint *)(puVar6[1] + iVar1);
-  if (*(int *)(puVar6[1] + iVar1) == 0) {
+  puVar9 = (uint *)(a6 + iVar1);
+  if (*(int *)(a6 + iVar1) == 0) {
     pvVar8 = (void *)puVar9[1];
   }
   else {
@@ -517,7 +544,8 @@ int _HashTableAdd(param_1, param_2, param_3)
         }
       }
       else {
-        iVar3 = (*(code *)puVar6[3])(**(undefined4 **)((int)pvVar8 + iVar1),param_2);
+        iVar3 = (*(code *)puVar6[3])
+                          (**(undefined4 **)((int)pvVar8 + iVar1),param_2,a2,in_r6,in_r7,in_r8,a6);
         if (iVar3 == 0) {
           **(undefined4 **)((int)pvVar8 + iVar1) = param_2;
           *(undefined4 *)(*(int *)((int)pvVar8 + iVar1) + 4) = param_3;
@@ -557,6 +585,11 @@ int _HashTableGet(param_1, param_2)
   uint uVar1;
   undefined4 *puVar2;
   int iVar3;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  uint a6;
   uint *puVar4;
   uint *puVar5;
   uint uVar6;
@@ -564,14 +597,15 @@ int _HashTableGet(param_1, param_2)
   uVar6 = 0;
   puVar4 = (uint *)*param_1;
   uVar1 = (*(code *)puVar4[2])(param_2);
+  a6 = puVar4[1];
   iVar3 = (uVar1 - (uVar1 / *puVar4) * *puVar4) * 8;
-  puVar5 = (uint *)(puVar4[1] + iVar3);
-  if (*(int *)(puVar4[1] + iVar3) != 0) {
+  puVar5 = (uint *)(a6 + iVar3);
+  if (*(int *)(a6 + iVar3) != 0) {
     do {
       uVar1 = puVar5[1];
       puVar2 = *(undefined4 **)(uVar1 + uVar6 * 4);
       if ((puVar2 != (undefined4 *)0x0) &&
-         (iVar3 = (*(code *)puVar4[3])(*puVar2,param_2), iVar3 == 0)) {
+         (iVar3 = (*(code *)puVar4[3])(*puVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar3 == 0)) {
         return *(undefined4 *)(*(int *)(uVar1 + uVar6 * 4) + 4);
       }
       uVar6 = uVar6 + 1;
@@ -581,13 +615,18 @@ int _HashTableGet(param_1, param_2)
 }
 
 /* _HashTableRemove @ 0x97c08d5c (196 bytes) */
-int _HashTableRemove(param_1, param_2)
+int _HashTableRemove(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 *param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   int iVar1;
   uint uVar2;
   int iVar3;
+  uint a6;
   uint *puVar4;
   uint *puVar5;
   uint uVar6;
@@ -596,14 +635,17 @@ int _HashTableRemove(param_1, param_2)
   uVar6 = 0;
   puVar4 = (uint *)*param_1;
   uVar2 = (*(code *)puVar4[2])(param_2);
+  a6 = puVar4[1];
   iVar1 = (uVar2 - (uVar2 / *puVar4) * *puVar4) * 8;
-  puVar5 = (uint *)(puVar4[1] + iVar1);
-  if (*(int *)(puVar4[1] + iVar1) != 0) {
+  puVar5 = (uint *)(a6 + iVar1);
+  if (*(int *)(a6 + iVar1) != 0) {
     do {
       uVar2 = puVar5[1];
       iVar1 = uVar6 * 4;
       if ((*(undefined4 **)(uVar2 + iVar1) != (undefined4 *)0x0) &&
-         (iVar3 = (*(code *)puVar4[3])(**(undefined4 **)(uVar2 + iVar1),param_2), iVar3 == 0)) {
+         (iVar3 = (*(code *)puVar4[3])
+                            (**(undefined4 **)(uVar2 + iVar1),param_2,param_3,param_4,param_5,
+                             param_6,a6), iVar3 == 0)) {
         uVar7 = *(undefined4 *)((int)*(void **)(uVar2 + iVar1) + 4);
         _free(*(void **)(uVar2 + iVar1));
         *(undefined4 *)(uVar2 + iVar1) = 0;
@@ -2396,10 +2438,7 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
 }
 
 /* _AddConstantParam @ 0x97c0b550 (436 bytes) */
-undefined2
-_AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param_5,float param_6,
-                 float param_7,float param_8)
-
+undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param_5,float param_6,float param_7,float param_8)
 {
   int iVar1;
   undefined4 uVar2;

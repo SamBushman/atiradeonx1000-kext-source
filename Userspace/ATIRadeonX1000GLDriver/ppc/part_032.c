@@ -2474,7 +2474,6 @@ int FUN_001134bc(param_1, param_2, param_3)
 
 /* FUN_00113554 @ 0x113554 (56 bytes) */
 double FUN_00113554(double fparam_1,double fparam_2)
-
 {
   double dVar1;
   

@@ -1546,18 +1546,18 @@ int __Reset(param_1)
 }
 
 /* __Start @ 0x2610 (308 bytes) */
-int __Start(param_1, param_2, param_3)
+int __Start(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  undefined4 param_7;
+  undefined4 param_8;
 {
   int iVar1;
   int iVar2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
   int local_a8;
   int local_a4 [2];
   undefined1 auStack_9c [144];
@@ -1569,7 +1569,8 @@ int __Start(param_1, param_2, param_3)
     if (iVar1 == 0) {
       iVar1 = _IOObjectGetClass(local_a8,auStack_9c);
       if (iVar1 == 0) {
-        _printf_LDBLStub("Unusual class (%s)\n",auStack_9c,iVar2,in_r6,in_r7,in_r8,in_r9,in_r10);
+        _printf_LDBLStub("Unusual class (%s)\n",auStack_9c,iVar2,param_4,param_5,param_6,param_7,
+                         param_8);
         iVar1 = -0x1ffffd39;
       }
       else {

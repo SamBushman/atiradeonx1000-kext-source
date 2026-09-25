@@ -1049,7 +1049,6 @@ int FUN_000027d0(param_1, param_2)
 
 /* FUN_00002ae0 @ 0x2ae0 (88 bytes) */
 void FUN_00002ae0(int param_1,double fparam_1)
-
 {
   float fVar1;
   float fVar2;

@@ -4272,7 +4272,6 @@ int _PPParserBuildErrorString(param_1, param_2, param_3)
 
 /* _pow_10 @ 0x97c12464 (156 bytes) */
 double _pow_10(int param_1)
-
 {
   undefined *puVar1;
   double dVar2;
@@ -4298,7 +4297,6 @@ double _pow_10(int param_1)
 
 /* _glp_strtod @ 0x97c12500 (824 bytes) */
 double _glp_strtod(byte *param_1,undefined4 *param_2)
-
 {
   bool bVar1;
   bool bVar2;
@@ -4432,11 +4430,7 @@ LAB_97c12804:
 }
 
 /* _glp_dtostr @ 0x97c12838 (1096 bytes) */
-char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,
-                  double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                  double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                  double fparam_12,double fparam_13)
-
+char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   char *pcVar1;
   char cVar2;

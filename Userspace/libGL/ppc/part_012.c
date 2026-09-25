@@ -898,9 +898,7 @@ int _glValidateProgramARB(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* _glUniform1fARB @ 0x92f410f0 (140 bytes) */
-void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -919,10 +917,7 @@ void _glUniform1fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,un
 }
 
 /* _glUniform2fARB @ 0x92f4117c (156 bytes) */
-void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2)
-
+void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -941,10 +936,7 @@ void _glUniform2fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,un
 }
 
 /* _glUniform3fARB @ 0x92f41218 (172 bytes) */
-void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2,double fparam_3)
-
+void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -963,10 +955,7 @@ void _glUniform3fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,un
 }
 
 /* _glUniform4fARB @ 0x92f412c4 (172 bytes) */
-void _glUniform4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                    undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                    double fparam_2,double fparam_3,double fparam_4)
-
+void _glUniform4fARB(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;

@@ -236,7 +236,6 @@ int _glIndexPointer(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glIndexd @ 0x92f2dd00 (128 bytes) */
 void _glIndexd(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -282,7 +281,6 @@ int _glIndexdv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glIndexf @ 0x92f2ddfc (128 bytes) */
 void _glIndexf(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -600,9 +598,7 @@ int _glIsTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _glLightModelf @ 0x92f2e45c (140 bytes) */
-void _glLightModelf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                   undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glLightModelf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -673,9 +669,7 @@ int _glLightModeliv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 }
 
 /* _glLightf @ 0x92f2e5f0 (148 bytes) */
-void _glLightf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-              undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glLightf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -850,10 +844,7 @@ int _glLogicOp(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _glMap1d @ 0x92f2e994 (184 bytes) */
-void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-             double fparam_1,double fparam_2)
-
+void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -870,10 +861,7 @@ void _glMap1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
 }
 
 /* _glMap1f @ 0x92f2ea4c (180 bytes) */
-void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-             double fparam_2)
-
+void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -892,10 +880,7 @@ void _glMap1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
 }
 
 /* _glMap2d @ 0x92f2eb00 (192 bytes) */
-void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-             double fparam_2,double fparam_3,double fparam_4)
-
+void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -912,10 +897,7 @@ void _glMap2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
 }
 
 /* _glMap2f @ 0x92f2ebc0 (192 bytes) */
-void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-             undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
-             double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
+void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -932,10 +914,7 @@ void _glMap2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined
 }
 
 /* _glMapGrid1d @ 0x92f2ec80 (156 bytes) */
-void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2)
-
+void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -954,10 +933,7 @@ void _glMapGrid1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 }
 
 /* _glMapGrid1f @ 0x92f2ed1c (156 bytes) */
-void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2)
-
+void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -976,10 +952,7 @@ void _glMapGrid1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 }
 
 /* _glMapGrid2d @ 0x92f2edb8 (160 bytes) */
-void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4)
-
+void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -996,10 +969,7 @@ void _glMapGrid2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undef
 }
 
 /* _glMapGrid2f @ 0x92f2ee58 (180 bytes) */
-void _glMapGrid2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4)
-
+void _glMapGrid2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1175,7 +1145,6 @@ int _glNormal3bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glNormal3d @ 0x92f2f224 (160 bytes) */
 void _glNormal3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1376,9 +1345,7 @@ int _glNormalPointer(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _glOrtho @ 0x92f2f658 (156 bytes) */
-void _glOrtho(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,
-             double fparam_6)
-
+void _glOrtho(double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6)
 {
   undefined *puVar1;
   undefined4 *puVar2;

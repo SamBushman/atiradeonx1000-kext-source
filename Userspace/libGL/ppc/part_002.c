@@ -106,7 +106,6 @@ int _glColor4bv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glColor4d @ 0x92f2b9fc (140 bytes) */
 void _glColor4d(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -590,7 +589,6 @@ int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, p
 
 /* _glDepthRange @ 0x92f2c4b0 (144 bytes) */
 void _glDepthRange(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -792,7 +790,6 @@ int _glEdgeFlagv(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glEvalCoord1d @ 0x92f2c8e4 (128 bytes) */
 void _glEvalCoord1d(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -838,7 +835,6 @@ int _glEvalCoord1dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glEvalCoord1f @ 0x92f2c9e0 (128 bytes) */
 void _glEvalCoord1f(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -884,7 +880,6 @@ int _glEvalCoord1fv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glEvalCoord2d @ 0x92f2cadc (144 bytes) */
 void _glEvalCoord2d(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -930,7 +925,6 @@ int _glEvalCoord2dv(param_1, param_2, param_3, param_4, param_5, param_6, param_
 
 /* _glEvalCoord2f @ 0x92f2cbe8 (144 bytes) */
 void _glEvalCoord2f(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

@@ -439,9 +439,7 @@ int _glDrawBuffers(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 }
 
 /* _glVertexAttrib1d @ 0x92f38444 (140 bytes) */
-void _glVertexAttrib1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glVertexAttrib1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -486,9 +484,7 @@ int _glVertexAttrib1dv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib1f @ 0x92f38554 (140 bytes) */
-void _glVertexAttrib1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glVertexAttrib1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -585,10 +581,7 @@ int _glVertexAttrib1sv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib2d @ 0x92f3876c (156 bytes) */
-void _glVertexAttrib2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2)
-
+void _glVertexAttrib2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -633,10 +626,7 @@ int _glVertexAttrib2dv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib2f @ 0x92f3888c (156 bytes) */
-void _glVertexAttrib2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2)
-
+void _glVertexAttrib2f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -733,10 +723,7 @@ int _glVertexAttrib2sv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib3d @ 0x92f38abc (172 bytes) */
-void _glVertexAttrib3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3)
-
+void _glVertexAttrib3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -781,10 +768,7 @@ int _glVertexAttrib3dv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib3f @ 0x92f38bec (172 bytes) */
-void _glVertexAttrib3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3)
-
+void _glVertexAttrib3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1089,10 +1073,7 @@ int _glVertexAttrib4bv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib4d @ 0x92f39268 (152 bytes) */
-void _glVertexAttrib4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3,double fparam_4)
-
+void _glVertexAttrib4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1135,10 +1116,7 @@ int _glVertexAttrib4dv(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _glVertexAttrib4f @ 0x92f39384 (172 bytes) */
-void _glVertexAttrib4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                      undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                      double fparam_2,double fparam_3,double fparam_4)
-
+void _glVertexAttrib4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;

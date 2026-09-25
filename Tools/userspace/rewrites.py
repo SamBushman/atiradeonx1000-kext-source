@@ -378,7 +378,10 @@ def mirror_frame(chunk):
     if not decls:
         return chunk, 0
     top = max(d['off'] for d in decls)                     # lowest address
-    total = max(top - d['off'] + d['size'] * d['n'] for d in decls)
+    # Ghidra's NN is the distance below the caller's 16-aligned r1 (TParseContext::error: acStack_210 is r1+0x40 of a 0x250 frame), so a variable's
+    # address is -NN mod 8: shift every offset by pad so the 8-aligned array keeps each variable's stock alignment (doubles, lwarx targets)
+    pad = (-top) % 8
+    total = max(top - d['off'] + d['size'] * d['n'] for d in decls) + pad
     nq = (total + 7) // 8
     first = True
     for d in sorted(decls, key=lambda d: -d['off']):
@@ -386,7 +389,7 @@ def mirror_frame(chunk):
         body = body.replace(d['line'] + '\n', (repl + '\n') if repl else '', 1)
         first = False
     for d in decls:
-        o = top - d['off']
+        o = top - d['off'] + pad
         t = d['ty'] if (d['ty'].endswith('*') or d['ty'] in SIGNED or d['ty'] in ('unsigned char', 'signed char', 'unsigned int', 'unsigned short', 'long long', 'unsigned long long', 'bool')) else ctype_of(d['ty']) if d['ty'] in SIZE_OF else d['ty']
         if d['arr']:
             ptr = '((%s *)((char *)ghidra_frame + %d))' % (t, o)
@@ -454,6 +457,31 @@ def fix_pointer_records(chunk):
     return head + body, blocks
 
 
+def rewrite_pair_results(chunk, ret64):
+    """Ghidra keeps the PowerPC register pair r3:r4 in one 64-bit local (`CONCAT44(r3, r4)`: r3 is the HIGH word) and assigns a call's result to it
+    directly: `uVar63 = yylex(...)`. The callee returns 32 bits in r3, so in C the token landed in the LOW word while the parser read it back from
+    the high one (`iVar46 = (int)(uVar63 >> 0x20)`) - the rebuilt GLSL parser saw end-of-input at the first token (issue #68). The result goes to
+    the high word; the low word is r4, which the call clobbers: it keeps its old value. Callees that really return 64 bits (`ret64`) are left
+    alone. Returns (chunk, number of assignments rewritten)."""
+    k = chunk.find('\n{')
+    if k < 0:
+        return chunk, 0
+    head, body = chunk[:k], chunk[k:]
+    v64 = set(re.findall(r'(?m)^\s+(?:ulonglong|longlong|undefined8|unsigned long long|long long)\s+(\w+);', body))
+    if not v64:
+        return chunk, 0
+    n = [0]
+    def repl(m):
+        v, call, fn = m.group(1), m.group(2), m.group(3) or m.group(4)
+        if fn in ret64 or fn.startswith(('CONCAT', 'GH_', 'SUB')):
+            return m.group(0)
+        n[0] += 1
+        return '%s = GH_PAIR_HI((%s), %s);' % (v, call, v)
+    pat = r'(?m)(?<![\w.])(%s) = ((?:\(\(\w[^()]*\(\*\)\(\)\)(\w+)\)|(\w+))\((?:[^;"]|"(?:[^"\\]|\\.)*")*\));' % '|'.join(sorted(map(re.escape, v64)))
+    body = re.sub(pat, repl, body)
+    return head + body, n[0]
+
+
 def rewrite_double_bits(text):
     """`(double)CONCAT44(hi, lo)` is Ghidra's rendering of building a double from two words (the int->double magic-number idiom, 0x43300000 in the high
     word): a bit-pattern reinterpretation. ghidra_c.h's CONCAT44 yields an integer, so the C cast converted it numerically (~4.5e18)."""
@@ -471,6 +499,14 @@ def rewrite_narrow_compares(text):
     for m in re.finditer(r'(?m)^\s+(?:byte|uchar|undefined1|char)\s+(bVar\d+|cVar\d+);', text):
         v = m.group(1)
         text, k = re.subn(r'(?<![\w.])%s - (0x[0-9a-f]+|\d+) < (0x[0-9a-f]+|\d+)' % v, r'(unsigned char)(%s - \1) < \2' % v, text)
+        n += k
+    # the same for halfwords: ParseOperand::IsMatrix is `uVar1 - 0x8b5a < 3` on a ushort GL type enum (stock: subfic/adde, an unsigned range test);
+    # promoted to int, every type below GL_FLOAT_MAT2 (vec4 = 0x8b52) compared as negative and counted as a matrix - the rebuilt GLSL compiler
+    # expanded `ftransform()` over four attribute registers (issue #68)
+    for m in re.finditer(r'(?m)^\s+(ushort|undefined2|word|short)\s+(\w+);', text):
+        v = m.group(2)
+        cast = 'short' if m.group(1) == 'short' else 'unsigned short'
+        text, k = re.subn(r'(?<![\w.])%s - (0x[0-9a-f]+|\d+) < (0x[0-9a-f]+|\d+)' % re.escape(v), r'(%s)(%s - \1) < \2' % (cast, v), text)
         n += k
     return text, n
 

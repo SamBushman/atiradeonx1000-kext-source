@@ -12,7 +12,6 @@ int _PPCConstantsAndScratchCreate()
 
 /* _PPCConstantsAndScratchInitialise @ 0x97be5700 (1196 bytes) */
 double _PPCConstantsAndScratchInitialise(undefined4 *param_1)
-
 {
   double dVar1;
   float fVar2;
@@ -207,11 +206,7 @@ int _PPEmulatorFramebufferFormat(param_1)
 }
 
 /* _PPEmulatorEmulateSingleOp @ 0x97be5be4 (8 bytes) */
-void _PPEmulatorEmulateSingleOp
-               (int param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,
-               double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-               double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
-
+void _PPEmulatorEmulateSingleOp(int param_1,undefined4 param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   ((int * (*)())_InterpreterEmulateOp)(*(undefined4 *)(param_1 + 0xdf0),param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
              fparam_6,fparam_7,fparam_8,fparam_9,fparam_10,fparam_11,fparam_12,fparam_13);
@@ -219,9 +214,12 @@ void _PPEmulatorEmulateSingleOp
 }
 
 /* _PPEmulatorRun @ 0x97be5bec (116 bytes) */
-int _PPEmulatorRun(param_1, param_2)
+int _PPEmulatorRun(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
 {
   int iVar1;
   code *UNRECOVERED_JUMPTABLE;
@@ -236,32 +234,37 @@ int _PPEmulatorRun(param_1, param_2)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+  (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,0x97be5bf8,param_1,param_2);
   return;
 }
 
 /* _PPEmulatorBuild @ 0x97be5c60 (576 bytes) */
-int _PPEmulatorBuild(param_1, param_2)
+int _PPEmulatorBuild(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   bool bVar1;
   undefined *puVar2;
   int iVar3;
   undefined4 uVar4;
   undefined4 uVar5;
+  int a6;
   code *UNRECOVERED_JUMPTABLE;
   uint uVar6;
   int iVar7;
   
   iVar7 = *(int *)(param_1 + 0xd80);
-  bVar1 = false;
+  a6 = 0;
   uVar6 = *(uint *)(iVar7 + 0x124);
   if (((*(int *)(iVar7 + 0x38) == 0x8804) || (*(int *)(iVar7 + 0x38) == 0x8b30)) &&
      ((double)*(float *)(*(int *)(param_1 + 0xda0) + 0xc) != DOUBLE_97c30a60)) {
-    bVar1 = true;
+    a6 = 1;
   }
-  bVar1 = !bVar1;
+  bVar1 = a6 == 0;
   if (bVar1) {
     if (*(int *)(iVar7 + 0x1c) != 0) {
       _glpDCBFree(*(int *)(iVar7 + 0x1c));
@@ -350,7 +353,7 @@ LAB_97be5e68:
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,param_2);
+  (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,param_6,a6);
   return;
 }
 
@@ -2793,7 +2796,6 @@ int _adjustAllocation_97be9cb4(param_1, param_2, param_3)
 
 /* _glpPPDisassemble @ 0x97be9d30 (27772 bytes) */
 double _glpPPDisassemble(uint *param_1)
-
 {
   bool bVar1;
   bool bVar2;

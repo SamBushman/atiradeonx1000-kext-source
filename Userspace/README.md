@@ -178,13 +178,28 @@ reaches - crashed it at one defect after another. Each was traced to a CLASS and
     stock offsets, so records of any member type (a std::vector's three pointers, a TParseContext) and overlapping buffers keep the stock layout
     (glprog: 376 functions). The address-of test no longer misses a casted `(T *)&x`. The older byte-buffer / struct-block passes remain for functions
     with a struct-typed frame variable.
+  * **r3:r4 pair variables**: Ghidra keeps the register pair in one 64-bit local with r3 as the HIGH word and assigns a 32-bit call result to it
+    directly (`uVar63 = yylex(...)`); the token landed in the low word and the GLSL parser read end-of-input at the first token. `rewrite_pair_results`
+    puts the result in the high word (61 glprog, 85 GLDriver sites).
+  * **string literals used with arithmetic** were Ghidra-typed strings standing for a number or an address: a struct offset 0x2d48 that equals a code
+    address in GLDriver (`*(short *)("}J3x..." + p)`, 76 sites), part of the parser's `yyr1` table in glprog (the goto state after every reduction
+    was read from a copy of the literal). `fix_string_arith` restores the number (an image address is then symbolised).
+  * **external relocations in a prebound image** (glprog) store the symbol's resolved address, not an addend: `sym + word` put
+    `compileNode + 0x97bbe7f0` into TIntermBinary's vtable; the addend is now word minus the symbol's address (20 glprog words; GLDriver is not
+    prebound and keeps its real addends, the typeinfo vtable + 8).
+  * `CONCATnn(in_register_x, param)` (a halfword parameter plus the rest of its register) is the parameter itself (48 glprog sites); a table base Ghidra
+    folded below the data (`*(i*4 + -0x584a7114)`, GL type enums as index) is anchored to the next section's first object.
+  * halfword range tests `uVar - 0x8b5a < 3` (ParseOperand::IsMatrix) compare unsigned in 16 bits like the stock `subfic/adde`; promoted to int every GL
+    vector type counted as a matrix (1 glprog, 3 GLDriver sites).
+  * `mirror_frame` keeps each variable's stock alignment (Ghidra's frame offsets are measured from the caller's 16-aligned r1).
 * decompile (Stage B3, `Tools/userspace/pipeline/README.md`): seven constant-index switches never transcribed (`TParseContext::error` jumped into the
   stock table); 39 functions printed `void` whose callers read their r3 result; 46 variadic calls missing arguments; by-value iterator/tag
   parameters that made the decompiler misattribute call arguments (42 functions carried Ghidra's own "Heritage AFTER dead removal" warning, now 0).
 
-State of the probe (`probe3`): `ShInitialize` (built-in symbol table: the whole built-in GLSL source parsed) and `ShConstructCompiler` succeed;
-`ShCompile` runs into `TParseContext::insertBuiltInArrayAtGlobalLevel` and then finds a corrupted node-allocator free list (a use-after-free still
-to be found). The behavioural tests of the table above still pass on the new link.
+State of the GLSL probe (`Tests/userspace/glsl_probe.c`, 2026-09-25): the rebuilt image compiles `void main() { gl_Position = ftransform(); }` end to end
+(built-in symbol table, parse, identical intermediate tree, code generation) and prints the same ARB program as the stock except one line: the
+stock declares `TEMP scratch;`, the rebuilt does not (under investigation: the code that writes it is not in any decompile). The behavioural tests of the
+table above still pass on the new link.
 
 ### Known residuals (explained, not hidden)
 

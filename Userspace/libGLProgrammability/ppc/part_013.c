@@ -4,7 +4,7 @@
 int __ZN17TPPStreamCompilerD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this);
+  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,2);
   return;
 }
 
@@ -12,19 +12,19 @@ int __ZN17TPPStreamCompilerD1Ev(this)
 int __ZN17TPPStreamCompilerD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this);
+  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,3);
   return;
 }
 
 /* __ZN17TPPStreamCompilerD4Ev @ 0x97bc97ec (536 bytes) */
-int __ZN17TPPStreamCompilerD4Ev(this)
+int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   void *this;
+  uint param_2;
 {
   int iVar1;
   int *piVar2;
   int iVar3;
   int iVar4;
-  uint in_r4;
   void *pvVar5;
   char in_RESERVE;
   byte in_cr0;
@@ -109,7 +109,7 @@ int __ZN17TPPStreamCompilerD4Ev(this)
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
   __ZN14TPoolAllocatorD1Ev((void *)((int)this + 0x10));
   *(undefined ***)this = &PTR___ZN13TShHandleBaseD1Ev_a7b7d898;
-  if ((in_r4 & 1) != 0) {
+  if ((param_2 & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -516,7 +516,7 @@ int DeleteCompiler(param_1)
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 4))();
+  (**(code **)(*(int *)param_1 + 4))(param_1);
   return;
 }
 
@@ -2114,7 +2114,7 @@ int GetChunkForSymbol(param_1, param_2)
   pvVar8 = *(void **)(param_1 + 0x14);
   if (((pvVar8 == (void *)0x0) || (iVar4 = _memcmp(pvVar8,"gl_",3), iVar4 != 0)) ||
      (*(char *)((int)pvVar8 + 3) == '_')) {
-    uVar6 = (**(code **)(**(int **)(param_1 + 0xc) + 0x24))();
+    uVar6 = (**(code **)(**(int **)(param_1 + 0xc) + 0x24))(*(int **)(param_1 + 0xc));
     switch(uVar6) {
     case 0:
     case 1:
@@ -2134,7 +2134,7 @@ int GetChunkForSymbol(param_1, param_2)
     case 6:
       pbVar5 = (byte *)_PPStreamChunkCreateWithType(3,0);
       *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xffe0ffff | 0x10000;
-      iVar4 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))();
+      iVar4 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))(*(int **)(param_1 + 0xc));
       *(uint *)(pbVar5 + 0x10) =
            (uint)(iVar4 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
       break;
@@ -2151,18 +2151,18 @@ int GetChunkForSymbol(param_1, param_2)
   bVar2 = *pbVar5;
   if (bVar2 == 2) {
 LAB_97bcc864:
-    uVar7 = GetPPStreamTypeForGLType(*(ushort *)(param_1 + 0x2c));
+    uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
     *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-    iVar4 = GetScalerWidthForType(*(ushort *)(param_1 + 0x2c));
+    iVar4 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
     uVar7 = (iVar4 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
     *(uint *)(pbVar5 + 0xc) = uVar7;
   }
   else if (bVar2 < 3) {
     if (bVar2 == 0) {
-      uVar7 = GetPPStreamTypeForGLType(*(ushort *)(param_1 + 0x2c));
+      uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
       *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-      iVar4 = GetScalerWidthForType(*(ushort *)(param_1 + 0x2c));
+      iVar4 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
       uVar7 = (iVar4 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
@@ -2371,11 +2371,9 @@ int FunctionTable__removeFunction(this, param_2)
 int FunctionTable__setReturnVal(this, param_2, param_3)
   unsigned char * this;
   int param_2;
-  int param_3;
+  undefined4 param_3;
 {
-  undefined3 in_register_00000014;
-  
-  *(uint *)(param_2 * 0x18 + *(int *)this + 4) = CONCAT31(in_register_00000014,param_3);
+  *(undefined4 *)(param_2 * 0x18 + *(int *)this + 4) = param_3;
   return;
 }
 
@@ -2383,11 +2381,9 @@ int FunctionTable__setReturnVal(this, param_2, param_3)
 int FunctionTable__setEmpty(this, param_2, param_3)
   unsigned char * this;
   int param_2;
-  int param_3;
+  undefined4 param_3;
 {
-  undefined3 in_register_00000014;
-  
-  *(uint *)(param_2 * 0x18 + *(int *)this + 8) = CONCAT31(in_register_00000014,param_3);
+  *(undefined4 *)(param_2 * 0x18 + *(int *)this + 8) = param_3;
   return;
 }
 
@@ -2997,12 +2993,7 @@ LAB_97bcd680:
 }
 
 /* _InterpreterLoadSource @ 0x97bcd924 (796 bytes) */
-double _InterpreterLoadSource
-               (int *param_1,int *param_2,int param_3,uint param_4,undefined4 param_5,
-               undefined4 param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,
-               double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,
-               double fparam_8,double fparam_9,double fparam_10,double fparam_11)
-
+double _InterpreterLoadSource(int *param_1,int *param_2,int param_3,uint param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,uint param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11)
 {
   float fVar1;
   float fVar2;
@@ -3157,11 +3148,7 @@ int _InterpreterTestCR(param_1, param_2, param_3, param_4, param_5, param_6, par
 }
 
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
-int * _InterpreterEmulateOp
-                (int *param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,
-                double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
-
+int * _InterpreterEmulateOp(int *param_1,int *param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float *pfVar1;
   float *pfVar2;
@@ -5517,11 +5504,7 @@ int _InterpreterWriteFinalFragmentToBuffer(param_1, param_2, param_3, param_4, p
 }
 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
-void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,
-                    double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,
-                    double fparam_9,double fparam_10,double fparam_11,double fparam_12,
-                    double fparam_13)
-
+void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   bool bVar1;
   float fVar2;

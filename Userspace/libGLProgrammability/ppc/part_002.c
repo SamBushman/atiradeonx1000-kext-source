@@ -243,10 +243,17 @@ int _FreeCPP()
 }
 
 /* _FinalCPP @ 0x97b863e0 (84 bytes) */
-int _FinalCPP()
+int _FinalCPP(param_1, param_2, param_3, param_4, param_5, param_6)
+  undefined4 param_1;
+  undefined4 param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   if (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x34) != 0) {
-    _CPPErrorToInfoLog("#if mismatch");
+    _CPPErrorToInfoLog("#if mismatch",param_2,param_3,param_4,param_5,param_6,
+                       *(int *)PTR__cpp_a7b7c0a4);
   }
   return 1;
 }
@@ -259,6 +266,15 @@ int _CPPdefine(param_1)
   int iVar2;
   undefined4 uVar3;
   int iVar4;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
+  int *in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  int in_r8;
+  int in_r9;
   int iVar5;
   int *piVar6;
   int iVar7;
@@ -278,6 +294,7 @@ int _CPPdefine(param_1)
   local_48 = 0;
   iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
+  uVar3 = extraout_r4;
   if (iVar2 == 0x10e) {
     iVar5 = param_1[2];
     iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
@@ -289,6 +306,7 @@ int _CPPdefine(param_1)
         iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                           (*(int *)(*(int *)puVar1 + 0x20),param_1);
         if ((iVar8 == 0) && (iVar2 == 0x29)) goto LAB_97b86554;
+        uVar3 = extraout_r4_00;
         if (iVar2 != 0x10e) goto LAB_97b86774;
         if (iVar8 < 0x40) {
           iVar8 = iVar8 + 1;
@@ -298,13 +316,16 @@ int _CPPdefine(param_1)
         iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                           (*(int *)(*(int *)puVar1 + 0x20),param_1);
       } while (iVar2 == 0x2c);
+      uVar3 = extraout_r4_01;
       if (iVar2 != 0x29) goto LAB_97b86774;
 LAB_97b86554:
+      in_r5 = (int *)(iVar8 << 2);
       local_50 = iVar8;
-      local_4c = (void *)((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),iVar8 << 2);
-      _memcpy(local_4c,local_150,iVar8 << 2);
-      iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                        (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
+      local_4c = (void *)((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),in_r5);
+      _memcpy(local_4c,local_150,(size_t)in_r5);
+      in_r9 = *(int *)PTR__cpp_a7b7c0a4;
+      iVar2 = (**(code **)(*(int *)(in_r9 + 0x20) + 4))
+                        (*(int *)(in_r9 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
     uVar3 = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,iVar5);
     local_48 = _NewTokenStream(uVar3,*(undefined4 *)(_macros + 0x10));
@@ -321,6 +342,7 @@ LAB_97b86554:
           _RecordToken(local_48,0x5c,param_1);
         }
       }
+      in_r5 = param_1;
       _RecordToken(local_48,iVar2,param_1);
       iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_1);
@@ -335,9 +357,10 @@ LAB_97b86554:
       if (*(int *)(iVar8 + 0x18) == local_50) {
         iVar2 = 0;
         if (0 < local_50) {
+          in_r8 = *(int *)(iVar8 + 0x1c);
           do {
-            if (*(int *)(iVar2 * 4 + *(int *)(iVar8 + 0x1c)) != *(int *)(iVar2 * 4 + (int)local_4c))
-            goto LAB_97b86728;
+            in_r9 = *(int *)(iVar2 * 4 + (int)local_4c);
+            if (*(int *)(iVar2 * 4 + in_r8) != in_r9) goto LAB_97b86728;
             iVar2 = iVar2 + 1;
           } while (iVar2 < local_50);
         }
@@ -357,7 +380,7 @@ LAB_97b86728:
         _StoreStr(uVar3);
         uVar3 = _GetStrfromTStr();
         _DecLineNumber();
-        _CPPShInfoLogMsg(uVar3);
+        _CPPShInfoLogMsg(uVar3,extraout_r4_02,in_r5,in_r6,in_r7,in_r8,in_r9);
         _IncLineNumber();
         _ResetTString();
       }
@@ -370,7 +393,7 @@ LAB_97b86728:
   }
   else {
 LAB_97b86774:
-    _CPPErrorToInfoLog("#define");
+    _CPPErrorToInfoLog("#define",uVar3,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar2;
 }
@@ -381,15 +404,24 @@ int _CPPundef(param_1)
 {
   undefined *puVar1;
   int iVar2;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 uVar3;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
   if (iVar2 == 10) {
-    _CPPErrorToInfoLog("#undef");
+    _CPPErrorToInfoLog("#undef",extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
     iVar2 = 10;
   }
   else {
+    uVar3 = extraout_r4;
     if (iVar2 == 0x10e) {
       iVar2 = _LookUpSymbol(_macros,*(undefined4 *)(param_1 + 8));
       if (iVar2 != 0) {
@@ -397,28 +429,36 @@ int _CPPundef(param_1)
       }
       iVar2 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_1);
+      uVar3 = extraout_r4_00;
       if (iVar2 == 10) {
         return 10;
       }
     }
-    _CPPErrorToInfoLog("#undef");
+    _CPPErrorToInfoLog("#undef",uVar3,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar2;
 }
 
 /* _CPPelse @ 0x97b868b0 (740 bytes) */
-int _CPPelse(param_1, param_2)
+int _CPPelse(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   int param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
+  int param_7;
 {
   undefined *puVar1;
   int iVar2;
   int iVar3;
+  undefined4 extraout_r4;
   int iVar4;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar4 = 0;
-  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))();
+  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20));
   do {
     while( true ) {
       while( true ) {
@@ -443,7 +483,8 @@ int _CPPelse(param_1, param_2)
           if (((iVar2 != _ifAtom) && (iVar2 != _ifdefAtom)) && (iVar2 != _ifndefAtom)) break;
           iVar4 = iVar4 + 1;
           *(int *)(*(int *)puVar1 + 0x34) = *(int *)(*(int *)puVar1 + 0x34) + 1;
-          *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + 1;
+          param_7 = *(int *)puVar1;
+          *(int *)(param_7 + 0x138) = *(int *)(param_7 + 0x138) + 1;
         }
         if (iVar2 != _endifAtom) break;
         iVar4 = iVar4 + -1;
@@ -458,17 +499,20 @@ int _CPPelse(param_1, param_2)
           return 0x10e;
         }
         *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + -1;
-        *(int *)(*(int *)puVar1 + 0x34) = *(int *)(*(int *)puVar1 + 0x34) + -1;
+        param_7 = *(int *)puVar1;
+        *(int *)(param_7 + 0x34) = *(int *)(param_7 + 0x34) + -1;
       }
       if ((param_1 != 0) && (iVar4 == 0)) break;
       if ((iVar2 == _elseAtom) && (iVar2 = ((int (*)())_ChkCorrectElseNesting)(), iVar2 == 0)) {
-        _CPPErrorToInfoLog("#else after a #else");
+        _CPPErrorToInfoLog("#else after a #else",extraout_r4,param_3,param_4,param_5,param_6,param_7
+                          );
         *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
       }
     }
     if (iVar2 == _elseAtom) {
       iVar4 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
-                        (*(int *)(*(int *)puVar1 + 0x20),param_2);
+                        (*(int *)(*(int *)puVar1 + 0x20),param_2,param_3,param_4,param_5,param_6,
+                         param_7);
       if (iVar4 == 10) {
         return 10;
       }
@@ -655,109 +699,143 @@ int _eval(param_1, param_2, param_3, param_4, param_5)
   undefined *puVar2;
   int iVar3;
   int iVar4;
-  int *piVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  int iVar5;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  int extraout_r4_02;
+  undefined4 *a2;
+  undefined4 *a4;
+  undefined4 in_r8;
+  int in_r9;
+  int *piVar6;
+  int *piVar7;
+  undefined4 a0;
+  undefined4 uVar8;
+  undefined8 uVar9;
+  undefined8 uVar10;
   
-  while (piVar5 = (int *)PTR__cpp_a7b7c0a4, param_1 == 0x10e) {
+  iVar5 = param_2;
+  a2 = param_3;
+  piVar6 = param_4;
+  a4 = param_5;
+  while( true ) {
+    piVar7 = (int *)PTR__cpp_a7b7c0a4;
+    uVar10 = CONCAT44(param_1,iVar5);
+    if (param_1 != 0x10e) break;
     if (param_5[2] == _definedAtom) {
-      param_1 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                          (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_5);
-      bVar1 = param_1 == 0x28;
+      iVar5 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                        (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_5);
+      bVar1 = iVar5 == 0x28;
+      uVar8 = extraout_r4;
       if (bVar1) {
-        param_1 = (**(code **)(*(int *)(*piVar5 + 0x20) + 4))(*(int *)(*piVar5 + 0x20),param_5);
+        iVar5 = (**(code **)(*(int *)(*piVar7 + 0x20) + 4))(*(int *)(*piVar7 + 0x20),param_5);
+        uVar8 = extraout_r4_00;
       }
-      if (param_1 != 0x10e) goto LAB_97b86fdc;
-      uVar7 = 0;
-      iVar4 = _LookUpSymbol(_macros,param_5[2]);
-      piVar5 = (int *)PTR__cpp_a7b7c0a4;
-      if ((iVar4 != 0) && ((*(uint *)(iVar4 + 0x24) & 0x40000000) == 0)) {
-        uVar7 = 1;
+      uVar10 = CONCAT44(iVar5,uVar8);
+      if (iVar5 != 0x10e) goto LAB_97b86fdc;
+      uVar8 = 0;
+      iVar5 = _LookUpSymbol(_macros,param_5[2]);
+      piVar7 = (int *)PTR__cpp_a7b7c0a4;
+      if ((iVar5 != 0) && ((*(uint *)(iVar5 + 0x24) & 0x40000000) == 0)) {
+        uVar8 = 1;
       }
-      *param_3 = uVar7;
-      param_1 = (**(code **)(*(int *)(*piVar5 + 0x20) + 4))(*(int *)(*piVar5 + 0x20),param_5);
+      *param_3 = uVar8;
+      iVar5 = (**(code **)(*(int *)(*piVar7 + 0x20) + 4))(*(int *)(*piVar7 + 0x20),param_5);
+      uVar10 = CONCAT44(iVar5,extraout_r4_01);
       if (!bVar1) goto LAB_97b86f0c;
       goto LAB_97b86e70;
     }
-    iVar4 = ((int (*)())_MacroExpand)(param_5[2],param_5);
-    if (iVar4 == 0) goto LAB_97b86fdc;
-    param_1 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                        (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_5);
+    uVar9 = ((int (*)())_MacroExpand)(param_5[2],param_5);
+    uVar10 = CONCAT44(0x10e,(int)uVar9);
+    if ((int)((ulonglong)uVar9 >> 0x20) == 0) goto LAB_97b86fdc;
+    in_r9 = *(int *)PTR__cpp_a7b7c0a4;
+    param_1 = (**(code **)(*(int *)(in_r9 + 0x20) + 4))
+                        (*(int *)(in_r9 + 0x20),param_5,a2,piVar6,a4,in_r8,in_r9);
+    iVar5 = extraout_r4_02;
   }
   if (param_1 == 0x10f) {
     *param_3 = *param_5;
-    iVar4 = *(int *)(*piVar5 + 0x20);
+    in_r9 = *piVar7;
+    iVar5 = *(int *)(in_r9 + 0x20);
 LAB_97b86e10:
-    param_1 = (**(code **)(iVar4 + 4))(iVar4,param_5);
+    iVar5 = (**(code **)(iVar5 + 4))(iVar5,param_5,a2,piVar6,a4,in_r8,in_r9);
 LAB_97b86f0c:
-    iVar4 = *param_4;
+    iVar3 = *param_4;
 LAB_97b86f10:
     puVar2 = PTR__cpp_a7b7c0a4;
-    if (iVar4 == 0) {
-      while ((param_1 != 0x29 && (param_1 != 10))) {
-        iVar4 = 0x11;
-        piVar5 = &DAT_a7b7cf14;
-        while (iVar3 = *piVar5, piVar5 = piVar5 + -3, iVar3 != param_1) {
-          iVar4 = iVar4 + -1;
-          if (iVar4 < 0) {
-            return param_1;
+    if (iVar3 == 0) {
+      while ((iVar5 != 0x29 && (iVar5 != 10))) {
+        iVar3 = 0x11;
+        piVar6 = &DAT_a7b7cf14;
+        while (iVar4 = *piVar6, piVar6 = piVar6 + -3, iVar4 != iVar5) {
+          iVar3 = iVar3 + -1;
+          if (iVar3 < 0) {
+            return iVar5;
           }
         }
-        if (iVar4 < 0) {
-          return param_1;
+        if (iVar3 < 0) {
+          return iVar5;
         }
-        iVar3 = *(int *)(&UNK_a7b7ce4c + iVar4 * 0xc);
-        if (iVar3 <= param_2) {
-          return param_1;
+        iVar4 = *(int *)(&UNK_a7b7ce4c + iVar3 * 0xc);
+        if (iVar4 <= param_2) {
+          return iVar5;
         }
-        uVar6 = *param_3;
-        uVar7 = (**(code **)(*(int *)(*(int *)puVar2 + 0x20) + 4))
+        a0 = *param_3;
+        uVar8 = (**(code **)(*(int *)(*(int *)puVar2 + 0x20) + 4))
                           (*(int *)(*(int *)puVar2 + 0x20),param_5);
-        param_1 = ((int (*)())_eval)(uVar7,iVar3,param_3,param_4,param_5);
-        uVar7 = (**(code **)(&UNK_a7b7ce50 + iVar4 * 0xc))(uVar6,*param_3);
-        *param_3 = uVar7;
+        iVar5 = ((int (*)())_eval)(uVar8,iVar4,param_3,param_4,param_5);
+        uVar8 = (**(code **)(&UNK_a7b7ce50 + iVar3 * 0xc))(a0,*param_3);
+        *param_3 = uVar8;
         if (*param_4 != 0) {
-          return param_1;
+          return iVar5;
         }
       }
     }
   }
   else {
     if (param_1 == 0x28) {
-      uVar7 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+      uVar8 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                         (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_5);
-      param_1 = ((int (*)())_eval)(uVar7,0,param_3,param_4,param_5);
-      iVar4 = *param_4;
-      if (iVar4 != 0) goto LAB_97b86f10;
+      a2 = param_3;
+      piVar6 = param_4;
+      a4 = param_5;
+      uVar10 = ((int (*)())_eval)(uVar8,0,param_3,param_4,param_5);
+      iVar5 = (int)((ulonglong)uVar10 >> 0x20);
+      iVar3 = *param_4;
+      if (iVar3 != 0) goto LAB_97b86f10;
 LAB_97b86e70:
-      if (param_1 == 0x29) {
-        iVar4 = *(int *)(*piVar5 + 0x20);
+      if ((int)((ulonglong)uVar10 >> 0x20) == 0x29) {
+        iVar5 = *(int *)(*piVar7 + 0x20);
         goto LAB_97b86e10;
       }
     }
     else {
-      iVar4 = 3;
+      iVar3 = 3;
       do {
-        if (*(int *)(&_unop + iVar4 * 8) == param_1) {
-          if (-1 < iVar4) {
-            uVar7 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                              (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_5);
-            param_1 = ((int (*)())_eval)(uVar7,0xc,param_3,param_4,param_5);
-            uVar7 = (**(code **)(&UNK_a7b7cf24 + iVar4 * 8))(*param_3);
-            *param_3 = uVar7;
+        if (*(int *)(&_unop + iVar3 * 8) == param_1) {
+          uVar10 = CONCAT44(param_1,iVar5);
+          if (-1 < iVar3) {
+            iVar5 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
+            uVar8 = (**(code **)(iVar5 + 4))
+                              (iVar5,param_5,a2,piVar6,a4,in_r8,*(int *)PTR__cpp_a7b7c0a4);
+            iVar5 = ((int (*)())_eval)(uVar8,0xc,param_3,param_4,param_5);
+            uVar8 = (**(code **)(&UNK_a7b7cf24 + iVar3 * 8))(*param_3);
+            *param_3 = uVar8;
             goto LAB_97b86f0c;
           }
           break;
         }
-        iVar4 = iVar4 + -1;
-      } while (-1 < iVar4);
+        iVar3 = iVar3 + -1;
+      } while (-1 < iVar3);
     }
 LAB_97b86fdc:
-    _CPPErrorToInfoLog("incorrect preprocessor directive");
+    iVar5 = (int)((ulonglong)uVar10 >> 0x20);
+    _CPPErrorToInfoLog("incorrect preprocessor directive",(int)uVar10,a2,piVar6,a4,in_r8,in_r9);
     *param_4 = 1;
     *param_3 = 0;
   }
-  return param_1;
+  return iVar5;
 }
 
 /* _CPPif @ 0x97b87010 (308 bytes) */
@@ -767,6 +845,15 @@ int _CPPif(param_1)
   undefined *puVar1;
   int iVar2;
   undefined4 uVar3;
+  undefined4 extraout_r4;
+  undefined4 in_r5;
+  int *piVar4;
+  undefined4 in_r6;
+  int *piVar5;
+  undefined4 in_r7;
+  undefined4 uVar6;
+  undefined4 in_r8;
+  undefined4 *puVar7;
   int local_20;
   int local_1c [4];
   
@@ -776,17 +863,22 @@ int _CPPif(param_1)
   local_1c[0] = 0;
   local_20 = 0;
   *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + 1;
-  iVar2 = *(int *)(*(int *)puVar1 + 0x34) + 1;
-  *(int *)(*(int *)puVar1 + 0x34) = iVar2;
-  if (iVar2 == 1) {
+  puVar7 = *(undefined4 **)puVar1;
+  iVar2 = puVar7[0xd];
+  puVar7[0xd] = iVar2 + 1;
+  if (iVar2 + 1 == 1) {
     iVar2 = *(int *)puVar1;
-    _ifloc = **(undefined4 **)(iVar2 + 0x18);
+    puVar7 = *(undefined4 **)(iVar2 + 0x18);
+    _ifloc = *puVar7;
   }
   else {
     iVar2 = *(int *)puVar1;
   }
   if (*(int *)(iVar2 + 0x34) < 0x41) {
-    iVar2 = ((int (*)())_eval)(uVar3,0,&local_20,local_1c,param_1);
+    piVar4 = &local_20;
+    piVar5 = local_1c;
+    uVar6 = param_1;
+    iVar2 = ((int (*)())_eval)(uVar3,0,piVar4,piVar5,param_1);
     if (iVar2 != 10) {
       _CPPWarningToInfoLog
                 ("unexpected tokens following the preprocessor directive - expected a newline");
@@ -797,11 +889,11 @@ int _CPPif(param_1)
       } while (iVar2 != 10);
     }
     if ((local_20 == 0) && (local_1c[0] == 0)) {
-      iVar2 = ((int (*)())_CPPelse)(1,param_1);
+      iVar2 = ((int (*)())_CPPelse)(1,param_1,piVar4,piVar5,uVar6,in_r8,puVar7);
     }
   }
   else {
-    _CPPErrorToInfoLog("max #if nesting depth exceeded");
+    _CPPErrorToInfoLog("max #if nesting depth exceeded",extraout_r4,in_r5,in_r6,in_r7,in_r8,puVar7);
     iVar2 = 0;
   }
   return iVar2;
@@ -815,53 +907,61 @@ int _CPPifdef(param_1, param_2)
   undefined *puVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
-  char *pcVar5;
-  undefined4 uVar6;
+  char *pcVar4;
+  undefined4 uVar5;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  int iVar6;
+  uint uVar7;
   
   puVar1 = PTR__cpp_a7b7c0a4;
-  iVar4 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))();
-  uVar6 = *(undefined4 *)(param_2 + 8);
-  iVar2 = *(int *)(*(int *)puVar1 + 0x34) + 1;
-  *(int *)(*(int *)puVar1 + 0x34) = iVar2;
+  iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20));
+  iVar6 = *(int *)puVar1;
+  uVar5 = *(undefined4 *)(param_2 + 8);
+  iVar2 = *(int *)(iVar6 + 0x34) + 1;
+  *(int *)(iVar6 + 0x34) = iVar2;
   if (iVar2 < 0x41) {
-    *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + 1;
-    if (iVar4 == 0x10e) {
-      iVar2 = _LookUpSymbol(_macros,uVar6);
-      iVar4 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
+    uVar7 = *(int *)(*(int *)puVar1 + 0x138) + 1;
+    *(uint *)(*(int *)puVar1 + 0x138) = uVar7;
+    if (iVar3 == 0x10e) {
+      iVar2 = _LookUpSymbol(_macros,uVar5);
+      iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_2);
-      if (iVar4 != 10) {
+      if (iVar3 != 10) {
         _CPPWarningToInfoLog
                   ("unexpected tokens following #ifdef preprocessor directive - expected a newline")
         ;
         do {
-          iVar4 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
+          iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                             (*(int *)(*(int *)puVar1 + 0x20),param_2);
-        } while (iVar4 != 10);
+        } while (iVar3 != 10);
       }
-      iVar3 = 0;
-      if ((iVar2 != 0) && ((*(uint *)(iVar2 + 0x24) & 0x40000000) == 0)) {
-        iVar3 = 1;
+      iVar6 = 0;
+      if ((iVar2 != 0) && (uVar7 = *(uint *)(iVar2 + 0x24) & 0x40000000, uVar7 == 0)) {
+        iVar6 = 1;
       }
-      if (iVar3 != param_1) {
-        iVar4 = ((int (*)())_CPPelse)(1,param_2);
+      if (iVar6 != param_1) {
+        iVar3 = ((int (*)())_CPPelse)(1,param_2,in_r5,in_r6,in_r7,in_r8,uVar7);
       }
     }
     else {
       if (param_1 == 0) {
-        pcVar5 = "ifndef";
+        pcVar4 = "ifndef";
       }
       else {
-        pcVar5 = "ifdef";
+        pcVar4 = "ifdef";
       }
-      _CPPErrorToInfoLog(pcVar5);
+      _CPPErrorToInfoLog(pcVar4,uVar5,in_r5,in_r6,in_r7,in_r8,uVar7);
     }
   }
   else {
-    _CPPErrorToInfoLog("max #if nesting depth exceeded");
-    iVar4 = 0;
+    _CPPErrorToInfoLog("max #if nesting depth exceeded",uVar5,in_r5,in_r6,in_r7,in_r8,iVar6);
+    iVar3 = 0;
   }
-  return iVar4;
+  return iVar3;
 }
 
 /* _CPPline @ 0x97b872a0 (268 bytes) */
@@ -871,17 +971,28 @@ int _CPPline(param_1)
   undefined *puVar1;
   int iVar2;
   int iVar3;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
+  undefined4 uVar4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
   if (iVar2 == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#line");
+    _CPPErrorToInfoLog("#line",extraout_r4_00,in_r5,in_r6,in_r7,in_r8,in_r9);
     _IncLineNumber();
     iVar2 = 10;
   }
   else {
+    uVar4 = extraout_r4;
     if (iVar2 == 0x10f) {
       iVar2 = _atoi((char *)(param_1 + 3));
       *param_1 = iVar2;
@@ -895,15 +1006,17 @@ int _CPPline(param_1)
         iVar2 = *(int *)(*(int *)puVar1 + 0x20);
         iVar3 = (**(code **)(iVar2 + 4))(iVar2,param_1);
         iVar2 = iVar3;
+        uVar4 = extraout_r4_02;
       }
       else {
         iVar3 = 10;
+        uVar4 = extraout_r4_01;
       }
       if (iVar2 == 10) {
         return iVar3;
       }
     }
-    _CPPErrorToInfoLog("#line");
+    _CPPErrorToInfoLog("#line",uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar2;
 }
@@ -916,6 +1029,12 @@ int _CPPerror(param_1)
   undefined *puVar2;
   int iVar3;
   undefined4 uVar4;
+  undefined4 extraout_r4;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
@@ -937,7 +1056,7 @@ int _CPPerror(param_1)
   }
   _DecLineNumber();
   uVar4 = _GetStrfromTStr();
-  _CPPShInfoLogMsg(uVar4);
+  _CPPShInfoLogMsg(uVar4,extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
   _ResetTString();
   *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x140) = 1;
   _IncLineNumber();
@@ -955,81 +1074,95 @@ int _CPPpragma(param_1)
   undefined4 *puVar5;
   size_t sVar6;
   char *pcVar7;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   int iVar8;
   int iVar9;
-  char *pcVar10;
-  undefined4 *puVar11;
-  int iVar12;
+  int iVar10;
+  char *pcVar11;
+  undefined4 *puVar12;
+  int iVar13;
   undefined2 local_40 [10];
   
-  iVar12 = 0;
-  uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
+  iVar8 = *(int *)PTR__cpp_a7b7c0a4;
+  iVar13 = 0;
+  uVar3 = (**(code **)(*(int *)(iVar8 + 0x20) + 4))
+                    (*(int *)(iVar8 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,iVar8);
   if (uVar3 == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#pragma");
+    _CPPErrorToInfoLog("#pragma",extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar8);
     _IncLineNumber();
     uVar4 = 10;
   }
   else {
     puVar5 = _malloc(0x28);
     puVar2 = PTR__atable_a7b7c0ac;
-    iVar8 = 10;
+    uVar4 = extraout_r4_00;
+    iVar9 = 10;
     do {
-      iVar9 = iVar8;
-      if (iVar8 <= iVar12) {
-        iVar9 = iVar8 << 1;
-        puVar5 = _realloc(puVar5,iVar8 << 3);
+      iVar10 = iVar9;
+      if (iVar9 <= iVar13) {
+        iVar10 = iVar9 << 1;
+        puVar5 = _realloc(puVar5,iVar9 << 3);
+        uVar4 = extraout_r4_01;
       }
       if (uVar3 == 0x10b) {
 LAB_97b8758c:
-        pcVar10 = (char *)(param_1 + 0xc);
-        sVar6 = _strlen(pcVar10);
+        pcVar11 = (char *)(param_1 + 0xc);
+        sVar6 = _strlen(pcVar11);
         pcVar7 = _malloc(sVar6 + 1);
-        puVar5[iVar12] = pcVar7;
+        puVar5[iVar13] = pcVar7;
       }
       else {
         if ((int)uVar3 < 0x10c) {
           if (uVar3 == 0xffffffff) {
-            _CPPShInfoLogMsg("#pragma directive must end with a newline");
+            _CPPShInfoLogMsg("#pragma directive must end with a newline",uVar4,in_r5,in_r6,in_r7,
+                             in_r8,iVar8);
             return 0xffffffff;
           }
         }
         else {
           if (uVar3 == 0x10e) {
-            pcVar10 = (char *)_GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-            sVar6 = _strlen(pcVar10);
+            pcVar11 = (char *)_GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
+            sVar6 = _strlen(pcVar11);
             pcVar7 = _malloc(sVar6 + 1);
-            puVar5[iVar12] = pcVar7;
+            puVar5[iVar13] = pcVar7;
             goto LAB_97b875f0;
           }
           if (uVar3 == 0x10f) goto LAB_97b8758c;
         }
         local_40[0] = (undefined2)((uVar3 & 0xff) << 8);
         pcVar7 = _malloc(2);
-        puVar5[iVar12] = pcVar7;
-        pcVar10 = (char *)local_40;
+        puVar5[iVar13] = pcVar7;
+        pcVar11 = (char *)local_40;
       }
 LAB_97b875f0:
-      iVar12 = iVar12 + 1;
-      _strcpy(pcVar7,pcVar10);
+      iVar13 = iVar13 + 1;
+      _strcpy(pcVar7,pcVar11);
       puVar1 = PTR__cpp_a7b7c0a4;
       uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                         (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
-      iVar8 = iVar9;
+      uVar4 = extraout_r4_02;
+      iVar9 = iVar10;
     } while (uVar3 != 10);
     iVar8 = *(int *)(*(int *)puVar1 + 0x20);
     (**(code **)(iVar8 + 0xc))(iVar8,10,param_1);
-    _HandlePragma(puVar5,iVar12);
+    _HandlePragma(puVar5,iVar13);
     iVar8 = *(int *)(*(int *)puVar1 + 0x20);
     uVar4 = (**(code **)(iVar8 + 4))(iVar8,param_1);
-    puVar11 = puVar5;
-    if (0 < iVar12) {
+    puVar12 = puVar5;
+    if (0 < iVar13) {
       do {
-        _free((void *)*puVar11);
-        iVar12 = iVar12 + -1;
-        puVar11 = puVar11 + 1;
-      } while (iVar12 != 0);
+        _free((void *)*puVar12);
+        iVar13 = iVar13 + -1;
+        puVar12 = puVar12 + 1;
+      } while (iVar13 != 0);
     }
     _free(puVar5);
   }
@@ -1043,33 +1176,48 @@ int _CPPversion(param_1)
   undefined *puVar1;
   int iVar2;
   int iVar3;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 uVar4;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
+  undefined4 extraout_r4_03;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
+  uVar4 = extraout_r4;
   if (*(int *)(*(int *)puVar1 + 0x28) == 1) {
-    _CPPShInfoLogMsg("#version must occur before any other statement in the program");
+    _CPPShInfoLogMsg("#version must occur before any other statement in the program",extraout_r4,
+                     in_r5,in_r6,in_r7,in_r8,in_r9);
+    uVar4 = extraout_r4_00;
   }
   if (iVar2 == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#version");
+    _CPPErrorToInfoLog("#version",extraout_r4_01,in_r5,in_r6,in_r7,in_r8,in_r9);
     _IncLineNumber();
     iVar2 = 10;
   }
   else {
     if (iVar2 != 0x10f) {
-      _CPPErrorToInfoLog("#version");
+      _CPPErrorToInfoLog("#version",uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
     iVar2 = _atoi((char *)(param_1 + 3));
     *param_1 = iVar2;
     if (iVar2 != 0x6e) {
-      _CPPShInfoLogMsg("Version number not supported by GL2");
+      _CPPShInfoLogMsg("Version number not supported by GL2",extraout_r4_02,in_r5,in_r6,in_r7,in_r8,
+                       in_r9);
     }
     iVar2 = *(int *)(*(int *)puVar1 + 0x20);
     iVar3 = (**(code **)(iVar2 + 4))(iVar2,param_1);
     iVar2 = 10;
     if (iVar3 != 10) {
-      _CPPErrorToInfoLog("#version");
+      _CPPErrorToInfoLog("#version",extraout_r4_03,in_r5,in_r6,in_r7,in_r8,in_r9);
       iVar2 = iVar3;
     }
   }
@@ -1085,6 +1233,16 @@ int _CPPextension(param_1)
   int iVar3;
   char *pcVar4;
   undefined4 uVar5;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 extraout_r4_02;
+  undefined4 extraout_r4_03;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   char acStack_70 [92];
   
   puVar1 = PTR__cpp_a7b7c0a4;
@@ -1092,13 +1250,13 @@ int _CPPextension(param_1)
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
   if (iVar3 == 10) {
     _DecLineNumber();
-    _CPPShInfoLogMsg("extension name not specified");
+    _CPPShInfoLogMsg("extension name not specified",extraout_r4_00,in_r5,in_r6,in_r7,in_r8,in_r9);
     _IncLineNumber();
     iVar3 = 10;
   }
   else {
     if (iVar3 != 0x10e) {
-      _CPPErrorToInfoLog("#extension");
+      _CPPErrorToInfoLog("#extension",extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
     puVar2 = PTR__atable_a7b7c0ac;
     pcVar4 = (char *)_GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8)
@@ -1117,15 +1275,17 @@ int _CPPextension(param_1)
         if (iVar3 == 10) {
           return 10;
         }
-        _CPPErrorToInfoLog("#extension");
+        _CPPErrorToInfoLog("#extension",extraout_r4_03,in_r5,in_r6,in_r7,in_r8,in_r9);
         return iVar3;
       }
       pcVar4 = "behavior for extension not specified";
+      uVar5 = extraout_r4_02;
     }
     else {
       pcVar4 = "\':\' missing after extension name";
+      uVar5 = extraout_r4_01;
     }
-    _CPPShInfoLogMsg(pcVar4);
+    _CPPShInfoLogMsg(pcVar4,uVar5,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar3;
 }
@@ -1138,6 +1298,14 @@ int _readCPPline(param_1)
   int iVar2;
   int iVar3;
   undefined4 uVar4;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  undefined4 extraout_r4_01;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  undefined4 in_r9;
   uint uVar5;
   
   puVar1 = PTR__cpp_a7b7c0a4;
@@ -1153,7 +1321,7 @@ int _readCPPline(param_1)
       if (iVar2 == _elseAtom) {
         iVar3 = ((int (*)())_ChkCorrectElseNesting)();
         if (iVar3 == 0) {
-          _CPPErrorToInfoLog("#else after a #else");
+          _CPPErrorToInfoLog("#else after a #else",extraout_r4_00,in_r5,in_r6,in_r7,in_r8,in_r9);
           iVar3 = 0;
           uVar5 = 1;
           *(undefined4 *)(*(int *)puVar1 + 0x34) = 0;
@@ -1162,7 +1330,7 @@ int _readCPPline(param_1)
         }
         iVar3 = *(int *)puVar1;
         if (*(int *)(iVar3 + 0x34) == 0) {
-          _CPPErrorToInfoLog("#else mismatch");
+          _CPPErrorToInfoLog("#else mismatch",extraout_r4_00,in_r5,in_r6,in_r7,in_r8,in_r9);
           *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
           iVar3 = *(int *)puVar1;
         }
@@ -1182,13 +1350,13 @@ int _readCPPline(param_1)
           if (iVar2 == _endifAtom) {
             *(undefined4 *)(*(int *)(*(int *)puVar1 + 0x138) * 4 + *(int *)puVar1 + 0x38) = 0;
             *(int *)(*(int *)puVar1 + 0x138) = *(int *)(*(int *)puVar1 + 0x138) + -1;
-            iVar2 = *(int *)(*(int *)puVar1 + 0x34);
-            if (iVar2 == 0) {
-              _CPPErrorToInfoLog("#endif mismatch");
+            iVar2 = *(int *)puVar1;
+            if (*(int *)(iVar2 + 0x34) == 0) {
+              _CPPErrorToInfoLog("#endif mismatch",extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar2);
               *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
             }
             else {
-              *(int *)(*(int *)puVar1 + 0x34) = iVar2 + -1;
+              *(int *)(iVar2 + 0x34) = *(int *)(iVar2 + 0x34) + -1;
             }
           }
           else if (iVar2 == _ifAtom) {
@@ -1223,7 +1391,7 @@ int _readCPPline(param_1)
                                            *(undefined4 *)(param_1 + 8));
                   _StoreStr(uVar4);
                   uVar4 = _GetStrfromTStr();
-                  _CPPShInfoLogMsg(uVar4);
+                  _CPPShInfoLogMsg(uVar4,extraout_r4_01,in_r5,in_r6,in_r7,in_r8,in_r9);
                   _ResetTString();
                 }
                 goto LAB_97b87c50;
@@ -1236,7 +1404,7 @@ int _readCPPline(param_1)
         }
         iVar3 = *(int *)puVar1;
         if (*(int *)(iVar3 + 0x34) == 0) {
-          _CPPErrorToInfoLog("#elif mismatch");
+          _CPPErrorToInfoLog("#elif mismatch",extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
           *(undefined4 *)(*(int *)puVar1 + 0x140) = 1;
           iVar3 = *(int *)puVar1;
         }
@@ -1246,7 +1414,7 @@ int _readCPPline(param_1)
                             (*(int *)(*(int *)puVar1 + 0x20),param_1);
         }
       }
-      iVar3 = ((int (*)())_CPPelse)(0,param_1);
+      iVar3 = ((int (*)())_CPPelse)(0,param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
   }
 LAB_97b87c50:
@@ -1353,9 +1521,13 @@ int _PrescanMacroArg(param_1, param_2)
 }
 
 /* _macro_scan @ 0x97b87eac (336 bytes) */
-int _macro_scan(param_1, param_2)
+int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 *param_1;
   int param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   bool bVar1;
   undefined *puVar2;
@@ -1377,6 +1549,7 @@ int _macro_scan(param_1, param_2)
         piVar4 = piVar4 + -1;
         if (iVar3 == *(int *)(param_2 + 8)) {
           if (!bVar1) {
+            param_3 = 0;
             _ReadFromTokenStream
                       (*(undefined4 *)(iVar7 * 4 + param_1[7]),*(undefined4 *)(param_2 + 8),0);
             goto LAB_97b87fc4;
@@ -1409,10 +1582,10 @@ int _macro_scan(param_1, param_2)
   }
   _free(param_1);
 LAB_97b87fc4:
+  iVar5 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
                     
                     
-  (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-            (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_2);
+  (**(code **)(iVar5 + 4))(iVar5,param_2,param_3,param_4,param_5,param_6,*(int *)PTR__cpp_a7b7c0a4);
   return;
 }
 
@@ -1432,9 +1605,15 @@ int _MacroExpand(param_1, param_2)
   int iVar9;
   char *pcVar10;
   undefined4 uVar11;
-  int *piVar12;
+  undefined4 extraout_r4;
+  undefined4 extraout_r4_00;
+  int *in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  int *a6;
+  int iVar12;
   int iVar13;
-  int iVar14;
   
   iVar6 = _LookUpSymbol(_macros,param_1);
   if (param_1 == ___LINE__Atom) {
@@ -1451,7 +1630,7 @@ int _MacroExpand(param_1, param_2)
         }
         puVar7 = _malloc(0x20);
         uVar11 = DAT_a7b7b008;
-        iVar13 = *(int *)PTR__cpp_a7b7c0a4;
+        iVar12 = *(int *)PTR__cpp_a7b7c0a4;
         puVar7[4] = 0;
         puVar7[5] = 0;
         puVar7[6] = 0;
@@ -1460,59 +1639,62 @@ int _MacroExpand(param_1, param_2)
         puVar7[2] = 0;
         puVar7[3] = 0;
         puVar7[1] = uVar11;
-        puVar7[5] = *(undefined4 *)(*(int *)(iVar13 + 0x20) + 0x14);
-        uVar11 = *(undefined4 *)(*(int *)(iVar13 + 0x20) + 0x10);
+        puVar7[5] = *(undefined4 *)(*(int *)(iVar12 + 0x20) + 0x14);
+        a6 = *(int **)(*(int *)(iVar12 + 0x20) + 0x10);
         puVar7[6] = iVar6 + 0x18;
-        puVar7[4] = uVar11;
+        puVar7[4] = a6;
         if (*(int *)(iVar6 + 0x1c) != 0) {
-          iVar13 = (**(code **)(*(int *)(iVar13 + 0x20) + 4))(*(int *)(iVar13 + 0x20),param_2);
-          if (iVar13 != 0x28) {
-            _UngetToken(iVar13,param_2);
+          iVar12 = (**(code **)(*(int *)(iVar12 + 0x20) + 4))
+                             (*(int *)(iVar12 + 0x20),param_2,in_r5,in_r6,in_r7,in_r8,a6,iVar12);
+          if (iVar12 != 0x28) {
+            _UngetToken(iVar12,param_2);
             param_2[2] = param_1;
             return 0;
           }
-          iVar13 = 0;
           pvVar8 = _malloc(*(int *)puVar7[6] << 2);
           puVar7[7] = pvVar8;
+          iVar12 = 0;
           if (0 < *(int *)puVar7[6]) {
             do {
-              uVar11 = _NewTokenStream("macro arg",0);
-              iVar14 = iVar13 * 4;
-              iVar13 = iVar13 + 1;
-              *(undefined4 *)(iVar14 + puVar7[7]) = uVar11;
+              iVar9 = _NewTokenStream("macro arg",0);
+              a6 = (int *)puVar7[7];
+              iVar13 = iVar12 + 1;
+              a6[iVar12] = iVar9;
+              iVar12 = iVar13;
             } while (iVar13 < *(int *)puVar7[6]);
           }
           puVar4 = PTR__cpp_a7b7c0a4;
-          iVar13 = 0;
+          iVar12 = 0;
           bVar3 = false;
 LAB_97b881d8:
-          iVar14 = 0;
+          iVar9 = 0;
           do {
-            iVar9 = (**(code **)(*(int *)(*(int *)puVar4 + 0x20) + 4))
-                              (*(int *)(*(int *)puVar4 + 0x20),param_2);
+            iVar13 = (**(code **)(*(int *)(*(int *)puVar4 + 0x20) + 4))
+                               (*(int *)(*(int *)puVar4 + 0x20),param_2);
             puVar5 = PTR__cpp_a7b7c0a4;
-            bVar1 = 0 < iVar9;
+            bVar1 = 0 < iVar13;
             if (!bVar1) goto LAB_97b8830c;
-            piVar12 = (int *)puVar7[6];
-            bVar2 = iVar9 == 0x29;
-            if ((*piVar12 == 0) && (!bVar2)) goto LAB_97b88284;
-            if (iVar14 == 0) {
-              if (iVar9 == 0x2c) goto LAB_97b88284;
+            a6 = (int *)puVar7[6];
+            bVar2 = iVar13 == 0x29;
+            if ((*a6 == 0) && (!bVar2)) goto LAB_97b88284;
+            if (iVar9 == 0) {
+              if (iVar13 == 0x2c) goto LAB_97b88284;
               if (bVar2) {
-                if ((*piVar12 != 1) || (bVar3)) {
-                  iVar13 = iVar13 + 1;
+                if ((*a6 != 1) || (bVar3)) {
+                  iVar12 = iVar12 + 1;
                 }
                 goto LAB_97b88294;
               }
             }
-            if (iVar9 == 0x28) {
-              iVar14 = iVar14 + 1;
+            if (iVar13 == 0x28) {
+              iVar9 = iVar9 + 1;
             }
             if (bVar2) {
-              iVar14 = iVar14 + -1;
+              iVar9 = iVar9 + -1;
             }
             bVar3 = true;
-            _RecordToken(*(undefined4 *)(iVar13 * 4 + puVar7[7]),iVar9,param_2);
+            in_r5 = param_2;
+            _RecordToken(*(undefined4 *)(iVar12 * 4 + puVar7[7]),iVar13,param_2);
           } while( true );
         }
         goto LAB_97b883b8;
@@ -1530,36 +1712,36 @@ LAB_97b88078:
   _UngetToken(0x10f,param_2);
   return 1;
 LAB_97b88284:
-  iVar13 = iVar13 + 1;
-  if (*piVar12 <= iVar13) goto LAB_97b88294;
+  iVar12 = iVar12 + 1;
+  if (*a6 <= iVar12) goto LAB_97b88294;
   goto LAB_97b881d8;
 LAB_97b88294:
-  if (iVar13 < *piVar12) {
+  if (iVar12 < *a6) {
     pcVar10 = "Too few args in Macro ";
 LAB_97b8834c:
     _StoreStr(pcVar10);
     uVar11 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
     _StoreStr(uVar11);
     uVar11 = _GetStrfromTStr();
-    _CPPShInfoLogMsg(uVar11);
+    _CPPShInfoLogMsg(uVar11,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
     _ResetTString();
-    piVar12 = (int *)puVar7[6];
+    a6 = (int *)puVar7[6];
   }
   else if (!bVar2) {
-    iVar13 = 0;
-    if (-1 < iVar9) {
+    iVar12 = 0;
+    if (-1 < iVar13) {
       bVar3 = false;
       do {
         if (bVar3) {
-          iVar13 = iVar13 + -1;
+          iVar12 = iVar12 + -1;
         }
-        iVar14 = (**(code **)(*(int *)(*(int *)puVar5 + 0x20) + 4))
-                           (*(int *)(*(int *)puVar5 + 0x20),param_2);
-        if (iVar14 == 0x28) {
-          iVar13 = iVar13 + 1;
+        iVar9 = (**(code **)(*(int *)(*(int *)puVar5 + 0x20) + 4))
+                          (*(int *)(*(int *)puVar5 + 0x20),param_2);
+        if (iVar9 == 0x28) {
+          iVar12 = iVar12 + 1;
         }
-        bVar1 = 0 < iVar14;
-      } while ((-1 < iVar14) && ((bVar3 = iVar14 == 0x29, 0 < iVar13 || (!bVar3))));
+        bVar1 = 0 < iVar9;
+      } while ((-1 < iVar9) && ((bVar3 = iVar9 == 0x29, 0 < iVar12 || (!bVar3))));
     }
     if (!bVar1) {
 LAB_97b8830c:
@@ -1567,21 +1749,21 @@ LAB_97b8830c:
       uVar11 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
       _StoreStr(uVar11);
       uVar11 = _GetStrfromTStr();
-      _CPPShInfoLogMsg(uVar11);
+      _CPPShInfoLogMsg(uVar11,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
       _ResetTString();
       return 1;
     }
     pcVar10 = "Too many args in Macro ";
     goto LAB_97b8834c;
   }
-  iVar13 = 0;
-  if (0 < *piVar12) {
+  iVar12 = 0;
+  if (0 < *a6) {
     do {
-      iVar14 = iVar13 * 4;
-      iVar13 = iVar13 + 1;
-      uVar11 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar14 + puVar7[7]),param_2);
-      *(undefined4 *)(iVar14 + puVar7[7]) = uVar11;
-    } while (iVar13 < *(int *)puVar7[6]);
+      iVar9 = iVar12 * 4;
+      iVar12 = iVar12 + 1;
+      uVar11 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + puVar7[7]),param_2);
+      *(undefined4 *)(iVar9 + puVar7[7]) = uVar11;
+    } while (iVar12 < *(int *)puVar7[6]);
   }
 LAB_97b883b8:
   puVar4 = PTR__cpp_a7b7c0a4;
@@ -1927,47 +2109,51 @@ int _ScanFromString(param_1)
 
 /* _lBuildFloatValue @ 0x97b88b88 (272 bytes) */
 double _lBuildFloatValue(int param_1,int param_2,uint param_3)
-
 {
   float fVar1;
   char *pcVar2;
   uint uVar3;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   int iVar4;
-  double dVar5;
+  int iVar5;
   double dVar6;
   double dVar7;
+  double dVar8;
   
   iVar4 = 0;
-  dVar6 = DOUBLE_97c30a48;
+  iVar5 = param_2;
+  dVar7 = DOUBLE_97c30a48;
   if (0 < param_2) {
     do {
       pcVar2 = (char *)(param_1 + iVar4);
       iVar4 = iVar4 + 1;
-      dVar6 = dVar6 * DOUBLE_97c30a50 +
+      dVar7 = dVar7 * DOUBLE_97c30a50 +
               ((double)CONCAT44(0x43300000,(int)*pcVar2 - 0x30U ^ 0x80000000) - DOUBLE_97c30a58);
-      param_2 = param_2 + -1;
-    } while (param_2 != 0);
+      iVar5 = iVar5 + -1;
+    } while (iVar5 != 0);
   }
   if (param_3 != 0) {
-    dVar5 = DOUBLE_97c30a50;
-    dVar7 = DOUBLE_97c30a60;
+    dVar6 = DOUBLE_97c30a50;
+    dVar8 = DOUBLE_97c30a60;
     for (uVar3 = ((int)param_3 >> 0x1f ^ param_3) - ((int)param_3 >> 0x1f); uVar3 != 0;
         uVar3 = (int)uVar3 >> 1) {
       if ((uVar3 & 1) != 0) {
-        dVar7 = dVar7 * dVar5;
+        dVar8 = dVar8 * dVar6;
       }
-      dVar5 = dVar5 * dVar5;
+      dVar6 = dVar6 * dVar6;
     }
     if ((int)param_3 < 0) {
-      dVar6 = dVar6 / dVar7;
+      dVar7 = dVar7 / dVar8;
     }
     else {
-      dVar6 = dVar6 * dVar7;
+      dVar7 = dVar7 * dVar8;
     }
   }
-  fVar1 = (float)dVar6;
+  fVar1 = (float)dVar7;
   if ((((uint)fVar1 & 0x7f800000) == 0x7f800000) && (((uint)fVar1 & 0x7fffff) == 0)) {
-    _CPPErrorToInfoLog(" ERROR___FP_CONST_OVERFLOW");
+    _CPPErrorToInfoLog(" ERROR___FP_CONST_OVERFLOW",param_2,0,in_r6,in_r7,in_r8,iVar4);
   }
   return (double)fVar1;
 }

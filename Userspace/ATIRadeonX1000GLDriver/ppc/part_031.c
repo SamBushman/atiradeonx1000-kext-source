@@ -1,9 +1,7 @@
 #include "decls.h"
 
 /* FUN_0010bed0 @ 0x10bed0 (320 bytes) */
-int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,
-                double fparam_1)
-
+int FUN_0010bed0(int param_1,undefined4 param_2,undefined4 param_3,int param_4,undefined4 param_5,double fparam_1)
 {
   undefined4 uVar1;
   int iVar2;
@@ -1377,7 +1375,7 @@ int FUN_0010e1d8(param_1, param_2)
   param_1[1] = iVar2;
   iVar2 = FUN_000e1564(param_2);
   if (iVar2 != 0) {
-    FUN_001920e0(iVar2);
+    FUN_001920e0(iVar2,param_2,1);
   }
   param_1[2] = iVar2;
   return;
@@ -1405,7 +1403,7 @@ int FUN_0010e2a0(param_1, param_2)
   param_1[1] = iVar2;
   iVar2 = FUN_000e1564(param_2);
   if (iVar2 != 0) {
-    FUN_001920e0(iVar2);
+    FUN_001920e0(iVar2,param_2,1);
   }
   param_1[2] = iVar2;
   return;

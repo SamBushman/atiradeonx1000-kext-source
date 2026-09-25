@@ -122,12 +122,9 @@ PATCHES = {
     # - a call through the lazy pointer with NO arguments and no return value (issue #67; found by scanning the corpora for argument-less calls through
     # code pointers). It only worked at -O0 because nothing happened to clobber r3 between the prologue and the call. PTR_LAB_a7b7c1c8 / ...b4 / ...c4 are
     # the __la_symbol_ptr slots of _malloc / _realloc / _free (link/symbol_map.tsv). C: call the import by name, pass the arguments, return the result.
-    'yy_flex_alloc': _scoped('glprog', _conv_with('yy_flex_alloc (0x97baddd0)', [
-        ('(*(code *)PTR_LAB_a7b7c1c8)();\n  return;', 'return _malloc(param_1);')])),
-    'yy_flex_realloc': _scoped('glprog', _conv_with('yy_flex_realloc (0x97baddd4)', [
-        ('(*(code *)PTR_LAB_a7b7c1b4)();\n  return;', 'return _realloc(param_1,param_2);')])),
-    'yy_flex_free': _scoped('glprog', _conv_with('yy_flex_free (0x97baddd8)', [
-        ('(*(code *)PTR_LAB_a7b7c1c4)();\n  return;', 'return _free(param_1);')])),
+    'yy_flex_alloc': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\(code \*\)PTR_LAB_a7b7c1c8\)\([^;]*\);\n  return;', 'return _malloc(param_1);', 1, 'yy_flex_alloc (0x97baddd0)')),
+    'yy_flex_realloc': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\(code \*\)PTR_LAB_a7b7c1b4\)\([^;]*\);\n  return;', 'return _realloc(param_1,param_2);', 1, 'yy_flex_realloc (0x97baddd4)')),
+    'yy_flex_free': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\(code \*\)PTR_LAB_a7b7c1c4\)\([^;]*\);\n  return;', 'return _free(param_1);', 1, 'yy_flex_free (0x97baddd8)')),
 
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
@@ -174,13 +171,14 @@ PATCHES = {
     # TIntermSymbol::traverse(TIntermTraverser*) (glprog, stock 0x97b97d40, 20 bytes): `lwz r12,0(r4); cmpwi r12,0; beqlr; mtspr ctr,r12; bctr` - a tail
     # call of the traverser's visitSymbol callback (*(traverser+0)) with r3 = this (the symbol) and r4 = the traverser, both untouched. Ghidra printed
     # `(**(code **)param_2)();` with no arguments (found by the tiny-function scan of issue #67/#70). C: pass (this, param_2).
-    'TIntermSymbol__traverse': _scoped('glprog', _conv_with('TIntermSymbol::traverse (0x97b97d40)', [
-        ('(**(code **)param_2)();', '(**(code **)param_2)(this,param_2);')])),
+    # (The indirect-call override of Stage B3 prints the tail call with `this` only - the decompiler applies a tail jump's override to r3 alone - so the
+    # patch stays, matching any argument list.)
+    'TIntermSymbol__traverse': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\*\(code \*\*\)param_2\)\([^;]*\);', '(**(code **)param_2)(this,param_2);', 1, 'TIntermSymbol::traverse (0x97b97d40)')),
 
     # __cxxabiv1::__terminate / __unexpected (glprog, stock 0x97c19de8 / 0x97c19e44): `mtspr ctr,r3; bctrl` (0x97c19df4..0x97c19dfc) calls the handler
     # passed in r3. Ghidra typed the handler as a plain byte pointer; C: call it as a function pointer.
-    '__cxxabiv1____terminate': _scoped('glprog', _conv_with('__terminate (0x97c19de8)', [('(*param_1)();', '((int (*)())param_1)();')])),
-    '__cxxabiv1____unexpected': _scoped('glprog', _conv_with('__unexpected (0x97c19e44)', [('(*param_1)();', '((int (*)())param_1)();')])),
+    '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
+    '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 
     # TIntermAggregate::addToPragmaTable (glprog, stock 0x97b96d18): `bl std::_Rb_tree<...>::operator=(const _Rb_tree&)` at 0x97b96db8.
     # The sanitiser keeps the `=` of a templated `operator=`, so the call read as an assignment (call lost). C: a call to that operator= with

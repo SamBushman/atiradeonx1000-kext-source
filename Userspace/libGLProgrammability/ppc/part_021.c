@@ -1,49 +1,49 @@
 #include "decls.h"
 
 /* __ZNSs6rbeginEv @ 0x97c13f18 (60 bytes) */
-int __ZNSs6rbeginEv(this)
+int __ZNSs6rbeginEv(this, param_2)
   void *this;
+  undefined4 param_2;
 {
-  undefined4 in_r4;
   undefined4 local_20 [5];
   
-  __ZNSs3endEv(local_20,in_r4);
+  __ZNSs3endEv(local_20,param_2);
   *(undefined4 *)((int)this + 4) = local_20[0];
   return this;
 }
 
 /* __ZNKSs6rbeginEv @ 0x97c13f54 (60 bytes) */
-int __ZNKSs6rbeginEv(this)
+int __ZNKSs6rbeginEv(this, param_2)
   void *this;
+  undefined4 param_2;
 {
-  undefined4 in_r4;
   undefined4 local_20 [5];
   
-  __ZNKSs3endEv(local_20,in_r4);
+  __ZNKSs3endEv(local_20,param_2);
   *(undefined4 *)((int)this + 4) = local_20[0];
   return this;
 }
 
 /* __ZNSs4rendEv @ 0x97c13f90 (60 bytes) */
-int __ZNSs4rendEv(this)
+int __ZNSs4rendEv(this, param_2)
   void *this;
+  undefined4 param_2;
 {
-  undefined4 in_r4;
   undefined4 local_20 [5];
   
-  __ZNSs5beginEv(local_20,in_r4);
+  __ZNSs5beginEv(local_20,param_2);
   *(undefined4 *)((int)this + 4) = local_20[0];
   return this;
 }
 
 /* __ZNKSs4rendEv @ 0x97c13fcc (60 bytes) */
-int __ZNKSs4rendEv(this)
+int __ZNKSs4rendEv(this, param_2)
   void *this;
+  undefined4 param_2;
 {
-  undefined4 in_r4;
   undefined4 local_20 [5];
   
-  __ZNKSs5beginEv(local_20,in_r4);
+  __ZNKSs5beginEv(local_20,param_2);
   *(undefined4 *)((int)this + 4) = local_20[0];
   return this;
 }
@@ -199,6 +199,7 @@ int __ZNSs6resizeEmc(this, param_2, param_3)
 {
   uint uVar1;
   char *pcVar2;
+  undefined3 in_register_00000014;
   char *pcVar3;
   uint uVar4;
   uint uVar5;
@@ -213,7 +214,7 @@ int __ZNSs6resizeEmc(this, param_2, param_3)
   }
   uVar1 = *(uint *)(*(int *)this + -0xc);
   if (uVar1 < param_2) {
-    ((int (*)())__ZNSs6appendEmc)(this,param_2 - uVar1,param_3);
+    ((int (*)())__ZNSs6appendEmc)(this,param_2 - uVar1,CONCAT31(in_register_00000014,param_3));
   }
   else if (param_2 < uVar1) {
     std__string___M_check((ulong)&local_40,this,param_2);
@@ -400,7 +401,9 @@ int __ZNSspLEc(this, param_2)
   void *this;
   int param_2;
 {
-  ((int (*)())__ZNSs6appendEmc)(this,1,param_2);
+  undefined3 in_register_00000010;
+  
+  ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(in_register_00000010,param_2));
   return;
 }
 
@@ -488,10 +491,9 @@ int __ZNSs6appendEPKcm(this, param_2, param_3)
 int __ZNSs6appendEmc(this, param_2, param_3)
   void *this;
   ulong param_2;
-  int param_3;
+  undefined4 param_3;
 {
   ulong uVar1;
-  undefined3 in_register_00000014;
   undefined4 local_30;
   undefined4 local_2c [6];
   
@@ -501,22 +503,21 @@ int __ZNSs6appendEmc(this, param_2, param_3)
   }
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_2,CONCAT31(in_register_00000014,param_3));
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_2,param_3);
   return;
 }
 
 /* std__string__push_back @ 0x97c14b00 (96 bytes) */
 int std__string__push_back(this, param_2)
   unsigned char * this;
-  int param_2;
+  undefined4 param_2;
 {
-  undefined3 in_register_00000010;
   undefined4 local_30;
   undefined4 local_2c [6];
   
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],1,CONCAT31(in_register_00000010,param_2));
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],1,param_2);
   return;
 }
 
@@ -763,13 +764,12 @@ int __ZNSs6insertEmmc(this, param_2, param_3, param_4)
   void *this;
   ulong param_2;
   ulong param_3;
-  int param_4;
+  undefined4 param_4;
 {
-  undefined3 in_register_00000018;
   undefined4 local_30 [7];
   
   std__string___M_check((ulong)local_30,this,param_2);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30[0],local_30[0],param_3,CONCAT31(in_register_00000018,param_4));
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30[0],local_30[0],param_3,param_4);
   return this;
 }
 
@@ -888,15 +888,14 @@ int __ZNSs7replaceEmmmc(this, param_2, param_3, param_4, param_5)
   ulong param_2;
   ulong param_3;
   ulong param_4;
-  int param_5;
+  undefined4 param_5;
 {
-  undefined3 in_register_0000001c;
   undefined4 local_30;
   undefined4 local_2c [4];
   
   std__string___M_check((ulong)&local_30,this,param_2);
   __ZNKSs7_M_foldEmm((ulong)local_2c,(ulong)this,param_2,param_3);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_4,CONCAT31(in_register_0000001c,param_5));
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_4,param_5);
   return;
 }
 
@@ -1024,7 +1023,6 @@ int std__string___S_construct(param_1, param_2, param_3)
 {
   ulong *puVar1;
   ulong *puVar2;
-  undefined3 in_register_00000010;
   char in_RESERVE;
   
   if (param_1 == 0) {
@@ -1036,7 +1034,7 @@ int std__string___S_construct(param_1, param_2, param_3)
   else {
     puVar2 = (ulong *)__ZNSs4_Rep9_S_createEmRKSaIcE(param_1,param_3);
     puVar1 = puVar2 + 3;
-    _memset(puVar1,CONCAT31(in_register_00000010,param_2),param_1);
+    _memset(puVar1,param_2,param_1);
     *puVar2 = param_1;
     *(undefined1 *)((int)puVar1 + param_1) = 0;
   }

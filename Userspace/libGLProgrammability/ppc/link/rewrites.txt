@@ -8,6 +8,10 @@ float/double call arguments given their true type (integer bit patterns reinterp
 stack records Ghidra declared as separate scalars, merged into one block: 0
   of which records with pointer members (rewrites.fix_pointer_records): 0
 functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): 376
+external-relocation data words whose stored (prebound) value was not an addend, corrected: 20 (1 of them prebound imports)
+CONCATnn(in_register_x, param) replaced by the parameter: 3; biased table-base literals anchored to the next section: 2
+string literals used with arithmetic, put back as the number / address they stand for: 1 sites
+32-bit call results assigned to an r3:r4 pair variable, moved to its high word (rewrites.rewrite_pair_results): 104
 short C++ call names left unresolved (6):
   in TParseContext__constructorErrorCheck: error -> TParseContext__error (same class, not confirmed by the stock call list) (4 candidates)
   in TParseContext__extensionErrorCheck: error -> TParseContext__error (same class, not confirmed by the stock call list) (4 candidates)

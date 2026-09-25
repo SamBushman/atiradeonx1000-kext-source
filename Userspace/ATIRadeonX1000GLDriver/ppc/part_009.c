@@ -1345,31 +1345,31 @@ int FUN_0005e0d0(param_1, param_2, param_3)
 int FUN_0005e770(param_1)
   int param_1;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 *puVar4;
+  uint uVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  int iVar4;
   uint uVar5;
   
-  uVar2 = 0;
+  uVar1 = 0;
   while( true ) {
-    bVar1 = *(int *)(param_1 + uVar2 * 4) != 0;
-    if ((bVar1) && (uVar5 = uVar2 + 1, uVar5 < 0x20)) {
-      iVar3 = 0x20 - uVar5;
-      puVar4 = (undefined4 *)(param_1 + uVar5 * 4);
+    iVar4 = *(int *)(param_1 + uVar1 * 4);
+    if ((iVar4 != 0) && (uVar5 = uVar1 + 1, uVar5 < 0x20)) {
+      iVar2 = 0x20 - uVar5;
+      puVar3 = (undefined4 *)(param_1 + uVar5 * 4);
       do {
-        puVar4[-1] = *puVar4;
-        puVar4 = puVar4 + 1;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
+        puVar3[-1] = *puVar3;
+        puVar3 = puVar3 + 1;
+        iVar2 = iVar2 + -1;
+      } while (iVar2 != 0);
     }
-    uVar2 = uVar2 + 1;
-    if (0x1f < uVar2) break;
-    if (bVar1) {
-      return;
+    uVar1 = uVar1 + 1;
+    if (0x1f < uVar1) break;
+    if (iVar4 != 0) {
+      return iVar4;
     }
   }
-  return;
+  return iVar4;
 }
 
 /* FUN_0005e7f0 @ 0x5e7f0 (3156 bytes) */
@@ -5358,12 +5358,7 @@ int FUN_000656b0(param_1)
 }
 
 /* FUN_000659d0 @ 0x659d0 (612 bytes) */
-void FUN_000659d0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,
-                 undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,
-                 double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,
-                 double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,
-                 double fparam_12,double fparam_13)
-
+void FUN_000659d0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   uint uVar1;
   int iVar2;

@@ -131,10 +131,7 @@ int _glConvolutionFilter2D(param_1, param_2, param_3, param_4, param_5, param_6,
 }
 
 /* _glConvolutionParameterf @ 0x92f33c0c (148 bytes) */
-void _glConvolutionParameterf
-               (undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-               undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glConvolutionParameterf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -724,9 +721,7 @@ int _glActiveTexture(param_1, param_2, param_3, param_4, param_5, param_6, param
 }
 
 /* _glMultiTexCoord1d @ 0x92f34904 (140 bytes) */
-void _glMultiTexCoord1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glMultiTexCoord1d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -771,9 +766,7 @@ int _glMultiTexCoord1dv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord1f @ 0x92f34a14 (140 bytes) */
-void _glMultiTexCoord1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glMultiTexCoord1f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -922,10 +915,7 @@ int _glMultiTexCoord1sv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord2d @ 0x92f34d34 (156 bytes) */
-void _glMultiTexCoord2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2)
-
+void _glMultiTexCoord2d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1100,10 +1090,7 @@ int _glMultiTexCoord2sv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord3d @ 0x92f350f8 (172 bytes) */
-void _glMultiTexCoord3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3)
-
+void _glMultiTexCoord3d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1148,10 +1135,7 @@ int _glMultiTexCoord3dv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord3f @ 0x92f35228 (172 bytes) */
-void _glMultiTexCoord3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3)
-
+void _glMultiTexCoord3f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1300,10 +1284,7 @@ int _glMultiTexCoord3sv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord4d @ 0x92f35588 (152 bytes) */
-void _glMultiTexCoord4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3,double fparam_4)
-
+void _glMultiTexCoord4d(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1346,10 +1327,7 @@ int _glMultiTexCoord4dv(param_1, param_2, param_3, param_4, param_5, param_6, pa
 }
 
 /* _glMultiTexCoord4f @ 0x92f356a4 (172 bytes) */
-void _glMultiTexCoord4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                       undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,
-                       double fparam_2,double fparam_3,double fparam_4)
-
+void _glMultiTexCoord4f(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
   undefined *puVar1;
   undefined4 *puVar2;

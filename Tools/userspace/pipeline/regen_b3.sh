@@ -16,11 +16,20 @@ run $X -postScript PatchConstSwitch.java $(cat $B/constswitch_glprog.txt)
 run $X -postScript SetValueReturn.java $(cat $B/setret_glprog.txt)
 run $X -postScript OverrideVariadicCalls.java $(cat $B/variadic_glprog.txt)
 run $X -postScript FlattenStructParams.java $(cat $B/flatten_glprog.txt)
+run $X -postScript OverrideIndirectCalls.java $OUT/icalls_glprog.tsv ALL
+run $X -postScript ExtendParams.java $(cat $B/extend_glprog.txt)
+run $X -postScript WidenParams.java $(cat $B/widen_glprog.txt)
 mkdir -p $OUT/n_glprog && run $X -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/redump_glprog.txt)
 # GLDriver (from gld-ext) and GA (from r32-ga)
 rm -rf gld-ret && cp -r gld-ext gld-ret
 run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetValueReturn.java $(cat $B/setret_gld.txt)
-mkdir -p $OUT/n_gld && run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/setret_gld.txt)
+run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ExtendParams.java $(cat $B/extend_gld.txt)
+mkdir -p $OUT/n_gld && run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/redump_gld.txt)
 rm -rf r32-ga-ret && cp -r r32-ga r32-ga-ret
 run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript SetValueReturn.java $(cat $B/setret_ga.txt)
-mkdir -p $OUT/n_ga && run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cat $B/setret_ga.txt)
+run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript ExtendParams.java $(cat $B/extend_ga.txt)
+mkdir -p $OUT/n_ga && run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cat $B/redump_ga.txt)
+rm -rf r32-va-ret && cp -r r32-va r32-va-ret
+run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetValueReturn.java $(cat $B/setret_va.txt)
+run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript ExtendParams.java $(cat $B/extend_va.txt)
+mkdir -p $OUT/n_va && run r32-va-ret Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/redump_va.txt)

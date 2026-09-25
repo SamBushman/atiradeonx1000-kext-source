@@ -232,7 +232,6 @@ int _glShadeModel(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glClearColor @ 0x92f27ef0 (160 bytes) */
 void _glClearColor(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -264,7 +263,6 @@ int FUN_92f27fc8()
 
 /* _glClearDepth @ 0x92f27fe0 (128 bytes) */
 void _glClearDepth(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -466,7 +464,6 @@ int _glClear(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glTranslatef @ 0x92f283e4 (160 bytes) */
 void _glTranslatef(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -512,7 +509,6 @@ int _glPolygonMode(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glRotatef @ 0x92f28508 (160 bytes) */
 void _glRotatef(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -532,7 +528,6 @@ void _glRotatef(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 
 /* _glScalef @ 0x92f285a8 (160 bytes) */
 void _glScalef(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -720,7 +715,6 @@ int _glLoadName(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glColor4f @ 0x92f289ac (160 bytes) */
 void _glColor4f(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -766,7 +760,6 @@ int _glBegin(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glVertex3d @ 0x92f28ac8 (160 bytes) */
 void _glVertex3d(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -805,7 +798,6 @@ int _glEnd()
 
 /* _glLineWidth @ 0x92f28bd8 (128 bytes) */
 void _glLineWidth(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -929,7 +921,6 @@ int _glDepthMask(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 
 /* _glNormal3f @ 0x92f28e80 (160 bytes) */
 void _glNormal3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -949,7 +940,6 @@ void _glNormal3f(double fparam_1,double fparam_2,double fparam_3)
 
 /* _glVertex3f @ 0x92f28f20 (160 bytes) */
 void _glVertex3f(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1014,7 +1004,6 @@ int _glDeleteLists(param_1, param_2, param_3, param_4, param_5, param_6, param_7
 
 /* _glTranslated @ 0x92f290b4 (160 bytes) */
 void _glTranslated(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1034,7 +1023,6 @@ void _glTranslated(double fparam_1,double fparam_2,double fparam_3)
 
 /* _glRotated @ 0x92f29154 (140 bytes) */
 void _glRotated(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1234,7 +1222,6 @@ int _glTexParameteri(param_1, param_2, param_3, param_4, param_5, param_6, param
 
 /* _glTexCoord2f @ 0x92f2959c (144 bytes) */
 void _glTexCoord2f(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1331,9 +1318,7 @@ int _glTexEnvi(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* _glMaterialf @ 0x92f297b8 (148 bytes) */
-void _glMaterialf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
-                 undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
-
+void _glMaterialf(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,undefined4 param_7,double fparam_1)
 {
   undefined *puVar1;
   undefined4 *puVar2;

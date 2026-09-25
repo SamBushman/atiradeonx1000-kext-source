@@ -245,6 +245,23 @@ def split_params(sp):
         else: cur += ch
     if cur.strip(): out.append(cur.strip())
     return out
+def fix_proto_type(t):
+    """a prototype's type (one line, not a K&R declaration): a class/struct type Ghidra invented becomes unsigned char, keeping pointer stars
+    (`TIntermConstantUnion *` in fold's exact prototype broke every part: fix_types only rewrites declarations at line starts)"""
+    t = ' '.join(t.split())
+    m = re.match(r'^(const\s+)?([A-Za-z_][\w:<>, ]*?)\s*(\**)$', t)
+    if not m:
+        return t
+    b = re.split(r'[<:]', m.group(2))[0]
+    if b in PRIM or b in kw or m.group(2) in PRIM:
+        return t
+    return ('unsigned char ' + m.group(3)).strip()
+def fix_proto_param(q):
+    m = re.match(r'^(.*?)([A-Za-z_]\w*)$', q.strip())
+    if not m:
+        return q
+    ty = m.group(1).strip()
+    return '%s%s%s' % (fix_proto_type(ty), '' if fix_proto_type(ty).endswith('*') else ' ', m.group(2))
 proto = {}
 for a, sz, name in idx:
     b = bodies.get(a)
@@ -253,7 +270,12 @@ for a, sz, name in idx:
     if not h: continue
     rt, params = h
     exact = bool(re.search(r'\b(float|double)\b(?!\s*\*)', rt + ' ' + params)) and not os.environ.get('LOOSE')   # LOOSE: verification build, callee sets only (float ABI irrelevant)
-    if exact: proto[a] = (fix_types(rt + ' ').strip(), fix_types(params + ' ').strip(), True)
+    if exact:
+        proto[a] = (fix_proto_type(rt), ','.join(fix_proto_param(q) for q in split_params(' '.join(params.split()))), True)
+        # the definition keeps an ANSI header (float/double arguments), written from the sanitised prototype: Ghidra's own header text can carry an
+        # invented class type on a line of its own (`TIntermConstantUnion *` before fold's name), which fix_types does not see
+        i = b.index('{')
+        bodies[a] = '%s %s(%s)\n' % (proto[a][0], name, proto[a][1]) + b[i:]
     else:
         nrt = 'int' if not re.search(r'\b(longlong|ulonglong|undefined8)\b(?!\s*\*)', rt) else fix_types(rt + ' ').strip()
         nparams = SMALL.sub('int', params)

@@ -300,7 +300,6 @@ int FUN_0017737c(param_1, param_2, param_3)
 
 /* FUN_0017740c @ 0x17740c (156 bytes) */
 undefined4 FUN_0017740c(int param_1,int param_2,double fparam_1)
-
 {
   bool bVar1;
   int iVar2;

@@ -255,7 +255,6 @@ int _glActiveStencilFaceEXT(param_1, param_2, param_3, param_4, param_5, param_6
 
 /* _glDepthBoundsEXT @ 0x92f42498 (144 bytes) */
 void _glDepthBoundsEXT(double fparam_1,double fparam_2)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -457,7 +456,6 @@ int _glSecondaryColor3bvEXT(param_1, param_2, param_3, param_4, param_5, param_6
 
 /* _glSecondaryColor3dEXT @ 0x92f42924 (160 bytes) */
 void _glSecondaryColor3dEXT(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -503,7 +501,6 @@ int _glSecondaryColor3dvEXT(param_1, param_2, param_3, param_4, param_5, param_6
 
 /* _glSecondaryColor3fEXT @ 0x92f42a40 (160 bytes) */
 void _glSecondaryColor3fEXT(double fparam_1,double fparam_2,double fparam_3)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -835,7 +832,6 @@ int _glSecondaryColorPointerEXT(param_1, param_2, param_3, param_4, param_5, par
 
 /* _glFogCoordfEXT @ 0x92f43118 (128 bytes) */
 void _glFogCoordfEXT(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -881,7 +877,6 @@ int _glFogCoordfvEXT(param_1, param_2, param_3, param_4, param_5, param_6, param
 
 /* _glFogCoorddEXT @ 0x92f43214 (128 bytes) */
 void _glFogCoorddEXT(double fparam_1)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;
@@ -1057,7 +1052,6 @@ int _glMultiDrawElementsEXT(param_1, param_2, param_3, param_4, param_5, param_6
 
 /* _glBlendColorEXT @ 0x92f43604 (160 bytes) */
 void _glBlendColorEXT(double fparam_1,double fparam_2,double fparam_3,double fparam_4)
-
 {
   undefined *puVar1;
   undefined4 *puVar2;

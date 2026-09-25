@@ -8,4 +8,8 @@ float/double call arguments given their true type (integer bit patterns reinterp
 stack records Ghidra declared as separate scalars, merged into one block: 0
   of which records with pointer members (rewrites.fix_pointer_records): 0
 functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): 22
+external-relocation data words whose stored (prebound) value was not an addend, corrected: 0 (0 of them prebound imports)
+CONCATnn(in_register_x, param) replaced by the parameter: 0; biased table-base literals anchored to the next section: 0
+string literals used with arithmetic, put back as the number / address they stand for: 0 sites
+32-bit call results assigned to an r3:r4 pair variable, moved to its high word (rewrites.rewrite_pair_results): 0
 short C++ call names left unresolved (0):

@@ -1395,10 +1395,7 @@ LAB_00004b14:
 }
 
 /* FUN_000055a4 @ 0x55a4 (11396 bytes) */
-int FUN_000055a4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5,
-                dword param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,
-                double fparam_5,double fparam_6,double fparam_7,double fparam_8)
-
+int FUN_000055a4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,int param_5,dword param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   bool bVar1;
   double dVar2;
@@ -5541,6 +5538,7 @@ int ___stub_getrealaddr(param_1)
 {
   size_t sVar1;
   int iVar2;
+  undefined4 uVar3;
   char local_58 [4];
   char acStack_54 [4];
   char acStack_50 [64];
@@ -5556,7 +5554,7 @@ int ___stub_getrealaddr(param_1)
     local_58[sVar1] = '\0';
   }
   _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
-  _NSAddressOfSymbol();
-  return;
+  uVar3 = _NSAddressOfSymbol();
+  return uVar3;
 }
 

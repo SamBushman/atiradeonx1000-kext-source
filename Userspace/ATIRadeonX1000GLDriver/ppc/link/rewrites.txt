@@ -3,9 +3,13 @@ byte buffers Ghidra declared as scalars, turned into arrays: 0
 (double)CONCAT44 bit-pattern constructions: 271
 hand text patches applied (config text_patches): orph_1efd0, orph_1efec, orph_1eff8
 64-bit shift helper calls fixed: 0
-narrow-type subtract-and-compare idioms: 0
+narrow-type subtract-and-compare idioms: 3
 float/double call arguments given their true type (integer bit patterns reinterpreted): 1200
 stack records Ghidra declared as separate scalars, merged into one block: 1
   of which records with pointer members (rewrites.fix_pointer_records): 1
 functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): 571
+external-relocation data words whose stored (prebound) value was not an addend, corrected: 0 (0 of them prebound imports)
+CONCATnn(in_register_x, param) replaced by the parameter: 0; biased table-base literals anchored to the next section: 0
+string literals used with arithmetic, put back as the number / address they stand for: 76 sites
+32-bit call results assigned to an r3:r4 pair variable, moved to its high word (rewrites.rewrite_pair_results): 85
 short C++ call names left unresolved (0):

@@ -54,7 +54,7 @@ int Binding__GetBindingBasicSize(this)
 {
   undefined4 uVar1;
   
-  uVar1 = GetVec4sForType(*(ushort *)(this + 0x24));
+  uVar1 = GetVec4sForType((uint)*(ushort *)(this + 0x24));
   return uVar1;
 }
 
@@ -64,7 +64,7 @@ int Binding__GetBindingSlots(this)
 {
   undefined4 uVar1;
   
-  uVar1 = GetVec4sForType(*(ushort *)(this + 0x24));
+  uVar1 = GetVec4sForType((uint)*(ushort *)(this + 0x24));
   return uVar1;
 }
 
@@ -138,46 +138,45 @@ int Binding__GetString(this)
 {
   int iVar1;
   size_t sVar2;
-  ushort uVar9;
-  char *pcVar3;
-  size_t sVar4;
-  char *pcVar5;
-  undefined4 uVar6;
+  undefined4 uVar3;
+  char *pcVar4;
+  size_t sVar5;
+  char *pcVar6;
   undefined4 uVar7;
   undefined4 uVar8;
+  undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
-  undefined4 uVar12;
   undefined8 local_30 [2];
   
   local_30[0] = _PTR_s__02d____02d____s____s__c__c_a7b7d6bc;
   iVar1 = Binding__IsClientRequest(this);
   sVar2 = _strlen(*(char **)((int)local_30 + iVar1 * 4));
   iVar1 = *(int *)(this + 0x10);
-  uVar9 = ((int (*)())Binding__GetOpenGLType)(this);
-  pcVar3 = (char *)GetGLStringForType(uVar9);
-  sVar4 = _strlen(pcVar3);
-  pcVar5 = _malloc(sVar2 + iVar1 + sVar4 + 0x15);
-  pcVar3 = (char *)0x0;
-  if (pcVar5 != (char *)0x0) {
+  uVar3 = ((int (*)())Binding__GetOpenGLType)(this);
+  pcVar4 = (char *)GetGLStringForType(uVar3);
+  sVar5 = _strlen(pcVar4);
+  pcVar6 = _malloc(sVar2 + iVar1 + sVar5 + 0x15);
+  pcVar4 = (char *)0x0;
+  if (pcVar6 != (char *)0x0) {
     iVar1 = Binding__IsClientRequest(this);
-    uVar6 = ((int (*)())Binding__GetActiveIndex)(this);
+    uVar3 = ((int (*)())Binding__GetActiveIndex)(this);
     uVar7 = ((int (*)())Binding__GetLocation)(this);
-    uVar9 = ((int (*)())Binding__GetOpenGLType)(this);
-    uVar12 = *(undefined4 *)(this + 8);
-    uVar8 = GetGLStringForType(uVar9);
-    uVar10 = 0x56;
+    uVar8 = ((int (*)())Binding__GetOpenGLType)(this);
+    uVar11 = *(undefined4 *)(this + 8);
+    uVar8 = GetGLStringForType(uVar8);
+    uVar9 = 0x56;
     if (this[0x34] == 0x0) {
+      uVar9 = 0x20;
+    }
+    uVar10 = 0x46;
+    if (this[0x35] == 0x0) {
       uVar10 = 0x20;
     }
-    uVar11 = 0x46;
-    if (this[0x35] == 0x0) {
-      uVar11 = 0x20;
-    }
-    _sprintf(pcVar5,*(char **)((int)local_30 + iVar1 * 4),uVar6,uVar7,uVar12,uVar8,uVar10,uVar11);
-    pcVar3 = pcVar5;
+    _sprintf(pcVar6,*(char **)((int)local_30 + iVar1 * 4),uVar3,uVar7,uVar11,uVar8,uVar9,uVar10);
+    pcVar4 = pcVar6;
   }
-  return pcVar3;
+  return pcVar4;
 }
 
 /* __ZN12BindingTableC2Ej @ 0x97bb05e0 (4 bytes) */
@@ -930,7 +929,7 @@ int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, p
     local_50 = DAT_97c38f98;
     iVar3 = ((int (*)())Binding__GetDecSize)(param_2);
     while (iVar3 = iVar3 + -1, -1 < iVar3) {
-      Binding__RemoveNameBackToChar(param_2,'[');
+      Binding__RemoveNameBackToChar(param_2,0x5b);
       _sprintf(acStack_90,"[%d]",iVar3);
       Binding__CatName(param_2,acStack_90);
       for (iVar11 = param_4; iVar11 < param_5; iVar11 = iVar11 + 1) {
@@ -947,7 +946,7 @@ int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, p
       iVar3 = (*(unsigned int *)((unsigned char *)&(local_50) + 0));
     }
     iVar11 = 0;
-    Binding__RemoveNameBackToChar(param_2,'[');
+    Binding__RemoveNameBackToChar(param_2,0x5b);
     if (-1 < iVar3) {
       uVar10 = iVar3 + 1;
       do {
@@ -1487,7 +1486,7 @@ int DeleteLinker(param_1)
   }
                     
                     
-  (**(code **)(*(int *)param_1 + 4))();
+  (**(code **)(*(int *)param_1 + 4))(param_1);
   return;
 }
 

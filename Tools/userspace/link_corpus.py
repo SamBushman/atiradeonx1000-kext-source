@@ -397,7 +397,45 @@ for nm in data_decls:
         needed[nm] = a
 
 # image-address literals in code (`0xa7b7bf8c` passed as a pointer): only for images with a high preferred address, where such a value cannot be a plain number
+# string literals that are really numbers or table addresses: Ghidra types bytes as a string (code bytes at 0x2d48 in GLDriver, part of the parser's yyr1
+# table in glprog) and then prints a constant that points there as that string. Used with arithmetic (`*(short *)("}J3x..." + off)`, a struct field
+# at 0x2d48; `*(short *)(" !\"#$..." + yyn*2 + 0x40)`, yyr1[yyn]) the C would index a copy of the literal. Match the literal's bytes to Ghidra's string
+# items and put the address back as a number (an image address is then symbolised like any other literal).
+def _c_unescape(lit):
+    out, i = bytearray(), 0
+    while i < len(lit):
+        c = lit[i]
+        if c == '\\' and i + 1 < len(lit):
+            n = lit[i + 1]
+            if n in 'x':
+                j = i + 2
+                while j < len(lit) and lit[j] in '0123456789abcdefABCDEF': j += 1
+                out.append(int(lit[i + 2:j], 16) & 0xff); i = j; continue
+            if n in '01234567':
+                j = i + 1
+                while j < len(lit) and j < i + 4 and lit[j] in '01234567': j += 1
+                out.append(int(lit[i + 1:j], 8) & 0xff); i = j; continue
+            out.append(ord({'n': '\n', 't': '\t', 'r': '\r', 'a': '\a', 'b': '\b', 'f': '\f', 'v': '\v'}.get(n, n)) & 0xff); i += 2; continue
+        out.append(ord(c) & 0xff); i += 1
+    return bytes(out)
+_str_items = collections.defaultdict(list)
+for _a, _g in gd.items():
+    if _g['dtype'] in ('string', 'TerminatedCString') and _g['len'] > 1:
+        _str_items[m.read(_a, _g['len']).split(b'\0')[0]].append(_a)
+STRLIT_ARITH = re.compile(r'\(\s*"((?:[^"\\]|\\.)*)"\s*\+')
+def fix_string_arith(txt):
+    def r(mm):
+        cands = _str_items.get(_c_unescape(mm.group(1)))
+        if not cands or len(cands) != 1:
+            return mm.group(0)
+        strlit_fixed.append(cands[0])
+        return '((char *)0x%x +' % cands[0]
+    return STRLIT_ARITH.sub(r, txt)
+strlit_fixed = []
+body = fix_string_arith(body)
+del strlit_fixed[:]
 lit_syms = {}
+biased_bases = []   # literals below a data section used as indexed table bases
 zf_lits = []    # (literal, zerofill object start it is expressed from)
 img_lo = min(s['addr'] for s in m.secs if s['size'])
 img_hi = max(s['addr'] + s['size'] for s in m.secs if s['size'])
@@ -422,6 +460,23 @@ if cfg.get('symbolize_literals') and img_lo >= 0x10000000:
             _b = v & ~3      # an unaligned value (`p <= 0xa7b7bb3c` normalised to `p < 0xa7b7bb3d`) is the aligned label plus a byte offset
         lit_syms[v] = ('SYM_%x' % _b, v - _b)
         needed['SYM_%x' % _b] = _b
+    # biased table bases: `*(undefined4 *)(i * 4 + -0x584a7114)` - Ghidra folded `table - k*4` into a constant that lies BELOW the image's data (the
+    # index is never small: GetGLStringForType's GL type enums 0x8b50..0x8b64). Such a literal (just below a section, used as `* N + LIT`) is expressed
+    # from that section's start, so the displacement to the real table survives the rebuilt layout.
+    _secs_sorted = sorted((s_['addr'], s_) for s_ in data_secs if s_['size'] and (s_['flags'] & 0xff) not in (1, 0xc))   # sections data.s emits whole
+    for _mm in re.finditer(r'\*\s*\d+\s*\+\s*(-?)0x([0-9a-f]{1,8})\b', body):
+        _v = int(_mm.group(2), 16)
+        _v = (1 << 32) - _v if _mm.group(1) else _v
+        if _v in lit_syms or m.sec_at(_v) is not None:
+            continue
+        _sec = next((s_ for sa_, s_ in _secs_sorted if sa_ > _v), None)
+        # anchor = the first named object of that section (its first words can be toolchain data the link does not emit: glprog __data starts with
+        # dyld's own pointers)
+        _nxt = min((a_ for a_ in needed.values() if a_ is not None and _sec is not None and _sec['addr'] <= a_ < _sec['addr'] + _sec['size']), default=None)
+        if _nxt is not None and _nxt - _v < 0x40000:
+            lit_syms[_v] = ('SYM_%x' % _nxt, _v - _nxt)
+            needed['SYM_%x' % _nxt] = _nxt
+            biased_bases.append(_v)
     with open(os.path.join(out, 'decls.h'), 'a') as f_:
         for nm in sorted(set(nm_ for nm_, _ in lit_syms.values())):
             f_.write('extern unsigned char %s asm("%s");\n' % (nm, nm))
@@ -533,6 +588,8 @@ for lst in m.sec_relocs.values():
     for r in lst:
         reloc_at.setdefault(r['addr'], r)
 
+ret64_names = set(re.findall(r'(?m)^(?:extern\s+)?(?:ulonglong|longlong|undefined8|unsigned long long|long long)\s+\**\s*(\w+)\s*\(', _all_body + '\n'.join(decls)))
+
 def fn_symbol_for(addr):
     """asm symbol expression for a code address"""
     if addr in fn_by_addr:
@@ -557,6 +614,7 @@ targets = set()        # data addresses that need a label
 for _nm, _sp in cfg.get('data_anchors', {}).items():
     targets.add(int(_sp['base'], 16))      # the object a PIC anchor is measured from needs a label
 ghidra_ptr_words = []
+prebound_import_words, ext_addend_fixed = [], []   # external-reloc words: prebound import values dropped / addends corrected
 unresolved_ptr_words = []   # (address, value) of relocated data words whose target has no symbol in the link
 raw_entries = {}            # stock address -> (lo, hi) raw code extent that data points at and no function owns
 def raw_entry_asm():
@@ -622,7 +680,25 @@ for s in data_secs:
         if r is not None and r['length'] == 2:
             if r['ext']:
                 sn = m.syms[r['symnum']]['name']
-                word_expr[a] = '%s+%d' % (sn, v) if v else sn
+                # a prebound image (glprog, libGL) stores the symbol's RESOLVED address in the word, not an addend: `sym + v` put
+                # `compileNode + 0x97bbe7f0` into TIntermBinary's vtable (issue #72). The addend is v minus the symbol's own address when the image
+                # defines it, and 0 for an import whose prebound address lies in another image.
+                # only a PREBOUND image (MH_PREBOUND) stores resolved addresses; elsewhere the word IS the addend (GLDriver's typeinfo pointers:
+                # __si_class_type_info's vtable + 8)
+                sd = m.syms[r['symnum']]
+                own = sd['value'] if (sd['type'] & 0x0e) == 0x0e else None
+                if not (m.flags & 0x10):
+                    add = v
+                elif own is not None and v:
+                    add = (v - own) & 0xffffffff
+                    add = add - (1 << 32) if add & 0x80000000 else add
+                elif v and m.sec_at(v) is None:
+                    add = 0; prebound_import_words.append(a)
+                else:
+                    add = v
+                if add != v:
+                    ext_addend_fixed.append(a)
+                word_expr[a] = '%s%+d' % (sn, add) if add else sn
             else:
                 e = classify_target(v)
                 if e:
@@ -838,6 +914,8 @@ di3_total = [0]
 cmp_total = [0]
 dbl_total = [0]
 blocks_total = [0]
+concat_inreg_total = [0]
+pair_total = [0]
 mirrored_total = [0]
 ptr_blocks_total = [0]
 placed_clipped = []
@@ -925,6 +1003,10 @@ for pdir_, f in _part_files:
             di3_total[0] += ndi
             txt, ncmp = rewrites.rewrite_narrow_compares(txt)
             cmp_total[0] += ncmp
+            txt, npair = rewrites.rewrite_pair_results(txt, ret64_names)
+            pair_total[0] += npair
+            if npair:
+                uses_link = True
             if cfg.get('mirror_frames'):
                 txt, nmir = rewrites.mirror_frame(txt)
                 mirrored_total[0] += nmir
@@ -947,6 +1029,12 @@ for pdir_, f in _part_files:
                     txt = re.sub(r'(?<![\w])%s\b(?!\s*\()' % re.escape(cn_), '0x%x' % fn_addr_by_name[cn_], txt)
             for bn_ in byte_arith_sized:
                 txt = re.sub(r'&\s*%s\b(?=\s*[+-]\s)' % re.escape(bn_), '((unsigned char *)&%s)' % bn_, txt)
+            txt = fix_string_arith(txt)
+            # `CONCAT22(in_register_00000010, param_2)`: Ghidra typed a parameter as a halfword and shows the rest of its register as an uninitialised
+            # `in_register_...`; the register as a whole IS the parameter the C already receives (TemporaryAllocator::getTemporary(ushort) indexed a
+            # table with garbage in the upper half)
+            txt, _nci = re.subn(r'CONCAT\d\d\(in_register_[0-9a-f]+,\s*(\w+)\)', r'(\1)', txt)
+            concat_inreg_total[0] += _nci
             if lit_syms:
                 txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
@@ -1023,6 +1111,10 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('  of which records with pointer members (rewrites.fix_pointer_records): %d\n' % ptr_blocks_total[0])
     w.write('functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): %d\n' % mirrored_total[0])
+    w.write('external-relocation data words whose stored (prebound) value was not an addend, corrected: %d (%d of them prebound imports)\n' % (len(ext_addend_fixed), len(prebound_import_words)))
+    w.write('CONCATnn(in_register_x, param) replaced by the parameter: %d; biased table-base literals anchored to the next section: %d\n' % (concat_inreg_total[0], len(biased_bases)))
+    w.write('string literals used with arithmetic, put back as the number / address they stand for: %d sites\n' % len(strlit_fixed))
+    w.write('32-bit call results assigned to an r3:r4 pair variable, moved to its high word (rewrites.rewrite_pair_results): %d\n' % pair_total[0])
     w.write('short C++ call names left unresolved (%d):\n' % len(unresolved_calls))
     for f_, tok, n_ in unresolved_calls:
         w.write('  in %s: %s (%d candidates)\n' % (f_, tok, n_))
@@ -1033,6 +1125,7 @@ static inline double GH_BITS_D(unsigned int hi, unsigned int lo) {
     return x.d;
 }
 static inline float GH_BITS_F(unsigned int u) { union { unsigned int u; float f; } x; x.u = u; return x.f; }
+#define GH_PAIR_HI(hi, old) ((((unsigned long long)(unsigned int)(hi)) << 32) | (unsigned int)(old))   /* r3:r4 pair: a 32-bit result in r3 = the high word */
 static inline double GH_BITS_DD(unsigned long long u) { union { unsigned long long u; double d; } x; x.u = u; return x.d; }
 #define GH_IS_FP(x) (__builtin_types_compatible_p(__typeof__(x), float) || __builtin_types_compatible_p(__typeof__(x), double))
 #define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), (double)(x), (double)GH_BITS_F((unsigned int)(x)))

@@ -11,11 +11,12 @@ int _PPEmulatorCreate()
 }
 
 /* dyld_stub_binding_helper @ 0x97b7bc94 (48 bytes) */
-int dyld_stub_binding_helper()
+int dyld_stub_binding_helper(param_1)
+  undefined4 param_1;
 {
                     
                     
-  (*dyld_lazy_symbol_binding_entry_point)();
+  (*dyld_lazy_symbol_binding_entry_point)(param_1);
   return;
 }
 

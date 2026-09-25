@@ -727,19 +727,15 @@ int __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_(param_1, param_2, pa
 
 /* __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_ @ 0x97c167c4 (84 bytes) */
 int __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_(param_1, param_2, param_3)
-  int param_1;
+  void *param_1;
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  undefined3 in_register_0000000c;
-  void *this;
-  
-  this = (void *)CONCAT31(in_register_0000000c,param_1);
-  __ZNSsC4Ev(this);
-  __ZNSs7reserveEm(this,*(int *)(*(int *)param_3 + -0xc) + 1);
-  __ZNSs6appendEmc(this,1,(char)param_2);
-  __ZNSs6appendERKSs(this,param_3);
-  return this;
+  __ZNSsC4Ev(param_1);
+  __ZNSs7reserveEm(param_1,*(int *)(*(int *)param_3 + -0xc) + 1);
+  __ZNSs6appendEmc(param_1,1,param_2);
+  __ZNSs6appendERKSs(param_1,param_3);
+  return param_1;
 }
 
 /* __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_ @ 0x97c16848 (44 bytes) */
@@ -1267,8 +1263,8 @@ int operator_new(param_1)
   undefined *puVar1;
   undefined *puVar2;
   void *pvVar3;
-  code *pcVar4;
-  undefined4 *puVar5;
+  code *a0;
+  undefined4 *puVar4;
   
   if (param_1 == 0) {
     param_1 = 1;
@@ -1278,17 +1274,17 @@ int operator_new(param_1)
     if (pvVar3 != (void *)0x0) {
       return pvVar3;
     }
-    pcVar4 = (code *)__keymgr_get_per_thread_data(2);
-    if (pcVar4 == (code *)0x0) break;
-    (*pcVar4)();
+    a0 = (code *)__keymgr_get_per_thread_data(2);
+    if (a0 == (code *)0x0) break;
+    (*a0)(a0);
     pvVar3 = _malloc(param_1);
   }
-  puVar5 = (undefined4 *)___cxa_allocate_exception(4);
+  puVar4 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c174;
   puVar1 = PTR___ZNSt9bad_allocD1Ev_a7b7c170;
-  *puVar5 = PTR_vtable_a7b7c178 + 8;
+  *puVar4 = PTR_vtable_a7b7c178 + 8;
                     
-  ___cxa_throw(puVar5,puVar2,puVar1);
+  ___cxa_throw(puVar4,puVar2,puVar1);
 }
 
 /* ___cxa_pure_virtual @ 0x97c1731c (48 bytes) */
