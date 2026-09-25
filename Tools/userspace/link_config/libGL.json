@@ -1,1 +1,7 @@
-{"gl_headers": ["${GL_HEADERS}/gl.h", "${GL_HEADERS}/glext.h"]}
+{
+ "gl_headers": [
+  "${GL_HEADERS}/gl.h",
+  "${GL_HEADERS}/glext.h"
+ ],
+ "mirror_frames": true
+}

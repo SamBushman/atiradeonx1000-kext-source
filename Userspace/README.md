@@ -151,6 +151,41 @@ listed below). The five GLDriver "placeholder" data objects turned out not to be
 
 Limits: C++ exceptions cannot work in the recompiled images (no unwind tables for C-compiled bodies; the runtime comes from libstdc++), and "links and loads" is weaker than "behaves the same".
 
+### Defects found by the GLSL front-end probe and the link audits (issues #67-#72, 2026-09-25)
+
+Driving the rebuilt libGLProgrammability's GLSL entry points (`ShInitialize`, `ShConstructCompiler`, `ShCompile`) - code the ARB-parser test never
+reaches - crashed it at one defect after another. Each was traced to a CLASS and fixed for all five images, not just at the crash site:
+
+* link (`link_corpus.py`):
+  * **clipped entries** were copied as raw stock words; a PC-relative `b`/`bc` among them jumped to wherever the displacement landed in the rebuilt layout
+    (`_AddAtom` = `b _LookUpAddString` went into the middle of a float routine; twelve glprog entries, eight of them `b _free`). Now symbolic, through a
+    generated PIC stub (dyld 10.4 rejects an external BR24 relocation, "unknown external relocation type"). A clipped entry whose continuation reads
+    a register the entry sets (`_str_ungetch`, `_unlinkScope`: `lwz r2,...`) is patched in `patches.py`; saveFP/restFP chains are not emitted.
+  * **relocated data words whose target had no symbol kept the stock address** silently: glprog's `_noop` (a clipped entry) in an input-source record;
+    54 GLDriver vtable slots pointing at raw code blocks (empty `blr` methods, entry thunks) or at code Ghidra filed as a detached range of another
+    function (0x19a468); the image header words. Now `_raw_entry_<addr>` asm entries in `code.s`, `__mh_*_header`, and every relocated word that still
+    has no symbol is listed in `unresolved_pointer_words.txt` (0 in all five images).
+  * **zerofill objects were sized by their Ghidra type**, so an array typed by its first element lost the rest (glprog `GetSymbolTable()::SymbolTables`,
+    3 pointers emitted as 4 bytes; 4 glprog, 259 GLDriver, 6 GA objects): now the gap to the next label (`zerofill_grown.txt`). Code literals that
+    point into a zerofill object are expressed from the object's label (the literal loop bound `-0x584817f7` stayed the stock address).
+  * **a signed corpus type was retyped unsigned** from Ghidra's `undefined4` (`_S_force_new`: the allocator's `< 1` test failed for -1 and pool blocks
+    were freed with operator delete, "pointer not malloced"): the corpus's signedness is kept (`signed_kept.txt`: 79 glprog, 10 GA, 1 VA, 3 libGL).
+  * the generated `build.sh` did not quote the install name (a path with a space broke the link).
+* rewrites (`rewrites.py`):
+  * **the lwarx/stwcx. rewrite looped forever** when Ghidra's result variable was the object itself (`DAT_x = storeWordConditionalIndexed(DAT_x + 1, ..)`):
+    the plain store before the CAS made every compare fail (10 glprog sites, std::string's empty-rep refcount). The new value now goes to a temporary.
+  * **stack records split into scalars**: `mirror_frame` (enabled in every link config) puts all of a function's frame variables into one array at their
+    stock offsets, so records of any member type (a std::vector's three pointers, a TParseContext) and overlapping buffers keep the stock layout
+    (glprog: 376 functions). The address-of test no longer misses a casted `(T *)&x`. The older byte-buffer / struct-block passes remain for functions
+    with a struct-typed frame variable.
+* decompile (Stage B3, `Tools/userspace/pipeline/README.md`): seven constant-index switches never transcribed (`TParseContext::error` jumped into the
+  stock table); 39 functions printed `void` whose callers read their r3 result; 46 variadic calls missing arguments; by-value iterator/tag
+  parameters that made the decompiler misattribute call arguments (42 functions carried Ghidra's own "Heritage AFTER dead removal" warning, now 0).
+
+State of the probe (`probe3`): `ShInitialize` (built-in symbol table: the whole built-in GLSL source parsed) and `ShConstructCompiler` succeed;
+`ShCompile` runs into `TParseContext::insertBuiltInArrayAtGlobalLevel` and then finds a corrupted node-allocator free list (a use-after-free still
+to be found). The behavioural tests of the table above still pass on the new link.
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,

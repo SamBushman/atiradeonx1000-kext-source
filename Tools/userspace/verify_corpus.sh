@@ -4,7 +4,7 @@
 N=$1; S=$2; D=$3; shift 3
 [ $# -eq 0 ] && set -- $(python3 $(dirname $0)/slice_ranges.py $S)
 H=$(dirname $0); T=/tmp/verify_$N; rm -rf $T; mkdir -p $T
-NOCAST=1 LOOSE=1 SINGLE=1 python3 $H/ghidra2c.py $D $T/corp 60 "$@" > /dev/null || exit 1
+CORPUS_SCOPE=$(python3 -c "import sys; sys.path.insert(0, '$H'); import patches; print(patches.scope_of_slice('$S') or '')") NOCAST=1 LOOSE=1 SINGLE=1 python3 $H/ghidra2c.py $D $T/corp 60 "$@" > /dev/null || exit 1
 cp $H/ghidra_c.h $T/corp/
 [ -n "$EXTRA" ] && cp $EXTRA $T/corp/extra_decls.h && echo '#include "extra_decls.h"' >> $T/corp/decls.h
 scp -q $S G5:/tmp/v_stock.bin

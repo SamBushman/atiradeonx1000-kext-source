@@ -4213,9 +4213,9 @@ int TPPStreamCompiler__parseIntermediateTree(this, param_2)
 
 /* __ZN17TPPStreamCompilerC2E11EShLanguagei @ 0x97bc96b0 (4 bytes) */
 int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
-  int *this;
-  int param_2;
-  int param_3;
+  void *this;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   int iVar1;
   undefined *puVar2;
@@ -4223,15 +4223,15 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
   char in_RESERVE;
   byte in_cr0;
   
-  this[2] = param_2;
-  *this = (int)&PTR___ZN9TCompilerD1Ev_a7b7d850;
-  this[1] = (int)(this + 0x2c);
-  this[3] = 0;
-  __ZN14TPoolAllocatorC1Ebii(this + 4,false,0x2000,0x10);
-  *this = DAT_a7b7bd98 + 8;
-  __ZN22ConstantAllocationListC1Ev(this + 0x11);
-  ((int (*)())__ZN18ParseFunctionStackC1Ev)(this + 0x16);
-  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)(this + 0x17);
+  *(undefined4 *)((int)this + 8) = param_2;
+  *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
+  *(int *)((int)this + 4) = (int)this + 0xb0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),false,0x2000,0x10);
+  *(int *)this = DAT_a7b7bd98 + 8;
+  __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
+  ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
+  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   puVar2 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
@@ -4241,8 +4241,8 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2d] = 4;
-  this[0x2c] = (int)(puVar2 + 0xc);
+  *(undefined4 *)((int)this + 0xb4) = 4;
+  *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
       iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
@@ -4250,30 +4250,30 @@ int __ZN17TPPStreamCompilerC2E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2f] = 4;
-  this[0x2e] = (int)(puVar2 + 0xc);
-  this[0x30] = param_3;
-  newQueue((unsigned char *)(this + 0x13));
-  this[0x22] = 0;
-  this[0x27] = 1;
-  this[0x1a] = 0;
-  this[0x1b] = 0;
-  this[0x1d] = 0;
-  this[0x1c] = 0;
-  this[0x1f] = 0;
-  this[0x20] = 0;
-  this[0x1e] = 0;
-  this[0x21] = 0;
-  this[0x18] = 0;
-  this[0x19] = 0;
+  *(undefined4 *)((int)this + 0xbc) = 4;
+  *(undefined **)((int)this + 0xb8) = puVar2 + 0xc;
+  *(undefined4 *)((int)this + 0xc0) = param_3;
+  newQueue((unsigned char *)((int)this + 0x4c));
+  *(undefined4 *)((int)this + 0x88) = 0;
+  *(undefined4 *)((int)this + 0x9c) = 1;
+  *(undefined4 *)((int)this + 0x68) = 0;
+  *(undefined4 *)((int)this + 0x6c) = 0;
+  *(undefined4 *)((int)this + 0x74) = 0;
+  *(undefined4 *)((int)this + 0x70) = 0;
+  *(undefined4 *)((int)this + 0x7c) = 0;
+  *(undefined4 *)((int)this + 0x80) = 0;
+  *(undefined4 *)((int)this + 0x78) = 0;
+  *(undefined4 *)((int)this + 0x84) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 100) = 0;
   return;
 }
 
 /* __ZN17TPPStreamCompilerC1E11EShLanguagei @ 0x97bc96b4 (4 bytes) */
 int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
-  int *this;
-  int param_2;
-  int param_3;
+  void *this;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   int iVar1;
   undefined *puVar2;
@@ -4281,15 +4281,15 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
   char in_RESERVE;
   byte in_cr0;
   
-  this[2] = param_2;
-  *this = (int)&PTR___ZN9TCompilerD1Ev_a7b7d850;
-  this[1] = (int)(this + 0x2c);
-  this[3] = 0;
-  __ZN14TPoolAllocatorC1Ebii(this + 4,false,0x2000,0x10);
-  *this = DAT_a7b7bd98 + 8;
-  __ZN22ConstantAllocationListC1Ev(this + 0x11);
-  ((int (*)())__ZN18ParseFunctionStackC1Ev)(this + 0x16);
-  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)(this + 0x17);
+  *(undefined4 *)((int)this + 8) = param_2;
+  *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
+  *(int *)((int)this + 4) = (int)this + 0xb0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),false,0x2000,0x10);
+  *(int *)this = DAT_a7b7bd98 + 8;
+  __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
+  ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
+  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   puVar2 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
@@ -4299,8 +4299,8 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2d] = 4;
-  this[0x2c] = (int)(puVar2 + 0xc);
+  *(undefined4 *)((int)this + 0xb4) = 4;
+  *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
       iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
@@ -4308,30 +4308,30 @@ int __ZN17TPPStreamCompilerC1E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2f] = 4;
-  this[0x2e] = (int)(puVar2 + 0xc);
-  this[0x30] = param_3;
-  newQueue((unsigned char *)(this + 0x13));
-  this[0x22] = 0;
-  this[0x27] = 1;
-  this[0x1a] = 0;
-  this[0x1b] = 0;
-  this[0x1d] = 0;
-  this[0x1c] = 0;
-  this[0x1f] = 0;
-  this[0x20] = 0;
-  this[0x1e] = 0;
-  this[0x21] = 0;
-  this[0x18] = 0;
-  this[0x19] = 0;
+  *(undefined4 *)((int)this + 0xbc) = 4;
+  *(undefined **)((int)this + 0xb8) = puVar2 + 0xc;
+  *(undefined4 *)((int)this + 0xc0) = param_3;
+  newQueue((unsigned char *)((int)this + 0x4c));
+  *(undefined4 *)((int)this + 0x88) = 0;
+  *(undefined4 *)((int)this + 0x9c) = 1;
+  *(undefined4 *)((int)this + 0x68) = 0;
+  *(undefined4 *)((int)this + 0x6c) = 0;
+  *(undefined4 *)((int)this + 0x74) = 0;
+  *(undefined4 *)((int)this + 0x70) = 0;
+  *(undefined4 *)((int)this + 0x7c) = 0;
+  *(undefined4 *)((int)this + 0x80) = 0;
+  *(undefined4 *)((int)this + 0x78) = 0;
+  *(undefined4 *)((int)this + 0x84) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 100) = 0;
   return;
 }
 
 /* __ZN17TPPStreamCompilerC4E11EShLanguagei @ 0x97bc96b8 (284 bytes) */
 int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
-  int *this;
-  int param_2;
-  int param_3;
+  void *this;
+  undefined4 param_2;
+  undefined4 param_3;
 {
   int iVar1;
   undefined *puVar2;
@@ -4339,15 +4339,15 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
   char in_RESERVE;
   byte in_cr0;
   
-  this[2] = param_2;
-  *this = (int)&PTR___ZN9TCompilerD1Ev_a7b7d850;
-  this[1] = (int)(this + 0x2c);
-  this[3] = 0;
-  __ZN14TPoolAllocatorC1Ebii(this + 4,false,0x2000,0x10);
-  *this = DAT_a7b7bd98 + 8;
-  __ZN22ConstantAllocationListC1Ev(this + 0x11);
-  ((int (*)())__ZN18ParseFunctionStackC1Ev)(this + 0x16);
-  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)(this + 0x17);
+  *(undefined4 *)((int)this + 8) = param_2;
+  *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
+  *(int *)((int)this + 4) = (int)this + 0xb0;
+  *(undefined4 *)((int)this + 0xc) = 0;
+  __ZN14TPoolAllocatorC1Ebii((void *)((int)this + 0x10),false,0x2000,0x10);
+  *(int *)this = DAT_a7b7bd98 + 8;
+  __ZN22ConstantAllocationListC1Ev((void *)((int)this + 0x44));
+  ((int (*)())__ZN18ParseFunctionStackC1Ev)((void *)((int)this + 0x58));
+  ((int (*)())__ZN19ParseWhileLoopStackC1Ev)((void *)((int)this + 0x5c));
   puVar2 = PTR__S_empty_rep_storage_a7b7c0f0;
   piVar3 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
@@ -4357,8 +4357,8 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2d] = 4;
-  this[0x2c] = (int)(puVar2 + 0xc);
+  *(undefined4 *)((int)this + 0xb4) = 4;
+  *(undefined **)((int)this + 0xb0) = puVar2 + 0xc;
   do {
     if (in_RESERVE != '\0') {
       iVar1 = storeWordConditionalIndexed(*piVar3 + 1,0,piVar3);
@@ -4366,22 +4366,22 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
       in_cr0 = 2;
     }
   } while (!(bool)(in_cr0 >> 1 & 1));
-  this[0x2f] = 4;
-  this[0x2e] = (int)(puVar2 + 0xc);
-  this[0x30] = param_3;
-  newQueue((unsigned char *)(this + 0x13));
-  this[0x22] = 0;
-  this[0x27] = 1;
-  this[0x1a] = 0;
-  this[0x1b] = 0;
-  this[0x1d] = 0;
-  this[0x1c] = 0;
-  this[0x1f] = 0;
-  this[0x20] = 0;
-  this[0x1e] = 0;
-  this[0x21] = 0;
-  this[0x18] = 0;
-  this[0x19] = 0;
+  *(undefined4 *)((int)this + 0xbc) = 4;
+  *(undefined **)((int)this + 0xb8) = puVar2 + 0xc;
+  *(undefined4 *)((int)this + 0xc0) = param_3;
+  newQueue((unsigned char *)((int)this + 0x4c));
+  *(undefined4 *)((int)this + 0x88) = 0;
+  *(undefined4 *)((int)this + 0x9c) = 1;
+  *(undefined4 *)((int)this + 0x68) = 0;
+  *(undefined4 *)((int)this + 0x6c) = 0;
+  *(undefined4 *)((int)this + 0x74) = 0;
+  *(undefined4 *)((int)this + 0x70) = 0;
+  *(undefined4 *)((int)this + 0x7c) = 0;
+  *(undefined4 *)((int)this + 0x80) = 0;
+  *(undefined4 *)((int)this + 0x78) = 0;
+  *(undefined4 *)((int)this + 0x84) = 0;
+  *(undefined4 *)((int)this + 0x60) = 0;
+  *(undefined4 *)((int)this + 100) = 0;
   return;
 }
 

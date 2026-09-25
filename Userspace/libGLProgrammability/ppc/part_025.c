@@ -46,7 +46,7 @@ LAB_97c1866c:
 
 /* __cxxabiv1____vmi_class_type_info____do_dyncast @ 0x97c186f0 (1092 bytes) */
 int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  void *this;
+  unsigned char * this;
   int param_2;
   uint param_3;
   unsigned char * param_4;
@@ -63,7 +63,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
   int iVar6;
   uint uVar7;
   uint uVar8;
-  undefined4 *puVar9;
+  unsigned char * p_Var9;
   int local_60;
   uint local_5c;
   uint local_58;
@@ -71,7 +71,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
   uint local_50;
   
   if ((param_8[4] & 0x10U) != 0) {
-    param_8[4] = *(int *)((int)this + 8);
+    param_8[4] = *(int *)(this + 8);
   }
   if ((param_5 == param_7) && (iVar6 = __ZNKSt9type_infoeqERKS_(this,param_6), iVar6 != 0)) {
     param_8[2] = param_3;
@@ -79,12 +79,12 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
   }
   iVar6 = __ZNKSt9type_infoeqERKS_(this,param_4);
   if (iVar6 == 0) {
-    iVar6 = *(int *)((int)this + 0xc) + -1;
-    if (*(int *)((int)this + 0xc) == 0) {
+    iVar6 = *(int *)(this + 0xc) + -1;
+    if (*(int *)(this + 0xc) == 0) {
       return 0;
     }
     bVar1 = param_2 != -2;
-    puVar9 = (undefined4 *)((int)this + iVar6 * 8 + 0x10);
+    p_Var9 = this + iVar6 * 8 + 0x10;
     uVar8 = 0;
     do {
       local_50 = param_8[4];
@@ -92,7 +92,7 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
       local_60 = 0;
       local_5c = 0;
       local_58 = 0;
-      uVar3 = puVar9[1];
+      uVar3 = *(uint *)(p_Var9 + 4);
       iVar4 = (int)uVar3 >> 8;
       uVar7 = param_3;
       if ((uVar3 & 1) != 0) {
@@ -107,9 +107,9 @@ int __cxxabiv1____vmi_class_type_info____do_dyncast(this, param_2, param_3, para
       }
       else {
 LAB_97c18848:
-        uVar3 = (**(code **)(*(int *)*puVar9 + 0x1c))
-                          ((int *)*puVar9,param_2,uVar7,param_4,(int)param_5 + iVar4,param_6,param_7
-                           ,&local_60);
+        uVar3 = (**(code **)(**(int **)p_Var9 + 0x1c))
+                          (*(int **)p_Var9,param_2,uVar7,param_4,(int)param_5 + iVar4,param_6,
+                           param_7,&local_60);
         uVar7 = local_54;
         uVar5 = param_8[2];
         param_8[2] = uVar5 | local_58;
@@ -125,7 +125,7 @@ LAB_97c18848:
           *param_8 = local_60;
           param_8[1] = local_5c;
           if (((local_60 != 0) && ((uVar5 | local_58) != 0)) &&
-             (((*(uint *)((int)this + 8) ^ 1) & 1) != 0)) {
+             (((*(uint *)(this + 8) ^ 1) & 1) != 0)) {
             return uVar3;
           }
         }
@@ -139,7 +139,7 @@ LAB_97c188fc:
               if ((param_8[2] < 4) || (((param_8[2] & 1U) != 0 && ((param_8[4] & 2U) != 0)))) {
                 if ((int)uVar5 < 1) {
                   if (((int)local_54 < 4) ||
-                     (((local_54 & 1) != 0 && ((*(uint *)((int)this + 8) & 2) != 0)))) {
+                     (((local_54 & 1) != 0 && ((*(uint *)(this + 8) & 2) != 0)))) {
                     if (param_2 < 0) {
                       if (!bVar1) goto LAB_97c189e8;
                       uVar5 = (**(code **)(*(int *)param_4 + 0x20))
@@ -158,8 +158,7 @@ LAB_97c189e8:
                   }
                 }
                 if ((int)uVar7 < 1) {
-                  if ((3 < (int)uVar5) &&
-                     (((uVar5 & 1) == 0 || ((*(uint *)((int)this + 8) & 2) == 0))))
+                  if ((3 < (int)uVar5) && (((uVar5 & 1) == 0 || ((*(uint *)(this + 8) & 2) == 0))))
                   goto LAB_97c18a38;
                   if (param_2 < 0) {
                     if (!bVar1) goto LAB_97c18a60;
@@ -222,7 +221,7 @@ LAB_97c18a38:
         }
       }
       bVar2 = iVar6 == 0;
-      puVar9 = puVar9 + -2;
+      p_Var9 = p_Var9 + -8;
       iVar6 = iVar6 + -1;
       uVar8 = uVar3;
       if (bVar2) {
@@ -808,7 +807,7 @@ int __Z12read_uleb128PKhPj(param_1, param_2)
     uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
   } while ((bVar1 & 0x80) != 0);
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* __Z12read_sleb128PKhPi @ 0x97c19534 (76 bytes) */
@@ -834,7 +833,7 @@ int __Z12read_sleb128PKhPi(param_1, param_2)
     uVar4 = uVar4 | -1 << (uVar3 & 0x3f);
   }
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* __Z28read_encoded_value_with_basehjPKhPj @ 0x97c19580 (312 bytes) */
@@ -942,7 +941,7 @@ int parse_lsda_header(param_1, param_2, param_3)
   param_3[0x15] = *plVar6;
   iVar4 = ((int (*)())__Z12read_uleb128PKhPj)((uchar *)(plVar6 + 1),local_30);
   *(uint *)(param_3 + 0x10) = iVar4 + local_30[0];
-  return;
+  return iVar4;
 }
 
 /* __Z15get_ttype_entryP16lsda_header_infoj @ 0x97c197c4 (84 bytes) */
@@ -1577,7 +1576,7 @@ int _read_uleb128_97c1a3ec(param_1, param_2)
     uVar4 = uVar4 | (bVar1 & 0x7f) << uVar2;
   } while ((bVar1 & 0x80) != 0);
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* _read_sleb128_97c1a41c @ 0x97c1a41c (76 bytes) */
@@ -1603,7 +1602,7 @@ int _read_sleb128_97c1a41c(param_1, param_2)
     uVar4 = uVar4 | -1 << (uVar3 & 0x3f);
   }
   *param_2 = uVar4;
-  return;
+  return param_1;
 }
 
 /* _read_encoded_value_with_base_97c1a468 @ 0x97c1a468 (312 bytes) */

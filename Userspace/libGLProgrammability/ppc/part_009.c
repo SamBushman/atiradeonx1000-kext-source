@@ -3506,7 +3506,7 @@ int __ZN14TGenericLinkerD4Ev(this)
 
 /* TGenericLinker__getShaderLocalParamRemapTable @ 0x97bb833c (40 bytes) */
 int TGenericLinker__getShaderLocalParamRemapTable(this, param_2)
-  int this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {
@@ -3520,7 +3520,7 @@ int TGenericLinker__getShaderLocalParamRemapTable(this, param_2)
 
 /* TGenericLinker__getNumShaderLocalParams @ 0x97bb8364 (40 bytes) */
 int TGenericLinker__getNumShaderLocalParams(this, param_2)
-  int this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {
@@ -3687,7 +3687,7 @@ int TGenericLinker__getActiveAttrib(this, param_2, param_3, param_4, param_5, pa
 
 /* TGenericLinker__getPPStreamManager @ 0x97bb8678 (40 bytes) */
 int TGenericLinker__getPPStreamManager(this, param_2)
-  int this;
+  unsigned char * this;
   int param_2;
 {
   if (param_2 == 0) {

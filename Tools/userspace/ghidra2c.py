@@ -370,6 +370,9 @@ PATCHES = {}
 NOTES = {}
 if os.path.exists(_pp):
     _spec = importlib.util.spec_from_file_location('patches', _pp); _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m); PATCHES = _m.PATCHES; NOTES = getattr(_m, 'NOTES', {})
+_PatchError = getattr(_m, 'PatchError', Exception) if os.path.exists(_pp) else Exception
+CORPUS_SCOPE = os.environ.get('CORPUS_SCOPE', '')
+_applied = set()
 funcs = [(a, sz, name) for a, sz, name in idx]
 for pi in range(0, len(funcs), part):
     chunk = funcs[pi:pi + part]; pn = 'part_%03d' % (pi // part)
@@ -444,7 +447,14 @@ for pi in range(0, len(funcs), part):
             conv = re.sub(r'\bcase \(\s*[\w ]+\*+\s*\)\s*(0x[0-9a-fA-F]+|\d+)\s*:', r'case \1:', conv)   # a pointer-typed switch: its case values are plain integers
             conv = re.sub(r'switch\((\w+)\)', lambda m: 'switch((int)%s)' % m.group(1) if re.search(r'(?m)^\s*[\w ]+\*+\s*%s\s*;' % m.group(1), conv) else m.group(0), conv)   # a pointer-typed switch variable
             conv = re.sub(r'(?m)^(\s*[A-Za-z_]\w*:)(\s*\n\s*\})', r'\1 ;\2', conv)   # a label needs a statement: `code_r0x...:` directly before `}` when the target is the function's end
-            if name in PATCHES: conv = PATCHES[name](b, conv)
+            if name in PATCHES:
+                _sc = getattr(PATCHES[name], 'scope', None)
+                if _sc is None or _sc == CORPUS_SCOPE:
+                    try: conv = PATCHES[name](b, conv); _applied.add(name)
+                    except _PatchError as _e:
+                        if os.environ.get('PATCH_DIAG'): print('PATCH-FAIL', name, _e)   # diagnostic: list every patch that no longer applies, keep going
+                        else: sys.exit('patches.py: %s: %s' % (name, _e))
+                elif not CORPUS_SCOPE: sys.exit('patches.py: %s has a scoped patch (%s) but CORPUS_SCOPE is not set (build_corpus.py / verify_corpus.sh set it)' % (name, _sc))
             f.write(conv + '\n')
             if os.environ.get('SINGLE'):
                 os.makedirs(os.path.join(out, 'single'), exist_ok=True)
@@ -455,4 +465,6 @@ with open(os.path.join(out, 'ledger.tsv'), 'w') as f:
 if externals:
     with open(os.path.join(out, 'externals.tsv'), 'w') as f:
         for a_, n_ in externals: f.write('%s\t%s\texternal (dyld import placeholder, no code in this binary)\n' % (a_, n_))
+_unused = sorted(k for k, v in PATCHES.items() if getattr(v, 'scope', None) == CORPUS_SCOPE and k not in _applied)
+if _unused and not os.environ.get('SINGLE'): print('patches.py: %d patch(es) of scope %s not applied (function absent from this dump or renamed): %s' % (len(_unused), CORPUS_SCOPE, ', '.join(_unused)))
 print(len(funcs), 'functions,', len(imports), 'imports,', len(data_syms), 'data symbols,', (len(funcs) + part - 1) // part, 'parts')

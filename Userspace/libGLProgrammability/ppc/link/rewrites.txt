@@ -1,11 +1,13 @@
-atomic read-modify-write idioms rewritten as compare-and-swap loops: 292
-byte buffers Ghidra declared as scalars, turned into arrays: 64
+atomic read-modify-write idioms rewritten as compare-and-swap loops: 298
+byte buffers Ghidra declared as scalars, turned into arrays: 0
 (double)CONCAT44 bit-pattern constructions: 84
 hand text patches applied (config text_patches): 
 64-bit shift helper calls fixed: 3
 narrow-type subtract-and-compare idioms: 7
 float/double call arguments given their true type (integer bit patterns reinterpreted): 1119
-stack records Ghidra declared as separate scalars, merged into one block: 143
+stack records Ghidra declared as separate scalars, merged into one block: 0
+  of which records with pointer members (rewrites.fix_pointer_records): 0
+functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): 376
 short C++ call names left unresolved (6):
   in TParseContext__constructorErrorCheck: error -> TParseContext__error (same class, not confirmed by the stock call list) (4 candidates)
   in TParseContext__extensionErrorCheck: error -> TParseContext__error (same class, not confirmed by the stock call list) (4 candidates)

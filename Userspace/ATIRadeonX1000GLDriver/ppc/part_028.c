@@ -74,9 +74,11 @@ int FUN_00105894(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  undefined4 uVar1;
+  
   *(int *)(param_1 + 0x160) = *(int *)(param_1 + 0x160) + -1;
-  ((int (*)())FUN_0010564c)(param_1,param_2,0);
-  return;
+  uVar1 = ((int (*)())FUN_0010564c)(param_1,param_2,0);
+  return uVar1;
 }
 
 /* FUN_001058a8 @ 0x1058a8 (136 bytes) */

@@ -1442,14 +1442,16 @@ int FUN_00193e18(param_1, param_2)
   int param_2;
 {
   uint uVar1;
+  int iVar2;
   
   uVar1 = param_2 + 3U & 0xfffffffc;
   if (*(uint *)(param_1 + 0x10) < uVar1 + *(int *)(param_1 + 8)) {
     ((int (*)())FUN_00193d98)(param_1,uVar1);
   }
-  *(int *)(param_1 + 0x14) = *(int *)(param_1 + 8);
-  *(uint *)(param_1 + 8) = uVar1 + *(int *)(param_1 + 8);
-  return;
+  iVar2 = *(int *)(param_1 + 8);
+  *(int *)(param_1 + 0x14) = iVar2;
+  *(uint *)(param_1 + 8) = uVar1 + iVar2;
+  return iVar2;
 }
 
 /* FUN_00193e74 @ 0x193e74 (68 bytes) */
@@ -2459,7 +2461,7 @@ int FUN_001952d8(param_1, param_2)
     }
   }
   *(int *)(param_1 * 4 + param_2) = iVar3;
-  return;
+  return iVar3;
 }
 
 /* FUN_00195330 @ 0x195330 (12 bytes) */

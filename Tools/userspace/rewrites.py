@@ -48,6 +48,11 @@ def rewrite_atomics(text):
         else:
             pexpr = ptr
             val = re.sub(r'\*(?:\([^)]*\))?%s\b' % re.escape(m.group('sp') or ptr), 'ghidra_old', val)
+        if pexpr == '&%s' % res:
+            # the result variable IS the object (`DAT_x = storeWordConditionalIndexed(DAT_x + 1, 0, 0xADDR)`): only the CAS may store to it; a plain
+            # store of the new value first made every CAS compare old+1 with old and loop forever (glprog std::string empty-rep refcount, issue #69)
+            return '\n'.join([ind + '{', ind + '  int ghidra_old, ghidra_new;', ind + '  do {', ind + '    ghidra_old = *(int *)(%s);' % pexpr,
+                              ind + '    ghidra_new = %s;' % val, ind + '  } while (!ghidra_cas32((void *)(%s), ghidra_old, ghidra_new));' % pexpr, ind + '}']) + '\n'
         return '\n'.join([ind + '{', ind + '  int ghidra_old;', ind + '  do {', ind + '    ghidra_old = *(int *)(%s);' % pexpr, ind + '    %s = %s;' % (res, val),
                           ind + '  } while (!ghidra_cas32((void *)(%s), ghidra_old, (int)(%s)));' % (pexpr, res), ind + '}']) + '\n'
 
@@ -69,10 +74,15 @@ def rewrite_atomics(text):
             lines.append(ind + '    %s = %s ghidra_old;' % (old, '(int)'))
         if m.group('mid'):
             lines.extend(l for l in m.group('mid').rstrip('\n').split('\n'))     # a value computed from the loaded word before the conditional store
-        lines.append(ind + '    %s = %s;' % (res, val if m.group('sp') is not None or old or True else val))
+        self_obj = pexpr == '&%s' % res     # the result variable is the object itself: only the CAS may store to it (see single())
+        if self_obj:
+            lines[1] = ind + '  int ghidra_old, ghidra_new;'
+            lines.append(ind + '    ghidra_new = %s;' % val)
+        else:
+            lines.append(ind + '    %s = %s;' % (res, val))
         if m.group('post'):
             lines.extend(l for l in m.group('post').rstrip('\n').split('\n'))
-        lines.append(ind + '  } while (!ghidra_cas32((void *)(%s), ghidra_old, (int)(%s)));' % (pexpr, res))
+        lines.append(ind + '  } while (!ghidra_cas32((void *)(%s), ghidra_old, %s));' % (pexpr, 'ghidra_new' if self_obj else '(int)(%s)' % res))
         lines.append(ind + '}')
         return '\n'.join(lines)
 
@@ -179,7 +189,19 @@ def _addr_of_matches(body, nm):
         j = m.start() - 1
         while j >= 0 and body[j] in ' \t\n':
             j -= 1
-        if j >= 0 and (body[j].isalnum() or body[j] in '_)]'):
+        if j >= 0 and body[j] == ')':
+            # `(unsigned char *)&x` is a cast of an address, `(a + b) & x` a binary and: look at what the parentheses hold
+            d, i = 0, j
+            while i >= 0:
+                if body[i] == ')': d += 1
+                elif body[i] == '(':
+                    d -= 1
+                    if d == 0: break
+                i -= 1
+            if i >= 0 and re.match(r'^\s*(?:const\s+)?[A-Za-z_][\w ]*?(?:\s*\*)+\s*$', body[i + 1:j]):
+                res.append(m)
+            continue
+        if j >= 0 and (body[j].isalnum() or body[j] in '_]'):
             continue                         # binary and
         res.append(m)
     return res
@@ -320,6 +342,114 @@ def fix_struct_blocks(chunk):
             body, n = re.subn(pat, (lambda mm: '%sunsigned int %s[%d] = { 0 };   /* zeroed: Ghidra splits a stored word into separately typed halves and leaves one half unassigned */\n' % (mm.group(1), base, nwords)) if first else '', body, count=1)
             if n:
                 first = False
+        blocks += 1
+    return head + body, blocks
+
+
+FRAME_SIZES = dict(SIZE_OF, **{'unsigned char': 1, 'signed char': 1, 'bool': 1, 'uchar': 1, 'unsigned int': 4, 'unsigned short': 2,
+                                'unsigned long long': 8, 'long long': 8})
+
+
+def mirror_frame(chunk):
+    """Put every stack-frame variable of a function (`local_NN`, `xStack_NN`: Ghidra names them by their frame offset) into ONE array at its stock
+    offset. The decompile shows a stack object as separate scalars (a std::vector as three pointers, a TParseContext as dozens of mixed-width
+    fields) and gcc -O0 lays separate scalars out in any order, so a callee handed `&first_member` read the other members from unrelated slots
+    (rebuilt ShCompile: _M_insert_aux on a split vector; TParseContext::initializeExtensionBehavior on a map inside a split TParseContext). The
+    frame array reproduces the stock layout exactly - records, byte buffers and arrays that overlap their neighbours included - so it subsumes
+    fix_byte_buffers / fix_struct_blocks / fix_pointer_records for the functions it handles (a function with a frame variable of unknown size is left
+    to them). Returns (chunk, 1 if mirrored else 0)."""
+    k = chunk.find('\n{')
+    if k < 0:
+        return chunk, 0
+    head, body = chunk[:k], chunk[k:]
+    end_decl = body.find('\n\n', 2)
+    decl_part = body[:end_decl] if end_decl > 0 else body
+    decls = []
+    for m in DECL.finditer(decl_part):
+        ty, nm, cnt = m.group(2).strip(), m.group(3), m.group(5)
+        if ty in ('return', 'else', 'goto', 'case') or '(' in m.group(0):
+            continue
+        stars = m.group(0)[m.group(0).index(m.group(2)) + len(m.group(2)):m.group(0).index(nm)].count('*')
+        size = 4 if stars else FRAME_SIZES.get(ty)
+        if size is None:
+            return chunk, 0                 # a struct-typed frame variable (dylib, dwarf_eh_bases): size unknown here
+        n = int(cnt) if cnt else 1
+        decls.append(dict(line=m.group(0), ty=ty + (' ' + '*' * stars if stars else ''), nm=nm, off=int(m.group(4), 16), size=size, n=n, arr=cnt is not None))
+    if not decls:
+        return chunk, 0
+    top = max(d['off'] for d in decls)                     # lowest address
+    total = max(top - d['off'] + d['size'] * d['n'] for d in decls)
+    nq = (total + 7) // 8
+    first = True
+    for d in sorted(decls, key=lambda d: -d['off']):
+        repl = ('%sunsigned long long ghidra_frame[%d] = { 0 };   /* the stock frame, variables at their offsets: rewrites.mirror_frame */' % (re.match(r'\s*', d['line']).group(0), nq)) if first else None
+        body = body.replace(d['line'] + '\n', (repl + '\n') if repl else '', 1)
+        first = False
+    for d in decls:
+        o = top - d['off']
+        t = d['ty'] if (d['ty'].endswith('*') or d['ty'] in SIGNED or d['ty'] in ('unsigned char', 'signed char', 'unsigned int', 'unsigned short', 'long long', 'unsigned long long', 'bool')) else ctype_of(d['ty']) if d['ty'] in SIZE_OF else d['ty']
+        if d['arr']:
+            ptr = '((%s *)((char *)ghidra_frame + %d))' % (t, o)
+            # `&(arr)` (the sub-piece rewrite's form `(unsigned char *)&(x) + k`) is the array's address too
+            body = re.sub(r'&\s*\(\s*%s\s*\)' % re.escape(d['nm']), lambda _m, p=ptr: p, body)
+            body = _sub_addr_of(body, d['nm'], ptr)
+            body = re.sub(r'(?<![\w.])%s\b' % re.escape(d['nm']), lambda _m, p=ptr: p, body)
+        else:
+            if d['size'] == 2:
+                # a halfword assigned CONCAT22(...) is a word store over it and its neighbour (as in fix_struct_blocks)
+                body = re.sub(r'(?m)^(\s*)%s = (CONCAT22\()' % re.escape(d['nm']), r'\1(*(unsigned int *)((char *)ghidra_frame + %d)) = \2' % o, body)
+            body = re.sub(r'(?<![\w.])%s\b' % re.escape(d['nm']), '(*(%s *)((char *)ghidra_frame + %d))' % (t, o), body)
+    return head + body, 1
+
+
+def fix_pointer_records(chunk):
+    """fix_struct_blocks for records with POINTER members, which it leaves alone: a std::vector is three pointers (`void *local_180; int *local_17c;
+    int *local_178;`) and `&local_180` is passed as the vector object - at -O0 the three locals were laid out in some other order, so
+    vector<TSymbolTableLevel*>::_M_insert_aux read _M_finish/_M_end_of_storage from unrelated stack words and memcpy'd garbage (the rebuilt ShCompile,
+    found by the GLSL differential test). Same rule: the dense chain of 4-byte (pointer or scalar) locals that starts at an address-taken one becomes
+    one zeroed word array; members are rewritten as typed accesses at their byte offsets. Only chains with a pointer member are handled here, so the
+    blocks fix_struct_blocks already made are untouched. Returns (chunk, number of blocks)."""
+    k = chunk.find('\n{')
+    if k < 0:
+        return chunk, 0
+    head, body = chunk[:k], chunk[k:]
+    decls = []
+    for m in DECL.finditer(body):
+        if m.group(5) is not None:
+            continue
+        stars = m.group(0)[m.group(0).index(m.group(2)) + len(m.group(2)):m.group(0).index(m.group(3))].count('*')
+        ty = m.group(2).strip()
+        if stars:
+            decls.append(dict(line=m.group(0), ty=ty + ' ' + '*' * stars, ptr=True, size=4, nm=m.group(3), off=int(m.group(4), 16)))
+        elif SIZE_OF.get(ty) == 4:
+            decls.append(dict(line=m.group(0), ty=ty, ptr=False, size=4, nm=m.group(3), off=int(m.group(4), 16)))
+    by_off = {d['off']: d for d in decls}
+    used, blocks = set(), 0
+    for d in sorted(decls, key=lambda d: -d['off']):
+        if d['nm'] in used or not _addr_of_matches(body, d['nm']):
+            continue
+        chain, cur = [d], d
+        while True:
+            nxt = by_off.get(cur['off'] - 4)
+            if not nxt or nxt['nm'] in used:
+                break
+            chain.append(nxt)
+            cur = nxt
+        if len(chain) < 2 or not any(c['ptr'] for c in chain):
+            continue
+        base = 'blk_%s' % d['nm']
+        # declarations: the first member's line becomes the block, the others go
+        for i, c in enumerate(chain):
+            used.add(c['nm'])
+            indent = re.match(r'\s*', c['line']).group(0)
+            repl = ('%sunsigned int %s[%d] = { 0 };   /* one stack record (pointer members): see rewrites.fix_pointer_records */' % (indent, base, len(chain))) if i == 0 else ''
+            body = body.replace(c['line'] + '\n', (repl + '\n') if repl else '', 1)
+        for c in chain:
+            t = c['ty'] if c['ptr'] else ctype_of(c['ty'])
+            ptr = '((%s *)((char *)%s + %d))' % (t, base, d['off'] - c['off'])
+            body = _sub_addr_of(body, c['nm'], ptr)
+            # a pointer member is also used with an index (`local_7c[i]`): that is an ordinary use of the pointer value
+            body = re.sub((r'(?<![\w.])%s\b' if c['ptr'] else r'(?<![\w.])%s\b(?!\s*\[)') % re.escape(c['nm']), lambda _m, p=ptr: '(*%s)' % p, body)
         blocks += 1
     return head + body, blocks
 

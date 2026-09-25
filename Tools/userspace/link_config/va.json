@@ -7,5 +7,6 @@
  ],
  "const_function_names": [
   "FUN_000010c0"
- ]
+ ],
+ "mirror_frames": true
 }

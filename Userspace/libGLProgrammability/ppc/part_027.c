@@ -96,7 +96,7 @@ LAB_97c310a4:
   *puVar2 = 0;
   puVar2[1] = param_1;
   puVar2[2] = 0;
-  return;
+  return puVar2;
 }
 
 /* std___Rb_tree_base_iterator___M_decrement @ 0x97c310d8 (144 bytes) */
@@ -266,36 +266,38 @@ int TType__isVector(this)
 
 /* __ZN5TType7setTypeE10TBasicTypeibbi @ 0x97c31368 (32 bytes) */
 int __ZN5TType7setTypeE10TBasicTypeibbi(this, param_2, param_3, param_4, param_5, param_6)
-  int this;
+  void *this;
   uint param_2;
   uint param_3;
   uint param_4;
   uint param_5;
   undefined4 param_6;
 {
-  *(undefined4 *)(this + 4) = param_6;
-  *(uint *)(this + 0x24) =
+  *(undefined4 *)((int)this + 4) = param_6;
+  *(uint *)((int)this + 0x24) =
        (param_5 & 1) << 9 |
        (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)(this + 0x24) & 0xfe0001ff;
+       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0001ff
+  ;
   return;
 }
 
 /* __ZN5TType7setTypeE10TBasicTypeibPS_ @ 0x97c31388 (40 bytes) */
 int __ZN5TType7setTypeE10TBasicTypeibPS_(this, param_2, param_3, param_4, param_5)
-  int this;
+  void *this;
   uint param_2;
   uint param_3;
   uint param_4;
   int param_5;
 {
-  *(uint *)(this + 0x24) =
+  *(uint *)((int)this + 0x24) =
        (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)(this + 0x24) & 0xfe0003ff;
+       (param_3 & 0xff) << 0xb | (param_2 & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0003ff
+  ;
   if (param_5 == 0) {
     return;
   }
-  *(undefined4 *)(this + 8) = *(undefined4 *)(param_5 + 8);
+  *(undefined4 *)((int)this + 8) = *(undefined4 *)(param_5 + 8);
   return;
 }
 
@@ -372,7 +374,7 @@ int TType__getQualifier(this)
 
 /* TType__changeQualifier @ 0x97c314d8 (16 bytes) */
 int TType__changeQualifier(this, param_2)
-  int this;
+  unsigned char * this;
   int param_2;
 {
   *(uint *)(this + 0x24) = param_2 << 0x19 | *(uint *)(this + 0x24) & 0x1ffffff;
@@ -504,7 +506,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, param_2)
 
 /* std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux @ 0x97c31678 (252 bytes) */
 int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, param_2, param_3)
-  undefined4 *this;
+  unsigned char * this;
   undefined4 *param_2;
   undefined4 *param_3;
 {
@@ -517,33 +519,33 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, 
   undefined4 uVar7;
   size_t sVar8;
   
-  puVar3 = (undefined4 *)this[2];
-  if (puVar3 == (undefined4 *)this[3]) {
+  puVar3 = *(undefined4 **)(this + 8);
+  if (puVar3 == *(undefined4 **)(this + 0xc)) {
     iVar4 = 1;
-    iVar2 = (int)puVar3 - this[1] >> 2;
+    iVar2 = (int)puVar3 - *(int *)(this + 4) >> 2;
     if (iVar2 != 0) {
       iVar4 = iVar2 << 1;
     }
-    pvVar5 = (void *)TPoolAllocator__allocate((unsigned char *)*this,iVar4 * 4);
-    sVar8 = (int)param_2 - (int)this[1];
-    _memmove(pvVar5,(void *)this[1],sVar8);
+    pvVar5 = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
+    sVar8 = (int)param_2 - (int)*(void **)(this + 4);
+    _memmove(pvVar5,*(void **)(this + 4),sVar8);
     if ((int)pvVar5 + sVar8 != 0) {
       *(undefined4 *)((int)pvVar5 + sVar8) = *param_3;
     }
-    iVar2 = this[2];
+    iVar2 = *(int *)(this + 8);
     pvVar6 = (void *)((int)pvVar5 + sVar8 + 4);
     _memmove(pvVar6,param_2,iVar2 - (int)param_2);
-    this[3] = (void *)((int)pvVar5 + iVar4 * 4);
-    this[2] = (int)pvVar6 + (iVar2 - (int)param_2);
-    this[1] = pvVar5;
+    *(void **)(this + 0xc) = (void *)((int)pvVar5 + iVar4 * 4);
+    *(int *)(this + 8) = (int)pvVar6 + (iVar2 - (int)param_2);
+    *(void **)(this + 4) = pvVar5;
   }
   else {
     iVar4 = 0;
     if (puVar3 != (undefined4 *)0x0) {
       *puVar3 = puVar3[-1];
-      iVar4 = this[2];
+      iVar4 = *(int *)(this + 8);
     }
-    this[2] = iVar4 + 4;
+    *(int *)(this + 8) = iVar4 + 4;
     uVar1 = (iVar4 + -4) - (int)param_2 & 0xfffffffc;
     uVar7 = *param_3;
     _memmove((void *)(iVar4 - uVar1),param_2,uVar1);
@@ -575,7 +577,7 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(param_1, param
 /* std__vector_TIntermNode__pool_allocator_TIntermNode_____insert @ 0x97c317d4 (152 bytes) */
 int std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(param_1, param_2, param_3, param_4)
   int *param_1;
-  int param_2;
+  unsigned char * param_2;
   undefined4 *param_3;
   undefined4 *param_4;
 {

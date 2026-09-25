@@ -875,8 +875,10 @@ int __SetDestination(param_1, param_2, param_3)
   uint param_2;
   undefined4 param_3;
 {
-  ((int (*)())__SetSurface)(param_1,(param_2 & 1) << 0xb,param_3);
-  return;
+  undefined4 uVar1;
+  
+  uVar1 = ((int (*)())__SetSurface)(param_1,(param_2 & 1) << 0xb,param_3);
+  return uVar1;
 }
 
 /* __LockSurface @ 0x1760 (160 bytes) */

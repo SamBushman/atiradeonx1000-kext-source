@@ -31,5 +31,6 @@
    "old": "((int (*)())_PPStreamChunkListGetMaxIndex)()",
    "new": "((int (*)())_PPStreamChunkListGetMaxIndex)(param_1[3])"
   }
- ]
+ ],
+ "mirror_frames": true
 }

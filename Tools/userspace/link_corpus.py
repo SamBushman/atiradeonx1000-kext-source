@@ -248,6 +248,7 @@ def c_type_for(name, kind):
 
 # ---------------------------------------------------------------------------------------------- link_decls.h (decls.h with asm labels + real widths)
 label_of = {}        # C identifier -> assembler symbol
+signed_kept = []     # data names whose signed corpus type was kept over Ghidra's unsigned-by-default one
 typed = 0
 def transform(lines):
     global typed
@@ -275,7 +276,21 @@ def transform(lines):
             _lab = cfg.get('data_label_overrides', {}).get(nm, nm)
             if nm in cfg.get('data_label_overrides', {}):
                 res.append('%s asm("%s");' % (ln.rstrip()[:-1], _lab))
+            elif t_ == 'char %s[]' and 'MACH_HEADER' not in ln:
+                # a string label IS the string, not a variable holding a pointer to it: the corpus declares `unsigned char *s_X` and reads `s_X[0]`, which on a
+                # pointer variable loads the string's first four bytes as an address (the rebuilt InitAtomTable read "~!%^" = 0x7e21255e and crashed)
+                res.append('extern %s asm("%s");' % (t_ % nm, nm))
+                typed += 1
             elif t_ and 'MACH_HEADER' not in ln and 'Ghidra' not in ln and not orig_ptr:
+                # Ghidra's data type gives the width; a corpus declaration that is already a SIGNED integer of that width keeps its signedness (the
+                # decompiler typed it from signed uses): glprog `_S_force_new` became `unsigned int`, the allocator's `_S_force_new < 1` test (stock
+                # `cmpwi; ble`) failed for its -1, and std::allocator freed pool blocks with operator delete ("pointer not malloced", issue #68)
+                _ct = mm.group(2).strip()
+                _signed = {'int': ('unsigned int', 'int'), 'long': ('unsigned int', 'int'), 'short': ('unsigned short', 'short'),
+                           'char': ('unsigned char', 'signed char'), 'longlong': ('unsigned long long', 'long long'), 'long long': ('unsigned long long', 'long long')}.get(_ct)
+                if _signed and t_.startswith(_signed[0] + ' '):
+                    t_ = _signed[1] + t_[len(_signed[0]):]
+                    signed_kept.append(nm)
                 res.append('extern %s asm("%s");' % (t_ % nm, nm))
                 typed += 1
             elif nm in byte_arith and kind == 'scalar' and '*' not in mm.group(2):
@@ -319,6 +334,16 @@ for _d in [''] + EXTRA_DIRS:
         if re.match(r'part_\d+\.c$', _f):
             _all_body += open(os.path.join(corpus, _d, _f)).read()
 byte_arith = set(re.findall(r'&\s*(\w+)\s*[+-]\s', _all_body)) | set(re.findall(r'\(\s*&\s*(\w+)\s*\)\s*\[', _all_body))   # address arithmetic assumes a byte-sized object
+# ... but only for an object Ghidra has no type for (`DAT_` with no data type, printed as a byte). An object with a real 2/4-byte type (`undefined4`,
+# `undefined2`, `pointer`) keeps its type: `X == 0` and `(&X)[i]` are element accesses (a 1-byte declaration read a byte / indexed by bytes: the rebuilt
+# GetSymbolTable tested one byte and `_shaderString[i]` indexed bytes, DAT_001b004c = 0x00010203 read as 0), and the explicit byte-offset forms
+# `&X + n*k` are rewritten to arithmetic on `(unsigned char *)&X` instead.
+def _sized_type(nm_):
+    a_ = data_addr(nm_)
+    g_ = gd.get(a_) if a_ is not None else None
+    return bool(g_) and re.match(r'^(undefined[248]|dword|word|short|ushort|int|uint|long|ulong|float|double|pointer|undefined \*)', g_['dtype']) is not None and g_['len'] in (2, 4, 8)
+byte_arith_sized = {n_ for n_ in byte_arith if _sized_type(n_)}
+byte_arith -= byte_arith_sized
 # A function whose own decompile returns nothing (`void`) but that a caller uses the result of (`x = (double)((void (*)())f)(...)`): Ghidra models the callee as
 # leaving a value in f1/r3 that it never wrote (a passed-through argument). C cannot use a void result, so give such a function the type the callers read it as.
 void_valued = {}
@@ -373,16 +398,32 @@ for nm in data_decls:
 
 # image-address literals in code (`0xa7b7bf8c` passed as a pointer): only for images with a high preferred address, where such a value cannot be a plain number
 lit_syms = {}
+zf_lits = []    # (literal, zerofill object start it is expressed from)
 img_lo = min(s['addr'] for s in m.secs if s['size'])
 img_hi = max(s['addr'] + s['size'] for s in m.secs if s['size'])
 if cfg.get('symbolize_literals') and img_lo >= 0x10000000:
     _lit = set(int(x, 16) for x in re.findall(r'\b0x([0-9a-f]{8})\b', body))
+    # Ghidra prints an address above 0x80000000 as a NEGATIVE constant (`(int)p < -0x584817f7` is `p < 0xa7b7e809`, a loop bound / end pointer)
+    _lit |= set((1 << 32) - int(x, 16) for x in re.findall(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', body))
     for v in sorted(_lit):
-        if img_lo <= v < img_hi and m.sec_at(v) is not None and not in_code(v) and (m.sec_at(v)['flags'] & 0xff) != 1:
-            lit_syms[v] = 'SYM_%x' % v
-            needed['SYM_%x' % v] = v
+        sec_v = m.sec_at(v) if img_lo <= v < img_hi else None
+        if sec_v is None or in_code(v):
+            continue
+        if (sec_v['flags'] & 0xff) in (1, 0xc):
+            # zerofill: every named object there is emitted as its own .zerofill (no label can sit inside one), so the literal is expressed from the
+            # object that contains it - the nearest named address at or below (glprog `(int)p < -0x584817f7` = GetSymbolTable()::SymbolTables + 0xd,
+            # the end bound of its 3-pointer array; the literal had stayed the stock address and the initialisation loop ran once)
+            _cands = [a_ for a_ in set(a2 for a2 in needed.values() if a2 is not None) | set(nlist_by_addr) if sec_v['addr'] <= a_ <= v]
+            if not _cands:
+                continue
+            _b = max(_cands)
+            zf_lits.append((v, _b))
+        else:
+            _b = v & ~3      # an unaligned value (`p <= 0xa7b7bb3c` normalised to `p < 0xa7b7bb3d`) is the aligned label plus a byte offset
+        lit_syms[v] = ('SYM_%x' % _b, v - _b)
+        needed['SYM_%x' % _b] = _b
     with open(os.path.join(out, 'decls.h'), 'a') as f_:
-        for v, nm in lit_syms.items():
+        for nm in sorted(set(nm_ for nm_, _ in lit_syms.values())):
             f_.write('extern unsigned char %s asm("%s");\n' % (nm, nm))
 
 # names that are really numeric constants Ghidra labelled as data (`&DAT_00010001` = 0x10001, an address in no section of the image, or `UINT_00002ee0` in code)
@@ -407,7 +448,7 @@ if os.path.exists(_p):
         if len(f) >= 2:
             extents.append((int(f[0], 16), int(f[1], 16)))
 clipped_entries = []
-clipped_blocks = []      # (entry names, machine words, ledger name of the function they fall into) - emitted into that function's translation unit
+clipped_blocks = []      # (entry names, machine words, ledger name of the function they fall into, stock start address) - emitted into that function's translation unit
 code_alias, code_s = ['#define %s (*(unsigned char *)0x%x)   /* a numeric constant, not an object */' % (nm, data_addr(nm) or 0) for nm in const_names], ['.text', '.align 2']
 for nm, a in sorted(needed.items()):
     if a is not None and in_code(a) and nm not in fn_by_addr.values():
@@ -416,7 +457,7 @@ for nm, a in sorted(needed.items()):
         if e and '+' not in e:
             code_alias.append('#define %s %s' % (nm, e))
         elif ext and ext[1] in fn_by_addr:
-            clipped_blocks.append(([nm], [struct.unpack('>I', m.read(w, 4))[0] for w in range(ext[0], ext[1], 4)], fn_by_addr[ext[1]]))
+            clipped_blocks.append(([nm], [struct.unpack('>I', m.read(w, 4))[0] for w in range(ext[0], ext[1], 4)], fn_by_addr[ext[1]], ext[0]))
             clipped_entries.append(nm)
         else:
             code_alias.append('/* %s at 0x%x: no function starts there */' % (nm, a))
@@ -425,11 +466,61 @@ for a_, ss_ in sorted(nlist_by_addr.items()):
         continue
     ext_ = next(((lo, hi) for lo, hi in extents if lo == a_), None)
     if ext_ and ext_[1] in fn_by_addr:
-        nms_ = [s_['name'] for s_ in ss_ if s_['name'] not in clipped_entries and s_['name'] not in TOOLCHAIN_FN]
+        # register save/restore millicode (saveFP/restFP chains) is toolchain code: the compiled functions use gcc's own, and a chain continued into
+        # the C transcription of the next chain segment would be meaningless
+        nms_ = [s_['name'] for s_ in ss_ if s_['name'] not in clipped_entries and not toolchain_fn(s_['name'], a_)]
         clipped_entries.extend(nms_)
         if nms_:
-            clipped_blocks.append((nms_, [struct.unpack('>I', m.read(w, 4))[0] for w in range(ext_[0], ext_[1], 4)], fn_by_addr[ext_[1]]))
+            clipped_blocks.append((nms_, [struct.unpack('>I', m.read(w, 4))[0] for w in range(ext_[0], ext_[1], 4)], fn_by_addr[ext_[1]], ext_[0]))
 open(os.path.join(out, 'code.s'), 'w').write('\n'.join(code_s) + '\n')
+stub_secs = [s_ for s_ in m.secs if (s_['flags'] & 0xff) == 8 and s_['r2']]   # S_SYMBOL_STUBS: one indirect-table entry per r2-byte stub
+def code_target_name(t):
+    """the symbol the rebuilt image knows the stock code address `t` by: a ledger function, a symbol-table name, or the import a dyld stub stands for"""
+    if t in fn_by_addr:
+        return fn_label.get(fn_by_addr[t], fn_by_addr[t])
+    for s_ in nlist_by_addr.get(t, []):
+        return s_['name']
+    for s_ in stub_secs:
+        if s_['addr'] <= t < s_['addr'] + s_['size'] and (t - s_['addr']) % s_['r2'] == 0:
+            n_ = indirect_name(s_, (t - s_['addr']) // s_['r2'])
+            if n_:
+                return n_
+    return None
+clip_stubs = []   # (label, symbol) of the stubs the clipped entries being emitted need
+def clip_stub(addr, n_):
+    """a PIC symbol stub + lazy pointer for a branch from a clipped entry, as gcc emits for a call: dyld 10.4 cannot apply an external BR24/BR14
+    relocation (a direct `b _free`, or `b` to an exported function of the image itself: "unknown external relocation type" at dlopen)"""
+    lab = 'Lclip_%x_%d' % (addr, len(clip_stubs))
+    clip_stubs.append((lab, n_))
+    return lab + '_stub'
+def clip_stub_asm():
+    t = ''.join('.section __TEXT,__picsymbolstub1,symbol_stubs,pure_instructions,32\\n.align 2\\n%s_stub:\\n.indirect_symbol %s\\nmflr r0\\nbcl 20,31,%s_pb\\n'
+                '%s_pb:\\nmflr r11\\naddis r11,r11,ha16(%s_lp-%s_pb)\\nmtlr r0\\nlwzu r12,lo16(%s_lp-%s_pb)(r11)\\nmtctr r12\\nbctr\\n'
+                '.lazy_symbol_pointer\\n%s_lp:\\n.indirect_symbol %s\\n.long dyld_stub_binding_helper\\n' % (l_, n_, l_, l_, l_, l_, l_, l_, l_, n_)
+                for l_, n_ in clip_stubs)
+    del clip_stubs[:]
+    return t
+def clipped_word(addr, w):
+    """one machine word of a clipped entry as assembler: position-dependent instructions (relative branches) are rewritten symbolically, a PIC-base
+    sequence (`bcl 20,31`) is refused - its addis/lwz offsets are relative to the stock layout"""
+    op = w >> 26
+    if w == 0x429f0005:
+        raise SystemExit('clipped entry at 0x%x computes a PIC base (bcl 20,31): its data offsets would be wrong in the rebuilt layout' % addr)
+    if op == 18 and not w & 2:
+        d = w & 0x03fffffc
+        t = (addr + (d - 0x04000000 if d & 0x02000000 else d)) & 0xffffffff
+        n_ = code_target_name(t)
+        if n_ is None:
+            raise SystemExit('clipped entry at 0x%x branches to 0x%x, which has no symbol' % (addr, t))
+        return '%s %s' % ('bl' if w & 1 else 'b', clip_stub(addr, n_))
+    if op == 16 and not w & 2:
+        d = w & 0xfffc
+        t = (addr + (d - 0x10000 if d & 0x8000 else d)) & 0xffffffff
+        n_ = code_target_name(t)
+        if n_ is None:
+            raise SystemExit('clipped entry at 0x%x branches to 0x%x, which has no symbol' % (addr, t))
+        return 'bc%s %d,%d,%s' % ('l' if w & 1 else '', (w >> 21) & 31, (w >> 16) & 31, clip_stub(addr, n_))
+    return '.long 0x%08x' % w
 for _n in sorted({n_ for n_ in re.findall(r'\bthunk_(FUN_[0-9a-f]+)\b', _all_body)}):
     code_alias.append('#define thunk_%s %s' % (_n, _n))
 if code_alias:
@@ -466,10 +557,51 @@ targets = set()        # data addresses that need a label
 for _nm, _sp in cfg.get('data_anchors', {}).items():
     targets.add(int(_sp['base'], 16))      # the object a PIC anchor is measured from needs a label
 ghidra_ptr_words = []
+unresolved_ptr_words = []   # (address, value) of relocated data words whose target has no symbol in the link
+raw_entries = {}            # stock address -> (lo, hi) raw code extent that data points at and no function owns
+def raw_entry_asm():
+    """the raw entries as assembler: the stock words, relative branches symbolic (via stubs), and a branch to whatever follows the block when its
+    last instruction is not an unconditional transfer (b / blr / bctr), since the next stock block is not laid out after it here"""
+    out_ = []
+    for t_, (lo_, hi_) in sorted(raw_entries.items()):
+        ws_ = [struct.unpack('>I', m.read(a_, 4))[0] for a_ in range(lo_, hi_, 4)]
+        out_ += ['.globl _raw_entry_%x' % t_, '_raw_entry_%x:' % t_] + [clipped_word(lo_ + 4 * i_, w_) for i_, w_ in enumerate(ws_)]
+        last_ = ws_[-1]
+        if not ((last_ >> 26) == 18 and not last_ & 3) and last_ not in (0x4e800020, 0x4e800420):
+            n_ = code_target_name(hi_)
+            if n_ is None:
+                raise SystemExit('raw entry 0x%x falls through to 0x%x, which has no symbol' % (t_, hi_))
+            out_.append('b %s' % clip_stub(hi_, n_))
+        out_.append(clip_stub_asm().replace('\\n', '\n') + '.text')
+    return out_
 word_expr = {}         # addr -> asm expression for that word (pointer words), decided in pass 1
+clipped_at = {start_: names_[0] for names_, words_, target_, start_ in clipped_blocks}
+HEADER_SYM = {6: '__mh_dylib_header', 8: '__mh_bundle_header', 2: '__mh_execute_header'}.get(m.filetype)
+text_seg_addr = next((sg['vmaddr'] for sg in m.segs if sg['name'] == '__TEXT'), None)
 def classify_target(t):
+    if t == text_seg_addr and HEADER_SYM:
+        return HEADER_SYM              # the image's own Mach header (a word the stock's crt/atexit code passes as the image handle)
     if in_code(t):
         e = fn_symbol_for(t)
+        if e is None and t in clipped_at:
+            e = clipped_at[t]          # a clipped entry (emitted as asm next to the function it falls into): `_noop` in a glprog InputSrc record
+        if e is None:
+            e = next((ss['name'] for ss in nlist_by_addr.get(t, [])), None)
+        if e is None:
+            ext_ = next(((lo, hi) for lo, hi in extents if lo == t), None)
+            if ext_ is None:
+                # no raw extent starts there: code Ghidra filed as a detached range of some other function (GLDriver 0x19a468, a 7-instruction
+                # virtual method listed under FUN_0019d480). The entry runs to its first unconditional transfer.
+                for k_ in range(64):
+                    w_ = struct.unpack('>I', m.read(t + 4 * k_, 4))[0]
+                    if ((w_ >> 26) == 18 and not w_ & 3) or w_ in (0x4e800020, 0x4e800420):
+                        ext_ = (t, t + 4 * k_ + 4)
+                        break
+            if ext_:
+                # code only a data word reaches (a vtable slot pointing at an empty `blr` method, an entry thunk `b FUN_..`): a raw block no ledger
+                # function owns; emitted into code.s as its own entry (see raw_entry_asm)
+                raw_entries[t] = ext_
+                e = '_raw_entry_%x' % t
         return e
     s = m.sec_at(t)
     if s is not None:
@@ -495,6 +627,8 @@ for s in data_secs:
                 e = classify_target(v)
                 if e:
                     word_expr[a] = e
+                else:
+                    unresolved_ptr_words.append((a, v))   # a relocated word would stay the stock address: it must not pass silently
         elif r is None and s['seg'] == '__TEXT' and a in gd and gd[a]['target'] is not None and gd[a]['dtype'] == 'pointer' and gd[a]['len'] == 4 and gd[a]['target'] == v:
             # read-only text cannot carry relocations, but the image is prebound: Ghidra's pointer type at the word is the only record that it is an address
             e = classify_target(v)
@@ -533,6 +667,10 @@ for a, g in gd.items():
         if sec is not None and not mo.is_code(sec) and sec not in sym_ptr_secs and g['name'] in needed and g['name'] not in names_at[a]:
             names_at[a].append(g['name'])
 
+for v_, b_ in zf_lits:
+    # no other zerofill object may start between the base and the literal, or the offset would reach into a separately placed object
+    assert not any(b_ < a_ <= v_ for a_ in names_at if names_at[a_] and a_ != b_), 'zerofill literal 0x%x crosses an object boundary above 0x%x' % (v_, b_)
+
 # ---------------------------------------------------------------------------------------------- data.s
 S = []
 S.append('# data.s - generated by Tools/userspace/link_corpus.py from %s' % os.path.basename(stock))
@@ -555,6 +693,9 @@ for a, ss in nlist_by_addr.items():
 for a, g in gd.items():
     if g['name'] in TOOLCHAIN_DATA:
         skip_words.add(a)
+zerofill_grown = []   # (address, name, Ghidra length, emitted size) of zerofill objects larger than their Ghidra type
+def first_name_of(a_):
+    return (names_at.get(a_) or ['LD_%x' % a_])[0]
 for s in data_secs:
     ty = s['flags'] & 0xff
     a, end = s['addr'], s['addr'] + s['size']
@@ -565,7 +706,12 @@ for s in data_secs:
         for k, a2 in enumerate(objs):
             nxt = objs[k + 1] if k + 1 < len(objs) else end
             g = gd.get(a2)
-            size = min(nxt - a2, g['len']) if g and g['len'] and g['len'] <= nxt - a2 else nxt - a2
+            # the whole gap to the next label: zerofill objects are emitted one by one (the stock layout is not kept), so bytes an object's Ghidra type
+            # does not cover would be lost - an array typed by its first element (glprog GetSymbolTable()::SymbolTables, 3 pointers typed as one
+            # undefined4) got 4 bytes and its other entries overlapped the next object. Padding at worst.
+            size = nxt - a2
+            if g and g['len'] and g['len'] < size:
+                zerofill_grown.append((a2, first_name_of(a2), g['len'], size))
             names = [n for n in names_at.get(a2, []) if n not in defined and n not in TOOLCHAIN_DATA]
             first = names[0] if names else 'LD_%x' % a2
             for n in names:
@@ -692,6 +838,8 @@ di3_total = [0]
 cmp_total = [0]
 dbl_total = [0]
 blocks_total = [0]
+mirrored_total = [0]
+ptr_blocks_total = [0]
 placed_clipped = []
 unresolved_calls = []
 bind_info = cfg.get('bind_calls')
@@ -777,10 +925,16 @@ for pdir_, f in _part_files:
             di3_total[0] += ndi
             txt, ncmp = rewrites.rewrite_narrow_compares(txt)
             cmp_total[0] += ncmp
+            if cfg.get('mirror_frames'):
+                txt, nmir = rewrites.mirror_frame(txt)
+                mirrored_total[0] += nmir
             txt, nbuf = rewrites.fix_byte_buffers(txt)
             bufs_total[0] += nbuf
             txt, nblk = rewrites.fix_struct_blocks(txt)
             blocks_total[0] += nblk
+            txt, npblk = rewrites.fix_pointer_records(txt)
+            blocks_total[0] += npblk
+            ptr_blocks_total[0] += npblk
             if natom:
                 uses_link = True
             for cn_, ca_ in dropped_addr.items():
@@ -791,8 +945,11 @@ for pdir_, f in _part_files:
                 if cn_ in fn_addr_by_name:
                     # a register offset / constant that equals a function's address: Ghidra printed the function name (value use only, not a call)
                     txt = re.sub(r'(?<![\w])%s\b(?!\s*\()' % re.escape(cn_), '0x%x' % fn_addr_by_name[cn_], txt)
+            for bn_ in byte_arith_sized:
+                txt = re.sub(r'&\s*%s\b(?=\s*[+-]\s)' % re.escape(bn_), '((unsigned char *)&%s)' % bn_, txt)
             if lit_syms:
-                txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: '((unsigned int)&%s)' % lit_syms[int(x.group(1), 16)] if int(x.group(1), 16) in lit_syms else x.group(0), txt)
+                txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
+                txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
             if bind_info:
                 txt = rewrites.bind_calls(txt, int(mm.group(2), 16), ledger_by_addr, short_to_c, siblings, callees, unresolved_calls)
             ch = txt.split('\n')
@@ -811,10 +968,12 @@ for pdir_, f in _part_files:
         mm_ = hdr.match(ch_[0])
         if mm_:
             _defined_here.add(mm_.group(1))
-    for names_, words_, target_ in clipped_blocks:
+    for names_, words_, target_, start_ in clipped_blocks:
         if target_ in _defined_here:
-            # a few instructions that fall through into the next function (a clipped entry): emitted next to that function so the branch stays inside one object
-            src += '\n__asm__(".text\\n' + ''.join('.globl %s\\n%s:\\n' % (n_, n_) for n_ in names_) + ''.join('.long 0x%08x\\n' % w_ for w_ in words_) + 'b %s\\n");\n' % fn_label.get(target_, target_)
+            # a few instructions that fall through into the next function (a clipped entry): emitted next to that function so the branch stays inside one object.
+            # The words are the stock machine code, so a PC-relative branch among them is re-emitted against its target's symbol (copied verbatim it would jump
+            # to wherever the same displacement lands in the rebuilt image: `_AddAtom` = `b _LookUpAddString` went into the middle of a float routine)
+            src += '\n__asm__(".text\\n' + ''.join('.globl %s\\n%s:\\n' % (n_, n_) for n_ in names_) + ''.join(clipped_word(start_ + 4 * i_, w_) + '\\n' for i_, w_ in enumerate(words_)) + 'b %s\\n' % fn_label.get(target_, target_) + clip_stub_asm() + '.text\\n");\n'
             placed_clipped.append(names_[0])
     if uses_link:
         src = src.replace('#include "decls.h"', '#include "decls.h"\n#include "ghidra_link.h"', 1)
@@ -862,6 +1021,8 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])
     w.write('float/double call arguments given their true type (integer bit patterns reinterpreted): %d\n' % floatargs_total[0])
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
+    w.write('  of which records with pointer members (rewrites.fix_pointer_records): %d\n' % ptr_blocks_total[0])
+    w.write('functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): %d\n' % mirrored_total[0])
     w.write('short C++ call names left unresolved (%d):\n' % len(unresolved_calls))
     for f_, tok, n_ in unresolved_calls:
         w.write('  in %s: %s (%d candidates)\n' % (f_, tok, n_))
@@ -942,9 +1103,23 @@ ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usa
       '# INSTALL overrides the install name (a dlopen() of a copy that keeps the stock name returns the already-loaded system image)',
       'gcc -arch ppc %s -o $OUT obj/*.o -exported_symbols_list exports.txt -read_only_relocs suppress %s %s' % (
           kind,
-          ('-install_name ${INSTALL:-%s} -compatibility_version %s -current_version %s' % (idl[1], ver(idl[3]), ver(idl[2]))) if idl and kind == '-dynamiclib' else '',
+          ('-install_name "${INSTALL:-%s}" -compatibility_version %s -current_version %s' % (idl[1], ver(idl[3]), ver(idl[2]))) if idl and kind == '-dynamiclib' else '',
           ' '.join(cfg.get('link_flags', auto_flags) + cfg.get('extra_link_flags', [])))]
 open(os.path.join(out, 'build.sh'), 'w').write('\n'.join(ln) + '\n')
 print('%s: %d typed data decls, %d data labels emitted, %d unresolved data symbols, %d toolchain functions dropped, %d exports' % (os.path.basename(stock), typed, len(defined), len(undefined), len(dropped), len(ex)))
 if undefined:
     print('UNRESOLVED:', ', '.join(undefined[:20]))
+if raw_entries:
+    with open(os.path.join(out, 'code.s'), 'a') as f:
+        f.write('\n'.join(raw_entry_asm()) + '\n')
+    print('%d raw code entries reached only from data emitted into code.s' % len(raw_entries))
+with open(os.path.join(out, 'signed_kept.txt'), 'w') as f:
+    f.write('\n'.join(signed_kept) + ('\n' if signed_kept else ''))
+with open(os.path.join(out, 'zerofill_grown.txt'), 'w') as f:
+    for a_, n_, gl_, sz_ in zerofill_grown:
+        f.write('0x%x\t%s\tghidra %d\temitted %d\n' % (a_, n_, gl_, sz_))
+with open(os.path.join(out, 'unresolved_pointer_words.txt'), 'w') as f:
+    for a_, v_ in unresolved_ptr_words:
+        f.write('0x%x\t0x%x\n' % (a_, v_))
+if unresolved_ptr_words:
+    print('WARNING: %d relocated data word(s) keep their stock value (no symbol for the target), see unresolved_pointer_words.txt' % len(unresolved_ptr_words))

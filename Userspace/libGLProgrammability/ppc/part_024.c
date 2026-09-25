@@ -659,7 +659,7 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param
 /* __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE @ 0x97c1857c (128 bytes) */
 int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
   void *this;
-  undefined4 param_2;
+  int param_2;
   int param_3;
   unsigned char * param_4;
   int param_5;

@@ -995,13 +995,15 @@ int FUN_001a32d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  undefined4 uVar1;
+  
   if (DAT_001fc1d4 == (code *)0x0) {
     DAT_001fc1d4 = (code *)((int (*)())FUN_001a3580)("sprintf");
   }
                     
                     
-  (*DAT_001fc1d4)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
-  return;
+  uVar1 = (*DAT_001fc1d4)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8);
+  return uVar1;
 }
 
 /* FUN_001a337c @ 0x1a337c (172 bytes) */

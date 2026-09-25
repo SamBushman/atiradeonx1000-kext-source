@@ -492,7 +492,7 @@ int std____default_alloc_template_true_0____S_refill(param_1)
     }
     *puVar3 = 0;
   }
-  return;
+  return iVar1;
 }
 
 /* std____default_alloc_template_true_0____S_chunk_alloc @ 0x97c178f4 (368 bytes) */

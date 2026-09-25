@@ -3514,8 +3514,7 @@ LAB_000a6ebc:
 int FUN_000a6f70(param_1)
   size_t param_1;
 {
-  _calloc(param_1,1);
-  return;
+  return (int)_calloc(param_1,1);
 }
 
 /* FUN_000a6f80 @ 0xa6f80 (4 bytes) */

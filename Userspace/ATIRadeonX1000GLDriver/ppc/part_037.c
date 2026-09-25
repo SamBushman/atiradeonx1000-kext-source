@@ -2565,10 +2565,12 @@ int FUN_00122e90(param_1, param_2)
   undefined4 param_1;
   int param_2;
 {
+  undefined4 uVar1;
+  
                     
                     
-  (**(code **)(PTR_PTR_001e8c60 + param_2 * 0x10 + 0xc))();
-  return;
+  uVar1 = (**(code **)(PTR_PTR_001e8c60 + param_2 * 0x10 + 0xc))();
+  return uVar1;
 }
 
 /* FUN_00122ebc @ 0x122ebc (28 bytes) */

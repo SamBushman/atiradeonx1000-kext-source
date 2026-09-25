@@ -2689,18 +2689,17 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_(this, param_2, par
   unsigned char * param_3;
 {
   undefined4 uVar1;
-  void *pvVar2;
+  size_t sVar2;
   char *pcVar3;
   
   if (param_2 == (char *)0x0) {
     pcVar3 = (char *)0xffffffff;
-    pvVar2 = this;
   }
   else {
-    pvVar2 = (void *)_strlen(param_2);
-    pcVar3 = param_2 + (int)pvVar2;
+    sVar2 = _strlen(param_2);
+    pcVar3 = param_2 + sVar2;
   }
-  pcVar3 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag)(pvVar2,pcVar3,param_3,0);
+  pcVar3 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag)(param_2,pcVar3,param_3,0);
   uVar1 = *(undefined4 *)param_3;
   *(char **)((int)this + 4) = pcVar3;
   *(undefined4 *)this = uVar1;

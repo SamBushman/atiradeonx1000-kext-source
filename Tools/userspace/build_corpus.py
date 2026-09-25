@@ -20,7 +20,10 @@ for _ in range(ncmds):
 first = min(int(r.split('-')[0], 16) for r in rng)
 rng = ['0-%x' % first] + rng if first else rng
 here = os.path.dirname(os.path.abspath(__file__))
-subprocess.run(['python3', here + '/ghidra2c.py', dd, out, '60'] + rng, check=True)
+sys.path.insert(0, here)
+import patches
+_env = dict(os.environ, CORPUS_SCOPE=patches.scope_of_slice(slice_f) or '')
+subprocess.run(['python3', here + '/ghidra2c.py', dd, out, '60'] + rng, check=True, env=_env)
 shutil.copy(here + '/ghidra_c.h', out)
 name = os.path.basename(out.rstrip('/'))
 tmp = '/tmp/bc_%s_%s' % (name, arch)
@@ -48,6 +51,12 @@ if und:
             elif re.search(r'\(\s*(?:uint|ulong|unsigned int|undefined4)\s*\)\s*%s\b' % re.escape(n), allsrc) and not re.search(r'\b%s\s*[<>]=?\s*-?0\b' % re.escape(n), allsrc): f.write('extern unsigned int %s;\n' % n)
             elif re.search(r'(?<![\w.>])%s\s*\(' % re.escape(n), allsrc): f.write('extern int %s();\n' % n)   # called: a function (e.g. a sanitised `operator=`)
             else: f.write('extern int %s;\n' % n)   # signedness comes from use (`x < 0`, no unsigned casts); a wrongly unsigned global makes gcc delete `x < 0` branches
+    # declarations the type heuristic above gets wrong (issue #67/#70): the machine code is the authority
+    for _n, _decl in patches.EXTRA_DECL_FIXES.get(_env['CORPUS_SCOPE'], {}).items():
+        _p = os.path.join(out, 'extra_decls.h'); _t = open(_p).read()
+        _t, _k = re.subn(r'(?m)^extern [^\n]*\b%s;$' % re.escape(_n), _decl, _t)
+        if _k != 1: sys.exit('EXTRA_DECL_FIXES: %s not declared exactly once in extra_decls.h (%d)' % (_n, _k))
+        open(_p, 'w').write(_t)
     with open(os.path.join(out, 'decls.h'), 'a') as f: f.write('#include "extra_decls.h"\n')
     subprocess.run('rm -rf %s/corpus && cp -r %s %s/corpus && tar czf %s.tgz -C %s corpus && scp -q %s.tgz G5:/tmp/bc.tgz' % (tmp, out, tmp, tmp, tmp, tmp), shell=True, check=True)
     r = subprocess.run(['ssh', 'G5', script], capture_output=True, text=True); print('2nd pass:', r.stdout.strip())

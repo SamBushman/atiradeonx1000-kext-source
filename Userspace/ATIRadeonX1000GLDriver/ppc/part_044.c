@@ -8735,10 +8735,11 @@ int FUN_00167e1c(param_1, param_2, param_3, param_4, param_5)
 {
   uint uVar1;
   int iVar2;
-  int iVar3;
+  undefined4 uVar3;
+  int iVar4;
   undefined4 local_28 [2];
   
-  iVar3 = *(int *)(*param_1 + 0x6c4);
+  iVar4 = *(int *)(*param_1 + 0x6c4);
   iVar2 = FUN_001043f0(0x31,*param_1);
   *(undefined4 *)(iVar2 + 0x98) = 0;
   *(undefined4 *)(iVar2 + 0x94) = *(undefined4 *)(iVar2 + 0x14c);
@@ -8754,9 +8755,9 @@ int FUN_00167e1c(param_1, param_2, param_3, param_4, param_5)
     *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) | 0x20;
   }
   FUN_000f35c4(iVar2);
-  *(int *)(iVar3 + 0x23c) = *(int *)(iVar3 + 0x23c) + 1;
-  ((int (*)())FUN_00165d3c)(param_1,iVar2,param_5,param_4);
-  return;
+  *(int *)(iVar4 + 0x23c) = *(int *)(iVar4 + 0x23c) + 1;
+  uVar3 = ((int (*)())FUN_00165d3c)(param_1,iVar2,param_5,param_4);
+  return uVar3;
 }
 
 /* FUN_00167ef4 @ 0x167ef4 (1396 bytes) */

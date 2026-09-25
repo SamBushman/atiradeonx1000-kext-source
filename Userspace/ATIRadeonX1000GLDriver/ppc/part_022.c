@@ -2317,7 +2317,7 @@ int FUN_000e83bc(param_1)
     iVar2 = *(int *)(iVar2 + 8);
     iVar1 = *(int *)(*(int *)(iVar2 + 0x88) + 8);
   }
-  return;
+  return iVar2;
 }
 
 /* FUN_000e8424 @ 0xe8424 (216 bytes) */

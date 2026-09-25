@@ -219,6 +219,7 @@ int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  undefined4 uVar1;
   undefined4 uStack0000001c;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
@@ -234,8 +235,8 @@ int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  ((int (*)())FUN_000f4fdc)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  uVar1 = ((int (*)())FUN_000f4fdc)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
+  return uVar1;
 }
 
 /* FUN_000f53c0 @ 0xf53c0 (396 bytes) */

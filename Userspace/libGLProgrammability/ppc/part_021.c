@@ -83,59 +83,62 @@ int __ZNSs7replaceEmmPKcm(this, param_2, param_3, param_4, param_5)
     __ZNKSs9_M_ibeginEv(local_2c,this);
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (&local_30,local_30 + param_2,local_2c[0] + param_2 + param_3,param_4,
-               param_4 + param_5,0);
-    return;
+              (this,local_30 + param_2,(char *)(local_2c[0] + param_2 + param_3),param_4,
+               param_4 + param_5);
   }
-  __ZNKSs9_M_ibeginEv(&local_30,this);
-  __ZNKSs9_M_ibeginEv(local_2c,this);
-  __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-            (local_2c,local_2c[0] + param_2,local_30 + param_2 + param_3,param_4,param_4 + param_5);
+  else {
+    __ZNKSs9_M_ibeginEv(&local_30,this);
+    __ZNKSs9_M_ibeginEv(local_2c,this);
+    __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+              (this,local_2c[0] + param_2,local_30 + param_2 + param_3,param_4,param_4 + param_5);
+  }
   return;
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_ @ 0x97c14150 (344 bytes) */
 int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_(this, param_2, param_3, param_4, param_5)
-  uint *this;
+  void *this;
   int param_2;
   int param_3;
-  uint param_4;
+  char *param_4;
   int param_5;
 {
-  uint uVar1;
+  char *pcVar1;
   uint uVar2;
   uint uVar3;
-  uint uVar4;
+  int iVar4;
+  uint uVar5;
   int local_30;
   int local_2c;
   int local_28 [2];
   
   __ZNKSs9_M_ibeginEv(&local_30,this);
-  param_5 = param_5 - param_4;
-  uVar4 = *(uint *)(*this - 0xc);
+  iVar4 = param_5 - (int)param_4;
+  uVar5 = *(uint *)(*(int *)this + -0xc);
   uVar2 = param_2 - local_30;
-  if (uVar4 < uVar2) {
+  if (uVar5 < uVar2) {
     std____throw_out_of_range("basic_string::replace");
   }
   uVar3 = param_3 - param_2;
-  if (uVar4 - uVar2 <= (uint)(param_3 - param_2)) {
-    uVar3 = uVar4 - uVar2;
+  if (uVar5 - uVar2 <= (uint)(param_3 - param_2)) {
+    uVar3 = uVar5 - uVar2;
   }
-  if (0x3ffffffcU - param_5 < uVar4 - uVar3) {
+  if (0x3ffffffcU - iVar4 < uVar5 - uVar3) {
     std____throw_length_error("basic_string::replace");
   }
-  uVar1 = *this;
-  if (((*(int *)(uVar1 - 4) < 1) && (uVar1 <= param_4)) && (param_4 <= uVar1 + uVar4)) {
+  pcVar1 = *(char **)this;
+  if (((*(int *)(pcVar1 + -4) < 1) && (pcVar1 <= param_4)) && (param_4 <= pcVar1 + uVar5)) {
     __ZNKSs9_M_ibeginEv(local_28,this);
     __ZNKSs9_M_ibeginEv(&local_2c,this);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (&local_2c,local_2c + uVar2,local_28[0] + uVar2 + uVar3,param_4,param_4 + param_5,0);
-    return;
+              (this,local_2c + uVar2,(char *)(local_28[0] + uVar2 + uVar3),param_4,param_4 + iVar4);
   }
-  __ZNKSs9_M_ibeginEv(&local_2c,this);
-  __ZNKSs9_M_ibeginEv(local_28,this);
-  __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-            (local_28,local_28[0] + uVar2,local_2c + uVar2 + uVar3,param_4,param_4 + param_5);
+  else {
+    __ZNKSs9_M_ibeginEv(&local_2c,this);
+    __ZNKSs9_M_ibeginEv(local_28,this);
+    __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+              (this,local_28[0] + uVar2,local_2c + uVar2 + uVar3,param_4,param_4 + iVar4);
+  }
   return;
 }
 
@@ -145,8 +148,8 @@ int __ZNSs5eraseEmm(param_1, param_2, param_3)
   ulong param_2;
   undefined4 param_3;
 {
-  uint uVar1;
-  uint uVar2;
+  char *pcVar1;
+  char *pcVar2;
   uint uVar3;
   uint uVar4;
   uint uVar5;
@@ -158,7 +161,7 @@ int __ZNSs5eraseEmm(param_1, param_2, param_3)
   
   std__string___M_check((ulong)&local_40,param_1,param_2);
   __ZNKSs7_M_foldEmm((ulong)&local_3c,param_1,param_2,param_3);
-  uVar2 = *(uint *)param_1;
+  pcVar2 = *(char **)param_1;
   __ZNKSs9_M_ibeginEv(&local_38,param_1);
   uVar5 = *(uint *)(*(int *)param_1 + -0xc);
   uVar3 = local_40 - local_38;
@@ -172,18 +175,19 @@ int __ZNSs5eraseEmm(param_1, param_2, param_3)
   if (0x3ffffffc < uVar5 - uVar4) {
     std____throw_length_error("basic_string::replace");
   }
-  uVar1 = *(uint *)param_1;
-  if (((*(int *)(uVar1 - 4) < 1) && (uVar1 <= uVar2)) && (uVar2 <= uVar1 + uVar5)) {
+  pcVar1 = *(char **)param_1;
+  if (((*(int *)(pcVar1 + -4) < 1) && (pcVar1 <= pcVar2)) && (pcVar2 <= pcVar1 + uVar5)) {
     __ZNKSs9_M_ibeginEv(local_30,param_1);
     __ZNKSs9_M_ibeginEv(&local_34,param_1);
     __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-              (&local_34,local_34 + uVar3,local_30[0] + uVar3 + uVar4,uVar2,uVar2,0);
-    return;
+              (param_1,local_34 + uVar3,(char *)(local_30[0] + uVar3 + uVar4),pcVar2,pcVar2);
   }
-  __ZNKSs9_M_ibeginEv(&local_34,param_1);
-  __ZNKSs9_M_ibeginEv(local_30,param_1);
-  __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-            (local_30,local_30[0] + uVar3,local_34 + uVar3 + uVar4,uVar2,uVar2);
+  else {
+    __ZNKSs9_M_ibeginEv(&local_34,param_1);
+    __ZNKSs9_M_ibeginEv(local_30,param_1);
+    __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+              ((void *)param_1,local_30[0] + uVar3,local_34 + uVar3 + uVar4,pcVar2,pcVar2);
+  }
   return;
 }
 
@@ -194,8 +198,8 @@ int __ZNSs6resizeEmc(this, param_2, param_3)
   int param_3;
 {
   uint uVar1;
-  uint uVar2;
-  uint uVar3;
+  char *pcVar2;
+  char *pcVar3;
   uint uVar4;
   uint uVar5;
   int local_40;
@@ -214,32 +218,33 @@ int __ZNSs6resizeEmc(this, param_2, param_3)
   else if (param_2 < uVar1) {
     std__string___M_check((ulong)&local_40,this,param_2);
     __ZNKSs7_M_foldEmm((ulong)&local_3c,(ulong)this,param_2,0xffffffff);
-    uVar1 = *(uint *)this;
+    pcVar3 = *(char **)this;
     __ZNKSs9_M_ibeginEv(&local_38,this);
     uVar4 = *(uint *)(*(int *)this + -0xc);
-    uVar3 = local_40 - local_38;
-    if (uVar4 < uVar3) {
+    uVar1 = local_40 - local_38;
+    if (uVar4 < uVar1) {
       std____throw_out_of_range("basic_string::replace");
     }
     uVar5 = local_3c - local_40;
-    if (uVar4 - uVar3 <= (uint)(local_3c - local_40)) {
-      uVar5 = uVar4 - uVar3;
+    if (uVar4 - uVar1 <= (uint)(local_3c - local_40)) {
+      uVar5 = uVar4 - uVar1;
     }
     if (0x3ffffffc < uVar4 - uVar5) {
       std____throw_length_error("basic_string::replace");
     }
-    uVar2 = *(uint *)this;
-    if (((*(int *)(uVar2 - 4) < 1) && (uVar2 <= uVar1)) && (uVar1 <= uVar2 + uVar4)) {
+    pcVar2 = *(char **)this;
+    if (((*(int *)(pcVar2 + -4) < 1) && (pcVar2 <= pcVar3)) && (pcVar3 <= pcVar2 + uVar4)) {
       __ZNKSs9_M_ibeginEv(local_30,this);
       __ZNKSs9_M_ibeginEv(&local_34,this);
       __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag
-                (&local_34,local_34 + uVar3,local_30[0] + uVar3 + uVar5,uVar1,uVar1,0);
-      return;
+                (this,local_34 + uVar1,(char *)(local_30[0] + uVar1 + uVar5),pcVar3,pcVar3);
     }
-    __ZNKSs9_M_ibeginEv(&local_34,this);
-    __ZNKSs9_M_ibeginEv(local_30,this);
-    __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-              (local_30,local_30[0] + uVar3,local_34 + uVar3 + uVar5,uVar1,uVar1);
+    else {
+      __ZNKSs9_M_ibeginEv(&local_34,this);
+      __ZNKSs9_M_ibeginEv(local_30,this);
+      __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+                (this,local_30[0] + uVar1,local_34 + uVar1 + uVar5,pcVar3,pcVar3);
+    }
   }
   return;
 }
@@ -419,7 +424,7 @@ int __ZNSs6appendERKSs(this, param_2)
   __ZNKSs9_M_ibeginEv(&local_28,param_2);
   __ZNKSs7_M_iendEv(local_24,param_2);
   __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
-            (local_24,local_30,local_2c,local_28,local_24[0]);
+            (this,local_30,local_2c,local_28,local_24[0]);
   return;
 }
 
@@ -454,7 +459,7 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
   std__string___M_check((ulong)&local_38,param_2,param_3);
   __ZNKSs7_M_foldEmm((ulong)&local_34,(ulong)param_2,param_3,uStack00000024);
   __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
-            (&local_34,local_40,local_3c,local_38,local_34);
+            (this,local_40,local_3c,local_38,local_34);
   return;
 }
 
@@ -475,7 +480,7 @@ int __ZNSs6appendEPKcm(this, param_2, param_3)
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
   __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-            (local_2c,local_30,local_2c[0],param_2,param_2 + param_3);
+            (this,local_30,local_2c[0],param_2,param_2 + param_3);
   return;
 }
 
@@ -578,7 +583,7 @@ int __ZNSs6assignERKSsmm(this, param_2, param_3, param_4)
 
 /* __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc @ 0x97c14c90 (16 bytes) */
 int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc(this, param_2, param_3, param_4)
-  undefined4 this;
+  void *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -628,7 +633,7 @@ int __ZNSs6insertEmPKcm(this, param_2, param_3, param_4)
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs9_M_ibeginEv(local_2c,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (local_2c,local_2c[0] + param_2,local_30 + param_2,param_3,param_3 + param_4);
+                     (this,local_2c[0] + param_2,local_30 + param_2,param_3,param_3 + param_4);
   }
   return this;
 }
@@ -641,56 +646,53 @@ int __ZNSs6insertEmRKSsmm(this, param_2, param_3, param_4, param_5)
   ulong param_4;
   ulong param_5;
 {
-  void *pvVar1;
-  void *pvVar2;
-  int iVar3;
-  uint uVar4;
-  size_t sVar5;
-  uint uVar6;
-  uint uVar7;
-  void *pvVar8;
+  char *pcVar1;
+  int iVar2;
+  char *pcVar3;
+  size_t sVar4;
+  uint uVar5;
+  char *pcVar6;
   int local_30;
   int local_2c [3];
   
-  iVar3 = *(int *)param_3;
-  uVar6 = *(uint *)(iVar3 + -0xc);
-  if (uVar6 < param_4) {
+  iVar2 = *(int *)param_3;
+  uVar5 = *(uint *)(iVar2 + -0xc);
+  if (uVar5 < param_4) {
     std____throw_out_of_range("basic_string::insert");
-    iVar3 = *(int *)param_3;
+    iVar2 = *(int *)param_3;
   }
-  uVar6 = uVar6 - param_4;
-  if (uVar6 <= param_5) {
-    param_5 = uVar6;
+  uVar5 = uVar5 - param_4;
+  if (uVar5 <= param_5) {
+    param_5 = uVar5;
   }
-  uVar6 = iVar3 + param_4;
-  uVar7 = *(uint *)(*(int *)this + -0xc);
-  if (uVar7 < param_2) {
+  pcVar1 = (char *)(iVar2 + param_4);
+  uVar5 = *(uint *)(*(int *)this + -0xc);
+  if (uVar5 < param_2) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - param_5 < uVar7) {
+  if (0x3ffffffc - param_5 < uVar5) {
     std____throw_length_error("basic_string::insert");
   }
-  uVar4 = *(uint *)this;
-  if (((*(int *)(uVar4 - 4) < 1) && (uVar4 <= uVar6)) && (uVar6 <= uVar4 + uVar7)) {
+  pcVar3 = *(char **)this;
+  if (((*(int *)(pcVar3 + -4) < 1) && (pcVar3 <= pcVar1)) && (pcVar1 <= pcVar3 + uVar5)) {
     __ZNSs9_M_mutateEmmm(this,param_2,0,param_5);
-    pvVar1 = (void *)(*(int *)this + (uVar6 - uVar4));
-    pvVar8 = (void *)(*(int *)this + param_2);
-    pvVar2 = pvVar1;
-    if ((pvVar8 < (void *)((int)pvVar1 + param_5)) &&
-       (pvVar2 = (void *)((int)pvVar1 + param_5), pvVar1 < pvVar8)) {
-      sVar5 = (int)pvVar8 - (int)pvVar1;
-      _memcpy(pvVar8,pvVar1,sVar5);
-      pvVar2 = (void *)((int)pvVar8 + param_5);
-      pvVar8 = (void *)((int)pvVar8 + sVar5);
-      param_5 = param_5 - sVar5;
+    pcVar1 = pcVar1 + (*(int *)this - (int)pcVar3);
+    pcVar6 = (char *)(*(int *)this + param_2);
+    pcVar3 = pcVar1;
+    if ((pcVar6 < pcVar1 + param_5) && (pcVar3 = pcVar1 + param_5, pcVar1 < pcVar6)) {
+      sVar4 = (int)pcVar6 - (int)pcVar1;
+      _memcpy(pcVar6,pcVar1,sVar4);
+      pcVar3 = pcVar6 + param_5;
+      pcVar6 = pcVar6 + sVar4;
+      param_5 = param_5 - sVar4;
     }
-    _memcpy(pvVar8,pvVar2,param_5);
+    _memcpy(pcVar6,pcVar3,param_5);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs9_M_ibeginEv(local_2c,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (local_2c,local_2c[0] + param_2,local_30 + param_2,uVar6,uVar6 + param_5);
+                     (this,local_2c[0] + param_2,local_30 + param_2,pcVar1,pcVar1 + param_5);
   }
   return this;
 }
@@ -701,47 +703,44 @@ int __ZNSs6insertEmRKSs(this, param_2, param_3)
   ulong param_2;
   unsigned char * param_3;
 {
-  void *pvVar1;
-  void *pvVar2;
-  size_t sVar3;
-  uint uVar4;
+  size_t sVar1;
+  char *pcVar2;
+  char *pcVar3;
+  size_t sVar4;
   uint uVar5;
-  size_t sVar6;
-  uint uVar7;
-  void *pvVar8;
+  char *pcVar6;
   int local_30;
   int local_2c [4];
   
-  uVar4 = *(uint *)param_3;
-  uVar7 = *(uint *)(*(int *)this + -0xc);
-  sVar3 = *(ulong *)(uVar4 - 0xc);
-  if (uVar7 < param_2) {
+  pcVar2 = *(char **)param_3;
+  uVar5 = *(uint *)(*(int *)this + -0xc);
+  sVar1 = *(size_t *)(pcVar2 + -0xc);
+  if (uVar5 < param_2) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - sVar3 < uVar7) {
+  if (0x3ffffffc - sVar1 < uVar5) {
     std____throw_length_error("basic_string::insert");
   }
-  uVar5 = *(uint *)this;
-  if (((*(int *)(uVar5 - 4) < 1) && (uVar5 <= uVar4)) && (uVar4 <= uVar5 + uVar7)) {
-    __ZNSs9_M_mutateEmmm(this,param_2,0,sVar3);
-    pvVar1 = (void *)(*(int *)this + (uVar4 - uVar5));
-    pvVar8 = (void *)(*(int *)this + param_2);
-    pvVar2 = pvVar1;
-    if ((pvVar8 < (void *)((int)pvVar1 + sVar3)) &&
-       (pvVar2 = (void *)((int)pvVar1 + sVar3), pvVar1 < pvVar8)) {
-      sVar6 = (int)pvVar8 - (int)pvVar1;
-      _memcpy(pvVar8,pvVar1,sVar6);
-      pvVar2 = (void *)((int)pvVar8 + sVar3);
-      pvVar8 = (void *)((int)pvVar8 + sVar6);
-      sVar3 = sVar3 - sVar6;
+  pcVar3 = *(char **)this;
+  if (((*(int *)(pcVar3 + -4) < 1) && (pcVar3 <= pcVar2)) && (pcVar2 <= pcVar3 + uVar5)) {
+    __ZNSs9_M_mutateEmmm(this,param_2,0,sVar1);
+    pcVar2 = pcVar2 + (*(int *)this - (int)pcVar3);
+    pcVar6 = (char *)(*(int *)this + param_2);
+    pcVar3 = pcVar2;
+    if ((pcVar6 < pcVar2 + sVar1) && (pcVar3 = pcVar2 + sVar1, pcVar2 < pcVar6)) {
+      sVar4 = (int)pcVar6 - (int)pcVar2;
+      _memcpy(pcVar6,pcVar2,sVar4);
+      pcVar3 = pcVar6 + sVar1;
+      pcVar6 = pcVar6 + sVar4;
+      sVar1 = sVar1 - sVar4;
     }
-    _memcpy(pvVar8,pvVar2,sVar3);
+    _memcpy(pcVar6,pcVar3,sVar1);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs9_M_ibeginEv(local_2c,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (local_2c,local_2c[0] + param_2,local_30 + param_2,uVar4,uVar4 + sVar3);
+                     (this,local_2c[0] + param_2,local_30 + param_2,pcVar2,pcVar2 + sVar1);
   }
   return this;
 }
@@ -781,15 +780,16 @@ int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc(param_1, param_2, param
   int param_3;
   undefined4 param_4;
 {
+  int iVar1;
   int local_30 [6];
   
   __ZNKSs9_M_ibeginEv(local_30,param_2);
-  param_3 = param_3 - local_30[0];
-  std__string___M_check((ulong)local_30,param_2,param_3);
+  iVar1 = param_3 - local_30[0];
+  std__string___M_check((ulong)local_30,param_2,iVar1);
   ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(param_2,local_30[0],local_30[0],1,param_4);
   *(undefined4 *)(*param_2 + -4) = 0xffffffff;
   __ZNKSs9_M_ibeginEv(local_30,param_2);
-  *param_1 = local_30[0] + param_3;
+  *param_1 = local_30[0] + iVar1;
   return param_1;
 }
 
@@ -935,7 +935,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs(this, param_2, p
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc @ 0x97c15514 (80 bytes) */
 int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, param_2, param_3, param_4)
-  undefined4 this;
+  void *this;
   undefined4 param_2;
   undefined4 param_3;
   char *param_4;
@@ -949,7 +949,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, param_2, pa
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc @ 0x97c15564 (180 bytes) */
 int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, param_2, param_3, param_4, param_5)
-  int *this;
+  void *this;
   int param_2;
   int param_3;
   uint param_4;
@@ -958,12 +958,12 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, param_2, par
   int local_30 [6];
   
   __ZNKSs9_M_ibeginEv(local_30,this);
-  if (0x3ffffffcU - (*(int *)(*this + -0xc) - (param_3 - param_2)) <= param_4) {
+  if (0x3ffffffcU - (*(int *)(*(int *)this + -0xc) - (param_3 - param_2)) <= param_4) {
     std____throw_length_error("basic_string::replace");
   }
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,param_4);
   if (param_4 != 0) {
-    _memset((void *)(*this + (param_2 - local_30[0])),param_5,param_4);
+    _memset((void *)(*(int *)this + (param_2 - local_30[0])),param_5,param_4);
   }
   return this;
 }

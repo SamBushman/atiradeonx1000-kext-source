@@ -943,13 +943,14 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2)
   size_t sVar3;
   char *pcVar4;
   void *pvVar5;
+  int in_r5;
   char *pcVar6;
   int iVar7;
   int iVar8;
   int iVar9;
   char acStack_30 [28];
   
-  _sprintf(acStack_30,"%u");
+  _sprintf(acStack_30,"%u",in_r5);
   sVar3 = _strlen(acStack_30);
   iVar9 = 0;
   pcVar4 = _malloc(*(int *)(param_1 + 0x20) + sVar3 + 1);

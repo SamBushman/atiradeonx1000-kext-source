@@ -55,7 +55,7 @@ extern int _eof_inputsrc;
 extern int _errorAtom;
 extern int _extensionAtom;
 extern int _fpDclList;
-extern unsigned char *_gPollAllocThreadData;
+extern unsigned int *_gPollAllocThreadData;
 extern int _glTypeNameStrings;
 extern int _globals_static;
 extern int _glpEpilogAVRTC;

@@ -1,7 +1,7 @@
 name	address	section	ghidra_type	len	c_declaration	value	defined_in
 __mh_bundle_header	0x0	?	mach_header	28	extern MACH_HEADER_t __mh_bundle_header asm("__mh_bundle_header");		linker symbol __mh_bundle_header
 _radeonCopyRegion	0x55a0	__TEXT,__text	-	-		0x7c400026	code entry (asm next to its function)
-s__LDBL128_0000cfbc	0xcfbc	__TEXT,__cstring	TerminatedCString	9	extern unsigned char *s__LDBL128_0000cfbc asm("s__LDBL128_0000cfbc");	0x244c4442	data.s
+s__LDBL128_0000cfbc	0xcfbc	__TEXT,__cstring	TerminatedCString	9	extern char s__LDBL128_0000cfbc[] asm("s__LDBL128_0000cfbc");	0x244c4442	data.s
 DOUBLE_0000cfd8	0xcfd8	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfd8 asm("DOUBLE_0000cfd8");	0x43300000	data.s
 DOUBLE_0000cfe0	0xcfe0	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfe0 asm("DOUBLE_0000cfe0");	0x43300000	data.s
 DOUBLE_0000cfe8	0xcfe8	__TEXT,__literal8	double	8	extern double DOUBLE_0000cfe8 asm("DOUBLE_0000cfe8");	0x3ff00000	data.s

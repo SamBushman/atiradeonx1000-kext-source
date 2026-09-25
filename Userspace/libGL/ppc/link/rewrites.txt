@@ -6,4 +6,6 @@ hand text patches applied (config text_patches):
 narrow-type subtract-and-compare idioms: 0
 float/double call arguments given their true type (integer bit patterns reinterpreted): 0
 stack records Ghidra declared as separate scalars, merged into one block: 0
+  of which records with pointer members (rewrites.fix_pointer_records): 0
+functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): 0
 short C++ call names left unresolved (0):

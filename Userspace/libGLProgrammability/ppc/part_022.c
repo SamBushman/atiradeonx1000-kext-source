@@ -651,7 +651,7 @@ LAB_97c164a4:
   puVar4[1] = param_1;
   *puVar4 = 0;
   puVar4[2] = 0;
-  return;
+  return puVar4;
 }
 
 /* __ZNSs4_Rep10_M_destroyERKSaIcE @ 0x97c165cc (132 bytes) */
@@ -789,7 +789,7 @@ int __ZNSsC1IPcEET_S1_RKSaIcE(this, param_2, param_3, param_4)
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())std__string___S_construct_char__)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())std__string___S_construct_char__)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -803,7 +803,7 @@ int __ZNSsC4IPcEET_S1_RKSaIcE(this, param_2, param_3, param_4)
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())std__string___S_construct_char__)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())std__string___S_construct_char__)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -828,7 +828,7 @@ int __ZNSsC1IPKcEET_S2_RKSaIcE(this, param_2, param_3, param_4)
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -842,7 +842,7 @@ int __ZNSsC4IPKcEET_S2_RKSaIcE(this, param_2, param_3, param_4)
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -852,7 +852,7 @@ int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, 
   void *this;
   undefined4 param_2;
   undefined4 param_3;
-  unsigned char * param_4;
+  undefined4 param_4;
 {
   ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(this,param_2,param_3,param_4);
   return;
@@ -867,7 +867,7 @@ int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, 
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -881,7 +881,7 @@ int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, 
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -891,7 +891,7 @@ int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
   void *this;
   undefined4 param_2;
   undefined4 param_3;
-  unsigned char * param_4;
+  undefined4 param_4;
 {
   ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(this,param_2,param_3,param_4);
   return;
@@ -906,7 +906,7 @@ int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
@@ -920,14 +920,14 @@ int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
 {
   char *pcVar1;
   
-  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(this,param_3,param_4,0);
+  pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,param_4,0);
   __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
   return;
 }
 
 /* std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__ @ 0x97c16a34 (108 bytes) */
 int std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
+  void *param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -942,14 +942,14 @@ int std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__(par
   ((int (*)())__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(auStack_50,param_4,param_5,auStack_40);
   __ZNKSs9_M_ibeginEv(&local_30,auStack_50);
   __ZNKSs7_M_iendEv(local_2c,auStack_50);
-  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(local_2c,param_2,param_3,local_30,local_2c[0]);
+  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(param_1,param_2,param_3,local_30,local_2c[0]);
   __ZNSsD4Ev(auStack_50);
   return psVar1;
 }
 
 /* std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__ @ 0x97c16ae4 (108 bytes) */
 int std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
+  void *param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -964,14 +964,14 @@ int std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string
   ((int (*)())__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(auStack_50,param_4,param_5,auStack_40);
   __ZNKSs9_M_ibeginEv(&local_30,auStack_50);
   __ZNKSs7_M_iendEv(local_2c,auStack_50);
-  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(local_2c,param_2,param_3,local_30,local_2c[0]);
+  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(param_1,param_2,param_3,local_30,local_2c[0]);
   __ZNSsD4Ev(auStack_50);
   return psVar1;
 }
 
 /* std__string___M_replace_char__ @ 0x97c16b94 (108 bytes) */
 int std__string___M_replace_char__(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
+  void *param_1;
   undefined4 param_2;
   undefined4 param_3;
   char *param_4;
@@ -986,16 +986,16 @@ int std__string___M_replace_char__(param_1, param_2, param_3, param_4, param_5)
   ((int (*)())__ZNSsC1IPcEET_S1_RKSaIcE)(auStack_50,param_4,param_5,aaStack_40);
   __ZNKSs9_M_ibeginEv(&local_30,auStack_50);
   __ZNKSs7_M_iendEv(local_2c,auStack_50);
-  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(local_2c,param_2,param_3,local_30,local_2c[0]);
+  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(param_1,param_2,param_3,local_30,local_2c[0]);
   __ZNSsD4Ev(auStack_50);
   return psVar1;
 }
 
 /* __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag @ 0x97c16c44 (108 bytes) */
 int __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag(param_1, param_2, param_3, param_4, param_5)
-  undefined4 param_1;
+  void *param_1;
   undefined4 param_2;
-  undefined4 param_3;
+  char *param_3;
   char *param_4;
   char *param_5;
 {
@@ -1008,14 +1008,14 @@ int __ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18
   ((int (*)())__ZNSsC1IPKcEET_S2_RKSaIcE)(auStack_50,param_4,param_5,aaStack_40);
   __ZNKSs9_M_ibeginEv(&local_30,auStack_50);
   __ZNKSs7_M_iendEv(local_2c,auStack_50);
-  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(local_2c,param_2,param_3,local_30,local_2c[0]);
+  psVar1 = ((int (*)())__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_)(param_1,param_2,param_3,local_30,local_2c[0]);
   __ZNSsD4Ev(auStack_50);
   return psVar1;
 }
 
 /* __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_ @ 0x97c16cf4 (168 bytes) */
 int __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_(this, param_2, param_3, param_4, param_5)
-  unsigned char * this;
+  void *this;
   int param_2;
   int param_3;
   int param_4;
@@ -1032,7 +1032,7 @@ int __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_
-              (*(int *)this + (param_2 - local_30[0]),param_4,param_5);
+              ((char *)(*(int *)this + (param_2 - local_30[0])),param_4,param_5);
   }
   return this;
 }
@@ -1056,7 +1056,7 @@ int std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__s
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
     __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_
-              (*(int *)this + (param_2 - local_30[0]),param_4,param_5);
+              ((char *)(*(int *)this + (param_2 - local_30[0])),param_4,param_5);
   }
   return this;
 }
@@ -1108,10 +1108,11 @@ int __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7
 }
 
 /* __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag @ 0x97c16f8c (152 bytes) */
-int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag(param_1, param_2, param_3)
+int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   unsigned char * param_3;
+  undefined4 param_4;
 {
   ulong *puVar1;
   ulong *puVar2;
@@ -1132,18 +1133,20 @@ int __ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcES
     uVar3 = param_2 - param_1;
     puVar2 = (ulong *)((int (*)())__ZNSs4_Rep9_S_createEmRKSaIcE)(uVar3,param_3);
     puVar1 = puVar2 + 3;
-    __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_(puVar1,param_1,param_2);
+    __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_((char *)puVar1,param_1,param_2)
+    ;
     *puVar2 = uVar3;
-    *(char *)((int)puVar1 + uVar3) = '\0';
+    *(undefined1 *)((int)puVar1 + uVar3) = 0;
   }
   return (char *)puVar1;
 }
 
 /* std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__ @ 0x97c17024 (152 bytes) */
-int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__(param_1, param_2, param_3)
+int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__(param_1, param_2, param_3, param_4)
   int param_1;
   int param_2;
   unsigned char * param_3;
+  undefined4 param_4;
 {
   ulong *puVar1;
   ulong *puVar2;
@@ -1164,9 +1167,10 @@ int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__stri
     uVar3 = param_2 - param_1;
     puVar2 = (ulong *)((int (*)())__ZNSs4_Rep9_S_createEmRKSaIcE)(uVar3,param_3);
     puVar1 = puVar2 + 3;
-    __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_(puVar1,param_1,param_2);
+    __ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_
+              ((char *)puVar1,param_1,param_2);
     *puVar2 = uVar3;
-    *(char *)((int)puVar1 + uVar3) = '\0';
+    *(undefined1 *)((int)puVar1 + uVar3) = 0;
   }
   return (char *)puVar1;
 }
@@ -1242,17 +1246,18 @@ int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(param_1, pa
 }
 
 /* __ZSt13__destroy_auxIPSsEvT_S1_12__false_type @ 0x97c1721c (76 bytes) */
-int __ZSt13__destroy_auxIPSsEvT_S1_12__false_type(param_1, param_2)
-  void *param_1;
-  void *param_2;
+int __ZSt13__destroy_auxIPSsEvT_S1_12__false_type(param_1, param_2, param_3)
+  unsigned char * param_1;
+  unsigned char * param_2;
+  undefined4 param_3;
 {
-  void *pvVar1;
+  unsigned char * psVar1;
   
-  pvVar1 = param_1;
-  for (; param_1 != param_2; param_1 = (void *)((int)param_1 + 4)) {
-    pvVar1 = (void *)__ZNSsD4Ev(param_1);
+  psVar1 = param_1;
+  for (; param_1 != param_2; param_1 = param_1 + 4) {
+    psVar1 = (unsigned char *)__ZNSsD4Ev(param_1);
   }
-  return pvVar1;
+  return psVar1;
 }
 
 /* operator_new @ 0x97c17268 (144 bytes) */

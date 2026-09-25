@@ -4112,7 +4112,7 @@ int FUN_0009bd00(param_1)
   piVar2[2] = 0;
   *piVar2 = (int)(piVar2 + 3);
   piVar2[1] = (int)(piVar2 + 3 + uVar1);
-  return;
+  return piVar2;
 }
 
 /* FUN_0009bd60 @ 0x9bd60 (160 bytes) */

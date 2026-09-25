@@ -52,16 +52,20 @@ int Binding__GetOpenGLType(this)
 int Binding__GetBindingBasicSize(this)
   unsigned char * this;
 {
-  GetVec4sForType(*(ushort *)(this + 0x24));
-  return;
+  undefined4 uVar1;
+  
+  uVar1 = GetVec4sForType(*(ushort *)(this + 0x24));
+  return uVar1;
 }
 
 /* Binding__GetBindingSlots @ 0x97bb0498 (8 bytes) */
 int Binding__GetBindingSlots(this)
   unsigned char * this;
 {
-  GetVec4sForType(*(ushort *)(this + 0x24));
-  return;
+  undefined4 uVar1;
+  
+  uVar1 = GetVec4sForType(*(ushort *)(this + 0x24));
+  return uVar1;
 }
 
 /* Binding__SetDecSize @ 0x97bb04a0 (8 bytes) */

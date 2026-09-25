@@ -1,3 +1,18 @@
-{"toolchain_functions": ["restFP", "saveFP", "___stub_getrealaddr", "_printf_LDBLStub"],
- "toolchain_addr_ranges": [["0x600", "0x1690"]],
- "label_overrides": {"_printf_LDBLStub": "_printf"}}
+{
+ "toolchain_functions": [
+  "restFP",
+  "saveFP",
+  "___stub_getrealaddr",
+  "_printf_LDBLStub"
+ ],
+ "toolchain_addr_ranges": [
+  [
+   "0x600",
+   "0x1690"
+  ]
+ ],
+ "label_overrides": {
+  "_printf_LDBLStub": "_printf"
+ },
+ "mirror_frames": true
+}

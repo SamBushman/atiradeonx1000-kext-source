@@ -500,11 +500,11 @@ int ConstructCompiler(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  void *pvVar1;
+  void *this;
   
-  pvVar1 = operator_new(200);
-  __ZN17TPPStreamCompilerC1E11EShLanguagei(pvVar1,param_1,param_2);
-  return pvVar1;
+  this = operator_new(200);
+  __ZN17TPPStreamCompilerC1E11EShLanguagei(this,param_1,param_2);
+  return this;
 }
 
 /* DeleteCompiler @ 0x97bca2b0 (24 bytes) */
@@ -2327,8 +2327,9 @@ int FunctionTable__addFunction(this, param_2)
   pvVar1 = _malloc(sVar3 + 1);
   *(void **)(uVar9 * 0x18 + iVar4) = pvVar1;
   _strcpy(*(char **)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
-  *(int *)(this + 4) = *(int *)(this + 4) + 1;
-  return;
+  iVar4 = *(int *)(this + 4);
+  *(int *)(this + 4) = iVar4 + 1;
+  return iVar4;
 }
 
 /* FunctionTable__removeFunction @ 0x97bccafc (168 bytes) */

@@ -5623,6 +5623,7 @@ int FUN_00151318(param_1)
   undefined4 param_1;
 {
   int iVar1;
+  undefined4 uVar2;
   undefined4 local_28;
   undefined4 local_24;
   undefined4 local_20;
@@ -5633,8 +5634,8 @@ int FUN_00151318(param_1)
   local_24 = 0;
   local_20 = 0;
   iVar1 = FUN_001054ec(param_1,0);
-  FUN_000f5c0c(param_1,1,*(undefined4 *)(iVar1 + 0x10),&local_28);
-  return;
+  uVar2 = FUN_000f5c0c(param_1,1,*(undefined4 *)(iVar1 + 0x10),&local_28);
+  return uVar2;
 }
 
 /* FUN_00151370 @ 0x151370 (1340 bytes) */

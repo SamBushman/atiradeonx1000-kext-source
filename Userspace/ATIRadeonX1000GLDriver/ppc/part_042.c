@@ -8267,6 +8267,7 @@ int FUN_00146670(param_1, param_2, param_3, param_4)
   code *UNRECOVERED_JUMPTABLE;
   int iVar1;
   int *piVar2;
+  undefined4 uVar3;
   
   iVar1 = (**(code **)(*param_2 + 0x5c))(param_2);
   if ((iVar1 == 0) && (param_3 == 0)) {
@@ -8279,8 +8280,8 @@ int FUN_00146670(param_1, param_2, param_3, param_4)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(piVar2,param_1);
-  return;
+  uVar3 = (*UNRECOVERED_JUMPTABLE)(piVar2,param_1);
+  return uVar3;
 }
 
 /* FUN_001466f4 @ 0x1466f4 (104 bytes) */

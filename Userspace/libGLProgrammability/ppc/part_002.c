@@ -45,8 +45,9 @@ int _InitAtomTable(param_1, param_2)
   undefined4 uVar6;
   char *pcVar7;
   int iVar8;
-  char local_20;
-  undefined1 local_1f;
+  char local_20_str[2];
+#define local_20 local_20_str[0]
+#define local_1f local_20_str[1]
   
   if (param_2 < 1) {
     param_2 = 0x7ff;
@@ -98,6 +99,8 @@ int _InitAtomTable(param_1, param_2)
     }
   }
   return uVar6;
+#undef local_20
+#undef local_1f
 }
 
 /* _PrintAtomTable @ 0x97b85f10 (208 bytes) */
@@ -1879,7 +1882,7 @@ int FUN_97b88a90(param_1, param_2)
   int param_1;
   int param_2;
 {
-  undefined1 *unaff_r2;
+  undefined1 *unaff_r2 = *(undefined1 **)(param_1 + 0x18);   /* set by the entry _str_ungetch: lwz r2,0x18(r3) */
   
   if ((char)unaff_r2[-1] == param_2) {
     *(undefined1 **)(param_1 + 0x18) = unaff_r2 + -1;
