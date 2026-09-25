@@ -222,12 +222,16 @@ The behavioural tests of the table above still pass on the new link.
   differences (`memset` and one unnamed stub call).
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
-* Callee comparison after Stage B3 (2026-09-25): glprog 5 functions differ - `handleDigit` (self-recursion, the stock `bl` target decoded = its own
+* Callee comparison after Stage B3 (2026-09-25): glprog 8 functions differ - `handleDigit` (self-recursion, the stock `bl` target decoded = its own
   entry), `___register_frame_table` (the stock tail-jumps to the 2-instruction thunk `register_frame_info_table` = `_bases(a, b, 0, 0)`, which the C
-  calls directly), the two dead range checks below, and the unwinder's `eh_rest_world_r10` (issue #63); GLDriver 2 differ (`FUN_00018120` below,
-  `FUN_000a7050` calls `FUN_000a6f70` directly where the stock calls through the pointer it has just stored at +0x24c - same target) and 4 jump-table functions have callees in never-transcribed case blocks
-  (`FUN_00002ae0`, `FUN_000d0488`, `FUN_000d0888`, `FUN_000f94dc`: open, issue #67). callee_compare_c.py now also counts a 4-8 byte piece of
-  saveFP/restFP (Ghidra split the millicode at every entry the stock uses) as millicode - 9 GLDriver and 2 glprog false differences.
+  calls directly), the two dead range checks below, the unwinder's `eh_rest_world_r10`, and the three rebuilt unwinder entry points, which no
+  longer call `save_world` / `eh_rest_world_r10` (the compiler emits the register save and the eh_return inline; issue #63). GLDriver 3 differ
+  (`FUN_00018120` and glAccum `FUN_00002ae0` tail-call `free` through its non-lazy pointer, the C calls the pointer; `FUN_000a7050` calls
+  `FUN_000a6f70` directly where the stock calls through the pointer it has just stored at +0x24c - same target) and 0 jump-table gaps: `FUN_000d0488`
+  / `FUN_000d0888` had unresolved tables (pipeline step 9), `FUN_00002ae0`'s cases were owned by no RANGES row (step 10), and `FUN_000f94dc`'s
+  "cases" are cleanup landing pads that branch to a shared `_Unwind_Resume` (the check now recognises them). callee_compare_c.py also counts a
+  4-8 byte piece of saveFP/restFP (Ghidra split the millicode at every entry the stock uses) as millicode - 9 GLDriver and 2 glprog false
+  differences.
 * libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`, a `memset` in one orphan), name aliases
   (`__register_frame_table`, `std::__default_alloc_template<true,0>::_Lock`), a call to a bare `blr` stub, and two libstdc++ range checks Ghidra
   proved unreachable (`_ShCompile`: `if (0 > max_size) __throw_length_error`; `std::operator+`: `if (0 > size()) __throw_out_of_range`).

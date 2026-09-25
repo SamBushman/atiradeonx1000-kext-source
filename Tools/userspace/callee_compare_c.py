@@ -251,6 +251,11 @@ for a_, sz_, name_, st_ in funcs:
     for g in unowned_between(min(l for l, h in rng_), max(h for l, h in rng_)):
         cg = count_range([g])
         if 'Unwind_Resume' in cg: continue   # a C++ exception landing pad: reachable only through the unwinder, no decompile can contain it
+        # a cleanup pad that runs a destructor and then branches to the shared `_Unwind_Resume` sequence (GLDriver FUN_000f94dc: `bl dtor; b 0xf9924`,
+        # 0xf9924 = `or r3,r27,r27; bl _Unwind_Resume`) - transcribed as a landing-pad companion function, not a case
+        i_ = bisect.bisect_left(saddr, g[1]) - 1
+        mb_ = re.match(r'0x([0-9a-f]+)', srows[i_][2]) if 0 <= i_ < len(srows) and srows[i_][1] == 'b' else None
+        if mb_ and 'Unwind_Resume' in count_range([(int(mb_.group(1), 16), int(mb_.group(1), 16) + 16)]): continue
         gc.update(cg)
     gc = clean(gc, n_); co_ = clean(ours[n_], n_)
     miss = {k: v for k, v in gc.items() if k not in co_ and not k.startswith('func_0x')}   # func_0x..: a `bl` from one unowned block into another, not a named callee
