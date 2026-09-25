@@ -154,10 +154,10 @@ LAB_00197f38:
   return;
 }
 
-/* FUN_00197fb8 @ 0x197fb8 (204 bytes) */
-int FUN_00197fb8(param_1, param_2, param_3, param_4, param_5)
+/* FUN_00197fb4 @ 0x197fb4 (208 bytes) */
+int FUN_00197fb4(param_1, param_2, param_3, param_4, param_5)
   int param_1;
-  undefined4 param_2;
+  int param_2;
   int param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -166,9 +166,8 @@ int FUN_00197fb8(param_1, param_2, param_3, param_4, param_5)
   int iVar2;
   undefined1 uVar3;
   int iVar4;
-  byte in_cr7;
   
-  if (!(bool)(in_cr7 >> 1 & 1)) {
+  if (param_2 != 0) {
     *(undefined2 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58) + 0xc) =
          (*(unsigned short *)((unsigned char *)&(param_5) + 2));
     iVar4 = *(int *)(param_1 + 0x60);
@@ -2974,18 +2973,17 @@ int FUN_0019d474()
   return;
 }
 
-/* FUN_0019d480 @ 0x19d480 (132 bytes) */
-int FUN_0019d480(param_1, param_2)
+/* FUN_0019d478 @ 0x19d478 (140 bytes) */
+int FUN_0019d478(param_1, param_2)
   int param_1;
   int *param_2;
 {
   uint uVar1;
   uint uVar2;
   undefined4 *puVar3;
-  undefined4 unaff_r28;
-  byte in_cr0;
+  int in_r5;
   
-  if ((bool)(in_cr0 >> 1 & 1)) {
+  if (in_r5 == 0) {
     puVar3 = (undefined4 *)0x0;
     uVar2 = *(uint *)(*(int *)(param_1 + 0x94) + 4);
     uVar1 = uVar2 - 1;
@@ -2996,7 +2994,7 @@ int FUN_0019d480(param_1, param_2)
   }
                     
                     
-  (**(code **)(*param_2 + 0x44))(param_2,*(undefined4 *)(param_1 + 0x10),unaff_r28);
+  (**(code **)(*param_2 + 0x44))(param_2,*(undefined4 *)(param_1 + 0x10),in_r5);
   return;
 }
 

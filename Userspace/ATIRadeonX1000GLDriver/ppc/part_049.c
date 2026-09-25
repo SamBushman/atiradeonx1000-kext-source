@@ -1770,8 +1770,8 @@ int FUN_0018962c(param_1, param_2)
   return uVar1 ^ 1;
 }
 
-/* FUN_00189664 @ 0x189664 (148 bytes) */
-int FUN_00189664(param_1, param_2, param_3, param_4, param_5)
+/* FUN_00189660 @ 0x189660 (152 bytes) */
+int FUN_00189660(param_1, param_2, param_3, param_4, param_5)
   int *param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -1780,10 +1780,9 @@ int FUN_00189664(param_1, param_2, param_3, param_4, param_5)
 {
   int iVar1;
   undefined4 uVar2;
-  byte in_cr0;
   
-  if (((!(bool)(in_cr0 >> 1 & 1)) && (iVar1 = (**(code **)(*param_5 + 0x4c))(param_5), iVar1 != 0))
-     && (*param_4 == 0x10304)) {
+  if (((param_5 != (int *)0x0) && (iVar1 = (**(code **)(*param_5 + 0x4c))(param_5), iVar1 != 0)) &&
+     (*param_4 == 0x10304)) {
     return 1;
   }
                     

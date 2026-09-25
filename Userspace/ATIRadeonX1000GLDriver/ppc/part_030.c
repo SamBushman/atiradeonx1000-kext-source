@@ -966,37 +966,65 @@ void FUN_0010b2dc(float *param_1,int param_2,int param_3,float param_4)
   return;
 }
 
-/* FUN_0010b334 @ 0x10b334 (92 bytes) */
-int FUN_0010b334(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,int param_5,double fparam_1)
+/* FUN_0010b32c @ 0x10b32c (100 bytes) */
+int FUN_0010b32c(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,int param_5,double fparam_1)
 {
-  undefined4 uVar1;
-  int iVar2;
+  bool bVar1;
+  undefined4 uVar2;
   int iVar3;
-  undefined4 uVar4;
-  int iVar5;
-  byte in_cr7;
+  int iVar4;
+  undefined4 uVar5;
+  int iVar6;
   
-  if ((bool)(in_cr7 >> 2 & 1)) {
-    uVar1 = 0;
+  switch(param_1) {
+  case 0:
+    uVar2 = 0x2a;
+    bVar1 = false;
+    break;
+  case 1:
+    uVar2 = 0x27;
+    bVar1 = false;
+    break;
+  case 2:
+    uVar2 = 0x29;
+    bVar1 = true;
+    break;
+  case 3:
+    uVar2 = 0x28;
+    bVar1 = true;
+    break;
+  case 4:
+    uVar2 = 0x29;
+    bVar1 = false;
+    break;
+  case 5:
+    uVar2 = 0x28;
+    bVar1 = false;
+    break;
+  default:
+    uVar2 = 0;
+    bVar1 = false;
+  }
+  uVar5 = *(undefined4 *)(param_5 + 0x6c4);
+  iVar3 = FUN_001043f0(uVar2,param_5);
+  iVar4 = FUN_001054ec(iVar3,2 - (uint)!bVar1);
+  *(undefined4 *)(iVar4 + 0xc) = param_3;
+  *(undefined4 *)(iVar4 + 8) = param_2;
+  if (!bVar1) {
+    uVar2 = 2;
   }
   else {
-                    
-    uVar1 = 0x29;
+    uVar2 = 1;
   }
-  uVar4 = *(undefined4 *)(param_5 + 0x6c4);
-  iVar2 = FUN_001043f0(uVar1,param_5);
-  iVar3 = FUN_001054ec(iVar2,1);
-  *(undefined4 *)(iVar3 + 0xc) = param_3;
-  *(undefined4 *)(iVar3 + 8) = param_2;
-  ((void (*)())FUN_000f79c4)(iVar2,uVar4,2,fparam_1,fparam_1,fparam_1,fparam_1);
-  iVar5 = *(int *)(param_5 + 0x3ac) + -1;
-  *(int *)(param_5 + 0x3ac) = iVar5;
-  iVar3 = FUN_001054ec(iVar2,0);
-  uVar1 = _UNK_001af9d8;
-  *(undefined4 *)(iVar3 + 0xc) = 0;
-  *(int *)(iVar3 + 8) = iVar5;
-  *(undefined4 *)(iVar2 + 0x9c) = uVar1;
-  return iVar2;
+  ((void (*)())FUN_000f79c4)(iVar3,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1);
+  iVar6 = *(int *)(param_5 + 0x3ac) + -1;
+  *(int *)(param_5 + 0x3ac) = iVar6;
+  iVar4 = FUN_001054ec(iVar3,0);
+  uVar2 = _UNK_001af9d8;
+  *(undefined4 *)(iVar4 + 0xc) = 0;
+  *(int *)(iVar4 + 8) = iVar6;
+  *(undefined4 *)(iVar3 + 0x9c) = uVar2;
+  return iVar3;
 }
 
 /* FUN_0010b498 @ 0x10b498 (352 bytes) */

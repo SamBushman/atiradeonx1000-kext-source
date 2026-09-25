@@ -998,9 +998,9 @@ int check_exception_spec(param_1, param_2, param_3, param_4)
   return 1;
 }
 
-/* FUN_97c19934 @ 0x97c19934 (968 bytes) */
-int FUN_97c19934(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
+/* ___gxx_personality_v0 @ 0x97c1992c (976 bytes) */
+int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
+  int param_1;
   uint param_2;
   int param_3;
   int param_4;
@@ -1021,7 +1021,6 @@ int FUN_97c19934(param_1, param_2, param_3, param_4, param_5, param_6)
   uchar *puVar10;
   unsigned char * ptVar11;
   uint uVar12;
-  byte in_cr7;
   int iStack_80;
   int iStack_7c;
   undefined4 uStack_78;
@@ -1037,7 +1036,7 @@ int FUN_97c19934(param_1, param_2, param_3, param_4, param_5, param_6)
   void *apvStack_48 [2];
   
   apvStack_48[0] = (void *)(param_5 + 0x20);
-  if (!(bool)(in_cr7 >> 1 & 1)) {
+  if (param_1 != 1) {
     return 3;
   }
   if (((param_2 == 6) && (param_3 == 0x474e5543)) && (param_4 == 0x432b2b00)) {

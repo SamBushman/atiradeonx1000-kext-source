@@ -2780,7 +2780,6 @@ cc86c	cc870	padding	FUN_000cae90	1
 cce54	cce8c	table	FUN_000cae90	14	
 cd028	cd030	padding	FUN_000cae90	2	
 cd10c	cd110	eh-pad	FUN_000cd05c	1	__Unwind_Resume
-cd154	cd15c	other	FUN_000cd05c	2	
 cd28c	cd290	millicode	FUN_000cd1c4	1	
 cd2c8	cd360	table	FUN_000cd290	38	
 cd380	cd388	other	FUN_000cd1c4	2	
@@ -2950,7 +2949,6 @@ ec56c	ec58c	eh-pad	FUN_000ec4f0	8	0x193cc0,__Unwind_Resume
 ecf5c	ecf7c	eh-pad	FUN_000eced0	8	0x193cc0,__Unwind_Resume
 ed0e4	ed0fc	eh-pad	FUN_000ecfac	6	__Unwind_Resume
 ed25c	ed274	eh-pad	FUN_000ed124	6	__Unwind_Resume
-ed29c	ed2a4	other	FUN_000ed124	2	
 edbf0	edc10	eh-pad	FUN_000ed89c	8	0x193cc0,__Unwind_Resume
 ee114	ee118	millicode	FUN_000edd98	1	
 ee214	ee218	millicode	FUN_000edd98	1	
@@ -2977,7 +2975,6 @@ f293c	f2950	other	FUN_000f1d7c	5	0x193cc0
 f2960	f2974	other	FUN_000f1d7c	5	0x193cc0
 f2984	f2998	other	FUN_000f1d7c	5	0x193cc0
 f29b8	f29d0	eh-pad	FUN_000f1d7c	6	0x193cc0,__Unwind_Resume
-f3bc0	f3bc4	other	FUN_000f3b68	1	
 f3cf8	f3d38	table	FUN_000f3c30	16	
 f40d4	f4114	table	FUN_000f403c	16	
 f513c	f515c	eh-pad	FUN_000f4fdc	8	0x193cc0,__Unwind_Resume
@@ -2985,7 +2982,6 @@ f6c50	f6c70	eh-pad	FUN_000f6a04	8	0x193cc0,__Unwind_Resume
 f8258	f8278	eh-pad	FUN_000f816c	8	0x193cc0,__Unwind_Resume
 f8430	f8450	eh-pad	FUN_000f83cc	8	0x193cc0,__Unwind_Resume
 f8908	f8928	eh-pad	FUN_000f88b4	8	0x193cc0,__Unwind_Resume
-f89b4	f89b8	other	FUN_000f89a4	1	
 f8cc8	f8ccc	millicode	FUN_000f8c88	1	
 f91e8	f9288	table	FUN_000f9140	40	
 f953c	f9550	table	FUN_000f94dc	5	
@@ -3109,8 +3105,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10a79c	10a7bc	eh-pad	FUN_0010a758	8	0x193cc0,__Unwind_Resume
 10adb4	10add4	eh-pad	FUN_0010ad68	8	0x193cc0,__Unwind_Resume
 10b000	10b020	eh-pad	FUN_0010af38	8	0x193cc0,__Unwind_Resume
-10b32c	10b334	other	FUN_0010b2dc	2	
-10b384	10b39c	table	FUN_0010b334	6	
+10b384	10b39c	table	FUN_0010b32c	6	
 10b638	10b7f0	table	FUN_0010b5f8	110	
 10b874	10b88c	table	FUN_0010b820	6	
 10b9c0	10ba40	table	FUN_0010b93c	32	
@@ -3248,7 +3243,6 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 127dac	127de8	eh-pad	FUN_00127994	15	0x193cc0,__Unwind_Resume
 1281e8	1281f0	millicode	FUN_001281b0	2	
 12841c	128430	other	FUN_0012839c	5	
-128ad4	128ad8	other	FUN_00128930	1	
 129108	12911c	eh-pad	FUN_00128fd0	5	__Unwind_Resume
 129268	12927c	eh-pad	FUN_00129130	5	__Unwind_Resume
 129340	129350	eh-pad	FUN_00129290	4	__Unwind_Resume
@@ -3305,9 +3299,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1351a4	1351c4	eh-pad	FUN_00135110	8	0x193cc0,__Unwind_Resume
 135258	135278	eh-pad	FUN_001351c4	8	0x193cc0,__Unwind_Resume
 1361b4	1361d4	eh-pad	FUN_00135fb0	8	0x193cc0,__Unwind_Resume
-136ec4	136ec8	other	FUN_00135fb0	1	
-136f5c	136f60	millicode	FUN_00136ec8	1	
-136fac	136fcc	eh-pad	FUN_00136ec8	8	0x193cc0,__Unwind_Resume
+136f5c	136f60	millicode	FUN_00136ec4	1	
+136fac	136fcc	eh-pad	FUN_00136ec4	8	0x193cc0,__Unwind_Resume
 137234	137238	millicode	FUN_0013719c	1	
 137284	1372a4	eh-pad	FUN_0013719c	8	0x193cc0,__Unwind_Resume
 137620	137640	eh-pad	FUN_00137474	8	0x193cc0,__Unwind_Resume
@@ -3339,7 +3332,6 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 143e18	143e30	eh-pad	FUN_0014375c	6	0x193cc0,__Unwind_Resume
 146564	14657c	eh-pad	FUN_00145670	6	0x193cc0,__Unwind_Resume
 1465d8	1465f0	eh-pad	FUN_0014657c	6	0x193cc0,__Unwind_Resume
-14694c	146950	other	FUN_00146868	1	
 1473f0	1474a8	table	FUN_00147398	46	
 148328	14832c	eh-pad	FUN_00147f54	1	__Unwind_Resume
 14b00c	14b010	eh-pad	FUN_0014acb8	1	__Unwind_Resume
@@ -3402,8 +3394,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 171ee4	171f1c	other	FUN_00171e68	14	
 171f2c	171f64	other	FUN_00171e68	14	
 171fa0	171fd0	eh-pad	FUN_00171e68	12	__Unwind_Resume
-172474	17247c	other	FUN_00172428	2	
-1724d4	1724f4	eh-pad	FUN_0017247c	8	0x193cc0,__Unwind_Resume
+1724d4	1724f4	eh-pad	FUN_00172474	8	0x193cc0,__Unwind_Resume
 172f04	172f0c	millicode	FUN_00172efc	2	
 172f20	172f24	millicode	FUN_00172f0c	1	
 172f2c	172f34	millicode	FUN_00172f24	2	
@@ -3439,7 +3430,6 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 185878	18587c	eh-pad	FUN_00184ef0	1	__Unwind_Resume
 185c28	185c2c	eh-pad	FUN_001859bc	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	
-189660	189664	other	FUN_0018962c	1	
 189764	18976c	millicode	FUN_001896f8	2	
 1897f8	1897fc	millicode	FUN_001897f0	1	
 18a528	18a548	eh-pad	FUN_0018a440	8	0x193cc0,__Unwind_Resume
@@ -3459,7 +3449,6 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 192358	192438	table	FUN_001922c4	56	
 19279c	1927a0	eh-pad	FUN_001922c4	1	__Unwind_Resume
 19323c	193240	eh-pad	FUN_0019286c	1	__Unwind_Resume
-193a8c	193a90	other	FUN_00193a00	1	
 193b88	193ba8	eh-pad	FUN_00193b3c	8	0x193cc0,__Unwind_Resume
 193bd0	193be8	other	FUN_00193b3c	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
@@ -3473,28 +3462,22 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 195644	195650	millicode	FUN_00195640	3	
 1961b0	1961c8	other	FUN_00196070	6	
 197964	197988	table	FUN_0019786c	9	
-197fb4	197fb8	other	FUN_00197ecc	1	
-19a8cc	19a8d4	millicode	FUN_0019d480	2	
-19aad8	19aaf4	other	FUN_0019d480	7	
-19ab58	19ab60	millicode	FUN_0019d480	2	
-19ac28	19ac2c	millicode	FUN_0019d480	1	
-19aca8	19acb0	millicode	FUN_0019d480	2	
-19b998	19b9ac	eh-pad	FUN_0019d480	5	__Unwind_Resume
-19ba28	19ba3c	eh-pad	FUN_0019d480	5	__Unwind_Resume
+19a8cc	19a8d4	millicode	FUN_0019d478	2	
+19aad8	19aaf4	other	FUN_0019d478	7	
+19ab58	19ab60	millicode	FUN_0019d478	2	
+19ac28	19ac2c	millicode	FUN_0019d478	1	
+19aca8	19acb0	millicode	FUN_0019d478	2	
+19b998	19b9ac	eh-pad	FUN_0019d478	5	__Unwind_Resume
+19ba28	19ba3c	eh-pad	FUN_0019d478	5	__Unwind_Resume
 19bab0	19bac4	eh-pad	FUN_0019ba3c	5	__Unwind_Resume
-19d478	19d480	other	FUN_0019d474	2	
 19d55c	19d57c	eh-pad	FUN_0019d4e8	8	0x193cc0,__Unwind_Resume
 19dd38	19dd4c	eh-pad	FUN_0019dcb0	5	0x19b91c,__Unwind_Resume
 19de30	19de50	eh-pad	FUN_0019dd7c	8	0x193cc0,__Unwind_Resume
 19df28	19df3c	eh-pad	FUN_0019deb0	5	0x19b91c,__Unwind_Resume
 19dfcc	19dfe0	eh-pad	FUN_0019df54	5	0x19b91c,__Unwind_Resume
 19ef4c	19ef50	millicode	FUN_0019ef2c	1	
-19f43c	19f440	other	FUN_0019f310	1	
 19fcc4	19fccc	millicode	FUN_0019fb84	2	
-19fdf0	19fdf4	other	FUN_0019fccc	1	
-1a00b4	1a00b8	other	FUN_0019ffdc	1	
 1a1094	1a10ac	table	FUN_001a0fe4	6	
-1a184c	1a1850	other	FUN_001a158c	1	
 1a1974	1a198c	table	FUN_001a191c	6	
 1a270c	1a2724	table	FUN_001a25a8	6	
 1a2874	1a2878	eh-pad	FUN_001a25a8	1	__Unwind_Resume

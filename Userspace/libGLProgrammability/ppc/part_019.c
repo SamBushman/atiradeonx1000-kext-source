@@ -3048,8 +3048,8 @@ int _glpDCBAlloc(param_1)
   return uVar2;
 }
 
-/* FUN_97c1092c @ 0x97c1092c (248 bytes) */
-int FUN_97c1092c(param_1)
+/* _glpDCBRealloc @ 0x97c10924 (256 bytes) */
+int _glpDCBRealloc(param_1)
   int param_1;
 {
   int iVar1;
@@ -3057,24 +3057,29 @@ int FUN_97c1092c(param_1)
   uint uVar3;
   int iVar4;
   void *pvVar5;
+  int in_r4;
   int iVar6;
-  int unaff_r29;
   uint uVar7;
-  byte in_cr0;
   
-  if ((bool)(in_cr0 >> 2 & 1)) {
+  if (in_r4 < 1) {
+    if (param_1 != 0) {
+      ((int (*)())_glpDCBFree)(param_1);
+    }
+    uVar3 = 0;
+  }
+  else {
     if (param_1 == 0) {
-      uVar3 = ((int (*)())_glpDCBAlloc)(unaff_r29);
+      uVar3 = ((int (*)())_glpDCBAlloc)(in_r4);
       return uVar3;
     }
     uVar7 = (uint)*(byte *)(param_1 + -1);
-    pvVar5 = _realloc((void *)(param_1 - uVar7),unaff_r29 + 0x3fU & 0xffffffe0);
+    pvVar5 = _realloc((void *)(param_1 - uVar7),in_r4 + 0x3fU & 0xffffffe0);
     uVar3 = 0;
     if (pvVar5 != (void *)0x0) {
       uVar3 = (int)pvVar5 + 0x20U & 0xffffffe0;
       uVar2 = uVar3 - (int)pvVar5 & 0xff;
       if (uVar2 != uVar7) {
-        iVar4 = unaff_r29 + 3 >> 2;
+        iVar4 = in_r4 + 3 >> 2;
         if (uVar2 < uVar7) {
           iVar6 = 0;
           if (0 < iVar4) {
@@ -3100,12 +3105,6 @@ int FUN_97c1092c(param_1)
         *(char *)(uVar3 - 1) = (char)(uVar3 - (int)pvVar5);
       }
     }
-  }
-  else {
-    if (param_1 != 0) {
-      ((int (*)())_glpDCBFree)(param_1);
-    }
-    uVar3 = 0;
   }
   return uVar3;
 }

@@ -3916,21 +3916,19 @@ int FUN_000cd05c(param_1, param_2)
   return iVar1;
 }
 
-/* FUN_000cd15c @ 0xcd15c (84 bytes) */
-int FUN_000cd15c(param_1)
-  undefined4 param_1;
+/* FUN_000cd154 @ 0xcd154 (92 bytes) */
+int FUN_000cd154(param_1)
+  undefined4 *param_1;
 {
   undefined4 uVar1;
   code *pcVar2;
-  undefined4 *unaff_r30;
-  byte in_cr0;
   
   uVar1 = 3;
-  if (!(bool)(in_cr0 >> 1 & 1)) {
-    pcVar2 = (code *)*unaff_r30;
-    uVar1 = unaff_r30[1];
+  if (param_1 != (undefined4 *)0x0) {
+    pcVar2 = (code *)*param_1;
+    uVar1 = param_1[1];
     FUN_000da458(param_1,1);
-    (*pcVar2)(uVar1,unaff_r30);
+    (*pcVar2)(uVar1,param_1);
     uVar1 = 0;
   }
   return uVar1;

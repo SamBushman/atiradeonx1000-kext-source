@@ -3369,19 +3369,17 @@ int FUN_00172428(param_1, param_2, param_3, param_4)
   return uVar2;
 }
 
-/* FUN_0017247c @ 0x17247c (88 bytes) */
-int FUN_0017247c(param_1, param_2, param_3)
+/* FUN_00172474 @ 0x172474 (96 bytes) */
+int FUN_00172474(param_1, param_2, param_3)
   int param_1;
-  undefined4 param_2;
+  undefined4 *param_2;
   int param_3;
 {
   undefined4 *puVar1;
   undefined4 uVar2;
   undefined4 uVar3;
-  undefined4 *unaff_r30;
-  byte in_cr0;
   
-  if ((bool)(in_cr0 >> 1 & 1)) {
+  if (param_2 == (undefined4 *)0x0) {
     uVar2 = 0x2b;
     if (param_3 == 0) {
       uVar2 = 0xa6;
@@ -3389,13 +3387,13 @@ int FUN_0017247c(param_1, param_2, param_3)
     uVar3 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
     puVar1 = (undefined4 *)FUN_00193e18(uVar3,0x168);
     *puVar1 = uVar3;
-    unaff_r30 = puVar1 + 1;
-    FUN_0010502c(unaff_r30,uVar2,*(undefined4 *)(param_1 + 8));
+    param_2 = puVar1 + 1;
+    FUN_0010502c(param_2,uVar2,*(undefined4 *)(param_1 + 8));
   }
   else {
-    FUN_00104f34(unaff_r30,param_3);
+    FUN_00104f34(param_2,param_3);
   }
-  return unaff_r30;
+  return param_2;
 }
 
 /* FUN_00172514 @ 0x172514 (176 bytes) */

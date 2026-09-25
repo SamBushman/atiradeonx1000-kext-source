@@ -504,10 +504,10 @@ int FUN_00128930(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return iVar1;
 }
 
-/* FUN_00128ad8 @ 0x128ad8 (676 bytes) */
-int FUN_00128ad8(param_1, param_2, param_3)
+/* FUN_00128ad4 @ 0x128ad4 (680 bytes) */
+int FUN_00128ad4(param_1, param_2, param_3)
   undefined4 param_1;
-  undefined4 param_2;
+  int param_2;
   int param_3;
 {
   undefined4 uVar1;
@@ -519,10 +519,9 @@ int FUN_00128ad8(param_1, param_2, param_3)
   int iVar7;
   uint uVar8;
   int iVar9;
-  byte in_cr7;
   double dVar10;
   
-  if ((bool)(in_cr7 >> 1 & 1)) {
+  if (param_2 == 1) {
     iVar6 = *(int *)(param_3 + 0x6c4);
     iVar2 = FUN_00127534(*(undefined4 *)(iVar6 + 0x3ac),0x1b,0,0);
     if (iVar2 != 0) {

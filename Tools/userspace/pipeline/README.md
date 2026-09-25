@@ -116,6 +116,16 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    (GLDriver 11, glprog 17, VA 2 functions + stubs) and their callers are re-decompiled; ghidra2c also declares them with their real return type.
    `Tests/userspace/ftoa_test.c` compares FUN_000cdc3c stock vs rebuilt on 20 values: identical (the build before step 12 died with SIGBUS; with only
    the ecvt/f1 fixes every exponent printed as `e00`).
+13. Misplaced function entries. gcc sometimes scheduled the first instructions before `mflr r0` - the entry compare (`cmpwi cr7,r4,0`), the CR
+   save and a `cmplwi` (`mfcr r2; cmplwi cr7,r3,5`), or `stmw; or. r29,r4,r4` - and auto-analysis started those functions at the `mflr`. The run
+   before it became an orphan and the decompile tested an uninitialised `in_cr7` / `in_cr0` or read `unaff_r29`: GLDriver FUN_0010b334 had five of
+   its six switch cases pruned, and glprog's `___gxx_personality_v0` and `_glpDCBRealloc` branched on garbage. `Tools/userspace/fallin_entries.py`
+   lists entries that the preceding code falls into; the 19 whose decompile reads a register that run sets (17 GLDriver, 2 glprog - the other two
+   glprog hits are FUN_97b88a90/97b89f04, patched in patches.py, and a saveFP piece) are re-created at the true entry by `gs/MoveEntries.java`
+   (b3/move_entries_*.txt); `Tools/userspace/apply_moves.py` moves their INDEX/RANGES rows and dump files. Afterwards no GLDriver function reads an
+   entry-set register, and `Tools/userspace/prune_orphans.py` drops every orphan whose code a function now owns: glprog 8 (the two moved entries
+   and the six constant-switch owners' duplicates), GLDriver 31 (the 17 moved entries, FUN_0010b32c's switch cases, and the FUN_0001ecd0 /
+   FUN_000c5460 case-code duplicates) - the #72 duplicate list.
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

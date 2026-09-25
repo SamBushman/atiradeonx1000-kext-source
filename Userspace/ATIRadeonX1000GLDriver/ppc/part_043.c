@@ -1,14 +1,14 @@
 #include "decls.h"
 
-/* FUN_00146950 @ 0x146950 (76 bytes) */
-int FUN_00146950(param_1, param_2)
+/* FUN_0014694c @ 0x14694c (80 bytes) */
+int FUN_0014694c(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
   int iVar1;
-  byte in_cr7;
+  int in_r5;
   
-  if ((!(bool)(in_cr7 >> 1 & 1)) &&
+  if ((in_r5 != 0) &&
      (iVar1 = FUN_00104054(param_1,param_2), iVar1 != *(int *)(*(int *)(param_1 + 0x10) + 4))) {
     return 0;
   }

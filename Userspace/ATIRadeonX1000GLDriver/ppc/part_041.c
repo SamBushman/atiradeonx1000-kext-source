@@ -3419,8 +3419,8 @@ code_r0x00136cac:
   return 0 < local_5c;
 }
 
-/* FUN_00136ec8 @ 0x136ec8 (148 bytes) */
-int FUN_00136ec8(param_1, param_2, param_3, param_4, param_5)
+/* FUN_00136ec4 @ 0x136ec4 (152 bytes) */
+int FUN_00136ec4(param_1, param_2, param_3, param_4, param_5)
   int *param_1;
   int param_2;
   int param_3;
@@ -3434,14 +3434,13 @@ int FUN_00136ec8(param_1, param_2, param_3, param_4, param_5)
   uint *puVar5;
   undefined4 uVar6;
   uint uVar7;
-  byte in_cr7;
   
   param_1[2] = param_2;
   param_1[10] = param_4;
   *param_1 = 0;
   param_1[3] = param_3;
   param_1[0xb] = param_5;
-  if (!(bool)(in_cr7 >> 1 & 1)) {
+  if (param_3 != 0) {
     iVar1 = FUN_00193e18(*(undefined4 *)(param_5 + 0x378),param_3 << 2);
     param_1[8] = iVar1;
     uVar6 = *(undefined4 *)(param_1[0xb] + 0x378);

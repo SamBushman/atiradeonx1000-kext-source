@@ -957,17 +957,16 @@ int FUN_000f3b68(param_1, param_2)
   return 0;
 }
 
-/* FUN_000f3bc4 @ 0xf3bc4 (108 bytes) */
-int FUN_000f3bc4(param_1, param_2)
+/* FUN_000f3bc0 @ 0xf3bc0 (112 bytes) */
+int FUN_000f3bc0(param_1, param_2)
   undefined4 param_1;
-  undefined4 param_2;
+  int param_2;
 {
   int iVar1;
   bool bVar2;
-  byte in_cr7;
   
-  if ((bool)(in_cr7 >> 1 & 1)) {
-    iVar1 = FUN_001054ec(param_1,param_2);
+  if (param_2 == 0) {
+    iVar1 = FUN_001054ec(param_1,0);
     bVar2 = *(int *)(iVar1 + 0x10) == _UNK_001aa84c;
   }
   else {

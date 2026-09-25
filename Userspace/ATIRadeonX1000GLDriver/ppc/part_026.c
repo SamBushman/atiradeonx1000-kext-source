@@ -2330,13 +2330,11 @@ int FUN_000f89a4(param_1, param_2)
   return *(undefined4 *)(param_1 * 0x24 + param_2 + 0x10);
 }
 
-/* FUN_000f89b8 @ 0xf89b8 (48 bytes) */
-int FUN_000f89b8(param_1)
-  int param_1;
+/* FUN_000f89b4 @ 0xf89b4 (52 bytes) */
+int FUN_000f89b4(param_1)
+  uint param_1;
 {
-  byte in_cr7;
-  
-  if ((bool)(in_cr7 >> 2 & 1)) {
+  if (5 < param_1) {
     return 8;
   }
   return *(undefined4 *)(PTR_DAT_001e8b84 + param_1 * 4);

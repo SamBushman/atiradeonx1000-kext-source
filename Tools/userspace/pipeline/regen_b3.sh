@@ -67,3 +67,13 @@ run glprog-lm GLProgProject libGLProgrammability.dylib -readOnly -postScript Red
 rm -rf va-lm && cp -r r32-va-ret va-lm
 run va-lm Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetLibmSignatures.java
 run va-lm Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/libm_redump_va.txt)
+# step 13: functions re-created at their true entry (gcc scheduled the entry compare / CR save / stmw before mflr; the decompile read an
+# uninitialised in_cr7 / unaff_r29), then Tools/userspace/apply_moves.py (INDEX/RANGES/dump files) and Tools/userspace/prune_orphans.py (orphans
+# whose code a function now owns)
+rm -rf gld-mv && cp -r gld-dw gld-mv
+run gld-mv GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript MoveEntries.java $(cat $B/move_entries_gld.txt)
+run gld-mv GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/rd_mv_gld $(cut -d: -f2 $B/move_entries_gld.txt)
+rm -rf glprog-mv && cp -r glprog-lm glprog-mv
+run glprog-mv GLProgProject libGLProgrammability.dylib -postScript MoveEntries.java $(cat $B/move_entries_glprog.txt)
+run glprog-mv GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/rd_mv_glprog $(cut -d: -f2 $B/move_entries_glprog.txt)
+# python3 Tools/userspace/apply_moves.py $OUT/n_gld $B/move_entries_gld.txt $OUT/rd_mv_gld   (and glprog), then prune_orphans.py N O unowned_code orph_*.tsv

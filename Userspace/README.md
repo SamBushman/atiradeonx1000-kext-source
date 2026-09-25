@@ -243,6 +243,15 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
 * `extraout_f1` left after calls to driver-internal functions (6 GLDriver, 2 glprog functions): the stock caller never uses that f1 itself (FPR
   liveness right after each call), it only forwards it to a later call - the same forwarded-garbage case as the PASS rows.
 
+### Entry-set registers and duplicate orphans (Stage B3 step 13)
+* 19 functions started one or two instructions late (gcc put the entry compare / CR save / `stmw` before `mflr`): their decompile tested an
+  uninitialised `in_cr7`/`in_cr0` or read `unaff_r29` - GLDriver FUN_0010b32c's six-way switch had collapsed to one case, glprog's
+  `___gxx_personality_v0` (the private EH personality routine) and `_glpDCBRealloc` branched on garbage. They are re-created at the true entry;
+  `Tools/userspace/fallin_entries.py` now finds no GLDriver function reading a register the code before its entry sets (glprog: the two patched
+  r2 cases and a saveFP piece remain, all explained). The other `in_cr0` reads (80 glprog, 21 GLDriver, 1 VA) are `lwarx/stwcx.` loops, which
+  assign it before testing and are rewritten as compare-and-swap at link time.
+* Orphans whose code a function now owns (moved entries, widened switch owners) are dropped: glprog 40 -> 32, GLDriver 525 -> 494.
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,

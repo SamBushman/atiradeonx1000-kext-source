@@ -1,206 +1,5 @@
 #include "decls.h"
 
-/* orph_1d8480 @ 0x1d8480 (8 bytes) */
-int orph_1d8480()
-{
-  return 1;
-}
-
-/* orph_1d8488 @ 0x1d8488 (8 bytes) */
-int orph_1d8488()
-{
-  return 0;
-}
-
-/* orph_1d8490 @ 0x1d8490 (8 bytes) */
-int orph_1d8490()
-{
-  return 1;
-}
-
-/* orph_1d8498 @ 0x1d8498 (8 bytes) */
-int orph_1d8498()
-{
-  return 0;
-}
-
-/* orph_1d84a0 @ 0x1d84a0 (4 bytes) */
-int orph_1d84a0()
-{
-  return;
-}
-
-/* orph_1d84a4 @ 0x1d84a4 (8 bytes) */
-int orph_1d84a4()
-{
-  return 0;
-}
-
-/* orph_1d857c @ 0x1d857c (8 bytes) */
-int orph_1d857c()
-{
-  return 1;
-}
-
-/* orph_1d86a8 @ 0x1d86a8 (12 bytes) */
-int orph_1d86a8(param_1)
-  int param_1;
-{
-  *(undefined4 *)(param_1 + 4) = 0;
-  return;
-}
-
-/* orph_1d86ec @ 0x1d86ec (16 bytes) */
-int orph_1d86ec(param_1)
-  int *param_1;
-{
-                    
-                    
-  (**(code **)(*param_1 + 8))();
-  return;
-}
-
-/* orph_1d86fc @ 0x1d86fc (8 bytes) */
-int orph_1d86fc()
-{
-  return 0;
-}
-
-/* orph_1d8704 @ 0x1d8704 (4 bytes) */
-int orph_1d8704()
-{
-  return;
-}
-
-/* orph_1d8708 @ 0x1d8708 (8 bytes) */
-int orph_1d8708()
-{
-  return 0;
-}
-
-/* orph_1d8710 @ 0x1d8710 (16 bytes) */
-int orph_1d8710(param_1)
-  int param_1;
-{
-  return *(int *)(param_1 + 4) == 0;
-}
-
-/* orph_1d8720 @ 0x1d8720 (20 bytes) */
-int orph_1d8720(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
-{
-  return *(int *)(param_2 + 0x98) == 6;
-}
-
-/* orph_1d8734 @ 0x1d8734 (8 bytes) */
-int orph_1d8734()
-{
-  return 0;
-}
-
-/* orph_1d873c @ 0x1d873c (8 bytes) */
-int orph_1d873c()
-{
-  return 0;
-}
-
-/* orph_1d8744 @ 0x1d8744 (4 bytes) */
-int orph_1d8744()
-{
-  return;
-}
-
-/* orph_1d8748 @ 0x1d8748 (8 bytes) */
-int orph_1d8748()
-{
-  return 0;
-}
-
-/* orph_1d8750 @ 0x1d8750 (8 bytes) */
-int orph_1d8750()
-{
-  return 0;
-}
-
-/* orph_1d8758 @ 0x1d8758 (4 bytes) */
-int orph_1d8758()
-{
-  return;
-}
-
-/* orph_1d875c @ 0x1d875c (4 bytes) */
-int orph_1d875c()
-{
-  return;
-}
-
-/* orph_1d8760 @ 0x1d8760 (8 bytes) */
-int orph_1d8760()
-{
-  return 3;
-}
-
-/* orph_1d8768 @ 0x1d8768 (8 bytes) */
-int orph_1d8768()
-{
-  return 0;
-}
-
-/* orph_1d8770 @ 0x1d8770 (8 bytes) */
-int orph_1d8770()
-{
-  return 0;
-}
-
-/* orph_1d8778 @ 0x1d8778 (12 bytes) */
-int orph_1d8778()
-{
-  undefined4 *in_r7;
-  
-  *in_r7 = 0;
-  return;
-}
-
-/* orph_1d8784 @ 0x1d8784 (8 bytes) */
-int orph_1d8784()
-{
-  return 0;
-}
-
-/* orph_1d878c @ 0x1d878c (4 bytes) */
-int orph_1d878c()
-{
-  return;
-}
-
-/* orph_1d8790 @ 0x1d8790 (8 bytes) */
-int orph_1d8790()
-{
-  return 1;
-}
-
-/* orph_1d8798 @ 0x1d8798 (8 bytes) */
-int orph_1d8798()
-{
-  return 0;
-}
-
-/* orph_1d87a0 @ 0x1d87a0 (8 bytes) */
-int orph_1d87a0()
-{
-  return 0x10;
-}
-
-/* orph_1d87e0 @ 0x1d87e0 (20 bytes) */
-int orph_1d87e0(param_1)
-  int param_1;
-{
-  *(undefined4 *)(param_1 + 8) = 0;
-  *(undefined4 *)(param_1 + 4) = 1;
-  return;
-}
-
 /* orph_1d87f4 @ 0x1d87f4 (8 bytes) */
 int orph_1d87f4()
 {
@@ -431,6 +230,228 @@ int orph_1d8ae4()
 
 /* orph_1d8aec @ 0x1d8aec (4 bytes) */
 int orph_1d8aec()
+{
+  return;
+}
+
+/* orph_1d8af0 @ 0x1d8af0 (4 bytes) */
+int orph_1d8af0()
+{
+  return;
+}
+
+/* orph_1d8c04 @ 0x1d8c04 (8 bytes) */
+int orph_1d8c04()
+{
+  return 1;
+}
+
+/* orph_1d8c0c @ 0x1d8c0c (4 bytes) */
+int orph_1d8c0c()
+{
+  return;
+}
+
+/* orph_1d8c10 @ 0x1d8c10 (8 bytes) */
+int orph_1d8c10()
+{
+  return 1;
+}
+
+/* orph_1d8cb4 @ 0x1d8cb4 (4 bytes) */
+int orph_1d8cb4()
+{
+  return;
+}
+
+/* orph_1d8cb8 @ 0x1d8cb8 (4 bytes) */
+int orph_1d8cb8()
+{
+  return;
+}
+
+/* orph_1d8cbc @ 0x1d8cbc (4 bytes) */
+int orph_1d8cbc()
+{
+  return;
+}
+
+/* orph_1d8cc0 @ 0x1d8cc0 (4 bytes) */
+int orph_1d8cc0()
+{
+  return;
+}
+
+/* orph_1d8cc4 @ 0x1d8cc4 (4 bytes) */
+int orph_1d8cc4()
+{
+  return;
+}
+
+/* orph_1d8cc8 @ 0x1d8cc8 (4 bytes) */
+int orph_1d8cc8()
+{
+  return;
+}
+
+/* orph_1d8ccc @ 0x1d8ccc (4 bytes) */
+int orph_1d8ccc()
+{
+  return;
+}
+
+/* orph_1d8cd0 @ 0x1d8cd0 (4 bytes) */
+int orph_1d8cd0()
+{
+  return;
+}
+
+/* orph_1d8cd4 @ 0x1d8cd4 (4 bytes) */
+int orph_1d8cd4()
+{
+  return;
+}
+
+/* orph_1d8cd8 @ 0x1d8cd8 (20 bytes) */
+int orph_1d8cd8(param_1, param_2, param_3)
+  int param_1;
+  int param_2;
+  int param_3;
+{
+  *(undefined1 *)(param_2 * 0x48 + *(int *)(param_1 + 0x58) + 0xe) = param_3;
+  return;
+}
+
+/* orph_1d8cec @ 0x1d8cec (20 bytes) */
+int orph_1d8cec(param_1, param_2, param_3)
+  int param_1;
+  int param_2;
+  int param_3;
+{
+  *(undefined1 *)(param_2 * 0x48 + *(int *)(param_1 + 0x58) + 0xf) = param_3;
+  return;
+}
+
+/* orph_1d8d00 @ 0x1d8d00 (8 bytes) */
+int orph_1d8d00()
+{
+  return 0;
+}
+
+/* orph_1d8d08 @ 0x1d8d08 (12 bytes) */
+int orph_1d8d08(param_1, param_2)
+  undefined4 param_1;
+  int param_2;
+{
+  return param_2 + 0x8000;
+}
+
+/* orph_1d8d14 @ 0x1d8d14 (24 bytes) */
+int orph_1d8d14(param_1, param_2)
+  int param_1;
+  int param_2;
+{
+  *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58) + 0x30) = param_2;
+  return;
+}
+
+/* orph_1d8d2c @ 0x1d8d2c (24 bytes) */
+int orph_1d8d2c(param_1, param_2)
+  int param_1;
+  int param_2;
+{
+  *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58) + 0x3f) = param_2;
+  return;
+}
+
+/* orph_1d8d44 @ 0x1d8d44 (4 bytes) */
+int orph_1d8d44()
+{
+  return;
+}
+
+/* orph_1d8d48 @ 0x1d8d48 (4 bytes) */
+int orph_1d8d48()
+{
+  return;
+}
+
+/* orph_1d8d4c @ 0x1d8d4c (60 bytes) */
+int orph_1d8d4c(param_1)
+  int param_1;
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58);
+  if (*(char *)(iVar1 + -0x14) == '\x01') {
+    return 0;
+  }
+  *(undefined1 *)(iVar1 + -0x14) = 1;
+  return 1;
+}
+
+/* orph_1d8d88 @ 0x1d8d88 (56 bytes) */
+int orph_1d8d88(param_1)
+  int param_1;
+{
+  int iVar1;
+  
+  iVar1 = *(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58);
+  if (*(char *)(iVar1 + 0x34) == '\x01') {
+    return 0;
+  }
+  *(undefined1 *)(iVar1 + 0x34) = 1;
+  return 1;
+}
+
+/* orph_1d8dc0 @ 0x1d8dc0 (4 bytes) */
+int orph_1d8dc0()
+{
+  return;
+}
+
+/* orph_1d8dc4 @ 0x1d8dc4 (4 bytes) */
+int orph_1d8dc4()
+{
+  return;
+}
+
+/* orph_1d8dc8 @ 0x1d8dc8 (4 bytes) */
+int orph_1d8dc8()
+{
+  return;
+}
+
+/* orph_1d8dcc @ 0x1d8dcc (4 bytes) */
+int orph_1d8dcc()
+{
+  return;
+}
+
+/* orph_1d8dd0 @ 0x1d8dd0 (4 bytes) */
+int orph_1d8dd0()
+{
+  return;
+}
+
+/* orph_1d8dd4 @ 0x1d8dd4 (24 bytes) */
+int orph_1d8dd4(param_1, param_2)
+  int param_1;
+  int param_2;
+{
+  *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0x58) + 0x31) = param_2;
+  return;
+}
+
+/* orph_1d8dec @ 0x1d8dec (12 bytes) */
+int orph_1d8dec(param_1)
+  int param_1;
+{
+  return *(int *)(param_1 + 0x58) << 4;
+}
+
+/* orph_1d8df8 @ 0x1d8df8 (24 bytes) */
+int orph_1d8df8()
 {
   return;
 }

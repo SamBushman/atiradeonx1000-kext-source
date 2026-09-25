@@ -157,10 +157,10 @@ LAB_001a168c:
   return;
 }
 
-/* FUN_001a1850 @ 0x1a1850 (204 bytes) */
-int FUN_001a1850(param_1, param_2, param_3, param_4, param_5)
+/* FUN_001a184c @ 0x1a184c (208 bytes) */
+int FUN_001a184c(param_1, param_2, param_3, param_4, param_5)
   int param_1;
-  undefined4 param_2;
+  int param_2;
   int param_3;
   undefined4 param_4;
   undefined4 param_5;
@@ -169,9 +169,8 @@ int FUN_001a1850(param_1, param_2, param_3, param_4, param_5)
   int iVar2;
   undefined1 uVar3;
   int iVar4;
-  byte in_cr7;
   
-  if (!(bool)(in_cr7 >> 1 & 1)) {
+  if (param_2 != 0) {
     *(undefined2 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8) + 0xc) =
          (*(unsigned short *)((unsigned char *)&(param_5) + 2));
     iVar4 = *(int *)(param_1 + 0x60);

@@ -1154,7 +1154,7 @@
 0x97c10548	384	_RepifyConstantLoopSimple	part_019	converted
 0x97c106c8	536	_ConstantPropagateFold	part_019	converted
 0x97c108e0	68	_glpDCBAlloc	part_019	converted
-0x97c1092c	248	FUN_97c1092c	part_019	converted
+0x97c10924	256	_glpDCBRealloc	part_019	converted
 0x97c10a24	12	_glpDCBFree	part_019	converted
 0x97c10a30	200	_PPParserMacroCreateFromMacro	part_019	converted
 0x97c10af8	100	_PPParserIdentifierCreateFromIdentifier	part_019	converted
@@ -1531,7 +1531,7 @@
 0x97c197c4	84	__Z15get_ttype_entryP16lsda_header_infoj	part_025	converted
 0x97c19818	152	get_adjusted_ptr	part_025	converted
 0x97c198b0	124	check_exception_spec	part_025	converted
-0x97c19934	968	FUN_97c19934	part_025	converted
+0x97c1992c	976	___gxx_personality_v0	part_025	converted
 0x97c19d00	232	FUN_97c19d00	part_025	converted
 0x97c19de8	28	__cxxabiv1____terminate	part_025	converted
 0x97c19e0c	56	std__terminate	part_025	converted

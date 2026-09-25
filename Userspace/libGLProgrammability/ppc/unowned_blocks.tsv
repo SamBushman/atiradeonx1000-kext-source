@@ -372,7 +372,6 @@ start	end	kind	owner	instructions	calls
 97c0f018	97c0f074	table	_UpdateScope	23	
 97c0fc8c	97c0fd08	table	_UnrollConstantLoopsSimple	31	
 97c102ec	97c102f4	other	_instructionIndexHashFunction	2	
-97c10924	97c1092c	other	_glpDCBAlloc	2	
 97c12020	97c12118	table	_PPParserBuildErrorString	62	
 97c12dfc	97c12e00	eh-pad	std::__throw_logic_error	1	__Unwind_Resume
 97c12e84	97c12e88	eh-pad	std::__throw_domain_error	1	__Unwind_Resume
@@ -411,8 +410,7 @@ start	end	kind	owner	instructions	calls
 97c19094	97c190a4	eh-pad	std::set_new_handler	4	__Unwind_Resume,___cxa_call_unexpected
 97c19134	97c1913c	millicode	__ZNSt9bad_allocD4Ev	2	
 97c195ec	97c19620	table	__Z28read_encoded_value_with_basehjPKhPj	13	
-97c1992c	97c19934	other	check_exception_spec	2	
-97c19cfc	97c19d00	millicode	FUN_97c19934	1	
+97c19cfc	97c19d00	millicode	___gxx_personality_v0	1	
 97c19e04	97c19e08	other	__cxxabiv1::__terminate	1	___cxa_begin_catch
 97c19ee0	97c19ef0	eh-pad	std::set_terminate	4	__Unwind_Resume,___cxa_call_unexpected
 97c19f54	97c19f64	eh-pad	std::set_unexpected	4	__Unwind_Resume,___cxa_call_unexpected
