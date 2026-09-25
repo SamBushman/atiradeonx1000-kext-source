@@ -252,6 +252,18 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
   assign it before testing and are rewritten as compare-and-swap at link time.
 * Orphans whose code a function now owns (moved entries, widened switch owners) are dropped: glprog 40 -> 32, GLDriver 525 -> 494.
 
+### "Removing unreachable block" in GLDriver (all 91 checked against the stock code)
+* 6 were real bugs, fixed: FUN_000cdc3c's minus sign / negative exponent (5 blocks - the ecvt arguments, step 12) and FUN_0010b32c's `r0 = 1`
+  switch cases (step 13).
+* 46 are dead for the constant arguments of a tail call Ghidra decompiled inline: the nine wrappers 0x242f0..0x248f0 enter FUN_00023a24 (at its
+  `mfcr` 0x23a20) with `r4` = 4/6/.. (the pruned blocks need `r4 == 5`; FUN_000243f0 passes 5 and loses the `!= 5` block), and FUN_000f019c enters
+  FUN_00106004 with `r6 = 0` (18 blocks on the `r6 != 0` path). The callees' own decompiles keep every path.
+* 39 are dead in the stock code too: FUN_000684c0 / 00069330 / 0006ec10 test bit 0x400000 of a word built by `li 0` + `rlwimi` inserts that never
+  set it (30); FUN_0003d590 / 0003b870 / 00024fe0 / 000096b0 branch on a 2-bit field already known to be 0; FUN_0002bbc4 / 0002b7f0 test a count
+  already known to be 2; FUN_00159b58 is reached only with cr7.lt set before `cror eq,so,lt`; FUN_000e5e70 re-tests `r2 <= 0xbe`; FUN_000e8124
+  compares a register with itself.
+glprog's 9 remaining blocks are all dead in the stock code (see above).
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,
