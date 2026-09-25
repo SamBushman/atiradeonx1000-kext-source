@@ -137,34 +137,34 @@ int Binding__GetString(this)
   unsigned char * this;
 {
   int iVar1;
-  size_t sVar2;
+  int iVar2;
   undefined4 uVar3;
-  char *pcVar4;
-  size_t sVar5;
-  char *pcVar6;
+  int iVar4;
+  char *pcVar5;
+  undefined4 uVar6;
   undefined4 uVar7;
-  undefined4 uVar8;
+  char *pcVar8;
   undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
   undefined8 local_30 [2];
   
-  local_30[0] = _PTR_s__02d____02d____s____s__c__c_a7b7d6bc;
+  local_30[0] = 0x97c2b3bc97c2b3dc;
   iVar1 = Binding__IsClientRequest(this);
-  sVar2 = _strlen(*(char **)((int)local_30 + iVar1 * 4));
+  iVar2 = _strlen(*(undefined4 *)((int)local_30 + iVar1 * 4));
   iVar1 = *(int *)(this + 0x10);
   uVar3 = ((int (*)())Binding__GetOpenGLType)(this);
-  pcVar4 = (char *)GetGLStringForType(uVar3);
-  sVar5 = _strlen(pcVar4);
-  pcVar6 = _malloc(sVar2 + iVar1 + sVar5 + 0x15);
-  pcVar4 = (char *)0x0;
-  if (pcVar6 != (char *)0x0) {
+  uVar3 = GetGLStringForType(uVar3);
+  iVar4 = _strlen(uVar3);
+  pcVar5 = (char *)_malloc(iVar2 + iVar1 + iVar4 + 0x15);
+  pcVar8 = (char *)0x0;
+  if (pcVar5 != (char *)0x0) {
     iVar1 = Binding__IsClientRequest(this);
     uVar3 = ((int (*)())Binding__GetActiveIndex)(this);
-    uVar7 = ((int (*)())Binding__GetLocation)(this);
-    uVar8 = ((int (*)())Binding__GetOpenGLType)(this);
+    uVar6 = ((int (*)())Binding__GetLocation)(this);
+    uVar7 = ((int (*)())Binding__GetOpenGLType)(this);
     uVar11 = *(undefined4 *)(this + 8);
-    uVar8 = GetGLStringForType(uVar8);
+    uVar7 = GetGLStringForType(uVar7);
     uVar9 = 0x56;
     if (this[0x34] == 0x0) {
       uVar9 = 0x20;
@@ -173,10 +173,10 @@ int Binding__GetString(this)
     if (this[0x35] == 0x0) {
       uVar10 = 0x20;
     }
-    _sprintf(pcVar6,*(char **)((int)local_30 + iVar1 * 4),uVar3,uVar7,uVar11,uVar8,uVar9,uVar10);
-    pcVar4 = pcVar6;
+    _sprintf(pcVar5,*(char **)((int)local_30 + iVar1 * 4),uVar3,uVar6,uVar11,uVar7,uVar9,uVar10);
+    pcVar8 = pcVar5;
   }
-  return pcVar4;
+  return pcVar8;
 }
 
 /* __ZN12BindingTableC2Ej @ 0x97bb05e0 (4 bytes) */
@@ -623,7 +623,8 @@ int BindingTable__InsertAttribBinding(this, param_2)
     iVar2 = Binding__IsBuiltIn(param_2);
     pBVar6 = *(unsigned char **)(this + 0xc);
     iVar4 = 1;
-    if ((iVar2 != 0) && (iVar2 = _memcmp(*(void **)(param_2 + 8),"gl_Vertex",10), iVar2 == 0)) {
+    if ((iVar2 != 0) && (iVar2 = _memcmp(*(undefined4 *)(param_2 + 8),"gl_Vertex",10), iVar2 == 0))
+    {
       if ((pBVar6 != (unsigned char *)0x0) && (iVar2 = ((int (*)())Binding__GetLocation)(pBVar6), iVar2 == 0)) {
         return 0;
       }
@@ -1268,136 +1269,137 @@ int BindingTable__GetString(this, param_2)
 {
   bool bVar1;
   char *pcVar2;
-  size_t sVar3;
-  char *pcVar4;
-  char *pcVar5;
-  int iVar6;
-  size_t sVar7;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  char *pcVar6;
+  char *pcVar7;
   int iVar8;
   uint uVar9;
+  uint uVar10;
   unsigned char * this_00;
   
   this_00 = (unsigned char *)0x0;
-  pcVar2 = _malloc(0x800);
-  sVar7 = 0x800;
-  iVar6 = 0;
+  pcVar2 = (char *)_malloc(0x800);
+  uVar9 = 0x800;
+  iVar8 = 0;
   if (pcVar2 == (char *)0x0) {
     return (char *)0x0;
   }
   *pcVar2 = '\0';
-  pcVar5 = pcVar2;
+  pcVar7 = pcVar2;
   if (2 < param_2) {
     if (param_2 == 3) {
-      iVar6 = 0;
+      iVar8 = 0;
       do {
-        pcVar4 = (char *)GetString(this,iVar6);
-        pcVar2 = pcVar5;
-        if (pcVar4 != (char *)0x0) {
-          sVar7 = _strlen(pcVar4);
-          sVar3 = _strlen(pcVar5);
-          pcVar2 = _realloc(pcVar5,sVar7 + sVar3 + 1);
+        iVar3 = GetString(this,iVar8);
+        pcVar2 = pcVar7;
+        if (iVar3 != 0) {
+          iVar4 = _strlen(iVar3);
+          iVar5 = _strlen(pcVar7);
+          pcVar2 = (char *)_realloc(pcVar7,iVar4 + iVar5 + 1);
           if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
-          _sprintf(pcVar2,"%s%s",pcVar2,pcVar4);
-          _free(pcVar4);
+          _sprintf(pcVar2,"%s%s",pcVar2,iVar3);
+          _free(iVar3);
         }
-        iVar6 = iVar6 + 1;
-        pcVar5 = pcVar2;
-        if (2 < iVar6) {
+        iVar8 = iVar8 + 1;
+        pcVar7 = pcVar2;
+        if (2 < iVar8) {
           return pcVar2;
         }
       } while( true );
     }
-    iVar8 = 4;
+    iVar3 = 4;
     if (6 < param_2) {
       do {
-        pcVar4 = (char *)GetString(this,iVar8);
-        pcVar2 = pcVar5;
-        if (pcVar4 != (char *)0x0) {
-          sVar7 = _strlen(pcVar4);
-          sVar3 = _strlen(pcVar5);
-          pcVar2 = _realloc(pcVar5,sVar7 + sVar3 + 1);
+        iVar8 = GetString(this,iVar3);
+        pcVar2 = pcVar7;
+        if (iVar8 != 0) {
+          iVar4 = _strlen(iVar8);
+          iVar5 = _strlen(pcVar7);
+          pcVar2 = (char *)_realloc(pcVar7,iVar4 + iVar5 + 1);
           if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
-          _sprintf(pcVar2,"%s%s",pcVar2,pcVar4);
-          _free(pcVar4);
+          _sprintf(pcVar2,"%s%s",pcVar2,iVar8);
+          _free(iVar8);
         }
-        iVar8 = iVar8 + 1;
-        pcVar5 = pcVar2;
-        if (6 < iVar8) {
+        iVar3 = iVar3 + 1;
+        pcVar7 = pcVar2;
+        if (6 < iVar3) {
           return pcVar2;
         }
       } while( true );
     }
     if (param_2 == 5) {
       if (**(int **)(this + 0x10) == 0) {
-        pcVar5 = "\n No Attribute Bindings\n";
+        pcVar7 = "\n No Attribute Bindings\n";
       }
       else {
-        pcVar5 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+        pcVar7 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
       }
     }
     else if (5 < param_2) {
       if (param_2 != 6) goto LAB_97bb1cf0;
       if (**(int **)(this + 0x18) == 0) {
-        pcVar5 = "\n No Uniform Bindings\n";
+        pcVar7 = "\n No Uniform Bindings\n";
       }
       else {
-        pcVar5 = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+        pcVar7 = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
       }
     }
     else {
       if (param_2 != 4) goto LAB_97bb1cf0;
       if (**(int **)(this + 8) == 0) {
-        pcVar5 = "\n No Client Attribute Requests\n";
+        pcVar7 = "\n No Client Attribute Requests\n";
       }
       else {
-        pcVar5 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
+        pcVar7 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
       }
     }
-    _sprintf(pcVar2,pcVar5);
+    _sprintf(pcVar2,pcVar7);
 LAB_97bb1cf0:
-    uVar9 = 0;
+    uVar10 = 0;
     if (*(int *)this == 0) {
       return pcVar2;
     }
     do {
       if (param_2 == 5) {
-        iVar8 = *(int *)(this + 0x10);
+        iVar3 = *(int *)(this + 0x10);
 LAB_97bb1d30:
-        this_00 = *(unsigned char **)(uVar9 * 4 + iVar8);
+        this_00 = *(unsigned char **)(uVar10 * 4 + iVar3);
       }
       else if (5 < param_2) {
         if (param_2 == 6) {
-          iVar8 = *(int *)(this + 0x18);
+          iVar3 = *(int *)(this + 0x18);
           goto LAB_97bb1d30;
         }
       }
       else if (param_2 == 4) {
-        iVar8 = *(int *)(this + 8);
+        iVar3 = *(int *)(this + 8);
         goto LAB_97bb1d30;
       }
       if (this_00 != (unsigned char *)0x0) {
-        _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,uVar9);
-        pcVar5 = pcVar2;
+        _sprintf(pcVar2,"%s  --- Hash %d ---\n",pcVar2,uVar10);
+        pcVar7 = pcVar2;
         do {
-          pcVar2 = (char *)((int (*)())Binding__GetString)(this_00);
-          if (pcVar2 != (char *)0x0) {
-            sVar3 = _strlen(pcVar2);
-            iVar6 = iVar6 + sVar3;
-            _sprintf(pcVar5,"%s   %s",pcVar5,pcVar2);
-            _free(pcVar2);
+          iVar3 = ((int (*)())Binding__GetString)(this_00);
+          if (iVar3 != 0) {
+            iVar4 = _strlen(iVar3);
+            iVar8 = iVar8 + iVar4;
+            _sprintf(pcVar7,"%s   %s",pcVar7,iVar3);
+            _free(iVar3);
           }
-          pcVar2 = pcVar5;
-          if (sVar7 < iVar6 + 0x300U) {
-            sVar7 = sVar7 << 1;
-            pcVar2 = _realloc(pcVar5,sVar7);
+          pcVar2 = pcVar7;
+          if (uVar9 < iVar8 + 0x300U) {
+            uVar9 = uVar9 << 1;
+            pcVar2 = (char *)_realloc(pcVar7,uVar9);
             if (pcVar2 == (char *)0x0) goto LAB_97bb1ddc;
           }
           this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
-          pcVar5 = pcVar2;
+          pcVar7 = pcVar2;
         } while (this_00 != (unsigned char *)0x0);
       }
-      uVar9 = uVar9 + 1;
-      if (*(uint *)this <= uVar9) {
+      uVar10 = uVar10 + 1;
+      if (*(uint *)this <= uVar10) {
         return pcVar2;
       }
     } while( true );
@@ -1406,10 +1408,10 @@ LAB_97bb1d30:
     this_00 = *(unsigned char **)(this + 0xc);
     bVar1 = this_00 == (unsigned char *)0x0;
     if (bVar1) {
-      pcVar4 = "\n No Attribute Bindings\n";
+      pcVar6 = "\n No Attribute Bindings\n";
     }
     else {
-      pcVar4 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+      pcVar6 = "\n Attribute Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
   else if (param_2 < 2) {
@@ -1418,10 +1420,10 @@ LAB_97bb1d30:
     this_00 = *(unsigned char **)(this + 4);
     bVar1 = this_00 == (unsigned char *)0x0;
     if (bVar1) {
-      pcVar4 = "\n No Client Attribute Requests\n";
+      pcVar6 = "\n No Client Attribute Requests\n";
     }
     else {
-      pcVar4 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
+      pcVar6 = "\n Client Attribute Requests: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
   else {
@@ -1432,35 +1434,35 @@ LAB_97bb1d30:
     this_00 = *(unsigned char **)(this + 0x14);
     bVar1 = this_00 == (unsigned char *)0x0;
     if (bVar1) {
-      pcVar4 = "\n No Uniform Bindings\n";
+      pcVar6 = "\n No Uniform Bindings\n";
     }
     else {
-      pcVar4 = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
+      pcVar6 = "\n Uniform Bindings: [Index: (Location) \'Name\'- Type Shader]\n";
     }
   }
-  _sprintf(pcVar2,pcVar4);
+  _sprintf(pcVar2,pcVar6);
 LAB_97bb1b5c:
   if (!bVar1) {
     do {
-      pcVar2 = (char *)((int (*)())Binding__GetString)(this_00);
-      if (pcVar2 != (char *)0x0) {
-        sVar3 = _strlen(pcVar2);
-        iVar6 = iVar6 + sVar3;
-        _sprintf(pcVar5,"%s  %s",pcVar5,pcVar2);
-        _free(pcVar2);
+      iVar3 = ((int (*)())Binding__GetString)(this_00);
+      if (iVar3 != 0) {
+        iVar4 = _strlen(iVar3);
+        iVar8 = iVar8 + iVar4;
+        _sprintf(pcVar7,"%s  %s",pcVar7,iVar3);
+        _free(iVar3);
       }
-      pcVar2 = pcVar5;
-      if (sVar7 < iVar6 + 0x300U) {
-        sVar7 = sVar7 << 1;
-        pcVar2 = _realloc(pcVar5,sVar7);
+      pcVar2 = pcVar7;
+      if (uVar9 < iVar8 + 0x300U) {
+        uVar9 = uVar9 << 1;
+        pcVar2 = (char *)_realloc(pcVar7,uVar9);
         if (pcVar2 == (char *)0x0) {
 LAB_97bb1ddc:
-          _free(pcVar5);
+          _free(pcVar7);
           return (char *)0x0;
         }
       }
       this_00 = (unsigned char *)((int (*)())Binding__GetNextBinding)(this_00);
-      pcVar5 = pcVar2;
+      pcVar7 = pcVar2;
     } while (this_00 != (unsigned char *)0x0);
   }
   return pcVar2;

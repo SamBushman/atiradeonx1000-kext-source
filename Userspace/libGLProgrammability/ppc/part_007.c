@@ -185,7 +185,7 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
   undefined4 in_r8;
   int iVar9;
   undefined4 in_r10;
-  size_t local_30 [4];
+  int local_30 [4];
   
   iVar3 = param_3;
   iVar7 = param_4;
@@ -209,7 +209,7 @@ int PaParseStrings(param_1, param_2, param_3, param_4, param_5)
       } while (iVar9 < param_3);
     }
     if (param_2 == (int *)0x0) {
-      param_2 = (int *)local_30;
+      param_2 = local_30;
       local_30[0] = _strlen(*param_1);
     }
     yyrestart((unsigned char *)0x0);
@@ -537,103 +537,102 @@ int _HandlePragma(param_1, param_2)
   undefined4 extraout_r4_05;
   undefined4 extraout_r4_06;
   undefined4 uVar3;
-  undefined4 uVar4;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int in_r9;
-  void *pvVar5;
+  undefined4 uVar4;
   
-  pvVar5 = (void *)*param_1;
-  uVar4 = 9;
-  iVar1 = _memcmp(pvVar5,"optimize",9);
+  uVar4 = *param_1;
+  uVar3 = 9;
+  iVar1 = _memcmp(uVar4,"optimize",9);
   if (iVar1 == 0) {
     if (param_2 == 4) {
-      uVar4 = 2;
-      iVar1 = _memcmp((void *)param_1[1],"(",2);
+      uVar3 = 2;
+      iVar1 = _memcmp(param_1[1],"(",2);
       if (iVar1 == 0) {
-        pvVar5 = (void *)param_1[2];
-        iVar1 = _memcmp(pvVar5,"on",3);
+        uVar4 = param_1[2];
+        iVar1 = _memcmp(uVar4,"on",3);
         if (iVar1 == 0) {
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x40) = 1;
         }
         else {
-          uVar4 = 4;
-          iVar1 = _memcmp(pvVar5,"off",4);
+          uVar3 = 4;
+          iVar1 = _memcmp(uVar4,"off",4);
           if (iVar1 != 0) {
             pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
-            uVar3 = extraout_r4_01;
+            uVar4 = extraout_r4_01;
             goto LAB_97bae84c;
           }
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x40) = 0;
         }
-        uVar4 = 2;
-        iVar1 = _memcmp((void *)param_1[3],")",2);
+        uVar3 = 2;
+        iVar1 = _memcmp(param_1[3],")",2);
         if (iVar1 == 0) {
           return;
         }
         pcVar2 = "\")\" expected to end \'optimize\' pragma";
-        uVar3 = extraout_r4_02;
+        uVar4 = extraout_r4_02;
       }
       else {
         pcVar2 = "\"(\" expected after \'optimize\' keyword";
-        uVar3 = extraout_r4_00;
+        uVar4 = extraout_r4_00;
       }
     }
     else {
       pcVar2 = "optimize pragma syntax is incorrect";
-      uVar3 = extraout_r4;
+      uVar4 = extraout_r4;
     }
   }
   else {
-    uVar4 = 6;
-    iVar1 = _memcmp(pvVar5,"debug",6);
+    uVar3 = 6;
+    iVar1 = _memcmp(uVar4,"debug",6);
     if (iVar1 != 0) {
       return;
     }
     if (param_2 == 4) {
-      uVar4 = 2;
-      iVar1 = _memcmp((void *)param_1[1],"(",2);
+      uVar3 = 2;
+      iVar1 = _memcmp(param_1[1],"(",2);
       if (iVar1 == 0) {
-        pvVar5 = (void *)param_1[2];
-        iVar1 = _memcmp(pvVar5,"on",3);
+        uVar4 = param_1[2];
+        iVar1 = _memcmp(uVar4,"on",3);
         if (iVar1 == 0) {
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x44) = 1;
         }
         else {
-          uVar4 = 4;
-          iVar1 = _memcmp(pvVar5,"off",4);
+          uVar3 = 4;
+          iVar1 = _memcmp(uVar4,"off",4);
           if (iVar1 != 0) {
             pcVar2 = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
-            uVar3 = extraout_r4_05;
+            uVar4 = extraout_r4_05;
             goto LAB_97bae84c;
           }
           in_r9 = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(in_r9 + 0x2c) + 0x44) = 0;
         }
-        uVar4 = 2;
-        iVar1 = _memcmp((void *)param_1[3],")",2);
+        uVar3 = 2;
+        iVar1 = _memcmp(param_1[3],")",2);
         if (iVar1 == 0) {
           return;
         }
         pcVar2 = "\")\" expected to end \'debug\' pragma";
-        uVar3 = extraout_r4_06;
+        uVar4 = extraout_r4_06;
       }
       else {
         pcVar2 = "\"(\" expected after \'debug\' keyword";
-        uVar3 = extraout_r4_04;
+        uVar4 = extraout_r4_04;
       }
     }
     else {
       pcVar2 = "debug pragma syntax is incorrect";
-      uVar3 = extraout_r4_03;
+      uVar4 = extraout_r4_03;
     }
   }
 LAB_97bae84c:
-  ((int (*)())_CPPShInfoLogMsg)(pcVar2,uVar3,uVar4,in_r6,in_r7,in_r8,in_r9);
+  ((int (*)())_CPPShInfoLogMsg)(pcVar2,uVar4,uVar3,in_r6,in_r7,in_r8,in_r9);
   return;
 }
 
@@ -644,7 +643,7 @@ int _StoreStr(param_1)
   int iVar1;
   int *piVar2;
   int iVar3;
-  size_t sVar4;
+  ulong uVar4;
   unsigned char * paVar5;
   unsigned char * this;
   char in_RESERVE;
@@ -696,8 +695,8 @@ int _StoreStr(param_1)
   }
   this = (unsigned char *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 0x58);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&local_60,this);
-  sVar4 = _strlen(" ");
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_60," ",sVar4);
+  uVar4 = _strlen(" ");
+  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_60," ",uVar4);
   __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
             ((unsigned char *)&local_70,(unsigned char *)&local_60,&local_c0);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this,(unsigned char *)&local_70);
@@ -768,33 +767,33 @@ int _GetStrfromTStr()
 int _ResetTString()
 {
   int iVar1;
-  size_t sVar2;
+  uint uVar2;
   char *pcVar3;
   unsigned char * psVar4;
   
   iVar1 = *(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c);
-  sVar2 = _strlen("");
-  if (0x3ffffffc < sVar2) {
+  uVar2 = _strlen("");
+  if (0x3ffffffc < uVar2) {
     std____throw_length_error("basic_string::assign");
   }
   pcVar3 = *(char **)(iVar1 + 0x5c);
   if (((0 < *(int *)(pcVar3 + -4)) || ("" < pcVar3)) || (pcVar3 + *(int *)(pcVar3 + -0xc) < "")) {
     psVar4 = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_
-                       ((void *)(iVar1 + 0x58),pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + sVar2
+                       ((void *)(iVar1 + 0x58),pcVar3,pcVar3 + *(int *)(pcVar3 + -0xc),"","" + uVar2
                        );
     return (char *)psVar4;
   }
-  if ((uint)((int)"" - (int)pcVar3) < sVar2) {
+  if ((uint)((int)"" - (int)pcVar3) < uVar2) {
     if (pcVar3 == "") goto LAB_97baeb5c;
-    _memmove(pcVar3,"",sVar2);
+    _memmove(pcVar3,"",uVar2);
   }
   else {
-    _memcpy(pcVar3,"",sVar2);
+    _memcpy(pcVar3,"",uVar2);
   }
   pcVar3 = *(char **)(iVar1 + 0x5c);
 LAB_97baeb5c:
-  *(size_t *)(pcVar3 + -0xc) = sVar2;
-  *(undefined1 *)(*(int *)(iVar1 + 0x5c) + sVar2) = 0;
+  *(uint *)(pcVar3 + -0xc) = uVar2;
+  *(undefined1 *)(*(int *)(iVar1 + 0x5c) + uVar2) = 0;
   return pcVar3;
 }
 
@@ -807,7 +806,7 @@ int _GetBehavior(param_1)
   int *piVar3;
   int iVar4;
   undefined4 uVar5;
-  size_t sVar6;
+  ulong uVar6;
   undefined4 extraout_r4;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -842,16 +841,16 @@ int _GetBehavior(param_1)
                     ((unsigned char *)&local_60,"behavior \'",(unsigned char *)local_50);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
                     ((unsigned char *)&local_70,(unsigned char *)&local_60);
-          sVar6 = _strlen(param_1);
+          uVar6 = _strlen(param_1);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                    ((unsigned char *)&local_70,param_1,sVar6);
+                    ((unsigned char *)&local_70,param_1,uVar6);
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_80,(unsigned char *)&local_70);
-          sVar6 = _strlen("\' is not supported");
+          uVar6 = _strlen("\' is not supported");
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                    (&local_80,"\' is not supported",sVar6);
+                    (&local_80,"\' is not supported",uVar6);
           bVar1 = *DAT_a7b7baa4;
           *(byte *)(local_7c + *(int *)(local_7c + -0xc)) = bVar1;
-          ((int (*)())_CPPShInfoLogMsg)(local_7c,extraout_r4,sVar6,in_r6,in_r7,in_r8,(uint)bVar1);
+          ((int (*)())_CPPShInfoLogMsg)(local_7c,extraout_r4,uVar6,in_r6,in_r7,in_r8,(uint)bVar1);
           piVar3 = (int *)(local_7c + -4);
           local_40[0] = local_80;
           do {
@@ -914,7 +913,7 @@ int _updateExtensionBehavior(param_1, param_2)
   int *piVar5;
   uint uVar6;
   int iVar7;
-  size_t sVar8;
+  ulong uVar8;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 *puVar9;
@@ -1048,16 +1047,16 @@ LAB_97baf31c:
                 ((unsigned char *)&local_130,"extension \'",(unsigned char *)local_120);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
                 ((unsigned char *)&local_140,(unsigned char *)&local_130);
-      sVar8 = _strlen(param_1);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,sVar8)
+      uVar8 = _strlen(param_1);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,uVar8)
       ;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_150,(unsigned char *)&local_140);
-      sVar8 = _strlen("\' is not supported");
+      uVar8 = _strlen("\' is not supported");
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                (&local_150,"\' is not supported",sVar8);
+                (&local_150,"\' is not supported",uVar8);
       bVar1 = *DAT_a7b7baa4;
       *(byte *)(local_14c + *(int *)(local_14c + -0xc)) = bVar1;
-      ((int (*)())_CPPShInfoLogMsg)(local_14c,extraout_r4_00,sVar8,in_r6,in_r7,in_r8,(uint)bVar1);
+      ((int (*)())_CPPShInfoLogMsg)(local_14c,extraout_r4_00,uVar8,in_r6,in_r7,in_r8,(uint)bVar1);
       piVar5 = (int *)(local_14c + -4);
       local_110[0] = local_150;
       do {
@@ -1107,14 +1106,14 @@ LAB_97baf31c:
                 ((unsigned char *)&local_e0,"extension \'",(unsigned char *)local_d0);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
                 ((unsigned char *)&local_140,(unsigned char *)&local_e0);
-      sVar8 = _strlen(param_1);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,sVar8)
+      uVar8 = _strlen(param_1);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm((unsigned char *)&local_140,param_1,uVar8)
       ;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
                 ((unsigned char *)&local_150,(unsigned char *)&local_140);
-      sVar8 = _strlen("\' is not supported");
+      uVar8 = _strlen("\' is not supported");
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-                ((unsigned char *)&local_150,"\' is not supported",sVar8);
+                ((unsigned char *)&local_150,"\' is not supported",uVar8);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(&local_1e0,(unsigned char *)&local_150);
       piVar5 = (int *)(local_14c + -4);
       local_c0[0] = local_150;
@@ -1289,7 +1288,7 @@ int PrintAttribute(param_1, param_2)
   
   uStack00000018 = param_1;
   uStack0000001c = param_2;
-  pcVar2 = _malloc(0x100);
+  pcVar2 = (char *)_malloc(0x100);
   iVar3 = ((int (*)())ncpy)(pcVar2,uStack0000001c & 0xffff);
   pcVar5 = pcVar2 + iVar3;
   switch(uStack00000018 >> 0x10 & 0xf) {
@@ -1367,7 +1366,7 @@ LAB_97baf660:
   pcVar5 = pcVar5 + iVar3;
 switchD_97baf4e0_default:
   *pcVar5 = '\0';
-  _realloc(pcVar2,(size_t)(pcVar5 + (1 - (int)pcVar2)));
+  _realloc(pcVar2,pcVar5 + (1 - (int)pcVar2));
   return;
 }
 
@@ -1387,7 +1386,7 @@ int PrintParam(param_1, param_2)
   
   uStack00000018 = param_1;
   uStack0000001c = param_2;
-  pcVar1 = _malloc(0x100);
+  pcVar1 = (char *)_malloc(0x100);
   iVar2 = ((int (*)())ncpy)(pcVar1,uStack0000001c & 0xffff);
   pcVar6 = pcVar1 + iVar2;
   switch(uStack00000018 >> 0x10 & 0x1f) {
@@ -1605,7 +1604,7 @@ LAB_97bafbc8:
   pcVar6 = pcVar6 + iVar2;
 switchD_97bafb24_default:
   *pcVar6 = '\0';
-  _realloc(pcVar1,(size_t)(pcVar6 + (1 - (int)pcVar1)));
+  _realloc(pcVar1,pcVar6 + (1 - (int)pcVar1));
   return;
 }
 
@@ -1617,7 +1616,7 @@ int PrintOutput(param_1, param_2)
   char *pcVar1;
   int iVar2;
   int iVar3;
-  void *pvVar4;
+  undefined4 uVar4;
   uint uVar5;
   char *pcVar6;
   char *pcVar7;
@@ -1626,7 +1625,7 @@ int PrintOutput(param_1, param_2)
   
   uStack00000018 = param_1;
   uStack0000001c = param_2;
-  pcVar1 = _malloc(0x100);
+  pcVar1 = (char *)_malloc(0x100);
   iVar2 = ((int (*)())ncpy)(pcVar1,uStack0000001c & 0xffff);
   pcVar7 = pcVar1 + iVar2;
   switch(uStack00000018 >> 0x10 & 0xf) {
@@ -1689,8 +1688,8 @@ LAB_97bafcf4:
   iVar2 = ((int (*)())scpy)(pcVar7,pcVar6);
 LAB_97bafd98:
   pcVar7[iVar2] = '\0';
-  pvVar4 = _realloc(pcVar1,(size_t)(pcVar7 + iVar2 + (1 - (int)pcVar1)));
-  return pvVar4;
+  uVar4 = _realloc(pcVar1,pcVar7 + iVar2 + (1 - (int)pcVar1));
+  return uVar4;
 }
 
 /* PrintTemp @ 0x97bafdc4 (76 bytes) */
@@ -1705,7 +1704,7 @@ int PrintTemp(param_1, param_2)
   
   uStack00000018 = param_1;
   uStack0000001c = param_2;
-  pcVar1 = _malloc(0x10);
+  pcVar1 = (char *)_malloc(0x10);
   iVar2 = ((int (*)())ncpy)(pcVar1,uStack0000001c & 0xffff);
   pcVar1[iVar2] = '\0';
   return pcVar1;
@@ -1715,8 +1714,8 @@ int PrintTemp(param_1, param_2)
 int Binding__ClearName(this)
   unsigned char * this;
 {
-  if (*(void **)(this + 8) != (void *)0x0) {
-    _free(*(void **)(this + 8));
+  if (*(int *)(this + 8) != 0) {
+    _free(*(int *)(this + 8));
   }
   *(undefined4 *)(this + 0x10) = 0;
   *(undefined4 *)(this + 8) = 0;
@@ -1971,9 +1970,9 @@ int __ZeqRK7BindingS1_(param_1, param_2)
   int iVar1;
   
   if (((*(int *)(param_1 + 0xc) == *(int *)(param_2 + 0xc)) &&
-      (*(size_t *)(param_1 + 0x10) == *(size_t *)(param_2 + 0x10))) &&
-     (iVar1 = _strncmp(*(char **)(param_1 + 8),*(char **)(param_2 + 8),*(size_t *)(param_1 + 0x10)),
-     iVar1 == 0)) {
+      (*(int *)(param_1 + 0x10) == *(int *)(param_2 + 0x10))) &&
+     (iVar1 = _strncmp(*(undefined4 *)(param_1 + 8),*(undefined4 *)(param_2 + 8),
+                       *(int *)(param_1 + 0x10)), iVar1 == 0)) {
     return 1;
   }
   return 0;
@@ -1987,32 +1986,31 @@ int Binding__CatName(this, param_2)
   char *pcVar1;
   int iVar2;
   int iVar3;
-  size_t sVar4;
-  char *pcVar5;
-  int iVar6;
+  char *pcVar4;
+  int iVar5;
   
   if (param_2 != (char *)0x0) {
-    sVar4 = _strlen(param_2);
-    pcVar5 = _malloc(sVar4 + *(int *)(this + 0x10) + 1);
+    iVar3 = _strlen(param_2);
+    pcVar4 = (char *)_malloc(iVar3 + *(int *)(this + 0x10) + 1);
     if (*(char **)(this + 8) != (char *)0x0) {
-      _strncpy(pcVar5,*(char **)(this + 8),*(int *)(this + 0x10) + 1);
+      _strncpy(pcVar4,*(char **)(this + 8),*(int *)(this + 0x10) + 1);
     }
-    _strncpy(pcVar5 + *(int *)(this + 0x10),param_2,sVar4 + 1);
-    *(size_t *)(this + 0x10) = *(int *)(this + 0x10) + sVar4;
-    _free(*(void **)(this + 8));
-    iVar2 = *(int *)(this + 0x10);
-    iVar6 = 0;
+    _strncpy(pcVar4 + *(int *)(this + 0x10),param_2,iVar3 + 1);
+    *(int *)(this + 0x10) = *(int *)(this + 0x10) + iVar3;
+    _free(*(undefined4 *)(this + 8));
+    iVar3 = *(int *)(this + 0x10);
+    iVar5 = 0;
     *(undefined4 *)(this + 0xc) = 0;
-    *(char **)(this + 8) = pcVar5;
-    if (iVar2 != 0) {
-      iVar3 = 0;
+    *(char **)(this + 8) = pcVar4;
+    if (iVar3 != 0) {
+      iVar2 = 0;
       do {
-        pcVar1 = pcVar5 + iVar6;
-        iVar6 = iVar6 + 1;
-        iVar3 = iVar3 + *pcVar1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
-      *(int *)(this + 0xc) = iVar3;
+        pcVar1 = pcVar4 + iVar5;
+        iVar5 = iVar5 + 1;
+        iVar2 = iVar2 + *pcVar1;
+        iVar3 = iVar3 + -1;
+      } while (iVar3 != 0);
+      *(int *)(this + 0xc) = iVar2;
     }
   }
   return;
@@ -2024,24 +2022,23 @@ int Binding__SetName(this, param_2)
   char *param_2;
 {
   int iVar1;
-  size_t sVar2;
-  char *pcVar3;
-  int iVar4;
+  char *pcVar2;
+  int iVar3;
   
   ClearName(this);
-  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
-    *(size_t *)(this + 0x10) = sVar2;
-    pcVar3 = _malloc(sVar2 + 1);
-    *(char **)(this + 8) = pcVar3;
-    _strncpy(pcVar3,param_2,*(int *)(this + 0x10) + 1);
+  if ((param_2 != (char *)0x0) && (iVar1 = _strlen(param_2), 0 < iVar1)) {
+    *(int *)(this + 0x10) = iVar1;
+    pcVar2 = (char *)_malloc(iVar1 + 1);
+    *(char **)(this + 8) = pcVar2;
+    _strncpy(pcVar2,param_2,*(int *)(this + 0x10) + 1);
     iVar1 = *(int *)(this + 0x10);
-    iVar4 = 0;
+    iVar3 = 0;
     *(undefined4 *)(this + 0xc) = 0;
     if (iVar1 != 0) {
       do {
-        pcVar3 = (char *)(*(int *)(this + 8) + iVar4);
-        iVar4 = iVar4 + 1;
-        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar3;
+        pcVar2 = (char *)(*(int *)(this + 8) + iVar3);
+        iVar3 = iVar3 + 1;
+        *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar2;
         iVar1 = iVar1 + -1;
       } while (iVar1 != 0);
     }
@@ -2055,59 +2052,58 @@ int Binding__SetNameFromArrayName(this, param_2)
   char *param_2;
 {
   bool bVar1;
-  size_t sVar2;
+  int iVar2;
   char *pcVar3;
   int iVar4;
-  int iVar5;
+  undefined4 uVar5;
   int iVar6;
-  int iVar7;
   
   ClearName(this);
-  iVar6 = 0;
-  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
-    *(size_t *)(this + 0x10) = sVar2;
-    pcVar3 = _malloc(sVar2 + 1);
+  uVar5 = 0;
+  if ((param_2 != (char *)0x0) && (iVar2 = _strlen(param_2), 0 < iVar2)) {
+    *(int *)(this + 0x10) = iVar2;
+    pcVar3 = (char *)_malloc(iVar2 + 1);
     *(char **)(this + 8) = pcVar3;
     _strncpy(pcVar3,param_2,*(int *)(this + 0x10) + 1);
     iVar4 = *(int *)(this + 8);
-    iVar5 = *(int *)(this + 0x10);
-    if (*(char *)(iVar4 + iVar5 + -1) == ']') {
+    iVar2 = *(int *)(this + 0x10);
+    if (*(char *)(iVar4 + iVar2 + -1) == ']') {
       bVar1 = false;
-      iVar7 = iVar5 + -1;
+      iVar6 = iVar2 + -1;
       do {
-        iVar7 = iVar7 + -1;
-        if (*(char *)(iVar4 + iVar7) == '[') {
+        iVar6 = iVar6 + -1;
+        if (*(char *)(iVar4 + iVar6) == '[') {
           bVar1 = true;
         }
-        if (iVar7 < 0) {
+        if (iVar6 < 0) {
           if (!bVar1) goto LAB_97bb0358;
           break;
         }
       } while (!bVar1);
-      iVar6 = _atoi((char *)(iVar4 + iVar7 + 1));
-      iVar5 = iVar7;
-      if (iVar7 < *(int *)(this + 0x10) + 1) {
+      uVar5 = _atoi(iVar4 + iVar6 + 1);
+      iVar2 = iVar6;
+      if (iVar6 < *(int *)(this + 0x10) + 1) {
         do {
-          *(undefined1 *)(*(int *)(this + 8) + iVar5) = 0;
-          iVar5 = iVar5 + 1;
-        } while (iVar5 < *(int *)(this + 0x10) + 1);
+          *(undefined1 *)(*(int *)(this + 8) + iVar2) = 0;
+          iVar2 = iVar2 + 1;
+        } while (iVar2 < *(int *)(this + 0x10) + 1);
       }
-      *(int *)(this + 0x10) = iVar7;
-      iVar5 = iVar7;
+      *(int *)(this + 0x10) = iVar6;
+      iVar2 = iVar6;
     }
 LAB_97bb0358:
     iVar4 = 0;
     *(undefined4 *)(this + 0xc) = 0;
-    if (iVar5 != 0) {
+    if (iVar2 != 0) {
       do {
         pcVar3 = (char *)(*(int *)(this + 8) + iVar4);
         iVar4 = iVar4 + 1;
         *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*pcVar3;
-        iVar5 = iVar5 + -1;
-      } while (iVar5 != 0);
+        iVar2 = iVar2 + -1;
+      } while (iVar2 != 0);
     }
   }
-  return iVar6;
+  return uVar5;
 }
 
 /* Binding__RemoveNameBackToChar @ 0x97bb03a8 (132 bytes) */

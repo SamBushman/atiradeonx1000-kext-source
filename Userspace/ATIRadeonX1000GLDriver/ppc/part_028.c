@@ -126,7 +126,7 @@ int FUN_00105930(param_1, param_2)
           do {
             if (uVar5 < *puVar6) {
               if (uVar2 <= uVar5) {
-                _memset((void *)(uVar2 * 4 + puVar6[2]),0,(uVar5 - uVar2) * 4 + 4);
+                _memset(uVar2 * 4 + puVar6[2],0,(uVar5 - uVar2) * 4 + 4);
                 puVar6[1] = uVar5 + 1;
               }
               piVar3 = (int *)(uVar5 * 4 + puVar6[2]);
@@ -354,7 +354,7 @@ int FUN_00105f04(param_1, param_2)
         puVar5 = *(uint **)(iVar1 + 0x10);
         uVar4 = puVar5[1];
         if (uVar4 < *puVar5) {
-          _memset((void *)(uVar4 * 4 + puVar5[2]),0,4);
+          _memset(uVar4 * 4 + puVar5[2],0,4);
           piVar2 = (int *)(uVar4 * 4 + puVar5[2]);
           puVar5[1] = uVar4 + 1;
         }
@@ -401,7 +401,7 @@ int FUN_00106004(param_1, param_2, param_3, param_4, param_5)
       do {
         if (uVar5 < *puVar6) {
           if (uVar2 <= uVar5) {
-            _memset((void *)(uVar2 * 4 + puVar6[2]),0,(uVar5 - uVar2) * 4 + 4);
+            _memset(uVar2 * 4 + puVar6[2],0,(uVar5 - uVar2) * 4 + 4);
             puVar6[1] = uVar5 + 1;
           }
           piVar3 = (int *)(uVar5 * 4 + puVar6[2]);
@@ -425,7 +425,7 @@ int FUN_00106004(param_1, param_2, param_3, param_4, param_5)
     puVar6 = *(uint **)(param_3 + 0x10);
     uVar2 = puVar6[1];
     if (uVar2 < *puVar6) {
-      _memset((void *)(uVar2 * 4 + puVar6[2]),0,4);
+      _memset(uVar2 * 4 + puVar6[2],0,4);
       piVar3 = (int *)(uVar2 * 4 + puVar6[2]);
       puVar6[1] = uVar2 + 1;
     }
@@ -740,7 +740,7 @@ int FUN_00106804(param_1, param_2, param_3, param_4)
         do {
           if (uVar6 < *puVar7) {
             if (uVar2 <= uVar6) {
-              _memset((void *)(uVar2 * 4 + puVar7[2]),0,(uVar6 - uVar2) * 4 + 4);
+              _memset(uVar2 * 4 + puVar7[2],0,(uVar6 - uVar2) * 4 + 4);
               puVar7[1] = uVar6 + 1;
             }
             piVar4 = (int *)(uVar6 * 4 + puVar7[2]);
@@ -775,7 +775,7 @@ LAB_00106908:
     puVar7 = *(uint **)(param_2 + 0x10);
     uVar2 = puVar7[1];
     if (uVar2 < *puVar7) {
-      _memset((void *)(uVar2 * 4 + puVar7[2]),0,4);
+      _memset(uVar2 * 4 + puVar7[2],0,4);
       piVar4 = (int *)(uVar2 * 4 + puVar7[2]);
       puVar7[1] = uVar2 + 1;
     }

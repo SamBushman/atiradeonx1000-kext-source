@@ -52,17 +52,17 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
   if (*(int *)((int)this + 0x70) != 0) {
     _PPStreamFree(*(int *)((int)this + 0x70));
   }
-  if (*(void **)((int)this + 0x78) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x78));
+  if (*(int *)((int)this + 0x78) != 0) {
+    _free(*(int *)((int)this + 0x78));
   }
-  if (*(void **)((int)this + 0x7c) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x7c));
+  if (*(int *)((int)this + 0x7c) != 0) {
+    _free(*(int *)((int)this + 0x7c));
   }
-  if (*(void **)((int)this + 0x80) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x80));
+  if (*(int *)((int)this + 0x80) != 0) {
+    _free(*(int *)((int)this + 0x80));
   }
-  if (*(void **)((int)this + 0x84) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x84));
+  if (*(int *)((int)this + 0x84) != 0) {
+    _free(*(int *)((int)this + 0x84));
   }
   pvVar5 = *(void **)((int)this + 0x60);
   if (pvVar5 != (void *)0x0) {
@@ -76,8 +76,8 @@ int __ZN17TPPStreamCompilerD4Ev(this, param_2)
     __ZdlPv(pvVar5);
   }
   *(undefined4 *)PTR_addressTempAllocator_a7b7c0f8 = 0;
-  if (*(void **)((int)this + 0x74) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x74));
+  if (*(int *)((int)this + 0x74) != 0) {
+    _free(*(int *)((int)this + 0x74));
   }
   iVar4 = *(int *)((int)this + 0xb8);
   piVar2 = (int *)(iVar4 + -4);
@@ -128,26 +128,26 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
 {
   char *pcVar1;
   char *pcVar2;
-  size_t sVar3;
+  int iVar3;
   char *pcVar4;
-  size_t sVar5;
+  int iVar5;
   undefined4 uStack00000028;
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
   char acStack_120 [264];
   
-  sVar5 = 0;
+  iVar5 = 0;
   uStack00000028 = param_5;
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
   _vsprintf(acStack_120,param_4,&STACKARG(0x28));
   if (param_3 != (char *)0x0) {
-    sVar5 = _strlen(param_3);
+    iVar5 = _strlen(param_3);
   }
-  sVar3 = _strlen(acStack_120);
-  pcVar4 = _malloc(sVar3 + sVar5 + 0x28);
+  iVar3 = _strlen(acStack_120);
+  pcVar4 = (char *)_malloc(iVar3 + iVar5 + 0x28);
   pcVar1 = DAT_a7b7bd20;
   pcVar2 = DAT_a7b7bd24;
   if (param_2 != (char *)0x0) {
@@ -180,9 +180,9 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
 {
   char *pcVar1;
   char *pcVar2;
-  size_t sVar3;
+  int iVar3;
   char *pcVar4;
-  size_t sVar5;
+  int iVar5;
   undefined4 uStack00000028;
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
@@ -194,12 +194,12 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
   uStack00000030 = param_7;
   uStack00000034 = param_8;
   _vsprintf(acStack_120,param_4,&STACKARG(0x28));
-  sVar5 = 0;
+  iVar5 = 0;
   if (param_3 != (char *)0x0) {
-    sVar5 = _strlen(param_3);
+    iVar5 = _strlen(param_3);
   }
-  sVar3 = _strlen(acStack_120);
-  pcVar4 = _malloc(sVar3 + sVar5 + 0x28);
+  iVar3 = _strlen(acStack_120);
+  pcVar4 = (char *)_malloc(iVar3 + iVar5 + 0x28);
   pcVar1 = DAT_a7b7bd34;
   pcVar2 = DAT_a7b7bd38;
   if (param_2 != (char *)0x0) {
@@ -223,17 +223,17 @@ int TPPStreamCompiler__getSymbolTableString(this, param_2)
   unsigned char * this;
   int param_2;
 {
-  char *pcVar1;
-  size_t sVar2;
+  undefined4 uVar1;
+  int iVar2;
   char *pcVar3;
   char *pcVar4;
   
   if (*(unsigned char **)(this + 0x68) == (unsigned char *)0x0) {
     return (char *)0x0;
   }
-  pcVar1 = (char *)ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
-  sVar2 = _strlen(pcVar1);
-  pcVar3 = _malloc(sVar2 + 0x17);
+  uVar1 = ParseSymbolTable__GetString(*(unsigned char **)(this + 0x68),param_2);
+  iVar2 = _strlen(uVar1);
+  pcVar3 = (char *)_malloc(iVar2 + 0x17);
   *pcVar3 = '\0';
   pcVar4 = DAT_a7b7bd64;
   if (param_2 != 1) {
@@ -246,9 +246,9 @@ int TPPStreamCompiler__getSymbolTableString(this, param_2)
       if (param_2 != 2) goto LAB_97bc9d00;
     }
   }
-  _sprintf(pcVar3,pcVar4,pcVar1);
+  _sprintf(pcVar3,pcVar4,uVar1);
 LAB_97bc9d00:
-  _free(pcVar1);
+  _free(uVar1);
   return pcVar3;
 }
 
@@ -298,20 +298,20 @@ int TPPStreamCompiler__reset(this)
   void *pvVar4;
   
   *(undefined4 *)(this + 0xc) = 0;
-  if (*(void **)(this + 0x78) != (void *)0x0) {
-    _free(*(void **)(this + 0x78));
+  if (*(int *)(this + 0x78) != 0) {
+    _free(*(int *)(this + 0x78));
   }
   *(undefined4 *)(this + 0x78) = 0;
-  if (*(void **)(this + 0x7c) != (void *)0x0) {
-    _free(*(void **)(this + 0x7c));
+  if (*(int *)(this + 0x7c) != 0) {
+    _free(*(int *)(this + 0x7c));
   }
   *(undefined4 *)(this + 0x7c) = 0;
-  if (*(void **)(this + 0x80) != (void *)0x0) {
-    _free(*(void **)(this + 0x80));
+  if (*(int *)(this + 0x80) != 0) {
+    _free(*(int *)(this + 0x80));
   }
   *(undefined4 *)(this + 0x80) = 0;
-  if (*(void **)(this + 0x84) != (void *)0x0) {
-    _free(*(void **)(this + 0x84));
+  if (*(int *)(this + 0x84) != 0) {
+    _free(*(int *)(this + 0x84));
   }
   pvVar4 = *(void **)(this + 0x68);
   *(undefined4 *)(this + 0x84) = 0;
@@ -362,7 +362,7 @@ int TPPStreamCompiler__compile(this, param_2)
   uint uVar1;
   int iVar2;
   int iVar3;
-  void *pvVar4;
+  undefined4 uVar4;
   char *pcVar5;
   uint uVar6;
   int local_20 [5];
@@ -383,15 +383,15 @@ int TPPStreamCompiler__compile(this, param_2)
       iVar3 = *(int *)(this + 0x70);
     }
     _PPStreamResolveBranches(iVar3);
-    if (*(void **)(this + 0x74) != (void *)0x0) {
-      _free(*(void **)(this + 0x74));
+    if (*(int *)(this + 0x74) != 0) {
+      _free(*(int *)(this + 0x74));
     }
     *(undefined4 *)(this + 0x74) = 0;
     _PPStreamGetStream(*(undefined4 *)(this + 0x70),0,local_20);
     if (local_20[0] != 0) {
-      pvVar4 = _malloc(local_20[0] * 8 + 0xfU & 0xfffffff0);
-      *(void **)(this + 0x74) = pvVar4;
-      _PPStreamGetStream(*(undefined4 *)(this + 0x70),pvVar4,local_20);
+      uVar4 = _malloc(local_20[0] * 8 + 0xfU & 0xfffffff0);
+      *(undefined4 *)(this + 0x74) = uVar4;
+      _PPStreamGetStream(*(undefined4 *)(this + 0x70),uVar4,local_20);
     }
   }
   iVar2 = *(int *)(this + 0xc);
@@ -412,18 +412,17 @@ int TPPStreamCompiler__compile(this, param_2)
 int TPPStreamCompiler__getStatsString(this)
   unsigned char * this;
 {
-  char *pcVar1;
+  undefined4 uVar1;
   int iVar2;
-  size_t sVar3;
-  char *pcVar4;
+  undefined4 uVar3;
   
-  pcVar1 = DAT_a7b7bd84;
+  uVar1 = DAT_a7b7bd84;
   iVar2 = *(int *)(this + 0x78);
   if (iVar2 == 0) {
-    sVar3 = _strlen(DAT_a7b7bd84);
-    pcVar4 = _malloc(sVar3 * 4 + 4);
-    *(char **)(this + 0x78) = pcVar4;
-    _strcpy(pcVar4,pcVar1);
+    iVar2 = _strlen(DAT_a7b7bd84);
+    uVar3 = _malloc(iVar2 * 4 + 4);
+    *(undefined4 *)(this + 0x78) = uVar3;
+    _strcpy(uVar3,uVar1);
     iVar2 = *(int *)(this + 0x78);
   }
   return iVar2;
@@ -433,18 +432,18 @@ int TPPStreamCompiler__getStatsString(this)
 int TPPStreamCompiler__getPPStreamString(this)
   unsigned char * this;
 {
-  char *pcVar1;
+  undefined4 uVar1;
   undefined4 extraout_r3;
-  size_t sVar2;
-  char *pcVar3;
+  int iVar2;
+  undefined4 uVar3;
   
-  pcVar1 = DAT_a7b7bd88;
+  uVar1 = DAT_a7b7bd88;
   if (*(int *)(this + 0x7c) == 0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      sVar2 = _strlen(DAT_a7b7bd88);
-      pcVar3 = _malloc(sVar2 * 4 + 4);
-      *(char **)(this + 0x7c) = pcVar3;
-      _strcpy(pcVar3,pcVar1);
+      iVar2 = _strlen(DAT_a7b7bd88);
+      uVar3 = _malloc(iVar2 * 4 + 4);
+      *(undefined4 *)(this + 0x7c) = uVar3;
+      _strcpy(uVar3,uVar1);
     }
     else {
       ((double (*)())_glpPPDisassemble)(*(int *)(this + 0x74));
@@ -459,16 +458,15 @@ int TPPStreamCompiler__getShaderToProgramString(this)
   unsigned char * this;
 {
   int iVar1;
-  size_t sVar2;
-  char *pcVar3;
+  undefined4 uVar2;
   
   iVar1 = *(int *)(this + 0x80);
   if (iVar1 == 0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      sVar2 = _strlen("No Shader Program generated.");
-      pcVar3 = _malloc(sVar2 * 4 + 4);
-      *(char **)(this + 0x80) = pcVar3;
-      _strcpy(pcVar3,"No Shader Program generated.");
+      iVar1 = _strlen("No Shader Program generated.");
+      uVar2 = _malloc(iVar1 * 4 + 4);
+      *(undefined4 *)(this + 0x80) = uVar2;
+      _strcpy(uVar2,"No Shader Program generated.");
       iVar1 = *(int *)(this + 0x80);
     }
     else {
@@ -2107,11 +2105,11 @@ int GetChunkForSymbol(param_1, param_2)
   byte *pbVar5;
   undefined4 uVar6;
   uint uVar7;
-  void *pvVar8;
+  int iVar8;
   
-  pvVar8 = *(void **)(param_1 + 0x14);
-  if (((pvVar8 == (void *)0x0) || (iVar4 = _memcmp(pvVar8,"gl_",3), iVar4 != 0)) ||
-     (*(char *)((int)pvVar8 + 3) == '_')) {
+  iVar8 = *(int *)(param_1 + 0x14);
+  if (((iVar8 == 0) || (iVar4 = _memcmp(iVar8,"gl_",3), iVar4 != 0)) ||
+     (*(char *)(iVar8 + 3) == '_')) {
     uVar6 = (**(code **)(**(int **)(param_1 + 0xc) + 0x24))(*(int **)(param_1 + 0xc));
     switch(uVar6) {
     case 0:
@@ -2132,9 +2130,9 @@ int GetChunkForSymbol(param_1, param_2)
     case 6:
       pbVar5 = (byte *)_PPStreamChunkCreateWithType(3,0);
       *(uint *)(pbVar5 + 0xc) = *(uint *)(pbVar5 + 0xc) & 0xffe0ffff | 0x10000;
-      iVar4 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))(*(int **)(param_1 + 0xc));
+      iVar8 = (**(code **)(**(int **)(param_1 + 0xc) + 0x20))(*(int **)(param_1 + 0xc));
       *(uint *)(pbVar5 + 0x10) =
-           (uint)(iVar4 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
+           (uint)(iVar8 - 5U < 8) << 0x1f | *(uint *)(pbVar5 + 0x10) & 0x7fffffff;
       break;
     default:
       pbVar5 = (byte *)0x0;
@@ -2151,8 +2149,8 @@ int GetChunkForSymbol(param_1, param_2)
 LAB_97bcc864:
     uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
     *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-    iVar4 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
-    uVar7 = (iVar4 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+    iVar8 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+    uVar7 = (iVar8 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
 LAB_97bcc8c0:
     *(uint *)(pbVar5 + 0xc) = uVar7;
   }
@@ -2160,8 +2158,8 @@ LAB_97bcc8c0:
     if (bVar2 == 0) {
       uVar7 = GetPPStreamTypeForGLType((uint)*(ushort *)(param_1 + 0x2c));
       *(uint *)(pbVar5 + 0xc) = (uVar7 & 7) << 0x1a | *(uint *)(pbVar5 + 0xc) & 0xe3ffffff;
-      iVar4 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
-      uVar7 = (iVar4 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
+      iVar8 = GetScalerWidthForType((uint)*(ushort *)(param_1 + 0x2c));
+      uVar7 = (iVar8 + -1) * 0x1000000 & 0x3000000U | *(uint *)(pbVar5 + 0xc) & 0x1cffffff;
       goto LAB_97bcc8c0;
     }
   }
@@ -2261,11 +2259,11 @@ int FunctionTable__clear(this)
       iVar2 = iVar2 + 1;
       puVar1 = (undefined4 *)(iVar3 + *(int *)this);
       iVar3 = iVar3 + 0x18;
-      _free((void *)*puVar1);
+      _free(*puVar1);
     } while (iVar2 < *(int *)(this + 4));
   }
-  if (*(void **)this != (void *)0x0) {
-    _free(*(void **)this);
+  if (*(int *)this != 0) {
+    _free(*(int *)this);
   }
   *(undefined4 *)(this + 4) = 0;
   *(undefined4 *)this = 0;
@@ -2277,57 +2275,60 @@ int FunctionTable__addFunction(this, param_2)
   unsigned char * this;
   char *param_2;
 {
-  void *pvVar1;
-  void *pvVar2;
-  size_t sVar3;
+  int iVar1;
+  int iVar2;
+  int iVar3;
   int iVar4;
   int iVar5;
   undefined4 uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
-  uint uVar9;
+  int iVar9;
+  uint uVar10;
   
-  uVar9 = *(uint *)(this + 4);
-  if ((uVar9 & 0xf) == 0) {
-    pvVar1 = _malloc(uVar9 * 0x18 + 0x180);
-    _memset(pvVar1,0,*(int *)(this + 4) * 0x18 + 0x180);
-    uVar9 = *(uint *)(this + 4);
+  uVar10 = *(uint *)(this + 4);
+  if ((uVar10 & 0xf) == 0) {
+    iVar2 = _malloc(uVar10 * 0x18 + 0x180);
+    _memset(iVar2,0,*(int *)(this + 4) * 0x18 + 0x180);
+    uVar10 = *(uint *)(this + 4);
     iVar4 = 0;
-    if ((int)uVar9 < 1) {
-      pvVar2 = *(void **)this;
+    if ((int)uVar10 < 1) {
+      iVar3 = *(int *)this;
     }
     else {
-      pvVar2 = *(void **)this;
+      iVar3 = *(int *)this;
       iVar5 = 0;
       do {
-        uVar7 = *(undefined4 *)((int)pvVar2 + iVar5 + 4);
+        iVar9 = iVar5 + iVar3;
+        uVar7 = *(undefined4 *)(iVar9 + 4);
         iVar4 = iVar4 + 1;
-        uVar8 = *(undefined4 *)((int)pvVar2 + iVar5 + 8);
-        uVar6 = *(undefined4 *)((int)pvVar2 + iVar5 + 0xc);
-        *(undefined4 *)(iVar5 + (int)pvVar1) = *(undefined4 *)(iVar5 + (int)pvVar2);
-        *(undefined4 *)((int)pvVar1 + iVar5 + 4) = uVar7;
-        *(undefined4 *)((int)pvVar1 + iVar5 + 8) = uVar8;
-        *(undefined4 *)((int)pvVar1 + iVar5 + 0xc) = uVar6;
-        uVar6 = *(undefined4 *)((int)pvVar2 + iVar5 + 0x10);
-        *(undefined4 *)((int)pvVar1 + iVar5 + 0x14) = *(undefined4 *)((int)pvVar2 + iVar5 + 0x14);
-        *(undefined4 *)((int)pvVar1 + iVar5 + 0x10) = uVar6;
+        uVar8 = *(undefined4 *)(iVar9 + 8);
+        iVar1 = iVar5 + iVar2;
+        uVar6 = *(undefined4 *)(iVar9 + 0xc);
+        *(undefined4 *)(iVar5 + iVar2) = *(undefined4 *)(iVar5 + iVar3);
         iVar5 = iVar5 + 0x18;
-      } while (iVar4 < (int)uVar9);
+        *(undefined4 *)(iVar1 + 4) = uVar7;
+        *(undefined4 *)(iVar1 + 8) = uVar8;
+        *(undefined4 *)(iVar1 + 0xc) = uVar6;
+        uVar6 = *(undefined4 *)(iVar9 + 0x10);
+        *(undefined4 *)(iVar1 + 0x14) = *(undefined4 *)(iVar9 + 0x14);
+        *(undefined4 *)(iVar1 + 0x10) = uVar6;
+      } while (iVar4 < (int)uVar10);
     }
-    if (pvVar2 != (void *)0x0) {
-      _free(pvVar2);
-      uVar9 = *(uint *)(this + 4);
+    if (iVar3 != 0) {
+      _free(iVar3);
+      uVar10 = *(uint *)(this + 4);
     }
-    *(void **)this = pvVar1;
+    *(int *)this = iVar2;
   }
   iVar4 = *(int *)this;
-  sVar3 = _strlen(param_2);
-  pvVar1 = _malloc(sVar3 + 1);
-  *(void **)(uVar9 * 0x18 + iVar4) = pvVar1;
-  _strcpy(*(char **)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
-  iVar4 = *(int *)(this + 4);
-  *(int *)(this + 4) = iVar4 + 1;
-  return iVar4;
+  iVar2 = _strlen(param_2);
+  uVar6 = _malloc(iVar2 + 1);
+  *(undefined4 *)(uVar10 * 0x18 + iVar4) = uVar6;
+  _strcpy(*(undefined4 *)(*(int *)(this + 4) * 0x18 + *(int *)this),param_2);
+  iVar2 = *(int *)(this + 4);
+  *(int *)(this + 4) = iVar2 + 1;
+  return iVar2;
 }
 
 /* FunctionTable__removeFunction @ 0x97bccafc (168 bytes) */
@@ -2342,7 +2343,7 @@ int FunctionTable__removeFunction(this, param_2)
   int iVar5;
   
   iVar5 = param_2 * 0x18;
-  _free(*(void **)(iVar5 + *(int *)this));
+  _free(*(undefined4 *)(iVar5 + *(int *)this));
   iVar1 = *(int *)(this + 4);
   if (param_2 < iVar1) {
     do {
@@ -2452,9 +2453,13 @@ int FunctionTable__updateForRemovingChunk(this, param_2)
 }
 
 /* FunctionTable__findFunction @ 0x97bcccb0 (132 bytes) */
-int FunctionTable__findFunction(this, param_2)
+int FunctionTable__findFunction(this, param_2, param_3, param_4, param_5, param_6)
   unsigned char * this;
   char *param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   int iVar1;
   int iVar2;
@@ -2465,7 +2470,7 @@ int FunctionTable__findFunction(this, param_2)
   if (0 < iVar1) {
     iVar2 = 0;
     do {
-      iVar1 = _strcmp(*(char **)(iVar2 + *(int *)this),param_2);
+      iVar1 = _strcmp(*(undefined4 *)(iVar2 + *(int *)this),param_2);
       if (iVar1 == 0) {
         iVar1 = *(int *)(this + 4);
         break;
@@ -2538,16 +2543,16 @@ int FunctionTable__dump()
 /* _InterpreterCreate @ 0x97bccdac (60 bytes) */
 int _InterpreterCreate()
 {
-  void *pvVar1;
+  undefined4 uVar1;
   
-  pvVar1 = _calloc(0xa70,1);
-  ((int (*)())_InterpreterInit)(pvVar1);
-  return pvVar1;
+  uVar1 = _calloc(0xa70,1);
+  ((int (*)())_InterpreterInit)(uVar1);
+  return uVar1;
 }
 
 /* _InterpreterFree @ 0x97bccde8 (48 bytes) */
 int _InterpreterFree(param_1)
-  void *param_1;
+  undefined4 param_1;
 {
   ((int (*)())_InterpreterShutdown)(param_1);
   _free(param_1);
@@ -2556,15 +2561,15 @@ int _InterpreterFree(param_1)
 
 /* _InterpreterInit @ 0x97bcce18 (72 bytes) */
 int _InterpreterInit(param_1)
-  void *param_1;
+  int param_1;
 {
   undefined4 uVar1;
   
   _memset(param_1,0,0xa70);
   uVar1 = ((int (*)())_InterpreterTextureSamplerCreate)();
-  *(undefined4 *)((int)param_1 + 0xa2c) = uVar1;
-  _InterpreterNoiseGeneratorInitialise((int)param_1 + 4);
-  _InterpreterRasterOpMachineInitialise((int)param_1 + 0xa24);
+  *(undefined4 *)(param_1 + 0xa2c) = uVar1;
+  _InterpreterNoiseGeneratorInitialise(param_1 + 4);
+  _InterpreterRasterOpMachineInitialise(param_1 + 0xa24);
   return;
 }
 
@@ -2935,10 +2940,9 @@ LAB_97bcd680:
       (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,
                                   param_9,param_10,0), iVar1 != 0)) &&
      (pfVar4 = (float *)((int)piVar6 + *piVar8), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf((double)*param_12);
+    iVar1 = ___isnanf(iVar1);
     uVar9 = 3;
-    if ((iVar1 == 0) &&
-       (uVar9 = DOUBLE_97c30a48 < (double)*param_12, (double)*param_12 < DOUBLE_97c30a48)) {
+    if ((iVar1 == 0) && (uVar9 = 0.0 < *param_12, *param_12 < 0.0)) {
       uVar9 = 2;
     }
     *(undefined1 *)(param_1 + 0x291) = uVar9;
@@ -2949,10 +2953,9 @@ LAB_97bcd680:
                                   (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
                                   param_9,param_10,1), iVar1 != 0)) &&
      (pfVar7 = (float *)((int)piVar6 + piVar8[1]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf((double)param_12[1]);
+    iVar1 = ___isnanf(iVar1);
     uVar9 = 3;
-    if ((iVar1 == 0) &&
-       (uVar9 = DOUBLE_97c30a48 < (double)param_12[1], (double)param_12[1] < DOUBLE_97c30a48)) {
+    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[1], param_12[1] < 0.0)) {
       uVar9 = 2;
     }
     *(undefined1 *)((int)param_1 + 0xa45) = uVar9;
@@ -2963,10 +2966,9 @@ LAB_97bcd680:
                                   (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
                                   param_9,param_10,2), iVar1 != 0)) &&
      (pfVar3 = (float *)((int)piVar6 + piVar8[2]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf((double)param_12[2]);
+    iVar1 = ___isnanf(iVar1);
     uVar9 = 3;
-    if ((iVar1 == 0) &&
-       (uVar9 = DOUBLE_97c30a48 < (double)param_12[2], (double)param_12[2] < DOUBLE_97c30a48)) {
+    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[2], param_12[2] < 0.0)) {
       uVar9 = 2;
     }
     *(undefined1 *)((int)param_1 + 0xa46) = uVar9;
@@ -2976,10 +2978,9 @@ LAB_97bcd680:
                                   (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
                                   param_9,param_10,3), iVar1 != 0)) &&
      (pfVar5 = (float *)((int)piVar6 + piVar8[3]), (char)param_13 != '\0')) {
-    iVar1 = ___isnanf((double)param_12[3]);
+    iVar1 = ___isnanf(iVar1);
     uVar9 = 3;
-    if ((iVar1 == 0) &&
-       (uVar9 = DOUBLE_97c30a48 < (double)param_12[3], (double)param_12[3] < DOUBLE_97c30a48)) {
+    if ((iVar1 == 0) && (uVar9 = 0.0 < param_12[3], param_12[3] < 0.0)) {
       uVar9 = 2;
     }
     *(undefined1 *)((int)param_1 + 0xa47) = uVar9;
@@ -5690,10 +5691,10 @@ void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,dou
 /* _InterpreterTextureSamplerCreate @ 0x97bd35dc (12 bytes) */
 int _InterpreterTextureSamplerCreate()
 {
-  void *pvVar1;
+  undefined4 uVar1;
   
-  pvVar1 = _calloc(0x2c,1);
-  return pvVar1;
+  uVar1 = _calloc(0x2c,1);
+  return uVar1;
 }
 
 /* _InterpreterTextureSamplerInitialise @ 0x97bd35e8 (16 bytes) */

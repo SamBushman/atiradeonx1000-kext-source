@@ -16,8 +16,8 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
   int iVar7;
   int iVar8;
   uint uVar9;
-  void *pvVar10;
-  void *pvVar11;
+  uint uVar10;
+  uint uVar11;
   uint uVar12;
   uint uVar13;
   int *piVar14;
@@ -30,7 +30,7 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
   uint local_60;
   uint local_5c;
   
-  puVar3 = _calloc(1,0x3c);
+  puVar3 = (undefined4 *)_calloc(1,0x3c);
   if ((param_2 & 1) == 0) {
     if ((param_2 & 8) == 0) {
       iVar4 = __DecodePixelFormat(param_3[1],puVar3 + 0xc,puVar3 + 0xd,puVar3 + 10,&local_70,
@@ -61,7 +61,7 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
         *puVar3 = local_68;
         uVar5 = param_3[4];
         uVar2 = param_3[5];
-        pvVar10 = (void *)*param_3;
+        uVar10 = *param_3;
         uVar9 = uVar12 * uVar5;
         uVar1 = uVar12 * uVar5 * uVar2 >> 2;
         uVar12 = uVar2;
@@ -113,13 +113,13 @@ int __AllocateSurface(param_1, param_2, param_3, param_4)
             piVar14 = piVar14 + 0xd;
             if (uVar12 != 0) {
               uVar13 = 0;
-              pvVar11 = pvVar10;
+              uVar11 = uVar10;
               do {
                 uVar13 = uVar13 + 1;
-                pvVar10 = (void *)((int)pvVar11 + uVar9);
-                _bcopy(pvVar11,piVar14,uVar9);
+                uVar10 = uVar11 + uVar9;
+                _bcopy(uVar11,piVar14,uVar9);
                 piVar14 = (int *)((int)piVar14 + (uVar9 & 0xfffffffc));
-                pvVar11 = pvVar10;
+                uVar11 = uVar10;
               } while (uVar13 != uVar12);
             }
             iVar8 = iVar8 + 1;
@@ -637,7 +637,7 @@ int __FreeSurface(param_1, param_2, param_3)
       piVar2 = *(int **)(param_3 + 0x28);
     }
     piVar2[2] = 0;
-    _free(*(void **)(param_3 + 0x28));
+    _free(*(undefined4 *)(param_3 + 0x28));
     *(undefined4 *)(param_3 + 0x28) = 0;
   }
   return uVar3;
@@ -655,7 +655,7 @@ int _createTextureBuffer(param_1, param_2, param_3, param_4)
   uint uVar3;
   uint uVar4;
   
-  if (_textureBufferBytes == (void *)0x0) {
+  if (_textureBufferBytes == 0) {
     uVar4 = param_2 + 0x20U & 0xffffffe0;
     uVar3 = param_3 + 0x20U & 0xffffffe0;
     goto LAB_00004194;
@@ -673,7 +673,7 @@ LAB_000040bc:
       if (iVar1 == 0) {
         return 1;
       }
-      if (_textureBufferBytes == (void *)0x0) goto LAB_00004194;
+      if (_textureBufferBytes == 0) goto LAB_00004194;
     }
   }
   uVar4 = param_2 + 0x20U & 0xffffffe0;
@@ -681,7 +681,7 @@ LAB_000040bc:
   *(int *)(param_1 + 0x94) = *(int *)(param_1 + 0x94) + -1;
   ((int (*)())__FreeSurface)(param_1,8,&_textureBuffer);
   _free(_textureBufferBytes);
-  _textureBufferBytes = (void *)0x0;
+  _textureBufferBytes = 0;
 LAB_00004194:
   if (param_4 == 0) {
     DAT_0000e738 = uVar4 << 2;
@@ -699,7 +699,7 @@ LAB_00004194:
   DAT_0000e734 = uVar3;
   _textureBufferBytes = _malloc(_textureBufferSize);
   uVar2 = 0;
-  if (_textureBufferBytes != (void *)0x0) {
+  if (_textureBufferBytes != 0) {
     _textureBuffer = _textureBufferBytes;
     iVar1 = ((int (*)())__AllocateSurface)(param_1,8,&_textureBuffer,0);
     if (iVar1 == 0) {
@@ -709,7 +709,7 @@ LAB_00004194:
     else {
       _free(_textureBufferBytes);
       uVar2 = 0;
-      _textureBufferBytes = (void *)0x0;
+      _textureBufferBytes = 0;
     }
   }
   return uVar2;
@@ -724,7 +724,7 @@ int _createOffscreenBuffer(param_1, param_2, param_3)
   int iVar1;
   undefined4 uVar2;
   
-  if (_offscreenBufferBytes == (void *)0x0) goto LAB_000043f0;
+  if (_offscreenBufferBytes == 0) goto LAB_000043f0;
   if (param_3 == 0) {
     if (DAT_0000e6c0 == 0x42475241) goto LAB_0000430c;
   }
@@ -737,13 +737,13 @@ LAB_0000430c:
       if (iVar1 == 0) {
         return 1;
       }
-      if (_offscreenBufferBytes == (void *)0x0) goto LAB_000043f0;
+      if (_offscreenBufferBytes == 0) goto LAB_000043f0;
     }
   }
   *(int *)(param_1 + 0x94) = *(int *)(param_1 + 0x94) + -1;
   ((int (*)())__FreeSurface)(param_1,0,&_offscreenBuffer);
   _free(_offscreenBufferBytes);
-  _offscreenBufferBytes = (void *)0x0;
+  _offscreenBufferBytes = 0;
 LAB_000043f0:
   _offscreenBufferWidth = (int)*(short *)(param_2 + 4) + 0x20U & 0xffffffe0;
   _offscreenBufferHeight = (int)*(short *)(param_2 + 6) + 0x20U & 0xffffffe0;
@@ -761,7 +761,7 @@ LAB_000043f0:
   DAT_0000e6d0 = _offscreenBufferHeight;
   _offscreenBufferBytes = _malloc(_offscreenBufferSize);
   uVar2 = 0;
-  if (_offscreenBufferBytes != (void *)0x0) {
+  if (_offscreenBufferBytes != 0) {
     _offscreenBuffer = _offscreenBufferBytes;
     iVar1 = ((int (*)())__AllocateSurface)(param_1,0,&_offscreenBuffer,0);
     if (iVar1 == 0) {
@@ -771,7 +771,7 @@ LAB_000043f0:
     else {
       _free(_offscreenBufferBytes);
       uVar2 = 0;
-      _offscreenBufferBytes = (void *)0x0;
+      _offscreenBufferBytes = 0;
     }
   }
   return uVar2;
@@ -783,17 +783,17 @@ int __Stop(param_1)
 {
   int iVar1;
   
-  if (_offscreenBufferBytes != (void *)0x0) {
+  if (_offscreenBufferBytes != 0) {
     *(int *)(param_1 + 0x94) = *(int *)(param_1 + 0x94) + -1;
     ((int (*)())__FreeSurface)(param_1,0,&_offscreenBuffer);
     _free(_offscreenBufferBytes);
-    _offscreenBufferBytes = (void *)0x0;
+    _offscreenBufferBytes = 0;
   }
-  if (_textureBufferBytes != (void *)0x0) {
+  if (_textureBufferBytes != 0) {
     *(int *)(param_1 + 0x94) = *(int *)(param_1 + 0x94) + -1;
     ((int (*)())__FreeSurface)(param_1,8,&_textureBuffer);
     _free(_textureBufferBytes);
-    _textureBufferBytes = (void *)0x0;
+    _textureBufferBytes = 0;
   }
   ((int (*)())__Flush)(param_1,0);
   iVar1 = *(int *)(param_1 + 0x10);
@@ -820,29 +820,29 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
   short sVar1;
   uint uVar2;
   bool bVar3;
-  double dVar4;
-  double dVar5;
-  undefined *puVar6;
-  uint *puVar7;
-  int iVar8;
+  undefined *puVar4;
+  uint *puVar5;
+  int iVar6;
+  int iVar7;
+  dword *pdVar8;
   int iVar9;
-  dword *pdVar10;
+  int iVar10;
   int iVar11;
-  int iVar12;
+  dword *pdVar12;
   int iVar13;
-  dword *pdVar14;
-  int iVar15;
-  int iVar16;
-  float fVar17;
-  dword *pdVar18;
-  int iVar19;
+  int iVar14;
+  float fVar15;
+  dword *pdVar16;
+  int iVar17;
+  int iVar18;
+  dword *pdVar19;
   int iVar20;
-  dword *pdVar21;
-  int iVar22;
+  float fVar21;
+  dword *pdVar22;
   float fVar23;
   dword *pdVar24;
-  float fVar25;
-  dword *pdVar26;
+  int iVar25;
+  int iVar26;
   int iVar27;
   int iVar28;
   int iVar29;
@@ -852,24 +852,22 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
   int iVar33;
   int iVar34;
   int iVar35;
-  int iVar36;
+  uint uVar36;
   int iVar37;
   uint uVar38;
   int iVar39;
   uint uVar40;
-  int iVar41;
-  uint uVar42;
-  uint uVar43;
-  dword *pdVar44;
-  int iVar45;
+  uint uVar41;
+  dword *pdVar42;
+  int iVar43;
+  double dVar44;
+  double dVar45;
   double dVar46;
   double dVar47;
   double dVar48;
   double dVar49;
   double dVar50;
   double dVar51;
-  double dVar52;
-  double dVar53;
   float local_1a8;
   float local_1a4;
   float local_1a0;
@@ -923,18 +921,16 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
   float *local_b0;
   int *local_ac;
   
-  pdVar44 = *(dword **)(param_1 + 0x80);
-  iVar41 = *(int *)(param_5 + 0x58);
-  uVar43 = *(int *)(*(int *)(param_1 + 0x18) + 0x10) - 7;
-  if (pdVar44 != (dword *)0x0) {
-    uVar42 = uVar43 - ((int)pdVar44 - (*(int *)(param_1 + 0x18) + 0x20) >> 2);
+  pdVar42 = *(dword **)(param_1 + 0x80);
+  iVar39 = *(int *)(param_5 + 0x58);
+  uVar41 = *(int *)(*(int *)(param_1 + 0x18) + 0x10) - 7;
+  if (pdVar42 != (dword *)0x0) {
+    uVar40 = uVar41 - ((int)pdVar42 - (*(int *)(param_1 + 0x18) + 0x20) >> 2);
     if ((0x1000 < *(short *)(param_1 + 0x50)) || (0x1000 < *(short *)(param_1 + 0x52))) {
       return 0xe00002c7;
     }
-    iVar8 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,0);
-    dVar5 = DOUBLE_0000cfe8;
-    dVar4 = DOUBLE_0000cfe0;
-    if (iVar8 != 0) {
+    iVar6 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,0);
+    if (iVar6 != 0) {
       local_d4 = *(uint *)(param_1 + 0x70);
       local_cc = DAT_0000e6e4 + 3;
       if (local_d4 == 3) {
@@ -950,7 +946,7 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
       else if (local_d8 == 6) {
         local_d8 = 0xc;
       }
-      if (iVar41 != 0) {
+      if (iVar39 != 0) {
         local_c0 = &local_1a0;
         local_bc = local_19c;
         local_b4 = &local_1a8;
@@ -969,425 +965,430 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
           uStack_18c = local_ac[1] + *(int *)(param_1 + 100) ^ 0x80000000;
           uStack_184 = local_ac[4] ^ 0x80000000;
           uStack_17c = local_ac[5] ^ 0x80000000;
-          dVar46 = (double)CONCAT44(0x43300000,uStack_194) - dVar4;
-          dVar50 = (double)(float)dVar46;
-          dVar48 = (double)CONCAT44(0x43300000,uStack_18c) - dVar4;
-          dVar51 = (double)(float)dVar48;
-          dVar47 = dVar51 + (double)(float)((double)CONCAT44(0x43300000,uStack_17c) - dVar4);
-          dVar53 = (double)(float)dVar47;
-          dVar49 = dVar50 + (double)(float)((double)CONCAT44(0x43300000,uStack_184) - dVar4);
-          dVar52 = (double)(float)dVar49;
-          if (DOUBLE_0000cff0 <= dVar50) {
-            local_170 = (longlong)(int)(dVar50 - DOUBLE_0000cff0);
-            local_dc = (int)(dVar50 - DOUBLE_0000cff0) + 0x80000000;
+          dVar44 = (double)CONCAT44(0x43300000,uStack_194) - 4503601774854144.0;
+          dVar48 = (double)(float)dVar44;
+          dVar46 = (double)CONCAT44(0x43300000,uStack_18c) - 4503601774854144.0;
+          dVar49 = (double)(float)dVar46;
+          dVar45 = dVar49 + (double)(float)((double)CONCAT44(0x43300000,uStack_17c) -
+                                           4503601774854144.0);
+          dVar51 = (double)(float)dVar45;
+          dVar47 = dVar48 + (double)(float)((double)CONCAT44(0x43300000,uStack_184) -
+                                           4503601774854144.0);
+          dVar50 = (double)(float)dVar47;
+          if (2147483648.0 <= dVar48) {
+            local_170 = (longlong)(int)(dVar48 - 2147483648.0);
+            local_dc = (int)(dVar48 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_dc = (uint)dVar46;
+            local_dc = (uint)dVar44;
             local_178 = (longlong)(int)local_dc;
           }
-          if (DOUBLE_0000cff0 <= dVar51) {
-            local_160 = (longlong)(int)(dVar51 - DOUBLE_0000cff0);
-            local_e0 = (int)(dVar51 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar49) {
+            local_160 = (longlong)(int)(dVar49 - 2147483648.0);
+            local_e0 = (int)(dVar49 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e0 = (uint)dVar48;
+            local_e0 = (uint)dVar46;
             local_168 = (longlong)(int)local_e0;
           }
-          if (DOUBLE_0000cff0 <= dVar52) {
-            local_150 = (longlong)(int)(dVar52 - DOUBLE_0000cff0);
-            local_e4 = (int)(dVar52 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar50) {
+            local_150 = (longlong)(int)(dVar50 - 2147483648.0);
+            local_e4 = (int)(dVar50 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e4 = (uint)dVar49;
+            local_e4 = (uint)dVar47;
             local_158 = (longlong)(int)local_e4;
           }
-          if (DOUBLE_0000cff0 <= dVar53) {
-            local_140 = (longlong)(int)(dVar53 - DOUBLE_0000cff0);
-            local_e8 = (int)(dVar53 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar51) {
+            local_140 = (longlong)(int)(dVar51 - 2147483648.0);
+            local_e8 = (int)(dVar51 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e8 = (uint)dVar47;
+            local_e8 = (uint)dVar45;
             local_148 = (longlong)(int)local_e8;
           }
           if (bVar3) {
-            if (uVar42 < 0x8a) {
+            if (uVar40 < 0x8a) {
               local_1a8 = *(float *)(param_1 + 0x18);
               local_19c[0] = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar44 = 0x5c8;
+                *pdVar42 = 0x5c8;
                 local_19c[0] = 2.8026e-45;
-                pdVar44[1] = local_c8;
+                pdVar42[1] = local_c8;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar44[(int)local_19c[0]] = 0x1000000;
-              puVar7 = *(uint **)(param_1 + 0x7c);
-              *puVar7 = ((int)pdVar44 - (int)puVar7 >> 2) + (int)local_19c[0] | *puVar7;
-              iVar8 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+              pdVar42[(int)local_19c[0]] = 0x1000000;
+              puVar5 = *(uint **)(param_1 + 0x7c);
+              *puVar5 = ((int)pdVar42 - (int)puVar5 >> 2) + (int)local_19c[0] | *puVar5;
+              iVar6 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                           *(undefined4 *)PTR_0000e694,local_b4,local_bc,1);
-              if (iVar8 == 0) {
+              if (iVar6 == 0) {
                 bVar3 = true;
                 *(undefined4 *)((int)local_1a8 + 0x1c) = 0;
-                pdVar44 = (dword *)((int)local_1a8 + 0x20);
+                pdVar42 = (dword *)((int)local_1a8 + 0x20);
                 *(float *)(param_1 + 0x18) = local_1a8;
-                pdVar10 = (dword *)((int)local_1a8 + 0x38);
-                pdVar14 = (dword *)((int)local_1a8 + 0x24);
+                pdVar8 = (dword *)((int)local_1a8 + 0x38);
+                pdVar12 = (dword *)((int)local_1a8 + 0x24);
                 *(int *)(param_1 + 0x7c) = (int)local_1a8 + 0x1c;
-                pdVar26 = (dword *)((int)local_1a8 + 0x28);
-                pdVar18 = (dword *)((int)local_1a8 + 0x2c);
-                pdVar21 = (dword *)((int)local_1a8 + 0x30);
-                pdVar24 = (dword *)((int)local_1a8 + 0x34);
-                uVar42 = uVar43;
+                pdVar24 = (dword *)((int)local_1a8 + 0x28);
+                pdVar16 = (dword *)((int)local_1a8 + 0x2c);
+                pdVar19 = (dword *)((int)local_1a8 + 0x30);
+                pdVar22 = (dword *)((int)local_1a8 + 0x34);
+                uVar40 = uVar41;
               }
               else {
 LAB_00004b14:
                 bVar3 = true;
                 *(undefined4 *)(param_1 + 0x7c) = 0;
                 *(undefined4 *)(param_1 + 0x18) = 0;
-                pdVar44 = (dword *)0x0;
-                pdVar14 = &__mh_bundle_header.cputype;
-                pdVar26 = &__mh_bundle_header.cpusubtype;
-                pdVar18 = &__mh_bundle_header.filetype;
-                pdVar21 = &__mh_bundle_header.ncmds;
-                pdVar24 = &__mh_bundle_header.sizeofcmds;
-                pdVar10 = &__mh_bundle_header.flags;
-                uVar42 = uVar43;
+                pdVar42 = (dword *)0x0;
+                pdVar12 = &__mh_bundle_header.cputype;
+                pdVar24 = &__mh_bundle_header.cpusubtype;
+                pdVar16 = &__mh_bundle_header.filetype;
+                pdVar19 = &__mh_bundle_header.ncmds;
+                pdVar22 = &__mh_bundle_header.sizeofcmds;
+                pdVar8 = &__mh_bundle_header.flags;
+                uVar40 = uVar41;
               }
             }
             else {
-              pdVar14 = pdVar44 + 1;
-              pdVar26 = pdVar44 + 2;
-              pdVar18 = pdVar44 + 3;
-              pdVar21 = pdVar44 + 4;
-              pdVar24 = pdVar44 + 5;
-              pdVar10 = pdVar44 + 6;
+              pdVar12 = pdVar42 + 1;
+              pdVar24 = pdVar42 + 2;
+              pdVar16 = pdVar42 + 3;
+              pdVar19 = pdVar42 + 4;
+              pdVar22 = pdVar42 + 5;
+              pdVar8 = pdVar42 + 6;
               bVar3 = true;
             }
           }
-          else if (uVar42 < 0x22) {
+          else if (uVar40 < 0x22) {
             local_19c[0] = *(float *)(param_1 + 0x18);
             local_1a8 = 0.0;
             if (*(int *)(param_1 + 0x8c) == 0) {
-              *pdVar44 = 0x5c8;
+              *pdVar42 = 0x5c8;
               local_1a8 = 2.8026e-45;
-              pdVar44[1] = local_c8;
+              pdVar42[1] = local_c8;
               *(undefined4 *)(param_1 + 0x94) = 0;
             }
-            pdVar44[(int)local_1a8] = 0x1000000;
-            puVar7 = *(uint **)(param_1 + 0x7c);
-            *puVar7 = ((int)pdVar44 - (int)puVar7 >> 2) + (int)local_1a8 | *puVar7;
-            iVar8 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694
+            pdVar42[(int)local_1a8] = 0x1000000;
+            puVar5 = *(uint **)(param_1 + 0x7c);
+            *puVar5 = ((int)pdVar42 - (int)puVar5 >> 2) + (int)local_1a8 | *puVar5;
+            iVar6 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694
                                         ,local_bc,&local_1a8,1);
-            if (iVar8 != 0) goto LAB_00004b14;
+            if (iVar6 != 0) goto LAB_00004b14;
             bVar3 = true;
             *(undefined4 *)((int)local_19c[0] + 0x1c) = 0;
             *(float *)(param_1 + 0x18) = local_19c[0];
-            pdVar44 = (dword *)((int)local_19c[0] + 0x20);
-            pdVar10 = (dword *)((int)local_19c[0] + 0x38);
+            pdVar42 = (dword *)((int)local_19c[0] + 0x20);
+            pdVar8 = (dword *)((int)local_19c[0] + 0x38);
             *(int *)(param_1 + 0x7c) = (int)local_19c[0] + 0x1c;
-            pdVar14 = (dword *)((int)local_19c[0] + 0x24);
-            pdVar26 = (dword *)((int)local_19c[0] + 0x28);
-            pdVar18 = (dword *)((int)local_19c[0] + 0x2c);
-            pdVar21 = (dword *)((int)local_19c[0] + 0x30);
-            pdVar24 = (dword *)((int)local_19c[0] + 0x34);
-            uVar42 = uVar43;
+            pdVar12 = (dword *)((int)local_19c[0] + 0x24);
+            pdVar24 = (dword *)((int)local_19c[0] + 0x28);
+            pdVar16 = (dword *)((int)local_19c[0] + 0x2c);
+            pdVar19 = (dword *)((int)local_19c[0] + 0x30);
+            pdVar22 = (dword *)((int)local_19c[0] + 0x34);
+            uVar40 = uVar41;
           }
           else {
-            pdVar14 = pdVar44 + 1;
-            pdVar26 = pdVar44 + 2;
-            pdVar18 = pdVar44 + 3;
-            pdVar21 = pdVar44 + 4;
-            pdVar24 = pdVar44 + 5;
-            pdVar10 = pdVar44 + 6;
+            pdVar12 = pdVar42 + 1;
+            pdVar24 = pdVar42 + 2;
+            pdVar16 = pdVar42 + 3;
+            pdVar19 = pdVar42 + 4;
+            pdVar22 = pdVar42 + 5;
+            pdVar8 = pdVar42 + 6;
             bVar3 = false;
           }
-          puVar7 = *(uint **)(param_1 + 0x7c);
-          *puVar7 = (int)pdVar44 - (int)puVar7 >> 2 | *puVar7;
-          *(dword **)(param_1 + 0x7c) = pdVar44;
-          *pdVar44 = 0xe000000;
-          *pdVar14 = 0;
-          puVar7 = *(uint **)(param_1 + 0x7c);
-          *puVar7 = (int)pdVar26 - (int)puVar7 >> 2 | *puVar7;
-          *(dword **)(param_1 + 0x7c) = pdVar26;
-          *pdVar26 = 0x10000000;
-          *pdVar18 = *(dword *)*DAT_0000e6e4;
-          *pdVar21 = DAT_0000e6e4[7];
-          *pdVar24 = 6;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = (int)pdVar42 - (int)puVar5 >> 2 | *puVar5;
+          *(dword **)(param_1 + 0x7c) = pdVar42;
+          *pdVar42 = 0xe000000;
+          *pdVar12 = 0;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = (int)pdVar24 - (int)puVar5 >> 2 | *puVar5;
+          *(dword **)(param_1 + 0x7c) = pdVar24;
+          *pdVar24 = 0x10000000;
+          *pdVar16 = *(dword *)*DAT_0000e6e4;
+          *pdVar19 = DAT_0000e6e4[7];
+          *pdVar22 = 6;
           if (bVar3) {
-            iVar9 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar10,param_1 + 0x4c,local_d4,0,0,0,0);
+            iVar7 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar8,param_1 + 0x4c,local_d4,0,0,0,0);
             local_b8 = *(short *)(param_1 + 0x50);
-            iVar15 = iVar9 + 1;
-            iVar19 = iVar9 + 2;
-            iVar12 = iVar9 + 0x16;
-            iVar8 = iVar9 << 2;
-            iVar45 = iVar9 + 3;
-            iVar27 = iVar9 + 4;
-            iVar13 = iVar9 + 5;
-            iVar16 = iVar9 + 6;
-            iVar22 = iVar9 + 7;
-            iVar20 = iVar9 + 8;
-            iVar28 = iVar9 + 9;
-            iVar29 = iVar9 + 10;
-            iVar30 = iVar9 + 0xb;
-            iVar31 = iVar9 + 0xc;
-            iVar32 = iVar9 + 0xd;
-            iVar33 = iVar9 + 0xe;
-            iVar34 = iVar9 + 0xf;
-            iVar35 = iVar9 + 0x10;
-            iVar36 = iVar9 + 0x11;
-            iVar37 = iVar9 + 0x12;
-            iVar39 = iVar9 + 0x13;
-            iVar11 = iVar9 + 0x14;
-            iVar9 = iVar9 + 0x15;
+            iVar13 = iVar7 + 1;
+            iVar17 = iVar7 + 2;
+            iVar10 = iVar7 + 0x16;
+            iVar6 = iVar7 << 2;
+            iVar43 = iVar7 + 3;
+            iVar25 = iVar7 + 4;
+            iVar11 = iVar7 + 5;
+            iVar14 = iVar7 + 6;
+            iVar20 = iVar7 + 7;
+            iVar18 = iVar7 + 8;
+            iVar26 = iVar7 + 9;
+            iVar27 = iVar7 + 10;
+            iVar28 = iVar7 + 0xb;
+            iVar29 = iVar7 + 0xc;
+            iVar30 = iVar7 + 0xd;
+            iVar31 = iVar7 + 0xe;
+            iVar32 = iVar7 + 0xf;
+            iVar33 = iVar7 + 0x10;
+            iVar34 = iVar7 + 0x11;
+            iVar35 = iVar7 + 0x12;
+            iVar37 = iVar7 + 0x13;
+            iVar9 = iVar7 + 0x14;
+            iVar7 = iVar7 + 0x15;
             local_b6 = *(short *)(param_1 + 0x52);
           }
           else {
-            *pdVar10 = 0x1120;
+            *pdVar8 = 0x1120;
             local_b8 = *(short *)(param_1 + 0x50);
             local_b6 = *(short *)(param_1 + 0x52);
-            pdVar10[1] = (int)local_b8 - 1U & 0x7ff | (local_b6 + -1) * 0x800 & 0x3ff800U |
-                         0x80000000;
-            pdVar10[2] = 0x1130;
-            pdVar10[3] = local_c4;
-            pdVar10[4] = 0x1140;
-            pdVar10[5] = *(int *)(param_1 + 0x5c) - 1U & 0x3fff |
-                         ((int)local_b8 - 1U) * 0x10 & 0x8000 | (local_b6 + -1) * 0x20 & 0x10000U;
-            iVar8 = 0x18;
-            iVar45 = 9;
-            iVar15 = 7;
-            iVar27 = 10;
-            iVar13 = 0xb;
-            iVar19 = 8;
-            iVar16 = 0xc;
-            iVar22 = 0xd;
-            iVar20 = 0xe;
-            iVar28 = 0xf;
-            iVar29 = 0x10;
-            iVar30 = 0x11;
-            iVar31 = 0x12;
-            iVar32 = 0x13;
-            iVar33 = 0x14;
-            iVar34 = 0x15;
-            iVar35 = 0x16;
-            iVar36 = 0x17;
-            iVar37 = 0x18;
-            iVar39 = 0x19;
-            iVar11 = 0x1a;
-            iVar9 = 0x1b;
-            iVar12 = 0x1c;
+            pdVar8[1] = (int)local_b8 - 1U & 0x7ff | (local_b6 + -1) * 0x800 & 0x3ff800U |
+                        0x80000000;
+            pdVar8[2] = 0x1130;
+            pdVar8[3] = local_c4;
+            pdVar8[4] = 0x1140;
+            pdVar8[5] = *(int *)(param_1 + 0x5c) - 1U & 0x3fff |
+                        ((int)local_b8 - 1U) * 0x10 & 0x8000 | (local_b6 + -1) * 0x20 & 0x10000U;
+            iVar6 = 0x18;
+            iVar43 = 9;
+            iVar13 = 7;
+            iVar25 = 10;
+            iVar11 = 0xb;
+            iVar17 = 8;
+            iVar14 = 0xc;
+            iVar20 = 0xd;
+            iVar18 = 0xe;
+            iVar26 = 0xf;
+            iVar27 = 0x10;
+            iVar28 = 0x11;
+            iVar29 = 0x12;
+            iVar30 = 0x13;
+            iVar31 = 0x14;
+            iVar32 = 0x15;
+            iVar33 = 0x16;
+            iVar34 = 0x17;
+            iVar35 = 0x18;
+            iVar37 = 0x19;
+            iVar9 = 0x1a;
+            iVar7 = 0x1b;
+            iVar10 = 0x1c;
           }
-          *(undefined4 *)((int)pdVar10 + iVar8) = 0x10f8;
-          pdVar10[iVar15] = local_dc & 0x1fff | (local_e0 & 0x1fff) << 0xd;
-          pdVar10[iVar19] = 0x10f9;
-          pdVar10[iVar45] = local_e4 & 0x1fff | (local_e8 & 0x1fff) << 0xd;
-          pdVar10[iVar27] = 0xc00c3500;
-          pdVar10[iVar13] = 0x4003d;
+          *(undefined4 *)((int)pdVar8 + iVar6) = 0x10f8;
+          pdVar8[iVar13] = local_dc & 0x1fff | (local_e0 & 0x1fff) << 0xd;
+          pdVar8[iVar17] = 0x10f9;
+          pdVar8[iVar43] = local_e4 & 0x1fff | (local_e8 & 0x1fff) << 0xd;
+          pdVar8[iVar25] = 0xc00c3500;
+          pdVar8[iVar11] = 0x4003d;
           uStack_134 = (int)local_b8 ^ 0x80000000;
           uStack_124 = (int)local_b6 ^ 0x80000000;
           local_138 = 0x43300000;
           local_128 = 0x43300000;
-          dVar49 = dVar5 / ((double)CONCAT44(0x43300000,uStack_134) - dVar4);
-          dVar47 = dVar5 / ((double)CONCAT44(0x43300000,uStack_124) - dVar4);
-          local_1a4 = (float)(dVar52 * dVar49);
-          local_19c[0] = (float)(dVar53 * dVar47);
-          local_1a0 = (float)(dVar50 * dVar49);
-          local_1a8 = (float)(dVar51 * dVar47);
-          pdVar10[iVar16] = local_dc | local_e8 << 0x10;
-          fVar23 = *local_c0;
-          pdVar10[iVar22] = (dword)fVar23;
-          fVar17 = *local_bc;
-          pdVar10[iVar20] = (dword)fVar17;
-          pdVar10[iVar28] = local_dc | local_e0 << 0x10;
-          pdVar10[iVar29] = (dword)fVar23;
-          fVar23 = *local_b4;
-          pdVar10[iVar30] = (dword)fVar23;
-          pdVar10[iVar31] = local_e4 | local_e0 << 0x10;
-          fVar25 = *local_b0;
-          pdVar10[iVar32] = (dword)fVar25;
-          pdVar10[iVar33] = (dword)fVar23;
-          pdVar10[iVar34] = local_e4 | local_e8 << 0x10;
-          pdVar10[iVar35] = (dword)fVar25;
-          pdVar10[iVar36] = (dword)fVar17;
-          pdVar10[iVar37] = 0x1393;
-          pdVar10[iVar39] = 10;
-          pdVar10[iVar11] = 0x5c8;
-          pdVar10[iVar9] = 0x20000;
-          uVar42 = (uVar42 - 6) - iVar12;
-          iVar8 = local_ac[5];
-          uVar40 = local_ac[2] + *(int *)(param_1 + 0x60);
-          iVar9 = local_ac[3] + *(int *)(param_1 + 100);
-          uVar38 = uVar40 + local_ac[4];
-          pdVar10 = pdVar10 + iVar12;
-          if (uVar42 < 0x22) {
+          dVar47 = 1.0 / ((double)CONCAT44(0x43300000,uStack_134) - 4503601774854144.0);
+          dVar45 = 1.0 / ((double)CONCAT44(0x43300000,uStack_124) - 4503601774854144.0);
+          local_1a4 = (float)(dVar50 * dVar47);
+          local_19c[0] = (float)(dVar51 * dVar45);
+          local_1a0 = (float)(dVar48 * dVar47);
+          local_1a8 = (float)(dVar49 * dVar45);
+          pdVar8[iVar14] = local_dc | local_e8 << 0x10;
+          fVar21 = *local_c0;
+          pdVar8[iVar20] = (dword)fVar21;
+          fVar15 = *local_bc;
+          pdVar8[iVar18] = (dword)fVar15;
+          pdVar8[iVar26] = local_dc | local_e0 << 0x10;
+          pdVar8[iVar27] = (dword)fVar21;
+          fVar21 = *local_b4;
+          pdVar8[iVar28] = (dword)fVar21;
+          pdVar8[iVar29] = local_e4 | local_e0 << 0x10;
+          fVar23 = *local_b0;
+          pdVar8[iVar30] = (dword)fVar23;
+          pdVar8[iVar31] = (dword)fVar21;
+          pdVar8[iVar32] = local_e4 | local_e8 << 0x10;
+          pdVar8[iVar33] = (dword)fVar23;
+          pdVar8[iVar34] = (dword)fVar15;
+          pdVar8[iVar35] = 0x1393;
+          pdVar8[iVar37] = 10;
+          pdVar8[iVar9] = 0x5c8;
+          pdVar8[iVar7] = 0x20000;
+          uVar40 = (uVar40 - 6) - iVar10;
+          iVar6 = local_ac[5];
+          uVar38 = local_ac[2] + *(int *)(param_1 + 0x60);
+          iVar7 = local_ac[3] + *(int *)(param_1 + 100);
+          uVar36 = uVar38 + local_ac[4];
+          pdVar8 = pdVar8 + iVar10;
+          if (uVar40 < 0x22) {
             local_1a4 = *(float *)(param_1 + 0x18);
             local_1a0 = 0.0;
             if (*(int *)(param_1 + 0x8c) == 0) {
-              *pdVar10 = 0x5c8;
+              *pdVar8 = 0x5c8;
               local_1a0 = 2.8026e-45;
-              pdVar10[1] = local_c8;
+              pdVar8[1] = local_c8;
               *(undefined4 *)(param_1 + 0x94) = 0;
             }
-            pdVar10[(int)local_1a0] = 0x1000000;
-            puVar6 = PTR_0000e694;
-            puVar7 = *(uint **)(param_1 + 0x7c);
-            *puVar7 = ((int)pdVar10 - (int)puVar7 >> 2) + (int)local_1a0 | *puVar7;
-            iVar11 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar6,
-                                         local_b0,local_c0,1);
-            uVar42 = uVar43;
-            if (iVar11 == 0) {
+            pdVar8[(int)local_1a0] = 0x1000000;
+            puVar4 = PTR_0000e694;
+            puVar5 = *(uint **)(param_1 + 0x7c);
+            *puVar5 = ((int)pdVar8 - (int)puVar5 >> 2) + (int)local_1a0 | *puVar5;
+            iVar9 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar4,
+                                        local_b0,local_c0,1);
+            uVar40 = uVar41;
+            if (iVar9 == 0) {
               bVar3 = true;
               *(undefined4 *)((int)local_1a4 + 0x1c) = 0;
               *(float *)(param_1 + 0x18) = local_1a4;
-              pdVar10 = (dword *)((int)local_1a4 + 0x20);
-              pdVar44 = (dword *)((int)local_1a4 + 0x38);
+              pdVar8 = (dword *)((int)local_1a4 + 0x20);
+              pdVar42 = (dword *)((int)local_1a4 + 0x38);
               *(int *)(param_1 + 0x7c) = (int)local_1a4 + 0x1c;
-              pdVar14 = (dword *)((int)local_1a4 + 0x24);
-              pdVar18 = (dword *)((int)local_1a4 + 0x28);
-              pdVar21 = (dword *)((int)local_1a4 + 0x2c);
-              pdVar26 = (dword *)((int)local_1a4 + 0x30);
-              pdVar24 = (dword *)((int)local_1a4 + 0x34);
+              pdVar12 = (dword *)((int)local_1a4 + 0x24);
+              pdVar16 = (dword *)((int)local_1a4 + 0x28);
+              pdVar19 = (dword *)((int)local_1a4 + 0x2c);
+              pdVar24 = (dword *)((int)local_1a4 + 0x30);
+              pdVar22 = (dword *)((int)local_1a4 + 0x34);
             }
             else {
               bVar3 = true;
               *(undefined4 *)(param_1 + 0x7c) = 0;
               *(undefined4 *)(param_1 + 0x18) = 0;
-              pdVar10 = (dword *)0x0;
-              pdVar14 = &__mh_bundle_header.cputype;
-              pdVar18 = &__mh_bundle_header.cpusubtype;
-              pdVar21 = &__mh_bundle_header.filetype;
-              pdVar26 = &__mh_bundle_header.ncmds;
-              pdVar24 = &__mh_bundle_header.sizeofcmds;
-              pdVar44 = &__mh_bundle_header.flags;
+              pdVar8 = (dword *)0x0;
+              pdVar12 = &__mh_bundle_header.cputype;
+              pdVar16 = &__mh_bundle_header.cpusubtype;
+              pdVar19 = &__mh_bundle_header.filetype;
+              pdVar24 = &__mh_bundle_header.ncmds;
+              pdVar22 = &__mh_bundle_header.sizeofcmds;
+              pdVar42 = &__mh_bundle_header.flags;
             }
           }
           else {
-            pdVar14 = pdVar10 + 1;
-            pdVar18 = pdVar10 + 2;
-            pdVar21 = pdVar10 + 3;
-            pdVar26 = pdVar10 + 4;
-            pdVar24 = pdVar10 + 5;
-            pdVar44 = pdVar10 + 6;
+            pdVar12 = pdVar8 + 1;
+            pdVar16 = pdVar8 + 2;
+            pdVar19 = pdVar8 + 3;
+            pdVar24 = pdVar8 + 4;
+            pdVar22 = pdVar8 + 5;
+            pdVar42 = pdVar8 + 6;
             bVar3 = false;
           }
-          puVar7 = *(uint **)(param_1 + 0x7c);
-          *puVar7 = (int)pdVar10 - (int)puVar7 >> 2 | *puVar7;
-          *(dword **)(param_1 + 0x7c) = pdVar10;
-          *pdVar10 = 0x12000000;
-          *pdVar14 = 0;
-          *pdVar18 = 0;
-          *pdVar21 = 0;
-          puVar7 = *(uint **)(param_1 + 0x7c);
-          *puVar7 = (int)pdVar26 - (int)puVar7 >> 2 | *puVar7;
-          *(dword **)(param_1 + 0x7c) = pdVar26;
-          *pdVar26 = 0x4000000;
-          *pdVar24 = *(dword *)*DAT_0000e6e4;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = (int)pdVar8 - (int)puVar5 >> 2 | *puVar5;
+          *(dword **)(param_1 + 0x7c) = pdVar8;
+          *pdVar8 = 0x12000000;
+          *pdVar12 = 0;
+          *pdVar16 = 0;
+          *pdVar19 = 0;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = (int)pdVar24 - (int)puVar5 >> 2 | *puVar5;
+          *(dword **)(param_1 + 0x7c) = pdVar24;
+          *pdVar24 = 0x4000000;
+          *pdVar22 = *(dword *)*DAT_0000e6e4;
           if (bVar3) {
-            iVar13 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar44,local_cc,local_d8,0,0,0,0);
-            local_ec = iVar13 + 1;
-            iVar28 = iVar13 + 9;
-            local_f4 = iVar13 + 3;
-            local_f8 = iVar13 + 4;
-            iVar12 = iVar13 + 10;
-            local_f0 = iVar13 + 2;
-            iVar16 = iVar13 + 0x16;
-            iVar11 = iVar13 << 2;
-            iVar19 = iVar13 + 5;
-            iVar27 = iVar13 + 6;
-            iVar20 = iVar13 + 7;
-            iVar22 = iVar13 + 8;
-            iVar30 = iVar13 + 0xb;
-            iVar31 = iVar13 + 0xc;
-            iVar32 = iVar13 + 0xd;
-            iVar33 = iVar13 + 0xe;
-            iVar34 = iVar13 + 0xf;
-            iVar35 = iVar13 + 0x10;
-            iVar36 = iVar13 + 0x11;
-            iVar37 = iVar13 + 0x12;
-            iVar29 = iVar13 + 0x13;
-            iVar15 = iVar13 + 0x14;
-            iVar13 = iVar13 + 0x15;
+            iVar11 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar42,local_cc,local_d8,0,0,0,0);
+            local_ec = iVar11 + 1;
+            iVar26 = iVar11 + 9;
+            local_f4 = iVar11 + 3;
+            local_f8 = iVar11 + 4;
+            iVar10 = iVar11 + 10;
+            local_f0 = iVar11 + 2;
+            iVar14 = iVar11 + 0x16;
+            iVar9 = iVar11 << 2;
+            iVar17 = iVar11 + 5;
+            iVar25 = iVar11 + 6;
+            iVar18 = iVar11 + 7;
+            iVar20 = iVar11 + 8;
+            iVar28 = iVar11 + 0xb;
+            iVar29 = iVar11 + 0xc;
+            iVar30 = iVar11 + 0xd;
+            iVar31 = iVar11 + 0xe;
+            iVar32 = iVar11 + 0xf;
+            iVar33 = iVar11 + 0x10;
+            iVar34 = iVar11 + 0x11;
+            iVar35 = iVar11 + 0x12;
+            iVar27 = iVar11 + 0x13;
+            iVar13 = iVar11 + 0x14;
+            iVar11 = iVar11 + 0x15;
           }
           else {
-            *pdVar44 = 0x1120;
+            *pdVar42 = 0x1120;
             sVar1 = *(short *)(local_cc + 1);
-            iVar11 = *(short *)((int)local_cc + 6) + -1;
-            pdVar44[1] = (int)sVar1 - 1U & 0x7ff | iVar11 * 0x800 & 0x3ff800U | 0x80000000;
-            pdVar44[2] = 0x1130;
-            pdVar44[3] = local_d8 & 0x1f | 0x53000;
-            pdVar44[4] = 0x1140;
-            pdVar44[5] = local_cc[4] - 1 & 0x3fff | ((int)sVar1 - 1U) * 0x10 & 0x8000 |
-                         iVar11 * 0x20 & 0x10000U;
+            iVar9 = *(short *)((int)local_cc + 6) + -1;
+            pdVar42[1] = (int)sVar1 - 1U & 0x7ff | iVar9 * 0x800 & 0x3ff800U | 0x80000000;
+            pdVar42[2] = 0x1130;
+            pdVar42[3] = local_d8 & 0x1f | 0x53000;
+            pdVar42[4] = 0x1140;
+            pdVar42[5] = local_cc[4] - 1 & 0x3fff | ((int)sVar1 - 1U) * 0x10 & 0x8000 |
+                         iVar9 * 0x20 & 0x10000U;
             local_f8 = 10;
             local_f0 = 8;
-            iVar11 = 0x18;
+            iVar9 = 0x18;
             local_f4 = 9;
             local_ec = 7;
-            iVar28 = 0xf;
-            iVar19 = 0xb;
-            iVar27 = 0xc;
-            iVar20 = 0xd;
-            iVar12 = 0x10;
-            iVar22 = 0xe;
-            iVar30 = 0x11;
-            iVar31 = 0x12;
-            iVar32 = 0x13;
-            iVar33 = 0x14;
-            iVar34 = 0x15;
-            iVar35 = 0x16;
-            iVar36 = 0x17;
-            iVar37 = 0x18;
-            iVar29 = 0x19;
-            iVar15 = 0x1a;
-            iVar13 = 0x1b;
-            iVar16 = 0x1c;
+            iVar26 = 0xf;
+            iVar17 = 0xb;
+            iVar25 = 0xc;
+            iVar18 = 0xd;
+            iVar10 = 0x10;
+            iVar20 = 0xe;
+            iVar28 = 0x11;
+            iVar29 = 0x12;
+            iVar30 = 0x13;
+            iVar31 = 0x14;
+            iVar32 = 0x15;
+            iVar33 = 0x16;
+            iVar34 = 0x17;
+            iVar35 = 0x18;
+            iVar27 = 0x19;
+            iVar13 = 0x1a;
+            iVar11 = 0x1b;
+            iVar14 = 0x1c;
           }
-          *(undefined4 *)((int)pdVar44 + iVar11) = 0x10f8;
-          pdVar44[local_ec] = uVar40 & 0x1fff | iVar9 * 0x2000 & 0x3ffe000U;
-          pdVar44[local_f0] = 0x10f9;
-          pdVar44[local_f4] = uVar38 & 0x1fff | (iVar9 + iVar8) * 0x2000 & 0x3ffe000U;
-          pdVar44[local_f8] = 0xc00c3500;
-          pdVar44[iVar19] = 0x4003d;
-          uVar2 = (iVar9 + iVar8) * 0x10000;
+          *(undefined4 *)((int)pdVar42 + iVar9) = 0x10f8;
+          pdVar42[local_ec] = uVar38 & 0x1fff | iVar7 * 0x2000 & 0x3ffe000U;
+          pdVar42[local_f0] = 0x10f9;
+          pdVar42[local_f4] = uVar36 & 0x1fff | (iVar7 + iVar6) * 0x2000 & 0x3ffe000U;
+          pdVar42[local_f8] = 0xc00c3500;
+          pdVar42[iVar17] = 0x4003d;
+          uVar2 = (iVar7 + iVar6) * 0x10000;
           local_118 = 0x43300000;
           uStack_114 = (int)*(short *)(local_cc + 1) ^ 0x80000000;
-          local_1a8 = (float)(dVar50 * (dVar5 / ((double)CONCAT44(0x43300000,uStack_114) - dVar4)));
+          local_1a8 = (float)(dVar48 * (1.0 / ((double)CONCAT44(0x43300000,uStack_114) -
+                                              4503601774854144.0)));
           local_110 = 0x43300000;
           uStack_10c = (int)*(short *)(local_cc + 1) ^ 0x80000000;
-          local_19c[0] = (float)(dVar52 * (dVar5 / ((double)CONCAT44(0x43300000,uStack_10c) - dVar4)
-                                          ));
+          local_19c[0] = (float)(dVar50 * (1.0 / ((double)CONCAT44(0x43300000,uStack_10c) -
+                                                 4503601774854144.0)));
           local_108 = 0x43300000;
           uStack_104 = (int)*(short *)((int)local_cc + 6) ^ 0x80000000;
-          local_1a0 = (float)(dVar51 * (dVar5 / ((double)CONCAT44(0x43300000,uStack_104) - dVar4)));
+          local_1a0 = (float)(dVar49 * (1.0 / ((double)CONCAT44(0x43300000,uStack_104) -
+                                              4503601774854144.0)));
           local_100 = 0x43300000;
           uStack_fc = (int)*(short *)((int)local_cc + 6) ^ 0x80000000;
-          local_1a4 = (float)(dVar53 * (dVar5 / ((double)CONCAT44(0x43300000,uStack_fc) - dVar4)));
-          pdVar44[iVar27] = uVar40 | uVar2;
-          fVar23 = *local_b4;
-          pdVar44[iVar20] = (dword)fVar23;
-          fVar17 = *local_b0;
-          pdVar44[iVar22] = (dword)fVar17;
-          pdVar44[iVar28] = uVar40 | iVar9 * 0x10000;
-          pdVar44[iVar12] = (dword)fVar23;
-          fVar23 = *local_c0;
-          pdVar44[iVar30] = (dword)fVar23;
-          pdVar44[iVar31] = uVar38 | iVar9 * 0x10000;
-          fVar25 = *local_bc;
-          pdVar44[iVar32] = (dword)fVar25;
-          pdVar44[iVar33] = (dword)fVar23;
-          pdVar44[iVar34] = uVar38 | uVar2;
-          pdVar44[iVar35] = (dword)fVar25;
-          pdVar44[iVar36] = (dword)fVar17;
-          pdVar44[iVar37] = 0x1393;
-          pdVar44[iVar29] = 10;
-          pdVar44[iVar15] = 0x5c8;
-          pdVar44[iVar13] = 0x20000;
-          uVar42 = (uVar42 - 6) - iVar16;
-          pdVar44 = pdVar44 + iVar16;
+          local_1a4 = (float)(dVar51 * (1.0 / ((double)CONCAT44(0x43300000,uStack_fc) -
+                                              4503601774854144.0)));
+          pdVar42[iVar25] = uVar38 | uVar2;
+          fVar21 = *local_b4;
+          pdVar42[iVar18] = (dword)fVar21;
+          fVar15 = *local_b0;
+          pdVar42[iVar20] = (dword)fVar15;
+          pdVar42[iVar26] = uVar38 | iVar7 * 0x10000;
+          pdVar42[iVar10] = (dword)fVar21;
+          fVar21 = *local_c0;
+          pdVar42[iVar28] = (dword)fVar21;
+          pdVar42[iVar29] = uVar36 | iVar7 * 0x10000;
+          fVar23 = *local_bc;
+          pdVar42[iVar30] = (dword)fVar23;
+          pdVar42[iVar31] = (dword)fVar21;
+          pdVar42[iVar32] = uVar36 | uVar2;
+          pdVar42[iVar33] = (dword)fVar23;
+          pdVar42[iVar34] = (dword)fVar15;
+          pdVar42[iVar35] = 0x1393;
+          pdVar42[iVar27] = 10;
+          pdVar42[iVar13] = 0x5c8;
+          pdVar42[iVar11] = 0x20000;
+          uVar40 = (uVar40 - 6) - iVar14;
+          pdVar42 = pdVar42 + iVar14;
           local_d0 = local_d0 + 1;
           local_ac = local_ac + 6;
           bVar3 = false;
-        } while (iVar41 != local_d0);
+        } while (iVar39 != local_d0);
       }
-      *(dword **)(param_1 + 0x80) = pdVar44;
+      *(dword **)(param_1 + 0x80) = pdVar42;
       return 0;
     }
   }
@@ -1399,76 +1400,68 @@ int FUN_000055a4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,
 {
   bool bVar1;
   double dVar2;
-  double dVar3;
+  float fVar3;
   float fVar4;
   short sVar5;
   uint uVar6;
   float fVar7;
-  float fVar8;
-  bool bVar9;
-  undefined *puVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  uint *puVar13;
+  bool bVar8;
+  undefined *puVar9;
+  int iVar10;
+  undefined4 *puVar11;
+  uint *puVar12;
+  int iVar13;
   int iVar14;
   int iVar15;
-  int iVar16;
-  float fVar17;
-  int iVar18;
-  float fVar19;
-  dword *pdVar20;
-  int iVar21;
-  dword *pdVar22;
-  int iVar23;
-  dword dVar24;
-  int iVar25;
-  float fVar26;
-  dword *pdVar27;
-  float fVar28;
-  dword *pdVar29;
-  dword dVar30;
+  float fVar16;
+  int iVar17;
+  float fVar18;
+  dword *pdVar19;
+  int iVar20;
+  dword *pdVar21;
+  int iVar22;
+  dword dVar23;
+  int iVar24;
+  float fVar25;
+  dword *pdVar26;
+  float fVar27;
+  dword *pdVar28;
+  dword dVar29;
+  float fVar30;
   float fVar31;
-  float fVar32;
-  dword *pdVar33;
+  dword *pdVar32;
+  int iVar33;
   int iVar34;
   int iVar35;
   int iVar36;
   int iVar37;
-  int iVar38;
-  uint uVar39;
+  uint uVar38;
+  int iVar39;
   int iVar40;
   int iVar41;
   int iVar42;
   int iVar43;
-  int iVar44;
-  uint uVar45;
+  uint uVar44;
+  int iVar45;
   int iVar46;
-  int iVar47;
-  uint uVar48;
+  uint uVar47;
+  int iVar48;
   int iVar49;
-  int iVar50;
-  uint uVar51;
+  uint uVar50;
+  dword *pdVar51;
   dword *pdVar52;
-  dword *pdVar53;
-  int *piVar54;
-  uint uVar55;
+  int *piVar53;
+  uint uVar54;
+  int iVar55;
   int iVar56;
   int iVar57;
-  int iVar58;
+  double dVar58;
   double dVar59;
   double dVar60;
   double dVar61;
   double dVar62;
-  double extraout_f1;
-  double extraout_f1_00;
-  double extraout_f1_01;
-  double extraout_f1_02;
-  double extraout_f1_03;
-  double extraout_f1_04;
   double dVar63;
   double dVar64;
-  double dVar65;
-  double dVar66;
   undefined4 local_368;
   float local_364;
   float local_360;
@@ -1622,85 +1615,84 @@ int FUN_000055a4(int param_1,undefined4 param_2,undefined4 param_3,uint param_4,
   float *local_ac;
   int *local_a8;
   
-  uVar55 = param_4 & 0x7ffff000;
-  pdVar53 = *(dword **)(param_1 + 0x80);
-  iVar56 = *(int *)(param_1 + 0x18);
-  piVar54 = *(int **)(param_5 + 0x60);
-  iVar11 = *(int *)(iVar56 + 0x10);
-  iVar38 = *piVar54;
-  uVar39 = iVar11 - 7;
-  if (pdVar53 == (dword *)0x0) {
+  uVar54 = param_4 & 0x7ffff000;
+  pdVar52 = *(dword **)(param_1 + 0x80);
+  iVar55 = *(int *)(param_1 + 0x18);
+  piVar53 = *(int **)(param_5 + 0x60);
+  iVar10 = *(int *)(iVar55 + 0x10);
+  iVar37 = *piVar53;
+  uVar38 = iVar10 - 7;
+  if (pdVar52 == (dword *)0x0) {
 LAB_000081e0:
-    iVar11 = -0x1ffffd42;
+    iVar10 = -0x1ffffd42;
   }
   else {
-    bVar1 = uVar55 == 0x1000;
+    bVar1 = uVar54 == 0x1000;
     if (bVar1) {
       local_fc = *(dword *)(param_1 + 0x84);
       local_d8 = (dword *)(param_1 + 0x1c);
       local_ec = *(int *)(param_1 + 0x30);
-      iVar23 = 0x9000000;
+      iVar22 = 0x9000000;
       local_f0 = *(int *)(param_1 + 0x34);
 LAB_000056ac:
       local_348 = *(short *)(local_d8 + 1);
       if ((0x1000 < local_348) || (0x1000 < *(short *)((int)local_d8 + 6))) {
         return -0x1ffffd39;
       }
-      local_140 = iVar23 + 0x1000000;
+      local_140 = iVar22 + 0x1000000;
     }
     else {
-      if (uVar55 < 0x1001) {
-        if (uVar55 != 0) {
+      if (uVar54 < 0x1001) {
+        if (uVar54 != 0) {
           return -0x1ffffd44;
         }
         local_d8 = (dword *)(param_1 + 0x4c);
         local_ec = 0;
         local_f0 = 0;
         local_fc = 0;
-        iVar23 = 0xd000000;
+        iVar22 = 0xd000000;
         goto LAB_000056ac;
       }
-      if (uVar55 == 0x3000) {
-        puVar12 = *(undefined4 **)(param_6 + 0x28);
+      if (uVar54 == 0x3000) {
+        puVar11 = *(undefined4 **)(param_6 + 0x28);
         local_ec = 0;
         local_f0 = 0;
-        local_d8 = puVar12 + 3;
+        local_d8 = puVar11 + 3;
         local_140 = 0x8000000;
-        local_fc = *(dword *)*puVar12;
+        local_fc = *(dword *)*puVar11;
         *(int *)(param_1 + 0x94) = *(int *)(param_1 + 0x94) + 1;
-        local_348 = *(short *)(puVar12 + 4);
+        local_348 = *(short *)(puVar11 + 4);
       }
       else {
-        if (uVar55 != 0x7000) {
+        if (uVar54 != 0x7000) {
           return -0x1ffffd44;
         }
         local_354[1] = 0x800;
         local_368 = 0x30;
         local_354[0] = param_6;
         local_fc = param_6;
-        iVar23 = _io_connect_method_scalarI_structureO
+        iVar22 = _io_connect_method_scalarI_structureO
                            (*(undefined4 *)(param_1 + 0xc),2,local_354,2,local_354 + 2,&local_368);
-        if (iVar23 != 0) {
-          return iVar23;
+        if (iVar22 != 0) {
+          return iVar22;
         }
         local_ec = 0;
         local_f0 = 0;
         local_140 = 0xc000000;
-        fparam_1 = extraout_f1;
         local_d8 = local_354 + 2;
       }
     }
-    puVar10 = PTR_0000e694;
-    local_d4 = piVar54 + 3;
-    if (iVar38 == 0) {
-      local_d4 = piVar54 + 1;
-      iVar38 = 1;
+    puVar9 = PTR_0000e694;
+    local_d4 = piVar53 + 3;
+    if (iVar37 == 0) {
+      local_d4 = piVar53 + 1;
+      iVar37 = 1;
     }
-    local_e8 = *(int *)(param_5 + 0x5c) - (int)*(short *)((int)piVar54 + 6);
+    local_e8 = *(int *)(param_5 + 0x5c) - (int)*(short *)((int)piVar53 + 6);
     dStack_304 = local_d8[2];
-    dVar30 = local_d8[4];
-    local_e4 = *(int *)(param_5 + 0x58) - (int)*(short *)(piVar54 + 1);
-    dVar24 = local_d8[7];
+    dVar29 = local_d8[4];
+    local_e4 = *(int *)(param_5 + 0x58) - (int)*(short *)(piVar53 + 1);
+    dVar23 = local_d8[7];
     local_f4 = local_d8[9];
     dStack_2fc = local_d8[3];
     if ((dStack_304 != (int)local_348) ||
@@ -1719,45 +1711,44 @@ LAB_000056ac:
     local_310 = 0x43300000;
     local_308 = 0x43300000;
     uStack_30c = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
-    fVar19 = (float)((double)CONCAT44(0x43300000,uStack_314) - DOUBLE_0000cfe0) /
-             (float)((double)CONCAT44(0x43300000,dStack_304) - DOUBLE_0000cfd8);
-    fVar26 = (float)((double)CONCAT44(0x43300000,uStack_30c) - DOUBLE_0000cfe0) /
-             (float)((double)CONCAT44(0x43300000,dStack_2fc) - DOUBLE_0000cfd8);
-    uVar48 = uVar39 - ((int)pdVar53 - (iVar56 + 0x20) >> 2);
-    while (((uint)pdVar53 & 0x1f) != 0) {
-      if (uVar48 == 0) {
+    fVar18 = (float)((double)CONCAT44(0x43300000,uStack_314) - 4503601774854144.0) /
+             (float)((double)CONCAT44(0x43300000,dStack_304) - 4503599627370496.0);
+    fVar25 = (float)((double)CONCAT44(0x43300000,uStack_30c) - 4503601774854144.0) /
+             (float)((double)CONCAT44(0x43300000,dStack_2fc) - 4503599627370496.0);
+    uVar47 = uVar38 - ((int)pdVar52 - (iVar55 + 0x20) >> 2);
+    while (((uint)pdVar52 & 0x1f) != 0) {
+      if (uVar47 == 0) {
         local_364 = *(float *)(param_1 + 0x18);
         local_360 = 0.0;
         if (*(int *)(param_1 + 0x8c) == 0) {
-          *pdVar53 = 0x5c8;
+          *pdVar52 = 0x5c8;
           local_360 = 2.8026e-45;
-          pdVar53[1] = 0xc000;
+          pdVar52[1] = 0xc000;
           *(undefined4 *)(param_1 + 0x94) = 0;
         }
-        pdVar53[(int)local_360] = 0x1000000;
-        puVar13 = *(uint **)(param_1 + 0x7c);
-        *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_360 | *puVar13;
-        iVar56 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
-                                     *(undefined4 *)puVar10,&local_364,&local_360,1);
-        fparam_1 = extraout_f1_00;
-        if (iVar56 == 0) {
+        pdVar52[(int)local_360] = 0x1000000;
+        puVar12 = *(uint **)(param_1 + 0x7c);
+        *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_360 | *puVar12;
+        iVar55 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar9,
+                                     &local_364,&local_360,1);
+        if (iVar55 == 0) {
           *(undefined4 *)((int)local_364 + 0x1c) = 0;
           *(float *)(param_1 + 0x18) = local_364;
-          pdVar53 = (dword *)((int)local_364 + 0x20);
+          pdVar52 = (dword *)((int)local_364 + 0x20);
           *(int *)(param_1 + 0x7c) = (int)local_364 + 0x1c;
-          uVar48 = uVar39;
+          uVar47 = uVar38;
         }
         else {
-          pdVar53 = (dword *)0x0;
+          pdVar52 = (dword *)0x0;
           *(undefined4 *)(param_1 + 0x7c) = 0;
           *(undefined4 *)(param_1 + 0x18) = 0;
-          uVar48 = uVar39;
+          uVar47 = uVar38;
         }
       }
       else {
-        *pdVar53 = 0x80000000;
-        pdVar53 = pdVar53 + 1;
-        uVar48 = uVar48 - 1;
+        *pdVar52 = 0x80000000;
+        pdVar52 = pdVar52 + 1;
+        uVar47 = uVar47 - 1;
       }
     }
     if ((local_144 == 0) && (local_f4 == *(dword *)(param_1 + 0x70))) {
@@ -1768,12 +1759,10 @@ LAB_000056ac:
     if (local_d8[10] != 1) {
       local_100 = (uint)(local_d8[10] == 2) << 1;
     }
-    iVar56 = (int)*(short *)(local_d8 + 1);
-    if (((bVar1) || (uVar55 == 0)) && (*(int *)(param_1 + 0x8c) == 0)) {
-      iVar11 = ((int (*)())_createOffscreenBuffer)(param_1,local_d8,0);
-      dVar62 = DOUBLE_0000cfe8;
-      dVar61 = DOUBLE_0000cfe0;
-      if (iVar11 == 0) goto LAB_000081e0;
+    iVar55 = (int)*(short *)(local_d8 + 1);
+    if (((bVar1) || (uVar54 == 0)) && (*(int *)(param_1 + 0x8c) == 0)) {
+      iVar10 = ((int (*)())_createOffscreenBuffer)(param_1,local_d8,0);
+      if (iVar10 == 0) goto LAB_000081e0;
       local_dc = DAT_0000e6e4 + 3;
       local_f8 = DAT_0000e6e4[0xc];
       if (local_f8 == 3) {
@@ -1782,7 +1771,7 @@ LAB_000056ac:
       else if (local_f8 == 6) {
         local_f8 = 0xc;
       }
-      if (iVar38 != 0) {
+      if (iVar37 != 0) {
         local_ac = &local_358;
         local_b8 = &local_364;
         local_b4 = &local_360;
@@ -1790,764 +1779,764 @@ LAB_000056ac:
         local_a8 = local_d4;
         local_b0 = &local_35c;
         local_e0 = 0;
-        bVar9 = true;
+        bVar8 = true;
         local_c4 = local_f4 & 0x1f | 0x53000;
         do {
           local_2f8 = 0x43300000;
           uStack_2f4 = local_ec + *(short *)local_a8 ^ 0x80000000;
           local_2f0 = 0x43300000;
           uStack_2ec = local_f0 + (short)*local_a8 ^ 0x80000000;
-          dVar59 = (double)CONCAT44(0x43300000,uStack_2f4) - dVar61;
+          dVar58 = (double)CONCAT44(0x43300000,uStack_2f4) - 4503601774854144.0;
           local_2e8 = 0x43300000;
           uStack_2e4 = (int)*(short *)(local_a8 + 1) ^ 0x80000000;
-          dVar63 = (double)(float)dVar59;
+          dVar61 = (double)(float)dVar58;
           local_2e0 = 0x43300000;
-          dVar60 = (double)CONCAT44(0x43300000,uStack_2ec) - dVar61;
+          dVar59 = (double)CONCAT44(0x43300000,uStack_2ec) - 4503601774854144.0;
           uStack_2dc = (int)*(short *)((int)local_a8 + 6) ^ 0x80000000;
-          dVar64 = (double)(float)dVar60;
-          dVar2 = dVar63 + (double)(float)((double)CONCAT44(0x43300000,uStack_2e4) - dVar61);
-          dVar65 = (double)(float)dVar2;
-          dVar3 = dVar64 + (double)(float)((double)CONCAT44(0x43300000,uStack_2dc) - dVar61);
-          dVar66 = (double)(float)dVar3;
-          if (DOUBLE_0000cff0 <= dVar63) {
-            local_2d0 = (longlong)(int)(dVar63 - DOUBLE_0000cff0);
-            local_104 = (int)(dVar63 - DOUBLE_0000cff0) + 0x80000000;
+          dVar62 = (double)(float)dVar59;
+          dVar60 = dVar61 + (double)(float)((double)CONCAT44(0x43300000,uStack_2e4) -
+                                           4503601774854144.0);
+          dVar63 = (double)(float)dVar60;
+          dVar2 = dVar62 + (double)(float)((double)CONCAT44(0x43300000,uStack_2dc) -
+                                          4503601774854144.0);
+          dVar64 = (double)(float)dVar2;
+          if (2147483648.0 <= dVar61) {
+            local_2d0 = (longlong)(int)(dVar61 - 2147483648.0);
+            local_104 = (int)(dVar61 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_104 = (uint)dVar59;
+            local_104 = (uint)dVar58;
             local_2d8 = (longlong)(int)local_104;
           }
-          if (DOUBLE_0000cff0 <= dVar64) {
-            local_2c0 = (longlong)(int)(dVar64 - DOUBLE_0000cff0);
-            local_108 = (int)(dVar64 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar62) {
+            local_2c0 = (longlong)(int)(dVar62 - 2147483648.0);
+            local_108 = (int)(dVar62 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_108 = (uint)dVar60;
+            local_108 = (uint)dVar59;
             local_2c8 = (longlong)(int)local_108;
           }
-          if (DOUBLE_0000cff0 <= dVar65) {
-            local_2b0 = (longlong)(int)(dVar65 - DOUBLE_0000cff0);
-            local_10c = (int)(dVar65 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar63) {
+            local_2b0 = (longlong)(int)(dVar63 - 2147483648.0);
+            local_10c = (int)(dVar63 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_10c = (uint)dVar2;
+            local_10c = (uint)dVar60;
             local_2b8 = (longlong)(int)local_10c;
           }
-          if (DOUBLE_0000cff0 <= dVar66) {
-            local_2a0 = (longlong)(int)(dVar66 - DOUBLE_0000cff0);
-            local_110 = (int)(dVar66 - DOUBLE_0000cff0) + 0x80000000;
+          if (2147483648.0 <= dVar64) {
+            local_2a0 = (longlong)(int)(dVar64 - 2147483648.0);
+            local_110 = (int)(dVar64 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_110 = (uint)dVar3;
+            local_110 = (uint)dVar2;
             local_2a8 = (longlong)(int)local_110;
           }
-          if (bVar9) {
-            if (uVar48 < 0x8a) {
+          if (bVar8) {
+            if (uVar47 < 0x8a) {
               local_360 = *(float *)(param_1 + 0x18);
               local_364 = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar53 = 0x5c8;
+                *pdVar52 = 0x5c8;
                 local_364 = 2.8026e-45;
-                pdVar53[1] = local_c8;
+                pdVar52[1] = local_c8;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar53[(int)local_364] = 0x1000000;
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_364 | *puVar13;
-              iVar11 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+              pdVar52[(int)local_364] = 0x1000000;
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_364 | *puVar12;
+              iVar10 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                            *(undefined4 *)PTR_0000e694,local_b4,local_b8,1);
-              if (iVar11 == 0) {
+              if (iVar10 == 0) {
                 *(undefined4 *)((int)local_360 + 0x1c) = 0;
-                pdVar53 = (dword *)((int)local_360 + 0x20);
+                pdVar52 = (dword *)((int)local_360 + 0x20);
                 *(float *)(param_1 + 0x18) = local_360;
-                pdVar27 = (dword *)((int)local_360 + 0x24);
+                pdVar26 = (dword *)((int)local_360 + 0x24);
                 *(int *)(param_1 + 0x7c) = (int)local_360 + 0x1c;
               }
               else {
 LAB_00005e40:
-                pdVar53 = (dword *)0x0;
+                pdVar52 = (dword *)0x0;
                 *(undefined4 *)(param_1 + 0x7c) = 0;
                 *(undefined4 *)(param_1 + 0x18) = 0;
-                pdVar27 = &__mh_bundle_header.cputype;
+                pdVar26 = &__mh_bundle_header.cputype;
               }
 LAB_00005e7c:
-              bVar9 = true;
-              uVar48 = uVar39;
+              bVar8 = true;
+              uVar47 = uVar38;
             }
             else {
-              pdVar27 = pdVar53 + 1;
-              bVar9 = true;
+              pdVar26 = pdVar52 + 1;
+              bVar8 = true;
             }
           }
           else {
-            if (uVar48 < 0x22) {
+            if (uVar47 < 0x22) {
               local_364 = *(float *)(param_1 + 0x18);
               local_360 = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar53 = 0x5c8;
+                *pdVar52 = 0x5c8;
                 local_360 = 2.8026e-45;
-                pdVar53[1] = local_c8;
+                pdVar52[1] = local_c8;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar53[(int)local_360] = 0x1000000;
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_360 | *puVar13;
-              iVar11 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+              pdVar52[(int)local_360] = 0x1000000;
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_360 | *puVar12;
+              iVar10 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                            *(undefined4 *)PTR_0000e694,local_b8,local_b4,1);
-              if (iVar11 != 0) goto LAB_00005e40;
+              if (iVar10 != 0) goto LAB_00005e40;
               *(undefined4 *)((int)local_364 + 0x1c) = 0;
               *(float *)(param_1 + 0x18) = local_364;
-              pdVar53 = (dword *)((int)local_364 + 0x20);
-              pdVar27 = (dword *)((int)local_364 + 0x24);
+              pdVar52 = (dword *)((int)local_364 + 0x20);
+              pdVar26 = (dword *)((int)local_364 + 0x24);
               *(int *)(param_1 + 0x7c) = (int)local_364 + 0x1c;
               goto LAB_00005e7c;
             }
-            pdVar27 = pdVar53 + 1;
-            bVar9 = false;
+            pdVar26 = pdVar52 + 1;
+            bVar8 = false;
           }
           if (bVar1) {
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = 0xa000000;
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = 0xa000000;
           }
           else {
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = 0xe000000;
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = 0xe000000;
           }
-          pdVar53 = pdVar27 + 5;
-          *pdVar27 = local_fc;
-          puVar13 = *(uint **)(param_1 + 0x7c);
-          *puVar13 = (int)(pdVar27 + 1) - (int)puVar13 >> 2 | *puVar13;
-          *(dword **)(param_1 + 0x7c) = pdVar27 + 1;
-          pdVar27[1] = 0x10000000;
-          pdVar27[2] = *(dword *)*DAT_0000e6e4;
-          dVar24 = DAT_0000e6e4[7];
-          pdVar27[4] = 6;
-          pdVar27[3] = dVar24;
-          if (bVar9) {
-            iVar23 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar53,local_d8,local_f4,0,0,0,0);
-            iVar56 = iVar23 + 1;
-            iVar15 = iVar23 + 0x16;
-            iVar11 = iVar23 << 2;
-            iVar57 = iVar23 + 2;
-            iVar34 = iVar23 + 3;
-            iVar35 = iVar23 + 4;
-            iVar16 = iVar23 + 5;
-            iVar25 = iVar23 + 6;
-            iVar18 = iVar23 + 7;
-            iVar21 = iVar23 + 8;
-            iVar36 = iVar23 + 9;
-            iVar37 = iVar23 + 10;
-            iVar40 = iVar23 + 0xb;
-            iVar41 = iVar23 + 0xc;
-            iVar42 = iVar23 + 0xd;
-            iVar43 = iVar23 + 0xe;
-            iVar44 = iVar23 + 0xf;
-            iVar46 = iVar23 + 0x10;
-            iVar47 = iVar23 + 0x11;
-            iVar49 = iVar23 + 0x12;
-            iVar50 = iVar23 + 0x13;
-            iVar14 = iVar23 + 0x14;
-            iVar23 = iVar23 + 0x15;
+          pdVar52 = pdVar26 + 5;
+          *pdVar26 = local_fc;
+          puVar12 = *(uint **)(param_1 + 0x7c);
+          *puVar12 = (int)(pdVar26 + 1) - (int)puVar12 >> 2 | *puVar12;
+          *(dword **)(param_1 + 0x7c) = pdVar26 + 1;
+          pdVar26[1] = 0x10000000;
+          pdVar26[2] = *(dword *)*DAT_0000e6e4;
+          dVar23 = DAT_0000e6e4[7];
+          pdVar26[4] = 6;
+          pdVar26[3] = dVar23;
+          if (bVar8) {
+            iVar22 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,0,0,0,0);
+            iVar55 = iVar22 + 1;
+            iVar14 = iVar22 + 0x16;
+            iVar10 = iVar22 << 2;
+            iVar56 = iVar22 + 2;
+            iVar33 = iVar22 + 3;
+            iVar34 = iVar22 + 4;
+            iVar15 = iVar22 + 5;
+            iVar24 = iVar22 + 6;
+            iVar17 = iVar22 + 7;
+            iVar20 = iVar22 + 8;
+            iVar35 = iVar22 + 9;
+            iVar36 = iVar22 + 10;
+            iVar39 = iVar22 + 0xb;
+            iVar40 = iVar22 + 0xc;
+            iVar41 = iVar22 + 0xd;
+            iVar42 = iVar22 + 0xe;
+            iVar43 = iVar22 + 0xf;
+            iVar45 = iVar22 + 0x10;
+            iVar46 = iVar22 + 0x11;
+            iVar48 = iVar22 + 0x12;
+            iVar49 = iVar22 + 0x13;
+            iVar13 = iVar22 + 0x14;
+            iVar22 = iVar22 + 0x15;
           }
           else {
-            *pdVar53 = 0x1120;
+            *pdVar52 = 0x1120;
             sVar5 = *(short *)(local_d8 + 1);
-            iVar11 = *(short *)((int)local_d8 + 6) + -1;
-            pdVar27[6] = (int)sVar5 - 1U & 0x7ff | iVar11 * 0x800 & 0x3ff800U | 0x80000000;
-            pdVar27[7] = 0x1130;
-            pdVar27[8] = local_c4;
-            pdVar27[9] = 0x1140;
-            pdVar27[10] = local_d8[4] - 1 & 0x3fff | ((int)sVar5 - 1U) * 0x10 & 0x8000 |
-                          iVar11 * 0x20 & 0x10000U;
-            iVar11 = 0x18;
-            iVar57 = 8;
-            iVar34 = 9;
-            iVar56 = 7;
-            iVar35 = 10;
-            iVar16 = 0xb;
-            iVar25 = 0xc;
-            iVar18 = 0xd;
-            iVar21 = 0xe;
-            iVar36 = 0xf;
-            iVar37 = 0x10;
-            iVar40 = 0x11;
-            iVar41 = 0x12;
-            iVar42 = 0x13;
-            iVar43 = 0x14;
-            iVar44 = 0x15;
-            iVar46 = 0x16;
-            iVar47 = 0x17;
-            iVar49 = 0x18;
-            iVar50 = 0x19;
-            iVar14 = 0x1a;
-            iVar23 = 0x1b;
-            iVar15 = 0x1c;
-          }
-          *(undefined4 *)((int)pdVar53 + iVar11) = 0x10f8;
-          pdVar53[iVar56] = local_104 & 0x1fff | (local_108 & 0x1fff) << 0xd;
-          pdVar53[iVar57] = 0x10f9;
-          pdVar53[iVar34] = local_10c & 0x1fff | (local_110 & 0x1fff) << 0xd;
-          pdVar53[iVar35] = 0xc00c3500;
-          pdVar53[iVar16] = 0x4003d;
-          local_298 = 0x43300000;
-          uStack_294 = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
-          local_358 = (float)(dVar63 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_294) - dVar61))
-                             );
-          local_290 = 0x43300000;
-          uStack_28c = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
-          local_35c = (float)(dVar65 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_28c) - dVar61))
-                             );
-          local_288 = 0x43300000;
-          uStack_284 = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
-          local_360 = (float)(dVar64 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_284) - dVar61))
-                             );
-          local_280 = 0x43300000;
-          uStack_27c = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
-          local_364 = (float)(dVar66 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_27c) - dVar61))
-                             );
-          pdVar53[iVar25] = local_104 | local_110 << 0x10;
-          fVar26 = *local_ac;
-          pdVar53[iVar18] = (dword)fVar26;
-          fVar19 = *local_b8;
-          pdVar53[iVar21] = (dword)fVar19;
-          pdVar53[iVar36] = local_104 | local_108 << 0x10;
-          pdVar53[iVar37] = (dword)fVar26;
-          fVar26 = *local_b4;
-          pdVar53[iVar40] = (dword)fVar26;
-          pdVar53[iVar41] = local_10c | local_108 << 0x10;
-          fVar31 = *local_b0;
-          pdVar53[iVar42] = (dword)fVar31;
-          pdVar53[iVar43] = (dword)fVar26;
-          pdVar53[iVar44] = local_10c | local_110 << 0x10;
-          pdVar53[iVar46] = (dword)fVar31;
-          pdVar53[iVar47] = (dword)fVar19;
-          pdVar53[iVar49] = 0x1393;
-          pdVar53[iVar50] = 10;
-          pdVar53[iVar14] = 0x5c8;
-          pdVar53[iVar23] = 0x20000;
-          uVar55 = (uVar48 - 6) - iVar15;
-          pdVar53 = pdVar53 + iVar15;
-          uVar51 = local_e4 + *(short *)local_a8;
-          uVar48 = uVar51 + (int)*(short *)(local_a8 + 1);
-          iVar56 = local_e8 + (short)*local_a8;
-          iVar11 = iVar56 + *(short *)((int)local_a8 + 6);
-          if (uVar55 < 0x22) {
-            local_35c = *(float *)(param_1 + 0x18);
-            local_358 = 0.0;
-            if (*(int *)(param_1 + 0x8c) == 0) {
-              *pdVar53 = 0x5c8;
-              local_358 = 2.8026e-45;
-              pdVar53[1] = local_c8;
-              *(undefined4 *)(param_1 + 0x94) = 0;
-            }
-            puVar10 = PTR_0000e694;
-            pdVar53[(int)local_358] = 0x1000000;
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_358 | *puVar13;
-            iVar23 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar10,
-                                         local_b0,local_ac,1);
-            if (iVar23 == 0) {
-              *(undefined4 *)((int)local_35c + 0x1c) = 0;
-              *(float *)(param_1 + 0x18) = local_35c;
-              pdVar53 = (dword *)((int)local_35c + 0x20);
-              pdVar27 = (dword *)((int)local_35c + 0x24);
-              *(int *)(param_1 + 0x7c) = (int)local_35c + 0x1c;
-            }
-            else {
-              pdVar53 = (dword *)0x0;
-              *(undefined4 *)(param_1 + 0x7c) = 0;
-              *(undefined4 *)(param_1 + 0x18) = 0;
-              pdVar27 = &__mh_bundle_header.cputype;
-            }
-            bVar9 = true;
-            uVar55 = uVar39;
-          }
-          else {
-            pdVar27 = pdVar53 + 1;
-            bVar9 = false;
-          }
-          if (bVar1) {
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = 0x11000000;
-          }
-          else {
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = 0x12000000;
-          }
-          pdVar27[1] = 0;
-          pdVar27[2] = 0;
-          pdVar53 = pdVar27 + 5;
-          *pdVar27 = local_fc;
-          puVar13 = *(uint **)(param_1 + 0x7c);
-          *puVar13 = (int)(pdVar27 + 3) - (int)puVar13 >> 2 | *puVar13;
-          *(dword **)(param_1 + 0x7c) = pdVar27 + 3;
-          pdVar27[3] = 0x4000000;
-          pdVar27[4] = *(dword *)*DAT_0000e6e4;
-          if (bVar9) {
-            iVar14 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar53,local_dc,local_f8,0,0,0,0);
-            iVar25 = iVar14 + 4;
-            iVar36 = iVar14 + 9;
-            local_15c = iVar14 + 3;
-            local_154 = iVar14 + 1;
-            local_158 = iVar14 + 2;
-            iVar16 = iVar14 + 0x16;
-            iVar23 = iVar14 << 2;
-            iVar18 = iVar14 + 5;
-            iVar35 = iVar14 + 6;
-            iVar21 = iVar14 + 7;
-            iVar34 = iVar14 + 8;
-            iVar50 = iVar14 + 10;
-            iVar37 = iVar14 + 0xb;
-            iVar40 = iVar14 + 0xc;
-            iVar41 = iVar14 + 0xd;
-            iVar42 = iVar14 + 0xe;
-            iVar43 = iVar14 + 0xf;
-            iVar44 = iVar14 + 0x10;
-            iVar46 = iVar14 + 0x11;
-            iVar47 = iVar14 + 0x12;
-            iVar49 = iVar14 + 0x13;
-            iVar15 = iVar14 + 0x14;
-            iVar14 = iVar14 + 0x15;
-          }
-          else {
-            *pdVar53 = 0x1120;
-            sVar5 = *(short *)(local_dc + 1);
-            iVar23 = *(short *)((int)local_dc + 6) + -1;
-            pdVar27[6] = (int)sVar5 - 1U & 0x7ff | iVar23 * 0x800 & 0x3ff800U | 0x80000000;
-            pdVar27[7] = 0x1130;
-            pdVar27[8] = local_f8 & 0x1f | 0x53000;
-            pdVar27[9] = 0x1140;
-            pdVar27[10] = local_dc[4] - 1 & 0x3fff | ((int)sVar5 - 1U) * 0x10 & 0x8000 |
-                          iVar23 * 0x20 & 0x10000U;
-            iVar25 = 10;
-            local_15c = 9;
-            iVar23 = 0x18;
-            iVar36 = 0xf;
-            local_154 = 7;
-            iVar18 = 0xb;
-            local_158 = 8;
-            iVar21 = 0xd;
-            iVar35 = 0xc;
-            iVar34 = 0xe;
-            iVar50 = 0x10;
-            iVar37 = 0x11;
+            iVar10 = *(short *)((int)local_d8 + 6) + -1;
+            pdVar26[6] = (int)sVar5 - 1U & 0x7ff | iVar10 * 0x800 & 0x3ff800U | 0x80000000;
+            pdVar26[7] = 0x1130;
+            pdVar26[8] = local_c4;
+            pdVar26[9] = 0x1140;
+            pdVar26[10] = local_d8[4] - 1 & 0x3fff | ((int)sVar5 - 1U) * 0x10 & 0x8000 |
+                          iVar10 * 0x20 & 0x10000U;
+            iVar10 = 0x18;
+            iVar56 = 8;
+            iVar33 = 9;
+            iVar55 = 7;
+            iVar34 = 10;
+            iVar15 = 0xb;
+            iVar24 = 0xc;
+            iVar17 = 0xd;
+            iVar20 = 0xe;
+            iVar35 = 0xf;
+            iVar36 = 0x10;
+            iVar39 = 0x11;
             iVar40 = 0x12;
             iVar41 = 0x13;
             iVar42 = 0x14;
             iVar43 = 0x15;
-            iVar44 = 0x16;
+            iVar45 = 0x16;
             iVar46 = 0x17;
-            iVar47 = 0x18;
+            iVar48 = 0x18;
             iVar49 = 0x19;
-            iVar15 = 0x1a;
-            iVar14 = 0x1b;
-            iVar16 = 0x1c;
+            iVar13 = 0x1a;
+            iVar22 = 0x1b;
+            iVar14 = 0x1c;
           }
-          *(undefined4 *)((int)pdVar53 + iVar23) = 0x10f8;
-          pdVar53[local_154] = uVar51 & 0x1fff | iVar56 * 0x2000 & 0x3ffe000U;
-          pdVar53[local_158] = 0x10f9;
-          pdVar53[local_15c] = uVar48 & 0x1fff | iVar11 * 0x2000 & 0x3ffe000U;
-          pdVar53[iVar25] = 0xc00c3500;
-          pdVar53[iVar18] = 0x4003d;
-          uVar45 = iVar11 * 0x10000;
+          *(undefined4 *)((int)pdVar52 + iVar10) = 0x10f8;
+          pdVar52[iVar55] = local_104 & 0x1fff | (local_108 & 0x1fff) << 0xd;
+          pdVar52[iVar56] = 0x10f9;
+          pdVar52[iVar33] = local_10c & 0x1fff | (local_110 & 0x1fff) << 0xd;
+          pdVar52[iVar34] = 0xc00c3500;
+          pdVar52[iVar15] = 0x4003d;
+          local_298 = 0x43300000;
+          uStack_294 = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
+          local_358 = (float)(dVar61 * (1.0 / ((double)CONCAT44(0x43300000,uStack_294) -
+                                              4503601774854144.0)));
+          local_290 = 0x43300000;
+          uStack_28c = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
+          local_35c = (float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_28c) -
+                                              4503601774854144.0)));
+          local_288 = 0x43300000;
+          uStack_284 = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
+          local_360 = (float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_284) -
+                                              4503601774854144.0)));
+          local_280 = 0x43300000;
+          uStack_27c = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
+          local_364 = (float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_27c) -
+                                              4503601774854144.0)));
+          pdVar52[iVar24] = local_104 | local_110 << 0x10;
+          fVar25 = *local_ac;
+          pdVar52[iVar17] = (dword)fVar25;
+          fVar18 = *local_b8;
+          pdVar52[iVar20] = (dword)fVar18;
+          pdVar52[iVar35] = local_104 | local_108 << 0x10;
+          pdVar52[iVar36] = (dword)fVar25;
+          fVar25 = *local_b4;
+          pdVar52[iVar39] = (dword)fVar25;
+          pdVar52[iVar40] = local_10c | local_108 << 0x10;
+          fVar30 = *local_b0;
+          pdVar52[iVar41] = (dword)fVar30;
+          pdVar52[iVar42] = (dword)fVar25;
+          pdVar52[iVar43] = local_10c | local_110 << 0x10;
+          pdVar52[iVar45] = (dword)fVar30;
+          pdVar52[iVar46] = (dword)fVar18;
+          pdVar52[iVar48] = 0x1393;
+          pdVar52[iVar49] = 10;
+          pdVar52[iVar13] = 0x5c8;
+          pdVar52[iVar22] = 0x20000;
+          uVar54 = (uVar47 - 6) - iVar14;
+          pdVar52 = pdVar52 + iVar14;
+          uVar50 = local_e4 + *(short *)local_a8;
+          uVar47 = uVar50 + (int)*(short *)(local_a8 + 1);
+          iVar55 = local_e8 + (short)*local_a8;
+          iVar10 = iVar55 + *(short *)((int)local_a8 + 6);
+          if (uVar54 < 0x22) {
+            local_35c = *(float *)(param_1 + 0x18);
+            local_358 = 0.0;
+            if (*(int *)(param_1 + 0x8c) == 0) {
+              *pdVar52 = 0x5c8;
+              local_358 = 2.8026e-45;
+              pdVar52[1] = local_c8;
+              *(undefined4 *)(param_1 + 0x94) = 0;
+            }
+            puVar9 = PTR_0000e694;
+            pdVar52[(int)local_358] = 0x1000000;
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_358 | *puVar12;
+            iVar22 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar9,
+                                         local_b0,local_ac,1);
+            if (iVar22 == 0) {
+              *(undefined4 *)((int)local_35c + 0x1c) = 0;
+              *(float *)(param_1 + 0x18) = local_35c;
+              pdVar52 = (dword *)((int)local_35c + 0x20);
+              pdVar26 = (dword *)((int)local_35c + 0x24);
+              *(int *)(param_1 + 0x7c) = (int)local_35c + 0x1c;
+            }
+            else {
+              pdVar52 = (dword *)0x0;
+              *(undefined4 *)(param_1 + 0x7c) = 0;
+              *(undefined4 *)(param_1 + 0x18) = 0;
+              pdVar26 = &__mh_bundle_header.cputype;
+            }
+            bVar8 = true;
+            uVar54 = uVar38;
+          }
+          else {
+            pdVar26 = pdVar52 + 1;
+            bVar8 = false;
+          }
+          if (bVar1) {
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = 0x11000000;
+          }
+          else {
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = 0x12000000;
+          }
+          pdVar26[1] = 0;
+          pdVar26[2] = 0;
+          pdVar52 = pdVar26 + 5;
+          *pdVar26 = local_fc;
+          puVar12 = *(uint **)(param_1 + 0x7c);
+          *puVar12 = (int)(pdVar26 + 3) - (int)puVar12 >> 2 | *puVar12;
+          *(dword **)(param_1 + 0x7c) = pdVar26 + 3;
+          pdVar26[3] = 0x4000000;
+          pdVar26[4] = *(dword *)*DAT_0000e6e4;
+          if (bVar8) {
+            iVar13 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_dc,local_f8,0,0,0,0);
+            iVar24 = iVar13 + 4;
+            iVar35 = iVar13 + 9;
+            local_15c = iVar13 + 3;
+            local_154 = iVar13 + 1;
+            local_158 = iVar13 + 2;
+            iVar15 = iVar13 + 0x16;
+            iVar22 = iVar13 << 2;
+            iVar17 = iVar13 + 5;
+            iVar34 = iVar13 + 6;
+            iVar20 = iVar13 + 7;
+            iVar33 = iVar13 + 8;
+            iVar49 = iVar13 + 10;
+            iVar36 = iVar13 + 0xb;
+            iVar39 = iVar13 + 0xc;
+            iVar40 = iVar13 + 0xd;
+            iVar41 = iVar13 + 0xe;
+            iVar42 = iVar13 + 0xf;
+            iVar43 = iVar13 + 0x10;
+            iVar45 = iVar13 + 0x11;
+            iVar46 = iVar13 + 0x12;
+            iVar48 = iVar13 + 0x13;
+            iVar14 = iVar13 + 0x14;
+            iVar13 = iVar13 + 0x15;
+          }
+          else {
+            *pdVar52 = 0x1120;
+            sVar5 = *(short *)(local_dc + 1);
+            iVar22 = *(short *)((int)local_dc + 6) + -1;
+            pdVar26[6] = (int)sVar5 - 1U & 0x7ff | iVar22 * 0x800 & 0x3ff800U | 0x80000000;
+            pdVar26[7] = 0x1130;
+            pdVar26[8] = local_f8 & 0x1f | 0x53000;
+            pdVar26[9] = 0x1140;
+            pdVar26[10] = local_dc[4] - 1 & 0x3fff | ((int)sVar5 - 1U) * 0x10 & 0x8000 |
+                          iVar22 * 0x20 & 0x10000U;
+            iVar24 = 10;
+            local_15c = 9;
+            iVar22 = 0x18;
+            iVar35 = 0xf;
+            local_154 = 7;
+            iVar17 = 0xb;
+            local_158 = 8;
+            iVar20 = 0xd;
+            iVar34 = 0xc;
+            iVar33 = 0xe;
+            iVar49 = 0x10;
+            iVar36 = 0x11;
+            iVar39 = 0x12;
+            iVar40 = 0x13;
+            iVar41 = 0x14;
+            iVar42 = 0x15;
+            iVar43 = 0x16;
+            iVar45 = 0x17;
+            iVar46 = 0x18;
+            iVar48 = 0x19;
+            iVar14 = 0x1a;
+            iVar13 = 0x1b;
+            iVar15 = 0x1c;
+          }
+          *(undefined4 *)((int)pdVar52 + iVar22) = 0x10f8;
+          pdVar52[local_154] = uVar50 & 0x1fff | iVar55 * 0x2000 & 0x3ffe000U;
+          pdVar52[local_158] = 0x10f9;
+          pdVar52[local_15c] = uVar47 & 0x1fff | iVar10 * 0x2000 & 0x3ffe000U;
+          pdVar52[iVar24] = 0xc00c3500;
+          pdVar52[iVar17] = 0x4003d;
+          uVar44 = iVar10 * 0x10000;
           local_278 = 0x43300000;
           uStack_274 = (int)*(short *)(local_dc + 1) ^ 0x80000000;
-          local_364 = (float)(dVar63 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_274) - dVar61))
-                             );
+          local_364 = (float)(dVar61 * (1.0 / ((double)CONCAT44(0x43300000,uStack_274) -
+                                              4503601774854144.0)));
           local_270 = 0x43300000;
           uStack_26c = (int)*(short *)(local_dc + 1) ^ 0x80000000;
-          local_360 = (float)(dVar65 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_26c) - dVar61))
-                             );
+          local_360 = (float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_26c) -
+                                              4503601774854144.0)));
           local_268 = 0x43300000;
           uStack_264 = (int)*(short *)((int)local_dc + 6) ^ 0x80000000;
-          local_358 = (float)(dVar64 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_264) - dVar61))
-                             );
+          local_358 = (float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_264) -
+                                              4503601774854144.0)));
           local_260 = 0x43300000;
           uStack_25c = (int)*(short *)((int)local_dc + 6) ^ 0x80000000;
-          local_35c = (float)(dVar66 * (dVar62 / ((double)CONCAT44(0x43300000,uStack_25c) - dVar61))
-                             );
-          pdVar53[iVar35] = uVar51 | uVar45;
-          fVar26 = *local_b8;
-          pdVar53[iVar21] = (dword)fVar26;
-          fVar19 = *local_b0;
-          pdVar53[iVar34] = (dword)fVar19;
-          pdVar53[iVar36] = uVar51 | iVar56 * 0x10000;
-          pdVar53[iVar50] = (dword)fVar26;
-          fVar26 = *local_ac;
-          pdVar53[iVar37] = (dword)fVar26;
-          pdVar53[iVar40] = uVar48 | iVar56 * 0x10000;
-          fVar31 = *local_b4;
-          pdVar53[iVar41] = (dword)fVar31;
-          pdVar53[iVar42] = (dword)fVar26;
-          pdVar53[iVar43] = uVar48 | uVar45;
-          pdVar53[iVar44] = (dword)fVar31;
-          pdVar53[iVar46] = (dword)fVar19;
-          pdVar53[iVar47] = 0x1393;
-          pdVar53[iVar49] = 10;
-          pdVar53[iVar15] = 0x5c8;
-          pdVar53[iVar14] = 0x20000;
-          uVar48 = (uVar55 - 6) - iVar16;
-          pdVar53 = pdVar53 + iVar16;
+          local_35c = (float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_25c) -
+                                              4503601774854144.0)));
+          pdVar52[iVar34] = uVar50 | uVar44;
+          fVar25 = *local_b8;
+          pdVar52[iVar20] = (dword)fVar25;
+          fVar18 = *local_b0;
+          pdVar52[iVar33] = (dword)fVar18;
+          pdVar52[iVar35] = uVar50 | iVar55 * 0x10000;
+          pdVar52[iVar49] = (dword)fVar25;
+          fVar25 = *local_ac;
+          pdVar52[iVar36] = (dword)fVar25;
+          pdVar52[iVar39] = uVar47 | iVar55 * 0x10000;
+          fVar30 = *local_b4;
+          pdVar52[iVar40] = (dword)fVar30;
+          pdVar52[iVar41] = (dword)fVar25;
+          pdVar52[iVar42] = uVar47 | uVar44;
+          pdVar52[iVar43] = (dword)fVar30;
+          pdVar52[iVar45] = (dword)fVar18;
+          pdVar52[iVar46] = 0x1393;
+          pdVar52[iVar48] = 10;
+          pdVar52[iVar14] = 0x5c8;
+          pdVar52[iVar13] = 0x20000;
+          uVar47 = (uVar54 - 6) - iVar15;
+          pdVar52 = pdVar52 + iVar15;
           local_e0 = local_e0 + 1;
           local_a8 = local_a8 + 2;
-          bVar9 = false;
-        } while (iVar38 != local_e0);
+          bVar8 = false;
+        } while (iVar37 != local_e0);
       }
     }
-    else if (iVar56 < 0x1001) {
-      if (iVar38 != 0) {
-        local_114 = dVar30 * dVar24 * 0x1000;
+    else if (iVar55 < 0x1001) {
+      if (iVar37 != 0) {
+        local_114 = dVar29 * dVar23 * 0x1000;
         local_b0 = &local_35c;
         local_b8 = &local_364;
         local_b4 = &local_360;
         local_ac = &local_358;
         local_170 = 0;
         bVar1 = true;
-        piVar54 = local_d4;
+        piVar53 = local_d4;
         do {
-          local_160 = (short *)((int)piVar54 + 2);
-          local_164 = (short *)((int)piVar54 + 6);
+          local_160 = (short *)((int)piVar53 + 2);
+          local_164 = (short *)((int)piVar53 + 6);
           local_258 = 0x43300000;
-          uStack_254 = local_ec + *(short *)piVar54 ^ 0x80000000;
-          uVar51 = local_e4 + *(short *)piVar54;
+          uStack_254 = local_ec + *(short *)piVar53 ^ 0x80000000;
+          uVar50 = local_e4 + *(short *)piVar53;
           local_250 = 0x43300000;
-          iVar56 = local_e8 + (short)*piVar54;
-          uStack_24c = local_f0 + (short)*piVar54 ^ 0x80000000;
+          iVar55 = local_e8 + (short)*piVar53;
+          uStack_24c = local_f0 + (short)*piVar53 ^ 0x80000000;
           local_248 = 0x43300000;
-          uStack_244 = (int)*(short *)(piVar54 + 1) ^ 0x80000000;
-          uVar55 = uVar51 + (int)*(short *)(piVar54 + 1);
-          fVar31 = (float)((double)CONCAT44(0x43300000,uStack_254) - DOUBLE_0000cfe0);
+          uStack_244 = (int)*(short *)(piVar53 + 1) ^ 0x80000000;
+          uVar54 = uVar50 + (int)*(short *)(piVar53 + 1);
+          fVar30 = (float)((double)CONCAT44(0x43300000,uStack_254) - 4503601774854144.0);
           local_240 = 0x43300000;
-          uStack_23c = (int)*(short *)((int)piVar54 + 6) ^ 0x80000000;
-          uVar45 = iVar56 + *(short *)((int)piVar54 + 6);
-          fVar4 = (float)((double)CONCAT44(0x43300000,uStack_24c) - DOUBLE_0000cfe0);
-          iVar11 = (int)*(short *)((int)local_d8 + 6);
-          fVar8 = fVar4 + (float)((double)CONCAT44(0x43300000,uStack_23c) - DOUBLE_0000cfe0);
-          if (iVar11 < 0x1000) {
+          uStack_23c = (int)*(short *)((int)piVar53 + 6) ^ 0x80000000;
+          uVar44 = iVar55 + *(short *)((int)piVar53 + 6);
+          fVar3 = (float)((double)CONCAT44(0x43300000,uStack_24c) - 4503601774854144.0);
+          iVar10 = (int)*(short *)((int)local_d8 + 6);
+          fVar4 = fVar3 + (float)((double)CONCAT44(0x43300000,uStack_23c) - 4503601774854144.0);
+          if (iVar10 < 0x1000) {
             local_238 = 0x43300000;
-            fVar17 = (float)((double)CONCAT44(0x43300000,iVar11) - DOUBLE_0000cfd8);
-            iStack_234 = iVar11;
+            fVar16 = (float)((double)CONCAT44(0x43300000,iVar10) - 4503599627370496.0);
+            iStack_234 = iVar10;
           }
           else {
-            fVar17 = FLOAT_0000d004;
-            if (FLOAT_0000d004 <= fVar8) {
-              iVar11 = 0x1000;
-              uVar45 = local_e8 + 0x1000;
-              fVar8 = FLOAT_0000d004;
+            fVar16 = 4096.0;
+            if (4096.0 <= fVar4) {
+              iVar10 = 0x1000;
+              uVar44 = local_e8 + 0x1000;
+              fVar4 = fVar16;
             }
             else {
-              iVar11 = 0x1000;
+              iVar10 = 0x1000;
             }
           }
           local_230 = 0x43300000;
           uStack_22c = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
-          fVar17 = fVar26 * (FLOAT_0000d000 / fVar17);
-          fVar8 = fVar8 * fVar17;
-          fVar4 = fVar4 * fVar17;
-          fVar17 = fVar19 * (FLOAT_0000d000 /
-                            (float)((double)CONCAT44(0x43300000,uStack_22c) - DOUBLE_0000cfe0));
-          fVar7 = (fVar31 + (float)((double)CONCAT44(0x43300000,uStack_244) - DOUBLE_0000cfe0)) *
-                  fVar17;
-          fVar31 = fVar31 * fVar17;
+          fVar16 = fVar25 * (1.0 / fVar16);
+          fVar4 = fVar4 * fVar16;
+          fVar3 = fVar3 * fVar16;
+          fVar16 = fVar18 * (1.0 / (float)((double)CONCAT44(0x43300000,uStack_22c) -
+                                          4503601774854144.0));
+          fVar7 = (fVar30 + (float)((double)CONCAT44(0x43300000,uStack_244) - 4503601774854144.0)) *
+                  fVar16;
+          fVar30 = fVar30 * fVar16;
           if (bVar1) {
-            if (uVar48 < 0x8a) {
+            if (uVar47 < 0x8a) {
               local_360 = *(float *)(param_1 + 0x18);
               local_364 = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar53 = 0x5c8;
+                *pdVar52 = 0x5c8;
                 local_364 = 2.8026e-45;
-                pdVar53[1] = 0xc000;
+                pdVar52[1] = 0xc000;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar53[(int)local_364] = 0x1000000;
-              puVar10 = PTR_0000e694;
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_364 | *puVar13;
-              iVar23 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
-                                           *(undefined4 *)puVar10,local_b4,local_b8,1);
-              if (iVar23 == 0) {
+              pdVar52[(int)local_364] = 0x1000000;
+              puVar9 = PTR_0000e694;
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_364 | *puVar12;
+              iVar22 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar9,
+                                           local_b4,local_b8,1);
+              if (iVar22 == 0) {
                 *(undefined4 *)((int)local_360 + 0x1c) = 0;
-                pdVar53 = (dword *)((int)local_360 + 0x20);
+                pdVar52 = (dword *)((int)local_360 + 0x20);
                 *(float *)(param_1 + 0x18) = local_360;
-                pdVar52 = (dword *)((int)local_360 + 0x38);
-                pdVar27 = (dword *)((int)local_360 + 0x24);
+                pdVar51 = (dword *)((int)local_360 + 0x38);
+                pdVar26 = (dword *)((int)local_360 + 0x24);
                 *(int *)(param_1 + 0x7c) = (int)local_360 + 0x1c;
-                pdVar20 = (dword *)((int)local_360 + 0x28);
-                pdVar22 = (dword *)((int)local_360 + 0x2c);
-                pdVar29 = (dword *)((int)local_360 + 0x30);
-                pdVar33 = (dword *)((int)local_360 + 0x34);
-                uVar48 = uVar39;
+                pdVar19 = (dword *)((int)local_360 + 0x28);
+                pdVar21 = (dword *)((int)local_360 + 0x2c);
+                pdVar28 = (dword *)((int)local_360 + 0x30);
+                pdVar32 = (dword *)((int)local_360 + 0x34);
+                uVar47 = uVar38;
               }
               else {
 LAB_00006cc0:
-                pdVar53 = (dword *)0x0;
+                pdVar52 = (dword *)0x0;
                 *(undefined4 *)(param_1 + 0x7c) = 0;
                 *(undefined4 *)(param_1 + 0x18) = 0;
-                pdVar27 = &__mh_bundle_header.cputype;
-                pdVar20 = &__mh_bundle_header.cpusubtype;
-                pdVar22 = &__mh_bundle_header.filetype;
-                pdVar29 = &__mh_bundle_header.ncmds;
-                pdVar33 = &__mh_bundle_header.sizeofcmds;
-                pdVar52 = &__mh_bundle_header.flags;
-                uVar48 = uVar39;
+                pdVar26 = &__mh_bundle_header.cputype;
+                pdVar19 = &__mh_bundle_header.cpusubtype;
+                pdVar21 = &__mh_bundle_header.filetype;
+                pdVar28 = &__mh_bundle_header.ncmds;
+                pdVar32 = &__mh_bundle_header.sizeofcmds;
+                pdVar51 = &__mh_bundle_header.flags;
+                uVar47 = uVar38;
               }
             }
             else {
-              pdVar27 = pdVar53 + 1;
-              pdVar20 = pdVar53 + 2;
-              pdVar22 = pdVar53 + 3;
-              pdVar29 = pdVar53 + 4;
-              pdVar33 = pdVar53 + 5;
-              pdVar52 = pdVar53 + 6;
+              pdVar26 = pdVar52 + 1;
+              pdVar19 = pdVar52 + 2;
+              pdVar21 = pdVar52 + 3;
+              pdVar28 = pdVar52 + 4;
+              pdVar32 = pdVar52 + 5;
+              pdVar51 = pdVar52 + 6;
             }
 LAB_00006d28:
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = local_140;
-            *pdVar27 = local_fc;
-            *pdVar20 = local_100;
-            *pdVar22 = 0;
-            *pdVar29 = 0;
-            *pdVar33 = 0;
-            uVar48 = uVar48 - 6;
-            iVar15 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,0,iVar11);
-            local_148 = iVar15 + 0xe;
-            local_14c = iVar15 + 0xf;
-            iVar18 = iVar15 + 0x16;
-            iVar11 = iVar15 << 2;
-            local_150 = iVar15 + 0x10;
-            iVar14 = iVar15 + 0x11;
-            iVar23 = iVar15 + 0x12;
-            iVar35 = iVar15 + 1;
-            iVar36 = iVar15 + 2;
-            iVar34 = iVar15 + 3;
-            iVar21 = iVar15 + 4;
-            iVar25 = iVar15 + 5;
-            iVar40 = iVar15 + 6;
-            iVar41 = iVar15 + 7;
-            iVar42 = iVar15 + 8;
-            iVar43 = iVar15 + 9;
-            iVar44 = iVar15 + 10;
-            iVar46 = iVar15 + 0xb;
-            iVar47 = iVar15 + 0xc;
-            iVar16 = iVar15 + 0xd;
-            iVar49 = iVar15 + 0x13;
-            iVar37 = iVar15 + 0x14;
-            iVar15 = iVar15 + 0x15;
-            pdVar53 = pdVar52;
-            fparam_1 = extraout_f1_01;
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = local_140;
+            *pdVar26 = local_fc;
+            *pdVar19 = local_100;
+            *pdVar21 = 0;
+            *pdVar28 = 0;
+            *pdVar32 = 0;
+            uVar47 = uVar47 - 6;
+            iVar14 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,0,iVar10);
+            local_148 = iVar14 + 0xe;
+            local_14c = iVar14 + 0xf;
+            iVar17 = iVar14 + 0x16;
+            iVar10 = iVar14 << 2;
+            local_150 = iVar14 + 0x10;
+            iVar13 = iVar14 + 0x11;
+            iVar22 = iVar14 + 0x12;
+            iVar34 = iVar14 + 1;
+            iVar35 = iVar14 + 2;
+            iVar33 = iVar14 + 3;
+            iVar20 = iVar14 + 4;
+            iVar24 = iVar14 + 5;
+            iVar39 = iVar14 + 6;
+            iVar40 = iVar14 + 7;
+            iVar41 = iVar14 + 8;
+            iVar42 = iVar14 + 9;
+            iVar43 = iVar14 + 10;
+            iVar45 = iVar14 + 0xb;
+            iVar46 = iVar14 + 0xc;
+            iVar15 = iVar14 + 0xd;
+            iVar48 = iVar14 + 0x13;
+            iVar36 = iVar14 + 0x14;
+            iVar14 = iVar14 + 0x15;
+            pdVar52 = pdVar51;
           }
           else {
-            if (uVar48 < 0x16) {
+            if (uVar47 < 0x16) {
               local_364 = *(float *)(param_1 + 0x18);
               local_360 = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar53 = 0x5c8;
+                *pdVar52 = 0x5c8;
                 local_360 = 2.8026e-45;
-                pdVar53[1] = 0xc000;
+                pdVar52[1] = 0xc000;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar53[(int)local_360] = 0x1000000;
-              puVar10 = PTR_0000e694;
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_360 | *puVar13;
-              iVar23 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
-                                           *(undefined4 *)puVar10,local_b8,local_b4,1);
-              if (iVar23 != 0) goto LAB_00006cc0;
+              pdVar52[(int)local_360] = 0x1000000;
+              puVar9 = PTR_0000e694;
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_360 | *puVar12;
+              iVar22 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar9,
+                                           local_b8,local_b4,1);
+              if (iVar22 != 0) goto LAB_00006cc0;
               *(undefined4 *)((int)local_364 + 0x1c) = 0;
               *(float *)(param_1 + 0x18) = local_364;
-              pdVar53 = (dword *)((int)local_364 + 0x20);
-              pdVar52 = (dword *)((int)local_364 + 0x38);
+              pdVar52 = (dword *)((int)local_364 + 0x20);
+              pdVar51 = (dword *)((int)local_364 + 0x38);
               *(int *)(param_1 + 0x7c) = (int)local_364 + 0x1c;
-              pdVar27 = (dword *)((int)local_364 + 0x24);
-              pdVar20 = (dword *)((int)local_364 + 0x28);
-              pdVar22 = (dword *)((int)local_364 + 0x2c);
-              pdVar29 = (dword *)((int)local_364 + 0x30);
-              pdVar33 = (dword *)((int)local_364 + 0x34);
-              uVar48 = uVar39;
+              pdVar26 = (dword *)((int)local_364 + 0x24);
+              pdVar19 = (dword *)((int)local_364 + 0x28);
+              pdVar21 = (dword *)((int)local_364 + 0x2c);
+              pdVar28 = (dword *)((int)local_364 + 0x30);
+              pdVar32 = (dword *)((int)local_364 + 0x34);
+              uVar47 = uVar38;
               goto LAB_00006d28;
             }
-            iVar11 = 0;
-            iVar35 = 1;
+            iVar10 = 0;
+            iVar34 = 1;
             local_148 = 0xe;
             local_14c = 0xf;
-            iVar14 = 0x11;
+            iVar13 = 0x11;
             local_150 = 0x10;
-            iVar36 = 2;
-            iVar34 = 3;
-            iVar23 = 0x12;
-            iVar21 = 4;
-            iVar25 = 5;
-            iVar40 = 6;
-            iVar41 = 7;
-            iVar42 = 8;
-            iVar43 = 9;
-            iVar44 = 10;
-            iVar46 = 0xb;
-            iVar47 = 0xc;
-            iVar16 = 0xd;
-            iVar49 = 0x13;
-            iVar37 = 0x14;
-            iVar15 = 0x15;
-            iVar18 = 0x16;
+            iVar35 = 2;
+            iVar33 = 3;
+            iVar22 = 0x12;
+            iVar20 = 4;
+            iVar24 = 5;
+            iVar39 = 6;
+            iVar40 = 7;
+            iVar41 = 8;
+            iVar42 = 9;
+            iVar43 = 10;
+            iVar45 = 0xb;
+            iVar46 = 0xc;
+            iVar15 = 0xd;
+            iVar48 = 0x13;
+            iVar36 = 0x14;
+            iVar14 = 0x15;
+            iVar17 = 0x16;
           }
-          *(undefined4 *)((int)pdVar53 + iVar11) = 0x10f8;
-          local_cc = uVar51 & 0x1fff;
-          pdVar53[iVar35] = local_cc | iVar56 * 0x2000 & 0x3ffe000U;
-          pdVar53[iVar36] = 0x10f9;
-          local_d0 = uVar55 & 0x1fff;
-          pdVar53[iVar34] = local_d0 | (uVar45 & 0x1fff) << 0xd;
-          pdVar53[iVar21] = 0xc00c3500;
-          pdVar53[iVar25] = 0x4003d;
-          pdVar53[iVar40] = uVar51 | uVar45 << 0x10;
-          fVar28 = *local_b0;
-          pdVar53[iVar41] = (dword)fVar28;
-          fVar17 = *local_b8;
-          pdVar53[iVar42] = (dword)fVar17;
-          pdVar53[iVar43] = uVar51 | iVar56 * 0x10000;
-          pdVar53[iVar44] = (dword)fVar28;
-          fVar28 = *local_b4;
-          pdVar53[iVar46] = (dword)fVar28;
-          pdVar53[iVar47] = uVar55 | iVar56 * 0x10000;
-          fVar32 = *local_ac;
-          pdVar53[iVar16] = (dword)fVar32;
-          pdVar53[local_148] = (dword)fVar28;
-          pdVar53[local_14c] = uVar55 | uVar45 << 0x10;
-          pdVar53[local_150] = (dword)fVar32;
-          pdVar53[iVar14] = (dword)fVar17;
-          pdVar53[iVar23] = 0x1393;
-          pdVar53[iVar49] = 10;
-          pdVar53[iVar37] = 0x5c8;
-          pdVar53[iVar15] = 0x20000;
-          uVar48 = uVar48 - iVar18;
+          *(undefined4 *)((int)pdVar52 + iVar10) = 0x10f8;
+          local_cc = uVar50 & 0x1fff;
+          pdVar52[iVar34] = local_cc | iVar55 * 0x2000 & 0x3ffe000U;
+          pdVar52[iVar35] = 0x10f9;
+          local_d0 = uVar54 & 0x1fff;
+          pdVar52[iVar33] = local_d0 | (uVar44 & 0x1fff) << 0xd;
+          pdVar52[iVar20] = 0xc00c3500;
+          pdVar52[iVar24] = 0x4003d;
+          pdVar52[iVar39] = uVar50 | uVar44 << 0x10;
+          fVar27 = *local_b0;
+          pdVar52[iVar40] = (dword)fVar27;
+          fVar16 = *local_b8;
+          pdVar52[iVar41] = (dword)fVar16;
+          pdVar52[iVar42] = uVar50 | iVar55 * 0x10000;
+          pdVar52[iVar43] = (dword)fVar27;
+          fVar27 = *local_b4;
+          pdVar52[iVar45] = (dword)fVar27;
+          pdVar52[iVar46] = uVar54 | iVar55 * 0x10000;
+          fVar31 = *local_ac;
+          pdVar52[iVar15] = (dword)fVar31;
+          pdVar52[local_148] = (dword)fVar27;
+          pdVar52[local_14c] = uVar54 | uVar44 << 0x10;
+          pdVar52[local_150] = (dword)fVar31;
+          pdVar52[iVar13] = (dword)fVar16;
+          pdVar52[iVar22] = 0x1393;
+          pdVar52[iVar48] = 10;
+          pdVar52[iVar36] = 0x5c8;
+          pdVar52[iVar14] = 0x20000;
+          uVar47 = uVar47 - iVar17;
           bVar1 = false;
-          pdVar53 = pdVar53 + iVar18;
-          iVar11 = (int)*local_160 + (int)*local_164;
-          local_364 = fVar8;
-          local_360 = fVar4;
-          local_35c = fVar31;
+          pdVar52 = pdVar52 + iVar17;
+          iVar10 = (int)*local_160 + (int)*local_164;
+          local_364 = fVar4;
+          local_360 = fVar3;
+          local_35c = fVar30;
           local_358 = fVar7;
-          if (0xfff < iVar11) {
+          if (0xfff < iVar10) {
             local_228 = 0x43300000;
-            iVar23 = local_e8 + 0x1000;
-            iVar56 = local_e8 + *local_160 + (int)*local_164;
-            uStack_224 = (local_f0 + iVar11) - 0x1000U ^ 0x80000000;
+            iVar22 = local_e8 + 0x1000;
+            iVar55 = local_e8 + *local_160 + (int)*local_164;
+            uStack_224 = (local_f0 + iVar10) - 0x1000U ^ 0x80000000;
             local_220 = 0x43300000;
-            iVar11 = *(short *)((int)local_d8 + 6) + -0x1000;
-            fVar17 = fVar26 * (FLOAT_0000d000 /
-                              (float)((double)CONCAT44(0x43300000,iVar11) - DOUBLE_0000cfd8));
-            fVar28 = (float)((double)CONCAT44(0x43300000,uStack_224) - DOUBLE_0000cfe0) * fVar17;
-            fVar17 = fVar17 * FLOAT_0000d008;
-            iStack_21c = iVar11;
-            if (uVar48 < 0x8a) {
+            iVar10 = *(short *)((int)local_d8 + 6) + -0x1000;
+            fVar16 = fVar25 * (1.0 / (float)((double)CONCAT44(0x43300000,iVar10) -
+                                            4503599627370496.0));
+            fVar27 = (float)((double)CONCAT44(0x43300000,uStack_224) - 4503601774854144.0) * fVar16;
+            fVar16 = fVar16 * 0.0;
+            iStack_21c = iVar10;
+            if (uVar47 < 0x8a) {
               local_358 = *(float *)(param_1 + 0x18);
               local_35c = 0.0;
               if (*(int *)(param_1 + 0x8c) == 0) {
-                *pdVar53 = 0x5c8;
+                *pdVar52 = 0x5c8;
                 local_35c = 2.8026e-45;
-                pdVar53[1] = 0xc000;
+                pdVar52[1] = 0xc000;
                 *(undefined4 *)(param_1 + 0x94) = 0;
               }
-              pdVar53[(int)local_35c] = 0x1000000;
-              puVar10 = PTR_0000e694;
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_35c | *puVar13;
-              iVar14 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
-                                           *(undefined4 *)puVar10,local_ac,local_b0,1);
-              if (iVar14 == 0) {
+              pdVar52[(int)local_35c] = 0x1000000;
+              puVar9 = PTR_0000e694;
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_35c | *puVar12;
+              iVar13 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar9,
+                                           local_ac,local_b0,1);
+              if (iVar13 == 0) {
                 *(undefined4 *)((int)local_358 + 0x1c) = 0;
                 *(float *)(param_1 + 0x18) = local_358;
-                pdVar53 = (dword *)((int)local_358 + 0x20);
-                pdVar52 = (dword *)((int)local_358 + 0x38);
+                pdVar52 = (dword *)((int)local_358 + 0x20);
+                pdVar51 = (dword *)((int)local_358 + 0x38);
                 *(int *)(param_1 + 0x7c) = (int)local_358 + 0x1c;
-                pdVar27 = (dword *)((int)local_358 + 0x24);
-                pdVar20 = (dword *)((int)local_358 + 0x28);
-                pdVar22 = (dword *)((int)local_358 + 0x2c);
-                pdVar29 = (dword *)((int)local_358 + 0x30);
-                pdVar33 = (dword *)((int)local_358 + 0x34);
-                uVar48 = uVar39;
+                pdVar26 = (dword *)((int)local_358 + 0x24);
+                pdVar19 = (dword *)((int)local_358 + 0x28);
+                pdVar21 = (dword *)((int)local_358 + 0x2c);
+                pdVar28 = (dword *)((int)local_358 + 0x30);
+                pdVar32 = (dword *)((int)local_358 + 0x34);
+                uVar47 = uVar38;
               }
               else {
-                pdVar53 = (dword *)0x0;
+                pdVar52 = (dword *)0x0;
                 *(undefined4 *)(param_1 + 0x7c) = 0;
                 *(undefined4 *)(param_1 + 0x18) = 0;
-                pdVar27 = &__mh_bundle_header.cputype;
-                pdVar20 = &__mh_bundle_header.cpusubtype;
-                pdVar22 = &__mh_bundle_header.filetype;
-                pdVar29 = &__mh_bundle_header.ncmds;
-                pdVar33 = &__mh_bundle_header.sizeofcmds;
-                pdVar52 = &__mh_bundle_header.flags;
-                uVar48 = uVar39;
+                pdVar26 = &__mh_bundle_header.cputype;
+                pdVar19 = &__mh_bundle_header.cpusubtype;
+                pdVar21 = &__mh_bundle_header.filetype;
+                pdVar28 = &__mh_bundle_header.ncmds;
+                pdVar32 = &__mh_bundle_header.sizeofcmds;
+                pdVar51 = &__mh_bundle_header.flags;
+                uVar47 = uVar38;
               }
             }
             else {
-              pdVar27 = pdVar53 + 1;
-              pdVar20 = pdVar53 + 2;
-              pdVar22 = pdVar53 + 3;
-              pdVar29 = pdVar53 + 4;
-              pdVar33 = pdVar53 + 5;
-              pdVar52 = pdVar53 + 6;
+              pdVar26 = pdVar52 + 1;
+              pdVar19 = pdVar52 + 2;
+              pdVar21 = pdVar52 + 3;
+              pdVar28 = pdVar52 + 4;
+              pdVar32 = pdVar52 + 5;
+              pdVar51 = pdVar52 + 6;
             }
-            puVar13 = *(uint **)(param_1 + 0x7c);
-            *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-            *(dword **)(param_1 + 0x7c) = pdVar53;
-            *pdVar53 = local_140;
-            *pdVar27 = local_fc;
-            *pdVar20 = local_100;
-            *pdVar22 = local_114;
-            *pdVar29 = 0;
-            *pdVar33 = 0;
-            iVar11 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,0,iVar11);
-            pdVar52[iVar11] = 0x10f8;
-            pdVar52[iVar11 + 1] = local_cc | iVar23 * 0x2000 & 0x3ffe000U;
-            pdVar52[iVar11 + 2] = 0x10f9;
-            pdVar52[iVar11 + 3] = local_d0 | iVar56 * 0x2000 & 0x3ffe000U;
-            pdVar52[iVar11 + 4] = 0xc00c3500;
-            pdVar52[iVar11 + 5] = 0x4003d;
-            uVar45 = iVar56 * 0x10000;
-            pdVar52[iVar11 + 6] = uVar51 | uVar45;
-            pdVar52[iVar11 + 7] = (dword)fVar31;
-            pdVar52[iVar11 + 8] = (dword)fVar28;
-            uVar6 = iVar23 * 0x10000;
-            pdVar52[iVar11 + 9] = uVar51 | uVar6;
-            pdVar52[iVar11 + 10] = (dword)fVar31;
-            pdVar52[iVar11 + 0xb] = (dword)fVar17;
-            pdVar52[iVar11 + 0xc] = uVar55 | uVar6;
-            pdVar52[iVar11 + 0xd] = (dword)fVar7;
-            pdVar52[iVar11 + 0xe] = (dword)fVar17;
-            pdVar52[iVar11 + 0xf] = uVar55 | uVar45;
-            pdVar52[iVar11 + 0x10] = (dword)fVar7;
-            pdVar52[iVar11 + 0x11] = (dword)fVar28;
-            pdVar52[iVar11 + 0x12] = 0x1393;
-            pdVar52[iVar11 + 0x13] = 10;
-            pdVar52[iVar11 + 0x14] = 0x5c8;
-            pdVar52[iVar11 + 0x15] = 0x20000;
-            uVar48 = (uVar48 - 6) - (iVar11 + 0x16);
+            puVar12 = *(uint **)(param_1 + 0x7c);
+            *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+            *(dword **)(param_1 + 0x7c) = pdVar52;
+            *pdVar52 = local_140;
+            *pdVar26 = local_fc;
+            *pdVar19 = local_100;
+            *pdVar21 = local_114;
+            *pdVar28 = 0;
+            *pdVar32 = 0;
+            iVar10 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,0,iVar10);
+            pdVar51[iVar10] = 0x10f8;
+            pdVar51[iVar10 + 1] = local_cc | iVar22 * 0x2000 & 0x3ffe000U;
+            pdVar51[iVar10 + 2] = 0x10f9;
+            pdVar51[iVar10 + 3] = local_d0 | iVar55 * 0x2000 & 0x3ffe000U;
+            pdVar51[iVar10 + 4] = 0xc00c3500;
+            pdVar51[iVar10 + 5] = 0x4003d;
+            uVar44 = iVar55 * 0x10000;
+            pdVar51[iVar10 + 6] = uVar50 | uVar44;
+            pdVar51[iVar10 + 7] = (dword)fVar30;
+            pdVar51[iVar10 + 8] = (dword)fVar27;
+            uVar6 = iVar22 * 0x10000;
+            pdVar51[iVar10 + 9] = uVar50 | uVar6;
+            pdVar51[iVar10 + 10] = (dword)fVar30;
+            pdVar51[iVar10 + 0xb] = (dword)fVar16;
+            pdVar51[iVar10 + 0xc] = uVar54 | uVar6;
+            pdVar51[iVar10 + 0xd] = (dword)fVar7;
+            pdVar51[iVar10 + 0xe] = (dword)fVar16;
+            pdVar51[iVar10 + 0xf] = uVar54 | uVar44;
+            pdVar51[iVar10 + 0x10] = (dword)fVar7;
+            pdVar51[iVar10 + 0x11] = (dword)fVar27;
+            pdVar51[iVar10 + 0x12] = 0x1393;
+            pdVar51[iVar10 + 0x13] = 10;
+            pdVar51[iVar10 + 0x14] = 0x5c8;
+            pdVar51[iVar10 + 0x15] = 0x20000;
+            uVar47 = (uVar47 - 6) - (iVar10 + 0x16);
             bVar1 = true;
-            pdVar53 = pdVar52 + iVar11 + 0x16;
-            fparam_1 = extraout_f1_02;
-            local_364 = fVar31;
+            pdVar52 = pdVar51 + iVar10 + 0x16;
+            local_364 = fVar30;
             local_360 = fVar7;
-            local_35c = fVar17;
-            local_358 = fVar28;
+            local_35c = fVar16;
+            local_358 = fVar27;
           }
-          piVar54 = piVar54 + 2;
+          piVar53 = piVar53 + 2;
           local_170 = local_170 + 1;
-        } while (iVar38 != local_170);
+        } while (iVar37 != local_170);
       }
     }
     else {
-      local_120 = iVar56 >> 1 & 0xfffffe00;
-      local_11c = iVar56 - local_120;
+      local_120 = iVar55 >> 1 & 0xfffffe00;
+      local_11c = iVar55 - local_120;
       local_118 = local_120 + 2;
       local_208 = 0x43300000;
       local_218 = 0x43300000;
@@ -2555,522 +2544,520 @@ LAB_00006d28:
       uStack_214 = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
       uStack_204 = local_11c ^ 0x80000000;
       uStack_20c = local_118 ^ 0x80000000;
-      fVar31 = FLOAT_0000d000 / (float)((double)CONCAT44(0x43300000,uStack_214) - DOUBLE_0000cfe0);
-      fVar4 = FLOAT_0000d000 / (float)((double)CONCAT44(0x43300000,uStack_204) - DOUBLE_0000cfe0);
-      fVar8 = FLOAT_0000d000 / (float)((double)CONCAT44(0x43300000,uStack_20c) - DOUBLE_0000cfe0);
-      if (iVar38 != 0) {
+      fVar30 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_214) - 4503601774854144.0);
+      fVar3 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_204) - 4503601774854144.0);
+      fVar4 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_20c) - 4503601774854144.0);
+      if (iVar37 != 0) {
         bVar1 = true;
         local_174 = 0;
         local_c0 = 0xc000;
         local_168 = local_d4;
         do {
-          iVar56 = (int)*(short *)local_168;
-          if (local_ec + iVar56 < (int)local_118) {
-            uStack_1fc = local_ec + iVar56 ^ 0x80000000;
+          iVar55 = (int)*(short *)local_168;
+          if (local_ec + iVar55 < (int)local_118) {
+            uStack_1fc = local_ec + iVar55 ^ 0x80000000;
             local_200 = 0x43300000;
-            uVar55 = local_ec + iVar56 + *(short *)(local_168 + 1);
+            uVar54 = local_ec + iVar55 + *(short *)(local_168 + 1);
             uStack_1f4 = local_118;
-            if ((int)uVar55 < (int)local_118) {
-              uStack_1f4 = uVar55;
+            if ((int)uVar54 < (int)local_118) {
+              uStack_1f4 = uVar54;
             }
             uStack_1f4 = uStack_1f4 ^ 0x80000000;
             local_1f8 = 0x43300000;
-            local_16c = local_e4 + iVar56;
-            uVar55 = local_16c + (int)*(short *)(local_168 + 1);
-            iVar56 = (int)(short)*local_168;
+            local_16c = local_e4 + iVar55;
+            uVar54 = local_16c + (int)*(short *)(local_168 + 1);
+            iVar55 = (int)(short)*local_168;
             local_1f0 = 0x43300000;
-            uStack_1ec = local_f0 + iVar56 ^ 0x80000000;
+            uStack_1ec = local_f0 + iVar55 ^ 0x80000000;
             local_1e8 = 0x43300000;
-            uStack_1e4 = local_f0 + iVar56 + *(short *)((int)local_168 + 6) ^ 0x80000000;
-            if ((int)local_118 < (int)uVar55) {
+            uStack_1e4 = local_f0 + iVar55 + *(short *)((int)local_168 + 6) ^ 0x80000000;
+            if ((int)local_118 < (int)uVar54) {
               local_1e0 = 0x43300000;
               uStack_1dc = local_e4 + local_118 ^ 0x80000000;
-              uVar55 = uStack_1dc;
+              uVar54 = uStack_1dc;
             }
             else {
-              uStack_1d4 = uVar55 ^ 0x80000000;
+              uStack_1d4 = uVar54 ^ 0x80000000;
               local_1d8 = 0x43300000;
-              uVar55 = uStack_1d4;
+              uVar54 = uStack_1d4;
             }
-            dVar61 = (double)CONCAT44(0x43300000,uVar55) - DOUBLE_0000cfe0;
-            dVar62 = (double)(float)dVar61;
-            if (DOUBLE_0000cff0 <= dVar62) {
-              iVar23 = (int)(dVar62 - DOUBLE_0000cff0);
-              local_1c8 = (longlong)iVar23;
-              local_124 = iVar23 + 0x80000000;
+            dVar60 = (double)CONCAT44(0x43300000,uVar54) - 4503601774854144.0;
+            fVar16 = (float)dVar60;
+            if (2.1474836e+09 <= fVar16) {
+              iVar22 = (int)(fVar16 - 2.1474836e+09);
+              local_1c8 = (longlong)iVar22;
+              local_124 = iVar22 + 0x80000000;
             }
             else {
-              local_124 = (uint)dVar61;
+              local_124 = (uint)dVar60;
               local_1d0 = (longlong)(int)local_124;
             }
-            fVar28 = fVar19 * fVar8 * (float)((double)CONCAT44(0x43300000,uStack_1fc) -
-                                             DOUBLE_0000cfe0);
-            fVar32 = fVar19 * fVar8 * (float)((double)CONCAT44(0x43300000,uStack_1f4) -
-                                             DOUBLE_0000cfe0);
-            fVar17 = fVar26 * fVar31 * (float)((double)CONCAT44(0x43300000,uStack_1ec) -
-                                              DOUBLE_0000cfe0);
-            fVar7 = fVar26 * fVar31 * (float)((double)CONCAT44(0x43300000,uStack_1e4) -
-                                             DOUBLE_0000cfe0);
-            local_128 = local_e8 + iVar56;
+            fVar16 = fVar18 * fVar4 * (float)((double)CONCAT44(0x43300000,uStack_1fc) -
+                                             4503601774854144.0);
+            fVar7 = fVar18 * fVar4 * (float)((double)CONCAT44(0x43300000,uStack_1f4) -
+                                            4503601774854144.0);
+            fVar27 = fVar25 * fVar30 * (float)((double)CONCAT44(0x43300000,uStack_1ec) -
+                                              4503601774854144.0);
+            fVar31 = fVar25 * fVar30 * (float)((double)CONCAT44(0x43300000,uStack_1e4) -
+                                              4503601774854144.0);
+            local_128 = local_e8 + iVar55;
             local_12c = local_128 + (int)*(short *)((int)local_168 + 6);
             if (bVar1) {
-              if (uVar48 < 0x9e) {
+              if (uVar47 < 0x9e) {
                 local_360 = *(float *)(param_1 + 0x18);
                 local_364 = 0.0;
                 if (*(int *)(param_1 + 0x8c) == 0) {
-                  *pdVar53 = 0x5c8;
+                  *pdVar52 = 0x5c8;
                   local_364 = 2.8026e-45;
-                  pdVar53[1] = local_c0;
+                  pdVar52[1] = local_c0;
                   *(undefined4 *)(param_1 + 0x94) = 0;
                 }
-                pdVar53[(int)local_364] = 0x1000000;
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_364 | *puVar13;
-                iVar56 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
+                pdVar52[(int)local_364] = 0x1000000;
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_364 | *puVar12;
+                iVar55 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                              *(undefined4 *)PTR_0000e694,&local_360,&local_364,1);
-                if (iVar56 == 0) {
+                if (iVar55 == 0) {
                   *(undefined4 *)((int)local_360 + 0x1c) = 0;
                   *(float *)(param_1 + 0x18) = local_360;
-                  pdVar53 = (dword *)((int)local_360 + 0x20);
-                  pdVar52 = (dword *)((int)local_360 + 0x38);
+                  pdVar52 = (dword *)((int)local_360 + 0x20);
+                  pdVar51 = (dword *)((int)local_360 + 0x38);
                   *(int *)(param_1 + 0x7c) = (int)local_360 + 0x1c;
-                  pdVar27 = (dword *)((int)local_360 + 0x24);
-                  pdVar20 = (dword *)((int)local_360 + 0x28);
-                  pdVar22 = (dword *)((int)local_360 + 0x2c);
-                  pdVar29 = (dword *)((int)local_360 + 0x30);
-                  pdVar33 = (dword *)((int)local_360 + 0x34);
-                  uVar48 = uVar39;
+                  pdVar26 = (dword *)((int)local_360 + 0x24);
+                  pdVar19 = (dword *)((int)local_360 + 0x28);
+                  pdVar21 = (dword *)((int)local_360 + 0x2c);
+                  pdVar28 = (dword *)((int)local_360 + 0x30);
+                  pdVar32 = (dword *)((int)local_360 + 0x34);
+                  uVar47 = uVar38;
                 }
                 else {
-                  pdVar53 = (dword *)0x0;
+                  pdVar52 = (dword *)0x0;
                   *(undefined4 *)(param_1 + 0x7c) = 0;
                   *(undefined4 *)(param_1 + 0x18) = 0;
-                  pdVar27 = &__mh_bundle_header.cputype;
-                  pdVar20 = &__mh_bundle_header.cpusubtype;
-                  pdVar22 = &__mh_bundle_header.filetype;
-                  pdVar29 = &__mh_bundle_header.ncmds;
-                  pdVar33 = &__mh_bundle_header.sizeofcmds;
-                  pdVar52 = &__mh_bundle_header.flags;
-                  uVar48 = uVar39;
+                  pdVar26 = &__mh_bundle_header.cputype;
+                  pdVar19 = &__mh_bundle_header.cpusubtype;
+                  pdVar21 = &__mh_bundle_header.filetype;
+                  pdVar28 = &__mh_bundle_header.ncmds;
+                  pdVar32 = &__mh_bundle_header.sizeofcmds;
+                  pdVar51 = &__mh_bundle_header.flags;
+                  uVar47 = uVar38;
                 }
               }
               else {
-                pdVar27 = pdVar53 + 1;
-                pdVar20 = pdVar53 + 2;
-                pdVar22 = pdVar53 + 3;
-                pdVar29 = pdVar53 + 4;
-                pdVar33 = pdVar53 + 5;
-                pdVar52 = pdVar53 + 6;
+                pdVar26 = pdVar52 + 1;
+                pdVar19 = pdVar52 + 2;
+                pdVar21 = pdVar52 + 3;
+                pdVar28 = pdVar52 + 4;
+                pdVar32 = pdVar52 + 5;
+                pdVar51 = pdVar52 + 6;
               }
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-              *(dword **)(param_1 + 0x7c) = pdVar53;
-              *pdVar53 = local_140;
-              *pdVar27 = local_fc;
-              *pdVar20 = local_100;
-              *pdVar22 = 0;
-              *pdVar29 = 0;
-              *pdVar33 = 0;
-              uVar48 = uVar48 - 4;
-              iVar56 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,local_118,0)
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+              *(dword **)(param_1 + 0x7c) = pdVar52;
+              *pdVar52 = local_140;
+              *pdVar26 = local_fc;
+              *pdVar19 = local_100;
+              *pdVar21 = 0;
+              *pdVar28 = 0;
+              *pdVar32 = 0;
+              uVar47 = uVar47 - 4;
+              iVar55 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,local_118,0)
               ;
-              fparam_1 = extraout_f1_03;
 LAB_0000789c:
-              iVar14 = iVar56 + 9;
-              iVar40 = iVar56 + 0x16;
-              iVar23 = iVar56 << 2;
-              iVar21 = iVar56 + 1;
-              iVar25 = iVar56 + 2;
-              iVar34 = iVar56 + 3;
-              iVar58 = iVar56 + 4;
-              iVar35 = iVar56 + 5;
-              iVar41 = iVar56 + 6;
-              iVar42 = iVar56 + 7;
-              iVar18 = iVar56 + 8;
-              iVar36 = iVar56 + 10;
-              iVar43 = iVar56 + 0xb;
-              iVar37 = iVar56 + 0xc;
-              iVar44 = iVar56 + 0xd;
-              iVar46 = iVar56 + 0xe;
-              iVar47 = iVar56 + 0xf;
-              iVar49 = iVar56 + 0x10;
-              iVar50 = iVar56 + 0x11;
-              iVar57 = iVar56 + 0x12;
-              iVar15 = iVar56 + 0x13;
-              iVar16 = iVar56 + 0x14;
-              iVar56 = iVar56 + 0x15;
-              pdVar53 = pdVar52;
+              iVar13 = iVar55 + 9;
+              iVar39 = iVar55 + 0x16;
+              iVar22 = iVar55 << 2;
+              iVar20 = iVar55 + 1;
+              iVar24 = iVar55 + 2;
+              iVar33 = iVar55 + 3;
+              iVar57 = iVar55 + 4;
+              iVar34 = iVar55 + 5;
+              iVar40 = iVar55 + 6;
+              iVar41 = iVar55 + 7;
+              iVar17 = iVar55 + 8;
+              iVar35 = iVar55 + 10;
+              iVar42 = iVar55 + 0xb;
+              iVar36 = iVar55 + 0xc;
+              iVar43 = iVar55 + 0xd;
+              iVar45 = iVar55 + 0xe;
+              iVar46 = iVar55 + 0xf;
+              iVar48 = iVar55 + 0x10;
+              iVar49 = iVar55 + 0x11;
+              iVar56 = iVar55 + 0x12;
+              iVar14 = iVar55 + 0x13;
+              iVar15 = iVar55 + 0x14;
+              iVar55 = iVar55 + 0x15;
+              pdVar52 = pdVar51;
             }
             else {
-              if (uVar48 < 0x2a) {
+              if (uVar47 < 0x2a) {
                 local_364 = *(float *)(param_1 + 0x18);
                 local_360 = 0.0;
                 if (*(int *)(param_1 + 0x8c) == 0) {
-                  *pdVar53 = 0x5c8;
+                  *pdVar52 = 0x5c8;
                   local_360 = 2.8026e-45;
-                  pdVar53[1] = local_c0;
+                  pdVar52[1] = local_c0;
                   *(undefined4 *)(param_1 + 0x94) = 0;
                 }
-                pdVar53[(int)local_360] = 0x1000000;
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_360 | *puVar13;
-                iVar56 = _IOConnectMapMemory(fparam_1,*(undefined4 *)(param_1 + 0xc),0,
+                pdVar52[(int)local_360] = 0x1000000;
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_360 | *puVar12;
+                iVar55 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                              *(undefined4 *)PTR_0000e694,&local_364,&local_360,1);
-                if (iVar56 == 0) {
+                if (iVar55 == 0) {
                   *(undefined4 *)((int)local_364 + 0x1c) = 0;
                   *(float *)(param_1 + 0x18) = local_364;
-                  pdVar27 = (dword *)((int)local_364 + 0x20);
-                  pdVar52 = (dword *)((int)local_364 + 0x38);
+                  pdVar26 = (dword *)((int)local_364 + 0x20);
+                  pdVar51 = (dword *)((int)local_364 + 0x38);
                   *(int *)(param_1 + 0x7c) = (int)local_364 + 0x1c;
-                  pdVar53 = (dword *)((int)local_364 + 0x24);
-                  pdVar20 = (dword *)((int)local_364 + 0x28);
-                  pdVar22 = (dword *)((int)local_364 + 0x2c);
-                  pdVar29 = (dword *)((int)local_364 + 0x30);
-                  pdVar33 = (dword *)((int)local_364 + 0x34);
+                  pdVar52 = (dword *)((int)local_364 + 0x24);
+                  pdVar19 = (dword *)((int)local_364 + 0x28);
+                  pdVar21 = (dword *)((int)local_364 + 0x2c);
+                  pdVar28 = (dword *)((int)local_364 + 0x30);
+                  pdVar32 = (dword *)((int)local_364 + 0x34);
                 }
                 else {
-                  pdVar27 = (dword *)0x0;
+                  pdVar26 = (dword *)0x0;
                   *(undefined4 *)(param_1 + 0x7c) = 0;
                   *(undefined4 *)(param_1 + 0x18) = 0;
-                  pdVar53 = &__mh_bundle_header.cputype;
-                  pdVar20 = &__mh_bundle_header.cpusubtype;
-                  pdVar22 = &__mh_bundle_header.filetype;
-                  pdVar29 = &__mh_bundle_header.ncmds;
-                  pdVar33 = &__mh_bundle_header.sizeofcmds;
-                  pdVar52 = &__mh_bundle_header.flags;
+                  pdVar52 = &__mh_bundle_header.cputype;
+                  pdVar19 = &__mh_bundle_header.cpusubtype;
+                  pdVar21 = &__mh_bundle_header.filetype;
+                  pdVar28 = &__mh_bundle_header.ncmds;
+                  pdVar32 = &__mh_bundle_header.sizeofcmds;
+                  pdVar51 = &__mh_bundle_header.flags;
                 }
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = (int)pdVar27 - (int)puVar13 >> 2 | *puVar13;
-                *(dword **)(param_1 + 0x7c) = pdVar27;
-                *pdVar27 = local_140;
-                *pdVar53 = local_fc;
-                *pdVar20 = local_100;
-                *pdVar22 = 0;
-                *pdVar29 = 0;
-                *pdVar33 = 0;
-                uVar48 = iVar11 - 0xb;
-                iVar56 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,local_118,
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = (int)pdVar26 - (int)puVar12 >> 2 | *puVar12;
+                *(dword **)(param_1 + 0x7c) = pdVar26;
+                *pdVar26 = local_140;
+                *pdVar52 = local_fc;
+                *pdVar19 = local_100;
+                *pdVar21 = 0;
+                *pdVar28 = 0;
+                *pdVar32 = 0;
+                uVar47 = iVar10 - 0xb;
+                iVar55 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,local_118,
                                             0);
-                fparam_1 = extraout_f1_04;
                 goto LAB_0000789c;
               }
-              iVar23 = 0;
-              iVar21 = 1;
-              iVar25 = 2;
-              iVar14 = 9;
-              iVar34 = 3;
-              iVar58 = 4;
-              iVar35 = 5;
-              iVar41 = 6;
-              iVar42 = 7;
-              iVar18 = 8;
-              iVar36 = 10;
-              iVar43 = 0xb;
-              iVar37 = 0xc;
-              iVar44 = 0xd;
-              iVar46 = 0xe;
-              iVar47 = 0xf;
-              iVar49 = 0x10;
-              iVar50 = 0x11;
-              iVar57 = 0x12;
-              iVar15 = 0x13;
-              iVar16 = 0x14;
-              iVar56 = 0x15;
-              iVar40 = 0x16;
+              iVar22 = 0;
+              iVar20 = 1;
+              iVar24 = 2;
+              iVar13 = 9;
+              iVar33 = 3;
+              iVar57 = 4;
+              iVar34 = 5;
+              iVar40 = 6;
+              iVar41 = 7;
+              iVar17 = 8;
+              iVar35 = 10;
+              iVar42 = 0xb;
+              iVar36 = 0xc;
+              iVar43 = 0xd;
+              iVar45 = 0xe;
+              iVar46 = 0xf;
+              iVar48 = 0x10;
+              iVar49 = 0x11;
+              iVar56 = 0x12;
+              iVar14 = 0x13;
+              iVar15 = 0x14;
+              iVar55 = 0x15;
+              iVar39 = 0x16;
             }
-            *(undefined4 *)((int)pdVar53 + iVar23) = 0x10f8;
-            pdVar53[iVar21] = local_16c & 0x1fff | (local_128 & 0x1fff) << 0xd;
-            pdVar53[iVar25] = 0x10f9;
-            pdVar53[iVar34] = local_124 & 0x1fff | (local_12c & 0x1fff) << 0xd;
-            pdVar53[iVar58] = 0xc00c3500;
-            pdVar53[iVar35] = 0x4003d;
-            pdVar53[iVar41] = local_16c | local_12c << 0x10;
-            pdVar53[iVar42] = (dword)fVar28;
-            pdVar53[iVar18] = (dword)fVar7;
-            pdVar53[iVar14] = local_16c | local_128 << 0x10;
-            pdVar53[iVar36] = (dword)fVar28;
-            pdVar53[iVar43] = (dword)fVar17;
-            pdVar53[iVar37] = local_124 | local_128 << 0x10;
-            pdVar53[iVar44] = (dword)fVar32;
-            pdVar53[iVar46] = (dword)fVar17;
-            pdVar53[iVar47] = local_124 | local_12c << 0x10;
-            pdVar53[iVar49] = (dword)fVar32;
-            pdVar53[iVar50] = (dword)fVar7;
-            pdVar53[iVar57] = 0x1393;
-            pdVar53[iVar15] = 10;
-            pdVar53[iVar16] = 0x5c8;
-            pdVar53[iVar56] = 0x20000;
-            uVar48 = uVar48 - iVar40;
+            *(undefined4 *)((int)pdVar52 + iVar22) = 0x10f8;
+            pdVar52[iVar20] = local_16c & 0x1fff | (local_128 & 0x1fff) << 0xd;
+            pdVar52[iVar24] = 0x10f9;
+            pdVar52[iVar33] = local_124 & 0x1fff | (local_12c & 0x1fff) << 0xd;
+            pdVar52[iVar57] = 0xc00c3500;
+            pdVar52[iVar34] = 0x4003d;
+            pdVar52[iVar40] = local_16c | local_12c << 0x10;
+            pdVar52[iVar41] = (dword)fVar16;
+            pdVar52[iVar17] = (dword)fVar31;
+            pdVar52[iVar13] = local_16c | local_128 << 0x10;
+            pdVar52[iVar35] = (dword)fVar16;
+            pdVar52[iVar42] = (dword)fVar27;
+            pdVar52[iVar36] = local_124 | local_128 << 0x10;
+            pdVar52[iVar43] = (dword)fVar7;
+            pdVar52[iVar45] = (dword)fVar27;
+            pdVar52[iVar46] = local_124 | local_12c << 0x10;
+            pdVar52[iVar48] = (dword)fVar7;
+            pdVar52[iVar49] = (dword)fVar31;
+            pdVar52[iVar56] = 0x1393;
+            pdVar52[iVar14] = 10;
+            pdVar52[iVar15] = 0x5c8;
+            pdVar52[iVar55] = 0x20000;
+            uVar47 = uVar47 - iVar39;
             bVar1 = false;
-            pdVar53 = pdVar53 + iVar40;
-            local_364 = fVar7;
-            local_360 = fVar17;
-            local_35c = fVar32;
-            local_358 = fVar28;
+            pdVar52 = pdVar52 + iVar39;
+            local_364 = fVar31;
+            local_360 = fVar27;
+            local_35c = fVar7;
+            local_358 = fVar16;
           }
           local_174 = local_174 + 1;
           local_168 = local_168 + 2;
-        } while (iVar38 != local_174);
+        } while (iVar37 != local_174);
         bVar1 = true;
         local_178 = 0;
         local_bc = 0xc000;
-        piVar54 = local_d4;
+        piVar53 = local_d4;
         do {
-          iVar23 = (int)*(short *)piVar54;
-          iVar56 = iVar23 + *(short *)(piVar54 + 1) + local_ec;
-          if ((int)local_120 < iVar56) {
+          iVar22 = (int)*(short *)piVar53;
+          iVar55 = iVar22 + *(short *)(piVar53 + 1) + local_ec;
+          if ((int)local_120 < iVar55) {
             uStack_1bc = local_120;
-            if ((int)local_120 < iVar23 + local_ec) {
-              uStack_1bc = iVar23 + local_ec;
+            if ((int)local_120 < iVar22 + local_ec) {
+              uStack_1bc = iVar22 + local_ec;
             }
             uStack_1bc = uStack_1bc ^ 0x80000000;
             uStack_1b4 = local_120 ^ 0x80000000;
-            uStack_1ac = iVar56 - local_120 ^ 0x80000000;
-            local_134 = local_e4 + iVar23;
+            uStack_1ac = iVar55 - local_120 ^ 0x80000000;
+            local_134 = local_e4 + iVar22;
             local_1c0 = 0x43300000;
             local_1b8 = 0x43300000;
             local_1b0 = 0x43300000;
-            iVar56 = (int)(short)*piVar54;
+            iVar55 = (int)(short)*piVar53;
             local_1a8 = 0x43300000;
-            uStack_1a4 = iVar56 + local_f0 ^ 0x80000000;
+            uStack_1a4 = iVar55 + local_f0 ^ 0x80000000;
             local_1a0 = 0x43300000;
-            uStack_19c = iVar56 + *(short *)((int)piVar54 + 6) + local_ec ^ 0x80000000;
+            uStack_19c = iVar55 + *(short *)((int)piVar53 + 6) + local_ec ^ 0x80000000;
             if ((int)local_120 < (int)local_134) {
               uStack_194 = local_134 ^ 0x80000000;
               local_198 = 0x43300000;
-              uVar55 = uStack_194;
+              uVar54 = uStack_194;
             }
             else {
               local_190 = 0x43300000;
               uStack_18c = local_e4 + local_120 ^ 0x80000000;
-              uVar55 = uStack_18c;
+              uVar54 = uStack_18c;
             }
-            dVar61 = (double)CONCAT44(0x43300000,uVar55) - DOUBLE_0000cfe0;
-            dVar62 = (double)(float)dVar61;
-            if (DOUBLE_0000cff0 <= dVar62) {
-              iVar23 = (int)(dVar62 - DOUBLE_0000cff0);
-              local_180 = (longlong)iVar23;
-              local_130 = iVar23 + 0x80000000;
+            dVar60 = (double)CONCAT44(0x43300000,uVar54) - 4503601774854144.0;
+            fVar4 = (float)dVar60;
+            if (2.1474836e+09 <= fVar4) {
+              iVar22 = (int)(fVar4 - 2.1474836e+09);
+              local_180 = (longlong)iVar22;
+              local_130 = iVar22 + 0x80000000;
             }
             else {
-              local_130 = (uint)dVar61;
+              local_130 = (uint)dVar60;
               local_188 = (longlong)(int)local_130;
             }
-            local_134 = local_134 + (int)*(short *)(piVar54 + 1);
-            fVar7 = fVar19 * fVar4 * ((float)((double)CONCAT44(0x43300000,uStack_1bc) -
-                                             DOUBLE_0000cfe0) -
+            local_134 = local_134 + (int)*(short *)(piVar53 + 1);
+            fVar4 = fVar18 * fVar3 * ((float)((double)CONCAT44(0x43300000,uStack_1bc) -
+                                             4503601774854144.0) -
                                      (float)((double)CONCAT44(0x43300000,uStack_1b4) -
-                                            DOUBLE_0000cfe0));
-            fVar28 = fVar19 * fVar4 * (float)((double)CONCAT44(0x43300000,uStack_1ac) -
-                                             DOUBLE_0000cfe0);
-            fVar8 = fVar26 * fVar31 * (float)((double)CONCAT44(0x43300000,uStack_1a4) -
-                                             DOUBLE_0000cfe0);
-            fVar17 = fVar26 * fVar31 * (float)((double)CONCAT44(0x43300000,uStack_19c) -
-                                              DOUBLE_0000cfe0);
-            local_138 = local_e8 + iVar56;
-            local_13c = local_138 + (int)*(short *)((int)piVar54 + 6);
+                                            4503601774854144.0));
+            fVar16 = fVar18 * fVar3 * (float)((double)CONCAT44(0x43300000,uStack_1ac) -
+                                             4503601774854144.0);
+            fVar7 = fVar25 * fVar30 * (float)((double)CONCAT44(0x43300000,uStack_1a4) -
+                                             4503601774854144.0);
+            fVar27 = fVar25 * fVar30 * (float)((double)CONCAT44(0x43300000,uStack_19c) -
+                                              4503601774854144.0);
+            local_138 = local_e8 + iVar55;
+            local_13c = local_138 + (int)*(short *)((int)piVar53 + 6);
             if (bVar1) {
-              if (uVar48 < 0x9e) {
+              if (uVar47 < 0x9e) {
                 local_35c = *(float *)(param_1 + 0x18);
                 local_358 = 0.0;
                 if (*(int *)(param_1 + 0x8c) == 0) {
-                  *pdVar53 = 0x5c8;
+                  *pdVar52 = 0x5c8;
                   local_358 = 2.8026e-45;
-                  pdVar53[1] = local_bc;
+                  pdVar52[1] = local_bc;
                   *(undefined4 *)(param_1 + 0x94) = 0;
                 }
-                pdVar53[(int)local_358] = 0x1000000;
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_358 | *puVar13;
-                iVar56 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                pdVar52[(int)local_358] = 0x1000000;
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_358 | *puVar12;
+                iVar55 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                              *(undefined4 *)PTR_0000e694,&local_35c,&local_358,1);
-                if (iVar56 == 0) {
+                if (iVar55 == 0) {
                   *(undefined4 *)((int)local_35c + 0x1c) = 0;
                   *(float *)(param_1 + 0x18) = local_35c;
-                  pdVar53 = (dword *)((int)local_35c + 0x20);
-                  pdVar52 = (dword *)((int)local_35c + 0x38);
+                  pdVar52 = (dword *)((int)local_35c + 0x20);
+                  pdVar51 = (dword *)((int)local_35c + 0x38);
                   *(int *)(param_1 + 0x7c) = (int)local_35c + 0x1c;
-                  pdVar27 = (dword *)((int)local_35c + 0x24);
-                  pdVar20 = (dword *)((int)local_35c + 0x28);
-                  pdVar22 = (dword *)((int)local_35c + 0x2c);
-                  pdVar29 = (dword *)((int)local_35c + 0x30);
-                  pdVar33 = (dword *)((int)local_35c + 0x34);
-                  uVar48 = uVar39;
+                  pdVar26 = (dword *)((int)local_35c + 0x24);
+                  pdVar19 = (dword *)((int)local_35c + 0x28);
+                  pdVar21 = (dword *)((int)local_35c + 0x2c);
+                  pdVar28 = (dword *)((int)local_35c + 0x30);
+                  pdVar32 = (dword *)((int)local_35c + 0x34);
+                  uVar47 = uVar38;
                 }
                 else {
-                  pdVar53 = (dword *)0x0;
+                  pdVar52 = (dword *)0x0;
                   *(undefined4 *)(param_1 + 0x7c) = 0;
                   *(undefined4 *)(param_1 + 0x18) = 0;
-                  pdVar27 = &__mh_bundle_header.cputype;
-                  pdVar20 = &__mh_bundle_header.cpusubtype;
-                  pdVar22 = &__mh_bundle_header.filetype;
-                  pdVar29 = &__mh_bundle_header.ncmds;
-                  pdVar33 = &__mh_bundle_header.sizeofcmds;
-                  pdVar52 = &__mh_bundle_header.flags;
-                  uVar48 = uVar39;
+                  pdVar26 = &__mh_bundle_header.cputype;
+                  pdVar19 = &__mh_bundle_header.cpusubtype;
+                  pdVar21 = &__mh_bundle_header.filetype;
+                  pdVar28 = &__mh_bundle_header.ncmds;
+                  pdVar32 = &__mh_bundle_header.sizeofcmds;
+                  pdVar51 = &__mh_bundle_header.flags;
+                  uVar47 = uVar38;
                 }
               }
               else {
-                pdVar27 = pdVar53 + 1;
-                pdVar20 = pdVar53 + 2;
-                pdVar22 = pdVar53 + 3;
-                pdVar29 = pdVar53 + 4;
-                pdVar33 = pdVar53 + 5;
-                pdVar52 = pdVar53 + 6;
+                pdVar26 = pdVar52 + 1;
+                pdVar19 = pdVar52 + 2;
+                pdVar21 = pdVar52 + 3;
+                pdVar28 = pdVar52 + 4;
+                pdVar32 = pdVar52 + 5;
+                pdVar51 = pdVar52 + 6;
               }
-              puVar13 = *(uint **)(param_1 + 0x7c);
-              *puVar13 = (int)pdVar53 - (int)puVar13 >> 2 | *puVar13;
-              *(dword **)(param_1 + 0x7c) = pdVar53;
-              *pdVar53 = local_140;
-              *pdVar27 = local_fc;
-              *pdVar20 = local_100;
-              *pdVar22 = 0;
-              *pdVar29 = local_d8[0xb];
-              *pdVar33 = local_120;
-              uVar48 = uVar48 - 4;
-              iVar56 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,local_11c,0)
+              puVar12 = *(uint **)(param_1 + 0x7c);
+              *puVar12 = (int)pdVar52 - (int)puVar12 >> 2 | *puVar12;
+              *(dword **)(param_1 + 0x7c) = pdVar52;
+              *pdVar52 = local_140;
+              *pdVar26 = local_fc;
+              *pdVar19 = local_100;
+              *pdVar21 = 0;
+              *pdVar28 = local_d8[0xb];
+              *pdVar32 = local_120;
+              uVar47 = uVar47 - 4;
+              iVar55 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,local_11c,0)
               ;
 LAB_00007ff0:
-              iVar14 = iVar56 + 9;
-              iVar15 = iVar56 + 10;
-              iVar40 = iVar56 + 0x16;
-              iVar23 = iVar56 << 2;
-              iVar25 = iVar56 + 1;
-              iVar34 = iVar56 + 2;
-              iVar35 = iVar56 + 3;
-              iVar41 = iVar56 + 4;
-              iVar42 = iVar56 + 5;
-              iVar43 = iVar56 + 6;
-              iVar44 = iVar56 + 7;
-              iVar21 = iVar56 + 8;
-              iVar46 = iVar56 + 0xb;
-              iVar37 = iVar56 + 0xc;
-              iVar47 = iVar56 + 0xd;
-              iVar49 = iVar56 + 0xe;
-              iVar58 = iVar56 + 0xf;
-              iVar36 = iVar56 + 0x10;
-              iVar50 = iVar56 + 0x11;
-              iVar57 = iVar56 + 0x12;
-              iVar16 = iVar56 + 0x13;
-              iVar18 = iVar56 + 0x14;
-              iVar56 = iVar56 + 0x15;
-              pdVar53 = pdVar52;
+              iVar13 = iVar55 + 9;
+              iVar14 = iVar55 + 10;
+              iVar39 = iVar55 + 0x16;
+              iVar22 = iVar55 << 2;
+              iVar24 = iVar55 + 1;
+              iVar33 = iVar55 + 2;
+              iVar34 = iVar55 + 3;
+              iVar40 = iVar55 + 4;
+              iVar41 = iVar55 + 5;
+              iVar42 = iVar55 + 6;
+              iVar43 = iVar55 + 7;
+              iVar20 = iVar55 + 8;
+              iVar45 = iVar55 + 0xb;
+              iVar36 = iVar55 + 0xc;
+              iVar46 = iVar55 + 0xd;
+              iVar48 = iVar55 + 0xe;
+              iVar57 = iVar55 + 0xf;
+              iVar35 = iVar55 + 0x10;
+              iVar49 = iVar55 + 0x11;
+              iVar56 = iVar55 + 0x12;
+              iVar15 = iVar55 + 0x13;
+              iVar17 = iVar55 + 0x14;
+              iVar55 = iVar55 + 0x15;
+              pdVar52 = pdVar51;
             }
             else {
-              if (uVar48 < 0x2a) {
+              if (uVar47 < 0x2a) {
                 local_358 = *(float *)(param_1 + 0x18);
                 local_35c = 0.0;
                 if (*(int *)(param_1 + 0x8c) == 0) {
-                  *pdVar53 = 0x5c8;
+                  *pdVar52 = 0x5c8;
                   local_35c = 2.8026e-45;
-                  pdVar53[1] = local_bc;
+                  pdVar52[1] = local_bc;
                   *(undefined4 *)(param_1 + 0x94) = 0;
                 }
-                pdVar53[(int)local_35c] = 0x1000000;
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = ((int)pdVar53 - (int)puVar13 >> 2) + (int)local_35c | *puVar13;
-                iVar56 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                pdVar52[(int)local_35c] = 0x1000000;
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = ((int)pdVar52 - (int)puVar12 >> 2) + (int)local_35c | *puVar12;
+                iVar55 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                              *(undefined4 *)PTR_0000e694,&local_358,&local_35c,1);
-                if (iVar56 == 0) {
+                if (iVar55 == 0) {
                   *(undefined4 *)((int)local_358 + 0x1c) = 0;
                   *(float *)(param_1 + 0x18) = local_358;
-                  pdVar27 = (dword *)((int)local_358 + 0x20);
-                  pdVar52 = (dword *)((int)local_358 + 0x38);
+                  pdVar26 = (dword *)((int)local_358 + 0x20);
+                  pdVar51 = (dword *)((int)local_358 + 0x38);
                   *(int *)(param_1 + 0x7c) = (int)local_358 + 0x1c;
-                  pdVar53 = (dword *)((int)local_358 + 0x24);
-                  pdVar20 = (dword *)((int)local_358 + 0x28);
-                  pdVar22 = (dword *)((int)local_358 + 0x2c);
-                  pdVar29 = (dword *)((int)local_358 + 0x30);
-                  pdVar33 = (dword *)((int)local_358 + 0x34);
+                  pdVar52 = (dword *)((int)local_358 + 0x24);
+                  pdVar19 = (dword *)((int)local_358 + 0x28);
+                  pdVar21 = (dword *)((int)local_358 + 0x2c);
+                  pdVar28 = (dword *)((int)local_358 + 0x30);
+                  pdVar32 = (dword *)((int)local_358 + 0x34);
                 }
                 else {
-                  pdVar27 = (dword *)0x0;
+                  pdVar26 = (dword *)0x0;
                   *(undefined4 *)(param_1 + 0x7c) = 0;
                   *(undefined4 *)(param_1 + 0x18) = 0;
-                  pdVar53 = &__mh_bundle_header.cputype;
-                  pdVar20 = &__mh_bundle_header.cpusubtype;
-                  pdVar22 = &__mh_bundle_header.filetype;
-                  pdVar29 = &__mh_bundle_header.ncmds;
-                  pdVar33 = &__mh_bundle_header.sizeofcmds;
-                  pdVar52 = &__mh_bundle_header.flags;
+                  pdVar52 = &__mh_bundle_header.cputype;
+                  pdVar19 = &__mh_bundle_header.cpusubtype;
+                  pdVar21 = &__mh_bundle_header.filetype;
+                  pdVar28 = &__mh_bundle_header.ncmds;
+                  pdVar32 = &__mh_bundle_header.sizeofcmds;
+                  pdVar51 = &__mh_bundle_header.flags;
                 }
-                puVar13 = *(uint **)(param_1 + 0x7c);
-                *puVar13 = (int)pdVar27 - (int)puVar13 >> 2 | *puVar13;
-                *(dword **)(param_1 + 0x7c) = pdVar27;
-                *pdVar27 = local_140;
-                *pdVar53 = local_fc;
-                *pdVar20 = local_100;
-                *pdVar22 = 0;
-                *pdVar29 = local_d8[0xb];
-                *pdVar33 = local_120;
-                uVar48 = iVar11 - 0xb;
-                iVar56 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar52,local_d8,local_f4,local_144,0,local_11c,
+                puVar12 = *(uint **)(param_1 + 0x7c);
+                *puVar12 = (int)pdVar26 - (int)puVar12 >> 2 | *puVar12;
+                *(dword **)(param_1 + 0x7c) = pdVar26;
+                *pdVar26 = local_140;
+                *pdVar52 = local_fc;
+                *pdVar19 = local_100;
+                *pdVar21 = 0;
+                *pdVar28 = local_d8[0xb];
+                *pdVar32 = local_120;
+                uVar47 = iVar10 - 0xb;
+                iVar55 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar51,local_d8,local_f4,local_144,0,local_11c,
                                             0);
                 goto LAB_00007ff0;
               }
-              iVar23 = 0;
-              iVar25 = 1;
-              iVar14 = 9;
-              iVar34 = 2;
-              iVar35 = 3;
-              iVar15 = 10;
-              iVar41 = 4;
-              iVar42 = 5;
-              iVar43 = 6;
-              iVar44 = 7;
-              iVar21 = 8;
-              iVar46 = 0xb;
-              iVar37 = 0xc;
-              iVar47 = 0xd;
-              iVar49 = 0xe;
-              iVar58 = 0xf;
-              iVar36 = 0x10;
-              iVar50 = 0x11;
-              iVar57 = 0x12;
-              iVar16 = 0x13;
-              iVar18 = 0x14;
-              iVar56 = 0x15;
-              iVar40 = 0x16;
+              iVar22 = 0;
+              iVar24 = 1;
+              iVar13 = 9;
+              iVar33 = 2;
+              iVar34 = 3;
+              iVar14 = 10;
+              iVar40 = 4;
+              iVar41 = 5;
+              iVar42 = 6;
+              iVar43 = 7;
+              iVar20 = 8;
+              iVar45 = 0xb;
+              iVar36 = 0xc;
+              iVar46 = 0xd;
+              iVar48 = 0xe;
+              iVar57 = 0xf;
+              iVar35 = 0x10;
+              iVar49 = 0x11;
+              iVar56 = 0x12;
+              iVar15 = 0x13;
+              iVar17 = 0x14;
+              iVar55 = 0x15;
+              iVar39 = 0x16;
             }
-            *(undefined4 *)((int)pdVar53 + iVar23) = 0x10f8;
-            pdVar53[iVar25] = local_130 & 0x1fff | (local_138 & 0x1fff) << 0xd;
-            pdVar53[iVar34] = 0x10f9;
-            pdVar53[iVar35] = local_134 & 0x1fff | (local_13c & 0x1fff) << 0xd;
-            pdVar53[iVar41] = 0xc00c3500;
-            pdVar53[iVar42] = 0x4003d;
-            pdVar53[iVar43] = local_130 | local_13c << 0x10;
-            pdVar53[iVar44] = (dword)fVar7;
-            pdVar53[iVar21] = (dword)fVar17;
-            pdVar53[iVar14] = local_130 | local_138 << 0x10;
-            pdVar53[iVar15] = (dword)fVar7;
-            pdVar53[iVar46] = (dword)fVar8;
-            pdVar53[iVar37] = local_134 | local_138 << 0x10;
-            pdVar53[iVar47] = (dword)fVar28;
-            pdVar53[iVar49] = (dword)fVar8;
-            pdVar53[iVar58] = local_134 | local_13c << 0x10;
-            pdVar53[iVar36] = (dword)fVar28;
-            pdVar53[iVar50] = (dword)fVar17;
-            pdVar53[iVar57] = 0x1393;
-            pdVar53[iVar16] = 10;
-            pdVar53[iVar18] = 0x5c8;
-            pdVar53[iVar56] = 0x20000;
-            uVar48 = uVar48 - iVar40;
+            *(undefined4 *)((int)pdVar52 + iVar22) = 0x10f8;
+            pdVar52[iVar24] = local_130 & 0x1fff | (local_138 & 0x1fff) << 0xd;
+            pdVar52[iVar33] = 0x10f9;
+            pdVar52[iVar34] = local_134 & 0x1fff | (local_13c & 0x1fff) << 0xd;
+            pdVar52[iVar40] = 0xc00c3500;
+            pdVar52[iVar41] = 0x4003d;
+            pdVar52[iVar42] = local_130 | local_13c << 0x10;
+            pdVar52[iVar43] = (dword)fVar4;
+            pdVar52[iVar20] = (dword)fVar27;
+            pdVar52[iVar13] = local_130 | local_138 << 0x10;
+            pdVar52[iVar14] = (dword)fVar4;
+            pdVar52[iVar45] = (dword)fVar7;
+            pdVar52[iVar36] = local_134 | local_138 << 0x10;
+            pdVar52[iVar46] = (dword)fVar16;
+            pdVar52[iVar48] = (dword)fVar7;
+            pdVar52[iVar57] = local_134 | local_13c << 0x10;
+            pdVar52[iVar35] = (dword)fVar16;
+            pdVar52[iVar49] = (dword)fVar27;
+            pdVar52[iVar56] = 0x1393;
+            pdVar52[iVar15] = 10;
+            pdVar52[iVar17] = 0x5c8;
+            pdVar52[iVar55] = 0x20000;
+            uVar47 = uVar47 - iVar39;
             bVar1 = false;
-            pdVar53 = pdVar53 + iVar40;
-            local_364 = fVar8;
-            local_360 = fVar28;
-            local_35c = fVar7;
-            local_358 = fVar17;
+            pdVar52 = pdVar52 + iVar39;
+            local_364 = fVar7;
+            local_360 = fVar16;
+            local_35c = fVar4;
+            local_358 = fVar27;
           }
-          piVar54 = piVar54 + 2;
+          piVar53 = piVar53 + 2;
           local_178 = local_178 + 1;
-        } while (iVar38 != local_178);
+        } while (iVar37 != local_178);
       }
     }
-    iVar11 = 0;
-    *(dword **)(param_1 + 0x80) = pdVar53;
+    iVar10 = 0;
+    *(dword **)(param_1 + 0x80) = pdVar52;
   }
-  return iVar11;
+  return iVar10;
 }
 
 /* _radeonFill @ 0x8260 (9000 bytes) */
@@ -3085,65 +3072,55 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
   float fVar1;
   float fVar2;
   float fVar3;
-  float fVar4;
-  float fVar5;
-  float fVar6;
-  bool bVar7;
-  bool bVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  float fVar14;
-  float fVar15;
-  undefined *puVar16;
-  undefined4 *puVar17;
-  float fVar18;
-  int iVar19;
-  dword dVar20;
-  int iVar21;
-  int iVar22;
-  int iVar23;
-  dword *pdVar24;
-  float fVar25;
-  dword *pdVar26;
-  uint uVar27;
+  bool bVar4;
+  bool bVar5;
+  double dVar6;
+  undefined *puVar7;
+  undefined4 *puVar8;
+  float fVar9;
+  int iVar10;
+  dword dVar11;
+  int iVar12;
+  int iVar13;
+  int iVar14;
+  dword *pdVar15;
+  float fVar16;
+  dword *pdVar17;
+  uint uVar18;
+  float fVar19;
+  dword *pdVar20;
+  int *piVar21;
+  dword *pdVar22;
+  float fVar23;
+  int iVar24;
+  uint *puVar25;
+  int iVar26;
+  dword *pdVar27;
   float fVar28;
-  dword *pdVar29;
-  int *piVar30;
+  float fVar29;
+  uint uVar30;
   dword *pdVar31;
-  float fVar32;
-  int iVar33;
-  uint *puVar34;
+  int iVar32;
+  uint uVar33;
+  uint uVar34;
   int iVar35;
-  dword *pdVar36;
-  float fVar37;
-  float fVar38;
+  uint uVar36;
+  int iVar37;
+  uint uVar38;
   uint uVar39;
-  dword *pdVar40;
+  int iVar40;
   int iVar41;
-  uint uVar42;
+  int iVar42;
   uint uVar43;
   int iVar44;
-  uint uVar45;
+  dword *pdVar45;
   int iVar46;
-  uint uVar47;
-  uint uVar48;
-  int iVar49;
+  int iVar47;
+  int iVar48;
+  undefined4 *puVar49;
   int iVar50;
   int iVar51;
-  uint uVar52;
-  int iVar53;
-  dword *pdVar54;
-  int iVar55;
-  int iVar56;
-  int iVar57;
-  undefined4 *puVar58;
-  int iVar59;
-  int iVar60;
-  int iVar61;
-  double dVar62;
+  int iVar52;
   float local_308;
   float local_304;
   float local_300;
@@ -3288,44 +3265,37 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
   float *local_c0;
   uint local_bc;
   
-  uVar42 = param_4 & 0x7ffff000;
-  if ((uVar42 != 0x6000) || ((param_3 & 0xf000) != 0)) {
-    pdVar54 = *(dword **)(param_1 + 0x80);
-    iVar33 = *(int *)(param_1 + 0x18);
-    uVar52 = param_5[5];
-    uVar39 = *(int *)(iVar33 + 0x10) - 7;
-    if ((pdVar54 != (dword *)0x0) &&
-       ((iVar21 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,(uint)(*(int *)(param_1 + 0x70) == 3)),
-        iVar21 != 0 &&
-        (iVar21 = ((int (*)())_createTextureBuffer)(param_1,0x40,0x40,(uint)(*(int *)(param_1 + 0x70) == 3)),
-        iVar21 != 0)))) {
+  uVar33 = param_4 & 0x7ffff000;
+  if ((uVar33 != 0x6000) || ((param_3 & 0xf000) != 0)) {
+    pdVar45 = *(dword **)(param_1 + 0x80);
+    iVar24 = *(int *)(param_1 + 0x18);
+    uVar43 = param_5[5];
+    uVar30 = *(int *)(iVar24 + 0x10) - 7;
+    if ((pdVar45 != (dword *)0x0) &&
+       ((iVar12 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,(uint)(*(int *)(param_1 + 0x70) == 3)),
+        iVar12 != 0 &&
+        (iVar12 = ((int (*)())_createTextureBuffer)(param_1,0x40,0x40,(uint)(*(int *)(param_1 + 0x70) == 3)),
+        iVar12 != 0)))) {
       local_f0 = 0x8284;
       local_108 = DAT_0000e748 + 0xc;
-      if (uVar42 != 0x6000) {
-        _fillTextureWithPattern(param_6,uVar42,*param_5,param_5[1]);
+      if (uVar33 != 0x6000) {
+        _fillTextureWithPattern(param_6,uVar33,*param_5,param_5[1]);
       }
       else {
         _fillTextureWithPattern(param_6,0x6000,param_6,param_6);
       }
-      dVar13 = DOUBLE_0000cfe8;
-      dVar11 = DOUBLE_0000cfe0;
-      dVar9 = DOUBLE_0000cfd8;
-      uVar42 = uVar39 - ((int)pdVar54 - (iVar33 + 0x20) >> 2);
+      uVar33 = uVar30 - ((int)pdVar45 - (iVar24 + 0x20) >> 2);
       if (param_5[0x16] != 0) {
-        local_bc = uVar52 & 0x7c00;
+        local_bc = uVar43 & 0x7c00;
         local_c4 = (param_3 & 0xc000) >> 0xe & 1;
         local_104 = 0;
-        bVar8 = (param_3 & 0xc000) == 0;
-        puVar58 = param_5;
+        bVar5 = (param_3 & 0xc000) == 0;
+        puVar49 = param_5;
         do {
-          fVar15 = FLOAT_0000d00c;
-          fVar14 = FLOAT_0000d008;
-          fVar18 = FLOAT_0000d000;
-          dVar10 = DOUBLE_0000cfd8;
-          local_114 = puVar58[0x18] + *(int *)(param_1 + 100);
-          local_118 = local_114 + puVar58[0x1a];
-          local_10c = puVar58[0x17] + *(int *)(param_1 + 0x60);
-          local_110 = local_10c + puVar58[0x19];
+          local_114 = puVar49[0x18] + *(int *)(param_1 + 100);
+          local_118 = local_114 + puVar49[0x1a];
+          local_10c = puVar49[0x17] + *(int *)(param_1 + 0x60);
+          local_110 = local_10c + puVar49[0x19];
           local_120 = local_118;
           if (local_114 + 8 < local_118) {
             local_120 = local_114 + 8;
@@ -3334,25 +3304,23 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
           iStack_2ac = (local_114 & 7) + param_5[3];
           local_2b8 = 0x43300000;
           local_2b0 = 0x43300000;
-          fVar1 = (float)((double)CONCAT44(0x43300000,iStack_2b4) - dVar9);
-          fVar2 = (float)((double)CONCAT44(0x43300000,iStack_2ac) - dVar9);
+          fVar9 = (float)((double)CONCAT44(0x43300000,iStack_2b4) - 4503599627370496.0);
+          fVar1 = (float)((double)CONCAT44(0x43300000,iStack_2ac) - 4503599627370496.0);
           if (local_114 < local_118) {
-            uVar48 = local_10c + 8;
-            uVar43 = local_110;
-            if (uVar48 < local_110) {
-              uVar43 = uVar48;
+            uVar39 = local_10c + 8;
+            uVar34 = local_110;
+            if (uVar39 < local_110) {
+              uVar34 = uVar39;
             }
             local_290 = 0x43300000;
-            bVar7 = true;
+            bVar4 = true;
             uStack_28c = local_bc >> 10;
-            fVar5 = fVar2 + FLOAT_0000d008;
-            fVar6 = fVar2 + FLOAT_0000d00c;
-            dVar62 = (double)CONCAT44(0x43300000,uStack_28c) - DOUBLE_0000cfd8;
-            uVar27 = local_114;
+            dVar6 = (double)CONCAT44(0x43300000,uStack_28c);
+            uVar18 = local_114;
             do {
-              local_11c = uVar27;
+              local_11c = uVar18;
               if (local_10c < local_110) {
-                if (!bVar7) {
+                if (!bVar4) {
                   local_ec = &local_308;
                   local_2a8 = 0x43300000;
                   local_2a0 = 0x43300000;
@@ -3368,31 +3336,31 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                   local_d8 = &local_2f4;
                   local_e8 = &local_304;
                   local_f4 = local_120 - local_11c;
-                  fVar3 = (float)((double)CONCAT44(0x43300000,local_11c) - dVar10);
-                  fVar4 = (float)((double)CONCAT44(0x43300000,local_120) - dVar10);
-                  uVar27 = uVar48;
-                  uVar47 = local_10c;
-                  local_124 = uVar43;
+                  fVar2 = (float)((double)CONCAT44(0x43300000,local_11c) - 4503599627370496.0);
+                  fVar3 = (float)((double)CONCAT44(0x43300000,local_120) - 4503599627370496.0);
+                  uVar18 = uVar39;
+                  uVar38 = local_10c;
+                  local_124 = uVar34;
                   goto LAB_00008bec;
                 }
-                uVar45 = uVar48;
-                if (uVar42 < 0xd4) {
+                uVar36 = uVar39;
+                if (uVar33 < 0xd4) {
                   local_2ec = *(float *)(param_1 + 0x18);
                   local_2e8 = 0.0;
                   if (*(int *)(param_1 + 0x8c) == 0) {
-                    *pdVar54 = 0x5c8;
+                    *pdVar45 = 0x5c8;
                     local_2e8 = 2.8026e-45;
-                    pdVar54[1] = 0xc000;
+                    pdVar45[1] = 0xc000;
                     *(undefined4 *)(param_1 + 0x94) = 0;
                   }
-                  pdVar54[(int)local_2e8] = 0x1000000;
-                  puVar16 = PTR_0000e694;
-                  puVar34 = *(uint **)(param_1 + 0x7c);
-                  *puVar34 = ((int)pdVar54 - (int)puVar34 >> 2) + (int)local_2e8 | *puVar34;
-                  iVar33 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
-                                               *(undefined4 *)puVar16,&local_2ec,&local_2e8,1);
+                  pdVar45[(int)local_2e8] = 0x1000000;
+                  puVar7 = PTR_0000e694;
+                  puVar25 = *(uint **)(param_1 + 0x7c);
+                  *puVar25 = ((int)pdVar45 - (int)puVar25 >> 2) + (int)local_2e8 | *puVar25;
+                  iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                                               *(undefined4 *)puVar7,&local_2ec,&local_2e8,1);
                   uStack_244 = local_10c;
-                  if (iVar33 == 0) {
+                  if (iVar24 == 0) {
                     local_e8 = &local_304;
                     local_e0 = &local_2fc;
                     local_d0 = local_2e4;
@@ -3403,43 +3371,43 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     local_d4 = &local_2f0;
                     local_c8 = local_11c << 0x10;
                     local_cc = local_120 << 0x10;
-                    pdVar54 = (dword *)((int)local_2ec + 0x20);
-                    pdVar31 = (dword *)((int)local_2ec + 0x38);
-                    pdVar24 = (dword *)((int)local_2ec + 0x24);
+                    pdVar45 = (dword *)((int)local_2ec + 0x20);
+                    pdVar22 = (dword *)((int)local_2ec + 0x38);
+                    pdVar15 = (dword *)((int)local_2ec + 0x24);
                     local_d8 = &local_2f4;
-                    pdVar26 = (dword *)((int)local_2ec + 0x2c);
-                    pdVar40 = (dword *)((int)local_2ec + 0x28);
+                    pdVar17 = (dword *)((int)local_2ec + 0x2c);
+                    pdVar31 = (dword *)((int)local_2ec + 0x28);
                     local_f4 = local_120 - local_11c;
-                    pdVar29 = (dword *)((int)local_2ec + 0x30);
-                    pdVar36 = (dword *)((int)local_2ec + 0x34);
+                    pdVar20 = (dword *)((int)local_2ec + 0x30);
+                    pdVar27 = (dword *)((int)local_2ec + 0x34);
                     *(int *)(param_1 + 0x7c) = (int)local_2ec + 0x1c;
                     *(float *)(param_1 + 0x18) = local_2ec;
-                    uVar42 = uVar39;
-                    local_124 = uVar43;
+                    uVar33 = uVar30;
+                    local_124 = uVar34;
                   }
                   else {
                     local_d0 = local_2e4;
                     local_e0 = &local_2fc;
                     local_e8 = &local_304;
                     local_ec = &local_308;
-                    pdVar54 = (dword *)0x0;
+                    pdVar45 = (dword *)0x0;
                     local_e4 = &local_300;
                     local_dc = &local_2f8;
-                    pdVar24 = &__mh_bundle_header.cputype;
+                    pdVar15 = &__mh_bundle_header.cputype;
                     local_cc = local_120 << 0x10;
                     local_d4 = &local_2f0;
-                    pdVar40 = &__mh_bundle_header.cpusubtype;
-                    pdVar26 = &__mh_bundle_header.filetype;
-                    pdVar29 = &__mh_bundle_header.ncmds;
-                    pdVar36 = &__mh_bundle_header.sizeofcmds;
-                    pdVar31 = &__mh_bundle_header.flags;
+                    pdVar31 = &__mh_bundle_header.cpusubtype;
+                    pdVar17 = &__mh_bundle_header.filetype;
+                    pdVar20 = &__mh_bundle_header.ncmds;
+                    pdVar27 = &__mh_bundle_header.sizeofcmds;
+                    pdVar22 = &__mh_bundle_header.flags;
                     local_c8 = local_11c << 0x10;
                     local_d8 = &local_2f4;
                     local_f4 = local_120 - local_11c;
                     *(undefined4 *)(param_1 + 0x7c) = 0;
                     *(undefined4 *)(param_1 + 0x18) = 0;
-                    uVar42 = uVar39;
-                    local_124 = uVar43;
+                    uVar33 = uVar30;
+                    local_124 = uVar34;
                   }
                 }
                 else {
@@ -3447,148 +3415,148 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                   local_e0 = &local_2fc;
                   local_e8 = &local_304;
                   local_ec = &local_308;
-                  pdVar24 = pdVar54 + 1;
-                  pdVar40 = pdVar54 + 2;
+                  pdVar15 = pdVar45 + 1;
+                  pdVar31 = pdVar45 + 2;
                   local_e4 = &local_300;
-                  pdVar26 = pdVar54 + 3;
+                  pdVar17 = pdVar45 + 3;
                   local_dc = &local_2f8;
-                  pdVar29 = pdVar54 + 4;
+                  pdVar20 = pdVar45 + 4;
                   local_cc = local_120 << 0x10;
                   local_d4 = &local_2f0;
-                  pdVar36 = pdVar54 + 5;
-                  pdVar31 = pdVar54 + 6;
+                  pdVar27 = pdVar45 + 5;
+                  pdVar22 = pdVar45 + 6;
                   local_c8 = local_11c << 0x10;
                   local_d8 = &local_2f4;
                   local_f4 = local_120 - local_11c;
                   uStack_244 = local_10c;
-                  local_124 = uVar43;
+                  local_124 = uVar34;
                 }
                 do {
-                  puVar34 = *(uint **)(param_1 + 0x7c);
-                  *puVar34 = (int)pdVar54 - (int)puVar34 >> 2 | *puVar34;
-                  *(dword **)(param_1 + 0x7c) = pdVar54;
-                  *pdVar54 = 0xa000000;
-                  *pdVar24 = *(dword *)(param_1 + 0x84);
-                  puVar34 = *(uint **)(param_1 + 0x7c);
-                  *puVar34 = (int)pdVar40 - (int)puVar34 >> 2 | *puVar34;
-                  *(dword **)(param_1 + 0x7c) = pdVar40;
-                  *pdVar40 = 0x10000000;
-                  *pdVar26 = *(dword *)*DAT_0000e6e4;
-                  *pdVar29 = DAT_0000e6e4[7];
+                  puVar25 = *(uint **)(param_1 + 0x7c);
+                  *puVar25 = (int)pdVar45 - (int)puVar25 >> 2 | *puVar25;
+                  *(dword **)(param_1 + 0x7c) = pdVar45;
+                  *pdVar45 = 0xa000000;
+                  *pdVar15 = *(dword *)(param_1 + 0x84);
+                  puVar25 = *(uint **)(param_1 + 0x7c);
+                  *puVar25 = (int)pdVar31 - (int)puVar25 >> 2 | *puVar25;
+                  *(dword **)(param_1 + 0x7c) = pdVar31;
+                  *pdVar31 = 0x10000000;
+                  *pdVar17 = *(dword *)*DAT_0000e6e4;
+                  *pdVar20 = DAT_0000e6e4[7];
                   if (DAT_0000e6c0 == 0x10) {
-                    *pdVar36 = 3;
+                    *pdVar27 = 3;
                   }
                   else {
-                    *pdVar36 = 6;
+                    *pdVar27 = 6;
                   }
-                  puVar34 = *(uint **)(param_1 + 0x7c);
-                  *puVar34 = (int)pdVar31 - (int)puVar34 >> 2 | *puVar34;
-                  *(dword **)(param_1 + 0x7c) = pdVar31;
-                  *pdVar31 = 0x13000000;
-                  pdVar31[1] = *(undefined4 *)**(undefined4 **)(local_f0 + 0x64c4);
-                  pdVar31[2] = 0;
-                  pdVar54 = pdVar31 + 4;
-                  pdVar31[3] = 0;
-                  iVar21 = *(int *)(param_1 + 0x70);
-                  uVar42 = uVar42 - 10;
-                  *pdVar54 = 0x850;
-                  pdVar31[5] = 0x100;
-                  pdVar31[6] = 0x887;
-                  pdVar31[7] = 0x1c000;
-                  pdVar31[8] = 0x82c;
-                  pdVar31[9] = 0;
-                  pdVar31[10] = 0x1002;
-                  pdVar31[0xb] = 0;
-                  pdVar31[0xc] = 0x824;
-                  pdVar31[0xd] = 1;
-                  pdVar31[0xe] = 0x825;
-                  pdVar31[0xf] = 0x12;
-                  pdVar31[0x10] = 0x82d;
-                  pdVar31[0x11] = 5;
-                  pdVar31[0x12] = 0x854;
-                  pdVar31[0x13] = 0x6010006;
-                  pdVar31[0x14] = 0x855;
-                  pdVar31[0x15] = 0x2701;
-                  pdVar31[0x16] = 0x878;
-                  pdVar31[0x17] = 0xf688f688;
-                  pdVar31[0x18] = 0x879;
-                  pdVar31[0x19] = 0xfb24f688;
-                  pdVar31[0x1a] = 0x10a2;
-                  pdVar31[0x1b] = 0;
-                  pdVar31[0x1c] = 0x1381;
-                  pdVar31[0x1d] = 0;
-                  pdVar31[0x1e] = 0x109e;
-                  pdVar31[0x1f] = 5;
-                  pdVar31[0x20] = 0x1383;
-                  pdVar31[0x21] = 0xf;
-                  pdVar31[0x22] = 0x1004;
-                  pdVar31[0x23] = 0x66666666;
-                  pdVar31[0x24] = 0x1005;
-                  pdVar31[0x25] = 0x66666666;
-                  pdVar31[0x26] = 0x10ae;
-                  pdVar31[0x27] = 0;
-                  pdVar31[0x28] = 0x10ea;
-                  pdVar31[0x29] = 0x2da49525;
-                  pdVar31[0x2a] = 0x10fa;
-                  pdVar31[0x2b] = 0xffffff;
-                  pdVar31[0x2c] = 0x10f4;
-                  pdVar31[0x2d] = 0xffff;
-                  pdVar31[0x2e] = 0x10f8;
-                  pdVar31[0x2f] = 0;
-                  pdVar31[0x30] = 0x10f9;
-                  pdVar31[0x31] =
+                  puVar25 = *(uint **)(param_1 + 0x7c);
+                  *puVar25 = (int)pdVar22 - (int)puVar25 >> 2 | *puVar25;
+                  *(dword **)(param_1 + 0x7c) = pdVar22;
+                  *pdVar22 = 0x13000000;
+                  pdVar22[1] = *(undefined4 *)**(undefined4 **)(local_f0 + 0x64c4);
+                  pdVar22[2] = 0;
+                  pdVar45 = pdVar22 + 4;
+                  pdVar22[3] = 0;
+                  iVar12 = *(int *)(param_1 + 0x70);
+                  uVar33 = uVar33 - 10;
+                  *pdVar45 = 0x850;
+                  pdVar22[5] = 0x100;
+                  pdVar22[6] = 0x887;
+                  pdVar22[7] = 0x1c000;
+                  pdVar22[8] = 0x82c;
+                  pdVar22[9] = 0;
+                  pdVar22[10] = 0x1002;
+                  pdVar22[0xb] = 0;
+                  pdVar22[0xc] = 0x824;
+                  pdVar22[0xd] = 1;
+                  pdVar22[0xe] = 0x825;
+                  pdVar22[0xf] = 0x12;
+                  pdVar22[0x10] = 0x82d;
+                  pdVar22[0x11] = 5;
+                  pdVar22[0x12] = 0x854;
+                  pdVar22[0x13] = 0x6010006;
+                  pdVar22[0x14] = 0x855;
+                  pdVar22[0x15] = 0x2701;
+                  pdVar22[0x16] = 0x878;
+                  pdVar22[0x17] = 0xf688f688;
+                  pdVar22[0x18] = 0x879;
+                  pdVar22[0x19] = 0xfb24f688;
+                  pdVar22[0x1a] = 0x10a2;
+                  pdVar22[0x1b] = 0;
+                  pdVar22[0x1c] = 0x1381;
+                  pdVar22[0x1d] = 0;
+                  pdVar22[0x1e] = 0x109e;
+                  pdVar22[0x1f] = 5;
+                  pdVar22[0x20] = 0x1383;
+                  pdVar22[0x21] = 0xf;
+                  pdVar22[0x22] = 0x1004;
+                  pdVar22[0x23] = 0x66666666;
+                  pdVar22[0x24] = 0x1005;
+                  pdVar22[0x25] = 0x66666666;
+                  pdVar22[0x26] = 0x10ae;
+                  pdVar22[0x27] = 0;
+                  pdVar22[0x28] = 0x10ea;
+                  pdVar22[0x29] = 0x2da49525;
+                  pdVar22[0x2a] = 0x10fa;
+                  pdVar22[0x2b] = 0xffffff;
+                  pdVar22[0x2c] = 0x10f4;
+                  pdVar22[0x2d] = 0xffff;
+                  pdVar22[0x2e] = 0x10f8;
+                  pdVar22[0x2f] = 0;
+                  pdVar22[0x30] = 0x10f9;
+                  pdVar22[0x31] =
                        *(uint *)(param_1 + 0x54) & 0x1fff |
                        (*(uint *)(param_1 + 0x58) & 0x1fff) << 0xd;
-                  pdVar31[0x32] = 0x13c0;
-                  pdVar31[0x33] = 0;
-                  pdVar31[0x34] = 0x13c1;
-                  pdVar31[0x35] = 0;
-                  pdVar31[0x36] = 0x10c0;
-                  pdVar31[0x37] = 0x40004;
-                  pdVar31[0x38] = 0x10c1;
-                  pdVar31[0x39] = 1;
-                  pdVar31[0x3a] = 0x10c8;
-                  pdVar31[0x3b] = 0x10;
-                  pdVar31[0x3c] = 0x10c9;
-                  pdVar31[0x3d] = 0x31;
-                  pdVar31[0x3e] = 0x101d;
-                  pdVar31[0x3f] = 0x28ffe040;
-                  pdVar31[0x40] = 0x101e;
-                  pdVar31[0x41] = 0x28ffe0c2;
-                  pdVar31[0x42] = 0x1041;
-                  pdVar31[0x43] = 3;
-                  pdVar31[0x44] = 0x1040;
-                  pdVar31[0x45] = 0;
-                  pdVar31[0x46] = 0x1100;
-                  pdVar31[0x47] = 0x2a92;
-                  pdVar31[0x48] = 0x1101;
-                  pdVar31[0x49] = 0x10002a92;
-                  pdVar31[0x4a] = 0x1120;
+                  pdVar22[0x32] = 0x13c0;
+                  pdVar22[0x33] = 0;
+                  pdVar22[0x34] = 0x13c1;
+                  pdVar22[0x35] = 0;
+                  pdVar22[0x36] = 0x10c0;
+                  pdVar22[0x37] = 0x40004;
+                  pdVar22[0x38] = 0x10c1;
+                  pdVar22[0x39] = 1;
+                  pdVar22[0x3a] = 0x10c8;
+                  pdVar22[0x3b] = 0x10;
+                  pdVar22[0x3c] = 0x10c9;
+                  pdVar22[0x3d] = 0x31;
+                  pdVar22[0x3e] = 0x101d;
+                  pdVar22[0x3f] = 0x28ffe040;
+                  pdVar22[0x40] = 0x101e;
+                  pdVar22[0x41] = 0x28ffe0c2;
+                  pdVar22[0x42] = 0x1041;
+                  pdVar22[0x43] = 3;
+                  pdVar22[0x44] = 0x1040;
+                  pdVar22[0x45] = 0;
+                  pdVar22[0x46] = 0x1100;
+                  pdVar22[0x47] = 0x2a92;
+                  pdVar22[0x48] = 0x1101;
+                  pdVar22[0x49] = 0x10002a92;
+                  pdVar22[0x4a] = 0x1120;
                   local_f8 = *(short *)(param_1 + 0x50);
                   local_f6 = *(short *)(param_1 + 0x52);
-                  pdVar31[0x4b] =
+                  pdVar22[0x4b] =
                        (int)local_f8 - 1U & 0x7ff | (local_f6 + -1) * 0x800 & 0x3ff800U | 0x80000000
                   ;
-                  pdVar31[0x4c] = 0x1121;
-                  uVar27 = (int)*(short *)(local_108 + 4) - 1;
-                  iVar35 = *(short *)(local_108 + 6) + -1;
-                  pdVar31[0x4d] = uVar27 & 0x7ff | iVar35 * 0x800 & 0x3ff800U | 0x80000000;
-                  pdVar31[0x4e] = 0x1130;
-                  iVar33 = 0x5300c - (uint)(iVar21 == 3);
-                  pdVar31[0x4f] = iVar33;
-                  pdVar31[0x50] = 0x1131;
-                  pdVar31[0x51] = iVar33;
-                  pdVar31[0x52] = 0x1140;
-                  pdVar31[0x53] =
+                  pdVar22[0x4c] = 0x1121;
+                  uVar18 = (int)*(short *)(local_108 + 4) - 1;
+                  iVar26 = *(short *)(local_108 + 6) + -1;
+                  pdVar22[0x4d] = uVar18 & 0x7ff | iVar26 * 0x800 & 0x3ff800U | 0x80000000;
+                  pdVar22[0x4e] = 0x1130;
+                  iVar24 = 0x5300c - (uint)(iVar12 == 3);
+                  pdVar22[0x4f] = iVar24;
+                  pdVar22[0x50] = 0x1131;
+                  pdVar22[0x51] = iVar24;
+                  pdVar22[0x52] = 0x1140;
+                  pdVar22[0x53] =
                        *(int *)(param_1 + 0x5c) - 1U & 0x3fff | ((int)local_f8 - 1U) * 0x10 & 0x8000
                        | (local_f6 + -1) * 0x20 & 0x10000U;
-                  pdVar31[0x54] = 0x1141;
-                  pdVar31[0x55] =
-                       *(int *)(local_108 + 0x10) - 1U & 0x3fff | uVar27 * 0x10 & 0x8000 |
-                       iVar35 * 0x20 & 0x10000U;
-                  if (bVar8) {
-                    iVar41 = 0x52;
-                    iVar23 = 0x148;
+                  pdVar22[0x54] = 0x1141;
+                  pdVar22[0x55] =
+                       *(int *)(local_108 + 0x10) - 1U & 0x3fff | uVar18 * 0x10 & 0x8000 |
+                       iVar26 * 0x20 & 0x10000U;
+                  if (bVar5) {
+                    iVar32 = 0x52;
+                    iVar14 = 0x148;
                     local_164 = 0x56;
                     local_168 = 0x57;
                     local_16c = 0x58;
@@ -3597,70 +3565,71 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     local_178 = 0x5b;
                     local_17c = 0x5c;
                     local_180 = 0x5d;
-                    iVar60 = 0x5f;
+                    iVar51 = 0x5f;
                     local_184 = 0x5e;
-                    iVar44 = 0x53;
-                    iVar46 = 0x54;
-                    iVar61 = 0x60;
-                    iVar49 = 0x55;
-                    iVar59 = 0x61;
-                    iVar50 = 0x62;
-                    iVar51 = 99;
-                    iVar53 = 100;
-                    iVar55 = 0x65;
-                    iVar56 = 0x66;
-                    iVar19 = 0x67;
-                    iVar57 = 0x68;
-                    iVar33 = 0x69;
-                    iVar35 = 0x6a;
-                    iVar22 = 0x6b;
-                    iVar21 = 0x6c;
+                    iVar35 = 0x53;
+                    iVar37 = 0x54;
+                    iVar52 = 0x60;
+                    iVar40 = 0x55;
+                    iVar50 = 0x61;
+                    iVar41 = 0x62;
+                    iVar42 = 99;
+                    iVar44 = 100;
+                    iVar46 = 0x65;
+                    iVar47 = 0x66;
+                    iVar10 = 0x67;
+                    iVar48 = 0x68;
+                    iVar24 = 0x69;
+                    iVar26 = 0x6a;
+                    iVar13 = 0x6b;
+                    iVar12 = 0x6c;
                   }
                   else {
-                    if (iVar21 == 3) {
-                      uStack_284 = uVar52 >> 5 & 0x1f;
-                      uStack_27c = uVar52 & 0x1f;
-                      uStack_294 = uVar52 >> 0xf & 1;
+                    if (iVar12 == 3) {
+                      uStack_284 = uVar43 >> 5 & 0x1f;
+                      uStack_27c = uVar43 & 0x1f;
+                      uStack_294 = uVar43 >> 0xf & 1;
                       local_288 = 0x43300000;
                       local_280 = 0x43300000;
                       local_298 = 0x43300000;
-                      local_128 = (float)dVar62 / FLOAT_0000cff8;
-                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_284) - dVar10) /
-                                  FLOAT_0000cff8;
-                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_27c) - dVar10) /
-                                  FLOAT_0000cff8;
-                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_294) - dVar10);
+                      local_128 = (float)(dVar6 - 4503599627370496.0) / 31.0;
+                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_284) -
+                                         4503599627370496.0) / 31.0;
+                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_27c) -
+                                         4503599627370496.0) / 31.0;
+                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_294) -
+                                         4503599627370496.0);
                     }
                     else {
-                      uStack_274 = uVar52 >> 0x18;
-                      uStack_26c = uVar52 >> 0x10 & 0xff;
-                      uStack_25c = uVar52 & 0xff;
-                      uStack_264 = uVar52 >> 8 & 0xff;
+                      uStack_274 = uVar43 >> 0x18;
+                      uStack_26c = uVar43 >> 0x10 & 0xff;
+                      uStack_25c = uVar43 & 0xff;
+                      uStack_264 = uVar43 >> 8 & 0xff;
                       local_278 = 0x43300000;
                       local_270 = 0x43300000;
                       local_268 = 0x43300000;
                       local_260 = 0x43300000;
-                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_274) - dVar10) /
-                                  FLOAT_0000cffc;
-                      local_128 = (float)((double)CONCAT44(0x43300000,uStack_26c) - dVar10) /
-                                  FLOAT_0000cffc;
-                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_25c) - dVar10) /
-                                  FLOAT_0000cffc;
-                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_264) - dVar10) /
-                                  FLOAT_0000cffc;
+                      local_134 = (float)((double)CONCAT44(0x43300000,uStack_274) -
+                                         4503599627370496.0) / 255.0;
+                      local_128 = (float)((double)CONCAT44(0x43300000,uStack_26c) -
+                                         4503599627370496.0) / 255.0;
+                      local_130 = (float)((double)CONCAT44(0x43300000,uStack_25c) -
+                                         4503599627370496.0) / 255.0;
+                      local_12c = (float)((double)CONCAT44(0x43300000,uStack_264) -
+                                         4503599627370496.0) / 255.0;
                     }
-                    pdVar31[0x56] = 0x1094;
-                    pdVar31[0x57] = 0x10000;
-                    pdVar31[0x58] = 0x1095;
-                    pdVar31[0x59] = (dword)local_128;
-                    pdVar31[0x5a] = 0x1095;
-                    pdVar31[0x5b] = (dword)local_12c;
-                    pdVar31[0x5c] = 0x1095;
-                    pdVar31[0x5d] = (dword)local_130;
-                    pdVar31[0x5e] = 0x1095;
-                    pdVar31[0x5f] = (dword)local_134;
-                    iVar41 = 0x5c;
-                    iVar23 = 0x170;
+                    pdVar22[0x56] = 0x1094;
+                    pdVar22[0x57] = 0x10000;
+                    pdVar22[0x58] = 0x1095;
+                    pdVar22[0x59] = (dword)local_128;
+                    pdVar22[0x5a] = 0x1095;
+                    pdVar22[0x5b] = (dword)local_12c;
+                    pdVar22[0x5c] = 0x1095;
+                    pdVar22[0x5d] = (dword)local_130;
+                    pdVar22[0x5e] = 0x1095;
+                    pdVar22[0x5f] = (dword)local_134;
+                    iVar32 = 0x5c;
+                    iVar14 = 0x170;
                     local_164 = 0x60;
                     local_168 = 0x61;
                     local_16c = 0x62;
@@ -3669,176 +3638,173 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     local_178 = 0x65;
                     local_17c = 0x66;
                     local_180 = 0x67;
-                    iVar60 = 0x69;
+                    iVar51 = 0x69;
                     local_184 = 0x68;
-                    iVar44 = 0x5d;
-                    iVar46 = 0x5e;
-                    iVar61 = 0x6a;
-                    iVar49 = 0x5f;
-                    iVar59 = 0x6b;
-                    iVar50 = 0x6c;
-                    iVar51 = 0x6d;
-                    iVar53 = 0x6e;
-                    iVar55 = 0x6f;
-                    iVar56 = 0x70;
-                    iVar19 = 0x71;
-                    iVar57 = 0x72;
-                    iVar33 = 0x73;
-                    iVar35 = 0x74;
-                    iVar22 = 0x75;
-                    iVar21 = 0x76;
+                    iVar35 = 0x5d;
+                    iVar37 = 0x5e;
+                    iVar52 = 0x6a;
+                    iVar40 = 0x5f;
+                    iVar50 = 0x6b;
+                    iVar41 = 0x6c;
+                    iVar42 = 0x6d;
+                    iVar44 = 0x6e;
+                    iVar46 = 0x6f;
+                    iVar47 = 0x70;
+                    iVar10 = 0x71;
+                    iVar48 = 0x72;
+                    iVar24 = 0x73;
+                    iVar26 = 0x74;
+                    iVar13 = 0x75;
+                    iVar12 = 0x76;
                   }
-                  *(undefined4 *)((int)pdVar54 + iVar23) = 0x1094;
-                  pdVar54[iVar44] = 0;
-                  pdVar54[iVar46] = 0x1095;
-                  pdVar54[iVar49] = 0x7803;
-                  pdVar54[local_164] = 0x1095;
-                  pdVar54[local_168] = 0x2410000;
-                  pdVar54[local_16c] = 0x1095;
-                  pdVar54[local_170] = 0x3901e401;
-                  pdVar54[local_174] = 0x1095;
-                  pdVar54[local_178] = 0;
-                  pdVar54[local_17c] = 0x1095;
-                  pdVar54[local_180] = 0;
-                  pdVar54[local_184] = 0x1095;
-                  pdVar54[iVar60] = 0;
-                  if (bVar8) {
-                    pdVar54[iVar61] = 0x1095;
-                    pdVar54[iVar59] = 0x78105;
-                    pdVar54[iVar50] = 0x1095;
-                    pdVar54[iVar51] = 1;
-                    pdVar54[iVar53] = 0x1095;
-                    pdVar54[iVar55] = 1;
-                    pdVar54[iVar56] = 0x1095;
-                    pdVar54[iVar19] = 0xdb0220;
-                    pdVar54[iVar57] = 0x1095;
-                    pdVar54[iVar33] = 0xc0c006;
-                    pdVar54[iVar35] = 0x1095;
-                    pdVar54[iVar22] = 0x20490000;
-                  }
-                  else {
-                    pdVar54[iVar61] = 0x1095;
-                    pdVar54[iVar59] = 0x7807;
-                    pdVar54[iVar50] = 0x1095;
-                    pdVar54[iVar51] = 0x2400000;
-                    pdVar54[iVar53] = 0x1095;
-                    pdVar54[iVar55] = 0x3900e400;
-                    pdVar54[iVar56] = 0x1095;
-                    pdVar54[iVar19] = 0;
-                    pdVar54[iVar57] = 0x1095;
-                    pdVar54[iVar33] = 0;
-                    pdVar54[iVar35] = 0x1095;
-                    pdVar54[iVar22] = 0;
-                    pdVar54[iVar21] = 0x1095;
-                    pdVar54[iVar41 + 0x1b] = 0x7804;
-                    pdVar54[iVar41 + 0x1c] = 0x1095;
-                    pdVar54[iVar41 + 0x1d] = 0x40040000;
-                    pdVar54[iVar41 + 0x1e] = 0x1095;
-                    pdVar54[iVar41 + 0x1f] = 0x40040000;
-                    pdVar54[iVar41 + 0x20] = 0x1095;
-                    pdVar54[iVar41 + 0x21] = 0xdb0490;
-                    pdVar54[iVar41 + 0x22] = 0x1095;
-                    pdVar54[iVar41 + 0x23] = 0xc10026;
-                    pdVar54[iVar41 + 0x24] = 0x1095;
-                    pdVar54[iVar41 + 0x25] = 0xdfa23028;
-                    pdVar54[iVar41 + 0x26] = 0x1095;
-                    pdVar54[iVar41 + 0x27] = 0x7800;
-                    pdVar54[iVar41 + 0x28] = 0x1095;
-                    pdVar54[iVar41 + 0x29] = 2;
-                    pdVar54[iVar41 + 0x2a] = 0x1095;
-                    pdVar54[iVar41 + 0x2b] = 2;
-                    pdVar54[iVar41 + 0x2c] = 0x1095;
-                    pdVar54[iVar41 + 0x2d] = 0xdb0220;
-                    pdVar54[iVar41 + 0x2e] = 0x1095;
-                    pdVar54[iVar41 + 0x2f] = 0xc0c021;
-                    pdVar54[iVar41 + 0x30] = 0x1095;
-                    pdVar54[iVar41 + 0x31] = 0x22;
-                    pdVar54[iVar41 + 0x32] = 0x1095;
-                    pdVar54[iVar41 + 0x33] = 0x78101;
-                    pdVar54[iVar41 + 0x34] = 0x1095;
-                    uVar27 = (local_c4 ^ 1) << 10 | local_c4 | 0x200000;
-                    pdVar54[iVar41 + 0x35] = uVar27;
-                    pdVar54[iVar41 + 0x36] = 0x1095;
-                    pdVar54[iVar41 + 0x37] = uVar27;
-                    pdVar54[iVar41 + 0x38] = 0x1095;
-                    pdVar54[iVar41 + 0x39] = 0x440221;
-                    pdVar54[iVar41 + 0x3a] = 0x1095;
-                    pdVar54[iVar41 + 0x3b] = 0x60d006;
-                    pdVar54[iVar41 + 0x3c] = 0x1095;
-                    iVar21 = iVar41 + 0x3e;
-                    pdVar54[iVar41 + 0x3d] = 0xdda22008;
-                  }
-                  pdVar54[iVar21] = 0x1189;
-                  pdVar54[iVar21 + 1] = 0;
-                  pdVar54[iVar21 + 2] = 0x1181;
-                  pdVar54[iVar21 + 3] = 5;
-                  pdVar54[iVar21 + 4] = 0x118d;
-                  if (bVar8) {
-                    dVar20 = 0x10000;
+                  *(undefined4 *)((int)pdVar45 + iVar14) = 0x1094;
+                  pdVar45[iVar35] = 0;
+                  pdVar45[iVar37] = 0x1095;
+                  pdVar45[iVar40] = 0x7803;
+                  pdVar45[local_164] = 0x1095;
+                  pdVar45[local_168] = 0x2410000;
+                  pdVar45[local_16c] = 0x1095;
+                  pdVar45[local_170] = 0x3901e401;
+                  pdVar45[local_174] = 0x1095;
+                  pdVar45[local_178] = 0;
+                  pdVar45[local_17c] = 0x1095;
+                  pdVar45[local_180] = 0;
+                  pdVar45[local_184] = 0x1095;
+                  pdVar45[iVar51] = 0;
+                  if (bVar5) {
+                    pdVar45[iVar52] = 0x1095;
+                    pdVar45[iVar50] = 0x78105;
+                    pdVar45[iVar41] = 0x1095;
+                    pdVar45[iVar42] = 1;
+                    pdVar45[iVar44] = 0x1095;
+                    pdVar45[iVar46] = 1;
+                    pdVar45[iVar47] = 0x1095;
+                    pdVar45[iVar10] = 0xdb0220;
+                    pdVar45[iVar48] = 0x1095;
+                    pdVar45[iVar24] = 0xc0c006;
+                    pdVar45[iVar26] = 0x1095;
+                    pdVar45[iVar13] = 0x20490000;
                   }
                   else {
-                    dVar20 = 0x40000;
+                    pdVar45[iVar52] = 0x1095;
+                    pdVar45[iVar50] = 0x7807;
+                    pdVar45[iVar41] = 0x1095;
+                    pdVar45[iVar42] = 0x2400000;
+                    pdVar45[iVar44] = 0x1095;
+                    pdVar45[iVar46] = 0x3900e400;
+                    pdVar45[iVar47] = 0x1095;
+                    pdVar45[iVar10] = 0;
+                    pdVar45[iVar48] = 0x1095;
+                    pdVar45[iVar24] = 0;
+                    pdVar45[iVar26] = 0x1095;
+                    pdVar45[iVar13] = 0;
+                    pdVar45[iVar12] = 0x1095;
+                    pdVar45[iVar32 + 0x1b] = 0x7804;
+                    pdVar45[iVar32 + 0x1c] = 0x1095;
+                    pdVar45[iVar32 + 0x1d] = 0x40040000;
+                    pdVar45[iVar32 + 0x1e] = 0x1095;
+                    pdVar45[iVar32 + 0x1f] = 0x40040000;
+                    pdVar45[iVar32 + 0x20] = 0x1095;
+                    pdVar45[iVar32 + 0x21] = 0xdb0490;
+                    pdVar45[iVar32 + 0x22] = 0x1095;
+                    pdVar45[iVar32 + 0x23] = 0xc10026;
+                    pdVar45[iVar32 + 0x24] = 0x1095;
+                    pdVar45[iVar32 + 0x25] = 0xdfa23028;
+                    pdVar45[iVar32 + 0x26] = 0x1095;
+                    pdVar45[iVar32 + 0x27] = 0x7800;
+                    pdVar45[iVar32 + 0x28] = 0x1095;
+                    pdVar45[iVar32 + 0x29] = 2;
+                    pdVar45[iVar32 + 0x2a] = 0x1095;
+                    pdVar45[iVar32 + 0x2b] = 2;
+                    pdVar45[iVar32 + 0x2c] = 0x1095;
+                    pdVar45[iVar32 + 0x2d] = 0xdb0220;
+                    pdVar45[iVar32 + 0x2e] = 0x1095;
+                    pdVar45[iVar32 + 0x2f] = 0xc0c021;
+                    pdVar45[iVar32 + 0x30] = 0x1095;
+                    pdVar45[iVar32 + 0x31] = 0x22;
+                    pdVar45[iVar32 + 0x32] = 0x1095;
+                    pdVar45[iVar32 + 0x33] = 0x78101;
+                    pdVar45[iVar32 + 0x34] = 0x1095;
+                    uVar18 = (local_c4 ^ 1) << 10 | local_c4 | 0x200000;
+                    pdVar45[iVar32 + 0x35] = uVar18;
+                    pdVar45[iVar32 + 0x36] = 0x1095;
+                    pdVar45[iVar32 + 0x37] = uVar18;
+                    pdVar45[iVar32 + 0x38] = 0x1095;
+                    pdVar45[iVar32 + 0x39] = 0x440221;
+                    pdVar45[iVar32 + 0x3a] = 0x1095;
+                    pdVar45[iVar32 + 0x3b] = 0x60d006;
+                    pdVar45[iVar32 + 0x3c] = 0x1095;
+                    iVar12 = iVar32 + 0x3e;
+                    pdVar45[iVar32 + 0x3d] = 0xdda22008;
                   }
-                  pdVar54[iVar21 + 5] = dVar20;
-                  pdVar54[iVar21 + 6] = 0x118e;
-                  pdVar54[iVar21 + 7] = 0;
-                  pdVar54[iVar21 + 8] = 0x118c;
-                  if (bVar8) {
-                    dVar20 = 0x10000;
+                  pdVar45[iVar12] = 0x1189;
+                  pdVar45[iVar12 + 1] = 0;
+                  pdVar45[iVar12 + 2] = 0x1181;
+                  pdVar45[iVar12 + 3] = 5;
+                  pdVar45[iVar12 + 4] = 0x118d;
+                  if (bVar5) {
+                    dVar11 = 0x10000;
                   }
                   else {
-                    dVar20 = 0x40000;
+                    dVar11 = 0x40000;
                   }
-                  pdVar54[iVar21 + 9] = dVar20;
-                  pdVar54[iVar21 + 10] = 0x11a9;
-                  pdVar54[iVar21 + 0xb] = 0x1b01;
-                  pdVar54[iVar21 + 0xc] = 0x11aa;
-                  pdVar54[iVar21 + 0xd] = 0xf;
-                  pdVar54[iVar21 + 0xe] = 0x11ab;
-                  pdVar54[iVar21 + 0xf] = 0xf;
-                  pdVar54[iVar21 + 0x10] = 0x11ac;
-                  pdVar54[iVar21 + 0x11] = 0xf;
-                  pdVar54[iVar21 + 0x12] = 0x12f0;
-                  pdVar54[iVar21 + 0x13] = 0;
-                  pdVar54[iVar21 + 0x14] = 0x12f5;
-                  pdVar54[iVar21 + 0x15] = 0;
-                  local_13c = iVar21 + 0x17;
-                  local_140 = iVar21 + 0x18;
-                  iVar35 = iVar21 + 0x30;
+                  pdVar45[iVar12 + 5] = dVar11;
+                  pdVar45[iVar12 + 6] = 0x118e;
+                  pdVar45[iVar12 + 7] = 0;
+                  pdVar45[iVar12 + 8] = 0x118c;
+                  if (bVar5) {
+                    dVar11 = 0x10000;
+                  }
+                  else {
+                    dVar11 = 0x40000;
+                  }
+                  pdVar45[iVar12 + 9] = dVar11;
+                  pdVar45[iVar12 + 10] = 0x11a9;
+                  pdVar45[iVar12 + 0xb] = 0x1b01;
+                  pdVar45[iVar12 + 0xc] = 0x11aa;
+                  pdVar45[iVar12 + 0xd] = 0xf;
+                  pdVar45[iVar12 + 0xe] = 0x11ab;
+                  pdVar45[iVar12 + 0xf] = 0xf;
+                  pdVar45[iVar12 + 0x10] = 0x11ac;
+                  pdVar45[iVar12 + 0x11] = 0xf;
+                  pdVar45[iVar12 + 0x12] = 0x12f0;
+                  pdVar45[iVar12 + 0x13] = 0;
+                  pdVar45[iVar12 + 0x14] = 0x12f5;
+                  pdVar45[iVar12 + 0x15] = 0;
+                  local_13c = iVar12 + 0x17;
+                  local_140 = iVar12 + 0x18;
+                  iVar26 = iVar12 + 0x30;
                   local_258 = 0x43300000;
                   local_250 = 0x43300000;
-                  iVar23 = iVar21 + 0x1a;
-                  iVar46 = iVar21 + 0x19;
+                  iVar14 = iVar12 + 0x1a;
+                  iVar37 = iVar12 + 0x19;
                   uStack_254 = local_11c;
                   uStack_24c = local_120;
-                  local_14c = iVar21 + 0x1e;
-                  local_150 = iVar21 + 0x1f;
-                  local_144 = iVar21 + 0x1b;
-                  local_15c = iVar21 + 0x22;
-                  local_160 = iVar21 + 0x24;
-                  local_138 = (iVar21 + 0x16) * 4;
-                  local_148 = iVar21 + 0x1d;
-                  local_154 = iVar21 + 0x20;
-                  iVar22 = iVar21 + 0x1c;
-                  local_158 = iVar21 + 0x21;
-                  iVar44 = iVar21 + 0x25;
-                  iVar33 = iVar21 + 0x26;
-                  iVar41 = iVar21 + 0x23;
-                  iVar57 = iVar21 + 0x27;
-                  iVar49 = iVar21 + 0x28;
-                  iVar50 = iVar21 + 0x29;
-                  iVar51 = iVar21 + 0x2a;
-                  iVar53 = iVar21 + 0x2b;
-                  iVar55 = iVar21 + 0x2c;
-                  iVar56 = iVar21 + 0x2d;
-                  iVar19 = iVar21 + 0x2e;
-                  iVar21 = iVar21 + 0x2f;
-                  fVar3 = (float)((double)CONCAT44(0x43300000,local_11c) - dVar10);
-                  fVar4 = (float)((double)CONCAT44(0x43300000,local_120) - dVar10);
+                  local_14c = iVar12 + 0x1e;
+                  local_150 = iVar12 + 0x1f;
+                  local_144 = iVar12 + 0x1b;
+                  local_15c = iVar12 + 0x22;
+                  local_160 = iVar12 + 0x24;
+                  local_138 = (iVar12 + 0x16) * 4;
+                  local_148 = iVar12 + 0x1d;
+                  local_154 = iVar12 + 0x20;
+                  iVar13 = iVar12 + 0x1c;
+                  local_158 = iVar12 + 0x21;
+                  iVar35 = iVar12 + 0x25;
+                  iVar24 = iVar12 + 0x26;
+                  iVar32 = iVar12 + 0x23;
+                  iVar48 = iVar12 + 0x27;
+                  iVar40 = iVar12 + 0x28;
+                  iVar41 = iVar12 + 0x29;
+                  iVar42 = iVar12 + 0x2a;
+                  iVar44 = iVar12 + 0x2b;
+                  iVar46 = iVar12 + 0x2c;
+                  iVar47 = iVar12 + 0x2d;
+                  iVar10 = iVar12 + 0x2e;
+                  iVar12 = iVar12 + 0x2f;
+                  fVar2 = (float)((double)CONCAT44(0x43300000,local_11c) - 4503599627370496.0);
+                  fVar3 = (float)((double)CONCAT44(0x43300000,local_120) - 4503599627370496.0);
                   while( true ) {
-                    fVar28 = FLOAT_0000d008;
-                    fVar25 = FLOAT_0000d000;
-                    dVar12 = DOUBLE_0000cfe0;
                     uStack_23c = local_124;
                     local_238 = 0x43300000;
                     local_228 = 0x43300000;
@@ -3846,127 +3812,131 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     local_240 = 0x43300000;
                     uStack_234 = (int)local_f8 ^ 0x80000000;
                     uStack_224 = (int)local_f6 ^ 0x80000000;
-                    local_304 = FLOAT_0000d000 /
-                                (float)((double)CONCAT44(0x43300000,uStack_234) - DOUBLE_0000cfe0);
-                    local_300 = FLOAT_0000d000 /
-                                (float)((double)CONCAT44(0x43300000,uStack_224) - DOUBLE_0000cfe0);
+                    local_304 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_234) -
+                                             4503601774854144.0);
+                    local_300 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_224) -
+                                             4503601774854144.0);
                     local_308 = local_304 *
-                                (float)((double)CONCAT44(0x43300000,uStack_244) - dVar10);
-                    local_304 = local_304 * (float)((double)CONCAT44(0x43300000,local_124) - dVar10)
+                                (float)((double)CONCAT44(0x43300000,uStack_244) - 4503599627370496.0
+                                       );
+                    local_304 = local_304 *
+                                (float)((double)CONCAT44(0x43300000,local_124) - 4503599627370496.0)
                     ;
-                    local_2fc = local_300 * fVar4;
-                    local_300 = local_300 * fVar3;
-                    *(undefined4 *)((int)pdVar54 + local_138) = 0xc0143500;
-                    pdVar54[local_13c] = 0x4003d;
-                    iVar59 = local_124 - uStack_244;
-                    if ((iVar59 == 8) && (local_f4 == 8)) {
+                    local_2fc = local_300 * fVar3;
+                    local_300 = local_300 * fVar2;
+                    *(undefined4 *)((int)pdVar45 + local_138) = 0xc0143500;
+                    pdVar45[local_13c] = 0x4003d;
+                    iVar50 = local_124 - uStack_244;
+                    if ((iVar50 == 8) && (local_f4 == 8)) {
                       local_1e8 = 0x43300000;
                       uStack_1e4 = (int)*(short *)(local_108 + 4) ^ 0x80000000;
-                      local_2f8 = (fVar1 + fVar28) *
-                                  (fVar25 / (float)((double)CONCAT44(0x43300000,uStack_1e4) - dVar12
-                                                   ));
+                      local_2f8 = (fVar9 + 0.0) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1e4) -
+                                                4503601774854144.0));
                       local_1e0 = 0x43300000;
                       uStack_1dc = (int)*(short *)(local_108 + 4) ^ 0x80000000;
-                      local_2f4 = (fVar1 + fVar15) *
-                                  (fVar25 / (float)((double)CONCAT44(0x43300000,uStack_1dc) - dVar12
-                                                   ));
+                      local_2f4 = (fVar9 + 8.0) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1dc) -
+                                                4503601774854144.0));
                       local_1d8 = 0x43300000;
                       uStack_1d4 = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2f0 = (fVar2 + fVar28) *
-                                  (fVar25 / (float)((double)CONCAT44(0x43300000,uStack_1d4) - dVar12
-                                                   ));
+                      local_2f0 = (fVar1 + 0.0) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1d4) -
+                                                4503601774854144.0));
                       local_1d0 = 0x43300000;
                       uStack_1cc = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4[0] = fVar6 * (fVar25 / (float)((double)CONCAT44(0x43300000,
-                                                                                uStack_1cc) - dVar12
-                                                              ));
+                      local_2e4[0] = (fVar1 + 8.0) *
+                                     (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1cc) -
+                                                   4503601774854144.0));
                     }
                     else {
                       local_218 = 0x43300000;
                       local_210 = 0x43300000;
                       uStack_214 = (int)*(short *)(local_108 + 4) ^ 0x80000000;
-                      local_2f8 = (fVar1 + fVar14) *
-                                  (fVar18 / (float)((double)CONCAT44(0x43300000,uStack_214) - dVar11
-                                                   ));
+                      local_2f8 = (fVar9 + 0.0) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_214) -
+                                                4503601774854144.0));
                       local_208 = 0x43300000;
                       uStack_204 = (int)*(short *)(local_108 + 4) ^ 0x80000000;
-                      local_2f4 = (fVar1 + (float)((double)CONCAT44(0x43300000,iVar59) - dVar10)) *
-                                  (fVar18 / (float)((double)CONCAT44(0x43300000,uStack_204) - dVar11
-                                                   ));
+                      local_2f4 = (fVar9 + (float)((double)CONCAT44(0x43300000,iVar50) -
+                                                  4503599627370496.0)) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_204) -
+                                                4503601774854144.0));
                       local_200 = 0x43300000;
                       iStack_1f4 = local_f4;
                       local_1f8 = 0x43300000;
                       uStack_1fc = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2f0 = fVar5 * (fVar18 / (float)((double)CONCAT44(0x43300000,uStack_1fc)
-                                                           - dVar11));
+                      local_2f0 = (fVar1 + 0.0) *
+                                  (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1fc) -
+                                                4503601774854144.0));
                       local_1f0 = 0x43300000;
                       uStack_1ec = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4[0] = (fVar2 + (float)((double)CONCAT44(0x43300000,local_f4) - dVar10
-                                                     )) *
-                                     (fVar18 / (float)((double)CONCAT44(0x43300000,uStack_1ec) -
-                                                      dVar11));
-                      iStack_20c = iVar59;
+                      local_2e4[0] = (fVar1 + (float)((double)CONCAT44(0x43300000,local_f4) -
+                                                     4503599627370496.0)) *
+                                     (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1ec) -
+                                                   4503601774854144.0));
+                      iStack_20c = iVar50;
                     }
-                    pdVar54[local_140] = uStack_244 | local_cc;
-                    fVar37 = *local_ec;
-                    pdVar54[iVar46] = (dword)fVar37;
-                    fVar28 = *local_e0;
-                    pdVar54[iVar23] = (dword)fVar28;
-                    fVar32 = *local_dc;
-                    pdVar54[local_144] = (dword)fVar32;
-                    fVar25 = *local_d0;
-                    pdVar54[iVar22] = (dword)fVar25;
-                    pdVar54[local_148] = uStack_244 | local_c8;
-                    pdVar54[local_14c] = (dword)fVar37;
-                    fVar38 = *local_e4;
-                    pdVar54[local_150] = (dword)fVar38;
-                    pdVar54[local_154] = (dword)fVar32;
-                    fVar37 = *local_d4;
-                    pdVar54[local_158] = (dword)fVar37;
-                    pdVar54[local_15c] = local_124 | local_c8;
-                    fVar32 = *local_e8;
-                    pdVar54[iVar41] = (dword)fVar32;
-                    pdVar54[local_160] = (dword)fVar38;
-                    fVar38 = *local_d8;
-                    pdVar54[iVar44] = (dword)fVar38;
-                    pdVar54[iVar33] = (dword)fVar37;
-                    pdVar54[iVar57] = local_124 | local_cc;
-                    pdVar54[iVar49] = (dword)fVar32;
-                    pdVar54[iVar50] = (dword)fVar28;
-                    pdVar54[iVar51] = (dword)fVar38;
-                    pdVar54[iVar53] = (dword)fVar25;
-                    pdVar54[iVar55] = 0x1393;
-                    pdVar54[iVar56] = 10;
-                    pdVar54[iVar19] = 0x5c8;
-                    pdVar54[iVar21] = 0x20000;
-                    uVar42 = uVar42 - iVar35;
-                    pdVar54 = pdVar54 + iVar35;
+                    pdVar45[local_140] = uStack_244 | local_cc;
+                    fVar28 = *local_ec;
+                    pdVar45[iVar37] = (dword)fVar28;
+                    fVar19 = *local_e0;
+                    pdVar45[iVar14] = (dword)fVar19;
+                    fVar23 = *local_dc;
+                    pdVar45[local_144] = (dword)fVar23;
+                    fVar16 = *local_d0;
+                    pdVar45[iVar13] = (dword)fVar16;
+                    pdVar45[local_148] = uStack_244 | local_c8;
+                    pdVar45[local_14c] = (dword)fVar28;
+                    fVar29 = *local_e4;
+                    pdVar45[local_150] = (dword)fVar29;
+                    pdVar45[local_154] = (dword)fVar23;
+                    fVar28 = *local_d4;
+                    pdVar45[local_158] = (dword)fVar28;
+                    pdVar45[local_15c] = local_124 | local_c8;
+                    fVar23 = *local_e8;
+                    pdVar45[iVar32] = (dword)fVar23;
+                    pdVar45[local_160] = (dword)fVar29;
+                    fVar29 = *local_d8;
+                    pdVar45[iVar35] = (dword)fVar29;
+                    pdVar45[iVar24] = (dword)fVar28;
+                    pdVar45[iVar48] = local_124 | local_cc;
+                    pdVar45[iVar40] = (dword)fVar23;
+                    pdVar45[iVar41] = (dword)fVar19;
+                    pdVar45[iVar42] = (dword)fVar29;
+                    pdVar45[iVar44] = (dword)fVar16;
+                    pdVar45[iVar46] = 0x1393;
+                    pdVar45[iVar47] = 10;
+                    pdVar45[iVar10] = 0x5c8;
+                    pdVar45[iVar12] = 0x20000;
+                    uVar33 = uVar33 - iVar26;
+                    pdVar45 = pdVar45 + iVar26;
                     local_124 = local_110;
                     if (uStack_244 + 0x10 < local_110) {
                       local_124 = uStack_244 + 0x10;
                     }
-                    bVar7 = false;
-                    if (local_110 <= uVar45) goto LAB_0000a09c;
-                    uVar27 = uVar45 + 8;
-                    uVar47 = uVar45;
+                    bVar4 = false;
+                    if (local_110 <= uVar36) goto LAB_0000a09c;
+                    uVar18 = uVar36 + 8;
+                    uVar38 = uVar36;
 LAB_00008bec:
-                    if (uVar42 < 0x1a) break;
+                    if (uVar33 < 0x1a) break;
                     local_f8 = *(short *)(param_1 + 0x50);
-                    iVar33 = 0x10;
-                    iVar35 = 0x1a;
-                    iVar44 = 0xf;
-                    iVar21 = 0x19;
-                    iVar19 = 0x18;
-                    iVar56 = 0x17;
-                    iVar55 = 0x16;
-                    iVar53 = 0x15;
-                    iVar51 = 0x14;
-                    iVar50 = 0x13;
-                    iVar49 = 0x12;
-                    iVar57 = 0x11;
-                    iVar41 = 0xd;
-                    iVar22 = 6;
-                    iVar23 = 4;
+                    iVar24 = 0x10;
+                    iVar26 = 0x1a;
+                    iVar35 = 0xf;
+                    iVar12 = 0x19;
+                    iVar10 = 0x18;
+                    iVar47 = 0x17;
+                    iVar46 = 0x16;
+                    iVar44 = 0x15;
+                    iVar42 = 0x14;
+                    iVar41 = 0x13;
+                    iVar40 = 0x12;
+                    iVar48 = 0x11;
+                    iVar32 = 0xd;
+                    iVar13 = 6;
+                    iVar14 = 4;
                     local_f6 = *(short *)(param_1 + 0x52);
                     local_160 = 0xe;
                     local_15c = 0xc;
@@ -3976,55 +3946,55 @@ LAB_00008bec:
                     local_148 = 7;
                     local_158 = 0xb;
                     local_140 = 2;
-                    iVar46 = 3;
+                    iVar37 = 3;
                     local_144 = 5;
                     local_13c = 1;
                     local_138 = 0;
-                    uVar45 = uVar27;
-                    uStack_244 = uVar47;
+                    uVar36 = uVar18;
+                    uStack_244 = uVar38;
                   }
                   local_2e8 = *(float *)(param_1 + 0x18);
                   local_2ec = 0.0;
                   if (*(int *)(param_1 + 0x8c) == 0) {
-                    *pdVar54 = 0x5c8;
+                    *pdVar45 = 0x5c8;
                     local_2ec = 2.8026e-45;
-                    pdVar54[1] = 0xc000;
+                    pdVar45[1] = 0xc000;
                     *(undefined4 *)(param_1 + 0x94) = 0;
                   }
-                  pdVar54[(int)local_2ec] = 0x1000000;
-                  puVar16 = PTR_0000e694;
-                  puVar34 = *(uint **)(param_1 + 0x7c);
-                  *puVar34 = ((int)pdVar54 - (int)puVar34 >> 2) + (int)local_2ec | *puVar34;
-                  iVar33 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
-                                               *(undefined4 *)puVar16,&local_2e8,&local_2ec,1);
-                  if (iVar33 == 0) {
+                  pdVar45[(int)local_2ec] = 0x1000000;
+                  puVar7 = PTR_0000e694;
+                  puVar25 = *(uint **)(param_1 + 0x7c);
+                  *puVar25 = ((int)pdVar45 - (int)puVar25 >> 2) + (int)local_2ec | *puVar25;
+                  iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                                               *(undefined4 *)puVar7,&local_2e8,&local_2ec,1);
+                  if (iVar24 == 0) {
                     *(undefined4 *)((int)local_2e8 + 0x1c) = 0;
                     *(float *)(param_1 + 0x18) = local_2e8;
-                    pdVar54 = (dword *)((int)local_2e8 + 0x20);
-                    pdVar31 = (dword *)((int)local_2e8 + 0x38);
+                    pdVar45 = (dword *)((int)local_2e8 + 0x20);
+                    pdVar22 = (dword *)((int)local_2e8 + 0x38);
                     *(int *)(param_1 + 0x7c) = (int)local_2e8 + 0x1c;
-                    pdVar24 = (dword *)((int)local_2e8 + 0x24);
-                    pdVar40 = (dword *)((int)local_2e8 + 0x28);
-                    pdVar26 = (dword *)((int)local_2e8 + 0x2c);
-                    pdVar29 = (dword *)((int)local_2e8 + 0x30);
-                    pdVar36 = (dword *)((int)local_2e8 + 0x34);
-                    uVar45 = uVar47 + 8;
-                    uStack_244 = uVar47;
-                    uVar42 = uVar39;
+                    pdVar15 = (dword *)((int)local_2e8 + 0x24);
+                    pdVar31 = (dword *)((int)local_2e8 + 0x28);
+                    pdVar17 = (dword *)((int)local_2e8 + 0x2c);
+                    pdVar20 = (dword *)((int)local_2e8 + 0x30);
+                    pdVar27 = (dword *)((int)local_2e8 + 0x34);
+                    uVar36 = uVar38 + 8;
+                    uStack_244 = uVar38;
+                    uVar33 = uVar30;
                   }
                   else {
-                    pdVar31 = &__mh_bundle_header.flags;
+                    pdVar22 = &__mh_bundle_header.flags;
                     *(undefined4 *)(param_1 + 0x7c) = 0;
                     *(undefined4 *)(param_1 + 0x18) = 0;
-                    pdVar36 = &__mh_bundle_header.sizeofcmds;
-                    pdVar29 = &__mh_bundle_header.ncmds;
-                    pdVar26 = &__mh_bundle_header.filetype;
-                    pdVar40 = &__mh_bundle_header.cpusubtype;
-                    pdVar24 = &__mh_bundle_header.cputype;
-                    pdVar54 = (dword *)0x0;
-                    uVar45 = uVar47 + 8;
-                    uStack_244 = uVar47;
-                    uVar42 = uVar39;
+                    pdVar27 = &__mh_bundle_header.sizeofcmds;
+                    pdVar20 = &__mh_bundle_header.ncmds;
+                    pdVar17 = &__mh_bundle_header.filetype;
+                    pdVar31 = &__mh_bundle_header.cpusubtype;
+                    pdVar15 = &__mh_bundle_header.cputype;
+                    pdVar45 = (dword *)0x0;
+                    uVar36 = uVar38 + 8;
+                    uStack_244 = uVar38;
+                    uVar33 = uVar30;
                   }
                 } while( true );
               }
@@ -4033,78 +4003,78 @@ LAB_0000a09c:
               if (local_11c + 0x10 < local_118) {
                 local_120 = local_11c + 0x10;
               }
-              uVar27 = local_11c + 8;
+              uVar18 = local_11c + 8;
             } while (local_11c + 8 < local_118);
           }
-          if (uVar42 < 0x86) {
+          if (uVar33 < 0x86) {
             local_2ec = *(float *)(param_1 + 0x18);
             local_2e8 = 0.0;
             if (*(int *)(param_1 + 0x8c) == 0) {
-              *pdVar54 = 0x5c8;
+              *pdVar45 = 0x5c8;
               local_2e8 = 2.8026e-45;
-              pdVar54[1] = 0xc000;
+              pdVar45[1] = 0xc000;
               *(undefined4 *)(param_1 + 0x94) = 0;
             }
-            pdVar54[(int)local_2e8] = 0x1000000;
-            puVar34 = *(uint **)(param_1 + 0x7c);
-            *puVar34 = ((int)pdVar54 - (int)puVar34 >> 2) + (int)local_2e8 | *puVar34;
-            iVar33 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+            pdVar45[(int)local_2e8] = 0x1000000;
+            puVar25 = *(uint **)(param_1 + 0x7c);
+            *puVar25 = ((int)pdVar45 - (int)puVar25 >> 2) + (int)local_2e8 | *puVar25;
+            iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                          *(undefined4 *)PTR_0000e694,&local_2ec,&local_2e8,1);
-            if (iVar33 == 0) {
+            if (iVar24 == 0) {
               *(undefined4 *)((int)local_2ec + 0x1c) = 0;
               *(float *)(param_1 + 0x18) = local_2ec;
-              pdVar54 = (dword *)((int)local_2ec + 0x20);
-              pdVar40 = (dword *)((int)local_2ec + 0x38);
+              pdVar45 = (dword *)((int)local_2ec + 0x20);
+              pdVar31 = (dword *)((int)local_2ec + 0x38);
               *(int *)(param_1 + 0x7c) = (int)local_2ec + 0x1c;
-              pdVar24 = (dword *)((int)local_2ec + 0x24);
-              pdVar26 = (dword *)((int)local_2ec + 0x28);
-              pdVar29 = (dword *)((int)local_2ec + 0x2c);
-              pdVar36 = (dword *)((int)local_2ec + 0x30);
-              pdVar31 = (dword *)((int)local_2ec + 0x34);
-              uVar42 = uVar39;
+              pdVar15 = (dword *)((int)local_2ec + 0x24);
+              pdVar17 = (dword *)((int)local_2ec + 0x28);
+              pdVar20 = (dword *)((int)local_2ec + 0x2c);
+              pdVar27 = (dword *)((int)local_2ec + 0x30);
+              pdVar22 = (dword *)((int)local_2ec + 0x34);
+              uVar33 = uVar30;
             }
             else {
-              pdVar54 = (dword *)0x0;
+              pdVar45 = (dword *)0x0;
               *(undefined4 *)(param_1 + 0x7c) = 0;
               *(undefined4 *)(param_1 + 0x18) = 0;
-              pdVar24 = &__mh_bundle_header.cputype;
-              pdVar26 = &__mh_bundle_header.cpusubtype;
-              pdVar29 = &__mh_bundle_header.filetype;
-              pdVar36 = &__mh_bundle_header.ncmds;
-              pdVar31 = &__mh_bundle_header.sizeofcmds;
-              pdVar40 = &__mh_bundle_header.flags;
-              uVar42 = uVar39;
+              pdVar15 = &__mh_bundle_header.cputype;
+              pdVar17 = &__mh_bundle_header.cpusubtype;
+              pdVar20 = &__mh_bundle_header.filetype;
+              pdVar27 = &__mh_bundle_header.ncmds;
+              pdVar22 = &__mh_bundle_header.sizeofcmds;
+              pdVar31 = &__mh_bundle_header.flags;
+              uVar33 = uVar30;
             }
           }
           else {
-            pdVar24 = pdVar54 + 1;
-            pdVar26 = pdVar54 + 2;
-            pdVar29 = pdVar54 + 3;
-            pdVar36 = pdVar54 + 4;
-            pdVar31 = pdVar54 + 5;
-            pdVar40 = pdVar54 + 6;
+            pdVar15 = pdVar45 + 1;
+            pdVar17 = pdVar45 + 2;
+            pdVar20 = pdVar45 + 3;
+            pdVar27 = pdVar45 + 4;
+            pdVar22 = pdVar45 + 5;
+            pdVar31 = pdVar45 + 6;
           }
-          puVar34 = *(uint **)(param_1 + 0x7c);
-          *puVar34 = (int)pdVar54 - (int)puVar34 >> 2 | *puVar34;
-          *(dword **)(param_1 + 0x7c) = pdVar54;
-          *pdVar54 = 0x11000000;
-          *pdVar24 = *(dword *)(param_1 + 0x84);
-          *pdVar26 = 0;
-          *pdVar29 = 0;
-          puVar34 = *(uint **)(param_1 + 0x7c);
-          *puVar34 = (int)pdVar36 - (int)puVar34 >> 2 | *puVar34;
-          *(dword **)(param_1 + 0x7c) = pdVar36;
-          *pdVar36 = 0x4000000;
-          *pdVar31 = *(dword *)*DAT_0000e6e4;
-          puVar17 = DAT_0000e6e4;
-          iVar33 = DAT_0000e6e4[0xc];
-          if (iVar33 == 3) {
-            iVar33 = 0xb;
+          puVar25 = *(uint **)(param_1 + 0x7c);
+          *puVar25 = (int)pdVar45 - (int)puVar25 >> 2 | *puVar25;
+          *(dword **)(param_1 + 0x7c) = pdVar45;
+          *pdVar45 = 0x11000000;
+          *pdVar15 = *(dword *)(param_1 + 0x84);
+          *pdVar17 = 0;
+          *pdVar20 = 0;
+          puVar25 = *(uint **)(param_1 + 0x7c);
+          *puVar25 = (int)pdVar27 - (int)puVar25 >> 2 | *puVar25;
+          *(dword **)(param_1 + 0x7c) = pdVar27;
+          *pdVar27 = 0x4000000;
+          *pdVar22 = *(dword *)*DAT_0000e6e4;
+          puVar8 = DAT_0000e6e4;
+          iVar24 = DAT_0000e6e4[0xc];
+          if (iVar24 == 3) {
+            iVar24 = 0xb;
           }
-          else if (iVar33 == 6) {
-            iVar33 = 0xc;
+          else if (iVar24 == 6) {
+            iVar24 = 0xc;
           }
-          iVar33 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar40,DAT_0000e6e4 + 3,iVar33,0,0,0,0);
+          iVar24 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar31,DAT_0000e6e4 + 3,iVar24,0,0,0,0);
           uStack_1c4 = local_10c;
           uStack_1b4 = local_114;
           uStack_1bc = local_110;
@@ -4113,170 +4083,177 @@ LAB_0000a09c:
           local_1c0 = 0x43300000;
           local_1b8 = 0x43300000;
           local_1b0 = 0x43300000;
-          pdVar40[iVar33] = 0xc00c3500;
-          pdVar40[iVar33 + 1] = 0x4003d;
+          pdVar31[iVar24] = 0xc00c3500;
+          pdVar31[iVar24 + 1] = 0x4003d;
           local_1a8 = 0x43300000;
-          uStack_1a4 = (int)*(short *)(puVar17 + 4) ^ 0x80000000;
-          local_2fc = (float)((double)(float)((double)CONCAT44(0x43300000,local_10c) - dVar9) *
-                             (dVar13 / ((double)CONCAT44(0x43300000,uStack_1a4) - dVar11)));
+          uStack_1a4 = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
+          local_2fc = (float)((double)(float)((double)CONCAT44(0x43300000,local_10c) -
+                                             4503599627370496.0) *
+                             (1.0 / ((double)CONCAT44(0x43300000,uStack_1a4) - 4503601774854144.0)))
+          ;
           local_1a0 = 0x43300000;
-          uStack_19c = (int)*(short *)(puVar17 + 4) ^ 0x80000000;
-          local_2e4[0] = (float)((double)(float)((double)CONCAT44(0x43300000,local_110) - dVar9) *
-                                (dVar13 / ((double)CONCAT44(0x43300000,uStack_19c) - dVar11)));
+          uStack_19c = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
+          local_2e4[0] = (float)((double)(float)((double)CONCAT44(0x43300000,local_110) -
+                                                4503599627370496.0) *
+                                (1.0 / ((double)CONCAT44(0x43300000,uStack_19c) - 4503601774854144.0
+                                       )));
           local_198 = 0x43300000;
-          uStack_194 = (int)*(short *)((int)puVar17 + 0x12) ^ 0x80000000;
-          local_2e8 = (float)((double)(float)((double)CONCAT44(0x43300000,local_114) - dVar9) *
-                             (dVar13 / ((double)CONCAT44(0x43300000,uStack_194) - dVar11)));
+          uStack_194 = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
+          local_2e8 = (float)((double)(float)((double)CONCAT44(0x43300000,local_114) -
+                                             4503599627370496.0) *
+                             (1.0 / ((double)CONCAT44(0x43300000,uStack_194) - 4503601774854144.0)))
+          ;
           local_190 = 0x43300000;
-          uStack_18c = (int)*(short *)((int)puVar17 + 0x12) ^ 0x80000000;
-          local_2ec = (float)((double)(float)((double)CONCAT44(0x43300000,local_118) - dVar9) *
-                             (dVar13 / ((double)CONCAT44(0x43300000,uStack_18c) - dVar11)));
-          pdVar40[iVar33 + 2] = local_10c | local_118 << 0x10;
-          pdVar40[iVar33 + 3] = (dword)local_2fc;
-          pdVar40[iVar33 + 4] = (dword)local_2ec;
-          pdVar40[iVar33 + 5] = local_10c | local_114 << 0x10;
-          pdVar40[iVar33 + 6] = (dword)local_2fc;
-          pdVar40[iVar33 + 7] = (dword)local_2e8;
-          pdVar40[iVar33 + 8] = local_110 | local_114 << 0x10;
-          pdVar40[iVar33 + 9] = (dword)local_2e4[0];
-          pdVar40[iVar33 + 10] = (dword)local_2e8;
-          pdVar40[iVar33 + 0xb] = local_110 | local_118 << 0x10;
-          pdVar40[iVar33 + 0xc] = (dword)local_2e4[0];
-          pdVar40[iVar33 + 0xd] = (dword)local_2ec;
-          pdVar40[iVar33 + 0xe] = 0x1393;
-          pdVar40[iVar33 + 0xf] = 10;
-          pdVar40[iVar33 + 0x10] = 0x5c8;
-          pdVar40[iVar33 + 0x11] = 0x20000;
-          uVar42 = (uVar42 - 6) - (iVar33 + 0x12);
-          puVar58 = puVar58 + 4;
-          pdVar54 = pdVar40 + iVar33 + 0x12;
+          uStack_18c = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
+          local_2ec = (float)((double)(float)((double)CONCAT44(0x43300000,local_118) -
+                                             4503599627370496.0) *
+                             (1.0 / ((double)CONCAT44(0x43300000,uStack_18c) - 4503601774854144.0)))
+          ;
+          pdVar31[iVar24 + 2] = local_10c | local_118 << 0x10;
+          pdVar31[iVar24 + 3] = (dword)local_2fc;
+          pdVar31[iVar24 + 4] = (dword)local_2ec;
+          pdVar31[iVar24 + 5] = local_10c | local_114 << 0x10;
+          pdVar31[iVar24 + 6] = (dword)local_2fc;
+          pdVar31[iVar24 + 7] = (dword)local_2e8;
+          pdVar31[iVar24 + 8] = local_110 | local_114 << 0x10;
+          pdVar31[iVar24 + 9] = (dword)local_2e4[0];
+          pdVar31[iVar24 + 10] = (dword)local_2e8;
+          pdVar31[iVar24 + 0xb] = local_110 | local_118 << 0x10;
+          pdVar31[iVar24 + 0xc] = (dword)local_2e4[0];
+          pdVar31[iVar24 + 0xd] = (dword)local_2ec;
+          pdVar31[iVar24 + 0xe] = 0x1393;
+          pdVar31[iVar24 + 0xf] = 10;
+          pdVar31[iVar24 + 0x10] = 0x5c8;
+          pdVar31[iVar24 + 0x11] = 0x20000;
+          uVar33 = (uVar33 - 6) - (iVar24 + 0x12);
+          puVar49 = puVar49 + 4;
+          pdVar45 = pdVar31 + iVar24 + 0x12;
           local_104 = local_104 + 1;
         } while (local_104 < (uint)param_5[0x16]);
       }
-      *(dword **)(param_1 + 0x80) = pdVar54;
+      *(dword **)(param_1 + 0x80) = pdVar45;
       return 0;
     }
   }
   else {
-    puVar58 = *(undefined4 **)(param_1 + 0x80);
-    iVar33 = *(int *)(*(int *)(param_1 + 0x18) + 0x10);
-    local_fc = iVar33 - 7;
-    if (puVar58 != (undefined4 *)0x0) {
-      uVar39 = param_5[0x16];
-      uVar42 = local_fc - ((int)puVar58 - (*(int *)(param_1 + 0x18) + 0x20) >> 2);
-      local_100 = (iVar33 - 0x75U) / 0xc - 1;
-      if (uVar39 != 0) {
+    puVar49 = *(undefined4 **)(param_1 + 0x80);
+    iVar24 = *(int *)(*(int *)(param_1 + 0x18) + 0x10);
+    local_fc = iVar24 - 7;
+    if (puVar49 != (undefined4 *)0x0) {
+      uVar30 = param_5[0x16];
+      uVar33 = local_fc - ((int)puVar49 - (*(int *)(param_1 + 0x18) + 0x20) >> 2);
+      local_100 = (iVar24 - 0x75U) / 0xc - 1;
+      if (uVar30 != 0) {
         local_c0 = &local_300;
         local_188 = local_100 * 0xc + 0x6e;
-        uVar52 = 0;
+        uVar43 = 0;
         do {
-          if (uVar42 < local_188) {
+          if (uVar33 < local_188) {
             local_2fc = *(float *)(param_1 + 0x18);
             local_2e4[0] = 0.0;
             if (*(int *)(param_1 + 0x8c) == 0) {
-              *puVar58 = 0x5c8;
+              *puVar49 = 0x5c8;
               local_2e4[0] = 2.8026e-45;
-              puVar58[1] = 0xc000;
+              puVar49[1] = 0xc000;
               *(undefined4 *)(param_1 + 0x94) = 0;
             }
-            puVar58[(int)local_2e4[0]] = 0x1000000;
-            puVar34 = *(uint **)(param_1 + 0x7c);
-            *puVar34 = ((int)puVar58 - (int)puVar34 >> 2) + (int)local_2e4[0] | *puVar34;
-            iVar33 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+            puVar49[(int)local_2e4[0]] = 0x1000000;
+            puVar25 = *(uint **)(param_1 + 0x7c);
+            *puVar25 = ((int)puVar49 - (int)puVar25 >> 2) + (int)local_2e4[0] | *puVar25;
+            iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
                                          *(undefined4 *)PTR_0000e694,&local_2fc,local_2e4,1);
-            uVar42 = local_fc;
-            if (iVar33 == 0) {
+            uVar33 = local_fc;
+            if (iVar24 == 0) {
               *(undefined4 *)((int)local_2fc + 0x1c) = 0;
               *(float *)(param_1 + 0x18) = local_2fc;
-              puVar58 = (undefined4 *)((int)local_2fc + 0x20);
+              puVar49 = (undefined4 *)((int)local_2fc + 0x20);
               *(int *)(param_1 + 0x7c) = (int)local_2fc + 0x1c;
-              uVar39 = param_5[0x16];
+              uVar30 = param_5[0x16];
             }
             else {
               *(undefined4 *)(param_1 + 0x7c) = 0;
               *(undefined4 *)(param_1 + 0x18) = 0;
-              puVar58 = (undefined4 *)0x0;
-              uVar39 = param_5[0x16];
+              puVar49 = (undefined4 *)0x0;
+              uVar30 = param_5[0x16];
             }
           }
-          uVar43 = uVar52 + local_100;
-          if (uVar43 < uVar39) {
-            uVar39 = uVar43;
+          uVar34 = uVar43 + local_100;
+          if (uVar34 < uVar30) {
+            uVar30 = uVar34;
           }
-          iVar33 = ((int (*)())_radeon3DFillSetup)(puVar58,0,param_6,param_1);
-          iVar35 = uVar39 - uVar52;
-          puVar58[iVar33] = iVar35 * 0xc0000 | 0xc0003500;
-          iVar21 = iVar33 + 2;
-          puVar58[iVar33 + 1] = iVar35 * 0x40000 | 0x3d;
-          dVar9 = DOUBLE_0000cfe0;
-          if (uVar52 < uVar39) {
-            iVar33 = iVar21 * 4;
-            iVar44 = *(int *)(param_1 + 0x60);
-            iVar46 = *(int *)(param_1 + 100);
-            iVar49 = iVar33 + 4;
-            iVar50 = iVar33 + 0x28;
-            iVar51 = iVar33 + 0x24;
-            piVar30 = param_5 + uVar52 * 4 + 0x17;
-            iVar53 = iVar33 + 0x20;
-            iVar55 = iVar33 + 0x1c;
-            iVar56 = iVar33 + 0x18;
-            iVar41 = iVar33 + 0x14;
-            iVar22 = iVar33 + 0x10;
-            iVar23 = iVar33 + 0xc;
-            iVar33 = iVar33 + 8;
+          iVar24 = ((int (*)())_radeon3DFillSetup)(puVar49,0,param_6,param_1);
+          iVar26 = uVar30 - uVar43;
+          puVar49[iVar24] = iVar26 * 0xc0000 | 0xc0003500;
+          iVar12 = iVar24 + 2;
+          puVar49[iVar24 + 1] = iVar26 * 0x40000 | 0x3d;
+          if (uVar43 < uVar30) {
+            iVar24 = iVar12 * 4;
+            iVar35 = *(int *)(param_1 + 0x60);
+            iVar37 = *(int *)(param_1 + 100);
+            iVar40 = iVar24 + 4;
+            iVar41 = iVar24 + 0x28;
+            iVar42 = iVar24 + 0x24;
+            piVar21 = param_5 + uVar43 * 4 + 0x17;
+            iVar44 = iVar24 + 0x20;
+            iVar46 = iVar24 + 0x1c;
+            iVar47 = iVar24 + 0x18;
+            iVar32 = iVar24 + 0x14;
+            iVar13 = iVar24 + 0x10;
+            iVar14 = iVar24 + 0xc;
+            iVar24 = iVar24 + 8;
             do {
               local_2d8 = 0x43300000;
-              uStack_2d4 = *piVar30 + iVar44 ^ 0x80000000;
-              local_2fc = (float)((double)CONCAT44(0x43300000,uStack_2d4) - dVar9);
+              uStack_2d4 = *piVar21 + iVar35 ^ 0x80000000;
+              local_2fc = (float)((double)CONCAT44(0x43300000,uStack_2d4) - 4503601774854144.0);
               local_2d0 = 0x43300000;
-              uStack_2cc = *piVar30 + iVar44 + piVar30[2] ^ 0x80000000;
-              local_300 = (float)((double)CONCAT44(0x43300000,uStack_2cc) - dVar9);
+              uStack_2cc = *piVar21 + iVar35 + piVar21[2] ^ 0x80000000;
+              local_300 = (float)((double)CONCAT44(0x43300000,uStack_2cc) - 4503601774854144.0);
               local_2c8 = 0x43300000;
-              uStack_2c4 = piVar30[1] + iVar46 ^ 0x80000000;
-              local_304 = (float)((double)CONCAT44(0x43300000,uStack_2c4) - dVar9);
+              uStack_2c4 = piVar21[1] + iVar37 ^ 0x80000000;
+              local_304 = (float)((double)CONCAT44(0x43300000,uStack_2c4) - 4503601774854144.0);
               local_2c0 = 0x43300000;
-              uStack_2bc = piVar30[1] + iVar46 + piVar30[3] ^ 0x80000000;
-              local_308 = (float)((double)CONCAT44(0x43300000,uStack_2bc) - dVar9);
-              puVar58[iVar21] = local_2fc;
-              *(float *)((int)puVar58 + iVar49) = local_308;
-              *(undefined4 *)((int)puVar58 + iVar33) = 0;
-              *(float *)((int)puVar58 + iVar23) = local_2fc;
-              *(float *)((int)puVar58 + iVar22) = local_304;
-              *(undefined4 *)((int)puVar58 + iVar41) = 0;
-              fVar18 = *local_c0;
-              *(float *)((int)puVar58 + iVar56) = fVar18;
-              *(float *)((int)puVar58 + iVar55) = local_304;
-              *(undefined4 *)((int)puVar58 + iVar53) = 0;
-              *(float *)((int)puVar58 + iVar51) = fVar18;
-              *(float *)((int)puVar58 + iVar50) = local_308;
-              iVar19 = iVar21 + 0xb;
-              iVar49 = iVar49 + 0x30;
-              iVar21 = iVar21 + 0xc;
-              iVar33 = iVar33 + 0x30;
-              iVar23 = iVar23 + 0x30;
-              iVar22 = iVar22 + 0x30;
+              uStack_2bc = piVar21[1] + iVar37 + piVar21[3] ^ 0x80000000;
+              local_308 = (float)((double)CONCAT44(0x43300000,uStack_2bc) - 4503601774854144.0);
+              puVar49[iVar12] = local_2fc;
+              *(float *)((int)puVar49 + iVar40) = local_308;
+              *(undefined4 *)((int)puVar49 + iVar24) = 0;
+              *(float *)((int)puVar49 + iVar14) = local_2fc;
+              *(float *)((int)puVar49 + iVar13) = local_304;
+              *(undefined4 *)((int)puVar49 + iVar32) = 0;
+              fVar9 = *local_c0;
+              *(float *)((int)puVar49 + iVar47) = fVar9;
+              *(float *)((int)puVar49 + iVar46) = local_304;
+              *(undefined4 *)((int)puVar49 + iVar44) = 0;
+              *(float *)((int)puVar49 + iVar42) = fVar9;
+              *(float *)((int)puVar49 + iVar41) = local_308;
+              iVar10 = iVar12 + 0xb;
+              iVar40 = iVar40 + 0x30;
+              iVar12 = iVar12 + 0xc;
+              iVar24 = iVar24 + 0x30;
+              iVar14 = iVar14 + 0x30;
+              iVar13 = iVar13 + 0x30;
+              iVar32 = iVar32 + 0x30;
+              iVar47 = iVar47 + 0x30;
+              iVar46 = iVar46 + 0x30;
+              iVar44 = iVar44 + 0x30;
+              iVar42 = iVar42 + 0x30;
               iVar41 = iVar41 + 0x30;
-              iVar56 = iVar56 + 0x30;
-              iVar55 = iVar55 + 0x30;
-              iVar53 = iVar53 + 0x30;
-              iVar51 = iVar51 + 0x30;
-              iVar50 = iVar50 + 0x30;
-              puVar58[iVar19] = 0;
-              piVar30 = piVar30 + 4;
-              iVar35 = iVar35 + -1;
-            } while (iVar35 != 0);
+              puVar49[iVar10] = 0;
+              piVar21 = piVar21 + 4;
+              iVar26 = iVar26 + -1;
+            } while (iVar26 != 0);
           }
-          puVar58[iVar21] = 0x1393;
-          puVar58[iVar21 + 1] = 10;
-          puVar58[iVar21 + 2] = 0x5c8;
-          puVar58[iVar21 + 3] = 0x20000;
-          uVar39 = param_5[0x16];
-          uVar42 = uVar42 - (iVar21 + 4);
-          puVar58 = puVar58 + iVar21 + 4;
-          uVar52 = uVar43;
-        } while (uVar43 < uVar39);
+          puVar49[iVar12] = 0x1393;
+          puVar49[iVar12 + 1] = 10;
+          puVar49[iVar12 + 2] = 0x5c8;
+          puVar49[iVar12 + 3] = 0x20000;
+          uVar30 = param_5[0x16];
+          uVar33 = uVar33 - (iVar12 + 4);
+          puVar49 = puVar49 + iVar12 + 4;
+          uVar43 = uVar34;
+        } while (uVar34 < uVar30);
       }
-      *(undefined4 **)(param_1 + 0x80) = puVar58;
+      *(undefined4 **)(param_1 + 0x80) = puVar49;
       return 0;
     }
   }
@@ -4296,38 +4273,33 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
   short sVar2;
   double dVar3;
   double dVar4;
-  double dVar5;
-  float fVar6;
-  float fVar7;
-  uint *puVar8;
-  int iVar9;
-  undefined4 uVar10;
-  uint uVar11;
+  uint *puVar5;
+  int iVar6;
+  undefined4 uVar7;
+  uint uVar8;
+  dword *pdVar9;
+  dword *pdVar10;
+  dword *pdVar11;
   dword *pdVar12;
-  dword *pdVar13;
-  dword *pdVar14;
-  dword *pdVar15;
-  float fVar16;
-  float fVar17;
-  uint uVar18;
-  dword *pdVar19;
-  dword *pdVar20;
-  float fVar21;
-  float fVar22;
-  undefined4 *puVar23;
+  float fVar13;
+  float fVar14;
+  uint uVar15;
+  dword *pdVar16;
+  dword *pdVar17;
+  float fVar18;
+  float fVar19;
+  undefined4 *puVar20;
+  uint uVar21;
+  uint *puVar22;
+  uint uVar23;
   uint uVar24;
-  uint *puVar25;
+  uint uVar25;
   uint uVar26;
   uint uVar27;
   uint uVar28;
   uint uVar29;
-  uint uVar30;
-  uint uVar31;
-  uint uVar32;
-  dword *pdVar33;
-  int iVar34;
-  double dVar35;
-  double dVar36;
+  dword *pdVar30;
+  int iVar31;
   uint *puStack00000028;
   uint uStack0000002c;
   float local_208;
@@ -4415,19 +4387,18 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
   float *local_ac;
   float local_a0;
   
-  pdVar33 = *(dword **)(param_1 + 0x80);
-  iVar34 = *(int *)(param_1 + 0x18);
-  local_cc = *(int *)(iVar34 + 0x10) - 7;
-  if ((pdVar33 == (dword *)0x0) ||
+  pdVar30 = *(dword **)(param_1 + 0x80);
+  iVar31 = *(int *)(param_1 + 0x18);
+  local_cc = *(int *)(iVar31 + 0x10) - 7;
+  if ((pdVar30 == (dword *)0x0) ||
      (puStack00000028 = param_5, uStack0000002c = param_6,
-     iVar9 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,(uint)(*(int *)(param_1 + 0x70) == 3)),
-     fVar7 = FLOAT_0000cffc, fVar6 = FLOAT_0000cff8, dVar5 = DOUBLE_0000cfe8,
-     dVar4 = DOUBLE_0000cfe0, dVar3 = DOUBLE_0000cfd8, iVar9 == 0)) {
-    uVar10 = 0xe00002be;
+     iVar6 = ((int (*)())_createOffscreenBuffer)(param_1,param_1 + 0x4c,(uint)(*(int *)(param_1 + 0x70) == 3)),
+     iVar6 == 0)) {
+    uVar7 = 0xe00002be;
   }
   else {
-    uVar24 = *puStack00000028;
-    uVar11 = local_cc - ((int)pdVar33 - (iVar34 + 0x20) >> 2);
+    uVar21 = *puStack00000028;
+    uVar8 = local_cc - ((int)pdVar30 - (iVar31 + 0x20) >> 2);
     if (puStack00000028[0x16] != 0) {
       local_1c8 = 0x43300000;
       local_1e0 = 0x43300000;
@@ -4448,328 +4419,328 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
       local_e4 = &local_1f4;
       local_e8 = &local_1f0;
       local_d0 = 0;
-      dVar36 = (double)CONCAT44(0x43300000,uStack_1c4) - DOUBLE_0000cfd8;
-      dVar35 = (double)CONCAT44(0x43300000,uStack_1dc) - DOUBLE_0000cfd8;
-      puVar25 = puStack00000028;
+      dVar4 = (double)CONCAT44(0x43300000,uStack_1c4);
+      dVar3 = (double)CONCAT44(0x43300000,uStack_1dc);
+      puVar22 = puStack00000028;
       do {
-        if (uVar11 < 0xda) {
+        if (uVar8 < 0xda) {
           local_1f8 = *(float *)(param_1 + 0x18);
           local_1fc = 0.0;
           if (*(int *)(param_1 + 0x8c) == 0) {
-            *pdVar33 = 0x5c8;
+            *pdVar30 = 0x5c8;
             local_1fc = 2.8026e-45;
-            pdVar33[1] = 0xc000;
+            pdVar30[1] = 0xc000;
             *(undefined4 *)(param_1 + 0x94) = 0;
           }
-          pdVar33[(int)local_1fc] = 0x1000000;
-          puVar8 = *(uint **)(param_1 + 0x7c);
-          *puVar8 = ((int)pdVar33 - (int)puVar8 >> 2) + (int)local_1fc | *puVar8;
-          iVar34 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694,
+          pdVar30[(int)local_1fc] = 0x1000000;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = ((int)pdVar30 - (int)puVar5 >> 2) + (int)local_1fc | *puVar5;
+          iVar31 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694,
                                        local_ac,local_b0,1);
-          uVar11 = local_cc;
-          if (iVar34 == 0) {
+          uVar8 = local_cc;
+          if (iVar31 == 0) {
             *(undefined4 *)((int)local_1f8 + 0x1c) = 0;
             *(float *)(param_1 + 0x18) = local_1f8;
-            pdVar33 = (dword *)((int)local_1f8 + 0x20);
-            pdVar13 = (dword *)((int)local_1f8 + 0x38);
+            pdVar30 = (dword *)((int)local_1f8 + 0x20);
+            pdVar10 = (dword *)((int)local_1f8 + 0x38);
             *(int *)(param_1 + 0x7c) = (int)local_1f8 + 0x1c;
-            pdVar19 = (dword *)((int)local_1f8 + 0x24);
-            pdVar20 = (dword *)((int)local_1f8 + 0x28);
-            pdVar14 = (dword *)((int)local_1f8 + 0x2c);
-            pdVar15 = (dword *)((int)local_1f8 + 0x30);
-            pdVar12 = (dword *)((int)local_1f8 + 0x34);
+            pdVar16 = (dword *)((int)local_1f8 + 0x24);
+            pdVar17 = (dword *)((int)local_1f8 + 0x28);
+            pdVar11 = (dword *)((int)local_1f8 + 0x2c);
+            pdVar12 = (dword *)((int)local_1f8 + 0x30);
+            pdVar9 = (dword *)((int)local_1f8 + 0x34);
           }
           else {
-            pdVar33 = (dword *)0x0;
-            pdVar19 = &__mh_bundle_header.cputype;
-            pdVar20 = &__mh_bundle_header.cpusubtype;
+            pdVar30 = (dword *)0x0;
+            pdVar16 = &__mh_bundle_header.cputype;
+            pdVar17 = &__mh_bundle_header.cpusubtype;
             *(undefined4 *)(param_1 + 0x7c) = 0;
             *(undefined4 *)(param_1 + 0x18) = 0;
-            pdVar14 = &__mh_bundle_header.filetype;
-            pdVar15 = &__mh_bundle_header.ncmds;
-            pdVar12 = &__mh_bundle_header.sizeofcmds;
-            pdVar13 = &__mh_bundle_header.flags;
+            pdVar11 = &__mh_bundle_header.filetype;
+            pdVar12 = &__mh_bundle_header.ncmds;
+            pdVar9 = &__mh_bundle_header.sizeofcmds;
+            pdVar10 = &__mh_bundle_header.flags;
           }
         }
         else {
-          pdVar19 = pdVar33 + 1;
-          pdVar20 = pdVar33 + 2;
-          pdVar14 = pdVar33 + 3;
-          pdVar15 = pdVar33 + 4;
-          pdVar12 = pdVar33 + 5;
-          pdVar13 = pdVar33 + 6;
+          pdVar16 = pdVar30 + 1;
+          pdVar17 = pdVar30 + 2;
+          pdVar11 = pdVar30 + 3;
+          pdVar12 = pdVar30 + 4;
+          pdVar9 = pdVar30 + 5;
+          pdVar10 = pdVar30 + 6;
         }
-        puVar8 = *(uint **)(param_1 + 0x7c);
-        *puVar8 = (int)pdVar33 - (int)puVar8 >> 2 | *puVar8;
-        *(dword **)(param_1 + 0x7c) = pdVar33;
-        *pdVar33 = 0xa000000;
-        *pdVar19 = *(dword *)(param_1 + 0x84);
-        puVar8 = *(uint **)(param_1 + 0x7c);
-        *puVar8 = (int)pdVar20 - (int)puVar8 >> 2 | *puVar8;
-        *(dword **)(param_1 + 0x7c) = pdVar20;
-        *pdVar20 = 0x10000000;
-        *pdVar14 = *(dword *)*DAT_0000e6e4;
-        *pdVar15 = DAT_0000e6e4[7];
+        puVar5 = *(uint **)(param_1 + 0x7c);
+        *puVar5 = (int)pdVar30 - (int)puVar5 >> 2 | *puVar5;
+        *(dword **)(param_1 + 0x7c) = pdVar30;
+        *pdVar30 = 0xa000000;
+        *pdVar16 = *(dword *)(param_1 + 0x84);
+        puVar5 = *(uint **)(param_1 + 0x7c);
+        *puVar5 = (int)pdVar17 - (int)puVar5 >> 2 | *puVar5;
+        *(dword **)(param_1 + 0x7c) = pdVar17;
+        *pdVar17 = 0x10000000;
+        *pdVar11 = *(dword *)*DAT_0000e6e4;
+        *pdVar12 = DAT_0000e6e4[7];
         if (DAT_0000e6c0 == 0x10) {
-          *pdVar12 = 3;
+          *pdVar9 = 3;
         }
         else {
-          *pdVar12 = 6;
+          *pdVar9 = 6;
         }
-        iVar34 = *(int *)(param_1 + 0x70);
-        *pdVar13 = 0x850;
-        pdVar13[1] = 0x100;
-        pdVar13[2] = 0x887;
-        pdVar13[3] = 0x1c000;
-        pdVar13[4] = 0x82c;
-        pdVar13[5] = 0;
-        pdVar13[6] = 0x1002;
-        pdVar13[7] = 0;
-        pdVar13[8] = 0x824;
-        pdVar13[9] = 1;
-        pdVar13[10] = 0x825;
-        pdVar13[0xb] = 2;
-        pdVar13[0xc] = 0x82d;
-        pdVar13[0xd] = 3;
-        pdVar13[0xe] = 0x854;
-        pdVar13[0xf] = 0x26010006;
-        pdVar13[0x10] = 0x878;
-        pdVar13[0x11] = 0xf688f688;
-        pdVar13[0x12] = 0x10a2;
-        pdVar13[0x13] = 0;
-        pdVar13[0x14] = 0x1381;
-        pdVar13[0x15] = 0;
-        pdVar13[0x16] = 0x109e;
-        pdVar13[0x17] = 5;
-        pdVar13[0x18] = 0x1383;
-        pdVar13[0x19] = 0xf;
-        pdVar13[0x1a] = 0x1004;
-        pdVar13[0x1b] = 0x66666666;
-        pdVar13[0x1c] = 0x1005;
-        pdVar13[0x1d] = 0x66666666;
-        pdVar13[0x1e] = 0x10ae;
-        pdVar13[0x1f] = 0;
-        pdVar13[0x20] = 0x10ea;
-        pdVar13[0x21] = 0x2da49525;
-        pdVar13[0x22] = 0x10fa;
-        pdVar13[0x23] = 0xffffff;
-        pdVar13[0x24] = 0x10f4;
-        pdVar13[0x25] = 0xffff;
-        pdVar13[0x26] = 0x10f8;
-        pdVar13[0x27] = 0;
-        pdVar13[0x28] = 0x10f9;
-        pdVar13[0x29] =
+        iVar31 = *(int *)(param_1 + 0x70);
+        *pdVar10 = 0x850;
+        pdVar10[1] = 0x100;
+        pdVar10[2] = 0x887;
+        pdVar10[3] = 0x1c000;
+        pdVar10[4] = 0x82c;
+        pdVar10[5] = 0;
+        pdVar10[6] = 0x1002;
+        pdVar10[7] = 0;
+        pdVar10[8] = 0x824;
+        pdVar10[9] = 1;
+        pdVar10[10] = 0x825;
+        pdVar10[0xb] = 2;
+        pdVar10[0xc] = 0x82d;
+        pdVar10[0xd] = 3;
+        pdVar10[0xe] = 0x854;
+        pdVar10[0xf] = 0x26010006;
+        pdVar10[0x10] = 0x878;
+        pdVar10[0x11] = 0xf688f688;
+        pdVar10[0x12] = 0x10a2;
+        pdVar10[0x13] = 0;
+        pdVar10[0x14] = 0x1381;
+        pdVar10[0x15] = 0;
+        pdVar10[0x16] = 0x109e;
+        pdVar10[0x17] = 5;
+        pdVar10[0x18] = 0x1383;
+        pdVar10[0x19] = 0xf;
+        pdVar10[0x1a] = 0x1004;
+        pdVar10[0x1b] = 0x66666666;
+        pdVar10[0x1c] = 0x1005;
+        pdVar10[0x1d] = 0x66666666;
+        pdVar10[0x1e] = 0x10ae;
+        pdVar10[0x1f] = 0;
+        pdVar10[0x20] = 0x10ea;
+        pdVar10[0x21] = 0x2da49525;
+        pdVar10[0x22] = 0x10fa;
+        pdVar10[0x23] = 0xffffff;
+        pdVar10[0x24] = 0x10f4;
+        pdVar10[0x25] = 0xffff;
+        pdVar10[0x26] = 0x10f8;
+        pdVar10[0x27] = 0;
+        pdVar10[0x28] = 0x10f9;
+        pdVar10[0x29] =
              *(uint *)(param_1 + 0x54) & 0x1fff | (*(uint *)(param_1 + 0x58) & 0x1fff) << 0xd;
-        pdVar13[0x2a] = 0x13c0;
-        pdVar13[0x2b] = 0;
-        pdVar13[0x2c] = 0x13c1;
-        pdVar13[0x2d] = 0;
-        pdVar13[0x2e] = 0x10c0;
-        pdVar13[0x2f] = 0x40002;
-        pdVar13[0x30] = 0x10c1;
-        pdVar13[0x31] = 0;
-        pdVar13[0x32] = 0x10c8;
-        pdVar13[0x33] = 0x10;
-        pdVar13[0x34] = 0x101d;
-        pdVar13[0x35] = 0x280c2040;
-        pdVar13[0x36] = 0x1041;
-        pdVar13[0x37] = 1;
-        pdVar13[0x38] = 0x1040;
-        pdVar13[0x39] = 0;
-        pdVar13[0x3a] = 0x1100;
-        pdVar13[0x3b] = 0x2a92;
-        pdVar13[0x3c] = 0x1120;
+        pdVar10[0x2a] = 0x13c0;
+        pdVar10[0x2b] = 0;
+        pdVar10[0x2c] = 0x13c1;
+        pdVar10[0x2d] = 0;
+        pdVar10[0x2e] = 0x10c0;
+        pdVar10[0x2f] = 0x40002;
+        pdVar10[0x30] = 0x10c1;
+        pdVar10[0x31] = 0;
+        pdVar10[0x32] = 0x10c8;
+        pdVar10[0x33] = 0x10;
+        pdVar10[0x34] = 0x101d;
+        pdVar10[0x35] = 0x280c2040;
+        pdVar10[0x36] = 0x1041;
+        pdVar10[0x37] = 1;
+        pdVar10[0x38] = 0x1040;
+        pdVar10[0x39] = 0;
+        pdVar10[0x3a] = 0x1100;
+        pdVar10[0x3b] = 0x2a92;
+        pdVar10[0x3c] = 0x1120;
         sVar1 = *(short *)(param_1 + 0x50);
         sVar2 = *(short *)(param_1 + 0x52);
-        uVar18 = (int)sVar1 - 1;
-        iVar9 = sVar2 + -1;
-        pdVar13[0x3d] = uVar18 & 0x7ff | iVar9 * 0x800 & 0x3ff800U | 0x80000000;
-        pdVar13[0x3e] = 0x1130;
-        pdVar13[0x3f] = 0x5300c - (uint)(iVar34 == 3);
-        pdVar13[0x40] = 0x1140;
-        pdVar13[0x41] =
-             *(int *)(param_1 + 0x5c) - 1U & 0x3fff | uVar18 * 0x10 & 0x8000 |
-             iVar9 * 0x20 & 0x10000U;
-        if (iVar34 != 3) {
+        uVar15 = (int)sVar1 - 1;
+        iVar6 = sVar2 + -1;
+        pdVar10[0x3d] = uVar15 & 0x7ff | iVar6 * 0x800 & 0x3ff800U | 0x80000000;
+        pdVar10[0x3e] = 0x1130;
+        pdVar10[0x3f] = 0x5300c - (uint)(iVar31 == 3);
+        pdVar10[0x40] = 0x1140;
+        pdVar10[0x41] =
+             *(int *)(param_1 + 0x5c) - 1U & 0x3fff | uVar15 * 0x10 & 0x8000 |
+             iVar6 * 0x20 & 0x10000U;
+        if (iVar31 != 3) {
           local_1c0 = 0x43300000;
-          fVar17 = (float)dVar36 / fVar7;
+          fVar14 = (float)(dVar4 - 4503599627370496.0) / 255.0;
           local_1b8 = 0x43300000;
           local_1b0 = 0x43300000;
           uStack_1ac = uStack0000002c & 0xff;
           uStack_1bc = uStack0000002c >> 0x10 & 0xff;
           uStack_1b4 = uStack0000002c >> 8 & 0xff;
-          fVar21 = (float)((double)CONCAT44(0x43300000,uStack_1bc) - dVar3) / fVar7;
-          fVar22 = (float)((double)CONCAT44(0x43300000,uStack_1b4) - dVar3) / fVar7;
-          fVar16 = (float)((double)CONCAT44(0x43300000,uStack_1ac) - dVar3) / fVar7;
+          fVar18 = (float)((double)CONCAT44(0x43300000,uStack_1bc) - 4503599627370496.0) / 255.0;
+          fVar19 = (float)((double)CONCAT44(0x43300000,uStack_1b4) - 4503599627370496.0) / 255.0;
+          fVar13 = (float)((double)CONCAT44(0x43300000,uStack_1ac) - 4503599627370496.0) / 255.0;
         }
         else {
           local_1d8 = 0x43300000;
-          fVar21 = (float)dVar35 / fVar6;
+          fVar18 = (float)(dVar3 - 4503599627370496.0) / 31.0;
           local_1d0 = 0x43300000;
           local_1ec[1] = 176.0;
           uStack_1d4 = uStack0000002c >> 5 & 0x1f;
           uStack_1cc = uStack0000002c & 0x1f;
           uStack_1e4 = uStack0000002c >> 0xf & 1;
-          fVar17 = (float)((double)CONCAT44(0x43300000,uStack_1e4) - dVar3);
-          fVar22 = (float)((double)CONCAT44(0x43300000,uStack_1d4) - dVar3) / fVar6;
-          fVar16 = (float)((double)CONCAT44(0x43300000,uStack_1cc) - dVar3) / fVar6;
+          fVar14 = (float)((double)CONCAT44(0x43300000,uStack_1e4) - 4503599627370496.0);
+          fVar19 = (float)((double)CONCAT44(0x43300000,uStack_1d4) - 4503599627370496.0) / 31.0;
+          fVar13 = (float)((double)CONCAT44(0x43300000,uStack_1cc) - 4503599627370496.0) / 31.0;
         }
-        pdVar13[0x42] = 0x1094;
-        pdVar13[0x43] = 0x10000;
-        pdVar13[0x44] = 0x1095;
-        pdVar13[0x45] = (dword)fVar21;
-        pdVar13[0x46] = 0x1095;
-        pdVar13[0x47] = (dword)fVar22;
-        pdVar13[0x48] = 0x1095;
-        pdVar13[0x49] = (dword)fVar16;
-        pdVar13[0x4a] = 0x1095;
-        pdVar13[0x4b] = (dword)fVar17;
-        if (iVar34 != 3) {
-          uStack_184 = uVar24 >> 0x18;
+        pdVar10[0x42] = 0x1094;
+        pdVar10[0x43] = 0x10000;
+        pdVar10[0x44] = 0x1095;
+        pdVar10[0x45] = (dword)fVar18;
+        pdVar10[0x46] = 0x1095;
+        pdVar10[0x47] = (dword)fVar19;
+        pdVar10[0x48] = 0x1095;
+        pdVar10[0x49] = (dword)fVar13;
+        pdVar10[0x4a] = 0x1095;
+        pdVar10[0x4b] = (dword)fVar14;
+        if (iVar31 != 3) {
+          uStack_184 = uVar21 >> 0x18;
           local_188 = 0x43300000;
-          uStack_17c = uVar24 >> 0x10 & 0xff;
+          uStack_17c = uVar21 >> 0x10 & 0xff;
           local_180 = 0x43300000;
           local_178 = 0x43300000;
           local_170 = 0x43300000;
-          uStack_174 = uVar24 >> 8 & 0xff;
-          uStack_16c = uVar24 & 0xff;
-          fVar17 = (float)((double)CONCAT44(0x43300000,uStack_184) - dVar3) / fVar7;
-          fVar21 = (float)((double)CONCAT44(0x43300000,uStack_17c) - dVar3) / fVar7;
-          fVar22 = (float)((double)CONCAT44(0x43300000,uStack_174) - dVar3) / fVar7;
-          fVar16 = (float)((double)CONCAT44(0x43300000,uStack_16c) - dVar3) / fVar7;
-          local_a0 = fVar16;
+          uStack_174 = uVar21 >> 8 & 0xff;
+          uStack_16c = uVar21 & 0xff;
+          fVar14 = (float)((double)CONCAT44(0x43300000,uStack_184) - 4503599627370496.0) / 255.0;
+          fVar18 = (float)((double)CONCAT44(0x43300000,uStack_17c) - 4503599627370496.0) / 255.0;
+          fVar19 = (float)((double)CONCAT44(0x43300000,uStack_174) - 4503599627370496.0) / 255.0;
+          fVar13 = (float)((double)CONCAT44(0x43300000,uStack_16c) - 4503599627370496.0) / 255.0;
+          local_a0 = fVar13;
         }
         else {
-          uStack_19c = uVar24 >> 10 & 0x1f;
+          uStack_19c = uVar21 >> 10 & 0x1f;
           local_1a0 = 0x43300000;
-          uStack_194 = uVar24 >> 5 & 0x1f;
+          uStack_194 = uVar21 >> 5 & 0x1f;
           local_198 = 0x43300000;
           local_190 = 0x43300000;
           local_1a8 = 0x43300000;
-          uStack_18c = uVar24 & 0x1f;
-          uStack_1a4 = uVar24 >> 0xf & 1;
-          fVar17 = (float)((double)CONCAT44(0x43300000,uStack_1a4) - dVar3);
-          fVar21 = (float)((double)CONCAT44(0x43300000,uStack_19c) - dVar3) / fVar6;
-          fVar22 = (float)((double)CONCAT44(0x43300000,uStack_194) - dVar3) / fVar6;
-          fVar16 = (float)((double)CONCAT44(0x43300000,uStack_18c) - dVar3) / fVar6;
-          local_a0 = fVar17;
+          uStack_18c = uVar21 & 0x1f;
+          uStack_1a4 = uVar21 >> 0xf & 1;
+          fVar14 = (float)((double)CONCAT44(0x43300000,uStack_1a4) - 4503599627370496.0);
+          fVar18 = (float)((double)CONCAT44(0x43300000,uStack_19c) - 4503599627370496.0) / 31.0;
+          fVar19 = (float)((double)CONCAT44(0x43300000,uStack_194) - 4503599627370496.0) / 31.0;
+          fVar13 = (float)((double)CONCAT44(0x43300000,uStack_18c) - 4503599627370496.0) / 31.0;
+          local_a0 = fVar14;
         }
-        pdVar13[0x4c] = 0x1095;
-        pdVar13[0x4d] = (dword)fVar21;
-        pdVar13[0x4e] = 0x1095;
-        pdVar13[0x4f] = (dword)fVar22;
-        pdVar13[0x50] = 0x1095;
-        pdVar13[0x51] = (dword)fVar16;
-        pdVar13[0x52] = 0x1095;
-        pdVar13[0x53] = (dword)fVar17;
-        pdVar13[0x54] = 0x1094;
-        pdVar13[0x55] = 0;
-        pdVar13[0x56] = 0x1095;
-        pdVar13[0x57] = 0x7803;
-        pdVar13[0x58] = 0x1095;
-        pdVar13[0x59] = 0x2400000;
-        pdVar13[0x5a] = 0x1095;
-        pdVar13[0x5b] = 0x3900e400;
-        pdVar13[0x5c] = 0x1095;
-        pdVar13[0x5d] = 0;
-        pdVar13[0x5e] = 0x1095;
-        pdVar13[0x5f] = 0;
-        pdVar13[0x60] = 0x1095;
-        pdVar13[0x61] = 0;
-        pdVar13[0x62] = 0x1095;
-        pdVar13[99] = 0x7804;
-        pdVar13[100] = 0x1095;
-        pdVar13[0x65] = 0x40040000;
-        pdVar13[0x66] = 0x1095;
-        pdVar13[0x67] = 0x40040000;
-        pdVar13[0x68] = 0x1095;
-        pdVar13[0x69] = local_c8;
-        pdVar13[0x6a] = 0x1095;
-        pdVar13[0x6b] = local_c4;
-        pdVar13[0x6c] = 0x1095;
-        pdVar13[0x6d] = local_c0;
-        pdVar13[0x6e] = 0x1095;
-        pdVar13[0x6f] = 0x7800;
-        pdVar13[0x70] = 0x1095;
-        pdVar13[0x71] = 1;
-        pdVar13[0x72] = 0x1095;
-        pdVar13[0x73] = 1;
-        pdVar13[0x74] = 0x1095;
-        pdVar13[0x75] = local_bc;
-        pdVar13[0x76] = 0x1095;
-        pdVar13[0x77] = local_b8;
-        pdVar13[0x78] = 0x1095;
-        pdVar13[0x79] = 0x12;
-        pdVar13[0x7a] = 0x1095;
-        pdVar13[0x7b] = 0x7800;
-        pdVar13[0x7c] = 0x1095;
-        pdVar13[0x7d] = 0x140400;
-        pdVar13[0x7e] = 0x1095;
-        pdVar13[0x7f] = 0x140400;
-        pdVar13[0x80] = 0x1095;
-        pdVar13[0x81] = local_b4;
-        pdVar13[0x82] = 0x1095;
-        pdVar13[0x83] = 0x60d036;
-        pdVar13[0x84] = 0x1095;
-        pdVar13[0x85] = 0xdda22038;
-        pdVar13[0x86] = 0x1095;
-        pdVar13[0x87] = 0x7800;
-        pdVar13[0x88] = 0x1095;
-        pdVar13[0x89] = 0x40040400;
-        pdVar13[0x8a] = 0x1095;
-        pdVar13[0x8b] = 0x40040400;
-        pdVar13[0x8c] = 0x1095;
-        pdVar13[0x8d] = local_c8;
-        pdVar13[0x8e] = 0x1095;
-        pdVar13[0x8f] = local_c4;
-        pdVar13[0x90] = 0x1095;
-        pdVar13[0x91] = local_c0;
-        pdVar13[0x92] = 0x1095;
-        pdVar13[0x93] = 0x7800;
-        pdVar13[0x94] = 0x1095;
-        pdVar13[0x95] = 1;
-        pdVar13[0x96] = 0x1095;
-        pdVar13[0x97] = 1;
-        pdVar13[0x98] = 0x1095;
-        pdVar13[0x99] = local_bc;
-        pdVar13[0x9a] = 0x1095;
-        pdVar13[0x9b] = local_b8;
-        pdVar13[0x9c] = 0x1095;
-        pdVar13[0x9d] = 0x12;
-        pdVar13[0x9e] = 0x1095;
-        pdVar13[0x9f] = 0x78101;
-        pdVar13[0xa0] = 0x1095;
-        pdVar13[0xa1] = 0x140003;
-        pdVar13[0xa2] = 0x1095;
-        pdVar13[0xa3] = 0x140003;
-        pdVar13[0xa4] = 0x1095;
-        pdVar13[0xa5] = local_b4;
-        pdVar13[0xa6] = 0x1095;
-        pdVar13[0xa7] = 0x60d006;
-        pdVar13[0xa8] = 0x1095;
-        pdVar13[0xa9] = 0xdda22008;
-        pdVar13[0xaa] = 0x1189;
-        pdVar13[0xab] = 0;
-        pdVar13[0xac] = 0x1181;
-        pdVar13[0xad] = 5;
-        pdVar13[0xae] = 0x118d;
-        pdVar13[0xaf] = 0x60000;
-        pdVar13[0xb0] = 0x118e;
-        pdVar13[0xb1] = 0;
-        pdVar13[0xb2] = 0x118c;
-        pdVar13[0xb3] = 0x60000;
-        pdVar13[0xb4] = 0x11a9;
-        pdVar13[0xb5] = 0x1b01;
-        pdVar13[0xb6] = 0x11aa;
-        pdVar13[0xb7] = 0xf;
-        pdVar13[0xb8] = 0x11ab;
-        pdVar13[0xb9] = 0xf;
-        pdVar13[0xba] = 0x11ac;
-        pdVar13[0xbb] = 0xf;
-        pdVar13[0xbc] = 0x12f0;
-        pdVar13[0xbd] = 0;
-        pdVar13[0xbe] = 0x12f5;
-        pdVar13[0xbf] = 0;
+        pdVar10[0x4c] = 0x1095;
+        pdVar10[0x4d] = (dword)fVar18;
+        pdVar10[0x4e] = 0x1095;
+        pdVar10[0x4f] = (dword)fVar19;
+        pdVar10[0x50] = 0x1095;
+        pdVar10[0x51] = (dword)fVar13;
+        pdVar10[0x52] = 0x1095;
+        pdVar10[0x53] = (dword)fVar14;
+        pdVar10[0x54] = 0x1094;
+        pdVar10[0x55] = 0;
+        pdVar10[0x56] = 0x1095;
+        pdVar10[0x57] = 0x7803;
+        pdVar10[0x58] = 0x1095;
+        pdVar10[0x59] = 0x2400000;
+        pdVar10[0x5a] = 0x1095;
+        pdVar10[0x5b] = 0x3900e400;
+        pdVar10[0x5c] = 0x1095;
+        pdVar10[0x5d] = 0;
+        pdVar10[0x5e] = 0x1095;
+        pdVar10[0x5f] = 0;
+        pdVar10[0x60] = 0x1095;
+        pdVar10[0x61] = 0;
+        pdVar10[0x62] = 0x1095;
+        pdVar10[99] = 0x7804;
+        pdVar10[100] = 0x1095;
+        pdVar10[0x65] = 0x40040000;
+        pdVar10[0x66] = 0x1095;
+        pdVar10[0x67] = 0x40040000;
+        pdVar10[0x68] = 0x1095;
+        pdVar10[0x69] = local_c8;
+        pdVar10[0x6a] = 0x1095;
+        pdVar10[0x6b] = local_c4;
+        pdVar10[0x6c] = 0x1095;
+        pdVar10[0x6d] = local_c0;
+        pdVar10[0x6e] = 0x1095;
+        pdVar10[0x6f] = 0x7800;
+        pdVar10[0x70] = 0x1095;
+        pdVar10[0x71] = 1;
+        pdVar10[0x72] = 0x1095;
+        pdVar10[0x73] = 1;
+        pdVar10[0x74] = 0x1095;
+        pdVar10[0x75] = local_bc;
+        pdVar10[0x76] = 0x1095;
+        pdVar10[0x77] = local_b8;
+        pdVar10[0x78] = 0x1095;
+        pdVar10[0x79] = 0x12;
+        pdVar10[0x7a] = 0x1095;
+        pdVar10[0x7b] = 0x7800;
+        pdVar10[0x7c] = 0x1095;
+        pdVar10[0x7d] = 0x140400;
+        pdVar10[0x7e] = 0x1095;
+        pdVar10[0x7f] = 0x140400;
+        pdVar10[0x80] = 0x1095;
+        pdVar10[0x81] = local_b4;
+        pdVar10[0x82] = 0x1095;
+        pdVar10[0x83] = 0x60d036;
+        pdVar10[0x84] = 0x1095;
+        pdVar10[0x85] = 0xdda22038;
+        pdVar10[0x86] = 0x1095;
+        pdVar10[0x87] = 0x7800;
+        pdVar10[0x88] = 0x1095;
+        pdVar10[0x89] = 0x40040400;
+        pdVar10[0x8a] = 0x1095;
+        pdVar10[0x8b] = 0x40040400;
+        pdVar10[0x8c] = 0x1095;
+        pdVar10[0x8d] = local_c8;
+        pdVar10[0x8e] = 0x1095;
+        pdVar10[0x8f] = local_c4;
+        pdVar10[0x90] = 0x1095;
+        pdVar10[0x91] = local_c0;
+        pdVar10[0x92] = 0x1095;
+        pdVar10[0x93] = 0x7800;
+        pdVar10[0x94] = 0x1095;
+        pdVar10[0x95] = 1;
+        pdVar10[0x96] = 0x1095;
+        pdVar10[0x97] = 1;
+        pdVar10[0x98] = 0x1095;
+        pdVar10[0x99] = local_bc;
+        pdVar10[0x9a] = 0x1095;
+        pdVar10[0x9b] = local_b8;
+        pdVar10[0x9c] = 0x1095;
+        pdVar10[0x9d] = 0x12;
+        pdVar10[0x9e] = 0x1095;
+        pdVar10[0x9f] = 0x78101;
+        pdVar10[0xa0] = 0x1095;
+        pdVar10[0xa1] = 0x140003;
+        pdVar10[0xa2] = 0x1095;
+        pdVar10[0xa3] = 0x140003;
+        pdVar10[0xa4] = 0x1095;
+        pdVar10[0xa5] = local_b4;
+        pdVar10[0xa6] = 0x1095;
+        pdVar10[0xa7] = 0x60d006;
+        pdVar10[0xa8] = 0x1095;
+        pdVar10[0xa9] = 0xdda22008;
+        pdVar10[0xaa] = 0x1189;
+        pdVar10[0xab] = 0;
+        pdVar10[0xac] = 0x1181;
+        pdVar10[0xad] = 5;
+        pdVar10[0xae] = 0x118d;
+        pdVar10[0xaf] = 0x60000;
+        pdVar10[0xb0] = 0x118e;
+        pdVar10[0xb1] = 0;
+        pdVar10[0xb2] = 0x118c;
+        pdVar10[0xb3] = 0x60000;
+        pdVar10[0xb4] = 0x11a9;
+        pdVar10[0xb5] = 0x1b01;
+        pdVar10[0xb6] = 0x11aa;
+        pdVar10[0xb7] = 0xf;
+        pdVar10[0xb8] = 0x11ab;
+        pdVar10[0xb9] = 0xf;
+        pdVar10[0xba] = 0x11ac;
+        pdVar10[0xbb] = 0xf;
+        pdVar10[0xbc] = 0x12f0;
+        pdVar10[0xbd] = 0;
+        pdVar10[0xbe] = 0x12f5;
+        pdVar10[0xbf] = 0;
         local_148 = 0x43300000;
         local_138 = 0x43300000;
         uStack_144 = (int)sVar1 ^ 0x80000000;
@@ -4778,172 +4749,180 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
         local_160 = 0x43300000;
         local_158 = 0x43300000;
         local_150 = 0x43300000;
-        uVar32 = puVar25[0x17] + *(int *)(param_1 + 0x60);
-        uVar30 = puVar25[0x18] + *(int *)(param_1 + 100);
-        uVar31 = uVar32 + puVar25[0x19];
-        uVar18 = uVar30 + puVar25[0x1a];
-        uStack_164 = uVar32 ^ 0x80000000;
-        uStack_154 = uVar30 ^ 0x80000000;
-        uStack_15c = uVar31 ^ 0x80000000;
-        uStack_14c = uVar18 ^ 0x80000000;
-        local_208 = FLOAT_0000d000 / (float)((double)CONCAT44(0x43300000,uStack_144) - dVar4);
-        local_200 = FLOAT_0000d000 / (float)((double)CONCAT44(0x43300000,uStack_134) - dVar4);
-        local_1ec[0] = local_208 * (float)((double)CONCAT44(0x43300000,uStack_164) - dVar4);
-        local_208 = local_208 * (float)((double)CONCAT44(0x43300000,uStack_15c) - dVar4);
-        local_204 = local_200 * (float)((double)CONCAT44(0x43300000,uStack_154) - dVar4);
-        local_200 = local_200 * (float)((double)CONCAT44(0x43300000,uStack_14c) - dVar4);
-        pdVar13[0xc0] = 0xc00c3500;
-        pdVar13[0xc1] = 0x4003d;
-        uVar29 = uVar32 | uVar18 * 0x10000;
-        pdVar13[0xc2] = uVar29;
-        fVar21 = *local_d4;
-        pdVar13[0xc3] = (dword)fVar21;
-        fVar17 = *local_d8;
-        pdVar13[0xc4] = (dword)fVar17;
-        uVar28 = uVar32 | uVar30 * 0x10000;
-        pdVar13[0xc5] = uVar28;
-        pdVar13[0xc6] = (dword)fVar21;
-        fVar21 = *local_dc;
-        pdVar13[199] = (dword)fVar21;
-        uVar27 = uVar31 | uVar30 * 0x10000;
-        pdVar13[200] = uVar27;
-        fVar22 = *local_e0;
-        pdVar13[0xc9] = (dword)fVar22;
-        pdVar13[0xca] = (dword)fVar21;
-        uVar26 = uVar31 | uVar18 * 0x10000;
-        pdVar13[0xcb] = uVar26;
-        pdVar13[0xcc] = (dword)fVar22;
-        pdVar13[0xcd] = (dword)fVar17;
-        pdVar13[0xce] = 0x1393;
-        pdVar13[0xcf] = 10;
-        pdVar13[0xd0] = 0x5c8;
-        pdVar13[0xd1] = 0x20000;
-        puVar23 = pdVar13 + 0xd2;
-        if (uVar11 - 0xd8 < 0x86) {
+        uVar29 = puVar22[0x17] + *(int *)(param_1 + 0x60);
+        uVar27 = puVar22[0x18] + *(int *)(param_1 + 100);
+        uVar28 = uVar29 + puVar22[0x19];
+        uVar15 = uVar27 + puVar22[0x1a];
+        uStack_164 = uVar29 ^ 0x80000000;
+        uStack_154 = uVar27 ^ 0x80000000;
+        uStack_15c = uVar28 ^ 0x80000000;
+        uStack_14c = uVar15 ^ 0x80000000;
+        local_208 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_144) - 4503601774854144.0);
+        local_200 = 1.0 / (float)((double)CONCAT44(0x43300000,uStack_134) - 4503601774854144.0);
+        local_1ec[0] = local_208 *
+                       (float)((double)CONCAT44(0x43300000,uStack_164) - 4503601774854144.0);
+        local_208 = local_208 *
+                    (float)((double)CONCAT44(0x43300000,uStack_15c) - 4503601774854144.0);
+        local_204 = local_200 *
+                    (float)((double)CONCAT44(0x43300000,uStack_154) - 4503601774854144.0);
+        local_200 = local_200 *
+                    (float)((double)CONCAT44(0x43300000,uStack_14c) - 4503601774854144.0);
+        pdVar10[0xc0] = 0xc00c3500;
+        pdVar10[0xc1] = 0x4003d;
+        uVar26 = uVar29 | uVar15 * 0x10000;
+        pdVar10[0xc2] = uVar26;
+        fVar18 = *local_d4;
+        pdVar10[0xc3] = (dword)fVar18;
+        fVar14 = *local_d8;
+        pdVar10[0xc4] = (dword)fVar14;
+        uVar25 = uVar29 | uVar27 * 0x10000;
+        pdVar10[0xc5] = uVar25;
+        pdVar10[0xc6] = (dword)fVar18;
+        fVar18 = *local_dc;
+        pdVar10[199] = (dword)fVar18;
+        uVar24 = uVar28 | uVar27 * 0x10000;
+        pdVar10[200] = uVar24;
+        fVar19 = *local_e0;
+        pdVar10[0xc9] = (dword)fVar19;
+        pdVar10[0xca] = (dword)fVar18;
+        uVar23 = uVar28 | uVar15 * 0x10000;
+        pdVar10[0xcb] = uVar23;
+        pdVar10[0xcc] = (dword)fVar19;
+        pdVar10[0xcd] = (dword)fVar14;
+        pdVar10[0xce] = 0x1393;
+        pdVar10[0xcf] = 10;
+        pdVar10[0xd0] = 0x5c8;
+        pdVar10[0xd1] = 0x20000;
+        puVar20 = pdVar10 + 0xd2;
+        if (uVar8 - 0xd8 < 0x86) {
           local_1fc = *(float *)(param_1 + 0x18);
           local_1f8 = 0.0;
           if (*(int *)(param_1 + 0x8c) == 0) {
-            *puVar23 = 0x5c8;
+            *puVar20 = 0x5c8;
             local_1f8 = 2.8026e-45;
-            pdVar13[0xd3] = 0xc000;
+            pdVar10[0xd3] = 0xc000;
             *(undefined4 *)(param_1 + 0x94) = 0;
           }
-          puVar23[(int)local_1f8] = 0x1000000;
-          puVar8 = *(uint **)(param_1 + 0x7c);
-          *puVar8 = ((int)puVar23 - (int)puVar8 >> 2) + (int)local_1f8 | *puVar8;
-          iVar34 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694,
+          puVar20[(int)local_1f8] = 0x1000000;
+          puVar5 = *(uint **)(param_1 + 0x7c);
+          *puVar5 = ((int)puVar20 - (int)puVar5 >> 2) + (int)local_1f8 | *puVar5;
+          iVar31 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)PTR_0000e694,
                                        local_b0,local_ac,1);
-          uVar11 = local_cc;
-          if (iVar34 == 0) {
+          uVar8 = local_cc;
+          if (iVar31 == 0) {
             *(undefined4 *)((int)local_1fc + 0x1c) = 0;
             *(float *)(param_1 + 0x18) = local_1fc;
-            puVar23 = (undefined4 *)((int)local_1fc + 0x20);
-            pdVar33 = (dword *)((int)local_1fc + 0x38);
+            puVar20 = (undefined4 *)((int)local_1fc + 0x20);
+            pdVar30 = (dword *)((int)local_1fc + 0x38);
             *(int *)(param_1 + 0x7c) = (int)local_1fc + 0x1c;
-            pdVar12 = (dword *)((int)local_1fc + 0x24);
-            pdVar14 = (dword *)((int)local_1fc + 0x28);
-            pdVar15 = (dword *)((int)local_1fc + 0x2c);
-            pdVar19 = (dword *)((int)local_1fc + 0x30);
-            pdVar13 = (dword *)((int)local_1fc + 0x34);
+            pdVar9 = (dword *)((int)local_1fc + 0x24);
+            pdVar11 = (dword *)((int)local_1fc + 0x28);
+            pdVar12 = (dword *)((int)local_1fc + 0x2c);
+            pdVar16 = (dword *)((int)local_1fc + 0x30);
+            pdVar10 = (dword *)((int)local_1fc + 0x34);
           }
           else {
-            puVar23 = (undefined4 *)0x0;
-            pdVar12 = &__mh_bundle_header.cputype;
-            pdVar14 = &__mh_bundle_header.cpusubtype;
+            puVar20 = (undefined4 *)0x0;
+            pdVar9 = &__mh_bundle_header.cputype;
+            pdVar11 = &__mh_bundle_header.cpusubtype;
             *(undefined4 *)(param_1 + 0x7c) = 0;
             *(undefined4 *)(param_1 + 0x18) = 0;
-            pdVar15 = &__mh_bundle_header.filetype;
-            pdVar19 = &__mh_bundle_header.ncmds;
-            pdVar13 = &__mh_bundle_header.sizeofcmds;
-            pdVar33 = &__mh_bundle_header.flags;
+            pdVar12 = &__mh_bundle_header.filetype;
+            pdVar16 = &__mh_bundle_header.ncmds;
+            pdVar10 = &__mh_bundle_header.sizeofcmds;
+            pdVar30 = &__mh_bundle_header.flags;
           }
         }
         else {
-          pdVar33 = pdVar13 + 0xd8;
-          pdVar12 = pdVar13 + 0xd3;
-          pdVar14 = pdVar13 + 0xd4;
-          pdVar15 = pdVar13 + 0xd5;
-          pdVar19 = pdVar13 + 0xd6;
-          pdVar13 = pdVar13 + 0xd7;
-          uVar11 = uVar11 - 0xd8;
+          pdVar30 = pdVar10 + 0xd8;
+          pdVar9 = pdVar10 + 0xd3;
+          pdVar11 = pdVar10 + 0xd4;
+          pdVar12 = pdVar10 + 0xd5;
+          pdVar16 = pdVar10 + 0xd6;
+          pdVar10 = pdVar10 + 0xd7;
+          uVar8 = uVar8 - 0xd8;
         }
-        puVar8 = *(uint **)(param_1 + 0x7c);
-        *puVar8 = (int)puVar23 - (int)puVar8 >> 2 | *puVar8;
-        *(undefined4 **)(param_1 + 0x7c) = puVar23;
-        *puVar23 = 0x11000000;
-        *pdVar12 = *(dword *)(param_1 + 0x84);
-        *pdVar14 = 0;
-        *pdVar15 = 0;
-        puVar8 = *(uint **)(param_1 + 0x7c);
-        *puVar8 = (int)pdVar19 - (int)puVar8 >> 2 | *puVar8;
-        *(dword **)(param_1 + 0x7c) = pdVar19;
-        *pdVar19 = 0x4000000;
-        *pdVar13 = *(dword *)*DAT_0000e6e4;
-        puVar23 = DAT_0000e6e4;
-        iVar34 = DAT_0000e6e4[0xc];
-        if (iVar34 == 3) {
-          iVar34 = 0xb;
+        puVar5 = *(uint **)(param_1 + 0x7c);
+        *puVar5 = (int)puVar20 - (int)puVar5 >> 2 | *puVar5;
+        *(undefined4 **)(param_1 + 0x7c) = puVar20;
+        *puVar20 = 0x11000000;
+        *pdVar9 = *(dword *)(param_1 + 0x84);
+        *pdVar11 = 0;
+        *pdVar12 = 0;
+        puVar5 = *(uint **)(param_1 + 0x7c);
+        *puVar5 = (int)pdVar16 - (int)puVar5 >> 2 | *puVar5;
+        *(dword **)(param_1 + 0x7c) = pdVar16;
+        *pdVar16 = 0x4000000;
+        *pdVar10 = *(dword *)*DAT_0000e6e4;
+        puVar20 = DAT_0000e6e4;
+        iVar31 = DAT_0000e6e4[0xc];
+        if (iVar31 == 3) {
+          iVar31 = 0xb;
         }
-        else if (iVar34 == 6) {
-          iVar34 = 0xc;
+        else if (iVar31 == 6) {
+          iVar31 = 0xc;
         }
-        iVar34 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar33,DAT_0000e6e4 + 3,iVar34,0,0,0,0);
+        iVar31 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar30,DAT_0000e6e4 + 3,iVar31,0,0,0,0);
         local_128 = 0x43300000;
         local_120 = 0x43300000;
         local_118 = 0x43300000;
         local_110 = 0x43300000;
-        pdVar33[iVar34] = 0xc00c3500;
-        pdVar33[iVar34 + 1] = 0x4003d;
+        pdVar30[iVar31] = 0xc00c3500;
+        pdVar30[iVar31 + 1] = 0x4003d;
         local_108 = 0x43300000;
-        uStack_104 = (int)*(short *)(puVar23 + 4) ^ 0x80000000;
-        local_1fc = (float)((double)(float)((double)CONCAT44(0x43300000,uVar32) - dVar3) *
-                           (dVar5 / ((double)CONCAT44(0x43300000,uStack_104) - dVar4)));
+        uStack_104 = (int)*(short *)(puVar20 + 4) ^ 0x80000000;
+        local_1fc = (float)((double)(float)((double)CONCAT44(0x43300000,uVar29) - 4503599627370496.0
+                                           ) *
+                           (1.0 / ((double)CONCAT44(0x43300000,uStack_104) - 4503601774854144.0)));
         local_100 = 0x43300000;
-        uStack_fc = (int)*(short *)(puVar23 + 4) ^ 0x80000000;
-        local_1f0 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar31) - dVar3) *
-                           (dVar5 / ((double)CONCAT44(0x43300000,uStack_fc) - dVar4)));
+        uStack_fc = (int)*(short *)(puVar20 + 4) ^ 0x80000000;
+        local_1f0 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar28) - 4503599627370496.0
+                                           ) *
+                           (1.0 / ((double)CONCAT44(0x43300000,uStack_fc) - 4503601774854144.0)));
         local_f8 = 0x43300000;
-        uStack_f4 = (int)*(short *)((int)puVar23 + 0x12) ^ 0x80000000;
-        local_1f4 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar30) - dVar3) *
-                           (dVar5 / ((double)CONCAT44(0x43300000,uStack_f4) - dVar4)));
+        uStack_f4 = (int)*(short *)((int)puVar20 + 0x12) ^ 0x80000000;
+        local_1f4 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar27) - 4503599627370496.0
+                                           ) *
+                           (1.0 / ((double)CONCAT44(0x43300000,uStack_f4) - 4503601774854144.0)));
         local_f0 = 0x43300000;
-        uStack_ec = (int)*(short *)((int)puVar23 + 0x12) ^ 0x80000000;
-        local_1f8 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar18) - dVar3) *
-                           (dVar5 / ((double)CONCAT44(0x43300000,uStack_ec) - dVar4)));
-        pdVar33[iVar34 + 2] = uVar29;
-        fVar21 = *local_b0;
-        pdVar33[iVar34 + 3] = (dword)fVar21;
-        fVar17 = *local_ac;
-        pdVar33[iVar34 + 4] = (dword)fVar17;
-        pdVar33[iVar34 + 5] = uVar28;
-        pdVar33[iVar34 + 6] = (dword)fVar21;
-        fVar21 = *local_e4;
-        pdVar33[iVar34 + 7] = (dword)fVar21;
-        pdVar33[iVar34 + 8] = uVar27;
-        fVar22 = *local_e8;
-        pdVar33[iVar34 + 9] = (dword)fVar22;
-        pdVar33[iVar34 + 10] = (dword)fVar21;
-        pdVar33[iVar34 + 0xb] = uVar26;
-        pdVar33[iVar34 + 0xc] = (dword)fVar22;
-        pdVar33[iVar34 + 0xd] = (dword)fVar17;
-        pdVar33[iVar34 + 0xe] = 0x1393;
-        pdVar33[iVar34 + 0xf] = 10;
-        pdVar33[iVar34 + 0x10] = 0x5c8;
-        pdVar33[iVar34 + 0x11] = 0x20000;
-        uVar11 = (uVar11 - 6) - (iVar34 + 0x12);
-        puVar25 = puVar25 + 4;
-        pdVar33 = pdVar33 + iVar34 + 0x12;
+        uStack_ec = (int)*(short *)((int)puVar20 + 0x12) ^ 0x80000000;
+        local_1f8 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar15) - 4503599627370496.0
+                                           ) *
+                           (1.0 / ((double)CONCAT44(0x43300000,uStack_ec) - 4503601774854144.0)));
+        pdVar30[iVar31 + 2] = uVar26;
+        fVar18 = *local_b0;
+        pdVar30[iVar31 + 3] = (dword)fVar18;
+        fVar14 = *local_ac;
+        pdVar30[iVar31 + 4] = (dword)fVar14;
+        pdVar30[iVar31 + 5] = uVar25;
+        pdVar30[iVar31 + 6] = (dword)fVar18;
+        fVar18 = *local_e4;
+        pdVar30[iVar31 + 7] = (dword)fVar18;
+        pdVar30[iVar31 + 8] = uVar24;
+        fVar19 = *local_e8;
+        pdVar30[iVar31 + 9] = (dword)fVar19;
+        pdVar30[iVar31 + 10] = (dword)fVar18;
+        pdVar30[iVar31 + 0xb] = uVar23;
+        pdVar30[iVar31 + 0xc] = (dword)fVar19;
+        pdVar30[iVar31 + 0xd] = (dword)fVar14;
+        pdVar30[iVar31 + 0xe] = 0x1393;
+        pdVar30[iVar31 + 0xf] = 10;
+        pdVar30[iVar31 + 0x10] = 0x5c8;
+        pdVar30[iVar31 + 0x11] = 0x20000;
+        uVar8 = (uVar8 - 6) - (iVar31 + 0x12);
+        puVar22 = puVar22 + 4;
+        pdVar30 = pdVar30 + iVar31 + 0x12;
         local_d0 = local_d0 + 1;
-        uStack_124 = uVar32;
-        uStack_11c = uVar31;
-        uStack_114 = uVar30;
-        uStack_10c = uVar18;
+        uStack_124 = uVar29;
+        uStack_11c = uVar28;
+        uStack_114 = uVar27;
+        uStack_10c = uVar15;
       } while (local_d0 < puStack00000028[0x16]);
     }
-    uVar10 = 0;
-    *(dword **)(param_1 + 0x80) = pdVar33;
+    uVar7 = 0;
+    *(dword **)(param_1 + 0x80) = pdVar30;
   }
-  return uVar10;
+  return uVar7;
 }
 
 /* _radeonSolidScanlines @ 0xba90 (3660 bytes) */
@@ -4957,52 +4936,45 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
 {
   float fVar1;
   float fVar2;
-  float fVar3;
-  float fVar4;
-  float fVar5;
-  char *pcVar6;
-  float fVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  undefined *puVar11;
-  uint uVar12;
+  char *pcVar3;
+  bool bVar4;
+  undefined *puVar5;
+  uint uVar6;
+  int iVar7;
+  uint uVar8;
+  uint uVar9;
+  int iVar10;
+  float *pfVar11;
+  dword *pdVar12;
   int iVar13;
-  uint uVar14;
-  uint uVar15;
-  int iVar16;
-  float *pfVar17;
-  dword *pdVar18;
-  int iVar19;
+  dword *pdVar14;
+  dword *pdVar15;
+  segment_command *psVar16;
+  int iVar17;
+  int iVar18;
+  uint uVar19;
   dword *pdVar20;
-  dword *pdVar21;
-  segment_command *psVar22;
-  int iVar23;
-  int iVar24;
-  uint uVar25;
+  int iVar21;
+  float fVar22;
+  dword *pdVar23;
+  uint *puVar24;
+  float *pfVar25;
   dword *pdVar26;
   int iVar27;
   float fVar28;
-  dword *pdVar29;
-  uint *puVar30;
-  float *pfVar31;
-  bool bVar35;
-  dword *pdVar32;
-  int iVar33;
-  float fVar34;
-  float fVar36;
-  int iVar37;
+  float fVar29;
+  int iVar30;
+  dword *pdVar31;
+  uint uVar32;
+  uint uVar33;
+  uint uVar34;
+  uint uVar35;
+  uint uVar36;
+  uint uVar37;
   dword *pdVar38;
-  uint uVar39;
-  uint uVar40;
-  uint uVar41;
-  uint uVar42;
-  uint uVar43;
-  uint uVar44;
-  dword *pdVar45;
-  dword *pdVar46;
-  undefined4 *puVar47;
-  dword *pdVar48;
+  dword *pdVar39;
+  undefined4 *puVar40;
+  dword *pdVar41;
   float local_1a4;
   float local_1a0;
   float local_19c;
@@ -5048,440 +5020,440 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
   int local_dc;
   
   if ((param_4 & 0x7ffff000) == 0x6000) {
-    puVar47 = *(undefined4 **)(param_1 + 0x80);
-    fVar36 = *(float *)(param_1 + 0x18);
-    if (puVar47 != (undefined4 *)0x0) {
-      if ((uint)((*(int *)((int)fVar36 + 0x10) + -7) - ((int)puVar47 - ((int)fVar36 + 0x20) >> 2)) <
+    puVar40 = *(undefined4 **)(param_1 + 0x80);
+    fVar29 = *(float *)(param_1 + 0x18);
+    if (puVar40 != (undefined4 *)0x0) {
+      if ((uint)((*(int *)((int)fVar29 + 0x10) + -7) - ((int)puVar40 - ((int)fVar29 + 0x20) >> 2)) <
           param_5[0x16] * 0xc + 0x6eU) {
         local_1a0 = 0.0;
         if (*(int *)(param_1 + 0x8c) == 0) {
-          *puVar47 = 0x5c8;
+          *puVar40 = 0x5c8;
           local_1a0 = 2.8026e-45;
-          puVar47[1] = 0xc000;
+          puVar40[1] = 0xc000;
           *(undefined4 *)(param_1 + 0x94) = 0;
         }
-        puVar47[(int)local_1a0] = 0x1000000;
-        puVar11 = PTR_0000e694;
-        puVar30 = *(uint **)(param_1 + 0x7c);
-        *puVar30 = ((int)puVar47 - (int)puVar30 >> 2) + (int)local_1a0 | *puVar30;
-        local_1a4 = fVar36;
-        iVar16 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar11,
+        puVar40[(int)local_1a0] = 0x1000000;
+        puVar5 = PTR_0000e694;
+        puVar24 = *(uint **)(param_1 + 0x7c);
+        *puVar24 = ((int)puVar40 - (int)puVar24 >> 2) + (int)local_1a0 | *puVar24;
+        local_1a4 = fVar29;
+        iVar10 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,*(undefined4 *)puVar5,
                                      &local_1a4,&local_1a0,1);
-        if (iVar16 == 0) {
+        if (iVar10 == 0) {
           *(undefined4 *)((int)local_1a4 + 0x1c) = 0;
           *(float *)(param_1 + 0x18) = local_1a4;
-          puVar47 = (undefined4 *)((int)local_1a4 + 0x20);
+          puVar40 = (undefined4 *)((int)local_1a4 + 0x20);
           *(int *)(param_1 + 0x7c) = (int)local_1a4 + 0x1c;
         }
         else {
-          puVar47 = (undefined4 *)0x0;
+          puVar40 = (undefined4 *)0x0;
           *(undefined4 *)(param_1 + 0x7c) = 0;
           *(undefined4 *)(param_1 + 0x18) = 0;
         }
       }
-      iVar16 = ((int (*)())_radeon3DFillSetup)(puVar47,0,param_6,param_1);
-      iVar24 = param_5[0x16];
-      puVar30 = puVar47 + iVar16;
-      *puVar30 = iVar24 * 0xc0000 | 0xc0003500;
-      pfVar17 = (float *)(puVar30 + 2);
-      puVar30[1] = iVar24 << 0x12 | 0x3d;
-      dVar8 = DOUBLE_0000cfe0;
-      uVar15 = param_5[0x17] + *(int *)(param_1 + 100);
-      fVar36 = (float)((double)CONCAT44(0x43300000,uVar15 ^ 0x80000000) - DOUBLE_0000cfe0);
-      fVar1 = (float)((double)CONCAT44(0x43300000,uVar15 + param_5[0x18] ^ 0x80000000) -
-                     DOUBLE_0000cfe0);
-      if (iVar24 != 0) {
-        iVar16 = *(int *)(param_1 + 0x60);
-        if (iVar24 == 0) {
-          iVar24 = 1;
+      iVar10 = ((int (*)())_radeon3DFillSetup)(puVar40,0,param_6,param_1);
+      iVar18 = param_5[0x16];
+      puVar24 = puVar40 + iVar10;
+      *puVar24 = iVar18 * 0xc0000 | 0xc0003500;
+      pfVar11 = (float *)(puVar24 + 2);
+      puVar24[1] = iVar18 << 0x12 | 0x3d;
+      uVar9 = param_5[0x17] + *(int *)(param_1 + 100);
+      fVar29 = (float)((double)CONCAT44(0x43300000,uVar9 ^ 0x80000000) - 4503601774854144.0);
+      fVar1 = (float)((double)CONCAT44(0x43300000,uVar9 + param_5[0x18] ^ 0x80000000) -
+                     4503601774854144.0);
+      if (iVar18 != 0) {
+        iVar10 = *(int *)(param_1 + 0x60);
+        if (iVar18 == 0) {
+          iVar18 = 1;
         }
         do {
-          fVar2 = (float)((double)CONCAT44(0x43300000,param_5[0x19] + iVar16 ^ 0x80000000) - dVar8);
-          fVar3 = (float)((double)CONCAT44(0x43300000,param_5[0x1a] + iVar16 ^ 0x80000000) - dVar8);
-          *pfVar17 = fVar2;
-          pfVar17[1] = fVar1;
-          pfVar17[2] = 0.0;
-          pfVar17[3] = fVar2;
-          pfVar17[4] = fVar36;
-          pfVar17[5] = 0.0;
-          pfVar17[6] = fVar3;
-          pfVar17[7] = fVar36;
-          pfVar17[8] = 0.0;
-          pfVar17[9] = fVar3;
-          pfVar17[10] = fVar1;
-          pfVar31 = pfVar17 + 0xb;
-          pfVar17 = pfVar17 + 0xc;
-          *pfVar31 = 0.0;
+          fVar28 = (float)((double)CONCAT44(0x43300000,param_5[0x19] + iVar10 ^ 0x80000000) -
+                          4503601774854144.0);
+          fVar22 = (float)((double)CONCAT44(0x43300000,param_5[0x1a] + iVar10 ^ 0x80000000) -
+                          4503601774854144.0);
+          *pfVar11 = fVar28;
+          pfVar11[1] = fVar1;
+          pfVar11[2] = 0.0;
+          pfVar11[3] = fVar28;
+          pfVar11[4] = fVar29;
+          pfVar11[5] = 0.0;
+          pfVar11[6] = fVar22;
+          pfVar11[7] = fVar29;
+          pfVar11[8] = 0.0;
+          pfVar11[9] = fVar22;
+          pfVar11[10] = fVar1;
+          pfVar25 = pfVar11 + 0xb;
+          pfVar11 = pfVar11 + 0xc;
+          *pfVar25 = 0.0;
           param_5 = param_5 + 2;
-          iVar24 = iVar24 + -1;
-        } while (iVar24 != 0);
+          iVar18 = iVar18 + -1;
+        } while (iVar18 != 0);
       }
-      *pfVar17 = 7.02191e-42;
-      pfVar17[1] = 1.4013e-44;
-      pfVar17[2] = 2.07392e-42;
-      pfVar17[3] = 1.83671e-40;
-      *(float **)(param_1 + 0x80) = pfVar17 + 4;
+      *pfVar11 = 7.02191e-42;
+      pfVar11[1] = 1.4013e-44;
+      pfVar11[2] = 2.07392e-42;
+      pfVar11[3] = 1.83671e-40;
+      *(float **)(param_1 + 0x80) = pfVar11 + 4;
       return 0;
     }
   }
   else {
-    pdVar46 = *(dword **)(param_1 + 0x80);
-    iVar16 = *(int *)(param_1 + 0x18);
-    uVar15 = *(int *)(iVar16 + 0x10) - 7;
-    if ((pdVar46 != (dword *)0x0) &&
-       (iVar24 = ((int (*)())_createTextureBuffer)(param_1,0x40,0x40,(uint)(*(int *)(param_1 + 0x70) == 3)),
-       iVar24 != 0)) {
+    pdVar39 = *(dword **)(param_1 + 0x80);
+    iVar10 = *(int *)(param_1 + 0x18);
+    uVar9 = *(int *)(iVar10 + 0x10) - 7;
+    if ((pdVar39 != (dword *)0x0) &&
+       (iVar18 = ((int (*)())_createTextureBuffer)(param_1,0x40,0x40,(uint)(*(int *)(param_1 + 0x70) == 3)),
+       iVar18 != 0)) {
       local_e8 = 0xbaa4;
-      uVar41 = uVar15 - ((int)pdVar46 - (iVar16 + 0x20) >> 2);
+      uVar34 = uVar9 - ((int)pdVar39 - (iVar10 + 0x20) >> 2);
       _fillTextureWithPattern(param_6,param_4 & 0x7ffff000,*param_5,param_5[1]);
-      fVar1 = FLOAT_0000d00c;
-      fVar36 = FLOAT_0000d008;
-      dVar8 = DOUBLE_0000cfd8;
-      iVar16 = *(int *)(((unsigned char *)0x00002ca4) + local_e8);
-      local_104 = *(int *)(iVar16 + 0x30);
+      iVar10 = *(int *)(((unsigned char *)0x00002ca4) + local_e8);
+      local_104 = *(int *)(iVar10 + 0x30);
       if (local_104 == 3) {
         local_104 = 0xb;
       }
       else if (local_104 == 6) {
         local_104 = 0xc;
       }
-      uVar25 = param_5[0x16];
+      uVar19 = param_5[0x16];
       local_178 = 0x43300000;
-      uVar39 = param_5[0x17] + *(int *)(param_1 + 100);
-      iStack_174 = (uVar39 & 7) + param_5[3];
-      uVar42 = uVar39 + param_5[0x18];
-      fVar2 = (float)((double)CONCAT44(0x43300000,iStack_174) - DOUBLE_0000cfd8);
-      if (uVar25 != 0) {
-        local_118 = uVar42;
-        if (uVar39 + 8 < uVar42) {
-          local_118 = uVar39 + 8;
+      uVar32 = param_5[0x17] + *(int *)(param_1 + 100);
+      iStack_174 = (uVar32 & 7) + param_5[3];
+      uVar35 = uVar32 + param_5[0x18];
+      fVar29 = (float)((double)CONCAT44(0x43300000,iStack_174) - 4503599627370496.0);
+      if (uVar19 != 0) {
+        local_118 = uVar35;
+        if (uVar32 + 8 < uVar35) {
+          local_118 = uVar32 + 8;
         }
-        bVar35 = true;
+        bVar4 = true;
         local_100 = 0;
-        fVar3 = fVar2 + FLOAT_0000d008;
-        fVar7 = fVar2 + FLOAT_0000d00c;
         local_10c = param_5;
         do {
-          dVar10 = DOUBLE_0000cfe8;
-          dVar9 = DOUBLE_0000cfe0;
           local_170 = 0x43300000;
-          uVar43 = *(int *)(param_1 + 0x60) + local_10c[0x19];
-          iStack_16c = (uVar43 & 7) + param_5[2];
-          uVar44 = *(int *)(param_1 + 0x60) + local_10c[0x1a];
-          fVar4 = (float)((double)CONCAT44(0x43300000,iStack_16c) - dVar8);
-          if (uVar39 < uVar42) {
-            local_114 = uVar43 + 8;
-            local_108 = uVar44;
-            if (local_114 < uVar44) {
+          uVar36 = *(int *)(param_1 + 0x60) + local_10c[0x19];
+          iStack_16c = (uVar36 & 7) + param_5[2];
+          uVar37 = *(int *)(param_1 + 0x60) + local_10c[0x1a];
+          fVar1 = (float)((double)CONCAT44(0x43300000,iStack_16c) - 4503599627370496.0);
+          if (uVar32 < uVar35) {
+            local_114 = uVar36 + 8;
+            local_108 = uVar37;
+            if (local_114 < uVar37) {
               local_108 = local_114;
             }
-            local_f4 = uVar43 & 0x1fff;
-            local_f0 = uVar44 & 0x1fff;
+            local_f4 = uVar36 & 0x1fff;
+            local_f0 = uVar37 & 0x1fff;
             local_f8 = 0xc000;
             local_ec = 0x4003d;
             local_fc = 1;
-            uVar25 = uVar39;
-            uVar12 = local_118;
+            uVar19 = uVar32;
+            uVar6 = local_118;
             do {
-              if (uVar43 < uVar44) {
-                uVar14 = uVar43;
-                uVar40 = local_108;
-                if (!bVar35) {
-                  local_e4 = uVar12 << 0x10;
-                  local_e0 = uVar25 << 0x10;
-                  local_dc = uVar12 - uVar25;
-                  uVar12 = local_114;
+              if (uVar36 < uVar37) {
+                uVar8 = uVar36;
+                uVar33 = local_108;
+                if (!bVar4) {
+                  local_e4 = uVar6 << 0x10;
+                  local_e0 = uVar19 << 0x10;
+                  local_dc = uVar6 - uVar19;
+                  uVar6 = local_114;
                   goto LAB_0000c1c8;
                 }
-                if (uVar41 < 0x8e) {
+                if (uVar34 < 0x8e) {
                   local_1a4 = *(float *)(param_1 + 0x18);
                   local_1a0 = 0.0;
                   if (*(int *)(param_1 + 0x8c) == 0) {
-                    *pdVar46 = 0x5c8;
+                    *pdVar39 = 0x5c8;
                     local_1a0 = 2.8026e-45;
-                    pdVar46[1] = local_f8;
+                    pdVar39[1] = local_f8;
                     *(undefined4 *)(param_1 + 0x94) = 0;
                   }
-                  pdVar46[(int)local_1a0] = 0x1000000;
-                  puVar11 = PTR_0000e694;
-                  puVar30 = *(uint **)(param_1 + 0x7c);
-                  *puVar30 = ((int)pdVar46 - (int)puVar30 >> 2) + (int)local_1a0 | *puVar30;
-                  iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
-                                               *(undefined4 *)puVar11,&local_1a4,&local_1a0,1);
-                  uVar40 = local_108;
-                  if (iVar24 == 0) {
-                    local_e4 = uVar12 << 0x10;
-                    local_e0 = uVar25 << 0x10;
-                    local_dc = uVar12 - uVar25;
+                  pdVar39[(int)local_1a0] = 0x1000000;
+                  puVar5 = PTR_0000e694;
+                  puVar24 = *(uint **)(param_1 + 0x7c);
+                  *puVar24 = ((int)pdVar39 - (int)puVar24 >> 2) + (int)local_1a0 | *puVar24;
+                  iVar18 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                                               *(undefined4 *)puVar5,&local_1a4,&local_1a0,1);
+                  uVar33 = local_108;
+                  if (iVar18 == 0) {
+                    local_e4 = uVar6 << 0x10;
+                    local_e0 = uVar19 << 0x10;
+                    local_dc = uVar6 - uVar19;
                     *(undefined4 *)((int)local_1a4 + 0x1c) = 0;
-                    pdVar46 = (dword *)((int)local_1a4 + 0x20);
+                    pdVar39 = (dword *)((int)local_1a4 + 0x20);
                     local_110 = local_114;
                     *(float *)(param_1 + 0x18) = local_1a4;
-                    pdVar48 = (dword *)((int)local_1a4 + 0x48);
+                    pdVar41 = (dword *)((int)local_1a4 + 0x48);
                     *(int *)(param_1 + 0x7c) = (int)local_1a4 + 0x1c;
-                    pdVar45 = (dword *)((int)local_1a4 + 0x24);
-                    pdVar38 = (dword *)((int)local_1a4 + 0x28);
-                    pdVar18 = (dword *)((int)local_1a4 + 0x2c);
-                    pdVar32 = (dword *)((int)local_1a4 + 0x30);
-                    pdVar20 = (dword *)((int)local_1a4 + 0x34);
-                    pdVar21 = (dword *)((int)local_1a4 + 0x38);
-                    psVar22 = (segment_command *)((int)local_1a4 + 0x3c);
-                    pdVar26 = (dword *)((int)local_1a4 + 0x40);
-                    pdVar29 = (dword *)((int)local_1a4 + 0x44);
-                    uVar41 = uVar15;
+                    pdVar38 = (dword *)((int)local_1a4 + 0x24);
+                    pdVar31 = (dword *)((int)local_1a4 + 0x28);
+                    pdVar12 = (dword *)((int)local_1a4 + 0x2c);
+                    pdVar26 = (dword *)((int)local_1a4 + 0x30);
+                    pdVar14 = (dword *)((int)local_1a4 + 0x34);
+                    pdVar15 = (dword *)((int)local_1a4 + 0x38);
+                    psVar16 = (segment_command *)((int)local_1a4 + 0x3c);
+                    pdVar20 = (dword *)((int)local_1a4 + 0x40);
+                    pdVar23 = (dword *)((int)local_1a4 + 0x44);
+                    uVar34 = uVar9;
                   }
                   else {
-                    local_e4 = uVar12 << 0x10;
-                    local_dc = uVar12 - uVar25;
-                    local_e0 = uVar25 << 0x10;
+                    local_e4 = uVar6 << 0x10;
+                    local_dc = uVar6 - uVar19;
+                    local_e0 = uVar19 << 0x10;
                     local_110 = local_114;
                     *(undefined4 *)(param_1 + 0x7c) = 0;
                     *(undefined4 *)(param_1 + 0x18) = 0;
-                    pdVar46 = (dword *)0x0;
-                    pdVar45 = &__mh_bundle_header.cputype;
-                    pdVar38 = &__mh_bundle_header.cpusubtype;
-                    pdVar18 = &__mh_bundle_header.filetype;
-                    pdVar32 = &__mh_bundle_header.ncmds;
-                    pdVar20 = &__mh_bundle_header.sizeofcmds;
-                    pdVar21 = &__mh_bundle_header.flags;
-                    psVar22 = &(*(GhidraMachOCommand *)0x0000001c);
-                    pdVar26 = &(*(GhidraMachOCommand *)0x0000001c).cmdsize;
-                    pdVar29 = (dword *)(*(GhidraMachOCommand *)0x0000001c).segname;
-                    pdVar48 = (dword *)((*(GhidraMachOCommand *)0x0000001c).segname + 4);
-                    uVar41 = uVar15;
+                    pdVar39 = (dword *)0x0;
+                    pdVar38 = &__mh_bundle_header.cputype;
+                    pdVar31 = &__mh_bundle_header.cpusubtype;
+                    pdVar12 = &__mh_bundle_header.filetype;
+                    pdVar26 = &__mh_bundle_header.ncmds;
+                    pdVar14 = &__mh_bundle_header.sizeofcmds;
+                    pdVar15 = &__mh_bundle_header.flags;
+                    psVar16 = &(*(GhidraMachOCommand *)0x0000001c);
+                    pdVar20 = &(*(GhidraMachOCommand *)0x0000001c).cmdsize;
+                    pdVar23 = (dword *)(*(GhidraMachOCommand *)0x0000001c).segname;
+                    pdVar41 = (dword *)((*(GhidraMachOCommand *)0x0000001c).segname + 4);
+                    uVar34 = uVar9;
                   }
                 }
                 else {
-                  local_e4 = uVar12 << 0x10;
-                  local_e0 = uVar25 << 0x10;
-                  local_dc = uVar12 - uVar25;
-                  pdVar45 = pdVar46 + 1;
-                  pdVar38 = pdVar46 + 2;
-                  pdVar18 = pdVar46 + 3;
+                  local_e4 = uVar6 << 0x10;
+                  local_e0 = uVar19 << 0x10;
+                  local_dc = uVar6 - uVar19;
+                  pdVar38 = pdVar39 + 1;
+                  pdVar31 = pdVar39 + 2;
+                  pdVar12 = pdVar39 + 3;
                   local_110 = local_114;
-                  pdVar32 = pdVar46 + 4;
-                  pdVar20 = pdVar46 + 5;
-                  pdVar21 = pdVar46 + 6;
-                  psVar22 = (segment_command *)(pdVar46 + 7);
-                  pdVar26 = pdVar46 + 8;
-                  pdVar29 = pdVar46 + 9;
-                  pdVar48 = pdVar46 + 10;
+                  pdVar26 = pdVar39 + 4;
+                  pdVar14 = pdVar39 + 5;
+                  pdVar15 = pdVar39 + 6;
+                  psVar16 = (segment_command *)(pdVar39 + 7);
+                  pdVar20 = pdVar39 + 8;
+                  pdVar23 = pdVar39 + 9;
+                  pdVar41 = pdVar39 + 10;
                 }
                 do {
-                  puVar30 = *(uint **)(param_1 + 0x7c);
-                  *puVar30 = (int)pdVar46 - (int)puVar30 >> 2 | *puVar30;
-                  *(dword **)(param_1 + 0x7c) = pdVar46;
-                  *pdVar46 = 0x11000000;
-                  *pdVar45 = *(dword *)(param_1 + 0x84);
-                  *pdVar38 = 0;
-                  *pdVar18 = 0;
-                  puVar30 = *(uint **)(param_1 + 0x7c);
-                  *puVar30 = (int)pdVar32 - (int)puVar30 >> 2 | *puVar30;
-                  *(dword **)(param_1 + 0x7c) = pdVar32;
-                  *pdVar32 = 0x8000000;
-                  *pdVar20 = *(dword *)**(undefined4 **)(((unsigned char *)0x00002ca4) + local_e8);
-                  *pdVar21 = 0;
-                  psVar22->cmd = 0;
-                  *pdVar26 = 0;
-                  *pdVar29 = 0;
-                  uVar41 = uVar41 - 10;
-                  iVar19 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar48,iVar16 + 0xc,local_104,0,0,0,0);
-                  iVar24 = iVar19 << 2;
-                  iVar33 = iVar19 + 1;
-                  iVar37 = iVar19 + 2;
-                  iVar27 = iVar19 + 3;
-                  iVar23 = iVar19 + 4;
-                  pdVar46 = pdVar48;
+                  puVar24 = *(uint **)(param_1 + 0x7c);
+                  *puVar24 = (int)pdVar39 - (int)puVar24 >> 2 | *puVar24;
+                  *(dword **)(param_1 + 0x7c) = pdVar39;
+                  *pdVar39 = 0x11000000;
+                  *pdVar38 = *(dword *)(param_1 + 0x84);
+                  *pdVar31 = 0;
+                  *pdVar12 = 0;
+                  puVar24 = *(uint **)(param_1 + 0x7c);
+                  *puVar24 = (int)pdVar26 - (int)puVar24 >> 2 | *puVar24;
+                  *(dword **)(param_1 + 0x7c) = pdVar26;
+                  *pdVar26 = 0x8000000;
+                  *pdVar14 = *(dword *)**(undefined4 **)(((unsigned char *)0x00002ca4) + local_e8);
+                  *pdVar15 = 0;
+                  psVar16->cmd = 0;
+                  *pdVar20 = 0;
+                  *pdVar23 = 0;
+                  uVar34 = uVar34 - 10;
+                  iVar13 = ((int (*)())_radeon3DCopySetup)(param_1,pdVar41,iVar10 + 0xc,local_104,0,0,0,0);
+                  iVar18 = iVar13 << 2;
+                  iVar27 = iVar13 + 1;
+                  iVar30 = iVar13 + 2;
+                  iVar21 = iVar13 + 3;
+                  iVar17 = iVar13 + 4;
+                  pdVar39 = pdVar41;
                   while( true ) {
                     if (local_fc != 0) {
-                      pcVar6 = (char *)((int)pdVar46 + iVar24);
-                      pcVar6[0] = '\0';
-                      pcVar6[1] = '\0';
-                      pcVar6[2] = '\x10';
-                      pcVar6[3] = -8;
-                      pdVar46[iVar33] = local_f4 | uVar39 * 0x2000 & 0x3ffe000;
-                      pdVar46[iVar37] = 0x10f9;
-                      pdVar46[iVar27] = local_f0 | uVar42 * 0x2000 & 0x3ffe000;
-                      iVar24 = iVar23 << 2;
-                      iVar33 = iVar23 + 1;
-                      iVar37 = iVar23 + 2;
+                      pcVar3 = (char *)((int)pdVar39 + iVar18);
+                      pcVar3[0] = '\0';
+                      pcVar3[1] = '\0';
+                      pcVar3[2] = '\x10';
+                      pcVar3[3] = -8;
+                      pdVar39[iVar27] = local_f4 | uVar32 * 0x2000 & 0x3ffe000;
+                      pdVar39[iVar30] = 0x10f9;
+                      pdVar39[iVar21] = local_f0 | uVar35 * 0x2000 & 0x3ffe000;
+                      iVar18 = iVar17 << 2;
+                      iVar27 = iVar17 + 1;
+                      iVar30 = iVar17 + 2;
                       local_fc = 0;
-                      iVar27 = iVar23 + 3;
-                      iVar19 = iVar23;
-                      iVar23 = iVar23 + 4;
+                      iVar21 = iVar17 + 3;
+                      iVar13 = iVar17;
+                      iVar17 = iVar17 + 4;
                     }
-                    iVar13 = uVar40 - uVar14;
-                    if ((iVar13 == 8) && (local_dc == 8)) {
-                      pcVar6 = (char *)((int)pdVar46 + iVar24);
-                      pcVar6[0] = -0x40;
-                      pcVar6[1] = '\f';
-                      pcVar6[2] = '5';
-                      pcVar6[3] = '\0';
-                      pdVar46[iVar33] = local_ec;
+                    iVar7 = uVar33 - uVar8;
+                    if ((iVar7 == 8) && (local_dc == 8)) {
+                      pcVar3 = (char *)((int)pdVar39 + iVar18);
+                      pcVar3[0] = -0x40;
+                      pcVar3[1] = '\f';
+                      pcVar3[2] = '5';
+                      pcVar3[3] = '\0';
+                      pdVar39[iVar27] = local_ec;
                       local_138 = 0x43300000;
-                      uStack_134 = (int)*(short *)(iVar16 + 0x10) ^ 0x80000000;
-                      fVar5 = (float)((double)(fVar4 + fVar36) *
-                                     (dVar10 / ((double)CONCAT44(0x43300000,uStack_134) - dVar9)));
+                      uStack_134 = (int)*(short *)(iVar10 + 0x10) ^ 0x80000000;
+                      fVar2 = (float)((double)(fVar1 + 0.0) *
+                                     (1.0 / ((double)CONCAT44(0x43300000,uStack_134) -
+                                            4503601774854144.0)));
                       local_130 = 0x43300000;
-                      uStack_12c = (int)*(short *)(iVar16 + 0x10) ^ 0x80000000;
-                      fVar34 = (float)((double)(fVar4 + fVar1) *
-                                      (dVar10 / ((double)CONCAT44(0x43300000,uStack_12c) - dVar9)));
+                      uStack_12c = (int)*(short *)(iVar10 + 0x10) ^ 0x80000000;
+                      fVar28 = (float)((double)(fVar1 + 8.0) *
+                                      (1.0 / ((double)CONCAT44(0x43300000,uStack_12c) -
+                                             4503601774854144.0)));
                       local_128 = 0x43300000;
-                      uStack_124 = (int)*(short *)(iVar16 + 0x12) ^ 0x80000000;
-                      local_1a4 = (float)((double)fVar3 *
-                                         (dVar10 / ((double)CONCAT44(0x43300000,uStack_124) - dVar9)
-                                         ));
+                      uStack_124 = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
+                      local_1a4 = (float)((double)(fVar29 + 0.0) *
+                                         (1.0 / ((double)CONCAT44(0x43300000,uStack_124) -
+                                                4503601774854144.0)));
                       local_120 = 0x43300000;
-                      uStack_11c = (int)*(short *)(iVar16 + 0x12) ^ 0x80000000;
-                      fVar28 = (float)((double)fVar7 *
-                                      (dVar10 / ((double)CONCAT44(0x43300000,uStack_11c) - dVar9)));
-                      pdVar46[iVar37] = uVar14 | local_e4;
-                      pdVar46[iVar27] = (dword)fVar5;
-                      pdVar46[iVar23] = (dword)fVar28;
-                      pdVar46[iVar19 + 5] = uVar14 | local_e0;
-                      pdVar46[iVar19 + 6] = (dword)fVar5;
-                      pdVar46[iVar19 + 7] = (dword)local_1a4;
-                      pdVar46[iVar19 + 8] = uVar40 | local_e0;
-                      local_1a0 = fVar34;
-                      local_19c = fVar28;
+                      uStack_11c = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
+                      fVar22 = (float)((double)(fVar29 + 8.0) *
+                                      (1.0 / ((double)CONCAT44(0x43300000,uStack_11c) -
+                                             4503601774854144.0)));
+                      pdVar39[iVar30] = uVar8 | local_e4;
+                      pdVar39[iVar21] = (dword)fVar2;
+                      pdVar39[iVar17] = (dword)fVar22;
+                      pdVar39[iVar13 + 5] = uVar8 | local_e0;
+                      pdVar39[iVar13 + 6] = (dword)fVar2;
+                      pdVar39[iVar13 + 7] = (dword)local_1a4;
+                      pdVar39[iVar13 + 8] = uVar33 | local_e0;
+                      local_1a0 = fVar28;
+                      local_19c = fVar22;
                     }
                     else {
                       local_168 = 0x43300000;
                       local_160 = 0x43300000;
                       iStack_15c = local_dc;
-                      pcVar6 = (char *)((int)pdVar46 + iVar24);
-                      pcVar6[0] = -0x40;
-                      pcVar6[1] = '\f';
-                      pcVar6[2] = '5';
-                      pcVar6[3] = '\0';
-                      pdVar46[iVar33] = local_ec;
+                      pcVar3 = (char *)((int)pdVar39 + iVar18);
+                      pcVar3[0] = -0x40;
+                      pcVar3[1] = '\f';
+                      pcVar3[2] = '5';
+                      pcVar3[3] = '\0';
+                      pdVar39[iVar27] = local_ec;
                       local_158 = 0x43300000;
-                      uStack_154 = (int)*(short *)(iVar16 + 0x10) ^ 0x80000000;
-                      local_19c = (float)((double)(fVar4 + fVar36) *
-                                         (dVar10 / ((double)CONCAT44(0x43300000,uStack_154) - dVar9)
-                                         ));
+                      uStack_154 = (int)*(short *)(iVar10 + 0x10) ^ 0x80000000;
+                      local_19c = (float)((double)(fVar1 + 0.0) *
+                                         (1.0 / ((double)CONCAT44(0x43300000,uStack_154) -
+                                                4503601774854144.0)));
                       local_150 = 0x43300000;
-                      uStack_14c = (int)*(short *)(iVar16 + 0x10) ^ 0x80000000;
-                      fVar34 = (float)((double)(fVar4 + (float)((double)CONCAT44(0x43300000,iVar13)
-                                                               - dVar8)) *
-                                      (dVar10 / ((double)CONCAT44(0x43300000,uStack_14c) - dVar9)));
+                      uStack_14c = (int)*(short *)(iVar10 + 0x10) ^ 0x80000000;
+                      fVar28 = (float)((double)(fVar1 + (float)((double)CONCAT44(0x43300000,iVar7) -
+                                                               4503599627370496.0)) *
+                                      (1.0 / ((double)CONCAT44(0x43300000,uStack_14c) -
+                                             4503601774854144.0)));
                       local_148 = 0x43300000;
-                      uStack_144 = (int)*(short *)(iVar16 + 0x12) ^ 0x80000000;
-                      local_1a4 = (float)((double)fVar3 *
-                                         (dVar10 / ((double)CONCAT44(0x43300000,uStack_144) - dVar9)
-                                         ));
+                      uStack_144 = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
+                      local_1a4 = (float)((double)(fVar29 + 0.0) *
+                                         (1.0 / ((double)CONCAT44(0x43300000,uStack_144) -
+                                                4503601774854144.0)));
                       local_140 = 0x43300000;
-                      uStack_13c = (int)*(short *)(iVar16 + 0x12) ^ 0x80000000;
-                      fVar28 = (float)((double)(fVar2 + (float)((double)CONCAT44(0x43300000,local_dc
-                                                                                ) - dVar8)) *
-                                      (dVar10 / ((double)CONCAT44(0x43300000,uStack_13c) - dVar9)));
-                      pdVar46[iVar37] = local_e4 | uVar14;
-                      pdVar46[iVar27] = (dword)local_19c;
-                      pdVar46[iVar23] = (dword)fVar28;
-                      pdVar46[iVar19 + 5] = local_e0 | uVar14;
-                      pdVar46[iVar19 + 6] = (dword)local_19c;
-                      pdVar46[iVar19 + 7] = (dword)local_1a4;
-                      pdVar46[iVar19 + 8] = local_e0 | uVar40;
-                      local_1a0 = fVar28;
-                      iStack_164 = iVar13;
+                      uStack_13c = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
+                      fVar22 = (float)((double)(fVar29 + (float)((double)CONCAT44(0x43300000,
+                                                                                  local_dc) -
+                                                                4503599627370496.0)) *
+                                      (1.0 / ((double)CONCAT44(0x43300000,uStack_13c) -
+                                             4503601774854144.0)));
+                      pdVar39[iVar30] = local_e4 | uVar8;
+                      pdVar39[iVar21] = (dword)local_19c;
+                      pdVar39[iVar17] = (dword)fVar22;
+                      pdVar39[iVar13 + 5] = local_e0 | uVar8;
+                      pdVar39[iVar13 + 6] = (dword)local_19c;
+                      pdVar39[iVar13 + 7] = (dword)local_1a4;
+                      pdVar39[iVar13 + 8] = local_e0 | uVar33;
+                      local_1a0 = fVar22;
+                      iStack_164 = iVar7;
                     }
-                    pdVar46[iVar19 + 9] = (dword)fVar34;
-                    pdVar46[iVar19 + 10] = (dword)local_1a4;
-                    pdVar46[iVar19 + 0xb] = uVar40 | local_e4;
-                    pdVar46[iVar19 + 0xc] = (dword)fVar34;
-                    pdVar46[iVar19 + 0xd] = (dword)fVar28;
-                    pdVar46[iVar19 + 0xe] = 0x1393;
-                    pdVar46[iVar19 + 0xf] = 10;
-                    pdVar46[iVar19 + 0x10] = 0x5c8;
-                    pdVar46[iVar19 + 0x11] = 0x20000;
-                    uVar41 = uVar41 - (iVar19 + 0x12);
-                    pdVar46 = pdVar46 + iVar19 + 0x12;
-                    uVar40 = uVar44;
-                    if (uVar14 + 0x10 < uVar44) {
-                      uVar40 = uVar14 + 0x10;
+                    pdVar39[iVar13 + 9] = (dword)fVar28;
+                    pdVar39[iVar13 + 10] = (dword)local_1a4;
+                    pdVar39[iVar13 + 0xb] = uVar33 | local_e4;
+                    pdVar39[iVar13 + 0xc] = (dword)fVar28;
+                    pdVar39[iVar13 + 0xd] = (dword)fVar22;
+                    pdVar39[iVar13 + 0xe] = 0x1393;
+                    pdVar39[iVar13 + 0xf] = 10;
+                    pdVar39[iVar13 + 0x10] = 0x5c8;
+                    pdVar39[iVar13 + 0x11] = 0x20000;
+                    uVar34 = uVar34 - (iVar13 + 0x12);
+                    pdVar39 = pdVar39 + iVar13 + 0x12;
+                    uVar33 = uVar37;
+                    if (uVar8 + 0x10 < uVar37) {
+                      uVar33 = uVar8 + 0x10;
                     }
-                    bVar35 = false;
-                    if (uVar44 <= local_110) goto LAB_0000c820;
-                    uVar12 = local_110 + 8;
-                    uVar14 = local_110;
+                    bVar4 = false;
+                    if (uVar37 <= local_110) goto LAB_0000c820;
+                    uVar6 = local_110 + 8;
+                    uVar8 = local_110;
 LAB_0000c1c8:
-                    if (uVar41 < 0x16) break;
-                    iVar23 = 4;
-                    iVar27 = 3;
-                    iVar37 = 2;
-                    iVar33 = 1;
-                    iVar24 = 0;
-                    iVar19 = 0;
-                    local_110 = uVar12;
+                    if (uVar34 < 0x16) break;
+                    iVar17 = 4;
+                    iVar21 = 3;
+                    iVar30 = 2;
+                    iVar27 = 1;
+                    iVar18 = 0;
+                    iVar13 = 0;
+                    local_110 = uVar6;
                   }
                   local_1a0 = *(float *)(param_1 + 0x18);
                   local_1a4 = 0.0;
                   if (*(int *)(param_1 + 0x8c) == 0) {
-                    *pdVar46 = 0x5c8;
+                    *pdVar39 = 0x5c8;
                     local_1a4 = 2.8026e-45;
-                    pdVar46[1] = local_f8;
+                    pdVar39[1] = local_f8;
                     *(undefined4 *)(param_1 + 0x94) = 0;
                   }
-                  pdVar46[(int)local_1a4] = 0x1000000;
-                  puVar11 = PTR_0000e694;
-                  puVar30 = *(uint **)(param_1 + 0x7c);
-                  *puVar30 = ((int)pdVar46 - (int)puVar30 >> 2) + (int)local_1a4 | *puVar30;
-                  iVar24 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
-                                               *(undefined4 *)puVar11,&local_1a0,&local_1a4,1);
-                  if (iVar24 == 0) {
-                    local_110 = uVar14 + 8;
+                  pdVar39[(int)local_1a4] = 0x1000000;
+                  puVar5 = PTR_0000e694;
+                  puVar24 = *(uint **)(param_1 + 0x7c);
+                  *puVar24 = ((int)pdVar39 - (int)puVar24 >> 2) + (int)local_1a4 | *puVar24;
+                  iVar18 = _IOConnectMapMemory(*(undefined4 *)(param_1 + 0xc),0,
+                                               *(undefined4 *)puVar5,&local_1a0,&local_1a4,1);
+                  if (iVar18 == 0) {
+                    local_110 = uVar8 + 8;
                     local_fc = 1;
                     *(undefined4 *)((int)local_1a0 + 0x1c) = 0;
                     *(float *)(param_1 + 0x18) = local_1a0;
-                    pdVar46 = (dword *)((int)local_1a0 + 0x20);
-                    pdVar48 = (dword *)((int)local_1a0 + 0x48);
+                    pdVar39 = (dword *)((int)local_1a0 + 0x20);
+                    pdVar41 = (dword *)((int)local_1a0 + 0x48);
                     *(int *)(param_1 + 0x7c) = (int)local_1a0 + 0x1c;
-                    pdVar45 = (dword *)((int)local_1a0 + 0x24);
-                    pdVar38 = (dword *)((int)local_1a0 + 0x28);
-                    pdVar18 = (dword *)((int)local_1a0 + 0x2c);
-                    pdVar32 = (dword *)((int)local_1a0 + 0x30);
-                    pdVar20 = (dword *)((int)local_1a0 + 0x34);
-                    pdVar21 = (dword *)((int)local_1a0 + 0x38);
-                    psVar22 = (segment_command *)((int)local_1a0 + 0x3c);
-                    pdVar26 = (dword *)((int)local_1a0 + 0x40);
-                    pdVar29 = (dword *)((int)local_1a0 + 0x44);
-                    uVar41 = uVar15;
+                    pdVar38 = (dword *)((int)local_1a0 + 0x24);
+                    pdVar31 = (dword *)((int)local_1a0 + 0x28);
+                    pdVar12 = (dword *)((int)local_1a0 + 0x2c);
+                    pdVar26 = (dword *)((int)local_1a0 + 0x30);
+                    pdVar14 = (dword *)((int)local_1a0 + 0x34);
+                    pdVar15 = (dword *)((int)local_1a0 + 0x38);
+                    psVar16 = (segment_command *)((int)local_1a0 + 0x3c);
+                    pdVar20 = (dword *)((int)local_1a0 + 0x40);
+                    pdVar23 = (dword *)((int)local_1a0 + 0x44);
+                    uVar34 = uVar9;
                   }
                   else {
-                    local_110 = uVar14 + 8;
-                    pdVar48 = (dword *)((*(GhidraMachOCommand *)0x0000001c).segname + 4);
-                    pdVar29 = (dword *)(*(GhidraMachOCommand *)0x0000001c).segname;
-                    pdVar26 = &(*(GhidraMachOCommand *)0x0000001c).cmdsize;
-                    psVar22 = &(*(GhidraMachOCommand *)0x0000001c);
+                    local_110 = uVar8 + 8;
+                    pdVar41 = (dword *)((*(GhidraMachOCommand *)0x0000001c).segname + 4);
+                    pdVar23 = (dword *)(*(GhidraMachOCommand *)0x0000001c).segname;
+                    pdVar20 = &(*(GhidraMachOCommand *)0x0000001c).cmdsize;
+                    psVar16 = &(*(GhidraMachOCommand *)0x0000001c);
                     local_fc = 1;
                     *(undefined4 *)(param_1 + 0x7c) = 0;
                     *(undefined4 *)(param_1 + 0x18) = 0;
-                    pdVar21 = &__mh_bundle_header.flags;
-                    pdVar20 = &__mh_bundle_header.sizeofcmds;
-                    pdVar32 = &__mh_bundle_header.ncmds;
-                    pdVar18 = &__mh_bundle_header.filetype;
-                    pdVar38 = &__mh_bundle_header.cpusubtype;
-                    pdVar45 = &__mh_bundle_header.cputype;
-                    pdVar46 = (dword *)0x0;
-                    uVar41 = uVar15;
+                    pdVar15 = &__mh_bundle_header.flags;
+                    pdVar14 = &__mh_bundle_header.sizeofcmds;
+                    pdVar26 = &__mh_bundle_header.ncmds;
+                    pdVar12 = &__mh_bundle_header.filetype;
+                    pdVar31 = &__mh_bundle_header.cpusubtype;
+                    pdVar38 = &__mh_bundle_header.cputype;
+                    pdVar39 = (dword *)0x0;
+                    uVar34 = uVar9;
                   }
                 } while( true );
               }
 LAB_0000c820:
-              uVar14 = uVar25 + 0x10;
-              uVar25 = uVar25 + 8;
-              uVar12 = uVar42;
-              if (uVar14 < uVar42) {
-                uVar12 = uVar14;
+              uVar8 = uVar19 + 0x10;
+              uVar19 = uVar19 + 8;
+              uVar6 = uVar35;
+              if (uVar8 < uVar35) {
+                uVar6 = uVar8;
               }
-            } while (uVar25 < uVar42);
-            uVar25 = param_5[0x16];
+            } while (uVar19 < uVar35);
+            uVar19 = param_5[0x16];
           }
           local_100 = local_100 + 1;
           local_10c = local_10c + 2;
-        } while (local_100 < uVar25);
+        } while (local_100 < uVar19);
       }
-      *(dword **)(param_1 + 0x80) = pdVar46;
+      *(dword **)(param_1 + 0x80) = pdVar39;
       return 0;
     }
   }
@@ -5534,9 +5506,9 @@ int FUN_0000c974()
 
 /* ___stub_getrealaddr @ 0xc9ec (164 bytes) */
 int ___stub_getrealaddr(param_1)
-  char *param_1;
+  undefined4 param_1;
 {
-  size_t sVar1;
+  int iVar1;
   int iVar2;
   undefined4 uVar3;
   char local_58 [4];
@@ -5545,16 +5517,16 @@ int ___stub_getrealaddr(param_1)
   
   local_58[0] = '_';
   _strcpy(local_58 + 1,param_1);
-  sVar1 = _strlen(local_58);
-  *(undefined4 *)(local_58 + sVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_0000cfbc) + 0));
-  acStack_50[sVar1] = s__LDBL128_0000cfbc[8];
-  *(undefined4 *)(acStack_54 + sVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_0000cfbc) + 4));
+  iVar1 = _strlen(local_58);
+  builtin_strncpy(local_58 + iVar1,"$LDB",4);
+  acStack_50[iVar1] = '\0';
+  builtin_strncpy(acStack_54 + iVar1,"L128",4);
   iVar2 = _NSIsSymbolNameDefinedWithHint(local_58,"libSystem.");
   if (iVar2 == 0) {
-    local_58[sVar1] = '\0';
+    local_58[iVar1] = '\0';
   }
-  _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
-  uVar3 = _NSAddressOfSymbol();
+  uVar3 = _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
+  uVar3 = _NSAddressOfSymbol(uVar3);
   return uVar3;
 }
 

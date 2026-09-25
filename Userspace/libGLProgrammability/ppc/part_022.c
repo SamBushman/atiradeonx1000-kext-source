@@ -68,10 +68,10 @@ int __ZNKSs13find_first_ofEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -133,10 +133,10 @@ int __ZNKSs12find_last_ofEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -190,10 +190,10 @@ int __ZNKSs17find_first_not_ofEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -261,10 +261,10 @@ int __ZNKSs16find_last_not_ofEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -322,14 +322,14 @@ int __ZNKSs7compareERKSs(this, param_2)
   uint local_1c [4];
   
   puVar2 = local_1c;
-  uVar3 = *(uint *)((int)*(void **)this + -0xc);
+  uVar3 = *(uint *)(*(int *)this + -0xc);
   local_20 = uVar3;
-  uVar4 = *(uint *)((int)*(void **)param_2 + -0xc);
+  uVar4 = *(uint *)(*(int *)param_2 + -0xc);
   local_1c[0] = uVar4;
   if (uVar3 <= uVar4) {
     puVar2 = &local_20;
   }
-  iVar1 = _memcmp(*(void **)this,*(void **)param_2,*puVar2);
+  iVar1 = _memcmp(*(int *)this,*(int *)param_2,*puVar2);
   if (iVar1 == 0) {
     iVar1 = uVar3 - uVar4;
   }
@@ -346,7 +346,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   uint uVar1;
   uint *puVar2;
   int iVar3;
-  void *pvVar4;
+  int iVar4;
   uint uVar5;
   ulong uStack00000020;
   uint local_30;
@@ -355,13 +355,13 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   
   iVar3 = *(int *)this;
   uVar5 = *(uint *)(iVar3 + -0xc);
-  pvVar4 = *(void **)param_4;
-  local_28[0] = *(uint *)((int)pvVar4 + -0xc);
+  iVar4 = *(int *)param_4;
+  local_28[0] = *(uint *)(iVar4 + -0xc);
   uStack00000020 = param_3;
   if (uVar5 < param_2) {
     std____throw_out_of_range("basic_string::compare");
     iVar3 = *(int *)this;
-    pvVar4 = *(void **)param_4;
+    iVar4 = *(int *)param_4;
   }
   uVar1 = local_28[0];
   local_30 = uVar5 - param_2;
@@ -375,7 +375,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   if (uVar5 <= local_28[0]) {
     puVar2 = &local_2c;
   }
-  iVar3 = _memcmp((void *)(iVar3 + param_2),pvVar4,*puVar2);
+  iVar3 = _memcmp(iVar3 + param_2,iVar4,*puVar2);
   if (iVar3 == 0) {
     iVar3 = uVar5 - uVar1;
   }
@@ -432,7 +432,7 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   if (uVar4 <= uVar5) {
     puVar1 = &local_28;
   }
-  iVar2 = _memcmp((void *)(iVar2 + param_2),(void *)(iVar3 + param_5),*puVar1);
+  iVar2 = _memcmp(iVar2 + param_2,iVar3 + param_5,*puVar1);
   if (iVar2 == 0) {
     iVar2 = uVar4 - uVar5;
   }
@@ -444,28 +444,27 @@ int __ZNKSs7compareEPKc(this, param_2)
   void *this;
   char *param_2;
 {
-  size_t sVar1;
-  int iVar2;
-  size_t *psVar3;
-  void *pvVar4;
-  uint uVar5;
+  uint uVar1;
+  uint *puVar2;
+  int iVar3;
+  uint uVar4;
   uint local_30;
-  size_t local_2c [6];
+  uint local_2c [6];
   
-  pvVar4 = *(void **)this;
-  uVar5 = *(uint *)((int)pvVar4 + -0xc);
-  local_30 = uVar5;
-  sVar1 = _strlen(param_2);
-  psVar3 = local_2c;
-  local_2c[0] = sVar1;
-  if (uVar5 <= sVar1) {
-    psVar3 = &local_30;
+  iVar3 = *(int *)this;
+  uVar4 = *(uint *)(iVar3 + -0xc);
+  local_30 = uVar4;
+  uVar1 = _strlen(param_2);
+  puVar2 = local_2c;
+  local_2c[0] = uVar1;
+  if (uVar4 <= uVar1) {
+    puVar2 = &local_30;
   }
-  iVar2 = _memcmp(pvVar4,param_2,*psVar3);
-  if (iVar2 == 0) {
-    iVar2 = uVar5 - sVar1;
+  iVar3 = _memcmp(iVar3,param_2,*puVar2);
+  if (iVar3 == 0) {
+    iVar3 = uVar4 - uVar1;
   }
-  return iVar2;
+  return iVar3;
 }
 
 /* __ZNKSs7compareEmmPKc @ 0x97c1628c (188 bytes) */
@@ -476,40 +475,39 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   char *param_4;
 {
   uint *puVar1;
-  size_t sVar2;
-  size_t *psVar3;
-  int iVar4;
-  uint uVar5;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
   ulong uStack00000020;
   uint local_30;
   uint local_2c;
-  size_t local_28 [4];
+  uint local_28 [4];
   
-  iVar4 = *(int *)this;
-  uVar5 = *(uint *)(iVar4 + -0xc);
+  iVar3 = *(int *)this;
+  uVar4 = *(uint *)(iVar3 + -0xc);
   uStack00000020 = param_3;
-  if (uVar5 < param_2) {
+  if (uVar4 < param_2) {
     std____throw_out_of_range("basic_string::compare");
-    iVar4 = *(int *)this;
+    iVar3 = *(int *)this;
   }
-  sVar2 = _strlen(param_4);
-  local_30 = uVar5 - param_2;
-  local_28[0] = sVar2;
+  uVar2 = _strlen(param_4);
+  local_30 = uVar4 - param_2;
+  local_28[0] = uVar2;
   puVar1 = &STACKARG(0x20);
   if (local_30 <= uStack00000020) {
     puVar1 = &local_30;
   }
-  uVar5 = *puVar1;
-  psVar3 = local_28;
-  local_2c = uVar5;
-  if (uVar5 <= sVar2) {
-    psVar3 = &local_2c;
+  uVar4 = *puVar1;
+  puVar1 = local_28;
+  local_2c = uVar4;
+  if (uVar4 <= uVar2) {
+    puVar1 = &local_2c;
   }
-  iVar4 = _memcmp((void *)(iVar4 + param_2),param_4,*psVar3);
-  if (iVar4 == 0) {
-    iVar4 = uVar5 - sVar2;
+  iVar3 = _memcmp(iVar3 + param_2,param_4,*puVar1);
+  if (iVar3 == 0) {
+    iVar3 = uVar4 - uVar2;
   }
-  return iVar4;
+  return iVar3;
 }
 
 /* __ZNKSs7compareEmmPKcm @ 0x97c16348 (220 bytes) */
@@ -520,49 +518,48 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
   char *param_4;
   ulong param_5;
 {
-  size_t *psVar1;
-  uint *puVar2;
-  int iVar3;
+  uint *puVar1;
+  int iVar2;
+  uint uVar3;
   uint uVar4;
-  uint uVar5;
   ulong uStack00000020;
   ulong uStack00000028;
-  size_t local_30;
+  uint local_30;
   uint local_2c;
   uint local_28;
   uint local_24 [3];
   
-  iVar3 = *(int *)this;
-  uVar4 = *(uint *)(iVar3 + -0xc);
+  iVar2 = *(int *)this;
+  uVar3 = *(uint *)(iVar2 + -0xc);
   uStack00000020 = param_3;
   uStack00000028 = param_5;
-  if (uVar4 < param_2) {
+  if (uVar3 < param_2) {
     std____throw_out_of_range("basic_string::compare");
-    iVar3 = *(int *)this;
+    iVar2 = *(int *)this;
   }
   local_30 = _strlen(param_4);
-  psVar1 = &STACKARG(0x28);
+  puVar1 = &STACKARG(0x28);
   if (local_30 <= uStack00000028) {
-    psVar1 = &local_30;
+    puVar1 = &local_30;
   }
-  local_2c = uVar4 - param_2;
-  uVar4 = *psVar1;
-  local_24[0] = uVar4;
-  puVar2 = &STACKARG(0x20);
+  local_2c = uVar3 - param_2;
+  uVar3 = *puVar1;
+  local_24[0] = uVar3;
+  puVar1 = &STACKARG(0x20);
   if (local_2c <= uStack00000020) {
-    puVar2 = &local_2c;
+    puVar1 = &local_2c;
   }
-  uVar5 = *puVar2;
-  puVar2 = local_24;
-  local_28 = uVar5;
-  if (uVar5 <= uVar4) {
-    puVar2 = &local_28;
+  uVar4 = *puVar1;
+  puVar1 = local_24;
+  local_28 = uVar4;
+  if (uVar4 <= uVar3) {
+    puVar1 = &local_28;
   }
-  iVar3 = _memcmp((void *)(iVar3 + param_2),param_4,*puVar2);
-  if (iVar3 == 0) {
-    iVar3 = uVar5 - uVar4;
+  iVar2 = _memcmp(iVar2 + param_2,param_4,*puVar1);
+  if (iVar2 == 0) {
+    iVar2 = uVar4 - uVar3;
   }
-  return iVar3;
+  return iVar2;
 }
 
 /* __ZNSs4_RepixEm @ 0x97c16424 (12 bytes) */
@@ -582,9 +579,8 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(param_1, param_2)
   undefined *puVar2;
   uint uVar3;
   undefined4 *puVar4;
-  char *pcVar5;
-  int iVar6;
-  ulong uVar7;
+  int iVar5;
+  ulong uVar6;
   char in_RESERVE;
   byte in_cr0;
   
@@ -593,22 +589,22 @@ int __ZNSs4_Rep9_S_createEmRKSaIcE(param_1, param_2)
   }
   puVar2 = PTR__S_force_new_a7b7c0e8;
   uVar3 = param_1 + 0x1d;
-  uVar7 = param_1 + 0xd;
+  uVar6 = param_1 + 0xd;
   if (uVar3 < 0x1001) {
-    if (uVar7 < 0x81) goto LAB_97c164a4;
+    if (uVar6 < 0x81) goto LAB_97c164a4;
     uVar3 = 0x80 - (uVar3 & 0x7f) & 0x7f;
   }
   else {
     uVar3 = 0x1000 - (uVar3 & 0xfff) & 0xfff;
   }
   param_1 = param_1 + uVar3;
-  uVar7 = param_1 + 0xd;
+  uVar6 = param_1 + 0xd;
 LAB_97c164a4:
   puVar4 = (undefined4 *)0x0;
-  if (uVar7 != 0) {
+  if (uVar6 != 0) {
     if (*(int *)PTR__S_force_new_a7b7c0e8 == 0) {
-      pcVar5 = _getenv("GLIBCPP_FORCE_NEW");
-      if (pcVar5 == (char *)0x0) {
+      iVar5 = _getenv("GLIBCPP_FORCE_NEW");
+      if (iVar5 == 0) {
         do {
           if (in_RESERVE != '\0') {
             uVar1 = storeWordConditionalIndexed(*(int *)puVar2 + -1,0,puVar2);
@@ -628,24 +624,24 @@ LAB_97c164a4:
       }
     }
     puVar2 = PTR__S_free_list_a7b7c0e4;
-    if ((uVar7 < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
-      iVar6 = (uVar7 + 7 >> 1 & 0x7ffffffc) - 4;
-      _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
-      puVar4 = *(undefined4 **)(puVar2 + iVar6);
+    if ((uVar6 < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
+      iVar5 = (uVar6 + 7 >> 1 & 0x7ffffffc) - 4;
+      _pthread_mutex_lock(PTR__S_node_allocator_lock_a7b7c0e0);
+      puVar4 = *(undefined4 **)(puVar2 + iVar5);
       if (puVar4 == (undefined4 *)0x0) {
         puVar4 = (undefined4 *)
-                 std____default_alloc_template_true_0____S_refill(uVar7 + 7 & 0xfffffff8);
+                 std____default_alloc_template_true_0____S_refill(uVar6 + 7 & 0xfffffff8);
       }
       else {
-        *(undefined4 *)(puVar2 + iVar6) = *puVar4;
+        *(undefined4 *)(puVar2 + iVar5) = *puVar4;
       }
       if (puVar4 == (undefined4 *)0x0) {
         std____throw_bad_alloc();
       }
-      _pthread_mutex_unlock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
+      _pthread_mutex_unlock(PTR__S_node_allocator_lock_a7b7c0e0);
     }
     else {
-      puVar4 = ((int (*)())operator_new)(uVar7);
+      puVar4 = ((int (*)())operator_new)(uVar6);
     }
   }
   puVar4[1] = param_1;
@@ -666,10 +662,10 @@ int __ZNSs4_Rep10_M_destroyERKSaIcE(param_1)
   puVar1 = PTR__S_node_allocator_lock_a7b7c0e0;
   if ((*(int *)(param_1 + 4) + 0xdU < 0x81) && (*(int *)PTR__S_force_new_a7b7c0e8 < 1)) {
     iVar3 = (*(int *)(param_1 + 4) + 0x14U >> 1 & 0x7ffffffc) - 4;
-    _pthread_mutex_lock((pthread_mutex_t *)PTR__S_node_allocator_lock_a7b7c0e0);
+    _pthread_mutex_lock(PTR__S_node_allocator_lock_a7b7c0e0);
     *(undefined4 *)param_1 = *(undefined4 *)(puVar2 + iVar3);
     *(unsigned char **)(puVar2 + iVar3) = param_1;
-    _pthread_mutex_unlock((pthread_mutex_t *)puVar1);
+    _pthread_mutex_unlock(puVar1);
   }
   else {
     __ZdlPv(param_1);
@@ -696,8 +692,8 @@ int __ZNSs4_Rep8_M_cloneERKSaIcEm(this, param_2, param_3)
   }
   puVar2 = (undefined4 *)((int (*)())__ZNSs4_Rep9_S_createEmRKSaIcE)(uVar3,param_2);
   uVar4 = 0;
-  if (*(size_t *)this != 0) {
-    _memcpy(puVar2 + 3,(void *)((int)this + 0xc),*(size_t *)this);
+  if (*(int *)this != 0) {
+    _memcpy(puVar2 + 3,(int)this + 0xc,*(int *)this);
     uVar4 = *(undefined4 *)this;
   }
   *puVar2 = uVar4;
@@ -710,17 +706,17 @@ int __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_(param_1, param_2, pa
   unsigned char * param_2;
   unsigned char * param_3;
 {
-  size_t sVar1;
+  int iVar1;
   undefined4 local_30;
   undefined4 local_2c [5];
   
-  sVar1 = _strlen((char *)param_2);
+  iVar1 = _strlen(param_2);
   __ZNSsC4Ev(param_1);
-  __ZNSs7reserveEm(param_1,sVar1 + *(int *)(*(int *)param_3 + -0xc));
+  __ZNSs7reserveEm(param_1,iVar1 + *(int *)(*(int *)param_3 + -0xc));
   __ZNKSs7_M_iendEv(&local_30,param_1);
   __ZNKSs7_M_iendEv(local_2c,param_1);
   __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_
-            (param_1,local_30,local_2c[0],param_2,param_2 + sVar1);
+            (param_1,local_30,local_2c[0],param_2,param_2 + iVar1);
   __ZNSs6appendERKSs(param_1,param_3);
   return param_1;
 }
@@ -1062,43 +1058,43 @@ int std__string___M_replace_safe_char__(this, param_2, param_3, param_4, param_5
   unsigned char * this;
   int param_2;
   int param_3;
-  void *param_4;
+  int param_4;
   int param_5;
 {
   uint uVar1;
   int local_30 [6];
   
-  uVar1 = param_5 - (int)param_4;
+  uVar1 = param_5 - param_4;
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string::_M_replace");
   }
   __ZNKSs9_M_ibeginEv(local_30,this);
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
-    _memcpy((void *)(*(int *)this + (param_2 - local_30[0])),param_4,uVar1);
+    _memcpy(*(int *)this + (param_2 - local_30[0]),param_4,uVar1);
   }
   return this;
 }
 
 /* __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_ @ 0x97c16ee8 (164 bytes) */
 int __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_(this, param_2, param_3, param_4, param_5)
-  unsigned char * this;
+  void *this;
   int param_2;
   int param_3;
-  void *param_4;
-  int param_5;
+  char *param_4;
+  char *param_5;
 {
   uint uVar1;
   int local_30 [6];
   
-  uVar1 = param_5 - (int)param_4;
+  uVar1 = (int)param_5 - (int)param_4;
   if (0x3ffffffb < uVar1) {
     std____throw_length_error("basic_string::_M_replace");
   }
   __ZNKSs9_M_ibeginEv(local_30,this);
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,uVar1);
   if (uVar1 != 0) {
-    _memcpy((void *)(*(int *)this + (param_2 - local_30[0])),param_4,uVar1);
+    _memcpy(*(int *)this + (param_2 - local_30[0]),param_4,uVar1);
   }
   return this;
 }
@@ -1172,10 +1168,11 @@ int std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__stri
 }
 
 /* std__string___S_construct_char__ @ 0x97c170bc (176 bytes) */
-int std__string___S_construct_char__(param_1, param_2, param_3)
-  void *param_1;
-  void *param_2;
+int std__string___S_construct_char__(param_1, param_2, param_3, param_4)
+  char *param_1;
+  char *param_2;
   unsigned char * param_3;
+  undefined4 param_4;
 {
   ulong *puVar1;
   ulong *puVar2;
@@ -1193,7 +1190,7 @@ int std__string___S_construct_char__(param_1, param_2, param_3)
     puVar1 = (ulong *)&DAT_a7b7bf90;
   }
   else {
-    if (param_1 == (void *)0x0) {
+    if (param_1 == (char *)0x0) {
       std____throw_logic_error("attempt to create string with null pointer");
     }
     uVar3 = (int)param_2 - (int)param_1;
@@ -1207,10 +1204,11 @@ int std__string___S_construct_char__(param_1, param_2, param_3)
 }
 
 /* __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag @ 0x97c1716c (176 bytes) */
-int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(param_1, param_2, param_3)
-  void *param_1;
-  void *param_2;
+int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(param_1, param_2, param_3, param_4)
+  char *param_1;
+  char *param_2;
   unsigned char * param_3;
+  undefined4 param_4;
 {
   ulong *puVar1;
   ulong *puVar2;
@@ -1228,7 +1226,7 @@ int __ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag(param_1, pa
     puVar1 = (ulong *)&DAT_a7b7bf90;
   }
   else {
-    if (param_1 == (void *)0x0) {
+    if (param_1 == (char *)0x0) {
       std____throw_logic_error("attempt to create string with null pointer");
     }
     uVar3 = (int)param_2 - (int)param_1;
@@ -1269,7 +1267,7 @@ int operator_new(param_1)
   if (param_1 == 0) {
     param_1 = 1;
   }
-  pvVar3 = _malloc(param_1);
+  pvVar3 = (void *)_malloc(param_1);
   while( true ) {
     if (pvVar3 != (void *)0x0) {
       return pvVar3;
@@ -1277,7 +1275,7 @@ int operator_new(param_1)
     a0 = (code *)__keymgr_get_per_thread_data(2);
     if (a0 == (code *)0x0) break;
     (*a0)(a0);
-    pvVar3 = _malloc(param_1);
+    pvVar3 = (void *)_malloc(param_1);
   }
   puVar4 = (undefined4 *)___cxa_allocate_exception(4);
   puVar2 = PTR_typeinfo_a7b7c174;

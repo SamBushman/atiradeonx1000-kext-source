@@ -375,7 +375,7 @@ int __ZNKSt9type_infoeqERKS_(this, param_2)
   
   uVar2 = 0;
   if ((param_2 == this) ||
-     (iVar1 = _strcmp(*(char **)((int)this + 4),*(char **)(param_2 + 4)), iVar1 == 0)) {
+     (iVar1 = _strcmp(*(undefined4 *)((int)this + 4),*(undefined4 *)(param_2 + 4)), iVar1 == 0)) {
     uVar2 = 1;
   }
   return uVar2;

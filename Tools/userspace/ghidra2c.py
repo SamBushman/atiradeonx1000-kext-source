@@ -459,6 +459,9 @@ for pi in range(0, len(funcs), part):
             # a pointer cast of an element of a float/double cursor (`(undefined4 *)pfVar3[3]`: GLDriver FUN_000ddbcc reads three floats and then a
             # pointer word from one stream) converts the float VALUE; the stock loads the word - reinterpret it
             b = re.sub(r'\(([A-Za-z_]\w*(?:\s*\*)+)\)\s*(p[fd]Var\d+)\[([^\[\]]+)\]', r'(*(\1 *)(\2 + (\3)))', b)
+            # Ghidra fits the Mach-O header struct onto a record whose first word it reads (`((mach_header *)(local_a8 + -1))->magic`, GLDriver
+            # FUN_000fd5c8; the struct is normalised to a byte type): `magic` is the first 4-byte field - the word at that address
+            b = re.sub(r'\(\((?:mach_header|unsigned char)\s*\*\)\s*\(([^()]*(?:\([^()]*\)[^()]*)*)\)\)->magic\b', r'(*(unsigned int *)(\1))', b)
             # ...and the same word used as a float later (`(float)puVar14`, the fourth component of that stream): its bits are the float
             b = re.sub(r'\(float\)\s*(p\w*Var\d+)\b(?!\s*[\[(])', r'(*(float *)&\1)', b)
             # `in_stack_000000XX` (XX >= 0) is the word at entry-sp + XX: the caller's frame (0 = back chain, 0x38+ = argument words 9+ that the

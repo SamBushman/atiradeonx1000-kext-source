@@ -549,16 +549,18 @@ LAB_001a20d4:
 }
 
 /* FUN_001a25a8 @ 0x1a25a8 (692 bytes) */
-int FUN_001a25a8(param_1, param_2, param_3)
+int FUN_001a25a8(param_1, param_2, param_3, param_4)
   int *param_1;
   int param_2;
   undefined4 param_3;
+  undefined4 param_4;
 {
   int iVar1;
   undefined4 uVar2;
   int iVar3;
   int iVar4;
   uint uVar5;
+  undefined4 a3;
   int iVar6;
   undefined1 uVar7;
   undefined1 auStack_48 [40];
@@ -576,6 +578,7 @@ int FUN_001a25a8(param_1, param_2, param_3)
   iVar3 = iVar1 + 0xbc;
   FUN_00103d50(iVar6,1,*(uint *)(param_2 + 0xb8) & 1);
   uVar2 = FUN_00105594(param_2,2);
+  a3 = 0;
   FUN_00106004(iVar1,2,uVar2,0,param_1[3]);
   iVar4 = FUN_001054ec(param_2,2);
   uVar2 = *(undefined4 *)(iVar4 + 0x10);
@@ -620,7 +623,7 @@ LAB_001a27a4:
   }
   FUN_001940a8(auStack_48);
   FUN_00193f64(auStack_48,iVar1);
-  (**(code **)(*param_1 + 0x34))(param_1,auStack_48,param_3);
+  (**(code **)(*param_1 + 0x34))(param_1,auStack_48,param_3,a3);
   *(undefined1 *)(param_1[0x18] * 0x48 + param_1[0x2a] + -5) = 0;
   *(undefined1 *)(param_1[0x18] * 0x48 + param_1[0x2a] + -4) = uVar7;
   *(undefined1 *)(param_1[0x18] * 0x48 + param_1[0x2a] + -0x34) = 0;
@@ -651,7 +654,7 @@ int FUN_001a2878(param_1, param_2)
   iVar3 = param_1[0x2a];
   uVar4 = puVar5[1];
   if (uVar4 < *puVar5) {
-    _memset((void *)(uVar4 * 4 + puVar5[2]),0,4);
+    _memset(uVar4 * 4 + puVar5[2],0,4);
     piVar2 = (int *)(uVar4 * 4 + puVar5[2]);
     puVar5[1] = uVar4 + 1;
   }
@@ -696,7 +699,7 @@ int FUN_001a2994(param_1, param_2, param_3)
   iVar3 = param_1[0x2a];
   uVar4 = puVar5[1];
   if (uVar4 < *puVar5) {
-    _memset((void *)(uVar4 * 4 + puVar5[2]),0,4);
+    _memset(uVar4 * 4 + puVar5[2],0,4);
     piVar2 = (int *)(uVar4 * 4 + puVar5[2]);
     puVar5[1] = uVar4 + 1;
   }
@@ -717,13 +720,14 @@ int FUN_001a2b10(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_6;
 {
   int iVar1;
+  undefined4 uVar2;
   int local_38 [7];
   
   local_38[0] = 0;
   iVar1 = FUN_001a0fe4(param_3,local_38);
   if (local_38[0] == 0) {
-    FUN_000e9184(param_6,0);
-    ((int (*)())FUN_001a25a8)(param_1,param_3,param_5);
+    uVar2 = FUN_000e9184(param_6,0);
+    ((int (*)())FUN_001a25a8)(param_1,param_3,param_5,uVar2);
     ((int (*)())FUN_001a2994)(param_1,param_2 + -1,param_4);
     *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8) + -0x36) = 0xf0;
     *(undefined1 *)(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8) + -0x3d) = 1;
@@ -816,7 +820,7 @@ int FUN_001a2db0(param_1, param_2)
   puVar4 = *(uint **)(param_1[4] + 0x24);
   uVar3 = puVar4[1];
   if (uVar3 < *puVar4) {
-    _memset((void *)(uVar3 * 4 + puVar4[2]),0,4);
+    _memset(uVar3 * 4 + puVar4[2],0,4);
     piVar1 = (int *)(uVar3 * 4 + puVar4[2]);
     puVar4[1] = uVar3 + 1;
   }
@@ -841,33 +845,34 @@ int FUN_001a2ee4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 {
   int *piVar1;
   undefined4 uVar2;
-  int iVar3;
+  undefined4 uVar3;
   int iVar4;
+  int iVar5;
   
   piVar1 = (int *)FUN_000e7804(param_2,param_2,param_3,param_4,param_5,param_6,param_7);
   (**(code **)(*piVar1 + 0x14))();
   FUN_0019401c(piVar1);
   *(undefined4 *)(param_2 + 0x130) = 0;
-  iVar3 = param_1[0x18];
+  iVar4 = param_1[0x18];
   (**(code **)(*param_1 + 0x34))(param_1,param_3,*(undefined4 *)(param_2 + 0xdc));
-  if ((*(int *)(param_2 + 0xdc) == 0) || (uVar2 = 1, iVar3 != param_1[0x18])) {
-    uVar2 = 0;
+  if ((*(int *)(param_2 + 0xdc) == 0) || (uVar3 = 1, iVar4 != param_1[0x18])) {
+    uVar3 = 0;
   }
-  FUN_000e9184(param_2,0);
-  ((int (*)())FUN_001a25a8)(param_1,piVar1,uVar2);
-  iVar4 = *(int *)(param_2 + 0x138);
-  iVar3 = FUN_00194034(iVar4 + 0x90);
-  if ((iVar3 < 3) && (iVar3 = FUN_000e79e8(iVar4), iVar3 != 0)) {
+  uVar2 = FUN_000e9184(param_2,0);
+  ((int (*)())FUN_001a25a8)(param_1,piVar1,uVar3,uVar2);
+  iVar5 = *(int *)(param_2 + 0x138);
+  iVar4 = FUN_00194034(iVar5 + 0x90);
+  if ((iVar4 < 3) && (iVar4 = FUN_000e79e8(iVar5), iVar4 != 0)) {
     piVar1 = (int *)0x0;
-    if (*(int *)(*(int *)(iVar4 + 0xd0) + 4) != 0) {
-      piVar1 = *(int **)(*(int *)(iVar4 + 0xd0) + 8);
+    if (*(int *)(*(int *)(iVar5 + 0xd0) + 4) != 0) {
+      piVar1 = *(int **)(*(int *)(iVar5 + 0xd0) + 8);
     }
-    uVar2 = 0;
+    uVar3 = 0;
     if (*piVar1 == *(int *)(param_2 + 0x13c)) goto LAB_001a2fe8;
   }
-  uVar2 = 1;
+  uVar3 = 1;
 LAB_001a2fe8:
-  ((int (*)())FUN_001a2db0)(param_1,uVar2);
+  ((int (*)())FUN_001a2db0)(param_1,uVar3);
   return;
 }
 
@@ -918,7 +923,7 @@ int FUN_001a3000(param_1, param_2)
   puVar5 = *(uint **)(param_1[4] + 0x24);
   uVar3 = puVar5[1];
   if (uVar3 < *puVar5) {
-    _memset((void *)(uVar3 * 4 + puVar5[2]),0,4);
+    _memset(uVar3 * 4 + puVar5[2],0,4);
     piVar1 = (int *)(uVar3 * 4 + puVar5[2]);
     puVar5[1] = uVar3 + 1;
   }
@@ -1067,9 +1072,9 @@ int FUN_001a34d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 
 /* FUN_001a3580 @ 0x1a3580 (164 bytes) */
 int FUN_001a3580(param_1)
-  char *param_1;
+  undefined4 param_1;
 {
-  size_t sVar1;
+  int iVar1;
   int iVar2;
   undefined4 uVar3;
   char local_58 [4];
@@ -1078,16 +1083,16 @@ int FUN_001a3580(param_1)
   
   local_58[0] = '_';
   _strcpy(local_58 + 1,param_1);
-  sVar1 = _strlen(local_58);
-  *(undefined4 *)(local_58 + sVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 0));
-  acStack_50[sVar1] = s__LDBL128_001aa0b4[8];
-  *(undefined4 *)(acStack_54 + sVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 4));
+  iVar1 = _strlen(local_58);
+  *(undefined4 *)(local_58 + iVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 0));
+  acStack_50[iVar1] = s__LDBL128_001aa0b4[8];
+  *(undefined4 *)(acStack_54 + iVar1) = (*(unsigned int *)((unsigned char *)&(s__LDBL128_001aa0b4) + 4));
   iVar2 = _NSIsSymbolNameDefinedWithHint(local_58,"libSystem.");
   if (iVar2 == 0) {
-    local_58[sVar1] = '\0';
+    local_58[iVar1] = '\0';
   }
-  _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
-  uVar3 = _NSAddressOfSymbol();
+  uVar3 = _NSLookupAndBindSymbolWithHint(local_58,"libSystem.");
+  uVar3 = _NSAddressOfSymbol(uVar3);
   return uVar3;
 }
 

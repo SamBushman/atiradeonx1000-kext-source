@@ -530,8 +530,8 @@ LAB_0004c770:
 int FUN_0004cde0(param_1)
   int param_1;
 {
-  if (*(void **)(param_1 + 0x10) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x10));
+  if (*(int *)(param_1 + 0x10) != 0) {
+    _free(*(int *)(param_1 + 0x10));
     *(undefined4 *)(param_1 + 0x10) = 0;
   }
   return;
@@ -2152,7 +2152,7 @@ int FUN_0004f720(param_1)
   *(undefined4 *)(param_1 + 0x1b28) = 0;
   *(undefined4 *)(param_1 + 0x27b0) = 0;
   *(uint *)(param_1 + 0x1abc) = uVar5 & 0xc0000000 | 0x2da49525;
-  _memset((void *)(param_1 + 0x1cdc),0,0x40);
+  _memset(param_1 + 0x1cdc,0,0x40);
   *(undefined4 *)(FUN_00002348 + param_1) = 0x1b0f;
   *(undefined4 *)(param_1 + 0x233c) = 0x1b0f;
   *(undefined4 *)(param_1 + 0x2340) = 0x1b0f;

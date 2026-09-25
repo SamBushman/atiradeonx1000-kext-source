@@ -18,7 +18,6 @@ extern int _OpsList_NVfp10;
 extern int _OpsList_NVfp20;
 extern int _OpsList_NVvp20;
 extern int _OpsList_NVvp30;
-extern int _PTR_s__02d____02d____s____s__c__c_a7b7d6bc;
 extern int _PerProcessGPA;
 extern int _S_end_free;
 extern int _S_force_new;

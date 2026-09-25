@@ -36,7 +36,7 @@ int FUN_0010f704(param_1, param_2, param_3)
     do {
       if (uVar10 < *param_2) {
         if (uVar6 <= uVar10) {
-          _memset((void *)(uVar6 * 4 + param_2[2]),0,(uVar10 - uVar6) * 4 + 4);
+          _memset(uVar6 * 4 + param_2[2],0,(uVar10 - uVar6) * 4 + 4);
           param_2[1] = uVar10 + 1;
         }
         piVar4 = (int *)(uVar10 * 4 + param_2[2]);
@@ -95,7 +95,7 @@ int FUN_0010f87c(param_1, param_2, param_3)
     do {
       if (uVar7 < *param_3) {
         if (uVar2 <= uVar7) {
-          _memset((void *)(uVar2 * 4 + param_3[2]),0,(uVar7 - uVar2) * 4 + 4);
+          _memset(uVar2 * 4 + param_3[2],0,(uVar7 - uVar2) * 4 + 4);
           param_3[1] = uVar7 + 1;
         }
         puVar3 = (undefined4 *)(uVar7 * 4 + param_3[2]);
@@ -117,7 +117,7 @@ int FUN_0010f87c(param_1, param_2, param_3)
             do {
               if (uVar10 < *puVar11) {
                 if (uVar2 <= uVar10) {
-                  _memset((void *)(uVar2 * 4 + puVar11[2]),0,(uVar10 - uVar2) * 4 + 4);
+                  _memset(uVar2 * 4 + puVar11[2],0,(uVar10 - uVar2) * 4 + 4);
                   puVar11[1] = uVar10 + 1;
                 }
                 piVar5 = (int *)(uVar10 * 4 + puVar11[2]);
@@ -172,7 +172,7 @@ int FUN_0010fa24(param_1, param_2, param_3, param_4, param_5)
     do {
       if (uVar6 < *param_5) {
         if (uVar2 <= uVar6) {
-          _memset((void *)(uVar2 * 4 + param_5[2]),0,(uVar6 - uVar2) * 4 + 4);
+          _memset(uVar2 * 4 + param_5[2],0,(uVar6 - uVar2) * 4 + 4);
           param_5[1] = uVar6 + 1;
         }
         piVar4 = (int *)(uVar6 * 4 + param_5[2]);
@@ -230,7 +230,7 @@ int FUN_0010fb54(param_1, param_2, param_3)
     do {
       if (uVar7 < *param_1) {
         if (uVar1 <= uVar7) {
-          _memset((void *)(uVar1 * 4 + param_1[2]),0,(uVar7 - uVar1) * 4 + 4);
+          _memset(uVar1 * 4 + param_1[2],0,(uVar7 - uVar1) * 4 + 4);
           param_1[1] = uVar7 + 1;
         }
         puVar2 = (undefined4 *)(uVar7 * 4 + param_1[2]);
@@ -289,7 +289,7 @@ int FUN_0010fc88(param_1, param_2, param_3, param_4)
     do {
       if (uVar8 < *param_2) {
         if (uVar2 <= uVar8) {
-          _memset((void *)(uVar2 * 4 + param_2[2]),0,(uVar8 - uVar2) * 4 + 4);
+          _memset(uVar2 * 4 + param_2[2],0,(uVar8 - uVar2) * 4 + 4);
           param_2[1] = uVar8 + 1;
         }
         puVar4 = (undefined4 *)(uVar8 * 4 + param_2[2]);
@@ -351,7 +351,7 @@ int FUN_0010fd98(param_1, param_2, param_3, param_4)
     do {
       if (uVar10 < *param_2) {
         if (uVar5 <= uVar10) {
-          _memset((void *)(uVar5 * 4 + param_2[2]),0,(uVar10 - uVar5) * 4 + 4);
+          _memset(uVar5 * 4 + param_2[2],0,(uVar10 - uVar5) * 4 + 4);
           param_2[1] = uVar10 + 1;
         }
         puVar6 = (undefined4 *)(uVar10 * 4 + param_2[2]);
@@ -416,7 +416,7 @@ int FUN_0010ff24(param_1, param_2)
     do {
       if (uVar6 < *param_2) {
         if (uVar2 <= uVar6) {
-          _memset((void *)(uVar2 * 4 + param_2[2]),0,(uVar6 - uVar2) * 4 + 4);
+          _memset(uVar2 * 4 + param_2[2],0,(uVar6 - uVar2) * 4 + 4);
           param_2[1] = uVar6 + 1;
         }
         piVar3 = (int *)(uVar6 * 4 + param_2[2]);
@@ -2073,7 +2073,7 @@ LAB_0011293c:
         uVar9 = *puVar16;
         if (uVar5 < uVar9) {
           if (uVar13 <= uVar5) {
-            _memset((void *)(uVar13 * 4 + puVar16[2]),0,(uVar5 - uVar13) * 4 + 4);
+            _memset(uVar13 * 4 + puVar16[2],0,(uVar5 - uVar13) * 4 + 4);
             uVar9 = *puVar16;
             puVar16[1] = uVar12;
           }
@@ -2087,7 +2087,7 @@ LAB_0011293c:
         if (uVar5 < uVar9) {
           uVar13 = puVar16[1];
           if (uVar13 <= uVar5) {
-            _memset((void *)(uVar13 * 4 + puVar16[2]),0,(uVar5 - uVar13) * 4 + 4);
+            _memset(uVar13 * 4 + puVar16[2],0,(uVar5 - uVar13) * 4 + 4);
             puVar16[1] = uVar12;
           }
           puVar3 = (undefined4 *)(iVar1 + puVar16[2]);
@@ -2108,7 +2108,7 @@ LAB_0011293c:
               do {
                 if (uVar12 < *puVar16) {
                   if (uVar13 <= uVar12) {
-                    _memset((void *)(uVar13 * 4 + puVar16[2]),0,(uVar12 - uVar13) * 4 + 4);
+                    _memset(uVar13 * 4 + puVar16[2],0,(uVar12 - uVar13) * 4 + 4);
                     puVar16[1] = uVar12 + 1;
                   }
                   puVar3 = (undefined4 *)(uVar12 * 4 + puVar16[2]);
@@ -2169,7 +2169,7 @@ LAB_00112ec4:
   }
   if (uVar12 < *puVar16) {
     if (uVar5 <= uVar12) {
-      _memset((void *)(uVar5 * 4 + puVar16[2]),0,(uVar12 - uVar5) * 4 + 4);
+      _memset(uVar5 * 4 + puVar16[2],0,(uVar12 - uVar5) * 4 + 4);
       puVar16[1] = uVar12 + 1;
     }
     piVar7 = (int *)(uVar12 * 4 + puVar16[2]);
@@ -2191,7 +2191,7 @@ LAB_00112ec4:
 code_r0x00112df4:
   if (uVar9 < *puVar16) {
     if (uVar5 <= uVar9) {
-      _memset((void *)(uVar5 * 4 + puVar16[2]),0,(uVar9 - uVar5) * 4 + 4);
+      _memset(uVar5 * 4 + puVar16[2],0,(uVar9 - uVar5) * 4 + 4);
       puVar16[1] = uVar12 + 2;
     }
     piVar7 = (int *)(uVar9 * 4 + puVar16[2]);

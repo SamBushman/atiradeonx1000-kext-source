@@ -77,3 +77,18 @@ rm -rf glprog-mv && cp -r glprog-lm glprog-mv
 run glprog-mv GLProgProject libGLProgrammability.dylib -postScript MoveEntries.java $(cat $B/move_entries_glprog.txt)
 run glprog-mv GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/rd_mv_glprog $(cut -d: -f2 $B/move_entries_glprog.txt)
 # python3 Tools/userspace/apply_moves.py $OUT/n_gld $B/move_entries_gld.txt $OUT/rd_mv_gld   (and glprog), then prune_orphans.py N O unowned_code orph_*.tsv
+# step 14: arguments forwarded to calls through pointers (ForwardArgs.java: FUN_000e1564(ctx, size) & co.), then every import's prototype
+# (SetImportSignatures.java: IOKit calls had lost 4 of their 6 arguments), call sites re-decompiled
+rm -rf gld-fw && cp -r gld-mv gld-fw
+run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ForwardArgs.java $(cat $B/forward_args_gld.txt)
+run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetImportSignatures.java
+run gld-fw GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/forward_redump_gld.txt) $(cat $B/importsig_redump_gld.txt)
+rm -rf glprog-is && cp -r glprog-mv glprog-is
+run glprog-is GLProgProject libGLProgrammability.dylib -postScript SetImportSignatures.java
+run glprog-is GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/importsig_redump_glprog.txt)
+rm -rf va-is && cp -r va-lm va-is
+run va-is Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript SetImportSignatures.java
+run va-is Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/importsig_redump_va.txt)
+rm -rf ga-is && cp -r r32-ga-ret ga-is
+run ga-is Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript SetImportSignatures.java
+run ga-is Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cat $B/importsig_redump_ga.txt)

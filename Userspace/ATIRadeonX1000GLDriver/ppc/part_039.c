@@ -21,7 +21,7 @@ int FUN_00127f24(param_1, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x6c);
   puVar1 = PTR_DAT_001e90f4;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -32,7 +32,7 @@ int FUN_00127f24(param_1, param_2)
   FUN_00189604(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -43,7 +43,7 @@ int FUN_00127f24(param_1, param_2)
 
 /* FUN_00127fd8 @ 0x127fd8 (32 bytes) */
 int FUN_00127fd8(param_1)
-  _Unwind_Exception *param_1;
+  undefined4 param_1;
 {
   int extraout_r3;
   int unaff_r27;
@@ -82,7 +82,7 @@ int FUN_00128030()
 int FUN_0012804c(param_1, param_2, param_3)
   int param_1;
   int param_2;
-  void *param_3;
+  undefined4 param_3;
 {
   undefined1 *puVar1;
   bool bVar2;
@@ -96,7 +96,7 @@ int FUN_0012804c(param_1, param_2, param_3)
   undefined1 *puVar10;
   int iVar11;
   
-  _memcpy((void *)(param_2 + 0x64c),param_3,0x963c);
+  _memcpy(param_2 + 0x64c,param_3,0x963c);
   iVar5 = 0;
   *(undefined4 *)(param_2 + 0x104) = *(undefined4 *)(((unsigned char *)0x0000172c) + param_1);
   iVar6 = param_1 + 0x80;
@@ -770,7 +770,7 @@ int FUN_00129290(param_1, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
   puVar1 = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -781,7 +781,7 @@ int FUN_00129290(param_1, param_2)
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -868,8 +868,8 @@ int FUN_00129478(param_1, param_2, param_3)
   int iVar11;
   undefined1 *puVar12;
   
-  _memcpy(*(void **)(param_2 + 0x650),(void *)param_3[1],*param_3 << 4);
-  _memcpy(*(void **)(param_2 + 0x654),(void *)param_3[2],900);
+  _memcpy(*(undefined4 *)(param_2 + 0x650),param_3[1],*param_3 << 4);
+  _memcpy(*(undefined4 *)(param_2 + 0x654),param_3[2],900);
   iVar4 = param_3[3];
   iVar7 = param_3[4];
   iVar11 = param_3[5];
@@ -1647,7 +1647,7 @@ int FUN_0012a4b8(param_1, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
   puVar1 = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -1658,7 +1658,7 @@ int FUN_0012a4b8(param_1, param_2)
   FUN_00172000(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(param_1 + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2);
+  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -1896,7 +1896,7 @@ int FUN_0012ab80(param_1)
   
   piVar1 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
   (**(code **)(*piVar1 + 0x74))(piVar1,param_1);
-  FUN_000ed7e4(param_1);
+  FUN_000ed7e4(param_1,"optimize_control_flow");
   return;
 }
 

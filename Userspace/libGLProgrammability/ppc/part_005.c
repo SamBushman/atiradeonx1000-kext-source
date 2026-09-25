@@ -1198,7 +1198,7 @@ int TParseContext__extensionErrorCheck(this, param_2, param_3)
   char *pcVar3;
   int *piVar4;
   int iVar5;
-  size_t sVar6;
+  ulong uVar6;
   uint *puVar7;
   undefined4 in_r8;
   undefined4 in_r10;
@@ -1211,7 +1211,7 @@ int TParseContext__extensionErrorCheck(this, param_2, param_3)
   byte in_cr0;
   byte bVar12;
   undefined4 local_1d0;
-  void *local_1cc;
+  int local_1cc;
   int local_1c0 [4];
   int local_1b0;
   char *local_1ac;
@@ -1280,14 +1280,14 @@ LAB_97b9d574:
   }
   else {
     puVar7 = &local_3c;
-    uVar11 = *(uint *)((int)local_1cc + -0xc);
+    uVar11 = *(uint *)(local_1cc + -0xc);
     local_40 = uVar11;
     uVar9 = *(uint *)(*(int *)(local_1b0 + 0x14) + -0xc);
     local_3c = uVar9;
     if (uVar11 <= uVar9) {
       puVar7 = &local_40;
     }
-    iVar5 = _memcmp(local_1cc,*(void **)(local_1b0 + 0x14),*puVar7);
+    iVar5 = _memcmp(local_1cc,*(undefined4 *)(local_1b0 + 0x14),*puVar7);
     in_cr0 = (iVar5 == 0) << 1;
     if (iVar5 == 0) {
       iVar5 = uVar11 - uVar9;
@@ -1295,7 +1295,7 @@ LAB_97b9d574:
     if (iVar5 < 0) goto LAB_97b9d574;
   }
   iVar10 = *(int *)(iVar10 + 0x18);
-  piVar4 = (int *)((int)local_1cc + -4);
+  piVar4 = (int *)(local_1cc + -4);
   local_140[0] = local_1d0;
   do {
     iVar5 = *piVar4;
@@ -1307,7 +1307,7 @@ LAB_97b9d574:
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar5 < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)((int)local_1cc + -0xc),local_140);
+              ((unsigned char *)(local_1cc + -0xc),local_140);
   }
   if (iVar10 == 2) {
     this_00 = *(void **)(this + 8);
@@ -1318,9 +1318,9 @@ LAB_97b9d574:
               ((char *)&local_1a0,(unsigned char *)"extension ",&uStack_130);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
               ((unsigned char *)&local_1b0,(unsigned char *)&local_1a0);
-    sVar6 = _strlen(" is being used");
+    uVar6 = _strlen(" is being used");
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm
-              ((unsigned char *)&local_1b0," is being used",sVar6);
+              ((unsigned char *)&local_1b0," is being used",uVar6);
     pcVar3 = local_1ac;
     local_1ac[*(int *)(local_1ac + -0xc)] = *DAT_a7b7ba18;
                     
@@ -1403,14 +1403,14 @@ LAB_97b9d574:
   local_1b0 = *(int *)(this + 0x34);
   if (local_1c0[0] != local_1b0) {
     puVar7 = &local_34;
-    uVar11 = *(uint *)((int)local_1cc + -0xc);
+    uVar11 = *(uint *)(local_1cc + -0xc);
     local_38 = uVar11;
     uVar9 = *(uint *)(*(int *)(local_1c0[0] + 0x14) + -0xc);
     local_34 = uVar9;
     if (uVar11 <= uVar9) {
       puVar7 = &local_38;
     }
-    iVar5 = _memcmp(local_1cc,*(void **)(local_1c0[0] + 0x14),*puVar7);
+    iVar5 = _memcmp(local_1cc,*(undefined4 *)(local_1c0[0] + 0x14),*puVar7);
     in_cr0 = (iVar5 == 0) << 1;
     if (iVar5 == 0) {
       iVar5 = uVar11 - uVar9;
@@ -1442,7 +1442,7 @@ LAB_97b9d574:
   }
 LAB_97b9d98c:
   iVar10 = *(int *)(iVar10 + 0x18);
-  piVar4 = (int *)((int)local_1cc + -4);
+  piVar4 = (int *)(local_1cc + -4);
   local_50[0] = local_1d0;
   do {
     iVar5 = *piVar4;
@@ -1454,7 +1454,7 @@ LAB_97b9d98c:
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar5 < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)((int)local_1cc + -0xc),local_50);
+              ((unsigned char *)(local_1cc + -0xc),local_50);
   }
   bVar1 = iVar10 == 3;
   if (bVar1) {
@@ -2761,14 +2761,14 @@ int TParseContext__addConstStruct(this, param_2, param_3, param_4, param_5, para
     iVar7 = (**(code **)(*piVar3 + 0x1c))(piVar3);
     uVar12 = *(uint *)(*(int *)(iVar7 + 4) + -0xc);
     local_50 = uVar12;
-    uVar10 = *(uint *)((int)*(void **)(param_2 + 4) + -0xc);
+    uVar10 = *(uint *)(*(int *)(param_2 + 4) + -0xc);
     local_4c[0] = uVar10;
     puVar5 = local_4c;
     if (uVar12 <= uVar10) {
       puVar5 = &local_50;
     }
     a2 = (unsigned char *)*puVar5;
-    iVar7 = _memcmp(*(void **)(iVar7 + 4),*(void **)(param_2 + 4),(size_t)a2);
+    iVar7 = _memcmp(*(undefined4 *)(iVar7 + 4),*(int *)(param_2 + 4),a2);
     if (iVar7 == 0) {
       iVar7 = uVar12 - uVar10;
     }
@@ -2846,7 +2846,7 @@ int TParseContext__initializeExtensionBehavior(this)
   char in_RESERVE;
   byte in_cr0;
   undefined4 local_d0;
-  void *local_cc;
+  int local_cc;
   undefined4 local_c0 [4];
   int local_b0 [4];
   int local_a0;
@@ -2869,14 +2869,14 @@ int TParseContext__initializeExtensionBehavior(this)
   local_a0 = *(int *)(this + 0x34);
   if (local_b0[0] != local_a0) {
     puVar4 = local_2c;
-    uVar5 = *(uint *)((int)local_cc + -0xc);
+    uVar5 = *(uint *)(local_cc + -0xc);
     local_30 = uVar5;
     uVar6 = *(uint *)(*(int *)(local_b0[0] + 0x14) + -0xc);
     local_2c[0] = uVar6;
     if (uVar5 <= uVar6) {
       puVar4 = &local_30;
     }
-    iVar3 = _memcmp(local_cc,*(void **)(local_b0[0] + 0x14),*puVar4);
+    iVar3 = _memcmp(local_cc,*(undefined4 *)(local_b0[0] + 0x14),*puVar4);
     in_cr0 = (iVar3 == 0) << 1;
     if (iVar3 == 0) {
       iVar3 = uVar5 - uVar6;
@@ -2908,7 +2908,7 @@ int TParseContext__initializeExtensionBehavior(this)
   }
 LAB_97b9fe04:
   *(undefined4 *)(iVar2 + 0x18) = 1;
-  piVar1 = (int *)((int)local_cc + -4);
+  piVar1 = (int *)(local_cc + -4);
   local_40[0] = local_d0;
   do {
     iVar2 = *piVar1;
@@ -2920,7 +2920,7 @@ LAB_97b9fe04:
   } while (!(bool)(in_cr0 >> 1 & 1));
   if (iVar2 < 1) {
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-              ((unsigned char *)((int)local_cc + -0xc),local_40);
+              ((unsigned char *)(local_cc + -0xc),local_40);
   }
   return;
 }
@@ -3576,7 +3576,7 @@ int _ShInitialize()
   } while (!(bool)(in_cr0 >> 1 & 1));
   local_34 = 4;
   local_38 = local_40;
-  _pthread_mutex_lock((pthread_mutex_t *)&_glsl_allocator_lock);
+  _pthread_mutex_lock(&_glsl_allocator_lock);
   iVar3 = InitProcess();
   uVar6 = 1;
   if (iVar3 == 0) {
@@ -3593,7 +3593,7 @@ int _ShInitialize()
     ((int (*)())generateBuiltInSymbolTable)(pTVar5,(unsigned char *)&local_40,(unsigned char *)0x0,4);
     ((int (*)())SetGlobalPoolAllocatorPtr)(pTVar4);
   }
-  _pthread_mutex_unlock((pthread_mutex_t *)&_glsl_allocator_lock);
+  _pthread_mutex_unlock(&_glsl_allocator_lock);
   piVar2 = (int *)(local_38 + -4);
   do {
     iVar3 = *piVar2;
@@ -3639,7 +3639,7 @@ int _ShDestruct(param_1)
   unsigned char * pTVar3;
   
   if (param_1 != (int *)0x0) {
-    _pthread_mutex_lock((pthread_mutex_t *)&_glsl_allocator_lock);
+    _pthread_mutex_lock(&_glsl_allocator_lock);
     iVar1 = (**(code **)(*param_1 + 8))(param_1);
     if (iVar1 == 0) {
       iVar1 = (**(code **)(*param_1 + 0xc))(param_1);
@@ -3652,7 +3652,7 @@ int _ShDestruct(param_1)
       pTVar2 = (unsigned char *)(**(code **)(*param_1 + 8))(param_1);
       DeleteCompiler(pTVar2);
     }
-    _pthread_mutex_unlock((pthread_mutex_t *)&_glsl_allocator_lock);
+    _pthread_mutex_unlock(&_glsl_allocator_lock);
     return;
   }
   return;
@@ -4007,7 +4007,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   if (piVar6 == (int *)0x0) {
     return 0;
   }
-  _pthread_mutex_lock((pthread_mutex_t *)&_glsl_allocator_lock);
+  _pthread_mutex_lock(&_glsl_allocator_lock);
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   ((int (*)())TPoolAllocator__push)(pTVar7);
   (**(code **)(*piVar6 + 0x18))(piVar6);
@@ -4026,7 +4026,7 @@ int _ShCompile(param_1, param_2, param_3, param_4, param_5)
   pcVar12 = *(char **)(piVar6[1] + 8);
   __ZNSs7replaceEmmPKcm((void *)(piVar6[1] + 8),0,*(ulong *)(pcVar12 + -0xc),pcVar12,0);
   if (param_3 == 0) {
-    _pthread_mutex_unlock((pthread_mutex_t *)&_glsl_allocator_lock);
+    _pthread_mutex_unlock(&_glsl_allocator_lock);
     return 1;
   }
   local_40 = piVar6[1];
@@ -4236,7 +4236,7 @@ LAB_97ba18d4:
   _FinalizePreprocessor();
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   ((int (*)())TPoolAllocator__pop)(pTVar7);
-  _pthread_mutex_unlock((pthread_mutex_t *)&_glsl_allocator_lock);
+  _pthread_mutex_unlock(&_glsl_allocator_lock);
   piVar6 = (int *)(local_e4 + -4);
   local_50[0] = local_e8;
   do {

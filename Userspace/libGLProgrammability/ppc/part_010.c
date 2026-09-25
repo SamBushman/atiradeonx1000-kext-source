@@ -44,17 +44,17 @@ int __ZN18TemporaryAllocatorD1Ev(this)
 int __ZN18TemporaryAllocatorD4Ev(this)
   void *this;
 {
-  void *pvVar1;
-  undefined4 *puVar2;
+  int iVar1;
+  int *piVar2;
   
-  puVar2 = (undefined4 *)((int)this + 0x60);
+  piVar2 = (int *)((int)this + 0x60);
   do {
-    pvVar1 = *(void **)this;
+    iVar1 = *(int *)this;
     this = (void *)((int)this + 4);
-    if (pvVar1 != (void *)0x0) {
-      _free(pvVar1);
+    if (iVar1 != 0) {
+      _free(iVar1);
     }
-  } while (this <= puVar2);
+  } while (this <= piVar2);
   return;
 }
 
@@ -68,7 +68,7 @@ int TemporaryAllocator__getTemporary(this, param_2)
   int iVar3;
   int *piVar4;
   uint uVar5;
-  void *pvVar6;
+  int iVar6;
   int iVar7;
   int iVar8;
   int iVar9;
@@ -101,7 +101,7 @@ int TemporaryAllocator__getTemporary(this, param_2)
     }
   }
   if (*(uint *)(this + iVar2 + 100) <= uVar10) {
-    pvVar6 = _malloc(*(uint *)(this + iVar2 + 100) * 4 + 0x40);
+    iVar6 = _malloc(*(uint *)(this + iVar2 + 100) * 4 + 0x40);
     iVar3 = *(int *)(this + iVar2 + 100);
     iVar7 = 0;
     if (iVar3 != 0) {
@@ -109,19 +109,19 @@ int TemporaryAllocator__getTemporary(this, param_2)
       do {
         iVar1 = iVar7 * 4;
         iVar7 = iVar7 + 1;
-        *(undefined4 *)(iVar1 + (int)pvVar6) = *(undefined4 *)(iVar1 + iVar8);
+        *(undefined4 *)(iVar1 + iVar6) = *(undefined4 *)(iVar1 + iVar8);
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
     }
-    _memset((void *)(*(int *)(this + iVar2 + 100) * 4 + (int)pvVar6),0,0x40);
-    if (*(void **)(this + iVar2) != (void *)0x0) {
-      _free(*(void **)(this + iVar2));
+    _memset(*(int *)(this + iVar2 + 100) * 4 + iVar6,0,0x40);
+    if (*(int *)(this + iVar2) != 0) {
+      _free(*(int *)(this + iVar2));
     }
-    *(void **)(this + iVar2) = pvVar6;
+    *(int *)(this + iVar2) = iVar6;
     uVar5 = *(int *)(this + iVar2 + 100) + 0x10;
     *(uint *)(this + iVar2 + 100) = uVar5;
     if (uVar10 < uVar5) {
-      iVar3 = *(int *)(iVar9 + (int)pvVar6);
+      iVar3 = *(int *)(iVar9 + iVar6);
       while (iVar3 != 0) {
         uVar10 = uVar10 + 1;
         iVar9 = uVar10 * 4;
@@ -165,8 +165,8 @@ int TemporaryAllocator__releaseTemporary(this, param_2, param_3)
 int ParseSymbol__ClearName(this)
   unsigned char * this;
 {
-  if (*(void **)(this + 0x14) != (void *)0x0) {
-    _free(*(void **)(this + 0x14));
+  if (*(int *)(this + 0x14) != 0) {
+    _free(*(int *)(this + 0x14));
   }
   *(undefined4 *)(this + 0x20) = 0;
   *(undefined4 *)(this + 0x14) = 0;
@@ -178,8 +178,8 @@ int ParseSymbol__ClearName(this)
 int ParseSymbol__ClearDirectIndex(this)
   unsigned char * this;
 {
-  if (*(void **)(this + 0x18) != (void *)0x0) {
-    _free(*(void **)(this + 0x18));
+  if (*(int *)(this + 0x18) != 0) {
+    _free(*(int *)(this + 0x18));
   }
   *(undefined4 *)(this + 0x24) = 0;
   *(undefined4 *)(this + 0x18) = 0;
@@ -305,14 +305,14 @@ int __ZN11ParseSymbolD1Ev(this)
 int __ZN11ParseSymbolD4Ev(this)
   void *this;
 {
-  if (*(void **)((int)this + 0x14) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x14));
+  if (*(int *)((int)this + 0x14) != 0) {
+    _free(*(int *)((int)this + 0x14));
   }
-  if (*(void **)((int)this + 0x18) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x18));
+  if (*(int *)((int)this + 0x18) != 0) {
+    _free(*(int *)((int)this + 0x18));
   }
-  if ((*(int *)((int)this + 0x44) != 0) && (*(void **)this != (void *)0x0)) {
-    _free(*(void **)this);
+  if ((*(int *)((int)this + 0x44) != 0) && (*(int *)this != 0)) {
+    _free(*(int *)this);
     return;
   }
   return;
@@ -604,8 +604,8 @@ int ParseSymbol__operator_(this, param_2)
     *(undefined4 *)(this + 8) = 0;
     *(undefined4 *)(this + 0x50) = 0;
     *(undefined4 *)(this + 4) = 0;
-    if ((*(void **)this != (void *)0x0) && (*(int *)(this + 0x44) != 0)) {
-      _free(*(void **)this);
+    if ((*(int *)this != 0) && (*(int *)(this + 0x44) != 0)) {
+      _free(*(int *)this);
     }
     *(undefined4 *)this = 0;
     *(undefined4 *)(this + 0x44) = 1;
@@ -626,9 +626,9 @@ int __ZeqRK11ParseSymbolS1_(param_1, param_2)
       ((*(int *)(param_1 + 0x28) == *(int *)(param_2 + 0x28) &&
        (*(int *)(param_1 + 0x48) == *(int *)(param_2 + 0x48))))) &&
      (((*(int *)(param_1 + 0x1c) == *(int *)(param_2 + 0x1c) &&
-       (*(size_t *)(param_1 + 0x20) == *(size_t *)(param_2 + 0x20))) &&
-      (iVar1 = _strncmp(*(char **)(param_1 + 0x14),*(char **)(param_2 + 0x14),
-                        *(size_t *)(param_1 + 0x20)), iVar1 == 0)))) {
+       (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
+      (iVar1 = _strncmp(*(undefined4 *)(param_1 + 0x14),*(undefined4 *)(param_2 + 0x14),
+                        *(int *)(param_1 + 0x20)), iVar1 == 0)))) {
     uVar2 = 1;
   }
   return uVar2;
@@ -813,8 +813,8 @@ int ParseSymbol__SetChunk(this, param_2)
   unsigned char * this;
   unsigned char * param_2;
 {
-  if ((*(void **)this != (void *)0x0) && (*(int *)(this + 0x44) != 0)) {
-    _free(*(void **)this);
+  if ((*(int *)this != 0) && (*(int *)(this + 0x44) != 0)) {
+    _free(*(int *)this);
   }
   *(unsigned char **)this = param_2;
   *(undefined4 *)(this + 0x44) = 1;
@@ -840,32 +840,31 @@ int ParseSymbol__CatName(this, param_2)
   char *pcVar1;
   int iVar2;
   int iVar3;
-  size_t sVar4;
-  char *pcVar5;
-  int iVar6;
+  char *pcVar4;
+  int iVar5;
   
   if (param_2 != (char *)0x0) {
-    sVar4 = _strlen(param_2);
-    pcVar5 = _malloc(sVar4 + *(int *)(this + 0x20) + 1);
+    iVar3 = _strlen(param_2);
+    pcVar4 = (char *)_malloc(iVar3 + *(int *)(this + 0x20) + 1);
     if (*(char **)(this + 0x14) != (char *)0x0) {
-      _strncpy(pcVar5,*(char **)(this + 0x14),*(int *)(this + 0x20) + 1);
+      _strncpy(pcVar4,*(char **)(this + 0x14),*(int *)(this + 0x20) + 1);
     }
-    _strncpy(pcVar5 + *(int *)(this + 0x20),param_2,sVar4 + 1);
-    *(size_t *)(this + 0x20) = *(int *)(this + 0x20) + sVar4;
-    _free(*(void **)(this + 0x14));
-    iVar2 = *(int *)(this + 0x20);
-    iVar6 = 0;
+    _strncpy(pcVar4 + *(int *)(this + 0x20),param_2,iVar3 + 1);
+    *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar3;
+    _free(*(undefined4 *)(this + 0x14));
+    iVar3 = *(int *)(this + 0x20);
+    iVar5 = 0;
     *(undefined4 *)(this + 0x1c) = 0;
-    *(char **)(this + 0x14) = pcVar5;
-    if (iVar2 != 0) {
-      iVar3 = 0;
+    *(char **)(this + 0x14) = pcVar4;
+    if (iVar3 != 0) {
+      iVar2 = 0;
       do {
-        pcVar1 = pcVar5 + iVar6;
-        iVar6 = iVar6 + 1;
-        iVar3 = iVar3 + *pcVar1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
-      *(int *)(this + 0x1c) = iVar3;
+        pcVar1 = pcVar4 + iVar5;
+        iVar5 = iVar5 + 1;
+        iVar2 = iVar2 + *pcVar1;
+        iVar3 = iVar3 + -1;
+      } while (iVar3 != 0);
+      *(int *)(this + 0x1c) = iVar2;
     }
   }
   return;
@@ -877,23 +876,22 @@ int ParseSymbol__SetName(this, param_2)
   char *param_2;
 {
   int iVar1;
-  size_t sVar2;
-  char *pcVar3;
-  int iVar4;
+  char *pcVar2;
+  int iVar3;
   
   ClearName(this);
-  if ((param_2 != (char *)0x0) && (sVar2 = _strlen(param_2), 0 < (int)sVar2)) {
-    *(size_t *)(this + 0x20) = sVar2;
-    pcVar3 = _malloc(sVar2 + 1);
-    *(char **)(this + 0x14) = pcVar3;
-    _strncpy(pcVar3,param_2,*(int *)(this + 0x20) + 1);
+  if ((param_2 != (char *)0x0) && (iVar1 = _strlen(param_2), 0 < iVar1)) {
+    *(int *)(this + 0x20) = iVar1;
+    pcVar2 = (char *)_malloc(iVar1 + 1);
+    *(char **)(this + 0x14) = pcVar2;
+    _strncpy(pcVar2,param_2,*(int *)(this + 0x20) + 1);
     iVar1 = *(int *)(this + 0x20);
-    iVar4 = 0;
+    iVar3 = 0;
     if (iVar1 != 0) {
       do {
-        pcVar3 = (char *)(*(int *)(this + 0x14) + iVar4);
-        iVar4 = iVar4 + 1;
-        *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + (int)*pcVar3;
+        pcVar2 = (char *)(*(int *)(this + 0x14) + iVar3);
+        iVar3 = iVar3 + 1;
+        *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + (int)*pcVar2;
         iVar1 = iVar1 + -1;
       } while (iVar1 != 0);
     }
@@ -946,21 +944,20 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
 {
   char cVar1;
   uint uVar2;
-  size_t sVar3;
-  char *pcVar4;
-  void *pvVar5;
+  int iVar3;
+  int iVar4;
+  int iVar5;
   char *pcVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
   char acStack_30 [28];
   
   _sprintf(acStack_30,"%u",param_3);
-  sVar3 = _strlen(acStack_30);
-  iVar9 = 0;
-  pcVar4 = _malloc(*(int *)(param_1 + 0x20) + sVar3 + 1);
-  uVar2 = 0;
+  iVar3 = _strlen(acStack_30);
   iVar8 = 0;
+  iVar4 = _malloc(*(int *)(param_1 + 0x20) + iVar3 + 1);
+  uVar2 = 0;
+  iVar3 = 0;
   if (param_2 != 0xffffffff) {
     pcVar6 = *(char **)(param_1 + 0x14);
     cVar1 = *pcVar6;
@@ -968,45 +965,45 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(param_1, param_2, param_3)
       if (cVar1 == '[') {
         uVar2 = uVar2 + 1;
       }
-      pcVar4[iVar9] = cVar1;
+      *(char *)(iVar4 + iVar8) = cVar1;
+      iVar3 = iVar3 + 1;
       iVar8 = iVar8 + 1;
-      iVar9 = iVar9 + 1;
       if (param_2 + 1 <= uVar2) break;
-      cVar1 = pcVar6[iVar8];
+      cVar1 = pcVar6[iVar3];
     }
   }
-  pcVar4[iVar9] = '\0';
-  _strcat(pcVar4,acStack_30);
-  cVar1 = pcVar4[iVar9];
+  *(undefined1 *)(iVar4 + iVar8) = 0;
+  _strcat(iVar4,acStack_30);
+  cVar1 = *(char *)(iVar4 + iVar8);
   while (cVar1 != '\0') {
-    iVar9 = iVar9 + 1;
-    cVar1 = pcVar4[iVar9];
+    iVar8 = iVar8 + 1;
+    cVar1 = *(char *)(iVar4 + iVar8);
   }
   iVar7 = *(int *)(param_1 + 0x14);
-  cVar1 = *(char *)(iVar7 + iVar8);
+  cVar1 = *(char *)(iVar7 + iVar3);
   while ((cVar1 != '\0' && (cVar1 != ']'))) {
-    iVar8 = iVar8 + 1;
-    cVar1 = *(char *)(iVar7 + iVar8);
+    iVar3 = iVar3 + 1;
+    cVar1 = *(char *)(iVar7 + iVar3);
   }
-  cVar1 = *(char *)(iVar7 + iVar8);
+  cVar1 = *(char *)(iVar7 + iVar3);
   while (cVar1 != '\0') {
-    pcVar4[iVar9] = cVar1;
+    *(char *)(iVar4 + iVar8) = cVar1;
+    iVar3 = iVar3 + 1;
     iVar8 = iVar8 + 1;
-    iVar9 = iVar9 + 1;
-    cVar1 = *(char *)(iVar7 + iVar8);
+    cVar1 = *(char *)(iVar7 + iVar3);
   }
-  pvVar5 = *(void **)(param_1 + 0x14);
-  pcVar4[iVar9] = *(char *)(iVar7 + iVar8);
-  if (pvVar5 != (void *)0x0) {
-    _free(pvVar5);
+  iVar5 = *(int *)(param_1 + 0x14);
+  *(undefined1 *)(iVar4 + iVar8) = *(undefined1 *)(iVar7 + iVar3);
+  if (iVar5 != 0) {
+    _free(iVar5);
   }
-  *(int *)(param_1 + 0x20) = iVar9;
-  iVar8 = 0;
+  *(int *)(param_1 + 0x20) = iVar8;
+  iVar3 = 0;
   *(undefined4 *)(param_1 + 0x1c) = 0;
-  *(char **)(param_1 + 0x14) = pcVar4;
-  for (; iVar9 != 0; iVar9 = iVar9 + -1) {
-    pcVar6 = pcVar4 + iVar8;
-    iVar8 = iVar8 + 1;
+  *(int *)(param_1 + 0x14) = iVar4;
+  for (; iVar8 != 0; iVar8 = iVar8 + -1) {
+    pcVar6 = (char *)(iVar4 + iVar3);
+    iVar3 = iVar3 + 1;
     *(int *)(param_1 + 0x1c) = *(int *)(param_1 + 0x1c) + (int)*pcVar6;
   }
   return;
@@ -1065,32 +1062,32 @@ int ParseSymbol__AddDirectIndex(this, param_2)
 {
   int iVar1;
   uint uVar2;
-  void *pvVar3;
-  void *pvVar4;
+  int iVar3;
+  int iVar4;
   uint uVar5;
   
   uVar2 = *(uint *)(this + 0x24);
   if ((uVar2 & 3) == 0) {
-    pvVar3 = _malloc(uVar2 * 4 + 0x10);
-    _memset(pvVar3,0,*(int *)(this + 0x24) * 4 + 0x10);
+    iVar3 = _malloc(uVar2 * 4 + 0x10);
+    _memset(iVar3,0,*(int *)(this + 0x24) * 4 + 0x10);
     uVar2 = *(uint *)(this + 0x24);
     uVar5 = 0;
     if (uVar2 == 0) {
-      pvVar4 = *(void **)(this + 0x18);
+      iVar4 = *(int *)(this + 0x18);
     }
     else {
-      pvVar4 = *(void **)(this + 0x18);
+      iVar4 = *(int *)(this + 0x18);
       do {
         iVar1 = uVar5 * 4;
         uVar5 = uVar5 + 1;
-        *(undefined4 *)(iVar1 + (int)pvVar3) = *(undefined4 *)(iVar1 + (int)pvVar4);
+        *(undefined4 *)(iVar1 + iVar3) = *(undefined4 *)(iVar1 + iVar4);
       } while (uVar5 < uVar2);
     }
-    if (pvVar4 != (void *)0x0) {
-      _free(pvVar4);
+    if (iVar4 != 0) {
+      _free(iVar4);
       uVar2 = *(uint *)(this + 0x24);
     }
-    *(void **)(this + 0x18) = pvVar3;
+    *(int *)(this + 0x18) = iVar3;
   }
   *(uint *)(uVar2 * 4 + *(int *)(this + 0x18)) = param_2;
   *(int *)(this + 0x24) = *(int *)(this + 0x24) + 1;
@@ -1143,65 +1140,66 @@ int ParseSymbol__GetString(this, param_2)
   byte bVar1;
   char *pcVar2;
   undefined4 uVar3;
-  byte *pbVar4;
-  char *pcVar5;
-  uint uVar6;
+  char *pcVar4;
+  byte *pbVar5;
+  int iVar6;
+  uint uVar7;
   
-  pcVar5 = (char *)0x0;
-  pcVar2 = _malloc(*(int *)(this + 0x20) + 0x200);
+  iVar6 = 0;
+  pcVar2 = (char *)_malloc(*(int *)(this + 0x20) + 0x200);
   if (pcVar2 == (char *)0x0) {
     return (char *)0x0;
   }
   *pcVar2 = '\0';
-  pbVar4 = *(byte **)this;
-  if (pbVar4 == (byte *)0x0) {
+  pbVar5 = *(byte **)this;
+  if (pbVar5 == (byte *)0x0) {
 LAB_97bbb054:
-    if (pcVar5 != (char *)0x0) {
-      _sprintf(pcVar2,DAT_a7b7bbbc,pcVar2,pcVar5,*(undefined4 *)(this + 0x14),
+    if (iVar6 != 0) {
+      _sprintf(pcVar2,DAT_a7b7bbbc,pcVar2,iVar6,*(undefined4 *)(this + 0x14),
                *(undefined4 *)(this + 0x28));
-      _free(pcVar5);
+      _free(iVar6);
       goto LAB_97bbb0a4;
     }
   }
   else {
-    bVar1 = *pbVar4;
+    bVar1 = *pbVar5;
     if (bVar1 == 2) {
       if (param_2 != 0) {
         _sprintf(pcVar2,_symbolUtilString);
-        pbVar4 = *(byte **)this;
+        pbVar5 = *(byte **)this;
       }
-      pcVar5 = (char *)PrintAttribute(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
+      iVar6 = PrintAttribute(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
       goto LAB_97bbb054;
     }
     if (2 < bVar1) {
       if (bVar1 == 3) {
         if (param_2 != 0) {
           _sprintf(pcVar2,DAT_a7b7bba8);
-          pbVar4 = *(byte **)this;
+          pbVar5 = *(byte **)this;
         }
-        pcVar5 = (char *)PrintParam(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
+        iVar6 = PrintParam(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
       }
       else {
         if (bVar1 != 4) goto LAB_97bbb038;
         if (param_2 != 0) {
           _sprintf(pcVar2,DAT_a7b7bbac);
-          pbVar4 = *(byte **)this;
+          pbVar5 = *(byte **)this;
         }
-        pcVar5 = (char *)PrintOutput(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
+        iVar6 = PrintOutput(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
       }
       goto LAB_97bbb054;
     }
     if (bVar1 != 0) {
 LAB_97bbb038:
-      pcVar5 = _malloc(0x20);
-      _strcpy(pcVar5,DAT_a7b7bbb8);
+      iVar6 = _malloc(0x20);
+      _strcpy(iVar6,DAT_a7b7bbb8);
       goto LAB_97bbb054;
     }
-    pcVar5 = DAT_a7b7bbb4;
+    pcVar4 = DAT_a7b7bbb4;
     if (param_2 != 0) {
-      pcVar5 = DAT_a7b7bbb0;
+      pcVar4 = DAT_a7b7bbb0;
     }
-    _sprintf(pcVar2,pcVar5,(uint)*(ushort *)(pbVar4 + 0x12));
+    _sprintf(pcVar2,pcVar4,(uint)*(ushort *)(pbVar5 + 0x12));
   }
   _sprintf(pcVar2,DAT_a7b7bbc0,pcVar2,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
 LAB_97bbb0a4:
@@ -1210,24 +1208,24 @@ LAB_97bbb0a4:
   if (1 < *(short *)(this + 0x2e)) {
     _sprintf(pcVar2,DAT_a7b7bbc8,pcVar2,(int)*(short *)(this + 0x30));
   }
-  pcVar5 = _malloc(0x40);
-  *pcVar5 = '\0';
-  uVar6 = 0;
+  pcVar4 = (char *)_malloc(0x40);
+  *pcVar4 = '\0';
+  uVar7 = 0;
   if (*(int *)(this + 0x24) != 0) {
     do {
-      if (uVar6 == 0) {
-        _sprintf(pcVar5,DAT_a7b7bbd0);
+      if (uVar7 == 0) {
+        _sprintf(pcVar4,DAT_a7b7bbd0);
       }
       else {
-        _sprintf(pcVar5,DAT_a7b7bbcc,pcVar5);
+        _sprintf(pcVar4,DAT_a7b7bbcc,pcVar4);
       }
-      uVar3 = GetDirectIndex(this,uVar6);
-      _sprintf(pcVar5,DAT_a7b7bbd4,pcVar5,uVar3);
-      uVar6 = uVar6 + 1;
-    } while (uVar6 < *(uint *)(this + 0x24));
+      uVar3 = GetDirectIndex(this,uVar7);
+      _sprintf(pcVar4,DAT_a7b7bbd4,pcVar4,uVar3);
+      uVar7 = uVar7 + 1;
+    } while (uVar7 < *(uint *)(this + 0x24));
   }
-  _sprintf(pcVar2,DAT_a7b7bbd8,pcVar2,pcVar5);
-  _free(pcVar5);
+  _sprintf(pcVar2,DAT_a7b7bbd8,pcVar2,pcVar4);
+  _free(pcVar4);
   return pcVar2;
 }
 
@@ -1235,8 +1233,8 @@ LAB_97bbb0a4:
 int ParseOperand__ClearDirectIndex(this)
   unsigned char * this;
 {
-  if (*(void **)(this + 0x1c) != (void *)0x0) {
-    _free(*(void **)(this + 0x1c));
+  if (*(int *)(this + 0x1c) != 0) {
+    _free(*(int *)(this + 0x1c));
   }
   *(undefined4 *)(this + 0x20) = 0;
   *(undefined4 *)(this + 0x1c) = 0;
@@ -1451,11 +1449,11 @@ LAB_97bbb3a4:
     __ZdlPv(this_00);
   }
 LAB_97bbb3cc:
-  if (*(void **)((int)this + 0x1c) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x1c));
+  if (*(int *)((int)this + 0x1c) != 0) {
+    _free(*(int *)((int)this + 0x1c));
   }
-  if (*(void **)((int)this + 0x10) != (void *)0x0) {
-    _free(*(void **)((int)this + 0x10));
+  if (*(int *)((int)this + 0x10) != 0) {
+    _free(*(int *)((int)this + 0x10));
     return;
   }
   return;
@@ -1576,32 +1574,32 @@ int ParseOperand__AddDirectIndex(this, param_2)
 {
   int iVar1;
   uint uVar2;
-  void *pvVar3;
-  void *pvVar4;
+  int iVar3;
+  int iVar4;
   uint uVar5;
   
   uVar2 = *(uint *)(this + 0x20);
   if ((uVar2 & 3) == 0) {
-    pvVar3 = _malloc(uVar2 * 4 + 0x10);
-    _memset(pvVar3,0,*(int *)(this + 0x20) * 4 + 0x10);
+    iVar3 = _malloc(uVar2 * 4 + 0x10);
+    _memset(iVar3,0,*(int *)(this + 0x20) * 4 + 0x10);
     uVar2 = *(uint *)(this + 0x20);
     uVar5 = 0;
     if (uVar2 == 0) {
-      pvVar4 = *(void **)(this + 0x1c);
+      iVar4 = *(int *)(this + 0x1c);
     }
     else {
-      pvVar4 = *(void **)(this + 0x1c);
+      iVar4 = *(int *)(this + 0x1c);
       do {
         iVar1 = uVar5 * 4;
         uVar5 = uVar5 + 1;
-        *(undefined4 *)(iVar1 + (int)pvVar3) = *(undefined4 *)(iVar1 + (int)pvVar4);
+        *(undefined4 *)(iVar1 + iVar3) = *(undefined4 *)(iVar1 + iVar4);
       } while (uVar5 < uVar2);
     }
-    if (pvVar4 != (void *)0x0) {
-      _free(pvVar4);
+    if (iVar4 != 0) {
+      _free(iVar4);
       uVar2 = *(uint *)(this + 0x20);
     }
-    *(void **)(this + 0x1c) = pvVar3;
+    *(int *)(this + 0x1c) = iVar3;
   }
   *(uint *)(uVar2 * 4 + *(int *)(this + 0x1c)) = param_2;
   *(int *)(this + 0x20) = *(int *)(this + 0x20) + 1;
@@ -2016,31 +2014,31 @@ int ParseOperand__AddSwizzle(this, param_2)
   int param_2;
 {
   uint uVar1;
-  void *pvVar2;
+  int iVar2;
   uint uVar3;
-  void *pvVar4;
+  int iVar4;
   
   uVar1 = *(uint *)(this + 0x14);
   if ((uVar1 & 3) == 0) {
-    pvVar2 = _malloc(uVar1 + 4);
-    _memset(pvVar2,0,*(int *)(this + 0x14) + 4);
+    iVar2 = _malloc(uVar1 + 4);
+    _memset(iVar2,0,*(int *)(this + 0x14) + 4);
     uVar1 = *(uint *)(this + 0x14);
     uVar3 = 0;
     if (uVar1 == 0) {
-      pvVar4 = *(void **)(this + 0x10);
+      iVar4 = *(int *)(this + 0x10);
     }
     else {
-      pvVar4 = *(void **)(this + 0x10);
+      iVar4 = *(int *)(this + 0x10);
       do {
-        *(undefined1 *)((int)pvVar2 + uVar3) = *(undefined1 *)((int)pvVar4 + uVar3);
+        *(undefined1 *)(iVar2 + uVar3) = *(undefined1 *)(iVar4 + uVar3);
         uVar3 = uVar3 + 1 & 0xff;
       } while (uVar3 < uVar1);
     }
-    if (pvVar4 != (void *)0x0) {
-      _free(pvVar4);
+    if (iVar4 != 0) {
+      _free(iVar4);
       uVar1 = *(uint *)(this + 0x14);
     }
-    *(void **)(this + 0x10) = pvVar2;
+    *(int *)(this + 0x10) = iVar2;
   }
   *(uchar *)(*(int *)(this + 0x10) + uVar1) = param_2;
   *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;

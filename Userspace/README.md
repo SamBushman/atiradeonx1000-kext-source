@@ -264,6 +264,17 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
   compares a register with itself.
 glprog's 9 remaining blocks are all dead in the stock code (see above).
 
+### Dropped call arguments (Stage B3 step 14)
+* Imports had no signatures: GLDriver's `io_connect_method_scalarI_structureI(connect, 0)` - the stock passes six arguments, so the rebuilt
+  driver would have sent the kernel whatever r5..r8 held. ~100 IOKit / libSystem / CF / dyld / C++-runtime imports now carry their argument
+  counts in all images (libGL's were already right).
+* FUN_000e1564(ctx, size) forwards the size its 20 callers load to the allocator callback `ctx->alloc(ctx->allocctx, size)`; the C dropped it.
+  19 such functions forward caller-set registers to a call through a pointer; they are fixed (pipeline step 14). `callarg_check.py`: GLDriver 42 of
+  10112 stock constant arguments without a matching C literal (was 154), glprog 34 of 777 - the remainder are forwarded registers into deeper
+  chains (FUN_001054ec -> allocator callback, whose arity is unknown) and constants the C prints as an expression.
+* Imports called from orphan / landing-pad code (GLDriver 567, glprog 185 sites: mostly `_Unwind_Resume`, `memset`, `strlen`) keep the old
+  decompile: that code is not wired into the rebuilt images' control flow (#63, #72).
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,

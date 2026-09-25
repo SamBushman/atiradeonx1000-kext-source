@@ -76,9 +76,8 @@ int _check_cxa_atexit(param_1, param_2)
 int _find_atexit_10_3()
 {
   uint uVar1;
-  char *pcVar2;
+  undefined4 uVar2;
   int iVar3;
-  undefined4 uVar4;
   uint local_38;
   code *local_34;
   code *local_30;
@@ -95,8 +94,8 @@ int _find_atexit_10_3()
      ((local_28 != (code *)0x0 && (local_24[0] != (code *)0x0)))) {
     uVar1 = (*local_34)();
     for (local_38 = 0; local_38 < uVar1; local_38 = local_38 + 1) {
-      pcVar2 = (char *)(*local_30)(local_38);
-      iVar3 = _strcmp(pcVar2,"/usr/lib/libSystem.B.dylib");
+      uVar2 = (*local_30)(local_38);
+      iVar3 = _strcmp(uVar2,"/usr/lib/libSystem.B.dylib");
       if (iVar3 == 0) {
         iVar3 = (*local_2c)(local_38);
         if (iVar3 == 0) {
@@ -104,8 +103,8 @@ int _find_atexit_10_3()
         }
         iVar3 = (*local_28)(iVar3,"_atexit",4);
         if (iVar3 != 0) {
-          uVar4 = (*local_24[0])(iVar3);
-          return uVar4;
+          uVar2 = (*local_24[0])(iVar3);
+          return uVar2;
         }
         return 0;
       }
@@ -138,45 +137,45 @@ int _get_globals()
   int iVar1;
   undefined4 uVar2;
   int iVar3;
-  void *local_20;
-  void *local_18;
+  int local_20;
+  int local_18;
   
-  local_20 = (void *)__keymgr_get_and_lock_processwide_ptr(0xe);
-  if ((local_20 == (void *)0x0) && (local_20 = _calloc(0x14,1), local_20 == (void *)0x0)) {
-    return (void *)0x0;
+  local_20 = __keymgr_get_and_lock_processwide_ptr(0xe);
+  if ((local_20 == 0) && (local_20 = _calloc(0x14,1), local_20 == 0)) {
+    return 0;
   }
-  if (*(char *)((int)local_20 + 3) == '\0') {
+  if (*(char *)(local_20 + 3) == '\0') {
     iVar1 = _dlopen("/usr/lib/libSystem.B.dylib",0x10);
     if (iVar1 == 0) {
-      *(undefined1 *)((int)local_20 + 3) = 1;
+      *(undefined1 *)(local_20 + 3) = 1;
       uVar2 = ((int (*)())_find_atexit_10_3)();
-      *(undefined4 *)((int)local_20 + 0x10) = uVar2;
-      if ((*(int *)((int)local_20 + 0x10) != 0) &&
-         (iVar1 = (**(code **)((int)local_20 + 0x10))(_our_atexit), iVar1 == 0)) goto LAB_00000bc8;
+      *(undefined4 *)(local_20 + 0x10) = uVar2;
+      if ((*(int *)(local_20 + 0x10) != 0) &&
+         (iVar1 = (**(code **)(local_20 + 0x10))(_our_atexit), iVar1 == 0)) goto LAB_00000bc8;
     }
     else {
       uVar2 = _dlsym(iVar1,"__cxa_atexit");
-      *(undefined4 *)((int)local_20 + 8) = uVar2;
+      *(undefined4 *)(local_20 + 8) = uVar2;
       uVar2 = _dlsym(iVar1,"__cxa_finalize");
-      *(undefined4 *)((int)local_20 + 0xc) = uVar2;
-      if (((*(int *)((int)local_20 + 8) != 0) && (*(int *)((int)local_20 + 0xc) != 0)) &&
-         (iVar3 = ((int (*)())_check_cxa_atexit)(*(undefined4 *)((int)local_20 + 8),
-                                    *(undefined4 *)((int)local_20 + 0xc)), iVar3 != -1)) {
+      *(undefined4 *)(local_20 + 0xc) = uVar2;
+      if (((*(int *)(local_20 + 8) != 0) && (*(int *)(local_20 + 0xc) != 0)) &&
+         (iVar3 = ((int (*)())_check_cxa_atexit)(*(undefined4 *)(local_20 + 8),*(undefined4 *)(local_20 + 0xc)),
+         iVar3 != -1)) {
         if (iVar3 == 0) {
-          *(undefined1 *)((int)local_20 + 3) = 2;
+          *(undefined1 *)(local_20 + 3) = 2;
         }
         else {
           uVar2 = _dlsym(iVar1,"atexit");
-          *(undefined4 *)((int)local_20 + 0x10) = uVar2;
-          if (*(int *)((int)local_20 + 0x10) == 0) goto LAB_00000bd4;
-          *(undefined1 *)((int)local_20 + 3) = 0x10;
+          *(undefined4 *)(local_20 + 0x10) = uVar2;
+          if (*(int *)(local_20 + 0x10) == 0) goto LAB_00000bd4;
+          *(undefined1 *)(local_20 + 3) = 0x10;
         }
         goto LAB_00000bc8;
       }
     }
 LAB_00000bd4:
     __keymgr_set_and_unlock_processwide_ptr(0xe,local_20);
-    local_18 = (void *)0x0;
+    local_18 = 0;
   }
   else {
 LAB_00000bc8:
@@ -317,7 +316,7 @@ int _add_routine(param_1, param_2)
   
   iStack00000018 = param_1;
   puStack0000001c = param_2;
-  puVar2 = _malloc(0x10);
+  puVar2 = (undefined4 *)_malloc(0x10);
   if (puVar2 == (undefined4 *)0x0) {
     __keymgr_set_and_unlock_processwide_ptr(0xe,iStack00000018);
     local_14 = 0xffffffff;
@@ -620,7 +619,7 @@ int _atexit_common(param_1, param_2)
       pcVar1 = *(code **)(iVar3 + 8);
       iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
       if ((*(ushort *)(*(int *)(PTR_0000e68c + 8) + 4) < 4) || (iVar3 == 0)) {
-        puVar4 = _malloc(0xc);
+        puVar4 = (undefined4 *)_malloc(0xc);
         if (puVar4 == (undefined4 *)0x0) {
           local_18 = 0xffffffff;
         }
@@ -1034,11 +1033,12 @@ int __QueryInterface(param_1, param_2, param_3, param_4, param_5, param_6)
   uStack00000020 = param_3;
   uStack00000024 = param_4;
   uStack00000028 = param_5;
-  uVar1 = _CFUUIDCreateFromUUIDBytes(0);
-  uVar2 = _CFUUIDGetConstantUUIDWithBytes(0,0x67,0x66,0xe9,0x4a,0,0,0);
+  uVar1 = _CFUUIDCreateFromUUIDBytes(0,param_2,param_3,param_4,param_5);
+  uVar2 = _CFUUIDGetConstantUUIDWithBytes
+                    (0,0x67,0x66,0xe9,0x4a,0,0,0,0,0,0,0,10,0x27,0x89,0x90,0x4e);
   iVar3 = _CFEqual(uVar1,uVar2);
   if (iVar3 == 0) {
-    uVar2 = _CFUUIDGetConstantUUIDWithBytes(0,0,0,0,0,0,0,0);
+    uVar2 = _CFUUIDGetConstantUUIDWithBytes(0,0,0,0,0,0,0,0,0,0xc0,0,0,0,0,0,0,0x46);
     iVar3 = _CFEqual(uVar1,uVar2);
     if (iVar3 == 0) {
       *param_6 = 0;
@@ -1460,12 +1460,12 @@ int _ATIRadeonX1000GAFactory(param_1, param_2)
   undefined4 uVar2;
   int iVar3;
   
-  uVar2 = _CFUUIDGetConstantUUIDWithBytes(0,0xac,0xcf,0,0,0,0,0);
+  uVar2 = _CFUUIDGetConstantUUIDWithBytes(0,0xac,0xcf,0,0,0,0,0,0,0,0,0,10,0x27,0x89,0x90,0x4e);
   iVar3 = _CFEqual(param_2,uVar2);
   puVar1 = (undefined4 *)0x0;
   if (iVar3 != 0) {
-    iVar3 = _CFUUIDGetConstantUUIDWithBytes(0,0x10,2,0x71,0,0,0,0);
-    puVar1 = _calloc(1,0x98);
+    iVar3 = _CFUUIDGetConstantUUIDWithBytes(0,0x10,2,0x71,0,0,0,0,0,0,0,0,10,0x27,0x89,0x8d,0x3e);
+    puVar1 = (undefined4 *)_calloc(1,0x98);
     *puVar1 = &_radeonGAInterface;
     if (iVar3 != 0) {
       uVar2 = _CFRetain(iVar3);
@@ -1479,15 +1479,15 @@ int _ATIRadeonX1000GAFactory(param_1, param_2)
 
 /* __Release @ 0x2420 (100 bytes) */
 int __Release(param_1)
-  void *param_1;
+  int param_1;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = *(int *)((int)param_1 + 8) + -1;
-  *(int *)((int)param_1 + 8) = iVar2;
+  iVar2 = *(int *)(param_1 + 8) + -1;
+  *(int *)(param_1 + 8) = iVar2;
   if (iVar2 == 0) {
-    iVar1 = *(int *)((int)param_1 + 4);
+    iVar1 = *(int *)(param_1 + 4);
     _free(param_1);
     if (iVar1 != 0) {
       _CFPlugInRemoveInstanceForFactory(iVar1);
@@ -1540,7 +1540,7 @@ int __Reset(param_1)
     *(undefined4 *)(param_1 + 0x90) = uVar3;
     *(undefined4 *)(param_1 + 0x94) = 0;
     uVar3 = ((int (*)())__SetDestination)(param_1,0,0);
-    _memcpy((void *)(param_1 + 0x1c),(void *)(param_1 + 0x4c),0x30);
+    _memcpy(param_1 + 0x1c,param_1 + 0x4c,0x30);
   }
   return uVar3;
 }
@@ -1563,7 +1563,7 @@ int __Start(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param
   undefined1 auStack_9c [144];
   
   iVar2 = param_1 + 0x84;
-  iVar1 = _IOAccelFindAccelerator(param_3,&local_a8);
+  iVar1 = _IOAccelFindAccelerator(param_3,&local_a8,iVar2);
   if (iVar1 == 0) {
     iVar1 = _IOObjectConformsTo(local_a8,"ATIRadeonX1000");
     if (iVar1 == 0) {
@@ -1589,10 +1589,10 @@ int __Start(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param
         }
       }
       if (local_a4[0] != 0) {
-        _IOServiceClose();
+        _IOServiceClose(local_a4[0]);
       }
       if (local_a8 != 0) {
-        _IOObjectRelease();
+        _IOObjectRelease(local_a8);
       }
     }
   }

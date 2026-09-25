@@ -3279,7 +3279,7 @@ int FUN_000e0740(param_1, param_2, param_3, param_4, param_5, param_6)
   uVar1 = 0x200;
   *(undefined4 *)(param_1 + 4) = param_2;
   *(undefined4 *)(param_1 + 8) = param_2;
-  _memset((void *)(param_1 + 0x10),0,0x200);
+  _memset(param_1 + 0x10,0,0x200);
   *(undefined4 *)(param_1 + 0x218) = 0;
   ((int (*)())FUN_000e0640)(param_1,extraout_r4,uVar1,param_4,param_5,param_6);
   return;
@@ -3537,7 +3537,7 @@ int FUN_000e0e28(param_1)
   if (0 < *(int *)(param_1 + 0x3a4)) {
     iVar1 = 0;
     do {
-      _memcpy(auStack_b8,(void *)(iVar1 + *(int *)(param_1 + 0x3a0)),0x80);
+      _memcpy(auStack_b8,iVar1 + *(int *)(param_1 + 0x3a0),0x80);
       iVar1 = iVar1 + 0x80;
       local_38 = 0;
     } while (iVar1 < *(int *)(param_1 + 0x3a4));
@@ -3580,161 +3580,161 @@ int FUN_000e0ebc(param_1)
 /* FUN_000e0ee8 @ 0xe0ee8 (1184 bytes) */
 int FUN_000e0ee8(param_1, param_2, param_3)
   int param_1;
-  char *param_2;
+  undefined4 param_2;
   int param_3;
 {
   bool bVar1;
-  size_t sVar2;
+  undefined4 uVar2;
   int iVar3;
   int iVar4;
   undefined **ppuVar5;
   
-  sVar2 = _strlen(param_2);
+  uVar2 = _strlen(param_2);
   ppuVar5 = &PTR_s_OPT_IGNORE_DEFINED_CONSTANTS_001dc444;
   iVar4 = 0;
-  while (iVar3 = _strncmp(*ppuVar5,param_2,sVar2), iVar3 != 0) {
+  while (iVar3 = _strncmp(*ppuVar5,param_2,uVar2), iVar3 != 0) {
     bVar1 = iVar4 == 0x4f;
     ppuVar5 = ppuVar5 + 1;
     iVar4 = iVar4 + 1;
     if (bVar1) {
-      iVar4 = _strncmp("opt_flatten_if_state",param_2,sVar2);
+      iVar4 = _strncmp("opt_flatten_if_state",param_2,uVar2);
       if (iVar4 == 0) {
         *(int *)(param_1 + 0x64c) = param_3;
       }
       else {
-        iVar4 = _strncmp("max_copy_folds",param_2,sVar2);
+        iVar4 = _strncmp("max_copy_folds",param_2,uVar2);
         if (iVar4 == 0) {
           *(int *)(param_1 + 0x650) = param_3;
         }
         else {
-          iVar4 = _strncmp("max_vn_kills",param_2,sVar2);
+          iVar4 = _strncmp("max_vn_kills",param_2,uVar2);
           if (iVar4 == 0) {
             *(int *)(param_1 + 0x654) = param_3;
           }
           else {
-            iVar4 = _strncmp("max_vn_transforms",param_2,sVar2);
+            iVar4 = _strncmp("max_vn_transforms",param_2,uVar2);
             if (iVar4 == 0) {
               *(int *)(param_1 + 0x658) = param_3;
             }
             else {
-              iVar4 = _strncmp("max_copy_merges",param_2,sVar2);
+              iVar4 = _strncmp("max_copy_merges",param_2,uVar2);
               if (iVar4 == 0) {
                 *(int *)(param_1 + 0x65c) = param_3;
               }
               else {
-                iVar4 = _strncmp("max_copy_props",param_2,sVar2);
+                iVar4 = _strncmp("max_copy_props",param_2,uVar2);
                 if (iVar4 == 0) {
                   *(int *)(param_1 + 0x660) = param_3;
                 }
                 else {
-                  iVar4 = _strncmp("max_mix_insts",param_2,sVar2);
+                  iVar4 = _strncmp("max_mix_insts",param_2,uVar2);
                   if (iVar4 == 0) {
                     *(int *)(param_1 + 0x664) = param_3;
                   }
                   else {
-                    iVar4 = _strncmp("max_presubs",param_2,sVar2);
+                    iVar4 = _strncmp("max_presubs",param_2,uVar2);
                     if (iVar4 == 0) {
                       *(int *)(param_1 + 0x668) = param_3;
                     }
                     else {
-                      iVar4 = _strncmp("max_mov_and_shift",param_2,sVar2);
+                      iVar4 = _strncmp("max_mov_and_shift",param_2,uVar2);
                       if (iVar4 == 0) {
                         *(int *)(param_1 + 0x670) = param_3;
                       }
                       else {
-                        iVar4 = _strncmp("max_useless_phis",param_2,sVar2);
+                        iVar4 = _strncmp("max_useless_phis",param_2,uVar2);
                         if (iVar4 == 0) {
                           *(int *)(param_1 + 0x66c) = param_3;
                         }
                         else {
-                          iVar4 = _strncmp("max_balance_conversions",param_2,sVar2);
+                          iVar4 = _strncmp("max_balance_conversions",param_2,uVar2);
                           if (iVar4 == 0) {
                             *(int *)(param_1 + 0x674) = param_3;
                           }
                           else {
-                            iVar4 = _strncmp("max_coalesce_loops",param_2,sVar2);
+                            iVar4 = _strncmp("max_coalesce_loops",param_2,uVar2);
                             if (iVar4 == 0) {
                               *(int *)(param_1 + 0x678) = param_3;
                             }
                             else {
-                              iVar4 = _strncmp("max_spill_loops",param_2,sVar2);
+                              iVar4 = _strncmp("max_spill_loops",param_2,uVar2);
                               if (iVar4 == 0) {
                                 *(int *)(param_1 + 0x67c) = param_3;
                               }
                               else {
-                                iVar4 = _strncmp("max_inst_hoists",param_2,sVar2);
+                                iVar4 = _strncmp("max_inst_hoists",param_2,uVar2);
                                 if (iVar4 == 0) {
                                   *(int *)(param_1 + 0x680) = param_3;
                                 }
                                 else {
-                                  iVar4 = _strncmp("max_mad_mul_to_d2a",param_2,sVar2);
+                                  iVar4 = _strncmp("max_mad_mul_to_d2a",param_2,uVar2);
                                   if (iVar4 == 0) {
                                     *(int *)(param_1 + 0x684) = param_3;
                                   }
                                   else {
-                                    iVar4 = _strncmp("max_mad_d2a_to_dp3",param_2,sVar2);
+                                    iVar4 = _strncmp("max_mad_d2a_to_dp3",param_2,uVar2);
                                     if (iVar4 == 0) {
                                       *(int *)(param_1 + 0x688) = param_3;
                                     }
                                     else {
-                                      iVar4 = _strncmp("max_add_add_to_dp3",param_2,sVar2);
+                                      iVar4 = _strncmp("max_add_add_to_dp3",param_2,uVar2);
                                       if (iVar4 == 0) {
                                         *(int *)(param_1 + 0x68c) = param_3;
                                       }
                                       else {
-                                        iVar4 = _strncmp("max_add_mul_to_mad",param_2,sVar2);
+                                        iVar4 = _strncmp("max_add_mul_to_mad",param_2,uVar2);
                                         if (iVar4 == 0) {
                                           *(int *)(param_1 + 0x690) = param_3;
                                         }
                                         else {
                                           iVar4 = _strncmp("max_add_mad_mul_to_mov_mad_mad",param_2,
-                                                           sVar2);
+                                                           uVar2);
                                           if (iVar4 == 0) {
                                             *(int *)(param_1 + 0x694) = param_3;
                                           }
                                           else {
-                                            iVar4 = _strncmp("max_reassociate",param_2,sVar2);
+                                            iVar4 = _strncmp("max_reassociate",param_2,uVar2);
                                             if (iVar4 == 0) {
                                               *(int *)(param_1 + 0x698) = param_3;
                                             }
                                             else {
-                                              iVar4 = _strncmp("max_reconst_alu",param_2,sVar2);
+                                              iVar4 = _strncmp("max_reconst_alu",param_2,uVar2);
                                               if (iVar4 == 0) {
                                                 *(int *)(param_1 + 0x69c) = param_3;
                                               }
                                               else {
                                                 iVar4 = _strncmp("max_remove_cnd_input",param_2,
-                                                                 sVar2);
+                                                                 uVar2);
                                                 if (iVar4 == 0) {
                                                   *(int *)(param_1 + 0x6a0) = param_3;
                                                 }
                                                 else {
                                                   iVar4 = _strncmp("max_r600_minimize_cf_attempts",
-                                                                   param_2,sVar2);
+                                                                   param_2,uVar2);
                                                   if (iVar4 == 0) {
                                                     *(int *)(param_1 + 0x6a4) = param_3;
                                                   }
                                                   else {
-                                                    iVar4 = _strncmp("max_flatten_if",param_2,sVar2)
+                                                    iVar4 = _strncmp("max_flatten_if",param_2,uVar2)
                                                     ;
                                                     if (iVar4 == 0) {
                                                       *(int *)(param_1 + 0x6a8) = param_3;
                                                     }
                                                     else {
                                                       iVar4 = _strncmp("rearrange_tree_depth",
-                                                                       param_2,sVar2);
+                                                                       param_2,uVar2);
                                                       if (iVar4 == 0) {
                                                         *(int *)(param_1 + 0x6ac) = param_3;
                                                       }
                                                       else {
                                                         iVar4 = _strncmp("limit_registers",param_2,
-                                                                         sVar2);
+                                                                         uVar2);
                                                         if (iVar4 == 0) {
                                                           *(int *)(param_1 + 0x6b0) = param_3;
                                                         }
                                                         else {
                                                           iVar4 = _strncmp("limit_instructions",
-                                                                           param_2,sVar2);
+                                                                           param_2,uVar2);
                                                           if (iVar4 == 0) {
                                                             *(int *)(param_1 + 0x6b4) = param_3;
                                                           }
@@ -3904,16 +3904,17 @@ int FUN_000e1534(param_1, param_2)
     *(int *)(param_1 + 0x314) = param_2;
   }
                     
-  _longjmp(*(int **)(param_1 + 4),1);
+  _longjmp(*(undefined4 *)(param_1 + 4),1);
 }
 
 /* FUN_000e1564 @ 0xe1564 (84 bytes) */
-int FUN_000e1564(param_1)
+int FUN_000e1564(param_1, param_2)
   int param_1;
+  undefined4 param_2;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(param_1 + 0x350))(*(undefined4 *)(param_1 + 0x354));
+  iVar1 = (**(code **)(param_1 + 0x350))(*(undefined4 *)(param_1 + 0x354),param_2);
   if (iVar1 == 0) {
     ((int (*)())FUN_000e1534)(param_1,2);
   }

@@ -1128,8 +1128,11 @@ static inline float GH_BITS_F(unsigned int u) { union { unsigned int u; float f;
 #define GH_PAIR_HI(hi, old) ((((unsigned long long)(unsigned int)(hi)) << 32) | (unsigned int)(old))   /* r3:r4 pair: a 32-bit result in r3 = the high word */
 static inline double GH_BITS_DD(unsigned long long u) { union { unsigned long long u; double d; } x; x.u = u; return x.d; }
 #define GH_IS_FP(x) (__builtin_types_compatible_p(__typeof__(x), float) || __builtin_types_compatible_p(__typeof__(x), double))
-#define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), (double)(x), (double)GH_BITS_F((unsigned int)(x)))
-#define GH_ARGD(x) __builtin_choose_expr(GH_IS_FP(x), (double)(x), __builtin_choose_expr(sizeof(x) == 8, GH_BITS_DD((unsigned long long)(x)), (double)(x)))
+/* the branch __builtin_choose_expr does not take must still type-check: a pointer argument (a stack slot Ghidra typed `int *` holding float bits,
+   GLDriver FUN_0010b118's third argument) cannot be cast to double, so the FP branch casts a value that is 0.0 unless x is floating */
+#define GH_FPV(x) ((double)__builtin_choose_expr(GH_IS_FP(x), (x), 0.0))
+#define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), (double)GH_BITS_F((unsigned int)(x)))
+#define GH_ARGD(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), __builtin_choose_expr(sizeof(x) == 8, GH_BITS_DD((unsigned long long)(x)), (double)(long)(x)))
 static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }
 static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) {
     vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));

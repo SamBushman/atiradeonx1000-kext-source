@@ -126,6 +126,21 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    entry-set register, and `Tools/userspace/prune_orphans.py` drops every orphan whose code a function now owns: glprog 8 (the two moved entries
    and the six constant-switch owners' duplicates), GLDriver 31 (the 17 moved entries, FUN_0010b32c's switch cases, and the FUN_0001ecd0 /
    FUN_000c5460 case-code duplicates) - the #72 duplicate list.
+14. Call arguments the decompile dropped. `Tools/userspace/callarg_check.py` compares, for every direct call, the constants the stock caller loads
+   into r3..r10 with the literal arguments of the decompile's calls to that callee (10112 GLDriver constants). Two classes:
+   * imports without a signature print only the arguments the decompiler happens to see: GLDriver called
+     `io_connect_method_scalarI_structureI(connect, 0)` where the stock passes six (the scalar array, its count, the struct and its size reached the
+     kernel as whatever r5..r8 held). `gs/SetImportSignatures.java` gives ~100 IOKit / libSystem / CoreFoundation / dyld / C++-runtime imports
+     their argument counts (GLDriver 132, glprog 80, VA 40, GA 66 functions incl. stubs); libGL's pthread calls were already right.
+   * arguments forwarded, untouched, to a call through a pointer: FUN_000e1564(ctx, size) calls ctx->alloc(ctx->allocctx, size) with the caller's
+     r4 - all 20 stock callers load the size - but had one parameter, and the call's override (OverrideIndirectCalls: a caller's untouched input
+     register is "not set") one argument. `Tools/userspace/hidden_params.py` lists argument registers live at entry beyond the declared parameters
+     that stock callers set (57 in GLDriver: 20 are return pass-throughs, 12 reach no reader, 1 is the patched calloc wrapper); the 19 functions
+     whose value reaches an indirect call get the parameters and at least that many arguments on their indirect calls (`gs/ForwardArgs.java`,
+     b3/forward_args_gld.txt). Extending their direct callees as well (FUN_001054ec's chain into the same allocator callback) was tried and
+     dropped: those callees are called from hundreds of sites that never set the registers, and Ghidra printed junk constants for them.
+   After both: 42 of 10112 GLDriver constants unmatched (was 154), glprog unchanged at 34 of 777 (no call there lost an argument).
+   RedumpContaining now raises the decompiler's payload limit (FUN_00115fa0, 3500 lines, failed with "Response buffer size exceeded").
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

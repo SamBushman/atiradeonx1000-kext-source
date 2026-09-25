@@ -578,9 +578,9 @@ int FUN_97c1913c(param_1)
   undefined *puVar3;
   uint uVar4;
   
-  puVar3 = _malloc(param_1 + 0x50U);
+  puVar3 = (undefined *)_malloc(param_1 + 0x50U);
   if (puVar3 == (undefined *)0x0) {
-    _pthread_mutex_lock((pthread_mutex_t *)&_emergency_mutex);
+    _pthread_mutex_lock(&_emergency_mutex);
     uVar4 = 0;
     bVar1 = true;
     uVar2 = _emergency_used;
@@ -596,7 +596,7 @@ int FUN_97c1913c(param_1)
         uVar2 = uVar2 >> 1;
       } while (uVar4 < 2);
     }
-    _pthread_mutex_unlock((pthread_mutex_t *)&_emergency_mutex);
+    _pthread_mutex_unlock(&_emergency_mutex);
     if (bVar1) {
       ((int (*)())std__terminate)();
     }
@@ -612,10 +612,10 @@ int ___cxa_free_exception(param_1)
   uint uVar1;
   
   if (((undefined4 *)0xa7b7e86f < param_1) && (param_1 < &_emergency_used)) {
-    _pthread_mutex_lock((pthread_mutex_t *)&_emergency_mutex);
+    _pthread_mutex_lock(&_emergency_mutex);
     uVar1 = (uint)(param_1 + 0x161205e4) >> 8 & 0x1f;
     _emergency_used = _emergency_used & (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1);
-    _pthread_mutex_unlock((pthread_mutex_t *)&_emergency_mutex);
+    _pthread_mutex_unlock(&_emergency_mutex);
     return;
   }
   _free(param_1 + -0x14);
@@ -1173,30 +1173,29 @@ int FUN_97c19d00(param_1)
   undefined4 uVar3;
   undefined4 *puVar4;
   int iVar5;
-  _Unwind_Exception *exception_object;
-  code *pcVar6;
-  unsigned char * p_Var7;
-  int iVar8;
-  uchar *puVar9;
+  code *extraout_r3;
+  unsigned char * p_Var6;
+  int iVar7;
+  uchar *puVar8;
   unsigned char alStack_40 [8];
   undefined4 uStack_38;
   
   ((int (*)())___cxa_begin_catch)(param_1);
   uStack_38 = *(undefined4 *)(param_1 + -0xc);
-  puVar9 = *(uchar **)(param_1 + -0x10);
-  iVar8 = *(int *)(param_1 + -0x18);
-  p_Var7 = *(unsigned char **)(param_1 + -0x24);
+  puVar8 = *(uchar **)(param_1 + -0x10);
+  iVar7 = *(int *)(param_1 + -0x18);
+  p_Var6 = *(unsigned char **)(param_1 + -0x24);
   uVar3 = ((int (*)())__cxxabiv1____unexpected)(*(unsigned char **)(param_1 + -0x28));
   ((int (*)())___cxa_begin_catch)(uVar3);
   puVar4 = (undefined4 *)((int (*)())___cxa_get_globals_fast)();
   puVar4 = (undefined4 *)*puVar4;
-  ((int (*)())parse_lsda_header)((unsigned char *)0x0,puVar9,alStack_40);
-  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*puVar4,puVar4 + 0x14,iVar8);
+  ((int (*)())parse_lsda_header)((unsigned char *)0x0,puVar8,alStack_40);
+  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*puVar4,puVar4 + 0x14,iVar7);
   if (iVar5 != 0) {
     ___cxa_rethrow();
   }
   puVar2 = PTR_typeinfo_a7b7c180;
-  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,iVar8);
+  iVar5 = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,iVar7);
   if (iVar5 != 0) {
     puVar4 = (undefined4 *)___cxa_allocate_exception(4);
     puVar1 = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
@@ -1204,11 +1203,11 @@ int FUN_97c19d00(param_1)
                     
     ((int (*)())___cxa_throw)(puVar4,puVar2,puVar1);
   }
-  exception_object = (_Unwind_Exception *)((int (*)())__cxxabiv1____terminate)(p_Var7);
+  uVar3 = ((int (*)())__cxxabiv1____terminate)(p_Var6);
   ((int (*)())___cxa_end_catch)();
   ((int (*)())___cxa_end_catch)();
-  pcVar6 = (code *)__Unwind_Resume(exception_object);
-  (*pcVar6)();
+  __Unwind_Resume(uVar3);
+  (*extraout_r3)();
                     
   _abort();
 }
@@ -1409,7 +1408,7 @@ int ___cxa_get_globals()
   if (iVar1 != 0) {
     return (undefined4 *)iVar1;
   }
-  puVar2 = _malloc(8);
+  puVar2 = (undefined4 *)_malloc(8);
   if (puVar2 != (undefined4 *)0x0) {
     if ((*(int *)(PTR_DAT_a7b7c190 + 8) == 0) ||
        (*(ushort *)(*(int *)(PTR_DAT_a7b7c190 + 8) + 4) < 4)) {
@@ -1437,7 +1436,7 @@ int ___eprintf(param_1, param_2, param_3, param_4)
   
   puVar1 = PTR_DAT_a7b7c0bc;
   _fprintf((FILE *)(PTR_DAT_a7b7c0bc + 0xb0),param_1,param_2,param_3,param_4);
-  _fflush((FILE *)(puVar1 + 0xb0));
+  _fflush(puVar1 + 0xb0);
                     
   _abort();
 }

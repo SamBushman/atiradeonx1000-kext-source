@@ -6113,9 +6113,9 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
   char in_RESERVE;
   byte bVar8;
   undefined4 local_80;
-  void *local_7c;
+  int local_7c;
   undefined4 local_70;
-  void *local_6c;
+  int local_6c;
   undefined4 local_60 [4];
   undefined4 local_50 [4];
   undefined4 local_40 [4];
@@ -6129,9 +6129,9 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(&local_70,"gl_",(unsigned char *)local_60)
     ;
     puVar5 = local_2c;
-    uVar6 = *(uint *)((int)local_6c + -0xc);
+    uVar6 = *(uint *)(local_6c + -0xc);
     local_30 = uVar6;
-    uVar7 = *(uint *)((int)local_7c + -0xc);
+    uVar7 = *(uint *)(local_7c + -0xc);
     local_2c[0] = uVar7;
     if (uVar6 <= uVar7) {
       puVar5 = &local_30;
@@ -6141,7 +6141,7 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     if (iVar2 == 0) {
       iVar2 = uVar6 - uVar7;
     }
-    piVar3 = (int *)((int)local_6c + -4);
+    piVar3 = (int *)(local_6c + -4);
     local_50[0] = local_70;
     do {
       iVar4 = *piVar3;
@@ -6153,9 +6153,9 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     } while (!(bool)(bVar8 >> 1));
     if (iVar4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)((int)local_6c + -0xc),local_50);
+                ((unsigned char *)(local_6c + -0xc),local_50);
     }
-    piVar3 = (int *)((int)local_7c + -4);
+    piVar3 = (int *)(local_7c + -4);
     local_40[0] = local_80;
     do {
       iVar4 = *piVar3;
@@ -6167,7 +6167,7 @@ int TParseContext__reservedErrorCheck(this, param_2, param_3)
     } while (!(bool)(bVar8 >> 1 & 1));
     if (iVar4 < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)((int)local_7c + -0xc),local_40);
+                ((unsigned char *)(local_7c + -0xc),local_40);
     }
     if (iVar2 == 0) {
       error((int)this,(char *)param_2,"reserved built-in name","gl_","",in_r8,local_7c,in_r10);

@@ -15,6 +15,10 @@ public class RedumpContaining extends GhidraScript {
         String[] args = getScriptArgs();
         String outDir = args[0];
         DecompInterface decomp = new DecompInterface();
+        ghidra.app.decompiler.DecompileOptions dopts = new ghidra.app.decompiler.DecompileOptions();
+        dopts.grabFromProgram(currentProgram);
+        dopts.setMaxPayloadMBytes(512);   // FUN_00115fa0's C exceeds the default response buffer
+        decomp.setOptions(dopts);
         decomp.openProgram(currentProgram);
         decomp.setSimplificationStyle("decompile");
         HashSet<String> seen = new HashSet<>();
@@ -30,6 +34,8 @@ public class RedumpContaining extends GhidraScript {
                 fw.write("// Function: " + fn.getName(true) + " @ " + fn.getEntryPoint() + "\n");
                 fw.write("// Signature: " + fn.getSignature() + "\n\n");
                 DecompileResults res = decomp.decompileFunction(fn, 180, new ConsoleTaskMonitor());
+                // a very large function (GLDriver FUN_00115fa0, ~3500 lines of state-table initialisation) needs longer: retry once with 30 minutes
+                if (res == null || !res.decompileCompleted()) res = decomp.decompileFunction(fn, 1800, new ConsoleTaskMonitor());
                 if (res != null && res.decompileCompleted()) fw.write(res.getDecompiledFunction().getC());
                 else { fw.write("!! decompile failed\n"); println("DECOMPILE ERROR: " + (res == null ? "null" : res.getErrorMessage())); }
             }

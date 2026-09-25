@@ -126,8 +126,7 @@ int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC1Ev(this)
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev(this)
   void *this;
 {
-  _pthread_mutex_lock((pthread_mutex_t *)
-                      &std____default_alloc_template_true_0____S_node_allocator_lock);
+  _pthread_mutex_lock(&std____default_alloc_template_true_0____S_node_allocator_lock);
   return;
 }
 
@@ -151,8 +150,7 @@ int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD1Ev(this)
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev(this)
   void *this;
 {
-  _pthread_mutex_unlock
-            ((pthread_mutex_t *)&std____default_alloc_template_true_0____S_node_allocator_lock);
+  _pthread_mutex_unlock(&std____default_alloc_template_true_0____S_node_allocator_lock);
   return;
 }
 
@@ -168,15 +166,15 @@ int std____default_alloc_template_true_0___allocate(param_1)
   ulong param_1;
 {
   uint uVar1;
-  char *pcVar2;
+  int iVar2;
   undefined4 *puVar3;
   char in_RESERVE;
   byte in_cr0;
   undefined1 auStack_30 [28];
   
   if (_S_force_new == 0) {
-    pcVar2 = _getenv("GLIBCPP_FORCE_NEW");
-    if (pcVar2 == (char *)0x0) {
+    iVar2 = _getenv("GLIBCPP_FORCE_NEW");
+    if (iVar2 == 0) {
       do {
         if (in_RESERVE != '\0') {
           _S_force_new = storeWordConditionalIndexed(_S_force_new + -1,0,0xa7b7c00c);
@@ -221,7 +219,7 @@ int std__allocator_char___allocate(param_1, param_2)
 {
   uint uVar1;
   undefined4 *puVar2;
-  char *pcVar3;
+  int iVar3;
   char in_RESERVE;
   byte bVar4;
   undefined1 auStack_30 [28];
@@ -230,8 +228,8 @@ int std__allocator_char___allocate(param_1, param_2)
   puVar2 = (undefined4 *)0x0;
   if (param_2 != (void *)0x0) {
     if (__default_alloc_template_true_0____S_force_new == 0) {
-      pcVar3 = _getenv("GLIBCPP_FORCE_NEW");
-      if (pcVar3 == (char *)0x0) {
+      iVar3 = _getenv("GLIBCPP_FORCE_NEW");
+      if (iVar3 == 0) {
         do {
           if (in_RESERVE != '\0') {
             __default_alloc_template_true_0____S_force_new =
@@ -556,7 +554,7 @@ int std____default_alloc_template_true_0___reallocate(param_1, param_2, param_3)
   void *pvVar1;
   
   if ((0x80 < param_2) && (0x80 < param_3)) {
-    pvVar1 = _realloc(param_1,param_3);
+    pvVar1 = (void *)_realloc(param_1,param_3);
     return pvVar1;
   }
   pvVar1 = param_1;

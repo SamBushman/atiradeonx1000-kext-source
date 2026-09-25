@@ -96,12 +96,14 @@ int FUN_00195590(param_1, param_2)
 }
 
 /* FUN_001955c0 @ 0x1955c0 (16 bytes) */
-int FUN_001955c0(param_1)
+int FUN_001955c0(param_1, param_2, param_3)
   int *param_1;
+  undefined4 param_2;
+  undefined4 param_3;
 {
                     
                     
-  (**(code **)(*param_1 + 0x104))();
+  (**(code **)(*param_1 + 0x104))(param_1,param_2,param_3);
   return;
 }
 
@@ -713,12 +715,12 @@ int FUN_00195fd8(param_1, param_2, param_3)
 int FUN_00196070(param_1)
   int *param_1;
 {
-  void *pvVar1;
+  int iVar1;
   
   if (param_1[0x1d] == 0) {
-    pvVar1 = (void *)(param_1[0x16] + param_1[0x18] * 0x48);
-    _memcpy((void *)((int)pvVar1 + 0x48),pvVar1,0x48);
-    _memset((void *)(param_1[0x18] * 0x48 + param_1[0x16]),0,0x48);
+    iVar1 = param_1[0x16] + param_1[0x18] * 0x48;
+    _memcpy(iVar1 + 0x48,iVar1,0x48);
+    _memset(param_1[0x18] * 0x48 + param_1[0x16],0,0x48);
     param_1[0x18] = 2;
     param_1[0x1d] = 1;
     (**(code **)(*param_1 + 0xc4))(param_1,1,0,0,0,0);
@@ -815,12 +817,12 @@ int FUN_001963b0(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
-  void *pvVar1;
+  undefined4 uVar1;
   
   *(undefined4 *)(param_1 + 0xa4) = *(undefined4 *)(param_4 + 0x30c);
-  pvVar1 = (void *)FUN_000e14e4(param_4,0x963c,param_3);
-  *(void **)(param_1 + 0x5c) = pvVar1;
-  _memset(pvVar1,0,0x963c);
+  uVar1 = FUN_000e14e4(param_4,0x963c,param_3);
+  *(undefined4 *)(param_1 + 0x5c) = uVar1;
+  _memset(uVar1,0,0x963c);
   *(undefined4 *)(param_1 + 0x58) = *(undefined4 *)(param_1 + 0x5c);
   *(undefined4 *)(param_1 + 0x54) = 3;
   *(undefined4 *)(param_1 + 0x10) = param_2;
@@ -866,76 +868,77 @@ int FUN_0019649c(param_1, param_2, param_3)
 }
 
 /* FUN_0019651c @ 0x19651c (640 bytes) */
-int FUN_0019651c(param_1, param_2)
+int FUN_0019651c(param_1, param_2, param_3)
   int *param_1;
   int param_2;
+  undefined4 param_3;
 {
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  code *pcVar7;
-  int iVar8;
-  uint uVar9;
+  undefined4 a4;
+  undefined4 a3;
+  uint a2;
+  code *pcVar4;
+  int a1;
+  uint uVar5;
   
-  uVar6 = 0;
-  uVar9 = 0;
+  a2 = 0;
+  uVar5 = 0;
   do {
     iVar2 = FUN_001054ec(param_2,0);
-    if (*(char *)(uVar9 + iVar2 + 0x10) == '\x01') {
-      uVar6 = uVar6 | 1 << (uVar9 & 0x3f);
+    if (*(char *)(uVar5 + iVar2 + 0x10) == '\x01') {
+      a2 = a2 | 1 << (uVar5 & 0x3f);
     }
-    bVar1 = uVar9 != 3;
-    uVar9 = uVar9 + 1;
+    bVar1 = uVar5 != 3;
+    uVar5 = uVar5 + 1;
   } while (bVar1);
   iVar2 = *(int *)(param_2 + 0x144);
   if ((iVar2 == 0x16) || (iVar2 == 0x17)) {
-    pcVar7 = *(code **)(*param_1 + 0xc4);
-    iVar8 = param_1[0x25];
+    pcVar4 = *(code **)(*param_1 + 0xc4);
+    a1 = param_1[0x25];
     uVar3 = FUN_0010e40c(iVar2,*(undefined4 *)(param_2 + 0x148));
-    uVar4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
-    uVar5 = 1;
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
+    a3 = 1;
   }
   else if (iVar2 == 0x1b) {
-    uVar5 = 1;
-    pcVar7 = *(code **)(*param_1 + 0xc4);
-    iVar8 = param_1[0x25];
+    a3 = 1;
+    pcVar4 = *(code **)(*param_1 + 0xc4);
+    a1 = param_1[0x25];
     uVar3 = *(undefined4 *)(param_2 + 0x148);
     iVar2 = FUN_000d9f3c(*(undefined4 *)(param_1[3] + 0x398),0);
     if (iVar2 == 0) {
-      uVar5 = 3;
+      a3 = 3;
     }
-    uVar4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
   }
   else {
     if (iVar2 != 0x23) {
-      pcVar7 = *(code **)(*param_1 + 200);
-      uVar9 = *(uint *)(param_2 + 0x148);
+      pcVar4 = *(code **)(*param_1 + 200);
+      uVar5 = *(uint *)(param_2 + 0x148);
       iVar2 = param_1[0x26];
       uVar3 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
-      (*pcVar7)(param_1,iVar2,uVar9,1,uVar3,(*(uint *)(param_2 + 0x13c) ^ 1) & 1);
-      (**(code **)(*param_1 + 0xcc))(param_1,param_1[0x26],uVar6);
+      (*pcVar4)(param_1,iVar2,uVar5,1,uVar3,(*(uint *)(param_2 + 0x13c) ^ 1) & 1);
+      (**(code **)(*param_1 + 0xcc))(param_1,param_1[0x26],a2);
       iVar2 = param_1[3];
       param_1[0x26] = param_1[0x26] + 1;
-      if (*(int *)(*(int *)(iVar2 + 0x6c4) + 0x80) < (int)uVar9) {
-        *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x80) = uVar9;
+      if (*(int *)(*(int *)(iVar2 + 0x6c4) + 0x80) < (int)uVar5) {
+        *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x80) = uVar5;
         iVar2 = param_1[3];
       }
       *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x88) =
-           1 << (uVar9 & 0x3f) | *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x88);
+           1 << (uVar5 & 0x3f) | *(uint *)(*(int *)(iVar2 + 0x6c4) + 0x88);
       iVar2 = param_1[0x25];
       goto LAB_0019675c;
     }
-    pcVar7 = *(code **)(*param_1 + 0xc4);
-    iVar8 = param_1[0x25];
+    pcVar4 = *(code **)(*param_1 + 0xc4);
+    a1 = param_1[0x25];
     uVar3 = *(undefined4 *)(param_2 + 0x148);
-    uVar4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
-    uVar5 = 2;
+    a4 = thunk_FUN_00134de8(*(undefined4 *)(param_1[3] + 0x6c4),param_2);
+    a3 = 2;
   }
-  (*pcVar7)(param_1,iVar8,uVar3,uVar5,uVar4,0);
-  (**(code **)(*param_1 + 0xd0))(param_1,param_1[0x25],uVar6);
+  (*pcVar4)(param_1,a1,uVar3,a3,a4,0);
+  (**(code **)(*param_1 + 0xd0))(param_1,param_1[0x25],a2);
   iVar2 = param_1[0x25] + 1;
   param_1[0x25] = iVar2;
 LAB_0019675c:
@@ -1495,11 +1498,11 @@ LAB_001976d0:
               }
               iVar11 = (**(code **)(*piVar10 + 0x48))(piVar10);
               if (iVar11 != 0) {
-                ((int (*)())FUN_001955c0)(param_1);
+                ((int (*)())FUN_001955c0)(param_1,piVar10,param_1[3]);
               }
               iVar11 = (**(code **)(*piVar10 + 0x4c))(piVar10);
               if (iVar11 != 0) {
-                ((int (*)())FUN_0019651c)(param_1,piVar10);
+                ((int (*)())FUN_0019651c)(param_1,piVar10,param_1[3]);
               }
               iVar11 = (**(code **)(*piVar10 + 0x38))(piVar10);
               if ((iVar11 != 0) && (param_1[0x23] == 1)) {

@@ -377,10 +377,10 @@ int __ZNSs6appendEPKc(this, param_2)
   void *this;
   char *param_2;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
   return;
 }
 
@@ -389,10 +389,10 @@ int __ZNSspLEPKc(this, param_2)
   void *this;
   char *param_2;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
   return;
 }
 
@@ -602,7 +602,7 @@ int __ZNSs6insertEmPKcm(this, param_2, param_3, param_4)
 {
   char *pcVar1;
   char *pcVar2;
-  size_t sVar3;
+  int iVar3;
   uint uVar4;
   char *pcVar5;
   int local_30;
@@ -622,11 +622,11 @@ int __ZNSs6insertEmPKcm(this, param_2, param_3, param_4)
     pcVar5 = (char *)(*(int *)this + param_2);
     pcVar2 = pcVar1;
     if ((pcVar5 < pcVar1 + param_4) && (pcVar2 = pcVar1 + param_4, pcVar1 < pcVar5)) {
-      sVar3 = (int)pcVar5 - (int)pcVar1;
-      _memcpy(pcVar5,pcVar1,sVar3);
+      iVar3 = (int)pcVar5 - (int)pcVar1;
+      _memcpy(pcVar5,pcVar1,iVar3);
       pcVar2 = pcVar5 + param_4;
-      pcVar5 = pcVar5 + sVar3;
-      param_4 = param_4 - sVar3;
+      pcVar5 = pcVar5 + iVar3;
+      param_4 = param_4 - iVar3;
     }
     _memcpy(pcVar5,pcVar2,param_4);
   }
@@ -650,44 +650,43 @@ int __ZNSs6insertEmRKSsmm(this, param_2, param_3, param_4, param_5)
   char *pcVar1;
   int iVar2;
   char *pcVar3;
-  size_t sVar4;
-  uint uVar5;
-  char *pcVar6;
+  uint uVar4;
+  char *pcVar5;
   int local_30;
   int local_2c [3];
   
   iVar2 = *(int *)param_3;
-  uVar5 = *(uint *)(iVar2 + -0xc);
-  if (uVar5 < param_4) {
+  uVar4 = *(uint *)(iVar2 + -0xc);
+  if (uVar4 < param_4) {
     std____throw_out_of_range("basic_string::insert");
     iVar2 = *(int *)param_3;
   }
-  uVar5 = uVar5 - param_4;
-  if (uVar5 <= param_5) {
-    param_5 = uVar5;
+  uVar4 = uVar4 - param_4;
+  if (uVar4 <= param_5) {
+    param_5 = uVar4;
   }
   pcVar1 = (char *)(iVar2 + param_4);
-  uVar5 = *(uint *)(*(int *)this + -0xc);
-  if (uVar5 < param_2) {
+  uVar4 = *(uint *)(*(int *)this + -0xc);
+  if (uVar4 < param_2) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - param_5 < uVar5) {
+  if (0x3ffffffc - param_5 < uVar4) {
     std____throw_length_error("basic_string::insert");
   }
   pcVar3 = *(char **)this;
-  if (((*(int *)(pcVar3 + -4) < 1) && (pcVar3 <= pcVar1)) && (pcVar1 <= pcVar3 + uVar5)) {
+  if (((*(int *)(pcVar3 + -4) < 1) && (pcVar3 <= pcVar1)) && (pcVar1 <= pcVar3 + uVar4)) {
     __ZNSs9_M_mutateEmmm(this,param_2,0,param_5);
     pcVar1 = pcVar1 + (*(int *)this - (int)pcVar3);
-    pcVar6 = (char *)(*(int *)this + param_2);
+    pcVar5 = (char *)(*(int *)this + param_2);
     pcVar3 = pcVar1;
-    if ((pcVar6 < pcVar1 + param_5) && (pcVar3 = pcVar1 + param_5, pcVar1 < pcVar6)) {
-      sVar4 = (int)pcVar6 - (int)pcVar1;
-      _memcpy(pcVar6,pcVar1,sVar4);
-      pcVar3 = pcVar6 + param_5;
-      pcVar6 = pcVar6 + sVar4;
-      param_5 = param_5 - sVar4;
+    if ((pcVar5 < pcVar1 + param_5) && (pcVar3 = pcVar1 + param_5, pcVar1 < pcVar5)) {
+      iVar2 = (int)pcVar5 - (int)pcVar1;
+      _memcpy(pcVar5,pcVar1,iVar2);
+      pcVar3 = pcVar5 + param_5;
+      pcVar5 = pcVar5 + iVar2;
+      param_5 = param_5 - iVar2;
     }
-    _memcpy(pcVar6,pcVar3,param_5);
+    _memcpy(pcVar5,pcVar3,param_5);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_30,this);
@@ -704,10 +703,10 @@ int __ZNSs6insertEmRKSs(this, param_2, param_3)
   ulong param_2;
   unsigned char * param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   char *pcVar2;
   char *pcVar3;
-  size_t sVar4;
+  int iVar4;
   uint uVar5;
   char *pcVar6;
   int local_30;
@@ -715,33 +714,33 @@ int __ZNSs6insertEmRKSs(this, param_2, param_3)
   
   pcVar2 = *(char **)param_3;
   uVar5 = *(uint *)(*(int *)this + -0xc);
-  sVar1 = *(size_t *)(pcVar2 + -0xc);
+  uVar1 = *(ulong *)(pcVar2 + -0xc);
   if (uVar5 < param_2) {
     std____throw_out_of_range("basic_string::insert");
   }
-  if (0x3ffffffc - sVar1 < uVar5) {
+  if (0x3ffffffc - uVar1 < uVar5) {
     std____throw_length_error("basic_string::insert");
   }
   pcVar3 = *(char **)this;
   if (((*(int *)(pcVar3 + -4) < 1) && (pcVar3 <= pcVar2)) && (pcVar2 <= pcVar3 + uVar5)) {
-    __ZNSs9_M_mutateEmmm(this,param_2,0,sVar1);
+    __ZNSs9_M_mutateEmmm(this,param_2,0,uVar1);
     pcVar2 = pcVar2 + (*(int *)this - (int)pcVar3);
     pcVar6 = (char *)(*(int *)this + param_2);
     pcVar3 = pcVar2;
-    if ((pcVar6 < pcVar2 + sVar1) && (pcVar3 = pcVar2 + sVar1, pcVar2 < pcVar6)) {
-      sVar4 = (int)pcVar6 - (int)pcVar2;
-      _memcpy(pcVar6,pcVar2,sVar4);
-      pcVar3 = pcVar6 + sVar1;
-      pcVar6 = pcVar6 + sVar4;
-      sVar1 = sVar1 - sVar4;
+    if ((pcVar6 < pcVar2 + uVar1) && (pcVar3 = pcVar2 + uVar1, pcVar2 < pcVar6)) {
+      iVar4 = (int)pcVar6 - (int)pcVar2;
+      _memcpy(pcVar6,pcVar2,iVar4);
+      pcVar3 = pcVar6 + uVar1;
+      pcVar6 = pcVar6 + iVar4;
+      uVar1 = uVar1 - iVar4;
     }
-    _memcpy(pcVar6,pcVar3,sVar1);
+    _memcpy(pcVar6,pcVar3,uVar1);
   }
   else {
     __ZNKSs9_M_ibeginEv(&local_30,this);
     __ZNKSs9_M_ibeginEv(local_2c,this);
     this = __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
-                     (this,local_2c[0] + param_2,local_30 + param_2,pcVar2,pcVar2 + sVar1);
+                     (this,local_2c[0] + param_2,local_30 + param_2,pcVar2,pcVar2 + uVar1);
   }
   return this;
 }
@@ -752,10 +751,10 @@ int __ZNSs6insertEmPKc(this, param_2, param_3)
   ulong param_2;
   char *param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_3);
-  ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_3);
+  ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -875,10 +874,10 @@ int __ZNSs7replaceEmmPKc(this, param_2, param_3, param_4)
   ulong param_3;
   char *param_4;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_4);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,param_4,sVar1);
+  uVar1 = _strlen(param_4);
+  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,param_4,uVar1);
   return;
 }
 
@@ -937,12 +936,12 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, param_2, pa
   void *this;
   undefined4 param_2;
   undefined4 param_3;
-  char *param_4;
+  undefined4 param_4;
 {
-  size_t sVar1;
+  undefined4 uVar1;
   
-  sVar1 = _strlen(param_4);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,sVar1);
+  uVar1 = _strlen(param_4);
+  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,uVar1);
   return;
 }
 
@@ -952,7 +951,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, param_2, par
   int param_2;
   int param_3;
   uint param_4;
-  int param_5;
+  undefined4 param_5;
 {
   int local_30 [6];
   
@@ -962,7 +961,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc(this, param_2, par
   }
   __ZNSs9_M_mutateEmmm(this,param_2 - local_30[0],param_3 - param_2,param_4);
   if (param_4 != 0) {
-    _memset((void *)(*(int *)this + (param_2 - local_30[0])),param_5,param_4);
+    _memset(*(int *)this + (param_2 - local_30[0]),param_5,param_4);
   }
   return this;
 }
@@ -1018,7 +1017,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_(this,
 /* std__string___S_construct @ 0x97c15738 (140 bytes) */
 int std__string___S_construct(param_1, param_2, param_3)
   ulong param_1;
-  int param_2;
+  undefined4 param_2;
   unsigned char * param_3;
 {
   ulong *puVar1;
@@ -1060,7 +1059,7 @@ int std__string__copy(this, param_2, param_3, param_4)
   if (uVar1 < param_3) {
     param_3 = uVar1;
   }
-  _memcpy(param_2,(void *)(iVar2 + param_4),param_3);
+  _memcpy(param_2,iVar2 + param_4,param_3);
   return param_3;
 }
 
@@ -1110,20 +1109,20 @@ int __ZNKSs4findEPKcmm(this, param_2, param_3, param_4)
   uint uVar1;
   int iVar2;
   uint uVar3;
-  void *pvVar4;
+  int iVar4;
   
   uVar1 = param_3 + param_4;
   uVar3 = *(uint *)(*(int *)this + -0xc);
   if (uVar1 <= uVar3) {
-    pvVar4 = (void *)(param_3 + *(int *)this);
+    iVar4 = param_3 + *(int *)this;
     do {
-      iVar2 = _memcmp(pvVar4,param_2,param_4);
+      iVar2 = _memcmp(iVar4,param_2,param_4);
       if (iVar2 == 0) {
         return param_3;
       }
       uVar1 = uVar1 + 1;
       param_3 = param_3 + 1;
-      pvVar4 = (void *)((int)pvVar4 + 1);
+      iVar4 = iVar4 + 1;
     } while (uVar1 <= uVar3);
   }
   return 0xffffffff;
@@ -1145,10 +1144,10 @@ int __ZNKSs4findEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs4findEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs4findEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 
@@ -1209,7 +1208,7 @@ int __ZNKSs5rfindEPKcmm(this, param_2, param_3, param_4)
     uStack00000020 = *puVar2;
     do {
       uVar1 = uStack00000020;
-      iVar3 = _memcmp((void *)(iVar4 + uStack00000020),param_2,param_4);
+      iVar3 = _memcmp(iVar4 + uStack00000020,param_2,param_4);
       if (iVar3 == 0) {
         return uVar1;
       }
@@ -1225,10 +1224,10 @@ int __ZNKSs5rfindEPKcm(this, param_2, param_3)
   char *param_2;
   ulong param_3;
 {
-  size_t sVar1;
+  ulong uVar1;
   
-  sVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs5rfindEPKcmm)(this,param_2,param_3,sVar1);
+  uVar1 = _strlen(param_2);
+  ((int (*)())__ZNKSs5rfindEPKcmm)(this,param_2,param_3,uVar1);
   return;
 }
 

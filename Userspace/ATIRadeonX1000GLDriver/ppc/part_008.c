@@ -18,40 +18,39 @@ int FUN_00053de0(param_1, param_2)
   int param_2;
 {
   bool bVar1;
-  void *pvVar2;
+  int iVar2;
   int iVar3;
-  int iVar4;
-  uint uVar5;
+  uint uVar4;
   
-  iVar4 = *(int *)(((unsigned char *)0x0000116c) + param_1);
+  iVar3 = *(int *)(((unsigned char *)0x0000116c) + param_1);
   if (*(int *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 8) == param_2) {
     FUN_00053b60(param_1,0);
   }
-  uVar5 = 0;
-  iVar3 = 0;
+  uVar4 = 0;
+  iVar2 = 0;
   bVar1 = true;
-  while (uVar5 < *(uint *)(iVar4 + 4)) {
+  while (uVar4 < *(uint *)(iVar3 + 4)) {
     if (!bVar1) goto LAB_00053e6c;
-    if (param_2 == *(int *)(iVar3 + *(int *)(iVar4 + 0xc) + 8)) {
+    if (param_2 == *(int *)(iVar2 + *(int *)(iVar3 + 0xc) + 8)) {
       bVar1 = false;
     }
     else {
-      uVar5 = uVar5 + 1;
-      iVar3 = iVar3 + 0x7c;
+      uVar4 = uVar4 + 1;
+      iVar2 = iVar2 + 0x7c;
     }
   }
   if (!bVar1) {
 LAB_00053e6c:
-    iVar3 = uVar5 * 0x7c + *(int *)(iVar4 + 0xc);
-    if (*(int *)(iVar3 + 0xc) == 0) {
-      ((int (*)())FUN_00055300)(param_1,iVar3);
-      pvVar2 = (void *)(uVar5 * 0x7c + *(int *)(iVar4 + 0xc));
-      _memmove(pvVar2,(void *)((int)pvVar2 + 0x7c),(*(int *)(iVar4 + 4) - uVar5) * 0x7c - 0x7c);
-      *(int *)(iVar4 + 4) = *(int *)(iVar4 + 4) + -1;
-      if (uVar5 < *(uint *)(((unsigned char *)0x00001188) + param_1)) {
-        iVar3 = *(uint *)(((unsigned char *)0x00001188) + param_1) - 1;
-        *(int *)(((unsigned char *)0x00001188) + param_1) = iVar3;
-        *(int *)(((unsigned char *)0x00001168) + param_1) = iVar3 * 0x7c + *(int *)(iVar4 + 0xc);
+    iVar2 = uVar4 * 0x7c + *(int *)(iVar3 + 0xc);
+    if (*(int *)(iVar2 + 0xc) == 0) {
+      ((int (*)())FUN_00055300)(param_1,iVar2);
+      iVar2 = uVar4 * 0x7c + *(int *)(iVar3 + 0xc);
+      _memmove(iVar2,iVar2 + 0x7c,(*(int *)(iVar3 + 4) - uVar4) * 0x7c + -0x7c);
+      *(int *)(iVar3 + 4) = *(int *)(iVar3 + 4) + -1;
+      if (uVar4 < *(uint *)(((unsigned char *)0x00001188) + param_1)) {
+        iVar2 = *(uint *)(((unsigned char *)0x00001188) + param_1) - 1;
+        *(int *)(((unsigned char *)0x00001188) + param_1) = iVar2;
+        *(int *)(((unsigned char *)0x00001168) + param_1) = iVar2 * 0x7c + *(int *)(iVar3 + 0xc);
       }
     }
   }
@@ -553,7 +552,7 @@ int FUN_00054c10(param_1, param_2)
   int iVar1;
   undefined4 uVar2;
   uint uVar3;
-  void *pvVar4;
+  undefined4 uVar4;
   int iVar5;
   int *piVar6;
   
@@ -576,21 +575,21 @@ int FUN_00054c10(param_1, param_2)
     do {
       iVar5 = piVar6[3];
       uVar3 = uVar3 + 1;
-      pvVar4 = *(void **)(iVar1 + iVar5);
+      uVar4 = *(undefined4 *)(iVar1 + iVar5);
       uVar2 = (**(code **)(param_1 + 0x10))(piVar6[4],4);
       *(undefined4 *)(iVar1 + iVar5) = uVar2;
-      _memcpy(*(void **)(piVar6[3] + iVar1),pvVar4,piVar6[4] * 4 - 4);
-      (**(code **)(param_1 + 0x18))(pvVar4);
+      _memcpy(*(undefined4 *)(piVar6[3] + iVar1),uVar4,piVar6[4] * 4 + -4);
+      (**(code **)(param_1 + 0x18))(uVar4);
       (**(code **)(((unsigned char *)0x000011a4) + param_1))
                 (param_1,iVar1 + piVar6[3],*(undefined4 *)(((unsigned char *)0x0000118c) + param_1));
       iVar5 = piVar6[3];
-      pvVar4 = *(void **)(iVar1 + iVar5 + 4);
+      uVar4 = *(undefined4 *)(iVar1 + iVar5 + 4);
       uVar2 = (**(code **)(param_1 + 0x10))(piVar6[4],1);
       *(undefined4 *)(iVar1 + iVar5 + 4) = uVar2;
       iVar5 = piVar6[3] + iVar1;
       iVar1 = iVar1 + 0x7c;
-      _memcpy(*(void **)(iVar5 + 4),pvVar4,piVar6[4] - 1);
-      (**(code **)(param_1 + 0x18))(pvVar4);
+      _memcpy(*(undefined4 *)(iVar5 + 4),uVar4,piVar6[4] + -1);
+      (**(code **)(param_1 + 0x18))(uVar4);
     } while (uVar3 < (uint)piVar6[1]);
   }
   return;
@@ -611,7 +610,7 @@ int FUN_00054da0(param_1, param_2)
 int FUN_00054dd0(param_1, param_2, param_3)
   int param_1;
   uint *param_2;
-  void *param_3;
+  int param_3;
 {
   uint uVar1;
   uint uVar2;
@@ -633,8 +632,8 @@ LAB_00054f2c:
   }
   else {
 LAB_00054e60:
-    _memcpy((void *)(param_2[1] + uVar2 * 0x54),param_3,0x54);
-    uVar1 = *(uint *)((int)param_3 + 0x20);
+    _memcpy(param_2[1] + uVar2 * 0x54,param_3,0x54);
+    uVar1 = *(uint *)(param_3 + 0x20);
     *(undefined1 *)(uVar2 * 0x54 + param_2[1] + 0x3c) = 0;
     if (param_2[3] <= uVar1) {
       uVar1 = (**(code **)(param_1 + 0x10))(uVar1 + 0x40,4);
@@ -644,8 +643,8 @@ LAB_00054e60:
         (**(code **)(param_1 + 0x18))(param_2[2]);
       }
       param_2[2] = uVar1;
-      param_2[3] = *(int *)((int)param_3 + 0x20) + 0x40;
-      uVar1 = *(uint *)((int)param_3 + 0x20);
+      param_2[3] = *(int *)(param_3 + 0x20) + 0x40;
+      uVar1 = *(uint *)(param_3 + 0x20);
     }
     *(uint *)(uVar1 * 4 + param_2[2]) = uVar2;
     *param_2 = *param_2 + 1;

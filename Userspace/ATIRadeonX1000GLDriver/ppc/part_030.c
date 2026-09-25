@@ -702,13 +702,15 @@ undefined4 FUN_0010ab8c(undefined4 param_1,undefined4 *param_2,double fparam_1)
 }
 
 /* FUN_0010ac38 @ 0x10ac38 (304 bytes) */
-int FUN_0010ac38(param_1, param_2, param_3)
+int FUN_0010ac38(param_1, param_2, param_3, param_4)
   int *param_1;
   int param_2;
   int param_3;
+  undefined4 param_4;
 {
   int iVar1;
   int iVar2;
+  int extraout_r4;
   int iVar3;
   int iVar4;
   int iVar5;
@@ -717,11 +719,14 @@ int FUN_0010ac38(param_1, param_2, param_3)
   int iVar8;
   int iVar9;
   
+  iVar1 = param_2;
+  iVar2 = param_3;
   if (0 < param_2) {
-    (**(code **)(*param_1 + 0x14))();
+    (**(code **)(*param_1 + 0x14))(param_1,param_2,param_3,param_4);
+    iVar1 = extraout_r4;
   }
   if (0 < param_3) {
-    (**(code **)(*param_1 + 0x14))(param_1);
+    (**(code **)(*param_1 + 0x14))(param_1,iVar1,iVar2,param_4);
   }
   iVar1 = param_1[param_2 * 6 + 0x23];
   iVar7 = param_1[param_2 * 6 + 0x24];

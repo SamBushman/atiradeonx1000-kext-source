@@ -78,8 +78,8 @@ int FUN_00103e84(param_1, param_2)
 
 /* FUN_00103ebc @ 0x103ebc (92 bytes) */
 int FUN_00103ebc(param_1, param_2, param_3, param_4)
-  void *param_1;
-  void *param_2;
+  undefined4 param_1;
+  int param_2;
   int param_3;
   int param_4;
 {
@@ -88,7 +88,7 @@ int FUN_00103ebc(param_1, param_2, param_3, param_4)
   _memcpy(param_2,param_1,0x164);
   if (param_4 == 0) {
     iVar1 = *(int *)(param_3 + 0x324);
-    *(int *)((int)param_2 + 0x14c) = iVar1;
+    *(int *)(param_2 + 0x14c) = iVar1;
     *(int *)(param_3 + 0x324) = iVar1 + 1;
   }
   return param_2;
@@ -134,8 +134,8 @@ int FUN_00103f44(param_1, param_2)
 
 /* FUN_00103f84 @ 0x103f84 (100 bytes) */
 int FUN_00103f84(param_1, param_2)
-  void *param_1;
-  void *param_2;
+  undefined4 param_1;
+  undefined4 param_2;
 {
   undefined4 local_28;
   undefined4 local_24;
@@ -422,7 +422,7 @@ int FUN_001043f0(param_1, param_2)
 
 /* FUN_0010445c @ 0x10445c (132 bytes) */
 int FUN_0010445c(param_1, param_2, param_3)
-  void *param_1;
+  undefined4 param_1;
   int param_2;
   int param_3;
 {
@@ -1263,7 +1263,7 @@ int FUN_001054ec(param_1, param_2)
     if (uVar4 < *puVar5) {
       uVar2 = puVar5[1];
       if (uVar2 <= uVar4) {
-        _memset((void *)(uVar2 * 4 + puVar5[2]),0,(uVar4 - uVar2) * 4 + 4);
+        _memset(uVar2 * 4 + puVar5[2],0,(uVar4 - uVar2) * 4 + 4);
         puVar5[1] = param_2 - 4;
       }
       piVar3 = (int *)(uVar4 * 4 + puVar5[2]);

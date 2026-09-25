@@ -207,11 +207,11 @@ int _HashSetNew(param_1, param_2, param_3)
 {
   int iVar1;
   uint *puVar2;
-  void *pvVar3;
-  uint uVar4;
+  uint uVar3;
+  undefined4 uVar4;
   uint uVar5;
   
-  puVar2 = _malloc(0x10);
+  puVar2 = (uint *)_malloc(0x10);
   if (param_2 == 0) {
     param_2 = DAT_a7b7bf70;
   }
@@ -221,18 +221,18 @@ int _HashSetNew(param_1, param_2, param_3)
   }
   puVar2[3] = param_3;
   *puVar2 = param_1;
-  pvVar3 = _malloc(param_1 << 3);
-  uVar4 = 0;
-  puVar2[1] = (uint)pvVar3;
+  uVar3 = _malloc(param_1 << 3);
+  uVar5 = 0;
+  puVar2[1] = uVar3;
   if (*puVar2 != 0) {
     do {
-      uVar5 = puVar2[1];
-      iVar1 = uVar4 * 8;
-      uVar4 = uVar4 + 1;
-      *(undefined4 *)(uVar5 + iVar1) = 0;
-      pvVar3 = _malloc(4);
-      *(void **)(uVar5 + iVar1 + 4) = pvVar3;
-    } while (uVar4 < *puVar2);
+      uVar3 = puVar2[1];
+      iVar1 = uVar5 * 8;
+      uVar5 = uVar5 + 1;
+      *(undefined4 *)(uVar3 + iVar1) = 0;
+      uVar4 = _malloc(4);
+      *(undefined4 *)(uVar3 + iVar1 + 4) = uVar4;
+    } while (uVar5 < *puVar2);
   }
   return puVar2;
 }
@@ -241,30 +241,30 @@ int _HashSetNew(param_1, param_2, param_3)
 int _HashSetFree(param_1)
   uint *param_1;
 {
-  void *pvVar1;
-  void *pvVar2;
+  uint uVar1;
+  int iVar2;
   uint uVar3;
   uint uVar4;
   
   uVar4 = 0;
   uVar3 = *param_1;
   if (uVar3 == 0) {
-    pvVar1 = (void *)param_1[1];
+    uVar1 = param_1[1];
   }
   else {
-    pvVar1 = (void *)param_1[1];
+    uVar1 = param_1[1];
     do {
-      pvVar2 = *(void **)((int)pvVar1 + uVar4 * 8 + 4);
-      if (pvVar2 != (void *)0x0) {
-        _free(pvVar2);
+      iVar2 = *(int *)(uVar1 + uVar4 * 8 + 4);
+      if (iVar2 != 0) {
+        _free(iVar2);
         uVar3 = *param_1;
-        pvVar1 = (void *)param_1[1];
+        uVar1 = param_1[1];
       }
       uVar4 = uVar4 + 1;
     } while (uVar4 < uVar3);
   }
-  if (pvVar1 != (void *)0x0) {
-    _free(pvVar1);
+  if (uVar1 != 0) {
+    _free(uVar1);
   }
   _free(param_1);
   return;
@@ -283,48 +283,47 @@ int _HashSetAdd(param_1, param_2)
   undefined4 in_r8;
   uint a6;
   uint uVar3;
-  void *pvVar4;
-  uint uVar5;
-  uint *puVar6;
+  uint uVar4;
+  uint *puVar5;
   
-  uVar5 = 0;
+  uVar4 = 0;
   uVar3 = 0xffffffff;
   uVar1 = (*(code *)param_1[2])(param_2);
   a6 = param_1[1];
   iVar2 = (uVar1 - (uVar1 / *param_1) * *param_1) * 8;
-  puVar6 = (uint *)(a6 + iVar2);
+  puVar5 = (uint *)(a6 + iVar2);
   if (*(int *)(a6 + iVar2) == 0) {
-    pvVar4 = (void *)puVar6[1];
+    uVar1 = puVar5[1];
   }
   else {
-    pvVar4 = (void *)puVar6[1];
+    uVar1 = puVar5[1];
     do {
-      iVar2 = *(int *)((int)pvVar4 + uVar5 * 4);
+      iVar2 = *(int *)(uVar1 + uVar4 * 4);
       if (iVar2 == 0) {
         if (uVar3 == 0xffffffff) {
-          uVar3 = uVar5;
+          uVar3 = uVar4;
         }
       }
       else {
         iVar2 = (*(code *)param_1[3])(iVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6);
         if (iVar2 == 0) {
-          *(undefined4 *)((int)pvVar4 + uVar5 * 4) = param_2;
+          *(undefined4 *)(uVar1 + uVar4 * 4) = param_2;
           return param_1;
         }
-        pvVar4 = (void *)puVar6[1];
+        uVar1 = puVar5[1];
       }
-      uVar5 = uVar5 + 1;
-    } while (uVar5 < *puVar6);
+      uVar4 = uVar4 + 1;
+    } while (uVar4 < *puVar5);
   }
   if (uVar3 == 0xffffffff) {
-    uVar3 = *puVar6;
-    *puVar6 = uVar3 + 1;
-    pvVar4 = _realloc(pvVar4,(uVar3 + 1) * 4);
-    puVar6[1] = (uint)pvVar4;
-    *(undefined4 *)((int)pvVar4 + *puVar6 * 4 + -4) = param_2;
+    uVar3 = *puVar5;
+    *puVar5 = uVar3 + 1;
+    uVar3 = _realloc(uVar1,(uVar3 + 1) * 4);
+    puVar5[1] = uVar3;
+    *(undefined4 *)(uVar3 + *puVar5 * 4 + -4) = param_2;
   }
   else {
-    *(undefined4 *)((int)pvVar4 + uVar3 * 4) = param_2;
+    *(undefined4 *)(uVar1 + uVar3 * 4) = param_2;
   }
   return param_1;
 }
@@ -459,7 +458,7 @@ int _HashTableNew(param_1, param_2, param_3)
   undefined4 *puVar1;
   undefined4 uVar2;
   
-  puVar1 = _malloc(4);
+  puVar1 = (undefined4 *)_malloc(4);
   uVar2 = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
   *puVar1 = uVar2;
   return puVar1;
@@ -470,7 +469,7 @@ int _HashTableFree(param_1)
   int *param_1;
 {
   uint *puVar1;
-  void *pvVar2;
+  int iVar2;
   uint uVar3;
   uint uVar4;
   uint *puVar5;
@@ -485,9 +484,9 @@ int _HashTableFree(param_1)
       puVar5 = (uint *)(puVar1[1] + uVar4 * 8);
       if (*(int *)(puVar1[1] + uVar4 * 8) != 0) {
         do {
-          pvVar2 = *(void **)(puVar5[1] + uVar6 * 4);
-          if (pvVar2 != (void *)0x0) {
-            _free(pvVar2);
+          iVar2 = *(int *)(puVar5[1] + uVar6 * 4);
+          if (iVar2 != 0) {
+            _free(iVar2);
           }
           uVar6 = uVar6 + 1;
         } while (uVar6 < *puVar5);
@@ -520,8 +519,7 @@ int _HashTableAdd(param_1, param_2, param_3)
   uint uVar5;
   uint *puVar6;
   uint uVar7;
-  void *pvVar8;
-  uint *puVar9;
+  uint *puVar8;
   
   puVar6 = (uint *)*param_1;
   uVar7 = 0;
@@ -530,48 +528,48 @@ int _HashTableAdd(param_1, param_2, param_3)
   uVar2 = (*(code *)puVar6[2])(param_2);
   a6 = puVar6[1];
   iVar1 = (uVar2 - (uVar2 / *puVar6) * *puVar6) * 8;
-  puVar9 = (uint *)(a6 + iVar1);
+  puVar8 = (uint *)(a6 + iVar1);
   if (*(int *)(a6 + iVar1) == 0) {
-    pvVar8 = (void *)puVar9[1];
+    uVar2 = puVar8[1];
   }
   else {
-    pvVar8 = (void *)puVar9[1];
+    uVar2 = puVar8[1];
     do {
       iVar1 = uVar7 * 4;
-      if (*(undefined4 **)((int)pvVar8 + iVar1) == (undefined4 *)0x0) {
+      if (*(undefined4 **)(uVar2 + iVar1) == (undefined4 *)0x0) {
         if (uVar5 == 0xffffffff) {
           uVar5 = uVar7;
         }
       }
       else {
         iVar3 = (*(code *)puVar6[3])
-                          (**(undefined4 **)((int)pvVar8 + iVar1),param_2,a2,in_r6,in_r7,in_r8,a6);
+                          (**(undefined4 **)(uVar2 + iVar1),param_2,a2,in_r6,in_r7,in_r8,a6);
         if (iVar3 == 0) {
-          **(undefined4 **)((int)pvVar8 + iVar1) = param_2;
-          *(undefined4 *)(*(int *)((int)pvVar8 + iVar1) + 4) = param_3;
+          **(undefined4 **)(uVar2 + iVar1) = param_2;
+          *(undefined4 *)(*(int *)(uVar2 + iVar1) + 4) = param_3;
           return param_1;
         }
-        pvVar8 = (void *)puVar9[1];
+        uVar2 = puVar8[1];
       }
       uVar7 = uVar7 + 1;
-    } while (uVar7 < *puVar9);
+    } while (uVar7 < *puVar8);
   }
   if (uVar5 == 0xffffffff) {
-    uVar5 = *puVar9;
-    *puVar9 = uVar5 + 1;
-    pvVar8 = _realloc(pvVar8,(uVar5 + 1) * 4);
-    uVar5 = *puVar9;
-    puVar9[1] = (uint)pvVar8;
-    puVar4 = _malloc(8);
-    *(undefined4 **)((int)pvVar8 + uVar5 * 4 + -4) = puVar4;
+    uVar5 = *puVar8;
+    *puVar8 = uVar5 + 1;
+    uVar5 = _realloc(uVar2,(uVar5 + 1) * 4);
+    puVar8[1] = uVar5;
+    iVar1 = uVar5 + *puVar8 * 4;
+    puVar4 = (undefined4 *)_malloc(8);
+    *(undefined4 **)(iVar1 + -4) = puVar4;
     *puVar4 = param_2;
-    iVar1 = *(int *)((int)pvVar8 + uVar5 * 4 + -4);
+    iVar1 = *(int *)(iVar1 + -4);
   }
   else {
-    puVar4 = _malloc(8);
-    *(undefined4 **)((int)pvVar8 + uVar5 * 4) = puVar4;
+    puVar4 = (undefined4 *)_malloc(8);
+    *(undefined4 **)(uVar2 + uVar5 * 4) = puVar4;
     *puVar4 = param_2;
-    iVar1 = *(int *)((int)pvVar8 + uVar5 * 4);
+    iVar1 = *(int *)(uVar2 + uVar5 * 4);
   }
   *(undefined4 *)(iVar1 + 4) = param_3;
   return param_1;
@@ -646,8 +644,8 @@ int _HashTableRemove(param_1, param_2, param_3, param_4, param_5, param_6)
          (iVar3 = (*(code *)puVar4[3])
                             (**(undefined4 **)(uVar2 + iVar1),param_2,param_3,param_4,param_5,
                              param_6,a6), iVar3 == 0)) {
-        uVar7 = *(undefined4 *)((int)*(void **)(uVar2 + iVar1) + 4);
-        _free(*(void **)(uVar2 + iVar1));
+        uVar7 = *(undefined4 *)(*(int *)(uVar2 + iVar1) + 4);
+        _free(*(int *)(uVar2 + iVar1));
         *(undefined4 *)(uVar2 + iVar1) = 0;
         return uVar7;
       }
@@ -988,124 +986,124 @@ int _RegistersMerge(param_1)
   int param_1;
 {
   undefined4 *puVar1;
-  size_t sVar2;
-  bool bVar3;
-  int iVar4;
-  int *piVar5;
-  void *pvVar6;
-  void *pvVar7;
-  int *piVar8;
-  int iVar9;
+  bool bVar2;
+  int iVar3;
+  int *piVar4;
+  int iVar5;
+  undefined4 uVar6;
+  int *piVar7;
+  int iVar8;
+  uint uVar9;
   uint uVar10;
-  uint uVar11;
-  int iVar12;
+  int iVar11;
+  uint uVar12;
   uint uVar13;
   uint uVar14;
-  uint uVar15;
+  int iVar15;
   int iVar16;
   int local_50 [6];
   
-  pvVar6 = _malloc(8);
-  iVar12 = 0;
-  pvVar7 = _malloc(0x10);
-  piVar8 = _realloc(pvVar7,0x10);
+  iVar5 = _malloc(8);
+  iVar11 = 0;
+  uVar6 = _malloc(0x10);
+  piVar7 = (int *)_realloc(uVar6,0x10);
   iVar16 = 4;
-  uVar14 = 1;
-  iVar9 = 0;
-  piVar5 = piVar8;
+  uVar13 = 1;
+  iVar8 = 0;
+  piVar4 = piVar7;
   do {
-    iVar4 = *(int *)(param_1 + 0x10) + iVar9;
-    iVar9 = iVar9 + 0x2c;
-    *piVar5 = iVar4;
-    piVar5 = piVar5 + 1;
+    iVar3 = *(int *)(param_1 + 0x10) + iVar8;
+    iVar8 = iVar8 + 0x2c;
+    *piVar4 = iVar3;
+    piVar4 = piVar4 + 1;
     iVar16 = iVar16 + -1;
   } while (iVar16 != 0);
-  uVar13 = 4;
+  uVar12 = 4;
   if (4 < *(uint *)(param_1 + 0xc)) {
-    iVar9 = 0xb0;
+    iVar8 = 0xb0;
     do {
-      iVar16 = iVar9 + *(int *)(param_1 + 0x10);
-      iVar4 = 4;
-      piVar5 = local_50;
+      iVar16 = iVar8 + *(int *)(param_1 + 0x10);
+      iVar3 = 4;
+      piVar4 = local_50;
       do {
-        *piVar5 = iVar16;
-        piVar5 = piVar5 + 1;
+        *piVar4 = iVar16;
+        piVar4 = piVar4 + 1;
         iVar16 = iVar16 + 0x2c;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
-      bVar3 = false;
+        iVar3 = iVar3 + -1;
+      } while (iVar3 != 0);
+      bVar2 = false;
       iVar16 = ((int (*)())_RegisterVectorIsFixed)(local_50);
       if (iVar16 == 0) {
-        uVar15 = 0;
-        piVar5 = piVar8;
-        if (uVar14 != 0) {
+        uVar14 = 0;
+        piVar4 = piVar7;
+        if (uVar13 != 0) {
 LAB_97c09514:
-          iVar16 = ((int (*)())_RegisterVectorCanMerge)(piVar5,local_50);
+          iVar16 = ((int (*)())_RegisterVectorCanMerge)(piVar4,local_50);
           if (iVar16 == 0) goto LAB_97c09608;
-          iVar4 = 0;
+          iVar3 = 0;
           iVar16 = 3;
           do {
-            iVar12 = iVar12 + 1;
-            sVar2 = iVar12 * 8;
-            _BitSetOrEquals(*(undefined4 *)(*(int *)(iVar4 + (int)piVar5) + 8),
-                            *(undefined4 *)(*(int *)(iVar4 + (int)local_50) + 8));
-            *(int *)(*(int *)(iVar4 + (int)piVar5) + 0x24) =
-                 *(int *)(*(int *)(iVar4 + (int)piVar5) + 0x24) +
-                 *(int *)(*(int *)(iVar4 + (int)local_50) + 0x24);
-            *(undefined4 *)(*(int *)(iVar4 + (int)local_50) + 0x18) = 1;
-            ((int (*)())_RegistersReInterfere)(param_1,*(undefined4 *)(iVar4 + (int)local_50),
-                       *(undefined4 *)(iVar4 + (int)piVar5));
-            pvVar6 = _realloc(pvVar6,sVar2);
+            iVar11 = iVar11 + 1;
+            _BitSetOrEquals(*(undefined4 *)(*(int *)(iVar3 + (int)piVar4) + 8),
+                            *(undefined4 *)(*(int *)(iVar3 + (int)local_50) + 8));
+            *(int *)(*(int *)(iVar3 + (int)piVar4) + 0x24) =
+                 *(int *)(*(int *)(iVar3 + (int)piVar4) + 0x24) +
+                 *(int *)(*(int *)(iVar3 + (int)local_50) + 0x24);
+            *(undefined4 *)(*(int *)(iVar3 + (int)local_50) + 0x18) = 1;
+            ((int (*)())_RegistersReInterfere)(param_1,*(undefined4 *)(iVar3 + (int)local_50),
+                       *(undefined4 *)(iVar3 + (int)piVar4));
+            iVar5 = _realloc(iVar5,iVar11 * 8);
+            iVar15 = iVar5 + iVar11 * 8;
             iVar16 = iVar16 + -1;
-            *(undefined4 *)((int)pvVar6 + (sVar2 - 8)) = *(undefined4 *)(iVar4 + (int)local_50);
-            puVar1 = (undefined4 *)(iVar4 + (int)piVar5);
-            iVar4 = iVar4 + 4;
-            *(undefined4 *)((int)pvVar6 + (sVar2 - 4)) = *puVar1;
+            *(undefined4 *)(iVar15 + -8) = *(undefined4 *)(iVar3 + (int)local_50);
+            puVar1 = (undefined4 *)(iVar3 + (int)piVar4);
+            iVar3 = iVar3 + 4;
+            *(undefined4 *)(iVar15 + -4) = *puVar1;
           } while (-1 < iVar16);
-          if ((*(int *)(*piVar5 + 0x14) == 1) && (*(int *)(local_50[0] + 0x14) == 1)) {
-            iVar16 = *(int *)(*piVar5 + 0x28);
-            uVar11 = *(uint *)(iVar16 + 0xc);
-            uVar15 = *(uint *)(*(int *)(local_50[0] + 0x28) + 0xc) >> 0x18 & 3;
-            uVar10 = uVar11 >> 0x18 & 3;
-            if (uVar15 < uVar10) {
-              uVar15 = uVar10;
+          if ((*(int *)(*piVar4 + 0x14) == 1) && (*(int *)(local_50[0] + 0x14) == 1)) {
+            iVar16 = *(int *)(*piVar4 + 0x28);
+            uVar10 = *(uint *)(iVar16 + 0xc);
+            uVar14 = *(uint *)(*(int *)(local_50[0] + 0x28) + 0xc) >> 0x18 & 3;
+            uVar9 = uVar10 >> 0x18 & 3;
+            if (uVar14 < uVar9) {
+              uVar14 = uVar9;
             }
-            *(uint *)(iVar16 + 0xc) = uVar15 << 0x18 | uVar11 & 0xfcffffff;
+            *(uint *)(iVar16 + 0xc) = uVar14 << 0x18 | uVar10 & 0xfcffffff;
           }
-          bVar3 = true;
+          bVar2 = true;
         }
 LAB_97c09618:
-        if (!bVar3) goto LAB_97c09620;
+        if (!bVar2) goto LAB_97c09620;
       }
       else {
 LAB_97c09620:
-        uVar14 = uVar14 + 1;
-        piVar8 = _realloc(piVar8,uVar14 * 0x10);
-        iVar4 = 4;
+        uVar13 = uVar13 + 1;
+        piVar7 = (int *)_realloc(piVar7,uVar13 * 0x10);
+        iVar3 = 4;
         iVar16 = 0;
         do {
-          *(undefined4 *)((int)piVar8 + iVar16 + (uVar14 * 0x10 - 0x10)) =
+          *(undefined4 *)((int)piVar7 + iVar16 + uVar13 * 0x10 + -0x10) =
                *(undefined4 *)(iVar16 + (int)local_50);
           iVar16 = iVar16 + 4;
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          iVar3 = iVar3 + -1;
+        } while (iVar3 != 0);
       }
-      uVar13 = uVar13 + 4;
-      iVar9 = iVar9 + 0xb0;
-    } while (uVar13 < *(uint *)(param_1 + 0xc));
+      uVar12 = uVar12 + 4;
+      iVar8 = iVar8 + 0xb0;
+    } while (uVar12 < *(uint *)(param_1 + 0xc));
   }
-  if (piVar8 != (int *)0x0) {
-    _free(piVar8);
+  if (piVar7 != (int *)0x0) {
+    _free(piVar7);
   }
-  ((int (*)())_RegistersReplace)(param_1,iVar12,pvVar6);
-  if (pvVar6 != (void *)0x0) {
-    _free(pvVar6);
+  ((int (*)())_RegistersReplace)(param_1,iVar11,iVar5);
+  if (iVar5 != 0) {
+    _free(iVar5);
   }
   return;
 LAB_97c09608:
-  uVar15 = uVar15 + 1;
-  piVar5 = piVar5 + 4;
-  if (uVar14 <= uVar15) goto LAB_97c09618;
+  uVar14 = uVar14 + 1;
+  piVar4 = piVar4 + 4;
+  if (uVar13 <= uVar14) goto LAB_97c09618;
   goto LAB_97c09514;
 }
 
@@ -1536,40 +1534,39 @@ int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_5;
   undefined4 param_6;
 {
-  void *pvVar1;
+  int iVar1;
   int iVar2;
   int iVar3;
   int iVar4;
   int iVar5;
-  int iVar6;
   
-  iVar5 = param_4 + param_5 * 4;
-  if (*(uint *)(param_1 + 0xc) < iVar5 + 4U) {
-    pvVar1 = _realloc(*(void **)(param_1 + 0x10),iVar5 * 0x2c + 0xb0);
-    *(void **)(param_1 + 0x10) = pvVar1;
-    _memset((void *)(*(int *)(param_1 + 0xc) * 0x2c + (int)pvVar1),0,
-            (iVar5 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0);
-    *(uint *)(param_1 + 0xc) = iVar5 + 4U;
+  iVar4 = param_4 + param_5 * 4;
+  if (*(uint *)(param_1 + 0xc) < iVar4 + 4U) {
+    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
+    *(int *)(param_1 + 0x10) = iVar1;
+    _memset(*(int *)(param_1 + 0xc) * 0x2c + iVar1,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
+           );
+    *(uint *)(param_1 + 0xc) = iVar4 + 4U;
   }
-  iVar4 = iVar5 * 0x2c;
-  iVar6 = 4;
-  iVar2 = 0;
+  iVar3 = iVar4 * 0x2c;
+  iVar5 = 4;
+  iVar1 = 0;
   do {
-    iVar3 = *(int *)(param_1 + 0x10) + iVar4;
-    *(int *)(*(int *)(param_1 + 0x10) + iVar4) = iVar5 + iVar2;
-    *(int *)(iVar3 + 0xc) = iVar2;
-    iVar4 = iVar4 + 0x2c;
-    *(undefined4 *)(iVar3 + 0x28) = param_2;
-    iVar2 = iVar2 + 1;
-    *(undefined4 *)(iVar3 + 8) = 0;
-    *(undefined4 *)(iVar3 + 0x14) = param_3;
-    *(undefined4 *)(iVar3 + 0x10) = param_6;
-    *(int *)(iVar3 + 4) = param_5;
-    *(undefined4 *)(iVar3 + 0x18) = 0;
-    *(undefined4 *)(iVar3 + 0x1c) = 0;
-    *(undefined4 *)(iVar3 + 0x20) = 0;
-    iVar6 = iVar6 + -1;
-  } while (iVar6 != 0);
+    iVar2 = *(int *)(param_1 + 0x10) + iVar3;
+    *(int *)(*(int *)(param_1 + 0x10) + iVar3) = iVar4 + iVar1;
+    *(int *)(iVar2 + 0xc) = iVar1;
+    iVar3 = iVar3 + 0x2c;
+    *(undefined4 *)(iVar2 + 0x28) = param_2;
+    iVar1 = iVar1 + 1;
+    *(undefined4 *)(iVar2 + 8) = 0;
+    *(undefined4 *)(iVar2 + 0x14) = param_3;
+    *(undefined4 *)(iVar2 + 0x10) = param_6;
+    *(int *)(iVar2 + 4) = param_5;
+    *(undefined4 *)(iVar2 + 0x18) = 0;
+    *(undefined4 *)(iVar2 + 0x1c) = 0;
+    *(undefined4 *)(iVar2 + 0x20) = 0;
+    iVar5 = iVar5 + -1;
+  } while (iVar5 != 0);
   return 0;
 }
 
@@ -1594,19 +1591,17 @@ int _InstructionAdd(param_1, param_2, param_3)
   uint uVar2;
   int iVar3;
   uint uVar4;
-  void *pvVar5;
-  void *pvVar6;
+  undefined4 uVar5;
+  int iVar6;
   int iVar7;
   int iVar8;
-  int iVar9;
-  undefined4 uVar10;
-  uint uVar11;
+  uint uVar9;
+  int iVar10;
+  int *piVar11;
   int iVar12;
-  int *piVar13;
+  uint *puVar13;
   int iVar14;
-  uint *puVar15;
-  int iVar16;
-  int iVar17;
+  int iVar15;
   uint local_70 [5];
   int local_5c;
   int local_58;
@@ -1614,14 +1609,14 @@ int _InstructionAdd(param_1, param_2, param_3)
   
   iVar3 = *param_2;
   *param_2 = iVar3 + 1;
-  uVar11 = 0;
+  uVar9 = 0;
   bVar1 = false;
-  pvVar5 = _realloc((void *)param_2[1],(iVar3 + 1) * 0x1c);
-  iVar3 = *param_2;
-  param_2[1] = (int)pvVar5;
-  piVar13 = (int *)((int)pvVar5 + iVar3 * 0x1c + -0x1c);
-  *(undefined4 *)((int)pvVar5 + iVar3 * 0x1c + -0xc) = 0;
-  *(int *)((int)pvVar5 + iVar3 * 0x1c + -4) = param_3;
+  iVar3 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
+  param_2[1] = iVar3;
+  iVar3 = iVar3 + *param_2 * 0x1c;
+  piVar11 = (int *)(iVar3 + -0x1c);
+  *(undefined4 *)(iVar3 + -0xc) = 0;
+  *(int *)(iVar3 + -4) = param_3;
   switch(*(uint *)(param_3 + 0xc) >> 0x12 & 0xff) {
   case 0x4b:
   case 0x4c:
@@ -1638,22 +1633,22 @@ int _InstructionAdd(param_1, param_2, param_3)
   case 0x69:
   case 0x6a:
   case 0x6b:
-    *(undefined4 *)((int)pvVar5 + iVar3 * 0x1c + -0xc) = 1;
+    *(undefined4 *)(iVar3 + -0xc) = 1;
     break;
   case 0x6d:
     bVar1 = true;
   }
-  *piVar13 = 0;
-  iVar12 = 0;
-  *(undefined4 *)((int)pvVar5 + iVar3 * 0x1c + -8) = 0;
-  pvVar6 = _malloc(4);
-  *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18) = pvVar6;
-  iVar7 = ((int (*)())_GetValidArgs)(param_3);
-  iVar14 = param_3;
-  iVar17 = param_3;
-  if (0 < iVar7) {
+  *piVar11 = 0;
+  iVar10 = 0;
+  *(undefined4 *)(iVar3 + -8) = 0;
+  uVar5 = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x18) = uVar5;
+  iVar6 = ((int (*)())_GetValidArgs)(param_3);
+  iVar12 = param_3;
+  iVar15 = param_3;
+  if (0 < iVar6) {
     do {
-      uVar4 = *(uint *)(iVar17 + 0x1c);
+      uVar4 = *(uint *)(iVar15 + 0x1c);
       local_70[0] = 0;
       uVar2 = uVar4 >> 0xc & 3;
       local_70[1] = 0;
@@ -1661,16 +1656,16 @@ int _InstructionAdd(param_1, param_2, param_3)
       local_70[3] = 0;
       if (uVar2 == 1) {
 LAB_97c0a284:
-        *(undefined4 *)((int)local_70 + (*(uint *)(iVar17 + 0x1c) >> 0x11 & 0xc)) = 1;
+        *(undefined4 *)((int)local_70 + (*(uint *)(iVar15 + 0x1c) >> 0x11 & 0xc)) = 1;
 LAB_97c0a290:
-        *(undefined4 *)((int)local_70 + (*(uint *)(iVar17 + 0x1c) >> 0x13 & 0xc)) = 1;
+        *(undefined4 *)((int)local_70 + (*(uint *)(iVar15 + 0x1c) >> 0x13 & 0xc)) = 1;
       }
       else {
         if (1 < uVar2) {
           if (uVar2 != 2) {
             if (uVar2 != 3) goto LAB_97c0a29c;
             *(undefined4 *)((int)local_70 + (uVar4 >> 0xd & 0xc)) = 1;
-            uVar4 = *(uint *)(iVar17 + 0x1c);
+            uVar4 = *(uint *)(iVar15 + 0x1c);
           }
           *(undefined4 *)((int)local_70 + (uVar4 >> 0xf & 0xc)) = 1;
           goto LAB_97c0a284;
@@ -1678,127 +1673,126 @@ LAB_97c0a290:
         if (uVar2 == 0) goto LAB_97c0a290;
       }
 LAB_97c0a29c:
-      uVar2 = *(uint *)(iVar17 + 0x1c);
-      uVar11 = uVar11 | uVar2 >> 0x1f;
-      ((int (*)())_GetRegisterIndicies)(*param_1,local_70 + 4,&local_5c,uVar2 >> 0x17 & 7,(uint)*(ushort *)(iVar17 + 0x22),
+      uVar2 = *(uint *)(iVar15 + 0x1c);
+      uVar9 = uVar9 | uVar2 >> 0x1f;
+      ((int (*)())_GetRegisterIndicies)(*param_1,local_70 + 4,&local_5c,uVar2 >> 0x17 & 7,(uint)*(ushort *)(iVar15 + 0x22),
                  uVar2 >> 0x1f,uVar2 >> 0xe & 1,uVar2 >> 0xc & 3);
       if ((int)local_70[4] <= local_5c) {
         uVar2 = local_70[4];
         do {
-          iVar16 = 0;
-          puVar15 = local_70;
+          iVar14 = 0;
+          puVar13 = local_70;
           do {
-            uVar4 = *puVar15;
-            puVar15 = puVar15 + 1;
+            uVar4 = *puVar13;
+            puVar13 = puVar13 + 1;
             if ((uVar4 != 0) &&
-               (iVar8 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar14 + 0x1c) >> 0x17 & 7,uVar2,iVar16),
-               iVar8 != 0)) {
-              iVar8 = *piVar13;
-              *piVar13 = iVar8 + 1;
-              pvVar6 = _realloc(*(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18),(iVar8 + 1) * 4);
-              iVar8 = *piVar13;
-              *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18) = pvVar6;
-              iVar9 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar14 + 0x1c) >> 0x17 & 7,uVar2,iVar16);
-              *(int *)((int)pvVar6 + iVar8 * 4 + -4) = iVar9;
+               (iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,iVar14),
+               iVar7 != 0)) {
+              iVar7 = *piVar11;
+              *piVar11 = iVar7 + 1;
+              iVar7 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar7 + 1) * 4);
+              *(int *)(iVar3 + -0x18) = iVar7;
+              iVar7 = iVar7 + *piVar11 * 4;
+              iVar8 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,iVar14);
+              *(int *)(iVar7 + -4) = iVar8;
               uVar4 = 0;
-              *(uint *)(iVar9 + 0x1c) = *(uint *)(iVar9 + 0x1c) | *(uint *)(iVar14 + 0x1c) >> 0x1f;
-              iVar8 = *(int *)((int)pvVar6 + iVar8 * 4 + -4);
-              if (((*(uint *)(iVar14 + 0x1c) & 0x4000) != 0) &&
-                 (1 < (*(uint *)(iVar14 + 0x1c) >> 0xc & 3) + 1)) {
+              *(uint *)(iVar8 + 0x1c) = *(uint *)(iVar8 + 0x1c) | *(uint *)(iVar12 + 0x1c) >> 0x1f;
+              iVar7 = *(int *)(iVar7 + -4);
+              if (((*(uint *)(iVar12 + 0x1c) & 0x4000) != 0) &&
+                 (1 < (*(uint *)(iVar12 + 0x1c) >> 0xc & 3) + 1)) {
                 uVar4 = 1;
               }
-              *(uint *)(iVar8 + 0x20) = *(uint *)(iVar8 + 0x20) | uVar4;
+              *(uint *)(iVar7 + 0x20) = *(uint *)(iVar7 + 0x20) | uVar4;
             }
-            iVar16 = iVar16 + 1;
-          } while (iVar16 < 4);
+            iVar14 = iVar14 + 1;
+          } while (iVar14 < 4);
           uVar2 = uVar2 + 1;
         } while ((int)uVar2 <= local_5c);
       }
-      iVar12 = iVar12 + 1;
-      iVar14 = iVar14 + 8;
-      iVar17 = iVar17 + 8;
-    } while (iVar12 < iVar7);
+      iVar10 = iVar10 + 1;
+      iVar12 = iVar12 + 8;
+      iVar15 = iVar15 + 8;
+    } while (iVar10 < iVar6);
   }
   uVar2 = *(uint *)(param_3 + 0x14);
   local_70[1] = uVar2 >> 0xe & 1;
   local_70[3] = uVar2 >> 0x10 & 1;
   local_70[0] = uVar2 >> 0xd & 1;
   local_70[2] = uVar2 >> 0xf & 1;
-  *(undefined4 *)((int)pvVar5 + iVar3 * 0x1c + -0x14) = 0;
-  pvVar6 = _malloc(4);
-  *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x10) = pvVar6;
-  *(uint *)((int)pvVar5 + iVar3 * 0x1c + -0xc) =
-       *(uint *)((int)pvVar5 + iVar3 * 0x1c + -0xc) |
-       (uint)((*(uint *)(param_3 + 0x14) >> 0x11 & 7) == 3);
+  *(undefined4 *)(iVar3 + -0x14) = 0;
+  uVar5 = _malloc(4);
+  *(undefined4 *)(iVar3 + -0x10) = uVar5;
+  *(uint *)(iVar3 + -0xc) =
+       *(uint *)(iVar3 + -0xc) | (uint)((*(uint *)(param_3 + 0x14) >> 0x11 & 7) == 3);
   uVar4 = *(uint *)(param_3 + 0x14);
   uVar2 = *(uint *)(param_3 + 0x18);
   ((int (*)())_GetRegisterIndicies)(*param_1,&local_58,local_54,uVar4 >> 0x11 & 7,uVar2 & 0xffff,uVar2 >> 0x1f,
              uVar4 >> 0xc & 1,uVar4 >> 10 & 3);
   if (local_58 <= local_54[0]) {
-    iVar14 = local_58;
+    iVar12 = local_58;
     do {
-      iVar17 = 0;
-      puVar15 = local_70;
+      iVar15 = 0;
+      puVar13 = local_70;
       do {
-        uVar4 = *puVar15;
-        puVar15 = puVar15 + 1;
+        uVar4 = *puVar13;
+        puVar13 = puVar13 + 1;
         if (uVar4 != 0) {
-          iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar14,iVar17);
-          if (iVar7 != 0) {
-            iVar7 = *(int *)((int)pvVar5 + iVar3 * 0x1c + -0x14) + 1;
-            *(int *)((int)pvVar5 + iVar3 * 0x1c + -0x14) = iVar7;
-            pvVar6 = _realloc(*(void **)((int)pvVar5 + iVar3 * 0x1c + -0x10),iVar7 * 4);
-            iVar7 = *(int *)((int)pvVar5 + iVar3 * 0x1c + -0x14);
-            *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x10) = pvVar6;
-            iVar12 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar14,iVar17);
-            *(int *)((int)pvVar6 + iVar7 * 4 + -4) = iVar12;
+          iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
+          if (iVar6 != 0) {
+            iVar6 = *(int *)(iVar3 + -0x14) + 1;
+            *(int *)(iVar3 + -0x14) = iVar6;
+            iVar6 = _realloc(*(undefined4 *)(iVar3 + -0x10),iVar6 * 4);
+            *(int *)(iVar3 + -0x10) = iVar6;
+            iVar6 = iVar6 + *(int *)(iVar3 + -0x14) * 4;
+            iVar10 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
+            *(int *)(iVar6 + -4) = iVar10;
             uVar4 = 0;
-            *(uint *)(iVar12 + 0x1c) = *(uint *)(iVar12 + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
-            iVar7 = *(int *)((int)pvVar6 + iVar7 * 4 + -4);
+            *(uint *)(iVar10 + 0x1c) = *(uint *)(iVar10 + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
+            iVar6 = *(int *)(iVar6 + -4);
             if (((*(uint *)(param_3 + 0x14) & 0x1000) != 0) &&
                (1 < (*(uint *)(param_3 + 0x14) >> 10 & 3) + 1)) {
               uVar4 = 1;
             }
-            *(uint *)(iVar7 + 0x20) = *(uint *)(iVar7 + 0x20) | uVar4;
+            *(uint *)(iVar6 + 0x20) = *(uint *)(iVar6 + 0x20) | uVar4;
           }
           if ((bVar1 || (int)uVar2 < 0) &&
-             (iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar14,iVar17),
-             iVar7 != 0)) {
-            iVar7 = *piVar13;
-            *piVar13 = iVar7 + 1;
-            pvVar6 = _realloc(*(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18),(iVar7 + 1) * 4);
-            iVar7 = *piVar13;
-            *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18) = pvVar6;
-            uVar10 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar14,iVar17);
-            *(undefined4 *)((int)pvVar6 + iVar7 * 4 + -4) = uVar10;
+             (iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15),
+             iVar6 != 0)) {
+            iVar6 = *piVar11;
+            *piVar11 = iVar6 + 1;
+            iVar10 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
+            iVar6 = *piVar11;
+            *(int *)(iVar3 + -0x18) = iVar10;
+            uVar5 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,iVar15);
+            *(undefined4 *)(iVar10 + iVar6 * 4 + -4) = uVar5;
           }
         }
-        iVar17 = iVar17 + 1;
-      } while (iVar17 < 4);
-      iVar14 = iVar14 + 1;
-    } while (iVar14 <= local_54[0]);
+        iVar15 = iVar15 + 1;
+      } while (iVar15 < 4);
+      iVar12 = iVar12 + 1;
+    } while (iVar12 <= local_54[0]);
   }
-  if ((uVar11 != 0 || (int)uVar2 < 0) && (iVar14 = ((int (*)())_GetRegister)(param_1,4,0,0), iVar14 != 0)) {
-    iVar14 = *piVar13;
-    *piVar13 = iVar14 + 1;
-    pvVar6 = _realloc(*(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18),(iVar14 + 1) * 4);
-    iVar14 = *piVar13;
-    *(void **)((int)pvVar5 + iVar3 * 0x1c + -0x18) = pvVar6;
-    uVar10 = ((int (*)())_GetRegister)(param_1,4,0,0);
-    *(undefined4 *)((int)pvVar6 + iVar14 * 4 + -4) = uVar10;
+  if ((uVar9 != 0 || (int)uVar2 < 0) && (iVar12 = ((int (*)())_GetRegister)(param_1,4,0,0), iVar12 != 0)) {
+    iVar12 = *piVar11;
+    *piVar11 = iVar12 + 1;
+    iVar15 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
+    iVar12 = *piVar11;
+    *(int *)(iVar3 + -0x18) = iVar15;
+    uVar5 = ((int (*)())_GetRegister)(param_1,4,0,0);
+    *(undefined4 *)(iVar15 + iVar12 * 4 + -4) = uVar5;
   }
-  return piVar13;
+  return piVar11;
 }
 
 /* _InstructionFree @ 0x97c0a65c (88 bytes) */
 int _InstructionFree(param_1)
   int param_1;
 {
-  if (*(void **)(param_1 + 4) != (void *)0x0) {
-    _free(*(void **)(param_1 + 4));
+  if (*(int *)(param_1 + 4) != 0) {
+    _free(*(int *)(param_1 + 4));
   }
-  if (*(void **)(param_1 + 0xc) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0xc));
+  if (*(int *)(param_1 + 0xc) != 0) {
+    _free(*(int *)(param_1 + 0xc));
     return;
   }
   return;
@@ -1809,29 +1803,28 @@ int _BlockAdd(param_1)
   int param_1;
 {
   int iVar1;
-  void *pvVar2;
-  void *pvVar3;
+  undefined4 uVar2;
   
   iVar1 = *(int *)(param_1 + 4) + 1;
   *(int *)(param_1 + 4) = iVar1;
-  pvVar2 = _realloc(*(void **)(param_1 + 8),iVar1 * 0x2c);
-  iVar1 = *(int *)(param_1 + 4);
-  *(void **)(param_1 + 8) = pvVar2;
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0x2c) = 0;
-  pvVar3 = _malloc(0x1c);
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0x24) = 0;
-  *(void **)((int)pvVar2 + iVar1 * 0x2c + -0x28) = pvVar3;
-  pvVar3 = _malloc(4);
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0x1c) = 0;
-  *(void **)((int)pvVar2 + iVar1 * 0x2c + -0x20) = pvVar3;
-  pvVar3 = _malloc(4);
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -4) = 0;
-  *(void **)((int)pvVar2 + iVar1 * 0x2c + -0x18) = pvVar3;
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0x14) = 0;
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0x10) = 0;
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -0xc) = 0;
-  *(undefined4 *)((int)pvVar2 + iVar1 * 0x2c + -8) = 0;
-  return (int)pvVar2 + iVar1 * 0x2c + -0x2c;
+  iVar1 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
+  *(int *)(param_1 + 8) = iVar1;
+  iVar1 = iVar1 + *(int *)(param_1 + 4) * 0x2c;
+  *(undefined4 *)(iVar1 + -0x2c) = 0;
+  uVar2 = _malloc(0x1c);
+  *(undefined4 *)(iVar1 + -0x24) = 0;
+  *(undefined4 *)(iVar1 + -0x28) = uVar2;
+  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -0x1c) = 0;
+  *(undefined4 *)(iVar1 + -0x20) = uVar2;
+  uVar2 = _malloc(4);
+  *(undefined4 *)(iVar1 + -4) = 0;
+  *(undefined4 *)(iVar1 + -0x18) = uVar2;
+  *(undefined4 *)(iVar1 + -0x14) = 0;
+  *(undefined4 *)(iVar1 + -0x10) = 0;
+  *(undefined4 *)(iVar1 + -0xc) = 0;
+  *(undefined4 *)(iVar1 + -8) = 0;
+  return iVar1 + -0x2c;
 }
 
 /* _BlockFree @ 0x97c0a754 (236 bytes) */
@@ -1850,14 +1843,14 @@ int _BlockFree(param_1)
       iVar2 = iVar2 + 0x1c;
     } while (uVar1 < *param_1);
   }
-  if ((void *)param_1[1] != (void *)0x0) {
-    _free((void *)param_1[1]);
+  if (param_1[1] != 0) {
+    _free(param_1[1]);
   }
-  if ((void *)param_1[3] != (void *)0x0) {
-    _free((void *)param_1[3]);
+  if (param_1[3] != 0) {
+    _free(param_1[3]);
   }
-  if ((void *)param_1[5] != (void *)0x0) {
-    _free((void *)param_1[5]);
+  if (param_1[5] != 0) {
+    _free(param_1[5]);
   }
   if (param_1[6] != 0) {
     _BitSetFree(param_1[6]);
@@ -1997,8 +1990,8 @@ int _RegistersFree(param_1)
       ((int (*)())_RegisterFree)(iVar1);
     } while (uVar2 < *(uint *)(param_1 + 0xc));
   }
-  if (*(void **)(param_1 + 0x10) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x10));
+  if (*(int *)(param_1 + 0x10) != 0) {
+    _free(*(int *)(param_1 + 0x10));
     return;
   }
   return;
@@ -2010,15 +2003,14 @@ int _GetOrAddBlock(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  void *pvVar2;
+  int iVar2;
   undefined4 uVar3;
   
   iVar1 = param_2 * 4;
   if (*(uint *)(param_1 + 0x14) < param_2 + 1U) {
-    pvVar2 = _realloc(*(void **)(param_1 + 0x18),iVar1 + 4);
-    *(void **)(param_1 + 0x18) = pvVar2;
-    _memset((void *)(*(int *)(param_1 + 0x14) * 4 + (int)pvVar2),0,
-            (param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
+    iVar2 = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
+    *(int *)(param_1 + 0x18) = iVar2;
+    _memset(*(int *)(param_1 + 0x14) * 4 + iVar2,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
     *(uint *)(param_1 + 0x14) = param_2 + 1U;
   }
   if (*(int *)(iVar1 + *(int *)(param_1 + 0x18)) == 0) {
@@ -2074,7 +2066,7 @@ int _Blockify(param_1)
   int iVar7;
   undefined4 local_30 [6];
   
-  _memset((void *)param_1[6],0,param_1[5] << 2);
+  _memset(param_1[6],0,param_1[5] << 2);
   ((int (*)())_GetOrAddBlock)(param_1,0);
   iVar7 = **(int **)(*param_1 + 0x20);
   while (iVar7 != 0) {
@@ -2111,7 +2103,7 @@ int _Blockify(param_1)
 switchD_97c0ac70_caseD_4e:
     iVar7 = iVar5;
   }
-  _memset((void *)param_1[6],0,param_1[5] << 2);
+  _memset(param_1[6],0,param_1[5] << 2);
   local_30[0] = 0;
   ((int (*)())_GetBlockFrom)(param_1,0,local_30);
   iVar5 = *param_1;
@@ -2217,19 +2209,18 @@ int _BlockAddSuccessor(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  void *pvVar2;
   
   if ((param_1 != 0) && (param_2 != 0)) {
     iVar1 = *(int *)(param_2 + 8) + 1;
     *(int *)(param_2 + 8) = iVar1;
-    pvVar2 = _realloc(*(void **)(param_2 + 0xc),iVar1 * 4);
-    *(void **)(param_2 + 0xc) = pvVar2;
-    *(int *)((int)pvVar2 + *(int *)(param_2 + 8) * 4 + -4) = param_1;
+    iVar1 = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
+    *(int *)(param_2 + 0xc) = iVar1;
+    *(int *)(iVar1 + *(int *)(param_2 + 8) * 4 + -4) = param_1;
     iVar1 = *(int *)(param_1 + 0x10) + 1;
     *(int *)(param_1 + 0x10) = iVar1;
-    pvVar2 = _realloc(*(void **)(param_1 + 0x14),iVar1 * 4);
-    *(void **)(param_1 + 0x14) = pvVar2;
-    *(int *)((int)pvVar2 + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
+    iVar1 = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
+    *(int *)(param_1 + 0x14) = iVar1;
+    *(int *)(iVar1 + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
   }
   return;
 }
@@ -2261,8 +2252,8 @@ int _BlocksFree(param_1)
       ((int (*)())_BlockFree)(iVar1);
     } while (uVar2 < *(uint *)(param_1 + 4));
   }
-  if (*(void **)(param_1 + 8) != (void *)0x0) {
-    _free(*(void **)(param_1 + 8));
+  if (*(int *)(param_1 + 8) != 0) {
+    _free(*(int *)(param_1 + 8));
     return;
   }
   return;
@@ -2273,19 +2264,19 @@ int _ProgramNew(param_1)
   undefined4 param_1;
 {
   undefined4 *puVar1;
-  void *pvVar2;
+  undefined4 uVar2;
   
-  puVar1 = _malloc(0x44);
+  puVar1 = (undefined4 *)_malloc(0x44);
   *puVar1 = param_1;
   puVar1[1] = 0;
-  pvVar2 = _malloc(0x2c);
-  puVar1[2] = pvVar2;
+  uVar2 = _malloc(0x2c);
+  puVar1[2] = uVar2;
   puVar1[3] = 0;
-  pvVar2 = _malloc(0x2c);
-  puVar1[4] = pvVar2;
+  uVar2 = _malloc(0x2c);
+  puVar1[4] = uVar2;
   puVar1[5] = 0;
-  pvVar2 = _malloc(4);
-  puVar1[6] = pvVar2;
+  uVar2 = _malloc(4);
+  puVar1[6] = uVar2;
   puVar1[0x10] = 0;
   puVar1[7] = 0;
   puVar1[8] = 0;
@@ -2301,10 +2292,10 @@ int _ProgramNew(param_1)
 
 /* _ProgramFree @ 0x97c0b208 (76 bytes) */
 int _ProgramFree(param_1)
-  void *param_1;
+  int param_1;
 {
-  if (*(void **)((int)param_1 + 0x18) != (void *)0x0) {
-    _free(*(void **)((int)param_1 + 0x18));
+  if (*(int *)(param_1 + 0x18) != 0) {
+    _free(*(int *)(param_1 + 0x18));
   }
   ((int (*)())_RegistersFree)(param_1);
   ((int (*)())_BlocksFree)(param_1);
@@ -2481,7 +2472,7 @@ undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,
       if (((((uVar3 >> 0x10 & 0x1f) == 0x11) && ((uVar3 >> 0x1a & 7) == param_3)) &&
           ((uVar3 >> 0x18 & 3) == param_4)) && (uVar3 >> 0x1d == param_2)) {
         iVar1 = _PPStreamChunkListChunkAtIndex(*(undefined4 *)(param_1 + 0x2c),uVar3 & 0xffff);
-        iVar1 = _memcmp(&local_50,(void *)(iVar1 + 0xc),0x10);
+        iVar1 = _memcmp(&local_50,iVar1 + 0xc,0x10);
         if (iVar1 == 0) {
           return *(undefined2 *)(iVar5 + 0x12);
         }

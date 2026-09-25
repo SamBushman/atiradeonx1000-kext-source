@@ -146,11 +146,11 @@ int _FreeAtomTable(param_1)
 {
   _FreeStringTable(param_1);
   _FreeHashTable(param_1 + 0xc);
-  if (*(void **)(param_1 + 0x28) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x28));
+  if (*(int *)(param_1 + 0x28) != 0) {
+    _free(*(int *)(param_1 + 0x28));
   }
-  if (*(void **)(param_1 + 0x2c) != (void *)0x0) {
-    _free(*(void **)(param_1 + 0x2c));
+  if (*(int *)(param_1 + 0x2c) != 0) {
+    _free(*(int *)(param_1 + 0x2c));
   }
   *(undefined4 *)(param_1 + 0x34) = 0;
   *(undefined4 *)(param_1 + 0x28) = 0;
@@ -164,15 +164,12 @@ int _InitCPP()
 {
   undefined *puVar1;
   undefined4 uVar2;
-  size_t sVar3;
+  int iVar3;
   unsigned char _Var4;
   uint uVar5;
-  int iVar6;
+  char *pcVar6;
   char *pcVar7;
-  char *pcVar8;
-  char local_60 [4];
-  char local_5c [4];
-  char local_58;
+  char local_60 [63];
   char acStack_21 [9];
   
   puVar1 = PTR__atable_a7b7c0ac;
@@ -200,35 +197,27 @@ int _InitCPP()
   _extensionAtom = _LookUpAddString(*(undefined4 *)puVar1,"extension");
   uVar2 = ((int (*)())_mem_CreatePool)(0,0);
   _macros = _NewScopeInPool(uVar2);
-  local_60[0] = s_PROFILE__97c23f9c[0];
-  local_60[1] = s_PROFILE__97c23f9c[1];
-  local_60[2] = s_PROFILE__97c23f9c[2];
-  local_60[3] = s_PROFILE__97c23f9c[3];
-  local_5c[0] = s_PROFILE__97c23f9c[4];
-  local_5c[1] = s_PROFILE__97c23f9c[5];
-  local_5c[2] = s_PROFILE__97c23f9c[6];
-  local_5c[3] = s_PROFILE__97c23f9c[7];
-  local_58 = s_PROFILE__97c23f9c[8];
-  sVar3 = _strlen(local_60);
+  builtin_strncpy(local_60,"PROFILE_",9);
+  iVar3 = _strlen(local_60);
   puVar1 = PTR_DAT_a7b7c0a8;
-  pcVar7 = local_60 + sVar3;
-  pcVar8 = *(char **)(*(int *)PTR__cpp_a7b7c0a4 + 4);
+  pcVar6 = local_60 + iVar3;
+  pcVar7 = *(char **)(*(int *)PTR__cpp_a7b7c0a4 + 4);
   while( true ) {
-    uVar5 = (uint)*pcVar8;
+    uVar5 = (uint)*pcVar7;
     if ((uVar5 & 0xffffff80) == 0) {
       uVar5 = -(*(uint *)(puVar1 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
     }
     else {
-      iVar6 = ___maskrune(uVar5,0x500);
-      uVar5 = (uint)(iVar6 != 0);
+      iVar3 = ___maskrune(uVar5,0x500);
+      uVar5 = (uint)(iVar3 != 0);
     }
-    if (((uVar5 == 0) && (*pcVar8 != '_')) || (acStack_21 <= pcVar7)) break;
-    _Var4 = ___toupper((int)*pcVar8);
-    pcVar8 = pcVar8 + 1;
-    *pcVar7 = (char)_Var4;
+    if (((uVar5 == 0) && (*pcVar7 != '_')) || (acStack_21 <= pcVar6)) break;
+    _Var4 = ___toupper((int)*pcVar7);
     pcVar7 = pcVar7 + 1;
+    *pcVar6 = (char)_Var4;
+    pcVar6 = pcVar6 + 1;
   }
-  *pcVar7 = '\0';
+  *pcVar6 = '\0';
   return 1;
 }
 
@@ -281,7 +270,7 @@ int _CPPdefine(param_1)
   int iVar8;
   int local_150 [64];
   int local_50;
-  void *local_4c;
+  int local_4c;
   undefined4 local_48;
   undefined4 local_44;
   undefined2 local_40;
@@ -290,7 +279,7 @@ int _CPPdefine(param_1)
   puVar1 = PTR__cpp_a7b7c0a4;
   local_50 = 0;
   local_44 = 0;
-  local_4c = (void *)0x0;
+  local_4c = 0;
   local_48 = 0;
   iVar2 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
@@ -321,8 +310,8 @@ int _CPPdefine(param_1)
 LAB_97b86554:
       in_r5 = (int *)(iVar8 << 2);
       local_50 = iVar8;
-      local_4c = (void *)((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),in_r5);
-      _memcpy(local_4c,local_150,(size_t)in_r5);
+      local_4c = ((int (*)())_mem_Alloc)(*(undefined4 *)(_macros + 0x10),in_r5);
+      _memcpy(local_4c,local_150,in_r5);
       in_r9 = *(int *)PTR__cpp_a7b7c0a4;
       iVar2 = (**(code **)(*(int *)(in_r9 + 0x20) + 4))
                         (*(int *)(in_r9 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,in_r9);
@@ -359,7 +348,7 @@ LAB_97b86554:
         if (0 < local_50) {
           in_r8 = *(int *)(iVar8 + 0x1c);
           do {
-            in_r9 = *(int *)(iVar2 * 4 + (int)local_4c);
+            in_r9 = *(int *)(iVar2 * 4 + local_4c);
             if (*(int *)(iVar2 * 4 + in_r8) != in_r9) goto LAB_97b86728;
             iVar2 = iVar2 + 1;
           } while (iVar2 < local_50);
@@ -388,7 +377,7 @@ LAB_97b86728:
     iVar2 = 10;
     *(undefined4 *)(iVar8 + 0x24) = local_44;
     *(int *)(iVar8 + 0x18) = local_50;
-    *(void **)(iVar8 + 0x1c) = local_4c;
+    *(int *)(iVar8 + 0x1c) = local_4c;
     *(undefined4 *)(iVar8 + 0x20) = local_48;
   }
   else {
@@ -966,16 +955,16 @@ int _CPPifdef(param_1, param_2)
 
 /* _CPPline @ 0x97b872a0 (268 bytes) */
 int _CPPline(param_1)
-  int *param_1;
+  undefined4 *param_1;
 {
   undefined *puVar1;
   int iVar2;
-  int iVar3;
+  undefined4 uVar3;
+  int iVar4;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
-  undefined4 uVar4;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -992,31 +981,31 @@ int _CPPline(param_1)
     iVar2 = 10;
   }
   else {
-    uVar4 = extraout_r4;
+    uVar3 = extraout_r4;
     if (iVar2 == 0x10f) {
-      iVar2 = _atoi((char *)(param_1 + 3));
-      *param_1 = iVar2;
-      _SetLineNumber(iVar2);
+      uVar3 = _atoi(param_1 + 3);
+      *param_1 = uVar3;
+      _SetLineNumber(uVar3);
       iVar2 = *(int *)(*(int *)puVar1 + 0x20);
       iVar2 = (**(code **)(iVar2 + 4))(iVar2,param_1);
       if (iVar2 == 0x10f) {
-        iVar2 = _atoi((char *)(param_1 + 3));
-        *param_1 = iVar2;
-        _SetStringNumber(iVar2);
+        uVar3 = _atoi(param_1 + 3);
+        *param_1 = uVar3;
+        _SetStringNumber(uVar3);
         iVar2 = *(int *)(*(int *)puVar1 + 0x20);
-        iVar3 = (**(code **)(iVar2 + 4))(iVar2,param_1);
-        iVar2 = iVar3;
-        uVar4 = extraout_r4_02;
+        iVar4 = (**(code **)(iVar2 + 4))(iVar2,param_1);
+        iVar2 = iVar4;
+        uVar3 = extraout_r4_02;
       }
       else {
-        iVar3 = 10;
-        uVar4 = extraout_r4_01;
+        iVar4 = 10;
+        uVar3 = extraout_r4_01;
       }
       if (iVar2 == 10) {
-        return iVar3;
+        return iVar4;
       }
     }
-    _CPPErrorToInfoLog("#line",uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
+    _CPPErrorToInfoLog("#line",uVar3,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar2;
 }
@@ -1072,8 +1061,7 @@ int _CPPpragma(param_1)
   uint uVar3;
   undefined4 uVar4;
   undefined4 *puVar5;
-  size_t sVar6;
-  char *pcVar7;
+  int iVar6;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1082,87 +1070,87 @@ int _CPPpragma(param_1)
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
+  int iVar7;
   int iVar8;
-  int iVar9;
-  int iVar10;
-  char *pcVar11;
-  undefined4 *puVar12;
-  int iVar13;
+  undefined2 *puVar9;
+  undefined4 *puVar10;
+  int iVar11;
   undefined2 local_40 [10];
   
-  iVar8 = *(int *)PTR__cpp_a7b7c0a4;
-  iVar13 = 0;
-  uVar3 = (**(code **)(*(int *)(iVar8 + 0x20) + 4))
-                    (*(int *)(iVar8 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,iVar8);
+  iVar7 = *(int *)PTR__cpp_a7b7c0a4;
+  iVar11 = 0;
+  uVar3 = (**(code **)(*(int *)(iVar7 + 0x20) + 4))
+                    (*(int *)(iVar7 + 0x20),param_1,in_r5,in_r6,in_r7,in_r8,iVar7);
   if (uVar3 == 10) {
     _DecLineNumber();
-    _CPPErrorToInfoLog("#pragma",extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar8);
+    _CPPErrorToInfoLog("#pragma",extraout_r4,in_r5,in_r6,in_r7,in_r8,iVar7);
     _IncLineNumber();
     uVar4 = 10;
   }
   else {
-    puVar5 = _malloc(0x28);
+    puVar5 = (undefined4 *)_malloc(0x28);
     puVar2 = PTR__atable_a7b7c0ac;
     uVar4 = extraout_r4_00;
-    iVar9 = 10;
+    iVar6 = 10;
     do {
-      iVar10 = iVar9;
-      if (iVar9 <= iVar13) {
-        iVar10 = iVar9 << 1;
-        puVar5 = _realloc(puVar5,iVar9 << 3);
+      iVar8 = iVar6;
+      if (iVar6 <= iVar11) {
+        iVar8 = iVar6 << 1;
+        puVar5 = (undefined4 *)_realloc(puVar5,iVar6 << 3);
         uVar4 = extraout_r4_01;
       }
       if (uVar3 == 0x10b) {
 LAB_97b8758c:
-        pcVar11 = (char *)(param_1 + 0xc);
-        sVar6 = _strlen(pcVar11);
-        pcVar7 = _malloc(sVar6 + 1);
-        puVar5[iVar13] = pcVar7;
+        puVar9 = (undefined2 *)(param_1 + 0xc);
+        iVar6 = _strlen(puVar9);
+        uVar4 = _malloc(iVar6 + 1);
+        puVar5[iVar11] = uVar4;
       }
       else {
         if ((int)uVar3 < 0x10c) {
           if (uVar3 == 0xffffffff) {
             _CPPShInfoLogMsg("#pragma directive must end with a newline",uVar4,in_r5,in_r6,in_r7,
-                             in_r8,iVar8);
+                             in_r8,iVar7);
             return 0xffffffff;
           }
         }
         else {
           if (uVar3 == 0x10e) {
-            pcVar11 = (char *)_GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-            sVar6 = _strlen(pcVar11);
-            pcVar7 = _malloc(sVar6 + 1);
-            puVar5[iVar13] = pcVar7;
+            puVar9 = (undefined2 *)
+                     _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
+            iVar6 = _strlen(puVar9);
+            uVar4 = _malloc(iVar6 + 1);
+            puVar5[iVar11] = uVar4;
             goto LAB_97b875f0;
           }
           if (uVar3 == 0x10f) goto LAB_97b8758c;
         }
         local_40[0] = (undefined2)((uVar3 & 0xff) << 8);
-        pcVar7 = _malloc(2);
-        puVar5[iVar13] = pcVar7;
-        pcVar11 = (char *)local_40;
+        uVar4 = _malloc(2);
+        puVar5[iVar11] = uVar4;
+        puVar9 = local_40;
       }
 LAB_97b875f0:
-      iVar13 = iVar13 + 1;
-      _strcpy(pcVar7,pcVar11);
+      iVar11 = iVar11 + 1;
+      _strcpy(uVar4,puVar9);
       puVar1 = PTR__cpp_a7b7c0a4;
       uVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                         (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_1);
       uVar4 = extraout_r4_02;
-      iVar9 = iVar10;
+      iVar6 = iVar8;
     } while (uVar3 != 10);
-    iVar8 = *(int *)(*(int *)puVar1 + 0x20);
-    (**(code **)(iVar8 + 0xc))(iVar8,10,param_1);
-    _HandlePragma(puVar5,iVar13);
-    iVar8 = *(int *)(*(int *)puVar1 + 0x20);
-    uVar4 = (**(code **)(iVar8 + 4))(iVar8,param_1);
-    puVar12 = puVar5;
-    if (0 < iVar13) {
+    iVar7 = *(int *)(*(int *)puVar1 + 0x20);
+    (**(code **)(iVar7 + 0xc))(iVar7,10,param_1);
+    _HandlePragma(puVar5,iVar11);
+    iVar7 = *(int *)(*(int *)puVar1 + 0x20);
+    uVar4 = (**(code **)(iVar7 + 4))(iVar7,param_1);
+    puVar10 = puVar5;
+    if (0 < iVar11) {
       do {
-        _free((void *)*puVar12);
-        iVar13 = iVar13 + -1;
-        puVar12 = puVar12 + 1;
-      } while (iVar13 != 0);
+        _free(*puVar10);
+        iVar11 = iVar11 + -1;
+        puVar10 = puVar10 + 1;
+      } while (iVar11 != 0);
     }
     _free(puVar5);
   }
@@ -1207,7 +1195,7 @@ int _CPPversion(param_1)
     if (iVar2 != 0x10f) {
       _CPPErrorToInfoLog("#version",uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
-    iVar2 = _atoi((char *)(param_1 + 3));
+    iVar2 = _atoi(param_1 + 3);
     *param_1 = iVar2;
     if (iVar2 != 0x6e) {
       _CPPShInfoLogMsg("Version number not supported by GL2",extraout_r4_02,in_r5,in_r6,in_r7,in_r8,
@@ -1231,8 +1219,8 @@ int _CPPextension(param_1)
   undefined *puVar1;
   undefined *puVar2;
   int iVar3;
-  char *pcVar4;
-  undefined4 uVar5;
+  undefined4 uVar4;
+  char *pcVar5;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
@@ -1243,7 +1231,7 @@ int _CPPextension(param_1)
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r9;
-  char acStack_70 [92];
+  undefined1 auStack_70 [92];
   
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
@@ -1259,17 +1247,16 @@ int _CPPextension(param_1)
       _CPPErrorToInfoLog("#extension",extraout_r4,in_r5,in_r6,in_r7,in_r8,in_r9);
     }
     puVar2 = PTR__atable_a7b7c0ac;
-    pcVar4 = (char *)_GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8)
-                                   );
-    _strcpy(acStack_70,pcVar4);
+    uVar4 = _GetAtomString(*(undefined4 *)PTR__atable_a7b7c0ac,*(undefined4 *)(param_1 + 8));
+    _strcpy(auStack_70,uVar4);
     iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                       (*(int *)(*(int *)puVar1 + 0x20),param_1);
     if (iVar3 == 0x3a) {
       iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                         (*(int *)(*(int *)puVar1 + 0x20),param_1);
       if (iVar3 == 0x10e) {
-        uVar5 = _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
-        _updateExtensionBehavior(acStack_70,uVar5);
+        uVar4 = _GetAtomString(*(undefined4 *)puVar2,*(undefined4 *)(param_1 + 8));
+        _updateExtensionBehavior(auStack_70,uVar4);
         iVar3 = (**(code **)(*(int *)(*(int *)puVar1 + 0x20) + 4))
                           (*(int *)(*(int *)puVar1 + 0x20),param_1);
         if (iVar3 == 10) {
@@ -1278,14 +1265,14 @@ int _CPPextension(param_1)
         _CPPErrorToInfoLog("#extension",extraout_r4_03,in_r5,in_r6,in_r7,in_r8,in_r9);
         return iVar3;
       }
-      pcVar4 = "behavior for extension not specified";
-      uVar5 = extraout_r4_02;
+      pcVar5 = "behavior for extension not specified";
+      uVar4 = extraout_r4_02;
     }
     else {
-      pcVar4 = "\':\' missing after extension name";
-      uVar5 = extraout_r4_01;
+      pcVar5 = "\':\' missing after extension name";
+      uVar4 = extraout_r4_01;
     }
-    _CPPShInfoLogMsg(pcVar4,uVar5,in_r5,in_r6,in_r7,in_r8,in_r9);
+    _CPPShInfoLogMsg(pcVar5,uVar4,in_r5,in_r6,in_r7,in_r8,in_r9);
   }
   return iVar3;
 }
@@ -1455,7 +1442,7 @@ int _PushEofSrc()
   undefined4 *puVar3;
   int iVar4;
   
-  puVar3 = _malloc(0x18);
+  puVar3 = (undefined4 *)_malloc(0x18);
   uVar2 = DAT_a7b7b010;
   uVar1 = DAT_a7b7b00c;
   iVar4 = *(int *)PTR__cpp_a7b7c0a4;
@@ -1534,16 +1521,15 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar3;
   int *piVar4;
   int iVar5;
-  void *pvVar6;
-  int iVar7;
+  int iVar6;
   
   iVar5 = _ReadToken(*(undefined4 *)(param_1[6] + 8),param_2);
   puVar2 = PTR__cpp_a7b7c0a4;
   if (iVar5 == 0x10e) {
-    iVar7 = *(int *)param_1[6] + -1;
-    bVar1 = iVar7 < 0;
+    iVar6 = *(int *)param_1[6] + -1;
+    bVar1 = iVar6 < 0;
     if (!bVar1) {
-      piVar4 = (int *)(iVar7 * 4 + ((int *)param_1[6])[1]);
+      piVar4 = (int *)(iVar6 * 4 + ((int *)param_1[6])[1]);
       do {
         iVar3 = *piVar4;
         piVar4 = piVar4 + -1;
@@ -1551,13 +1537,13 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
           if (!bVar1) {
             param_3 = 0;
             _ReadFromTokenStream
-                      (*(undefined4 *)(iVar7 * 4 + param_1[7]),*(undefined4 *)(param_2 + 8),0);
+                      (*(undefined4 *)(iVar6 * 4 + param_1[7]),*(undefined4 *)(param_2 + 8),0);
             goto LAB_97b87fc4;
           }
           break;
         }
-        iVar7 = iVar7 + -1;
-        bVar1 = iVar7 < 0;
+        iVar6 = iVar6 + -1;
+        bVar1 = iVar6 < 0;
       } while (!bVar1);
     }
   }
@@ -1566,19 +1552,19 @@ int _macro_scan(param_1, param_2, param_3, param_4, param_5, param_6)
   }
   *(uint *)(param_1[6] + 0xc) = *(uint *)(param_1[6] + 0xc) & 0x7fffffff;
   *(undefined4 *)(*(int *)puVar2 + 0x20) = *param_1;
-  pvVar6 = (void *)param_1[7];
-  if (pvVar6 != (void *)0x0) {
-    iVar5 = *(int *)param_1[6] + -1;
-    if (-1 < iVar5) {
+  iVar5 = param_1[7];
+  if (iVar5 != 0) {
+    iVar6 = *(int *)param_1[6] + -1;
+    if (-1 < iVar6) {
       while( true ) {
-        _DeleteTokenStream(*(undefined4 *)(iVar5 * 4 + (int)pvVar6));
-        iVar5 = iVar5 + -1;
-        if (iVar5 < 0) break;
-        pvVar6 = (void *)param_1[7];
+        _DeleteTokenStream(*(undefined4 *)(iVar6 * 4 + iVar5));
+        iVar6 = iVar6 + -1;
+        if (iVar6 < 0) break;
+        iVar5 = param_1[7];
       }
-      pvVar6 = (void *)param_1[7];
+      iVar5 = param_1[7];
     }
-    _free(pvVar6);
+    _free(iVar5);
   }
   _free(param_1);
 LAB_97b87fc4:
@@ -1592,7 +1578,7 @@ LAB_97b87fc4:
 /* _MacroExpand @ 0x97b87ffc (1024 bytes) */
 int _MacroExpand(param_1, param_2)
   int param_1;
-  int *param_2;
+  undefined4 *param_2;
 {
   bool bVar1;
   bool bVar2;
@@ -1600,24 +1586,23 @@ int _MacroExpand(param_1, param_2)
   undefined *puVar4;
   undefined *puVar5;
   int iVar6;
-  undefined4 *puVar7;
-  void *pvVar8;
+  undefined4 uVar7;
+  undefined4 *puVar8;
   int iVar9;
   char *pcVar10;
-  undefined4 uVar11;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  int *in_r5;
+  undefined4 *in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   int *a6;
+  int iVar11;
   int iVar12;
-  int iVar13;
   
   iVar6 = _LookUpSymbol(_macros,param_1);
   if (param_1 == ___LINE__Atom) {
-    iVar6 = _GetLineNumber();
+    uVar7 = _GetLineNumber();
   }
   else {
     if (param_1 != ___FILE__Atom) {
@@ -1628,65 +1613,65 @@ int _MacroExpand(param_1, param_2)
         if ((int)*(uint *)(iVar6 + 0x24) < 0) {
           return 0;
         }
-        puVar7 = _malloc(0x20);
-        uVar11 = DAT_a7b7b008;
-        iVar12 = *(int *)PTR__cpp_a7b7c0a4;
-        puVar7[4] = 0;
-        puVar7[5] = 0;
-        puVar7[6] = 0;
-        puVar7[7] = 0;
-        *puVar7 = 0;
-        puVar7[2] = 0;
-        puVar7[3] = 0;
-        puVar7[1] = uVar11;
-        puVar7[5] = *(undefined4 *)(*(int *)(iVar12 + 0x20) + 0x14);
-        a6 = *(int **)(*(int *)(iVar12 + 0x20) + 0x10);
-        puVar7[6] = iVar6 + 0x18;
-        puVar7[4] = a6;
+        puVar8 = (undefined4 *)_malloc(0x20);
+        uVar7 = DAT_a7b7b008;
+        iVar11 = *(int *)PTR__cpp_a7b7c0a4;
+        puVar8[4] = 0;
+        puVar8[5] = 0;
+        puVar8[6] = 0;
+        puVar8[7] = 0;
+        *puVar8 = 0;
+        puVar8[2] = 0;
+        puVar8[3] = 0;
+        puVar8[1] = uVar7;
+        puVar8[5] = *(undefined4 *)(*(int *)(iVar11 + 0x20) + 0x14);
+        a6 = *(int **)(*(int *)(iVar11 + 0x20) + 0x10);
+        puVar8[6] = iVar6 + 0x18;
+        puVar8[4] = a6;
         if (*(int *)(iVar6 + 0x1c) != 0) {
-          iVar12 = (**(code **)(*(int *)(iVar12 + 0x20) + 4))
-                             (*(int *)(iVar12 + 0x20),param_2,in_r5,in_r6,in_r7,in_r8,a6,iVar12);
-          if (iVar12 != 0x28) {
-            _UngetToken(iVar12,param_2);
+          iVar11 = (**(code **)(*(int *)(iVar11 + 0x20) + 4))
+                             (*(int *)(iVar11 + 0x20),param_2,in_r5,in_r6,in_r7,in_r8,a6,iVar11);
+          if (iVar11 != 0x28) {
+            _UngetToken(iVar11,param_2);
             param_2[2] = param_1;
             return 0;
           }
-          pvVar8 = _malloc(*(int *)puVar7[6] << 2);
-          puVar7[7] = pvVar8;
-          iVar12 = 0;
-          if (0 < *(int *)puVar7[6]) {
+          uVar7 = _malloc(*(int *)puVar8[6] << 2);
+          puVar8[7] = uVar7;
+          iVar11 = 0;
+          if (0 < *(int *)puVar8[6]) {
             do {
               iVar9 = _NewTokenStream("macro arg",0);
-              a6 = (int *)puVar7[7];
-              iVar13 = iVar12 + 1;
-              a6[iVar12] = iVar9;
-              iVar12 = iVar13;
-            } while (iVar13 < *(int *)puVar7[6]);
+              a6 = (int *)puVar8[7];
+              iVar12 = iVar11 + 1;
+              a6[iVar11] = iVar9;
+              iVar11 = iVar12;
+            } while (iVar12 < *(int *)puVar8[6]);
           }
           puVar4 = PTR__cpp_a7b7c0a4;
-          iVar12 = 0;
+          iVar11 = 0;
           bVar3 = false;
 LAB_97b881d8:
           iVar9 = 0;
           do {
-            iVar13 = (**(code **)(*(int *)(*(int *)puVar4 + 0x20) + 4))
+            iVar12 = (**(code **)(*(int *)(*(int *)puVar4 + 0x20) + 4))
                                (*(int *)(*(int *)puVar4 + 0x20),param_2);
             puVar5 = PTR__cpp_a7b7c0a4;
-            bVar1 = 0 < iVar13;
+            bVar1 = 0 < iVar12;
             if (!bVar1) goto LAB_97b8830c;
-            a6 = (int *)puVar7[6];
-            bVar2 = iVar13 == 0x29;
+            a6 = (int *)puVar8[6];
+            bVar2 = iVar12 == 0x29;
             if ((*a6 == 0) && (!bVar2)) goto LAB_97b88284;
             if (iVar9 == 0) {
-              if (iVar13 == 0x2c) goto LAB_97b88284;
+              if (iVar12 == 0x2c) goto LAB_97b88284;
               if (bVar2) {
                 if ((*a6 != 1) || (bVar3)) {
-                  iVar12 = iVar12 + 1;
+                  iVar11 = iVar11 + 1;
                 }
                 goto LAB_97b88294;
               }
             }
-            if (iVar13 == 0x28) {
+            if (iVar12 == 0x28) {
               iVar9 = iVar9 + 1;
             }
             if (bVar2) {
@@ -1694,83 +1679,83 @@ LAB_97b881d8:
             }
             bVar3 = true;
             in_r5 = param_2;
-            _RecordToken(*(undefined4 *)(iVar12 * 4 + puVar7[7]),iVar13,param_2);
+            _RecordToken(*(undefined4 *)(iVar11 * 4 + puVar8[7]),iVar12,param_2);
           } while( true );
         }
         goto LAB_97b883b8;
       }
       param_2[3] = 0x31303000;
-      iVar6 = _atoi((char *)(param_2 + 3));
-      *param_2 = iVar6;
+      uVar7 = _atoi(param_2 + 3);
+      *param_2 = uVar7;
       goto LAB_97b88078;
     }
-    iVar6 = _GetStringNumber();
+    uVar7 = _GetStringNumber();
   }
-  *param_2 = iVar6;
-  _sprintf((char *)(param_2 + 3),"%d",iVar6);
+  *param_2 = uVar7;
+  _sprintf((char *)(param_2 + 3),"%d",uVar7);
 LAB_97b88078:
   _UngetToken(0x10f,param_2);
   return 1;
 LAB_97b88284:
-  iVar12 = iVar12 + 1;
-  if (*a6 <= iVar12) goto LAB_97b88294;
+  iVar11 = iVar11 + 1;
+  if (*a6 <= iVar11) goto LAB_97b88294;
   goto LAB_97b881d8;
 LAB_97b88294:
-  if (iVar12 < *a6) {
+  if (iVar11 < *a6) {
     pcVar10 = "Too few args in Macro ";
 LAB_97b8834c:
     _StoreStr(pcVar10);
-    uVar11 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
-    _StoreStr(uVar11);
-    uVar11 = _GetStrfromTStr();
-    _CPPShInfoLogMsg(uVar11,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
+    uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
+    _StoreStr(uVar7);
+    uVar7 = _GetStrfromTStr();
+    _CPPShInfoLogMsg(uVar7,extraout_r4_00,in_r5,in_r6,in_r7,in_r8,a6);
     _ResetTString();
-    a6 = (int *)puVar7[6];
+    a6 = (int *)puVar8[6];
   }
   else if (!bVar2) {
-    iVar12 = 0;
-    if (-1 < iVar13) {
+    iVar11 = 0;
+    if (-1 < iVar12) {
       bVar3 = false;
       do {
         if (bVar3) {
-          iVar12 = iVar12 + -1;
+          iVar11 = iVar11 + -1;
         }
         iVar9 = (**(code **)(*(int *)(*(int *)puVar5 + 0x20) + 4))
                           (*(int *)(*(int *)puVar5 + 0x20),param_2);
         if (iVar9 == 0x28) {
-          iVar12 = iVar12 + 1;
+          iVar11 = iVar11 + 1;
         }
         bVar1 = 0 < iVar9;
-      } while ((-1 < iVar9) && ((bVar3 = iVar9 == 0x29, 0 < iVar12 || (!bVar3))));
+      } while ((-1 < iVar9) && ((bVar3 = iVar9 == 0x29, 0 < iVar11 || (!bVar3))));
     }
     if (!bVar1) {
 LAB_97b8830c:
       _StoreStr("EOF in Macro ");
-      uVar11 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
-      _StoreStr(uVar11);
-      uVar11 = _GetStrfromTStr();
-      _CPPShInfoLogMsg(uVar11,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
+      uVar7 = ((int (*)())_GetStringOfAtom)(*(undefined4 *)PTR__atable_a7b7c0ac,param_1);
+      _StoreStr(uVar7);
+      uVar7 = _GetStrfromTStr();
+      _CPPShInfoLogMsg(uVar7,extraout_r4,in_r5,in_r6,in_r7,in_r8,a6);
       _ResetTString();
       return 1;
     }
     pcVar10 = "Too many args in Macro ";
     goto LAB_97b8834c;
   }
-  iVar12 = 0;
+  iVar11 = 0;
   if (0 < *a6) {
     do {
-      iVar9 = iVar12 * 4;
-      iVar12 = iVar12 + 1;
-      uVar11 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + puVar7[7]),param_2);
-      *(undefined4 *)(iVar9 + puVar7[7]) = uVar11;
-    } while (iVar12 < *(int *)puVar7[6]);
+      iVar9 = iVar11 * 4;
+      iVar11 = iVar11 + 1;
+      uVar7 = ((int (*)())_PrescanMacroArg)(*(undefined4 *)(iVar9 + puVar8[7]),param_2);
+      *(undefined4 *)(iVar9 + puVar8[7]) = uVar7;
+    } while (iVar11 < *(int *)puVar8[6]);
   }
 LAB_97b883b8:
   puVar4 = PTR__cpp_a7b7c0a4;
-  *puVar7 = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
+  *puVar8 = *(undefined4 *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20);
   *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 0x80000000;
   _RewindTokenStream(*(undefined4 *)(iVar6 + 0x20));
-  *(undefined4 **)(*(int *)puVar4 + 0x20) = puVar7;
+  *(undefined4 **)(*(int *)puVar4 + 0x20) = puVar8;
   return 1;
 }
 
@@ -1795,7 +1780,7 @@ int _InitCPPStruct()
   undefined1 *puVar3;
   int iVar4;
   
-  piVar2 = _malloc(0x158);
+  piVar2 = (int *)_malloc(0x158);
   uVar1 = 0;
   _cpp = piVar2;
   if (piVar2 != (int *)0x0) {
@@ -1895,7 +1880,7 @@ int _mem_CreatePool(param_1, param_2)
   puVar1 = (undefined4 *)0x0;
   if (((param_2 & uVar3) == 0) && (0x17 < param_1)) {
     if ((param_1 & uVar3) == 0) {
-      puVar2 = _malloc(param_1);
+      puVar2 = (undefined4 *)_malloc(param_1);
       puVar1 = (undefined4 *)0x0;
       if (puVar2 != (undefined4 *)0x0) {
         puVar2[2] = (int)puVar2 + param_1;
@@ -1913,18 +1898,18 @@ int _mem_CreatePool(param_1, param_2)
 
 /* _mem_FreePool @ 0x97b88768 (108 bytes) */
 int _mem_FreePool(param_1)
-  undefined4 *param_1;
+  int *param_1;
 {
   int *piVar1;
-  void *pvVar2;
+  int iVar2;
   
   for (piVar1 = (int *)param_1[5]; piVar1 != (int *)0x0; piVar1 = (int *)*piVar1) {
     (*(code *)piVar1[1])(piVar1[2]);
   }
-  while (param_1 != (void *)0x0) {
-    pvVar2 = (void *)*param_1;
+  while (param_1 != (int *)0x0) {
+    iVar2 = *param_1;
     _free(param_1);
-    param_1 = pvVar2;
+    param_1 = (int *)iVar2;
   }
   return;
 }
@@ -1952,7 +1937,7 @@ int _mem_Alloc(param_1, param_2)
     param_1[1] = uVar2;
     uVar1 = uVar1 + uVar5 + 4 & ~uVar5;
     if (uVar1 < (uint)param_1[3]) {
-      puVar3 = _malloc(param_1[3]);
+      puVar3 = (undefined4 *)_malloc(param_1[3]);
       if (puVar3 == (undefined4 *)0x0) {
         return 0;
       }
@@ -1960,7 +1945,7 @@ int _mem_Alloc(param_1, param_2)
       param_1[2] = (int)puVar3 + param_1[3];
     }
     else {
-      puVar3 = _malloc(uVar1);
+      puVar3 = (undefined4 *)_malloc(uVar1);
       if (puVar3 == (undefined4 *)0x0) {
         return 0;
       }
@@ -2090,7 +2075,7 @@ int _ScanFromString(param_1)
   undefined4 *puVar3;
   int iVar4;
   
-  puVar3 = _malloc(0x1c);
+  puVar3 = (undefined4 *)_malloc(0x1c);
   uVar1 = DAT_a7b7b038;
   uVar2 = DAT_a7b7b034;
   iVar4 = *(int *)PTR__cpp_a7b7c0a4;
