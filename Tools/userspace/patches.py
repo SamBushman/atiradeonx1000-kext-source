@@ -101,6 +101,75 @@ def _scoped(scope, fn):
 # (RETIRED 2026-09-25 - see the note in PATCHES.)
 
 
+def _body(what, body, decl_subs=()):
+    """Replace the whole function body (from the first `{` line) with `body`; `decl_subs` fix K&R parameter declarations first."""
+    def f(raw, conv):
+        conv = _subs(conv, decl_subs, what)
+        k = conv.find('\n{\n')
+        if k < 0:
+            raise PatchError('%s: no body' % what)
+        return conv[:k + 1] + body
+    return f
+
+
+# --- the private C++ unwinder's three entry points (glprog) -------------------------------------------------------------------------
+# _Unwind_RaiseException (stock 0x97c1bb6c), _Unwind_ForcedUnwind (0x97c1bd8c), _Unwind_Resume (0x97c1be20) are libgcc's unwind.inc (gcc 4.0), compiled
+# with __builtin_unwind_init and __builtin_eh_return: the prologue is `li r11,-frame; bl save_world` (the millicode saves every register and makes the
+# frame), the exit is `b eh_rest_world_r10` with r10 = the stack adjustment and the handler address stored in the LR slot (0x968(r1) / 0x5b8(r1)).
+# Ghidra cannot see the frame save_world creates: the decompile addressed the locals at entry-sp + x (STACKARG, in_stack_), i.e. inside the CALLERS'
+# frames, and called save_world / eh_rest_world_r10 as ordinary functions - the rebuilt _Unwind_RaiseException passed a garbage context and died
+# (SIGBUS in uw_init_context_1, Tests/userspace/eh_test.cpp). The bodies below are that source, field offsets read from the machine code:
+#   context 0x1d8 bytes (memcpy 0x1d8 at 0x97c1bbac), its return address at +0x1c0 (uw_init_context_1 0x97c1b79c; 0x3e0(r1) = cur + 0x1c0);
+#   fs.personality at +0x390 (0x790(r1), fs at 0x400(r1)); personality(1, _UA_SEARCH_PHASE, exception_class (r5:r6), exc, &cur) at 0x97c1bbdc..0x97c1bbf8;
+#   6 = _URC_HANDLER_FOUND, 8 = _URC_CONTINUE_UNWIND, else 3 = _URC_FATAL_PHASE1_ERROR; uw_frame_state_for 5 = _URC_END_OF_STACK;
+#   private_1 / private_2 = exc + 0xc / + 0x10 (0 and cur.ra = uw_identify_context, 0x97c1bc34..0x97c1bc38); Phase2 result 7 = _URC_INSTALL_CONTEXT,
+#   then uw_install_context_1(&this, &cur) is the offset and cur.ra the handler (0x97c1bc6c..0x97c1bc84); ForcedUnwind stores stop / stop_argument
+#   (0x97c1bde4 / 0x97c1bdec); Resume picks the phase-2 routine by private_1 == 0 (0x97c1be68) and aborts unless it returns 7 (0x97c1be98).
+# The compiler generates the save_world / eh_rest_world_r10 calls itself (link_config glprog.json drops the stock copies as toolchain millicode).
+_UW_LOCALS = """  double this_context[0x1d8 / 8], cur_context[0x1d8 / 8];
+  double fs[0x3d0 / 8];
+  long offset;
+  int code;
+"""
+_UW_INIT = """  __builtin_unwind_init();
+  ((int (*)())_uw_init_context_1)(this_context, __builtin_dwarf_cfa(), __builtin_return_address(0));
+  _memcpy(cur_context, this_context, 0x1d8);
+"""
+_UW_INSTALL = """  offset = ((int (*)())_uw_install_context_1)(this_context, cur_context);
+  __builtin_eh_return(offset, __builtin_frob_return_addr(*(void **)((char *)cur_context + 0x1c0)));
+"""
+_UW_RAISE = "{\n" + _UW_LOCALS + _UW_INIT + """  while (1) {
+    void *pers;
+    code = ((int (*)())_uw_frame_state_for)(cur_context, fs);
+    if (code == 5) return 5;
+    if (code != 0) return 3;
+    pers = *(void **)((char *)fs + 0x390);
+    if (pers != 0) {
+      code = ((int (*)(int, int, unsigned long long, void *, void *))pers)(1, 1, exception_object->exception_class, exception_object, cur_context);
+      if (code == 6) break;
+      if (code != 8) return 3;
+    }
+    ((int (*)())_uw_update_context)(cur_context, fs);
+  }
+  exception_object->private_1 = 0;
+  exception_object->private_2 = *(unsigned long *)((char *)cur_context + 0x1c0);
+  _memcpy(cur_context, this_context, 0x1d8);
+  code = ((int (*)())__Unwind_RaiseException_Phase2)(exception_object, cur_context);
+  if (code != 7) return code;
+""" + _UW_INSTALL + "}\n"
+_UW_FORCED = "{\n" + _UW_LOCALS + _UW_INIT + """  exception_object->private_1 = (unsigned long)stop;
+  exception_object->private_2 = (unsigned long)stop_parameter;
+  code = ((int (*)())__Unwind_ForcedUnwind_Phase2)(exception_object, cur_context);
+  if (code != 7) return code;
+""" + _UW_INSTALL + "}\n"
+_UW_RESUME = "{\n" + _UW_LOCALS + _UW_INIT + """  if (exception_object->private_1 == 0)
+    code = ((int (*)())__Unwind_RaiseException_Phase2)(exception_object, cur_context);
+  else
+    code = ((int (*)())__Unwind_ForcedUnwind_Phase2)(exception_object, cur_context);
+  if (code != 7) _abort();
+""" + _UW_INSTALL + "}\n"
+
+
 def _fix_two_empty_cases(conv):
     n = conv.count('case "":')
     if n != 2:
@@ -177,6 +246,11 @@ PATCHES = {
 
     # __cxxabiv1::__terminate / __unexpected (glprog, stock 0x97c19de8 / 0x97c19e44): `mtspr ctr,r3; bctrl` (0x97c19df4..0x97c19dfc) calls the handler
     # passed in r3. Ghidra typed the handler as a plain byte pointer; C: call it as a function pointer.
+    # the private unwinder's entry points: see _UW_RAISE above (ForcedUnwind's `stop` is a function pointer - stock stores the whole r4, 0x97c1bde4 -
+    # Ghidra typed it `unsigned char`)
+    '__Unwind_RaiseException': _scoped('glprog', _body('_Unwind_RaiseException (0x97c1bb6c)', _UW_RAISE)),
+    '__Unwind_ForcedUnwind': _scoped('glprog', _body('_Unwind_ForcedUnwind (0x97c1bd8c)', _UW_FORCED, (('  unsigned char stop;\n', '  void *stop;\n'),))),
+    '__Unwind_Resume': _scoped('glprog', _body('_Unwind_Resume (0x97c1be20)', _UW_RESUME)),
     '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
     '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 

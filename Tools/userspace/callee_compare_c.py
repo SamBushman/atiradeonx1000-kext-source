@@ -54,6 +54,11 @@ def is_millicode(t):
         saves = [1 for _, op, r in ops if op in ('stfd', 'lfd', 'stw', 'lwz', 'stmw', 'lmw') and re.match(r'^[rf](1[3-9]|2\d|3[01])', r)]
         bad = [1 for _, op, r in ops if op in ('bl', 'bc', 'bdnz', 'cmpwi', 'cmplwi', 'cmpw', 'beq', 'bne', 'blt', 'bgt', 'ble', 'bge', 'bctrl')]
         res = len(saves) >= 3 and not bad
+        # a mid-entry piece of saveFP/restFP that Ghidra split off (GLDriver FUN_001a3254 = `stfd f24,-0x40(r1)`, 4 bytes, falling into the next
+        # piece): nothing but callee-saved register saves/restores, the LR word and the return
+        if not res and ops and all((op in ('stfd', 'lfd') and re.match(r'^f(1[4-9]|2\d|3[01]),', r)) or (op in ('stw', 'lwz') and r.startswith('r0,0x8(r1)'))
+                                   or (op == 'mtspr' and r.startswith('lr,')) or op == 'blr' for _, op, r in ops):
+            res = True
     _mc[t] = res; return res
 def stock_callees(a, sz):
     return count_range(franges.get(a) or [(a, a + sz)])

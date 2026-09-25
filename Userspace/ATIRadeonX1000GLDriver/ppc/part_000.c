@@ -1048,7 +1048,7 @@ int FUN_000027d0(param_1, param_2)
 }
 
 /* FUN_00002ae0 @ 0x2ae0 (88 bytes) */
-void FUN_00002ae0(int param_1,double fparam_1)
+void FUN_00002ae0(int param_1,undefined4 param_2,double fparam_1)
 {
   float fVar1;
   float fVar2;
@@ -1073,7 +1073,6 @@ void FUN_00002ae0(int param_1,double fparam_1)
   uint uVar20;
   void *pvVar22;
   int iVar23;
-  undefined4 in_r4;
   undefined1 *puVar24;
   undefined2 *puVar25;
   int iVar26;
@@ -1121,7 +1120,7 @@ void FUN_00002ae0(int param_1,double fparam_1)
   if (iVar28 == 0) {
     return;
   }
-  switch(in_r4) {
+  switch(param_2) {
   case 0x100:
     if ((*(uint *)(param_1 + 0x154) & 3) == 0) {
       iVar28 = *(int *)(param_1 + 0x10);
@@ -1165,7 +1164,7 @@ void FUN_00002ae0(int param_1,double fparam_1)
       }
       pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
       FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22);
+                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22,2,0);
       uVar31 = uVar29 + iVar28;
       if (fparam_1 < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(param_1 + 0x140) = 1;
@@ -1267,7 +1266,7 @@ void FUN_00002ae0(int param_1,double fparam_1)
       }
       pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
       FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22);
+                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22,2,0);
       uVar31 = uVar29 + iVar28;
       if (fparam_1 < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(param_1 + 0x140) = 1;
@@ -1373,7 +1372,7 @@ void FUN_00002ae0(int param_1,double fparam_1)
       }
       pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
       FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22);
+                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8367,pvVar22,2,0);
       uVar31 = uVar29 + iVar28;
       if (fparam_1 < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(param_1 + 0x140) = 1;
@@ -1521,7 +1520,7 @@ void FUN_00002ae0(int param_1,double fparam_1)
       }
       pvVar22 = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
       FUN_00029290(param_1,0,0,*(int *)(param_1 + 0x15c) + 7U & 0xfffffff8,
-                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22);
+                   *(undefined4 *)(param_1 + 0x160),0x80e1,0x8366,pvVar22,2,0);
       uVar31 = uVar29 + iVar28;
       if (fparam_1 < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(param_1 + 0x140) = 1;

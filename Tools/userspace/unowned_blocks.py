@@ -5,7 +5,8 @@ attributed to the function whose own span contains it (or the nearest preceding 
   table        .long words only (embedded switch offset tables)
   eh-pad       C++ exception landing pad (ends in _Unwind_Resume; reachable only through the unwinder, so no decompile can show it)
   millicode    register save/restore helper entry (mfcr / stfd/lfd runs)
-  switch-code  case code following a switch table (in a decompile only if the switch was recovered)
+  switch-code  case code following a switch table that no owner RANGES covers (after Stage B3 step 10: only the dead cases of glprog's
+               constant-index tables)
   other        anything else
 Columns: start, end, kind, owner function, instruction count, calls made (names)."""
 import sys, re, bisect
@@ -42,6 +43,15 @@ def owner(a):
         if lo <= a < hi: return n          # inside a function's own span
         if best is None: best = n
     return best or '?'
+ri = {a: i for i, (a, _, _) in enumerate(rows)}
+def guarded_table_len(a):
+    """entries of the embedded table starting at `a` (the word after a `bctr`), from the `cmplwi crN,rX,MAX` guard before it; 0 if none"""
+    i = ri.get(a - 4)
+    if i is None or rows[i][1] != 'bctr': return 0
+    for j in range(i - 1, max(-1, i - 32), -1):
+        m = re.match(r'cr\d,r\d+,(0x[0-9a-f]+|\d+)$', rows[j][2])
+        if rows[j][1] == 'cmplwi' and m: return int(m.group(1), 0) + 1
+    return 0
 unc = []
 for a, op, rest in rows:
     k = bisect.bisect_right(mi, a) - 1
@@ -62,6 +72,8 @@ with open(out, 'w') as f:
         elif all(o == '.long' for o in ops): k = 'table'
         elif 'Unwind_Resume' in txt: k = 'eh-pad'
         elif len(b) <= 40 and all(o in ('stfd', 'lfd', 'stw', 'lwz', 'stmw', 'lmw', 'blr', 'b', 'mfcr', 'mtcrf', 'mtocrf', 'mfspr', 'mtspr', 'nop') for o in ops): k = 'millicode'
+        elif guarded_table_len(b[0][0]) >= len(b) - next((i for i, o in enumerate(reversed(ops)) if o != 'nop'), 0): k = 'table'   # a table right after
+            # its bctr (plus alignment nops) whose words otool shows as instructions (a negative offset as an FP op, 0x200 as attn)
         elif '.long' in ops[:8]: k = 'switch-code'
         else: k = 'other'
         cnt[k] = cnt.get(k, 0) + 1

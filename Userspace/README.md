@@ -196,10 +196,24 @@ reaches - crashed it at one defect after another. Each was traced to a CLASS and
   stock table); 39 functions printed `void` whose callers read their r3 result; 46 variadic calls missing arguments; by-value iterator/tag
   parameters that made the decompiler misattribute call arguments (42 functions carried Ghidra's own "Heritage AFTER dead removal" warning, now 0).
 
+* **stack parameters** (9th+ argument words, stored by the caller at 0x38(r1)): Ghidra's PowerPC cspec is SysV and never declares them, so the
+  callee read them as uninitialised locals (`in_stack_00000038`) and callers dropped them. `_glpDisassemble2Op` gets the address of its caller's
+  flag word as argument 9; without it the word looked unaliased, the flag tests of `_glpPPShaderToProgramString` folded to constants ("Removing
+  unreachable block", 157 blocks) and the rebuilt image never printed `TEMP scratch;`. Fixed in the analysed copies (Stage B3 step 8: 14 glprog, 70
+  GLDriver functions get Darwin stack storage, callers re-decompiled); any `in_stack_` at a non-negative offset left over now reads the entry stack
+  pointer's memory (ghidra2c), like the `uStack` names.
+* **the private unwinder's entry points** (`_Unwind_RaiseException` / `_ForcedUnwind` / `_Resume`, glprog): built with `__builtin_unwind_init` +
+  `__builtin_eh_return`, so `save_world` makes their frame and `eh_rest_world_r10` leaves it; the decompile put their locals in the callers'
+  frames and called the millicode as functions (a throw died with SIGBUS). They are rebuilt from the libgcc source they came from (patches.py
+  `_UW_RAISE`, offsets from the machine code); a throw now ends in SIGABRT like the stock, but by a different path (see issue #63: the rebuilt code
+  has no FDEs in the image's private frame registry, so `uw_init_context_1` aborts where the stock unwinds to the foreign frame and terminates).
+
 State of the GLSL probe (`Tests/userspace/glsl_probe.c`, 2026-09-25): the rebuilt image compiles `void main() { gl_Position = ftransform(); }` end to end
-(built-in symbol table, parse, identical intermediate tree, code generation) and prints the same ARB program as the stock except one line: the
-stock declares `TEMP scratch;`, the rebuilt does not (under investigation: the code that writes it is not in any decompile). The behavioural tests of the
-table above still pass on the new link.
+(built-in symbol table, parse, identical intermediate tree, code generation) and prints the same ARB program as the stock (the only differing lines are
+two heap addresses the probe prints). Of glprog's remaining "Removing unreachable block" warnings (9 blocks in 4 functions) every one is dead in the
+stock code too: `_byte_scan` 0x97b89adc (r3 == 0xa just tested), `_ShCompile` 0x97ba1188 (`subf r9,r0,r0` = 0 compared `<=`), `std::operator+`
+0x97c32c14 (`cmplw r0,r0`), `_UnrollConstantLoopsSimple` 0x97c10090.. (the switch field, bits 20-21, was cleared by `rlwinm r0,r0,0,24,19` just before).
+The behavioural tests of the table above still pass on the new link.
 
 ### Known residuals (explained, not hidden)
 
@@ -208,6 +222,12 @@ table above still pass on the new link.
   differences (`memset` and one unnamed stub call).
 
 * GLDriver `FUN_00018120`: calls `free` through a non-lazy pointer (`(*PTR_...)(p)`); the stock code tail-calls the stub. Same behaviour.
+* Callee comparison after Stage B3 (2026-09-25): glprog 5 functions differ - `handleDigit` (self-recursion, the stock `bl` target decoded = its own
+  entry), `___register_frame_table` (the stock tail-jumps to the 2-instruction thunk `register_frame_info_table` = `_bases(a, b, 0, 0)`, which the C
+  calls directly), the two dead range checks below, and the unwinder's `eh_rest_world_r10` (issue #63); GLDriver 2 differ (`FUN_00018120` below,
+  `FUN_000a7050` calls `FUN_000a6f70` directly where the stock calls through the pointer it has just stored at +0x24c - same target) and 4 jump-table functions have callees in never-transcribed case blocks
+  (`FUN_00002ae0`, `FUN_000d0488`, `FUN_000d0888`, `FUN_000f94dc`: open, issue #67). callee_compare_c.py now also counts a 4-8 byte piece of
+  saveFP/restFP (Ghidra split the millicode at every entry the stock uses) as millicode - 9 GLDriver and 2 glprog false differences.
 * libGLProgrammability: calls through `PTR_LAB_...` (`yy_flex_alloc/free/realloc`, `eh_rest_world_r10`, a `memset` in one orphan), name aliases
   (`__register_frame_table`, `std::__default_alloc_template<true,0>::_Lock`), a call to a bare `blr` stub, and two libstdc++ range checks Ghidra
   proved unreachable (`_ShCompile`: `if (0 > max_size) __throw_length_error`; `std::operator+`: `if (0 > size()) __throw_out_of_range`).

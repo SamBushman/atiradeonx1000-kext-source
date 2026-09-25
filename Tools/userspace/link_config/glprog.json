@@ -3,6 +3,10 @@
   "NAN",
   "_URC_FOREIGN_EXCEPTION_CAUGHT"
  ],
+ "toolchain_functions": [
+  "save_world",
+  "eh_rest_world_r10"
+ ],
  "prelude": [
   "#define _URC_FOREIGN_EXCEPTION_CAUGHT 1"
  ],

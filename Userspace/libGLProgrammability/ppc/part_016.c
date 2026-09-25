@@ -1689,7 +1689,7 @@ switchD_97be7d14_default:
 }
 
 /* _glpWriteSourceOperand_97be7fc0 @ 0x97be7fc0 (380 bytes) */
-int _glpWriteSourceOperand_97be7fc0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glpWriteSourceOperand_97be7fc0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   undefined4 param_3;
@@ -1698,11 +1698,11 @@ int _glpWriteSourceOperand_97be7fc0(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_6;
   int param_7;
   int param_8;
+  int param_9;
 {
   char cVar1;
   int iVar2;
   int iVar3;
-  int in_stack_00000038;
   
   iVar2 = param_7 * 8;
   if ((*(uint *)(iVar2 + param_1) & 0x8000000) != 0) {
@@ -1727,7 +1727,7 @@ int _glpWriteSourceOperand_97be7fc0(param_1, param_2, param_3, param_4, param_5,
   }
   iVar3 = ((int (*)())_glpWriteSourceOperandType)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
   if ((*(uint *)(iVar2 + param_1) >> 0x17 & 7) != 4) {
-    if (in_stack_00000038 == 0) {
+    if (param_9 == 0) {
       iVar3 = ((int (*)())_glpWriteSourceOperandSwizzle)(param_1,iVar3,param_7,param_8);
     }
     else {
@@ -1998,7 +1998,7 @@ switchD_97be857c_default:
 }
 
 /* _glpDisassemble1Op @ 0x97be8778 (4416 bytes) */
-int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11)
   uint *param_1;
   int param_2;
   int *param_3;
@@ -2007,6 +2007,9 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  int *param_10;
+  uint param_11;
 {
   uint uVar1;
   char cVar2;
@@ -2023,15 +2026,12 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
   int iVar13;
   int iVar14;
   undefined1 *puVar15;
-  undefined4 in_stack_00000038;
-  int *in_stack_0000003c;
-  byte in_stack_00000043;
   
   iVar13 = 0;
   uVar1 = *param_1;
-  iVar10 = *in_stack_0000003c;
+  iVar10 = *param_10;
   uVar3 = param_1[1];
-  uVar12 = (uint)in_stack_00000043;
+  uVar12 = param_11 & 0xff;
   uVar11 = uVar1 >> 0x12 & 0xff;
   iVar9 = 0;
   iVar14 = param_2;
@@ -2047,7 +2047,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
           cVar2 = "  "[iVar5 + 1];
           iVar5 = iVar4;
         } while (cVar2 != '\0');
-        iVar10 = *in_stack_0000003c;
+        iVar10 = *param_10;
       }
       iVar9 = iVar9 + 1;
       iVar14 = iVar14 + iVar4;
@@ -2130,7 +2130,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar13 = 2;
     if (uVar1 >> 0x1d != 2) break;
     iVar14 = 0;
@@ -2195,7 +2195,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar13 = 2;
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
@@ -2236,7 +2236,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -2246,7 +2246,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
     }
     iVar13 = 3;
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -2278,7 +2278,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,1);
     iVar13 = 3;
     break;
   case 0x42:
@@ -2304,7 +2304,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar10 = 2;
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
@@ -2339,7 +2339,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -2361,7 +2361,7 @@ int _glpDisassemble1Op(param_1, param_2, param_3, param_4, param_5, param_6, par
 LAB_97be9620:
     iVar13 = iVar13 + 1;
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15 + iVar14,param_5,param_6,param_7,param_8,iVar13,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15 + iVar14,param_5,param_6,param_7,param_8,iVar13,uVar12,0);
     break;
   case 0x48:
   case 0x49:
@@ -2399,7 +2399,7 @@ LAB_97be9928:
       iVar14 = iVar14 + 1;
     }
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteBranchOperand)(param_1,puVar15 + iVar14,in_stack_00000038,1,(uint)(uVar11 == 0x4b));
+              ((int (*)())_glpWriteBranchOperand)(param_1,puVar15 + iVar14,param_9,1,(uint)(uVar11 == 0x4b));
   case 0x4d:
   case 0x54:
   case 0x59:
@@ -2421,7 +2421,7 @@ LAB_97be8e48:
     }
     goto LAB_97be9988;
   case 0x55:
-    *in_stack_0000003c = *in_stack_0000003c + 1;
+    *param_10 = *param_10 + 1;
     if (uVar12 != 0) {
       uVar1 = param_1[1];
       iVar9 = ((int (*)())_glpWriteSizeType)(puVar15,uVar1 >> 0x1a & 3,uVar1 >> 0x1c & 1,uVar1 >> 0x17 & 7);
@@ -2526,7 +2526,7 @@ switchD_97be8b04_default:
     break;
   case 0x56:
   case 0x57:
-    *in_stack_0000003c = *in_stack_0000003c + 1;
+    *param_10 = *param_10 + 1;
     iVar14 = 0;
     cVar2 = s__97c291c0[0];
     while (cVar2 != '\0') {
@@ -2537,7 +2537,7 @@ switchD_97be8b04_default:
     goto LAB_97be9988;
   case 0x58:
   case 0x6a:
-    *in_stack_0000003c = *in_stack_0000003c + 1;
+    *param_10 = *param_10 + 1;
     goto LAB_97be8e48;
   case 0x60:
   case 0x61:
@@ -2552,7 +2552,7 @@ LAB_97be9988:
     puVar15 = puVar15 + iVar14;
 LAB_97be99b4:
     puVar15 = (undefined1 *)
-              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15,param_5,param_6,param_7,param_8,2,uVar12);
+              ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,puVar15,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar13 = 2;
     break;
   case 0x62:
@@ -2577,7 +2577,7 @@ LAB_97be99b4:
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,2,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -2585,7 +2585,7 @@ LAB_97be99b4:
       cVar2 = ", "[iVar14 + 1];
       iVar14 = iVar14 + 1;
     }
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,3,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -2594,7 +2594,7 @@ LAB_97be99b4:
       iVar14 = iVar14 + 1;
     }
     iVar10 = 4;
-    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,4,uVar12);
+    iVar9 = ((int (*)())_glpWriteSourceOperand_97be7fc0)(param_1,iVar9 + iVar14,param_5,param_6,param_7,param_8,4,uVar12,0);
     iVar14 = 0;
     cVar2 = s___97c2d7ec[0];
     while (cVar2 != '\0') {
@@ -5193,7 +5193,7 @@ LAB_97bedcb4:
         local_9c = local_9c + -1;
       }
       ((int (*)())_glpDisassemble1Op)(param_1 + uVar9 * 2 + iVar11 * 2,local_a8,&local_98,&local_94,local_88,
-                         local_84,local_80,local_7c);
+                         local_84,local_80,local_7c,local_74,&local_9c,local_64);
       local_a8 = (int *)((int)local_a8 + local_94);
       iVar11 = iVar11 + local_98;
       uVar27 = ((int (*)())_adjustAllocation_97be9cb4)(&local_b0,&local_ac,&local_a8);

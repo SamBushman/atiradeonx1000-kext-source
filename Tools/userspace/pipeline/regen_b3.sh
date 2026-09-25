@@ -20,11 +20,27 @@ run $X -postScript OverrideIndirectCalls.java $OUT/icalls_glprog.tsv ALL
 run $X -postScript ExtendParams.java $(cat $B/extend_glprog.txt)
 run $X -postScript WidenParams.java $(cat $B/widen_glprog.txt)
 mkdir -p $OUT/n_glprog && run $X -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/redump_glprog.txt)
+# step 8, stack parameters (9th+ argument words at 0x38(r1)), on a further copy; the redumped files replace their earlier versions
+rm -rf glprog-stk && cp -r glprog-sw glprog-stk
+X="glprog-stk GLProgProject libGLProgrammability.dylib"
+run $X -postScript ExtendParams.java $(cat $B/stackparams_glprog.txt)
+run $X -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/stackredump_glprog.txt)
 # GLDriver (from gld-ext) and GA (from r32-ga)
 rm -rf gld-ret && cp -r gld-ext gld-ret
 run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetValueReturn.java $(cat $B/setret_gld.txt)
 run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ExtendParams.java $(cat $B/extend_gld.txt)
 mkdir -p $OUT/n_gld && run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/redump_gld.txt)
+rm -rf gld-stk && cp -r gld-ret gld-stk
+run gld-stk GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ExtendParams.java $(cat $B/stackparams_gld.txt)
+run gld-stk GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/stackredump_gld.txt)
+# step 9: the two embedded jump tables Ghidra left unresolved ("Jumptable with 0 entries") and glAccum's missing r4 parameter
+rm -rf gld-sw && cp -r gld-stk gld-sw
+run gld-sw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript FixSwitches.java 0xd072c 0xd0aa0
+run gld-sw GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ExtendParams.java 0x2ae0:2
+run gld-sw GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld 0xd0488 0xd0888 0x2ae0
+# step 10 (no Ghidra): RANGES rows of every switch owner widened to its case code - b3/ranges_switch_{gld,glprog,va}.tsv from
+#   python3 Tools/userspace/switch_ranges.py <stock.dis> $OUT/n_<x>/RANGES.tsv Userspace/<bin>/ppc/unowned_blocks.tsv <slice>   (run on the step-9 RANGES)
+# replace those rows in $OUT/n_<x>/RANGES.tsv, then unowned_blocks.py / coverage.py / raw_blocks.py / raw_emit.py / text_complete.py as in Stage A
 rm -rf r32-ga-ret && cp -r r32-ga r32-ga-ret
 run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript SetValueReturn.java $(cat $B/setret_ga.txt)
 run r32-ga-ret Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript ExtendParams.java $(cat $B/extend_ga.txt)

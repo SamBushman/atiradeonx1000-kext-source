@@ -968,7 +968,7 @@ int FUN_0019679c(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_00196858 @ 0x196858 (640 bytes) */
-int FUN_00196858(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_00196858(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int *param_2;
   int param_3;
@@ -976,6 +976,8 @@ int FUN_00196858(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_5;
   int param_6;
   int param_7;
+  undefined4 param_8;
+  int param_9;
 {
   bool bVar1;
   bool bVar2;
@@ -983,10 +985,9 @@ int FUN_00196858(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int iVar3;
   uint *puVar5;
   int iVar6;
-  int in_stack_00000038;
   
   iVar6 = 1;
-  bVar1 = in_stack_00000038 == 0;
+  bVar1 = param_9 == 0;
   puVar5 = (uint *)(param_2 + 0x2e);
   do {
     iVar3 = (**(code **)(*param_2 + 0x14))(param_2);

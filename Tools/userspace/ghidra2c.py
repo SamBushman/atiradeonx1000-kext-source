@@ -448,6 +448,12 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:DAT|UNK)_([0-9a-f]{8})\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
+            # `in_stack_000000XX` (XX >= 0) is the word at entry-sp + XX: the caller's frame (0 = back chain, 0x38+ = argument words 9+ that the
+            # signature does not declare - ExtendParams.java covers the called ones). Ghidra declares it as a local, so the C read garbage; read the
+            # entry stack pointer's memory instead, as for the `uStack` names below (the unwinder walks frames through in_stack_00000000).
+            for ist_ in list(re.finditer(r'(?m)^[ \t]*([A-Za-z_][\w ]*?[\s*]+)(in_stack_([0-7][0-9a-f]{7}))\s*;\n', b)):
+                b = b.replace(ist_.group(0), '', 1)
+                b = re.sub(r'\b%s\b' % ist_.group(2), '(*(%s *)(*(unsigned int *)__builtin_frame_address(0) + 0x%s))' % (ist_.group(1).strip(), ist_.group(3).lstrip('0') or '0'), b)
             declared_ = set(re.findall(r'(?m)^\s*[A-Za-z_][\w ]*?[\s*]+(\w+)\s*(?:\[[^\]]*\])?\s*;', b))
             b = re.sub(r'\b_?([a-z]{1,2})Stack([0-9a-f]{8})\b', lambda m: m.group(0) if m.group(0) in declared_ else '(*(%s *)(*(unsigned int *)__builtin_frame_address(0) + 0x%s))' % ({'b': 'unsigned char', 'c': 'char', 'u': 'unsigned int', 'i': 'int', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long'}.get(m.group(1), 'unsigned int'), m.group(2).lstrip('0') or '0'), b)
             b = re.sub(r'\bstack0x([0-9a-f]{8})\b', lambda m: m.group(0) if m.group(0) in declared_ else 'STACKARG(0x%s)' % m.group(1).lstrip('0').rjust(1, '0'), b)

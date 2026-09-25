@@ -1073,66 +1073,33 @@ int __Unwind_RaiseException_Phase2(param_1, param_2)
 int __Unwind_RaiseException(exception_object)
   _Unwind_Exception *exception_object;
 {
-  undefined4 *a4;
-  int iVar1;
-  unsigned char extraout_r3;
-  undefined4 extraout_r4;
-  undefined4 a2;
-  undefined4 in_r6;
-  undefined4 *in_r7;
-  undefined1 *in_r8;
-  undefined4 *in_r9;
-  undefined4 uVar2;
-  undefined8 uVar3;
-  int in_stack_00000000;
-  undefined4 in_stack_000003e0;
-  code *in_stack_00000790;
-  
-  ((int (*)())save_world)();
-  ((int (*)())_uw_init_context_1)(&STACKARG(0x40),&STACKARG(0x960),*(undefined4 *)(in_stack_00000000 + 8));
-  a2 = 0x1d8;
-  _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
-  do {
-    uVar3 = ((int (*)())_uw_frame_state_for)(&STACKARG(0x220),&STACKARG(0x400));
-    iVar1 = (int)((ulonglong)uVar3 >> 0x20);
-    uVar2 = (undefined4)uVar3;
-    if (iVar1 == 5) {
-      uVar3 = CONCAT44(5,uVar2);
-LAB_97c1bc54:
-      uVar2 = 0;
-LAB_97c1bc84:
-      ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar3 >> 0x20),(int)uVar3,a2,in_r6,in_r7,in_r8,in_r9,uVar2)
-      ;
-      return extraout_r3;
+  double this_context[0x1d8 / 8], cur_context[0x1d8 / 8];
+  double fs[0x3d0 / 8];
+  long offset;
+  int code;
+  __builtin_unwind_init();
+  ((int (*)())_uw_init_context_1)(this_context, __builtin_dwarf_cfa(), __builtin_return_address(0));
+  _memcpy(cur_context, this_context, 0x1d8);
+  while (1) {
+    void *pers;
+    code = ((int (*)())_uw_frame_state_for)(cur_context, fs);
+    if (code == 5) return 5;
+    if (code != 0) return 3;
+    pers = *(void **)((char *)fs + 0x390);
+    if (pers != 0) {
+      code = ((int (*)(int, int, unsigned long long, void *, void *))pers)(1, 1, exception_object->exception_class, exception_object, cur_context);
+      if (code == 6) break;
+      if (code != 8) return 3;
     }
-    if (iVar1 != 0) {
-LAB_97c1bc5c:
-      uVar3 = CONCAT44(3,uVar2);
-      goto LAB_97c1bc54;
-    }
-    if (in_stack_00000790 != (code *)0x0) {
-      in_r8 = &STACKARG(0x220);
-      a2 = *a4;
-      in_r6 = a4[1];
-      in_r7 = a4;
-      iVar1 = (*in_stack_00000790)(1,1,a2,in_r6,a4,in_r8);
-      if (iVar1 == 6) {
-        a2 = 0x1d8;
-        a4[3] = 0;
-        a4[4] = in_stack_000003e0;
-        in_r9 = a4;
-        _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
-        uVar3 = ((int (*)())__Unwind_RaiseException_Phase2)(a4,&STACKARG(0x220));
-        if ((int)((ulonglong)uVar3 >> 0x20) != 7) goto LAB_97c1bc54;
-        uVar3 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
-        uVar2 = (undefined4)((ulonglong)uVar3 >> 0x20);
-        goto LAB_97c1bc84;
-      }
-      uVar2 = extraout_r4;
-      if (iVar1 != 8) goto LAB_97c1bc5c;
-    }
-    ((int (*)())_uw_update_context)(&STACKARG(0x220),&STACKARG(0x400));
-  } while( true );
+    ((int (*)())_uw_update_context)(cur_context, fs);
+  }
+  exception_object->private_1 = 0;
+  exception_object->private_2 = *(unsigned long *)((char *)cur_context + 0x1c0);
+  _memcpy(cur_context, this_context, 0x1d8);
+  code = ((int (*)())__Unwind_RaiseException_Phase2)(exception_object, cur_context);
+  if (code != 7) return code;
+  offset = ((int (*)())_uw_install_context_1)(this_context, cur_context);
+  __builtin_eh_return(offset, __builtin_frob_return_addr(*(void **)((char *)cur_context + 0x1c0)));
 }
 
 /* __Unwind_ForcedUnwind_Phase2 @ 0x97c1bc88 (260 bytes) */
@@ -1181,72 +1148,46 @@ int __Unwind_ForcedUnwind_Phase2(param_1, param_2)
 /* __Unwind_ForcedUnwind @ 0x97c1bd8c (148 bytes) */
 int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter, param_4, param_5, param_6, param_7)
   _Unwind_Exception *exception_object;
-  unsigned char stop;
+  void *stop;
   void *stop_parameter;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  int extraout_r3;
-  unsigned char extraout_r3_00;
-  undefined4 extraout_r4;
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined8 uVar3;
-  int in_stack_00000000;
-  
-  ((int (*)())save_world)();
-  ((int (*)())_uw_init_context_1)(&STACKARG(0x40),&STACKARG(0x5b0),*(undefined4 *)(in_stack_00000000 + 8));
-  uVar1 = 0x1d8;
-  _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
-  *(undefined4 *)(extraout_r3 + 0xc) = extraout_r4;
-  *(void **)(extraout_r3 + 0x10) = stop_parameter;
-  uVar3 = ((int (*)())__Unwind_ForcedUnwind_Phase2)(extraout_r3,&STACKARG(0x220));
-  uVar2 = 0;
-  if ((int)((ulonglong)uVar3 >> 0x20) == 7) {
-    uVar3 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
-    uVar2 = (undefined4)((ulonglong)uVar3 >> 0x20);
-  }
-  ((int (*)())eh_rest_world_r10)((int)((ulonglong)uVar3 >> 0x20),(int)uVar3,uVar1,param_4,param_5,param_6,param_7
-                    ,uVar2);
-  return extraout_r3_00;
+  double this_context[0x1d8 / 8], cur_context[0x1d8 / 8];
+  double fs[0x3d0 / 8];
+  long offset;
+  int code;
+  __builtin_unwind_init();
+  ((int (*)())_uw_init_context_1)(this_context, __builtin_dwarf_cfa(), __builtin_return_address(0));
+  _memcpy(cur_context, this_context, 0x1d8);
+  exception_object->private_1 = (unsigned long)stop;
+  exception_object->private_2 = (unsigned long)stop_parameter;
+  code = ((int (*)())__Unwind_ForcedUnwind_Phase2)(exception_object, cur_context);
+  if (code != 7) return code;
+  offset = ((int (*)())_uw_install_context_1)(this_context, cur_context);
+  __builtin_eh_return(offset, __builtin_frob_return_addr(*(void **)((char *)cur_context + 0x1c0)));
 }
 
 /* __Unwind_Resume @ 0x97c1be20 (152 bytes) */
 int __Unwind_Resume(exception_object)
   _Unwind_Exception *exception_object;
 {
-  int extraout_r3;
-  int iVar1;
-  undefined4 uVar2;
-  undefined4 extraout_r3_00;
-  undefined4 uVar3;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined8 uVar4;
-  int in_stack_00000000;
-  
-  ((int (*)())save_world)();
-  ((int (*)())_uw_init_context_1)(&STACKARG(0x40),&STACKARG(0x5b0),*(undefined4 *)(in_stack_00000000 + 8));
-  uVar3 = 0x1d8;
-  _memcpy(&STACKARG(0x220),&STACKARG(0x40),0x1d8);
-  if (*(int *)(extraout_r3 + 0xc) == 0) {
-    iVar1 = ((int (*)())__Unwind_RaiseException_Phase2)(extraout_r3,&STACKARG(0x220));
-  }
-  else {
-    iVar1 = ((int (*)())__Unwind_ForcedUnwind_Phase2)(extraout_r3,&STACKARG(0x220));
-  }
-  if (iVar1 != 7) {
-                    
-    _abort();
-  }
-  uVar4 = ((int (*)())_uw_install_context_1)(&STACKARG(0x40),&STACKARG(0x220));
-  uVar2 = (undefined4)((ulonglong)uVar4 >> 0x20);
-  ((int (*)())eh_rest_world_r10)(uVar2,(int)uVar4,uVar3,in_r6,in_r7,in_r8,in_r9,uVar2);
-  return extraout_r3_00;
+  double this_context[0x1d8 / 8], cur_context[0x1d8 / 8];
+  double fs[0x3d0 / 8];
+  long offset;
+  int code;
+  __builtin_unwind_init();
+  ((int (*)())_uw_init_context_1)(this_context, __builtin_dwarf_cfa(), __builtin_return_address(0));
+  _memcpy(cur_context, this_context, 0x1d8);
+  if (exception_object->private_1 == 0)
+    code = ((int (*)())__Unwind_RaiseException_Phase2)(exception_object, cur_context);
+  else
+    code = ((int (*)())__Unwind_ForcedUnwind_Phase2)(exception_object, cur_context);
+  if (code != 7) _abort();
+  offset = ((int (*)())_uw_install_context_1)(this_context, cur_context);
+  __builtin_eh_return(offset, __builtin_frob_return_addr(*(void **)((char *)cur_context + 0x1c0)));
 }
 
 /* __Unwind_DeleteException @ 0x97c1beb8 (20 bytes) */
@@ -2667,14 +2608,13 @@ int eh_rest_world_r10(param_1, param_2, param_3, param_4, param_5, param_6, para
   undefined4 param_7;
   undefined4 param_8;
 {
-  int in_stack_00000000;
   
                     
                     
-  (**(code **)(in_stack_00000000 + 8))
-            (*(undefined4 *)(in_stack_00000000 + -0x1b0),*(undefined4 *)(in_stack_00000000 + -0x1ac)
-             ,*(undefined4 *)(in_stack_00000000 + -0x1a8),
-             *(undefined4 *)(in_stack_00000000 + -0x1a4),param_8,*(code **)(in_stack_00000000 + 8),
+  (**(code **)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + 8))
+            (*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1b0),*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1ac)
+             ,*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1a8),
+             *(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1a4),param_8,*(code **)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + 8),
              param_7,param_8);
   return;
 }

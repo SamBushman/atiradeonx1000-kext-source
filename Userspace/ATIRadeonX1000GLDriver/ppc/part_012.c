@@ -514,7 +514,7 @@ int FUN_00083c90(param_1, param_2)
 }
 
 /* FUN_00083e10 @ 0x83e10 (692 bytes) */
-int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
   int param_1;
   uint param_2;
   uint param_3;
@@ -523,6 +523,14 @@ int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
+  uint param_13;
+  uint param_14;
+  uint *param_15;
+  uint *param_16;
 {
   uint uVar1;
   uint uVar2;
@@ -543,14 +551,6 @@ int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar17;
   uint uVar18;
   int iVar19;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
-  uint in_stack_00000048;
-  uint in_stack_0000004c;
-  uint *in_stack_00000050;
-  uint *in_stack_00000054;
   
   iVar19 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar19 + 1U) {
@@ -586,9 +586,9 @@ int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar19 + 4);
   uVar17 = *(uint *)(iVar19 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar19 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar19 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -614,58 +614,58 @@ int FUN_00083e10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar19 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
-  uVar11 = in_stack_00000048 & 0xf;
+  uVar1 = (*param_11 & 7) << 0xd;
+  uVar11 = param_13 & 0xf;
   *(uint *)(iVar19 + 8) = uVar1 | uVar2 | uVar12 | uVar17 & 0xffff0000;
-  uVar3 = (in_stack_0000004c & 0xff) << 5;
-  uVar4 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_14 & 0xff) << 5;
+  uVar4 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar19 + 8) = uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfff80000;
-  uVar5 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar5 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar19 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xffc00000;
-  uVar14 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar14 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar19 + 8) = uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfe000000;
-  uVar6 = (*in_stack_00000044 & 1) << 0x19;
+  uVar6 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar19 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfc000000;
-  uVar7 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar7 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf8000000;
-  uVar8 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar8 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 8) =
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf0000000
   ;
-  uVar13 = in_stack_00000044[3];
+  uVar13 = param_12[3];
   *(uint *)(iVar19 + 0xc) = uVar3 | uVar11 | uVar18 & 0xffffe000;
   *(uint *)(iVar19 + 8) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12;
-  uVar1 = (*in_stack_00000050 & 7) << 0xd;
+  uVar1 = (*param_15 & 7) << 0xd;
   *(uint *)(iVar19 + 0xc) = uVar1 | uVar3 | uVar11 | uVar18 & 0xffff0000;
-  uVar2 = (in_stack_00000050[1] & 7) << 0x10;
+  uVar2 = (param_15[1] & 7) << 0x10;
   *(uint *)(iVar19 + 0xc) = uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000050[2] & 7) << 0x13;
+  uVar4 = (param_15[2] & 7) << 0x13;
   *(uint *)(iVar19 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000050[3] & 7) << 0x16;
+  uVar5 = (param_15[3] & 7) << 0x16;
   *(uint *)(iVar19 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000054 & 1) << 0x19;
+  uVar14 = (*param_16 & 1) << 0x19;
   *(uint *)(iVar19 + 0xc) =
        uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000054[1] & 1) << 0x1a;
+  uVar6 = (param_16[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 0xc) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000054[2] & 1) << 0x1b;
+  uVar7 = (param_16[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 0xc) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf0000000
   ;
   *(uint *)(iVar19 + 0xc) =
-       (in_stack_00000054[3] & 1) << 0x1c |
+       (param_16[3] & 1) << 0x1c |
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11;
   *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_000840d0 @ 0x840d0 (548 bytes) */
-int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -674,6 +674,10 @@ int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -693,10 +697,6 @@ int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -732,9 +732,9 @@ int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -759,25 +759,25 @@ int FUN_000840d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -877,7 +877,7 @@ int FUN_00084300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000844e0 @ 0x844e0 (548 bytes) */
-int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -886,6 +886,10 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -905,10 +909,6 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -944,9 +944,9 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -971,25 +971,25 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -998,7 +998,7 @@ int FUN_000844e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_00084710 @ 0x84710 (548 bytes) */
-int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1007,6 +1007,10 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -1026,10 +1030,6 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -1065,9 +1065,9 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1092,25 +1092,25 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -1119,7 +1119,7 @@ int FUN_00084710(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_00084940 @ 0x84940 (692 bytes) */
-int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1128,6 +1128,14 @@ int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
+  uint param_13;
+  uint param_14;
+  uint *param_15;
+  uint *param_16;
 {
   uint uVar1;
   uint uVar2;
@@ -1148,14 +1156,6 @@ int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar17;
   uint uVar18;
   int iVar19;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
-  uint in_stack_00000048;
-  uint in_stack_0000004c;
-  uint *in_stack_00000050;
-  uint *in_stack_00000054;
   
   iVar19 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar19 + 1U) {
@@ -1191,9 +1191,9 @@ int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar19 + 4);
   uVar17 = *(uint *)(iVar19 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar19 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar19 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1219,58 +1219,58 @@ int FUN_00084940(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar19 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
-  uVar11 = in_stack_00000048 & 0xf;
+  uVar1 = (*param_11 & 7) << 0xd;
+  uVar11 = param_13 & 0xf;
   *(uint *)(iVar19 + 8) = uVar1 | uVar2 | uVar12 | uVar17 & 0xffff0000;
-  uVar3 = (in_stack_0000004c & 0xff) << 5;
-  uVar4 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_14 & 0xff) << 5;
+  uVar4 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar19 + 8) = uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfff80000;
-  uVar5 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar5 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar19 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xffc00000;
-  uVar14 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar14 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar19 + 8) = uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfe000000;
-  uVar6 = (*in_stack_00000044 & 1) << 0x19;
+  uVar6 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar19 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfc000000;
-  uVar7 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar7 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf8000000;
-  uVar8 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar8 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 8) =
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf0000000
   ;
-  uVar13 = in_stack_00000044[3];
+  uVar13 = param_12[3];
   *(uint *)(iVar19 + 0xc) = uVar3 | uVar11 | uVar18 & 0xffffe000;
   *(uint *)(iVar19 + 8) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12;
-  uVar1 = (*in_stack_00000050 & 7) << 0xd;
+  uVar1 = (*param_15 & 7) << 0xd;
   *(uint *)(iVar19 + 0xc) = uVar1 | uVar3 | uVar11 | uVar18 & 0xffff0000;
-  uVar2 = (in_stack_00000050[1] & 7) << 0x10;
+  uVar2 = (param_15[1] & 7) << 0x10;
   *(uint *)(iVar19 + 0xc) = uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000050[2] & 7) << 0x13;
+  uVar4 = (param_15[2] & 7) << 0x13;
   *(uint *)(iVar19 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000050[3] & 7) << 0x16;
+  uVar5 = (param_15[3] & 7) << 0x16;
   *(uint *)(iVar19 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000054 & 1) << 0x19;
+  uVar14 = (*param_16 & 1) << 0x19;
   *(uint *)(iVar19 + 0xc) =
        uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000054[1] & 1) << 0x1a;
+  uVar6 = (param_16[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 0xc) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000054[2] & 1) << 0x1b;
+  uVar7 = (param_16[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 0xc) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf0000000
   ;
   *(uint *)(iVar19 + 0xc) =
-       (in_stack_00000054[3] & 1) << 0x1c |
+       (param_16[3] & 1) << 0x1c |
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11;
   *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084c00 @ 0x84c00 (692 bytes) */
-int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1279,6 +1279,14 @@ int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
+  uint param_13;
+  uint param_14;
+  uint *param_15;
+  uint *param_16;
 {
   uint uVar1;
   uint uVar2;
@@ -1299,14 +1307,6 @@ int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar17;
   uint uVar18;
   int iVar19;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
-  uint in_stack_00000048;
-  uint in_stack_0000004c;
-  uint *in_stack_00000050;
-  uint *in_stack_00000054;
   
   iVar19 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar19 + 1U) {
@@ -1342,9 +1342,9 @@ int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar19 + 4);
   uVar17 = *(uint *)(iVar19 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar19 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar19 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1370,58 +1370,58 @@ int FUN_00084c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar19 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
-  uVar11 = in_stack_00000048 & 0xf;
+  uVar1 = (*param_11 & 7) << 0xd;
+  uVar11 = param_13 & 0xf;
   *(uint *)(iVar19 + 8) = uVar1 | uVar2 | uVar12 | uVar17 & 0xffff0000;
-  uVar3 = (in_stack_0000004c & 0xff) << 5;
-  uVar4 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_14 & 0xff) << 5;
+  uVar4 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar19 + 8) = uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfff80000;
-  uVar5 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar5 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar19 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xffc00000;
-  uVar14 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar14 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar19 + 8) = uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfe000000;
-  uVar6 = (*in_stack_00000044 & 1) << 0x19;
+  uVar6 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar19 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfc000000;
-  uVar7 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar7 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf8000000;
-  uVar8 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar8 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 8) =
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf0000000
   ;
-  uVar13 = in_stack_00000044[3];
+  uVar13 = param_12[3];
   *(uint *)(iVar19 + 0xc) = uVar3 | uVar11 | uVar18 & 0xffffe000;
   *(uint *)(iVar19 + 8) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12;
-  uVar1 = (*in_stack_00000050 & 7) << 0xd;
+  uVar1 = (*param_15 & 7) << 0xd;
   *(uint *)(iVar19 + 0xc) = uVar1 | uVar3 | uVar11 | uVar18 & 0xffff0000;
-  uVar2 = (in_stack_00000050[1] & 7) << 0x10;
+  uVar2 = (param_15[1] & 7) << 0x10;
   *(uint *)(iVar19 + 0xc) = uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000050[2] & 7) << 0x13;
+  uVar4 = (param_15[2] & 7) << 0x13;
   *(uint *)(iVar19 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000050[3] & 7) << 0x16;
+  uVar5 = (param_15[3] & 7) << 0x16;
   *(uint *)(iVar19 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000054 & 1) << 0x19;
+  uVar14 = (*param_16 & 1) << 0x19;
   *(uint *)(iVar19 + 0xc) =
        uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000054[1] & 1) << 0x1a;
+  uVar6 = (param_16[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 0xc) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000054[2] & 1) << 0x1b;
+  uVar7 = (param_16[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 0xc) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf0000000
   ;
   *(uint *)(iVar19 + 0xc) =
-       (in_stack_00000054[3] & 1) << 0x1c |
+       (param_16[3] & 1) << 0x1c |
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11;
   *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00084ec0 @ 0x84ec0 (692 bytes) */
-int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1430,6 +1430,14 @@ int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
+  uint param_13;
+  uint param_14;
+  uint *param_15;
+  uint *param_16;
 {
   uint uVar1;
   uint uVar2;
@@ -1450,14 +1458,6 @@ int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar17;
   uint uVar18;
   int iVar19;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
-  uint in_stack_00000048;
-  uint in_stack_0000004c;
-  uint *in_stack_00000050;
-  uint *in_stack_00000054;
   
   iVar19 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar19 + 1U) {
@@ -1493,9 +1493,9 @@ int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar19 + 4);
   uVar17 = *(uint *)(iVar19 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar19 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar19 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1521,58 +1521,58 @@ int FUN_00084ec0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar19 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
-  uVar11 = in_stack_00000048 & 0xf;
+  uVar1 = (*param_11 & 7) << 0xd;
+  uVar11 = param_13 & 0xf;
   *(uint *)(iVar19 + 8) = uVar1 | uVar2 | uVar12 | uVar17 & 0xffff0000;
-  uVar3 = (in_stack_0000004c & 0xff) << 5;
-  uVar4 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_14 & 0xff) << 5;
+  uVar4 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar19 + 8) = uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfff80000;
-  uVar5 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar5 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar19 + 8) = uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xffc00000;
-  uVar14 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar14 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar19 + 8) = uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfe000000;
-  uVar6 = (*in_stack_00000044 & 1) << 0x19;
+  uVar6 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar19 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xfc000000;
-  uVar7 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar7 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf8000000;
-  uVar8 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar8 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 8) =
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12 | uVar17 & 0xf0000000
   ;
-  uVar13 = in_stack_00000044[3];
+  uVar13 = param_12[3];
   *(uint *)(iVar19 + 0xc) = uVar3 | uVar11 | uVar18 & 0xffffe000;
   *(uint *)(iVar19 + 8) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar1 | uVar2 | uVar12;
-  uVar1 = (*in_stack_00000050 & 7) << 0xd;
+  uVar1 = (*param_15 & 7) << 0xd;
   *(uint *)(iVar19 + 0xc) = uVar1 | uVar3 | uVar11 | uVar18 & 0xffff0000;
-  uVar2 = (in_stack_00000050[1] & 7) << 0x10;
+  uVar2 = (param_15[1] & 7) << 0x10;
   *(uint *)(iVar19 + 0xc) = uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000050[2] & 7) << 0x13;
+  uVar4 = (param_15[2] & 7) << 0x13;
   *(uint *)(iVar19 + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000050[3] & 7) << 0x16;
+  uVar5 = (param_15[3] & 7) << 0x16;
   *(uint *)(iVar19 + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000054 & 1) << 0x19;
+  uVar14 = (*param_16 & 1) << 0x19;
   *(uint *)(iVar19 + 0xc) =
        uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000054[1] & 1) << 0x1a;
+  uVar6 = (param_16[1] & 1) << 0x1a;
   *(uint *)(iVar19 + 0xc) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000054[2] & 1) << 0x1b;
+  uVar7 = (param_16[2] & 1) << 0x1b;
   *(uint *)(iVar19 + 0xc) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11 | uVar18 & 0xf0000000
   ;
   *(uint *)(iVar19 + 0xc) =
-       (in_stack_00000054[3] & 1) << 0x1c |
+       (param_16[3] & 1) << 0x1c |
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | uVar11;
   *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
   return;
 }
 
 /* FUN_00085180 @ 0x85180 (548 bytes) */
-int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1581,6 +1581,10 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -1600,10 +1604,6 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -1639,9 +1639,9 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1666,25 +1666,25 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -1693,7 +1693,7 @@ int FUN_00085180(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000853b0 @ 0x853b0 (548 bytes) */
-int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1702,6 +1702,10 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -1721,10 +1725,6 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -1760,9 +1760,9 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1787,25 +1787,25 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -1814,7 +1814,7 @@ int FUN_000853b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000855e0 @ 0x855e0 (548 bytes) */
-int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1823,6 +1823,10 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -1842,10 +1846,6 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -1881,9 +1881,9 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -1908,25 +1908,25 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -1935,7 +1935,7 @@ int FUN_000855e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_00085810 @ 0x85810 (548 bytes) */
-int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -1944,6 +1944,10 @@ int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -1963,10 +1967,6 @@ int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -2002,9 +2002,9 @@ int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -2029,25 +2029,25 @@ int FUN_00085810(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -2501,7 +2501,7 @@ int FUN_00086100(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000862b0 @ 0x862b0 (548 bytes) */
-int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2510,6 +2510,10 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -2529,10 +2533,6 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -2568,9 +2568,9 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -2595,25 +2595,25 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;
@@ -2622,7 +2622,7 @@ int FUN_000862b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_000864e0 @ 0x864e0 (548 bytes) */
-int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12)
   int param_1;
   uint param_2;
   uint param_3;
@@ -2631,6 +2631,10 @@ int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint param_6;
   uint *param_7;
   uint *param_8;
+  uint param_9;
+  uint param_10;
+  uint *param_11;
+  uint *param_12;
 {
   uint uVar1;
   uint uVar2;
@@ -2650,10 +2654,6 @@ int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar16;
   int iVar17;
   uint uVar18;
-  uint in_stack_00000038;
-  uint in_stack_0000003c;
-  uint *in_stack_00000040;
-  uint *in_stack_00000044;
   
   iVar16 = *(int *)(param_1 + 0x3cc);
   if (*(uint *)(param_1 + 0x3e0) < iVar16 + 1U) {
@@ -2689,9 +2689,9 @@ int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar13 = *(uint *)(iVar16 + 4);
   uVar18 = *(uint *)(iVar16 + 8);
   uVar11 = param_5 & 0xf;
-  uVar12 = in_stack_00000038 & 0xf;
+  uVar12 = param_9 & 0xf;
   uVar1 = (param_6 & 0xff) << 5;
-  uVar2 = (in_stack_0000003c & 0xff) << 5;
+  uVar2 = (param_10 & 0xff) << 5;
   *(uint *)(iVar16 + 4) = uVar1 | uVar11 | uVar13 & 0xffffe000;
   uVar3 = (*param_7 & 7) << 0xd;
   *(uint *)(iVar16 + 4) = uVar3 | uVar1 | uVar11 | uVar13 & 0xffff0000;
@@ -2716,25 +2716,25 @@ int FUN_000864e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(uint *)(iVar16 + 4) =
        (uVar13 & 1) << 0x1c |
        uVar8 | uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar11;
-  uVar1 = (*in_stack_00000040 & 7) << 0xd;
+  uVar1 = (*param_11 & 7) << 0xd;
   *(uint *)(iVar16 + 8) = uVar1 | uVar2 | uVar12 | uVar18 & 0xffff0000;
-  uVar3 = (in_stack_00000040[1] & 7) << 0x10;
+  uVar3 = (param_11[1] & 7) << 0x10;
   *(uint *)(iVar16 + 8) = uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfff80000;
-  uVar4 = (in_stack_00000040[2] & 7) << 0x13;
+  uVar4 = (param_11[2] & 7) << 0x13;
   *(uint *)(iVar16 + 8) = uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xffc00000;
-  uVar5 = (in_stack_00000040[3] & 7) << 0x16;
+  uVar5 = (param_11[3] & 7) << 0x16;
   *(uint *)(iVar16 + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfe000000;
-  uVar14 = (*in_stack_00000044 & 1) << 0x19;
+  uVar14 = (*param_12 & 1) << 0x19;
   *(uint *)(iVar16 + 8) =
        uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xfc000000;
-  uVar6 = (in_stack_00000044[1] & 1) << 0x1a;
+  uVar6 = (param_12[1] & 1) << 0x1a;
   *(uint *)(iVar16 + 8) =
        uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf8000000;
-  uVar7 = (in_stack_00000044[2] & 1) << 0x1b;
+  uVar7 = (param_12[2] & 1) << 0x1b;
   *(uint *)(iVar16 + 8) =
        uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12 | uVar18 & 0xf0000000
   ;
-  uVar1 = (in_stack_00000044[3] & 1) << 0x1c |
+  uVar1 = (param_12[3] & 1) << 0x1c |
           uVar7 | uVar6 | uVar14 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | uVar12;
   *(uint *)(iVar16 + 0xc) = uVar1;
   *(uint *)(iVar16 + 8) = uVar1;

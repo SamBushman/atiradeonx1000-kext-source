@@ -13,7 +13,7 @@ start	end	kind	owner	instructions	calls
 2cf4	2d00	padding	FUN_00002c70	3	
 2d78	2d80	padding	FUN_00002d00	2	
 2e04	2e10	padding	FUN_00002dc0	3	
-2e98	2f00	switch-code	FUN_00002e50	26	
+2e98	2f00	table	FUN_00002e50	26	
 318c	3190	padding	FUN_00002e50	1	
 31bc	31c0	padding	FUN_00002e50	1	
 320c	3210	padding	FUN_00002e50	1	

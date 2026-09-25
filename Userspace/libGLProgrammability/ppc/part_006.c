@@ -6068,7 +6068,7 @@ LAB_97ba9a08:
     local_858 = local_838;
     iVar56 = TParseContext__arrayErrorCheck
                        ((int)param_1,psVar22,uVar58,local_850,local_84c,local_848,local_844,
-                        local_840);
+                        local_840,puVar5[0xe],puVar5[0xf],puVar5[0x10]);
     goto LAB_97bab180;
   case 0x7d:
     local_870 = *(unsigned char **)(pTVar57 + -0x74);

@@ -4744,7 +4744,7 @@ int FUN_00020b00(param_1)
 }
 
 /* FUN_00020b30 @ 0x20b30 (620 bytes) */
-int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   int param_2;
   uint param_3;
@@ -4753,6 +4753,7 @@ int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int param_6;
   uint param_7;
   undefined4 param_8;
+  uint param_9;
 {
   uint uVar1;
   uint uVar2;
@@ -4762,7 +4763,6 @@ int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar6;
   uint uVar7;
   int iVar8;
-  uint in_stack_00000038;
   
   iVar8 = 3;
   if ((*(uint *)(param_1 + 0x154) & 0xf) != 3) {
@@ -4817,7 +4817,7 @@ int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   }
   puVar3[1] = uVar1;
   puVar3[2] = 0xc0089b00;
-  puVar3[3] = iVar8 << 8 | (in_stack_00000038 & 0xff) << 0x10 | 0x20030ff;
+  puVar3[3] = iVar8 << 8 | (param_9 & 0xff) << 0x10 | 0x20030ff;
   puVar5 = *(uint **)(param_1 + 0x1d8);
   *puVar5 = (int)(puVar3 + 4) - (int)puVar5 >> 2 | *puVar5;
   *(undefined4 **)(param_1 + 0x1d8) = puVar3 + 4;
@@ -4837,7 +4837,7 @@ int FUN_00020b30(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 }
 
 /* FUN_00021c70 @ 0x21c70 (1540 bytes) */
-int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4845,6 +4845,8 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
+  undefined4 param_8;
+  undefined4 param_9;
 {
   undefined *puVar1;
   uint *puVar2;
@@ -4854,7 +4856,6 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint uVar6;
   undefined4 *puVar7;
   int iVar8;
-  undefined4 in_stack_00000038;
   
   iVar8 = param_1 + 0x240;
   *(undefined1 *)(param_1 + 0x2a5e) = 1;
@@ -4870,7 +4871,7 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   puVar2 = *(uint **)(param_1 + 0x1d8);
   *puVar2 = (int)puVar7 - (int)puVar2 >> 2 | *puVar2;
   *(undefined4 **)(param_1 + 0x1d8) = puVar7;
-  puVar7[2] = in_stack_00000038;
+  puVar7[2] = param_9;
   puVar7[1] = 0x404;
   *puVar7 = 0x2d000000;
   puVar7[3] = param_2;

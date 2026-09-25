@@ -5,138 +5,12 @@ const unsigned int text_data_27c4[3] = {0x00000000, 0x00000000, 0x00000000};
 const unsigned int text_data_2ad8[2] = {0x60000000, 0x60000000};
 /* 0x2b38-0x2b4c table switch table of the `bctr` at 0x2b34: entry i -> 0x2b38 + word[i]; targets 2b4c 327c 3ba0 4e00 4bb4 */
 const unsigned int text_data_2b38[5] = {0x00000014, 0x00000744, 0x00001068, 0x000022c8, 0x0000207c};
-/* 0x2cd4-0x2cdc padding */
-const unsigned int text_data_2cd4[2] = {0x60000000, 0x60000000};
-/* 0x2dec-0x2df4 padding */
-const unsigned int text_data_2dec[2] = {0x60000000, 0x60000000};
-/* 0x2e28-0x2e30 padding */
-const unsigned int text_data_2e28[2] = {0x60000000, 0x60000000};
-/* 0x3074-0x307c padding */
-const unsigned int text_data_3074[2] = {0x60000000, 0x60000000};
-/* 0x3174-0x317c padding */
-const unsigned int text_data_3174[2] = {0x60000000, 0x60000000};
-/* 0x3414-0x341c padding */
-const unsigned int text_data_3414[2] = {0x60000000, 0x60000000};
-/* 0x35b8-0x35c0 padding */
-const unsigned int text_data_35b8[2] = {0x60000000, 0x60000000};
-/* 0x38dc-0x38e4 padding */
-const unsigned int text_data_38dc[2] = {0x60000000, 0x60000000};
-/* 0x3a34-0x3a3c padding */
-const unsigned int text_data_3a34[2] = {0x60000000, 0x60000000};
 /* 0x3b9c-0x3ba0 padding */
 const unsigned int text_data_3b9c[1] = {0x60000000};
-/* 0x3e70-0x3e7c padding */
-const unsigned int text_data_3e70[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x3ec0-0x3ec4 padding */
-const unsigned int text_data_3ec0[1] = {0x60000000};
-/* 0x3efc-0x3f00 padding */
-const unsigned int text_data_3efc[1] = {0x60000000};
-/* 0x3f38-0x3f3c padding */
-const unsigned int text_data_3f38[1] = {0x60000000};
-/* 0x4150-0x415c padding */
-const unsigned int text_data_4150[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x419c-0x41a0 padding */
-const unsigned int text_data_419c[1] = {0x60000000};
-/* 0x41d4-0x41d8 padding */
-const unsigned int text_data_41d4[1] = {0x60000000};
-/* 0x420c-0x4210 padding */
-const unsigned int text_data_420c[1] = {0x60000000};
-/* 0x4580-0x458c padding */
-const unsigned int text_data_4580[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x45d0-0x45d4 padding */
-const unsigned int text_data_45d0[1] = {0x60000000};
-/* 0x460c-0x4610 padding */
-const unsigned int text_data_460c[1] = {0x60000000};
-/* 0x4648-0x464c padding */
-const unsigned int text_data_4648[1] = {0x60000000};
-/* 0x4688-0x4690 padding */
-const unsigned int text_data_4688[2] = {0x60000000, 0x60000000};
-/* 0x46a4-0x46a8 padding */
-const unsigned int text_data_46a4[1] = {0x60000000};
-/* 0x46d0-0x46d8 padding */
-const unsigned int text_data_46d0[2] = {0x60000000, 0x60000000};
-/* 0x46ec-0x46f0 padding */
-const unsigned int text_data_46ec[1] = {0x60000000};
-/* 0x471c-0x4724 padding */
-const unsigned int text_data_471c[2] = {0x60000000, 0x60000000};
-/* 0x4738-0x473c padding */
-const unsigned int text_data_4738[1] = {0x60000000};
-/* 0x4768-0x4770 padding */
-const unsigned int text_data_4768[2] = {0x60000000, 0x60000000};
-/* 0x4784-0x4788 padding */
-const unsigned int text_data_4784[1] = {0x60000000};
-/* 0x4940-0x494c padding */
-const unsigned int text_data_4940[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x498c-0x4990 padding */
-const unsigned int text_data_498c[1] = {0x60000000};
-/* 0x49c4-0x49c8 padding */
-const unsigned int text_data_49c4[1] = {0x60000000};
-/* 0x49fc-0x4a00 padding */
-const unsigned int text_data_49fc[1] = {0x60000000};
-/* 0x4a3c-0x4a44 padding */
-const unsigned int text_data_4a3c[2] = {0x60000000, 0x60000000};
-/* 0x4a58-0x4a5c padding */
-const unsigned int text_data_4a58[1] = {0x60000000};
-/* 0x4a84-0x4a8c padding */
-const unsigned int text_data_4a84[2] = {0x60000000, 0x60000000};
-/* 0x4aa0-0x4aa4 padding */
-const unsigned int text_data_4aa0[1] = {0x60000000};
-/* 0x4ad0-0x4ad8 padding */
-const unsigned int text_data_4ad0[2] = {0x60000000, 0x60000000};
-/* 0x4aec-0x4af0 padding */
-const unsigned int text_data_4aec[1] = {0x60000000};
-/* 0x4b1c-0x4b24 padding */
-const unsigned int text_data_4b1c[2] = {0x60000000, 0x60000000};
-/* 0x4b38-0x4b3c padding */
-const unsigned int text_data_4b38[1] = {0x60000000};
-/* 0x4cbc-0x4cc4 padding */
-const unsigned int text_data_4cbc[2] = {0x60000000, 0x60000000};
-/* 0x4cf4-0x4d00 padding */
-const unsigned int text_data_4cf4[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x4d68-0x4d70 padding */
-const unsigned int text_data_4d68[2] = {0x60000000, 0x60000000};
 /* 0x4d88-0x4d90 padding */
 const unsigned int text_data_4d88[2] = {0x60000000, 0x60000000};
-/* 0x4da8-0x4db0 padding */
-const unsigned int text_data_4da8[2] = {0x60000000, 0x60000000};
-/* 0x4f50-0x4f54 padding */
-const unsigned int text_data_4f50[1] = {0x60000000};
-/* 0x5038-0x5040 padding */
-const unsigned int text_data_5038[2] = {0x60000000, 0x60000000};
-/* 0x50ec-0x50f0 padding */
-const unsigned int text_data_50ec[1] = {0x60000000};
-/* 0x515c-0x5160 padding */
-const unsigned int text_data_515c[1] = {0x60000000};
-/* 0x51c8-0x51d0 padding */
-const unsigned int text_data_51c8[2] = {0x60000000, 0x60000000};
-/* 0x5270-0x527c padding */
-const unsigned int text_data_5270[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x5294-0x529c padding */
-const unsigned int text_data_5294[2] = {0x60000000, 0x60000000};
-/* 0x52b8-0x52bc padding */
-const unsigned int text_data_52b8[1] = {0x60000000};
-/* 0x52d4-0x52dc padding */
-const unsigned int text_data_52d4[2] = {0x60000000, 0x60000000};
-/* 0x52f8-0x52fc padding */
-const unsigned int text_data_52f8[1] = {0x60000000};
-/* 0x5314-0x531c padding */
-const unsigned int text_data_5314[2] = {0x60000000, 0x60000000};
-/* 0x5338-0x533c padding */
-const unsigned int text_data_5338[1] = {0x60000000};
-/* 0x5354-0x535c padding */
-const unsigned int text_data_5354[2] = {0x60000000, 0x60000000};
 /* 0x5384-0x5390 padding */
 const unsigned int text_data_5384[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x53c4-0x53d0 padding */
-const unsigned int text_data_53c4[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x5400-0x540c padding */
-const unsigned int text_data_5400[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x543c-0x5448 padding */
-const unsigned int text_data_543c[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x5478-0x5484 padding */
-const unsigned int text_data_5478[3] = {0x60000000, 0x60000000, 0x60000000};
-/* 0x549c-0x54a4 padding */
-const unsigned int text_data_549c[2] = {0x60000000, 0x60000000};
 /* 0x5608-0x5610 padding */
 const unsigned int text_data_5608[2] = {0x60000000, 0x60000000};
 /* 0x5628-0x5630 padding */
@@ -5407,8 +5281,6 @@ const unsigned int text_data_c243c[1] = {0x60000000};
 const unsigned int text_data_c24ac[1] = {0x60000000};
 /* 0xc25b4-0xc26b8 table switch table of the `bctr` at 0xc25b0: entry i -> 0xc25b4 + word[i]; targets c26f0 c26c0 c26c8 c26f0 c26d0 c26f0 c26f0 c26f0 c26d8 c26f0 c26f0 c26f0 c26f0 c26f0 c26f0 c26f0... */
 const unsigned int text_data_c25b4[65] = {0x0000013c, 0x0000010c, 0x00000114, 0x0000013c, 0x0000011c, 0x0000013c, 0x0000013c, 0x0000013c, 0x00000124, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000012c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x00000134, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x0000013c, 0x00000104};
-/* 0xc26ec-0xc26f0 padding */
-const unsigned int text_data_c26ec[1] = {0x60000000};
 /* 0xc2704-0xc2710 padding */
 const unsigned int text_data_c2704[3] = {0x60000000, 0x60000000, 0x60000000};
 /* 0xc2824-0xc2830 padding */
@@ -5505,8 +5377,6 @@ const unsigned int text_data_c50ec[1] = {0x60000000};
 const unsigned int text_data_c515c[1] = {0x60000000};
 /* 0xc51fc-0xc5300 table switch table of the `bctr` at 0xc51f8: entry i -> 0xc51fc + word[i]; targets c5340 c5308 c5310 c5340 c5318 c5340 c5340 c5340 c5320 c5340 c5340 c5340 c5340 c5340 c5340 c5340... */
 const unsigned int text_data_c51fc[65] = {0x00000144, 0x0000010c, 0x00000114, 0x00000144, 0x0000011c, 0x00000144, 0x00000144, 0x00000144, 0x00000124, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x0000012c, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000134, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000144, 0x00000104};
-/* 0xc5334-0xc5340 padding */
-const unsigned int text_data_c5334[3] = {0x60000000, 0x60000000, 0x60000000};
 /* 0xc5354-0xc5360 padding */
 const unsigned int text_data_c5354[3] = {0x60000000, 0x60000000, 0x60000000};
 /* 0xc53d4-0xc53e0 padding */
@@ -5525,8 +5395,6 @@ const unsigned int text_data_c57a8[2] = {0x60000000, 0x60000000};
 const unsigned int text_data_c57f4[16] = {0x00000048, 0x00000050, 0x00000058, 0x00000048, 0x00000050, 0x00000058, 0x00000048, 0x00000050, 0x00000058, 0x00000040, 0x00000040, 0x00000040, 0x00000048, 0x00000050, 0x00000058, 0x00000040};
 /* 0xc5874-0xc58b4 table switch table of the `bctr` at 0xc5870: entry i -> 0xc5874 + word[i]; targets c58b4 c58b4 c58b4 c58c4 c58c4 c58c4 c58d8 c58d8 c58d8 c58ec c5900 c5914 c5928 c5928 c5928 c595c */
 const unsigned int text_data_c5874[16] = {0x00000040, 0x00000040, 0x00000040, 0x00000050, 0x00000050, 0x00000050, 0x00000064, 0x00000064, 0x00000064, 0x00000078, 0x0000008c, 0x000000a0, 0x000000b4, 0x000000b4, 0x000000b4, 0x000000e8};
-/* 0xc59ac-0xc59b0 padding */
-const unsigned int text_data_c59ac[1] = {0x60000000};
 /* 0xc59b8-0xc59c0 padding */
 const unsigned int text_data_c59b8[2] = {0x60000000, 0x60000000};
 /* 0xc59d4-0xc59e0 padding */
@@ -5575,8 +5443,6 @@ const unsigned int text_data_c67b4[3] = {0x60000000, 0x60000000, 0x60000000};
 const unsigned int text_data_c6818[2] = {0x60000000, 0x60000000};
 /* 0xc6998-0xc69c0 table switch table of the `bctr` at 0xc6994: entry i -> 0xc6998 + word[i]; targets c69c0 c6a08 c6ab8 c6a50 c6a08 c6a08 c6b60 c69c0 c69c0 c6b38 */
 const unsigned int text_data_c6998[10] = {0x00000028, 0x00000070, 0x00000120, 0x000000b8, 0x00000070, 0x00000070, 0x000001c8, 0x00000028, 0x00000028, 0x000001a0};
-/* 0xc6b64-0xc6b70 padding */
-const unsigned int text_data_c6b64[3] = {0x60000000, 0x60000000, 0x60000000};
 /* 0xc6e4c-0xc6e50 padding */
 const unsigned int text_data_c6e4c[1] = {0x60000000};
 /* 0xc6e78-0xc6e80 padding */

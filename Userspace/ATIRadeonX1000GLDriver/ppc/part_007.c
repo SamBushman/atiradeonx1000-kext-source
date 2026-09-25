@@ -4522,7 +4522,7 @@ int FUN_00053610(param_1, param_2, param_3, param_4, param_5, param_6)
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
     FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
-                 param_6,0);
+                 param_6,0,&DAT_001db998,0,&DAT_001db998);
   }
   return;
 }
@@ -4540,13 +4540,13 @@ int FUN_000536a0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
     FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
-                 param_6,param_7);
+                 param_6,param_7,param_8,0,&DAT_001db998);
   }
   return;
 }
 
 /* FUN_00053730 @ 0x53730 (132 bytes) */
-int FUN_00053730(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int FUN_00053730(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -4555,10 +4555,12 @@ int FUN_00053730(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_6;
   undefined4 param_7;
   undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
 {
   if (((unsigned char *)0x00001170)[param_1] != '\0') {
     FUN_000553c0(param_1,*(undefined4 *)(((unsigned char *)0x00001168) + param_1),param_2,param_3,param_4,param_5,
-                 param_6,param_7);
+                 param_6,param_7,param_8,param_9,param_10);
   }
   return;
 }
@@ -4589,7 +4591,8 @@ int FUN_000537c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uStack_34 = param_6;
     uStack_30 = param_7;
     uStack_2c = param_8;
-    iVar1 = FUN_000553c0(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0);
+    iVar1 = FUN_000553c0(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0,&DAT_001db998,0,
+                         &DAT_001db998);
     if ((iVar1 != 0) && (param_2 - 0x879dU < 0x10)) {
       *(undefined1 *)((param_2 - 0x879dU) + iVar2 + 0x44) = 1;
     }

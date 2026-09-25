@@ -1128,10 +1128,9 @@ int FUN_0010dcb8(param_1, param_2)
 /* FUN_0010dcc4 @ 0x10dcc4 (56 bytes) */
 int FUN_0010dcc4()
 {
-  int in_stack_00000038;
   
-  if (*(int *)(in_stack_00000038 + 0x6c4) != 0) {
-    FUN_000e1534(in_stack_00000038,0xf);
+  if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)) + 0x6c4) != 0) {
+    FUN_000e1534((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x38)),0xf);
   }
   return 0;
 }
@@ -1222,10 +1221,9 @@ int FUN_0010ddfc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 /* FUN_0010de34 @ 0x10de34 (56 bytes) */
 int FUN_0010de34()
 {
-  int in_stack_0000003c;
   
-  if (*(int *)(in_stack_0000003c + 0x6c4) != 0) {
-    FUN_000e1534(in_stack_0000003c,0xf);
+  if (*(int *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)) + 0x6c4) != 0) {
+    FUN_000e1534((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x3c)),0xf);
   }
   return 0;
 }

@@ -73,6 +73,35 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
 7. `gs/WidenParams.java`: parameters typed narrower than their register although the function rebuilds the whole register
    (`CONCAT31(in_register_0000000c, param_1)`): ParseOperand::GetAsSourceVar(bool) had the demangled `bool` on r3, which carries the hidden
    struct-return pointer, and callers passed that stack address cast to bool (44 glprog functions, b3/widen_glprog.txt).
+8. Stack parameters (`gs/ExtendParams.java` again, lists b3/stackparams_*.txt): Ghidra's PowerPC cspec is SysV and never gives a function more
+   than the eight register arguments by itself; a 9th+ argument word (stored by the caller at 0x38(r1)) was read by the callee as an uninitialised
+   local `in_stack_00000038`, and callers dropped the argument. `_glpDisassemble2Op` takes the address of its caller's flag word as argument 9;
+   with the argument gone the word looked unaliased, its tests folded to constants ("Removing unreachable block") and the rebuilt
+   `_glpPPShaderToProgramString` never printed "TEMP scratch;". The functions come from `Tools/userspace/instack_table.py` (positive offsets),
+   the counts and call sites from `Tools/userspace/stack_params.py`; parameters 9+ get explicit Darwin storage (0x38 + 4k - dynamic storage would
+   put them at SysV's Stack[0x8]), `nofp` drops invented float parameters first (`_InterpreterLoadSource`: eleven, the body only writes FPRs).
+   Iterated to closure (functions that forward their own stack arguments appear once their callee takes them): 14 glprog, 70 GLDriver
+   (FUN_00029290 by hand: its committed signature was `(void)`; its callers are orphan code). After it no dump file reads a positive
+   `in_stack_` offset except six glprog and two GLDriver clipped fragments that nothing calls. Not changed: negative `in_stack_` reads are
+   over-arity arguments (SysV-stacked fparam_9..13 of 57 signatures, `gs/ListStackParams.java`); 56 are never read, FUN_0002bbc4's goes on to
+   FUN_00090470, which uses no FPR.
+9. GLDriver's two embedded jump tables that Ghidra never resolved ("Jumptable with 0 entries", the C jumped into the stock table as a call):
+   `FUN_000d0488` (0xd072c, 32 entries / 9 targets, `param_8 < 0x20`) and `FUN_000d0888` (0xd0aa0, 4 targets) - `gs/FixSwitches.java`, owners
+   re-decompiled; their RANGES rows are widened to the case code by step 10. Every other "indirect jump treated as call" in the five dumps is an epilogue tail call through a
+   function pointer (`lmw ...; mtctr; bctr`) or an import stub's jump, which the C prints as call + return - equivalent (`Tools/userspace/jumptable_triage.py`).
+   The same step fixes FUN_00002ae0, entry 0 of the dispatch table `_gldInitDispatch` hands out - the driver's glAccum(ctx, op, value): the stock reads
+   r3, r4 (the op, `switch` 0x100..0x104 = GL_ACCUM..GL_ADD) and f1; Ghidra had `(param_1, double)` and the C switched on an uninitialised `in_r4`.
+   ExtendParams now inserts GPR parameters in front of float ones (Darwin gives an int after a double the GPR the double shadows).
+10. Switch owners' RANGES: when Ghidra's decompiler recovers a jump table it transcribes the cases, but the listing's function body - what RANGES
+   records - stops at the `bctr`, so the case code counted as unowned ("switch-code", raw asm): FUN_00002ae0's five cases were an 11 KB "orphan"
+   region (0x2b38-0x5610). `Tools/userspace/switch_ranges.py` follows every embedded table of each owner (the size from the `cmplwi` guard, words read
+   from the binary - otool shows a negative offset as an FP instruction and 0x200 as `attn`; a constant-index table `lwz r0,K(base)` reaches only
+   entry K/4) and widens 22 GLDriver and 31 glprog rows (b3/ranges_switch_*.tsv). What stays unowned: in glprog 76 blocks behind unused entries of
+   constant-index tables (dead in the stock code, emitted as byte-identical asm), elsewhere only alignment `nop`s; unowned_blocks.py now calls a
+   table whose words decode as instructions a table. __text accounting: GLDriver function bodies 1626832 -> 1647352 bytes, glprog 629768 -> 639588,
+   0 bytes unaccounted. Side finding for #72: 20 orphan extents of unowned_code (14 GLDriver in 0x1efd0.., 0xc5538.., 0x10b3b4..; glprog one in each of the six
+   constant-switch owners of step 3) now duplicate case code their owner transcribes, and 11 glprog landing-pad extents run into the next
+   function's entry.
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

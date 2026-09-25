@@ -1133,24 +1133,26 @@ int FUN_00127994(param_1, param_2)
 }
 
 /* FUN_00127e48 @ 0x127e48 (132 bytes) */
-int FUN_00127e48(param_1, param_2, param_3, param_4, param_5, param_6)
+int FUN_00127e48(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
   int param_6;
+  undefined4 param_7;
+  undefined4 param_8;
+  undefined4 param_9;
+  undefined4 param_10;
 {
   int iVar1;
-  undefined4 in_stack_00000038;
-  undefined4 in_stack_0000003c;
   
   iVar1 = *(int *)(((unsigned char *)0x0000172c) + param_1);
   *(int *)(((unsigned char *)0x0000172c) + param_1) = iVar1 + 1;
   iVar1 = param_1 + iVar1 * 0x34 + 0x60;
   *(undefined4 *)(iVar1 + 8) = param_3;
   *(undefined4 *)(iVar1 + 0xc) = param_4;
-  *(undefined4 *)(iVar1 + 0x10) = in_stack_0000003c;
+  *(undefined4 *)(iVar1 + 0x10) = param_10;
   *(undefined4 *)(iVar1 + 0x1c) = 1;
   *(undefined1 *)(iVar1 + 0x37) = (undefined1)param_2;
   *(char *)(iVar1 + 0x38) = (char)((uint)param_5 >> 0x18);
@@ -1158,7 +1160,7 @@ int FUN_00127e48(param_1, param_2, param_3, param_4, param_5, param_6)
   *(char *)(iVar1 + 0x3a) = (char)((uint)param_5 >> 8);
   *(char *)(iVar1 + 0x3b) = (char)param_5;
   *(uint *)(iVar1 + 0x24) = (uint)(param_6 == 0);
-  *(undefined4 *)(iVar1 + 0x18) = in_stack_00000038;
+  *(undefined4 *)(iVar1 + 0x18) = param_9;
   *(undefined1 *)(iVar1 + 0x34) = (undefined1)param_2;
   *(undefined1 *)(iVar1 + 0x35) = (undefined1)param_2;
   *(undefined1 *)(iVar1 + 0x36) = (undefined1)param_2;
