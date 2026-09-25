@@ -1,0 +1,3 @@
+entry	function	register	class	first reader / imports
+7f80	FUN_00007f80	r6	PASS-no	7fc8 bl 0x6120
+7f80	FUN_00007f80	r7	PASS-no	7fc8 bl 0x6120

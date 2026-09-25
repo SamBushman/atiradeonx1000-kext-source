@@ -1956,7 +1956,7 @@ LAB_97bc6330:
     __ZdlPv(this_00);
   }
   if (puVar3 == (undefined4 *)0x0) {
-    TPPStreamCompiler__warning(SUB41(this,0),(char *)0x0,*(char **)(*(int *)param_2 + 0x14),DAT_a7b7bd3c,in_r7,in_r8,
+    TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)param_2 + 0x14),DAT_a7b7bd3c,in_r7,in_r8,
             *(int *)param_2,in_r10);
     uVar5 = uVar4;
     goto LAB_97bc6440;
@@ -3802,8 +3802,7 @@ int TPPStreamCompiler__getOperandAsSourceVar(param_1, param_2, param_3, param_4,
   
   if (*(int *)param_3 == 0) {
     if (*(int *)(param_3 + 8) != 0) {
-      error(SUB41(param_2,0),(char *)0x1,(char *)0x0,_compileErrorString,param_5,param_6,param_7,
-            param_8);
+      error(param_2,(char *)0x1,(char *)0x0,_compileErrorString,param_5,param_6,param_7,param_8);
     }
     uVar5 = 4;
     iVar7 = 4;
@@ -3839,7 +3838,7 @@ int TPPStreamCompiler__getOperandAsSourceVar(param_1, param_2, param_3, param_4,
         }
       }
       else {
-        error(SUB41(param_2,0),(char *)0x1,(char *)0x0,DAT_a7b7bd14,param_5,param_6,uVar5,param_8);
+        error(param_2,(char *)0x1,(char *)0x0,DAT_a7b7bd14,param_5,param_6,uVar5,param_8);
       }
       iVar7 = iVar7 + 4;
     }
@@ -4193,7 +4192,7 @@ LAB_97bc909c:
     }
     uVar13 = local_b0[0] | local_b0[1] | local_b0[2] | (uint)local_a4;
     if ((uVar13 != 0) && (bVar10)) {
-      TPPStreamCompiler__warning(SUB41(this,0),(char *)0x0,(char *)0x0,DAT_a7b7bd40,in_r7,uVar19,uVar13,puVar20);
+      TPPStreamCompiler__warning(this,(char *)0x0,(char *)0x0,DAT_a7b7bd40,in_r7,uVar19,uVar13,puVar20);
     }
     if (bVar2) {
       if (bVar10) {

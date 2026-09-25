@@ -215,6 +215,19 @@ stock code too: `_byte_scan` 0x97b89adc (r3 == 0xa just tested), `_ShCompile` 0x
 0x97c32c14 (`cmplw r0,r0`), `_UnrollConstantLoopsSimple` 0x97c10090.. (the switch field, bits 20-21, was cleared by `rlwinm r0,r0,0,24,19` just before).
 The behavioural tests of the table above still pass on the new link.
 
+### Undeclared argument registers (`in_rN`, issue #70)
+Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
+from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees
+followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
+* USED (the body reads the entry value) - three real missing parameters, all fixed: GLDriver glAccum `FUN_00002ae0` (r4, the op), glprog
+  `TPPStreamCompiler::error` / `::warning` (r3 = `this`: Ghidra applied the demangled `(bool, ...)` from r3, the body read `this` as an uninitialised
+  `in_r3`, and callers passed `SUB41(this, 0)`, the low byte of it - every preprocessor error / warning path of the rebuilt image dereferenced garbage).
+* RET (only the return reads it: r3/r4 untouched on some path, a return-value question) - 1 GLDriver, 4 glprog; DEAD - 1 glprog (a saveFP piece).
+* PASS (the entry value only reaches a call): the callee chain never reads it (118 GLDriver, 85 glprog, 2 VA), it only reaches the `...` of a variadic
+  function (15 glprog: `TParseContext::error`, `TPPStreamCompiler::error`), or it reaches a call through a pointer / an import / more than 3 levels
+  (115 GLDriver, 177 glprog). For every PASS row no stock caller sets that register before calling the function (`param_used.py`: `real=[]`), so the
+  stock itself forwards whatever the register held - the rebuilt C forwards an uninitialised local instead; neither is an argument.
+
 ### Known residuals (explained, not hidden)
 
 * Callee comparison (strict, libGLProgrammability): the stock calls `malloc`/`realloc`/`free` from `yy_flex_*` through `PTR_LAB_...` pointers, `handleDigit` under an alias name,

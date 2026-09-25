@@ -102,6 +102,10 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    0 bytes unaccounted. Side finding for #72: 20 orphan extents of unowned_code (14 GLDriver in 0x1efd0.., 0xc5538.., 0x10b3b4..; glprog one in each of the six
    constant-switch owners of step 3) now duplicate case code their owner transcribes, and 11 glprog landing-pad extents run into the next
    function's entry.
+11. `TPPStreamCompiler::error` / `::warning` (glprog): r3 is `this`, Ghidra put the demangled `bool` there; the body read `this` as `in_r3` and
+   callers passed `SUB41(this,0)`. WidenParams (now matched by namespace-qualified name, so `TParseContext::error` is not touched; PIC stubs by
+   their `<EXTERNAL>::` name) on the two functions and the stub, callers re-decompiled (b3/widen2_redump_glprog.txt). Found by
+   `Tools/userspace/inreg_liveness.py` (Userspace/README.md, "Undeclared argument registers").
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

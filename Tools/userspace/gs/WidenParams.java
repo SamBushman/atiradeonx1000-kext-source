@@ -23,10 +23,10 @@ public class WidenParams extends GhidraScript {
             if (f0 == null) continue;
             Set<Integer> idx = new HashSet<>();
             for (String i : p[1].split(",")) idx.add(Integer.parseInt(i));
-            byName.put(f0.getName(), idx);
+            byName.put(f0.getName(true), idx);   // namespace-qualified: TPPStreamCompiler::error must not widen TParseContext::error
         }
         for (Function f : currentProgram.getFunctionManager().getFunctions(true)) {
-            Set<Integer> idx = byName.get(f.getName());
+            Set<Integer> idx = byName.get(f.getName(true).replaceFirst("^<EXTERNAL>::", ""));   // the function and its PIC stub
             if (idx == null) continue;
             List<Parameter> ps = new ArrayList<>();
             Parameter[] cur = f.getParameters();
@@ -34,6 +34,7 @@ public class WidenParams extends GhidraScript {
                 ps.add(new ParameterImpl(cur[i].getName(), idx.contains(i) ? Undefined4DataType.dataType : cur[i].getDataType(), currentProgram, SourceType.USER_DEFINED));
             f.updateFunction(f.getCallingConventionName(), f.getReturn(), ps, FunctionUpdateType.DYNAMIC_STORAGE_ALL_PARAMS, true, SourceType.USER_DEFINED);
             n++;
+            println("WIDENPARAMS " + f.getName(true) + " @ " + f.getEntryPoint());
         }
         println("WIDENPARAMS " + n + " functions");
     }

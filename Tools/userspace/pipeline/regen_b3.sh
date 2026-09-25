@@ -25,6 +25,11 @@ rm -rf glprog-stk && cp -r glprog-sw glprog-stk
 X="glprog-stk GLProgProject libGLProgrammability.dylib"
 run $X -postScript ExtendParams.java $(cat $B/stackparams_glprog.txt)
 run $X -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/stackredump_glprog.txt)
+# step 11: TPPStreamCompiler::error / ::warning take `this` in r3 (Ghidra had the demangled bool there); matched by qualified name + the PIC stub
+rm -rf glprog-w2 && cp -r glprog-stk glprog-w2
+X="glprog-w2 GLProgProject libGLProgrammability.dylib"
+run $X -postScript WidenParams.java 0x97bc9a04:0 0x97bc9b34:0 0x97c21a00:0
+run $X -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/widen2_redump_glprog.txt)
 # GLDriver (from gld-ext) and GA (from r32-ga)
 rm -rf gld-ret && cp -r gld-ext gld-ret
 run gld-ret GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetValueReturn.java $(cat $B/setret_gld.txt)

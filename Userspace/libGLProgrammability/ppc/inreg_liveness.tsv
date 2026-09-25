@@ -1,0 +1,283 @@
+entry	function	register	class	first reader / imports
+97b7dadc	_PPParserParseStatement	r9	PASS-no	97b7db00 bl _PPParserGetPart
+97b86434	_CPPdefine	r5	PASS-indirect	97b86488 bctrl 
+97b86434	_CPPdefine	r6	PASS-indirect	97b86488 bctrl 
+97b86434	_CPPdefine	r7	PASS-indirect	97b86488 bctrl 
+97b86434	_CPPdefine	r8	PASS-indirect	97b86488 bctrl 
+97b86434	_CPPdefine	r9	PASS-indirect	97b86488 bctrl 
+97b867e0	_CPPundef	r5	PASS-indirect	97b86818 bctrl 
+97b867e0	_CPPundef	r6	PASS-indirect	97b86818 bctrl 
+97b867e0	_CPPundef	r7	PASS-indirect	97b86818 bctrl 
+97b867e0	_CPPundef	r8	PASS-indirect	97b86818 bctrl 
+97b867e0	_CPPundef	r9	PASS-indirect	97b86818 bctrl 
+97b86cb4	_eval	r8	PASS-indirect	97b86db8 bl _MacroExpand
+97b86cb4	_eval	r9	PASS-indirect	97b86db8 bl _MacroExpand
+97b87010	_CPPif	r5	PASS-indirect	97b87048 bctrl 
+97b87010	_CPPif	r6	PASS-indirect	97b87048 bctrl 
+97b87010	_CPPif	r7	PASS-indirect	97b87048 bctrl 
+97b87010	_CPPif	r8	PASS-indirect	97b87048 bctrl 
+97b87144	_CPPifdef	r5	PASS-indirect	97b8717c bctrl 
+97b87144	_CPPifdef	r6	PASS-indirect	97b8717c bctrl 
+97b87144	_CPPifdef	r7	PASS-indirect	97b8717c bctrl 
+97b87144	_CPPifdef	r8	PASS-indirect	97b8717c bctrl 
+97b872a0	_CPPline	r5	PASS-indirect	97b872d8 bctrl 
+97b872a0	_CPPline	r6	PASS-indirect	97b872d8 bctrl 
+97b872a0	_CPPline	r7	PASS-indirect	97b872d8 bctrl 
+97b872a0	_CPPline	r8	PASS-indirect	97b872d8 bctrl 
+97b872a0	_CPPline	r9	PASS-indirect	97b872d8 bctrl 
+97b873ac	_CPPerror	r5	PASS-indirect	97b873e4 bctrl 
+97b873ac	_CPPerror	r6	PASS-indirect	97b873e4 bctrl 
+97b873ac	_CPPerror	r7	PASS-indirect	97b873e4 bctrl 
+97b873ac	_CPPerror	r8	PASS-indirect	97b873e4 bctrl 
+97b873ac	_CPPerror	r9	PASS-indirect	97b873e4 bctrl 
+97b87494	_CPPpragma	r5	PASS-indirect	97b874d4 bctrl 
+97b87494	_CPPpragma	r6	PASS-indirect	97b874d4 bctrl 
+97b87494	_CPPpragma	r7	PASS-indirect	97b874d4 bctrl 
+97b87494	_CPPpragma	r8	PASS-indirect	97b874d4 bctrl 
+97b876a4	_CPPversion	r5	PASS-indirect	97b876dc bctrl 
+97b876a4	_CPPversion	r6	PASS-indirect	97b876dc bctrl 
+97b876a4	_CPPversion	r7	PASS-indirect	97b876dc bctrl 
+97b876a4	_CPPversion	r8	PASS-indirect	97b876dc bctrl 
+97b876a4	_CPPversion	r9	PASS-indirect	97b876dc bctrl 
+97b877a4	_CPPextension	r5	PASS-indirect	97b877dc bctrl 
+97b877a4	_CPPextension	r6	PASS-indirect	97b877dc bctrl 
+97b877a4	_CPPextension	r7	PASS-indirect	97b877dc bctrl 
+97b877a4	_CPPextension	r8	PASS-indirect	97b877dc bctrl 
+97b877a4	_CPPextension	r9	PASS-indirect	97b877dc bctrl 
+97b87900	_readCPPline	r5	PASS-indirect	97b8793c bctrl 
+97b87900	_readCPPline	r6	PASS-indirect	97b8793c bctrl 
+97b87900	_readCPPline	r7	PASS-indirect	97b8793c bctrl 
+97b87900	_readCPPline	r8	PASS-indirect	97b8793c bctrl 
+97b87900	_readCPPline	r9	PASS-indirect	97b8793c bctrl 
+97b87ffc	_MacroExpand	r5	PASS-no	97b8802c bl 0x97c1e3c0	; symbol stub for: _LookUpSym
+97b87ffc	_MacroExpand	r6	PASS-no	97b8802c bl 0x97c1e3c0	; symbol stub for: _LookUpSym
+97b87ffc	_MacroExpand	r7	PASS-no	97b8802c bl 0x97c1e3c0	; symbol stub for: _LookUpSym
+97b87ffc	_MacroExpand	r8	PASS-no	97b8802c bl 0x97c1e3c0	; symbol stub for: _LookUpSym
+97b88b88	_lBuildFloatValue	r6	PASS-no	97b88c78 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b88b88	_lBuildFloatValue	r7	PASS-no	97b88c78 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b88b88	_lBuildFloatValue	r8	PASS-no	97b88c78 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b88c98	_lFloatConst	r7	PASS-indirect	97b88cf8 bctrl 
+97b88c98	_lFloatConst	r8	PASS-indirect	97b88cf8 bctrl 
+97b88c98	_lFloatConst	r9	PASS-indirect	97b88cf8 bctrl 
+97b89cd0	_yylex_CPP	r5	PASS-indirect	97b89d20 bctrl 
+97b89cd0	_yylex_CPP	r6	PASS-indirect	97b89d20 bctrl 
+97b89cd0	_yylex_CPP	r7	PASS-indirect	97b89d20 bctrl 
+97b89cd0	_yylex_CPP	r8	PASS-indirect	97b89d20 bctrl 
+97b89e94	_check_EOF	r4	RET	97b89efc blr 
+97b89e94	_check_EOF	r5	PASS-no	97b89ed8 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b89e94	_check_EOF	r6	PASS-no	97b89ed8 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b89e94	_check_EOF	r7	PASS-no	97b89ed8 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b89e94	_check_EOF	r8	PASS-no	97b89ed8 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b89e94	_check_EOF	r9	PASS-vararg	97b89ed8 bl 0x97c1e460	; symbol stub for: _CPPErrorT
+97b8a11c	_lAddToTree	r5	PASS-no	97b8a158 bl 0x97c1e660	; symbol stub for: _GetRevers
+97b8a11c	_lAddToTree	r6	PASS-no	97b8a158 bl 0x97c1e660	; symbol stub for: _GetRevers
+97b8a11c	_lAddToTree	r7	PASS-no	97b8a158 bl 0x97c1e660	; symbol stub for: _GetRevers
+97b8a11c	_lAddToTree	r8	PASS-no	97b8a158 bl 0x97c1e660	; symbol stub for: _GetRevers
+97b8a11c	_lAddToTree	r9	PASS-no	97b8a158 bl 0x97c1e660	; symbol stub for: _GetRevers
+97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r5	PASS-no	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r6	PASS-indirect	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r7	PASS-indirect	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8e624	TIntermediate::addConversion	r7	PASS-indirect	97b8e65c bctrl 
+97b8e624	TIntermediate::addConversion	r8	PASS-indirect	97b8e65c bctrl 
+97b8fae0	TIntermediate::addComma	r7	PASS-indirect	97b8fb1c bctrl 
+97b8fae0	TIntermediate::addComma	r8	PASS-indirect	97b8fb1c bctrl 
+97b915d4	compareStructure	r7	PASS-indirect	97b91630 bctrl 
+97b915d4	compareStructure	r8	PASS-indirect	97b91630 bctrl 
+97b95c0c	TIntermediate::changeAggrToTempConst	r7	PASS-indirect	97b95c44 bctrl 
+97b95c0c	TIntermediate::changeAggrToTempConst	r8	PASS-indirect	97b95c44 bctrl 
+97b95f40	TIntermediate::promoteConstantUnion	r6	PASS-indirect	97b95f84 bctrl 
+97b95f40	TIntermediate::promoteConstantUnion	r7	PASS-indirect	97b95f84 bctrl 
+97b95f40	TIntermediate::promoteConstantUnion	r8	PASS-indirect	97b95f84 bctrl 
+97b95f40	TIntermediate::promoteConstantUnion	r9	PASS-indirect	97b95f84 bctrl 
+97b96820	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	r7	PASS-indirect	97b96850 bctrl 
+97b96820	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	r8	PASS-indirect	97b96850 bctrl 
+97b96a10	TIntermediate::removeMatrixConstNode	r8	PASS-indirect	97b96a50 bctrl 
+97b9a31c	TParseContext::parseVectorFields	r10	PASS-vararg	97b9a564 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9aec8	TParseContext::constErrorCheck	r8	PASS-indirect	97b9aef8 bctrl 
+97b9aec8	TParseContext::constErrorCheck	r9	PASS-indirect	97b9aef8 bctrl 
+97b9aec8	TParseContext::constErrorCheck	r10	PASS-indirect	97b9aef8 bctrl 
+97b9af54	TParseContext::integerErrorCheck	r8	PASS-indirect	97b9af88 bctrl 
+97b9af54	TParseContext::integerErrorCheck	r9	PASS-indirect	97b9af88 bctrl 
+97b9af54	TParseContext::integerErrorCheck	r10	PASS-indirect	97b9af88 bctrl 
+97b9b000	TParseContext::globalErrorCheck	r9	PASS-vararg	97b9b034 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9b000	TParseContext::globalErrorCheck	r10	PASS-vararg	97b9b034 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9b054	TParseContext::reservedErrorCheck	r8	PASS-unknown	97b9b0ac bl 0x97c1f160	; symbol stub for: __ZNSbIcSt
+97b9b054	TParseContext::reservedErrorCheck	r10	PASS-unknown	97b9b0ac bl 0x97c1f160	; symbol stub for: __ZNSbIcSt
+97b9b1cc	TParseContext::constructorErrorCheck	r10	PASS-indirect	97b9b9dc bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9ba00	TParseContext::voidErrorCheck	r8	PASS-vararg	97b9ba58 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9ba78	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	r9	PASS-indirect	97b9baac bctrl 
+97b9ba78	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	r10	PASS-indirect	97b9baac bctrl 
+97b9bb48	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	r8	PASS-vararg	97b9bbb0 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9bb48	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	r9	PASS-vararg	97b9bbb0 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9bb48	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	r10	PASS-vararg	97b9bbb0 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9bbcc	TParseContext::samplerErrorCheck	r8	PASS-indirect	97b9bc04 bl __ZN13TParseContext15containsSamplerER5T
+97b9bbcc	TParseContext::samplerErrorCheck	r9	PASS-indirect	97b9bc04 bl __ZN13TParseContext15containsSamplerER5T
+97b9bbcc	TParseContext::samplerErrorCheck	r10	PASS-indirect	97b9bc04 bl __ZN13TParseContext15containsSamplerER5T
+97b9bc84	TParseContext::structQualifierErrorCheck	r10	PASS-indirect	97b9bcc4 bl 0x97c1ed60	; symbol stub for: __Z18getQu
+97b9bd30	TParseContext::parameterSamplerErrorCheck	r8	PASS-indirect	97b9bd70 bctrl 
+97b9bd30	TParseContext::parameterSamplerErrorCheck	r9	PASS-indirect	97b9bd70 bctrl 
+97b9bd30	TParseContext::parameterSamplerErrorCheck	r10	PASS-indirect	97b9bd70 bctrl 
+97b9be9c	TParseContext::insertBuiltInArrayAtGlobalLevel	r8	PASS-no	97b9beb8 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b9be9c	TParseContext::insertBuiltInArrayAtGlobalLevel	r10	PASS-no	97b9beb8 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b9cb78	TParseContext::arraySetMaxSize	r10	PASS-indirect	97b9cbd0 bctrl 
+97b9d3d8	TParseContext::paramErrorCheck	r8	PASS-indirect	97b9d414 bl 0x97c1ed60	; symbol stub for: __Z18getQu
+97b9d3d8	TParseContext::paramErrorCheck	r9	PASS-indirect	97b9d414 bl 0x97c1ed60	; symbol stub for: __Z18getQu
+97b9d3d8	TParseContext::paramErrorCheck	r10	PASS-indirect	97b9d414 bl 0x97c1ed60	; symbol stub for: __Z18getQu
+97b9d4b0	TParseContext::extensionErrorCheck	r8	PASS-no	97b9d4d4 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b9d4b0	TParseContext::extensionErrorCheck	r10	PASS-no	97b9d4d4 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b9ea2c	TParseContext::addConstructor	r9	PASS-indirect	97b9ea88 bctrl 
+97b9ea2c	TParseContext::addConstructor	r10	PASS-indirect	97b9ea88 bctrl 
+97b9eddc	TParseContext::constructBuiltIn	r10	PASS-indirect	97b9eea0 bl __ZN13TParseContext5errorEiPKcS1_S1_z
+97b9f138	TParseContext::addConstVectorNode	r9	PASS-indirect	97b9f170 bctrl 
+97b9f138	TParseContext::addConstVectorNode	r10	PASS-indirect	97b9f170 bctrl 
+97b9f600	TParseContext::addConstMatrixNode	r7	PASS-indirect	97b9f63c bctrl 
+97b9f600	TParseContext::addConstMatrixNode	r8	PASS-indirect	97b9f63c bctrl 
+97b9f600	TParseContext::addConstMatrixNode	r9	PASS-indirect	97b9f63c bctrl 
+97b9f600	TParseContext::addConstMatrixNode	r10	PASS-indirect	97b9f63c bctrl 
+97b9f988	TParseContext::addConstStruct	r10	PASS-indirect	97b9f9d4 bctrl 
+97b9fe54	InitializeGlobalPools	r3	RET	97b9fee0 blr 
+97b9fee4	FreeGlobalPools	r3	RET	97b9ff10 bl __Z22GetGlobalPoolAllocatorv
+97ba0680	RemoveAllTreeNodes	r5	PASS-indirect	97ba0710 bctrl 
+97ba0680	RemoveAllTreeNodes	r6	PASS-indirect	97ba0710 bctrl 
+97ba0680	RemoveAllTreeNodes	r7	PASS-indirect	97ba0710 bctrl 
+97ba0680	RemoveAllTreeNodes	r8	PASS-indirect	97ba0710 bctrl 
+97ba2b10	TSymbolTableLevel::dump	r5	PASS-indirect	97ba2b50 bctrl 
+97ba2b10	TSymbolTableLevel::dump	r6	PASS-indirect	97ba2b50 bctrl 
+97ba2b10	TSymbolTableLevel::dump	r7	PASS-indirect	97ba2b50 bctrl 
+97ba2b10	TSymbolTableLevel::dump	r8	PASS-indirect	97ba2b50 bctrl 
+97ba2da0	__ZN17TSymbolTableLevelD4Ev	r5	PASS-indirect	97ba2df4 bl 0x97c1fc40	; symbol stub for: __ZNSt22_R
+97ba2da0	__ZN17TSymbolTableLevelD4Ev	r6	PASS-indirect	97ba2df4 bl 0x97c1fc40	; symbol stub for: __ZNSt22_R
+97ba2da0	__ZN17TSymbolTableLevelD4Ev	r7	PASS-indirect	97ba2df4 bl 0x97c1fc40	; symbol stub for: __ZNSt22_R
+97ba2da0	__ZN17TSymbolTableLevelD4Ev	r8	PASS-indirect	97ba2df4 bl 0x97c1fc40	; symbol stub for: __ZNSt22_R
+97ba33f0	TSymbolTableLevel::clone	r5	PASS-no	97ba3408 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97ba33f0	TSymbolTableLevel::clone	r6	PASS-no	97ba3408 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97ba33f0	TSymbolTableLevel::clone	r7	PASS-no	97ba3408 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97ba33f0	TSymbolTableLevel::clone	r8	PASS-no	97ba3408 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97badddc	PaParseStrings	r8	PASS-no	97bade18 bl 0x97c1e600	; symbol stub for: _ScanFromS
+97badddc	PaParseStrings	r10	PASS-no	97bade18 bl 0x97c1e600	; symbol stub for: _ScanFromS
+97bae058	PaReservedWord	r9	PASS-vararg	97bae0a4 bl 0x97c1f1c0	; symbol stub for: __ZN13TPar
+97bae058	PaReservedWord	r10	PASS-vararg	97bae0a4 bl 0x97c1f1c0	; symbol stub for: __ZN13TPar
+97bae1a8	PaParseComment	r9	PASS-no	97bae1d4 bl __Z7yyinputv
+97bae1a8	PaParseComment	r10	PASS-no	97bae1d4 bl __Z7yyinputv
+97bae468	_CPPShInfoLogMsg	r10	PASS-vararg	97bae4ac bl 0x97c1f1c0	; symbol stub for: __ZN13TPar
+97bae4cc	_CPPErrorToInfoLog	r10	PASS-vararg	97bae514 bl 0x97c1f1c0	; symbol stub for: __ZN13TPar
+97bae634	_HandlePragma	r6	PASS-no	97bae668 bl 0x97c1e7e0	; symbol stub for: _memcmp
+97bae634	_HandlePragma	r7	PASS-no	97bae668 bl 0x97c1e7e0	; symbol stub for: _memcmp
+97bae634	_HandlePragma	r8	PASS-no	97bae668 bl 0x97c1e7e0	; symbol stub for: _memcmp
+97bae634	_HandlePragma	r9	PASS-no	97bae668 bl 0x97c1e7e0	; symbol stub for: _memcmp
+97baeb80	_GetBehavior	r6	PASS-no	97baebac bl 0x97c1e7e0	; symbol stub for: _memcmp
+97baeb80	_GetBehavior	r7	PASS-no	97baebac bl 0x97c1e7e0	; symbol stub for: _memcmp
+97baeb80	_GetBehavior	r8	PASS-no	97baebac bl 0x97c1e7e0	; symbol stub for: _memcmp
+97baed64	_updateExtensionBehavior	r6	PASS-no	97baed88 bl _GetBehavior
+97baed64	_updateExtensionBehavior	r7	PASS-no	97baed88 bl _GetBehavior
+97baed64	_updateExtensionBehavior	r8	PASS-no	97baed88 bl _GetBehavior
+97baed64	_updateExtensionBehavior	r9	PASS-no	97baed88 bl _GetBehavior
+97bb7b4c	TGenericLinker::BuildSymbolTableList	r6	PASS-indirect	97bb7bd4 bctrl 
+97bb7b4c	TGenericLinker::BuildSymbolTableList	r7	PASS-indirect	97bb7bd4 bctrl 
+97bb7b4c	TGenericLinker::BuildSymbolTableList	r8	PASS-indirect	97bb7bd4 bctrl 
+97bb9a20	getOpenGLTypeFromTType	r5	PASS-indirect	97bb9a4c bctrl 
+97bb9a20	getOpenGLTypeFromTType	r6	PASS-indirect	97bb9a4c bctrl 
+97bb9a20	getOpenGLTypeFromTType	r7	PASS-indirect	97bb9a4c bctrl 
+97bb9a20	getOpenGLTypeFromTType	r8	PASS-indirect	97bb9a4c bctrl 
+97bba5a8	ParseSymbol::ResolveOpenGLType	r5	PASS-indirect	97bba5e0 bctrl 
+97bba5a8	ParseSymbol::ResolveOpenGLType	r6	PASS-indirect	97bba5e0 bctrl 
+97bba5a8	ParseSymbol::ResolveOpenGLType	r7	PASS-indirect	97bba5e0 bctrl 
+97bba5a8	ParseSymbol::ResolveOpenGLType	r8	PASS-indirect	97bba5e0 bctrl 
+97bbc50c	ParseSymbolTable::InsertSingleSymbol	r5	PASS-indirect	97bbc534 bl 0x97c211e0	; symbol stub for: __Z17GetCh
+97bbc50c	ParseSymbolTable::InsertSingleSymbol	r6	PASS-indirect	97bbc534 bl 0x97c211e0	; symbol stub for: __Z17GetCh
+97bbc50c	ParseSymbolTable::InsertSingleSymbol	r7	PASS-indirect	97bbc534 bl 0x97c211e0	; symbol stub for: __Z17GetCh
+97bbc50c	ParseSymbolTable::InsertSingleSymbol	r8	PASS-indirect	97bbc534 bl 0x97c211e0	; symbol stub for: __Z17GetCh
+97bbd4c4	ParseSymbolTable::FindFirstElement	r5	PASS-no	97bbd714 bl __ZN16ParseSymbolTable10FindSymbolEP11Pa
+97bbd4c4	ParseSymbolTable::FindFirstElement	r6	PASS-no	97bbd714 bl __ZN16ParseSymbolTable10FindSymbolEP11Pa
+97bbd4c4	ParseSymbolTable::FindFirstElement	r7	PASS-no	97bbd714 bl __ZN16ParseSymbolTable10FindSymbolEP11Pa
+97bbd4c4	ParseSymbolTable::FindFirstElement	r8	PASS-no	97bbd714 bl __ZN16ParseSymbolTable10FindSymbolEP11Pa
+97bc4748	TPPStreamCompiler::newIndirectOperandFromConstant	r6	PASS-no	97bc479c bl 0x97c1ea80	; symbol stub for: __Znwm
+97bc4748	TPPStreamCompiler::newIndirectOperandFromConstant	r7	PASS-no	97bc479c bl 0x97c1ea80	; symbol stub for: __Znwm
+97bc4748	TPPStreamCompiler::newIndirectOperandFromConstant	r8	PASS-no	97bc479c bl 0x97c1ea80	; symbol stub for: __Znwm
+97bc4f74	TPPStreamCompiler::equalOperands	r8	PASS-indirect	97bc4fb4 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc4f74	TPPStreamCompiler::equalOperands	r10	PASS-indirect	97bc4fb4 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc5b60	TPPStreamCompiler::assignOperands	r7	PASS-indirect	97bc5b90 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc5b60	TPPStreamCompiler::assignOperands	r8	PASS-indirect	97bc5b90 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc5b60	TPPStreamCompiler::assignOperands	r9	PASS-indirect	97bc5b90 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc5b60	TPPStreamCompiler::assignOperands	r10	PASS-indirect	97bc5b90 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc62c4	TPPStreamCompiler::getArrayOffset	r7	PASS-no	97bc62f4 bl 0x97c21c20	; symbol stub for: __ZN16Pars
+97bc62c4	TPPStreamCompiler::getArrayOffset	r8	PASS-no	97bc62f4 bl 0x97c21c20	; symbol stub for: __ZN16Pars
+97bc62c4	TPPStreamCompiler::getArrayOffset	r10	PASS-no	97bc62f4 bl 0x97c21c20	; symbol stub for: __ZN16Pars
+97bc6458	TPPStreamCompiler::constructReplicate	r7	PASS-indirect	97bc647c bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc6458	TPPStreamCompiler::constructReplicate	r8	PASS-indirect	97bc647c bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc66d8	TPPStreamCompiler::constructDiagonal	r7	PASS-indirect	97bc66fc bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc66d8	TPPStreamCompiler::constructDiagonal	r8	PASS-indirect	97bc66fc bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc66d8	TPPStreamCompiler::constructDiagonal	r10	PASS-indirect	97bc66fc bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc6c84	TPPStreamCompiler::constructElement	r7	PASS-indirect	97bc6ce4 bl 0x97c21260	; symbol stub for: __ZNK12Par
+97bc6c84	TPPStreamCompiler::constructElement	r8	PASS-indirect	97bc6ce4 bl 0x97c21260	; symbol stub for: __ZNK12Par
+97bc6c84	TPPStreamCompiler::constructElement	r10	PASS-indirect	97bc6ce4 bl 0x97c21260	; symbol stub for: __ZNK12Par
+97bc7354	TPPStreamCompiler::constructFromOperand	r7	PASS-indirect	97bc7790 bl 0x97c1ea80	; symbol stub for: __Znwm
+97bc7354	TPPStreamCompiler::constructFromOperand	r8	PASS-indirect	97bc7790 bl 0x97c1ea80	; symbol stub for: __Znwm
+97bc7b04	TPPStreamCompiler::FinishScalerSelect	r7	PASS-indirect	97bc7b88 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc7b04	TPPStreamCompiler::FinishScalerSelect	r8	PASS-indirect	97bc7b88 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc7b04	TPPStreamCompiler::FinishScalerSelect	r10	PASS-indirect	97bc7b88 bl __ZN17TPPStreamCompiler22IndirectAddress
+97bc7d5c	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	r7	PASS-indirect	97bc7d9c bl __ZN17TPPStreamCompiler18newNodeFromOper
+97bc7d5c	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	r8	PASS-indirect	97bc7d9c bl __ZN17TPPStreamCompiler18newNodeFromOper
+97bc7d5c	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	r10	PASS-indirect	97bc7d9c bl __ZN17TPPStreamCompiler18newNodeFromOper
+97bc89fc	TPPStreamCompiler::generateAddressLoad	r6	PASS-deep	97bc8a90 bl __ZN17TPPStreamCompiler21getOperandAsSou
+97bc89fc	TPPStreamCompiler::generateAddressLoad	r7	PASS-vararg	97bc8a90 bl __ZN17TPPStreamCompiler21getOperandAsSou
+97bc89fc	TPPStreamCompiler::generateAddressLoad	r8	PASS-vararg	97bc8a90 bl __ZN17TPPStreamCompiler21getOperandAsSou
+97bc8f0c	TPPStreamCompiler::copyPropagateCompilerTemp	r7	PASS-vararg	97bc94ac bl __ZN17TPPStreamCompiler26removeOrphanedC
+97bc94d0	TPPStreamCompiler::parseIntermediateTree	r5	PASS-no	97bc9520 bl 0x97c21b40	; symbol stub for: __ZN18Temp
+97bc94d0	TPPStreamCompiler::parseIntermediateTree	r6	PASS-no	97bc9520 bl 0x97c21b40	; symbol stub for: __ZN18Temp
+97bc94d0	TPPStreamCompiler::parseIntermediateTree	r7	PASS-no	97bc9520 bl 0x97c21b40	; symbol stub for: __ZN18Temp
+97bc94d0	TPPStreamCompiler::parseIntermediateTree	r8	PASS-no	97bc9520 bl 0x97c21b40	; symbol stub for: __ZN18Temp
+97bcdd50	_InterpreterEmulateOp	r5	PASS-no	97bcdd5c bl 0x97c1a258
+97bd31e0	_InterpreterRun	r5	PASS-no	97bd31e8 bl 0x97c1a23c
+97bd31e0	_InterpreterRun	r6	PASS-no	97bd31e8 bl 0x97c1a23c
+97bd31e0	_InterpreterRun	r7	PASS-no	97bd31e8 bl 0x97c1a23c
+97bd31e0	_InterpreterRun	r8	PASS-no	97bd31e8 bl 0x97c1a23c
+97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	r6	PASS-no	97bdaf30 bl 0x97c1e060	; symbol stub for: _memcpy
+97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	r7	PASS-no	97bdaf30 bl 0x97c1e060	; symbol stub for: _memcpy
+97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	r8	PASS-no	97bdaf30 bl 0x97c1e060	; symbol stub for: _memcpy
+97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	r9	PASS-no	97bdaf30 bl 0x97c1e060	; symbol stub for: _memcpy
+97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	r10	PASS-no	97bdaf30 bl 0x97c1e060	; symbol stub for: _memcpy
+97bdc334	_PPCRuntimeCompilerCompileNO	r5	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdc334	_PPCRuntimeCompilerCompileNO	r6	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdc334	_PPCRuntimeCompilerCompileNO	r7	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdc334	_PPCRuntimeCompilerCompileNO	r8	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdc334	_PPCRuntimeCompilerCompileNO	r9	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdc334	_PPCRuntimeCompilerCompileNO	r10	PASS-no	97bdc354 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r5	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r6	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r7	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r8	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r9	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97bdda38	_PPCRuntimeCompilerCompileAV	r10	PASS-no	97bdda60 bl _PPCRuntimeCompilerInitialise
+97c08730	_HashSetAdd	r5	PASS-indirect	97c0875c bctrl 
+97c08730	_HashSetAdd	r6	PASS-indirect	97c0875c bctrl 
+97c08730	_HashSetAdd	r7	PASS-indirect	97c0875c bctrl 
+97c08730	_HashSetAdd	r8	PASS-indirect	97c0875c bctrl 
+97c08840	_HashSetGet	r5	PASS-indirect	97c08868 bctrl 
+97c08840	_HashSetGet	r6	PASS-indirect	97c08868 bctrl 
+97c08840	_HashSetGet	r7	PASS-indirect	97c08868 bctrl 
+97c08840	_HashSetGet	r8	PASS-indirect	97c08868 bctrl 
+97c088f0	_HashSetRemove	r5	PASS-indirect	97c08918 bctrl 
+97c088f0	_HashSetRemove	r6	PASS-indirect	97c08918 bctrl 
+97c088f0	_HashSetRemove	r7	PASS-indirect	97c08918 bctrl 
+97c088f0	_HashSetRemove	r8	PASS-indirect	97c08918 bctrl 
+97c08b54	_HashTableAdd	r6	PASS-indirect	97c08b88 bctrl 
+97c08b54	_HashTableAdd	r7	PASS-indirect	97c08b88 bctrl 
+97c08b54	_HashTableAdd	r8	PASS-indirect	97c08b88 bctrl 
+97c08ca4	_HashTableGet	r5	PASS-indirect	97c08ccc bctrl 
+97c08ca4	_HashTableGet	r6	PASS-indirect	97c08ccc bctrl 
+97c08ca4	_HashTableGet	r7	PASS-indirect	97c08ccc bctrl 
+97c08ca4	_HashTableGet	r8	PASS-indirect	97c08ccc bctrl 
+97c1a23c	FUN_97c1a23c	r3	DEAD	
+97c1a25c	FUN_97c1a25c	r3	RET	97c1a270 blr 
+97c1bb6c	__Unwind_RaiseException	r6	PASS-no	97c1bb74 bl save_world
+97c1bb6c	__Unwind_RaiseException	r7	PASS-no	97c1bb74 bl save_world
+97c1bb6c	__Unwind_RaiseException	r8	PASS-no	97c1bb74 bl save_world
+97c1bb6c	__Unwind_RaiseException	r9	PASS-no	97c1bb74 bl save_world
+97c1be20	__Unwind_Resume	r6	PASS-no	97c1be28 bl save_world
+97c1be20	__Unwind_Resume	r7	PASS-no	97c1be28 bl save_world
+97c1be20	__Unwind_Resume	r8	PASS-no	97c1be28 bl save_world
+97c1be20	__Unwind_Resume	r9	PASS-no	97c1be28 bl save_world
+97c1cb40	_frame_heapsort	r6	PASS-indirect	97c1cbb0 bctrl 
+97c1cb40	_frame_heapsort	r7	PASS-indirect	97c1cbb0 bctrl 
+97c1cb40	_frame_heapsort	r8	PASS-indirect	97c1cbb0 bctrl 

@@ -128,7 +128,6 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
 {
   char *pcVar1;
   char *pcVar2;
-  int in_r3;
   size_t sVar3;
   char *pcVar4;
   size_t sVar5;
@@ -156,15 +155,15 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
     pcVar2 = DAT_a7b7bd1c;
   }
   if (param_3 == (char *)0x0) {
-    _sprintf(pcVar4,pcVar2,*(undefined4 *)(in_r3 + 0x90),acStack_120);
+    _sprintf(pcVar4,pcVar2,*(undefined4 *)(param_1 + 0x90),acStack_120);
   }
   else {
-    _sprintf(pcVar4,pcVar1,*(undefined4 *)(in_r3 + 0x90),param_3,acStack_120);
+    _sprintf(pcVar4,pcVar1,*(undefined4 *)(param_1 + 0x90),param_3,acStack_120);
   }
-  __ZN13TInfoSinkBase6appendEPKc((void *)(in_r3 + 0xb0),pcVar4);
-  __ZN13TInfoSinkBase6appendEPKc((void *)(in_r3 + 0xb0),"\n");
+  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),pcVar4);
+  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),"\n");
   _free(pcVar4);
-  *(undefined4 *)(in_r3 + 0xa0) = 1;
+  *(undefined4 *)(param_1 + 0xa0) = 1;
   return;
 }
 
@@ -181,7 +180,6 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
 {
   char *pcVar1;
   char *pcVar2;
-  int in_r3;
   size_t sVar3;
   char *pcVar4;
   size_t sVar5;
@@ -209,13 +207,13 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
     pcVar2 = DAT_a7b7bd30;
   }
   if (param_3 == (char *)0x0) {
-    _sprintf(pcVar4,pcVar2,*(undefined4 *)(in_r3 + 0x90),acStack_120);
+    _sprintf(pcVar4,pcVar2,*(undefined4 *)(param_1 + 0x90),acStack_120);
   }
   else {
-    _sprintf(pcVar4,pcVar1,*(undefined4 *)(in_r3 + 0x90),param_3,acStack_120);
+    _sprintf(pcVar4,pcVar1,*(undefined4 *)(param_1 + 0x90),param_3,acStack_120);
   }
-  __ZN13TInfoSinkBase6appendEPKc((void *)(in_r3 + 0xb0),pcVar4);
-  __ZN13TInfoSinkBase6appendEPKc((void *)(in_r3 + 0xb0),"\n");
+  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),pcVar4);
+  __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),"\n");
   _free(pcVar4);
   return;
 }
