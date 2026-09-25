@@ -96,3 +96,17 @@ run va-is Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScr
 rm -rf ga-is && cp -r r32-ga-ret ga-is
 run ga-is Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript SetImportSignatures.java
 run ga-is Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cat $B/importsig_redump_ga.txt)
+# step 15: values Ghidra typed float that hold integers / pointers. FUN_001043f0 returns an object pointer (SetPointerReturn: its callers had kept
+# the objects in float locals); stack locals typed float but holding counts / addresses (RetypeLocals, b3/retype_locals_*.txt from
+# Tools/userspace/float_ints.py); the remaining plain int<->float casts become bit reinterpretations in ghidra2c (fix_float_int, needs
+# CORPUS_SLICE, which build_corpus.py and verify_corpus.sh set)
+rm -rf gld-rl && cp -r gld-fw gld-rl
+run gld-rl GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetPointerReturn.java 0x1043f0
+run gld-rl GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript RetypeLocals.java $(cat $B/retype_locals_gld.txt)
+run gld-rl GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld 0x180830 $(cut -d: -f1 $B/retype_locals_gld.txt)
+rm -rf glprog-rl && cp -r glprog-is glprog-rl
+run glprog-rl GLProgProject libGLProgrammability.dylib -postScript RetypeLocals.java $(cat $B/retype_locals_glprog.txt)
+run glprog-rl GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cut -d: -f1 $B/retype_locals_glprog.txt)
+rm -rf ga-rl && cp -r ga-is ga-rl
+run ga-rl Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript RetypeLocals.java $(cat $B/retype_locals_ga.txt)
+run ga-rl Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cut -d: -f1 $B/retype_locals_ga.txt)

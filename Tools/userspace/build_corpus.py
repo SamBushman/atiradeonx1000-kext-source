@@ -22,7 +22,7 @@ rng = ['0-%x' % first] + rng if first else rng
 here = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, here)
 import patches
-_env = dict(os.environ, CORPUS_SCOPE=patches.scope_of_slice(slice_f) or '')
+_env = dict(os.environ, CORPUS_SCOPE=patches.scope_of_slice(slice_f) or '', CORPUS_SLICE=os.path.abspath(slice_f))   # CORPUS_SLICE: ghidra2c reads the stock code (fctiw per function)
 subprocess.run(['python3', here + '/ghidra2c.py', dd, out, '60'] + rng, check=True, env=_env)
 shutil.copy(here + '/ghidra_c.h', out)
 name = os.path.basename(out.rstrip('/'))

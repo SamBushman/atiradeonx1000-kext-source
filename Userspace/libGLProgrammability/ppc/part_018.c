@@ -2454,10 +2454,10 @@ undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,
   local_48 = param_7;
   local_44 = param_8;
   if (param_3 != 1) {
-    local_50 = (float)(int)param_5;
-    local_4c = (float)(int)param_6;
-    local_48 = (float)(int)param_7;
-    local_44 = (float)(int)param_8;
+    local_50 = GH_U2F((unsigned int)((int)param_5));
+    local_4c = GH_U2F((unsigned int)((int)param_6));
+    local_48 = GH_U2F((unsigned int)((int)param_7));
+    local_44 = GH_U2F((unsigned int)((int)param_8));
     local_40 = (longlong)(int)local_44;
   }
   piVar4 = *(int **)(param_1 + 0x10);

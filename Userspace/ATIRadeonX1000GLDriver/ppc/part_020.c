@@ -1974,7 +1974,7 @@ int FUN_000ddbcc(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         ((char * (*)())FUN_000cdc3c)(iVar21,10,puVar16,(double)fVar13);
         iVar19 = FUN_001a32d0(pcVar5 + iVar21,"%s, ",puVar16,param_4,param_5,param_6,puVar2,puVar15)
         ;
-        ((char * (*)())FUN_000cdc3c)(iVar19,10,puVar16,(double)(*(float *)&puVar14));
+        ((char * (*)())FUN_000cdc3c)(iVar19,10,puVar16,(double)GH_U2F((unsigned int)(puVar14)));
         FUN_001a32d0(pcVar5 + iVar21 + iVar19,"%s",puVar16,param_4,param_5,param_6,puVar2,puVar15);
       }
       else {

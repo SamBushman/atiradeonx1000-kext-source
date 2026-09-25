@@ -5266,7 +5266,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     }
   }
   else {
-    fVar18 = (float)(*(uint *)(param_1 + 0x1ce8) & 0xffff00ff | 0xff00);
+    fVar18 = GH_U2F((unsigned int)((*(uint *)(param_1 + 0x1ce8) & 0xffff00ff | 0xff00)));
     pfVar16 = pfStack_a4;
     if (param_4 != 0) {
       uStack_9c = param_7 ^ 0x80000000;
@@ -5291,7 +5291,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             local_14c = *(float *)(param_9 + 0x38);
             local_168 = *(float *)(param_9 + 0x3c);
             bVar2 = *(byte *)pfVar16;
-            *pfVar15 = (float)0x000013c2;
+            *pfVar15 = GH_U2F((unsigned int)(0x000013c2));
             pfVar16 = (float *)((int)pfVar16 + param_6);
             fVar18 = (float)((uint)bVar2 | (uint)fVar18 & 0xffffff00);
             pfVar15[1] = fVar18;
@@ -5303,15 +5303,15 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             pfVar15[6] = local_164;
             pfVar15[7] = local_160;
             pfVar15[8] = local_15c;
-            pfVar15[2] = (float)0x00001087;
+            pfVar15[2] = GH_U2F((unsigned int)(0x00001087));
             pfVar15[4] = -2.1282349;
-            pfVar15[3] = (float)(uVar1 << 0x10 | uVar1 & 0xffff);
+            pfVar15[3] = GH_U2F((unsigned int)((uVar1 << 0x10 | uVar1 & 0xffff)));
             pfVar15[9] = 1.0;
             pfVar15[10] = local_154;
             pfVar15[0xb] = local_150;
             pfVar15[0xc] = local_14c;
             pfVar15[0xd] = local_168;
-            pfVar15[0xe] = (float)0x00001087;
+            pfVar15[0xe] = GH_U2F((unsigned int)(0x00001087));
             pfVar15[0xf] = *(float *)(param_1 + 0x1f0c);
             pfVar15 = pfVar15 + 0x10;
             local_164 = fVar3 + local_164;
@@ -5324,7 +5324,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       } while (param_4 != iVar20);
     }
   }
-  *pfVar15 = (float)0x00001087;
+  *pfVar15 = GH_U2F((unsigned int)(0x00001087));
   pfVar15[1] = *(float *)(param_1 + 0x1f0c);
   *(float **)(param_1 + 0x298c) = pfVar15 + 2;
   uStack_b4 = uVar19;
@@ -7597,7 +7597,7 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
 LAB_0002d9d0:
     uVar3 = uVar3 & 0xffff;
 LAB_0002d9d4:
-    fVar6 = (float)(uVar3 | uVar3 << 0x10);
+    fVar6 = GH_U2F((unsigned int)((uVar3 | uVar3 << 0x10)));
     break;
   case '\x1c':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
@@ -7616,21 +7616,21 @@ LAB_0002d9d4:
     else {
       iVar1 = (int)dVar7;
     }
-    fVar6 = (float)(uVar3 & 0xffff | iVar1 << 0x10);
+    fVar6 = GH_U2F((unsigned int)((uVar3 & 0xffff | iVar1 << 0x10)));
     break;
   case '\x1f':
   case '!':
     uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1);
-    fVar6 = (float)(uVar3 << 0x10 | uVar3);
+    fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
     break;
   case ' ':
     uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1_00);
-    fVar6 = (float)(uVar3 << 0x10 | uVar3);
+    fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
     break;
   case '\"':
     uVar3 = ((uint (*)())FUN_0001d7c0)(fparam_1);
     iVar1 = ((uint (*)())FUN_0001d7c0)((double)fStack00000028);
-    fVar6 = (float)(uVar3 | iVar1 << 0x10);
+    fVar6 = GH_U2F((unsigned int)((uVar3 | iVar1 << 0x10)));
     break;
   case '#':
     dVar7 = dVar7 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
@@ -7704,7 +7704,7 @@ LAB_0002d9d4:
       uVar5 = (uint)dVar7;
     }
 LAB_0002dcb4:
-    fVar6 = (float)(uVar3 | uVar4 | (uVar5 & 0x3ff) << 10);
+    fVar6 = GH_U2F((unsigned int)((uVar3 | uVar4 | (uVar5 & 0x3ff) << 10)));
     break;
   case '(':
     fVar6 = (float)((uint)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6);
@@ -7718,7 +7718,7 @@ LAB_0002dcb4:
     else {
       iVar1 = (int)dVar7;
     }
-    fVar6 = (float)(iVar1 << 8);
+    fVar6 = GH_U2F((unsigned int)((iVar1 << 8)));
   }
   *(float *)(param_1 + 0x28) = fVar6;
   return;

@@ -1591,7 +1591,7 @@ int FUN_0019fa58(param_1, param_2, param_3, param_4, param_5)
         uVar3 = (uint)*(byte *)((param_5 & 0xff) + iVar5 + 0x10);
         if (uVar3 < 4) {
           uVar2 = *puVar6 & 0xfffff1ff;
-          fVar1 = (float)piVar4[uVar3 * 6 + 8];
+          fVar1 = GH_U2F((unsigned int)(piVar4[uVar3 * 6 + 8]));
           *puVar6 = uVar2;
           if (fVar1 == 0.0) {
             *puVar6 = uVar2 | 0x800;
@@ -2085,7 +2085,7 @@ int FUN_001a09d0(param_1, param_2, param_3, param_4, param_5)
             iVar6 = FUN_001054ec(param_4,iVar9);
             uVar4 = (uint)*(byte *)((uint)bVar2 + iVar6 + 0x10);
             if (uVar4 < 4) {
-              fVar3 = (float)piVar5[uVar4 * 6 + 8];
+              fVar3 = GH_U2F((unsigned int)(piVar5[uVar4 * 6 + 8]));
               if (fVar3 == 0.0) {
                 *puVar7 = *puVar7 & ~(7 << (uVar10 & 0x3f)) | 4 << (uVar10 & 0x3f);
               }

@@ -322,7 +322,7 @@ int FUN_0002ddf0(param_1, param_2)
   }
   iVar26 = param_2[0xc];
   cVar29 = *(char *)((int)param_2 + 0x72);
-  if ((float)param_2[0x24] != *(float *)(iVar26 + 0x2c)) {
+  if (GH_U2F((unsigned int)(param_2[0x24])) != *(float *)(iVar26 + 0x2c)) {
     param_2[0x24] = (int)*(float *)(iVar26 + 0x2c);
     dVar31 = (double)*(float *)(iVar26 + 0x2c);
     if (DOUBLE_001aa1e8 <= dVar31) {

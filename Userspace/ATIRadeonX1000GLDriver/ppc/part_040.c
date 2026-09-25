@@ -723,7 +723,7 @@ int FUN_0012c59c(param_1, param_2)
             *(int *)(param_1 + 8) = piVar4[0x25];
             return 1;
           }
-          if ((piVar4[uVar1 * 6 + 7] == 2) && ((float)piVar4[uVar1 * 6 + 8] == FLOAT_001aa0d4)) {
+          if ((piVar4[uVar1 * 6 + 7] == 2) && (GH_U2F((unsigned int)(piVar4[uVar1 * 6 + 8])) == FLOAT_001aa0d4)) {
             *(undefined4 *)(param_1 + 4) = 1;
             return 1;
           }
@@ -780,7 +780,7 @@ int FUN_0012c7c0(param_1, param_2)
         local_38[0] = *(undefined4 *)(iVar6 + 0x10);
         uVar2 = (uint)*(byte *)((int)local_38 + iVar5);
         if (((((int)*(char *)(piVar4 + 0x57) >> (uVar2 & 0x3f) & 1U) != 0) &&
-            (piVar4[uVar2 * 6 + 7] == 2)) && ((float)piVar4[uVar2 * 6 + 8] == FLOAT_001aa0e8)) {
+            (piVar4[uVar2 * 6 + 7] == 2)) && (GH_U2F((unsigned int)(piVar4[uVar2 * 6 + 8])) == FLOAT_001aa0e8)) {
           return 1;
         }
       }
@@ -900,7 +900,7 @@ int FUN_0012c908(param_1, param_2, param_3, param_4)
       *(uint *)(param_1 + 0x14) = (uint)*(byte *)((int)&local_38 + *(int *)(param_1 + 0x14));
     }
     else {
-      fVar2 = (float)piVar7[8];
+      fVar2 = GH_U2F((unsigned int)(piVar7[8]));
       *(undefined4 *)(param_1 + 0x1c) = 1;
       local_28 = (longlong)(int)fVar2;
       *(int *)(param_1 + 0x18) = (int)fVar2;

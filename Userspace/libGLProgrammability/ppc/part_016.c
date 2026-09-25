@@ -5520,7 +5520,7 @@ LAB_97bedcb4:
         local_a8 = (int *)((int)local_a8 + iVar14 + iVar13 + iVar12);
         local_a8 = (int *)((char * (*)())_glp_dtostr)((int)((ulonglong)uVar25 >> 0x20),(int)uVar25,local_a8,
                                       (int)local_ac + (local_b0 - (int)local_a8),
-                                      (double)(float)param_1[uVar18 * 2 + iVar9 * 2 + 1],1e-07,in_f3
+                                      (double)GH_U2F((unsigned int)(param_1[uVar18 * 2 + iVar9 * 2 + 1])),1e-07,in_f3
                                       ,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_fffffd08,
                                       in_stack_fffffd10,in_stack_fffffd18,in_stack_fffffd20,
                                       in_stack_fffffd28);

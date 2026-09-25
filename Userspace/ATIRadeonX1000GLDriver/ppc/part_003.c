@@ -83,14 +83,14 @@ LAB_00019e50:
   local_24 = param_1[0xf] & 0xff83efff;
   param_1[0xf] = local_24;
   if (bVar1) {
-    if ((float)param_1[0xa95] <= FLOAT_001aa128) {
-      if (FLOAT_001aa128 < (float)param_1[0xa96]) {
+    if (GH_U2F((unsigned int)(param_1[0xa95])) <= FLOAT_001aa128) {
+      if (FLOAT_001aa128 < GH_U2F((unsigned int)(param_1[0xa96]))) {
         local_24 = local_24 | 0x41000;
         param_1[0xf] = local_24;
         goto LAB_00019f40;
       }
     }
-    else if (FLOAT_001aa128 < (float)param_1[0xa96]) {
+    else if (FLOAT_001aa128 < GH_U2F((unsigned int)(param_1[0xa96]))) {
       local_24 = local_24 | 0x81000;
       param_1[0xf] = local_24;
       goto LAB_00019f40;
@@ -2519,7 +2519,7 @@ uint FUN_0001d7c0(double fparam_1)
   int iVar4;
   
   fVar1 = (float)fparam_1;
-  uVar3 = (uint)fVar1 >> 0x17 & 0xff;
+  uVar3 = (uint)GH_F2U(fVar1) >> 0x17 & 0xff;
   iVar2 = uVar3 - 0x7f;
   if (iVar2 < 0x11) {
     if (iVar2 < -0xe) {
@@ -2529,19 +2529,19 @@ uint FUN_0001d7c0(double fparam_1)
       }
       else {
         iVar4 = 0;
-        uVar3 = (((uint)fVar1 & 0x7fffff | 0x800000) >> (-iVar2 - 0xeU & 0x3f)) >> 0xd;
+        uVar3 = (((uint)GH_F2U(fVar1) & 0x7fffff | 0x800000) >> (-iVar2 - 0xeU & 0x3f)) >> 0xd;
       }
     }
     else {
       iVar4 = uVar3 - 0x70;
-      uVar3 = ((uint)fVar1 & 0x7fffff) >> 0xd;
+      uVar3 = ((uint)GH_F2U(fVar1) & 0x7fffff) >> 0xd;
     }
   }
   else {
     iVar4 = 0x1f;
     uVar3 = 0x3ff;
   }
-  return ((uint)fVar1 >> 0x1f) << 0xf | iVar4 << 10 | uVar3;
+  return ((uint)GH_F2U(fVar1) >> 0x1f) << 0xf | iVar4 << 10 | uVar3;
 }
 
 /* FUN_0001d880 @ 0x1d880 (704 bytes) */

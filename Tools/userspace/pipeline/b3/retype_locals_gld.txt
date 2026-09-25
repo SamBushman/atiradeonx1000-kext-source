@@ -1,0 +1,12 @@
+0xe5e70:local_64=uint
+0x123c08:local_50=uint
+0x128430:local_b8=uint
+0x129a0c:local_50=uint
+0x129eb4:local_38=uint
+0x17a8a4:local_58=uint
+0x17d6ac:local_54=uint
+0x17f1f8:local_64=uint
+0x180830:local_98=uint
+0x184ef0:local_f4=uint
+0x1919d8:local_38=uint
+0x191b30:local_50=uint

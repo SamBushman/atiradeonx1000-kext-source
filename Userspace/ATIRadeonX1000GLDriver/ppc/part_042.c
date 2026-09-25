@@ -2634,9 +2634,9 @@ int FUN_0013d820(param_1, param_2)
           if (piVar5[uVar3 * 6 + 7] != 2) {
             return;
           }
-          if (((float)piVar5[uVar3 * 6 + 8] != FLOAT_001aa0d4) ||
+          if ((GH_U2F((unsigned int)(piVar5[uVar3 * 6 + 8])) != FLOAT_001aa0d4) ||
              (*(char *)((int)local_40 + iVar8) != '\x05')) {
-            if ((float)piVar5[uVar3 * 6 + 8] != FLOAT_001aa0e8) {
+            if (GH_U2F((unsigned int)(piVar5[uVar3 * 6 + 8])) != FLOAT_001aa0e8) {
               return;
             }
             if (*(char *)((int)local_40 + iVar8) != '\x03') {

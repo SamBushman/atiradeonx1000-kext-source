@@ -1,0 +1,5 @@
+0x4600:local_19c=uint,local_1a0=uint,local_1a4=uint,local_1a8=uint
+0x55a4:local_358=uint,local_35c=uint,local_360=uint,local_364=uint
+0x8260:local_2e4=uint,local_2e8=uint,local_2ec=uint,local_2fc=uint
+0xa5a0:local_1f8=uint,local_1fc=uint
+0xba90:local_1a0=uint,local_1a4=uint

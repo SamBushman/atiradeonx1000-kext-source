@@ -934,7 +934,7 @@ int FUN_0010d730(param_1, param_2, param_3, param_4)
     *(undefined4 *)(param_1 + 0x98) = uVar13;
     *(undefined4 *)(param_1 + 0x9c) = uVar14;
     *(int *)(param_1 + 0x160) = iVar4 + *(int *)(iVar16 + 0x478);
-    if ((float)param_2[(param_3 >> 0x18) * 6 + 8] == FLOAT_001aa0d4) {
+    if (GH_U2F((unsigned int)(param_2[(param_3 >> 0x18) * 6 + 8])) == FLOAT_001aa0d4) {
       FUN_00106004(param_1,1,uVar3,0,param_4);
       FUN_00103d50(param_1 + 0xa4,1,uVar1);
       FUN_00103d50(param_1 + 0xa4,2,uVar12);

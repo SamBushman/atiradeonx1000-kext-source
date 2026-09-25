@@ -1043,13 +1043,13 @@ int FUN_000a9070(param_1, param_2)
             puVar19[0xb] = uVar8;
             *puVar11 = (uVar8 & 3) << 0x18 | *puVar11 & 0xfcffffff;
           }
-          fVar1 = (float)puVar18[0xd];
+          fVar1 = GH_U2F((unsigned int)(puVar18[0xd]));
           fVar2 = *(float *)(puVar19 + 0x12);
           if ((uint)uVar5 != (uint)uVar6) {
             puVar19[0xe] = uVar5;
             *puVar11 = (uVar5 & 1) << 0x1c | *puVar11 & 0xefffffff;
           }
-          fVar3 = (float)puVar18[0xe];
+          fVar3 = GH_U2F((unsigned int)(puVar18[0xe]));
           fVar4 = *(float *)(puVar19 + 0x14);
           if (fVar1 != fVar2) {
             *(float *)(puVar19 + 0x12) = fVar1;
@@ -1781,7 +1781,7 @@ LAB_000aa35c:
                 *(undefined4 *)(param_4 + 0xc) = *(undefined4 *)(iVar13 + 8);
               }
               else {
-                dVar31 = (double)(float)(0x5f375a00 - ((uint)fVar4 >> 1));
+                dVar31 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar4) >> 1));
                 dVar30 = (double)(float)(dVar31 * (double)(float)(dVar34 * dVar31));
                 dVar34 = (double)(float)(fparam_6 - dVar30);
                 fVar2 = (float)(dVar34 * (double)(float)(dVar31 * fparam_5)) *
@@ -1818,7 +1818,7 @@ LAB_000aa35c:
                     fparam_8 = (double)(float)(dVar33 + dVar31);
                   }
                   else {
-                    dVar34 = (double)(float)(0x5f375a00 - ((uint)fVar2 >> 1));
+                    dVar34 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar2) >> 1));
                     dVar36 = (double)(float)(dVar34 * (double)(float)(dVar35 * dVar34));
                     dVar35 = (double)(float)(fparam_6 - dVar36);
                     dVar34 = (double)((float)(dVar35 * (double)(float)(dVar34 * fparam_5)) *
@@ -1851,7 +1851,7 @@ LAB_000aa35c:
                     *(float *)(((unsigned char *)0x000014e0) + (int)(param_1 + iVar7 + 8)) = (float)dVar32;
                   }
                   else {
-                    dVar34 = (double)(float)(0x5f375a00 - ((uint)fVar2 >> 1));
+                    dVar34 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar2) >> 1));
                     dVar33 = (double)(float)(dVar34 * (double)(float)(dVar31 * dVar34));
                     dVar31 = (double)(float)(fparam_6 - dVar33);
                     dVar31 = (double)((float)(dVar31 * (double)(float)(dVar34 * fparam_5)) *
@@ -1887,7 +1887,7 @@ LAB_000aa35c:
                        *(undefined4 *)(((unsigned char *)0x000014a0) + (int)(param_1 + iVar7 + 0xc));
                 }
                 else {
-                  dVar34 = (double)(float)(0x5f375a00 - ((uint)fVar4 >> 1));
+                  dVar34 = (double)(float)(0x5f375a00 - ((uint)GH_F2U(fVar4) >> 1));
                   dVar30 = (double)(float)(dVar34 * (double)(float)(dVar31 * dVar34));
                   dVar31 = (double)(float)(fparam_6 - dVar30);
                   fVar2 = (float)(dVar31 * (double)(float)(dVar34 * fparam_5)) *
@@ -2779,7 +2779,7 @@ int FUN_000abd10(param_1, param_2, param_3)
   *(undefined1 *)(param_2 + 0x6c) = 1;
   while (pfVar11 < (float *)(uVar3 + iVar10)) {
     fVar6 = *pfVar11;
-    switch((uint)fVar6 & 0xffff) {
+    switch((uint)GH_F2U(fVar6) & 0xffff) {
     default:
       goto switchD_000abe1c_caseD_0;
     case 1:
@@ -2858,10 +2858,10 @@ int FUN_000abd10(param_1, param_2, param_3)
     case 0x16:
       pfVar4 = pfVar11 + 1;
       pfVar11 = pfVar11 + 2;
-      uVar2 = (uint)*pfVar4 >> 0x10 & 0x3f;
+      uVar2 = (uint)GH_F2U(*pfVar4) >> 0x10 & 0x3f;
       if (uVar2 == 0x11) {
         *(uint *)(*(int *)(param_2 + 0x74) + 0xc) =
-             1 << ((uint)*pfVar4 & 0x3f) | *(uint *)(*(int *)(param_2 + 0x74) + 0xc);
+             1 << ((uint)GH_F2U(*pfVar4) & 0x3f) | *(uint *)(*(int *)(param_2 + 0x74) + 0xc);
       }
       else if (uVar2 < 0x12) {
         if (uVar2 == 0x10) {
@@ -2878,11 +2878,11 @@ int FUN_000abd10(param_1, param_2, param_3)
     case 0x18:
       break;
     case 0x19:
-      uVar2 = (uint)fVar6 >> 0x10 & 0xff;
+      uVar2 = (uint)GH_F2U(fVar6) >> 0x10 & 0xff;
       pfVar11 = pfVar11 + 1;
       *(uint *)(*(int *)(param_2 + 0x74) + 0x10) =
-           1 << ((uint)fVar6 >> 0x10 & 0x3f) | *(uint *)(*(int *)(param_2 + 0x74) + 0x10);
-      switch((uint)fVar6 >> 0x18 & 7) {
+           1 << ((uint)GH_F2U(fVar6) >> 0x10 & 0x3f) | *(uint *)(*(int *)(param_2 + 0x74) + 0x10);
+      switch((uint)GH_F2U(fVar6) >> 0x18 & 7) {
       case 0:
         iVar9 = uVar2 * 4;
         if (*(int *)(((unsigned char *)0x000013f8) + iVar9 + param_1) == 0) {
@@ -2913,7 +2913,7 @@ switchD_000ac280_caseD_4:
         break;
       case 2:
         uVar1 = 5;
-        if (((uint)fVar6 & 0x18000000) != 0x10000000) {
+        if (((uint)GH_F2U(fVar6) & 0x18000000) != 0x10000000) {
           uVar1 = 2;
         }
         *(undefined4 *)(uVar2 * 4 + *(int *)(param_2 + 0x74) + 0x14) = uVar1;
@@ -2927,10 +2927,10 @@ switchD_000ac280_caseD_4:
       break;
     case 0x1c:
       fVar6 = pfVar11[1];
-      uVar2 = (uint)fVar6 >> 0x10 & 0x3f;
+      uVar2 = (uint)GH_F2U(fVar6) >> 0x10 & 0x3f;
       if (uVar2 == 1) {
         (**(code **)(((unsigned char *)0x00001280) + param_1))
-                  (param_1,uVar8,(uint)fVar6 & 0xffff,(uint)fVar6 & 0xffff,pfVar11 + 2,1,0);
+                  (param_1,uVar8,(uint)GH_F2U(fVar6) & 0xffff,(uint)GH_F2U(fVar6) & 0xffff,pfVar11 + 2,1,0);
         pfVar4 = pfVar11 + 6;
       }
       else {
@@ -2949,12 +2949,12 @@ switchD_000ac280_caseD_4:
           fStack_2c = -pfVar11[5];
           local_4c = (float)((double)CONCAT44(0x43300000,fStack_2c) - DOUBLE_001aa1e0);
           (**(code **)(((unsigned char *)0x00001280) + param_1))
-                    (param_1,uVar8,(uint)fVar6 & 0xffff,(uint)fVar6 & 0xffff,&local_58,1,0);
+                    (param_1,uVar8,(uint)GH_F2U(fVar6) & 0xffff,(uint)GH_F2U(fVar6) & 0xffff,&local_58,1,0);
           pfVar4 = pfVar11 + 6;
         }
       }
       pfVar11 = pfVar4;
-      iVar9 = ((uint)fVar6 & 0xffff) + 1;
+      iVar9 = ((uint)GH_F2U(fVar6) & 0xffff) + 1;
       if (*(int *)(*(int *)(param_2 + 0x74) + 0x84) < iVar9) {
         *(int *)(*(int *)(param_2 + 0x74) + 0x84) = iVar9;
       }
@@ -2968,28 +2968,28 @@ switchD_000ac280_caseD_4:
       break;
     case 0x5d:
       pfVar4 = pfVar11 + 1;
-      if ((int)fVar6 < 0) {
+      if ((int)GH_F2U(fVar6) < 0) {
         pfVar4 = pfVar11 + 2;
       }
-      if (((uint)fVar6 & 0x40000000) != 0) {
+      if (((uint)GH_F2U(fVar6) & 0x40000000) != 0) {
         pfVar4 = pfVar4 + 1;
       }
       fVar6 = *pfVar4;
       pfVar7 = pfVar4 + 1;
-      if (((uint)fVar6 & 0x3f0000) == 0x180000) {
+      if (((uint)GH_F2U(fVar6) & 0x3f0000) == 0x180000) {
         *(undefined1 *)(*(int *)(param_2 + 0x74) + 4) = 1;
       }
-      if (((uint)fVar6 & 0x400000) != 0) {
+      if (((uint)GH_F2U(fVar6) & 0x400000) != 0) {
         pfVar7 = pfVar4 + 2;
       }
       local_58 = *pfVar7;
       pfVar11 = pfVar7 + 1;
-      if (((uint)local_58 & 0x400000) != 0) {
+      if (((uint)GH_F2U(local_58) & 0x400000) != 0) {
         pfVar11 = pfVar7 + 2;
       }
-      if (((uint)local_58 >> 0x10 & 0x3f) - 1 < 2) {
+      if (((uint)GH_F2U(local_58) >> 0x10 & 0x3f) - 1 < 2) {
         iVar5 = *(int *)(param_2 + 0x74);
-        iVar9 = ((uint)local_58 & 0xffff) + 1;
+        iVar9 = ((uint)GH_F2U(local_58) & 0xffff) + 1;
         if (*(int *)(iVar5 + 0x84) < iVar9) {
 LAB_000ac4f8:
           *(int *)(iVar5 + 0x84) = iVar9;
@@ -2998,39 +2998,39 @@ LAB_000ac4f8:
       break;
     case 0x5e:
       pfVar4 = pfVar11 + 1;
-      if ((int)fVar6 < 0) {
+      if ((int)GH_F2U(fVar6) < 0) {
         pfVar4 = pfVar11 + 2;
       }
-      if (((uint)fVar6 & 0x40000000) != 0) {
+      if (((uint)GH_F2U(fVar6) & 0x40000000) != 0) {
         pfVar4 = pfVar4 + 1;
       }
       fVar6 = *pfVar4;
       pfVar11 = pfVar4 + 1;
-      if (((uint)fVar6 & 0x3f0000) == 0x180000) {
+      if (((uint)GH_F2U(fVar6) & 0x3f0000) == 0x180000) {
         *(undefined1 *)(*(int *)(param_2 + 0x74) + 4) = 1;
       }
-      if (((uint)fVar6 & 0x400000) != 0) {
+      if (((uint)GH_F2U(fVar6) & 0x400000) != 0) {
         pfVar11 = pfVar4 + 2;
       }
       local_58 = *pfVar11;
       pfVar4 = pfVar11 + 1;
-      if (((uint)local_58 & 0x400000) != 0) {
+      if (((uint)GH_F2U(local_58) & 0x400000) != 0) {
         pfVar4 = pfVar11 + 2;
       }
-      if (((uint)local_58 >> 0x10 & 0x3f) - 1 < 2) {
-        iVar9 = ((uint)local_58 & 0xffff) + 1;
+      if (((uint)GH_F2U(local_58) >> 0x10 & 0x3f) - 1 < 2) {
+        iVar9 = ((uint)GH_F2U(local_58) & 0xffff) + 1;
         if (*(int *)(*(int *)(param_2 + 0x74) + 0x84) < iVar9) {
           *(int *)(*(int *)(param_2 + 0x74) + 0x84) = iVar9;
         }
       }
       local_54 = *pfVar4;
       pfVar11 = pfVar4 + 1;
-      if (((uint)local_54 & 0x400000) != 0) {
+      if (((uint)GH_F2U(local_54) & 0x400000) != 0) {
         pfVar11 = pfVar4 + 2;
       }
-      if (((uint)local_54 >> 0x10 & 0x3f) - 1 < 2) {
+      if (((uint)GH_F2U(local_54) >> 0x10 & 0x3f) - 1 < 2) {
         iVar5 = *(int *)(param_2 + 0x74);
-        iVar9 = ((uint)local_54 & 0xffff) + 1;
+        iVar9 = ((uint)GH_F2U(local_54) & 0xffff) + 1;
         if (*(int *)(iVar5 + 0x84) < iVar9) goto LAB_000ac4f8;
       }
     }

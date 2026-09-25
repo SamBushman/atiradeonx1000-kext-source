@@ -2692,7 +2692,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           uVar3 = 0;
         }
-        fVar2 = (float)(uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f);
+        fVar2 = GH_U2F((unsigned int)((uVar3 | (uVar4 & 0x1f) << 10 | (uVar6 & 0x1f) << 5 | uVar8 & 0x1f)));
       }
       else {
         fVar7 = *param_2 * FLOAT_97c3acbc + FLOAT_97c3acc0;
@@ -2773,7 +2773,7 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
         else {
           iVar9 = (int)param_2[3];
         }
-        fVar2 = (float)(iVar9 << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)
+        fVar2 = GH_U2F((unsigned int)((iVar9 << 0x18 | (uVar4 & 0xff) << 0x10 | (uVar6 & 0xff) << 8 | uVar8 & 0xff)))
         ;
       }
       *param_3 = fVar2;
@@ -2816,22 +2816,22 @@ int _InterpreterUnpackPixel(param_1, param_2, param_3)
           return;
         }
         fVar6 = *param_3;
-        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)fVar6 >> 10 & 0x1f) - DOUBLE_97c30a68) -
+        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 10 & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)fVar6 >> 5 & 0x1f) - DOUBLE_97c30a68) -
+        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 5 & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)fVar6 >> 0xf & 1) - DOUBLE_97c30a68) -
+        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) >> 0xf & 1) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
-        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)fVar6 & 0x1f) - DOUBLE_97c30a68) -
+        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar6) & 0x1f) - DOUBLE_97c30a68) -
                 FLOAT_97c3acc0;
         fVar1 = FLOAT_97c3accc;
       }
       else {
         fVar2 = *param_3;
-        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)fVar2 >> 0x10 & 0xff) - DOUBLE_97c30a68);
-        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)fVar2 >> 8 & 0xff) - DOUBLE_97c30a68);
-        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)fVar2 & 0xff) - DOUBLE_97c30a68);
-        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)fVar2 >> 0x18) - DOUBLE_97c30a68);
+        fVar3 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 0x10 & 0xff) - DOUBLE_97c30a68);
+        fVar5 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 8 & 0xff) - DOUBLE_97c30a68);
+        fVar6 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) & 0xff) - DOUBLE_97c30a68);
+        fVar2 = (float)((double)CONCAT44(0x43300000,(uint)GH_F2U(fVar2) >> 0x18) - DOUBLE_97c30a68);
         fVar1 = FLOAT_97c3acc8;
       }
       param_2[3] = fVar2 * fVar1;
@@ -3035,23 +3035,23 @@ int _InterpreterLoadSource(param_1, param_2, param_3, param_4, param_5, param_6,
   if (((iVar6 == 0x8804) || (iVar6 == 0x8b30)) && (uStack0000002c == 2)) {
     iVar6 = *(int *)(iVar9 + 0xda4);
     iVar9 = *(int *)(iVar9 + 0xda0);
-    fVar1 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000024]) * (float)param_1[0x28c]
+    fVar1 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000024]) * GH_U2F((unsigned int)(param_1[0x28c]))
             + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000024]);
     *param_12 = fVar1;
-    fVar2 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000025]) * (float)param_1[0x28c]
+    fVar2 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000025]) * GH_U2F((unsigned int)(param_1[0x28c]))
             + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000025]);
     param_12[1] = fVar2;
-    fVar3 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000026]) * (float)param_1[0x28c]
+    fVar3 = *(float *)(iVar6 + param_2[param_11 * 4 + (uint)bStack00000026]) * GH_U2F((unsigned int)(param_1[0x28c]))
             + *(float *)(iVar9 + param_2[param_11 * 4 + (uint)bStack00000026]);
     param_12[2] = fVar3;
-    fVar4 = *(float *)(iVar6 + param_2[param_11 * 4 + (param_4 & 0xff)]) * (float)param_1[0x28c] +
+    fVar4 = *(float *)(iVar6 + param_2[param_11 * 4 + (param_4 & 0xff)]) * GH_U2F((unsigned int)(param_1[0x28c])) +
             *(float *)(iVar9 + param_2[param_11 * 4 + (param_4 & 0xff)]);
     param_12[3] = fVar4;
     if (*param_2 != 0) {
-      *param_12 = fVar1 * (float)param_1[0x28f];
-      param_12[1] = fVar2 * (float)param_1[0x28f];
-      param_12[2] = fVar3 * (float)param_1[0x28f];
-      param_12[3] = fVar4 * (float)param_1[0x28f];
+      *param_12 = fVar1 * GH_U2F((unsigned int)(param_1[0x28f]));
+      param_12[1] = fVar2 * GH_U2F((unsigned int)(param_1[0x28f]));
+      param_12[2] = fVar3 * GH_U2F((unsigned int)(param_1[0x28f]));
+      param_12[3] = fVar4 * GH_U2F((unsigned int)(param_1[0x28f]));
     }
   }
   else {
@@ -4886,7 +4886,7 @@ LAB_97bd1cd8:
         ((int (*)())_InterpreterTextureSamplerSetProjectionEnabled)(param_1[0x28b],uVar32);
         ((int (*)())_InterpreterTextureSamplerSetLodBiasEnabled)(param_1[0x28b],(uint)(iVar21 == 0x44 || iVar21 - 0x44U == 1));
         fparam_1 = (double)((double (*)())_InterpreterTextureSamplerAttachDerivatives)(param_1[0x28b],*(undefined4 *)(iVar19 + 0xda4),
-                                      (double)(float)param_1[0x28f]);
+                                      (double)GH_U2F((unsigned int)(param_1[0x28f])));
         fVar7 = local_130[7];
         if (iVar21 - 0x44U < 2) {
           iVar14 = *(int *)(iVar19 + 0xd80);
@@ -5648,7 +5648,7 @@ void _InterpreterRun(int param_1,int param_2,double fparam_1,double fparam_2,dou
       if (fVar2 < fVar5) {
         uVar17 = uVar17 | 2;
       }
-      pfVar16[0x1f] = (float)(uVar17 | 0x1000000);
+      pfVar16[0x1f] = GH_U2F((unsigned int)((uVar17 | 0x1000000)));
       if (uVar17 == 0) {
         if (fVar2 < fVar14) {
           bVar1 = fVar2 <= FLOAT_97c3acf4;

@@ -8386,8 +8386,8 @@ void FUN_00016670(int param_1,float *param_2,int param_3,int param_4,undefined4 
               if (iVar21 < iVar16) {
                 *pfVar12 = 2.93152e-42;
                 pfVar12[1] = *(float *)(iStack_b0 + 0x1b84);
-                pfVar12[2] = (float)((iVar13 - iVar21) * 0x80000 | 0xc0003500);
-                pfVar12[3] = (float)((iVar13 - iVar21) * 0x10000 | 0x31);
+                pfVar12[2] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x80000 | 0xc0003500)));
+                pfVar12[3] = GH_U2F((unsigned int)(((iVar13 - iVar21) * 0x10000 | 0x31)));
                 iVar21 = iVar16 * iVar19;
                 *(float **)(param_1 + 0x1dc) = pfVar25;
                 iVar13 = iVar21 * 0x20;

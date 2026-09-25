@@ -402,6 +402,107 @@ if os.path.exists(_pp):
     _spec = importlib.util.spec_from_file_location('patches', _pp); _m = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_m); PATCHES = _m.PATCHES; NOTES = getattr(_m, 'NOTES', {})
 _PatchError = getattr(_m, 'PatchError', Exception) if os.path.exists(_pp) else Exception
 CORPUS_SCOPE = os.environ.get('CORPUS_SCOPE', '')
+# int <-> float casts that are only Ghidra's typing: a union word (GLSL TIntermConstantUnion::fold keeps int, float and bool constants in one
+# `float *` array), an object pointer in a float-typed local. 32-bit PowerPC has no int->float instruction (a real conversion is the 0x43300000
+# magic-double sequence, printed as CONCAT44), and a real float->int conversion needs fctiw/fctiwz - so `(float)<int expression>` is always a bit
+# reinterpretation, and `(int)fVarN` is one in every function whose stock code has no fctiw*. The rebuilt fold had folded ivec4(7,5,17,6) -
+# ivec4(3,1,4,2) to 0 and reported a divide by zero for the division (the denormal bits of a small integer converted to 0).
+_FCTIW = None
+if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.tsv')):
+    import struct as _st
+    _d = open(os.environ['CORPUS_SLICE'], 'rb').read(); _secs = []
+    _nc = _st.unpack('>I', _d[16:20])[0]; _p = 28
+    for _ in range(_nc):
+        _c, _cs = _st.unpack('>II', _d[_p:_p + 8])
+        if _c == 1:
+            _ns = _st.unpack('>I', _d[_p + 48:_p + 52])[0]; _q = _p + 56
+            for _ in range(_ns):
+                _a, _sz, _off = _st.unpack('>3I', _d[_q + 32:_q + 44]); _secs.append((_a, _sz, _off)); _q += 68
+        _p += _cs
+    def _word(x):
+        for sa, sz_, off in _secs:
+            if sa <= x < sa + sz_ and off: return _st.unpack('>I', _d[off + x - sa:off + x - sa + 4])[0]
+        return 0
+    _FCTIW = set()
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                if any((_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15) for x in range(_lo, _hi, 4)):
+                    _FCTIW.add(int(_f[0], 16)); break
+def _operand(t, i):
+    """end index of the primary expression starting at t[i] (after optional unary - * & and casts): an identifier with subscripts / member
+    access, a parenthesised expression, a literal"""
+    n = len(t)
+    while i < n and t[i] == ' ': i += 1
+    while i < n and t[i] in '-*&!~': i += 1
+    while i < n and t[i] == '(':   # a cast or a parenthesised expression
+        d = 0; j = i
+        while j < n:
+            if t[j] == '(': d += 1
+            elif t[j] == ')':
+                d -= 1
+                if d == 0: break
+            j += 1
+        inner = t[i + 1:j]
+        if re.match(r'^\s*(?:unsigned |signed )?[A-Za-z_]\w*(?:\s*\*)*\s*$', inner) and not re.match(r'^\s*[a-z]\w*Var\d+\s*$', inner):
+            i = j + 1   # a cast: the operand follows
+            while i < n and t[i] in ' -*&!~': i += 1
+            continue
+        i = j + 1; break
+    else:
+        m = re.match(r'[A-Za-z_]\w*|0x[0-9a-fA-F]+|\d+', t[i:])
+        if not m: return None
+        i += m.end()
+    while i < n and t[i] in '[.-(':   # subscripts / member access / a call's argument list
+        if t[i] == '(':
+            d = 0; j = i
+            while j < n:
+                if t[j] == '(': d += 1
+                elif t[j] == ')':
+                    d -= 1
+                    if d == 0: break
+                j += 1
+            i = j + 1
+        elif t[i] == '[':
+            d = 0; j = i
+            while j < n:
+                if t[j] == '[': d += 1
+                elif t[j] == ']':
+                    d -= 1
+                    if d == 0: break
+                j += 1
+            i = j + 1
+        elif t.startswith('->', i) or t[i] == '.':
+            k = i + (2 if t[i] == '-' else 1); m = re.match(r'[A-Za-z_]\w*', t[k:])
+            if not m: break
+            i = k + m.end()
+        else: break
+    return i
+_FLOATY = re.compile(r'\b(?:[fd]Var\d+|pfVar\d+|pdVar\d+|FLOAT_\w+|DOUBLE_\w+|fparam_\w+|in_f\d+|extraout_f\d+|float|double)\b|\d\.\d|\d+e[-+]?\d')
+def fix_float_int(b, entry):
+    floc = set(re.findall(r'(?m)^\s+float\s+(\w+)(?:\s*\[\d+\])?;', b))
+    out = []; i = 0; n = 0
+    while True:
+        m = re.search(r'\((float|int|uint|u?short|u?char|byte|undefined4)\)', b[i:])
+        if not m: out.append(b[i:]); break
+        st = i + m.start(); en = i + m.end(); ty = m.group(1)
+        e = _operand(b, en)
+        if e is None: out.append(b[i:en]); i = en; continue
+        opd = b[en:e].strip()
+        if ty == 'float':
+            # an integer expression made float without the conversion sequence
+            if opd and not _FLOATY.search(opd) and not opd.startswith('('+'double'):
+                out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
+        elif _FCTIW is not None and entry not in _FCTIW:
+            base = re.match(r'^\*?\(?\s*([A-Za-z_]\w*)', opd)
+            if base and (re.match(r'^(?:f)Var\d+$', base.group(1)) or base.group(1) in floc or re.match(r'^pfVar\d+$', base.group(1)) and ('[' in opd or opd.startswith('*'))) \
+               and not re.search(r'[+\-*/]\s', opd):
+                out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
+        out.append(b[i:en]); i = en
+    return ''.join(out), n
 _applied = set()
 funcs = [(a, sz, name) for a, sz, name in idx]
 for pi in range(0, len(funcs), part):
@@ -456,6 +557,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:DAT|UNK)_([0-9a-f]{8})\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
+            b, _nfi = fix_float_int(b, int(a, 16))
             # a pointer cast of an element of a float/double cursor (`(undefined4 *)pfVar3[3]`: GLDriver FUN_000ddbcc reads three floats and then a
             # pointer word from one stream) converts the float VALUE; the stock loads the word - reinterpret it
             b = re.sub(r'\(([A-Za-z_]\w*(?:\s*\*)+)\)\s*(p[fd]Var\d+)\[([^\[\]]+)\]', r'(*(\1 *)(\2 + (\3)))', b)

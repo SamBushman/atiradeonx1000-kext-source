@@ -150,6 +150,20 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    b3/retype_forwarded_gld.txt). The redumps also inline values Ghidra now reads from `__const` / `__literal` data (glprog 308, GLDriver 5
    declarations fewer): read-only, so equivalent.
    RedumpContaining now raises the decompiler's payload limit (FUN_00115fa0, 3500 lines, failed with "Response buffer size exceeded").
+15. Integers and pointers in float-typed variables. Ghidra types a value by its uses, and a storage it shares with floats (a union array, a
+   reused stack slot) makes it `float`; the C then converts the VALUE where the stock moves bits:
+   * glprog `TIntermConstantUnion::fold` keeps int, float and bool constants in one `float *` array. The rebuilt front end folded
+     `ivec4(7,5,17,6) - ivec4(3,1,4,2)` to 0, negation and division to garbage, and reported a divide by zero (the denormal bits of a small
+     integer converted to 0) - `Tests/userspace/glsl_intfold2.vert`; the function has no fctiw at all.
+   * GLDriver FUN_00180830 kept the object pointers FUN_001043f0 returns in float locals (`fVar7 = (float)FUN_001043f0(..)`, `*(T *)((int)fVar7 +
+     0x98)`: 24 bits of mantissa); GA `_radeonSolidScanlines` & co. kept IOConnectMapMemory's address/size out-parameters and command counters in
+     float stack locals (`local_1a0 = 2.8026e-45` is the integer 2; `puVar40[(int)local_1a0]` indexed 0).
+   Fixes: `gs/SetPointerReturn.java` (FUN_001043f0 returns `void *`), `gs/RetypeLocals.java` on the stack locals `Tools/userspace/float_ints.py`
+   finds (denormal literal assigned or `(int)local` used as an address: GA 16, GLDriver 12, glprog 1), and in ghidra2c `fix_float_int`: 32-bit
+   PowerPC has no int->float instruction (a real conversion is the 0x43300000 magic sequence, printed as CONCAT44), so `(float)<int expression>`
+   is always a bit reinterpretation (GH_U2F), and in a function whose stock code has no fctiw/fctiwz `(int)fVarN` is one too (GH_F2U) -
+   `Tools/userspace/cvt_scan.py` counts the functions (GLDriver 175, glprog 50, GA 4, VA 1 without fctiw). 263 casts rewritten. GLDriver
+   FUN_0009d410 remains: it compares an address with the bits of 1.0f (the stock does that too); same outcome.
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

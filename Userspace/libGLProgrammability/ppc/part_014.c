@@ -38,14 +38,14 @@ double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefine
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
-    if (local_40 < (float)piVar2[0xc]) {
-      local_40 = (float)piVar2[0xc];
+    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
+    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
+      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
     }
     fparam_1 = (double)local_40;
     dVar4 = fparam_1;
-    if ((double)(float)piVar2[8] < fparam_1) {
-      dVar4 = (double)(float)piVar2[8];
+    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
+      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
     }
     if (DOUBLE_97c30a78 <= dVar4) {
       local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
@@ -112,14 +112,14 @@ double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefine
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
-    if (local_40 < (float)piVar2[0xc]) {
-      local_40 = (float)piVar2[0xc];
+    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
+    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
+      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
     }
     fparam_1 = (double)local_40;
     dVar4 = fparam_1;
-    if ((double)(float)piVar2[8] < fparam_1) {
-      dVar4 = (double)(float)piVar2[8];
+    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
+      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
     }
     if (DOUBLE_97c30a78 <= dVar4) {
       local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
@@ -187,14 +187,14 @@ double _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefine
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
                                in_stack_ffffff58,in_stack_ffffff60);
-    local_40 = (float)((double)(float)(dVar4 + (double)(float)piVar2[0x10]) + fparam_1);
-    if (local_40 < (float)piVar2[0xc]) {
-      local_40 = (float)piVar2[0xc];
+    local_40 = (float)((double)(float)(dVar4 + (double)GH_U2F((unsigned int)(piVar2[0x10]))) + fparam_1);
+    if (local_40 < GH_U2F((unsigned int)(piVar2[0xc]))) {
+      local_40 = GH_U2F((unsigned int)(piVar2[0xc]));
     }
     fparam_1 = (double)local_40;
     dVar4 = fparam_1;
-    if ((double)(float)piVar2[8] < fparam_1) {
-      dVar4 = (double)(float)piVar2[8];
+    if ((double)GH_U2F((unsigned int)(piVar2[8])) < fparam_1) {
+      dVar4 = (double)GH_U2F((unsigned int)(piVar2[8]));
     }
     if (DOUBLE_97c30a78 <= dVar4) {
       local_58 = (longlong)(int)(dVar4 - DOUBLE_97c30a78);
@@ -388,7 +388,7 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *param_1,float *param_2,i
   if ((float)dVar11 < (float)dVar10) {
     fVar1 = (float)dVar10;
   }
-  dVar10 = _log2((double)(fVar1 * (float)param_1[4]));
+  dVar10 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
   return (double)(float)dVar10;
 }
 
@@ -436,7 +436,7 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *param_1,float *param_2,i
   if ((float)dVar14 < (float)dVar13) {
     fVar1 = (float)dVar13;
   }
-  dVar13 = _log2((double)(fVar1 * (float)param_1[4]));
+  dVar13 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
   return (double)(float)dVar13;
 }
 
@@ -484,7 +484,7 @@ double _InterpreterTextureSamplerCalculateLambda3D(int *param_1,float *param_2,i
   if ((float)dVar13 < (float)dVar12) {
     fVar1 = (float)dVar12;
   }
-  dVar12 = _log2((double)(fVar1 * (float)param_1[4]));
+  dVar12 = _log2((double)(fVar1 * GH_U2F((unsigned int)(param_1[4]))));
   return (double)(float)dVar12;
 }
 
@@ -541,7 +541,7 @@ double _InterpreterTextureSamplerSampleTexel1DFromLevel(int *param_1,uint param_
   if (uVar4 == 0x2700) {
 LAB_97bd42d8:
     if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-      fVar3 = (float)piVar6[param_3 * 0x34 + 0x5c];
+      fVar3 = GH_U2F((unsigned int)(piVar6[param_3 * 0x34 + 0x5c]));
       iVar5 = param_3 * 0x34 + 100;
       iVar8 = piVar6[param_3 * 0x34 + 0x71];
     }
@@ -574,7 +574,7 @@ LAB_97bd42d0:
     }
   }
   if (*(short *)(iVar5 + 0x10) == -0x7ed3) {
-    fVar3 = (float)piVar6[param_3 * 0x34 + 0x5c];
+    fVar3 = GH_U2F((unsigned int)(piVar6[param_3 * 0x34 + 0x5c]));
     iVar5 = piVar6[param_3 * 0x34 + 0x71];
   }
   else {
@@ -584,7 +584,7 @@ LAB_97bd42d0:
       iVar5 = piVar6[param_3 * 0x34 + 0x70];
       goto LAB_97bd43d4;
     }
-    fVar3 = (float)piVar6[param_3 * 0x34 + 0x5c];
+    fVar3 = GH_U2F((unsigned int)(piVar6[param_3 * 0x34 + 0x5c]));
     iVar5 = piVar6[param_3 * 0x34 + 0x72];
   }
   iVar8 = param_3 * 0x34 + 100;
@@ -688,16 +688,16 @@ double _InterpreterTextureSamplerSampleTexel2DFromLevel(int *param_1,uint param_
   if (uVar6 == 0x2700) {
 LAB_97bd4648:
     if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-      fVar5 = (float)piVar7[param_3 * 0x34 + 0x5c];
+      fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5c]));
       iVar8 = param_3 * 0x34 + 100;
       iVar10 = piVar7[param_3 * 0x34 + 0x71];
-      fVar4 = (float)piVar7[param_3 * 0x34 + 0x5d];
+      fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
     }
     else {
       fVar5 = *pfVar9;
       iVar8 = param_3 * 0x34 + 0x50;
       iVar10 = piVar7[param_3 * 0x34 + 0x70];
-      fVar4 = (float)piVar7[param_3 * 0x34 + 0x49];
+      fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
     }
     local_c0 = (uint)(fVar2 * fVar5);
     local_bc = (uint)(fVar3 * fVar4);
@@ -723,7 +723,7 @@ LAB_97bd4640:
     }
   }
   if ((*(short *)(iVar8 + 0x10) == -0x7ed3) || (*(short *)(iVar8 + 0x12) == -0x7ed3)) {
-    fVar4 = (float)piVar7[param_3 * 0x34 + 0x5c];
+    fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5c]));
     iVar8 = piVar7[param_3 * 0x34 + 0x71];
   }
   else {
@@ -731,14 +731,14 @@ LAB_97bd4640:
       fVar4 = *pfVar9;
       iVar10 = param_3 * 0x34 + 0x50;
       iVar8 = piVar7[param_3 * 0x34 + 0x70];
-      fVar5 = (float)piVar7[param_3 * 0x34 + 0x49];
+      fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
       goto LAB_97bd479c;
     }
-    fVar4 = (float)piVar7[param_3 * 0x34 + 0x5c];
+    fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5c]));
     iVar8 = piVar7[param_3 * 0x34 + 0x72];
   }
   iVar10 = param_3 * 0x34 + 100;
-  fVar5 = (float)piVar7[param_3 * 0x34 + 0x5d];
+  fVar5 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x5d]));
 LAB_97bd479c:
   piVar7 = piVar7 + iVar10;
   fVar2 = (float)((double)(fVar2 * fVar4) + DOUBLE_97c30a88);
@@ -886,18 +886,18 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *param_1,uint param_
 LAB_97bd4b08:
     if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
        (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-      fVar8 = (float)piVar12[param_3 * 0x34 + 0x5c];
+      fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5c]));
       iVar11 = param_3 * 0x34 + 100;
       iVar14 = piVar12[param_3 * 0x34 + 0x71];
-      fVar9 = (float)piVar12[param_3 * 0x34 + 0x5d];
-      fVar7 = (float)piVar12[param_3 * 0x34 + 0x5e];
+      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
+      fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
     }
     else {
       fVar8 = *pfVar13;
       iVar11 = param_3 * 0x34 + 0x50;
       iVar14 = piVar12[param_3 * 0x34 + 0x70];
-      fVar9 = (float)piVar12[param_3 * 0x34 + 0x49];
-      fVar7 = (float)piVar12[param_3 * 0x34 + 0x4a];
+      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
+      fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
     }
     local_120 = (uint)(local_130 * fVar8);
     local_11c = (uint)(local_12c * fVar9);
@@ -924,7 +924,7 @@ LAB_97bd4b00:
   }
   if (((*(short *)(iVar11 + 0x10) == -0x7ed3) || (*(short *)(iVar11 + 0x12) == -0x7ed3)) ||
      (*(short *)(iVar11 + 0x14) == -0x7ed3)) {
-    fVar7 = (float)piVar12[param_3 * 0x34 + 0x5c];
+    fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5c]));
     iVar11 = piVar12[param_3 * 0x34 + 0x71];
   }
   else {
@@ -933,16 +933,16 @@ LAB_97bd4b00:
       fVar7 = *pfVar13;
       iVar14 = param_3 * 0x34 + 0x50;
       iVar11 = piVar12[param_3 * 0x34 + 0x70];
-      fVar8 = (float)piVar12[param_3 * 0x34 + 0x49];
-      fVar9 = (float)piVar12[param_3 * 0x34 + 0x4a];
+      fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
+      fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
       goto LAB_97bd4cb4;
     }
-    fVar7 = (float)piVar12[param_3 * 0x34 + 0x5c];
+    fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5c]));
     iVar11 = piVar12[param_3 * 0x34 + 0x72];
   }
   iVar14 = param_3 * 0x34 + 100;
-  fVar8 = (float)piVar12[param_3 * 0x34 + 0x5d];
-  fVar9 = (float)piVar12[param_3 * 0x34 + 0x5e];
+  fVar8 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5d]));
+  fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x5e]));
 LAB_97bd4cb4:
   piVar12 = piVar12 + iVar14;
   fVar7 = (float)((double)(local_130 * fVar7) + DOUBLE_97c30a88);
@@ -1549,13 +1549,13 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
   local_58 = local_70;
   local_40 = local_4c;
   local_3c = local_48;
-  local_38 = (float)local_44;
+  local_38 = GH_U2F((unsigned int)(local_44));
   local_34 = local_50;
   ((int (*)())_InterpreterNoiseGeneratorInterpolate)(param_1,&local_50,&local_40,&local_60,&local_50);
   local_40 = local_48;
   local_3c = local_44;
   local_38 = local_50;
-  local_34 = (float)local_4c;
+  local_34 = GH_U2F((unsigned int)(local_4c));
   local_54 = local_6c;
   local_60 = local_6c;
   local_5c = local_6c;
@@ -1642,7 +1642,7 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   local_40 = local_4c;
   local_3c = local_48;
   local_54 = local_6c;
-  local_38 = (float)local_44;
+  local_38 = GH_U2F((unsigned int)(local_44));
   local_34 = local_50;
   local_60 = local_6c;
   local_5c = local_6c;
@@ -1652,7 +1652,7 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   local_3c = local_44;
   local_54 = local_68;
   local_38 = local_50;
-  local_34 = (float)local_4c;
+  local_34 = GH_U2F((unsigned int)(local_4c));
   local_60 = local_68;
   local_5c = local_68;
   local_58 = local_68;
@@ -1942,10 +1942,10 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
     uVar15 = 0;
     break;
   case 1:
-    uVar15 = (uint)(fVar3 < *pfVar14);
+    uVar15 = (uint)GH_F2U((fVar3 < *pfVar14));
     break;
   case 2:
-    uVar15 = (uint)(fVar3 == *pfVar14);
+    uVar15 = (uint)GH_F2U((fVar3 == *pfVar14));
     break;
   case 3:
     bVar2 = fVar3 <= *pfVar14;
@@ -1954,7 +1954,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
     uVar15 = (uint)(*pfVar14 < fVar3);
     break;
   case 5:
-    uVar15 = (uint)(fVar3 != *pfVar14);
+    uVar15 = (uint)GH_F2U((fVar3 != *pfVar14));
     break;
   case 6:
     bVar2 = *pfVar14 <= fVar3;
@@ -2544,10 +2544,10 @@ LAB_97bd770c:
   }
   uVar6 = uVar13 & 0xff | (uVar6 & 0xff) << 8 | (uVar7 & 0xff) << 0x10 | uVar10 << 0x18;
 LAB_97bd77d8:
-  fVar4 = ((float)(uVar6 & 0xff | 0x4b000000) - 8388608.0) * FLOAT_97c3acc8;
-  fVar1 = ((float)(uVar6 >> 0x10 & 0xff | 0x4b000000) - 8388608.0) * FLOAT_97c3acc8;
-  fVar2 = ((float)(uVar6 >> 8 & 0xff | 0x4b000000) - 8388608.0) * FLOAT_97c3acc8;
-  *param_4 = ((float)(uVar6 >> 0x18 | 0x4b000000) - 8388608.0) * FLOAT_97c3acc8;
+  fVar4 = (GH_U2F((unsigned int)((uVar6 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  fVar1 = (GH_U2F((unsigned int)((uVar6 >> 0x10 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  fVar2 = (GH_U2F((unsigned int)((uVar6 >> 8 & 0xff | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
+  *param_4 = (GH_U2F((unsigned int)((uVar6 >> 0x18 | 0x4b000000))) - 8388608.0) * FLOAT_97c3acc8;
   param_4[3] = fVar4;
   param_4[1] = fVar1;
   param_4[2] = fVar2;

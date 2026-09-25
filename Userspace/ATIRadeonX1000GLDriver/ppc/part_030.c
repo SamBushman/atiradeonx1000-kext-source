@@ -1065,7 +1065,7 @@ int FUN_0010b498(param_1, param_2)
       }
       iVar3 = (**(code **)(*piVar4 + 0x48))(piVar4);
       if (((iVar3 == 0) || (((int)*(char *)(piVar4 + 0x57) >> (uVar6 & 0x3f) & 1U) == 0)) ||
-         ((float)piVar4[uVar6 * 6 + 8] != fVar2)) {
+         (GH_U2F((unsigned int)(piVar4[uVar6 * 6 + 8])) != fVar2)) {
         return 0;
       }
     }

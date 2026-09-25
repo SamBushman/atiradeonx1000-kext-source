@@ -1111,7 +1111,7 @@ int FUN_000e2c78(param_1, param_2, param_3)
         FUN_000d9e58(uVar15,uVar12,iVar3,(int)sVar2,uVar7,uVar5);
       }
       else {
-        fVar6 = (float)(**(code **)(*param_2 + 0x8c))(param_2,iVar9);
+        fVar6 = GH_U2F((unsigned int)((**(code **)(*param_2 + 0x8c))(param_2,iVar9)));
         uVar12 = *(undefined4 *)(param_1 + 0x94);
         uVar15 = *(undefined4 *)(param_3 + 0x398);
         uVar5 = ((int (*)())FUN_000e16b8)(param_3);
@@ -1974,7 +1974,7 @@ int FUN_000e44c4(param_1, param_2, param_3, param_4)
       do {
         uVar5 = param_4 >> (uVar9 & 0x3f) & 7;
         if (uVar5 < 4) {
-          fVar1 = (float)piVar7[uVar5 + 1];
+          fVar1 = GH_U2F((unsigned int)(piVar7[uVar5 + 1]));
         }
         else {
           fVar1 = FLOAT_001aa0d4;

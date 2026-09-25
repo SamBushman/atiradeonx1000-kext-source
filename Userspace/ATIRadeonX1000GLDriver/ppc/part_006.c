@@ -7591,22 +7591,22 @@ uint FUN_0004a7d0(double fparam_1)
   uint uVar3;
   
   fVar1 = (float)fparam_1;
-  uVar2 = (uint)fVar1 >> 0x17 & 0xff;
-  uVar3 = (uint)fVar1 >> 8 & 0x800000;
+  uVar2 = (uint)GH_F2U(fVar1) >> 0x17 & 0xff;
+  uVar3 = (uint)GH_F2U(fVar1) >> 8 & 0x800000;
   if (uVar2 < 0x41) {
     return 0;
   }
   if (0xbf < uVar2) {
     return uVar3 | 0x7fffff;
   }
-  return (uint)fVar1 >> 7 & 0xffff | uVar3 | (uVar2 - 0x40) * 0x10000;
+  return (uint)GH_F2U(fVar1) >> 7 & 0xffff | uVar3 | (uVar2 - 0x40) * 0x10000;
 }
 
 /* FUN_0004a830 @ 0x4a830 (40 bytes) */
 double FUN_0004a830(uint param_1)
 {
-  return (double)(float)((param_1 & 0x800000) << 8 | ((param_1 >> 0x10 & 0x7f) + 0x40) * 0x800000 |
-                        (param_1 & 0xffff) << 7);
+  return (double)GH_U2F((unsigned int)(((param_1 & 0x800000) << 8 | ((param_1 >> 0x10 & 0x7f) + 0x40) * 0x800000 |
+                        (param_1 & 0xffff) << 7)));
 }
 
 /* FUN_0004a860 @ 0x4a860 (112 bytes) */

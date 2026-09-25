@@ -4431,9 +4431,9 @@ LAB_0009bfa0:
             *(undefined4 *)(iVar19 + 0x174) = uVar8;
             *(undefined4 *)(iVar19 + 0x17c) = uVar18;
             *(undefined4 *)(iVar19 + 0x180) = uVar20;
-            fVar5 = (float)puVar14[4];
-            fVar4 = (float)puVar14[5];
-            *(float *)(iVar19 + 0x1fc) = -(float)puVar14[6];
+            fVar5 = GH_U2F((unsigned int)(puVar14[4]));
+            fVar4 = GH_U2F((unsigned int)(puVar14[5]));
+            *(float *)(iVar19 + 0x1fc) = -GH_U2F((unsigned int)(puVar14[6]));
             *(float *)(iVar19 + 500) = -fVar5;
             *(float *)(iVar19 + 0x1f8) = -fVar4;
             *(uint *)(iVar10 + iVar16 + 0x284) =
@@ -5112,7 +5112,7 @@ LAB_0009d4b8:
   _memset(piVar21,0xffffffff,0x324);
   param_5[2] = 0;
   if (((unsigned char *)0x00004301)[iVar20] == '\0') {
-    local_78 = (float)(iVar20 + 0x2460);
+    local_78 = GH_U2F((unsigned int)((iVar20 + 0x2460)));
     iVar8 = 0;
     if ((((((local_74[0] != 0 || local_74[1] != 0) || local_74[2] != 0) ||
           FLOAT_001aa0e8 != local_78) ||
@@ -5145,7 +5145,7 @@ LAB_0009d4b8:
     iVar8 = 0;
     iVar16 = 4;
     uVar4 = 0;
-    fVar12 = (float)(iVar20 + 0x1960);
+    fVar12 = GH_U2F((unsigned int)((iVar20 + 0x1960)));
     piVar11 = piVar21;
     do {
       if (((1 << (bVar1 & 0x3f)) - 1U & 1 << (uVar4 & 0x3f)) != 0) {
@@ -5176,7 +5176,7 @@ LAB_0009d4b8:
         }
       }
       uVar4 = uVar4 + 1;
-      fVar12 = (float)((int)fVar12 + 0x40);
+      fVar12 = (float)((int)GH_F2U(fVar12) + 0x40);
       piVar11 = piVar11 + 1;
       iVar16 = iVar16 + -1;
     } while (iVar16 != 0);
@@ -5530,7 +5530,7 @@ LAB_0009d4b8:
   }
   *param_4 = iVar8;
   if (((unsigned char *)0x00004301)[iVar19] == '\0') {
-    local_78 = (float)(iVar19 + 0x1960);
+    local_78 = GH_U2F((unsigned int)((iVar19 + 0x1960)));
     if ((((((local_74[0] == 0 && local_74[1] == 0) && local_74[2] == 0) &&
           FLOAT_001aa0e8 == local_78) &&
          (((local_74[3] == 0 && local_60 == 0) && local_5c == 0) && FLOAT_001aa0e8 == local_64)) &&
@@ -6589,7 +6589,7 @@ void FUN_0009f0b0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
         uStack_15c = 0;
         iVar25 = *(int *)(iVar18 + 0x338) * 0x10;
         *(ulonglong *)(iVar36 + iVar25) = CONCAT44(local_168,fStack_164);
-        *(ulonglong *)(iVar36 + iVar25 + 8) = (ulonglong)(uint)local_160 << 0x20;
+        *(ulonglong *)(iVar36 + iVar25 + 8) = (ulonglong)(uint)GH_F2U(local_160) << 0x20;
         uVar27 = piVar45[2];
         break;
       case 0x18:

@@ -4476,9 +4476,9 @@ int FUN_00089320(param_1, param_2)
     fVar2 = param_2[1];
     fVar3 = param_2[2];
     param_1[iVar7 * 4 + 0x9019] = (int)param_2[3];
-    param_1[iVar7 * 4 + 0x9016] = (int)fVar1;
-    param_1[iVar7 * 4 + 0x9017] = (int)fVar2;
-    param_1[iVar7 * 4 + 0x9018] = (int)fVar3;
+    param_1[iVar7 * 4 + 0x9016] = (int)GH_F2U(fVar1);
+    param_1[iVar7 * 4 + 0x9017] = (int)GH_F2U(fVar2);
+    param_1[iVar7 * 4 + 0x9018] = (int)GH_F2U(fVar3);
     param_1[0x9116] = param_1[0x9116] + 1;
   }
   else {

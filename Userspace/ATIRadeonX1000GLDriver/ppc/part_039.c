@@ -230,11 +230,11 @@ int FUN_001281f0(param_1, param_2, param_3, param_4)
   puVar5 = &DAT_001aff0c;
   while( true ) {
     uVar7 = *puVar5;
-    if (((((float)puVar5[1] == fVar2) &&
-         ((cStack00000024 == '\x04' || (fVar1 == (float)puVar5[-4])))) &&
-        ((cStack00000025 == '\x04' || (fVar1 == (float)puVar5[-3])))) &&
-       (((cStack00000026 == '\x04' || (fVar1 == (float)puVar5[-2])) &&
-        ((cStack00000027 == '\x04' || ((float)puVar5[-1] == fVar1)))))) break;
+    if ((((GH_U2F((unsigned int)(puVar5[1])) == fVar2) &&
+         ((cStack00000024 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-4])))))) &&
+        ((cStack00000025 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-3])))))) &&
+       (((cStack00000026 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-2])))) &&
+        ((cStack00000027 == '\x04' || (GH_U2F((unsigned int)(puVar5[-1])) == fVar1)))))) break;
     puVar5 = puVar5 + 6;
     if (puVar5 == (undefined4 *)&UNK_001aff54) {
       return 0;
@@ -302,27 +302,30 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
   float fVar1;
   bool bVar2;
   int *piVar3;
-  float *pfVar4;
+  uint *puVar4;
   char *pcVar5;
   int iVar6;
   dword *pdVar7;
   undefined4 uVar8;
   int iVar9;
   int iVar10;
-  float local_b8 [4];
+  uint local_b8;
+  undefined4 uStack_b4;
+  undefined4 uStack_b0;
+  undefined4 uStack_ac;
   undefined4 local_a8;
   undefined4 local_a4;
   undefined4 local_a0;
   float local_50;
   
-  if (*param_4 != DAT_001affa0) {
+  if (*param_4 != 0x4040404) {
     pcVar5 = "In";
+    fVar1 = 0.0;
     iVar9 = 4;
     bVar2 = true;
     iVar6 = 1;
     piVar3 = param_4;
     pdVar7 = param_3;
-    fVar1 = FLOAT_001aa0d4;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
@@ -344,10 +347,10 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
     else {
       pcVar5 = "";
       iVar9 = 4;
-      pfVar4 = local_b8;
+      puVar4 = &local_b8;
       do {
-        *pfVar4 = NAN;
-        pfVar4 = pfVar4 + 1;
+        *puVar4 = 0x7ffffffe;
+        puVar4 = puVar4 + 1;
         iVar9 = iVar9 + -1;
       } while (iVar9 != 0);
       pdVar7 = &MACH_HEADER.cputype;
@@ -355,11 +358,11 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
       iVar10 = 4;
       do {
         local_50 = fVar1;
-        *(float *)(iVar9 + (int)local_b8) = fVar1;
+        *(float *)(iVar9 + (int)&local_b8) = fVar1;
         iVar9 = iVar9 + 4;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      iVar9 = FUN_000f6a04(param_2,local_b8,DAT_001aff9c);
+      iVar9 = FUN_000f6a04(param_2,&local_b8,0x10203);
     }
     if (iVar9 != 0) {
       return iVar9;
@@ -369,13 +372,11 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
     if (iVar6 != 0) {
       return iVar6;
     }
-    if ((((((*(uint *)(param_2 + 0x30) & 0x100) != 0) && ((float)*param_3 == FLOAT_001aa0d4)) &&
-         ((float)param_3[1] == FLOAT_001aa0e8)) &&
-        (((float)param_3[2] == FLOAT_001aa0d4 && ((float)param_3[3] == FLOAT_001aa0d4)))) &&
-       (*param_4 == DAT_001aff9c)) {
-      FUN_000f4a24(param_3,local_b8);
-      iVar6 = FUN_000f5248(uVar8,local_b8[0],local_b8[1],local_b8[2],local_b8[3],local_a8,local_a4,
-                           local_a0);
+    if ((((((*(uint *)(param_2 + 0x30) & 0x100) != 0) && (GH_U2F((unsigned int)(*param_3)) == 0.0)) &&
+         (GH_U2F((unsigned int)(param_3[1])) == 1.0)) && ((GH_U2F((unsigned int)(param_3[2])) == 0.0 && (GH_U2F((unsigned int)(param_3[3])) == 0.0))))
+       && (*param_4 == 0x10203)) {
+      FUN_000f4a24(param_3,&local_b8);
+      iVar6 = FUN_000f5248(uVar8,local_b8,uStack_b4,uStack_b0,uStack_ac,local_a8,local_a4,local_a0);
       return iVar6;
     }
     iVar6 = FUN_000f57f0(uVar8,param_3,param_4,piVar3);
@@ -1189,50 +1190,51 @@ int FUN_00129a0c(param_1, param_2, param_3, param_4, param_5)
 {
   char cVar1;
   float fVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
-  undefined4 uVar6;
-  float *pfVar7;
-  int iVar8;
+  int *piVar3;
+  int iVar4;
+  undefined4 uVar5;
+  float *pfVar6;
+  int iVar7;
   uint local_58;
   undefined4 local_54;
-  float local_50 [8];
+  uint local_50;
+  float fStack_4c;
+  float fStack_48;
+  float fStack_44;
   undefined4 local_30;
   
   local_58 = param_4 << 0x18 | (param_4 & 0xff00) << 8 | param_4 >> 8 & 0xff00 | param_4 >> 0x18;
-  piVar4 = (int *)FUN_00105594(param_2,param_3);
-  iVar5 = (**(code **)(*piVar4 + 0x48))();
-  if (iVar5 == 0) {
+  piVar3 = (int *)FUN_00105594(param_2,param_3);
+  iVar4 = (**(code **)(*piVar3 + 0x48))();
+  if (iVar4 == 0) {
 LAB_00129b30:
-    uVar6 = 0;
+    uVar5 = 0;
   }
   else {
-    iVar5 = FUN_001054ec(param_2,param_3);
-    iVar8 = 0;
-    local_54 = *(undefined4 *)(iVar5 + 0x10);
-    iVar5 = 4;
-    pfVar7 = local_50;
+    iVar4 = FUN_001054ec(param_2,param_3);
+    iVar7 = 0;
+    local_54 = *(undefined4 *)(iVar4 + 0x10);
+    iVar4 = 4;
+    pfVar6 = (float *)&local_50;
     do {
-      cVar1 = *(char *)((int)&local_58 + iVar8);
-      *pfVar7 = FLOAT_001aa0d4;
+      cVar1 = *(char *)((int)&local_58 + iVar7);
+      *pfVar6 = 0.0;
       if (cVar1 == '\0') {
-        uVar3 = (uint)*(byte *)((int)local_50 + iVar8 + -4);
-        if ((((int)*(char *)(piVar4 + 0x57) >> (uVar3 & 0x3f) & 1U) == 0) ||
-           (((fVar2 = (float)piVar4[uVar3 * 6 + 8], fVar2 != FLOAT_001aa0d4 &&
-             (fVar2 != FLOAT_001aa0e8)) && (local_30 = 0xbf800000, fVar2 != -1.0))))
+        if ((((int)*(char *)(piVar3 + 0x57) >> (*(byte *)((int)&local_54 + iVar7) & 0x3f) & 1U) == 0
+            ) || (((fVar2 = GH_U2F((unsigned int)(piVar3[(uint)*(byte *)((int)&local_54 + iVar7) * 6 + 8])),
+                   fVar2 != 0.0 && (fVar2 != 1.0)) && (local_30 = 0xbf800000, fVar2 != -1.0))))
         goto LAB_00129b30;
-        *pfVar7 = fVar2;
+        *pfVar6 = fVar2;
       }
-      iVar8 = iVar8 + 1;
-      pfVar7 = pfVar7 + 1;
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
-    ((void (*)())FUN_000f79c4)(param_2,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)local_50[0],
-                 (double)local_50[1],(double)local_50[2],(double)local_50[3]);
-    uVar6 = 1;
+      iVar7 = iVar7 + 1;
+      pfVar6 = pfVar6 + 1;
+      iVar4 = iVar4 + -1;
+    } while (iVar4 != 0);
+    ((void (*)())FUN_000f79c4)(param_2,*(undefined4 *)(param_5 + 0x6c4),param_3,(double)GH_U2F((unsigned int)(local_50)),
+                 (double)fStack_4c,(double)fStack_48,(double)fStack_44);
+    uVar5 = 1;
   }
-  return uVar6;
+  return uVar5;
 }
 
 /* FUN_00129b48 @ 0x129b48 (632 bytes) */
@@ -1369,24 +1371,24 @@ int FUN_00129eb4(param_1, param_2, param_3, param_4)
   float fVar1;
   bool bVar2;
   int *piVar3;
-  float *pfVar4;
+  uint *puVar4;
   char *pcVar5;
   int iVar6;
   dword *pdVar7;
   undefined4 uVar8;
   int iVar9;
   int iVar10;
-  float local_38 [6];
+  uint local_38;
   float local_20;
   
-  if (*param_4 != DAT_001affbc) {
+  if (*param_4 != 0x4040404) {
     pcVar5 = "te()\n";
+    fVar1 = 0.0;
     iVar9 = 4;
     bVar2 = true;
     iVar6 = 1;
     piVar3 = param_4;
     pdVar7 = param_3;
-    fVar1 = FLOAT_001aa0d4;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
@@ -1408,10 +1410,10 @@ int FUN_00129eb4(param_1, param_2, param_3, param_4)
     else {
       pcVar5 = "";
       iVar9 = 4;
-      pfVar4 = local_38;
+      puVar4 = &local_38;
       do {
-        *pfVar4 = NAN;
-        pfVar4 = pfVar4 + 1;
+        *puVar4 = 0x7ffffffe;
+        puVar4 = puVar4 + 1;
         iVar9 = iVar9 + -1;
       } while (iVar9 != 0);
       pdVar7 = &MACH_HEADER.cputype;
@@ -1419,11 +1421,11 @@ int FUN_00129eb4(param_1, param_2, param_3, param_4)
       iVar10 = 4;
       do {
         local_20 = fVar1;
-        *(float *)(iVar9 + (int)local_38) = fVar1;
+        *(float *)(iVar9 + (int)&local_38) = fVar1;
         iVar9 = iVar9 + 4;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      iVar9 = FUN_000f6a04(param_2,local_38,DAT_001affb8);
+      iVar9 = FUN_000f6a04(param_2,&local_38,0x10203);
     }
     if (iVar9 != 0) {
       return iVar9;

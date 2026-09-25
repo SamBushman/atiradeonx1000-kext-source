@@ -792,28 +792,28 @@ int FUN_00159b58(param_1, param_2, param_3)
               *(int *)(param_3 + 0x218) = *(int *)(param_3 + 0x218) + 1;
               switch(iVar8) {
               case 0:
-                uVar11 = (uint)(local_e4 == local_9c);
-                uVar7 = (uint)(local_e4 == local_b4);
+                uVar11 = (uint)GH_F2U((local_e4 == local_9c));
+                uVar7 = (uint)GH_F2U((local_e4 == local_b4));
                 break;
               case 1:
-                uVar11 = (uint)(local_e4 != local_9c);
-                uVar7 = (uint)(local_e4 != local_b4);
+                uVar11 = (uint)GH_F2U((local_e4 != local_9c));
+                uVar7 = (uint)GH_F2U((local_e4 != local_b4));
                 break;
               case 2:
-                uVar11 = (uint)(local_e4 < local_9c);
-                uVar7 = (uint)(local_e4 < local_b4);
+                uVar11 = (uint)GH_F2U((local_e4 < local_9c));
+                uVar7 = (uint)GH_F2U((local_e4 < local_b4));
                 break;
               case 3:
-                uVar11 = (uint)(local_e4 <= local_9c);
-                uVar7 = (uint)(local_e4 <= local_b4);
+                uVar11 = (uint)GH_F2U((local_e4 <= local_9c));
+                uVar7 = (uint)GH_F2U((local_e4 <= local_b4));
                 break;
               case 4:
-                uVar11 = (uint)(local_9c < local_e4);
-                uVar7 = (uint)(local_b4 < local_e4);
+                uVar11 = (uint)GH_F2U((local_9c < local_e4));
+                uVar7 = (uint)GH_F2U((local_b4 < local_e4));
                 break;
               case 5:
-                uVar11 = (uint)(local_9c <= local_e4);
-                uVar7 = (uint)(local_b4 <= local_e4);
+                uVar11 = (uint)GH_F2U((local_9c <= local_e4));
+                uVar7 = (uint)GH_F2U((local_b4 <= local_e4));
                 break;
               default:
                 goto switchD_0015a394_default;

@@ -611,11 +611,11 @@ int FUN_000f5cf0(param_1, param_2, param_3, param_4)
     } while (iVar3 != 0);
     if (bVar1) {
       if (((*(uint *)(param_2 * 0x18 + param_1 + 0xa0) & 2) != 0) &&
-         ((float)param_4[1] < FLOAT_001aa0d4)) {
-        param_4[1] = (int)-(float)param_4[1];
+         (GH_U2F((unsigned int)(param_4[1])) < FLOAT_001aa0d4)) {
+        param_4[1] = (int)-GH_U2F((unsigned int)(param_4[1]));
       }
       if ((*(uint *)(param_2 * 0x18 + param_1 + 0xa0) & 1) != 0) {
-        param_4[1] = (int)-(float)param_4[1];
+        param_4[1] = (int)-GH_U2F((unsigned int)(param_4[1]));
         return 1;
       }
       return 1;
@@ -656,7 +656,7 @@ LAB_000f5f7c:
     do {
       uVar5 = (uint)*(byte *)((int)&local_38 + iVar4);
       if (uVar5 < 4) {
-        local_30 = (float)piVar1[uVar5 * 6 + 8];
+        local_30 = GH_U2F((unsigned int)(piVar1[uVar5 * 6 + 8]));
         local_2c = piVar1[uVar5 * 6 + 9];
         local_28 = piVar1[uVar5 * 6 + 10];
         local_34 = piVar1[uVar5 * 6 + 7];
@@ -664,7 +664,7 @@ LAB_000f5f7c:
         local_24 = piVar1[uVar5 * 6 + 0xb];
         if (((piVar1[uVar5 * 6 + 7] != 2) ||
             (((int)*(char *)(piVar1 + 0x57) >> (uVar5 & 0x3f) & 1U) == 0)) ||
-           ((float)piVar1[uVar5 * 6 + 8] < FLOAT_001aa0d4)) goto LAB_000f5f7c;
+           (GH_U2F((unsigned int)(piVar1[uVar5 * 6 + 8])) < FLOAT_001aa0d4)) goto LAB_000f5f7c;
       }
       iVar4 = iVar4 + 1;
       iVar2 = iVar2 + -1;
@@ -1417,7 +1417,7 @@ LAB_000f6f58:
               uVar3 = *puVar12;
               if (uVar3 == *puVar10) {
                 if (uVar3 == 2) {
-                  bVar14 = (float)puVar12[1] < (float)puVar10[1];
+                  bVar14 = GH_U2F((unsigned int)(puVar12[1])) < GH_U2F((unsigned int)(puVar10[1]));
                 }
                 else {
                   bVar14 = puVar12[1] < puVar10[1];

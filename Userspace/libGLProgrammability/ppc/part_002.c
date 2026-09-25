@@ -2137,7 +2137,7 @@ double _lBuildFloatValue(int param_1,int param_2,uint param_3)
     }
   }
   fVar1 = (float)dVar7;
-  if ((((uint)fVar1 & 0x7f800000) == 0x7f800000) && (((uint)fVar1 & 0x7fffff) == 0)) {
+  if ((((uint)GH_F2U(fVar1) & 0x7f800000) == 0x7f800000) && (((uint)GH_F2U(fVar1) & 0x7fffff) == 0)) {
     _CPPErrorToInfoLog(" ERROR___FP_CONST_OVERFLOW",param_2,0,in_r6,in_r7,in_r8,iVar4);
   }
   return (double)fVar1;

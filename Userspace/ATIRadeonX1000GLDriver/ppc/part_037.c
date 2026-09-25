@@ -3188,7 +3188,10 @@ int FUN_00123c08(param_1, param_2, param_3)
   int iVar16;
   undefined4 *local_58;
   undefined4 local_54;
-  float local_50 [11];
+  uint local_50;
+  float fStack_4c;
+  float fStack_48;
+  float fStack_44;
   
   if (*(int *)(param_1 + 0x378) == 0) {
     iVar7 = *(int *)(param_1 + 8);
@@ -3202,15 +3205,15 @@ int FUN_00123c08(param_1, param_2, param_3)
     do {
       iVar2 = *(int *)(iVar3 + 0x10);
       if (iVar2 == 1) {
-        *(undefined4 *)((int)local_50 + iVar8) = 0;
+        *(undefined4 *)((int)&local_50 + iVar8) = 0;
       }
       else if (iVar2 == 2) {
-        *(undefined4 *)((int)local_50 + iVar8) = 0x3f800000;
+        *(undefined4 *)((int)&local_50 + iVar8) = 0x3f800000;
       }
       else if (iVar2 == 0) {
         bVar1 = true;
-        *(undefined4 *)((int)local_50 + iVar8) = 0;
-        *(undefined1 *)((int)local_50 + iVar9 + -4) = 1;
+        *(undefined4 *)((int)&local_50 + iVar8) = 0;
+        *(undefined1 *)((int)&local_54 + iVar9) = 1;
       }
       iVar9 = iVar9 + 1;
       iVar8 = iVar8 + 4;
@@ -3219,8 +3222,8 @@ int FUN_00123c08(param_1, param_2, param_3)
     } while (iVar16 != 0);
     uVar4 = FUN_001084b8(0x31,iVar7);
     *(undefined4 *)(param_1 + 0x378) = uVar4;
-    ((void (*)())FUN_000f79c4)(uVar4,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4),1,(double)local_50[0],
-                 (double)local_50[1],(double)local_50[2],(double)local_50[3]);
+    ((void (*)())FUN_000f79c4)(uVar4,*(undefined4 *)(*(int *)(param_1 + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(local_50)),
+                 (double)fStack_4c,(double)fStack_48,(double)fStack_44);
     iVar3 = *(int *)(*(int *)(param_1 + 0x378) + 0xa4);
     piVar5 = *(int **)(iVar3 + 0x18);
     if (*piVar5 == 0) {

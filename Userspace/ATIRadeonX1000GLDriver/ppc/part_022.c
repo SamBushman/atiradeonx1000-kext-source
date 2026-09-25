@@ -775,7 +775,7 @@ int FUN_000e5e70(param_1)
   int iVar17;
   bool bVar18;
   int local_68;
-  float local_64 [4];
+  uint local_64;
   float local_54 [10];
   
   iVar13 = 0;
@@ -943,7 +943,7 @@ LAB_000e6ac4:
     param_1[0xe] = 1;
     goto switchD_000e61ac_caseD_a;
   case 7:
-    local_64[0] = 8.40779e-45;
+    local_64 = 6;
     ((int (*)())FUN_000e547c)(param_1,0x34,local_68,6,in_r7,in_r8);
     break;
   case 8:
@@ -1041,7 +1041,7 @@ LAB_000e6ac4:
     param_1[0x14] = 0;
     break;
   case 9:
-    local_64[0] = 1.12104e-44;
+    local_64 = 8;
     iVar4 = local_68 + -1;
     in_r7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
@@ -1067,8 +1067,8 @@ LAB_000e6ac4:
         iVar13 = (int)(short)**(uint **)param_1[0x19];
         uVar12 = **(uint **)param_1[0x19] >> 0x10 & 0x3f;
         if (uVar12 == 1) {
-          ((void (*)())FUN_000e4780)(param_1,iVar13,(double)(float)param_1[0x25],(double)(float)param_1[0x26],
-                       (double)(float)param_1[0x27],(double)(float)param_1[0x28]);
+          ((void (*)())FUN_000e4780)(param_1,iVar13,(double)GH_U2F((unsigned int)(param_1[0x25])),(double)GH_U2F((unsigned int)(param_1[0x26])),
+                       (double)GH_U2F((unsigned int)(param_1[0x27])),(double)GH_U2F((unsigned int)(param_1[0x28])));
         }
         else if (uVar12 == 2) {
           FUN_000e4450(param_1,iVar13,param_1[0x25],param_1[0x26],param_1[0x27],param_1[0x28]);
@@ -1149,7 +1149,7 @@ LAB_000e6ac4:
     }
     if ((((uVar11 != (uVar5 >> 0x10 & 0x3f)) || (uVar11 != 1)) ||
         (iVar4 = FUN_000e07dc(*param_1,1), iVar4 == 0)) ||
-       ((iVar4 = FUN_000e44c4(param_1,(int)(short)uVar3,local_64,iVar17), iVar4 == 0 ||
+       ((iVar4 = FUN_000e44c4(param_1,(int)(short)uVar3,&local_64,iVar17), iVar4 == 0 ||
         (iVar4 = FUN_000e44c4(param_1,(int)(short)uVar5,local_54,iVar7), iVar4 == 0)))) {
       puVar15 = (uint *)param_1[0xf];
       uVar12 = puVar15[1];
@@ -1169,22 +1169,22 @@ LAB_000e6ac4:
     }
     switch(uVar6 >> 0x10 & 7) {
     case 0:
-      bVar18 = local_64[0] != local_54[0];
+      bVar18 = GH_U2F((unsigned int)(local_64)) != local_54[0];
       break;
     case 1:
-      bVar18 = local_64[0] == local_54[0];
+      bVar18 = GH_U2F((unsigned int)(local_64)) == local_54[0];
       break;
     case 2:
-      bVar18 = local_54[0] <= local_64[0];
+      bVar18 = local_54[0] <= GH_U2F((unsigned int)(local_64));
       break;
     case 3:
-      bVar18 = local_54[0] < local_64[0];
+      bVar18 = local_54[0] < GH_U2F((unsigned int)(local_64));
       break;
     case 4:
-      bVar18 = local_64[0] <= local_54[0];
+      bVar18 = GH_U2F((unsigned int)(local_64)) <= local_54[0];
       break;
     case 5:
-      bVar18 = local_64[0] < local_54[0];
+      bVar18 = GH_U2F((unsigned int)(local_64)) < local_54[0];
       break;
     default:
       goto switchD_000e67b4_default;
@@ -1278,22 +1278,22 @@ LAB_000e6870:
   case 0x53:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
-    local_64[0] = 8.40779e-45;
+    local_64 = 6;
     ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,6,in_r7,in_r8);
     break;
   case 0x66:
-    local_64[0] = 8.40779e-45;
+    local_64 = 6;
     ((int (*)())FUN_000e547c)(param_1,0x70,local_68,6,in_r7,in_r8);
     break;
   case 0x67:
-    local_64[0] = 1.12104e-44;
+    local_64 = 8;
     iVar4 = local_68 + -1;
     in_r7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
     ((int (*)())FUN_000e5384)(param_1,0x6f,iVar4,8,in_r7,in_r8);
     break;
   case 0x68:
-    local_64[0] = 1.12104e-44;
+    local_64 = 8;
     iVar4 = local_68 + -1;
     in_r7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
@@ -1581,11 +1581,11 @@ switchD_000e61ac_caseD_53:
     }
     break;
   case 0x74:
-    local_64[0] = 1.61149e-43;
+    local_64 = 0x73;
     ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,0x73,in_r7,in_r8);
     break;
   case 0x75:
-    local_64[0] = 1.61149e-43;
+    local_64 = 0x73;
     ((int (*)())FUN_000e547c)(param_1,0x70,local_68,0x73,in_r7,in_r8);
   }
   goto LAB_000e5e9c;

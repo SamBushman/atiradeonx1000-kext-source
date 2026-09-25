@@ -3289,7 +3289,7 @@ int TPoolAllocator__allocate(this, param_2)
   }
   else {
     *(uint *)(this + 0x14) = uVar5 + *(uint *)(this + 0xc) & ~*(uint *)(this + 0xc);
-    iVar6 = *(int *)(this + 0x1c) + iVar6 + (int)fVar1;
+    iVar6 = *(int *)(this + 0x1c) + iVar6 + (int)GH_F2U(fVar1);
   }
   return iVar6;
 }
