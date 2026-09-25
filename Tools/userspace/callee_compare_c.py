@@ -120,7 +120,7 @@ for l in open(odis):
             g = sm.group(1) if sm else None
             if g and (g.startswith(('FUN_', 'part_')) or norm(g) in fnames): lastsym = norm(g); idx_since = 0
             else: idx_since += 1
-HELPERS = {'vectorPermute','vectorConditionalSelect','dataCacheBlockClearToZero','dataCacheBlockAllocate','fixunssfdi','fixunsdfdi','fixsfdi','cmpdi2','ucmpdi2','floatdidf','floatundidf','fixdfdi','fixunsdfdi','ashldi3','lshrdi3','ashrdi3','muldi3','divdi3','udivdi3','moddi3','umoddi3','floatdisf','fixsfdi','storeWordConditionalIndexed','Unwind_Resume','builtin_strncpy','bzero','memmove'}
+HELPERS = {'GH_U2F','GH_F2U','vectorPermute','vectorConditionalSelect','dataCacheBlockClearToZero','dataCacheBlockAllocate','fixunssfdi','fixunsdfdi','fixsfdi','cmpdi2','ucmpdi2','floatdidf','floatundidf','fixdfdi','fixunsdfdi','ashldi3','lshrdi3','ashrdi3','muldi3','divdi3','udivdi3','moddi3','umoddi3','floatdisf','fixsfdi','storeWordConditionalIndexed','Unwind_Resume','builtin_strncpy','bzero','memmove'}
 ALIAS = {'bzero': 'memset', 'memmove': 'memcpy', 'ZdlPv': 'operator_delete', 'ZdaPv': 'operator_delete__', 'Znwm': 'operator_new', 'Znam': 'operator_new__', 'ZdlPvRKSt9nothrow_t': 'operator_delete', 'ZnwmRKSt9nothrow_t': 'operator_new'}
 mill_names = {norm(n) for a, sz, n, st in funcs if is_millicode(a)}   # register save/restore millicode: Ghidra shows the prologue helper as a call, the stock compiler inlines it
 def is_stub(a, sz):
