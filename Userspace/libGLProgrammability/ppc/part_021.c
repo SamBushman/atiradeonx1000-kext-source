@@ -439,6 +439,7 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
   ulong param_3;
   ulong param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   ulong uVar1;
   uint *puVar2;
   ulong uStack00000024;
@@ -448,7 +449,7 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
   undefined4 local_34;
   uint local_30 [6];
   
-  puVar2 = &STACKARG(0x24);
+  puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   local_30[0] = *(int *)(*(int *)param_2 + -0xc) - param_3;
   if (local_30[0] <= param_4) {
     puVar2 = local_30;
@@ -1191,6 +1192,7 @@ int __ZNKSs5rfindEPKcmm(this, param_2, param_3, param_4)
   ulong param_3;
   ulong param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   uint *puVar2;
   int iVar3;
@@ -1202,7 +1204,7 @@ int __ZNKSs5rfindEPKcmm(this, param_2, param_3, param_4)
   local_30[0] = *(uint *)(iVar4 + -0xc);
   if (param_4 <= local_30[0]) {
     local_30[0] = local_30[0] - param_4;
-    puVar2 = &STACKARG(0x20);
+    puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     if (local_30[0] <= param_3) {
       puVar2 = local_30;
     }

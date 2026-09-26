@@ -464,6 +464,7 @@ int FUN_0010453c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   int iVar2;
   undefined4 uVar3;
@@ -472,7 +473,7 @@ int FUN_0010453c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   
   uStack00000020 = param_3;
   if (*(int *)(param_1 + 0x98) == 0x33) {
-    pbVar4 = (byte *)&STACKARG(0x20);
+    pbVar4 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     do {
       uVar1 = (uint)*pbVar4;
       if ((uVar1 != 4) &&
@@ -481,7 +482,7 @@ int FUN_0010453c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
                              ((double)*(float *)(uVar1 * 0x18 + param_1 + 0x20)), iVar2 == 0))))
       goto LAB_001045cc;
       pbVar4 = pbVar4 + 1;
-    } while (pbVar4 != &STACKARG(0x24));
+    } while (pbVar4 != &(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
     uVar3 = 1;
   }
   else {

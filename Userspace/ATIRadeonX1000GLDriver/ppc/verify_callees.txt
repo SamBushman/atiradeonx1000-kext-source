@@ -1,6 +1,5 @@
 SWITCH-GAPS: 0 jump-table functions with a callee in their unowned case blocks that the recompile never calls
-LOWCOUNT: 40 functions where stock calls some callee more often than the recompile (info)
-3982 functions compared, 3 with functions whose callee SETS differ (51 skipped; 43 more differ only through shared tail code)
-1 FUN_000a7050 STOCK-ONLY {} OURS-ONLY {'FUN_000a6f70': 1}
+LOWCOUNT: 5 functions where stock calls some callee more often than the recompile (info)
+3982 functions compared, 2 with functions whose callee SETS differ (51 skipped; 11 more differ only through shared tail code)
 1 FUN_00018120 STOCK-ONLY {'free': 1} OURS-ONLY {}
 1 FUN_00002ae0 STOCK-ONLY {'free': 1} OURS-ONLY {}

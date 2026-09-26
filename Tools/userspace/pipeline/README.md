@@ -197,6 +197,11 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).
+18. printf-family calls whose format lives in a global pointer variable (`sprintf(buf, DAT_x)` with DAT_x -> "%s.%s"): `gs/OverrideVariadicCalls.java` reads the pointer
+   from the image and now also NARROWS a call that passes more arguments than the format consumes. Run on a copy of glprog-ia (`glprog-vf`) over every function with a
+   non-literal printf-family format (`b3/variadic2_glprog.txt`; 8 calls + `TIntermLoop::compileNode`'s literal `"%s%d"` that had lost its counter) and the nine
+   functions re-dumped (`b3/variadic2_redump_glprog.txt`). `Tools/userspace/format_check.py LINKED_TREE` audits every printf-family call of a linked tree against its format.
+
 
 ## Reproducibility check (GA, from scratch)
 A fresh import + FindMoreFuncs + DecompAll + DumpRanges reproduces the archived function set and RANGES exactly; 9 of 82 dump files differ only in

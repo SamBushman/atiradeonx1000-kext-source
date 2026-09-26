@@ -215,6 +215,43 @@ stock code too: `_byte_scan` 0x97b89adc (r3 == 0xa just tested), `_ShCompile` 0x
 0x97c32c14 (`cmplw r0,r0`), `_UnrollConstantLoopsSimple` 0x97c10090.. (the switch field, bits 20-21, was cleared by `rlwinm r0,r0,0,24,19` just before).
 The behavioural tests of the table above still pass on the new link.
 
+### Defects found by the 141-shader GLSL differential test (issues #60, #66-#72, 2026-09-26)
+`Tests/userspace/glsl_test.c` compiles 141 shaders with the stock and the rebuilt libGLProgrammability, three `ShCompile` variants per process, and compares
+the info logs and the generated ARB programs byte for byte. Its first run against the corrected harness (the earlier one called an entry point that does not
+exist) crashed 133 of 141 in the third compile; it is now 141/141 identical (`v_longident` segfaults in the stock too). Every difference was a decompile or link defect
+of a class no static check sees, and each class was checked across all five images:
+1. **A hand-typed global declaration** (`build_corpus.py`'s heuristic declares a dereferenced extra-decl global `unsigned char *`): `*_S_start_free = word` in the SGI
+   allocator's `_S_chunk_alloc` compiled to `stb`, the leftover piece's link word kept stale high bytes (0x10000000) and the 8-byte free list broke (`vector::_M_insert_aux`
+   crashed in the next compile). `patches.EXTRA_DECL_FIXES['glprog']['_S_start_free']`. The four heuristic decls of glprog were checked against the machine code.
+2. **NaN-pattern float constants** (`ghidra2c.fix_nan`): Ghidra prints any NaN word held in a float variable as the bare token `NAN` (payload lost), which the recompile
+   takes as 0x7fc00000. The stock builds 0x7fffffff (GLSL integer division by zero folds to INT_MAX; glprog 1 function) or the sentinels 0x7fff0000 / 0x7ffffffe /
+   0x7ffffffd that GLDriver compares as WORDS (`x == NAN` is never true in float; 11 functions). The real word comes from the `lis`/`ori` the stock function builds
+   (one candidate per function, else the build says so), and `==`/`!=` become bit compares.
+3. **Comparison results made "float"** (`fix_float_int`): `(uint)(fVar5 == fVar6)` is the bool word 0/1; the reinterpretation pass saw the float variable inside the
+   parentheses and wrote `GH_F2U(<bool>)` = 0x3f800000, so constant-folded float comparisons in the GLSL front end and three GLDriver state comparisons produced 1065353216.
+4. **Float lvalues passed to integer parameters** (`ghidra2c.fix_float_args`): `_ncpy(buf, *pfVar24)` - Ghidra typed the pointer float because another case of the same
+   switch reads floats through it; the call passed a double (an unprototyped `(int (*)())` call promotes float; r4 = the double's high word): `PARAM prm0 = {916455424, ...}`
+   for `float(bool)`. The word is passed (glprog 8 sites, GLDriver 5).
+5. **printf-family calls whose format is a global pointer variable** (`gs/OverrideVariadicCalls.java`, Stage B3 step 18): `sprintf(buf, DAT_a7b7bd8c /* "%s.%s" */)` printed with
+   no variadic arguments (only literal formats were resolved) and `sprintf(..., uVar3, (&_shaderString)[i], uVar9)` with an extra one in the middle. The override now reads
+   the pointer and corrects the count either way (9 glprog functions; `assignOperands` crashed inside `sprintf`). `Tools/userspace/format_check.py` re-derives every
+   format's conversion count against the C call sites of a linked tree.
+6. **Alloca through a variable stack pointer** (`patches.py` `yyparse`): Ghidra models r1 as `puVar4 = entry-sp - 0x2cf0; puVar4 -= size`, so the recompiled parser
+   "allocated" its grown stacks below its own real sp, where the next call's frame overwrote them (a shader nested > 200 levels crashed). Real `__builtin_alloca`; the
+   outgoing stack-argument words live in a local array.
+7. **The callee writes a whole object into `&local_50`** (`rewrites.mirror_frame`): a by-value `TType` return (sret) fills 0x30 bytes at a frame slot of which the
+   function touches a few words, so the frame array ended inside the object (`TIntermBinary::indirectNode` crashed on return). The array now reserves a 0x40-byte tail.
+8. **Home words of the register arguments** (`ghidra2c.fix_home_slots`): `STACKARG(0x18..0x34)` / `xStack000000NN` is the caller-allocated home of r3..r10, where a
+   function that takes the address of a by-value struct / char array / `...` spills the register (`TIntermediate::makeAggregate`'s TSourceLoc, `TPPStreamCompiler::error`'s
+   varargs for `vsprintf`, the PPCRuntimeCompiler swizzle masks). The recompile does not spill; it read the caller's parameter area. A local `ghidra_home[8]` is filled with
+   the incoming parameters (glprog 19, GLDriver 53, GA 1, VA 1 functions; those with float / 64-bit parameters are reported).
+9. **Addresses into the frame that no variable names** (`rewrites.mirror_frame`, `mirror_stackaddr`): `&STACKARG(0xfffffec0) + i * 4` (byte arithmetic; Ghidra's stack0x names are
+   byte arrays) is a buffer at entry-sp - 0x140 that `constructElement` fills through pointer arithmetic and that overlaps `local_80`; the recompile wrote the caller's
+   frame, so a constant `bool` reached the PP stream as 0 (`float(bvec2(true,false).x)`). They are byte addresses inside the frame array now (GLDriver has the same pattern in
+   five functions; libGL's frame-marker uses are left as they were).
+Checks after the fixes, all on the G5: glsl_test 141/141, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
+unchanged and of GLDriver improved (`FUN_000a7050` no longer differs).
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

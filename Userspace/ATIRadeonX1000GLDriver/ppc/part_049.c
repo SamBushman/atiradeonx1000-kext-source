@@ -416,7 +416,7 @@ LAB_001874d4:
     }
     if (bVar1) {
       if ((local_68 == 1.0) || (local_68 == -1.0)) {
-        uVar2 = (uint)GH_F2U((local_68 == -1.0));
+        uVar2 = (uint)(local_68 == -1.0);
         if (uVar2 == (param_3[0x2e] & 1U)) {
           return 0;
         }
@@ -431,7 +431,7 @@ LAB_001874d4:
       }
       if ((((local_68 == 0.5) || (local_68 == -0.5)) &&
           (iVar7 = FUN_00184cd8(param_1,param_2,param_4), iVar7 != 0)) &&
-         ((param_3[0x2e] & 1U) == (uint)GH_F2U((local_68 == 0.5)))) {
+         ((param_3[0x2e] & 1U) == (uint)(local_68 == 0.5))) {
         pvVar8 = FUN_001043f0(0x99,*(undefined4 *)(param_4 + 8));
         uVar10 = *(undefined4 *)((int)pvVar8 + 0x14c);
         iVar7 = FUN_001054ec(pvVar8,0);
@@ -439,7 +439,7 @@ LAB_001874d4:
         *(undefined4 *)(iVar7 + 8) = uVar10;
         uVar10 = FUN_00105594(param_3,1);
         FUN_00106004(pvVar8,1,uVar10,0,*(undefined4 *)(param_4 + 8));
-        iVar7 = FUN_00185da4(param_2,(uint)GH_F2U((local_68 == -0.5)),param_1,pvVar8,param_3,param_4,param_5
+        iVar7 = FUN_00185da4(param_2,(uint)(local_68 == -0.5),param_1,pvVar8,param_3,param_4,param_5
                              ,param_6,param_7,piVar11);
         if (iVar7 != 0) {
           param_1[0x49] = param_1[0x49] + -1;

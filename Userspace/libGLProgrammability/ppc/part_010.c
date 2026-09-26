@@ -1138,95 +1138,94 @@ int ParseSymbol__GetString(this, param_2)
   int param_2;
 {
   byte bVar1;
-  char *pcVar2;
-  undefined4 uVar3;
-  char *pcVar4;
-  byte *pbVar5;
-  int iVar6;
-  uint uVar7;
+  char *p0;
+  undefined4 uVar2;
+  char *pcVar3;
+  byte *pbVar4;
+  int iVar5;
+  uint uVar6;
   
-  iVar6 = 0;
-  pcVar2 = (char *)_malloc(*(int *)(this + 0x20) + 0x200);
-  if (pcVar2 == (char *)0x0) {
+  iVar5 = 0;
+  p0 = (char *)_malloc(*(int *)(this + 0x20) + 0x200);
+  if (p0 == (char *)0x0) {
     return (char *)0x0;
   }
-  *pcVar2 = '\0';
-  pbVar5 = *(byte **)this;
-  if (pbVar5 == (byte *)0x0) {
+  *p0 = '\0';
+  pbVar4 = *(byte **)this;
+  if (pbVar4 == (byte *)0x0) {
 LAB_97bbb054:
-    if (iVar6 != 0) {
-      _sprintf(pcVar2,DAT_a7b7bbbc,pcVar2,iVar6,*(undefined4 *)(this + 0x14),
-               *(undefined4 *)(this + 0x28));
-      _free(iVar6);
+    if (iVar5 != 0) {
+      _sprintf(p0,DAT_a7b7bbbc,p0,iVar5,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
+      _free(iVar5);
       goto LAB_97bbb0a4;
     }
   }
   else {
-    bVar1 = *pbVar5;
+    bVar1 = *pbVar4;
     if (bVar1 == 2) {
       if (param_2 != 0) {
-        _sprintf(pcVar2,_symbolUtilString);
-        pbVar5 = *(byte **)this;
+        _sprintf(p0,_symbolUtilString);
+        pbVar4 = *(byte **)this;
       }
-      iVar6 = PrintAttribute(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
+      iVar5 = PrintAttribute(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
       goto LAB_97bbb054;
     }
     if (2 < bVar1) {
       if (bVar1 == 3) {
         if (param_2 != 0) {
-          _sprintf(pcVar2,DAT_a7b7bba8);
-          pbVar5 = *(byte **)this;
+          _sprintf(p0,DAT_a7b7bba8);
+          pbVar4 = *(byte **)this;
         }
-        iVar6 = PrintParam(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
+        iVar5 = PrintParam(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
       }
       else {
         if (bVar1 != 4) goto LAB_97bbb038;
         if (param_2 != 0) {
-          _sprintf(pcVar2,DAT_a7b7bbac);
-          pbVar5 = *(byte **)this;
+          _sprintf(p0,DAT_a7b7bbac);
+          pbVar4 = *(byte **)this;
         }
-        iVar6 = PrintOutput(*(undefined4 *)(pbVar5 + 0xc),*(undefined4 *)(pbVar5 + 0x10));
+        iVar5 = PrintOutput(*(undefined4 *)(pbVar4 + 0xc),*(undefined4 *)(pbVar4 + 0x10));
       }
       goto LAB_97bbb054;
     }
     if (bVar1 != 0) {
 LAB_97bbb038:
-      iVar6 = _malloc(0x20);
-      _strcpy(iVar6,DAT_a7b7bbb8);
+      iVar5 = _malloc(0x20);
+      _strcpy(iVar5,DAT_a7b7bbb8);
       goto LAB_97bbb054;
     }
-    pcVar4 = DAT_a7b7bbb4;
+    pcVar3 = DAT_a7b7bbb4;
     if (param_2 != 0) {
-      pcVar4 = DAT_a7b7bbb0;
+      pcVar3 = DAT_a7b7bbb0;
     }
-    _sprintf(pcVar2,pcVar4,(uint)*(ushort *)(pbVar5 + 0x12));
+    _sprintf(p0,pcVar3,(uint)*(ushort *)(pbVar4 + 0x12));
   }
-  _sprintf(pcVar2,DAT_a7b7bbc0,pcVar2,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
+  _sprintf(p0,DAT_a7b7bbc0,p0,*(undefined4 *)(this + 0x14),*(undefined4 *)(this + 0x28));
 LAB_97bbb0a4:
-  uVar3 = GetGLStringForType((uint)*(ushort *)(this + 0x2c));
-  _sprintf(pcVar2,DAT_a7b7bbc4,pcVar2,uVar3);
+  uVar2 = GetGLStringForType((uint)*(ushort *)(this + 0x2c));
+  _sprintf(p0,DAT_a7b7bbc4,p0,uVar2);
   if (1 < *(short *)(this + 0x2e)) {
-    _sprintf(pcVar2,DAT_a7b7bbc8,pcVar2,(int)*(short *)(this + 0x30));
+    _sprintf(p0,DAT_a7b7bbc8,(int)p0,(int)*(short *)(this + 0x30),(int)*(short *)(this + 0x2e));
   }
-  pcVar4 = (char *)_malloc(0x40);
-  *pcVar4 = '\0';
-  uVar7 = 0;
+  pcVar3 = (char *)_malloc(0x40);
+  *pcVar3 = '\0';
+  uVar6 = 0;
   if (*(int *)(this + 0x24) != 0) {
     do {
-      if (uVar7 == 0) {
-        _sprintf(pcVar4,DAT_a7b7bbd0);
+      if (uVar6 == 0) {
+        _sprintf(pcVar3,DAT_a7b7bbd0);
       }
       else {
-        _sprintf(pcVar4,DAT_a7b7bbcc,pcVar4);
+        _sprintf(pcVar3,DAT_a7b7bbcc,pcVar3);
       }
-      uVar3 = GetDirectIndex(this,uVar7);
-      _sprintf(pcVar4,DAT_a7b7bbd4,pcVar4,uVar3);
-      uVar7 = uVar7 + 1;
-    } while (uVar7 < *(uint *)(this + 0x24));
+      uVar2 = GetDirectIndex(this,uVar6);
+      _sprintf(pcVar3,DAT_a7b7bbd4,pcVar3,uVar2);
+      uVar6 = uVar6 + 1;
+    } while (uVar6 < *(uint *)(this + 0x24));
   }
-  _sprintf(pcVar2,DAT_a7b7bbd8,pcVar2,pcVar4);
-  _free(pcVar4);
-  return pcVar2;
+  _sprintf(p0,DAT_a7b7bbd8,p0,pcVar3);
+  _free(pcVar3);
+  return p0;
 }
 
 /* ParseOperand__ClearDirectIndex @ 0x97bbb1a4 (68 bytes) */

@@ -2399,7 +2399,7 @@ int FUN_00176a94(param_1, param_2, param_3)
   float local_40;
   
   iVar7 = 4;
-  *param_1 = NAN;
+  *param_1 = GH_U2F(0x7fff0000U);
   puVar3 = local_78;
   do {
     *puVar3 = 0x7ffffffe;
@@ -2448,7 +2448,7 @@ int FUN_00176a94(param_1, param_2, param_3)
     iVar7 = iVar7 + 4;
     iVar6 = iVar6 + 4;
   } while (bVar1);
-  *param_1 = NAN;
+  *param_1 = GH_U2F(0x7fff0000U);
   piVar4 = *(int **)(*(int *)(param_2 + 0xb0) + 0x88);
   (**(code **)(*piVar4 + 8))
             (piVar4,param_1,local_78,local_68,local_58,*(undefined4 *)(param_2 + 0x238));

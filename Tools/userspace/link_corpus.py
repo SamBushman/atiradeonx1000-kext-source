@@ -1008,7 +1008,7 @@ for pdir_, f in _part_files:
             if npair:
                 uses_link = True
             if cfg.get('mirror_frames'):
-                txt, nmir = rewrites.mirror_frame(txt)
+                txt, nmir = rewrites.mirror_frame(txt, cfg.get('mirror_stackaddr', True))
                 mirrored_total[0] += nmir
             txt, nbuf = rewrites.fix_byte_buffers(txt)
             bufs_total[0] += nbuf

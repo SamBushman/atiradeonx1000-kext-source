@@ -771,7 +771,7 @@ int FUN_001781a4(param_1, param_2, param_3)
   float local_34 [2];
   
   iVar5 = 5;
-  *param_1 = NAN;
+  *param_1 = GH_U2F(0x7fff0000U);
   puVar1 = local_68;
   do {
     *puVar1 = 0x7ffffffe;
@@ -1275,11 +1275,11 @@ int FUN_00178e90(param_1, param_2, param_3, param_4)
   iVar5 = 5;
   pfVar4 = local_58;
   do {
-    *pfVar4 = NAN;
+    *pfVar4 = GH_U2F(0x7fff0000U);
     pfVar4 = pfVar4 + 1;
     iVar5 = iVar5 + -1;
   } while (iVar5 != 0);
-  *param_1 = NAN;
+  *param_1 = GH_U2F(0x7fff0000U);
   if (*(int *)(*(int *)(*(int *)(param_2 + 0xb0) + 0x88) + 8) == 0x32) {
     if (param_3 == 1) {
       pfVar4 = (float *)FUN_00173360(*(undefined4 *)(param_2 + 0x238),
@@ -1465,6 +1465,7 @@ int FUN_001793d8(param_1, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   int iVar2;
   undefined4 *puVar3;
@@ -1485,7 +1486,7 @@ int FUN_001793d8(param_1, param_2, param_3)
   piVar10 = (int *)(param_2 * 0x10 + param_1 + 0x168);
   iVar4 = 0;
   uStack00000020 = param_3;
-  pcVar7 = (char *)&STACKARG(0x20);
+  pcVar7 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if (*pcVar7 != '\0') {
       if (iVar4 == 0) {
@@ -1500,7 +1501,7 @@ int FUN_001793d8(param_1, param_2, param_3)
     }
     pcVar7 = pcVar7 + 1;
     piVar10 = piVar10 + 1;
-  } while (pcVar7 != &STACKARG(0x24));
+  } while (pcVar7 != &(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
   puVar11 = *(uint **)(*(int *)(param_2 * 0x18 + *(int *)(param_1 + 0xb0) + 0x8c) + 0x2c);
   uVar5 = puVar11[1];
   uVar8 = uVar5 - 1;
@@ -2126,7 +2127,7 @@ int FUN_0017a3d4(param_1)
   pfVar12 = local_8c + 3;
   pfVar6 = pfVar12;
   do {
-    *pfVar6 = NAN;
+    *pfVar6 = GH_U2F(0x7fff0000U);
     pfVar6 = pfVar6 + 1;
     iVar17 = iVar17 + -1;
   } while (iVar17 != 0);
@@ -2148,7 +2149,7 @@ int FUN_0017a3d4(param_1)
     pfVar7 = local_8c;
     if (*(char *)(iVar17 + iVar8 + 0x10) != '\x01') {
       do {
-        *pfVar7 = NAN;
+        *pfVar7 = GH_U2F(0x7fff0000U);
         pfVar7 = pfVar7 + 1;
       } while (pfVar12 != pfVar7);
       piVar14 = (int *)(iVar18 + 8);
@@ -2164,7 +2165,7 @@ int FUN_0017a3d4(param_1)
         if (iVar11 < 0) {
           pfVar9 = (float *)FUN_00173360(*(undefined4 *)(param_1 + 0x238),iVar11);
           *pfVar7 = *pfVar9;
-          iVar11 = FUN_00176324(*pfVar9);
+          iVar11 = FUN_00176324(*(unsigned int *)pfVar9);
           *piVar15 = iVar11;
         }
         else {
@@ -2474,7 +2475,7 @@ int FUN_0017ab4c(param_1)
   puVar7 = (undefined4 *)(param_1 + 0x214);
   do {
     ((int (*)())FUN_00178d78)(local_48,param_1,iVar6);
-    if (local_48[0] != NAN) {
+    if ((GH_F2U(local_48[0]) != 0x7ffffffeU)) {
       bVar1 = -1 < (int)GH_F2U(local_48[0]);
       if (bVar1) {
         fparam_1 = (double)local_48[0];

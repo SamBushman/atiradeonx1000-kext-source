@@ -593,6 +593,7 @@ int __WaitComplete(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack0000001c;
   
   uStack0000001c = param_2;
@@ -602,7 +603,7 @@ int __WaitComplete(param_1, param_2)
     uStack0000001c = 1;
   }
   ((int (*)())__Flush)(param_1,0);
-  _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 0xc),7,&STACKARG(0x1c),1,0,0);
+  _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 0xc),7,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),1,0,0);
   return;
 }
 

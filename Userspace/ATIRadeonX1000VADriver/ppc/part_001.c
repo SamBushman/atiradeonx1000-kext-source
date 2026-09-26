@@ -4916,6 +4916,7 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   undefined *puVar2;
   uint uVar3;
@@ -4968,8 +4969,8 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   local_6c = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
   local_78 = (float)((double)CONCAT44(0x43300000,uStack_4c) - 4503601774854144.0) * 0.5;
   local_74 = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0) * 0.5;
-  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = param_2;
-  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x20)) = param_3;
+  (*(short *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(short *)((unsigned char *)ghidra_home + 8)) = param_3;
   local_68 = local_78;
   local_64 = local_74;
   local_60 = local_70;

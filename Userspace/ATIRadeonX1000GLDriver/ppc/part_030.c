@@ -1189,7 +1189,7 @@ float * FUN_0010b93c(float *param_1,int param_2,int param_3,float param_4,int pa
       goto joined_r0x0010baa4;
     }
   default:
-    fVar2 = NAN;
+    fVar2 = GH_U2F(0x7ffffffdU);
 LAB_0010baf4:
     *param_1 = fVar2;
     return param_1;

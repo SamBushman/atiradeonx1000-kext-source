@@ -1651,6 +1651,7 @@ int yyparse(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param
   uint uVar2;
   unsigned char * pTVar3;
   undefined4 *puVar4;
+  undefined4 yy_outargs[0x14];
   undefined *puVar5;
   int iVar6;
   unsigned char * pTVar7;
@@ -1941,7 +1942,7 @@ int yyparse(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param
   int *local_58;
   int local_54;
   
-  puVar4 = (undefined4 *)&STACKARG(0xffffd310);
+  puVar4 = yy_outargs;
   pTVar56 = aTStack_2b10;
   pTVar41 = (unsigned char *)0xc8;
   iVar48 = 0;
@@ -1969,15 +1970,11 @@ LAB_97ba3784:
       }
       local_60 = (unsigned char *)((int)pTVar41 * 2);
       iVar54 = iVar55 * 2;
-      puVar18 = (undefined4 *)((int)puVar4 - ((uint)(local_60 + 0x1e) & 0xfffffff0));
-      *puVar18 = *puVar4;
       param_3 = (char *)(iVar55 * 0x2c);
-      pTVar7 = (unsigned char *)(puVar18 + 0x14);
+      pTVar7 = (unsigned char *)__builtin_alloca((uint)local_60 + 0x40);
       _memcpy(pTVar7,pTVar45,iVar54);
       pTVar46 = pTVar7 + iVar54 + -2;
-      puVar4 = (undefined4 *)((int)puVar18 - ((int)pTVar41 * 0x2c + 0x1eU & 0xfffffff0));
-      *puVar4 = *puVar18;
-      pTVar3 = (unsigned char *)(puVar4 + 0x14);
+      pTVar3 = (unsigned char *)__builtin_alloca((int)pTVar41 * 0x2c + 0x40);
       pTVar56 = pTVar3 + (int)param_3;
       _memcpy(pTVar3,pTVar42,param_3);
       pTVar56 = pTVar56 + -0x2c;

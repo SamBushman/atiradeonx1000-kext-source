@@ -37,11 +37,21 @@ public class OverrideVariadicCalls extends GhidraScript {
     Address constAddr(Varnode v) {
         if (v == null) return null;
         if (v.isConstant()) return toAddr(v.getOffset());
+        if (v.isAddress() && v.getAddress().isMemoryAddress() && v.getSize() == 4) {   // the decompiler shows the global itself (DAT_x) as the argument
+            try { return toAddr(currentProgram.getMemory().getInt(v.getAddress()) & 0xffffffffL); } catch (Exception e) { return null; }
+        }
         PcodeOp d = v.getDef();
         if (d == null) return null;
         int oc = d.getOpcode();
         if (oc == PcodeOp.COPY || oc == PcodeOp.CAST) return constAddr(d.getInput(0));
         if (oc == PcodeOp.PTRSUB && d.getInput(0).isConstant() && d.getInput(0).getOffset() == 0 && d.getInput(1).isConstant()) return toAddr(d.getInput(1).getOffset());
+        if (oc == PcodeOp.LOAD) {
+            // a format kept in a global pointer variable (`lwz r4,DAT_a7b7bd8c` = the address of "%s.%s", a relocated pointer that is initialised in the
+            // file): read the pointer. Step 18: the calls through such variables (TPPStreamCompiler::assignOperands & co.) had lost their variadic arguments.
+            Address pa = constAddr(d.getInput(1));
+            if (pa == null) return null;
+            try { return toAddr(currentProgram.getMemory().getInt(pa) & 0xffffffffL); } catch (Exception e) { return null; }
+        }
         return null;
     }
     @Override
@@ -81,7 +91,7 @@ public class OverrideVariadicCalls extends GhidraScript {
                     else extra.add(IntegerDataType.dataType);
                 }
                 int given = op.getNumInputs() - 2 - fi;
-                if (given >= extra.size()) continue;
+                if (given == extra.size()) continue;   // fewer OR MORE than the format consumes is overridden (an extra middle argument printed the wrong value)
                 todo.add(new Object[] { op.getSeqnum().getTarget(), real, fi, extra, fmt, given });
             }
             for (Object[] t : todo) {

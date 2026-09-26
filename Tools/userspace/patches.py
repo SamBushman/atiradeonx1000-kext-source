@@ -195,6 +195,20 @@ PATCHES = {
     'yy_flex_realloc': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\(code \*\)PTR_LAB_a7b7c1b4\)\([^;]*\);\n  return;', 'return _realloc(param_1,param_2);', 1, 'yy_flex_realloc (0x97baddd4)')),
     'yy_flex_free': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*\(code \*\)PTR_LAB_a7b7c1c4\)\([^;]*\);\n  return;', 'return _free(param_1);', 1, 'yy_flex_free (0x97baddd8)')),
 
+    # yyparse (glprog, stock 0x97ba373c): bison's stack growth uses alloca (`yyss = alloca(..)` / `yyvs = alloca(..)`, each `stwux r1,r1,rN` + a copy of
+    # the back chain). Ghidra models r1 as a plain variable (puVar4 = entry-sp - 0x2cf0, then puVar4 -= size), so the recompile "allocated" the two new
+    # stacks in the memory below its own real sp, where the next call's frame (yylex...) overwrote them: a shader nested more than 200 levels deep
+    # (`e_deep_parens`: 176 parentheses grow the 200-entry stack) crashed in yyparse. Real alloca instead. The same variable is the base of the
+    # outgoing stack-argument words (`puVar4[0xe..0x10]` = 0x38+(r1) words of the 11-argument call of arrayErrorCheck): a local array holds them,
+    # not the memory at a guessed offset in the frame.
+    'yyparse': _scoped('glprog', lambda raw, conv: _subs(conv, [
+        ('  undefined4 *puVar4;\n', '  undefined4 *puVar4;\n  undefined4 yy_outargs[0x14];\n'),
+        ('  puVar4 = (undefined4 *)&STACKARG(0xffffd310);\n', '  puVar4 = yy_outargs;\n'),
+        ('      puVar18 = (undefined4 *)((int)puVar4 - ((uint)(local_60 + 0x1e) & 0xfffffff0));\n      *puVar18 = *puVar4;\n', ''),
+        ('      pTVar7 = (unsigned char *)(puVar18 + 0x14);\n', '      pTVar7 = (unsigned char *)__builtin_alloca((uint)local_60 + 0x40);\n'),
+        ('      puVar4 = (undefined4 *)((int)puVar18 - ((int)pTVar41 * 0x2c + 0x1eU & 0xfffffff0));\n      *puVar4 = *puVar18;\n      pTVar3 = (unsigned char *)(puVar4 + 0x14);\n',
+         '      pTVar3 = (unsigned char *)__builtin_alloca((int)pTVar41 * 0x2c + 0x40);\n')], 'yyparse (0x97ba373c)')),
+
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
     # 0x97b9fe54: `bl operator new(8); stw r30,4(r3); stw r3,0(r28); stw r29,0(r3)` - word stores at +0 and +4). The corpus declares it `unsigned char *`
@@ -318,6 +332,10 @@ EXTRA_DECL_FIXES = {
     'glprog': {
         # pointer to an 8-byte record of two words (InitializeGlobalPools, stock 0x97b9fe54: stw at +0 and +4)
         '_gPollAllocThreadData': 'extern unsigned int *_gPollAllocThreadData;',
+        # SGI allocator chunk cursor (_S_chunk_alloc, stock 0x97c178f4): Ghidra types it `undefined4 *`; the leftover piece is put on a free list with
+        # `*_S_start_free = list[i]` = `stw`. The heuristic `unsigned char *` compiled that as `stb`: the block's link word kept its old high bytes
+        # (0x10000000) and corrupted the 8-byte free list (found by the 141-shader differential: 3rd compile in one process crashed in vector::_M_insert_aux).
+        '_S_start_free': 'extern unsigned int *_S_start_free;',
     },
 }
 

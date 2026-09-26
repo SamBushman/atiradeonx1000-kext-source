@@ -350,7 +350,10 @@ FRAME_SIZES = dict(SIZE_OF, **{'unsigned char': 1, 'signed char': 1, 'bool': 1, 
                                 'unsigned long long': 8, 'long long': 8})
 
 
-def mirror_frame(chunk):
+_NEG_STACKADDR = re.compile(r'&STACKARG\((0xf[0-9a-f]{7})\)')
+
+
+def mirror_frame(chunk, stackaddr=True):
     """Put every stack-frame variable of a function (`local_NN`, `xStack_NN`: Ghidra names them by their frame offset) into ONE array at its stock
     offset. The decompile shows a stack object as separate scalars (a std::vector as three pointers, a TParseContext as dozens of mixed-width
     fields) and gcc -O0 lays separate scalars out in any order, so a callee handed `&first_member` read the other members from unrelated slots
@@ -377,17 +380,28 @@ def mirror_frame(chunk):
         decls.append(dict(line=m.group(0), ty=ty + (' ' + '*' * stars if stars else ''), nm=nm, off=int(m.group(4), 16), size=size, n=n, arr=cnt is not None))
     if not decls:
         return chunk, 0
-    top = max(d['off'] for d in decls)                     # lowest address
+    # `&STACKARG(0xffffff70)` = the address entry-sp - 0x90: Ghidra shows an address into the frame it never named a variable for (a buffer reached only
+    # through pointer arithmetic: constructElement's constant words at -0x140 and, through `puVar + 0xc0`, local_80; GLDriver's float buffers) as a
+    # plain offset from the entry stack pointer. In the recompile that is the CALLER's frame, not this function's: the writes went nowhere the named
+    # locals could see. They belong in the same frame array, as BYTE addresses (Ghidra's stack0x names are byte arrays: `&stack0xfffffec0 + i * 4`).
+    sa = sorted(set(0x100000000 - int(m, 16) for m in _NEG_STACKADDR.findall(body))) if stackaddr else []
+    top = max([d['off'] for d in decls] + sa)              # lowest address
     # Ghidra's NN is the distance below the caller's 16-aligned r1 (TParseContext::error: acStack_210 is r1+0x40 of a 0x250 frame), so a variable's
     # address is -NN mod 8: shift every offset by pad so the 8-aligned array keeps each variable's stock alignment (doubles, lwarx targets)
     pad = (-top) % 8
-    total = max(top - d['off'] + d['size'] * d['n'] for d in decls) + pad
+    total = max([top - d['off'] + d['size'] * d['n'] for d in decls] + [top - nn + 32 for nn in sa]) + pad
+    # a callee handed the address of a frame slot (`(**(vtable + 0x38))(&local_50, obj)`: a by-value TType return, sret) writes the WHOLE object, but only
+    # the words the function itself touches are variables here. In the stock the object's tail is free frame above the last touched variable; at -O0 the
+    # array would end there and the callee's stores would overwrite unrelated locals / the saved registers (rebuilt TIntermBinary::indirectNode crashed on
+    # return, GLSL differential v_struct/v_const). Reserve the tail: TType is the largest such object (0x30).
+    total += 0x40
     nq = (total + 7) // 8
     first = True
     for d in sorted(decls, key=lambda d: -d['off']):
         repl = ('%sunsigned long long ghidra_frame[%d] = { 0 };   /* the stock frame, variables at their offsets: rewrites.mirror_frame */' % (re.match(r'\s*', d['line']).group(0), nq)) if first else None
         body = body.replace(d['line'] + '\n', (repl + '\n') if repl else '', 1)
         first = False
+    body = _NEG_STACKADDR.sub(lambda m: '((unsigned char *)ghidra_frame + %d)' % (top - (0x100000000 - int(m.group(1), 16)) + pad), body)
     for d in decls:
         o = top - d['off'] + pad
         t = d['ty'] if (d['ty'].endswith('*') or d['ty'] in SIGNED or d['ty'] in ('unsigned char', 'signed char', 'unsigned int', 'unsigned short', 'long long', 'unsigned long long', 'bool')) else ctype_of(d['ty']) if d['ty'] in SIZE_OF else d['ty']

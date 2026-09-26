@@ -3,5 +3,6 @@
   "${GL_HEADERS}/gl.h",
   "${GL_HEADERS}/glext.h"
  ],
- "mirror_frames": true
+ "mirror_frames": true,
+ "mirror_stackaddr": false
 }

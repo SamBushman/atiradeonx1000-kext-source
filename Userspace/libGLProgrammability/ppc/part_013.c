@@ -127,6 +127,7 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
@@ -143,7 +144,7 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  _vsprintf(acStack_120,param_4,&STACKARG(0x28));
+  _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   if (param_3 != (char *)0x0) {
     iVar5 = _strlen(param_3);
   }
@@ -179,6 +180,7 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
@@ -194,7 +196,7 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  _vsprintf(acStack_120,param_4,&STACKARG(0x28));
+  _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   iVar5 = 0;
   if (param_3 != (char *)0x0) {
     iVar5 = _strlen(param_3);
@@ -2868,6 +2870,7 @@ int _InterpreterWriteDestination(param_1, param_2, param_3, param_4, param_5, pa
   float *param_12;
   undefined4 param_13;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   int iVar2;
   float *pfVar3;
@@ -2933,8 +2936,8 @@ LAB_97bcd680:
   iStack0000001c = param_2;
   iStack00000020 = param_3;
   uStack00000024 = param_4;
-  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)) = param_5;
-  (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)) = param_6;
+  (*(short *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
   if ((((param_9 & 0x1000000) != 0) &&
@@ -2951,7 +2954,7 @@ LAB_97bcd680:
   pfVar7 = pfVar5;
   if ((((param_9 & 0x2000000) != 0) &&
       (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
                                   param_9,param_10,1), iVar1 != 0)) &&
      (pfVar7 = (float *)((int)piVar6 + piVar8[1]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);
@@ -2964,7 +2967,7 @@ LAB_97bcd680:
   pfVar3 = pfVar5;
   if ((((param_9 & 0x4000000) != 0) &&
       (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
                                   param_9,param_10,2), iVar1 != 0)) &&
      (pfVar3 = (float *)((int)piVar6 + piVar8[2]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);
@@ -2976,7 +2979,7 @@ LAB_97bcd680:
   }
   if ((((param_9 & 0x8000000) != 0) &&
       (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)),(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x2c)),uStack00000030,uStack00000034,
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
                                   param_9,param_10,3), iVar1 != 0)) &&
      (pfVar5 = (float *)((int)piVar6 + piVar8[3]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);

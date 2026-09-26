@@ -2353,16 +2353,16 @@ LAB_97b94ef8:
     default:
       goto switchD_97b94d20_caseD_17;
     case 10:
-      fVar6 = (float)(uint)GH_F2U((fVar5 == fVar6));
+      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 == fVar6)));
       break;
     case 0xb:
-      fVar6 = (float)(uint)GH_F2U((fVar5 != fVar6));
+      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 != fVar6)));
       break;
     case 0xe:
-      fVar6 = (float)(uint)GH_F2U((fVar5 < fVar6));
+      fVar6 = GH_U2F((unsigned int)((uint)(fVar5 < fVar6)));
       break;
     case 0xf:
-      fVar6 = (float)(uint)GH_F2U((fVar6 < fVar5));
+      fVar6 = GH_U2F((unsigned int)((uint)(fVar6 < fVar5)));
       break;
     case 0x10:
       bVar31 = fVar5 <= fVar6;
@@ -2462,7 +2462,7 @@ code_r0x97b95098:
       __ZN13TInfoSinkBase6appendEPKc(param_4,": ");
       __ZN13TInfoSinkBase6appendEPKc(param_4,"Divide by zero error during constant folding");
       __ZN13TInfoSinkBase6appendEPKc(param_4,"\n");
-      fVar6 = NAN;
+      fVar6 = GH_U2F(0x7fffffffU);
     }
     else {
       fVar6 = GH_U2F((unsigned int)(((int)uVar10 / (int)uVar25)));
@@ -5738,6 +5738,7 @@ int TParseContext__error(param_1, param_2, param_3, param_4, param_5, param_6, p
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   int *piVar2;
   int iVar3;
@@ -5756,7 +5757,7 @@ int TParseContext__error(param_1, param_2, param_3, param_4, param_5, param_6, p
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  _vsnprintf(acStack_210,400,param_5,&STACKARG(0x2c));
+  _vsnprintf(acStack_210,400,param_5,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
   __ZN13TInfoSinkBase6appendEPKc(*(void **)(param_1 + 8),"ERROR: ");
   pvVar4 = *(void **)(param_1 + 8);
   a1 = (uint)param_2 & 0xffff;

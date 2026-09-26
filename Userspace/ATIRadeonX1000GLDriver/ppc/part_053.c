@@ -2072,6 +2072,7 @@ int FUN_001a09d0(param_1, param_2, param_3, param_4, param_5)
   int param_4;
   undefined4 param_5;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   byte bVar2;
   float fVar3;
@@ -2091,7 +2092,7 @@ int FUN_001a09d0(param_1, param_2, param_3, param_4, param_5)
     do {
       a0 = (int *)FUN_00105594(param_4,iVar8);
       if ((a0 != (int *)0x0) && (iVar5 = (**(code **)(*a0 + 0x48))(a0), iVar5 != 0)) {
-        pbVar7 = (byte *)&STACKARG(0x28);
+        pbVar7 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
         uVar9 = 0;
         do {
           bVar2 = *pbVar7;

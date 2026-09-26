@@ -1217,7 +1217,7 @@ int FUN_0017d6ac(param_1, param_2)
     iVar5 = 4;
     pfVar3 = (float *)&local_54;
     do {
-      *pfVar3 = NAN;
+      *pfVar3 = GH_U2F(0x7fff0000U);
       pfVar3 = pfVar3 + 1;
       iVar5 = iVar5 + -1;
     } while (iVar5 != 0);
@@ -1239,14 +1239,14 @@ int FUN_0017d6ac(param_1, param_2)
                       (piVar7,*(undefined4 *)(*(int *)(param_1 + 0x238) + 0x6c4),&local_54,&local_58
                       );
     if (iVar5 == 0) {
-      fVar10 = NAN;
+      fVar10 = GH_U2F(0x7fff0000U);
       iVar5 = 0;
       pfVar3 = param_2;
       do {
         iVar6 = FUN_001054ec(*(undefined4 *)(param_1 + 0xb0),0);
         if (*(char *)(iVar5 + iVar6 + 0x10) != '\x01') {
-          FUN_00173e10(*(undefined4 *)(param_1 + 0x238),*pfVar3);
-          if (fVar10 == NAN) {
+          FUN_00173e10(*(undefined4 *)(param_1 + 0x238), *(unsigned int *)pfVar3);
+          if ((GH_F2U(fVar10) == 0x7fff0000U)) {
             fVar10 = *pfVar3;
           }
           else if (fVar10 != *pfVar3) {
@@ -1257,7 +1257,7 @@ int FUN_0017d6ac(param_1, param_2)
         pfVar3 = pfVar3 + 1;
         iVar5 = iVar5 + 1;
       } while (bVar1);
-      iVar5 = FUN_00173e10(*(undefined4 *)(param_1 + 0x238),fVar10);
+      iVar5 = FUN_00173e10(*(undefined4 *)(param_1 + 0x238), GH_F2U(fVar10));
       if (*(byte *)(iVar5 + 8) == 0) {
         return 0;
       }
@@ -1285,7 +1285,7 @@ int FUN_0017d6ac(param_1, param_2)
       }
       else {
         do {
-          *pfVar3 = NAN;
+          *pfVar3 = GH_U2F(0x7fff0000U);
           pfVar3 = pfVar3 + 1;
         } while (pfVar3 != afStack_44);
         iVar4 = 0;
@@ -1702,7 +1702,7 @@ int FUN_0017e1f4(param_1)
   iVar4 = 1;
   do {
     FUN_001770e4(local_38,param_1,iVar4);
-    if (local_38[0] != NAN) {
+    if ((GH_F2U(local_38[0]) != 0x7fff0000U)) {
       bVar1 = -1 < (int)GH_F2U(local_38[0]);
       if (bVar1) {
         fparam_1 = (double)local_38[0];
@@ -2315,13 +2315,13 @@ int FUN_0017f1f8(param_1)
   iVar7 = 5;
   pfVar2 = local_54;
   do {
-    *pfVar2 = NAN;
+    *pfVar2 = GH_U2F(0x7fff0000U);
     pfVar2 = pfVar2 + 1;
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
   pfVar2 = (float *)&local_64;
   do {
-    *pfVar2 = NAN;
+    *pfVar2 = GH_U2F(0x7fff0000U);
     pfVar2 = pfVar2 + 1;
   } while (pfVar2 != local_54);
   iVar7 = 0;

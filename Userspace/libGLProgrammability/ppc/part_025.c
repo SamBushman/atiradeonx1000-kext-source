@@ -979,6 +979,7 @@ int check_exception_spec(param_1, param_2, param_3, param_4)
   void *param_3;
   int param_4;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   unsigned char * ptVar1;
   int iVar2;
   uchar *puVar3;
@@ -993,7 +994,7 @@ int check_exception_spec(param_1, param_2, param_3, param_4)
       return 0;
     }
     ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(param_1,local_20[0]);
-    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,param_2,&STACKARG(0x20));
+    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   } while (iVar2 == 0);
   return 1;
 }

@@ -432,6 +432,26 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
                 _lo, _hi = (int(x, 16) for x in _r.split('-'))
                 if any((_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15) for x in range(_lo, _hi, 4)):
                     _FCTIW.add(int(_f[0], 16)); break
+    # NaN-pattern constants each function builds (`lis rD,hi` + `ori rD,rD,lo` / `addi rD,rD,lo` / nothing): Ghidra prints a float variable holding ANY NaN
+    # pattern as the bare token NAN (payload lost) although the stock's is 0x7fffffff (INT_MAX assigned to a union word Ghidra typed float). GH_NAN() in the
+    # recompile is math.h's 0x7fc00000. fix_nan() below substitutes the real bits.
+    _NANC = {}
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cs = set()
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
+                    rd = (w >> 21) & 31; v = (w & 0xffff) << 16; w2 = _word(x + 4)
+                    if (w2 >> 26) == 24 and ((w2 >> 21) & 31) == rd: v |= w2 & 0xffff       # ori rA,rS,imm (rS = rD)
+                    elif (w2 >> 26) == 14 and ((w2 >> 16) & 31) == rd:                     # addi rD,rD,simm
+                        v = (v + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff
+                    if (v >> 23) & 0xff == 0xff and v & 0x7fffff: _cs.add(v)
+            _NANC[int(_f[0], 16)] = _cs
 def _operand(t, i):
     """end index of the primary expression starting at t[i] (after optional unary - * & and casts): an identifier with subscripts / member
     access, a parenthesised expression, a literal"""
@@ -492,6 +512,12 @@ def fix_float_int(b, entry):
         e = _operand(b, en)
         if e is None: out.append(b[i:en]); i = en; continue
         opd = b[en:e].strip()
+        # a comparison / logical expression is an int (0 or 1) whatever the variables inside it are: `(uint)(fVar5 == fVar6)` is the bool word, not a float
+        _cmp = re.search(r'==|!=|<=|>=|&&|\|\||(?<![<-])<(?![<=])|(?<![>-])>(?![>=])', re.sub(r'"[^"]*"', '', opd))
+        if _cmp and ty != 'float':
+            out.append(b[i:en]); i = en; continue
+        if _cmp and re.match(r'^\(\s*(?:u?int|byte|u?short|u?char|undefined\d?|bool)\s*\)', opd):   # the outer `(float)(uint)(a == b)`: an int stored into a float-typed word
+            out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
         if ty == 'float':
             # an integer expression made float without the conversion sequence
             if opd and not _FLOATY.search(opd) and not opd.startswith('('+'double'):
@@ -503,6 +529,87 @@ def fix_float_int(b, entry):
                 out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
         out.append(b[i:en]); i = en
     return ''.join(out), n
+# Callee parameter types by name, for fix_float_args
+_PTYPES = {}
+for _a, _sz, _nm in idx:
+    if _a in proto and bodies.get(_a):
+        _rt, _pr, _ex = proto[_a]
+        _pl = [] if _pr.strip() in ('void', '') else split_params(_pr)
+        _PTYPES[_nm] = [re.sub(r'\b\w+$', '', q.strip()).strip() or 'int' for q in _pl]
+def _split_call_args(t):
+    out = []; d = 0; cur = ''; q = None
+    for ch in t:
+        if q:
+            cur += ch
+            if ch == q: q = None
+            continue
+        if ch in '"\'': q = ch; cur += ch; continue
+        if ch in '([': d += 1
+        if ch in ')]': d -= 1
+        if ch == ',' and d == 0: out.append(cur.strip()); cur = ''
+        else: cur += ch
+    if cur.strip(): out.append(cur.strip())
+    return out
+_FLT_ARG = re.compile(r'^(\*)(p?fVar\d+)$|^(pfVar\d+)\[([^\[\]]+)\]$|^(fVar\d+)$|^\*\(float \*\)(.+)$')
+def fix_float_args(b):
+    """A float-typed lvalue (`*pfVar24`, `pfVar24[1]`, `fVar10`, `*(float *)p`) passed where the callee's parameter is an integer / pointer: Ghidra typed the
+    pointer float because another path of the function reads floats through it, but this call passes the WORD (the stock loads it with `lwz` into an
+    argument register). Left as is, gcc converts the float to an int (or, through an unprototyped `(int (*)())` cast, passes a double: r4 = its high word) -
+    the rebuilt `PARAM prm0 = {916455424, 0, 0, 0}` for `float(bool)`. -> the word."""
+    out = []; i = 0; n = 0
+    for m in re.finditer(r'(?<![\w.>])([A-Za-z_]\w*)\)?\(', b):
+        name = m.group(1)
+        if name not in _PTYPES or m.start() < i: continue
+        j = m.end(); d = 1
+        while d and j < len(b):
+            if b[j] == '(': d += 1
+            elif b[j] == ')': d -= 1
+            j += 1
+        args = _split_call_args(b[m.end():j - 1]); changed = False
+        for k, a in enumerate(args):
+            if k >= len(_PTYPES[name]) or re.search(r'\b(float|double)\b(?!\s*\*)', _PTYPES[name][k]): continue
+            fm = _FLT_ARG.match(a)
+            if not fm: continue
+            if fm.group(2): args[k] = '*(unsigned int *)%s' % fm.group(2)
+            elif fm.group(3): args[k] = '((unsigned int *)%s)[%s]' % (fm.group(3), fm.group(4))
+            elif fm.group(5): args[k] = 'GH_F2U(%s)' % fm.group(5)
+            else: args[k] = '*(unsigned int *)%s' % fm.group(6)
+            changed = True; n += 1
+        if changed:
+            out.append(b[i:m.end()]); out.append(', '.join(args) + ')'); i = j
+    out.append(b[i:])
+    return ''.join(out), n
+def fix_home_slots(b, name):
+    """`STACKARG(0x18..0x34)` is the caller-allocated home word of one of the register arguments r3..r10 (entry-sp + 0x18 + 4k): a function that takes the address
+    of a by-value struct / char array / va_list argument spills the register there in its prologue (TIntermediate::makeAggregate's TSourceLoc,
+    TPPStreamCompiler::error's `...` handed to vsprintf, PPCRuntimeCompiler*'s 4-byte swizzle masks). The recompiled function does not spill: the C read the
+    caller's parameter area, i.e. whatever the caller left there. Give the function its own home words, filled with the incoming register parameters."""
+    _fa = r'\(\*\(([^()]*?) \*\)\(\*\(unsigned int \*\)__builtin_frame_address\(0\) \+ 0x([0-9a-f]+)\)\)'   # `bStack00000021` / `puStack00000020` / `in_stack_00000024`
+    slots = [m for m in re.findall(r'STACKARG\((0x[0-9a-f]+)\)', b) if 0x18 <= int(m, 16) < 0x38] + [m[1] for m in re.findall(_fa, b) if 0x18 <= int(m[1], 16) < 0x38]
+    if not slots: return b, 0
+    k = b.index('{'); head, rest = b[:k], b[k:]
+    hm = re.search(r'\(([^()]*)\)', head)
+    if not hm: return b, 0
+    if re.search(r'\b(float|double|longlong|ulonglong|undefined8)\b(?!\s*\*)', head):
+        sys.stderr.write('HOME-SLOTS: %s has float / 64-bit parameters - STACKARG home words left as is\n' % name); return b, 0
+    names = [q.strip().split()[-1].lstrip('*') for q in hm.group(1).split(',') if q.strip() and q.strip() != 'void']
+    words = (names + ['0'] * 8)[:8]
+    rest = rest.replace('{\n', '{\n  unsigned int ghidra_home[8] = { %s };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */\n' % ', '.join(words), 1)
+    rest = re.sub(r'STACKARG\((0x[0-9a-f]+)\)', lambda m: '(*(unsigned int *)((unsigned char *)ghidra_home + %d))' % (int(m.group(1), 16) - 0x18) if 0x18 <= int(m.group(1), 16) < 0x38 else m.group(0), rest)
+    rest = re.sub(_fa, lambda m: '(*(%s *)((unsigned char *)ghidra_home + %d))' % (m.group(1), int(m.group(2), 16) - 0x18) if 0x18 <= int(m.group(2), 16) < 0x38 else m.group(0), rest)
+    return head + rest, len(slots)
+def fix_nan(b, entry):
+    """a bare `NAN` token (a float-typed variable holding a NaN-pattern word) -> the one NaN-pattern constant the stock function builds"""
+    if not re.search(r'(?<![\w"])NAN\b(?!\s*\()', b): return b, 0
+    cs = sorted(_NANC.get(entry, ())) if _FCTIW is not None else []
+    if len(cs) != 1:
+        sys.stderr.write('NAN-CONST: %x has %d candidate NaN constants %s - not substituted\n' % (entry, len(cs), [hex(c) for c in cs]))
+        return b, 0
+    # (in)equality with the constant: the stock compares the WORDS (a NaN never compares equal as a float), so compare bits
+    _opd = r'(\*?[A-Za-z_]\w*(?:\[[^\]\n]*\])?)'
+    b = re.sub(_opd + r'\s*(==|!=)\s*NAN\b(?!\s*\()', lambda m: '(GH_F2U(%s) %s 0x%08xU)' % (m.group(1), m.group(2), cs[0]), b)
+    b = re.sub(r'(?<![\w"])NAN\b(?!\s*\()\s*(==|!=)\s*' + _opd, lambda m: '(GH_F2U(%s) %s 0x%08xU)' % (m.group(2), m.group(1), cs[0]), b)
+    return re.sub(r'(?<![\w"])NAN\b(?!\s*\()', 'GH_U2F(0x%08xU)' % cs[0], b), 1
 _applied = set()
 funcs = [(a, sz, name) for a, sz, name in idx]
 for pi in range(0, len(funcs), part):
@@ -558,6 +665,8 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
+            b, _nnan = fix_nan(b, int(a, 16))
+            b, _nfa = fix_float_args(b)
             # an integer / pointer cast of a float LITERAL is its bit pattern: Ghidra inlines a read-only float constant it read with an integer load
             # (GLDriver FUN_000a9ac0: `local_54 ^ (uint)1.0`, `param_4 == (undefined *)1.0` - the stock compares words with 0x3f800000 loaded by
             # lwz from FLOAT_001aa0e8); PowerPC 32 has no float->int conversion without fctiw, and a real one of a constant would be folded
@@ -581,6 +690,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b_?([a-z]{1,2})Stack([0-9a-f]{8})\b', lambda m: m.group(0) if m.group(0) in declared_ else '(*(%s *)(*(unsigned int *)__builtin_frame_address(0) + 0x%s))' % ({'b': 'unsigned char', 'c': 'char', 'u': 'unsigned int', 'i': 'int', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long'}.get(m.group(1), 'unsigned int'), m.group(2).lstrip('0') or '0'), b)
             b = re.sub(r'\bstack0x([0-9a-f]{8})\b', lambda m: m.group(0) if m.group(0) in declared_ else 'STACKARG(0x%s)' % m.group(1).lstrip('0').rjust(1, '0'), b)
             b = re.sub(r'\((STACKARG\(0x[0-9a-f]+\))\)\s*\[', r'((unsigned int *)\1)[', b)
+            b, _nhs = fix_home_slots(b, name)
             b = re.sub(r'\b([A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*)\._(\d+)_(\d+)_', lambda m: '(*(%s *)((unsigned char *)&(%s) + %s))' % ({'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(3), 'unsigned int'), m.group(1), m.group(2)), b)
             k_ = b.index('{'); head_, rest_ = b[:k_], b[k_:]
             for nm in ([] if (os.environ.get('NOCAST') and not os.environ.get('CASTEXACT')) else exact_fns):

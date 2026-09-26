@@ -22,7 +22,7 @@ extern int _PerProcessGPA;
 extern int _S_end_free;
 extern int _S_force_new;
 extern int _S_heap_size;
-extern unsigned char *_S_start_free;
+extern unsigned int *_S_start_free;
 extern int _ScopeList;
 extern int _URC_FOREIGN_EXCEPTION_CAUGHT;
 extern int ___FILE__Atom;

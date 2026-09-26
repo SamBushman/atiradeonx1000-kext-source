@@ -52,13 +52,14 @@ int FUN_000f2e50(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   undefined4 uStack0000001c;
   
   uStack0000001c = param_2;
   iVar2 = 4;
-  pcVar1 = (char *)&STACKARG(0x1c);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if ((byte)(*pcVar1 - 2U) < 2) {
       *pcVar1 = '\x01';
@@ -75,6 +76,7 @@ int FUN_000f2e98(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   char *pcVar3;
@@ -82,7 +84,7 @@ int FUN_000f2e98(param_1, param_2)
   int iVar5;
   undefined4 uStack0000001c;
   
-  pcVar3 = (char *)&STACKARG(0x1c);
+  pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   iVar5 = 4;
   uStack0000001c = param_2;
   bVar1 = false;
@@ -118,6 +120,7 @@ int FUN_000f2f28(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
@@ -127,8 +130,8 @@ int FUN_000f2f28(param_1, param_2, param_3)
   uStack0000001c = param_2;
   iVar3 = 4;
   uStack00000020 = param_3;
-  pcVar1 = (char *)&STACKARG(0x1c);
-  pcVar2 = (char *)&STACKARG(0x20);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if ((1 < (byte)(*pcVar1 - 2U)) && (*pcVar2 == '\x01')) {
       *pcVar1 = '\x01';
@@ -147,6 +150,7 @@ int FUN_000f2f84(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
@@ -156,8 +160,8 @@ int FUN_000f2f84(param_1, param_2, param_3)
   uStack0000001c = param_2;
   iVar3 = 4;
   uStack00000020 = param_3;
-  pcVar1 = (char *)&STACKARG(0x1c);
-  pcVar2 = (char *)&STACKARG(0x20);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if ((1 < (byte)(*pcVar1 - 2U)) && (*pcVar2 == '\0')) {
       *pcVar1 = '\0';
@@ -176,6 +180,7 @@ int FUN_000f2fe0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
@@ -185,8 +190,8 @@ int FUN_000f2fe0(param_1, param_2, param_3)
   uStack0000001c = param_2;
   iVar3 = 4;
   uStack00000020 = param_3;
-  pcVar1 = (char *)&STACKARG(0x1c);
-  pcVar2 = (char *)&STACKARG(0x20);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if (*pcVar1 == '\x04') {
       *pcVar1 = *pcVar2;
@@ -205,6 +210,7 @@ int FUN_000f302c(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char cVar1;
   char *pcVar2;
   char *pcVar3;
@@ -215,8 +221,8 @@ int FUN_000f302c(param_1, param_2, param_3)
   uStack0000001c = param_2;
   iVar4 = 4;
   uStack00000020 = param_3;
-  pcVar3 = (char *)&STACKARG(0x1c);
-  pcVar2 = (char *)&STACKARG(0x20);
+  pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
+  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     cVar1 = *pcVar2;
     if (((cVar1 == *pcVar3) && (cVar1 != '\x03')) && (cVar1 != '\x02')) {
@@ -234,6 +240,7 @@ int FUN_000f302c(param_1, param_2, param_3)
 int FUN_000f308c(param_1)
   undefined4 param_1;
 {
+  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   byte *pbVar2;
   uint uVar3;
@@ -243,7 +250,7 @@ int FUN_000f308c(param_1)
   
   uStack00000018 = param_1;
   iVar5 = 4;
-  pbVar2 = (byte *)&STACKARG(0x18);
+  pbVar2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   uVar3 = 0xffffffff;
   while (((uVar1 = (uint)*pbVar2, uVar4 = uVar3, uVar1 == 4 || (uVar4 = uVar1, (int)uVar3 < 0)) ||
          (uVar1 == uVar3))) {
@@ -261,6 +268,7 @@ int FUN_000f308c(param_1)
 int FUN_000f30d4(param_1)
   undefined4 param_1;
 {
+  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   int iVar3;
@@ -269,7 +277,7 @@ int FUN_000f30d4(param_1)
   uStack00000018 = param_1;
   iVar3 = 4;
   iVar2 = 0;
-  pcVar1 = (char *)&STACKARG(0x18);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
     if (*pcVar1 != '\x01') {
       return iVar2;
@@ -285,6 +293,7 @@ int FUN_000f30d4(param_1)
 int FUN_000f3108(param_1)
   undefined4 param_1;
 {
+  unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   int iVar3;
@@ -293,7 +302,7 @@ int FUN_000f3108(param_1)
   uStack00000018 = param_1;
   iVar3 = 4;
   iVar2 = 0;
-  pcVar1 = (char *)&STACKARG(0x18);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
     if (*pcVar1 == '\x01') {
       return iVar2;
@@ -481,13 +490,14 @@ int FUN_000f33f8(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
   int iVar3;
   int iVar4;
   undefined4 uStack0000001c;
   
-  pcVar2 = (char *)&STACKARG(0x1c);
+  pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   iVar4 = 4;
   uStack0000001c = param_2;
   iVar3 = 0;
@@ -497,7 +507,7 @@ int FUN_000f33f8(param_1, param_2)
       iVar4 = 4;
       do {
         if (*pcVar2 == '\x04') {
-          *pcVar2 = *(char *)((int)&STACKARG(0x1c) + iVar3);
+          *pcVar2 = *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + iVar3);
         }
         pcVar2 = pcVar2 + 1;
         iVar4 = iVar4 + -1;
@@ -518,6 +528,7 @@ int FUN_000f3470(param_1, param_2)
   uint *param_1;
   uint param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -532,19 +543,19 @@ int FUN_000f3470(param_1, param_2)
   char cStack0000001e;
   char cStack0000001f;
   
-  (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = param_2;
-  uVar3 = (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c));
+  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = param_2;
+  uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   bStack0000001c = (byte)(param_2 >> 0x18);
   uVar4 = (uint)bStack0000001c;
   if (uVar4 == 4) {
     bVar2 = true;
     iVar8 = 1;
     do {
-      uVar7 = (uint)(&STACKARG(0x1c))[iVar8];
+      uVar7 = (uint)(&(*(unsigned int *)((unsigned char *)ghidra_home + 4)))[iVar8];
       iVar9 = iVar8;
       if ((uVar7 != 4) && (iVar9 = iVar8 + 1, uVar4 = uVar7, iVar9 < 4)) {
         iVar5 = 4 - iVar9;
-        pbVar6 = (byte *)(&STACKARG(0x1d) + iVar8);
+        pbVar6 = (byte *)(&(*(unsigned int *)((unsigned char *)ghidra_home + 5)) + iVar8);
         do {
           if ((*pbVar6 != 4) && (uVar7 != *pbVar6)) {
             bVar2 = false;
@@ -561,7 +572,7 @@ int FUN_000f3470(param_1, param_2)
     bVar1 = false;
     iVar8 = 4;
     bVar2 = true;
-    pbVar6 = &STACKARG(0x1c);
+    pbVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
       if (*pbVar6 == 4) {
         bVar1 = true;
@@ -579,24 +590,24 @@ int FUN_000f3470(param_1, param_2)
     return;
   }
   bVar1 = bStack0000001c == 4;
-  (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = uVar3;
+  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
   if (bVar1) {
-    (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = param_2 & 0xffffff;
+    (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = param_2 & 0xffffff;
   }
   if (cStack0000001d == '\x04') {
-    (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d)) = CONCAT12(1,(*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1e)));
+    (*(char *)((unsigned char *)ghidra_home + 5)) = CONCAT12(1,(*(char *)((unsigned char *)ghidra_home + 6)));
   }
   if (cStack0000001e == '\x04') {
-    (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1e)) = CONCAT11(2,cStack0000001f);
+    (*(char *)((unsigned char *)ghidra_home + 6)) = CONCAT11(2,cStack0000001f);
   }
-  uVar3 = (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c));
+  uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   if (cStack0000001f == '\x04') {
-    (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = CONCAT31((*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)),3);
-    uVar3 = (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c));
+    (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = CONCAT31((*(unsigned char *)((unsigned char *)ghidra_home + 4)),3);
+    uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   }
 LAB_000f35b4:
-  (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c)) = uVar3;
-  *param_1 = (*(unsigned char *)(*(unsigned int *)__builtin_frame_address(0) + 0x1c));
+  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
+  *param_1 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   return;
 }
 
@@ -631,6 +642,7 @@ int FUN_000f366c(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte *pbVar1;
   int iVar2;
   undefined4 uStack0000001c;
@@ -638,7 +650,7 @@ int FUN_000f366c(param_1, param_2)
   uStack0000001c = param_2;
   iVar2 = 4;
   *param_1 = DAT_001aa838;
-  pbVar1 = (byte *)&STACKARG(0x1c);
+  pbVar1 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if (*pbVar1 != 4) {
       *(undefined1 *)((int)param_1 + (uint)*pbVar1) = 0;
@@ -654,12 +666,13 @@ int FUN_000f36b8(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   undefined4 uStack0000001c;
   
   uStack0000001c = param_2;
-  pcVar1 = (char *)&STACKARG(0x1c);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   iVar2 = 4;
   *param_1 = DAT_001aa838;
   do {
@@ -678,6 +691,7 @@ int FUN_000f370c(param_1, param_2)
   char *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char cVar2;
   int iVar3;
@@ -685,7 +699,7 @@ int FUN_000f370c(param_1, param_2)
   
   uStack0000001c = param_2;
   cVar2 = '\0';
-  pcVar1 = (char *)&STACKARG(0x1c);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   iVar3 = 4;
   *(undefined4 *)param_1 = DAT_001aa83c;
   do {
@@ -705,12 +719,13 @@ int FUN_000f3764(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   undefined4 uStack0000001c;
   
   uStack0000001c = param_2;
-  pcVar1 = (char *)&STACKARG(0x1c);
+  pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   iVar2 = 4;
   *param_1 = DAT_001aa838;
   do {
@@ -984,6 +999,7 @@ int FUN_000f3c30(param_1, param_2, param_3, param_4, param_5)
   int param_4;
   undefined4 param_5;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   uint uVar2;
   byte *pbVar3;
@@ -998,7 +1014,7 @@ int FUN_000f3c30(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_38;
   undefined4 local_34 [7];
   
-  (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)) = param_5;
+  (*(char *)((unsigned char *)ghidra_home + 16)) = param_5;
   (**(code **)(*param_2 + 0x14))(param_2,param_2,param_3,param_4,param_5);
   param_1[0] = 0;
   param_1[1] = 0;
@@ -1106,7 +1122,7 @@ switchD_000f3cf4_caseD_4:
   case 0xc:
     iVar4 = FUN_001054ec(param_2,param_3);
     iVar7 = 0;
-    pcVar6 = &STACKARG(0x28);
+    pcVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
     local_34[0] = *(undefined4 *)(iVar4 + 0x10);
     iVar4 = 4;
     pbVar3 = param_1;

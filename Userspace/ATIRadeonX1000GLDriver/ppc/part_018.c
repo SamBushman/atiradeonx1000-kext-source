@@ -4026,10 +4026,11 @@ int FUN_000cd1ec(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000024;
   
   uStack00000024 = param_4;
-  ((int (*)())FUN_000cd388)(param_1,param_2,param_3,&STACKARG(0x24));
+  ((int (*)())FUN_000cd388)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
   return;
 }
 
@@ -4044,10 +4045,11 @@ int FUN_000cd214(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000020;
   
   uStack00000020 = param_3;
-  ((int (*)())FUN_000cd404)(param_1,param_2,&STACKARG(0x20),param_4,param_5,param_6,param_7,param_8);
+  ((int (*)())FUN_000cd404)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
   return;
 }
 
@@ -4061,10 +4063,11 @@ int FUN_000cd23c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000028;
   
   uStack00000028 = param_5;
-  ((int (*)())FUN_000cdba4)(param_1,param_2,param_3,param_4,&STACKARG(0x28),param_6,param_7);
+  ((int (*)())FUN_000cdba4)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
   return;
 }
 
@@ -4078,10 +4081,11 @@ int FUN_000cd264(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000020;
   
   uStack00000020 = param_3;
-  ((int (*)())FUN_000cdbe4)(param_1,param_2,&STACKARG(0x20),param_4,param_5,param_6,param_7);
+  ((int (*)())FUN_000cdbe4)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
   return;
 }
 
@@ -4148,6 +4152,7 @@ int FUN_000cd3a4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000024;
   undefined4 uStack00000028;
   undefined4 uStack0000002c;
@@ -4159,7 +4164,7 @@ int FUN_000cd3a4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  (*(code *)*param_2)(param_1,"",param_3,&STACKARG(0x24),param_5,param_6,param_7,param_8);
+  (*(code *)*param_2)(param_1,"",param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),param_5,param_6,param_7,param_8);
   return;
 }
 
@@ -4680,6 +4685,7 @@ int FUN_000ce050(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char cVar1;
   char *pcVar2;
   undefined4 uStack00000020;
@@ -4697,7 +4703,7 @@ int FUN_000ce050(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uStack0000002c = param_6;
     uStack00000030 = param_7;
     uStack00000034 = param_8;
-    FUN_001a34d4(auStack_a4,param_2,&STACKARG(0x20),param_4,param_5,param_6,param_7,param_8);
+    FUN_001a34d4(auStack_a4,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
     pcVar2 = (char *)_strchr(auStack_a4,0x3f);
     if (pcVar2 != (char *)0x0) {
       for (; (((cVar1 = *pcVar2, cVar1 == '?' || (cVar1 == ' ')) || (cVar1 == ',')) ||
@@ -4707,7 +4713,7 @@ int FUN_000ce050(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     }
     FUN_001a32d0(auStack_a4,"%s\n",auStack_a4,param_4,param_5,param_6,param_7,param_8);
     (*(code *)**(undefined4 **)(param_1 + 8))
-              (*(undefined4 *)(param_1 + 0xc),"",auStack_a4,&STACKARG(0x20));
+              (*(undefined4 *)(param_1 + 0xc),"",auStack_a4,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
 }
@@ -6121,6 +6127,7 @@ int FUN_000d03b4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_7;
   undefined4 param_8;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
@@ -6136,8 +6143,8 @@ int FUN_000d03b4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     uStack0000002c = param_6;
     uStack00000030 = param_7;
     uStack00000034 = param_8;
-    FUN_001a34d4(auStack_124,param_2,&STACKARG(0x20),param_4,param_5,param_6,param_7,param_8);
-    (*(code *)*DAT_001fa61c)(DAT_001fa618,"",auStack_124,&STACKARG(0x20));
+    FUN_001a34d4(auStack_124,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
+    (*(code *)*DAT_001fa61c)(DAT_001fa618,"",auStack_124,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   }
   return;
 }

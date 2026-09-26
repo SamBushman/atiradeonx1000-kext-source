@@ -773,13 +773,14 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   undefined4 param_4;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uVar1;
   undefined4 uStack0000001c;
   undefined4 uStack00000020;
   
   uStack0000001c = param_2;
   uStack00000020 = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&STACKARG(0x1c),&STACKARG(0x20));
+  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = uStack00000020;
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = uStack0000001c;
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
@@ -794,13 +795,14 @@ int FUN_001275a0(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   uint param_4;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uVar1;
   undefined4 uStack0000001c;
   undefined4 uStack00000020;
   
   uStack0000001c = param_2;
   uStack00000020 = param_3;
-  ((int (*)())FUN_001272d4)(param_1,&STACKARG(0x1c),&STACKARG(0x20));
+  ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   uVar1 = FUN_00122e90(uStack00000020,uStack0000001c,param_4,*param_1);
   FUN_00194d44(param_1[1],uVar1);
   return uVar1;

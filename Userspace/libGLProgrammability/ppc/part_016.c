@@ -4843,7 +4843,7 @@ LAB_97bed34c:
             iVar10 = iVar12;
           } while (cVar8 != '\0');
           local_a8 = (int *)((int)local_a8 + iVar12);
-          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8,*pfVar23);
+          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8, *(unsigned int *)pfVar23);
           cVar8 = ',';
           iVar10 = 0;
           do {
@@ -4853,7 +4853,7 @@ LAB_97bed34c:
             iVar10 = iVar13;
           } while (cVar8 != '\0');
           local_a8 = (int *)((int)local_a8 + iVar13 + iVar12);
-          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8,pfVar23[1]);
+          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8, ((unsigned int *)pfVar23)[1]);
           cVar8 = ',';
           iVar10 = 0;
           do {
@@ -4863,7 +4863,7 @@ LAB_97bed34c:
             iVar10 = iVar13;
           } while (cVar8 != '\0');
           local_a8 = (int *)((int)local_a8 + iVar13 + iVar12);
-          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8,pfVar23[2]);
+          iVar12 = ((int (*)())_ncpy_97be5f58)(local_a8, ((unsigned int *)pfVar23)[2]);
           cVar8 = ',';
           iVar10 = 0;
           do {
@@ -4873,7 +4873,7 @@ LAB_97bed34c:
             iVar10 = iVar13;
           } while (cVar8 != '\0');
           local_a8 = (int *)((int)local_a8 + iVar13 + iVar12);
-          iVar10 = ((int (*)())_ncpy_97be5f58)(local_a8,pfVar23[3]);
+          iVar10 = ((int (*)())_ncpy_97be5f58)(local_a8, ((unsigned int *)pfVar23)[3]);
           cVar8 = '}';
           local_a8 = (int *)((int)local_a8 + iVar10);
           iVar10 = 0;

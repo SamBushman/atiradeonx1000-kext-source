@@ -1942,10 +1942,10 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
     uVar15 = 0;
     break;
   case 1:
-    uVar15 = (uint)GH_F2U((fVar3 < *pfVar14));
+    uVar15 = (uint)(fVar3 < *pfVar14);
     break;
   case 2:
-    uVar15 = (uint)GH_F2U((fVar3 == *pfVar14));
+    uVar15 = (uint)(fVar3 == *pfVar14);
     break;
   case 3:
     bVar2 = fVar3 <= *pfVar14;
@@ -1954,7 +1954,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(param_1)
     uVar15 = (uint)(*pfVar14 < fVar3);
     break;
   case 5:
-    uVar15 = (uint)GH_F2U((fVar3 != *pfVar14));
+    uVar15 = (uint)(fVar3 != *pfVar14);
     break;
   case 6:
     bVar2 = *pfVar14 <= fVar3;
@@ -3008,6 +3008,7 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   undefined4 param_11;
   int param_12;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte bVar1;
   uint *puVar2;
   int iVar3;
@@ -3036,7 +3037,7 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
   uStack00000028 = param_5;
   iVar11 = 0;
   uStack0000002c = param_6;
-  (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   uStack00000034 = param_8;
   if (param_1[0x393] != 0) {
     param_2 = param_2 + 0x20;
@@ -3065,14 +3066,14 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       do {
         if ((*piVar12 == 0) &&
            (iVar11 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar9,puStack00000020,uStack00000024,uStack00000028,
-                                uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,
+                                uStack0000002c,(*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,
                                 param_11,iVar4), iVar11 == 1)) {
           if (uVar9 != param_2) {
             puVar2 = (uint *)param_1[0x38c];
             *puVar2 = param_2 << 0x15 | uVar9 << 0xb | 0xfc000090;
             param_1[0x38c] = (int)(puVar2 + 1);
             ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-                       (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,param_11,0,iVar4);
+                       (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,param_11,0,iVar4);
             piVar12[0xc] = param_1[0x391];
             goto LAB_97bd8938;
           }
@@ -3088,8 +3089,8 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       if (((*(int *)(param_1[0x389] + 0x38) == 0x8804) ||
           (*(int *)(param_1[0x389] + 0x38) == 0x8b30)) && (uStack00000030 == 2)) {
         puVar7 = (uint *)param_1[0x38c];
-        *puVar7 = puStack00000020[*(byte *)((int)&STACKARG(0x28) + iVar4)] & 0xffff | 0xc10d0000;
-        bVar1 = *(byte *)((int)&STACKARG(0x28) + iVar4);
+        *puVar7 = puStack00000020[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc10d0000;
+        bVar1 = *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4);
         param_1[0x38c] = (int)(puVar7 + 1);
         uVar9 = puStack00000020[bVar1];
         puVar2 = puVar7 + 3;
@@ -3099,21 +3100,21 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       else {
         puVar2 = (uint *)param_1[0x38c];
         *puVar2 = param_2 << 0x15 | (uStack00000030 + 5) * 0x10000 |
-                  puStack00000020[*(byte *)((int)&STACKARG(0x28) + iVar4)] & 0xffff | 0xc0000000;
+                  puStack00000020[*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4)] & 0xffff | 0xc0000000;
         puVar2 = puVar2 + 1;
       }
       param_1[0x38c] = (int)puVar2;
     }
     else {
       ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-                 (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9);
+                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9);
       puVar2 = (uint *)param_1[0x38c];
-      *puVar2 = (uint)*(byte *)((int)&STACKARG(0x28) + iVar4) << 2 | 0x82ef0000;
-      puVar2[1] = param_2 << 0x15 | (((*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
+      *puVar2 = (uint)*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + iVar4) << 2 | 0x82ef0000;
+      puVar2[1] = param_2 << 0x15 | (((*(unsigned int *)((unsigned char *)ghidra_home + 24)) >> 0x10) + 5) * 0x10000 | 0x7c00bc2e;
       param_1[0x38c] = (int)(puVar2 + 2);
     }
     ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-               (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,param_11,0,iVar4);
+               (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,param_11,0,iVar4);
     return;
   }
   if ((uVar5 & 4) != 0) {
@@ -3125,7 +3126,7 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       piVar12 = piVar12 + 0xe;
       if (iVar3 == 0) {
         iVar3 = ((int (*)())_PPCRuntimeCompilerRegisterContainsData)(param_1,uVar10,puStack00000020,uStack00000024,uStack00000028,
-                           uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,param_11,
+                           uStack0000002c,(*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,param_11,
                            iVar4);
         if ((iVar3 == 3) && (uStack00000030 == 0)) {
           iVar11 = 3;
@@ -3142,14 +3143,14 @@ int _PPCRuntimeCompilerLoadRegister(param_1, param_2, param_3, param_4, param_5,
       puVar2 = (uint *)param_1[0x38c];
       *puVar2 = iVar3 * 0x200000 | uVar10 << 0x10 | uVar10 << 0xb | 0x10000484;
       param_1[0x38c] = (int)(puVar2 + 1);
-      iVar11 = _memcmp(param_1 + uVar10 * 0xe + 0x1c4,&STACKARG(0x28),4);
+      iVar11 = _memcmp(param_1 + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
       if (iVar11 != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,param_1 + uVar10 * 0xe + 0x1c4,&STACKARG(0x28));
+                  (auStack_40,param_1 + uVar10 * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
         _PPCRuntimeCompilerSwizzleRegisterAV(param_1,iVar3,auStack_40);
       }
       ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,iVar3,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-                 (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,param_11,0,iVar4);
+                 (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,param_11,0,iVar4);
       param_1[uVar10 * 0xe + 0x1cc] = param_1[0x391];
 LAB_97bd8938:
       param_1[0x391] = param_1[0x391] + 1;
@@ -3225,7 +3226,7 @@ LAB_97bd8938:
     if (uStack00000030 == 0) {
       ((int (*)())_PPCRuntimeCompilerSaveAllTemporariesToMemory)(param_1);
     }
-    ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,(*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),
+    ((int (*)())_PPCRuntimeCompilerCalculateIndirectAddress)(param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,(*(unsigned int *)((unsigned char *)ghidra_home + 24)),
                uStack00000034,param_9);
     uVar9 = *puVar2;
     if ((((uVar9 & 0xf) == 0) && (puVar2[1] == uVar9 + 4)) &&
@@ -3264,12 +3265,12 @@ LAB_97bd877c:
     param_1[0x38c] = (int)(puVar2 + 1);
   }
 LAB_97bd87b4:
-  _PPCRuntimeCompilerSwizzleRegisterAV(param_1,param_2 - 0x20,&STACKARG(0x28));
+  _PPCRuntimeCompilerSwizzleRegisterAV(param_1,param_2 - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(param_1,param_2 - 0x20,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-             (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9,param_10,param_11,uVar8,iVar4);
+             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9,param_10,param_11,uVar8,iVar4);
   iVar4 = _PPCRuntimeCompilerFindVariableInfo
                     (param_1,puStack00000020,uStack00000024,uStack00000028,uStack0000002c,
-                     (*(unsigned int *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)),uStack00000034,param_9);
+                     (*(unsigned int *)((unsigned char *)ghidra_home + 24)),uStack00000034,param_9);
   *(undefined4 *)(iVar4 + 4) = 0;
   return;
 }
@@ -3832,6 +3833,7 @@ int _PPCRuntimeCompilerDirtyRegistersWithData(param_1, param_2, param_3, param_4
   undefined4 param_10;
   undefined4 param_11;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char cVar1;
   undefined4 uVar2;
   int iVar3;
@@ -3877,7 +3879,7 @@ int _PPCRuntimeCompilerDirtyRegistersWithData(param_1, param_2, param_3, param_4
         iVar3 = iVar6 + param_1 + 0x700;
         do {
           iVar8 = 4;
-          pcVar5 = (char *)&STACKARG(0x24);
+          pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
           do {
             cVar1 = *pcVar5;
             pcVar5 = pcVar5 + 1;
@@ -4020,6 +4022,7 @@ int _PPCRuntimeCompilerSetRegister(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_12;
   undefined4 param_13;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
@@ -4040,7 +4043,7 @@ int _PPCRuntimeCompilerSetRegister(param_1, param_2, param_3, param_4, param_5, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  _memcpy(iVar1 + 8,&STACKARG(0x20),0x24);
+  _memcpy(iVar1 + 8,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),0x24);
   *(undefined4 *)(iVar1 + 0x34) = param_12;
   *(undefined4 *)(iVar1 + 0x30) = *(undefined4 *)(param_1 + 0xe44);
   *(int *)(param_1 + 0xe44) = *(int *)(param_1 + 0xe44) + 1;
@@ -4062,6 +4065,7 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
   undefined4 param_11;
   int param_12;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte bVar1;
   int iVar2;
   byte *pbVar3;
@@ -4086,7 +4090,7 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
   uStack00000024 = param_4;
   uStack00000028 = param_5;
   uStack0000002c = param_6;
-  (*(short *)(*(unsigned int *)__builtin_frame_address(0) + 0x30)) = param_7;
+  (*(short *)((unsigned char *)ghidra_home + 24)) = param_7;
   uStack00000034 = param_8;
   if (*(int *)(param_1 + 0xe4c) == 0) {
     iVar2 = param_2 * 0x38 + param_1;
@@ -4094,7 +4098,7 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
          (iVar7 = _memcmp(*(undefined4 *)(iVar2 + 8),param_3,0x10), iVar7 == 0)) &&
         (*(short *)(iVar2 + 0x18) == sStack00000030)) &&
        (((*(char *)(iVar2 + *(int *)(iVar2 + 4) + 0x10) ==
-          *(char *)((int)&STACKARG(0x28) + param_12) && (cStack00000033 == '\0')) &&
+          *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + param_12) && (cStack00000033 == '\0')) &&
         (*(char *)(iVar2 + 0x1b) == '\0')))) {
       return 1;
     }
@@ -4106,7 +4110,7 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
        (iVar2 = _memcmp(*(undefined4 *)(iVar7 + 8),param_3,0x10), iVar2 == 0)) {
       if ((*(short *)(iVar7 + 0x18) == sStack00000030) &&
          ((cStack00000033 == '\0' && (*(char *)(iVar7 + 0x1b) == '\0')))) {
-        iVar2 = _memcmp(iVar7 + 0x10,&STACKARG(0x28),uStack00000034 >> 0x10 & 0xff);
+        iVar2 = _memcmp(iVar7 + 0x10,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),uStack00000034 >> 0x10 & 0xff);
         if (iVar2 == 0) {
           return 1;
         }
@@ -4114,13 +4118,13 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
         piVar4 = local_20;
         do {
           if ((uVar6 < (uStack00000034 >> 0x10 & 0xff)) &&
-             (*(byte *)((int)&STACKARG(0x28) + uVar6) < 4)) {
+             (*(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6) < 4)) {
             uVar5 = 0;
             pbVar3 = (byte *)(iVar7 + 0x10);
             do {
               bVar1 = *pbVar3;
               pbVar3 = pbVar3 + 1;
-              if (bVar1 == *(byte *)((int)&STACKARG(0x28) + uVar6)) goto LAB_97bd9f54;
+              if (bVar1 == *(byte *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 16)) + uVar6)) goto LAB_97bd9f54;
               uVar5 = uVar5 + 1;
             } while (uVar5 < 4);
           }

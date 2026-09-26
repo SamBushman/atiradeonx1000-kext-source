@@ -3995,7 +3995,7 @@ int TIntermLoop__compileNode(this, param_2, param_3, param_4, param_5, param_6)
     _sprintf(acStack_130,"%s%d","gl__WhileBody_",iVar17);
     _sprintf(acStack_110,"%s%d","gl__WhileEnd_",iVar17);
     _sprintf(acStack_f0,"%s%d","gl__WhileStart_",iVar17);
-    _sprintf(acStack_d0,"%s%d","gl__WhileEndIf_");
+    _sprintf(acStack_d0,"%s%d",(int)"gl__WhileEndIf_",iVar17);
     pcVar11 = acStack_110;
     ParseWhileLoopStack__push((unsigned char *)(param_2 + 0x5c),acStack_130,acStack_110);
     local_ac = 0;

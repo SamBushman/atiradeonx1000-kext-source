@@ -797,28 +797,28 @@ int FUN_00159b58(param_1, param_2, param_3)
               *(int *)(param_3 + 0x218) = *(int *)(param_3 + 0x218) + 1;
               switch(iVar8) {
               case 0:
-                uVar11 = (uint)GH_F2U((local_e4 == local_9c));
-                uVar7 = (uint)GH_F2U((local_e4 == local_b4));
+                uVar11 = (uint)(local_e4 == local_9c);
+                uVar7 = (uint)(local_e4 == local_b4);
                 break;
               case 1:
-                uVar11 = (uint)GH_F2U((local_e4 != local_9c));
-                uVar7 = (uint)GH_F2U((local_e4 != local_b4));
+                uVar11 = (uint)(local_e4 != local_9c);
+                uVar7 = (uint)(local_e4 != local_b4);
                 break;
               case 2:
-                uVar11 = (uint)GH_F2U((local_e4 < local_9c));
-                uVar7 = (uint)GH_F2U((local_e4 < local_b4));
+                uVar11 = (uint)(local_e4 < local_9c);
+                uVar7 = (uint)(local_e4 < local_b4);
                 break;
               case 3:
-                uVar11 = (uint)GH_F2U((local_e4 <= local_9c));
-                uVar7 = (uint)GH_F2U((local_e4 <= local_b4));
+                uVar11 = (uint)(local_e4 <= local_9c);
+                uVar7 = (uint)(local_e4 <= local_b4);
                 break;
               case 4:
-                uVar11 = (uint)GH_F2U((local_9c < local_e4));
-                uVar7 = (uint)GH_F2U((local_b4 < local_e4));
+                uVar11 = (uint)(local_9c < local_e4);
+                uVar7 = (uint)(local_b4 < local_e4);
                 break;
               case 5:
-                uVar11 = (uint)GH_F2U((local_9c <= local_e4));
-                uVar7 = (uint)GH_F2U((local_b4 <= local_e4));
+                uVar11 = (uint)(local_9c <= local_e4);
+                uVar7 = (uint)(local_b4 <= local_e4);
                 break;
               default:
                 goto switchD_0015a394_default;
@@ -5273,7 +5273,7 @@ LAB_00162370:
   pfVar12 = local_a8;
   pfVar4 = local_b8;
   do {
-    *pfVar4 = NAN;
+    *pfVar4 = GH_U2F(0x7fff0000U);
     pfVar4 = pfVar4 + 1;
     iVar7 = iVar7 + -1;
   } while (iVar7 != 0);
@@ -5363,7 +5363,7 @@ LAB_001627ec:
   iVar6 = 4;
   pfVar4 = pfVar12;
   do {
-    *pfVar4 = NAN;
+    *pfVar4 = GH_U2F(0x7fff0000U);
     pfVar4 = pfVar4 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
@@ -5763,6 +5763,7 @@ int FUN_001633f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   undefined4 uVar2;
   int iStack00000018;
@@ -5772,7 +5773,7 @@ int FUN_001633f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   if ((*(uint *)(param_1 + 0x14) & 0x200) != 0) {
     uVar2 = FUN_00105594(param_1,*(undefined4 *)(param_1 + 0x84));
   }
-  iVar1 = ((int (*)())FUN_00162dfc)(&STACKARG(0x18),0,param_2);
+  iVar1 = ((int (*)())FUN_00162dfc)(&(*(unsigned int *)((unsigned char *)ghidra_home + 0)),0,param_2);
   if (iVar1 != 0) {
     *(int *)(param_2 + 0x1fc) = *(int *)(param_2 + 0x1fc) + 1;
     FUN_00105894(uVar2,*(undefined4 *)(param_2 + 8));
@@ -6619,6 +6620,7 @@ int FUN_00164bec(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int *piVar1;
   bool bVar2;
   int iVar3;
@@ -6682,7 +6684,7 @@ int FUN_00164bec(param_1, param_2, param_3, param_4)
         }
         iVar14 = 4;
         iVar11 = 0x7fffffff;
-        pcVar10 = (char *)&STACKARG(0x1c);
+        pcVar10 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
         iVar12 = 0;
         do {
           if (*pcVar10 != '\0') {
@@ -6724,7 +6726,7 @@ LAB_00164d6c:
         param_1[0x69] = uVar5;
       }
       iVar13 = 4;
-      pcVar10 = (char *)&STACKARG(0x1c);
+      pcVar10 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
       iVar9 = 0;
       do {
         if (*pcVar10 != '\0') {
@@ -7260,6 +7262,7 @@ int FUN_00165b7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   uint param_7;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *puVar1;
   undefined4 uVar2;
   undefined4 *puVar3;
@@ -7322,7 +7325,7 @@ int FUN_00165b7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   }
   *puVar3 = puVar1 + 1;
   iVar8 = 4;
-  pcVar4 = (char *)&STACKARG(0x2c);
+  pcVar4 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 20));
   do {
     if (*pcVar4 != '\0') {
       *(int *)(param_2 + 0x48) = *(int *)(param_2 + 0x48) + 1;
@@ -8632,6 +8635,7 @@ int FUN_00167b68(param_1, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   char cVar2;
   int *piVar3;
@@ -8693,7 +8697,7 @@ int FUN_00167b68(param_1, param_2, param_3)
       if (bVar1) {
         iVar14 = 0;
         iVar7 = 0;
-        pcVar11 = (char *)&STACKARG(0x20);
+        pcVar11 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
         piVar3 = param_1;
         do {
           if ((*(char *)((int)local_58 + iVar14) == '\0') &&

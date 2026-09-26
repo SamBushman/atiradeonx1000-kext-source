@@ -329,6 +329,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_10;
   int *param_11;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
   uint uVar3;
@@ -568,7 +569,7 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
         if (local_12c != (char *)0x0) {
 LAB_97b9caf4:
           iVar9 = TParseContext__voidErrorCheck((unsigned char *)param_1,(int)param_2,param_3,
-                                 (unsigned char *)&STACKARG(0x24));
+                                 (unsigned char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
           if (iVar9 != 0) {
             return 1;
           }

@@ -343,6 +343,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   ulong param_3;
   unsigned char * param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   uint *puVar2;
   int iVar3;
@@ -365,7 +366,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   }
   uVar1 = local_28[0];
   local_30 = uVar5 - param_2;
-  puVar2 = &STACKARG(0x20);
+  puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   if (local_30 <= uStack00000020) {
     puVar2 = &local_30;
   }
@@ -391,6 +392,7 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   ulong param_5;
   ulong param_6;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, param_6, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint *puVar1;
   int iVar2;
   int iVar3;
@@ -415,14 +417,14 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
     iVar3 = *(int *)param_4;
   }
   local_30 = uVar5 - param_2;
-  puVar1 = &STACKARG(0x20);
+  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   if (local_30 <= uStack00000020) {
     puVar1 = &local_30;
   }
   local_2c = uVar4 - param_5;
   uVar4 = *puVar1;
   local_28 = uVar4;
-  puVar1 = &STACKARG(0x2c);
+  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 20));
   if (local_2c <= uStack0000002c) {
     puVar1 = &local_2c;
   }
@@ -474,6 +476,7 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   ulong param_3;
   char *param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint *puVar1;
   uint uVar2;
   int iVar3;
@@ -493,7 +496,7 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   uVar2 = _strlen(param_4);
   local_30 = uVar4 - param_2;
   local_28[0] = uVar2;
-  puVar1 = &STACKARG(0x20);
+  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   if (local_30 <= uStack00000020) {
     puVar1 = &local_30;
   }
@@ -518,6 +521,7 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
   char *param_4;
   ulong param_5;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint *puVar1;
   int iVar2;
   uint uVar3;
@@ -538,14 +542,14 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
     iVar2 = *(int *)this;
   }
   local_30 = _strlen(param_4);
-  puVar1 = &STACKARG(0x28);
+  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
   if (local_30 <= uStack00000028) {
     puVar1 = &local_30;
   }
   local_2c = uVar3 - param_2;
   uVar3 = *puVar1;
   local_24[0] = uVar3;
-  puVar1 = &STACKARG(0x20);
+  puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   if (local_2c <= uStack00000020) {
     puVar1 = &local_2c;
   }

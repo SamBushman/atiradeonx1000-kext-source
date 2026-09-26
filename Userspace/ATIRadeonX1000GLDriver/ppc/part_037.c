@@ -2612,6 +2612,7 @@ int FUN_00122ed8(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   int iVar2;
   int iVar3;
@@ -2621,7 +2622,7 @@ int FUN_00122ed8(param_1, param_2)
   if (*(int *)(*(int *)(param_1 + 0x30) + 0x98) != 8) {
     iVar2 = 0;
     iVar3 = 4;
-    pcVar1 = (char *)&STACKARG(0x1c);
+    pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
       if (*pcVar1 == '\0') {
         *(undefined1 *)(iVar2 + *(int *)(param_1 + 0x30) + 0x9c) = 0;
@@ -3112,6 +3113,7 @@ int FUN_00123a34(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *puVar1;
   undefined4 uVar2;
   int iVar3;
@@ -3133,7 +3135,7 @@ int FUN_00123a34(param_1, param_2, param_3)
       if (*(int *)(*(int *)(param_1 + 0x30) + 0x98) != 0x18) {
         iVar3 = 0;
         iVar5 = 4;
-        pcVar4 = (char *)&STACKARG(0x1c);
+        pcVar4 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
         do {
           if (*pcVar4 == '\0') {
             *(undefined1 *)(iVar3 + *(int *)(param_1 + 0x30) + 0x9c) = 0;

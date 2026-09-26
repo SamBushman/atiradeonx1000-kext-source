@@ -137,3 +137,8 @@ run ga-ia Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript Re
 rm -rf va-ia && cp -r va-is va-ia
 run va-ia Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript ExtendIndirectCalls.java $B/indirect_args_va.txt /dev/null
 run va-ia Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/indirect_redump_va.txt)
+# step 18: printf-family calls whose format is a global pointer variable, and calls that pass more arguments than the format consumes
+# (OverrideVariadicCalls.java now resolves the pointer and narrows); the functions are re-dumped
+rm -rf glprog-vf && cp -r glprog-ia glprog-vf
+run glprog-vf GLProgProject libGLProgrammability.dylib -postScript OverrideVariadicCalls.java $(cat $B/variadic2_glprog.txt)
+run glprog-vf GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/variadic2_redump_glprog.txt)

@@ -3543,6 +3543,7 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   undefined *puVar2;
   uint uVar3;
@@ -3664,7 +3665,7 @@ int TIntermediate__setAggregateOperator(this, param_2, param_3, param_4)
       puVar8 = *(undefined4 **)(this_00 + 8);
       if (puVar8 == *(undefined4 **)(this_00 + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                  (this_00,puVar8,&STACKARG(0x1c));
+                  (this_00,puVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
       }
       else {
         iVar6 = 0;
@@ -4100,6 +4101,7 @@ int TIntermediate__growAggregate(this, param_2, param_3, param_4)
   unsigned char * param_3;
   int param_4;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   uint uVar2;
   int *piVar3;
@@ -4175,7 +4177,7 @@ int TIntermediate__growAggregate(this, param_2, param_3, param_4)
     puVar7 = *(undefined4 **)(pvVar6 + 8);
     if (puVar7 == *(undefined4 **)(pvVar6 + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (pvVar6,puVar7,&STACKARG(0x1c));
+                (pvVar6,puVar7,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
     }
     else {
       iVar4 = 0;
@@ -4192,7 +4194,7 @@ LAB_97b8f5cc:
     puVar7 = *(undefined4 **)(pvVar6 + 8);
     if (puVar7 == *(undefined4 **)(pvVar6 + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (pvVar6,puVar7,&STACKARG(0x20));
+                (pvVar6,puVar7,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
     }
     else {
       iVar4 = 0;
@@ -4215,6 +4217,7 @@ int TIntermediate__makeAggregate(this, param_2, param_3)
   unsigned char * param_2;
   int param_3;
 {
+  unsigned int ghidra_home[8] = { this, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   uint uVar2;
   int *piVar3;
@@ -4284,7 +4287,7 @@ int TIntermediate__makeAggregate(this, param_2, param_3)
     a1 = *(undefined4 **)(this_01 + 8);
     if (a1 == *(undefined4 **)(this_01 + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (this_01,a1,&STACKARG(0x1c));
+                (this_01,a1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
       a1 = extraout_r4;
     }
     else {
