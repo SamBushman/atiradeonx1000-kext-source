@@ -579,7 +579,7 @@ LAB_0010ce20:
       puVar8 = local_5c;
       for (iVar11 = 1; iVar5 = (**(code **)(*piVar3 + 0x14))(piVar3), iVar11 <= iVar5;
           iVar11 = iVar11 + 1) {
-        ((float * (*)())FUN_0010b93c)(local_48,piVar3,iVar11,uVar7,param_2);
+        FUN_0010b93c(local_48,piVar3,iVar11,uVar7,param_2);
         fparam_1 = (double)local_48[0];
         piVar10 = (int *)*puVar8;
         uVar12 = ((int (*)())FUN_0010b184)(piVar10,extraout_r4,local_64,fparam_1);

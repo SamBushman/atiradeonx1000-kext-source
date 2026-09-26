@@ -61,5 +61,6 @@
  "prelude": [
   "extern unsigned char DAT_001d91c8[] asm(\"DAT_001d91c8\");"
  ],
- "mirror_frames": true
+ "mirror_frames": true,
+ "symbolize_literals_ctx": true
 }

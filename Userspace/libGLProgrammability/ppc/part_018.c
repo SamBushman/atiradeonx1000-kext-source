@@ -2429,8 +2429,20 @@ int _AddTempRegister(param_1, param_2, param_3, param_4)
 }
 
 /* _AddConstantParam @ 0x97c0b550 (436 bytes) */
-undefined2 _AddConstantParam(int param_1,uint param_2,uint param_3,uint param_4,float param_5,float param_6,float param_7,float param_8)
+int _AddConstantParam(param_1, param_2, param_3, param_4, param_5_w, param_6_w, param_7_w, param_8_w)
+  int param_1;
+  uint param_2;
+  uint param_3;
+  uint param_4;
+  unsigned int param_5_w;
+  unsigned int param_6_w;
+  unsigned int param_7_w;
+  unsigned int param_8_w;
 {
+  float param_5 = GH_U2F(param_5_w);
+  float param_6 = GH_U2F(param_6_w);
+  float param_7 = GH_U2F(param_7_w);
+  float param_8 = GH_U2F(param_8_w);
   int iVar1;
   undefined4 uVar2;
   uint uVar3;

@@ -5117,7 +5117,7 @@ int FUN_000cea6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uVar1 = (*(unsigned short *)((unsigned char *)&(s_ox_001a64a8) + 1));
   uVar6 = *param_2;
   pcVar4 = (char *)(uVar6 >> 8 & 0xf);
-  if (pcVar4 < "") {
+  if ((uint)pcVar4 < 6) {
     pcVar5 = (char *)(0);
     switch((int)pcVar4) {
     case 0x0:

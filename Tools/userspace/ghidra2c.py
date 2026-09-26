@@ -194,6 +194,11 @@ for a, sz, name in idx:
 defined_names = {name for a, sz, name in idx}
 allbody = '\n'.join(b for b in bodies.values() if b)
 data_syms = sorted(set(re.findall(r'\bswitchdataD_[0-9a-f]{8}\b|(?<![A-Za-z0-9])_?(?:DAT|UNK|PTR|EXT)_[0-9a-f]{8}\b|\b(?:PTR_)?(?:s|u|PTR)_[A-Za-z_0-9]*_[0-9a-f]{8}\b|\bPTR_[A-Za-z_0-9]+_[0-9a-f]{8}\b', allbody)))
+# `uRam001dbf94`: Ghidra's name for a read of an absolute address it has no data symbol for (a PIC `addis r2,r31,0x12; lwz` it folded into a constant). Left as an
+# absolute dereference the rebuilt image read whatever sits at that number in ITS layout (GLDriver FUN_000c1780 stored 0 instead of the 1.0f at 0x1dbf94); name it
+# like any other data address so the link tree gives it a label (an address in no section becomes a numeric constant there, as for any DAT_ name)
+_ram_addrs = sorted(set(re.findall(r'\b[a-z]{1,2}Ram([0-9a-f]{8})\b', allbody)))
+data_syms = sorted(set(data_syms) | set('DAT_' + x for x in _ram_addrs if not in_text(x)))
 data_syms = [d for d in data_syms if not (re.search(r'_([0-9a-f]{8})$', d) and in_text(re.search(r'_([0-9a-f]{8})$', d).group(1)) and not d.startswith(('PTR_', 'switchdataD_')))]
 calls = set(re.findall(r'\b([A-Za-z_][A-Za-z_0-9]*)\s*\(', allbody))
 imports = sorted(c for c in calls if c not in kw and c not in defined_names and c not in PRIM and not re.match(r'^(CONCAT|SUB|ZEXT|SEXT|sync|instructionSynchronize|dataCache|enforce|trap|halt|CARRY|SCARRY|SBORROW|LOCK|UNLOCK|NAN|ROUND|ABS|INT2FLOAT|FLOAT2FLOAT|TRUNC|POPCOUNT|BREAK|GBITS)', c) and c not in data_syms)
@@ -262,6 +267,123 @@ def fix_proto_param(q):
         return q
     ty = m.group(1).strip()
     return '%s%s%s' % (fix_proto_type(ty), '' if fix_proto_type(ty).endswith('*') else ' ', m.group(2))
+_FCTIW = None
+if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.tsv')):
+    import struct as _st
+    _d = open(os.environ['CORPUS_SLICE'], 'rb').read(); _secs = []
+    _nc = _st.unpack('>I', _d[16:20])[0]; _p = 28
+    for _ in range(_nc):
+        _c, _cs = _st.unpack('>II', _d[_p:_p + 8])
+        if _c == 1:
+            _ns = _st.unpack('>I', _d[_p + 48:_p + 52])[0]; _q = _p + 56
+            for _ in range(_ns):
+                _a, _sz, _off = _st.unpack('>3I', _d[_q + 32:_q + 44]); _secs.append((_a, _sz, _off)); _q += 68
+        _p += _cs
+    def _word(x):
+        for sa, sz_, off in _secs:
+            if sa <= x < sa + sz_ and off: return _st.unpack('>I', _d[off + x - sa:off + x - sa + 4])[0]
+        return 0
+    _FCTIW = set()
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                if any((_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15) for x in range(_lo, _hi, 4)):
+                    _FCTIW.add(int(_f[0], 16)); break
+    # NaN-pattern constants each function builds (`lis rD,hi` + `ori rD,rD,lo` / `addi rD,rD,lo` / nothing): Ghidra prints a float variable holding ANY NaN
+    # pattern as the bare token NAN (payload lost) although the stock's is 0x7fffffff (INT_MAX assigned to a union word Ghidra typed float). GH_NAN() in the
+    # recompile is math.h's 0x7fc00000. fix_nan() below substitutes the real bits.
+    _NANC = {}
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cs = set()
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
+                    rd = (w >> 21) & 31; v = (w & 0xffff) << 16; w2 = _word(x + 4)
+                    if (w2 >> 26) == 24 and ((w2 >> 21) & 31) == rd: v |= w2 & 0xffff       # ori rA,rS,imm (rS = rD)
+                    elif (w2 >> 26) == 14 and ((w2 >> 16) & 31) == rd:                     # addi rD,rD,simm
+                        v = (v + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff
+                    if (v >> 23) & 0xff == 0xff and v & 0x7fffff: _cs.add(v)
+            _NANC[int(_f[0], 16)] = _cs
+    # every 32-bit constant a function builds from immediates (`lis`+`ori`/`addi`, `li`): a function symbol Ghidra prints for one of these is the NUMBER (a PIC
+    # image forms real code addresses relative to the PIC base, never with lis/ori) - see fix_literal_syms()
+    _LITC = {}
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cs = set()
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if (w >> 26) == 14 and ((w >> 16) & 31) == 0:                  # li rD,simm
+                        _cs.add(w & 0xffff if not w & 0x8000 else (w & 0xffff) | 0xffff0000); continue
+                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
+                    rd = (w >> 21) & 31; hi = (w & 0xffff) << 16; _cs.add(hi)
+                    for y in range(x + 4, min(x + 4 + 4 * 16, _hi), 4):      # the low half may come a few instructions later (scheduled around other work)
+                        w2 = _word(y); op2 = w2 >> 26
+                        if op2 in (16, 18, 19): break                        # a branch ends the block
+                        if op2 == 24 and ((w2 >> 21) & 31) == rd: _cs.add(hi | (w2 & 0xffff))                 # ori rA,rD,imm
+                        elif op2 == 14 and ((w2 >> 16) & 31) == rd: _cs.add((hi + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff)   # addi rA,rD,simm
+                        if op2 in (14, 15, 24, 25, 32, 33, 34, 35) and ((w2 >> 21) & 31 if op2 in (14, 15, 32, 33, 34, 35) else (w2 >> 16) & 31) == rd and y != x: break   # rD overwritten
+            _LITC[int(_f[0], 16)] = _cs
+    _DISP = {}   # D-form displacements / addi immediates each function uses (the numbers `fix_code_strings` picks between)
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cs = set()
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if (w >> 26) in (14, 12, 13, 15) or 32 <= (w >> 26) <= 55: _cs.add(w & 0xffff)
+            _DISP[int(_f[0], 16)] = _cs
+# `float param_3` where the stock reads the argument from its GENERAL register (`stw r5,-0x20(r1); lfs f13,-0x20(r1)`: the GLDriver interface functions
+# FUN_0010aee8 / 10b118 / 10b284 / 10b2dc / 10b93c, FUN_000f4bc8 take float BITS in GPRs): the rebuilt C, given a prototype-style float, received it in f1 -
+# fnfuzz saw FUN_0010aee8 scale by whatever f1 held. The parameter becomes the word and the body makes its float from it.
+def _gpr_float_params(a, b, name):
+    if _FCTIW is None: return b
+    h = split_header(b, name)
+    if not h: return b
+    rt, params = h
+    pl = split_params(' '.join(params.split())) if params.strip() not in ('void', '') else []
+    hit = [(k, m.group(1)) for k, q in enumerate(pl) for m in [re.match(r'^float\s+(param_\d+)$', q.strip())] if m]
+    if not hit: return b
+    words = set(); copies = {}
+    for _r in RANGES_OF.get(int(a, 16), ()):
+        for x in range(_r[0], _r[1], 4):
+            w = _word(x)
+            if (w >> 26) == 36 and ((w >> 16) & 31) == 1: words.add((w >> 21) & 31)      # stw rS,d(r1)
+            elif (w >> 26) == 31 and ((w >> 1) & 0x3ff) == 444 and ((w >> 21) & 31) == ((w >> 11) & 31): copies[(w >> 16) & 31] = (w >> 21) & 31    # mr rA,rS
+    slot = 0; slots = []
+    for q in pl:
+        slots.append(slot); slot += 2 if re.match(r'^(double|longlong|ulonglong|undefined8)\b', q.strip()) else 1
+    words |= {copies[x] for x in list(words) if x in copies}      # `or r29,r5,r5; ...; stw r29,0x40(r1)`
+    ok = [(k, nm) for k, nm in hit if (3 + slots[k]) in words]
+    if not ok: return b
+    for k, nm in ok:
+        pl[k] = 'unsigned int %s_w' % nm
+    i = b.index('{')
+    inits = ''.join('  float %s = GH_U2F(%s_w);\n' % (nm, nm) for k, nm in ok)
+    sys.stderr.write('GPR-FLOAT: %s %s\n' % (name, [nm for k, nm in ok]))
+    return '%s %s(%s)\n{\n%s' % (rt, name, ','.join(pl), inits) + b[i + 1:].lstrip('\n') if False else '%s %s(%s)\n' % (rt, name, ','.join(pl)) + b[i:i + 1] + '\n' + inits + b[i + 1:].lstrip('\n')
+RANGES_OF = {}
+if _FCTIW is not None:
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            RANGES_OF[int(_f[0], 16)] = [tuple(int(x, 16) for x in r.split('-')) for r in _f[3].split(';') if r]
+for a, sz, name in idx:
+    if bodies.get(a): bodies[a] = _gpr_float_params(a, bodies[a], name)
 proto = {}
 for a, sz, name in idx:
     b = bodies.get(a)
@@ -411,74 +533,45 @@ CORPUS_SCOPE = os.environ.get('CORPUS_SCOPE', '')
 # magic-double sequence, printed as CONCAT44), and a real float->int conversion needs fctiw/fctiwz - so `(float)<int expression>` is always a bit
 # reinterpretation, and `(int)fVarN` is one in every function whose stock code has no fctiw*. The rebuilt fold had folded ivec4(7,5,17,6) -
 # ivec4(3,1,4,2) to 0 and reported a divide by zero for the division (the denormal bits of a small integer converted to 0).
-_FCTIW = None
-if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.tsv')):
-    import struct as _st
-    _d = open(os.environ['CORPUS_SLICE'], 'rb').read(); _secs = []
-    _nc = _st.unpack('>I', _d[16:20])[0]; _p = 28
-    for _ in range(_nc):
-        _c, _cs = _st.unpack('>II', _d[_p:_p + 8])
-        if _c == 1:
-            _ns = _st.unpack('>I', _d[_p + 48:_p + 52])[0]; _q = _p + 56
-            for _ in range(_ns):
-                _a, _sz, _off = _st.unpack('>3I', _d[_q + 32:_q + 44]); _secs.append((_a, _sz, _off)); _q += 68
-        _p += _cs
-    def _word(x):
+def _c_unescape_b(t):
+    out = bytearray(); i = 0
+    esc = {'n': 10, 't': 9, 'r': 13, 'a': 7, 'b': 8, 'f': 12, 'v': 11, '\\': 92, '"': 34, "'": 39, '?': 63}
+    while i < len(t):
+        c = t[i]
+        if c != '\\': out += c.encode('latin-1'); i += 1; continue
+        i += 1; c = t[i]
+        if c == 'x':
+            j = i + 1
+            while j < len(t) and t[j] in '0123456789abcdefABCDEF': j += 1
+            out.append(int(t[i + 1:j], 16) & 255); i = j
+        elif c in '01234567':
+            j = i
+            while j < len(t) and j < i + 3 and t[j] in '01234567': j += 1
+            out.append(int(t[i:j], 8) & 255); i = j
+        else: out.append(esc.get(c, ord(c))); i += 1
+    return bytes(out)
+def fix_code_strings(b, entry):
+    """`("}J3x})+x|B;x}k" + *(int *)(p + 0x10))`: Ghidra prints the small constant 0x2e0a as a pointer to the C string that the CODE bytes at that address
+    happen to spell (GLDriver: a 32-bit offset into the context added to a 'string'; 8 functions). A string literal that starts an addition and whose bytes
+    are found ONLY inside a code range of the image is that number."""
+    if _FCTIW is None or not text_ranges: return b, 0
+    n = 0
+    def rep(m):
+        nonlocal n
+        raw = _c_unescape_b(m.group(1))
+        if len(raw) < 4: return m.group(0)
+        hits = []
         for sa, sz_, off in _secs:
-            if sa <= x < sa + sz_ and off: return _st.unpack('>I', _d[off + x - sa:off + x - sa + 4])[0]
-        return 0
-    _FCTIW = set()
-    for _l in open(os.path.join(src, 'RANGES.tsv')):
-        _f = _l.rstrip('\n').split('\t')
-        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
-            for _r in _f[3].split(';'):
-                if not _r: continue
-                _lo, _hi = (int(x, 16) for x in _r.split('-'))
-                if any((_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15) for x in range(_lo, _hi, 4)):
-                    _FCTIW.add(int(_f[0], 16)); break
-    # NaN-pattern constants each function builds (`lis rD,hi` + `ori rD,rD,lo` / `addi rD,rD,lo` / nothing): Ghidra prints a float variable holding ANY NaN
-    # pattern as the bare token NAN (payload lost) although the stock's is 0x7fffffff (INT_MAX assigned to a union word Ghidra typed float). GH_NAN() in the
-    # recompile is math.h's 0x7fc00000. fix_nan() below substitutes the real bits.
-    _NANC = {}
-    for _l in open(os.path.join(src, 'RANGES.tsv')):
-        _f = _l.rstrip('\n').split('\t')
-        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
-            _cs = set()
-            for _r in _f[3].split(';'):
-                if not _r: continue
-                _lo, _hi = (int(x, 16) for x in _r.split('-'))
-                for x in range(_lo, _hi, 4):
-                    w = _word(x)
-                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
-                    rd = (w >> 21) & 31; v = (w & 0xffff) << 16; w2 = _word(x + 4)
-                    if (w2 >> 26) == 24 and ((w2 >> 21) & 31) == rd: v |= w2 & 0xffff       # ori rA,rS,imm (rS = rD)
-                    elif (w2 >> 26) == 14 and ((w2 >> 16) & 31) == rd:                     # addi rD,rD,simm
-                        v = (v + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff
-                    if (v >> 23) & 0xff == 0xff and v & 0x7fffff: _cs.add(v)
-            _NANC[int(_f[0], 16)] = _cs
-    # every 32-bit constant a function builds from immediates (`lis`+`ori`/`addi`, `li`): a function symbol Ghidra prints for one of these is the NUMBER (a PIC
-    # image forms real code addresses relative to the PIC base, never with lis/ori) - see fix_literal_syms()
-    _LITC = {}
-    for _l in open(os.path.join(src, 'RANGES.tsv')):
-        _f = _l.rstrip('\n').split('\t')
-        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
-            _cs = set()
-            for _r in _f[3].split(';'):
-                if not _r: continue
-                _lo, _hi = (int(x, 16) for x in _r.split('-'))
-                for x in range(_lo, _hi, 4):
-                    w = _word(x)
-                    if (w >> 26) == 14 and ((w >> 16) & 31) == 0:                  # li rD,simm
-                        _cs.add(w & 0xffff if not w & 0x8000 else (w & 0xffff) | 0xffff0000); continue
-                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
-                    rd = (w >> 21) & 31; hi = (w & 0xffff) << 16; _cs.add(hi)
-                    for y in range(x + 4, min(x + 4 + 4 * 16, _hi), 4):      # the low half may come a few instructions later (scheduled around other work)
-                        w2 = _word(y); op2 = w2 >> 26
-                        if op2 in (16, 18, 19): break                        # a branch ends the block
-                        if op2 == 24 and ((w2 >> 21) & 31) == rd: _cs.add(hi | (w2 & 0xffff))                 # ori rA,rD,imm
-                        elif op2 == 14 and ((w2 >> 16) & 31) == rd: _cs.add((hi + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff)   # addi rA,rD,simm
-                        if op2 in (14, 15, 24, 25, 32, 33, 34, 35) and ((w2 >> 21) & 31 if op2 in (14, 15, 32, 33, 34, 35) else (w2 >> 16) & 31) == rd and y != x: break   # rD overwritten
-            _LITC[int(_f[0], 16)] = _cs
+            if not off or not in_text('%x' % sa): continue
+            k = _d.find(raw + b'\0', off, off + sz_)
+            while k >= 0:
+                hits.append(sa + k - off); k = _d.find(raw + b'\0', k + 1, off + sz_)
+        if len(hits) > 1: hits = [h for h in hits if any(h <= d < h + 0x40 for d in _DISP.get(entry, ()))] or hits    # the index adds a few bytes to the displacement
+        if len(hits) != 1:
+            sys.stderr.write('CODE-STRING: %r hits %s in %x unresolved\n' % (raw[:20], [hex(h) for h in hits], entry)); return m.group(0)
+        n += 1; return '((unsigned char *)0x%08x)%s' % (hits[0], m.group(2))
+    b = re.sub(r'"((?:[^"\\\n]|\\.)*)"(\s*\+|\[)', rep, b)
+    return b, n
 def fix_literal_syms(b, entry):
     """`puVar5[2] = (uint)FUN_000308c0;` (GLDriver FUN_00023700 builds a packet header: `lis r2,3; ori r2,r2,0x8c0`): Ghidra names a number after the function that
     happens to live at that address, the link tree then resolves the name to the REBUILT function's address. A function symbol that is not called and whose
@@ -490,7 +583,8 @@ def fix_literal_syms(b, entry):
         nonlocal n
         if int(m.group(2), 16) not in cs: return m.group(0)
         n += 1; return '0x%s' % m.group(2)
-    b = re.sub(r'(?<![\w.>])(&?)(?:FUN|LAB)_([0-9a-f]{8})\b(?!\s*\()', lambda m: rep(m) if True else m.group(0), b)
+    b = re.sub(r'(?<![\w.>])(&?)(?:FUN|LAB)_([0-9a-f]{8})\b(?!\s*\()', rep, b)
+    b = re.sub(r'(?<![\w.>])(&)(?:DAT|UNK|PTR_DAT|PTR_LAB)_([0-9a-f]{8})\b', rep, b)     # the ADDRESS of a data object that is really a built constant
     return b, n
 def _operand(t, i):
     """end index of the primary expression starting at t[i] (after optional unary - * & and casts): an identifier with subscripts / member
@@ -737,7 +831,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\(\s*(?:undefined1|char|byte|undefined|uchar)\s+\[(\d)\]\s*\)', lambda m: '(%s)' % {'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(1), 'unsigned int'), b)
             b = re.sub(r'\(&\s*([A-Za-z_]\w*)\s*\)\s*\[', lambda m: '(%s)[' % m.group(1) if (m.group(1) in tables or m.group(1).startswith('switchdataD_')) else m.group(0), b)
             b = re.sub(r'&\s*([A-Za-z_]\w*)\b(?!\s*\))', lambda m: m.group(1) if (m.group(1) in tables and not m.group(1).startswith(('FLOAT_','DOUBLE_'))) else m.group(0), b)
-            b = re.sub(r'\b([a-z]{1,2})Ram([0-9a-f]{8})\b', lambda m: '(*(%s *)0x%s)' % ({'u': 'unsigned int', 'i': 'int', 'b': 'unsigned char', 'c': 'char', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long', 'ul': 'unsigned long long'}.get(m.group(1), 'unsigned int'), m.group(2)), b)
+            b = re.sub(r'\b([a-z]{1,2})Ram([0-9a-f]{8})\b', lambda m: ('(*(%s *)&DAT_%s)' if not in_text(m.group(2)) else '(*(%s *)0x%s)') % ({'u': 'unsigned int', 'i': 'int', 'b': 'unsigned char', 'c': 'char', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long', 'ul': 'unsigned long long'}.get(m.group(1), 'unsigned int'), m.group(2)), b)
             b = re.sub(r'\bregister0x[0-9a-f]{8}\b', '((unsigned int)__builtin_frame_address(0))', b)
             b = re.sub(r'&\s*(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '((unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\(\s*(?:DAT|UNK)_([0-9a-f]{8})\s*\)\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
@@ -752,6 +846,7 @@ for pi in range(0, len(funcs), part):
             b, _nns = fix_neg_shift(b)
             b, _nco = fix_code_offsets(b)
             b, _nlit = fix_literal_syms(b, int(a, 16))
+            b, _ncs = fix_code_strings(b, int(a, 16))
             b, _nfa = fix_float_args(b)
             # an integer / pointer cast of a float LITERAL is its bit pattern: Ghidra inlines a read-only float constant it read with an integer load
             # (GLDriver FUN_000a9ac0: `local_54 ^ (uint)1.0`, `param_4 == (undefined *)1.0` - the stock compares words with 0x3f800000 loaded by

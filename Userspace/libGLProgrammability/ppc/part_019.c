@@ -2650,7 +2650,7 @@ LAB_97c0fe04:
       local_1c4 = 0;
       local_1c0 = 0;
       local_1dc = 2;
-      local_1e0 = ((undefined2 (*)())_AddConstantParam)(param_1,local_208,local_204,0,0x3f800000,0,0,0);
+      local_1e0 = _AddConstantParam(param_1,local_208,local_204,0,0x3f800000,0,0,0);
       local_1ac = 1;
       local_1a4 = 4;
       local_1a8 = 0;
@@ -2947,7 +2947,7 @@ LAB_97c10628:
           local_38 = 0;
           local_40 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_97c30a58);
           *(uint *)(param_2 + 0x1c) = *(uint *)(param_2 + 0x1c) & 0xfc7fffff | 0x1000000;
-          uVar4 = ((undefined2 (*)())_AddConstantParam)(param_1,0,1,0,local_40,0,0,0);
+          uVar4 = _AddConstantParam(param_1,0,1,0,local_40,0,0,0);
           *(undefined2 *)(param_2 + 0x22) = uVar4;
         }
         return iVar5;
@@ -2998,7 +2998,7 @@ int _ConstantPropagateFold(param_1)
           iVar4 = _HashSetGet(uVar2,&local_70);
           if ((iVar4 != 0) && (*(int *)(iVar4 + 0x14) != 0)) {
             *(uint *)(iVar6 + 0x10) = *(uint *)(iVar6 + 0x10) & 0xfc7fffff | 0x1000000;
-            uVar5 = ((undefined2 (*)())_AddConstantParam)(param_1,*(undefined4 *)(iVar4 + 8),
+            uVar5 = _AddConstantParam(param_1,*(undefined4 *)(iVar4 + 8),
                                       *(undefined4 *)(iVar4 + 0xc),*(undefined4 *)(iVar4 + 0x10),
                                       *(undefined4 *)(iVar4 + 0x18),*(undefined4 *)(iVar4 + 0x1c),
                                       *(undefined4 *)(iVar4 + 0x20),*(undefined4 *)(iVar4 + 0x24));

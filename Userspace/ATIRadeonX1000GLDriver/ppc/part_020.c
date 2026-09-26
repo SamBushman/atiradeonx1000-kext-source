@@ -1050,7 +1050,7 @@ int FUN_000dd1f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     uVar9 = 0;
     do {
       ((int (*)())FUN_000dcef4)(param_1,uVar10 >> 0x10 & 0x3f,param_3,param_4,param_5,param_6,param_7);
-      if (((undefined4 *)(uVar10 & 0x3f0000) == &DAT_001b0000) ||
+      if (((undefined4 *)(uVar10 & 0x3f0000) == 0x001b0000) ||
          ((undefined4 *)(uVar10 & 0x3f0000) == (undefined4 *)0x1c0000)) {
         param_3 = uVar10 & 0xffff;
         FUN_001a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,in_r10);
@@ -1264,7 +1264,7 @@ int FUN_000dd6bc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         bVar2 = true;
       }
     }
-    else if ((puVar3 == &DAT_001b0000) || (bVar2 = false, puVar3 == (undefined4 *)0x1c0000)) {
+    else if ((puVar3 == 0x001b0000) || (bVar2 = false, puVar3 == (undefined4 *)0x1c0000)) {
       param_3 = uVar7 & 0xffff;
       FUN_001a32d0(auStack_b8,"%d",param_3,param_4,param_5,param_6,param_7,param_8);
       bVar2 = true;

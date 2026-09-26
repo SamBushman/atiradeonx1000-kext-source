@@ -431,7 +431,7 @@ int FUN_000d5900(param_1, param_2)
   uVar3 = *puVar8 + 1;
   *puVar8 = uVar3;
   if (((*(uint *)(param_1 + 0x44) & 0xa00000) != 0) ||
-     (((int)*(uint *)(param_1 + 0x44) < 0 && (*(short *)("}J3x})+x|B;x}k" + iVar6) == -0x7e06)))) {
+     (((int)*(uint *)(param_1 + 0x44) < 0 && (*(short *)(((unsigned char *)0x00002d48) + iVar6) == -0x7e06)))) {
     if (*(uint *)(param_2 + 8) <= uVar3) {
       uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
       if (*(int *)(param_2 + 0xc) != 0) {

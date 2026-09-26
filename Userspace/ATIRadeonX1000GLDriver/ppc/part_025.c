@@ -1716,8 +1716,12 @@ LAB_000f4b94:
 }
 
 /* FUN_000f4bc8 @ 0xf4bc8 (32 bytes) */
-bool FUN_000f4bc8(float param_1,float param_2)
+int FUN_000f4bc8(param_1_w, param_2_w)
+  unsigned int param_1_w;
+  unsigned int param_2_w;
 {
+  float param_1 = GH_U2F(param_1_w);
+  float param_2 = GH_U2F(param_2_w);
   return param_2 < param_1;
 }
 

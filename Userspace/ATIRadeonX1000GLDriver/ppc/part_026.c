@@ -3161,7 +3161,7 @@ LAB_000f9f08:
     bVar1 = true;
     bVar2 = true;
   }
-  if (((undefined4 *)(uVar17 & 0x3f0000) != &DAT_001b0000) && (!bVar1)) goto LAB_000fa744;
+  if (((undefined4 *)(uVar17 & 0x3f0000) != 0x001b0000) && (!bVar1)) goto LAB_000fa744;
   iVar20 = 1;
   iVar5 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar5;
@@ -4166,7 +4166,7 @@ LAB_000fb800:
   }
   else {
     if (((undefined4 *)(uVar22 & 0x3f0000) == (undefined4 *)0x1c0000) ||
-       ((undefined4 *)(uVar22 & 0x3f0000) == &DAT_001b0000)) {
+       ((undefined4 *)(uVar22 & 0x3f0000) == 0x001b0000)) {
       bVar2 = false;
       goto LAB_000fb800;
     }

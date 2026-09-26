@@ -5144,7 +5144,7 @@ int FUN_000c0880(param_1)
         *(undefined2 *)((int)puVar21 + 0x22) = 1;
         *(undefined2 *)(puVar21 + 8) = 1;
         puVar21[7] = uVar9 & 0xffffffe5;
-        uVar8 = (*(unsigned int *)0x001dbf94);
+        uVar8 = (*(unsigned int *)&DAT_001dbf94);
         *(undefined2 *)(puVar21 + 5) = 0;
         puVar21[-3] = uVar8;
         puVar21[-1] = uVar8;
@@ -5322,10 +5322,10 @@ int FUN_000c0fd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         *(undefined2 *)(iVar27 + 0x36) = 2;
         *(ushort *)(iVar27 + 10) = *(ushort *)(iVar27 + 10) & 0xefff | 0x2000;
         *(ushort *)(iVar27 + 0x34) = *(ushort *)(iVar27 + 0x34) & 0xffdf | 0x40;
-        uVar28 = (*(unsigned int *)0x001dbf90);
+        uVar28 = (*(unsigned int *)&DAT_001dbf90);
         *(undefined2 *)(iVar27 + 0x38) = 1;
         *(undefined4 *)(iVar27 + 0xc) = uVar28;
-        *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)0x001dbf94);
+        *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
       }
       if ((((uVar14 == 7) && (*(short *)(iVar27 + 8) == *(short *)(iVar27 + 0xc))) &&
           (*(int *)(iVar27 + 8) == *(int *)(iVar27 + 0x10))) &&
@@ -5336,10 +5336,10 @@ int FUN_000c0fd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         *(undefined2 *)(iVar27 + 0x36) = 2;
         *(ushort *)(iVar27 + 10) = *(ushort *)(iVar27 + 10) & 0xefff | 0x2000;
         *(ushort *)(iVar27 + 0x34) = *(ushort *)(iVar27 + 0x34) & 0xffdf | 0x40;
-        uVar28 = (*(unsigned int *)0x001dbf90);
+        uVar28 = (*(unsigned int *)&DAT_001dbf90);
         *(undefined2 *)(iVar27 + 0x38) = 1;
         *(undefined4 *)(iVar27 + 0xc) = uVar28;
-        *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)0x001dbf94);
+        *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
       }
       if (uVar14 == 0) {
         uVar17 = *(ushort *)(iVar27 + 0x36);
@@ -5352,11 +5352,11 @@ int FUN_000c0fd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
           *(undefined2 *)(iVar27 + 0x36) = 2;
           *(undefined2 *)(iVar27 + 0x34) = *(undefined2 *)(iVar27 + 0x38);
           *(undefined4 *)(iVar27 + 8) = *(undefined4 *)(iVar27 + 0x10);
-          uVar28 = (*(unsigned int *)0x001dbf90);
+          uVar28 = (*(unsigned int *)&DAT_001dbf90);
           uVar12 = 1;
           *(undefined2 *)(iVar27 + 0x38) = 1;
           *(undefined4 *)(iVar27 + 0xc) = uVar28;
-          *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)0x001dbf94);
+          *(undefined4 *)(iVar27 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
         }
         uVar29 = uVar17;
         if (((*(ushort *)(iVar27 + 8) & 0x300) == 0) && ((uVar17 & 2) == 0)) {
@@ -5392,7 +5392,7 @@ int FUN_000c0fd0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
              (fVar4 = *(float *)(iVar27 + 0x2c), fVar4 < FLOAT_001aa100)) {
             bVar3 = true;
             *(undefined2 *)(iVar27 + 0x38) = 1;
-            uVar28 = (*(unsigned int *)0x001dbf94);
+            uVar28 = (*(unsigned int *)&DAT_001dbf94);
             *(float *)(iVar27 + 0x2c) = fVar4 + fVar4;
             *(undefined4 *)(iVar27 + 0x10) = uVar28;
           }
@@ -5708,7 +5708,7 @@ LAB_000c14b0:
               *(undefined2 *)((int)puVar24 + 0x22) = 1;
               *(undefined2 *)(puVar24 + 8) = 1;
               puVar24[7] = uVar19 & 0xffffffe5;
-              uVar28 = (*(unsigned int *)0x001dbf94);
+              uVar28 = (*(unsigned int *)&DAT_001dbf94);
               *(undefined2 *)(puVar24 + 5) = 0;
               puVar24[-3] = uVar28;
               puVar24[-1] = uVar28;
@@ -5845,11 +5845,11 @@ int FUN_000c1780(param_1, param_2, param_3)
     do {
       puVar17[0x3a] = 1;
       puVar17[0x1a] = 1;
-      uVar20 = (*(unsigned int *)0x001dbf94);
+      uVar20 = (*(unsigned int *)&DAT_001dbf94);
       bVar3 = iVar6 != 2;
       puVar17 = puVar17 + 1;
       iVar6 = iVar6 + 1;
-      *(undefined4 *)(puVar19 + 4) = (*(unsigned int *)0x001dbf94);
+      *(undefined4 *)(puVar19 + 4) = (*(unsigned int *)&DAT_001dbf94);
       *(undefined4 *)(puVar19 + 0x24) = uVar20;
       puVar19 = puVar19 + 2;
     } while (bVar3);
@@ -6033,10 +6033,10 @@ LAB_000c1cec:
             *(undefined2 *)(iVar22 + 0x36) = 2;
             *(ushort *)(iVar22 + 10) = *(ushort *)(iVar22 + 10) & 0xefff | 0x2000;
             *(ushort *)(iVar22 + 0x34) = *(ushort *)(iVar22 + 0x34) & 0xffdf | 0x40;
-            uVar20 = (*(unsigned int *)0x001dbf90);
+            uVar20 = (*(unsigned int *)&DAT_001dbf90);
             *(undefined2 *)(iVar22 + 0x38) = 1;
             *(undefined4 *)(iVar22 + 0xc) = uVar20;
-            *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)0x001dbf94);
+            *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
           }
           if ((((uVar13 == 7) && (*(short *)(iVar22 + 8) == *(short *)(iVar22 + 0xc))) &&
               (*(int *)(iVar22 + 8) == *(int *)(iVar22 + 0x10))) &&
@@ -6047,10 +6047,10 @@ LAB_000c1cec:
             *(undefined2 *)(iVar22 + 0x36) = 2;
             *(ushort *)(iVar22 + 10) = *(ushort *)(iVar22 + 10) & 0xefff | 0x2000;
             *(ushort *)(iVar22 + 0x34) = *(ushort *)(iVar22 + 0x34) & 0xffdf | 0x40;
-            uVar20 = (*(unsigned int *)0x001dbf90);
+            uVar20 = (*(unsigned int *)&DAT_001dbf90);
             *(undefined2 *)(iVar22 + 0x38) = 1;
             *(undefined4 *)(iVar22 + 0xc) = uVar20;
-            *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)0x001dbf94);
+            *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
           }
           if (uVar13 == 0) {
             uVar15 = *(ushort *)(iVar22 + 0x36);
@@ -6063,11 +6063,11 @@ LAB_000c1cec:
               *(undefined2 *)(iVar22 + 0x36) = 2;
               *(undefined2 *)(iVar22 + 0x34) = *(undefined2 *)(iVar22 + 0x38);
               *(undefined4 *)(iVar22 + 8) = *(undefined4 *)(iVar22 + 0x10);
-              uVar20 = (*(unsigned int *)0x001dbf90);
+              uVar20 = (*(unsigned int *)&DAT_001dbf90);
               uVar10 = 1;
               *(undefined2 *)(iVar22 + 0x38) = 1;
               *(undefined4 *)(iVar22 + 0xc) = uVar20;
-              *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)0x001dbf94);
+              *(undefined4 *)(iVar22 + 0x10) = (*(unsigned int *)&DAT_001dbf94);
             }
             uVar21 = uVar15;
             if (((*(ushort *)(iVar22 + 8) & 0x300) == 0) && ((uVar15 & 2) == 0)) {
@@ -6104,7 +6104,7 @@ LAB_000c1cec:
                  (fVar4 = *(float *)(iVar22 + 0x2c), fVar4 < FLOAT_001aa100)) {
                 bVar3 = true;
                 *(undefined2 *)(iVar22 + 0x38) = 1;
-                uVar20 = (*(unsigned int *)0x001dbf94);
+                uVar20 = (*(unsigned int *)&DAT_001dbf94);
                 *(float *)(iVar22 + 0x2c) = fVar4 + fVar4;
                 *(undefined4 *)(iVar22 + 0x10) = uVar20;
               }
@@ -6425,7 +6425,7 @@ LAB_000c14b0:
                 puVar17[0x11] = 1;
                 puVar17[0x10] = 1;
                 *(uint *)(puVar17 + 0xe) = uVar11 & 0xffffffe5;
-                uVar20 = (*(unsigned int *)0x001dbf94);
+                uVar20 = (*(unsigned int *)&DAT_001dbf94);
                 puVar17[10] = 0;
                 *(undefined4 *)(puVar17 + -6) = uVar20;
                 *(undefined4 *)(puVar17 + -2) = uVar20;
@@ -8539,11 +8539,11 @@ LAB_000c46e8:
         do {
           puVar14[0x3a] = 1;
           puVar14[0x1a] = 1;
-          uVar3 = (*(unsigned int *)0x001dbf94);
+          uVar3 = (*(unsigned int *)&DAT_001dbf94);
           bVar1 = iVar13 != 2;
           puVar14 = puVar14 + 1;
           iVar13 = iVar13 + 1;
-          *(undefined4 *)(puVar11 + 4) = (*(unsigned int *)0x001dbf94);
+          *(undefined4 *)(puVar11 + 4) = (*(unsigned int *)&DAT_001dbf94);
           *(undefined4 *)(puVar11 + 0x24) = uVar3;
           puVar11 = puVar11 + 2;
         } while (bVar1);

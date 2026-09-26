@@ -4726,7 +4726,7 @@ LAB_0000c3e4:
   param_2[0x36] = fVar1;
   param_2[0x37] = local_3c;
   param_2[0x38] = uVar4 | uVar7 << 0x10;
-  param_2[0x39] = &DAT_00010001;
+  param_2[0x39] = 0x00010001;
   param_2[0x3a] = fVar2;
   param_2[0x3b] = local_3c;
   param_2[0x3c] = uVar4;

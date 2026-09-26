@@ -816,8 +816,12 @@ int FUN_0010ae20(param_1, param_2, param_3)
 }
 
 /* FUN_0010aee8 @ 0x10aee8 (80 bytes) */
-float * FUN_0010aee8(float *param_1,int param_2,float param_3)
+int FUN_0010aee8(param_1, param_2, param_3_w)
+  float *param_1;
+  int param_2;
+  unsigned int param_3_w;
 {
+  float param_3 = GH_U2F(param_3_w);
   double dVar1;
   
   dVar1 = (double)((double (*)())FUN_0010aad4)(*(undefined4 *)(param_2 + 0x124));
@@ -889,8 +893,12 @@ int FUN_0010af38(param_1, param_2, param_3)
 }
 
 /* FUN_0010b118 @ 0x10b118 (108 bytes) */
-void FUN_0010b118(float *param_1,int param_2,float param_3)
+int FUN_0010b118(param_1, param_2, param_3_w)
+  float *param_1;
+  int param_2;
+  unsigned int param_3_w;
 {
+  float param_3 = GH_U2F(param_3_w);
   float fVar1;
   
   fVar1 = param_3;
@@ -946,8 +954,13 @@ int FUN_0010b184(int *param_1,undefined4 param_2,int *param_3,double fparam_1)
 }
 
 /* FUN_0010b284 @ 0x10b284 (88 bytes) */
-void FUN_0010b284(float *param_1,int param_2,int param_3,float param_4)
+int FUN_0010b284(param_1, param_2, param_3, param_4_w)
+  float *param_1;
+  int param_2;
+  int param_3;
+  unsigned int param_4_w;
 {
+  float param_4 = GH_U2F(param_4_w);
   float fVar1;
   
   fVar1 = param_4;
@@ -962,8 +975,13 @@ void FUN_0010b284(float *param_1,int param_2,int param_3,float param_4)
 }
 
 /* FUN_0010b2dc @ 0x10b2dc (80 bytes) */
-void FUN_0010b2dc(float *param_1,int param_2,int param_3,float param_4)
+int FUN_0010b2dc(param_1, param_2, param_3, param_4_w)
+  float *param_1;
+  int param_2;
+  int param_3;
+  unsigned int param_4_w;
 {
+  float param_4 = GH_U2F(param_4_w);
   if ((*(uint *)(param_3 * 0x18 + param_2 + 0xa0) & 2) != 0) {
     if (param_4 < FLOAT_001aa0d4) {
       param_4 = -param_4;
@@ -1154,8 +1172,14 @@ int FUN_0010b914(param_1, param_2)
 }
 
 /* FUN_0010b93c @ 0x10b93c (344 bytes) */
-float * FUN_0010b93c(float *param_1,int param_2,int param_3,float param_4,int param_5)
+int FUN_0010b93c(param_1, param_2, param_3, param_4_w, param_5)
+  float *param_1;
+  int param_2;
+  int param_3;
+  unsigned int param_4_w;
+  int param_5;
 {
+  float param_4 = GH_U2F(param_4_w);
   uint uVar1;
   float fVar2;
   double dVar3;

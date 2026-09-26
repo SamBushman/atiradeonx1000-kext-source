@@ -866,7 +866,7 @@ void FUN_0004d620(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     return;
   }
   if ((uVar4 & 0x80100000) == 0x80000000) {
-    if (*(short *)("}J3x})+x|B;x}k" + *(int *)(*(int *)(param_1 + 4) + 0x10)) == -0x7e06)
+    if (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(param_1 + 4) + 0x10)) == -0x7e06)
     goto LAB_0004d6ac;
   }
   else if ((uVar4 & 0x800000) != 0) {
@@ -4794,7 +4794,7 @@ int FUN_00053b60(param_1, param_2)
       uVar5 = *(uint *)(param_1 + 0x18a4);
       if ((uVar1 & 0x100000) == 0) {
         if ((((int)uVar1 < 0) &&
-            (*(short *)("}J3x})+x|B;x}k" + *(int *)(*(int *)(param_1 + 4) + 0x10)) == -0x7e06)) ||
+            (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(param_1 + 4) + 0x10)) == -0x7e06)) ||
            (uVar4 = 0, (uVar1 & 0x80800000) == 0x800000)) {
           uVar4 = 1;
         }

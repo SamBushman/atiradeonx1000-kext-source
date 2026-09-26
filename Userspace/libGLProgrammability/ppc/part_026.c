@@ -2805,8 +2805,8 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS
   byte in_cr0;
   
   if ((param_1 == param_2) &&
-     (iVar3 = GetGlobalPoolAllocator(), iVar1 = (*(int *)0xa7b7b71c), *(int *)param_3 == iVar3)) {
-    piVar2 = (int *)((*(int *)0xa7b7b71c) + 8);
+     (iVar3 = GetGlobalPoolAllocator(), iVar1 = (*(int *)&DAT_a7b7b71c), *(int *)param_3 == iVar3)) {
+    piVar2 = (int *)((*(int *)&DAT_a7b7b71c) + 8);
     do {
       if (in_RESERVE != '\0') {
         iVar3 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);

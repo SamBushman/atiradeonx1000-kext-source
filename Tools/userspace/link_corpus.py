@@ -494,6 +494,37 @@ if cfg.get('symbolize_literals') and img_lo >= 0x10000000:
         for nm in sorted(set(nm_ for nm_, _ in lit_syms.values())):
             f_.write('extern unsigned char %s asm("%s");\n' % (nm, nm))
 
+# An image whose addresses are small (GLDriver: 0x1dc198) cannot symbolise every literal - masks and offsets look the same - but Ghidra folds a PIC
+# `addis r2,r31,0x12; lwz r0,disp(r2)` into the ABSOLUTE stock address, printed `(x & 0x7c) + 0x1dc198` / `*(uint *)(i * 4 + 0x1dc0d8)`: an ADDRESS added to an
+# index. Such a literal - inside a writable/const DATA section (not eh_frame, exception tables, zerofill), used as an operand of a binary `+` and not of a
+# bitwise / comparison operator - is expressed from a label, so it survives the rebuilt layout (GLDriver FUN_000c1780 read 1.0f from a wrong address).
+_CTX_LIT = re.compile(r'(?<![\w.])0x0*([0-9a-f]{5,8})\b')
+ctx_lit_syms = {}
+def _ctx_lit_ok(txt, mt):
+    v = int(mt.group(1), 16)
+    left = txt[max(0, mt.start() - 24):mt.start()].rstrip(); right = txt[mt.end():mt.end() + 6].lstrip()
+    if not left or left[-1] in '"\'': return False
+    lplus = left.endswith('+') and not left.endswith('++') and len(left) > 1 and re.search(r'[\w)\]]\s*\+$', left) is not None
+    rplus = right.startswith('+') and not right.startswith('++')
+    if not (lplus or rplus): return False
+    if re.search(r'(&|\||\^|<|>|=|!|~|-|\*)\s*$', left) and not lplus: return False
+    if re.match(r'(&|\||\^|<|>|=|!|\*)', right): return False
+    return True
+if cfg.get('symbolize_literals_ctx'):
+    for mt in _CTX_LIT.finditer(body):
+        v = int(mt.group(1), 16)
+        if v in ctx_lit_syms or not (img_lo <= v < img_hi): continue
+        sec_v = m.sec_at(v)
+        if sec_v is None or in_code(v) or (sec_v['flags'] & 0xff) in (1, 0xc): continue
+        if sec_v['name'] in ('__eh_frame', '__gcc_except_tab', '__dyld', '__la_symbol_ptr', '__nl_symbol_ptr') or not _ctx_lit_ok(body, mt): continue
+        _b = v & ~3
+        ctx_lit_syms[v] = ('SYM_%x' % _b, v - _b)
+        needed['SYM_%x' % _b] = _b
+    with open(os.path.join(out, 'decls.h'), 'a') as f_:
+        for nm in sorted(set(nm_ for nm_, _ in ctx_lit_syms.values())):
+            f_.write('extern unsigned char %s asm("%s");\n' % (nm, nm))
+    print('%d context-symbolised data address literals' % len(ctx_lit_syms))
+
 # names that are really numeric constants Ghidra labelled as data (`&DAT_00010001` = 0x10001, an address in no section of the image, or `UINT_00002ee0` in code)
 const_names = []
 for nm, a in sorted(needed.items()):
@@ -1052,6 +1083,8 @@ for pdir_, f in _part_files:
                 txt = re.sub(r'\b0x([0-9a-f]{8})([0-9a-f]{8})\b', _split64, txt)
                 txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
+            if ctx_lit_syms:
+                txt = _CTX_LIT.sub(lambda x: ('((unsigned int)&%s + %d)' % ctx_lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in ctx_lit_syms and _ctx_lit_ok(txt, x) else x.group(0), txt)
             if bind_info:
                 txt = rewrites.bind_calls(txt, int(mm.group(2), 16), ledger_by_addr, short_to_c, siblings, callees, unresolved_calls)
             ch = txt.split('\n')

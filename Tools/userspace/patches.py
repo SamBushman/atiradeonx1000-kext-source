@@ -174,7 +174,11 @@ def _fix_two_empty_cases(conv):
     n = conv.count('case "":')
     if n != 2:
         raise PatchError('FUN_000cea6c (0xcea6c): expected 2 `case "":` labels, found %d' % n)
-    return conv.replace('case "":', 'case 4:', 1).replace('case "":', 'case 5:', 1)
+    # the range test in front of the switch is the same constant: `cmplwi cr7,r9,0x5; bgt` sends 6..15 to the `?` case, Ghidra printed `pcVar4 < ""` (the zero
+    # byte at header address 6). Compiled, the test was always true and the `?` name was never written (found by the pure-function fuzz)
+    if conv.count('if (pcVar4 < "") {') != 1:
+        raise PatchError('FUN_000cea6c (0xcea6c): expected one `if (pcVar4 < "") {`')
+    return conv.replace('case "":', 'case 4:', 1).replace('case "":', 'case 5:', 1).replace('if (pcVar4 < "") {', 'if ((uint)pcVar4 < 6) {', 1)
 
 
 PATCHES = {

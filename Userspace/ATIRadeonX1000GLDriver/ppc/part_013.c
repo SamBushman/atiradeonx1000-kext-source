@@ -3729,7 +3729,7 @@ int FUN_0008fc70(param_1)
   if (*(int *)(param_1 + 0x44) < 0) {
     FUN_0004fc80(param_1,1,3,0,1,0,0,0);
     *(undefined4 *)(param_1 + 0x1a0) = 1;
-    if ("}J3x})+x|B;x}k"[iVar4 + 3] == '\0') {
+    if (((unsigned char *)0x00002d48)[iVar4 + 3] == '\0') {
       uVar3 = *(uint *)(param_1 + 0x44);
       uVar5 = 2;
     }
@@ -3865,7 +3865,7 @@ int FUN_000900a0(param_1)
   *(undefined4 *)(param_1 + 0x1ca0) = 1;
   if ((int)uVar8 < 0) {
     *(undefined4 *)(param_1 + 0x1ca0) = 3;
-    if ("}J3x})+x|B;x}k"[iVar5 + 3] != '\0') {
+    if (((unsigned char *)0x00002d48)[iVar5 + 3] != '\0') {
       *(undefined4 *)(param_1 + 0x1ca0) = 7;
     }
   }
@@ -3891,10 +3891,10 @@ int FUN_000900a0(param_1)
   *(undefined4 *)(param_1 + 0x1ba0) = 0;
   uVar4 = *(uint *)(param_1 + 0x44);
   if ((int)uVar4 < 0) {
-    if (*(short *)("}J3x})+x|B;x}k" + iVar5) == -0x7e06) {
+    if (*(short *)(((unsigned char *)0x00002d48) + iVar5) == -0x7e06) {
       *(undefined4 *)(param_1 + 0x1b9c) = 7;
     }
-    if ("}J3x})+x|B;x}k"[iVar5 + 4] == '\0') {
+    if (((unsigned char *)0x00002d48)[iVar5 + 4] == '\0') {
       uVar1 = *(uint *)(param_1 + 0x1b9c);
     }
     else {
@@ -4235,7 +4235,7 @@ int FUN_00090990(param_1, param_2)
   if ((((((*(char *)(iVar3 + 0x21) != '\0') && ((param_2[3] & 0x10000000) == 0)) &&
         ((*(int *)(*(int *)(iVar3 + 0x18) + 0x198) == 0 || (*(int *)(iVar3 + 0x1cc) != 0)))) &&
        ((((unsigned char *)0x00004304)[iVar4] == '\0' || (*(int *)(iVar3 + 0x1cc) != 0)))) &&
-      (("}J3x})+x|B;x}k"[iVar4 + 2] == '\0' || ("}J3x})+x|B;x}k"[iVar4 + 6] == '\0')))) && (!bVar1))
+      ((((unsigned char *)0x00002d48)[iVar4 + 2] == '\0' || (((unsigned char *)0x00002d48)[iVar4 + 6] == '\0')))) && (!bVar1))
   {
     if (*(char *)(iVar3 + 0x20) == '\0') {
       *(undefined1 *)(iVar3 + 0x20) = 1;

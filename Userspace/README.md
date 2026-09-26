@@ -285,7 +285,7 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   bytes Ghidra saw of a token buffer (`char local_120; char local_11f;` + `GetPart(p, &local_120, 0)`; `rewrites.mirror_frame` now reserves 0x100 bytes above an
   address-taken byte scalar); the libgcc 64-bit shift helpers differ for out-of-range counts only (toolchain functions, excluded); `saveFP`/`restFP` millicode
   and two clipped fragments are not functions.
-* **GLDriver: 2723 candidate functions, 12 trials each.** Three real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
+* **GLDriver: 2723 candidate functions, 12 trials each.** Seven real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
   1. `fix_code_offsets` - a struct-field OFFSET that equals a function's address is printed as that function's symbol (`*(int *)(FUN_00024870 + i * 4 + param_1) = ..`:
      `addis r2,r2,2; stw r4,0x4870(r2)`); the link tree resolves the name to the rebuilt function's address, so FUN_00077560 stored through a wild pointer.
      ~690 sites (context offsets 0x2748, 0x26c8, 0x1e24, 0x1dc4 ...), and `((code **)FUN_00030c50)[i]` table bases. Nothing adds to a function's address.
@@ -295,6 +295,14 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   3. `fix_home_slots` - Ghidra declared BOTH `undefined4 uStack0000001c;` and used `stack0x0000001c` for the same word (the caller's parameter home area, where
      a by-value 4-byte mask is spilled); the byte-mask loop wrote one name and the final store read the other (FUN_000f2f28 / f2f84 / f302c / f33f8 and 20 more
      in GLDriver, glprog, GA and VA: the result never reached `*param_1`). Both names now map to the function's own `ghidra_home[]`.
+  4. `uRamXXXXXXXX` (Ghidra's read of an absolute address it has no symbol for) was left as a raw absolute dereference; it is now a `DAT_` reference (FUN_000c1780
+     stored 0 instead of the 1.0f at 0x1dbf94). And absolute data-section literals used as `index + 0x1dc198` are expressed from a label
+     (`symbolize_literals_ctx` in `link_config/gld.json`, 29 literals).
+  5. A C string literal that starts an addition or is indexed and whose bytes occur only in a code range is the small number of that address
+     (`"}J3x})+x|B;x}k" + off` = 0x2d48 / 0x2e0a...; ~105 sites in 8 functions); `pcVar4 < ""` in FUN_000cea6c is `< 6`.
+  6. `float param_N` that the stock reads from a GENERAL register (`stw r5,-0x20(r1); lfs f13,-0x20(r1)`: FUN_0010aee8 / 10b118 / 10b284 / 10b2dc / 10b93c /
+     f4bc8, glprog `_AddConstantParam`) became an `unsigned int` word + a local float (the prototype-style float was received in f1).
+  7. `&DAT_001b0000` etc. that the stock builds with `lis` are numbers (a mask compare read a label's address).
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
   wrong rebuilt function and reports crashes that are not there.
 ### Undeclared argument registers (`in_rN`, issue #70)
