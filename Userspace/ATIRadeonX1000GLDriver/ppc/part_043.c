@@ -4855,7 +4855,7 @@ LAB_0014fa98:
   } while (iVar19 != 3);
   bVar2 = false;
 LAB_0014fa80:
-  if (puVar20 != (uint *)((int)&MACH_HEADER.magic + 3)) {
+  if (puVar20 != (uint *)((int)((unsigned char *)0x0) + 3)) {
     iVar3 = iVar3 + 4;
     if (bVar2) goto LAB_0014fad0;
     local_68 = puVar20;
@@ -4865,7 +4865,7 @@ LAB_0014fa80:
     return 0;
   }
 LAB_0014fad0:
-  if (local_68 == (uint *)((int)&MACH_HEADER.magic + 2)) {
+  if (local_68 == (uint *)((int)((unsigned char *)0x0) + 2)) {
     uVar4 = FUN_00105594(*param_2,param_2[1]);
     FUN_00106004(uVar4,2,uVar5,1,*(undefined4 *)(iStack00000020 + 8));
     iVar19 = FUN_00105594(*param_2,param_2[1]);
@@ -4911,7 +4911,7 @@ LAB_0014fad0:
     iVar19 = FUN_001054ec(iVar18,iVar3);
     *(undefined4 *)(iVar19 + 0x10) = local_8c;
   }
-  else if (local_68 == (uint *)((int)&MACH_HEADER.magic + 1)) {
+  else if (local_68 == (uint *)((int)((unsigned char *)0x0) + 1)) {
     uVar4 = FUN_00105594(*param_2,param_2[1]);
     FUN_00106004(uVar4,1,uVar5,1,*(undefined4 *)(iStack00000020 + 8));
     iVar19 = FUN_00105594(*param_2,param_2[1]);

@@ -7898,7 +7898,7 @@ LAB_000c3a40:
       if ((uVar4 & 0x100) == 0) {
         if ((uVar4 & 0x200) != 0) {
           uVar5 = puVar18[3];
-          puVar16 = (ushort *)((int)&MACH_HEADER.magic + 1);
+          puVar16 = (ushort *)((int)((unsigned char *)0x0) + 1);
           goto LAB_000c3ab0;
         }
       }
@@ -7916,7 +7916,7 @@ LAB_000c3ab0:
           puVar16 = (ushort *)(int)(short)(ushort)bVar6;
           if (*(short *)(iVar9 + 0x84) == -1) {
             uVar10 = 2;
-            puVar16 = (ushort *)((int)&MACH_HEADER.magic + 2);
+            puVar16 = (ushort *)((int)((unsigned char *)0x0) + 2);
           }
           *(short *)((iVar12 + uVar10) * 2 + param_1 + 0x80) = (short)param_2;
           puVar20[-1] = (ushort)puVar16 | puVar20[-1] & 0xfffc;
@@ -9908,7 +9908,7 @@ int FUN_000c6470(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             param_4 = auStack_864;
             do {
               uVar8 = param_4[param_8];
-              if ((uVar3 == uVar8) && (param_5 != (uint *)((int)&MACH_HEADER.magic + 2))) {
+              if ((uVar3 == uVar8) && (param_5 != (uint *)((int)((unsigned char *)0x0) + 2))) {
                 uVar5 = 0;
                 *(undefined1 *)(puVar13 + 8) = 1;
               }
@@ -10292,7 +10292,7 @@ int FUN_000c6ff0(param_1, param_2)
   }
   else {
     puVar1 = *(undefined **)(param_1 + 0x23d4);
-    if (((puVar1 + -0x7240 < &MACH_HEADER.ncmds) || (puVar1 + -0x7100 < &MACH_HEADER.ncmds)) ||
+    if (((puVar1 + -0x7240 < ((unsigned char *)0x10)) || (puVar1 + -0x7100 < ((unsigned char *)0x10))) ||
        (((((puVar1 != (undefined *)0x71c0 &&
            ((((puVar1 != (undefined *)0x71c2 && (puVar1 != (undefined *)0x71c6)) &&
              (puVar1 != (undefined *)0x71ce)) &&

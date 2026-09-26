@@ -556,7 +556,7 @@ LAB_00173fa0:
     iVar3 = FUN_00113090(*(undefined4 *)(*(int *)(*(int *)(param_1 + 0xb0) + 0x88) + 8),
                          *(undefined4 *)(param_1 + 0x238));
     if (iVar3 != 0) {
-      pdVar11 = &MACH_HEADER.magic;
+      pdVar11 = ((unsigned char *)0x0);
       iVar3 = FUN_0011320c(*(undefined4 *)(*(int *)(*(int *)(param_1 + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(param_1 + 0x238));
       if (iVar3 == 0) {
@@ -616,7 +616,7 @@ LAB_00173fa0:
       }
     }
     piVar13 = *(int **)(param_1 + 0xb0);
-    pdVar11 = &MACH_HEADER.magic;
+    pdVar11 = ((unsigned char *)0x0);
     while( true ) {
       pdVar11 = (dword *)((int)pdVar11 + 1);
       uVar17 = (**(code **)(*piVar13 + 0x14))(piVar13);

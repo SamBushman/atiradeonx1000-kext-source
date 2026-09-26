@@ -1572,7 +1572,7 @@ int FUN_00188fec(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       param_4 = (int *)FUN_00146610(param_2,param_3,param_4);
     }
     piVar4 = (int *)0x0;
-    piVar5 = (int *)((int)&MACH_HEADER.magic + 1);
+    piVar5 = (int *)((int)((unsigned char *)0x0) + 1);
     iVar1 = FUN_0014b82c(param_4,param_5,0,1);
     piVar2 = param_4;
     if (iVar1 != 0) {
@@ -3869,13 +3869,13 @@ int FUN_0018d4b4(param_1, param_2, param_3, param_4, param_5)
           iVar2 = (**(code **)(*piVar5 + 0x14))(piVar5);
           if (iVar2 == 1) {
             uVar4 = FUN_00105594(piVar5,1);
-            piVar3 = (int *)((int)&MACH_HEADER.magic + 1);
+            piVar3 = (int *)((int)((unsigned char *)0x0) + 1);
             iVar2 = ((int (*)())FUN_0018d388)(param_4,uVar4,1);
           }
           else {
             uVar4 = FUN_00105594(piVar5,1);
             piVar3 = (int *)FUN_00105594(piVar5,2);
-            a3 = (int *)((int)&MACH_HEADER.magic + 1);
+            a3 = (int *)((int)((unsigned char *)0x0) + 1);
             iVar2 = ((int (*)())FUN_0018cdd8)(param_4,uVar4,piVar3,1);
           }
           if (iVar2 == 0) {
@@ -3900,7 +3900,7 @@ LAB_0018d948:
           FUN_000f3398(local_40,*(undefined4 *)(iVar7 + 0x10));
           if ((local_40[0] & 0xffffff00) == 0) {
             if ((local_40[0] & 0xff) == 0) goto LAB_0018da08;
-            piVar3 = (int *)((int)&MACH_HEADER.magic + 1);
+            piVar3 = (int *)((int)((unsigned char *)0x0) + 1);
             iVar7 = ((int (*)())FUN_0018c7f4)(param_4,a0,1);
           }
           else if ((local_40[0] & 0xff) == 0) {

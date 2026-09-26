@@ -189,7 +189,7 @@ int FUN_001919d8(param_1, param_2, param_3, param_4)
         puVar4 = puVar4 + 1;
         iVar9 = iVar9 + -1;
       } while (iVar9 != 0);
-      pdVar7 = &MACH_HEADER.cputype;
+      pdVar7 = ((unsigned char *)0x4);
       iVar9 = 0;
       iVar10 = 4;
       do {
@@ -1413,7 +1413,7 @@ int FUN_00193d98(param_1, param_2)
   undefined4 uVar5;
   
   puVar1 = (undefined *)(param_2 + 3U & 0xfffffffc);
-  puVar4 = ((unsigned char *)0x00002fd8);
+  puVar4 = ((unsigned char *)0x00002fd8U);
   if (0x2fd7 < (int)puVar1) {
     puVar4 = puVar1;
   }

@@ -1672,7 +1672,7 @@ int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
   uVar8 = local_60;
   if (local_60 < local_64) {
     iVar6 = local_60 * 4;
-    pdVar10 = &MACH_HEADER.cputype;
+    pdVar10 = ((unsigned char *)0x4);
     _memset(local_5c + iVar6,0,4);
     local_60 = uVar8 + 1;
     uVar16 = CONCAT44(iVar6 + local_5c,extraout_r4);
@@ -1732,7 +1732,7 @@ int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
           a0[0x46] = *(int *)(param_1 + 0x474);
           if (local_60 < local_64) {
             iVar6 = local_60 * 4;
-            pdVar10 = &MACH_HEADER.cputype;
+            pdVar10 = ((unsigned char *)0x4);
             _memset(iVar6 + local_5c,0,4);
             local_60 = uVar3 + 1;
             puVar1 = (undefined4 *)(iVar6 + local_5c);

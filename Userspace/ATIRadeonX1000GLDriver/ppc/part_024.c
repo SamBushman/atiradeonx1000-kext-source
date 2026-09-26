@@ -3466,7 +3466,7 @@ int FUN_000f1d7c(param_1, param_2, param_3)
   uVar8 = local_54;
   if (local_54 < local_58) {
     iVar4 = local_54 * 4;
-    a2 = &MACH_HEADER.cputype;
+    a2 = ((unsigned char *)0x4);
     _memset(iVar4 + local_50,0,4);
     local_54 = uVar8 + 1;
     puVar2 = (undefined4 *)(iVar4 + local_50);
@@ -3478,7 +3478,7 @@ int FUN_000f1d7c(param_1, param_2, param_3)
   *puVar2 = param_3;
   if (local_84 < local_88) {
     iVar4 = local_84 * 4;
-    a2 = &MACH_HEADER.cputype;
+    a2 = ((unsigned char *)0x4);
     _memset(iVar4 + local_80,0,4);
     local_84 = uVar8 + 1;
     puVar2 = (undefined4 *)(iVar4 + local_80);
@@ -3585,7 +3585,7 @@ LAB_000f26a4:
             if ((piVar3[5] & 0x200U) == 0) goto LAB_000f26a4;
             if (local_54 < local_58) {
               iVar4 = local_54 * 4;
-              a2 = &MACH_HEADER.cputype;
+              a2 = ((unsigned char *)0x4);
               _memset(iVar4 + local_50,0,4);
               local_54 = uVar8 + 1;
               puVar2 = (undefined4 *)(iVar4 + local_50);
@@ -3598,7 +3598,7 @@ LAB_000f26a4:
             iVar4 = piVar3[0x21];
             if (local_84 < local_88) {
               iVar5 = local_84 * 4;
-              a2 = &MACH_HEADER.cputype;
+              a2 = ((unsigned char *)0x4);
               _memset(iVar5 + local_80,0,4);
               local_84 = uVar8 + 1;
               piVar12 = (int *)(iVar5 + local_80);
@@ -3612,7 +3612,7 @@ LAB_000f26a4:
           else {
             if (local_54 < local_58) {
               iVar4 = local_54 * 4;
-              a2 = &MACH_HEADER.cputype;
+              a2 = ((unsigned char *)0x4);
               _memset(iVar4 + local_50,0,4);
               local_54 = uVar8 + 1;
               puVar2 = (undefined4 *)(iVar4 + local_50);
@@ -3624,7 +3624,7 @@ LAB_000f26a4:
             *puVar2 = piVar3;
             if (local_84 < local_88) {
               iVar4 = local_84 * 4;
-              a2 = &MACH_HEADER.cputype;
+              a2 = ((unsigned char *)0x4);
               _memset(iVar4 + local_80,0,4);
               local_84 = uVar8 + 1;
               puVar2 = (undefined4 *)(iVar4 + local_80);
@@ -3639,7 +3639,7 @@ LAB_000f26a4:
         else {
           if (local_54 < local_58) {
             iVar4 = local_54 * 4;
-            a2 = &MACH_HEADER.cputype;
+            a2 = ((unsigned char *)0x4);
             _memset(iVar4 + local_50,0,4);
             local_54 = uVar8 + 1;
             puVar2 = (undefined4 *)(iVar4 + local_50);
@@ -3651,7 +3651,7 @@ LAB_000f26a4:
           *puVar2 = piVar3;
           if (local_84 < local_88) {
             iVar4 = local_84 * 4;
-            a2 = &MACH_HEADER.cputype;
+            a2 = ((unsigned char *)0x4);
             _memset(iVar4 + local_80,0,4);
             local_84 = uVar8 + 1;
             puVar2 = (undefined4 *)(iVar4 + local_80);
@@ -3690,7 +3690,7 @@ LAB_000f2690:
         uVar8 = local_84;
         if (local_84 < local_88) {
           iVar5 = local_84 * 4;
-          a2 = &MACH_HEADER.cputype;
+          a2 = ((unsigned char *)0x4);
           _memset(iVar5 + local_80,0,4);
           local_84 = uVar8 + 1;
           piVar12 = (int *)(iVar5 + local_80);
@@ -3733,7 +3733,7 @@ LAB_000f2690:
           uVar9 = local_74;
           if (local_74 < local_78) {
             iVar4 = local_74 * 4;
-            a2 = &MACH_HEADER.cputype;
+            a2 = ((unsigned char *)0x4);
             _memset(iVar4 + local_70,0,4);
             local_74 = uVar9 + 1;
             puVar2 = (undefined4 *)(iVar4 + local_70);
@@ -3745,7 +3745,7 @@ LAB_000f2690:
           *puVar2 = piVar3;
           if (local_64 < local_68) {
             iVar4 = local_64 * 4;
-            a2 = &MACH_HEADER.cputype;
+            a2 = ((unsigned char *)0x4);
             _memset(iVar4 + local_60,0,4);
             local_64 = uVar9 + 1;
             puVar2 = (undefined4 *)(iVar4 + local_60);
@@ -3790,7 +3790,7 @@ LAB_000f25ac:
                   if ((uVar8 & *(uint *)(iVar5 + 0xc)) != 0) {
                     if (local_74 < local_78) {
                       iVar5 = local_74 * 4;
-                      a2 = &MACH_HEADER.cputype;
+                      a2 = ((unsigned char *)0x4);
                       _memset(iVar5 + local_70,0,4);
                       local_74 = uVar9 + 1;
                       puVar2 = (undefined4 *)(iVar5 + local_70);
@@ -3802,7 +3802,7 @@ LAB_000f25ac:
                     *puVar2 = piVar3;
                     if (local_64 < local_68) {
                       iVar5 = local_64 * 4;
-                      a2 = &MACH_HEADER.cputype;
+                      a2 = ((unsigned char *)0x4);
                       _memset(iVar5 + local_60,0,4);
                       local_64 = uVar9 + 1;
                       piVar12 = (int *)(iVar5 + local_60);
@@ -3835,7 +3835,7 @@ LAB_000f260c:
     if ((uVar8 & *(uint *)(iVar4 + 0xc)) == 0) goto LAB_000f260c;
     if (local_74 < local_78) {
       iVar4 = local_74 * 4;
-      a2 = &MACH_HEADER.cputype;
+      a2 = ((unsigned char *)0x4);
       _memset(iVar4 + local_70,0,4);
       local_74 = uVar9 + 1;
       puVar2 = (undefined4 *)(iVar4 + local_70);
@@ -3848,7 +3848,7 @@ LAB_000f260c:
     iVar4 = piVar3[0x21];
     if (local_64 < local_68) {
       iVar5 = local_64 * 4;
-      a2 = &MACH_HEADER.cputype;
+      a2 = ((unsigned char *)0x4);
       _memset(iVar5 + local_60,0,4);
       local_64 = uVar8 + 1;
       piVar12 = (int *)(iVar5 + local_60);

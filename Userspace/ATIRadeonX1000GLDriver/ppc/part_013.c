@@ -1611,7 +1611,7 @@ int FUN_0008c590(param_1, param_2, param_3, param_4)
   piVar9[0xb] = -1;
   piVar9[10] = -1;
   piVar9[9] = 1;
-  piVar13 = (int *)((int)&MACH_HEADER.cputype + 3);
+  piVar13 = (int *)((int)((unsigned char *)0x4) + 3);
   iVar12 = 7;
   piVar9[0xc] = (int)"";
   piVar4 = piVar9;
@@ -1795,7 +1795,7 @@ LAB_0008cb70:
                     if ((iVar7 != 0) && (*(int *)(iVar7 + 0x18) == 0)) {
                       uVar19 = *(uint *)(iVar7 + 0x1c) - 0x20;
                       if ((int)uVar19 < 0) {
-                        piVar4 = (int *)((int)&MACH_HEADER.magic + 1);
+                        piVar4 = (int *)((int)((unsigned char *)0x0) + 1);
                         uVar19 = 0;
                         uVar6 = 1 << (*(uint *)(iVar7 + 0x1c) & 0x3f);
                       }
@@ -3626,7 +3626,7 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   if (bVar9) {
     *(int *)(a1 + 8) = (int)puVar12 - a1 >> 2;
   }
-  puVar15 = ((unsigned char *)0x00001087);
+  puVar15 = ((unsigned char *)0x00001087U);
   a1_00 = puVar12 + 0x10;
   local_68 = 0x43300000;
   local_60 = 0x43300000;
@@ -3652,7 +3652,7 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   iVar17 = (int)(fVar5 * *(float *)(param_1 + 0x2814) * 0.5 * (fVar1 - fVar4));
   local_38 = (longlong)iVar17;
   puVar12[2] = 0x82c;
-  *puVar12 = ((unsigned char *)0x00001087);
+  *puVar12 = ((unsigned char *)0x00001087U);
   puVar12[1] = iVar17 << 0x10 | a6 & 0xffff;
   uVar11 = *(undefined4 *)(param_1 + 0x1b84);
   puVar12[5] = 0x10031;
@@ -3665,11 +3665,11 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   puVar12[3] = uVar11;
   puVar12[0xc] = uVar8;
   puVar12[0xd] = uVar13;
-  puVar12[0xe] = ((unsigned char *)0x00001087);
+  puVar12[0xe] = ((unsigned char *)0x00001087U);
   puVar12[8] = 0;
   puVar12[0xf] = *(undefined4 *)(param_1 + 0x1ccc);
   *(undefined4 **)(0x00002748 + param_1 + 4) = a1_00;
-  (**(code **)(param_1 + 0x275c))(param_1,a1_00,puVar12,a3_00,((unsigned char *)0x00001087),a1_00,a6,0xc0083500);
+  (**(code **)(param_1 + 0x275c))(param_1,a1_00,puVar12,a3_00,((unsigned char *)0x00001087U),a1_00,a6,0xc0083500);
   FUN_0009d3b0(param_1,extraout_r4,puVar12,a3_00,puVar15,a1_00,a6);
   FUN_000872e0(param_1,auStack_f8);
   if (bVar9) {

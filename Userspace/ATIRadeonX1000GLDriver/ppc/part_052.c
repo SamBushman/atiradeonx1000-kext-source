@@ -322,7 +322,7 @@ int FUN_001981ac(param_1, param_2)
   if (local_68 == 0xb4) {
     iVar8 = 3;
 LAB_00198290:
-    piVar22 = (int *)((int)&MACH_HEADER.magic + 1);
+    piVar22 = (int *)((int)((unsigned char *)0x0) + 1);
     piVar19 = param_2 + 0x26;
     bVar1 = local_6c != 0;
     bVar2 = local_70 != 0;
@@ -371,7 +371,7 @@ LAB_00198290:
           piVar16 = piVar22;
           local_f0 = (**(code **)(*param_1 + 0x158))(param_1,param_2);
 LAB_0019852c:
-          bVar3 = piVar22 == (int *)((int)&MACH_HEADER.magic + 3);
+          bVar3 = piVar22 == (int *)((int)((unsigned char *)0x0) + 3);
           bVar5 = (byte)((uint)local_64 >> 0x18);
           if ((bVar3) && (!(bool)(bVar5 >> 5 & 1))) {
             local_ec[2] = 0x11;
@@ -416,7 +416,7 @@ LAB_0019852c:
                   piVar16 = piVar16 + 1;
                   uVar21 = uVar21 + 1;
                 } while (bVar4);
-                a4 = (int *)((int)&MACH_HEADER.magic + 3);
+                a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199c88:
                 pcVar7 = *(code **)(*param_1 + 0xf8);
                 goto joined_r0x00199c90;
@@ -451,7 +451,7 @@ LAB_00199c88:
                   piVar16 = piVar16 + 1;
                   uVar21 = uVar21 + 1;
                 } while (bVar4);
-                a4 = (int *)((int)&MACH_HEADER.magic + 3);
+                a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199b44:
                 pcVar7 = *(code **)(*param_1 + 0xf4);
               }
@@ -497,17 +497,17 @@ LAB_00199b44:
                   uVar21 = uVar21 + 1;
                   piVar16 = piVar16 + 1;
                 } while (bVar4);
-                a4 = (int *)((int)&MACH_HEADER.magic + 3);
+                a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_001999e8:
                 (**(code **)(*param_1 + 0xf4))(param_1,piVar22,local_bc,local_dc,a4,piVar23);
                 pcVar7 = *(code **)(*param_1 + 0xf8);
 joined_r0x00199c90:
                 if (bVar3) {
                   if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
-                    piVar15 = (int *)((int)&MACH_HEADER.magic + 3);
+                    piVar15 = (int *)((int)((unsigned char *)0x0) + 3);
                   }
                   else {
-                    piVar15 = (int *)((int)&MACH_HEADER.magic + 1);
+                    piVar15 = (int *)((int)((unsigned char *)0x0) + 1);
                   }
                 }
               }
@@ -556,15 +556,15 @@ LAB_00199cdc:
                 piVar16 = piVar16 + 1;
                 uVar21 = uVar21 + 1;
               } while (bVar4);
-              a4 = (int *)((int)&MACH_HEADER.magic + 3);
+              a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199e60:
               piVar15 = piVar22;
               if (bVar3) {
                 if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
-                  piVar15 = (int *)((int)&MACH_HEADER.magic + 3);
+                  piVar15 = (int *)((int)((unsigned char *)0x0) + 3);
                 }
                 else {
-                  piVar15 = (int *)((int)&MACH_HEADER.magic + 1);
+                  piVar15 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
               piVar16 = local_ec;
@@ -599,15 +599,15 @@ LAB_00199e60:
                 piVar16 = piVar16 + 1;
                 uVar21 = uVar21 + 1;
               } while (bVar4);
-              a4 = (int *)((int)&MACH_HEADER.magic + 3);
+              a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_00199fdc:
               piVar25 = piVar22;
               if (bVar3) {
                 if ((bool)((byte)((uint)local_64 >> 0x1d) & 1)) {
-                  piVar25 = (int *)((int)&MACH_HEADER.magic + 3);
+                  piVar25 = (int *)((int)((unsigned char *)0x0) + 3);
                 }
                 else {
-                  piVar25 = (int *)((int)&MACH_HEADER.magic + 1);
+                  piVar25 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
               piVar16 = local_ec;
@@ -640,7 +640,7 @@ LAB_00199fdc:
               piVar16 = &local_f0;
               iVar26 = (**(code **)(*param_1 + 0xdc))(param_1,a0);
               if (iVar26 == 0) {
-                if ((piVar22 != (int *)((int)&MACH_HEADER.magic + 3)) ||
+                if ((piVar22 != (int *)((int)((unsigned char *)0x0) + 3)) ||
                    ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
                   if (bVar1) {
                     piVar16 = local_bc;
@@ -678,7 +678,7 @@ LAB_00199fdc:
           }
           iVar26 = (**(code **)(*a0 + 0x5c))(a0);
           if (iVar26 == 0) goto LAB_0019852c;
-          if ((piVar22 != (int *)((int)&MACH_HEADER.magic + 3)) ||
+          if ((piVar22 != (int *)((int)((unsigned char *)0x0) + 3)) ||
              ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
             if (bVar1) {
               piVar16 = local_bc;

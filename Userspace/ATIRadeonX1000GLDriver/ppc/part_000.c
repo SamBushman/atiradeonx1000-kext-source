@@ -2788,15 +2788,15 @@ int _gldGetInteger(param_1, param_2, param_3, param_4, param_5, param_6)
       break;
     case 0xb:
       *param_3 = 0x1908;
-      param_3[1] = (uint)((unsigned char *)0x00001403);
+      param_3[1] = (uint)((unsigned char *)0x00001403U);
       break;
     case 0xc:
       *param_3 = 0x1908;
-      param_3[1] = (uint)((unsigned char *)0x0000140b);
+      param_3[1] = (uint)((unsigned char *)0x0000140bU);
       break;
     case 0xd:
       *param_3 = 0x1908;
-      param_3[1] = (uint)((unsigned char *)0x00001406);
+      param_3[1] = (uint)((unsigned char *)0x00001406U);
     }
     uVar2 = 0;
     param_3[2] = local_20;
@@ -3302,7 +3302,7 @@ int _gldCreateContext(param_1, param_2, param_3, param_4, param_5, param_6, para
      ((*(uint *)(param_2 + 0x30) & ~*(uint *)PTR_DAT_001e88ac) != 0)) {
     return 0x2716;
   }
-  puVar5 = (uint *)_malloc(((unsigned char *)0x00002b98));
+  puVar5 = (uint *)_malloc(((unsigned char *)0x00002b98U));
   if (*(int *)(puVar2 + 4) != 0) {
     local_48[0] = 0;
     if ((*(uint *)(param_2 + 0x30) & 1) == 0) {
@@ -3477,7 +3477,7 @@ LAB_00006798:
                 uVar7 = puVar5[0xf];
                 puVar5[0xe] = 0x4000;
                 if ((uVar7 & 0x40) != 0) {
-                  puVar5[0xe] = (uint)((unsigned char *)0x00004100);
+                  puVar5[0xe] = (uint)((unsigned char *)0x00004100U);
                 }
                 if ((uVar7 & 0x80) == 0) {
                   uVar6 = puVar5[0xe];

@@ -1083,6 +1083,8 @@ for pdir_, f in _part_files:
                 txt = re.sub(r'\b0x([0-9a-f]{8})([0-9a-f]{8})\b', _split64, txt)
                 txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
+            # `((unsigned char *)0x000c6e40)` where 0xc6e40 is the entry of a function of the link (ghidra2c prints `&DAT_...` of a code address that way): its label
+            txt = re.sub(r'\(\(unsigned char \*\)0x([0-9a-f]{8})\)', lambda x: ('((unsigned char *)%s)' % fn_by_addr[int(x.group(1), 16)]) if int(x.group(1), 16) in fn_by_addr and '+' not in fn_by_addr[int(x.group(1), 16)] else x.group(0), txt)
             if ctx_lit_syms:
                 txt = _CTX_LIT.sub(lambda x: ('((unsigned int)&%s + %d)' % ctx_lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in ctx_lit_syms and _ctx_lit_ok(txt, x) else x.group(0), txt)
             if bind_info:

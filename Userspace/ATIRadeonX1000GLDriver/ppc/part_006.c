@@ -874,12 +874,12 @@ int FUN_0003f850(param_1)
         return iVar2;
       }
       puVar6 = (undefined4 *)0x0;
-      pdVar7 = &MACH_HEADER.cputype;
-      pdVar9 = &MACH_HEADER.cpusubtype;
-      pdVar10 = &MACH_HEADER.filetype;
-      pdVar3 = &MACH_HEADER.ncmds;
-      pdVar4 = &MACH_HEADER.sizeofcmds;
-      pdVar5 = &MACH_HEADER.flags;
+      pdVar7 = ((unsigned char *)0x4);
+      pdVar9 = ((unsigned char *)0x8);
+      pdVar10 = ((unsigned char *)0xc);
+      pdVar3 = ((unsigned char *)0x10);
+      pdVar4 = ((unsigned char *)0x14);
+      pdVar5 = ((unsigned char *)0x18);
       goto LAB_0003f918;
     }
     *piVar8 = iVar2;
@@ -967,10 +967,10 @@ int FUN_0003f9f0(param_1, param_2, param_3)
         return iVar2;
       }
       puVar1 = (undefined4 *)0x0;
-      pdVar6 = &MACH_HEADER.cputype;
-      pdVar10 = &MACH_HEADER.cpusubtype;
-      pdVar12 = &MACH_HEADER.filetype;
-      pdVar7 = &MACH_HEADER.ncmds;
+      pdVar6 = ((unsigned char *)0x4);
+      pdVar10 = ((unsigned char *)0x8);
+      pdVar12 = ((unsigned char *)0xc);
+      pdVar7 = ((unsigned char *)0x10);
       goto LAB_0003fb50;
     }
     *piVar13 = iVar2;
@@ -1246,8 +1246,8 @@ int FUN_0003ff40(param_1, param_2, param_3)
         return iVar2;
       }
       puVar3 = (undefined4 *)0x0;
-      pdVar7 = &MACH_HEADER.cputype;
-      pdVar6 = &MACH_HEADER.cpusubtype;
+      pdVar7 = ((unsigned char *)0x4);
+      pdVar6 = ((unsigned char *)0x8);
       goto LAB_00040128;
     }
     *piVar8 = iVar2;
@@ -1319,10 +1319,10 @@ int FUN_000401b0(param_1, param_2, param_3)
         return iVar2;
       }
       puVar5 = (undefined4 *)0x0;
-      pdVar3 = &MACH_HEADER.cputype;
-      pdVar4 = &MACH_HEADER.cpusubtype;
-      pdVar6 = &MACH_HEADER.filetype;
-      pdVar7 = &MACH_HEADER.ncmds;
+      pdVar3 = ((unsigned char *)0x4);
+      pdVar4 = ((unsigned char *)0x8);
+      pdVar6 = ((unsigned char *)0xc);
+      pdVar7 = ((unsigned char *)0x10);
       goto LAB_000402d0;
     }
     *piVar8 = iVar2;
@@ -2380,8 +2380,8 @@ int FUN_00041510(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         return iVar3;
       }
       puVar4 = (undefined4 *)0x0;
-      pdVar5 = &MACH_HEADER.cputype;
-      pdVar6 = &MACH_HEADER.cpusubtype;
+      pdVar5 = ((unsigned char *)0x4);
+      pdVar6 = ((unsigned char *)0x8);
       goto LAB_00041698;
     }
     *piVar8 = iVar3;
@@ -2582,8 +2582,8 @@ LAB_00041a08:
         return iVar7;
       }
       puVar4 = (undefined4 *)0x0;
-      pdVar6 = &MACH_HEADER.cputype;
-      pdVar9 = &MACH_HEADER.cpusubtype;
+      pdVar6 = ((unsigned char *)0x4);
+      pdVar9 = ((unsigned char *)0x8);
       goto LAB_00041b48;
     }
     *piVar11 = iVar7;
@@ -3435,7 +3435,7 @@ LAB_00043320:
   uStack_54 = uStack_54 | 0x400000;
   uStack_4c = (undefined *)((uint)uStack_4c | 0x400000);
   uStack_48 = (undefined *)((uint)uStack_48 | 0x400000);
-  apuStack_40[2] = ((unsigned char *)0x00005555);
+  apuStack_40[2] = ((unsigned char *)0x00005555U);
   uStack_44 = 0x440000;
   if (iVar4 == 0) {
     piVar9 = (int *)(param_1 + 0x28);
@@ -4387,8 +4387,8 @@ int FUN_00044ac0(param_1, param_2, param_3)
         return iVar2;
       }
       puVar3 = (undefined4 *)0x0;
-      pdVar5 = &MACH_HEADER.cputype;
-      pdVar4 = &MACH_HEADER.cpusubtype;
+      pdVar5 = ((unsigned char *)0x4);
+      pdVar4 = ((unsigned char *)0x8);
       goto LAB_00044c08;
     }
     *piVar6 = iVar2;
@@ -4464,7 +4464,7 @@ int FUN_00044c90(param_1, param_2)
   local_a8 = local_a8 | 0x400000;
   iVar3 = ((int (*)())FUN_0003f1c0)(param_1,iVar11 + 0x18,puVar5,&local_94);
   if (iVar3 == 0) {
-    local_90 = ((unsigned char *)0x00005555);
+    local_90 = ((unsigned char *)0x00005555U);
     local_9c = 0x440000;
     if (param_1[9] != 0) {
       return param_1[9];
@@ -4869,7 +4869,7 @@ LAB_000458f0:
   local_84 = local_84 | 0x400000;
   iVar3 = ((int (*)())FUN_0003f1c0)(param_1,iVar16 + 0x18,puVar6,&local_70);
   if (iVar3 != 0) goto LAB_000458f0;
-  local_6c = ((unsigned char *)0x00005555);
+  local_6c = ((unsigned char *)0x00005555U);
   local_78 = 0x440000;
   if (param_1[9] != 0) {
     return param_1[9];
@@ -6682,7 +6682,7 @@ LAB_0004a4ec:
       return iVar12;
     }
     puVar26 = (undefined4 *)0x0;
-    pdVar16 = &MACH_HEADER.cputype;
+    pdVar16 = ((unsigned char *)0x4);
   }
   else {
 LAB_00048eb4:
@@ -8238,7 +8238,7 @@ int FUN_0004b710(param_1)
     do {
       iVar2 = iVar2 + 1;
       puVar1 = puVar3 + *(int *)(param_1 + 0x1e60);
-      puVar3 = ((unsigned char *)0x00003754) + (int)puVar3;
+      puVar3 = ((unsigned char *)0x00003754U) + (int)puVar3;
       *(undefined4 *)(puVar1 + 0x1780) = 0;
       ((int (*)())FUN_0004b5d0)(param_1,puVar1);
     } while (iVar2 < (int)(uint)*(ushort *)(param_1 + 0x1e6c));
@@ -8270,9 +8270,9 @@ int FUN_0004b7d0(param_1)
   iVar8 = *(int *)(((unsigned char *)0x0000112c) + param_1);
   ((int (*)())FUN_0004b710)(param_1);
   *(undefined2 *)(param_1 + 0x1e6c) = 1;
-  uVar3 = _malloc(((unsigned char *)0x00003754));
+  uVar3 = _malloc(((unsigned char *)0x00003754U));
   *(undefined4 *)(param_1 + 0x1e60) = uVar3;
-  _memset(uVar3,0,((unsigned char *)0x00003754));
+  _memset(uVar3,0,((unsigned char *)0x00003754U));
   *(undefined4 *)(param_1 + 0x1e5c) = 0;
   ((int (*)())FUN_0004ab60)(param_1);
   *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e60)) = 0xffff;
@@ -8547,9 +8547,9 @@ LAB_0004bee0:
         uVar5 = 0;
         ((int (*)())FUN_0004b710)(param_1);
         *(undefined2 *)(param_1 + 0x1e6c) = 1;
-        uVar9 = _malloc(((unsigned char *)0x00003754));
+        uVar9 = _malloc(((unsigned char *)0x00003754U));
         *(undefined4 *)(param_1 + 0x1e60) = uVar9;
-        _memset(uVar9,0,((unsigned char *)0x00003754));
+        _memset(uVar9,0,((unsigned char *)0x00003754U));
         ((int (*)())FUN_0004ab60)(param_1);
         *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e60)) = 0xffff;
         uVar7 = *(ushort *)(param_1 + 0x1e6c);
@@ -8586,7 +8586,7 @@ LAB_0004bee0:
       else {
         *(ushort *)(((unsigned char *)0x000015c8) + uVar5 * 0x3754 + iVar6) = uVar7 - 1;
       }
-      _memset(*(undefined4 *)(param_1 + 0x1e5c),0,((unsigned char *)0x00003754));
+      _memset(*(undefined4 *)(param_1 + 0x1e5c),0,((unsigned char *)0x00003754U));
       *(undefined2 *)(((unsigned char *)0x000015c8) + *(int *)(param_1 + 0x1e5c)) = 0xffff;
       _memcpy(((unsigned char *)0x00001544) + *(int *)(param_1 + 0x1e5c),param_1 + 0x18a4,0x84);
       return 0;

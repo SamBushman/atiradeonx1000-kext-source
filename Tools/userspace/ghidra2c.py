@@ -324,10 +324,11 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
                 _lo, _hi = (int(x, 16) for x in _r.split('-'))
                 for x in range(_lo, _hi, 4):
                     w = _word(x)
-                    if (w >> 26) == 14 and ((w >> 16) & 31) == 0:                  # li rD,simm
-                        _cs.add(w & 0xffff if not w & 0x8000 else (w & 0xffff) | 0xffff0000); continue
-                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
-                    rd = (w >> 21) & 31; hi = (w & 0xffff) << 16; _cs.add(hi)
+                    if ((w >> 26) not in (14, 15)) or ((w >> 16) & 31) != 0: continue      # li rD,simm (14) / lis rD,imm (15): addi / addis with rA = 0
+                    rd = (w >> 21) & 31
+                    if (w >> 26) == 14: hi = (w & 0xffff) - (0x10000 if w & 0x8000 else 0) & 0xffffffff if not w & 0x8000 else ((w & 0xffff) | 0xffff0000)
+                    else: hi = (w & 0xffff) << 16
+                    _cs.add(hi)
                     for y in range(x + 4, min(x + 4 + 4 * 16, _hi), 4):      # the low half may come a few instructions later (scheduled around other work)
                         w2 = _word(y); op2 = w2 >> 26
                         if op2 in (16, 18, 19): break                        # a branch ends the block
@@ -833,8 +834,15 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'&\s*([A-Za-z_]\w*)\b(?!\s*\))', lambda m: m.group(1) if (m.group(1) in tables and not m.group(1).startswith(('FLOAT_','DOUBLE_'))) else m.group(0), b)
             b = re.sub(r'\b([a-z]{1,2})Ram([0-9a-f]{8})\b', lambda m: ('(*(%s *)&DAT_%s)' if not in_text(m.group(2)) else '(*(%s *)0x%s)') % ({'u': 'unsigned int', 'i': 'int', 'b': 'unsigned char', 'c': 'char', 's': 'short', 'us': 'unsigned short', 'p': 'unsigned char *', 'd': 'double', 'f': 'float', 'l': 'long long', 'ul': 'unsigned long long'}.get(m.group(1), 'unsigned int'), m.group(2)), b)
             b = re.sub(r'\bregister0x[0-9a-f]{8}\b', '((unsigned int)__builtin_frame_address(0))', b)
-            b = re.sub(r'&\s*(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '((unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) else m.group(0), b)
+            # (an address the function builds with lis/ori is a plain number; the cast form is kept for the ones link_corpus may find to be a code label - GLDriver
+            # FUN_000c6ff0 stores `&DAT_000c6e40`, the entry of an unowned 12-byte calloc thunk, as a callback: the stock address in the rebuilt image)
+            b = re.sub(r'&\s*(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: ('((unsigned char *)0x%s%s)' % (m.group(1), 'U' if (_FCTIW is not None and int(m.group(1), 16) in _LITC.get(int(a, 16), ())) else '')) if in_text(m.group(1)) else m.group(0), b)
             b = re.sub(r'\(\s*(?:DAT|UNK)_([0-9a-f]{8})\s*\)\s*\[', lambda m: ('((unsigned char *)0x%s)[' % m.group(1)) if in_text(m.group(1)) else m.group(0), b)
+            # `(int)&MACH_HEADER.magic + 1`: the small integer constants 0..0x1c that Ghidra printed as the ADDRESS of a field of the Mach-O header it laid over
+            # address 0 (GLDriver: ~190 uses in 30 functions, a NULL / 1 / 2 / 3 / 0x10 in a pointer-typed variable or a device-id range test - FUN_000c6ff0 compared
+            # the chip id against `&MACH_HEADER.ncmds`). The link tree resolved it to the real header's address; it is the number.
+            _mhf = {'magic': 0, 'cputype': 4, 'cpusubtype': 8, 'filetype': 0xc, 'ncmds': 0x10, 'sizeofcmds': 0x14, 'flags': 0x18, 'reserved': 0x1c}
+            b = re.sub(r'&\s*MACH_HEADER\.(magic|cputype|cpusubtype|filetype|ncmds|sizeofcmds|flags|reserved)\b', lambda m: '((unsigned char *)0x%x)' % _mhf[m.group(1)], b)
             b = re.sub(r'\b\w+_command_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOCommand *)0x%s)' % m.group(1), b)   # a constant that lands in the Mach-O header area (e.g. 0x1c = first load command), not an object
             b = re.sub(r'\bsection_([0-9a-f]{8})\b', lambda m: '(*(GhidraMachOSection *)0x%s)' % m.group(1), b)
             b = re.sub(r'\(float\)\(\(unsigned char \*\)(0x[0-9a-f]+)\)', r'(float)\1', b)

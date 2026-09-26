@@ -261,6 +261,19 @@ PATCHES = {
     # call through the import stub as a void call even with a 4-byte return type committed (SetValueReturn.java), so the C returned nothing (issue #70).
     'FUN_000a6f70': _scoped('gld', _conv_with('FUN_000a6f70 (0xa6f70)', [('  _calloc(param_1,1);\n  return;\n', '  return (int)_calloc(param_1,1);\n')])),
 
+    # The software vertex-program emulator's scalar built-ins in the coalesced text (GLDriver 0x1d05b0 cos, 0x1d0794 sin, 0x1d06ec rsqrt, 0x1d0820 sqrt; found by the
+    # pure-function fuzz: FUN_001d06ec scaled by 1/sqrt(whatever f1 held)). Ghidra printed the libm calls - and, in sin / cos, the virtual call in front of them
+    # (`lwz r3,0x30c(r6); lwz r2,0(r3); lwz r0,0xe0(r2); bctrl`: this = *(param_4 + 0x30c), the angle conversion) - WITHOUT their arguments: `lfs f1,4(r5)`
+    # is the operand and reaches `bl _sqrt` / the virtual call in f1, the virtual call's double result is the operand of `bl _cos` / `bl _sin` (0x1d061c, 0x1d07fc).
+    'FUN_001d05b0': _scoped('gld', _conv_with('FUN_001d05b0 (0x1d05b0)', [(
+        '    (**(code **)(**(int **)(param_4 + 0x30c) + 0xe0))();\n    dVar1 = (double)_cos();',
+        '    dVar1 = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));')])),
+    'FUN_001d0794': _scoped('gld', _conv_with('FUN_001d0794 (0x1d0794)', [(
+        '    (**(code **)(**(int **)(param_4 + 0x30c) + 0xe0))();\n    dVar1 = (double)_sin();',
+        '    dVar1 = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));')])),
+    'FUN_001d06ec': _scoped('gld', _conv_with('FUN_001d06ec (0x1d06ec)', [('dVar2 = (double)_sqrt();', 'dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));')])),
+    'FUN_001d0820': _scoped('gld', _conv_with('FUN_001d0820 (0x1d0820)', [('dVar2 = (double)_sqrt();', 'dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));')])),
+
     # TIntermSymbol::traverse(TIntermTraverser*) (glprog, stock 0x97b97d40, 20 bytes): `lwz r12,0(r4); cmpwi r12,0; beqlr; mtspr ctr,r12; bctr` - a tail
     # call of the traverser's visitSymbol callback (*(traverser+0)) with r3 = this (the symbol) and r4 = the traverser, both untouched. Ghidra printed
     # `(**(code **)param_2)();` with no arguments (found by the tiny-function scan of issue #67/#70). C: pass (this, param_2).

@@ -2393,7 +2393,7 @@ int FUN_001a1338(param_1, param_2)
   undefined4 uVar2;
   
   uVar2 = *(undefined4 *)(param_2 + 0x378);
-  puVar1 = (undefined4 *)FUN_00193e18(uVar2,((unsigned char *)0x000010c4));
+  puVar1 = (undefined4 *)FUN_00193e18(uVar2,((unsigned char *)0x000010c4U));
   *puVar1 = uVar2;
   puVar1[1] = &PTR_FUN_001eb9a8;
   puVar1[7] = 0;

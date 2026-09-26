@@ -194,8 +194,7 @@ int FUN_001d05b0(param_1, param_2, param_3, param_4)
     *param_2 = 0.0;
   }
   else {
-    (**(code **)(**(int **)(param_4 + 0x30c) + 0xe0))();
-    dVar1 = (double)_cos();
+    dVar1 = (double)_cos(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));
     *param_2 = (float)dVar1;
   }
   return 1;
@@ -239,7 +238,7 @@ int FUN_001d06ec(param_1, param_2, param_3)
     if (*(float *)(param_3 + 4) <= FLOAT_001aa0d4) {
       return 1;
     }
-    dVar2 = (double)_sqrt();
+    dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));
     fVar1 = (float)(DOUBLE_001aa200 / dVar2);
   }
   *param_2 = fVar1;
@@ -274,8 +273,7 @@ int FUN_001d0794(param_1, param_2, param_3, param_4)
     *param_2 = FLOAT_001aa0e8;
   }
   else {
-    (**(code **)(**(int **)(param_4 + 0x30c) + 0xe0))();
-    dVar1 = (double)_sin();
+    dVar1 = (double)_sin(((double (*)(int, double))*(code **)(**(int **)(param_4 + 0x30c) + 0xe0))(*(int *)(param_4 + 0x30c), (double)*(float *)(param_3 + 4)));
     *param_2 = (float)dVar1;
   }
   return 1;
@@ -295,7 +293,7 @@ int FUN_001d0820(param_1, param_2, param_3)
     if (*(int *)(param_3 + 4) < 1) {
       return 1;
     }
-    dVar2 = (double)_sqrt();
+    dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));
     fVar1 = (float)dVar2;
   }
   *param_2 = fVar1;

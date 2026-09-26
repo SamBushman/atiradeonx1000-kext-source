@@ -350,7 +350,7 @@ int FUN_00128430(param_1, param_2, param_3, param_4)
         puVar4 = puVar4 + 1;
         iVar9 = iVar9 + -1;
       } while (iVar9 != 0);
-      pdVar7 = &MACH_HEADER.cputype;
+      pdVar7 = ((unsigned char *)0x4);
       iVar9 = 0;
       iVar10 = 4;
       do {
@@ -1412,7 +1412,7 @@ int FUN_00129eb4(param_1, param_2, param_3, param_4)
         puVar4 = puVar4 + 1;
         iVar9 = iVar9 + -1;
       } while (iVar9 != 0);
-      pdVar7 = &MACH_HEADER.cputype;
+      pdVar7 = ((unsigned char *)0x4);
       iVar9 = 0;
       iVar10 = 4;
       do {
