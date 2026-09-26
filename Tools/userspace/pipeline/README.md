@@ -152,9 +152,11 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    RedumpContaining now raises the decompiler's payload limit (FUN_00115fa0, 3500 lines, failed with "Response buffer size exceeded").
 15. Integers and pointers in float-typed variables. Ghidra types a value by its uses, and a storage it shares with floats (a union array, a
    reused stack slot) makes it `float`; the C then converts the VALUE where the stock moves bits:
-   * glprog `TIntermConstantUnion::fold` keeps int, float and bool constants in one `float *` array. The rebuilt front end folded
-     `ivec4(7,5,17,6) - ivec4(3,1,4,2)` to 0, negation and division to garbage, and reported a divide by zero (the denormal bits of a small
-     integer converted to 0) - `Tests/userspace/glsl_intfold2.vert`; the function has no fctiw at all.
+   * glprog `TIntermConstantUnion::fold` keeps int, float and bool constants in one `float *` array, and its C converted their values
+     (`(int)fVar6` of the bits of a small integer); the function has no fctiw at all. CORRECTION: this step was first reported as fixing the
+     wrong vector folding of `Tests/userspace/glsl_intfold2.vert`. That check compared with `diff <(..) <(..)` on the G5, which on Tiger's bash
+     2.05b exits 0 whatever the contents - it did not. Instrumenting the fold showed its arithmetic right and its INPUT array overwritten: the
+     cause was a dropped argument of an indirect call (step 17). The rewrite here stays (it is what the stock does), but it was not the fix.
    * GLDriver FUN_00180830 kept the object pointers FUN_001043f0 returns in float locals (`fVar7 = (float)FUN_001043f0(..)`, `*(T *)((int)fVar7 +
      0x98)`: 24 bits of mantissa); GA `_radeonSolidScanlines` & co. kept IOConnectMapMemory's address/size out-parameters and command counters in
      float stack locals (`local_1a0 = 2.8026e-45` is the integer 2; `puVar40[(int)local_1a0]` indexed 0).
@@ -164,6 +166,34 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    is always a bit reinterpretation (GH_U2F), and in a function whose stock code has no fctiw/fctiwz `(int)fVarN` is one too (GH_F2U) -
    `Tools/userspace/cvt_scan.py` counts the functions (GLDriver 175, glprog 50, GA 4, VA 1 without fctiw). 263 casts rewritten. GLDriver
    FUN_0009d410 remains: it compares an address with the bits of 1.0f (the stock does that too); same outcome.
+16. Arguments still dropped at call sites (#70), found by `Tools/userspace/callarg_check.py`: for every stock `bl`, the argument registers set
+   to a constant, an incoming parameter or a stack address, checked against the C call's argument at that position.
+   * glprog `_InterpreterEmulateOp`: the noise ops called `InterpreterNoiseGeneratorCalculate1D..4D(param_1 + 1, local_130 + 4, in_r5)` - the output
+     float[12] (r1+0x60) went out as an uninitialised register (patches.py); the PIC stubs of `InterpreterNoiseGeneratorCalculate4D` and
+     `InterpreterTextureSamplerSampleTexelRECT` had fewer parameters than their definitions read (b3/extend2_glprog.txt).
+   * GLDriver: its libGLProgrammability / libGLImage imports had no prototypes (`glgConvertType` printed 3 of its 8 arguments); FUN_00165b7c
+     forwards r3..r9 to a call through a pointer (b3/glfix_redump_gld.txt).
+   Remaining reports (GLDriver 14 constants, 16 parameters, 37 stack addresses) were reviewed: addresses passed through a variable, an empty
+   `get_allocator` class, calls into empty functions - the tool's limits, not dropped arguments.
+17. Indirect calls with some arguments dropped (#70). OverrideIndirectCalls.java widened only indirect calls the decompiler printed with NO
+   argument; one printed with some kept just those. glprog `TIntermediate::changeAggrToTempConst` printed its first virtual `getType` as
+   `(**(code **)(*param_2 + 0x38))(local_60)`: the stock passes the node in r4, the caller's own untouched r4. The rebuilt call built the type of
+   a garbage object, the constant's array was allocated too small, and the next pool allocation (a TIntermConstantUnion) overwrote it: every
+   folded vector constant came out as garbage (`-ivec4(1,2,3,4)` read `{0x7bb930, 2, 0x7bb600, 0}`; float vectors too), found by printing the
+   array from the rebuilt fold. `Tools/userspace/indirect_args.py` lists the argument registers of every stock `bctrl` (written in the call's
+   block, except a register that only serves as the base of the call target's load, or still holding an incoming parameter of the caller);
+   `gs/ExtendIndirectCalls.java` widens the calls that pass fewer (glprog 61, GLDriver 721, GA 7, VA 7; an over-count is an extra argument the
+   callee does not read). Five GLDriver calls with a float argument are left alone: all are `obj->vfunc_0xf0(float)`, the count came from the
+   vtable temp. libGL's five (`glMap1d` & co.) are template-generated dispatch stubs that forward every register.
+   With it, two link-stage fixes the probes exposed:
+   * `rewrites.rewrite_pair_results` (a 32-bit result kept in an r3:r4 pair variable goes to the high word) matched only a call on one line:
+     `uVar64 = TParseContext__addConstMatrixNode\n (...)` stayed in the low word, the parser read the node as null and typed `m[1]` of a
+     `const mat2` as `const float` ("not enough data provided for construction"). The right-hand side is now parsed, and indirect calls count
+     (glprog 100 -> 106 sites, GLDriver 94 -> 104). `Tests/userspace/glsl_constmat.vert`.
+   * The re-decompiles inline read-only constants (GLDriver 64 fewer data symbols: `__TEXT,__const`/`__literal`, and 7 `__DATA,__const`
+     pointers now printed as the address they hold, `&DAT_001dbd14` - relocated by the linker). An integer or pointer cast of a float literal
+     is its bit pattern (ghidra2c): FUN_000a9ac0 `local_54 ^ (uint)1.0` - the stock XORs with the word of FLOAT_001aa0e8, 0x3f800000.
+   Checked with `Tests/userspace/glsl_probes.sh` (cmp on files; the pre-fix image fails it), gld/glprog/GA/VA/libGL tests, ftoa_test.
 Step 2 was repeated with an exhaustive candidate set - every function whose C returns nothing, checked against every stock call site
 (`Tools/userspace/ret_used.py`): `AllocateAtom`, `NewSymbol`, `lNewBlock`, `glpWriteSourceOperand` (214 callers)... (b3/setret_*.txt: 25 glprog, 42
 GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merely passes through).

@@ -104,7 +104,8 @@ int TIntermBinary__promote(this, param_2, param_3, param_4, param_5, param_6)
   unsigned char aaStack_50 [4];
   uint local_4c;
   
-  uVar6 = (**(code **)(**(int **)(this + 0x34) + 0x48))(*(int **)(this + 0x34));
+  uVar6 = (**(code **)(**(int **)(this + 0x34) + 0x48))
+                    (*(int **)(this + 0x34),param_2,param_3,param_4,param_5,param_6);
   iVar7 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
   if ((int)uVar6 < iVar7) {
     uVar6 = (**(code **)(**(int **)(this + 0x38) + 0x48))(*(int **)(this + 0x38));
@@ -295,7 +296,7 @@ LAB_97b90940:
             }
           } while (!(bool)(bVar13 >> 1 & 1));
           if ((int)puVar5 < 1) {
-            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_a0 + -3));
+            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_a0 + -3),(unsigned char *)&local_90);
           }
           __ZN13TInfoSinkBase6appendEPKc(param_2,": ");
 code_r0x97b91274:
@@ -411,7 +412,7 @@ LAB_97b914fc:
               }
             } while (!(bool)(bVar13 >> 1 & 1));
             if ((int)puVar5 < 1) {
-              __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_a0 + -3));
+              __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_a0 + -3),&local_90);
             }
             __ZN13TInfoSinkBase6appendEPKc(param_2,": ");
             goto code_r0x97b91274;
@@ -2619,7 +2620,7 @@ int TIntermediate__changeAggrToTempConst(this, param_2, param_3, param_4)
   
   a2 = param_3;
   iVar2 = param_4;
-  (**(code **)(*(int *)param_2 + 0x38))(local_60);
+  (**(code **)(*(int *)param_2 + 0x38))(local_60,param_2,param_3,param_4);
   if ((local_3c & 0x400) == 0) {
     iVar1 = (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18;
   }
@@ -2767,7 +2768,7 @@ int TIntermediate__promoteConstantUnion(this, param_2, param_3)
   
   iVar8 = param_3[0xc];
   a2 = param_3;
-  (**(code **)(*param_3 + 0x38))(local_c0,param_3);
+  (**(code **)(*param_3 + 0x38))(local_c0,param_3,param_3);
   if ((local_9c & 0x400) == 0) {
     iVar2 = (int)(local_9c << 0xd | local_9c >> 0x13) >> 0x18;
   }
@@ -2838,7 +2839,7 @@ override_jmp_97b960f0_case_0:
             }
           } while (!(bool)(bVar11 >> 1 & 1));
           if ((int)puVar4 < 1) {
-            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_c0[0] + -3));
+            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_c0[0] + -3),aaStack_b0);
           }
           __ZN13TInfoSinkBase6appendEPKc(this_01,": ");
           __ZN13TInfoSinkBase6appendEPKc(this_01,pcVar9);
@@ -2857,7 +2858,7 @@ override_jmp_97b960f0_case_0:
           }
           else if (uVar6 == 3) {
             uStack_8c = *(uint *)(iVar10 * 4 + iVar8);
-            dVar12 = DOUBLE_97c30a68;
+            dVar12 = 4503599627370496.0;
             goto LAB_97b96098;
           }
           this_01 = *(void **)this;
@@ -2867,7 +2868,7 @@ override_jmp_97b960f0_case_0:
           goto override_jmp_97b960f0_case_0;
         }
         uStack_8c = *(uint *)(iVar10 * 4 + iVar8) ^ 0x80000000;
-        dVar12 = DOUBLE_97c30a58;
+        dVar12 = 4503601774854144.0;
 LAB_97b96098:
         in_r9 = (undefined *)(iVar10 * 4);
         local_90 = 0x43300000;
@@ -2882,7 +2883,7 @@ LAB_97b96098:
           if (uVar6 < 3) {
             if (uVar6 == 1) {
               in_r9 = &DAT_97c35f58;
-              uVar6 = (uint)((double)*(float *)(iVar10 * 4 + iVar8) != DOUBLE_97c30a48);
+              uVar6 = (uint)(*(float *)(iVar10 * 4 + iVar8) != 0.0);
               goto LAB_97b9625c;
             }
           }
@@ -2943,6 +2944,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   int *a0;
   int *a1;
   undefined4 a1_00;
+  undefined4 a1_01;
   unsigned char * a3;
   int a4;
   unsigned char * a5;
@@ -3028,7 +3030,7 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
           *a0 = (int)puVar13;
           local_80 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
           iVar6 = *a0;
-          a1_00 = (*(code *)**(undefined4 **)param_6)(param_6);
+          a1_00 = (*(code *)**(undefined4 **)param_6)(param_6,a1_01,param_3,a3,a4,a5,a0 + 2);
           (**(code **)(iVar6 + 4))(a0,a1_00);
           param_3 = (unsigned char *)(*(int *)(param_2 + 4) + *param_4 * 4);
           a3 = (unsigned char *)local_4c;
@@ -3079,7 +3081,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   
   a2 = param_3;
   a3 = param_4;
-  iVar3 = (**(code **)(*(int *)param_3 + 0x30))(param_3);
+  iVar3 = (**(code **)(*(int *)param_3 + 0x30))(param_3,param_2,param_3,param_4);
   if (iVar3 == 1) {
     iVar3 = (**(code **)(*(int *)param_4 + 100))(param_4);
     iVar4 = *(int *)**(undefined4 **)(iVar3 + 4);
@@ -3160,6 +3162,7 @@ int TIntermediate__removeMatrixConstNode(this, param_2, param_3, param_4, param_
   int *a0;
   int *piVar11;
   undefined4 a1;
+  undefined4 a1_00;
   unsigned char * a2;
   unsigned char * a3;
   int a4;
@@ -3260,7 +3263,7 @@ LAB_97b96b5c:
         *a0 = (int)puVar12;
         local_80 = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         iVar6 = *a0;
-        uVar7 = (*(code *)**(undefined4 **)param_4)(param_4);
+        uVar7 = (*(code *)**(undefined4 **)param_4)(param_4,a1_00,a2,a3,a4,in_r8,a0 + 2);
         (**(code **)(iVar6 + 4))(a0,uVar7);
         a2 = (unsigned char *)(*(int *)(param_2 + 4) + param_5 * 4 + iVar13 * 4);
         a3 = (unsigned char *)local_4c;
@@ -3368,7 +3371,7 @@ int OutputTreeText(param_1, param_2, param_3)
   char acStack_70 [64];
   unsigned char aaStack_30 [28];
   
-  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
+  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2,param_2,param_3);
   a1 = uVar4 & 0xffff;
   bVar5 = (a1 == 0) << 1;
   if (a1 == 0) {
@@ -3432,7 +3435,7 @@ int OutputSymbol(param_1, param_2, param_3, param_4, param_5, param_6)
   iVar3 = local_3c;
   puVar1 = DAT_a7b7b9e0;
   *(undefined1 *)(local_3c + *(int *)(local_3c + -0xc)) = *DAT_a7b7b9e0;
-  iVar4 = (**(code **)(*(int *)param_1 + 0x60))(param_1,a1,a2);
+  iVar4 = (**(code **)(*(int *)param_1 + 0x60))(param_1,a1,a2,param_4,param_5,param_6,local_3c);
   a6 = *(int *)(iVar4 + 4);
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *puVar1;
   uVar6 = *(undefined4 *)(iVar4 + 4);
@@ -4510,7 +4513,7 @@ int ParseBinary(param_1, param_2, param_3)
   undefined **local_70 [4];
   char acStack_60 [72];
   
-  (**(code **)(*(int *)param_2 + 0x38))(&local_170);
+  (**(code **)(*(int *)param_2 + 0x38))(&local_170,param_2,param_3);
   local_170 = &PTR___ZN5TTypeD1Ev_a7b7d488;
   if (local_14c >> 0x19 == 2) {
     pvVar9 = *(void **)(param_3 + 0x6c);
@@ -4537,7 +4540,7 @@ int ParseBinary(param_1, param_2, param_3)
       }
     } while (!(bool)(bVar10 >> 1 & 1));
     if ((int)puVar6 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),aaStack_160);
     }
     __ZN13TInfoSinkBase6appendEPKc(pvVar9,": ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar9,"Binary Node found in constant constructor");
@@ -4585,7 +4588,7 @@ int ParseBinary(param_1, param_2, param_3)
       }
     } while (!(bool)(bVar10 >> 1 & 1));
     if ((int)puVar6 < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3));
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_170 + -3),aaStack_160);
     }
     __ZN13TInfoSinkBase6appendEPKc(pvVar9,": ");
     __ZN13TInfoSinkBase6appendEPKc(pvVar9,acStack_140);
@@ -4933,7 +4936,7 @@ int ParseSelection(param_1, param_2, param_3)
   unsigned char aaStack_30 [28];
   
   this = *(void **)(param_3 + 0x6c);
-  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
+  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2,param_2,param_3);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   a1 = uVar4 & 0xffff;
   bVar5 = (a1 == 0) << 1;
@@ -4956,7 +4959,7 @@ int ParseSelection(param_1, param_2, param_3)
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Selection Node found in constant constructor");
@@ -5245,7 +5248,7 @@ int ParseLoop(param_1, param_2, param_3)
   unsigned char aaStack_30 [28];
   
   this = *(void **)(param_3 + 0x6c);
-  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
+  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2,param_2,param_3);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   a1 = uVar4 & 0xffff;
   bVar5 = (a1 == 0) << 1;
@@ -5268,7 +5271,7 @@ int ParseLoop(param_1, param_2, param_3)
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Loop Node found in constant constructor");
@@ -5342,7 +5345,7 @@ int ParseBranch(param_1, param_2, param_3)
   unsigned char aaStack_30 [28];
   
   this = *(void **)(param_3 + 0x6c);
-  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2);
+  uVar4 = (*(code *)**(undefined4 **)param_2)(param_2,param_2,param_3);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
   a1 = uVar4 & 0xffff;
   bVar5 = (a1 == 0) << 1;
@@ -5365,7 +5368,7 @@ int ParseBranch(param_1, param_2, param_3)
     }
   } while (!(bool)(bVar5 >> 1 & 1));
   if (iVar3 < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc));
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc),acStack_70);
   }
   __ZN13TInfoSinkBase6appendEPKc(this,": ");
   __ZN13TInfoSinkBase6appendEPKc(this,"Branch Node found in constant constructor");
@@ -5505,7 +5508,7 @@ int TIntermediate__parseConstTree(this, param_2, param_3, param_4, param_5, para
     local_48 = param_8;
     local_40 = param_6;
     (**(code **)(*(int *)param_3 + 8))
-              (param_3,&local_b0,local_60,local_64,local_68,local_6c,DAT_a7b7b9f0);
+              (param_3,&local_b0,local_60,local_64,local_68,local_6c,DAT_a7b7b9f0,local_70);
     if (local_3c == 0) {
       uVar1 = 0;
     }
@@ -6067,7 +6070,7 @@ int TParseContext__constErrorCheck(this, param_2)
   undefined4 in_r9;
   undefined4 in_r10;
   
-  iVar1 = (**(code **)(*(int *)param_2 + 0x44))(param_2);
+  iVar1 = (**(code **)(*(int *)param_2 + 0x44))(param_2,param_2);
   if (iVar1 != 2) {
     pcVar2 = (char *)(*(code *)**(undefined4 **)param_2)(param_2);
     error((int)this,pcVar2,"constant expression required","","",in_r8,in_r9,in_r10);
@@ -6087,7 +6090,7 @@ int TParseContext__integerErrorCheck(this, param_2, param_3)
   undefined4 in_r9;
   undefined4 in_r10;
   
-  iVar1 = (**(code **)(*(int *)param_2 + 0x40))(param_2);
+  iVar1 = (**(code **)(*(int *)param_2 + 0x40))(param_2,param_2,param_3);
   if ((iVar1 == 2) && (iVar1 = (**(code **)(*(int *)param_2 + 0x48))(param_2), iVar1 == 1)) {
     return 0;
   }

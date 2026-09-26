@@ -3,7 +3,7 @@
 corpus: OUT_DIR/decls.h (prototypes + data/import declarations), OUT_DIR/part_NNN.c (PART_SIZE functions each, default 60),
 OUT_DIR/ledger.tsv (address, size, name, part, status). The function text is unchanged apart from: (1) class/struct-typed
 pointer types Ghidra invented become `unsigned char *` (byte arithmetic, as Ghidra models them); (2) comment header removed."""
-import sys, os, re, collections
+import sys, os, re, collections, struct
 src, out = sys.argv[1], sys.argv[2]
 part = int(sys.argv[3]) if len(sys.argv) > 3 else 60
 text_ranges = []   # (lo, hi) of code sections: DAT_/LAB_/UNK_ addresses inside them are numeric constants Ghidra mislabels
@@ -558,6 +558,11 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
+            # an integer / pointer cast of a float LITERAL is its bit pattern: Ghidra inlines a read-only float constant it read with an integer load
+            # (GLDriver FUN_000a9ac0: `local_54 ^ (uint)1.0`, `param_4 == (undefined *)1.0` - the stock compares words with 0x3f800000 loaded by
+            # lwz from FLOAT_001aa0e8); PowerPC 32 has no float->int conversion without fctiw, and a real one of a constant would be folded
+            b = re.sub(r'\(((?:uint|int|undefined4|ulong|long|[A-Za-z_]\w*(?: \w+)*\s*\*+))\)\s*(-?\d+\.\d+(?:e[-+]?\d+)?)\b(?!\s*[fF])',
+                       lambda m: '(%s)0x%08xU' % (m.group(1), struct.unpack('>I', struct.pack('>f', float(m.group(2))))[0]), b)
             # a pointer cast of an element of a float/double cursor (`(undefined4 *)pfVar3[3]`: GLDriver FUN_000ddbcc reads three floats and then a
             # pointer word from one stream) converts the float VALUE; the stock loads the word - reinterpret it
             b = re.sub(r'\(([A-Za-z_]\w*(?:\s*\*)+)\)\s*(p[fd]Var\d+)\[([^\[\]]+)\]', r'(*(\1 *)(\2 + (\3)))', b)

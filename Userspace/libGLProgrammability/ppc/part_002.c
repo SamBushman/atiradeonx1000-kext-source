@@ -447,7 +447,8 @@ int _CPPelse(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   puVar1 = PTR__cpp_a7b7c0a4;
   iVar4 = 0;
   iVar3 = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
-                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20));
+                    (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),param_2,param_3,param_4,param_5,
+                     param_6,param_7);
   do {
     while( true ) {
       while( true ) {

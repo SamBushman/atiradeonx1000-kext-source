@@ -13,7 +13,7 @@ int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, param_3
   undefined4 in_r9;
   undefined4 in_r10;
   
-  iVar1 = (**(code **)(*(int *)param_3 + 0x40))(param_3);
+  iVar1 = (**(code **)(*(int *)param_3 + 0x40))(param_3,param_2,param_3,param_4,param_5,param_6);
   if ((((iVar1 == 3) && (iVar1 = (**(code **)(*(int *)param_3 + 0x54))(param_3), iVar1 == 0)) &&
       (iVar1 = (**(code **)(*(int *)param_3 + 0x50))(param_3), iVar1 == 0)) &&
      (iVar1 = (**(code **)(*(int *)param_3 + 0x58))(param_3), iVar1 == 0)) {
@@ -147,7 +147,7 @@ int TParseContext__containsSampler(this, param_2)
   int iVar3;
   uint uVar4;
   
-  iVar1 = (**(code **)(*(int *)param_2 + 0x20))(param_2);
+  iVar1 = (**(code **)(*(int *)param_2 + 0x20))(param_2,param_2);
   uVar2 = 1;
   if (7 < iVar1 - 5U) {
     iVar1 = (**(code **)(*(int *)param_2 + 0x20))(param_2);
@@ -807,7 +807,7 @@ int TParseContext__arraySetMaxSize(this, param_2, param_3, param_4, param_5, par
   local_50 = 0;
   piVar7 = *(int **)(this + 4);
   iVar5 = param_6;
-  uVar2 = (**(code **)(*(int *)param_2 + 0x60))(param_2);
+  uVar2 = (**(code **)(*(int *)param_2 + 0x60))(param_2,param_2,param_3,param_4,param_5,param_6);
   iVar6 = *piVar7;
   iVar3 = (piVar7[1] - iVar6 >> 2) + -1;
   while( true ) {
@@ -928,7 +928,7 @@ LAB_97b9cf8c:
         }
       } while (!(bool)(bVar9 >> 1 & 1));
       if (iVar5 < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_d0 + -0xc));
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_d0 + -0xc),acStack_a0);
       }
       __ZN13TInfoSinkBase6appendEPKc(pvVar4,": ");
       __ZN13TInfoSinkBase6appendEPKc(pvVar4,"gl_MaxTextureCoords not defined");
@@ -1487,7 +1487,7 @@ int TParseContext__findFunction(this, param_2, param_3, param_4, param_5, param_
   
   piVar6 = *(int **)(this + 4);
   a3 = param_4;
-  uVar3 = (**(code **)(*(int *)param_3 + 8))(param_3);
+  uVar3 = (**(code **)(*(int *)param_3 + 8))(param_3,param_2,param_3,param_4,param_5,param_6);
   iVar5 = *piVar6;
   iVar2 = (piVar6[1] - iVar5 >> 2) + -1;
   while( true ) {
@@ -2162,7 +2162,7 @@ int TParseContext__canNodeBeRemoved(this, param_2)
   int iVar3;
   undefined4 *puVar4;
   
-  this_00 = (unsigned char *)(**(code **)(*(int *)param_2 + 0x1c))(param_2);
+  this_00 = (unsigned char *)(**(code **)(*(int *)param_2 + 0x1c))(param_2,param_2);
   uVar1 = 0;
   if (this_00 != (unsigned char *)0x0) {
     iVar2 = TIntermOperator__isConstructor(this_00);
@@ -2421,7 +2421,8 @@ int TParseContext__constructStruct(this, param_2, param_3, param_4, param_5, par
   a3 = param_4;
   a4 = param_5;
   a5 = param_6;
-  piVar1 = (int *)(**(code **)(*(int *)param_2 + 0x14))(param_2);
+  piVar1 = (int *)(**(code **)(*(int *)param_2 + 0x14))
+                            (param_2,param_2,param_3,param_4,param_5,param_6);
   (**(code **)(*piVar1 + 0x38))(local_80,piVar1);
   a6 = 0;
   if (((*(uint *)(param_3 + 0x24) & 0x1fffe00) == (local_5c & 0x1fffe00)) &&
@@ -2485,7 +2486,7 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
   
   pTVar9 = param_3;
   iVar11 = param_4;
-  iVar5 = (**(code **)(*(int *)param_3 + 0x18))(param_3);
+  iVar5 = (**(code **)(*(int *)param_3 + 0x18))(param_3,param_2,param_3,param_4,param_5,param_6);
   a1 = (unsigned char *)(**(code **)(*(int *)param_3 + 0x1c))(param_3);
   if (iVar5 != 0) {
     pcVar10 = *(unsigned char **)(iVar5 + 0x30);
@@ -2514,7 +2515,7 @@ int TParseContext__addConstVectorNode(this, param_2, param_3, param_4, param_5, 
         }
       } while (!(bool)(bVar12 >> 1 & 1));
       if ((int)puVar4 < 1) {
-        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_90[0] + -3));
+        __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_90[0] + -3),acStack_80);
       }
       __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
       __ZN13TInfoSinkBase6appendEPKc
@@ -2633,7 +2634,7 @@ int TParseContext__addConstMatrixNode(this, param_2, param_3, param_4)
   
   a2 = (char *)param_3;
   a3 = (char *)param_4;
-  piVar1 = (int *)(**(code **)(*(int *)param_3 + 0x18))(param_3);
+  piVar1 = (int *)(**(code **)(*(int *)param_3 + 0x18))(param_3,param_2,param_3,param_4);
   a1 = (unsigned char *)(**(code **)(*(int *)param_3 + 0x1c))(param_3);
   (**(code **)(*(int *)param_3 + 0x38))(local_60,param_3);
   local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -2750,7 +2751,7 @@ int TParseContext__addConstStruct(this, param_2, param_3, param_4, param_5, para
   iVar8 = 0;
   a2 = param_3;
   iVar1 = param_4;
-  (**(code **)(*(int *)param_3 + 0x38))(local_80,param_3);
+  (**(code **)(*(int *)param_3 + 0x38))(local_80,param_3,param_3,param_4,param_5,param_6);
   iVar6 = *(int *)param_3;
   local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   pTVar2 = (unsigned char *)(**(code **)(iVar6 + 0x18))(param_3,a1_00,a2,iVar1,param_5,param_6,iVar6);

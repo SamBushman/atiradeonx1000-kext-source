@@ -110,3 +110,30 @@ run glprog-rl GLProgProject libGLProgrammability.dylib -readOnly -postScript Red
 rm -rf ga-rl && cp -r ga-is ga-rl
 run ga-rl Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript RetypeLocals.java $(cat $B/retype_locals_ga.txt)
 run ga-rl Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cut -d: -f1 $B/retype_locals_ga.txt)
+# step 16: arguments still dropped at call sites, from Tools/userspace/callarg_check.py (a register argument the stock sets - constant, incoming
+# parameter or stack address - that the C call does not pass at its position). glprog: the PIC stubs of _InterpreterNoiseGeneratorCalculate4D and
+# of the RECT texture fetch took fewer parameters than their definitions read (ExtendParams); _InterpreterEmulateOp's noise output pointer is
+# fixed in patches.py. GLDriver: prototypes for its libGLProgrammability / libGLImage imports (SetImportSignatures: glgConvertType printed 3 of
+# its 8 arguments) and FUN_00165b7c forwards 7 registers to a call through a pointer.
+rm -rf glprog-rc && cp -r glprog-rl glprog-rc
+run glprog-rc GLProgProject libGLProgrammability.dylib -postScript ExtendParams.java $(cat $B/extend2_glprog.txt)
+run glprog-rc GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/extend2_redump_glprog.txt)
+rm -rf gld-gl && cp -r gld-rl gld-gl
+run gld-gl GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript SetImportSignatures.java
+run gld-gl GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ForwardArgs.java 0x165b7c:7
+run gld-gl GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/glfix_redump_gld.txt)
+# step 17: indirect calls printed with fewer arguments than the stock passes (OverrideIndirectCalls.java only widened calls printed with none):
+# Tools/userspace/indirect_args.py lists every bctrl's argument registers (b3/indirect_args_*.txt), ExtendIndirectCalls.java widens the calls that
+# pass fewer (never narrows; calls with float arguments are left alone and listed) and writes the functions it changed (b3/indirect_redump_*.txt)
+rm -rf gld-ia && cp -r gld-gl gld-ia
+run gld-ia GLDProject ATIRadeonX1000GLDriver.bundle.bin -postScript ExtendIndirectCalls.java $B/indirect_args_gld.txt /dev/null
+run gld-ia GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/indirect_redump_gld.txt)
+rm -rf glprog-ia && cp -r glprog-rc glprog-ia
+run glprog-ia GLProgProject libGLProgrammability.dylib -postScript ExtendIndirectCalls.java $B/indirect_args_glprog.txt /dev/null
+run glprog-ia GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/indirect_redump_glprog.txt)
+rm -rf ga-ia && cp -r ga-rl ga-ia
+run ga-ia Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -postScript ExtendIndirectCalls.java $B/indirect_args_ga.txt /dev/null
+run ga-ia Rest32Project ATIRadeonX1000GA.plugin.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_ga $(cat $B/indirect_redump_ga.txt)
+rm -rf va-ia && cp -r va-is va-ia
+run va-ia Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -postScript ExtendIndirectCalls.java $B/indirect_args_va.txt /dev/null
+run va-ia Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScript RedumpContaining.java $OUT/n_va $(cat $B/indirect_redump_va.txt)

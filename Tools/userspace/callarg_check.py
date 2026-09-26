@@ -92,13 +92,52 @@ def lit(e):
     v = imm(e.rstrip('UuLl'))
     if v is None and re.match(r"^-\d+$", e): v = int(e)
     return None if v is None else v & 0xffffffff
+def param_copies(rng):
+    """{callee-saved reg: incoming argument index} for registers whose only definition in the function is a prologue copy `or rX,rY,rY` of an
+    argument register rY that nothing overwrote before the copy"""
+    defs = collections.defaultdict(list); first_call = None; seq = []
+    for lo, hi in rng:
+        for a in range(lo, hi, 4):
+            if a not in ins: continue
+            op, arg = ins[a]; seq.append(a)
+            if op in ('bl', 'bctrl') and first_call is None: first_call = a
+            p = [x.strip() for x in arg.split(';')[0].split(',')]
+            if op == 'lmw' or op == 'lwz' and len(p) > 1 and p[1].endswith('(r1)') and int(p[0][1:]) >= 13: continue   # the epilogue's restore
+            if p and re.match(r'r\d+$', p[0]) and not op.startswith(('st', 'cmp', 'b', 'tw', 'mt')): defs[int(p[0][1:])].append((a, op, p))
+    out = {}
+    for r, ds in defs.items():
+        if r < 13 or len(ds) != 1: continue
+        a, op, p = ds[0]
+        if op == 'or' and len(p) == 3 and p[1] == p[2] and re.match(r'r([3-9]|10)$', p[1]) and (first_call is None or a < first_call):
+            y = int(p[1][1:])
+            if not any(d[0] < a for d in defs.get(y, [])): out[r] = y - 3
+    return out
+def arg_source(a, r, pc):
+    """the source of argument register r at the call at a, within its basic block: ('param', k), ('stack', off) or None"""
+    i = idx[a] - 1
+    while i >= 0 and idx[a] - i < 40:
+        b = order[i]; op, arg = ins[b]
+        if op.startswith('b') or b in BRANCH_TARGETS and b != order[idx[a] - 1]: break
+        p = [x.strip() for x in arg.split(';')[0].split(',')]
+        if p and p[0] == 'r%d' % r and not op.startswith(('st', 'cmp')):
+            if op == 'or' and len(p) == 3 and p[1] == p[2] and int(p[1][1:]) in pc: return ('param', pc[int(p[1][1:])])
+            if op == 'addi' and len(p) == 3 and p[1] == 'r1': return ('stack', int(p[2], 0))
+            return None
+        i -= 1
+    return None
 tot = miss = checked = symd = 0; out = []
+pmiss = pchecked = smiss = schecked = 0
 for ent, (name, rng) in sorted(rows.items()):
     if flt and flt not in name: continue
     f = os.path.join(dump, '0x%x.txt' % ent)
     if not os.path.exists(f): continue
     text = open(f).read(); text = text[text.find('\n{\n'):]
     per = collections.defaultdict(list)
+    pcs = param_copies(rng)
+    _sg = re.search(r'// Signature: .*', open(f).read(2000))
+    # the parameters' names in order (`this`, `param_2`, a demangled name...): an incoming argument is matched by its name
+    pnames = [re.search(r'(\w+)\s*$', x.strip()).group(1) for x in split_args(re.search(r'\((.*)\)', _sg.group(0)).group(1))
+              if x.strip() and x.strip() != 'void' and re.search(r'(\w+)\s*$', x.strip())] if _sg and re.search(r'\((.*)\)', _sg.group(0)) else []
     for lo, hi in rng:
         for a in range(lo, hi, 4):
             if ins.get(a, ('',))[0] != 'bl': continue
@@ -107,7 +146,11 @@ for ent, (name, rng) in sorted(rows.items()):
             cal = ms.group(1) if ms else names.get(t) or (label.get(t) if t is not None else None) or (arg.split()[0] if not mt else None)
             if not cal: continue
             k = consts_before(a)
-            if k: per[short(cal)].append((a, k))
+            src_ = {}
+            for r in range(3, 11):
+                sv = arg_source(a, r, pcs)
+                if sv: src_[r] = sv
+            if k or src_: per[short(cal)].append((a, k, src_))
     for cal, sites in per.items():
         calls = c_calls(text, cal)
         if not calls: continue
@@ -119,7 +162,29 @@ for ent, (name, rng) in sorted(rows.items()):
                 if v is not None: have[(i, v)] += 1
                 ms_ = re.match(r'^(?:\([^()]*\)\s*)?&?(FUN|LAB|DAT|UNK|PTR_\w*)_([0-9a-f]{8})$', e)
                 if ms_: sym[(i, int(ms_.group(2), 16))] = e   # a constant the decompiler printed as a symbol at that address
-        for a, k in sites:
+        haveP = collections.Counter(); haveS = collections.Counter()
+        addrvars = set(re.findall(r'\b(\w+)\s*=\s*(?:\([^()]*\)\s*)?&', text))   # variables the function assigns an address to
+        for args in calls:
+            slot = 0
+            for i_, e_ in enumerate(args):
+                i0 = slot   # the GPR slot of this argument: a double before it takes two (Darwin)
+                slot += 2 if re.search(r'\((?:double)\)|\bdVar\d+|\bDOUBLE_|\bfparam_', e_) else 1
+                i_ = i0
+                e2 = re.sub(r'^(?:\((?:[\w ]+\**)\)\s*)+', '', e_.strip())
+                if e2 in addrvars: haveS[i_] += 1
+                if e2 in pnames: haveP[(i_, pnames.index(e2))] += 1
+                if '&' in e2 or re.match(r'^(?:a[uc]Stack|local_|[a-z]*Stack)\w*', e2) or 'STACKARG' in e2 or 'frame_address' in e2 or 'ghidra_frame' in e2: haveS[i_] += 1
+        for a, k, src_ in sites:
+            for r, sv in sorted(src_.items()):
+                if sv[0] == 'param':
+                    if sv[1] >= len(pnames): continue   # an undeclared incoming register (in_rN, see inreg_liveness.py)
+                    pchecked += 1
+                    if haveP[(r - 3, sv[1])] > 0: haveP[(r - 3, sv[1])] -= 1; continue
+                    pmiss += 1; out.append('%x\t%s\tcall %x %s\tr%d = incoming param_%d not at argument %d of any C call (%d C calls)' % (ent, name, a, cal, r, sv[1] + 1, r - 3, len(calls)))   # param_N: the Nth incoming
+                else:
+                    schecked += 1
+                    if haveS[r - 3] > 0: haveS[r - 3] -= 1; continue
+                    smiss += 1; out.append('%x\t%s\tcall %x %s\tr%d = r1+%#x (a stack address) not at argument %d of any C call (%d C calls)' % (ent, name, a, cal, r, sv[1], r - 3, len(calls)))
             for r, v in sorted(k.items()):
                 checked += 1
                 if have[(r - 3, v)] > 0: have[(r - 3, v)] -= 1; continue
@@ -130,3 +195,4 @@ for ent, (name, rng) in sorted(rows.items()):
                 miss += 1; out.append('%x\t%s\tcall %x %s\tr%d = %#x not at argument %d of any C call (%d C calls)' % (ent, name, a, cal, r, v, r - 3, len(calls)))
 for l in out: print(l)
 print('checked %d constant arguments, %d not found in the C, %d printed as a symbol at that address' % (checked, miss, symd))
+print('checked %d incoming-parameter arguments, %d not at their position; %d stack-address arguments, %d not an address at their position' % (pchecked, pmiss, schecked, smiss))

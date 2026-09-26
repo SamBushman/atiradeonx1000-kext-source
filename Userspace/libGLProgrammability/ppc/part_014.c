@@ -1,7 +1,7 @@
 #include "decls.h"
 
 /* _InterpreterTextureSamplerAttachDerivatives @ 0x97bd3614 (12 bytes) */
-double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1)
+void _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1)
 {
   *(float *)(param_1 + 0x10) = (float)fparam_1;
   *(undefined4 *)(param_1 + 0xc) = param_2;
@@ -9,7 +9,7 @@ double _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   int *piVar2;
@@ -82,7 +82,7 @@ double _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefine
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
 {
   float fVar1;
   int *piVar2;
@@ -158,7 +158,7 @@ double _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefine
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-double _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4 param_3,undefined4 param_4,float *param_5,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
   float fVar1;
   int *piVar2;

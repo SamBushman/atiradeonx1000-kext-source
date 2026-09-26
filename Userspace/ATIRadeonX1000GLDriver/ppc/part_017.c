@@ -2908,16 +2908,20 @@ void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   int iVar2;
   undefined4 *puVar3;
   undefined4 extraout_r4;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  int a6;
   
   if ((*(uint *)(param_1 + 0x44) & 0x100000) == 0) {
     puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
     *(undefined4 **)(FUN_00002748 + param_1 + 4) = puVar3;
     *puVar3 = 0x860;
-    *(undefined4 *)(*(int *)(FUN_00002748 + param_1 + 4) + 4) = *(undefined4 *)(param_1 + 0x1b78);
+    a6 = *(int *)(FUN_00002748 + param_1 + 4);
+    *(undefined4 *)(a6 + 4) = *(undefined4 *)(param_1 + 0x1b78);
     iVar2 = *(int *)(FUN_00002748 + param_1 + 4);
     pcVar1 = *(code **)(param_1 + 0x275c);
     *(int *)(FUN_00002748 + param_1 + 4) = iVar2 + 8;
-    (*pcVar1)(param_1,iVar2 + 8);
+    (*pcVar1)(param_1,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
     FUN_0009be00(param_1);
     fparam_1 = (double)FUN_0009cc30(param_1);
     param_2 = extraout_r4;

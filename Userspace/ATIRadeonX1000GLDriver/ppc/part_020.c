@@ -3887,7 +3887,8 @@ int FUN_000e14e4(param_1, param_2, param_3)
 {
   undefined4 uVar1;
   
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x174))();
+  uVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x174))
+                    (*(int **)(param_1 + 0x30c),param_2,param_3,param_1);
   *(undefined4 *)(param_3 * 4 + param_1 + 0x4d4) = uVar1;
   return;
 }

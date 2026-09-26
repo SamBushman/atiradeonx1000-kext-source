@@ -723,7 +723,7 @@ int FUN_0012740c(param_1)
   
   FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
   while (local_28 != (int *)0x0) {
-    (**(code **)(*local_28 + 4))();
+    (**(code **)(*local_28 + 4))(local_28);
     FUN_00194938(auStack_38);
   }
   return;
@@ -918,7 +918,7 @@ int FUN_00127850(param_1)
   FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
   iVar2 = 0;
   while (local_28 != (int *)0x0) {
-    iVar1 = (**(code **)(*local_28 + 0x18))();
+    iVar1 = (**(code **)(*local_28 + 0x18))(local_28);
     if (iVar1 != 0) {
       iVar2 = iVar2 + 1;
     }

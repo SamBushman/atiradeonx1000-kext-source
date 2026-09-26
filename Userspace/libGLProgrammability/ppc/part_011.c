@@ -1792,7 +1792,7 @@ int TIntermSymbol__compileNode(this, param_2, param_3, param_4, param_5, param_6
   undefined4 *this_01;
   
   this_01 = (undefined4 *)0x0;
-  iVar2 = (**(code **)(*(int *)this + 0x60))(this);
+  iVar2 = (**(code **)(*(int *)this + 0x60))(this,param_2,param_3,param_4,param_5,param_6);
   puVar1 = DAT_a7b7bd04;
   a6 = *(int *)(iVar2 + 4);
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *DAT_a7b7bd04;
@@ -1964,7 +1964,7 @@ int TIntermBinary__compileNode(this, param_2, param_3, param_4, param_5, param_6
   local_38 = (unsigned char *)0x0;
   local_34 = (unsigned char *)0x0;
   local_90 = 0;
-  local_90 = (*(code *)**(undefined4 **)this)(this);
+  local_90 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6);
   puVar16 = *(undefined4 **)this;
   local_c0 = local_c0 & 0x1fffffff | 0x40000000;
   uVar4 = (*(code *)*puVar16)(this,a1,param_3,param_4,param_5,param_6,puVar16);
@@ -2462,7 +2462,7 @@ int TIntermUnary__compileNode(this, param_2, param_3, param_4, param_5, param_6)
   local_7c = 0;
   local_20 = (unsigned char *)0x0;
   local_80 = 0;
-  local_80 = (*(code *)**(undefined4 **)this)(this);
+  local_80 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6);
   local_b0 = local_b0 & 0x1fffffff | 0x20000000;
   uVar3 = (*(code *)**(undefined4 **)this)(this);
   *(undefined4 *)(param_2 + 0x90) = uVar3;
@@ -4441,7 +4441,7 @@ int TIntermBranch__compileNode(this, param_2, param_3, param_4, param_5, param_6
   local_84 = 0;
   local_80 = 0;
   local_7c = 0;
-  local_80 = (*(code *)**(undefined4 **)this)(this);
+  local_80 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6);
   piVar8 = *(int **)(this + 0xc);
   local_b0 = local_b0 & 0x1fffffff;
   uVar5 = extraout_r4;
@@ -4656,7 +4656,7 @@ int TIntermSymbol__indirectNode(this, param_2, param_3, param_4, param_5, param_
   undefined4 *this_01;
   
   this_01 = (undefined4 *)0x0;
-  iVar2 = (**(code **)(*(int *)this + 0x60))(this);
+  iVar2 = (**(code **)(*(int *)this + 0x60))(this,param_2,param_3,param_4,param_5,param_6);
   puVar1 = DAT_a7b7bd0c;
   a6 = *(int *)(iVar2 + 4);
   *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *DAT_a7b7bd0c;
@@ -4903,14 +4903,18 @@ LAB_97bc3364:
 }
 
 /* TIntermUnary__indirectNode @ 0x97bc33b8 (112 bytes) */
-int TIntermUnary__indirectNode(this, param_2)
+int TIntermUnary__indirectNode(this, param_2, param_3, param_4, param_5, param_6)
   unsigned char * this;
   unsigned char * param_2;
+  undefined4 param_3;
+  undefined4 param_4;
+  undefined4 param_5;
+  undefined4 param_6;
 {
   undefined4 uVar1;
   void *this_00;
   
-  uVar1 = (*(code *)**(undefined4 **)this)(this);
+  uVar1 = (*(code *)**(undefined4 **)this)(this,param_2,param_3,param_4,param_5,param_6);
   *(undefined4 *)(param_2 + 0x90) = uVar1;
   this_00 = (void *)(**(code **)(**(int **)(this + 0x34) + 0x10))(*(int **)(this + 0x34),param_2);
   if (this_00 != (void *)0x0) {

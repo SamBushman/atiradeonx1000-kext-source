@@ -367,11 +367,16 @@ int FUN_000546d0(param_1, param_2)
   int param_2;
 {
   int iVar1;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
   int iVar2;
   uint uVar3;
   
   (**(code **)(((unsigned char *)0x000011ac) + param_1))(param_1,param_2,0);
-  (**(code **)(((unsigned char *)0x000011a4) + param_1))(param_1,param_2,*(undefined4 *)(((unsigned char *)0x0000118c) + param_1));
+  (**(code **)(((unsigned char *)0x000011a4) + param_1))
+            (param_1,param_2,*(undefined4 *)(((unsigned char *)0x0000118c) + param_1),in_r6,in_r7,in_r8,
+             *(code **)(((unsigned char *)0x000011a4) + param_1));
   *(undefined4 *)(param_2 + 100) = 0;
   *(undefined4 *)(param_2 + 0x54) = 0;
   *(undefined4 *)(param_2 + 0x58) = 0;
@@ -453,40 +458,40 @@ int FUN_00054980(param_1)
   int param_1;
 {
   bool bVar1;
+  int a0;
   int iVar2;
   int iVar3;
-  int iVar4;
-  uint uVar5;
-  int iVar6;
+  uint uVar4;
+  int iVar5;
   
-  iVar4 = *(int *)(((unsigned char *)0x0000116c) + param_1);
-  if (*(int *)(iVar4 + 4) != 0) {
-    uVar5 = 0;
-    iVar6 = 0;
+  iVar3 = *(int *)(((unsigned char *)0x0000116c) + param_1);
+  if (*(int *)(iVar3 + 4) != 0) {
+    uVar4 = 0;
+    iVar5 = 0;
     do {
-      uVar5 = uVar5 + 1;
-      iVar3 = iVar6 + *(int *)(iVar4 + 0xc);
-      iVar6 = iVar6 + 0x7c;
-      ((int (*)())FUN_00055300)(param_1,iVar3);
-    } while (uVar5 < *(uint *)(iVar4 + 4));
+      uVar4 = uVar4 + 1;
+      iVar2 = iVar5 + *(int *)(iVar3 + 0xc);
+      iVar5 = iVar5 + 0x7c;
+      ((int (*)())FUN_00055300)(param_1,iVar2);
+    } while (uVar4 < *(uint *)(iVar3 + 4));
   }
-  iVar3 = 0;
-  (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0xc));
-  *(undefined4 *)(iVar4 + 4) = 0;
-  ((int (*)())FUN_000551f0)(param_1,iVar4 + 0x14);
-  iVar6 = iVar4;
+  iVar2 = 0;
+  (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar3 + 0xc));
+  *(undefined4 *)(iVar3 + 4) = 0;
+  ((int (*)())FUN_000551f0)(param_1,iVar3 + 0x14);
+  iVar5 = iVar3;
   do {
-    iVar2 = *(int *)(iVar6 + 0x28);
-    while (iVar2 != 0) {
-      *(int *)(iVar6 + 0x28) = *(int *)(iVar2 + 0xc);
-      (**(code **)(param_1 + 0x18))();
-      iVar2 = *(int *)(iVar6 + 0x28);
+    a0 = *(int *)(iVar5 + 0x28);
+    while (a0 != 0) {
+      *(int *)(iVar5 + 0x28) = *(int *)(a0 + 0xc);
+      (**(code **)(param_1 + 0x18))(a0);
+      a0 = *(int *)(iVar5 + 0x28);
     }
-    bVar1 = iVar3 != 0x1f;
-    iVar6 = iVar6 + 4;
-    iVar3 = iVar3 + 1;
+    bVar1 = iVar2 != 0x1f;
+    iVar5 = iVar5 + 4;
+    iVar2 = iVar2 + 1;
   } while (bVar1);
-  (**(code **)(param_1 + 0x18))(iVar4);
+  (**(code **)(param_1 + 0x18))(iVar3);
   *(undefined4 *)(((unsigned char *)0x0000116c) + param_1) = 0;
   return;
 }
@@ -495,7 +500,7 @@ int FUN_00054980(param_1)
 int FUN_00054a90(param_1)
   int param_1;
 {
-  (**(code **)(((unsigned char *)0x000011a8) + param_1))();
+  (**(code **)(((unsigned char *)0x000011a8) + param_1))(param_1);
   **(int **)(((unsigned char *)0x0000116c) + param_1) = **(int **)(((unsigned char *)0x0000116c) + param_1) + -1;
   if (**(int **)(((unsigned char *)0x0000116c) + param_1) == 0) {
     ((int (*)())FUN_00054980)(param_1);
@@ -793,6 +798,7 @@ int FUN_000551f0(param_1, param_2)
   uint *param_2;
 {
   int iVar1;
+  int a0;
   uint uVar2;
   uint uVar3;
   uint uVar4;
@@ -804,8 +810,9 @@ int FUN_000551f0(param_1, param_2)
     if (uVar3 != 0) {
       do {
         iVar1 = uVar4 * 0x54 + uVar2;
-        if ((*(int *)(iVar1 + 0x38) != 0) && (*(char *)(iVar1 + 0x3c) != '\0')) {
-          (**(code **)(param_1 + 0x18))();
+        a0 = *(int *)(iVar1 + 0x38);
+        if ((a0 != 0) && (*(char *)(iVar1 + 0x3c) != '\0')) {
+          (**(code **)(param_1 + 0x18))(a0);
           *(undefined4 *)(uVar4 * 0x54 + param_2[1] + 0x38) = 0;
           uVar2 = param_2[1];
           uVar3 = *param_2;
@@ -830,15 +837,15 @@ int FUN_00055300(param_1, param_2)
 {
   (**(code **)(((unsigned char *)0x000011ac) + param_1))(param_1,param_2,1);
   if (*param_2 != 0) {
-    (**(code **)(param_1 + 0x18))();
+    (**(code **)(param_1 + 0x18))(*param_2);
     *param_2 = 0;
   }
   if (param_2[1] != 0) {
-    (**(code **)(param_1 + 0x18))();
+    (**(code **)(param_1 + 0x18))(param_2[1]);
     param_2[1] = 0;
   }
   if (param_2[6] != 0) {
-    (**(code **)(param_1 + 0x18))();
+    (**(code **)(param_1 + 0x18))(param_2[6]);
     param_2[6] = 0;
     param_2[5] = 0;
   }

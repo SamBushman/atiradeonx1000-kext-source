@@ -251,6 +251,11 @@ PATCHES = {
     '__Unwind_RaiseException': _scoped('glprog', _body('_Unwind_RaiseException (0x97c1bb6c)', _UW_RAISE)),
     '__Unwind_ForcedUnwind': _scoped('glprog', _body('_Unwind_ForcedUnwind (0x97c1bd8c)', _UW_FORCED, (('  unsigned char stop;\n', '  void *stop;\n'),))),
     '__Unwind_Resume': _scoped('glprog', _body('_Unwind_Resume (0x97c1be20)', _UW_RESUME)),
+    # _InterpreterEmulateOp (glprog, stock 0x97bcdd50): the noise() opcodes call _InterpreterNoiseGeneratorCalculate1D..4D(state, in, out) with
+    # `addi r3,r23,4; addi r4,r1,0x70; addi r5,r1,0x60; bl` (0x97bd0b98..0x97bd0be0). The decompiler shows r4 as `local_130 + 4` (local_130 is the
+    # float[12] at r1+0x60) but prints r5 as the function's own untouched `in_r5` - it loses that `addi` (it does so for these four sites only;
+    # callarg_check.py, stack-address arguments). C: the output is `local_130` itself.
+    '_InterpreterEmulateOp': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'(_InterpreterNoiseGeneratorCalculate[1-4]D\)?\s*\(param_1 \+ 1,local_130 \+ 4,)in_r5\)', r'\1local_130)', 4, '_InterpreterEmulateOp noise output (0x97bd0ba0..)')),
     '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
     '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 

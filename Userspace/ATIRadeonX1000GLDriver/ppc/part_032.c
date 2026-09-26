@@ -2220,7 +2220,7 @@ int FUN_00112f08(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return iVar1 + param_1 * 0x38 + 0x10;
 }
 
@@ -2238,7 +2238,7 @@ int FUN_00112f78(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) & 1;
 }
 
@@ -2266,8 +2266,8 @@ int FUN_00112fe4(param_1)
   undefined4 uVar4;
   int *piVar5;
   
-  iVar2 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))();
-  iVar3 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x40))();
+  iVar2 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c));
+  iVar3 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x40))(*(int **)(param_1 + 0x30c));
   if (iVar3 < 1) {
 LAB_00113034:
     uVar4 = 1;
@@ -2295,7 +2295,7 @@ int FUN_00113090(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 2 & 1;
 }
 
@@ -2306,7 +2306,7 @@ int FUN_001130dc(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 3 & 1;
 }
 
@@ -2317,7 +2317,7 @@ int FUN_00113128(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 6 & 1;
 }
 
@@ -2328,7 +2328,7 @@ int FUN_00113174(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 7 & 1;
 }
 
@@ -2339,7 +2339,7 @@ int FUN_001131c0(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 8 & 1;
 }
 
@@ -2350,7 +2350,7 @@ int FUN_0011320c(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 9 & 1;
 }
 
@@ -2361,7 +2361,7 @@ int FUN_00113258(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 10 & 1;
 }
 
@@ -2372,7 +2372,7 @@ int FUN_001132a4(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 0xc & 1;
 }
 
@@ -2383,7 +2383,7 @@ int FUN_001132f0(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(uint *)(param_1 * 0x38 + iVar1) >> 0xd & 1;
 }
 
@@ -2394,7 +2394,7 @@ int FUN_0011333c(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(undefined4 *)(param_1 * 0x38 + iVar1 + 4);
 }
 
@@ -2405,7 +2405,7 @@ int FUN_00113388(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0x30);
 }
 
@@ -2416,7 +2416,7 @@ int FUN_001133d4(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0xc);
 }
 
@@ -2427,7 +2427,7 @@ int FUN_00113420(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c));
+  iVar1 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x16c))(*(int **)(param_2 + 0x30c),param_2);
   return *(undefined4 *)(param_1 * 0x38 + iVar1 + 0x34);
 }
 
@@ -2438,7 +2438,7 @@ int FUN_0011346c(param_1, param_2)
 {
   int iVar1;
   
-  iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))();
+  iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c),param_2);
   return *(uint *)(iVar1 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
 }
 
@@ -2599,11 +2599,13 @@ int FUN_00113734(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_7;
 {
   uint uVar1;
+  int *a0;
   int iVar2;
   
   uVar1 = 0;
-  if (((*(int **)(param_1 + 0x30c))[2] & 0x10U) != 0) {
-    iVar2 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))();
+  a0 = *(int **)(param_1 + 0x30c);
+  if ((a0[2] & 0x10U) != 0) {
+    iVar2 = (**(code **)(*a0 + 0x16c))(a0);
     uVar1 = *(uint *)(iVar2 + *(int *)(*(int *)(param_2 + 0x88) + 8) * 0x38) >> 2 & 1;
   }
   return uVar1;
@@ -2619,7 +2621,7 @@ int FUN_0011379c(param_1, param_2)
   undefined4 uVar3;
   int iVar4;
   
-  iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))();
+  iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c),param_2);
   iVar4 = *(int *)(*(int *)(param_2 + 0x88) + 8);
   iVar2 = ((int (*)())FUN_00113174)(iVar4,param_1);
   if ((iVar2 != 0) || (uVar3 = 1, (*(uint *)(iVar1 + iVar4 * 0x38) & 2) == 0)) {

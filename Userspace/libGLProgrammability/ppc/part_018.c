@@ -288,7 +288,7 @@ int _HashSetAdd(param_1, param_2)
   
   uVar4 = 0;
   uVar3 = 0xffffffff;
-  uVar1 = (*(code *)param_1[2])(param_2);
+  uVar1 = (*(code *)param_1[2])(param_2,param_2);
   a6 = param_1[1];
   iVar2 = (uVar1 - (uVar1 / *param_1) * *param_1) * 8;
   puVar5 = (uint *)(a6 + iVar2);
@@ -344,7 +344,7 @@ int _HashSetGet(param_1, param_2)
   uint uVar4;
   
   uVar4 = 0;
-  uVar1 = (*(code *)param_1[2])(param_2);
+  uVar1 = (*(code *)param_1[2])(param_2,param_2);
   a6 = param_1[1];
   iVar2 = (uVar1 - (uVar1 / *param_1) * *param_1) * 8;
   puVar3 = (uint *)(a6 + iVar2);
@@ -380,7 +380,7 @@ int _HashSetRemove(param_1, param_2)
   uint uVar6;
   
   uVar6 = 0;
-  uVar3 = (*(code *)param_1[2])(param_2);
+  uVar3 = (*(code *)param_1[2])(param_2,param_2);
   a6 = param_1[1];
   iVar1 = (uVar3 - (uVar3 / *param_1) * *param_1) * 8;
   puVar5 = (uint *)(a6 + iVar1);
@@ -525,7 +525,7 @@ int _HashTableAdd(param_1, param_2, param_3)
   uVar7 = 0;
   uVar5 = 0xffffffff;
   a2 = param_3;
-  uVar2 = (*(code *)puVar6[2])(param_2);
+  uVar2 = (*(code *)puVar6[2])(param_2,param_2,param_3);
   a6 = puVar6[1];
   iVar1 = (uVar2 - (uVar2 / *puVar6) * *puVar6) * 8;
   puVar8 = (uint *)(a6 + iVar1);
@@ -594,7 +594,7 @@ int _HashTableGet(param_1, param_2)
   
   uVar6 = 0;
   puVar4 = (uint *)*param_1;
-  uVar1 = (*(code *)puVar4[2])(param_2);
+  uVar1 = (*(code *)puVar4[2])(param_2,param_2);
   a6 = puVar4[1];
   iVar3 = (uVar1 - (uVar1 / *puVar4) * *puVar4) * 8;
   puVar5 = (uint *)(a6 + iVar3);
@@ -632,7 +632,7 @@ int _HashTableRemove(param_1, param_2, param_3, param_4, param_5, param_6)
   
   uVar6 = 0;
   puVar4 = (uint *)*param_1;
-  uVar2 = (*(code *)puVar4[2])(param_2);
+  uVar2 = (*(code *)puVar4[2])(param_2,param_2,param_3,param_4,param_5,param_6);
   a6 = puVar4[1];
   iVar1 = (uVar2 - (uVar2 / *puVar4) * *puVar4) * 8;
   puVar5 = (uint *)(a6 + iVar1);

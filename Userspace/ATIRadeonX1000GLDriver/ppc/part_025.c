@@ -999,8 +999,11 @@ int FUN_000f3c30(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_34 [7];
   
   (*(char *)(*(unsigned int *)__builtin_frame_address(0) + 0x28)) = param_5;
-  (**(code **)(*param_2 + 0x14))(param_2);
-  *(undefined4 *)param_1 = DAT_001aa844;
+  (**(code **)(*param_2 + 0x14))(param_2,param_2,param_3,param_4,param_5);
+  param_1[0] = 0;
+  param_1[1] = 0;
+  param_1[2] = 0;
+  param_1[3] = 0;
   if (0 < param_3) {
     iVar4 = FUN_00105594(param_2,param_3);
     if (iVar4 == 0) {
@@ -1191,10 +1194,10 @@ int FUN_000f403c(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_28;
   undefined4 local_24 [3];
   
-  (**(code **)(*param_2 + 0x14))(param_2);
+  (**(code **)(*param_2 + 0x14))(param_2,param_2,param_3,param_4,param_5);
   iVar4 = FUN_001054ec(param_2,param_3);
   local_58 = *(uint *)(iVar4 + 0x10);
-  *param_1 = DAT_001aa844;
+  *param_1 = 0;
   uVar5 = FUN_001134bc(param_2[0x22],param_2,param_5);
   switch(uVar5) {
   case 0:

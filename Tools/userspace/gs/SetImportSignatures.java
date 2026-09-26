@@ -36,7 +36,11 @@ public class SetImportSignatures extends GhidraScript {
             "_keymgr_set_per_thread_data:2 NSIsSymbolNameDefinedWithHint:2 NSLookupAndBindSymbolWithHint:2 NSAddressOfSymbol:1",
             "__cxa_guard_acquire:1 __cxa_guard_release:1 __cxa_allocate_exception:1 __cxa_throw:3 __cxa_begin_catch:1 __cxa_end_catch:0",
             "__cxa_rethrow:0 __cxa_free_exception:1 __cxa_get_globals:0 __cxa_get_globals_fast:0 __cxa_call_unexpected:1 _Unwind_Resume:1",
-            "__ashldi3:3 __lshrdi3:3 __ashrdi3:3 __eprintf:4 __isnanf:1");
+            "__ashldi3:3 __lshrdi3:3 __ashrdi3:3 __eprintf:4 __isnanf:1",
+            // GLDriver's imports from libGLProgrammability (their definitions there: registers each one reads) and libGLImage (not transcribed
+            // here: all eight argument registers, so no argument can be dropped; an extra one is ignored)
+            "glpPPShaderLinearize:2 glpPPShaderToProgram:3 glpFreePPShaderLinearize:1 glpFreePPShaderToProgram:1 glpUniformToFloat:4",
+            "glgConvertType:8 glgProcessPixels:8 glgPixelCenters:8");
         for (String kv : t.split(" ")) { String[] p = kv.split(":"); N.put(p[0], Integer.parseInt(p[1])); }
     }
     int count = 0;

@@ -7791,7 +7791,6 @@ int FUN_0004ac90(param_1)
   uint *puVar13;
   int iVar14;
   double fparam_1;
-  double dVar15;
   undefined4 local_58;
   undefined4 local_54;
   undefined4 local_50;
@@ -7810,12 +7809,11 @@ int FUN_0004ac90(param_1)
   bVar1 = false;
   if (uVar11 != 0) {
     uVar10 = 0;
-    dVar15 = (double)FLOAT_001aa0d4;
     iVar12 = param_1;
     do {
       iVar3 = *(int *)(((unsigned char *)0x000013f8) + iVar12);
       if (((iVar3 != 0) && (*(short *)(iVar3 + 0x38) == 0x1902)) &&
-         (fparam_1 = (double)*(float *)(iVar3 + 0x50), fparam_1 != dVar15)) {
+         (fparam_1 = (double)*(float *)(iVar3 + 0x50), fparam_1 != 0.0)) {
         iVar3 = ((int)uVar10 >> 2) + (uint)((int)uVar10 < 0 && (uVar10 & 3) != 0);
         if (iVar3 == 1) {
           iVar14 = ((uint (*)())FUN_0004a7d0)(fparam_1);
@@ -7850,17 +7848,16 @@ int FUN_0004ac90(param_1)
     local_54 = *(undefined4 *)(((unsigned char *)0x00002de4) + iVar12);
     local_50 = *(undefined4 *)(((unsigned char *)0x00002de8) + iVar12);
     local_4c = 0;
-    local_48 = FLOAT_001aa114 /
-               (*(float *)(((unsigned char *)0x00002df8) + iVar12) - *(float *)(((unsigned char *)0x00002df4) + iVar12));
+    local_48 = -1.0 / (*(float *)(((unsigned char *)0x00002df8) + iVar12) - *(float *)(((unsigned char *)0x00002df4) + iVar12));
     local_44 = *(float *)(((unsigned char *)0x00002df8) + iVar12) * *(float *)(((unsigned char *)0x00002dfc) + iVar12);
-    local_40 = (float)((double)*(float *)(((unsigned char *)0x00002df0) + iVar12) / DOUBLE_001aa268);
-    local_3c = (float)((double)*(float *)(((unsigned char *)0x00002df0) + iVar12) / DOUBLE_001aa270);
+    local_40 = *(float *)(((unsigned char *)0x00002df0) + iVar12) / 0.6931472;
+    local_3c = *(float *)(((unsigned char *)0x00002df0) + iVar12) / 0.83255464;
     (**(code **)(((unsigned char *)0x00001280) + param_1))
               (param_1,0,
                *(undefined4 *)(((unsigned char *)0x00003878) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(param_1 + 0x1e5c)))
                ,*(undefined4 *)
                  (((unsigned char *)0x00003878) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(param_1 + 0x1e5c))),&local_58,1,
-               1);
+               1,*(code **)(((unsigned char *)0x00001280) + param_1));
     (**(code **)(((unsigned char *)0x00001280) + param_1))
               (param_1,0,
                *(undefined4 *)(((unsigned char *)0x0000387c) + *(int *)(((unsigned char *)0x000036c0) + *(int *)(param_1 + 0x1e5c)))
@@ -8047,7 +8044,7 @@ LAB_0004b42c:
     iVar7 = *(int *)(param_1 + 0x1e5c);
     ((unsigned char *)0x000010e9)[iVar7] = 0;
     ((unsigned char *)0x000010ea)[iVar7] = 0;
-    (**(code **)(param_1 + 0x294c))(param_1);
+    (**(code **)(param_1 + 0x294c))(param_1,iVar7);
     pcVar3 = *(code **)(((unsigned char *)0x00001330) + param_1);
     uVar8 = *(undefined4 *)(param_1 + 0x1930);
   }
@@ -8106,19 +8103,24 @@ int FUN_0004b480(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  code *pcVar2;
-  undefined4 uVar3;
+  undefined4 in_r5;
+  undefined4 in_r6;
+  undefined4 in_r7;
+  undefined4 in_r8;
+  code *a6;
+  undefined4 uVar2;
   
   iVar1 = param_2 * 4 + param_1;
   if (*(int *)(((unsigned char *)0x00001448) + iVar1) != 0) {
-    uVar3 = *(undefined4 *)(param_1 + 0x1930);
+    uVar2 = *(undefined4 *)(param_1 + 0x1930);
     *(undefined4 *)(param_1 + 0x23e0) = 0;
     **(undefined1 **)(((unsigned char *)0x00001448) + iVar1) = 0;
-    (**(code **)(((unsigned char *)0x00001290) + param_1))(param_1,*(undefined4 *)(((unsigned char *)0x00001448) + iVar1));
-    pcVar2 = *(code **)(((unsigned char *)0x00001330) + param_1);
+    (**(code **)(((unsigned char *)0x00001290) + param_1))
+              (param_1,*(undefined4 *)(((unsigned char *)0x00001448) + iVar1),in_r5,in_r6,in_r7,in_r8,0);
+    a6 = *(code **)(((unsigned char *)0x00001330) + param_1);
     *(uint *)(param_1 + 0x1f2c) = *(uint *)(param_1 + 0x1f2c) & 0xfffff800 | 0x80;
-    (*pcVar2)(param_1,0xc0100000);
-    *(undefined4 *)(param_1 + 0x1930) = uVar3;
+    (*a6)(param_1,0xc0100000,in_r5,in_r6,in_r7,in_r8,a6);
+    *(undefined4 *)(param_1 + 0x1930) = uVar2;
   }
   return;
 }

@@ -470,16 +470,47 @@ def rewrite_pair_results(chunk, ret64):
     v64 = set(re.findall(r'(?m)^\s+(?:ulonglong|longlong|undefined8|unsigned long long|long long)\s+(\w+);', body))
     if not v64:
         return chunk, 0
-    n = [0]
-    def repl(m):
-        v, call, fn = m.group(1), m.group(2), m.group(3) or m.group(4)
-        if fn in ret64 or fn.startswith(('CONCAT', 'GH_', 'SUB')):
-            return m.group(0)
-        n[0] += 1
-        return '%s = GH_PAIR_HI((%s), %s);' % (v, call, v)
-    pat = r'(?m)(?<![\w.])(%s) = ((?:\(\(\w[^()]*\(\*\)\(\)\)(\w+)\)|(\w+))\((?:[^;"]|"(?:[^"\\]|\\.)*")*\));' % '|'.join(sorted(map(re.escape, v64)))
-    body = re.sub(pat, repl, body)
-    return head + body, n[0]
+    # the right-hand side is parsed, not matched: Ghidra wraps a long call after its name (`uVar64 = TParseContext__addConstMatrixNode\n
+    # (param_1,...)`: yyparse's constant-matrix index node came out null - `m[1]` of a `const mat2` typed as `const float`), and an indirect call
+    # (`(**(code **)(*p + 0x18))(p)`, `code` returns int) is a 32-bit result too
+    n = 0; out = []; i = 0
+    for m in re.finditer(r'(?m)(?<![\w.])(%s) = ' % '|'.join(sorted(map(re.escape, v64))), body):
+        st = m.end()
+        if st < i:
+            continue
+        d = 0; j = st; opens = []
+        while j < len(body):
+            c = body[j]
+            if c == '"':
+                j += 1
+                while j < len(body) and body[j] != '"':
+                    j += 2 if body[j] == '\\' else 1
+            elif c == '(':
+                if d == 0:
+                    opens.append(j)
+                d += 1
+            elif c == ')':
+                d -= 1
+            elif c == ';' and d == 0:
+                break
+            j += 1
+        rhs = body[st:j]
+        if not rhs.rstrip().endswith(')') or len(opens) < 1:
+            continue
+        callee = rhs[:opens[-1] - st].strip()      # everything before the last top-level argument list
+        mfn = re.match(r'^(?:\(\(\w[^()]*\(\*\)\(\)\)(\w+)\)|(\w+))$', callee)
+        if mfn:
+            fn = mfn.group(1) or mfn.group(2)
+            if fn in ret64 or fn.startswith(('CONCAT', 'GH_', 'SUB')):
+                continue
+        elif not re.match(r'^\(\*+\s*\((?:code|int \(\*\)\(\))\s*\*', callee):
+            continue       # not a call (an expression, a cast)
+        out.append(body[i:m.start()])
+        out.append('%s = GH_PAIR_HI((%s), %s)' % (m.group(1), rhs.strip(), m.group(1)))
+        i = j; n += 1
+    out.append(body[i:])
+    body = ''.join(out)
+    return head + body, n
 
 
 def rewrite_double_bits(text):

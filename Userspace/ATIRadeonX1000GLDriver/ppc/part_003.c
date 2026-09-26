@@ -1378,7 +1378,7 @@ int FUN_0001bac0(param_1, param_2)
     } while (!(bool)(in_cr0 >> 1 & 1));
   }
   *(int **)(param_1 + 0x298c) = piVar6 + 0x4b;
-  (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+  (**(code **)(param_1 + 0x299c))(param_1 + 0x240,piVar6 + 0x4b);
   if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
     ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
   }
@@ -4852,13 +4852,22 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uVar3;
   undefined4 *puVar4;
   int iVar5;
+  undefined4 a3;
+  undefined4 a4;
+  undefined4 a5;
   uint uVar6;
   undefined4 *puVar7;
-  int iVar8;
+  int a0;
   
-  iVar8 = param_1 + 0x240;
+  a0 = param_1 + 0x240;
   *(undefined1 *)(param_1 + 0x2a5e) = 1;
-  puVar4 = (undefined4 *)(**(code **)(param_1 + 0x2998))(iVar8,0x406);
+  uVar3 = param_3;
+  a3 = param_4;
+  a4 = param_5;
+  a5 = param_6;
+  puVar4 = (undefined4 *)
+           (**(code **)(param_1 + 0x2998))(a0,0x406,param_3,param_4,param_5,param_6,param_7,param_8)
+  ;
   *(undefined4 **)(param_1 + 0x298c) = puVar4;
   puVar7 = puVar4;
   if (*(char *)(param_1 + 0x2a42) == '\0') {
@@ -4868,7 +4877,8 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     *(undefined1 *)(param_1 + 0x2a42) = 1;
   }
   puVar2 = *(uint **)(param_1 + 0x1d8);
-  *puVar2 = (int)puVar7 - (int)puVar2 >> 2 | *puVar2;
+  uVar6 = *puVar2;
+  *puVar2 = (int)puVar7 - (int)puVar2 >> 2 | uVar6;
   *(undefined4 **)(param_1 + 0x1d8) = puVar7;
   puVar7[2] = param_9;
   puVar7[1] = 0x404;
@@ -4880,8 +4890,8 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   puVar7[7] = param_6;
   puVar7[8] = param_7;
   *(undefined4 **)(param_1 + 0x298c) = puVar7 + 0x404;
-  (**(code **)(param_1 + 0x299c))(iVar8,puVar7 + 0x404);
-  iVar5 = (**(code **)(param_1 + 0x2998))(iVar8,0xbf);
+  (**(code **)(param_1 + 0x299c))(a0,puVar7 + 0x404,uVar3,a3,a4,a5,uVar6);
+  iVar5 = (**(code **)(param_1 + 0x2998))(a0,0xbf);
   *(int *)(param_1 + 0x298c) = iVar5;
   puVar2 = *(uint **)(param_1 + 0x1d8);
   *puVar2 = iVar5 - (int)puVar2 >> 2 | *puVar2;
@@ -5074,11 +5084,11 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   puVar7[0xba] = *(undefined4 *)(param_1 + 0x1f04);
   puVar7[0xbb] = *(undefined4 *)(param_1 + 0x1f00);
   puVar7[0xbc] = *(undefined4 *)(param_1 + 0x1f08);
-  FUN_0004c100(puVar7 + 2,iVar8);
+  FUN_0004c100(puVar7 + 2,a0);
   *(undefined4 **)(param_1 + 0x298c) = puVar7 + 0xbf;
                     
                     
-  (**(code **)(param_1 + 0x299c))(iVar8);
+  (**(code **)(param_1 + 0x299c))(a0);
   return;
 }
 
@@ -6110,6 +6120,7 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
   int iVar2;
   undefined4 *puVar3;
   undefined4 *puVar4;
+  undefined4 in_r8;
   undefined4 uVar5;
   undefined4 uVar6;
   
@@ -6123,7 +6134,8 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
   puVar3 = (undefined4 *)
            (**(code **)(param_1 + 0x2758))
                      (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
-                              iVar2 * *(int *)(param_1 + 0x243c) * 5 + iVar2 * 2 + 0x16);
+                              iVar2 * *(int *)(param_1 + 0x243c) * 5 + iVar2 * 2 + 0x16,param_3,
+                      param_4,param_5,in_r8,iVar2 * 2);
   iVar2 = *(int *)(param_1 + 0x2440);
   *(undefined4 **)(FUN_00002748 + param_1 + 4) = puVar3;
   if (iVar2 != param_1 + 0x1be4) {
@@ -6267,6 +6279,8 @@ int FUN_00024190(param_1, param_2, param_3, param_4)
   int iVar1;
   undefined4 *puVar2;
   undefined4 *puVar3;
+  undefined4 in_r7;
+  undefined4 in_r8;
   uint uVar4;
   undefined4 uVar5;
   
@@ -6274,7 +6288,8 @@ int FUN_00024190(param_1, param_2, param_3, param_4)
   puVar2 = (undefined4 *)
            (**(code **)(param_1 + 0x2758))
                      (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
-                              *(int *)(param_1 + 0x243c) * param_4 * 5 + param_4 * 2 + 0x16);
+                              *(int *)(param_1 + 0x243c) * param_4 * 5 + param_4 * 2 + 0x16,param_3,
+                      param_4,in_r7,in_r8,*(code **)(param_1 + 0x2758));
   iVar1 = *(int *)(param_1 + 0x2440);
   *(undefined4 **)(FUN_00002748 + param_1 + 4) = puVar2;
   if (iVar1 != param_1 + 0x1be4) {

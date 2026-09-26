@@ -108,3 +108,7 @@ extern vec16 vectorPermute(), vectorConditionalSelect();
 #define trap(x) __asm__ __volatile__("trap")
 #define halt_baddata() __builtin_trap()
 #endif
+/* bit reinterpretation between a float and a 32-bit word (ghidra2c fix_float_int: casts that are only Ghidra's typing of a union word or a
+   pointer held in a float-typed variable) */
+static inline unsigned int GH_F2U(float f) { union { float f; unsigned int u; } x; x.f = f; return x.u; }
+static inline float GH_U2F(unsigned int u) { union { unsigned int u; float f; } x; x.u = u; return x.f; }

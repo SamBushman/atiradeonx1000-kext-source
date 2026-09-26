@@ -961,7 +961,7 @@ int get_adjusted_ptr(param_1, param_2, param_3)
   undefined4 *local_20 [4];
   
   local_20[0] = *param_3;
-  iVar1 = (**(code **)(*(int *)param_2 + 8))(param_2);
+  iVar1 = (**(code **)(*(int *)param_2 + 8))(param_2,param_2,param_3);
   if (iVar1 != 0) {
     local_20[0] = (undefined4 *)*local_20[0];
   }

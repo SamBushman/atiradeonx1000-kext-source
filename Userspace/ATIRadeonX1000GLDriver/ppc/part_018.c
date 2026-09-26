@@ -4159,7 +4159,7 @@ int FUN_000cd3a4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  (*(code *)*param_2)(param_1,"",param_3,&STACKARG(0x24));
+  (*(code *)*param_2)(param_1,"",param_3,&STACKARG(0x24),param_5,param_6,param_7,param_8);
   return;
 }
 
