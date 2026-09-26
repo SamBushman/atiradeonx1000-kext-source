@@ -559,7 +559,36 @@ def rewrite_double_bits(text):
     # (double)(CONCAT44(hi, lo) ^ K): the xor flips bits of the low word
     out, n0 = re.subn(r'\(double\)\(\s*CONCAT44\(([^,()]+),([^,()]+)\)\s*\^\s*(0x[0-9a-fA-F]+U?)\s*\)', r'GH_BITS_D(\1, (\2) ^ \3)', out)
     out, n1 = re.subn(r'\(double\)\s*CONCAT44\(', 'GH_BITS_D(', out)
-    return out, n0 + n1
+    out, n2 = _magic_low_words(out)
+    return out, n0 + n1 + n2
+
+
+def _magic_low_words(text):
+    """`GH_BITS_D(0x43300000, lo)` is the int -> double magic-number sequence: `lo` is the WORD (x ^ 0x80000000 for a signed source). When Ghidra typed the source a float
+    (`param_3` of _glpUniformToFloat is `float *` but holds the int uniform words) it printed the xoris as a float negation `-*param_3` and the C converted the negated float VALUE to
+    an unsigned integer; a bare float-typed operand was converted the same way. GH_LOWNEG / GH_LOWW (ghidra_link.h) take the float's bits (xor 0x80000000 for the negation) when
+    the operand is float typed and are the plain conversion otherwise. Found by the gcc-14 -Wfloat-conversion audit (glprog 4 sites, GLD 20+)"""
+    key = 'GH_BITS_D(0x43300000,'; out = []; i = 0; n = 0
+    while True:
+        j = text.find(key, i)
+        if j < 0: out.append(text[i:]); break
+        k = j + len(key); d = 1; q = k
+        while q < len(text) and d:
+            d += {'(': 1, ')': -1}.get(text[q], 0); q += 1
+        lo = text[k:q - 1]
+        if d or ',' in lo.replace('(', '\0').split('\0')[0] and False:
+            out.append(text[i:k]); i = k; continue
+        lo_s = lo.strip()
+        if re.match(r'^-\s*[*(\w]', lo_s) and not re.search(r'[+\-*/&|^<>?:]\s|\s[+\-*/&|^<>?:]', lo_s[1:]):
+            new = ' GH_LOWNEG(%s)' % lo_s[1:].strip(); n += 1
+        elif re.match(r'^\(?\*\(float \*\)', lo_s) and lo_s.count('(') == lo_s.count(')'):
+            new = ' GH_LOWW(%s)' % lo_s; n += 1
+        elif re.match(r'^[*(]*[\w\[\]. ()>*+-]*$', lo_s) and not re.search(r'\s[+\-*/&|^<>?:]\s', lo_s) and ('float' in lo_s or re.match(r'^\*?p?[fd]Var\d+(?:\[[^\]]*\])?$|^\*?param_\d+(?:\[[^\]]*\])?$', lo_s)):
+            new = ' GH_LOWW(%s)' % lo_s; n += 1
+        else:
+            out.append(text[i:q]); i = q; continue
+        out.append(text[i:k]); out.append(new); out.append(')'); i = q
+    return ''.join(out), n
 
 
 def rewrite_narrow_compares(text):
@@ -651,3 +680,62 @@ def rewrite_float_args(text, protos):
         out.append(head); out.append(','.join(new).lstrip() if new else ''); out.append(')'); pos = i
     out.append(text[pos:])
     return ''.join(out), n
+
+
+_FST_KW = re.compile(r'^\s*(?:if|else|while|for|do|switch|case|default|return|goto|break|continue|typedef|extern|static)\b')
+_FST_FLOATY = re.compile(r'\b(?:[fd]Var\d+|pfVar\d+|pdVar\d+|FLOAT_\w+|DOUBLE_\w+|fparam_\w+|in_f\d+|extraout_f\d+|float|double)\b|(?<![\w.])\d+\.\d+|(?<![\w.])\d+e[-+]?\d+\b')
+_FST_INTCAST = re.compile(r'^\s*\(\s*(?:u?int|undefined\d?|u?long|u?char|byte|u?short|bool)\s*\)|^\s*GH_')
+
+
+def _fst_split(stmt):
+    """(lhs, rhs) of a plain `lhs = rhs;` statement (first ` = ` outside brackets), else None"""
+    d = 0; q = None; i = 0
+    while i < len(stmt):
+        ch = stmt[i]
+        if q:
+            if ch == '\\': i += 1
+            elif ch == q: q = None
+        elif ch in '"\'': q = ch
+        elif ch in '([{': d += 1
+        elif ch in ')]}': d -= 1
+        elif d == 0 and stmt.startswith(' = ', i):
+            return stmt[:i], stmt[i + 3:]
+        i += 1
+    return None
+
+
+def rewrite_float_stores(text):
+    """A float / double VALUE stored into an integer-typed word: Ghidra types a store `stfs f0,0x70(r3)` by the other uses of the destination, so `param_1[0x1c] = 0.003921569;`
+    or `puVar30[0xcc] = (fVar7 + fVar14) * 0.5;` target an `undefined4 *` - C converts the value (0 / 1 / truncated) where the stock stores the float's BITS. Only the
+    compiler knows both types: GH_STF (ghidra_link.h) assigns normally to a float / double lvalue and stores the bits (GH_F2U of the float, or the double's 64 bits) into a 4 / 8-byte
+    integer lvalue when the right-hand side is float / double typed. Found by the -Wall audit (gcc-14 -Wfloat-conversion): the libGLProgrammability constants block (69 of 864
+    words 0), GLDriver's matrix / vertex transforms (~100 sites), GA, VA."""
+    floc = set(re.findall(r'(?m)^\s+(?:float|double)\s+(\w+)(?:\s*\[[^\]]*\])?\s*;', text))
+    fptr = set(re.findall(r'(?m)^\s+(?:float|double)\s*\*+\s*(\w+)\s*;', text))
+    lines = text.split('\n'); out = []; n = 0; i = 0
+    while i < len(lines):
+        ln = lines[i]
+        m = re.match(r'^(\s+)(\S.*)$', ln)
+        if not m or _FST_KW.match(ln) or ' = ' not in ln:
+            out.append(ln); i += 1; continue
+        # gather a statement that continues over several lines (balanced brackets, ends with `;`)
+        j = i; stmt = m.group(2)
+        def bal(s): return s.count('(') - s.count(')') + s.count('[') - s.count(']')
+        while (bal(stmt) > 0 or not stmt.rstrip().endswith(';')) and j + 1 < len(lines) and j - i < 8 and not stmt.rstrip().endswith(('{', '}')):
+            j += 1; stmt += ' ' + lines[j].strip()
+        if not stmt.rstrip().endswith(';') or bal(stmt) != 0:
+            out.append(ln); i += 1; continue
+        sp = _fst_split(stmt.rstrip()[:-1])
+        if not sp: out.append(ln); i += 1; continue
+        lhs, rhs = sp[0].strip(), sp[1].strip()
+        if not lhs or '/*' in stmt or rhs.startswith('{') or re.match(r'^[A-Za-z_][\w\s*]*[\s*][A-Za-z_]\w*\s*(\[[^\]]*\])?$', lhs) or _fst_split(rhs) or lhs[0] in '{}' or lhs.startswith(('GH_', '/*')) or '"' in lhs:
+            out.append(ln); i += 1; continue
+        root = re.match(r'^[*(\s]*([A-Za-z_]\w*)', lhs)
+        rname = root.group(1) if root else ''
+        if (re.match(r'^[*(\s]*(?:\*?\s*\(\s*)?(?:float|double)\s*\*', lhs) or re.match(r'^\*?[fd]Var\d+$|^\*?p[fd]Var\d+(?:\[.*\])?$|^[fd]Var\d+$', lhs)
+                or rname in floc or rname in fptr or '(float *)' in lhs or '(double *)' in lhs):
+            out.append(ln); i += 1; continue
+        if not _FST_FLOATY.search(rhs) and not (set(re.findall(r'\b[A-Za-z_]\w*\b', rhs)) & (floc | fptr)) or _FST_INTCAST.match(rhs):
+            out.append(ln); i += 1; continue
+        out.append('%sGH_STF(%s, (%s));' % (m.group(1), lhs, rhs)); n += 1; i = j + 1
+    return '\n'.join(out), n

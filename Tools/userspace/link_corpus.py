@@ -384,6 +384,7 @@ for nm_, a_ in nlist_alias.items():       # another name (in the symbol table) o
 new_decls = transform(decls)
 float_protos_ = rewrites.float_protos(new_decls)
 floatargs_total = [0]
+fstores_total = [0]
 if cfg.get('prelude'):
     new_decls = list(cfg['prelude']) + new_decls
 if cfg.get('postlude'):
@@ -1104,6 +1105,13 @@ for pdir_, f in _part_files:
                 txt = _CTX_LIT.sub(lambda x: ('((unsigned int)&%s + %d)' % ctx_lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in ctx_lit_syms and _ctx_lit_ok(txt, x) else x.group(0), txt)
             if bind_info:
                 txt = rewrites.bind_calls(txt, int(mm.group(2), 16), ledger_by_addr, short_to_c, siblings, callees, unresolved_calls)
+            # last: the other rewrites match plain `x = call(...)` statements (rewrite_pair_results, bind_calls); GH_STF hides that shape
+            txt, nlow = rewrites._magic_low_words(txt)      # again: after mirror_frame the operands carry their types (`*(float *)(frame + N)`)
+            txt, nfst = rewrites.rewrite_float_stores(txt)
+            nfst += nlow
+            if nfst:
+                uses_link = True
+                fstores_total[0] += nfst
             ch = txt.split('\n')
         if mm and gl_protos is not None and mm.group(1).startswith('_gl') and not mm.group(1).startswith('_gll'):
             new_ch, status = fix_gl_stubs.patch_function('\n'.join(ch), mm.group(1), gl_protos)
@@ -1172,6 +1180,7 @@ with open(os.path.join(out, 'rewrites.txt'), 'w') as w:
     w.write('64-bit shift helper calls fixed: %d\n' % di3_total[0])
     w.write('narrow-type subtract-and-compare idioms: %d\n' % cmp_total[0])
     w.write('float/double call arguments given their true type (integer bit patterns reinterpreted): %d\n' % floatargs_total[0])
+    w.write('float / double values stored into integer-typed words, stored as bits (rewrites.rewrite_float_stores, GH_STF): %d\n' % fstores_total[0])
     w.write('stack records Ghidra declared as separate scalars, merged into one block: %d\n' % blocks_total[0])
     w.write('  of which records with pointer members (rewrites.fix_pointer_records): %d\n' % ptr_blocks_total[0])
     w.write('functions whose stack frame is mirrored at the stock offsets (rewrites.mirror_frame): %d\n' % mirrored_total[0])
@@ -1195,6 +1204,19 @@ static inline double GH_BITS_DD(unsigned long long u) { union { unsigned long lo
 /* the branch __builtin_choose_expr does not take must still type-check: a pointer argument (a stack slot Ghidra typed `int *` holding float bits,
    GLDriver FUN_0010b118's third argument) cannot be cast to double, so the FP branch casts a value that is 0.0 unless x is floating */
 #define GH_FPV(x) ((double)__builtin_choose_expr(GH_IS_FP(x), (x), 0.0))
+#define GH_ISF(x) __builtin_types_compatible_p(__typeof__(x), float)
+#define GH_ISD(x) __builtin_types_compatible_p(__typeof__(x), double)
+static inline unsigned long long GH_D2ULL(double d) { union { double d; unsigned long long u; } x; x.d = d; return x.u; }
+/* GH_STF(lv, rhs): `lv = rhs` where rhs is float / double typed and lv an integer word (Ghidra's typing of an stfs / stfd destination): the BITS are stored (rewrites.rewrite_float_stores).
+   Every unchosen branch still type-checks, so the float / double operands go through choose_expr with a 0.0 fallback */
+#define GH_STF(lv, rhs) ((lv) = __builtin_choose_expr(GH_IS_FP(lv), (rhs), \\
+    __builtin_choose_expr(sizeof(lv) == 4 && GH_ISF(rhs), (__typeof__(lv))GH_F2U(__builtin_choose_expr(GH_ISF(rhs), (rhs), 0.0f)), \\
+    __builtin_choose_expr(sizeof(lv) == 4 && GH_ISD(rhs), (__typeof__(lv))GH_F2U((float)__builtin_choose_expr(GH_ISD(rhs), (rhs), 0.0)), \\
+    __builtin_choose_expr(sizeof(lv) == 8 && GH_ISD(rhs), (__typeof__(lv))GH_D2ULL(__builtin_choose_expr(GH_ISD(rhs), (rhs), 0.0)), (rhs))))))
+/* the low word of the int -> double magic-number sequence (rewrites._magic_low_words): a float-typed operand is a WORD Ghidra typed float - its bits (`-x` on it is the sign-flip
+   xoris that makes a signed word's magic-double form); an integer operand converts / negates as before */
+#define GH_LOWW(x) __builtin_choose_expr(GH_ISF(x), GH_F2U(__builtin_choose_expr(GH_ISF(x), (x), 0.0f)), (unsigned int)(x))
+#define GH_LOWNEG(x) __builtin_choose_expr(GH_ISF(x), GH_F2U(__builtin_choose_expr(GH_ISF(x), (x), 0.0f)) ^ 0x80000000u, (unsigned int)(-(long)(x)))
 #define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), (double)GH_BITS_F((unsigned int)(x)))
 #define GH_ARGD(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), __builtin_choose_expr(sizeof(x) == 8, GH_BITS_DD((unsigned long long)(x)), (double)(long)(x)))
 static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }

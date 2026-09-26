@@ -334,6 +334,29 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   so real float -> int conversions in the interpreter had become bit reinterpretations (the differential tests did not reach them); regenerated and re-verified.
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
   wrong rebuilt function and reports crashes that are not there.
+### Compiler-warning audit (issue #68, criterion 2)
+`Tools/userspace/wall_audit.sh TREE OUT gcc4|gcc14` (run on the G5 on a link tree) compiles every part with warnings: Apple gcc 4.0.1 `-O1 -Wall` (the compiler of the images; data-flow warnings
+need -O1) and the Tigerbrew `gcc-14 -fsyntax-only` with the conversion diagnostics gcc 4.0.1 lacks (`-Wfloat-conversion`, `-Wtype-limits`, `-Wsequence-point`, `-Wshift-*`,
+`-Wtautological-compare`). gcc 4.0.1 has no warning at all for a float converted into an integer (`-Wconversion` is silent), which is why this class was invisible.
+gcc 4.0.1 `-Wall` volume on glprog: ~6900 warnings, of which the rare categories were read one by one (always-false / tautological compares, `a<=b<=c`, oversized constants - gcc 4.0.1 keeps a too-large constant as 64 bits, verified -, pointer/integer
+compares = globals declared `int` tested against a null pointer); each was an equivalent print of the stock's own test (a loop guard `count + 1 > 0` the stock also emits, `-2 << n | 0xfffffffe >> 32-n` rotates, a `char` compared with -1
+  that the stock's `lbz` + `addic.` also never satisfies) - and the noise classes that are not defects: `return;` in `int`-typed functions whose result nobody reads (1032 glprog / 3362 GLD sites; the ones a stock caller reads were found by ret_used.py and given a return value in Stage B3, defect class 5 above - that audit was run on the dumps of 2026-09-25 and has NOT been repeated on the later ones), `control reaches end of non-void function`, Ghidra's pointer/integer mixing, `a1`..`a6` placeholders of indirect calls (registers
+  the stock passes on untouched), `in_rN` / `extraout_rN` reads (classified by `inreg_liveness.py`).
+Defect classes it found (both fixed in `link_corpus.py` / `rewrites.py`, macros in `ghidra_link.h`):
+19. **A float / double value stored into an integer-typed word.** Ghidra types a store `stfs f0,0x70(r3)` by the other uses of the destination: `param_1[0x1c] = 0.003921569;` with
+    `undefined4 *param_1` (glprog `_PPCConstantsAndScratchInitialise`), `puVar30[0xcc] = (fVar7 + fVar14) * 0.5;` (GLDriver's matrix / vertex transforms). C converts the VALUE (0, or a
+    truncated integer); the stock stores the float's BITS. The interpreter's constants block had 69 of 864 words wrong (`Tests/userspace/const_scratch_test.c`), and no test or fuzz run
+    reached the function (it reads the link register and calls a non-whitelisted function). `rewrites.rewrite_float_stores` wraps every plain assignment whose right-hand side looks
+    floating (float locals, `fVar` names, float literals, `(float)` / `*(float *)`) in `GH_STF(lv, (rhs))`; the COMPILER decides from the two types (`__builtin_choose_expr` on
+    `__typeof__`): a float / double lvalue is assigned normally, a 4-byte integer lvalue gets `GH_F2U` of the float (the double rounded to float first, as `frsp`), an 8-byte one the double's
+    bits, everything else is untouched. It runs LAST among the statement rewrites (`rewrite_pair_results` and `bind_calls` match plain `x = call(...)`; wrapped first, the pair rewrite was
+    silently skipped and 42 GLSL shaders crashed - found by building with `GH_STF` defined as a plain assignment and comparing function sizes). After the fix gcc-14 reports no float ->
+    integer conversion in any of the five images. Sites whose value the C changed (gcc-14 count before the fix): glprog 77, GLDriver 73, VA 38, GA 0, libGL 0 (`rewrite_float_stores` wraps 202 / 606 / 43 / 83 candidate statements, most of them float lvalues that are unchanged).
+20. **`GH_BITS_D(0x43300000, lo)` with a float-typed `lo`** (the int -> double magic-number sequence on a word Ghidra typed float): `-*param_3` is the stock's `xoris r0,r0,0x8000`
+    (sign flip of the word = `x ^ 0x80000000`, the signed form), printed as a float negation, and C converted the negated float VALUE to unsigned (glprog `_glpUniformToFloat`, 5 sites;
+    GLDriver 4 sites with a bare `*(float *)(frame + N)`). `rewrites._magic_low_words`: `GH_LOWNEG(x)` = `GH_F2U(x) ^ 0x80000000` for a float `x` (plain negation for an integer),
+    `GH_LOWW(x)` = the word's bits.
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees
