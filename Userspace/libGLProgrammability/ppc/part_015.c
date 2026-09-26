@@ -6515,8 +6515,8 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
       *param_2 = 0x3b000210;
       param_2[1] = 0x7e63c1ce;
       param_2[2] = 0xc123021c;
-      param_2[3] = (uint)fVar3 >> 0x10 | 0x3de00000;
-      param_2[4] = (uint)fVar3 & 0xffff | 0x61ef0000;
+      param_2[3] = (uint)(int)fVar3 >> 0x10 | 0x3de00000;
+      param_2[4] = (uint)(int)fVar3 & 0xffff | 0x61ef0000;
       param_2[5] = 0x91e30210;
       param_2[6] = 0xc1030210;
       uVar6 = 0xfc094000;
@@ -6533,7 +6533,7 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
         uVar6 = (uint)(int)(dVar7 - DOUBLE_97c30a78);
       }
       else {
-        uVar6 = (uint)fVar3;
+        uVar6 = (uint)(int)fVar3;
       }
       *param_2 = 0x10734c0a;
       param_2[1] = 0x1063444a;

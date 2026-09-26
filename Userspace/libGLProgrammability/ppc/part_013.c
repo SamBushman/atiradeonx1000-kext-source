@@ -2666,21 +2666,21 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
           uVar4 = (uint)(int)(dVar11 - dVar12);
         }
         else {
-          uVar4 = (uint)*param_2;
+          uVar4 = (uint)(int)*param_2;
         }
         dVar12 = (double)param_2[1];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar6 = (uint)param_2[1];
+          uVar6 = (uint)(int)param_2[1];
         }
         dVar12 = (double)param_2[2];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)param_2[2];
+          uVar8 = (uint)(int)param_2[2];
         }
         if (FLOAT_97c3acc0 <= param_2[3]) {
           uVar3 = 0x8000;
@@ -2746,21 +2746,21 @@ int _InterpreterPackPixel(param_1, param_2, param_3)
           uVar4 = (uint)(int)(dVar11 - dVar12);
         }
         else {
-          uVar4 = (uint)*param_2;
+          uVar4 = (uint)(int)*param_2;
         }
         dVar12 = (double)param_2[1];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar6 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar6 = (uint)param_2[1];
+          uVar6 = (uint)(int)param_2[1];
         }
         dVar12 = (double)param_2[2];
         if (DOUBLE_97c30a78 <= dVar12) {
           uVar8 = (uint)(int)(dVar12 - DOUBLE_97c30a78);
         }
         else {
-          uVar8 = (uint)param_2[2];
+          uVar8 = (uint)(int)param_2[2];
         }
         dVar12 = (double)param_2[3];
         if (DOUBLE_97c30a78 <= dVar12) {
@@ -4885,7 +4885,7 @@ LAB_97bd29a8:
             uVar24 = (int)(local_130[8] - 2.1474836e+09) ^ 0x80000000;
           }
           else {
-            uVar24 = (uint)local_130[8];
+            uVar24 = (uint)(int)local_130[8];
             local_90 = (longlong)(int)uVar24;
           }
         }

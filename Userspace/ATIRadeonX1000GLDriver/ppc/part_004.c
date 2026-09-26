@@ -4062,7 +4062,7 @@ LAB_000284b0:
   fVar7 = fVar7 - fVar11;
   iVar41 = (int)((fVar8 - fVar9) * fVar4);
   local_a0 = (longlong)iVar41;
-  uVar33 = (uint)((fVar3 - fVar7) * fVar4);
+  uVar33 = (uint)(int)((fVar3 - fVar7) * fVar4);
   local_98 = (longlong)(int)uVar33;
   puVar26[0xc9] = 0xc0033500;
   puVar26[0xca] = 0x10031;
@@ -5261,10 +5261,10 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
               local_78 = 0x43300000;
               local_70 = 0x43300000;
               local_68 = 0x43300000;
-              uStack_64 = (uint)fVar8 & 0xff;
-              uStack_7c = (uint)fVar8 >> 0x18;
-              pfVar16 = (float *)((uint)fVar8 >> 0x10 & 0xff);
-              uStack_6c = (uint)fVar8 >> 8 & 0xff;
+              uStack_64 = (uint)(int)fVar8 & 0xff;
+              uStack_7c = (uint)(int)fVar8 >> 0x18;
+              pfVar16 = (float *)((uint)(int)fVar8 >> 0x10 & 0xff);
+              uStack_6c = (uint)(int)fVar8 >> 8 & 0xff;
               local_168 = (float)((double)CONCAT44(0x43300000,uStack_7c) - dVar6) / fVar18;
               local_14c = (float)((double)CONCAT44(0x43300000,uStack_64) - dVar6) / fVar18;
               local_154 = (float)((double)CONCAT44(0x43300000,pfVar16) - dVar6) / fVar18;
@@ -5319,7 +5319,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             bVar2 = *(byte *)pfVar16;
             *pfVar15 = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
             pfVar16 = (float *)((int)pfVar16 + param_6);
-            fVar18 = GH_U2F((unsigned int)(((uint)bVar2 | (uint)fVar18 & 0xffffff00)));
+            fVar18 = GH_U2F((unsigned int)(((uint)bVar2 | (uint)(int)fVar18 & 0xffffff00)));
             pfVar15[1] = fVar18;
             uStack_94 = *(undefined4 *)(param_1 + 0x248);
             local_98 = 0x43300000;
@@ -5815,7 +5815,7 @@ LAB_0002a520:
       puVar24[0xc4] = fVar12 * fVar2;
       puVar24[0xc2] = fVar8 * fVar2;
       puVar24[0xc3] = fVar5 * fVar6;
-      uVar31 = (uint)((fVar11 - fVar3) * fVar14);
+      uVar31 = (uint)(int)((fVar11 - fVar3) * fVar14);
       local_88 = (longlong)(int)uVar31;
       puVar24[0xc9] = 0x10031;
       puVar24[200] = 0xc0033500;
@@ -7555,17 +7555,17 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   case '\x04':
   case '\x0f':
   case '\x16':
-    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 | (int)fVar6 << 8)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 | (int)fVar6 << 8)));
     break;
   case '\x05':
-    fVar6 = GH_U2F((unsigned int)((((uint)fVar2 & 0xf8) << 8 | (uVar3 & 0xfc) << 3 | uVar4 >> 3)));
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar2 & 0xf8) << 8 | (uVar3 & 0xfc) << 3 | uVar4 >> 3)));
     break;
   case '\x06':
-    fVar6 = GH_U2F((unsigned int)((((uint)fVar6 & 0xf0) << 8 | ((uint)fVar2 & 0xf0) << 4 | uVar3 & 0xf0 |
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0xf0) << 8 | ((uint)(int)fVar2 & 0xf0) << 4 | uVar3 & 0xf0 |
                    uVar4 >> 4)));
     break;
   case '\a':
-    fVar6 = GH_U2F((unsigned int)((((uint)fVar6 & 0x80) << 8 | ((uint)fVar2 & 0xf8) << 7 | (uVar3 & 0xf8) << 2 |
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0x80) << 8 | ((uint)(int)fVar2 & 0xf8) << 7 | (uVar3 & 0xf8) << 2 |
                    uVar4 >> 3)));
     break;
   case '\b':
@@ -7585,7 +7585,7 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   case '\x12':
   case '\x18':
   case '\x1e':
-    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 | uVar3 << 8 | (int)fVar6 << 0x18 | uVar4 << 0x10)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 | uVar3 << 8 | (int)fVar6 << 0x18 | uVar4 << 0x10)));
     break;
   case '\x10':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
@@ -7737,7 +7737,7 @@ LAB_0002dcb4:
     fVar6 = GH_U2F((unsigned int)((uVar3 | uVar4 | (uVar5 & 0x3ff) << 10)));
     break;
   case '(':
-    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6)));
     break;
   case ')':
     dVar7 = dVar7 * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;

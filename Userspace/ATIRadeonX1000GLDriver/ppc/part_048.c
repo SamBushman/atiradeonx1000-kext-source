@@ -2348,7 +2348,7 @@ int FUN_0017f1f8(param_1)
         *pfVar2 = *pfVar4;
         pfVar2 = pfVar2 + 1;
       } while (pfVar2 != local_54 + 3);
-      (&local_64)[iVar7] = (uint)(local_54[1] * local_54[2]);
+      (&local_64)[iVar7] = (uint)GH_F2U((float)((local_54[1] * local_54[2])));
     }
     bVar1 = iVar7 != 3;
     iVar8 = iVar8 + 4;

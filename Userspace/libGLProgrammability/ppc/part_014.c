@@ -700,7 +700,7 @@ LAB_97bd4648:
       fVar4 = GH_U2F((unsigned int)(piVar7[param_3 * 0x34 + 0x49]));
     }
     local_c0 = (uint)(fVar2 * fVar5);
-    local_bc = (uint)(fVar3 * fVar4);
+    local_bc = (uint)(int)(fVar3 * fVar4);
     local_b0 = 0;
     local_b8 = 0;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_c0);
@@ -899,9 +899,9 @@ LAB_97bd4b08:
       fVar9 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x49]));
       fVar7 = GH_U2F((unsigned int)(piVar12[param_3 * 0x34 + 0x4a]));
     }
-    local_120 = (uint)(local_130 * fVar8);
-    local_11c = (uint)(local_12c * fVar9);
-    local_118 = (uint)(local_128 * fVar7);
+    local_120 = (uint)(int)(local_130 * fVar8);
+    local_11c = (uint)(int)(local_12c * fVar9);
+    local_118 = (uint)(int)(local_128 * fVar7);
     local_110 = (longlong)(int)local_118;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_120);
     dVar15 = (double)((int (*)())_InterpreterTextureSamplerLoadTexel3D)(param_1,iVar14,piVar12 + iVar11,&local_120,param_5);
@@ -1110,7 +1110,7 @@ LAB_97bd51b8:
       iVar8 = param_3 * 0x34 + 0x50;
     }
     local_c0 = (uint)*param_4;
-    local_bc = (uint)param_4[1];
+    local_bc = (uint)(int)param_4[1];
     local_b0 = 0;
     local_b8 = 0;
     ((int (*)())_InterpreterTextureSamplerWrapCoordinate)(param_1,&local_c0);
@@ -2055,7 +2055,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2063,7 +2063,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar3 < uVar5;
       break;
@@ -2074,7 +2074,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2082,7 +2082,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar3 == uVar5;
       break;
@@ -2093,7 +2093,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2101,7 +2101,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar3 <= uVar5;
       break;
@@ -2112,7 +2112,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2120,7 +2120,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar5 < uVar3;
       break;
@@ -2131,7 +2131,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2139,7 +2139,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar3 != uVar5;
       break;
@@ -2150,7 +2150,7 @@ switchD_97bd6924_caseD_7:
         uVar3 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar3 = (uint)fVar4;
+        uVar3 = (uint)(int)fVar4;
       }
       fVar1 = fVar1 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar1;
@@ -2158,7 +2158,7 @@ switchD_97bd6924_caseD_7:
         uVar5 = (int)(dVar7 - DOUBLE_97c30a78) ^ 0x80000000;
       }
       else {
-        uVar5 = (uint)fVar1;
+        uVar5 = (uint)(int)fVar1;
       }
       bVar6 = uVar5 <= uVar3;
       break;

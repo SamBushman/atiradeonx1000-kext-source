@@ -357,6 +357,32 @@ Defect classes it found (both fixed in `link_corpus.py` / `rewrites.py`, macros 
     GLDriver 4 sites with a bare `*(float *)(frame + N)`). `rewrites._magic_low_words`: `GH_LOWNEG(x)` = `GH_F2U(x) ^ 0x80000000` for a float `x` (plain negation for an integer),
     `GH_LOWW(x)` = the word's bits.
 
+21. **A float / double EXPRESSION cast into an integer word** (the cast form of class 19): `puVar30[6] = (uint)(fVar19 * (fVar24 - fVar8));` is `stfs f11,0x18(r28)` - the GL packet writer of
+    GLDriver FUN_000353a0 / 00034200 / 00029c00 / 0009f0b0 (viewport / clip / vertex words), GA's `radeonFill` / `radeonHighlight` / `radeonSolidScanlines` / `radeonCopy` (69 sites: every
+    vertex coordinate of the 2D fill primitives was an integer, in `dword` casts that no earlier rule knew) and glprog's interpreter. Found with a new oracle, **`Tools/userspace/fctiw_oracle.py`**:
+    a real float -> integer conversion needs one `fctiw` / `fctiwz` instruction in the stock, a bit store needs none, so a rebuilt function with MORE `fctiw*` than the stock has bit stores that
+    became conversions (`radeonFill` stock 0, rebuilt 36). Fixes in `ghidra2c.py`: (a) in a function whose stock code has no `fctiw*` every float -> integer cast is a bit copy, whatever the
+    operand's shape (`GH_F2U((float)(x))`); the operand test knows each function's own float-typed names (`float *param_3` -> `param_3[1]`, `(uint)param_3[1]` in VA `FUN_00002e50`); (b)
+    `resolve_float_casts` reconciles the rest per function: CN cast sites vs S stock conversions, K = CN - S surplus sites are bit stores - first whole right-hand sides stored into
+    pointer-indexed memory, then into locals; a candidate set larger than K is left alone and listed in `float_cast_residual.txt`; the `(longlong)(int)x` copies of an unsigned idiom and its
+    `x - 2^31` arm are not counted; (c) the remaining `(uint)x` is a SIGNED `fctiwz` (`(uint)(int)x`), except the first S - CN of them, which are real unsigned conversions (glprog
+    `_InterpreterTextureSamplerSampleTexel*FromLevel`: 6 stock conversions, 4 casts); (d) `dword` is a cast type (it was missing from the tokenizer).
+    Result (stock fctiw* / rebuilt): GA radeonFill 0/0 (was 36), radeonHighlight 0/0 (was 40), radeonSolidScanlines 0/0 (was 18), FUN_000055a4 12/16 (was 96); GLDriver FUN_00034200 2/2 (was 24),
+    FUN_0009f0b0 0/0 (was 16), FUN_000353a0 12/12 (was 26); VA 0 functions above the stock. What is left above the stock (GLDriver 16 functions, glprog 7, GA 2, VA 0; below it: GLDriver 1, glprog 1) is +1..+6 from Ghidra printing
+    one conversion in several places (`(uint)(int)fVar8 & 0xff`, `>> 0x18`, `>> 0x10 & 0xff`: four compiled conversions of one stock fctiwz), which is harmless; the reverse (Ghidra merged duplicates:
+    GLDriver FUN_0004ed90 7 stock / 5 rebuilt) is expected too. The two hard limits: an ambiguous candidate set (GLDriver FUN_00018a40: 18 local-store casts for 3 surplus) and the
+    signed / unsigned choice of the `S - CN` casts are decided by source order, not proved.
+22. **`CONCAT44(float, float)`**: a 64-bit store of two floats (GLDriver FUN_0009f0b0: `*(ulonglong *)p = CONCAT44(f0, f1)`) converted each float to an integer (`(unsigned int)(a)`): `ghidra_c.h`'s
+    `CONCAT44` now takes a float-typed piece as its bits (`GH_W4`, a `__builtin_choose_expr` on the type).
+
+### Class-by-class scan (issue #68, criterion 3)
+`python3 Tools/userspace/class_scan.py <link trees>` counts, in the linked sources that are actually compiled, the residual instances of the UNFIXED form of each defect class found so far
+(`Userspace/class_scan.txt` = the run of 2026-09-26 on all five trees): CONCAT44-built doubles converted numerically, byte-minus-constant compares, 64-bit shift helpers, function symbols as
+operands of `+`/`-`, `uRam` reads, `&MACH_HEADER.field`, uninitialised `in_xer_*`, bare `NAN`, unsigned conversions of float expressions ... All are 0 except the informational rows
+(halfword `CONCATnn` = integer concatenation, correct; unprototyped calls with a float argument = the ones `GH_ARGF/GH_ARGD` wrap; one `&MACH_HEADER` = a hoisted speculative read of a NULL
+pointer in `_gldPageoffBuffer`; two `(uint)(fVar * fVar)` = the real unsigned conversions kept by `resolve_float_casts`). The two classes with no textual signature - float values stored as words
+(19, 21) - are checked by compiler diagnostics (`wall_audit.sh ... gcc14`: no float -> integer conversion left) and by the fctiw oracle above.
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

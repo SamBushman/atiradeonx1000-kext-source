@@ -1454,7 +1454,7 @@ LAB_00003104:
     break;
   case 0x1b:
     uVar6 = 0;
-    FUN_00004740(param_1,(int)SUB41(*param_3,0),(int)(char)*(undefined4 *)(param_1 + 0x114),
+    FUN_00004740(param_1,(int)GH_F2U((float)(SUB41(*param_3,0))),(int)(char)*(undefined4 *)(param_1 + 0x114),
                  param_1 + 0x10c,*(undefined4 *)(param_1 + 0x118));
     fVar1 = *(float *)(param_1 + 300);
     fVar2 = *(float *)(param_1 + 0x134);
@@ -1463,13 +1463,13 @@ LAB_00003104:
   case 0x1c:
     *(short *)(param_1 + 0x124) = SUB42(*param_3,0);
     fVar3 = param_3[1];
-    if ((uint)(int)*(float *)(param_1 + 0x57c) < (uint)param_3[1]) {
+    if ((uint)GH_F2U((float)(*(float *)(param_1 + 0x57c))) < (uint)GH_F2U((float)(param_3[1]))) {
       fVar3 = *(float *)(param_1 + 0x57c);
     }
     *(short *)(param_1 + 0x128) = SUB42(fVar3,0);
     *(short *)(param_1 + 0x126) = SUB42(param_3[2],0);
     fVar3 = param_3[3];
-    if ((uint)(int)*(float *)(param_1 + 0x578) < (uint)param_3[3]) {
+    if ((uint)GH_F2U((float)(*(float *)(param_1 + 0x578))) < (uint)GH_F2U((float)(param_3[3]))) {
       fVar3 = *(float *)(param_1 + 0x578);
     }
     fVar1 = *(float *)(param_1 + 300);

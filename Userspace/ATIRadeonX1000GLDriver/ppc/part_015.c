@@ -2892,7 +2892,7 @@ int FUN_000a5c40(param_1)
     uVar7 = (int)(fVar1 - 2.1474836e+09) + 0x80000000;
   }
   else {
-    uVar7 = (uint)fVar1;
+    uVar7 = (uint)(int)fVar1;
   }
   fVar1 = *(float *)(((unsigned char *)0x00002dac) + iVar5) * 255.0;
   if (2.1474836e+09 <= fVar1) {

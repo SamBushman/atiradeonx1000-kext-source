@@ -4026,7 +4026,7 @@ LAB_0008886c:
     ((int (*)())FUN_00088e70)(param_1,"invalid suffix on number");
   }
   *(double *)(param_1 + 0x1c) = dVar10;
-  *(int *)(param_1 + 0x18) = (int)dVar10;
+  *(int *)(param_1 + 0x18) = (int)GH_F2U((float)(dVar10));
   if ((bVar2) && (dVar10 == (double)CONCAT44(0x43300000,(int)dVar10) - DOUBLE_001aa250)) {
     *(undefined4 *)(param_1 + 0x14) = 0xf;
   }
@@ -4496,7 +4496,7 @@ int FUN_00089320(param_1, param_2)
     fVar1 = *param_2;
     fVar2 = param_2[1];
     fVar3 = param_2[2];
-    param_1[iVar7 * 4 + 0x9019] = (int)param_2[3];
+    param_1[iVar7 * 4 + 0x9019] = (int)GH_F2U((float)(param_2[3]));
     param_1[iVar7 * 4 + 0x9016] = (int)GH_F2U(fVar1);
     param_1[iVar7 * 4 + 0x9017] = (int)GH_F2U(fVar2);
     param_1[iVar7 * 4 + 0x9018] = (int)GH_F2U(fVar3);

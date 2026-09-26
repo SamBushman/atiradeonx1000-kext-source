@@ -2424,10 +2424,10 @@ LAB_00006d28:
           bVar1 = false;
           pdVar53 = pdVar53 + iVar22;
           iVar16 = (int)*local_160 + (int)*local_164;
-          local_364 = (uint)fVar6;
-          local_360 = (uint)fVar4;
-          local_35c = (uint)fVar3;
-          local_358 = (uint)fVar11;
+          local_364 = (uint)GH_F2U((float)(fVar6));
+          local_360 = (uint)GH_F2U((float)(fVar4));
+          local_35c = (uint)GH_F2U((float)(fVar3));
+          local_358 = (uint)GH_F2U((float)(fVar11));
           if (0xfff < iVar16) {
             local_228 = 0x43300000;
             iVar26 = local_e8 + 0x1000;
@@ -2507,18 +2507,18 @@ LAB_00006d28:
             pdVar52[iVar16 + 5] = 0x4003d;
             uVar45 = iVar56 * 0x10000;
             pdVar52[iVar16 + 6] = uVar51 | uVar45;
-            pdVar52[iVar16 + 7] = (dword)fVar3;
-            pdVar52[iVar16 + 8] = (dword)fVar12;
+            pdVar52[iVar16 + 7] = (dword)GH_F2U((float)(fVar3));
+            pdVar52[iVar16 + 8] = (dword)GH_F2U((float)(fVar12));
             uVar8 = iVar26 * 0x10000;
             pdVar52[iVar16 + 9] = uVar51 | uVar8;
-            pdVar52[iVar16 + 10] = (dword)fVar3;
-            pdVar52[iVar16 + 0xb] = (dword)fVar5;
+            pdVar52[iVar16 + 10] = (dword)GH_F2U((float)(fVar3));
+            pdVar52[iVar16 + 0xb] = (dword)GH_F2U((float)(fVar5));
             pdVar52[iVar16 + 0xc] = uVar55 | uVar8;
-            pdVar52[iVar16 + 0xd] = (dword)fVar11;
-            pdVar52[iVar16 + 0xe] = (dword)fVar5;
+            pdVar52[iVar16 + 0xd] = (dword)GH_F2U((float)(fVar11));
+            pdVar52[iVar16 + 0xe] = (dword)GH_F2U((float)(fVar5));
             pdVar52[iVar16 + 0xf] = uVar55 | uVar45;
-            pdVar52[iVar16 + 0x10] = (dword)fVar11;
-            pdVar52[iVar16 + 0x11] = (dword)fVar12;
+            pdVar52[iVar16 + 0x10] = (dword)GH_F2U((float)(fVar11));
+            pdVar52[iVar16 + 0x11] = (dword)GH_F2U((float)(fVar12));
             pdVar52[iVar16 + 0x12] = 0x1393;
             pdVar52[iVar16 + 0x13] = 10;
             pdVar52[iVar16 + 0x14] = 0x5c8;
@@ -2526,10 +2526,10 @@ LAB_00006d28:
             uVar48 = (uVar48 - 6) - (iVar16 + 0x16);
             bVar1 = true;
             pdVar53 = pdVar52 + iVar16 + 0x16;
-            local_364 = (uint)fVar3;
-            local_360 = (uint)fVar11;
-            local_35c = (uint)fVar5;
-            local_358 = (uint)fVar12;
+            local_364 = (uint)GH_F2U((float)(fVar3));
+            local_360 = (uint)GH_F2U((float)(fVar11));
+            local_35c = (uint)GH_F2U((float)(fVar5));
+            local_358 = (uint)GH_F2U((float)(fVar12));
           }
           piVar54 = piVar54 + 2;
           local_170 = local_170 + 1;
@@ -2774,17 +2774,17 @@ LAB_0000789c:
             pdVar53[iVar58] = 0xc00c3500;
             pdVar53[iVar35] = 0x4003d;
             pdVar53[iVar41] = local_16c | local_12c << 0x10;
-            pdVar53[iVar42] = (dword)fVar5;
-            pdVar53[iVar22] = (dword)fVar13;
+            pdVar53[iVar42] = (dword)GH_F2U((float)(fVar5));
+            pdVar53[iVar22] = (dword)GH_F2U((float)(fVar13));
             pdVar53[iVar19] = local_16c | local_128 << 0x10;
-            pdVar53[iVar36] = (dword)fVar5;
-            pdVar53[iVar43] = (dword)fVar12;
+            pdVar53[iVar36] = (dword)GH_F2U((float)(fVar5));
+            pdVar53[iVar43] = (dword)GH_F2U((float)(fVar12));
             pdVar53[iVar37] = local_124 | local_128 << 0x10;
-            pdVar53[iVar44] = (dword)fVar11;
-            pdVar53[iVar46] = (dword)fVar12;
+            pdVar53[iVar44] = (dword)GH_F2U((float)(fVar11));
+            pdVar53[iVar46] = (dword)GH_F2U((float)(fVar12));
             pdVar53[iVar47] = local_124 | local_12c << 0x10;
-            pdVar53[iVar49] = (dword)fVar11;
-            pdVar53[iVar50] = (dword)fVar13;
+            pdVar53[iVar49] = (dword)GH_F2U((float)(fVar11));
+            pdVar53[iVar50] = (dword)GH_F2U((float)(fVar13));
             pdVar53[iVar57] = 0x1393;
             pdVar53[iVar20] = 10;
             pdVar53[iVar21] = 0x5c8;
@@ -2792,10 +2792,10 @@ LAB_0000789c:
             uVar48 = uVar48 - iVar40;
             bVar1 = false;
             pdVar53 = pdVar53 + iVar40;
-            local_364 = (uint)fVar13;
-            local_360 = (uint)fVar12;
-            local_35c = (uint)fVar11;
-            local_358 = (uint)fVar5;
+            local_364 = (uint)GH_F2U((float)(fVar13));
+            local_360 = (uint)GH_F2U((float)(fVar12));
+            local_35c = (uint)GH_F2U((float)(fVar11));
+            local_358 = (uint)GH_F2U((float)(fVar5));
           }
           local_174 = local_174 + 1;
           local_168 = local_168 + 2;
@@ -3028,17 +3028,17 @@ LAB_00007ff0:
             pdVar53[iVar41] = 0xc00c3500;
             pdVar53[iVar42] = 0x4003d;
             pdVar53[iVar43] = local_130 | local_13c << 0x10;
-            pdVar53[iVar44] = (dword)fVar6;
-            pdVar53[iVar24] = (dword)fVar12;
+            pdVar53[iVar44] = (dword)GH_F2U((float)(fVar6));
+            pdVar53[iVar24] = (dword)GH_F2U((float)(fVar12));
             pdVar53[iVar19] = local_130 | local_138 << 0x10;
-            pdVar53[iVar20] = (dword)fVar6;
-            pdVar53[iVar46] = (dword)fVar11;
+            pdVar53[iVar20] = (dword)GH_F2U((float)(fVar6));
+            pdVar53[iVar46] = (dword)GH_F2U((float)(fVar11));
             pdVar53[iVar37] = local_134 | local_138 << 0x10;
-            pdVar53[iVar47] = (dword)fVar5;
-            pdVar53[iVar49] = (dword)fVar11;
+            pdVar53[iVar47] = (dword)GH_F2U((float)(fVar5));
+            pdVar53[iVar49] = (dword)GH_F2U((float)(fVar11));
             pdVar53[iVar58] = local_134 | local_13c << 0x10;
-            pdVar53[iVar36] = (dword)fVar5;
-            pdVar53[iVar50] = (dword)fVar12;
+            pdVar53[iVar36] = (dword)GH_F2U((float)(fVar5));
+            pdVar53[iVar50] = (dword)GH_F2U((float)(fVar12));
             pdVar53[iVar57] = 0x1393;
             pdVar53[iVar21] = 10;
             pdVar53[iVar22] = 0x5c8;
@@ -3046,10 +3046,10 @@ LAB_00007ff0:
             uVar48 = uVar48 - iVar40;
             bVar1 = false;
             pdVar53 = pdVar53 + iVar40;
-            local_364 = (uint)fVar11;
-            local_360 = (uint)fVar5;
-            local_35c = (uint)fVar6;
-            local_358 = (uint)fVar12;
+            local_364 = (uint)GH_F2U((float)(fVar11));
+            local_360 = (uint)GH_F2U((float)(fVar5));
+            local_35c = (uint)GH_F2U((float)(fVar6));
+            local_358 = (uint)GH_F2U((float)(fVar12));
           }
           piVar54 = piVar54 + 2;
           local_178 = local_178 + 1;
@@ -3622,13 +3622,13 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     pdVar21[0x56] = 0x1094;
                     pdVar21[0x57] = 0x10000;
                     pdVar21[0x58] = 0x1095;
-                    pdVar21[0x59] = (dword)local_128;
+                    pdVar21[0x59] = (dword)GH_F2U(local_128);
                     pdVar21[0x5a] = 0x1095;
-                    pdVar21[0x5b] = (dword)local_12c;
+                    pdVar21[0x5b] = (dword)GH_F2U(local_12c);
                     pdVar21[0x5c] = 0x1095;
-                    pdVar21[0x5d] = (dword)local_130;
+                    pdVar21[0x5d] = (dword)GH_F2U(local_130);
                     pdVar21[0x5e] = 0x1095;
-                    pdVar21[0x5f] = (dword)local_134;
+                    pdVar21[0x5f] = (dword)GH_F2U(local_134);
                     iVar31 = 0x5c;
                     iVar14 = 0x170;
                     local_164 = 0x60;
@@ -3823,7 +3823,7 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                     local_304 = local_304 *
                                 (float)((double)CONCAT44(0x43300000,local_124) - 4503599627370496.0)
                     ;
-                    local_2fc = (uint)(local_300 * fVar3);
+                    local_2fc = (uint)GH_F2U((float)((local_300 * fVar3)));
                     local_300 = local_300 * fVar2;
                     *(undefined4 *)((int)pdVar44 + local_138) = 0xc0143500;
                     pdVar44[local_13c] = 0x4003d;
@@ -3846,9 +3846,9 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                                                 4503601774854144.0));
                       local_1d0 = 0x43300000;
                       uStack_1cc = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4 = (uint)(int)((fVar1 + 8.0) *
+                      local_2e4 = (uint)GH_F2U((float)(((fVar1 + 8.0) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1cc) -
-                                                      4503601774854144.0)));
+                                                      4503601774854144.0)))));
                     }
                     else {
                       local_218 = 0x43300000;
@@ -3872,39 +3872,39 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                                                 4503601774854144.0));
                       local_1f0 = 0x43300000;
                       uStack_1ec = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4 = (uint)(int)((fVar1 + (float)((double)CONCAT44(0x43300000,local_f4) -
+                      local_2e4 = (uint)GH_F2U((float)(((fVar1 + (float)((double)CONCAT44(0x43300000,local_f4) -
                                                          4503599627370496.0)) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1ec) -
-                                                      4503601774854144.0)));
+                                                      4503601774854144.0)))));
                       iStack_20c = iVar49;
                     }
                     pdVar44[local_140] = uStack_244 | local_cc;
                     fVar27 = *local_ec;
-                    pdVar44[iVar36] = (dword)fVar27;
+                    pdVar44[iVar36] = (dword)GH_F2U(fVar27);
                     dVar18 = *local_e0;
                     pdVar44[iVar14] = dVar18;
                     fVar22 = *local_dc;
-                    pdVar44[local_144] = (dword)fVar22;
+                    pdVar44[local_144] = (dword)GH_F2U(fVar22);
                     dVar11 = *local_d0;
                     pdVar44[iVar13] = dVar11;
                     pdVar44[local_148] = uStack_244 | local_c8;
-                    pdVar44[local_14c] = (dword)fVar27;
+                    pdVar44[local_14c] = (dword)GH_F2U(fVar27);
                     fVar28 = *local_e4;
-                    pdVar44[local_150] = (dword)fVar28;
-                    pdVar44[local_154] = (dword)fVar22;
+                    pdVar44[local_150] = (dword)GH_F2U(fVar28);
+                    pdVar44[local_154] = (dword)GH_F2U(fVar22);
                     fVar27 = *local_d4;
-                    pdVar44[local_158] = (dword)fVar27;
+                    pdVar44[local_158] = (dword)GH_F2U(fVar27);
                     pdVar44[local_15c] = local_124 | local_c8;
                     fVar22 = *local_e8;
-                    pdVar44[iVar31] = (dword)fVar22;
-                    pdVar44[local_160] = (dword)fVar28;
+                    pdVar44[iVar31] = (dword)GH_F2U(fVar22);
+                    pdVar44[local_160] = (dword)GH_F2U(fVar28);
                     fVar28 = *local_d8;
-                    pdVar44[iVar34] = (dword)fVar28;
-                    pdVar44[iVar23] = (dword)fVar27;
+                    pdVar44[iVar34] = (dword)GH_F2U(fVar28);
+                    pdVar44[iVar23] = (dword)GH_F2U(fVar27);
                     pdVar44[iVar47] = local_124 | local_cc;
-                    pdVar44[iVar39] = (dword)fVar22;
+                    pdVar44[iVar39] = (dword)GH_F2U(fVar22);
                     pdVar44[iVar40] = dVar18;
-                    pdVar44[iVar41] = (dword)fVar28;
+                    pdVar44[iVar41] = (dword)GH_F2U(fVar28);
                     pdVar44[iVar43] = dVar11;
                     pdVar44[iVar45] = 0x1393;
                     pdVar44[iVar46] = 10;
@@ -4592,13 +4592,13 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
         pdVar10[0x42] = 0x1094;
         pdVar10[0x43] = 0x10000;
         pdVar10[0x44] = 0x1095;
-        pdVar10[0x45] = (dword)fVar20;
+        pdVar10[0x45] = (dword)GH_F2U(fVar20);
         pdVar10[0x46] = 0x1095;
-        pdVar10[0x47] = (dword)fVar21;
+        pdVar10[0x47] = (dword)GH_F2U(fVar21);
         pdVar10[0x48] = 0x1095;
-        pdVar10[0x49] = (dword)fVar13;
+        pdVar10[0x49] = (dword)GH_F2U(fVar13);
         pdVar10[0x4a] = 0x1095;
-        pdVar10[0x4b] = (dword)fVar14;
+        pdVar10[0x4b] = (dword)GH_F2U(fVar14);
         if (iVar33 != 3) {
           uStack_184 = uVar23 >> 0x18;
           local_188 = 0x43300000;
@@ -4630,13 +4630,13 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
           local_a0 = fVar14;
         }
         pdVar10[0x4c] = 0x1095;
-        pdVar10[0x4d] = (dword)fVar20;
+        pdVar10[0x4d] = (dword)GH_F2U(fVar20);
         pdVar10[0x4e] = 0x1095;
-        pdVar10[0x4f] = (dword)fVar21;
+        pdVar10[0x4f] = (dword)GH_F2U(fVar21);
         pdVar10[0x50] = 0x1095;
-        pdVar10[0x51] = (dword)fVar13;
+        pdVar10[0x51] = (dword)GH_F2U(fVar13);
         pdVar10[0x52] = 0x1095;
-        pdVar10[0x53] = (dword)fVar14;
+        pdVar10[0x53] = (dword)GH_F2U(fVar14);
         pdVar10[0x54] = 0x1094;
         pdVar10[0x55] = 0;
         pdVar10[0x56] = 0x1095;
@@ -4776,23 +4776,23 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
         uVar28 = uVar31 | uVar16 * 0x10000;
         pdVar10[0xc2] = uVar28;
         fVar20 = *local_d4;
-        pdVar10[0xc3] = (dword)fVar20;
+        pdVar10[0xc3] = (dword)GH_F2U(fVar20);
         fVar14 = *local_d8;
-        pdVar10[0xc4] = (dword)fVar14;
+        pdVar10[0xc4] = (dword)GH_F2U(fVar14);
         uVar27 = uVar31 | uVar29 * 0x10000;
         pdVar10[0xc5] = uVar27;
-        pdVar10[0xc6] = (dword)fVar20;
+        pdVar10[0xc6] = (dword)GH_F2U(fVar20);
         fVar20 = *local_dc;
-        pdVar10[199] = (dword)fVar20;
+        pdVar10[199] = (dword)GH_F2U(fVar20);
         uVar26 = uVar30 | uVar29 * 0x10000;
         pdVar10[200] = uVar26;
         fVar21 = *local_e0;
-        pdVar10[0xc9] = (dword)fVar21;
-        pdVar10[0xca] = (dword)fVar20;
+        pdVar10[0xc9] = (dword)GH_F2U(fVar21);
+        pdVar10[0xca] = (dword)GH_F2U(fVar20);
         uVar25 = uVar30 | uVar16 * 0x10000;
         pdVar10[0xcb] = uVar25;
-        pdVar10[0xcc] = (dword)fVar21;
-        pdVar10[0xcd] = (dword)fVar14;
+        pdVar10[0xcc] = (dword)GH_F2U(fVar21);
+        pdVar10[0xcd] = (dword)GH_F2U(fVar14);
         pdVar10[0xce] = 0x1393;
         pdVar10[0xcf] = 10;
         pdVar10[0xd0] = 0x5c8;
@@ -4903,13 +4903,13 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
         pdVar32[iVar33 + 5] = uVar27;
         pdVar32[iVar33 + 6] = dVar18;
         fVar14 = *local_e4;
-        pdVar32[iVar33 + 7] = (dword)fVar14;
+        pdVar32[iVar33 + 7] = (dword)GH_F2U(fVar14);
         pdVar32[iVar33 + 8] = uVar26;
         fVar20 = *local_e8;
-        pdVar32[iVar33 + 9] = (dword)fVar20;
-        pdVar32[iVar33 + 10] = (dword)fVar14;
+        pdVar32[iVar33 + 9] = (dword)GH_F2U(fVar20);
+        pdVar32[iVar33 + 10] = (dword)GH_F2U(fVar14);
         pdVar32[iVar33 + 0xb] = uVar25;
-        pdVar32[iVar33 + 0xc] = (dword)fVar20;
+        pdVar32[iVar33 + 0xc] = (dword)GH_F2U(fVar20);
         pdVar32[iVar33 + 0xd] = dVar15;
         pdVar32[iVar33 + 0xe] = 0x1393;
         pdVar32[iVar33 + 0xf] = 10;
@@ -5311,10 +5311,10 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
                                       (1.0 / ((double)CONCAT44(0x43300000,uStack_11c) -
                                              4503601774854144.0)));
                       pdVar39[iVar30] = uVar9 | local_e4;
-                      pdVar39[iVar21] = (dword)fVar3;
-                      pdVar39[iVar17] = (dword)fVar22;
+                      pdVar39[iVar21] = (dword)GH_F2U(fVar3);
+                      pdVar39[iVar17] = (dword)GH_F2U(fVar22);
                       pdVar39[iVar13 + 5] = uVar9 | local_e0;
-                      pdVar39[iVar13 + 6] = (dword)fVar3;
+                      pdVar39[iVar13 + 6] = (dword)GH_F2U(fVar3);
                       pdVar39[iVar13 + 7] = local_1a4;
                       pdVar39[iVar13 + 8] = uVar33 | local_e0;
                       local_1a0 = (uint)GH_F2U(fVar28);
@@ -5354,20 +5354,20 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
                                       (1.0 / ((double)CONCAT44(0x43300000,uStack_13c) -
                                              4503601774854144.0)));
                       pdVar39[iVar30] = local_e4 | uVar9;
-                      pdVar39[iVar21] = (dword)local_19c;
-                      pdVar39[iVar17] = (dword)fVar22;
+                      pdVar39[iVar21] = (dword)GH_F2U(local_19c);
+                      pdVar39[iVar17] = (dword)GH_F2U(fVar22);
                       pdVar39[iVar13 + 5] = local_e0 | uVar9;
-                      pdVar39[iVar13 + 6] = (dword)local_19c;
+                      pdVar39[iVar13 + 6] = (dword)GH_F2U(local_19c);
                       pdVar39[iVar13 + 7] = local_1a4;
                       pdVar39[iVar13 + 8] = local_e0 | uVar33;
                       local_1a0 = (uint)GH_F2U(fVar22);
                       iStack_164 = iVar8;
                     }
-                    pdVar39[iVar13 + 9] = (dword)fVar28;
+                    pdVar39[iVar13 + 9] = (dword)GH_F2U(fVar28);
                     pdVar39[iVar13 + 10] = local_1a4;
                     pdVar39[iVar13 + 0xb] = uVar33 | local_e4;
-                    pdVar39[iVar13 + 0xc] = (dword)fVar28;
-                    pdVar39[iVar13 + 0xd] = (dword)fVar22;
+                    pdVar39[iVar13 + 0xc] = (dword)GH_F2U(fVar28);
+                    pdVar39[iVar13 + 0xd] = (dword)GH_F2U(fVar22);
                     pdVar39[iVar13 + 0xe] = 0x1393;
                     pdVar39[iVar13 + 0xf] = 10;
                     pdVar39[iVar13 + 0x10] = 0x5c8;

@@ -6764,7 +6764,7 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
           }
           local_50 = (float)dVar9;
           local_88 = 0x43300000;
-          uStack_84 = ((uint)local_50 >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
+          uStack_84 = ((uint)(int)local_50 >> 0x17 & 0xff) - 0x7f ^ 0x80000000;
           dVar10 = _pow(DOUBLE_001aa2a0,(double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
           dVar10 = _log(dVar10);
           dVar11 = _log(dVar3);

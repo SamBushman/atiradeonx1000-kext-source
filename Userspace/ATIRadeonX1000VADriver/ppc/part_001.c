@@ -4208,12 +4208,12 @@ LAB_0000b2b8:
     if (fVar13 < 0.0) {
       local_1e8 = 0.0;
     }
-    uStack_84 = (uint)(fVar18 * (fVar15 - fVar16) + fVar16);
+    uStack_84 = (uint)(int)(fVar18 * (fVar15 - fVar16) + fVar16);
     local_90 = (longlong)(int)uStack_84;
     if (-fVar13 < 0.0) {
       local_1e8 = fVar13;
     }
-    uStack_74 = (uint)(fVar18 * (fVar5 - fVar16) + fVar16);
+    uStack_74 = (uint)(int)(fVar18 * (fVar5 - fVar16) + fVar16);
     local_80 = (longlong)(int)uStack_74;
     fVar1 = fVar3;
     if (local_1e4 - fVar3 < 0.0) {

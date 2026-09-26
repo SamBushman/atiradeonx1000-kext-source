@@ -283,15 +283,17 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
         for sa, sz_, off in _secs:
             if sa <= x < sa + sz_ and off: return _st.unpack('>I', _d[off + x - sa:off + x - sa + 4])[0]
         return 0
-    _FCTIW = set()
+    _FCTIW = set(); _FCTIWN = {}    # entries of functions holding a float -> integer conversion (fctiw / fctiwz), and how many
     for _l in open(os.path.join(src, 'RANGES.tsv')):
         _f = _l.rstrip('\n').split('\t')
         if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cnt = 0
             for _r in _f[3].split(';'):
                 if not _r: continue
                 _lo, _hi = (int(x, 16) for x in _r.split('-'))
-                if any((_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15) for x in range(_lo, _hi, 4)):
-                    _FCTIW.add(int(_f[0], 16)); break
+                _cnt += sum(1 for x in range(_lo, _hi, 4) if (_word(x) >> 26) == 63 and ((_word(x) >> 1) & 0x3ff) in (14, 15))
+            if _cnt:
+                _FCTIW.add(int(_f[0], 16)); _FCTIWN[int(_f[0], 16)] = _cnt
     # NaN-pattern constants each function builds (`lis rD,hi` + `ori rD,rD,lo` / `addi rD,rD,lo` / nothing): Ghidra prints a float variable holding ANY NaN
     # pattern as the bare token NAN (payload lost) although the stock's is 0x7fffffff (INT_MAX assigned to a union word Ghidra typed float). GH_NAN() in the
     # recompile is math.h's 0x7fc00000. fix_nan() below substitutes the real bits.
@@ -661,12 +663,30 @@ def _operand(t, i):
         else: break
     return i
 _FLOATY = re.compile(r'\b(?:[fd]Var\d+|pfVar\d+|pdVar\d+|FLOAT_\w+|DOUBLE_\w+|fparam_\w+|in_f\d+|extraout_f\d+|float|double)\b|\d\.\d|\d+e[-+]?\d')
+def _ptr_store_lhs(pre):
+    """`pre` (the text before a cast) ends with `<pointer-indexed memory> = ` - `puVar30[6] = `, `*param_2 = `, `*(uint *)(p + 8) = ` - not a scalar variable and not a stack array
+    (`local_78[0] = ` is a local: a lone cast into one is not evidence of a bit store)"""
+    if not re.search(r'[^=!<>]=\s*$', pre): return False
+    if re.search(r'\b[A-Za-z_]\w*Var\d+\s*=\s*$', pre) or re.search(r'\b(?:local|uStack|iStack|fStack)_?[0-9a-f]+\s*=\s*$', pre): return False
+    m = re.search(r'([A-Za-z_]\w*)(?:\[[^\]\n]*\])+\s*=\s*$', pre)
+    if m: return not re.match(r'(?:local_|auStack|aiStack|afStack|adStack|uStack|iStack|fStack|ghidra_)', m.group(1))
+    return re.search(r'\*\s*[\w(][^;=\n]*\s*=\s*$', pre) is not None or re.search(r'\)\s*=\s*$', pre) is not None
+# a floating-point VALUE token (a bare `pfVar3` / `pdVar44` is a pointer to floats: an integer)
+_FVAL = re.compile(r'\b[fd]Var\d+\b|\bp[fd]Var\d+\s*\[|\*\s*p[fd]Var\d+\b|\bFLOAT_\w+|\bDOUBLE_\w+|\bfparam_\w+|\bin_f\d+|\bextraout_f\d+|\*\s*\(\s*(?:float|double)\s*\*\s*\)|\(\s*(?:float|double)\s*\)|(?<![\w.])\d+\.\d+|(?<![\w.])\d+e[-+]?\d+\b')
+def _fvals_for(b):
+    """_FVAL extended with this function's own float-typed names: `float *param_3` (`param_3[1]`, `*param_3`), `float x` / `double x[4]` locals"""
+    ptrs = set(re.findall(r'(?m)^\s*(?:float|double)\s*\*+\s*(\w+)\s*;', b)); vals = set(re.findall(r'(?m)^\s*(?:float|double)\s+(\w+)(?:\s*\[[^\]]*\])?\s*;', b))
+    ex = []
+    if ptrs: ex.append(r'\b(?:%s)\s*\[|\*\s*(?:%s)\b' % ('|'.join(map(re.escape, ptrs)), '|'.join(map(re.escape, ptrs))))
+    if vals: ex.append(r'\b(?:%s)\b' % '|'.join(map(re.escape, vals)))
+    return re.compile(_FVAL.pattern + ('|' + '|'.join(ex) if ex else ''))
 def fix_float_int(b, entry):
+    _fv = _fvals_for(b)
     floc = set(re.findall(r'(?m)^\s+float\s+(\w+)(?:\s*\[\d+\])?;', b))
     _intword = set(v for v in floc if re.search(r'\b%s\s*=\s*\(float\)\(\(?\s*(?:int|uint)\)' % re.escape(v), b))   # float-typed variables that are assigned integer words
     out = []; i = 0; n = 0
     while True:
-        m = re.search(r'\((float|int|uint|u?short|u?char|byte|undefined4)\)', b[i:])
+        m = re.search(r'\((float|int|uint|dword|u?short|u?char|byte|undefined4)\)', b[i:])
         if not m: out.append(b[i:]); break
         st = i + m.start(); en = i + m.end(); ty = m.group(1)
         e = _operand(b, en)
@@ -684,7 +704,7 @@ def fix_float_int(b, entry):
             # integer WORDS (GLDriver FUN_0002d2b0 packs colour channels: the C converted the value to float and lost the low bits of a 32-bit pixel; fnfuzz `graph` profile).
             # 32-bit PowerPC has no int -> float instruction outside the CONCAT44 magic-double sequence, so this is a bit copy even when float variables occur inside.
             if opd and (not _FLOATY.search(opd) or re.match(r'^\(*\s*\(?(?:int|uint)\)', opd)) and not opd.startswith('('+'double') and 'CONCAT44' not in opd:
-                out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
+                out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % fix_float_int(opd, entry)[0]); i = e; n += 1; continue
         elif _FCTIW is not None and (opd.startswith('(float)') or (opd.startswith('*(float *)') and re.search(r'[\])]\s*=\s*$', b[max(0, st - 40):st]))) and (opd.startswith('(float)((double)CONCAT44(0x43300000') or _FRSPCT.get(entry, 0) < len(re.findall(r'\((?:int|uint|undefined4|ulong)\)(?:\(float\)|\*\(float \*\))', b))):
             # `param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000, x) - magic)`: the int -> float conversion sequence followed by `frsp; stfs` into a word Ghidra
             # typed int - the word holds the FLOAT's bits (1.0f = 0x3f800000), C's `(int)` converted the value (1). Only in a function without fctiw*, or when the operand is
@@ -695,12 +715,93 @@ def fix_float_int(b, entry):
             if base and (re.match(r'^(?:f)Var\d+$', base.group(1)) or base.group(1) in floc or re.match(r'^pfVar\d+$', base.group(1)) and ('[' in opd or opd.startswith('*'))) \
                and not re.search(r'[+\-*/]\s', opd):
                 out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
+        if ty in ('int', 'uint', 'dword', 'undefined4', 'ulong') and _FCTIW is not None and opd and not opd.startswith(('GH_', '(int)', '(uint)', '(undefined4)')) and _fv.search(re.sub(r'\bp[fd]Var\d+\b(?!\s*\[)', '', opd)) \
+           and not re.search(r'\((?:u?int|undefined\d?|u?short|u?char|byte|u?long|longlong|ulonglong|bool)\)|<<|>>|&|\||\^|%|==|!=|<=|>=|(?<![-\w])<(?![<=])|(?<![-\w])>(?![>=])|\?', re.sub(r'"[^"]*"', '', opd)) \
+           and (entry not in _FCTIW or (ty in ('uint', 'dword', 'undefined4') and re.match(r'\s*;', b[e:e + 8]) and _ptr_store_lhs(b[max(0, st - 60):st]))):
+            # a float EXPRESSION cast to an unsigned word: the stock has no fctiw* in the function (a conversion needs one - the unsigned idiom uses it too), or the cast is the whole right-hand
+            # side of a store into pointer-indexed memory (`puVar30[6] = (uint)(fVar19 * (fVar24 - fVar8))`: the packet writer's `stfs f11,0x18(r28)`; real conversions in the same
+            # function go to locals / call arguments / are combined with shifts). Ghidra only typed the destination unsigned: the WORD holds the float's bits, C's `(uint)` converted the
+            # value. GLDriver FUN_000353a0 / FUN_00034200 / FUN_00029c00, GA radeonFill / radeonHighlight / radeonSolidScanlines (per-function fctiwz counts, stock vs rebuilt: the surplus).
+            _opd2, _nn = fix_float_int(opd, entry)   # inner `(float)word` reinterpretations first (`-(float)param_4[1]` is the word's sign flip)
+            out.append(b[i:st]); out.append('(%s)GH_F2U((float)(%s))' % (ty, _opd2)); i = e; n += 1 + _nn; continue
         if ty == 'uint' and not opd.startswith('(int)') and not opd.startswith('GH_') and (re.match(r'^d(?:Var)\d+$', opd) or (_FLOATY.search(opd) and re.search(r'(?<![\w.])[-+*/]\s|\s[-+*/]\s', opd) and re.search(r'\bFLOAT_|\bDOUBLE_|\(double\)|\bdVar\d+|\*\(float \*\)|\(float\)', opd) and 'CONCAT44' not in opd.split('(float)')[0])):
             # `uVar15 = (uint)(*(float *)(p + 0x34) + FLOAT_001aa10c)`: a float -> integer conversion the stock does with `fctiwz` alone (a SIGNED, saturating conversion; the unsigned
             # conversion is the compare-with-2^31 idiom, which Ghidra prints as an explicit branch). C's `(uint)` of a double is the unsigned conversion: values >= 2^31 gave a different
             # word (GLDriver FUN_0002ddf0: a garbage viewport size changed a 4-bit field). `(uint)(int)` is exactly `fctiwz`.
             out.append(b[i:en]); out.append('(int)'); i = en; n += 1; continue
         out.append(b[i:en]); i = en
+    return ''.join(out), n
+_FRESID = []    # (entry, message) - functions whose float -> integer cast count could not be matched to the stock's fctiw count
+def resolve_float_casts(b, entry):
+    """Per-function reconciliation of float -> integer CASTS with the stock's conversion instructions (fctiw / fctiwz). Ghidra prints `(uint)fVar` both for a real conversion and
+    for `stfs` into a word it typed unsigned; the two cannot be told apart by text, but every real conversion needs one fctiw* instruction in the stock function. CN = the cast
+    sites left after fix_float_int, S = the stock's fctiw* count: K = CN - S surplus casts are bit stores. Candidates in order: whole right-hand sides stored into pointer-indexed
+    memory (`piVar19[2] = (int)(fVar3 + 1.0);` - GLDriver FUN_00034200: 22 of 24), then into locals (`local_c = (uint)fVar6;`); anything that feeds arithmetic, a comparison or an
+    argument is a conversion. A candidate set larger than K is ambiguous (reported in float_cast_residual.txt, left as conversions). What stays is a signed `fctiwz`: `(uint)x` -> `(uint)(int)x`
+    (the unsigned conversion is the compare-with-2^31 idiom, which Ghidra prints as an explicit branch)."""
+    if _FCTIW is None: return b, 0
+    S = _FCTIWN.get(entry, 0)
+    _fv = _fvals_for(b)
+    sites = []
+    for m in re.finditer(r'\((int|uint|dword|undefined4)\)', b):
+        en = m.end(); e = _operand(b, en)
+        if e is None: continue
+        opd = b[en:e].strip()
+        if not opd or opd.startswith(('GH_', '(int)', '(uint)', '(dword)', '(undefined4)')): continue
+        o2 = re.sub(r'\bp[fd]Var\d+\b(?!\s*\[)', '', re.sub(r'"[^"]*"', '', opd))
+        if not _fv.search(o2) or re.search(r'<<|>>|&|\||\^|==|!=|CONCAT|\?|(?<![-\w])[<>](?![<>=])', o2): continue
+        after = b[e:e + 8].lstrip(); pre = b[max(0, m.start() - 70):m.start()]
+        whole = after.startswith(';') and re.search(r'[^=!<>]=\s*$', pre) is not None
+        idiom = re.search(r'2\.147\d*e\+09|2147483648|2\.1474836e\+09', opd) is not None      # the unsigned-conversion idiom's `x - 2^31` arm: a real fctiwz
+        if re.search(r'\(longlong\)\s*$', pre): continue     # the 64-bit copy of a fctiwz result (`local_170 = (longlong)(int)(x - 2^31)`, `local_28 = (longlong)(int)fVar1`): the stock converts once
+        if idiom:
+            whole = False
+        mem = whole and re.search(r'(\]|\))\s*=\s*$', pre) is not None and not re.search(r'\b[A-Za-z_]\w*Var\d+\s*=\s*$', pre)
+        if mem:    # only a store through a POINTER (`puVar30[6] =`, `*param_2 =`): a stack array (`local_78[0] =`, `auStack_..[i] =`) is a local
+            _lm = re.search(r'([A-Za-z_]\w*)(?:\[[^\]\n]*\])*\s*=\s*$', pre)
+            if _lm and re.match(r'(?:local_|auStack|aiStack|afStack|adStack|uStack|iStack|fStack|ghidra_)', _lm.group(1)): mem = False
+        sites.append((m.start(), en, e, m.group(1), opd, whole, mem))
+    K = len(sites) - S
+    todo = []; note = None
+    if K > 0:
+        c1 = [x for x in sites if x[6]]; c2 = [x for x in sites if x[5] and not x[6]]
+        if c1 and len(c1) <= K: todo += c1; K -= len(c1)
+        elif c1: note = 'ambiguous: %d memory-store casts for %d surplus' % (len(c1), K)
+        if K > 0 and not note:
+            # locals: only RUNS of >= 3 consecutive statements (a vector / packet written word by word: GA FUN_000055a4's four `local_364 = (uint)fVar6;`); a lone
+            # `uVar6 = (uint)fVar3;` is as likely the else-arm of the unsigned idiom or a conversion Ghidra printed once (glprog _glp_dtostr, AlphaTestRTCAV: infinite loops)
+            ln = lambda x: b.count('\n', 0, x[0])
+            c2 = sorted(c2, key=lambda x: x[0]); runs = []; cur = []
+            for x in c2:
+                if cur and ln(x) - ln(cur[-1]) <= 1: cur.append(x)
+                else:
+                    if len(cur) >= 3: runs.append(cur)
+                    cur = [x]
+            if len(cur) >= 3: runs.append(cur)
+            c2 = [x for r in runs for x in r]
+            if c2 and len(c2) <= K: todo += c2; K -= len(c2)
+            elif c2: note = 'ambiguous: %d local-store casts for %d surplus' % (len(c2), K)
+        if K > 0 and not note: note = '%d surplus cast(s) unmatched' % K
+        if note: _FRESID.append((entry, '%s (casts %d, stock fctiw* %d)' % (note, len(sites), S)))
+    chosen = set(x[0] for x in todo)
+    # the conversions that remain cost one fctiwz each when signed and two when unsigned (the compare-with-2^31 idiom): a stock count ABOVE the remaining casts means some
+    # unsigned casts are real unsigned conversions (glprog _InterpreterTextureSamplerSampleTexel1DFromLevel: 6 fctiwz, 4 casts); the first S - CN of them (source order) stay unsigned
+    remaining = [x for x in sorted(sites) if x[0] not in chosen]
+    n_unsigned = max(0, S - len(remaining))
+    unsigned_keep = set(x[0] for x in [y for y in remaining if y[3] in ('uint', 'dword', 'undefined4')][:n_unsigned])
+    out = []; i = 0; n = 0
+    for st, en, e, ty, opd, whole, mem in sorted(sites):
+        if st < i: continue
+        out.append(b[i:st])
+        inner, _nn = fix_float_int(opd, entry) if st in chosen else (opd, 0)
+        if st in chosen:
+            out.append('(%s)GH_F2U((float)(%s))' % (ty, inner)); n += 1
+        elif ty in ('uint', 'dword', 'undefined4') and _FCTIWN.get(entry) and st not in unsigned_keep:
+            out.append('(%s)(int)%s' % (ty, b[en:e])); n += 1     # a signed fctiwz, not C's unsigned conversion
+        else:
+            out.append(b[st:e])
+        i = e
+    out.append(b[i:])
     return ''.join(out), n
 # Callee parameter types by name, for fix_float_args
 _PTYPES = {}
@@ -890,6 +991,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\b(?:LAB|DAT|UNK)_([0-9a-f]{8})\b', lambda m: '(*(unsigned char *)0x%s)' % m.group(1) if in_text(m.group(1)) and m.group(0).startswith(('DAT', 'UNK')) else m.group(0), b)
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
+            b, _nrc = resolve_float_casts(b, int(a, 16))
             b, _nnan = fix_nan(b, int(a, 16))
             # `byte in_xer_so;` is the summary-overflow bit copied into the CR images the code builds (`(a == b) << 1 | in_xer_so & 1`); the stock's XER[SO] is 0 (no `o`
             # instruction, no mtxer sets it) and the rebuilt local was uninitialised stack (GLDriver FUN_0001c380, 22 uses in 4 functions)
@@ -966,6 +1068,10 @@ for pi in range(0, len(funcs), part):
                 os.makedirs(os.path.join(out, 'single'), exist_ok=True)
                 open(os.path.join(out, 'single', (name if len(name) < 100 else name[:80] + '_' + a[2:]) + '.c'), 'w').write('#include "../decls.h"\n\n' + conv + '\n')
             led.append((a, sz, name, pn, NOTES.get(name, 'converted')))
+if _FCTIW is not None:
+    with open(os.path.join(out, 'float_cast_residual.txt'), 'w') as _f:
+        _f.write('# functions whose float -> integer cast sites could not be reconciled with the stock fctiw* count (resolve_float_casts): entry, reason\n')
+        for _e, _m in sorted(_FRESID): _f.write('0x%x\t%s\n' % (_e, _m))
 with open(os.path.join(out, 'ledger.tsv'), 'w') as f:
     for r in led: f.write('\t'.join(map(str, r)) + '\n')
 if externals:

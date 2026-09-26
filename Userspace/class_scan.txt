@@ -1,0 +1,15 @@
+id   class (residual pattern)                                                                             b_glprog_x6 b_gld_x6  b_ga_x6  b_va_x6 b_libgl_x6
+C01  CONCAT44 built double converted numerically                                                                 0        0        0        0        0
+C02  halfword / byte CONCATnn left as integer arithmetic (CONCAT22/CONCAT31/CONCAT13)                           30      252        0       24        0   [informational: ghidra_c.h defines them as integer concatenation (correct for words)]
+C03  byte/halfword variable minus constant compared with < (promoted to int)                                     0        0        0        0        0
+C04  64-bit shift helper called through int (*)() (high word only)                                               0        0        0        0        0
+C05  function symbol used as an operand of + / - (a field offset equal to a function address)                    0        0        0        0        0
+C06  uRam / iRam / bRam absolute read of an unnamed data address                                                 0        0        0        0        0
+C07  &MACH_HEADER.field taken as an address                                                                      0        1        0        0        0   [GLDriver _gldPageoffBuffer: a speculative read at +0x16 of a NULL pointer that Ghidra hoisted above the null test; harmless (reads the rebuilt header)]
+C08  in_xer_* summary-overflow local left uninitialised                                                          0        0        0        0        0
+C09  bare NAN token (payload lost: stock words are 0x7fff0000 / 0x7fffffff ...)                                  0        0        0        0        0
+C10  alloca (Ghidra models r1 as a variable)                                                                     0        0        0        0        0   [only where patched (yyparse -> __builtin_alloca)]
+C11  unsigned conversion of a float expression: (uint)(float op ...)                                             2        0        0        0        0
+C12  STACKARG / in_stack_ read left as an uninitialised local                                                    1        2        0        0        0   [classified by inreg_liveness / ExtendParams]
+C13  code-address literal formed with lis/ori kept as a symbol (packet header 0x308c0 style): FUN_ + &DAT        0        0        0        0        0
+C14  call through an unprototyped cast with a bare float-typed variable as an argument (fix_float_args /         5       55        0        0        0   [informational: legitimate when the callee takes a float in an FPR (GH_ARGF/GH_ARGD wrap those)]

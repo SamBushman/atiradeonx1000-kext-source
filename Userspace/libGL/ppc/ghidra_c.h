@@ -70,7 +70,10 @@ typedef struct { lc_str name; unsigned int timestamp, current_version, compatibi
 typedef unsigned long long uint64_t_g;
 #define true 1
 #define false 0
-#define CONCAT44(a, b) ((((ulonglong)(unsigned int)(a)) << 32) | (unsigned int)(b))
+/* a float-typed piece of a CONCAT44 is the WORD holding the float (a 64-bit store of two floats: FUN_0009f0b0's `*(ulonglong *)p = CONCAT44(f0, f1)`): its bits, not its value */
+#define GH_FLT_T(x) __builtin_types_compatible_p(__typeof__(x), float)
+#define GH_W4(x) __builtin_choose_expr(GH_FLT_T(x), GH_F2U(__builtin_choose_expr(GH_FLT_T(x), (x), 0.0f)), (unsigned int)(x))
+#define CONCAT44(a, b) ((((ulonglong)GH_W4(a)) << 32) | GH_W4(b))
 #define CONCAT22(a, b) ((((unsigned int)(unsigned short)(a)) << 16) | (unsigned short)(b))
 #define CONCAT31(a, b) ((((unsigned int)(a)) << 8) | (unsigned char)(b))
 #define CONCAT13(a, b) ((((unsigned int)(unsigned char)(a)) << 24) | ((unsigned int)(b) & 0xffffff))

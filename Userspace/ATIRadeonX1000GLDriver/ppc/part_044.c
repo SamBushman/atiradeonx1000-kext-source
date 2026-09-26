@@ -1641,7 +1641,7 @@ int FUN_0015b974(param_1, param_2, param_3, param_4, param_5)
             }
             else {
               local_40 = 0x43300000;
-              uVar5 = (uint)local_5c;
+              uVar5 = (uint)(int)local_5c;
               local_48 = (longlong)(int)uVar5;
               uStack_3c = uVar5 ^ 0x80000000;
               if (local_5c != (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0))

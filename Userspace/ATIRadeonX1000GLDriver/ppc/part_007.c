@@ -1814,8 +1814,8 @@ int FUN_0004ed90(param_1)
       fVar1 = *(float *)(param_1 + 0x100);
       fVar2 = *(float *)(param_1 + 0x104);
     }
-    *(short *)(param_1 + 0x1cd2) = (short)((uint)(iVar6 * (int)fVar1) >> 1);
-    *(short *)(param_1 + 0x1cd0) = (short)((uint)(iVar6 * (int)fVar2) >> 1);
+    *(short *)(param_1 + 0x1cd2) = (short)((uint)(int)(iVar6 * (int)fVar1) >> 1);
+    *(short *)(param_1 + 0x1cd0) = (short)((uint)(int)(iVar6 * (int)fVar2) >> 1);
   }
   else if ((uVar5 & 0x80) == 0) {
     *(short *)(param_1 + 0x1cd2) = (short)((uint)(iVar6 * *(int *)(param_1 + 0x108)) >> 1);

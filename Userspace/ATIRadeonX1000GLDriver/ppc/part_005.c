@@ -469,7 +469,7 @@ LAB_0002e708:
     uVar15 = (int)(dVar31 - DOUBLE_001aa1e8) + 0x80000000;
   }
   else {
-    uVar15 = (uint)fVar12;
+    uVar15 = (uint)(int)fVar12;
   }
   param_2[0x13] = iVar26 << 0x10 | uVar15;
   ((void (*)())FUN_0002d2b0)(piVar30,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
@@ -617,7 +617,7 @@ int FUN_0002ee30(param_1, param_2)
     uVar7 = (int)(dVar13 - DOUBLE_001aa1e8) + 0x80000000;
   }
   else {
-    uVar7 = (uint)fVar1;
+    uVar7 = (uint)(int)fVar1;
   }
   if ((((uint)*(byte *)(iVar11 + 0x5f) << 0x10 | (uint)*(byte *)(iVar11 + 0x5e)) !=
        *(uint *)(param_2 + 0x48)) || ((iVar8 << 0x10 | uVar7) != *(uint *)(param_2 + 0x4c))) {
@@ -4361,18 +4361,18 @@ LAB_0003482c:
     iVar29 = iVar29 + 0x20;
     if (*(char *)((int)puVar36 + 0x6f) == '\0') {
       piVar38 = piVar19 + 0xc;
-      piVar19[2] = (int)(fVar3 + 1.0);
+      piVar19[2] = (int)GH_F2U((float)((fVar3 + 1.0)));
       *piVar19 = 0x31080;
-      piVar19[1] = (int)fVar2;
-      piVar19[3] = (int)fVar10;
+      piVar19[1] = (int)GH_F2U((float)(fVar2));
+      piVar19[3] = (int)GH_F2U((float)(fVar10));
       piVar19[5] = (int)((unsigned char *)0x00001087U);
-      piVar19[4] = (int)fVar3;
+      piVar19[4] = (int)GH_F2U((float)(fVar3));
       fVar4 = (float)((double)CONCAT44(0x43300000,uStack_84 ^ 0x80000000) - 4503601774854144.0);
       fVar7 = (float)((double)CONCAT44(0x43300000,uStack_88 ^ 0x80000000) - 4503601774854144.0);
       piVar19[7] = -0x3ffccb00;
       piVar19[8] = 0x10031;
-      piVar19[9] = (int)((fVar4 + 0.0) * 0.5);
-      piVar19[10] = (int)((fVar7 + 0.0) * 0.5);
+      piVar19[9] = (int)GH_F2U((float)(((fVar4 + 0.0) * 0.5)));
+      piVar19[10] = (int)GH_F2U((float)(((fVar7 + 0.0) * 0.5)));
       piVar19[0xb] = 0;
       piVar19[6] = (int)(fVar4 * 6.0) << 0x10 | (int)(fVar7 * 6.0);
     }
@@ -4390,30 +4390,30 @@ LAB_0003482c:
         do {
           while( true ) {
             uVar35 = uVar35 + 1;
-            piVar19[6] = (int)fVar7;
-            piVar19[0xb] = (int)fVar7;
-            piVar19[0x10] = (int)fVar7;
-            piVar19[0x15] = (int)fVar7;
+            piVar19[6] = (int)GH_F2U((float)(fVar7));
+            piVar19[0xb] = (int)GH_F2U((float)(fVar7));
+            piVar19[0x10] = (int)GH_F2U((float)(fVar7));
+            piVar19[0x15] = (int)GH_F2U((float)(fVar7));
             piVar38 = piVar19 + 0x16;
             *piVar19 = -0x3febcb00;
             piVar19[1] = 0x4003d;
             piVar19[2] = 0;
             piVar19[3] = 0;
             fVar7 = fVar7 + fVar4;
-            piVar19[4] = (int)fVar2;
-            piVar19[5] = (int)fVar3;
-            piVar19[7] = (int)fVar6;
+            piVar19[4] = (int)GH_F2U((float)(fVar2));
+            piVar19[5] = (int)GH_F2U((float)(fVar3));
+            piVar19[7] = (int)GH_F2U((float)(fVar6));
             piVar19[8] = 0;
-            piVar19[9] = (int)fVar10;
-            piVar19[10] = (int)fVar3;
-            piVar19[0xc] = (int)fVar6;
-            piVar19[0xd] = (int)fVar5;
-            piVar19[0xe] = (int)fVar10;
-            piVar19[0xf] = (int)(fVar3 + 1.0);
+            piVar19[9] = (int)GH_F2U((float)(fVar10));
+            piVar19[10] = (int)GH_F2U((float)(fVar3));
+            piVar19[0xc] = (int)GH_F2U((float)(fVar6));
+            piVar19[0xd] = (int)GH_F2U((float)(fVar5));
+            piVar19[0xe] = (int)GH_F2U((float)(fVar10));
+            piVar19[0xf] = (int)GH_F2U((float)((fVar3 + 1.0)));
             piVar19[0x11] = 0;
-            piVar19[0x12] = (int)fVar5;
-            piVar19[0x13] = (int)fVar2;
-            piVar19[0x14] = (int)(fVar3 + 1.0);
+            piVar19[0x12] = (int)GH_F2U((float)(fVar5));
+            piVar19[0x13] = (int)GH_F2U((float)(fVar2));
+            piVar19[0x14] = (int)GH_F2U((float)((fVar3 + 1.0)));
             if ((int)uVar14 <= (int)uVar35) break;
             piVar19[0x16] = (int)((unsigned char *)0x00001393U);
             piVar19[0x17] = 10;
@@ -5001,7 +5001,7 @@ LAB_00035740:
     }
     uVar38 = uVar50 - 1;
     uVar28 = (((int)uVar38 >> 9) + (uint)((int)uVar38 < 0 && (uVar38 & 0x1ff) != 0)) * 0x200;
-    uVar38 = (uint)fVar23;
+    uVar38 = (uint)(int)fVar23;
     if ((FLOAT_001aa0d4 < fVar23) &&
        ((float)((double)CONCAT44(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar23)) {
       uVar38 = uVar38 + 1;
@@ -5019,7 +5019,7 @@ LAB_00035740:
     }
     uVar38 = uVar49 - 1;
     uVar28 = (((int)uVar38 >> 6) + (uint)((int)uVar38 < 0 && (uVar38 & 0x3f) != 0)) * 0x40;
-    uVar38 = (uint)fVar13;
+    uVar38 = (uint)(int)fVar13;
     if ((FLOAT_001aa0d4 < fVar13) &&
        ((float)((double)CONCAT44(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_001aa1e0) < fVar13)) {
       uVar38 = uVar38 + 1;
@@ -5284,16 +5284,16 @@ LAB_00035dd8:
             fVar17 = (fVar17 + fVar16) * FLOAT_001aa10c;
             fVar6 = (fVar6 + fVar15) * FLOAT_001aa10c;
             puVar30[4] = 0x31080;
-            puVar30[6] = (uint)(fVar19 * (fVar24 - fVar8));
-            puVar30[8] = (uint)(fVar19 * (fVar3 - fVar8));
+            puVar30[6] = (uint)GH_F2U((float)((fVar19 * (fVar24 - fVar8))));
+            puVar30[8] = (uint)GH_F2U((float)((fVar19 * (fVar3 - fVar8))));
             puVar30[9] = (uint)((unsigned char *)0x00001087U);
             fVar3 = (float)((double)CONCAT44(0x43300000,uVar29) - dVar25);
-            puVar30[7] = (uint)(fVar18 * (fVar22 - fVar3));
-            puVar30[5] = (uint)(fVar18 * (fVar2 - fVar3));
+            puVar30[7] = (uint)GH_F2U((float)((fVar18 * (fVar22 - fVar3))));
+            puVar30[5] = (uint)GH_F2U((float)((fVar18 * (fVar2 - fVar3))));
             puVar30[0xb] = 0xc0033500;
             puVar30[0xc] = 0x10031;
-            puVar30[0xd] = (uint)fVar17;
-            puVar30[0xe] = (uint)fVar6;
+            puVar30[0xd] = (uint)GH_F2U((float)(fVar17));
+            puVar30[0xe] = (uint)GH_F2U((float)(fVar6));
             puVar30[10] = (int)fVar20 << 0x10 | (int)fVar21;
             puVar30[0xf] = 0;
             puVar30 = puVar30 + 0x10;
@@ -6231,7 +6231,7 @@ LAB_00038698:
               puVar30[0xc2] = 0x3f800000;
               fVar2 = (float)((double)CONCAT44(0x43300000,uStack_13c) - 4503601774854144.0);
               fVar3 = (float)((double)CONCAT44(0x43300000,uStack_144) - 4503601774854144.0);
-              uVar44 = (uint)((fVar2 - fVar3) * 6.0);
+              uVar44 = (uint)(int)((fVar2 - fVar3) * 6.0);
               lStack_138 = (longlong)(int)uVar44;
               puVar30[199] = 0xc0033500;
               puVar30[200] = 0x10031;
@@ -6699,7 +6699,7 @@ LAB_00037930:
     uVar24 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
   }
   else {
-    uVar24 = (uint)fVar17;
+    uVar24 = (uint)(int)fVar17;
     lStack_198 = (longlong)(int)uVar24;
   }
   fVar17 = fVar5 - 1.0;
@@ -6708,7 +6708,7 @@ LAB_00037930:
     uVar35 = (int)(fVar17 - 2.1474836e+09) + 0x80000000;
   }
   else {
-    uVar35 = (uint)fVar17;
+    uVar35 = (uint)(int)fVar17;
     lStack_188 = (longlong)(int)uVar35;
   }
   puVar30[0xab] = uVar24 & 0x7ff | (uVar35 & 0x7ff) << 0xb | 0x80000000;
@@ -6796,7 +6796,7 @@ LAB_000371ac:
   puVar30[0xc5] = (fVar13 + fVar2) * (1.0 / fVar4);
   puVar30[0xc3] = fVar15 * (1.0 / fVar4);
   puVar30[0xc4] = (fVar14 + fVar3) * (1.0 / fVar5);
-  uVar26 = (uint)((fVar14 - fVar7) * 6.0);
+  uVar26 = (uint)(int)((fVar14 - fVar7) * 6.0);
   lStack_150 = (longlong)(int)uVar26;
   puVar30[0xca] = 0x10031;
   puVar30[0xc9] = 0xc0033500;
