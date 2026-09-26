@@ -252,6 +252,15 @@ def c_type_for(name, kind):
     return 'unsigned char %s[]'   # structures etc.: raw bytes
 
 # ---------------------------------------------------------------------------------------------- link_decls.h (decls.h with asm labels + real widths)
+# `(&DAT_001e6158)[iVar2]` is Ghidra's index into an array of ITS data type (undefined4: the stock does `rlwinm r0,r3,2,0,29; lwzx`); the corpus declares such a table
+# `unsigned char X[]` (it is also used for byte arithmetic), so the rebuilt index scaled by 1 and read one byte (GLDriver FUN_001771b0 / FUN_0017729c filled the texture-unit
+# state from the wrong table entries; found by the pure-function fuzz `graph` profile). Index through a pointer of the Ghidra type's width.
+sized_index_tables = {}
+for _nm, _v in data_decls.items():
+    _t = c_type_for(_nm, _v[0])
+    _mw = re.match(r'^(unsigned (?:short|int|long long))\b', _t or '')
+    if _mw and re.search(r'extern (?:const )?unsigned char %s\[\];' % re.escape(_nm), open(os.path.join(corpus, 'decls.h')).read() if os.path.exists(os.path.join(corpus, 'decls.h')) else ''):
+        sized_index_tables[_nm] = _mw.group(1)
 label_of = {}        # C identifier -> assembler symbol
 signed_kept = []     # data names whose signed corpus type was kept over Ghidra's unsigned-by-default one
 typed = 0
@@ -1085,6 +1094,9 @@ for pdir_, f in _part_files:
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
             # `((unsigned char *)0x000c6e40)` where 0xc6e40 is the entry of a function of the link (ghidra2c prints `&DAT_...` of a code address that way): its label
             txt = re.sub(r'\(\(unsigned char \*\)0x([0-9a-f]{8})\)', lambda x: ('((unsigned char *)%s)' % fn_by_addr[int(x.group(1), 16)]) if int(x.group(1), 16) in fn_by_addr and '+' not in fn_by_addr[int(x.group(1), 16)] else x.group(0), txt)
+            if sized_index_tables:
+                txt = re.sub(r'\((%s)\)\[' % '|'.join(re.escape(n_) for n_ in sized_index_tables), lambda x: '((%s *)%s)[' % (sized_index_tables[x.group(1)], x.group(1)), txt)
+                txt = re.sub(r'(?<![\w)>.&])(%s)\[' % '|'.join(re.escape(n_) for n_ in sized_index_tables), lambda x: '((%s *)%s)[' % (sized_index_tables[x.group(1)], x.group(1)), txt)
             if ctx_lit_syms:
                 txt = _CTX_LIT.sub(lambda x: ('((unsigned int)&%s + %d)' % ctx_lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in ctx_lit_syms and _ctx_lit_ok(txt, x) else x.group(0), txt)
             if bind_info:
