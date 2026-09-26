@@ -654,6 +654,7 @@ def _operand(t, i):
 _FLOATY = re.compile(r'\b(?:[fd]Var\d+|pfVar\d+|pdVar\d+|FLOAT_\w+|DOUBLE_\w+|fparam_\w+|in_f\d+|extraout_f\d+|float|double)\b|\d\.\d|\d+e[-+]?\d')
 def fix_float_int(b, entry):
     floc = set(re.findall(r'(?m)^\s+float\s+(\w+)(?:\s*\[\d+\])?;', b))
+    _intword = set(v for v in floc if re.search(r'\b%s\s*=\s*\(float\)\(\(?\s*(?:int|uint)\)' % re.escape(v), b))   # float-typed variables that are assigned integer words
     out = []; i = 0; n = 0
     while True:
         m = re.search(r'\((float|int|uint|u?short|u?char|byte|undefined4)\)', b[i:])
@@ -670,14 +671,17 @@ def fix_float_int(b, entry):
             out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
         if ty == 'float':
             # an integer expression made float without the conversion sequence
-            if opd and not _FLOATY.search(opd) and not opd.startswith('('+'double'):
+            # `fVar6 = (float)((uint)fVar2 | (int)fVar6 << 8)`: an integer expression (it starts with an int / uint cast) stored into a float-typed variable that carries
+            # integer WORDS (GLDriver FUN_0002d2b0 packs colour channels: the C converted the value to float and lost the low bits of a 32-bit pixel; fnfuzz `graph` profile).
+            # 32-bit PowerPC has no int -> float instruction outside the CONCAT44 magic-double sequence, so this is a bit copy even when float variables occur inside.
+            if opd and (not _FLOATY.search(opd) or re.match(r'^\(*\s*\(?(?:int|uint)\)', opd)) and not opd.startswith('('+'double') and 'CONCAT44' not in opd:
                 out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
         elif _FCTIW is not None and (opd.startswith('(float)') or (opd.startswith('*(float *)') and re.search(r'[\])]\s*=\s*$', b[max(0, st - 40):st]))) and (opd.startswith('(float)((double)CONCAT44(0x43300000') or _FRSPCT.get(entry, 0) < len(re.findall(r'\((?:int|uint|undefined4|ulong)\)(?:\(float\)|\*\(float \*\))', b))):
             # `param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000, x) - magic)`: the int -> float conversion sequence followed by `frsp; stfs` into a word Ghidra
             # typed int - the word holds the FLOAT's bits (1.0f = 0x3f800000), C's `(int)` converted the value (1). Only in a function without fctiw*, or when the operand is
             # itself a fresh int -> float conversion (a float -> int conversion of one is never written): GLDriver FUN_0002ddf0 (9 sites), GA 0x8260 / 0xa5a0 / 0xba90 (9)
             out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
-        elif _FCTIW is not None and entry not in _FCTIW:
+        elif _FCTIW is not None and (entry not in _FCTIW or re.match(r'^\*?\(?\s*([A-Za-z_]\w*)', opd) and re.match(r'^\*?\(?\s*([A-Za-z_]\w*)', opd).group(1) in _intword):
             base = re.match(r'^\*?\(?\s*([A-Za-z_]\w*)', opd)
             if base and (re.match(r'^(?:f)Var\d+$', base.group(1)) or base.group(1) in floc or re.match(r'^pfVar\d+$', base.group(1)) and ('[' in opd or opd.startswith('*'))) \
                and not re.search(r'[+\-*/]\s', opd):
@@ -794,7 +798,9 @@ def fix_code_offsets(b):
     out.append(b[i:])
     b = ''.join(out)
     # `((code **)FUN_00030c50)[param_3 + param_1]`: the same coincidence as a table base (GLDriver FUN_0001ecd0 and one more function)
-    b, k = re.subn(r'\(code \*\*\)FUN_([0-9a-f]{8})\)\s*\[', lambda m: '(code **)0x%s)[' % m.group(1), b)
+    # ...and it is a BYTE table, not a table of code pointers: the stock does `lbz r0,0xc50(r2)` with r2 = r5 + r3 + 0x30000 (FUN_00079b00) and `stb r0,0x2595(r30)` (= param_1 +
+    # 0x27d5, FUN_0001ecd0). Ghidra's `code **` scaled the index by 4 and stored a pointer.
+    b, k = re.subn(r'\(code \*\*\)FUN_([0-9a-f]{8})\)\s*\[([^\[\]]*)\]\s*(=(?!=)\s*\(code \*\)0x1;|==\s*\(code \*\)0x0)?', lambda m: '(unsigned char *)0x%s)[%s]%s' % (m.group(1), m.group(2), (' = 1;' if m.group(3) and m.group(3).startswith('=') and not m.group(3).startswith('==') else ' == 0') if m.group(3) else ''), b)
     return b, n + k
 def fix_nan(b, entry):
     """a bare `NAN` token (a float-typed variable holding a NaN-pattern word) -> the one NaN-pattern constant the stock function builds"""

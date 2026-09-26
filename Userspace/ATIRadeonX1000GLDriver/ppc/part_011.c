@@ -1982,8 +1982,8 @@ int FUN_00079b00(param_1, param_2, param_3, param_4)
   int iVar1;
   undefined4 *puVar2;
   
-  if ((param_3 != param_2) && (((code **)0x00030c50)[param_3 + param_1] == (code *)0x0)) {
-    ((code **)0x00030c50)[param_3 + param_1] = (code *)0x1;
+  if ((param_3 != param_2) && (((unsigned char *)0x00030c50)[param_3 + param_1] == 0)) {
+    ((unsigned char *)0x00030c50)[param_3 + param_1] = 1;
     iVar1 = ((int (*)())FUN_00079910)(param_1,param_1 + 0xe450 + param_2 * 4,param_3,param_4,0,0,param_1 + 0x38);
     if (iVar1 != 0) {
       return iVar1;

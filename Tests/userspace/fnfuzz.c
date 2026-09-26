@@ -39,7 +39,7 @@ static unsigned long long rng_state;
 static unsigned rnd32(void) { rng_state = rng_state * 6364136223846793005ULL + 1442695040888963407ULL; return (unsigned)(rng_state >> 32); }
 static unsigned arena_ptr(void) { return ARENA_BASE + ARENA_PTR_LO + ((rnd32() % (ARENA_SIZE - 2 * ARENA_PTR_LO)) & ~3u); }
 
-static int tiny;
+static int tiny, graph;   /* graph: the arena is mostly pointers to itself (a linked structure a function can walk two or three levels deep) */
 static int narrow;   /* FNFUZZ_PROFILE=narrow: small integers only (no wild indexes into tables), so a difference in behaviour is a difference in the code, not in an out-of-range read */
 static unsigned gen_int(void) {
     unsigned k = rnd32() % 20;
@@ -96,7 +96,7 @@ static void child(void *fn, const cand_t *c, unsigned seed, int mode) {
     if (m != (void *)ARENA_BASE) _exit(9);
     rng_state = (unsigned long long)seed * 2862933555777941757ULL + c->id;
     unsigned *w = (unsigned *)ARENA_BASE;
-    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
+    for (unsigned i = 0; i < ARENA_SIZE / 4; i++) { unsigned k = rnd32() % 10; w[i] = graph ? (k < 2 ? 0 : k < 4 ? rnd32() % 64 : arena_ptr()) : tiny ? (k < 6 ? 0 : k < 9 ? rnd32() % 16 : arena_ptr()) : (k < 3 ? 0 : k < 6 ? rnd32() % 64 : k < 7 ? (narrow ? rnd32() % 256 : rnd32()) : arena_ptr()); }
     unsigned ia[8]; double da[13]; int k = 0, j = 0;
     for (const char *p = c->pc; *p && *p != '-'; p++) {
         switch (*p) {
@@ -145,7 +145,7 @@ static int same(const result_t *a, const result_t *b, char rc) {
 
 int main(int argc, char **argv) {
     if (argc < 4) { fprintf(stderr, "usage: fnfuzz LEDGER.tsv STOCK REBUILT [trials] [filter|@first,count]\n"); return 2; }
-    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny");
+    narrow = getenv("FNFUZZ_PROFILE") && (!strcmp(getenv("FNFUZZ_PROFILE"), "narrow") || !strcmp(getenv("FNFUZZ_PROFILE"), "tiny")); tiny = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "tiny"); graph = getenv("FNFUZZ_PROFILE") && !strcmp(getenv("FNFUZZ_PROFILE"), "graph");
     int trials = argc > 4 ? atoi(argv[4]) : 12; const char *flt = argc > 5 ? argv[5] : NULL;
     FILE *f = fopen(argv[1], "r"); if (!f) { perror(argv[1]); return 2; }
     char line[512], anchor[96]; unsigned a_stock = 0, a_reb = 0;

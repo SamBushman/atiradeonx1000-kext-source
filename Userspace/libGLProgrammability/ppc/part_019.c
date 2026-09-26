@@ -2985,9 +2985,9 @@ int _ConstantPropagateFold(param_1)
           iVar4 = _HashSetGet(uVar2,&local_70);
           if ((iVar4 != 0) && (*(int *)(iVar4 + 0x14) != 0)) {
             *(uint *)(iVar6 + 0x10) = *(uint *)(iVar6 + 0x10) & 0x7fffffff;
-            local_40 = (longlong)(int)GH_F2U(*(float *)(iVar4 + 0x18));
+            local_40 = (longlong)(int)*(float *)(iVar4 + 0x18);
             *(short *)(iVar6 + 0x16) =
-                 *(short *)(iVar6 + 0x16) + (short)(int)GH_F2U(*(float *)(iVar4 + 0x18));
+                 *(short *)(iVar6 + 0x16) + (short)(int)*(float *)(iVar4 + 0x18);
           }
         }
         uVar1 = *(uint *)(iVar6 + 0x10);
@@ -3015,8 +3015,8 @@ int _ConstantPropagateFold(param_1)
       iVar3 = _HashSetGet(uVar2,&local_70);
       if ((iVar3 != 0) && (*(int *)(iVar3 + 0x14) != 0)) {
         *(uint *)(iVar7 + 0x18) = *(uint *)(iVar7 + 0x18) & 0x7fffffff;
-        local_40 = (longlong)(int)GH_F2U(*(float *)(iVar3 + 0x18));
-        *(short *)(iVar7 + 0x1a) = *(short *)(iVar7 + 0x1a) + (short)(int)GH_F2U(*(float *)(iVar3 + 0x18));
+        local_40 = (longlong)(int)*(float *)(iVar3 + 0x18);
+        *(short *)(iVar7 + 0x1a) = *(short *)(iVar7 + 0x1a) + (short)(int)*(float *)(iVar3 + 0x18);
       }
     }
     ((int (*)())_EmulateOp)(param_1,iVar7,uVar2);

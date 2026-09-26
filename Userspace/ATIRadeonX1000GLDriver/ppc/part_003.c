@@ -4176,7 +4176,7 @@ code_r0x0001f7c0:
     }
     uVar17 = 1;
     *(undefined1 *)(param_1 + 0x2a5e) = 1;
-    ((code **)0x000027d0)[param_1 + 5] = (code *)0x1;
+    ((unsigned char *)0x000027d0)[param_1 + 5] = 1;
   }
   else {
 LAB_0001f7f0:

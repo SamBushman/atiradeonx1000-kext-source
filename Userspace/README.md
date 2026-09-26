@@ -285,7 +285,7 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   bytes Ghidra saw of a token buffer (`char local_120; char local_11f;` + `GetPart(p, &local_120, 0)`; `rewrites.mirror_frame` now reserves 0x100 bytes above an
   address-taken byte scalar); the libgcc 64-bit shift helpers differ for out-of-range counts only (toolchain functions, excluded); `saveFP`/`restFP` millicode
   and two clipped fragments are not functions.
-* **GLDriver: 2723 candidate functions, 12 trials each.** Ten real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
+* **GLDriver: 2723 candidate functions, 12 trials each.** Fourteen real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
   1. `fix_code_offsets` - a struct-field OFFSET that equals a function's address is printed as that function's symbol (`*(int *)(FUN_00024870 + i * 4 + param_1) = ..`:
      `addis r2,r2,2; stw r4,0x4870(r2)`); the link tree resolves the name to the rebuilt function's address, so FUN_00077560 stored through a wild pointer.
      ~690 sites (context offsets 0x2748, 0x26c8, 0x1e24, 0x1dc4 ...), and `((code **)FUN_00030c50)[i]` table bases. Nothing adds to a function's address.
@@ -316,6 +316,13 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
      `param_2[0x24] = (int)*(float *)(p + 0x2c)`: C converted the value (1.0f became 1), the stock does `frsp; stfs` / `lfs; stfs`. `fix_float_int` now treats a cast of
      a float-valued operand as a bit copy unless the function really converts a `frsp` / `lfs` result with `fctiwz` (`_FRSPCT`, counted per function) - and, for
      `*(float *)`, only when the destination is a memory word.
+  13. `((code **)FUN_00030c50)[param_3 + param_1]` / `((code **)FUN_000027d0)[param_1 + 5] = 1` are BYTE tables (`lbz` / `stb` at base + index): the `code **` scaled by 4 and stored a
+     pointer (FUN_00079b00, FUN_0001ecd0).
+  14. Integer words in float-typed variables: `fVar6 = (float)((uint)fVar2 | (int)fVar6 << 8)` (FUN_0002d2b0, the colour-channel packer of the framebuffer-clear path) converted the
+     32-bit pixel to float and lost its low bits; a `(float)` cast of an expression that starts with an int / uint cast is a bit copy (no int -> float instruction exists outside the
+     CONCAT44 sequence), and `(uint)fVarN` of such a variable is a bit read (`_intword`).
+  Regression found and fixed the same day: the glprog / VA parts committed at s31 had been regenerated before the `*(float *)` bit-copy rule was restricted to memory-word destinations,
+  so real float -> int conversions in the interpreter had become bit reinterpretations (the differential tests did not reach them); regenerated and re-verified.
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
   wrong rebuilt function and reports crashes that are not there.
 ### Undeclared argument registers (`in_rN`, issue #70)

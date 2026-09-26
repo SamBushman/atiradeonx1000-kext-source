@@ -5178,7 +5178,7 @@ LAB_0009d4b8:
         }
       }
       uVar4 = uVar4 + 1;
-      fVar12 = (float)((int)GH_F2U(fVar12) + 0x40);
+      fVar12 = GH_U2F((unsigned int)(((int)fVar12 + 0x40)));
       piVar11 = piVar11 + 1;
       iVar16 = iVar16 + -1;
     } while (iVar16 != 0);

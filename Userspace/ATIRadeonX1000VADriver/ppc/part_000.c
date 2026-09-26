@@ -1463,13 +1463,13 @@ LAB_00003104:
   case 0x1c:
     *(short *)(param_1 + 0x124) = SUB42(*param_3,0);
     fVar3 = param_3[1];
-    if ((uint)GH_F2U(*(float *)(param_1 + 0x57c)) < (uint)param_3[1]) {
+    if ((uint)*(float *)(param_1 + 0x57c) < (uint)param_3[1]) {
       fVar3 = *(float *)(param_1 + 0x57c);
     }
     *(short *)(param_1 + 0x128) = SUB42(fVar3,0);
     *(short *)(param_1 + 0x126) = SUB42(param_3[2],0);
     fVar3 = param_3[3];
-    if ((uint)GH_F2U(*(float *)(param_1 + 0x578)) < (uint)param_3[3]) {
+    if ((uint)*(float *)(param_1 + 0x578) < (uint)param_3[3]) {
       fVar3 = *(float *)(param_1 + 0x578);
     }
     fVar1 = *(float *)(param_1 + 300);

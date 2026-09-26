@@ -2470,7 +2470,7 @@ int _AddConstantParam(param_1, param_2, param_3, param_4, param_5_w, param_6_w, 
     local_4c = GH_U2F((unsigned int)((int)param_6));
     local_48 = GH_U2F((unsigned int)((int)param_7));
     local_44 = GH_U2F((unsigned int)((int)param_8));
-    local_40 = (longlong)(int)local_44;
+    local_40 = (longlong)(int)GH_F2U(local_44);
   }
   piVar4 = *(int **)(param_1 + 0x10);
   iVar5 = *piVar4;

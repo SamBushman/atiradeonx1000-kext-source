@@ -1586,7 +1586,7 @@ void FUN_00024970(int param_1,int param_2,int param_3,int param_4,undefined4 par
     *(undefined1 *)(param_1 + 0x2a5e) = 1;
     *(int *)(param_1 + 0x2680) = param_1 + 0x26dc;
     *(int *)(param_1 + 0x2684) = param_1 + 0x26fc;
-    ((code **)0x000027d0)[param_1 + 5] = (code *)0x1;
+    ((unsigned char *)0x000027d0)[param_1 + 5] = 1;
   }
   return;
 }
@@ -5319,7 +5319,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
             bVar2 = *(byte *)pfVar16;
             *pfVar15 = GH_U2F((unsigned int)(((unsigned char *)0x000013c2U)));
             pfVar16 = (float *)((int)pfVar16 + param_6);
-            fVar18 = (float)((uint)bVar2 | (uint)fVar18 & 0xffffff00);
+            fVar18 = GH_U2F((unsigned int)(((uint)bVar2 | (uint)fVar18 & 0xffffff00)));
             pfVar15[1] = fVar18;
             uStack_94 = *(undefined4 *)(param_1 + 0x248);
             local_98 = 0x43300000;
@@ -7516,10 +7516,10 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   }
   dVar11 = dVar11 * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= dVar11) {
-    fVar2 = (float)((int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000);
+    fVar2 = GH_U2F((unsigned int)(((int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    fVar2 = (float)(int)dVar11;
+    fVar2 = GH_U2F((unsigned int)((int)dVar11));
   }
   dVar12 = dVar12 * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= dVar12) {
@@ -7537,10 +7537,10 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   }
   dVar14 = dVar14 * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= dVar14) {
-    fVar6 = (float)((int)(dVar14 - DOUBLE_001aa1e8) + -0x80000000);
+    fVar6 = GH_U2F((unsigned int)(((int)(dVar14 - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    fVar6 = (float)(int)dVar14;
+    fVar6 = GH_U2F((unsigned int)((int)dVar14));
   }
   switch(*(char *)(param_1 + 0x37)) {
   default:
@@ -7555,18 +7555,18 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   case '\x04':
   case '\x0f':
   case '\x16':
-    fVar6 = (float)((uint)fVar2 | (int)fVar6 << 8);
+    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 | (int)fVar6 << 8)));
     break;
   case '\x05':
-    fVar6 = (float)(((uint)fVar2 & 0xf8) << 8 | (uVar3 & 0xfc) << 3 | uVar4 >> 3);
+    fVar6 = GH_U2F((unsigned int)((((uint)fVar2 & 0xf8) << 8 | (uVar3 & 0xfc) << 3 | uVar4 >> 3)));
     break;
   case '\x06':
-    fVar6 = (float)(((uint)fVar6 & 0xf0) << 8 | ((uint)fVar2 & 0xf0) << 4 | uVar3 & 0xf0 |
-                   uVar4 >> 4);
+    fVar6 = GH_U2F((unsigned int)((((uint)fVar6 & 0xf0) << 8 | ((uint)fVar2 & 0xf0) << 4 | uVar3 & 0xf0 |
+                   uVar4 >> 4)));
     break;
   case '\a':
-    fVar6 = (float)(((uint)fVar6 & 0x80) << 8 | ((uint)fVar2 & 0xf8) << 7 | (uVar3 & 0xf8) << 2 |
-                   uVar4 >> 3);
+    fVar6 = GH_U2F((unsigned int)((((uint)fVar6 & 0x80) << 8 | ((uint)fVar2 & 0xf8) << 7 | (uVar3 & 0xf8) << 2 |
+                   uVar4 >> 3)));
     break;
   case '\b':
   case '\v':
@@ -7578,14 +7578,14 @@ void FUN_0002d2b0(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   case '\x1d':
   case '&':
   case '\'':
-    fVar6 = (float)(uVar4 | (int)fVar6 << 0x18 | (int)fVar2 << 0x10 | uVar3 << 8);
+    fVar6 = (float)(uVar4 | (int)GH_F2U(fVar6) << 0x18 | (int)GH_F2U(fVar2) << 0x10 | uVar3 << 8);
     break;
   case '\t':
   case '\n':
   case '\x12':
   case '\x18':
   case '\x1e':
-    fVar6 = (float)((uint)fVar2 | uVar3 << 8 | (int)fVar6 << 0x18 | uVar4 << 0x10);
+    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 | uVar3 << 8 | (int)fVar6 << 0x18 | uVar4 << 0x10)));
     break;
   case '\x10':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
@@ -7737,7 +7737,7 @@ LAB_0002dcb4:
     fVar6 = GH_U2F((unsigned int)((uVar3 | uVar4 | (uVar5 & 0x3ff) << 10)));
     break;
   case '(':
-    fVar6 = (float)((uint)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6);
+    fVar6 = GH_U2F((unsigned int)(((uint)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6)));
     break;
   case ')':
     dVar7 = dVar7 * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
