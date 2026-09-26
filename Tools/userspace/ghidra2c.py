@@ -390,7 +390,11 @@ def fix_arrays(b):
         nm = am.group(1)
         b = re.sub(r'(?m)^(\s*)%s\s*=\s*\((unsigned int|unsigned short)\)' % re.escape(nm), lambda m: '%s*(%s *)%s = (%s)' % (m.group(1), m.group(2), nm, m.group(2)), b)
         b = re.sub(r'(?m)^(\s*)%s\s*=\s*(\(\*\((?:unsigned int|unsigned short) \*\))' % re.escape(nm), lambda m: '%s*(unsigned int *)%s = %s' % (m.group(1), nm, m.group(2)), b)
-    b = re.sub(r'(?m)^(\s*p\w+ = (?:\(\w+ \*\))?)((?:local|\w*Stack)_[0-9a-f]+)\[0\];', r'\1\2;', b)   # array decay (pointer to the buffer), not element 0
+    def _decay(mm):   # array decay (pointer to the buffer), not element 0 - but only for a BUFFER: an array of pointers (`ParseOperand *local_48[3]`) has a pointer in element 0
+        decl = re.search(r'(?m)^\s*([A-Za-z_][\w ]*?[\s*]+)%s\s*\[' % re.escape(mm.group(2)), b)
+        if decl and '*' in decl.group(1): return mm.group(0)
+        return mm.group(1) + mm.group(2) + ';'
+    b = re.sub(r'(?m)^(\s*p\w+ = (?:\(\w+ \*\))?)((?:local|\w*Stack)_[0-9a-f]+)\[0\];', _decay, b)
     return b
 
 led = []
@@ -691,6 +695,19 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'\bstack0x([0-9a-f]{8})\b', lambda m: m.group(0) if m.group(0) in declared_ else 'STACKARG(0x%s)' % m.group(1).lstrip('0').rjust(1, '0'), b)
             b = re.sub(r'\((STACKARG\(0x[0-9a-f]+\))\)\s*\[', r'((unsigned int *)\1)[', b)
             b, _nhs = fix_home_slots(b, name)
+            # a 4-byte sub-piece in an ORDERED comparison is a signed int (BindingTable::InsertUniformArray: `local_50._4_4_ < local_50._0_4_` is the stock's `cmpw`;
+            # the unsigned cast made -1 "larger" than 0 and the array's element bindings were never created)
+            _PC = r'[A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*\._\d+_4_'
+            _pint = lambda mm: '(*(int *)((unsigned char *)&(%s) + %s))' % (mm.group(1), mm.group(2))
+            def _signed_pieces(txt):
+                pat = re.compile(r'\b(' + r'[A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*' + r')\._(\d+)_4_')
+                out = []; last = 0
+                for mm in pat.finditer(txt):
+                    before = txt[max(0, mm.start() - 6):mm.start()]; after = txt[mm.end():mm.end() + 6]
+                    if re.search(r'(<=|>=|<|>)\s*$', before.rstrip() + ' ') and not re.search(r'(<<|>>|->)\s*$', before) or re.match(r'\s*(<=|>=|<(?!<)|>(?!>))', after):
+                        out.append(txt[last:mm.start()]); out.append(_pint(mm)); last = mm.end()
+                out.append(txt[last:]); return ''.join(out)
+            b = _signed_pieces(b)
             b = re.sub(r'\b([A-Za-z_]\w*(?:\[[^\]]*\])?(?:\.[A-Za-z_]\w*)*)\._(\d+)_(\d+)_', lambda m: '(*(%s *)((unsigned char *)&(%s) + %s))' % ({'1': 'unsigned char', '2': 'unsigned short', '4': 'unsigned int', '8': 'unsigned long long'}.get(m.group(3), 'unsigned int'), m.group(1), m.group(2)), b)
             k_ = b.index('{'); head_, rest_ = b[:k_], b[k_:]
             for nm in ([] if (os.environ.get('NOCAST') and not os.environ.get('CASTEXACT')) else exact_fns):

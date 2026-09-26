@@ -696,7 +696,7 @@ int __ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBeha
     if (ppVar7 != ppVar5) {
       local_70[0] = ppVar7;
       std___Rb_tree_base_iterator___M_decrement((unsigned char *)local_70);
-      ppVar5 = local_70;
+      ppVar5 = local_70[0];
       pvVar4 = *(void **)(param_4 + 4);
       puVar2 = &local_3c;
       uVar3 = *(uint *)(*(int *)(local_70[0] + 0x14) + -0xc);

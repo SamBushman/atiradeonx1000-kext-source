@@ -7825,43 +7825,45 @@ int FUN_000b51a0(param_1, param_2, param_3)
 {
   float fVar1;
   float fVar2;
-  double dVar3;
-  int iVar4;
-  undefined4 *puVar5;
+  uint uVar3;
+  uint uVar4;
+  int iVar5;
+  undefined4 *puVar6;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar6;
+  int iVar7;
   double fparam_2;
   double fparam_1;
-  double dVar7;
-  double dVar8;
   
-  dVar3 = DOUBLE_001aa240;
-  iVar4 = *(int *)(param_1 + 4);
-  iVar6 = *(int *)(iVar4 + 0x10);
+  iVar5 = *(int *)(param_1 + 4);
+  iVar7 = *(int *)(iVar5 + 0x10);
   if (*(char *)(param_2 + 0x1e2f) != '\0') {
-    fVar1 = *(float *)(iVar4 + 0x2a58);
-    fVar2 = *(float *)(iVar4 + 0x2a54);
-    dVar7 = (double)CONCAT44(0x43300000,*(uint *)(iVar6 + 0x1840) ^ 0x80000000) - DOUBLE_001aa1e0;
-    dVar8 = (double)CONCAT44(0x43300000,*(uint *)(iVar6 + 0x1844) ^ 0x80000000) - DOUBLE_001aa1e0;
+    uVar3 = *(uint *)(iVar7 + 0x1840);
+    fVar1 = *(float *)(iVar5 + 0x2a58);
+    fVar2 = *(float *)(iVar5 + 0x2a54);
+    uVar4 = *(uint *)(iVar7 + 0x1844);
     fparam_1 = (double)(fVar2 * (float)((double)CONCAT44(0x43300000,
-                                                         *(uint *)(iVar6 + 0x1848) ^ 0x80000000) -
-                                       DOUBLE_001aa1e0) * FLOAT_001aa10c);
+                                                         *(uint *)(iVar7 + 0x1848) ^ 0x80000000) -
+                                       4503601774854144.0) * 0.5);
     fparam_2 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                         *(uint *)(iVar6 + 0x184c) ^ 0x80000000) -
-                                       DOUBLE_001aa1e0) * FLOAT_001aa10c);
-    puVar5 = param_3;
+                                                         *(uint *)(iVar7 + 0x184c) ^ 0x80000000) -
+                                       4503601774854144.0) * 0.5);
+    puVar6 = param_3;
     ((void (*)())FUN_000b4f50)(*param_3,param_3[0x2e] - *(int *)(param_2 + 0x1f1c),param_3,in_r6,in_r7,in_r8,
                  *(undefined4 *)(param_1 + 0x2454),fparam_1,fparam_2,
-                 (double)(float)((*(double *)(iVar6 + 0x1838) - *(double *)(FUN_00001830 + iVar6)) *
-                                DOUBLE_001aa240),(double)FLOAT_001aa0d4);
-    ((void (*)())FUN_000b4f50)(*param_3,param_3[0x2f] - *(int *)(param_2 + 0x1f1c),puVar5,in_r6,in_r7,in_r8,
+                 (double)(float)((*(double *)(iVar7 + 0x1838) - *(double *)(FUN_00001830 + iVar7)) *
+                                0.5),0.0);
+    ((void (*)())FUN_000b4f50)(*param_3,param_3[0x2f] - *(int *)(param_2 + 0x1f1c),puVar6,in_r6,in_r7,in_r8,
                  *(undefined4 *)(param_1 + 0x2454),
-                 (double)(float)((double)(fVar2 * (float)dVar7) + fparam_1),
-                 (double)(float)((double)(fVar1 * (float)dVar8) + fparam_2),
-                 (double)(float)((*(double *)(iVar6 + 0x1838) + *(double *)(FUN_00001830 + iVar6)) *
-                                dVar3),(double)FLOAT_001aa0d4);
+                 (double)(float)((double)(fVar2 * (float)((double)CONCAT44(0x43300000,
+                                                                           uVar3 ^ 0x80000000) -
+                                                         4503601774854144.0)) + fparam_1),
+                 (double)(float)((double)(fVar1 * (float)((double)CONCAT44(0x43300000,
+                                                                           uVar4 ^ 0x80000000) -
+                                                         4503601774854144.0)) + fparam_2),
+                 (double)(float)((*(double *)(iVar7 + 0x1838) + *(double *)(FUN_00001830 + iVar7)) *
+                                0.5),0.0);
     *(undefined4 *)(param_1 + 0x1e64) = 0;
   }
   return;

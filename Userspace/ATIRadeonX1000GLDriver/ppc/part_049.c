@@ -383,7 +383,7 @@ LAB_001874d4:
         if (local_a8 == (int *)0x0) {
           local_a8 = (int *)FUN_000f57f0(uVar14,local_7c,local_a4,iVar7);
         }
-        piVar6 = local_a4;
+        piVar6 = local_a4[0];
         if (local_a8 == (int *)0x0) {
           return 0;
         }
@@ -471,7 +471,7 @@ LAB_001874d4:
         if (local_a4[1] == (int *)0x0) {
           local_a4[1] = (int *)FUN_000f57f0(uVar13,local_7c,local_a4,piVar6);
         }
-        piVar6 = local_a4;
+        piVar6 = local_a4[0];
         if (local_a4[1] == (int *)0x0) {
           return 0;
         }
@@ -1965,7 +1965,7 @@ LAB_00189ab0:
               else {
                 iVar3 = 0;
                 iVar8 = iVar5;
-                piVar2 = local_68;
+                piVar2 = local_68[0];
                 while (a0 != piVar2) {
                   iVar3 = iVar3 + 1;
                   iVar8 = iVar8 + -1;

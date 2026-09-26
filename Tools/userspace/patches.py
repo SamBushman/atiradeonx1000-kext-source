@@ -209,6 +209,12 @@ PATCHES = {
         ('      puVar4 = (undefined4 *)((int)puVar18 - ((int)pTVar41 * 0x2c + 0x1eU & 0xfffffff0));\n      *puVar4 = *puVar18;\n      pTVar3 = (unsigned char *)(puVar4 + 0x14);\n',
          '      pTVar3 = (unsigned char *)__builtin_alloca((int)pTVar41 * 0x2c + 0x40);\n')], 'yyparse (0x97ba373c)')),
 
+    # TGenericLinker::GetBindingTableString (glprog, stock 0x97bb4894): the second sprintf has SEVEN variadic arguments; the seventh is a stack argument
+    # (`stw r23,0x38(r1)` before the call at 0x97bb495c: r23 = the tables string GetString(3)). The call-site override (OverrideVariadicCalls) gives it
+    # Ghidra's SysV stack slot, so the decompile read an uninitialised local `in_stack_ffffff88` and the rebuilt binding table stopped after the uniform
+    # count ("No Client Attribute Requests", the attribute / uniform binding lists were missing: GLSL differential v_builtin_vars).
+    'TGenericLinker__GetBindingTableString': _scoped('glprog', _conv_with('TGenericLinker::GetBindingTableString (0x97bb4894)', [('a5,in_stack_ffffff88);', 'a5,uVar1);')])),
+
     # --- data symbols Ghidra typed inconsistently (word index in one function, byte offset in another) -----------------------------------
     # _gPollAllocThreadData (glprog, data 0xa7b7ba1c) is a pointer to an 8-byte record { TPoolAllocator *pool; int; } (InitializeGlobalPools, stock
     # 0x97b9fe54: `bl operator new(8); stw r30,4(r3); stw r3,0(r28); stw r29,0(r3)` - word stores at +0 and +4). The corpus declares it `unsigned char *`

@@ -436,24 +436,26 @@ int TPPStreamCompiler__getPPStreamString(this)
   unsigned char * this;
 {
   undefined4 uVar1;
-  undefined4 extraout_r3;
-  int iVar2;
-  undefined4 uVar3;
+  void *pvVar2;
+  int iVar3;
+  undefined4 uVar4;
   
   uVar1 = DAT_a7b7bd88;
-  if (*(int *)(this + 0x7c) == 0) {
+  pvVar2 = *(void **)(this + 0x7c);
+  if (pvVar2 == (void *)0x0) {
     if ((*(int *)(this + 0xc) == 0) || (*(int *)(this + 0x74) == 0)) {
-      iVar2 = _strlen(DAT_a7b7bd88);
-      uVar3 = _malloc(iVar2 * 4 + 4);
-      *(undefined4 *)(this + 0x7c) = uVar3;
-      _strcpy(uVar3,uVar1);
+      iVar3 = _strlen(DAT_a7b7bd88);
+      uVar4 = _malloc(iVar3 * 4 + 4);
+      *(undefined4 *)(this + 0x7c) = uVar4;
+      _strcpy(uVar4,uVar1);
+      pvVar2 = *(void **)(this + 0x7c);
     }
     else {
-      ((double (*)())_glpPPDisassemble)(*(int *)(this + 0x74));
-      *(undefined4 *)(this + 0x7c) = extraout_r3;
+      pvVar2 = _glpPPDisassemble(*(int *)(this + 0x74));
+      *(void **)(this + 0x7c) = pvVar2;
     }
   }
-  return;
+  return pvVar2;
 }
 
 /* TPPStreamCompiler__getShaderToProgramString @ 0x97bca18c (148 bytes) */

@@ -40,10 +40,13 @@ static void run_child(const char *lib, const char *shader, int lang, const char 
     if (!L) { fprintf(out, "DLOPEN FAILED %s\n", dlerror()); fclose(out); _exit(3); }
     init_t init = dlsym(L, "ShInitialize"); mk_t mk = dlsym(L, "ShConstructCompiler"); compile_t comp = dlsym(L, "ShCompile");
     log_t lg = dlsym(L, "ShGetInfoLog"); destroy_t des = dlsym(L, "ShDestruct"); getpp_t getpp = dlsym(L, "ShGetCompilerShaderToProgramString");
+    mk_t mkl = dlsym(L, "ShConstructLinker"); int (*link)(void *, void **, int, int, int) = dlsym(L, "ShLink");
+    const char *(*getlp)(void *) = dlsym(L, "ShGetLinkerShaderToProgramString"), *(*getlb)(void *) = dlsym(L, "ShGetLinkerBindingTable");
+    const char *(*getls)(void *) = dlsym(L, "ShGetLinkerStats"), *(*getlpp)(void *) = dlsym(L, "ShGetLinkerPPStream");
     fprintf(out, "init=%d\n", init());
-    static const struct { int mode; unsigned dbg; const char *name; } var[3] = { { 0, 0, "A parse" }, { 1, 1, "B tree+codegen" }, { 1, 0, "C codegen" } };
+    static const struct { int mode; unsigned dbg; const char *name; } var[4] = { { 0, 0, "A parse" }, { 1, 1, "B tree+codegen" }, { 1, 0, "C codegen" }, { 1, 0, "D codegen+link" } };
     const char *only = getenv("GT_VARIANTS");   /* debugging: e.g. GT_VARIANTS=AC runs just those variants, in that order */
-    for (int vi = 0; vi < (only ? (int)strlen(only) : 3); vi++) {
+    for (int vi = 0; vi < (only ? (int)strlen(only) : 4); vi++) {
         int v = only ? only[vi] - 'A' : vi;
         void *h = mk(lang, 0);
         const char *s[1] = { shader };
@@ -52,6 +55,17 @@ static void run_child(const char *lib, const char *shader, int lang, const char 
         fprintf(out, "== variant %s: rc=%d\n--- log (%d bytes)\n%s\n", var[v].name, rc, l ? (int)strlen(l) : -1, l ? l : "(null)");
         void *pp = getpp(h);   /* the generated ARB program text (or "No Shader Program generated.") */
         fprintf(out, "--- program (%s)\n%s\n", pp ? "string" : "none", pp ? (const char *)pp : "(null)");
+        if (v == 3 && rc) {   /* what the GL driver does next: link the compiled shader; the linker owns the final program text, binding table and statistics */
+            void *lk = mkl(lang, 0);
+            void *hs[1] = { h };
+            int lrc = link(lk, hs, 1, 0, 0);
+            const char *ll = lg(lk);
+            fprintf(out, "== link: rc=%d\n--- log (%d bytes)\n%s\n", lrc, ll ? (int)strlen(ll) : -1, ll ? ll : "(null)");
+            const char *(*fn[4])(void *) = { getlp, getlb, getls, getlpp };
+            static const char *fname[4] = { "program", "binding table", "stats", "pp stream" };
+            for (int q = 0; q < 4; q++) { const char *t = fn[q] ? fn[q](lk) : NULL; fprintf(out, "--- linker %s (%s)\n%s\n", fname[q], t ? "string" : "none", t ? t : "(null)"); }
+            des(lk);
+        }
         des(h);
         fflush(out);
     }

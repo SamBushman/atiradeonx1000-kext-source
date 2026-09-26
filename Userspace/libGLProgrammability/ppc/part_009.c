@@ -1396,7 +1396,7 @@ int TGenericLinker__GetBindingTableString(this)
     a3 = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
     a4 = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
     a5 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
-    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),iVar2,iVar3,a3,a4,a5,in_stack_ffffff88);
+    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),iVar2,iVar3,a3,a4,a5,uVar1);
   }
   _free(uVar1);
   return p0;
@@ -3969,82 +3969,78 @@ int TGenericLinker__getPPStreamString(this)
   bool bVar1;
   int iVar2;
   undefined4 uVar3;
-  int extraout_r3;
   int iVar4;
-  int extraout_r3_00;
   char *pcVar5;
-  int iVar6;
-  int iVar7;
+  void *pvVar6;
+  void *pvVar7;
   int local_30 [5];
   
-  iVar6 = 0;
-  iVar7 = 0;
+  pvVar6 = (void *)0x0;
+  pvVar7 = (void *)0x0;
   if (*(int *)(this + 0x54) != 0) {
     _free(*(int *)(this + 0x54));
   }
   *(undefined4 *)(this + 0x54) = 0;
   iVar2 = _strlen(DAT_a7b7bb4c);
   if (*(int *)(this + 0x30) == 0) {
-    iVar6 = _strlen(DAT_a7b7bb58);
-    iVar6 = _malloc(iVar6 + 1);
-    _strcpy(iVar6,DAT_a7b7bb58);
+    iVar4 = _strlen(DAT_a7b7bb58);
+    pvVar6 = (void *)_malloc(iVar4 + 1);
+    _strcpy(pvVar6,DAT_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x30),0,local_30);
     if (local_30[0] != 0) {
       uVar3 = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
       _PPStreamGetStream(*(undefined4 *)(this + 0x30),uVar3,local_30);
-      ((double (*)())_glpPPDisassemble)(uVar3);
+      pvVar6 = _glpPPDisassemble(uVar3);
       _free(uVar3);
-      iVar6 = extraout_r3;
     }
   }
-  if (iVar6 != 0) {
-    iVar4 = _strlen(iVar6);
+  if (pvVar6 != (void *)0x0) {
+    iVar4 = _strlen(pvVar6);
     iVar2 = iVar2 + iVar4;
   }
   iVar4 = _strlen(DAT_a7b7bb48);
   iVar2 = iVar2 + iVar4;
   if (*(int *)(this + 0x34) == 0) {
-    iVar7 = _strlen(DAT_a7b7bb58);
-    iVar7 = _malloc(iVar7 + 1);
-    _strcpy(iVar7,DAT_a7b7bb58);
+    iVar4 = _strlen(DAT_a7b7bb58);
+    pvVar7 = (void *)_malloc(iVar4 + 1);
+    _strcpy(pvVar7,DAT_a7b7bb58);
   }
   else {
     _PPStreamGetStream(*(int *)(this + 0x34),0,local_30);
     if (local_30[0] != 0) {
       uVar3 = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
       _PPStreamGetStream(*(undefined4 *)(this + 0x34),uVar3,local_30);
-      ((double (*)())_glpPPDisassemble)(uVar3);
+      pvVar7 = _glpPPDisassemble(uVar3);
       _free(uVar3);
-      iVar7 = extraout_r3_00;
     }
   }
-  bVar1 = iVar7 == 0;
+  bVar1 = pvVar7 == (void *)0x0;
   if (!bVar1) {
-    iVar4 = _strlen(iVar7);
+    iVar4 = _strlen(pvVar7);
     iVar2 = iVar2 + iVar4;
   }
   pcVar5 = (char *)_malloc(iVar2 + 8);
   *(char **)(this + 0x54) = pcVar5;
   _sprintf(pcVar5,"%s\n",DAT_a7b7bb4c);
-  if (iVar6 == 0) {
+  if (pvVar6 == (void *)0x0) {
     _sprintf(*(char **)(this + 0x54),"%s\n\n%s\n",*(char **)(this + 0x54),DAT_a7b7bb48);
   }
   else {
-    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),iVar6,DAT_a7b7bb48);
+    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),pvVar6,DAT_a7b7bb48);
   }
   if (bVar1) {
     _sprintf(*(char **)(this + 0x54),"%s\n",*(char **)(this + 0x54));
   }
   else {
-    _sprintf(*(char **)(this + 0x54),"%s%s\n",*(char **)(this + 0x54),iVar7);
+    _sprintf(*(char **)(this + 0x54),"%s%s\n",*(char **)(this + 0x54),pvVar7);
   }
-  if (iVar6 != 0) {
-    _free(iVar6);
+  if (pvVar6 != (void *)0x0) {
+    _free(pvVar6);
   }
   if (!bVar1) {
-    _free(iVar7);
+    _free(pvVar7);
   }
   return *(undefined4 *)(this + 0x54);
 }

@@ -129,6 +129,9 @@ def parse_callees(dis_path, ledger, sym_addr=None):
     return res
 
 
+ARITY = {}   # C function name -> declared parameter count (set by link_corpus.py)
+
+
 def bind_calls(chunk, faddr, ledger_by_addr, short_to_c, siblings, callees, unresolved):
     """Replace short/ambiguous C++ call names in one function's text with the ledger name of the callee the stock code makes."""
     known = set(ledger_by_addr.values())
@@ -137,8 +140,15 @@ def bind_calls(chunk, faddr, ledger_by_addr, short_to_c, siblings, callees, unre
     out = []
     counters = {}
 
-    def pick(token, cands):
+    def pick(token, cands, nargs=None):
         cset = [c for c in cands if addr_of.get(c) in called]
+        # the call passes NARGS arguments: a callee that declares fewer parameters cannot be the one (BindingTable::GetString(this, type) is printed
+        # `GetString(this, i)` and the k-th-call rule below bound it to Binding::GetString(this), which the stock also calls, so the table was walked
+        # with the wrong `this`)
+        if nargs is not None and len(cset) > 1:
+            fit = [c for c in cset if ARITY.get(c, 99) >= nargs]
+            if fit and len(fit) < len(cset):
+                cset = fit
         if len(cset) == 1:
             return cset[0]
         if len(cset) > 1:
@@ -149,6 +159,17 @@ def bind_calls(chunk, faddr, ledger_by_addr, short_to_c, siblings, callees, unre
             return seq[k] if k < len(seq) else seq[-1]
         return None
 
+    def _nargs(m):
+        t, i, d, n, seen = m.string, m.end(), 1, 0, False
+        while i < len(t) and d:
+            ch = t[i]
+            if ch in '([': d += 1
+            elif ch in ')]': d -= 1
+            elif ch == ',' and d == 1: n += 1
+            elif not ch.isspace(): seen = True
+            i += 1
+        return (n + 1) if seen else 0
+
     def sub(m):
         token = m.group(1)
         if token in KEYWORDS:
@@ -156,14 +177,14 @@ def bind_calls(chunk, faddr, ledger_by_addr, short_to_c, siblings, callees, unre
         if token in known:
             sibs = siblings.get(token)
             if sibs and len(sibs) > 1:
-                r = pick(token, sibs)
+                r = pick(token, sibs, _nargs(m))
                 if r and r != token:
                     return m.group(0).replace(token, r, 1)
             return m.group(0)
         cands = short_to_c.get(token)
         if not cands:
             return m.group(0)
-        r = pick(token, cands)
+        r = pick(token, cands, _nargs(m))
         if r is None and len(cands) == 1:
             r = cands[0]
         if r is None:

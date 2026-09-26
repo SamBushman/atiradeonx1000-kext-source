@@ -201,6 +201,10 @@ GLDriver, 3 GA, 3 VA; two GLDriver/GA hits are register-save millicode, r3 merel
    from the image and now also NARROWS a call that passes more arguments than the format consumes. Run on a copy of glprog-ia (`glprog-vf`) over every function with a
    non-literal printf-family format (`b3/variadic2_glprog.txt`; 8 calls + `TIntermLoop::compileNode`'s literal `"%s%d"` that had lost its counter) and the nine
    functions re-dumped (`b3/variadic2_redump_glprog.txt`). `Tools/userspace/format_check.py LINKED_TREE` audits every printf-family call of a linked tree against its format.
+19. `gs/SetPointerReturn.java` on `_glpPPDisassemble` and on its PIC stub (0x97c20720): the function returns the disassembly text in r3, Ghidra typed it `double` and the callers
+   (`TGenericLinker::getPPStreamString`, `TPPStreamCompiler::getPPStreamString`) read an uninitialised `extraout_r3` (b3/ptrret_*.txt; project glprog-pr). The same step
+   re-dumps the callers of functions with 9+ parameters whose stack arguments were lost (`Tools/userspace/stackarg_calls.py`; b3/stackcallers_redump_*.txt: three glprog and five
+   GLDriver functions, from glprog-pr / gld-ia).
 
 
 ## Reproducibility check (GA, from scratch)

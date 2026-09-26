@@ -943,7 +943,7 @@ int BindingTable__InsertUniformArray(this, param_2, param_3, param_4, param_5, p
     }
     (*(unsigned int *)((unsigned char *)&(local_50) + 0)) = (int)((ulonglong)local_50 >> 0x20);
     iVar3 = (*(unsigned int *)((unsigned char *)&(local_50) + 4));
-    if ((*(unsigned int *)((unsigned char *)&(local_50) + 4)) < (*(unsigned int *)((unsigned char *)&(local_50) + 0))) {
+    if ((*(int *)((unsigned char *)&(local_50) + 4)) < (*(int *)((unsigned char *)&(local_50) + 0))) {
       iVar3 = (*(unsigned int *)((unsigned char *)&(local_50) + 0));
     }
     iVar11 = 0;
@@ -1020,7 +1020,7 @@ LAB_97bb1538:
             iVar4 = ((int (*)())Binding__GetBindingSlots)(this_00);
             *(int *)(this + 0x24) = *(int *)(this + 0x24) + iVar4;
           }
-          if (iVar11 <= (*(unsigned int *)((unsigned char *)&(local_50) + 0))) {
+          if (iVar11 <= (*(int *)((unsigned char *)&(local_50) + 0))) {
             this_00[0x34] = 0x1;
             iVar4 = ((int (*)())Binding__GetBindingSlots)(this_00);
             *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + iVar4;
@@ -1029,7 +1029,7 @@ LAB_97bb1538:
               *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
             }
           }
-          if (iVar11 <= (*(unsigned int *)((unsigned char *)&(local_50) + 4))) {
+          if (iVar11 <= (*(int *)((unsigned char *)&(local_50) + 4))) {
             this_00[0x35] = 0x1;
             iVar4 = ((int (*)())Binding__GetBindingSlots)(param_2);
             *(int *)(this + 0x30) = *(int *)(this + 0x30) + iVar4;

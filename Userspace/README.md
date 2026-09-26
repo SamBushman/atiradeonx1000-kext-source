@@ -249,7 +249,28 @@ of a class no static check sees, and each class was checked across all five imag
    byte arrays) is a buffer at entry-sp - 0x140 that `constructElement` fills through pointer arithmetic and that overlaps `local_80`; the recompile wrote the caller's
    frame, so a constant `bool` reached the PP stream as 0 (`float(bvec2(true,false).x)`). They are byte addresses inside the frame array now (GLDriver has the same pattern in
    five functions; libGL's frame-marker uses are left as they were).
-Checks after the fixes, all on the G5: glsl_test 141/141, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
+10. **Real shaders and the linker** (variant D of `glsl_test`: `ShConstructLinker` + `ShLink` + the linker's program / binding-table / remap-table / PP token-stream
+    strings). The compile-only variants say nothing about code generation for real programs (the compiler-level program string exists only for the tiniest
+    shaders); the linker's token stream is the full generated program. The 403 shaders Godot's GLES2 driver caches for the X1900 (`Tests/userspace/godot_shaders.tar.xz`)
+    are compared through it. The first run: 18 of 403 identical, 187 crashes. Each of these was one defect, all found by comparing gdb traces of the stock and the rebuilt image
+    at a function boundary (per-call results, then the raw PP stream words, then per-op `AddOperation` words):
+    * two adjacent address words folded into one 64-bit constant (`0x97c2b3bc97c2b3dc`, `Binding::GetString`'s two format strings): the link now splits it into two symbolised
+      literals (`link_corpus._split64`);
+    * same-named C++ methods bound by the k-th-call rule: `BindingTable::GetString(this, type)` (printed `GetString(this, i)`) was bound to `Binding::GetString(this)`, which
+      the stock also calls; the binder now filters candidates by the call's argument count (`rewrites.ARITY`);
+    * `_glpPPDisassemble` was typed `double` (it returns the text in r3; Ghidra took an early-out path as an f1 return) and its callers read an uninitialised `extraout_r3`:
+      `gs/SetPointerReturn.java` on the function and on its PIC stub, callers re-dumped (b3/ptrret_*.txt, step 19);
+    * callers of functions with 9+ parameters whose outgoing stack words never reached the decompile (`_glpWriteTextureOperand` -> `_glpWriteSourceOperand`: the stack argument
+      0 was lost and the swizzle text was wrong; GLDriver FUN_000fa958's callers): `Tools/userspace/stackarg_calls.py` finds them from the machine code (the older caller
+      finder of `stack_params.py` matches static functions by name, and `_glpWriteSourceOperand` exists twice), five GLDriver / three glprog callers re-dumped;
+    * ghidra2c's array-decay rewrite `pX = local_NN[0]` -> `pX = local_NN` was meant for byte buffers but also hit arrays of POINTERS (`ParseOperand *local_48[3]`): the frame
+      slot's ADDRESS was passed as `this` (glprog 5 parts, GLDriver 4);
+    * a 4-byte sub-piece of a 64-bit local in an ORDERED comparison was cast `unsigned` (`local_50._4_4_ < local_50._0_4_` is the stock's `cmpw`): an array uniform's element
+      bindings were never created (`gl_EyePlaneS[0]`); now `int` (ghidra2c `_signed_pieces`);
+    * the seventh variadic argument of a `sprintf` (a stack word) read as an uninitialised `in_stack_ffffff88` (patches.py `TGenericLinker__GetBindingTableString`; every other
+      negative `in_stack_` read in the corpora is a SysV float-argument overflow nobody reads or an outgoing word the stock leaves unset).
+    Result: **141/141 hand-written and 403/403 real shaders identical** through compile and link (`v_longident`: both images segfault).
+Checks after the fixes, all on the G5: glsl_test 141/141 + 403/403 real, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
 unchanged and of GLDriver improved (`FUN_000a7050` no longer differs).
 
 ### Undeclared argument registers (`in_rN`, issue #70)

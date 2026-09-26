@@ -1508,7 +1508,7 @@ int FUN_00121000(param_1)
             ppiVar16 = ppiVar16 + 1;
           } while (iVar6 < piVar9[0x21]);
         }
-        piVar8 = local_58;
+        piVar8 = local_58[0];
         local_64 = 0;
         piVar12 = (int *)0x0;
         if (piVar11 != (int *)0x0) {

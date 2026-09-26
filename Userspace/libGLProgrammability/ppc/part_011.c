@@ -2287,7 +2287,7 @@ LAB_97bbf370:
         ;
         local_a8 = local_80;
         local_a4 = local_7c;
-        pPVar8 = local_30;
+        pPVar8 = local_30[0];
         TPPStreamCompiler__getOperandAsDestVar
                   ((unsigned char *)&local_80,param_2,local_30[0],ppPVar15,iVar3,param_6);
         uVar20 = CONCAT44(local_30[0],extraout_r4_00);
@@ -2310,7 +2310,7 @@ LAB_97bbf370:
             __ZN12ParseOperandC1ERKS_(pvVar12,*(unsigned char **)(local_38 + 0xc));
             *(void **)(pPVar8 + 0xc) = pvVar12;
           }
-          pPVar8 = local_30;
+          pPVar8 = local_30[0];
           if (*(int *)(local_38 + 8) != 0) {
             pvVar12 = operator_new(0x38);
             __ZN12ParseOperandC1ERKS_(pvVar12,*(unsigned char **)(local_38 + 8));
@@ -3525,7 +3525,7 @@ LAB_97bc11d8:
       }
       uVar15 = GetPPStreamTypeForGLType((uint)uVar3);
       local_d0[1] = (uVar15 & 7) << 0x17 | local_d0[1] & 0xfc7fffff;
-      pPVar25 = local_48;
+      pPVar25 = local_48[0];
     }
     iVar6 = ParseOperand__GetLogicalSize(pPVar25);
     local_d0[1] = (iVar6 + -1) * 0x4000000 & 0xc000000U | local_d0[1] & 0xf3ffffff;
@@ -3883,7 +3883,7 @@ LAB_97bc18ac:
       TPPStreamCompiler__AddOperation(param_2,&local_40,(unsigned char *)a2,(char *)0x0,0);
       iVar8 = extraout_r4_05;
     }
-    pPVar6 = local_38;
+    pPVar6 = local_38[0];
     if (local_38[0] != (unsigned char *)0x0) {
       __ZN12ParseOperandD1Ev(local_38[0]);
       __ZdlPv(pPVar6);
@@ -4162,7 +4162,7 @@ int TIntermLoop__compileNode(this, param_2, param_3, param_4, param_5, param_6)
                 (param_2,(unsigned char **)0x0,(unsigned char *)&local_b0,(char *)0x0,0);
       uVar4 = _strlen(acStack_d0);
       _PPStreamAddLabel(iVar16,acStack_d0,uVar4);
-      pPVar3 = local_5c;
+      pPVar3 = local_5c[0];
       if (local_5c[0] != (unsigned char *)0x0) {
         __ZN12ParseOperandD1Ev(local_5c[0]);
         __ZdlPv(pPVar3);
@@ -4321,7 +4321,7 @@ int TIntermLoop__compileNode(this, param_2, param_3, param_4, param_5, param_6)
                 (param_2,(unsigned char **)0x0,(unsigned char *)&local_b0,(char *)0x0,0);
       uVar4 = _strlen(acStack_d0);
       _PPStreamAddLabel(iVar16,acStack_d0,uVar4);
-      pPVar3 = local_5c;
+      pPVar3 = local_5c[0];
       if (local_5c[0] != (unsigned char *)0x0) {
         __ZN12ParseOperandD1Ev(local_5c[0]);
         __ZdlPv(pPVar3);

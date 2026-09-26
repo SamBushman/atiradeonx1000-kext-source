@@ -1219,7 +1219,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
                         (*(unsigned char **)(this + 0x68),
                          *(unsigned char **)((int)local_68 + iVar4 + 8));
             }
-            pPVar7 = local_70;
+            pPVar7 = local_70[0];
             iVar18 = iVar18 + -1;
             iVar4 = iVar4 + 4;
           } while (-1 < iVar18);
@@ -1236,7 +1236,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
             __ZN12ParseOperandD1Ev(local_68[3]);
             __ZdlPv(pPVar11);
           }
-          pPVar11 = local_70;
+          pPVar11 = local_70[0];
           if ((pPVar7 != (unsigned char *)0x0) && (local_70[0] != (unsigned char *)0x0)) {
             pPVar11 = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,param_2);
             local_dc = 0;
@@ -1279,7 +1279,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
             _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&local_e0,0,0);
             __ZN12ParseOperandD1Ev(pPVar7);
             __ZdlPv(pPVar7);
-            pPVar7 = local_70;
+            pPVar7 = local_70[0];
             if (local_70[0] != (unsigned char *)0x0) {
               __ZN12ParseOperandD1Ev(local_70[0]);
               __ZdlPv(pPVar7);
@@ -1341,7 +1341,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
                         (*(unsigned char **)(this + 0x68),local_68[iVar17 + 2]);
               uVar9 = extraout_r4_00;
             }
-            pPVar7 = local_70;
+            pPVar7 = local_70[0];
             uVar19 = CONCAT44(local_70[0],uVar9);
             iVar17 = iVar17 + 1;
             if (1 < iVar17) break;
@@ -1410,7 +1410,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
             _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&local_e0);
             __ZN12ParseOperandD1Ev(pPVar7);
             __ZdlPv(pPVar7);
-            pPVar7 = local_70;
+            pPVar7 = local_70[0];
             uVar19 = CONCAT44(uVar9,extraout_r4_03);
             if (local_70[0] != (unsigned char *)0x0) {
               __ZN12ParseOperandD1Ev(local_70[0]);
@@ -1666,7 +1666,7 @@ int TPPStreamCompiler__assignOperands(this, param_2, param_3, param_4)
     if (iVar4 != 0) {
       iVar10 = *(int *)(iVar4 + 4);
       iVar5 = *(int *)(iVar4 + 8) - iVar10 >> 3;
-      pPVar7 = local_60;
+      pPVar7 = local_60[0];
       if (iVar5 != 0) {
         while( true ) {
           iVar5 = iVar5 + -1;
@@ -1771,7 +1771,7 @@ int TPPStreamCompiler__assignOperands(this, param_2, param_3, param_4)
         iVar4 = iVar4 + 4;
       } while (-1 < iVar12);
       ((int (*)())TPPStreamCompiler__assignOperands)(this,local_60 + 4,local_60 + 5,param_4);
-      pPVar7 = local_50;
+      pPVar7 = local_50[0];
       if (local_50[0] != (void *)0x0) {
         __ZN12ParseOperandD1Ev(local_50[0]);
         __ZdlPv(pPVar7);
@@ -3000,7 +3000,7 @@ int TPPStreamCompiler__construct(this, param_2, param_3, param_4)
           iVar5 = ParseOperand__GetLogicalSize(*param_3);
           bVar1 = iVar6 == iVar5;
         }
-        pPVar4 = local_30;
+        pPVar4 = local_30[0];
         if (bVar1) {
           if (local_30[0] != (unsigned char *)0x0) {
             __ZN12ParseOperandD1Ev(local_30[0]);
@@ -3098,7 +3098,7 @@ int TPPStreamCompiler__FinishScalerSelect(this, param_2)
       __ZN12ParseOperandD1Ev(pPVar6);
       __ZdlPv(pPVar6);
     }
-    pPVar6 = local_20;
+    pPVar6 = local_20[0];
     if (local_20[0] != (unsigned char *)0x0) {
       __ZN12ParseOperandD1Ev(local_20[0]);
       __ZdlPv(pPVar6);

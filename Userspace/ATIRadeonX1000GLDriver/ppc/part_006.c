@@ -2717,7 +2717,7 @@ int FUN_00041c00(param_1, param_2, param_3)
     iVar6 = param_1[9];
   }
 LAB_00041e30:
-  puVar4 = apuStack_50;
+  puVar4 = apuStack_50[0];
   uStack_54 = (uint *)uStack_58;
   puVar9 = uStack_5c;
   uStack_68 = CONCAT22((*(unsigned short *)((unsigned char *)&(uStack_68) + 0)),0xd);

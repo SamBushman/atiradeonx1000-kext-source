@@ -1911,7 +1911,7 @@ LAB_97b953d4:
         __ZNSsC1EPKcRKSaIcE(local_140,(char *)paVar22,(unsigned char *)&local_f0);
         *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
         __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_140[0]);
-        ppuVar29 = local_140;
+        ppuVar29 = local_140[0];
         goto code_r0x97b95b60;
       }
       iVar17 = (**(code **)(*(int *)this + 0x48))(this,a1_08);
@@ -2115,7 +2115,7 @@ LAB_97b953d4:
       __ZNSsC1EPKcRKSaIcE(local_140,acStack_d0,paVar22);
       *(undefined *)((int)local_140[0] + (int)local_140[0][-3]) = *PTR__S_terminal_a7b7c0b8;
       __ZN13TInfoSinkBase6appendEPKc(param_4,(char *)local_140[0]);
-      ppuVar29 = local_140;
+      ppuVar29 = local_140[0];
 code_r0x97b932f0:
       ppuVar4 = ppuVar29 + -1;
       paVar20 = (unsigned char *)(ppuVar29 + -3);

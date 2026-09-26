@@ -142,3 +142,8 @@ run va-ia Rest32Project ATIRadeonX1000VADriver.bundle.bin.ppc -readOnly -postScr
 rm -rf glprog-vf && cp -r glprog-ia glprog-vf
 run glprog-vf GLProgProject libGLProgrammability.dylib -postScript OverrideVariadicCalls.java $(cat $B/variadic2_glprog.txt)
 run glprog-vf GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/variadic2_redump_glprog.txt)
+# step 19: _glpPPDisassemble returns a pointer (function + its PIC stub); callers of 9+-parameter functions whose stack arguments were dropped (stackarg_calls.py)
+rm -rf glprog-pr && cp -r glprog-vf glprog-pr
+run glprog-pr GLProgProject libGLProgrammability.dylib -postScript SetPointerReturn.java $(cat $B/ptrret_glprog.txt)
+run glprog-pr GLProgProject libGLProgrammability.dylib -readOnly -postScript RedumpContaining.java $OUT/n_glprog $(cat $B/ptrret_redump_glprog.txt) $(cat $B/stackcallers_redump_glprog.txt)
+run gld-ia GLDProject ATIRadeonX1000GLDriver.bundle.bin -readOnly -postScript RedumpContaining.java $OUT/n_gld $(cat $B/stackcallers_redump_gld.txt)

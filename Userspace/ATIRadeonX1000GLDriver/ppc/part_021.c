@@ -1679,7 +1679,7 @@ int FUN_000e3b88(param_1, param_2, param_3, param_4)
       piVar13 = (int *)0x0;
       iVar14 = 0;
     }
-    piVar8 = local_54;
+    piVar8 = local_54[0];
     piVar13 = (int *)piVar13[1];
     if (iVar14 != 0) {
       bVar1 = iVar14 == 2;
@@ -1740,7 +1740,7 @@ int FUN_000e3b88(param_1, param_2, param_3, param_4)
         bVar2 = true;
         if (iVar14 != 1) {
 LAB_000e4140:
-          piVar8 = local_54;
+          piVar8 = local_54[0];
           uVar11 = FUN_00105594(local_54[0],local_54[0][0x21]);
           param_1[2] = param_1[2] + 1;
           iVar10 = piVar8[0x26];
@@ -1794,7 +1794,7 @@ LAB_000e4140:
           return iVar14;
         }
       }
-      piVar8 = local_54;
+      piVar8 = local_54[0];
       iVar14 = thunk_FUN_00134de8(*(undefined4 *)(*param_1 + 0x6c4),local_54[0]);
       iVar6 = FUN_001054ec(piVar8,0);
       local_58 = *(undefined4 *)(iVar6 + 0x10);

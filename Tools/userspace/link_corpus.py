@@ -17,7 +17,7 @@ be linked as it stands. This tool
 
 `build.sh` (run on the Tiger G5 with Apple gcc 4.0.1) compiles and links the dylib/bundle with the stock's install name and versions.
 """
-import sys, os, re, json, struct, collections
+import sys, os, re, json, struct, collections, glob
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import machoutil as mo
 import rewrites
@@ -57,6 +57,11 @@ for d_ in EXTRA_DIRS:      # companion corpora (unowned_code/: code only reached
         if len(f) >= 4:
             ledger.append((int(f[0], 16), int(f[1]), f[2], d_ + '/' + f[3]))
 fn_by_addr = {a: n for a, s, n, p in ledger}
+# declared parameter counts (K&R / ANSI definitions of the corpus), for rewrites.bind_calls
+for _pf in sorted(glob.glob(os.path.join(corpus, 'part_*.c'))):
+    for _m in re.finditer(r'(?m)^/\* (\S+) @ \S+ \(\d+ bytes\) \*/\n[^\n(]*?\b\w+\(([^)]*)\)', open(_pf).read()):
+        _ps = [x for x in _m.group(2).split(',') if x.strip() and x.strip() != 'void']
+        rewrites.ARITY[_m.group(1)] = len(_ps)
 fn_addrs = sorted(fn_by_addr)
 
 # ---------------------------------------------------------------------------------------------- ghidra data
@@ -440,6 +445,14 @@ zf_lits = []    # (literal, zerofill object start it is expressed from)
 img_lo = min(s['addr'] for s in m.secs if s['size'])
 img_hi = max(s['addr'] + s['size'] for s in m.secs if s['size'])
 if cfg.get('symbolize_literals') and img_lo >= 0x10000000:
+    # two adjacent address words folded into ONE 64-bit constant (Binding::GetString: the stock copies the two-entry table {"..%s..", "..%s.."} with an
+    # `lfd`/`stfd` pair; Ghidra prints `0x97c2b3bc97c2b3dc`): split it so that each half is symbolised like any other image-address literal
+    def _split64(mm):
+        hi, lo = int(mm.group(1), 16), int(mm.group(2), 16)
+        if img_lo <= hi < img_hi and img_lo <= lo < img_hi:
+            return '(((unsigned long long)0x%08x << 32) | (unsigned long long)0x%08x)' % (hi, lo)
+        return mm.group(0)
+    body = re.sub(r'\b0x([0-9a-f]{8})([0-9a-f]{8})\b', _split64, body)
     _lit = set(int(x, 16) for x in re.findall(r'\b0x([0-9a-f]{8})\b', body))
     # Ghidra prints an address above 0x80000000 as a NEGATIVE constant (`(int)p < -0x584817f7` is `p < 0xa7b7e809`, a loop bound / end pointer)
     _lit |= set((1 << 32) - int(x, 16) for x in re.findall(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', body))
@@ -1036,6 +1049,7 @@ for pdir_, f in _part_files:
             txt, _nci = re.subn(r'CONCAT\d\d\(in_register_[0-9a-f]+,\s*(\w+)\)', r'(\1)', txt)
             concat_inreg_total[0] += _nci
             if lit_syms:
+                txt = re.sub(r'\b0x([0-9a-f]{8})([0-9a-f]{8})\b', _split64, txt)
                 txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
             if bind_info:

@@ -990,7 +990,7 @@ extern int _isTempArrayStart();
 extern int _isParamArrayStart_97be9b80();
 extern int _InsertLabel();
 extern int _adjustAllocation_97be9cb4();
-extern double _glpPPDisassemble(uint *param_1);
+extern int _glpPPDisassemble();
 extern int _handleDigit_97bf0d2c();
 extern int _PPStreamChunkCreateWithType();
 extern int _PPStreamChunkCompare();
