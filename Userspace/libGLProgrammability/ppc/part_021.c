@@ -442,7 +442,6 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
   unsigned int ghidra_home[8] = { this, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   ulong uVar1;
   uint *puVar2;
-  ulong uStack00000024;
   undefined4 local_40;
   undefined4 local_3c;
   undefined4 local_38;
@@ -455,14 +454,14 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
     puVar2 = local_30;
   }
   uVar1 = *puVar2 + *(int *)(*(int *)this + -0xc);
-  uStack00000024 = param_4;
+  (*(ulong *)((unsigned char *)ghidra_home + 12)) = param_4;
   if (*(uint *)(*(int *)this + -8) < uVar1) {
     ((int (*)())__ZNSs7reserveEm)(this,uVar1);
   }
   __ZNKSs7_M_iendEv(&local_40,this);
   __ZNKSs7_M_iendEv(&local_3c,this);
   std__string___M_check((ulong)&local_38,param_2,param_3);
-  __ZNKSs7_M_foldEmm((ulong)&local_34,(ulong)param_2,param_3,uStack00000024);
+  __ZNKSs7_M_foldEmm((ulong)&local_34,(ulong)param_2,param_3,(*(ulong *)((unsigned char *)ghidra_home + 12)));
   __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
             (this,local_40,local_3c,local_38,local_34);
   return;
@@ -1197,7 +1196,6 @@ int __ZNKSs5rfindEPKcmm(this, param_2, param_3, param_4)
   uint *puVar2;
   int iVar3;
   int iVar4;
-  uint uStack00000020;
   uint local_30 [7];
   
   iVar4 = *(int *)this;
@@ -1208,15 +1206,15 @@ int __ZNKSs5rfindEPKcmm(this, param_2, param_3, param_4)
     if (local_30[0] <= param_3) {
       puVar2 = local_30;
     }
-    uStack00000020 = *puVar2;
+    (*(uint *)((unsigned char *)ghidra_home + 8)) = *puVar2;
     do {
-      uVar1 = uStack00000020;
-      iVar3 = _memcmp(iVar4 + uStack00000020,param_2,param_4);
+      uVar1 = (*(uint *)((unsigned char *)ghidra_home + 8));
+      iVar3 = _memcmp(iVar4 + (*(uint *)((unsigned char *)ghidra_home + 8)),param_2,param_4);
       if (iVar3 == 0) {
         return uVar1;
       }
-      uStack00000020 = uVar1 - 1;
-    } while (uStack00000020 != 0xffffffff);
+      (*(uint *)((unsigned char *)ghidra_home + 8)) = uVar1 - 1;
+    } while ((*(uint *)((unsigned char *)ghidra_home + 8)) != 0xffffffff);
   }
   return 0xffffffff;
 }

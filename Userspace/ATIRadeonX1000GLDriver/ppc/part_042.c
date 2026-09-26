@@ -4603,7 +4603,6 @@ int FUN_001411dc(param_1, param_2, param_3, param_4)
   int iVar6;
   int iVar7;
   int iVar8;
-  undefined4 uStack00000024;
   undefined4 local_58;
   undefined4 local_54;
   undefined4 local_50;
@@ -4612,7 +4611,7 @@ int FUN_001411dc(param_1, param_2, param_3, param_4)
   undefined4 local_44 [7];
   
   bVar1 = param_2 == param_3;
-  uStack00000024 = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   FUN_0011379c(*param_1,param_2);
   FUN_0011379c(*param_1,param_3);
   iVar3 = FUN_001054ec(param_2,0);
@@ -6302,7 +6301,6 @@ int FUN_0014375c(param_1, param_2, param_3)
   int iVar18;
   int iVar19;
   uint uVar20;
-  int iStack00000020;
   int local_78;
   undefined4 local_74;
   uint local_70;
@@ -6318,7 +6316,7 @@ int FUN_0014375c(param_1, param_2, param_3)
   local_64 = *(undefined4 *)(*param_1 + 0x378);
   local_6c = 0;
   local_70 = 2;
-  iStack00000020 = param_3;
+  (*(int *)((unsigned char *)ghidra_home + 8)) = param_3;
   local_68 = FUN_00193e18(local_64,8);
   local_54 = *(undefined4 *)(*param_1 + 0x378);
   local_5c = 0;
@@ -6335,7 +6333,7 @@ int FUN_0014375c(param_1, param_2, param_3)
     puVar5 = (undefined4 *)FUN_0019423c(&local_70,local_6c);
   }
   uVar8 = local_5c;
-  iVar11 = iStack00000020;
+  iVar11 = (*(int *)((unsigned char *)ghidra_home + 8));
   *puVar5 = param_2;
   if (local_5c < local_60) {
     iVar15 = local_5c * 4;
@@ -6369,7 +6367,7 @@ int FUN_0014375c(param_1, param_2, param_3)
         }
         iVar15 = *piVar6;
         FUN_00194208(&local_60,uVar8);
-        iStack00000020 = iVar15;
+        (*(int *)((unsigned char *)ghidra_home + 8)) = iVar15;
       } while (iVar15 == DAT_001b003c);
       puVar16 = *(uint **)(iVar11 + 0x10);
       if (puVar16[1] != 0) {
@@ -8253,12 +8251,10 @@ int FUN_00146624(param_1, param_2)
   char *pcVar1;
   char *pcVar2;
   int iVar3;
-  undefined4 uStack00000018;
-  undefined4 uStack0000001c;
   
-  uStack00000018 = param_1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
   iVar3 = 4;
-  uStack0000001c = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   while ((*pcVar1 != '\x01' || (*pcVar2 == '\x04'))) {

@@ -349,7 +349,6 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   int iVar3;
   int iVar4;
   uint uVar5;
-  ulong uStack00000020;
   uint local_30;
   uint local_2c;
   uint local_28 [5];
@@ -358,7 +357,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   uVar5 = *(uint *)(iVar3 + -0xc);
   iVar4 = *(int *)param_4;
   local_28[0] = *(uint *)(iVar4 + -0xc);
-  uStack00000020 = param_3;
+  (*(ulong *)((unsigned char *)ghidra_home + 8)) = param_3;
   if (uVar5 < param_2) {
     std____throw_out_of_range("basic_string::compare");
     iVar3 = *(int *)this;
@@ -367,7 +366,7 @@ int __ZNKSs7compareEmmRKSs(this, param_2, param_3, param_4)
   uVar1 = local_28[0];
   local_30 = uVar5 - param_2;
   puVar2 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= uStack00000020) {
+  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
     puVar2 = &local_30;
   }
   uVar5 = *puVar2;
@@ -398,8 +397,6 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   int iVar3;
   uint uVar4;
   uint uVar5;
-  ulong uStack00000020;
-  ulong uStack0000002c;
   uint local_30;
   uint local_2c;
   uint local_28;
@@ -409,8 +406,8 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   uVar5 = *(uint *)(iVar2 + -0xc);
   iVar3 = *(int *)param_4;
   uVar4 = *(uint *)(iVar3 + -0xc);
-  uStack00000020 = param_3;
-  uStack0000002c = param_6;
+  (*(ulong *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(ulong *)((unsigned char *)ghidra_home + 20)) = param_6;
   if ((uVar5 < param_2) || (uVar4 < param_5)) {
     std____throw_out_of_range("basic_string::compare");
     iVar2 = *(int *)this;
@@ -418,14 +415,14 @@ int __ZNKSs7compareEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   }
   local_30 = uVar5 - param_2;
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= uStack00000020) {
+  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
     puVar1 = &local_30;
   }
   local_2c = uVar4 - param_5;
   uVar4 = *puVar1;
   local_28 = uVar4;
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 20));
-  if (local_2c <= uStack0000002c) {
+  if (local_2c <= (*(ulong *)((unsigned char *)ghidra_home + 20))) {
     puVar1 = &local_2c;
   }
   uVar5 = *puVar1;
@@ -481,14 +478,13 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   uint uVar2;
   int iVar3;
   uint uVar4;
-  ulong uStack00000020;
   uint local_30;
   uint local_2c;
   uint local_28 [4];
   
   iVar3 = *(int *)this;
   uVar4 = *(uint *)(iVar3 + -0xc);
-  uStack00000020 = param_3;
+  (*(ulong *)((unsigned char *)ghidra_home + 8)) = param_3;
   if (uVar4 < param_2) {
     std____throw_out_of_range("basic_string::compare");
     iVar3 = *(int *)this;
@@ -497,7 +493,7 @@ int __ZNKSs7compareEmmPKc(this, param_2, param_3, param_4)
   local_30 = uVar4 - param_2;
   local_28[0] = uVar2;
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_30 <= uStack00000020) {
+  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
     puVar1 = &local_30;
   }
   uVar4 = *puVar1;
@@ -526,8 +522,6 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
   int iVar2;
   uint uVar3;
   uint uVar4;
-  ulong uStack00000020;
-  ulong uStack00000028;
   uint local_30;
   uint local_2c;
   uint local_28;
@@ -535,22 +529,22 @@ int __ZNKSs7compareEmmPKcm(this, param_2, param_3, param_4, param_5)
   
   iVar2 = *(int *)this;
   uVar3 = *(uint *)(iVar2 + -0xc);
-  uStack00000020 = param_3;
-  uStack00000028 = param_5;
+  (*(ulong *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(ulong *)((unsigned char *)ghidra_home + 16)) = param_5;
   if (uVar3 < param_2) {
     std____throw_out_of_range("basic_string::compare");
     iVar2 = *(int *)this;
   }
   local_30 = _strlen(param_4);
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-  if (local_30 <= uStack00000028) {
+  if (local_30 <= (*(ulong *)((unsigned char *)ghidra_home + 16))) {
     puVar1 = &local_30;
   }
   local_2c = uVar3 - param_2;
   uVar3 = *puVar1;
   local_24[0] = uVar3;
   puVar1 = &(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-  if (local_2c <= uStack00000020) {
+  if (local_2c <= (*(ulong *)((unsigned char *)ghidra_home + 8))) {
     puVar1 = &local_2c;
   }
   uVar4 = *puVar1;

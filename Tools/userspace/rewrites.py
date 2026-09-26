@@ -416,6 +416,10 @@ def mirror_frame(chunk, stackaddr=True):
     # array would end there and the callee's stores would overwrite unrelated locals / the saved registers (rebuilt TIntermBinary::indirectNode crashed on
     # return, GLSL differential v_struct/v_const). Reserve the tail: TType is the largest such object (0x30).
     total += 0x40
+    # a byte scalar whose address is passed on (`char local_120; char local_11f;` + `_PPParserGetPart(p, &local_120, 0)`) is the head of a string buffer Ghidra
+    # only saw two bytes of: the callee writes up to a token's length (the parsers use 256-byte buffers) - reserve room above the highest such variable
+    if any(d['ty'] in BYTE_TYPES and not d['arr'] and _addr_of_matches(body, d['nm']) for d in decls):
+        total += 0x100
     nq = (total + 7) // 8
     first = True
     for d in sorted(decls, key=lambda d: -d['off']):

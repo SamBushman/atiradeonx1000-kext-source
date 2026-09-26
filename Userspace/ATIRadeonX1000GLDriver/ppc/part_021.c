@@ -339,7 +339,7 @@ int FUN_000e1b70(param_1, param_2)
       *(int *)(param_1 + 0x310) = iVar1;
       if (param_2 == 2) {
         FUN_0010dd54(*(undefined4 *)(iVar1 + 4));
-        *(undefined4 *)(FUN_00001740 + *(int *)(*(int *)(param_1 + 0x310) + 8)) = 2;
+        *(undefined4 *)(0x00001740 + *(int *)(*(int *)(param_1 + 0x310) + 8)) = 2;
       }
     }
     else if (param_2 == 4) {

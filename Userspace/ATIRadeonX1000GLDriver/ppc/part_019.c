@@ -2971,20 +2971,14 @@ int FUN_000da904(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
-  undefined4 uStack00000020;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   undefined1 auStack_224 [536];
   
-  uStack00000020 = param_3;
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   FUN_001a3428(auStack_224,0x200,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_5,param_6,param_7,param_8);
   uVar1 = _strlen(param_1 + 0x10);
   if (uVar1 <= 0x1ff - uVar1) {
@@ -3028,18 +3022,13 @@ int FUN_000da9fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
-  undefined4 uStack00000024;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   undefined1 auStack_234 [540];
   
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   if (0 < param_2) {
     iVar3 = 0;
     uVar2 = param_3;

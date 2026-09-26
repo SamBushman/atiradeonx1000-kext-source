@@ -456,6 +456,42 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
                         v = (v + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff
                     if (v >> 23) & 0xff == 0xff and v & 0x7fffff: _cs.add(v)
             _NANC[int(_f[0], 16)] = _cs
+    # every 32-bit constant a function builds from immediates (`lis`+`ori`/`addi`, `li`): a function symbol Ghidra prints for one of these is the NUMBER (a PIC
+    # image forms real code addresses relative to the PIC base, never with lis/ori) - see fix_literal_syms()
+    _LITC = {}
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            _cs = set()
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if (w >> 26) == 14 and ((w >> 16) & 31) == 0:                  # li rD,simm
+                        _cs.add(w & 0xffff if not w & 0x8000 else (w & 0xffff) | 0xffff0000); continue
+                    if (w >> 26) != 15 or ((w >> 16) & 31) != 0: continue      # addis rD,0,imm = lis
+                    rd = (w >> 21) & 31; hi = (w & 0xffff) << 16; _cs.add(hi)
+                    for y in range(x + 4, min(x + 4 + 4 * 16, _hi), 4):      # the low half may come a few instructions later (scheduled around other work)
+                        w2 = _word(y); op2 = w2 >> 26
+                        if op2 in (16, 18, 19): break                        # a branch ends the block
+                        if op2 == 24 and ((w2 >> 21) & 31) == rd: _cs.add(hi | (w2 & 0xffff))                 # ori rA,rD,imm
+                        elif op2 == 14 and ((w2 >> 16) & 31) == rd: _cs.add((hi + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff)   # addi rA,rD,simm
+                        if op2 in (14, 15, 24, 25, 32, 33, 34, 35) and ((w2 >> 21) & 31 if op2 in (14, 15, 32, 33, 34, 35) else (w2 >> 16) & 31) == rd and y != x: break   # rD overwritten
+            _LITC[int(_f[0], 16)] = _cs
+def fix_literal_syms(b, entry):
+    """`puVar5[2] = (uint)FUN_000308c0;` (GLDriver FUN_00023700 builds a packet header: `lis r2,3; ori r2,r2,0x8c0`): Ghidra names a number after the function that
+    happens to live at that address, the link tree then resolves the name to the REBUILT function's address. A function symbol that is not called and whose
+    address is one of the constants this function builds from immediates is that constant."""
+    cs = _LITC.get(entry) if _FCTIW is not None else None
+    if not cs: return b, 0
+    n = 0
+    def rep(m):
+        nonlocal n
+        if int(m.group(2), 16) not in cs: return m.group(0)
+        n += 1; return '0x%s' % m.group(2)
+    b = re.sub(r'(?<![\w.>])(&?)(?:FUN|LAB)_([0-9a-f]{8})\b(?!\s*\()', lambda m: rep(m) if True else m.group(0), b)
+    return b, n
 def _operand(t, i):
     """end index of the primary expression starting at t[i] (after optional unary - * & and casts): an identifier with subscripts / member
     access, a parenthesised expression, a literal"""
@@ -592,6 +628,16 @@ def fix_home_slots(b, name):
     slots = [m for m in re.findall(r'STACKARG\((0x[0-9a-f]+)\)', b) if 0x18 <= int(m, 16) < 0x38] + [m[1] for m in re.findall(_fa, b) if 0x18 <= int(m[1], 16) < 0x38]
     if not slots: return b, 0
     k = b.index('{'); head, rest = b[:k], b[k:]
+    # ...and Ghidra ALSO declared a local for the same slot (`undefined4 uStack0000001c;` beside `&stack0x0000001c`): two names for one word - the loop
+    # wrote through one and the final store read the other (GLDriver FUN_000f2f84 / FUN_000f302c: the byte-mask result never reached *param_1)
+    _tm = {'undefined': 'unsigned char', 'undefined1': 'unsigned char', 'undefined2': 'unsigned short', 'undefined4': 'unsigned int', 'undefined8': 'unsigned long long'}
+    for dm in list(re.finditer(r'(?m)^[ \t]*([A-Za-z_][\w ]*?[\s*]+)(_?[a-z]{1,2}Stack([0-7][0-9a-f]{7}))[ \t]*;[ \t]*\n', rest)):
+        off = int(dm.group(3), 16)
+        if not 0x18 <= off < 0x38: continue
+        ty = dm.group(1).strip(); ty = _tm.get(ty, ty)
+        rest = rest.replace(dm.group(0), '', 1)
+        rest = re.sub(r'\b%s\b' % dm.group(2), '(*(%s *)((unsigned char *)ghidra_home + %d))' % (ty, off - 0x18), rest)
+        slots.append(hex(off))
     hm = re.search(r'\(([^()]*)\)', head)
     if not hm: return b, 0
     if re.search(r'\b(float|double|longlong|ulonglong|undefined8)\b(?!\s*\*)', head):
@@ -602,6 +648,39 @@ def fix_home_slots(b, name):
     rest = re.sub(r'STACKARG\((0x[0-9a-f]+)\)', lambda m: '(*(unsigned int *)((unsigned char *)ghidra_home + %d))' % (int(m.group(1), 16) - 0x18) if 0x18 <= int(m.group(1), 16) < 0x38 else m.group(0), rest)
     rest = re.sub(_fa, lambda m: '(*(%s *)((unsigned char *)ghidra_home + %d))' % (m.group(1), int(m.group(2), 16) - 0x18) if 0x18 <= int(m.group(2), 16) < 0x38 else m.group(0), rest)
     return head + rest, len(slots)
+def fix_neg_shift(b):
+    """`-(*(byte *)p ^ 1) >> 0x1f`: the stock's `neg; rlwinm r3,r3,1,31,31` is an UNSIGNED shift of the negated byte, but C promotes a byte to (signed) int and
+    the recompile shifted arithmetically (0 / -1 instead of 0 / 1; GLDriver FUN_000f313c and two other sites). A unary minus over a parenthesised expression
+    that is shifted right by 31 gets a (uint) cast on the operand unless Ghidra already wrote (int) in front (an arithmetic shift)."""
+    out = []; i = 0; n = 0
+    for m in re.finditer(r'(?<![\w)\]])-\(', b):
+        if m.start() < i: continue
+        j = m.end(); d = 1
+        while j < len(b) and d:
+            if b[j] == '(': d += 1
+            elif b[j] == ')': d -= 1
+            j += 1
+        if not re.match(r'\s*>>\s*(0x1f|31)\b', b[j:j + 12]): continue
+        if re.search(r'\((int|uint)\)\s*$', b[max(0, m.start() - 8):m.start()]): continue
+        out.append(b[i:m.start()]); out.append('-(uint)(' + b[m.end():j]); i = j; n += 1
+    out.append(b[i:])
+    return ''.join(out), n
+def fix_code_offsets(b):
+    """`*(int *)(FUN_00024870 + iVar3 * 4 + param_1) = ..`: a struct-field offset (`addis r2,r2,2; stw r4,0x4870(r2)` = +0x24870) that happens to equal a
+    function's address, which Ghidra renders as that function's symbol. The link tree resolves FUN_ names to the REBUILT function's address, so the C
+    stored through a wild pointer (GLDriver FUN_00077560 SIGBUS; ~690 sites, mostly context offsets 0x2748 / 0x26c8 / 0x1e24 / 0x1dc4). Nothing adds to or
+    subtracts from a function's address, so a FUN_ name that is an operand of a binary + / - is the numeric constant."""
+    n = 0
+    out = []; i = 0
+    for m in re.finditer(r'(?<![\w&])FUN_([0-9a-f]{8})\b(?!\s*\()', b):
+        pre = b[:m.start()][-12:]; post = b[m.end():m.end() + 6]
+        if re.search(r'[\w)\]]\s*[-+]\s*$', pre) or re.match(r'\s*[-+](?![-+>=])', post):
+            out.append(b[i:m.start()]); out.append('0x' + m.group(1)); i = m.end(); n += 1
+    out.append(b[i:])
+    b = ''.join(out)
+    # `((code **)FUN_00030c50)[param_3 + param_1]`: the same coincidence as a table base (GLDriver FUN_0001ecd0 and one more function)
+    b, k = re.subn(r'\(code \*\*\)FUN_([0-9a-f]{8})\)\s*\[', lambda m: '(code **)0x%s)[' % m.group(1), b)
+    return b, n + k
 def fix_nan(b, entry):
     """a bare `NAN` token (a float-typed variable holding a NaN-pattern word) -> the one NaN-pattern constant the stock function builds"""
     if not re.search(r'(?<![\w"])NAN\b(?!\s*\()', b): return b, 0
@@ -670,6 +749,9 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
             b, _nnan = fix_nan(b, int(a, 16))
+            b, _nns = fix_neg_shift(b)
+            b, _nco = fix_code_offsets(b)
+            b, _nlit = fix_literal_syms(b, int(a, 16))
             b, _nfa = fix_float_args(b)
             # an integer / pointer cast of a float LITERAL is its bit pattern: Ghidra inlines a read-only float constant it read with an integer load
             # (GLDriver FUN_000a9ac0: `local_54 ^ (uint)1.0`, `param_4 == (undefined *)1.0` - the stock compares words with 0x3f800000 loaded by

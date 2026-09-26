@@ -273,6 +273,30 @@ of a class no static check sees, and each class was checked across all five imag
 Checks after the fixes, all on the G5: glsl_test 141/141 + 403/403 real, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
 unchanged and of GLDriver improved (`FUN_000a7050` no longer differs).
 
+### Pure-function differential (issue #68, criterion 1)
+`Tests/userspace/fnfuzz.c` calls every function of an image that can safely be called in isolation - no indirect call, no atomic / cache / special-register
+instruction, no import outside `memcpy`/`str*`/libm (`Tools/userspace/fnfuzz_gen.py` reads the stock code and the dump's signatures and writes the ledgers
+`Tests/userspace/fnfuzz/{glprog,gld,ga,va}.tsv`) - with seeded arguments in a forked child of the stock and of the rebuilt image and compares what came back:
+the integer or float result (only when a stock caller reads it: Ghidra's `undefined` returns are whatever r3 held) and a digest of a 128 KB scratch arena that
+pointer parameters point into. Words that look like an address of either image are normalised first, a stock that disagrees with itself is dropped, a hang on one
+side only is re-run with a longer limit (the -O0 rebuild is several times slower on long loops), and the run starts from a mixed distribution of integers
+(zero, small, powers of two, negative, arena pointers) and floats. Functions that crash in both images for every input are reported as uninformative.
+* **libGLProgrammability: 526 candidate functions, 12 trials each: no difference** except what the ledger now excludes. Findings on the way: `_PPParserParseSwizzleCode` overflowed the two
+  bytes Ghidra saw of a token buffer (`char local_120; char local_11f;` + `GetPart(p, &local_120, 0)`; `rewrites.mirror_frame` now reserves 0x100 bytes above an
+  address-taken byte scalar); the libgcc 64-bit shift helpers differ for out-of-range counts only (toolchain functions, excluded); `saveFP`/`restFP` millicode
+  and two clipped fragments are not functions.
+* **GLDriver: 2723 candidate functions, 12 trials each.** Three real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
+  1. `fix_code_offsets` - a struct-field OFFSET that equals a function's address is printed as that function's symbol (`*(int *)(FUN_00024870 + i * 4 + param_1) = ..`:
+     `addis r2,r2,2; stw r4,0x4870(r2)`); the link tree resolves the name to the rebuilt function's address, so FUN_00077560 stored through a wild pointer.
+     ~690 sites (context offsets 0x2748, 0x26c8, 0x1e24, 0x1dc4 ...), and `((code **)FUN_00030c50)[i]` table bases. Nothing adds to a function's address.
+  2. `fix_literal_syms` - a function symbol used as a VALUE whose address is a constant the stock function builds with `lis` + `ori`/`addi` (the low half may come
+     up to 16 instructions later): the packet header `0x308c0` in FUN_00023700 (three sites; VA: `0x10c0`, three sites). A PIC image forms code addresses
+     relative to the PIC base, never from immediates.
+  3. `fix_home_slots` - Ghidra declared BOTH `undefined4 uStack0000001c;` and used `stack0x0000001c` for the same word (the caller's parameter home area, where
+     a by-value 4-byte mask is spilled); the byte-mask loop wrote one name and the final store read the other (FUN_000f2f28 / f2f84 / f302c / f33f8 and 20 more
+     in GLDriver, glprog, GA and VA: the result never reached `*param_1`). Both names now map to the function's own `ghidra_home[]`.
+  The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
+  wrong rebuilt function and reports crashes that are not there.
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

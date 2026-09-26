@@ -5766,10 +5766,9 @@ int FUN_001633f8(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   int iVar1;
   undefined4 uVar2;
-  int iStack00000018;
   
   uVar2 = 0;
-  iStack00000018 = param_1;
+  (*(int *)((unsigned char *)ghidra_home + 0)) = param_1;
   if ((*(uint *)(param_1 + 0x14) & 0x200) != 0) {
     uVar2 = FUN_00105594(param_1,*(undefined4 *)(param_1 + 0x84));
   }
@@ -6635,11 +6634,10 @@ int FUN_00164bec(param_1, param_2, param_3, param_4)
   int iVar12;
   int iVar13;
   int iVar14;
-  undefined4 uStack0000001c;
   int local_28 [6];
   
   bVar2 = param_4 == 0;
-  uStack0000001c = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   if (bVar2) {
     iVar13 = 4;
     iVar9 = 0;
@@ -7275,10 +7273,9 @@ int FUN_00165b7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uint *puVar6;
   undefined4 uVar7;
   int iVar8;
-  undefined4 uStack0000002c;
   
   uVar7 = *(undefined4 *)(*param_1 + 0x378);
-  uStack0000002c = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
   puVar1 = (undefined4 *)FUN_00193e18(uVar7,0x24);
   a6 = 0x1010101;
   *puVar1 = uVar7;
@@ -7301,7 +7298,7 @@ int FUN_00165b7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uVar7 = (**(code **)(*(int *)param_1[3] + 0x20))
                     ((int *)param_1[3],*(undefined4 *)(param_2 + 0x38),a2,a3,uVar7,a5,a6);
   puVar1[8] = uVar7;
-  puVar1[7] = uStack0000002c;
+  puVar1[7] = (*(unsigned int *)((unsigned char *)ghidra_home + 20));
   puVar6 = *(uint **)(param_2 + 0x40);
   uVar5 = puVar6[1];
   if (uVar5 < *puVar6) {
@@ -8650,10 +8647,9 @@ int FUN_00167b68(param_1, param_2, param_3)
   int iVar12;
   uint uVar13;
   int iVar14;
-  undefined4 uStack00000020;
   uint local_58 [7];
   
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   if (param_2 != 1) {
     uVar4 = 0;
     piVar3 = *(int **)(*param_1 + 0x30c);

@@ -1857,7 +1857,7 @@ int FUN_00149de4(param_1, param_2, param_3, param_4, param_5)
         if (iVar5 == 0) {
           uVar16 = param_3[0x2e] & 1;
           if ((param_1[param_2 * 6 + 0x28] & 2U) == 0) {
-            uVar13 = -(param_3[0x2e] & 2U) >> 0x1f;
+            uVar13 = -(uint)(param_3[0x2e] & 2U) >> 0x1f;
           }
           else {
             uVar13 = 1;

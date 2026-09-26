@@ -268,7 +268,7 @@ int FUN_0012678c(param_1)
 int FUN_001267b8(param_1)
   int param_1;
 {
-  return -(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
+  return -(uint)(*(uint *)(&DAT_001ea904 + param_1 * 0x10) & 0x11) >> 0x1f;
 }
 
 /* FUN_001267ec @ 0x1267ec (84 bytes) */
@@ -775,14 +775,12 @@ int FUN_00127534(param_1, param_2, param_3, param_4)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uVar1;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = uStack00000020;
-  *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = uStack0000001c;
+  *(undefined4 *)(*(int *)(param_1 + 0x24) + 8) = (*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  *(undefined4 *)(*(int *)(param_1 + 0x24) + 4) = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   *(undefined4 *)(*(int *)(param_1 + 0x24) + 0xc) = param_4;
   uVar1 = FUN_00194834(*(undefined4 *)(param_1 + 4),*(undefined4 *)(param_1 + 0x24));
   return uVar1;
@@ -797,13 +795,11 @@ int FUN_001275a0(param_1, param_2, param_3, param_4)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 uVar1;
-  undefined4 uStack0000001c;
-  undefined4 uStack00000020;
   
-  uStack0000001c = param_2;
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   ((int (*)())FUN_001272d4)(param_1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-  uVar1 = FUN_00122e90(uStack00000020,uStack0000001c,param_4,*param_1);
+  uVar1 = FUN_00122e90((*(unsigned int *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 4)),param_4,*param_1);
   FUN_00194d44(param_1[1],uVar1);
   return uVar1;
 }
@@ -1172,7 +1168,7 @@ int FUN_00127e48(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 int FUN_00127ecc(param_1)
   int param_1;
 {
-  if (*(int *)(FUN_00001740 + param_1) == 2) {
+  if (*(int *)(0x00001740 + param_1) == 2) {
     return 0x40;
   }
   return 0x20;

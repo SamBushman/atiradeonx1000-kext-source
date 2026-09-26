@@ -1477,7 +1477,6 @@ int FUN_001793d8(param_1, param_2, param_3)
   int iVar9;
   int *piVar10;
   uint *puVar11;
-  undefined4 uStack00000020;
   undefined4 local_38;
   undefined4 local_34;
   undefined4 local_30;
@@ -1485,7 +1484,7 @@ int FUN_001793d8(param_1, param_2, param_3)
   
   piVar10 = (int *)(param_2 * 0x10 + param_1 + 0x168);
   iVar4 = 0;
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   pcVar7 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
     if (*pcVar7 != '\0') {

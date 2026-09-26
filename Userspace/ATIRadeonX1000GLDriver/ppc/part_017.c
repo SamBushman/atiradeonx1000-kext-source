@@ -2914,13 +2914,13 @@ void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   
   if ((*(uint *)(param_1 + 0x44) & 0x100000) == 0) {
     puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
-    *(undefined4 **)(FUN_00002748 + param_1 + 4) = puVar3;
+    *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
     *puVar3 = 0x860;
-    a6 = *(int *)(FUN_00002748 + param_1 + 4);
+    a6 = *(int *)(0x00002748 + param_1 + 4);
     *(undefined4 *)(a6 + 4) = *(undefined4 *)(param_1 + 0x1b78);
-    iVar2 = *(int *)(FUN_00002748 + param_1 + 4);
+    iVar2 = *(int *)(0x00002748 + param_1 + 4);
     pcVar1 = *(code **)(param_1 + 0x275c);
-    *(int *)(FUN_00002748 + param_1 + 4) = iVar2 + 8;
+    *(int *)(0x00002748 + param_1 + 4) = iVar2 + 8;
     (*pcVar1)(param_1,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
     FUN_0009be00(param_1);
     fparam_1 = (double)FUN_0009cc30(param_1);
@@ -4029,7 +4029,7 @@ LAB_000bf474:
           if ((uVar4 == 2) &&
              (bVar19 = bVar19 | *(byte *)(puVar14 + 1) | *(byte *)((int)puVar14 + 0x1b),
              *(char *)((int)puVar14 + 0x1a) != '\0')) {
-            uVar18 = uVar18 | -(puVar14[7] & 0xffff00) >> 0x1f;
+            uVar18 = uVar18 | -(uint)(puVar14[7] & 0xffff00) >> 0x1f;
           }
         }
         else {

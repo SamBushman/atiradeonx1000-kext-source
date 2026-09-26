@@ -71,7 +71,7 @@ undefined4 FUN_00191888(int param_1,undefined4 param_2,uint *param_3,uint *param
           uVar2 = 0;
           iVar3 = 8;
           do {
-            if (fparam_1 == (double)*(float *)(FUN_00001740 + param_1 + 4)) {
+            if (fparam_1 == (double)*(float *)(0x00001740 + param_1 + 4)) {
               *param_4 = uVar2;
               return 1;
             }
@@ -105,13 +105,12 @@ int FUN_00191940(param_1, param_2, param_3)
   undefined4 uVar3;
   int iVar4;
   double fparam_1;
-  undefined4 uStack00000020;
   undefined1 auStack_28 [4];
   undefined1 auStack_24 [32];
   
   bVar1 = false;
   iVar4 = 4;
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   fparam_1 = (double)FLOAT_001aa0d4;
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
@@ -297,9 +296,8 @@ int FUN_00191c7c(param_1, param_2, param_3, param_4, param_5)
   char *pcVar5;
   int iVar6;
   int iVar7;
-  undefined4 uStack00000024;
   
-  uStack00000024 = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   *param_3 = 0xffffffff;
   pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   iVar6 = 4;
@@ -345,7 +343,7 @@ int FUN_00191c7c(param_1, param_2, param_3, param_4, param_5)
     pfVar4 = pfVar4 + 1;
     iVar6 = iVar6 + -1;
   } while (iVar6 != 0);
-  iVar6 = (**(code **)(*param_1 + 0x98))(param_1,param_2,uStack00000024);
+  iVar6 = (**(code **)(*param_1 + 0x98))(param_1,param_2,(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
   if (iVar6 != 0) {
     iVar6 = 0;
     iVar7 = 4;

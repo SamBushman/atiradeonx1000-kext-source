@@ -133,17 +133,13 @@ int TPPStreamCompiler__error(param_1, param_2, param_3, param_4, param_5, param_
   int iVar3;
   char *pcVar4;
   int iVar5;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   char acStack_120 [264];
   
   iVar5 = 0;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   if (param_3 != (char *)0x0) {
     iVar5 = _strlen(param_3);
@@ -186,16 +182,12 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
   int iVar3;
   char *pcVar4;
   int iVar5;
-  undefined4 uStack00000028;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   char acStack_120 [268];
   
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   _vsprintf(acStack_120,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   iVar5 = 0;
   if (param_3 != (char *)0x0) {
@@ -2882,14 +2874,6 @@ int _InterpreterWriteDestination(param_1, param_2, param_3, param_4, param_5, pa
   float *pfVar7;
   int *piVar8;
   undefined1 uVar9;
-  int iStack0000001c;
-  int iStack00000020;
-  uint uStack00000024;
-  short sStack00000028;
-  ushort uStack0000002c;
-  char cStack0000002f;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   float local_50 [4];
   float local_40;
   float local_3c;
@@ -2907,26 +2891,26 @@ int _InterpreterWriteDestination(param_1, param_2, param_3, param_4, param_5, pa
   param_12[2] = local_38;
   param_12[3] = local_34;
   iVar2 = *(int *)(iVar1 + 0xd80);
-  uStack0000002c = (ushort)((uint)param_6 >> 0x10);
+  (*(ushort *)((unsigned char *)ghidra_home + 20)) = (ushort)((uint)param_6 >> 0x10);
   if (((*(int *)(iVar2 + 0x38) == 0x8804) || (*(int *)(iVar2 + 0x38) == 0x8b30)) &&
-     (uStack0000002c == 1)) {
+     ((*(ushort *)((unsigned char *)ghidra_home + 20)) == 1)) {
     piVar6 = param_1 + 0x292;
     piVar8 = (int *)(param_2 + param_11 * 0x10);
   }
   else {
     if (((*(int *)(iVar2 + 0x38) == 0x8804) || (*(int *)(iVar2 + 0x38) == 0x8b30)) &&
-       (uStack0000002c == 9)) {
+       ((*(ushort *)((unsigned char *)ghidra_home + 20)) == 9)) {
       piVar6 = param_1 + 0x28c;
     }
     else {
-      cStack0000002f = (char)param_6;
-      piVar6 = *(int **)((uint)uStack0000002c * 4 + iVar1 + 0xd84);
-      if (cStack0000002f != '\0') {
+      (*(char *)((unsigned char *)ghidra_home + 23)) = (char)param_6;
+      piVar6 = *(int **)((uint)(*(ushort *)((unsigned char *)ghidra_home + 20)) * 4 + iVar1 + 0xd84);
+      if ((*(char *)((unsigned char *)ghidra_home + 23)) != '\0') {
         iVar2 = param_3 * 0xc + iVar2;
-        sStack00000028 = (short)((uint)param_5 >> 0x10);
+        (*(short *)((unsigned char *)ghidra_home + 16)) = (short)((uint)param_5 >> 0x10);
         iVar1 = *(int *)(iVar2 + 0x80);
         piVar8 = (int *)(iVar1 + (((uint)((param_2 + param_11 * 0x10) - iVar1) >> 4) +
-                                  param_1[0x290] + (int)sStack00000028 & *(uint *)(iVar2 + 0x88)) *
+                                  param_1[0x290] + (int)(*(short *)((unsigned char *)ghidra_home + 16)) & *(uint *)(iVar2 + 0x88)) *
                                  0x10);
         goto LAB_97bcd680;
       }
@@ -2935,13 +2919,13 @@ int _InterpreterWriteDestination(param_1, param_2, param_3, param_4, param_5, pa
   }
 LAB_97bcd680:
   pfVar4 = pfVar5;
-  iStack0000001c = param_2;
-  iStack00000020 = param_3;
-  uStack00000024 = param_4;
+  (*(int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(int *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(uint *)((unsigned char *)ghidra_home + 12)) = param_4;
   (*(short *)((unsigned char *)ghidra_home + 16)) = param_5;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   if ((((param_9 & 0x1000000) != 0) &&
       (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,
                                   param_9,param_10,0), iVar1 != 0)) &&
@@ -2955,8 +2939,8 @@ LAB_97bcd680:
   }
   pfVar7 = pfVar5;
   if ((((param_9 & 0x2000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
+      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
                                   param_9,param_10,1), iVar1 != 0)) &&
      (pfVar7 = (float *)((int)piVar6 + piVar8[1]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);
@@ -2968,8 +2952,8 @@ LAB_97bcd680:
   }
   pfVar3 = pfVar5;
   if ((((param_9 & 0x4000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
+      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
                                   param_9,param_10,2), iVar1 != 0)) &&
      (pfVar3 = (float *)((int)piVar6 + piVar8[2]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);
@@ -2980,8 +2964,8 @@ LAB_97bcd680:
     *(undefined1 *)((int)param_1 + 0xa46) = uVar9;
   }
   if ((((param_9 & 0x8000000) != 0) &&
-      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,iStack0000001c,iStack00000020,uStack00000024,
-                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),uStack00000030,uStack00000034,
+      (iVar1 = ((int (*)())_InterpreterTestCR)(param_1,(*(int *)((unsigned char *)ghidra_home + 4)),(*(int *)((unsigned char *)ghidra_home + 8)),(*(uint *)((unsigned char *)ghidra_home + 12)),
+                                  (*(short *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),(*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),
                                   param_9,param_10,3), iVar1 != 0)) &&
      (pfVar5 = (float *)((int)piVar6 + piVar8[3]), (char)param_13 != '\0')) {
     iVar1 = ___isnanf(iVar1);

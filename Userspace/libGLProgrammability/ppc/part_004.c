@@ -5746,17 +5746,14 @@ int TParseContext__error(param_1, param_2, param_3, param_4, param_5, param_6, p
   void *pvVar4;
   char in_RESERVE;
   byte bVar5;
-  undefined4 uStack0000002c;
-  undefined4 uStack00000030;
-  undefined4 uStack00000034;
   char acStack_210 [400];
   char *apcStack_80 [4];
   char acStack_70 [64];
   unsigned char aaStack_30 [24];
   
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
-  uStack00000034 = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
   _vsnprintf(acStack_210,400,param_5,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
   __ZN13TInfoSinkBase6appendEPKc(*(void **)(param_1 + 8),"ERROR: ");
   pvVar4 = *(void **)(param_1 + 8);

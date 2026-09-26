@@ -2083,12 +2083,11 @@ int FUN_001a09d0(param_1, param_2, param_3, param_4, param_5)
   byte *pbVar7;
   int iVar8;
   uint uVar9;
-  undefined4 uStack00000028;
   
   if (1 < *(int *)(param_4 + 0x84)) {
     iVar8 = 2;
     puVar6 = (uint *)(param_3 + param_2 * 4);
-    uStack00000028 = param_5;
+    (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
     do {
       a0 = (int *)FUN_00105594(param_4,iVar8);
       if ((a0 != (int *)0x0) && (iVar5 = (**(code **)(*a0 + 0x48))(a0), iVar5 != 0)) {

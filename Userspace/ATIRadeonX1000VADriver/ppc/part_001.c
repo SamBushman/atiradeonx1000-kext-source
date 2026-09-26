@@ -1586,7 +1586,7 @@ int FUN_00006230(param_1, param_2, param_3, param_4)
     puVar2[0xf] = 0x28ffe040;
     puVar2[0x10] = 0x10c8;
     puVar2[0x11] = 0x50;
-    puVar2[0x12] = FUN_000010c0;
+    puVar2[0x12] = 0x000010c0;
     puVar2[0x13] = 0x40002;
     puVar2[0x14] = 0x10c1;
     puVar2[0x15] = 0;
@@ -3257,7 +3257,7 @@ int FUN_00009700(param_1, param_2)
   }
   piVar2[2] = 0x825;
   piVar2[3] = uVar4;
-  piVar2[4] = (int)FUN_000010c0;
+  piVar2[4] = (int)0x000010c0;
   piVar2[5] = param_2 << 1 | 0x40000;
   piVar2[6] = 0x10c1;
   piVar3 = piVar2 + 8;
@@ -4799,7 +4799,7 @@ int FUN_0000c4b0(param_1, param_2, param_3, param_4)
   puVar4[0xb] = 1;
   puVar4[0xc] = 0x825;
   puVar4[0xd] = 0x12;
-  puVar4[0xe] = FUN_000010c0;
+  puVar4[0xe] = 0x000010c0;
   puVar4[0xf] = 0x40004;
   puVar4[0x10] = 0x10c1;
   puVar4[0x11] = 1;
@@ -4925,10 +4925,6 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   undefined4 *puVar6;
   int iVar7;
   int iVar8;
-  short sStack0000001c;
-  short sStack0000001e;
-  short sStack00000020;
-  short sStack00000022;
   float local_78;
   float local_74;
   float local_70;
@@ -4953,15 +4949,15 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   local_50 = 0x43300000;
   local_58 = 0x43300000;
   local_48 = 0x43300000;
-  sStack00000022 = (short)param_3;
-  sStack0000001e = (short)param_2;
-  sStack00000020 = (short)((uint)param_3 >> 0x10);
-  sStack0000001c = (short)((uint)param_2 >> 0x10);
+  (*(short *)((unsigned char *)ghidra_home + 10)) = (short)param_3;
+  (*(short *)((unsigned char *)ghidra_home + 6)) = (short)param_2;
+  (*(short *)((unsigned char *)ghidra_home + 8)) = (short)((uint)param_3 >> 0x10);
+  (*(short *)((unsigned char *)ghidra_home + 4)) = (short)((uint)param_2 >> 0x10);
   puVar6 = *(undefined4 **)(param_1 + 0x34);
-  uStack_4c = (int)sStack0000001e ^ 0x80000000;
-  uStack_3c = (int)sStack00000022 ^ 0x80000000;
-  uStack_54 = (int)sStack0000001c ^ 0x80000000;
-  uStack_44 = (int)sStack00000020 ^ 0x80000000;
+  uStack_4c = (int)(*(short *)((unsigned char *)ghidra_home + 6)) ^ 0x80000000;
+  uStack_3c = (int)(*(short *)((unsigned char *)ghidra_home + 10)) ^ 0x80000000;
+  uStack_54 = (int)(*(short *)((unsigned char *)ghidra_home + 4)) ^ 0x80000000;
+  uStack_44 = (int)(*(short *)((unsigned char *)ghidra_home + 8)) ^ 0x80000000;
   uVar3 = *(uint *)(param_1 + 0x60);
   iVar8 = *(int *)(param_1 + 100);
   uVar1 = uVar3 >> 1;

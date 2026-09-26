@@ -469,9 +469,8 @@ int FUN_0010453c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int iVar2;
   undefined4 uVar3;
   byte *pbVar4;
-  undefined4 uStack00000020;
   
-  uStack00000020 = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   if (*(int *)(param_1 + 0x98) == 0x33) {
     pbVar4 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     do {

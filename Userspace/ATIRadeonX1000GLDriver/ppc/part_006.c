@@ -7897,7 +7897,7 @@ int FUN_0004ac90(param_1)
     *(int **)(param_1 + 0x1e64) = piVar9;
     if (*piVar6 == 0) {
       iVar3 = piVar6[1];
-      *(undefined4 *)(FUN_00002348 + param_1 + 4) = 1;
+      *(undefined4 *)(0x00002348 + param_1 + 4) = 1;
       *(int *)(param_1 + 0x2350) = iVar3;
       *(int *)(param_1 + 0x2338) = *piVar5;
       *piVar6 = 1;
@@ -7915,7 +7915,7 @@ int FUN_0004ac90(param_1)
         iVar14 = iVar14 + -1;
       } while (iVar14 != 0);
       uVar11 = 0;
-      pcVar4 = FUN_00001f30 + param_1;
+      pcVar4 = 0x00001f30 + param_1;
       piVar5 = piVar9 + 0x20;
       piVar6 = piVar9;
       do {
@@ -7950,7 +7950,7 @@ int FUN_0004ac90(param_1)
       *(uint *)(param_1 + 0x1f2c) = puVar13[0x82];
       uVar11 = *puVar13;
       *(int *)(param_1 + 0x1f34) = iVar12;
-      *(uint *)(FUN_00001f30 + param_1) = uVar11 & 0xffffff1f;
+      *(uint *)(0x00001f30 + param_1) = uVar11 & 0xffffff1f;
       _memcpy(param_1 + 0x1ea8,puVar13 + 1,iVar12 << 2);
       uVar2 = puVar13[0x23];
       uVar10 = puVar13[0x24];

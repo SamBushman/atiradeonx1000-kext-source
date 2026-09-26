@@ -205,7 +205,7 @@ int _InitCPP()
   while( true ) {
     uVar5 = (uint)*pcVar7;
     if ((uVar5 & 0xffffff80) == 0) {
-      uVar5 = -(*(uint *)(puVar1 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
+      uVar5 = -(uint)(*(uint *)(puVar1 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
     }
     else {
       iVar3 = ___maskrune(uVar5,0x500);

@@ -614,15 +614,15 @@ int _IsBadUsage(param_1)
     do {
       uVar3 = *puVar2;
       puVar2 = puVar2 + 2;
-      uVar4 = uVar4 | -(uVar3 >> 0x15 & 3) >> 0x1f | uVar3 >> 0x1b & 1 | uVar3 >> 0x1f |
-              uVar3 >> 0xe & 1 | -(uVar3 >> 0xc & 3) >> 0x1f;
+      uVar4 = uVar4 | -(uint)(uVar3 >> 0x15 & 3) >> 0x1f | uVar3 >> 0x1b & 1 | uVar3 >> 0x1f |
+              uVar3 >> 0xe & 1 | -(uint)(uVar3 >> 0xc & 3) >> 0x1f;
       iVar1 = iVar1 + -1;
     } while (iVar1 != 0);
   }
   uVar3 = *(uint *)(param_1 + 0x14);
   return uVar4 | *(uint *)(param_1 + 0x18) >> 0x1f | uVar3 >> 0xc & 1 |
-         *(uint *)(param_1 + 0x10) >> 0x14 & 1 | -(uVar3 & 0x1c000) >> 0x1f |
-         -(uVar3 >> 10 & 3) >> 0x1f;
+         *(uint *)(param_1 + 0x10) >> 0x14 & 1 | -(uint)(uVar3 & 0x1c000) >> 0x1f |
+         -(uint)(uVar3 >> 10 & 3) >> 0x1f;
 }
 
 /* _ClearDestedOpRegisters @ 0x97c0c740 (220 bytes) */

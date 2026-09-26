@@ -192,10 +192,6 @@ int FUN_001281f0(param_1, param_2, param_3, param_4)
   undefined4 uVar7;
   int iVar8;
   int iVar9;
-  char cStack00000024;
-  char cStack00000025;
-  char cStack00000026;
-  char cStack00000027;
   
   (*(char *)((unsigned char *)ghidra_home + 12)) = param_4;
   bVar3 = true;
@@ -224,18 +220,18 @@ int FUN_001281f0(param_1, param_2, param_3, param_4)
     fVar2 = fVar2 + fVar1;
     iVar8 = iVar8 + -1;
   } while (iVar8 != 0);
-  cStack00000024 = (char)((uint)param_4 >> 0x18);
-  cStack00000025 = (char)((uint)param_4 >> 0x10);
-  cStack00000026 = (char)((uint)param_4 >> 8);
-  cStack00000027 = (char)param_4;
+  (*(char *)((unsigned char *)ghidra_home + 12)) = (char)((uint)param_4 >> 0x18);
+  (*(char *)((unsigned char *)ghidra_home + 13)) = (char)((uint)param_4 >> 0x10);
+  (*(char *)((unsigned char *)ghidra_home + 14)) = (char)((uint)param_4 >> 8);
+  (*(char *)((unsigned char *)ghidra_home + 15)) = (char)param_4;
   puVar5 = &DAT_001aff0c;
   while( true ) {
     uVar7 = *puVar5;
     if ((((GH_U2F((unsigned int)(puVar5[1])) == fVar2) &&
-         ((cStack00000024 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-4])))))) &&
-        ((cStack00000025 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-3])))))) &&
-       (((cStack00000026 == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-2])))) &&
-        ((cStack00000027 == '\x04' || (GH_U2F((unsigned int)(puVar5[-1])) == fVar1)))))) break;
+         (((*(char *)((unsigned char *)ghidra_home + 12)) == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-4])))))) &&
+        (((*(char *)((unsigned char *)ghidra_home + 13)) == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-3])))))) &&
+       ((((*(char *)((unsigned char *)ghidra_home + 14)) == '\x04' || (fVar1 == GH_U2F((unsigned int)(puVar5[-2])))) &&
+        (((*(char *)((unsigned char *)ghidra_home + 15)) == '\x04' || (GH_U2F((unsigned int)(puVar5[-1])) == fVar1)))))) break;
     puVar5 = puVar5 + 6;
     if (puVar5 == (undefined4 *)&UNK_001aff54) {
       return 0;
@@ -471,11 +467,10 @@ int FUN_00128930(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int iVar4;
   undefined4 uVar5;
   int iVar6;
-  undefined4 uStack00000030;
   
   uVar5 = *(undefined4 *)(param_10 + 0x6c4);
   iVar4 = *(int *)(PTR_DAT_001e8b84 + param_2 * 4);
-  uStack00000030 = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   iVar1 = FUN_001043f0(0x8b,param_10);
   uVar2 = FUN_000ec208(uVar5,param_4);
   iVar3 = FUN_001054ec(iVar1,1);
@@ -1108,13 +1103,12 @@ int FUN_00129854(param_1, param_2, param_3, param_4)
   char *pcVar6;
   int iVar7;
   int iVar8;
-  undefined4 uStack00000024;
   int local_38 [4];
   longlong local_28;
   undefined4 local_20;
   
   pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
-  uStack00000024 = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   *param_3 = -1;
   iVar7 = 4;
   pfVar3 = param_2;
@@ -1469,7 +1463,6 @@ int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uVar8;
   undefined4 *puVar9;
   int iVar10;
-  undefined4 uStack00000030;
   
   iVar7 = param_10;
   uVar8 = *(undefined4 *)(param_10 + 0x6c4);
@@ -1503,7 +1496,7 @@ int FUN_0012a00c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     bVar1 = false;
   }
   bVar1 = !bVar1;
-  uStack00000030 = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   uVar2 = FUN_001043f0(uVar2,param_10);
   uVar3 = FUN_000ec208(uVar8,param_4);
   iVar4 = FUN_001054ec(uVar2,2 - (uint)bVar1);

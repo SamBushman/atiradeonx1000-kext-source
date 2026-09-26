@@ -8792,13 +8792,13 @@ int FUN_00017310(param_1, param_2, param_3)
             *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
             _io_connect_method_scalarI_scalarO
                       (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-            uVar2 = *(uint *)(FUN_000026c8 + param_1);
+            uVar2 = *(uint *)(0x000026c8 + param_1);
             *(int *)(param_1 + 0x1fc) = local_24;
             uVar3 = local_24 + (local_20 & 0xfffffffc);
             *(int *)(param_1 + 500) = local_24;
             *(uint *)(param_1 + 0x1f8) = uVar3;
             uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-            *(uint *)(FUN_000026c8 + param_1) = uVar2 | 1;
+            *(uint *)(0x000026c8 + param_1) = uVar2 | 1;
             *(undefined4 *)(param_1 + 0x200) = uVar1;
             iVar5 = local_24;
           }
@@ -8816,12 +8816,12 @@ int FUN_00017310(param_1, param_2, param_3)
             *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
             _io_connect_method_scalarI_scalarO
                       (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-            uVar3 = *(uint *)(FUN_000026c8 + param_1);
+            uVar3 = *(uint *)(0x000026c8 + param_1);
             *(int *)(param_1 + 0x1fc) = local_24;
             *(int *)(param_1 + 500) = local_24;
             *(uint *)(param_1 + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
             uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-            *(uint *)(FUN_000026c8 + param_1) = uVar3 | 1;
+            *(uint *)(0x000026c8 + param_1) = uVar3 | 1;
             *(undefined4 *)(param_1 + 0x200) = uVar1;
             iVar5 = local_24;
           }
@@ -8840,12 +8840,12 @@ int FUN_00017310(param_1, param_2, param_3)
           *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
           _io_connect_method_scalarI_scalarO
                     (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-          uVar3 = *(uint *)(FUN_000026c8 + param_1);
+          uVar3 = *(uint *)(0x000026c8 + param_1);
           *(int *)(param_1 + 0x1fc) = local_24;
           *(int *)(param_1 + 500) = local_24;
           *(uint *)(param_1 + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
           uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-          *(uint *)(FUN_000026c8 + param_1) = uVar3 | 1;
+          *(uint *)(0x000026c8 + param_1) = uVar3 | 1;
           *(undefined4 *)(param_1 + 0x200) = uVar1;
           return 0;
         }
@@ -8907,11 +8907,11 @@ int FUN_00017750(param_1, param_2, param_3)
   param_2[0x18] = 0x3f800000;
   param_2[0x19] = 0x42800000;
   param_2[0x1a] = 0x3e000000;
-  *(byte *)(param_2 + 9) = (byte)(-(*(uint *)(param_3 + 0x10) & 0x3ffffffc) >> 0x1f);
+  *(byte *)(param_2 + 9) = (byte)(-(uint)(*(uint *)(param_3 + 0x10) & 0x3ffffffc) >> 0x1f);
   *(byte *)((int)param_2 + 0x25) = (byte)(*(uint *)(param_3 + 0xc) >> 3) & 1;
   uVar4 = *(uint *)(param_3 + 0xc) >> 1 & 1;
   *(char *)((int)param_2 + 0x26) = (char)uVar4;
-  *(byte *)((int)param_2 + 0x27) = (byte)(-(*(uint *)(param_3 + 0x10) & 0x3f000000) >> 0x1f);
+  *(byte *)((int)param_2 + 0x27) = (byte)(-(uint)(*(uint *)(param_3 + 0x10) & 0x3f000000) >> 0x1f);
   iVar3 = param_3;
   FUN_0000a180(*(undefined4 *)(param_3 + 0x10),&local_58,param_3,in_r6,in_r7,in_r8,uVar4);
   param_2[10] = (int)local_50;
@@ -9822,7 +9822,7 @@ LAB_00018700:
         uVar41 = *(uint *)(param_1 + 0x1db4);
         puVar30[0xbd] = 0x82c;
         puVar30[0x1c] = uVar41;
-        uVar41 = *(uint *)(FUN_00001dc4 + param_1);
+        uVar41 = *(uint *)(0x00001dc4 + param_1);
         puVar30[0x1d] = (uint)((unsigned char *)0x000010ae);
         puVar30[0xbe] = uVar41;
         uVar41 = *(uint *)(param_1 + 0x1d70);
@@ -9843,7 +9843,7 @@ LAB_00018700:
         uVar41 = *(uint *)(param_1 + 0x1de0);
         puVar30[0x29] = 0x82d;
         puVar30[0x28] = uVar41;
-        puVar30[0x2a] = *(uint *)(FUN_000026c8 + param_1 + 4);
+        puVar30[0x2a] = *(uint *)(0x000026c8 + param_1 + 4);
         puVar30[0x2b] = 0x854;
         puVar42 = PTR_DAT_001e88c8;
         uVar41 = **(uint **)(param_1 + 0x2680);

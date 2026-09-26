@@ -1,0 +1,11 @@
+#anchor	_ATIRadeonX1000GAFactory	22d0	2884
+0	__dyld_func_lookup	630	fa0	32	-	v
+1	__Probe	1950	15f0	16	iiip	v
+2	_window_mode_to_ati_format	1960	162c	148	n	v
+3	__AddRef	1b80	1960	20	n	v
+4	__DecodePixelFormat	1ba0	19a0	468	nppppppp	v
+5	_fillTextureWithPattern	1d90	1d04	664	pnii	v
+6	__GetCapabilities	2030	23f0	156	nnp	v
+7	__GetBlitter	20e0	2528	224	iinnp	v
+8	__WaitSurface	2270	27ac	72	nin	v
+9	_radeon3DCopySetup	2d10	3e30	2048	innnnnnn	v

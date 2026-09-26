@@ -969,7 +969,7 @@ int _idstr(param_1, param_2)
     }
     uVar5 = (uint)(char)bVar1;
     if ((uVar5 & 0xffffff80) == 0) {
-      uVar5 = -(*(uint *)(puVar2 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
+      uVar5 = -(uint)(*(uint *)(puVar2 + uVar5 * 4 + 0x34) & 0x500) >> 0x1f;
     }
     else {
       iVar3 = ___maskrune(uVar5,0x500);

@@ -983,11 +983,10 @@ int check_exception_spec(param_1, param_2, param_3, param_4)
   unsigned char * ptVar1;
   int iVar2;
   uchar *puVar3;
-  void *pvStack00000020;
   uint local_20 [4];
   
   puVar3 = (uchar *)((*(int *)(param_1 + 0xc) - param_4) + -1);
-  pvStack00000020 = param_3;
+  (*(void * *)((unsigned char *)ghidra_home + 8)) = param_3;
   do {
     puVar3 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,local_20);
     if (local_20[0] == 0) {

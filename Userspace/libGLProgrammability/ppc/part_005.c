@@ -362,11 +362,6 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   byte in_cr0;
   byte bVar22;
   undefined8 uVar23;
-  uint uStack00000024;
-  uint uStack00000028;
-  uint uStack0000002c;
-  uint uStack00000030;
-  uint uStack00000034;
   undefined **local_130;
   char *local_12c;
   int local_128;
@@ -410,13 +405,13 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
   uint local_40;
   uint local_3c;
   
-  uStack00000024 = param_4;
-  uStack00000028 = param_5;
-  uStack0000002c = param_6;
-  uStack00000030 = param_7;
+  (*(uint *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(uint *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(uint *)((unsigned char *)ghidra_home + 20)) = param_6;
+  (*(uint *)((unsigned char *)ghidra_home + 24)) = param_7;
   if (((param_8 == 0) && (param_5 != 3)) && (param_5 != 2)) {
     bVar1 = param_11 == (int *)0x0;
-    uStack00000034 = 1;
+    (*(uint *)((unsigned char *)ghidra_home + 28)) = 1;
     piVar7 = (int *)0x0;
     if ((bVar1) ||
        (((piVar7 = (int *)(**(code **)(*param_11 + 0x18))(param_11), piVar7 != (int *)0x0 &&
@@ -455,31 +450,31 @@ int TParseContext__arrayErrorCheck(param_1, param_2, param_3, param_4, param_5, 
         uVar23 = ((int (*)())TPoolAllocator__allocate)(pTVar10,0x40);
         piVar21 = (int *)((ulonglong)uVar23 >> 0x20);
         uVar13 = (undefined4)uVar23;
-        local_10c = (uStack00000034 & 1) << 9 |
-                    (uStack00000030 & 1) << 10 |
-                    (uStack0000002c & 0xff) << 0xb |
-                    (uStack00000024 & 0x3f) << 0x13 | uStack00000028 << 0x19 | local_10c & 0x1ff;
+        local_10c = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
+                    ((*(uint *)((unsigned char *)ghidra_home + 24)) & 1) << 10 |
+                    ((*(uint *)((unsigned char *)ghidra_home + 20)) & 0xff) << 0xb |
+                    ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | local_10c & 0x1ff;
         local_c8 = param_10;
         local_130 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-        local_100 = uStack00000024;
-        local_fc = uStack00000028;
-        local_f8 = uStack0000002c;
-        local_f4 = uStack00000030;
-        local_f0 = uStack00000034;
+        local_100 = (*(uint *)((unsigned char *)ghidra_home + 12));
+        local_fc = (*(uint *)((unsigned char *)ghidra_home + 16));
+        local_f8 = (*(uint *)((unsigned char *)ghidra_home + 20));
+        local_f4 = (*(uint *)((unsigned char *)ghidra_home + 24));
+        local_f0 = (*(uint *)((unsigned char *)ghidra_home + 28));
         local_ec = param_9;
         local_e8 = param_10;
-        local_e0 = uStack00000024;
-        local_dc = (unsigned char *)uStack00000028;
-        local_d8 = uStack0000002c;
-        local_d4 = uStack00000030;
-        local_d0 = uStack00000034;
+        local_e0 = (*(uint *)((unsigned char *)ghidra_home + 12));
+        local_dc = (unsigned char *)(*(uint *)((unsigned char *)ghidra_home + 16));
+        local_d8 = (*(uint *)((unsigned char *)ghidra_home + 20));
+        local_d4 = (*(uint *)((unsigned char *)ghidra_home + 24));
+        local_d0 = (*(uint *)((unsigned char *)ghidra_home + 28));
         local_cc = param_9;
         local_128 = 0;
         local_118 = (char *)0x0;
         a2 = param_9;
         a3 = param_10;
-        uVar16 = uStack00000028;
-        param_6 = uStack0000002c;
+        uVar16 = (*(uint *)((unsigned char *)ghidra_home + 16));
+        param_6 = (*(uint *)((unsigned char *)ghidra_home + 20));
         local_124 = local_12c;
         ppuVar6 = (undefined **)0x0;
         local_11c = local_12c;
@@ -600,26 +595,26 @@ LAB_97b9caf4:
             pcVar14 = "redeclaring non-array as array";
           }
           else if (a0[4] < 1) {
-            local_10c = (uStack00000034 & 1) << 9 |
-                        (uStack00000030 & 1) << 10 |
-                        (uStack0000002c & 0xff) << 0xb |
-                        (uStack00000024 & 0x3f) << 0x13 | uStack00000028 << 0x19 | local_10c & 0x1ff
+            local_10c = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
+                        ((*(uint *)((unsigned char *)ghidra_home + 24)) & 1) << 10 |
+                        ((*(uint *)((unsigned char *)ghidra_home + 20)) & 0xff) << 0xb |
+                        ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | local_10c & 0x1ff
             ;
             local_c8 = param_10;
             local_130 = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
             local_110 = (char *)0x0;
-            local_100 = uStack00000024;
-            local_fc = uStack00000028;
-            local_f8 = uStack0000002c;
-            local_f4 = uStack00000030;
-            local_f0 = uStack00000034;
+            local_100 = (*(uint *)((unsigned char *)ghidra_home + 12));
+            local_fc = (*(uint *)((unsigned char *)ghidra_home + 16));
+            local_f8 = (*(uint *)((unsigned char *)ghidra_home + 20));
+            local_f4 = (*(uint *)((unsigned char *)ghidra_home + 24));
+            local_f0 = (*(uint *)((unsigned char *)ghidra_home + 28));
             local_ec = param_9;
             local_e8 = param_10;
-            local_e0 = uStack00000024;
-            local_dc = (unsigned char *)uStack00000028;
-            local_d8 = uStack0000002c;
-            local_d4 = uStack00000030;
-            local_d0 = uStack00000034;
+            local_e0 = (*(uint *)((unsigned char *)ghidra_home + 12));
+            local_dc = (unsigned char *)(*(uint *)((unsigned char *)ghidra_home + 16));
+            local_d8 = (*(uint *)((unsigned char *)ghidra_home + 20));
+            local_d4 = (*(uint *)((unsigned char *)ghidra_home + 24));
+            local_d0 = (*(uint *)((unsigned char *)ghidra_home + 28));
             local_cc = param_9;
             local_12c = (char *)0x0;
             local_128 = 0;
@@ -628,14 +623,14 @@ LAB_97b9caf4:
             local_11c = (char *)0x0;
             local_118 = (char *)0x0;
             local_114 = (char *)0x0;
-            param_6 = uStack00000030;
-            param_8 = uStack00000024;
+            param_6 = (*(uint *)((unsigned char *)ghidra_home + 24));
+            param_8 = (*(uint *)((unsigned char *)ghidra_home + 12));
             ppuVar6 = local_120;
             if (param_9 != (unsigned char *)0x0) {
               local_128 = *(int *)(param_9 + 8);
               uVar13 = param_10;
-              uVar16 = uStack0000002c;
-              uVar15 = uStack00000028;
+              uVar16 = (*(uint *)((unsigned char *)ghidra_home + 20));
+              uVar15 = (*(uint *)((unsigned char *)ghidra_home + 16));
               uVar23 = TType__setStructSize((unsigned char *)&local_130,*(unsigned char **)(param_9 + 8));
               local_118 = (char *)((ulonglong)uVar23 >> 0x20);
               iVar9 = (**(code **)(*(int *)local_cc + 0x18))
@@ -719,7 +714,7 @@ LAB_97b9cb40:
     local_10c = 0;
     local_108 = 0;
     local_104 = 0;
-    uStack00000034 = param_8;
+    (*(uint *)((unsigned char *)ghidra_home + 28)) = param_8;
     pcVar14 = local_110;
     local_f0 = param_4;
     local_ec = (unsigned char *)param_5;
