@@ -3,7 +3,7 @@
 corpus: OUT_DIR/decls.h (prototypes + data/import declarations), OUT_DIR/part_NNN.c (PART_SIZE functions each, default 60),
 OUT_DIR/ledger.tsv (address, size, name, part, status). The function text is unchanged apart from: (1) class/struct-typed
 pointer types Ghidra invented become `unsigned char *` (byte arithmetic, as Ghidra models them); (2) comment header removed."""
-import sys, os, re, collections, struct
+import sys, os, re, collections, struct, importlib.util
 src, out = sys.argv[1], sys.argv[2]
 part = int(sys.argv[3]) if len(sys.argv) > 3 else 60
 text_ranges = []   # (lo, hi) of code sections: DAT_/LAB_/UNK_ addresses inside them are numeric constants Ghidra mislabels
@@ -472,6 +472,15 @@ for mh in sorted(set(re.findall(r'\b(__mh_\w+_header)\b', allbody))): decls.appe
 ftab = set(re.findall(r'\(\s*((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\)\s*\[', allbody)) | set(re.findall(r'\b((?:FLOAT|DOUBLE)_[0-9a-f]{8})\s*\[', allbody)) | tables
 for f in sorted(set(re.findall(r'\bFLOAT_[0-9a-f]{8}\b', allbody))): decls.append('extern float %s%s;' % (f, '[]' if f in ftab else ''))
 for f in sorted(set(re.findall(r'\bDOUBLE_[0-9a-f]{8}\b', allbody))): decls.append('extern double %s%s;' % (f, '[]' if f in ftab else ''))
+# prototypes a hand patch changes (patches.PROTO_OVERRIDES[scope][name] = the full `extern ...;` line): the dump's signature is what decls.h is generated from
+_ppo = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'patches.py')
+_po = {}
+if os.path.exists(_ppo):
+    _spo = importlib.util.spec_from_file_location('patches_po', _ppo); _mo = importlib.util.module_from_spec(_spo); _spo.loader.exec_module(_mo); _po = getattr(_mo, 'PROTO_OVERRIDES', {})
+for _pn, _pd in _po.get(os.environ.get('CORPUS_SCOPE', ''), {}).items():
+    _hit = [i_ for i_, d_ in enumerate(decls) if re.match(r'^extern [^(;]*\b%s\(' % re.escape(_pn), d_)]
+    if len(_hit) != 1: sys.exit('PROTO_OVERRIDES: %s declared %d times' % (_pn, len(_hit)))
+    decls[_hit[0]] = _pd
 open(os.path.join(out, 'decls.h'), 'w').write('\n'.join(decls) + '\n')
 print('thiscall arguments restored: %d (%d still without an object)' % (this_added, len(unresolved_this)))
 def fix_arrays(b):

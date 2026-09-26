@@ -181,6 +181,19 @@ def _fix_two_empty_cases(conv):
     return conv.replace('case "":', 'case 4:', 1).replace('case "":', 'case 5:', 1).replace('if (pcVar4 < "") {', 'if ((uint)pcVar4 < 6) {', 1)
 
 
+def _fix_242f0(conv):
+    old_hdr = 'void FUN_000242f0(double param_1,double param_2,double param_3,double param_4,double param_5,double param_6,double param_7,double param_8,int param_9,int param_10,undefined4 param_11,undefined4 param_12,undefined4 param_13,undefined4 param_14)\n'
+    if conv.count(old_hdr) != 1:
+        raise PatchError('FUN_000242f0 (0x242f0): header not found')
+    new_hdr = 'void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)\n'
+    body = conv.replace(old_hdr, '', 1)
+    def ren(m):
+        n = int(m.group(1))
+        return 'fparam_%d' % n if n <= 8 else 'param_%d' % (n - 8)
+    body = re.sub(r'\bparam_(\d+)\b', ren, body)
+    return new_hdr + body
+
+
 PATCHES = {
     # RETIRED 2026-09-25 (issue #71): yyparse (both TTypeLine _M_insert_aux sites), removeChildNode#1 (erase), removeChildNode#2 (_M_insert_aux) and the
     # two C2 -> C4 constructor aliases. Each dropped/misplaced argument was a symptom of the callee's by-value iterator / tag parameters (a
@@ -294,6 +307,11 @@ PATCHES = {
     # _M_destroy(this, alloc). Ghidra's signature has only `this`; the C passed an uninitialised `in_r4` (class PASS-yes in inreg_liveness.tsv). C: `in_r4` is the second parameter.
     '__ZNSs4_Rep10_M_disposeERKSaIcE': _scoped('glprog', _conv_with('_Rep::_M_dispose (0x97c13458)', [('(param_1)\n  unsigned char * param_1;\n{\n', '(param_1, in_r4)\n  unsigned char * param_1;\n  uint in_r4;\n{\n'), ('  int iVar3;\n  uint in_r4;\n', '  int iVar3;\n')])),
 
+    # FUN_000242f0 (gld, stock 0x242f0): the sibling of FUN_00024370 / 000243e0 ... (the vertex-array emitters). Its dump signature listed the eight pass-through FPR parameters FIRST
+    # (`double param_1..param_8, int param_9 ...`), so the prototype-style rebuilt function took its context pointer from the STACK (Darwin gives every double two GPR slots) instead of
+    # r3 - the pure-function fuzz saw the stock dereference the context and the rebuilt one never do. C: the sibling's signature (ints first, the doubles `fparam_N`).
+    'FUN_000242f0': _scoped('gld', lambda raw, conv: _fix_242f0(conv)),
+
     # TIntermSymbol::traverse(TIntermTraverser*) (glprog, stock 0x97b97d40, 20 bytes): `lwz r12,0(r4); cmpwi r12,0; beqlr; mtspr ctr,r12; bctr` - a tail
     # call of the traverser's visitSymbol callback (*(traverser+0)) with r3 = this (the symbol) and r4 = the traverser, both untouched. Ghidra printed
     # `(**(code **)param_2)();` with no arguments (found by the tiny-function scan of issue #67/#70). C: pass (this, param_2).
@@ -371,6 +389,13 @@ PATCHES = {
 
 # Declarations of undeclared data symbols that build_corpus.py's type heuristic gets wrong (it types a dereferenced name `unsigned char *`), by scope.
 # The machine code is the authority for each; see the patch comments above for the evidence.
+PROTO_OVERRIDES = {
+    'gld': {
+        # FUN_000242f0: see the patch (the dump lists the pass-through doubles first)
+        'FUN_000242f0': 'extern void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);',
+    },
+}
+
 EXTRA_DECL_FIXES = {
     'glprog': {
         # pointer to an 8-byte record of two words (InitializeGlobalPools, stock 0x97b9fe54: stw at +0 and +4)
