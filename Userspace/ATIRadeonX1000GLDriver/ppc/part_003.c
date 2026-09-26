@@ -1651,7 +1651,7 @@ int FUN_0001c380(param_1, param_2, param_3, param_4, param_5, param_6)
   int iVar49;
   int iVar50;
   byte *pbVar51;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   int iVar52;
   int iStack00000024;
   byte local_508 [4];

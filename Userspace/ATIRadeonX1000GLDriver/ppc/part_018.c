@@ -4539,7 +4539,7 @@ char * FUN_000cdc3c(undefined4 param_1,int param_2,char *param_3,double fparam_1
       uVar10 = (int)(dVar14 - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar10 = (uint)dVar14;
+      uVar10 = (uint)(int)dVar14;
       local_80 = (longlong)(int)uVar10;
     }
     uVar11 = 0;
@@ -4557,7 +4557,7 @@ char * FUN_000cdc3c(undefined4 param_1,int param_2,char *param_3,double fparam_1
         uVar5 = iVar8 + 0x80000000;
       }
       else {
-        uVar5 = (uint)dVar15;
+        uVar5 = (uint)(int)dVar15;
         local_68 = (longlong)(int)uVar5;
       }
       cVar6 = (char)(uVar13 / uVar5);
@@ -6770,7 +6770,7 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
           dVar11 = _log(dVar3);
           dVar10 = _floor(dVar10 / dVar11);
           local_78 = 0x43300000;
-          uVar7 = (uint)dVar10;
+          uVar7 = (uint)(int)dVar10;
           local_80 = (longlong)(int)uVar7;
           uStack_74 = uVar7 ^ 0x80000000;
           dVar11 = _pow(dVar3,(double)CONCAT44(0x43300000,uStack_74) - dVar2);
@@ -6784,7 +6784,7 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
             dVar11 = dVar9 / dVar11 + dVar10;
           }
           dVar9 = _floor(dVar11);
-          uVar5 = (uint)dVar9;
+          uVar5 = (uint)(int)dVar9;
           local_68 = (longlong)(int)uVar5;
           local_98[2] = 0x2e;
           iVar6 = 3;
@@ -6795,7 +6795,7 @@ double FUN_000d10dc(undefined4 param_1,uint param_2,undefined4 param_3,undefined
             dVar11 = (dVar11 - ((double)CONCAT44(0x43300000,uStack_5c) - dVar2)) * dVar3;
             dVar9 = _floor(dVar11);
             bVar1 = iVar6 != 9;
-            uVar5 = (uint)dVar9;
+            uVar5 = (uint)(int)dVar9;
             local_58 = (longlong)(int)uVar5;
             local_98[iVar6] = (char)uVar5 + '0';
             iVar6 = iVar6 + 1;

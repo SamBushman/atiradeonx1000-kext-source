@@ -981,7 +981,7 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
             local_dc = (int)(dVar48 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_dc = (uint)dVar44;
+            local_dc = (uint)(int)dVar44;
             local_178 = (longlong)(int)local_dc;
           }
           if (2147483648.0 <= dVar49) {
@@ -989,7 +989,7 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
             local_e0 = (int)(dVar49 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e0 = (uint)dVar46;
+            local_e0 = (uint)(int)dVar46;
             local_168 = (longlong)(int)local_e0;
           }
           if (2147483648.0 <= dVar50) {
@@ -997,7 +997,7 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
             local_e4 = (int)(dVar50 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e4 = (uint)dVar47;
+            local_e4 = (uint)(int)dVar47;
             local_158 = (longlong)(int)local_e4;
           }
           if (2147483648.0 <= dVar51) {
@@ -1005,7 +1005,7 @@ int _radeonCopy(param_1, param_2, param_3, param_4, param_5)
             local_e8 = (int)(dVar51 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_e8 = (uint)dVar45;
+            local_e8 = (uint)(int)dVar45;
             local_148 = (longlong)(int)local_e8;
           }
           if (bVar3) {
@@ -1807,7 +1807,7 @@ LAB_000056ac:
             local_104 = (int)(dVar62 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_104 = (uint)dVar59;
+            local_104 = (uint)(int)dVar59;
             local_2d8 = (longlong)(int)local_104;
           }
           if (2147483648.0 <= dVar63) {
@@ -1815,7 +1815,7 @@ LAB_000056ac:
             local_108 = (int)(dVar63 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_108 = (uint)dVar60;
+            local_108 = (uint)(int)dVar60;
             local_2c8 = (longlong)(int)local_108;
           }
           if (2147483648.0 <= dVar64) {
@@ -1823,7 +1823,7 @@ LAB_000056ac:
             local_10c = (int)(dVar64 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_10c = (uint)dVar61;
+            local_10c = (uint)(int)dVar61;
             local_2b8 = (longlong)(int)local_10c;
           }
           if (2147483648.0 <= dVar65) {
@@ -1831,7 +1831,7 @@ LAB_000056ac:
             local_110 = (int)(dVar65 - 2147483648.0) + 0x80000000;
           }
           else {
-            local_110 = (uint)dVar2;
+            local_110 = (uint)(int)dVar2;
             local_2a8 = (longlong)(int)local_110;
           }
           if (bVar14) {
@@ -2591,7 +2591,7 @@ LAB_00006d28:
               local_124 = iVar26 + 0x80000000;
             }
             else {
-              local_124 = (uint)dVar61;
+              local_124 = (uint)(int)dVar61;
               local_1d0 = (longlong)(int)local_124;
             }
             fVar5 = fVar9 * fVar6 * (float)((double)CONCAT44(0x43300000,uStack_1fc) -
@@ -2842,7 +2842,7 @@ LAB_0000789c:
               local_130 = iVar26 + 0x80000000;
             }
             else {
-              local_130 = (uint)dVar61;
+              local_130 = (uint)(int)dVar61;
               local_188 = (longlong)(int)local_130;
             }
             local_134 = local_134 + (int)*(short *)(piVar54 + 1);
@@ -3846,7 +3846,7 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                                                 4503601774854144.0));
                       local_1d0 = 0x43300000;
                       uStack_1cc = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4 = (uint)((fVar1 + 8.0) *
+                      local_2e4 = (uint)(int)((fVar1 + 8.0) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1cc) -
                                                       4503601774854144.0)));
                     }
@@ -3872,7 +3872,7 @@ int _radeonFill(param_1, param_2, param_3, param_4, param_5, param_6)
                                                 4503601774854144.0));
                       local_1f0 = 0x43300000;
                       uStack_1ec = (int)*(short *)(local_108 + 6) ^ 0x80000000;
-                      local_2e4 = (uint)((fVar1 + (float)((double)CONCAT44(0x43300000,local_f4) -
+                      local_2e4 = (uint)(int)((fVar1 + (float)((double)CONCAT44(0x43300000,local_f4) -
                                                          4503599627370496.0)) *
                                         (1.0 / (float)((double)CONCAT44(0x43300000,uStack_1ec) -
                                                       4503601774854144.0)));

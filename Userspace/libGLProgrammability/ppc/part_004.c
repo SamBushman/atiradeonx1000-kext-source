@@ -2803,7 +2803,7 @@ LAB_97b96174:
                     
             goto override_jmp_97b960f0_case_0;
           }
-          uVar6 = (uint)*(float *)(iVar10 * 4 + iVar8);
+          uVar6 = (uint)(int)*(float *)(iVar10 * 4 + iVar8);
           local_40 = (longlong)(int)uVar6;
         }
 LAB_97b9625c:

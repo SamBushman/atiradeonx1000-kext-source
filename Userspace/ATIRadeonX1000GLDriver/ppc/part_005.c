@@ -104,8 +104,8 @@ int FUN_0002ddf0(param_1, param_2)
   dVar31 = DOUBLE_001aa240;
   puVar27 = (ushort *)param_2[0xc];
   *(byte *)((int)param_2 + 0x3d) = (byte)(-(uint)puVar27[0x2e] >> 0x1f);
-  uVar15 = (uint)((double)*(float *)(puVar27 + 0x18) + dVar31);
-  uVar17 = (uint)((double)*(float *)(puVar27 + 0x1a) + dVar31);
+  uVar15 = (uint)(int)((double)*(float *)(puVar27 + 0x18) + dVar31);
+  uVar17 = (uint)(int)((double)*(float *)(puVar27 + 0x1a) + dVar31);
   uVar14 = (uint)*(byte *)(puVar27 + 0x2f);
   uVar16 = uVar15 + uVar14;
   if ((int)uVar16 < 0) {
@@ -475,8 +475,8 @@ LAB_0002e708:
   ((void (*)())FUN_0002d2b0)(piVar30,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
                (double)*(float *)(iVar28 + 0x24),(double)*(float *)(iVar28 + 0x28));
   uVar14 = (uint)*(byte *)((int)param_2 + 0xa5);
-  uVar15 = (uint)(*(float *)(iVar28 + 0x34) + FLOAT_001aa10c);
-  uVar17 = (uint)(*(float *)(iVar28 + 0x30) + FLOAT_001aa10c);
+  uVar15 = (uint)(int)(*(float *)(iVar28 + 0x34) + FLOAT_001aa10c);
+  uVar17 = (uint)(int)(*(float *)(iVar28 + 0x30) + FLOAT_001aa10c);
   if ((int)uVar14 < (int)uVar15) {
     uVar15 = uVar14;
   }
@@ -2819,7 +2819,7 @@ int FUN_00032100(param_1, param_2, param_3, param_4, param_5, param_6)
   uint uVar36;
   undefined *puVar37;
   undefined1 *puVar38;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   bool bVar39;
   bool bVar40;
   byte in_cr1;

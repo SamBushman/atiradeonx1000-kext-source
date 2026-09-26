@@ -735,7 +735,7 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, param_2, param_3)
   int iVar15;
   int iVar16;
   int iVar17;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   unsigned char * pTStack00000020;
   undefined4 local_1f0;
   uint local_1ec;

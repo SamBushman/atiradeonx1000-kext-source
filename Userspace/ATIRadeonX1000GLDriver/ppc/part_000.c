@@ -1803,7 +1803,7 @@ code_r0x00003264:
                         uVar13 = (int)(dVar54 - DOUBLE_001aa1e8) + 0x80000000;
                       }
                       else {
-                        uVar13 = (uint)dVar54;
+                        uVar13 = (uint)(int)dVar54;
                       }
                       pcVar30 = pcVar30 + 4;
                       *puVar43 = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
@@ -1924,7 +1924,7 @@ code_r0x00003264:
                       uVar13 = (int)(dVar54 - DOUBLE_001aa1e8) + 0x80000000;
                     }
                     else {
-                      uVar13 = (uint)dVar54;
+                      uVar13 = (uint)(int)dVar54;
                     }
                     psVar39 = psVar39 + 4;
                     *puVar43 = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;

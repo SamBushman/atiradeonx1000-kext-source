@@ -268,7 +268,7 @@ int FUN_001981ac(param_1, param_2)
   int *piVar23;
   undefined4 uVar24;
   int *piVar25;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   int iVar26;
   undefined8 uVar27;
   int local_f8;

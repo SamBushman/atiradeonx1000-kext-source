@@ -52,7 +52,7 @@ void _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4
       uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)dVar4;
+      uVar3 = (uint)(int)dVar4;
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
@@ -126,7 +126,7 @@ void _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4
       uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)dVar4;
+      uVar3 = (uint)(int)dVar4;
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
@@ -201,7 +201,7 @@ void _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4
       uVar3 = (int)(dVar4 - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      uVar3 = (uint)dVar4;
+      uVar3 = (uint)(int)dVar4;
       local_60 = (longlong)(int)uVar3;
     }
     if (1 < *(ushort *)(*piVar2 + 0x16) - 0x2700) {
@@ -593,7 +593,7 @@ LAB_97bd43d4:
   dVar11 = DOUBLE_97c30a88 + 0.0;
   dVar9 = DOUBLE_97c30a88 + 0.0;
   dVar10 = _floor((double)fVar2);
-  local_90 = (uint)dVar10;
+  local_90 = (uint)(int)dVar10;
   local_80 = (longlong)(int)local_90;
   dVar10 = _floor((double)(float)dVar11);
   local_8c = (int)dVar10;
@@ -745,10 +745,10 @@ LAB_97bd479c:
   dVar11 = DOUBLE_97c30a88 + 0.0;
   fVar3 = (float)((double)(fVar3 * fVar5) + DOUBLE_97c30a88);
   dVar12 = _floor((double)fVar2);
-  local_c0 = (uint)dVar12;
+  local_c0 = (uint)(int)dVar12;
   local_b0 = (longlong)(int)local_c0;
   dVar12 = _floor((double)fVar3);
-  local_bc = (uint)dVar12;
+  local_bc = (uint)(int)dVar12;
   local_b0 = (longlong)(int)local_bc;
   dVar11 = _floor((double)(float)dVar11);
   local_50 = 0x43300000;
@@ -949,13 +949,13 @@ LAB_97bd4cb4:
   fVar8 = (float)((double)(local_12c * fVar8) + DOUBLE_97c30a88);
   fVar9 = (float)((double)(local_128 * fVar9) + DOUBLE_97c30a88);
   dVar15 = _floor((double)fVar7);
-  local_120 = (uint)dVar15;
+  local_120 = (uint)(int)dVar15;
   local_110 = (longlong)(int)local_120;
   dVar15 = _floor((double)fVar8);
-  local_11c = (uint)dVar15;
+  local_11c = (uint)(int)dVar15;
   local_110 = (longlong)(int)local_11c;
   dVar15 = _floor((double)fVar9);
-  local_118 = (uint)dVar15;
+  local_118 = (uint)(int)dVar15;
   local_110 = (longlong)(int)local_118;
   local_70 = 0x43300000;
   uStack_6c = local_118 ^ 0x80000000;
@@ -1148,10 +1148,10 @@ LAB_97bd51b0:
     dVar11 = DOUBLE_97c30a88 + 0.0;
     fVar5 = (float)((double)param_4[1] + DOUBLE_97c30a88);
     dVar12 = _floor((double)fVar4);
-    local_c0 = (uint)dVar12;
+    local_c0 = (uint)(int)dVar12;
     local_b0 = (longlong)(int)local_c0;
     dVar12 = _floor((double)fVar5);
-    local_bc = (uint)dVar12;
+    local_bc = (uint)(int)dVar12;
     local_b0 = (longlong)(int)local_bc;
     dVar11 = _floor((double)(float)dVar11);
     local_50 = 0x43300000;
@@ -1461,7 +1461,7 @@ double _InterpreterNoiseGeneratorInterpolatedNoise1D(int param_1,float *param_2)
   uint uStack_24;
   
   dVar2 = _floor((double)*param_2);
-  uVar1 = (uint)dVar2;
+  uVar1 = (uint)(int)dVar2;
   local_30 = (longlong)(int)uVar1;
   dVar2 = _floor((double)param_2[1]);
   local_30 = (longlong)(int)dVar2;
@@ -1523,10 +1523,10 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int param_1,float *param_2)
   uint uStack_24;
   
   dVar5 = _floor((double)*param_2);
-  uVar1 = (uint)dVar5;
+  uVar1 = (uint)(int)dVar5;
   local_30 = (longlong)(int)uVar1;
   dVar5 = _floor((double)param_2[1]);
-  uVar2 = (uint)dVar5;
+  uVar2 = (uint)(int)dVar5;
   local_30 = (longlong)(int)uVar2;
   local_28 = 0x43300000;
   uStack_24 = uVar2 ^ 0x80000000;
@@ -1600,13 +1600,13 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int param_1,float *param_2)
   uint uStack_24;
   
   dVar9 = _floor((double)*param_2);
-  uVar5 = (uint)dVar9;
+  uVar5 = (uint)(int)dVar9;
   local_30 = (longlong)(int)uVar5;
   dVar9 = _floor((double)param_2[1]);
-  uVar7 = (uint)dVar9;
+  uVar7 = (uint)(int)dVar9;
   local_30 = (longlong)(int)uVar7;
   dVar9 = _floor((double)param_2[2]);
-  uVar1 = (uint)dVar9;
+  uVar1 = (uint)(int)dVar9;
   local_30 = (longlong)(int)uVar1;
   local_28 = 0x43300000;
   uStack_24 = uVar1 ^ 0x80000000;
@@ -2461,8 +2461,8 @@ LAB_97bd74b4:
     fVar3 = param_2[3];
     goto LAB_97bd74b4;
   }
-  uVar10 = (uint)((double)*param_2 * DOUBLE_97c30a98);
-  uVar5 = (uint)((double)*param_3 * DOUBLE_97c30a98);
+  uVar10 = (uint)(int)((double)*param_2 * DOUBLE_97c30a98);
+  uVar5 = (uint)(int)((double)*param_3 * DOUBLE_97c30a98);
   uVar7 = ((int)((double)param_2[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar10 << 0x18;
   uVar8 = ((int)((double)param_2[2] * DOUBLE_97c30a98) & 0xffU) << 8 | uVar7;
   uVar11 = ((int)((double)param_3[1] * DOUBLE_97c30a98) & 0xffU) << 0x10 | uVar5 << 0x18;

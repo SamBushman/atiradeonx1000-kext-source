@@ -285,7 +285,7 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   bytes Ghidra saw of a token buffer (`char local_120; char local_11f;` + `GetPart(p, &local_120, 0)`; `rewrites.mirror_frame` now reserves 0x100 bytes above an
   address-taken byte scalar); the libgcc 64-bit shift helpers differ for out-of-range counts only (toolchain functions, excluded); `saveFP`/`restFP` millicode
   and two clipped fragments are not functions.
-* **GLDriver: 2723 candidate functions, 12 trials each.** Fifteen real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
+* **GLDriver: 2723 candidate functions, 12 trials each.** Eighteen real defect classes (all in the C, none in the stock), found by triaging the differences and fixed in `ghidra2c.py`:
   1. `fix_code_offsets` - a struct-field OFFSET that equals a function's address is printed as that function's symbol (`*(int *)(FUN_00024870 + i * 4 + param_1) = ..`:
      `addis r2,r2,2; stw r4,0x4870(r2)`); the link tree resolves the name to the rebuilt function's address, so FUN_00077560 stored through a wild pointer.
      ~690 sites (context offsets 0x2748, 0x26c8, 0x1e24, 0x1dc4 ...), and `((code **)FUN_00030c50)[i]` table bases. Nothing adds to a function's address.
@@ -324,6 +324,12 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   15. `(&DAT_001e6158)[iVar2]` is Ghidra's index into an array of ITS data type (undefined4: the stock does `rlwinm r0,r3,2,0,29; lwzx`); the corpus declares such a table
      `unsigned char X[]` (it is also used for byte arithmetic), so the rebuilt index scaled by 1 and read a byte (GLDriver FUN_001771b0 / FUN_0017729c / FUN_0002ddf0's
      neighbours, 20 sites, 7 tables): `link_corpus.py` now indexes through a pointer of the Ghidra type's width (`sized_index_tables`).
+  16. `(uint)(float expression)` - a float -> integer conversion the stock does with `fctiwz` alone (SIGNED, saturating; the unsigned conversion is the compare-with-2^31 idiom
+     Ghidra prints as an explicit branch) - compiled to C's unsigned conversion: a garbage size >= 2^31 gave a different word (FUN_0002ddf0's clamp). Now `(uint)(int)` (206 sites).
+  17. `byte in_xer_so;` (the summary-overflow bit merged into CR images: `(a == b) << 1 | in_xer_so & 1`, 4 functions) was uninitialised stack; the stock's XER[SO] is 0.
+  18. Zerofill (bss / common) objects were each aligned to the section alignment: DAT_001f65e7 (7981 bytes, stock address 0x1f65e7) landed on an 8-byte boundary, one byte away from the
+     DAT_001f65e4..e6 it belongs to (FUN_0001c380's pixel-conversion buffer is indexed as ONE object). Every object now follows the previous one at the stock offset (alignment 0; the
+     first object keeps the stock address's alignment), so relative addresses inside bss / common are the stock's.
   Regression found and fixed the same day: the glprog / VA parts committed at s31 had been regenerated before the `*(float *)` bit-copy rule was restricted to memory-word destinations,
   so real float -> int conversions in the interpreter had become bit reinterpretations (the differential tests did not reach them); regenerated and re-verified.
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the

@@ -6530,7 +6530,7 @@ int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
       fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
       dVar7 = (double)fVar3;
       if (DOUBLE_97c30a78 <= dVar7) {
-        uVar6 = (uint)(dVar7 - DOUBLE_97c30a78);
+        uVar6 = (uint)(int)(dVar7 - DOUBLE_97c30a78);
       }
       else {
         uVar6 = (uint)fVar3;

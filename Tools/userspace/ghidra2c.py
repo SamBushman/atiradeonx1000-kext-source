@@ -686,6 +686,11 @@ def fix_float_int(b, entry):
             if base and (re.match(r'^(?:f)Var\d+$', base.group(1)) or base.group(1) in floc or re.match(r'^pfVar\d+$', base.group(1)) and ('[' in opd or opd.startswith('*'))) \
                and not re.search(r'[+\-*/]\s', opd):
                 out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
+        if ty == 'uint' and not opd.startswith('(int)') and not opd.startswith('GH_') and (re.match(r'^d(?:Var)\d+$', opd) or (_FLOATY.search(opd) and re.search(r'(?<![\w.])[-+*/]\s|\s[-+*/]\s', opd) and re.search(r'\bFLOAT_|\bDOUBLE_|\(double\)|\bdVar\d+|\*\(float \*\)|\(float\)', opd) and 'CONCAT44' not in opd.split('(float)')[0])):
+            # `uVar15 = (uint)(*(float *)(p + 0x34) + FLOAT_001aa10c)`: a float -> integer conversion the stock does with `fctiwz` alone (a SIGNED, saturating conversion; the unsigned
+            # conversion is the compare-with-2^31 idiom, which Ghidra prints as an explicit branch). C's `(uint)` of a double is the unsigned conversion: values >= 2^31 gave a different
+            # word (GLDriver FUN_0002ddf0: a garbage viewport size changed a 4-bit field). `(uint)(int)` is exactly `fctiwz`.
+            out.append(b[i:en]); out.append('(int)'); i = en; n += 1; continue
         out.append(b[i:en]); i = en
     return ''.join(out), n
 # Callee parameter types by name, for fix_float_args
@@ -877,6 +882,9 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
             b, _nnan = fix_nan(b, int(a, 16))
+            # `byte in_xer_so;` is the summary-overflow bit copied into the CR images the code builds (`(a == b) << 1 | in_xer_so & 1`); the stock's XER[SO] is 0 (no `o`
+            # instruction, no mtxer sets it) and the rebuilt local was uninitialised stack (GLDriver FUN_0001c380, 22 uses in 4 functions)
+            b = re.sub(r'(?m)^(\s*(?:byte|uchar|undefined1|char)\s+in_xer_(?:so|ov|ca))\s*;', r'\1 = 0;', b)
             b, _nns = fix_neg_shift(b)
             b, _nco = fix_code_offsets(b)
             b, _nlit = fix_literal_syms(b, int(a, 16))

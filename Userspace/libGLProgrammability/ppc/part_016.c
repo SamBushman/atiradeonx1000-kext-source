@@ -2815,7 +2815,7 @@ int _glpPPDisassemble(param_1)
   int iVar22;
   uint uVar23;
   float *pfVar24;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   uint uVar25;
   double in_f3;
   double in_f4;

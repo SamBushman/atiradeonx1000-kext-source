@@ -1435,7 +1435,7 @@ char * FUN_0000bfa0(undefined4 param_1,undefined4 param_2,char *param_3,uint par
       local_68 = 0x43300000;
       uStack_64 = local_78[0] ^ 0x80000000;
       dVar11 = _round(((double)CONCAT44(0x43300000,uStack_64) - DOUBLE_001aa1e0) * DOUBLE_001aa218);
-      local_78[0] = (uint)dVar11;
+      local_78[0] = (uint)(int)dVar11;
       local_60 = (longlong)(int)local_78[0];
       dVar12 = (double)((double (*)())FUN_0000be70)(local_78[0],extraout_r4,puVar4,param_4,in_r7,in_r8,puVar5);
       dVar11 = (double)((double (*)())FUN_0000be70)(-local_78[0],extraout_r4_00,puVar4,param_4,in_r7,in_r8,puVar5);

@@ -4455,7 +4455,7 @@ char * _glp_dtostr(undefined4 param_1,undefined4 param_2,char *param_3,uint para
       _frexp(fparam_1,local_50);
       dVar8 = _round(((double)CONCAT44(0x43300000,local_50[0] ^ 0x80000000) - DOUBLE_97c30a58) *
                      DOUBLE_97c30ad0);
-      local_50[0] = (uint)dVar8;
+      local_50[0] = (uint)(int)dVar8;
       dVar8 = (double)((double (*)())_pow_10)(local_50[0]);
       dVar9 = (double)((double (*)())_pow_10)(-local_50[0]);
       dVar10 = fparam_2 * dVar8;

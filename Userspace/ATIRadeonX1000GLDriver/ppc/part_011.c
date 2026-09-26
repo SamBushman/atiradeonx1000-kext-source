@@ -3799,7 +3799,7 @@ int FUN_0007c760(param_1)
   int *piVar32;
   int iVar33;
   uint *puVar34;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   int iVar35;
   int iVar36;
   undefined8 uVar37;
@@ -4734,7 +4734,7 @@ int FUN_0007dde0(param_1, param_2)
   uint uVar30;
   int iVar31;
   int iVar32;
-  byte in_xer_so;
+  byte in_xer_so = 0;
   bool bVar33;
   bool bVar34;
   bool bVar35;

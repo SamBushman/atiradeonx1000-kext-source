@@ -3647,7 +3647,7 @@ int FUN_0008f7f0(param_1, param_2, param_3, param_4, param_5)
   fVar3 = (float)((double)CONCAT44(0x43300000,uStack_54) - 4503601774854144.0);
   fVar4 = (float)((double)CONCAT44(0x43300000,uStack_5c) - 4503601774854144.0);
   fVar5 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503599627370496.0);
-  a6 = (uint)(*(float *)(param_1 + 0x2818) * 0.5 * fVar5 * (fVar3 - fVar2));
+  a6 = (uint)(int)(*(float *)(param_1 + 0x2818) * 0.5 * fVar5 * (fVar3 - fVar2));
   local_40 = (longlong)(int)a6;
   iVar17 = (int)(fVar5 * *(float *)(param_1 + 0x2814) * 0.5 * (fVar1 - fVar4));
   local_38 = (longlong)iVar17;

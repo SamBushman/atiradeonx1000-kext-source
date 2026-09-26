@@ -6824,7 +6824,7 @@ int FUN_000c1f80(param_1, param_2, param_3)
             uVar9 = (int)(dVar17 - DOUBLE_001aa1e8) + 0x80000000;
           }
           else {
-            uVar9 = (uint)dVar17;
+            uVar9 = (uint)(int)dVar17;
           }
           switch(uVar9) {
           case 1:
@@ -8920,7 +8920,7 @@ int FUN_000c4ce0(param_1, param_2, param_3)
         iVar15 = 0;
         iVar8 = iVar17;
         do {
-          uVar13 = (uint)((double)*(float *)(iVar8 + 0x2c) * DOUBLE_001aa290);
+          uVar13 = (uint)(int)((double)*(float *)(iVar8 + 0x2c) * DOUBLE_001aa290);
           uStack_31 = (undefined1)uVar13;
           switch(uVar13 & 0xff) {
           case 1:

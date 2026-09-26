@@ -848,7 +848,10 @@ for s in data_secs:
                 S.append('.globl %s' % n)
             if a2 in targets and not names:
                 S.append('.globl LD_%x' % a2)
-            S.append('.zerofill %s,%s,%s,%d,%d' % (s['seg'], s['name'], first, size, min(s['align'], 4) if size >= (1 << min(s['align'], 4)) else 0))
+            # Alignment 0 for every object but the first: each object's size is the whole gap to the next label, so objects laid out in address order without padding keep the
+            # stock's exact offsets - and with them the stock's alignment, from the section's start. Aligning a later object (7981-byte DAT_001f65e7, 8-aligned) moved it one
+            # byte away from DAT_001f65e4..e6, which the pixel-conversion code (FUN_0001c380) indexes as ONE buffer (`DAT_001f65e4[i]`, `DAT_001f65e5[i]`, `&DAT_001f65e7 + i*4`).
+            S.append('.zerofill %s,%s,%s,%d,%d' % (s['seg'], s['name'], first, size, min(4, (a2 & -a2).bit_length() - 1) if k == 0 and a2 == a else 0))   # the first object: the stock address's own alignment (up to 16), the rest follow it at the stock offsets
             for n in names[1:]:
                 S.append('.set %s, %s' % (n, first))
             if a2 in targets and names:
