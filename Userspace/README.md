@@ -309,6 +309,13 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
      rebuilt image); a `((unsigned char *)0x...)` literal that is a function entry of the link is now that function's label (`link_corpus.py`).
   10. Four libm calls in the vertex-program emulator's scalar built-ins (0x1d05b0 cos, 0x1d0794 sin, 0x1d06ec rsqrt, 0x1d0820 sqrt) lost their arguments (and the virtual
      call in front of sin / cos): `patches.py`.
+  11. `_vfree();` with no argument in FUN_00029290's pixel-upload path (`lwz r3,0x2934(r25); bl _vfree`): `patches.py`.
+  Audit gap closed on the way: GLDriver's stock disassembly used by the static audits (`indirect_args`, `inreg_liveness`, `callarg_check`, ...) covered `__text` only, not the
+  764 functions of `__textcoal_nt` (0x1cd664-0x1d8fe4); rerun with `otool -s __TEXT __textcoal_nt -v` appended: only the two vcalls above (sin / cos) were missing.
+  12. A float stored as a WORD into an int-typed slot: `param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000, x) - m)` (FUN_0002ddf0, 9 sites; GA 25 sites) and
+     `param_2[0x24] = (int)*(float *)(p + 0x2c)`: C converted the value (1.0f became 1), the stock does `frsp; stfs` / `lfs; stfs`. `fix_float_int` now treats a cast of
+     a float-valued operand as a bit copy unless the function really converts a `frsp` / `lfs` result with `fctiwz` (`_FRSPCT`, counted per function) - and, for
+     `*(float *)`, only when the destination is a memory word.
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
   wrong rebuilt function and reports crashes that are not there.
 ### Undeclared argument registers (`in_rN`, issue #70)
@@ -318,6 +325,10 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
 * USED (the body reads the entry value) - three real missing parameters, all fixed: GLDriver glAccum `FUN_00002ae0` (r4, the op), glprog
   `TPPStreamCompiler::error` / `::warning` (r3 = `this`: Ghidra applied the demangled `(bool, ...)` from r3, the body read `this` as an uninitialised
   `in_r3`, and callers passed `SUB41(this, 0)`, the low byte of it - every preprocessor error / warning path of the rebuilt image dereferenced garbage).
+* **Re-run 2026-09-26** against the current dumps and the complete stock disassembly (GLDriver's `__textcoal_nt` added; the committed tables had been made from earlier
+  dumps): three more USED rows, found by the pure-function fuzz and fixed in `patches.py` - GLDriver `FUN_0014694c` and `FUN_0019d478` (r5, third parameter; only reached
+  through pointers) and glprog `_glpDCBRealloc` (r4, the size: all four callers pass it, the C read an uninitialised local); glprog
+  `std::string::_Rep::_M_dispose` forwards the caller's r4 (the allocator) to `_M_destroy` (PASS-yes). Tables regenerated.
 * RET (only the return reads it: r3/r4 untouched on some path, a return-value question) - 1 GLDriver, 4 glprog; DEAD - 1 glprog (a saveFP piece).
 * PASS (the entry value only reaches a call): the callee chain never reads it (118 GLDriver, 85 glprog, 2 VA), it only reaches the `...` of a variadic
   function (15 glprog: `TParseContext::error`, `TPPStreamCompiler::error`), or it reaches a call through a pointer / an import / more than 3 levels

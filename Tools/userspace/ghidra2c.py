@@ -336,6 +336,21 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
                         elif op2 == 14 and ((w2 >> 16) & 31) == rd: _cs.add((hi + ((w2 & 0xffff) - (0x10000 if w2 & 0x8000 else 0))) & 0xffffffff)   # addi rA,rD,simm
                         if op2 in (14, 15, 24, 25, 32, 33, 34, 35) and ((w2 >> 21) & 31 if op2 in (14, 15, 32, 33, 34, 35) else (w2 >> 16) & 31) == rd and y != x: break   # rD overwritten
             _LITC[int(_f[0], 16)] = _cs
+    _FRSPCT = {}   # functions in which a `frsp` / `lfs` result is converted to an integer (`frsp fX,fY` ... `fctiwz fZ,fX`): a REAL float -> int conversion of a float value
+    for _l in open(os.path.join(src, 'RANGES.tsv')):
+        _f = _l.rstrip('\n').split('\t')
+        if len(_f) > 3 and _f[0].startswith('0x') and _f[2] == 'fn':
+            for _r in _f[3].split(';'):
+                if not _r: continue
+                _lo, _hi = (int(x, 16) for x in _r.split('-'))
+                for x in range(_lo, _hi, 4):
+                    w = _word(x)
+                    if ((w >> 26) == 63 and ((w >> 1) & 0x3ff) == 12) or (w >> 26) == 48:      # frsp fD,fB  /  lfs fD,d(rA)
+                        fr = (w >> 21) & 31
+                        for y in range(x + 4, min(x + 36, _hi), 4):
+                            w2 = _word(y)
+                            if (w2 >> 26) == 63 and ((w2 >> 1) & 0x3ff) in (14, 15) and ((w2 >> 11) & 31) == fr: _FRSPCT[int(_f[0], 16)] = _FRSPCT.get(int(_f[0], 16), 0) + 1
+                            if (w2 >> 26) == 63 and ((w2 >> 21) & 31) == fr and y != x: break
     _DISP = {}   # D-form displacements / addi immediates each function uses (the numbers `fix_code_strings` picks between)
     for _l in open(os.path.join(src, 'RANGES.tsv')):
         _f = _l.rstrip('\n').split('\t')
@@ -657,6 +672,11 @@ def fix_float_int(b, entry):
             # an integer expression made float without the conversion sequence
             if opd and not _FLOATY.search(opd) and not opd.startswith('('+'double'):
                 out.append(b[i:st]); out.append('GH_U2F((unsigned int)(%s))' % opd); i = e; n += 1; continue
+        elif _FCTIW is not None and (opd.startswith('(float)') or (opd.startswith('*(float *)') and re.search(r'[\])]\s*=\s*$', b[max(0, st - 40):st]))) and (opd.startswith('(float)((double)CONCAT44(0x43300000') or _FRSPCT.get(entry, 0) < len(re.findall(r'\((?:int|uint|undefined4|ulong)\)(?:\(float\)|\*\(float \*\))', b))):
+            # `param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000, x) - magic)`: the int -> float conversion sequence followed by `frsp; stfs` into a word Ghidra
+            # typed int - the word holds the FLOAT's bits (1.0f = 0x3f800000), C's `(int)` converted the value (1). Only in a function without fctiw*, or when the operand is
+            # itself a fresh int -> float conversion (a float -> int conversion of one is never written): GLDriver FUN_0002ddf0 (9 sites), GA 0x8260 / 0xa5a0 / 0xba90 (9)
+            out.append(b[i:st]); out.append('(%s)GH_F2U(%s)' % (ty, opd)); i = e; n += 1; continue
         elif _FCTIW is not None and entry not in _FCTIW:
             base = re.match(r'^\*?\(?\s*([A-Za-z_]\w*)', opd)
             if base and (re.match(r'^(?:f)Var\d+$', base.group(1)) or base.group(1) in floc or re.match(r'^pfVar\d+$', base.group(1)) and ('[' in opd or opd.startswith('*'))) \

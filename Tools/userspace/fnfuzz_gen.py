@@ -4,7 +4,11 @@
 A function is a candidate when its stock code has no indirect call, no system call, no special-register or atomic / cache instruction and calls no import
 outside a small whitelist (memcpy/memset/str*/libm): it can then be called with arbitrary arguments in a scratch process, stock and rebuilt, and the results
 compared. One row per candidate: id, C name, stock address, rebuilt file offset (from nm, via the C name's asm label in decls.h), size, parameter classes
-(p pointer, i integer or unknown word, n definite integer, f float, d double, L 64-bit integer; from the dump's signature) and the return class (i, d, v)."""
+(p pointer, i integer or unknown word, n definite integer, f float, d double, L 64-bit integer; from the dump's signature) and the return class (i, d, v).
+
+STOCK_DIS must cover EVERY code section: `otool -tv` (__text) plus `otool -s __TEXT __textcoal_nt -v`. GLDriver keeps 764 functions (42 KB, the vertex-program emulator's
+built-ins among them) in __textcoal_nt; a __text-only disassembly made them look like candidates with no forbidden instruction, and left the same functions out of
+every other stock-code audit (indirect_args, inreg_liveness, ...)."""
 import sys, re, os
 key, dis, dump, link, snm, rnm, out = sys.argv[1:8]
 WL = set('memcpy memset bcopy memmove memcmp strlen strcmp strncmp strcpy strncpy strcat strchr strrchr bzero sqrt sqrtf pow powf exp exp2 log log2 log10 sin cos tan atan atan2 asin acos floor ceil fabs fmod modf frexp ldexp abs labs'.split())

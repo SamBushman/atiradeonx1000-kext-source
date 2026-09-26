@@ -185,8 +185,8 @@ int FUN_0002ddf0(param_1, param_2)
     *(undefined1 *)((int)param_2 + 0x6d) = 2;
     uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
     *(short *)(param_2 + 0x1e) = (short)uVar21;
-    param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31);
-    param_2[0x21] = (int)(float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31);
+    param_2[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
+    param_2[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 1:
     uVar22 = 1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f);
@@ -195,8 +195,8 @@ int FUN_0002ddf0(param_1, param_2)
     *(undefined1 *)((int)param_2 + 0x6d) = 3;
     uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
     *(short *)(param_2 + 0x1e) = (short)uVar21;
-    param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31);
-    param_2[0x21] = (int)(float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31);
+    param_2[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
+    param_2[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 2:
     uVar22 = (uint)puVar27[uVar16 * 0xc + 0x52] +
@@ -207,8 +207,8 @@ int FUN_0002ddf0(param_1, param_2)
     *(undefined1 *)((int)param_2 + 0x6d) = 2;
     uVar21 = (uint)uVar9 + (uint)bVar3 * -2;
     *(short *)(param_2 + 0x1e) = (short)uVar21;
-    param_2[0x20] = (int)(float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31);
-    param_2[0x21] = (int)(float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31);
+    param_2[0x20] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar22 & 0xffff) - dVar31));
+    param_2[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 3:
     iVar26 = ((int (*)())FUN_0002dcf0)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
@@ -232,9 +232,9 @@ int FUN_0002ddf0(param_1, param_2)
     uVar19 = (uint)*(ushort *)(param_2 + 0x1d);
     uVar18 = (uint)*(ushort *)(param_2 + 0x1f);
     param_2[0x21] =
-         (int)(float)((double)CONCAT44(0x43300000,(uint)*(ushort *)(param_2 + 0x1e)) - dVar31);
+         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)(param_2 + 0x1e)) - dVar31));
     param_2[0x20] =
-         (int)(float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)param_2 + 0x76)) - dVar31);
+         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)param_2 + 0x76)) - dVar31));
     break;
   case 4:
     iVar26 = ((int (*)())FUN_0002dcf0)(param_2,uVar18,uVar19,uVar22,uVar20,uVar21);
@@ -256,8 +256,8 @@ int FUN_0002ddf0(param_1, param_2)
     uVar19 = (uint)*(ushort *)(param_2 + 0x1d);
     uVar18 = (uint)*(ushort *)(param_2 + 0x1f);
     param_2[0x20] =
-         (int)(float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)param_2 + 0x76)) -
-                     DOUBLE_001aa250);
+         (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)param_2 + 0x76)) -
+                     DOUBLE_001aa250));
   }
   if (((((bVar1 != uVar20) || (bVar2 != bVar25)) || ((uint)uVar7 != (uVar22 & 0xffff))) ||
       (((uint)uVar8 != (uVar21 & 0xffff) || ((uint)uVar5 != (uVar17 & 0xffff))))) ||
@@ -323,7 +323,7 @@ int FUN_0002ddf0(param_1, param_2)
   iVar26 = param_2[0xc];
   cVar29 = *(char *)((int)param_2 + 0x72);
   if (GH_U2F((unsigned int)(param_2[0x24])) != *(float *)(iVar26 + 0x2c)) {
-    param_2[0x24] = (int)*(float *)(iVar26 + 0x2c);
+    param_2[0x24] = (int)GH_F2U(*(float *)(iVar26 + 0x2c));
     dVar31 = (double)*(float *)(iVar26 + 0x2c);
     if (DOUBLE_001aa1e8 <= dVar31) {
       iVar28 = (int)(dVar31 - DOUBLE_001aa1e8) + -0x80000000;

@@ -3040,14 +3040,14 @@ int FUN_0019d474()
 }
 
 /* FUN_0019d478 @ 0x19d478 (140 bytes) */
-int FUN_0019d478(param_1, param_2)
+int FUN_0019d478(param_1, param_2, in_r5)
   int param_1;
   int *param_2;
+  int in_r5;
 {
   uint uVar1;
   uint uVar2;
   undefined4 *puVar3;
-  int in_r5;
   
   if (in_r5 == 0) {
     puVar3 = (undefined4 *)0x0;

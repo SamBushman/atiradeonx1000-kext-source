@@ -1,4 +1,3 @@
-entry	function	register	class	first reader / imports
 97b7dadc	_PPParserParseStatement	r9	PASS-no	97b7db00 bl _PPParserGetPart
 97b86434	_CPPdefine	r5	PASS-indirect	97b86488 bctrl 
 97b86434	_CPPdefine	r6	PASS-indirect	97b86488 bctrl 
@@ -77,10 +76,14 @@ entry	function	register	class	first reader / imports
 97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r5	PASS-no	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
 97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r6	PASS-indirect	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
 97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	r7	PASS-indirect	97b8b95c bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8c5c0	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	r6	PASS-no	97b8c644 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8c5c0	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	r7	PASS-no	97b8c644 bl 0x97c1e940	; symbol stub for: __Z22GetGl
+97b8c5c0	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	r8	PASS-no	97b8c644 bl 0x97c1e940	; symbol stub for: __Z22GetGl
 97b8e624	TIntermediate::addConversion	r7	PASS-indirect	97b8e65c bctrl 
 97b8e624	TIntermediate::addConversion	r8	PASS-indirect	97b8e65c bctrl 
 97b8fae0	TIntermediate::addComma	r7	PASS-indirect	97b8fb1c bctrl 
 97b8fae0	TIntermediate::addComma	r8	PASS-indirect	97b8fb1c bctrl 
+97b8fc3c	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	r8	PASS-indirect	97b8fc84 bctrl 
 97b915d4	compareStructure	r7	PASS-indirect	97b91630 bctrl 
 97b915d4	compareStructure	r8	PASS-indirect	97b91630 bctrl 
 97b95c0c	TIntermediate::changeAggrToTempConst	r7	PASS-indirect	97b95c44 bctrl 
@@ -268,6 +271,8 @@ entry	function	register	class	first reader / imports
 97c08ca4	_HashTableGet	r6	PASS-indirect	97c08ccc bctrl 
 97c08ca4	_HashTableGet	r7	PASS-indirect	97c08ccc bctrl 
 97c08ca4	_HashTableGet	r8	PASS-indirect	97c08ccc bctrl 
+97c10924	_glpDCBRealloc	r4	USED	97c10928 or. r29,r4,r4
+97c13458	__ZNSs4_Rep10_M_disposeERKSaIcE	r4	PASS-yes	97c13474 b __ZNSs4_Rep10_M_destroyERKSaIcE
 97c1a23c	FUN_97c1a23c	r3	DEAD	
 97c1a25c	FUN_97c1a25c	r3	RET	97c1a270 blr 
 97c1bb6c	__Unwind_RaiseException	r6	PASS-no	97c1bb74 bl save_world

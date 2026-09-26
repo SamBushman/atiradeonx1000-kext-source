@@ -117,13 +117,13 @@ int __ZNSs4_Rep10_M_refdataEv(this)
 }
 
 /* __ZNSs4_Rep10_M_disposeERKSaIcE @ 0x97c13458 (32 bytes) */
-int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1)
+int __ZNSs4_Rep10_M_disposeERKSaIcE(param_1, in_r4)
   unsigned char * param_1;
+  uint in_r4;
 {
   int iVar1;
   unsigned char * paVar2;
   int iVar3;
-  uint in_r4;
   char in_RESERVE;
   byte in_cr0;
   

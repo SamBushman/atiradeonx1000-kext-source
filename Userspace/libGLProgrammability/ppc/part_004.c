@@ -2803,7 +2803,7 @@ LAB_97b96174:
                     
             goto override_jmp_97b960f0_case_0;
           }
-          uVar6 = (uint)*(float *)(iVar10 * 4 + iVar8);
+          uVar6 = (uint)GH_F2U(*(float *)(iVar10 * 4 + iVar8));
           local_40 = (longlong)(int)uVar6;
         }
 LAB_97b9625c:
@@ -4323,7 +4323,7 @@ code_r0x97b98bfc:
                 if (iVar8 == 1) {
                   uVar10 = *(uint *)(param_2 + 0x60) >> 0x13 & 0x3f;
                   if (uVar10 == 2) {
-                    iVar8 = (int)*(float *)(iVar14 * 4 + iVar17);
+                    iVar8 = (int)GH_F2U(*(float *)(iVar14 * 4 + iVar17));
                     local_58 = (longlong)iVar8;
                     *(int *)(*(int *)(param_2 + 0x30) * 4 + iVar12) = iVar8;
                   }

@@ -274,6 +274,26 @@ PATCHES = {
     'FUN_001d06ec': _scoped('gld', _conv_with('FUN_001d06ec (0x1d06ec)', [('dVar2 = (double)_sqrt();', 'dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));')])),
     'FUN_001d0820': _scoped('gld', _conv_with('FUN_001d0820 (0x1d0820)', [('dVar2 = (double)_sqrt();', 'dVar2 = (double)_sqrt((double)*(float *)(param_3 + 4));')])),
 
+    # FUN_00029290 (gld, stock 0x29290; the pixel-upload path): `lwz r3,0x2934(r25); cmpwi r3,0; beq; bl _vfree` (0x29ad0..0x29adc) frees the staging buffer that the
+    # test just read - Ghidra printed `_vfree();` with no argument, the rebuilt call freed whatever r3 held. The other four `_vfree` calls of the function kept theirs.
+    'FUN_00029290': _scoped('gld', _conv_with('FUN_00029290 (0x29ad0)', [(
+        'if (*(int *)(((unsigned char *)0x00002b74) + param_1) != 0) {\n                  _vfree();',
+        'if (*(int *)(((unsigned char *)0x00002b74) + param_1) != 0) {\n                  _vfree(*(int *)(((unsigned char *)0x00002b74) + param_1));')])),
+
+    # FUN_0014694c / FUN_0019d478 (gld, stock 0x14694c `cmpwi cr7,r5,0` at the entry; 0x19d478 `or. r28,r5,r5` at 0x19d47c): a third parameter (r5) that Ghidra's signature
+    # lacks - the body reads it as an uninitialised `in_r5` (inreg_liveness.py class USED; both are only called through pointers, so no direct caller shows it). Found by
+    # the pure-function fuzz (the rebuilt FUN_0014694c dereferenced whatever the stack held). C: `in_r5` becomes the third parameter.
+    'FUN_0014694c': _scoped('gld', _conv_with('FUN_0014694c (0x14694c)', [('(param_1, param_2)\n  int param_1;\n  undefined4 param_2;\n{\n  int iVar1;\n  int in_r5;\n', '(param_1, param_2, in_r5)\n  int param_1;\n  undefined4 param_2;\n  int in_r5;\n{\n  int iVar1;\n')])),
+    'FUN_0019d478': _scoped('gld', _conv_with('FUN_0019d478 (0x19d478)', [('(param_1, param_2)\n  int param_1;\n  int *param_2;\n{\n  uint uVar1;\n  uint uVar2;\n  undefined4 *puVar3;\n  int in_r5;\n', '(param_1, param_2, in_r5)\n  int param_1;\n  int *param_2;\n  int in_r5;\n{\n  uint uVar1;\n  uint uVar2;\n  undefined4 *puVar3;\n')])),
+
+    # _glpDCBRealloc (glprog, stock 0x97c10924): the size is the second parameter (`or. r29,r4,r4` at 0x97c10928; all four callers pass two arguments) but Ghidra's signature has
+    # one and the body read an uninitialised `in_r4` (inreg_liveness.py class USED, still listed as USED in the committed table). C: `in_r4` becomes the second parameter.
+    '_glpDCBRealloc': _scoped('glprog', _conv_with('_glpDCBRealloc (0x97c10924)', [('_glpDCBRealloc(param_1)\n  int param_1;\n{\n', '_glpDCBRealloc(param_1, in_r4)\n  int param_1;\n  int in_r4;\n{\n'), ('  int iVar5;\n  int in_r4;\n', '  int iVar5;\n')])),
+
+    # std::string::_Rep::_M_dispose(const allocator&) (glprog, stock 0x97c13458): `b _M_destroy` (0x97c13474) forwards the caller's r4 - the allocator reference - to
+    # _M_destroy(this, alloc). Ghidra's signature has only `this`; the C passed an uninitialised `in_r4` (class PASS-yes in inreg_liveness.tsv). C: `in_r4` is the second parameter.
+    '__ZNSs4_Rep10_M_disposeERKSaIcE': _scoped('glprog', _conv_with('_Rep::_M_dispose (0x97c13458)', [('(param_1)\n  unsigned char * param_1;\n{\n', '(param_1, in_r4)\n  unsigned char * param_1;\n  uint in_r4;\n{\n'), ('  int iVar3;\n  uint in_r4;\n', '  int iVar3;\n')])),
+
     # TIntermSymbol::traverse(TIntermTraverser*) (glprog, stock 0x97b97d40, 20 bytes): `lwz r12,0(r4); cmpwi r12,0; beqlr; mtspr ctr,r12; bctr` - a tail
     # call of the traverser's visitSymbol callback (*(traverser+0)) with r3 = this (the symbol) and r4 = the traverser, both untouched. Ghidra printed
     # `(**(code **)param_2)();` with no arguments (found by the tiny-function scan of issue #67/#70). C: pass (this, param_2).

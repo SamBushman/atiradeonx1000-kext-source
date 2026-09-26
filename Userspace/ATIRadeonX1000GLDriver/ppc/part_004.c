@@ -4512,7 +4512,7 @@ LAB_00029a74:
               uVar18 = param_5 * uStack_b8 + 0xfff & 0xfffff000;
               if (*(uint *)(((unsigned char *)0x00002b78) + param_1) < uVar18) {
                 if (*(int *)(((unsigned char *)0x00002b74) + param_1) != 0) {
-                  _vfree();
+                  _vfree(*(int *)(((unsigned char *)0x00002b74) + param_1));
                 }
                 pvVar9 = _valloc(uVar18);
                 *(uint *)(((unsigned char *)0x00002b78) + param_1) = uVar18;

@@ -1186,10 +1186,10 @@ LAB_00004b14:
           local_128 = 0x43300000;
           dVar47 = 1.0 / ((double)CONCAT44(0x43300000,uStack_134) - 4503601774854144.0);
           dVar45 = 1.0 / ((double)CONCAT44(0x43300000,uStack_124) - 4503601774854144.0);
-          local_1a4 = (uint)(float)(dVar50 * dVar47);
-          local_19c = (uint)(float)(dVar51 * dVar45);
-          local_1a0 = (uint)(float)(dVar48 * dVar47);
-          local_1a8 = (uint)(float)(dVar49 * dVar45);
+          local_1a4 = (uint)GH_F2U((float)(dVar50 * dVar47));
+          local_19c = (uint)GH_F2U((float)(dVar51 * dVar45));
+          local_1a0 = (uint)GH_F2U((float)(dVar48 * dVar47));
+          local_1a8 = (uint)GH_F2U((float)(dVar49 * dVar45));
           pdVar8[iVar14] = local_dc | local_e8 << 0x10;
           dVar21 = *local_c0;
           pdVar8[iVar20] = dVar21;
@@ -1348,20 +1348,20 @@ LAB_00004b14:
           uVar2 = (iVar7 + iVar6) * 0x10000;
           local_118 = 0x43300000;
           uStack_114 = (int)*(short *)(local_cc + 1) ^ 0x80000000;
-          local_1a8 = (uint)(float)(dVar48 * (1.0 / ((double)CONCAT44(0x43300000,uStack_114) -
-                                                    4503601774854144.0)));
+          local_1a8 = (uint)GH_F2U((float)(dVar48 * (1.0 / ((double)CONCAT44(0x43300000,uStack_114) -
+                                                    4503601774854144.0))));
           local_110 = 0x43300000;
           uStack_10c = (int)*(short *)(local_cc + 1) ^ 0x80000000;
-          local_19c = (uint)(float)(dVar50 * (1.0 / ((double)CONCAT44(0x43300000,uStack_10c) -
-                                                    4503601774854144.0)));
+          local_19c = (uint)GH_F2U((float)(dVar50 * (1.0 / ((double)CONCAT44(0x43300000,uStack_10c) -
+                                                    4503601774854144.0))));
           local_108 = 0x43300000;
           uStack_104 = (int)*(short *)((int)local_cc + 6) ^ 0x80000000;
-          local_1a0 = (uint)(float)(dVar49 * (1.0 / ((double)CONCAT44(0x43300000,uStack_104) -
-                                                    4503601774854144.0)));
+          local_1a0 = (uint)GH_F2U((float)(dVar49 * (1.0 / ((double)CONCAT44(0x43300000,uStack_104) -
+                                                    4503601774854144.0))));
           local_100 = 0x43300000;
           uStack_fc = (int)*(short *)((int)local_cc + 6) ^ 0x80000000;
-          local_1a4 = (uint)(float)(dVar51 * (1.0 / ((double)CONCAT44(0x43300000,uStack_fc) -
-                                                    4503601774854144.0)));
+          local_1a4 = (uint)GH_F2U((float)(dVar51 * (1.0 / ((double)CONCAT44(0x43300000,uStack_fc) -
+                                                    4503601774854144.0))));
           pdVar42[iVar25] = uVar38 | uVar2;
           dVar21 = *local_b4;
           pdVar42[iVar18] = dVar21;
@@ -1988,20 +1988,20 @@ LAB_00005e7c:
           pdVar53[iVar21] = 0x4003d;
           local_298 = 0x43300000;
           uStack_294 = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
-          local_358 = (uint)(float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_294) -
-                                                    4503601774854144.0)));
+          local_358 = (uint)GH_F2U((float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_294) -
+                                                    4503601774854144.0))));
           local_290 = 0x43300000;
           uStack_28c = (int)*(short *)(local_d8 + 1) ^ 0x80000000;
-          local_35c = (uint)(float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_28c) -
-                                                    4503601774854144.0)));
+          local_35c = (uint)GH_F2U((float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_28c) -
+                                                    4503601774854144.0))));
           local_288 = 0x43300000;
           uStack_284 = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
-          local_360 = (uint)(float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_284) -
-                                                    4503601774854144.0)));
+          local_360 = (uint)GH_F2U((float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_284) -
+                                                    4503601774854144.0))));
           local_280 = 0x43300000;
           uStack_27c = (int)*(short *)((int)local_d8 + 6) ^ 0x80000000;
-          local_364 = (uint)(float)(dVar65 * (1.0 / ((double)CONCAT44(0x43300000,uStack_27c) -
-                                                    4503601774854144.0)));
+          local_364 = (uint)GH_F2U((float)(dVar65 * (1.0 / ((double)CONCAT44(0x43300000,uStack_27c) -
+                                                    4503601774854144.0))));
           pdVar53[iVar28] = local_104 | local_110 << 0x10;
           dVar31 = *local_ac;
           pdVar53[iVar22] = dVar31;
@@ -2153,20 +2153,20 @@ LAB_00005e7c:
           uVar45 = iVar16 * 0x10000;
           local_278 = 0x43300000;
           uStack_274 = (int)*(short *)(local_dc + 1) ^ 0x80000000;
-          local_364 = (uint)(float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_274) -
-                                                    4503601774854144.0)));
+          local_364 = (uint)GH_F2U((float)(dVar62 * (1.0 / ((double)CONCAT44(0x43300000,uStack_274) -
+                                                    4503601774854144.0))));
           local_270 = 0x43300000;
           uStack_26c = (int)*(short *)(local_dc + 1) ^ 0x80000000;
-          local_360 = (uint)(float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_26c) -
-                                                    4503601774854144.0)));
+          local_360 = (uint)GH_F2U((float)(dVar64 * (1.0 / ((double)CONCAT44(0x43300000,uStack_26c) -
+                                                    4503601774854144.0))));
           local_268 = 0x43300000;
           uStack_264 = (int)*(short *)((int)local_dc + 6) ^ 0x80000000;
-          local_358 = (uint)(float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_264) -
-                                                    4503601774854144.0)));
+          local_358 = (uint)GH_F2U((float)(dVar63 * (1.0 / ((double)CONCAT44(0x43300000,uStack_264) -
+                                                    4503601774854144.0))));
           local_260 = 0x43300000;
           uStack_25c = (int)*(short *)((int)local_dc + 6) ^ 0x80000000;
-          local_35c = (uint)(float)(dVar65 * (1.0 / ((double)CONCAT44(0x43300000,uStack_25c) -
-                                                    4503601774854144.0)));
+          local_35c = (uint)GH_F2U((float)(dVar65 * (1.0 / ((double)CONCAT44(0x43300000,uStack_25c) -
+                                                    4503601774854144.0))));
           pdVar53[iVar35] = uVar51 | uVar45;
           dVar31 = *local_b8;
           pdVar53[iVar24] = dVar31;
@@ -4088,28 +4088,28 @@ LAB_0000a09c:
           pdVar30[iVar23 + 1] = 0x4003d;
           local_1a8 = 0x43300000;
           uStack_1a4 = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
-          local_2fc = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,local_10c) -
+          local_2fc = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,local_10c) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,uStack_1a4) -
-                                          4503601774854144.0)));
+                                          4503601774854144.0))));
           local_1a0 = 0x43300000;
           uStack_19c = (int)*(short *)(puVar8 + 4) ^ 0x80000000;
-          local_2e4 = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,local_110) -
+          local_2e4 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,local_110) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,uStack_19c) -
-                                          4503601774854144.0)));
+                                          4503601774854144.0))));
           local_198 = 0x43300000;
           uStack_194 = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
-          local_2e8 = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,local_114) -
+          local_2e8 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,local_114) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,uStack_194) -
-                                          4503601774854144.0)));
+                                          4503601774854144.0))));
           local_190 = 0x43300000;
           uStack_18c = (int)*(short *)((int)puVar8 + 0x12) ^ 0x80000000;
-          local_2ec = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,local_118) -
+          local_2ec = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,local_118) -
                                                    4503599627370496.0) *
                                    (1.0 / ((double)CONCAT44(0x43300000,uStack_18c) -
-                                          4503601774854144.0)));
+                                          4503601774854144.0))));
           pdVar30[iVar23 + 2] = local_10c | local_118 << 0x10;
           pdVar30[iVar23 + 3] = local_2fc;
           pdVar30[iVar23 + 4] = local_2ec;
@@ -4205,8 +4205,8 @@ LAB_0000a09c:
             do {
               local_2d8 = 0x43300000;
               uStack_2d4 = *piVar20 + iVar34 ^ 0x80000000;
-              local_2fc = (uint)(float)((double)CONCAT44(0x43300000,uStack_2d4) - 4503601774854144.0
-                                       );
+              local_2fc = (uint)GH_F2U((float)((double)CONCAT44(0x43300000,uStack_2d4) - 4503601774854144.0
+                                       ));
               local_2d0 = 0x43300000;
               uStack_2cc = *piVar20 + iVar34 + piVar20[2] ^ 0x80000000;
               local_300 = (float)((double)CONCAT44(0x43300000,uStack_2cc) - 4503601774854144.0);
@@ -4875,10 +4875,10 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
         pdVar32[iVar33 + 1] = 0x4003d;
         local_108 = 0x43300000;
         uStack_104 = (int)*(short *)(puVar22 + 4) ^ 0x80000000;
-        local_1fc = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,uVar31) -
+        local_1fc = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,uVar31) -
                                                  4503599627370496.0) *
                                  (1.0 / ((double)CONCAT44(0x43300000,uStack_104) -
-                                        4503601774854144.0)));
+                                        4503601774854144.0))));
         local_100 = 0x43300000;
         uStack_fc = (int)*(short *)(puVar22 + 4) ^ 0x80000000;
         local_1f0 = (float)((double)(float)((double)CONCAT44(0x43300000,uVar30) - 4503599627370496.0
@@ -4891,10 +4891,10 @@ int _radeonHighlight(param_1, param_2, param_3, param_4, param_5, param_6)
                            (1.0 / ((double)CONCAT44(0x43300000,uStack_f4) - 4503601774854144.0)));
         local_f0 = 0x43300000;
         uStack_ec = (int)*(short *)((int)puVar22 + 0x12) ^ 0x80000000;
-        local_1f8 = (uint)(float)((double)(float)((double)CONCAT44(0x43300000,uVar16) -
+        local_1f8 = (uint)GH_F2U((float)((double)(float)((double)CONCAT44(0x43300000,uVar16) -
                                                  4503599627370496.0) *
                                  (1.0 / ((double)CONCAT44(0x43300000,uStack_ec) - 4503601774854144.0
-                                        )));
+                                        ))));
         pdVar32[iVar33 + 2] = uVar28;
         dVar18 = *local_b0;
         pdVar32[iVar33 + 3] = dVar18;
@@ -5302,9 +5302,9 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
                                              4503601774854144.0)));
                       local_128 = 0x43300000;
                       uStack_124 = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
-                      local_1a4 = (uint)(float)((double)(fVar1 + 0.0) *
+                      local_1a4 = (uint)GH_F2U((float)((double)(fVar1 + 0.0) *
                                                (1.0 / ((double)CONCAT44(0x43300000,uStack_124) -
-                                                      4503601774854144.0)));
+                                                      4503601774854144.0))));
                       local_120 = 0x43300000;
                       uStack_11c = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
                       fVar22 = (float)((double)(fVar1 + 8.0) *
@@ -5343,9 +5343,9 @@ int _radeonSolidScanlines(param_1, param_2, param_3, param_4, param_5, param_6)
                                              4503601774854144.0)));
                       local_148 = 0x43300000;
                       uStack_144 = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
-                      local_1a4 = (uint)(float)((double)(fVar1 + 0.0) *
+                      local_1a4 = (uint)GH_F2U((float)((double)(fVar1 + 0.0) *
                                                (1.0 / ((double)CONCAT44(0x43300000,uStack_144) -
-                                                      4503601774854144.0)));
+                                                      4503601774854144.0))));
                       local_140 = 0x43300000;
                       uStack_13c = (int)*(short *)(iVar10 + 0x12) ^ 0x80000000;
                       fVar22 = (float)((double)(fVar1 + (float)((double)CONCAT44(0x43300000,local_dc

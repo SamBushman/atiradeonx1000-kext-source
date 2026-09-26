@@ -1,8 +1,14 @@
-entry	function	register	class	first reader / imports
+10b184	FUN_0010b184	r6	PASS-indirect	10b1b8 bctrl 
+10b184	FUN_0010b184	r7	PASS-indirect	10b1b8 bctrl 
+10c47c	FUN_0010c47c	r5	PASS-indirect	10c4ac bctrl 
+10c47c	FUN_0010c47c	r6	PASS-indirect	10c4ac bctrl 
+10c47c	FUN_0010c47c	r7	PASS-indirect	10c4ac bctrl 
+10c47c	FUN_0010c47c	r8	PASS-indirect	10c4ac bctrl 
 10c670	FUN_0010c670	r6	PASS-deep	10c69c bl 0x105594
 10c670	FUN_0010c670	r7	PASS-deep	10c69c bl 0x105594
 10c670	FUN_0010c670	r8	PASS-deep	10c69c bl 0x105594
 10c670	FUN_0010c670	r9	PASS-deep	10c69c bl 0x105594
+10cb48	FUN_0010cb48	r8	PASS-deep	10cb70 bl 0x105594
 10cfcc	FUN_0010cfcc	r8	PASS-deep	10cff4 bl 0x105594
 10cfcc	FUN_0010cfcc	r9	PASS-deep	10cff4 bl 0x105594
 10d4cc	FUN_0010d4cc	r5	PASS-deep	10d4f0 bl 0x105594
@@ -10,11 +16,19 @@ entry	function	register	class	first reader / imports
 10d4cc	FUN_0010d4cc	r7	PASS-deep	10d4f0 bl 0x105594
 10d4cc	FUN_0010d4cc	r8	PASS-deep	10d4f0 bl 0x105594
 10d4cc	FUN_0010d4cc	r9	PASS-deep	10d4f0 bl 0x105594
+11f2f8	FUN_0011f2f8	r6	PASS-no	11f31c bl 0xe07dc
+11f2f8	FUN_0011f2f8	r7	PASS-no	11f31c bl 0xe07dc
+11f2f8	FUN_0011f2f8	r8	PASS-no	11f31c bl 0xe07dc
 120cd4	FUN_00120cd4	r6	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r7	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r8	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r9	PASS-deep	120cf8 bl 0xec4f0
 120cd4	FUN_00120cd4	r10	PASS-deep	120cf8 bl 0xec4f0
+1214fc	FUN_001214fc	r6	PASS-indirect	121544 bl 0x193e18
+1214fc	FUN_001214fc	r7	PASS-indirect	121544 bl 0x193e18
+1214fc	FUN_001214fc	r8	PASS-indirect	121544 bl 0x193e18
+12499c	FUN_0012499c	r8	PASS-deep	1249bc bl 0x124938
+125db8	FUN_00125db8	r8	PASS-deep	125dd8 bl 0x124938
 12abd8	FUN_0012abd8	r5	PASS-no	12ac08 bl 0x19401c
 12abd8	FUN_0012abd8	r6	PASS-no	12ac08 bl 0x19401c
 12abd8	FUN_0012abd8	r7	PASS-no	12ac08 bl 0x19401c
@@ -51,6 +65,8 @@ entry	function	register	class	first reader / imports
 139f84	FUN_00139f84	r7	PASS-indirect	139fb0 bctrl 
 139f84	FUN_00139f84	r8	PASS-indirect	139fb0 bctrl 
 139f84	FUN_00139f84	r9	PASS-indirect	139fb0 bctrl 
+13a8a4	FUN_0013a8a4	r7	PASS-deep	13a8e4 bl 0x193e74
+13a8a4	FUN_0013a8a4	r8	PASS-deep	13a8e4 bl 0x193e74
 13c210	FUN_0013c210	r5	PASS-no	13c234 bl 0xe07dc
 13c210	FUN_0013c210	r6	PASS-no	13c234 bl 0xe07dc
 13c210	FUN_0013c210	r7	PASS-no	13c234 bl 0xe07dc
@@ -61,6 +77,13 @@ entry	function	register	class	first reader / imports
 13caf4	FUN_0013caf4	r7	PASS-no	13cb18 bl 0xe9294
 13caf4	FUN_0013caf4	r8	PASS-no	13cb18 bl 0xe9294
 13caf4	FUN_0013caf4	r9	PASS-no	13cb18 bl 0xe9294
+14694c	FUN_0014694c	r5	USED	14694c cmpwi cr7,r5,0x0
+147704	FUN_00147704	r7	PASS-deep	147724 bl 0x105594
+147704	FUN_00147704	r8	PASS-deep	147724 bl 0x105594
+148980	FUN_00148980	r6	PASS-no	1489a8 bl 0xe07dc
+148980	FUN_00148980	r7	PASS-no	1489a8 bl 0xe07dc
+148980	FUN_00148980	r8	PASS-no	1489a8 bl 0xe07dc
+149de4	FUN_00149de4	r8	PASS-indirect	149e28 bctrl 
 14e6e4	FUN_0014e6e4	r5	PASS-deep	14e9a4 bl 0x105594
 14e6e4	FUN_0014e6e4	r6	PASS-deep	14e9a4 bl 0x105594
 14e6e4	FUN_0014e6e4	r7	PASS-deep	14e9a4 bl 0x105594
@@ -73,6 +96,8 @@ entry	function	register	class	first reader / imports
 1507d0	FUN_001507d0	r6	PASS-deep	150810 bl 0x105594
 1507d0	FUN_001507d0	r7	PASS-deep	150810 bl 0x105594
 1507d0	FUN_001507d0	r8	PASS-deep	150810 bl 0x105594
+151a74	FUN_00151a74	r8	PASS-indirect	151ab0 bctrl 
+1524b8	FUN_001524b8	r8	PASS-indirect	1524f4 bctrl 
 152ea8	FUN_00152ea8	r6	PASS-indirect	152ee4 bctrl 
 152ea8	FUN_00152ea8	r7	PASS-indirect	152ee4 bctrl 
 152ea8	FUN_00152ea8	r8	PASS-indirect	152ee4 bctrl 
@@ -81,15 +106,31 @@ entry	function	register	class	first reader / imports
 1541f0	FUN_001541f0	r7	PASS-indirect	15422c bctrl 
 1541f0	FUN_001541f0	r8	PASS-indirect	15422c bctrl 
 1541f0	FUN_001541f0	r9	PASS-indirect	15422c bctrl 
+154dc0	FUN_00154dc0	r7	PASS-deep	154e18 bl 0x105594
+154dc0	FUN_00154dc0	r8	PASS-deep	154e18 bl 0x105594
+159b58	FUN_00159b58	r7	PASS-deep	159bb8 bl 0x105594
+159b58	FUN_00159b58	r8	PASS-deep	159bb8 bl 0x105594
+15a68c	FUN_0015a68c	r6	PASS-indirect	15a6c4 bl 0x193e18
+15a68c	FUN_0015a68c	r7	PASS-indirect	15a6c4 bl 0x193e18
+15a68c	FUN_0015a68c	r8	PASS-indirect	15a6c4 bl 0x193e18
+15c6d4	FUN_0015c6d4	r5	PASS-deep	15c708 bl 0x105594
+15c6d4	FUN_0015c6d4	r6	PASS-deep	15c708 bl 0x105594
+15c6d4	FUN_0015c6d4	r7	PASS-deep	15c708 bl 0x105594
+15c6d4	FUN_0015c6d4	r8	PASS-deep	15c708 bl 0x105594
 15e494	FUN_0015e494	r5	PASS-indirect	15e4d4 bctrl 
+15ea3c	FUN_0015ea3c	r7	PASS-no	15ea90 bl 0x126760
+15ea3c	FUN_0015ea3c	r8	PASS-no	15ea90 bl 0x126760
 15f44c	FUN_0015f44c	r8	PASS-indirect	15f498 bl 0x105594
 161748	FUN_00161748	r6	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r7	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r8	PASS-indirect	161784 bctrl 
 161748	FUN_00161748	r9	PASS-indirect	161784 bctrl 
+167ef4	FUN_00167ef4	r9	PASS-indirect	167f24 bctrl 
 169e30	FUN_00169e30	r7	PASS-indirect	169e60 bl 0x193e18
 169e30	FUN_00169e30	r8	PASS-indirect	169e60 bl 0x193e18
 169e30	FUN_00169e30	r10	PASS-indirect	169e60 bl 0x193e18
+16d538	FUN_0016d538	r7	PASS-indirect	16d55c bl 0x1045e4
+16d538	FUN_0016d538	r8	PASS-indirect	16d55c bl 0x1045e4
 171714	FUN_00171714	r6	PASS-no	171750 bl 0x10ddcc
 171714	FUN_00171714	r7	PASS-no	171750 bl 0x10ddcc
 171714	FUN_00171714	r8	PASS-no	171750 bl 0x10ddcc
@@ -99,20 +140,100 @@ entry	function	register	class	first reader / imports
 171e68	FUN_00171e68	r7	PASS-no	171e88 bl 0x1940a8
 171e68	FUN_00171e68	r8	PASS-no	171e88 bl 0x1940a8
 171e68	FUN_00171e68	r9	PASS-no	171e88 bl 0x1940a8
+173b98	FUN_00173b98	r7	PASS-indirect	173bd4 bl 0xe9c00
+173b98	FUN_00173b98	r8	PASS-indirect	173bd4 bl 0xe9c00
+173f1c	FUN_00173f1c	r5	PASS-indirect	173f50 bl 0x126760
+173f1c	FUN_00173f1c	r6	PASS-indirect	173f50 bl 0x126760
+173f1c	FUN_00173f1c	r7	PASS-indirect	173f50 bl 0x126760
 175b40	FUN_00175b40	r6	PASS-deep	175bd4 bl 0x19423c
 175b40	FUN_00175b40	r7	PASS-deep	175bd4 bl 0x19423c
 175b40	FUN_00175b40	r8	PASS-deep	175bd4 bl 0x19423c
+176c40	FUN_00176c40	r7	PASS-indirect	176cd0 bctrl 
+176c40	FUN_00176c40	r8	PASS-indirect	176cd0 bctrl 
 17750	FUN_00017750	r6	PASS-no	1784c bl 0xa180
 17750	FUN_00017750	r7	PASS-no	1784c bl 0xa180
 17750	FUN_00017750	r8	PASS-no	1784c bl 0xa180
+17ab4c	FUN_0017ab4c	r6	PASS-indirect	17ab98 bl 0x178d78
+17ab4c	FUN_0017ab4c	r7	PASS-indirect	17ab98 bl 0x178d78
+17ab4c	FUN_0017ab4c	r8	PASS-indirect	17ab98 bl 0x178d78
+17b12c	FUN_0017b12c	r7	PASS-no	17b154 bl 0xe07dc
+17b12c	FUN_0017b12c	r8	PASS-no	17b154 bl 0xe07dc
+17d6ac	FUN_0017d6ac	r7	PASS-deep	17d6dc bl 0x1054ec
+17d6ac	FUN_0017d6ac	r8	PASS-deep	17d6dc bl 0x1054ec
+17e1f4	FUN_0017e1f4	r6	PASS-deep	17e22c bl 0x1770e4
+17e1f4	FUN_0017e1f4	r7	PASS-deep	17e22c bl 0x1770e4
+17e1f4	FUN_0017e1f4	r8	PASS-deep	17e22c bl 0x1770e4
+17e338	FUN_0017e338	r6	PASS-deep	17e354 bl 0x179c44
+17e338	FUN_0017e338	r7	PASS-deep	17e354 bl 0x179c44
+17e338	FUN_0017e338	r8	PASS-deep	17e354 bl 0x179c44
 17ee0	FUN_00017ee0	r6	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	FUN_00017ee0	r7	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	FUN_00017ee0	r8	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	FUN_00017ee0	r9	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17ee0	FUN_00017ee0	r10	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
+17f1f8	FUN_0017f1f8	r7	PASS-deep	17f27c bl 0x1054ec
+17f1f8	FUN_0017f1f8	r8	PASS-deep	17f27c bl 0x1054ec
 18120	FUN_00018120	r10	PASS-no	18168 bl 0xa2f0
+18ad08	FUN_0018ad08	r7	PASS-indirect	18ad4c bl 0x1043f0
+18ad08	FUN_0018ad08	r8	PASS-indirect	18ad4c bl 0x1043f0
+18b1bc	FUN_0018b1bc	r8	PASS-indirect	18b29c bl 0x19423c
+18b654	FUN_0018b654	r7	PASS-deep	18b714 bl 0xf3a30
+18b654	FUN_0018b654	r8	PASS-deep	18b714 bl 0xf3a30
+18b9cc	FUN_0018b9cc	r7	PASS-indirect	18ba00 bl 0x126760
+18b9cc	FUN_0018b9cc	r8	PASS-indirect	18ba00 bl 0x126760
+18d4b4	FUN_0018d4b4	r8	PASS-indirect	18d50c bl 0x105594
+1906c8	FUN_001906c8	r5	PASS-indirect	190720 bctrl 
+1906c8	FUN_001906c8	r6	PASS-indirect	190720 bctrl 
+190990	FUN_00190990	r5	PASS-indirect	1909d4 bctrl 
+190990	FUN_00190990	r6	PASS-indirect	1909d4 bctrl 
+190990	FUN_00190990	r7	PASS-indirect	1909d4 bctrl 
+190990	FUN_00190990	r8	PASS-indirect	1909d4 bctrl 
+193944	FUN_00193944	r7	PASS-indirect	193974 bctrl 
+193944	FUN_00193944	r8	PASS-indirect	193974 bctrl 
+19c130	FUN_0019c130	r8	PASS-deep	19c190 bl 0x105594
+19ca78	FUN_0019ca78	r6	PASS-deep	19cab4 bl 0x105dbc
+19ca78	FUN_0019ca78	r7	PASS-deep	19cab4 bl 0x105dbc
+19ca78	FUN_0019ca78	r8	PASS-deep	19cab4 bl 0x105dbc
+19d478	FUN_0019d478	r5	USED	19d47c or. r28,r5,r5
+19f880	FUN_0019f880	r6	PASS-indirect	19f950 bctrl 
+19f880	FUN_0019f880	r7	PASS-indirect	19f950 bctrl 
+19f880	FUN_0019f880	r8	PASS-indirect	19f950 bctrl 
+19ff2c	FUN_0019ff2c	r6	PASS-indirect	19ff60 bctrl 
+19ff2c	FUN_0019ff2c	r7	PASS-indirect	19ff60 bctrl 
+19ff2c	FUN_0019ff2c	r8	PASS-indirect	19ff60 bctrl 
+19ffdc	FUN_0019ffdc	r6	PASS-indirect	1a0010 bctrl 
+19ffdc	FUN_0019ffdc	r7	PASS-indirect	1a0010 bctrl 
+19ffdc	FUN_0019ffdc	r8	PASS-indirect	1a0010 bctrl 
+1a14d0	FUN_001a14d0	r6	PASS-indirect	1a1504 bctrl 
+1a14d0	FUN_001a14d0	r7	PASS-indirect	1a1504 bctrl 
+1a14d0	FUN_001a14d0	r8	PASS-indirect	1a1504 bctrl 
+1a2878	FUN_001a2878	r5	PASS-indirect	1a28f4 bctrl 
+1a2878	FUN_001a2878	r6	PASS-indirect	1a28f4 bctrl 
+1a2878	FUN_001a2878	r7	PASS-indirect	1a28f4 bctrl 
+1a2878	FUN_001a2878	r8	PASS-indirect	1a28f4 bctrl 
+1a2d10	FUN_001a2d10	r6	PASS-indirect	1a2d44 bctrl 
+1a2d10	FUN_001a2d10	r7	PASS-indirect	1a2d44 bctrl 
+1a2d10	FUN_001a2d10	r8	PASS-indirect	1a2d44 bctrl 
+1a3000	FUN_001a3000	r5	PASS-no	1a3020 bl 0x194034
+1a3000	FUN_001a3000	r6	PASS-no	1a3020 bl 0x194034
+1a3000	FUN_001a3000	r7	PASS-no	1a3020 bl 0x194034
+1a3000	FUN_001a3000	r8	PASS-no	1a3020 bl 0x194034
 1e280	FUN_0001e280	r6	PASS-no	1e32c bl 0xb620
 1e280	FUN_0001e280	r10	PASS-no	1e3dc bl 0x1db50
+1f70	FUN_00001f70	r5	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	FUN_00001f70	r6	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	FUN_00001f70	r7	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+1f70	FUN_00001f70	r8	PASS-import	__keymgr_set_and_unlock_processwide_ptr	
+20f4	FUN_000020f4	r5	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	FUN_000020f4	r6	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	FUN_000020f4	r7	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+20f4	FUN_000020f4	r8	PASS-import	__keymgr_get_and_lock_processwide_ptr	
+23a24	FUN_00023a24	r8	PASS-indirect	23ab4 bctrl 
+23a8	FUN_000023a8	r6	PASS-import		
+23a8	FUN_000023a8	r7	PASS-import		
+23a8	FUN_000023a8	r8	PASS-import		
+24190	FUN_00024190	r7	PASS-indirect	241ec bctrl 
+24190	FUN_00024190	r8	PASS-indirect	241ec bctrl 
 25ec0	FUN_00025ec0	r6	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	FUN_00025ec0	r7	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	FUN_00025ec0	r8	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
@@ -124,12 +245,57 @@ entry	function	register	class	first reader / imports
 2c230	FUN_0002c230	r7	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r8	PASS-indirect	2c2f8 bl 0x90990
 2cc30	FUN_0002cc30	r9	PASS-no	2ccd8 bl 0x2bf30
+2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
+2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
 34200	FUN_00034200	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut
 48da0	FUN_00048da0	r4	RET	4a7cc blr 
 48da0	FUN_00048da0	r5	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
 48da0	FUN_00048da0	r6	PASS-no	48f00 bl 0x1a38e0	; symbol stub for: _realloc
+4b480	FUN_0004b480	r5	PASS-indirect	4b4cc bctrl 
+4b480	FUN_0004b480	r6	PASS-indirect	4b4cc bctrl 
+4b480	FUN_0004b480	r7	PASS-indirect	4b4cc bctrl 
+4b480	FUN_0004b480	r8	PASS-indirect	4b4cc bctrl 
+4c560	FUN_0004c560	r6	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	FUN_0004c560	r7	PASS-indirect	4c5d0 bl 0x4dc30
+4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
 4d100	FUN_0004d100	r5	PASS-indirect	4d314 bl 0x4ce30
 4d100	FUN_0004d100	r6	PASS-indirect	4d314 bl 0x4ce30
+4fd80	FUN_0004fd80	r5	PASS-indirect	4fef0 bctrl 
+4fd80	FUN_0004fd80	r6	PASS-indirect	4fef0 bctrl 
+4fd80	FUN_0004fd80	r7	PASS-indirect	4fef0 bctrl 
+4fd80	FUN_0004fd80	r8	PASS-indirect	4fef0 bctrl 
+50300	FUN_00050300	r5	PASS-indirect	50358 bctrl 
+50300	FUN_00050300	r6	PASS-indirect	50358 bctrl 
+50300	FUN_00050300	r7	PASS-indirect	50358 bctrl 
+50300	FUN_00050300	r8	PASS-indirect	50358 bctrl 
+50ef0	FUN_00050ef0	r7	PASS-indirect	50fac bctrl 
+50ef0	FUN_00050ef0	r8	PASS-indirect	50fac bctrl 
+53990	FUN_00053990	r5	PASS-no	539c8 bl 0xb9f10
+53990	FUN_00053990	r6	PASS-indirect	539c8 bl 0xb9f10
+53990	FUN_00053990	r7	PASS-no	539c8 bl 0xb9f10
+53990	FUN_00053990	r8	PASS-no	539c8 bl 0xb9f10
+546d0	FUN_000546d0	r6	PASS-indirect	54704 bctrl 
+546d0	FUN_000546d0	r7	PASS-indirect	54704 bctrl 
+546d0	FUN_000546d0	r8	PASS-indirect	54704 bctrl 
+5f810	FUN_0005f810	r5	PASS-no	5f878 bl 0x5e7f0
+5f810	FUN_0005f810	r6	PASS-no	5f878 bl 0x5e7f0
+5f810	FUN_0005f810	r7	PASS-no	5f878 bl 0x5e7f0
+5f810	FUN_0005f810	r8	PASS-no	5f878 bl 0x5e7f0
+64720	FUN_00064720	r5	PASS-indirect	64830 bctrl 
+64720	FUN_00064720	r6	PASS-indirect	64830 bctrl 
+64720	FUN_00064720	r7	PASS-indirect	64830 bctrl 
+64a10	FUN_00064a10	r5	PASS-indirect	64d64 bctrl 
+64a10	FUN_00064a10	r6	PASS-indirect	64d64 bctrl 
+64a10	FUN_00064a10	r7	PASS-indirect	64d64 bctrl 
+64a10	FUN_00064a10	r8	PASS-indirect	64d64 bctrl 
+64f40	FUN_00064f40	r5	PASS-indirect	64fa0 bctrl 
+64f40	FUN_00064f40	r6	PASS-indirect	64fa0 bctrl 
+64f40	FUN_00064f40	r7	PASS-indirect	64fa0 bctrl 
+64f40	FUN_00064f40	r8	PASS-indirect	64fa0 bctrl 
+651e0	FUN_000651e0	r5	PASS-indirect	65218 bl 0x61dc0
+651e0	FUN_000651e0	r6	PASS-indirect	65218 bl 0x61dc0
+651e0	FUN_000651e0	r7	PASS-indirect	65218 bl 0x61dc0
+651e0	FUN_000651e0	r8	PASS-indirect	65218 bl 0x61dc0
 65370	FUN_00065370	r5	PASS-indirect	653a8 bctrl 
 65370	FUN_00065370	r6	PASS-indirect	653a8 bctrl 
 65370	FUN_00065370	r7	PASS-indirect	653a8 bctrl 
@@ -138,30 +304,74 @@ entry	function	register	class	first reader / imports
 656b0	FUN_000656b0	r7	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
 656b0	FUN_000656b0	r8	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
 656b0	FUN_000656b0	r9	PASS-no	656dc bl 0x1a3760	; symbol stub for: _memset
+71bc0	FUN_00071bc0	r7	PASS-no	71c48 bl 0x70cd0
 79e70	FUN_00079e70	r5	PASS-no	79f10 bl 0x79e10
 79e70	FUN_00079e70	r6	PASS-no	79f10 bl 0x79e10
 79e70	FUN_00079e70	r7	PASS-no	79f10 bl 0x79e10
 79e70	FUN_00079e70	r8	PASS-no	79f10 bl 0x79e10
 7c760	FUN_0007c760	r6	PASS-no	7c7b0 bl 0x7a060
+82900	FUN_00082900	r5	PASS-indirect	82b64 bctrl 
+82900	FUN_00082900	r6	PASS-indirect	82b64 bctrl 
 83470	FUN_00083470	r7	PASS-no	83498 bl 0x656b0
 83470	FUN_00083470	r8	PASS-no	83498 bl 0x656b0
 83470	FUN_00083470	r9	PASS-no	83498 bl 0x656b0
+837b0	FUN_000837b0	r5	PASS-no	837c4 bl 0x83470
+837b0	FUN_000837b0	r6	PASS-no	837c4 bl 0x83470
+837b0	FUN_000837b0	r7	PASS-no	837c4 bl 0x83470
+837b0	FUN_000837b0	r8	PASS-no	837c4 bl 0x83470
 83870	FUN_00083870	r10	PASS-indirect	8389c bl 0x90470
+86840	FUN_00086840	r5	PASS-indirect	868a0 bctrl 
+86840	FUN_00086840	r6	PASS-indirect	868a0 bctrl 
+86840	FUN_00086840	r7	PASS-indirect	868a0 bctrl 
+86840	FUN_00086840	r8	PASS-indirect	868a0 bctrl 
 872e0	FUN_000872e0	r5	PASS-indirect	87428 bctrl 
 872e0	FUN_000872e0	r6	PASS-indirect	87428 bctrl 
+872e0	FUN_000872e0	r7	PASS-indirect	87428 bctrl 
+872e0	FUN_000872e0	r8	PASS-indirect	87428 bctrl 
 8b6d0	FUN_0008b6d0	r5	PASS-deep	8b6f0 bl 0x89740
 8b960	FUN_0008b960	r5	PASS-deep	8b978 bl 0x89740
 8b9f0	FUN_0008b9f0	r5	PASS-deep	8baf4 bl 0x88e70
 8c590	FUN_0008c590	r7	PASS-indirect	8c5d8 bctrl 
 8c590	FUN_0008c590	r8	PASS-indirect	8c5d8 bctrl 
+8dc50	FUN_0008dc50	r5	PASS-indirect	8dce8 bctrl 
+8dc50	FUN_0008dc50	r6	PASS-indirect	8dce8 bctrl 
+8dc50	FUN_0008dc50	r7	PASS-indirect	8dce8 bctrl 
+8dc50	FUN_0008dc50	r8	PASS-indirect	8dce8 bctrl 
+8f520	FUN_0008f520	r4	PASS-indirect	8f558 bctrl 
+8f520	FUN_0008f520	r5	PASS-indirect	8f558 bctrl 
+8f520	FUN_0008f520	r6	PASS-indirect	8f558 bctrl 
+8f520	FUN_0008f520	r7	PASS-indirect	8f558 bctrl 
+8f520	FUN_0008f520	r8	PASS-indirect	8f558 bctrl 
 8f760	FUN_0008f760	r7	PASS-indirect	8f7d0 bl 0x8c590
 8f760	FUN_0008f760	r8	PASS-indirect	8f7d0 bl 0x8c590
 8f760	FUN_0008f760	r10	PASS-indirect	8f7d0 bl 0x8c590
+8fb70	FUN_0008fb70	r6	PASS-indirect	8fba0 bl 0x86840
+8fb70	FUN_0008fb70	r7	PASS-indirect	8fba0 bl 0x86840
+8fb70	FUN_0008fb70	r8	PASS-indirect	8fba0 bl 0x86840
+9c700	FUN_0009c700	r5	PASS-indirect	9c740 bl 0x9a990
+9c700	FUN_0009c700	r6	PASS-indirect	9c740 bl 0x9a990
+9c700	FUN_0009c700	r7	PASS-indirect	9c740 bl 0x9a990
+9c700	FUN_0009c700	r8	PASS-indirect	9c740 bl 0x9a990
 a0380	FUN_000a0380	r10	PASS-no	a03c8 bl 0xa0290
 a0d70	FUN_000a0d70	r6	PASS-no	a0dac bl 0xa0290
 a0d70	FUN_000a0d70	r7	PASS-no	a0dac bl 0xa0290
 a0d70	FUN_000a0d70	r8	PASS-no	a0dac bl 0xa0290
 a4980	FUN_000a4980	r8	PASS-no	a4994 bl 0x1a3258
+a5c40	FUN_000a5c40	r5	PASS-indirect	a5e14 bctrl 
+a5c40	FUN_000a5c40	r6	PASS-indirect	a5e14 bctrl 
+a5c40	FUN_000a5c40	r7	PASS-indirect	a5e14 bctrl 
+a5c40	FUN_000a5c40	r8	PASS-indirect	a5e14 bctrl 
+a6500	FUN_000a6500	r5	PASS-no	a6524 bl 0x4e990
+a6500	FUN_000a6500	r6	PASS-no	a6524 bl 0x4e990
+a6500	FUN_000a6500	r7	PASS-no	a6524 bl 0x4e990
+a6500	FUN_000a6500	r8	PASS-no	a6524 bl 0x4e990
+a7050	FUN_000a7050	r5	PASS-indirect	a721c bctrl 
+a7050	FUN_000a7050	r6	PASS-indirect	a721c bctrl 
+afe40	FUN_000afe40	r7	PASS-indirect	afed8 bctrl 
+afe40	FUN_000afe40	r8	PASS-indirect	afed8 bctrl 
+b3630	FUN_000b3630	r6	PASS-indirect	b3764 bl 0xb15d0
+b3630	FUN_000b3630	r7	PASS-indirect	b3764 bl 0xb15d0
+b3630	FUN_000b3630	r8	PASS-indirect	b3764 bl 0xb15d0
 b5010	FUN_000b5010	r7	PASS-no	b5068 bl 0xb4f50
 b5010	FUN_000b5010	r8	PASS-no	b5068 bl 0xb4f50
 b50a0	FUN_000b50a0	r6	PASS-no	b5144 bl 0xb4f50
@@ -173,6 +383,16 @@ b51a0	FUN_000b51a0	r8	PASS-no	b51b4 bl 0x1a3260
 b5320	FUN_000b5320	r6	PASS-no	b53a0 bl 0xb4f50
 b5320	FUN_000b5320	r7	PASS-no	b53a0 bl 0xb4f50
 b5320	FUN_000b5320	r8	PASS-no	b53a0 bl 0xb4f50
+b5400	FUN_000b5400	r5	PASS-indirect	b5438 bctrl 
+b5400	FUN_000b5400	r6	PASS-indirect	b5438 bctrl 
+b5400	FUN_000b5400	r7	PASS-indirect	b5438 bctrl 
+b5400	FUN_000b5400	r8	PASS-indirect	b5438 bctrl 
+b6580	FUN_000b6580	r5	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	FUN_000b6580	r6	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	FUN_000b6580	r7	PASS-indirect	b65b8 bl 0x4bbf0
+b6580	FUN_000b6580	r8	PASS-indirect	b65b8 bl 0x4bbf0
+bd9a0	FUN_000bd9a0	r7	PASS-indirect	bd9d8 bctrl 
+bd9a0	FUN_000bd9a0	r8	PASS-indirect	bd9d8 bctrl 
 bfa0	FUN_0000bfa0	r7	PASS-no	bfac bl 0x1a3264
 bfa0	FUN_0000bfa0	r8	PASS-no	bfac bl 0x1a3264
 bfed0	FUN_000bfed0	r6	PASS-no	bfeec bl 0xc5e60
@@ -220,6 +440,9 @@ ea148	FUN_000ea148	r5	PASS-no	ea194 bl 0x1940a8
 ea148	FUN_000ea148	r6	PASS-no	ea194 bl 0x1940a8
 ea148	FUN_000ea148	r7	PASS-no	ea194 bl 0x1940a8
 ea148	FUN_000ea148	r8	PASS-no	ea194 bl 0x1940a8
+f1d7c	FUN_000f1d7c	r6	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	FUN_000f1d7c	r7	PASS-indirect	f1dd8 bl 0x193e18
+f1d7c	FUN_000f1d7c	r8	PASS-indirect	f1dd8 bl 0x193e18
 f29f4	FUN_000f29f4	r5	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	FUN_000f29f4	r6	PASS-indirect	f2a10 bl 0x10ea30
 f29f4	FUN_000f29f4	r7	PASS-indirect	f2a10 bl 0x10ea30
@@ -230,6 +453,10 @@ f620	FUN_0000f620	r6	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	FUN_0000f620	r7	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	FUN_0000f620	r8	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
 f620	FUN_0000f620	r10	PASS-no	f650 bl 0x1a3660	; symbol stub for: _malloc
+f8aa0	FUN_000f8aa0	r8	PASS-indirect	f8b7c bl 0x19e9fc
+f9140	FUN_000f9140	r6	PASS-indirect	f918c bctrl 
+f9140	FUN_000f9140	r7	PASS-indirect	f918c bctrl 
+f9140	FUN_000f9140	r8	PASS-indirect	f918c bctrl 
 fd5c8	FUN_000fd5c8	r6	PASS-indirect	fd640 bl 0x193e18
 fd5c8	FUN_000fd5c8	r7	PASS-indirect	fd640 bl 0x193e18
 fd5c8	FUN_000fd5c8	r8	PASS-indirect	fd640 bl 0x193e18
