@@ -163,7 +163,7 @@ for ent, (name, rng) in sorted(rows.items()):
                 ms_ = re.match(r'^(?:\([^()]*\)\s*)?&?(FUN|LAB|DAT|UNK|PTR_\w*)_([0-9a-f]{8})$', e)
                 if ms_: sym[(i, int(ms_.group(2), 16))] = e   # a constant the decompiler printed as a symbol at that address
         haveP = collections.Counter(); haveS = collections.Counter()
-        addrvars = set(re.findall(r'\b(\w+)\s*=\s*(?:\([^()]*\)\s*)?&', text))   # variables the function assigns an address to
+        addrvars = set(re.findall(r'\b(\w+)\s*=\s*(?:\([^()]*\)\s*)?(?:&|a[a-z]?Stack_\w+\s*[;+])', text))   # variables the function assigns an address to (`&x`, or a stack array, which decays: `a5 = auStack_5c;`)
         for args in calls:
             slot = 0
             for i_, e_ in enumerate(args):
