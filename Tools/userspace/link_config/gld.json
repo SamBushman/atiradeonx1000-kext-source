@@ -19,10 +19,19 @@
  "data_label_overrides": {
   "MACH_HEADER": "__mh_bundle_header"
  },
+ "extra_c": [
+  "/* The stock's crt atexit shim (FUN_00002748 -> FUN_000023a8: the statically linked libgcc registry, keymgr key 14) registers every function-static destructor with the image itself as",
+  "   owner, so dlclose runs them (Tests/userspace/unload_test.c: the stock runs a handler registered through it DURING dlclose; libSystem's atexit(fn) runs it at process exit,",
+  "   after the image is unmapped). __cxa_atexit(fn, 0, header) is the same contract: dyld runs __cxa_finalize(header) on dlclose. issue #69 criterion 3 */",
+  "extern int __cxa_atexit(void (*)(void *), void *, void *);",
+  "extern char gld_mach_header asm(\"__mh_bundle_header\");",
+  "int gld_atexit_shim(void (*f)(void)) asm(\"_gld_atexit_shim\");",
+  "int gld_atexit_shim(void (*f)(void)) { return __cxa_atexit((void (*)(void *))f, 0, &gld_mach_header); }"
+ ],
  "label_overrides": {
   "builtin_strncpy": "_strncpy",
   "operator_delete": "__ZdlPv",
-  "FUN_00002748": "_atexit"
+  "FUN_00002748": "_gld_atexit_shim"
  },
  "data_anchors": {
   "DAT_001b2eb8": {

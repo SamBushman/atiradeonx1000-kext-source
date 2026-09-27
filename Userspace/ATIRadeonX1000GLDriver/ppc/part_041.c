@@ -1544,7 +1544,7 @@ int FUN_00133fe4(param_1)
           iVar12 = *piVar16;
           FUN_00194208(puVar11,puVar2[2] - 1);
           uVar5 = FUN_001308e0(iVar12);
-          FUN_00130abc(uVar5);
+          FUN_00130abc(uVar5,param_1,*(undefined4 *)(param_1 + 0x2c));
           uVar5 = ((int (*)())FUN_001318a4)(param_1,*(undefined4 *)(iVar12 + 0x94),uVar1);
           uVar6 = thunk_FUN_001307f8(iVar12);
           FUN_001312f4(iVar12,uVar1,uVar5,uVar6,*(undefined4 *)(param_1 + 0x2c));
@@ -1577,7 +1577,7 @@ int FUN_00133fe4(param_1)
                   piVar16[5] = piVar16[5] | 0x8000000;
                   iVar3 = (**(code **)(iVar3 + 0x14))(piVar18);
                   if ((iVar7 <= iVar3) && (iVar3 = FUN_00131008(1,piVar18,iVar7), iVar3 != 0)) {
-                    FUN_00130abc(piVar18);
+                    FUN_00130abc(piVar18,param_1,*(undefined4 *)(param_1 + 0x2c));
                     if (((piVar16[5] & 0x20000000U) == 0) || ((piVar16[6] & 1U) != 0)) {
                       iVar3 = ((int (*)())FUN_001318a4)(param_1,iVar15,uVar1);
                       iVar15 = FUN_00130a08(piVar18,*(undefined4 *)(iVar3 + 0x13c));
@@ -3410,7 +3410,7 @@ code_r0x00136cac:
                    *(int *)(param_1 + 0x10));
     } while (iVar3 < *(int *)(param_1 + 0xc));
   }
-  FUN_000ed7e4(*(undefined4 *)(param_1 + 0x28),0x1a9e78);
+  FUN_000ed7e4(*(undefined4 *)(param_1 + 0x28),(int)"color_graph");
   FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),piVar11);
   FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),iVar10);
   FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),piVar6);

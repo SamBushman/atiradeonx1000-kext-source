@@ -20,7 +20,7 @@ def keys(n, anchor, table):
     return out
 GP = {'yfa': ['__Z13yy_flex_allocj'], 'yfr': ['__Z15yy_flex_reallocPvj'], 'yff': ['__Z12yy_flex_freePv'], 'ung': ['_str_ungetch'], 'unl': ['_unlinkScope'], 'cppv': ['_cpp'], 'scopev': ['_ScopeList'],
       'dcba': ['_glpDCBAlloc'], 'dcbr': ['_glpDCBRealloc'], 'dcbf': ['_glpDCBFree'], 'trav': ['__ZN13TIntermSymbol8traverseEP16TIntermTraverser']}
-GD = {'cal': ['FUN_000a6f70'], 'cos': ['FUN_001d05b0'], 'sin': ['FUN_001d0794'], 'rsq': ['FUN_001d06ec']}
+GD = {'permslot': ['PTR_DAT_001e88cc'], 'avswap': ['FUN_0001e8a0'], 'avcopy': ['FUN_0001eaf0'], 'cmdemit': ['FUN_0002cd50'], 'cflush': ['FUN_0000b620'], 'cflush2': ['FUN_0000b670'], 'cal': ['FUN_000a6f70'], 'cos': ['FUN_001d05b0'], 'sin': ['FUN_001d0794'], 'rsq': ['FUN_001d06ec']}
 sp, rp, sd, rd, rgp, rgd = sys.argv[1:7]
 def run(image, anchor, ks):
     r = subprocess.run(['ssh', 'G5', 'cd "%s/tests" && ./patch_sites_test "%s" %s %s 2>&1' % (G, image, anchor, ' '.join(ks))], capture_output=True, text=True); return r.stdout
@@ -28,7 +28,7 @@ res = {}
 nsp, nrp, nsd, nrd = nm(sp), nm(rp), nm(sd), nm(rd)
 # stock nm lacks some local symbols: the stock addresses are taken from the ledger names known from the corpus
 for k, v in {'_str_ungetch': 0x97b88a8c, '_unlinkScope': 0x97b89f00, '__ZN13TIntermSymbol8traverseEP16TIntermTraverser': 0x97b97d40}.items(): nsp.setdefault(k, v)
-for k, v in {'FUN_000a6f70': 0xa6f70, 'FUN_001d05b0': 0x1d05b0, 'FUN_001d0794': 0x1d0794, 'FUN_001d06ec': 0x1d06ec}.items(): nsd.setdefault(k, v)
+for k, v in {'PTR_DAT_001e88cc': 0x1e88cc, 'FUN_0001e8a0': 0x1e8a0, 'FUN_0001eaf0': 0x1eaf0, 'FUN_0002cd50': 0x2cd50, 'FUN_0000b620': 0xb620, 'FUN_0000b670': 0xb670, 'FUN_000a6f70': 0xa6f70, 'FUN_001d05b0': 0x1d05b0, 'FUN_001d0794': 0x1d0794, 'FUN_001d06ec': 0x1d06ec}.items(): nsd.setdefault(k, v)
 out = {}
 out['glprog stock'] = run(SYS, 'glpDCBAlloc', keys(nsp, '_glpDCBAlloc', GP)); out['glprog rebuilt'] = run(rgp, 'glpDCBAlloc', keys(nrp, '_glpDCBAlloc', GP))
 out['gld stock'] = run(GLD, 'gldGetString', keys(nsd, '_gldGetString', GD)); out['gld rebuilt'] = run(rgd, 'gldGetString', keys(nrd, '_gldGetString', GD))

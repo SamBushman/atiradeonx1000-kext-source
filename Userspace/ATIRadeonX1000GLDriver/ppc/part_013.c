@@ -804,7 +804,7 @@ LAB_0008b1f0:
           FUN_00088e70(param_1,pcVar3);
           return;
         }
-        ((int (*)())FUN_0008aa40)(param_1,iVar1);
+        ((int (*)())FUN_0008aa40)(param_1,iVar1,0,0);
         param_2[6] = 0;
         return;
       }
@@ -814,7 +814,7 @@ LAB_0008afa0:
     }
   }
   else if (uVar4 != 0x17) goto LAB_0008afa0;
-  ((int (*)())FUN_0008aa40)(param_1,iVar1);
+  ((int (*)())FUN_0008aa40)(param_1,iVar1,0,0);
   param_2[6] = 0;
   return;
 }

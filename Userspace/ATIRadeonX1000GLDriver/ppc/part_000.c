@@ -87,11 +87,11 @@ int FUN_000018fc()
   code *local_28;
   code *local_24 [7];
   
-  ((int (*)())FUN_00001770)(0x1a4120,(uint)&local_34);
-  ((int (*)())FUN_00001770)(0x1a4138,(uint)&local_30);
-  ((int (*)())FUN_00001770)(0x1a4150,(uint)&local_2c);
-  ((int (*)())FUN_00001770)(0x1a4168,(uint)&local_28);
-  uVar1 = ((int (*)())FUN_00001770)(0x1a4188,(uint)local_24);
+  ((int (*)())FUN_00001770)((int)"__dyld_image_count",(uint)&local_34);
+  ((int (*)())FUN_00001770)((int)"__dyld_get_image_name",(uint)&local_30);
+  ((int (*)())FUN_00001770)((int)"__dyld_get_image_header",(uint)&local_2c);
+  ((int (*)())FUN_00001770)((int)"__dyld_NSLookupSymbolInImage",(uint)&local_28);
+  uVar1 = ((int (*)())FUN_00001770)((int)"__dyld_NSAddressOfSymbol",(uint)local_24);
   if ((((local_34 != (code *)0x0) && (local_30 != (code *)0x0)) && (local_2c != (code *)0x0)) &&
      ((local_28 != (code *)0x0 && (local_24[0] != (code *)0x0)))) {
     uVar2 = (*local_34)(uVar1);

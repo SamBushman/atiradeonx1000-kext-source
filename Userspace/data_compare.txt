@@ -1,4 +1,4 @@
-# data_compare.py on the linked images (tag x6, 2026-09-26): initialised data of each rebuilt image vs the stock's
+# data_compare.py on the linked images (tags x6; GLDriver z1, 2026-09-26): initialised data of each rebuilt image vs the stock's
 
 == ga
 __bss          21 identical
@@ -32,11 +32,11 @@ __bss          1033 identical, 3 identical (located by anchor)
 __common       257 identical, 31 identical (located by anchor)
 __const        161 identical, 124 identical (located by anchor), 59 same up to pointer targets, 12 same up to pointer targets (located by anchor)
 __const_coal   1 same up to pointer targets, 307 same up to pointer targets (located by anchor)
-__cstring      226 identical, 26 no label, content ABSENT, 1339 no label, content present
+__cstring      226 identical, 13 no label, content ABSENT, 1352 no label, content present
 __data         90 identical, 49 identical (located by anchor), 22 same up to pointer targets, 4 same up to pointer targets (located by anchor)
 __literal4     57 identical, 5 no label, content present
 __literal8     25 identical, 1 no label, content present
-0 objects differ, 26 without a label whose content is absent from the rebuilt image
+0 objects differ, 13 without a label whose content is absent from the rebuilt image
 
 == libgl
 __cstring      1 no label, content present

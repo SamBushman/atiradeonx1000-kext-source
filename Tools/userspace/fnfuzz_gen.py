@@ -98,10 +98,13 @@ for _pf in sorted(glob.glob(os.path.join(link, 'part_*.c'))):
     for _f in re.split(r'(?m)^(?=/\* \S+ @ \S+ \(\d+ bytes\) \*/)', open(_pf).read()):
         _m = re.match(r'/\* (\S+) @', _f)
         if _m and re.search(r'\bin_r(0|2|11|12)\b', _f): IMPLICIT.add(_m.group(1))
+# FNFUZZ_ALLOW=dcbz,lwarx,... lets functions containing those (otherwise excluded) instructions in; FNFUZZ_ONLY_ALLOWED=1 then keeps ONLY the functions that do contain one:
+# the ledger of the hardware-flavoured functions (cache ops, atomics, barriers) for a single-threaded differential (issue #69)
+ALLOW = set(x for x in os.environ.get('FNFUZZ_ALLOW', '').split(',') if x); ONLY_ALLOWED = bool(os.environ.get('FNFUZZ_ONLY_ALLOWED'))
 rows = []
 for ent, (nm, rs) in sorted(fns.items()):
     if nm in IMPLICIT: continue
-    bad = None; size = 0
+    bad = None; size = 0; used_allowed = False
     for lo, hi in rs:
         size += hi - lo
         for a in range(lo, hi, 4):
@@ -111,7 +114,9 @@ for ent, (nm, rs) in sorted(fns.items()):
             elif op == 'mtspr' and 'lr' not in arg and 'ctr' not in arg: bad = 'spr'
             elif op == 'mfspr' and not re.search(r'\b(lr|ctr|xer)\b', arg): bad = 'spr'
             elif re.search(r'\b0xff[0-9a-f]{2}\(r1\)', arg) and op in ('lwz', 'lhz', 'lbz', 'lfs', 'lfd', 'lha'): bad = 'redzone'   # a load below the stack pointer: a fragment of a caller's frame (prologue saves are stores)
-            elif op in ('sync', 'eieio', 'isync', 'lwarx', 'stwcx.', 'dcbz', 'dcbf', 'icbi', 'dcbst'): bad = op
+            elif op in ('sync', 'eieio', 'isync', 'lwarx', 'stwcx.', 'dcbz', 'dcbf', 'icbi', 'dcbst'):
+                if op in ALLOW: used_allowed = True
+                else: bad = op
             elif op in ('bl', 'bl+', 'bl-'):
                 mm = re.search(r'symbol stub for: (\S+)', arg)
                 if mm and mm.group(1).lstrip('_') not in WL: bad = 'import'
@@ -120,6 +125,7 @@ for ent, (nm, rs) in sorted(fns.items()):
     if first[0] in ('stfd', 'lfd') and re.match(r'f(1[4-9]|2\d|3[01])\b', first[1]): continue      # saveFP / restFP millicode entry points (a register-save chain, not a function)
     if key == 'glprog' and ent in (0x97b89f04, 0x97b88a90): continue                                # clipped fragments patched in patches.py (they read the parent's registers)
     if bad or size < 16 or re.match(r'^(eh_|__Unwind|orph_|save_world|rest_world|dyld_stub|_glp?Unwind|_*(lshr|ashl|ashr|mul|div|mod|udiv|umod|cmp|ucmp|fix|float|neg|ffs|clz|ctz|popcount|parity)[a-z]*[ds]i[0-9]?$)', nm): continue
+    if ONLY_ALLOWED and not used_allowed: continue
     sg = sig_of(ent)
     if sg is None: continue
     ct = CTYPES.get(nm)

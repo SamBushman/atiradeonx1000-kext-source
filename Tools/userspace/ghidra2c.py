@@ -267,7 +267,7 @@ def fix_proto_param(q):
         return q
     ty = m.group(1).strip()
     return '%s%s%s' % (fix_proto_type(ty), '' if fix_proto_type(ty).endswith('*') else ' ', m.group(2))
-_FCTIW = None
+_FCTIW = None; _CSTR = None
 if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.tsv')):
     import struct as _st
     _d = open(os.environ['CORPUS_SLICE'], 'rb').read(); _secs = []
@@ -283,6 +283,19 @@ if os.environ.get('CORPUS_SLICE') and os.path.exists(os.path.join(src, 'RANGES.t
         for sa, sz_, off in _secs:
             if sa <= x < sa + sz_ and off: return _st.unpack('>I', _d[off + x - sa:off + x - sa + 4])[0]
         return 0
+    _CSTR = None      # (lo, hi, bytes-of-section): the stock's __cstring, for fix_cstring_literals
+    for _cn in range(0):
+        pass
+    _p2 = 28
+    for _ in range(_nc):
+        _c, _cs = _st.unpack('>II', _d[_p2:_p2 + 8])
+        if _c == 1:
+            _ns2 = _st.unpack('>I', _d[_p2 + 48:_p2 + 52])[0]; _q2 = _p2 + 56
+            for _ in range(_ns2):
+                if _d[_q2:_q2 + 16].split(b'\0')[0] == b'__cstring':
+                    _a2, _sz2, _off2 = _st.unpack('>3I', _d[_q2 + 32:_q2 + 44]); _CSTR = (_a2, _a2 + _sz2, _d[_off2:_off2 + _sz2])
+                _q2 += 68
+        _p2 += _cs
     _FCTIW = set(); _FCTIWN = {}    # entries of functions holding a float -> integer conversion (fctiw / fctiwz), and how many
     for _l in open(os.path.join(src, 'RANGES.tsv')):
         _f = _l.rstrip('\n').split('\t')
@@ -671,6 +684,22 @@ def _ptr_store_lhs(pre):
     m = re.search(r'([A-Za-z_]\w*)(?:\[[^\]\n]*\])+\s*=\s*$', pre)
     if m: return not re.match(r'(?:local_|auStack|aiStack|afStack|adStack|uStack|iStack|fStack|ghidra_)', m.group(1))
     return re.search(r'\*\s*[\w(][^;=\n]*\s*=\s*$', pre) is not None or re.search(r'\)\s*=\s*$', pre) is not None
+def fix_cstring_literals(b):
+    """A number that is the address of a C string in the stock (`FUN_000ed7e4(param_1,0x1a9ed4)`: the pass-name argument of GLDriver's profiling hook; the
+    dyld-lookup helper's names): Ghidra typed the argument an integer and printed the STOCK address, which means nothing in the rebuilt layout (the callee
+    dereferenced a wild pointer; the strings were not even in the image). Only a literal that is exactly a string start (the byte before is NUL) is replaced,
+    by the string itself."""
+    if _CSTR is None: return b, 0
+    lo, hi, data = _CSTR; n = [0]
+    def rep(m):
+        v = int(m.group(1), 16)
+        if not (lo <= v < hi) or (v > lo and data[v - lo - 1] != 0): return m.group(0)
+        e = data.index(b'\0', v - lo); sv = data[v - lo:e]
+        if len(sv) < 1 or any(c < 0x20 or c > 0x7e for c in sv): return m.group(0)
+        n[0] += 1
+        return '(int)"%s"' % ''.join('\\' + chr(c) if chr(c) in '"\\' else chr(c) for c in sv).replace('?', '\\?')
+    b2 = re.sub(r'(?<![\w.\"])0x([0-9a-f]{4,8})\b(?!\s*[\[\]])', rep, b)
+    return b2, n[0]
 # a floating-point VALUE token (a bare `pfVar3` / `pdVar44` is a pointer to floats: an integer)
 _FVAL = re.compile(r'\b[fd]Var\d+\b|\bp[fd]Var\d+\s*\[|\*\s*p[fd]Var\d+\b|\bFLOAT_\w+|\bDOUBLE_\w+|\bfparam_\w+|\bin_f\d+|\bextraout_f\d+|\*\s*\(\s*(?:float|double)\s*\*\s*\)|\(\s*(?:float|double)\s*\)|(?<![\w.])\d+\.\d+|(?<![\w.])\d+e[-+]?\d+\b')
 def _fvals_for(b):
@@ -992,6 +1021,7 @@ for pi in range(0, len(funcs), part):
             b = re.sub(r'(?<![\w.>])(%s)\s*\[' % '|'.join(re.escape(n) for n in defined_names) if defined_names else 'x^', lambda m: '((code **)%s)[' % m.group(1), b)
             b, _nfi = fix_float_int(b, int(a, 16))
             b, _nrc = resolve_float_casts(b, int(a, 16))
+            b, _ncl = fix_cstring_literals(b)
             b, _nnan = fix_nan(b, int(a, 16))
             # `byte in_xer_so;` is the summary-overflow bit copied into the CR images the code builds (`(a == b) << 1 | in_xer_so & 1`); the stock's XER[SO] is 0 (no `o`
             # instruction, no mtxer sets it) and the rebuilt local was uninitialised stack (GLDriver FUN_0001c380, 22 uses in 4 functions)

@@ -395,8 +395,9 @@ through the rebuilt image's external relocations. Result (identical / same up to
 * **libGLProgrammability: 0 real differences among ~1100 objects** (bss 174, `__const` 214, `__data` 357, strings 286 + 1262 by content, `__datacoal_nt` 39, literals 32). 35 objects differ for known, intended reasons: 31 are the stock's private copies of libstdc++'s exception typeinfo (`std::bad_alloc::typeinfo`,
   `__cxxabiv1::__si_class_type_info::typeinfo-name` ..., in `__datacoal_nt`; the rebuilt image imports the system libstdc++'s: issue #63), `dyld__mh_dylib_header` (the image's own header address, bound by dyld
   differently) and the prebound `__cxxabiv1::__terminate_handler` (three aliases: an address inside libstdc++ at the stock's link time).
-* Stock objects with no counterpart: the dyld / atexit boilerplate strings of the toolchain stub (`__dyld_image_count`, `__dyld_NSLookupSymbolInImage`, `__cxa_finalize` ... 13 GA, 10 VA, 10 GLDriver) and 16 GLDriver / 2 glprog pass-name strings
-  (`assign_slots`, `mark_io`, `ssa_build` ...; `before`, `after`) that no code of the corpus (parts, raw blocks, pads, orphans) references.
+* Stock objects with no counterpart: the dyld / atexit boilerplate strings of the toolchain stub (`__dyld_image_count`, `__dyld_NSLookupSymbolInImage`, `__cxa_finalize` ... 13 GA, 10 VA, 10 GLDriver), three GLDriver
+  diagnostic strings (`too_many_program_parameters` ...) and 2 glprog strings (`before`, `after`) that no code of the corpus references. (The first run of this compare listed 16 more GLDriver strings -
+  the pass names `assign_slots`, `mark_io`, `ssa_build` ... - as unreferenced; they were not: see class 23 below, the corpus passed their STOCK ADDRESSES as numbers.)
 * Not compared: `__TEXT,__eh_frame`, `__gcc_except_tab` (not emitted, #63), the symbol-pointer / stub sections (rebuilt by the linker).
 **PIC anchors (criterion 2).** `DAT_001b2eb8`, `DAT_001b40f0`, `DAT_001b81b8` are addresses in the stock's `__eh_frame` (past the end of `__const`), defined in the rebuilt image as `LD_1b0050 + 11880` / `LD_1b0044 + 16556` /
 `LD_1b2ac0 + 22264`. Every use in the corpus (`part_042.c` x4, `part_043.c` x3, `part_052.c` x1) is `local_NN = &DAT_...` inside a function's exception-registration record (`local_7c = 2; local_70 = &...`, next to the
@@ -418,8 +419,8 @@ do either way (#63: no LSDA / FDE is emitted). The other anchors listed in `link
 
 ### Hand patches: derivation, loud failure, tests (issue #71)
 Every entry of `Tools/userspace/patches.py` carries a comment with the stock address range it was derived from and the equivalent C; every substitution is counted (`_subs` / `_re_subs` raise `PatchError`
-when a pattern is found a different number of times, `_body` also when the header does not name the function), and `Tools/userspace/test_patches.py` proves that ALL 35 patches fail loudly on text
-without their pattern (35 checked, 0 silent). The retired patches are listed with their derivation at the end of the file. Run-time evidence per patch (stock vs rebuilt):
+when a pattern is found a different number of times, `_body` also when the header does not name the function), and `Tools/userspace/test_patches.py` proves that ALL 40 patches fail loudly on text
+without their pattern (40 checked, 0 silent). The retired patches are listed with their derivation at the end of the file. Run-time evidence per patch (stock vs rebuilt):
 | patch | test |
 |---|---|
 | `yy_flex_alloc` / `realloc` / `free`, `_str_ungetch` + `FUN_97b88a90`, `_unlinkScope` + `FUN_97b89f04`, `_glpDCBRealloc`, `TIntermSymbol::traverse`, GLDriver `FUN_000a6f70`, `FUN_001d05b0` / `1d0794` (cos, sin through the virtual angle conversion), `FUN_001d06ec` | `Tests/userspace/patch_sites_test.c` + `patch_sites.py`: each function driven with its real argument shapes in both images (fake `_cpp` record, list nodes, callback traverser, fake vtable), outputs identical (14 + 34 lines) |
@@ -432,8 +433,42 @@ without their pattern (35 checked, 0 silent). The retired patches are listed wit
 | `__terminate` / `__unexpected`, `_Unwind_RaiseException` / `ForcedUnwind` / `Resume` | `eh_test.cpp` (stock and rebuilt both end in SIGABRT; the rebuilt path differs inside the unwinder - #63) |
 | `_InterpreterEmulateOp` noise output, `_Rep::_M_dispose` | **no direct test**: the first needs an emulator program + context (`interp_noise_test` checks the callee, not this site), the second is reached through std::string destruction in every compile but not isolated |
 | `FUN_00029290` (`_vfree` argument), `FUN_0007c760` (dead `memset` length assignment), `FUN_000c6470` (pointer cast) | **not reachable without a live GL context** (pixel upload / context setup) or compile-time only (a cast, a dead assignment): recorded reason, no test |
+| `FUN_0008b160`, `FUN_00133fe4`, `FUN_0013d160`, `FUN_001240a8`, `FUN_0017e3f4` (dropped call arguments, class 23) | **not reachable without a live GL context** (state / draw-path functions taking the driver context); derived from the stock's argument registers at each `bl` (comments in `patches.py`), the pass-name call by the `"rewrite"` string at the stock address |
 | the two i386 patches | the i386 slice is not built (user decision) |
 
+### Atomics, AltiVec / cache instructions, atexit, analysed-copy edits (issue #69)
+* **Atomics (criterion 1).** The `lwarx ... stwcx.` loops are rewritten (`rewrites.rewrite_atomics`) as `do { old = *p; new = f(old); } while (!ghidra_cas32(p, old, new));`, with `ghidra_cas32` =
+  `1: lwarx cur,0,p; cmpw cur,old; bne- 2f; stwcx. new,0,p; bne- 1b; 2:` returning `cur == old` (`ghidra_link.h`). Reservation semantics are the stock's: the store happens only if the reservation
+  survived AND the word still equals what the function read (a lost reservation retries in place, a changed value retries the whole computation); the stock has no `sync` / `eieio` / `isync` around these loops
+  (47 GLDriver, 292 glprog and 2 VA rewritten sites; the only `sync; isync` pairs in the five images end the `dcbf` range-flush routines, GLDriver 0xb670 / 0xb620's sibling, and VA's), so no ordering is lost. Evidence: `atomic_test.c` (two threads on the pool-string refcount path: no lost update, both images) and the
+  single-threaded differential of every function that contains `lwarx` / `stwcx.` / `sync` / `eieio` / `isync` / cache ops (`FNFUZZ_ALLOW=... FNFUZZ_ONLY_ALLOWED=1 fnfuzz_gen.py`: GLDriver 5, glprog 20,
+  VA 2 functions; glprog 16 of 20 informative, all identical), plus `patch_sites_test.c` `cmdemit` (GLDriver `FUN_0002cd50`: the reference count of the object's holder goes 0x50000 -> 0x60000
+  through the CAS loop, the command words are identical) and the dcbst / dcbf range flush `FUN_0000b620`. Two of the five GLDriver ones crash in both images for every input (need a context), which
+  the fuzz reports as uninformative.
+* **AltiVec / cache instructions (criterion 2).** Only two functions of the five images contain AltiVec code outside the toolchain's `save_world` / `rest_world`: GLDriver `FUN_0001e8a0` (16-bit swapping
+  copy: `vperm`, `dcbt`, `dcba`) and `FUN_0001eaf0` (copy with `dcbz` clear-to-zero and a `vsel` edge merge). `patch_sites_test.c` drives each over 378 combinations of destination alignment
+  (0..128), source alignment (0..48 bytes) and length (2..1500) with guard bytes and a fixed permute-constant table in the data word the stock's initialisation fills (`PTR_DAT_001e88cc`): the
+  FNV checksums of the whole destination buffer are identical in the stock and the rebuilt image (`7ae2498cdef61387`, `78b3a23c14bd4927`). The `dcba` (`dataCacheBlockAllocate`) is a no-op in the
+  rebuilt C - it is a hint, and the 970 does not implement it.
+* **atexit (criterion 3) - a real difference, fixed.** The stock GLDriver's crt shim (`FUN_00002748` -> `FUN_000023a8`, a statically linked libgcc registry on keymgr key 14; 253 call sites register
+  function-static destructors) is dropped as toolchain code, and the rebuilt image had mapped it to libSystem's `atexit(fn)`. `Tests/userspace/unload_test.c` shows the difference: a handler registered through
+  the stock shim runs DURING `dlclose`; through `atexit` it runs at process exit, after the image is unmapped (a dangling call if the renderer bundle is ever unloaded). `__cxa_atexit(fn, 0, header)` has the stock's
+  contract (dyld runs `__cxa_finalize(header)` on `dlclose`: verified with the image's own header as the handle), so `link_config/gld.json` now defines `_gld_atexit_shim` (new `extra_c` key of
+  `link_corpus.py`) doing exactly that; the rebuilt shim's handler runs during `dlclose`, as the stock's. GA's crt shim is transcribed (`_atexit`, `_atexit_common`, `_our_atexit`), VA / glprog / libGL
+  have no atexit call sites. The single registration made while any of the images is `dlopen`ed is identical in the stock and the rebuilt image (`unload_test`, `DYLD_FORCE_FLAT_NAMESPACE=1`).
+* **Analysed-copy edits (criterion 4).** `Userspace/<bin>/ppc/analysed_copy_patches.tsv` (from `Tools/userspace/analysed_patch_sites.py`) lists every edited site with the stock behaviour and why the C is
+  equivalent: NopMillicode (glprog 7, GLDriver 20, libGL 39 `bl`s into the FPR-save millicode: it only stores callee-saved FPRs and preserves r3..r10; the decompiler modelled a call that clobbers them),
+  FixSwitches (glprog 123, GLDriver 6 embedded jump tables with their extents and targets), PatchConstSwitch (glprog 7), MoveEntries (glprog 2, GLDriver 17 functions re-created at their true entry).
+
+23. **String addresses printed as numbers, and dropped call arguments (issue #70 criterion 2).** Found while looking at why 16 GLDriver strings had no counterpart in the rebuilt image:
+    `FUN_000ed7e4(param_1, 0x1a9ed4)` - Ghidra typed the pass-name argument of the profiling hook an integer and printed the stock address of the string, which is a wild pointer in the rebuilt layout (11
+    call sites, the virtual `+0x48` method of each pass object receives it; the 5 dyld-lookup names of the crt helper had the same form). `ghidra2c.fix_cstring_literals` replaces a literal that is exactly the
+    start of a stock `__cstring` (byte before is NUL, printable content) by the string: `(int)"assign_slots"`. The 12th caller had lost the argument altogether, and `detect_short_calls.py` (direct calls with
+    fewer arguments than the callee's definition has parameters) listed four more such functions; each was checked against the argument registers at the stock `bl` and patched in `patches.py`
+    (GLDriver `FUN_0008b160` r5 = r6 = 0 x2, `FUN_00133fe4` r4 = param_1, r5 = *(param_1 + 0x2c) x2, `FUN_0013d160` "rewrite", `FUN_001240a8` r5 = param_1, `FUN_0017e3f4` r5 = *(param_1 + 0x238)). The
+    detector now reports 0 in GLDriver / GA / VA / libGL; the 22 in glprog are `_Rep::_M_destroy(this, allocator)` (the callee reads the allocator only in its landing pad) and string literals that spell `yy_scan_bytes()`.
+    `Tools/userspace/callarg_triage.py` classifies the residual rows of `callarg_check.py` (`Userspace/<bin>/ppc/callarg_residual.tsv`): benign (callee ignores the register / only returns it / import of smaller
+    arity / a symbolised text address / a double's second slot / an alias of the parameter or constant) vs CHECK.
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

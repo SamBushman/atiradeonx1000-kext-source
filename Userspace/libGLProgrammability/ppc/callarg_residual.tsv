@@ -1,0 +1,59 @@
+# owner entry	owner	call site	callee	register	value	class
+0x97b7d540	_PPParserParseOptionIdentifier	0x97b7d8b8	PPStreamAddOption	r4	0x7 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: 0; 9)
+0x97b81994	_PPParserParseDestination	0x97b81b60	PPParserGetPart	r9	0x1 not at argument 6 of any C call (3 C calls)	BENIGN-CALLEE-IGNORES
+0x97b85418	___initialize_Cplusplus	0x97b8543c	dyld_func_lookup	r4	r1+0x38 (a stack address) not at argument 1 of any C call (1 C calls)	CHECK-indirect
+0x97b87010	_CPPif	0x97b870cc	eval	r6	r1+0x44 (a stack address) not at argument 3 of any C call (1 C calls)	CHECK (C arg3: piVar5)
+0x97b88ee4	_byte_scan	0x97b89a54	lFloatConst	r5	0x2e not at argument 2 of any C call (1 C calls)	CHECK (C arg2: a1)
+0x97b8a794	_ReadToken	0x97b8aac8	eprintf	r5	0x168 not at argument 2 of any C call (1 C calls)	CHECK
+0x97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	0x97b8bbac	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x2c0 (a stack address) not at argument 2 of any C call (7 C calls)	CHECK-unknown
+0x97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	0x97b8bda8	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x340 (a stack address) not at argument 2 of any C call (7 C calls)	CHECK-unknown
+0x97b8c5c0	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	0x97b8c68c	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x70 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK-unknown
+0x97b9b1cc	TParseContext::constructorErrorCheck	0x97b9b608	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x90 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK-unknown
+0x97b9c180	TParseContext::arrayErrorCheck	0x97b9ca20	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x120 (a stack address) not at argument 2 of any C call (3 C calls)	CHECK-unknown
+0x97b9cfe8	TParseContext::nonInitErrorCheck	0x97b9d174	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0xb0 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK-unknown
+0x97b9db6c	TParseContext::executeInitializer	0x97b9e0ec	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0xf0 (a stack address) not at argument 2 of any C call (3 C calls)	CHECK-unknown
+0x97b9db6c	TParseContext::executeInitializer	0x97b9e348	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	r5	r1+0x100 (a stack address) not at argument 2 of any C call (3 C calls)	CHECK-unknown
+0x97b9db6c	TParseContext::executeInitializer	0x97b9e92c	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_	r4	r1+0x140 (a stack address) not at argument 1 of any C call (4 C calls)	CHECK
+0x97ba0adc	generateBuiltInSymbolTable	0x97ba0b00	ZN9TBuiltIns10initializeERK16TBuiltInResource	r3	r1+0x40 (a stack address) not at argument 0 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97ba0adc	generateBuiltInSymbolTable	0x97ba0b00	ZN9TBuiltIns10initializeERK16TBuiltInResource	r4	incoming param_1 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97ba2670	TType::buildMangledName	0x97ba26e0	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc	r5	0x76 not at argument 2 of any C call (6 C calls)	CHECK
+0x97ba2670	TType::buildMangledName	0x97ba2778	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc	r5	0x62 not at argument 2 of any C call (6 C calls)	CHECK
+0x97ba2fb4	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	0x97ba3148	eprintf	r5	0xb9 not at argument 2 of any C call (1 C calls)	CHECK
+0x97baed64	_updateExtensionBehavior	0x97baf34c	ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_	r4	r1+0x1e0 (a stack address) not at argument 1 of any C call (8 C calls)	CHECK
+0x97bc5b60	TPPStreamCompiler::assignOperands	0x97bc600c	ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	r6	r1+0xb8 (a stack address) not at argument 3 of any C call (1 C calls)	CHECK
+0x97bc7b04	TPPStreamCompiler::FinishScalerSelect	0x97bc7b88	ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	r6	r1+0x90 (a stack address) not at argument 3 of any C call (1 C calls)	CHECK
+0x97bcdd50	_InterpreterEmulateOp	0x97bd0ba4	InterpreterNoiseGeneratorCalculate1D	r5	r1+0x60 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x97bcdd50	_InterpreterEmulateOp	0x97bd0bb8	InterpreterNoiseGeneratorCalculate2D	r5	r1+0x60 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x97bcdd50	_InterpreterEmulateOp	0x97bd0bcc	InterpreterNoiseGeneratorCalculate3D	r5	r1+0x60 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x97bcdd50	_InterpreterEmulateOp	0x97bd0be0	InterpreterNoiseGeneratorCalculate4D	r5	r1+0x60 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x97bcdd50	_InterpreterEmulateOp	0x97bd2948	InterpreterTextureSamplerSetProjectionEnabled	r4	0x1 not at argument 1 of any C call (1 C calls)	CHECK (C arg1: uVar32)
+0x97bdda38	_PPCRuntimeCompilerCompileAV	0x97be1540	PPCTextureSamplerSetProjectionEnabled	r4	0x1 not at argument 1 of any C call (1 C calls)	CHECK (C arg1: uVar15)
+0x97be7fc0	_glpWriteSourceOperand_97be7fc0	0x97be80b0	glpWriteSourceOperandExtendedSwizzle	r6	incoming param_8 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97bf0e10	_PPStreamChunkCompare	0x97bf0edc	memcmp	r5	0x8 not at argument 2 of any C call (1 C calls)	CHECK (C arg2: uVar3)
+0x97c075e0	_LocalCopyPropagator	0x97c0762c	EndLocalAvailableCopyList	r5	incoming param_1 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c0b938	_FlattenIf	0x97c0bf90	AddTempRegister	r9	0x1 not at argument 6 of any C call (4 C calls)	BENIGN-CALLEE-IGNORES
+0x97c0b938	_FlattenIf	0x97c0bc9c	GetValidArgs	r9	r1+0x200 (a stack address) not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c0c8dc	_EmulateOp	0x97c0efac	ClearDestedRegisters	r6	incoming param_2 not at argument 3 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x97c1376c	__ZNSsC4ERKSs	0x97c13790	ZNKSs13get_allocatorEv	r3	r1+0x50 (a stack address) not at argument 0 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c1376c	__ZNSsC4ERKSs	0x97c137dc	ZNKSs13get_allocatorEv	r4	incoming param_2 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c13894	__ZNSsC4ERKSsmmRKSaIcE	0x97c138e8	ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	r3	incoming param_2 not at argument 0 of any C call (1 C calls)	CHECK
+0x97c13a3c	__ZNSsD4Ev	0x97c13a58	ZNKSs13get_allocatorEv	r3	r1+0x40 (a stack address) not at argument 0 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c145e8	__ZNSs7reserveEm	0x97c14660	ZNKSs13get_allocatorEv	r4	incoming param_1 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c14880	__ZNSs6appendERKSs	0x97c1490c	ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	r6	incoming param_2 not at argument 3 of any C call (1 C calls)	CHECK
+0x97c14924	__ZNSs6appendERKSsmm	0x97c149e4	ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	r6	incoming param_3 not at argument 3 of any C call (1 C calls)	CHECK
+0x97c14b60	__ZNSs6assignERKSs	0x97c14b98	ZNKSs13get_allocatorEv	r3	r1+0x40 (a stack address) not at argument 0 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c14b60	__ZNSs6assignERKSs	0x97c14b98	ZNKSs13get_allocatorEv	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c14b60	__ZNSs6assignERKSs	0x97c14bf8	ZNSs4_Rep10_M_destroyERKSaIcE	r4	r1+0x40 (a stack address) not at argument 1 of any C call (1 C calls)	CHECK
+0x97c153dc	__ZNSs7replaceEmmmc	0x97c1543c	ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	CHECK
+0x97c15848	__ZNSs4swapERSs	0x97c158a0	ZNKSs13get_allocatorEv	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c15848	__ZNSs4swapERSs	0x97c158ac	ZNKSs13get_allocatorEv	r3	r1+0x50 (a stack address) not at argument 0 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c15848	__ZNSs4swapERSs	0x97c158ac	ZNKSs13get_allocatorEv	r4	incoming param_2 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x97c16a34	std::string::_M_replace<__gnu_cxx::__normal_iterator<char*,std::string>>	0x97c16ac8	ZNSsD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c16ae4	std::string::_M_replace<__gnu_cxx::__normal_iterator<char_const*,std::string>>	0x97c16b78	ZNSsD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c16b94	std::string::_M_replace<char*>	0x97c16c28	ZNSsD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c16c44	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	0x97c16cd8	ZNSsD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c1721c	__ZSt13__destroy_auxIPSsEvT_S1_12__false_type	0x97c17248	ZNSsD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c17424	std::__default_alloc_template<true,0>::allocate	0x97c17528	ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c17544	std::allocator<char>::allocate	0x97c17650	ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c1766c	std::__default_alloc_template<true,0>::deallocate	0x97c176dc	ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x97c176f4	std::allocator<char>::deallocate	0x97c17768	ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	r4	0x2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES

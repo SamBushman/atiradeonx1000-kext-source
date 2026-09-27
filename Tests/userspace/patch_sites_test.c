@@ -69,6 +69,46 @@ int main(int argc, char **argv) {
         printf("TIntermSymbol::traverse: callback called %d time(s), this ok %d, traverser ok %d\n", ncalls, last_this == &dummy, last_trav == trv);
         void *trv0[4] = { 0, 0, 0, 0 }; ncalls = 0; tr(&dummy, trv0); printf("with a NULL callback: %d call(s)\n", ncalls);
     }
+    /* GLDriver FUN_0002cd50 (a command-stream emitter: an atomic reference-count add of 0x10000 on the object's holder, `lwarx/stwcx.` rewritten as a CAS loop) and
+       FUN_0000b620 (a `dcbst` loop + `dcbf` over a range, line size from *(param_1 + 8)); the cache-line alignment of the stream is fixed so the outputs are comparable */
+    int *(*em)(void *, void *, int, int *) = F("cmdemit");
+    if (em) {
+        static int cmd[64] __attribute__((aligned(64))); static unsigned char ctx[0x300]; static unsigned char obj[0x100]; static int holder[8];
+        for (int v = 0; v < 4; v++) {
+            memset(cmd, 0, sizeof cmd); memset(ctx, 0, sizeof ctx); memset(obj, 0, sizeof obj); memset(holder, 0, sizeof holder);
+            *(int **)(ctx + 0x1d8) = cmd; holder[0] = 0x1234; holder[4] = 0x50000; *(int **)(obj + 0x34) = holder; *(int *)(obj + 0x40) = 0x77;
+            *(unsigned *)(obj + 0xc8) = (v & 1) ? 0xc00000 : 0; *(unsigned *)(obj + 0xcc) = 0x8000; obj[0x38] = 0x5a;
+            int *r = em(ctx, (v & 2) ? NULL : obj, 3, cmd + 4);
+            printf("cmdemit v=%d: returned +%ld words, ctx->last=+%ld words, holder refcount %x, words:", v, (long)(r - cmd), (long)(*(int **)(ctx + 0x1d8) - cmd), holder[4]);
+            for (int i = 0; i < 16; i++) printf(" %x", cmd[i]); printf("\n");
+        }
+    }
+    for (int q = 0; q < 2; q++) {
+        void (*cf)(void *, unsigned, int, int, int, int, int, int) = F(q ? "cflush2" : "cflush");
+        if (!cf) continue;
+        static unsigned char st[16]; static char mem[1024] __attribute__((aligned(128)));
+        for (int ls = 32; ls <= 128; ls *= 4) { memset(st, 0, 16); st[8] = ls; for (int i = 0; i < 1024; i++) mem[i] = i; cf(st, (unsigned)mem + 3, 500, 0, 0, 0, 0, 0); }
+        printf("%s: ran with line sizes 32 and 128, memory intact %d\n", q ? "FUN_0000b670 (dcbf loop + sync; isync)" : "FUN_0000b620 (dcbst loop + dcbf)", mem[1000] == (char)1000);
+    }
+    /* GLDriver FUN_0001e8a0 (AltiVec halfword-swapping copy: vperm, dcbt, dcbz-style allocate) and FUN_0001eaf0 (AltiVec copy with dcbz clear-to-zero of the destination lines and a
+       vsel edge merge): destination / source at assorted alignments and lengths, guard bytes around the destination; the result is a checksum of the whole destination buffer */
+    static unsigned char permtab[0x400] __attribute__((aligned(16)));
+    { int **slot = F("permslot"); if (slot) { for (int i = 0; i < 0x400; i++) permtab[i] = (i * 5 + (i >> 4)) & 0x1f;    /* the data word the stock's initialisation fills: a pointer to the vperm / vsel constants */
+        **(int **)slot = (int)permtab; } }
+    void (*sw)(void *, void *, unsigned) = F("avswap"), (*cp)(unsigned, unsigned, unsigned) = F("avcopy");
+    for (int k = 0; k < 2; k++) {
+        if (!(k ? (void *)cp : (void *)sw)) continue;
+        static unsigned char src[8192] __attribute__((aligned(128))), dst[8192] __attribute__((aligned(128)));
+        for (int i = 0; i < 8192; i++) src[i] = (unsigned char)(i * 7 + (i >> 8));
+        static const int doff[] = { 0, 4, 16, 32, 36, 60, 128 }, soff[] = { 0, 4, 8, 12, 20, 48 }, cnt[] = { 2, 16, 34, 64, 130, 256, 500, 1000, 1500 };
+        unsigned long long h = 1469598103934665603ULL; int n = 0;
+        for (unsigned a = 0; a < sizeof doff / sizeof *doff; a++) for (unsigned b = 0; b < sizeof soff / sizeof *soff; b++) for (unsigned c = 0; c < sizeof cnt / sizeof *cnt; c++) {
+            memset(dst, 0xaa, sizeof dst); if (getenv("PS_TRACE")) fprintf(stderr, "k=%d d=%d s=%d c=%d\n", k, doff[a], soff[b], cnt[c]);
+            if (k) cp((unsigned)dst + 256 + doff[a], (unsigned)src + 256 + soff[b], cnt[c]); else sw(dst + 256 + doff[a], src + 256 + soff[b], cnt[c]);
+            for (int i = 0; i < 8192; i++) { h ^= dst[i]; h *= 1099511628211ULL; } n++;
+        }
+        printf("%s: %d combinations, checksum %08x%08x\n", k ? "FUN_0001eaf0" : "FUN_0001e8a0", n, (unsigned)(h >> 32), (unsigned)h);
+    }
     void *(*cal)(unsigned) = F("cal");
     if (cal) { unsigned char *p = cal(37); int z = 1; for (int i = 0; i < 37; i++) if (p[i]) z = 0; printf("FUN_000a6f70: block %s, zeroed %d\n", p ? "ok" : "NULL", z); }
     static const float xs[] = { 0.0f, 1.0f, 0.5f, 2.0f, -1.0f, 3.14159f, 100.0f, 1e-3f, 1e10f, -0.0f };

@@ -1,0 +1,2 @@
+# owner entry	owner	call site	callee	register	value	class
+0x7f80	FUN_00007f80	0x8284	FUN_00007de0	r9	0x0 not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES

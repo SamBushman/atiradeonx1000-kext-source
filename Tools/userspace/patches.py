@@ -366,6 +366,25 @@ PATCHES = {
     'FUN_000c6470': _scoped('gld', _conv_with('FUN_000c6470 (0xc6470)', [
         ('SUB42(param_3,0)', 'SUB42((unsigned long)param_3,0)')])),
 
+    # Direct calls whose C passes FEWER arguments than the callee's own parameter list (detect_short_calls.py candidates, checked against the stock's argument registers at each
+    # `bl`; issue #70 criterion 2): the callee reads the missing registers, the rebuilt call left them holding whatever the caller's frame had.
+    # FUN_0008b160 (stock 0x8b160): `bl 0x8aa40` at 0x8afd8 and 0x8b010, each preceded by `li r5,0; li r6,0` (callarg_check: r5 = 0x0, r6 = 0x0 at both).  C: (param_1, iVar1, 0, 0)
+    'FUN_0008b160': _scoped('gld', _conv_with('FUN_0008b160 (0x8afd8, 0x8b010)', [('((int (*)())FUN_0008aa40)(param_1,iVar1);', '((int (*)())FUN_0008aa40)(param_1,iVar1,0,0);', 2)])),
+    # FUN_00133fe4 (stock 0x133fe4, r23 = param_1 from `or r23,r3,r3` at 0x133fec): `bl 0x130abc` at 0x1341ac (`lwz r5,0x2c(r23); or r3,r30,r30; or r4,r23,r23`, r30 = piVar18)
+    # and at 0x134380 (`lwz r5,0x2c(r23); or r4,r23,r23`, r3 = the result of `bl 0x1308e0` just before = uVar5). C: (r3, param_1, *(param_1 + 0x2c))
+    'FUN_00133fe4': _scoped('gld', _conv_with('FUN_00133fe4 (0x1341ac, 0x134380)', [
+        ('FUN_00130abc(uVar5);', 'FUN_00130abc(uVar5,param_1,*(undefined4 *)(param_1 + 0x2c));'),
+        ('FUN_00130abc(piVar18);', 'FUN_00130abc(piVar18,param_1,*(undefined4 *)(param_1 + 0x2c));')])),
+    # FUN_0013d160 (stock 0x13d160): `bl 0xed7e4` at 0x13d384 with `addis r4,r31,7; addi r4,r4,0xcd5c` (r31 = the PIC base 0x13d168) = 0x1a9ec4 = the C string "rewrite" (the pass-name
+    # argument of the profiling hook FUN_000ed7e4 - all its other 11 callers passed the string's STOCK ADDRESS as a number, see fix_cstring_literals in ghidra2c.py). C: (param_1, "rewrite")
+    'FUN_0013d160': _scoped('gld', _conv_with('FUN_0013d160 (0x13d384)', [('FUN_000ed7e4(param_1);', 'FUN_000ed7e4(param_1,(int)"rewrite");')])),
+    # FUN_001240a8 (stock 0x1240a8): a tail call `b 0x123c08` at 0x1241a8 with r3 = *(r5+0x6c4), r4 = r25 (= param_2), r5 = r29 (`or r5,r29,r29` at 0x12419c; r29 = param_1 from
+    # `or r29,r3,r3` at 0x1240b4). C: the third argument is param_1.
+    'FUN_001240a8': _scoped('gld', _conv_with('FUN_001240a8 (0x1241a8)', [('((int (*)())FUN_00123c08)(*(undefined4 *)(param_3 + 0x6c4),param_2);', '((int (*)())FUN_00123c08)(*(undefined4 *)(param_3 + 0x6c4),param_2,param_1);')])),
+    # FUN_0017e3f4 (stock 0x17e3f4, r30 = param_1): `bl 0x122fa4` at 0x17e588 after `lwz r5,0x238(r30); or r3,r25,r25; lwz r2,0x6c4(r5); lwz r4,0x3a0(r2)`: r5 still holds
+    # *(param_1 + 0x238) (the object whose +0x6c4 field supplies the second argument). C: third argument *(param_1 + 0x238).
+    'FUN_0017e3f4': _scoped('gld', _conv_with('FUN_0017e3f4 (0x17e588)', [('*(int *)(*(int *)(param_1 + 0x238) + 0x6c4) + 0x3a0)\n                        );', '*(int *)(*(int *)(param_1 + 0x238) + 0x6c4) + 0x3a0)\n                        ,*(undefined4 *)(param_1 + 0x238));')])),
+
     # --- GLDriver i386 (dump not archived; not exercised by the current pipeline) ---------------------------------------------------
     # FUN_001984c6 (gld i386 slice, stock 0x1984c6): local_28 is a pointer to a record (indexed as local_28[0x26]); Ghidra declared it as a one-element array of undefined4
     # (the i386 slice is not part of the rebuilt images: user decision 2026-09-19)

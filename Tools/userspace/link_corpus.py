@@ -1150,6 +1150,9 @@ if _undecl:
     with open(os.path.join(out, 'decls.h'), 'a') as f_:
         for n in _undecl:
             f_.write('extern int %s() asm("%s");\n' % (n, n))
+if cfg.get('extra_c'):      # C the image needs that no stock function provides (a faithful stand-in for dropped toolchain code)
+    with open(os.path.join(out, 'x_extra_part_000.c'), 'w') as f_:
+        f_.write('#include "decls.h"\n' + '\n'.join(cfg['extra_c']) + '\n')
 for dn_ in cfg.get('dummy_functions', []):
     with open(os.path.join(out, 'x_dummy_part_000.c'), 'a') as f_:
         f_.write('/* %s: not reproduced (millicode entry Ghidra printed as a call, or a function whose decompile failed); returns 0 */\nunsigned long long %s_dummy() asm("%s");\nunsigned long long %s_dummy() { return 0; }\n' % (dn_, dn_, dn_, dn_))

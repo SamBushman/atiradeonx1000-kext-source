@@ -1038,7 +1038,7 @@ LAB_0012ce40:
                     iVar3 = ((int (*)())FUN_0012b6a8)(local_84,local_88,in_r5,in_r6,in_r7,in_r8,in_r9);
                     bVar1 = bVar1 || iVar3 != 0;
                     if (iVar3 != 0) {
-                      FUN_000ed7e4(param_1,0x1a9e00);
+                      FUN_000ed7e4(param_1,(int)"loop_trans");
                     }
                   }
                 }
@@ -1522,7 +1522,7 @@ int FUN_0012d2f0(param_1)
     } while (piVar23 != (int *)0x0);
     if (bVar1) {
       FUN_000ec2e8(param_1);
-      FUN_000ed7e4(param_1,0x1a9e0c);
+      FUN_000ed7e4(param_1,(int)"flatten_ifs");
       FUN_0013bd68(param_1,0);
     }
   }
@@ -2893,7 +2893,7 @@ LAB_0013037c:
       FUN_0013bd68(param_1,0);
     }
   }
-  FUN_000ed7e4(param_1,0x1a9e18);
+  FUN_000ed7e4(param_1,(int)"remove_empty_graphs");
   return;
 }
 

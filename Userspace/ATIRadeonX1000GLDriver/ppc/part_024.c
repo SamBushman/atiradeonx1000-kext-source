@@ -3882,7 +3882,7 @@ int FUN_000f29f4(param_1)
   int *piVar9;
   
   FUN_0010ea30(param_1);
-  ((int (*)())FUN_000ed7e4)(param_1,0x1a97e0);
+  ((int (*)())FUN_000ed7e4)(param_1,(int)"assign_slots");
   piVar1 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
   iVar3 = *piVar1;
   iVar2 = (**(code **)(iVar3 + 0xd8))(piVar1);
@@ -3944,7 +3944,7 @@ int FUN_000f29f4(param_1)
   }
   *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x800;
   ((int (*)())FUN_000ec1ec)(param_1);
-  ((int (*)())FUN_000ed7e4)(param_1,0x1a97f0);
+  ((int (*)())FUN_000ed7e4)(param_1,(int)"mark_io");
   return;
 }
 

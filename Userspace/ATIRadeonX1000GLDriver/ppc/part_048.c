@@ -1832,7 +1832,7 @@ int FUN_0017e3f4(param_1, param_2, param_3, param_4)
   *(undefined4 *)(iVar5 + 0x98) = uVar16;
   if (bVar1) {
     iVar8 = FUN_00122fa4(uVar17,*(undefined4 *)(*(int *)(*(int *)(param_1 + 0x238) + 0x6c4) + 0x3a0)
-                        );
+                        ,*(undefined4 *)(param_1 + 0x238));
     *(undefined4 *)(param_1 + 0x21c) = *(undefined4 *)(iVar8 + 0xb0);
   }
   else {
@@ -5606,7 +5606,7 @@ int FUN_00184ab4(param_1, param_2)
     }
     iVar1 = iVar2;
   }
-  FUN_000ed7e4(param_2,0x1a9fa8);
+  FUN_000ed7e4(param_2,(int)"minreg_order");
   return;
 }
 

@@ -3006,7 +3006,7 @@ code_r0x00171b84:
   iVar8 = param_1[1];
 code_r0x00171ba0:
   (**(code **)(*(int *)param_1[2] + 0x70))((int *)param_1[2],iVar8);
-  FUN_000ed7e4(param_1[1],0x1a9f20);
+  FUN_000ed7e4(param_1[1],(int)"sched_preprocess");
   iVar8 = FUN_000e07dc(*param_1,0x43);
   if (iVar8 != 0) {
     FUN_00184ab4(param_1,param_2);
@@ -3059,7 +3059,7 @@ code_r0x00171ba0:
   ;
   FUN_000e0e0c(*param_1,"Scheduler : Total dot-product transformed %d\n",param_1[0x6a],in_r6,in_r7,
                in_r8,iVar4,in_r10);
-  FUN_000ed7e4(param_1[1],0x1a9f84);
+  FUN_000ed7e4(param_1[1],(int)"schedule_inst");
   FUN_00138080(param_2);
   iVar4 = param_1[0x4c];
   piVar13 = param_1;

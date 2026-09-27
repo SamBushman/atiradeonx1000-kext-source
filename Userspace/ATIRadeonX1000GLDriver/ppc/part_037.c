@@ -2536,7 +2536,7 @@ LAB_001228ec:
         FUN_00172fb4(*(undefined4 *)(param_1 + 8));
       }
       *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0xc;
-      FUN_000ed7e4(param_1,0x1a9ca4);
+      FUN_000ed7e4(param_1,(int)"ssa_build");
       FUN_00193cc0(local_50,local_54);
       return;
     }
@@ -3372,7 +3372,7 @@ int FUN_001240a8(param_1, param_2, param_3)
     ((int (*)())FUN_00122f28)(param_1,iVar1);
     return puVar4;
   }
-  puVar2 = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(param_3 + 0x6c4),param_2);
+  puVar2 = (undefined4 *)((int (*)())FUN_00123c08)(*(undefined4 *)(param_3 + 0x6c4),param_2,param_1);
   return puVar2;
 }
 

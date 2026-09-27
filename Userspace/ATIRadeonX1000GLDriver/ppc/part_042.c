@@ -2456,7 +2456,7 @@ int FUN_0013d160(param_1)
   }
   ((int (*)())FUN_0013c210)(param_1);
   ((int (*)())FUN_0013bd68)(param_1,0);
-  FUN_000ed7e4(param_1);
+  FUN_000ed7e4(param_1,(int)"rewrite");
   iVar2 = FUN_000e07dc(*(undefined4 *)(param_1 + 8),0x1f);
   if (iVar2 != 0) {
     FUN_0012ccc0(param_1);
@@ -8198,7 +8198,7 @@ LAB_001463fc:
     } while( true );
   }
 LAB_0014653c:
-  FUN_000ed7e4(iVar2,0x1a9ed4);
+  FUN_000ed7e4(iVar2,(int)"post_pack_insts");
   FUN_00193cc0(uVar9,iVar7);
   return;
 LAB_00146538:

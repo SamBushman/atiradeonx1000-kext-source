@@ -1,0 +1,57 @@
+# owner entry	owner	call site	callee	register	value	class
+0x6700	_gldCreateContext	0x6778	malloc	r3	0x2b98 printed as &UNK_00002b98 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xbfa0	FUN_0000bfa0	0xc048	frexp	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-DOUBLE-SLOT
+0x16670	FUN_00016670	0x1681c	FUN_0002a260	r10	r1+0x48 (a stack address) not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x2c230	FUN_0002c230	0x2c678	FUN_00027990	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x2c230	FUN_0002c230	0x2c6a8	FUN_0001fd00	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x32100	FUN_00032100	0x33ad8	valloc	r8	0x1 not at argument 5 of any C call (1 C calls)	CHECK (C arg5: -)
+0x32100	FUN_00032100	0x33b18	FUN_0002f4d0	r7	0x1 not at argument 4 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
+0x3b280	FUN_0003b280	0x3b530	FUN_000547f0	r5	0x1406 printed as &DAT_00001406 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x46e90	FUN_00046e90	0x48528	memset	r10	r1+0x90 (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
+0x46e90	FUN_00046e90	0x48670	memset	r10	r1+0x6c (a stack address) not at argument 7 of any C call (10 C calls)	BENIGN-IMPORT-ARITY
+0x46e90	FUN_00046e90	0x47d5c	FUN_0003fbf0	r10	0x1 not at argument 7 of any C call (23 C calls)	BENIGN-CALLEE-IGNORES
+0x4b7d0	FUN_0004b7d0	0x4b800	malloc	r3	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4b7d0	FUN_0004b7d0	0x4b810	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4bbf0	FUN_0004bbf0	0x4bf84	malloc	r3	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4bbf0	FUN_0004bbf0	0x4bf94	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4bbf0	FUN_0004bbf0	0x4c0b0	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0x4def0	FUN_0004def0	0x4e454	FUN_0004de30	r9	0x0 not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x4f720	FUN_0004f720	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
+0x656b0	FUN_000656b0	0x65790	FUN_00065610	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x656b0	FUN_000656b0	0x65790	FUN_00065610	r6	r1+0x3c (a stack address) not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x7a4a0	FUN_0007a4a0	0x7a604	FUN_00077cf0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7a4a0	FUN_0007a4a0	0x7aaa8	FUN_00077cf0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x7aae0	FUN_0007aae0	0x7ad24	FUN_000782e0	r4	incoming param_8 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT
+0x8b160	FUN_0008b160	0x8afd8	FUN_0008aa40	r5	0x0 not at argument 2 of any C call (2 C calls)	CHECK (C arg2: -; -)
+0x8b160	FUN_0008b160	0x8afd8	FUN_0008aa40	r6	0x0 not at argument 3 of any C call (2 C calls)	CHECK (C arg3: -; -)
+0x8b160	FUN_0008b160	0x8b010	FUN_0008aa40	r5	0x0 not at argument 2 of any C call (2 C calls)	CHECK (C arg2: -; -)
+0x8b160	FUN_0008b160	0x8b010	FUN_0008aa40	r6	0x0 not at argument 3 of any C call (2 C calls)	CHECK (C arg3: -; -)
+0xa4980	FUN_000a4980	0xa523c	FUN_00030c50	r9	0x1401 printed as &UNK_00001401 (symbolized-text-address)	BENIGN-SYMBOLIZED
+0xa4980	FUN_000a4980	0xa56c8	FUN_000a3790	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0xa4980	FUN_000a4980	0xa5760	FUN_000a3a60	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0xb3630	FUN_000b3630	0xb4030	FUN_000b15d0	r9	0x3 not at argument 6 of any C call (13 C calls)	BENIGN-CALLEE-IGNORES
+0xb4400	FUN_000b4400	0xb49bc	FUN_000879f0	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0xc8e50	FUN_000c8e50	0xca130	FUN_000c7460	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
+0xcae90	FUN_000cae90	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
+0xeec50	FUN_000eec50	0xed5ec	FUN_001046c8	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
+0xeec50	FUN_000eec50	0xed3fc	FUN_001054ec	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
+0xeec50	FUN_000eec50	0xed4b0	FUN_001054ec	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
+0xeec50	FUN_000eec50	0xed600	FUN_000e7700	r4	incoming param_2 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: iVar7; iVar5)
+0xf4698	FUN_000f4698	0xf46f0	FUN_000f3340	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	CHECK (C arg2: local_18)
+0xfd5c8	FUN_000fd5c8	0xfe0c0	FUN_000f8aa0	r10	r1+0x58 (a stack address) not at argument 7 of any C call (8 C calls)	CHECK-indirect (C arg7: -; -)
+0xfd5c8	FUN_000fd5c8	0xfffdc	FUN_000f30d4	r9	r1+0x48 (a stack address) not at argument 6 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
+0x11ff7c	FUN_0011ff7c	0x120ba4	FUN_000e9184	r4	0x0 not at argument 1 of any C call (6 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x120cd4	FUN_00120cd4	0x120f10	FUN_0011ff7c	r10	r1+0x38 (a stack address) not at argument 7 of any C call (1 C calls)	CHECK (C arg7: in_r10)
+0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	CHECK-indirect (C arg1: -; -)
+0x133fe4	FUN_00133fe4	0x134380	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	CHECK-indirect (C arg1: -; -)
+0x158264	FUN_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
+0x15a68c	FUN_0015a68c	0x15b248	FUN_001054ec	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
+0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x186a88	FUN_00186a88	0x1874f0	FUN_001043f0	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
+0x18843c	FUN_0018843c	0x18885c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x188fec	FUN_00188fec	0x189054	FUN_0014abdc	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
+0x188fec	FUN_00188fec	0x18927c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x188fec	FUN_00188fec	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x1a1338	FUN_001a1338	0x1a135c	FUN_00193e18	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED
