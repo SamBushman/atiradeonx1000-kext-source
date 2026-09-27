@@ -403,6 +403,17 @@ through the rebuilt image's external relocations. Result (identical / same up to
 `__Unwind` state words): the address is stored and never dereferenced by non-EH code, so what lies behind it in the rebuilt image cannot be read unless an exception propagates - which the rebuilt image cannot
 do either way (#63: no LSDA / FDE is emitted). The other anchors listed in `link_config/gld.json` are objects of the compared sections and are covered by `data_compare.py`.
 
+**Orphans and landing pads: which must be reachable (criterion 3).** Static references to each orphan's entry in the stock (a `bl`, a branch from other code, a pointer word in any data section):
+* GLDriver, 494 orphans (`unowned_code/`): **432 are pointed to by data words** - callback / dispatch tables (`__const_coal`, `__data`); those are wired in the rebuilt image, because the tables are emitted
+  with pointers to the orphan's label and the data compare above shows every such pointer equal; 18 are targets of branches in other code and are linked beside their owner; **44 (2890 bytes; the 16-byte
+  and 12-byte fragments at 0x98d8-0x9aec ...) have no static reference at all** in the stock either - alignment / dead fragments, kept for coverage only, not wired.
+* libGLProgrammability, 32 orphans: 6 data-referenced (wired); 26 (5628 bytes) unreferenced: the 20 duplicates of their owner's switch-case bodies (Stage B3 step 13: the case code is part of the owner's
+  decompile, the orphan extent is a second copy) and six 8-20 byte fragments - not wired.
+* Landing pads (GLDriver 566, glprog 44): reachable only through the LSDA call-site tables of an exception in flight. GLDriver has no catch clause and imports no throwing library call, and the stock
+  libGLProgrammability carries a private EH runtime whose `throw` always ends in `terminate` (#63): no pad can execute in the stock, so none needs to in the rebuilt image. Decision: pads stay as verified
+  reference C, unlinked (their `unaff_r*` reads make them meaningless standalone); revisit only if #63 emits real FDE / LSDA data.
+(The counts come from a scan of the stock disassembly and data sections; a reference through a register computed at run time would not show.)
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees
