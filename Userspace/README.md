@@ -481,8 +481,14 @@ without their pattern (40 checked, 0 silent). The retired patches are listed wit
     instrumented (`-finstrument-functions`) build's inserted `__cyg_profile_func_exit` call landed exactly there and clobbered it
     (`_ShConstructCompiler` dropped `ConstructCompiler`'s `TCompiler*` result). `Tools/userspace/passthrough_ret.py` finds the candidates from the
     stock disassembly + ledger; `Tools/userspace/fix_passthrough_ret.py` rewrites them, skipping any whose last statement isn't itself a plain call
-    (a real assignment - still void) and any function already declared `void` (nothing reads its result either way). 109 functions fixed across the
-    five images (35 glprog, 1 GA, 1 VA, 38 libGL, 35 GLDriver); verified against the full differential/behavioural suite, 0 changes. Does not by
+    (a real assignment - still void) and any function already declared `void` (nothing reads its result either way), nor one declared any type other
+    than `int` (r3 isn't the return register for a `double`-declared owner; found live: GLDriver `FUN_000520c0`). The candidate search initially used
+    disassembly dumps that missed `__textcoal_nt` (weak C++ template instantiations) and thunks that tail-call via a bare `b` with no `blr` of their
+    own (control returns straight to the THUNK's caller) - widening it to catch both surfaced ~5x more real fixes, and a bug in the fixer itself: a
+    `do { ... } while (cond);` loop's closing line also ends in `);`, so a function that fell off such a loop with no explicit `return;` at all had
+    its "last statement" scan match the loop's own close, producing `return } while (...);` - a syntax error, caught by actually compiling the
+    result rather than trusting a line/statement count. 848 functions fixed across the five images (284 glprog, 1 GA, 1 VA, 38 libGL, 524 GLDriver);
+    verified with a `-fsyntax-only` compile of every changed file plus the full differential/behavioural suite, 0 behavioural changes. Does not by
     itself fix the coverage build's crash - see the caveat under "Which functions does any test enter?" below.
 ### Which functions does any test enter? (issue #65 criterion 1)
 `COVERAGE=1 python3 Tools/userspace/link_corpus.py ...` links an instrumented copy of an image (`-finstrument-functions` + a hook that appends the image offset of every function the first time a process
