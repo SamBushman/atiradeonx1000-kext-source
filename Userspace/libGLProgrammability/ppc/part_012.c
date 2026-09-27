@@ -4456,7 +4456,6 @@ int __ZN17TPPStreamCompilerC4E11EShLanguagei(this, param_2, param_3)
 int __ZN17TPPStreamCompilerD2Ev(this)
   void *this;
 {
-  __ZN17TPPStreamCompilerD4Ev(this,0);
-  return;
+  return __ZN17TPPStreamCompilerD4Ev(this,0);
 }
 

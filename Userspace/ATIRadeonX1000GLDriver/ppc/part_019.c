@@ -2922,8 +2922,7 @@ int FUN_000da8a8(param_1)
   param_1[0x84] = 0;
   param_1[0x85] = 0;
   param_1[0x86] = 0;
-  _memset(param_1 + 4,0,0x200);
-  return;
+  return _memset(param_1 + 4,0,0x200);
 }
 
 /* FUN_000da8d0 @ 0xda8d0 (16 bytes) */
@@ -3837,8 +3836,7 @@ int FUN_000dbb44(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     return;
   }
   *param_1 = *param_1 + 1;
-  ((int (*)())FUN_000da904)(param_1,"!!invalid!!",param_3,param_4,param_5,param_6,param_7,0xdbb50);
-  return;
+  return ((int (*)())FUN_000da904)(param_1,"!!invalid!!",param_3,param_4,param_5,param_6,param_7,0xdbb50);
 }
 
 /* FUN_000dbbc0 @ 0xdbbc0 (284 bytes) */

@@ -2576,8 +2576,7 @@ int FUN_00122de8(param_1)
       iVar2 = iVar2 + -1;
     } while (iVar2 != 0);
   }
-  FUN_000f019c(param_1);
-  return;
+  return FUN_000f019c(param_1);
 }
 
 /* FUN_00122e90 @ 0x122e90 (44 bytes) */
@@ -2603,8 +2602,7 @@ int FUN_00122ebc(param_1)
   
   iVar1 = *(int *)(*(int *)(param_1 + 0x2c) + 4);
   *(undefined4 *)(param_1 + 0x28) = 0xffffffff;
-  FUN_00194208(*(int *)(param_1 + 0x2c),iVar1 + -1);
-  return;
+  return FUN_00194208(*(int *)(param_1 + 0x2c),iVar1 + -1);
 }
 
 /* FUN_00122ed8 @ 0x122ed8 (80 bytes) */

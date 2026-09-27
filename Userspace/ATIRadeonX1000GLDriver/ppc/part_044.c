@@ -8579,8 +8579,7 @@ LAB_00167a18:
   if (piVar13 != (int *)0x0) {
     FUN_00193cc0(*puVar5,puVar5);
   }
-  FUN_00193cc0(*(undefined4 *)(*param_1 + 0x378),iVar6);
-  return;
+  return FUN_00193cc0(*(undefined4 *)(*param_1 + 0x378),iVar6);
 }
 
 /* FUN_00167a74 @ 0x167a74 (244 bytes) */
@@ -10058,8 +10057,7 @@ LAB_0016a42c:
   FUN_000e0e0c(*param_1,"Scheduler : %d out of %d instructions are marked global\n",iVar9,iVar10,
                in_r7,in_r8,0,in_r10);
   FUN_00193cc0(*(undefined4 *)(*param_1 + 0x378),iVar8);
-  FUN_00193cc0(*(undefined4 *)(*param_1 + 0x378),iVar7);
-  return;
+  return FUN_00193cc0(*(undefined4 *)(*param_1 + 0x378),iVar7);
 }
 
 /* FUN_0016a568 @ 0x16a568 (6052 bytes) */

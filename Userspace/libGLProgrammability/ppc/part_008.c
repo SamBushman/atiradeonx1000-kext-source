@@ -246,8 +246,7 @@ int __ZN12BindingTableC1Ej(this, param_2)
   void *this;
   uint param_2;
 {
-  ((int (*)())__ZN12BindingTableC4Ej)(this,param_2);
-  return;
+  return ((int (*)())__ZN12BindingTableC4Ej)(this,param_2);
 }
 
 /* __ZN12BindingTableC4Ej @ 0x97bb05e8 (288 bytes) */
@@ -316,16 +315,14 @@ int __ZN12BindingTableC4Ej(this, param_2)
 int __ZN12BindingTableD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN12BindingTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN12BindingTableD4Ev)(this);
 }
 
 /* __ZN12BindingTableD1Ev @ 0x97bb0710 (8 bytes) */
 int __ZN12BindingTableD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN12BindingTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN12BindingTableD4Ev)(this);
 }
 
 /* __ZN12BindingTableD4Ev @ 0x97bb0718 (148 bytes) */
@@ -353,8 +350,7 @@ int __ZN12BindingTableD4Ev(this)
   ((int (*)())BindingTable__ClearInternalBindings)(this);
   __ZdlPv(*(void **)((int)this + 8));
   __ZdlPv(*(void **)((int)this + 0x10));
-  __ZdlPv(*(void **)((int)this + 0x18));
-  return;
+  return __ZdlPv(*(void **)((int)this + 0x18));
 }
 
 /* BindingTable__ClearInternalBindings @ 0x97bb07ac (336 bytes) */

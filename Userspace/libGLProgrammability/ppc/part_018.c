@@ -266,8 +266,7 @@ int _HashSetFree(param_1)
   if (uVar1 != 0) {
     _free(uVar1);
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _HashSetAdd @ 0x97c08730 (272 bytes) */
@@ -497,8 +496,7 @@ int _HashTableFree(param_1)
     puVar1 = (uint *)*param_1;
   }
   ((int (*)())_HashSetFree)(puVar1);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _HashTableAdd @ 0x97c08b54 (336 bytes) */
@@ -1577,8 +1575,7 @@ int _RegisterFree(param_1)
   if (*(int *)(param_1 + 8) == 0) {
     return;
   }
-  _BitSetFree(*(int *)(param_1 + 8));
-  return;
+  return _BitSetFree(*(int *)(param_1 + 8));
 }
 
 /* _InstructionAdd @ 0x97c0a0a4 (1324 bytes) */
@@ -2230,8 +2227,7 @@ int _BlockAddPredecessor(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  ((int (*)())_BlockAddSuccessor)(param_2,param_1);
-  return;
+  return ((int (*)())_BlockAddSuccessor)(param_2,param_1);
 }
 
 /* _BlocksFree @ 0x97c0b0f4 (124 bytes) */
@@ -2299,8 +2295,7 @@ int _ProgramFree(param_1)
   }
   ((int (*)())_RegistersFree)(param_1);
   ((int (*)())_BlocksFree)(param_1);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _FlattenIfs @ 0x97c0b254 (468 bytes) */

@@ -1754,8 +1754,7 @@ int FUN_000307a0(param_1, param_2)
   *puVar1 = (int)piVar2 - (int)puVar1 >> 2 | *puVar1;
   *(int **)(param_1 + 0x1d8) = piVar2;
   *piVar2 = param_2 * 0x1000000 + 0x16000000;
-  FUN_000a8320(param_1,param_2);
-  return;
+  return FUN_000a8320(param_1,param_2);
 }
 
 /* FUN_00030840 @ 0x30840 (124 bytes) */
@@ -1865,8 +1864,7 @@ int FUN_00030a50(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  _gldDeleteTexture(*(undefined4 *)(param_1 + 4),param_2);
-  return;
+  return _gldDeleteTexture(*(undefined4 *)(param_1 + 4),param_2);
 }
 
 /* FUN_00030a60 @ 0x30a60 (240 bytes) */
@@ -9113,8 +9111,7 @@ int FUN_0003c310(param_1, param_2)
     (**(code **)(param_1 + 0x18))(param_2[10]);
     param_2[10] = 0;
   }
-  FUN_00053ef0(param_1,*param_2);
-  return;
+  return FUN_00053ef0(param_1,*param_2);
 }
 
 /* FUN_0003c400 @ 0x3c400 (4136 bytes) */
@@ -10287,7 +10284,6 @@ int FUN_0003e4c0(param_1, param_2)
   undefined4 param_1;
   undefined4 *param_2;
 {
-  FUN_000a1570(param_1,*param_2);
-  return;
+  return FUN_000a1570(param_1,*param_2);
 }
 

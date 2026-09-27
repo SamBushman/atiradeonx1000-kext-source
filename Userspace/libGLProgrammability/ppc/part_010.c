@@ -4,8 +4,7 @@
 int __ZN18TemporaryAllocatorC1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN18TemporaryAllocatorC4Ev)(this);
-  return;
+  return ((int (*)())__ZN18TemporaryAllocatorC4Ev)(this);
 }
 
 /* __ZN18TemporaryAllocatorC4Ev @ 0x97bb9e94 (32 bytes) */
@@ -28,16 +27,14 @@ int __ZN18TemporaryAllocatorC4Ev(this)
 int __ZN18TemporaryAllocatorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
 }
 
 /* __ZN18TemporaryAllocatorD1Ev @ 0x97bb9ebc (8 bytes) */
 int __ZN18TemporaryAllocatorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN18TemporaryAllocatorD4Ev)(this);
 }
 
 /* __ZN18TemporaryAllocatorD4Ev @ 0x97bb9ec4 (72 bytes) */
@@ -289,16 +286,14 @@ int __ZN11ParseSymbolC4Ev(this)
 int __ZN11ParseSymbolD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN11ParseSymbolD4Ev)(this);
-  return;
+  return ((int (*)())__ZN11ParseSymbolD4Ev)(this);
 }
 
 /* __ZN11ParseSymbolD1Ev @ 0x97bba220 (8 bytes) */
 int __ZN11ParseSymbolD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN11ParseSymbolD4Ev)(this);
-  return;
+  return ((int (*)())__ZN11ParseSymbolD4Ev)(this);
 }
 
 /* __ZN11ParseSymbolD4Ev @ 0x97bba228 (116 bytes) */
@@ -1016,8 +1011,7 @@ int ParseSymbol__RemoveArrayIndex(this)
   if (*(char *)(*(int *)(this + 0x14) + *(int *)(this + 0x20) + -1) != ']') {
     return;
   }
-  RemoveNameBackToChar(this,0x5b);
-  return;
+  return RemoveNameBackToChar(this,0x5b);
 }
 
 /* ParseSymbol__TrimNameToBase @ 0x97bbad10 (156 bytes) */
@@ -1351,8 +1345,7 @@ int __ZN12ParseOperandC1ERKS_(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZN12ParseOperandC4ERKS_)(this,param_2);
-  return;
+  return ((int (*)())__ZN12ParseOperandC4ERKS_)(this,param_2);
 }
 
 /* __ZN12ParseOperandC4ERKS_ @ 0x97bbb230 (232 bytes) */
@@ -1408,16 +1401,14 @@ int __ZN12ParseOperandC4ERKS_(this, param_2)
 int __ZN12ParseOperandD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN12ParseOperandD4Ev)(this);
-  return;
+  return ((int (*)())__ZN12ParseOperandD4Ev)(this);
 }
 
 /* __ZN12ParseOperandD1Ev @ 0x97bbb320 (8 bytes) */
 int __ZN12ParseOperandD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN12ParseOperandD4Ev)(this);
-  return;
+  return ((int (*)())__ZN12ParseOperandD4Ev)(this);
 }
 
 /* __ZN12ParseOperandD4Ev @ 0x97bbb328 (232 bytes) */

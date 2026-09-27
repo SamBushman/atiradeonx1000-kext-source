@@ -256,8 +256,7 @@ int __ZNSs6resizeEm(this, param_2)
   void *this;
   ulong param_2;
 {
-  ((int (*)())__ZNSs6resizeEmc)(this,param_2,'\0');
-  return;
+  return ((int (*)())__ZNSs6resizeEmc)(this,param_2,'\0');
 }
 
 /* __ZNSs7reserveEm @ 0x97c145e8 (204 bytes) */
@@ -309,8 +308,7 @@ int __ZNSs7reserveEm(this, param_2)
 int __ZNSs5clearEv(this)
   void *this;
 {
-  __ZNSs9_M_mutateEmmm(this,0,*(ulong *)(*(int *)this + -0xc),0);
-  return;
+  return __ZNSs9_M_mutateEmmm(this,0,*(ulong *)(*(int *)this + -0xc),0);
 }
 
 /* __ZNKSs5emptyEv @ 0x97c146e0 (20 bytes) */
@@ -369,8 +367,7 @@ int __ZNSspLERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSs6appendERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSs6appendERKSs)(this,param_2);
 }
 
 /* __ZNSs6appendEPKc @ 0x97c147f4 (64 bytes) */
@@ -381,8 +378,7 @@ int __ZNSs6appendEPKc(this, param_2)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
-  return;
+  return ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
 }
 
 /* __ZNSspLEPKc @ 0x97c14834 (64 bytes) */
@@ -393,8 +389,7 @@ int __ZNSspLEPKc(this, param_2)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
-  return;
+  return ((int (*)())__ZNSs6appendEPKcm)(this,param_2,uVar1);
 }
 
 /* __ZNSspLEc @ 0x97c14874 (12 bytes) */
@@ -404,8 +399,7 @@ int __ZNSspLEc(this, param_2)
 {
   undefined3 in_register_00000010;
   
-  ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(in_register_00000010,param_2));
-  return;
+  return ((int (*)())__ZNSs6appendEmc)(this,1,CONCAT31(in_register_00000010,param_2));
 }
 
 /* __ZNSs6appendERKSs @ 0x97c14880 (164 bytes) */
@@ -574,8 +568,7 @@ int __ZNSs6assignERKSsmm(this, param_2, param_3, param_4)
   if (uVar2 <= param_4) {
     param_4 = uVar2;
   }
-  __ZNSs6assignEPKcm(this,(char *)(iVar1 + param_3),param_4);
-  return;
+  return __ZNSs6assignEPKcm(this,(char *)(iVar1 + param_3),param_4);
 }
 
 /* __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc @ 0x97c14c90 (16 bytes) */
@@ -585,8 +578,7 @@ int __ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc(this, param_2, param_3
   undefined4 param_3;
   undefined4 param_4;
 {
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,param_2,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,param_2,param_2,param_3,param_4);
 }
 
 /* __ZNSs6insertEmPKcm @ 0x97c14ca0 (332 bytes) */
@@ -750,8 +742,7 @@ int __ZNSs6insertEmPKc(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_3);
-  ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNSs6insertEmPKcm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNSs6insertEmmc @ 0x97c15104 (92 bytes) */
@@ -859,8 +850,7 @@ int __ZNSs7replaceEmmRKSsmm(this, param_2, param_3, param_4, param_5, param_6)
   if (uVar2 <= param_6) {
     param_6 = uVar2;
   }
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,(char *)(iVar1 + param_5),param_6);
-  return;
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,(char *)(iVar1 + param_5),param_6);
 }
 
 /* __ZNSs7replaceEmmPKc @ 0x97c1538c (80 bytes) */
@@ -873,8 +863,7 @@ int __ZNSs7replaceEmmPKc(this, param_2, param_3, param_4)
   ulong uVar1;
   
   uVar1 = _strlen(param_4);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,param_4,uVar1);
-  return;
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2,param_3,param_4,uVar1);
 }
 
 /* __ZNSs7replaceEmmmc @ 0x97c153dc (120 bytes) */
@@ -934,8 +923,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc(this, param_2, pa
   undefined4 uVar1;
   
   uVar1 = _strlen(param_4);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,uVar1);
-  return;
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm)(this,param_2,param_3,param_4,uVar1);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc @ 0x97c15564 (180 bytes) */
@@ -1127,8 +1115,7 @@ int __ZNKSs4findERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs4findEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs4findEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs4findEPKcm @ 0x97c15998 (72 bytes) */
@@ -1140,8 +1127,7 @@ int __ZNKSs4findEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs4findEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs4findEPKcmm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNKSs4findEcm @ 0x97c159e0 (96 bytes) */
@@ -1172,8 +1158,7 @@ int __ZNKSs5rfindERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs5rfindEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs5rfindEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs5rfindEPKcmm @ 0x97c15a4c (148 bytes) */
@@ -1220,7 +1205,6 @@ int __ZNKSs5rfindEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs5rfindEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs5rfindEPKcmm)(this,param_2,param_3,uVar1);
 }
 

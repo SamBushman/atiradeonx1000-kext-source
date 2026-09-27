@@ -236,8 +236,7 @@ int FUN_0001a0f0(param_1, param_2)
   *(int *)(param_1 + 0x1d8) = iVar3 + 0x1c;
   *(undefined4 **)(param_1 + 0x1dc) = puVar4;
   *(undefined4 **)(param_1 + 0x2994) = puVar4 + 0x6000;
-  FUN_0002c6c0(param_1);
-  return;
+  return FUN_0002c6c0(param_1);
 }
 
 /* FUN_0001a280 @ 0x1a280 (588 bytes) */
@@ -374,8 +373,7 @@ int _gldFlush(param_1)
   if (*(uint *)(param_1 + 0x1dc) <= *(int *)(param_1 + 0x1e4) + 0x28U) {
     return;
   }
-  ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
-  return;
+  return ((int (*)())FUN_0001a0f0)(param_1,0x1000000);
 }
 
 /* _gldFinish @ 0x1a5e0 (136 bytes) */

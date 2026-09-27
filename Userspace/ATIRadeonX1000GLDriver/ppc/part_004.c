@@ -6604,8 +6604,7 @@ int FUN_0002be90(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
-  FUN_000a3be0(param_1 + 0x240,param_3,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return FUN_000a3be0(param_1 + 0x240,param_3,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_0002bea0 @ 0x2bea0 (116 bytes) */
@@ -7174,8 +7173,7 @@ int FUN_0002cc10(param_1)
   if (*(uint *)(param_1 + 0x1dc) <= *(int *)(param_1 + 0x1e4) + 0x28U) {
     return;
   }
-  FUN_0001a0f0(param_1,0x1000000);
-  return;
+  return FUN_0001a0f0(param_1,0x1000000);
 }
 
 /* FUN_0002cc30 @ 0x2cc30 (276 bytes) */

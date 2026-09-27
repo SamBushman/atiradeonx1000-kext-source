@@ -24,8 +24,7 @@ int FUN_001cfee0(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  FUN_00193cc0(param_1[-1],param_1 + -1);
-  return;
+  return FUN_00193cc0(param_1[-1],param_1 + -1);
 }
 
 /* FUN_001cff28 @ 0x1cff28 (52 bytes) */
@@ -52,8 +51,7 @@ int FUN_001cff5c(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  FUN_00193cc0(param_1[-1],param_1 + -1);
-  return;
+  return FUN_00193cc0(param_1[-1],param_1 + -1);
 }
 
 /* FUN_001cffa4 @ 0x1cffa4 (36 bytes) */
@@ -69,8 +67,7 @@ int FUN_001cffc8(param_1)
   undefined4 *param_1;
 {
   *param_1 = &PTR_FUN_001ea5b0;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d0000 @ 0x1d0000 (32 bytes) */
@@ -110,8 +107,7 @@ int FUN_001d01d4(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8c88 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d0208 @ 0x1d0208 (36 bytes) */
@@ -127,8 +123,7 @@ int FUN_001d022c(param_1)
   undefined4 *param_1;
 {
   *param_1 = PTR_DAT_001e8f28 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d0278 @ 0x1d0278 (288 bytes) */
@@ -580,8 +575,7 @@ int FUN_001d0f28(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d0f6c @ 0x1d0f6c (68 bytes) */
@@ -611,8 +605,7 @@ int FUN_001d0fb0(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d0ff4 @ 0x1d0ff4 (68 bytes) */
@@ -642,8 +635,7 @@ int FUN_001d1038(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d107c @ 0x1d107c (68 bytes) */
@@ -673,8 +665,7 @@ int FUN_001d10c0(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d1104 @ 0x1d1104 (68 bytes) */
@@ -704,8 +695,7 @@ int FUN_001d1148(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d118c @ 0x1d118c (68 bytes) */
@@ -735,8 +725,7 @@ int FUN_001d11d0(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d1214 @ 0x1d1214 (68 bytes) */
@@ -766,8 +755,7 @@ int FUN_001d1258(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d129c @ 0x1d129c (68 bytes) */
@@ -797,8 +785,7 @@ int FUN_001d12e0(param_1)
   puVar2 = PTR_DAT_001e8f28;
   *param_1 = puVar1 + 8;
   *param_1 = puVar2 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d1324 @ 0x1d1324 (68 bytes) */
@@ -828,8 +815,7 @@ int FUN_001d1368(param_1)
   puVar1 = PTR_DAT_001e8f28;
   *param_1 = puVar2 + 8;
   *param_1 = puVar1 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d13ac @ 0x1d13ac (68 bytes) */
@@ -859,8 +845,7 @@ int FUN_001d13f0(param_1)
   puVar1 = PTR_DAT_001e8f28;
   *param_1 = puVar2 + 8;
   *param_1 = puVar1 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d1434 @ 0x1d1434 (68 bytes) */
@@ -890,8 +875,7 @@ int FUN_001d1478(param_1)
   puVar1 = PTR_DAT_001e8f28;
   *param_1 = puVar2 + 8;
   *param_1 = puVar1 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d14bc @ 0x1d14bc (68 bytes) */
@@ -921,8 +905,7 @@ int FUN_001d1500(param_1)
   puVar1 = PTR_DAT_001e8f28;
   *param_1 = puVar2 + 8;
   *param_1 = puVar1 + 8;
-  operator_delete(param_1);
-  return;
+  return operator_delete(param_1);
 }
 
 /* FUN_001d1544 @ 0x1d1544 (68 bytes) */

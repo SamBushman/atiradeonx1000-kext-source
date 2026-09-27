@@ -4,16 +4,14 @@
 int __ZN17TPPStreamCompilerD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,2);
 }
 
 /* __ZN17TPPStreamCompilerD0Ev @ 0x97bc97e4 (8 bytes) */
 int __ZN17TPPStreamCompilerD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZN17TPPStreamCompilerD4Ev)(this,3);
 }
 
 /* __ZN17TPPStreamCompilerD4Ev @ 0x97bc97ec (536 bytes) */
@@ -2203,8 +2201,7 @@ int __ZN13FunctionTableC2Ev(this)
 int __ZN13FunctionTableC1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN13FunctionTableC4Ev)(this);
-  return;
+  return ((int (*)())__ZN13FunctionTableC4Ev)(this);
 }
 
 /* __ZN13FunctionTableC4Ev @ 0x97bcc944 (16 bytes) */
@@ -2220,24 +2217,21 @@ int __ZN13FunctionTableC4Ev(this)
 int __ZN13FunctionTableD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN13FunctionTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN13FunctionTableD4Ev)(this);
 }
 
 /* __ZN13FunctionTableD1Ev @ 0x97bcc95c (8 bytes) */
 int __ZN13FunctionTableD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN13FunctionTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN13FunctionTableD4Ev)(this);
 }
 
 /* __ZN13FunctionTableD4Ev @ 0x97bcc964 (4 bytes) */
 int __ZN13FunctionTableD4Ev(this)
   void *this;
 {
-  ((int (*)())FunctionTable__clear)(this);
-  return;
+  return ((int (*)())FunctionTable__clear)(this);
 }
 
 /* FunctionTable__clear @ 0x97bcc968 (120 bytes) */
@@ -2551,8 +2545,7 @@ int _InterpreterFree(param_1)
   undefined4 param_1;
 {
   ((int (*)())_InterpreterShutdown)(param_1);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _InterpreterInit @ 0x97bcce18 (72 bytes) */
@@ -2565,8 +2558,7 @@ int _InterpreterInit(param_1)
   uVar1 = ((int (*)())_InterpreterTextureSamplerCreate)();
   *(undefined4 *)(param_1 + 0xa2c) = uVar1;
   _InterpreterNoiseGeneratorInitialise(param_1 + 4);
-  _InterpreterRasterOpMachineInitialise(param_1 + 0xa24);
-  return;
+  return _InterpreterRasterOpMachineInitialise(param_1 + 0xa24);
 }
 
 /* _InterpreterShutdown @ 0x97bcce60 (8 bytes) */
@@ -2585,8 +2577,7 @@ int _InterpreterAttachEmulatorContext(param_1, param_2)
   undefined4 param_2;
 {
   *param_1 = param_2;
-  _InterpreterRasterOpMachineAttachEmulatorContext(param_1 + 0x289,param_2);
-  return;
+  return _InterpreterRasterOpMachineAttachEmulatorContext(param_1 + 0x289,param_2);
 }
 
 /* _InterpreterPackPixel @ 0x97bcce74 (1208 bytes) */

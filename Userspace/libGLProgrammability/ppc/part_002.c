@@ -1425,8 +1425,7 @@ LAB_97b87cb4:
 int _FreeMacro(param_1)
   int param_1;
 {
-  _DeleteTokenStream(*(undefined4 *)(param_1 + 8));
-  return;
+  return _DeleteTokenStream(*(undefined4 *)(param_1 + 8));
 }
 
 /* _eof_scan_97b87cd4 @ 0x97b87cd4 (8 bytes) */
@@ -2063,8 +2062,7 @@ int FUN_97b88a90(param_1, param_2)
     return;
   }
   *(int *)(param_1 + 0x14) = *(int *)(param_1 + 0x14) + -1;
-  _DecLineNumber();
-  return;
+  return _DecLineNumber();
 }
 
 /* _ScanFromString @ 0x97b88af4 (148 bytes) */

@@ -5,8 +5,7 @@ int __ZNSt16invalid_argumentC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt16invalid_argumentC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt16invalid_argumentC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt16invalid_argumentC4ERKSs @ 0x97c17cf0 (68 bytes) */
@@ -24,8 +23,7 @@ int __ZNSt12length_errorC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12length_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12length_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12length_errorC1ERKSs @ 0x97c17d38 (4 bytes) */
@@ -33,8 +31,7 @@ int __ZNSt12length_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12length_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12length_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12length_errorC4ERKSs @ 0x97c17d3c (68 bytes) */
@@ -52,8 +49,7 @@ int __ZNSt12out_of_rangeC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12out_of_rangeC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12out_of_rangeC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12out_of_rangeC1ERKSs @ 0x97c17d84 (4 bytes) */
@@ -61,8 +57,7 @@ int __ZNSt12out_of_rangeC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12out_of_rangeC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12out_of_rangeC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12out_of_rangeC4ERKSs @ 0x97c17d88 (68 bytes) */
@@ -81,8 +76,7 @@ int __ZNSt13runtime_errorC2ERKSs(this, param_2)
   unsigned char * param_2;
 {
   *(int *)this = DAT_a7b7c010 + 8;
-  __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
-  return;
+  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
 }
 
 /* __ZNSt13runtime_errorC1ERKSs @ 0x97c17dd0 (4 bytes) */
@@ -90,8 +84,7 @@ int __ZNSt13runtime_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt13runtime_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt13runtime_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt13runtime_errorC4ERKSs @ 0x97c17dd4 (56 bytes) */
@@ -100,32 +93,28 @@ int __ZNSt13runtime_errorC4ERKSs(this, param_2)
   unsigned char * param_2;
 {
   *(int *)this = DAT_a7b7c010 + 8;
-  __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
-  return;
+  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
 }
 
 /* __ZNSt13runtime_errorD2Ev @ 0x97c17e34 (8 bytes) */
 int __ZNSt13runtime_errorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt13runtime_errorD4Ev)(this,0);
 }
 
 /* __ZNSt13runtime_errorD1Ev @ 0x97c17e3c (8 bytes) */
 int __ZNSt13runtime_errorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt13runtime_errorD4Ev)(this,2);
 }
 
 /* __ZNSt13runtime_errorD0Ev @ 0x97c17e44 (8 bytes) */
 int __ZNSt13runtime_errorD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13runtime_errorD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt13runtime_errorD4Ev)(this,3);
 }
 
 /* __ZNSt13runtime_errorD4Ev @ 0x97c17e4c (136 bytes) */
@@ -176,8 +165,7 @@ int __ZNSt11range_errorC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt11range_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt11range_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt11range_errorC1ERKSs @ 0x97c17f08 (4 bytes) */
@@ -185,8 +173,7 @@ int __ZNSt11range_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt11range_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt11range_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt11range_errorC4ERKSs @ 0x97c17f0c (68 bytes) */
@@ -204,8 +191,7 @@ int __ZNSt14overflow_errorC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt14overflow_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt14overflow_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt14overflow_errorC1ERKSs @ 0x97c17f54 (4 bytes) */
@@ -213,8 +199,7 @@ int __ZNSt14overflow_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt14overflow_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt14overflow_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt14overflow_errorC4ERKSs @ 0x97c17f58 (68 bytes) */
@@ -232,8 +217,7 @@ int __ZNSt15underflow_errorC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt15underflow_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt15underflow_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt15underflow_errorC1ERKSs @ 0x97c17fa0 (4 bytes) */
@@ -241,8 +225,7 @@ int __ZNSt15underflow_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt15underflow_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt15underflow_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt15underflow_errorC4ERKSs @ 0x97c17fa4 (68 bytes) */
@@ -259,24 +242,21 @@ int __ZNSt15underflow_errorC4ERKSs(this, param_2)
 int __ZNSt9type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt9type_infoD4Ev)(this,0);
 }
 
 /* __ZNSt9type_infoD1Ev @ 0x97c17ff0 (8 bytes) */
 int __ZNSt9type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt9type_infoD4Ev)(this,2);
 }
 
 /* __ZNSt9type_infoD0Ev @ 0x97c17ff8 (8 bytes) */
 int __ZNSt9type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9type_infoD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt9type_infoD4Ev)(this,3);
 }
 
 /* __ZNSt9type_infoD4Ev @ 0x97c18000 (44 bytes) */
@@ -288,32 +268,28 @@ int __ZNSt9type_infoD4Ev(this, param_2)
   if ((param_2 & 1) == 0) {
     return;
   }
-  __ZdlPv(this);
-  return;
+  return __ZdlPv(this);
 }
 
 /* __ZNSt8bad_castD2Ev @ 0x97c1802c (8 bytes) */
 int __ZNSt8bad_castD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt8bad_castD4Ev)(this,0);
 }
 
 /* __ZNSt8bad_castD1Ev @ 0x97c18034 (8 bytes) */
 int __ZNSt8bad_castD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt8bad_castD4Ev)(this,2);
 }
 
 /* __ZNSt8bad_castD0Ev @ 0x97c1803c (8 bytes) */
 int __ZNSt8bad_castD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt8bad_castD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt8bad_castD4Ev)(this,3);
 }
 
 /* __ZNSt8bad_castD4Ev @ 0x97c18044 (88 bytes) */
@@ -333,24 +309,21 @@ int __ZNSt8bad_castD4Ev(this, param_2)
 int __ZNSt10bad_typeidD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt10bad_typeidD4Ev)(this,0);
 }
 
 /* __ZNSt10bad_typeidD1Ev @ 0x97c180a4 (8 bytes) */
 int __ZNSt10bad_typeidD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt10bad_typeidD4Ev)(this,2);
 }
 
 /* __ZNSt10bad_typeidD0Ev @ 0x97c180ac (8 bytes) */
 int __ZNSt10bad_typeidD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt10bad_typeidD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt10bad_typeidD4Ev)(this,3);
 }
 
 /* __ZNSt10bad_typeidD4Ev @ 0x97c180b4 (88 bytes) */
@@ -400,8 +373,7 @@ int __ZNKSt9type_info10__do_catchEPKS_PPvj(param_1, param_2, param_3)
   void **param_2;
   uint param_3;
 {
-  ((int (*)())__ZNKSt9type_infoeqERKS_)(param_1,(unsigned char *)param_2);
-  return;
+  return ((int (*)())__ZNKSt9type_infoeqERKS_)(param_1,(unsigned char *)param_2);
 }
 
 /* __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv @ 0x97c1816c (8 bytes) */
@@ -416,24 +388,21 @@ int __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv(param_
 int __ZN10__cxxabiv117__class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,0);
 }
 
 /* __ZN10__cxxabiv117__class_type_infoD1Ev @ 0x97c1817c (8 bytes) */
 int __ZN10__cxxabiv117__class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,2);
 }
 
 /* __ZN10__cxxabiv117__class_type_infoD0Ev @ 0x97c18184 (8 bytes) */
 int __ZN10__cxxabiv117__class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZN10__cxxabiv117__class_type_infoD4Ev)(this,3);
 }
 
 /* __ZN10__cxxabiv117__class_type_infoD4Ev @ 0x97c1818c (104 bytes) */
@@ -454,24 +423,21 @@ int __ZN10__cxxabiv117__class_type_infoD4Ev(this, param_2)
 int __ZN10__cxxabiv120__si_class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,0);
 }
 
 /* __ZN10__cxxabiv120__si_class_type_infoD1Ev @ 0x97c181fc (8 bytes) */
 int __ZN10__cxxabiv120__si_class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,2);
 }
 
 /* __ZN10__cxxabiv120__si_class_type_infoD0Ev @ 0x97c18204 (8 bytes) */
 int __ZN10__cxxabiv120__si_class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZN10__cxxabiv120__si_class_type_infoD4Ev)(this,3);
 }
 
 /* __ZN10__cxxabiv120__si_class_type_infoD4Ev @ 0x97c1820c (104 bytes) */
@@ -492,24 +458,21 @@ int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this, param_2)
 int __ZN10__cxxabiv121__vmi_class_type_infoD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,0);
 }
 
 /* __ZN10__cxxabiv121__vmi_class_type_infoD1Ev @ 0x97c1827c (8 bytes) */
 int __ZN10__cxxabiv121__vmi_class_type_infoD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,2);
 }
 
 /* __ZN10__cxxabiv121__vmi_class_type_infoD0Ev @ 0x97c18284 (8 bytes) */
 int __ZN10__cxxabiv121__vmi_class_type_infoD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZN10__cxxabiv121__vmi_class_type_infoD4Ev)(this,3);
 }
 
 /* __ZN10__cxxabiv121__vmi_class_type_infoD4Ev @ 0x97c1828c (104 bytes) */

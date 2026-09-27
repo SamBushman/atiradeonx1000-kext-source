@@ -1610,8 +1610,7 @@ int FUN_000e7658(param_1)
   iVar2 = (*(uint *)(param_1 + 0xb4) >> 3 & 0x1ffffffc) + *(int *)(*(int *)(param_1 + 0xac) + 0x3bc)
   ;
   *(uint *)(iVar2 + 8) = (-2 << uVar1 | 0xfffffffeU >> 0x20 - uVar1) & *(uint *)(iVar2 + 8);
-  FUN_00193f20(param_1);
-  return;
+  return FUN_00193f20(param_1);
 }
 
 /* FUN_000e7688 @ 0xe7688 (60 bytes) */
@@ -2453,8 +2452,7 @@ int FUN_000e86f0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     piVar1 = piVar2;
   }
-  ((int (*)())FUN_000e84fc)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000e84fc)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000e87e4 @ 0xe87e4 (340 bytes) */

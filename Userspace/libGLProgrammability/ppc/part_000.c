@@ -33,8 +33,7 @@ int _PPEmulatorInit(param_1)
   ((double (*)())_PPCConstantsAndScratchInitialise)(param_1);
   uVar1 = _InterpreterCreate();
   *(undefined4 *)(param_1 + 0xdf0) = uVar1;
-  _InterpreterAttachEmulatorContext(uVar1,param_1);
-  return;
+  return _InterpreterAttachEmulatorContext(uVar1,param_1);
 }
 
 /* _PPParserCreate @ 0x97b7bd24 (96 bytes) */
@@ -1130,8 +1129,7 @@ int _PPStreamAddOption(param_1, param_2)
   uVar2 = *(undefined4 *)(param_1 + 0x30);
   *puVar1 = 7;
   puVar1[0xf] = (undefined1)param_2;
-  ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
-  return;
+  return ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
 }
 
 /* _PPStreamChunkListAddChunk @ 0x97b7d924 (72 bytes) */
@@ -1170,8 +1168,7 @@ int _PPStreamAddAttribBinding(param_1, param_2)
   *puVar1 = 2;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
   *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
-  return;
+  return ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
 }
 
 /* _PPParserReturnPart @ 0x97b7d9c8 (132 bytes) */
@@ -2956,8 +2953,7 @@ int _PPStreamAddParamBinding(param_1, param_2)
   *(undefined4 *)(puVar1 + 0x10) = uVar6;
   *(undefined4 *)(puVar1 + 0x14) = uVar5;
   *(undefined4 *)(puVar1 + 0x18) = uVar3;
-  ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
-  return;
+  return ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
 }
 
 /* _PPParserParseAttributeDeclaration @ 0x97b804a8 (268 bytes) */
@@ -3550,8 +3546,7 @@ int _PPStreamAddOutputBinding(param_1, param_2)
   *puVar1 = 4;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
   *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
-  return;
+  return ((int (*)())_PPStreamChunkListAddChunk)(uVar2,puVar1);
 }
 
 /* _PPParserParseOperation @ 0x97b813c8 (1068 bytes) */
@@ -4098,8 +4093,7 @@ int FUN_97b82078(param_1, param_2, param_3, param_4)
     uVar1 = *(uint *)(puVar3 + 0xc) & 0xfffc0000;
   }
   *(uint *)(puVar3 + 0xc) = uVar1;
-  ((int (*)())_PPStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x20),puVar3);
-  return;
+  return ((int (*)())_PPStreamChunkListAddChunk)(*(undefined4 *)(param_1 + 0x20),puVar3);
 }
 
 /* _PPParserParseEnd @ 0x97b82150 (136 bytes) */

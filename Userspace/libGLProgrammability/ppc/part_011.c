@@ -260,16 +260,14 @@ int __ZN16ParseSymbolTableC4Ej(this, param_2)
 int __ZN16ParseSymbolTableD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN16ParseSymbolTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN16ParseSymbolTableD4Ev)(this);
 }
 
 /* __ZN16ParseSymbolTableD1Ev @ 0x97bbc320 (8 bytes) */
 int __ZN16ParseSymbolTableD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN16ParseSymbolTableD4Ev)(this);
-  return;
+  return ((int (*)())__ZN16ParseSymbolTableD4Ev)(this);
 }
 
 /* __ZN16ParseSymbolTableD4Ev @ 0x97bbc328 (92 bytes) */
@@ -286,8 +284,7 @@ int __ZN16ParseSymbolTableD4Ev(this)
     __ZdlPv(this_00);
     this_00 = pvVar1;
   }
-  __ZdlPv(*(void **)((int)this + 8));
-  return;
+  return __ZdlPv(*(void **)((int)this + 8));
 }
 
 /* ParseSymbolTable__processOperand @ 0x97bbc384 (252 bytes) */
@@ -5082,16 +5079,14 @@ int __ZN22ConstantAllocationListC4Ev(this)
 int __ZN22ConstantAllocationListD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN22ConstantAllocationListD4Ev)(this);
-  return;
+  return ((int (*)())__ZN22ConstantAllocationListD4Ev)(this);
 }
 
 /* __ZN22ConstantAllocationListD1Ev @ 0x97bc371c (8 bytes) */
 int __ZN22ConstantAllocationListD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN22ConstantAllocationListD4Ev)(this);
-  return;
+  return ((int (*)())__ZN22ConstantAllocationListD4Ev)(this);
 }
 
 /* __ZN22ConstantAllocationListD4Ev @ 0x97bc3724 (16 bytes) */
@@ -5101,8 +5096,7 @@ int __ZN22ConstantAllocationListD4Ev(this)
   if (*(int *)this == 0) {
     return;
   }
-  _free(*(int *)this);
-  return;
+  return _free(*(int *)this);
 }
 
 /* ConstantAllocationList__clear @ 0x97bc3734 (68 bytes) */

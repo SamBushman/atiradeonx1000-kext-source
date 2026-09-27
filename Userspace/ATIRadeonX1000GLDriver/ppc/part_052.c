@@ -2023,8 +2023,7 @@ int FUN_0019b808(param_1)
   if (uVar2 < *(uint *)(param_1 + 0x30)) {
     *(undefined4 *)(param_1 + 0x30) = *(undefined4 *)(param_1 + 0x58);
   }
-  ((int (*)())FUN_0019a568)(param_1,3);
-  return;
+  return ((int (*)())FUN_0019a568)(param_1,3);
 }
 
 /* FUN_0019b8bc @ 0x19b8bc (96 bytes) */

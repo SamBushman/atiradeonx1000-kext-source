@@ -6762,8 +6762,7 @@ int FUN_000a0300(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   if (param_2 != 0x8804) {
     return;
   }
-  FUN_0008df50(param_1,0x8875,param_4,param_5);
-  return;
+  return FUN_0008df50(param_1,0x8875,param_4,param_5);
 }
 
 /* FUN_000a0350 @ 0xa0350 (36 bytes) */
@@ -7305,8 +7304,7 @@ int FUN_000a0ef0(param_1)
   *(undefined1 **)(((unsigned char *)0x00001128) + param_1) = puVar2;
   *puVar2 = 0;
   *(undefined4 *)(((unsigned char *)0x00001130) + param_1) = 0;
-  FUN_0008f520(param_1);
-  return;
+  return FUN_0008f520(param_1);
 }
 
 /* FUN_000a0f80 @ 0xa0f80 (4 bytes) */

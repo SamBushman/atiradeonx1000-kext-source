@@ -664,24 +664,21 @@ int TSymbolTable__dump(this, param_2)
 int __ZN9TFunctionD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN9TFunctionD4Ev)(this);
-  return;
+  return ((int (*)())__ZN9TFunctionD4Ev)(this);
 }
 
 /* __ZN9TFunctionD1Ev @ 0x97ba2c94 (8 bytes) */
 int __ZN9TFunctionD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN9TFunctionD4Ev)(this);
-  return;
+  return ((int (*)())__ZN9TFunctionD4Ev)(this);
 }
 
 /* __ZN9TFunctionD0Ev @ 0x97ba2c9c (8 bytes) */
 int __ZN9TFunctionD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN9TFunctionD4Ev)(this);
-  return;
+  return ((int (*)())__ZN9TFunctionD4Ev)(this);
 }
 
 /* __ZN9TFunctionD4Ev @ 0x97ba2ca4 (236 bytes) */
@@ -733,16 +730,14 @@ int __ZN9TFunctionD4Ev(this)
 int __ZN17TSymbolTableLevelD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TSymbolTableLevelD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZN17TSymbolTableLevelD4Ev)(this,0);
 }
 
 /* __ZN17TSymbolTableLevelD1Ev @ 0x97ba2d98 (8 bytes) */
 int __ZN17TSymbolTableLevelD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN17TSymbolTableLevelD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN17TSymbolTableLevelD4Ev)(this,2);
 }
 
 /* __ZN17TSymbolTableLevelD4Ev @ 0x97ba2da0 (184 bytes) */
@@ -8890,8 +8885,7 @@ int yyrestart(param_1)
     _yy_current_buffer = (unsigned char *)((int (*)())yy_create_buffer)(_yyin,0x4000);
   }
   yy_init_buffer(_yy_current_buffer,param_1);
-  ((int (*)())yy_load_buffer_state)();
-  return;
+  return ((int (*)())yy_load_buffer_state)();
 }
 
 /* yy_switch_to_buffer @ 0x97bad968 (148 bytes) */

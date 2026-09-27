@@ -16,15 +16,25 @@ for l in open(rows_file):
     if not f or f[0] != 'TAIL': continue
     want[f[1]] = f[2]
 
+CONTROL_KW = ('if', 'else', 'while', 'do', 'for', 'switch', 'case', 'default', 'return', 'break', 'continue', 'goto')
 def is_call_stmt(stmt):
+    s = stmt.strip()
+    # reject anything that isn't a plain expression statement: a brace anywhere means the "last statement" scan actually swallowed a control-flow
+    # construct's closing brace (e.g. a do{...}while(cond) tail with no explicit `return;` of its own - found live, glprog TGenericLinker's C-tors:
+    # the outer \A(.*\);) match is DOTALL and grabbed "} while (...);" as if it were a call, since it too ends in ");"). A real call statement never
+    # contains `{` or `}`, and never starts with a control-flow keyword.
+    if '{' in s or '}' in s: return False
+    if re.match(r'^(?:%s)\b' % '|'.join(CONTROL_KW), s): return False
     depth = 0
-    for i, c in enumerate(stmt):
+    for i, c in enumerate(s):
         if c == '(': depth += 1
         elif c == ')': depth -= 1
         elif c == '=' and depth == 0:
-            if stmt[i - 1:i] in ('=', '!', '<', '>') or stmt[i + 1:i + 2] == '=': continue
+            if s[i - 1:i] in ('=', '!', '<', '>') or s[i + 1:i + 2] == '=': continue
             return False
-    return True
+    # must end with a balanced, closed call's `)` - not e.g. a bare "while (cond)" condition left dangling, and not a statement whose top-level form
+    # isn't "<primary>(<args>)" at all (depth returned to exactly 0 at the very last character, and that character is ')')
+    return depth == 0 and s.endswith(')')
 
 fixed = 0
 for p in sorted(glob.glob(os.path.join(parts_dir, 'part_*.c'))):
@@ -39,6 +49,11 @@ for p in sorted(glob.glob(os.path.join(parts_dir, 'part_*.c'))):
         decl_line = fbody.split('\n', 1)[0]
         if re.match(r'^\s*void\b', decl_line):
             print('SKIP\t%s\t%s\tfunction is declared void - no caller reads a return value, fix unnecessary' % (addr, want[addr]), file=sys.stderr); continue
+        if not re.match(r'^\s*int\b', decl_line):
+            # r3-forwarding only makes sense when the function is declared `int` (ghidra2c's default): a `double`/`float`-declared owner returns
+            # through f1, not r3, and `return <int-typed-call>;` there would insert a real int->double conversion - a deterministic but WRONG value,
+            # worse than the pre-existing garbage. (Found live: GLDriver FUN_000520c0, declared `double`, tail-calls an `(int (*)())`-cast FUN_0004f550.)
+            print('SKIP\t%s\t%s\tfunction is declared %r, not int - r3 is not its return register, leaving alone' % (addr, want[addr], decl_line.split()[0]), file=sys.stderr); continue
         mm = re.search(r'\A(.*\);)\n  return;\n\}(\s*)\Z', fbody, re.S)
         if not mm:
             print('SKIP\t%s\t%s\tno matching call;return;} tail' % (addr, want[addr]), file=sys.stderr); continue

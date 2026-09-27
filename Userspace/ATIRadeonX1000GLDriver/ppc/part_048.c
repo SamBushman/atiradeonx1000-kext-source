@@ -2049,8 +2049,7 @@ int FUN_0017e7e0(param_1)
   }
   _memset((void *)(param_1 + 0xb4),0,0x15c);
   FUN_0017386c(param_1);
-  FUN_00173f1c(param_1);
-  return;
+  return FUN_00173f1c(param_1);
 }
 
 /* FUN_0017ebb0 @ 0x17ebb0 (508 bytes) */
@@ -5605,8 +5604,7 @@ int FUN_00184ab4(param_1, param_2)
     }
     iVar1 = iVar2;
   }
-  FUN_000ed7e4(param_2,(int)"minreg_order");
-  return;
+  return FUN_000ed7e4(param_2,(int)"minreg_order");
 }
 
 /* FUN_00184bcc @ 0x184bcc (36 bytes) */

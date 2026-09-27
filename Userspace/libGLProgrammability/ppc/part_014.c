@@ -2819,8 +2819,7 @@ int _PPCRuntimeCompilerInitialise(param_1, param_2)
   *(undefined4 *)(param_1 + 0xe4c) = param_2;
   _PPCTextureSamplerInitialise(*(undefined4 *)(param_1 + 0xe1c));
   ((int (*)())_PPCRuntimeCompilerInitialiseRegisterAllocator)(param_1);
-  ((int (*)())_PPCRuntimeCompilerInitialiseVariableInfo)(param_1);
-  return;
+  return ((int (*)())_PPCRuntimeCompilerInitialiseVariableInfo)(param_1);
 }
 
 /* _PPCRuntimeCompilerInitialiseRegisterAllocator @ 0x97bd7d90 (156 bytes) */
@@ -2923,8 +2922,7 @@ int _PPCRuntimeCompilerFree(param_1)
     *(undefined4 *)(param_1 + 0xe00) = 0;
   }
   _PPCTextureSamplerFree(*(undefined4 *)(param_1 + 0xe1c));
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPCRuntimeCompilerOutputAllRegisters @ 0x97bd7f5c (4 bytes) */
@@ -2939,8 +2937,7 @@ int _PPCRuntimeCompilerAttachEmulatorContext(param_1, param_2)
   undefined4 param_2;
 {
   *(undefined4 *)(param_1 + 0xe20) = param_2;
-  _PPCRasterOpMachineAttachEmulatorContext(param_1 + 0xe14,param_2);
-  return;
+  return _PPCRasterOpMachineAttachEmulatorContext(param_1 + 0xe14,param_2);
 }
 
 /* _PPCRuntimeCompilerAttachEmulatorProgram @ 0x97bd7f6c (8 bytes) */

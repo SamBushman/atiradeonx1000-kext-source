@@ -252,8 +252,7 @@ int FUN_00173938(param_1, param_2, param_3)
     iVar2 = iVar2 + -1;
   } while (iVar2 != 0);
   _memset(param_1 + 0x2d,0,0x15c);
-  ((int (*)())FUN_0017386c)(param_1);
-  return;
+  return ((int (*)())FUN_0017386c)(param_1);
 }
 
 /* FUN_001739c0 @ 0x1739c0 (136 bytes) */
@@ -285,8 +284,7 @@ int FUN_001739c0(param_1, param_2, param_3)
     iVar2 = iVar2 + -1;
   } while (iVar2 != 0);
   _memset(param_1 + 0x2d,0,0x15c);
-  ((int (*)())FUN_0017386c)(param_1);
-  return;
+  return ((int (*)())FUN_0017386c)(param_1);
 }
 
 /* FUN_00173a48 @ 0x173a48 (176 bytes) */
@@ -775,8 +773,7 @@ int FUN_001745ac(param_1)
 {
   _memset(param_1 + 0xb4,0,0x15c);
   ((int (*)())FUN_0017386c)(param_1);
-  ((int (*)())FUN_00173f1c)(param_1);
-  return;
+  return ((int (*)())FUN_00173f1c)(param_1);
 }
 
 /* FUN_001745f0 @ 0x1745f0 (216 bytes) */

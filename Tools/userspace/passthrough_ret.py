@@ -69,6 +69,12 @@ for a, size, name, part in funcs:
         if res == 'pass': passes += 1
         elif res == 'join': joinp += 1
     joins += joinp
+    # a thunk whose ENTIRE body is a tail jump (`b target`, no `bl`/`blr` at all) never returns to itself: control goes straight from the callee to
+    # the thunk's own caller, so the thunk's C form must forward the callee's result exactly like the call->blr case above (glprog's std::basic_string
+    # C1 constructor thunks are this shape: 4 bytes, a single unconditional `b` to the C4/C2 base-object constructor - found auditing __textcoal_nt,
+    # 2026-09-26, missed by the -bl/-blr scan above since there is no `blr` in the function for it to anchor on).
+    if not any(op in ('blr', 'bctr') for _, op, _ in seq) and seq and seq[-1][1] == 'b':
+        passes += 1
     if not passes: continue
     c = body.get(a, '')
     ret_void = len(re.findall(r'^\s*return\s*;', c, re.M))

@@ -419,8 +419,7 @@ int FUN_0010a474(param_1, param_2, param_3)
   param_1[5] = param_1[5] | 0x18;
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
-  FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
-  return;
+  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
 /* FUN_0010a50c @ 0x10a50c (96 bytes) */
@@ -437,8 +436,7 @@ int FUN_0010a50c(param_1, param_2, param_3)
   param_1[5] = param_1[5] | 0x18;
   *param_1 = puVar1 + 8;
   param_1[0x20] = 1;
-  FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
-  return;
+  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
 /* FUN_0010a5a4 @ 0x10a5a4 (68 bytes) */
@@ -470,8 +468,7 @@ int FUN_0010a620(param_1, param_2, param_3)
   *param_1 = puVar1;
   param_1[5] = param_1[5] | 0x18;
   param_1[0x21] = 1;
-  FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
-  return;
+  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
 /* FUN_0010a6bc @ 0x10a6bc (100 bytes) */
@@ -488,8 +485,7 @@ int FUN_0010a6bc(param_1, param_2, param_3)
   *param_1 = puVar1;
   param_1[5] = param_1[5] | 0x18;
   param_1[0x21] = 1;
-  FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
-  return;
+  return FUN_000ee9ac(*(undefined4 *)(param_3 + 0x6c4),param_1);
 }
 
 /* FUN_0010a758 @ 0x10a758 (68 bytes) */

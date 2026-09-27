@@ -58,16 +58,14 @@ int __ZNSaIcEC4ERKS_(param_1)
 int __ZNSaIcED2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSaIcED4Ev)(this);
-  return;
+  return ((int (*)())__ZNSaIcED4Ev)(this);
 }
 
 /* __ZNSaIcED1Ev @ 0x97c17394 (8 bytes) */
 int __ZNSaIcED1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSaIcED4Ev)(this);
-  return;
+  return ((int (*)())__ZNSaIcED4Ev)(this);
 }
 
 /* __ZNSaIcED4Ev @ 0x97c1739c (4 bytes) */
@@ -110,48 +108,42 @@ int __ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm(param_1)
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(this);
-  return;
+  return ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(this);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC1Ev @ 0x97c173cc (4 bytes) */
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(this);
-  return;
+  return ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev)(this);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev @ 0x97c173d0 (28 bytes) */
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev(this)
   void *this;
 {
-  _pthread_mutex_lock(&std____default_alloc_template_true_0____S_node_allocator_lock);
-  return;
+  return _pthread_mutex_lock(&std____default_alloc_template_true_0____S_node_allocator_lock);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD2Ev @ 0x97c173ec (8 bytes) */
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(this);
-  return;
+  return ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(this);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD1Ev @ 0x97c173f4 (8 bytes) */
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(this);
-  return;
+  return ((int (*)())__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev)(this);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev @ 0x97c173fc (28 bytes) */
 int __ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev(this)
   void *this;
 {
-  _pthread_mutex_unlock(&std____default_alloc_template_true_0____S_node_allocator_lock);
-  return;
+  return _pthread_mutex_unlock(&std____default_alloc_template_true_0____S_node_allocator_lock);
 }
 
 /* __ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm @ 0x97c17418 (12 bytes) */
@@ -379,16 +371,14 @@ int __ZNSaIwEC4ERKS_(param_1)
 int __ZNSaIwED2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSaIwED4Ev)(this);
-  return;
+  return ((int (*)())__ZNSaIwED4Ev)(this);
 }
 
 /* __ZNSaIwED1Ev @ 0x97c177b8 (8 bytes) */
 int __ZNSaIwED1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSaIwED4Ev)(this);
-  return;
+  return ((int (*)())__ZNSaIwED4Ev)(this);
 }
 
 /* __ZNSaIwED4Ev @ 0x97c177c0 (4 bytes) */
@@ -445,8 +435,7 @@ int __ZNSaIwE10deallocateEPwm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())std____default_alloc_template_true_0___deallocate)(param_2,param_3 << 2);
-  return;
+  return ((int (*)())std____default_alloc_template_true_0___deallocate)(param_2,param_3 << 2);
 }
 
 /* __ZNSaIwE9constructEPwRKw @ 0x97c17844 (20 bytes) */
@@ -595,8 +584,7 @@ int __ZNSt11logic_errorC2ERKSs(this, param_2)
   unsigned char * param_2;
 {
   *(int *)this = DAT_a7b7c014 + 8;
-  __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
-  return;
+  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
 }
 
 /* __ZNSt11logic_errorC1ERKSs @ 0x97c17b68 (4 bytes) */
@@ -604,8 +592,7 @@ int __ZNSt11logic_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt11logic_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt11logic_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt11logic_errorC4ERKSs @ 0x97c17b6c (56 bytes) */
@@ -614,32 +601,28 @@ int __ZNSt11logic_errorC4ERKSs(this, param_2)
   unsigned char * param_2;
 {
   *(int *)this = DAT_a7b7c014 + 8;
-  __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
-  return;
+  return __ZNSsC1ERKSs((void *)((int)this + 4),param_2);
 }
 
 /* __ZNSt11logic_errorD2Ev @ 0x97c17bcc (8 bytes) */
 int __ZNSt11logic_errorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt11logic_errorD4Ev)(this,0);
 }
 
 /* __ZNSt11logic_errorD1Ev @ 0x97c17bd4 (8 bytes) */
 int __ZNSt11logic_errorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt11logic_errorD4Ev)(this,2);
 }
 
 /* __ZNSt11logic_errorD0Ev @ 0x97c17bdc (8 bytes) */
 int __ZNSt11logic_errorD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt11logic_errorD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt11logic_errorD4Ev)(this,3);
 }
 
 /* __ZNSt11logic_errorD4Ev @ 0x97c17be4 (136 bytes) */
@@ -690,8 +673,7 @@ int __ZNSt12domain_errorC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12domain_errorC1ERKSs @ 0x97c17ca0 (4 bytes) */
@@ -699,8 +681,7 @@ int __ZNSt12domain_errorC1ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
-  return;
+  return ((int (*)())__ZNSt12domain_errorC4ERKSs)(this,param_2);
 }
 
 /* __ZNSt12domain_errorC4ERKSs @ 0x97c17ca4 (68 bytes) */
@@ -718,7 +699,6 @@ int __ZNSt16invalid_argumentC2ERKSs(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  __ZNSt16invalid_argumentC4ERKSs(this,param_2);
-  return;
+  return __ZNSt16invalid_argumentC4ERKSs(this,param_2);
 }
 

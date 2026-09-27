@@ -3104,16 +3104,14 @@ int __ZN14TPoolAllocatorC4Ebii(this, param_2, param_3, param_4)
 int __ZN14TPoolAllocatorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TPoolAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN14TPoolAllocatorD4Ev)(this);
 }
 
 /* __ZN14TPoolAllocatorD1Ev @ 0x97ba005c (8 bytes) */
 int __ZN14TPoolAllocatorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TPoolAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN14TPoolAllocatorD4Ev)(this);
 }
 
 /* __ZN14TPoolAllocatorD4Ev @ 0x97ba0064 (184 bytes) */

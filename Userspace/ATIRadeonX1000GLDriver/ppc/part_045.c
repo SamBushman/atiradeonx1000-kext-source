@@ -852,8 +852,7 @@ LAB_0016e148:
       }
     }
   }
-  FUN_00193f64(iVar2,param_2);
-  return;
+  return FUN_00193f64(iVar2,param_2);
 }
 
 /* FUN_0016e1a4 @ 0x16e1a4 (1668 bytes) */
@@ -1392,8 +1391,7 @@ LAB_0016ef60:
     ((int (*)())FUN_0016df8c)(param_1,param_2);
     return;
   }
-  FUN_00193f64(param_1 + 0x19,param_2);
-  return;
+  return FUN_00193f64(param_1 + 0x19,param_2);
 }
 
 /* FUN_0016ff54 @ 0x16ff54 (6540 bytes) */
@@ -2824,8 +2822,7 @@ int FUN_00170e6c(param_1, param_2)
       iVar10 = iVar10 + 4;
     }
   }
-  FUN_00166cfc(param_1);
-  return;
+  return FUN_00166cfc(param_1);
 }
 
 /* FUN_00171714 @ 0x171714 (408 bytes) */
@@ -3633,8 +3630,7 @@ int FUN_00172a90(param_1, param_2, param_3)
   uVar1 = *(undefined4 *)(param_2 + 8);
   *(undefined4 *)(param_2 + 8) = *(undefined4 *)(param_2 + 4);
   *(undefined4 *)(param_2 + 4) = uVar1;
-  FUN_0010ac38(param_1,1,2,param_3);
-  return;
+  return FUN_0010ac38(param_1,1,2,param_3);
 }
 
 /* FUN_00172ab0 @ 0x172ab0 (40 bytes) */

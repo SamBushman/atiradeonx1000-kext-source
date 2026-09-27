@@ -3580,8 +3580,7 @@ int FUN_00062220(param_1, param_2)
     (**(code **)(param_1 + 0x18))(*(int *)(param_2 + 0x2b8));
   }
   (**(code **)(param_1 + 0x18))(param_2);
-  FUN_0007dd30(param_1,param_2);
-  return;
+  return FUN_0007dd30(param_1,param_2);
 }
 
 /* FUN_00062370 @ 0x62370 (104 bytes) */

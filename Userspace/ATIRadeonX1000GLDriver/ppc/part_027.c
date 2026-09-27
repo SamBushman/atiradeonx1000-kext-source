@@ -530,8 +530,7 @@ int FUN_0010469c(param_1, param_2, param_3, param_4)
   *(undefined4 *)(param_1 + 0x98) = param_3;
   *(uint *)(param_1 + 0x14) = *(uint *)(param_1 + 0x14) | 0x42;
   *(undefined4 *)(param_1 + 0x80) = 0;
-  FUN_000ee9ac(param_2,param_1);
-  return;
+  return FUN_000ee9ac(param_2,param_1);
 }
 
 /* FUN_001046c8 @ 0x1046c8 (104 bytes) */
@@ -830,8 +829,7 @@ int FUN_00104be8(param_1, param_2)
   int param_1;
   int param_2;
 {
-  ((int (*)())FUN_00104bbc)(param_2 * 0x18 + param_1 + 0x8c);
-  return;
+  return ((int (*)())FUN_00104bbc)(param_2 * 0x18 + param_1 + 0x8c);
 }
 
 /* FUN_00104bf8 @ 0x104bf8 (324 bytes) */

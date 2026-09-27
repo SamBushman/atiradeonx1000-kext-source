@@ -2230,8 +2230,7 @@ int FUN_0007a070(param_1)
   }
   *(undefined4 *)(param_1 + 0x40c) = 0;
   *(undefined4 *)(param_1 + 0x408) = 0;
-  ((int (*)())FUN_0007a060)(param_1);
-  return;
+  return ((int (*)())FUN_0007a060)(param_1);
 }
 
 /* FUN_0007a110 @ 0x7a110 (100 bytes) */

@@ -441,24 +441,21 @@ int ___dynamic_cast(param_1, param_2, param_3, param_4)
 int __ZNSt9exceptionD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9exceptionD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt9exceptionD4Ev)(this,0);
 }
 
 /* __ZNSt9exceptionD1Ev @ 0x97c18f78 (8 bytes) */
 int __ZNSt9exceptionD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9exceptionD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt9exceptionD4Ev)(this,2);
 }
 
 /* __ZNSt9exceptionD0Ev @ 0x97c18f80 (8 bytes) */
 int __ZNSt9exceptionD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9exceptionD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt9exceptionD4Ev)(this,3);
 }
 
 /* __ZNSt9exceptionD4Ev @ 0x97c18f88 (72 bytes) */
@@ -477,24 +474,21 @@ int __ZNSt9exceptionD4Ev(this, param_2)
 int __ZNSt13bad_exceptionD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,0);
 }
 
 /* __ZNSt13bad_exceptionD1Ev @ 0x97c18fd8 (8 bytes) */
 int __ZNSt13bad_exceptionD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,2);
 }
 
 /* __ZNSt13bad_exceptionD0Ev @ 0x97c18fe0 (8 bytes) */
 int __ZNSt13bad_exceptionD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt13bad_exceptionD4Ev)(this,3);
 }
 
 /* __ZNSt13bad_exceptionD4Ev @ 0x97c18fe8 (88 bytes) */
@@ -536,24 +530,21 @@ int std__set_new_handler(param_1)
 int __ZNSt9bad_allocD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9bad_allocD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZNSt9bad_allocD4Ev)(this,0);
 }
 
 /* __ZNSt9bad_allocD1Ev @ 0x97c190cc (8 bytes) */
 int __ZNSt9bad_allocD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9bad_allocD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZNSt9bad_allocD4Ev)(this,2);
 }
 
 /* __ZNSt9bad_allocD0Ev @ 0x97c190d4 (8 bytes) */
 int __ZNSt9bad_allocD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZNSt9bad_allocD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZNSt9bad_allocD4Ev)(this,3);
 }
 
 /* __ZNSt9bad_allocD4Ev @ 0x97c190dc (88 bytes) */
@@ -618,8 +609,7 @@ int ___cxa_free_exception(param_1)
     _pthread_mutex_unlock(&_emergency_mutex);
     return;
   }
-  _free(param_1 + -0x14);
-  return;
+  return _free(param_1 + -0x14);
 }
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
@@ -638,8 +628,7 @@ int __gxx_exception_cleanup(param_1, param_2)
   if ((code *)puVar1[1] != (code *)0x0) {
     (*(code *)puVar1[1])(param_2 + 1);
   }
-  ((int (*)())___cxa_free_exception)(param_2 + 1);
-  return;
+  return ((int (*)())___cxa_free_exception)(param_2 + 1);
 }
 
 /* ___cxa_throw @ 0x97c19308 (216 bytes) */

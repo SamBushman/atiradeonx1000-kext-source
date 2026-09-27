@@ -134,8 +134,7 @@ int FUN_0012b64c(param_1)
   iVar2 = FUN_000e920c(param_1,0);
   *(undefined4 *)(*(int *)(iVar1 + 0xd0) + 4) = 0;
   *(undefined4 *)(*(int *)(iVar2 + 0xd4) + 4) = 0;
-  FUN_000e8e4c(iVar1,iVar2);
-  return;
+  return FUN_000e8e4c(iVar1,iVar2);
 }
 
 /* FUN_0012b6a8 @ 0x12b6a8 (224 bytes) */
@@ -1616,8 +1615,7 @@ int FUN_0012dd58(param_1, param_2, param_3)
     if ((param_2 == (int *)0x0) || (iVar1 = FUN_00194374(&local_44,param_2), iVar1 == 0)) break;
   }
   FUN_000e7658(param_3);
-  FUN_00193cc0(local_38,local_3c);
-  return;
+  return FUN_00193cc0(local_38,local_3c);
 }
 
 /* FUN_0012df90 @ 0x12df90 (1216 bytes) */
@@ -1811,8 +1809,7 @@ int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
   FUN_000e7658(param_2);
   FUN_000e7658(param_3);
   FUN_000ec2e8(param_1);
-  FUN_00193cc0(local_58,local_5c);
-  return;
+  return FUN_00193cc0(local_58,local_5c);
 }
 
 /* FUN_0012e488 @ 0x12e488 (172 bytes) */
@@ -2892,8 +2889,7 @@ LAB_0013037c:
       FUN_0013bd68(param_1,0);
     }
   }
-  FUN_000ed7e4(param_1,(int)"remove_empty_graphs");
-  return;
+  return FUN_000ed7e4(param_1,(int)"remove_empty_graphs");
 }
 
 /* FUN_001303f4 @ 0x1303f4 (48 bytes) */

@@ -172,8 +172,7 @@ int TIntermAggregate__setName(param_1, param_2)
   unsigned char * param_1;
   unsigned char * param_2;
 {
-  __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(param_1 + 0x54,param_2);
-  return;
+  return __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(param_1 + 0x54,param_2);
 }
 
 /* TIntermAggregate__getName @ 0x97c32554 (8 bytes) */
@@ -492,8 +491,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm(this, param_2, para
   ulong param_3;
   ulong param_4;
 {
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm @ 0x97c32a64 (180 bytes) */
@@ -779,8 +777,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm(this, param_2, pa
     iVar2 = *(int *)((int)this + 4);
   }
   iVar2 = iVar2 + *(int *)(iVar2 + -0xc);
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(this,iVar2,iVar2,param_2,param_2 + param_3);
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_)(this,iVar2,iVar2,param_2,param_2 + param_3);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_ @ 0x97c33034 (116 bytes) */
@@ -801,8 +798,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_(this, param_2)
     iVar3 = *(int *)((int)this + 4);
   }
   iVar3 = iVar3 + *(int *)(iVar3 + -0xc);
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_)(this,iVar3,iVar3,iVar2,iVar2 + *(int *)(iVar2 + -0xc));
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_)(this,iVar3,iVar3,iVar2,iVar2 + *(int *)(iVar2 + -0xc));
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag @ 0x97c330a8 (176 bytes) */
@@ -1202,8 +1198,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1IPKcEET_S7_RKS2_(this, param
   char *param_3;
   unsigned char * param_4;
 {
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_ @ 0x97c33850 (76 bytes) */

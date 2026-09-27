@@ -115,8 +115,7 @@ int FUN_001955d0(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   undefined4 param_5;
 {
-  FUN_000e2c78(param_1,param_5,param_4);
-  return;
+  return FUN_000e2c78(param_1,param_5,param_4);
 }
 
 /* FUN_001955dc @ 0x1955dc (28 bytes) */
@@ -125,8 +124,7 @@ int FUN_001955dc(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_000e2c78(param_2,param_1,param_3);
-  return;
+  return FUN_000e2c78(param_2,param_1,param_3);
 }
 
 /* FUN_001955f8 @ 0x1955f8 (36 bytes) */
@@ -1207,8 +1205,7 @@ int FUN_00196e3c(param_1)
   if (param_1 == (undefined4 *)0x0) {
     return;
   }
-  FUN_00193cc0(param_1[-1],param_1 + -1);
-  return;
+  return FUN_00193cc0(param_1[-1],param_1 + -1);
 }
 
 /* FUN_00196e90 @ 0x196e90 (872 bytes) */

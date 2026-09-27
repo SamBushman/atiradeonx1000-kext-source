@@ -2802,8 +2802,7 @@ int FUN_0008e2e0(param_1, param_2, param_3, param_4)
   _memcpy(pcVar5 + 10,param_4,iVar1);
   pcVar5[iVar1 + 0xc] = '\0';
   ((int (*)())FUN_0008df50)(param_1,0x8875,iVar1 + 0xc,pcVar5);
-  _free(pcVar5);
-  return;
+  return _free(pcVar5);
 }
 
 /* FUN_0008ebb0 @ 0x8ebb0 (4284 bytes) */
@@ -3488,9 +3487,8 @@ int FUN_0008f520(param_1)
   iVar3 = *(int *)(iVar4 + 8);
   uVar1 = (**(code **)(param_1 + 0xc))(0x78,a1_00,in_r5,in_r6,in_r7,in_r8,iVar3);
   *(undefined4 *)(iVar2 * 0x18 + iVar3 + 0x14) = uVar1;
-  ((int (*)())FUN_0008dc50)(param_1,*(undefined4 *)
+  return ((int (*)())FUN_0008dc50)(param_1,*(undefined4 *)
                         (*(int *)(((unsigned char *)0x00001220) + param_1) * 0x18 + *(int *)(iVar4 + 8) + 0x14));
-  return;
 }
 
 /* FUN_0008f6f0 @ 0x8f6f0 (108 bytes) */
@@ -3536,9 +3534,8 @@ int FUN_0008f760(param_1)
   ((int (*)())FUN_0008c590)(param_1,*(undefined4 *)
                         (*(int *)(*(int *)(((unsigned char *)0x00001220) + param_1) * 0x18 + *(int *)(iVar3 + 8) +
                                  0x14) + 0x74),0xf,"!!ARBfp1.0\nEND\n");
-  ((int (*)())FUN_0008dbd0)(param_1,*(undefined4 *)(((unsigned char *)0x0000126c) + param_1),uVar1,pcVar2,in_r7,in_r8,iVar3,
+  return ((int (*)())FUN_0008dbd0)(param_1,*(undefined4 *)(((unsigned char *)0x0000126c) + param_1),uVar1,pcVar2,in_r7,in_r8,iVar3,
                in_r10);
-  return;
 }
 
 /* FUN_0008f7f0 @ 0x8f7f0 (884 bytes) */
@@ -4213,8 +4210,7 @@ int FUN_00090960(param_1)
   }
   *(undefined1 *)(iVar1 + 0x20) = 0;
   *(undefined4 *)(iVar1 + 0x1cc) = 0;
-  ((int (*)())FUN_00090840)(param_1);
-  return;
+  return ((int (*)())FUN_00090840)(param_1);
 }
 
 /* FUN_00090990 @ 0x90990 (772 bytes) */

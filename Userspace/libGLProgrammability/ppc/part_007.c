@@ -45,8 +45,7 @@ int yy_flush_buffer(param_1)
   if (param_1 != _yy_current_buffer) {
     return;
   }
-  yy_load_buffer_state();
-  return;
+  return yy_load_buffer_state();
 }
 
 /* yy_scan_buffer @ 0x97badbf8 (192 bytes) */
@@ -92,8 +91,7 @@ int yy_scan_string(param_1)
     iVar2 = iVar2 + 1;
     cVar1 = param_1[iVar2];
   }
-  ((int (*)())yy_scan_bytes)(param_1,iVar2);
-  return;
+  return ((int (*)())yy_scan_bytes)(param_1,iVar2);
 }
 
 /* yy_scan_bytes @ 0x97badce4 (176 bytes) */
@@ -283,8 +281,7 @@ int PaReservedWord()
   TParseContext__error
             (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"Reserved word.",_yytext,"","",
              in_r9,in_r10);
-  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
-  return;
+  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
 }
 
 /* PaIdentOrType @ 0x97bae0c4 (228 bytes) */
@@ -378,8 +375,7 @@ int _CPPDebugLogMsg(param_1)
   
   this = (void *)(*(int *)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c) + 8) + 8);
   __ZN13TInfoSinkBase6appendEPKc(this,param_1);
-  __ZN13TInfoSinkBase6appendEPKc(this,"\n");
-  return;
+  return __ZN13TInfoSinkBase6appendEPKc(this,"\n");
 }
 
 /* _CPPWarningToInfoLog @ 0x97bae2e8 (92 bytes) */
@@ -448,8 +444,7 @@ int _CPPShInfoLogMsg(param_1, param_2, param_3, param_4, param_5, param_6, param
   puVar1 = PTR__cpp_a7b7c0a4;
   TParseContext__error
             (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"","",param_1,"",param_7,in_r10);
-  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
-  return;
+  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
 }
 
 /* _CPPErrorToInfoLog @ 0x97bae4cc (104 bytes) */
@@ -469,8 +464,7 @@ int _CPPErrorToInfoLog(param_1, param_2, param_3, param_4, param_5, param_6, par
   TParseContext__error
             (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x2c),_yylineno,"syntax error","",param_1,"",
              param_7,in_r10);
-  TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
-  return;
+  return TParseContext__recover(*(unsigned char **)(*(int *)puVar1 + 0x2c));
 }
 
 /* _SetLineNumber @ 0x97bae534 (44 bytes) */
@@ -1790,16 +1784,14 @@ int __ZN7BindingC4Ev(this)
 int __ZN7BindingD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN7BindingD4Ev)(this);
-  return;
+  return ((int (*)())__ZN7BindingD4Ev)(this);
 }
 
 /* __ZN7BindingD1Ev @ 0x97bafeb4 (8 bytes) */
 int __ZN7BindingD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN7BindingD4Ev)(this);
-  return;
+  return ((int (*)())__ZN7BindingD4Ev)(this);
 }
 
 /* __ZN7BindingD4Ev @ 0x97bafebc (4 bytes) */

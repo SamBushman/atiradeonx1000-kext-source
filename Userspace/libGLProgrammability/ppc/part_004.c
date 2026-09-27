@@ -5863,9 +5863,8 @@ int TParseContext__assignError(this, param_2, param_3, param_4, param_5)
   bVar1 = *pbVar2;
   uVar3 = *(undefined4 *)(param_4 + 4);
   *(byte *)(*(int *)(param_5 + 4) + *(int *)(*(int *)(param_5 + 4) + -0xc)) = bVar1;
-  error((int)this,(char *)param_2,"",param_3,"cannot convert from \'%s\' to \'%s\'",
+  return error((int)this,(char *)param_2,"",param_3,"cannot convert from \'%s\' to \'%s\'",
         *(undefined4 *)(param_5 + 4),uVar3,(uint)bVar1);
-  return;
 }
 
 /* TParseContext__unaryOpError @ 0x97b9aa14 (84 bytes) */
@@ -5876,10 +5875,9 @@ int TParseContext__unaryOpError(this, param_2, param_3, param_4)
   int param_4;
 {
   *(undefined1 *)(*(int *)(param_4 + 4) + *(int *)(*(int *)(param_4 + 4) + -0xc)) = *DAT_a7b7ba18;
-  error((int)this,(char *)param_2," wrong operand type",param_3,
+  return error((int)this,(char *)param_2," wrong operand type",param_3,
         "no operation \'%s\' exists that takes an operand of type %s (or there is no acceptable conversion)"
         ,param_3,*(undefined4 *)(param_4 + 4),param_4);
-  return;
 }
 
 /* TParseContext__binaryOpError @ 0x97b9aa68 (104 bytes) */
@@ -5897,10 +5895,9 @@ int TParseContext__binaryOpError(this, param_2, param_3, param_4, param_5)
   *(undefined1 *)(*(int *)(param_5 + 4) + *(int *)(*(int *)(param_5 + 4) + -0xc)) = *DAT_a7b7ba18;
   uVar2 = *(undefined4 *)(param_5 + 4);
   *(undefined1 *)(*(int *)(param_4 + 4) + *(int *)(*(int *)(param_4 + 4) + -0xc)) = *puVar1;
-  error((int)this,(char *)param_2," wrong operand types ",param_3,
+  return error((int)this,(char *)param_2," wrong operand types ",param_3,
         "no operation \'%s\' exists that takes a left-hand operand of type \'%s\' and a right operand of type \'%s\' (or there is no acceptable conversion)"
         ,param_3,*(undefined4 *)(param_4 + 4),uVar2);
-  return;
 }
 
 /* TParseContext__lValueErrorCheck @ 0x97b9aad0 (944 bytes) */

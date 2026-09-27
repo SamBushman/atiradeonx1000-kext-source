@@ -155,8 +155,7 @@ int FUN_0010c010(param_1, param_2, param_3)
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,iVar12,param_3);
-  return;
+  return (*UNRECOVERED_JUMPTABLE)(param_1,iVar12,param_3);
 }
 
 /* FUN_0010c37c @ 0x10c37c (256 bytes) */
@@ -753,8 +752,7 @@ int FUN_0010d15c(param_1, param_2, param_3, param_4)
   if (local_74 != 0) {
     FUN_00106b48(param_1,&local_78,param_3,param_4);
   }
-  FUN_000e7700(iVar8,iVar7,param_1);
-  return;
+  return FUN_000e7700(iVar8,iVar7,param_1);
 }
 
 /* FUN_0010d358 @ 0x10d358 (372 bytes) */
@@ -997,8 +995,7 @@ int FUN_0010da84(param_1)
   *(undefined4 *)(((unsigned char *)0x0000172c) + param_1) = 0;
   *(undefined4 *)(((unsigned char *)0x00001728) + param_1) = 0;
   _memset(param_1 + 0x68,0,0xd00);
-  _memset(param_1 + 0xd68,0,0x9c0);
-  return;
+  return _memset(param_1 + 0xd68,0,0x9c0);
 }
 
 /* FUN_0010dad8 @ 0x10dad8 (128 bytes) */
@@ -1259,8 +1256,7 @@ int FUN_0010de6c(param_1, param_2, param_3, param_4, param_5, param_6)
   iVar3 = FUN_00109810(0xa4,uVar4);
   FUN_001046c8(iVar3,0,uVar2);
   *(int *)(iVar3 + 300) = (int)(short)uVar1;
-  FUN_000f92fc(param_2,iVar3,param_6);
-  return;
+  return FUN_000f92fc(param_2,iVar3,param_6);
 }
 
 /* FUN_0010defc @ 0x10defc (340 bytes) */

@@ -65,8 +65,7 @@ int FUN_00053ef0(param_1, param_2)
   if (param_2 == 0) {
     return;
   }
-  ((int (*)())FUN_00053de0)(param_1,param_2);
-  return;
+  return ((int (*)())FUN_00053de0)(param_1,param_2);
 }
 
 /* FUN_00053f00 @ 0x53f00 (124 bytes) */
@@ -849,8 +848,7 @@ int FUN_00055300(param_1, param_2)
     param_2[6] = 0;
     param_2[5] = 0;
   }
-  ((int (*)())FUN_000551f0)(param_1,param_2 + 7);
-  return;
+  return ((int (*)())FUN_000551f0)(param_1,param_2 + 7);
 }
 
 /* FUN_000553c0 @ 0x553c0 (556 bytes) */

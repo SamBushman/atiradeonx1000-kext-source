@@ -538,10 +538,9 @@ LAB_00131f98:
   uVar5 = 0;
   *(undefined4 *)(param_1 + 0x34) = 4;
   FUN_00193cc0(*(undefined4 *)(iVar4 + 0x378),piVar6);
-  FUN_000e0e0c(*(undefined4 *)(param_1 + 8),
+  return FUN_000e0e0c(*(undefined4 *)(param_1 + 8),
                "Register allocation : Repartition -> %d physical + %d virtual = %d regs\n",param_3,
                param_2,param_4,in_r8,uVar5,in_r10);
-  return;
 }
 
 /* FUN_001322a8 @ 0x1322a8 (416 bytes) */
@@ -1484,8 +1483,7 @@ LAB_00133bd0:
                *(int *)(param_1 + 8));
   }
   FUN_00193cc0(local_84,local_88);
-  FUN_00193cc0(local_74,local_78);
-  return;
+  return FUN_00193cc0(local_74,local_78);
 }
 
 /* FUN_00133fe4 @ 0x133fe4 (140 bytes) */
@@ -2074,8 +2072,7 @@ int FUN_00134cd4(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_00195330(param_2,param_3,*(undefined4 *)(param_1 + 0x20));
-  return;
+  return FUN_00195330(param_2,param_3,*(undefined4 *)(param_1 + 0x20));
 }
 
 /* FUN_00134ce8 @ 0x134ce8 (200 bytes) */
@@ -2567,8 +2564,7 @@ int FUN_001357d4(param_1)
     FUN_00193cc0(*(undefined4 *)(iVar5 + 0xc),*(undefined4 *)(iVar5 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
   }
-  FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
-  return;
+  return FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
 }
 
 /* FUN_00135900 @ 0x135900 (300 bytes) */
@@ -2612,8 +2608,7 @@ int FUN_00135900(param_1)
     FUN_00193cc0(*(undefined4 *)(iVar5 + 0xc),*(undefined4 *)(iVar5 + 8));
     FUN_00193cc0(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
   }
-  FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
-  return;
+  return FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378),*(undefined4 *)(param_1 + 0x20));
 }
 
 /* FUN_00135a2c @ 0x135a2c (500 bytes) */
@@ -4724,8 +4719,7 @@ int FUN_00138fb4(param_1, param_2, param_3, param_4)
   
   a0 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
   (**(code **)(*a0 + 0x6c))(a0,param_1,param_4,param_4);
-  FUN_0014846c(param_1,param_4);
-  return;
+  return FUN_0014846c(param_1,param_4);
 }
 
 /* FUN_00139008 @ 0x139008 (44 bytes) */

@@ -8708,8 +8708,7 @@ int FUN_00017260(param_1)
       iVar5 = iVar5 + -1;
     } while (iVar5 != 0);
   }
-  FUN_000a7a60(param_1);
-  return;
+  return FUN_000a7a60(param_1);
 }
 
 /* FUN_00017310 @ 0x17310 (1008 bytes) */

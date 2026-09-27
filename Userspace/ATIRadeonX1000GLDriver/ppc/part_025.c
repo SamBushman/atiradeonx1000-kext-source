@@ -1884,7 +1884,6 @@ int FUN_000f4d80(param_1, param_2)
   local_24 = *(undefined4 *)(param_1 + 0xc);
   local_20 = *(undefined4 *)(param_1 + 0x10);
   local_1c = *(undefined4 *)(param_1 + 0x14);
-  FUN_00194720(*puVar2,param_2);
-  return;
+  return FUN_00194720(*puVar2,param_2);
 }
 

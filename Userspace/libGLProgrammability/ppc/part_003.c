@@ -4756,8 +4756,7 @@ int __ZN13TIntermediate9addBranchE9TOperatori(this, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,param_2,0,param_3);
-  return;
+  return ((int (*)())__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi)(this,param_2,0,param_3);
 }
 
 /* __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi @ 0x97b9035c (124 bytes) */
@@ -4806,8 +4805,7 @@ int TIntermediate__remove(this, param_2)
   if (param_2 == (unsigned char *)0x0) {
     return;
   }
-  RemoveAllTreeNodes(param_2);
-  return;
+  return RemoveAllTreeNodes(param_2);
 }
 
 /* TIntermOperator__modifiesState @ 0x97b90444 (48 bytes) */

@@ -110,8 +110,7 @@ int _PPStreamChunkListFree(param_1)
       iVar2 = iVar3;
     } while (iVar1 != 0);
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPStreamChunkListRemoveChunk @ 0x97b82790 (120 bytes) */
@@ -333,8 +332,7 @@ int _PPStreamAddTempUsage(param_1, param_2)
   *(undefined4 *)(puVar1 + 0x10) = uVar6;
   *(undefined4 *)(puVar1 + 0x14) = uVar5;
   *(undefined4 *)(puVar1 + 0x18) = uVar3;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPEmulatorProgramCreate @ 0x97b82d7c (72 bytes) */
@@ -927,8 +925,7 @@ int _PPParserFree(param_1)
   undefined4 param_1;
 {
   ((int (*)())_PPParserShutdown)(param_1);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPParserShutdown @ 0x97b83ed4 (88 bytes) */
@@ -968,8 +965,7 @@ int _PPParserRemoveScope(param_1, param_2)
   else {
     *(int *)(*(int *)(param_2 + 0x20) + 0x1c) = iVar1;
   }
-  ((int (*)())_PPParserScopeFree)(param_2);
-  return;
+  return ((int (*)())_PPParserScopeFree)(param_2);
 }
 
 /* _PPParserScopeFree @ 0x97b83f70 (116 bytes) */
@@ -988,8 +984,7 @@ int _PPParserScopeFree(param_1)
     ((int (*)())_PPParserScopeRemoveMacro)(param_1,iVar1);
     iVar1 = param_1[2];
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPParserScopeRemoveIdentifier @ 0x97b83fe4 (68 bytes) */
@@ -1013,8 +1008,7 @@ int _PPParserScopeRemoveIdentifier(param_1, param_2)
   else {
     *(int *)(*(int *)(param_2 + 0x20) + 0x1c) = iVar1;
   }
-  ((int (*)())_PPParserIdentifierFree)(param_2);
-  return;
+  return ((int (*)())_PPParserIdentifierFree)(param_2);
 }
 
 /* _PPParserIdentifierFree @ 0x97b84028 (52 bytes) */
@@ -1022,8 +1016,7 @@ int _PPParserIdentifierFree(param_1)
   undefined4 param_1;
 {
   _PPParserIdentifierSetName(param_1,0);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPParserScopeRemoveMacro @ 0x97b8405c (68 bytes) */
@@ -1047,8 +1040,7 @@ int _PPParserScopeRemoveMacro(param_1, param_2)
   else {
     *(int *)(*(int *)(param_2 + 0x1c) + 0x18) = iVar1;
   }
-  ((int (*)())_PPParserMacroFree)(param_2);
-  return;
+  return ((int (*)())_PPParserMacroFree)(param_2);
 }
 
 /* _PPParserMacroFree @ 0x97b840a0 (144 bytes) */
@@ -1082,8 +1074,7 @@ int _PPParserMacroFree(param_1)
   if (iVar3 != 0) {
     _free(iVar3);
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPParserGetScalars @ 0x97b84130 (200 bytes) */
@@ -1147,8 +1138,7 @@ int _PPStreamAddConstant(param_1, param_2)
   *(undefined4 *)(puVar5 + 0x10) = uVar3;
   *(undefined4 *)(puVar5 + 0x14) = uVar4;
   *(undefined4 *)(puVar5 + 0x18) = uVar1;
-  _PPStreamChunkListAddChunk(uVar6,puVar5);
-  return;
+  return _PPStreamChunkListAddChunk(uVar6,puVar5);
 }
 
 /* _PPParserParseTempDeclaration @ 0x97b84264 (468 bytes) */
@@ -1608,8 +1598,7 @@ int _PPEmulatorFree(param_1)
 {
   _InterpreterFree(*(undefined4 *)(param_1 + 0xdf0));
   _free(*(undefined4 *)(param_1 + 0xd84));
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPStreamFree @ 0x97b84c28 (140 bytes) */
@@ -1659,8 +1648,7 @@ int _PPEmulatorProgramFree(param_1)
     param_1[0x2c] = 0;
   }
   ((int (*)())_PPEmulatorProgramInitialiseHandleBanks)(param_1,0,0,0,0);
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _PPParserParseAliasDeclaration @ 0x97b84d68 (368 bytes) */

@@ -35,8 +35,7 @@ int __ZNKSs13find_first_ofERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs13find_first_ofEPKcmm @ 0x97c15b90 (152 bytes) */
@@ -71,8 +70,7 @@ int __ZNKSs13find_first_ofEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs13find_first_ofEPKcmm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNKSs13find_first_ofEcm @ 0x97c15c70 (4 bytes) */
@@ -81,8 +79,7 @@ int __ZNKSs13find_first_ofEcm(this, param_2, param_3)
   int param_2;
   ulong param_3;
 {
-  __ZNKSs4findEcm(this,param_2,param_3);
-  return;
+  return __ZNKSs4findEcm(this,param_2,param_3);
 }
 
 /* __ZNKSs12find_last_ofERKSsm @ 0x97c15c74 (12 bytes) */
@@ -91,8 +88,7 @@ int __ZNKSs12find_last_ofERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs12find_last_ofEPKcmm @ 0x97c15c80 (144 bytes) */
@@ -136,8 +132,7 @@ int __ZNKSs12find_last_ofEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs12find_last_ofEPKcmm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNKSs12find_last_ofEcm @ 0x97c15d58 (4 bytes) */
@@ -146,8 +141,7 @@ int __ZNKSs12find_last_ofEcm(this, param_2, param_3)
   int param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs5rfindEcm)(this,param_2,param_3);
-  return;
+  return ((int (*)())__ZNKSs5rfindEcm)(this,param_2,param_3);
 }
 
 /* __ZNKSs17find_first_not_ofERKSsm @ 0x97c15d5c (12 bytes) */
@@ -156,8 +150,7 @@ int __ZNKSs17find_first_not_ofERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs17find_first_not_ofEPKcmm @ 0x97c15d68 (124 bytes) */
@@ -193,8 +186,7 @@ int __ZNKSs17find_first_not_ofEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs17find_first_not_ofEPKcmm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNKSs17find_first_not_ofEcm @ 0x97c15e2c (68 bytes) */
@@ -219,8 +211,7 @@ int __ZNKSs16find_last_not_ofERKSsm(this, param_2, param_3)
   unsigned char * param_2;
   ulong param_3;
 {
-  ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
-  return;
+  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,*(char **)param_2,param_3,*(ulong *)(*(char **)param_2 + -0xc));
 }
 
 /* __ZNKSs16find_last_not_ofEPKcmm @ 0x97c15e7c (136 bytes) */
@@ -264,8 +255,7 @@ int __ZNKSs16find_last_not_ofEPKcm(this, param_2, param_3)
   ulong uVar1;
   
   uVar1 = _strlen(param_2);
-  ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,param_2,param_3,uVar1);
-  return;
+  return ((int (*)())__ZNKSs16find_last_not_ofEPKcmm)(this,param_2,param_3,uVar1);
 }
 
 /* __ZNKSs16find_last_not_ofEcm @ 0x97c15f4c (84 bytes) */
@@ -767,8 +757,7 @@ int __ZNSsC2IPcEET_S1_RKSaIcE(this, param_2, param_3, param_4)
   char *param_3;
   unsigned char * param_4;
 {
-  ((int (*)())__ZNSsC4IPcEET_S1_RKSaIcE)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSsC4IPcEET_S1_RKSaIcE)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSsC1IPcEET_S1_RKSaIcE @ 0x97c168d8 (4 bytes) */
@@ -781,8 +770,7 @@ int __ZNSsC1IPcEET_S1_RKSaIcE(this, param_2, param_3, param_4)
   char *pcVar1;
   
   pcVar1 = ((int (*)())std__string___S_construct_char__)(param_2,param_3,param_4,0);
-  __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
-  return;
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
 }
 
 /* __ZNSsC4IPcEET_S1_RKSaIcE @ 0x97c168dc (80 bytes) */
@@ -805,8 +793,7 @@ int __ZNSsC2IPKcEET_S2_RKSaIcE(this, param_2, param_3, param_4)
   char *param_3;
   unsigned char * param_4;
 {
-  ((int (*)())__ZNSsC4IPKcEET_S2_RKSaIcE)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSsC4IPKcEET_S2_RKSaIcE)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSsC1IPKcEET_S2_RKSaIcE @ 0x97c16930 (4 bytes) */
@@ -819,8 +806,7 @@ int __ZNSsC1IPKcEET_S2_RKSaIcE(this, param_2, param_3, param_4)
   char *pcVar1;
   
   pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
-  __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
-  return;
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
 }
 
 /* __ZNSsC4IPKcEET_S2_RKSaIcE @ 0x97c16934 (80 bytes) */
@@ -843,8 +829,7 @@ int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, 
   undefined4 param_3;
   undefined4 param_4;
 {
-  ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE @ 0x97c16988 (4 bytes) */
@@ -857,8 +842,7 @@ int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, 
   char *pcVar1;
   
   pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(param_2,param_3,param_4,0);
-  __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
-  return;
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
 }
 
 /* __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE @ 0x97c1698c (80 bytes) */
@@ -881,8 +865,7 @@ int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
   undefined4 param_3;
   undefined4 param_4;
 {
-  ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(this,param_2,param_3,param_4);
-  return;
+  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(this,param_2,param_3,param_4);
 }
 
 /* __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169e0 (4 bytes) */
@@ -895,8 +878,7 @@ int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2,
   char *pcVar1;
   
   pcVar1 = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,param_4,0);
-  __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
-  return;
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,param_4);
 }
 
 /* __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169e4 (80 bytes) */

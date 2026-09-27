@@ -745,8 +745,7 @@ int FUN_0003f5d0(param_1)
   if (param_1 == 0) {
     return;
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* FUN_0003f5e0 @ 0x3f5e0 (112 bytes) */

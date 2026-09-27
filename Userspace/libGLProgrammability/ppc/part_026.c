@@ -1520,8 +1520,7 @@ int ___register_frame_info(fde, ob)
   void *fde;
   void *ob;
 {
-  ((int (*)())___register_frame_info_bases)(fde,ob,(void *)0x0,(void *)0x0);
-  return;
+  return ((int (*)())___register_frame_info_bases)(fde,ob,(void *)0x0,(void *)0x0);
 }
 
 /* ___register_frame @ 0x97c1c668 (88 bytes) */
@@ -2622,8 +2621,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this, param_2, par
   char *param_2;
   unsigned char * param_3;
 {
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_)(this,param_2,param_3);
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_)(this,param_2,param_3);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_ @ 0x97c30ae4 (100 bytes) */
@@ -2655,8 +2653,7 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(this, param_2)
   void *this;
   unsigned char * param_2;
 {
-  ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_)(this,param_2);
-  return;
+  return ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_)(this,param_2);
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_ @ 0x97c30b4c (148 bytes) */

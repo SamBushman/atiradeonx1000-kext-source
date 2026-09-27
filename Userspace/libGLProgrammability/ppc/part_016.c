@@ -7378,8 +7378,7 @@ int _PPStreamAddTempUsageArray(param_1, param_2)
   *puVar1 = 6;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
   *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPStreamAddAddressUsage @ 0x97bf1390 (84 bytes) */
@@ -7396,8 +7395,7 @@ int _PPStreamAddAddressUsage(param_1, param_2)
   uVar2 = *(undefined4 *)(param_1 + 0xc);
   *puVar1 = 1;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPStreamAddParamBindingArray @ 0x97bf13e4 (92 bytes) */
@@ -7417,8 +7415,7 @@ int _PPStreamAddParamBindingArray(param_1, param_2)
   *puVar1 = 5;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
   *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPStreamInsertOperationBeforeChunk @ 0x97bf1440 (288 bytes) */
@@ -7522,8 +7519,7 @@ int _PPStreamAddLabel(param_1, param_2, param_3)
   _memmove(puVar1 + 0x14,param_2,param_3);
   uVar2 = *(undefined4 *)(param_1 + 0x24);
   puVar1[param_3 + 0x14] = 0;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPStreamRemoveLabelsAtOperationIndex @ 0x97bf16cc (96 bytes) */
@@ -7561,8 +7557,7 @@ int _PPStreamAddRasterOp(param_1, param_2)
   *puVar1 = 9;
   *(undefined4 *)(puVar1 + 0xc) = uVar3;
   *(undefined4 *)(puVar1 + 0x10) = uVar4;
-  _PPStreamChunkListAddChunk(uVar2,puVar1);
-  return;
+  return _PPStreamChunkListAddChunk(uVar2,puVar1);
 }
 
 /* _PPStreamAttachStream @ 0x97bf1788 (1212 bytes) */
@@ -8002,8 +7997,7 @@ int _PPStreamChangeBranchTargets(param_1, param_2, param_3)
   undefined4 param_3;
 {
   ((int (*)())_renumberLabels)(**(undefined4 **)(param_1 + 0x24),param_2,param_3,0);
-  ((int (*)())_renumberTargets)(**(undefined4 **)(param_1 + 0x20),param_2,param_3,0);
-  return;
+  return ((int (*)())_renumberTargets)(**(undefined4 **)(param_1 + 0x20),param_2,param_3,0);
 }
 
 /* _PPStreamPackIndices @ 0x97bf20fc (612 bytes) */
@@ -8102,8 +8096,7 @@ int _PPStreamSortParamConstants(param_1)
       uVar1 = *(ushort *)(iVar4 + 0x12);
     }
   }
-  _PPStreamChunkListSort(*(undefined4 *)(param_1 + 0x10));
-  return;
+  return _PPStreamChunkListSort(*(undefined4 *)(param_1 + 0x10));
 }
 
 /* _PPStreamResolveBranches @ 0x97bf2408 (340 bytes) */

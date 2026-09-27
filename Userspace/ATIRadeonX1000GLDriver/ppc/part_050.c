@@ -1337,8 +1337,7 @@ int FUN_00193be8(param_1)
   if (param_1[5] == 0) {
     return;
   }
-  ((int (*)())FUN_00193cc0)(*(undefined4 *)(*param_1 + 0x370),param_1[5]);
-  return;
+  return ((int (*)())FUN_00193cc0)(*(undefined4 *)(*param_1 + 0x370),param_1[5]);
 }
 
 /* FUN_00193c00 @ 0x193c00 (116 bytes) */
@@ -1531,8 +1530,7 @@ int FUN_00193f64(param_1, param_2)
   int param_1;
   undefined4 param_2;
 {
-  ((int (*)())FUN_00193f44)(param_2,param_1 + 0xc);
-  return;
+  return ((int (*)())FUN_00193f44)(param_2,param_1 + 0xc);
 }
 
 /* FUN_00193f74 @ 0x193f74 (32 bytes) */
@@ -1557,8 +1555,7 @@ int FUN_00193f94(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  ((int (*)())FUN_00193f74)(param_2,param_1);
-  return;
+  return ((int (*)())FUN_00193f74)(param_2,param_1);
 }
 
 /* FUN_00193fa4 @ 0x193fa4 (16 bytes) */
@@ -1583,8 +1580,7 @@ int FUN_00193fb4(param_1)
     (**(code **)(*piVar1 + 4))(piVar1);
     piVar1 = piVar2;
   }
-  ((int (*)())FUN_00193fa4)(param_1);
-  return;
+  return ((int (*)())FUN_00193fa4)(param_1);
 }
 
 /* FUN_0019401c @ 0x19401c (24 bytes) */
@@ -1710,8 +1706,7 @@ int FUN_00194208(param_1, param_2)
   iVar1 = *(uint *)(param_1 + 4) - 1;
   iVar2 = param_2 * 4 + *(int *)(param_1 + 8);
   *(int *)(param_1 + 4) = iVar1;
-  _memcpy(iVar2,iVar2 + 4,(iVar1 - param_2) * 4);
-  return;
+  return _memcpy(iVar2,iVar2 + 4,(iVar1 - param_2) * 4);
 }
 
 /* FUN_0019423c @ 0x19423c (152 bytes) */
@@ -1859,8 +1854,7 @@ int FUN_001943f0(param_1)
       uVar5 = uVar5 + 1;
     } while (uVar5 < uVar1);
   }
-  ((int (*)())FUN_00193cc0)(param_1[5],uVar3);
-  return;
+  return ((int (*)())FUN_00193cc0)(param_1[5],uVar3);
 }
 
 /* FUN_00194504 @ 0x194504 (276 bytes) */
@@ -1914,8 +1908,7 @@ int FUN_00194504(param_1)
       uVar5 = uVar5 + 1;
     } while (uVar5 < uVar1);
   }
-  ((int (*)())FUN_00193cc0)(param_1[5],uVar3);
-  return;
+  return ((int (*)())FUN_00193cc0)(param_1[5],uVar3);
 }
 
 /* FUN_00194618 @ 0x194618 (264 bytes) */
@@ -2097,8 +2090,7 @@ int FUN_00194a94(param_1, param_2)
   *param_1 = param_2;
   param_1[3] = 0xffffffff;
   param_1[1] = 0xffffffff;
-  ((int (*)())FUN_00194938)(param_1);
-  return;
+  return ((int (*)())FUN_00194938)(param_1);
 }
 
 /* FUN_00194aa8 @ 0x194aa8 (260 bytes) */

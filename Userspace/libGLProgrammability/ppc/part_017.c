@@ -10239,8 +10239,7 @@ int _glpFreePPShaderToProgram(param_1)
   if (param_1 == 0) {
     return;
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _glpUniformToFloat @ 0x97c05988 (344 bytes) */
@@ -11547,8 +11546,7 @@ int _CopyPropagateOperation(param_1, param_2, param_3)
 {
   ((int (*)())_ReplaceUsingAvailableCopyTable)(param_1,param_2);
   ((int (*)())_RemoveFromAvailableCopyTable)(param_1,param_2,param_3);
-  ((int (*)())_AddToAvailableCopyTable)(param_1,param_2,param_3);
-  return;
+  return ((int (*)())_AddToAvailableCopyTable)(param_1,param_2,param_3);
 }
 
 /* _EndLocalAvailableCopyList @ 0x97c0755c (132 bytes) */
@@ -11601,8 +11599,7 @@ int _LocalCopyPropagator(param_1)
   if (puVar1[1] != 0) {
     _free(puVar1[1]);
   }
-  _free(puVar1);
-  return;
+  return _free(puVar1);
 }
 
 /* _EmbedSamplerParamIndices @ 0x97c076cc (144 bytes) */
@@ -11846,8 +11843,7 @@ int _glpPPShaderLinearizeStreamMgr(param_1, param_2)
     _RegistersCleanup(uVar1);
     _ProgramFree(uVar1);
   }
-  _PPStreamPackIndices(param_1);
-  return;
+  return _PPStreamPackIndices(param_1);
 }
 
 /* _glpPPShaderLinearize @ 0x97c07c30 (156 bytes) */
@@ -11880,8 +11876,7 @@ int _glpFreePPShaderLinearize(param_1)
   if (param_1 == 0) {
     return;
   }
-  _free(param_1);
-  return;
+  return _free(param_1);
 }
 
 /* _BitSetNew @ 0x97c07cd8 (104 bytes) */

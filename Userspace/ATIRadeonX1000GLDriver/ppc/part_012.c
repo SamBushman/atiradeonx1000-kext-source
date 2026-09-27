@@ -285,8 +285,7 @@ int FUN_000837b0(param_1)
   pcVar3 = *(code **)(param_1 + 0x275c);
   *(int *)(0x00002748 + param_1 + 4) = iVar1 + 0x24;
   (*pcVar3)(param_1,iVar1 + 0x24,in_r5,in_r6,in_r7,in_r8,a6);
-  FUN_0004e880(param_1);
-  return;
+  return FUN_0004e880(param_1);
 }
 
 /* FUN_00083870 @ 0x83870 (1012 bytes) */
@@ -4279,8 +4278,7 @@ int FUN_00088e70(param_1, param_2)
 int FUN_00088ee0(param_1)
   undefined4 param_1;
 {
-  ((int (*)())FUN_00088e70)(param_1,"out of memory");
-  return;
+  return ((int (*)())FUN_00088e70)(param_1,"out of memory");
 }
 
 /* FUN_00088f00 @ 0x88f00 (184 bytes) */
@@ -4387,8 +4385,7 @@ LAB_00089104:
 int FUN_00089140(param_1)
   undefined4 param_1;
 {
-  ((int (*)())FUN_00088e70)(param_1,"internal error");
-  return;
+  return ((int (*)())FUN_00088e70)(param_1,"internal error");
 }
 
 /* FUN_00089160 @ 0x89160 (44 bytes) */
@@ -4400,8 +4397,7 @@ int FUN_00089160(param_1, param_2)
     ((int (*)())FUN_00088920)(param_1);
     return;
   }
-  ((int (*)())FUN_00088e70)(param_1,"unexpected token");
-  return;
+  return ((int (*)())FUN_00088e70)(param_1,"unexpected token");
 }
 
 /* FUN_00089190 @ 0x89190 (124 bytes) */

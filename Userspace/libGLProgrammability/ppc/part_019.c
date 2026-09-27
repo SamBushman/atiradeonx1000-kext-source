@@ -3200,8 +3200,7 @@ int _PPParserInitFromParent(param_1, param_2)
   int param_1;
   int param_2;
 {
-  _memcpy(param_1 + 0x450,param_2 + 0x450,0x3c);
-  return;
+  return _memcpy(param_1 + 0x450,param_2 + 0x450,0x3c);
 }
 
 /* _PPParserInherit @ 0x97c10c18 (44 bytes) */
@@ -3236,8 +3235,7 @@ int _PPParserDeclareNVAddressRegisters(param_1)
   _PPParserIdentifierSetName(iVar1,"a0");
   *(undefined4 *)(iVar1 + 0xc) = 0xffffffff;
   *(undefined4 *)(iVar1 + 8) = 0;
-  _PPParserScopeAddIdentifier(*(undefined4 *)(param_1 + 0x44c),iVar1);
-  return;
+  return _PPParserScopeAddIdentifier(*(undefined4 *)(param_1 + 0x44c),iVar1);
 }
 
 /* _PPParserParseBlock @ 0x97c10ca0 (236 bytes) */

@@ -3398,24 +3398,21 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
 int __ZN14TGenericLinkerD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,0);
-  return;
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,0);
 }
 
 /* __ZN14TGenericLinkerD1Ev @ 0x97bb8238 (8 bytes) */
 int __ZN14TGenericLinkerD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,2);
-  return;
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,2);
 }
 
 /* __ZN14TGenericLinkerD0Ev @ 0x97bb8240 (8 bytes) */
 int __ZN14TGenericLinkerD0Ev(this)
   void *this;
 {
-  ((int (*)())__ZN14TGenericLinkerD4Ev)(this,3);
-  return;
+  return ((int (*)())__ZN14TGenericLinkerD4Ev)(this,3);
 }
 
 /* __ZN14TGenericLinkerD4Ev @ 0x97bb8248 (244 bytes) */
@@ -4473,8 +4470,7 @@ int __ZN20AddressTempAllocatorC2Ev(this)
 int __ZN20AddressTempAllocatorC1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN20AddressTempAllocatorC4Ev)(this);
-  return;
+  return ((int (*)())__ZN20AddressTempAllocatorC4Ev)(this);
 }
 
 /* __ZN20AddressTempAllocatorC4Ev @ 0x97bb9d0c (16 bytes) */
@@ -4490,16 +4486,14 @@ int __ZN20AddressTempAllocatorC4Ev(this)
 int __ZN20AddressTempAllocatorD2Ev(this)
   void *this;
 {
-  ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
 }
 
 /* __ZN20AddressTempAllocatorD1Ev @ 0x97bb9d24 (8 bytes) */
 int __ZN20AddressTempAllocatorD1Ev(this)
   void *this;
 {
-  ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
-  return;
+  return ((int (*)())__ZN20AddressTempAllocatorD4Ev)(this);
 }
 
 /* __ZN20AddressTempAllocatorD4Ev @ 0x97bb9d2c (16 bytes) */
@@ -4509,8 +4503,7 @@ int __ZN20AddressTempAllocatorD4Ev(this)
   if (*(int *)this == 0) {
     return;
   }
-  _free(*(int *)this);
-  return;
+  return _free(*(int *)this);
 }
 
 /* AddressTempAllocator__getTemporary @ 0x97bb9d3c (316 bytes) */

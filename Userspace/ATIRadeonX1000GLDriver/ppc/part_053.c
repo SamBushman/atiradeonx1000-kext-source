@@ -118,8 +118,7 @@ LAB_0019dab0:
   *(undefined4 *)(param_2 + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*param_1 + 0x34))(param_1,param_3,*(undefined4 *)(param_2 + 0xdc));
-  FUN_000e2860(*(undefined4 *)(param_2 + 0x13c),param_5);
-  return;
+  return FUN_000e2860(*(undefined4 *)(param_2 + 0x13c),param_5);
 }
 
 /* FUN_0019dc48 @ 0x19dc48 (104 bytes) */
@@ -1102,8 +1101,7 @@ int FUN_0019f0cc(param_1, param_2, param_3, param_4, param_5, param_6)
 int FUN_0019f110(param_1)
   int param_1;
 {
-  _memset(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8),0,0x48);
-  return;
+  return _memset(*(int *)(param_1 + 0x60) * 0x48 + *(int *)(param_1 + 0xa8),0,0x48);
 }
 
 /* FUN_0019f138 @ 0x19f138 (168 bytes) */
@@ -1145,8 +1143,7 @@ int FUN_0019f1e0(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
-  FUN_000e2c78(param_2,param_1,param_3);
-  return;
+  return FUN_000e2c78(param_2,param_1,param_3);
 }
 
 /* FUN_0019f1fc @ 0x19f1fc (48 bytes) */
