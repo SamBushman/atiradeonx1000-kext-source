@@ -1,0 +1,495 @@
+# entry	size	name	static references in the stock	decision
+0x98d8	16	orph_98d8	-	not wired: no static reference (dead / alignment fragment)
+0x98e8	16	orph_98e8	-	not wired: no static reference (dead / alignment fragment)
+0x98f8	16	orph_98f8	-	not wired: no static reference (dead / alignment fragment)
+0x9908	16	orph_9908	-	not wired: no static reference (dead / alignment fragment)
+0x9918	16	orph_9918	-	not wired: no static reference (dead / alignment fragment)
+0x9930	120	orph_9930	-	not wired: no static reference (dead / alignment fragment)
+0x9954	52	orph_9954	branch	linked beside its owner: target of a branch / call in other code
+0x9968	16	orph_9968	branch	linked beside its owner: target of a branch / call in other code
+0x9978	16	orph_9978	branch	linked beside its owner: target of a branch / call in other code
+0x9988	16	orph_9988	branch	linked beside its owner: target of a branch / call in other code
+0x9998	16	orph_9998	branch	linked beside its owner: target of a branch / call in other code
+0x99a8	120	orph_99a8	-	not wired: no static reference (dead / alignment fragment)
+0x99cc	52	orph_99cc	branch	linked beside its owner: target of a branch / call in other code
+0x99e0	16	orph_99e0	branch	linked beside its owner: target of a branch / call in other code
+0x99f0	16	orph_99f0	branch	linked beside its owner: target of a branch / call in other code
+0x9a00	16	orph_9a00	branch	linked beside its owner: target of a branch / call in other code
+0x9a10	16	orph_9a10	branch	linked beside its owner: target of a branch / call in other code
+0x9a20	20	orph_9a20	-	not wired: no static reference (dead / alignment fragment)
+0x9a34	12	orph_9a34	-	not wired: no static reference (dead / alignment fragment)
+0x9a40	12	orph_9a40	-	not wired: no static reference (dead / alignment fragment)
+0x9a4c	12	orph_9a4c	-	not wired: no static reference (dead / alignment fragment)
+0x9a58	12	orph_9a58	-	not wired: no static reference (dead / alignment fragment)
+0x9a64	12	orph_9a64	-	not wired: no static reference (dead / alignment fragment)
+0x9a70	168	orph_9a70	-	not wired: no static reference (dead / alignment fragment)
+0x9aa4	1	orph_9aa4	-	not wired: no static reference (dead / alignment fragment)
+0x9ac4	124	orph_9ac4	-	not wired: no static reference (dead / alignment fragment)
+0x9acc	128	orph_9acc	-	not wired: no static reference (dead / alignment fragment)
+0x9ad8	124	orph_9ad8	-	not wired: no static reference (dead / alignment fragment)
+0x9ae0	128	orph_9ae0	-	not wired: no static reference (dead / alignment fragment)
+0x9aec	124	orph_9aec	-	not wired: no static reference (dead / alignment fragment)
+0x9b0c	92	orph_9b0c	branch	linked beside its owner: target of a branch / call in other code
+0x9b30	36	orph_9b30	branch	linked beside its owner: target of a branch / call in other code
+0x9b54	20	orph_9b54	branch	linked beside its owner: target of a branch / call in other code
+0x9b68	1	orph_9b68	-	not wired: no static reference (dead / alignment fragment)
+0x40a9c	32	orph_40a9c	-	not wired: no static reference (dead / alignment fragment)
+0x40ac0	4	orph_40ac0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x4c544	24	orph_4c544	-	not wired: no static reference (dead / alignment fragment)
+0x535c4	44	orph_535c4	-	not wired: no static reference (dead / alignment fragment)
+0x535f0	28	orph_535f0	-	not wired: no static reference (dead / alignment fragment)
+0x76a64	80	orph_76a64	-	not wired: no static reference (dead / alignment fragment)
+0x7a174	28	orph_7a174	-	not wired: no static reference (dead / alignment fragment)
+0x7a190	16	orph_7a190	-	not wired: no static reference (dead / alignment fragment)
+0xc6e40	12	orph_c6e40	-	not wired: no static reference (dead / alignment fragment)
+0xc71d0	24	orph_c71d0	-	not wired: no static reference (dead / alignment fragment)
+0xcd380	8	orph_cd380	-	not wired: no static reference (dead / alignment fragment)
+0xce330	376	orph_ce330	-	not wired: no static reference (dead / alignment fragment)
+0xce344	376	orph_ce344	-	not wired: no static reference (dead / alignment fragment)
+0xcec34	256	orph_cec34	-	not wired: no static reference (dead / alignment fragment)
+0xcec48	256	orph_cec48	-	not wired: no static reference (dead / alignment fragment)
+0xd9f34	8	orph_d9f34	-	not wired: no static reference (dead / alignment fragment)
+0xd9f78	8	orph_d9f78	-	not wired: no static reference (dead / alignment fragment)
+0xda880	40	orph_da880	-	not wired: no static reference (dead / alignment fragment)
+0xe2084	8	orph_e2084	-	not wired: no static reference (dead / alignment fragment)
+0xe208c	8	orph_e208c	-	not wired: no static reference (dead / alignment fragment)
+0xe2884	36	orph_e2884	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe28a8	36	orph_e28a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe28cc	36	orph_e28cc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe2950	36	orph_e2950	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe2974	36	orph_e2974	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe2998	36	orph_e2998	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe29bc	36	orph_e29bc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe29e0	36	orph_e29e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0xe7650	8	orph_e7650	-	not wired: no static reference (dead / alignment fragment)
+0xec1e4	8	orph_ec1e4	-	not wired: no static reference (dead / alignment fragment)
+0x10451c	32	orph_10451c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x10dcfc	12	orph_10dcfc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x10ddf4	8	orph_10ddf4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x12841c	20	orph_12841c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x129400	8	orph_129400	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x129ea0	20	orph_129ea0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x12ab70	8	orph_12ab70	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x12ab78	8	orph_12ab78	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x12dd48	8	orph_12dd48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x12dd50	8	orph_12dd50	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x176e0c	20	orph_176e0c	-	not wired: no static reference (dead / alignment fragment)
+0x187588	32	orph_187588	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x191708	8	orph_191708	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x193bd0	24	orph_193bd0	-	not wired: no static reference (dead / alignment fragment)
+0x1961b0	24	orph_1961b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x19aad8	28	orph_19aad8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd664	56	orph_1cd664	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd69c	4	orph_1cd69c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6a0	4	orph_1cd6a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6a4	4	orph_1cd6a4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6a8	8	orph_1cd6a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6b0	4	orph_1cd6b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6b4	44	orph_1cd6b4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6e0	8	orph_1cd6e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6e8	8	orph_1cd6e8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6f0	8	orph_1cd6f0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd6f8	8	orph_1cd6f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd700	8	orph_1cd700	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd708	24	orph_1cd708	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd720	8	orph_1cd720	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd728	8	orph_1cd728	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd730	8	orph_1cd730	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd738	8	orph_1cd738	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd740	8	orph_1cd740	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd748	8	orph_1cd748	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd750	8	orph_1cd750	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd758	8	orph_1cd758	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd760	8	orph_1cd760	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd768	8	orph_1cd768	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd770	8	orph_1cd770	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd778	8	orph_1cd778	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd780	8	orph_1cd780	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd788	8	orph_1cd788	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd790	8	orph_1cd790	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd798	8	orph_1cd798	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7a0	8	orph_1cd7a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7a8	8	orph_1cd7a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7b0	8	orph_1cd7b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7b8	4	orph_1cd7b8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cd7d8	20	orph_1cd7d8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdbf8	4	orph_1cdbf8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdbfc	8	orph_1cdbfc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc04	8	orph_1cdc04	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc0c	8	orph_1cdc0c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc14	8	orph_1cdc14	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc1c	8	orph_1cdc1c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc24	8	orph_1cdc24	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc2c	8	orph_1cdc2c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc34	8	orph_1cdc34	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc3c	8	orph_1cdc3c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc44	8	orph_1cdc44	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc4c	8	orph_1cdc4c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc54	8	orph_1cdc54	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc5c	8	orph_1cdc5c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdc80	8	orph_1cdc80	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdca4	8	orph_1cdca4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdcc8	8	orph_1cdcc8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdcec	8	orph_1cdcec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdcf4	8	orph_1cdcf4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdd18	8	orph_1cdd18	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdd3c	8	orph_1cdd3c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdd7c	8	orph_1cdd7c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdda0	8	orph_1cdda0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cddc4	8	orph_1cddc4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cdde8	8	orph_1cdde8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cde0c	8	orph_1cde0c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cde14	4	orph_1cde14	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce61c	116	orph_1ce61c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce648	24	orph_1ce648	branch	linked beside its owner: target of a branch / call in other code
+0x1ce660	24	orph_1ce660	branch	linked beside its owner: target of a branch / call in other code
+0x1ce678	24	orph_1ce678	branch	linked beside its owner: target of a branch / call in other code
+0x1ce690	28	orph_1ce690	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce6ac	8	orph_1ce6ac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce6d0	8	orph_1ce6d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce6f4	8	orph_1ce6f4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce76c	8	orph_1ce76c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce790	8	orph_1ce790	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce7d0	8	orph_1ce7d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce7f4	4	orph_1ce7f4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce7f8	8	orph_1ce7f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce838	8	orph_1ce838	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce840	8	orph_1ce840	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce848	8	orph_1ce848	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce850	8	orph_1ce850	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce858	8	orph_1ce858	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce87c	8	orph_1ce87c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce884	8	orph_1ce884	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce88c	8	orph_1ce88c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8b0	8	orph_1ce8b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8b8	4	orph_1ce8b8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8bc	4	orph_1ce8bc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8c0	8	orph_1ce8c0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8c8	8	orph_1ce8c8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8d0	8	orph_1ce8d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8f4	8	orph_1ce8f4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce8fc	4	orph_1ce8fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce900	4	orph_1ce900	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce904	8	orph_1ce904	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce90c	8	orph_1ce90c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce914	8	orph_1ce914	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce938	8	orph_1ce938	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce940	4	orph_1ce940	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce944	4	orph_1ce944	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce948	8	orph_1ce948	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce950	8	orph_1ce950	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce958	4	orph_1ce958	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce978	8	orph_1ce978	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce980	4	orph_1ce980	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce984	4	orph_1ce984	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce988	8	orph_1ce988	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce990	28	orph_1ce990	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce9ac	8	orph_1ce9ac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce9d0	8	orph_1ce9d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce9d8	8	orph_1ce9d8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce9e0	28	orph_1ce9e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ce9fc	8	orph_1ce9fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea04	8	orph_1cea04	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea0c	8	orph_1cea0c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea14	8	orph_1cea14	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea1c	8	orph_1cea1c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea40	8	orph_1cea40	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea48	28	orph_1cea48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea64	8	orph_1cea64	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea6c	28	orph_1cea6c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea88	8	orph_1cea88	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea90	8	orph_1cea90	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cea98	8	orph_1cea98	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceaa0	28	orph_1ceaa0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceabc	8	orph_1ceabc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceac4	8	orph_1ceac4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceacc	28	orph_1ceacc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceae8	8	orph_1ceae8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceaf0	8	orph_1ceaf0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceaf8	28	orph_1ceaf8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb14	28	orph_1ceb14	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb30	8	orph_1ceb30	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb38	8	orph_1ceb38	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb40	8	orph_1ceb40	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb48	28	orph_1ceb48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb64	28	orph_1ceb64	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb80	28	orph_1ceb80	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceb9c	8	orph_1ceb9c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1ceba4	8	orph_1ceba4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cebac	8	orph_1cebac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cebd0	4	orph_1cebd0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cebd4	8	orph_1cebd4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cebdc	8	orph_1cebdc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec00	8	orph_1cec00	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec08	28	orph_1cec08	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec24	28	orph_1cec24	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec40	8	orph_1cec40	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec48	8	orph_1cec48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec6c	32	orph_1cec6c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cec8c	32	orph_1cec8c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cecac	12	orph_1cecac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cecb8	8	orph_1cecb8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cffec	8	orph_1cffec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cfff4	4	orph_1cfff4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cfff8	4	orph_1cfff8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1cfffc	4	orph_1cfffc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0020	8	orph_1d0020	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0028	8	orph_1d0028	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0030	8	orph_1d0030	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0038	4	orph_1d0038	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d003c	4	orph_1d003c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0040	8	orph_1d0040	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0048	4	orph_1d0048	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d004c	4	orph_1d004c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0050	4	orph_1d0050	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0054	4	orph_1d0054	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0058	8	orph_1d0058	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0060	8	orph_1d0060	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0068	8	orph_1d0068	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0090	8	orph_1d0090	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0098	8	orph_1d0098	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00a0	8	orph_1d00a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00a8	8	orph_1d00a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00b0	8	orph_1d00b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00b8	8	orph_1d00b8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00c0	8	orph_1d00c0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00c8	8	orph_1d00c8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00d0	8	orph_1d00d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00d8	8	orph_1d00d8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00e0	8	orph_1d00e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00e8	8	orph_1d00e8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00f0	8	orph_1d00f0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d00f8	8	orph_1d00f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0100	4	orph_1d0100	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0104	8	orph_1d0104	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d010c	8	orph_1d010c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0114	8	orph_1d0114	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d011c	36	orph_1d011c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0140	4	orph_1d0140	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0144	8	orph_1d0144	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d016c	8	orph_1d016c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0174	8	orph_1d0174	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d017c	8	orph_1d017c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0184	8	orph_1d0184	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d018c	4	orph_1d018c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0190	8	orph_1d0190	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0198	4	orph_1d0198	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d019c	8	orph_1d019c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d01a4	4	orph_1d01a4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d01a8	4	orph_1d01a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d01ac	4	orph_1d01ac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d01f8	4	orph_1d01f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d01fc	8	orph_1d01fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0204	4	orph_1d0204	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0250	8	orph_1d0250	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0258	8	orph_1d0258	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0260	24	orph_1d0260	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0398	24	orph_1d0398	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d03b0	24	orph_1d03b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d03c8	20	orph_1d03c8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d03dc	24	orph_1d03dc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d03f4	24	orph_1d03f4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d040c	28	orph_1d040c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0428	24	orph_1d0428	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0440	24	orph_1d0440	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0458	24	orph_1d0458	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0470	24	orph_1d0470	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0488	24	orph_1d0488	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d04a0	32	orph_1d04a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d04c0	32	orph_1d04c0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d04e0	36	orph_1d04e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0504	36	orph_1d0504	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0528	32	orph_1d0528	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0548	32	orph_1d0548	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0568	28	orph_1d0568	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0584	28	orph_1d0584	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d05a0	16	orph_1d05a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d096c	24	orph_1d096c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0984	24	orph_1d0984	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d099c	24	orph_1d099c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0b6c	40	orph_1d0b6c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0cb4	36	orph_1d0cb4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d1c	44	orph_1d0d1c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d38	16	orph_1d0d38	branch	linked beside its owner: target of a branch / call in other code
+0x1d0d48	36	orph_1d0d48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d6c	8	orph_1d0d6c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d74	8	orph_1d0d74	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0d7c	56	orph_1d0d7c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0db4	4	orph_1d0db4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0db8	4	orph_1d0db8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dbc	4	orph_1d0dbc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dc0	4	orph_1d0dc0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dc4	4	orph_1d0dc4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dc8	4	orph_1d0dc8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dcc	4	orph_1d0dcc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dd0	4	orph_1d0dd0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dd4	4	orph_1d0dd4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dd8	4	orph_1d0dd8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0ddc	4	orph_1d0ddc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0de0	4	orph_1d0de0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0de4	4	orph_1d0de4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0de8	4	orph_1d0de8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dec	4	orph_1d0dec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0df0	4	orph_1d0df0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0df4	4	orph_1d0df4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0df8	4	orph_1d0df8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0dfc	4	orph_1d0dfc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0e00	4	orph_1d0e00	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0e04	4	orph_1d0e04	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d0e08	4	orph_1d0e08	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78a8	8	orph_1d78a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78b0	8	orph_1d78b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78b8	8	orph_1d78b8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78c0	8	orph_1d78c0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78c8	8	orph_1d78c8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78d0	8	orph_1d78d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78d8	8	orph_1d78d8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78e0	8	orph_1d78e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78e8	8	orph_1d78e8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78f0	8	orph_1d78f0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d78f8	8	orph_1d78f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7900	8	orph_1d7900	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7908	8	orph_1d7908	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7910	8	orph_1d7910	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7918	8	orph_1d7918	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7920	8	orph_1d7920	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7928	8	orph_1d7928	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7930	8	orph_1d7930	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7938	8	orph_1d7938	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7940	8	orph_1d7940	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d7948	8	orph_1d7948	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82c4	4	orph_1d82c4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82c8	8	orph_1d82c8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82d0	8	orph_1d82d0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82d8	8	orph_1d82d8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82e0	8	orph_1d82e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82e8	8	orph_1d82e8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82f0	8	orph_1d82f0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82f8	4	orph_1d82f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d82fc	4	orph_1d82fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8300	8	orph_1d8300	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8308	8	orph_1d8308	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8310	4	orph_1d8310	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8314	4	orph_1d8314	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d83e8	8	orph_1d83e8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d83f0	8	orph_1d83f0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d83f8	8	orph_1d83f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8400	8	orph_1d8400	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8408	8	orph_1d8408	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8410	8	orph_1d8410	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8418	20	orph_1d8418	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d842c	8	orph_1d842c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8434	20	orph_1d8434	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8448	8	orph_1d8448	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8450	8	orph_1d8450	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8458	8	orph_1d8458	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8460	8	orph_1d8460	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8468	8	orph_1d8468	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8470	4	orph_1d8470	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8474	8	orph_1d8474	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d847c	4	orph_1d847c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8480	8	orph_1d8480	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8488	8	orph_1d8488	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8490	8	orph_1d8490	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8498	8	orph_1d8498	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d84a0	4	orph_1d84a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d84a4	8	orph_1d84a4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d857c	8	orph_1d857c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d86a8	12	orph_1d86a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d86ec	16	orph_1d86ec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d86fc	8	orph_1d86fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8704	4	orph_1d8704	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8708	8	orph_1d8708	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8710	16	orph_1d8710	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8720	20	orph_1d8720	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8734	8	orph_1d8734	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d873c	8	orph_1d873c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8744	4	orph_1d8744	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8748	8	orph_1d8748	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8750	8	orph_1d8750	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8758	4	orph_1d8758	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d875c	4	orph_1d875c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8760	8	orph_1d8760	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8768	8	orph_1d8768	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8770	8	orph_1d8770	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8778	12	orph_1d8778	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8784	8	orph_1d8784	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d878c	4	orph_1d878c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8790	8	orph_1d8790	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8798	8	orph_1d8798	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d87a0	8	orph_1d87a0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d87e0	20	orph_1d87e0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d87f4	8	orph_1d87f4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d87fc	4	orph_1d87fc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8800	8	orph_1d8800	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8808	28	orph_1d8808	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8824	20	orph_1d8824	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8838	8	orph_1d8838	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8840	8	orph_1d8840	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8848	8	orph_1d8848	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8898	16	orph_1d8898	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d88a8	24	orph_1d88a8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d88c0	80	orph_1d88c0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8910	52	orph_1d8910	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d898c	36	orph_1d898c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d89b0	36	orph_1d89b0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d89d4	36	orph_1d89d4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d89f8	8	orph_1d89f8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8a00	24	orph_1d8a00	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8a10	8	orph_1d8a10	branch	linked beside its owner: target of a branch / call in other code
+0x1d8a18	8	orph_1d8a18	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8a20	8	orph_1d8a20	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8aa4	8	orph_1d8aa4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8aac	8	orph_1d8aac	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ab4	20	orph_1d8ab4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ac8	8	orph_1d8ac8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ad0	4	orph_1d8ad0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ad4	8	orph_1d8ad4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8adc	8	orph_1d8adc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ae4	8	orph_1d8ae4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8aec	4	orph_1d8aec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8af0	4	orph_1d8af0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8c04	8	orph_1d8c04	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8c0c	4	orph_1d8c0c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8c10	8	orph_1d8c10	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cb4	4	orph_1d8cb4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cb8	4	orph_1d8cb8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cbc	4	orph_1d8cbc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cc0	4	orph_1d8cc0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cc4	4	orph_1d8cc4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cc8	4	orph_1d8cc8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ccc	4	orph_1d8ccc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cd0	4	orph_1d8cd0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cd4	4	orph_1d8cd4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cd8	20	orph_1d8cd8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8cec	20	orph_1d8cec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d00	8	orph_1d8d00	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d08	12	orph_1d8d08	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d14	24	orph_1d8d14	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d2c	24	orph_1d8d2c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d44	4	orph_1d8d44	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d48	4	orph_1d8d48	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d4c	60	orph_1d8d4c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8d88	56	orph_1d8d88	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dc0	4	orph_1d8dc0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dc4	4	orph_1d8dc4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dc8	4	orph_1d8dc8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dcc	4	orph_1d8dcc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dd0	4	orph_1d8dd0	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dd4	24	orph_1d8dd4	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8dec	12	orph_1d8dec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8df8	24	orph_1d8df8	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e0c	4	orph_1d8e0c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e10	20	orph_1d8e10	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e24	20	orph_1d8e24	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e38	12	orph_1d8e38	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e44	24	orph_1d8e44	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e5c	24	orph_1d8e5c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e74	24	orph_1d8e74	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e8c	4	orph_1d8e8c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8e90	60	orph_1d8e90	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8ecc	56	orph_1d8ecc	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8f04	48	orph_1d8f04	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8f34	28	orph_1d8f34	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8f50	4	orph_1d8f50	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x1d8f54	4	orph_1d8f54	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare

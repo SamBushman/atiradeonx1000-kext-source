@@ -407,8 +407,10 @@ do either way (#63: no LSDA / FDE is emitted). The other anchors listed in `link
 * GLDriver, 494 orphans (`unowned_code/`): **432 are pointed to by data words** - callback / dispatch tables (`__const_coal`, `__data`); those are wired in the rebuilt image, because the tables are emitted
   with pointers to the orphan's label and the data compare above shows every such pointer equal; 18 are targets of branches in other code and are linked beside their owner; **44 (2890 bytes; the 16-byte
   and 12-byte fragments at 0x98d8-0x9aec ...) have no static reference at all** in the stock either - alignment / dead fragments, kept for coverage only, not wired.
-* libGLProgrammability, 32 orphans: 6 data-referenced (wired); 26 (5628 bytes) unreferenced: the 20 duplicates of their owner's switch-case bodies (Stage B3 step 13: the case code is part of the owner's
-  decompile, the orphan extent is a second copy) and six 8-20 byte fragments - not wired.
+* libGLProgrammability, 32 orphans: 6 data-referenced (wired); 26 (5628 bytes) have no static reference. `unowned_code/code_owners.tsv` names the function whose frame each one runs in: `_CPPWarningToInfoLog` (4),
+  `FUN_97b9907c` / `97b99274` / `97b9989c` / `97b99eb8` / `97b9a04c` / `97b9a844` (3 each; arms of the switch at 0x97b99060 etc.), `_op_shl`, `_op_pos`, `_PPParserParseSwizzleCode` ... These are the arms of the compiler-generated
+  constant-index cleanup switches (`b3/constswitch_glprog.txt`, `PatchConstSwitch.java`): at each call site the index is a constant, the owner's C carries the arm of ITS constant, and the other arms
+  belong to the cleanup paths of other sites of the same shared code - not wired (no ordinary control flow reaches them; the exception-cleanup path does, #63).
 * Landing pads (GLDriver 566, glprog 44): reachable only through the LSDA call-site tables of an exception in flight. GLDriver has no catch clause and imports no throwing library call, and the stock
   libGLProgrammability carries a private EH runtime whose `throw` always ends in `terminate` (#63): no pad can execute in the stock, so none needs to in the rebuilt image. Decision: pads stay as verified
   reference C, unlinked (their `unaff_r*` reads make them meaningless standalone); revisit only if #63 emits real FDE / LSDA data.
