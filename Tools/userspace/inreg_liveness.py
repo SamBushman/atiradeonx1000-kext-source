@@ -151,7 +151,7 @@ IMPORTS = {}
 # argument words of the imports the forwarded registers reach (the C prototypes; `operator new(unsigned long)` = __Znwm)
 ARITY = {'_memset': 3, '_memcpy': 3, '_memmove': 3, '_memcmp': 3, '_malloc': 1, '_calloc': 2, '_realloc': 2, '_free': 1, '_strlen': 1,
          '_strcat': 2, '_strcpy': 2, '_strncpy': 3, '_strcmp': 2, '_strncmp': 3, '_getpid': 0, '_pthread_mutex_lock': 1, '_pthread_mutex_unlock': 1,
-         '__Znwm': 1, '__Znam': 1, '__ZdlPv': 1, '__ZdaPv': 1, '_abort': 0, '_bzero': 2}
+         '__Znwm': 1, '__Znam': 1, '__ZdlPv': 1, '__ZdaPv': 1, '_abort': 0, '_bzero': 2, '_valloc': 1, '_vfree': 1}
 FARITY = {'_ecvt': 1, '_fcvt': 1, '_ldexp': 1, '_frexp': 1, '_modf': 1, '_floor': 1, '_ceil': 1, '_sqrt': 1, '_fabs': 1, '_pow': 2, '_fmod': 2,
           '_sin': 1, '_cos': 1, '_tan': 1, '_atan2': 2, '_exp': 1, '_log': 1, '_log10': 1, '_floorf': 1, '_ceilf': 1, '_sqrtf': 1, '_powf': 2}
 def cls(ent):
