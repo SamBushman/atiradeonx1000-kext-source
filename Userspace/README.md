@@ -416,6 +416,24 @@ do either way (#63: no LSDA / FDE is emitted). The other anchors listed in `link
   reference C, unlinked (their `unaff_r*` reads make them meaningless standalone); revisit only if #63 emits real FDE / LSDA data.
 (The counts come from a scan of the stock disassembly and data sections; a reference through a register computed at run time would not show.)
 
+### Hand patches: derivation, loud failure, tests (issue #71)
+Every entry of `Tools/userspace/patches.py` carries a comment with the stock address range it was derived from and the equivalent C; every substitution is counted (`_subs` / `_re_subs` raise `PatchError`
+when a pattern is found a different number of times, `_body` also when the header does not name the function), and `Tools/userspace/test_patches.py` proves that ALL 35 patches fail loudly on text
+without their pattern (35 checked, 0 silent). The retired patches are listed with their derivation at the end of the file. Run-time evidence per patch (stock vs rebuilt):
+| patch | test |
+|---|---|
+| `yy_flex_alloc` / `realloc` / `free`, `_str_ungetch` + `FUN_97b88a90`, `_unlinkScope` + `FUN_97b89f04`, `_glpDCBRealloc`, `TIntermSymbol::traverse`, GLDriver `FUN_000a6f70`, `FUN_001d05b0` / `1d0794` (cos, sin through the virtual angle conversion), `FUN_001d06ec` | `Tests/userspace/patch_sites_test.c` + `patch_sites.py`: each function driven with its real argument shapes in both images (fake `_cpp` record, list nodes, callback traverser, fake vtable), outputs identical (14 + 34 lines) |
+| `FUN_001d0820`, `FUN_000cea6c`, `FUN_0014694c`, `FUN_0019d478`, `FUN_000242f0` | `fnfuzz` candidates (12 seeded trials each; several of these patches were found by it), 0 differences |
+| `yyparse` (alloca, outgoing-argument array) | `e_deep_parens.frag` in the 141-shader differential (176 nested parentheses grow the parser stack): identical |
+| `TGenericLinker::GetBindingTableString` | the linked binding tables of all 544 shaders (variant D): identical |
+| `GetCompilerPoolAllocator`, `_gPollAllocThreadData` / `_S_start_free` declarations, `yy_load_buffer_state`, `_InitAtomTable` | run by every `ShInitialize` / compile of the shader differentials (a wrong version crashed them - that is how they were found) |
+| `TIntermAggregate::addToPragmaTable` | the `#pragma` cases of `glsl_gen_shaders.py`: identical |
+| `___initialize_Cplusplus` | runs when either image is `dlopen`ed (static initialisers): both load and run |
+| `__terminate` / `__unexpected`, `_Unwind_RaiseException` / `ForcedUnwind` / `Resume` | `eh_test.cpp` (stock and rebuilt both end in SIGABRT; the rebuilt path differs inside the unwinder - #63) |
+| `_InterpreterEmulateOp` noise output, `_Rep::_M_dispose` | **no direct test**: the first needs an emulator program + context (`interp_noise_test` checks the callee, not this site), the second is reached through std::string destruction in every compile but not isolated |
+| `FUN_00029290` (`_vfree` argument), `FUN_0007c760` (dead `memset` length assignment), `FUN_000c6470` (pointer cast) | **not reachable without a live GL context** (pixel upload / context setup) or compile-time only (a cast, a dead assignment): recorded reason, no test |
+| the two i386 patches | the i386 slice is not built (user decision) |
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

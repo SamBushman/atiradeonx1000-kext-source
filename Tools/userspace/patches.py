@@ -108,6 +108,8 @@ def _body(what, body, decl_subs=()):
         k = conv.find('\n{\n')
         if k < 0:
             raise PatchError('%s: no body' % what)
+        if what.split()[0].lstrip('_') not in conv[:k]:      # a whole-body replacement must at least be applied to the function it was written for
+            raise PatchError('%s: the function header does not name %s' % (what, what.split()[0]))
         return conv[:k + 1] + body
     return f
 
@@ -365,9 +367,10 @@ PATCHES = {
         ('SUB42(param_3,0)', 'SUB42((unsigned long)param_3,0)')])),
 
     # --- GLDriver i386 (dump not archived; not exercised by the current pipeline) ---------------------------------------------------
-    # local_28 is a pointer to a record (indexed as local_28[0x26]); Ghidra declared it as a one-element array of undefined4
+    # FUN_001984c6 (gld i386 slice, stock 0x1984c6): local_28 is a pointer to a record (indexed as local_28[0x26]); Ghidra declared it as a one-element array of undefined4
+    # (the i386 slice is not part of the rebuilt images: user decision 2026-09-19)
     'FUN_001984c6': _scoped('gld-i386', _raw_with('FUN_001984c6', [('undefined4 local_28[1];', 'int *local_28;')])),
-    # 128-bit register shift left by 32 bits (pslldq 4): bytes move up by four, low dword becomes zero
+    # FUN_000b50a3 (gld i386 slice, stock 0xb50a3): 128-bit register shift left by 32 bits (`pslldq xmm,4`): bytes move up by four, low dword becomes zero
     'FUN_000b50a3': _scoped('gld-i386', lambda raw, conv: _re_subs(
         conv, r'(auVar\d+) = (auVar\d+) << 0x20;', r'{ unsigned char t_[16]; _memset(t_, 0, 16); _memcpy(t_ + 4, \2, 12); _memcpy(\1, t_, 16); }', 1, 'FUN_000b50a3')),
 }
