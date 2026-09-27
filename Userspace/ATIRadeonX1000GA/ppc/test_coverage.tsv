@@ -1,0 +1,81 @@
+# stock entry	name	size	entered by a test of the differential suite	if not: static reason
+0x600	dyld_stub_binding_helper	48	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
+0x630	__dyld_func_lookup	32	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
+0x650	_cxa_atexit_check_2	40	not a C function of the rebuilt image	
+0x678	_cxa_atexit_check_1	120	not a C function of the rebuilt image	
+0x6f0	_check_cxa_atexit	204	not a C function of the rebuilt image	
+0x7bc	_find_atexit_10_3	504	not a C function of the rebuilt image	
+0x9b4	FUN_000009b4	32	not a C function of the rebuilt image	
+0x9d4	FUN_000009d4	32	not a C function of the rebuilt image	
+0x9f4	_get_globals	528	not a C function of the rebuilt image	
+0xc04	FUN_00000c04	32	not a C function of the rebuilt image	
+0xc24	FUN_00000c24	32	not a C function of the rebuilt image	
+0xc44	FUN_00000c44	32	not a C function of the rebuilt image	
+0xc64	FUN_00000c64	32	not a C function of the rebuilt image	
+0xc84	FUN_00000c84	32	not a C function of the rebuilt image	
+0xca4	FUN_00000ca4	32	not a C function of the rebuilt image	
+0xcc4	FUN_00000cc4	32	not a C function of the rebuilt image	
+0xce4	_add_routine	268	not a C function of the rebuilt image	
+0xdf0	FUN_00000df0	32	not a C function of the rebuilt image	
+0xe10	FUN_00000e10	32	not a C function of the rebuilt image	
+0xe30	_run_routines	292	not a C function of the rebuilt image	
+0xf54	FUN_00000f54	32	not a C function of the rebuilt image	
+0xf74	FUN_00000f74	32	not a C function of the rebuilt image	
+0xf94	FUN_00000f94	32	not a C function of the rebuilt image	
+0xfb4	_cxa_atexit_wrapper	312	not a C function of the rebuilt image	
+0x10ec	FUN_000010ec	32	not a C function of the rebuilt image	
+0x110c	FUN_0000110c	32	not a C function of the rebuilt image	
+0x112c	FUN_0000112c	32	not a C function of the rebuilt image	
+0x114c	_our_atexit	188	not a C function of the rebuilt image	
+0x1208	FUN_00001208	32	not a C function of the rebuilt image	
+0x1228	FUN_00001228	32	not a C function of the rebuilt image	
+0x1248	FUN_00001248	32	not a C function of the rebuilt image	
+0x1268	_atexit_common	672	not a C function of the rebuilt image	
+0x1508	FUN_00001508	32	not a C function of the rebuilt image	
+0x1528	FUN_00001528	32	not a C function of the rebuilt image	
+0x1548	FUN_00001548	32	not a C function of the rebuilt image	
+0x1568	FUN_00001568	32	not a C function of the rebuilt image	
+0x1588	___cxa_atexit	96	not a C function of the rebuilt image	
+0x15e8	FUN_000015e8	32	not a C function of the rebuilt image	
+0x1608	_atexit	92	not a C function of the rebuilt image	
+0x1664	FUN_00001664	32	not a C function of the rebuilt image	
+0x1690	__SetSurface	184	no	calls an import (io_connect_method_scalarI_structureO)
+0x1750	__SetDestination	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1760	__LockSurface	160	no	calls an import (io_connect_method_scalarI_scalarO)
+0x1820	__UnlockSurface	144	no	calls an import (io_connect_method_scalarI_scalarO)
+0x18c0	__SwapSurface	128	no	calls an import (io_connect_method_scalarI_scalarO)
+0x1950	__Probe	16	yes	
+0x1960	_window_mode_to_ati_format	148	yes	
+0x1a20	__QueryInterface	340	no	calls an import (CFEqual); calls an import (CFUUIDCreateFromUUIDBytes); calls an import (CFUUIDGetConstantUUIDWithBytes)
+0x1b80	__AddRef	20	yes	
+0x1ba0	__DecodePixelFormat	468	yes	
+0x1d90	_fillTextureWithPattern	664	yes	
+0x2030	__GetCapabilities	156	yes	
+0x20e0	__GetBlitter	224	yes	
+0x21f0	__Synchronize	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x2200	__GetBeamPosition	104	no	calls an import (io_connect_method_structureI_structureO)
+0x2270	__WaitSurface	72	yes	
+0x22d0	_ATIRadeonX1000GAFactory	324	no	calls an import (CFEqual); calls an import (CFPlugInAddInstanceForFactory); calls an import (CFRetain)
+0x2420	__Release	100	no	calls an import (CFPlugInRemoveInstanceForFactory); calls an import (CFRelease); calls an import (free)
+0x2490	__Reset	360	no	calls an import (IOConnectMapMemory)
+0x2610	__Start	308	no	calls an import (IOAccelFindAccelerator); calls an import (IOObjectConformsTo); calls an import (IOObjectGetClass)
+0x2750	__AllocateSurface	1420	no	calls an import (calloc); calls an import (free); calls an import (io_connect_method_scalarI_scalarO)
+0x2d10	_radeon3DCopySetup	2048	yes	
+0x3540	_radeon3DFillSetup	2020	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x3d30	__Flush	344	no	calls an import (IOConnectMapMemory)
+0x3ea0	__WaitComplete	140	no	calls an import (io_connect_method_scalarI_structureI)
+0x3f30	__FreeSurface	224	no	calls an import (free); calls an import (io_connect_method_scalarI_structureI)
+0x4020	_createTextureBuffer	584	no	calls an import (free); calls an import (io_connect_method_scalarI_structureI); calls an import (malloc)
+0x4290	_createOffscreenBuffer	588	no	calls an import (free); calls an import (io_connect_method_scalarI_structureI); calls an import (malloc)
+0x4500	__Stop	248	no	calls an import (IOObjectRelease); calls an import (IOServiceClose); calls an import (free)
+0x4600	_radeonCopy	3944	no	calls an import (IOConnectMapMemory)
+0x55a4	FUN_000055a4	11396	no	calls an import (IOConnectMapMemory); calls an import (io_connect_method_scalarI_structureO)
+0x8260	_radeonFill	9000	no	calls an import (IOConnectMapMemory)
+0xa5a0	_radeonHighlight	5300	no	calls an import (IOConnectMapMemory)
+0xba90	_radeonSolidScanlines	3660	no	calls an import (IOConnectMapMemory)
+0xc89c	_printf$LDBLStub	172	not a C function of the rebuilt image	
+0xc954	FUN_0000c954	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc960	FUN_0000c960	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc968	FUN_0000c968	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc974	FUN_0000c974	36	no	tiny (36 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc9ec	___stub_getrealaddr	164	not a C function of the rebuilt image	

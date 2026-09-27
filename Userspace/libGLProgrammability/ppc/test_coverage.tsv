@@ -1,0 +1,2046 @@
+# stock entry	name	size	entered by a test of the differential suite	if not: static reason
+0x97b7bc5c	_PPEmulatorCreate	56	no	calls an import (malloc)
+0x97b7bc94	dyld_stub_binding_helper	48	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
+0x97b7bcc4	_PPEmulatorInit	96	no	calls an import (InterpreterCreate); calls an import (PPCConstantsAndScratchInitialise); calls an import (malloc)
+0x97b7bd24	_PPParserCreate	96	yes	
+0x97b7bd84	_PPParserScopeCreate	408	yes	
+0x97b7bf1c	_PPParserMacroCreate	12	yes	
+0x97b7bf28	_PPParserMacroSetSearchString	116	yes	
+0x97b7bf9c	_PPParserMacroSetParamStringsCount	60	yes	
+0x97b7bfd8	_PPParserMacroSetParamString	116	yes	
+0x97b7c04c	_PPParserPreprocessString	2588	yes	
+0x97b7ce10	_PPParserScopeAddMacro	52	yes	
+0x97b7ce44	_PPParserAddScope	60	yes	
+0x97b7ce80	_PPParserInit	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b7ce84	_PPParserAttachString	228	yes	
+0x97b7cf68	_PPStreamCreate	152	yes	
+0x97b7d000	_PPStreamChunkListCreate	12	yes	
+0x97b7d00c	_PPParserAttachStream	100	yes	
+0x97b7d070	_PPParserScopeAttachStream	36	yes	
+0x97b7d094	_PPParserParse	296	yes	
+0x97b7d1bc	_PPParserParseVersion	204	yes	
+0x97b7d288	_PPParserGetPart	368	yes	
+0x97b7d3f8	_PPParserGetCharacter	144	yes	
+0x97b7d488	_PPParserParseOption	184	yes	
+0x97b7d540	_PPParserParseOptionIdentifier	916	yes	
+0x97b7d8d4	_PPStreamAddOption	80	yes	
+0x97b7d924	_PPStreamChunkListAddChunk	72	yes	
+0x97b7d96c	_PPStreamAddAttribBinding	92	yes	
+0x97b7d9c8	_PPParserReturnPart	132	yes	
+0x97b7da4c	_PPParserReturnCharacter	144	yes	
+0x97b7dadc	_PPParserParseStatement	2176	yes	
+0x97b7e35c	_PPParserParseParameterDeclaration	372	yes	
+0x97b7e4d0	_PPParserValidateName	1360	yes	
+0x97b7ea20	_PPParserIdentifierCreate	48	yes	
+0x97b7ea50	_PPParserIdentifierSetName	124	yes	
+0x97b7eacc	_PPParserScopeAddIdentifier	124	yes	
+0x97b7eb48	_PPParserScopeFindIdentifier	100	yes	
+0x97b7ebac	_PPParserParseParamBinding	5900	yes	
+0x97b802b8	_PPParserScopeFindMacro	100	yes	
+0x97b8031c	_PPParserParseArray	176	yes	
+0x97b803cc	_PPParserGetInteger	112	yes	
+0x97b8043c	_PPStreamAddParamBinding	108	yes	
+0x97b804a8	_PPParserParseAttributeDeclaration	268	yes	
+0x97b805b4	_PPParserParseAttributeBinding	1684	yes	
+0x97b80c48	_testAttribMatch	300	yes	
+0x97b80d94	_PPParserParseOutputDeclaration	284	yes	
+0x97b80eb0	_PPParserParseOutputBinding	1212	yes	
+0x97b8136c	_PPStreamAddOutputBinding	92	yes	
+0x97b813c8	_PPParserParseOperation	1068	yes	
+0x97b81994	_PPParserParseDestination	604	yes	
+0x97b81bf0	_PPParserParseSwizzleSourceVar	460	yes	
+0x97b81dbc	_PPParserParseSourceVar	696	yes	
+0x97b82078	FUN_97b82078	216	yes	
+0x97b82150	_PPParserParseEnd	136	yes	
+0x97b821d8	_PPStreamAttribBindingIsEqual	88	yes	
+0x97b82230	_PPStreamOutputBindingIsEqual	88	yes	
+0x97b82288	_PPStreamParamBindingIsEqual	88	yes	
+0x97b822e0	_PPStreamChunkListGetStream	276	yes	
+0x97b823f4	_PPStreamChunkGetStream	184	yes	
+0x97b824dc	_PPStreamChunkListCreateFromChunkList	96	yes	
+0x97b8253c	_PPStreamChunkCreateFromChunk	128	yes	
+0x97b825bc	_GetChunkAllocationSize	124	yes	
+0x97b82668	_PPStreamChunkListSort	156	yes	
+0x97b82704	_PPStreamAttachOperationsChunkList	56	yes	
+0x97b8273c	_PPStreamChunkListFree	84	yes	
+0x97b82790	_PPStreamChunkListRemoveChunk	120	no	calls an import (free)
+0x97b82808	_PPStreamAttachParamBindingsChunkList	56	yes	
+0x97b82840	_PPStreamAttachParamBindingArraysChunkList	56	yes	
+0x97b82878	_PPStreamGetStream	964	yes	
+0x97b82c3c	_PPStreamChunkListGetMaxIndex	164	yes	
+0x97b82d10	_PPStreamAddTempUsage	108	yes	
+0x97b82d7c	_PPEmulatorProgramCreate	72	no	calls an import (calloc)
+0x97b82dc4	_PPEmulatorProgramInitialiseHandleBanks	288	no	calls an import (free); calls an import (malloc)
+0x97b82ee4	_PPEmulatorProgramConvertFromPPStream	2768	no	calls an import (PPStreamChunkListChunkAtIndex); calls an import (calloc); calls an import (malloc)
+0x97b83ddc	_PPStreamChunkListChunkAtIndex	152	yes	
+0x97b83ea4	_PPParserFree	48	yes	
+0x97b83ed4	_PPParserShutdown	88	yes	
+0x97b83f2c	_PPParserRemoveScope	68	yes	
+0x97b83f70	_PPParserScopeFree	116	yes	
+0x97b83fe4	_PPParserScopeRemoveIdentifier	68	yes	
+0x97b84028	_PPParserIdentifierFree	52	yes	
+0x97b8405c	_PPParserScopeRemoveMacro	68	yes	
+0x97b840a0	_PPParserMacroFree	144	yes	
+0x97b84130	_PPParserGetScalars	200	yes	
+0x97b841f8	_PPStreamAddConstant	108	yes	
+0x97b84264	_PPParserParseTempDeclaration	468	yes	
+0x97b84438	_PPParserParseSourceSwizzle	396	yes	
+0x97b8462c	_PPParserParseDestinationMask	412	yes	
+0x97b84830	_PPParserParseTextureSourceVar	704	yes	
+0x97b84af0	___lshrdi3	96	yes	
+0x97b84b50	___ashldi3	96	yes	
+0x97b84bb0	_PPStreamGetTexOperationCount	60	yes	
+0x97b84bec	_PPEmulatorFree	60	no	calls an import (InterpreterFree); calls an import (free)
+0x97b84c28	_PPStreamFree	140	yes	
+0x97b84cb4	_PPEmulatorProgramFree	180	no	calls an import (free); calls an import (glpDCBFree)
+0x97b84d68	_PPParserParseAliasDeclaration	368	no	calls an import (malloc)
+0x97b84ed8	_PPParserMacroSetReplaceString	64	no	calls an import (free)
+0x97b84f18	_PPParserMacroGetReplaceString	320	yes	
+0x97b85058	_PPParserParseSwizzleCode	620	yes	
+0x97b853f8	__dyld_func_lookup	32	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
+0x97b85418	___initialize_Cplusplus	88	no	toolchain crt code (runs under dyld: lazy binding / image initialisation); indirect call (driver context / vtable / callback)
+0x97b85470	FUN_97b85470	32	yes	
+0x97b85490	InitProcess	36	yes	
+0x97b854b4	DetachProcess	36	no	calls an import (Z15FreeGlobalPoolsv)
+0x97b854d8	_InitStringTable	84	yes	
+0x97b8552c	_FreeStringTable	72	no	calls an import (free)
+0x97b85574	_HashString	68	yes	
+0x97b855b8	_HashString2	64	yes	
+0x97b855f8	_AddString	156	yes	
+0x97b85694	_InitHashTable	160	yes	
+0x97b85734	_FreeHashTable	72	no	calls an import (free)
+0x97b8577c	_GrowAtomTable	256	yes	
+0x97b8587c	_lReverse	64	yes	
+0x97b858bc	_AllocateAtom	120	yes	
+0x97b85934	_SetAtomValue	40	yes	
+0x97b8595c	_FindHashLoc	264	yes	
+0x97b85a64	_IncreaseHashTableSize	192	yes	
+0x97b85b24	_LookUpAddStringHash	144	yes	
+0x97b85bb4	_LookUpAddString	104	yes	
+0x97b85c1c	_GetAtomString	144	yes	
+0x97b85cac	_GetReversedAtom	44	yes	
+0x97b85cdc	_AddAtomFixed	196	yes	
+0x97b85da0	_InitAtomTable	368	yes	
+0x97b85f10	_PrintAtomTable	208	no	calls an import (CPPDebugLogMsg); calls an import (sprintf)
+0x97b85fe0	_GetStringOfAtom	24	yes	
+0x97b85ff8	_FreeAtomTable	104	no	calls an import (free)
+0x97b86060	_InitCPP	812	yes	
+0x97b8638c	_FreeCPP	84	no	calls an import (mem_FreePool)
+0x97b863e0	_FinalCPP	84	no	calls an import (CPPErrorToInfoLog)
+0x97b86434	_CPPdefine	940	no	calls an import (AddSymbol); calls an import (CPPErrorToInfoLog); calls an import (CPPShInfoLogMsg)
+0x97b867e0	_CPPundef	208	no	calls an import (CPPErrorToInfoLog); calls an import (LookUpSymbol); indirect call (driver context / vtable / callback)
+0x97b868b0	_CPPelse	740	no	calls an import (CPPErrorToInfoLog); calls an import (CPPWarningToInfoLog); indirect call (driver context / vtable / callback)
+0x97b86b94	_op_logor	28	yes	
+0x97b86bb0	_op_logand	28	yes	
+0x97b86bcc	_op_or	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86bd4	_op_xor	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86bdc	_op_and	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86be4	_op_eq	16	yes	
+0x97b86bf4	_op_ne	16	yes	
+0x97b86c04	_op_ge	20	yes	
+0x97b86c18	_op_le	20	yes	
+0x97b86c2c	_op_gt	20	yes	
+0x97b86c40	_op_lt	20	yes	
+0x97b86c54	_op_shl	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86c7c	_op_div	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86c84	_op_mod	16	yes	
+0x97b86c94	_op_pos	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86ca0	_op_cmpl	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86ca8	_op_not	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b86cb4	_eval	860	no	calls an import (CPPErrorToInfoLog); calls an import (LookUpSymbol); indirect call (driver context / vtable / callback)
+0x97b87010	_CPPif	308	no	calls an import (CPPErrorToInfoLog); calls an import (CPPWarningToInfoLog); indirect call (driver context / vtable / callback)
+0x97b87144	_CPPifdef	348	no	calls an import (CPPErrorToInfoLog); calls an import (CPPWarningToInfoLog); calls an import (LookUpSymbol)
+0x97b872a0	_CPPline	268	no	calls an import (CPPErrorToInfoLog); calls an import (DecLineNumber); calls an import (IncLineNumber)
+0x97b873ac	_CPPerror	232	no	calls an import (CPPShInfoLogMsg); calls an import (DecLineNumber); calls an import (GetStrfromTStr)
+0x97b87494	_CPPpragma	528	no	calls an import (CPPErrorToInfoLog); calls an import (CPPShInfoLogMsg); calls an import (DecLineNumber)
+0x97b876a4	_CPPversion	256	no	calls an import (CPPErrorToInfoLog); calls an import (CPPShInfoLogMsg); calls an import (DecLineNumber)
+0x97b877a4	_CPPextension	348	no	calls an import (CPPErrorToInfoLog); calls an import (CPPShInfoLogMsg); calls an import (DecLineNumber)
+0x97b87900	_readCPPline	972	no	calls an import (CPPErrorToInfoLog); calls an import (CPPShInfoLogMsg); calls an import (CPPWarningToInfoLog)
+0x97b87ccc	_FreeMacro	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b87cd4	_eof_scan_97b87cd4	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b87ce0	_PushEofSrc	120	no	calls an import (malloc)
+0x97b87d58	_PopEofSrc	64	yes	
+0x97b87d98	_PrescanMacroArg	276	no	calls an import (DeleteTokenStream); calls an import (LookUpSymbol); calls an import (NewTokenStream)
+0x97b87eac	_macro_scan	336	no	calls an import (DeleteTokenStream); calls an import (ReadFromTokenStream); calls an import (ReadToken)
+0x97b87ffc	_MacroExpand	1024	yes	
+0x97b883fc	_ChkCorrectElseNesting	72	yes	
+0x97b88444	_InitCPPStruct	144	yes	
+0x97b884d4	_ResetPreprocessor	196	yes	
+0x97b88598	_InitPreprocessor	136	yes	
+0x97b88620	_FreeCPPStruct	92	yes	
+0x97b8867c	_FinalizePreprocessor	72	no	calls an import (FreeAtomTable); calls an import (FreeScanner)
+0x97b886c4	_mem_CreatePool	164	yes	
+0x97b88768	_mem_FreePool	108	no	calls an import (free); indirect call (driver context / vtable / callback)
+0x97b887d4	_mem_Alloc	224	yes	
+0x97b888b4	_mem_AddCleanup	112	yes	
+0x97b88924	_eof_scan_97b88924	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b88930	_InitScanner	116	yes	
+0x97b889a8	_str_getch	228	yes	
+0x97b88a90	FUN_97b88a90	100	yes	
+0x97b88af4	_ScanFromString	148	yes	
+0x97b88b88	_lBuildFloatValue	272	no	calls an import (CPPErrorToInfoLog)
+0x97b88c98	_lFloatConst	588	no	calls an import (CPPErrorToInfoLog); indirect call (driver context / vtable / callback)
+0x97b88ee4	_byte_scan	3060	yes	
+0x97b89cd0	_yylex_CPP	452	yes	
+0x97b89e94	_check_EOF	108	yes	
+0x97b89f04	FUN_97b89f04	72	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97b89f4c	_NewScopeInPool	152	yes	
+0x97b89fe4	_PushScope	148	yes	
+0x97b8a078	_PopScope	48	yes	
+0x97b8a0a8	_NewSymbol	116	yes	
+0x97b8a11c	_lAddToTree	188	no	calls an import (CPPErrorToInfoLog); calls an import (GetReversedAtom)
+0x97b8a1d8	_AddSymbol	88	yes	
+0x97b8a230	_LookUpLocalSymbol	148	yes	
+0x97b8a2c4	_LookUpSymbol	108	yes	
+0x97b8a330	_idstr	248	no	calls an import (malloc); calls an import (maskrune); calls an import (mem_Alloc)
+0x97b8a428	_lNewBlock	136	no	calls an import (malloc); calls an import (mem_Alloc)
+0x97b8a4b0	_lAddByte	92	yes	
+0x97b8a50c	_lReadByte	88	yes	
+0x97b8a564	_NewTokenStream	124	no	calls an import (malloc); calls an import (mem_Alloc)
+0x97b8a5e0	_DeleteTokenStream	116	no	calls an import (free)
+0x97b8a654	_RecordToken	292	no	calls an import (GetAtomString)
+0x97b8a778	_RewindTokenStream	28	yes	
+0x97b8a794	_ReadToken	888	no	calls an import (LookUpAddString); calls an import (atoi); calls an import (eprintf)
+0x97b8ab0c	_scan_token	248	no	calls an import (free); indirect call (driver context / vtable / callback)
+0x97b8ac04	_ReadFromTokenStream	172	no	calls an import (malloc)
+0x97b8acb4	FUN_97b8acb4	96	no	calls an import (free)
+0x97b8ad14	_UngetToken	156	no	calls an import (malloc)
+0x97b8adb0	_DumpTokenStream	240	no	calls an import (CPPDebugLogMsg); calls an import (GetAtomString); calls an import (sprintf)
+0x97b8aed4	TBuiltIns::getNumStringArrays	20	not a C function of the rebuilt image	
+0x97b8aee8	TBuiltIns::getStringArray	204	not a C function of the rebuilt image	
+0x97b8afb4	TBuiltIns::getStringSizeArray	204	not a C function of the rebuilt image	
+0x97b8b080	TBuiltIns::getNumStrings	148	not a C function of the rebuilt image	
+0x97b8b114	__ZN9TBuiltIns10initializeEv	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b8b118	__ZN9TBuiltIns10initializeERK16TBuiltInResource	4	yes	
+0x97b8b11c	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	5284	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm)
+0x97b8c5c0	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	600	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm)
+0x97b8c818	GetPreprocessorBuiltinString	28	yes	
+0x97b8c834	__ZN13TInfoSinkBase6appendEPKc	196	no	calls an import (ZNSs6appendEPKcm); calls an import (ZNSs7reserveEm)
+0x97b8c8f8	__ZN13TInfoSinkBase6appendEic	180	no	calls an import (ZNSs6appendEmc); calls an import (ZNSs7reserveEm)
+0x97b8c9ac	__ZN13TInfoSinkBase6appendERKSs	204	no	calls an import (ZNSs6appendERKSs); calls an import (ZNSs7reserveEm)
+0x97b8ca78	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	244	no	calls an import (ZNSs6appendEPKcm); calls an import (ZNSs7reserveEm)
+0x97b8cb6c	TIntermediate::addSymbol	376	not a C function of the rebuilt image	
+0x97b8cce4	TIntermediate::addBinaryMath	2288	not a C function of the rebuilt image	
+0x97b8d63c	TIntermediate::addAssign	640	not a C function of the rebuilt image	
+0x97b8d8bc	TIntermediate::addIndex	460	not a C function of the rebuilt image	
+0x97b8da88	TIntermediate::addUnaryMath	1772	not a C function of the rebuilt image	
+0x97b8e1b8	TIntermediate::setAggregateOperator	1132	not a C function of the rebuilt image	
+0x97b8e624	TIntermediate::addConversion	3164	not a C function of the rebuilt image	
+0x97b8f36c	TIntermediate::growAggregate	760	not a C function of the rebuilt image	
+0x97b8f664	TIntermediate::makeAggregate	632	not a C function of the rebuilt image	
+0x97b8f8dc	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	516	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); indirect call (driver context / vtable / callback)
+0x97b8fae0	TIntermediate::addComma	348	not a C function of the rebuilt image	
+0x97b8fc3c	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	628	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); indirect call (driver context / vtable / callback)
+0x97b8feb0	TIntermediate::addConstantUnion	300	not a C function of the rebuilt image	
+0x97b8ffdc	TIntermediate::addSwizzle	744	not a C function of the rebuilt image	
+0x97b902c4	TIntermediate::addLoop	140	not a C function of the rebuilt image	
+0x97b90350	__ZN13TIntermediate9addBranchE9TOperatori	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b9035c	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	124	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); indirect call (driver context / vtable / callback)
+0x97b903d8	TIntermediate::postProcess	96	not a C function of the rebuilt image	
+0x97b90438	TIntermediate::remove	12	not a C function of the rebuilt image	
+0x97b90444	TIntermOperator::modifiesState	48	not a C function of the rebuilt image	
+0x97b90474	TIntermOperator::isConstructor	24	not a C function of the rebuilt image	
+0x97b9048c	TIntermUnary::promote	304	not a C function of the rebuilt image	
+0x97b905bc	TIntermBinary::promote	3548	not a C function of the rebuilt image	
+0x97b915d4	compareStructure	336	no	indirect call (driver context / vtable / callback)
+0x97b91724	TIntermConstantUnion::fold	15308	not a C function of the rebuilt image	
+0x97b95c0c	TIntermediate::changeAggrToTempConst	484	not a C function of the rebuilt image	
+0x97b95df0	TIntermediate::copyConstUnion	336	not a C function of the rebuilt image	
+0x97b95f40	TIntermediate::promoteConstantUnion	1308	not a C function of the rebuilt image	
+0x97b964e8	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	824	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); calls an import (ZNSt6vectorIP11TIntermNode14pool_allocatorIS1_EE15_M_range_insertIN9__gnu_cxx17__normal_iteratorIPS1_S4_EEEEvS9_T_SA_St20forward_iterator_tag)
+0x97b96820	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	496	no	calls an import (ZNSt6vectorIP11TIntermNode14pool_allocatorIS1_EE13_M_insert_auxEN9__gnu_cxx17__normal_iteratorIPS1_S4_EERKS1_); calls an import (ZNSt6vectorIP11TIntermNode14pool_allocatorIS1_EE5eraseEN9__gnu_cxx17__normal_iteratorIPS1_S4_EE); indirect call (driver context / vtable / callback)
+0x97b96a10	TIntermediate::removeMatrixConstNode	776	not a C function of the rebuilt image	
+0x97b96d18	TIntermAggregate::addToPragmaTable	184	not a C function of the rebuilt image	
+0x97b96dd0	TType::getCompleteString	276	not a C function of the rebuilt image	
+0x97b96ee4	OutputTreeText	240	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN13TInfoSinkBase6appendERKSs)
+0x97b96fd4	OutputSymbol	268	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_)
+0x97b970e0	OutputBinary	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE)
+0x97b971d8	OutputUnary	224	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE)
+0x97b972b8	OutputAggregate	340	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE)
+0x97b97450	OutputSelection	516	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE)
+0x97b97654	OutputConstantUnion	876	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b97a04	OutputLoop	400	no	calls an import (ZN13TInfoSinkBase6appendEPKc); indirect call (driver context / vtable / callback)
+0x97b97b94	OutputBranch	200	no	calls an import (ZN13TInfoSinkBase6appendEPKc); indirect call (driver context / vtable / callback)
+0x97b97c5c	TIntermediate::outputTree	228	not a C function of the rebuilt image	
+0x97b97d40	TIntermSymbol::traverse	20	not a C function of the rebuilt image	
+0x97b97d54	TIntermConstantUnion::traverse	20	not a C function of the rebuilt image	
+0x97b97d68	TIntermBinary::traverse	324	not a C function of the rebuilt image	
+0x97b97eac	TIntermUnary::traverse	240	not a C function of the rebuilt image	
+0x97b97f9c	TIntermAggregate::traverse	292	not a C function of the rebuilt image	
+0x97b980c0	TIntermSelection::traverse	388	not a C function of the rebuilt image	
+0x97b98244	TIntermLoop::traverse	388	not a C function of the rebuilt image	
+0x97b983c8	TIntermBranch::traverse	216	not a C function of the rebuilt image	
+0x97b984a0	ParseSymbol	2128	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN13TInfoSinkBase6appendEPKc)
+0x97b98e04	ParseBinary	780	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK5TType17getCompleteStringEv)
+0x97b9907c	FUN_97b9907c	240	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99198	ParseUnary	444	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK5TType17getCompleteStringEv)
+0x97b99274	FUN_97b99274	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99398	ParseAggregate	1104	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK15TIntermOperator13isConstructorEv)
+0x97b9982c	ParseSelection	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9989c	FUN_97b9989c	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b999c0	ParseConstantUnion	1160	no	indirect call (driver context / vtable / callback)
+0x97b99e48	ParseLoop	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99eb8	FUN_97b99eb8	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99fdc	ParseBranch	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9a04c	FUN_97b9a04c	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9a170	TIntermediate::parseConstTree	428	not a C function of the rebuilt image	
+0x97b9a31c	TParseContext::parseVectorFields	612	not a C function of the rebuilt image	
+0x97b9a5e8	TParseContext::parseMatrixFields	464	not a C function of the rebuilt image	
+0x97b9a7b8	TParseContext::recover	12	not a C function of the rebuilt image	
+0x97b9a7c4	TParseContext::error	428	not a C function of the rebuilt image	
+0x97b9a844	FUN_97b9a844	324	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9a9b4	TParseContext::assignError	96	not a C function of the rebuilt image	
+0x97b9aa14	TParseContext::unaryOpError	84	not a C function of the rebuilt image	
+0x97b9aa68	TParseContext::binaryOpError	104	not a C function of the rebuilt image	
+0x97b9aad0	TParseContext::lValueErrorCheck	944	not a C function of the rebuilt image	
+0x97b9aec8	TParseContext::constErrorCheck	140	not a C function of the rebuilt image	
+0x97b9af54	TParseContext::integerErrorCheck	172	not a C function of the rebuilt image	
+0x97b9b000	TParseContext::globalErrorCheck	84	not a C function of the rebuilt image	
+0x97b9b054	TParseContext::reservedErrorCheck	376	not a C function of the rebuilt image	
+0x97b9b1cc	TParseContext::constructorErrorCheck	2036	not a C function of the rebuilt image	
+0x97b9ba00	TParseContext::voidErrorCheck	120	not a C function of the rebuilt image	
+0x97b9ba78	__ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped	208	no	indirect call (driver context / vtable / callback)
+0x97b9bb48	__ZN13TParseContext14boolErrorCheckEiRK11TPublicType	132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97b9bbcc	TParseContext::samplerErrorCheck	184	not a C function of the rebuilt image	
+0x97b9bc84	TParseContext::structQualifierErrorCheck	172	not a C function of the rebuilt image	
+0x97b9bd30	TParseContext::parameterSamplerErrorCheck	184	not a C function of the rebuilt image	
+0x97b9bde8	TParseContext::containsSampler	180	not a C function of the rebuilt image	
+0x97b9be9c	TParseContext::insertBuiltInArrayAtGlobalLevel	740	not a C function of the rebuilt image	
+0x97b9c180	TParseContext::arrayErrorCheck	2552	not a C function of the rebuilt image	
+0x97b9cb78	TParseContext::arraySetMaxSize	1068	not a C function of the rebuilt image	
+0x97b9cfe8	TParseContext::nonInitErrorCheck	1008	not a C function of the rebuilt image	
+0x97b9d3d8	TParseContext::paramErrorCheck	216	not a C function of the rebuilt image	
+0x97b9d4b0	TParseContext::extensionErrorCheck	1300	not a C function of the rebuilt image	
+0x97b9da08	TParseContext::findFunction	356	not a C function of the rebuilt image	
+0x97b9db6c	TParseContext::executeInitializer	3572	not a C function of the rebuilt image	
+0x97b9e960	TParseContext::canNodeBeRemoved	204	not a C function of the rebuilt image	
+0x97b9ea2c	TParseContext::addConstructor	944	not a C function of the rebuilt image	
+0x97b9eddc	TParseContext::constructBuiltIn	408	not a C function of the rebuilt image	
+0x97b9efb0	TParseContext::constructStruct	392	not a C function of the rebuilt image	
+0x97b9f138	TParseContext::addConstVectorNode	1156	not a C function of the rebuilt image	
+0x97b9f600	TParseContext::addConstMatrixNode	904	not a C function of the rebuilt image	
+0x97b9f988	TParseContext::addConstStruct	848	not a C function of the rebuilt image	
+0x97b9fcd8	TParseContext::initializeExtensionBehavior	380	not a C function of the rebuilt image	
+0x97b9fe54	InitializeGlobalPools	144	yes	
+0x97b9fee4	FreeGlobalPools	112	no	calls an import (ZdlPv)
+0x97b9ff54	GetGlobalPoolAllocator	32	yes	
+0x97b9ff74	SetGlobalPoolAllocatorPtr	32	yes	
+0x97b9ff94	GetCompilerPoolAllocator	32	yes	
+0x97b9ffb4	__ZN14TPoolAllocatorC2Ebii	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97b9ffb8	__ZN14TPoolAllocatorC1Ebii	4	yes	
+0x97b9ffbc	__ZN14TPoolAllocatorC4Ebii	152	yes	
+0x97ba0054	__ZN14TPoolAllocatorD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba005c	__ZN14TPoolAllocatorD1Ev	8	yes	
+0x97ba0064	__ZN14TPoolAllocatorD4Ev	184	yes	
+0x97ba011c	TAllocation::checkGuardBlock	4	not a C function of the rebuilt image	
+0x97ba0120	TPoolAllocator::push	136	not a C function of the rebuilt image	
+0x97ba01a8	TPoolAllocator::pop	160	not a C function of the rebuilt image	
+0x97ba0248	TPoolAllocator::popAll	76	not a C function of the rebuilt image	
+0x97ba0294	TPoolAllocator::allocate	328	not a C function of the rebuilt image	
+0x97ba03dc	TAllocation::checkAllocList	156	not a C function of the rebuilt image	
+0x97ba0478	QualifierWritten	156	no	indirect call (driver context / vtable / callback)
+0x97ba0514	AliveSymbol	76	no	indirect call (driver context / vtable / callback)
+0x97ba0560	AliveSelection	16	yes	
+0x97ba0570	RemoveSymbol	24	yes	
+0x97ba0588	RemoveBinary	56	no	indirect call (driver context / vtable / callback)
+0x97ba05c0	RemoveUnary	56	no	indirect call (driver context / vtable / callback)
+0x97ba05f8	RemoveAggregate	56	no	indirect call (driver context / vtable / callback)
+0x97ba0630	RemoveSelection	56	no	indirect call (driver context / vtable / callback)
+0x97ba0668	RemoveConstantUnion	24	yes	
+0x97ba0680	RemoveAllTreeNodes	168	no	indirect call (driver context / vtable / callback)
+0x97ba0728	GetSymbolTable	132	yes	
+0x97ba07ac	GetResources	108	yes	
+0x97ba0818	_ShInitialize	360	yes	
+0x97ba0980	_ShConstructCompiler	32	no	calls an import (Z17ConstructCompiler11EShLanguagei)
+0x97ba09a4	_ShDestruct	200	no	calls an import (Z12DeleteLinkerP13TShHandleBase); calls an import (Z14DeleteCompilerP9TCompiler); calls an import (pthread_mutex_lock)
+0x97ba0a6c	_ShFinalize	112	no	calls an import (Z13DetachProcessv); calls an import (ZN14TPoolAllocator6popAllEv); calls an import (ZN14TPoolAllocatorD1Ev)
+0x97ba0adc	generateBuiltInSymbolTable	112	yes	
+0x97ba0b4c	initializeSymbolTable	1268	yes	
+0x97ba10c8	_ShCompile	2468	no	atomic / cache / barrier instruction; calls an import (FinalizePreprocessor); calls an import (InitPreprocessor)
+0x97ba1a6c	_ShLink	428	no	calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZN14TGenericLinker4linkEPKPvi); calls an import (ZN14TGenericLinker5resetEv)
+0x97ba1c68	ShSetEncryptionMethod	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba1c6c	_ShGetInfoLog	244	no	calls an import (ZN13TInfoSinkBase6appendEPKc); indirect call (driver context / vtable / callback)
+0x97ba1d60	_ShGetPPStream	96	no	indirect call (driver context / vtable / callback)
+0x97ba1dc0	_ShGetShaderLocalParamRemapTable	92	no	calls an import (ZN14TGenericLinker29getShaderLocalParamRemapTableE11EShLanguage); indirect call (driver context / vtable / callback)
+0x97ba1e1c	_ShGetNumShaderLocalParams	92	no	calls an import (ZN14TGenericLinker23getNumShaderLocalParamsE11EShLanguage); indirect call (driver context / vtable / callback)
+0x97ba1e78	_ShAttributeBindingRequest	104	no	indirect call (driver context / vtable / callback)
+0x97ba1ee0	_ShGetNumActiveAttributes	104	no	calls an import (ZN12BindingTable29GetNumActiveAttributeBindingsEv); indirect call (driver context / vtable / callback)
+0x97ba1f48	_ShGetNumActiveUniforms	104	no	calls an import (ZN12BindingTable27GetNumActiveUniformBindingsEv); indirect call (driver context / vtable / callback)
+0x97ba1fb0	_ShGetActiveUserUniformsSize	104	no	calls an import (ZN12BindingTable25GetSizeActiveUserUniformsEv); indirect call (driver context / vtable / callback)
+0x97ba2018	_ShGetMaxAttributeLength	104	no	calls an import (ZN12BindingTable21GetMaxAttributeLengthEv); indirect call (driver context / vtable / callback)
+0x97ba2080	_ShGetMaxUniformLength	104	no	calls an import (ZN12BindingTable19GetMaxUniformLengthEv); indirect call (driver context / vtable / callback)
+0x97ba20e8	_ShGetActiveUniform	132	no	calls an import (ZN14TGenericLinker16getActiveUniformEmlPlS0_PmPc); indirect call (driver context / vtable / callback)
+0x97ba216c	_ShGetUniformTypeInfo	116	no	calls an import (ZN14TGenericLinker18getUniformTypeInfoElPlPmPh); indirect call (driver context / vtable / callback)
+0x97ba21e0	_ShGetActiveAttrib	132	no	calls an import (ZN14TGenericLinker15getActiveAttribEmlPlS0_PmPc); indirect call (driver context / vtable / callback)
+0x97ba2264	_ShGetAttribLocation	112	no	calls an import (ZN12BindingTable31FindAttribBindingLocationByNameEPKc); indirect call (driver context / vtable / callback)
+0x97ba22d4	_ShGetUniformLocation	112	no	calls an import (ZN12BindingTable38FindClientUniformBindingLocationByNameEPKc); indirect call (driver context / vtable / callback)
+0x97ba2344	_ShGetPPStreamManager	92	no	calls an import (ZN14TGenericLinker18getPPStreamManagerE11EShLanguage); indirect call (driver context / vtable / callback)
+0x97ba23a0	_ShGetLinkerStats	84	no	calls an import (ZN14TGenericLinker14getStatsStringEv); indirect call (driver context / vtable / callback)
+0x97ba23f4	_ShGetCompilerStats	96	no	indirect call (driver context / vtable / callback)
+0x97ba2454	_ShGetLinkerPPStream	84	no	calls an import (ZN14TGenericLinker17getPPStreamStringEv); indirect call (driver context / vtable / callback)
+0x97ba24a8	_ShGetCompilerPPStream	96	no	indirect call (driver context / vtable / callback)
+0x97ba2508	_ShGetLinkerShaderToProgramString	84	no	calls an import (ZN14TGenericLinker24getShaderToProgramStringEv); indirect call (driver context / vtable / callback)
+0x97ba255c	_ShGetCompilerShaderToProgramString	96	no	indirect call (driver context / vtable / callback)
+0x97ba25bc	_ShGetLinkerBindingTable	84	no	calls an import (ZN14TGenericLinker14getTableStringEv); indirect call (driver context / vtable / callback)
+0x97ba2610	_ShGetCompilerSymbolTable	96	no	indirect call (driver context / vtable / callback)
+0x97ba2670	TType::buildMangledName	688	not a C function of the rebuilt image	
+0x97ba295c	TVariable::dump	220	not a C function of the rebuilt image	
+0x97ba2a38	TFunction::dump	216	not a C function of the rebuilt image	
+0x97ba2b10	TSymbolTableLevel::dump	112	not a C function of the rebuilt image	
+0x97ba2b80	TSymbolTable::dump	268	not a C function of the rebuilt image	
+0x97ba2c8c	__ZN9TFunctionD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2c94	__ZN9TFunctionD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2c9c	__ZN9TFunctionD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2ca4	__ZN9TFunctionD4Ev	236	no	atomic / cache / barrier instruction; calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_); indirect call (driver context / vtable / callback)
+0x97ba2d90	__ZN17TSymbolTableLevelD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2d98	__ZN17TSymbolTableLevelD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2da0	__ZN17TSymbolTableLevelD4Ev	184	no	calls an import (ZNSt22_Rb_tree_base_iterator12_M_incrementEv); calls an import (ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_P7TSymbolESt10_Select1stIS9_ESt4lessIS4_ES2_IS9_EE8_M_eraseEPSt13_Rb_tree_nodeIS9_E); indirect call (driver context / vtable / callback)
+0x97ba2e58	TSymbolTableLevel::relateToOperator	168	not a C function of the rebuilt image	
+0x97ba2f00	__ZN7TSymbolC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2f04	__ZN7TSymbolC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2f08	__ZN7TSymbolC4ERKS_	164	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_)
+0x97ba2fac	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2fb0	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba2fb4	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	432	no	calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm); calls an import (ZN5TType8copyTypeERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)
+0x97ba3164	TVariable::clone	76	not a C function of the rebuilt image	
+0x97ba31b0	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba31b4	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ba31b8	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	492	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN14TPoolAllocator8allocateEm)
+0x97ba33a4	TFunction::clone	76	not a C function of the rebuilt image	
+0x97ba33f0	TSymbolTableLevel::clone	352	not a C function of the rebuilt image	
+0x97ba3550	TSymbolTable::copyTable	492	not a C function of the rebuilt image	
+0x97ba373c	yyparse	34436	yes	
+0x97bac120	yylex	4128	yes	
+0x97bad390	yy_get_next_buffer	656	yes	
+0x97bad620	yy_get_previous_state	280	yes	
+0x97bad738	yy_try_NUL_trans	184	yes	
+0x97bad7f0	yyinput	272	yes	
+0x97bad900	yyrestart	104	yes	
+0x97bad968	yy_switch_to_buffer	148	yes	
+0x97bad9fc	yy_load_buffer_state	88	yes	
+0x97bada54	yy_create_buffer	140	yes	
+0x97badae0	yy_delete_buffer	124	yes	
+0x97badb5c	yy_init_buffer	68	yes	
+0x97badba0	yy_flush_buffer	88	yes	
+0x97badbf8	yy_scan_buffer	192	yes	
+0x97badcb8	yy_scan_string	44	yes	
+0x97badce4	yy_scan_bytes	176	yes	
+0x97badd94	yy_fatal_error	60	yes	
+0x97baddd0	yy_flex_alloc	4	yes	
+0x97baddd4	yy_flex_realloc	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97baddd8	yy_flex_free	4	yes	
+0x97badddc	PaParseStrings	452	yes	
+0x97badfa0	yyerror	184	no	calls an import (ZN13TParseContext5errorEiPKcS1_S1_z)
+0x97bae058	PaReservedWord	108	no	calls an import (ZN13TParseContext5errorEiPKcS1_S1_z)
+0x97bae0c4	PaIdentOrType	228	yes	
+0x97bae1a8	PaParseComment	228	no	calls an import (ZN13TParseContext5errorEiPKcS1_S1_z); calls an import (ZN13TParseContext7recoverEv)
+0x97bae28c	_CPPDebugLogMsg	92	no	calls an import (ZN13TInfoSinkBase6appendEPKc)
+0x97bae2e8	_CPPWarningToInfoLog	316	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97bae468	_CPPShInfoLogMsg	100	no	calls an import (ZN13TParseContext5errorEiPKcS1_S1_z)
+0x97bae4cc	_CPPErrorToInfoLog	104	no	calls an import (ZN13TParseContext5errorEiPKcS1_S1_z)
+0x97bae534	_SetLineNumber	44	yes	
+0x97bae560	_SetStringNumber	44	yes	
+0x97bae58c	_GetStringNumber	32	yes	
+0x97bae5ac	_GetLineNumber	32	yes	
+0x97bae5cc	_IncLineNumber	52	yes	
+0x97bae600	_DecLineNumber	52	yes	
+0x97bae634	_HandlePragma	576	yes	
+0x97bae874	_StoreStr	448	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_)
+0x97baea34	_GetStrfromTStr	80	yes	
+0x97baea84	_ResetTString	252	no	calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_); calls an import (ZSt20__throw_length_errorPKc)
+0x97baeb80	_GetBehavior	484	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_)
+0x97baed64	_updateExtensionBehavior	1468	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN13TInfoSinkBase6appendEPKc)
+0x97baf364	setInitialState	32	yes	
+0x97baf384	scpy	52	yes	
+0x97baf3b8	handleDigit	112	yes	
+0x97baf428	ncpy	88	yes	
+0x97baf480	PrintAttribute	456	no	calls an import (malloc)
+0x97baf68c	PrintParam	1228	no	calls an import (malloc)
+0x97bafbf4	PrintOutput	420	no	calls an import (malloc)
+0x97bafdc4	PrintTemp	76	no	calls an import (malloc)
+0x97bafe10	Binding::ClearName	72	not a C function of the rebuilt image	
+0x97bafe58	__ZN7BindingC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafe5c	__ZN7BindingC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafe60	__ZN7BindingC4Ev	76	yes	
+0x97bafeac	__ZN7BindingD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafeb4	__ZN7BindingD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafebc	__ZN7BindingD4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafec0	__ZN7BindingC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafec4	__ZN7BindingC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bafec8	__ZN7BindingC4ERKS_	224	yes	
+0x97baffa8	Binding::operator=	232	not a C function of the rebuilt image	
+0x97bb0090	__ZeqRK7BindingS1_	88	yes	
+0x97bb00e8	Binding::CatName	208	not a C function of the rebuilt image	
+0x97bb01b8	Binding::SetName	164	not a C function of the rebuilt image	
+0x97bb025c	Binding::SetNameFromArrayName	332	not a C function of the rebuilt image	
+0x97bb03a8	Binding::RemoveNameBackToChar	132	not a C function of the rebuilt image	
+0x97bb042c	Binding::GetHash	20	not a C function of the rebuilt image	
+0x97bb0440	Binding::IsClientRequest	8	not a C function of the rebuilt image	
+0x97bb0448	Binding::SetClientRequest	8	not a C function of the rebuilt image	
+0x97bb0450	Binding::IsBuiltIn	8	not a C function of the rebuilt image	
+0x97bb0458	Binding::SetBuiltIn	8	not a C function of the rebuilt image	
+0x97bb0460	Binding::GetLocation	8	not a C function of the rebuilt image	
+0x97bb0468	Binding::SetLocation	8	not a C function of the rebuilt image	
+0x97bb0470	Binding::GetActiveIndex	8	not a C function of the rebuilt image	
+0x97bb0478	Binding::SetActiveIndex	8	not a C function of the rebuilt image	
+0x97bb0480	Binding::SetOpenGLType	8	not a C function of the rebuilt image	
+0x97bb0488	Binding::GetOpenGLType	8	not a C function of the rebuilt image	
+0x97bb0490	Binding::GetBindingBasicSize	8	not a C function of the rebuilt image	
+0x97bb0498	Binding::GetBindingSlots	8	not a C function of the rebuilt image	
+0x97bb04a0	Binding::SetDecSize	8	not a C function of the rebuilt image	
+0x97bb04a8	Binding::SetActualSize	8	not a C function of the rebuilt image	
+0x97bb04b0	Binding::GetDecSize	8	not a C function of the rebuilt image	
+0x97bb04b8	Binding::GetActualSize	8	not a C function of the rebuilt image	
+0x97bb04c0	Binding::GetNextBinding	8	not a C function of the rebuilt image	
+0x97bb04c8	Binding::GetNextBindingInHash	8	not a C function of the rebuilt image	
+0x97bb04d0	Binding::SetNextBinding	8	not a C function of the rebuilt image	
+0x97bb04d8	Binding::SetNextBindingInHash	8	not a C function of the rebuilt image	
+0x97bb04e0	Binding::GetString	256	not a C function of the rebuilt image	
+0x97bb05e0	__ZN12BindingTableC2Ej	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb05e4	__ZN12BindingTableC1Ej	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb05e8	__ZN12BindingTableC4Ej	288	no	calls an import (Znam)
+0x97bb0708	__ZN12BindingTableD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb0710	__ZN12BindingTableD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb0718	__ZN12BindingTableD4Ev	148	no	calls an import (ZdlPv)
+0x97bb07ac	BindingTable::ClearInternalBindings	336	not a C function of the rebuilt image	
+0x97bb08fc	BindingTable::InsertAttribRequestBinding	244	not a C function of the rebuilt image	
+0x97bb09f0	BindingTable::NextAttribRequestBinding	24	not a C function of the rebuilt image	
+0x97bb0a08	BindingTable::FindAttribRequestBinding	116	not a C function of the rebuilt image	
+0x97bb0a7c	BindingTable::FindAttribRequestBindingLocationByName	228	not a C function of the rebuilt image	
+0x97bb0b60	BindingTable::InsertClientAttribBinding	368	not a C function of the rebuilt image	
+0x97bb0cd0	BindingTable::InsertAttribBinding	508	not a C function of the rebuilt image	
+0x97bb0ecc	BindingTable::NextAttribBinding	24	not a C function of the rebuilt image	
+0x97bb0ee4	BindingTable::FindAttribBinding	116	not a C function of the rebuilt image	
+0x97bb0f58	BindingTable::FindAttribBindingLocationByName	228	not a C function of the rebuilt image	
+0x97bb103c	BindingTable::GetAttribBindingNameByLocation	92	not a C function of the rebuilt image	
+0x97bb1098	BindingTable::GetAttribBindingByIndex	88	not a C function of the rebuilt image	
+0x97bb10f0	BindingTable::InsertSingleUniform	452	not a C function of the rebuilt image	
+0x97bb12b4	BindingTable::AddSingleUniformReference	184	not a C function of the rebuilt image	
+0x97bb136c	BindingTable::InsertUniformArray	944	not a C function of the rebuilt image	
+0x97bb171c	BindingTable::NextUniformBinding	24	not a C function of the rebuilt image	
+0x97bb1734	BindingTable::FindUniformBinding	116	not a C function of the rebuilt image	
+0x97bb17a8	BindingTable::FindUniformBindingByName	116	not a C function of the rebuilt image	
+0x97bb181c	BindingTable::FindClientUniformBindingLocationByName	264	not a C function of the rebuilt image	
+0x97bb1924	BindingTable::FindUniformBindingByLocation	160	not a C function of the rebuilt image	
+0x97bb19c4	BindingTable::FindUniformBindingByIndex	88	not a C function of the rebuilt image	
+0x97bb1a1c	BindingTable::GetNumActiveAttributeBindings	8	not a C function of the rebuilt image	
+0x97bb1a24	BindingTable::GetNumActiveUniformBindings	8	not a C function of the rebuilt image	
+0x97bb1a2c	BindingTable::GetSizeActiveUserUniforms	8	not a C function of the rebuilt image	
+0x97bb1a34	BindingTable::GetSizeActiveUserAttributes	8	not a C function of the rebuilt image	
+0x97bb1a3c	BindingTable::GetSizeActiveVertexUniforms	8	not a C function of the rebuilt image	
+0x97bb1a44	BindingTable::GetSizeActiveFragmentUniforms	8	not a C function of the rebuilt image	
+0x97bb1a4c	BindingTable::GetSizeActiveAttributes	8	not a C function of the rebuilt image	
+0x97bb1a54	BindingTable::GetMaxAttributeLength	8	not a C function of the rebuilt image	
+0x97bb1a5c	BindingTable::GetMaxUniformLength	8	not a C function of the rebuilt image	
+0x97bb1a64	BindingTable::GetNumActiveVertexSamplers	8	not a C function of the rebuilt image	
+0x97bb1a6c	BindingTable::GetNumActiveFragmentSamplers	8	not a C function of the rebuilt image	
+0x97bb1a74	BindingTable::GetString	1028	not a C function of the rebuilt image	
+0x97bb1e78	ConstructLinker	64	no	calls an import (Znwm)
+0x97bb1eb8	DeleteLinker	24	yes	
+0x97bb1ed0	UpdateOperations	504	yes	
+0x97bb20c8	TGenericLinker::FindChunkDelta	208	not a C function of the rebuilt image	
+0x97bb21dc	TGenericLinker::MergeCompilers	3308	not a C function of the rebuilt image	
+0x97bb2ff0	TGenericLinker::CreateFromStreamWithSymbolTableUpdate	904	not a C function of the rebuilt image	
+0x97bb33bc	TGenericLinker::RemoveUnreachableFunctions	952	not a C function of the rebuilt image	
+0x97bb37fc	TGenericLinker::RenumberLabels	40	not a C function of the rebuilt image	
+0x97bb3824	TGenericLinker::RemoveUnusedRegisters	820	not a C function of the rebuilt image	
+0x97bb3b58	TGenericLinker::RemoveExtraVertexOutputs	376	not a C function of the rebuilt image	
+0x97bb3d14	TGenericLinker::FixOutputReads	1160	not a C function of the rebuilt image	
+0x97bb419c	TGenericLinker::OptimizeFunctionIO	1304	not a C function of the rebuilt image	
+0x97bb46f8	TGenericLinker::GetRemapTableString	412	not a C function of the rebuilt image	
+0x97bb4894	TGenericLinker::GetBindingTableString	384	not a C function of the rebuilt image	
+0x97bb4a14	TGenericLinker::GetFullTableString	152	not a C function of the rebuilt image	
+0x97bb4aac	TGenericLinker::ReportStats	4	not a C function of the rebuilt image	
+0x97bb4ab0	TGenericLinker::InsertClientAttribBinding	92	not a C function of the rebuilt image	
+0x97bb4b0c	TGenericLinker::AddAttribBinding	472	not a C function of the rebuilt image	
+0x97bb4d6c	TGenericLinker::CollectClientAttributeBindings	676	not a C function of the rebuilt image	
+0x97bb50dc	TGenericLinker::CollectAttributeBindings	996	not a C function of the rebuilt image	
+0x97bb54c0	TGenericLinker::RemapVertexAttributes	464	not a C function of the rebuilt image	
+0x97bb56d4	TGenericLinker::AllocateTextureUnitsForVaryings	4928	not a C function of the rebuilt image	
+0x97bb6b48	TGenericLinker::CoalesceCommonUniforms	484	not a C function of the rebuilt image	
+0x97bb6d2c	TGenericLinker::BuildUniformRemapTables	1088	not a C function of the rebuilt image	
+0x97bb727c	TGenericLinker::InsertUniformBindingFromSymbol	472	not a C function of the rebuilt image	
+0x97bb7498	TGenericLinker::CollectUniformBindings	296	not a C function of the rebuilt image	
+0x97bb75c0	TGenericLinker::CreateFunctionTable	1284	not a C function of the rebuilt image	
+0x97bb7b4c	TGenericLinker::BuildSymbolTableList	1080	not a C function of the rebuilt image	
+0x97bb8054	TGenericLinker::BuildProcessingComponents	200	not a C function of the rebuilt image	
+0x97bb811c	__ZN14TGenericLinkerC2Ei	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb8120	__ZN14TGenericLinkerC1Ei	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb8124	__ZN14TGenericLinkerC4Ei	268	no	atomic / cache / barrier instruction; calls an import (ZN12BindingTableC1Ej); calls an import (Znwm)
+0x97bb8230	__ZN14TGenericLinkerD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb8238	__ZN14TGenericLinkerD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb8240	__ZN14TGenericLinkerD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb8248	__ZN14TGenericLinkerD4Ev	244	no	atomic / cache / barrier instruction; calls an import (ZN12BindingTableD1Ev); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97bb833c	TGenericLinker::getShaderLocalParamRemapTable	40	not a C function of the rebuilt image	
+0x97bb8364	TGenericLinker::getNumShaderLocalParams	40	not a C function of the rebuilt image	
+0x97bb838c	TGenericLinker::attributeBindingRequest	196	not a C function of the rebuilt image	
+0x97bb8450	TGenericLinker::getActiveUniform	192	not a C function of the rebuilt image	
+0x97bb8510	TGenericLinker::getUniformTypeInfo	172	not a C function of the rebuilt image	
+0x97bb85bc	TGenericLinker::getActiveAttrib	188	not a C function of the rebuilt image	
+0x97bb8678	TGenericLinker::getPPStreamManager	40	not a C function of the rebuilt image	
+0x97bb86a0	TGenericLinker::reset	412	not a C function of the rebuilt image	
+0x97bb883c	TGenericLinker::link	1664	not a C function of the rebuilt image	
+0x97bb9098	TGenericLinker::getStatsString	104	not a C function of the rebuilt image	
+0x97bb9100	TGenericLinker::getPPStreamString	604	not a C function of the rebuilt image	
+0x97bb935c	TGenericLinker::getShaderToProgramString	768	not a C function of the rebuilt image	
+0x97bb965c	TGenericLinker::getTableString	68	not a C function of the rebuilt image	
+0x97bb96a0	GetGLStringForType	168	yes	
+0x97bb9748	GetShaderStringForType	168	yes	
+0x97bb97f0	GetVec4sForType	136	yes	
+0x97bb9878	GetPPStreamTypeForGLType	164	yes	
+0x97bb991c	GetScalerWidthForType	260	yes	
+0x97bb9a20	getOpenGLTypeFromTType	676	no	indirect call (driver context / vtable / callback)
+0x97bb9d04	__ZN20AddressTempAllocatorC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9d08	__ZN20AddressTempAllocatorC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9d0c	__ZN20AddressTempAllocatorC4Ev	16	yes	
+0x97bb9d1c	__ZN20AddressTempAllocatorD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9d24	__ZN20AddressTempAllocatorD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9d2c	__ZN20AddressTempAllocatorD4Ev	16	yes	
+0x97bb9d3c	AddressTempAllocator::getTemporary	316	not a C function of the rebuilt image	
+0x97bb9e78	AddressTempAllocator::releaseTemporary	20	not a C function of the rebuilt image	
+0x97bb9e8c	__ZN18TemporaryAllocatorC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9e90	__ZN18TemporaryAllocatorC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9e94	__ZN18TemporaryAllocatorC4Ev	32	yes	
+0x97bb9eb4	__ZN18TemporaryAllocatorD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9ebc	__ZN18TemporaryAllocatorD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bb9ec4	__ZN18TemporaryAllocatorD4Ev	72	no	calls an import (free)
+0x97bb9f0c	TemporaryAllocator::getTemporary	408	not a C function of the rebuilt image	
+0x97bba0a4	TemporaryAllocator::releaseTemporary	100	not a C function of the rebuilt image	
+0x97bba108	ParseSymbol::ClearName	72	not a C function of the rebuilt image	
+0x97bba150	ParseSymbol::ClearDirectIndex	68	not a C function of the rebuilt image	
+0x97bba194	__ZN11ParseSymbolC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba198	__ZN11ParseSymbolC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba19c	__ZN11ParseSymbolC4Ev	124	yes	
+0x97bba218	__ZN11ParseSymbolD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba220	__ZN11ParseSymbolD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba228	__ZN11ParseSymbolD4Ev	116	no	calls an import (free)
+0x97bba29c	__ZN11ParseSymbolC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba2a0	__ZN11ParseSymbolC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bba2a4	__ZN11ParseSymbolC4ERKS_	296	yes	
+0x97bba3cc	ParseSymbol::operator=	328	not a C function of the rebuilt image	
+0x97bba514	__ZeqRK11ParseSymbolS1_	148	yes	
+0x97bba5a8	ParseSymbol::ResolveOpenGLType	616	not a C function of the rebuilt image	
+0x97bba850	ParseSymbol::SetParseTreeType	120	not a C function of the rebuilt image	
+0x97bba8c8	ParseSymbol::SetChunk	84	not a C function of the rebuilt image	
+0x97bba91c	ParseSymbol::SetArrayPositionFromLastIndex	56	not a C function of the rebuilt image	
+0x97bba954	ParseSymbol::CatName	208	not a C function of the rebuilt image	
+0x97bbaa24	ParseSymbol::SetName	156	not a C function of the rebuilt image	
+0x97bbaac0	ParseSymbol::RemoveNameBackToChar	132	not a C function of the rebuilt image	
+0x97bbab44	ParseSymbol::ChangeArrayNameForArrayIndex	424	not a C function of the rebuilt image	
+0x97bbacec	ParseSymbol::RemoveArrayIndex	36	not a C function of the rebuilt image	
+0x97bbad10	ParseSymbol::TrimNameToBase	156	not a C function of the rebuilt image	
+0x97bbadac	ParseSymbol::AddDirectIndex	196	not a C function of the rebuilt image	
+0x97bbae70	ParseSymbol::PopDirectIndex	64	not a C function of the rebuilt image	
+0x97bbaeb0	ParseSymbol::RemoveDirectIndex	16	not a C function of the rebuilt image	
+0x97bbaec0	ParseSymbol::GetDirectIndex	16	not a C function of the rebuilt image	
+0x97bbaed0	ParseSymbol::GetString	724	not a C function of the rebuilt image	
+0x97bbb1a4	ParseOperand::ClearDirectIndex	68	not a C function of the rebuilt image	
+0x97bbb1e8	__ZN12ParseOperandC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb1ec	__ZN12ParseOperandC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb1f0	__ZN12ParseOperandC4Ev	56	yes	
+0x97bbb228	__ZN12ParseOperandC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb22c	__ZN12ParseOperandC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb230	__ZN12ParseOperandC4ERKS_	232	yes	
+0x97bbb318	__ZN12ParseOperandD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb320	__ZN12ParseOperandD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbb328	__ZN12ParseOperandD4Ev	232	no	calls an import (ZdlPv); calls an import (free)
+0x97bbb410	ParseOperand::operator=	220	not a C function of the rebuilt image	
+0x97bbb4ec	__ZeqRK12ParseOperandS1_	328	yes	
+0x97bbb634	ParseOperand::Clear	88	not a C function of the rebuilt image	
+0x97bbb68c	ParseOperand::AddDirectIndex	196	not a C function of the rebuilt image	
+0x97bbb750	ParseOperand::PopDirectIndex	64	not a C function of the rebuilt image	
+0x97bbb790	ParseOperand::RemoveDirectIndex	16	not a C function of the rebuilt image	
+0x97bbb7a0	ParseOperand::GetDirectIndex	16	not a C function of the rebuilt image	
+0x97bbb7b0	ParseOperand::GetAsDestVar	716	not a C function of the rebuilt image	
+0x97bbba7c	ParseOperand::GetAsSourceVar	676	not a C function of the rebuilt image	
+0x97bbbd20	ParseOperand::IsMatrix	52	not a C function of the rebuilt image	
+0x97bbbd54	ParseOperand::GetBaseSize	76	not a C function of the rebuilt image	
+0x97bbbda0	ParseOperand::GetLogicalSize	132	not a C function of the rebuilt image	
+0x97bbbe24	ParseOperand::isWriteable	132	not a C function of the rebuilt image	
+0x97bbbef8	ParseOperand::AddSwizzle	184	not a C function of the rebuilt image	
+0x97bbbfb0	ParseOperand::RemoveSwizzle	16	not a C function of the rebuilt image	
+0x97bbbfc0	ParseOperand::GetSwizzle	12	not a C function of the rebuilt image	
+0x97bbbfcc	ParseOperand::ClearSwizzles	68	not a C function of the rebuilt image	
+0x97bbc010	ParseOperand::GetString	584	not a C function of the rebuilt image	
+0x97bbc258	__ZN16ParseSymbolTableC2Ej	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbc25c	__ZN16ParseSymbolTableC1Ej	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbc260	__ZN16ParseSymbolTableC4Ej	184	no	calls an import (Znam)
+0x97bbc318	__ZN16ParseSymbolTableD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbc320	__ZN16ParseSymbolTableD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bbc328	__ZN16ParseSymbolTableD4Ev	92	no	calls an import (ZdlPv)
+0x97bbc384	ParseSymbolTable::processOperand	252	not a C function of the rebuilt image	
+0x97bbc480	ParseSymbolTable::AddSymbol	140	not a C function of the rebuilt image	
+0x97bbc50c	ParseSymbolTable::InsertSingleSymbol	1504	not a C function of the rebuilt image	
+0x97bbcaec	ParseSymbolTable::FinishArrayAddition	216	not a C function of the rebuilt image	
+0x97bbcbc4	ParseSymbolTable::AddTempFromOutput	324	not a C function of the rebuilt image	
+0x97bbcd08	ParseSymbolTable::AddFromExternalSymbol	1028	not a C function of the rebuilt image	
+0x97bbd10c	ParseSymbolTable::InsertSymbol	952	not a C function of the rebuilt image	
+0x97bbd4c4	ParseSymbolTable::FindFirstElement	624	not a C function of the rebuilt image	
+0x97bbd734	ParseSymbolTable::FindSymbol	120	not a C function of the rebuilt image	
+0x97bbd7ac	ParseSymbolTable::NextSymbol	24	not a C function of the rebuilt image	
+0x97bbd7c4	ParseSymbolTable::NextSymbolInHash	20	not a C function of the rebuilt image	
+0x97bbd7d8	ParseSymbolTable::FirstSymbolInHash	32	not a C function of the rebuilt image	
+0x97bbd7f8	ParseSymbolTable::FindGlobalSymbolByName	244	not a C function of the rebuilt image	
+0x97bbd8ec	ParseSymbolTable::FindSymbolByName	232	not a C function of the rebuilt image	
+0x97bbd9d4	ParseSymbolTable::FindNextParamSymbolByName	192	not a C function of the rebuilt image	
+0x97bbda94	ParseSymbolTable::RemoveSymbol	600	not a C function of the rebuilt image	
+0x97bbdcec	ParseSymbolTable::RemoveEndSymbol	704	not a C function of the rebuilt image	
+0x97bbdfac	ParseSymbolTable::CopySymbolTable	228	not a C function of the rebuilt image	
+0x97bbe090	ParseSymbolTable::ChangeChunk	128	not a C function of the rebuilt image	
+0x97bbe110	ParseSymbolTable::ClearCompilerTempData	40	not a C function of the rebuilt image	
+0x97bbe138	ParseSymbolTable::Dump	84	not a C function of the rebuilt image	
+0x97bbe18c	ParseSymbolTable::GetString	992	not a C function of the rebuilt image	
+0x97bbe56c	TIntermSymbol::compileNode	304	not a C function of the rebuilt image	
+0x97bbe69c	TIntermConstantUnion::compileNode	340	not a C function of the rebuilt image	
+0x97bbe7f0	TIntermBinary::compileNode	3444	not a C function of the rebuilt image	
+0x97bbf564	TIntermUnary::compileNode	1824	not a C function of the rebuilt image	
+0x97bbfca4	TIntermAggregate::compileNode	4308	not a C function of the rebuilt image	
+0x97bc1348	TIntermSelection::compileNode	2232	not a C function of the rebuilt image	
+0x97bc1c00	TIntermLoop::compileNode	3000	not a C function of the rebuilt image	
+0x97bc27b8	TIntermBranch::compileNode	1420	not a C function of the rebuilt image	
+0x97bc2d44	TIntermSymbol::indirectNode	312	not a C function of the rebuilt image	
+0x97bc2e7c	TIntermConstantUnion::indirectNode	340	not a C function of the rebuilt image	
+0x97bc2fd0	TIntermBinary::indirectNode	1000	not a C function of the rebuilt image	
+0x97bc33b8	TIntermUnary::indirectNode	112	not a C function of the rebuilt image	
+0x97bc3428	TIntermAggregate::indirectNode	232	not a C function of the rebuilt image	
+0x97bc3510	TIntermSelection::indirectNode	204	not a C function of the rebuilt image	
+0x97bc35dc	TIntermLoop::indirectNode	200	not a C function of the rebuilt image	
+0x97bc36a4	TIntermBranch::indirectNode	88	not a C function of the rebuilt image	
+0x97bc36fc	__ZN22ConstantAllocationListC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3700	__ZN22ConstantAllocationListC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3704	__ZN22ConstantAllocationListC4Ev	16	yes	
+0x97bc3714	__ZN22ConstantAllocationListD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc371c	__ZN22ConstantAllocationListD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3724	__ZN22ConstantAllocationListD4Ev	16	yes	
+0x97bc3734	ConstantAllocationList::clear	68	not a C function of the rebuilt image	
+0x97bc3778	ConstantAllocationList::addConstant	320	not a C function of the rebuilt image	
+0x97bc38b8	ConstantAllocationList::updateConstant	128	not a C function of the rebuilt image	
+0x97bc3938	ConstantAllocationList::getConstantUsage	132	not a C function of the rebuilt image	
+0x97bc39bc	newQueue	20	yes	
+0x97bc39d0	size	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc39d8	store	108	no	calls an import (malloc)
+0x97bc3a44	fetch	100	no	calls an import (free)
+0x97bc3aa8	__ZN19ParseWhileLoopStackC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3aac	__ZN19ParseWhileLoopStackC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3ab0	__ZN19ParseWhileLoopStackC4Ev	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3abc	ParseWhileLoopStack::empty	16	not a C function of the rebuilt image	
+0x97bc3acc	ParseWhileLoopStack::push	76	not a C function of the rebuilt image	
+0x97bc3b18	ParseWhileLoopStack::pop	64	not a C function of the rebuilt image	
+0x97bc3b58	ParseWhileLoopStack::continueLabel	28	not a C function of the rebuilt image	
+0x97bc3b74	ParseWhileLoopStack::breakLabel	28	not a C function of the rebuilt image	
+0x97bc3b90	__ZN18ParseFunctionStackC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3b94	__ZN18ParseFunctionStackC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3b98	__ZN18ParseFunctionStackC4Ev	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc3ba4	ParseFunctionStack::empty	16	not a C function of the rebuilt image	
+0x97bc3bb4	ParseFunctionStack::push	88	not a C function of the rebuilt image	
+0x97bc3c0c	ParseFunctionStack::pop	80	not a C function of the rebuilt image	
+0x97bc3c5c	ParseFunctionStack::current	28	not a C function of the rebuilt image	
+0x97bc3c78	ParseFunctionStack::getCurrentNumParams	28	not a C function of the rebuilt image	
+0x97bc3c94	ParseFunctionStack::setCurrentNumParams	20	not a C function of the rebuilt image	
+0x97bc3ca8	ParseFunctionStack::getLastParamOpIndex	28	not a C function of the rebuilt image	
+0x97bc3cc4	ParseFunctionStack::setLastParamOpIndex	20	not a C function of the rebuilt image	
+0x97bc3cd8	ParseFunctionStack::getCurrentParamList	28	not a C function of the rebuilt image	
+0x97bc3cf4	ParseFunctionStack::setCurrentParamList	20	not a C function of the rebuilt image	
+0x97bc3d08	TPPStreamCompiler::getVertex	244	not a C function of the rebuilt image	
+0x97bc3dfc	TPPStreamCompiler::getPosition	240	not a C function of the rebuilt image	
+0x97bc3eec	TPPStreamCompiler::getMVP	248	not a C function of the rebuilt image	
+0x97bc3fe4	TPPStreamCompiler::newNodeFromOperand	460	not a C function of the rebuilt image	
+0x97bc41b0	TPPStreamCompiler::newTemporary	400	not a C function of the rebuilt image	
+0x97bc4340	TPPStreamCompiler::newAddressTemp	272	not a C function of the rebuilt image	
+0x97bc4450	TPPStreamCompiler::newReturnValue	352	not a C function of the rebuilt image	
+0x97bc45b0	TPPStreamCompiler::newParam	408	not a C function of the rebuilt image	
+0x97bc4748	TPPStreamCompiler::newIndirectOperandFromConstant	2092	not a C function of the rebuilt image	
+0x97bc4f74	TPPStreamCompiler::equalOperands	2416	not a C function of the rebuilt image	
+0x97bc58e4	TPPStreamCompiler::duplicateDestinationSource	636	not a C function of the rebuilt image	
+0x97bc5b60	TPPStreamCompiler::assignOperands	1892	not a C function of the rebuilt image	
+0x97bc62c4	TPPStreamCompiler::getArrayOffset	404	not a C function of the rebuilt image	
+0x97bc6458	TPPStreamCompiler::constructReplicate	640	not a C function of the rebuilt image	
+0x97bc66d8	TPPStreamCompiler::constructDiagonal	1452	not a C function of the rebuilt image	
+0x97bc6c84	TPPStreamCompiler::constructElement	1744	not a C function of the rebuilt image	
+0x97bc7354	TPPStreamCompiler::constructFromOperand	1620	not a C function of the rebuilt image	
+0x97bc79dc	TPPStreamCompiler::construct	296	not a C function of the rebuilt image	
+0x97bc7b04	TPPStreamCompiler::FinishScalerSelect	464	not a C function of the rebuilt image	
+0x97bc7cd4	TPPStreamCompiler::LastOperationIndex	36	not a C function of the rebuilt image	
+0x97bc7cf8	TPPStreamCompiler::AddOperation	100	not a C function of the rebuilt image	
+0x97bc7d5c	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	952	yes	
+0x97bc8114	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	88	yes	
+0x97bc816c	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	108	yes	
+0x97bc81d8	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	128	yes	
+0x97bc8258	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	188	yes	
+0x97bc8314	TPPStreamCompiler::getNewConstantSourceVar	472	not a C function of the rebuilt image	
+0x97bc84ec	TPPStreamCompiler::getConstantAsSourceVar	1296	not a C function of the rebuilt image	
+0x97bc89fc	TPPStreamCompiler::generateAddressLoad	256	not a C function of the rebuilt image	
+0x97bc8afc	TPPStreamCompiler::getOperandAsDestVar	76	not a C function of the rebuilt image	
+0x97bc8b48	TPPStreamCompiler::getOperandAsSourceVar	420	not a C function of the rebuilt image	
+0x97bc8cec	TPPStreamCompiler::removeOrphanedCompilerTemp	544	not a C function of the rebuilt image	
+0x97bc8f0c	TPPStreamCompiler::copyPropagateCompilerTemp	1476	not a C function of the rebuilt image	
+0x97bc94d0	TPPStreamCompiler::parseIntermediateTree	480	not a C function of the rebuilt image	
+0x97bc96b0	__ZN17TPPStreamCompilerC2E11EShLanguagei	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc96b4	__ZN17TPPStreamCompilerC1E11EShLanguagei	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc96b8	__ZN17TPPStreamCompilerC4E11EShLanguagei	284	no	atomic / cache / barrier instruction; calls an import (ZN14TPoolAllocatorC1Ebii)
+0x97bc97d4	__ZN17TPPStreamCompilerD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc97dc	__ZN17TPPStreamCompilerD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc97e4	__ZN17TPPStreamCompilerD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc97ec	__ZN17TPPStreamCompilerD4Ev	536	no	atomic / cache / barrier instruction; calls an import (PPStreamFree); calls an import (ZN13FunctionTableD1Ev)
+0x97bc9a04	TPPStreamCompiler::error	304	not a C function of the rebuilt image	
+0x97bc9b34	TPPStreamCompiler::warning	296	not a C function of the rebuilt image	
+0x97bc9c5c	TPPStreamCompiler::getSymbolTableString	196	not a C function of the rebuilt image	
+0x97bc9d20	TPPStreamCompiler::dumpSymbolTableInfo	220	not a C function of the rebuilt image	
+0x97bc9dfc	TPPStreamCompiler::reportStats	4	not a C function of the rebuilt image	
+0x97bc9e00	TPPStreamCompiler::reset	324	not a C function of the rebuilt image	
+0x97bc9f44	TPPStreamCompiler::compile	332	not a C function of the rebuilt image	
+0x97bca090	TPPStreamCompiler::getStatsString	108	not a C function of the rebuilt image	
+0x97bca0fc	TPPStreamCompiler::getPPStreamString	144	not a C function of the rebuilt image	
+0x97bca18c	TPPStreamCompiler::getShaderToProgramString	148	not a C function of the rebuilt image	
+0x97bca220	TPPStreamCompiler::getTableString	72	not a C function of the rebuilt image	
+0x97bca268	ConstructCompiler	72	no	calls an import (Znwm)
+0x97bca2b0	DeleteCompiler	24	yes	
+0x97bca2c8	GetBuiltInInitialSwizzle	748	yes	
+0x97bca5b4	GetBuiltInChunkForSymbol	8452	no	calls an import (PPStreamChunkCreateWithType); calls an import (ZNK11ParseSymbol14GetDirectIndexEj)
+0x97bcc6b8	GetChunkForSymbol	592	no	calls an import (PPStreamChunkCreateWithType); calls an import (Z21GetScalerWidthForTypet); calls an import (Z24GetPPStreamTypeForGLTypet)
+0x97bcc93c	__ZN13FunctionTableC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcc940	__ZN13FunctionTableC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcc944	__ZN13FunctionTableC4Ev	16	yes	
+0x97bcc954	__ZN13FunctionTableD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcc95c	__ZN13FunctionTableD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcc964	__ZN13FunctionTableD4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcc968	FunctionTable::clear	120	not a C function of the rebuilt image	
+0x97bcc9e0	FunctionTable::addFunction	284	not a C function of the rebuilt image	
+0x97bccafc	FunctionTable::removeFunction	168	not a C function of the rebuilt image	
+0x97bccba4	FunctionTable::setReturnVal	20	not a C function of the rebuilt image	
+0x97bccbb8	FunctionTable::setEmpty	20	not a C function of the rebuilt image	
+0x97bccbcc	FunctionTable::setNumParams	20	not a C function of the rebuilt image	
+0x97bccbe0	FunctionTable::setFirstOp	20	not a C function of the rebuilt image	
+0x97bccbf4	FunctionTable::setLastOp	20	not a C function of the rebuilt image	
+0x97bccc08	FunctionTable::updateForRemovingChunk	168	not a C function of the rebuilt image	
+0x97bcccb0	FunctionTable::findFunction	132	not a C function of the rebuilt image	
+0x97bccd34	FunctionTable::getFunctionName	16	not a C function of the rebuilt image	
+0x97bccd44	FunctionTable::getReturnVal	20	not a C function of the rebuilt image	
+0x97bccd58	FunctionTable::getEmpty	20	not a C function of the rebuilt image	
+0x97bccd6c	FunctionTable::getNumParams	20	not a C function of the rebuilt image	
+0x97bccd80	FunctionTable::getFirstOp	20	not a C function of the rebuilt image	
+0x97bccd94	FunctionTable::getLastOp	20	not a C function of the rebuilt image	
+0x97bccda8	FunctionTable::dump	4	not a C function of the rebuilt image	
+0x97bccdac	_InterpreterCreate	60	no	calls an import (calloc)
+0x97bccde8	_InterpreterFree	48	yes	
+0x97bcce18	_InterpreterInit	72	no	calls an import (InterpreterNoiseGeneratorInitialise); calls an import (InterpreterTextureSamplerCreate)
+0x97bcce60	_InterpreterShutdown	8	yes	
+0x97bcce68	_InterpreterAttachEmulatorContext	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bcce74	_InterpreterPackPixel	1208	no	calls an import (PPEmulatorFramebufferFormat)
+0x97bcd32c	_InterpreterUnpackPixel	428	no	calls an import (PPEmulatorFramebufferFormat)
+0x97bcd4d8	_InterpreterWriteDestination	1100	no	calls an import (isnanf)
+0x97bcd924	_InterpreterLoadSource	796	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bcdc40	_InterpreterTestCR	240	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bcdd50	_InterpreterEmulateOp	20820	no	calls an import (InterpreterNoiseGeneratorCalculate1D); calls an import (InterpreterNoiseGeneratorCalculate2D); calls an import (InterpreterNoiseGeneratorCalculate3D)
+0x97bd3068	_InterpreterWriteFinalFragmentToBuffer	376	no	calls an import (InterpreterRasterOpMachine_AlphaTest); calls an import (InterpreterRasterOpMachine_Blending); calls an import (InterpreterRasterOpMachine_BufferMask)
+0x97bd31e0	_InterpreterRun	1020	no	calls an import (InterpreterRasterOpMachine_DepthTest)
+0x97bd35dc	_InterpreterTextureSamplerCreate	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd35e8	_InterpreterTextureSamplerInitialise	16	yes	
+0x97bd35fc	_InterpreterTextureSamplerAttachGLDContext	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd3604	_InterpreterTextureSamplerSetProjectionEnabled	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd360c	_InterpreterTextureSamplerSetLodBiasEnabled	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd3614	_InterpreterTextureSamplerAttachDerivatives	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd3620	_InterpreterTextureSamplerSampleTexel1D	512	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd3820	_InterpreterTextureSamplerSampleTexel2D	512	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd3a20	_InterpreterTextureSamplerSampleTexel3D	512	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd3c28	_InterpreterTextureSamplerWrapCoordinate	528	yes	
+0x97bd3e38	_InterpreterTextureSamplerCalculateLambda1D	276	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd3f4c	_InterpreterTextureSamplerCalculateLambda2D	348	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd40a8	_InterpreterTextureSamplerCalculateLambda3D	360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd4210	_InterpreterTextureSamplerSampleTexel1DFromLevel	876	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd457c	_InterpreterTextureSamplerSampleTexel2DFromLevel	1196	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd4a28	_InterpreterTextureSamplerSampleTexel3DFromLevel	1768	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd5110	_InterpreterTextureSamplerSampleTexelRECTFromLevel	1056	yes	
+0x97bd5530	_InterpreterTextureSamplerLoadTexel1D	172	yes	
+0x97bd55dc	_InterpreterTextureSamplerLoadTexel2D	188	yes	
+0x97bd5698	_InterpreterTextureSamplerLoadTexel3D	204	yes	
+0x97bd5764	_InterpreterNoiseGeneratorCreate	60	yes	
+0x97bd57a0	_InterpreterNoiseGeneratorInitialise	280	yes	
+0x97bd58bc	_InterpreterNoiseGeneratorSmoothHermiteCurve	156	yes	
+0x97bd5958	_InterpreterNoiseGeneratorInterpolate	100	yes	
+0x97bd59bc	_InterpreterNoiseGeneratorInterpolatedNoise1D	476	yes	
+0x97bd5b98	_InterpreterNoiseGeneratorInterpolatedNoise2D	544	yes	
+0x97bd5db8	_InterpreterNoiseGeneratorInterpolatedNoise3D	784	yes	
+0x97bd60c8	_InterpreterNoiseGeneratorCalculate1D	240	yes	
+0x97bd61b8	_InterpreterNoiseGeneratorCalculate2D	248	yes	
+0x97bd62b0	_InterpreterNoiseGeneratorCalculate3D	256	yes	
+0x97bd63b4	_InterpreterRasterOpMachineCreate	60	no	calls an import (calloc)
+0x97bd63f0	_InterpreterRasterOpMachineInitialise	16	yes	
+0x97bd6404	_InterpreterRasterOpMachineAttachEmulatorContext	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd640c	_InterpreterRasterOpMachineAttachRuntimeCompiler	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd6414	_InterpreterRasterOpMachine_DepthTest	236	yes	
+0x97bd6520	_InterpreterRasterOpMachine_DepthAndStencilTest	732	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd683c	_InterpreterRasterOpMachine_AlphaTest	1548	no	calls an import (PPEmulatorFramebufferFormat)
+0x97bd6e88	_InterpreterRasterOpMachine_Blending	1252	no	calls an import (PPEmulatorFramebufferFormat)
+0x97bd7394	_InterpreterRasterOpMachine_LogicOp	1208	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd7874	_InterpreterRasterOpMachine_BufferMask	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd78f4	_InterpreterRasterOpMachineCalculateBlendingFactors	664	yes	
+0x97bd7bc8	_InterpreterRasterOpMachineUpdateStencilBuffer	212	yes	
+0x97bd7cbc	_glpRTCAddAChunk_97bd7cbc	48	yes	
+0x97bd7cec	_PPCRuntimeCompilerCreate	88	no	calls an import (PPCRasterOpMachineAttachRuntimeCompiler); calls an import (PPCRasterOpMachineInitialise); calls an import (PPCTextureSamplerCreate)
+0x97bd7d44	_PPCRuntimeCompilerInitialise	76	no	calls an import (PPCTextureSamplerInitialise)
+0x97bd7d90	_PPCRuntimeCompilerInitialiseRegisterAllocator	156	yes	
+0x97bd7e2c	_PPCRuntimeCompilerInitialiseVariableInfo	224	no	calls an import (calloc); calls an import (free)
+0x97bd7f0c	_PPCRuntimeCompilerFree	80	no	calls an import (PPCTextureSamplerFree); calls an import (free)
+0x97bd7f5c	_PPCRuntimeCompilerOutputAllRegisters	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd7f60	_PPCRuntimeCompilerAttachEmulatorContext	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd7f6c	_PPCRuntimeCompilerAttachEmulatorProgram	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bd7f74	_PPCRuntimeCompilerSetOptionFlags	16	yes	
+0x97bd7f84	_PPCRuntimeCompilerCalculateIndirectAddress	224	yes	
+0x97bd8064	_PPCRuntimeCompilerLoadRegister	2736	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd8b14	_PPCRuntimeCompilerBackupRegister	2144	yes	
+0x97bd9374	_PPCRuntimeCompilerSaveAllTemporariesToMemory	120	yes	
+0x97bd93ec	_PPCRuntimeCompilerSaveRegisterToMemory	1400	no	calls an import (PPEmulatorVariableMaskFromSwizzle)
+0x97bd9964	_PPCRuntimeCompilerDirtyRegister	112	yes	
+0x97bd99d4	_PPCRuntimeCompilerDirtyRegistersWithData	436	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd9b88	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	136	yes	
+0x97bd9c10	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	136	yes	
+0x97bd9c98	_PPCRuntimeCompilerDirtyRegistersContainingTemps	136	yes	
+0x97bd9d20	_PPCRuntimeCompilerDirtyRegistersContainingParams	136	yes	
+0x97bd9da8	_PPCRuntimeCompilerSetRegister	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bd9e3c	_PPCRuntimeCompilerRegisterContainsData	560	yes	
+0x97bda06c	_PPCRuntimeCompilerGetBaseIndexInRegister	16	yes	
+0x97bda07c	_PPCRuntimeCompilerGetOffsetInRegister	88	yes	
+0x97bda0d4	_PPCRuntimeCompilerBuildTransferSwizzle	104	yes	
+0x97bda13c	_PPCRuntimeCompilerSwizzleRegisterAV	2444	yes	
+0x97bdaac8	_PPCRuntimeCompilerFindVariableInfo	88	yes	
+0x97bdab20	_PPCRuntimeCompilerLoadSourceNO	348	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bdac7c	_PPCRuntimeCompilerLoadSourceAV	268	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bdad88	_PPCRuntimeCompilerWriteDestinationNO	368	yes	
+0x97bdaef8	_PPCRuntimeCompilerWriteDestinationAV	748	no	calls an import (PPEmulatorVariableSwizzleFromMask)
+0x97bdb1e4	_PPCRuntimeCompilerTestConditionRegisterAV	576	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bdb444	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	568	no	calls an import (PPCRasterOpMachine_AlphaTestRTCAV); calls an import (PPCRasterOpMachine_BlendingRTCAV); calls an import (PPCRasterOpMachine_BufferMaskRTCAV)
+0x97bdb67c	_PPCRuntimeCompilerWritePrologNO	828	yes	
+0x97bdb9b8	_PPCRuntimeCompilerWriteEpilogNO	352	yes	
+0x97bdbb18	_PPCRuntimeCompilerWritePrologAV	1132	no	calls an import (PPEmulatorFramebufferFormat)
+0x97bdbf84	_PPCRuntimeCompilerWriteEpilogAV	304	yes	
+0x97bdc0b4	_PPCRuntimeCompilerStride	548	yes	
+0x97bdc2d8	_PPCRuntimeCompilerLoop	92	yes	
+0x97bdc334	_PPCRuntimeCompilerCompileNO	5348	no	calls an import (PPCTextureSamplerAttachGLDContext); calls an import (PPCTextureSamplerSampleTexel2DRTCNO); calls an import (PPCTextureSamplerSampleTexelRECTRTCNO)
+0x97bdda38	_PPCRuntimeCompilerCompileAV	15728	no	calls an import (PPCNoiseGeneratorCalculate1DAVRTC); calls an import (PPCNoiseGeneratorCalculate2DAVRTC); calls an import (PPCNoiseGeneratorCalculate3DAVRTC)
+0x97be1be0	_PPCRuntimeCompilerGetCompiledResult	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1be8	_PPCTextureSamplerCreate	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1bf4	_PPCTextureSamplerInitialise	16	yes	
+0x97be1c08	_PPCTextureSamplerAttachGLDContext	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1c10	_PPCTextureSamplerSetProjectionEnabled	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1c18	_PPCTextureSamplerSetLodBiasEnabled	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1c20	_PPCTextureSamplerAttachDerivatives	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1c2c	_glpRTCAddAChunk_97be1c2c	48	yes	
+0x97be1c5c	_PPCTextureSamplerSampleTexel1DRTCNO	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1c64	_PPCTextureSamplerSampleTexel2DRTCNO	560	yes	
+0x97be1e94	_PPCTextureSamplerSampleTexel3DRTCNO	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be1e9c	_PPCTextureSamplerSampleTexelRECTRTCNO	488	yes	
+0x97be2084	_PPCTextureSamplerWrapCoordinates1DRTCAV	144	yes	
+0x97be2114	_PPCTextureSamplerWrapCoordinates2DRTCAV	212	yes	
+0x97be21e8	_PPCTextureSamplerWrapCoordinates3DRTCAV	328	yes	
+0x97be2330	_PPCTextureSamplerSampleTexel1DRTCAV	780	yes	
+0x97be263c	_PPCTextureSamplerSampleTexel2DRTCAV	780	yes	
+0x97be2948	_PPCTextureSamplerSampleTexel3DRTCAV	780	yes	
+0x97be2c58	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	960	yes	
+0x97be3018	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	1172	yes	
+0x97be34ac	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	1612	yes	
+0x97be3af8	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	1084	yes	
+0x97be3f34	_PPCNoiseGeneratorCreate	56	no	calls an import (malloc)
+0x97be3f6c	_PPCNoiseGeneratorInitialise	280	yes	
+0x97be4088	_glpRTCAddAChunk_97be4088	48	yes	
+0x97be40b8	_PPCNoiseGeneratorCalculate1DAVRTC	228	yes	
+0x97be419c	_PPCNoiseGeneratorCalculate2DAVRTC	228	yes	
+0x97be4280	_PPCNoiseGeneratorCalculate3DAVRTC	228	yes	
+0x97be4364	_PPCNoiseGeneratorCalculate4DAVRTC	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be436c	_PPCRasterOpMachineCreate	60	no	calls an import (calloc)
+0x97be43a8	_PPCRasterOpMachineInitialise	16	yes	
+0x97be43bc	_PPCRasterOpMachineAttachEmulatorContext	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be43c4	_PPCRasterOpMachineAttachRuntimeCompiler	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be43cc	_PPCRasterOpMachine_DepthTestRTCAV	272	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97be44fc	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	1172	yes	
+0x97be49d0	_PPCRasterOpMachine_AlphaTestRTCAV	616	no	calls an import (PPEmulatorFramebufferFormat)
+0x97be4c58	_PPCRasterOpMachine_BlendingRTCAV	888	no	calls an import (PPEmulatorFramebufferFormat)
+0x97be4ff8	_PPCRasterOpMachine_LogicOpRTCAV	520	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97be5234	_PPCRasterOpMachine_BufferMaskRTCAV	208	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97be5304	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	400	yes	
+0x97be54d0	_PPCRasterOpMachineUpdateStencilBufferRTCAV	468	yes	
+0x97be56c4	_PPCConstantsAndScratchCreate	56	yes	
+0x97be5700	_PPCConstantsAndScratchInitialise	1196	yes	
+0x97be5bac	_PPEmulatorAttachProgram	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be5bb4	_PPEmulatorGetEmulationLevel	24	yes	
+0x97be5bcc	_PPEmulatorFramebufferFormat	24	yes	
+0x97be5be4	_PPEmulatorEmulateSingleOp	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be5bec	_PPEmulatorRun	116	yes	
+0x97be5c60	_PPEmulatorBuild	576	no	calls an import (PPCRuntimeCompilerAttachEmulatorContext); calls an import (PPCRuntimeCompilerAttachEmulatorProgram); calls an import (PPCRuntimeCompilerCompileAV)
+0x97be5ea0	_PPEmulatorRunNoop	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97be5ea8	_PPEmulatorVariableSwizzleFromMask	108	yes	
+0x97be5f14	_PPEmulatorVariableMaskFromSwizzle	68	yes	
+0x97be5f58	_ncpy_97be5f58	144	yes	
+0x97be5fe8	_glpWriteSizeTypePrecision	676	yes	
+0x97be62a0	_glpWritePrecision	224	yes	
+0x97be6380	_glpWriteOperandSize	236	yes	
+0x97be646c	_glpWriteSizeType	472	yes	
+0x97be6658	_glpWriteClampSat	216	yes	
+0x97be6730	_glpWriteDestinationOperand_97be6730	2384	yes	
+0x97be70a0	_glpWriteAddressOperand	820	yes	
+0x97be73d4	_glpWriteSourceOperandType	1476	yes	
+0x97be79ac	_glpWriteSourceOperandSwizzle	488	yes	
+0x97be7b94	_glpWriteSourceOperandExtendedSwizzle	1024	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97be7fc0	_glpWriteSourceOperand_97be7fc0	380	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97be813c	_glpWriteBranchOperand	796	no	calls an import (sprintf)
+0x97be8478	_glpWriteTextureOperand_97be8478	736	yes	
+0x97be8778	_glpDisassemble1Op	4416	no	calls an import (sprintf)
+0x97be9b20	_isTempArrayStart	96	yes	
+0x97be9b80	_isParamArrayStart_97be9b80	96	yes	
+0x97be9be0	_InsertLabel	212	yes	
+0x97be9cb4	_adjustAllocation_97be9cb4	124	no	calls an import (realloc)
+0x97be9d30	_glpPPDisassemble	27772	no	calls an import (free); calls an import (glp_dtostr); calls an import (malloc)
+0x97bf0d2c	_handleDigit_97bf0d2c	112	yes	
+0x97bf0d9c	_PPStreamChunkCreateWithType	116	no	calls an import (calloc)
+0x97bf0e10	_PPStreamChunkCompare	212	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97bf0f14	_PPStreamChunkListInsertChunkBeforeChunk	84	yes	
+0x97bf0f68	_PPStreamChunkListInsertChunkAfterChunk	116	yes	
+0x97bf0fdc	_PPStreamChunkListRemoveChunkNoFree	88	yes	
+0x97bf1034	_PPStreamChunkListCompare	132	yes	
+0x97bf10b8	_PPStreamDuplicate	636	yes	
+0x97bf1334	_PPStreamAddTempUsageArray	92	no	calls an import (calloc)
+0x97bf1390	_PPStreamAddAddressUsage	84	yes	
+0x97bf13e4	_PPStreamAddParamBindingArray	92	yes	
+0x97bf1440	_PPStreamInsertOperationBeforeChunk	288	no	calls an import (calloc)
+0x97bf1560	_PPStreamInsertOperationAfterChunk	236	no	calls an import (calloc)
+0x97bf164c	_PPStreamAddLabel	128	no	calls an import (calloc)
+0x97bf16cc	_PPStreamRemoveLabelsAtOperationIndex	96	yes	
+0x97bf172c	_PPStreamAddRasterOp	92	no	calls an import (calloc)
+0x97bf1788	_PPStreamAttachStream	1212	no	calls an import (calloc)
+0x97bf1c44	_PPStreamCompare	328	yes	
+0x97bf1d8c	_PPStreamRenumberOperandIndices	332	yes	
+0x97bf1ed8	_renumberTempArrayIndices	56	yes	
+0x97bf1f10	_renumberParamArrayIndices	56	yes	
+0x97bf1f48	_renumberLabels	72	yes	
+0x97bf1f90	_renumberTargets	148	yes	
+0x97bf20a8	_PPStreamChangeBranchTargets	84	yes	
+0x97bf20fc	_PPStreamPackIndices	612	yes	
+0x97bf2360	_PPStreamSortParamConstants	168	yes	
+0x97bf2408	_PPStreamResolveBranches	340	yes	
+0x97bf255c	_PPStreamGetArray	152	yes	
+0x97bf25f4	_PPStreamFindDuplicateChunk	240	yes	
+0x97bf2714	_PPStreamRemoveOperation	192	yes	
+0x97bf27d4	_adjustAllocation_97bf27d4	124	no	calls an import (realloc)
+0x97bf2850	_ncpy_97bf2850	144	yes	
+0x97bf28e0	_glpSourceSign	180	yes	
+0x97bf2994	_glpSourceType	1080	yes	
+0x97bf2dcc	_glpSourceComponents	504	yes	
+0x97bf2fc4	_glpWriteComponentsWithDestinationSwizzle	244	yes	
+0x97bf30b8	_glpWriteSourceOperand_97bf30b8	128	yes	
+0x97bf3138	_glpWriteDestinationMask	1312	yes	
+0x97bf3658	_glpWriteDestinationOperand_97bf3658	348	yes	
+0x97bf37b4	_glpWriteTextureOperand_97bf37b4	760	yes	
+0x97bf3acc	_glpDisassemble2Op	56112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c017c0	_isParamArrayStart_97c017c0	96	yes	
+0x97c01820	_glpPPShaderToProgramString	15972	no	calls an import (free); calls an import (glp_dtostr); calls an import (malloc)
+0x97c057a4	_glpPPShaderToProgram	472	no	calls an import (PPParserAttachStream); calls an import (PPParserAttachString); calls an import (PPParserCreate)
+0x97c0597c	_glpFreePPShaderToProgram	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c05988	_glpUniformToFloat	344	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c05ae0	_glpUniformsToFloats	144	yes	
+0x97c05b70	_handleDigit_97c05b70	112	yes	
+0x97c05be0	_clearFuncInfoList	68	yes	
+0x97c05c24	_UpdateFunctionIndex	60	yes	
+0x97c05c60	_RecordFunctionCall	188	no	calls an import (free); calls an import (malloc)
+0x97c05d1c	_RecordFunctionEdge	72	yes	
+0x97c05d64	_ClearJumpTable	92	no	calls an import (free)
+0x97c05dc0	_AddOpToJumpTable	396	no	calls an import (free); calls an import (malloc)
+0x97c05fd0	_UpdateFunctionTable	68	yes	
+0x97c06014	_FindFunctionIndex	48	yes	
+0x97c06044	_InlineFunctionsBranch	1488	no	calls an import (PPStreamChangeBranchTargets); calls an import (PPStreamChunkListRemoveChunk); calls an import (PPStreamInsertOperationAfterChunk)
+0x97c06614	_IsParamSampler	84	no	calls an import (PPStreamChunkListChunkAtIndex)
+0x97c06668	_GetStreamArray_97c06668	152	yes	
+0x97c06700	_FindMatchingAvailableCopy	164	yes	
+0x97c067a4	_UpdateACUsingAvailableCopyTable	444	yes	
+0x97c06960	_AddToAvailableCopyTable	1196	no	calls an import (free); calls an import (malloc)
+0x97c06e0c	_FindInAvailableCopyTableSource	304	yes	
+0x97c06f3c	_CheckRemoveAvailableCopyTable	756	yes	
+0x97c07230	_ReplaceUsingAvailableCopyTable	580	yes	
+0x97c07474	_RemoveFromAvailableCopyTable	152	yes	
+0x97c0750c	_CopyPropagateOperation	80	yes	
+0x97c0755c	_EndLocalAvailableCopyList	132	yes	
+0x97c075e0	_LocalCopyPropagator	236	no	calls an import (free); calls an import (malloc)
+0x97c076cc	_EmbedSamplerParamIndices	144	yes	
+0x97c0775c	_LinearizeFixOutputReads	916	no	calls an import (PPStreamAddTempUsage); calls an import (PPStreamChangeBranchTargets); calls an import (PPStreamChunkListGetMaxIndex)
+0x97c07af0	_glpPPShaderLinearizeStreamMgr	320	no	calls an import (Blockify); calls an import (BuildGenKill); calls an import (BuildInterferenceSets)
+0x97c07c30	_glpPPShaderLinearize	156	no	calls an import (PPStreamAttachStream); calls an import (PPStreamCreate); calls an import (PPStreamFree)
+0x97c07ccc	_glpFreePPShaderLinearize	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c07cd8	_BitSetNew	104	yes	
+0x97c07d40	_BitSetClone	64	yes	
+0x97c07d80	_BitSetFree	52	no	calls an import (free)
+0x97c07db4	_BitSetGetSizeInBits	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c07dbc	_BitSetGetEquals	88	yes	
+0x97c07e14	_BitSetSetEquals	88	yes	
+0x97c07e6c	_BitSetClearEquals	88	yes	
+0x97c07ec4	_BitSetSetRangeEquals	84	yes	
+0x97c07f18	_BitSetSetRangeEqualsInternal	100	yes	
+0x97c07f7c	_BitSetExpandEquals	60	yes	
+0x97c07fb8	_BitSetSetSizeEquals	112	yes	
+0x97c08030	_BitSetNextSetBit	136	yes	
+0x97c080b8	_BitSetAndEquals	128	yes	
+0x97c08138	_BitSetAndNotEquals	128	yes	
+0x97c081b8	_BitSetOrEquals	128	yes	
+0x97c08238	_BitSetXorEquals	128	yes	
+0x97c082b8	_BitSetCopyEquals	120	yes	
+0x97c08330	_BitSetEqualsTest	144	yes	
+0x97c083c0	_BitSetAndTest	136	yes	
+0x97c08448	_BitSetAndNotTest	136	yes	
+0x97c084d0	_BitSetOrTest	136	yes	
+0x97c08558	_BitSetXorTest	136	yes	
+0x97c085e0	_defaultHashFunction	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c085e4	_defaultEqualsFunction	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c085ec	_HashSetNew	192	no	calls an import (malloc)
+0x97c086ac	_HashSetFree	132	no	calls an import (free)
+0x97c08730	_HashSetAdd	272	no	calls an import (realloc); indirect call (driver context / vtable / callback)
+0x97c08840	_HashSetGet	176	no	indirect call (driver context / vtable / callback)
+0x97c088f0	_HashSetRemove	184	no	indirect call (driver context / vtable / callback)
+0x97c089a8	_HashSetIteratorSetup	24	yes	
+0x97c089c0	_HashSetIteratorNext	160	yes	
+0x97c08a60	_HashTableNew	84	no	calls an import (HashSetNew); calls an import (malloc)
+0x97c08ab4	_HashTableFree	160	no	calls an import (HashSetFree); calls an import (free)
+0x97c08b54	_HashTableAdd	336	no	calls an import (malloc); calls an import (realloc); indirect call (driver context / vtable / callback)
+0x97c08ca4	_HashTableGet	184	no	indirect call (driver context / vtable / callback)
+0x97c08d5c	_HashTableRemove	196	no	calls an import (free); indirect call (driver context / vtable / callback)
+0x97c08e20	_GetValidArgs	32	yes	
+0x97c08e40	_GetStreamArray_97c08e40	164	yes	
+0x97c08ee4	_GetRegisterIndicies	168	yes	
+0x97c08f8c	_GetRegister	160	yes	
+0x97c09040	_BuildGenKill	364	no	calls an import (BitSetGetEquals); calls an import (BitSetNew); calls an import (BitSetSetEquals)
+0x97c091ac	_BuildLiveOut	240	no	calls an import (BitSetAndNotEquals); calls an import (BitSetClone); calls an import (BitSetEqualsTest)
+0x97c0929c	_BuildInterferenceSets	436	no	calls an import (BitSetClearEquals); calls an import (BitSetClone); calls an import (BitSetFirstSetBit)
+0x97c09450	_RegistersMerge	612	no	calls an import (BitSetOrEquals); calls an import (free); calls an import (malloc)
+0x97c096b4	_DeadCodeEliminationSimple	440	no	calls an import (BitSetClearEquals); calls an import (BitSetClone); calls an import (BitSetFree)
+0x97c0986c	_RegistersReInterfere	140	no	calls an import (BitSetClearEquals); calls an import (BitSetFirstSetBit); calls an import (BitSetNextSetBit)
+0x97c098f8	_RegistersReplace	568	yes	
+0x97c09b30	_RegistersCleanup	628	no	calls an import (PPStreamChunkListRemoveChunk)
+0x97c09db8	_RegisterIsMergeable	40	yes	
+0x97c09de0	_RegisterCanMerge	168	yes	
+0x97c09e88	_RegisterIsFixed	40	yes	
+0x97c09eb0	_RegisterVectorCanMerge	136	yes	
+0x97c09f38	_RegisterVectorIsFixed	116	yes	
+0x97c09fac	_RegisterAdd	232	no	calls an import (realloc)
+0x97c0a094	_RegisterFree	16	yes	
+0x97c0a0a4	_InstructionAdd	1324	no	calls an import (malloc); calls an import (realloc)
+0x97c0a65c	_InstructionFree	88	no	calls an import (free)
+0x97c0a6b4	_BlockAdd	160	yes	
+0x97c0a754	_BlockFree	236	yes	
+0x97c0a840	_RegistersInitialize	104	no	calls an import (BitSetNew); calls an import (BitSetSetEquals)
+0x97c0a8a8	_Registerify	424	yes	
+0x97c0aa50	_RegistersFree	124	yes	
+0x97c0aacc	_GetOrAddBlock	148	yes	
+0x97c0ab60	_GetBlockFrom	84	yes	
+0x97c0abb4	_GetBlock	36	yes	
+0x97c0abd8	_Blockify	752	yes	
+0x97c0b054	_BlockAddSuccessor	144	yes	
+0x97c0b0e4	_BlockAddPredecessor	16	yes	
+0x97c0b0f4	_BlocksFree	124	yes	
+0x97c0b170	_ProgramNew	152	no	calls an import (malloc)
+0x97c0b208	_ProgramFree	76	no	calls an import (free)
+0x97c0b254	_FlattenIfs	468	yes	
+0x97c0b4ac	_regEqualsFunction	36	yes	
+0x97c0b4d0	_AddTempRegister	128	no	calls an import (PPStreamAddTempUsage); calls an import (PPStreamChunkListGetMaxIndex)
+0x97c0b550	_AddConstantParam	436	no	calls an import (PPStreamAddConstant); calls an import (PPStreamAddParamBinding); calls an import (PPStreamChunkListChunkAtIndex)
+0x97c0b704	_GetRegisterTypeInfo	544	no	calls an import (PPStreamChunkListChunkAtIndex)
+0x97c0b938	_FlattenIf	3384	no	calls an import (HashSetAdd); calls an import (HashSetFree); calls an import (HashSetIteratorNext)
+0x97c0c670	_IsBadUsage	208	yes	
+0x97c0c740	_ClearDestedOpRegisters	220	yes	
+0x97c0c81c	_ClearDestedRegisters	92	yes	
+0x97c0c878	_ClearRegisterState	100	no	calls an import (HashSetIteratorNext); calls an import (HashSetIteratorSetup); calls an import (HashSetRemove)
+0x97c0c8dc	_EmulateOp	8892	no	calls an import (HashSetAdd); calls an import (HashSetGet); calls an import (PPStreamChunkListChunkAtIndex)
+0x97c0efd8	_UpdateScope	96	yes	
+0x97c0f094	_GetOpRegs	240	yes	
+0x97c0f184	_DetectConstantLoopsSimple	2520	no	calls an import (PPStreamInsertOperationBeforeChunk); calls an import (PPStreamRemoveOperation)
+0x97c0fb5c	_UnrollConstantLoopsSimple	1808	no	calls an import (HashSetFree); calls an import (HashSetGet); calls an import (HashSetNew)
+0x97c102e8	_instructionIndexHashFunction	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c102f4	_UnrollConstantLoopSimple	596	no	calls an import (HashTableAdd); calls an import (HashTableFree); calls an import (HashTableGet)
+0x97c10548	_RepifyConstantLoopSimple	384	no	calls an import (HashSetFree); calls an import (HashSetGet); calls an import (HashSetNew)
+0x97c106c8	_ConstantPropagateFold	536	no	calls an import (HashSetFree); calls an import (HashSetGet); calls an import (HashSetNew)
+0x97c108e0	_glpDCBAlloc	68	no	calls an import (malloc)
+0x97c10924	_glpDCBRealloc	256	no	calls an import (realloc)
+0x97c10a24	_glpDCBFree	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c10a30	_PPParserMacroCreateFromMacro	200	no	calls an import (calloc)
+0x97c10af8	_PPParserIdentifierCreateFromIdentifier	100	yes	
+0x97c10b5c	_PPParserScopeCreateFromScope	172	no	calls an import (calloc)
+0x97c10c08	_PPParserInitFromParent	16	yes	
+0x97c10c18	_PPParserInherit	44	yes	
+0x97c10c44	_PPParserDeclareNVAddressRegisters	92	yes	
+0x97c10ca0	_PPParserParseBlock	236	yes	
+0x97c10d8c	_PPParserParseDefaultArray	240	yes	
+0x97c10e7c	_PPParserParseRangeArray	320	yes	
+0x97c10fbc	_PPParserParseIndirectArray	620	yes	
+0x97c11228	_PPParserParseAddressDeclaration	340	yes	
+0x97c1137c	_PPParserParseBranchLabel	68	yes	
+0x97c113c0	_PPParserParseLabel	256	no	calls an import (PPStreamAddLabel)
+0x97c114c0	_PPParserParseAddressDestination	348	yes	
+0x97c1161c	_PPParserParseBranchCondition	972	yes	
+0x97c119e8	_PPParserParseAddressSourceVar	140	yes	
+0x97c11a74	_PPParserParseMacroDeclaration	720	no	calls an import (malloc)
+0x97c11d44	_PPParserExpandMacro	664	no	calls an import (calloc); calls an import (free); calls an import (malloc)
+0x97c11fdc	_PPParserBuildErrorString	912	yes	
+0x97c12464	_pow_10	156	yes	
+0x97c12500	_glp_strtod	824	yes	
+0x97c12838	_glp_dtostr	1096	no	calls an import (round)
+0x97c12c80	std::__throw_bad_exception	68	not a C function of the rebuilt image	
+0x97c12cc4	std::__throw_bad_alloc	68	not a C function of the rebuilt image	
+0x97c12d08	std::__throw_bad_cast	68	not a C function of the rebuilt image	
+0x97c12d4c	std::__throw_bad_typeid	68	not a C function of the rebuilt image	
+0x97c12d90	std::__throw_logic_error	132	not a C function of the rebuilt image	
+0x97c12e18	std::__throw_domain_error	132	not a C function of the rebuilt image	
+0x97c12ea0	std::__throw_invalid_argument	132	not a C function of the rebuilt image	
+0x97c12f28	std::__throw_length_error	132	not a C function of the rebuilt image	
+0x97c12fb0	std::__throw_out_of_range	132	not a C function of the rebuilt image	
+0x97c13038	std::__throw_runtime_error	132	not a C function of the rebuilt image	
+0x97c130c0	std::__throw_range_error	132	not a C function of the rebuilt image	
+0x97c13148	std::__throw_overflow_error	132	not a C function of the rebuilt image	
+0x97c131d0	std::__throw_underflow_error	132	not a C function of the rebuilt image	
+0x97c13258	__ZNKSs7_M_dataEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13260	__ZNSs7_M_dataEPc	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1326c	__ZNKSs6_M_repEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13278	__ZNKSs9_M_ibeginEv	12	yes	
+0x97c13284	__ZNKSs4sizeEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13290	__ZNKSs7_M_iendEv	20	yes	
+0x97c132a4	__ZNKSs4_Rep12_M_is_leakedEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c132b0	__ZNSs7_M_leakEv	20	yes	
+0x97c132c4	std::string::_M_check	112	not a C function of the rebuilt image	
+0x97c13334	__ZNKSs7_M_foldEmm	100	yes	
+0x97c13398	__ZNSs13_S_copy_charsEPcS_S_	36	yes	
+0x97c133bc	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_	36	yes	
+0x97c133e0	__ZNSs13_S_copy_charsEPcPKcS1_	36	yes	
+0x97c13404	__ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_	36	yes	
+0x97c13428	__ZNKSs4_Rep12_M_is_sharedEv	24	yes	
+0x97c13440	__ZNKSs8capacityEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1344c	__ZNKSs13get_allocatorEv	4	yes	
+0x97c13450	__ZNSs4_Rep10_M_refdataEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13458	__ZNSs4_Rep10_M_disposeERKSaIcE	32	no	atomic / cache / barrier instruction
+0x97c13478	__ZNSs4_Rep15_M_set_sharableEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13484	__ZNSs9_M_mutateEmmm	340	yes	
+0x97c135dc	__ZNSs4_Rep13_M_set_leakedEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c135e8	std::string::_M_leak_hard	84	not a C function of the rebuilt image	
+0x97c1363c	__ZNSs12_S_empty_repEv	28	yes	
+0x97c13658	__ZNSsC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1365c	__ZNSsC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13660	__ZNSs12_Alloc_hiderC2EPcRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13664	__ZNSs12_Alloc_hiderC1EPcRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13668	__ZNSs12_Alloc_hiderC4EPcRKSaIcE	8	yes	
+0x97c13670	__ZNSs4_Rep10_M_refcopyEv	28	no	atomic / cache / barrier instruction
+0x97c1368c	__ZNSsC4Ev	84	yes	
+0x97c136e0	__ZNSsC2ERKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c136e4	__ZNSsC1ERKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c136e8	__ZNSsC4ERKSaIcE	76	yes	
+0x97c13734	__ZNSsC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13738	__ZNSsC1ERKSs	4	yes	
+0x97c1373c	__ZNSs4_Rep7_M_grabERKSaIcES2_	48	no	atomic / cache / barrier instruction
+0x97c1376c	__ZNSsC4ERKSs	152	no	atomic / cache / barrier instruction
+0x97c13808	__ZNSsC2ERKSsmm	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1380c	__ZNSsC1ERKSsmm	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13810	__ZNSsC4ERKSsmm	120	yes	
+0x97c1388c	__ZNSsC2ERKSsmmRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13890	__ZNSsC1ERKSsmmRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13894	__ZNSsC4ERKSsmmRKSaIcE	124	yes	
+0x97c13910	__ZNSsC2EPKcmRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13914	__ZNSsC1EPKcmRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13918	__ZNSsC4EPKcmRKSaIcE	80	yes	
+0x97c13968	__ZNSsC2EPKcRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1396c	__ZNSsC1EPKcRKSaIcE	4	yes	
+0x97c13970	__ZNSsC4EPKcRKSaIcE	104	yes	
+0x97c139d8	__ZNSsC2EmcRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c139dc	__ZNSsC1EmcRKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c139e0	__ZNSsC4EmcRKSaIcE	76	yes	
+0x97c13a2c	__ZNSsD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13a34	__ZNSsD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13a3c	__ZNSsD4Ev	92	yes	
+0x97c13a98	__ZNSsaSERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13a9c	__ZNKSs8max_sizeEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c13aa8	__ZNSs6assignEPKcm	252	no	calls an import (ZSt20__throw_length_errorPKc)
+0x97c13ba4	__ZNSs6assignEPKc	260	no	calls an import (ZSt20__throw_length_errorPKc)
+0x97c13ca8	__ZNSsaSEPKc	260	no	calls an import (ZSt20__throw_length_errorPKc)
+0x97c13dac	__ZNSs6assignEmc	100	yes	
+0x97c13e10	__ZNSsaSEc	96	yes	
+0x97c13e70	__ZNSs5beginEv	64	yes	
+0x97c13eb0	__ZNKSs5beginEv	12	yes	
+0x97c13ebc	__ZNSs3endEv	72	yes	
+0x97c13f04	__ZNKSs3endEv	20	yes	
+0x97c13f18	__ZNSs6rbeginEv	60	yes	
+0x97c13f54	__ZNKSs6rbeginEv	60	yes	
+0x97c13f90	__ZNSs4rendEv	60	yes	
+0x97c13fcc	__ZNKSs4rendEv	60	yes	
+0x97c14008	__ZNKSs6lengthEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c14014	__ZNSs7replaceEmmPKcm	316	yes	
+0x97c14150	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	344	yes	
+0x97c142a8	__ZNSs5eraseEmm	376	no	calls an import (ZSt20__throw_length_errorPKc); calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c14420	__ZNSs6resizeEmc	448	no	calls an import (ZSt20__throw_length_errorPKc); calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c145e0	__ZNSs6resizeEm	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c145e8	__ZNSs7reserveEm	224	yes	
+0x97c146cc	__ZNSs5clearEv	20	yes	
+0x97c146e0	__ZNKSs5emptyEv	20	yes	
+0x97c146f4	__ZNKSsixEm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c14700	__ZNSsixEm	56	yes	
+0x97c14738	__ZNKSs2atEm	88	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c14790	__ZNSs2atEm	96	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c147f0	__ZNSspLERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c147f4	__ZNSs6appendEPKc	64	yes	
+0x97c14834	__ZNSspLEPKc	64	yes	
+0x97c14874	__ZNSspLEc	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c14880	__ZNSs6appendERKSs	164	yes	
+0x97c14924	__ZNSs6appendERKSsmm	216	yes	
+0x97c149fc	__ZNSs6appendEPKcm	132	yes	
+0x97c14a80	__ZNSs6appendEmc	128	yes	
+0x97c14b00	std::string::push_back	96	not a C function of the rebuilt image	
+0x97c14b60	__ZNSs6assignERKSs	180	no	atomic / cache / barrier instruction
+0x97c14c18	__ZNSs6assignERKSsmm	120	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c14c90	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	16	yes	
+0x97c14ca0	__ZNSs6insertEmPKcm	332	yes	
+0x97c14dec	__ZNSs6insertEmRKSsmm	388	no	calls an import (ZSt20__throw_length_errorPKc); calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c14f70	__ZNSs6insertEmRKSs	332	no	calls an import (ZSt20__throw_length_errorPKc); calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c150bc	__ZNSs6insertEmPKc	72	yes	
+0x97c15104	__ZNSs6insertEmmc	92	yes	
+0x97c15160	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	148	yes	
+0x97c151f4	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	128	yes	
+0x97c15274	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	132	yes	
+0x97c152f8	__ZNSs7replaceEmmRKSs	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15304	__ZNSs7replaceEmmRKSsmm	136	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c1538c	__ZNSs7replaceEmmPKc	80	yes	
+0x97c153dc	__ZNSs7replaceEmmmc	120	yes	
+0x97c15454	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	96	yes	
+0x97c154b4	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	96	yes	
+0x97c15514	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc	80	yes	
+0x97c15564	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	180	yes	
+0x97c15618	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_	96	yes	
+0x97c15678	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	96	yes	
+0x97c156d8	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_	96	yes	
+0x97c15738	std::string::_S_construct	140	not a C function of the rebuilt image	
+0x97c157c4	std::string::copy	132	not a C function of the rebuilt image	
+0x97c15848	__ZNSs4swapERSs	140	yes	
+0x97c158d4	__ZNKSs5c_strEv	48	yes	
+0x97c15904	__ZNKSs4dataEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1590c	__ZNKSs4findEPKcmm	128	yes	
+0x97c1598c	__ZNKSs4findERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15998	__ZNKSs4findEPKcm	72	yes	
+0x97c159e0	__ZNKSs4findEcm	96	no	calls an import (memchr)
+0x97c15a40	__ZNKSs5rfindERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15a4c	__ZNKSs5rfindEPKcmm	148	yes	
+0x97c15ae0	__ZNKSs5rfindEPKcm	72	yes	
+0x97c15b28	__ZNKSs5rfindEcm	92	yes	
+0x97c15b84	__ZNKSs13find_first_ofERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15b90	__ZNKSs13find_first_ofEPKcmm	152	yes	
+0x97c15c28	__ZNKSs13find_first_ofEPKcm	72	yes	
+0x97c15c70	__ZNKSs13find_first_ofEcm	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15c74	__ZNKSs12find_last_ofERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15c80	__ZNKSs12find_last_ofEPKcmm	144	yes	
+0x97c15d10	__ZNKSs12find_last_ofEPKcm	72	yes	
+0x97c15d58	__ZNKSs12find_last_ofEcm	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15d5c	__ZNKSs17find_first_not_ofERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15d68	__ZNKSs17find_first_not_ofEPKcmm	124	yes	
+0x97c15de4	__ZNKSs17find_first_not_ofEPKcm	72	yes	
+0x97c15e2c	__ZNKSs17find_first_not_ofEcm	68	yes	
+0x97c15e70	__ZNKSs16find_last_not_ofERKSsm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c15e7c	__ZNKSs16find_last_not_ofEPKcmm	136	yes	
+0x97c15f04	__ZNKSs16find_last_not_ofEPKcm	72	yes	
+0x97c15f4c	__ZNKSs16find_last_not_ofEcm	84	yes	
+0x97c15fa0	std::string::substr	112	not a C function of the rebuilt image	
+0x97c16010	__ZNKSs7compareERKSs	96	yes	
+0x97c16070	__ZNKSs7compareEmmRKSs	188	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c1612c	__ZNKSs7compareEmmRKSsmm	240	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c1621c	__ZNKSs7compareEPKc	112	yes	
+0x97c1628c	__ZNKSs7compareEmmPKc	188	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c16348	__ZNKSs7compareEmmPKcm	220	no	calls an import (ZSt20__throw_out_of_rangePKc)
+0x97c16424	__ZNSs4_RepixEm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c16430	__ZNSs4_Rep9_S_createEmRKSaIcE	384	yes	
+0x97c165cc	__ZNSs4_Rep10_M_destroyERKSaIcE	152	yes	
+0x97c16674	__ZNSs4_Rep8_M_cloneERKSaIcEm	148	yes	
+0x97c16708	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	164	yes	
+0x97c167c4	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_	108	yes	
+0x97c16848	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_	68	yes	
+0x97c168a4	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	24	yes	
+0x97c168bc	__ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_	24	yes	
+0x97c168d4	__ZNSsC2IPcEET_S1_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c168d8	__ZNSsC1IPcEET_S1_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c168dc	__ZNSsC4IPcEET_S1_RKSaIcE	80	yes	
+0x97c1692c	__ZNSsC2IPKcEET_S2_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c16930	__ZNSsC1IPKcEET_S2_RKSaIcE	4	yes	
+0x97c16934	__ZNSsC4IPKcEET_S2_RKSaIcE	80	yes	
+0x97c16984	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c16988	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1698c	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	80	yes	
+0x97c169dc	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c169e0	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c169e4	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	80	yes	
+0x97c16a34	std::string::_M_replace<__gnu_cxx::__normal_iterator<char*,std::string>>	148	not a C function of the rebuilt image	
+0x97c16ab8	FUN_97c16ab8	44	not a C function of the rebuilt image	
+0x97c16ae4	std::string::_M_replace<__gnu_cxx::__normal_iterator<char_const*,std::string>>	148	not a C function of the rebuilt image	
+0x97c16b68	FUN_97c16b68	44	not a C function of the rebuilt image	
+0x97c16b94	std::string::_M_replace<char*>	148	not a C function of the rebuilt image	
+0x97c16c18	FUN_97c16c18	44	not a C function of the rebuilt image	
+0x97c16c44	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	148	yes	
+0x97c16cc8	FUN_97c16cc8	44	not a C function of the rebuilt image	
+0x97c16cf4	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	168	yes	
+0x97c16d9c	std::string::_M_replace_safe<__gnu_cxx::__normal_iterator<char_const*,std::string>>	168	not a C function of the rebuilt image	
+0x97c16e44	std::string::_M_replace_safe<char*>	164	not a C function of the rebuilt image	
+0x97c16ee8	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	164	yes	
+0x97c16f8c	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	152	yes	
+0x97c17024	std::string::_S_construct<__gnu_cxx::__normal_iterator<char_const*,std::string>>	152	not a C function of the rebuilt image	
+0x97c170bc	std::string::_S_construct<char*>	176	not a C function of the rebuilt image	
+0x97c1716c	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	176	yes	
+0x97c1721c	__ZSt13__destroy_auxIPSsEvT_S1_12__false_type	76	yes	
+0x97c17268	operator.new	164	not a C function of the rebuilt image	
+0x97c1731c	___cxa_pure_virtual	48	no	calls an import (ZSt9terminatev); calls an import (write)
+0x97c1734c	__ZdlPv	40	yes	
+0x97c17374	__ZNSaIcEC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17378	__ZNSaIcEC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1737c	__ZNSaIcEC4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17380	__ZNSaIcEC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17384	__ZNSaIcEC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17388	__ZNSaIcEC4ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1738c	__ZNSaIcED2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17394	__ZNSaIcED1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1739c	__ZNSaIcED4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173a0	__ZNKSaIcE7addressERc	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173a8	__ZNKSaIcE7addressERKc	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173b0	__ZNKSaIcE8max_sizeEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173b8	__ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm	16	yes	
+0x97c173c8	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173cc	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173d0	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev	28	yes	
+0x97c173ec	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173f4	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c173fc	__ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev	28	yes	
+0x97c17418	__ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17424	std::__default_alloc_template<true,0>::allocate	264	not a C function of the rebuilt image	
+0x97c17544	std::allocator<char>::allocate	272	not a C function of the rebuilt image	
+0x97c1766c	std::__default_alloc_template<true,0>::deallocate	136	not a C function of the rebuilt image	
+0x97c176f4	std::allocator<char>::deallocate	140	not a C function of the rebuilt image	
+0x97c17780	__ZNSaIcE9constructEPcRKc	20	yes	
+0x97c17794	__ZNSaIcE7destroyEPc	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17798	__ZNSaIwEC2Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1779c	__ZNSaIwEC1Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177a0	__ZNSaIwEC4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177a4	__ZNSaIwEC2ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177a8	__ZNSaIwEC1ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177ac	__ZNSaIwEC4ERKS_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177b0	__ZNSaIwED2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177b8	__ZNSaIwED1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177c0	__ZNSaIwED4Ev	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177c4	__ZNKSaIwE7addressERw	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177cc	__ZNKSaIwE7addressERKw	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177d4	__ZNKSaIwE8max_sizeEv	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c177e0	std::allocator<wchar_t>::allocate	88	not a C function of the rebuilt image	
+0x97c17838	__ZNSaIwE10deallocateEPwm	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17844	__ZNSaIwE9constructEPwRKw	20	yes	
+0x97c17858	__ZNSaIwE7destroyEPw	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1785c	std::__default_alloc_template<true,0>::_S_refill	152	not a C function of the rebuilt image	
+0x97c178f4	std::__default_alloc_template<true,0>::_S_chunk_alloc	368	not a C function of the rebuilt image	
+0x97c17a64	std::__default_alloc_template<true,0>::reallocate	172	not a C function of the rebuilt image	
+0x97c17b10	__ZdaPv	32	yes	
+0x97c17b30	operator.new[]	36	not a C function of the rebuilt image	
+0x97c17b64	__ZNSt11logic_errorC2ERKSs	4	yes	
+0x97c17b68	__ZNSt11logic_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17b6c	__ZNSt11logic_errorC4ERKSs	76	no	calls an import (ZNSsC1ERKSs)
+0x97c17bcc	__ZNSt11logic_errorD2Ev	8	yes	
+0x97c17bd4	__ZNSt11logic_errorD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17bdc	__ZNSt11logic_errorD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17be4	__ZNSt11logic_errorD4Ev	136	yes	
+0x97c17c6c	__ZNKSt11logic_error4whatEv	48	yes	
+0x97c17c9c	__ZNSt12domain_errorC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17ca0	__ZNSt12domain_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17ca4	__ZNSt12domain_errorC4ERKSs	68	yes	
+0x97c17ce8	__ZNSt16invalid_argumentC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17cec	__ZNSt16invalid_argumentC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17cf0	__ZNSt16invalid_argumentC4ERKSs	68	yes	
+0x97c17d34	__ZNSt12length_errorC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17d38	__ZNSt12length_errorC1ERKSs	4	yes	
+0x97c17d3c	__ZNSt12length_errorC4ERKSs	68	yes	
+0x97c17d80	__ZNSt12out_of_rangeC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17d84	__ZNSt12out_of_rangeC1ERKSs	4	yes	
+0x97c17d88	__ZNSt12out_of_rangeC4ERKSs	68	yes	
+0x97c17dcc	__ZNSt13runtime_errorC2ERKSs	4	yes	
+0x97c17dd0	__ZNSt13runtime_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17dd4	__ZNSt13runtime_errorC4ERKSs	76	no	calls an import (ZNSsC1ERKSs)
+0x97c17e34	__ZNSt13runtime_errorD2Ev	8	yes	
+0x97c17e3c	__ZNSt13runtime_errorD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17e44	__ZNSt13runtime_errorD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17e4c	__ZNSt13runtime_errorD4Ev	136	yes	
+0x97c17ed4	__ZNKSt13runtime_error4whatEv	48	yes	
+0x97c17f04	__ZNSt11range_errorC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17f08	__ZNSt11range_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17f0c	__ZNSt11range_errorC4ERKSs	68	yes	
+0x97c17f50	__ZNSt14overflow_errorC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17f54	__ZNSt14overflow_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17f58	__ZNSt14overflow_errorC4ERKSs	68	yes	
+0x97c17f9c	__ZNSt15underflow_errorC2ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17fa0	__ZNSt15underflow_errorC1ERKSs	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17fa4	__ZNSt15underflow_errorC4ERKSs	68	yes	
+0x97c17fe8	__ZNSt9type_infoD2Ev	8	yes	
+0x97c17ff0	__ZNSt9type_infoD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c17ff8	__ZNSt9type_infoD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18000	__ZNSt9type_infoD4Ev	44	yes	
+0x97c1802c	__ZNSt8bad_castD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18034	__ZNSt8bad_castD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1803c	__ZNSt8bad_castD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18044	__ZNSt8bad_castD4Ev	88	no	calls an import (ZNSt9exceptionD2Ev); calls an import (ZdlPv)
+0x97c1809c	__ZNSt10bad_typeidD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c180a4	__ZNSt10bad_typeidD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c180ac	__ZNSt10bad_typeidD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c180b4	__ZNSt10bad_typeidD4Ev	88	no	calls an import (ZNSt9exceptionD2Ev); calls an import (ZdlPv)
+0x97c1810c	__ZNKSt9type_infoeqERKS_	76	yes	
+0x97c18158	__ZNKSt9type_info14__is_pointer_pEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18160	__ZNKSt9type_info15__is_function_pEv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18168	__ZNKSt9type_info10__do_catchEPKS_PPvj	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1816c	__ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18174	__ZN10__cxxabiv117__class_type_infoD2Ev	8	yes	
+0x97c1817c	__ZN10__cxxabiv117__class_type_infoD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18184	__ZN10__cxxabiv117__class_type_infoD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1818c	__ZN10__cxxabiv117__class_type_infoD4Ev	104	yes	
+0x97c181f4	__ZN10__cxxabiv120__si_class_type_infoD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c181fc	__ZN10__cxxabiv120__si_class_type_infoD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18204	__ZN10__cxxabiv120__si_class_type_infoD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1820c	__ZN10__cxxabiv120__si_class_type_infoD4Ev	104	yes	
+0x97c18274	__ZN10__cxxabiv121__vmi_class_type_infoD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1827c	__ZN10__cxxabiv121__vmi_class_type_infoD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18284	__ZN10__cxxabiv121__vmi_class_type_infoD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1828c	__ZN10__cxxabiv121__vmi_class_type_infoD4Ev	104	yes	
+0x97c182f4	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	124	yes	
+0x97c18370	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	120	no	indirect call (driver context / vtable / callback)
+0x97c183e8	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	20	yes	
+0x97c183fc	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	136	yes	
+0x97c18484	__cxxabiv1::__vmi_class_type_info::__do_find_public_src	248	not a C function of the rebuilt image	
+0x97c1857c	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	128	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c185fc	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	244	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c186f0	__cxxabiv1::__vmi_class_type_info::__do_dyncast	1092	not a C function of the rebuilt image	
+0x97c18b34	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	84	yes	
+0x97c18b88	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c18bfc	__cxxabiv1::__vmi_class_type_info::__do_upcast	556	not a C function of the rebuilt image	
+0x97c18e28	___dynamic_cast	328	no	indirect call (driver context / vtable / callback)
+0x97c18f70	__ZNSt9exceptionD2Ev	8	yes	
+0x97c18f78	__ZNSt9exceptionD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18f80	__ZNSt9exceptionD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18f88	__ZNSt9exceptionD4Ev	72	yes	
+0x97c18fd0	__ZNSt13bad_exceptionD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18fd8	__ZNSt13bad_exceptionD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18fe0	__ZNSt13bad_exceptionD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c18fe8	__ZNSt13bad_exceptionD4Ev	88	no	calls an import (ZdlPv)
+0x97c19040	__ZNKSt9exception4whatEv	16	yes	
+0x97c19050	std::set_new_handler	100	not a C function of the rebuilt image	
+0x97c190c4	__ZNSt9bad_allocD2Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c190cc	__ZNSt9bad_allocD1Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c190d4	__ZNSt9bad_allocD0Ev	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c190dc	__ZNSt9bad_allocD4Ev	88	no	calls an import (ZNSt9exceptionD2Ev); calls an import (ZdlPv)
+0x97c1913c	FUN_97c1913c	220	yes	
+0x97c19218	___cxa_free_exception	152	no	calls an import (pthread_mutex_lock)
+0x97c192b0	__gxx_exception_cleanup	88	no	calls an import (ZN10__cxxabiv111__terminateEPFvvE); indirect call (driver context / vtable / callback)
+0x97c19308	___cxa_throw	216	yes	
+0x97c193e0	__Z21size_of_encoded_valueh	120	yes	
+0x97c19458	__Z21base_of_encoded_valuehP15_Unwind_Context	172	no	calls an import (abort)
+0x97c19504	__Z12read_uleb128PKhPj	48	yes	
+0x97c19534	__Z12read_sleb128PKhPi	76	yes	
+0x97c19580	__Z28read_encoded_value_with_basehjPKhPj	312	yes	
+0x97c196ec	parse_lsda_header	216	no	calls an import (Unwind_GetRegionStart)
+0x97c197c4	__Z15get_ttype_entryP16lsda_header_infoj	84	yes	
+0x97c19818	get_adjusted_ptr	152	yes	
+0x97c198b0	check_exception_spec	124	yes	
+0x97c1992c	___gxx_personality_v0	976	no	calls an import (Unwind_GetIP); calls an import (Unwind_GetLanguageSpecificData); calls an import (Unwind_SetGR)
+0x97c19d00	FUN_97c19d00	232	no	calls an import (Unwind_Resume); calls an import (ZN10__cxxabiv111__terminateEPFvvE); calls an import (ZN10__cxxabiv112__unexpectedEPFvvE)
+0x97c19de8	__cxxabiv1::__terminate	32	not a C function of the rebuilt image	
+0x97c19e0c	std::terminate	56	not a C function of the rebuilt image	
+0x97c19e44	__cxxabiv1::__unexpected	28	not a C function of the rebuilt image	
+0x97c19e60	std::unexpected	56	not a C function of the rebuilt image	
+0x97c19e98	std::set_terminate	100	not a C function of the rebuilt image	
+0x97c19f0c	std::set_unexpected	100	not a C function of the rebuilt image	
+0x97c19f80	___cxa_begin_catch	108	no	calls an import (cxa_get_globals)
+0x97c19fec	___cxa_end_catch	144	no	calls an import (abort); calls an import (cxa_get_globals_fast)
+0x97c1a07c	__ZSt18uncaught_exceptionv	44	no	calls an import (cxa_get_globals)
+0x97c1a0a8	__Z21get_globals_init_oncev	32	yes	
+0x97c1a0c8	___cxa_get_globals_fast	52	yes	
+0x97c1a0fc	___cxa_get_globals	220	yes	
+0x97c1a1d8	___eprintf	76	no	calls an import (abort); calls an import (fflush); calls an import (fprintf)
+0x97c1a23c	FUN_97c1a23c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a24c	FUN_97c1a24c	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a258	FUN_97c1a258	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a25c	FUN_97c1a25c	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a28c	FUN_97c1a28c	60	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c1a2c8	_size_of_encoded_value_97c1a2c8	120	no	calls an import (abort)
+0x97c1a340	_base_of_encoded_value	172	no	calls an import (abort)
+0x97c1a3ec	_read_uleb128_97c1a3ec	48	yes	
+0x97c1a41c	_read_sleb128_97c1a41c	76	yes	
+0x97c1a468	_read_encoded_value_with_base_97c1a468	312	no	calls an import (abort)
+0x97c1a5d4	__Unwind_GetLanguageSpecificData	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a5dc	__Unwind_GetRegionStart	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a5e4	__Unwind_FindEnclosingFunction	56	no	calls an import (Unwind_Find_FDE)
+0x97c1a61c	__Unwind_GetDataRelBase	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a624	__Unwind_GetTextRelBase	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a62c	_extract_cie_info	348	yes	
+0x97c1a788	_execute_stack_op	1212	no	calls an import (abort)
+0x97c1aee8	_execute_cfa_program	1084	no	calls an import (abort)
+0x97c1b3e4	_uw_frame_state_for	328	yes	
+0x97c1b52c	___frame_state_for	236	yes	
+0x97c1b618	_uw_update_context_1	320	yes	
+0x97c1b758	_uw_update_context	68	yes	
+0x97c1b79c	_uw_init_context_1	132	yes	
+0x97c1b820	_uw_install_context_1	652	no	calls an import (pthread_once)
+0x97c1baac	__Unwind_RaiseException_Phase2	192	no	calls an import (abort); indirect call (driver context / vtable / callback)
+0x97c1bb6c	__Unwind_RaiseException	284	yes	
+0x97c1bc88	__Unwind_ForcedUnwind_Phase2	260	no	indirect call (driver context / vtable / callback)
+0x97c1bd8c	__Unwind_ForcedUnwind	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c1be20	__Unwind_Resume	152	no	calls an import (abort)
+0x97c1beb8	__Unwind_DeleteException	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1becc	__Unwind_GetGR	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1bedc	__Unwind_SetGR	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1beec	__Unwind_GetIP	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1bef4	__Unwind_SetIP	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1befc	_init_dwarf_reg_size_table	1192	yes	
+0x97c1c3a4	_size_of_encoded_value_97c1c3a4	120	yes	
+0x97c1c41c	_read_uleb128_97c1c41c	48	yes	
+0x97c1c44c	_read_sleb128_97c1c44c	76	yes	
+0x97c1c498	_read_encoded_value_with_base_97c1c498	312	yes	
+0x97c1c604	___register_frame_info_bases	88	yes	
+0x97c1c65c	___register_frame_info	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1c668	___register_frame	88	no	calls an import (malloc)
+0x97c1c6c0	___register_frame_info_table_bases	68	yes	
+0x97c1c710	___register_frame_table	68	no	calls an import (malloc)
+0x97c1c748	___deregister_frame_info_bases	240	yes	
+0x97c1c83c	___deregister_frame	72	yes	
+0x97c1c884	_base_from_object	120	yes	
+0x97c1c8fc	_get_cie_encoding	200	yes	
+0x97c1c9c4	_fde_unencoded_compare	40	yes	
+0x97c1c9ec	_fde_single_encoding_compare	152	yes	
+0x97c1ca84	_fde_mixed_encoding_compare	188	yes	
+0x97c1cb40	_frame_heapsort	568	yes	
+0x97c1cd78	_classify_object_over_fdes	308	yes	
+0x97c1ceac	_add_fdes	332	yes	
+0x97c1cff8	_linear_search_fdes	352	yes	
+0x97c1d158	_search_object	624	yes	
+0x97c1d3c8	__Unwind_Find_registered_FDE	356	yes	
+0x97c1d52c	_live_image_destructor	196	no	calls an import (free); calls an import (keymgr_get_and_lock_processwide_ptr); calls an import (keymgr_set_and_unlock_processwide_ptr)
+0x97c1d5f0	__Unwind_Find_FDE	224	yes	
+0x97c1d6d0	_init_object	732	yes	
+0x97c1d9ac	_examine_objects	556	yes	
+0x97c1dbd8	_fde_split	296	yes	
+0x97c1dd00	save_world	252	not a C function of the rebuilt image	
+0x97c1de10	eh_rest_world_r10	264	not a C function of the rebuilt image	
+0x97c30ae0	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_	4	yes	
+0x97c30ae4	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_	100	yes	
+0x97c30b48	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_	4	yes	
+0x97c30b4c	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	148	yes	
+0x97c30be0	std::_Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>::insert_unique	388	not a C function of the rebuilt image	
+0x97c30d64	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_	12	yes	
+0x97c30d70	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	196	yes	
+0x97c30e34	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	148	yes	
+0x97c30ec8	std::_Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>::_M_insert	356	not a C function of the rebuilt image	
+0x97c3102c	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_	172	yes	
+0x97c310d8	std::_Rb_tree_base_iterator::_M_decrement	144	not a C function of the rebuilt image	
+0x97c31168	std::_Rb_tree_rebalance	328	not a C function of the rebuilt image	
+0x97c312b0	TType::getTypeName	8	not a C function of the rebuilt image	
+0x97c312b8	__ZN5TTypeD1Ev	36	yes	
+0x97c312dc	__ZN5TTypeD0Ev	36	yes	
+0x97c31300	TType::isArray	12	not a C function of the rebuilt image	
+0x97c3130c	TType::getInstanceSize	40	not a C function of the rebuilt image	
+0x97c31334	TType::isMatrix	12	not a C function of the rebuilt image	
+0x97c31340	TType::isVector	40	not a C function of the rebuilt image	
+0x97c31368	__ZN5TType7setTypeE10TBasicTypeibbi	32	yes	
+0x97c31388	__ZN5TType7setTypeE10TBasicTypeibPS_	40	yes	
+0x97c313b0	TType::setTypeName	132	not a C function of the rebuilt image	
+0x97c31434	TType::setFieldName	132	not a C function of the rebuilt image	
+0x97c314b8	TType::getFieldName	8	not a C function of the rebuilt image	
+0x97c314c0	TType::getBasicType	12	not a C function of the rebuilt image	
+0x97c314cc	TType::getQualifier	12	not a C function of the rebuilt image	
+0x97c314d8	TType::changeQualifier	16	not a C function of the rebuilt image	
+0x97c314e8	TType::getNominalSize	16	not a C function of the rebuilt image	
+0x97c314f8	std::_Rb_tree_rotate_left	92	not a C function of the rebuilt image	
+0x97c31554	std::_Rb_tree_rotate_right	92	not a C function of the rebuilt image	
+0x97c315b0	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	200	yes	
+0x97c31678	std::vector<TIntermNode*,pool_allocator<TIntermNode*>>::_M_insert_aux	252	not a C function of the rebuilt image	
+0x97c31774	std::vector<TIntermNode*,pool_allocator<TIntermNode*>>::erase	96	not a C function of the rebuilt image	
+0x97c317d4	std::vector<TIntermNode*,pool_allocator<TIntermNode*>>::insert	152	not a C function of the rebuilt image	
+0x97c3186c	std::vector<TIntermNode*,pool_allocator<TIntermNode*>>::_M_range_insert<__gnu_cxx::__normal_iterator<TIntermNode**,std::vector<TIntermNode*,pool_allocator<TIntermNode*>>>>	424	not a C function of the rebuilt image	
+0x97c31a14	std::_Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>::operator=	280	not a C function of the rebuilt image	
+0x97c31b2c	std::_Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>::_M_copy	280	not a C function of the rebuilt image	
+0x97c31c44	TType::setStructSize	284	not a C function of the rebuilt image	
+0x97c31d60	TIntermNode::getLine	8	not a C function of the rebuilt image	
+0x97c31d68	TIntermNode::setLine	8	not a C function of the rebuilt image	
+0x97c31d70	TIntermNode::getAsConstantUnion	8	not a C function of the rebuilt image	
+0x97c31d78	TIntermNode::getAsAggregate	8	not a C function of the rebuilt image	
+0x97c31d80	TIntermNode::getAsBinaryNode	8	not a C function of the rebuilt image	
+0x97c31d88	TIntermNode::getAsSelectionNode	8	not a C function of the rebuilt image	
+0x97c31d90	TIntermNode::getAsSymbolNode	8	not a C function of the rebuilt image	
+0x97c31d98	TIntermTyped::getAsTyped	4	not a C function of the rebuilt image	
+0x97c31d9c	TIntermTyped::setType	152	not a C function of the rebuilt image	
+0x97c31e34	TIntermTyped::getType	192	not a C function of the rebuilt image	
+0x97c31ef4	TIntermTyped::getTypePointer	8	not a C function of the rebuilt image	
+0x97c31efc	TIntermTyped::getBasicType	12	not a C function of the rebuilt image	
+0x97c31f08	TIntermTyped::getQualifier	12	not a C function of the rebuilt image	
+0x97c31f14	TIntermTyped::getNominalSize	16	not a C function of the rebuilt image	
+0x97c31f24	TIntermTyped::getSize	40	not a C function of the rebuilt image	
+0x97c31f4c	TIntermTyped::isMatrix	12	not a C function of the rebuilt image	
+0x97c31f58	TIntermTyped::isArray	12	not a C function of the rebuilt image	
+0x97c31f64	TIntermTyped::isVector	40	not a C function of the rebuilt image	
+0x97c31f8c	__ZN12TIntermTypedD1Ev	52	yes	
+0x97c31fc0	__ZN12TIntermTypedD0Ev	52	yes	
+0x97c31ff4	std::_Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>::_M_erase	192	not a C function of the rebuilt image	
+0x97c320b4	TIntermNode::getAsTyped	8	not a C function of the rebuilt image	
+0x97c320bc	__ZN11TIntermNodeD1Ev	36	yes	
+0x97c320e0	__ZN11TIntermNodeD0Ev	36	yes	
+0x97c32104	getQualifierString	280	yes	
+0x97c3226c	TType::getBasicString	220	not a C function of the rebuilt image	
+0x97c32384	TIntermSymbol::getId	8	not a C function of the rebuilt image	
+0x97c3238c	TIntermSymbol::getSymbol	8	not a C function of the rebuilt image	
+0x97c32394	TIntermSymbol::getAsSymbolNode	4	not a C function of the rebuilt image	
+0x97c32398	TIntermConstantUnion::getAsConstantUnion	4	not a C function of the rebuilt image	
+0x97c3239c	TIntermOperator::promote	8	not a C function of the rebuilt image	
+0x97c323a4	TIntermBinary::setLeft	8	not a C function of the rebuilt image	
+0x97c323ac	TIntermBinary::setRight	8	not a C function of the rebuilt image	
+0x97c323b4	TIntermBinary::getLeft	8	not a C function of the rebuilt image	
+0x97c323bc	TIntermBinary::getRight	8	not a C function of the rebuilt image	
+0x97c323c4	TIntermBinary::getAsBinaryNode	4	not a C function of the rebuilt image	
+0x97c323c8	TIntermUnary::setOperand	8	not a C function of the rebuilt image	
+0x97c323d0	TIntermUnary::getOperand	8	not a C function of the rebuilt image	
+0x97c323d8	__ZN16TIntermAggregateD1Ev	176	no	atomic / cache / barrier instruction
+0x97c32488	__ZN16TIntermAggregateD0Ev	176	no	atomic / cache / barrier instruction
+0x97c32538	TIntermAggregate::getAsAggregate	4	not a C function of the rebuilt image	
+0x97c3253c	TIntermAggregate::setOperator	8	not a C function of the rebuilt image	
+0x97c32544	TIntermAggregate::getSequence	8	not a C function of the rebuilt image	
+0x97c3254c	TIntermAggregate::setName	8	not a C function of the rebuilt image	
+0x97c32554	TIntermAggregate::getName	8	not a C function of the rebuilt image	
+0x97c3255c	TIntermAggregate::setUserDefined	12	not a C function of the rebuilt image	
+0x97c32568	TIntermAggregate::isUserDefined	8	not a C function of the rebuilt image	
+0x97c32570	TIntermAggregate::getQualifier	8	not a C function of the rebuilt image	
+0x97c32578	TIntermSelection::getCondition	8	not a C function of the rebuilt image	
+0x97c32580	TIntermSelection::getTrueBlock	8	not a C function of the rebuilt image	
+0x97c32588	TIntermSelection::getFalseBlock	8	not a C function of the rebuilt image	
+0x97c32590	TIntermSelection::getAsSelectionNode	4	not a C function of the rebuilt image	
+0x97c32594	std::_Rb_tree<std::string,std::pair<std::string_const,std::string>,std::_Select1st<std::pair<std::string_const,std::string>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,std::string>>>::clear	96	not a C function of the rebuilt image	
+0x97c325f4	__ZN13TIntermBranchD1Ev	36	yes	
+0x97c32618	__ZN13TIntermBranchD0Ev	36	yes	
+0x97c3263c	__ZN11TIntermLoopD1Ev	36	yes	
+0x97c32660	__ZN11TIntermLoopD0Ev	36	yes	
+0x97c32684	__ZN16TIntermSelectionD1Ev	52	yes	
+0x97c326b8	__ZN16TIntermSelectionD0Ev	52	yes	
+0x97c326ec	__ZN12TIntermUnaryD1Ev	52	yes	
+0x97c32720	__ZN12TIntermUnaryD0Ev	52	yes	
+0x97c32754	__ZN13TIntermBinaryD1Ev	52	yes	
+0x97c32788	__ZN13TIntermBinaryD0Ev	52	yes	
+0x97c327bc	__ZN20TIntermConstantUnionD1Ev	52	yes	
+0x97c327f0	__ZN20TIntermConstantUnionD0Ev	52	yes	
+0x97c32824	__ZN13TIntermSymbolD1Ev	148	no	atomic / cache / barrier instruction
+0x97c328b8	__ZN13TIntermSymbolD0Ev	148	no	atomic / cache / barrier instruction
+0x97c3294c	std::_Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>::find	276	not a C function of the rebuilt image	
+0x97c32a60	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c32a64	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm	180	yes	
+0x97c32b18	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	112	yes	
+0x97c32b88	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	340	no	atomic / cache / barrier instruction
+0x97c32cdc	std::_Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>::lower_bound	176	not a C function of the rebuilt image	
+0x97c32d8c	__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueESt17_Rb_tree_iteratorIS8_RS8_PS8_ERKS8_	568	yes	
+0x97c32fc4	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEPKcm	112	yes	
+0x97c33034	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendERKS3_	116	yes	
+0x97c330a8	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag	176	no	atomic / cache / barrier instruction
+0x97c33158	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	216	yes	
+0x97c33230	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_	152	yes	
+0x97c332c8	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	172	no	atomic / cache / barrier instruction
+0x97c33374	std::_Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>::_M_insert	356	not a C function of the rebuilt image	
+0x97c334d8	__ZNSt8_Rb_treeISbIcSt11char_traitsIcE14pool_allocatorIcEESt4pairIKS4_9TBehaviorESt10_Select1stIS8_ESt4lessIS4_ES2_IS8_EE13insert_uniqueERKS8_	388	yes	
+0x97c3365c	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcS3_EEEERS3_S8_S8_T_SA_	152	yes	
+0x97c336f4	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	344	yes	
+0x97c3384c	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1IPKcEET_S7_RKS2_	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c33850	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4IPKcEET_S7_RKS2_	76	yes	
+0x97c3389c	std::vector<TPoolAllocator::tAllocState,std::allocator<TPoolAllocator::tAllocState>>::_M_insert_aux	640	not a C function of the rebuilt image	
+0x97c33b1c	std::__uninitialized_copy_aux<__gnu_cxx::__normal_iterator<TPoolAllocator::tAllocState*,std::vector<TPoolAllocator::tAllocState,std::allocator<TPoolAllocator::tAllocState>>>,__gnu_cxx::__normal_iterator<TPoolAllocator::tAllocState*,std::vector<TPoolAllocator::tAllocState,std::allocator<TPoolAllocator::tAllocState>>>>	92	not a C function of the rebuilt image	
+0x97c33b78	std::_Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>::_M_erase	128	not a C function of the rebuilt image	
+0x97c33bf8	std::vector<TSymbolTableLevel*,std::allocator<TSymbolTableLevel*>>::_M_insert_aux	516	not a C function of the rebuilt image	
+0x97c33dfc	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc	108	yes	
+0x97c33e68	std::_Rb_tree<std::string,std::pair<std::string_const,TSymbol*>,std::_Select1st<std::pair<std::string_const,TSymbol*>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TSymbol*>>>::_M_erase	128	not a C function of the rebuilt image	
+0x97c33ee8	std::vector<TParameter,pool_allocator<TParameter>>::_M_insert_aux	384	not a C function of the rebuilt image	
+0x97c34068	std::_Rb_tree<TVector<TTypeLine>*,std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>,std::_Select1st<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>,std::less<TVector<TTypeLine>*>,std::allocator<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>>::_M_erase	88	not a C function of the rebuilt image	
+0x97c340c0	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7replaceEN9__gnu_cxx17__normal_iteratorIPcS3_EES7_mc	160	yes	
+0x97c34160	std::__uninitialized_copy_aux<__gnu_cxx::__normal_iterator<TParameter*,std::vector<TParameter,pool_allocator<TParameter>>>,__gnu_cxx::__normal_iterator<TParameter*,std::vector<TParameter,pool_allocator<TParameter>>>>	92	not a C function of the rebuilt image	
+0x97c341bc	std::_Rb_tree_base_iterator::_M_increment	120	not a C function of the rebuilt image	
+0x97c34234	TType::copyType	800	not a C function of the rebuilt image	
+0x97c34554	__ZN7TSymbolD1Ev	36	yes	
+0x97c34578	__ZN7TSymbolD0Ev	36	yes	
+0x97c3459c	TSymbol::getMangledName	8	not a C function of the rebuilt image	
+0x97c345a4	TSymbol::isFunction	8	not a C function of the rebuilt image	
+0x97c345ac	TSymbol::isVariable	8	not a C function of the rebuilt image	
+0x97c345b4	__ZN9TVariableD1Ev	52	yes	
+0x97c345e8	__ZN9TVariableD0Ev	52	yes	
+0x97c3461c	TVariable::isVariable	8	not a C function of the rebuilt image	
+0x97c34624	TFunction::isFunction	8	not a C function of the rebuilt image	
+0x97c3462c	TFunction::getMangledName	8	not a C function of the rebuilt image	
+0x97c34634	std::_Rb_tree<TVector<TTypeLine>*,std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>,std::_Select1st<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>,std::less<TVector<TTypeLine>*>,std::allocator<std::pair<TVector<TTypeLine>*const,TVector<TTypeLine>*>>>::find	108	not a C function of the rebuilt image	
+0x97c346a0	std::vector<TTypeLine,pool_allocator<TTypeLine>>::_M_insert_aux	384	not a C function of the rebuilt image	
+0x97c34820	std::__uninitialized_copy_aux<__gnu_cxx::__normal_iterator<TTypeLine*,std::vector<TTypeLine,pool_allocator<TTypeLine>>>,__gnu_cxx::__normal_iterator<TTypeLine*,std::vector<TTypeLine,pool_allocator<TTypeLine>>>>	92	not a C function of the rebuilt image	
+0x97c3487c	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_	64	yes	
+0x97c348bc	std::vector<int,pool_allocator<int>>::_M_insert_aux	252	not a C function of the rebuilt image	
+0x97c349b8	std::_Rb_tree<std::string,std::pair<std::string_const,TBehavior>,std::_Select1st<std::pair<std::string_const,TBehavior>>,std::less<std::string>,pool_allocator<std::pair<std::string_const,TBehavior>>>::find	288	not a C function of the rebuilt image	
+0x97c34ad8	__ZN13TShHandleBaseD1Ev	36	yes	
+0x97c34afc	__ZN13TShHandleBaseD0Ev	36	yes	
+0x97c34b20	TShHandleBase::getAsCompiler	8	not a C function of the rebuilt image	
+0x97c34b28	TShHandleBase::getAsLinker	8	not a C function of the rebuilt image	
+0x97c34b30	TGenericLinker::getAsLinker	4	not a C function of the rebuilt image	
+0x97c34b34	__ZN9TCompilerD1Ev	88	yes	
+0x97c34b8c	__ZN9TCompilerD0Ev	92	yes	
+0x97c34be8	TCompiler::getInfoSink	8	not a C function of the rebuilt image	
+0x97c34bf0	TCompiler::getPPStream	8	not a C function of the rebuilt image	
+0x97c34bf8	TCompiler::getAsCompiler	4	not a C function of the rebuilt image	
+0x97c34bfc	TCompiler::linkable	8	not a C function of the rebuilt image	
+0x97c34c04	TCompiler::getStatsString	8	not a C function of the rebuilt image	
+0x97c34c0c	TCompiler::getPPStreamString	8	not a C function of the rebuilt image	
+0x97c34c14	TCompiler::getShaderToProgramString	8	not a C function of the rebuilt image	
+0x97c34c1c	TCompiler::getTableString	8	not a C function of the rebuilt image	
+0x97c34c24	TCompiler::setOpimizationLevel	4	not a C function of the rebuilt image	
+0x97c34c28	TCompiler::setDebugOptions	4	not a C function of the rebuilt image	
+0x97c34c2c	TCompiler::getNewCompilationAllocator	60	not a C function of the rebuilt image	
+0x97c34c68	TPPStreamCompiler::setOpimizationLevel	8	not a C function of the rebuilt image	
+0x97c34c70	TPPStreamCompiler::setDebugOptions	8	not a C function of the rebuilt image	
+0x97c34c78	TPPStreamCompiler::getPPStream	8	not a C function of the rebuilt image	
+0x97c34c80	__ZNSt12domain_errorD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34cc0	__ZNSt16invalid_argumentD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34d00	__ZNSt12length_errorD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34d40	__ZNSt12out_of_rangeD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34d80	__ZNSt11range_errorD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34dc0	__ZNSt14overflow_errorD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34e00	__ZNSt15underflow_errorD1Ev	64	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c34e40	__ZNSt12domain_errorD0Ev	76	yes	
+0x97c34e8c	__ZNSt16invalid_argumentD0Ev	76	yes	
+0x97c34ed8	__ZNSt12length_errorD0Ev	76	yes	
+0x97c34f24	__ZNSt12out_of_rangeD0Ev	76	yes	
+0x97c34f70	__ZNSt11range_errorD0Ev	76	yes	
+0x97c34fbc	__ZNSt14overflow_errorD0Ev	76	yes	
+0x97c35008	__ZNSt15underflow_errorD0Ev	76	yes	
+0x97c3aff8	_ZNSt12domain_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b020	_ZNSt16invalid_argumentD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b048	_ZNSt12length_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b070	_ZNSt12out_of_rangeD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b098	_ZNSt11range_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b0c0	_ZNSt14overflow_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b0e8	_ZNSt15underflow_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b110	_ZNSt12domain_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b13c	_ZNSt16invalid_argumentD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b168	_ZNSt12length_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b194	_ZNSt12out_of_rangeD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b1c0	_ZNSt11range_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b1ec	_ZNSt14overflow_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0x97c3b218	_ZNSt15underflow_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f000	_ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_.eh	1	not a C function of the rebuilt image	
+0xa7b7f004	_ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_.eh	1	not a C function of the rebuilt image	
+0xa7b7f008	_ZNKSs12find_last_ofEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f00c	_ZNKSs12find_last_ofEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f010	_ZNKSs12find_last_ofERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f014	_ZNKSs12find_last_ofEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f018	_ZNKSs13find_first_ofEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f01c	_ZNKSs13find_first_ofEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f020	_ZNKSs13find_first_ofERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f024	_ZNKSs13find_first_ofEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f028	_ZNKSs13get_allocatorEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f02c	_ZNKSs16find_last_not_ofEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f030	_ZNKSs16find_last_not_ofEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f034	_ZNKSs16find_last_not_ofERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f038	_ZNKSs16find_last_not_ofEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f03c	_ZNKSs17find_first_not_ofEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f040	_ZNKSs17find_first_not_ofEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f044	_ZNKSs17find_first_not_ofERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f048	_ZNKSs17find_first_not_ofEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f04c	_ZNKSs3endEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f050	_ZNKSs4_Rep12_M_is_leakedEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f054	_ZNKSs4_Rep12_M_is_sharedEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f058	_ZNKSs4dataEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f05c	_ZNKSs4findEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f060	_ZNKSs4findEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f064	_ZNKSs4findERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f068	_ZNKSs4findEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f06c	_ZNKSs4rendEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f070	_ZNKSs4sizeEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f074	_ZNKSs5beginEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f078	_ZNKSs5c_strEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f07c	_ZNKSs5emptyEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f080	_ZNKSs5rfindEPKcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f084	_ZNKSs5rfindEPKcmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f088	_ZNKSs5rfindERKSsm.eh	1	not a C function of the rebuilt image	
+0xa7b7f08c	_ZNKSs5rfindEcm.eh	1	not a C function of the rebuilt image	
+0xa7b7f090	_ZNKSs6_M_repEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f094	_ZNKSs6lengthEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f098	_ZNKSs6rbeginEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f09c	_ZNKSs7_M_dataEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0a0	_ZNKSs7_M_foldEmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f0a4	_ZNKSs7_M_iendEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0a8	_ZNKSs7compareEPKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f0ac	_ZNKSs7compareERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f0b0	_ZNKSs8capacityEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0b4	_ZNKSs8max_sizeEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0b8	_ZNKSs9_M_ibeginEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0bc	_ZNKSsixEm.eh	1	not a C function of the rebuilt image	
+0xa7b7f0c0	_ZNSs12_Alloc_hiderC1EPcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f0c4	_ZNSs12_Alloc_hiderC2EPcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f0c8	_ZNSs12_Alloc_hiderC4EPcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f0cc	_ZNSs12_S_empty_repEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0d0	_ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIPKcSsEES4_.eh	1	not a C function of the rebuilt image	
+0xa7b7f0d4	_ZNSs13_S_copy_charsEPcN9__gnu_cxx17__normal_iteratorIS_SsEES2_.eh	1	not a C function of the rebuilt image	
+0xa7b7f0d8	_ZNSs13_S_copy_charsEPcPKcS1_.eh	1	not a C function of the rebuilt image	
+0xa7b7f0dc	_ZNSs13_S_copy_charsEPcS_S_.eh	1	not a C function of the rebuilt image	
+0xa7b7f0e0	_ZNSs4_Rep10_M_disposeERKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f0e4	_ZNSs4_Rep10_M_refcopyEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0e8	_ZNSs4_Rep10_M_refdataEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0ec	_ZNSs4_Rep13_M_set_leakedEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0f0	_ZNSs4_Rep15_M_set_sharableEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f0f4	_ZNSs4_Rep7_M_grabERKSaIcES2_.eh	1	not a C function of the rebuilt image	
+0xa7b7f0f8	_ZNSs4_RepixEm.eh	1	not a C function of the rebuilt image	
+0xa7b7f0fc	_ZNSs4swapERSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f100	_ZNSs5clearEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f104	_ZNSs6appendEPKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f108	_ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc.eh	1	not a C function of the rebuilt image	
+0xa7b7f10c	_ZNSs6insertEmPKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f110	_ZNSs6resizeEm.eh	1	not a C function of the rebuilt image	
+0xa7b7f114	_ZNSs7_M_dataEPc.eh	1	not a C function of the rebuilt image	
+0xa7b7f118	_ZNSs7_M_leakEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f11c	_ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f120	_ZNSs7replaceEmmPKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f124	_ZNSs7replaceEmmRKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f128	_ZNSsC1EPKcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f12c	_ZNSsC1EPKcmRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f130	_ZNSsC1ERKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f134	_ZNSsC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f138	_ZNSsC1ERKSsmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f13c	_ZNSsC1ERKSsmmRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f140	_ZNSsC1EmcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f144	_ZNSsC1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f148	_ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f14c	_ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f150	_ZNSsC1IPKcEET_S2_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f154	_ZNSsC1IPcEET_S1_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f158	_ZNSsC2EPKcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f15c	_ZNSsC2EPKcmRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f160	_ZNSsC2ERKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f164	_ZNSsC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f168	_ZNSsC2ERKSsmm.eh	1	not a C function of the rebuilt image	
+0xa7b7f16c	_ZNSsC2ERKSsmmRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f170	_ZNSsC2EmcRKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f174	_ZNSsC2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f178	_ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f17c	_ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f180	_ZNSsC2IPKcEET_S2_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f184	_ZNSsC2IPcEET_S1_RKSaIcE.eh	1	not a C function of the rebuilt image	
+0xa7b7f188	_ZNSsC4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f18c	_ZNSsD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f190	_ZNSsD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f194	_ZNSsD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f198	_ZNSsaSERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f19c	_ZNSspLEPKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1a0	_ZNSspLERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f1a4	_ZNSspLEc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1a8	_ZSt13__destroy_auxIPSsEvT_S1_12__false_type.eh	1	not a C function of the rebuilt image	
+0xa7b7f1ac	_ZdlPv.eh	1	not a C function of the rebuilt image	
+0xa7b7f1b0	_ZNKSaIcE7addressERKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1b4	_ZNKSaIcE7addressERc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1b8	_ZNKSaIcE8max_sizeEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f1bc	_ZNKSaIwE7addressERKw.eh	1	not a C function of the rebuilt image	
+0xa7b7f1c0	_ZNKSaIwE7addressERw.eh	1	not a C function of the rebuilt image	
+0xa7b7f1c4	_ZNKSaIwE8max_sizeEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f1c8	_ZNSaIcE7destroyEPc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1cc	_ZNSaIcE9constructEPcRKc.eh	1	not a C function of the rebuilt image	
+0xa7b7f1d0	_ZNSaIcEC1ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f1d4	_ZNSaIcEC1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1d8	_ZNSaIcEC2ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f1dc	_ZNSaIcEC2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1e0	_ZNSaIcEC4ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f1e4	_ZNSaIcEC4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1e8	_ZNSaIcED1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1ec	_ZNSaIcED2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1f0	_ZNSaIcED4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f1f4	_ZNSaIwE10deallocateEPwm.eh	1	not a C function of the rebuilt image	
+0xa7b7f1f8	_ZNSaIwE7destroyEPw.eh	1	not a C function of the rebuilt image	
+0xa7b7f1fc	_ZNSaIwE9constructEPwRKw.eh	1	not a C function of the rebuilt image	
+0xa7b7f200	_ZNSaIwEC1ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f204	_ZNSaIwEC1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f208	_ZNSaIwEC2ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f20c	_ZNSaIwEC2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f210	_ZNSaIwEC4ERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f214	_ZNSaIwEC4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f218	_ZNSaIwED1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f21c	_ZNSaIwED2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f220	_ZNSaIwED4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f224	_ZNSt24__default_alloc_templateILb1ELi0EE11_S_round_upEm.eh	1	not a C function of the rebuilt image	
+0xa7b7f228	_ZNSt24__default_alloc_templateILb1ELi0EE17_S_freelist_indexEm.eh	1	not a C function of the rebuilt image	
+0xa7b7f22c	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockC1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f230	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockC2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f234	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockC4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f238	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f23c	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f240	_ZNSt24__default_alloc_templateILb1ELi0EE5_LockD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f244	_ZdaPv.eh	1	not a C function of the rebuilt image	
+0xa7b7f248	_ZNKSt11logic_error4whatEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f24c	_ZNKSt13runtime_error4whatEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f250	_ZNSt11logic_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f254	_ZNSt11logic_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f258	_ZNSt11logic_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f25c	_ZNSt11logic_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f260	_ZNSt11logic_errorD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f264	_ZNSt11logic_errorD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f268	_ZNSt11range_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f26c	_ZNSt11range_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f270	_ZNSt12domain_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f274	_ZNSt12domain_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f278	_ZNSt12length_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f27c	_ZNSt12length_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f280	_ZNSt12out_of_rangeC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f284	_ZNSt12out_of_rangeC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f288	_ZNSt13runtime_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f28c	_ZNSt13runtime_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f290	_ZNSt13runtime_errorD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f294	_ZNSt13runtime_errorD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f298	_ZNSt13runtime_errorD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f29c	_ZNSt13runtime_errorD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2a0	_ZNSt14overflow_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2a4	_ZNSt14overflow_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2a8	_ZNSt15underflow_errorC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2ac	_ZNSt15underflow_errorC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2b0	_ZNSt16invalid_argumentC1ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2b4	_ZNSt16invalid_argumentC2ERKSs.eh	1	not a C function of the rebuilt image	
+0xa7b7f2b8	_ZN10__cxxabiv117__class_type_infoD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2bc	_ZN10__cxxabiv117__class_type_infoD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2c0	_ZN10__cxxabiv117__class_type_infoD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2c4	_ZN10__cxxabiv120__si_class_type_infoD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2c8	_ZN10__cxxabiv120__si_class_type_infoD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2cc	_ZN10__cxxabiv120__si_class_type_infoD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2d0	_ZN10__cxxabiv121__vmi_class_type_infoD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2d4	_ZN10__cxxabiv121__vmi_class_type_infoD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2d8	_ZN10__cxxabiv121__vmi_class_type_infoD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f2dc	_ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj.eh	1	not a C function of the rebuilt image	
+0xa7b7f2e0	_ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE.eh	1	not a C function of the rebuilt image	
+0xa7b7f2e4	_ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE.eh	1	not a C function of the rebuilt image	
+0xa7b7f2e8	_ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_.eh	1	not a C function of the rebuilt image	
+0xa7b7f2ec	_ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE.eh	1	not a C function of the rebuilt image	
+0xa7b7f2f0	_ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE.eh	1	not a C function of the rebuilt image	
+0xa7b7f2f4	_ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_.eh	1	not a C function of the rebuilt image	
+0xa7b7f2f8	_ZNKSt9type_info10__do_catchEPKS_PPvj.eh	1	not a C function of the rebuilt image	
+0xa7b7f2fc	_ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv.eh	1	not a C function of the rebuilt image	
+0xa7b7f300	_ZNKSt9type_info14__is_pointer_pEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f304	_ZNKSt9type_info15__is_function_pEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f308	_ZNKSt9type_infoeqERKS_.eh	1	not a C function of the rebuilt image	
+0xa7b7f30c	_ZNSt10bad_typeidD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f310	_ZNSt10bad_typeidD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f314	_ZNSt10bad_typeidD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f318	_ZNSt10bad_typeidD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f31c	_ZNSt8bad_castD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f320	_ZNSt8bad_castD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f324	_ZNSt8bad_castD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f328	_ZNSt8bad_castD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f32c	_ZNSt9type_infoD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f330	_ZNSt9type_infoD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f334	_ZNSt9type_infoD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f338	_ZNSt9type_infoD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f33c	_ZNKSt9exception4whatEv.eh	1	not a C function of the rebuilt image	
+0xa7b7f340	_ZNSt13bad_exceptionD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f344	_ZNSt13bad_exceptionD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f348	_ZNSt13bad_exceptionD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f34c	_ZNSt13bad_exceptionD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f350	_ZNSt9exceptionD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f354	_ZNSt9exceptionD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f358	_ZNSt9exceptionD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f35c	_ZNSt9exceptionD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f360	_ZNSt9bad_allocD0Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f364	_ZNSt9bad_allocD1Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f368	_ZNSt9bad_allocD2Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f36c	_ZNSt9bad_allocD4Ev.eh	1	not a C function of the rebuilt image	
+0xa7b7f370	_Z21size_of_encoded_valueh.eh	1	not a C function of the rebuilt image	
+0xa7b7f374	_Z21base_of_encoded_valuehP15_Unwind_Context.eh	1	not a C function of the rebuilt image	
+0xa7b7f378	_Z12read_uleb128PKhPj.eh	1	not a C function of the rebuilt image	
+0xa7b7f37c	_Z12read_sleb128PKhPi.eh	1	not a C function of the rebuilt image	
+0xa7b7f380	_Z28read_encoded_value_with_basehjPKhPj.eh	1	not a C function of the rebuilt image	
+0xa7b7f384	_Z15get_ttype_entryP16lsda_header_infoj.eh	1	not a C function of the rebuilt image	
+0xa7b7f388	_ZSt18uncaught_exceptionv.eh	1	not a C function of the rebuilt image	
+0xa7b7f394	_Z21get_globals_init_oncev.eh	1	not a C function of the rebuilt image	

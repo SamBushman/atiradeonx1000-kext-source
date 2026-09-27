@@ -1,0 +1,121 @@
+# stock entry	name	size	entered by a test of the differential suite	if not: static reason
+0x1070	FUN_00001070	48	not a C function of the rebuilt image	
+0x10a0	FUN_000010a0	32	not a C function of the rebuilt image	
+0x10c0	FUN_000010c0	40	not a C function of the rebuilt image	
+0x10e8	FUN_000010e8	120	not a C function of the rebuilt image	
+0x1160	FUN_00001160	204	not a C function of the rebuilt image	
+0x122c	FUN_0000122c	504	not a C function of the rebuilt image	
+0x1424	FUN_00001424	32	not a C function of the rebuilt image	
+0x1444	FUN_00001444	32	not a C function of the rebuilt image	
+0x1464	FUN_00001464	528	not a C function of the rebuilt image	
+0x1674	FUN_00001674	32	not a C function of the rebuilt image	
+0x1694	FUN_00001694	32	not a C function of the rebuilt image	
+0x16b4	FUN_000016b4	32	not a C function of the rebuilt image	
+0x16d4	FUN_000016d4	32	not a C function of the rebuilt image	
+0x16f4	FUN_000016f4	32	not a C function of the rebuilt image	
+0x1714	FUN_00001714	32	not a C function of the rebuilt image	
+0x1734	FUN_00001734	32	not a C function of the rebuilt image	
+0x1754	FUN_00001754	268	not a C function of the rebuilt image	
+0x1860	FUN_00001860	32	not a C function of the rebuilt image	
+0x1880	FUN_00001880	32	not a C function of the rebuilt image	
+0x18a0	FUN_000018a0	292	not a C function of the rebuilt image	
+0x19c4	FUN_000019c4	32	not a C function of the rebuilt image	
+0x19e4	FUN_000019e4	32	not a C function of the rebuilt image	
+0x1a04	FUN_00001a04	32	not a C function of the rebuilt image	
+0x1a24	FUN_00001a24	312	not a C function of the rebuilt image	
+0x1b5c	FUN_00001b5c	32	not a C function of the rebuilt image	
+0x1b7c	FUN_00001b7c	32	not a C function of the rebuilt image	
+0x1b9c	FUN_00001b9c	32	not a C function of the rebuilt image	
+0x1bbc	FUN_00001bbc	188	not a C function of the rebuilt image	
+0x1c78	FUN_00001c78	32	not a C function of the rebuilt image	
+0x1c98	FUN_00001c98	32	not a C function of the rebuilt image	
+0x1cb8	FUN_00001cb8	32	not a C function of the rebuilt image	
+0x1cd8	FUN_00001cd8	672	not a C function of the rebuilt image	
+0x1f78	FUN_00001f78	32	not a C function of the rebuilt image	
+0x1f98	FUN_00001f98	32	not a C function of the rebuilt image	
+0x1fb8	FUN_00001fb8	32	not a C function of the rebuilt image	
+0x1fd8	FUN_00001fd8	32	not a C function of the rebuilt image	
+0x1ff8	FUN_00001ff8	96	not a C function of the rebuilt image	
+0x2058	FUN_00002058	32	not a C function of the rebuilt image	
+0x2078	FUN_00002078	92	not a C function of the rebuilt image	
+0x20d4	FUN_000020d4	32	not a C function of the rebuilt image	
+0x2100	_AVACreateRenderer	556	no	calls an import (calloc); calls an import (strlcpy)
+0x2340	FUN_00002340	108	no	calls an import (free)
+0x23b0	_AVACreateRendererDisplayExt	160	no	calls an import (calloc)
+0x2450	_AVACreateRendererDVDExt	164	no	calls an import (calloc)
+0x2500	_AVAGetRendererInfo	108	yes	
+0x2570	FUN_00002570	936	no	calls an import (CGDisplayIDToOpenGLDisplayMask); calls an import (IOConnectMapMemory); calls an import (IOServiceClose)
+0x2930	FUN_00002930	132	no	calls an import (free); calls an import (io_connect_method_scalarI_structureI)
+0x29c0	FUN_000029c0	424	yes	
+0x2b70	FUN_00002b70	244	no	calls an import (IOServiceClose); calls an import (free)
+0x2c70	FUN_00002c70	132	no	calls an import (io_connect_method_scalarI_scalarO)
+0x2d00	FUN_00002d00	120	no	calls an import (io_connect_method_scalarI_structureI)
+0x2d80	FUN_00002d80	64	yes	
+0x2dc0	FUN_00002dc0	68	yes	
+0x2e10	FUN_00002e10	64	yes	
+0x2e50	FUN_00002e50	1144	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_scalarI_structureO)
+0x3350	FUN_00003350	720	no	calls an import (calloc); calls an import (free); calls an import (io_connect_method_scalarI_scalarO)
+0x3630	FUN_00003630	356	yes	
+0x37b0	FUN_000037b0	124	yes	
+0x3830	FUN_00003830	136	yes	
+0x38c0	FUN_000038c0	100	yes	
+0x3930	FUN_00003930	916	yes	
+0x3cd0	FUN_00003cd0	672	yes	
+0x3fc0	FUN_00003fc0	696	yes	
+0x4280	FUN_00004280	192	yes	
+0x4340	FUN_00004340	988	no	calls an import (free); calls an import (io_connect_method_scalarI_scalarO); calls an import (io_connect_method_scalarI_structureI)
+0x4740	FUN_00004740	664	no	calls an import (IOConnectMapMemory)
+0x49f0	FUN_000049f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x4a00	FUN_00004a00	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x4a10	FUN_00004a10	296	yes	
+0x4b40	FUN_00004b40	1116	no	calls an import (IOConnectMapMemory)
+0x4fa0	FUN_00004fa0	552	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (io_connect_method_scalarI_structureI); calls an import (puts)
+0x51f0	FUN_000051f0	136	yes	
+0x5280	FUN_00005280	108	no	calls an import (io_connect_method_scalarI_scalarO)
+0x52f0	FUN_000052f0	924	no	calls an import (IOConnectMapMemory)
+0x56a0	FUN_000056a0	512	no	calls an import (IOConnectMapMemory); indirect call (driver context / vtable / callback)
+0x58b0	FUN_000058b0	1196	yes	
+0x5d60	FUN_00005d60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x5d70	FUN_00005d70	600	yes	
+0x5fd0	FUN_00005fd0	320	no	calls an import (io_connect_method_structureI_structureO)
+0x6120	FUN_00006120	252	no	calls an import (IOConnectMapMemory)
+0x6230	FUN_00006230	2900	yes	
+0x6d90	FUN_00006d90	644	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x7020	FUN_00007020	592	yes	
+0x7270	FUN_00007270	544	yes	
+0x7490	FUN_00007490	696	yes	
+0x7760	FUN_00007760	204	yes	
+0x7850	FUN_00007850	1416	yes	
+0x7de0	FUN_00007de0	416	yes	
+0x7f80	FUN_00007f80	1072	no	calls an import (IOConnectMapMemory)
+0x83e0	FUN_000083e0	300	yes	
+0x8510	FUN_00008510	372	yes	
+0x8690	FUN_00008690	344	yes	
+0x8800	FUN_00008800	28	yes	
+0x8820	FUN_00008820	3588	yes	
+0x9670	FUN_00009670	28	yes	
+0x9690	FUN_00009690	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x96a0	FUN_000096a0	96	yes	
+0x9700	FUN_00009700	528	yes	
+0x9930	FUN_00009930	80	yes	
+0x9980	FUN_00009980	48	yes	
+0x99b0	FUN_000099b0	264	yes	
+0x9ac0	FUN_00009ac0	424	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x9c80	FUN_00009c80	1160	no	calls an import (IOConnectMapMemory)
+0xa110	FUN_0000a110	964	no	calls an import (IOConnectMapMemory)
+0xa4e0	FUN_0000a4e0	1304	no	calls an import (IOConnectMapMemory)
+0xaa00	FUN_0000aa00	1152	no	calls an import (IOConnectMapMemory)
+0xae80	FUN_0000ae80	2380	no	calls an import (IOConnectMapMemory)
+0xb7f0	FUN_0000b7f0	964	no	calls an import (IOConnectMapMemory)
+0xbbc0	FUN_0000bbc0	864	no	calls an import (IOConnectMapMemory)
+0xbf20	FUN_0000bf20	72	no	atomic / cache / barrier instruction
+0xbf70	FUN_0000bf70	80	no	atomic / cache / barrier instruction
+0xbfc0	FUN_0000bfc0	400	no	calls an import (IOConnectMapMemory)
+0xc160	FUN_0000c160	848	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xc4b0	FUN_0000c4b0	1508	no	calls an import (IOConnectMapMemory)
+0xcaa0	FUN_0000caa0	92	yes	
+0xcb00	FUN_0000cb00	1136	no	calls an import (IOConnectMapMemory)
+0xcf98	FUN_0000cf98	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfa4	FUN_0000cfa4	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfa8	FUN_0000cfa8	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfe8	FUN_0000cfe8	44	no	tiny (44 bytes) crt / thunk fragment: reached only through a caller no test exercises

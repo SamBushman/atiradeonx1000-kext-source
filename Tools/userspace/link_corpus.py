@@ -1278,9 +1278,27 @@ for c_, nm_, cur_, comp_ in m.dylibs:
     f_ = lib_flag(nm_)
     if f_ not in auto_flags:
         auto_flags.append(f_)
+if os.environ.get('COVERAGE'):      # function coverage of the rebuilt image (issue #65): every C function appends its image offset to $COV_FILE the first time a process enters it
+    with open(os.path.join(out, 'x_cov_part_000.c'), 'w') as f_:
+        f_.write(r'''#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+extern char cov_hdr asm("%s");
+static unsigned char cov_seen[0x180000 / 8]; static int cov_fd = -2;
+void __cyg_profile_func_enter(void *fn, void *site) __attribute__((no_instrument_function));
+void __cyg_profile_func_exit(void *fn, void *site) __attribute__((no_instrument_function));
+void __cyg_profile_func_enter(void *fn, void *site) {
+    unsigned off = (unsigned)fn - (unsigned)&cov_hdr, i = off >> 2;
+    if (i >= 8u * sizeof cov_seen || (cov_seen[i >> 3] & (1 << (i & 7)))) return;
+    cov_seen[i >> 3] |= 1 << (i & 7);
+    if (cov_fd == -2) { const char *p = getenv("COV_FILE"); cov_fd = open(p ? p : "/tmp/cov_default.bin", O_WRONLY | O_APPEND | O_CREAT, 0666); }
+    if (cov_fd >= 0) write(cov_fd, &off, 4);
+}
+void __cyg_profile_func_exit(void *fn, void *site) {}
+''' % HEADER_SYM)
 kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
-      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc -O0 -w -fPIC -fno-common -force_cpusubtype_ALL"',
+      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc -O0 -w -fPIC -fno-common -force_cpusubtype_ALL%s"' % (' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
       'rm -rf obj; mkdir obj',
       'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; gcc $CFLAGS -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
       'as -arch ppc -o obj/data.o data.s',

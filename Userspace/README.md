@@ -474,6 +474,25 @@ without their pattern (40 checked, 0 silent). The retired patches are listed wit
     `2fAPPLE`, `glBitmap`, `glSampleCoverage` / `ARB` lost their `GLboolean`, ... 14 functions; the existing test only called `glClear`). The forwarding call now uses the prototyped pointer type
     (`(ret (*)(unsigned int, T1, T2 ...))`): a float keeps its FPR and ONE slot, as in the stock. One more difference is Apple's: the stock `glVertexAttrib4Nub` passes `x` where `z` belongs
     (`or r7,r30,r30`: the incoming r6 is never read); the rebuilt stub keeps the bug (`ARG_OVERRIDES`).
+### Which functions does any test enter? (issue #65 criterion 1)
+`COVERAGE=1 python3 Tools/userspace/link_corpus.py ...` links an instrumented copy of an image (`-finstrument-functions` + a hook that appends the image offset of every function the first time a process
+enters it to `$COV_FILE`); the whole differential suite is run against the instrumented images with `COV_FILE` set (load / export tests, fnfuzz for GA / VA / glprog / GLDriver, the 141 + 403 GLSL shaders and the
+GLSL probes, ARB parser, noise generator, constants block, atexit / unload, patch-site drives, libGL smoke test and the 888-entry-point dispatch test), and `Tools/userspace/test_coverage.py` writes
+`Userspace/<bin>/ppc/test_coverage.tsv` (every function of the corpus: entered by a test yes / no, and for the ones no test entered the static reason). Result (2026-09-26, C functions only - asm blocks,
+millicode, clipped entries and dropped toolchain code are not instrumented):
+| image | C functions | entered | not entered | of the not entered: calls an import (IOKit / libSystem / CF) | indirect call through a context / vtable | atomics / cache ops | no static blocker |
+|---|---|---|---|---|---|---|---|
+| libGL | 897 | 890 | 7 | 0 | 1 | 0 | 4 (+3 dyld / crt) |
+| GLDriver | 3994 | 2823 | 1171 | 304 | 801 | 28 | 233 |
+| libGLProgrammability | 1295 | 670 | 625 | 733 (multi-count) | 89 | 45 | 310 |
+| GA | 40 | 9 | 31 | 46 (multi-count: every IOConnect* / CF* call) | 1 | 0 | 7 |
+| VA | 80 | 36 | 44 | 52 (multi-count) | 2 | 2 | 11 |
+Reading it: GA is an IOKit user-client plug-in - every function it has left calls `IOConnectMapMemory` / `io_connect_method_*` / `IOAccelFindAccelerator`, i.e. needs the accelerator kext and hardware behind it (the
+surface / blit / flush / start / stop paths; `radeonFill` / `Copy` / `Highlight` / `SolidScanlines` and the 3D setup); its factory / QueryInterface path needs the CFPlugIn type UUID. GLDriver: 801 of the 1171
+call through the context's function tables, i.e. need a live driver context (#64). The rows marked "no static blocker" (GLDriver 233, glprog 310, VA 11, GA 7, libGL 4) are functions a test COULD reach; for glprog
+they are mostly front-end paths of GLSL features none of the 544 shaders use, the interpreter / emulator (`Interpreter*` 33, `PPC*` 37, `PPEmulator*` 11) and the disassembler writers - that is the
+remaining test-writing work, not a hardware limit. The lists are the record; no claim is made that a function is dead.
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees
