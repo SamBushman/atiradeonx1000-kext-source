@@ -1,0 +1,44 @@
+# data_compare.py on the linked images (tag x6, 2026-09-26): initialised data of each rebuilt image vs the stock's
+
+== ga
+__bss          21 identical
+__cstring      13 no label, content ABSENT, 2 no label, content present
+__data         1 identical (located by anchor)
+__literal4     2 identical, 4 no label, content present
+__literal8     1 identical, 3 no label, content present
+0 objects differ, 13 without a label whose content is absent from the rebuilt image
+
+== va
+__bss          3 identical
+__common       2 no label, content present
+__cstring      10 no label, content ABSENT, 3 no label, content present
+__data         40 identical, 1 identical (located by anchor)
+__literal4     9 identical, 10 no label, content present
+__literal8     1 identical, 3 no label, content present
+0 objects differ, 10 without a label whose content is absent from the rebuilt image
+
+== glprog
+__bss          168 identical, 6 identical (located by anchor)
+__const        34 identical, 48 identical (located by anchor), 40 same up to pointer targets, 92 same up to pointer targets (located by anchor)
+__cstring      286 identical, 2 no label, content ABSENT, 1262 no label, content present
+__data         3 DIFFERENT, 1 DIFFERENT (located by anchor), 29 identical, 7 identical (located by anchor), 190 same up to pointer targets, 24 same up to pointer targets (1 unverified), 103 same up to pointer targets (located by anchor)
+__datacoal_nt  31 DIFFERENT (located by anchor), 2 identical, 1 identical (located by anchor), 5 same up to pointer targets (1 unverified) (located by anchor)
+__literal4     15 identical, 49 no label, content present
+__literal8     17 identical, 2 no label, content present
+35 objects differ, 2 without a label whose content is absent from the rebuilt image
+
+== gld
+__bss          1033 identical, 3 identical (located by anchor)
+__common       257 identical, 31 identical (located by anchor)
+__const        161 identical, 124 identical (located by anchor), 59 same up to pointer targets, 12 same up to pointer targets (located by anchor)
+__const_coal   1 same up to pointer targets, 307 same up to pointer targets (located by anchor)
+__cstring      226 identical, 26 no label, content ABSENT, 1339 no label, content present
+__data         90 identical, 49 identical (located by anchor), 22 same up to pointer targets, 4 same up to pointer targets (located by anchor)
+__literal4     57 identical, 5 no label, content present
+__literal8     25 identical, 1 no label, content present
+0 objects differ, 26 without a label whose content is absent from the rebuilt image
+
+== libgl
+__cstring      1 no label, content present
+__data         1 DIFFERENT (located by anchor), 3 identical
+1 objects differ, 0 without a label whose content is absent from the rebuilt image

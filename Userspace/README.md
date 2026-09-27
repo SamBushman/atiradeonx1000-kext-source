@@ -383,6 +383,26 @@ operands of `+`/`-`, `uRam` reads, `&MACH_HEADER.field`, uninitialised `in_xer_*
 pointer in `_gldPageoffBuffer`; two `(uint)(fVar * fVar)` = the real unsigned conversions kept by `resolve_float_casts`). The two classes with no textual signature - float values stored as words
 (19, 21) - are checked by compiler diagnostics (`wall_audit.sh ... gcc14`: no float -> integer conversion left) and by the fctiw oracle above.
 
+### Data sections vs the stock (issue #72, criteria 1 and 2)
+`Tools/userspace/data_compare.py` (run with the link tree's `symbol_map.tsv` and the corpus `ledger.tsv`; results in `Userspace/data_compare.txt`) reads every data object of the stock's table from the stock
+slice and the same object from the rebuilt image and compares them word by word. Objects are found by their label (the link tree emits every stock data symbol under the SAME name), and, for
+the unlabelled interior of a section (GLDriver's 5558-word `__const_coal`, glprog's tables), through the nearest labelled object of the same stock section, whose (stock -> rebuilt) displacement
+is constant because the emitter keeps a section's objects in order. A word that is an ADDRESS in both images is a pointer and is compared by TARGET, since every pointer moves with the layout:
+(nearest symbol, offset) with symbols matched by name (Ghidra's sanitised `A__b` = the demangled `A::b`; `std::string` aliases), or the stock address that a Ghidra label embeds
+(`DAT_001ada48` + 3628), or - for a pointer to a C string - the string itself (the rebuilt image pools its strings anonymously); a word that is 0 on disk and bound by dyld is resolved
+through the rebuilt image's external relocations. Result (identical / same up to pointer targets / located by anchor, all counted as equal):
+* **GLDriver: 0 of 2235 initialised objects differ** (bss/common 1324, `__const` 356, `__const_coal` 308, `__data` 165, literals 82; plus 226 strings equal by name and 1339 more present by content); GA: 0 of 25; VA: 0 of 54; libGL: 0 real (4 objects, only its `__mh_dylib_header` word differs).
+* **libGLProgrammability: 0 real differences among ~1100 objects** (bss 174, `__const` 214, `__data` 357, strings 286 + 1262 by content, `__datacoal_nt` 39, literals 32). 35 objects differ for known, intended reasons: 31 are the stock's private copies of libstdc++'s exception typeinfo (`std::bad_alloc::typeinfo`,
+  `__cxxabiv1::__si_class_type_info::typeinfo-name` ..., in `__datacoal_nt`; the rebuilt image imports the system libstdc++'s: issue #63), `dyld__mh_dylib_header` (the image's own header address, bound by dyld
+  differently) and the prebound `__cxxabiv1::__terminate_handler` (three aliases: an address inside libstdc++ at the stock's link time).
+* Stock objects with no counterpart: the dyld / atexit boilerplate strings of the toolchain stub (`__dyld_image_count`, `__dyld_NSLookupSymbolInImage`, `__cxa_finalize` ... 13 GA, 10 VA, 10 GLDriver) and 16 GLDriver / 2 glprog pass-name strings
+  (`assign_slots`, `mark_io`, `ssa_build` ...; `before`, `after`) that no code of the corpus (parts, raw blocks, pads, orphans) references.
+* Not compared: `__TEXT,__eh_frame`, `__gcc_except_tab` (not emitted, #63), the symbol-pointer / stub sections (rebuilt by the linker).
+**PIC anchors (criterion 2).** `DAT_001b2eb8`, `DAT_001b40f0`, `DAT_001b81b8` are addresses in the stock's `__eh_frame` (past the end of `__const`), defined in the rebuilt image as `LD_1b0050 + 11880` / `LD_1b0044 + 16556` /
+`LD_1b2ac0 + 22264`. Every use in the corpus (`part_042.c` x4, `part_043.c` x3, `part_052.c` x1) is `local_NN = &DAT_...` inside a function's exception-registration record (`local_7c = 2; local_70 = &...`, next to the
+`__Unwind` state words): the address is stored and never dereferenced by non-EH code, so what lies behind it in the rebuilt image cannot be read unless an exception propagates - which the rebuilt image cannot
+do either way (#63: no LSDA / FDE is emitted). The other anchors listed in `link_config/gld.json` are objects of the compared sections and are covered by `data_compare.py`.
+
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees
