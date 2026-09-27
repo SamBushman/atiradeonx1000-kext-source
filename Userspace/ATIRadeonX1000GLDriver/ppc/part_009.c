@@ -5243,7 +5243,7 @@ LAB_00065500:
   }
   else {
     in_r5 = *(undefined4 *)(iVar2 + 0x3c);
-    (**(code **)((int)((unsigned char *)0x00001294) + param_1))(param_1);
+    (**(code **)((int)((unsigned char *)0x00001294) + param_1))(param_1,iVar2,in_r5);
     uVar3 = extraout_r4_00;
   }
   if (*(char *)(*(int *)(iVar2 + 0x54) + 0x752) == '\0') {
