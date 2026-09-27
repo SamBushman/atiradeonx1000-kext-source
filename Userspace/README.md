@@ -469,6 +469,11 @@ without their pattern (40 checked, 0 silent). The retired patches are listed wit
     detector now reports 0 in GLDriver / GA / VA / libGL; the 22 in glprog are `_Rep::_M_destroy(this, allocator)` (the callee reads the allocator only in its landing pad) and string literals that spell `yy_scan_bytes()`.
     `Tools/userspace/callarg_triage.py` classifies the residual rows of `callarg_check.py` (`Userspace/<bin>/ppc/callarg_residual.tsv`): benign (callee ignores the register / only returns it / import of smaller
     arity / a symbolised text address / a double's second slot / an alias of the parameter or constant) vs CHECK.
+24. **libGL dispatch stubs forwarded floats as doubles (issue #65 criterion 2).** The rebuilt stubs (`fix_gl_stubs.py` template) tail-called the context's entry through `(*)()`, an unprototyped type: a
+    `GLfloat` argument is promoted to `double`, two GPR slots, and every integer argument after it moved one register (`glMap1f`, `glMap2f`, `glMapGrid2f`, `glMapVertexAttrib1fAPPLE` /
+    `2fAPPLE`, `glBitmap`, `glSampleCoverage` / `ARB` lost their `GLboolean`, ... 14 functions; the existing test only called `glClear`). The forwarding call now uses the prototyped pointer type
+    (`(ret (*)(unsigned int, T1, T2 ...))`): a float keeps its FPR and ONE slot, as in the stock. One more difference is Apple's: the stock `glVertexAttrib4Nub` passes `x` where `z` belongs
+    (`or r7,r30,r30`: the incoming r6 is never read); the rebuilt stub keeps the bug (`ARG_OVERRIDES`).
 ### Undeclared argument registers (`in_rN`, issue #70)
 Every function whose decompile reads an argument register it does not declare (`in_r3`..`in_r10`: 234 GLDriver, 282 glprog, 2 VA reads) is classified
 from the stock machine code by `Tools/userspace/inreg_liveness.py` (backward liveness over the function's RANGES, tables followed, callees

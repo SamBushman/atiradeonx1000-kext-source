@@ -65,6 +65,12 @@ TEMPLATE = """{
 }"""
 
 
+# Apple's stock stubs that do NOT forward their arguments faithfully (found by Tests/userspace/libgl_dispatch_test.c, stock vs rebuilt argument positions):
+# glVertexAttrib4Nub (stock 0x92f38fc0): `or r26,r3,r3` (index) `or r30,r4,r4` (x) `or r28,r5,r5` (y) `or r27,r7,r7` (w) - the incoming r6 (z) is never read - then
+# `or r4,r26` `or r5,r30` `or r6,r28` `or r7,r30,r30` `or r8,r27`: the dispatch call receives x where z belongs (a bug in the shipped libGL). The rebuilt stub keeps it: bug for bug.
+ARG_OVERRIDES = {'glVertexAttrib4Nub': {3: 'param_2'}}
+
+
 def patch_function(chunk, name, protos):
     """chunk = one function (comment line + K&R header + decls + body). Returns (new_chunk, status)."""
     cname = name[1:] if name.startswith('_') else name
@@ -83,9 +89,12 @@ def patch_function(chunk, name, protos):
     if not mm:
         return chunk, 'no dispatch call'
     idx = mm.group(1)
-    args = ''.join(', param_%d' % (k + 1) for k in range(len(types)))
+    args = ''.join(', %s' % ARG_OVERRIDES.get(cname, {}).get(k, 'param_%d' % (k + 1)) for k in range(len(types)))
     rt = ret.strip()
-    fnc = '((%s (*)())puVar2[%s])(puVar2[0]%s);' % (rt, idx, args)
+    # a PROTOTYPED pointer type: through `(*)()` a GLfloat argument is promoted to double (two GPR slots, everything after it shifted: glMap1f, glMap2f, glMapGrid2f, glSampleCoverage,
+    # glBitmap, glVertexAttrib4Nub ... forwarded their integer arguments in the wrong registers - found by Tests/userspace/libgl_dispatch_test.c); the stock forwards a float in its FPR
+    # and ONE slot, which is what the prototype gives
+    fnc = '((%s (*)(%s))puVar2[%s])(puVar2[0]%s);' % (rt, ', '.join(['unsigned int'] + types), idx, args)
     call = fnc if rt == 'void' else 'return ' + fnc
     sig = '%s %s(%s)' % (rt, cname, ', '.join('%s param_%d' % (ty, k + 1) for k, ty in enumerate(types)) if types else 'void')
     body = TEMPLATE % dict(idx=idx, off=int(idx, 16) * 4 if idx.startswith('0x') else int(idx) * 4, call=call)
