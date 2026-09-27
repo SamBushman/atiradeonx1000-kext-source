@@ -474,6 +474,16 @@ without their pattern (40 checked, 0 silent). The retired patches are listed wit
     `2fAPPLE`, `glBitmap`, `glSampleCoverage` / `ARB` lost their `GLboolean`, ... 14 functions; the existing test only called `glClear`). The forwarding call now uses the prototyped pointer type
     (`(ret (*)(unsigned int, T1, T2 ...))`): a float keeps its FPR and ONE slot, as in the stock. One more difference is Apple's: the stock `glVertexAttrib4Nub` passes `x` where `z` belongs
     (`or r7,r30,r30`: the incoming r6 is never read); the rebuilt stub keeps the bug (`ARG_OVERRIDES`).
+25. **Dropped passthrough return values (issues #65/#68).** A stock function whose `blr` is reached straight from a call's `bl`/`bctrl` (nothing but
+    epilogue in between, nothing writing r3) returns whatever its callee returned; when the decompiler believed that callee void, it emitted
+    `<call>(...); return;` in the (always-`int`) C function instead of `return <call>(...);`. On a plain `-O0` build this happens to work (nothing
+    generated between the call and a bare `return;` touches r3), but it's register luck: found via the glprog function-coverage build, where an
+    instrumented (`-finstrument-functions`) build's inserted `__cyg_profile_func_exit` call landed exactly there and clobbered it
+    (`_ShConstructCompiler` dropped `ConstructCompiler`'s `TCompiler*` result). `Tools/userspace/passthrough_ret.py` finds the candidates from the
+    stock disassembly + ledger; `Tools/userspace/fix_passthrough_ret.py` rewrites them, skipping any whose last statement isn't itself a plain call
+    (a real assignment - still void) and any function already declared `void` (nothing reads its result either way). 109 functions fixed across the
+    five images (35 glprog, 1 GA, 1 VA, 38 libGL, 35 GLDriver); verified against the full differential/behavioural suite, 0 changes. Does not by
+    itself fix the coverage build's crash - see the caveat under "Which functions does any test enter?" below.
 ### Which functions does any test enter? (issue #65 criterion 1)
 `COVERAGE=1 python3 Tools/userspace/link_corpus.py ...` links an instrumented copy of an image (`-finstrument-functions` + a hook that appends the image offset of every function the first time a process
 enters it to `$COV_FILE`); the whole differential suite is run against the instrumented images with `COV_FILE` set (load / export tests, fnfuzz for GA / VA / glprog / GLDriver, the 141 + 403 GLSL shaders and the
@@ -487,6 +497,13 @@ millicode, clipped entries and dropped toolchain code are not instrumented):
 | libGLProgrammability | 1295 | 670 | 625 | 733 (multi-count) | 89 | 45 | 310 |
 | GA | 40 | 9 | 31 | 46 (multi-count: every IOConnect* / CF* call) | 1 | 0 | 7 |
 | VA | 80 | 36 | 44 | 52 (multi-count) | 2 | 2 | 11 |
+**glprog's row is a known undercount, not yet fixed (2026-09-26):** 3 of the 141 `glsl_test` shaders crash on the instrumented image, in
+`TParseContext::executeInitializer` (reached through `ShInitialize`/`generateBuiltInSymbolTable`/`initializeSymbolTable`, so on every shader, but only
+3 of 141 actually hit the garbage read) - see the `KNOWN ISSUE` comment on `link_corpus.py`'s `COVERAGE` block. Every function only reached through
+those 3 shaders' run therefore reads as "not entered" here when it may well be entered by the other 138 or by a non-instrumented test; the 670/625
+split (and the "no static blocker" 310) are a lower bound on "entered", not a measurement. The crash is independent of defect class 25 above (fixed,
+but re-tested against a fresh instrumented rebuild and the crash is unchanged) and of `cov_seen`'s size; only removing the hook object entirely stops
+it. Do not re-derive conclusions from these two rows until it is root-caused and the table regenerated.
 Reading it: GA is an IOKit user-client plug-in - every function it has left calls `IOConnectMapMemory` / `io_connect_method_*` / `IOAccelFindAccelerator`, i.e. needs the accelerator kext and hardware behind it (the
 surface / blit / flush / start / stop paths; `radeonFill` / `Copy` / `Highlight` / `SolidScanlines` and the 3D setup); its factory / QueryInterface path needs the CFPlugIn type UUID. GLDriver: 801 of the 1171
 call through the context's function tables, i.e. need a live driver context (#64). The rows marked "no static blocker" (GLDriver 233, glprog 310, VA 11, GA 7, libGL 4) are functions a test COULD reach; for glprog
