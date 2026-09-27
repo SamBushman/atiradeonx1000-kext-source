@@ -431,8 +431,7 @@ int FUN_000dc658(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     param_7 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
     param_8 = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
   }
-  FUN_000da904(param_1,local_38,param_3,param_4,param_5,param_6,param_7,param_8);
-  return;
+  return FUN_000da904(param_1,local_38,param_3,param_4,param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000dc71c @ 0xdc71c (268 bytes) */
@@ -504,8 +503,7 @@ int FUN_000dc83c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   
   uVar1 = param_2 >> 0x10 & 0xff;
   FUN_001a32d0(auStack_38,"_stage(%d)",uVar1,param_4,param_5,param_6,param_7,param_8);
-  FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
-  return;
+  return FUN_000da904(param_1,auStack_38,uVar1,param_4,param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000dc88c @ 0xdc88c (324 bytes) */
@@ -837,8 +835,7 @@ int FUN_000dcdf4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   FUN_001a32d0(auStack_118,"il_%s_%d_%d",pcVar2,uVar3,uVar4,param_6,param_7,param_8);
   *(uint *)(param_1 + 0x218) = (uint)(uVar1 == 1);
   FUN_000da904(param_1,auStack_118,pcVar2,uVar3,uVar4,param_6,param_7,param_8);
-  FUN_000da984(param_1,extraout_r4,pcVar2,uVar3,uVar4,param_6,param_7,param_8);
-  return;
+  return FUN_000da984(param_1,extraout_r4,pcVar2,uVar3,uVar4,param_6,param_7,param_8);
 }
 
 /* FUN_000dcef4 @ 0xdcef4 (640 bytes) */

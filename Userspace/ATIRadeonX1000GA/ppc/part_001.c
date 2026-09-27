@@ -602,8 +602,7 @@ int __WaitComplete(param_1, param_2)
     (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = 1;
   }
   ((int (*)())__Flush)(param_1,0);
-  _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 0xc),7,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),1,0,0);
-  return;
+  return _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 0xc),7,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)),1,0,0);
 }
 
 /* __FreeSurface @ 0x3f30 (224 bytes) */

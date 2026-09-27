@@ -555,8 +555,7 @@ int TVariable__dump(this, param_2)
   if ((*(uint *)(this + 0x30) & 0x200) != 0) {
     __ZN13TInfoSinkBase6appendEPKc(this_00,"[0]");
   }
-  __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
-  return;
+  return __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
 }
 
 /* TFunction__dump @ 0x97ba2a38 (216 bytes) */
@@ -583,8 +582,7 @@ int TFunction__dump(this, param_2)
   iVar2 = (**(code **)(*(int *)this + 8))(this);
   *(undefined1 *)(*(int *)(iVar2 + 4) + *(int *)(*(int *)(iVar2 + 4) + -0xc)) = *puVar1;
   __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(iVar2 + 4));
-  __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
-  return;
+  return __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
 }
 
 /* TSymbolTableLevel__dump @ 0x97ba2b10 (112 bytes) */
@@ -1632,8 +1630,7 @@ int TSymbolTable__copyTable(this, param_2)
     local_60[3] = local_60;
     local_5c = 0;
   }
-  std____default_alloc_template_true_0___deallocate(local_60,0x18);
-  return;
+  return std____default_alloc_template_true_0___deallocate(local_60,0x18);
 }
 
 /* yyparse @ 0x97ba373c (34436 bytes) */

@@ -265,8 +265,7 @@ int FUN_000f53c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  ((int (*)())FUN_000f4fdc)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f4fdc)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f554c @ 0xf554c (352 bytes) */
@@ -295,8 +294,7 @@ int FUN_000f554c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  ((int (*)())FUN_000f4fdc)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f4fdc)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f56ac @ 0xf56ac (324 bytes) */
@@ -322,8 +320,7 @@ int FUN_000f56ac(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uStack00000028 = param_5;
   uStack0000002c = param_6;
   uStack00000030 = param_7;
-  ((int (*)())FUN_000f4fdc)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f4fdc)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f57f0 @ 0xf57f0 (540 bytes) */
@@ -955,8 +952,7 @@ int FUN_000f65d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  ((int (*)())FUN_000f6248)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f6248)(param_1,3,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f6760 @ 0xf6760 (352 bytes) */
@@ -985,8 +981,7 @@ int FUN_000f6760(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  ((int (*)())FUN_000f6248)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f6248)(param_1,2,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f68c0 @ 0xf68c0 (324 bytes) */
@@ -1012,8 +1007,7 @@ int FUN_000f68c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   uStack00000028 = param_5;
   uStack0000002c = param_6;
   uStack00000030 = param_7;
-  ((int (*)())FUN_000f6248)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000f6248)(param_1,1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000f6a04 @ 0xf6a04 (588 bytes) */
@@ -1670,9 +1664,8 @@ int FUN_000f771c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_78;
   undefined4 local_74;
   
-  ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
+  return ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
                local_98,local_94,local_90,local_8c,1,param_6,local_80,local_7c,local_78,local_74,1);
-  return;
 }
 
 /* FUN_000f7870 @ 0xf7870 (340 bytes) */
@@ -1698,9 +1691,8 @@ int FUN_000f7870(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_78;
   undefined4 local_74;
   
-  ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,3,param_4,local_b0,local_ac,local_a8,local_a4,3,param_5,
+  return ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,3,param_4,local_b0,local_ac,local_a8,local_a4,3,param_5,
                local_98,local_94,local_90,local_8c,3,param_6,local_80,local_7c,local_78,local_74,3);
-  return;
 }
 
 /* FUN_000f79c4 @ 0xf79c4 (332 bytes) */

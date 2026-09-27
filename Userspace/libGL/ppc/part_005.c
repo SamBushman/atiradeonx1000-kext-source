@@ -582,8 +582,7 @@ int _glTexImage1D(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x12d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x12d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glTexParameterfv @ 0x92f324c8 (140 bytes) */
@@ -1279,8 +1278,7 @@ int _glTexImage3D(param_1, param_2, param_3, param_4, param_5, param_6, param_7,
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x1b7])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x1b7])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glTexSubImage3D @ 0x92f333e8 (208 bytes) */
@@ -1304,8 +1302,7 @@ int _glTexSubImage3D(param_1, param_2, param_3, param_4, param_5, param_6, param
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x1b8])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x1b8])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCopyTexSubImage3D @ 0x92f334b8 (192 bytes) */
@@ -1329,8 +1326,7 @@ int _glCopyTexSubImage3D(param_1, param_2, param_3, param_4, param_5, param_6, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x1b9])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x1b9])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glColorTable @ 0x92f33578 (164 bytes) */

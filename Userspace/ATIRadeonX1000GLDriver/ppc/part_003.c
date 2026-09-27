@@ -364,8 +364,7 @@ int FUN_0001a4e0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0,param_3,4,0,0);
     param_2 = extraout_r4;
   }
-  ((int (*)())FUN_0001a280)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_0001a280)(param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _gldFlush @ 0x1a5c0 (28 bytes) */
@@ -5615,10 +5614,9 @@ int _gldInitDispatch(param_1, param_2, param_3, param_4, param_5)
   param_2[0x1a] = PTR_FUN_001e896c;
   param_2[0x1b] = puVar2;
   param_2[0x20] = PTR_FUN_001e88d8;
-  ((uint (*)())_gldUpdateDispatch)(param_1,param_2,&local_38,param_4,param_5,uVar4,fparam_1,in_f2,in_f3,in_f4,
+  return ((uint (*)())_gldUpdateDispatch)(param_1,param_2,&local_38,param_4,param_5,uVar4,fparam_1,in_f2,in_f3,in_f4,
                      in_f5,in_f6,in_f7,in_f8,in_stack_ffffff98,in_stack_ffffffa0,in_stack_ffffffa8,
                      in_stack_ffffffb0,in_stack_ffffffb8);
-  return;
 }
 
 /* FUN_00022eb0 @ 0x22eb0 (536 bytes) */

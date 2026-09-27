@@ -209,8 +209,7 @@ int TPPStreamCompiler__warning(param_1, param_2, param_3, param_4, param_5, para
   }
   __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),pcVar4);
   __ZN13TInfoSinkBase6appendEPKc((void *)(param_1 + 0xb0),"\n");
-  _free(pcVar4);
-  return;
+  return _free(pcVar4);
 }
 
 /* TPPStreamCompiler__getSymbolTableString @ 0x97bc9c5c (196 bytes) */

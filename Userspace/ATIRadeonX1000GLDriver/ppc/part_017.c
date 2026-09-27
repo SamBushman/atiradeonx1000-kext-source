@@ -10190,8 +10190,7 @@ int FUN_000c6e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   
   _strcpy(auStack_118,param_2);
   iVar1 = _strlen(auStack_118);
-  FUN_001a3428(auStack_118 + iVar1,0x100 - iVar1,param_3,param_4,param_5,param_6,param_7,param_8);
-  return;
+  return FUN_001a3428(auStack_118 + iVar1,0x100 - iVar1,param_3,param_4,param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000c6ef0 @ 0xc6ef0 (88 bytes) */

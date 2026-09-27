@@ -99,8 +99,7 @@ int _glCompressedTexImage3D(param_1, param_2, param_3, param_4, param_5, param_6
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17c])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17c])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexImage2D @ 0x92f35cc4 (184 bytes) */
@@ -124,8 +123,7 @@ int _glCompressedTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexImage1D @ 0x92f35d7c (172 bytes) */
@@ -175,8 +173,7 @@ int _glCompressedTexSubImage3D(param_1, param_2, param_3, param_4, param_5, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17f])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17f])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexSubImage2D @ 0x92f35ef8 (192 bytes) */
@@ -200,8 +197,7 @@ int _glCompressedTexSubImage2D(param_1, param_2, param_3, param_4, param_5, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x180])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x180])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexSubImage1D @ 0x92f35fb8 (172 bytes) */
@@ -1480,7 +1476,6 @@ int _glIsQuery(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x27d])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x27d])(*puVar2,param_1);
 }
 

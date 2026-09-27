@@ -8616,8 +8616,7 @@ int FUN_0003b620(param_1, param_2, param_3, param_4, param_5)
       param_4 = param_4 + -1;
     } while (param_4 != 0);
   }
-  FUN_00054590(param_1 + 0x240,param_2,iVar7,local_418);
-  return;
+  return FUN_00054590(param_1 + 0x240,param_2,iVar7,local_418);
 }
 
 /* FUN_0003b870 @ 0x3b870 (2500 bytes) */

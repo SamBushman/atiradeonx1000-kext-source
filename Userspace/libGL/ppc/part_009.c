@@ -765,8 +765,7 @@ int _glIsShader(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x290])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x290])(*puVar2,param_1);
 }
 
 /* _glIsProgram @ 0x92f3ac7c (128 bytes) */
@@ -789,8 +788,7 @@ int _glIsProgram(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x291])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x291])(*puVar2,param_1);
 }
 
 /* _glGetShaderiv @ 0x92f3acfc (140 bytes) */
@@ -1333,8 +1331,7 @@ int _glIsProgramARB(param_1, param_2, param_3, param_4, param_5, param_6, param_
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x1db])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x1db])(*puVar2,param_1);
 }
 
 /* _glVertexAttrib1sARB @ 0x92f3b8a4 (132 bytes) */

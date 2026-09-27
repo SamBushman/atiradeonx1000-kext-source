@@ -3305,8 +3305,7 @@ int TIntermAggregate__addToPragmaTable(this, param_2)
   *(int *)(*(int *)(this_00 + 4) + 0xc) = *(int *)(this_00 + 4);
   *(unsigned char
     **)(this + 0x68) = this_00;
-  std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_(this_00,(unsigned char *)param_2);
-  return;
+  return std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_(this_00,(unsigned char *)param_2);
 }
 
 /* TType__getCompleteString @ 0x97b96dd0 (276 bytes) */
@@ -3455,8 +3454,7 @@ int OutputSymbol(param_1, param_2, param_3, param_4, param_5, param_6)
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(local_3c + -0xc),local_30);
   }
-  __ZN13TInfoSinkBase6appendEPKc((void *)(*(int *)(param_2 + 0x30) + 8),acStack_b0);
-  return;
+  return __ZN13TInfoSinkBase6appendEPKc((void *)(*(int *)(param_2 + 0x30) + 8),acStack_b0);
 }
 
 /* OutputBinary @ 0x97b970e0 (248 bytes) */

@@ -532,8 +532,7 @@ int _glCopyTexImage2D(param_1, param_2, param_3, param_4, param_5, param_6, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x37])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x37])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCopyTexSubImage1D @ 0x92f2c354 (164 bytes) */
@@ -583,8 +582,7 @@ int _glCopyTexSubImage2D(param_1, param_2, param_3, param_4, param_5, param_6, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x39])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x39])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glDepthRange @ 0x92f2c4b0 (144 bytes) */

@@ -3022,8 +3022,7 @@ int _ConstantPropagateFold(param_1)
     ((int (*)())_EmulateOp)(param_1,iVar7,uVar2);
   }
   ((int (*)())_ClearRegisterState)(uVar2);
-  _HashSetFree(uVar2);
-  return;
+  return _HashSetFree(uVar2);
 }
 
 /* _glpDCBAlloc @ 0x97c108e0 (68 bytes) */

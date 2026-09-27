@@ -404,8 +404,7 @@ int _glSeparableFilter2D(param_1, param_2, param_3, param_4, param_5, param_6, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x1ac])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x1ac])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glGetHistogram @ 0x92f3428c (156 bytes) */

@@ -124,8 +124,7 @@ int _glIsVertexAttribEnabledAPPLE(param_1, param_2, param_3, param_4, param_5, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
-  (*(code *)puVar2[0x218])(*puVar2,param_1,param_2);
-  return;
+  return (*(code *)puVar2[0x218])(*puVar2,param_1,param_2);
 }
 
 /* _glMapVertexAttrib1dAPPLE @ 0x92f44268 (192 bytes) */
@@ -322,8 +321,7 @@ int _glIsFenceAPPLE(param_1, param_2, param_3, param_4, param_5, param_6, param_
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x1d3])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x1d3])(*puVar2,param_1);
 }
 
 /* _glTestFenceAPPLE @ 0x92f44804 (128 bytes) */
@@ -346,8 +344,7 @@ int _glTestFenceAPPLE(param_1, param_2, param_3, param_4, param_5, param_6, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x1d4])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x1d4])(*puVar2,param_1);
 }
 
 /* _glFinishFenceAPPLE @ 0x92f44884 (124 bytes) */
@@ -396,8 +393,7 @@ int _glTestObjectAPPLE(param_1, param_2, param_3, param_4, param_5, param_6, par
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffa0);
   }
-  (*(code *)puVar2[0x1d6])(*puVar2,param_1,param_2);
-  return;
+  return (*(code *)puVar2[0x1d6])(*puVar2,param_1,param_2);
 }
 
 /* _glFinishObjectAPPLE @ 0x92f44988 (132 bytes) */
@@ -602,8 +598,7 @@ int _glIsVertexArrayAPPLE(param_1, param_2, param_3, param_4, param_5, param_6, 
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x22a])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x22a])(*puVar2,param_1);
 }
 
 /* _glElementPointerAPPLE @ 0x92f44d9c (132 bytes) */
@@ -1157,8 +1152,7 @@ int _glCombinerOutputNV(param_1, param_2, param_3, param_4, param_5, param_6, pa
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff70);
   }
-  (*(code *)puVar2[0x1bf])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x1bf])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glFinalCombinerInputNV @ 0x92f45a28 (148 bytes) */

@@ -951,8 +951,7 @@ int _glCompressedTexImage3DARB(param_1, param_2, param_3, param_4, param_5, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17c])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17c])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexImage2DARB @ 0x92f3f2d0 (184 bytes) */
@@ -976,8 +975,7 @@ int _glCompressedTexImage2DARB(param_1, param_2, param_3, param_4, param_5, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17d])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexImage1DARB @ 0x92f3f388 (172 bytes) */
@@ -1027,8 +1025,7 @@ int _glCompressedTexSubImage3DARB(param_1, param_2, param_3, param_4, param_5, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x17f])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x17f])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexSubImage2DARB @ 0x92f3f504 (192 bytes) */
@@ -1052,8 +1049,7 @@ int _glCompressedTexSubImage2DARB(param_1, param_2, param_3, param_4, param_5, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffff80);
   }
-  (*(code *)puVar2[0x180])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
-  return;
+  return (*(code *)puVar2[0x180])(*puVar2,param_1,param_2,param_3,param_4,param_5,param_6,param_7);
 }
 
 /* _glCompressedTexSubImage1DARB @ 0x92f3f5c4 (172 bytes) */

@@ -1246,8 +1246,7 @@ LAB_0013ae10: ;
     iVar6 = iVar10;
     iVar15 = *(int *)(iVar10 + 8);
   }
-  FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar9);
-  return;
+  return FUN_00193cc0(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar9);
 }
 
 /* FUN_0013b1e8 @ 0x13b1e8 (520 bytes) */

@@ -545,8 +545,7 @@ int _glIsEnabled(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x90])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x90])(*puVar2,param_1);
 }
 
 /* _glIsList @ 0x92f2e35c (128 bytes) */
@@ -569,8 +568,7 @@ int _glIsList(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x91])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x91])(*puVar2,param_1);
 }
 
 /* _glIsTexture @ 0x92f2e3dc (128 bytes) */
@@ -593,8 +591,7 @@ int _glIsTexture(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x92])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x92])(*puVar2,param_1);
 }
 
 /* _glLightModelf @ 0x92f2e45c (140 bytes) */

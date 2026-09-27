@@ -259,8 +259,7 @@ int FUN_0010fb54(param_1, param_2, param_3)
     } while ((int)uVar7 < (int)uVar1);
     iVar4 = iVar4 + 1;
   }
-  ((int (*)())FUN_0010fa24)(2,auStack_f8,iVar6,iVar4,*(undefined4 *)(param_3 + 0x418));
-  return;
+  return ((int (*)())FUN_0010fa24)(2,auStack_f8,iVar6,iVar4,*(undefined4 *)(param_3 + 0x418));
 }
 
 /* FUN_0010fc88 @ 0x10fc88 (272 bytes) */
@@ -312,8 +311,7 @@ int FUN_0010fc88(param_1, param_2, param_3, param_4)
     } while ((int)uVar8 < (int)uVar2);
     iVar5 = iVar5 + 1;
   }
-  ((int (*)())FUN_0010fa24)(param_1,auStack_f8,iVar7,iVar5,*(undefined4 *)(param_4 + 0x418));
-  return;
+  return ((int (*)())FUN_0010fa24)(param_1,auStack_f8,iVar7,iVar5,*(undefined4 *)(param_4 + 0x418));
 }
 
 /* FUN_0010fd98 @ 0x10fd98 (396 bytes) */
@@ -393,8 +391,7 @@ LAB_0010febc:
     } while ((int)uVar10 < (int)uVar5);
     iVar3 = *param_3;
   }
-  ((int (*)())FUN_0010fa24)(param_1,local_f8,iVar11,iVar3,*(undefined4 *)(param_4 + 0x418));
-  return;
+  return ((int (*)())FUN_0010fa24)(param_1,local_f8,iVar11,iVar3,*(undefined4 *)(param_4 + 0x418));
 }
 
 /* FUN_0010ff24 @ 0x10ff24 (252 bytes) */

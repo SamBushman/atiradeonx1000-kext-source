@@ -1514,8 +1514,7 @@ LAB_000e3900:
   }
   (**(code **)(*local_54 + 0x24))(local_54,param_2,param_3);
 LAB_000e392c:
-  ((int (*)())FUN_000e3308)(auStack_74);
-  return;
+  return ((int (*)())FUN_000e3308)(auStack_74);
 }
 
 /* FUN_000e3968 @ 0xe3968 (396 bytes) */

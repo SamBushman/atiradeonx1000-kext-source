@@ -1157,8 +1157,7 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
     piVar2 = piVar3;
   }
   FUN_00194034(param_4 + 0x24);
-  FUN_00193cc0(local_48,local_4c);
-  return;
+  return FUN_00193cc0(local_48,local_4c);
 }
 
 /* FUN_0012d2f0 @ 0x12d2f0 (1988 bytes) */

@@ -11091,8 +11091,7 @@ int FUN_0016bd70(param_1)
       FUN_00193cc0(puVar10[-1],puVar10 + -1);
     }
   }
-  FUN_00193cc0(local_5c,local_60);
-  return;
+  return FUN_00193cc0(local_5c,local_60);
 }
 
 /* FUN_0016c1fc @ 0x16c1fc (1092 bytes) */

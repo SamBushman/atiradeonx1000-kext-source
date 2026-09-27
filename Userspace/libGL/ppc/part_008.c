@@ -228,8 +228,7 @@ int _glIsBuffer(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x286])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x286])(*puVar2,param_1);
 }
 
 /* _glBufferData @ 0x92f37fe8 (148 bytes) */
@@ -356,8 +355,7 @@ int _glUnmapBuffer(param_1, param_2, param_3, param_4, param_5, param_6, param_7
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x28b])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x28b])(*puVar2,param_1);
 }
 
 /* _glGetBufferParameteriv @ 0x92f382a8 (140 bytes) */

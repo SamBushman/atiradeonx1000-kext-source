@@ -5356,8 +5356,7 @@ int FUN_00029c00(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack_b4 = uVar19;
   (**(code **)(param_1 + 0x299c))(iVar21,pfVar15 + 2);
   FUN_0009d3b0(iVar21,extraout_r4,pfVar13,iVar9,pfVar14,pfVar15,pfVar16);
-  FUN_000872e0(iVar21,afStack_148);
-  return;
+  return FUN_000872e0(iVar21,afStack_148);
 }
 
 /* FUN_0002a260 @ 0x2a260 (356 bytes) */

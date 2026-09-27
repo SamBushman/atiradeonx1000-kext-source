@@ -5180,8 +5180,7 @@ LAB_00183fe8:
       } while( true );
     }
   }
-  ((int (*)())FUN_00183ac8)(param_1);
-  return;
+  return ((int (*)())FUN_00183ac8)(param_1);
 }
 
 /* FUN_0018401c @ 0x18401c (144 bytes) */

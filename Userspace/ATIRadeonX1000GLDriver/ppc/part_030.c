@@ -811,8 +811,7 @@ int FUN_0010ae20(param_1, param_2, param_3)
   *(int *)(param_1 + 0x160) = iVar2 + iVar1;
   *(undefined4 *)(param_1 + 0x98) = 0;
   FUN_000e7738(uVar4,uVar3,param_1);
-  (**(code **)(*param_2 + 0xc))(param_2,0,*(undefined4 *)(param_3 + 8));
-  return;
+  return (**(code **)(*param_2 + 0xc))(param_2,0,*(undefined4 *)(param_3 + 8));
 }
 
 /* FUN_0010aee8 @ 0x10aee8 (80 bytes) */

@@ -945,8 +945,7 @@ int FUN_000c8de0(param_1, param_2)
   iVar1 = *param_1;
   *param_1 = iVar2;
   *(int *)(iVar2 + 0x24) = iVar1;
-  _memcpy(iVar2,param_2,0x24);
-  return;
+  return _memcpy(iVar2,param_2,0x24);
 }
 
 /* FUN_000c8e30 @ 0xc8e30 (28 bytes) */
@@ -4029,8 +4028,7 @@ int FUN_000cd1ec(param_1, param_2, param_3, param_4)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  ((int (*)())FUN_000cd388)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
-  return;
+  return ((int (*)())FUN_000cd388)(param_1,param_2,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
 }
 
 /* FUN_000cd214 @ 0xcd214 (40 bytes) */
@@ -4047,8 +4045,7 @@ int FUN_000cd214(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_000cd404)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
-  return;
+  return ((int (*)())FUN_000cd404)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000cd23c @ 0xcd23c (40 bytes) */
@@ -4064,8 +4061,7 @@ int FUN_000cd23c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  ((int (*)())FUN_000cdba4)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
-  return;
+  return ((int (*)())FUN_000cdba4)(param_1,param_2,param_3,param_4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),param_6,param_7);
 }
 
 /* FUN_000cd264 @ 0xcd264 (40 bytes) */
@@ -4081,8 +4077,7 @@ int FUN_000cd264(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  ((int (*)())FUN_000cdbe4)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
-  return;
+  return ((int (*)())FUN_000cdbe4)(param_1,param_2,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),param_4,param_5,param_6,param_7);
 }
 
 /* FUN_000cd290 @ 0xcd290 (88 bytes) */
@@ -4155,8 +4150,7 @@ int FUN_000cd3a4(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  (*(code *)*param_2)(param_1,"",param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),param_5,param_6,param_7,param_8);
-  return;
+  return (*(code *)*param_2)(param_1,"",param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),param_5,param_6,param_7,param_8);
 }
 
 /* FUN_000cd404 @ 0xcd404 (1952 bytes) */

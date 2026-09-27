@@ -202,8 +202,7 @@ int _glIsQueryARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x27d])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x27d])(*puVar2,param_1);
 }
 
 /* _glBeginQueryARB @ 0x92f402f8 (132 bytes) */
@@ -434,8 +433,7 @@ int _glIsBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, param_7
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x286])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x286])(*puVar2,param_1);
 }
 
 /* _glBufferDataARB @ 0x92f407a8 (148 bytes) */
@@ -562,8 +560,7 @@ int _glUnmapBufferARB(param_1, param_2, param_3, param_4, param_5, param_6, para
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x28b])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x28b])(*puVar2,param_1);
 }
 
 /* _glGetBufferParameterivARB @ 0x92f40a68 (140 bytes) */

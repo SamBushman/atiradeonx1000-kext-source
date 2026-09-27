@@ -3491,9 +3491,8 @@ int RemoveAllTreeNodes(param_1)
   local_24 = 0;
   local_20 = 0;
   local_14 = 0;
-  (**(code **)(*(int *)param_1 + 8))
+  return (**(code **)(*(int *)param_1 + 8))
             (param_1,&local_40,in_r5,in_r6,in_r7,in_r8,DAT_a7b7ba28,*(int *)param_1);
-  return;
 }
 
 /* GetSymbolTable @ 0x97ba0728 (132 bytes) */
@@ -3624,8 +3623,7 @@ int _ShConstructCompiler(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  ConstructCompiler(param_1,param_2);
-  return;
+  return ConstructCompiler(param_1,param_2);
 }
 
 /* _ShDestruct @ 0x97ba09a4 (200 bytes) */

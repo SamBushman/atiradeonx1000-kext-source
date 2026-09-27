@@ -427,9 +427,8 @@ int __ZNSs6appendERKSs(this, param_2)
   __ZNKSs7_M_iendEv(&local_2c,this);
   __ZNKSs9_M_ibeginEv(&local_28,param_2);
   __ZNKSs7_M_iendEv(local_24,param_2);
-  __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
+  return __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
             (this,local_30,local_2c,local_28,local_24[0]);
-  return;
 }
 
 /* __ZNSs6appendERKSsmm @ 0x97c14924 (216 bytes) */
@@ -462,9 +461,8 @@ int __ZNSs6appendERKSsmm(this, param_2, param_3, param_4)
   __ZNKSs7_M_iendEv(&local_3c,this);
   std__string___M_check((ulong)&local_38,param_2,param_3);
   __ZNKSs7_M_foldEmm((ulong)&local_34,(ulong)param_2,param_3,(*(ulong *)((unsigned char *)ghidra_home + 12)));
-  __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
+  return __ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_
             (this,local_40,local_3c,local_38,local_34);
-  return;
 }
 
 /* __ZNSs6appendEPKcm @ 0x97c149fc (132 bytes) */
@@ -483,9 +481,8 @@ int __ZNSs6appendEPKcm(this, param_2, param_3)
   }
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
-  __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
+  return __ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_
             (this,local_30,local_2c[0],param_2,param_2 + param_3);
-  return;
 }
 
 /* __ZNSs6appendEmc @ 0x97c14a80 (128 bytes) */
@@ -504,8 +501,7 @@ int __ZNSs6appendEmc(this, param_2, param_3)
   }
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_2,param_3);
-  return;
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_2,param_3);
 }
 
 /* std__string__push_back @ 0x97c14b00 (96 bytes) */
@@ -518,8 +514,7 @@ int std__string__push_back(this, param_2)
   
   __ZNKSs7_M_iendEv(&local_30,this);
   __ZNKSs7_M_iendEv(local_2c,this);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],1,param_2);
-  return;
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],1,param_2);
 }
 
 /* __ZNSs6assignERKSs @ 0x97c14b60 (104 bytes) */
@@ -895,8 +890,7 @@ int __ZNSs7replaceEmmmc(this, param_2, param_3, param_4, param_5)
   
   std__string___M_check((ulong)&local_30,this,param_2);
   __ZNKSs7_M_foldEmm((ulong)local_2c,(ulong)this,param_2,param_3);
-  ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_4,param_5);
-  return;
+  return ((int (*)())__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc)(this,local_30,local_2c[0],param_4,param_5);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm @ 0x97c15454 (96 bytes) */
@@ -910,8 +904,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm(this, param_2, p
   int local_30 [5];
   
   __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,param_4,param_5);
-  return;
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,param_4,param_5);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs @ 0x97c154b4 (96 bytes) */
@@ -928,8 +921,7 @@ int __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs(this, param_2, p
   pcVar1 = (char *)*param_4;
   uVar2 = *(ulong *)(pcVar1 + -0xc);
   __ZNKSs9_M_ibeginEv(local_30,this);
-  ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,pcVar1,uVar2);
-  return;
+  return ((int (*)())__ZNSs7replaceEmmPKcm)(this,param_2 - local_30[0],param_3 - param_2,pcVar1,uVar2);
 }
 
 /* __ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc @ 0x97c15514 (80 bytes) */

@@ -4426,8 +4426,7 @@ int FUN_0000b7f0(param_1, param_2, param_3)
   local_6c = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0);
   local_70 = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
   local_64 = (float)((double)CONCAT44(0x43300000,uStack_34) - 4503599627370496.0);
-  ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,uStack_34,uStack_2c);
-  return;
+  return ((int (*)())FUN_00009ac0)(puVar6 + 8,&local_78,&local_68,uStack_34,uStack_2c);
 }
 
 /* FUN_0000bbc0 @ 0xbbc0 (864 bytes) */

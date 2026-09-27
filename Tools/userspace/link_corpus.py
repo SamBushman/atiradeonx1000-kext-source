@@ -1278,20 +1278,27 @@ for c_, nm_, cur_, comp_ in m.dylibs:
     f_ = lib_flag(nm_)
     if f_ not in auto_flags:
         auto_flags.append(f_)
-if os.environ.get('COVERAGE'):      # function coverage of the rebuilt image (issue #65): every C function appends its image offset to $COV_FILE the first time a process enters it
+if os.environ.get('COVERAGE'):      # function coverage of the rebuilt image (issue #65): every C function appends its image offset to $COV_FILE the first time a process enters it.
+    # KNOWN ISSUE (2026-09-26): linking this hook object into glprog - even compiled plain, with every part_*.c's -finstrument-functions calls
+    # left off, so nothing in the image ever calls it - makes 3 of 141 glsl_test shaders (e.g. v_ctor.vert) crash in TParseContext::executeInitializer
+    # on a garbage pointer read off TParseContext's own stack frame, reached through generateBuiltInSymbolTable/initializeSymbolTable/ShInitialize.
+    # Shrinking cov_seen to 16 bytes does not stop it; removing this file entirely does. So it is not this array's size, and (given the crash is
+    # unchanged whether the calls fire or not) not the __cyg_profile_* calls clobbering a register either - something about the mere presence of an
+    # extra linked object shifts a layout-sensitive address this function's stack computation depends on. Not root-caused; do not trust glprog's
+    # function-coverage numbers for the functions on that path until it is.
     with open(os.path.join(out, 'x_cov_part_000.c'), 'w') as f_:
         f_.write(r'''#include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 extern char cov_hdr asm("%s");
-static unsigned char cov_seen[0x180000 / 8]; static int cov_fd = -2;
+static unsigned char cov_seen[0x180000 / 8]; static int cov_fd; static char cov_opened;   /* zero-init only: an initialised static would land in __DATA,__data and shift the stock section layout that data.s reproduces */
 void __cyg_profile_func_enter(void *fn, void *site) __attribute__((no_instrument_function));
 void __cyg_profile_func_exit(void *fn, void *site) __attribute__((no_instrument_function));
 void __cyg_profile_func_enter(void *fn, void *site) {
     unsigned off = (unsigned)fn - (unsigned)&cov_hdr, i = off >> 2;
     if (i >= 8u * sizeof cov_seen || (cov_seen[i >> 3] & (1 << (i & 7)))) return;
     cov_seen[i >> 3] |= 1 << (i & 7);
-    if (cov_fd == -2) { const char *p = getenv("COV_FILE"); cov_fd = open(p ? p : "/tmp/cov_default.bin", O_WRONLY | O_APPEND | O_CREAT, 0666); }
+    if (!cov_opened) { const char *p = getenv("COV_FILE"); cov_opened = 1; cov_fd = open(p ? p : "/tmp/cov_default.bin", O_WRONLY | O_APPEND | O_CREAT, 0666); }
     if (cov_fd >= 0) write(cov_fd, &off, 4);
 }
 void __cyg_profile_func_exit(void *fn, void *site) {}

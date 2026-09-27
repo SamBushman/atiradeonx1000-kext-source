@@ -1141,8 +1141,7 @@ int _glIsRenderbufferEXT(param_1, param_2, param_3, param_4, param_5, param_6, p
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x29a])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x29a])(*puVar2,param_1);
 }
 
 /* _glBindRenderbufferEXT @ 0x92f43824 (132 bytes) */
@@ -1295,8 +1294,7 @@ int _glIsFramebufferEXT(param_1, param_2, param_3, param_4, param_5, param_6, pa
     *(undefined4 **)puVar1 = puVar2;
     puVar2[0x2ac] = &STACKARG(0xffffffb0);
   }
-  (*(code *)puVar2[0x2a0])(*puVar2,param_1);
-  return;
+  return (*(code *)puVar2[0x2a0])(*puVar2,param_1);
 }
 
 /* _glBindFramebufferEXT @ 0x92f43b50 (132 bytes) */
