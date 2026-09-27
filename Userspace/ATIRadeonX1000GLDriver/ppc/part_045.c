@@ -3869,8 +3869,11 @@ int FUN_00172ed4(param_1)
 int FUN_00172ee8(param_1)
   int param_1;
 {
-  *(int *)(param_1 + 0x3cc) = *(int *)(param_1 + 0x3cc) + -1;
-  return;
+  int iVar1;
+
+  iVar1 = *(int *)(param_1 + 0x3cc) + -1;
+  *(int *)(param_1 + 0x3cc) = iVar1;
+  return iVar1;
 }
 
 /* FUN_00172efc @ 0x172efc (8 bytes) */
