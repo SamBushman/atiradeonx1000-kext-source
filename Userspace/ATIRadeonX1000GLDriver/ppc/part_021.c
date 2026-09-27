@@ -580,7 +580,7 @@ int FUN_000e2094(param_1, param_2)
       }
       ((int (*)())FUN_000e4400)(puVar7,uVar5);
     }
-    (**(code **)(**(int **)(param_1 + 0x30c) + 0x60))();
+    (**(code **)(**(int **)(param_1 + 0x30c) + 0x60))(*(int **)(param_1 + 0x30c));
     FUN_000ef498(*(undefined4 *)(param_1 + 0x6c4),puVar7);
     if (puVar7 != (undefined4 *)0x0) {
       ((int (*)())FUN_000e4934)(puVar7);

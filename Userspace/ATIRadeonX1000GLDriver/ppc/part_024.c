@@ -2227,13 +2227,13 @@ int FUN_000ef498(param_1, param_2)
     iVar2 = 0;
   }
   piVar8 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-  (**(code **)(*piVar8 + 0x14))(piVar8,uVar9);
+  (**(code **)(*piVar8 + 0x14))(piVar8,uVar9,*(int *)(param_1 + 8));
   if (iVar2 == 1) {
     ((int (*)())FUN_000eec50)(param_1,extraout_r4_00);
   }
   else if ((iVar2 == 2) || (iVar2 == 0)) {
     piVar8 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-    (**(code **)(*piVar8 + 0xac))(piVar8,*(undefined4 *)(param_1 + 0x358),param_1);
+    (**(code **)(*piVar8 + 0xac))(piVar8,*(undefined4 *)(param_1 + 0x358),param_1,*(int *)(param_1 + 8));
   }
   ((int (*)())FUN_000ef204)(param_1);
   FUN_0012eacc(param_1);
