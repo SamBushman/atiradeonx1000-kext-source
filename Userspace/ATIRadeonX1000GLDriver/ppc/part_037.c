@@ -245,7 +245,7 @@ int FUN_0011eaa0(param_1)
                 ((int (*)())FUN_0012306c)(iVar13,puVar14);
               }
               FUN_000e76c4(piVar8,puVar14);
-              (**(code **)(*piVar8 + 0x48))();
+              (**(code **)(*piVar8 + 0x48))(piVar8);
               *(uint *)((int)piVar1 + uVar12 + 8) = 1 << uVar9 | *(uint *)((int)piVar1 + uVar12 + 8)
               ;
             }
