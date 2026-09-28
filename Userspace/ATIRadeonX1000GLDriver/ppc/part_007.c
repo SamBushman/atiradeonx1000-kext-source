@@ -1174,7 +1174,7 @@ int FUN_0004ddc0(param_1)
   *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 8;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
   return;
 }
 
@@ -1609,7 +1609,7 @@ int FUN_0004e880(param_1)
     *(uint *)(0x00002748 + param_1 + 4) = uVar1 * 8 + *(int *)(0x00002748 + param_1 + 4) + 8;
                     
                     
-    (*UNRECOVERED_JUMPTABLE)(param_1);
+    (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
     return;
   }
   return;

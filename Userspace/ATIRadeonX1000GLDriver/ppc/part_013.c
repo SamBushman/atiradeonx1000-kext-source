@@ -4191,7 +4191,7 @@ int FUN_00090840(param_1)
   *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 0x10;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
   return;
 }
 

@@ -1830,7 +1830,7 @@ LAB_000a41d0:
   *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 8;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
   return;
 }
 

@@ -8823,7 +8823,7 @@ int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   }
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
   return;
 }
 

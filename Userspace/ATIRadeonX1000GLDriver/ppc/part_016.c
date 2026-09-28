@@ -8037,7 +8037,7 @@ int FUN_000b5400(param_1, param_2)
     *(uint *)(0x00002748 + param_1 + 4) = uVar2 * 8 + *(int *)(0x00002748 + param_1 + 4) + 8;
                     
                     
-    (*UNRECOVERED_JUMPTABLE)(param_1);
+    (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
     return;
   }
   return;

@@ -2742,7 +2742,7 @@ int FUN_00086710(param_1)
   *(int *)(0x00002748 + param_1 + 4) = *(int *)(0x00002748 + param_1 + 4) + 0x1c;
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1);
+  (*UNRECOVERED_JUMPTABLE)(param_1,*(int *)(0x00002748 + param_1 + 4));
   return;
 }
 
@@ -3629,14 +3629,24 @@ int FUN_00087e80(param_1, param_2, param_3, param_4)
   int iVar7;
   int iVar8;
   int iVar9;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  uint local_3c;
-  uint local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  
+  /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
+   * (&local_48 passed to FUN_000b4400, which internally indexes it param_4[0]..param_4[6] - and that
+   * value flows straight through into FUN_000cae90 as its own param_4, where param_4[1] seeds a loop
+   * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
+   * value FUN_000cae90 read via param_4[1] was heap-garbage-sized, not the small local_44 value),
+   * corrupting a command-stream interpreter loop's iteration count downstream and eventually walking
+   * off the end into zeroed memory, hitting the interpreter's own out-of-range-opcode safety net
+   * (_exit(0), confirmed present in stock too - not itself a bug). Merged into a real array, aliased
+   * back to the original names so the rest of this function's logic is unchanged (issue #64). */
+  undefined4 local_48_arr[7];
+#define local_48 local_48_arr[0]
+#define local_44 local_48_arr[1]
+#define local_40 local_48_arr[2]
+#define local_3c local_48_arr[3]
+#define local_38 local_48_arr[4]
+#define local_34 local_48_arr[5]
+#define local_30 local_48_arr[6]
+
   iVar8 = param_3 + 0x124;
   uVar3 = param_1[0x8f8];
   *(undefined4 *)(((unsigned char *)0x000037cc) + param_3) = 0;
@@ -3705,6 +3715,13 @@ LAB_00088008:
   }
   local_3c = uVar2;
   iVar4 = FUN_000b4400(param_1,param_3 + 0x18a8,param_3 + 0x1784,&local_48,iVar8);
+#undef local_48
+#undef local_44
+#undef local_40
+#undef local_3c
+#undef local_38
+#undef local_34
+#undef local_30
   if (iVar4 == 1) {
     return 0xfffffffe;
   }
