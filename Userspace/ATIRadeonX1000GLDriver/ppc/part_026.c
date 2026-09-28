@@ -129,8 +129,13 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
-  int aiStack_9c [4];
-  int local_8c;
+  /* issue #64 live-repro: same defect as FUN_000f6248 in this file (fixed earlier this session) -
+   * called below as aiStack_9c[param_2] with param_2 observed as 4, one past this array's declared
+   * 4 elements; local_8c (assigned right after, from param_1[5]) sits exactly at the missing 5th
+   * index by its own hex offset (0x9c-0x8c=0x10). Extended to 5 elements; local_8c aliased to
+   * index 4. */
+  int aiStack_9c [5];
+#define local_8c aiStack_9c[4]
   undefined4 local_88 [29];
   
   aiStack_9c[1] = param_1[2];
@@ -207,6 +212,7 @@ int FUN_000f4fdc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   }
   return puVar3;
 }
+#undef local_8c
 
 /* FUN_000f5248 @ 0xf5248 (376 bytes) */
 int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)

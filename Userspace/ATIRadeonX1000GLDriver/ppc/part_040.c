@@ -1074,10 +1074,12 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
   int iVar6;
   uint uVar7;
   int iVar8;
-  uint local_54;
-  uint local_50;
-  int local_4c;
-  undefined4 local_48;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_54/local_50/local_4c/local_48 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_54_buf [0x10];
+  #define local_54 (*(uint *)(local_54_buf + 0x00))
+  #define local_50 (*(uint *)(local_54_buf + 0x04))
+  #define local_4c (*(int *)(local_54_buf + 0x08))
+  #define local_48 (*(undefined4 *)(local_54_buf + 0x0c))
   
   local_48 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
   local_50 = 0;
@@ -1158,6 +1160,10 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
   FUN_00194034(param_4 + 0x24);
   return FUN_00193cc0(local_48,local_4c);
 }
+#undef local_54
+#undef local_50
+#undef local_4c
+#undef local_48
 
 /* FUN_0012d2f0 @ 0x12d2f0 (1988 bytes) */
 int FUN_0012d2f0(param_1)
@@ -1559,10 +1565,12 @@ int FUN_0012dd58(param_1, param_2, param_3)
   uint uVar5;
   uint uVar6;
   undefined8 uVar7;
-  uint local_44;
-  uint local_40;
-  undefined4 *local_3c;
-  undefined4 local_38;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_44/local_40/local_3c/local_38 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_44_buf [0x10];
+  #define local_44 (*(uint *)(local_44_buf + 0x00))
+  #define local_40 (*(uint *)(local_44_buf + 0x04))
+  #define local_3c (*(undefined4 * *)(local_44_buf + 0x08))
+  #define local_38 (*(undefined4 *)(local_44_buf + 0x0c))
   
   uVar5 = *(uint *)(param_1 + 8);
   *(int *)(param_1 + 0x474) = *(int *)(param_1 + 0x474) + 1;
@@ -1617,6 +1625,10 @@ int FUN_0012dd58(param_1, param_2, param_3)
   FUN_000e7658(param_3);
   return FUN_00193cc0(local_38,local_3c);
 }
+#undef local_44
+#undef local_40
+#undef local_3c
+#undef local_38
 
 /* FUN_0012df90 @ 0x12df90 (1216 bytes) */
 int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
@@ -1646,10 +1658,12 @@ int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
   uint *puVar14;
   int *piVar15;
   undefined8 uVar16;
-  uint local_64;
-  uint local_60;
-  int local_5c;
-  undefined4 local_58;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_64/local_60/local_5c/local_58 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_64_buf [0x10];
+  #define local_64 (*(uint *)(local_64_buf + 0x00))
+  #define local_60 (*(uint *)(local_64_buf + 0x04))
+  #define local_5c (*(int *)(local_64_buf + 0x08))
+  #define local_58 (*(undefined4 *)(local_64_buf + 0x0c))
   
   if (param_2[0x53] == 1) {
     iVar13 = param_2[0x4e];
@@ -1811,6 +1825,10 @@ int FUN_0012df90(param_1, param_2, param_3, param_4, param_5)
   FUN_000ec2e8(param_1);
   return FUN_00193cc0(local_58,local_5c);
 }
+#undef local_64
+#undef local_60
+#undef local_5c
+#undef local_58
 
 /* FUN_0012e488 @ 0x12e488 (172 bytes) */
 int FUN_0012e488(param_1, param_2)
@@ -2720,10 +2738,12 @@ int FUN_0012fe8c(param_1, param_2, param_3)
   undefined4 *puVar4;
   uint uVar5;
   undefined4 uVar6;
-  uint local_44;
-  uint local_40;
-  undefined4 *local_3c;
-  undefined4 local_38;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_44/local_40/local_3c/local_38 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_44_buf [0x10];
+  #define local_44 (*(uint *)(local_44_buf + 0x00))
+  #define local_40 (*(uint *)(local_44_buf + 0x04))
+  #define local_3c (*(undefined4 * *)(local_44_buf + 0x08))
+  #define local_38 (*(undefined4 *)(local_44_buf + 0x0c))
   
   iVar2 = FUN_00194034(param_3 + 0x90);
   if (2 < iVar2) {
@@ -2783,6 +2803,10 @@ code_r0x0013008c:
     goto LAB_00130088;
   } while( true );
 }
+#undef local_44
+#undef local_40
+#undef local_3c
+#undef local_38
 
 /* FUN_001300b0 @ 0x1300b0 (836 bytes) */
 int FUN_001300b0(param_1)
