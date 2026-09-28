@@ -2508,7 +2508,16 @@ int FUN_00170e6c(param_1, param_2)
   int iVar16;
   int local_48;
   int local_44;
-  undefined1 auStack_40 [8];
+  /* NOTE (issue #64): declared 8 bytes, but FUN_001940a8's sentinel-list init writes through +0x14
+   * (6 words) - confirmed via stock disasm and by tracing the actual crash: local_38 = auStack_40+0xc
+   * computed a pointer past the declared array, into whatever unrelated stack content followed it, so
+   * *(local_38+8) read garbage instead of the sentinel's real self-pointer. That garbage happened to
+   * read as 0 (list "empty"), so the loop below - which registers this object into a shared pending-list
+   * via FUN_0016ee90/FUN_0016df8c - never ran at all, leaving FUN_0016c640's later check permanently
+   * empty and crashing much deeper in FUN_00194034 (same defect class as the two fixes already landed
+   * on this issue for FUN_00169b70/FUN_00158c3c/FUN_0016bd70). local_38 only ever stores the *value*
+   * auStack_40+0xc (not aliased memory), so simply enlarging the array is sufficient here. */
+  undefined1 auStack_40 [0x18];
   int local_38;
   
   FUN_0016a568(param_1,param_2);
