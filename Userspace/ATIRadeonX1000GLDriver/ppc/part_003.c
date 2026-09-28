@@ -2862,9 +2862,15 @@ int FUN_0001dff0(param_1)
   *(undefined4 **)(param_1 + 0x1d8) = puVar1;
   *puVar1 = 0x3a000000;
   *(undefined4 **)(param_1 + 0x298c) = puVar1 + 1;
-                    
-                    
-  (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+  /* Ghidra dropped this tail-call's 2nd arg (bctr preserves whatever's in r4 - confirmed via stock
+   * disassembly 0x1e050-0x1e078: r4 is explicitly loaded as r2+4 (== puVar1+1, the just-advanced
+   * write pointer) right before the tail jump through the vtable slot at +0x299c, which is
+   * FUN_0002be60, the ring-buffer "set current pointer" setter (param_1, new_ptr). Without this arg,
+   * whatever garbage was left in r4 (observed live: leftover "1" from this function's own earlier
+   * call) got installed as the ring buffer's current write pointer, corrupting it for every
+   * subsequent allocation through this object - root cause of the post-gldCreateContext GLDriver
+   * crash tracked in issue #64. */
+  (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar1 + 1);
   return;
 }
 
