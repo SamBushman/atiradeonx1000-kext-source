@@ -7211,7 +7211,7 @@ void FUN_00039330(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -7385,7 +7385,7 @@ void FUN_00039610(int param_1,uint param_2,uint param_3,undefined4 param_4,undef
     *(undefined4 **)(param_1 + 0x298c) = puVar8 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar8 + 4);
     return;
   }
   return;
@@ -7502,7 +7502,7 @@ void FUN_00039a60(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -7619,7 +7619,7 @@ void FUN_00039d40(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -7736,7 +7736,7 @@ void FUN_0003a020(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -7853,7 +7853,7 @@ void FUN_0003a300(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -7970,7 +7970,7 @@ void FUN_0003a5e0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -8087,7 +8087,7 @@ void FUN_0003a8c0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -8204,7 +8204,7 @@ void FUN_0003aba0(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;
@@ -8321,7 +8321,7 @@ void FUN_0003ae80(int param_1,uint param_2,undefined4 param_3,undefined4 param_4
     *(undefined4 **)(param_1 + 0x298c) = puVar7 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(param_1 + 0x240);
+    (**(code **)(param_1 + 0x299c))(param_1 + 0x240,puVar7 + 4);
     return;
   }
   return;

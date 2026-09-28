@@ -1811,7 +1811,10 @@ LAB_000a41d0:
       *(undefined4 **)(0x00002748 + param_1 + 4) = puVar6 + 1;
       iVar11 = iVar11 + -1;
     } while (iVar11 != 0);
-    (**(code **)(param_1 + 0x275c))(param_1);
+    /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the
+     * just-advanced pointer to +0x274c then loads it right back into r4 before the bctr
+     * tail-jump. */
+    (**(code **)(param_1 + 0x275c))(param_1,puVar6 + 1);
   }
   if (bVar1) {
     (**(code **)(((unsigned char *)0x00001330) + param_1))(param_1,0xc0100000);

@@ -5091,7 +5091,7 @@ int FUN_00021c70(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   *(undefined4 **)(param_1 + 0x298c) = puVar7 + 0xbf;
                     
                     
-  (**(code **)(param_1 + 0x299c))(a0);
+  (**(code **)(param_1 + 0x299c))(a0,puVar7 + 0xbf);
   return;
 }
 
@@ -6265,9 +6265,9 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
   puVar4[2] = ((unsigned char *)0x00001393U);
   puVar4[1] = 0;
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar4 + 4;
-                    
-                    
-  (**(code **)(param_1 + 0x275c))(param_1);
+  /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the just-advanced
+   * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
+  (**(code **)(param_1 + 0x275c))(param_1,puVar4 + 4);
   return;
 }
 
@@ -6326,9 +6326,9 @@ int FUN_00024190(param_1, param_2, param_3, param_4)
   puVar3[2] = ((unsigned char *)0x00001393U);
   puVar3[1] = 0;
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3 + 4;
-                    
-                    
-  (**(code **)(param_1 + 0x275c))(param_1);
+  /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64) - stock stores the just-advanced
+   * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
+  (**(code **)(param_1 + 0x275c))(param_1,puVar3 + 4);
   return;
 }
 
@@ -6474,7 +6474,7 @@ void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
     *(undefined4 **)(param_1 + 0x298c) = puVar2 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(iVar4);
+    (**(code **)(param_1 + 0x299c))(iVar4,puVar2 + 4);
     return;
   }
   return;
@@ -6622,7 +6622,7 @@ void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
     *(undefined4 **)(param_1 + 0x298c) = puVar2 + 4;
                     
                     
-    (**(code **)(param_1 + 0x299c))(iVar4);
+    (**(code **)(param_1 + 0x299c))(iVar4,puVar2 + 4);
     return;
   }
   return;

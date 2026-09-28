@@ -9054,11 +9054,19 @@ int FUN_00017b20(param_1)
   int iVar7;
   int iVar8;
   int iVar9;
-  int local_48;
-  int local_44;
-  int local_40;
-  int local_3c;
-  
+  /* local_48/local_44 and local_40/local_3c are each used as a 2-element array (&local_48 /
+   * &local_40 passed to _CFDictionaryCreate with count=2) - classic Ghidra stack-split: at -O0
+   * these landed non-adjacent (confirmed live: &local_48+4 == &local_40, not &local_44), so
+   * CFDictionaryCreate read local_40's CFNumber as the 2nd dictionary key instead of local_44's
+   * CFString, corrupting the notification dictionary and crashing inside CFStringCreateCopy.
+   * Merged into real contiguous arrays to match the actual usage (issue #64). */
+  int local_48_arr[2];
+  int local_40_arr[2];
+#define local_48 local_48_arr[0]
+#define local_44 local_48_arr[1]
+#define local_40 local_40_arr[0]
+#define local_3c local_40_arr[1]
+
   iVar1 = _CFNotificationCenterGetDistributedCenter();
   uVar2 = _getpid();
   *(undefined4 *)(param_1 + 0x2a60) = uVar2;
@@ -9980,9 +9988,8 @@ LAB_00018700:
         puVar30[0xc6] = (uint)((unsigned char *)0x000013ccU);
         puVar30[0xc1] = 0x113c8;
         *(uint **)(param_1 + 0x298c) = puVar30 + 0xca;
-                    
-                    
-        (**(code **)(param_1 + 0x299c))(iVar34);
+        /* dropped 2nd arg, same defect class as FUN_0001dff0 (issue #64). */
+        (**(code **)(param_1 + 0x299c))(iVar34,puVar30 + 0xca);
         return;
       }
       FUN_00021c70(param_1,param_3,param_4,param_5,param_6,uVar41,uVar43,in_r10,uVar32);
