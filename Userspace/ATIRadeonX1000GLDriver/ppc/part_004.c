@@ -6916,7 +6916,21 @@ LAB_0002c610:
       }
       pcVar3 = *(code **)(param_1 + 0x275c);
       *(undefined4 **)(0x00002748 + param_1 + 4) = puVar6 + 0x39;
-      (*pcVar3)(param_1);
+      /* issue #64 live-repro (crash #10, the long-running "iVar5+0x1dc=1" hunt): this indirect
+       * dispatch through the per-instance table at 0x275c supplied only 1 of 2 real arguments -
+       * a dropped-call-args bug matching the same class already fixed for FUN_000840d0's own
+       * dispatch calls. The line right above sets up *(0x2748+param_1+4) - the exact "current
+       * write pointer" value the real target expects as its 2nd argument - but never actually
+       * passes it; a sibling call site to this SAME dispatch slot (FUN_00082c50, part_011.c:8826)
+       * shows the correct, complete shape: `(*fn)(param_1, *(int*)(0x2748+param_1+4));`. Live-
+       * verified via a hardware watchpoint installed from the moment CGLCreateContext returns
+       * (tracking the target field through ~15 legitimate updates via FUN_0002be60): on real
+       * hardware, this exact call resolves to FUN_0002be60(param_1, param_2) - a simple setter,
+       * `*(*(param_1+4)+0x1dc) = param_2;` - and with no 2nd argument ever pushed by the caller,
+       * param_2 read whatever was left in r4 by earlier, unrelated code: the literal integer 1.
+       * That single wild write is what every downstream consumer (FUN_0002be00, FUN_0002cd50)
+       * was tripping over. Fixed by passing the value the call site had already prepared. */
+      (*pcVar3)(param_1,*(undefined4 *)(0x00002748 + param_1 + 4));
     }
     if (*(short *)((int)param_2 + 6) != 0) {
       ((int (*)())FUN_0002ce40)(param_1,param_2);
