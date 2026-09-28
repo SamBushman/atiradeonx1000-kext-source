@@ -2677,6 +2677,7 @@ int FUN_00170e6c(param_1, param_2)
   param_1[0x48] = -1;
   param_1[0x49] = 0;
   FUN_001940a8(auStack_40);
+  local_38 = (int)(auStack_40 + 0xc);
   puVar14 = (uint *)param_1[6];
   uVar8 = puVar14[1];
   if (0 < (int)uVar8) {
