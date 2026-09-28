@@ -361,8 +361,21 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     param_1[3] = uVar1 & 0xffff | 0x440000;
     param_1 = param_1 + 5;
   }
+  /* issue #64 live-repro (3rd crash, past the earlier two fixes): puVar3 - the value this function
+   * actually returns (part_018.c:386) - was only ever assigned as a side effect of this
+   * OR-condition's third clause, via the comma operator. C's short-circuit evaluation means that
+   * side effect never runs when either of the first two clauses is already true, leaving puVar3
+   * uninitialized in that case (it has no earlier assignment anywhere in the function). Live-
+   * verified on real hardware via a raw memory watchpoint: with *(param_2+0x22fc)==3 (this
+   * function's own case), the returned puVar3 was garbage, corrupting a since-freed heap block's
+   * `free_list_t.previous` field the moment the caller wrote through it (FUN_000cae90
+   * part_018.c:3651, `*puVar45 = ppppppuVar15;`) - confirmed via Apple's real scalable_malloc.c
+   * checksum formula against the live-read corrupted bytes. puVar3 is meant to track the current
+   * write pointer (== param_1) at this checkpoint regardless of which clause is true; made the
+   * assignment unconditional so the case that skipped it can no longer leave it unset. */
+  puVar3 = param_1;
   if (((*(int *)(param_2 + 0x2218) != 0) || (*(int *)(param_2 + 0x2220) != 0)) ||
-     (puVar3 = param_1, *(int *)(param_2 + 0x2234) == 0)) {
+     (*(int *)(param_2 + 0x2234) == 0)) {
     if ((*(int *)(param_2 + 0x2214) == 0) && (*(int *)(param_2 + 0x221c) != 0)) {
       *param_1 = 0x47;
       param_1[2] = 0x10000;
