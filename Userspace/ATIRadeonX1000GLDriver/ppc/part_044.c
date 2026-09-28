@@ -119,38 +119,44 @@ int FUN_00158c3c(param_1, param_2)
   int iVar14;
   uint *puVar15;
   int iVar16;
-  uint local_68;
-  uint local_64;
-  int local_60;
+  /* NOTE (issue #64): local_68/local_64/local_60 are passed by address (&local_68) to FUN_00193e18/
+   * FUN_00194208/FUN_0019423c as one contiguous 3-word vector struct (capacity, count, data-ptr).
+   * Ghidra split it into 3 separate scalar locals, which -O0 does NOT lay out contiguously (confirmed
+   * live: real stack deltas were 0x44/0x4 bytes, not 4/4) - forced into one array so the compiler
+   * can't reorder/pad between them. */
+  undefined4 local_68vec_158c3c[3];
+#define local_68_vec local_68vec_158c3c[0]
+#define local_64_vec local_68vec_158c3c[1]
+#define local_60_vec local_68vec_158c3c[2]
   undefined4 local_5c;
   undefined4 local_58;
   undefined4 local_54;
   undefined4 local_50 [6];
   
   local_5c = *(undefined4 *)(*(int *)(param_2 + 8) + 0x378);
-  local_68 = 2;
-  local_64 = 0;
-  local_60 = FUN_00193e18(local_5c,8);
-  uVar9 = local_64;
-  if (local_64 < local_68) {
-    iVar13 = local_64 * 4;
-    _memset(local_60 + iVar13,0,4);
-    local_64 = uVar9 + 1;
-    piVar3 = (int *)(iVar13 + local_60);
+  local_68_vec = 2;
+  local_64_vec = 0;
+  local_60_vec = FUN_00193e18(local_5c,8);
+  uVar9 = local_64_vec;
+  if (local_64_vec < local_68_vec) {
+    iVar13 = local_64_vec * 4;
+    _memset(local_60_vec + iVar13,0,4);
+    local_64_vec = uVar9 + 1;
+    piVar3 = (int *)(iVar13 + local_60_vec);
   }
   else {
-    piVar3 = (int *)FUN_0019423c(&local_68,local_64);
+    piVar3 = (int *)FUN_0019423c(&local_68_vec,local_64_vec);
   }
   *piVar3 = param_1;
   uVar11 = 0;
   do {
-    uVar9 = local_64 - 1;
+    uVar9 = local_64_vec - 1;
     piVar3 = (int *)0x0;
-    if (uVar9 < local_64) {
-      piVar3 = (int *)(uVar9 * 4 + local_60);
+    if (uVar9 < local_64_vec) {
+      piVar3 = (int *)(uVar9 * 4 + local_60_vec);
     }
     iVar16 = *piVar3;
-    FUN_00194208(&local_68,uVar9);
+    FUN_00194208(&local_68_vec,uVar9);
     iVar13 = *(int *)(iVar16 + 0x124);
     iVar14 = *(int *)(*(int *)(iVar16 + 0x88) + 8);
     if (iVar14 - 0x12U < 3) {
@@ -182,16 +188,16 @@ int FUN_00158c3c(param_1, param_2)
           }
           else {
             ((int (*)())FUN_00158988)(iVar16,piVar3,iVar13,uVar12,uVar1,param_2);
-            uVar9 = local_64;
+            uVar9 = local_64_vec;
             *(undefined4 *)(iVar16 + 0x124) = 0;
-            if (local_64 < local_68) {
-              iVar13 = local_64 * 4;
-              _memset(iVar13 + local_60,0,4);
-              local_64 = uVar9 + 1;
-              puVar6 = (undefined4 *)(iVar13 + local_60);
+            if (local_64_vec < local_68_vec) {
+              iVar13 = local_64_vec * 4;
+              _memset(iVar13 + local_60_vec,0,4);
+              local_64_vec = uVar9 + 1;
+              puVar6 = (undefined4 *)(iVar13 + local_60_vec);
             }
             else {
-              puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+              puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
             }
             *puVar6 = piVar3;
           }
@@ -295,44 +301,44 @@ LAB_001593b8:
               iVar14 = FUN_0015800c(iVar16,piVar5,iVar13,uVar12,uVar2,param_2);
               if (iVar14 == 0) break;
               ((int (*)())FUN_00158988)(iVar16,piVar5,iVar13,uVar12,uVar2,param_2);
-              uVar9 = local_64;
+              uVar9 = local_64_vec;
               *(undefined4 *)(iVar16 + 0x124) = 0;
-              if (local_64 < local_68) {
-                iVar14 = local_64 * 4;
-                _memset(iVar14 + local_60,0,4);
-                local_64 = uVar9 + 1;
-                puVar6 = (undefined4 *)(iVar14 + local_60);
+              if (local_64_vec < local_68_vec) {
+                iVar14 = local_64_vec * 4;
+                _memset(iVar14 + local_60_vec,0,4);
+                local_64_vec = uVar9 + 1;
+                puVar6 = (undefined4 *)(iVar14 + local_60_vec);
               }
               else {
-                puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+                puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
               }
               *puVar6 = piVar5;
             }
             else {
               ((int (*)())FUN_00158988)(iVar16,piVar3,iVar13,uVar12,uVar1,param_2);
-              uVar9 = local_64;
+              uVar9 = local_64_vec;
               *(undefined4 *)(iVar16 + 0x124) = 0;
-              if (local_64 < local_68) {
-                iVar14 = local_64 * 4;
-                _memset(iVar14 + local_60,0,4);
-                local_64 = uVar9 + 1;
-                puVar6 = (undefined4 *)(iVar14 + local_60);
+              if (local_64_vec < local_68_vec) {
+                iVar14 = local_64_vec * 4;
+                _memset(iVar14 + local_60_vec,0,4);
+                local_64_vec = uVar9 + 1;
+                puVar6 = (undefined4 *)(iVar14 + local_60_vec);
               }
               else {
-                puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+                puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
               }
               *puVar6 = piVar3;
             }
             ((int (*)())FUN_00158988)(iVar16,uVar8,iVar13,uVar12,uVar7,param_2);
-            uVar9 = local_64;
-            if (local_64 < local_68) {
-              iVar13 = local_64 * 4;
-              _memset(iVar13 + local_60,0,4);
-              local_64 = uVar9 + 1;
-              puVar6 = (undefined4 *)(iVar13 + local_60);
+            uVar9 = local_64_vec;
+            if (local_64_vec < local_68_vec) {
+              iVar13 = local_64_vec * 4;
+              _memset(iVar13 + local_60_vec,0,4);
+              local_64_vec = uVar9 + 1;
+              puVar6 = (undefined4 *)(iVar13 + local_60_vec);
             }
             else {
-              puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+              puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
             }
             *puVar6 = uVar8;
           }
@@ -346,36 +352,36 @@ LAB_001593b8:
           uVar11 = 1;
         }
         ((int (*)())FUN_00158988)(iVar16,piVar3,iVar13,uVar12,uVar1,param_2);
-        uVar9 = local_64;
-        if (local_64 < local_68) {
-          iVar14 = local_64 * 4;
-          _memset(iVar14 + local_60,0,4);
-          local_64 = uVar9 + 1;
-          puVar6 = (undefined4 *)(iVar14 + local_60);
+        uVar9 = local_64_vec;
+        if (local_64_vec < local_68_vec) {
+          iVar14 = local_64_vec * 4;
+          _memset(iVar14 + local_60_vec,0,4);
+          local_64_vec = uVar9 + 1;
+          puVar6 = (undefined4 *)(iVar14 + local_60_vec);
         }
         else {
-          puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+          puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
         }
         *puVar6 = piVar3;
         if (piVar3 != piVar5) {
           ((int (*)())FUN_00158988)(iVar16,piVar5,iVar13,uVar12,uVar2,param_2);
 LAB_00158fc8:
-          uVar9 = local_64;
-          if (local_64 < local_68) {
-            iVar13 = local_64 * 4;
-            _memset(iVar13 + local_60,0,4);
-            local_64 = uVar9 + 1;
-            puVar6 = (undefined4 *)(iVar13 + local_60);
+          uVar9 = local_64_vec;
+          if (local_64_vec < local_68_vec) {
+            iVar13 = local_64_vec * 4;
+            _memset(iVar13 + local_60_vec,0,4);
+            local_64_vec = uVar9 + 1;
+            puVar6 = (undefined4 *)(iVar13 + local_60_vec);
           }
           else {
-            puVar6 = (undefined4 *)FUN_0019423c(&local_68,local_64);
+            puVar6 = (undefined4 *)FUN_0019423c(&local_68_vec,local_64_vec);
           }
           *puVar6 = piVar5;
         }
       }
     }
-  } while (local_64 != 0);
-  FUN_00193cc0(local_5c,local_60);
+  } while (local_64_vec != 0);
+  FUN_00193cc0(local_5c,local_60_vec);
   return uVar11;
 }
 
@@ -9691,8 +9697,14 @@ int FUN_00169b70(param_1)
   uint uVar9;
   uint *puVar10;
   int iVar11;
-  undefined1 auStack_48 [8];
-  int local_40;
+  /* NOTE (issue #64): auStack_48 was declared 8 bytes, but FUN_001940a8's sentinel-list init writes through
+   * +0x14 (6 words) - confirmed live/via stock disasm: it writes local_40 (frame+0x40, i.e. auStack_48+8) as
+   * part of the SAME sentinel struct (the self-referential "list head" pointer), not a separately-initialized
+   * local. -O0 doesn't lay declared locals contiguously, so the two must be one buffer (classic stack-split
+   * artifact, same class as the FUN_00170e6c/FUN_00171e68 fixes already landed on this issue). */
+  undefined4 auStack_48_vec169b70[6];
+#define auStack_48 ((unsigned char *)auStack_48_vec169b70)
+#define local_40 ((int)auStack_48_vec169b70[2])
   
   uVar8 = 0;
   FUN_001940a8(auStack_48);
@@ -10459,6 +10471,17 @@ LAB_0016a958:
         }
         else {
 LAB_0016b038:
+          if ((piVar14[0x20] != 0) &&
+             (iVar7 = FUN_00126760(piVar14[0x26]), iVar7 != 0) &&
+             ((piVar14[5] & 2U) == 0) &&
+             (iVar7 = (**(code **)(*piVar14 + 0x50))(piVar14), iVar7 == 0) &&
+             ((piVar14[5] & 0x40U) == 0) &&
+             (((piVar14[5] & 0x20U) != 0) ||
+              (iVar7 = FUN_000e07dc(*param_1,0x25), iVar7 == 0))) {
+            iVar7 = *(int *)(*param_1 + 0x3c4) + 1;
+            *(int *)(*param_1 + 0x3c4) = iVar7;
+            piVar14[0x25] = iVar7;
+          }
           piVar5 = (int *)piVar14[2];
         }
       }
@@ -10932,16 +10955,22 @@ int FUN_0016bd70(param_1)
   uint *puVar17;
   undefined4 uVar18;
   uint uVar19;
-  uint local_68;
-  uint local_64;
-  int local_60;
+  /* NOTE (issue #64): local_68/local_64/local_60 are passed by address (&local_68) to FUN_00193e18/
+   * FUN_00194208/FUN_0019423c as one contiguous 3-word vector struct (capacity, count, data-ptr).
+   * Ghidra split it into 3 separate scalar locals, which -O0 does NOT lay out contiguously (confirmed
+   * live: real stack deltas were 0x44/0x4 bytes, not 4/4) - forced into one array so the compiler
+   * can't reorder/pad between them. */
+  undefined4 local_68vec_16bd70[3];
+#define local_68_vec local_68vec_16bd70[0]
+#define local_64_vec local_68vec_16bd70[1]
+#define local_60_vec local_68vec_16bd70[2]
   undefined4 local_5c;
   
   local_5c = *(undefined4 *)(*param_1 + 0x378);
   uVar11 = *(uint *)(param_1[6] + 4);
-  local_64 = 0;
-  local_68 = 2;
-  local_60 = FUN_00193e18(local_5c,8);
+  local_64_vec = 0;
+  local_68_vec = 2;
+  local_60_vec = FUN_00193e18(local_5c,8);
   if (0 < (int)uVar11) {
     uVar14 = 0;
     puVar10 = (uint *)0x0;
@@ -10985,28 +11014,28 @@ int FUN_0016bd70(param_1)
             iVar5 = iVar5 + -1;
           } while (iVar5 != 0);
         }
-        uVar3 = local_64;
+        uVar3 = local_64_vec;
         *(uint **)(iVar13 + 0x60) = puVar10;
         puVar10[4] = 1;
         *puVar10 = *(uint *)(*(int *)(iVar13 + 0x38) + 0xc);
-        if (local_64 < local_68) {
-          iVar5 = local_64 * 4;
-          _memset(iVar5 + local_60,0,4);
-          local_64 = uVar3 + 1;
-          piVar4 = (int *)(iVar5 + local_60);
+        if (local_64_vec < local_68_vec) {
+          iVar5 = local_64_vec * 4;
+          _memset(iVar5 + local_60_vec,0,4);
+          local_64_vec = uVar3 + 1;
+          piVar4 = (int *)(iVar5 + local_60_vec);
         }
         else {
-          piVar4 = (int *)FUN_0019423c(&local_68,local_64);
+          piVar4 = (int *)FUN_0019423c(&local_68_vec,local_64_vec);
         }
         *piVar4 = iVar13;
-        while (uVar3 = DAT_001b01a8, local_64 != 0) {
-          uVar3 = local_64 - 1;
+        while (uVar3 = DAT_001b01a8, local_64_vec != 0) {
+          uVar3 = local_64_vec - 1;
           piVar4 = (int *)0x0;
-          if (uVar3 < local_64) {
-            piVar4 = (int *)(uVar3 * 4 + local_60);
+          if (uVar3 < local_64_vec) {
+            piVar4 = (int *)(uVar3 * 4 + local_60_vec);
           }
           iVar5 = *piVar4;
-          FUN_00194208(&local_68,uVar3);
+          FUN_00194208(&local_68_vec,uVar3);
           puVar17 = *(uint **)(iVar5 + 0x40);
           uVar15 = 0;
           uVar3 = puVar17[1];
@@ -11042,7 +11071,7 @@ int FUN_0016bd70(param_1)
                     else {
                       puVar6 = (undefined4 *)FUN_0019423c(puVar17,uVar19);
                     }
-                    uVar8 = local_64;
+                    uVar8 = local_64_vec;
                     piVar4 = (int *)*puVar6;
                     if (((piVar4[2] == 0) && (piVar4[4] == *(int *)(iVar16 + 0x10))) &&
                        ((piVar4[5] == *(int *)(iVar16 + 0x14) && (*(int *)(*piVar4 + 0x60) == 0))))
@@ -11051,14 +11080,14 @@ int FUN_0016bd70(param_1)
                       puVar10[4] = puVar10[4] + 1;
                       *puVar10 = *puVar10 | *(uint *)(*(int *)(*piVar4 + 0x38) + 0xc);
                       iVar9 = *piVar4;
-                      if (local_64 < local_68) {
-                        iVar1 = local_64 * 4;
-                        _memset(iVar1 + local_60,0,4);
-                        local_64 = uVar8 + 1;
-                        piVar4 = (int *)(iVar1 + local_60);
+                      if (local_64_vec < local_68_vec) {
+                        iVar1 = local_64_vec * 4;
+                        _memset(iVar1 + local_60_vec,0,4);
+                        local_64_vec = uVar8 + 1;
+                        piVar4 = (int *)(iVar1 + local_60_vec);
                       }
                       else {
-                        piVar4 = (int *)FUN_0019423c(&local_68,local_64);
+                        piVar4 = (int *)FUN_0019423c(&local_68_vec,local_64_vec);
                       }
                       *piVar4 = iVar9;
                     }
@@ -11089,7 +11118,7 @@ int FUN_0016bd70(param_1)
       FUN_00193cc0(puVar10[-1],puVar10 + -1);
     }
   }
-  return FUN_00193cc0(local_5c,local_60);
+  return FUN_00193cc0(local_5c,local_60_vec);
 }
 
 /* FUN_0016c1fc @ 0x16c1fc (1092 bytes) */
