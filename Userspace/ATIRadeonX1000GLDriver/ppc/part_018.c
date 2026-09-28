@@ -2491,19 +2491,27 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_c154;
   undefined4 local_c150;
   undefined4 local_c14c;
-  /* Declared too small (72 bytes) vs. its own memset (0xbc = 188 bytes, exactly reaching
-   * local_c08c - confirmed by offset arithmetic: 0xc148-0xbc=0xc08c). The memset was overflowing
-   * into local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090, corrupting them every
-   * time this ran (issue #64). Enlarged to the real size; those other locals remain separately
-   * declared (harmless - they're distinct stack slots the compiler now places after this buffer
-   * instead of inside it, and nothing does pointer arithmetic from this buffer into them). */
+  /* Follow-up to the previous fix's own bug (issue #64 live-repro): enlarging auStack_c148 was
+   * correct, but leaving local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090 as
+   * separate, non-overlapping locals was NOT harmless - confirmed live on real hardware. Stock's
+   * real code does do pointer arithmetic from this buffer into them: FUN_000cd1b0 (called with
+   * auStack_c148) tail-calls into FUN_000da394/FUN_000e2524, which read *(auStack_c148+0x4c)
+   * expecting local_c0fc's value; a loop just below also writes local_c0f0[8..15], expecting
+   * those words to land in local_c0d0. With the locals declared separately, the compiler placed
+   * them elsewhere on the stack, so auStack_c148+0x4c stayed at its memset'd 0 instead of the
+   * real pointer - a null deref several calls downstream, in FUN_00193c00's live differential
+   * GLDriver test harness. Root-caused via a live watchpoint comparing stock vs. rebuilt (stock:
+   * r3=0x40d470 at the same call; rebuilt: 0). Properly merged this time into one byte-accurate
+   * 0xbc-byte buffer; each offset below is confirmed directly from its own name's hex value
+   * (0xc148-0xc0fc=0x4c, 0xc148-0xc090=0xb8, etc), and the whole run is contiguous and exactly
+   * 0xbc bytes (0xb8+4), matching the buffer's own real, memset'd size. */
   undefined1 auStack_c148 [0xbc];
-  uint *local_c100;
-  uint *local_c0fc;
-  int local_c0f8;
-  uint local_c0f0 [8];
-  uint local_c0d0 [16];
-  int local_c090;
+#define local_c100 (*(uint **)(auStack_c148 + 0x48))
+#define local_c0fc (*(uint **)(auStack_c148 + 0x4c))
+#define local_c0f8 (*(int *)(auStack_c148 + 0x50))
+#define local_c0f0 ((uint *)(auStack_c148 + 0x58))
+#define local_c0d0 ((uint *)(auStack_c148 + 0x78))
+#define local_c090 (*(int *)(auStack_c148 + 0xb8))
   uint ******local_c08c;
   undefined4 local_c088;
   uint local_c084;
