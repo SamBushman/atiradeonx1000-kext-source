@@ -8581,13 +8581,25 @@ int FUN_000b6580(param_1, param_2)
   uint *puVar14;
   uint uVar15;
   undefined8 uVar16;
-  undefined4 local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  uint local_5c;
-  uint local_58;
-  undefined4 local_54;
-  undefined4 local_50;
+  /* local_68/local_64/local_60/local_5c/local_58/local_54/local_50 are one contiguous 7-word
+   * array - &local_68 is passed to FUN_000b4400, which internally indexes it param_4[0]..param_4[6],
+   * and that same pointer flows straight through into FUN_000cae90 as its own param_4, where
+   * param_4[0] is a buffer pointer and param_4[1] seeds a command-stream token-count loop bound
+   * (confirmed live: FUN_000cae90 read local_64's slot as heap-garbage, not the value this function
+   * just stored, because the two locals landed non-adjacent at -O0). This is the exact same defect,
+   * same call chain (X -> FUN_000b4400 -> FUN_000cae90's param_4[0]/param_4[1]), already fixed once
+   * for FUN_00087e80's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
+   * are not guaranteed contiguous by the compiler, only by the caller's own struct convention.
+   * Merged into a real array, aliased back to the original names so the rest of this function's
+   * logic is unchanged (issue #64). */
+  undefined4 local_68_arr[7];
+#define local_68 local_68_arr[0]
+#define local_64 local_68_arr[1]
+#define local_60 local_68_arr[2]
+#define local_5c local_68_arr[3]
+#define local_58 local_68_arr[4]
+#define local_54 local_68_arr[5]
+#define local_50 local_68_arr[6]
   
   bVar1 = param_2 == 0;
   iVar11 = *(int *)(*(int *)(param_1 + 4) + 0x10);
@@ -8886,6 +8898,13 @@ LAB_000b66b8:
   FUN_0004ac90(param_1);
   return;
 }
+#undef local_68
+#undef local_64
+#undef local_60
+#undef local_5c
+#undef local_58
+#undef local_54
+#undef local_50
 
 /* FUN_000b6f20 @ 0xb6f20 (928 bytes) */
 double FUN_000b6f20(int param_1,int param_2,int param_3,int param_4,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
