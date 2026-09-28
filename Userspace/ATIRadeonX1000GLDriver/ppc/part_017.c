@@ -9504,13 +9504,23 @@ int FUN_000c5e60(param_1)
   char *pcVar28;
   uint uVar29;
   int iVar30;
-  uint local_98;
-  uint local_94;
-  uint local_90;
-  uint local_8c;
-  uint local_88;
-  uint local_84;
-  uint local_80;
+  /* issue #64 live-repro (crash #8, past the FUN_000cae90 fixes): local_98/local_94/local_90/
+   * local_8c/local_88/local_84/local_80/local_7c were 8 separately-declared 4-byte locals,
+   * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
+   * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -
+   * the same Ghidra local-splitting defect class already fixed in FUN_000fd5c8,
+   * FUN_000b6580's local_68 cluster, and this session's own FUN_000f4d80 local_2c cluster.
+   * Only local_98's OWN 4 bytes are real storage; the walk past it (needed to reach what
+   * should be local_94/local_90/.../local_7c) ran off local_98's real bounds into whatever
+   * gcc actually placed next on the stack. Live-verified on real hardware via a hardware
+   * watchpoint on the calling function's saved r30/r31 stack slot: this loop's clamping
+   * store (`*(undefined2*)((int)&local_98+iVar8) = 0xff;`) was confirmed to be the exact
+   * write corrupting that slot, which is what caused FUN_000b4400's r30 to read back as
+   * 0xff00ff and crash on its next stack-relative access. Fixed by giving the cluster real,
+   * guaranteed-contiguous storage as an array (local_7c is kept as its own separate variable
+   * too, since it is independently used above for the early-return check; local_98_arr[7] is
+   * initialized to the same value alongside it so the walk's last slot still gets it). */
+  uint local_98_arr[8];
   uint local_7c;
   uint local_78;
   uint local_74;
@@ -9527,13 +9537,14 @@ int FUN_000c5e60(param_1)
     return;
   }
   local_58 = param_1[2];
-  local_98 = local_7c;
-  local_94 = local_7c;
-  local_90 = local_7c;
-  local_8c = local_7c;
-  local_88 = local_7c;
-  local_84 = local_7c;
-  local_80 = local_7c;
+  local_98_arr[0] = local_7c;
+  local_98_arr[1] = local_7c;
+  local_98_arr[2] = local_7c;
+  local_98_arr[3] = local_7c;
+  local_98_arr[4] = local_7c;
+  local_98_arr[5] = local_7c;
+  local_98_arr[6] = local_7c;
+  local_98_arr[7] = local_7c;
   if (local_58 == 0) {
     local_5c = local_58;
     local_74 = local_58;
@@ -9632,7 +9643,7 @@ LAB_000c60a8:
             }
             if (*pbVar14 < 0x10) {
               iVar8 = (uint)*pbVar14 * 2;
-              *(short *)((int)&local_98 + iVar8) = *(short *)((int)&local_98 + iVar8) + 1;
+              *(short *)((int)local_98_arr + iVar8) = *(short *)((int)local_98_arr + iVar8) + 1;
             }
           }
         }
@@ -9772,10 +9783,10 @@ LAB_000c6350:
   *(undefined2 *)(param_1 + 9) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
   puVar3 = param_1;
   do {
-    uVar11 = *(ushort *)((int)&local_98 + iVar8);
+    uVar11 = *(ushort *)((int)local_98_arr + iVar8);
     if (0xff < uVar11) {
       uVar11 = 0xff;
-      *(undefined2 *)((int)&local_98 + iVar8) = 0xff;
+      *(undefined2 *)((int)local_98_arr + iVar8) = 0xff;
     }
     *(char *)((int)puVar3 + 0x2a) = (char)uVar11;
     iVar8 = iVar8 + 2;
