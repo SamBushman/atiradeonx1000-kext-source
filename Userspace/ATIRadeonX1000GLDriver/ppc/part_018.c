@@ -2918,12 +2918,34 @@ code_r0x000cb214:
   case 6:
   case 0x10:
   case 0x27:
-  case 0x28:
   case 0x29:
   case 0x2a:
   case 0x2b:
   case 0x4b:
   case 0x53:
+    local_c1f8 = puVar34 + 1;
+    puVar23 = local_c1f8;
+    goto switchD_000cb23c_caseD_18;
+  /* issue #64 live-repro (crash #3, use-after-free): opcode 0x28 was lumped in with the
+   * trivial single-word opcodes above in THIS sizing pass, contributing nothing extra to
+   * iVar47 (the buffer's extra-output-words budget). But the WRITE pass's real case 0x28
+   * (below, `puVar45 = FUN_000c7930(...); *puVar45 = ppppppuVar15;`) calls FUN_000c7930,
+   * which - depending on live per-context state read from local_c08c/param_2 - can emit far
+   * more than one output word: tallying every conditional block in FUN_000c7930 (part_018.c),
+   * its worst case is 110 words (60 from the first *(param_2+0x22fc)!=0 block's three
+   * sub-loops, 24 from the *(param_2+0x21d0)!=0 loop, 12 from the unconditional third loop,
+   * 5 from the 0x220c/0x2204/0x2234 block, 9 from the final 0x2218/0x2220/0x2234 block),
+   * plus the caller's own extra `*puVar45 = ppppppuVar15` word already covered by this
+   * opcode's baseline 1-word allowance. Live-verified on real hardware: with a watchpoint on
+   * the corrupted freed heap block, `info locals` inside FUN_000cae90 at the exact fault
+   * showed puVar45 (the write's destination pointer, i.e. FUN_000c7930's real return value)
+   * equal to the corrupted address, and ppppppuVar15 (the value written) equal to 0x28 - the
+   * opcode number itself, confirming this exact call site. Splitting 0x28 out and adding its
+   * real worst-case bonus here (matching the existing iVar47/iVar26 bonus pattern used by
+   * cases 0x24/0x5d/0x5e above) so the command buffer is sized for what this opcode can
+   * actually emit. */
+  case 0x28:
+    iVar47 = iVar47 + 110;
     local_c1f8 = puVar34 + 1;
     puVar23 = local_c1f8;
     goto switchD_000cb23c_caseD_18;
@@ -3332,6 +3354,25 @@ LAB_000cc88c:
     local_c198[0] = local_c198[0] & 0x403fffff | 0x62000000;
     local_c0fc = puVar34;
     local_9cbc = _malloc(0x900);
+    /* issue #64 live-repro (crash #6, past the iVar47-mask fix): local_9cc8 - the record count
+     * later used as this loop's bound (`uVar21 = local_9cc8; ... while (uVar35 < uVar21)`,
+     * below) - is read in several places but WRITTEN nowhere in this entire function; the only
+     * thing ever done with its companion buffer is this _malloc(0x900) (64 records of 0x24
+     * bytes each) with no populating writes anywhere in this 4600-line function either. A
+     * freshly malloc'd, never-populated record list has zero valid entries, so the natural,
+     * safe count is 0 - but nothing sets it, leaving it as raw uninitialized stack garbage.
+     * Live-verified on real hardware: local_9cc8 read back as 3221123400 (0xC000FE48), driving
+     * the consumption loop far past the (empty) buffer into unrelated memory, reading a garbage
+     * piVar18[0] (e.g. 4249536) used as an array index and crashing on the resulting wild
+     * write. Initialized to 0 to match the buffer's real (empty) population state.
+     *
+     * The exact same defect class recurs at local_9c18 just below (used the identical way -
+     * `if (local_9c18 != 0) { pcVar31 = local_9c14; do { ... } while (--local_9c18 != 0); }`
+     * over its own never-populated buffer local_9c14) - also never written anywhere in this
+     * function. Live-verified: it crashed next, reading through pcVar31 at address 0xc0000000.
+     * Fixed the same way, for the same reason. */
+    local_9cc8 = 0;
+    local_9c18 = 0;
     iVar47 = ((int (*)())FUN_000cd1b0)(*param_5,auStack_c148,auStack_9d1c);
     if (iVar47 != 0) {
       return 2;
@@ -3394,6 +3435,20 @@ LAB_000cc88c:
           iVar47 = piVar18[1];
           ppppppuVar15 = *param_3;
           iVar26 = *piVar18;
+          /* issue #64 live-repro (crash #5, past the local_2c-cluster fix): this if-chain
+           * checks iVar47 (piVar18[1]) against exactly {1,0,2,3}, each mapping to one of 4
+           * consecutive byte offsets (0x24,0x23,0x25,0x26 respectively - i.e. really just
+           * `0x23 + iVar47` for iVar47 in that 2-bit range), but leaves ppppppuVar17 NULL for
+           * any other value - a classic decompiled-masked-switch defect (Ghidra shows the
+           * post-mask compares but drops the `& 3` itself; this project already carries
+           * Tools/userspace/switch_ranges.py for the general form of this class). Live-verified
+           * on real hardware: piVar18[1] held 128 (0x80) in a real run - not garbage, since
+           * piVar18[2]==1 correctly selected this case and piVar18[0]==3 was a sane iVar26 -
+           * and its low 2 bits (128 & 3 == 0) are exactly the "iVar47==0" case per the pattern
+           * above, so the field is genuinely wider than 2 bits and this chain must mask it
+           * before comparing. Rewritten to mask first; behavior for the four originally-
+           * handled raw values (0-3, already within the mask's range) is unchanged. */
+          iVar47 = iVar47 & 3;
           if (iVar47 == 1) {
             ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x24;
           }
@@ -3404,10 +3459,7 @@ LAB_000cc88c:
             ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x25;
           }
           else {
-            ppppppuVar17 = (uint ******)0x0;
-            if (iVar47 == 3) {
-              ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x26;
-            }
+            ppppppuVar17 = ppppppuVar15 + iVar26 * 4 + 0x26;
           }
           *ppppppuVar17 = (uint *****)piVar18[5];
           uVar21 = local_9cc8;
