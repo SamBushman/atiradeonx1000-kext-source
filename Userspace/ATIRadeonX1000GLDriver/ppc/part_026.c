@@ -5053,8 +5053,17 @@ int FUN_000fd5c8(param_1, param_2)
   undefined4 local_178;
   uint ****local_174;
   uint *****local_170;
-  undefined1 auStack_16c [8];
-  int local_164;
+  /* issue #64 live-repro (2nd instance, same function): FUN_001940a8(local_6c=auStack_16c), two lines
+   * below FUN_001940a8(local_68=auStack_154) which already got this fix, writes the same 6-word/0x18-byte
+   * sentinel-list header (see the comment on auStack_154 just below) - word[2] (self-referential "next",
+   * param_1[2] = param_1+3) is what `local_164`'s four loops read as the list head, same shape as
+   * local_14c's. auStack_16c was declared only 8 bytes with local_164 as a separate scalar 8 bytes in;
+   * live-confirmed the pointer this yields (local_164, still holding the list head's own address) is a
+   * real allocation but reads back as MallocPreScribble's 0xAA fill - i.e. never received the init write,
+   * same root cause as local_14c's, just missed by that fix since it's a second, independent instance.
+   * Merged into one 0x18-byte buffer the same way, aliased back to the original name. */
+  unsigned char auStack_16c [0x18];
+#define local_164 (*(int *)(auStack_16c + 0x08))
   /* issue #64 live-repro: FUN_001940a8 (called below via local_68=auStack_154) writes param_1[0]
    * through param_1[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
    * self-referential empty-list-head init at param_1[2] (offset 8: *(auStack_154+8) = auStack_154+12).
@@ -8201,3 +8210,4 @@ code_r0x00103bb0:
   goto switchD_000fdaf0_caseD_2;
 }
 #undef local_14c
+#undef local_164
