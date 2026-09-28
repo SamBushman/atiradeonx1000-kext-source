@@ -1433,14 +1433,18 @@ int FUN_0016ff54(param_1, param_2)
   undefined4 uVar32;
   int iVar33;
   int *piStack00000018;
-  undefined *local_78;
-  undefined *local_74;
-  int local_70;
-  undefined4 local_6c;
-  undefined *local_68;
-  undefined *local_64;
-  int local_60;
-  undefined4 local_5c;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_78/local_74/local_70/local_6c are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_78_buf [0x10];
+  #define local_78 (*(undefined * *)(local_78_buf + 0x00))
+  #define local_74 (*(undefined * *)(local_78_buf + 0x04))
+  #define local_70 (*(int *)(local_78_buf + 0x08))
+  #define local_6c (*(undefined4 *)(local_78_buf + 0x0c))
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_68/local_64/local_60/local_5c are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_68_buf [0x10];
+  #define local_68 (*(undefined * *)(local_68_buf + 0x00))
+  #define local_64 (*(undefined * *)(local_68_buf + 0x04))
+  #define local_60 (*(int *)(local_68_buf + 0x08))
+  #define local_5c (*(undefined4 *)(local_68_buf + 0x0c))
   uint local_58;
   uint local_54;
   int local_50;
@@ -2299,6 +2303,14 @@ code_r0x0016f044:
   if (iVar24 == 0) goto LAB_0016f3cc;
   goto LAB_0016f038;
 }
+#undef local_78
+#undef local_74
+#undef local_70
+#undef local_6c
+#undef local_68
+#undef local_64
+#undef local_60
+#undef local_5c
 
 /* FUN_00170990 @ 0x170990 (572 bytes) */
 int FUN_00170990(param_1)

@@ -718,8 +718,17 @@ int FUN_00127324(param_1, param_2, param_3, param_4, param_5)
 int FUN_0012740c(param_1)
   int param_1;
 {
-  undefined1 auStack_38 [16];
-  int *local_28;
+  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+   * this session - auStack_38 is walked by FUN_00194938/FUN_00194a94 as param_1[0..4] (0x14 bytes)
+   * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
+   * own continuation value. Separated, FUN_00194938's real update never reached local_28, so the
+   * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
+   * re-passed to the vtable call on every spin instead of the real next node, repeatedly
+   * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
+   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * between two visits). Merged into one 0x14-byte buffer. */
+  unsigned char auStack_38 [0x14];
+#define local_28 (*(int **)(auStack_38 + 0x10))
   
   FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
   while (local_28 != (int *)0x0) {
@@ -910,8 +919,17 @@ int FUN_00127850(param_1)
 {
   int iVar1;
   int iVar2;
-  undefined1 auStack_38 [16];
-  int *local_28;
+  /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
+   * this session - auStack_38 is walked by FUN_00194938/FUN_00194a94 as param_1[0..4] (0x14 bytes)
+   * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
+   * own continuation value. Separated, FUN_00194938's real update never reached local_28, so the
+   * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
+   * re-passed to the vtable call on every spin instead of the real next node, repeatedly
+   * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
+   * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
+   * between two visits). Merged into one 0x14-byte buffer. */
+  unsigned char auStack_38 [0x14];
+#define local_28 (*(int **)(auStack_38 + 0x10))
   
   FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
   iVar2 = 0;
@@ -924,6 +942,7 @@ int FUN_00127850(param_1)
   }
   return iVar2;
 }
+#undef local_28
 
 /* FUN_001278d0 @ 0x1278d0 (196 bytes) */
 int FUN_001278d0(param_1)

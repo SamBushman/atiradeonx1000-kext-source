@@ -784,24 +784,40 @@ int _gldChoosePixelFormat(param_1, param_2)
   uint uVar27;
   uint uVar28;
   uint uVar29;
-  undefined4 local_194;
-  uint local_190;
-  uint local_18c;
-  uint local_188;
-  uint local_184;
-  uint local_180;
-  uint local_17c;
-  uint local_178;
-  undefined2 local_174;
-  undefined2 local_172;
-  undefined2 local_170;
-  undefined2 local_16e;
-  undefined4 local_16c;
-  undefined1 local_168;
-  undefined1 local_167;
-  undefined1 local_166;
-  undefined1 local_165;
-  uint local_164;
+  /* issue #64 live-repro: local_60 = &local_194 (below) is used with pointer arithmetic spanning
+   * MULTIPLE 0x34-byte rows (local_60 + N*0xd, N up to a driver-computed pixel-format-variant
+   * count) - the real stock array this represents is bigger than just this one row of individually
+   * named locals. Ghidra only named row 0's fields (this group, exactly 0x34 bytes, confirmed by
+   * each name's own hex offset: 0x194-0x160=0x34); the next declared local after this group is
+   * local_88, a real, unrelated variable - so the gap between them (0x194-0x88=0x10c bytes) is
+   * exactly where the stock compiler placed the array's further rows, accessed only through this
+   * pointer arithmetic and never given individual names. Left as separate scalars (the same defect
+   * class fixed once already this session in auStack_c148/FUN_000cae90), the -O0 rebuild does not
+   * place them contiguously, so writes past row 0 miss into whatever real local happens to come
+   * next on this build's stack - confirmed live: corrupts far enough to overwrite this function's
+   * own param_1/param_2 (live differential harness: _gldChoosePixelFormat crashes with
+   * param_1=0xf, param_2=0x8000 - stock's real args here are always real pointers). Merged into one
+   * 0x10c-byte buffer (row 0 aliased back to the original names, byte-exact per their own offsets;
+   * the further rows stay unnamed/only reached via local_60, exactly as in the transcription). */
+  unsigned char local_194_buf[0x10c];
+#define local_194 (*(undefined4 *)(local_194_buf + 0x00))
+#define local_190 (*(uint *)(local_194_buf + 0x04))
+#define local_18c (*(uint *)(local_194_buf + 0x08))
+#define local_188 (*(uint *)(local_194_buf + 0x0c))
+#define local_184 (*(uint *)(local_194_buf + 0x10))
+#define local_180 (*(uint *)(local_194_buf + 0x14))
+#define local_17c (*(uint *)(local_194_buf + 0x18))
+#define local_178 (*(uint *)(local_194_buf + 0x1c))
+#define local_174 (*(undefined2 *)(local_194_buf + 0x20))
+#define local_172 (*(undefined2 *)(local_194_buf + 0x22))
+#define local_170 (*(undefined2 *)(local_194_buf + 0x24))
+#define local_16e (*(undefined2 *)(local_194_buf + 0x26))
+#define local_16c (*(undefined4 *)(local_194_buf + 0x28))
+#define local_168 (*(undefined1 *)(local_194_buf + 0x2c))
+#define local_167 (*(undefined1 *)(local_194_buf + 0x2d))
+#define local_166 (*(undefined1 *)(local_194_buf + 0x2e))
+#define local_165 (*(undefined1 *)(local_194_buf + 0x2f))
+#define local_164 (*(uint *)(local_194_buf + 0x30))
   uint local_88;
   uint local_84;
   int local_80;

@@ -10155,6 +10155,23 @@ LAB_000c6e10:
   return;
 }
 
+/* FUN_000c6e40 @ 0xc6e40 (12 bytes) - issue #64 live-repro: a genuine, separate function Ghidra's
+ * initial analysis never split out (no standard prologue - it's a 3-instruction tail-call right
+ * after the preceding function's blr, only reachable via the PC-relative function-pointer table
+ * FUN_000c6ff0 builds; never found by any direct bl/b xref). Confirmed live: FUN_000cd05c calls
+ * *(param_1+0x30) - previously transcribed as the raw literal (unsigned char*)0x000c6e40, which
+ * pointed at these bytes as DATA instead of as this function's own real code - as
+ * (arg, 0x44, param_3), landing here with param_2=0x44 after the ABI drops the 3rd arg; this
+ * confirmed-real code is or r3,r4,r4 / li r4,1 / b 0x1a3700 (the _calloc picsymbolstub), i.e. this
+ * is the allocator half of an alloc/free callback pair with the very next function, FUN_000c6e50
+ * (_free(param_2)). Otherwise unreachable without this fix (issue #64). */
+int FUN_000c6e40(param_1, param_2)
+  undefined4 param_1;
+  size_t param_2;
+{
+  return _calloc(param_2,1);
+}
+
 /* FUN_000c6e50 @ 0xc6e50 (40 bytes) */
 int FUN_000c6e50(param_1, param_2)
   undefined4 param_1;
@@ -10269,20 +10286,31 @@ int FUN_000c6ff0(param_1, param_2)
   undefined4 local_88;
   undefined4 local_84;
   undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_54;
-  undefined4 *local_50;
-  undefined *local_4c;
-  code *local_48;
-  code *local_44;
-  code *local_40;
-  code *local_3c;
-  code *local_38;
-  code *local_34;
-  code *local_30;
+  /* issue #64 live-repro: FUN_000cd05c (called below via &local_7c) reads its first argument at
+   * byte offsets up to +0x4c (*(param_1+0x30)/+0x34/+0x38/+0x40/+0x44/+0x48/+0x4c), i.e. it expects
+   * local_7c through local_30 (and local_54/local_50/local_4c above them) to be ONE contiguous
+   * 0x54-byte buffer - confirmed directly by this function's own "_memset(&local_7c,0,0x54)" a few
+   * lines down, not a guess. Left as separate scalars (same defect class as auStack_c148 and
+   * local_194 in _gldChoosePixelFormat, both fixed earlier this session), the -O0 rebuild does not
+   * place them contiguously, so FUN_000cd05c's offset reads miss into whatever real stack slot
+   * happens to be there instead - confirmed live: corrupts far enough to zero this function's own
+   * param_1, crashing on the *(param_1+0x186c)=uVar2 store a few lines below. Merged into one
+   * 0x54-byte buffer (offsets confirmed per each name's own hex value, e.g. 0x7c-0x30=0x4c). */
+  unsigned char local_7c_buf[0x54];
+#define local_54 (*(undefined4 *)(local_7c_buf + 0x28))
+#define local_50 (*(undefined4 **)(local_7c_buf + 0x2c))
+#define local_4c (*(undefined **)(local_7c_buf + 0x30))
+#define local_48 (*(code **)(local_7c_buf + 0x34))
+#define local_44 (*(code **)(local_7c_buf + 0x38))
+#define local_40 (*(code **)(local_7c_buf + 0x3c))
+#define local_3c (*(code **)(local_7c_buf + 0x40))
+#define local_38 (*(code **)(local_7c_buf + 0x44))
+#define local_34 (*(code **)(local_7c_buf + 0x48))
+#define local_30 (*(code **)(local_7c_buf + 0x4c))
+#define local_7c (*(undefined4 *)(local_7c_buf + 0x00))
+#define local_78 (*(undefined4 *)(local_7c_buf + 0x04))
   
-  _memset(&local_7c,0,0x54);
+  _memset(local_7c_buf,0,0x54);
   local_78 = *(undefined4 *)(param_1 + 0x23d8);
   local_80 = 0;
   local_88 = 0;
@@ -10310,7 +10338,7 @@ int FUN_000c6ff0(param_1, param_2)
       local_7c = 0x3e;
     }
   }
-  local_4c = ((unsigned char *)0x000c6e40);
+  local_4c = (undefined *)FUN_000c6e40;
   local_48 = FUN_000c6e50;
   local_54 = 2;
   local_44 = FUN_000c6e80;
@@ -10326,6 +10354,18 @@ int FUN_000c6ff0(param_1, param_2)
   *(undefined4 *)(param_1 + 0x1870) = local_84;
   return;
 }
+#undef local_54
+#undef local_50
+#undef local_4c
+#undef local_48
+#undef local_44
+#undef local_40
+#undef local_3c
+#undef local_38
+#undef local_34
+#undef local_30
+#undef local_7c
+#undef local_78
 
 /* FUN_000c71e0 @ 0xc71e0 (76 bytes) */
 int FUN_000c71e0(param_1)

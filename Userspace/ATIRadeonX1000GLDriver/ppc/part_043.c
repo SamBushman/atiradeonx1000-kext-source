@@ -4245,10 +4245,12 @@ int FUN_0014e6e4(param_1, param_2)
   int iVar12;
   uint *puVar13;
   uint uVar14;
-  uint local_48;
-  uint local_44;
-  int local_40;
-  undefined4 local_3c;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_48/local_44/local_40/local_3c are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_48_buf [0x10];
+  #define local_48 (*(uint *)(local_48_buf + 0x00))
+  #define local_44 (*(uint *)(local_48_buf + 0x04))
+  #define local_40 (*(int *)(local_48_buf + 0x08))
+  #define local_3c (*(undefined4 *)(local_48_buf + 0x0c))
   
   iVar1 = *(int *)(*(int *)(param_1 + 0x88) + 8);
   if ((iVar1 == 0x12) || (iVar1 == 0x13)) {
@@ -4338,6 +4340,10 @@ LAB_0014e874:
   }
   return;
 }
+#undef local_48
+#undef local_44
+#undef local_40
+#undef local_3c
 
 /* FUN_0014e9e4 @ 0x14e9e4 (2620 bytes) */
 int FUN_0014e9e4(param_1, param_2, param_3, param_4, param_5)
@@ -8652,10 +8658,12 @@ int FUN_00156d48(param_1, param_2, param_3)
   int local_bc;
   undefined4 local_b8;
   undefined4 local_b4;
-  uint local_b0;
-  uint local_ac;
-  int local_a8;
-  undefined4 local_a4;
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with FUN_0019423c - local_b0/local_ac/local_a8/local_a4 are its four words by their own hex offsets. FUN_0019423c unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  unsigned char local_b0_buf [0x10];
+  #define local_b0 (*(uint *)(local_b0_buf + 0x00))
+  #define local_ac (*(uint *)(local_b0_buf + 0x04))
+  #define local_a8 (*(int *)(local_b0_buf + 0x08))
+  #define local_a4 (*(undefined4 *)(local_b0_buf + 0x0c))
   int local_98;
   int local_94;
   undefined4 local_90;
@@ -9089,6 +9097,10 @@ LAB_001576d0:
   }
   return param_1;
 }
+#undef local_b0
+#undef local_ac
+#undef local_a8
+#undef local_a4
 
 /* FUN_00157b78 @ 0x157b78 (1172 bytes) */
 int FUN_00157b78(param_1, param_2, param_3)

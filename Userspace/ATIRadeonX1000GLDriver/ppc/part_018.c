@@ -2491,32 +2491,54 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_c154;
   undefined4 local_c150;
   undefined4 local_c14c;
-  /* Declared too small (72 bytes) vs. its own memset (0xbc = 188 bytes, exactly reaching
-   * local_c08c - confirmed by offset arithmetic: 0xc148-0xbc=0xc08c). The memset was overflowing
-   * into local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090, corrupting them every
-   * time this ran (issue #64). Enlarged to the real size; those other locals remain separately
-   * declared (harmless - they're distinct stack slots the compiler now places after this buffer
-   * instead of inside it, and nothing does pointer arithmetic from this buffer into them). */
+  /* Follow-up to the previous fix's own bug (issue #64 live-repro): enlarging auStack_c148 was
+   * correct, but leaving local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090 as
+   * separate, non-overlapping locals was NOT harmless - confirmed live on real hardware. Stock's
+   * real code does do pointer arithmetic from this buffer into them: FUN_000cd1b0 (called with
+   * auStack_c148) tail-calls into FUN_000da394/FUN_000e2524, which read *(auStack_c148+0x4c)
+   * expecting local_c0fc's value; a loop just below also writes local_c0f0[8..15], expecting
+   * those words to land in local_c0d0. With the locals declared separately, the compiler placed
+   * them elsewhere on the stack, so auStack_c148+0x4c stayed at its memset'd 0 instead of the
+   * real pointer - a null deref several calls downstream, in FUN_00193c00's live differential
+   * GLDriver test harness. Root-caused via a live watchpoint comparing stock vs. rebuilt (stock:
+   * r3=0x40d470 at the same call; rebuilt: 0). Properly merged this time into one byte-accurate
+   * 0xbc-byte buffer; each offset below is confirmed directly from its own name's hex value
+   * (0xc148-0xc0fc=0x4c, 0xc148-0xc090=0xb8, etc), and the whole run is contiguous and exactly
+   * 0xbc bytes (0xb8+4), matching the buffer's own real, memset'd size. */
   undefined1 auStack_c148 [0xbc];
-  uint *local_c100;
-  uint *local_c0fc;
-  int local_c0f8;
-  uint local_c0f0 [8];
-  uint local_c0d0 [16];
-  int local_c090;
+#define local_c100 (*(uint **)(auStack_c148 + 0x48))
+#define local_c0fc (*(uint **)(auStack_c148 + 0x4c))
+#define local_c0f8 (*(int *)(auStack_c148 + 0x50))
+#define local_c0f0 ((uint *)(auStack_c148 + 0x58))
+#define local_c0d0 ((uint *)(auStack_c148 + 0x78))
+#define local_c090 (*(int *)(auStack_c148 + 0xb8))
   uint ******local_c08c;
   undefined4 local_c088;
   uint local_c084;
-  uint local_c080 [4];
-  undefined4 local_c070;
-  undefined4 local_c06c;
-  undefined4 local_c068;
-  undefined4 local_c064;
-  uint local_c060 [4];
-  undefined4 local_c050;
-  undefined4 local_c04c;
-  undefined4 local_c048;
-  undefined4 local_c044;
+  /* issue #64 live-repro: the command-stream interpreter's source-side copy loop further down
+   * ("puVar23 = local_c080; ... do{uVar21=*puVar23; uVar35=puVar23[8]; puVar23=puVar23+1; ...}
+   * while(iVar47!=0)" with iVar47 starting at 8) reads puVar23[0] and puVar23[8] across 8
+   * iterations, reaching as far as local_c080+0x3c - 16 contiguous words (0x40 bytes), not just
+   * local_c080's own declared 4. local_c070/c06c/c068/c064/c060/c050/c04c/c048/c044 are exactly
+   * those remaining words by their own hex offsets. This is the read-side counterpart of the
+   * auStack_c148/local_c0fc fix from earlier this session (the write side, local_c0f0/local_c0d0,
+   * was already sized correctly there). Left separate, the rebuild copied whatever real stack
+   * words happened to follow local_c080's own 4 into the destination command buffer instead of
+   * the real header/argument words - live-verified: the command-stream interpreter three calls
+   * later reads a garbage opcode (>100) from the corrupted buffer and hits its own documented
+   * out-of-range safety net (_exit(0), confirmed present in stock too). Merged into one 0x40-byte
+   * buffer. */
+  unsigned char local_c080_buf [0x40];
+#define local_c080 ((uint *)(local_c080_buf + 0x00))
+#define local_c070 (*(undefined4 *)(local_c080_buf + 0x10))
+#define local_c06c (*(undefined4 *)(local_c080_buf + 0x14))
+#define local_c068 (*(undefined4 *)(local_c080_buf + 0x18))
+#define local_c064 (*(undefined4 *)(local_c080_buf + 0x1c))
+#define local_c060 ((uint *)(local_c080_buf + 0x20))
+#define local_c050 (*(undefined4 *)(local_c080_buf + 0x30))
+#define local_c04c (*(undefined4 *)(local_c080_buf + 0x34))
+#define local_c048 (*(undefined4 *)(local_c080_buf + 0x38))
+#define local_c044 (*(undefined4 *)(local_c080_buf + 0x3c))
   int local_c040;
   uint ******local_c03c;
   int local_c034;
@@ -3904,6 +3926,16 @@ joined_r0x000cc708:
   pppppppuVar36 = local_c1f4;
   goto switchD_000cbc48_caseD_18;
 }
+#undef local_c080
+#undef local_c070
+#undef local_c06c
+#undef local_c068
+#undef local_c064
+#undef local_c060
+#undef local_c050
+#undef local_c04c
+#undef local_c048
+#undef local_c044
 
 /* FUN_000cd05c @ 0xcd05c (176 bytes) */
 int FUN_000cd05c(param_1, param_2, param_3)
