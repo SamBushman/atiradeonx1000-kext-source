@@ -131,8 +131,16 @@ int FUN_0011eaa0(param_1)
   undefined4 uVar16;
   uint uVar17;
   uint uVar18;
-  undefined1 auStack_60 [16];
-  int local_50;
+  /* issue #64 live-repro: auStack_60 is the iterator state object passed to FUN_00194938/
+   * FUN_00194a94, which read/write param_1[0..4] - 5 words, 0x14 bytes. auStack_60 was declared
+   * only 16 bytes (4 words); local_50 sits exactly at the missing 5th word by its own hex name
+   * (0x60-0x50=0x10). The main loop below re-reads local_50 as its own continuation value
+   * (iVar13 = local_50) right after each FUN_00194938 call - with the two locals not contiguous,
+   * that call's real update to param_1[4] never reaches local_50, so iVar13 never changes and the
+   * while(iVar13!=0) loop spins forever (confirmed live: the rebuilt driver hangs at 99% CPU
+   * inside FUN_00194938, never returning). Merged into one 0x14-byte buffer. */
+  unsigned char auStack_60 [0x14];
+#define local_50 (*(int *)(auStack_60 + 0x10))
   
   iVar15 = *(int *)(*(int *)(param_1 + 0x3bc) + 4);
   uVar16 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
@@ -266,6 +274,7 @@ int FUN_0011eaa0(param_1)
   }
   return;
 }
+#undef local_50
 
 /* FUN_0011eec8 @ 0x11eec8 (1072 bytes) */
 int FUN_0011eec8(param_1, param_2)
@@ -533,9 +542,19 @@ int FUN_0011f578(param_1)
   undefined4 uVar5;
   int *piVar6;
   uint uVar7;
-  uint local_44;
-  uint local_40;
-  undefined4 *local_3c;
+  /* issue #64 live-repro: &local_44 is the same small growable-array header (capacity/count/
+   * data-pointer) FUN_0019423c/FUN_00194208 use elsewhere in this file - local_44, local_40 and
+   * local_3c are exactly its three words by their own hex offsets (0x44-0x40=4, 0x40-0x3c=4).
+   * local_38 is a separate, unrelated value (assigned from param_1 before this header is even
+   * built) and stays its own declaration. Left as separate scalars, FUN_00194208's shrink inside
+   * the do-loop below never reaches the same memory local_40/local_44's own loop condition reads,
+   * so the loop never sees the array become empty and spins forever (confirmed live: the rebuilt
+   * driver hangs at 99-100% CPU inside FUN_00194208, stuck at its own return statement, never
+   * making real progress). Merged the three header words into one 0xc-byte buffer. */
+  unsigned char local_44_buf [0xc];
+#define local_44 (*(uint *)(local_44_buf + 0x00))
+#define local_40 (*(uint *)(local_44_buf + 0x04))
+#define local_3c (*(undefined4 **)(local_44_buf + 0x08))
   undefined4 local_38;
   
   local_38 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
@@ -617,6 +636,9 @@ LAB_0011f744:
     }
   } while( true );
 }
+#undef local_44
+#undef local_40
+#undef local_3c
 
 /* FUN_0011f7fc @ 0x11f7fc (164 bytes) */
 int FUN_0011f7fc(param_1, param_2, param_3)
@@ -1671,9 +1693,18 @@ int FUN_001214fc(param_1)
   undefined4 *local_68;
   int local_64;
   int local_60;
-  uint local_5c;
-  uint local_58;
-  int local_54;
+  /* issue #64 live-repro: &local_5c is passed to FUN_0019423c/FUN_00194208 as a small growable-
+   * array header (capacity/count/data-pointer, param_1[0]/[1]/[2] there) - local_5c, local_58 and
+   * local_54 are exactly its three words by their own hex offsets (0x5c-0x58=4, 0x58-0x54=4). Left
+   * as separate scalars, the rebuild does not place them contiguously, so FUN_00194208's tail-called
+   * _memcpy(iVar2,iVar2+4,(iVar1-param_2)*4) - iVar2 derived from local_54's real value, iVar1 from
+   * local_5c's - read/wrote whatever unrelated word followed local_5c on this build's stack instead,
+   * a KERN_PROTECTION_FAILURE inside memcpy at a very small address. Merged into one 0xc-byte
+   * buffer. */
+  unsigned char local_5c_buf [0xc];
+#define local_5c (*(uint *)(local_5c_buf + 0x00))
+#define local_58 (*(uint *)(local_5c_buf + 0x04))
+#define local_54 (*(int *)(local_5c_buf + 0x08))
   undefined4 local_50;
   
   local_50 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
@@ -2546,6 +2577,9 @@ LAB_001228ec:
   if ((int *)piVar6[2] == (int *)0x0) goto LAB_001227bc;
   goto LAB_00122000;
 }
+#undef local_5c
+#undef local_58
+#undef local_54
 
 /* FUN_00122de8 @ 0x122de8 (168 bytes) */
 int FUN_00122de8(param_1)

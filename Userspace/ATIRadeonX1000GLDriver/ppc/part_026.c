@@ -816,8 +816,19 @@ int FUN_000f6248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 uStack0000002c;
   undefined4 uStack00000030;
   undefined4 uStack00000034;
-  undefined4 auStack_8c [4];
-  undefined4 local_7c;
+  /* issue #64 live-repro: called below as auStack_8c[param_2] with param_2 observed as 4 - one
+   * past this array's declared 4 elements (indices 0-3). Confirmed in stock's own disassembly: the
+   * word this 5th index reads (entry-sp-0x8c+0x10, by this array's own hex name) is the exact same
+   * stack slot as local_7c (entry-sp-0x7c), which the very next line fills with a real value
+   * (*(param_1+0x14)) - stock never writes a separate word for index 0 either (genuinely padding/
+   * unused there), so this is the same locals-that-must-be-contiguous defect as elsewhere this
+   * session, just one array cell short instead of a raw address. Left separate, auStack_8c[4] read
+   * whatever unrelated word happened to follow it on this build's stack instead of local_7c's real
+   * value, corrupting a callback-table lookup several frames down (FUN_00194834 called through a
+   * garbage function pointer, jumping into stack memory as code). Extended to 5 elements; local_7c
+   * aliased to index 4 so both names reach the same word. */
+  undefined4 auStack_8c [5];
+#define local_7c auStack_8c[4]
   undefined4 local_78 [26];
   
   auStack_8c[1] = *(undefined4 *)(param_1 + 8);
@@ -894,6 +905,7 @@ int FUN_000f6248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   }
   return iVar4;
 }
+#undef local_7c
 
 /* FUN_000f645c @ 0xf645c (376 bytes) */
 int FUN_000f645c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
@@ -5037,8 +5049,18 @@ int FUN_000fd5c8(param_1, param_2)
   uint *****local_170;
   undefined1 auStack_16c [8];
   int local_164;
-  undefined1 auStack_154 [8];
-  int local_14c;
+  /* issue #64 live-repro: FUN_001940a8 (called below via local_68=auStack_154) writes param_1[0]
+   * through param_1[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
+   * self-referential empty-list-head init at param_1[2] (offset 8: *(auStack_154+8) = auStack_154+12).
+   * auStack_154 was declared only 8 bytes; local_14c (used as a list head in four separate loops
+   * later in this function) sits exactly at that offset-8 slot by its own hex name (0x154-0x14c=8),
+   * and the 12 bytes after it (up to local_13c, 0x154-0x13c=0x18) are the same buffer's remaining
+   * two words, never individually named. Left separate, local_14c never receives its initializer at
+   * all in the rebuild (confirmed live: read as garbage/uninitialized), corrupting every one of the
+   * four unlink loops that use it as a list head - traced down to a crash in FUN_0019401c, a plain
+   * linked-list unlink helper, dereferencing garbage. Merged into one 0x18-byte buffer. */
+  unsigned char auStack_154 [0x18];
+#define local_14c (*(int *)(auStack_154 + 0x08))
   uint *local_13c;
   undefined4 local_138;
   undefined4 local_134;
@@ -8172,4 +8194,4 @@ code_r0x00103bb0:
   }
   goto switchD_000fdaf0_caseD_2;
 }
-
+#undef local_14c
