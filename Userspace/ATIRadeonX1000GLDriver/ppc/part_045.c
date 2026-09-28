@@ -3119,15 +3119,27 @@ int FUN_00171e68(param_1)
   undefined4 in_r9;
   undefined4 *puVar2;
   int iVar4;
-  undefined1 auStack_1d8 [52];
-  undefined1 auStack_1a4 [24];
-  undefined1 auStack_18c [24];
-  undefined1 auStack_174 [24];
-  undefined1 auStack_15c [24];
-  undefined1 auStack_144 [24];
-  undefined4 auStack_12c [18];
-  undefined4 uStack_e4;
-  undefined1 local_e0 [200];
+  /* NOTE (issue #64, ROOT CAUSE of the FUN_00194034 crash): these 9 locals were declared as separate
+   * adjacent stack scalars/arrays, but this function's own code treats them as ONE contiguous 0x1c0-byte
+   * region - confirmed three independent ways: (1) their own names encode consecutive stock frame
+   * offsets with no gaps (0x1d8-0x1a4=0x34=auStack_1d8's real size, ... down to local_e0 starting at
+   * exactly 0xf8 bytes in); (2) the backward-walking loop a few lines down decrements by exactly 6 words
+   * (24 bytes) per step through auStack_144/15c/174/18c/1a4, expecting them contiguous; (3) empirically -
+   * this IS the original crash: FUN_00170e6c reads *(this_object + 0x3e words) = +0xf8 bytes, which lands
+   * exactly on local_e0's real position in stock (a real FUN_001940a8 sentinel list), but on -O0-scattered
+   * garbage in the rebuild, since nothing guarantees these 9 separate locals land in this order or even
+   * adjacently. Traced from the crash back to here across two long sessions (issue #64) - fixing by
+   * forcing one real contiguous buffer with aliases at the exact offsets stock's own naming confirms. */
+  undefined1 auStack_1e68_combined [0x1c0];
+#define auStack_1d8 (auStack_1e68_combined + 0x0)
+#define auStack_1a4 (auStack_1e68_combined + 0x34)
+#define auStack_18c (auStack_1e68_combined + 0x4c)
+#define auStack_174 (auStack_1e68_combined + 0x64)
+#define auStack_15c (auStack_1e68_combined + 0x7c)
+#define auStack_144 (auStack_1e68_combined + 0x94)
+#define auStack_12c ((undefined4 *)(auStack_1e68_combined + 0xac))
+#define uStack_e4 (*(undefined4 *)(auStack_1e68_combined + 0xf4))
+#define local_e0 (auStack_1e68_combined + 0xf8)
   undefined4 *puVar3;
   
   FUN_001940a8(auStack_1a4);

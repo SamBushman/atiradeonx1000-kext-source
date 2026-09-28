@@ -840,7 +840,7 @@ int FUN_000e284c(param_1)
   
                     
                     
-  uVar1 = (**(code **)(**(int **)(param_1 + 0x20) + 8))();
+  uVar1 = (**(code **)(**(int **)(param_1 + 0x20) + 8))(*(int **)(param_1 + 0x20));
   return uVar1;
 }
 
@@ -1451,9 +1451,24 @@ int FUN_000e36bc(param_1, param_2, param_3)
   undefined4 in_r8;
   undefined4 in_r9;
   undefined4 in_r10;
-  undefined1 auStack_78 [4];
-  undefined1 auStack_74 [32];
-  int *local_54;
+  /* NOTE (issue #64): auStack_78/auStack_74/local_54 declared as 3 separate adjacent locals sharing one
+   * real stock stack region. "local_54" is NOT a separate buffer after auStack_74 - per stock disassembly
+   * (r1+0x3c=auStack_74, r1+0x5c=local_54, frame size 0xb0) it's simply the name for auStack_74's own
+   * word index 8 (0x74-0x54=0x20=8 words in). FUN_000e3544(auStack_74,...) writes auStack_74[0] through
+   * auStack_74[0xd] (up to +0x34 bytes, i.e. through frame offset r1+0x70) - CONFIRMED by reading that
+   * callee's own body - so auStack_74's real required size is 0x38 bytes, not the 0x20 the auStack_74..
+   * local_54 gap alone would suggest (an earlier version of this fix under-sized it at 0x28 total, which
+   * still let FUN_000e3544's tail writes (words 9-0xd, past local_54) overflow past this whole buffer -
+   * confirmed live: that overflow was clobbering a saved register in the CALLER's (FUN_000e2094's) frame,
+   * corrupting its r30 and causing a second crash further into gldCreateContext). Those extra words are
+   * never read back by any other statement in this function (no name exists for them, hence no overflow
+   * was visible from local C code alone) - only sized correctly by checking the callee's real write range
+   * against stock disassembly. Same defect class as the FUN_00171e68/FUN_00170e6c/FUN_00169b70/
+   * FUN_00158c3c fixes already landed on this issue. */
+  undefined1 auStack_e36bc_combined [0x40];
+#define auStack_78 (auStack_e36bc_combined + 0x0)
+#define auStack_74 (auStack_e36bc_combined + 0x4)
+#define local_54 (*(int **)(auStack_e36bc_combined + 0x24))
   
   ((int (*)())FUN_000e3544)(auStack_74,param_1,param_3);
   (**(code **)(*local_54 + 0x18))(local_54,*param_1);
@@ -1515,6 +1530,9 @@ LAB_000e3900:
 LAB_000e392c:
   return ((int (*)())FUN_000e3308)(auStack_74);
 }
+#undef auStack_78
+#undef auStack_74
+#undef local_54
 
 /* FUN_000e3968 @ 0xe3968 (396 bytes) */
 int FUN_000e3968(param_1, param_2, param_3)
