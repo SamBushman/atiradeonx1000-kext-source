@@ -1923,7 +1923,20 @@ int FUN_000e4400(param_1, param_2)
 int FUN_000e4408(param_1)
   int param_1;
 {
-  return *(undefined2 *)(param_1 + 0x8e);
+  /* issue #64 live-repro (2nd crash, past the calloc(44) fix): *(param_1+0x8e) is a "current
+   * token subtype" cache that can transiently hold an out-of-range value (confirmed: every other
+   * reader in this file - FUN_000e4a38:2265, and part_022.c:840/842/852/854/858 - checks
+   * `< 0xbf` before trusting it, resetting to 0 otherwise). This function, this field's only
+   * other reader, returned it raw with no such check - live-verified the caller (FUN_000e4c40)
+   * then used the unclamped value (0xc000 in the reproducing run) as an unbounded switch/table
+   * index, crashing in FUN_000e4710's table lookup three calls later. Added the same clamp every
+   * other consumer already has. */
+  undefined2 uVar1;
+  uVar1 = *(undefined2 *)(param_1 + 0x8e);
+  if (0xbe < (ushort)uVar1) {
+    uVar1 = 0;
+  }
+  return uVar1;
 }
 
 /* FUN_000e4410 @ 0xe4410 (64 bytes) */
