@@ -1404,15 +1404,34 @@ int FUN_00095dd0(param_1, param_2, param_3)
       iVar2 = local_a4;
     }
     uVar3 = *(undefined4 *)(param_1[0xfb] + 8);
+    /* issue #64 live-repro (crash #9, past the local_98-cluster fix): this indirect dispatch
+     * (through the per-instance function-pointer table at 0x12e4+iVar5) reaches FUN_000840d0
+     * on real hardware, whose real signature takes 12 parameters - but every call at this
+     * shared call shape only supplies 8, matching the project's known dropped-call-args
+     * defect class (Tools/userspace/indirect_args.py, detect_dropped_args.py). Since the call
+     * is an untyped raw function-pointer invocation, the missing param_9-12 are simply never
+     * pushed; FUN_000840d0 reads whatever stale stack memory happens to be there instead.
+     * Live-verified on real hardware: it crashed dereferencing param_11 as a null pointer.
+     * FUN_000840d0's own body applies the IDENTICAL bit-packing pattern to (param_5,param_6,
+     * param_7,param_8) as it does to (param_9,param_10,param_11,param_12) - one group at
+     * iVar15+4, the other at iVar15+8 - matching OpenGL's separate front/back stencil-state
+     * encoding; when front and back use the same function (the common, non-"Separate" case
+     * exercised here), both groups are the same values. Fixed by supplying uVar3/iVar8+N/
+     * &DAT_001dbd14/&DAT_001fa5e8 again as param_9-12 at every call site reaching this same
+     * dispatch slot in this function. */
     (**(code **)(((unsigned char *)0x000012e4) + iVar5))
-              (param_1,uVar4,iVar2,&DAT_001dbd04,uVar3,iVar8,&DAT_001dbd14,&DAT_001fa5e8);
+              (param_1,uVar4,iVar2,&DAT_001dbd04,uVar3,iVar8,&DAT_001dbd14,&DAT_001fa5e8,
+               uVar3,iVar8,&DAT_001dbd14,&DAT_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e4) + iVar5))
-              (param_1,uVar4,iVar2,&DAT_001dbd64,uVar3,iVar8 + 1,&DAT_001dbd14,&DAT_001fa5e8);
+              (param_1,uVar4,iVar2,&DAT_001dbd64,uVar3,iVar8 + 1,&DAT_001dbd14,&DAT_001fa5e8,
+               uVar3,iVar8 + 1,&DAT_001dbd14,&DAT_001fa5e8);
     (**(code **)(((unsigned char *)0x000012e4) + iVar5))
-              (param_1,uVar4,iVar2,&DAT_001dbd54,uVar3,iVar8 + 2,&DAT_001dbd14,&DAT_001fa5e8);
+              (param_1,uVar4,iVar2,&DAT_001dbd54,uVar3,iVar8 + 2,&DAT_001dbd14,&DAT_001fa5e8,
+               uVar3,iVar8 + 2,&DAT_001dbd14,&DAT_001fa5e8);
     if ((*(char *)(param_1 + 0x1d1) == '\0') || (param_1[0x1a8] != -1)) {
       (**(code **)(((unsigned char *)0x000012e4) + iVar5))
-                (param_1,uVar4,iVar2,&DAT_001dbd44,uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8);
+                (param_1,uVar4,iVar2,&DAT_001dbd44,uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8,
+                 uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8);
     }
     else {
       uVar9 = *(undefined4 *)param_1[0xfc];
@@ -1422,7 +1441,8 @@ int FUN_00095dd0(param_1, param_2, param_3)
         return 7;
       }
       (**(code **)(((unsigned char *)0x000012e4) + iVar5))
-                (param_1,uVar9,local_7c,&DAT_001dbd44,uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8);
+                (param_1,uVar9,local_7c,&DAT_001dbd44,uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8,
+                 uVar3,iVar8 + 3,&DAT_001dbd14,&DAT_001fa5e8);
       (**(code **)(((unsigned char *)0x000012e8) + iVar5))
                 (param_1,uVar4,iVar2,&DAT_001dbd44,uVar7,local_7c,&DAT_001dbcd4,&DAT_001fa5e8);
       FUN_00091980(param_1,uVar7,local_7c);
