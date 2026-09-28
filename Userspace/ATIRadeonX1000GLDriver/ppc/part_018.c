@@ -2512,7 +2512,21 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
 #define local_c0f0 ((uint *)(auStack_c148 + 0x58))
 #define local_c0d0 ((uint *)(auStack_c148 + 0x78))
 #define local_c090 (*(int *)(auStack_c148 + 0xb8))
-  uint ******local_c08c;
+  /* issue #64 live-repro: FUN_000c8910/FUN_000c8600 (reached via the command-stream token-1/0x47
+   * opcode handlers below) treat their 3rd/4th argument - &local_c08c, passed directly or via an
+   * alias (pppppppuVar19/local_88) at every call site in this function - as the base of a large
+   * per-context attribute-state array, indexing it at param_3[2] up to param_3[0x88a] (~8.7KB).
+   * Declared as a single word, this overflowed onto whatever real stock places after it on the
+   * stack. Live-verified on real hardware via a raw memory watchpoint at the real stock address:
+   * FUN_000c8600's `param_3[param_1+0x87c] = 1;` (opcode 0x47, param_1==0) is a real, deterministic
+   * write stock performs that the rebuild's undersized local_c08c can't - traced back through
+   * FUN_000cae90's own size-computation cascade (part_018.c:2758-2820) to the calloc(44) crash this
+   * issue's title tracks: the write's real destination is 12 bytes past a stack region our size
+   * computation reads back as a "flag" (local_9e9c[0]) to decide the command buffer's malloc size,
+   * so leaving it unwritten undersizes that malloc by exactly the corruption this issue chases.
+   * Given its own real size, without touching any other local's declaration. */
+  unsigned char local_c08c_buf [0x2400];
+#define local_c08c (*(uint *******)(local_c08c_buf))
   undefined4 local_c088;
   uint local_c084;
   /* issue #64 live-repro: the command-stream interpreter's source-side copy loop further down
@@ -3926,6 +3940,7 @@ joined_r0x000cc708:
   pppppppuVar36 = local_c1f4;
   goto switchD_000cbc48_caseD_18;
 }
+#undef local_c08c
 #undef local_c080
 #undef local_c070
 #undef local_c06c
