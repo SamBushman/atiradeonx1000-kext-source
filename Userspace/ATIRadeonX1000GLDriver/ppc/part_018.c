@@ -2515,16 +2515,30 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   uint ******local_c08c;
   undefined4 local_c088;
   uint local_c084;
-  uint local_c080 [4];
-  undefined4 local_c070;
-  undefined4 local_c06c;
-  undefined4 local_c068;
-  undefined4 local_c064;
-  uint local_c060 [4];
-  undefined4 local_c050;
-  undefined4 local_c04c;
-  undefined4 local_c048;
-  undefined4 local_c044;
+  /* issue #64 live-repro: the command-stream interpreter's source-side copy loop further down
+   * ("puVar23 = local_c080; ... do{uVar21=*puVar23; uVar35=puVar23[8]; puVar23=puVar23+1; ...}
+   * while(iVar47!=0)" with iVar47 starting at 8) reads puVar23[0] and puVar23[8] across 8
+   * iterations, reaching as far as local_c080+0x3c - 16 contiguous words (0x40 bytes), not just
+   * local_c080's own declared 4. local_c070/c06c/c068/c064/c060/c050/c04c/c048/c044 are exactly
+   * those remaining words by their own hex offsets. This is the read-side counterpart of the
+   * auStack_c148/local_c0fc fix from earlier this session (the write side, local_c0f0/local_c0d0,
+   * was already sized correctly there). Left separate, the rebuild copied whatever real stack
+   * words happened to follow local_c080's own 4 into the destination command buffer instead of
+   * the real header/argument words - live-verified: the command-stream interpreter three calls
+   * later reads a garbage opcode (>100) from the corrupted buffer and hits its own documented
+   * out-of-range safety net (_exit(0), confirmed present in stock too). Merged into one 0x40-byte
+   * buffer. */
+  unsigned char local_c080_buf [0x40];
+#define local_c080 ((uint *)(local_c080_buf + 0x00))
+#define local_c070 (*(undefined4 *)(local_c080_buf + 0x10))
+#define local_c06c (*(undefined4 *)(local_c080_buf + 0x14))
+#define local_c068 (*(undefined4 *)(local_c080_buf + 0x18))
+#define local_c064 (*(undefined4 *)(local_c080_buf + 0x1c))
+#define local_c060 ((uint *)(local_c080_buf + 0x20))
+#define local_c050 (*(undefined4 *)(local_c080_buf + 0x30))
+#define local_c04c (*(undefined4 *)(local_c080_buf + 0x34))
+#define local_c048 (*(undefined4 *)(local_c080_buf + 0x38))
+#define local_c044 (*(undefined4 *)(local_c080_buf + 0x3c))
   int local_c040;
   uint ******local_c03c;
   int local_c034;
@@ -3912,6 +3926,16 @@ joined_r0x000cc708:
   pppppppuVar36 = local_c1f4;
   goto switchD_000cbc48_caseD_18;
 }
+#undef local_c080
+#undef local_c070
+#undef local_c06c
+#undef local_c068
+#undef local_c064
+#undef local_c060
+#undef local_c050
+#undef local_c04c
+#undef local_c048
+#undef local_c044
 
 /* FUN_000cd05c @ 0xcd05c (176 bytes) */
 int FUN_000cd05c(param_1, param_2, param_3)
