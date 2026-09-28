@@ -1036,13 +1036,18 @@ int FUN_000c8e50(param_1, param_2, param_3)
   undefined4 local_2b24;
   undefined4 local_2b20;
   undefined4 local_2b1c;
-  undefined1 auStack_2b18 [76];
+  /* Same undersized-buffer defect as auStack_c148 below (issue #64), same function, a sibling call
+   * site: declared 76 bytes but memset to 0xbc=188 (0x2b18-0xbc=0x2a5c, exactly this buffer's own
+   * sibling declared right after it - confirming the real size). Enlarged to match. */
+  undefined1 auStack_2b18 [0xbc];
   uint *local_2acc;
   int local_2ac8;
   undefined4 local_2ac0 [8];
   undefined4 local_2aa0 [16];
   int local_2a60;
-  undefined1 auStack_2a5c [72];
+  /* Same undersized-buffer defect as auStack_9d1c below (issue #64), same function, a sibling call
+   * site: declared 72 bytes but memset to 0x674=1652. Enlarged to match. */
+  undefined1 auStack_2a5c [0x674];
   undefined4 local_2a14;
   undefined4 local_2a10;
   uint local_2a08;
@@ -2486,7 +2491,13 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_c154;
   undefined4 local_c150;
   undefined4 local_c14c;
-  undefined1 auStack_c148 [72];
+  /* Declared too small (72 bytes) vs. its own memset (0xbc = 188 bytes, exactly reaching
+   * local_c08c - confirmed by offset arithmetic: 0xc148-0xbc=0xc08c). The memset was overflowing
+   * into local_c100/local_c0fc/local_c0f8/local_c0f0/local_c0d0/local_c090, corrupting them every
+   * time this ran (issue #64). Enlarged to the real size; those other locals remain separately
+   * declared (harmless - they're distinct stack slots the compiler now places after this buffer
+   * instead of inside it, and nothing does pointer arithmetic from this buffer into them). */
+  undefined1 auStack_c148 [0xbc];
   uint *local_c100;
   uint *local_c0fc;
   int local_c0f8;
@@ -2551,7 +2562,16 @@ int FUN_000cae90(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_9d70;
   int local_9d6c;
   undefined4 local_9d20;
-  undefined1 auStack_9d1c [72];
+  /* Declared too small (72 bytes) vs. its own memset (0x9c88 = 40072 bytes) - this is the real
+   * root cause of the shader/GLSL token-stream parser crash tracked on issue #64: this buffer is
+   * the token stream's own backing storage (its address eventually becomes the base FUN_000e4a38
+   * walks via param_1+0x74), and at 72 declared bytes the memset was overflowing ~40KB into
+   * whatever the compiler placed after it on the stack - onto this same giant function's own many
+   * other locals, corrupting them, AND leaving the "real" 40KB buffer's tail entirely unzeroed
+   * (reading uninitialized stack garbage there once the token stream's real content ran out,
+   * instead of the clean zero/terminator byte stock's properly-sized buffer provides). Enlarged to
+   * the real size. */
+  undefined1 auStack_9d1c [0x9c88];
   undefined4 local_9cd4;
   uint local_9cc8;
   int local_9cbc;
