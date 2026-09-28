@@ -3885,18 +3885,19 @@ int FUN_000a7050(param_1)
   puVar3 = PTR_FUN_001e8a88;
   *(undefined **)(((unsigned char *)0x000014bc) + param_1) = puVar2;
   *(undefined **)(((unsigned char *)0x00001464) + param_1) = puVar3;
-  /* NOTE (issue #64): real root cause of the crash reached inside FUN_000a2530 - this whole area
-   * (stock 0xa7178-0xa72b0ish) is a genuine Ghidra decompile gap, not a transcription slip: THREE
-   * separate calls through a locally-installed allocator callback (confirmed live: the callback
-   * pointer resolves to exactly FUN_000a6f70, the same _calloc(x,1) wrapper already visible
-   * elsewhere in this function), storing results to iVar9+0x116c / +0x1154 / +0x112c. None of the
-   * three, nor the callback install itself, made it into this corpus - FUN_000a2530 then reads
-   * +0x1154 as a live pointer and crashes on the null the missing store left behind. Only the
-   * middle call is added here (confirmed via stock disasm: "li r3,0x90" right before its bctrl) -
-   * that's the one FUN_000a2530 actually needs. The other two (+0x116c, +0x112c, real sizes not
-   * yet confirmed) are a real, still-open gap in this function's transcription - tracked as a
-   * follow-up, not guessed at here. */
+  /* Completed (issue #64): the whole 3-call missing block (stock 0xa7178-0xa72b0ish) is now
+   * restored, in stock's real order, sizes and destinations all confirmed directly from
+   * disassembly (each call's "li r3,N" immediately precedes its bctrl; each destination is the
+   * "stw r3,OFFSET(r30)" immediately after): calloc(0xa8)->+0x116c, calloc(0x90)->+0x1154,
+   * calloc(0x14)->+0x112c, all through the same locally-installed FUN_000a6f70 callback already
+   * used elsewhere in this function. The middle call (+0x1154) was the one already fixed and
+   * verified to resolve the original FUN_000a2530 null-deref crash on this issue. The other two
+   * were left as an open follow-up at the time - re-derived and added here after a *different*,
+   * later crash (FUN_00193c00, deep in the GLSL shader-compiler call chain) traced back to this
+   * same still-missing block. */
+  *(int *)(iVar9 + 0x116c) = ((int (*)())FUN_000a6f70)(0xa8);
   *(int *)(iVar9 + 0x1154) = ((int (*)())FUN_000a6f70)(0x90);
+  *(int *)(iVar9 + 0x112c) = ((int (*)())FUN_000a6f70)(0x14);
   ((int (*)())FUN_000a2530)(iVar9);
   FUN_000a0ef0(iVar9);
   FUN_0008f760(iVar9);
