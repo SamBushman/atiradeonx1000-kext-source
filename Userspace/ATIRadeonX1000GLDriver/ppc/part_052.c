@@ -3192,3 +3192,95 @@ int FUN_0019d7a0(param_1, param_2, param_3, param_4)
   return;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_00197b30");
+asm(".set FUN_00197b30, _FUN_00197b30");
+asm(".globl FUN_00197de4");
+asm(".set FUN_00197de4, _FUN_00197de4");
+asm(".globl FUN_00197ecc");
+asm(".set FUN_00197ecc, _FUN_00197ecc");
+asm(".globl FUN_00197fb4");
+asm(".set FUN_00197fb4, _FUN_00197fb4");
+asm(".globl FUN_00198084");
+asm(".set FUN_00198084, _FUN_00198084");
+asm(".globl FUN_001981ac");
+asm(".set FUN_001981ac, _FUN_001981ac");
+asm(".globl FUN_0019a2f0");
+asm(".set FUN_0019a2f0, _FUN_0019a2f0");
+asm(".globl FUN_0019a3bc");
+asm(".set FUN_0019a3bc, _FUN_0019a3bc");
+asm(".globl FUN_0019a484");
+asm(".set FUN_0019a484, _FUN_0019a484");
+asm(".globl FUN_0019a510");
+asm(".set FUN_0019a510, _FUN_0019a510");
+asm(".globl FUN_0019a618");
+asm(".set FUN_0019a618, _FUN_0019a618");
+asm(".globl FUN_0019a690");
+asm(".set FUN_0019a690, _FUN_0019a690");
+asm(".globl FUN_0019a6a0");
+asm(".set FUN_0019a6a0, _FUN_0019a6a0");
+asm(".globl FUN_0019a80c");
+asm(".set FUN_0019a80c, _FUN_0019a80c");
+asm(".globl FUN_0019a8a8");
+asm(".set FUN_0019a8a8, _FUN_0019a8a8");
+asm(".globl FUN_0019a8ac");
+asm(".set FUN_0019a8ac, _FUN_0019a8ac");
+asm(".globl FUN_0019a8bc");
+asm(".set FUN_0019a8bc, _FUN_0019a8bc");
+asm(".globl FUN_0019a8d4");
+asm(".set FUN_0019a8d4, _FUN_0019a8d4");
+asm(".globl FUN_0019a954");
+asm(".set FUN_0019a954, _FUN_0019a954");
+asm(".globl FUN_0019a9dc");
+asm(".set FUN_0019a9dc, _FUN_0019a9dc");
+asm(".globl FUN_0019aa7c");
+asm(".set FUN_0019aa7c, _FUN_0019aa7c");
+asm(".globl FUN_0019aaf4");
+asm(".set FUN_0019aaf4, _FUN_0019aaf4");
+asm(".globl FUN_0019ab60");
+asm(".set FUN_0019ab60, _FUN_0019ab60");
+asm(".globl FUN_0019abc4");
+asm(".set FUN_0019abc4, _FUN_0019abc4");
+asm(".globl FUN_0019ac2c");
+asm(".set FUN_0019ac2c, _FUN_0019ac2c");
+asm(".globl FUN_0019aca4");
+asm(".set FUN_0019aca4, _FUN_0019aca4");
+asm(".globl FUN_0019acb0");
+asm(".set FUN_0019acb0, _FUN_0019acb0");
+asm(".globl FUN_0019adf8");
+asm(".set FUN_0019adf8, _FUN_0019adf8");
+asm(".globl FUN_0019ae80");
+asm(".set FUN_0019ae80, _FUN_0019ae80");
+asm(".globl FUN_0019aee8");
+asm(".set FUN_0019aee8, _FUN_0019aee8");
+asm(".globl FUN_0019af40");
+asm(".set FUN_0019af40, _FUN_0019af40");
+asm(".globl FUN_0019b3c8");
+asm(".set FUN_0019b3c8, _FUN_0019b3c8");
+asm(".globl FUN_0019b6a0");
+asm(".set FUN_0019b6a0, _FUN_0019b6a0");
+asm(".globl FUN_0019b748");
+asm(".set FUN_0019b748, _FUN_0019b748");
+asm(".globl FUN_0019b808");
+asm(".set FUN_0019b808, _FUN_0019b808");
+asm(".globl FUN_0019b8bc");
+asm(".set FUN_0019b8bc, _FUN_0019b8bc");
+asm(".globl FUN_0019b9ac");
+asm(".set FUN_0019b9ac, _FUN_0019b9ac");
+asm(".globl FUN_0019ba3c");
+asm(".set FUN_0019ba3c, _FUN_0019ba3c");
+asm(".globl FUN_0019d1f4");
+asm(".set FUN_0019d1f4, _FUN_0019d1f4");
+asm(".globl FUN_0019d474");
+asm(".set FUN_0019d474, _FUN_0019d474");
+asm(".globl FUN_0019d478");
+asm(".set FUN_0019d478, _FUN_0019d478");
+asm(".globl FUN_0019d590");
+asm(".set FUN_0019d590, _FUN_0019d590");
+asm(".globl FUN_0019d7a0");
+asm(".set FUN_0019d7a0, _FUN_0019d7a0");

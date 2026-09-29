@@ -1,3 +1,208 @@
+/* issue: comprehensive #define fix - decls.h names hundreds of functions/data WITH
+ * a leading underscore (matching Ghidra's naming for both internal helpers and
+ * imported system calls), but gcc automatically adds ONE MORE leading underscore on
+ * top of that when compiling. Apple's stock ld silently reconciles this; ld64
+ * (required for this PPC binary's size - stock ld breaks on large PPC links) does
+ * not, and needs every real system/CoreFoundation/IOKit call and every one of these
+ * data symbols to resolve to the name it actually expects. Renaming each identifier
+ * via #define (applied to its declaration AND every call/reference site,
+ * transparently) so the compiled symbol matches exactly. */
+#define _aniso aniso
+#define _aoffimmi aoffimmi
+#define _calloc calloc
+#define _ceil ceil
+#define _CFDictionaryCreate CFDictionaryCreate
+#define _CFDictionaryGetValue CFDictionaryGetValue
+#define _CFNotificationCenterAddObserver CFNotificationCenterAddObserver
+#define _CFNotificationCenterGetDistributedCenter CFNotificationCenterGetDistributedCenter
+#define _CFNotificationCenterPostNotification CFNotificationCenterPostNotification
+#define _CFNotificationCenterRemoveObserver CFNotificationCenterRemoveObserver
+#define _CFNumberCreate CFNumberCreate
+#define _CFNumberGetValue CFNumberGetValue
+#define _CFRelease CFRelease
+#define _CFStringCreateWithCString CFStringCreateWithCString
+#define _cmpval cmpval
+#define _coordmode coordmode
+#define _cos cos
+#define ___cxa_guard_acquire __cxa_guard_acquire
+#define ___cxa_guard_release __cxa_guard_release
+#define _divcomp divcomp
+#define _dlopen dlopen
+#define _dlsym dlsym
+#define _ecvt ecvt
+#define _elem elem
+#define _elemOffset elemOffset
+#define _exit exit
+#define _exportStream exportStream
+#define _fclose fclose
+#define _fgets fgets
+#define _floor floor
+#define _fmtw fmtw
+#define _fmtx fmtx
+#define _fmty fmty
+#define _fmtz fmtz
+#define _fopen fopen
+#define _fread fread
+#define _free free
+#define _frexp frexp
+#define _fwrite fwrite
+#define _getenv getenv
+#define _getpid getpid
+#define _gldAllocVertexBuffer gldAllocVertexBuffer
+#define _gldAttachDrawable gldAttachDrawable
+#define _gldChoosePixelFormat gldChoosePixelFormat
+#define _gldCompleteVertexBuffer gldCompleteVertexBuffer
+#define _gldCreateBuffer gldCreateBuffer
+#define _gldCreateContext gldCreateContext
+#define _gldCreateFence gldCreateFence
+#define _gldCreateFramebuffer gldCreateFramebuffer
+#define _gldCreatePipelineProgram gldCreatePipelineProgram
+#define _gldCreateQuery gldCreateQuery
+#define _gldCreateShared gldCreateShared
+#define _gldCreateTexture gldCreateTexture
+#define _gldCreateTextureLevel gldCreateTextureLevel
+#define _gldCreateVertexArray gldCreateVertexArray
+#define _gldDeleteTexture gldDeleteTexture
+#define _gldDeleteTextureLevel gldDeleteTextureLevel
+#define _gldDestroyBuffer gldDestroyBuffer
+#define _gldDestroyContext gldDestroyContext
+#define _gldDestroyFence gldDestroyFence
+#define _gldDestroyFramebuffer gldDestroyFramebuffer
+#define _gldDestroyMemoryPluginData gldDestroyMemoryPluginData
+#define _gldDestroyPipelineProgram gldDestroyPipelineProgram
+#define _gldDestroyPixelFormat gldDestroyPixelFormat
+#define _gldDestroyQuery gldDestroyQuery
+#define _gldDestroyShared gldDestroyShared
+#define _gldDestroyVertexArray gldDestroyVertexArray
+#define _gldFinish gldFinish
+#define _gldFinishMemoryPluginData gldFinishMemoryPluginData
+#define _gldFinishObject gldFinishObject
+#define _gldFlush gldFlush
+#define _gldFlushBuffer gldFlushBuffer
+#define _gldFlushVertexArray gldFlushVertexArray
+#define _gldFreeVertexBuffer gldFreeVertexBuffer
+#define _gldGetError gldGetError
+#define _gldGetInteger gldGetInteger
+#define _gldGetMemoryPluginData gldGetMemoryPluginData
+#define _gldGetPipelineProgramInfo gldGetPipelineProgramInfo
+#define _gldGetQueryInfo gldGetQueryInfo
+#define _gldGetRendererInfo gldGetRendererInfo
+#define _gldGetString gldGetString
+#define _gldGetTextureLevel gldGetTextureLevel
+#define _gldGetTextureLevelInfo gldGetTextureLevelInfo
+#define _gldGetVersion gldGetVersion
+#define _gldInitDispatch gldInitDispatch
+#define _gldInitializeLibrary gldInitializeLibrary
+#define _gldIsTextureResident gldIsTextureResident
+#define _gldModifyPipelineProgram gldModifyPipelineProgram
+#define _gldModifyTexture gldModifyTexture
+#define _gldModifyTextureLevel gldModifyTextureLevel
+#define _gldModifyVertexArray gldModifyVertexArray
+#define _gldPageoffBuffer gldPageoffBuffer
+#define _gldReclaimBuffer gldReclaimBuffer
+#define _gldReclaimContext gldReclaimContext
+#define _gldReclaimFramebuffer gldReclaimFramebuffer
+#define _gldReclaimTexture gldReclaimTexture
+#define _gldReclaimVertexArray gldReclaimVertexArray
+#define _gldRelatePipelineProgram gldRelatePipelineProgram
+#define _gldSetInteger gldSetInteger
+#define _gldSetMemoryPluginData gldSetMemoryPluginData
+#define _gldTerminateLibrary gldTerminateLibrary
+#define _gldTestMemoryPluginData gldTestMemoryPluginData
+#define _gldTestObject gldTestObject
+#define _gldUpdateDispatch gldUpdateDispatch
+#define _glgConvertType glgConvertType
+#define _glgPixelCenters glgPixelCenters
+#define _glgProcessPixels glgProcessPixels
+#define _glpFreePPShaderLinearize glpFreePPShaderLinearize
+#define _glpFreePPShaderToProgram glpFreePPShaderToProgram
+#define _glpPPShaderLinearize glpPPShaderLinearize
+#define _glpPPShaderToProgram glpPPShaderToProgram
+#define _glpUniformToFloat glpUniformToFloat
+#define _id id
+#define _index index
+#define _interp interp
+#define _IOConnectAddClient IOConnectAddClient
+#define _IOConnectMapMemory IOConnectMapMemory
+#define _io_connect_method_scalarI_scalarO io_connect_method_scalarI_scalarO
+#define _io_connect_method_scalarI_structureI io_connect_method_scalarI_structureI
+#define _io_connect_method_structureI_structureO io_connect_method_structureI_structureO
+#define _IOServiceClose IOServiceClose
+#define _IOServiceOpen IOServiceOpen
+#define __keymgr_get_and_lock_processwide_ptr _keymgr_get_and_lock_processwide_ptr
+#define __keymgr_set_and_unlock_processwide_ptr _keymgr_set_and_unlock_processwide_ptr
+#define _lodbias lodbias
+#define _log log
+#define _logf logf
+#define _longjmp longjmp
+#define _mag mag
+#define _malloc malloc
+#define _matrix matrix
+#define _memcmp memcmp
+#define _memcpy memcpy
+#define _memmove memmove
+#define _memset memset
+#define _min min
+#define _mip mip
+#define _neg neg
+#define _NSAddressOfSymbol NSAddressOfSymbol
+#define _NSIsSymbolNameDefinedWithHint NSIsSymbolNameDefinedWithHint
+#define _NSLookupAndBindSymbolWithHint NSLookupAndBindSymbolWithHint
+#define _param param
+#define _pclose pclose
+#define _popen popen
+#define _pow pow
+#define _pthread_mutexattr_init pthread_mutexattr_init
+#define _pthread_mutexattr_settype pthread_mutexattr_settype
+#define _pthread_mutex_destroy pthread_mutex_destroy
+#define _pthread_mutex_init pthread_mutex_init
+#define _pthread_mutex_lock pthread_mutex_lock
+#define _pthread_mutex_unlock pthread_mutex_unlock
+#define _puts puts
+#define _realloc realloc
+#define _relop relop
+#define _resource resource
+#define _rindex rindex
+#define _round round
+#define _sampler sampler
+#define _setjmp setjmp
+#define _shadowmode shadowmode
+#define _sin sin
+#define _sqrt sqrt
+#define _sqrtf sqrtf
+#define _stage stage
+#define _stateStride stateStride
+#define _strcat strcat
+#define _strchr strchr
+#define _strcmp strcmp
+#define _strcpy strcpy
+#define _strlcpy strlcpy
+#define _strlen strlen
+#define _strncmp strncmp
+#define _type type
+#define _UNK_001aa7f4 UNK_001aa7f4
+#define _UNK_001aa7f8 UNK_001aa7f8
+#define _UNK_001aa848 UNK_001aa848
+#define _UNK_001aa84c UNK_001aa84c
+#define _UNK_001af9d8 UNK_001af9d8
+#define _UNK_001b2a7c UNK_001b2a7c
+#define __Unwind_Resume _Unwind_Resume
+#define _usage usage
+#define _usageIndex usageIndex
+#define _usleep usleep
+#define _valloc valloc
+#define _vfree vfree
+#define _volmag volmag
+#define _volmin volmin
+#define _w w
+#define _x x
+#define _xoffset xoffset
+#define _y y
+#define _yoffset yoffset
+#define _z z
+#define _zeroop zeroop
+#define _zoffset zoffset
+
 #include "ghidra_c.h"
 
 extern int FUN_00001740();
@@ -4109,6 +4314,10 @@ extern float _logf();
 extern int _longjmp();
 extern int _mag();
 extern int _malloc();
+/* issue #74: real libSystem allocator-introspection function (malloc/malloc.h), declared
+ * loosely like every other extern in this file - used by FUN_0004cde0's malloc_size() guard
+ * to validate a pointer is one the allocator actually handed out before freeing it. */
+extern int malloc_size();
 extern int _matrix();
 extern int _memcmp();
 extern int _memcpy();
@@ -6541,6 +6750,17 @@ extern unsigned char *PTR_FUN_001db9b8[];
 extern int (*PTR_FUN_001dba14)();
 extern unsigned char PTR_FUN_001dbb0c;
 extern int (*PTR_FUN_001e8754)();
+/* issue #74 side-fix: pre-existing gap, unrelated to the free-related fixes in this same
+ * session - these two PTR_ symbols are real, defined data (confirmed present in data.s) but
+ * were never declared here, so x_unowned_code_part_000.c/007.c (the only two files that
+ * reference them) have always failed to compile with "undeclared identifier", silently
+ * dropping several exported _gld* symbols from the link and only surfacing as a hard link
+ * failure once every other export happened to need one of them. Declared using the same
+ * conventions as their neighbors: PTR_FUN_001e876c is dereferenced as a function pointer
+ * (`(*(code*)PTR_FUN_001e876c)(...)`); PTR_orph_1d8910_001eb328 is used via `&`, i.e. a plain
+ * byte variable, matching PTR_FUN_001dbb0c's own declaration style just above. */
+extern int (*PTR_FUN_001e876c)();
+extern unsigned char PTR_orph_1d8910_001eb328;
 extern unsigned char PTR_FUN_001e88c4;
 extern unsigned char PTR_FUN_001e88d4;
 extern unsigned char PTR_FUN_001e88d8;

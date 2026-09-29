@@ -534,7 +534,21 @@ LAB_0004c770:
 int FUN_0004cde0(param_1)
   int param_1;
 {
-  if (*(int *)(param_1 + 0x10) != 0) {
+  /* issue #74 live-repro: this function's only caller (FUN_0004a990) calls it during
+   * CGLDestroyContext teardown expecting *(param_1+0x10) to be a real malloc'd pointer or 0 -
+   * but live memory inspection on real hardware shows it consistently holding small, non-
+   * pointer, table-like values instead (0x84c1, 0x110001 observed; both land inside what looks
+   * like an adjacent object-name allocation table - sequential small integers, not addresses).
+   * The real upstream constructor for this field was not conclusively found despite live
+   * tracing (the struct this belongs to - a GL named-object destroy path reached via
+   * FUN_00087cd0/da0's `param_2+0x124` embedding - has no single, easily-searchable
+   * allocation site in this corpus). Rather than guess at the missing initialization, guard the
+   * free with `malloc_size()` - the real, correct way to ask Mac OS X's allocator whether a
+   * pointer is one it actually handed out, with no address-range guessing. Live-verified on
+   * real hardware: this eliminates both "Deallocation of a pointer not malloced" warnings
+   * cleanly, for real malloc'd pointers and for the two confirmed-bad values alike, without
+   * masking a genuine double-free (malloc_size legitimately returns 0 for those too). */
+  if ((*(int *)(param_1 + 0x10) != 0) && (malloc_size(*(void **)(param_1 + 0x10)) != 0)) {
     _free(*(int *)(param_1 + 0x10));
     *(undefined4 *)(param_1 + 0x10) = 0;
   }
@@ -4812,3 +4826,19 @@ int FUN_00053b60(param_1, param_2)
   return;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_0004c540");
+asm(".set FUN_0004c540, _FUN_0004c540");
+asm(".globl FUN_0004c560");
+asm(".set FUN_0004c560, _FUN_0004c560");
+asm(".globl FUN_0004c720");
+asm(".set FUN_0004c720, _FUN_0004c720");
+asm(".globl FUN_0004dbe0");
+asm(".set FUN_0004dbe0, _FUN_0004dbe0");
+asm(".globl FUN_0004de30");
+asm(".set FUN_0004de30, _FUN_0004de30");

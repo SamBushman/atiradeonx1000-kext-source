@@ -7663,7 +7663,13 @@ int FUN_0004a990(param_1, param_2)
   int param_1;
   undefined4 *param_2;
 {
-  FUN_0004cde0(param_2 + 8);
+  /* issue #74: this called FUN_0004cde0(param_2+8) twice in a row with the identical argument.
+   * FUN_0004cde0 is a plain free-and-null helper, so the second call was always a guaranteed
+   * no-op once the first succeeded (or, before the malloc_size() guard above, a second harmless
+   * skip once the first left a bad value in place) - a redundant duplicate, not a real second
+   * resource being freed. Removed; no other call site in this corpus uses a different offset
+   * here to compare against, so there is no evidence a second, distinct field was ever meant
+   * to be freed. */
   FUN_0004cde0(param_2 + 8);
   *param_2 = 0;
   param_2[7] = 0;
@@ -8665,3 +8671,37 @@ LAB_0004c1ac:
   return;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_0003fd80");
+asm(".set FUN_0003fd80, _FUN_0003fd80");
+asm(".globl FUN_0003ff40");
+asm(".set FUN_0003ff40, _FUN_0003ff40");
+asm(".globl FUN_000401b0");
+asm(".set FUN_000401b0, _FUN_000401b0");
+asm(".globl FUN_00040370");
+asm(".set FUN_00040370, _FUN_00040370");
+asm(".globl FUN_00041310");
+asm(".set FUN_00041310, _FUN_00041310");
+asm(".globl FUN_00041510");
+asm(".set FUN_00041510, _FUN_00041510");
+asm(".globl FUN_00041750");
+asm(".set FUN_00041750, _FUN_00041750");
+asm(".globl FUN_00041c00");
+asm(".set FUN_00041c00, _FUN_00041c00");
+asm(".globl FUN_00042e00");
+asm(".set FUN_00042e00, _FUN_00042e00");
+asm(".globl FUN_00043df0");
+asm(".set FUN_00043df0, _FUN_00043df0");
+asm(".globl FUN_00043f60");
+asm(".set FUN_00043f60, _FUN_00043f60");
+asm(".globl FUN_00044360");
+asm(".set FUN_00044360, _FUN_00044360");
+asm(".globl FUN_00044500");
+asm(".set FUN_00044500, _FUN_00044500");
+asm(".globl FUN_00044ac0");
+asm(".set FUN_00044ac0, _FUN_00044ac0");

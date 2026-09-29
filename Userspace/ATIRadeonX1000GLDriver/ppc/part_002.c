@@ -10775,3 +10775,15 @@ LAB_00019be0:
   return;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_00016670");
+asm(".set FUN_00016670, _FUN_00016670");
+asm(".globl FUN_00018120");
+asm(".set FUN_00018120, _FUN_00018120");
+asm(".globl FUN_000199a0");
+asm(".set FUN_000199a0, _FUN_000199a0");

@@ -4669,3 +4669,65 @@ double FUN_000897b0(int param_1)
   return dVar2 * dVar3;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_000837b0");
+asm(".set FUN_000837b0, _FUN_000837b0");
+asm(".globl FUN_00083870");
+asm(".set FUN_00083870, _FUN_00083870");
+asm(".globl FUN_00083e10");
+asm(".set FUN_00083e10, _FUN_00083e10");
+asm(".globl FUN_000840d0");
+asm(".set FUN_000840d0, _FUN_000840d0");
+asm(".globl FUN_00084300");
+asm(".set FUN_00084300, _FUN_00084300");
+asm(".globl FUN_000844e0");
+asm(".set FUN_000844e0, _FUN_000844e0");
+asm(".globl FUN_00084710");
+asm(".set FUN_00084710, _FUN_00084710");
+asm(".globl FUN_00084940");
+asm(".set FUN_00084940, _FUN_00084940");
+asm(".globl FUN_00084c00");
+asm(".set FUN_00084c00, _FUN_00084c00");
+asm(".globl FUN_00084ec0");
+asm(".set FUN_00084ec0, _FUN_00084ec0");
+asm(".globl FUN_00085180");
+asm(".set FUN_00085180, _FUN_00085180");
+asm(".globl FUN_000853b0");
+asm(".set FUN_000853b0, _FUN_000853b0");
+asm(".globl FUN_000855e0");
+asm(".set FUN_000855e0, _FUN_000855e0");
+asm(".globl FUN_00085810");
+asm(".set FUN_00085810, _FUN_00085810");
+asm(".globl FUN_00085a40");
+asm(".set FUN_00085a40, _FUN_00085a40");
+asm(".globl FUN_00085bf0");
+asm(".set FUN_00085bf0, _FUN_00085bf0");
+asm(".globl FUN_00085da0");
+asm(".set FUN_00085da0, _FUN_00085da0");
+asm(".globl FUN_00085f50");
+asm(".set FUN_00085f50, _FUN_00085f50");
+asm(".globl FUN_00086100");
+asm(".set FUN_00086100, _FUN_00086100");
+asm(".globl FUN_000862b0");
+asm(".set FUN_000862b0, _FUN_000862b0");
+asm(".globl FUN_000864e0");
+asm(".set FUN_000864e0, _FUN_000864e0");
+asm(".globl FUN_00087960");
+asm(".set FUN_00087960, _FUN_00087960");
+asm(".globl FUN_000879e0");
+asm(".set FUN_000879e0, _FUN_000879e0");
+asm(".globl FUN_00087cd0");
+asm(".set FUN_00087cd0, _FUN_00087cd0");
+asm(".globl FUN_00087da0");
+asm(".set FUN_00087da0, _FUN_00087da0");
+asm(".globl FUN_00087e60");
+asm(".set FUN_00087e60, _FUN_00087e60");
+asm(".globl FUN_00087e80");
+asm(".set FUN_00087e80, _FUN_00087e80");
+asm(".globl FUN_00088190");
+asm(".set FUN_00088190, _FUN_00088190");

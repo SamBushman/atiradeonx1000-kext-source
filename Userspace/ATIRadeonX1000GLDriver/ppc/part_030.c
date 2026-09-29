@@ -1381,3 +1381,23 @@ void FUN_0010bd50(int param_1,undefined4 param_2,int param_3,int param_4,double 
   return;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_00109d50");
+asm(".set FUN_00109d50, _FUN_00109d50");
+asm(".globl FUN_00109e84");
+asm(".set FUN_00109e84, _FUN_00109e84");
+asm(".globl FUN_00109fa0");
+asm(".set FUN_00109fa0, _FUN_00109fa0");
+asm(".globl FUN_0010a0c4");
+asm(".set FUN_0010a0c4, _FUN_0010a0c4");
+asm(".globl FUN_0010a240");
+asm(".set FUN_0010a240, _FUN_0010a240");
+asm(".globl FUN_0010a5a4");
+asm(".set FUN_0010a5a4, _FUN_0010a5a4");
+asm(".globl FUN_0010a758");
+asm(".set FUN_0010a758, _FUN_0010a758");

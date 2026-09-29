@@ -1193,3 +1193,47 @@ int FUN_00127ecc(param_1)
   return 0x20;
 }
 
+
+/* issue: auto-generated aliases bridging data.s/code.s references (written
+ * without a leading underscore, matching the raw stock-binary symbol name)
+ * against the real compiled C symbols (gcc adds one underscore automatically).
+ * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
+ * large PPC links) does not silently reconcile this the way stock ld did. */
+asm(".globl FUN_001267ec");
+asm(".set FUN_001267ec, _FUN_001267ec");
+asm(".globl FUN_001268f8");
+asm(".set FUN_001268f8, _FUN_001268f8");
+asm(".globl FUN_00126984");
+asm(".set FUN_00126984, _FUN_00126984");
+asm(".globl FUN_00126a10");
+asm(".set FUN_00126a10, _FUN_00126a10");
+asm(".globl FUN_00126a9c");
+asm(".set FUN_00126a9c, _FUN_00126a9c");
+asm(".globl FUN_00126b28");
+asm(".set FUN_00126b28, _FUN_00126b28");
+asm(".globl FUN_00126bb4");
+asm(".set FUN_00126bb4, _FUN_00126bb4");
+asm(".globl FUN_00126c40");
+asm(".set FUN_00126c40, _FUN_00126c40");
+asm(".globl FUN_00126ccc");
+asm(".set FUN_00126ccc, _FUN_00126ccc");
+asm(".globl FUN_00126d58");
+asm(".set FUN_00126d58, _FUN_00126d58");
+asm(".globl FUN_00126e90");
+asm(".set FUN_00126e90, _FUN_00126e90");
+asm(".globl FUN_00126f1c");
+asm(".set FUN_00126f1c, _FUN_00126f1c");
+asm(".globl FUN_00126fa8");
+asm(".set FUN_00126fa8, _FUN_00126fa8");
+asm(".globl FUN_00127034");
+asm(".set FUN_00127034, _FUN_00127034");
+asm(".globl FUN_001270c0");
+asm(".set FUN_001270c0, _FUN_001270c0");
+asm(".globl FUN_0012714c");
+asm(".set FUN_0012714c, _FUN_0012714c");
+asm(".globl FUN_001271d8");
+asm(".set FUN_001271d8, _FUN_001271d8");
+asm(".globl FUN_00127e48");
+asm(".set FUN_00127e48, _FUN_00127e48");
+asm(".globl FUN_00127ecc");
+asm(".set FUN_00127ecc, _FUN_00127ecc");

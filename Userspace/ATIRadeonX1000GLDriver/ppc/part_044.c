@@ -10104,11 +10104,24 @@ int FUN_0016a568(param_1, param_2)
   uint *puVar25;
   undefined4 uVar26;
   uint *puVar27;
-  undefined1 auStack_78 [8];
+  /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): auStack_78 is declared
+   * as only 8 bytes, but FUN_001940a8(auStack_78) - a sentinel-node doubly-linked-list
+   * initializer - writes through it as `undefined4*` up to index 5 (`param_1[4] = param_1;
+   * param_1[5] = 0;`), i.e. 24 bytes: the same undersized-local defect class already fixed for
+   * local_c08c/local_2c/local_98. The overrun silently landed on whatever gcc placed next on
+   * this rebuild's stack instead of the intended sentinel-node fields, so the list's "head"
+   * self-pointer (meant to make the sentinel point to itself when empty, per
+   * FUN_00193f44/FUN_00193f64's insert logic) never actually got set. Live-verified on real
+   * hardware: the very next list-insert call (FUN_00193f64(auStack_78,puVar24), a few lines
+   * below) crashed dereferencing that missing self-pointer as a wild address. `local_70`,
+   * declared right after, is independently used later in this function (part_044.c:10810-
+   * 10858) and must keep its own storage - so auStack_78 gets its own full-sized buffer here
+   * rather than being merged with its neighbors. */
+  undefined1 auStack_78 [24];
   int local_70;
   uint local_58;
   int local_54;
-  
+
   iVar7 = FUN_000e07dc(*param_1,0x24);
   uVar19 = 0x7fffffff;
   if (iVar7 == 0) {
