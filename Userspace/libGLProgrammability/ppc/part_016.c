@@ -204,10 +204,12 @@ int _PPEmulatorRun(param_1, param_2, param_3, param_4, param_5)
   else {
     UNRECOVERED_JUMPTABLE = *(code **)(iVar1 + 8);
   }
-                    
-                    
-  (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,0x97be5bf8,param_1,param_2);
-  return;
+
+
+  /* dropped-return-value defect (class 25, issue #68) - stock does this as a real bctr tail-jump
+   * (no blr afterward), so whatever the JIT/interpreter target returns in r3 IS this function's
+   * real return value; verified via Capstone disasm of the real 0x97be5bec body. */
+  return (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,0x97be5bf8,param_1,param_2);
 }
 
 /* _PPEmulatorBuild @ 0x97be5c60 (576 bytes) */
@@ -323,10 +325,11 @@ LAB_97be5e68:
   else {
     UNRECOVERED_JUMPTABLE = *(code **)(iVar7 + 0xc);
   }
-                    
-                    
-  (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,param_6,a6);
-  return;
+
+
+  /* dropped-return-value defect (class 25, issue #68) - same real bctr tail-jump shape as
+   * _PPEmulatorRun above; verified via Capstone disasm of the real 0x97be5c60 body. */
+  return (*UNRECOVERED_JUMPTABLE)(param_1,param_2,param_3,param_4,param_5,param_6,a6);
 }
 
 /* _PPEmulatorRunNoop @ 0x97be5ea0 (8 bytes) */

@@ -345,7 +345,9 @@ int _PPEmulatorProgramCreate()
   uVar1 = DAT_a7b7bda4;
   *(undefined4 *)(iVar2 + 0xc) = DAT_a7b7bda4;
   *(undefined4 *)(iVar2 + 8) = uVar1;
-  return;
+  /* dropped-return-value defect (class 25, issue #68) - stock leaves calloc's result in r3
+   * through to blr; verified via Capstone disasm of the real 0x97b82d7c body. */
+  return iVar2;
 }
 
 /* _PPEmulatorProgramInitialiseHandleBanks @ 0x97b82dc4 (288 bytes) */
