@@ -2714,7 +2714,9 @@ int FUN_00170e6c(param_1, param_2)
       else {
         piVar3 = (int *)FUN_0019423c(puVar14,uVar12);
       }
-      if (*(int *)(*piVar3 + 0x34) == 0) {
+      /* issue #76: same shared param_1[6] array gap as part_044.c's per-format processing -
+       * skip a never-populated slot instead of dereferencing it. */
+      if ((*piVar3 != 0) && (*(int *)(*piVar3 + 0x34) == 0)) {
         FUN_00193f64(auStack_40,*piVar3);
       }
       uVar12 = uVar12 + 1;

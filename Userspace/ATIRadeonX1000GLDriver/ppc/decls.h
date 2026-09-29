@@ -5063,106 +5063,116 @@ extern unsigned char DAT_001fadf8;
 extern unsigned char DAT_001fae00;
 extern unsigned char DAT_001fae08;
 extern unsigned char DAT_001fae10;
-extern unsigned char DAT_001fae18;
-extern unsigned char DAT_001fae1c;
-extern unsigned char DAT_001fae20;
-extern unsigned char DAT_001fae24;
-extern unsigned char DAT_001fae2c;
-extern unsigned char DAT_001fae30;
-extern unsigned char DAT_001fae34;
-extern unsigned char DAT_001fae38;
-extern unsigned char DAT_001fae40;
-extern unsigned char DAT_001fae44;
-extern unsigned char DAT_001fae48;
-extern unsigned char DAT_001fae4c;
-extern unsigned char DAT_001fae54;
-extern unsigned char DAT_001fae58;
-extern unsigned char DAT_001fae5c;
-extern unsigned char DAT_001fae60;
-extern unsigned char DAT_001fae68;
-extern unsigned char DAT_001fae6c;
-extern unsigned char DAT_001fae70;
-extern unsigned char DAT_001fae74;
-extern unsigned char DAT_001fae7c;
-extern unsigned char DAT_001fae80;
-extern unsigned char DAT_001fae84;
-extern unsigned char DAT_001fae88;
-extern unsigned char DAT_001fae90;
-extern unsigned char DAT_001fae94;
-extern unsigned char DAT_001fae98;
-extern unsigned char DAT_001fae9c;
-extern unsigned char DAT_001faea4;
-extern unsigned char DAT_001faea8;
-extern unsigned char DAT_001faeac;
-extern unsigned char DAT_001faeb0;
-extern unsigned char DAT_001faeb8;
-extern unsigned char DAT_001faebc;
-extern unsigned char DAT_001faec0;
-extern unsigned char DAT_001faec4;
-extern unsigned char DAT_001faecc;
-extern unsigned char DAT_001faed0;
-extern unsigned char DAT_001faed4;
-extern unsigned char DAT_001faed8;
-extern unsigned char DAT_001faee0;
-extern unsigned char DAT_001faee4;
-extern unsigned char DAT_001faee8;
-extern unsigned char DAT_001faeec;
-extern unsigned char DAT_001faef4;
-extern unsigned char DAT_001faef8;
-extern unsigned char DAT_001faefc;
-extern unsigned char DAT_001faf00;
-extern unsigned char DAT_001faf08;
-extern unsigned char DAT_001faf0c;
-extern unsigned char DAT_001faf10;
-extern unsigned char DAT_001faf14;
-extern unsigned char DAT_001faf1c;
-extern unsigned char DAT_001faf20;
-extern unsigned char DAT_001faf24;
-extern unsigned char DAT_001faf28;
-extern unsigned char DAT_001faf30;
-extern unsigned char DAT_001faf34;
-extern unsigned char DAT_001faf38;
-extern unsigned char DAT_001faf3c;
-extern unsigned char DAT_001faf44;
-extern unsigned char DAT_001faf48;
-extern unsigned char DAT_001faf4c;
-extern unsigned char DAT_001faf50;
-extern unsigned char DAT_001faf58;
-extern unsigned char DAT_001faf5c;
-extern unsigned char DAT_001faf60;
-extern unsigned char DAT_001faf64;
-extern unsigned char DAT_001faf6c;
-extern unsigned char DAT_001faf70;
-extern unsigned char DAT_001faf74;
-extern unsigned char DAT_001faf78;
-extern unsigned char DAT_001faf80;
-extern unsigned char DAT_001faf84;
-extern unsigned char DAT_001faf88;
-extern unsigned char DAT_001faf8c;
-extern unsigned char DAT_001faf94;
-extern unsigned char DAT_001faf98;
-extern unsigned char DAT_001faf9c;
-extern unsigned char DAT_001fafa0;
-extern unsigned char DAT_001fafa8;
-extern unsigned char DAT_001fafac;
-extern unsigned char DAT_001fafb0;
-extern unsigned char DAT_001fafb4;
-extern unsigned char DAT_001fafbc;
-extern unsigned char DAT_001fafc0;
-extern unsigned char DAT_001fafc4;
-extern unsigned char DAT_001fafc8;
-extern unsigned char DAT_001fafd0;
-extern unsigned char DAT_001fafd4;
-extern unsigned char DAT_001fafd8;
-extern unsigned char DAT_001fafdc;
-extern unsigned char DAT_001fafe4;
-extern unsigned char DAT_001fafe8;
-extern unsigned char DAT_001fafec;
-extern unsigned char DAT_001faff0;
-extern unsigned char DAT_001faff8;
-extern unsigned char DAT_001faffc;
-extern unsigned char DAT_001fb000;
-extern unsigned char DAT_001fb004;
+/* issue #76 (supersedes/widens the earlier issue #75 descriptor-arena fix): the real arena
+ * of 20-byte "format descriptor" records is BIGGER than first measured - re-scanning
+ * part_036.c's own descriptor-base assignments (`DAT_xxx = PTR_DAT_yyy + 8;`) end to end finds
+ * 252 records spanning 0x1fae10 to 0x1fc1d3 (5060 bytes), not the ~4100-byte subset
+ * originally covered. Confirmed live: a second, different descriptor (for pixel format index
+ * 19, reached via a post-CGLCreateContext call path) showed the exact same truncated-byte
+ * symptom (0x13000000 instead of 0x13) at DAT_001fc13c, which sits past the old fix's upper
+ * bound. Re-anchored the whole merge on DAT_001fae10 (the arena's true lowest address) and folded
+ * every symbol in the wider range - including the old anchor DAT_001fb004 itself, now just
+ * another slot - into one backing array via the same offset-preserving macro technique. */
+#define DAT_001fae18 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 8))
+#define DAT_001fae1c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 12))
+#define DAT_001fae20 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 16))
+#define DAT_001fae24 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 20))
+#define DAT_001fae2c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 28))
+#define DAT_001fae30 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 32))
+#define DAT_001fae34 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 36))
+#define DAT_001fae38 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 40))
+#define DAT_001fae40 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 48))
+#define DAT_001fae44 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 52))
+#define DAT_001fae48 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 56))
+#define DAT_001fae4c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 60))
+#define DAT_001fae54 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 68))
+#define DAT_001fae58 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 72))
+#define DAT_001fae5c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 76))
+#define DAT_001fae60 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 80))
+#define DAT_001fae68 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 88))
+#define DAT_001fae6c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 92))
+#define DAT_001fae70 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 96))
+#define DAT_001fae74 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 100))
+#define DAT_001fae7c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 108))
+#define DAT_001fae80 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 112))
+#define DAT_001fae84 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 116))
+#define DAT_001fae88 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 120))
+#define DAT_001fae90 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 128))
+#define DAT_001fae94 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 132))
+#define DAT_001fae98 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 136))
+#define DAT_001fae9c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 140))
+#define DAT_001faea4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 148))
+#define DAT_001faea8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 152))
+#define DAT_001faeac (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 156))
+#define DAT_001faeb0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 160))
+#define DAT_001faeb8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 168))
+#define DAT_001faebc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 172))
+#define DAT_001faec0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 176))
+#define DAT_001faec4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 180))
+#define DAT_001faecc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 188))
+#define DAT_001faed0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 192))
+#define DAT_001faed4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 196))
+#define DAT_001faed8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 200))
+#define DAT_001faee0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 208))
+#define DAT_001faee4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 212))
+#define DAT_001faee8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 216))
+#define DAT_001faeec (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 220))
+#define DAT_001faef4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 228))
+#define DAT_001faef8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 232))
+#define DAT_001faefc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 236))
+#define DAT_001faf00 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 240))
+#define DAT_001faf08 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 248))
+#define DAT_001faf0c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 252))
+#define DAT_001faf10 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 256))
+#define DAT_001faf14 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 260))
+#define DAT_001faf1c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 268))
+#define DAT_001faf20 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 272))
+#define DAT_001faf24 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 276))
+#define DAT_001faf28 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 280))
+#define DAT_001faf30 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 288))
+#define DAT_001faf34 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 292))
+#define DAT_001faf38 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 296))
+#define DAT_001faf3c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 300))
+#define DAT_001faf44 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 308))
+#define DAT_001faf48 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 312))
+#define DAT_001faf4c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 316))
+#define DAT_001faf50 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 320))
+#define DAT_001faf58 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 328))
+#define DAT_001faf5c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 332))
+#define DAT_001faf60 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 336))
+#define DAT_001faf64 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 340))
+#define DAT_001faf6c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 348))
+#define DAT_001faf70 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 352))
+#define DAT_001faf74 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 356))
+#define DAT_001faf78 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 360))
+#define DAT_001faf80 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 368))
+#define DAT_001faf84 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 372))
+#define DAT_001faf88 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 376))
+#define DAT_001faf8c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 380))
+#define DAT_001faf94 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 388))
+#define DAT_001faf98 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 392))
+#define DAT_001faf9c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 396))
+#define DAT_001fafa0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 400))
+#define DAT_001fafa8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 408))
+#define DAT_001fafac (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 412))
+#define DAT_001fafb0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 416))
+#define DAT_001fafb4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 420))
+#define DAT_001fafbc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 428))
+#define DAT_001fafc0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 432))
+#define DAT_001fafc4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 436))
+#define DAT_001fafc8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 440))
+#define DAT_001fafd0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 448))
+#define DAT_001fafd4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 452))
+#define DAT_001fafd8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 456))
+#define DAT_001fafdc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 460))
+#define DAT_001fafe4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 468))
+#define DAT_001fafe8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 472))
+#define DAT_001fafec (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 476))
+#define DAT_001faff0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 480))
+#define DAT_001faff8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 488))
+#define DAT_001faffc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 492))
+#define DAT_001fb000 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 496))
+#define DAT_001fb004 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 500))
 /* issue #75 (follow-up #2, generalized): part_036.c populates a 4100-byte arena of 205
  * "format descriptor" records (20 bytes each: DAT_001fb004 through DAT_001fc004), writing each
  * record's fields (a base pointer at +0, plus int fields at +8/+0xc/+0x10 - e.g.
@@ -5999,98 +6009,98 @@ extern unsigned char DAT_001fb004;
 #define DAT_001fbffc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4088))
 #define DAT_001fc000 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4092))
 #define DAT_001fc004 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4096))
-extern unsigned char DAT_001fc008;
-extern unsigned char DAT_001fc010;
-extern unsigned char DAT_001fc014;
-extern unsigned char DAT_001fc018;
-extern unsigned char DAT_001fc01c;
-extern unsigned char DAT_001fc024;
-extern unsigned char DAT_001fc028;
-extern unsigned char DAT_001fc02c;
-extern unsigned char DAT_001fc030;
-extern unsigned char DAT_001fc038;
-extern unsigned char DAT_001fc03c;
-extern unsigned char DAT_001fc040;
-extern unsigned char DAT_001fc044;
-extern unsigned char DAT_001fc04c;
-extern unsigned char DAT_001fc050;
-extern unsigned char DAT_001fc054;
-extern unsigned char DAT_001fc058;
-extern unsigned char DAT_001fc060;
-extern unsigned char DAT_001fc064;
-extern unsigned char DAT_001fc068;
-extern unsigned char DAT_001fc06c;
-extern unsigned char DAT_001fc074;
-extern unsigned char DAT_001fc078;
-extern unsigned char DAT_001fc07c;
-extern unsigned char DAT_001fc080;
-extern unsigned char DAT_001fc088;
-extern unsigned char DAT_001fc08c;
-extern unsigned char DAT_001fc090;
-extern unsigned char DAT_001fc094;
-extern unsigned char DAT_001fc09c;
-extern unsigned char DAT_001fc0a0;
-extern unsigned char DAT_001fc0a4;
-extern unsigned char DAT_001fc0a8;
-extern unsigned char DAT_001fc0b0;
-extern unsigned char DAT_001fc0b4;
-extern unsigned char DAT_001fc0b8;
-extern unsigned char DAT_001fc0bc;
-extern unsigned char DAT_001fc0c4;
-extern unsigned char DAT_001fc0c8;
-extern unsigned char DAT_001fc0cc;
-extern unsigned char DAT_001fc0d0;
-extern unsigned char DAT_001fc0d8;
-extern unsigned char DAT_001fc0dc;
-extern unsigned char DAT_001fc0e0;
-extern unsigned char DAT_001fc0e4;
-extern unsigned char DAT_001fc0ec;
-extern unsigned char DAT_001fc0f0;
-extern unsigned char DAT_001fc0f4;
-extern unsigned char DAT_001fc0f8;
-extern unsigned char DAT_001fc100;
-extern unsigned char DAT_001fc104;
-extern unsigned char DAT_001fc108;
-extern unsigned char DAT_001fc10c;
-extern unsigned char DAT_001fc114;
-extern unsigned char DAT_001fc118;
-extern unsigned char DAT_001fc11c;
-extern unsigned char DAT_001fc120;
-extern unsigned char DAT_001fc128;
-extern unsigned char DAT_001fc12c;
-extern unsigned char DAT_001fc130;
-extern unsigned char DAT_001fc134;
-extern unsigned char DAT_001fc13c;
-extern unsigned char DAT_001fc140;
-extern unsigned char DAT_001fc144;
-extern unsigned char DAT_001fc148;
-extern unsigned char DAT_001fc150;
-extern unsigned char DAT_001fc154;
-extern unsigned char DAT_001fc158;
-extern unsigned char DAT_001fc15c;
-extern unsigned char DAT_001fc164;
-extern unsigned char DAT_001fc168;
-extern unsigned char DAT_001fc16c;
-extern unsigned char DAT_001fc170;
-extern unsigned char DAT_001fc178;
-extern unsigned char DAT_001fc17c;
-extern unsigned char DAT_001fc180;
-extern unsigned char DAT_001fc184;
-extern unsigned char DAT_001fc18c;
-extern unsigned char DAT_001fc190;
-extern unsigned char DAT_001fc194;
-extern unsigned char DAT_001fc198;
-extern unsigned char DAT_001fc1a0;
-extern unsigned char DAT_001fc1a4;
-extern unsigned char DAT_001fc1a8;
-extern unsigned char DAT_001fc1ac;
-extern unsigned char DAT_001fc1b4;
-extern unsigned char DAT_001fc1b8;
-extern unsigned char DAT_001fc1bc;
-extern unsigned char DAT_001fc1c0;
-extern unsigned char DAT_001fc1c8;
-extern unsigned char DAT_001fc1cc;
-extern unsigned char DAT_001fc1d0;
+#define DAT_001fc008 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4600))
+#define DAT_001fc010 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4608))
+#define DAT_001fc014 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4612))
+#define DAT_001fc018 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4616))
+#define DAT_001fc01c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4620))
+#define DAT_001fc024 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4628))
+#define DAT_001fc028 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4632))
+#define DAT_001fc02c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4636))
+#define DAT_001fc030 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4640))
+#define DAT_001fc038 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4648))
+#define DAT_001fc03c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4652))
+#define DAT_001fc040 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4656))
+#define DAT_001fc044 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4660))
+#define DAT_001fc04c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4668))
+#define DAT_001fc050 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4672))
+#define DAT_001fc054 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4676))
+#define DAT_001fc058 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4680))
+#define DAT_001fc060 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4688))
+#define DAT_001fc064 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4692))
+#define DAT_001fc068 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4696))
+#define DAT_001fc06c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4700))
+#define DAT_001fc074 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4708))
+#define DAT_001fc078 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4712))
+#define DAT_001fc07c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4716))
+#define DAT_001fc080 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4720))
+#define DAT_001fc088 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4728))
+#define DAT_001fc08c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4732))
+#define DAT_001fc090 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4736))
+#define DAT_001fc094 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4740))
+#define DAT_001fc09c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4748))
+#define DAT_001fc0a0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4752))
+#define DAT_001fc0a4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4756))
+#define DAT_001fc0a8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4760))
+#define DAT_001fc0b0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4768))
+#define DAT_001fc0b4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4772))
+#define DAT_001fc0b8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4776))
+#define DAT_001fc0bc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4780))
+#define DAT_001fc0c4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4788))
+#define DAT_001fc0c8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4792))
+#define DAT_001fc0cc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4796))
+#define DAT_001fc0d0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4800))
+#define DAT_001fc0d8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4808))
+#define DAT_001fc0dc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4812))
+#define DAT_001fc0e0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4816))
+#define DAT_001fc0e4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4820))
+#define DAT_001fc0ec (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4828))
+#define DAT_001fc0f0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4832))
+#define DAT_001fc0f4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4836))
+#define DAT_001fc0f8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4840))
+#define DAT_001fc100 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4848))
+#define DAT_001fc104 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4852))
+#define DAT_001fc108 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4856))
+#define DAT_001fc10c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4860))
+#define DAT_001fc114 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4868))
+#define DAT_001fc118 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4872))
+#define DAT_001fc11c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4876))
+#define DAT_001fc120 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4880))
+#define DAT_001fc128 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4888))
+#define DAT_001fc12c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4892))
+#define DAT_001fc130 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4896))
+#define DAT_001fc134 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4900))
+#define DAT_001fc13c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4908))
+#define DAT_001fc140 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4912))
+#define DAT_001fc144 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4916))
+#define DAT_001fc148 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4920))
+#define DAT_001fc150 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4928))
+#define DAT_001fc154 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4932))
+#define DAT_001fc158 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4936))
+#define DAT_001fc15c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4940))
+#define DAT_001fc164 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4948))
+#define DAT_001fc168 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4952))
+#define DAT_001fc16c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4956))
+#define DAT_001fc170 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4960))
+#define DAT_001fc178 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4968))
+#define DAT_001fc17c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4972))
+#define DAT_001fc180 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4976))
+#define DAT_001fc184 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4980))
+#define DAT_001fc18c (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4988))
+#define DAT_001fc190 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4992))
+#define DAT_001fc194 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 4996))
+#define DAT_001fc198 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5000))
+#define DAT_001fc1a0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5008))
+#define DAT_001fc1a4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5012))
+#define DAT_001fc1a8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5016))
+#define DAT_001fc1ac (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5020))
+#define DAT_001fc1b4 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5028))
+#define DAT_001fc1b8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5032))
+#define DAT_001fc1bc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5036))
+#define DAT_001fc1c0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5040))
+#define DAT_001fc1c8 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5048))
+#define DAT_001fc1cc (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5052))
+#define DAT_001fc1d0 (*(unsigned char **)((unsigned char *)&DAT_001fae10 + 5056))
 extern int (*DAT_001fc1d4)();
 extern int (*DAT_001fc1d8)();
 extern int (*DAT_001fc1dc)();
@@ -7093,233 +7103,243 @@ extern unsigned char _UNK_001aa848;
 extern unsigned char _UNK_001aa84c;
 extern unsigned char _UNK_001af9d8;
 extern unsigned char _UNK_001b2a7c;
-extern unsigned char *s_0_001a450c;
-extern unsigned char *s_12_001a445c;
-extern unsigned char *s_16_001a4458;
-extern unsigned char *s_1D_001a4524;
-extern unsigned char *s_1_001a442c;
-extern unsigned char *s_2D_001a4528;
-extern unsigned char *s_32_001a4454;
-extern unsigned char *s_3D_001a452c;
-extern unsigned char *s_ADDRESS_adr0_001a4700;
-extern unsigned char *s_APPLE_no_altivec_001a4664;
-extern unsigned char *s_APPLE_no_runtime_compile_001a4648;
-extern unsigned char *s_ARB_draw_buffers_001a46e8;
-extern unsigned char *s_ARB_fog_exp2_001a45f0;
-extern unsigned char *s_ARB_fog_exp_001a45e4;
-extern unsigned char *s_ARB_fog_linear_001a4600;
-extern unsigned char *s_ARB_fragment_program_shadow_001a46a4;
-extern unsigned char *s_ARB_position_invariant_001a45cc;
-extern unsigned char *s_ARB_precision_hint_fastest_001a4610;
-extern unsigned char *s_ARB_precision_hint_nicest_001a462c;
-extern unsigned char *s_ATTRIB_att_001a4738;
-extern unsigned char *s_B_001a4450;
-extern unsigned char *s_CUBE_001a4530;
-extern unsigned char *s_C_001a4428;
+/* issue #76: Ghidra "s_" string-literal symbols (the bytes AT this address ARE the string data
+ * itself, not a pointer stored elsewhere) were declared as `unsigned char *` (a pointer
+ * variable) throughout this file, instead of an array. Call sites that take `&NAME` explicitly
+ * happen to still work (numerically identical address either way), but plain array-index or
+ * pass-by-name syntax (`NAME[n]`, `foo(NAME)`) - with a pointer type - dereferences this
+ * symbol's own storage as if it held a pointer value first. Confirmed live: s__LDBL128_001aa0b4
+ * (part_054.c, building a "$LDBL128" symbol-name suffix for an NSLookupAndBindSymbol call)
+ * crashed exactly that way (`lwz r2,0(r2); addi r2,r2,8; lbz r0,0(r2)` - an extra leading
+ * dereference reading garbage, then indexing through it). Fixed the whole class at once now
+ * that a real crash proved the pattern, rather than one at a time. */
+extern unsigned char s_0_001a450c[];
+extern unsigned char s_12_001a445c[];
+extern unsigned char s_16_001a4458[];
+extern unsigned char s_1D_001a4524[];
+extern unsigned char s_1_001a442c[];
+extern unsigned char s_2D_001a4528[];
+extern unsigned char s_32_001a4454[];
+extern unsigned char s_3D_001a452c[];
+extern unsigned char s_ADDRESS_adr0_001a4700[];
+extern unsigned char s_APPLE_no_altivec_001a4664[];
+extern unsigned char s_APPLE_no_runtime_compile_001a4648[];
+extern unsigned char s_ARB_draw_buffers_001a46e8[];
+extern unsigned char s_ARB_fog_exp2_001a45f0[];
+extern unsigned char s_ARB_fog_exp_001a45e4[];
+extern unsigned char s_ARB_fog_linear_001a4600[];
+extern unsigned char s_ARB_fragment_program_shadow_001a46a4[];
+extern unsigned char s_ARB_position_invariant_001a45cc[];
+extern unsigned char s_ARB_precision_hint_fastest_001a4610[];
+extern unsigned char s_ARB_precision_hint_nicest_001a462c[];
+extern unsigned char s_ATTRIB_att_001a4738[];
+extern unsigned char s_B_001a4450[];
+extern unsigned char s_CUBE_001a4530[];
+extern unsigned char s_C_001a4428[];
 extern unsigned char s_Du_001a64b4;
-extern unsigned char *s_END_001a4bb0;
-extern unsigned char *s_EQ_001a4b64;
-extern unsigned char *s_FL_001a4b7c;
-extern unsigned char *s_F_001a4448;
-extern unsigned char *s_GE_001a4b68;
-extern unsigned char *s_GT_001a4b6c;
-extern unsigned char *s_H_001a443c;
-extern unsigned char *s_IL_backcolor_001a62f0;
-extern unsigned char *s_IL_color_001a62e4;
-extern unsigned char *s_IL_fog_001a6300;
-extern unsigned char *s_IL_generic_001a6308;
-extern unsigned char *s_IL_pointsize_001a62d4;
-extern unsigned char *s_IL_pos_001a62cc;
-extern unsigned char *s_IL_unknown_001a6314;
-extern unsigned char *s_I_001a444c;
-extern unsigned char *s_LE_001a4b70;
-extern unsigned char *s_LONG_OUTPUT_res_001a4a3c;
-extern unsigned char *s_LONG_TEMP_001a4720;
-extern unsigned char *s_LT_001a4b74;
+extern unsigned char s_END_001a4bb0[];
+extern unsigned char s_EQ_001a4b64[];
+extern unsigned char s_FL_001a4b7c[];
+extern unsigned char s_F_001a4448[];
+extern unsigned char s_GE_001a4b68[];
+extern unsigned char s_GT_001a4b6c[];
+extern unsigned char s_H_001a443c[];
+extern unsigned char s_IL_backcolor_001a62f0[];
+extern unsigned char s_IL_color_001a62e4[];
+extern unsigned char s_IL_fog_001a6300[];
+extern unsigned char s_IL_generic_001a6308[];
+extern unsigned char s_IL_pointsize_001a62d4[];
+extern unsigned char s_IL_pos_001a62cc[];
+extern unsigned char s_IL_unknown_001a6314[];
+extern unsigned char s_I_001a444c[];
+extern unsigned char s_LE_001a4b70[];
+extern unsigned char s_LONG_OUTPUT_res_001a4a3c[];
+extern unsigned char s_LONG_TEMP_001a4720[];
+extern unsigned char s_LT_001a4b74[];
 extern unsigned char s_MUL_V_001df634;
-extern unsigned char *s_NE_001a4b78;
-extern unsigned char *s_NV_fragment_program2_001a468c;
-extern unsigned char *s_NV_fragment_program_001a4678;
-extern unsigned char *s_NV_vertex_program2_001a46c0;
-extern unsigned char *s_NV_vertex_program3_001a46d4;
-extern unsigned char *s_OPTION_001a45c4;
-extern unsigned char *s_OUTPUT_res_001a4a30;
-extern unsigned char *s_PARAM_prm_001a4828;
-extern unsigned char *s_RECT_001a4538;
-extern unsigned char *s_R_001a4438;
-extern unsigned char *s_SHADOW1D_001a4558;
-extern unsigned char *s_SHADOW2D_001a454c;
-extern unsigned char *s_SHADOWRECT_001a4540;
-extern unsigned char *s_SHORT_OUTPUT_res_001a4a4c;
-extern unsigned char *s_SHORT_TEMP_001a472c;
-extern unsigned char *s_TEMP_001a4718;
-extern unsigned char *s_TR_001a4b60;
-extern unsigned char *s_Unkown_Target__error__001a45a8;
-extern unsigned char *s_X_001a4440;
-extern unsigned char *s__001a4134;
-extern unsigned char *s__001a45c0;
-extern unsigned char *s__001a4844;
-extern unsigned char *s__001a4b4c;
-extern unsigned char *s__001a4b5c;
-extern unsigned char *s__1_001a4510;
-extern unsigned char *s__EQ_001a44a8;
-extern unsigned char *s__FL_001a44d8;
-extern unsigned char *s__GE_001a44b0;
-extern unsigned char *s__GT_001a44b8;
-extern unsigned char *s__LDBL128_001aa0b4;
-extern unsigned char *s__LE_001a44c0;
-extern unsigned char *s__LT_001a44c8;
-extern unsigned char *s__NE_001a44d0;
-extern unsigned char *s__SAT_001a4430;
-extern unsigned char *s__TR_001a44a0;
-extern unsigned char *s___001a4444;
-extern unsigned char *s___001a4464;
-extern unsigned char *s___001a4468;
-extern unsigned char *s___001a4488;
-extern unsigned char *s___001a448c;
-extern unsigned char *s___001a44e0;
-extern unsigned char *s___001a44e4;
-extern unsigned char *s___001a44f4;
-extern unsigned char *s___001a44f8;
-extern unsigned char *s___001a46fc;
-extern unsigned char *s___001a4834;
-extern unsigned char *s___001a49dc;
-extern unsigned char *s___001a49e0;
-extern unsigned char *s___001a4a2c;
-extern unsigned char *s___001a4b58;
-extern unsigned char *s___ARBfp1_0_001a4584;
-extern unsigned char *s___ARBfragmentshader_001a4590;
-extern unsigned char *s___ARBvertexshader_001a4570;
-extern unsigned char *s___ARBvp1_0_001a4564;
-extern unsigned char *s___ILfs1_0_001a5d2c;
-extern unsigned char *s____001a4520;
-extern unsigned char *s____001a4878;
-extern unsigned char *s____001a4a24;
-extern unsigned char *s_____001a4838;
-extern unsigned char *s_____Fixed_constant_data_not_curr_001a49e4;
-extern unsigned char *s______001a6f98;
-extern unsigned char *s___adr_001a4710;
-extern unsigned char *s___color_001a4918;
-extern unsigned char *s___eye__001a48ec;
-extern unsigned char *s___fragment__001a4750;
-extern unsigned char *s___object__001a4904;
-extern unsigned char *s___plane_001a4928;
-extern unsigned char *s___vertex__001a4744;
-extern unsigned char *s__adr_001a4470;
-extern unsigned char *s__back_primary_001a4ab4;
-extern unsigned char *s__back_secondary_001a4ad8;
-extern unsigned char *s__front_primary_001a4aa4;
-extern unsigned char *s__front_secondary_001a4ac4;
+extern unsigned char s_NE_001a4b78[];
+extern unsigned char s_NV_fragment_program2_001a468c[];
+extern unsigned char s_NV_fragment_program_001a4678[];
+extern unsigned char s_NV_vertex_program2_001a46c0[];
+extern unsigned char s_NV_vertex_program3_001a46d4[];
+extern unsigned char s_OPTION_001a45c4[];
+extern unsigned char s_OUTPUT_res_001a4a30[];
+extern unsigned char s_PARAM_prm_001a4828[];
+extern unsigned char s_RECT_001a4538[];
+extern unsigned char s_R_001a4438[];
+extern unsigned char s_SHADOW1D_001a4558[];
+extern unsigned char s_SHADOW2D_001a454c[];
+extern unsigned char s_SHADOWRECT_001a4540[];
+extern unsigned char s_SHORT_OUTPUT_res_001a4a4c[];
+extern unsigned char s_SHORT_TEMP_001a472c[];
+extern unsigned char s_TEMP_001a4718[];
+extern unsigned char s_TR_001a4b60[];
+extern unsigned char s_Unkown_Target__error__001a45a8[];
+extern unsigned char s_X_001a4440[];
+extern unsigned char s__001a4134[];
+extern unsigned char s__001a45c0[];
+extern unsigned char s__001a4844[];
+extern unsigned char s__001a4b4c[];
+extern unsigned char s__001a4b5c[];
+extern unsigned char s__1_001a4510[];
+extern unsigned char s__EQ_001a44a8[];
+extern unsigned char s__FL_001a44d8[];
+extern unsigned char s__GE_001a44b0[];
+extern unsigned char s__GT_001a44b8[];
+extern unsigned char s__LDBL128_001aa0b4[];
+extern unsigned char s__LE_001a44c0[];
+extern unsigned char s__LT_001a44c8[];
+extern unsigned char s__NE_001a44d0[];
+extern unsigned char s__SAT_001a4430[];
+extern unsigned char s__TR_001a44a0[];
+extern unsigned char s___001a4444[];
+extern unsigned char s___001a4464[];
+extern unsigned char s___001a4468[];
+extern unsigned char s___001a4488[];
+extern unsigned char s___001a448c[];
+extern unsigned char s___001a44e0[];
+extern unsigned char s___001a44e4[];
+extern unsigned char s___001a44f4[];
+extern unsigned char s___001a44f8[];
+extern unsigned char s___001a46fc[];
+extern unsigned char s___001a4834[];
+extern unsigned char s___001a49dc[];
+extern unsigned char s___001a49e0[];
+extern unsigned char s___001a4a2c[];
+extern unsigned char s___001a4b58[];
+extern unsigned char s___ARBfp1_0_001a4584[];
+extern unsigned char s___ARBfragmentshader_001a4590[];
+extern unsigned char s___ARBvertexshader_001a4570[];
+extern unsigned char s___ARBvp1_0_001a4564[];
+extern unsigned char s___ILfs1_0_001a5d2c[];
+extern unsigned char s____001a4520[];
+extern unsigned char s____001a4878[];
+extern unsigned char s____001a4a24[];
+extern unsigned char s_____001a4838[];
+extern unsigned char s_____Fixed_constant_data_not_curr_001a49e4[];
+extern unsigned char s______001a6f98[];
+extern unsigned char s___adr_001a4710[];
+extern unsigned char s___color_001a4918[];
+extern unsigned char s___eye__001a48ec[];
+extern unsigned char s___fragment__001a4750[];
+extern unsigned char s___object__001a4904[];
+extern unsigned char s___plane_001a4928[];
+extern unsigned char s___vertex__001a4744[];
+extern unsigned char s__adr_001a4470[];
+extern unsigned char s__back_primary_001a4ab4[];
+extern unsigned char s__back_secondary_001a4ad8[];
+extern unsigned char s__front_primary_001a4aa4[];
+extern unsigned char s__front_secondary_001a4ac4[];
 extern unsigned char s__line_001a82e8;
 extern unsigned char s__line_adj_001a82fc;
 extern unsigned char s__line_strip_001a82c4;
-extern unsigned char *s__p_001a74dc;
-extern unsigned char *s__point_001a82e0;
+extern unsigned char s__p_001a74dc[];
+extern unsigned char s__point_001a82e0[];
 extern unsigned char s__point_list_001a82b8;
 extern unsigned char s__triangle_001a82f0;
 extern unsigned char s__triangle_adj_001a8308;
 extern unsigned char s__triangle_strip_001a82d0;
-extern unsigned char *s__w_001a4484;
-extern unsigned char *s__w_001a4508;
-extern unsigned char *s__x_001a4478;
-extern unsigned char *s__x_001a44fc;
-extern unsigned char *s__y_001a447c;
-extern unsigned char *s__y_001a4500;
-extern unsigned char *s__z_001a4480;
-extern unsigned char *s__z_001a4504;
-extern unsigned char *s_abs__001a6f88;
-extern unsigned char *s_adr_001a44f0;
-extern unsigned char *s_alpha_001a77e8;
-extern unsigned char *s_alu_wait_001a7364;
-extern unsigned char *s_ambient_001a47f4;
-extern unsigned char *s_att_001a44e8;
-extern unsigned char *s_attenuation_001a488c;
-extern unsigned char *s_attrib__001a47d0;
-extern unsigned char *s_back__001a47ec;
-extern unsigned char *s_clip__001a4920;
-extern unsigned char *s_color__001a4990;
-extern unsigned char *s_color_primary_001a476c;
-extern unsigned char *s_color_secondary_001a477c;
-extern unsigned char *s_depth_range_001a4948;
-extern unsigned char *s_diffuse_001a47fc;
-extern unsigned char *s_emission_001a4810;
-extern unsigned char *s_env__001a4868;
-extern unsigned char *s_eq_001a77d8;
-extern unsigned char *s_fog_color_001a4930;
-extern unsigned char *s_fog_params_001a493c;
-extern unsigned char *s_fogcoord_001a4794;
-extern unsigned char *s_front__001a47e4;
-extern unsigned char *s_frontfacing_001a47a0;
-extern unsigned char *s_ge_001a77e0;
-extern unsigned char *s_gs_001a8394;
-extern unsigned char *s_half_001a4898;
-extern unsigned char *s_ign_unc_001a734c;
-extern unsigned char *s_inverse__001a49bc;
-extern unsigned char *s_invtrans__001a49c8;
-extern unsigned char *s_label__001a4b50;
-extern unsigned char *s_label__001a4ba4;
-extern unsigned char *s_light__001a4870;
-extern unsigned char *s_lightmodel__001a48cc;
-extern unsigned char *s_lightmodel_ambient_001a48b8;
-extern unsigned char *s_lightprod__001a48ac;
-extern unsigned char *s_local__001a4860;
-extern unsigned char *s_lt_001a77dc;
-extern unsigned char *s_main__001a4b44;
-extern unsigned char *s_material__001a47d8;
-extern unsigned char *s_matrix__001a4974;
-extern unsigned char *s_matrixindex__001a47c0;
-extern unsigned char *s_modelview__001a4998;
-extern unsigned char *s_mvp__001a4988;
-extern unsigned char *s_nab__001a6f90;
-extern unsigned char *s_ne_001a77e4;
-extern unsigned char *s_neg__001a6f80;
-extern unsigned char *s_normal_001a478c;
-extern unsigned char *s_normalscale_001a4a18;
-extern unsigned char *s_ox_001a64a8;
-extern unsigned char *s_point_attenuation_001a4960;
-extern unsigned char *s_point_size_001a4954;
-extern unsigned char *s_position_001a4760;
-extern unsigned char *s_prm_001a44ec;
-extern unsigned char *s_program__001a484c;
-extern unsigned char *s_program__001a49a4;
-extern unsigned char *s_projection__001a497c;
-extern unsigned char *s_ps_001a8390;
-extern unsigned char *s_q_001a4900;
-extern unsigned char *s_r_001a48fc;
-extern unsigned char *s_res_001a446c;
-extern unsigned char *s_result_attrib__001a4b0c;
-extern unsigned char *s_result_clipVertex_001a4b30;
-extern unsigned char *s_result_color_001a4a94;
-extern unsigned char *s_result_depth_001a4afc;
-extern unsigned char *s_result_eyePosition_001a4b1c;
-extern unsigned char *s_result_fogcoord_001a4a70;
-extern unsigned char *s_result_pointsize_001a4a80;
-extern unsigned char *s_result_position_001a4a60;
-extern unsigned char *s_result_texcoord__001a4ae8;
-extern unsigned char *s_row__001a49d4;
-extern unsigned char *s_s_001a48f4;
-extern unsigned char *s_scenecolor_001a48d8;
-extern unsigned char *s_sem_grab_001a73ac;
-extern unsigned char *s_sem_wait_001a7358;
-extern unsigned char *s_shininess_001a481c;
-extern unsigned char *s_specular_001a4804;
-extern unsigned char *s_spot_direction_001a487c;
-extern unsigned char *s_spotcutoff_001a48a0;
-extern unsigned char *s_srcp_001a6fa0;
-extern unsigned char *s_state__001a4858;
-extern unsigned char *s_t_001a48f8;
-extern unsigned char *s_texcoord__001a47ac;
-extern unsigned char *s_texenv__001a4910;
-extern unsigned char *s_texgen__001a48e4;
-extern unsigned char *s_texture__001a4514;
-extern unsigned char *s_tmp_001a4460;
-extern unsigned char *s_transpose__001a49b0;
-extern unsigned char *s_vs_001a838c;
-extern unsigned char *s_w_001a449c;
-extern unsigned char *s_weight__001a47b8;
-extern unsigned char *s_x_001a4490;
-extern unsigned char *s_y_001a4494;
-extern unsigned char *s_z_001a4498;
+extern unsigned char s__w_001a4484[];
+extern unsigned char s__w_001a4508[];
+extern unsigned char s__x_001a4478[];
+extern unsigned char s__x_001a44fc[];
+extern unsigned char s__y_001a447c[];
+extern unsigned char s__y_001a4500[];
+extern unsigned char s__z_001a4480[];
+extern unsigned char s__z_001a4504[];
+extern unsigned char s_abs__001a6f88[];
+extern unsigned char s_adr_001a44f0[];
+extern unsigned char s_alpha_001a77e8[];
+extern unsigned char s_alu_wait_001a7364[];
+extern unsigned char s_ambient_001a47f4[];
+extern unsigned char s_att_001a44e8[];
+extern unsigned char s_attenuation_001a488c[];
+extern unsigned char s_attrib__001a47d0[];
+extern unsigned char s_back__001a47ec[];
+extern unsigned char s_clip__001a4920[];
+extern unsigned char s_color__001a4990[];
+extern unsigned char s_color_primary_001a476c[];
+extern unsigned char s_color_secondary_001a477c[];
+extern unsigned char s_depth_range_001a4948[];
+extern unsigned char s_diffuse_001a47fc[];
+extern unsigned char s_emission_001a4810[];
+extern unsigned char s_env__001a4868[];
+extern unsigned char s_eq_001a77d8[];
+extern unsigned char s_fog_color_001a4930[];
+extern unsigned char s_fog_params_001a493c[];
+extern unsigned char s_fogcoord_001a4794[];
+extern unsigned char s_front__001a47e4[];
+extern unsigned char s_frontfacing_001a47a0[];
+extern unsigned char s_ge_001a77e0[];
+extern unsigned char s_gs_001a8394[];
+extern unsigned char s_half_001a4898[];
+extern unsigned char s_ign_unc_001a734c[];
+extern unsigned char s_inverse__001a49bc[];
+extern unsigned char s_invtrans__001a49c8[];
+extern unsigned char s_label__001a4b50[];
+extern unsigned char s_label__001a4ba4[];
+extern unsigned char s_light__001a4870[];
+extern unsigned char s_lightmodel__001a48cc[];
+extern unsigned char s_lightmodel_ambient_001a48b8[];
+extern unsigned char s_lightprod__001a48ac[];
+extern unsigned char s_local__001a4860[];
+extern unsigned char s_lt_001a77dc[];
+extern unsigned char s_main__001a4b44[];
+extern unsigned char s_material__001a47d8[];
+extern unsigned char s_matrix__001a4974[];
+extern unsigned char s_matrixindex__001a47c0[];
+extern unsigned char s_modelview__001a4998[];
+extern unsigned char s_mvp__001a4988[];
+extern unsigned char s_nab__001a6f90[];
+extern unsigned char s_ne_001a77e4[];
+extern unsigned char s_neg__001a6f80[];
+extern unsigned char s_normal_001a478c[];
+extern unsigned char s_normalscale_001a4a18[];
+extern unsigned char s_ox_001a64a8[];
+extern unsigned char s_point_attenuation_001a4960[];
+extern unsigned char s_point_size_001a4954[];
+extern unsigned char s_position_001a4760[];
+extern unsigned char s_prm_001a44ec[];
+extern unsigned char s_program__001a484c[];
+extern unsigned char s_program__001a49a4[];
+extern unsigned char s_projection__001a497c[];
+extern unsigned char s_ps_001a8390[];
+extern unsigned char s_q_001a4900[];
+extern unsigned char s_r_001a48fc[];
+extern unsigned char s_res_001a446c[];
+extern unsigned char s_result_attrib__001a4b0c[];
+extern unsigned char s_result_clipVertex_001a4b30[];
+extern unsigned char s_result_color_001a4a94[];
+extern unsigned char s_result_depth_001a4afc[];
+extern unsigned char s_result_eyePosition_001a4b1c[];
+extern unsigned char s_result_fogcoord_001a4a70[];
+extern unsigned char s_result_pointsize_001a4a80[];
+extern unsigned char s_result_position_001a4a60[];
+extern unsigned char s_result_texcoord__001a4ae8[];
+extern unsigned char s_row__001a49d4[];
+extern unsigned char s_s_001a48f4[];
+extern unsigned char s_scenecolor_001a48d8[];
+extern unsigned char s_sem_grab_001a73ac[];
+extern unsigned char s_sem_wait_001a7358[];
+extern unsigned char s_shininess_001a481c[];
+extern unsigned char s_specular_001a4804[];
+extern unsigned char s_spot_direction_001a487c[];
+extern unsigned char s_spotcutoff_001a48a0[];
+extern unsigned char s_srcp_001a6fa0[];
+extern unsigned char s_state__001a4858[];
+extern unsigned char s_t_001a48f8[];
+extern unsigned char s_texcoord__001a47ac[];
+extern unsigned char s_texenv__001a4910[];
+extern unsigned char s_texgen__001a48e4[];
+extern unsigned char s_texture__001a4514[];
+extern unsigned char s_tmp_001a4460[];
+extern unsigned char s_transpose__001a49b0[];
+extern unsigned char s_vs_001a838c[];
+extern unsigned char s_w_001a449c[];
+extern unsigned char s_weight__001a47b8[];
+extern unsigned char s_x_001a4490[];
+extern unsigned char s_y_001a4494[];
+extern unsigned char s_z_001a4498[];
 extern MACH_HEADER_t MACH_HEADER;
 extern float FLOAT_001aa0cc;
 extern float FLOAT_001aa0d0;

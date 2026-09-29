@@ -8065,6 +8065,9 @@ int FUN_00166cfc(param_1)
       }
       uVar8 = uVar8 + 1;
       piVar7 = (int *)*puVar2;
+      /* issue #76: same shared param_1[0x18] array gap as elsewhere - skip a never-populated
+       * slot instead of dereferencing it. */
+      if (piVar7 == (int *)0x0) goto LAB_issue76_skip_166cfc;
       uVar9 = 0;
       *(undefined4 *)(piVar7[0xe] + 0x150) = 0;
       puVar10 = (uint *)piVar7[0x10];
@@ -8110,6 +8113,7 @@ int FUN_00166cfc(param_1)
         FUN_00193cc0(*(undefined4 *)(iVar5 + -4),iVar5 + -4);
       }
       (**(code **)(*piVar7 + 4))(piVar7);
+LAB_issue76_skip_166cfc:
       if (uVar6 == uVar8) break;
       puVar10 = *(uint **)(param_1 + 0x18);
     }
@@ -8280,6 +8284,9 @@ int FUN_001670fc(param_1)
         piVar4 = (int *)FUN_0019423c(puVar20,uVar15);
       }
       iVar12 = *piVar4;
+      /* issue #76: same shared-array gap as FUN_0016a568/FUN_0016bd70 - skip a never-populated
+       * param_1[6] slot instead of dereferencing/passing it on as a live format object. */
+      if (iVar12 == 0) goto LAB_issue76_skip_1670fc;
       iVar3 = FUN_000e07dc(*param_1,0x28);
       if (iVar3 == 0) {
 LAB_001672b8:
@@ -8454,6 +8461,10 @@ LAB_001676d0:
           else {
             piVar4 = (int *)FUN_0019423c(puVar20,uVar7);
           }
+          /* issue #76: same shared-array gap as elsewhere in this function - *piVar4 (the
+           * slot's own stored format pointer, not piVar4 itself) can legitimately still be an
+           * unpopulated 0. */
+          if (*piVar4 == 0) goto LAB_issue76_skip_1670fc_inner;
           if (*(int *)(*piVar4 + 0x5c) == 0) {
             iVar8 = *(int *)(*piVar4 + 0x58);
             if (iVar8 == 1) {
@@ -8467,6 +8478,7 @@ LAB_001676d0:
             *(int *)(iVar12 + 0x20) = *(int *)(iVar12 + 0x20) + 1;
           }
         }
+LAB_issue76_skip_1670fc_inner:
         uVar7 = uVar7 + 1;
         bVar2 = uVar17 != 0x1f;
         iVar3 = iVar3 + 4;
@@ -8475,6 +8487,7 @@ LAB_001676d0:
       if (local_58 < *(int *)(iVar12 + 0x14)) {
         local_58 = *(int *)(iVar12 + 0x14);
       }
+LAB_issue76_skip_1670fc:
       uVar14 = uVar14 + 1;
       uVar15 = uVar15 - 1;
       uVar18 = uVar18 - 1;
@@ -9724,6 +9737,9 @@ int FUN_00169b70(param_1)
         piVar3 = (int *)FUN_0019423c(puVar10,uVar8);
       }
       iVar6 = *piVar3;
+      /* issue #76: same shared-array gap as FUN_0016a568/FUN_0016bd70/FUN_001670fc - skip a
+       * never-populated param_1[0x18]-array slot instead of dereferencing it. */
+      if (iVar6 == 0) goto LAB_issue76_skip_169b70;
       uVar2 = 0;
       puVar10 = *(uint **)(iVar6 + 0x44);
       uVar9 = puVar10[1];
@@ -9766,6 +9782,7 @@ LAB_00169d08:
           FUN_00193f64(auStack_48,iVar6);
         }
       }
+LAB_issue76_skip_169b70:
       uVar8 = uVar8 + 1;
       if (uVar7 == uVar8) break;
       puVar10 = *(uint **)(param_1 + 0x18);
@@ -10543,6 +10560,29 @@ LAB_0016b038:
             piVar4 = (int *)FUN_0019423c(puVar27,uVar20);
           }
           iVar22 = *piVar4;
+          /* issue #76: iVar22 is read back from param_1[6]'s array at whatever index this
+           * iteration's format was recorded under - but that recording can legitimately still
+           * be an empty (never-populated) slot: a *different*, unrelated code path
+           * (FUN_00168468, cross-referencing a format's own sub-component via that
+           * component's OWN persistent [0x54] "registry index") can grow this SAME array ahead
+           * of the official sequential writer, using an index that has nothing to do with how
+           * many formats this loop has appended so far. Verified live on real hardware: the
+           * component's [0x54] value was stable and pre-existing (set before this whole
+           * CGLCreateContext call chain even began, not corrupted by anything traced this
+           * session), and every instruction from this read through the FUN_00164fc0 call below
+           * is a byte-for-byte accurate decompilation of the stock binary (checked against the
+           * real disassembly) - so this is a real, stock-shared gap between two independent
+           * writers of the same growable array, not a decompilation defect. The rest of this
+           * loop iteration exists purely to detect and register cross-format rendering quirks
+           * (building "puVar15[7]=0x1010101"-tagged quirk records) for a real, populated
+           * format pair - with nothing here to compare against, there is no quirk to register,
+           * so skip straight to this iteration's own bookkeeping instead of dereferencing a
+           * format that was never actually stored. */
+          if (iVar22 == 0) {
+            iVar12 = 0;
+            iVar23 = 0;
+            goto LAB_issue76_skip_pair;
+          }
           piVar4 = *(int **)(iVar22 + 0x38);
           iVar12 = ((int (*)())FUN_00164fc0)(piVar4);
           if (iVar12 != 0) {
@@ -10912,6 +10952,7 @@ LAB_0016b038:
               iVar16 = *(int *)(iVar18 + 8);
             }
           }
+LAB_issue76_skip_pair:
           uVar20 = uVar20 - 1;
           iVar7 = iVar7 + -4;
           local_54 = local_54 + 1;
@@ -11001,6 +11042,12 @@ int FUN_0016bd70(param_1)
         piVar4 = (int *)FUN_0019423c(puVar17,uVar14);
       }
       iVar13 = *piVar4;
+      /* issue #76: same shared-array gap as FUN_0016a568 - param_1[6] can have never-populated
+       * slots left behind by an unrelated code path (FUN_00168468) that grows this same array
+       * via a format's own persistent, pre-existing registry index, independent of how many
+       * slots this function's own sequential scan has walked. Skip an empty slot instead of
+       * dereferencing it. */
+      if (iVar13 == 0) goto LAB_issue76_skip_16bd70;
       if (((((*(int *)(iVar13 + 0x60) == 0) &&
             (piVar4 = *(int **)(iVar13 + 0x38), piVar4[0x20] != 0)) &&
            (iVar5 = FUN_00126760(piVar4[0x26]), iVar5 != 0)) &&
@@ -11125,6 +11172,7 @@ int FUN_0016bd70(param_1)
           puVar10 = (uint *)0x0;
         }
       }
+LAB_issue76_skip_16bd70:
       uVar14 = uVar14 + 1;
     } while (uVar11 != uVar14);
     if (puVar10 != (uint *)0x0) {

@@ -1108,10 +1108,20 @@ int FUN_001a3580(param_1)
   int iVar1;
   int iVar2;
   undefined4 uVar3;
-  char local_58 [4];
-  char acStack_54 [4];
-  char acStack_50 [64];
-  
+  /* issue #76 (same defect class as issue #64's stack-split fixes elsewhere in this corpus):
+   * local_58/acStack_54/acStack_50 are three separate locals at consecutive stock frame offsets
+   * (-0x58, -0x54, -0x50 - no gaps), meant to be ONE 72-byte buffer: code builds a symbol name
+   * by strcpy'ing into local_58+1 (needing far more than local_58's own declared 4 bytes) and
+   * then appends a literal string constant across all three via raw word-sized stores
+   * (`*(undefined4*)(local_58+iVar1)`, `acStack_50[iVar1]`, `*(undefined4*)(acStack_54+iVar1)`).
+   * -O0 doesn't lay separately-declared locals out contiguously, so this crashed writing/reading
+   * through whatever unrelated stack content followed the undersized local_58 on its own.
+   * Merged into one real buffer with offset-preserving aliases, per the established pattern. */
+  char acStack_58_combined[72];
+#define local_58 (acStack_58_combined + 0)
+#define acStack_54 (acStack_58_combined + 4)
+#define acStack_50 (acStack_58_combined + 8)
+
   local_58[0] = '_';
   _strcpy(local_58 + 1,param_1);
   iVar1 = _strlen(local_58);
