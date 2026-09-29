@@ -6339,7 +6339,16 @@ extern unsigned char DAT_001fc6dc;
 extern unsigned char PTR_001e88a4;
 extern unsigned char PTR_001e88a8;
 extern unsigned char PTR_001e88b0;
-extern unsigned char PTR_001e88b4;
+/* issue: this was declared as a plain byte (missing the pointer asterisk every OTHER
+ * "PTR_"-named global near it correctly has, e.g. PTR_DAT_001e88ac) - but data.s defines it
+ * as `.long _mach_task_self_`, a real 4-byte pointer to the well-known mach_task_self_ system
+ * global. FUN_00039100 (part_005.c) casts its VALUE directly to a pointer and dereferences it
+ * (`*(undefined4*)PTR_001e88b4`); with the wrong, truncated 1-byte type, that reads only the
+ * pointer's low byte (observed live as 0xa0) and crashes dereferencing THAT as an address
+ * instead of the real pointer. Likely one instance of a wider pattern (616 total "extern
+ * unsigned char PTR_*" declarations in this file, most probably correct byte-array bases,
+ * but worth a dedicated audit - filed separately as issue #75). */
+extern unsigned char *PTR_001e88b4;
 extern unsigned char PTR_001e88b8;
 extern unsigned char PTR_001e88bc;
 extern unsigned char PTR_001e88c0;
