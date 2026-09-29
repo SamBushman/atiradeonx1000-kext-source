@@ -1,0 +1,12 @@
+{
+ "97440": {
+  "38@976cc": "iVarS9",
+  "38@9789c": "iVarS9",
+  "38@979c0": "iVarS9"
+ },
+ "93510": {
+  "3c@937fc": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))",
+  "3c@9383c": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))",
+  "3c@9387c": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))"
+ }
+}

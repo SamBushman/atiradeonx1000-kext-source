@@ -15,12 +15,21 @@ For every `bctrl` through struct offset SLOT that stores four stack words in its
 Without --apply it only reports. Sites it cannot resolve or pair are reported and left alone."""
 import sys, re, io, importlib.util, contextlib, collections, glob, os
 ARGV = sys.argv[:]
-dis, rng, dump, corpus, slot = ARGV[1], ARGV[2], ARGV[3], ARGV[4], int(ARGV[5], 0)
+dis, rng, dump, corpus = ARGV[1], ARGV[2], ARGV[3], ARGV[4]
+_sl = ARGV[5].split(':')
+slot = int(_sl[0], 0)
+NWORDS = int(_sl[1]) if len(_sl) > 1 else 4        # SLOT[:N] - stack words (arguments 9..8+N) the slot's callee takes
 APPLY = '--apply' in ARGV
 sys.argv = ['reg_supply.py', dis, rng, dump, '--terminals', '0', '3']          # reg_supply.py's module code reads argv; only its definitions are used
 src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')).read().split('if mode_term:')[0]
 __file__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')
 exec(src)
+
+# hand-written expressions for phi words the tool cannot tie to a C variable: {"<function entry hex>": {"<word offset hex>@<call address hex>": "<C expression>"}} - the C must
+# already contain the variable (added by hand at the merge point, see Userspace/README.md)
+import json as _json
+_ovp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'stackargs_overrides.json')
+OVERRIDES = _json.load(open(_ovp)) if os.path.exists(_ovp) else {}
 
 # ---- symbolic values -----------------------------------------------------------------------------------------------------
 _rd = {}
@@ -138,20 +147,30 @@ def pic_expr_for_word(g, a, store_addr, reg):
     """the symbol name of the PIC constant held in reg at the store instruction"""
     ab = pic_abs(g, store_addr, reg)
     return None if ab is None else sym_for(ab)
+BTARGETS = set()
+for _a, (_op, _arg) in ins.items():
+    if _op.startswith('b') and not _op.startswith(('bl', 'blr', 'bctr')) or _op in ('b',):
+        _m = re.match(r'(?:cr\d,)?0x([0-9a-f]+)', _arg)
+        if _m: BTARGETS.add(int(_m.group(1), 16))
 def stack_stores(a):
+    """{offset: (source register, store address)} of the stores to 0x38..0x44(r1) in the straight-line code before the call; the scan stops at a branch target
+    (a store before a join belongs to only one incoming path: the other paths may store another register), so a call whose stores precede a join has fewer than
+    four words and is left alone"""
     st = {}; b = a - 4; n = 0
     while b in ins and n < 120:
         o, ar = ins[b]
         if o.startswith('b') or o == '.long': break
         m = re.match(r'(r\d+),(0x[0-9a-f]+)\(r1\)$', ar.replace(' ', ''))
-        if o == 'stw' and m and 0x38 <= int(m.group(2), 16) < 0x48 and int(m.group(2), 16) not in st: st[int(m.group(2), 16)] = (int(m.group(1)[1:]), b)
+        if o == 'stw' and m and 0x38 <= int(m.group(2), 16) < 0x38 + 4 * NWORDS and int(m.group(2), 16) not in st: st[int(m.group(2), 16)] = (int(m.group(1)[1:]), b)
+        if b in BTARGETS: break
         b -= 4; n += 1
     return st
-sites = collections.defaultdict(list)
+sites = collections.defaultdict(list); JOINS = []
 for a, (op, arg) in sorted(ins.items()):
     if op == 'bctrl' and a in owner and slot_of(a) == slot:
         st = stack_stores(a)
-        if len(st) == 4: sites[owner[a]].append((a, st))
+        if len(st) == NWORDS: sites[owner[a]].append((a, st))
+        else: JOINS.append((a, owner[a], sorted(hex(k) for k in st)))
 
 SYMS = {}
 for l in open(os.path.join(corpus, 'link', 'symbol_map.tsv')):
@@ -225,6 +244,39 @@ def pic_expr(g, a, reg):
     ab = pic_abs(g, a, reg)
     return None if ab is None else sym_for(ab)
 
+def c_defs_of(body):
+    d = collections.defaultdict(list)
+    for m in re.finditer(r'(?m)^\s*(?:\*\s*\(\w[\w ]*\*\)\s*)?(\w+)\s*=\s*([^;=][^;]*);', body): d[m.group(1)].append(m.group(2))
+    return d
+def c_resolve_text(e, defs, depth=2, seen=None):
+    seen = seen if seen is not None else set(); out = [e]
+    if depth == 0: return e
+    for v in set(re.findall(r'\b[A-Za-z_]\w*\b', e)):
+        if v in defs and v not in seen:
+            for r_ in defs[v][:80]: out.append(c_resolve_text(r_, defs, depth - 1, seen | {v}))
+    return ' '.join(out)
+def key_offsets(k):
+    """the offsets of a load / addi chain rooted at an entry register, or None if the tree is not of that shape"""
+    offs = []
+    while k[0] in ('lwz', 'lbz', 'lhz', 'addi'):
+        o = k[1]
+        if not isinstance(o, int): return None
+        offs.append(o if o < 0x8000 else o - 0x10000); k = k[2]
+    return (offs, k[1]) if k[0] == 'entry' else None
+def arg_consistent(argkey, arg_text, defs):
+    """does the C argument mention the parameter and every offset of the stock's load chain (a check that the pairing is right)?"""
+    ko = key_offsets(argkey)
+    if ko is None: return True                     # a constant / phi / PIC: nothing to compare
+    offs, reg = ko
+    t = c_resolve_text(arg_text, defs)
+    if not re.search(r'\bparam_%d\b' % (reg - 2), t): return True    # reached through an unrelated local: cannot say
+    nums = set()
+    for x in re.findall(r'-?0x[0-9a-fA-F]+|-?\b\d+\b', t):
+        try: nums.add(int(x, 0))
+        except ValueError: pass
+    sc = {n * z for n in nums for z in (1, 2, 4, 8)} | nums
+    return all(o == 0 or o in sc or -o in sc for o in offs)
+
 # ---- the C side ----------------------------------------------------------------------------------------------------------
 ledger = {}
 for l in open(os.path.join(corpus, 'ledger.tsv')):
@@ -258,24 +310,40 @@ for g in sorted(sites):
         calls.append((m.start(), i, j - 1, split_args(body[i:j - 1])))
     ss = sites[g]
     if len(calls) != len(ss): report.append('%x %s: %d stock sites vs %d C calls - skipped' % (g, name, len(ss), len(calls))); continue
-    # validate the pairing through the PIC constants (arguments r6 / r9 / r10)
-    bad = False
-    for (a, st), (cs, ai, aj, args) in zip(ss, calls):
+    fdefs = c_defs_of(body)
+    def compatible(a, args):
         for reg in (6, 9, 10):
             ab = pic_abs(g, a, reg)
             if ab is not None and len(args) >= reg - 2 and re.search(r'_[0-9a-f]{8}\b', args[reg - 3]):
-                mm = re.search(r'_([0-9a-f]{8})\b', args[reg - 3])
-                if int(mm.group(1), 16) != ab: bad = True
-    if bad: report.append('%x %s: PIC-constant mismatch when pairing by order - skipped' % (g, name)); continue
-    newbody = []; pos = 0; decls = []; last_group = {}; nvar = 0
+                if int(re.search(r'_([0-9a-f]{8})\b', args[reg - 3]).group(1), 16) != ab: return False
+        return all(arg_consistent(key(g, a, 2 + p_), args[p_ - 1], fdefs) for p_ in range(2, min(len(args), 8) + 1))
+    # pair by order when that is consistent; otherwise by the unique compatible C call (Ghidra may lay the code out in a different order)
+    comp = [[compatible(a, c[3]) for c in calls] for a, st in ss]
+    order = list(range(len(ss)))
+    if all(comp[i][i] for i in order): pair = order
+    else:
+        pair = []; used = set()
+        for i in order:
+            cs_ = [j for j in order if comp[i][j] and j not in used]
+            if not cs_: pair = None; break
+            pair.append(cs_[0]); used.add(cs_[0])
+        if pair is not None and len(used) != len(ss): pair = None
+        if pair is None: report.append('%x %s: no consistent pairing of stock calls and C calls - skipped' % (g, name)); continue
+        report.append('%x %s: paired out of order (%s)' % (g, name, ','.join(map(str, pair))))
+    both = sorted(zip(ss, [calls[j] for j in pair]), key=lambda x: x[1][0])      # process in the C's textual order
+    ss = [x[0] for x in both]; calls = [x[1] for x in both]
+    newbody = []; pos = 0; decls = []; last_group = {}
+    nvar = max([int(x) for x in re.findall(r'\biVarS(\d+)\b', body)] + [0])      # earlier runs (other slots) already declared some
     for (a, st), (cs, ai, aj, args) in zip(ss, calls):
-        if len(args) == 12: continue
+        if len(args) == 8 + NWORDS: continue
         if len(args) != 8: report.append('%x %s call at %x: %d C arguments' % (g, name, a, len(args))); continue
         argkeys = {p_: key(g, a, 2 + p_) for p_ in range(1, 9)}
         new = []; ok = True; pre = []
-        for k in range(4):
+        for k in range(NWORDS):
             off = 0x38 + 4 * k; sr, sa = st[off]
             kk = key(g, a, sr)
+            ov = OVERRIDES.get('%x' % g, {}).get('%x@%x' % (off, a))
+            if ov: new.append(ov); continue
             hit = [p_ for p_, ak in argkeys.items() if ak == kk and ak[0] not in ('deep',)]
             if not hit and kk[0] == 'multi':
                 hit = [p_ for p_ in argkeys if argkeys[p_][0] == 'multi' and same_multi(g, a, sr, 2 + p_)]
@@ -313,6 +381,14 @@ for g in sorted(sites):
         newbody.append((cs, ai, aj, outs, pre))
     if not newbody: continue
     b2 = body; shift = 0
+    ok_nb = []
+    for cs, ai, aj, outs, pre in newbody:
+        # the call must start a statement (the assignments go right before it): the previous significant character is `;`, `{`, `}` or the `)` / `else` of an unbraced header
+        before = re.sub(r'/\*.*?\*/', '', body[:cs], flags=re.S).rstrip()
+        pl = before[before.rfind('\n') + 1:]
+        if before[-1:] in ';{}' or re.match(r'\s*(?:\}\s*)?(?:else\s*(?:if\b.*\))?|(?:if|while|for)\b.*\))\s*$', pl) or before.endswith('else'): ok_nb.append((cs, ai, aj, outs, pre))
+        else: report.append('%x %s: a call inside an expression at C offset %d - left at 8 arguments' % (g, name, cs))
+    newbody = ok_nb
     for cs, ai, aj, outs, pre in newbody:
         # the statement start: the beginning of the call's line
         ls = b2.rfind('\n', 0, cs + shift) + 1

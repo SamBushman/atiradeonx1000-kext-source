@@ -595,10 +595,14 @@ callee read stale stack for its second group (an earlier hand fix, #64, had rest
 e.g. 5th = `*(f+8)`, 9th = `*(f+4)`). `Tools/userspace/stackargs_indirect.py STOCK_DIS RANGES DUMP CORPUS 0x12e4 [--apply]` derives each word from the stock's reaching definitions (a symbolic
 tree of `or` copies / `lwz` / `addi` / `li`, PIC constants named through `link/symbol_map.tsv`, stack locals named by their offset below the entry SP, a phi of several definitions matched to the
 unique C variable assigned from those loads), pairs the stock's calls with the C calls of the function by order (validated through the PIC constants), and appends the four arguments; a value
-several consecutive calls use is computed once into an `iVarS<n>` local before the first call, like the stock's callee-saved register. Applied to 58 of the 83 C calls (`part_013.c`, `part_014.c`);
-**25 stay at 8 arguments** and are reported by the tool: `FUN_00093510` (3 calls) and `FUN_00097440` (3): a phi the tool cannot tie to one C variable; `FUN_00096600` (5): the same, and
-`0x96a20` also reads the uninitialised `r13` on one path; `FUN_00093a40` (9): C call order differs from the address order, the PIC check refuses to pair; plus sites in functions with calls
-the stock does not have. Built and linked on the `fixed52` tree (0 compile failures) and `cgl_probe` runs clean, but the probe does not reach these paths.
+several consecutive calls use is computed once into an `iVarS<n>` local before the first call, like the stock's callee-saved register. Applied to **73 of the 83** C calls through `0x12e4` (`part_013.c`, `part_014.c`). The same table has more entries whose callees take stack words - from `FUN_000a7050`'s two table variants: `0x12ec`, `0x12f0`,
+`0x1300`..`0x130c`, `0x1324`, `0x1328` (12 parameters: 4 words) and `0x12f4`, `0x12f8`, `0x12fc`, `0x132c` (16 parameters: 8 words) - so the tool takes `SLOT[:WORDS]` and was run for each: 47 more calls now pass
+their stack words (the low slots `0x12c0`..`0x12d8` differ per table variant and are not touched). Three checks keep the derivation honest: the four/eight stores must all lie after the last join (a store before a join
+belongs to one path only - `0x96a20`), the pairing of stock and C calls must be consistent argument by argument (Ghidra lays some functions out in another order: `FUN_00093510`, `FUN_00093a40`, `FUN_0009aa00` are paired
+out of order; an earlier version paired by address order alone and mis-assigned `FUN_00093510` / `FUN_0009aa00`, reverted), and a call inside an expression (`if (.. , call(..))`) is left alone. Phi words the tool cannot tie
+to a C variable are named by hand in `Tools/userspace/stackargs_overrides.json` (`FUN_00097440`: `iVarS9`, assigned per arm; `FUN_00093510`: the `param_2[i]` selection). Still at 8 arguments (reported by the tool):
+`FUN_00096600` (its phis and `0x96a20`), and the per-function count mismatches for `0x12ec` / `0x12f4` in `FUN_00094840`, `FUN_00097440`, `FUN_00098500`, `FUN_00096d80`, `FUN_00093000` (the C has calls the stock
+does not, orphan fragments). After a regen, rerun the tool per slot. Built and linked on the `fixed52` tree (0 compile failures) and `cgl_probe` runs clean, but the probe does not reach these paths.
 
 ### Floating-point arguments and results (Stage B3 step 12)
 * Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
