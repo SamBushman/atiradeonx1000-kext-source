@@ -589,6 +589,17 @@ defined on every path to the call. 41 GLDriver sites were flagged (including `FU
 glprog's 79 flagged sites are C++ virtual calls and were not reviewed one by one. Verified live: the `r79all` bundle (all of the above on the `fixed52` tree) runs `cgl_probe` clean, 5 runs; none of these paths
 is proven exercised by that probe, so the check for these six is the disassembly comparison plus a clean build.
 
+**Stack-passed arguments of indirect calls (2026-09-29).** All 78 stock `bctrl`s through `ctx+0x240 + 0x12e4` (the per-instance table entry that is `FUN_000840d0`, 12 parameters: two groups
+of four - the stencil-style front / back state) store four words at `0x38..0x44(r1)` = arguments 9..12 (`FUN_000840d0` reads them at its `0xb8..0xc4(r1)`), but the C passed 8, so the rebuilt
+callee read stale stack for its second group (an earlier hand fix, #64, had restored them at one function only). The words are *not* copies of arguments 5..8 (front and back groups differ:
+e.g. 5th = `*(f+8)`, 9th = `*(f+4)`). `Tools/userspace/stackargs_indirect.py STOCK_DIS RANGES DUMP CORPUS 0x12e4 [--apply]` derives each word from the stock's reaching definitions (a symbolic
+tree of `or` copies / `lwz` / `addi` / `li`, PIC constants named through `link/symbol_map.tsv`, stack locals named by their offset below the entry SP, a phi of several definitions matched to the
+unique C variable assigned from those loads), pairs the stock's calls with the C calls of the function by order (validated through the PIC constants), and appends the four arguments; a value
+several consecutive calls use is computed once into an `iVarS<n>` local before the first call, like the stock's callee-saved register. Applied to 58 of the 83 C calls (`part_013.c`, `part_014.c`);
+**25 stay at 8 arguments** and are reported by the tool: `FUN_00093510` (3 calls) and `FUN_00097440` (3): a phi the tool cannot tie to one C variable; `FUN_00096600` (5): the same, and
+`0x96a20` also reads the uninitialised `r13` on one path; `FUN_00093a40` (9): C call order differs from the address order, the PIC check refuses to pair; plus sites in functions with calls
+the stock does not have. Built and linked on the `fixed52` tree (0 compile failures) and `cgl_probe` runs clean, but the probe does not reach these paths.
+
 ### Floating-point arguments and results (Stage B3 step 12)
 * Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
   style. The only signature this put an integer in the wrong register is `ecvt(double, int, int*, int*)` in GLDriver: its caller FUN_000cdc3c
