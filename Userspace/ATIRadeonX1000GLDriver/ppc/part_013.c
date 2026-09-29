@@ -2593,7 +2593,8 @@ int FUN_0008dda0(param_1, param_2)
   int iVar3;
   int iVar4;
   int iVar5;
-  
+  int iVar6;
+
   *(undefined4 *)(param_2 + 0xc) = 0;
   *(undefined4 *)(param_2 + 8) = 0;
   param_2[4] = 0;
@@ -2617,9 +2618,12 @@ int FUN_0008dda0(param_1, param_2)
     iVar5 = 0;
     if (0 < iVar1) {
       do {
-        if (*(int *)(iVar5 * 4 + iVar3) != 0) {
+        /* issue #79 class: the stock's r4 is the slot's object (`lwzx r4,r2,r3` before the `beq`),
+         * the callback is (ctx, obj) */
+        iVar6 = *(int *)(iVar5 * 4 + iVar3);
+        if (iVar6 != 0) {
           *(undefined4 *)(iVar5 * 4 + iVar3) = 0;
-          (**(code **)(((unsigned char *)0x00001224) + param_1))(param_1);
+          ((int (*)())*(code **)(((unsigned char *)0x00001224) + param_1))(param_1,iVar6);
           iVar3 = *(int *)(param_2 + 0x70);
           iVar1 = *(int *)(iVar4 + 0x10);
         }

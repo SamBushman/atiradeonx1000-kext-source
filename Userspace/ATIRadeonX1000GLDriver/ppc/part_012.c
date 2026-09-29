@@ -3870,7 +3870,9 @@ int FUN_00088190(param_1, param_2)
     }
     (**(code **)(param_1 + 0x294c))(param_1,pcVar5);
     if ((*(uint *)(param_1 + 0x1930) & 0xc0100000) != 0) {
-      (**(code **)(((unsigned char *)0x00001330) + param_1))(param_1);
+      /* issue #79 class: the stock's r4 here is the flags word itself (`lwz r4,0x1930(r29)`, tested by
+       * `andis. r0,r4,0xc010`, then the `bctrl` at 0x88444); the siblings pass the literal 0xc0100000 */
+      (**(code **)(((unsigned char *)0x00001330) + param_1))(param_1,*(undefined4 *)(param_1 + 0x1930));
       *(uint *)(param_1 + 0x1930) = *(uint *)(param_1 + 0x1930) & 0x3fefffff;
     }
   }

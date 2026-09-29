@@ -2917,7 +2917,9 @@ LAB_00050920:
   }
   pcVar1 = *(code **)(param_1 + 0x275c);
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2 + 0x41;
-  (*pcVar1)(param_1);
+  /* issue #79 class: `stw r4,0x274c(r30)` leaves the new write pointer in r4 for the `bctrl` at
+   * 0x50d10 - the callback is (ctx, write pointer), like every sibling call through 0x275c */
+  (*pcVar1)(param_1,puVar2 + 0x41);
   if (*(int *)(param_1 + 0x2494) != 0) {
     puVar2 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,0x12);
     *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2;

@@ -3848,7 +3848,8 @@ int FUN_000e1484(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x584) != 0) {
-    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354));
+    /* issue #79 class: r4 = `lwz r4,0x584(r3)` (the field just tested) is the object handed to the release callback */
+    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x584));
     *(undefined4 *)(param_1 + 0x584) = 0;
   }
   return;

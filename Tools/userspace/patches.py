@@ -346,6 +346,25 @@ PATCHES = {
         r'(  int iVar2;\n)', r'\1  int iVar3;\n', 1, 'FUN_000b5fb0 decl (0xb5fb0)'),
         r'    if \(\*\(int \*\)\(\(\(unsigned char \*\)0x00001448\) \+ iVar2\) != 0\) \{\n(      pcVar1 = [^\n]*\n      \*\(undefined4 \*\)\(\(\(unsigned char \*\)0x00001448\) \+ iVar2\) = 0;\n)      \(\*pcVar1\)\(param_1\);',
         r'    iVar3 = *(int *)(((unsigned char *)0x00001448) + iVar2);\n    if (iVar3 != 0) {\n\1      ((int (*)())pcVar1)(param_1,iVar3);', 1, 'FUN_000b5fb0 slot object (0xb5ff0)')),
+    # The same class (issue #79 follow-up scan: an indirect call's argument register set in an earlier basic block, or a register the callee slot's other callers all set):
+    # FUN_0008dda0 (0x8de58: the slot object `lwzx r4,r2,r3`, callback ctx+0x1224 = (ctx, obj)), FUN_00050300 (0x50d10: `stw r4,0x274c(r30)` leaves the new write
+    # pointer in r4 for the ctx+0x275c call), FUN_00088190 (0x88444: r4 = the flags word `lwz r4,0x1930(r29)` for ctx+0x1330), FUN_000e1484 (0xe14b4: r4 = field 0x584 for
+    # the release callback ctx+0x34c), FUN_0010defc (0x10df7c: r4 = `lwz r4,0x64(r2)`), FUN_00096600 (0x96a20: r9 / r10 = &DAT_001dbd14 / &DAT_001fa5e8, the 7th / 8th
+    # arguments of every sibling call through ctx+0x12e4).
+    'FUN_0008dda0': _scoped('gld', _conv_with('FUN_0008dda0 slot object (0x8de58)', [
+        ('  int iVar5;\n', '  int iVar5;\n  int iVar6;\n'),
+        ('        if (*(int *)(iVar5 * 4 + iVar3) != 0) {\n          *(undefined4 *)(iVar5 * 4 + iVar3) = 0;\n          (**(code **)(((unsigned char *)0x00001224) + param_1))(param_1);',
+         '        iVar6 = *(int *)(iVar5 * 4 + iVar3);\n        if (iVar6 != 0) {\n          *(undefined4 *)(iVar5 * 4 + iVar3) = 0;\n          ((int (*)())*(code **)(((unsigned char *)0x00001224) + param_1))(param_1,iVar6);')])),
+    'FUN_00050300': _scoped('gld', _conv_with('FUN_00050300 write pointer (0x50d10)', [
+        ('  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2 + 0x41;\n  (*pcVar1)(param_1);', '  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2 + 0x41;\n  (*pcVar1)(param_1,puVar2 + 0x41);')])),
+    'FUN_00088190': _scoped('gld', _conv_with('FUN_00088190 flags word (0x88444)', [
+        ('      (**(code **)(((unsigned char *)0x00001330) + param_1))(param_1);\n      *(uint *)(param_1 + 0x1930)', '      (**(code **)(((unsigned char *)0x00001330) + param_1))(param_1,*(undefined4 *)(param_1 + 0x1930));\n      *(uint *)(param_1 + 0x1930)')])),
+    'FUN_000e1484': _scoped('gld', _conv_with('FUN_000e1484 release object (0xe14b4)', [
+        ('    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354));\n    *(undefined4 *)(param_1 + 0x584) = 0;', '    (**(code **)(param_1 + 0x34c))(*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(param_1 + 0x584));\n    *(undefined4 *)(param_1 + 0x584) = 0;')])),
+    'FUN_0010defc': _scoped('gld', _conv_with('FUN_0010defc release object (0x10df7c)', [
+        ('    if (*(int *)(iVar1 + 100) != 0) {\n      (**(code **)(param_2 + 0x34c))(*(undefined4 *)(param_2 + 0x354));\n      iVar1 = *(int *)(param_1 + 4);', '    if (*(int *)(iVar1 + 100) != 0) {\n      (**(code **)(param_2 + 0x34c))(*(undefined4 *)(param_2 + 0x354),*(int *)(iVar1 + 100));\n      iVar1 = *(int *)(param_1 + 4);')])),
+    'FUN_00096600': _scoped('gld', _conv_with('FUN_00096600 7th/8th arguments (0x96a20)', [
+        ('(**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13);', '(**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13,&DAT_001dbd14,&DAT_001fa5e8);')])),
     '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
     '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 

@@ -575,6 +575,20 @@ hand (`bt` is unreliable past frame 1), then stock disassembly of the caller. `p
 `asm("_strncpy")` / `asm("__ZdlPv")` labels of `b41fa31` - `link_corpus.py` adds an `asm()` label to every extern itself from `gld.json`'s `label_overrides`, so the duplicate was a
 compile error on the Tiger gcc 4.0.1.
 
+**Follow-up scan for the same class (2026-09-29).** For every `bctrl` reached through a struct slot (`lwz rD,OFF(rB)` ... `bctrl`, not a C++ vtable) the callee's arity was estimated from all calls
+through the same offset (`reg_supply.py`'s slot statistics: median argument registers set purely in-block; needs 3 calling functions) and compared with the argument registers the stock has
+defined on every path to the call. 41 GLDriver sites were flagged (including `FUN_000b5fb0` itself: the control); the ones through C++ virtual calls (`lwz r2,0(r3); lwz r0,k(r2)`,
+`this` only) are not defects, 3 were already fixed by hand (FUN_0002c230's and FUN_000a3be0's `0x275c` calls), and these 6 were real and are fixed (each read against the stock disassembly;
+`patches.py` keeps them):
+* `FUN_0008dda0` (0x8de58): the same four-slot loop as `FUN_000b5fb0`, object from `lwzx r4,r2,r3`, callback `ctx+0x1224` = `(ctx, obj)`;
+* `FUN_00050300` (0x50d10): `stw r4,0x274c(r30)` leaves the new write pointer in r4 for the `ctx+0x275c` call (`(ctx, write pointer)`, as every sibling);
+* `FUN_00088190` (0x88444): r4 = the flags word `lwz r4,0x1930(r29)` (tested by `andis. r0,r4,0xc010`) for `ctx+0x1330`; the siblings pass the literal `0xc0100000`;
+* `FUN_000e1484` (0xe14b4) and `FUN_0010defc` (0x10df7c): the release callback `ctx+0x34c` = `(allocctx, obj)`, obj = `lwz r4,0x584(r3)` / `lwz r4,0x64(r2)` (the sibling calls in `FUN_0010defc` pass it);
+* `FUN_00096600` (0x96a20): `addi r9,r11,0x5700` / `addi r10,r10,0x3fd4` from the PIC base 0x96614 = `&DAT_001dbd14` / `&DAT_001fa5e8`, the 7th / 8th arguments of every sibling call through `ctx+0x12e4`
+  (they are also stored as stack words, which is why the same-block count stopped at r8; the stack words of these calls are not passed by the C, at this or any sibling site - not investigated).
+glprog's 79 flagged sites are C++ virtual calls and were not reviewed one by one. Verified live: the `r79all` bundle (all of the above on the `fixed52` tree) runs `cgl_probe` clean, 5 runs; none of these paths
+is proven exercised by that probe, so the check for these six is the disassembly comparison plus a clean build.
+
 ### Floating-point arguments and results (Stage B3 step 12)
 * Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
   style. The only signature this put an integer in the wrong register is `ecvt(double, int, int*, int*)` in GLDriver: its caller FUN_000cdc3c

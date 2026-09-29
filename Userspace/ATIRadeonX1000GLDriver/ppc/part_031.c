@@ -1278,7 +1278,9 @@ int FUN_0010defc(param_1, param_2)
       iVar1 = *(int *)(param_1 + 4);
     }
     if (*(int *)(iVar1 + 100) != 0) {
-      (**(code **)(param_2 + 0x34c))(*(undefined4 *)(param_2 + 0x354));
+      /* issue #79 class: r4 = `lwz r4,0x64(r2)` (compared, then the release argument); the sibling in the
+       * second block passes the same field */
+      (**(code **)(param_2 + 0x34c))(*(undefined4 *)(param_2 + 0x354),*(int *)(iVar1 + 100));
       iVar1 = *(int *)(param_1 + 4);
     }
     (**(code **)(param_2 + 0x34c))(*(undefined4 *)(param_2 + 0x354),iVar1);

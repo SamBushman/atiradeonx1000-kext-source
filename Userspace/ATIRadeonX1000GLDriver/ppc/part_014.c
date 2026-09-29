@@ -1732,7 +1732,10 @@ int FUN_00096600(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       goto LAB_000969f0;
     case 2:
 LAB_000969f0:
-      (**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13);
+      /* issue #79 class: the stock sets r9 / r10 (`addi r9,r11,0x5700`, `addi r10,r10,0x3fd4` from the PIC base 0x96614 =
+       * &DAT_001dbd14 / &DAT_001fa5e8) for the `bctrl` at 0x96a20 - the same 7th / 8th arguments every sibling call through
+       * this slot passes - and stores them again as stack words, which is why the same-block count stopped at r8 */
+      (**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13,&DAT_001dbd14,&DAT_001fa5e8);
       goto switchD_0009696c_default;
     case 3:
       iVar10 = *(int *)(param_1 + 0x4e8);
