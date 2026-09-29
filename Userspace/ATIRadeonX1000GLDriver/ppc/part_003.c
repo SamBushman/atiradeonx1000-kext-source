@@ -6110,22 +6110,24 @@ int FUN_00023870(param_1, param_2, param_3, param_4)
   return param_4 + 7;
 }
 
-/* FUN_00023a24 @ 0x23a24 (1860 bytes) */
-int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
+/* FUN_00023a24 @ 0x23a24 (1860 bytes) - hidden-argument defect (found auditing #70/#77): real
+ * callers (the FUN_000243f0-family wrappers tail-calling in via 0x23a20) pass a real 6th
+ * argument in r8, previously read here as an undeclared, uninitialised in_r8. */
+int FUN_00023a24(param_1, param_2, param_3, param_4, param_5, param_6)
   int param_1;
   int param_2;
   undefined4 param_3;
   int param_4;
   int param_5;
+  undefined4 param_6;
 {
   bool bVar1;
   int iVar2;
   undefined4 *puVar3;
   undefined4 *puVar4;
-  undefined4 in_r8;
   undefined4 uVar5;
   undefined4 uVar6;
-  
+
   bVar1 = param_2 == 5;
   uVar5 = *(undefined4 *)(param_1 + 4);
   uVar6 = *(undefined4 *)(param_1 + 0x1ca0);
@@ -6137,7 +6139,7 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
            (**(code **)(param_1 + 0x2758))
                      (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
                               iVar2 * *(int *)(param_1 + 0x243c) * 5 + iVar2 * 2 + 0x16,param_3,
-                      param_4,param_5,in_r8,iVar2 * 2);
+                      param_4,param_5,param_6,iVar2 * 2);
   iVar2 = *(int *)(param_1 + 0x2440);
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
   if (iVar2 != param_1 + 0x1be4) {
@@ -6271,17 +6273,20 @@ int FUN_00023a24(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_00024190 @ 0x24190 (344 bytes) */
-int FUN_00024190(param_1, param_2, param_3, param_4)
+/* FUN_00024190 @ 0x24190 (344 bytes) - hidden-argument defect (found auditing #70): real callers
+ * (FUN_000245f0/000246f0/0002 47f0, tail-calling in via 0x24190) pass a real 5th argument in
+ * r7, previously read here as an undeclared, uninitialised in_r7. in_r8 stays as-is: no real
+ * caller supplies it (stock genuinely forwards whatever garbage is there). */
+int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
   undefined4 *param_3;
   uint param_4;
+  undefined4 param_5;
 {
   int iVar1;
   undefined4 *puVar2;
   undefined4 *puVar3;
-  undefined4 in_r7;
   undefined4 in_r8;
   uint uVar4;
   undefined4 uVar5;
@@ -6291,7 +6296,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4)
            (**(code **)(param_1 + 0x2758))
                      (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
                               *(int *)(param_1 + 0x243c) * param_4 * 5 + param_4 * 2 + 0x16,param_3,
-                      param_4,in_r7,in_r8,*(code **)(param_1 + 0x2758));
+                      param_4,param_5,in_r8,*(code **)(param_1 + 0x2758));
   iVar1 = *(int *)(param_1 + 0x2440);
   *(undefined4 **)(0x00002748 + param_1 + 4) = puVar2;
   if (iVar1 != param_1 + 0x1be4) {
