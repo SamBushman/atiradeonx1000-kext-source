@@ -1996,6 +1996,10 @@ int FUN_00096d80(param_1)
   int iVarS3;
   int iVarS4;
   int iVarS5;
+  int iVarS6;
+  int iVarS7;
+  int iVarS8;
+  int iVarS9;
   
   iVar5 = 1;
   if (param_1 != 0) {

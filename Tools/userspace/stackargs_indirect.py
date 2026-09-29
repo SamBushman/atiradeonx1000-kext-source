@@ -338,34 +338,73 @@ for g in sorted(sites):
             d += {'(': 1, ')': -1}.get(body[j], 0); j += 1
         calls.append((m.start(), i, j - 1, split_args(body[i:j - 1])))
     ss = sites[g]
+    if calls and all(len(c[3]) >= 8 + NWORDS for c in calls): continue        # nothing left to add here
     fdefs = c_defs_of(body); CTX[0] = g; CTX[1] = body
-    def compatible(a, args):
+    def compatible(a, args, strict=True):
         for reg in (6, 9, 10):
             ab = pic_abs(g, a, reg)
             if ab is not None and len(args) >= reg - 2 and re.search(r'_[0-9a-f]{8}\b', args[reg - 3]):
                 if int(re.search(r'_([0-9a-f]{8})\b', args[reg - 3]).group(1), 16) != ab: return False
-        return all(arg_consistent(key(g, a, 2 + p_), args[p_ - 1], fdefs) for p_ in range(2, min(len(args), 8) + 1))
+        for p_ in range(2, min(len(args), 8) + 1):
+            k_ = key(g, a, 2 + p_)
+            if not arg_consistent(k_, args[p_ - 1], fdefs): return False
+            # a stack local: the stock's `addi rN,r1,off` / `lwz rN,off(r1)` must be the local Ghidra names by that offset (F - off below the entry SP)
+            if strict and k_[0] in ('addi', 'lwz') and k_[2][0] == 'def' and ins[k_[2][1]][0] == 'stwu' and isinstance(k_[1], int):
+                nm_ = stack_local(g, k_[1] if k_[1] < 0x8000 else k_[1] - 0x10000, body)
+                if nm_ is not None and nm_.lstrip('&') not in c_resolve_text(args[p_ - 1], fdefs): return False
+        return True
     # pair by order when the counts agree and that is consistent; otherwise each C call takes the stock call it is compatible with (Ghidra may lay the code
     # out in another order, or repeat a block: several C calls may then stand for one stock call)
     comp = [[compatible(a, c[3]) for c in calls] for a, st in ss]
+    # C calls compatible with no stock call (code the stock does not have there) and stock calls compatible with no C call are set aside
+    ok_c = [j for j in range(len(calls)) if any(comp[i][j] for i in range(len(ss)))]
+    ok_s = [i for i in range(len(ss)) if any(comp[i][j] for j in range(len(calls)))]
+    if (len(ok_c) != len(calls) or len(ok_s) != len(ss)) and len(ok_c) == len(ok_s) and ok_c:
+        report.append('%x %s: %d C call(s) and %d stock call(s) set aside as incompatible with every counterpart' % (g, name, len(calls) - len(ok_c), len(ss) - len(ok_s)))
+        calls = [calls[j] for j in ok_c]; ss = [ss[i] for i in ok_s]
+        comp = [[compatible(a, c[3]) for c in calls] for a, st in ss]
     order = list(range(len(ss)))
     pairs = None
-    if len(calls) == len(ss) and all(comp[i][i] for i in order): pairs = [(i, i) for i in order]
-    elif len(calls) == len(ss):
-        # a perfect matching of stock calls to compatible C calls (depth first; the greedy choice can take the wrong one of two look-alikes)
+    # anchors: a stock call with exactly one compatible C call takes it; no other stock call can (the C's block order differs from the address order, so no
+    # positional narrowing is done)
+    def narrow(comp_):
+        comp2 = [row[:] for row in comp_]; changed = True
+        while changed:
+            changed = False
+            anchors = {i: [j for j in range(len(calls)) if comp2[i][j]] for i in range(len(ss))}
+            fixed = {i: v[0] for i, v in anchors.items() if len(v) == 1}
+            # a C call taken by an anchor is not available to the others
+            for i, j in fixed.items():
+                for k in range(len(ss)):
+                    if k != i and comp2[k][j]: comp2[k][j] = False; changed = True
+        return comp2
+    comp = narrow(comp)
+    def sig_of(i):
+        a_, st_ = ss[i]
+        # the words as symbolic values, and which of the call's own register arguments (r3..r10) hold the same value: a swap of two look-alike calls changes neither
+        wk = [key(g, st_[0x38 + 4 * k][1], st_[0x38 + 4 * k][0]) for k in range(NWORDS)]
+        return tuple((str(w), tuple(r_ for r_ in range(3, 11) if key(g, a_, r_) == w)) for w in wk)
+    if pairs is None and len(calls) >= len(ss):
+        # every stock call takes a distinct compatible C call (the C may have extra calls); when several matchings exist they must give every C call the same
+        # words (look-alike calls), otherwise the function is left alone unless a human checked the pairing (pairing_ok)
         sols = []
-        def dfs(i, used, cur):
-            if len(sols) > 400: return
+        def dfs2(i, used, cur):
+            if len(sols) > 3000: return
             if i == len(ss): sols.append(list(cur)); return
-            for j in order:
+            for j in range(len(calls)):
                 if comp[i][j] and j not in used:
-                    used.add(j); cur.append((i, j)); dfs(i + 1, used, cur); cur.pop(); used.discard(j)
-        dfs(0, set(), [])
-        pairs = min(sols, key=lambda m: sum(abs(i - j) for i, j in m)) if sols else None      # look-alike calls: the matching closest to address order
-        if len(sols) > 1:
-            if '%x' % g in OVERRIDES.get('pairing_ok', []): report.append('%x %s: %d compatible matchings, the one closest to address order taken (checked by hand)' % (g, name, len(sols)))
-            else: report.append('%x %s: %d compatible matchings (look-alike calls) - skipped, list the function in stackargs_overrides.json pairing_ok after checking it by hand' % (g, name, len(sols))); continue
-        if pairs is not None: report.append('%x %s: paired out of order (%s)' % (g, name, ','.join(str(j) for i, j in pairs)))
+                    used.add(j); cur.append((i, j)); dfs2(i + 1, used, cur); cur.pop(); used.discard(j)
+        dfs2(0, set(), [])
+        if not sols:
+            # the stack-local naming evidence may be wrong (a differently named alias): retry without it
+            comp = [[compatible(a, c[3], False) for c in calls] for a, st in ss]
+            sols.clear(); dfs2(0, set(), [])
+        if sols:
+            maps = {tuple(sorted((j, sig_of(i)) for i, j in m)) for m in sols}
+            if len(maps) == 1 or '%x' % g in OVERRIDES.get('pairing_ok', []):
+                pairs = min(sols, key=lambda m: sum(abs(i - j) for i, j in m))
+                extra = sorted(set(range(len(calls))) - {j for i, j in pairs})
+                report.append('%x %s: %d matching(s), %s%s' % (g, name, len(sols), 'all give the same words' if len(maps) == 1 else 'closest to address order (checked by hand)', (', C call(s) %s have no stock counterpart (left alone)' % ','.join(map(str, extra))) if extra else ''))
     if pairs is None:
         # (a many-to-one pairing was tried and rejected: the C calls a stock site does not have are not copies of it - the other stock calls have their stores before a join)
         report.append('%x %s: %d stock sites vs %d C calls, no consistent one-to-one pairing - skipped' % (g, name, len(ss), len(calls))); continue
