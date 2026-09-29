@@ -8,5 +8,9 @@
   "3c@937fc": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))",
   "3c@9383c": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))",
   "3c@9387c": "(*(int *)(param_2 + (uVar9 - 1) * 4) == 0 ? *(int *)(param_1 + 4) : (*(int *)(param_2 + (uVar9 - 1) * 4) == 1 ? *(int *)(param_1 + 100) : 0))"
- }
+ },
+ "pairing_ok": [
+  "93510",
+  "93a40"
+ ]
 }

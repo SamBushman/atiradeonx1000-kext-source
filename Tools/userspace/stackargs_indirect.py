@@ -103,8 +103,14 @@ def same_multi(g, a, r1, r2):
     return not rest
 def has_call_between(g, d, a):
     return any(ins[x][0] in ('bl', 'bctrl') for x in range(d, a, 4) if x in ins) if d < a else False
+CTX = [None, None]          # (function entry, C body of the function being edited): lets cexpr name a load from the function's own stack frame
 def cexpr(k):
-    """a C expression for a symbolic value over the parameters, or None"""
+    """a C expression for a symbolic value over the parameters (or the function's stack locals), or None"""
+    if k[0] in ('lwz',) and k[2][0] == 'def' and ins[k[2][1]][0] == 'stwu' and CTX[0] is not None:
+        off = k[1] if k[1] < 0x8000 else k[1] - 0x10000
+        nm = stack_local(CTX[0], off, CTX[1])
+        if nm is None: return None
+        return '*(int *)%s' % nm if not nm.startswith('&') else nm[1:]
     if k[0] == 'entry': return 'param_%d' % (k[1] - 2) if 3 <= k[1] <= 10 else None
     if k[0] == 'li':
         try: return str(int(k[1], 0))
@@ -152,18 +158,41 @@ for _a, (_op, _arg) in ins.items():
     if _op.startswith('b') and not _op.startswith(('bl', 'blr', 'bctr')) or _op in ('b',):
         _m = re.match(r'(?:cr\d,)?0x([0-9a-f]+)', _arg)
         if _m: BTARGETS.add(int(_m.group(1), 16))
+_stk = {}
+def stack_reaching(g):
+    """{addr: {word offset: frozenset(store addresses)}} at the input of each instruction: which `stw rS,0x38..(r1)` stores reach it (a call kills them: the callee owns
+    the outgoing area, and a branch merges the paths)"""
+    if g in _stk: return _stk[g]
+    lr, lt, la, info, succ = il.cls(g)
+    addrs = sorted(info); IN = {a: {} for a in addrs}
+    changed = True
+    while changed:
+        changed = False
+        for a in addrs:
+            op, arg = ins[a]; out = dict(IN[a])
+            if op in ('bl', 'bctrl', 'blrl'): out = {}
+            else:
+                m = re.match(r'(r\d+),(0x[0-9a-f]+)\(r1\)$', arg.replace(' ', ''))
+                if op == 'stw' and m and 0x38 <= int(m.group(2), 16) < 0x38 + 4 * NWORDS: out[int(m.group(2), 16)] = frozenset([a])
+            for s_ in succ[a]:
+                cur = IN[s_]; new = dict(cur); ch = False
+                for o, v in out.items():
+                    nv = cur.get(o, frozenset()) | v
+                    if nv != cur.get(o): new[o] = nv; ch = True
+                if ch: IN[s_] = new; changed = True
+    _stk[g] = IN
+    return IN
 def stack_stores(a):
-    """{offset: (source register, store address)} of the stores to 0x38..0x44(r1) in the straight-line code before the call; the scan stops at a branch target
-    (a store before a join belongs to only one incoming path: the other paths may store another register), so a call whose stores precede a join has fewer than
-    four words and is left alone"""
-    st = {}; b = a - 4; n = 0
-    while b in ins and n < 120:
-        o, ar = ins[b]
-        if o.startswith('b') or o == '.long': break
-        m = re.match(r'(r\d+),(0x[0-9a-f]+)\(r1\)$', ar.replace(' ', ''))
-        if o == 'stw' and m and 0x38 <= int(m.group(2), 16) < 0x38 + 4 * NWORDS and int(m.group(2), 16) not in st: st[int(m.group(2), 16)] = (int(m.group(1)[1:]), b)
-        if b in BTARGETS: break
-        b -= 4; n += 1
+    """{offset: (source register, store address)}: every word reached by exactly one store, or by several stores that store registers holding the same symbolic
+    value (then the first); a word reached by different values, or by no store, is left out (the site is then reported and left alone)"""
+    g = owner[a]; st = {}
+    for off, stores in stack_reaching(g).get(a, {}).items():
+        regs = []
+        for sa in stores:
+            m = re.match(r'(r\d+),', ins[sa][1]); regs.append((int(m.group(1)[1:]), sa))
+        ks = {key(g, sa, r) for r, sa in regs}
+        if len(ks) == 1 and next(iter(ks))[0] not in ('multi', 'deep'): st[off] = regs[0]
+        elif len(regs) == 1: st[off] = regs[0]
     return st
 sites = collections.defaultdict(list); JOINS = []
 for a, (op, arg) in sorted(ins.items()):
@@ -309,28 +338,38 @@ for g in sorted(sites):
             d += {'(': 1, ')': -1}.get(body[j], 0); j += 1
         calls.append((m.start(), i, j - 1, split_args(body[i:j - 1])))
     ss = sites[g]
-    if len(calls) != len(ss): report.append('%x %s: %d stock sites vs %d C calls - skipped' % (g, name, len(ss), len(calls))); continue
-    fdefs = c_defs_of(body)
+    fdefs = c_defs_of(body); CTX[0] = g; CTX[1] = body
     def compatible(a, args):
         for reg in (6, 9, 10):
             ab = pic_abs(g, a, reg)
             if ab is not None and len(args) >= reg - 2 and re.search(r'_[0-9a-f]{8}\b', args[reg - 3]):
                 if int(re.search(r'_([0-9a-f]{8})\b', args[reg - 3]).group(1), 16) != ab: return False
         return all(arg_consistent(key(g, a, 2 + p_), args[p_ - 1], fdefs) for p_ in range(2, min(len(args), 8) + 1))
-    # pair by order when that is consistent; otherwise by the unique compatible C call (Ghidra may lay the code out in a different order)
+    # pair by order when the counts agree and that is consistent; otherwise each C call takes the stock call it is compatible with (Ghidra may lay the code
+    # out in another order, or repeat a block: several C calls may then stand for one stock call)
     comp = [[compatible(a, c[3]) for c in calls] for a, st in ss]
     order = list(range(len(ss)))
-    if all(comp[i][i] for i in order): pair = order
-    else:
-        pair = []; used = set()
-        for i in order:
-            cs_ = [j for j in order if comp[i][j] and j not in used]
-            if not cs_: pair = None; break
-            pair.append(cs_[0]); used.add(cs_[0])
-        if pair is not None and len(used) != len(ss): pair = None
-        if pair is None: report.append('%x %s: no consistent pairing of stock calls and C calls - skipped' % (g, name)); continue
-        report.append('%x %s: paired out of order (%s)' % (g, name, ','.join(map(str, pair))))
-    both = sorted(zip(ss, [calls[j] for j in pair]), key=lambda x: x[1][0])      # process in the C's textual order
+    pairs = None
+    if len(calls) == len(ss) and all(comp[i][i] for i in order): pairs = [(i, i) for i in order]
+    elif len(calls) == len(ss):
+        # a perfect matching of stock calls to compatible C calls (depth first; the greedy choice can take the wrong one of two look-alikes)
+        sols = []
+        def dfs(i, used, cur):
+            if len(sols) > 400: return
+            if i == len(ss): sols.append(list(cur)); return
+            for j in order:
+                if comp[i][j] and j not in used:
+                    used.add(j); cur.append((i, j)); dfs(i + 1, used, cur); cur.pop(); used.discard(j)
+        dfs(0, set(), [])
+        pairs = min(sols, key=lambda m: sum(abs(i - j) for i, j in m)) if sols else None      # look-alike calls: the matching closest to address order
+        if len(sols) > 1:
+            if '%x' % g in OVERRIDES.get('pairing_ok', []): report.append('%x %s: %d compatible matchings, the one closest to address order taken (checked by hand)' % (g, name, len(sols)))
+            else: report.append('%x %s: %d compatible matchings (look-alike calls) - skipped, list the function in stackargs_overrides.json pairing_ok after checking it by hand' % (g, name, len(sols))); continue
+        if pairs is not None: report.append('%x %s: paired out of order (%s)' % (g, name, ','.join(str(j) for i, j in pairs)))
+    if pairs is None:
+        # (a many-to-one pairing was tried and rejected: the C calls a stock site does not have are not copies of it - the other stock calls have their stores before a join)
+        report.append('%x %s: %d stock sites vs %d C calls, no consistent one-to-one pairing - skipped' % (g, name, len(ss), len(calls))); continue
+    both = sorted(((ss[i], calls[j]) for i, j in pairs), key=lambda x: x[1][0])      # process in the C's textual order
     ss = [x[0] for x in both]; calls = [x[1] for x in both]
     newbody = []; pos = 0; decls = []; last_group = {}
     nvar = max([int(x) for x in re.findall(r'\biVarS(\d+)\b', body)] + [0])      # earlier runs (other slots) already declared some
@@ -341,7 +380,7 @@ for g in sorted(sites):
         new = []; ok = True; pre = []
         for k in range(NWORDS):
             off = 0x38 + 4 * k; sr, sa = st[off]
-            kk = key(g, a, sr)
+            kk = key(g, sa, sr)          # the value at the store, not at the call: the register may be redefined in between
             ov = OVERRIDES.get('%x' % g, {}).get('%x@%x' % (off, a))
             if ov: new.append(ov); continue
             hit = [p_ for p_, ak in argkeys.items() if ak == kk and ak[0] not in ('deep',)]
@@ -359,7 +398,7 @@ for g in sorted(sites):
             elif kk[0] not in ('multi', 'deep', 'def'):
                 e = cexpr(kk)
             elif kk[0] == 'multi':
-                pv = phi_var(g, sa if False else a, sr, body)
+                pv = phi_var(g, sa, sr, body)
                 if pv: new.append(pv); continue
             if e is None: ok = False; report.append('%x %s call %x word %#x: no C expression for %s' % (g, name, a, off, kk)); break
             new.append(('EXPR', kk, e))
@@ -372,7 +411,7 @@ for g in sorted(sites):
             if isinstance(w, str): outs.append(w); continue
             _, kk, e = w
             off = 0x38 + 4 * k; sr, sa = st[off]
-            ident = (sr, tuple(sorted(str(x) for x in reaching(g).get(a, {}).get(sr, frozenset()))))
+            ident = (sr, tuple(sorted(str(x) for x in reaching(g).get(sa, {}).get(sr, frozenset()))))
             prev = last_group.get(ident)
             if prev and not re.search(r'[{}]|\b(?:if|else|goto|switch|case|while|for|do|return)\b|LAB_', body[prev[1]:cs]):
                 outs.append(prev[0]); continue

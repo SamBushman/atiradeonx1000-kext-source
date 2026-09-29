@@ -5235,6 +5235,10 @@ int FUN_00092570(param_1)
   int iVarS1;
   int iVarS2;
   int iVarS3;
+  int iVarS4;
+  int iVarS5;
+  int iVarS6;
+  int iVarS7;
   
   uVar1 = 0;
   iVar3 = *(int *)(param_1 + 0x3d4);
@@ -5281,8 +5285,12 @@ int FUN_00092570(param_1)
           local_b8 = local_68;
           local_b4 = local_64;
           local_ac = local_5c;
+          iVarS4 = *(int *)((int)param_1 + 1216);
+          iVarS5 = &local_c8;
+          iVarS6 = local_7c;
+          iVarS7 = &local_b8;
           (**(code **)(((unsigned char *)0x000012f4) + iVar3))
-                    (param_1,uVar4,uVar1,&DAT_001dbd84,uVar5,local_a4,&local_d8,&DAT_001fa5e8);
+                    (param_1,uVar4,uVar1,&DAT_001dbd84,uVar5,local_a4,&local_d8,&DAT_001fa5e8,uVar5,iVarS4,iVarS5,&DAT_001fa5e8,uVar5,iVarS6,iVarS7,&DAT_001fa5e8);
           ((int (*)())FUN_000911a0)(param_1,auStack_a8);
           ((int (*)())FUN_000911a0)(param_1,auStack_80);
           return 0;
