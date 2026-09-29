@@ -5163,825 +5163,842 @@ extern unsigned char DAT_001faff8;
 extern unsigned char DAT_001faffc;
 extern unsigned char DAT_001fb000;
 extern unsigned char DAT_001fb004;
-extern unsigned char DAT_001fb00c;
-extern unsigned char DAT_001fb010;
-extern unsigned char DAT_001fb014;
-extern unsigned char DAT_001fb018;
-extern unsigned char DAT_001fb020;
-extern unsigned char DAT_001fb024;
-extern unsigned char DAT_001fb028;
-extern unsigned char DAT_001fb02c;
-extern unsigned char DAT_001fb034;
-extern unsigned char DAT_001fb038;
-extern unsigned char DAT_001fb03c;
-extern unsigned char DAT_001fb040;
-extern unsigned char DAT_001fb048;
-extern unsigned char DAT_001fb04c;
-extern unsigned char DAT_001fb050;
-extern unsigned char DAT_001fb054;
-extern unsigned char DAT_001fb05c;
-extern unsigned char DAT_001fb060;
-extern unsigned char DAT_001fb064;
-extern unsigned char DAT_001fb068;
-extern unsigned char DAT_001fb070;
-extern unsigned char DAT_001fb074;
-extern unsigned char DAT_001fb078;
-extern unsigned char DAT_001fb07c;
-extern unsigned char DAT_001fb084;
-extern unsigned char DAT_001fb088;
-extern unsigned char DAT_001fb08c;
-extern unsigned char DAT_001fb090;
-extern unsigned char DAT_001fb098;
-extern unsigned char DAT_001fb09c;
-extern unsigned char DAT_001fb0a0;
-extern unsigned char DAT_001fb0a4;
-extern unsigned char DAT_001fb0ac;
-extern unsigned char DAT_001fb0b0;
-extern unsigned char DAT_001fb0b4;
-extern unsigned char DAT_001fb0b8;
-extern unsigned char DAT_001fb0c0;
-extern unsigned char DAT_001fb0c4;
-extern unsigned char DAT_001fb0c8;
-extern unsigned char DAT_001fb0cc;
-extern unsigned char DAT_001fb0d4;
-extern unsigned char DAT_001fb0d8;
-extern unsigned char DAT_001fb0dc;
-extern unsigned char DAT_001fb0e0;
-extern unsigned char DAT_001fb0e8;
-extern unsigned char DAT_001fb0ec;
-extern unsigned char DAT_001fb0f0;
-extern unsigned char DAT_001fb0f4;
-extern unsigned char DAT_001fb0fc;
-extern unsigned char DAT_001fb100;
-extern unsigned char DAT_001fb104;
-extern unsigned char DAT_001fb108;
-extern unsigned char DAT_001fb110;
-extern unsigned char DAT_001fb114;
-extern unsigned char DAT_001fb118;
-extern unsigned char DAT_001fb11c;
-extern unsigned char DAT_001fb124;
-extern unsigned char DAT_001fb128;
-extern unsigned char DAT_001fb12c;
-extern unsigned char DAT_001fb130;
-extern unsigned char DAT_001fb138;
-extern unsigned char DAT_001fb13c;
-extern unsigned char DAT_001fb140;
-extern unsigned char DAT_001fb144;
-extern unsigned char DAT_001fb14c;
-extern unsigned char DAT_001fb150;
-extern unsigned char DAT_001fb154;
-extern unsigned char DAT_001fb158;
-extern unsigned char DAT_001fb160;
-extern unsigned char DAT_001fb164;
-extern unsigned char DAT_001fb168;
-extern unsigned char DAT_001fb16c;
-extern unsigned char DAT_001fb174;
-extern unsigned char DAT_001fb178;
-extern unsigned char DAT_001fb17c;
-extern unsigned char DAT_001fb180;
-extern unsigned char DAT_001fb188;
-extern unsigned char DAT_001fb18c;
-extern unsigned char DAT_001fb190;
-extern unsigned char DAT_001fb194;
-extern unsigned char DAT_001fb19c;
-extern unsigned char DAT_001fb1a0;
-extern unsigned char DAT_001fb1a4;
-extern unsigned char DAT_001fb1a8;
-extern unsigned char DAT_001fb1b0;
-extern unsigned char DAT_001fb1b4;
-extern unsigned char DAT_001fb1b8;
-extern unsigned char DAT_001fb1bc;
-extern unsigned char DAT_001fb1c4;
-extern unsigned char DAT_001fb1c8;
-extern unsigned char DAT_001fb1cc;
-extern unsigned char DAT_001fb1d0;
-extern unsigned char DAT_001fb1d8;
-extern unsigned char DAT_001fb1dc;
-extern unsigned char DAT_001fb1e0;
-extern unsigned char DAT_001fb1e4;
-extern unsigned char DAT_001fb1ec;
-extern unsigned char DAT_001fb1f0;
-extern unsigned char DAT_001fb1f4;
-extern unsigned char DAT_001fb1f8;
-extern unsigned char DAT_001fb200;
-extern unsigned char DAT_001fb204;
-extern unsigned char DAT_001fb208;
-extern unsigned char DAT_001fb20c;
-extern unsigned char DAT_001fb214;
-extern unsigned char DAT_001fb218;
-extern unsigned char DAT_001fb21c;
-extern unsigned char DAT_001fb220;
-extern unsigned char DAT_001fb228;
-extern unsigned char DAT_001fb22c;
-extern unsigned char DAT_001fb230;
-extern unsigned char DAT_001fb234;
-extern unsigned char DAT_001fb23c;
-extern unsigned char DAT_001fb240;
-extern unsigned char DAT_001fb244;
-extern unsigned char DAT_001fb248;
-extern unsigned char DAT_001fb250;
-extern unsigned char DAT_001fb254;
-extern unsigned char DAT_001fb258;
-extern unsigned char DAT_001fb25c;
-extern unsigned char DAT_001fb264;
-extern unsigned char DAT_001fb268;
-extern unsigned char DAT_001fb26c;
-extern unsigned char DAT_001fb270;
-extern unsigned char DAT_001fb278;
-extern unsigned char DAT_001fb27c;
-extern unsigned char DAT_001fb280;
-extern unsigned char DAT_001fb284;
-extern unsigned char DAT_001fb28c;
-extern unsigned char DAT_001fb290;
-extern unsigned char DAT_001fb294;
-extern unsigned char DAT_001fb298;
-extern unsigned char DAT_001fb2a0;
-extern unsigned char DAT_001fb2a4;
-extern unsigned char DAT_001fb2a8;
-extern unsigned char DAT_001fb2ac;
-extern unsigned char DAT_001fb2b4;
-extern unsigned char DAT_001fb2b8;
-extern unsigned char DAT_001fb2bc;
-extern unsigned char DAT_001fb2c0;
-extern unsigned char DAT_001fb2c8;
-extern unsigned char DAT_001fb2cc;
-extern unsigned char DAT_001fb2d0;
-extern unsigned char DAT_001fb2d4;
-extern unsigned char DAT_001fb2dc;
-extern unsigned char DAT_001fb2e0;
-extern unsigned char DAT_001fb2e4;
-extern unsigned char DAT_001fb2e8;
-extern unsigned char DAT_001fb2f0;
-extern unsigned char DAT_001fb2f4;
-extern unsigned char DAT_001fb2f8;
-extern unsigned char DAT_001fb2fc;
-extern unsigned char DAT_001fb304;
-extern unsigned char DAT_001fb308;
-extern unsigned char DAT_001fb30c;
-extern unsigned char DAT_001fb310;
-extern unsigned char DAT_001fb318;
-extern unsigned char DAT_001fb31c;
-extern unsigned char DAT_001fb320;
-extern unsigned char DAT_001fb324;
-extern unsigned char DAT_001fb32c;
-extern unsigned char DAT_001fb330;
-extern unsigned char DAT_001fb334;
-extern unsigned char DAT_001fb338;
-extern unsigned char DAT_001fb340;
-extern unsigned char DAT_001fb344;
-extern unsigned char DAT_001fb348;
-extern unsigned char DAT_001fb34c;
-extern unsigned char DAT_001fb354;
-extern unsigned char DAT_001fb358;
-extern unsigned char DAT_001fb35c;
-extern unsigned char DAT_001fb360;
-extern unsigned char DAT_001fb368;
-extern unsigned char DAT_001fb36c;
-extern unsigned char DAT_001fb370;
-extern unsigned char DAT_001fb374;
-extern unsigned char DAT_001fb37c;
-extern unsigned char DAT_001fb380;
-extern unsigned char DAT_001fb384;
-extern unsigned char DAT_001fb388;
-extern unsigned char DAT_001fb390;
-extern unsigned char DAT_001fb394;
-extern unsigned char DAT_001fb398;
-extern unsigned char DAT_001fb39c;
-extern unsigned char DAT_001fb3a4;
-extern unsigned char DAT_001fb3a8;
-extern unsigned char DAT_001fb3ac;
-extern unsigned char DAT_001fb3b0;
-extern unsigned char DAT_001fb3b8;
-extern unsigned char DAT_001fb3bc;
-extern unsigned char DAT_001fb3c0;
-extern unsigned char DAT_001fb3c4;
-extern unsigned char DAT_001fb3cc;
-extern unsigned char DAT_001fb3d0;
-extern unsigned char DAT_001fb3d4;
-extern unsigned char DAT_001fb3d8;
-extern unsigned char DAT_001fb3e0;
-extern unsigned char DAT_001fb3e4;
-extern unsigned char DAT_001fb3e8;
-extern unsigned char DAT_001fb3ec;
-extern unsigned char DAT_001fb3f4;
-extern unsigned char DAT_001fb3f8;
-extern unsigned char DAT_001fb3fc;
-extern unsigned char DAT_001fb400;
-extern unsigned char DAT_001fb408;
-extern unsigned char DAT_001fb40c;
-extern unsigned char DAT_001fb410;
-extern unsigned char DAT_001fb414;
-extern unsigned char DAT_001fb41c;
-extern unsigned char DAT_001fb420;
-extern unsigned char DAT_001fb424;
-extern unsigned char DAT_001fb428;
-extern unsigned char DAT_001fb430;
-extern unsigned char DAT_001fb434;
-extern unsigned char DAT_001fb438;
-extern unsigned char DAT_001fb43c;
-extern unsigned char DAT_001fb444;
-extern unsigned char DAT_001fb448;
-extern unsigned char DAT_001fb44c;
-extern unsigned char DAT_001fb450;
-extern unsigned char DAT_001fb458;
-extern unsigned char DAT_001fb45c;
-extern unsigned char DAT_001fb460;
-extern unsigned char DAT_001fb464;
-extern unsigned char DAT_001fb46c;
-extern unsigned char DAT_001fb470;
-extern unsigned char DAT_001fb474;
-extern unsigned char DAT_001fb478;
-extern unsigned char DAT_001fb480;
-extern unsigned char DAT_001fb484;
-extern unsigned char DAT_001fb488;
-extern unsigned char DAT_001fb48c;
-extern unsigned char DAT_001fb494;
-extern unsigned char DAT_001fb498;
-extern unsigned char DAT_001fb49c;
-extern unsigned char DAT_001fb4a0;
-extern unsigned char DAT_001fb4a8;
-extern unsigned char DAT_001fb4ac;
-extern unsigned char DAT_001fb4b0;
-extern unsigned char DAT_001fb4b4;
-extern unsigned char DAT_001fb4bc;
-extern unsigned char DAT_001fb4c0;
-extern unsigned char DAT_001fb4c4;
-extern unsigned char DAT_001fb4c8;
-extern unsigned char DAT_001fb4d0;
-extern unsigned char DAT_001fb4d4;
-extern unsigned char DAT_001fb4d8;
-extern unsigned char DAT_001fb4dc;
-extern unsigned char DAT_001fb4e4;
-extern unsigned char DAT_001fb4e8;
-extern unsigned char DAT_001fb4ec;
-extern unsigned char DAT_001fb4f0;
-extern unsigned char DAT_001fb4f8;
-extern unsigned char DAT_001fb4fc;
-extern unsigned char DAT_001fb500;
-extern unsigned char DAT_001fb504;
-extern unsigned char DAT_001fb50c;
-extern unsigned char DAT_001fb510;
-extern unsigned char DAT_001fb514;
-extern unsigned char DAT_001fb518;
-extern unsigned char DAT_001fb520;
-extern unsigned char DAT_001fb524;
-extern unsigned char DAT_001fb528;
-extern unsigned char DAT_001fb52c;
-extern unsigned char DAT_001fb534;
-extern unsigned char DAT_001fb538;
-extern unsigned char DAT_001fb53c;
-extern unsigned char DAT_001fb540;
-extern unsigned char DAT_001fb548;
-extern unsigned char DAT_001fb54c;
-extern unsigned char DAT_001fb550;
-extern unsigned char DAT_001fb554;
-extern unsigned char DAT_001fb55c;
-extern unsigned char DAT_001fb560;
-extern unsigned char DAT_001fb564;
-extern unsigned char DAT_001fb568;
-extern unsigned char DAT_001fb570;
-extern unsigned char DAT_001fb574;
-extern unsigned char DAT_001fb578;
-extern unsigned char DAT_001fb57c;
-extern unsigned char DAT_001fb584;
-extern unsigned char DAT_001fb588;
-extern unsigned char DAT_001fb58c;
-extern unsigned char DAT_001fb590;
-extern unsigned char DAT_001fb598;
-extern unsigned char DAT_001fb59c;
-extern unsigned char DAT_001fb5a0;
-extern unsigned char DAT_001fb5a4;
-extern unsigned char DAT_001fb5ac;
-extern unsigned char DAT_001fb5b0;
-extern unsigned char DAT_001fb5b4;
-extern unsigned char DAT_001fb5b8;
-extern unsigned char DAT_001fb5c0;
-extern unsigned char DAT_001fb5c4;
-extern unsigned char DAT_001fb5c8;
-extern unsigned char DAT_001fb5cc;
-extern unsigned char DAT_001fb5d4;
-extern unsigned char DAT_001fb5d8;
-extern unsigned char DAT_001fb5dc;
-extern unsigned char DAT_001fb5e0;
-extern unsigned char DAT_001fb5e8;
-extern unsigned char DAT_001fb5ec;
-extern unsigned char DAT_001fb5f0;
-extern unsigned char DAT_001fb5f4;
-extern unsigned char DAT_001fb5fc;
-extern unsigned char DAT_001fb600;
-extern unsigned char DAT_001fb604;
-extern unsigned char DAT_001fb608;
-extern unsigned char DAT_001fb610;
-extern unsigned char DAT_001fb614;
-extern unsigned char DAT_001fb618;
-extern unsigned char DAT_001fb61c;
-extern unsigned char DAT_001fb624;
-extern unsigned char DAT_001fb628;
-extern unsigned char DAT_001fb62c;
-extern unsigned char DAT_001fb630;
-extern unsigned char DAT_001fb638;
-extern unsigned char DAT_001fb63c;
-extern unsigned char DAT_001fb640;
-extern unsigned char DAT_001fb644;
-extern unsigned char DAT_001fb64c;
-extern unsigned char DAT_001fb650;
-extern unsigned char DAT_001fb654;
-extern unsigned char DAT_001fb658;
-extern unsigned char DAT_001fb660;
-extern unsigned char DAT_001fb664;
-extern unsigned char DAT_001fb668;
-extern unsigned char DAT_001fb66c;
-extern unsigned char DAT_001fb674;
-extern unsigned char DAT_001fb678;
-extern unsigned char DAT_001fb67c;
-extern unsigned char DAT_001fb680;
-extern unsigned char DAT_001fb688;
-extern unsigned char DAT_001fb68c;
-extern unsigned char DAT_001fb690;
-extern unsigned char DAT_001fb694;
-extern unsigned char DAT_001fb69c;
-extern unsigned char DAT_001fb6a0;
-extern unsigned char DAT_001fb6a4;
-extern unsigned char DAT_001fb6a8;
-extern unsigned char DAT_001fb6b0;
-extern unsigned char DAT_001fb6b4;
-extern unsigned char DAT_001fb6b8;
-extern unsigned char DAT_001fb6bc;
-extern unsigned char DAT_001fb6c4;
-extern unsigned char DAT_001fb6c8;
-extern unsigned char DAT_001fb6cc;
-extern unsigned char DAT_001fb6d0;
-extern unsigned char DAT_001fb6d8;
-extern unsigned char DAT_001fb6dc;
-extern unsigned char DAT_001fb6e0;
-extern unsigned char DAT_001fb6e4;
-extern unsigned char DAT_001fb6ec;
-extern unsigned char DAT_001fb6f0;
-extern unsigned char DAT_001fb6f4;
-extern unsigned char DAT_001fb6f8;
-extern unsigned char DAT_001fb700;
-extern unsigned char DAT_001fb704;
-extern unsigned char DAT_001fb708;
-extern unsigned char DAT_001fb70c;
-extern unsigned char DAT_001fb714;
-extern unsigned char DAT_001fb718;
-extern unsigned char DAT_001fb71c;
-extern unsigned char DAT_001fb720;
-extern unsigned char DAT_001fb728;
-extern unsigned char DAT_001fb72c;
-extern unsigned char DAT_001fb730;
-extern unsigned char DAT_001fb734;
-extern unsigned char DAT_001fb73c;
-extern unsigned char DAT_001fb740;
-extern unsigned char DAT_001fb744;
-extern unsigned char DAT_001fb748;
-extern unsigned char DAT_001fb750;
-extern unsigned char DAT_001fb754;
-extern unsigned char DAT_001fb758;
-extern unsigned char DAT_001fb75c;
-extern unsigned char DAT_001fb764;
-extern unsigned char DAT_001fb768;
-extern unsigned char DAT_001fb76c;
-extern unsigned char DAT_001fb770;
-extern unsigned char DAT_001fb778;
-extern unsigned char DAT_001fb77c;
-extern unsigned char DAT_001fb780;
-extern unsigned char DAT_001fb784;
-extern unsigned char DAT_001fb78c;
-extern unsigned char DAT_001fb790;
-extern unsigned char DAT_001fb794;
-extern unsigned char DAT_001fb798;
-extern unsigned char DAT_001fb7a0;
-extern unsigned char DAT_001fb7a4;
-extern unsigned char DAT_001fb7a8;
-extern unsigned char DAT_001fb7ac;
-extern unsigned char DAT_001fb7b4;
-extern unsigned char DAT_001fb7b8;
-extern unsigned char DAT_001fb7bc;
-extern unsigned char DAT_001fb7c0;
-extern unsigned char DAT_001fb7c8;
-extern unsigned char DAT_001fb7cc;
-extern unsigned char DAT_001fb7d0;
-extern unsigned char DAT_001fb7d4;
-extern unsigned char DAT_001fb7dc;
-extern unsigned char DAT_001fb7e0;
-extern unsigned char DAT_001fb7e4;
-extern unsigned char DAT_001fb7e8;
-extern unsigned char DAT_001fb7f0;
-extern unsigned char DAT_001fb7f4;
-extern unsigned char DAT_001fb7f8;
-extern unsigned char DAT_001fb7fc;
-extern unsigned char DAT_001fb804;
-extern unsigned char DAT_001fb808;
-extern unsigned char DAT_001fb80c;
-extern unsigned char DAT_001fb810;
-extern unsigned char DAT_001fb818;
-extern unsigned char DAT_001fb81c;
-extern unsigned char DAT_001fb820;
-extern unsigned char DAT_001fb824;
-extern unsigned char DAT_001fb82c;
-extern unsigned char DAT_001fb830;
-extern unsigned char DAT_001fb834;
-extern unsigned char DAT_001fb838;
-extern unsigned char DAT_001fb840;
-extern unsigned char DAT_001fb844;
-extern unsigned char DAT_001fb848;
-extern unsigned char DAT_001fb84c;
-extern unsigned char DAT_001fb854;
-extern unsigned char DAT_001fb858;
-extern unsigned char DAT_001fb85c;
-extern unsigned char DAT_001fb860;
-extern unsigned char DAT_001fb868;
-extern unsigned char DAT_001fb86c;
-extern unsigned char DAT_001fb870;
-extern unsigned char DAT_001fb874;
-extern unsigned char DAT_001fb87c;
-extern unsigned char DAT_001fb880;
-extern unsigned char DAT_001fb884;
-extern unsigned char DAT_001fb888;
-extern unsigned char DAT_001fb890;
-extern unsigned char DAT_001fb894;
-extern unsigned char DAT_001fb898;
-extern unsigned char DAT_001fb89c;
-extern unsigned char DAT_001fb8a4;
-extern unsigned char DAT_001fb8a8;
-extern unsigned char DAT_001fb8ac;
-extern unsigned char DAT_001fb8b0;
-extern unsigned char DAT_001fb8b8;
-extern unsigned char DAT_001fb8bc;
-extern unsigned char DAT_001fb8c0;
-extern unsigned char DAT_001fb8c4;
-extern unsigned char DAT_001fb8cc;
-extern unsigned char DAT_001fb8d0;
-extern unsigned char DAT_001fb8d4;
-extern unsigned char DAT_001fb8d8;
-extern unsigned char DAT_001fb8e0;
-extern unsigned char DAT_001fb8e4;
-extern unsigned char DAT_001fb8e8;
-extern unsigned char DAT_001fb8ec;
-extern unsigned char DAT_001fb8f4;
-extern unsigned char DAT_001fb8f8;
-extern unsigned char DAT_001fb8fc;
-extern unsigned char DAT_001fb900;
-extern unsigned char DAT_001fb908;
-extern unsigned char DAT_001fb90c;
-extern unsigned char DAT_001fb910;
-extern unsigned char DAT_001fb914;
-extern unsigned char DAT_001fb91c;
-extern unsigned char DAT_001fb920;
-extern unsigned char DAT_001fb924;
-extern unsigned char DAT_001fb928;
-extern unsigned char DAT_001fb930;
-extern unsigned char DAT_001fb934;
-extern unsigned char DAT_001fb938;
-extern unsigned char DAT_001fb93c;
-extern unsigned char DAT_001fb944;
-extern unsigned char DAT_001fb948;
-extern unsigned char DAT_001fb94c;
-extern unsigned char DAT_001fb950;
-extern unsigned char DAT_001fb958;
-extern unsigned char DAT_001fb95c;
-extern unsigned char DAT_001fb960;
-extern unsigned char DAT_001fb964;
-extern unsigned char DAT_001fb96c;
-extern unsigned char DAT_001fb970;
-extern unsigned char DAT_001fb974;
-extern unsigned char DAT_001fb978;
-extern unsigned char DAT_001fb980;
-extern unsigned char DAT_001fb984;
-extern unsigned char DAT_001fb988;
-extern unsigned char DAT_001fb98c;
-extern unsigned char DAT_001fb994;
-extern unsigned char DAT_001fb998;
-extern unsigned char DAT_001fb99c;
-extern unsigned char DAT_001fb9a0;
-extern unsigned char DAT_001fb9a8;
-extern unsigned char DAT_001fb9ac;
-extern unsigned char DAT_001fb9b0;
-extern unsigned char DAT_001fb9b4;
-extern unsigned char DAT_001fb9bc;
-extern unsigned char DAT_001fb9c0;
-extern unsigned char DAT_001fb9c4;
-extern unsigned char DAT_001fb9c8;
-extern unsigned char DAT_001fb9d0;
-extern unsigned char DAT_001fb9d4;
-extern unsigned char DAT_001fb9d8;
-extern unsigned char DAT_001fb9dc;
-extern unsigned char DAT_001fb9e4;
-extern unsigned char DAT_001fb9e8;
-extern unsigned char DAT_001fb9ec;
-extern unsigned char DAT_001fb9f0;
-extern unsigned char DAT_001fb9f8;
-extern unsigned char DAT_001fb9fc;
-extern unsigned char DAT_001fba00;
-extern unsigned char DAT_001fba04;
-extern unsigned char DAT_001fba0c;
-extern unsigned char DAT_001fba10;
-extern unsigned char DAT_001fba14;
-extern unsigned char DAT_001fba18;
-extern unsigned char DAT_001fba20;
-extern unsigned char DAT_001fba24;
-extern unsigned char DAT_001fba28;
-extern unsigned char DAT_001fba2c;
-extern unsigned char DAT_001fba34;
-extern unsigned char DAT_001fba38;
-extern unsigned char DAT_001fba3c;
-extern unsigned char DAT_001fba40;
-extern unsigned char DAT_001fba48;
-extern unsigned char DAT_001fba4c;
-extern unsigned char DAT_001fba50;
-extern unsigned char DAT_001fba54;
-extern unsigned char DAT_001fba5c;
-extern unsigned char DAT_001fba60;
-extern unsigned char DAT_001fba64;
-extern unsigned char DAT_001fba68;
-extern unsigned char DAT_001fba70;
-extern unsigned char DAT_001fba74;
-extern unsigned char DAT_001fba78;
-extern unsigned char DAT_001fba7c;
-extern unsigned char DAT_001fba84;
-extern unsigned char DAT_001fba88;
-extern unsigned char DAT_001fba8c;
-extern unsigned char DAT_001fba90;
-extern unsigned char DAT_001fba98;
-extern unsigned char DAT_001fba9c;
-extern unsigned char DAT_001fbaa0;
-extern unsigned char DAT_001fbaa4;
-extern unsigned char DAT_001fbaac;
-extern unsigned char DAT_001fbab0;
-extern unsigned char DAT_001fbab4;
-extern unsigned char DAT_001fbab8;
-extern unsigned char DAT_001fbac0;
-extern unsigned char DAT_001fbac4;
-extern unsigned char DAT_001fbac8;
-extern unsigned char DAT_001fbacc;
-extern unsigned char DAT_001fbad4;
-extern unsigned char DAT_001fbad8;
-extern unsigned char DAT_001fbadc;
-extern unsigned char DAT_001fbae0;
-extern unsigned char DAT_001fbae8;
-extern unsigned char DAT_001fbaec;
-extern unsigned char DAT_001fbaf0;
-extern unsigned char DAT_001fbaf4;
-extern unsigned char DAT_001fbafc;
-extern unsigned char DAT_001fbb00;
-extern unsigned char DAT_001fbb04;
-extern unsigned char DAT_001fbb08;
-extern unsigned char DAT_001fbb10;
-extern unsigned char DAT_001fbb14;
-extern unsigned char DAT_001fbb18;
-extern unsigned char DAT_001fbb1c;
-extern unsigned char DAT_001fbb24;
-extern unsigned char DAT_001fbb28;
-extern unsigned char DAT_001fbb2c;
-extern unsigned char DAT_001fbb30;
-extern unsigned char DAT_001fbb38;
-extern unsigned char DAT_001fbb3c;
-extern unsigned char DAT_001fbb40;
-extern unsigned char DAT_001fbb44;
-extern unsigned char DAT_001fbb4c;
-extern unsigned char DAT_001fbb50;
-extern unsigned char DAT_001fbb54;
-extern unsigned char DAT_001fbb58;
-extern unsigned char DAT_001fbb60;
-extern unsigned char DAT_001fbb64;
-extern unsigned char DAT_001fbb68;
-extern unsigned char DAT_001fbb6c;
-extern unsigned char DAT_001fbb74;
-extern unsigned char DAT_001fbb78;
-extern unsigned char DAT_001fbb7c;
-extern unsigned char DAT_001fbb80;
-extern unsigned char DAT_001fbb88;
-extern unsigned char DAT_001fbb8c;
-extern unsigned char DAT_001fbb90;
-extern unsigned char DAT_001fbb94;
-extern unsigned char DAT_001fbb9c;
-extern unsigned char DAT_001fbba0;
-extern unsigned char DAT_001fbba4;
-extern unsigned char DAT_001fbba8;
-extern unsigned char DAT_001fbbb0;
-extern unsigned char DAT_001fbbb4;
-extern unsigned char DAT_001fbbb8;
-extern unsigned char DAT_001fbbbc;
-extern unsigned char DAT_001fbbc4;
-extern unsigned char DAT_001fbbc8;
-extern unsigned char DAT_001fbbcc;
-extern unsigned char DAT_001fbbd0;
-extern unsigned char DAT_001fbbd8;
-extern unsigned char DAT_001fbbdc;
-extern unsigned char DAT_001fbbe0;
-extern unsigned char DAT_001fbbe4;
-extern unsigned char DAT_001fbbec;
-extern unsigned char DAT_001fbbf0;
-extern unsigned char DAT_001fbbf4;
-extern unsigned char DAT_001fbbf8;
-extern unsigned char DAT_001fbc00;
-extern unsigned char DAT_001fbc04;
-extern unsigned char DAT_001fbc08;
-extern unsigned char DAT_001fbc0c;
-extern unsigned char DAT_001fbc14;
-extern unsigned char DAT_001fbc18;
-extern unsigned char DAT_001fbc1c;
-extern unsigned char DAT_001fbc20;
-extern unsigned char DAT_001fbc28;
-extern unsigned char DAT_001fbc2c;
-extern unsigned char DAT_001fbc30;
-extern unsigned char DAT_001fbc34;
-extern unsigned char DAT_001fbc3c;
-extern unsigned char DAT_001fbc40;
-extern unsigned char DAT_001fbc44;
-extern unsigned char DAT_001fbc48;
-extern unsigned char DAT_001fbc50;
-extern unsigned char DAT_001fbc54;
-extern unsigned char DAT_001fbc58;
-extern unsigned char DAT_001fbc5c;
-extern unsigned char DAT_001fbc64;
-extern unsigned char DAT_001fbc68;
-extern unsigned char DAT_001fbc6c;
-extern unsigned char DAT_001fbc70;
-extern unsigned char DAT_001fbc78;
-extern unsigned char DAT_001fbc7c;
-extern unsigned char DAT_001fbc80;
-extern unsigned char DAT_001fbc84;
-extern unsigned char DAT_001fbc8c;
-extern unsigned char DAT_001fbc90;
-extern unsigned char DAT_001fbc94;
-extern unsigned char DAT_001fbc98;
-extern unsigned char DAT_001fbca0;
-extern unsigned char DAT_001fbca4;
-extern unsigned char DAT_001fbca8;
-extern unsigned char DAT_001fbcac;
-extern unsigned char DAT_001fbcb4;
-extern unsigned char DAT_001fbcb8;
-extern unsigned char DAT_001fbcbc;
-extern unsigned char DAT_001fbcc0;
-extern unsigned char DAT_001fbcc8;
-extern unsigned char DAT_001fbccc;
-extern unsigned char DAT_001fbcd0;
-extern unsigned char DAT_001fbcd4;
-extern unsigned char DAT_001fbcdc;
-extern unsigned char DAT_001fbce0;
-extern unsigned char DAT_001fbce4;
-extern unsigned char DAT_001fbce8;
-extern unsigned char DAT_001fbcf0;
-extern unsigned char DAT_001fbcf4;
-extern unsigned char DAT_001fbcf8;
-extern unsigned char DAT_001fbcfc;
-extern unsigned char DAT_001fbd04;
-extern unsigned char DAT_001fbd08;
-extern unsigned char DAT_001fbd0c;
-extern unsigned char DAT_001fbd10;
-extern unsigned char DAT_001fbd18;
-extern unsigned char DAT_001fbd1c;
-extern unsigned char DAT_001fbd20;
-extern unsigned char DAT_001fbd24;
-extern unsigned char DAT_001fbd2c;
-extern unsigned char DAT_001fbd30;
-extern unsigned char DAT_001fbd34;
-extern unsigned char DAT_001fbd38;
-extern unsigned char DAT_001fbd40;
-extern unsigned char DAT_001fbd44;
-extern unsigned char DAT_001fbd48;
-extern unsigned char DAT_001fbd4c;
-extern unsigned char DAT_001fbd54;
-extern unsigned char DAT_001fbd58;
-extern unsigned char DAT_001fbd5c;
-extern unsigned char DAT_001fbd60;
-extern unsigned char DAT_001fbd68;
-extern unsigned char DAT_001fbd6c;
-extern unsigned char DAT_001fbd70;
-extern unsigned char DAT_001fbd74;
-extern unsigned char DAT_001fbd7c;
-extern unsigned char DAT_001fbd80;
-extern unsigned char DAT_001fbd84;
-extern unsigned char DAT_001fbd88;
-extern unsigned char DAT_001fbd90;
-extern unsigned char DAT_001fbd94;
-extern unsigned char DAT_001fbd98;
-extern unsigned char DAT_001fbd9c;
-extern unsigned char DAT_001fbda4;
-extern unsigned char DAT_001fbda8;
-extern unsigned char DAT_001fbdac;
-extern unsigned char DAT_001fbdb0;
-extern unsigned char DAT_001fbdb8;
-extern unsigned char DAT_001fbdbc;
-extern unsigned char DAT_001fbdc0;
-extern unsigned char DAT_001fbdc4;
-extern unsigned char DAT_001fbdcc;
-extern unsigned char DAT_001fbdd0;
-extern unsigned char DAT_001fbdd4;
-extern unsigned char DAT_001fbdd8;
-extern unsigned char DAT_001fbde0;
-extern unsigned char DAT_001fbde4;
-extern unsigned char DAT_001fbde8;
-extern unsigned char DAT_001fbdec;
-extern unsigned char DAT_001fbdf4;
-extern unsigned char DAT_001fbdf8;
-extern unsigned char DAT_001fbdfc;
-extern unsigned char DAT_001fbe00;
-extern unsigned char DAT_001fbe08;
-extern unsigned char DAT_001fbe0c;
-extern unsigned char DAT_001fbe10;
-extern unsigned char DAT_001fbe14;
-extern unsigned char DAT_001fbe1c;
-extern unsigned char DAT_001fbe20;
-extern unsigned char DAT_001fbe24;
-extern unsigned char DAT_001fbe28;
-extern unsigned char DAT_001fbe30;
-extern unsigned char DAT_001fbe34;
-extern unsigned char DAT_001fbe38;
-extern unsigned char DAT_001fbe3c;
-extern unsigned char DAT_001fbe44;
-extern unsigned char DAT_001fbe48;
-extern unsigned char DAT_001fbe4c;
-extern unsigned char DAT_001fbe50;
-extern unsigned char DAT_001fbe58;
-extern unsigned char DAT_001fbe5c;
-extern unsigned char DAT_001fbe60;
-extern unsigned char DAT_001fbe64;
-extern unsigned char DAT_001fbe6c;
-extern unsigned char DAT_001fbe70;
-extern unsigned char DAT_001fbe74;
-extern unsigned char DAT_001fbe78;
-extern unsigned char DAT_001fbe80;
-extern unsigned char DAT_001fbe84;
-extern unsigned char DAT_001fbe88;
-extern unsigned char DAT_001fbe8c;
-extern unsigned char DAT_001fbe94;
-extern unsigned char DAT_001fbe98;
-extern unsigned char DAT_001fbe9c;
-extern unsigned char DAT_001fbea0;
-extern unsigned char DAT_001fbea8;
-extern unsigned char DAT_001fbeac;
-extern unsigned char DAT_001fbeb0;
-extern unsigned char DAT_001fbeb4;
-extern unsigned char DAT_001fbebc;
-extern unsigned char DAT_001fbec0;
-extern unsigned char DAT_001fbec4;
-extern unsigned char DAT_001fbec8;
-extern unsigned char DAT_001fbed0;
-extern unsigned char DAT_001fbed4;
-extern unsigned char DAT_001fbed8;
-extern unsigned char DAT_001fbedc;
-extern unsigned char DAT_001fbee4;
-extern unsigned char DAT_001fbee8;
-extern unsigned char DAT_001fbeec;
-extern unsigned char DAT_001fbef0;
-extern unsigned char DAT_001fbef8;
-extern unsigned char DAT_001fbefc;
-extern unsigned char DAT_001fbf00;
-extern unsigned char DAT_001fbf04;
-extern unsigned char DAT_001fbf0c;
-extern unsigned char DAT_001fbf10;
-extern unsigned char DAT_001fbf14;
-extern unsigned char DAT_001fbf18;
-extern unsigned char DAT_001fbf20;
-extern unsigned char DAT_001fbf24;
-extern unsigned char DAT_001fbf28;
-extern unsigned char DAT_001fbf2c;
-extern unsigned char DAT_001fbf34;
-extern unsigned char DAT_001fbf38;
-extern unsigned char DAT_001fbf3c;
-extern unsigned char DAT_001fbf40;
-extern unsigned char DAT_001fbf48;
-extern unsigned char DAT_001fbf4c;
-extern unsigned char DAT_001fbf50;
-extern unsigned char DAT_001fbf54;
-extern unsigned char DAT_001fbf5c;
-extern unsigned char DAT_001fbf60;
-extern unsigned char DAT_001fbf64;
-extern unsigned char DAT_001fbf68;
-extern unsigned char DAT_001fbf70;
-extern unsigned char DAT_001fbf74;
-extern unsigned char DAT_001fbf78;
-extern unsigned char DAT_001fbf7c;
-extern unsigned char DAT_001fbf84;
-extern unsigned char DAT_001fbf88;
-extern unsigned char DAT_001fbf8c;
-extern unsigned char DAT_001fbf90;
-extern unsigned char DAT_001fbf98;
-extern unsigned char DAT_001fbf9c;
-extern unsigned char DAT_001fbfa0;
-extern unsigned char DAT_001fbfa4;
-extern unsigned char DAT_001fbfac;
-extern unsigned char DAT_001fbfb0;
-extern unsigned char DAT_001fbfb4;
-extern unsigned char DAT_001fbfb8;
-extern unsigned char DAT_001fbfc0;
-extern unsigned char DAT_001fbfc4;
-extern unsigned char DAT_001fbfc8;
-extern unsigned char DAT_001fbfcc;
-extern unsigned char DAT_001fbfd4;
-extern unsigned char DAT_001fbfd8;
-extern unsigned char DAT_001fbfdc;
-extern unsigned char DAT_001fbfe0;
-extern unsigned char DAT_001fbfe8;
-extern unsigned char DAT_001fbfec;
-extern unsigned char DAT_001fbff0;
-extern unsigned char DAT_001fbff4;
-extern unsigned char DAT_001fbffc;
-extern unsigned char DAT_001fc000;
-extern unsigned char DAT_001fc004;
+/* issue #75 (follow-up #2, generalized): part_036.c populates a 4100-byte arena of 205
+ * "format descriptor" records (20 bytes each: DAT_001fb004 through DAT_001fc004), writing each
+ * record's fields (a base pointer at +0, plus int fields at +8/+0xc/+0x10 - e.g.
+ * `DAT_001fb408 = 0x87;`) via Ghidra-derived individual symbol names, one per referenced
+ * offset - not as one real C array/struct. Every one of these 820 names was its own
+ * INDEPENDENT `.zerofill` symbol, so our own linker had no reason to place them adjacently or
+ * in the original relative order (same root cause as the FUN_00001830 stack-locals bug and the
+ * DAT_001fc2b0 array above, just at a much larger scale). Confirmed live: the very first
+ * descriptor this driver actually reads (DAT_001fb400+8, format index 135) came back as
+ * 0x87000000 instead of 0x87 (a stray high byte from unrelated memory), and after fixing only
+ * that one descriptor in isolation, DAT_001fb400's OWN base-pointer field then read back as
+ * 0x08000000 garbage too - a DIFFERENT descriptor's oversized/misplaced write bleeding across
+ * our own linker's arbitrary layout. Fixing one descriptor at a time was chasing a moving
+ * target, so this fixes the whole arena at once: DAT_001fb004 (the arena's first record) stays
+ * the one real scalar declaration, with its data.s zerofill enlarged to cover all 4100 bytes,
+ * and every other name in the arena becomes a macro reading/writing the correct 4-byte slot
+ * inside that single backing allocation. */
+#define DAT_001fb00c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 8))
+#define DAT_001fb010 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 12))
+#define DAT_001fb014 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 16))
+#define DAT_001fb018 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 20))
+#define DAT_001fb020 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 28))
+#define DAT_001fb024 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 32))
+#define DAT_001fb028 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 36))
+#define DAT_001fb02c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 40))
+#define DAT_001fb034 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 48))
+#define DAT_001fb038 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 52))
+#define DAT_001fb03c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 56))
+#define DAT_001fb040 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 60))
+#define DAT_001fb048 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 68))
+#define DAT_001fb04c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 72))
+#define DAT_001fb050 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 76))
+#define DAT_001fb054 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 80))
+#define DAT_001fb05c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 88))
+#define DAT_001fb060 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 92))
+#define DAT_001fb064 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 96))
+#define DAT_001fb068 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 100))
+#define DAT_001fb070 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 108))
+#define DAT_001fb074 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 112))
+#define DAT_001fb078 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 116))
+#define DAT_001fb07c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 120))
+#define DAT_001fb084 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 128))
+#define DAT_001fb088 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 132))
+#define DAT_001fb08c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 136))
+#define DAT_001fb090 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 140))
+#define DAT_001fb098 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 148))
+#define DAT_001fb09c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 152))
+#define DAT_001fb0a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 156))
+#define DAT_001fb0a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 160))
+#define DAT_001fb0ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 168))
+#define DAT_001fb0b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 172))
+#define DAT_001fb0b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 176))
+#define DAT_001fb0b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 180))
+#define DAT_001fb0c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 188))
+#define DAT_001fb0c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 192))
+#define DAT_001fb0c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 196))
+#define DAT_001fb0cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 200))
+#define DAT_001fb0d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 208))
+#define DAT_001fb0d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 212))
+#define DAT_001fb0dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 216))
+#define DAT_001fb0e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 220))
+#define DAT_001fb0e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 228))
+#define DAT_001fb0ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 232))
+#define DAT_001fb0f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 236))
+#define DAT_001fb0f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 240))
+#define DAT_001fb0fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 248))
+#define DAT_001fb100 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 252))
+#define DAT_001fb104 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 256))
+#define DAT_001fb108 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 260))
+#define DAT_001fb110 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 268))
+#define DAT_001fb114 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 272))
+#define DAT_001fb118 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 276))
+#define DAT_001fb11c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 280))
+#define DAT_001fb124 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 288))
+#define DAT_001fb128 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 292))
+#define DAT_001fb12c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 296))
+#define DAT_001fb130 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 300))
+#define DAT_001fb138 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 308))
+#define DAT_001fb13c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 312))
+#define DAT_001fb140 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 316))
+#define DAT_001fb144 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 320))
+#define DAT_001fb14c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 328))
+#define DAT_001fb150 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 332))
+#define DAT_001fb154 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 336))
+#define DAT_001fb158 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 340))
+#define DAT_001fb160 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 348))
+#define DAT_001fb164 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 352))
+#define DAT_001fb168 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 356))
+#define DAT_001fb16c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 360))
+#define DAT_001fb174 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 368))
+#define DAT_001fb178 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 372))
+#define DAT_001fb17c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 376))
+#define DAT_001fb180 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 380))
+#define DAT_001fb188 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 388))
+#define DAT_001fb18c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 392))
+#define DAT_001fb190 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 396))
+#define DAT_001fb194 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 400))
+#define DAT_001fb19c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 408))
+#define DAT_001fb1a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 412))
+#define DAT_001fb1a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 416))
+#define DAT_001fb1a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 420))
+#define DAT_001fb1b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 428))
+#define DAT_001fb1b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 432))
+#define DAT_001fb1b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 436))
+#define DAT_001fb1bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 440))
+#define DAT_001fb1c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 448))
+#define DAT_001fb1c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 452))
+#define DAT_001fb1cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 456))
+#define DAT_001fb1d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 460))
+#define DAT_001fb1d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 468))
+#define DAT_001fb1dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 472))
+#define DAT_001fb1e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 476))
+#define DAT_001fb1e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 480))
+#define DAT_001fb1ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 488))
+#define DAT_001fb1f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 492))
+#define DAT_001fb1f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 496))
+#define DAT_001fb1f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 500))
+#define DAT_001fb200 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 508))
+#define DAT_001fb204 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 512))
+#define DAT_001fb208 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 516))
+#define DAT_001fb20c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 520))
+#define DAT_001fb214 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 528))
+#define DAT_001fb218 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 532))
+#define DAT_001fb21c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 536))
+#define DAT_001fb220 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 540))
+#define DAT_001fb228 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 548))
+#define DAT_001fb22c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 552))
+#define DAT_001fb230 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 556))
+#define DAT_001fb234 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 560))
+#define DAT_001fb23c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 568))
+#define DAT_001fb240 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 572))
+#define DAT_001fb244 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 576))
+#define DAT_001fb248 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 580))
+#define DAT_001fb250 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 588))
+#define DAT_001fb254 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 592))
+#define DAT_001fb258 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 596))
+#define DAT_001fb25c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 600))
+#define DAT_001fb264 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 608))
+#define DAT_001fb268 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 612))
+#define DAT_001fb26c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 616))
+#define DAT_001fb270 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 620))
+#define DAT_001fb278 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 628))
+#define DAT_001fb27c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 632))
+#define DAT_001fb280 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 636))
+#define DAT_001fb284 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 640))
+#define DAT_001fb28c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 648))
+#define DAT_001fb290 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 652))
+#define DAT_001fb294 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 656))
+#define DAT_001fb298 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 660))
+#define DAT_001fb2a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 668))
+#define DAT_001fb2a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 672))
+#define DAT_001fb2a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 676))
+#define DAT_001fb2ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 680))
+#define DAT_001fb2b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 688))
+#define DAT_001fb2b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 692))
+#define DAT_001fb2bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 696))
+#define DAT_001fb2c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 700))
+#define DAT_001fb2c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 708))
+#define DAT_001fb2cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 712))
+#define DAT_001fb2d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 716))
+#define DAT_001fb2d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 720))
+#define DAT_001fb2dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 728))
+#define DAT_001fb2e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 732))
+#define DAT_001fb2e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 736))
+#define DAT_001fb2e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 740))
+#define DAT_001fb2f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 748))
+#define DAT_001fb2f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 752))
+#define DAT_001fb2f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 756))
+#define DAT_001fb2fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 760))
+#define DAT_001fb304 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 768))
+#define DAT_001fb308 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 772))
+#define DAT_001fb30c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 776))
+#define DAT_001fb310 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 780))
+#define DAT_001fb318 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 788))
+#define DAT_001fb31c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 792))
+#define DAT_001fb320 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 796))
+#define DAT_001fb324 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 800))
+#define DAT_001fb32c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 808))
+#define DAT_001fb330 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 812))
+#define DAT_001fb334 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 816))
+#define DAT_001fb338 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 820))
+#define DAT_001fb340 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 828))
+#define DAT_001fb344 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 832))
+#define DAT_001fb348 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 836))
+#define DAT_001fb34c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 840))
+#define DAT_001fb354 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 848))
+#define DAT_001fb358 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 852))
+#define DAT_001fb35c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 856))
+#define DAT_001fb360 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 860))
+#define DAT_001fb368 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 868))
+#define DAT_001fb36c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 872))
+#define DAT_001fb370 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 876))
+#define DAT_001fb374 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 880))
+#define DAT_001fb37c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 888))
+#define DAT_001fb380 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 892))
+#define DAT_001fb384 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 896))
+#define DAT_001fb388 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 900))
+#define DAT_001fb390 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 908))
+#define DAT_001fb394 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 912))
+#define DAT_001fb398 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 916))
+#define DAT_001fb39c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 920))
+#define DAT_001fb3a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 928))
+#define DAT_001fb3a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 932))
+#define DAT_001fb3ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 936))
+#define DAT_001fb3b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 940))
+#define DAT_001fb3b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 948))
+#define DAT_001fb3bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 952))
+#define DAT_001fb3c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 956))
+#define DAT_001fb3c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 960))
+#define DAT_001fb3cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 968))
+#define DAT_001fb3d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 972))
+#define DAT_001fb3d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 976))
+#define DAT_001fb3d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 980))
+#define DAT_001fb3e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 988))
+#define DAT_001fb3e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 992))
+#define DAT_001fb3e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 996))
+#define DAT_001fb3ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1000))
+#define DAT_001fb3f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1008))
+#define DAT_001fb3f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1012))
+#define DAT_001fb3fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1016))
+#define DAT_001fb400 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1020))
+#define DAT_001fb408 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1028))
+#define DAT_001fb40c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1032))
+#define DAT_001fb410 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1036))
+#define DAT_001fb414 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1040))
+#define DAT_001fb41c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1048))
+#define DAT_001fb420 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1052))
+#define DAT_001fb424 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1056))
+#define DAT_001fb428 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1060))
+#define DAT_001fb430 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1068))
+#define DAT_001fb434 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1072))
+#define DAT_001fb438 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1076))
+#define DAT_001fb43c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1080))
+#define DAT_001fb444 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1088))
+#define DAT_001fb448 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1092))
+#define DAT_001fb44c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1096))
+#define DAT_001fb450 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1100))
+#define DAT_001fb458 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1108))
+#define DAT_001fb45c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1112))
+#define DAT_001fb460 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1116))
+#define DAT_001fb464 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1120))
+#define DAT_001fb46c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1128))
+#define DAT_001fb470 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1132))
+#define DAT_001fb474 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1136))
+#define DAT_001fb478 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1140))
+#define DAT_001fb480 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1148))
+#define DAT_001fb484 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1152))
+#define DAT_001fb488 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1156))
+#define DAT_001fb48c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1160))
+#define DAT_001fb494 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1168))
+#define DAT_001fb498 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1172))
+#define DAT_001fb49c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1176))
+#define DAT_001fb4a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1180))
+#define DAT_001fb4a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1188))
+#define DAT_001fb4ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1192))
+#define DAT_001fb4b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1196))
+#define DAT_001fb4b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1200))
+#define DAT_001fb4bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1208))
+#define DAT_001fb4c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1212))
+#define DAT_001fb4c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1216))
+#define DAT_001fb4c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1220))
+#define DAT_001fb4d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1228))
+#define DAT_001fb4d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1232))
+#define DAT_001fb4d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1236))
+#define DAT_001fb4dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1240))
+#define DAT_001fb4e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1248))
+#define DAT_001fb4e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1252))
+#define DAT_001fb4ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1256))
+#define DAT_001fb4f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1260))
+#define DAT_001fb4f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1268))
+#define DAT_001fb4fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1272))
+#define DAT_001fb500 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1276))
+#define DAT_001fb504 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1280))
+#define DAT_001fb50c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1288))
+#define DAT_001fb510 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1292))
+#define DAT_001fb514 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1296))
+#define DAT_001fb518 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1300))
+#define DAT_001fb520 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1308))
+#define DAT_001fb524 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1312))
+#define DAT_001fb528 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1316))
+#define DAT_001fb52c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1320))
+#define DAT_001fb534 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1328))
+#define DAT_001fb538 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1332))
+#define DAT_001fb53c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1336))
+#define DAT_001fb540 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1340))
+#define DAT_001fb548 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1348))
+#define DAT_001fb54c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1352))
+#define DAT_001fb550 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1356))
+#define DAT_001fb554 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1360))
+#define DAT_001fb55c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1368))
+#define DAT_001fb560 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1372))
+#define DAT_001fb564 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1376))
+#define DAT_001fb568 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1380))
+#define DAT_001fb570 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1388))
+#define DAT_001fb574 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1392))
+#define DAT_001fb578 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1396))
+#define DAT_001fb57c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1400))
+#define DAT_001fb584 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1408))
+#define DAT_001fb588 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1412))
+#define DAT_001fb58c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1416))
+#define DAT_001fb590 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1420))
+#define DAT_001fb598 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1428))
+#define DAT_001fb59c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1432))
+#define DAT_001fb5a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1436))
+#define DAT_001fb5a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1440))
+#define DAT_001fb5ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1448))
+#define DAT_001fb5b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1452))
+#define DAT_001fb5b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1456))
+#define DAT_001fb5b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1460))
+#define DAT_001fb5c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1468))
+#define DAT_001fb5c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1472))
+#define DAT_001fb5c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1476))
+#define DAT_001fb5cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1480))
+#define DAT_001fb5d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1488))
+#define DAT_001fb5d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1492))
+#define DAT_001fb5dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1496))
+#define DAT_001fb5e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1500))
+#define DAT_001fb5e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1508))
+#define DAT_001fb5ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1512))
+#define DAT_001fb5f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1516))
+#define DAT_001fb5f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1520))
+#define DAT_001fb5fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1528))
+#define DAT_001fb600 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1532))
+#define DAT_001fb604 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1536))
+#define DAT_001fb608 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1540))
+#define DAT_001fb610 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1548))
+#define DAT_001fb614 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1552))
+#define DAT_001fb618 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1556))
+#define DAT_001fb61c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1560))
+#define DAT_001fb624 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1568))
+#define DAT_001fb628 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1572))
+#define DAT_001fb62c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1576))
+#define DAT_001fb630 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1580))
+#define DAT_001fb638 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1588))
+#define DAT_001fb63c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1592))
+#define DAT_001fb640 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1596))
+#define DAT_001fb644 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1600))
+#define DAT_001fb64c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1608))
+#define DAT_001fb650 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1612))
+#define DAT_001fb654 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1616))
+#define DAT_001fb658 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1620))
+#define DAT_001fb660 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1628))
+#define DAT_001fb664 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1632))
+#define DAT_001fb668 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1636))
+#define DAT_001fb66c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1640))
+#define DAT_001fb674 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1648))
+#define DAT_001fb678 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1652))
+#define DAT_001fb67c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1656))
+#define DAT_001fb680 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1660))
+#define DAT_001fb688 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1668))
+#define DAT_001fb68c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1672))
+#define DAT_001fb690 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1676))
+#define DAT_001fb694 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1680))
+#define DAT_001fb69c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1688))
+#define DAT_001fb6a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1692))
+#define DAT_001fb6a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1696))
+#define DAT_001fb6a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1700))
+#define DAT_001fb6b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1708))
+#define DAT_001fb6b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1712))
+#define DAT_001fb6b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1716))
+#define DAT_001fb6bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1720))
+#define DAT_001fb6c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1728))
+#define DAT_001fb6c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1732))
+#define DAT_001fb6cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1736))
+#define DAT_001fb6d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1740))
+#define DAT_001fb6d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1748))
+#define DAT_001fb6dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1752))
+#define DAT_001fb6e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1756))
+#define DAT_001fb6e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1760))
+#define DAT_001fb6ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1768))
+#define DAT_001fb6f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1772))
+#define DAT_001fb6f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1776))
+#define DAT_001fb6f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1780))
+#define DAT_001fb700 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1788))
+#define DAT_001fb704 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1792))
+#define DAT_001fb708 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1796))
+#define DAT_001fb70c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1800))
+#define DAT_001fb714 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1808))
+#define DAT_001fb718 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1812))
+#define DAT_001fb71c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1816))
+#define DAT_001fb720 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1820))
+#define DAT_001fb728 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1828))
+#define DAT_001fb72c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1832))
+#define DAT_001fb730 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1836))
+#define DAT_001fb734 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1840))
+#define DAT_001fb73c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1848))
+#define DAT_001fb740 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1852))
+#define DAT_001fb744 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1856))
+#define DAT_001fb748 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1860))
+#define DAT_001fb750 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1868))
+#define DAT_001fb754 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1872))
+#define DAT_001fb758 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1876))
+#define DAT_001fb75c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1880))
+#define DAT_001fb764 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1888))
+#define DAT_001fb768 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1892))
+#define DAT_001fb76c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1896))
+#define DAT_001fb770 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1900))
+#define DAT_001fb778 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1908))
+#define DAT_001fb77c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1912))
+#define DAT_001fb780 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1916))
+#define DAT_001fb784 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1920))
+#define DAT_001fb78c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1928))
+#define DAT_001fb790 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1932))
+#define DAT_001fb794 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1936))
+#define DAT_001fb798 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1940))
+#define DAT_001fb7a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1948))
+#define DAT_001fb7a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1952))
+#define DAT_001fb7a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1956))
+#define DAT_001fb7ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1960))
+#define DAT_001fb7b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1968))
+#define DAT_001fb7b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1972))
+#define DAT_001fb7bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1976))
+#define DAT_001fb7c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1980))
+#define DAT_001fb7c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1988))
+#define DAT_001fb7cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1992))
+#define DAT_001fb7d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 1996))
+#define DAT_001fb7d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2000))
+#define DAT_001fb7dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2008))
+#define DAT_001fb7e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2012))
+#define DAT_001fb7e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2016))
+#define DAT_001fb7e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2020))
+#define DAT_001fb7f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2028))
+#define DAT_001fb7f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2032))
+#define DAT_001fb7f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2036))
+#define DAT_001fb7fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2040))
+#define DAT_001fb804 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2048))
+#define DAT_001fb808 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2052))
+#define DAT_001fb80c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2056))
+#define DAT_001fb810 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2060))
+#define DAT_001fb818 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2068))
+#define DAT_001fb81c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2072))
+#define DAT_001fb820 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2076))
+#define DAT_001fb824 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2080))
+#define DAT_001fb82c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2088))
+#define DAT_001fb830 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2092))
+#define DAT_001fb834 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2096))
+#define DAT_001fb838 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2100))
+#define DAT_001fb840 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2108))
+#define DAT_001fb844 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2112))
+#define DAT_001fb848 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2116))
+#define DAT_001fb84c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2120))
+#define DAT_001fb854 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2128))
+#define DAT_001fb858 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2132))
+#define DAT_001fb85c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2136))
+#define DAT_001fb860 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2140))
+#define DAT_001fb868 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2148))
+#define DAT_001fb86c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2152))
+#define DAT_001fb870 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2156))
+#define DAT_001fb874 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2160))
+#define DAT_001fb87c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2168))
+#define DAT_001fb880 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2172))
+#define DAT_001fb884 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2176))
+#define DAT_001fb888 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2180))
+#define DAT_001fb890 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2188))
+#define DAT_001fb894 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2192))
+#define DAT_001fb898 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2196))
+#define DAT_001fb89c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2200))
+#define DAT_001fb8a4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2208))
+#define DAT_001fb8a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2212))
+#define DAT_001fb8ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2216))
+#define DAT_001fb8b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2220))
+#define DAT_001fb8b8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2228))
+#define DAT_001fb8bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2232))
+#define DAT_001fb8c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2236))
+#define DAT_001fb8c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2240))
+#define DAT_001fb8cc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2248))
+#define DAT_001fb8d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2252))
+#define DAT_001fb8d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2256))
+#define DAT_001fb8d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2260))
+#define DAT_001fb8e0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2268))
+#define DAT_001fb8e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2272))
+#define DAT_001fb8e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2276))
+#define DAT_001fb8ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2280))
+#define DAT_001fb8f4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2288))
+#define DAT_001fb8f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2292))
+#define DAT_001fb8fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2296))
+#define DAT_001fb900 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2300))
+#define DAT_001fb908 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2308))
+#define DAT_001fb90c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2312))
+#define DAT_001fb910 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2316))
+#define DAT_001fb914 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2320))
+#define DAT_001fb91c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2328))
+#define DAT_001fb920 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2332))
+#define DAT_001fb924 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2336))
+#define DAT_001fb928 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2340))
+#define DAT_001fb930 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2348))
+#define DAT_001fb934 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2352))
+#define DAT_001fb938 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2356))
+#define DAT_001fb93c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2360))
+#define DAT_001fb944 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2368))
+#define DAT_001fb948 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2372))
+#define DAT_001fb94c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2376))
+#define DAT_001fb950 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2380))
+#define DAT_001fb958 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2388))
+#define DAT_001fb95c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2392))
+#define DAT_001fb960 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2396))
+#define DAT_001fb964 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2400))
+#define DAT_001fb96c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2408))
+#define DAT_001fb970 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2412))
+#define DAT_001fb974 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2416))
+#define DAT_001fb978 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2420))
+#define DAT_001fb980 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2428))
+#define DAT_001fb984 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2432))
+#define DAT_001fb988 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2436))
+#define DAT_001fb98c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2440))
+#define DAT_001fb994 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2448))
+#define DAT_001fb998 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2452))
+#define DAT_001fb99c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2456))
+#define DAT_001fb9a0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2460))
+#define DAT_001fb9a8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2468))
+#define DAT_001fb9ac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2472))
+#define DAT_001fb9b0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2476))
+#define DAT_001fb9b4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2480))
+#define DAT_001fb9bc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2488))
+#define DAT_001fb9c0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2492))
+#define DAT_001fb9c4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2496))
+#define DAT_001fb9c8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2500))
+#define DAT_001fb9d0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2508))
+#define DAT_001fb9d4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2512))
+#define DAT_001fb9d8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2516))
+#define DAT_001fb9dc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2520))
+#define DAT_001fb9e4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2528))
+#define DAT_001fb9e8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2532))
+#define DAT_001fb9ec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2536))
+#define DAT_001fb9f0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2540))
+#define DAT_001fb9f8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2548))
+#define DAT_001fb9fc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2552))
+#define DAT_001fba00 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2556))
+#define DAT_001fba04 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2560))
+#define DAT_001fba0c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2568))
+#define DAT_001fba10 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2572))
+#define DAT_001fba14 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2576))
+#define DAT_001fba18 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2580))
+#define DAT_001fba20 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2588))
+#define DAT_001fba24 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2592))
+#define DAT_001fba28 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2596))
+#define DAT_001fba2c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2600))
+#define DAT_001fba34 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2608))
+#define DAT_001fba38 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2612))
+#define DAT_001fba3c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2616))
+#define DAT_001fba40 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2620))
+#define DAT_001fba48 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2628))
+#define DAT_001fba4c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2632))
+#define DAT_001fba50 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2636))
+#define DAT_001fba54 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2640))
+#define DAT_001fba5c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2648))
+#define DAT_001fba60 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2652))
+#define DAT_001fba64 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2656))
+#define DAT_001fba68 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2660))
+#define DAT_001fba70 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2668))
+#define DAT_001fba74 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2672))
+#define DAT_001fba78 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2676))
+#define DAT_001fba7c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2680))
+#define DAT_001fba84 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2688))
+#define DAT_001fba88 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2692))
+#define DAT_001fba8c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2696))
+#define DAT_001fba90 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2700))
+#define DAT_001fba98 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2708))
+#define DAT_001fba9c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2712))
+#define DAT_001fbaa0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2716))
+#define DAT_001fbaa4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2720))
+#define DAT_001fbaac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2728))
+#define DAT_001fbab0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2732))
+#define DAT_001fbab4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2736))
+#define DAT_001fbab8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2740))
+#define DAT_001fbac0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2748))
+#define DAT_001fbac4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2752))
+#define DAT_001fbac8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2756))
+#define DAT_001fbacc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2760))
+#define DAT_001fbad4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2768))
+#define DAT_001fbad8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2772))
+#define DAT_001fbadc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2776))
+#define DAT_001fbae0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2780))
+#define DAT_001fbae8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2788))
+#define DAT_001fbaec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2792))
+#define DAT_001fbaf0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2796))
+#define DAT_001fbaf4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2800))
+#define DAT_001fbafc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2808))
+#define DAT_001fbb00 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2812))
+#define DAT_001fbb04 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2816))
+#define DAT_001fbb08 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2820))
+#define DAT_001fbb10 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2828))
+#define DAT_001fbb14 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2832))
+#define DAT_001fbb18 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2836))
+#define DAT_001fbb1c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2840))
+#define DAT_001fbb24 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2848))
+#define DAT_001fbb28 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2852))
+#define DAT_001fbb2c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2856))
+#define DAT_001fbb30 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2860))
+#define DAT_001fbb38 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2868))
+#define DAT_001fbb3c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2872))
+#define DAT_001fbb40 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2876))
+#define DAT_001fbb44 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2880))
+#define DAT_001fbb4c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2888))
+#define DAT_001fbb50 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2892))
+#define DAT_001fbb54 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2896))
+#define DAT_001fbb58 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2900))
+#define DAT_001fbb60 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2908))
+#define DAT_001fbb64 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2912))
+#define DAT_001fbb68 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2916))
+#define DAT_001fbb6c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2920))
+#define DAT_001fbb74 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2928))
+#define DAT_001fbb78 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2932))
+#define DAT_001fbb7c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2936))
+#define DAT_001fbb80 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2940))
+#define DAT_001fbb88 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2948))
+#define DAT_001fbb8c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2952))
+#define DAT_001fbb90 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2956))
+#define DAT_001fbb94 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2960))
+#define DAT_001fbb9c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2968))
+#define DAT_001fbba0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2972))
+#define DAT_001fbba4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2976))
+#define DAT_001fbba8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2980))
+#define DAT_001fbbb0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2988))
+#define DAT_001fbbb4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2992))
+#define DAT_001fbbb8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 2996))
+#define DAT_001fbbbc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3000))
+#define DAT_001fbbc4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3008))
+#define DAT_001fbbc8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3012))
+#define DAT_001fbbcc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3016))
+#define DAT_001fbbd0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3020))
+#define DAT_001fbbd8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3028))
+#define DAT_001fbbdc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3032))
+#define DAT_001fbbe0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3036))
+#define DAT_001fbbe4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3040))
+#define DAT_001fbbec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3048))
+#define DAT_001fbbf0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3052))
+#define DAT_001fbbf4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3056))
+#define DAT_001fbbf8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3060))
+#define DAT_001fbc00 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3068))
+#define DAT_001fbc04 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3072))
+#define DAT_001fbc08 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3076))
+#define DAT_001fbc0c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3080))
+#define DAT_001fbc14 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3088))
+#define DAT_001fbc18 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3092))
+#define DAT_001fbc1c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3096))
+#define DAT_001fbc20 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3100))
+#define DAT_001fbc28 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3108))
+#define DAT_001fbc2c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3112))
+#define DAT_001fbc30 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3116))
+#define DAT_001fbc34 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3120))
+#define DAT_001fbc3c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3128))
+#define DAT_001fbc40 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3132))
+#define DAT_001fbc44 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3136))
+#define DAT_001fbc48 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3140))
+#define DAT_001fbc50 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3148))
+#define DAT_001fbc54 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3152))
+#define DAT_001fbc58 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3156))
+#define DAT_001fbc5c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3160))
+#define DAT_001fbc64 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3168))
+#define DAT_001fbc68 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3172))
+#define DAT_001fbc6c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3176))
+#define DAT_001fbc70 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3180))
+#define DAT_001fbc78 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3188))
+#define DAT_001fbc7c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3192))
+#define DAT_001fbc80 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3196))
+#define DAT_001fbc84 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3200))
+#define DAT_001fbc8c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3208))
+#define DAT_001fbc90 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3212))
+#define DAT_001fbc94 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3216))
+#define DAT_001fbc98 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3220))
+#define DAT_001fbca0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3228))
+#define DAT_001fbca4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3232))
+#define DAT_001fbca8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3236))
+#define DAT_001fbcac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3240))
+#define DAT_001fbcb4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3248))
+#define DAT_001fbcb8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3252))
+#define DAT_001fbcbc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3256))
+#define DAT_001fbcc0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3260))
+#define DAT_001fbcc8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3268))
+#define DAT_001fbccc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3272))
+#define DAT_001fbcd0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3276))
+#define DAT_001fbcd4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3280))
+#define DAT_001fbcdc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3288))
+#define DAT_001fbce0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3292))
+#define DAT_001fbce4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3296))
+#define DAT_001fbce8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3300))
+#define DAT_001fbcf0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3308))
+#define DAT_001fbcf4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3312))
+#define DAT_001fbcf8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3316))
+#define DAT_001fbcfc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3320))
+#define DAT_001fbd04 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3328))
+#define DAT_001fbd08 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3332))
+#define DAT_001fbd0c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3336))
+#define DAT_001fbd10 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3340))
+#define DAT_001fbd18 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3348))
+#define DAT_001fbd1c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3352))
+#define DAT_001fbd20 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3356))
+#define DAT_001fbd24 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3360))
+#define DAT_001fbd2c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3368))
+#define DAT_001fbd30 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3372))
+#define DAT_001fbd34 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3376))
+#define DAT_001fbd38 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3380))
+#define DAT_001fbd40 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3388))
+#define DAT_001fbd44 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3392))
+#define DAT_001fbd48 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3396))
+#define DAT_001fbd4c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3400))
+#define DAT_001fbd54 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3408))
+#define DAT_001fbd58 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3412))
+#define DAT_001fbd5c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3416))
+#define DAT_001fbd60 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3420))
+#define DAT_001fbd68 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3428))
+#define DAT_001fbd6c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3432))
+#define DAT_001fbd70 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3436))
+#define DAT_001fbd74 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3440))
+#define DAT_001fbd7c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3448))
+#define DAT_001fbd80 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3452))
+#define DAT_001fbd84 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3456))
+#define DAT_001fbd88 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3460))
+#define DAT_001fbd90 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3468))
+#define DAT_001fbd94 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3472))
+#define DAT_001fbd98 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3476))
+#define DAT_001fbd9c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3480))
+#define DAT_001fbda4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3488))
+#define DAT_001fbda8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3492))
+#define DAT_001fbdac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3496))
+#define DAT_001fbdb0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3500))
+#define DAT_001fbdb8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3508))
+#define DAT_001fbdbc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3512))
+#define DAT_001fbdc0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3516))
+#define DAT_001fbdc4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3520))
+#define DAT_001fbdcc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3528))
+#define DAT_001fbdd0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3532))
+#define DAT_001fbdd4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3536))
+#define DAT_001fbdd8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3540))
+#define DAT_001fbde0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3548))
+#define DAT_001fbde4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3552))
+#define DAT_001fbde8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3556))
+#define DAT_001fbdec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3560))
+#define DAT_001fbdf4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3568))
+#define DAT_001fbdf8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3572))
+#define DAT_001fbdfc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3576))
+#define DAT_001fbe00 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3580))
+#define DAT_001fbe08 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3588))
+#define DAT_001fbe0c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3592))
+#define DAT_001fbe10 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3596))
+#define DAT_001fbe14 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3600))
+#define DAT_001fbe1c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3608))
+#define DAT_001fbe20 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3612))
+#define DAT_001fbe24 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3616))
+#define DAT_001fbe28 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3620))
+#define DAT_001fbe30 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3628))
+#define DAT_001fbe34 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3632))
+#define DAT_001fbe38 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3636))
+#define DAT_001fbe3c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3640))
+#define DAT_001fbe44 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3648))
+#define DAT_001fbe48 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3652))
+#define DAT_001fbe4c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3656))
+#define DAT_001fbe50 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3660))
+#define DAT_001fbe58 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3668))
+#define DAT_001fbe5c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3672))
+#define DAT_001fbe60 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3676))
+#define DAT_001fbe64 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3680))
+#define DAT_001fbe6c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3688))
+#define DAT_001fbe70 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3692))
+#define DAT_001fbe74 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3696))
+#define DAT_001fbe78 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3700))
+#define DAT_001fbe80 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3708))
+#define DAT_001fbe84 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3712))
+#define DAT_001fbe88 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3716))
+#define DAT_001fbe8c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3720))
+#define DAT_001fbe94 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3728))
+#define DAT_001fbe98 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3732))
+#define DAT_001fbe9c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3736))
+#define DAT_001fbea0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3740))
+#define DAT_001fbea8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3748))
+#define DAT_001fbeac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3752))
+#define DAT_001fbeb0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3756))
+#define DAT_001fbeb4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3760))
+#define DAT_001fbebc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3768))
+#define DAT_001fbec0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3772))
+#define DAT_001fbec4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3776))
+#define DAT_001fbec8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3780))
+#define DAT_001fbed0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3788))
+#define DAT_001fbed4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3792))
+#define DAT_001fbed8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3796))
+#define DAT_001fbedc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3800))
+#define DAT_001fbee4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3808))
+#define DAT_001fbee8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3812))
+#define DAT_001fbeec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3816))
+#define DAT_001fbef0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3820))
+#define DAT_001fbef8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3828))
+#define DAT_001fbefc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3832))
+#define DAT_001fbf00 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3836))
+#define DAT_001fbf04 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3840))
+#define DAT_001fbf0c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3848))
+#define DAT_001fbf10 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3852))
+#define DAT_001fbf14 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3856))
+#define DAT_001fbf18 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3860))
+#define DAT_001fbf20 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3868))
+#define DAT_001fbf24 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3872))
+#define DAT_001fbf28 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3876))
+#define DAT_001fbf2c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3880))
+#define DAT_001fbf34 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3888))
+#define DAT_001fbf38 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3892))
+#define DAT_001fbf3c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3896))
+#define DAT_001fbf40 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3900))
+#define DAT_001fbf48 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3908))
+#define DAT_001fbf4c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3912))
+#define DAT_001fbf50 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3916))
+#define DAT_001fbf54 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3920))
+#define DAT_001fbf5c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3928))
+#define DAT_001fbf60 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3932))
+#define DAT_001fbf64 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3936))
+#define DAT_001fbf68 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3940))
+#define DAT_001fbf70 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3948))
+#define DAT_001fbf74 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3952))
+#define DAT_001fbf78 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3956))
+#define DAT_001fbf7c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3960))
+#define DAT_001fbf84 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3968))
+#define DAT_001fbf88 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3972))
+#define DAT_001fbf8c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3976))
+#define DAT_001fbf90 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3980))
+#define DAT_001fbf98 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3988))
+#define DAT_001fbf9c (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3992))
+#define DAT_001fbfa0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 3996))
+#define DAT_001fbfa4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4000))
+#define DAT_001fbfac (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4008))
+#define DAT_001fbfb0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4012))
+#define DAT_001fbfb4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4016))
+#define DAT_001fbfb8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4020))
+#define DAT_001fbfc0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4028))
+#define DAT_001fbfc4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4032))
+#define DAT_001fbfc8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4036))
+#define DAT_001fbfcc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4040))
+#define DAT_001fbfd4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4048))
+#define DAT_001fbfd8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4052))
+#define DAT_001fbfdc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4056))
+#define DAT_001fbfe0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4060))
+#define DAT_001fbfe8 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4068))
+#define DAT_001fbfec (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4072))
+#define DAT_001fbff0 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4076))
+#define DAT_001fbff4 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4080))
+#define DAT_001fbffc (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4088))
+#define DAT_001fc000 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4092))
+#define DAT_001fc004 (*(unsigned char **)((unsigned char *)&DAT_001fb004 + 4096))
 extern unsigned char DAT_001fc008;
 extern unsigned char DAT_001fc010;
 extern unsigned char DAT_001fc014;
@@ -6083,279 +6100,330 @@ extern unsigned char DAT_001fc1f4;
 extern unsigned char DAT_001fc1f8[];
 extern unsigned char DAT_001fc1fc[];
 extern unsigned char DAT_001fc2b0;
-extern unsigned char DAT_001fc2ec;
-extern unsigned char DAT_001fc2f0;
-extern unsigned char DAT_001fc2f4;
-extern unsigned char DAT_001fc2f8;
-extern unsigned char DAT_001fc2fc;
-extern unsigned char DAT_001fc300;
-extern unsigned char DAT_001fc304;
-extern unsigned char DAT_001fc308;
-extern unsigned char DAT_001fc30c;
-extern unsigned char DAT_001fc310;
-extern unsigned char DAT_001fc314;
-extern unsigned char DAT_001fc318;
-extern unsigned char DAT_001fc31c;
-extern unsigned char DAT_001fc320;
-extern unsigned char DAT_001fc324;
-extern unsigned char DAT_001fc328;
-extern unsigned char DAT_001fc32c;
-extern unsigned char DAT_001fc330;
-extern unsigned char DAT_001fc334;
-extern unsigned char DAT_001fc338;
-extern unsigned char DAT_001fc33c;
-extern unsigned char DAT_001fc340;
-extern unsigned char DAT_001fc344;
-extern unsigned char DAT_001fc348;
-extern unsigned char DAT_001fc34c;
-extern unsigned char DAT_001fc350;
-extern unsigned char DAT_001fc354;
-extern unsigned char DAT_001fc358;
-extern unsigned char DAT_001fc35c;
-extern unsigned char DAT_001fc360;
-extern unsigned char DAT_001fc364;
-extern unsigned char DAT_001fc368;
-extern unsigned char DAT_001fc36c;
-extern unsigned char DAT_001fc370;
-extern unsigned char DAT_001fc374;
-extern unsigned char DAT_001fc378;
-extern unsigned char DAT_001fc37c;
-extern unsigned char DAT_001fc380;
-extern unsigned char DAT_001fc384;
-extern unsigned char DAT_001fc388;
-extern unsigned char DAT_001fc38c;
-extern unsigned char DAT_001fc390;
-extern unsigned char DAT_001fc394;
-extern unsigned char DAT_001fc398;
-extern unsigned char DAT_001fc39c;
-extern unsigned char DAT_001fc3a0;
-extern unsigned char DAT_001fc3a4;
-extern unsigned char DAT_001fc3a8;
-extern unsigned char DAT_001fc3ac;
-extern unsigned char DAT_001fc3b0;
-extern unsigned char DAT_001fc3b4;
-extern unsigned char DAT_001fc3b8;
-extern unsigned char DAT_001fc3bc;
-extern unsigned char DAT_001fc3c0;
-extern unsigned char DAT_001fc3c4;
-extern unsigned char DAT_001fc3c8;
-extern unsigned char DAT_001fc3cc;
-extern unsigned char DAT_001fc3d0;
-extern unsigned char DAT_001fc3d4;
-extern unsigned char DAT_001fc3d8;
-extern unsigned char DAT_001fc3dc;
-extern unsigned char DAT_001fc3e0;
-extern unsigned char DAT_001fc3e4;
-extern unsigned char DAT_001fc3e8;
-extern unsigned char DAT_001fc3ec;
-extern unsigned char DAT_001fc3f0;
-extern unsigned char DAT_001fc3f4;
-extern unsigned char DAT_001fc3f8;
-extern unsigned char DAT_001fc3fc;
-extern unsigned char DAT_001fc400;
-extern unsigned char DAT_001fc404;
-extern unsigned char DAT_001fc408;
-extern unsigned char DAT_001fc40c;
-extern unsigned char DAT_001fc410;
-extern unsigned char DAT_001fc414;
-extern unsigned char DAT_001fc418;
-extern unsigned char DAT_001fc41c;
-extern unsigned char DAT_001fc420;
-extern unsigned char DAT_001fc424;
-extern unsigned char DAT_001fc428;
-extern unsigned char DAT_001fc42c;
-extern unsigned char DAT_001fc430;
-extern unsigned char DAT_001fc434;
-extern unsigned char DAT_001fc438;
-extern unsigned char DAT_001fc43c;
-extern unsigned char DAT_001fc440;
-extern unsigned char DAT_001fc444;
-extern unsigned char DAT_001fc448;
-extern unsigned char DAT_001fc44c;
-extern unsigned char DAT_001fc450;
-extern unsigned char DAT_001fc454;
-extern unsigned char DAT_001fc458;
-extern unsigned char DAT_001fc45c;
-extern unsigned char DAT_001fc460;
-extern unsigned char DAT_001fc464;
-extern unsigned char DAT_001fc468;
-extern unsigned char DAT_001fc46c;
-extern unsigned char DAT_001fc470;
-extern unsigned char DAT_001fc474;
-extern unsigned char DAT_001fc478;
-extern unsigned char DAT_001fc47c;
-extern unsigned char DAT_001fc480;
-extern unsigned char DAT_001fc484;
-extern unsigned char DAT_001fc488;
-extern unsigned char DAT_001fc48c;
-extern unsigned char DAT_001fc490;
-extern unsigned char DAT_001fc494;
-extern unsigned char DAT_001fc498;
-extern unsigned char DAT_001fc49c;
-extern unsigned char DAT_001fc4a0;
-extern unsigned char DAT_001fc4a4;
-extern unsigned char DAT_001fc4a8;
-extern unsigned char DAT_001fc4ac;
-extern unsigned char DAT_001fc4b0;
-extern unsigned char DAT_001fc4b4;
-extern unsigned char DAT_001fc4b8;
-extern unsigned char DAT_001fc4bc;
-extern unsigned char DAT_001fc4c0;
-extern unsigned char DAT_001fc4c4;
-extern unsigned char DAT_001fc4c8;
-extern unsigned char DAT_001fc4cc;
-extern unsigned char DAT_001fc4d0;
-extern unsigned char DAT_001fc4d4;
-extern unsigned char DAT_001fc4d8;
-extern unsigned char DAT_001fc4dc;
-extern unsigned char DAT_001fc4e0;
-extern unsigned char DAT_001fc4e4;
-extern unsigned char DAT_001fc4e8;
-extern unsigned char DAT_001fc4ec;
-extern unsigned char DAT_001fc4f0;
-extern unsigned char DAT_001fc4f4;
-extern unsigned char DAT_001fc4f8;
-extern unsigned char DAT_001fc4fc;
-extern unsigned char DAT_001fc500;
-extern unsigned char DAT_001fc504;
-extern unsigned char DAT_001fc508;
-extern unsigned char DAT_001fc50c;
-extern unsigned char DAT_001fc510;
-extern unsigned char DAT_001fc514;
-extern unsigned char DAT_001fc518;
-extern unsigned char DAT_001fc51c;
-extern unsigned char DAT_001fc520;
-extern unsigned char DAT_001fc524;
-extern unsigned char DAT_001fc528;
-extern unsigned char DAT_001fc52c;
-extern unsigned char DAT_001fc530;
-extern unsigned char DAT_001fc534;
-extern unsigned char DAT_001fc538;
-extern unsigned char DAT_001fc53c;
-extern unsigned char DAT_001fc540;
-extern unsigned char DAT_001fc544;
-extern unsigned char DAT_001fc548;
-extern unsigned char DAT_001fc54c;
-extern unsigned char DAT_001fc550;
-extern unsigned char DAT_001fc554;
-extern unsigned char DAT_001fc558;
-extern unsigned char DAT_001fc55c;
-extern unsigned char DAT_001fc560;
-extern unsigned char DAT_001fc564;
-extern unsigned char DAT_001fc568;
-extern unsigned char DAT_001fc56c;
-extern unsigned char DAT_001fc570;
-extern unsigned char DAT_001fc574;
-extern unsigned char DAT_001fc578;
-extern unsigned char DAT_001fc57c;
-extern unsigned char DAT_001fc580;
-extern unsigned char DAT_001fc584;
-extern unsigned char DAT_001fc588;
-extern unsigned char DAT_001fc58c;
-extern unsigned char DAT_001fc590;
-extern unsigned char DAT_001fc594;
-extern unsigned char DAT_001fc598;
-extern unsigned char DAT_001fc59c;
-extern unsigned char DAT_001fc5a0;
-extern unsigned char DAT_001fc5a4;
-extern unsigned char DAT_001fc5a8;
-extern unsigned char DAT_001fc5ac;
-extern unsigned char DAT_001fc5b0;
-extern unsigned char DAT_001fc5b4;
-extern unsigned char DAT_001fc5b8;
-extern unsigned char DAT_001fc5bc;
-extern unsigned char DAT_001fc5c0;
-extern unsigned char DAT_001fc5c4;
-extern unsigned char DAT_001fc5c8;
-extern unsigned char DAT_001fc5cc;
-extern unsigned char DAT_001fc5d0;
-extern unsigned char DAT_001fc5d4;
-extern unsigned char DAT_001fc5d8;
-extern unsigned char DAT_001fc5dc;
-extern unsigned char DAT_001fc5e0;
-extern unsigned char DAT_001fc5e4;
-extern unsigned char DAT_001fc5e8;
-extern unsigned char DAT_001fc5ec;
-extern unsigned char DAT_001fc5f0;
-extern unsigned char DAT_001fc5f4;
-extern unsigned char DAT_001fc5f8;
-extern unsigned char DAT_001fc5fc;
-extern unsigned char DAT_001fc600;
-extern unsigned char DAT_001fc604;
-extern unsigned char DAT_001fc608;
-extern unsigned char DAT_001fc60c;
-extern unsigned char DAT_001fc610;
-extern unsigned char DAT_001fc614;
-extern unsigned char DAT_001fc618;
-extern unsigned char DAT_001fc61c;
-extern unsigned char DAT_001fc620;
-extern unsigned char DAT_001fc624;
-extern unsigned char DAT_001fc628;
-extern unsigned char DAT_001fc62c;
-extern unsigned char DAT_001fc630;
-extern unsigned char DAT_001fc634;
-extern unsigned char DAT_001fc638;
-extern unsigned char DAT_001fc63c;
-extern unsigned char DAT_001fc640;
-extern unsigned char DAT_001fc644;
-extern unsigned char DAT_001fc648;
-extern unsigned char DAT_001fc64c;
-extern unsigned char DAT_001fc650;
-extern unsigned char DAT_001fc654;
-extern unsigned char DAT_001fc658;
-extern unsigned char DAT_001fc65c;
-extern unsigned char DAT_001fc660;
-extern unsigned char DAT_001fc664;
-extern unsigned char DAT_001fc668;
-extern unsigned char DAT_001fc66c;
-extern unsigned char DAT_001fc670;
-extern unsigned char DAT_001fc674;
-extern unsigned char DAT_001fc678;
-extern unsigned char DAT_001fc67c;
-extern unsigned char DAT_001fc680;
-extern unsigned char DAT_001fc684;
-extern unsigned char DAT_001fc688;
-extern unsigned char DAT_001fc68c;
-extern unsigned char DAT_001fc690;
-extern unsigned char DAT_001fc694;
-extern unsigned char DAT_001fc698;
-extern unsigned char DAT_001fc69c;
-extern unsigned char DAT_001fc6a0;
-extern unsigned char DAT_001fc6a4;
-extern unsigned char DAT_001fc6a8;
-extern unsigned char DAT_001fc6ac;
-extern unsigned char DAT_001fc6b0;
-extern unsigned char DAT_001fc6b4;
-extern unsigned char DAT_001fc6b8;
-extern unsigned char DAT_001fc6bc;
-extern unsigned char DAT_001fc6c0;
-extern unsigned char DAT_001fc6c4;
-extern unsigned char DAT_001fc6c8;
-extern unsigned char DAT_001fc6cc;
-extern unsigned char DAT_001fc6d0;
-extern unsigned char DAT_001fc6d4;
-extern unsigned char DAT_001fc6d8;
-extern unsigned char DAT_001fc6dc;
-extern unsigned char PTR_001e88a4;
-extern unsigned char PTR_001e88a8;
-extern unsigned char PTR_001e88b0;
-/* issue: this was declared as a plain byte (missing the pointer asterisk every OTHER
- * "PTR_"-named global near it correctly has, e.g. PTR_DAT_001e88ac) - but data.s defines it
- * as `.long _mach_task_self_`, a real 4-byte pointer to the well-known mach_task_self_ system
- * global. FUN_00039100 (part_005.c) casts its VALUE directly to a pointer and dereferences it
- * (`*(undefined4*)PTR_001e88b4`); with the wrong, truncated 1-byte type, that reads only the
- * pointer's low byte (observed live as 0xa0) and crashes dereferencing THAT as an address
- * instead of the real pointer. Likely one instance of a wider pattern (616 total "extern
- * unsigned char PTR_*" declarations in this file, most probably correct byte-array bases,
- * but worth a dedicated audit - filed separately as issue #75). */
+/* issue #75 (follow-up, static-data version of the same bug class): DAT_001fc2b0 and this
+ * whole run of individually-named DAT_ globals are, in the REAL stock binary, ONE SINGLE
+ * contiguous array - FUN_00112f54 (part_032.c) reads it purely via pointer arithmetic
+ * (`*(undefined4*)(&DAT_001fc2b0 + index*4)`), and part_036.c's giant format-table
+ * initializer writes into it the exact same way, just via individually Ghidra-named slots
+ * (because THAT code happens to reference each slot by absolute address instead of computed
+ * index). Declaring every slot as its own INDEPENDENT `.zerofill` symbol - as this whole
+ * decls.h did - only worked in the original binary because ITS compiler/linker happened to
+ * lay them out contiguously and in order; our rebuild's linker has no reason to preserve that
+ * adjacency (same root cause as the FUN_00001830 local_28/local_24 stack-slot bug fixed
+ * earlier in this same investigation, just for static/BSS storage instead of the stack).
+ * Confirmed live: DAT_001fc2b0's own `.zerofill` was only 60 bytes (15 entries), so a real
+ * call site (`FUN_00112f54(0x87)` = index 135, part_027.c:1155) read 480 bytes past its
+ * allocated storage into unrelated memory (observed as 0xf0000000), even though part_036.c
+ * DOES correctly execute `DAT_001fc4cc = &DAT_001fb400;` (the real value for index 135) -
+ * it just lands in a completely separate, independent 4-byte allocation that the array-style
+ * read never sees. Also: each of these individual slots was itself typed as a scalar
+ * `unsigned char` (1 byte) despite always being assigned a real pointer value
+ * (`NAME = &DAT_xxx;`), which would truncate every one of those writes down to 1 byte even if
+ * the adjacency problem didn't exist.
+ *
+ * Fixed by enlarging DAT_001fc2b0's own storage (data.s zerofill 60 -> 1200 bytes, 300
+ * entries - comfortably past the highest confirmed real index, 249) and redirecting every one
+ * of these previously-independent slot names into that same array via macros, so the write
+ * side (part_036.c) and the read side (FUN_00112f54) are provably the same physical storage
+ * regardless of what our own linker does. Verified these 253 names have no OTHER use anywhere
+ * in the corpus (never read directly, never have their own address taken) - only ever written
+ * once each by part_036.c's initializer - so this substitution is safe. */
+#define DAT_001fc2ec (*(unsigned char **)(&DAT_001fc2b0 + 15*4))
+#define DAT_001fc2f0 (*(unsigned char **)(&DAT_001fc2b0 + 16*4))
+#define DAT_001fc2f4 (*(unsigned char **)(&DAT_001fc2b0 + 17*4))
+#define DAT_001fc2f8 (*(unsigned char **)(&DAT_001fc2b0 + 18*4))
+#define DAT_001fc2fc (*(unsigned char **)(&DAT_001fc2b0 + 19*4))
+#define DAT_001fc300 (*(unsigned char **)(&DAT_001fc2b0 + 20*4))
+#define DAT_001fc304 (*(unsigned char **)(&DAT_001fc2b0 + 21*4))
+#define DAT_001fc308 (*(unsigned char **)(&DAT_001fc2b0 + 22*4))
+#define DAT_001fc30c (*(unsigned char **)(&DAT_001fc2b0 + 23*4))
+#define DAT_001fc310 (*(unsigned char **)(&DAT_001fc2b0 + 24*4))
+#define DAT_001fc314 (*(unsigned char **)(&DAT_001fc2b0 + 25*4))
+#define DAT_001fc318 (*(unsigned char **)(&DAT_001fc2b0 + 26*4))
+#define DAT_001fc31c (*(unsigned char **)(&DAT_001fc2b0 + 27*4))
+#define DAT_001fc320 (*(unsigned char **)(&DAT_001fc2b0 + 28*4))
+#define DAT_001fc324 (*(unsigned char **)(&DAT_001fc2b0 + 29*4))
+#define DAT_001fc328 (*(unsigned char **)(&DAT_001fc2b0 + 30*4))
+#define DAT_001fc32c (*(unsigned char **)(&DAT_001fc2b0 + 31*4))
+#define DAT_001fc330 (*(unsigned char **)(&DAT_001fc2b0 + 32*4))
+#define DAT_001fc334 (*(unsigned char **)(&DAT_001fc2b0 + 33*4))
+#define DAT_001fc338 (*(unsigned char **)(&DAT_001fc2b0 + 34*4))
+#define DAT_001fc33c (*(unsigned char **)(&DAT_001fc2b0 + 35*4))
+#define DAT_001fc340 (*(unsigned char **)(&DAT_001fc2b0 + 36*4))
+#define DAT_001fc344 (*(unsigned char **)(&DAT_001fc2b0 + 37*4))
+#define DAT_001fc348 (*(unsigned char **)(&DAT_001fc2b0 + 38*4))
+#define DAT_001fc34c (*(unsigned char **)(&DAT_001fc2b0 + 39*4))
+#define DAT_001fc350 (*(unsigned char **)(&DAT_001fc2b0 + 40*4))
+#define DAT_001fc354 (*(unsigned char **)(&DAT_001fc2b0 + 41*4))
+#define DAT_001fc358 (*(unsigned char **)(&DAT_001fc2b0 + 42*4))
+#define DAT_001fc35c (*(unsigned char **)(&DAT_001fc2b0 + 43*4))
+#define DAT_001fc360 (*(unsigned char **)(&DAT_001fc2b0 + 44*4))
+#define DAT_001fc364 (*(unsigned char **)(&DAT_001fc2b0 + 45*4))
+#define DAT_001fc368 (*(unsigned char **)(&DAT_001fc2b0 + 46*4))
+#define DAT_001fc36c (*(unsigned char **)(&DAT_001fc2b0 + 47*4))
+#define DAT_001fc370 (*(unsigned char **)(&DAT_001fc2b0 + 48*4))
+#define DAT_001fc374 (*(unsigned char **)(&DAT_001fc2b0 + 49*4))
+#define DAT_001fc378 (*(unsigned char **)(&DAT_001fc2b0 + 50*4))
+#define DAT_001fc37c (*(unsigned char **)(&DAT_001fc2b0 + 51*4))
+#define DAT_001fc380 (*(unsigned char **)(&DAT_001fc2b0 + 52*4))
+#define DAT_001fc384 (*(unsigned char **)(&DAT_001fc2b0 + 53*4))
+#define DAT_001fc388 (*(unsigned char **)(&DAT_001fc2b0 + 54*4))
+#define DAT_001fc38c (*(unsigned char **)(&DAT_001fc2b0 + 55*4))
+#define DAT_001fc390 (*(unsigned char **)(&DAT_001fc2b0 + 56*4))
+#define DAT_001fc394 (*(unsigned char **)(&DAT_001fc2b0 + 57*4))
+#define DAT_001fc398 (*(unsigned char **)(&DAT_001fc2b0 + 58*4))
+#define DAT_001fc39c (*(unsigned char **)(&DAT_001fc2b0 + 59*4))
+#define DAT_001fc3a0 (*(unsigned char **)(&DAT_001fc2b0 + 60*4))
+#define DAT_001fc3a4 (*(unsigned char **)(&DAT_001fc2b0 + 61*4))
+#define DAT_001fc3a8 (*(unsigned char **)(&DAT_001fc2b0 + 62*4))
+#define DAT_001fc3ac (*(unsigned char **)(&DAT_001fc2b0 + 63*4))
+#define DAT_001fc3b0 (*(unsigned char **)(&DAT_001fc2b0 + 64*4))
+#define DAT_001fc3b4 (*(unsigned char **)(&DAT_001fc2b0 + 65*4))
+#define DAT_001fc3b8 (*(unsigned char **)(&DAT_001fc2b0 + 66*4))
+#define DAT_001fc3bc (*(unsigned char **)(&DAT_001fc2b0 + 67*4))
+#define DAT_001fc3c0 (*(unsigned char **)(&DAT_001fc2b0 + 68*4))
+#define DAT_001fc3c4 (*(unsigned char **)(&DAT_001fc2b0 + 69*4))
+#define DAT_001fc3c8 (*(unsigned char **)(&DAT_001fc2b0 + 70*4))
+#define DAT_001fc3cc (*(unsigned char **)(&DAT_001fc2b0 + 71*4))
+#define DAT_001fc3d0 (*(unsigned char **)(&DAT_001fc2b0 + 72*4))
+#define DAT_001fc3d4 (*(unsigned char **)(&DAT_001fc2b0 + 73*4))
+#define DAT_001fc3d8 (*(unsigned char **)(&DAT_001fc2b0 + 74*4))
+#define DAT_001fc3dc (*(unsigned char **)(&DAT_001fc2b0 + 75*4))
+#define DAT_001fc3e0 (*(unsigned char **)(&DAT_001fc2b0 + 76*4))
+#define DAT_001fc3e4 (*(unsigned char **)(&DAT_001fc2b0 + 77*4))
+#define DAT_001fc3e8 (*(unsigned char **)(&DAT_001fc2b0 + 78*4))
+#define DAT_001fc3ec (*(unsigned char **)(&DAT_001fc2b0 + 79*4))
+#define DAT_001fc3f0 (*(unsigned char **)(&DAT_001fc2b0 + 80*4))
+#define DAT_001fc3f4 (*(unsigned char **)(&DAT_001fc2b0 + 81*4))
+#define DAT_001fc3f8 (*(unsigned char **)(&DAT_001fc2b0 + 82*4))
+#define DAT_001fc3fc (*(unsigned char **)(&DAT_001fc2b0 + 83*4))
+#define DAT_001fc400 (*(unsigned char **)(&DAT_001fc2b0 + 84*4))
+#define DAT_001fc404 (*(unsigned char **)(&DAT_001fc2b0 + 85*4))
+#define DAT_001fc408 (*(unsigned char **)(&DAT_001fc2b0 + 86*4))
+#define DAT_001fc40c (*(unsigned char **)(&DAT_001fc2b0 + 87*4))
+#define DAT_001fc410 (*(unsigned char **)(&DAT_001fc2b0 + 88*4))
+#define DAT_001fc414 (*(unsigned char **)(&DAT_001fc2b0 + 89*4))
+#define DAT_001fc418 (*(unsigned char **)(&DAT_001fc2b0 + 90*4))
+#define DAT_001fc41c (*(unsigned char **)(&DAT_001fc2b0 + 91*4))
+#define DAT_001fc420 (*(unsigned char **)(&DAT_001fc2b0 + 92*4))
+#define DAT_001fc424 (*(unsigned char **)(&DAT_001fc2b0 + 93*4))
+#define DAT_001fc428 (*(unsigned char **)(&DAT_001fc2b0 + 94*4))
+#define DAT_001fc42c (*(unsigned char **)(&DAT_001fc2b0 + 95*4))
+#define DAT_001fc430 (*(unsigned char **)(&DAT_001fc2b0 + 96*4))
+#define DAT_001fc434 (*(unsigned char **)(&DAT_001fc2b0 + 97*4))
+#define DAT_001fc438 (*(unsigned char **)(&DAT_001fc2b0 + 98*4))
+#define DAT_001fc43c (*(unsigned char **)(&DAT_001fc2b0 + 99*4))
+#define DAT_001fc440 (*(unsigned char **)(&DAT_001fc2b0 + 100*4))
+#define DAT_001fc444 (*(unsigned char **)(&DAT_001fc2b0 + 101*4))
+#define DAT_001fc448 (*(unsigned char **)(&DAT_001fc2b0 + 102*4))
+#define DAT_001fc44c (*(unsigned char **)(&DAT_001fc2b0 + 103*4))
+#define DAT_001fc450 (*(unsigned char **)(&DAT_001fc2b0 + 104*4))
+#define DAT_001fc454 (*(unsigned char **)(&DAT_001fc2b0 + 105*4))
+#define DAT_001fc458 (*(unsigned char **)(&DAT_001fc2b0 + 106*4))
+#define DAT_001fc45c (*(unsigned char **)(&DAT_001fc2b0 + 107*4))
+#define DAT_001fc460 (*(unsigned char **)(&DAT_001fc2b0 + 108*4))
+#define DAT_001fc464 (*(unsigned char **)(&DAT_001fc2b0 + 109*4))
+#define DAT_001fc468 (*(unsigned char **)(&DAT_001fc2b0 + 110*4))
+#define DAT_001fc46c (*(unsigned char **)(&DAT_001fc2b0 + 111*4))
+#define DAT_001fc470 (*(unsigned char **)(&DAT_001fc2b0 + 112*4))
+#define DAT_001fc474 (*(unsigned char **)(&DAT_001fc2b0 + 113*4))
+#define DAT_001fc478 (*(unsigned char **)(&DAT_001fc2b0 + 114*4))
+#define DAT_001fc47c (*(unsigned char **)(&DAT_001fc2b0 + 115*4))
+#define DAT_001fc480 (*(unsigned char **)(&DAT_001fc2b0 + 116*4))
+#define DAT_001fc484 (*(unsigned char **)(&DAT_001fc2b0 + 117*4))
+#define DAT_001fc488 (*(unsigned char **)(&DAT_001fc2b0 + 118*4))
+#define DAT_001fc48c (*(unsigned char **)(&DAT_001fc2b0 + 119*4))
+#define DAT_001fc490 (*(unsigned char **)(&DAT_001fc2b0 + 120*4))
+#define DAT_001fc494 (*(unsigned char **)(&DAT_001fc2b0 + 121*4))
+#define DAT_001fc498 (*(unsigned char **)(&DAT_001fc2b0 + 122*4))
+#define DAT_001fc49c (*(unsigned char **)(&DAT_001fc2b0 + 123*4))
+#define DAT_001fc4a0 (*(unsigned char **)(&DAT_001fc2b0 + 124*4))
+#define DAT_001fc4a4 (*(unsigned char **)(&DAT_001fc2b0 + 125*4))
+#define DAT_001fc4a8 (*(unsigned char **)(&DAT_001fc2b0 + 126*4))
+#define DAT_001fc4ac (*(unsigned char **)(&DAT_001fc2b0 + 127*4))
+#define DAT_001fc4b0 (*(unsigned char **)(&DAT_001fc2b0 + 128*4))
+#define DAT_001fc4b4 (*(unsigned char **)(&DAT_001fc2b0 + 129*4))
+#define DAT_001fc4b8 (*(unsigned char **)(&DAT_001fc2b0 + 130*4))
+#define DAT_001fc4bc (*(unsigned char **)(&DAT_001fc2b0 + 131*4))
+#define DAT_001fc4c0 (*(unsigned char **)(&DAT_001fc2b0 + 132*4))
+#define DAT_001fc4c4 (*(unsigned char **)(&DAT_001fc2b0 + 133*4))
+#define DAT_001fc4c8 (*(unsigned char **)(&DAT_001fc2b0 + 134*4))
+#define DAT_001fc4cc (*(unsigned char **)(&DAT_001fc2b0 + 135*4))
+#define DAT_001fc4d0 (*(unsigned char **)(&DAT_001fc2b0 + 136*4))
+#define DAT_001fc4d4 (*(unsigned char **)(&DAT_001fc2b0 + 137*4))
+#define DAT_001fc4d8 (*(unsigned char **)(&DAT_001fc2b0 + 138*4))
+#define DAT_001fc4dc (*(unsigned char **)(&DAT_001fc2b0 + 139*4))
+#define DAT_001fc4e0 (*(unsigned char **)(&DAT_001fc2b0 + 140*4))
+#define DAT_001fc4e4 (*(unsigned char **)(&DAT_001fc2b0 + 141*4))
+#define DAT_001fc4e8 (*(unsigned char **)(&DAT_001fc2b0 + 142*4))
+#define DAT_001fc4ec (*(unsigned char **)(&DAT_001fc2b0 + 143*4))
+#define DAT_001fc4f0 (*(unsigned char **)(&DAT_001fc2b0 + 144*4))
+#define DAT_001fc4f4 (*(unsigned char **)(&DAT_001fc2b0 + 145*4))
+#define DAT_001fc4f8 (*(unsigned char **)(&DAT_001fc2b0 + 146*4))
+#define DAT_001fc4fc (*(unsigned char **)(&DAT_001fc2b0 + 147*4))
+#define DAT_001fc500 (*(unsigned char **)(&DAT_001fc2b0 + 148*4))
+#define DAT_001fc504 (*(unsigned char **)(&DAT_001fc2b0 + 149*4))
+#define DAT_001fc508 (*(unsigned char **)(&DAT_001fc2b0 + 150*4))
+#define DAT_001fc50c (*(unsigned char **)(&DAT_001fc2b0 + 151*4))
+#define DAT_001fc510 (*(unsigned char **)(&DAT_001fc2b0 + 152*4))
+#define DAT_001fc514 (*(unsigned char **)(&DAT_001fc2b0 + 153*4))
+#define DAT_001fc518 (*(unsigned char **)(&DAT_001fc2b0 + 154*4))
+#define DAT_001fc51c (*(unsigned char **)(&DAT_001fc2b0 + 155*4))
+#define DAT_001fc520 (*(unsigned char **)(&DAT_001fc2b0 + 156*4))
+#define DAT_001fc524 (*(unsigned char **)(&DAT_001fc2b0 + 157*4))
+#define DAT_001fc528 (*(unsigned char **)(&DAT_001fc2b0 + 158*4))
+#define DAT_001fc52c (*(unsigned char **)(&DAT_001fc2b0 + 159*4))
+#define DAT_001fc530 (*(unsigned char **)(&DAT_001fc2b0 + 160*4))
+#define DAT_001fc534 (*(unsigned char **)(&DAT_001fc2b0 + 161*4))
+#define DAT_001fc538 (*(unsigned char **)(&DAT_001fc2b0 + 162*4))
+#define DAT_001fc53c (*(unsigned char **)(&DAT_001fc2b0 + 163*4))
+#define DAT_001fc540 (*(unsigned char **)(&DAT_001fc2b0 + 164*4))
+#define DAT_001fc544 (*(unsigned char **)(&DAT_001fc2b0 + 165*4))
+#define DAT_001fc548 (*(unsigned char **)(&DAT_001fc2b0 + 166*4))
+#define DAT_001fc54c (*(unsigned char **)(&DAT_001fc2b0 + 167*4))
+#define DAT_001fc550 (*(unsigned char **)(&DAT_001fc2b0 + 168*4))
+#define DAT_001fc554 (*(unsigned char **)(&DAT_001fc2b0 + 169*4))
+#define DAT_001fc558 (*(unsigned char **)(&DAT_001fc2b0 + 170*4))
+#define DAT_001fc55c (*(unsigned char **)(&DAT_001fc2b0 + 171*4))
+#define DAT_001fc560 (*(unsigned char **)(&DAT_001fc2b0 + 172*4))
+#define DAT_001fc564 (*(unsigned char **)(&DAT_001fc2b0 + 173*4))
+#define DAT_001fc568 (*(unsigned char **)(&DAT_001fc2b0 + 174*4))
+#define DAT_001fc56c (*(unsigned char **)(&DAT_001fc2b0 + 175*4))
+#define DAT_001fc570 (*(unsigned char **)(&DAT_001fc2b0 + 176*4))
+#define DAT_001fc574 (*(unsigned char **)(&DAT_001fc2b0 + 177*4))
+#define DAT_001fc578 (*(unsigned char **)(&DAT_001fc2b0 + 178*4))
+#define DAT_001fc57c (*(unsigned char **)(&DAT_001fc2b0 + 179*4))
+#define DAT_001fc580 (*(unsigned char **)(&DAT_001fc2b0 + 180*4))
+#define DAT_001fc584 (*(unsigned char **)(&DAT_001fc2b0 + 181*4))
+#define DAT_001fc588 (*(unsigned char **)(&DAT_001fc2b0 + 182*4))
+#define DAT_001fc58c (*(unsigned char **)(&DAT_001fc2b0 + 183*4))
+#define DAT_001fc590 (*(unsigned char **)(&DAT_001fc2b0 + 184*4))
+#define DAT_001fc594 (*(unsigned char **)(&DAT_001fc2b0 + 185*4))
+#define DAT_001fc598 (*(unsigned char **)(&DAT_001fc2b0 + 186*4))
+#define DAT_001fc59c (*(unsigned char **)(&DAT_001fc2b0 + 187*4))
+#define DAT_001fc5a0 (*(unsigned char **)(&DAT_001fc2b0 + 188*4))
+#define DAT_001fc5a4 (*(unsigned char **)(&DAT_001fc2b0 + 189*4))
+#define DAT_001fc5a8 (*(unsigned char **)(&DAT_001fc2b0 + 190*4))
+#define DAT_001fc5ac (*(unsigned char **)(&DAT_001fc2b0 + 191*4))
+#define DAT_001fc5b0 (*(unsigned char **)(&DAT_001fc2b0 + 192*4))
+#define DAT_001fc5b4 (*(unsigned char **)(&DAT_001fc2b0 + 193*4))
+#define DAT_001fc5b8 (*(unsigned char **)(&DAT_001fc2b0 + 194*4))
+#define DAT_001fc5bc (*(unsigned char **)(&DAT_001fc2b0 + 195*4))
+#define DAT_001fc5c0 (*(unsigned char **)(&DAT_001fc2b0 + 196*4))
+#define DAT_001fc5c4 (*(unsigned char **)(&DAT_001fc2b0 + 197*4))
+#define DAT_001fc5c8 (*(unsigned char **)(&DAT_001fc2b0 + 198*4))
+#define DAT_001fc5cc (*(unsigned char **)(&DAT_001fc2b0 + 199*4))
+#define DAT_001fc5d0 (*(unsigned char **)(&DAT_001fc2b0 + 200*4))
+#define DAT_001fc5d4 (*(unsigned char **)(&DAT_001fc2b0 + 201*4))
+#define DAT_001fc5d8 (*(unsigned char **)(&DAT_001fc2b0 + 202*4))
+#define DAT_001fc5dc (*(unsigned char **)(&DAT_001fc2b0 + 203*4))
+#define DAT_001fc5e0 (*(unsigned char **)(&DAT_001fc2b0 + 204*4))
+#define DAT_001fc5e4 (*(unsigned char **)(&DAT_001fc2b0 + 205*4))
+#define DAT_001fc5e8 (*(unsigned char **)(&DAT_001fc2b0 + 206*4))
+#define DAT_001fc5ec (*(unsigned char **)(&DAT_001fc2b0 + 207*4))
+#define DAT_001fc5f0 (*(unsigned char **)(&DAT_001fc2b0 + 208*4))
+#define DAT_001fc5f4 (*(unsigned char **)(&DAT_001fc2b0 + 209*4))
+#define DAT_001fc5f8 (*(unsigned char **)(&DAT_001fc2b0 + 210*4))
+#define DAT_001fc5fc (*(unsigned char **)(&DAT_001fc2b0 + 211*4))
+#define DAT_001fc600 (*(unsigned char **)(&DAT_001fc2b0 + 212*4))
+#define DAT_001fc604 (*(unsigned char **)(&DAT_001fc2b0 + 213*4))
+#define DAT_001fc608 (*(unsigned char **)(&DAT_001fc2b0 + 214*4))
+#define DAT_001fc60c (*(unsigned char **)(&DAT_001fc2b0 + 215*4))
+#define DAT_001fc610 (*(unsigned char **)(&DAT_001fc2b0 + 216*4))
+#define DAT_001fc614 (*(unsigned char **)(&DAT_001fc2b0 + 217*4))
+#define DAT_001fc618 (*(unsigned char **)(&DAT_001fc2b0 + 218*4))
+#define DAT_001fc61c (*(unsigned char **)(&DAT_001fc2b0 + 219*4))
+#define DAT_001fc620 (*(unsigned char **)(&DAT_001fc2b0 + 220*4))
+#define DAT_001fc624 (*(unsigned char **)(&DAT_001fc2b0 + 221*4))
+#define DAT_001fc628 (*(unsigned char **)(&DAT_001fc2b0 + 222*4))
+#define DAT_001fc62c (*(unsigned char **)(&DAT_001fc2b0 + 223*4))
+#define DAT_001fc630 (*(unsigned char **)(&DAT_001fc2b0 + 224*4))
+#define DAT_001fc634 (*(unsigned char **)(&DAT_001fc2b0 + 225*4))
+#define DAT_001fc638 (*(unsigned char **)(&DAT_001fc2b0 + 226*4))
+#define DAT_001fc63c (*(unsigned char **)(&DAT_001fc2b0 + 227*4))
+#define DAT_001fc640 (*(unsigned char **)(&DAT_001fc2b0 + 228*4))
+#define DAT_001fc644 (*(unsigned char **)(&DAT_001fc2b0 + 229*4))
+#define DAT_001fc648 (*(unsigned char **)(&DAT_001fc2b0 + 230*4))
+#define DAT_001fc64c (*(unsigned char **)(&DAT_001fc2b0 + 231*4))
+#define DAT_001fc650 (*(unsigned char **)(&DAT_001fc2b0 + 232*4))
+#define DAT_001fc654 (*(unsigned char **)(&DAT_001fc2b0 + 233*4))
+#define DAT_001fc658 (*(unsigned char **)(&DAT_001fc2b0 + 234*4))
+#define DAT_001fc65c (*(unsigned char **)(&DAT_001fc2b0 + 235*4))
+#define DAT_001fc660 (*(unsigned char **)(&DAT_001fc2b0 + 236*4))
+#define DAT_001fc664 (*(unsigned char **)(&DAT_001fc2b0 + 237*4))
+#define DAT_001fc668 (*(unsigned char **)(&DAT_001fc2b0 + 238*4))
+#define DAT_001fc66c (*(unsigned char **)(&DAT_001fc2b0 + 239*4))
+#define DAT_001fc670 (*(unsigned char **)(&DAT_001fc2b0 + 240*4))
+#define DAT_001fc674 (*(unsigned char **)(&DAT_001fc2b0 + 241*4))
+#define DAT_001fc678 (*(unsigned char **)(&DAT_001fc2b0 + 242*4))
+#define DAT_001fc67c (*(unsigned char **)(&DAT_001fc2b0 + 243*4))
+#define DAT_001fc680 (*(unsigned char **)(&DAT_001fc2b0 + 244*4))
+#define DAT_001fc684 (*(unsigned char **)(&DAT_001fc2b0 + 245*4))
+#define DAT_001fc688 (*(unsigned char **)(&DAT_001fc2b0 + 246*4))
+#define DAT_001fc68c (*(unsigned char **)(&DAT_001fc2b0 + 247*4))
+#define DAT_001fc690 (*(unsigned char **)(&DAT_001fc2b0 + 248*4))
+#define DAT_001fc694 (*(unsigned char **)(&DAT_001fc2b0 + 249*4))
+#define DAT_001fc698 (*(unsigned char **)(&DAT_001fc2b0 + 250*4))
+#define DAT_001fc69c (*(unsigned char **)(&DAT_001fc2b0 + 251*4))
+#define DAT_001fc6a0 (*(unsigned char **)(&DAT_001fc2b0 + 252*4))
+#define DAT_001fc6a4 (*(unsigned char **)(&DAT_001fc2b0 + 253*4))
+#define DAT_001fc6a8 (*(unsigned char **)(&DAT_001fc2b0 + 254*4))
+#define DAT_001fc6ac (*(unsigned char **)(&DAT_001fc2b0 + 255*4))
+#define DAT_001fc6b0 (*(unsigned char **)(&DAT_001fc2b0 + 256*4))
+#define DAT_001fc6b4 (*(unsigned char **)(&DAT_001fc2b0 + 257*4))
+#define DAT_001fc6b8 (*(unsigned char **)(&DAT_001fc2b0 + 258*4))
+#define DAT_001fc6bc (*(unsigned char **)(&DAT_001fc2b0 + 259*4))
+#define DAT_001fc6c0 (*(unsigned char **)(&DAT_001fc2b0 + 260*4))
+#define DAT_001fc6c4 (*(unsigned char **)(&DAT_001fc2b0 + 261*4))
+#define DAT_001fc6c8 (*(unsigned char **)(&DAT_001fc2b0 + 262*4))
+#define DAT_001fc6cc (*(unsigned char **)(&DAT_001fc2b0 + 263*4))
+#define DAT_001fc6d0 (*(unsigned char **)(&DAT_001fc2b0 + 264*4))
+#define DAT_001fc6d4 (*(unsigned char **)(&DAT_001fc2b0 + 265*4))
+#define DAT_001fc6d8 (*(unsigned char **)(&DAT_001fc2b0 + 266*4))
+#define DAT_001fc6dc (*(unsigned char **)(&DAT_001fc2b0 + 267*4))
+extern unsigned char *PTR_001e88a4;
+extern unsigned char *PTR_001e88a8;
+/* issue #75: this whole cluster (b0-c0) was declared as plain bytes (missing the pointer
+ * asterisk every OTHER "PTR_"-named global near it correctly has, e.g. PTR_DAT_001e88ac) -
+ * but data.s defines EACH of them as a real 4-byte pointer to a well-known system global
+ * (__cpu_capabilities, _mach_task_self_, _kCFCopyStringDictionaryKeyCallBacks,
+ * _kCFTypeDictionaryValueCallBacks, _kCFAllocatorDefault respectively). FUN_00039100
+ * (part_005.c) casts PTR_001e88b4's VALUE directly to a pointer and dereferences it
+ * (`*(undefined4*)PTR_001e88b4`); with the wrong, truncated 1-byte type, that read only the
+ * pointer's low byte (observed live as 0xa0) and crashed dereferencing THAT as an address -
+ * confirmed live on real hardware to recur immediately afterward, identically, for
+ * PTR_001e88b0 too, in gldCreateContext. Fixed the whole cluster together rather than
+ * one at a time.
+ *
+ * Follow-up (still issue #75): PTR_001e8a3c/8a58/8aa4/8b14 below turned out to be the SAME
+ * bug hitting a *different* object - FUN_000a7050 (part_015.c) wires up a 4-slot allocator
+ * vtable {generic-alloc, calloc, realloc, free} at param_1+0x24c.."+0x258, and the calloc
+ * slot (+0x250, read back later as param_1+0x10 inside FUN_000b6020, part_016.c) was
+ * PTR_001e8b14 - declared as a plain byte here, so the compiled read only got PTR_001e8b14's
+ * top byte (observed live as the literal integer 1) instead of the real 4-byte pointer to
+ * _calloc that data.s actually stores there (`.long _calloc`), crashing with pc=0 the moment
+ * FUN_000b6020 called it as `(*pcVar8)(1, size)`. Confirmed the neighbors in this same data.s
+ * region (_free/_realloc/_memcpy, same 4-slot-vtable pattern) share the identical bug.
+ *
+ * Given three confirmed live crashes from this exact class in one session, ran the deferred
+ * "dedicated audit" of all 616 "extern unsigned char PTR_*" declarations rather than fixing
+ * these in isolation: for every one lacking the asterisk, mechanically checked data.s's real
+ * definition. 548 of 611 are backed by a single 4-byte ".long" slot - genuinely scalar pointer
+ * variables exactly like this cluster - and got the missing "*" added below in this same pass
+ * (verified per-symbol against data.s, not guessed). The remaining 63 are multi-entry arrays
+ * (real vtables with 2-4 ".long" entries, e.g. PTR_FUN_001e97a0) where a plain scalar
+ * declaration doesn't have this failure mode as long as call sites take &NAME rather than a
+ * bare value - left alone, flagged here as still worth checking if a future crash points at
+ * one of them specifically. */
+extern unsigned char *PTR_001e88b0;
 extern unsigned char *PTR_001e88b4;
-extern unsigned char PTR_001e88b8;
-extern unsigned char PTR_001e88bc;
-extern unsigned char PTR_001e88c0;
-extern unsigned char PTR_001e8a3c;
-extern unsigned char PTR_001e8a58;
-extern unsigned char PTR_001e8aa4;
-extern unsigned char PTR_001e8b14;
+extern unsigned char *PTR_001e88b8;
+extern unsigned char *PTR_001e88bc;
+extern unsigned char *PTR_001e88c0;
+extern unsigned char *PTR_001e8a3c;
+extern unsigned char *PTR_001e8a58;
+extern unsigned char *PTR_001e8aa4;
+extern unsigned char *PTR_001e8b14;
 extern unsigned char *PTR_DAT_001dbdd4[];
 extern unsigned char *PTR_DAT_001dbe3c[];
 extern unsigned char *PTR_DAT_001dbe84[];
@@ -6370,383 +6438,383 @@ extern unsigned char PTR_DAT_001e269c;
 extern unsigned char PTR_DAT_001e27bc;
 extern unsigned char *PTR_DAT_001e88ac;
 extern unsigned char *PTR_DAT_001e88c8;
-extern unsigned char PTR_DAT_001e88cc;
-extern unsigned char PTR_DAT_001e88d0;
-extern unsigned char PTR_DAT_001e8994;
-extern unsigned char PTR_DAT_001e8998;
-extern unsigned char PTR_DAT_001e899c;
-extern unsigned char PTR_DAT_001e8ae4;
-extern unsigned char PTR_DAT_001e8b48;
-extern unsigned char PTR_DAT_001e8b4c;
-extern unsigned char PTR_DAT_001e8b50;
-extern unsigned char PTR_DAT_001e8b54;
-extern unsigned char PTR_DAT_001e8b58;
-extern unsigned char PTR_DAT_001e8b5c;
-extern unsigned char PTR_DAT_001e8b60;
-extern unsigned char PTR_DAT_001e8b64;
-extern unsigned char PTR_DAT_001e8b68;
-extern unsigned char PTR_DAT_001e8b6c;
-extern unsigned char PTR_DAT_001e8b70;
-extern unsigned char PTR_DAT_001e8b74;
-extern unsigned char PTR_DAT_001e8b78;
-extern unsigned char PTR_DAT_001e8b7c;
-extern unsigned char PTR_DAT_001e8b80;
-extern unsigned char PTR_DAT_001e8b84;
-extern unsigned char PTR_DAT_001e8b88;
-extern unsigned char PTR_DAT_001e8b8c;
-extern unsigned char PTR_DAT_001e8b90;
-extern unsigned char PTR_DAT_001e8b94;
-extern unsigned char PTR_DAT_001e8b98;
-extern unsigned char PTR_DAT_001e8b9c;
-extern unsigned char PTR_DAT_001e8ba0;
-extern unsigned char PTR_DAT_001e8ba4;
-extern unsigned char PTR_DAT_001e8ba8;
-extern unsigned char PTR_DAT_001e8bac;
-extern unsigned char PTR_DAT_001e8bb0;
-extern unsigned char PTR_DAT_001e8bb4;
-extern unsigned char PTR_DAT_001e8bb8;
-extern unsigned char PTR_DAT_001e8bbc;
-extern unsigned char PTR_DAT_001e8bc0;
-extern unsigned char PTR_DAT_001e8bc4;
-extern unsigned char PTR_DAT_001e8bc8;
-extern unsigned char PTR_DAT_001e8bcc;
-extern unsigned char PTR_DAT_001e8bd0;
-extern unsigned char PTR_DAT_001e8bd4;
-extern unsigned char PTR_DAT_001e8bd8;
-extern unsigned char PTR_DAT_001e8bdc;
-extern unsigned char PTR_DAT_001e8be0;
-extern unsigned char PTR_DAT_001e8be4;
-extern unsigned char PTR_DAT_001e8be8;
-extern unsigned char PTR_DAT_001e8bec;
-extern unsigned char PTR_DAT_001e8bf0;
-extern unsigned char PTR_DAT_001e8bf4;
-extern unsigned char PTR_DAT_001e8bf8;
-extern unsigned char PTR_DAT_001e8bfc;
-extern unsigned char PTR_DAT_001e8c00;
-extern unsigned char PTR_DAT_001e8c04;
-extern unsigned char PTR_DAT_001e8c08;
-extern unsigned char PTR_DAT_001e8c0c;
-extern unsigned char PTR_DAT_001e8c10;
-extern unsigned char PTR_DAT_001e8c14;
-extern unsigned char PTR_DAT_001e8c18;
-extern unsigned char PTR_DAT_001e8c1c;
-extern unsigned char PTR_DAT_001e8c20;
-extern unsigned char PTR_DAT_001e8c24;
-extern unsigned char PTR_DAT_001e8c28;
-extern unsigned char PTR_DAT_001e8c2c;
-extern unsigned char PTR_DAT_001e8c30;
-extern unsigned char PTR_DAT_001e8c34;
-extern unsigned char PTR_DAT_001e8c38;
-extern unsigned char PTR_DAT_001e8c3c;
-extern unsigned char PTR_DAT_001e8c40;
-extern unsigned char PTR_DAT_001e8c44;
-extern unsigned char PTR_DAT_001e8c48;
-extern unsigned char PTR_DAT_001e8c4c;
-extern unsigned char PTR_DAT_001e8c50;
-extern unsigned char PTR_DAT_001e8c54;
-extern unsigned char PTR_DAT_001e8c58;
-extern unsigned char PTR_DAT_001e8c5c;
-extern unsigned char PTR_DAT_001e8c64;
-extern unsigned char PTR_DAT_001e8c68;
-extern unsigned char PTR_DAT_001e8c6c;
-extern unsigned char PTR_DAT_001e8c70;
-extern unsigned char PTR_DAT_001e8c74;
-extern unsigned char PTR_DAT_001e8c78;
-extern unsigned char PTR_DAT_001e8c80;
-extern unsigned char PTR_DAT_001e8c84;
-extern unsigned char PTR_DAT_001e8c88;
-extern unsigned char PTR_DAT_001e8c8c;
-extern unsigned char PTR_DAT_001e8c90;
-extern unsigned char PTR_DAT_001e8c94;
-extern unsigned char PTR_DAT_001e8c98;
-extern unsigned char PTR_DAT_001e8c9c;
-extern unsigned char PTR_DAT_001e8ca0;
-extern unsigned char PTR_DAT_001e8ca4;
-extern unsigned char PTR_DAT_001e8ca8;
-extern unsigned char PTR_DAT_001e8cac;
-extern unsigned char PTR_DAT_001e8cb0;
-extern unsigned char PTR_DAT_001e8cb4;
-extern unsigned char PTR_DAT_001e8cb8;
-extern unsigned char PTR_DAT_001e8cbc;
-extern unsigned char PTR_DAT_001e8cc0;
-extern unsigned char PTR_DAT_001e8cc4;
-extern unsigned char PTR_DAT_001e8cc8;
-extern unsigned char PTR_DAT_001e8ccc;
-extern unsigned char PTR_DAT_001e8cd0;
-extern unsigned char PTR_DAT_001e8cd4;
-extern unsigned char PTR_DAT_001e8cd8;
-extern unsigned char PTR_DAT_001e8cdc;
-extern unsigned char PTR_DAT_001e8ce0;
-extern unsigned char PTR_DAT_001e8ce4;
-extern unsigned char PTR_DAT_001e8ce8;
-extern unsigned char PTR_DAT_001e8cec;
-extern unsigned char PTR_DAT_001e8cf0;
-extern unsigned char PTR_DAT_001e8cf4;
-extern unsigned char PTR_DAT_001e8cf8;
-extern unsigned char PTR_DAT_001e8cfc;
-extern unsigned char PTR_DAT_001e8d00;
-extern unsigned char PTR_DAT_001e8d04;
-extern unsigned char PTR_DAT_001e8d08;
-extern unsigned char PTR_DAT_001e8d0c;
-extern unsigned char PTR_DAT_001e8d10;
-extern unsigned char PTR_DAT_001e8d14;
-extern unsigned char PTR_DAT_001e8d18;
-extern unsigned char PTR_DAT_001e8d1c;
-extern unsigned char PTR_DAT_001e8d20;
-extern unsigned char PTR_DAT_001e8d24;
-extern unsigned char PTR_DAT_001e8d28;
-extern unsigned char PTR_DAT_001e8d2c;
-extern unsigned char PTR_DAT_001e8d30;
-extern unsigned char PTR_DAT_001e8d34;
-extern unsigned char PTR_DAT_001e8d38;
-extern unsigned char PTR_DAT_001e8d3c;
-extern unsigned char PTR_DAT_001e8d40;
-extern unsigned char PTR_DAT_001e8d44;
-extern unsigned char PTR_DAT_001e8d48;
-extern unsigned char PTR_DAT_001e8d4c;
-extern unsigned char PTR_DAT_001e8d50;
-extern unsigned char PTR_DAT_001e8d54;
-extern unsigned char PTR_DAT_001e8d58;
-extern unsigned char PTR_DAT_001e8d5c;
-extern unsigned char PTR_DAT_001e8d60;
-extern unsigned char PTR_DAT_001e8d64;
-extern unsigned char PTR_DAT_001e8d68;
-extern unsigned char PTR_DAT_001e8d6c;
-extern unsigned char PTR_DAT_001e8d70;
-extern unsigned char PTR_DAT_001e8d74;
-extern unsigned char PTR_DAT_001e8d78;
-extern unsigned char PTR_DAT_001e8d7c;
-extern unsigned char PTR_DAT_001e8d80;
-extern unsigned char PTR_DAT_001e8d84;
-extern unsigned char PTR_DAT_001e8d88;
-extern unsigned char PTR_DAT_001e8d8c;
-extern unsigned char PTR_DAT_001e8d90;
-extern unsigned char PTR_DAT_001e8d94;
-extern unsigned char PTR_DAT_001e8d98;
-extern unsigned char PTR_DAT_001e8d9c;
-extern unsigned char PTR_DAT_001e8da0;
-extern unsigned char PTR_DAT_001e8da4;
-extern unsigned char PTR_DAT_001e8da8;
-extern unsigned char PTR_DAT_001e8dac;
-extern unsigned char PTR_DAT_001e8db0;
-extern unsigned char PTR_DAT_001e8db4;
-extern unsigned char PTR_DAT_001e8db8;
-extern unsigned char PTR_DAT_001e8dbc;
-extern unsigned char PTR_DAT_001e8dc0;
-extern unsigned char PTR_DAT_001e8dc4;
-extern unsigned char PTR_DAT_001e8dc8;
-extern unsigned char PTR_DAT_001e8dcc;
-extern unsigned char PTR_DAT_001e8dd0;
-extern unsigned char PTR_DAT_001e8dd4;
-extern unsigned char PTR_DAT_001e8dd8;
-extern unsigned char PTR_DAT_001e8ddc;
-extern unsigned char PTR_DAT_001e8de0;
-extern unsigned char PTR_DAT_001e8de4;
-extern unsigned char PTR_DAT_001e8de8;
-extern unsigned char PTR_DAT_001e8dec;
-extern unsigned char PTR_DAT_001e8df0;
-extern unsigned char PTR_DAT_001e8df4;
-extern unsigned char PTR_DAT_001e8df8;
-extern unsigned char PTR_DAT_001e8dfc;
-extern unsigned char PTR_DAT_001e8e00;
-extern unsigned char PTR_DAT_001e8e04;
-extern unsigned char PTR_DAT_001e8e08;
-extern unsigned char PTR_DAT_001e8e0c;
-extern unsigned char PTR_DAT_001e8e10;
-extern unsigned char PTR_DAT_001e8e14;
-extern unsigned char PTR_DAT_001e8e18;
-extern unsigned char PTR_DAT_001e8e1c;
-extern unsigned char PTR_DAT_001e8e20;
-extern unsigned char PTR_DAT_001e8e24;
-extern unsigned char PTR_DAT_001e8e28;
-extern unsigned char PTR_DAT_001e8e2c;
-extern unsigned char PTR_DAT_001e8e30;
-extern unsigned char PTR_DAT_001e8e34;
-extern unsigned char PTR_DAT_001e8e38;
-extern unsigned char PTR_DAT_001e8e3c;
-extern unsigned char PTR_DAT_001e8e40;
-extern unsigned char PTR_DAT_001e8e44;
-extern unsigned char PTR_DAT_001e8e48;
-extern unsigned char PTR_DAT_001e8e4c;
-extern unsigned char PTR_DAT_001e8e50;
-extern unsigned char PTR_DAT_001e8e54;
-extern unsigned char PTR_DAT_001e8e58;
-extern unsigned char PTR_DAT_001e8e5c;
-extern unsigned char PTR_DAT_001e8e60;
-extern unsigned char PTR_DAT_001e8e64;
-extern unsigned char PTR_DAT_001e8e68;
-extern unsigned char PTR_DAT_001e8e6c;
-extern unsigned char PTR_DAT_001e8e70;
-extern unsigned char PTR_DAT_001e8e74;
-extern unsigned char PTR_DAT_001e8e78;
-extern unsigned char PTR_DAT_001e8e7c;
-extern unsigned char PTR_DAT_001e8e80;
-extern unsigned char PTR_DAT_001e8e84;
-extern unsigned char PTR_DAT_001e8e88;
-extern unsigned char PTR_DAT_001e8e8c;
-extern unsigned char PTR_DAT_001e8e90;
-extern unsigned char PTR_DAT_001e8e94;
-extern unsigned char PTR_DAT_001e8e98;
-extern unsigned char PTR_DAT_001e8e9c;
-extern unsigned char PTR_DAT_001e8ea0;
-extern unsigned char PTR_DAT_001e8ea4;
-extern unsigned char PTR_DAT_001e8ea8;
-extern unsigned char PTR_DAT_001e8eac;
-extern unsigned char PTR_DAT_001e8eb0;
-extern unsigned char PTR_DAT_001e8eb4;
-extern unsigned char PTR_DAT_001e8eb8;
-extern unsigned char PTR_DAT_001e8ebc;
-extern unsigned char PTR_DAT_001e8ec0;
-extern unsigned char PTR_DAT_001e8ec4;
-extern unsigned char PTR_DAT_001e8ec8;
-extern unsigned char PTR_DAT_001e8ecc;
-extern unsigned char PTR_DAT_001e8ed0;
-extern unsigned char PTR_DAT_001e8ed4;
-extern unsigned char PTR_DAT_001e8ed8;
-extern unsigned char PTR_DAT_001e8edc;
-extern unsigned char PTR_DAT_001e8ee0;
-extern unsigned char PTR_DAT_001e8ee4;
-extern unsigned char PTR_DAT_001e8ee8;
-extern unsigned char PTR_DAT_001e8eec;
-extern unsigned char PTR_DAT_001e8ef0;
-extern unsigned char PTR_DAT_001e8ef4;
-extern unsigned char PTR_DAT_001e8ef8;
-extern unsigned char PTR_DAT_001e8efc;
-extern unsigned char PTR_DAT_001e8f00;
-extern unsigned char PTR_DAT_001e8f04;
-extern unsigned char PTR_DAT_001e8f08;
-extern unsigned char PTR_DAT_001e8f0c;
-extern unsigned char PTR_DAT_001e8f10;
-extern unsigned char PTR_DAT_001e8f14;
-extern unsigned char PTR_DAT_001e8f18;
-extern unsigned char PTR_DAT_001e8f1c;
-extern unsigned char PTR_DAT_001e8f20;
-extern unsigned char PTR_DAT_001e8f24;
-extern unsigned char PTR_DAT_001e8f28;
-extern unsigned char PTR_DAT_001e8f2c;
-extern unsigned char PTR_DAT_001e8f30;
-extern unsigned char PTR_DAT_001e8f34;
-extern unsigned char PTR_DAT_001e8f38;
-extern unsigned char PTR_DAT_001e8f3c;
-extern unsigned char PTR_DAT_001e8f40;
-extern unsigned char PTR_DAT_001e8f44;
-extern unsigned char PTR_DAT_001e8f48;
-extern unsigned char PTR_DAT_001e8f4c;
-extern unsigned char PTR_DAT_001e8f50;
-extern unsigned char PTR_DAT_001e8f54;
-extern unsigned char PTR_DAT_001e8f58;
-extern unsigned char PTR_DAT_001e8f5c;
-extern unsigned char PTR_DAT_001e8f60;
-extern unsigned char PTR_DAT_001e8f64;
-extern unsigned char PTR_DAT_001e8f68;
-extern unsigned char PTR_DAT_001e8f6c;
-extern unsigned char PTR_DAT_001e8f70;
-extern unsigned char PTR_DAT_001e8f74;
-extern unsigned char PTR_DAT_001e8f78;
-extern unsigned char PTR_DAT_001e8f7c;
-extern unsigned char PTR_DAT_001e8f80;
-extern unsigned char PTR_DAT_001e8f84;
-extern unsigned char PTR_DAT_001e8f88;
-extern unsigned char PTR_DAT_001e8f8c;
-extern unsigned char PTR_DAT_001e8f90;
-extern unsigned char PTR_DAT_001e8f94;
-extern unsigned char PTR_DAT_001e8f98;
-extern unsigned char PTR_DAT_001e8f9c;
-extern unsigned char PTR_DAT_001e8fa0;
-extern unsigned char PTR_DAT_001e8fa4;
-extern unsigned char PTR_DAT_001e8fa8;
-extern unsigned char PTR_DAT_001e8fac;
-extern unsigned char PTR_DAT_001e8fb0;
-extern unsigned char PTR_DAT_001e8fb4;
-extern unsigned char PTR_DAT_001e8fb8;
-extern unsigned char PTR_DAT_001e8fbc;
-extern unsigned char PTR_DAT_001e8fc0;
-extern unsigned char PTR_DAT_001e8fc4;
-extern unsigned char PTR_DAT_001e8fc8;
-extern unsigned char PTR_DAT_001e8fcc;
-extern unsigned char PTR_DAT_001e8fd0;
-extern unsigned char PTR_DAT_001e8fd4;
-extern unsigned char PTR_DAT_001e8fd8;
-extern unsigned char PTR_DAT_001e8fdc;
-extern unsigned char PTR_DAT_001e8fe0;
-extern unsigned char PTR_DAT_001e8fe4;
-extern unsigned char PTR_DAT_001e8fe8;
-extern unsigned char PTR_DAT_001e8fec;
-extern unsigned char PTR_DAT_001e8ff0;
-extern unsigned char PTR_DAT_001e8ff4;
-extern unsigned char PTR_DAT_001e8ff8;
-extern unsigned char PTR_DAT_001e8ffc;
-extern unsigned char PTR_DAT_001e9000;
-extern unsigned char PTR_DAT_001e9004;
-extern unsigned char PTR_DAT_001e9008;
-extern unsigned char PTR_DAT_001e900c;
-extern unsigned char PTR_DAT_001e9010;
-extern unsigned char PTR_DAT_001e9014;
-extern unsigned char PTR_DAT_001e9018;
-extern unsigned char PTR_DAT_001e901c;
-extern unsigned char PTR_DAT_001e9020;
-extern unsigned char PTR_DAT_001e9024;
-extern unsigned char PTR_DAT_001e9028;
-extern unsigned char PTR_DAT_001e902c;
-extern unsigned char PTR_DAT_001e9030;
-extern unsigned char PTR_DAT_001e9034;
-extern unsigned char PTR_DAT_001e9038;
-extern unsigned char PTR_DAT_001e903c;
-extern unsigned char PTR_DAT_001e9040;
-extern unsigned char PTR_DAT_001e9044;
-extern unsigned char PTR_DAT_001e9048;
-extern unsigned char PTR_DAT_001e904c;
-extern unsigned char PTR_DAT_001e9050;
-extern unsigned char PTR_DAT_001e9054;
-extern unsigned char PTR_DAT_001e9058;
-extern unsigned char PTR_DAT_001e905c;
-extern unsigned char PTR_DAT_001e9060;
-extern unsigned char PTR_DAT_001e9064;
-extern unsigned char PTR_DAT_001e9068;
-extern unsigned char PTR_DAT_001e906c;
-extern unsigned char PTR_DAT_001e9070;
-extern unsigned char PTR_DAT_001e9074;
-extern unsigned char PTR_DAT_001e9078;
-extern unsigned char PTR_DAT_001e907c;
-extern unsigned char PTR_DAT_001e9080;
-extern unsigned char PTR_DAT_001e9084;
-extern unsigned char PTR_DAT_001e9088;
-extern unsigned char PTR_DAT_001e908c;
-extern unsigned char PTR_DAT_001e90c8;
-extern unsigned char PTR_DAT_001e90cc;
-extern unsigned char PTR_DAT_001e90d0;
-extern unsigned char PTR_DAT_001e90d4;
-extern unsigned char PTR_DAT_001e90d8;
-extern unsigned char PTR_DAT_001e90dc;
-extern unsigned char PTR_DAT_001e90e0;
-extern unsigned char PTR_DAT_001e90e4;
-extern unsigned char PTR_DAT_001e90e8;
-extern unsigned char PTR_DAT_001e90ec;
-extern unsigned char PTR_DAT_001e90f0;
-extern unsigned char PTR_DAT_001e90f4;
-extern unsigned char PTR_DAT_001e90f8;
-extern unsigned char PTR_DAT_001e90fc;
-extern unsigned char PTR_DAT_001e9100;
-extern unsigned char PTR_DAT_001e9104;
-extern unsigned char PTR_DAT_001e9108;
-extern unsigned char PTR_DAT_001e9110;
-extern unsigned char PTR_DAT_001e9114;
-extern unsigned char PTR_DAT_001e9118;
-extern unsigned char PTR_DAT_001e911c;
-extern unsigned char PTR_DAT_001e9120;
-extern unsigned char PTR_DAT_001e9124;
-extern unsigned char PTR_DAT_001e9128;
-extern unsigned char PTR_DAT_001e912c;
-extern unsigned char PTR_DAT_001e9130;
-extern unsigned char PTR_DAT_001e9134;
-extern unsigned char PTR_DAT_001e9138;
-extern unsigned char PTR_DAT_001e913c;
-extern unsigned char PTR_DAT_001e9140;
-extern unsigned char PTR_DAT_001e9144;
-extern unsigned char PTR_DAT_001e9148;
-extern unsigned char PTR_DAT_001e914c;
-extern unsigned char PTR_DAT_001e9770;
-extern unsigned char PTR_DAT_001e9774;
+extern unsigned char *PTR_DAT_001e88cc;
+extern unsigned char *PTR_DAT_001e88d0;
+extern unsigned char *PTR_DAT_001e8994;
+extern unsigned char *PTR_DAT_001e8998;
+extern unsigned char *PTR_DAT_001e899c;
+extern unsigned char *PTR_DAT_001e8ae4;
+extern unsigned char *PTR_DAT_001e8b48;
+extern unsigned char *PTR_DAT_001e8b4c;
+extern unsigned char *PTR_DAT_001e8b50;
+extern unsigned char *PTR_DAT_001e8b54;
+extern unsigned char *PTR_DAT_001e8b58;
+extern unsigned char *PTR_DAT_001e8b5c;
+extern unsigned char *PTR_DAT_001e8b60;
+extern unsigned char *PTR_DAT_001e8b64;
+extern unsigned char *PTR_DAT_001e8b68;
+extern unsigned char *PTR_DAT_001e8b6c;
+extern unsigned char *PTR_DAT_001e8b70;
+extern unsigned char *PTR_DAT_001e8b74;
+extern unsigned char *PTR_DAT_001e8b78;
+extern unsigned char *PTR_DAT_001e8b7c;
+extern unsigned char *PTR_DAT_001e8b80;
+extern unsigned char *PTR_DAT_001e8b84;
+extern unsigned char *PTR_DAT_001e8b88;
+extern unsigned char *PTR_DAT_001e8b8c;
+extern unsigned char *PTR_DAT_001e8b90;
+extern unsigned char *PTR_DAT_001e8b94;
+extern unsigned char *PTR_DAT_001e8b98;
+extern unsigned char *PTR_DAT_001e8b9c;
+extern unsigned char *PTR_DAT_001e8ba0;
+extern unsigned char *PTR_DAT_001e8ba4;
+extern unsigned char *PTR_DAT_001e8ba8;
+extern unsigned char *PTR_DAT_001e8bac;
+extern unsigned char *PTR_DAT_001e8bb0;
+extern unsigned char *PTR_DAT_001e8bb4;
+extern unsigned char *PTR_DAT_001e8bb8;
+extern unsigned char *PTR_DAT_001e8bbc;
+extern unsigned char *PTR_DAT_001e8bc0;
+extern unsigned char *PTR_DAT_001e8bc4;
+extern unsigned char *PTR_DAT_001e8bc8;
+extern unsigned char *PTR_DAT_001e8bcc;
+extern unsigned char *PTR_DAT_001e8bd0;
+extern unsigned char *PTR_DAT_001e8bd4;
+extern unsigned char *PTR_DAT_001e8bd8;
+extern unsigned char *PTR_DAT_001e8bdc;
+extern unsigned char *PTR_DAT_001e8be0;
+extern unsigned char *PTR_DAT_001e8be4;
+extern unsigned char *PTR_DAT_001e8be8;
+extern unsigned char *PTR_DAT_001e8bec;
+extern unsigned char *PTR_DAT_001e8bf0;
+extern unsigned char *PTR_DAT_001e8bf4;
+extern unsigned char *PTR_DAT_001e8bf8;
+extern unsigned char *PTR_DAT_001e8bfc;
+extern unsigned char *PTR_DAT_001e8c00;
+extern unsigned char *PTR_DAT_001e8c04;
+extern unsigned char *PTR_DAT_001e8c08;
+extern unsigned char *PTR_DAT_001e8c0c;
+extern unsigned char *PTR_DAT_001e8c10;
+extern unsigned char *PTR_DAT_001e8c14;
+extern unsigned char *PTR_DAT_001e8c18;
+extern unsigned char *PTR_DAT_001e8c1c;
+extern unsigned char *PTR_DAT_001e8c20;
+extern unsigned char *PTR_DAT_001e8c24;
+extern unsigned char *PTR_DAT_001e8c28;
+extern unsigned char *PTR_DAT_001e8c2c;
+extern unsigned char *PTR_DAT_001e8c30;
+extern unsigned char *PTR_DAT_001e8c34;
+extern unsigned char *PTR_DAT_001e8c38;
+extern unsigned char *PTR_DAT_001e8c3c;
+extern unsigned char *PTR_DAT_001e8c40;
+extern unsigned char *PTR_DAT_001e8c44;
+extern unsigned char *PTR_DAT_001e8c48;
+extern unsigned char *PTR_DAT_001e8c4c;
+extern unsigned char *PTR_DAT_001e8c50;
+extern unsigned char *PTR_DAT_001e8c54;
+extern unsigned char *PTR_DAT_001e8c58;
+extern unsigned char *PTR_DAT_001e8c5c;
+extern unsigned char *PTR_DAT_001e8c64;
+extern unsigned char *PTR_DAT_001e8c68;
+extern unsigned char *PTR_DAT_001e8c6c;
+extern unsigned char *PTR_DAT_001e8c70;
+extern unsigned char *PTR_DAT_001e8c74;
+extern unsigned char *PTR_DAT_001e8c78;
+extern unsigned char *PTR_DAT_001e8c80;
+extern unsigned char *PTR_DAT_001e8c84;
+extern unsigned char *PTR_DAT_001e8c88;
+extern unsigned char *PTR_DAT_001e8c8c;
+extern unsigned char *PTR_DAT_001e8c90;
+extern unsigned char *PTR_DAT_001e8c94;
+extern unsigned char *PTR_DAT_001e8c98;
+extern unsigned char *PTR_DAT_001e8c9c;
+extern unsigned char *PTR_DAT_001e8ca0;
+extern unsigned char *PTR_DAT_001e8ca4;
+extern unsigned char *PTR_DAT_001e8ca8;
+extern unsigned char *PTR_DAT_001e8cac;
+extern unsigned char *PTR_DAT_001e8cb0;
+extern unsigned char *PTR_DAT_001e8cb4;
+extern unsigned char *PTR_DAT_001e8cb8;
+extern unsigned char *PTR_DAT_001e8cbc;
+extern unsigned char *PTR_DAT_001e8cc0;
+extern unsigned char *PTR_DAT_001e8cc4;
+extern unsigned char *PTR_DAT_001e8cc8;
+extern unsigned char *PTR_DAT_001e8ccc;
+extern unsigned char *PTR_DAT_001e8cd0;
+extern unsigned char *PTR_DAT_001e8cd4;
+extern unsigned char *PTR_DAT_001e8cd8;
+extern unsigned char *PTR_DAT_001e8cdc;
+extern unsigned char *PTR_DAT_001e8ce0;
+extern unsigned char *PTR_DAT_001e8ce4;
+extern unsigned char *PTR_DAT_001e8ce8;
+extern unsigned char *PTR_DAT_001e8cec;
+extern unsigned char *PTR_DAT_001e8cf0;
+extern unsigned char *PTR_DAT_001e8cf4;
+extern unsigned char *PTR_DAT_001e8cf8;
+extern unsigned char *PTR_DAT_001e8cfc;
+extern unsigned char *PTR_DAT_001e8d00;
+extern unsigned char *PTR_DAT_001e8d04;
+extern unsigned char *PTR_DAT_001e8d08;
+extern unsigned char *PTR_DAT_001e8d0c;
+extern unsigned char *PTR_DAT_001e8d10;
+extern unsigned char *PTR_DAT_001e8d14;
+extern unsigned char *PTR_DAT_001e8d18;
+extern unsigned char *PTR_DAT_001e8d1c;
+extern unsigned char *PTR_DAT_001e8d20;
+extern unsigned char *PTR_DAT_001e8d24;
+extern unsigned char *PTR_DAT_001e8d28;
+extern unsigned char *PTR_DAT_001e8d2c;
+extern unsigned char *PTR_DAT_001e8d30;
+extern unsigned char *PTR_DAT_001e8d34;
+extern unsigned char *PTR_DAT_001e8d38;
+extern unsigned char *PTR_DAT_001e8d3c;
+extern unsigned char *PTR_DAT_001e8d40;
+extern unsigned char *PTR_DAT_001e8d44;
+extern unsigned char *PTR_DAT_001e8d48;
+extern unsigned char *PTR_DAT_001e8d4c;
+extern unsigned char *PTR_DAT_001e8d50;
+extern unsigned char *PTR_DAT_001e8d54;
+extern unsigned char *PTR_DAT_001e8d58;
+extern unsigned char *PTR_DAT_001e8d5c;
+extern unsigned char *PTR_DAT_001e8d60;
+extern unsigned char *PTR_DAT_001e8d64;
+extern unsigned char *PTR_DAT_001e8d68;
+extern unsigned char *PTR_DAT_001e8d6c;
+extern unsigned char *PTR_DAT_001e8d70;
+extern unsigned char *PTR_DAT_001e8d74;
+extern unsigned char *PTR_DAT_001e8d78;
+extern unsigned char *PTR_DAT_001e8d7c;
+extern unsigned char *PTR_DAT_001e8d80;
+extern unsigned char *PTR_DAT_001e8d84;
+extern unsigned char *PTR_DAT_001e8d88;
+extern unsigned char *PTR_DAT_001e8d8c;
+extern unsigned char *PTR_DAT_001e8d90;
+extern unsigned char *PTR_DAT_001e8d94;
+extern unsigned char *PTR_DAT_001e8d98;
+extern unsigned char *PTR_DAT_001e8d9c;
+extern unsigned char *PTR_DAT_001e8da0;
+extern unsigned char *PTR_DAT_001e8da4;
+extern unsigned char *PTR_DAT_001e8da8;
+extern unsigned char *PTR_DAT_001e8dac;
+extern unsigned char *PTR_DAT_001e8db0;
+extern unsigned char *PTR_DAT_001e8db4;
+extern unsigned char *PTR_DAT_001e8db8;
+extern unsigned char *PTR_DAT_001e8dbc;
+extern unsigned char *PTR_DAT_001e8dc0;
+extern unsigned char *PTR_DAT_001e8dc4;
+extern unsigned char *PTR_DAT_001e8dc8;
+extern unsigned char *PTR_DAT_001e8dcc;
+extern unsigned char *PTR_DAT_001e8dd0;
+extern unsigned char *PTR_DAT_001e8dd4;
+extern unsigned char *PTR_DAT_001e8dd8;
+extern unsigned char *PTR_DAT_001e8ddc;
+extern unsigned char *PTR_DAT_001e8de0;
+extern unsigned char *PTR_DAT_001e8de4;
+extern unsigned char *PTR_DAT_001e8de8;
+extern unsigned char *PTR_DAT_001e8dec;
+extern unsigned char *PTR_DAT_001e8df0;
+extern unsigned char *PTR_DAT_001e8df4;
+extern unsigned char *PTR_DAT_001e8df8;
+extern unsigned char *PTR_DAT_001e8dfc;
+extern unsigned char *PTR_DAT_001e8e00;
+extern unsigned char *PTR_DAT_001e8e04;
+extern unsigned char *PTR_DAT_001e8e08;
+extern unsigned char *PTR_DAT_001e8e0c;
+extern unsigned char *PTR_DAT_001e8e10;
+extern unsigned char *PTR_DAT_001e8e14;
+extern unsigned char *PTR_DAT_001e8e18;
+extern unsigned char *PTR_DAT_001e8e1c;
+extern unsigned char *PTR_DAT_001e8e20;
+extern unsigned char *PTR_DAT_001e8e24;
+extern unsigned char *PTR_DAT_001e8e28;
+extern unsigned char *PTR_DAT_001e8e2c;
+extern unsigned char *PTR_DAT_001e8e30;
+extern unsigned char *PTR_DAT_001e8e34;
+extern unsigned char *PTR_DAT_001e8e38;
+extern unsigned char *PTR_DAT_001e8e3c;
+extern unsigned char *PTR_DAT_001e8e40;
+extern unsigned char *PTR_DAT_001e8e44;
+extern unsigned char *PTR_DAT_001e8e48;
+extern unsigned char *PTR_DAT_001e8e4c;
+extern unsigned char *PTR_DAT_001e8e50;
+extern unsigned char *PTR_DAT_001e8e54;
+extern unsigned char *PTR_DAT_001e8e58;
+extern unsigned char *PTR_DAT_001e8e5c;
+extern unsigned char *PTR_DAT_001e8e60;
+extern unsigned char *PTR_DAT_001e8e64;
+extern unsigned char *PTR_DAT_001e8e68;
+extern unsigned char *PTR_DAT_001e8e6c;
+extern unsigned char *PTR_DAT_001e8e70;
+extern unsigned char *PTR_DAT_001e8e74;
+extern unsigned char *PTR_DAT_001e8e78;
+extern unsigned char *PTR_DAT_001e8e7c;
+extern unsigned char *PTR_DAT_001e8e80;
+extern unsigned char *PTR_DAT_001e8e84;
+extern unsigned char *PTR_DAT_001e8e88;
+extern unsigned char *PTR_DAT_001e8e8c;
+extern unsigned char *PTR_DAT_001e8e90;
+extern unsigned char *PTR_DAT_001e8e94;
+extern unsigned char *PTR_DAT_001e8e98;
+extern unsigned char *PTR_DAT_001e8e9c;
+extern unsigned char *PTR_DAT_001e8ea0;
+extern unsigned char *PTR_DAT_001e8ea4;
+extern unsigned char *PTR_DAT_001e8ea8;
+extern unsigned char *PTR_DAT_001e8eac;
+extern unsigned char *PTR_DAT_001e8eb0;
+extern unsigned char *PTR_DAT_001e8eb4;
+extern unsigned char *PTR_DAT_001e8eb8;
+extern unsigned char *PTR_DAT_001e8ebc;
+extern unsigned char *PTR_DAT_001e8ec0;
+extern unsigned char *PTR_DAT_001e8ec4;
+extern unsigned char *PTR_DAT_001e8ec8;
+extern unsigned char *PTR_DAT_001e8ecc;
+extern unsigned char *PTR_DAT_001e8ed0;
+extern unsigned char *PTR_DAT_001e8ed4;
+extern unsigned char *PTR_DAT_001e8ed8;
+extern unsigned char *PTR_DAT_001e8edc;
+extern unsigned char *PTR_DAT_001e8ee0;
+extern unsigned char *PTR_DAT_001e8ee4;
+extern unsigned char *PTR_DAT_001e8ee8;
+extern unsigned char *PTR_DAT_001e8eec;
+extern unsigned char *PTR_DAT_001e8ef0;
+extern unsigned char *PTR_DAT_001e8ef4;
+extern unsigned char *PTR_DAT_001e8ef8;
+extern unsigned char *PTR_DAT_001e8efc;
+extern unsigned char *PTR_DAT_001e8f00;
+extern unsigned char *PTR_DAT_001e8f04;
+extern unsigned char *PTR_DAT_001e8f08;
+extern unsigned char *PTR_DAT_001e8f0c;
+extern unsigned char *PTR_DAT_001e8f10;
+extern unsigned char *PTR_DAT_001e8f14;
+extern unsigned char *PTR_DAT_001e8f18;
+extern unsigned char *PTR_DAT_001e8f1c;
+extern unsigned char *PTR_DAT_001e8f20;
+extern unsigned char *PTR_DAT_001e8f24;
+extern unsigned char *PTR_DAT_001e8f28;
+extern unsigned char *PTR_DAT_001e8f2c;
+extern unsigned char *PTR_DAT_001e8f30;
+extern unsigned char *PTR_DAT_001e8f34;
+extern unsigned char *PTR_DAT_001e8f38;
+extern unsigned char *PTR_DAT_001e8f3c;
+extern unsigned char *PTR_DAT_001e8f40;
+extern unsigned char *PTR_DAT_001e8f44;
+extern unsigned char *PTR_DAT_001e8f48;
+extern unsigned char *PTR_DAT_001e8f4c;
+extern unsigned char *PTR_DAT_001e8f50;
+extern unsigned char *PTR_DAT_001e8f54;
+extern unsigned char *PTR_DAT_001e8f58;
+extern unsigned char *PTR_DAT_001e8f5c;
+extern unsigned char *PTR_DAT_001e8f60;
+extern unsigned char *PTR_DAT_001e8f64;
+extern unsigned char *PTR_DAT_001e8f68;
+extern unsigned char *PTR_DAT_001e8f6c;
+extern unsigned char *PTR_DAT_001e8f70;
+extern unsigned char *PTR_DAT_001e8f74;
+extern unsigned char *PTR_DAT_001e8f78;
+extern unsigned char *PTR_DAT_001e8f7c;
+extern unsigned char *PTR_DAT_001e8f80;
+extern unsigned char *PTR_DAT_001e8f84;
+extern unsigned char *PTR_DAT_001e8f88;
+extern unsigned char *PTR_DAT_001e8f8c;
+extern unsigned char *PTR_DAT_001e8f90;
+extern unsigned char *PTR_DAT_001e8f94;
+extern unsigned char *PTR_DAT_001e8f98;
+extern unsigned char *PTR_DAT_001e8f9c;
+extern unsigned char *PTR_DAT_001e8fa0;
+extern unsigned char *PTR_DAT_001e8fa4;
+extern unsigned char *PTR_DAT_001e8fa8;
+extern unsigned char *PTR_DAT_001e8fac;
+extern unsigned char *PTR_DAT_001e8fb0;
+extern unsigned char *PTR_DAT_001e8fb4;
+extern unsigned char *PTR_DAT_001e8fb8;
+extern unsigned char *PTR_DAT_001e8fbc;
+extern unsigned char *PTR_DAT_001e8fc0;
+extern unsigned char *PTR_DAT_001e8fc4;
+extern unsigned char *PTR_DAT_001e8fc8;
+extern unsigned char *PTR_DAT_001e8fcc;
+extern unsigned char *PTR_DAT_001e8fd0;
+extern unsigned char *PTR_DAT_001e8fd4;
+extern unsigned char *PTR_DAT_001e8fd8;
+extern unsigned char *PTR_DAT_001e8fdc;
+extern unsigned char *PTR_DAT_001e8fe0;
+extern unsigned char *PTR_DAT_001e8fe4;
+extern unsigned char *PTR_DAT_001e8fe8;
+extern unsigned char *PTR_DAT_001e8fec;
+extern unsigned char *PTR_DAT_001e8ff0;
+extern unsigned char *PTR_DAT_001e8ff4;
+extern unsigned char *PTR_DAT_001e8ff8;
+extern unsigned char *PTR_DAT_001e8ffc;
+extern unsigned char *PTR_DAT_001e9000;
+extern unsigned char *PTR_DAT_001e9004;
+extern unsigned char *PTR_DAT_001e9008;
+extern unsigned char *PTR_DAT_001e900c;
+extern unsigned char *PTR_DAT_001e9010;
+extern unsigned char *PTR_DAT_001e9014;
+extern unsigned char *PTR_DAT_001e9018;
+extern unsigned char *PTR_DAT_001e901c;
+extern unsigned char *PTR_DAT_001e9020;
+extern unsigned char *PTR_DAT_001e9024;
+extern unsigned char *PTR_DAT_001e9028;
+extern unsigned char *PTR_DAT_001e902c;
+extern unsigned char *PTR_DAT_001e9030;
+extern unsigned char *PTR_DAT_001e9034;
+extern unsigned char *PTR_DAT_001e9038;
+extern unsigned char *PTR_DAT_001e903c;
+extern unsigned char *PTR_DAT_001e9040;
+extern unsigned char *PTR_DAT_001e9044;
+extern unsigned char *PTR_DAT_001e9048;
+extern unsigned char *PTR_DAT_001e904c;
+extern unsigned char *PTR_DAT_001e9050;
+extern unsigned char *PTR_DAT_001e9054;
+extern unsigned char *PTR_DAT_001e9058;
+extern unsigned char *PTR_DAT_001e905c;
+extern unsigned char *PTR_DAT_001e9060;
+extern unsigned char *PTR_DAT_001e9064;
+extern unsigned char *PTR_DAT_001e9068;
+extern unsigned char *PTR_DAT_001e906c;
+extern unsigned char *PTR_DAT_001e9070;
+extern unsigned char *PTR_DAT_001e9074;
+extern unsigned char *PTR_DAT_001e9078;
+extern unsigned char *PTR_DAT_001e907c;
+extern unsigned char *PTR_DAT_001e9080;
+extern unsigned char *PTR_DAT_001e9084;
+extern unsigned char *PTR_DAT_001e9088;
+extern unsigned char *PTR_DAT_001e908c;
+extern unsigned char *PTR_DAT_001e90c8;
+extern unsigned char *PTR_DAT_001e90cc;
+extern unsigned char *PTR_DAT_001e90d0;
+extern unsigned char *PTR_DAT_001e90d4;
+extern unsigned char *PTR_DAT_001e90d8;
+extern unsigned char *PTR_DAT_001e90dc;
+extern unsigned char *PTR_DAT_001e90e0;
+extern unsigned char *PTR_DAT_001e90e4;
+extern unsigned char *PTR_DAT_001e90e8;
+extern unsigned char *PTR_DAT_001e90ec;
+extern unsigned char *PTR_DAT_001e90f0;
+extern unsigned char *PTR_DAT_001e90f4;
+extern unsigned char *PTR_DAT_001e90f8;
+extern unsigned char *PTR_DAT_001e90fc;
+extern unsigned char *PTR_DAT_001e9100;
+extern unsigned char *PTR_DAT_001e9104;
+extern unsigned char *PTR_DAT_001e9108;
+extern unsigned char *PTR_DAT_001e9110;
+extern unsigned char *PTR_DAT_001e9114;
+extern unsigned char *PTR_DAT_001e9118;
+extern unsigned char *PTR_DAT_001e911c;
+extern unsigned char *PTR_DAT_001e9120;
+extern unsigned char *PTR_DAT_001e9124;
+extern unsigned char *PTR_DAT_001e9128;
+extern unsigned char *PTR_DAT_001e912c;
+extern unsigned char *PTR_DAT_001e9130;
+extern unsigned char *PTR_DAT_001e9134;
+extern unsigned char *PTR_DAT_001e9138;
+extern unsigned char *PTR_DAT_001e913c;
+extern unsigned char *PTR_DAT_001e9140;
+extern unsigned char *PTR_DAT_001e9144;
+extern unsigned char *PTR_DAT_001e9148;
+extern unsigned char *PTR_DAT_001e914c;
+extern unsigned char *PTR_DAT_001e9770;
+extern unsigned char *PTR_DAT_001e9774;
 extern unsigned char PTR_DAT_001e9778;
 extern unsigned char *PTR_DAT_001e9f78[];
 extern unsigned char *PTR_DAT_001e9f7c[];
@@ -6770,165 +6838,165 @@ extern int (*PTR_FUN_001e8754)();
  * byte variable, matching PTR_FUN_001dbb0c's own declaration style just above. */
 extern int (*PTR_FUN_001e876c)();
 extern unsigned char PTR_orph_1d8910_001eb328;
-extern unsigned char PTR_FUN_001e88c4;
-extern unsigned char PTR_FUN_001e88d4;
-extern unsigned char PTR_FUN_001e88d8;
-extern unsigned char PTR_FUN_001e88dc;
-extern unsigned char PTR_FUN_001e88e0;
-extern unsigned char PTR_FUN_001e88e4;
-extern unsigned char PTR_FUN_001e88e8;
-extern unsigned char PTR_FUN_001e88ec;
-extern unsigned char PTR_FUN_001e88f0;
-extern unsigned char PTR_FUN_001e88f4;
-extern unsigned char PTR_FUN_001e88f8;
-extern unsigned char PTR_FUN_001e88fc;
-extern unsigned char PTR_FUN_001e8900;
-extern unsigned char PTR_FUN_001e8908;
-extern unsigned char PTR_FUN_001e890c;
-extern unsigned char PTR_FUN_001e8910;
-extern unsigned char PTR_FUN_001e8914;
-extern unsigned char PTR_FUN_001e8918;
-extern unsigned char PTR_FUN_001e891c;
-extern unsigned char PTR_FUN_001e8920;
-extern unsigned char PTR_FUN_001e8924;
-extern unsigned char PTR_FUN_001e8928;
-extern unsigned char PTR_FUN_001e892c;
-extern unsigned char PTR_FUN_001e8930;
-extern unsigned char PTR_FUN_001e8934;
-extern unsigned char PTR_FUN_001e8938;
-extern unsigned char PTR_FUN_001e893c;
-extern unsigned char PTR_FUN_001e8940;
-extern unsigned char PTR_FUN_001e8944;
-extern unsigned char PTR_FUN_001e8948;
-extern unsigned char PTR_FUN_001e894c;
-extern unsigned char PTR_FUN_001e8950;
-extern unsigned char PTR_FUN_001e8954;
-extern unsigned char PTR_FUN_001e8958;
-extern unsigned char PTR_FUN_001e895c;
-extern unsigned char PTR_FUN_001e8960;
-extern unsigned char PTR_FUN_001e8964;
-extern unsigned char PTR_FUN_001e8968;
-extern unsigned char PTR_FUN_001e896c;
-extern unsigned char PTR_FUN_001e8970;
-extern unsigned char PTR_FUN_001e8974;
-extern unsigned char PTR_FUN_001e8980;
-extern unsigned char PTR_FUN_001e8984;
-extern unsigned char PTR_FUN_001e8988;
-extern unsigned char PTR_FUN_001e898c;
-extern unsigned char PTR_FUN_001e8990;
-extern unsigned char PTR_FUN_001e89a0;
-extern unsigned char PTR_FUN_001e89a4;
-extern unsigned char PTR_FUN_001e89a8;
-extern unsigned char PTR_FUN_001e89ac;
-extern unsigned char PTR_FUN_001e89b0;
-extern unsigned char PTR_FUN_001e89b4;
-extern unsigned char PTR_FUN_001e89b8;
-extern unsigned char PTR_FUN_001e89bc;
-extern unsigned char PTR_FUN_001e89c0;
-extern unsigned char PTR_FUN_001e89c4;
-extern unsigned char PTR_FUN_001e89c8;
-extern unsigned char PTR_FUN_001e89d0;
-extern unsigned char PTR_FUN_001e89d8;
-extern unsigned char PTR_FUN_001e89dc;
-extern unsigned char PTR_FUN_001e89e0;
-extern unsigned char PTR_FUN_001e89e4;
-extern unsigned char PTR_FUN_001e89e8;
-extern unsigned char PTR_FUN_001e89ec;
-extern unsigned char PTR_FUN_001e89f0;
-extern unsigned char PTR_FUN_001e89f4;
-extern unsigned char PTR_FUN_001e89f8;
-extern unsigned char PTR_FUN_001e89fc;
-extern unsigned char PTR_FUN_001e8a00;
-extern unsigned char PTR_FUN_001e8a04;
-extern unsigned char PTR_FUN_001e8a08;
-extern unsigned char PTR_FUN_001e8a0c;
-extern unsigned char PTR_FUN_001e8a10;
-extern unsigned char PTR_FUN_001e8a14;
-extern unsigned char PTR_FUN_001e8a18;
-extern unsigned char PTR_FUN_001e8a1c;
-extern unsigned char PTR_FUN_001e8a20;
-extern unsigned char PTR_FUN_001e8a24;
-extern unsigned char PTR_FUN_001e8a28;
-extern unsigned char PTR_FUN_001e8a2c;
-extern unsigned char PTR_FUN_001e8a30;
-extern unsigned char PTR_FUN_001e8a34;
-extern unsigned char PTR_FUN_001e8a38;
-extern unsigned char PTR_FUN_001e8a40;
-extern unsigned char PTR_FUN_001e8a44;
-extern unsigned char PTR_FUN_001e8a48;
-extern unsigned char PTR_FUN_001e8a4c;
-extern unsigned char PTR_FUN_001e8a50;
-extern unsigned char PTR_FUN_001e8a54;
-extern unsigned char PTR_FUN_001e8a5c;
-extern unsigned char PTR_FUN_001e8a60;
-extern unsigned char PTR_FUN_001e8a64;
-extern unsigned char PTR_FUN_001e8a68;
-extern unsigned char PTR_FUN_001e8a6c;
-extern unsigned char PTR_FUN_001e8a70;
-extern unsigned char PTR_FUN_001e8a74;
-extern unsigned char PTR_FUN_001e8a78;
-extern unsigned char PTR_FUN_001e8a7c;
-extern unsigned char PTR_FUN_001e8a80;
-extern unsigned char PTR_FUN_001e8a84;
-extern unsigned char PTR_FUN_001e8a88;
-extern unsigned char PTR_FUN_001e8a8c;
-extern unsigned char PTR_FUN_001e8a90;
-extern unsigned char PTR_FUN_001e8a94;
-extern unsigned char PTR_FUN_001e8a98;
-extern unsigned char PTR_FUN_001e8a9c;
-extern unsigned char PTR_FUN_001e8aa0;
-extern unsigned char PTR_FUN_001e8aa8;
-extern unsigned char PTR_FUN_001e8aac;
-extern unsigned char PTR_FUN_001e8ab0;
-extern unsigned char PTR_FUN_001e8ab4;
-extern unsigned char PTR_FUN_001e8ab8;
-extern unsigned char PTR_FUN_001e8abc;
-extern unsigned char PTR_FUN_001e8ac0;
-extern unsigned char PTR_FUN_001e8ac4;
-extern unsigned char PTR_FUN_001e8ac8;
-extern unsigned char PTR_FUN_001e8acc;
-extern unsigned char PTR_FUN_001e8ad0;
-extern unsigned char PTR_FUN_001e8ad4;
-extern unsigned char PTR_FUN_001e8ad8;
-extern unsigned char PTR_FUN_001e8adc;
-extern unsigned char PTR_FUN_001e8ae0;
-extern unsigned char PTR_FUN_001e8ae8;
-extern unsigned char PTR_FUN_001e8aec;
-extern unsigned char PTR_FUN_001e8af0;
-extern unsigned char PTR_FUN_001e8af4;
-extern unsigned char PTR_FUN_001e8af8;
-extern unsigned char PTR_FUN_001e8afc;
-extern unsigned char PTR_FUN_001e8b00;
-extern unsigned char PTR_FUN_001e8b04;
-extern unsigned char PTR_FUN_001e8b08;
-extern unsigned char PTR_FUN_001e8b0c;
-extern unsigned char PTR_FUN_001e8b10;
-extern unsigned char PTR_FUN_001e8b18;
-extern unsigned char PTR_FUN_001e8b1c;
-extern unsigned char PTR_FUN_001e8b20;
-extern unsigned char PTR_FUN_001e8b24;
-extern unsigned char PTR_FUN_001e8b28;
-extern unsigned char PTR_FUN_001e8b2c;
-extern unsigned char PTR_FUN_001e8b30;
-extern unsigned char PTR_FUN_001e8b34;
-extern unsigned char PTR_FUN_001e8b38;
-extern unsigned char PTR_FUN_001e8b3c;
-extern unsigned char PTR_FUN_001e8b40;
-extern unsigned char PTR_FUN_001e8c7c;
-extern unsigned char PTR_FUN_001e9090;
-extern unsigned char PTR_FUN_001e9094;
-extern unsigned char PTR_FUN_001e9098;
-extern unsigned char PTR_FUN_001e909c;
-extern unsigned char PTR_FUN_001e90a0;
-extern unsigned char PTR_FUN_001e90a4;
-extern unsigned char PTR_FUN_001e90a8;
-extern unsigned char PTR_FUN_001e90ac;
-extern unsigned char PTR_FUN_001e90b0;
-extern unsigned char PTR_FUN_001e90b4;
-extern unsigned char PTR_FUN_001e90b8;
-extern unsigned char PTR_FUN_001e90bc;
-extern unsigned char PTR_FUN_001e90c0;
-extern unsigned char PTR_FUN_001e90c4;
+extern unsigned char *PTR_FUN_001e88c4;
+extern unsigned char *PTR_FUN_001e88d4;
+extern unsigned char *PTR_FUN_001e88d8;
+extern unsigned char *PTR_FUN_001e88dc;
+extern unsigned char *PTR_FUN_001e88e0;
+extern unsigned char *PTR_FUN_001e88e4;
+extern unsigned char *PTR_FUN_001e88e8;
+extern unsigned char *PTR_FUN_001e88ec;
+extern unsigned char *PTR_FUN_001e88f0;
+extern unsigned char *PTR_FUN_001e88f4;
+extern unsigned char *PTR_FUN_001e88f8;
+extern unsigned char *PTR_FUN_001e88fc;
+extern unsigned char *PTR_FUN_001e8900;
+extern unsigned char *PTR_FUN_001e8908;
+extern unsigned char *PTR_FUN_001e890c;
+extern unsigned char *PTR_FUN_001e8910;
+extern unsigned char *PTR_FUN_001e8914;
+extern unsigned char *PTR_FUN_001e8918;
+extern unsigned char *PTR_FUN_001e891c;
+extern unsigned char *PTR_FUN_001e8920;
+extern unsigned char *PTR_FUN_001e8924;
+extern unsigned char *PTR_FUN_001e8928;
+extern unsigned char *PTR_FUN_001e892c;
+extern unsigned char *PTR_FUN_001e8930;
+extern unsigned char *PTR_FUN_001e8934;
+extern unsigned char *PTR_FUN_001e8938;
+extern unsigned char *PTR_FUN_001e893c;
+extern unsigned char *PTR_FUN_001e8940;
+extern unsigned char *PTR_FUN_001e8944;
+extern unsigned char *PTR_FUN_001e8948;
+extern unsigned char *PTR_FUN_001e894c;
+extern unsigned char *PTR_FUN_001e8950;
+extern unsigned char *PTR_FUN_001e8954;
+extern unsigned char *PTR_FUN_001e8958;
+extern unsigned char *PTR_FUN_001e895c;
+extern unsigned char *PTR_FUN_001e8960;
+extern unsigned char *PTR_FUN_001e8964;
+extern unsigned char *PTR_FUN_001e8968;
+extern unsigned char *PTR_FUN_001e896c;
+extern unsigned char *PTR_FUN_001e8970;
+extern unsigned char *PTR_FUN_001e8974;
+extern unsigned char *PTR_FUN_001e8980;
+extern unsigned char *PTR_FUN_001e8984;
+extern unsigned char *PTR_FUN_001e8988;
+extern unsigned char *PTR_FUN_001e898c;
+extern unsigned char *PTR_FUN_001e8990;
+extern unsigned char *PTR_FUN_001e89a0;
+extern unsigned char *PTR_FUN_001e89a4;
+extern unsigned char *PTR_FUN_001e89a8;
+extern unsigned char *PTR_FUN_001e89ac;
+extern unsigned char *PTR_FUN_001e89b0;
+extern unsigned char *PTR_FUN_001e89b4;
+extern unsigned char *PTR_FUN_001e89b8;
+extern unsigned char *PTR_FUN_001e89bc;
+extern unsigned char *PTR_FUN_001e89c0;
+extern unsigned char *PTR_FUN_001e89c4;
+extern unsigned char *PTR_FUN_001e89c8;
+extern unsigned char *PTR_FUN_001e89d0;
+extern unsigned char *PTR_FUN_001e89d8;
+extern unsigned char *PTR_FUN_001e89dc;
+extern unsigned char *PTR_FUN_001e89e0;
+extern unsigned char *PTR_FUN_001e89e4;
+extern unsigned char *PTR_FUN_001e89e8;
+extern unsigned char *PTR_FUN_001e89ec;
+extern unsigned char *PTR_FUN_001e89f0;
+extern unsigned char *PTR_FUN_001e89f4;
+extern unsigned char *PTR_FUN_001e89f8;
+extern unsigned char *PTR_FUN_001e89fc;
+extern unsigned char *PTR_FUN_001e8a00;
+extern unsigned char *PTR_FUN_001e8a04;
+extern unsigned char *PTR_FUN_001e8a08;
+extern unsigned char *PTR_FUN_001e8a0c;
+extern unsigned char *PTR_FUN_001e8a10;
+extern unsigned char *PTR_FUN_001e8a14;
+extern unsigned char *PTR_FUN_001e8a18;
+extern unsigned char *PTR_FUN_001e8a1c;
+extern unsigned char *PTR_FUN_001e8a20;
+extern unsigned char *PTR_FUN_001e8a24;
+extern unsigned char *PTR_FUN_001e8a28;
+extern unsigned char *PTR_FUN_001e8a2c;
+extern unsigned char *PTR_FUN_001e8a30;
+extern unsigned char *PTR_FUN_001e8a34;
+extern unsigned char *PTR_FUN_001e8a38;
+extern unsigned char *PTR_FUN_001e8a40;
+extern unsigned char *PTR_FUN_001e8a44;
+extern unsigned char *PTR_FUN_001e8a48;
+extern unsigned char *PTR_FUN_001e8a4c;
+extern unsigned char *PTR_FUN_001e8a50;
+extern unsigned char *PTR_FUN_001e8a54;
+extern unsigned char *PTR_FUN_001e8a5c;
+extern unsigned char *PTR_FUN_001e8a60;
+extern unsigned char *PTR_FUN_001e8a64;
+extern unsigned char *PTR_FUN_001e8a68;
+extern unsigned char *PTR_FUN_001e8a6c;
+extern unsigned char *PTR_FUN_001e8a70;
+extern unsigned char *PTR_FUN_001e8a74;
+extern unsigned char *PTR_FUN_001e8a78;
+extern unsigned char *PTR_FUN_001e8a7c;
+extern unsigned char *PTR_FUN_001e8a80;
+extern unsigned char *PTR_FUN_001e8a84;
+extern unsigned char *PTR_FUN_001e8a88;
+extern unsigned char *PTR_FUN_001e8a8c;
+extern unsigned char *PTR_FUN_001e8a90;
+extern unsigned char *PTR_FUN_001e8a94;
+extern unsigned char *PTR_FUN_001e8a98;
+extern unsigned char *PTR_FUN_001e8a9c;
+extern unsigned char *PTR_FUN_001e8aa0;
+extern unsigned char *PTR_FUN_001e8aa8;
+extern unsigned char *PTR_FUN_001e8aac;
+extern unsigned char *PTR_FUN_001e8ab0;
+extern unsigned char *PTR_FUN_001e8ab4;
+extern unsigned char *PTR_FUN_001e8ab8;
+extern unsigned char *PTR_FUN_001e8abc;
+extern unsigned char *PTR_FUN_001e8ac0;
+extern unsigned char *PTR_FUN_001e8ac4;
+extern unsigned char *PTR_FUN_001e8ac8;
+extern unsigned char *PTR_FUN_001e8acc;
+extern unsigned char *PTR_FUN_001e8ad0;
+extern unsigned char *PTR_FUN_001e8ad4;
+extern unsigned char *PTR_FUN_001e8ad8;
+extern unsigned char *PTR_FUN_001e8adc;
+extern unsigned char *PTR_FUN_001e8ae0;
+extern unsigned char *PTR_FUN_001e8ae8;
+extern unsigned char *PTR_FUN_001e8aec;
+extern unsigned char *PTR_FUN_001e8af0;
+extern unsigned char *PTR_FUN_001e8af4;
+extern unsigned char *PTR_FUN_001e8af8;
+extern unsigned char *PTR_FUN_001e8afc;
+extern unsigned char *PTR_FUN_001e8b00;
+extern unsigned char *PTR_FUN_001e8b04;
+extern unsigned char *PTR_FUN_001e8b08;
+extern unsigned char *PTR_FUN_001e8b0c;
+extern unsigned char *PTR_FUN_001e8b10;
+extern unsigned char *PTR_FUN_001e8b18;
+extern unsigned char *PTR_FUN_001e8b1c;
+extern unsigned char *PTR_FUN_001e8b20;
+extern unsigned char *PTR_FUN_001e8b24;
+extern unsigned char *PTR_FUN_001e8b28;
+extern unsigned char *PTR_FUN_001e8b2c;
+extern unsigned char *PTR_FUN_001e8b30;
+extern unsigned char *PTR_FUN_001e8b34;
+extern unsigned char *PTR_FUN_001e8b38;
+extern unsigned char *PTR_FUN_001e8b3c;
+extern unsigned char *PTR_FUN_001e8b40;
+extern unsigned char *PTR_FUN_001e8c7c;
+extern unsigned char *PTR_FUN_001e9090;
+extern unsigned char *PTR_FUN_001e9094;
+extern unsigned char *PTR_FUN_001e9098;
+extern unsigned char *PTR_FUN_001e909c;
+extern unsigned char *PTR_FUN_001e90a0;
+extern unsigned char *PTR_FUN_001e90a4;
+extern unsigned char *PTR_FUN_001e90a8;
+extern unsigned char *PTR_FUN_001e90ac;
+extern unsigned char *PTR_FUN_001e90b0;
+extern unsigned char *PTR_FUN_001e90b4;
+extern unsigned char *PTR_FUN_001e90b8;
+extern unsigned char *PTR_FUN_001e90bc;
+extern unsigned char *PTR_FUN_001e90c0;
+extern unsigned char *PTR_FUN_001e90c4;
 extern unsigned char *PTR_FUN_001e9150[];
 extern unsigned char PTR_FUN_001e97a0;
 extern unsigned char PTR_FUN_001e9848;
@@ -6979,13 +7047,13 @@ extern unsigned char PTR_FUN_001eb6a0;
 extern unsigned char PTR_FUN_001eb808;
 extern unsigned char PTR_FUN_001eb8d8;
 extern unsigned char PTR_FUN_001eb9a8;
-extern unsigned char PTR_LAB_001e8904;
-extern unsigned char PTR_LAB_001e89cc;
-extern unsigned char PTR_LAB_001e89d4;
+extern unsigned char *PTR_LAB_001e8904;
+extern unsigned char *PTR_LAB_001e89cc;
+extern unsigned char *PTR_LAB_001e89d4;
 extern unsigned char *PTR_PTR_001e8c60;
-extern unsigned char PTR_PTR_001e910c;
-extern unsigned char PTR__gldFinish_001e8978;
-extern unsigned char PTR__gldFlush_001e897c;
+extern unsigned char *PTR_PTR_001e910c;
+extern unsigned char *PTR__gldFinish_001e8978;
+extern unsigned char *PTR__gldFlush_001e897c;
 extern unsigned char PTR_s_0x55_0_JUMP_NONE_NONE_NONE_001dc2d0;
 extern unsigned char PTR_s_0xaa_0_JUMP_NONE_NONE_NONE_001dc2d8;
 extern unsigned char *PTR_s_1D_001e9158[];

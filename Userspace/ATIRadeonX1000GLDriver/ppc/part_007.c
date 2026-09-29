@@ -4842,3 +4842,15 @@ asm(".globl FUN_0004dbe0");
 asm(".set FUN_0004dbe0, _FUN_0004dbe0");
 asm(".globl FUN_0004de30");
 asm(".set FUN_0004de30, _FUN_0004de30");
+
+/* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
+ * just branches straight to the real function below, no different behavior or arguments - but
+ * decls.h declares "thunk_FUN_xxx" as its own separate extern function that nothing in this
+ * corpus ever DEFINES a body for. The stock ld apparently tolerated the resulting undefined
+ * reference (never actually called in a way that mattered, or silently resolved some other
+ * way); ld64 leaves it a real unresolved lazy symbol, crashing the moment this call path is
+ * first taken. Real fix: alias the thunk name directly onto the real function, so calling
+ * "thunk_FUN_xxx" IS calling FUN_xxx - which is exactly what the original binary's trampoline
+ * did. */
+asm(".globl _thunk_FUN_00053b60");
+asm(".set _thunk_FUN_00053b60, _FUN_00053b60");

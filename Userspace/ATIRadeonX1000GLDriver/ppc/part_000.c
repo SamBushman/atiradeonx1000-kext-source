@@ -51,22 +51,32 @@ int FUN_00001830(param_1, param_2)
   int iVar1;
   code *pcStack00000018;
   code *pcStack0000001c;
-  int local_28;
-  code *local_24;
+  /* issue #75 (follow-up): local_28 (flag/arg, at Ghidra-derived stack offset -0x28) and
+   * local_24 (the real __cxa_atexit pointer, at offset -0x24, i.e. exactly 4 bytes higher)
+   * were declared as two SEPARATE C locals, but FUN_000017b8 reaches local_24 purely via raw
+   * pointer arithmetic on the address of local_28 (`param_1[1]`, i.e. `&local_28 + 4`) - an
+   * assumption baked in from the STOCK binary's original gcc-4.0.1 stack layout, which this
+   * rebuild's gcc-7 has no reason to honor. Confirmed live: gdb showed &local_28 = 0xbffe70cc
+   * but &local_24 = 0xbffe70bc (16 bytes away, not 4) - so `param_1[1]` inside FUN_000017b8 was
+   * reading an unrelated stack slot instead of the real __cxa_atexit pointer, landing on 0 and
+   * crashing with pc=0 the moment __cxa_finalize (called a few lines below) invoked it. Fixed
+   * by merging the two into one real struct, so their relative layout is guaranteed regardless
+   * of compiler - matching the adjacency the original raw offsets assumed. */
+  struct { int flag; code *real_atexit_fn; } local_2818;
   int local_18;
-  
-  local_28 = 0;
+
+  local_2818.flag = 0;
   pcStack00000018 = param_1;
   pcStack0000001c = param_2;
-  local_24 = param_1;
-  iVar1 = (*param_1)(FUN_000017b8,&local_28,&local_28);
+  local_2818.real_atexit_fn = param_1;
+  iVar1 = (*param_1)(FUN_000017b8,&local_2818.flag,&local_2818.flag);
   if (iVar1 == 0) {
-    (*pcStack0000001c)(&local_28);
-    if (local_28 == 0) {
-      (*pcStack0000001c)(&local_28);
-      local_28 = 0;
+    (*pcStack0000001c)(&local_2818.flag);
+    if (local_2818.flag == 0) {
+      (*pcStack0000001c)(&local_2818.flag);
+      local_2818.flag = 0;
     }
-    local_18 = local_28;
+    local_18 = local_2818.flag;
   }
   else {
     local_18 = -1;
