@@ -6566,7 +6566,7 @@ joined_r0x00103afc:
       }
       goto switchD_0010061c_caseD_0;
     case 0x2c:
-      (*(int *)((char *)frame_ + 284)) = 0x1dd5d8;
+      (*(int *)((char *)frame_ + 284)) = ANCH(0x1dd5d8);
       if ((UNK_001dc660 == 0) || (iVar34 == UNK_001dc660)) {
 code_r0x00101020:
         (*(int *)((char *)frame_ + 300)) = 0;

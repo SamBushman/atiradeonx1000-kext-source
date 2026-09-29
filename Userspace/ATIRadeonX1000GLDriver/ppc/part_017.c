@@ -8613,7 +8613,7 @@ LAB_000c49b0:
             *(undefined4 *)puVar14 = *(undefined4 *)(uVar5 * 4 + 0x1dc04c);
             puVar14[1] = uVar6 << 0xc | puVar14[1];
             uVar30 = uVar30 - 1;
-            puVar7 = (uint *)0x1dc04c;
+            puVar7 = ANCH(0x1dc04c);
             if (uVar30 == 0) goto LAB_000c4a74;
             if (iVar13 == 1) {
               uVar5 = (uint)*pbVar19;

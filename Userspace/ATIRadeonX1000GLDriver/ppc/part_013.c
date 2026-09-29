@@ -4889,7 +4889,7 @@ int FUN_00091d70(param_1)
     (**(code **)(((unsigned char *)0x000012ec) + iVar2))
               (param_1,**(undefined4 **)(param_1 + 0x3f0),*(undefined4 *)(param_1 + 0x470),
                &DAT_001dbd84,*(undefined4 *)(*(int *)(param_1 + 0x3ec) + 8),
-               *(undefined4 *)(param_1 + 0x344),&DAT_001fa5f8,&DAT_001fa5e8,iVar1,(*(char *)(iVar2 + 0x12a) == '\0' ? *(int *)(param_1 + 4) : *(int *)(param_1 + 0x448)),iVarS1,&DAT_001fa5e8);
+               *(undefined4 *)(param_1 + 0x344),&DAT_001fa5f8,&DAT_001fa5e8,(*(char *)(iVar2 + 0x12a) == '\0' ? (*(int **)(param_1 + 0x3ec))[1] : **(int **)(param_1 + 0x3ec)),(*(char *)(iVar2 + 0x12a) == '\0' ? *(int *)(param_1 + 4) : *(int *)(param_1 + 0x448)),iVarS1,&DAT_001fa5e8);
   }
   return 0;
 }
@@ -5114,12 +5114,12 @@ LAB_00092420:
       uVar6 = **(undefined4 **)(param_1 + 0x3ec);
       uVar5 = **(undefined4 **)(param_1 + 0x3f0);
       (**(code **)(((unsigned char *)0x000012e4) + iVar2))
-                (param_1,uVar5,(*(undefined4 *)((char *)frame_ + 12)),((undefined1 *)((char *)frame_ + 16)),uVar6,iVar3,&DAT_001dbd74,&DAT_001fa5e8,uVar6,iVar4,&DAT_001dbd74,&DAT_001fa5e8);
+                (param_1,uVar5,(*(undefined4 *)((char *)frame_ + 12)),((undefined1 *)((char *)frame_ + 16)),uVar6,iVar3,&DAT_001dbd74,&DAT_001fa5e8,uVar6,(*(char *)(iVar2 + 0x128) == '\0' ? (*(char *)(iVar2 + 300) == '\0' ? *(int *)(param_1 + 0x448) : *(int *)(param_1 + 0x470)) : *(int *)(param_1 + 0x498)),&DAT_001dbd74,&DAT_001fa5e8);
       iVarS1 = &DAT_001dbd74;
       iVarS2 = &DAT_001dbd94;
       iVarS3 = *(int *)((int)param_1 + 1056);
       (**(code **)(((unsigned char *)0x000012f8) + iVar2))
-                (param_1,uVar5,uVar1,&DAT_001dbd84,uVar6,(*(undefined4 *)((char *)frame_ + 12)),((undefined1 *)((char *)frame_ + 32)),&DAT_001fa5e8,uVar6,iVar4,iVarS1,iVarS2,uVar6,iVarS3,iVarS1,&DAT_001fa5e8);
+                (param_1,uVar5,uVar1,&DAT_001dbd84,uVar6,(*(undefined4 *)((char *)frame_ + 12)),((undefined1 *)((char *)frame_ + 32)),&DAT_001fa5e8,uVar6,(*(char *)(iVar2 + 0x128) == '\0' ? (*(char *)(iVar2 + 300) == '\0' ? *(int *)(param_1 + 0x448) : *(int *)(param_1 + 0x470)) : *(int *)(param_1 + 0x498)),iVarS1,iVarS2,uVar6,iVarS3,iVarS1,&DAT_001fa5e8);
       ((int (*)())FUN_000911a0)(param_1,((undefined1 *)((char *)frame_ + 8)));
       return 0;
     }

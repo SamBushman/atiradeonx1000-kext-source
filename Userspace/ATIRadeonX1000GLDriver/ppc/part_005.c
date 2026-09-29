@@ -5908,8 +5908,8 @@ LAB_00037c6c:
             (*(uint *)((char *)frame_ + 300)) = param_8 + param_5 ^ 0x80000000;
             (*(undefined4 *)((char *)frame_ + 296)) = 0x43300000;
             (*(undefined4 *)((char *)frame_ + 288)) = 0x43300000;
-            (*(code * *)((char *)frame_ + 424)) = FUN_001d6a08;
-            (*(int *)((char *)frame_ + 436)) = 0x1e6a08;
+            (*(code * *)((char *)frame_ + 424)) = ANCH(0x1d6a08);
+            (*(int *)((char *)frame_ + 436)) = ANCH(0x1e6a08);
             (*(int *)((char *)frame_ + 428)) = param_4 * 0x18;
             (*(int *)((char *)frame_ + 388)) = param_3 * 0x168;
             (*(int *)((char *)frame_ + 348)) = (param_3 * 0xd + param_4) * 0x20;
@@ -5920,10 +5920,10 @@ LAB_00037c6c:
             (*(int * *)((char *)frame_ + 392)) = &(*(int *)((char *)frame_ + 12));
             (*(uint ** *)((char *)frame_ + 400)) = &(*(uint * *)((char *)frame_ + 20));
             (*(uint * *)((char *)frame_ + 404)) = &(*(uint *)((char *)frame_ + 24));
-            (*(code * *)((char *)frame_ + 384)) = FUN_001d6a08;
+            (*(code * *)((char *)frame_ + 384)) = ANCH(0x1d6a08);
             (*(uint * *)((char *)frame_ + 412)) = &(*(uint *)((char *)frame_ + 32));
-            (*(code * *)((char *)frame_ + 380)) = FUN_001d6a08;
-            (*(code * *)((char *)frame_ + 416)) = FUN_001d6a08;
+            (*(code * *)((char *)frame_ + 380)) = ANCH(0x1d6a08);
+            (*(code * *)((char *)frame_ + 416)) = ANCH(0x1d6a08);
             fVar4 = (float)((double)CONCAT44(0x43300000,(*(uint *)((char *)frame_ + 292))) - 4503601774854144.0);
             fVar5 = (float)((double)CONCAT44(0x43300000,(*(uint *)((char *)frame_ + 300))) - 4503601774854144.0);
             iVar22 = (int)((fVar5 - fVar4) * 6.0);
@@ -6449,7 +6449,7 @@ LAB_00037930:
     }
     else if ((param_11 != 0x80e1) || (param_12 != (undefined *)0x8367)) goto LAB_00037930;
   }
-  (*(code * *)((char *)frame_ + 424)) = FUN_001d6a08;
+  (*(code * *)((char *)frame_ + 424)) = ANCH(0x1d6a08);
   iVar22 = (uVar26 & 0xff) * 0x24;
   bVar1 = ((uVar44 | (*(uint *)((char *)frame_ + 8))) & 0x1f) == 0;
   bVar46 = bVar1 << 1;
