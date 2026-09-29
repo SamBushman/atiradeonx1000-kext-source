@@ -1542,8 +1542,7 @@ int FUN_0019f98c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uint uVar2;
   int iVar3;
   int iVar4;
-  int local_28;
-  uint local_24 [7];
+  unsigned int frame_[12] __attribute__((aligned(16)));
   
   if (*(int *)(param_2 + 300) == 3) {
     uVar2 = 0;
@@ -1560,9 +1559,9 @@ int FUN_0019f98c(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       iVar4 = iVar4 + -1;
       fVar1 = FLOAT_001aa0d4;
     } while (iVar4 != 0);
-    iVar3 = ((undefined4 (*)())FUN_00191888)(*(undefined4 *)(param_1 + 0xa4),param_2,&local_28,local_24,(double)fVar1);
+    iVar3 = ((undefined4 (*)())FUN_00191888)(*(undefined4 *)(param_1 + 0xa4),param_2,&(*(int *)((char *)frame_ + 8)),((uint *)((char *)frame_ + 12)),(double)fVar1);
     if (iVar3 != 0) {
-      *param_3 = local_24[0] | local_28 << 3 | 0x2000;
+      *param_3 = ((uint *)((char *)frame_ + 12))[0] | (*(int *)((char *)frame_ + 8)) << 3 | 0x2000;
       return 1;
     }
   }
@@ -2273,15 +2272,12 @@ int FUN_001a0fe4(param_1, param_2)
   undefined4 uVar1;
   int iVar2;
   bool bVar3;
-  int local_48;
-  float local_44;
-  int local_30;
-  float local_2c;
+  unsigned int frame_[20] __attribute__((aligned(16)));
   
   uVar1 = DAT_001b2d70;
-  iVar2 = FUN_000f5cf0(param_1,1,DAT_001b2d70,&local_48);
-  if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = FUN_000f5cf0(param_1,2,uVar1,&local_30), iVar2 == 0)) || (local_30 != 2)) {
+  iVar2 = FUN_000f5cf0(param_1,1,DAT_001b2d70,&(*(int *)((char *)frame_ + 8)));
+  if ((((iVar2 == 0) || ((*(int *)((char *)frame_ + 8)) != 2)) ||
+      (iVar2 = FUN_000f5cf0(param_1,2,uVar1,&(*(int *)((char *)frame_ + 32))), iVar2 == 0)) || ((*(int *)((char *)frame_ + 32)) != 2)) {
     bVar3 = false;
     *param_2 = 0;
   }
@@ -2289,22 +2285,22 @@ int FUN_001a0fe4(param_1, param_2)
     bVar3 = false;
     switch(*(undefined4 *)(param_1 + 300)) {
     case 0:
-      bVar3 = local_44 == local_2c;
+      bVar3 = (*(float *)((char *)frame_ + 12)) == (*(float *)((char *)frame_ + 36));
       break;
     case 1:
-      bVar3 = local_44 != local_2c;
+      bVar3 = (*(float *)((char *)frame_ + 12)) != (*(float *)((char *)frame_ + 36));
       break;
     case 2:
-      bVar3 = local_2c < local_44;
+      bVar3 = (*(float *)((char *)frame_ + 36)) < (*(float *)((char *)frame_ + 12));
       break;
     case 3:
-      bVar3 = local_2c <= local_44;
+      bVar3 = (*(float *)((char *)frame_ + 36)) <= (*(float *)((char *)frame_ + 12));
       break;
     case 4:
-      bVar3 = local_44 < local_2c;
+      bVar3 = (*(float *)((char *)frame_ + 12)) < (*(float *)((char *)frame_ + 36));
       break;
     case 5:
-      bVar3 = local_44 <= local_2c;
+      bVar3 = (*(float *)((char *)frame_ + 12)) <= (*(float *)((char *)frame_ + 36));
     }
     *param_2 = 1;
   }

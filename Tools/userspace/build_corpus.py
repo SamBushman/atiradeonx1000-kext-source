@@ -101,3 +101,8 @@ if os.environ.get('DATA_WIDTHS'):
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import data_types
     data_types.main(out, os.environ['DATA_WIDTHS'])
+# stack variables a callee reaches through a pointer keep the stock's relative layout (issue #83): FRAME_LAYOUT=1 enables it
+if os.environ.get('FRAME_LAYOUT'):
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import frame_layout
+    frame_layout.main(out, True)

@@ -137,16 +137,14 @@ int FUN_00103f84(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
-  undefined4 local_28;
-  undefined4 local_24;
-  undefined4 local_20;
+  unsigned int frame_[12] __attribute__((aligned(16)));
   
-  local_20 = 0;
-  local_28 = 0;
-  local_24 = 0;
-  ((int (*)())FUN_00103f18)(param_1,&local_28,0xffffffff);
+  (*(undefined4 *)((char *)frame_ + 16)) = 0;
+  (*(undefined4 *)((char *)frame_ + 8)) = 0;
+  (*(undefined4 *)((char *)frame_ + 12)) = 0;
+  ((int (*)())FUN_00103f18)(param_1,&(*(undefined4 *)((char *)frame_ + 8)),0xffffffff);
   _memcpy(param_1,param_2,0x164);
-  return ((int (*)())FUN_00103f44)(param_1,&local_28);
+  return ((int (*)())FUN_00103f44)(param_1,&(*(undefined4 *)((char *)frame_ + 8)));
 }
 
 /* FUN_00103fe8 @ 0x103fe8 (52 bytes) */

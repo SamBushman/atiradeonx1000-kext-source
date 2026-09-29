@@ -788,20 +788,18 @@ int FUN_0010ae20(param_1, param_2, param_3)
   int iVar2;
   undefined4 uVar3;
   undefined4 uVar4;
-  undefined4 local_48;
-  undefined4 local_44;
-  undefined4 local_40;
+  unsigned int frame_[20] __attribute__((aligned(16)));
   
-  local_48 = 0;
-  local_44 = 0;
-  local_40 = 0;
-  FUN_00103f18(param_1,&local_48,0xffffffff);
+  (*(undefined4 *)((char *)frame_ + 8)) = 0;
+  (*(undefined4 *)((char *)frame_ + 12)) = 0;
+  (*(undefined4 *)((char *)frame_ + 16)) = 0;
+  FUN_00103f18(param_1,&(*(undefined4 *)((char *)frame_ + 8)),0xffffffff);
   uVar3 = *(undefined4 *)(param_1 + 4);
   uVar4 = *(undefined4 *)(param_1 + 0x158);
   iVar2 = FUN_00104054(param_1,param_3);
   FUN_0019401c(param_1);
   FUN_00103f84(param_1,param_2);
-  FUN_00103f44(param_1,&local_48);
+  FUN_00103f44(param_1,&(*(undefined4 *)((char *)frame_ + 8)));
   iVar1 = *(int *)(param_3 + 0x478);
   *(undefined4 *)(param_1 + 0x94) = *(undefined4 *)(param_1 + 0x14c);
   *(int *)(param_1 + 0x160) = iVar2 + iVar1;
@@ -1304,24 +1302,22 @@ int FUN_0010bc78(param_1, param_2)
   int iVar1;
   undefined4 uVar2;
   int iVar3;
-  int local_28;
-  int local_24;
-  int local_20 [4];
+  unsigned int frame_[12] __attribute__((aligned(16)));
   
   iVar1 = *(int *)(param_1[0x22] + 8);
   uVar2 = FUN_0011333c(iVar1,param_2);
   iVar3 = FUN_00112f54(uVar2);
   param_1[0x22] = iVar3;
   iVar3 = (**(code **)(*param_1 + 0x14))(param_1);
-  FUN_000f33f8(&local_28,param_1[0x2d]);
-  param_1[0x2d] = local_28;
+  FUN_000f33f8(&(*(int *)((char *)frame_ + 8)),param_1[0x2d]);
+  param_1[0x2d] = (*(int *)((char *)frame_ + 8));
   if (1 < iVar3) {
-    FUN_000f33f8(&local_24,param_1[0x33]);
-    param_1[0x33] = local_24;
+    FUN_000f33f8(&(*(int *)((char *)frame_ + 12)),param_1[0x33]);
+    param_1[0x33] = (*(int *)((char *)frame_ + 12));
   }
   if (2 < iVar3) {
-    FUN_000f33f8(local_20,param_1[0x39]);
-    param_1[0x39] = local_20[0];
+    FUN_000f33f8(((int *)((char *)frame_ + 16)),param_1[0x39]);
+    param_1[0x39] = ((int *)((char *)frame_ + 16))[0];
   }
   if (iVar1 == 0x35) {
     FUN_00103d50(param_1 + 0x2f,1,param_1[0x34] & 1U ^ 1);

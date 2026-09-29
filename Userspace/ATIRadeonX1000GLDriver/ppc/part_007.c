@@ -4529,19 +4529,19 @@ int FUN_000534c0(param_1, param_2, param_3, param_4, param_5)
   undefined4 uVar2;
   uint uVar3;
   uint uVar4;
-  undefined4 local_48 [8];
+  unsigned int frame_[20] __attribute__((aligned(16)));
   
-  local_48[0] = DAT_001aa584;
-  local_48[2] = DAT_001aa58c;
-  local_48[1] = DAT_001aa588;
+  ((undefined4 *)((char *)frame_ + 8))[0] = DAT_001aa584;
+  ((undefined4 *)((char *)frame_ + 8))[2] = DAT_001aa58c;
+  ((undefined4 *)((char *)frame_ + 8))[1] = DAT_001aa588;
   iVar1 = *(int *)(((unsigned char *)0x00001168) + param_1);
-  uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,local_48[*param_3],0x87e1,0,param_2,*param_4);
+  uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,((undefined4 *)((char *)frame_ + 8))[*param_3],0x87e1,0,param_2,*param_4);
   *param_5 = uVar2;
   if (1 < param_2) {
     uVar3 = 1;
     do {
       uVar4 = uVar3 + 1;
-      uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,local_48[param_3[uVar3]],0x87e1,*param_5,
+      uVar2 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,((undefined4 *)((char *)frame_ + 8))[param_3[uVar3]],0x87e1,*param_5,
                            param_2 - uVar3,param_4[uVar3]);
       param_5[uVar3] = uVar2;
       uVar3 = uVar4;
@@ -4617,20 +4617,17 @@ int FUN_000537c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
 {
   int iVar1;
   int iVar2;
-  int iStack_38;
-  uint uStack_34;
-  uint uStack_30;
-  uint uStack_2c;
+  unsigned int frame_[16] __attribute__((aligned(16)));
   
   if (((((((unsigned char *)0x00001170)[param_1] != '\0') && (param_5 - 0x87d5U < 0xb)) && (0x87d4 < param_6)) &&
       ((param_6 < 0x87e0 && (0x87d4 < param_7)))) &&
      ((param_7 < 0x87e0 && ((0x87d4 < param_8 && (param_8 < 0x87e0)))))) {
     iVar2 = *(int *)(((unsigned char *)0x00001168) + param_1);
-    iStack_38 = param_5;
-    uStack_34 = param_6;
-    uStack_30 = param_7;
-    uStack_2c = param_8;
-    iVar1 = FUN_000553c0(param_1,iVar2,0x879a,param_2,param_3,param_4,&iStack_38,0,&DAT_001db998,0,
+    (*(int *)((char *)frame_ + 8)) = param_5;
+    (*(uint *)((char *)frame_ + 12)) = param_6;
+    (*(uint *)((char *)frame_ + 16)) = param_7;
+    (*(uint *)((char *)frame_ + 20)) = param_8;
+    iVar1 = FUN_000553c0(param_1,iVar2,0x879a,param_2,param_3,param_4,&(*(int *)((char *)frame_ + 8)),0,&DAT_001db998,0,
                          &DAT_001db998);
     if ((iVar1 != 0) && (param_2 - 0x879dU < 0x10)) {
       *(undefined1 *)((param_2 - 0x879dU) + iVar2 + 0x44) = 1;
