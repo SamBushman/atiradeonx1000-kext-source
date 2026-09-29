@@ -534,21 +534,14 @@ LAB_0004c770:
 int FUN_0004cde0(param_1)
   int param_1;
 {
-  /* issue #74 live-repro: this function's only caller (FUN_0004a990) calls it during
-   * CGLDestroyContext teardown expecting *(param_1+0x10) to be a real malloc'd pointer or 0 -
-   * but live memory inspection on real hardware shows it consistently holding small, non-
-   * pointer, table-like values instead (0x84c1, 0x110001 observed; both land inside what looks
-   * like an adjacent object-name allocation table - sequential small integers, not addresses).
-   * The real upstream constructor for this field was not conclusively found despite live
-   * tracing (the struct this belongs to - a GL named-object destroy path reached via
-   * FUN_00087cd0/da0's `param_2+0x124` embedding - has no single, easily-searchable
-   * allocation site in this corpus). Rather than guess at the missing initialization, guard the
-   * free with `malloc_size()` - the real, correct way to ask Mac OS X's allocator whether a
-   * pointer is one it actually handed out, with no address-range guessing. Live-verified on
-   * real hardware: this eliminates both "Deallocation of a pointer not malloced" warnings
-   * cleanly, for real malloc'd pointers and for the two confirmed-bad values alike, without
-   * masking a genuine double-free (malloc_size legitimately returns 0 for those too). */
-  if ((*(int *)(param_1 + 0x10) != 0) && (malloc_size(*(void **)(param_1 + 0x10)) != 0)) {
+  /* issue #74 / #79: this is the stock's plain free-and-null helper again. It used to carry a
+   * malloc_size() guard because the bad values it freed on CGLDestroyContext teardown (0x84c1,
+   * 0x110001 in #74; 0x24 in FUN_0004b5d0, #79) looked like table entries - the guard hid a
+   * real bug instead of fixing it: FUN_000b5fb0 dropped the object it hands the destroy
+   * callback (`lwz r4,0x1448(r30)`, loaded before the branch, so its indirect-call argument
+   * count missed it) and the destructor ran on whatever r4 held. With that fixed, cgl_probe
+   * runs clean on real hardware WITHOUT the guard (5 runs, zero malloc warnings). */
+  if (*(int *)(param_1 + 0x10) != 0) {
     _free(*(int *)(param_1 + 0x10));
     *(undefined4 *)(param_1 + 0x10) = 0;
   }

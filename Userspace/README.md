@@ -564,6 +564,17 @@ terminal call read it) - `Userspace/<bin>/ppc/inreg_supply.tsv`:
   * Reviewed: `FUN_000eec50` r5 (Ghidra inlined the tail call `b 0xed3a4`: the callee's param_2 is the C's `iVar7`); `FUN_00133fe4` -> `FUN_00130abc` r5 (unused parameters: the
     callee reads only r3 and forwards r4/r5 to a this-only virtual call).
 
+### An indirect-call argument loaded in another basic block (issue #79, 2026-09-29)
+`indirect_args.py` counts a `bctrl`'s arguments from the straight-line code just before it. GLDriver `FUN_000b5fb0` (the four per-context object slots `ctx+0x1448..0x1454`) loads the
+slot's object into r4 (`lwz r4,0x1448(r30)`) and then branches over an empty slot (`beq`) to the `bctrl` of the destroy callback `ctx+0x1224` (= `FUN_00087cd0(ctx, obj)`), so
+the count saw one argument and the C called `(*pcVar1)(param_1)`. The rebuilt destructor ran on whatever r4 held: `cgl_probe` printed `malloc: *** Deallocation of a pointer not
+malloced: 0x24` on every `CGLDestroyContext` (#79), and it was the real cause of #74's `0x84c1` / `0x110001` (which the `malloc_size()` guard in `FUN_0004cde0` only hid - the
+guard is removed, the function is the stock's plain free-and-null again). Live, on the real hardware: `fixed52` (guard, no fix) warns on every run; the fix alone 0 warnings in 5
+runs; the fix with the guard removed 0 warnings in 5 runs. Found with `gdb --waitfor=cgl_probe` and a conditional breakpoint `free if $r3 == 0x24`, the PowerPC back chain walked by
+hand (`bt` is unreliable past frame 1), then stock disassembly of the caller. `patches.py` keeps the fix for a regen. Also reverted in `decls.h`: the two hand-added
+`asm("_strncpy")` / `asm("__ZdlPv")` labels of `b41fa31` - `link_corpus.py` adds an `asm()` label to every extern itself from `gld.json`'s `label_overrides`, so the duplicate was a
+compile error on the Tiger gcc 4.0.1.
+
 ### Floating-point arguments and results (Stage B3 step 12)
 * Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
   style. The only signature this put an integer in the wrong register is `ecvt(double, int, int*, int*)` in GLDriver: its caller FUN_000cdc3c

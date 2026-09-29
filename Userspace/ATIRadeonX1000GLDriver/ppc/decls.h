@@ -4314,10 +4314,6 @@ extern float _logf();
 extern int _longjmp();
 extern int _mag();
 extern int _malloc();
-/* issue #74: real libSystem allocator-introspection function (malloc/malloc.h), declared
- * loosely like every other extern in this file - used by FUN_0004cde0's malloc_size() guard
- * to validate a pointer is one the allocator actually handed out before freeing it. */
-extern int malloc_size();
 extern int _matrix();
 extern int _memcmp();
 extern int _memcpy();
@@ -4374,7 +4370,7 @@ extern int _z();
 extern int _zeroop();
 extern int _zoffset();
 extern int abs();
-extern int builtin_strncpy() asm("_strncpy");
+extern int builtin_strncpy();
 extern int cmp();
 extern int cnd();
 extern int component();
@@ -4403,7 +4399,7 @@ extern int mdv();
 extern int min();
 extern int nab();
 extern int neg();
-extern int operator_delete() asm("__ZdlPv");
+extern int operator_delete();
 extern int packed();
 extern int rcp();
 extern int rsq();

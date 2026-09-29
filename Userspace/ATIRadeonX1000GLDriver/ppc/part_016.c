@@ -8391,13 +8391,20 @@ int FUN_000b5fb0(param_1)
 {
   code *pcVar1;
   int iVar2;
-  
+  int iVar3;
+
   iVar2 = param_1;
   do {
-    if (*(int *)(((unsigned char *)0x00001448) + iVar2) != 0) {
+    /* issue #79: the stock loads the slot's object into r4 (`lwz r4,0x1448(r30)`) BEFORE the
+     * `beq` that skips an empty slot, so the `bctrl` at 0xb5ff0 sits in a different basic block
+     * from the load of its second argument and the indirect-call argument count (1) missed it.
+     * The destroy callback (FUN_00087cd0) is (ctx, obj): the rebuilt code destroyed whatever
+     * garbage was in r4 - the bad free(0x24) here and #74's 0x84c1 / 0x110001. */
+    iVar3 = *(int *)(((unsigned char *)0x00001448) + iVar2);
+    if (iVar3 != 0) {
       pcVar1 = *(code **)(((unsigned char *)0x00001224) + param_1);
       *(undefined4 *)(((unsigned char *)0x00001448) + iVar2) = 0;
-      (*pcVar1)(param_1);
+      ((int (*)())pcVar1)(param_1,iVar3);
     }
     iVar2 = iVar2 + 4;
   } while (iVar2 != param_1 + 0x10);

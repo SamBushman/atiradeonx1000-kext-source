@@ -338,6 +338,14 @@ PATCHES = {
     # the code-emit pointer). The 2D/3D calls print `,in_r5)` after `in_r5 = *(param_1 + 0xe30)`, the RECT call kept the assignment and lost the argument
     # (callarg_check.py, computed-source arguments, issue #70 criterion 2): the rebuilt RECT sampler wrote its code at whatever r5 held.
     '_PPCRuntimeCompilerCompileAV': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'_PPCTextureSamplerSampleTexelRECTRTCAV\s*\(\*\(undefined4 \*\)\(param_1 \+ 0xe1c\),uVar8\);', '((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);', 1, '_PPCRuntimeCompilerCompileAV RECT sampler (0x97be1630)')),
+    # FUN_000b5fb0 (gld, stock 0xb5fb0; issue #79): destroys the four per-context slots `ctx+0x1448..0x1454`: `lwz r4,0x1448(r30)` (the object) BEFORE the `beq`
+    # that skips an empty slot, then `lwz r0,0x1224(r29); stw r27,0x1448(r30); or r3,r29,r29; bctrl` - the callback is (ctx, obj) (FUN_00087cd0). The load sits in another
+    # basic block than the `bctrl`, so the indirect-call argument count (indirect_args.py, same block only) saw one argument and the decompile dropped the object: the rebuilt
+    # destructor ran on whatever r4 held (the bad `free(0x24)` of #79, #74's 0x84c1 / 0x110001).
+    'FUN_000b5fb0': _scoped('gld', lambda raw, conv: _re_subs(_re_subs(conv,
+        r'(  int iVar2;\n)', r'\1  int iVar3;\n', 1, 'FUN_000b5fb0 decl (0xb5fb0)'),
+        r'    if \(\*\(int \*\)\(\(\(unsigned char \*\)0x00001448\) \+ iVar2\) != 0\) \{\n(      pcVar1 = [^\n]*\n      \*\(undefined4 \*\)\(\(\(unsigned char \*\)0x00001448\) \+ iVar2\) = 0;\n)      \(\*pcVar1\)\(param_1\);',
+        r'    iVar3 = *(int *)(((unsigned char *)0x00001448) + iVar2);\n    if (iVar3 != 0) {\n\1      ((int (*)())pcVar1)(param_1,iVar3);', 1, 'FUN_000b5fb0 slot object (0xb5ff0)')),
     '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
     '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 
