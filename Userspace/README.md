@@ -680,3 +680,7 @@ glprog's 9 remaining blocks are all dead in the stock code (see above).
 "Compile-clean" plus "same callees" is strong evidence, not proof, of equivalence. Data-symbol types are inferred from use (sized by the access,
 signed unless used unsigned); struct/class pointer types are `unsigned char *`; x86 `in_*`/`unaff_*` pseudo-registers and `LOCK()/UNLOCK()` are
 declared/no-op so the text builds. Function text is Ghidra's; a Ghidra decompiler bug survives into the corpus.
+
+### Auditing stack words (#81)
+
+`stackargs_indirect.py ... SLOT[:WORDS] --audit` recomputes the words of calls that already carry them and prints every difference to the C (a local the C passes is compared through its last textual assignment). `--restrip=<function hex,...>` removes the words of the flagged calls in those functions, so the next `--apply` re-derives them. The first version paired stock and C calls weakly, and the audit found ~40 words that were derived for the wrong site (e.g. `*(*(param_1+980)+4836)` copied to unrelated calls) - all re-derived; pairings that are ambiguous are given by hand in `stackargs_overrides.json`. Calls whose word is a phi of several stores or a first-iteration/later-iteration register (FUN_00098500 0x994cc, FUN_00097440 0x97bc4) were written by hand from the stock and are not covered by the audit.

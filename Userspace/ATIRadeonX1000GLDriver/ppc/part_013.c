@@ -5585,7 +5585,7 @@ int FUN_00093000(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     if (*(int *)(param_1 + 0x6a0) != -1) {
       (**(code **)(((unsigned char *)0x000012ec) + *(int *)(param_1 + 0x3d4)))
-                (param_1,a1,a2,&DAT_001dbd24,a4,iVar2,&DAT_001dbd14,&DAT_001fa5e8);
+                (param_1,a1,a2,&DAT_001dbd24,a4,iVar2,&DAT_001dbd14,&DAT_001fa5e8,**(int **)(param_1 + 0x3ec),*(int *)(param_1 + 0x6a0),(int)param_1 + 1716,&DAT_001fa5e8);
       return 0;
     }
   }

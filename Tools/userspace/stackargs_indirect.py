@@ -20,7 +20,8 @@ _sl = ARGV[5].split(':')
 slot = int(_sl[0], 0)
 NWORDS = int(_sl[1]) if len(_sl) > 1 else 4        # SLOT[:N] - stack words (arguments 9..8+N) the slot's callee takes
 APPLY = '--apply' in ARGV
-AUDIT = '--audit' in ARGV        # recompute the words of calls that already have them and print those that differ from what the C passes
+RESTRIP = {int(x_, 16) for a_ in ARGV if a_.startswith('--restrip=') for x_ in a_[10:].split(',')}       # functions whose flagged calls lose their words again (the next --apply re-derives them)
+AUDIT = '--audit' in ARGV or bool(RESTRIP)        # recompute the words of calls that already have them and print those that differ from what the C passes
 sys.argv = ['reg_supply.py', dis, rng, dump, '--terminals', '0', '3']          # reg_supply.py's module code reads argv; only its definitions are used
 src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')).read().split('if mode_term:')[0]
 __file__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')
@@ -438,7 +439,7 @@ for g in sorted(sites):
         report.append('%x %s: %d stock sites vs %d C calls, no consistent one-to-one pairing - skipped' % (g, name, len(ss), len(calls))); continue
     both = sorted(((ss[i], calls[j]) for i, j in pairs), key=lambda x: x[1][0])      # process in the C's textual order
     ss = [x[0] for x in both]; calls = [x[1] for x in both]
-    newbody = []; pos = 0; decls = []; last_group = {}
+    newbody = []; pos = 0; decls = []; last_group = {}; ALLINL = {}; strips = []
     nvar = max([int(x) for x in re.findall(r'\biVarS(\d+)\b', body)] + [0])      # earlier runs (other slots) already declared some
     for (a, st), (cs, ai, aj, args) in zip(ss, calls):
         if len(args) == 8 + NWORDS and not AUDIT: continue
@@ -504,14 +505,35 @@ for g in sorted(sites):
             last_group[ident] = (vn, aj)
         if AUDIT:
             if len(args) == 8 + NWORDS:
-                inl = {m_.group(1): m_.group(2) for m_ in (re.match(r'(\w+) = (.*);$', x_) for x_ in pre) if m_}
+                ALLINL.update({m_.group(1): m_.group(2) for m_ in (re.match(r'(\w+) = (.*);$', x_) for x_ in pre) if m_})
+                inl = ALLINL
                 cur = [c_.strip() for c_ in args[8:]]
                 exp_ = ['(%s)' % inl[o_] if o_ in inl else o_ for o_ in outs]
                 # a local the tool would create is compared through its assigned expression; either side may be a hand-written name: print every difference for review
-                bad = [(k_, cur[k_], exp_[k_]) for k_ in range(NWORDS) if cur[k_].replace(' ', '') != exp_[k_].replace(' ', '') and not re.match(r'iVarS\d+$', cur[k_])]
+                def unwrap(x_):
+                    while x_.startswith('(') and x_.endswith(')'):
+                        d_ = 0; ok_ = True
+                        for i_, ch_ in enumerate(x_):
+                            d_ += (ch_ == '(') - (ch_ == ')')
+                            if d_ == 0 and i_ < len(x_) - 1: ok_ = False; break
+                        if not ok_: break
+                        x_ = x_[1:-1]
+                    return x_
+                def via(c_):
+                    # a local the C carries the word in: its last textual assignment before the call (a hand-made phi of several assignments shows up as a difference to review)
+                    if not re.match(r'iVarS\d+$', c_): return c_
+                    ms_ = [m_ for m_ in re.finditer(r'\b%s = (.*?);' % c_, body[:cs])]
+                    return ms_[-1].group(1) if ms_ else c_
+                nrm = lambda x_: unwrap(unwrap(x_.strip()).replace(' ', '')).replace('(int)', '')
+                bad = [(k_, cur[k_], exp_[k_]) for k_ in range(NWORDS) if nrm(via(cur[k_])) != nrm(via(unwrap(exp_[k_].strip())))]
                 if bad: report.append('AUDIT %x %s call %x: %s' % (g, name, a, '; '.join('word %d: C has %s, derived %s' % (k_, c_[:50], e_[:50]) for k_, c_, e_ in bad)))
+                if bad and g in RESTRIP: strips.append((ai, aj, ','.join(args[:8])))
             continue
         newbody.append((cs, ai, aj, outs, pre))
+    if strips:
+        b3 = body
+        for ai_, aj_, keep_ in sorted(strips, reverse=True): b3 = b3[:ai_] + keep_ + b3[aj_:]
+        edits[part] = text[:fs] + b3 + text[fe:]; report.append('%x %s: %d calls stripped of their words' % (g, name, len(strips)))
     if not newbody: continue
     b2 = body; shift = 0
     ok_nb = []
