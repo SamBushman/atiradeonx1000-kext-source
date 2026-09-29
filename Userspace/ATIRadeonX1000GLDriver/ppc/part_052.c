@@ -572,7 +572,9 @@ LAB_00199e60:
               piVar16 = local_ec;
               piVar17 = local_5c;
               piVar25 = piVar23;
-              (**(code **)(*param_1 + 0xfc))(param_1,piVar15);
+              /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+               * disassembly): stock passes piVar16, piVar17, the literal 3, and piVar25 too. */
+              (**(code **)(*param_1 + 0xfc))(param_1,piVar15,piVar16,piVar17,3,piVar25);
             }
             if (iVar26 != 0) {
               uVar21 = 1;
@@ -614,7 +616,10 @@ LAB_00199fdc:
               }
               piVar16 = local_ec;
               piVar17 = local_5c;
-              (**(code **)(*param_1 + 0x100))(param_1,piVar25);
+              /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+               * disassembly): stock passes piVar16, piVar17, the literal 3, and piVar23 too -
+               * piVar23 directly, not piVar25 (reassigned below, diverged from piVar23 by here). */
+              (**(code **)(*param_1 + 0x100))(param_1,piVar25,piVar16,piVar17,3,piVar23);
               piVar25 = piVar23;
             }
           }
