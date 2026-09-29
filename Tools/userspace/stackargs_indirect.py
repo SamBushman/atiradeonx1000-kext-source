@@ -104,8 +104,17 @@ def same_multi(g, a, r1, r2):
 def has_call_between(g, d, a):
     return any(ins[x][0] in ('bl', 'bctrl') for x in range(d, a, 4) if x in ins) if d < a else False
 CTX = [None, None]          # (function entry, C body of the function being edited): lets cexpr name a load from the function's own stack frame
+def defvar(k):
+    """the C variable a hand-written override names for a base value the tool cannot express: a single unknown definition (`add r23,r0,r9`) or a merge of definitions
+    (stackargs_overrides.json: "defvars": {"<function>": {"<def address hex>" or "<addr,addr,..>": "<C variable>"}})"""
+    if CTX[0] is None: return None
+    m = OVERRIDES.get('defvars', {}).get('%x' % CTX[0], {})
+    if k[0] == 'def': return m.get('%x' % k[1])
+    if k[0] == 'multi': return m.get(','.join('%x' % int(x) for x in k[1] if x != 'E'))
+    return None
 def cexpr(k):
     """a C expression for a symbolic value over the parameters (or the function's stack locals), or None"""
+    if k[0] in ('def', 'multi'): return defvar(k)
     if k[0] in ('lwz',) and k[2][0] == 'def' and ins[k[2][1]][0] == 'stwu' and CTX[0] is not None:
         off = k[1] if k[1] < 0x8000 else k[1] - 0x10000
         nm = stack_local(CTX[0], off, CTX[1])
@@ -265,7 +274,15 @@ def stack_local(g, off, body):
     if F is None: return None
     suf = '%x' % (F - off)
     m = re.search(r'\b((?:[a-z]*Stack_|local_)%s)\b(\[)?' % suf, body)
-    if not m: return None
+    if not m:
+        # inside a larger local: Ghidra names an array by its lowest address (largest suffix); find one that covers the target
+        t = F - off
+        for mm in re.finditer(r'(?m)^\s*([a-z0-9]+)\s+\**((?:[a-z]*Stack_|local_)([0-9a-f]+))\s*\[(\d+)\];', body):
+            ty, nm, sf, cnt = mm.group(1), mm.group(2), int(mm.group(3), 16), int(mm.group(4))
+            esz = 1 if ty in ('undefined1', 'byte', 'char', 'uchar', 'bool') else 2 if ty in ('undefined2', 'short', 'ushort') else 8 if ty in ('undefined8', 'double', 'longlong') else 4
+            if sf - cnt * esz < t <= sf and (sf - t) % 1 == 0:
+                return '((unsigned char *)%s + %d)' % (nm, sf - t)
+        return None
     nm = m.group(1)
     isarr = re.search(r'\b%s\[' % re.escape(nm), body) is not None and 'Stack' in nm and nm.startswith('a')
     return nm if isarr else '&' + nm
@@ -359,12 +376,17 @@ for g in sorted(sites):
     # C calls compatible with no stock call (code the stock does not have there) and stock calls compatible with no C call are set aside
     ok_c = [j for j in range(len(calls)) if any(comp[i][j] for i in range(len(ss)))]
     ok_s = [i for i in range(len(ss)) if any(comp[i][j] for j in range(len(calls)))]
-    if (len(ok_c) != len(calls) or len(ok_s) != len(ss)) and len(ok_c) == len(ok_s) and ok_c:
+    if not OVERRIDES.get('pairs', {}).get('%x' % g, {}).get('%x' % slot) and (len(ok_c) != len(calls) or len(ok_s) != len(ss)) and len(ok_c) == len(ok_s) and ok_c:
         report.append('%x %s: %d C call(s) and %d stock call(s) set aside as incompatible with every counterpart' % (g, name, len(calls) - len(ok_c), len(ss) - len(ok_s)))
         calls = [calls[j] for j in ok_c]; ss = [ss[i] for i in ok_s]
         comp = [[compatible(a, c[3]) for c in calls] for a, st in ss]
     order = list(range(len(ss)))
     pairs = None
+    hp = OVERRIDES.get('pairs', {}).get('%x' % g, {}).get('%x' % slot)
+    if hp:
+        # a pairing decided by hand (stock call address -> index of the C call among this slot's calls in the function, in text order)
+        pairs = [(i, hp['%x' % ss[i][0]]) for i in order if '%x' % ss[i][0] in hp]
+        report.append('%x %s: pairing given by hand for %d call(s)' % (g, name, len(pairs)))
     # anchors: a stock call with exactly one compatible C call takes it; no other stock call can (the C's block order differs from the address order, so no
     # positional narrowing is done)
     def narrow(comp_):
@@ -427,6 +449,12 @@ for g in sorted(sites):
                 hit = [p_ for p_ in argkeys if argkeys[p_][0] == 'multi' and same_multi(g, a, sr, 2 + p_)]
             if hit: new.append(args[hit[0] - 1]); continue
             e = None
+            if kk[0] in ('multi', 'deep', 'def') or (kk[0] == 'lwz' and cexpr(kk) is None):
+                # Ghidra keeps some stores to the outgoing area as assignments to a local named by that slot's offset (F - 0x38 - 4k) - the C variable already holds the
+                # value the stock stored last on whatever path reaches the call
+                nm_ = stack_local(g, off, body)
+                if nm_ is not None and nm_.startswith('&') and re.search(r'(?m)^\s*%s\s*=' % re.escape(nm_[1:]), body):
+                    new.append(nm_[1:]); continue
             if kk[0] == 'addi' and kk[2][0] == 'def' and ins[kk[2][1]][0] == 'stwu':
                 e = stack_local(g, kk[1] if kk[1] < 0x8000 else kk[1] - 0x10000, body)
             elif kk[0] == 'addi' and kk[2][0] == 'def':
@@ -465,7 +493,11 @@ for g in sorted(sites):
         before = re.sub(r'/\*.*?\*/', '', body[:cs], flags=re.S).rstrip()
         pl = before[before.rfind('\n') + 1:]
         if before[-1:] in ';{}' or re.match(r'\s*(?:\}\s*)?(?:else\s*(?:if\b.*\))?|(?:if|while|for)\b.*\))\s*$', pl) or before.endswith('else'): ok_nb.append((cs, ai, aj, outs, pre))
-        else: report.append('%x %s: a call inside an expression at C offset %d - left at 8 arguments' % (g, name, cs))
+        else:
+            # inside an expression no statement can be added: the words are passed as inline expressions (each evaluated once, in the call)
+            inl = {m_.group(1): m_.group(2) for m_ in (re.match(r'(\w+) = (.*);$', x_) for x_ in pre) if m_}
+            ok_nb.append((cs, ai, aj, ['(%s)' % inl[o_] if o_ in inl else o_ for o_ in outs], []))
+            report.append('%x %s: a call inside an expression at C offset %d - its stack words are passed inline' % (g, name, cs))
     newbody = ok_nb
     for cs, ai, aj, outs, pre in newbody:
         # the statement start: the beginning of the call's line
