@@ -168,6 +168,7 @@ for _a, (_op, _arg) in ins.items():
         _m = re.match(r'(?:cr\d,)?0x([0-9a-f]+)', _arg)
         if _m: BTARGETS.add(int(_m.group(1), 16))
 _stk = {}
+PHISTORES = {}          # (call, word offset) -> the differing stores that reach it
 def stack_reaching(g):
     """{addr: {word offset: frozenset(store addresses)}} at the input of each instruction: which `stw rS,0x38..(r1)` stores reach it (a call kills them: the callee owns
     the outgoing area, and a branch merges the paths)"""
@@ -202,6 +203,7 @@ def stack_stores(a):
         ks = {key(g, sa, r) for r, sa in regs}
         if len(ks) == 1 and next(iter(ks))[0] not in ('multi', 'deep'): st[off] = regs[0]
         elif len(regs) == 1: st[off] = regs[0]
+        else: PHISTORES[(a, off)] = regs; st[off] = (-1, regs)        # different values on different paths: a phi, resolved (or not) at derivation time
     return st
 sites = collections.defaultdict(list); JOINS = []
 for a, (op, arg) in sorted(ins.items()):
@@ -221,13 +223,15 @@ def numset(text):
         except ValueError: pass
     return n
 def phi_var(g, a, reg, body):
-    """the C variable that carries a register's merged value: every reaching definition is a simple load (or li) whose offset appears in an assignment to the variable
-    (or, for `li`, a literal assignment); returns the unique such variable or None"""
+    """the C variable that carries a register's merged value (see phi_var_keys)"""
     ds = reaching(g).get(a, {}).get(reg, frozenset())
     if 'E' in ds or len(ds) < 2: return None
+    return phi_var_keys([key_of_def(g, d, 6) for d in ds], body)
+def phi_var_keys(keys, body):
+    """the unique C variable to which every merged value is assigned: each value is a simple load (its offset appears in an assignment to the variable) or a
+    literal (a literal assignment); None if there is no such variable or several"""
     need = []
-    for d in ds:
-        k = key_of_def(g, d, 6)
+    for k in keys:
         if k[0] in ('lwz', 'lbz', 'lhz'): need.append(('off', k[1]))
         elif k[0] == 'li':
             try: need.append(('lit', int(k[1], 0)))
@@ -404,7 +408,7 @@ for g in sorted(sites):
     def sig_of(i):
         a_, st_ = ss[i]
         # the words as symbolic values, and which of the call's own register arguments (r3..r10) hold the same value: a swap of two look-alike calls changes neither
-        wk = [key(g, st_[0x38 + 4 * k][1], st_[0x38 + 4 * k][0]) for k in range(NWORDS)]
+        wk = [('phi', tuple(str(key(g, sa_, r_)) for r_, sa_ in st_[0x38 + 4 * k][1])) if st_[0x38 + 4 * k][0] == -1 else key(g, st_[0x38 + 4 * k][1], st_[0x38 + 4 * k][0]) for k in range(NWORDS)]
         return tuple((str(w), tuple(r_ for r_ in range(3, 11) if key(g, a_, r_) == w)) for w in wk)
     if pairs is None and len(calls) >= len(ss):
         # every stock call takes a distinct compatible C call (the C may have extra calls); when several matchings exist they must give every C call the same
@@ -441,6 +445,18 @@ for g in sorted(sites):
         new = []; ok = True; pre = []
         for k in range(NWORDS):
             off = 0x38 + 4 * k; sr, sa = st[off]
+            if sr == -1:
+                # a word stored with different values on different paths: the C variable that carries the merge, if there is a unique one
+                pk = [key(g, sa_, r_) for r_, sa_ in sa]
+                abs_ = {pic_abs(g, sa_, r_) for r_, sa_ in sa}
+                if len(abs_) == 1 and None not in abs_:
+                    ex_ = sym_for(next(iter(abs_)))           # every path stores the same PIC address
+                    if ex_: new.append(ex_); continue
+                pv = phi_var_keys(pk, body)
+                ov = OVERRIDES.get('%x' % g, {}).get('%x@%x' % (off, a))
+                if ov: new.append(ov); continue
+                if pv: new.append(pv); continue
+                ok = False; report.append('%x %s call %x word %#x: a phi of %d stores, no unique C variable (%s)' % (g, name, a, off, len(pk), ' | '.join(str(k_[:2]) for k_ in pk))); break
             kk = key(g, sa, sr)          # the value at the store, not at the call: the register may be redefined in between
             ov = OVERRIDES.get('%x' % g, {}).get('%x@%x' % (off, a))
             if ov: new.append(ov); continue
