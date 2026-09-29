@@ -2,7 +2,9 @@
 """callarg_check.py STOCK_DIS DUMP_DIR [NAME_FILTER]  - call-site argument check (issue #70 criterion 2): for every direct call in the stock code, the
 constants the caller loads into argument registers in the same basic block (`li r5,0x10`, `lis`+`ori`/`addi`) must appear as the same literal at
 the same argument position of a call to that callee in the function's decompile. Integer arguments only (a call whose C has a float/double
-argument before the position is skipped - Darwin shifts the GPR slots). Calls are matched per (function, callee) as multisets, so the order in
+argument before the position is skipped - Darwin shifts the GPR slots). Computed sources (issue #70 criterion 2, order/source): an argument register loaded
+`addi rK,rP,off` / `lwz|lbz|lhz|lha rK,off(rP)` from a register rP that is a prologue copy of an incoming parameter is matched by parameter AND offset
+against the C argument, resolved through the function's own `var = expr;` assignments (3 levels): the C text must mention that parameter and the offset. Calls are matched per (function, callee) as multisets, so the order in
 which the decompiler prints them does not matter. Prints every stock constant that no C call of that callee in that function carries at that
 position (a dropped, shifted or wrong argument), and a summary. A constant the decompiler printed as the symbol at that address is reported
 apart: SYMBOLIZED-FUNCTION (`FUN_00001740` for the size 0x1740 - the rebuilt code passes the rebuilt function's address) is a real defect,
@@ -83,6 +85,32 @@ def c_calls(text, callee):
             j += 1
         res.append(split_args(text[i:j - 1]))
     return res
+def c_defs(text):
+    """{variable: [right-hand sides]} of the `var = expr;` assignments of a decompile (casts kept), for resolving an argument through its locals"""
+    d = collections.defaultdict(list)
+    for m in re.finditer(r'(?m)^\s*(?:\*\s*\(\w[\w ]*\*\)\s*)?(\w+)\s*=\s*([^;=][^;]*);', text):
+        d[m.group(1)].append(m.group(2))
+    return d
+def c_resolve(e, defs, depth=2, seen=None):
+    """the text of e with every variable in it replaced by the right-hand sides assigned to it (transitively, `depth` levels)"""
+    seen = seen if seen is not None else set(); out = [e]
+    if depth == 0: return e
+    for v in set(re.findall(r'\b[A-Za-z_]\w*\b', e)):
+        if v in defs and v not in seen:
+            for r in defs[v][:80]: out.append(c_resolve(r, defs, depth - 1, seen | {v}))
+    return ' '.join(out)
+def c_carries(e, defs, pname, off):
+    """could the C argument e carry parameter `pname` plus (or loaded at) offset off: its resolved text mentions the parameter and the offset value"""
+    t = c_resolve(e, defs)
+    if not re.search(r'\b%s\b' % re.escape(pname), t): return False
+    if off == 0: return True
+    nums = set(int(x, 16) for x in re.findall(r'\b(?:UNK|DAT|FUN|LAB|PTR_\w*?)_?([0-9a-f]{8})\b', t))   # an offset the decompiler printed as the symbol at that address (`&DAT_000011d1`)
+    for x in re.findall(r'-?0x[0-9a-fA-F]+|-?\b\d+\b', t):
+        try: nums.add(int(x, 0))
+        except ValueError: pass
+    # `param_1[2]` / `param_1 + 2` on a typed pointer scale the literal by the element size (int / short / double, byte)
+    scaled = {n * z for n in nums for z in (1, 2, 4, 8)}
+    return off in scaled or -off in scaled or (off & 0xffff) in scaled
 def lit(e):
     e = re.sub(r'^\((?:[\w ]+\**)\)\s*', '', e.strip())   # a cast
     if e in ('false', "'\\0'", 'NULL'): return 0
@@ -112,9 +140,18 @@ def param_copies(rng):
             y = int(p[1][1:])
             if not any(d[0] < a for d in defs.get(y, [])): out[r] = y - 3
     return out
+def _reads(op, parts, r):
+    """does the instruction read register r (any operand except a plain destination)"""
+    regs_ = [int(x) for x in re.findall(r'\br(\d+)\b', ','.join(parts))]
+    if op.startswith(('st', 'cmp', 'tw', 'mt', 'bc', 'b')): return r in regs_
+    # dest first: only the source operands count (rlwimi also reads its destination)
+    src = [int(x) for x in re.findall(r'\br(\d+)\b', ','.join(parts[1:]))]
+    return r in src or (op.startswith('rlwimi') and parts and parts[0] == 'r%d' % r)
 def arg_source(a, r, pc):
-    """the source of argument register r at the call at a, within its basic block: ('param', k), ('stack', off) or None"""
-    i = idx[a] - 1
+    """the source of argument register r at the call at a, within its basic block: ('param', k), ('stack', off), ('addr'|'field', k, off) or None.
+    A computed source (addr / field) counts only when nothing between the load and the call reads r again: a register read afterwards is a temporary
+    the compiler left behind (a base pointer, a compare operand), not an argument."""
+    i = idx[a] - 1; reread = False
     while i >= 0 and idx[a] - i < 40:
         b = order[i]; op, arg = ins[b]
         if op.startswith('b') or b in BRANCH_TARGETS and b != order[idx[a] - 1]: break
@@ -122,11 +159,18 @@ def arg_source(a, r, pc):
         if p and p[0] == 'r%d' % r and not op.startswith(('st', 'cmp')):
             if op == 'or' and len(p) == 3 and p[1] == p[2] and int(p[1][1:]) in pc: return ('param', pc[int(p[1][1:])])
             if op == 'addi' and len(p) == 3 and p[1] == 'r1': return ('stack', int(p[2], 0))
+            if reread: return None
+            if op == 'addi' and len(p) == 3 and re.match(r'r\d+$', p[1]) and int(p[1][1:]) in pc and imm(p[2]) is not None:
+                o = imm(p[2]) & 0xffff; return ('addr', pc[int(p[1][1:])], o - 0x10000 if o & 0x8000 else o)
+            mm = re.match(r'(-?0x[0-9a-f]+|-?\d+)\(r(\d+)\)$', p[1]) if len(p) == 2 else None
+            if op in ('lwz', 'lbz', 'lhz', 'lha') and mm and int(mm.group(2)) in pc:
+                o = int(mm.group(1), 0) & 0xffff; return ('field', pc[int(mm.group(2))], o - 0x10000 if o & 0x8000 else o)
             return None
+        if _reads(op, p, r): reread = True
         i -= 1
     return None
 tot = miss = checked = symd = 0; out = []
-pmiss = pchecked = smiss = schecked = 0
+pmiss = pchecked = smiss = schecked = fmiss = fchecked = 0
 for ent, (name, rng) in sorted(rows.items()):
     if flt and flt not in name: continue
     f = os.path.join(dump, '0x%x.txt' % ent)
@@ -163,6 +207,8 @@ for ent, (name, rng) in sorted(rows.items()):
                 ms_ = re.match(r'^(?:\([^()]*\)\s*)?&?(FUN|LAB|DAT|UNK|PTR_\w*)_([0-9a-f]{8})$', e)
                 if ms_: sym[(i, int(ms_.group(2), 16))] = e   # a constant the decompiler printed as a symbol at that address
         haveP = collections.Counter(); haveS = collections.Counter()
+        defs_ = c_defs(text)
+        fneed = collections.Counter(); fsites = collections.defaultdict(list)
         addrvars = set(re.findall(r'\b(\w+)\s*=\s*(?:\([^()]*\)\s*)?(?:&|a[a-z]?Stack_\w+\s*[;+])', text))   # variables the function assigns an address to (`&x`, or a stack array, which decays: `a5 = auStack_5c;`)
         for args in calls:
             slot = 0
@@ -176,6 +222,9 @@ for ent, (name, rng) in sorted(rows.items()):
                 if '&' in e2 or re.match(r'^(?:a[uc]Stack|local_|[a-z]*Stack)\w*', e2) or 'STACKARG' in e2 or 'frame_address' in e2 or 'ghidra_frame' in e2: haveS[i_] += 1
         for a, k, src_ in sites:
             for r, sv in sorted(src_.items()):
+                if sv[0] in ('addr', 'field'):
+                    if sv[1] >= len(pnames): continue
+                    fneed[(r - 3, sv[1], sv[2], sv[0])] += 1; fsites[(r - 3, sv[1], sv[2], sv[0])].append(a); continue
                 if sv[0] == 'param':
                     if sv[1] >= len(pnames): continue   # an undeclared incoming register (in_rN, see inreg_liveness.py)
                     pchecked += 1
@@ -193,6 +242,15 @@ for ent, (name, rng) in sorted(rows.items()):
                     kind = 'SYMBOLIZED-FUNCTION' if re.match(r'^(?:\([^()]*\)\s*)?FUN_', sym[(r - 3, v)]) else 'symbolized-text-address'
                     out.append('%x\t%s\tcall %x %s\tr%d = %#x printed as %s (%s)' % (ent, name, a, cal, r, v, sym[(r - 3, v)], kind)); continue
                 miss += 1; out.append('%x\t%s\tcall %x %s\tr%d = %#x not at argument %d of any C call (%d C calls)' % (ent, name, a, cal, r, v, r - 3, len(calls)))
+        for (pos, k_, off, kind), need in fneed.items():
+            have_n = 0
+            for args in calls:
+                if pos < len(args) and c_carries(args[pos], defs_, pnames[k_], off): have_n += 1
+            fchecked += need
+            if have_n < need:
+                fmiss += need - have_n
+                out.append('%x\t%s\tcall %x %s\tr%d = %s %s%+#x: %d stock site(s), %d C call(s) carry it at argument %d (%d C calls)' % (ent, name, fsites[(pos, k_, off, kind)][0], cal, pos + 3, 'field at' if kind == 'field' else 'address', pnames[k_], off, need, have_n, pos, len(calls)))
 for l in out: print(l)
 print('checked %d constant arguments, %d not found in the C, %d printed as a symbol at that address' % (checked, miss, symd))
+print('checked %d computed-source arguments (addr / field of a parameter), %d not carried by the C at their position' % (fchecked, fmiss))
 print('checked %d incoming-parameter arguments, %d not at their position; %d stack-address arguments, %d not an address at their position' % (pchecked, pmiss, schecked, smiss))

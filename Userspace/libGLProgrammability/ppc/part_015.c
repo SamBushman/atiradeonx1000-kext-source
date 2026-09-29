@@ -4415,8 +4415,7 @@ LAB_97be1820:
               uVar7 = *(uint *)(*(int *)(param_1 + 0xe28) + 0x110);
               if (uVar7 == 2) {
                 in_r5 = *(undefined4 *)(param_1 + 0xe30);
-                uVar23 = _PPCTextureSamplerSampleTexelRECTRTCAV
-                                   (*(undefined4 *)(param_1 + 0xe1c),uVar8);
+                uVar23 = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);
               }
               else {
                 uVar15 = extraout_r4_07;

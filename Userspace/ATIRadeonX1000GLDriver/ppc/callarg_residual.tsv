@@ -33,25 +33,43 @@
 0xb4400	FUN_000b4400	0xb49bc	FUN_000879f0	r10	0x0 not at argument 7 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0xc8e50	FUN_000c8e50	0xca130	FUN_000c7460	r10	r1+0x7c (a stack address) not at argument 7 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0xcae90	FUN_000cae90	0xcccc4	malloc	r9	r1+0x98 (a stack address) not at argument 6 of any C call (4 C calls)	BENIGN-IMPORT-ARITY
+0xed89c	FUN_000ed89c	0xed9ac	FUN_00104364	r7	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0xed89c	FUN_000ed89c	0xedcb4	FUN_001049e8	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xeec50	FUN_000eec50	0xed5ec	FUN_001046c8	r3	incoming param_2 not at argument 0 of any C call (8 C calls)	CHECK (C arg0: iVar2; iVar2)
+0xeec50	FUN_000eec50	0xed3ec	FUN_001046c8	r5	field at param_2+0xa4: 2 stock site(s), 0 C call(s) carry it at argument 2 (8 C calls)	BENIGN-REVIEWED (Ghidra inlined the tail call `b 0xed3a4` from FUN_000eec50: the callee's param_2 is the C's iVar7 = *(param_1+0x34c); stock r4 = r30 at 0xeee28)
 0xeec50	FUN_000eec50	0xed3fc	FUN_001054ec	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
 0xeec50	FUN_000eec50	0xed4b0	FUN_001054ec	r3	incoming param_2 not at argument 0 of any C call (7 C calls)	CHECK (C arg0: puVar11; iVar7)
 0xeec50	FUN_000eec50	0xed600	FUN_000e7700	r4	incoming param_2 not at argument 1 of any C call (3 C calls)	CHECK (C arg1: iVar7; iVar5)
+0xeee4c	FUN_000eee4c	0xeeef4	FUN_001049e8	r5	field at param_1+0x8: 3 stock site(s), 0 C call(s) carry it at argument 2 (3 C calls)	BENIGN-CALLEE-IGNORES
 0xf4698	FUN_000f4698	0xf46f0	FUN_000f3340	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	CHECK (C arg2: local_18)
+0xf94dc	FUN_000f94dc	0xf9a34	FUN_001049e8	r5	field at param_1+0x8: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0xfd5c8	FUN_000fd5c8	0xfe0c0	FUN_000f8aa0	r10	r1+0x58 (a stack address) not at argument 7 of any C call (8 C calls)	CHECK-indirect (C arg7: -; -)
 0xfd5c8	FUN_000fd5c8	0xfffdc	FUN_000f30d4	r9	r1+0x48 (a stack address) not at argument 6 of any C call (2 C calls)	BENIGN-CALLEE-IGNORES
 0x11ff7c	FUN_0011ff7c	0x120ba4	FUN_000e9184	r4	0x0 not at argument 1 of any C call (6 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x120cd4	FUN_00120cd4	0x120f10	FUN_0011ff7c	r10	r1+0x38 (a stack address) not at argument 7 of any C call (1 C calls)	CHECK (C arg7: in_r10)
 0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x133fe4	FUN_00133fe4	0x134380	FUN_00130abc	r4	incoming param_1 not at argument 1 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x133fe4	FUN_00133fe4	0x1341ac	FUN_00130abc	r5	field at param_1+0x2c: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-REVIEWED (FUN_00130abc reads only r3; r4/r5 go to a this-only virtual call `(*(vtbl+0x34))(this)` at 0x13074c: unused parameters of the source prototype)
 0x158264	FUN_00158264	0x158380	FUN_0015800c	r7	incoming param_2 not at argument 4 of any C call (1 C calls)	CHECK (C arg4: local_68)
 0x15a68c	FUN_0015a68c	0x15b248	FUN_001054ec	r4	0x1 not at argument 1 of any C call (15 C calls)	CHECK (C arg1: iVar9; iVar9)
 0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r4	incoming param_2 not at argument 1 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r5	incoming param_3 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x175dac	FUN_00175dac	0x175e08	FUN_00172a28	r6	incoming param_5 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
+0x177b4c	FUN_00177b4c	0x177c74	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x177cd0	FUN_00177cd0	0x177db8	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x177e14	FUN_00177e14	0x177fc8	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x178024	FUN_00178024	0x178148	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17ad24	FUN_0017ad24	0x17adcc	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17ce7c	FUN_0017ce7c	0x17d00c	FUN_001049e8	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x17e7e0	FUN_0017e7e0	0x17eb44	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x17f5a4	FUN_0017f5a4	0x17f6b0	FUN_001049e8	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x180830	FUN_00180830	0x180fa0	FUN_001049e8	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x186a88	FUN_00186a88	0x1874f0	FUN_001043f0	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
 0x18843c	FUN_0018843c	0x18885c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x18843c	FUN_0018843c	0x1888f8	FUN_001875a8	r7	field at param_5+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x188fec	FUN_00188fec	0x189054	FUN_0014abdc	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
 0x188fec	FUN_00188fec	0x18927c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
 0x188fec	FUN_00188fec	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x1922c4	FUN_001922c4	0x192850	FUN_001875a8	r7	field at param_4+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x19286c	FUN_0019286c	0x1934dc	FUN_001875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x1a1338	FUN_001a1338	0x1a135c	FUN_00193e18	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED

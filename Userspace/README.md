@@ -533,6 +533,37 @@ followed 3 levels) - `Userspace/<bin>/ppc/inreg_liveness.tsv`:
   (115 GLDriver, 177 glprog). For every PASS row no stock caller sets that register before calling the function (`param_used.py`: `real=[]`), so the
   stock itself forwards whatever the register held - the rebuilt C forwards an uninitialised local instead; neither is an argument.
 
+### Who supplies a forwarded register, and computed call arguments (issue #70, 2026-09-29)
+`Tools/userspace/reg_supply.py` answers the two questions the PASS rows above left open (does anything ever hand the forwarded register a value, and could the
+terminal call read it) - `Userspace/<bin>/ppc/inreg_supply.tsv`:
+* **Terminals** (`--terminals ENTRY REG`): from the function, follow the entry value through direct callees that only forward it to the calls that end the chain.
+  A call through a pointer can take the register only if it is at most one slot above the highest argument register set FOR the call (the last write in the
+  block, not read again before the call - a base pointer a store used is a leftover) or forwarded untouched; calls through the same struct offset
+  (`lwz rD,OFF(rB)`, `mtctr`, `bctrl`) are pooled per offset (the maximum only lowers a bound, the median may raise one: an offset is shared by unrelated
+  structs, e.g. `+0x20` is also libstdc++'s RTTI vtable); imports use `inreg_liveness.py`'s arities. `GARBAGE` = no terminal can read it.
+* **Supply** (`ENTRY REG [DEPTH]`, `--all`): a forward may-analysis at every direct caller (`bl`, tail `b`, by address or symbol) says whether the register holds a
+  value the caller wrote (DEF), the caller's own untouched entry value (recursing upwards), or a call's clobber (r5.. are leftovers after a call). A root that
+  does not read the register itself supplies garbage. `GARBAGE-UNSUPPLIED` = a terminal might read it but nothing ever defines it.
+* Control: `FUN_000e1564(ctx, size)` (the allocator callback with a forwarded size, a real hidden parameter fixed earlier) is `POSSIBLE-READ` / SUPPLIED by all 20 callers.
+* Result over every PASS-indirect / -import / -deep / -unknown row: GLDriver 311 (298 GARBAGE, 10 GARBAGE-UNSUPPLIED, 3 reviewed by hand: `ctx+0xc` allocator calls
+  take only `r3`; `FUN_0008f520`'s single caller tail-calls with a clobbered r4), glprog 179 (157 / 19 / 3 reviewed: `_eval` r9 reaches a variadic routine's
+  register spill, `reservedErrorCheck` r8 a variadic forward, `_frame_heapsort` r6 is not a parameter), VA 0. **No PASS row is a lost argument**, including the
+  multi-hop `FUN_000b3630` (r6..r8) / `FUN_000b6580` (r5..r8) chain of the 2026-09-29 comment: every path to a `bctrl` there passes through earlier calls
+  (r6..r8 are clobbered at 0xb37ec), the terminals are the allocator (`li r3,size`) and `+0x34`-slot callbacks that take r3/r4, so the stock forwards leftovers
+  exactly as the C does; the corpus's `in_r6..in_r8` are those leftovers (nothing to apply).
+* `callarg_check.py` now also compares **computed** arguments (issue #70 criterion 2, order and source): `addi rK,rP,off` / `lwz|lbz|lhz|lha rK,off(rP)` where rP is a
+  prologue copy of an incoming parameter, matched by parameter AND offset against the C argument resolved through the function's own `var = expr;` assignments
+  (2 levels; `p[i]` / `p + n` literals scaled by 1/2/4/8; `&DAT_000011d1`-style symbols read as their address). GLDriver 2224 arguments, 30 sites without a match (18
+  rows); glprog 250 / 1; VA 54 / 0; GA 30 / 0; libGL 0. `callarg_triage.py` classifies them: GLDriver 16 rows are callee-ignores (`FUN_001049e8` never reads r5: `or r5,r28,r28`
+  first, 12 rows; `FUN_00104364` 1; `FUN_001875a8` 3) and 2 were reviewed by hand (below); glprog's 1 is a real defect, fixed.
+  * **Real: glprog `_PPCRuntimeCompilerCompileAV`, RECT texture sampler.** The stock loads `r5 = *(param_1+0xe30)` (the code-emit pointer) before
+    `bl _PPCTextureSamplerSampleTexelRECTRTCAV` (an entry that is `b ..RECTFromLevelRTCAV`, which reads r5), exactly as for the 2D/3D samplers; the C kept
+    `in_r5 = ...` but passed two arguments. The rebuilt runtime compiler would have written the RECT sampler's code through whatever r5 held. Patch in
+    `patches.py`; rebuilt call site now sets `r5` (`lwz r5,0x7c(r30)` before the `bl`; the previous build had only r3, r4). The JIT path cannot be run
+    end to end (issue #78, identical crash in stock and rebuilt), so this is verified by disassembly and by the unchanged GLSL differential probes.
+  * Reviewed: `FUN_000eec50` r5 (Ghidra inlined the tail call `b 0xed3a4`: the callee's param_2 is the C's `iVar7`); `FUN_00133fe4` -> `FUN_00130abc` r5 (unused parameters: the
+    callee reads only r3 and forwards r4/r5 to a this-only virtual call).
+
 ### Floating-point arguments and results (Stage B3 step 12)
 * Darwin passes every float argument in f1..f13 **and** gives it a slot in the GPR sequence (a double shadows two GPRs); Ghidra assigns them SysV
   style. The only signature this put an integer in the wrong register is `ecvt(double, int, int*, int*)` in GLDriver: its caller FUN_000cdc3c

@@ -173,6 +173,9 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
      `InterpreterTextureSamplerSampleTexelRECT` had fewer parameters than their definitions read (b3/extend2_glprog.txt).
    * GLDriver: its libGLProgrammability / libGLImage imports had no prototypes (`glgConvertType` printed 3 of its 8 arguments); FUN_00165b7c
      forwards r3..r9 to a call through a pointer (b3/glfix_redump_gld.txt).
+   * glprog `_PPCRuntimeCompilerCompileAV` (2026-09-29, computed sources - `callarg_check.py` now compares `addi`/`lwz` of a parameter copy by parameter and offset): the RECT
+     texture-sampler call kept `in_r5 = *(param_1 + 0xe30)` but passed two arguments (patches.py). `Tools/userspace/reg_supply.py` classifies every forwarded (PASS-*)
+     register by terminal-call arity and by who supplies it: no GLDriver / glprog row is a lost argument (Userspace/README.md, "Who supplies a forwarded register").
    Remaining reports (GLDriver 14 constants, 16 parameters, 37 stack addresses) were reviewed: addresses passed through a variable, an empty
    `get_allocator` class, calls into empty functions - the tool's limits, not dropped arguments.
 17. Indirect calls with some arguments dropped (#70). OverrideIndirectCalls.java widened only indirect calls the decompiler printed with NO

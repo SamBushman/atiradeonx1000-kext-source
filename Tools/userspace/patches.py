@@ -333,6 +333,11 @@ PATCHES = {
     # float[12] at r1+0x60) but prints r5 as the function's own untouched `in_r5` - it loses that `addi` (it does so for these four sites only;
     # callarg_check.py, stack-address arguments). C: the output is `local_130` itself.
     '_InterpreterEmulateOp': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'(_InterpreterNoiseGeneratorCalculate[1-4]D\)?\s*\(param_1 \+ 1,local_130 \+ 4,)in_r5\)', r'\1local_130)', 4, '_InterpreterEmulateOp noise output (0x97bd0ba0..)')),
+    # _PPCRuntimeCompilerCompileAV (glprog, stock 0x97bdda38): the texture-sampler opcodes call _PPCTextureSamplerSampleTexel{1D,2D,3D,RECT}RTCAV(sampler, level, out)
+    # with `lwz r3,0xe1c(r30); or r4,r29,r29; lwz r5,0xe30(r30); bl` (RECT: 0x97be1624..0x97be1630; the entry is `b ..RECTFromLevelRTCAV`, whose body reads r5 -
+    # the code-emit pointer). The 2D/3D calls print `,in_r5)` after `in_r5 = *(param_1 + 0xe30)`, the RECT call kept the assignment and lost the argument
+    # (callarg_check.py, computed-source arguments, issue #70 criterion 2): the rebuilt RECT sampler wrote its code at whatever r5 held.
+    '_PPCRuntimeCompilerCompileAV': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'_PPCTextureSamplerSampleTexelRECTRTCAV\s*\(\*\(undefined4 \*\)\(param_1 \+ 0xe1c\),uVar8\);', '((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);', 1, '_PPCRuntimeCompilerCompileAV RECT sampler (0x97be1630)')),
     '__cxxabiv1____terminate': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__terminate (0x97c19de8)')),
     '__cxxabiv1____unexpected': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'\(\*param_1\)\(([^;]*)\);', r'((int (*)())param_1)(\1);', 1, '__unexpected (0x97c19e44)')),
 

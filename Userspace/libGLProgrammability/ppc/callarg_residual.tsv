@@ -28,6 +28,7 @@
 0x97bcdd50	_InterpreterEmulateOp	0x97bd0be0	InterpreterNoiseGeneratorCalculate4D	r5	r1+0x60 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
 0x97bcdd50	_InterpreterEmulateOp	0x97bd2948	InterpreterTextureSamplerSetProjectionEnabled	r4	0x1 not at argument 1 of any C call (1 C calls)	CHECK (C arg1: uVar32)
 0x97bdda38	_PPCRuntimeCompilerCompileAV	0x97be1540	PPCTextureSamplerSetProjectionEnabled	r4	0x1 not at argument 1 of any C call (1 C calls)	CHECK (C arg1: uVar15)
+0x97bdda38	_PPCRuntimeCompilerCompileAV	0x97be1630	PPCTextureSamplerSampleTexelRECTRTCAV	r5	field at param_1+0xe30: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	FIXED (RECT sampler lost its 3rd argument, patches.py _PPCRuntimeCompilerCompileAV; 2D/3D siblings pass in_r5)
 0x97be7fc0	_glpWriteSourceOperand_97be7fc0	0x97be80b0	glpWriteSourceOperandExtendedSwizzle	r6	incoming param_8 not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x97bf0e10	_PPStreamChunkCompare	0x97bf0edc	memcmp	r5	0x8 not at argument 2 of any C call (1 C calls)	CHECK (C arg2: uVar3)
 0x97c075e0	_LocalCopyPropagator	0x97c0762c	EndLocalAvailableCopyList	r5	incoming param_1 not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
