@@ -1846,7 +1846,9 @@ int FUN_00149de4(param_1, param_2, param_3, param_4, param_5)
     local_68 = local_58[0];
     pcVar15 = *(code **)(*piVar18 + 0x104);
     iVar4 = FUN_00105594(param_3,1);
-    iVar5 = (*pcVar15)(piVar18,param_1,param_2,&local_68);
+    /* dropped 5th arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+     * disassembly): stock passes the just-computed iVar4 in r7 too. */
+    iVar5 = (*pcVar15)(piVar18,param_1,param_2,&local_68,iVar4);
     if (iVar5 != 0) {
       piVar18 = (int *)FUN_00105594(param_3,1);
       piVar6 = (int *)FUN_00105594(param_1,param_2);

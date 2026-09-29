@@ -369,7 +369,9 @@ LAB_00198290:
         if (iVar26 == 0x29) {
           piVar17 = (int *)param_1[3];
           piVar16 = piVar22;
-          local_f0 = (**(code **)(*param_1 + 0x158))(param_1,param_2);
+          /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+           * disassembly): stock passes piVar22 and piVar17 (the value just computed above) too. */
+          local_f0 = (**(code **)(*param_1 + 0x158))(param_1,param_2,piVar22,piVar17);
 LAB_0019852c:
           bVar3 = piVar22 == (int *)((int)((unsigned char *)0x0) + 3);
           bVar5 = (byte)((uint)local_64 >> 0x18);
@@ -625,7 +627,9 @@ LAB_00199fdc:
             if (iVar26 != 0) {
               piVar17 = (int *)param_1[3];
               piVar16 = param_2;
-              (**(code **)(*param_1 + 0x154))(param_1,piVar22);
+              /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+               * disassembly): stock passes param_2 and piVar17 too. */
+              (**(code **)(*param_1 + 0x154))(param_1,piVar22,param_2,piVar17);
             }
             goto LAB_0019852c;
           }
@@ -638,7 +642,9 @@ LAB_00199fdc:
           if (iVar26 != 0) {
             if (a0[0x26] == 0x33) {
               piVar16 = &local_f0;
-              iVar26 = (**(code **)(*param_1 + 0xdc))(param_1,a0);
+              /* dropped 1 arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+               * disassembly): stock passes &local_f0 (piVar16) too. */
+              iVar26 = (**(code **)(*param_1 + 0xdc))(param_1,a0,piVar16);
               if (iVar26 == 0) {
                 if ((piVar22 != (int *)((int)((unsigned char *)0x0) + 3)) ||
                    ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
@@ -646,13 +652,17 @@ LAB_00199fdc:
                     piVar16 = local_bc;
                     piVar17 = local_dc;
                     a4 = param_2;
-                    (**(code **)(*param_1 + 0xd4))(param_1,piVar22);
+                    /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
+                     * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
+                    (**(code **)(*param_1 + 0xd4))(param_1,piVar22,piVar16,piVar17,a4);
                   }
                   if (bVar2) {
                     piVar16 = local_ec;
                     piVar17 = local_5c;
                     a4 = param_2;
-                    (**(code **)(*param_1 + 0xd8))(param_1,piVar22);
+                    /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
+                     * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
+                    (**(code **)(*param_1 + 0xd8))(param_1,piVar22,piVar16,piVar17,a4);
                   }
                 }
                 else {
@@ -684,13 +694,17 @@ LAB_00199fdc:
               piVar16 = local_bc;
               piVar17 = local_dc;
               a4 = piVar23;
-              (**(code **)(*param_1 + 0xec))(param_1,piVar22);
+              /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
+               * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
+              (**(code **)(*param_1 + 0xec))(param_1,piVar22,piVar16,piVar17,a4);
             }
             if (bVar2) {
               piVar16 = local_ec;
               piVar17 = local_5c;
               a4 = piVar23;
-              (**(code **)(*param_1 + 0xf0))(param_1,piVar22);
+              /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
+               * ground-truth disassembly): stock passes piVar16, piVar17, a4 too. */
+              (**(code **)(*param_1 + 0xf0))(param_1,piVar22,piVar16,piVar17,a4);
             }
           }
           else {

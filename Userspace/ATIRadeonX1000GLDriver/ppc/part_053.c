@@ -102,7 +102,11 @@ LAB_0019dab0:
   do {
     a2 = iVar10;
     uVar8 = uVar3 & 0xff;
-    (**(code **)(*piVar11 + 0x88))(piVar11,1);
+    /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
+     * disassembly): stock passes iVar10 and uVar8 here too, matching the identical-shape
+     * call a few lines above (both loops dispatch the same vtable+0x88 method the same way -
+     * r28, set once, holds this loop's masked byte for both). */
+    (**(code **)(*piVar11 + 0x88))(piVar11,1,iVar10,uVar8);
     bVar1 = iVar10 != 3;
     iVar10 = iVar10 + 1;
   } while (bVar1);

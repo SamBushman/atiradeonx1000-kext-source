@@ -1945,7 +1945,10 @@ int FUN_0005f540(param_1, param_2)
   return;
 }
 
-/* FUN_0005f810 @ 0x5f810 (9624 bytes) */
+/* FUN_0005f810 @ 0x5f810 (9624 bytes) - 14 of its vtable+0x1344 dispatch calls dropped a
+ * genuine 3rd argument (the already-declared in_r5) that stock passes (found auditing #70 via
+ * ExtendIndirectCalls.java / ground-truth disassembly); a 15th, differently-shaped call at the
+ * same vtable slot already had its own real 3rd argument and needed no change. */
 int FUN_0005f810(param_1, param_2)
   int param_1;
   int *param_2;
@@ -2250,7 +2253,7 @@ LAB_0005fdf0:
                   iVar16 = *(int *)(uVar23 + 0x58);
                   uVar14 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
                   in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                   (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                   *(undefined4 *)(uVar23 + 0x54) = uVar14;
                   *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2308,7 +2311,7 @@ LAB_000600f4:
                 iVar19 = *(int *)(uVar23 + 0x58);
                 uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
                 in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                 (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                 *(undefined4 *)(uVar23 + 0x54) = uVar14;
                 iVar16 = iVar19 * 0x28;
@@ -2349,7 +2352,7 @@ LAB_000600f4:
                   iVar16 = *(int *)(uVar23 + 0x58);
                   uVar15 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
                   in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54));
+                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
                   (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                   *(undefined4 *)(uVar23 + 0x54) = uVar15;
                   *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2428,7 +2431,7 @@ LAB_000603e0:
                                            (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
                         in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
                         (**(code **)(((unsigned char *)0x00001344) + param_1))
-                                  (uVar14,*(undefined4 *)(uVar23 + 0x54));
+                                  (uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                         (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                         *(undefined4 *)(uVar23 + 0x54) = uVar14;
                         iVar12 = iVar3 * 0x28;
@@ -2478,7 +2481,7 @@ LAB_00060590:
                         uVar15 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
                         in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
                         (**(code **)(((unsigned char *)0x00001344) + param_1))
-                                  (uVar15,*(undefined4 *)(uVar23 + 0x54));
+                                  (uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
                         (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                         *(undefined4 *)(uVar23 + 0x54) = uVar15;
                         *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2509,7 +2512,7 @@ LAB_0006068c:
                       iVar19 = *(int *)(uVar23 + 0x58);
                       uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
                       in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                       (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                       *(undefined4 *)(uVar23 + 0x54) = uVar14;
                       *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2592,7 +2595,7 @@ LAB_0006079c:
                       uVar14 = (**(code **)(param_1 + 0x10))
                                          (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
                       in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                       (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                       *(undefined4 *)(uVar23 + 0x54) = uVar14;
                       iVar12 = iVar3 * 0x28;
@@ -2682,7 +2685,7 @@ LAB_000608e0:
                     iVar16 = *(int *)(uVar23 + 0x58);
                     uVar14 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
                     in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                     (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                     *(undefined4 *)(uVar23 + 0x54) = uVar14;
                     *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2738,7 +2741,7 @@ LAB_00060bdc:
                   iVar19 = *(int *)(uVar23 + 0x58);
                   uVar14 = (**(code **)(param_1 + 0x10))(iVar19 + 0x10,0x28);
                   in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                  (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                   (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                   *(undefined4 *)(uVar23 + 0x54) = uVar14;
                   iVar18 = iVar19 * 0x28;
@@ -2779,7 +2782,7 @@ LAB_00060bdc:
                     iVar16 = *(int *)(uVar23 + 0x58);
                     uVar15 = (**(code **)(param_1 + 0x10))(iVar16 + 0x10,0x28);
                     in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54));
+                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
                     (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                     *(undefined4 *)(uVar23 + 0x54) = uVar15;
                     *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2859,7 +2862,7 @@ LAB_00060ebc:
                       uVar14 = (**(code **)(param_1 + 0x10))
                                          (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
                       in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                       (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                       *(undefined4 *)(uVar23 + 0x54) = uVar14;
                       iVar12 = iVar3 * 0x28;
@@ -2908,7 +2911,7 @@ LAB_0006106c:
                       iVar18 = *(int *)(uVar23 + 0x58);
                       uVar15 = (**(code **)(param_1 + 0x10))(iVar18 + 0x10,0x28);
                       in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54));
+                      (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar15,*(undefined4 *)(uVar23 + 0x54),in_r5);
                       (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                       *(undefined4 *)(uVar23 + 0x54) = uVar15;
                       *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -2939,7 +2942,7 @@ LAB_00061168:
                     iVar18 = *(int *)(uVar23 + 0x58);
                     uVar14 = (**(code **)(param_1 + 0x10))(iVar18 + 0x10,0x28);
                     in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                     (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                     *(undefined4 *)(uVar23 + 0x54) = uVar14;
                     *(int *)(uVar23 + 0x58) = *(int *)(uVar23 + 0x58) + 0x10;
@@ -3021,7 +3024,7 @@ LAB_00061278:
                     uVar14 = (**(code **)(param_1 + 0x10))
                                        (iVar3 + 0x10,0x28,in_r5,in_r6,in_r7,in_r8,0);
                     in_r5 = *(int *)(uVar23 + 0x58) * 0x28;
-                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54));
+                    (**(code **)(((unsigned char *)0x00001344) + param_1))(uVar14,*(undefined4 *)(uVar23 + 0x54),in_r5);
                     (**(code **)(param_1 + 0x18))(*(undefined4 *)(uVar23 + 0x54));
                     *(undefined4 *)(uVar23 + 0x54) = uVar14;
                     iVar12 = iVar3 * 0x28;
