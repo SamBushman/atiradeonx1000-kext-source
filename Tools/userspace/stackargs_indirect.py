@@ -81,6 +81,17 @@ def key(g, a, reg, depth=6):
     if op == 'addi' and len(p) == 3 and p[1] != 'r0': return ('addi', _n(p[2]), key(g, d, int(p[1][1:]), depth - 1))
     if op == 'addi' and len(p) == 3: return ('li', p[2])
     return ('def', d)
+def same_multi(g, a, r1, r2):
+    """two registers that merge several definitions at a: the same value if their definitions pair up one to one in the same places (within 3 instructions of each
+    other) with equal symbolic values - two registers loaded in parallel on every path"""
+    d1 = reaching(g).get(a, {}).get(r1, frozenset()); d2 = reaching(g).get(a, {}).get(r2, frozenset())
+    if 'E' in d1 or 'E' in d2 or len(d1) != len(d2) or len(d1) < 2: return False
+    rest = sorted(int(x) for x in d2)
+    for x in sorted(int(x) for x in d1):
+        m = [y for y in rest if abs(y - x) <= 12 and key_of_def(g, x, 6) == key_of_def(g, y, 6) and key_of_def(g, x, 6)[0] not in ('multi', 'deep', 'def')]
+        if len(m) != 1: return False
+        rest.remove(m[0])
+    return not rest
 def has_call_between(g, d, a):
     return any(ins[x][0] in ('bl', 'bctrl') for x in range(d, a, 4) if x in ins) if d < a else False
 def cexpr(k):
@@ -266,6 +277,8 @@ for g in sorted(sites):
             off = 0x38 + 4 * k; sr, sa = st[off]
             kk = key(g, a, sr)
             hit = [p_ for p_, ak in argkeys.items() if ak == kk and ak[0] not in ('deep',)]
+            if not hit and kk[0] == 'multi':
+                hit = [p_ for p_ in argkeys if argkeys[p_][0] == 'multi' and same_multi(g, a, sr, 2 + p_)]
             if hit: new.append(args[hit[0] - 1]); continue
             e = None
             if kk[0] == 'addi' and kk[2][0] == 'def' and ins[kk[2][1]][0] == 'stwu':
