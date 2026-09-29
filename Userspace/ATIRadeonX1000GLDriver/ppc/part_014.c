@@ -1678,6 +1678,8 @@ int FUN_00096600(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   char cVar5;
   undefined4 uVar6;
   int iVar7;
+  int iVarSa;
+  int iVarSb;
   undefined4 *puVar8;
   undefined4 *puVar9;
   int iVar10;
@@ -1827,13 +1829,19 @@ int FUN_00096600(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
           FUN_000914e0(param_1);
         }
       }
+      /* #70 stack words: case 1 (stock 0x969a8) passes (rec[0], *(param_1 + 0x3f8)) as the 9th / 10th arguments below, case 2
+       * (0x96988) passes (rec[4], *param_1); the 11th / 12th are the PIC constants on both paths */
+      iVarSa = *puVar9;
+      iVarSb = *(int *)(param_1 + 0x3f8);
       goto LAB_000969f0;
     case 2:
+      iVarSa = puVar9[1];
+      iVarSb = *(int *)param_1;
 LAB_000969f0:
       /* issue #79 class: the stock sets r9 / r10 (`addi r9,r11,0x5700`, `addi r10,r10,0x3fd4` from the PIC base 0x96614 =
        * &DAT_001dbd14 / &DAT_001fa5e8) for the `bctrl` at 0x96a20 - the same 7th / 8th arguments every sibling call through
        * this slot passes - and stores them again as stack words, which is why the same-block count stopped at r8 */
-      (**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13,&DAT_001dbd14,&DAT_001fa5e8);
+      (**(code **)(((unsigned char *)0x000012e4) + iVar7))(param_1,uVar12,uVar17,puVar18,uVar14,uVar13,&DAT_001dbd14,&DAT_001fa5e8,iVarSa,iVarSb,&DAT_001dbd14,&DAT_001fa5e8);
       goto switchD_0009696c_default;
     case 3:
       iVar10 = *(int *)(param_1 + 0x4e8);
