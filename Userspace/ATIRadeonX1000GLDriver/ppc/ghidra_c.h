@@ -107,6 +107,14 @@ extern vec16 vectorPermute(), vectorConditionalSelect();
 #define dataCacheBlockFlush(a) __asm__ __volatile__("dcbf 0,%0" :: "r"(a) : "memory")
 #define dataCacheBlockStore(a) __asm__ __volatile__("dcbst 0,%0" :: "r"(a) : "memory")
 #define dataCacheBlockTouch(a) __asm__ __volatile__("dcbt 0,%0" :: "r"(a) : "memory")
+/* issue #64 live-repro (crash after #11): these two pseudo-functions - Ghidra's readable names
+ * for the `dcbz`/`dcba` opcodes, same family as the three dataCacheBlock* macros just above -
+ * were missing from this file entirely, so every call to them compiled as a real external
+ * function call to a symbol that exists nowhere on the system. Live-verified on real hardware:
+ * dyld failed at the first actual call with "Symbol not found: _dataCacheBlockClearToZero".
+ * Added using the same inline-asm pattern as their siblings above. */
+#define dataCacheBlockClearToZero(a) __asm__ __volatile__("dcbz 0,%0" :: "r"(a) : "memory")
+#define dataCacheBlockAllocate(a) __asm__ __volatile__("dcba 0,%0" :: "r"(a) : "memory")
 #define enforceInOrderExecutionIO() __asm__ __volatile__("eieio" ::: "memory")
 #define trap(x) __asm__ __volatile__("trap")
 #define halt_baddata() __builtin_trap()
