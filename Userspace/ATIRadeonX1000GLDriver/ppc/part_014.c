@@ -2023,8 +2023,8 @@ LAB_00097408:
       bVar1 = !bVar1;
       (*(int * *)((char *)frame_ + 60)) = &(*(int *)((char *)frame_ + 16));
       (*(int *)((char *)frame_ + 64)) = param_1 + 0x5ac;
-      (*(int *)((char *)frame_ + 72)) = 0x1d6d90;
-      (*(int *)((char *)frame_ + 56)) = 0x1d6d90;
+      (*(int *)((char *)frame_ + 72)) = (int)&DAT_001dbd84 - 0x4ff4;   /* the stock's address 0x1d6d90 (+ 0x4ff4 = DAT_001dbd84): a raw stock address is wrong in the rebuilt image (#84) */
+      (*(int *)((char *)frame_ + 56)) = (int)&DAT_001dbd84 - 0x4ff4;   /* the stock's address 0x1d6d90 (+ 0x4ff4 = DAT_001dbd84): a raw stock address is wrong in the rebuilt image (#84) */
       uVar18 = 0;
       iVar14 = 0;
       iVar10 = 0;

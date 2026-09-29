@@ -17,14 +17,14 @@ def scan(corpus):
         p = os.path.join(corpus, hf)
         if os.path.exists(p):
             for l in open(p):
-                m = re.match(r'extern unsigned char (DAT_[0-9a-f]{8});$', l.strip())
+                m = re.match(r'extern unsigned char ((?:DAT|UNK|PTR_DAT|PTR_FUN)_[0-9a-f]{8});$', l.strip())
                 if m: decl[m.group(1)] = hf
     uses = collections.defaultdict(list); addr_arith = set()
     for f in sorted(glob.glob(os.path.join(corpus, 'part_*.c'))):
         s = open(f).read()
-        for m in re.finditer(r'(?<![&\w])(DAT_[0-9a-f]{8})\b(?!\s*\[)', s):
+        for m in re.finditer(r'(?<![&\w])((?:DAT|UNK|PTR_DAT|PTR_FUN)_[0-9a-f]{8})\b(?!\s*\[)', s):
             if m.group(1) in decl: uses[m.group(1)].append((s[max(0, m.start() - 60):m.start()], s[m.end():m.end() + 30]))
-        for m in re.finditer(r'(?<![\w)])&\s*(DAT_[0-9a-f]{8})\s*[-+]', s):
+        for m in re.finditer(r'(?<![\w)])&\s*((?:DAT|UNK|PTR_DAT|PTR_FUN)_[0-9a-f]{8})\s*[-+]', s):
             if m.group(1) in decl: addr_arith.add(m.group(1))
     return decl, uses, addr_arith
 
@@ -43,7 +43,8 @@ def unsigned_use(pre):
     return bool(re.search(r'\((?:uint|undefined4|ulong|unsigned int)\)\s*$', pre) or re.search(r'\bu\w*Var\d*\s*=\s*$', pre))
 
 def choose(name, uses, widths):
-    mach = widths.get(hex(int(name[4:], 16))) if widths else None
+    if name.startswith('PTR_'): return 'unsigned char *'          # a pointer cell: always a word
+    mach = widths.get(hex(int(name[-8:], 16))) if widths else None
     ws = collections.Counter(ctx_width(a, b) for a, b in uses)
     if mach:
         w = max(int(k) for k in mach) if set(mach) != {'1', '4'} else 4
