@@ -4335,9 +4335,12 @@ int FUN_00053040(param_1, param_2)
 }
 
 /* FUN_00053060 @ 0x53060 (4 bytes) */
-int FUN_00053060()
+int FUN_00053060(param_1)
+  undefined4 param_1;
 {
-  return;
+  /* hidden-argument defect (hidden_params.py) - real body is a single `blr`: an identity function
+   * on r3, and its one real caller (part_005.c) does supply a real param_1. */
+  return param_1;
 }
 
 /* FUN_00053070 @ 0x53070 (36 bytes) */

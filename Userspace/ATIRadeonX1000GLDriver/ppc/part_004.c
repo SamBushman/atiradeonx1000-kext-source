@@ -6057,9 +6057,12 @@ LAB_0002a9a0:
 }
 
 /* FUN_0002b3b0 @ 0x2b3b0 (4 bytes) */
-int FUN_0002b3b0()
+int FUN_0002b3b0(param_1)
+  undefined4 param_1;
 {
-  return;
+  /* hidden-argument defect (hidden_params.py) - real body is a single `blr`: an identity function
+   * on r3, and its one real caller (part_001.c) does supply a real param_1. */
+  return param_1;
 }
 
 /* FUN_0002b3c0 @ 0x2b3c0 (464 bytes) */
