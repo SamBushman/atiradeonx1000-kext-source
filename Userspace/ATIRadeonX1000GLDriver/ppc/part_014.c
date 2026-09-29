@@ -1303,7 +1303,7 @@ LAB_00095d30:
         }
         iVarS5 = *(int *)((int)*(int *)((int)param_1 + 1004) + 0);
         (**(code **)(((unsigned char *)0x000012e4) + iVar7))
-                  (param_1,uVar9,local_7c,&DAT_001dbd44,uVar8,iVar2 + 3,&DAT_001dbd14,&DAT_001fa5e8,iVarS5,&DAT_001dbd44,&DAT_001dbd14,&DAT_001fa5e8)
+                  (param_1,uVar9,local_7c,&DAT_001dbd44,uVar8,iVar2 + 3,&DAT_001dbd14,&DAT_001fa5e8,iVarS5,iVarS2,&DAT_001dbd14,&DAT_001fa5e8)
         ;
         (**(code **)(((unsigned char *)0x000012e8) + iVar7))
                   (param_1,uVar6,uVar5,&DAT_001dbd44,uVar4,local_7c,&DAT_001dbcd4,&DAT_001fa5e8);

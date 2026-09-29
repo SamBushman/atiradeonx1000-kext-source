@@ -4880,6 +4880,7 @@ int FUN_00091b90(param_1)
   undefined4 local_64;
   undefined1 auStack_60 [16];
   undefined1 auStack_50 [32];
+  int iVarS1;
   
   iVar3 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x498) != -1) {
@@ -4916,8 +4917,9 @@ int FUN_00091b90(param_1)
             (param_1,uVar7,local_64,auStack_60,uVar2,iVar4,&DAT_001dbd74,&DAT_001fa5e8,uVar2,iVar4,&DAT_001dbd74,&DAT_001fa5e8);
   (**(code **)(((unsigned char *)0x00001318) + iVar3))
             (param_1,uVar7,local_64,auStack_60,uVar5,local_64,auStack_50,&DAT_001fa5e8);
+  iVarS1 = &DAT_001dbd74;
   (**(code **)(((unsigned char *)0x000012ec) + iVar3))
-            (param_1,uVar7,uVar6,&DAT_001dbd84,uVar5,local_64,auStack_50,&DAT_001fa5e8);
+            (param_1,uVar7,uVar6,&DAT_001dbd84,uVar5,local_64,auStack_50,&DAT_001fa5e8,uVar2,iVar4,iVarS1,&DAT_001fa5e8);
   ((int (*)())FUN_000911a0)(param_1,auStack_68);
   return 0;
 }
@@ -4928,6 +4930,7 @@ int FUN_00091d70(param_1)
 {
   int iVar1;
   int iVar2;
+  int iVarS1;
   
   iVar2 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x470) == -1) {
@@ -4944,10 +4947,11 @@ int FUN_00091d70(param_1)
       }
       _memcpy(param_1 + 0x46c,param_1 + 0x444,0x28);
     }
+    iVarS1 = &DAT_001dbd74;
     (**(code **)(((unsigned char *)0x000012ec) + iVar2))
               (param_1,**(undefined4 **)(param_1 + 0x3f0),*(undefined4 *)(param_1 + 0x470),
                &DAT_001dbd84,*(undefined4 *)(*(int *)(param_1 + 0x3ec) + 8),
-               *(undefined4 *)(param_1 + 0x344),&DAT_001fa5f8,&DAT_001fa5e8);
+               *(undefined4 *)(param_1 + 0x344),&DAT_001fa5f8,&DAT_001fa5e8,iVar1,(*(char *)(iVar2 + 0x12a) == '\0' ? *(int *)(param_1 + 4) : *(int *)(param_1 + 0x448)),iVarS1,&DAT_001fa5e8);
   }
   return 0;
 }

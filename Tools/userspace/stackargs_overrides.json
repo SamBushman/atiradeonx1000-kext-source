@@ -114,5 +114,11 @@
   "40@96bf0": "(param_3 != 0 ? ((unsigned char *)&DAT_001dbdc0 + 4) : &DAT_001dbd14)",
   "40@96c34": "(param_3 != 0 ? ((unsigned char *)&DAT_001dbdc0 + 4) : &DAT_001dbd14)",
   "40@96c78": "(param_3 != 0 ? ((unsigned char *)&DAT_001dbdc0 + 4) : &DAT_001dbd14)"
+ },
+ "91b90": {
+  "38@91d24": "uVar2"
+ },
+ "91d70": {
+  "3c@91e48": "(*(char *)(iVar2 + 0x12a) == '\\0' ? *(int *)(param_1 + 4) : *(int *)(param_1 + 0x448))"
  }
 }

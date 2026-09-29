@@ -20,6 +20,7 @@ _sl = ARGV[5].split(':')
 slot = int(_sl[0], 0)
 NWORDS = int(_sl[1]) if len(_sl) > 1 else 4        # SLOT[:N] - stack words (arguments 9..8+N) the slot's callee takes
 APPLY = '--apply' in ARGV
+AUDIT = '--audit' in ARGV        # recompute the words of calls that already have them and print those that differ from what the C passes
 sys.argv = ['reg_supply.py', dis, rng, dump, '--terminals', '0', '3']          # reg_supply.py's module code reads argv; only its definitions are used
 src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')).read().split('if mode_term:')[0]
 __file__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.py')
@@ -246,6 +247,7 @@ def phi_var_keys(keys, body):
         for kind, val in need:
             hit = False
             for r_ in rhss:
+                if kind == 'off' and (re.match(r'\s*(?:\([^()]*\)\s*)?\w+\s*\(', r_) or ('*' not in r_ and '[' not in r_)): continue      # a call or a plain value is not a load of a field
                 ns = numset(r_)
                 if kind == 'lit' and re.fullmatch(r'(?:\([^)]*\))?\s*(0x0*%x|%d)' % (val, val), r_.strip()): hit = True
                 if kind == 'off' and val != 0 and any(val == n * z for n in ns for z in (1, 2, 4, 8)): hit = True
@@ -359,7 +361,7 @@ for g in sorted(sites):
             d += {'(': 1, ')': -1}.get(body[j], 0); j += 1
         calls.append((m.start(), i, j - 1, split_args(body[i:j - 1])))
     ss = sites[g]
-    if calls and all(len(c[3]) >= 8 + NWORDS for c in calls): continue        # nothing left to add here
+    if not AUDIT and calls and all(len(c[3]) >= 8 + NWORDS for c in calls): continue        # nothing left to add here
     fdefs = c_defs_of(body); CTX[0] = g; CTX[1] = body
     def compatible(a, args, strict=True):
         for reg in (6, 9, 10):
@@ -439,8 +441,8 @@ for g in sorted(sites):
     newbody = []; pos = 0; decls = []; last_group = {}
     nvar = max([int(x) for x in re.findall(r'\biVarS(\d+)\b', body)] + [0])      # earlier runs (other slots) already declared some
     for (a, st), (cs, ai, aj, args) in zip(ss, calls):
-        if len(args) == 8 + NWORDS: continue
-        if len(args) != 8: report.append('%x %s call at %x: %d C arguments' % (g, name, a, len(args))); continue
+        if len(args) == 8 + NWORDS and not AUDIT: continue
+        if len(args) not in (8, 8 + NWORDS): report.append('%x %s call at %x: %d C arguments' % (g, name, a, len(args))); continue
         argkeys = {p_: key(g, a, 2 + p_) for p_ in range(1, 9)}
         new = []; ok = True; pre = []
         for k in range(NWORDS):
@@ -500,6 +502,15 @@ for g in sorted(sites):
                 outs.append(prev[0]); continue
             nvar += 1; vn = 'iVarS%d' % nvar; decls.append(vn); pre.append('%s = %s;' % (vn, e)); outs.append(vn)
             last_group[ident] = (vn, aj)
+        if AUDIT:
+            if len(args) == 8 + NWORDS:
+                inl = {m_.group(1): m_.group(2) for m_ in (re.match(r'(\w+) = (.*);$', x_) for x_ in pre) if m_}
+                cur = [c_.strip() for c_ in args[8:]]
+                exp_ = ['(%s)' % inl[o_] if o_ in inl else o_ for o_ in outs]
+                # a local the tool would create is compared through its assigned expression; either side may be a hand-written name: print every difference for review
+                bad = [(k_, cur[k_], exp_[k_]) for k_ in range(NWORDS) if cur[k_].replace(' ', '') != exp_[k_].replace(' ', '') and not re.match(r'iVarS\d+$', cur[k_])]
+                if bad: report.append('AUDIT %x %s call %x: %s' % (g, name, a, '; '.join('word %d: C has %s, derived %s' % (k_, c_[:50], e_[:50]) for k_, c_, e_ in bad)))
+            continue
         newbody.append((cs, ai, aj, outs, pre))
     if not newbody: continue
     b2 = body; shift = 0
