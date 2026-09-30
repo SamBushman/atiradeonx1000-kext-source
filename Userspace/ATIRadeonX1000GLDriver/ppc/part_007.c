@@ -969,7 +969,7 @@ void FUN_0004d770(int param_1,double fparam_1,double fparam_2,double fparam_3,do
   uVar14 = *(uint *)(0x00001b14 + param_1);
   uVar7 = uVar14 & 0xfffffff8;
   *(uint *)(0x00001b14 + param_1) = uVar7;
-  if ((((*(uint *)((*(unsigned char *)0x0000317c) + iVar16) & 0xffff0000) != 0) || (((unsigned char *)0x0000317b)[iVar16] != '\0'))
+  if ((((*(uint *)(((unsigned char *)0x0000317cU) + iVar16) & 0xffff0000) != 0) || (((unsigned char *)0x0000317b)[iVar16] != '\0'))
      && ((*(float *)(((unsigned char *)0x0000316c) + iVar16) != FLOAT_001aa0d4 ||
          (*(float *)(((unsigned char *)0x00003168) + iVar16) != FLOAT_001aa0d4)))) {
     if (((unsigned char *)0x0000317b)[iVar16] != '\0') {
@@ -1208,7 +1208,7 @@ int FUN_0004de30(param_1, param_2, param_3, param_4, param_5, param_6)
     iVar2 = param_2 + 0x124;
   }
   if (0 < param_6) {
-    pcVar3 = (*(unsigned char *)0x00002ddc) + param_4 + iVar2;
+    pcVar3 = ((unsigned char *)0x00002ddcU) + param_4 + iVar2;
     puVar1 = (undefined4 *)(param_4 * 0x10 + iVar2 + 0x8c);
     do {
       if ((*pcVar3 != '\0') && (pcVar3[0x100] == '\0')) {
@@ -1814,7 +1814,7 @@ int FUN_0004ed90(param_1)
         fVar2 = *(float *)(((unsigned char *)0x000013c4) + param_1);
         fVar1 = (float)((double)CONCAT44(0x43300000,iVar6) - DOUBLE_001aa250);
         *(short *)(param_1 + 0x1cd0) =
-             (short)((int)(fVar1 * *(float *)((*(unsigned char *)0x000013c8) + param_1)) >> 1);
+             (short)((int)(fVar1 * *(float *)(((unsigned char *)0x000013c8U) + param_1)) >> 1);
         *(short *)(param_1 + 0x1cd2) = (short)((int)(fVar1 * fVar2) >> 1);
         goto LAB_0004efc0;
       }
@@ -1830,7 +1830,7 @@ int FUN_0004ed90(param_1)
   }
   else {
     iVar4 = *(int *)(((unsigned char *)0x000013d4) + param_1);
-    *(short *)(param_1 + 0x1cd2) = (short)(iVar6 * *(int *)((*(unsigned char *)0x000013d0) + param_1) >> 1);
+    *(short *)(param_1 + 0x1cd2) = (short)(iVar6 * *(int *)(((unsigned char *)0x000013d0U) + param_1) >> 1);
     *(short *)(param_1 + 0x1cd0) = (short)(iVar6 * iVar4 >> 1);
   }
 LAB_0004efc0:
@@ -2664,7 +2664,7 @@ int FUN_00050300(param_1)
   puVar2[0x44] = 0xffffff;
   puVar2[0x47] = 0x8000;
   puVar2[0x48] = 0xc0001000;
-  puVar2[0x4a] = (*(unsigned char *)0x000010ea);
+  puVar2[0x4a] = ((unsigned char *)0x000010eaU);
   puVar2[0x49] = 0;
   puVar2[0x42] = uVar8;
   puVar2[0x45] = 0;
@@ -2727,13 +2727,13 @@ int FUN_00050300(param_1)
         puVar2[2] = ((unsigned char *)0x00001110) + iVar6;
         puVar2[1] = uVar8;
         uVar8 = *puVar11;
-        puVar2[4] = (*(unsigned char *)0x00001120) + iVar6;
+        puVar2[4] = ((unsigned char *)0x00001120U) + iVar6;
         puVar2[3] = uVar8;
         uVar8 = *puVar12;
         puVar2[6] = ((unsigned char *)0x00001130) + iVar6;
         puVar2[5] = uVar8;
         uVar8 = *puVar13;
-        puVar2[8] = (*(unsigned char *)0x00001170) + iVar6;
+        puVar2[8] = ((unsigned char *)0x00001170U) + iVar6;
         puVar2[7] = uVar8;
         uVar8 = *puVar4;
         puVar2[10] = ((unsigned char *)0x00001160) + iVar6;
@@ -3807,13 +3807,13 @@ int FUN_00052280(param_1)
         puVar6[2] = ((unsigned char *)0x00001110) + iVar9;
         puVar6[1] = uVar2;
         uVar2 = *puVar14;
-        puVar6[4] = (*(unsigned char *)0x00001120) + iVar9;
+        puVar6[4] = ((unsigned char *)0x00001120U) + iVar9;
         puVar6[3] = uVar2;
         uVar2 = *puVar15;
         puVar6[6] = ((unsigned char *)0x00001130) + iVar9;
         puVar6[5] = uVar2;
         uVar2 = *puVar11;
-        puVar6[8] = (*(unsigned char *)0x00001170) + iVar9;
+        puVar6[8] = ((unsigned char *)0x00001170U) + iVar9;
         puVar6[7] = uVar2;
         uVar2 = *puVar8;
         puVar6[10] = ((unsigned char *)0x00001160) + iVar9;
@@ -3965,7 +3965,7 @@ int FUN_00052280(param_1)
       *puVar5 = (int)puVar7 - (int)puVar5 >> 2 | *puVar5;
       *(undefined4 **)(iVar9 + 0x1d8) = puVar7;
       *puVar7 = 0x2f000000;
-      puVar7[1] = (*(unsigned char *)0x000010e9);
+      puVar7[1] = ((unsigned char *)0x000010e9U);
       uVar2 = *(undefined4 *)(param_1 + 0x1ae0);
       puVar7[3] = ((unsigned char *)0x000013c7U);
       puVar7[2] = uVar2;

@@ -7615,7 +7615,7 @@ switchD_000a0718_caseD_8811:
         *param_4 = *(uint *)(((unsigned char *)0x00001208) + param_1);
         return;
       case 0x880d:
-        *param_4 = *(uint *)((*(unsigned char *)0x0000120c) + param_1);
+        *param_4 = *(uint *)(((unsigned char *)0x0000120cU) + param_1);
         return;
       case 0x880e:
         *param_4 = *(uint *)(((unsigned char *)0x00001210) + param_1);

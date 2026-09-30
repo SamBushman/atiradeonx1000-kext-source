@@ -1922,7 +1922,7 @@ LAB_0008ce38:
                 } while (iVar16 != 0);
               }
               piVar15 = piVar4;
-              if (*(int *)((*(unsigned char *)0x0000120c) + iVar12) < iVar22) {
+              if (*(int *)(((unsigned char *)0x0000120cU) + iVar12) < iVar22) {
                 FUN_00088e70(piVar9,"too many indirections");
               }
               else {
@@ -2184,7 +2184,7 @@ int FUN_0008d470(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined *puVar16;
   int iVar17;
   
-  puVar7 = (*(unsigned char *)0x000011d0) + param_1;
+  puVar7 = ((unsigned char *)0x000011d0U) + param_1;
   uVar11 = *(uint *)(param_1 + 0x44);
   iVar17 = *(int *)(*(int *)(param_1 + 4) + 0x10);
   ((unsigned char *)0x000011d2)[param_1] = 0;
@@ -3459,7 +3459,7 @@ int FUN_0008f520(param_1)
   int iVar4;
   undefined *puVar5;
   
-  puVar5 = (*(unsigned char *)0x000011d0) + param_1;
+  puVar5 = ((unsigned char *)0x000011d0U) + param_1;
   iVar4 = *(int *)(((unsigned char *)0x0000112c) + param_1);
   *(undefined4 *)(((unsigned char *)0x0000126c) + param_1) = 1;
   *(undefined4 *)(((unsigned char *)0x00001220) + param_1) = 2;

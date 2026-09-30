@@ -3232,7 +3232,7 @@ LAB_0007209c:
               iVar18 = iVar10 * 0x28;
               iVar16 = iVar10 + 1;
               param_2[0xc] = param_2[0xc] | 0x40;
-              *(int *)((*(unsigned char *)0x00001390) + iVar15) = iVar10;
+              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
               *(int *)(iVar15 + 0x100) = iVar10;
               *(undefined4 *)(iVar15 + 0xa8) = 1;
               *(undefined4 *)(iVar14 + 8) = 1;
@@ -3422,7 +3422,7 @@ LAB_000724bc:
               iVar18 = iVar10 * 0x28;
               iVar16 = iVar10 + 1;
               param_2[0xc] = param_2[0xc] | 0x40;
-              *(int *)((*(unsigned char *)0x00001390) + iVar15) = iVar10;
+              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
               *(int *)(iVar15 + 0x100) = iVar10;
               *(undefined4 *)(iVar15 + 0xa8) = 1;
               *(undefined4 *)(iVar14 + 8) = 1;
@@ -3612,7 +3612,7 @@ LAB_000728e4:
               iVar16 = iVar10 * 0x28;
               iVar26 = iVar10 + 1;
               param_2[0xc] = param_2[0xc] | 0x40;
-              *(int *)((*(unsigned char *)0x00001390) + iVar15) = iVar10;
+              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
               *(int *)(iVar15 + 0x100) = iVar10;
               *(undefined4 *)(iVar15 + 0xa8) = 1;
               *(undefined4 *)(in_r7 + 8) = 1;

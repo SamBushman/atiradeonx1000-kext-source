@@ -1128,7 +1128,7 @@ int FUN_000a2e90(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int local_4c;
   int local_48;
   
-  ((int (*)())FUN_000a27f0)((*(unsigned char *)0x00001134) + param_1,param_2,&local_98,auStack_94);
+  ((int (*)())FUN_000a27f0)(((unsigned char *)0x00001134U) + param_1,param_2,&local_98,auStack_94);
   if (((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
         (local_98 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) && (param_4 - 0x8961U < 0xc))
       && (((1 << (param_4 - 0x8961U & 0x3f) & 0xffdU) != 0 &&
@@ -1206,7 +1206,7 @@ int FUN_000a3160(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int local_4c;
   int local_48;
   
-  ((int (*)())FUN_000a27f0)((*(unsigned char *)0x00001134) + param_1,param_2,auStack_98,&local_94);
+  ((int (*)())FUN_000a27f0)(((unsigned char *)0x00001134U) + param_1,param_2,auStack_98,&local_94);
   if (((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
         (local_94 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) && (param_4 - 0x8961U < 0xc))
       && (((1 << (param_4 - 0x8961U & 0x3f) & 0xffdU) != 0 &&
@@ -3529,7 +3529,7 @@ LAB_000a6ebc:
   *puVar3 = (int)puVar4 - (int)puVar3 >> 2 | *puVar3;
   *(undefined4 **)(iVar6 + 0x1d8) = puVar4;
   *puVar4 = 0x2f000000;
-  puVar4[1] = (*(unsigned char *)0x000010e9);
+  puVar4[1] = ((unsigned char *)0x000010e9U);
   uVar9 = *(undefined4 *)(param_1 + 0x1ae0);
   puVar4[3] = ((unsigned char *)0x000013c7U);
   puVar4[2] = uVar9;
@@ -3648,10 +3648,10 @@ int FUN_000a7050(param_1)
   *(undefined2 *)(((unsigned char *)0x000015fe) + param_1) = 0x100;
   *(undefined4 *)(((unsigned char *)0x00001614) + param_1) = 0x40;
   ((unsigned char *)0x000015f8)[param_1] = ((unsigned char *)0x00002b7c)[param_1];
-  *(undefined4 *)((*(unsigned char *)0x00001618) + param_1) = 0;
+  *(undefined4 *)(((unsigned char *)0x00001618U) + param_1) = 0;
   *(undefined4 *)(((unsigned char *)0x0000161c) + param_1) = 0;
   *(undefined4 *)(((unsigned char *)0x0000160c) + param_1) = 0x3e000000;
-  *(undefined4 *)((*(unsigned char *)0x00001610) + param_1) = 1;
+  *(undefined4 *)(((unsigned char *)0x00001610U) + param_1) = 1;
   *(undefined4 *)(((unsigned char *)0x00001620) + param_1) = 1;
   *(undefined4 *)(((unsigned char *)0x000013f8) + param_1) = 0xffff;
   *(undefined4 *)(((unsigned char *)0x00001400) + param_1) = 0xffff;

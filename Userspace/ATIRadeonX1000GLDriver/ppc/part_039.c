@@ -49,7 +49,7 @@ int FUN_00127fd8(param_1)
   int unaff_r27;
   int *unaff_r30;
   
-  *unaff_r30 = *(int *)((*(unsigned char *)0x000011d0) + unaff_r27) + 8;
+  *unaff_r30 = *(int *)(((unsigned char *)0x000011d0U) + unaff_r27) + 8;
   __Unwind_Resume(param_1);
   *(undefined4 *)(*(int *)(extraout_r3 + 8) + 0x2c) = 0x100;
   return;

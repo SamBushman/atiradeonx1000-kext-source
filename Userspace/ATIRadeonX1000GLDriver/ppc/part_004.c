@@ -2853,7 +2853,7 @@ LAB_000284b0:
   puVar26[0xd3] = 3;
   puVar26[0xd4] = 0x5c8;
   puVar26[0xd5] = 0x20000;
-  puVar26[0xd6] = (*(unsigned char *)0x000010ea);
+  puVar26[0xd6] = ((unsigned char *)0x000010eaU);
   uVar34 = *(undefined4 *)(param_1 + 0x1cfc);
   puVar26[0xd8] = ((unsigned char *)0x000010faU);
   puVar26[0xd7] = uVar34;
@@ -2866,7 +2866,7 @@ LAB_000284b0:
   puVar26[0xdf] = ((unsigned char *)0x00001008U);
   puVar26[0xde] = uVar34;
   uVar34 = *(undefined4 *)(param_1 + 0x1ca0);
-  puVar26[0xe1] = (*(unsigned char *)0x000010e9);
+  puVar26[0xe1] = ((unsigned char *)0x000010e9U);
   puVar26[0xe0] = uVar34;
   uVar34 = *(undefined4 *)(param_1 + 0x1d20);
   puVar26[0xe3] = ((unsigned char *)0x000013c7U);
@@ -3003,13 +3003,13 @@ LAB_000284b0:
   puVar26[0x16c] = 0;
   puVar26[0x16e] = 0;
   puVar26[0x168] = uVar34;
-  puVar26[0x16f] = (*(unsigned char *)0x00001150);
+  puVar26[0x16f] = ((unsigned char *)0x00001150U);
   puVar26[0x171] = ((unsigned char *)0x00001100U);
   uVar34 = *(undefined4 *)(param_1 + 0x1f1c);
   puVar26[0x173] = ((unsigned char *)0x00001110U);
   puVar26[0x172] = uVar34;
   puVar26[0x174] = *(undefined4 *)(param_1 + 0x1f5c);
-  puVar26[0x175] = (*(unsigned char *)0x00001120);
+  puVar26[0x175] = ((unsigned char *)0x00001120U);
   uVar34 = *(undefined4 *)(param_1 + 0x1f9c);
   puVar26[0x177] = ((unsigned char *)0x00001130U);
   puVar26[0x176] = uVar34;
@@ -3274,7 +3274,7 @@ LAB_00029878:
 LAB_000299f8:
             if ((bVar4) ||
                ((((bVar1 && (((*(uint *)(((unsigned char *)0x000030b4) + iVar16) & 0xff1) != 0 ||
-                             ((*(uint *)((*(unsigned char *)0x00002e68) + iVar16) & 0xffff0000) != 0)))) ||
+                             ((*(uint *)(((unsigned char *)0x00002e68U) + iVar16) & 0xffff0000) != 0)))) ||
                  (param_6 - 0x1901U < 2)) ||
                 ((((uStack_a8 & 0x3f) != 0 || (0x1fff < (int)uStack_a8)) ||
                  ((uStack_ac & 0x1f) != 0)))))) {
@@ -3662,7 +3662,7 @@ LAB_000299f8:
             uVar12 = uVar22 & 0xf;
             if ((bVar4) ||
                ((((bVar1 && (((*(uint *)(((unsigned char *)0x000030b4) + iVar20) & 0xff1) != 0 ||
-                             ((*(uint *)((*(unsigned char *)0x00002e68) + iVar20) & 0xffff0000) != 0)))) ||
+                             ((*(uint *)(((unsigned char *)0x00002e68U) + iVar20) & 0xffff0000) != 0)))) ||
                  (param_6 - 0x1901U < 2)) ||
                 ((((uStack_a8 & 0x3f) != 0 || (0x1fff < (int)uStack_a8)) ||
                  ((uStack_ac & 0x1f) != 0)))))) {
@@ -4605,7 +4605,7 @@ LAB_0002a520:
       puVar24[0xd2] = 3;
       puVar24[0xd3] = 0x5c8;
       puVar24[0xd4] = 0x20000;
-      puVar24[0xd5] = (*(unsigned char *)0x000010ea);
+      puVar24[0xd5] = ((unsigned char *)0x000010eaU);
       uVar25 = *(undefined4 *)(param_1 + 0x1cfc);
       puVar24[0xd7] = ((unsigned char *)0x000010faU);
       puVar24[0xd6] = uVar25;
@@ -4618,7 +4618,7 @@ LAB_0002a520:
       puVar24[0xde] = ((unsigned char *)0x00001008U);
       puVar24[0xdd] = uVar25;
       uVar25 = *(undefined4 *)(param_1 + 0x1ca0);
-      puVar24[0xe0] = (*(unsigned char *)0x000010e9);
+      puVar24[0xe0] = ((unsigned char *)0x000010e9U);
       puVar24[0xdf] = uVar25;
       uVar25 = *(undefined4 *)(param_1 + 0x1d20);
       puVar24[0xe2] = ((unsigned char *)0x000013c7U);
@@ -4751,13 +4751,13 @@ LAB_0002a520:
       puVar24[0x16b] = 0;
       puVar24[0x16d] = 0;
       puVar24[0x167] = uVar25;
-      puVar24[0x16e] = (*(unsigned char *)0x00001150);
+      puVar24[0x16e] = ((unsigned char *)0x00001150U);
       puVar24[0x170] = ((unsigned char *)0x00001100U);
       uVar25 = *(undefined4 *)(param_1 + 0x1f1c);
       puVar24[0x172] = ((unsigned char *)0x00001110U);
       puVar24[0x171] = uVar25;
       puVar24[0x173] = *(undefined4 *)(param_1 + 0x1f5c);
-      puVar24[0x174] = (*(unsigned char *)0x00001120);
+      puVar24[0x174] = ((unsigned char *)0x00001120U);
       uVar25 = *(undefined4 *)(param_1 + 0x1f9c);
       puVar24[0x176] = ((unsigned char *)0x00001130U);
       puVar24[0x175] = uVar25;

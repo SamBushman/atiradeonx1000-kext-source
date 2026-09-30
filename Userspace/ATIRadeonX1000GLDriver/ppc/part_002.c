@@ -9436,7 +9436,7 @@ LAB_000185c0:
     bVar22 = false;
   }
   if (((param_7 == 0x1801) && ((*(uint *)(param_1 + 0x154) & 0x30000) != 0)) &&
-     ((iVar33 = *(int *)(param_1 + 0x10), *(int *)((*(unsigned char *)0x00002e40) + iVar33) == 0 &&
+     ((iVar33 = *(int *)(param_1 + 0x10), *(int *)(((unsigned char *)0x00002e40U) + iVar33) == 0 &&
       ((((((unsigned char *)0x00002e44)[iVar33] != '\0' && (((uint)puVar42 & 0x10001) == 0)) &&
         (((uint)puVar42 & 0x10) != 0)) && (*(short *)(((unsigned char *)0x00002dc4) + iVar33) == 0x207)))))) {
     iVar33 = FUN_0001a010(param_1,4,iVar34,iVar29,iVar38,iVar40,puVar42);
@@ -9800,7 +9800,7 @@ LAB_00018700:
         puVar30[5] = 3;
         puVar30[6] = 0x5c8;
         puVar30[7] = 0x20000;
-        puVar30[8] = (uint)(*(unsigned char *)0x000010ea);
+        puVar30[8] = (uint)((unsigned char *)0x000010eaU);
         uVar41 = *(uint *)(param_1 + 0x1cfc);
         puVar30[10] = (uint)((unsigned char *)0x000010faU);
         puVar30[9] = uVar41;
@@ -9813,7 +9813,7 @@ LAB_00018700:
         puVar30[0x11] = (uint)((unsigned char *)0x00001008U);
         puVar30[0x10] = uVar41;
         uVar41 = *(uint *)(param_1 + 0x1ca0);
-        puVar30[0x13] = (uint)(*(unsigned char *)0x000010e9);
+        puVar30[0x13] = (uint)((unsigned char *)0x000010e9U);
         puVar30[0x12] = uVar41;
         uVar41 = *(uint *)(param_1 + 0x1d20);
         puVar30[0x15] = (uint)((unsigned char *)0x000013c7U);
@@ -9946,13 +9946,13 @@ LAB_00018700:
         puVar30[0xa0] = 0;
         puVar30[0x9d] = (uint)((unsigned char *)0x0000138eU);
         puVar30[0x9a] = uVar41;
-        puVar30[0xa1] = (uint)(*(unsigned char *)0x00001150);
+        puVar30[0xa1] = (uint)((unsigned char *)0x00001150U);
         puVar30[0xa3] = (uint)((unsigned char *)0x00001100U);
         uVar41 = *(uint *)(param_1 + 0x1f1c);
         puVar30[0xa5] = (uint)((unsigned char *)0x00001110U);
         puVar30[0xa4] = uVar41;
         puVar30[0xa6] = *(uint *)(param_1 + 0x1f5c);
-        puVar30[0xa7] = (uint)(*(unsigned char *)0x00001120);
+        puVar30[0xa7] = (uint)((unsigned char *)0x00001120U);
         uVar41 = *(uint *)(param_1 + 0x1f9c);
         puVar30[0xa9] = (uint)((unsigned char *)0x00001130U);
         puVar30[0xa8] = uVar41;

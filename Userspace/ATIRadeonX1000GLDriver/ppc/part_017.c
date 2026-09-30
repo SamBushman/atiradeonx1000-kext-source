@@ -10460,7 +10460,7 @@ int FUN_000c72f0(param_1, param_2, param_3)
   iVar4 = iVar1 * 4 + param_1;
   uVar3 = *(uint *)(((unsigned char *)0x000011a8) + iVar4);
   *(undefined4 *)((int)((unsigned char *)0x000011cc) + iVar5) = param_3[1];
-  *(undefined4 *)((*(unsigned char *)0x000011d0) + iVar5) = param_3[2];
+  *(undefined4 *)(((unsigned char *)0x000011d0U) + iVar5) = param_3[2];
   uVar2 = param_3[3];
   *(uint *)(((unsigned char *)0x000011a8) + iVar4) = 1 << (param_2 + iVar1 * -0x20 & 0x3f) | uVar3;
   *(undefined4 *)(((unsigned char *)0x000011d4) + iVar5) = uVar2;

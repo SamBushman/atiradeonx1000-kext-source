@@ -2899,7 +2899,7 @@ LAB_0015cf80:
           iVar24 = FUN_001054ec(param_1,iVar24);
           *(int *)(iVar24 + 0x10) = iVar7;
         }
-        if ((iVar6 != 0) && (local_f4[0] != *(int *)((*(unsigned char *)0x00003190) + (int)local_60))) {
+        if ((iVar6 != 0) && (local_f4[0] != *(int *)(((unsigned char *)0x00003190U) + (int)local_60))) {
           FUN_00106804(param_1,iVar6,uVar17,*(undefined4 *)(param_2 + 8));
           iVar24 = local_f4[0];
           iVar7 = FUN_001054ec(param_1,3);

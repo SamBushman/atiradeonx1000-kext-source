@@ -1664,7 +1664,7 @@ code_r0x00003264:
   case 0x102:
     if ((*(uint *)(param_1 + 0x154) & 3) == 0) {
       iVar28 = *(int *)(param_1 + 0x10);
-      if (*(int *)((*(unsigned char *)0x00002e40) + iVar28) != 0) {
+      if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
         if (((unsigned char *)0x00003190)[iVar28] == '\0') {
           iVar19 = *(int *)(param_1 + 0x15c);
           iVar26 = *(int *)(param_1 + 0x160);
@@ -1956,7 +1956,7 @@ code_r0x00003264:
     }
     else {
       iVar28 = *(int *)(param_1 + 0x10);
-      if (*(int *)((*(unsigned char *)0x00002e40) + iVar28) != 0) {
+      if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
         if (((unsigned char *)0x00003190)[iVar28] == '\0') {
           iVar19 = *(int *)(param_1 + 0x15c);
           iVar26 = *(int *)(param_1 + 0x160);
