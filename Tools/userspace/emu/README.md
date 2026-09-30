@@ -18,3 +18,9 @@ Setup (nothing is installed system-wide): `pip install --break-system-packages -
 Emulator details that matter: zero-fill sections are zeroed; non-lazy pointers to symbols defined in the image are filled from the indirect symbol table (imports get a name-keyed sentinel);
 dyld stubs and calls to address 0 return 0; a data read from the image's own code marks the run as meaningless (`bad_read`); the fake context has a valid caps block
 (`A+4 -> +0x10 -> bytes at +0x2d48`), without which loops that read `((unsigned char *)0x2d48)[p + 4]` run on garbage.
+
+## Hardware differential (G5, gdb): `hwdiff.py`, `hwdiff2.py`, `hwseq.py`
+`hwseq.py LIST STOPFUN` prints the ORDER in which the listed functions are entered until the first entry of STOPFUN, stock (`break *0x1008000+addr`; the driver loads at 0x1008000)
+vs rebuilt (`break *FUN_x` - the EXACT entry: `break FUN_x` skips the prologue and misses small leaf functions), and the first divergence. `hwdiff2.py` compares hit counts
+(`ignore N 1000000` counts without stopping). Traps: gdb-696 needs its script piped (`cat script | gdb`), not redirected; a missing symbol aborts numbering of later `commands`;
+`pkill` does not exist on Tiger; software `watch` on the whole run takes hours.

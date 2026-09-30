@@ -1143,7 +1143,7 @@ for pdir_, f in _part_files:
                 uses_link = True
             for _lv, _lt, _rp in anchor_edits.get(mm.group(1), []):
                 txt = re.sub(r'(?m)^(\s*)%s = %s;' % (re.escape(_lv), re.escape(_lt)), lambda x_: '%s%s = %s;' % (x_.group(1), _lv, _rp), txt)
-            if cfg.get('mirror_frames'):
+            if cfg.get('mirror_frames') and mm.group(1) not in cfg.get('mirror_skip', []):
                 txt, nmir = rewrites.mirror_frame(txt, cfg.get('mirror_stackaddr', True))
                 mirrored_total[0] += nmir
             txt, nbuf = rewrites.fix_byte_buffers(txt)
