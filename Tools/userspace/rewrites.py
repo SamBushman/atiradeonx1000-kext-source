@@ -241,6 +241,10 @@ def _sub_addr_of(body, nm, repl):
 # ------------------------------------------------------------------------------------------------ byte buffers declared as scalars
 BYTE_TYPES = ('char', 'undefined1', 'byte', 'uchar', 'undefined', 'unsigned char')
 DECL = re.compile(r'(?m)^(\s+)([A-Za-z_][\w ]*?)[\s*]+((?:local|\w+Stack)_([0-9a-f]+))(?:\s*\[\s*(\d+)\s*\])?;')
+# mirror_frame also takes the corpus's hand-merged buffers: `local_c08c_buf [0x2400]` (hex count, `_buf` suffix; the hex in the name is the frame offset
+# of the buffer's LOWEST byte, like any other local's). Left out, such a buffer stayed a separate object while the scalars Ghidra saw inside it
+# (local_9e58 = state+0x2234 of FUN_000cae90's per-context state) were mirrored elsewhere, so the callee read a word nobody wrote.
+DECL_MIRROR = re.compile(r'(?m)^(\s+)([A-Za-z_][\w ]*?)[\s*]+((?:local|\w+Stack)_([0-9a-f]+)(?:_buf)?)(?:\s*\[\s*(0x[0-9a-fA-F]+|\d+)\s*\])?;')
 
 
 def fix_byte_buffers(chunk):
@@ -389,7 +393,7 @@ def mirror_frame(chunk, stackaddr=True):
     end_decl = body.find('\n\n', 2)
     decl_part = body[:end_decl] if end_decl > 0 else body
     decls = []
-    for m in DECL.finditer(decl_part):
+    for m in DECL_MIRROR.finditer(decl_part):
         ty, nm, cnt = m.group(2).strip(), m.group(3), m.group(5)
         if ty in ('return', 'else', 'goto', 'case') or '(' in m.group(0):
             continue
@@ -397,7 +401,7 @@ def mirror_frame(chunk, stackaddr=True):
         size = 4 if stars else FRAME_SIZES.get(ty)
         if size is None:
             return chunk, 0                 # a struct-typed frame variable (dylib, dwarf_eh_bases): size unknown here
-        n = int(cnt) if cnt else 1
+        n = int(cnt, 0) if cnt else 1
         decls.append(dict(line=m.group(0), ty=ty + (' ' + '*' * stars if stars else ''), nm=nm, off=int(m.group(4), 16), size=size, n=n, arr=cnt is not None))
     if not decls:
         return chunk, 0

@@ -3240,7 +3240,7 @@ LAB_000293b0:
       uStack_a8 = uStack_e8;
       iStack_90 = param_4;
       iStack_8c = param_5;
-      _glgConvertType(param_6,param_7);
+      _glgConvertType(param_6,param_7,puVar11,puVar12);
       piVar19 = *(int **)(param_1 + 0x150);
       if (piVar19 == (int *)0x0) {
         aiStack_e0[2] = param_2;

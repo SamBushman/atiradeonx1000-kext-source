@@ -337,6 +337,10 @@ PATCHES = {
     # with `lwz r3,0xe1c(r30); or r4,r29,r29; lwz r5,0xe30(r30); bl` (RECT: 0x97be1624..0x97be1630; the entry is `b ..RECTFromLevelRTCAV`, whose body reads r5 -
     # the code-emit pointer). The 2D/3D calls print `,in_r5)` after `in_r5 = *(param_1 + 0xe30)`, the RECT call kept the assignment and lost the argument
     # (callarg_check.py, computed-source arguments, issue #70 criterion 2): the rebuilt RECT sampler wrote its code at whatever r5 held.
+    # FUN_00029290 (gld, stock 0x29570): `_glgConvertType(format, type, &out1, &out2)` = `mr r3,r24; mr r4,r18; addi r5,r1,0x8c; addi r6,r1,0x90; bl` (frame size 0x130:
+    # r1+0x8c = Stack_a4, r1+0x90 = Stack_a0, the two locals Ghidra copied to puVar11/puVar12 just before). Ghidra printed only the first two arguments, so the rebuilt
+    # glReadPixels path passed a stale r5 (0x40) and glgConvertType stored through it (SIGBUS after the first draw, link_corpus build, issue #64 follow-up).
+    'FUN_00029290': _scoped('gld', lambda raw, conv: _re_subs(conv, r'_glgConvertType\(param_6,param_7\);', '_glgConvertType(param_6,param_7,puVar11,puVar12);', 1, 'FUN_00029290 glgConvertType (0x29570)')),
     '_PPCRuntimeCompilerCompileAV': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'_PPCTextureSamplerSampleTexelRECTRTCAV\s*\(\*\(undefined4 \*\)\(param_1 \+ 0xe1c\),uVar8\);', '((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);', 1, '_PPCRuntimeCompilerCompileAV RECT sampler (0x97be1630)')),
     # FUN_000b5fb0 (gld, stock 0xb5fb0; issue #79): destroys the four per-context slots `ctx+0x1448..0x1454`: `lwz r4,0x1448(r30)` (the object) BEFORE the `beq`
     # that skips an empty slot, then `lwz r0,0x1224(r29); stw r27,0x1448(r30); or r3,r29,r29; bctrl` - the callback is (ctx, obj) (FUN_00087cd0). The load sits in another
