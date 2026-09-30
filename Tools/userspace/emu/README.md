@@ -1,16 +1,20 @@
-# Differential emulation: stock vs rebuilt GLDriver (#81, #82, #83)
+# Differential emulation: stock vs rebuilt GLDriver (#81)
 
-Runs a function of the stock bundle and the same function of the rebuilt bundle (`out_*` from `build.sh` on the G5) in a PPC emulator (unicorn) on the SAME fake
-context, with the dispatch table (`*(ctx+0x3d4) + 0x12e4..0x132c`) pointing at logging hooks, and compares every hooked call: r3..r10 and the stack words the slot's
-callee takes. Pointers into the images are normalised to `DAT_x + offset` through the rebuilt image's `nm` (a DAT symbol's stock address is in its name).
+Runs a function of the stock bundle and the same function of a rebuilt bundle in a PPC emulator (unicorn) on the SAME fake context and compares what they do.
+The rebuilt bundle must come from the real link stage (`relink.sh NAME` = `link_corpus.py` -> G5 `build.sh` -> local `rebuilt_NAME.{bin,nm}`); a build from the raw
+`part_*.c` + raw `decls.h` is NOT representative (that mistake produced #82/#83, since retracted: the link stage types data externs, mirrors frames, symbolises literals).
 
-Setup (nothing is installed system-wide):
-    pip install --break-system-packages --target /tmp/upkgs unicorn
-    scp G5:/System/Library/Extensions/ATIRadeonX1000GLDriver.bundle/Contents/MacOS/ATIRadeonX1000GLDriver /tmp/emu/stock.bin     # fat: the ppc slice is used
-    scp G5:'.../out_xx' /tmp/emu/rebuilt.bin ; ssh G5 nm -n .../out_xx > /tmp/emu/rebuilt.nm         # RBIN / RNM override the paths
-Use:  `python3 first.py FUN_00099e50 3 400 3`  (first diverging call per seed, NOSTK=1 ignores stack-array contents)
-      `python3 sites.py FUN_00097440 400`      (per hand-written site: aligned-equal / call-equal / CALL-DIFFERS / rebuilt-missing)
-Emulator details that matter: zero-fill sections are zeroed, non-lazy pointers to symbols defined in the image are filled from the indirect symbol table,
-dyld stubs and calls to address 0 return 0.
-What it found: #82 (scalar DAT globals read as bytes), #83 (stack locals a callee reaches through a pointer laid out by gcc instead of like the stock), #84 (raw stock
-addresses as C integers).
+* `first.py FN NARGS SEEDS [SHOW]`  - the first diverging dispatch call per seed (dispatch table hooked: `*(ctx+0x3d4)+0x12e4..0x132c` are logging stubs; r3..r10 + the stack words
+  the slot's callee takes are compared). `NOSTK=1` ignores the contents of stack arrays.
+* `cat1.py FN SEEDS`                - one line of JSON: runs reached / identical / divergence categories (used over the 78 functions that call through the table:
+  440 of 441 runs identical on the r6 build).
+* `sites.py FN SEEDS`               - per hand-written stack-word site: aligned-equal / call-equal / CALL-DIFFERS / rebuilt-missing.
+* `eff.py FN NARGS SEEDS`           - generic: return value, ctx/A/heap/stack-buffer writes and dispatch calls of any function. A sweep over all 3,900 functions is noisy (16 runs each,
+  6 register args): pointer arguments that are not pointers, functions that read their caller's stack, dyld-bound pointer cells and vtable pointer stores make a difference
+  that is not a defect. Treat its list as candidates only.
+
+Setup (nothing is installed system-wide): `pip install --break-system-packages --target /tmp/upkgs unicorn`; stock.bin = the G5's
+`/System/Library/Extensions/ATIRadeonX1000GLDriver.bundle/Contents/MacOS/ATIRadeonX1000GLDriver` (fat, the ppc slice is used); `RBIN` / `RNM` point at the rebuilt image and its `nm -n`.
+Emulator details that matter: zero-fill sections are zeroed; non-lazy pointers to symbols defined in the image are filled from the indirect symbol table (imports get a name-keyed sentinel);
+dyld stubs and calls to address 0 return 0; a data read from the image's own code marks the run as meaningless (`bad_read`); the fake context has a valid caps block
+(`A+4 -> +0x10 -> bytes at +0x2d48`), without which loops that read `((unsigned char *)0x2d48)[p + 4]` run on garbage.

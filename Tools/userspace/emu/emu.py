@@ -13,7 +13,7 @@ def load(path):
             ct, cs, o, sz, al = struct.unpack('>5I', d[8+20*i:28+20*i])
             if ct == 18: d = d[o:o+sz]; break
     magic, ct, cs, ft, ncmds, socm, flags = struct.unpack('>7I', d[:28])
-    p = 28; segs = []; stubs = []; zero = []; symtab = None; indirect = None; ptrsecs = []
+    p = 28; segs = []; stubs = []; zero = []; symtab = None; indirect = None; ptrsecs = []; textr = []
     for i in range(ncmds):
         cmd, size = struct.unpack('>2I', d[p:p+8])
         if cmd == 1:
@@ -21,6 +21,7 @@ def load(path):
             q = p + 56
             for j in range(ns):
                 sn = d[q:q+16].rstrip(b'\0').decode(); a, s, o, al, ro, nr, f = struct.unpack('>7I', d[q+32:q+60])
+                if sn == '__text': textr.append((a, a + s))
                 if 'stub' in sn: stubs.append((a, a + s))
                 if (f & 0xff) in (1, 0xc, 0x12): zero.append((a, s))
                 if (f & 0xff) in (6, 7): ptrsecs.append((a, s, struct.unpack('>I', d[q+60:q+64])[0]))
@@ -38,11 +39,16 @@ def load(path):
                 if idx >= 0x40000000 or idx >= nsyms: continue
                 nt, ns_, ndesc, nval = struct.unpack('>BBHI', d[symoff + 12 * idx + 4:symoff + 12 * idx + 12])
                 if (nt & 0x0e) == 0x0e and nval: fill.append((a + 4 * k, nval))
-    return segs, stubs, zero, fill
+                elif (nt & 0x0e) == 0 and idx < nsyms:          # an import: the same sentinel for the same name in every image (a dyld-bound cell)
+                    strx = struct.unpack('>I', d[symoff + 12 * idx:symoff + 12 * idx + 4])[0]
+                    nm_ = d[stroff + strx:d.index(b'\0', stroff + strx)]
+                    import zlib
+                    fill.append((a + 4 * k, 0x60000000 + ((zlib.crc32(nm_) & 0xffffff) << 4)))
+    return segs, stubs, zero, fill, textr
 
 class Image:
     def __init__(self, path, nm_syms):
-        self.segs, self.stubs, self.zero, self.fill = load(path)
+        self.segs, self.stubs, self.zero, self.fill, self.textr = load(path)
         self.syms = nm_syms
 
 STACK = 0x7f000000; STACK_SIZE = 0x100000
@@ -69,6 +75,8 @@ class Runner:
         self.log = []; self.n = 0
         uc.hook_add(UC_HOOK_CODE, self.code_hook)
         uc.hook_add(UC_HOOK_MEM_UNMAPPED, self.unmapped)
+        self.bad_read = False
+        uc.hook_add(UC_HOOK_MEM_READ, self.mem_read)
         self.stubranges = img.stubs
 
     def unmapped(self, uc, access, addr, size, value, ud):
@@ -77,6 +85,10 @@ class Runner:
         except Exception: return False
         self.autopages.append(base)
         return True
+
+    def mem_read(self, uc, access, addr, size, value, ud):
+        # a data read from the image's own code (or below it): a pointer argument that is not one - the run says nothing about the function
+        if addr < 0x1000 or any(lo <= addr < hi for lo, hi in self.img.textr): self.bad_read = True
 
     def word(self, a): return struct.unpack('>I', bytes(self.uc.mem_read(a, 4)))[0]
 
@@ -117,7 +129,7 @@ class Runner:
         # hook code area: nothing to write (hooked by address)
 
     def call(self, entry, args, limit=300000):
-        uc = self.uc; self.log = []; self.n = 0; self.limit = limit; self.status = '?'
+        uc = self.uc; self.log = []; self.n = 0; self.limit = limit; self.status = '?'; self.bad_read = False
         for i in range(32): uc.reg_write(UC_PPC_REG_0 + i, 0)
         sp = STACK + STACK_SIZE - 0x1000
         uc.reg_write(UC_PPC_REG_1, sp)
@@ -145,5 +157,9 @@ def mkmem(rng, entries):
     for k in (0x3ec, 0x3f0):
         struct.pack_into('>I', ctx, k, HEAP + (rng.randrange(0, 0x40000) & ~0xf))
     for i, s in enumerate(SLOTS): struct.pack_into('>I', a, s, HOOK + 16 * i)
-    for off in (4,): struct.pack_into('>I', a, off, HEAP + (rng.randrange(0, 0x40000) & ~0xf))
+    p1 = rng.randrange(0x1000, 0x20000) & ~0xf
+    struct.pack_into('>I', a, 4, HEAP + p1)                              # A+4 -> chip struct; +0x10 -> caps block whose bytes at +0x2d48.. are small counts
+    p2 = rng.randrange(0x20000, 0x60000) & ~0xf
+    struct.pack_into('>I', heap, p1 + 0x10, HEAP + p2)
+    heap[p2 + 0x2d4c] = rng.randrange(0, 4); heap[p2 + 0x2d4d] = rng.randrange(0, 2)
     return bytes(ctx), bytes(heap), bytes(a)

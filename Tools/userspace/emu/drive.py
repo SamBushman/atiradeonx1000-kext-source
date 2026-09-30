@@ -21,6 +21,16 @@ TAB = {'s': table('s'), 'r': table('r')}
 KEYS = {k: [a for a, n in v] for k, v in TAB.items()}
 IMG = {'s': (0, 0x200000), 'r': (0, 0x800000)}
 
+# canonical form: an address inside a named object of the image is expressed as the STOCK address it corresponds to (stock name hex + offset); anything else is an int
+_ext = {}
+def _mk(which):
+    rows = []
+    for n, a in rsyms.items():
+        m_ = re.match(r'(?:DAT|PTR_DAT|LD|SYM|PTR_FUN|UNK|FUN|s_)\w*?_([0-9a-f]{5,8})$', n) if n.startswith(('DAT_', 'PTR_DAT_', 'LD_', 'SYM_', 'PTR_FUN_', 'UNK_', 'FUN_')) else None
+        if m_: rows.append((a, int(m_.group(1), 16)))
+    rows.sort()
+    return rows
+_R = _mk('r'); _RK = [a for a, s_ in _R]
 def norm(which, w, snaps=None):
     if w is None: return None
     if w >= 0xfffff000: return ('const', w)
@@ -29,12 +39,14 @@ def norm(which, w, snaps=None):
     if CTXA <= w < CTXA + CTX_SIZE: return ('ctx', w - CTXA)
     if AA <= w < AA + A_SIZE: return ('A', w - AA)
     if HOOK <= w < HOOK + 0x1000: return ('hook', (w - HOOK) // 16)
-    lo, hi = IMG[which]
-    if 0x1000 <= w < hi:
-        i = bisect.bisect_right(KEYS[which], w) - 1
-        if i >= 0 and w - KEYS[which][i] < 0x2000:
-            a, n = TAB[which][i]; return ('sym', n, w - a)
-        return ('img?', )
+    if which == 's':
+        return ('img', w) if 0x1000 <= w < 0x210000 else ('int', w)
+    if 0x1000 <= w < 0x800000:
+        i = bisect.bisect_right(_RK, w) - 1
+        if i >= 0:
+            a, sa = _R[i]
+            nxt = _RK[i + 1] if i + 1 < len(_RK) else a + 4
+            if w - a < min(nxt - a, 0x10000): return ('img', sa + (w - a))
     return ('int', w)
 
 NW = {0x12e4:4,0x12ec:4,0x12f0:4,0x1300:4,0x1304:4,0x1308:4,0x130c:4,0x1324:4,0x1328:4,0x12f4:8,0x12f8:8,0x12fc:8,0x132c:8}
