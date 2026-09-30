@@ -535,6 +535,50 @@ if cfg.get('symbolize_literals_ctx'):
             f_.write('extern unsigned char %s asm("%s");\n' % (nm, nm))
     print('%d context-symbolised data address literals' % len(ctx_lit_syms))
 
+# PIC anchors folded into numbers: the stock builds a data pointer as `anchor + offset` (`addis/addi` off the PIC base; Ghidra prints `local_58 = 0x1d6d90;` or
+# `local_60 = FUN_001d8514;` and later `((unsigned char *)0x4ff4) + iVar7` = DAT_001dbd84). The anchor itself is not an address of anything (it lies in code or
+# between objects), so no literal pass touches it and the rebuilt image, whose sections sit elsewhere, hands the callee a stock address. An assignment
+# `v = L;` of such a value whose uses add ONE constant K (or several that land in one section) is rewritten to `v = (int)&SYM_T - K`, T = L + K the address the
+# stock reaches, so the target follows the rebuilt layout (FUN_00096d80: the descriptor table pointer of every 0x12f4/0x12ec dispatch was a stock address).
+anchor_edits = {}     # function name -> [(variable, literal text, replacement)]
+anchor_skipped = []
+if cfg.get('symbolize_anchors'):
+    _hdr = re.compile(r'(?m)^/\* (\S+) @ 0x[0-9a-f]+ \(\d+ bytes\) \*/\n')
+    _hs = list(_hdr.finditer(body))
+    for _i, _h in enumerate(_hs):
+        _chunk = body[_h.end():_hs[_i + 1].start() if _i + 1 < len(_hs) else len(body)]
+        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = (0x[0-9a-f]{5,6}|FUN_00[0-9a-f]{6});', _chunk):
+            _lv, _lt = _a.group(1), _a.group(2)
+            _L = int(_lt[4:], 16) if _lt.startswith('FUN_') else int(_lt, 16)
+            if not (0x1000 <= _L < img_hi) or _L & 0xffff == 0 or _lv in [e_[0] for e_ in anchor_edits.get(_h.group(1), [])]: continue
+            _al = {_lv}      # the variable and the variables it is copied into (`iVar7 = local_58;`)
+            for _r in range(2):
+                _al |= set(re.findall(r'(?m)^\s*([A-Za-z_]\w*) = (?:\([\w ]+\*?\))?(?:%s);' % '|'.join(re.escape(x_) for x_ in _al), _chunk))
+            _ks = set()
+            for _v in _al:
+                _ks |= set(int(x, 16) for x in re.findall(r'\(\(unsigned char \*\)0x0*([0-9a-f]+)\)\s*\+\s*(?:\(int\))?%s\b' % _v, _chunk))
+                _ks |= set(int(x, 16) for x in re.findall(r'\b%s\s*\+\s*0x0*([0-9a-f]+)\b' % _v, _chunk))
+                _ks |= set(int(x, 16) for x in re.findall(r'\b0x0*([0-9a-f]+)\s*\+\s*(?:\(int\))?%s\b' % _v, _chunk))
+            _ks = sorted(k_ for k_ in _ks if k_ >= 0x100)
+            if not _ks: continue
+            _ts = [_L + k_ for k_ in _ks]
+            _secs = [m.sec_at(t_) if img_lo <= t_ < img_hi else None for t_ in _ts]
+            if any(s_ is None or in_code(t_) or s_['name'] in ('__eh_frame', '__gcc_except_tab', '__dyld', '__la_symbol_ptr', '__nl_symbol_ptr') for s_, t_ in zip(_secs, _ts)) or len(set(s_['name'] for s_ in _secs)) != 1:
+                anchor_skipped.append((_h.group(1), _lv, hex(_L), [hex(k_) for k_ in _ks])); continue
+            _T, _K, _sec = _ts[0], _ks[0], _secs[0]
+            if (_sec['flags'] & 0xff) in (1, 0xc):
+                _cands = [a_ for a_ in set(a2 for a2 in needed.values() if a2 is not None) | set(nlist_by_addr) if _sec['addr'] <= a_ <= _T]
+                if not _cands or any(max(a_ for a_ in _cands if a_ <= t_) != max(_cands) for t_ in _ts): anchor_skipped.append((_h.group(1), _lv, hex(_L), 'zerofill')); continue
+                _b = max(_cands)
+            else:
+                _b = _T & ~3
+            needed['SYM_%x' % _b] = _b
+            anchor_edits.setdefault(_h.group(1), []).append((_lv, _lt, '((int)&SYM_%x + %d - 0x%x)' % (_b, _T - _b, _K)))
+    with open(os.path.join(out, 'decls.h'), 'a') as f_:
+        for _nm in sorted(set(re.search(r'SYM_[0-9a-f]+', r_[2]).group(0) for v_ in anchor_edits.values() for r_ in v_)):
+            f_.write('extern unsigned char %s asm("%s");\n' % (_nm, _nm))
+    print('%d anchor assignments symbolised in %d functions (%d skipped)' % (sum(len(v_) for v_ in anchor_edits.values()), len(anchor_edits), len(anchor_skipped)))
+
 # names that are really numeric constants Ghidra labelled as data (`&DAT_00010001` = 0x10001, an address in no section of the image, or `UINT_00002ee0` in code)
 const_names = []
 for nm, a in sorted(needed.items()):
@@ -1064,6 +1108,8 @@ for pdir_, f in _part_files:
             pair_total[0] += npair
             if npair:
                 uses_link = True
+            for _lv, _lt, _rp in anchor_edits.get(mm.group(1), []):
+                txt = re.sub(r'(?m)^(\s*)%s = %s;' % (re.escape(_lv), re.escape(_lt)), lambda x_: '%s%s = %s;' % (x_.group(1), _lv, _rp), txt)
             if cfg.get('mirror_frames'):
                 txt, nmir = rewrites.mirror_frame(txt, cfg.get('mirror_stackaddr', True))
                 mirrored_total[0] += nmir
@@ -1123,6 +1169,9 @@ for pdir_, f in _part_files:
             unpatched.append((mm.group(1), status))
         o.append('\n'.join(ch))
     src = '\n'.join(o)
+    # the corpus carries `asm(".globl FUN_x"); asm(".set FUN_x, _FUN_x")` / `_thunk_FUN_x` alias pairs for the raw-declaration builds; here every function already has its own
+    # asm label (link_decls.h), so the aliases would reference the undefined `_FUN_x`
+    src = re.sub(r'(?m)^asm\("\.(?:globl|set) [^"]*"\);\n', '', src)
     _defined_here = set()
     for ch_ in chunks:
         mm_ = hdr.match(ch_[0])

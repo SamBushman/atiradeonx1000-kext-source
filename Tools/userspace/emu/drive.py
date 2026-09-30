@@ -13,6 +13,9 @@ def table(which):
         m = re.match(r'(?:DAT|FUN|PTR_DAT|PTR_FUN|s_|switchD)\w*?_?([0-9a-f]{8})$', n)
         if m and n.startswith(('DAT_', 'PTR_DAT_')):
             t.append((a if which == 'r' else int(m.group(1), 16), n))
+        m2 = re.match(r'LD_([0-9a-f]+)$', n)
+        if m2:
+            t.append((a if which == 'r' else int(m2.group(1), 16), n))
     t.sort(); return t
 TAB = {'s': table('s'), 'r': table('r')}
 KEYS = {k: [a for a, n in v] for k, v in TAB.items()}

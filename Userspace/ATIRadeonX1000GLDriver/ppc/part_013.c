@@ -5190,7 +5190,7 @@ LAB_00092420:
       uVar6 = **(undefined4 **)(param_1 + 0x3ec);
       uVar5 = **(undefined4 **)(param_1 + 0x3f0);
       (**(code **)(((unsigned char *)0x000012e4) + iVar2))
-                (param_1,uVar5,local_64,auStack_60,uVar6,iVar3,&DAT_001dbd74,&DAT_001fa5e8,uVar6,iVar4,&DAT_001dbd74,&DAT_001fa5e8);
+                (param_1,uVar5,local_64,auStack_60,uVar6,iVar3,&DAT_001dbd74,&DAT_001fa5e8,uVar6,(*(char *)(iVar2 + 0x128) == '\0' ? (*(char *)(iVar2 + 300) == '\0' ? *(int *)(param_1 + 0x448) : *(int *)(param_1 + 0x470)) : *(int *)(param_1 + 0x498)),&DAT_001dbd74,&DAT_001fa5e8);
       iVarS1 = &DAT_001dbd74;
       iVarS2 = &DAT_001dbd94;
       iVarS3 = *(int *)((int)param_1 + 1056);
