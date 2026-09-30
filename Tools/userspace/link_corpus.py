@@ -558,6 +558,7 @@ if cfg.get('symbolize_anchors'):
             for _v in _al:
                 _ks |= set(int(x, 16) for x in re.findall(r'\(\(unsigned char \*\)0x0*([0-9a-f]+)\)\s*\+\s*(?:\(int\))?%s\b' % _v, _chunk))
                 _ks |= set(int(x, 16) for x in re.findall(r'\b%s\s*\+\s*0x0*([0-9a-f]+)\b' % _v, _chunk))
+                _ks |= set(int(x) for x in re.findall(r'\b%s\s*\+\s*(\d{3,})\b' % _v, _chunk))
                 _ks |= set(int(x, 16) for x in re.findall(r'\b0x0*([0-9a-f]+)\s*\+\s*(?:\(int\))?%s\b' % _v, _chunk))
             _ks = sorted(k_ for k_ in _ks if k_ >= 0x100)
             if not _ks: continue
@@ -574,6 +575,38 @@ if cfg.get('symbolize_anchors'):
                 _b = _T & ~3
             needed['SYM_%x' % _b] = _b
             anchor_edits.setdefault(_h.group(1), []).append((_lv, _lt, '((int)&SYM_%x + %d - 0x%x)' % (_b, _T - _b, _K)))
+        # `v = &PTR_DAT_001f4850;` used as `v + 0x1766` (pointer arithmetic by the element size of v's type): Ghidra folded `&other_object` into `&this + k*elem`; the
+        # sum leaves this object (and may leave its section), so it is expressed from the object the stock reaches
+        _ESZ = {'undefined': 1, 'char': 1, 'byte': 1, 'uchar': 1, 'undefined1': 1, 'undefined2': 2, 'short': 2, 'ushort': 2}
+        for _a in re.finditer(r'(?m)^\s*([A-Za-z_]\w*) = &(\w+_[0-9a-f]{8});', _chunk):
+            _lv, _nm0 = _a.group(1), _a.group(2)
+            _A0 = addr_of_name(_nm0)
+            if _A0 is None or not (img_lo <= _A0 < img_hi) or _lv in [e_[0] for e_ in anchor_edits.get(_h.group(1), [])]: continue
+            _dm = re.search(r'(?m)^  ([A-Za-z_][\w ]*?)\s*(\**)\s*%s;' % _lv, _chunk)
+            if not _dm: continue
+            _nst = len(_dm.group(2)) + _dm.group(1).count('*')
+            _esz = 4 if _nst >= 2 else _ESZ.get(_dm.group(1).split()[-1], 4) if _nst == 1 else None
+            if _esz is None: continue
+            _al = {_lv}
+            _ksb = set(int(x, 16) for x in re.findall(r'(?<!\(int\))\b%s\s*\+\s*0x0*([0-9a-f]+)\b' % _lv, _chunk))
+            _ksb = set(k_ * _esz for k_ in _ksb)                         # `v + k` is scaled by the element size, `(int)v + k` is bytes
+            _ksb |= set(int(x, 16) for x in re.findall(r'\(int\)%s\s*\+\s*0x0*([0-9a-f]+)\b' % _lv, _chunk))
+            _ksb |= set(int(x) for x in re.findall(r'\(int\)%s\s*\+\s*(\d{3,})\b' % _lv, _chunk))
+            _ks = sorted(k_ for k_ in _ksb if k_ >= 0x400)
+            if not _ks: continue
+            _ts = [_A0 + k_ for k_ in _ks]
+            _secs = [m.sec_at(t_) if img_lo <= t_ < img_hi else None for t_ in _ts]
+            if any(s_ is None or in_code(t_) or s_['name'] in ('__eh_frame', '__gcc_except_tab', '__dyld', '__la_symbol_ptr', '__nl_symbol_ptr') for s_, t_ in zip(_secs, _ts)) or len(set(s_['name'] for s_ in _secs)) != 1:
+                anchor_skipped.append((_h.group(1), _lv, _nm0, [hex(k_) for k_ in _ks])); continue
+            _T, _K, _sec = _ts[0], _ks[0], _secs[0]
+            if (_sec['flags'] & 0xff) in (1, 0xc):
+                _cands = [a_ for a_ in set(a2 for a2 in needed.values() if a2 is not None) | set(nlist_by_addr) if _sec['addr'] <= a_ <= _T]
+                if not _cands or any(max(a_ for a_ in _cands if a_ <= t_) != max(_cands) for t_ in _ts): anchor_skipped.append((_h.group(1), _lv, _nm0, 'zerofill')); continue
+                _b = max(_cands)
+            else:
+                _b = _T & ~3
+            needed['SYM_%x' % _b] = _b
+            anchor_edits.setdefault(_h.group(1), []).append((_lv, '&' + _nm0, '((%s)((int)&SYM_%x + %d - %d))' % ((_dm.group(1) + ' ' + _dm.group(2)).strip() + (' *' if False else '') if False else 'void *', _b, _T - _b, _K)))
     with open(os.path.join(out, 'decls.h'), 'a') as f_:
         for _nm in sorted(set(re.search(r'SYM_[0-9a-f]+', r_[2]).group(0) for v_ in anchor_edits.values() for r_ in v_)):
             f_.write('extern unsigned char %s asm("%s");\n' % (_nm, _nm))
