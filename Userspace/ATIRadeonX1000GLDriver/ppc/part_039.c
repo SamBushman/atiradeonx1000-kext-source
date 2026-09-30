@@ -609,7 +609,7 @@ int FUN_00128d7c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   if ((bVar3 & 8) != 0) {
     return;
   }
-  iVar4 = FUN_00173e10(param_3,-param_2[5]);
+  iVar4 = FUN_00173e10(param_3,GH_F2U(-param_2[5]));
   if (*(char *)(iVar4 + 8) == '\0') {
     bVar3 = *(byte *)(iVar4 + 9);
   }
@@ -631,7 +631,7 @@ LAB_00128e28:
   iVar4 = -3;
   pfVar6 = (float *)&DAT_001aff4c;
   do {
-    iVar5 = FUN_00173e10(param_3,*param_2 * *pfVar6);
+    iVar5 = FUN_00173e10(param_3,GH_F2U(*param_2 * *pfVar6));
     if (*(char *)(iVar5 + 8) == '\0') {
       bVar3 = *(byte *)(iVar5 + 9);
 LAB_00128e98:
@@ -658,7 +658,7 @@ LAB_00128e98:
       pfVar6 = (float *)&DAT_001aff4c;
       iVar4 = -3;
       do {
-        iVar5 = FUN_00173e10(param_3,-*param_2 * *pfVar6);
+        iVar5 = FUN_00173e10(param_3,GH_F2U(-*param_2 * *pfVar6));
         if (*(char *)(iVar5 + 8) == '\0') {
           *(undefined4 *)(iVar5 + 0x20) = 0x31;
           FUN_00176280(iVar5,param_2);
@@ -1612,7 +1612,7 @@ int FUN_0012a3c0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   
   if ((((*(char *)(param_2 + 8) != '\0') && (bVar2 = *(byte *)(param_2 + 9), (bVar2 & 1) == 0)) &&
       ((bVar2 & 2) == 0)) && (((bVar2 & 4) == 0 && ((bVar2 & 8) == 0)))) {
-    iVar3 = FUN_00173e10(param_3,-*(float *)(param_2 + 0x14));
+    iVar3 = FUN_00173e10(param_3,GH_F2U(-*(float *)(param_2 + 0x14)));
     if (*(char *)(iVar3 + 8) == '\0') {
       bVar2 = *(byte *)(iVar3 + 9);
     }

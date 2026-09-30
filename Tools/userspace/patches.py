@@ -359,6 +359,12 @@ PATCHES = {
     'FUN_000f6d14': _scoped('gld', lambda raw, conv: _subs(conv, [('param_21, param_22)\n', 'param_21, param_22, param_23)\n'), ('  int param_22;\n{', '  int param_22;\n  undefined4 param_23;\n{'), ('    local_270[9] = (int *)param_17;\n', '    local_270[9] = (int *)param_17;\n    local_270[10] = (int *)param_23;\n')], 'FUN_000f6d14 param_23')),
     'FUN_000f771c': _scoped('gld', lambda raw, conv: _re_subs(conv, r'(local_78,local_74,1)\);', r'\1,param_7);', 1, 'FUN_000f771c 23rd word')),
     'FUN_000f7870': _scoped('gld', lambda raw, conv: _re_subs(conv, r'(local_78,local_74,3)\);', r'\1,param_7);', 1, 'FUN_000f7870 23rd word')),
+    # FUN_00173e10(ctx, key) looks the 32-bit KEY up in a hash table (`FUN_00172af4` hashes *key, `FUN_00172b2c` compares): the float constants of the fragment program arrive as their raw
+    # bit patterns in r4 (stock: stfs/lwz, or the float is already in an integer register). Ghidra printed the float expression itself, which an unprototyped call promotes to a double in an FPR,
+    # so the rebuilt looked up garbage, never found the existing constant entry and created a new one (hwseq over 1798 functions: FUN_00172b2c x3 in stock, FUN_00172ee8 (create) in the rebuilt).
+    'FUN_00128d7c': _scoped('gld', lambda raw, conv: _re_subs(conv, r'(FUN_00173e10\(param_3,)((?:-|-\*|\*)(?:param_2(?:\[5\])?|\*param_2 \* \*pfVar6)[^;]*?)\);', r'\1GH_F2U(\2));', 3, 'FUN_00128d7c float keys')),
+    'FUN_0012a3c0': _scoped('gld', lambda raw, conv: _re_subs(conv, r'FUN_00173e10\(param_3,(-\*\(float \*\)\(param_2 \+ 0x14\))\);', r'FUN_00173e10(param_3,GH_F2U(\1));', 1, 'FUN_0012a3c0 float key')),
+    'FUN_0017740c': _scoped('gld', lambda raw, conv: _re_subs(conv, r'FUN_00173e10\((\*\(undefined4 \*\)\(param_1 \+ 0x238\)),\(float\)fparam_1\);', r'FUN_00173e10(\1,GH_F2U((float)fparam_1));', 1, 'FUN_0017740c float key')),
     '_PPCRuntimeCompilerCompileAV': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'_PPCTextureSamplerSampleTexelRECTRTCAV\s*\(\*\(undefined4 \*\)\(param_1 \+ 0xe1c\),uVar8\);', '((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);', 1, '_PPCRuntimeCompilerCompileAV RECT sampler (0x97be1630)')),
     # FUN_000b5fb0 (gld, stock 0xb5fb0; issue #79): destroys the four per-context slots `ctx+0x1448..0x1454`: `lwz r4,0x1448(r30)` (the object) BEFORE the `beq`
     # that skips an empty slot, then `lwz r0,0x1224(r29); stw r27,0x1448(r30); or r3,r29,r29; bctrl` - the callback is (ctx, obj) (FUN_00087cd0). The load sits in another

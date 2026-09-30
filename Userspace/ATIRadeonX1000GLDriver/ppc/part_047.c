@@ -308,7 +308,7 @@ undefined4 FUN_0017740c(int param_1,int param_2,double fparam_1)
   int iVar5;
   
   piVar4 = (int *)(param_2 * 0x10 + param_1 + 0x168);
-  iVar2 = FUN_00173e10(*(undefined4 *)(param_1 + 0x238),(float)fparam_1);
+  iVar2 = FUN_00173e10(*(undefined4 *)(param_1 + 0x238),GH_F2U((float)fparam_1));
   iVar5 = 0;
   while ((iVar3 = FUN_001054ec(*(undefined4 *)(param_1 + 0xb0),0),
          *(char *)(iVar5 + iVar3 + 0x10) == '\x01' || (*piVar4 == *(int *)(iVar2 + 4)))) {
