@@ -3974,7 +3974,7 @@ int FUN_000f2bdc(param_1, param_2, param_3)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(unsigned char *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   (*(byte *)((unsigned char *)ghidra_home + 10)) = (byte)(param_3 >> 8);
   (*(byte *)((unsigned char *)ghidra_home + 9)) = (byte)(param_3 >> 0x10);
   (*(byte *)((unsigned char *)ghidra_home + 8)) = (byte)(param_3 >> 0x18);

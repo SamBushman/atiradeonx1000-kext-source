@@ -193,7 +193,7 @@ int FUN_001281f0(param_1, param_2, param_3, param_4)
   int iVar8;
   int iVar9;
   
-  (*(char *)((unsigned char *)ghidra_home + 12)) = param_4;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   bVar3 = true;
   *param_3 = 0xffffffff;
   iVar8 = 4;

@@ -753,3 +753,13 @@ def fix_unsigned_small_compare(chunk):
     stock gives false (FUN_0011f2f8: the swizzle-byte loop returned early for every node, the rebuilt never built the node's constant-source list; 22 GLDriver sites, 11 libGLProgrammability).
     Returns (chunk, number of rewrites)."""
     return _UNSIGNED_SMALL_CMP.subn(lambda m: '(uint)(%s - %s) %s %s' % (m.group(1), m.group(2), m.group(3), m.group(4)), chunk)
+
+
+_HOME_SUBWORD_STORE = re.compile(r'(?m)^(\s*)\(\*\((?:char|unsigned char|short|ushort|uchar|byte|signed char) \*\)(\(\(unsigned char \*\)ghidra_home \+ \d+\))\) = ((?:param_\d+)(?: & 0x[0-9a-f]+)?);')
+
+
+def fix_home_subword_store(chunk):
+    """fix_home_slots gave the function home words; Ghidra's own `cStack00000028 = (char)param_5` (the prologue's `stw r7,0x98(r1)` seen through a byte-typed stack
+    variable) became a one-BYTE store over the top byte of the word, although the function reads all four bytes of that word as a mask (`pcVar6 = &cStack28`, big-endian
+    byte 0 = the mask's top byte: FUN_000f3c30 returned 0x10100 where the stock returns 0x1010100). The spill is always a whole word. Returns (chunk, n)."""
+    return _HOME_SUBWORD_STORE.subn(lambda m: '%s(*(unsigned int *)%s) = %s;' % (m.group(1), m.group(2), m.group(3)), chunk)

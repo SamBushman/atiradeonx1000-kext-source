@@ -4059,7 +4059,7 @@ int _PPCRuntimeCompilerRegisterContainsData(param_1, param_2, param_3, param_4, 
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(short *)((unsigned char *)ghidra_home + 24)) = param_7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   (*(uint *)((unsigned char *)ghidra_home + 28)) = param_8;
   if (*(int *)(param_1 + 0xe4c) == 0) {
     iVar2 = param_2 * 0x38 + param_1;

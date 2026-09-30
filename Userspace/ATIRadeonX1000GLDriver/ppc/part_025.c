@@ -525,7 +525,7 @@ int FUN_000f3470(param_1, param_2)
   int iVar8;
   int iVar9;
   
-  (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   uVar3 = (*(unsigned char *)((unsigned char *)ghidra_home + 4));
   (*(byte *)((unsigned char *)ghidra_home + 4)) = (byte)(param_2 >> 0x18);
   uVar4 = (uint)(*(byte *)((unsigned char *)ghidra_home + 4));
@@ -574,7 +574,7 @@ int FUN_000f3470(param_1, param_2)
   bVar1 = (*(byte *)((unsigned char *)ghidra_home + 4)) == 4;
   (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = uVar3;
   if (bVar1) {
-    (*(unsigned char *)((unsigned char *)ghidra_home + 4)) = param_2 & 0xffffff;
+    (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2 & 0xffffff;
   }
   if ((*(char *)((unsigned char *)ghidra_home + 5)) == '\x04') {
     (*(char *)((unsigned char *)ghidra_home + 5)) = CONCAT12(1,(*(char *)((unsigned char *)ghidra_home + 6)));
@@ -988,7 +988,7 @@ int FUN_000f3c30(param_1, param_2, param_3, param_4, param_5)
   undefined4 local_38;
   undefined4 local_34 [7];
   
-  (*(char *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
   (**(code **)(*param_2 + 0x14))(param_2,param_2,param_3,param_4,param_5);
   param_1[0] = 0;
   param_1[1] = 0;

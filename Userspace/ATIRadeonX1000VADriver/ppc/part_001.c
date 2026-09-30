@@ -4964,8 +4964,8 @@ int FUN_0000cb00(param_1, param_2, param_3, param_4, param_5)
   local_6c = (float)((double)CONCAT44(0x43300000,uStack_44) - 4503601774854144.0);
   local_78 = (float)((double)CONCAT44(0x43300000,uStack_4c) - 4503601774854144.0) * 0.5;
   local_74 = (float)((double)CONCAT44(0x43300000,uStack_3c) - 4503601774854144.0) * 0.5;
-  (*(short *)((unsigned char *)ghidra_home + 4)) = param_2;
-  (*(short *)((unsigned char *)ghidra_home + 8)) = param_3;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   local_68 = local_78;
   local_64 = local_74;
   local_60 = local_70;

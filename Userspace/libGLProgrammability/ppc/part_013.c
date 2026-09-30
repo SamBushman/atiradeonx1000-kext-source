@@ -2912,7 +2912,7 @@ LAB_97bcd680:
   (*(int *)((unsigned char *)ghidra_home + 4)) = param_2;
   (*(int *)((unsigned char *)ghidra_home + 8)) = param_3;
   (*(uint *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(short *)((unsigned char *)ghidra_home + 16)) = param_5;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
