@@ -2336,7 +2336,9 @@ int FUN_00009d70(param_1, param_2, param_3, param_4, param_5)
   int iVar4;
   char in_RESERVE;
   byte in_cr0;
-  unsigned int frame_[12] __attribute__((aligned(16)));
+  undefined4 local_28;
+  undefined1 auStack_24 [4];
+  int local_20;
   
   param_2[2] = param_3;
   param_2[3] = param_4;
@@ -2344,12 +2346,12 @@ int FUN_00009d70(param_1, param_2, param_3, param_4, param_5)
   param_2[4] = param_5;
   iVar4 = *param_2;
   *param_2 = 0;
-  (*(undefined4 *)((char *)frame_ + 8)) = 8;
+  local_28 = 8;
   iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,((undefined1 *)((char *)frame_ + 12)),&(*(undefined4 *)((char *)frame_ + 8)));
+                    (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,auStack_24,&local_28);
   if (iVar3 == 0) {
-    *param_2 = (*(int *)((char *)frame_ + 16));
-    piVar2 = (int *)((*(int *)((char *)frame_ + 16)) + 0x10);
+    *param_2 = local_20;
+    piVar2 = (int *)(local_20 + 0x10);
     do {
       if (in_RESERVE != '\0') {
         iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
@@ -2357,7 +2359,7 @@ int FUN_00009d70(param_1, param_2, param_3, param_4, param_5)
         in_cr0 = 2;
       }
     } while (!(bool)(in_cr0 >> 1 & 1));
-    *(undefined1 *)((*(int *)((char *)frame_ + 16)) + 0x14) = 1;
+    *(undefined1 *)(local_20 + 0x14) = 1;
   }
   if (iVar4 != 0) {
     piVar2 = (int *)(iVar4 + 0x10);

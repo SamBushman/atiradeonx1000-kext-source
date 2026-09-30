@@ -580,7 +580,9 @@ int FUN_0010647c(param_1, param_2)
   int iVar4;
   int iVar5;
   int iVar6;
-  unsigned int frame_[16] __attribute__((aligned(16)));
+  undefined4 local_38;
+  undefined4 local_34;
+  undefined4 local_30 [4];
   
   if (0 < param_1[0x20]) {
     iVar5 = 0;
@@ -596,10 +598,10 @@ int FUN_0010647c(param_1, param_2)
   if (((*(uint *)(iVar5 + 0x30) & 8) == 0) && (*(int *)(param_1[0x22] + 8) != 0x8e)) {
     iVar3 = FUN_001054ec(param_1,0);
     iVar5 = 0;
-    (*(undefined4 *)((char *)frame_ + 8)) = *(undefined4 *)(iVar3 + 0x10);
+    local_38 = *(undefined4 *)(iVar3 + 0x10);
     iVar3 = 4;
     do {
-      if (*(char *)((int)&(*(undefined4 *)((char *)frame_ + 8)) + iVar5) == '\0') {
+      if (*(char *)((int)&local_38 + iVar5) == '\0') {
         iVar5 = 1;
         if (0 < param_1[0x21]) {
           do {
@@ -619,15 +621,15 @@ int FUN_0010647c(param_1, param_2)
     if (((*(uint *)(iVar5 + 0x30) & 0x20000) != 0) && (iVar3 = 1, 0 < param_1[0x21])) {
       do {
         iVar5 = FUN_001054ec(param_1,iVar3);
-        (*(undefined4 *)((char *)frame_ + 12)) = *(undefined4 *)(iVar5 + 0x10);
+        local_34 = *(undefined4 *)(iVar5 + 0x10);
         iVar5 = FUN_00105594(param_1,iVar3);
         if (iVar5 != 0) {
           iVar4 = FUN_001054ec(iVar5,0);
           iVar6 = 0;
-          ((undefined4 *)((char *)frame_ + 16))[0] = *(undefined4 *)(iVar4 + 0x10);
+          local_30[0] = *(undefined4 *)(iVar4 + 0x10);
           do {
-            uVar2 = (uint)*(byte *)((int)((undefined4 *)((char *)frame_ + 16)) + iVar6 + -4);
-            if (((uVar2 != 4) && (*(char *)((int)((undefined4 *)((char *)frame_ + 16)) + uVar2) != '\0')) &&
+            uVar2 = (uint)*(byte *)((int)local_30 + iVar6 + -4);
+            if (((uVar2 != 4) && (*(char *)((int)local_30 + uVar2) != '\0')) &&
                ((*(uint *)(iVar5 + 0x14) & 0x200) != 0)) {
               FUN_001054ec(iVar5,*(undefined4 *)(iVar5 + 0x84));
             }
