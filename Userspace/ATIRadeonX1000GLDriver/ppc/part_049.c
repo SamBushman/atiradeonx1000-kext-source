@@ -298,7 +298,7 @@ int FUN_00186a88(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         iVar4 = 4;
         piVar11 = param_1;
         do {
-          if (*(byte *)(piVar11 + 0x27) - 2 < 2) goto LAB_001874d4;
+          if ((uint)(*(byte *)(piVar11 + 0x27) - 2) < 2) goto LAB_001874d4;
           piVar11 = (int *)((int)piVar11 + 1);
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);

@@ -41,7 +41,7 @@ LAB_00158b4c:
           iVar2 = 4;
           piVar4 = param_2;
           do {
-            if (*(byte *)(piVar4 + 0x27) - 2 < 2) goto LAB_00158b48;
+            if ((uint)(*(byte *)(piVar4 + 0x27) - 2) < 2) goto LAB_00158b48;
             piVar4 = (int *)((int)piVar4 + 1);
             iVar2 = iVar2 + -1;
           } while (iVar2 != 0);
@@ -225,7 +225,7 @@ int FUN_00158c3c(param_1, param_2)
                 iVar14 = 4;
                 piVar10 = piVar3;
                 do {
-                  if (*(byte *)(piVar10 + 0x27) - 2 < 2) goto LAB_00159218;
+                  if ((uint)(*(byte *)(piVar10 + 0x27) - 2) < 2) goto LAB_00159218;
                   piVar10 = (int *)((int)piVar10 + 1);
                   iVar14 = iVar14 + -1;
                 } while (iVar14 != 0);
@@ -265,7 +265,7 @@ LAB_00159218:
                 iVar14 = 4;
                 piVar10 = piVar5;
                 do {
-                  if (*(byte *)(piVar10 + 0x27) - 2 < 2) goto LAB_001593b8;
+                  if ((uint)(*(byte *)(piVar10 + 0x27) - 2) < 2) goto LAB_001593b8;
                   piVar10 = (int *)((int)piVar10 + 1);
                   iVar14 = iVar14 + -1;
                 } while (iVar14 != 0);
@@ -4131,7 +4131,7 @@ int FUN_00160320(param_1, param_2, param_3, param_4, param_5)
       iVar2 = 4;
       piVar8 = param_3;
       do {
-        if (*(byte *)(piVar8 + 0x27) - 2 < 2) goto LAB_001605dc;
+        if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) goto LAB_001605dc;
         piVar8 = (int *)((int)piVar8 + 1);
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
@@ -4192,7 +4192,7 @@ LAB_001605dc:
         iVar2 = 4;
         piVar8 = param_3;
         do {
-          if (*(byte *)(piVar8 + 0x27) - 2 < 2) {
+          if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) {
             return 0;
           }
           piVar8 = (int *)((int)piVar8 + 1);
@@ -4354,7 +4354,7 @@ LAB_001605dc:
     iVar2 = 4;
     piVar8 = param_3;
     do {
-      if (*(byte *)(piVar8 + 0x27) - 2 < 2) {
+      if ((uint)(*(byte *)(piVar8 + 0x27) - 2) < 2) {
         return 0;
       }
       piVar8 = (int *)((int)piVar8 + 1);
@@ -9973,7 +9973,7 @@ LAB_0016a200:
                 iVar2 = 4;
                 piVar11 = piVar12;
                 do {
-                  if (*(byte *)(piVar11 + 0x27) - 2 < 2) goto LAB_0016a1fc;
+                  if ((uint)(*(byte *)(piVar11 + 0x27) - 2) < 2) goto LAB_0016a1fc;
                   piVar11 = (int *)((int)piVar11 + 1);
                   iVar2 = iVar2 + -1;
                 } while (iVar2 != 0);

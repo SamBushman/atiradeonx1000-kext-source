@@ -288,7 +288,7 @@ LAB_97b7c604:
       uVar11 = 0;
       uVar7 = uVar8;
       if (uVar16 < uVar6) {
-        if ((*(byte *)(param_2 + uVar16) - 0x30 < 10) || (*(byte *)(param_2 + uVar16) == 0x2e)) {
+        if (((uint)(*(byte *)(param_2 + uVar16) - 0x30) < 10) || (*(byte *)(param_2 + uVar16) == 0x2e)) {
           uVar11 = 1;
         }
         bVar1 = *(byte *)(param_2 + uVar16);
@@ -497,7 +497,7 @@ LAB_97b7ccfc:
       }
       uVar12 = 0;
       if (uVar7 < uVar6) {
-        if ((*(byte *)(param_2 + uVar7) - 0x30 < 10) || (*(byte *)(param_2 + uVar7) == 0x2e)) {
+        if (((uint)(*(byte *)(param_2 + uVar7) - 0x30) < 10) || (*(byte *)(param_2 + uVar7) == 0x2e)) {
           uVar12 = 1;
         }
         bVar1 = *(byte *)(param_2 + uVar7);

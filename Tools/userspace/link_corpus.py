@@ -1190,6 +1190,7 @@ for pdir_, f in _part_files:
             if bind_info:
                 txt = rewrites.bind_calls(txt, int(mm.group(2), 16), ledger_by_addr, short_to_c, siblings, callees, unresolved_calls)
             # last: the other rewrites match plain `x = call(...)` statements (rewrite_pair_results, bind_calls); GH_STF hides that shape
+            txt, _nus = rewrites.fix_unsigned_small_compare(txt)
             txt, nlow = rewrites._magic_low_words(txt)      # again: after mirror_frame the operands carry their types (`*(float *)(frame + N)`)
             txt, nfst = rewrites.rewrite_float_stores(txt)
             nfst += nlow

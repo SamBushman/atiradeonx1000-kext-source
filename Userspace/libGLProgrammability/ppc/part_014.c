@@ -33,7 +33,7 @@ void _InterpreterTextureSamplerSampleTexel1D(int *param_1,int param_2,undefined4
   float local_40;
   
   piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
@@ -107,7 +107,7 @@ void _InterpreterTextureSamplerSampleTexel2D(int *param_1,int param_2,undefined4
   float local_40;
   
   piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,
@@ -182,7 +182,7 @@ void _InterpreterTextureSamplerSampleTexel3D(int *param_1,int param_2,undefined4
   float local_40;
   
   piVar2 = *(int **)(*param_1 + param_2 * 4);
-  if (*(ushort *)(*piVar2 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar2 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     dVar4 = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
                                fparam_6,fparam_7,fparam_8,in_stack_ffffff48,in_stack_ffffff50,

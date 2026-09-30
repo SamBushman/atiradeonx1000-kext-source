@@ -2302,7 +2302,7 @@ int FUN_0013caf4(param_1, param_2, param_3)
                     iVar5 = 4;
                     in_r9 = piVar1;
                     do {
-                      if (*(byte *)(in_r9 + 0x27) - 2 < 2) goto LAB_0013cd68;
+                      if ((uint)(*(byte *)(in_r9 + 0x27) - 2) < 2) goto LAB_0013cd68;
                       in_r9 = (int *)((int)in_r9 + 1);
                       iVar5 = iVar5 + -1;
                     } while (iVar5 != 0);
@@ -2338,7 +2338,7 @@ LAB_0013cd68:
                     iVar5 = 4;
                     in_r9 = piVar1;
                     do {
-                      if (*(byte *)(in_r9 + 0x27) - 2 < 2) goto LAB_0013cee8;
+                      if ((uint)(*(byte *)(in_r9 + 0x27) - 2) < 2) goto LAB_0013cee8;
                       in_r9 = (int *)((int)in_r9 + 1);
                       iVar5 = iVar5 + -1;
                     } while (iVar5 != 0);

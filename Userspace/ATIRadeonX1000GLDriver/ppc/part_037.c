@@ -482,7 +482,7 @@ int FUN_0011f2f8(param_1, param_2, param_3)
         iVar1 = 4;
         piVar4 = param_2;
         do {
-          if (*(byte *)(piVar4 + 0x27) - 2 < 2) {
+          if ((uint)(*(byte *)(piVar4 + 0x27) - 2) < 2) {
             return 0;
           }
           piVar4 = (int *)((int)piVar4 + 1);

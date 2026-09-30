@@ -743,3 +743,13 @@ def rewrite_float_stores(text):
             out.append(ln); i += 1; continue
         out.append('%sGH_STF(%s, (%s));' % (m.group(1), lhs, rhs)); n += 1; i = j + 1
     return '\n'.join(out), n
+
+
+_UNSIGNED_SMALL_CMP = re.compile(r'(?<![\w)])(\*\((?:byte|ushort|uchar) \*\)(?:\([^()]*(?:\([^()]*\)[^()]*)*\)|\w+)) - ((?:0x[0-9a-f]+|\d+)) (<|<=|>|>=) ((?:0x[0-9a-f]+|\d+))\b')
+
+
+def fix_unsigned_small_compare(chunk):
+    """Ghidra prints the UNSIGNED range test `cmplwi (byte - 2), 1` as `*(byte *)p - 2 < 2`; in C the byte is promoted to a signed int, so byte 0 gives -2 < 2 = true where the
+    stock gives false (FUN_0011f2f8: the swizzle-byte loop returned early for every node, the rebuilt never built the node's constant-source list; 22 GLDriver sites, 11 libGLProgrammability).
+    Returns (chunk, number of rewrites)."""
+    return _UNSIGNED_SMALL_CMP.subn(lambda m: '(uint)(%s - %s) %s %s' % (m.group(1), m.group(2), m.group(3), m.group(4)), chunk)

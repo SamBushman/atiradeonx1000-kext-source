@@ -5115,7 +5115,7 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
   uint *puVar6;
   
   piVar5 = *(int **)(param_2 * 4 + *param_1);
-  if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     if (param_1[9] != 0) {
       *param_3 = 0x39e00200;
@@ -5153,7 +5153,7 @@ int _PPCTextureSamplerSampleTexel1DRTCAV(param_1, param_2, param_3)
     puVar6[8] = 0x39e00200;
     puVar6[9] = 0x7c8379ce;
     puVar6[10] = 0x7f03782e;
-    if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 2) {
+    if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 2) {
       puVar3 = (undefined4 *)
                ((int (*)())_PPCTextureSamplerSampleTexel1DFromLevelRTCAV)(param_1,param_2,puVar6 + 0xb);
     }
@@ -5205,7 +5205,7 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
   uint *puVar6;
   
   piVar5 = *(int **)(param_2 * 4 + *param_1);
-  if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     if (param_1[9] != 0) {
       *param_3 = 0x39e00200;
@@ -5243,7 +5243,7 @@ int _PPCTextureSamplerSampleTexel2DRTCAV(param_1, param_2, param_3)
     puVar6[8] = 0x39e00200;
     puVar6[9] = 0x7c8379ce;
     puVar6[10] = 0x7f03782e;
-    if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 2) {
+    if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 2) {
       puVar3 = (undefined4 *)
                ((int (*)())_PPCTextureSamplerSampleTexel2DFromLevelRTCAV)(param_1,param_2,puVar6 + 0xb);
     }
@@ -5295,7 +5295,7 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
   uint *puVar6;
   
   piVar5 = *(int **)(param_2 * 4 + *param_1);
-  if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 4) {
+  if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 4) {
     param_1[10] = 1;
     if (param_1[9] != 0) {
       *param_3 = 0x39e00200;
@@ -5333,7 +5333,7 @@ int _PPCTextureSamplerSampleTexel3DRTCAV(param_1, param_2, param_3)
     puVar6[8] = 0x39e00200;
     puVar6[9] = 0x7c8379ce;
     puVar6[10] = 0x7f03782e;
-    if (*(ushort *)(*piVar5 + 0x16) - 0x2700 < 2) {
+    if ((uint)(*(ushort *)(*piVar5 + 0x16) - 0x2700) < 2) {
       puVar3 = (undefined4 *)
                ((int (*)())_PPCTextureSamplerSampleTexel3DFromLevelRTCAV)(param_1,param_2,puVar6 + 0xb);
     }

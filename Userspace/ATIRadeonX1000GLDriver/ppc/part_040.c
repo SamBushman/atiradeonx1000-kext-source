@@ -699,7 +699,7 @@ int FUN_0012c59c(param_1, param_2)
         iVar2 = 4;
         piVar4 = param_2;
         do {
-          if (*(byte *)(piVar4 + 0x27) - 2 < 2) {
+          if ((uint)(*(byte *)(piVar4 + 0x27) - 2) < 2) {
             return 0;
           }
           piVar4 = (int *)((int)piVar4 + 1);
