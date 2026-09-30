@@ -738,6 +738,11 @@ def fn_symbol_for(addr):
         # only inside the function's own extent
         for a, s, n, p in ledger:
             if a == base and addr < a + max(s, 4):
+                # a function whose chunk starts with alignment `nop`s (the ledger's extent runs from the previous function's end to the next entry): the
+                # pointer is to the REAL entry, which is where the compiled C function begins - `label+12` would land in the middle of the compiled body
+                # (orph_4c544+12: the ctx+0x1338 callback; called, it ran into the rebuilt prologue's middle and the state packet FUN_00086710 was never emitted)
+                if all(struct.unpack('>I', m.read(x_, 4))[0] == 0x60000000 for x_ in range(a, addr, 4)):
+                    return fn_label.get(n, n)
                 return '%s+%d' % (fn_label.get(n, n), addr - a)
     return None
 
