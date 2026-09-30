@@ -1164,7 +1164,7 @@ LAB_000f6b68:
 }
 
 /* FUN_000f6d14 @ 0xf6d14 (2568 bytes) */
-int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16, param_17, param_18, param_19, param_20, param_21, param_22)
+int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16, param_17, param_18, param_19, param_20, param_21, param_22, param_23)
   undefined4 param_1;
   int param_2;
   undefined4 param_3;
@@ -1187,6 +1187,7 @@ int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   undefined4 param_20;
   undefined4 param_21;
   int param_22;
+  undefined4 param_23;
 {
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined1 uVar1;
@@ -1349,6 +1350,7 @@ int FUN_000f6d14(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     } while (iVar15 != 0);
     local_270[8] = (int *)param_11;
     local_270[9] = (int *)param_17;
+    local_270[10] = (int *)param_23;
     local_270[7] = (int *)param_5;
     iVar15 = ((int (*)())FUN_000f6a04)(param_2,local_270 + 7,DAT_001aa868);
     if (iVar15 != 0) {
@@ -1683,7 +1685,7 @@ int FUN_000f771c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_74;
   
   return ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,1,param_4,local_b0,local_ac,local_a8,local_a4,1,param_5,
-               local_98,local_94,local_90,local_8c,1,param_6,local_80,local_7c,local_78,local_74,1);
+               local_98,local_94,local_90,local_8c,1,param_6,local_80,local_7c,local_78,local_74,1,param_7);
 }
 
 /* FUN_000f7870 @ 0xf7870 (340 bytes) */
@@ -1710,7 +1712,7 @@ int FUN_000f7870(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_74;
   
   return ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,3,param_4,local_b0,local_ac,local_a8,local_a4,3,param_5,
-               local_98,local_94,local_90,local_8c,3,param_6,local_80,local_7c,local_78,local_74,3);
+               local_98,local_94,local_90,local_8c,3,param_6,local_80,local_7c,local_78,local_74,3,param_7);
 }
 
 /* the raw 32-bit pattern of a float, as the stock passes it in a general register / stack word (`stfs f1,0xec(r1); lwz r7,0xec(r1)`) */
@@ -1735,7 +1737,7 @@ void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,doubl
   
   ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,2,FBITS(fparam_1),local_a0,local_9c,local_98,local_94,2,
                FBITS(fparam_2),local_88,local_84,local_80,local_7c,2,FBITS(fparam_3),local_70,
-               local_6c,local_68,local_64,2);
+               local_6c,local_68,local_64,2,FBITS(fparam_4));
   return;
 }
 
