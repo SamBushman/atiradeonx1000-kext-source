@@ -1407,7 +1407,7 @@ int TPPStreamCompiler__equalOperands(this, param_2, param_3, param_4, param_5)
             local_dc = (iVar5 + -1) * 0x4000000 & 0xc000000U | local_dc & 0xf3f3ffff;
             ppPVar13 = (unsigned char **)0x0;
             a3 = (unsigned char **)0x0;
-            _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&local_e0);
+            _PPStreamAddOperation(*(undefined4 *)(this + 0x70),&local_e0,0,0);
             __ZN12ParseOperandD1Ev(pPVar7);
             __ZdlPv(pPVar7);
             pPVar7 = local_70[0];

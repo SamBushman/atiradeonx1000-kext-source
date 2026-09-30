@@ -341,6 +341,15 @@ PATCHES = {
     # r1+0x8c = Stack_a4, r1+0x90 = Stack_a0, the two locals Ghidra copied to puVar11/puVar12 just before). Ghidra printed only the first two arguments, so the rebuilt
     # glReadPixels path passed a stale r5 (0x40) and glgConvertType stored through it (SIGBUS after the first draw, link_corpus build, issue #64 follow-up).
     'FUN_00029290': _scoped('gld', lambda raw, conv: _re_subs(conv, r'_glgConvertType\(param_6,param_7\);', '_glgConvertType(param_6,param_7,puVar11,puVar12);', 1, 'FUN_00029290 glgConvertType (0x29570)')),
+    # stubargs.py (stub calls: dropped arguments the .dis-based checks cannot see), glprog: three calls that lost an argument register set up in their own block.
+    # TPPStreamCompiler::equalOperands (0x97bc5390..0x97bc539c): `addi r4,r1,0x40; li r5,0; li r6,0; bl _PPStreamAddOperation` - Ghidra kept the two `= 0` assignments
+    # (ppPVar13/a3) and printed only two arguments.
+    'TPPStreamCompiler__equalOperands': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'(_PPStreamAddOperation\(\*\(undefined4 \*\)\(this \+ 0x70\),&local_e0)\);(\s*__ZN12ParseOperandD1Ev\(pPVar7\);\s*__ZdlPv\(pPVar7\);)', r'\1,0,0);\2', 1, 'equalOperands _PPStreamAddOperation (0x97bc539c)')),
+    # generateBuiltInSymbolTable (0x97ba0af8..0x97ba0b00): `addi r3,r1,0x40; mr r4,r29; bl TBuiltIns::initialize` (r29 = the incoming resource, passed on as the 4th argument of initializeSymbolTable below).
+    'generateBuiltInSymbolTable': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'__ZN9TBuiltIns10initializeERK16TBuiltInResource\(aTStack_30\);', '__ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30,param_1);', 1, 'generateBuiltInSymbolTable TBuiltIns::initialize (0x97ba0b00)')),
+    # TGenericLinker::OptimizeFunctionIO (0x97bb4420..0x97bb4434): `lwz r3,0x38(r2); mr r4,r30; bl FunctionTable::getFirstOp; ... mr r7,r3; bl sprintf` - the result of getFirstOp is sprintf's 5th argument;
+    # Ghidra printed the call as a statement and sprintf with four arguments.
+    'TGenericLinker__OptimizeFunctionIO': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'( +)FunctionTable__getFirstOp\((\*\(unsigned char \*\*\)\(this \+ iVar2 \+ 0x38\),iVar18)\);\s*_sprintf\(p0,DAT_a7b7baec,a0,\(&_shaderString\)\[iVar12\]\);', r'\1uVar8 = FunctionTable__getFirstOp(\2);\n\1_sprintf(p0,DAT_a7b7baec,a0,(&_shaderString)[iVar12],uVar8);', 1, 'OptimizeFunctionIO sprintf (0x97bb4434)')),
     '_PPCRuntimeCompilerCompileAV': _scoped('glprog', lambda raw, conv: _re_subs(conv, r'_PPCTextureSamplerSampleTexelRECTRTCAV\s*\(\*\(undefined4 \*\)\(param_1 \+ 0xe1c\),uVar8\);', '((int (*)())_PPCTextureSamplerSampleTexelRECTRTCAV)(*(undefined4 *)(param_1 + 0xe1c),uVar8,in_r5);', 1, '_PPCRuntimeCompilerCompileAV RECT sampler (0x97be1630)')),
     # FUN_000b5fb0 (gld, stock 0xb5fb0; issue #79): destroys the four per-context slots `ctx+0x1448..0x1454`: `lwz r4,0x1448(r30)` (the object) BEFORE the `beq`
     # that skips an empty slot, then `lwz r0,0x1224(r29); stw r27,0x1448(r30); or r3,r29,r29; bctrl` - the callback is (ctx, obj) (FUN_00087cd0). The load sits in another

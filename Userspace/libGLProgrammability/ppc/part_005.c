@@ -3679,7 +3679,7 @@ int generateBuiltInSymbolTable(param_1, param_2, param_3, param_4)
 {
   unsigned char aTStack_30 [28];
   
-  __ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30);
+  __ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30,param_1);
   ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,0,param_2,param_1,param_3);
   ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,1,param_2,param_1,param_3);
   return 1;

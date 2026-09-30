@@ -1184,8 +1184,8 @@ int TGenericLinker__OptimizeFunctionIO(this)
                     iVar10 = _strlen((&_shaderString)[iVar12]);
                     iVar11 = _strlen(a0);
                     p0 = (char *)_malloc(iVar7 + iVar10 + iVar11 + 9);
-                    FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-                    _sprintf(p0,DAT_a7b7baec,a0,(&_shaderString)[iVar12]);
+                    uVar8 = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+                    _sprintf(p0,DAT_a7b7baec,a0,(&_shaderString)[iVar12],uVar8);
                     this_00 = *(void **)(this + 0x84);
                     
                     __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
