@@ -1713,6 +1713,10 @@ int FUN_000f7870(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
                local_98,local_94,local_90,local_8c,3,param_6,local_80,local_7c,local_78,local_74,3);
 }
 
+/* the raw 32-bit pattern of a float, as the stock passes it in a general register / stack word (`stfs f1,0xec(r1); lwz r7,0xec(r1)`) */
+#ifndef FBITS
+#define FBITS(x) ({ float fbits_ = (float)(x); *(unsigned int *)&fbits_; })
+#endif
 /* FUN_000f79c4 @ 0xf79c4 (332 bytes) */
 void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
 {
@@ -1729,8 +1733,8 @@ void FUN_000f79c4(undefined4 param_1,undefined4 param_2,undefined4 param_3,doubl
   undefined4 local_68;
   undefined4 local_64;
   
-  ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,2,(float)fparam_1,local_a0,local_9c,local_98,local_94,2,
-               (float)fparam_2,local_88,local_84,local_80,local_7c,2,(float)fparam_3,local_70,
+  ((int (*)())FUN_000f6d14)(param_1,param_2,param_3,2,FBITS(fparam_1),local_a0,local_9c,local_98,local_94,2,
+               FBITS(fparam_2),local_88,local_84,local_80,local_7c,2,FBITS(fparam_3),local_70,
                local_6c,local_68,local_64,2);
   return;
 }
