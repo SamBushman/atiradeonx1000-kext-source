@@ -54,9 +54,8 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 param_1, UInt32*param_2,
   UInt8 *pIVar14;
   unsigned int uVar15;
   int *piVar16;
-  UInt8 auStack_68 [8];
-  int local_60;
-  int local_5c;
+  /* one 16-byte stack object filled by the +0x5b4 / +0x560 callees (Ghidra named its words auStack_68 / auStack_68[2] / auStack_68[3]; #85) */
+  int auStack_68[4];
   int local_58;
   int local_54;
   int local_50;
@@ -248,16 +247,16 @@ LAB_0000a43c:
           pIVar14 = pIVar14 + 4;
         } while (self + 0xa8 != pIVar14);
         if (((unsigned int)(M<int>(M<int>(self + 0xe0) + 0x10) * 4 - GH_page_size) <
-             (unsigned int)(local_5c - (M<int>(self + 0xe0) + 0x20))) &&
+             (unsigned int)(auStack_68[3] - (M<int>(self + 0xe0) + 0x20))) &&
            (M<unsigned int>(self + 0xb0) < 0x80000)) {
           M<unsigned int>(self + 0xb0) = M<unsigned int>(self + 0xb0) << 1;
         }
-        if (local_60 == 0) {
+        if (auStack_68[2] == 0) {
           iVar3 = M<int>(M<int>(self + 200) + 0x50) + -1;
         }
         else {
           M<int>(M<int>(self + 200) + 0x704) =
-               local_60 * 4 + M<int>(M<int>(self + 200) + 0x704);
+               auStack_68[2] * 4 + M<int>(M<int>(self + 200) + 0x704);
           iVar3 = VCALL(*M<int *>(self + 200), 0x560)(M<int *>(self + 200),auStack_68);
         }
         piVar5 = M<int *>(self + 0x290);

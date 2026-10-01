@@ -186,11 +186,10 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   UInt32 uVar14;
   UInt32 uVar15;
   UInt32 uVar16;
-  UInt32 local_f8;
-  UInt32 local_f4;
-  UInt8 auStack_f0 [156];
-  UInt32 local_54;
-  UInt32 local_50;
+  /* One 0xa8-byte stack object (r1+0x58..): Ghidra named its slots separately. getCurrentDisplayMode fills f8/f4 and getPixelInformation fills
+   `pix` AND the two words after it (L.f54 / L.f50), so they must be one object: as separate scalars the compiler saw L.f54/L.f50
+   as never written and deleted the branches that read them (4 of the 10 ATIR500Memory::reserve calls, #85). */
+  struct { UInt32 f8; UInt32 f4; UInt8 pix[156]; UInt32 f54; UInt32 f50; } L;
   
   self[0x168] = 0x0;
   M<UInt16>(self + 0x14e) = 1;
@@ -274,21 +273,21 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   uVar4 = M<UInt32>(self + 0xb08);
   uVar14 = M<UInt32>(self + 0xb0c);
   iVar10 = VCALL(*M<SInt32 *>(self + 0xd4), 0x5f0)
-                     (M<SInt32 *>(self + 0xd4),&local_f4,&local_f8);
+                     (M<SInt32 *>(self + 0xd4),&L.f4,&L.f8);
   if (iVar10 != 0) {
     GH_IOLog("ERROR: VendorAccelerator::set_display_mode_and_vram() call to fFramebuffers[0].framebuffer->getCurrentDisplayMode() result:%lX\n"
                  ,iVar10);
     GH_IOSleep(10);
   }
   iVar10 = VCALL(*M<SInt32 *>(self + 0xd4), 0x5ec)
-                     (M<SInt32 *>(self + 0xd4),local_f4,local_f8,0,auStack_f0);
+                     (M<SInt32 *>(self + 0xd4),L.f4,L.f8,0,L.pix);
   if (iVar10 != 0) {
     GH_IOLog("ERROR: VendorAccelerator::set_display_mode_and_vram() call to fFramebuffers[0].framebuffer->getPixelInformation() result:%lX\n"
                  ,iVar10);
     GH_IOSleep(10);
   }
-  if (local_54 != 0) {
-    uVar14 = local_54;
+  if (L.f54 != 0) {
+    uVar14 = L.f54;
   }
   iVar10 = M<SInt32>(self + 0x860);
   uVar11 = (UInt32)M<UInt8>(iVar10 + 0x16c7) << 0x18 | (UInt32)M<UInt8>(iVar10 + 0x16c6) << 0x10 |
@@ -368,15 +367,15 @@ LAB_0001c54c:
     if (uVar13 != 0) {
       uVar14 = uVar11 / uVar13;
     }
-    uVar8 = local_50;
-    if ((local_50 & 0xf) != 0) {
-      uVar8 = (local_50 & 0xfffffff0) + 0x10;
+    uVar8 = L.f50;
+    if ((L.f50 & 0xf) != 0) {
+      uVar8 = (L.f50 & 0xfffffff0) + 0x10;
     }
     uVar5 = uVar8 * uVar11;
     M<UInt16>(self + 0x142) = uVar9;
     M<SInt16>(self + 0x140) = (SInt16)uVar14;
-    M<SInt16>(self + 0x148) = (SInt16)local_54;
-    M<SInt16>(self + 0x14a) = (SInt16)local_50;
+    M<SInt16>(self + 0x148) = (SInt16)L.f54;
+    M<SInt16>(self + 0x14a) = (SInt16)L.f50;
     self[0x163] = 0xff;
     M<UInt32>(self + 0x134) = uVar4;
     M<SInt16>(self + 0x144) = (SInt16)uVar11;
@@ -414,17 +413,17 @@ LAB_0001c54c:
   uVar13 = M<UInt32>(self + 0xb24);
   if (((((bVar1 & 1) == 0) || (M<UInt32>(self + 0x9c) <= uVar16)) ||
       (iVar10 = VCALL(*M<SInt32 *>(self + 0xf4), 0x5f0)
-                          (M<SInt32 *>(self + 0xf4),&local_f8,&local_f4), iVar10 != 0)) ||
+                          (M<SInt32 *>(self + 0xf4),&L.f8,&L.f4), iVar10 != 0)) ||
      (iVar10 = VCALL(*M<SInt32 *>(self + 0xf4), 0x5ec)
-                         (M<SInt32 *>(self + 0xf4),local_f8,local_f4,0,auStack_f0), iVar10 != 0)) {
+                         (M<SInt32 *>(self + 0xf4),L.f8,L.f4,0,L.pix), iVar10 != 0)) {
     uVar16 = 0;
     uVar14 = 0x200000;
     M<UInt32>(self + 0x1b4) = 0;
     M<UInt32>(self + 0x1ac) = 0;
     goto LAB_0001c9b0;
   }
-  if (local_54 != 0) {
-    uVar13 = local_54;
+  if (L.f54 != 0) {
+    uVar13 = L.f54;
   }
   iVar10 = M<SInt32>(self + 0x860);
   bVar1 = M<UInt8>(iVar10 + 0x6904) & 3;
@@ -493,16 +492,16 @@ LAB_0001c7d0:
   if (uVar8 != 0) {
     uVar13 = uVar14 / uVar8;
   }
-  uVar3 = local_50;
-  if ((local_50 & 0xf) != 0) {
-    uVar3 = (local_50 & 0xfffffff0) + 0x10;
+  uVar3 = L.f50;
+  if ((L.f50 & 0xf) != 0) {
+    uVar3 = (L.f50 & 0xfffffff0) + 0x10;
   }
   uVar15 = uVar3 * uVar14;
   M<SInt16>(self + 0x1bc) = (SInt16)uVar14;
   M<UInt16>(self + 0x1ba) = uVar9;
   M<SInt16>(self + 0x1b8) = (SInt16)uVar13;
-  M<SInt16>(self + 0x1c0) = (SInt16)local_54;
-  M<SInt16>(self + 0x1c2) = (SInt16)local_50;
+  M<SInt16>(self + 0x1c0) = (SInt16)L.f54;
+  M<SInt16>(self + 0x1c2) = (SInt16)L.f50;
   self[0x1db] = 0xff;
   M<UInt32>(self + 0x1ac) = uVar16;
   M<UInt32>(self + 0x1b4) = uVar15;

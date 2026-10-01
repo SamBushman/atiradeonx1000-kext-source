@@ -33,17 +33,24 @@ def callees(lines, lo=None, hi=None):
         elif op == 'b' and rest:
             t = rest.split()[0]
             if t.startswith('0x'):
-                if lo is not None and not (lo <= int(t, 16) < hi) and int(t, 16) in addr2name:     # only a known function entry (not a shared-epilogue / millicode stub)
-                    c['bl:' + t] += 1       # stock: tail `b` to another function's address
+                if lo is not None and not (lo <= int(t, 16) < hi):
+                    if int(t, 16) in addr2name: c['bl:' + t] += 1       # stock: tail `b` to another function's entry
+                    elif int(t, 16) in stub2name: c[stub2name[int(t, 16)]] += 1    # stock: tail `b` through a lazy-binding stub (IOLockUnlock...)
+                    # anything else is a shared-epilogue / millicode stub: not a call
             else:
                 c['bl:' + t.lstrip('_')] += 1   # rebuilt: tail `b` to another function (named symbolically)
     return c
 # stock
 srows = []
+stub2name = {}      # `jbsr SYM,0xSTUBADDR`: the lazy-binding stub's address -> symbol, so a plain tail `b 0xSTUBADDR` resolves too
 for l in open(sdis):
     m = ins.match(l)
-    if m: srows.append((int(m.group(1), 16), m.group(2), m.group(3)))
+    if m:
+        srows.append((int(m.group(1), 16), m.group(2), m.group(3)))
+        if m.group(2) == 'jbsr' and ',' in m.group(3):
+            nm, st = m.group(3).split(',', 1); stub2name[int(st, 16)] = nm.lstrip('_')
 import bisect
+ledaddrs = sorted(addr2name)
 saddr = [r[0] for r in srows]
 def stock_range(a, n):
     i = bisect.bisect_left(saddr, a); j = bisect.bisect_left(saddr, a + n)
@@ -84,6 +91,9 @@ def expand(sym, seen=()):
 res = []
 for sym, (a, n, name) in led.items():
     if sym not in ofun: continue
+    # the ledger size stops at the last `blr`; a shipped body can continue past it (a trailing `jbsr IOLockUnlock` block), so read up to the next ledger entry
+    nxt = ledaddrs[bisect.bisect_right(ledaddrs, a)] if bisect.bisect_right(ledaddrs, a) < len(ledaddrs) else a + n
+    n = max(n, nxt - a)
     cs = norm(callees(stock_range(a, n), a, a + n), False)
     co = norm(expand(sym), True)
     # bl to a defined local function shows as a name in ours and an address in stock: fold both to bare names
@@ -98,8 +108,11 @@ for sym, (a, n, name) in led.items():
         return r
     cs, co = fold(cs), fold(co)
     d = sum(((cs - co) + (co - cs)).values())
-    if d >= mind: res.append((d, name, dict(cs - co), dict(co - cs)))
+    # classes of delta: SAME-SET = every distinct callee occurs on both sides (only the NUMBER of call sites differs: duplicated or merged error
+    # tails, unrolling, tail merging); SET-DIFF = a callee exists on one side only (inlined, or missing/extra code) and needs a real look
+    kind = 'SAME-SET' if set(cs) == set(co) else 'SET-DIFF'
+    if d >= mind: res.append((d, name, dict(cs - co), dict(co - cs), kind))
 res.sort(reverse=True)
 print(len(res), 'methods differ (of', len(led), ')')
-for d, name, miss, extra in res[:int(sys.argv[4]) if len(sys.argv) > 4 else 80]:
-    print(d, name, 'STOCK-ONLY', miss, 'OURS-ONLY', extra)
+for d, name, miss, extra, kind in res[:int(sys.argv[4]) if len(sys.argv) > 4 else 80]:
+    print(d, name, kind, 'STOCK-ONLY', miss, 'OURS-ONLY', extra)
