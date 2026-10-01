@@ -27,6 +27,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `<vtable>`
 - **manual tier**: provisional T2 (#100 table)
+- **manual preconditions**: HAZARD (traced, NOT run): with a surface bound, set_swap_rect writes this+0x90..0x96 and calls vtable 0x5c4 on the surface = ATIR500Surface::invalidate, which for every panel (accelerator+0xcc, >= 1) ORs 1 into word +0x1c of the header POINTED TO BY surface+0xc34+i*0x94. In the shipped code the only store to +0xc34 is a clearing store (0x11bc0, `stw r0,0xc34(r11)`); no initialising store was found, so for a surface that has only been through set_id_mode/set_shape the pointer may be NULL -> NULL+0x1c write = kernel panic (#43 class). The detach/unbound forms (baseline, surface NULL) skip the call. Do not run with a bound surface until the +0xc34 header is proven valid.
 - **manual reason**: baseline: (0,0,0,0) | deep path not yet exercised: non-zero rectangle on a bound surface
 
 ## GL sel 2 - `IOATIR500GLContext::set_swap_interval` 
@@ -38,6 +39,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `<vtable>`
 - **manual tier**: provisional T2 (#100 table)
+- **manual preconditions**: Same hazard as GL 1 (set_swap_interval stores this+0x98/0x9a then calls surface vtable 0x5c4 = ATIR500Surface::invalidate when bound).
 - **manual reason**: baseline: (0,0) | deep path not yet exercised: non-zero interval on a bound surface
 
 ## GL sel 3 - `IOATIR500GLContext::get_config` 
