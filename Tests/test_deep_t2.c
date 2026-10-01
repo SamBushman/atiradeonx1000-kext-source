@@ -214,9 +214,33 @@ static void lock_unlock_variants(io_service_t service) {
     check("leak check: driver class instance counts identical before/after", same, "before={%d,%d,%d,%d,%d,%d} after={%d,%d,%d,%d,%d,%d}", before[0], before[1], before[2], before[3], before[4], before[5], after[0], after[1], after[2], after[3], after[4], after[5]);
 }
 
+/* T2 row 5 (issue #100): set_id_mode (sel 7) error paths. Traced (IOATIR500Surface::set_id_mode, 0x142b0): (a) mode bits with any of 0xffff7fc0 set -> BadArgument BEFORE the lock is taken;
+ * (b) a read or write lock held (surface+0xbd0/+0xbd1 non-zero) -> CannotLock, state untouched; otherwise the success path the harness already uses. */
+static void set_id_mode_errors(io_service_t service) {
+    io_connect_t c = IO_OBJECT_NULL; kern_return_t r; unsigned char data[0x44]; IOByteCount sz = sizeof data;
+    printf("-- Surface T2: set_id_mode error paths --\n");
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &c) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x40);
+    check("Surface set_id_mode(0, 0x40): a mode bit outside the accepted set -> BadArgument", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x80000000);
+    check("Surface set_id_mode(0, 0x80000000) -> BadArgument", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x4);
+    check("Surface set_id_mode(0, 0x4) [precondition]", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureO(c, 0, 1, &sz, 0, data);
+    check("Surface read lock (lockOptions 0)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x4);
+    check("Surface set_id_mode(0, 0x4) while the read lock is held -> CannotLock", r == TEST_kIOReturnCannotLock, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 1, 1, 0, 0);
+    check("Surface read_unlock_options releases the lock", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x4);
+    check("Surface set_id_mode(0, 0x4) after the unlock succeeds again", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    IOServiceClose(c);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
     dvd_bind_round_trip(service);
     lock_unlock_variants(service);
+    set_id_mode_errors(service);
 }

@@ -630,7 +630,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: ALLOCATES
 - shipped callees (ordered): `IOLockLock <vtable> IOATIR500Surface14reset_req_bitsEv IOATIR500Surface12reset_accessEv IOMallocAligned IOFreeAligned <vtable> IOATIR500Surface13prune_buffersEv <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 & 0xffff7fc0) != 0) {`; 0xe00002cc CannotLock <- `if ((M<unsigned int>(self + 0xbd0) & 0xffff0000) != 0) {`; 0xe00002be NoResources <- `if (iVar5 == 0) {`; 0xe00002bc Error <- `uVar8 = 0xe00002bc;`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live) for the error paths: mode bits outside 0xffff7fc0's complement (0x40, 0x80000000) -> BadArgument before the lock; with a read lock held -> CannotLock; success again after the unlock. (The success paths were already in the #42 baseline.)
 - **manual reason**: baseline: many real success cases; (0,0) -> Error | deep path not yet exercised: every mode bit and id class, error paths
 
 ## Surface sel 8 - `IOATIR500Surface::set_scale` 

@@ -79,5 +79,13 @@
 [OK] Surface read lock again r=0x00000000
 [OK] Surface read_unlock_options(sel 1) releases it (cleanup) r=0x00000000
 [OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+-- Surface T2: set_id_mode error paths --
+[OK] Surface set_id_mode(0, 0x40): a mode bit outside the accepted set -> BadArgument r=0xe00002c2
+[OK] Surface set_id_mode(0, 0x80000000) -> BadArgument r=0xe00002c2
+[OK] Surface set_id_mode(0, 0x4) [precondition] r=0x00000000
+[OK] Surface read lock (lockOptions 0) r=0x00000000
+[OK] Surface set_id_mode(0, 0x4) while the read lock is held -> CannotLock r=0xe00002cc
+[OK] Surface read_unlock_options releases the lock r=0x00000000
+[OK] Surface set_id_mode(0, 0x4) after the unlock succeeds again r=0x00000000
 
-73 calls made (72 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+80 calls made (79 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

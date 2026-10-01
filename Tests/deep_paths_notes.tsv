@@ -176,3 +176,4 @@ DVD 15	tier	T1 CONFIRMED (live) bound, (0,0,0,0): 0 (dvd_setup_subpicture is a `
 Surface 4	tier	T2 CONFIRMED (live): with only the READ lock held write_unlock_options -> CannotLock and the read lock stays held (the write byte +0xbd1 is its own state).
 Surface 13	tier	T2 CONFIRMED (live): after a read lock -> 0 (releases it); again -> CannotLock; query_lock available in between.
 Surface 15	tier	T2 CONFIRMED (live): with only the READ lock held -> CannotLock, state untouched.
+Surface 7	tier	T2 CONFIRMED (live) for the error paths: mode bits outside 0xffff7fc0's complement (0x40, 0x80000000) -> BadArgument before the lock; with a read lock held -> CannotLock; success again after the unlock. (The success paths were already in the #42 baseline.)
