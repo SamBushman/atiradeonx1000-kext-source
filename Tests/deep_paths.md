@@ -26,8 +26,8 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `<vtable>`
-- **manual tier**: provisional T2 (#100 table)
-- **manual preconditions**: HAZARD (traced, NOT run): with a surface bound, set_swap_rect writes this+0x90..0x96 and calls vtable 0x5c4 on the surface = ATIR500Surface::invalidate, which for every panel (accelerator+0xcc, >= 1) ORs 1 into word +0x1c of the header POINTED TO BY surface+0xc34+i*0x94. In the shipped code the only store to +0xc34 is a clearing store (0x11bc0, `stw r0,0xc34(r11)`); no initialising store was found, so for a surface that has only been through set_id_mode/set_shape the pointer may be NULL -> NULL+0x1c write = kernel panic (#43 class). The detach/unbound forms (baseline, surface NULL) skip the call. Do not run with a bound surface until the +0xc34 header is proven valid.
+- **manual tier**: T2 CONFIRMED (live, Tests/test_deep_t2.c): bound surface, (0,0,4,4) then (0,0,0,0) -> 0.
+- **manual preconditions**: HAZARD TRACED AND RESOLVED (2026-10-01): with a surface bound, set_swap_rect writes this+0x90..0x96 and calls vtable 0x5c4 = ATIR500Surface::invalidate, which ORs 1 into word +0x1c of the swap-buffer header at surface+0xc34+i*0x94 for every panel i < accelerator+0xcc. That pointer is cleared by IOATIR500Surface::start's per-panel init loop and then SET by allocMasterSwapBuffer(panel, 0x9000), called for every panel from the same loop, whenever the accelerator's per-panel swap-buffer count (+0x114+4*panel) is non-zero. That count is written only with 1 (IOATIR500Accelerator::start, teardown3D, disp_mode_did_change) or 2 (setup_stereo) - never 0 - and an allocation failure aborts start, so every panel's header is valid after a successful Surface open. (A surface on a machine with zero panels loops zero times.) Verified live: see tier.
 - **manual reason**: baseline: (0,0,0,0) | deep path not yet exercised: non-zero rectangle on a bound surface
 
 ## GL sel 2 - `IOATIR500GLContext::set_swap_interval` 
@@ -38,8 +38,8 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `<vtable>`
-- **manual tier**: provisional T2 (#100 table)
-- **manual preconditions**: Same hazard as GL 1 (set_swap_interval stores this+0x98/0x9a then calls surface vtable 0x5c4 = ATIR500Surface::invalidate when bound).
+- **manual tier**: T2 CONFIRMED (live): bound surface, (1,0) then (0,0) -> 0.
+- **manual preconditions**: Same path and resolution as GL 1 (set_swap_interval stores this+0x98/0x9a, then surface vtable 0x5c4 = invalidate when bound).
 - **manual reason**: baseline: (0,0) | deep path not yet exercised: non-zero interval on a bound surface
 
 ## GL sel 3 - `IOATIR500GLContext::get_config` 

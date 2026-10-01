@@ -237,10 +237,48 @@ static void set_id_mode_errors(io_service_t service) {
     IOServiceClose(c);
 }
 
+/* T2 row 6 (issue #100): set_swap_rect (sel 1) / set_swap_interval (sel 2) with a surface bound. Each stores shorts in the context (this+0x90..0x9a) and, with a bound
+ * surface, calls vtable 0x5c4 = ATIR500Surface::invalidate, which ORs 1 into word +0x1c of the swap-buffer header at surface+0xc34+i*0x94 for every panel i < accelerator+0xcc.
+ * Hazard analysis (Tests/deep_paths_notes.tsv, GL 1): that header pointer is set by IOATIR500Surface::start -> allocMasterSwapBuffer(panel, 0x9000) whenever the
+ * accelerator's per-panel swap-buffer count (+0x114+4*panel) is non-zero; the count is written only with 1 (IOATIR500Accelerator::start, teardown3D, disp_mode_did_change)
+ * or 2 (setup_stereo), never 0 - so every panel's header is valid after a successful surface start. */
+static void gl_swap_params_bound(io_service_t service) {
+    io_connect_t s = IO_OBJECT_NULL, g = IO_OBJECT_NULL; kern_return_t r; unsigned char region[20];
+    printf("-- GL T2: set_swap_rect / set_swap_interval with a bound surface --\n");
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+    if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+    if (r == TEST_kIOReturnSuccess) {
+        memset(region, 0, sizeof region);
+        *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = 4; *(SInt16 *)(region + 10) = 4; *(SInt16 *)(region + 16) = 4; *(SInt16 *)(region + 18) = 4;
+        r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+    }
+    check("Surface preconditions (set_id_mode x2, set_shape)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    if (r == TEST_kIOReturnSuccess && open_user_client(service, CLIENT_TYPE_GL, &g) == TEST_kIOReturnSuccess) {
+        r = IOConnectMethodScalarIStructureI(g, 0, 4, 0, 1, 0, 0, 0, NULL);
+        check("GL set_surface(1, 0, 0, 0) binds", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+        if (r == TEST_kIOReturnSuccess) {
+            r = IOConnectMethodScalarIStructureI(g, 1, 4, 0, 0, 0, 4, 4, NULL);
+            check("GL set_swap_rect(0,0,4,4) with a surface bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(g, 2, 2, 0, 1, 0, NULL);
+            check("GL set_swap_interval(1,0) with a surface bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(g, 1, 4, 0, 0, 0, 0, 0, NULL);
+            check("GL set_swap_rect(0,0,0,0) restores the defaults", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(g, 2, 2, 0, 0, 0, NULL);
+            check("GL set_swap_interval(0,0) restores the defaults", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(g, 0, 4, 0, 0, 0, 0, 0, NULL);
+            check("GL set_surface(0) detaches", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+        }
+        IOServiceClose(g);
+    } else if (r == TEST_kIOReturnSuccess) { printf("[FAIL] GL open\n"); g_testsUnexpected++; }
+    IOServiceClose(s);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
     dvd_bind_round_trip(service);
     lock_unlock_variants(service);
     set_id_mode_errors(service);
+    gl_swap_params_bound(service);
 }

@@ -87,5 +87,13 @@
 [OK] Surface set_id_mode(0, 0x4) while the read lock is held -> CannotLock r=0xe00002cc
 [OK] Surface read_unlock_options releases the lock r=0x00000000
 [OK] Surface set_id_mode(0, 0x4) after the unlock succeeds again r=0x00000000
+-- GL T2: set_swap_rect / set_swap_interval with a bound surface --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] GL set_surface(1, 0, 0, 0) binds r=0x00000000
+[OK] GL set_swap_rect(0,0,4,4) with a surface bound -> success r=0x00000000
+[OK] GL set_swap_interval(1,0) with a surface bound -> success r=0x00000000
+[OK] GL set_swap_rect(0,0,0,0) restores the defaults r=0x00000000
+[OK] GL set_swap_interval(0,0) restores the defaults r=0x00000000
+[OK] GL set_surface(0) detaches r=0x00000000
 
-80 calls made (79 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+87 calls made (86 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
