@@ -24,3 +24,10 @@ dyld stubs and calls to address 0 return 0; a data read from the image's own cod
 vs rebuilt (`break *FUN_x` - the EXACT entry: `break FUN_x` skips the prologue and misses small leaf functions), and the first divergence. `hwdiff2.py` compares hit counts
 (`ignore N 1000000` counts without stopping). Traps: gdb-696 needs its script piped (`cat script | gdb`), not redirected; a missing symbol aborts numbering of later `commands`;
 `pkill` does not exist on Tiger; software `watch` on the whole run takes hours.
+
+## #80 session notes (2026-09-30/10-01) - see also the issue
+`ringdump.sh NAME|stock` + `ringcmp2.py stock NAME [N]` diff the GPU command ring (IOKit memType 2, dumped at `glReadPixels` under gdb); `probe.sh NAME` runs `cgl_probe` against `out_NAME`;
+`hwseq.py` / `hwseqv.py` log function-entry order (+ r3..r8, noisy: unused argument registers hold garbage); `ppcdis.py ADDR LEN` disassembles the stock image.
+Method that worked: ring diff -> find the stock writer (gdb on the mapped ring) -> compare callee order stock vs rebuilt (`hwseq.py`) -> at the first diverging function capture args/returns on both sides.
+Traps: gdb hardware watchpoints miss dcbz / commpage stores; a gdb read of unmapped memory inside a `commands` block aborts the whole run (heap blocks are unmapped when freed);
+`break *0x1008000+off` for stock, `break *FUN_xxxxxxxx` for the rebuilt; Tiger has no `seq`, `timeout`, `pkill`.
