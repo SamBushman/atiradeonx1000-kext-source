@@ -27,10 +27,10 @@
 
 
 /* real addr 0x34b0 */
-void IOATIR500Accelerator::addTransferToGART(VendorTransferBuffer *real_param_1) {
+IOReturn IOATIR500Accelerator::addTransferToGART(VendorTransferBuffer *real_param_1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
 
-  VCALL(M<SInt32>(self), 0x5a0)(self,M<UInt32>(param_1 + 8),param_1 + 4);
-  return;
+  /* the shipped body tail-calls addToGART (vtable +0x5a0): its result is this function's result (#86) */
+  return VCALL(M<SInt32>(self), 0x5a0)(self,M<UInt32>(param_1 + 8),param_1 + 4);
 }

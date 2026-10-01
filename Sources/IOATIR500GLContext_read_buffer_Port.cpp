@@ -31,9 +31,10 @@ extern "C" UInt32 GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(.
 
 
 /* real addr 0x8d10 */
-IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *real_param_1, UInt32 param_2) {
+IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *real_param_2, UInt32 param_3) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its param_2 (#86) */
+    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
 
   UInt8 *pIVar1;
   SInt32 iVar2;
@@ -53,17 +54,16 @@ IOReturn IOATIR500GLContext::read_buffer(sIOGLContextReadBufferData *real_param_
   SInt32 iVar16;
   UInt32 uVar17;
   SInt32 iVar18;
-  UInt32 local_48;
-  SInt32 local_44;
-  SInt32 *local_40;
-  UInt16 local_3c;
-  UInt16 local_3a;
+  /* Ghidra split one 16-byte stack record (r1+0x58, the 3rd-from-last argument of the +0x5e8/+0x5ac calls) into five scalars; the callee
+   * writes local_s.f44 through `&local_s`, so as separate scalars the `local_s.f44 != 0` branch (unlock / +0x55c / relock / +0x5ac) was
+   * folded away as dead code (#86/#85: the stock-only IOLockLock/IOLockUnlock/indirect calls). Keep it one object. */
+  struct { UInt32 f48; SInt32 f44; SInt32 *f40; UInt16 f3c; UInt16 f3a; } local_s;
   
-  local_3a = 0;
-  local_3c = 3;
-  local_48 = 0;
-  local_44 = 0;
-  local_40 = (SInt32 *)0x0;
+  local_s.f3a = 0;
+  local_s.f3c = 3;
+  local_s.f48 = 0;
+  local_s.f44 = 0;
+  local_s.f40 = (SInt32 *)0x0;
   iVar18 = M<SInt32>(param_2);
   iVar15 = M<SInt32>(param_2 + 4);
   iVar13 = M<SInt32>(param_2 + 8);
@@ -164,13 +164,13 @@ LAB_00008f74:
     }
     uVar6 = iVar11 + iVar7;
     uVar8 = uVar6 & GH_page_size - 1U;
-    local_40 = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar6 & -GH_page_size,
+    local_s.f40 = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar6 & -GH_page_size,
                                    -GH_page_size &
                                    (GH_page_size +
                                    iVar10 * (iVar12 + -1) +
                                    (UInt32)M<UInt16>(iVar16 + 0x16) * iVar13 + uVar8) - 1,0,
                                    M<UInt32>(param_1 + 0x78));
-    if (local_40 == (SInt32 *)0x0) {
+    if (local_s.f40 == (SInt32 *)0x0) {
       uVar17 = 0xe00002be;
     }
     else {
@@ -178,7 +178,7 @@ LAB_00008f74:
       iVar11 = piVar5[0x1f];
       VCALL(*piVar5, 0x5e8)
                 (piVar5,iVar18,iVar15,iVar13,iVar12,M<UInt32>(param_1 + 0x298),
-                 M<UInt32>(param_1 + 0x29c),iVar16,M<UInt32>(param_1 + 0x7c),&local_48,
+                 M<UInt32>(param_1 + 0x29c),iVar16,M<UInt32>(param_1 + 0x7c),&local_s,
                  uVar8,iVar10,2);
       iVar12 = 0xa0;
       iVar13 = 0x17;
@@ -190,7 +190,7 @@ LAB_00008f74:
         iVar12 = iVar12 + 0x78;
         iVar13 = iVar13 + -1;
       } while (iVar13 != 0);
-      if (local_44 != 0) {
+      if (local_s.f44 != 0) {
         GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
         piVar5 = M<SInt32 *>(param_1 + 200);
         iVar13 = piVar5[0x1ed];
@@ -198,12 +198,12 @@ LAB_00008f74:
                            (piVar5,M<UInt32>(M<SInt32>(param_1 + 0x290) + 0x7c));
         piVar5[0x1ed] = iVar13 + iVar12;
         GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-        VCALL(*M<SInt32 *>(param_1 + 200), 0x5ac)(M<SInt32 *>(param_1 + 200),&local_48);
+        VCALL(*M<SInt32 *>(param_1 + 200), 0x5ac)(M<SInt32 *>(param_1 + 200),&local_s);
       }
       uVar17 = 0;
-      VCALL(*local_40, 0x18)(local_40);
+      VCALL(*local_s.f40, 0x18)(local_s.f40);
     }
-    local_40 = (SInt32 *)0x0;
+    local_s.f40 = (SInt32 *)0x0;
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
     return uVar17;
   }

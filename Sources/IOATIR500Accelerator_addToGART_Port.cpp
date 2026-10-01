@@ -27,9 +27,12 @@
 
 
 /* real addr 0x5220 */
-void IOATIR500Accelerator::addToGART(IOMemoryDescriptor*param_1, UInt32*param_2) {
+/* CORRECTED (#86): the mechanical port took Ghidra's param_1 (which is `this`, r3) for the descriptor and emitted a tail call through the
+ * descriptor's own vtable. The shipped body (otool -tV, 0x5220) loads `this`' vtable, reads the byte count at this+0x830 and calls
+ * vtable slot +0x590 (addToMinMaxGART) on `this` with (descriptor = r4, outOffset = r5, minOffset = 0, maxOffset = (this[0x830] >> 2) << page_shift). */
+IOReturn IOATIR500Accelerator::addToGART(IOMemoryDescriptor *descriptor, UInt32 *result) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  VCALL(M<SInt32>(param_1), 0x590)(param_1);
-  return;
+    /* the shipped body tail-calls: the callee's r3 is this function's result (the earlier `void` typing, issue #26, hid it) */
+    return addToMinMaxGART(descriptor, result, 0, (M<UInt32>(self + 0x830) >> 2) << GH_page_shift);
 }

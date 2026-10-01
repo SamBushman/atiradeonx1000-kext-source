@@ -92,9 +92,9 @@ public:
     virtual bool     reserveInGART(UInt32 gartOffset);                          /* +0x594, real addr 0x51c0 */
     virtual void     clearInGART(UInt32 gartOffset);                            /* +0x598, real addr 0x5200 */
     virtual void     synchronizeGART(UInt32 offset, UInt32 length);             /* +0x59c, real addr 0x53e0: empty */
-    virtual void     addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0 */
+    virtual IOReturn addToGART(IOMemoryDescriptor *descriptor, UInt32 *result); /* +0x5a0; returns addToMinMaxGART's result unchanged (1 = mapped) (#86) */
     virtual void     removeFromGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset); /* +0x5a4, real addr 0x5270 */
-    virtual void     addTransferToGART(VendorTransferBuffer *buffer);           /* +0x5a8 */
+    virtual IOReturn addTransferToGART(VendorTransferBuffer *buffer);           /* +0x5a8; passes addToGART's result through (#86) */
     virtual void     removeTransferFromGART(VendorTransferBuffer *buffer);      /* +0x5ac */
     virtual UInt32   makeGARTEntry(UInt32 physicalAddress);                     /* +0x5b0, real addr 0x3670: returns its argument */
     virtual bool     display_mode_will_change(SInt32 mode) = 0;                 /* +0x5b4 */

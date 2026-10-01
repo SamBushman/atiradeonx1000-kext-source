@@ -27,8 +27,9 @@
 
 
 /* real addr 0x7de0 */
-IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 param_1) {
+IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 param_2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the stamp (r4) is its param_2, unused by the shipped body (#86) */
 
   SInt32 iVar1;
   UInt32 uVar2;

@@ -29,9 +29,10 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x35540 */
-IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *real_param_1, UInt32 param_2) {
+IOReturn ATIR500DVDContext::doIDCT(sATIDVDIDCTInfo *real_param_2, UInt32 param_3) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the first real argument (r4) is its param_2 (#86) */
+    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
 
   SInt32 iVar1;
   UInt32 uVar2;

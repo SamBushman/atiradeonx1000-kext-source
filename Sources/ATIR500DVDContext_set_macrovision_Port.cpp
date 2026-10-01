@@ -30,13 +30,14 @@ extern "C" UInt32 GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(...) 
 
 
 /* real addr 0x35010 */
-IOReturn ATIR500DVDContext::set_macrovision(UInt32 param_1, UInt32 param_2) {
+IOReturn ATIR500DVDContext::set_macrovision(UInt32 param_2, UInt32 param_3) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); (attribute, value) are param_2/param_3 (#86) */
 
   SInt32 iVar1;
   SInt32 *piVar2;
   UInt32 uVar3;
-  UInt32 stack0x00000020; /* the shipped code spills its (undeclared) 3rd register argument here and passes the slot's address on */
+  /* the shipped code spills its 3rd register argument (param_3, `value`) to the stack and passes the slot's address on */
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 0x8c) + 0x840));
   iVar1 = M<SInt32>(param_1 + 0x8c);
@@ -53,7 +54,7 @@ IOReturn ATIR500DVDContext::set_macrovision(UInt32 param_1, UInt32 param_2) {
       uVar3 = 0xe00002c0;
     }
     else {
-      uVar3 = VCALL(*piVar2, 0x70c)(piVar2,param_2,&stack0x00000020);
+      uVar3 = VCALL(*piVar2, 0x70c)(piVar2,param_2,&param_3);
       iVar1 = M<SInt32>(param_1 + 0x8c);
     }
   }

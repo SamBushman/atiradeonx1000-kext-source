@@ -121,22 +121,24 @@ bool ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 al
 
 
 
-void ATIRadeonX1000::addToGART(IOMemoryDescriptor *descriptor, UInt32 *result) {
-    /* CONFIRMED real trivial pass-through - no added logic. */
-    IOATIR500Accelerator::addToGART(descriptor, result);
+IOReturn ATIRadeonX1000::addToGART(IOMemoryDescriptor *descriptor, UInt32 *result) {
+    /* CONFIRMED real trivial pass-through - no added logic; the base result is returned (#86). */
+    return IOATIR500Accelerator::addToGART(descriptor, result);
 }
 
 
 
-void ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
-    IOATIR500Accelerator::addTransferToGART(buffer);
+IOReturn ATIRadeonX1000::addTransferToGART(VendorTransferBuffer *buffer) {
+    IOReturn mapped = IOATIR500Accelerator::addTransferToGART(buffer);
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     /* real: `iVar1 = base_call(...); if ((iVar1 != 0) && (this[0x85] != 0)) { this+0x8a0 = 1; }` -
-     * the base call's own real return value is CONFIRMED (issue #26) to not exist - addToGART is
-     * genuinely void at both class levels - so the gate is transcribed here on the byte at
-     * this+0x85 alone, matching the base call's own real (lack of a) return value. */
-    if (self[0x85] != 0) {
+     * CORRECTED (#86): issue #26 concluded the base call has no return value and dropped the `iVar1 != 0` half of the
+     * gate. The shipped disassembly (0x1a4f8: `cmpwi r3,0; beq`) shows the opposite: the chain addTransferToGART -> addToGART ->
+     * addToMinMaxGART (slot +0x590, returns 1 on success / 0 on failure) passes r3 straight through, and the flag is only set
+     * when the mapping succeeded. The result is returned unchanged (r3 is untouched after the compare). */
+    if (mapped != 0 && self[0x85] != 0) {
         *reinterpret_cast<UInt32 *>(self + 0x8a0) = 1;
     }
+    return mapped;
 }
 

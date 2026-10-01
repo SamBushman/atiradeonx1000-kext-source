@@ -29,8 +29,9 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9740 */
-IOReturn IOATIR500GLContext::page_off_texture(UInt32 param_1, UInt32 param_2, unsigned int param_3, unsigned int param_4) {
+IOReturn IOATIR500GLContext::page_off_texture(UInt32 param_2, UInt32 param_3, unsigned int param_4, unsigned int param_5) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the real arguments start at param_2 (#86) */
 
   SInt32 *piVar1;
   UInt32 uVar2;
