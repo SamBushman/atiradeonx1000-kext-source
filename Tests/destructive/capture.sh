@@ -13,7 +13,7 @@ step ioreg     /usr/sbin/ioreg -l -w0
 step displays  /usr/sbin/system_profiler SPDisplaysDataType
 step vm_stat   /usr/bin/vm_stat
 step syslog_tail sh -c 'tail -n 80 /var/log/system.log'
-if [ -x ./regsnap ]; then step regs ./regsnap; fi
+if [ -x ./regsnap ]; then step regs ./regsnap; else echo "capture: note - ./regsnap not built (make regsnap): no register snapshot"; fi
 /usr/sbin/screencapture -x "$P.png" 2>/dev/null || { echo "capture: screencapture FAILED"; FAIL=$((FAIL+1)); }
 # Volumes: `diskutil verifyVolume` on Tiger cannot unmount the mounted Test HD ("Could not unmount disk for verification") and reports a live
 # "Volume Bit Map needs minor repair" on the in-use boot volume, so an absolute clean/unclean verdict is not available while mounted. The check is

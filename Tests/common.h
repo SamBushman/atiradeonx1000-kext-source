@@ -202,5 +202,6 @@ void run_gl_context_tests(io_service_t service);
 void run_2d_context_tests(io_service_t service);
 void run_dvd_context_tests(io_service_t service);
 void run_surface_context_tests(io_service_t service);
+void run_deep_t1_tests(io_service_t service);   /* issue #100, test_deep_t1.c: ./parity_test_harness --deep */
 
 #endif /* ATIRADEONX1000_TESTS_COMMON_H */

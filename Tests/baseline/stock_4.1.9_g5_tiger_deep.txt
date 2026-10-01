@@ -1,0 +1,32 @@
+-- GL T1 --
+[OK] GL get_config(sel 3) succeeds r=0x00000000
+[OK] GL get_config(sel 3) is repeatable {8454208,259817472,268435456} vs {8454208,259817472,268435456}
+[OK] GL get_config out[2] (VRAM bytes) is a power of two >= 64 MB out[2]=0x10000000
+[OK] GL get_config out[1] (usable VRAM) is within out[2] and >= half of it out[1]=0xf7c8000 out[2]=0x10000000
+[OK] GL get_status(sel 4) succeeds r=0x00000000
+[OK] GL get_status(sel 4) == 0 on an idle device (stock baseline) status=0x0
+[OK] GL get_hw_info(sel 20) succeeds r=0x00000000
+[OK] GL get_hw_info chip id == 0x7240 (R580, the stock value on this X1900) hw={0x3,0x7240,0xc,0x1,0x0}
+[OK] GL get_hw_info pipe counts are plausible (1..16, z pipes >= 1) numPipes-ish=3,12 zPipes-ish=1
+[OK] GL get_hw_info(sel 20) is repeatable
+-- 2D T1 --
+[OK] 2D get_config(sel 1) succeeds r=0x00000000
+[OK] 2D get_config == GL get_config {out[0], out[2]} 2D={8454208,268435456} GL out0=8454208 out2=268435456
+[OK] 2D get_surface_info(panel 0) succeeds, 0x30 bytes r=0x00000000 outSize=48
+[OK] 2D get_surface_info packs width/height consistently (d[1] == d[2]<<16 | d[3]) and a real mode (>= 640x480) d[1]=0x7800438 w=1920 h=1080
+[OK] 2D get_surface_info(panel 0) is repeatable
+[OK] 2D read_regs(sel 16) of CONFIG_MEMSIZE 0x00f8 + RBBM_STATUS 0x0e40 succeeds r=0x00000000
+[OK] 2D read_regs CONFIG_MEMSIZE == the VRAM size reported by get_config reg=0x10000000 vram=0x10000000
+[REC] 2D read_regs RBBM_STATUS(0x0e40) (bit 31 = GUI active; varies) = 0x10000140
+[OK] 2D read_regs one register: CONFIG_MEMSIZE is repeatable 0x10000000 vs 0x10000000
+-- DVD T1 --
+[OK] DVD get_config(sel 1) == 2D get_config DVD={8454208,268435456}
+[OK] DVD get_status(sel 2) == 0 with nothing bound (stock baseline) r=0x00000000 out0=0
+[OK] DVD read_regs(sel 13) CONFIG_MEMSIZE == the VRAM size reported by get_config r=0x00000000 reg=0x10000000
+[OK] DVD check_stamps(sel 20, 0, 0): both done r=0x00000000 both=1
+-- Surface T1 --
+[OK] Surface get_state(sel 2) == 1 (stock baseline) r=0x00000000 state=1
+[OK] Surface surface_query_lock(sel 11) with no lock held -> CannotLock r=0xe00002cc
+[OK] Surface get_state(sel 2) unchanged after the query state=1
+
+26 calls made (25 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

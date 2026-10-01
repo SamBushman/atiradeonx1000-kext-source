@@ -11,4 +11,7 @@ destructive-%: %.c dtest.c dtest.h ../common.h
 clean:
 	rm -f selftest_get_state regsnap
 
-.PHONY: clean
+.PHONY: clean regsnap
+
+regsnap: regsnap.c ../common.h
+	$(CC) $(CFLAGS) -o regsnap regsnap.c $(LDFLAGS)

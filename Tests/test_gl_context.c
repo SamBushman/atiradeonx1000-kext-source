@@ -208,7 +208,10 @@ static void test_get_data_buffer(io_connect_t connect) {
     int out0 = -1, out1 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 18, 0, 2, &out0, &out1);
     report("GL get_data_buffer(sel 18)", r, NULL);
-    if (r == TEST_kIOReturnSuccess) printf("    out={0x%x,0x%x}\n", out0, out1);
+    /* NOT a pure query (issue #100 Step 0, Tests/deep_paths.md): the body calls IOATIR500Accelerator::allocOneDataBuffer / allocDataBuffers and so GROWS a
+     * global pool - out[0] was 0xd000 when the baseline was recorded (2026-09-18) and 0x10000 on 2026-10-01 after the desktop had run for days, with
+     * the stock kext unchanged. The baseline therefore pins only what is invariant: out[1] and that out[0] is one of the observed pool sizes. */
+    if (r == TEST_kIOReturnSuccess) printf("    out[0] %s {0xd000,0x10000}, out[1]=0x%x\n", (out0 == 0xd000 || out0 == 0x10000) ? "in the observed set" : "OUTSIDE the observed set", out1);
 }
 
 /* selector 19: set_stereo(UInt32,UInt32) - CONFIRMED: structureI, in=2,

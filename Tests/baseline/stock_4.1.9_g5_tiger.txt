@@ -21,7 +21,7 @@
 [OK] GL set_surface_volatile_state(sel 16, 0) -> 0x00000000 (kIOReturnSuccess)
 [REC] GL reclaim_resources(sel 17) -> 0x00000000 (kIOReturnSuccess)
 [REC] GL get_data_buffer(sel 18) -> 0x00000000 (kIOReturnSuccess)
-    out={0xd000,0x10000}
+    out[0] in the observed set {0xd000,0x10000}, out[1]=0x10000
 [SKIP] GL set_stereo(sel 19, 0,0) -- not run live: shape corrected (2 scalars) but mutates global accelerator stereo state
 [OK] GL get_hw_info(sel 20) -> 0x00000000 (kIOReturnSuccess)
     hw={0x3,0x7240,0xc,0x1,0x0}

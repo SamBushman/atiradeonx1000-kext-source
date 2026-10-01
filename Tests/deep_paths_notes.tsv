@@ -1,0 +1,157 @@
+# manual statements for Tools/deep_paths.py (key<TAB>field<TAB>text); "provisional" rows carry the issue #100 table's own tier and deep-path text, not yet hand-traced
+GL 0	tier	provisional T2 (#100 table)
+GL 0	reason	baseline: only id 0 (detach) | deep path not yet exercised: bind a real surface (Surface connection id + modeBits)
+GL 1	tier	provisional T2 (#100 table)
+GL 1	reason	baseline: (0,0,0,0) | deep path not yet exercised: non-zero rectangle on a bound surface
+GL 2	tier	provisional T2 (#100 table)
+GL 2	reason	baseline: (0,0) | deep path not yet exercised: non-zero interval on a bound surface
+GL 3	tier	provisional T1 (#100 table)
+GL 3	reason	baseline: success, outputs recorded only | deep path not yet exercised: assert outputs; re-read after state changes
+GL 4	tier	provisional T1 (#100 table)
+GL 4	reason	baseline: success, recorded only | deep path not yet exercised: status with a bound surface / after work
+GL 5	tier	provisional T1 (#100 table)
+GL 5	reason	baseline: unbound -> Error | deep path not yet exercised: bound surface: real dimensions
+GL 6	tier	provisional T1 (#100 table)
+GL 6	reason	baseline: id 0 -> BadArgument | deep path not yet exercised: a real id: the info struct
+GL 7	tier	provisional T2 (#100 table)
+GL 7	reason	baseline: bad kind -> BadArgument; unbound -> CannotLock | deep path not yet exercised: valid kind on a bound surface: copy of surface into user memory (struct `sIOGLContextReadBufferData`; also #86)
+GL 8	tier	provisional T3 (#100 table)
+GL 8	reason	baseline: success with nothing pending | deep path not yet exercised: finish after submitted work (waits on the GPU timestamp)
+GL 9	tier	provisional T2 (#100 table)
+GL 9	reason	baseline: stamp 0 (always reached) | deep path not yet exercised: a non-zero stamp from a real submission, reached and not-yet-reached (bounded wait; #86 for rebuilt)
+GL 10	tier	provisional T3 (#100 table)
+GL 10	reason	baseline: invalid kind -> NoResources | deep path not yet exercised: valid kind: allocates a texture (VRAM/GART), returns id/handle
+GL 11	tier	provisional T2 (#100 table)
+GL 11	reason	baseline: unallocated id -> BadArgument | deep path not yet exercised: delete an allocated texture
+GL 12	tier	provisional T3 (#100 table)
+GL 12	reason	baseline: (0) -> CannotLock | deep path not yet exercised: a valid call (global shared-state change)
+GL 13	tier	provisional T3 (#100 table)
+GL 13	reason	baseline: unallocated id -> BadArgument | deep path not yet exercised: page off an allocated texture (VRAM to backing copy; #86 for rebuilt)
+GL 14	tier	provisional T3 (#100 table)
+GL 14	reason	baseline: unbound -> Unsupported | deep path not yet exercised: bound surface + `IOAccelSurfaceScaling` (layout unreconstructed)
+GL 15	tier	provisional T2 (#100 table)
+GL 15	reason	baseline: unallocated id -> BadArgument | deep path not yet exercised: purge an allocated texture
+GL 16	tier	provisional T3 (#100 table)
+GL 16	reason	baseline: value 0 -> success | deep path not yet exercised: non-zero (the body relinks the accelerator's global surface list)
+GL 17	tier	provisional T3 (#100 table)
+GL 17	reason	baseline: success, nothing to reclaim | deep path not yet exercised: reclaim with real resources outstanding (global reclamation)
+GL 18	tier	provisional T1 (#100 table)
+GL 18	reason	baseline: success, recorded only | deep path not yet exercised: after allocations; the allocation-failure path (#99)
+GL 20	tier	provisional T1 (#100 table)
+GL 20	reason	baseline: success, recorded only | deep path not yet exercised: assert the five outputs against the hardware
+2D 0	tier	provisional T2 (#100 table)
+2D 0	reason	baseline: panel 0, no surface -> success + info | deep path not yet exercised: bind a real surface to a panel
+2D 1	tier	provisional T1 (#100 table)
+2D 1	reason	baseline: success, recorded | deep path not yet exercised: assert outputs
+2D 2	tier	provisional T1 (#100 table)
+2D 2	reason	baseline: 3 cases incl. real read-only info for panel 0 | deep path not yet exercised: other panels / ids if present
+2D 3	tier	provisional T3 (#100 table)
+2D 3	reason	baseline: unbound -> NoResources | deep path not yet exercised: bound: flips the displayed buffer (display-visible)
+2D 4	tier	provisional T3 (#100 table)
+2D 4	reason	baseline: unbound -> Unsupported | deep path not yet exercised: bound + scaling struct
+2D 5	tier	provisional T2 (#100 table)
+2D 5	reason	baseline: unbound -> CannotLock | deep path not yet exercised: lock a bound surface (VRAM/GART mapping)
+2D 6	tier	provisional T2 (#100 table)
+2D 6	reason	baseline: unbound -> BadArgument | deep path not yet exercised: unlock after a successful lock
+2D 7	tier	provisional T2 (#100 table)
+2D 7	reason	baseline: mode 0 | deep path not yet exercised: other modes / after work
+2D 8	tier	provisional T2 (#100 table)
+2D 8	reason	baseline: zero size -> BadArgument | deep path not yet exercised: real declare (allocates through the shared allocator)
+2D 9	tier	provisional T2 (#100 table)
+2D 9	reason	baseline: p1 = 0 -> BadArgument | deep path not yet exercised: real create
+2D 10	tier	provisional T3 (#100 table)
+2D 10	reason	baseline: bytes 0 -> BadArgument | deep path not yet exercised: real create (AGP texture allocation, GART)
+2D 11	tier	provisional T2 (#100 table)
+2D 11	reason	baseline: no allocator -> NoResources | deep path not yet exercised: delete after create
+2D 12	tier	provisional T2 (#100 table)
+2D 12	reason	baseline: no allocator -> NoResources | deep path not yet exercised: wait on a real image
+2D 13	tier	provisional DONE (#100 table)
+2D 13	reason	baseline: Unsupported (stub by design) | deep path not yet exercised: none: the stub is the whole behaviour
+2D 14	tier	provisional DONE (#100 table)
+2D 14	reason	baseline: Unsupported (stub by design) | deep path not yet exercised: none: the stub is the whole behaviour
+2D 16	tier	provisional T1 (#100 table)
+2D 16	reason	baseline: zero registers; size mismatch | deep path not yet exercised: READ real registers (non-zero count): read-only, easy
+2D 17	tier	provisional T3 (#100 table)
+2D 17	reason	baseline: not multiple of 8 -> BadArgument; zero pairs | deep path not yet exercised: real register pairs: HARDWARE WRITE
+2D 18	tier	provisional T3 (#100 table)
+2D 18	reason	baseline: same two cases | deep path not yet exercised: real pairs: HARDWARE WRITE
+DVD 0	tier	provisional T2 (#100 table)
+DVD 0	reason	baseline: id 0 (detach) only | deep path not yet exercised: bind a real surface (prerequisite of most rows below)
+DVD 1	tier	provisional T1 (#100 table)
+DVD 1	reason	baseline: success, recorded | deep path not yet exercised: assert outputs
+DVD 2	tier	provisional T1 (#100 table)
+DVD 2	reason	baseline: success, recorded | deep path not yet exercised: with a bound surface
+DVD 3	tier	provisional T1 (#100 table)
+DVD 3	reason	baseline: unbound -> Error | deep path not yet exercised: bound: real dimensions
+DVD 4	tier	provisional T3 (#100 table)
+DVD 4	reason	baseline: unbound -> CannotLock | deep path not yet exercised: bound: VRAM allocation, retry loop up to 1000 times
+DVD 5	tier	provisional T2 (#100 table)
+DVD 5	reason	baseline: unbound -> BadArgument | deep path not yet exercised: after a successful lock
+DVD 7	tier	provisional T2 (#100 table)
+DVD 7	reason	baseline: success | deep path not yet exercised: after work
+DVD 8	tier	provisional T2 (#100 table)
+DVD 8	reason	baseline: zero size -> BadArgument | deep path not yet exercised: real declare (shared allocator)
+DVD 9	tier	provisional T2 (#100 table)
+DVD 9	reason	baseline: no allocator -> NoResources | deep path not yet exercised: after a real declare
+DVD 10	tier	provisional T1 (#100 table)
+DVD 10	reason	baseline: unbound -> Error | deep path not yet exercised: bound surface
+DVD 11	tier	provisional T2 (#100 table)
+DVD 11	reason	baseline: unbound -> Error | deep path not yet exercised: bound: writes the surface's overlay geometry
+DVD 12	tier	provisional T1 (#100 table)
+DVD 12	reason	baseline: unbound -> Error | deep path not yet exercised: bound (the body behind the guard is an empty no-op)
+DVD 13	tier	provisional T1 (#100 table)
+DVD 13	reason	baseline: zero registers; size mismatch | deep path not yet exercised: READ real registers (non-zero count): read-only
+DVD 15	tier	provisional T1 (#100 table)
+DVD 15	reason	baseline: unbound -> Error | deep path not yet exercised: bound (empty no-op behind the guard)
+DVD 17	tier	provisional T2 (#100 table)
+DVD 17	reason	baseline: unbound -> Error | deep path not yet exercised: bound: sets the surface's deinterlace mode
+DVD 19	tier	provisional T2 (#100 table)
+DVD 19	reason	baseline: (0,0) | deep path not yet exercised: non-zero stamps from real work
+DVD 20	tier	provisional T1 (#100 table)
+DVD 20	reason	baseline: (0,0) -> both done | deep path not yet exercised: non-zero stamps: done / not-yet-done
+DVD 21	tier	provisional T2 (#100 table)
+DVD 21	reason	baseline: unbound -> NotReady | deep path not yet exercised: bound: writes the surface geometry
+Surface 0	tier	provisional T2 (#100 table)
+Surface 0	reason	baseline: lockOptions=0 real success (0x44-byte output) | deep path not yet exercised: lockOptions 1/2/3 (allocation paths: see #94-#96)
+Surface 1	tier	provisional T2 (#100 table)
+Surface 1	reason	baseline: no lock held -> CannotLock | deep path not yet exercised: unlock after a successful lock
+Surface 2	tier	provisional T1 (#100 table)
+Surface 2	reason	baseline: success, recorded | deep path not yet exercised: state after changes
+Surface 4	tier	provisional T2 (#100 table)
+Surface 4	reason	baseline: no lock -> CannotLock | deep path not yet exercised: unlock after a write lock (#94)
+Surface 5	tier	provisional T2 (#100 table)
+Surface 5	reason	baseline: rectangle off-surface -> success | deep path not yet exercised: a real in-surface rectangle: surface to user copy
+Surface 6	tier	provisional T2 (#100 table)
+Surface 6	reason	baseline: real success | deep path not yet exercised: other arguments / the backing-store connect path
+Surface 7	tier	provisional T2 (#100 table)
+Surface 7	reason	baseline: many real success cases; (0,0) -> Error | deep path not yet exercised: every mode bit and id class, error paths
+Surface 8	tier	provisional T3 (#100 table)
+Surface 8	reason	baseline: disabled path (size 0) | deep path not yet exercised: enabled path: 0x2c-byte `IOAccelSurfaceScaling` (display scaling)
+Surface 9	tier	provisional T2 (#100 table)
+Surface 9	reason	baseline: one real 4x4 region | deep path not yet exercised: other regions / shapes
+Surface 11	tier	provisional T1 (#100 table)
+Surface 11	reason	baseline: CannotLock (nothing held) | deep path not yet exercised: result while a lock is held
+Surface 13	tier	provisional T2 (#100 table)
+Surface 13	reason	baseline: no lock -> CannotLock | deep path not yet exercised: after a read lock
+Surface 15	tier	provisional T2 (#100 table)
+Surface 15	reason	baseline: no lock -> CannotLock | deep path not yet exercised: after a write lock
+Surface 16	tier	provisional T3 (#100 table)
+Surface 16	reason	baseline: selector 0 -> BadArgument only | deep path not yet exercised: selector 1 (`set_surface_blocking`; value 0 sleeps on a lock) and 4 (`set_volatile_state`, relinks the global surface list)
+Surface 17	tier	provisional T2 (#100 table)
+Surface 17	reason	baseline: real success (wire shape unverified) | deep path not yet exercised: verify the wire shape; other lengths
+Surface 18	tier	provisional T3 (#100 table)
+Surface 18	reason	baseline: selector 0 -> BadArgument only | deep path not yet exercised: selectors 1 and 4 as above
+# ---- hand-traced / live-verified statements (2026-10-01) ----
+GL 3	tier	T1 CONFIRMED (live Phase S, Tests/test_deep_t1.c). Body: IOLockLock, IOLockSleep (only while the device-active flag at accelerator+0x80 is clear), four vtable reads, IOLockUnlock. Outputs {0x810040, 0xf7c8000, 0x10000000} = {config word, usable VRAM, VRAM size}; out[2] equals the CONFIG_MEMSIZE register (0xf8).
+GL 4	tier	T1 CONFIRMED (live). Same lock/sleep prologue as get_config; status 0 on an idle device.
+GL 20	tier	T1 CONFIRMED (live). hw={0x3,0x7240,0xc,0x1,0x0}: chip id 0x7240 (R580); four ATIRadeonX1000 getters under the command lock; no state change.
+GL 18	tier	RECLASSIFIED T1 -> T2 (hand-traced + live evidence). The body calls IOATIR500Accelerator::allocOneDataBuffer / allocDataBuffers and so grows a GLOBAL pool (and is the method of #99: one allocation-failure path returns NoResources with the command lock still held). Live: out[0] was 0xd000 at baseline time (2026-09-18) and 0x10000 on 2026-10-01 with the stock kext unchanged. The normal baseline now pins only the invariants.
+2D 1	tier	T1 CONFIRMED (live): out == {GL out[0], VRAM size}.
+2D 2	tier	T1 CONFIRMED for panel 0 (live): 0x30-byte info, d[1] = d[2]<<16 | d[3] (width/height 1920x1080), repeatable; read-only fields of the accelerator's panel record.
+2D 16	tier	T1 CONFIRMED (live): reads (offset & 0x1ffc) through the MMIO window, no write. CONFIG_MEMSIZE (0xf8) == get_config VRAM; RBBM_STATUS (0xe40) recorded (0x10000140 idle).
+DVD 1	tier	T1 CONFIRMED (live): == 2D get_config.
+DVD 2	tier	T1 CONFIRMED (live) with nothing bound: out0 = 0.
+DVD 13	tier	T1 CONFIRMED (live): same body shape as 2D read_regs (struct sizes must match and be a multiple of 4, else BadArgument before the lock; Error 0xe00002d8 NotReady if the device-active flag is clear).
+DVD 20	tier	T1 CONFIRMED for (0,0) (live): bothDone = 1; non-zero stamps need real submitted work (T2, depends on #93/#97).
+Surface 2	tier	T1 CONFIRMED (live): state 1, unchanged by queries.
+Surface 11	tier	T1 CONFIRMED for 'no lock held' (live): CannotLock; the held-lock result needs a successful lock (T2, #94-#96).
