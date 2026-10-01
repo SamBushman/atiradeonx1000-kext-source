@@ -1312,14 +1312,16 @@ static inline unsigned long long GH_D2ULL(double d) { union { double d; unsigned
 #define GH_ARGF(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), (double)GH_BITS_F((unsigned int)(x)))
 #define GH_ARGD(x) __builtin_choose_expr(GH_IS_FP(x), GH_FPV(x), __builtin_choose_expr(sizeof(x) == 8, GH_BITS_DD((unsigned long long)(x)), (double)(long)(x)))
 static inline void GH_DCBZ(unsigned int p) { __asm__ __volatile__("dcbz 0,%0" : : "r"(p) : "memory"); }
+/* v0-v2 are live only between the lvx and the stvx, but Darwin saves a thread's vector registers across a context switch only for the bits set in VRSAVE (SPR 256):
+   without them an interrupt inside the window loses the operands (GLDriver FUN_0001eaf0: 1 in ~15 test runs returned a different checksum). Set v0-v2's bits around the asm, restore after */
 static inline vec16 GH_VPERM(vec16 a, vec16 b, vec16 c) {
-    vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
-    __asm__ __volatile__("lvx v0,0,%1\\n\\tlvx v1,0,%2\\n\\tlvx v2,0,%3\\n\\tvperm v0,v0,v1,v2\\n\\tstvx v0,0,%0" : : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
+    unsigned int vs0, vs1; vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
+    __asm__ __volatile__("mfspr %0,256\\n\\toris %1,%0,0xe000\\n\\tmtspr 256,%1\\n\\tlvx v0,0,%3\\n\\tlvx v1,0,%4\\n\\tlvx v2,0,%5\\n\\tvperm v0,v0,v1,v2\\n\\tstvx v0,0,%2\\n\\tmtspr 256,%0" : "=&r"(vs0), "=&r"(vs1) : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
     return r;
 }
 static inline vec16 GH_VSEL(vec16 a, vec16 b, vec16 c) {
-    vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
-    __asm__ __volatile__("lvx v0,0,%1\\n\\tlvx v1,0,%2\\n\\tlvx v2,0,%3\\n\\tvsel v0,v0,v1,v2\\n\\tstvx v0,0,%0" : : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
+    unsigned int vs0, vs1; vec16 ra __attribute__((aligned(16))) = a, rb __attribute__((aligned(16))) = b, rc __attribute__((aligned(16))) = c, r __attribute__((aligned(16)));
+    __asm__ __volatile__("mfspr %0,256\\n\\toris %1,%0,0xe000\\n\\tmtspr 256,%1\\n\\tlvx v0,0,%3\\n\\tlvx v1,0,%4\\n\\tlvx v2,0,%5\\n\\tvsel v0,v0,v1,v2\\n\\tstvx v0,0,%2\\n\\tmtspr 256,%0" : "=&r"(vs0), "=&r"(vs1) : "r"(&r), "r"(&ra), "r"(&rb), "r"(&rc) : "memory");
     return r;
 }
 #define vectorPermute GH_VPERM
