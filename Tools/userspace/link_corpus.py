@@ -1181,7 +1181,10 @@ for pdir_, f in _part_files:
                 txt = re.sub(r'\b0x([0-9a-f]{8})\b', lambda x: ('((unsigned int)&%s + %d)' % lit_syms[int(x.group(1), 16)]) if int(x.group(1), 16) in lit_syms else x.group(0), txt)
                 txt = re.sub(r'(?<![\w)\]])-0x([0-9a-f]{1,8})\b', lambda x: ('((int)&%s + %d)' % lit_syms[(1 << 32) - int(x.group(1), 16)]) if (1 << 32) - int(x.group(1), 16) in lit_syms else x.group(0), txt)
             # `((unsigned char *)0x000c6e40)` where 0xc6e40 is the entry of a function of the link (ghidra2c prints `&DAT_...` of a code address that way): its label
-            txt = re.sub(r'\(\(unsigned char \*\)0x([0-9a-f]{8})\)', lambda x: ('((unsigned char *)%s)' % fn_by_addr[int(x.group(1), 16)]) if int(x.group(1), 16) in fn_by_addr and '+' not in fn_by_addr[int(x.group(1), 16)] else x.group(0), txt)
+            # ...but NOT when it is then indexed (`((unsigned char *)0x00030c50)[param_3 + param_1]`): that is a struct-field OFFSET that coincides with a function's entry
+            # (stock `addis r2,r2,3; lbz r0,0xc50(r2)` = param_1 + param_3 + 0x30c50), the same coincidence ghidra2c.fix_code_offsets handles for `+` / `-`. The label's
+            # address is the REBUILT function's, so the access went through a wild pointer (GLDriver FUN_00079b00, FUN_0001ecd0, FUN_00024970; found by fnfuzz, #44)
+            txt = re.sub(r'\(\(unsigned char \*\)0x([0-9a-f]{8})\)(?!\s*\[)', lambda x: ('((unsigned char *)%s)' % fn_by_addr[int(x.group(1), 16)]) if int(x.group(1), 16) in fn_by_addr and '+' not in fn_by_addr[int(x.group(1), 16)] else x.group(0), txt)
             if sized_index_tables:
                 txt = re.sub(r'\((%s)\)\[' % '|'.join(re.escape(n_) for n_ in sized_index_tables), lambda x: '((%s *)%s)[' % (sized_index_tables[x.group(1)], x.group(1)), txt)
                 txt = re.sub(r'(?<![\w)>.&])(%s)\[' % '|'.join(re.escape(n_) for n_ in sized_index_tables), lambda x: '((%s *)%s)[' % (sized_index_tables[x.group(1)], x.group(1)), txt)
