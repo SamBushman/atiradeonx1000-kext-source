@@ -1,0 +1,3 @@
+# this_register_check.py allow-list (#86): each entry was read against the shipped disassembly and is benign. Format: <mangled symbol> <reason>
+__ZN16ATIR500GLContext12load_textureEP19VendorTextureBuffer pass-2 only: the shipped body spills `this` (r3) to the stack and reloads it; the rebuild keeps it in r3 (read against otool -tV, #86)
+__ZN14ATIRadeonX100027submit_idct_buffer_consumedEPmmP15sATIDVDIDCTInfo pass-2 only: the rebuild spills the 4th argument (sATIDVDIDCTInfo *, r6) to the stack and reads it back; the shipped body reads it from r6 directly (#86)

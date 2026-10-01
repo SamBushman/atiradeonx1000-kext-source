@@ -11,3 +11,8 @@ CLS=${*:-"IOATIR500Accelerator ATIRadeonX1000 IOATIR500GLContext ATIR500GLContex
 python3 Tools/vtable_map.py $STOCK $CLS | sed 's/ @ 0x[0-9a-f]* ([_a-z]*)//' > $T/vt_stock.txt
 python3 Tools/vtable_map.py $T/ours.bin $CLS | sed 's/ @ 0x[0-9a-f]* ([_a-z]*)//' > $T/vt_ours.txt
 echo "vtable lines differing: $(diff $T/vt_stock.txt $T/vt_ours.txt | grep -c '^[<>]')"
+# this-register check (#86): the first real argument must never be dereferenced as `this` (needs `otool -arch ppc -tV` on the Tiger box)
+scp -q $STOCK $H:/tmp/stock_kext.bin
+ssh $H 'otool -arch ppc -tV /tmp/stock_kext.bin' > $T/stock.dis
+ssh $H 'otool -arch ppc -tV /tmp/rb_cur/out/ATIRadeonX1000' > $T/ours.dis
+python3 Tools/this_register_check.py $T/stock.dis $T/ours.dis --allow Tools/this_register_allow.txt

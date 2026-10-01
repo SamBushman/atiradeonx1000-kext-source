@@ -41,6 +41,11 @@ def find_ret(cls, name, nparams):
                 if len(ps) == nparams: return m.group(1).strip() + (' ' if m.group(1).strip().endswith('*') is False else '')
                 if best is None and os.path.basename(h) == cls + '.h': best = m.group(1).strip() + ' '
     return best
+def is_static(name):
+    for h in glob.glob(ROOT + '/Headers/*.h'):
+        for line in open(h):
+            if re.match(r'\s*static\s[^;{]*\b%s\s*\(' % re.escape(name), line): return True
+    return False
 def cut_old(cls, name):
     for f in sorted(glob.glob(ROOT + '/Sources/*.cpp')):
         s = open(f).read()
@@ -83,12 +88,25 @@ for arg in sys.argv[1:]:
     if ret is None: print('NO HEADER DECL', dm); ret = 'UInt32 '
     prim_ptr = re.compile(r'^(?:const\s+)?(?:unsigned int|int|long|UInt8|UInt16|UInt32|SInt8|SInt16|SInt32|char|void|float|IOMemoryDescriptor)\s*\*+$')
     dp = []; cast_opts = []
-    for i, p in enumerate(params):
-        t = project_type(p)
-        if t.endswith('*') and not prim_ptr.match(t) and t.count('*') == 1:
-            dp.append('%s *real_param_%d' % (t.rstrip('* ').strip(), i + 1)); cast_opts.append('cast:param_%d' % (i + 1))
+    # #86: when Ghidra's signature inference never saw `this` used, its decompile names the incoming `this` register (r3) `param_1`
+    # and the real arguments start at param_2. Declaring the demangled parameters as param_1.. made the first real argument take
+    # `this`' place (the body then dereferenced e.g. `attribute` or a stamp value as the object). Detect it: the decompile has no
+    # `this` token and the method is non-static -> shift the parameter names by one and declare `this=param_1`.
+    shift = 0
+    work = '%s/work/0x%x.txt' % (SP, a)
+    if cls and not is_static(fn) and not re.search(r'\bthis=', opts):
+        if os.path.exists(work):
+            if not re.search(r'(?<![\w])this(?![\w])', open(work).read()): shift = 1
         else:
-            dp.append('%s%sparam_%d' % (t, '' if t.endswith('*') else ' ', i + 1))
+            print('   WARNING: %s missing - cannot tell whether Ghidra named `this` param_1; pass this=param_1 explicitly (see #86)' % work)
+    if re.search(r'\bthis=param_1\b', opts): shift = 1
+    elif shift: opts = (opts + ' this=param_1').strip()
+    for i, p in enumerate(params):
+        t = project_type(p); n = i + 1 + shift
+        if t.endswith('*') and not prim_ptr.match(t) and t.count('*') == 1:
+            dp.append('%s *real_param_%d' % (t.rstrip('* ').strip(), n)); cast_opts.append('cast:param_%d' % n)
+        else:
+            dp.append('%s%sparam_%d' % (t, '' if t.endswith('*') else ' ', n))
     decl_params = ', '.join(dp)
     base_opts = opts
     opts = (opts + ('' if os.environ.get('NOEXACT') else ' exact ') + ' '.join(cast_opts)).strip()
