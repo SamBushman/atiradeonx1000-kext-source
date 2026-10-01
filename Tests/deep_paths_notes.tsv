@@ -173,3 +173,6 @@ DVD 3	tier	T1/T2 CONFIRMED (live): bound -> {768,576} (the default buffer record
 DVD 10	tier	T1 CONFIRMED (live) bound: 0 (ATIR500Surface::showbuffer is a `blr` stub); unbound -> Error.
 DVD 12	tier	T1 CONFIRMED (live) bound, arg 0: 0 (enable/disable_overlay are `blr` stubs).
 DVD 15	tier	T1 CONFIRMED (live) bound, (0,0,0,0): 0 (dvd_setup_subpicture is a `blr` stub).
+Surface 4	tier	T2 CONFIRMED (live): with only the READ lock held write_unlock_options -> CannotLock and the read lock stays held (the write byte +0xbd1 is its own state).
+Surface 13	tier	T2 CONFIRMED (live): after a read lock -> 0 (releases it); again -> CannotLock; query_lock available in between.
+Surface 15	tier	T2 CONFIRMED (live): with only the READ lock held -> CannotLock, state untouched.

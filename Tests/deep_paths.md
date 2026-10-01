@@ -595,7 +595,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface22surface_unlock_opt`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live): with only the READ lock held write_unlock_options -> CannotLock and the read lock stays held (the write byte +0xbd1 is its own state).
 - **manual reason**: baseline: no lock -> CannotLock | deep path not yet exercised: unlock after a write lock (#94)
 
 ## Surface sel 5 - `IOATIR500Surface::surface_read` 
@@ -694,7 +694,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface22surface_unlock_opt`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live): after a read lock -> 0 (releases it); again -> CannotLock; query_lock available in between.
 - **manual reason**: baseline: no lock -> CannotLock | deep path not yet exercised: after a read lock
 
 ## Surface sel 14 - `IOATIR500Surface::surface_write_lock` (own issue #88-#97, not part of #100)
@@ -714,7 +714,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface22surface_unlock_opt`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live): with only the READ lock held -> CannotLock, state untouched.
 - **manual reason**: baseline: no lock -> CannotLock | deep path not yet exercised: after a write lock
 
 ## Surface sel 16 - `IOATIR500Surface::surface_control` 

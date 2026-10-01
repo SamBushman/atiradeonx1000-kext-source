@@ -178,8 +178,45 @@ static void dvd_bind_round_trip(io_service_t service) {
     check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
 }
 
+/* T2 row 4 (issue #100): the other unlock selectors after a read lock. Traced (IOATIR500Surface::surface_unlock_options, 0x14f60): the READ lock lives in the byte at
+ * surface+0xbd0, the WRITE lock in +0xbd1; unlock(type) looks at its own byte only: zero -> CannotLock, state untouched; the wrappers sel 13 (surface_read_unlock) /
+ * sel 1 (surface_read_unlock_options) use type 1, sel 15 (surface_write_unlock) / sel 4 (surface_write_unlock_options) type 2. */
+static void lock_unlock_variants(io_service_t service) {
+    int before[NCLS], after[NCLS], i, same = 1; io_connect_t c = IO_OBJECT_NULL; kern_return_t r; unsigned char data[0x44]; IOByteCount sz = sizeof data;
+    printf("-- Surface T2: unlock variants after a read lock --\n");
+    class_counts(before);
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &c) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(c, 7, 2, 0, 0, 0x4);
+    check("Surface set_id_mode(0,0x4) [precondition]", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureO(c, 0, 1, &sz, 0, data);
+    check("Surface read lock (lockOptions 0)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 4, 1, 0, 0);
+    check("Surface write_unlock_options(sel 4) while only the READ lock is held -> CannotLock", r == TEST_kIOReturnCannotLock, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 15, 0, 0);
+    check("Surface surface_write_unlock(sel 15) while only the READ lock is held -> CannotLock", r == TEST_kIOReturnCannotLock, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 11, 0, 0);
+    check("Surface query_lock: the read lock is still held after the two refused write unlocks -> CannotLock", r == TEST_kIOReturnCannotLock, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 13, 0, 0);
+    check("Surface surface_read_unlock(sel 13) releases the read lock", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 11, 0, 0);
+    check("Surface query_lock after sel 13 -> available", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 13, 0, 0);
+    check("Surface surface_read_unlock(sel 13) a second time -> CannotLock", r == TEST_kIOReturnCannotLock, "r=0x%08x", (unsigned int)r);
+    sz = sizeof data;
+    r = IOConnectMethodScalarIStructureO(c, 0, 1, &sz, 0, data);
+    check("Surface read lock again", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIScalarO(c, 1, 1, 0, 0);
+    check("Surface read_unlock_options(sel 1) releases it (cleanup)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    IOServiceClose(c);
+    usleep(300000);
+    class_counts(after);
+    for (i = 0; i < NCLS; i++) if (before[i] != after[i]) same = 0;
+    check("leak check: driver class instance counts identical before/after", same, "before={%d,%d,%d,%d,%d,%d} after={%d,%d,%d,%d,%d,%d}", before[0], before[1], before[2], before[3], before[4], before[5], after[0], after[1], after[2], after[3], after[4], after[5]);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
     dvd_bind_round_trip(service);
+    lock_unlock_variants(service);
 }

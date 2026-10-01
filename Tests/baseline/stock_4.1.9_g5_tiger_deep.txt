@@ -67,5 +67,17 @@
 [OK] DVD get_surface_size after detaching -> Error again r=0xe00002bc
 [OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
 [OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- Surface T2: unlock variants after a read lock --
+[OK] Surface set_id_mode(0,0x4) [precondition] r=0x00000000
+[OK] Surface read lock (lockOptions 0) r=0x00000000
+[OK] Surface write_unlock_options(sel 4) while only the READ lock is held -> CannotLock r=0xe00002cc
+[OK] Surface surface_write_unlock(sel 15) while only the READ lock is held -> CannotLock r=0xe00002cc
+[OK] Surface query_lock: the read lock is still held after the two refused write unlocks -> CannotLock r=0xe00002cc
+[OK] Surface surface_read_unlock(sel 13) releases the read lock r=0x00000000
+[OK] Surface query_lock after sel 13 -> available r=0x00000000
+[OK] Surface surface_read_unlock(sel 13) a second time -> CannotLock r=0xe00002cc
+[OK] Surface read lock again r=0x00000000
+[OK] Surface read_unlock_options(sel 1) releases it (cleanup) r=0x00000000
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
 
-62 calls made (61 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+73 calls made (72 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
