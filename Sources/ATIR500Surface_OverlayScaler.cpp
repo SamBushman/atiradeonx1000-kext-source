@@ -161,39 +161,8 @@ void ATIR500Surface::set_linear_transform(int matrixIndex, OverlayPictureControl
 }
 
 /* Fills the 15 scaler-tap register words at regs+0x114.. from the coefficient set selected by 4096/scale. */
-void ATIR500Surface::filter_setup(UInt32 scale, OverlayRegisters *regs) {
-    UInt8 *r = reinterpret_cast<UInt8 *>(regs);
-    double d = static_cast<double>(4096.0f / static_cast<float>(UD(scale)));
-    double v = 0.25;
-    if (0.25 <= d) {
-        v = d;
-        if (1.0 < d) {
-            v = 1.0;
-        }
-    }
-    int entry = static_cast<int>((v - 0.25) * 100.0) * 0x20;
-    const UInt8 *set = reinterpret_cast<const UInt8 *>(kFilterSetupArrayOfSets) + 8 + entry;
-    U32At(r, 0x114) = set[0] & 0xf;
-    U32At(r, 0x118) = set[1] & 0x7f;
-    U32At(r, 0x11c) = set[2] & 0x7f;
-    U32At(r, 0x120) = set[3] & 0xf;
-    U32At(r, 0x124) = set[4] & 0xf;
-    U32At(r, 0x128) = set[5] & 0x7f;
-    U32At(r, 300) = set[6] & 0x7f;
-    U32At(r, 0x130) = set[7] & 0xf;
-    U32At(r, 0x134) = set[8] & 0xf;
-    U32At(r, 0x138) = set[9] & 0x7f;
-    U32At(r, 0x13c) = set[10] & 0x7f;
-    U32At(r, 0x140) = set[11] & 0xf;
-    U32At(r, 0x144) = set[12] & 0xf;
-    U32At(r, 0x148) = set[13] & 0x7f;
-    U32At(r, 0x14c) = set[14] & 0x7f;
-    U32At(r, 0x150) = set[15] & 0xf;
-    U32At(r, 0x160) = set[19] & 0xf;
-    U32At(r, 0x154) = set[16] & 0xf;
-    U32At(r, 0x158) = set[17] & 0x7f;
-    U32At(r, 0x15c) = set[18] & 0x7f;
-}
+/* (re-ported mechanically: see ATIR500Surface_filter_setup_Port.cpp) */
+
 
 /* Looks up the horizontal-scaler step entry for `mode` whose 3-tap sum fits the scale; writes the chosen entry's
  * fields through the nine output pointers and returns the first computed increment (or `this` for an unknown mode). */
@@ -284,87 +253,8 @@ UInt32 ATIR500Surface::calc_h_inc_step_by(int mode, float scale, int p3, int p4,
 
 /* Builds the six surface-descriptor register words (one per overlay plane): bits 1.. plane selector, bit-field
  * from info+0x88.., base address >> 4 in bits 4.., and a high bit-field from the per-plane state. */
-void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *infoIn, UInt32 *out) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *info = reinterpret_cast<UInt8 *>(infoIn);
-    SInt32 e8[6];
-    SInt32 d0[6];
-    UInt32 b8[6] = { 0, 0, 0, 0, 0, 0 };   /* words 3-5 stay unwritten (stack garbage) on the iVar17 != 0 video path */
+/* (re-ported mechanically: see ATIR500Surface_get_surf_desc_regs_Port.cpp) */
 
-    if (U32At(info, 0x3c) - 9u < 2) {
-        UInt32 v40 = U32At(info, 0x40);
-        SInt32 mode = static_cast<SInt32>(U32At(info, 0xe0));
-        for (int k = 0; k < 6; ++k) {
-            UInt32 base = U32At(self, U32At(self, 0xd90) * 0x78 + 0x560);
-            U32At(info, 0x70 + k * 4) = v40;
-            U32At(info, 0x88 + k * 4) = 0;
-            U32At(info, 0x58 + k * 4) = base;
-            e8[k] = mode;
-            d0[k] = 0;
-        }
-        SInt32 a = static_cast<SInt32>(U32At(info, 0xd4));
-        SInt32 b = static_cast<SInt32>(U32At(info, 0xd8));
-        SInt32 c = static_cast<SInt32>(U32At(info, 0xdc));
-        b8[0] = static_cast<UInt32>(a / 16);
-        b8[1] = static_cast<UInt32>(b / 16);
-        b8[2] = static_cast<UInt32>(c / 16);
-        if (mode == 0) {
-            b8[3] = b8[0];
-            b8[4] = b8[1];
-            b8[5] = b8[2];
-        }
-        U32At(info, 0x90) = 1;
-        U32At(info, 0x98) = 1;
-        U32At(info, 0x8c) = 1;
-        U32At(info, 0x9c) = 1;
-    } else {
-        SInt32 v10 = static_cast<SInt32>(U32At(info, 0x10));
-        SInt32 v14 = static_cast<SInt32>(U32At(info, 0x14));
-        float f30 = F32At(info, 0x30);
-        float f34 = F32At(info, 0x34);
-        SInt32 mode = static_cast<SInt32>(U32At(info, 0xe0));
-        UInt32 v40 = U32At(info, 0x40);
-        UInt32 bits = U32At(info, 0x54);
-        SInt32 t1 = (v10 < 0) ? -v10 : 0;
-        SInt32 t2 = (v14 < 0) ? -v14 : 0;
-        UInt32 q3 = static_cast<UInt32>(v10) / U32At(info, 0x50);
-        UInt32 q4 = static_cast<UInt32>(v14) / U32At(info, 0x4c);
-        SInt32 t3 = (static_cast<SInt32>(q3) < 0) ? -static_cast<SInt32>(q3) : 0;
-        SInt32 t4 = (static_cast<SInt32>(q4) < 0) ? -static_cast<SInt32>(q4) : 0;
-        float fVar2 = static_cast<float>(SD(t1)) * f34;
-        float fVar3 = static_cast<float>(SD(t3)) * f34;
-        float fA = static_cast<float>(SD(t2)) * f30;
-        float fB = static_cast<float>(SD(t4)) * f30;
-        for (UInt32 k = 0; k < 6; ++k) {
-            e8[k] = mode;
-            UInt32 base = U32At(self, 0x128);
-            U32At(info, 0x70 + k * 4) = v40;
-            U32At(info, 0x88 + k * 4) = 0;
-            U32At(info, 0xa0 + k * 4) = 0;
-            U32At(info, 0xb8 + k * 4) = 0;
-            U32At(info, 0x58 + k * 4) = base;
-            SInt32 iVar16, iVar14;
-            if (((bits >> (k & 0x3f)) & 1) == 0) {
-                float fVar4 = fA * static_cast<float>(UD(U32At(info, 0x44)));
-                iVar16 = static_cast<SInt32>(F2U(static_cast<double>(fVar4))) + static_cast<SInt32>(U32At(info, 0xa0 + k * 4));
-                iVar14 = static_cast<SInt32>(F2U(static_cast<double>(fVar2)));
-            } else {
-                float fVar4 = fB * static_cast<float>(UD(U32At(info, 0x48)));
-                iVar16 = static_cast<SInt32>(F2U(static_cast<double>(fVar4))) + static_cast<SInt32>(U32At(info, 0xa0 + k * 4));
-                iVar14 = static_cast<SInt32>(F2U(static_cast<double>(fVar3)));
-            }
-            SInt32 stride = static_cast<SInt32>(U32At(info, 0x70 + k * 4));
-            SInt32 origin = static_cast<SInt32>(U32At(info, 0x58 + k * 4));
-            d0[k] = 0;
-            SInt32 offset = iVar14 * stride + origin;
-            b8[k] = static_cast<UInt32>(iVar16 + offset) >> 4;
-        }
-    }
-    for (int k = 0; k < 6; ++k) {
-        out[k] = (static_cast<UInt32>(e8[k]) << 1) | U32At(info, 0x88 + k * 4) | (b8[k] << 4) |
-                 (static_cast<UInt32>(d0[k]) << 0x1b);
-    }
-}
 
 /* Computes the horizontal scaler blanking window for the overlay's output line (outputs 7/8/9). */
 void ATIR500Surface::calc_h_scaler_blank(OverlaySurfaceInfo *infoIn, OverlayBandwidthInfo *bandwidth, UInt32 p3, UInt32 p4,

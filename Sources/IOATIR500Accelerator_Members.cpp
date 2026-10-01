@@ -306,44 +306,8 @@ void IOATIR500Accelerator::teardownAGP(IOService *real_provider) {
 }
 
 /* real addr 0x5270 */
-void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor *real_param_1, UInt32 param_2) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+/* (re-ported mechanically: see IOATIR500Accelerator_removeFromGART_Port.cpp) */
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
-  UInt32 uVar4;
-  
-  uVar4 = param_2 >> (GH_page_shift & 0x3f);
-  if (param_1 != (UInt8 *)0x0) {
-    uVar1 = VCALL(M<SInt32>(param_1), 0x128)(param_1);
-    uVar1 = uVar4 + (uVar1 >> (GH_page_shift & 0x3f));
-    iVar3 = uVar1 - uVar4;
-    M<SInt32>(self + 0x718) = (iVar3 << (GH_page_shift & 0x3f)) + M<SInt32>(self + 0x718);
-    M<SInt32>(self + 0xa0) = M<SInt32>(self + 0xa0) - (iVar3 << (GH_page_shift & 0x3f));
-    if (uVar4 < uVar1) {
-      iVar2 = uVar4 << 2;
-      do {
-        M<UInt32>(M<SInt32>(self + 0x83c) + iVar2) = M<UInt32>(self + 0x844);
-        iVar2 = iVar2 + 4;
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
-    }
-    if (((M<UInt32>(self + 0x98) & 2) != 0) &&
-       (uVar4 = param_2 >> (GH_page_shift & 0x3f), uVar4 < uVar1)) {
-      do {
-        iVar3 = uVar4 << (GH_page_shift & 0x3f);
-        uVar4 = uVar4 + 1;
-        VCALL(M<SInt32>(self), 0x588)(self,M<UInt32>(self + 0x22c),iVar3,0);
-      } while (uVar4 != uVar1);
-    }
-    uVar4 = param_2 >> (GH_page_shift & 0x3f);
-    VCALL(M<SInt32>(self), 0x59c)(self,uVar4,uVar1 - uVar4);
-    VCALL(M<SInt32>(param_1), 0x148)(param_1,3);
-  }
-  return;
-}
 
 /* real addr 0x5710 */
 bool IOATIR500Accelerator::disp_mode_did_change() {

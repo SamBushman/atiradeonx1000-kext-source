@@ -24,73 +24,8 @@ inline UInt16 &U16At(void *base, int offset) { return *reinterpret_cast<UInt16 *
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
 } // namespace
 
-void ATIR500Surface::setupFullScreen() {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 side = U8At(self, 0x158);
-    UInt8 *accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    UInt32 panel = U32At(self, 0xc14);
-    U32At(self, 0xdb8) = U8At(accel + panel * 0x78, 0x164);
-    U8At(accel + panel * 0x78, 0x164) = side;
-    if ((U32At(self, 0xbe8) & 0x10) != 0) {
-        U8At(self, U32At(self, 0xc14) + 0xdb6) = 1;
-    }
-    accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-    if (U8At(accel, 0x9b0) != 0) {
-        panel = U32At(self, 0xc14);
-        UInt32 other = 0;
-        bool touchOther = false;
-        if (U32At(accel, panel * 0x18 + 0xb10) == 0) {
-            if (U32At(accel, 0x894) != 0) {
-                other = (panel == 0) ? 1u : 0u;
-                if (U32At(accel, other * 0x18 + 0xb10) != 0) {
-                    touchOther = true;
-                }
-            }
-            if (touchOther) {
-                UInt8 *rec = accel + other * 0x78;
-                U8At(rec, 0x9f4) = side;
-                U8At(rec, 0x164) = side;
-            }
-        } else {
-            U8At(accel + panel * 0x78, 0x9f4) = side;
-            accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-            if (U32At(accel, 0x894) != 0) {
-                other = (U32At(self, 0xc14) == 0) ? 1u : 0u;
-                UInt8 *rec = accel + other * 0x78;
-                if (U32At(accel, other * 0x18 + 0xb10) == 0) {
-                    U8At(rec, 0x164) = side;
-                } else {
-                    U8At(rec, 0x9f4) = side;
-                    U8At(rec, 0x164) = side;
-                }
-            }
-        }
-    }
+/* (re-ported mechanically: see ATIR500Surface_setupFullScreen_Port.cpp) */
 
-    if (is_flip_allowed() == 0) {
-        accel = reinterpret_cast<UInt8 *>(U32At(self, 0xd50));
-        UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(accel, 0x860));
-        UInt8 b7 = U8At(mmio, 0x6107);
-        UInt8 b5 = U8At(mmio, 0x6105);
-        UInt8 b4 = U8At(mmio, 0x6104);
-        panel = U32At(self, 0xc14);
-        UInt32 field6 = (U8At(mmio, 0x6106) & 0xffcfu) << 0x10;
-        UInt32 sideAtPanel = U8At(accel + panel * 0x78, 0x164);
-        UInt32 bit1 = (sideAtPanel & 1u) << 0x15;
-        UInt32 bit2 = (sideAtPanel > 1) ? 0x100000u : 0u;
-        UInt32 regOffset = (panel == 0) ? 0x6104u : 0x6904u;
-        UInt32 value = (static_cast<UInt32>(b4) << 0x18) | (static_cast<UInt32>(b5) << 0x10) |
-                       ((bit2 | field6 | bit1) >> 8) | static_cast<UInt32>(b7);
-        U32At(mmio, regOffset) = value;
-        enforceInOrderExecutionIO();
-        if (U32At(accel, 0x894) != 0) {
-            UInt32 otherRegOffset = (panel == 0) ? 0x6904u : 0x6104u;
-            U32At(mmio, otherRegOffset) = value;
-            enforceInOrderExecutionIO();
-        }
-    }
-    IOATIR500Surface::setupFullScreen();
-}
 
 SInt32 ATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *bufferIn, UInt32 index, UInt32 level, SInt32 *outWidth,
                                           SInt32 *outHeight, SInt32 *outBytes) {
