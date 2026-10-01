@@ -516,10 +516,11 @@ joined_r0x00199c90:
               piVar16 = local_bc;
               piVar17 = local_dc;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes piVar16, piVar17, the literal 3, and piVar23 too -
-               * piVar23's real register (r27) is set once, early in the function, and never
+               * disassembly): stock passes piVar16, piVar17, r21 (== a4: the search loop's
+               * `r23 - 1`, or 3 only when the loop runs out - NOT a literal 3, #80), and piVar23
+               * too - piVar23's real register (r27) is set once, early in the function, and never
                * reassigned before this call, same as the already-fixed 0xec/0xf0 calls above. */
-              (*pcVar7)(param_1,piVar15,piVar16,piVar17,3,piVar23);
+              (*pcVar7)(param_1,piVar15,piVar16,piVar17,a4,piVar23);
               piVar25 = piVar23;
             }
           }
