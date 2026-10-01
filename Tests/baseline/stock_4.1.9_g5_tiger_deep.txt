@@ -41,5 +41,18 @@
 [OK] Surface read unlock (cleanup, so close leaves no lock) r=0x00000000
 [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={1,2,1,0,1,2} after={1,2,1,0,1,2}
 [OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- GL T2: bind a registered surface, read it back, detach --
+[OK] Surface set_id_mode(1,0x0) [precondition] r=0x00000000
+[OK] Surface set_id_mode(1,0x20) [precondition] r=0x00000000
+[OK] Surface set_shape(sel 9) [precondition] r=0x00000000
+[OK] GL get_surface_size before binding -> Error (stock baseline) r=0xe00002bc
+[OK] GL set_surface(1, modeBits 0) binds the registered surface r=0x00000000
+[OK] GL get_surface_size with a surface bound == the 4x4 shape set by set_shape (stock: {4,4,4,4}) r=0x00000000 size={4,4,4,4}
+[OK] GL get_surface_size is repeatable
+[OK] GL get_surface_info(sel 6, id 1) == {32,4,4} (stock observed: 32 = bits per pixel, then the 4x4 shape) r=0x00000000 info={32,4,4}
+[OK] GL set_surface(0) detaches r=0x00000000
+[OK] GL get_surface_size after detaching -> Error again r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
 
-38 calls made (37 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+50 calls made (49 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
