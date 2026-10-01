@@ -595,7 +595,8 @@ protected:
      * real-offset order with a leading pad from this class's own start
      * (IOUserClient is the real base) and a pad array in every real gap.
      */
-    UInt8 _pad_0x00[0x88];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8 _pad_0x78[0x88 - sizeof(IOUserClient)];
 
     /* contextListHeadA/B - FIXED (issue #42 test-harness pass, "fix real
      * layout bugs found" policy): these two offsets were previously

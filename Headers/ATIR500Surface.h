@@ -277,6 +277,11 @@ public:
      * Sources/ATIR500Surface_SubmitFlipBuffer.cpp.
      */
     virtual void submit_flip_buffer(UInt32 id, IOATIR500GLContext *context, UInt32 flag);
+
+protected:
+    /* LAYOUT (#85): the shipped object is 0xdbc bytes (`li r3,0xdbc` before OSObject::operator new in this class's MetaClass::alloc and in the creating
+     * method); this class declares no data of its own, so pad the base up to that size. A base larger than the real object fails to compile (negative bound). */
+    UInt8 _pad_object_size[0xdbc - sizeof(IOATIR500Surface)];
 };
 
 #endif /* ATIR500SURFACE_H */

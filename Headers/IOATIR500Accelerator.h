@@ -475,7 +475,8 @@ private:
      * `_pad_before_active`) and a pad between liveGLContextListHead and
      * live2DContextListHead.
      */
-    UInt8   _pad_0x00[0x5c];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8   _pad_0x50[0x5c - sizeof(IOAccelerator)];
     IOATIR500Surface    *liveSurfaceListHead;    /* +0x5c, INFERRED offset */
     IOATIR500GLContext  *liveGLContextListHead;  /* +0x60, CONFIRMED this pass: IOATIR500GLContext::start's
                                                     * real decompile does `piVar4[0x18] = this` on the accelerator

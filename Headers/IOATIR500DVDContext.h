@@ -179,7 +179,8 @@ protected:
      * own start (IOUserClient is the real base) and a pad array in
      * every real gap. Same shape as 2D's own equivalent fix.
      */
-    UInt8 _pad_0x00[0x84];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8 _pad_0x78[0x84 - sizeof(IOUserClient)];
     IOATIR500Shared *sharedAllocator; /* +0x84, CONFIRMED (issue #7): owns the real texture-lookup-by-index table (own +0x10/+0x14 fields) the bind/unbind opcode families bounds-check and index into - the same real layout independently confirmed on GL and 2D's own equivalents this session. */
     UInt32 surfaceFlagsBitmask; /* +0x88, FIXED (issue #42 test-harness pass, "fix real layout bugs found" policy): this was wrongly counted as padding - real decompile of IOATIR500DVDContext::set_surface (Sources/IOATIR500DVDContext_SetSurface.cpp) shows it's a real, actively read-and-written UInt32 accumulator bitmask, OR'd with `0x400 << (n & 0x3f)` for each of `param3` (set_surface's own 3rd real parameter) iterations. Exact real semantic role beyond "a per-call accumulated bit-per-count mask" UNKNOWN - transcribed honestly by real offset/behavior, not guessed at by name. */
     ATIRadeonX1000 *accelerator;    /* +0x8c, CONFIRMED offset. CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */

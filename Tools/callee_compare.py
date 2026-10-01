@@ -10,14 +10,17 @@ led = {}
 addr2name = {}
 for l in open('Ledger/kext_ppc_ledger.tsv'):
     f = l.rstrip('\n').split('\t')
-    if len(f) >= 5:
+    if len(f) >= 6:
+        addr2name[int(f[0], 16)] = f[5].lstrip('_') or f[4]      # the same (mangled) spelling the rebuilt object uses
+    elif len(f) >= 5:
         addr2name[int(f[0], 16)] = f[4]
     if len(f) >= 6 and f[2] == 'method' and f[3] == 'DONE':
         led[f[5]] = (int(f[0], 16), int(f[1]), f[4])
 ins = re.compile(r'^([0-9a-f]{8})\t(\S+)\s*(.*)$')
-def callees(lines):
+def callees(lines, lo=None, hi=None):
+    """lo/hi: the function's own address range (stock only; the rebuilt object names other functions symbolically)"""
     c = collections.Counter()
-    for a, op, rest in lines:
+    for k, (a, op, rest) in enumerate(lines):
         if op == 'jbsr':
             c[rest.split(',')[0].lstrip('_')] += 1
         elif op in ('bl', 'bla'):
@@ -25,6 +28,15 @@ def callees(lines):
             c['bl:' + t.lstrip('_')] += 1
         elif op == 'bctrl':
             c['<indirect>'] += 1
+        elif op == 'bctr' and not (k + 1 < len(lines) and lines[k + 1][1] == '.long'):
+            c['<indirect>'] += 1           # tail call through the vtable (a switch's bctr is followed by its .long table)
+        elif op == 'b' and rest:
+            t = rest.split()[0]
+            if t.startswith('0x'):
+                if lo is not None and not (lo <= int(t, 16) < hi) and int(t, 16) in addr2name:     # only a known function entry (not a shared-epilogue / millicode stub)
+                    c['bl:' + t] += 1       # stock: tail `b` to another function's address
+            else:
+                c['bl:' + t.lstrip('_')] += 1   # rebuilt: tail `b` to another function (named symbolically)
     return c
 # stock
 srows = []
@@ -72,7 +84,7 @@ def expand(sym, seen=()):
 res = []
 for sym, (a, n, name) in led.items():
     if sym not in ofun: continue
-    cs = norm(callees(stock_range(a, n)), False)
+    cs = norm(callees(stock_range(a, n), a, a + n), False)
     co = norm(expand(sym), True)
     # bl to a defined local function shows as a name in ours and an address in stock: fold both to bare names
     ALIAS = {'memmove': 'memcpy', 'bzero': 'memset'}

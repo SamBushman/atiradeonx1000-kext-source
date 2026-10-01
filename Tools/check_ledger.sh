@@ -16,3 +16,5 @@ scp -q $STOCK $H:/tmp/stock_kext.bin
 ssh $H 'otool -arch ppc -tV /tmp/stock_kext.bin' > $T/stock.dis
 ssh $H 'otool -arch ppc -tV /tmp/rb_cur/out/ATIRadeonX1000' > $T/ours.dis
 python3 Tools/this_register_check.py $T/stock.dis $T/ours.dis --allow Tools/this_register_allow.txt
+# allocation-size check (#85): every `new` must allocate the shipped object size
+python3 Tools/alloc_size_compare.py $T/stock.dis $T/ours.dis

@@ -93,13 +93,13 @@ struct GLKMemoryElement;
  * Now `OSDeclareDefaultStructors` + `OSDefineMetaClassAndStructors`
  * (Sources/MetaClassRegistration.cpp) generate the constructor pair,
  * metaclass and vtable exactly as the original did. Real object size
- * 0x28 = sizeof(OSObject) (8) + the 0x20-byte pad below.
+ * 0x14 = sizeof(OSObject) (8) + the 0xc-byte pad below (corrected, #85: the shipped allocation is `li r3,0x14`).
  */
 class ATIR500Memory : public OSObject {
     OSDeclareDefaultStructors(ATIR500Memory)
 public:
     /* raw-offset fields (chunkList at +0x10 etc., see this header's layout comments) live in this pad */
-    UInt8 _pad_confirmed_size[0x20];
+    UInt8 _pad_confirmed_size[0x14 - 8];   /* the shipped object is 0x14 bytes (`li r3,0x14` in ATIR500Memory::MetaClass::alloc, IOATIR500Accelerator::start, ATIRadeonX1000::start): OSObject's 8 + 0xc (#85; the earlier 0x20 was the IOATIR500Shared figure) */
 
     /*
      * Two real constructor bodies exist (real addrs `0x18c00`/`0x18ce0`),

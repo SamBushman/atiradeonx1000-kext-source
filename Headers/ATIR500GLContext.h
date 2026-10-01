@@ -394,11 +394,8 @@ protected:
      * cross-referenced in comments for the exact function each was
      * confirmed in.
      */
-    UInt8   _pad_0x00[0x290];
-    void   *boundSurface;          /* +0x290, CONFIRMED: the currently-bound render surface, read throughout get_config/get_status/get_surface_size/scale_surface/read_buffer */
-    UInt8   _pad_0x294[0x29c - 0x294];
-    SInt32  mipLevel;              /* +0x29c, CONFIRMED: current mip level index, used in per-mip offset computations throughout */
-    UInt8   _pad_0x2a0[0x2a4 - 0x2a0];
+    /* boundSurface (+0x290) and mipLevel (+0x29c) now live in IOATIR500GLContext (see there); this class's own data starts right after the base,
+     * at +0x2a4 (#85). All offsets are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp. */
     void   *textureSlotArray;      /* +0x2a4, base of a 20-entry (16 fragment-texture + 4 vertex-attribute) per-unit slot array, stride 4 bytes - CONFIRMED (0x06-0x15/0x16-0x25 unbind families, opcode 0x39's vertex-attribute binding at index>=16) */
     UInt8   _pad_0x2a8[0x328 - 0x2a8];
     void   *transferBufferSlot;    /* +0x328, a single distinct texture-tracking slot separate from textureSlotArray - CONFIRMED (opcodes 0x26/0x27's bind/unbind pair) */
@@ -417,6 +414,7 @@ protected:
     UInt16  altUnitSelector;       /* +0x3b2, CONFIRMED referenced alongside +0x3aa in the per-context texture-unit array init in start() */
     UInt8   _pad_0x3b4[0x3f0 - 0x3b4];
     void   *perUnitTextureArray;   /* +0x3f0, stride 0x78, 6 real entries, CONFIRMED initialized in start() with real default blend/format bits */
+    UInt8   _pad_tail[0x690 - 0x3f4];   /* the shipped object is 0x690 bytes (ATIR500GLContext::MetaClass::alloc: `li r3,0x690; OSObject::operator new`) (#85) */
 };
 
 #endif /* ATIR500GLCONTEXT_H */

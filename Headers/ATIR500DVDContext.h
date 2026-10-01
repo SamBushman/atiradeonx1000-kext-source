@@ -100,6 +100,11 @@ protected:
      * today (grep-confirmed), so this doesn't change any call site.
      */
     sATIDVDIDCTInfo *idctInfo() const { return reinterpret_cast<sATIDVDIDCTInfo *>(boundSurface); }
+
+protected:
+    /* LAYOUT (#85): the shipped object is 0x1e0 bytes (`li r3,0x1e0` before OSObject::operator new in this class's MetaClass::alloc and in the creating
+     * method); this class declares no data of its own, so pad the base up to that size. A base larger than the real object fails to compile (negative bound). */
+    UInt8 _pad_object_size[0x1e0 - sizeof(IOATIR500DVDContext)];
 };
 
 #endif /* ATIR500DVDCONTEXT_H */

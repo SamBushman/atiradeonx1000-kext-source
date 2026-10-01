@@ -113,6 +113,11 @@ public:
      * independently decompiled this pass.
      */
     void alloc_and_load_image(VendorTextureBuffer *texture);
+
+protected:
+    /* LAYOUT (#85): the shipped object is 0x12c bytes (`li r3,0x12c` before OSObject::operator new in this class's MetaClass::alloc and in the creating
+     * method); this class declares no data of its own, so pad the base up to that size. A base larger than the real object fails to compile (negative bound). */
+    UInt8 _pad_object_size[0x12c - sizeof(IOATIR5002DContext)];
 };
 
 #endif /* ATIR5002DCONTEXT_H */

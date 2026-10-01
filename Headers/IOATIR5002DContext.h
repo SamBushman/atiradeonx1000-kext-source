@@ -141,7 +141,8 @@ protected:
      * object, which matters for this class's own real `OSTypeAlloc`
      * allocation size.
      */
-    UInt8 _pad_0x00[0x88];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8 _pad_0x78[0x88 - sizeof(IOUserClient)];
     IOATIR500Shared *sharedAllocator; /* +0x88, CONFIRMED: the IOATIR500Shared* lazily created via create_shared() on first texture/transfer allocation. Concrete type CONFIRMED this pass (issue #7) - real bounds-checked texture-by-index lookups go through its own +0x10 (array)/+0x14 (count) fields, the same real layout independently confirmed via DVD's this+0x84 and GL's own texture lists. */
     UInt8 _pad_0x8c[0x94 - 0x8c];
     ATIRadeonX1000 *accelerator;   /* +0x94, CONFIRMED offset (every method above reaches hardware through `*(int*)(this+0x94)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */

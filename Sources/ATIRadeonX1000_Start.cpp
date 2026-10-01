@@ -141,10 +141,9 @@ bool ATIRadeonX1000::start(IOService *param_1) {
     M<UInt16>(self + 0xaa) = 0x1000;
     M<UInt16>(self + 0xa8) = 0x1000;
   }
-  this_00 = (UInt8 *)GH_ZN8OSObjectnwEm(0x14);
-  if (this_00 != (UInt8 *)0x0) {
-    this_00 = (UInt8 *)new ATIR500Memory();
-  }
+  /* #85: the decompile's `operator new(0x14); if (p) ATIR500Memory::ATIR500Memory(p)` pair is exactly what `new ATIR500Memory()` compiles to; the
+   * mechanical port wrote both, which allocated twice and leaked the first object on every start(). */
+  this_00 = (UInt8 *)new ATIR500Memory();
   M<UInt8 *>(self + 0x93c) = this_00;
   if (this_00 != (UInt8 *)0x0) {
     iVar5 = ((ATIR500Memory *)(this_00))->init_pool(0);

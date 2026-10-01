@@ -161,7 +161,8 @@ public:
      * both their individual reality and their relative order below - no
      * longer modeled as "unordered".
      */
-    UInt8   _pad_before_active[0x80];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8   _pad_before_active[0x80 - sizeof(IOATIR500Accelerator)];
     UInt8   deviceActiveFlag;         /* +0x80, CONFIRMED: a real byte gate checked before nearly every hardware operation in every context class, and directly read/written by 6 independent ATIRadeonX1000:: methods (callPlatformFunction, submit_empty_buffer, start_promo4_engine/stop_promo4_engine, GPUSensorFunc, system_will_change_speed) - always as a single byte, never contradicted */
     UInt8   _pad_0x81[0x224 - 0x81];
 
@@ -241,7 +242,7 @@ public:
     UInt32  mainRingCursor;           /* +0x918, INFERRED offset (this project confirmed the field's existence and role - the real write-cursor submit_ring_data advances - via the same +0x1600-relative-to-userspace reasoning as the client-side cursor fields, not from a from-zero decompile of this exact byte) */
     UInt8   _pad_0x91c[0x930 - 0x91c]; /* FIXED (issue #57): a real 0x14-byte gap between mainRingCursor and idctRingCursor had no padding array at all, so idctRingCursor was compiling at +0x91c instead of its own documented +0x930. */
     UInt32  idctRingCursor;           /* +0x930, CONFIRMED distinct from mainRingCursor: submit_idct_buffer_consumed writes IDCT_RING_WPTR using a value derived from this field, not this+0x918 */
-    UInt8   _pad_0x934[0xc00 - 0x934]; /* UNKNOWN: large unverified gap - real upper bound NOT confirmed; sized to comfortably cover the largest real accelerator-relative offset referenced anywhere else in this project's own code (0xbe8, in IOATIR500Surface_LockShape.cpp) plus margin, NOT a confirmed real boundary - a genuine placeholder, flagged honestly rather than guessed precisely. Revisit once more of this class's own tail fields are independently decompiled. */
+    UInt8   _pad_0x934[0xc60 - 0x934]; /* UNKNOWN: large unverified gap - real upper bound NOT confirmed; sized to comfortably cover the largest real accelerator-relative offset referenced anywhere else in this project's own code (0xbe8, in IOATIR500Surface_LockShape.cpp) plus margin, NOT a confirmed real boundary - a genuine placeholder, flagged honestly rather than guessed precisely. Revisit once more of this class's own tail fields are independently decompiled. */
 
     /*
      * The two real, software-only IOInterruptEventSource callbacks this

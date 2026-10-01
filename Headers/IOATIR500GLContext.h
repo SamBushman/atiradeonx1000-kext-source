@@ -278,13 +278,20 @@ protected:
      * real-offset order with a leading pad from this class's own start
      * (IOUserClient is the real base here) and pads between each gap.
      */
-    UInt8   _pad_0x00[0x80];
+    /* LAYOUT (#85): the base class's own data occupies the first sizeof(base) bytes of the object and C++ places this class's members AFTER it; the pad therefore covers only the gap up to the first documented offset (all offsets below are ABSOLUTE object offsets, checked by Sources/LayoutChecks.cpp). */
+    UInt8   _pad_0x78[0x80 - sizeof(IOUserClient)];
     IOATIR500GLContext    *nextLiveContext; /* +0x80, CONFIRMED, NEW finding this pass: the intrusive "next" link for the accelerator's live-GL-context singly-linked list (see start()'s real head-insertion push into accelerator+0x60 / liveGLContextListHead). Not previously documented. */
     UInt8   _pad_0x84[0x88 - 0x84];
     IOATIR500Shared       *clientHandle;  /* +0x88, CONFIRMED: the reference-counted handle connectClient transfers. Concrete type CONFIRMED this pass - IOATIR500GLContext::start allocates it via `new IOATIR500Shared` and stores the result here directly (was `void*`; IOATIR500Shared itself remains a real but not-yet-reconstructed class - see IOATIR500Accelerator.h). */
     UInt8   _pad_0x8c[0xc8 - 0x8c];
     ATIRadeonX1000 *accelerator;   /* +200 (0xc8), CONFIRMED: every method above reaches hardware exclusively through this pointer. CORRECTED to the concrete ATIRadeonX1000 type (was IOATIR500Accelerator*) - see ATIRadeonX1000.h's updated comment: context classes need chip-specific methods (submit_buffer, MMIO access) only declared on the concrete subclass. */
-    UInt8   _pad_0xcc[0x2a0 - 0xcc];
+    UInt8   _pad_0xcc[0x290 - 0xcc];
+    /* boundSurface / mipLevel: documented in ATIR500GLContext.h (found through the subclass's code), but they sit BELOW the
+     * regularMethodTable at +0x2a0 that this class's own start() writes, so they belong to this class's data - a derived class cannot
+     * own a member that precedes a base member. Moved here (#85); the subclass still reaches them by name. */
+    void   *boundSurface;          /* +0x290, CONFIRMED: the currently-bound render surface, read throughout get_config/get_status/get_surface_size/scale_surface/read_buffer */
+    UInt8   _pad_0x294[0x29c - 0x294];
+    SInt32  mipLevel;              /* +0x29c, CONFIRMED: current mip level index, used in per-mip offset computations throughout */
     /*
      * The regular external-method table pointer - CONFIRMED to exist at
      * this offset (ATIR500GLContext::getTargetAndMethodForIndex:
