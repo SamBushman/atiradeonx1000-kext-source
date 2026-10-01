@@ -15,21 +15,16 @@ step vm_stat   /usr/bin/vm_stat
 step syslog_tail sh -c 'tail -n 80 /var/log/system.log'
 if [ -x ./regsnap ]; then step regs ./regsnap; fi
 /usr/sbin/screencapture -x "$P.png" 2>/dev/null || { echo "capture: screencapture FAILED"; FAIL=$((FAIL+1)); }
-# every mounted volume must verify clean (a hard reset once corrupted files on the Tiger working volume, godot-ports #9)
-: > "$P.volumes"
-# default: the two volumes of the issue (boot volume + the Tiger working volume "Test HD"); override with DTEST_VOLUMES (newline-separated). Other
-# volumes (Sorbet HD = Leopard's boot disk, off-limits, ThinkTanks, ...) are deliberately not touched.
+# Volumes: `diskutil verifyVolume` on Tiger cannot unmount the mounted Test HD ("Could not unmount disk for verification") and reports a live
+# "Volume Bit Map needs minor repair" on the in-use boot volume, so an absolute clean/unclean verdict is not available while mounted. The check is
+# therefore RELATIVE: the output is recorded here and postflight.sh flags any CHANGE between pre and post (new damage, or a volume that stops
+# verifying) as CORRUPTION-class. After a hard reset compare against the last pre.volumes of any earlier run.
 VOLS=${DTEST_VOLUMES:-"/
 /Volumes/Test HD"}
+: > "$P.volumes"
 echo "$VOLS" | while IFS= read -r V; do
     [ -d "$V" ] || continue
-    OUT=`/usr/sbin/diskutil verifyVolume "$V" 2>&1`; RC=$?
-    echo "== $V rc=$RC" >> "$P.volumes"; echo "$OUT" >> "$P.volumes"
-    case "$OUT" in
-        *"appears to be OK"*|*"appears to be ok"*) ;;
-        *"not supported"*|*"Cannot verify"*|*"cannot be verified"*|*"in use"*) echo "capture: volume $V could not be verified live (recorded, not counted)";;
-        *) echo "capture: volume $V did NOT verify clean"; echo x >> "$P.volfail";;
-    esac
+    echo "== $V" >> "$P.volumes"
+    /usr/sbin/diskutil verifyVolume "$V" 2>&1 | sed 's/\x1b\[[0-9;]*m//g' | grep -iE 'Checking|needs|error|invalid|incorrect|corrupt|damaged|overlapped|missing' | grep -v 'needs to be repaired' >> "$P.volumes"
 done
-[ -f "$P.volfail" ] && { FAIL=$((FAIL+`wc -l < "$P.volfail"`)); rm -f "$P.volfail"; }
 exit $FAIL

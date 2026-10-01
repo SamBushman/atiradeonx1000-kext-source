@@ -10,14 +10,13 @@ suite (`../Makefile` does not know this directory), and always through `dtest_ma
 2. On the **dev machine** (a second machine): `sh peer_ack.sh G5 <dir-on-G5>` - checks the dev git tree is clean and pushed, touches
    `results/peer_ack` over ssh (proof that a second ssh session answers) and tells you to run `nc -ul 9999` in a second terminal.
 3. On the G5: `sh preflight.sh <name>` - captures kextstat, `ioreg -l -w0`, displays, vm_stat, the system.log tail, (register snapshot if
-   `./regsnap` exists), a screenshot, and `diskutil verifyVolume` of `/` and `/Volumes/Test HD`; checks the ATI kext is loaded, no GL or DVD
-   client exists, and the peer acknowledged. Any failure aborts. On success it writes `results/preflight.ok`.
+   `./regsnap` exists), a screenshot, and `diskutil verifyVolume` output of `/` and `/Volumes/Test HD` (Tiger cannot verify a mounted volume absolutely - the check is the pre/post CHANGE); checks the ATI kext is loaded, no GL application or DVD client exists (an idle desktop holds one GL context: WindowServer's; `DTEST_MAX_GL`/`DTEST_MAX_DVD` override), and the peer acknowledged. Any failure aborts. On success it writes `results/preflight.ok`.
 4. `./<name> --phase <A|B|..> [--kext stock|rebuilt] [--mirror DEVHOST:9999] --i-understand-this-may-hang-the-machine`
 5. `sh postflight.sh <name>` - repeats the capture into `post.*`, diffs it (kextstat must be identical, volumes clean), prints the other diffs.
 6. Put the outcome class, the log and the diffs into the issue.
 
 `dtest_main()` refuses (exit 2-7) without `--phase` and `--i-understand-this-may-hang-the-machine`, while `results/<name>.state` says
-`IN PROGRESS` (an interrupted run), without a preflight and a peer acknowledgement newer than 15 minutes, while a GL or DVD context exists
+`IN PROGRESS` (an interrupted run), without a preflight and a peer acknowledgement newer than 15 minutes, while more than one GL context or any DVD context exists
 (unless the test declares it needs one), or when the accelerator service is missing.
 
 ## Write-ahead log

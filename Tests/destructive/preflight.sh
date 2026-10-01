@@ -19,9 +19,11 @@ sh ./capture.sh $R/$M/pre || bad "state capture reported failures (see above)"
 # 3. a second machine is watching
 if [ -f $R/peer_ack ] && [ -z "`find $R/peer_ack -mmin +15 2>/dev/null`" ]; then :; else bad "no peer acknowledgement in the last 15 minutes (run peer_ack.sh from a second machine)"; fi
 # 4. no GL / DVD client right now (dtest_main re-checks)
-for C in ATIR500GLContext ATIR500DVDContext; do
-    N=`/usr/sbin/ioreg -w0 -c $C 2>/dev/null | grep -c "<class $C"`
-    [ "$N" = "0" ] || bad "$N live $C instance(s): quit the GL application / DVD Player"
+# an idle desktop holds ONE GL context (WindowServer's Quartz Extreme compositor) and no DVD context
+for CM in "ATIR500GLContext ${DTEST_MAX_GL:-1}" "ATIR500DVDContext ${DTEST_MAX_DVD:-0}"; do
+    set -- $CM
+    N=`/usr/sbin/ioreg -w0 -c $1 2>/dev/null | grep -c "<class $1"`
+    [ "$N" -le "$2" ] || bad "$N live $1 instance(s) (allowed $2): quit the GL application / DVD Player"
 done
 if [ $FAIL -eq 0 ]; then touch $R/preflight.ok; echo "PREFLIGHT OK for $M (capture in $R/$M/pre.*)"; exit 0; fi
 echo "PREFLIGHT FAILED ($FAIL item(s)) - not running"; exit 1

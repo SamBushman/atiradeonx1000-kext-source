@@ -112,8 +112,11 @@ int dtest_main(int argc, char **argv, const char *method, int needs_gl_or_dvd_cl
     snprintf(path, sizeof path, "%s/peer_ack", t.resultsdir);
     if (!file_age_ok(path, 900)) { fprintf(stderr, "%s: no peer acknowledgement in the last 15 minutes: from a SECOND machine run  sh Tests/destructive/peer_ack.sh <ssh-host>  (a hung G5 keeps the last log line on that machine)\n", method); return 4; }
     if (!needs_gl_or_dvd_client) {
+        /* an idle Tiger desktop already holds ONE GL context (WindowServer's Quartz Extreme compositor) and no DVD context; more means a GL
+         * application or DVD Player. Override with DTEST_MAX_GL / DTEST_MAX_DVD (e.g. when a test needs a client). */
+        int maxgl = getenv("DTEST_MAX_GL") ? atoi(getenv("DTEST_MAX_GL")) : 1, maxdvd = getenv("DTEST_MAX_DVD") ? atoi(getenv("DTEST_MAX_DVD")) : 0;
         int gl = count_instances("ATIR500GLContext"), dvd = count_instances("ATIR500DVDContext");
-        if (gl != 0 || dvd != 0) { fprintf(stderr, "%s: refusing: %d GL context(s) and %d DVD context(s) exist - a GL application or DVD Player is running. Quit it first.\n", method, gl, dvd); return 5; }
+        if (gl > maxgl || dvd > maxdvd) { fprintf(stderr, "%s: refusing: %d GL context(s) (allowed %d: WindowServer's) and %d DVD context(s) (allowed %d) exist - a GL application or DVD Player is running. Quit it first.\n", method, gl, maxgl, dvd, maxdvd); return 5; }
     }
     utc(ts, sizeof ts, 1);
     snprintf(t.logpath, sizeof t.logpath, "%s/%s_%s_%s.log", t.resultsdir, method, t.kext, ts);
