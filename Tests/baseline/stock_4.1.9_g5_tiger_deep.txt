@@ -54,5 +54,18 @@
 [OK] GL get_surface_size after detaching -> Error again r=0xe00002bc
 [OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
 [OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- DVD T2: bind a registered surface, bound-surface rows, detach --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] DVD show_buffer(sel 10) unbound -> Error (stock baseline) r=0xe00002bc
+[OK] DVD set_surface(1, modeBits 0, 0) binds the registered surface r=0x00000000
+[OK] DVD get_surface_size with a surface bound == {768,576} (stock observed: the default 768x576 buffer record at surface+0xa8/+0x120, not the 4x4 shape) r=0x00000000 size={768,576}
+[OK] DVD get_surface_size is repeatable
+[OK] DVD show_buffer(sel 10) bound -> success (stub body) r=0x00000000
+[OK] DVD dvd_enable_overlay(sel 12, 0) bound -> success (stub body) r=0x00000000
+[OK] DVD dvd_setup_subpicture(sel 15, 0,0,0,0) bound -> success (stub body) r=0x00000000
+[OK] DVD set_surface(0) detaches r=0x00000000
+[OK] DVD get_surface_size after detaching -> Error again r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
 
-50 calls made (49 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+62 calls made (61 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

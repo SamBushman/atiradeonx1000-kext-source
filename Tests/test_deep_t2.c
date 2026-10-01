@@ -129,7 +129,57 @@ static void gl_bind_round_trip(io_service_t service) {
     check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
 }
 
+/* T2 row 3 (issue #100): the DVD twin of row 2. IOATIR500DVDContext::set_surface (0xfa40) was traced: find_surface_for_id, remove_dvd_context / set_dvd_context,
+ * reset_req_bits, prune_buffers, update_surface = ATIR500DVDContext::build_scissor (a 16-byte tail call; reads surface fields only). The bound-surface rows reached
+ * afterwards - show_buffer, dvd_enable_overlay, dvd_setup_subpicture - end in ATIR500Surface::showbuffer / enable_overlay / disable_overlay / dvd_setup_subpicture,
+ * which are `blr` stubs in the shipped kext (size_compare: stock 16 B padded, no instructions but the return), so they only run their lock + guard. */
+static void dvd_bind_round_trip(io_service_t service) {
+    int before[NCLS], after[NCLS], i, same = 1, k0, k1; io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r;
+    unsigned char region[20]; int d0 = -1, d1 = -1, e0 = -1, e1 = -1;
+    printf("-- DVD T2: bind a registered surface, bound-surface rows, detach --\n");
+    class_counts(before); k0 = kext_count();
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+    if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+    if (r == TEST_kIOReturnSuccess) {
+        memset(region, 0, sizeof region);
+        *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = 4; *(SInt16 *)(region + 10) = 4; *(SInt16 *)(region + 16) = 4; *(SInt16 *)(region + 18) = 4;
+        r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+    }
+    check("Surface preconditions (set_id_mode x2, set_shape)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    if (r == TEST_kIOReturnSuccess && open_user_client(service, CLIENT_TYPE_DVD, &d) == TEST_kIOReturnSuccess) {
+        r = IOConnectMethodScalarIScalarO(d, 10, 2, 0, 0, 0);
+        check("DVD show_buffer(sel 10) unbound -> Error (stock baseline)", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        r = IOConnectMethodScalarIStructureI(d, 0, 3, 0, 1, 0, 0, NULL);
+        check("DVD set_surface(1, modeBits 0, 0) binds the registered surface", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+        if (r == TEST_kIOReturnSuccess) {
+            r = IOConnectMethodScalarIScalarO(d, 3, 0, 2, &d0, &d1);
+            check("DVD get_surface_size with a surface bound == {768,576} (stock observed: the default 768x576 buffer record at surface+0xa8/+0x120, not the 4x4 shape)", r == TEST_kIOReturnSuccess && d0 == 768 && d1 == 576, "r=0x%08x size={%d,%d}", (unsigned int)r, d0, d1);
+            r = IOConnectMethodScalarIScalarO(d, 3, 0, 2, &e0, &e1);
+            check("DVD get_surface_size is repeatable", r == TEST_kIOReturnSuccess && d0 == e0 && d1 == e1, NULL);
+            r = IOConnectMethodScalarIScalarO(d, 10, 2, 0, 0, 0);
+            check("DVD show_buffer(sel 10) bound -> success (stub body)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 12, 1, 0, 0);
+            check("DVD dvd_enable_overlay(sel 12, 0) bound -> success (stub body)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 15, 4, 0, 0, 0, 0, 0);
+            check("DVD dvd_setup_subpicture(sel 15, 0,0,0,0) bound -> success (stub body)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(d, 0, 3, 0, 0, 0, 0, NULL);
+            check("DVD set_surface(0) detaches", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 3, 0, 2, &e0, &e1);
+            check("DVD get_surface_size after detaching -> Error again", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        }
+        IOServiceClose(d);
+    } else if (r == TEST_kIOReturnSuccess) { printf("[FAIL] DVD open\n"); g_testsUnexpected++; }
+    IOServiceClose(s);
+    usleep(300000);
+    class_counts(after); k1 = kext_count();
+    for (i = 0; i < NCLS; i++) if (before[i] != after[i]) same = 0;
+    check("leak check: driver class instance counts identical before/after", same, "before={%d,%d,%d,%d,%d,%d} after={%d,%d,%d,%d,%d,%d}", before[0], before[1], before[2], before[3], before[4], before[5], after[0], after[1], after[2], after[3], after[4], after[5]);
+    check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
+    dvd_bind_round_trip(service);
 }

@@ -439,7 +439,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Accelerator19find_surface_f IOATIR500Surface18remove_dvd_context IOATIR500Surface13prune_buffersEv IOATIR500Surface14reset_req_bitsEv <vtable> IOATIR500Surface15set_dvd_contextEP1 IOATIR500Surface13prune_buffersEv IOATIR500Surface13prune_buffersEv <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (bVar1) {`; 0xe00002c2 BadArgument <- `uVar6 = 0xe00002c2;`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live, Tests/test_deep_t2.c): same registered 4x4 surface (id 1) as GL: set_surface(1,0,0) = 0 binds (traced: remove_dvd_context / set_dvd_context, prune_buffers, update_surface = ATIR500DVDContext::build_scissor tail call); set_surface(0) detaches.
 - **manual reason**: baseline: id 0 (detach) only | deep path not yet exercised: bind a real surface (prerequisite of most rows below)
 
 ## DVD sel 1 - `IOATIR500DVDContext::get_config` 
@@ -473,7 +473,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `-`
 - return-code sites in the source (code <- nearest guard): 0xe00002bc Error <- `if (M<SInt32>(self + 0xf8) == 0) {`
-- **manual tier**: provisional T1 (#100 table)
+- **manual tier**: T1/T2 CONFIRMED (live): bound -> {768,576} (the default buffer record at surface+0xa8/+0x120, unlike GL which reports the 4x4 shape); unbound -> Error.
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound: real dimensions
 
 ## DVD sel 4 - `IOATIR500DVDContext::lock_all_buffers` 
@@ -797,7 +797,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock ATIR500Surface10showbufferEii IOLockUnlock`
-- **manual tier**: provisional T1 (#100 table)
+- **manual tier**: T1 CONFIRMED (live) bound: 0 (ATIR500Surface::showbuffer is a `blr` stub); unbound -> Error.
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound surface
 
 ## DVD sel 11 - `ATIR500DVDContext::dvd_setup_overlay` 
@@ -821,7 +821,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock ATIR500Surface14enable_overlayEv ATIR500Surface15disable_overlayEv IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<SInt32>(self + 0xf8) == 0) {`
-- **manual tier**: provisional T1 (#100 table)
+- **manual tier**: T1 CONFIRMED (live) bound, arg 0: 0 (enable/disable_overlay are `blr` stubs).
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound (the body behind the guard is an empty no-op)
 
 ## DVD sel 13 - `ATIR500DVDContext::read_regs` 
@@ -855,7 +855,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock ATIR500Surface20dvd_setup_subpicture IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<int>(self + 0xf8) == 0) {`
-- **manual tier**: provisional T1 (#100 table)
+- **manual tier**: T1 CONFIRMED (live) bound, (0,0,0,0): 0 (dvd_setup_subpicture is a `blr` stub).
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound (empty no-op behind the guard)
 
 ## DVD sel 16 - `ATIR500DVDContext::set_macrovision` (own issue #88-#97, not part of #100)
