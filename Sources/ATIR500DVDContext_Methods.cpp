@@ -129,57 +129,8 @@ void ATIR500DVDContext::stop(IOService *provider) {
 
 /* Real: types 0-3 go to IOATIR500DVDContext::clientMemoryForType; 4 and 5 hand out the luma / chroma IDCT
  * command buffers, alternating between the two buffers of each pair on every call. */
-IOReturn ATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32 *options, IOMemoryDescriptor **memory) {
-    UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (type < 4) {
-        return IOATIR500DVDContext::clientMemoryForType(type, options, memory);
-    }
-    void *lock = *reinterpret_cast<void **>(reinterpret_cast<UInt8 *>(accelerator) + 0x840);
-    if (type == 4) {
-        DVDSubM_lock(lock);
-        if (U32At(self, 0x164) == 0) {
-            accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x194));
-            reinterpret_cast<OSObject *>(U32At(self, 0x18c))->retain();
-            *options = 0;
-            *memory = reinterpret_cast<IOMemoryDescriptor *>(U32At(self, 0x18c));
-            init_command_buffer_header(reinterpret_cast<VendorCommandBufferHeader *>(U32At(self, 0x198)), U32At(self, 0x19c), 0);
-            U32At(reinterpret_cast<void *>(U32At(self, 0x198)), 0x18) = U32At(self, 0x150);
-            U32At(self, 0x164) = 1;
-        } else {
-            accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x178));
-            reinterpret_cast<OSObject *>(U32At(self, 0x170))->retain();
-            *options = 0;
-            *memory = reinterpret_cast<IOMemoryDescriptor *>(U32At(self, 0x170));
-            init_command_buffer_header(reinterpret_cast<VendorCommandBufferHeader *>(U32At(self, 0x17c)), U32At(self, 0x180), 0);
-            U32At(reinterpret_cast<void *>(U32At(self, 0x17c)), 0x18) = U32At(self, 0x150);
-            U32At(self, 0x164) = 0;
-        }
-    } else {
-        if (type != 5) {
-            return 0xe00002c2;
-        }
-        DVDSubM_lock(lock);
-        if (U32At(self, 0x1a0) == 0) {
-            accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x1d0));
-            reinterpret_cast<OSObject *>(U32At(self, 0x1c8))->retain();
-            *options = 0;
-            *memory = reinterpret_cast<IOMemoryDescriptor *>(U32At(self, 0x1c8));
-            init_command_buffer_header(reinterpret_cast<VendorCommandBufferHeader *>(U32At(self, 0x1d4)), U32At(self, 0x1d8), 0);
-            U32At(reinterpret_cast<void *>(U32At(self, 0x1d4)), 0x18) = U32At(self, 0x150);
-            U32At(self, 0x1a0) = 1;
-        } else {
-            accelerator->waitForConsumedIDCTTimeStamp(U32At(self, 0x1b4));
-            reinterpret_cast<OSObject *>(U32At(self, 0x1ac))->retain();
-            *options = 0;
-            *memory = reinterpret_cast<IOMemoryDescriptor *>(U32At(self, 0x1ac));
-            init_command_buffer_header(reinterpret_cast<VendorCommandBufferHeader *>(U32At(self, 0x1b8)), U32At(self, 0x1bc), 0);
-            U32At(reinterpret_cast<void *>(U32At(self, 0x1b8)), 0x18) = U32At(self, 0x150);
-            U32At(self, 0x1a0) = 0;
-        }
-    }
-    DVDSubM_unlock(lock);
-    return 0;
-}
+/* (re-ported mechanically: see ATIR500DVDContext_clientMemoryForType_Port.cpp) */
+
 
 /* selectors 0-9 index the 10-entry base table (this+0x100), 10-21 the 12-entry table at this+0x1dc */
 IOExternalMethod *ATIR500DVDContext::getTargetAndMethodForIndex(IOService **target, UInt32 selector) {
