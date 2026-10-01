@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     if (deep) {
         /* issue #100: T1 deep paths with asserted outputs; separate baseline (baseline/stock_4.1.9_g5_tiger_deep.txt) */
         run_deep_t1_tests(service);
+        run_deep_t2_tests(service);
     } else {
         run_gl_context_tests(service);
         run_2d_context_tests(service);

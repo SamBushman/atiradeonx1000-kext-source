@@ -28,5 +28,18 @@
 [OK] Surface get_state(sel 2) == 1 (stock baseline) r=0x00000000 state=1
 [OK] Surface surface_query_lock(sel 11) with no lock held -> CannotLock r=0xe00002cc
 [OK] Surface get_state(sel 2) unchanged after the query state=1
+-- Surface T2: read-lock round trip (lockOptions 0) --
+[OK] Surface set_id_mode(0,0x4) [precondition] r=0x00000000
+[OK] Surface query_lock after set_id_mode: available (0) - the record is valid and nothing is held r=0x00000000
+[OK] Surface surface_read_lock_options(lockOptions=0) succeeds, 0x44 bytes r=0x00000000 size=68
+[OK] Surface query_lock while the read lock is held -> CannotLock r=0xe00002cc
+[OK] Surface second read lock on the same connection while held -> CannotLock (lock byte already set) r=0xe00002cc
+[OK] Surface surface_read_unlock_options after the lock succeeds r=0x00000000
+[OK] Surface query_lock after the unlock: available again r=0x00000000
+[OK] Surface surface_read_unlock_options a second time -> CannotLock (nothing held) r=0xe00002cc
+[OK] Surface read lock again after unlock: same output struct as the first lock (deterministic) r=0x00000000
+[OK] Surface read unlock (cleanup, so close leaves no lock) r=0x00000000
+[OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
 
-26 calls made (25 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+38 calls made (37 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

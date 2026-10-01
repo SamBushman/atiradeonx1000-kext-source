@@ -547,7 +547,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface20surface_lock_optio`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED for lockOptions=0 (live): set_id_mode(0,0x4) -> read_lock_options(0) -> 0x44 bytes (deterministic across lock/unlock/lock); a second read lock while held -> CannotLock (the lock byte is written back unchanged); lockOptions 1/2/3 still untested (allocation paths, #94-#96).
 - **manual reason**: baseline: lockOptions=0 real success (0x44-byte output) | deep path not yet exercised: lockOptions 1/2/3 (allocation paths: see #94-#96)
 
 ## Surface sel 1 - `IOATIR500Surface::surface_read_unlock_options` 
@@ -558,7 +558,7 @@ labelled **manual**. Nothing here was run on hardware.
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface22surface_unlock_opt`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live, Tests/test_deep_t2.c): sel 1 takes ONE scalar in (a zero-scalar call is rejected by IOKit's dispatch with BadArgument before the body runs). After a successful read lock (lockOptions 0): unlock -> 0, a second unlock -> CannotLock; the vtable-0x600 completion call is skipped because the buffer owns no VRAM yet.
 - **manual reason**: baseline: no lock held -> CannotLock | deep path not yet exercised: unlock after a successful lock
 
 ## Surface sel 2 - `IOATIR500Surface::get_state` 
@@ -668,7 +668,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `uVar3 = 0xe00002cc;`
-- **manual tier**: T1 CONFIRMED for 'no lock held' (live): CannotLock; the held-lock result needs a successful lock (T2, #94-#96).
+- **manual tier**: T1/T2 CONFIRMED (live): set_id_mode(0,0x4) -> query_lock = 0 (available); while a read lock is held -> CannotLock; after the unlock -> 0 again.
 - **manual reason**: baseline: CannotLock (nothing held) | deep path not yet exercised: result while a lock is held
 
 ## Surface sel 12 - `IOATIR500Surface::surface_read_lock` (own issue #88-#97, not part of #100)

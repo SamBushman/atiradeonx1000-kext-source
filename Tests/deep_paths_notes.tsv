@@ -155,3 +155,6 @@ DVD 13	tier	T1 CONFIRMED (live): same body shape as 2D read_regs (struct sizes m
 DVD 20	tier	T1 CONFIRMED for (0,0) (live): bothDone = 1; non-zero stamps need real submitted work (T2, depends on #93/#97).
 Surface 2	tier	T1 CONFIRMED (live): state 1, unchanged by queries.
 Surface 11	tier	T1 CONFIRMED for 'no lock held' (live): CannotLock; the held-lock result needs a successful lock (T2, #94-#96).
+Surface 1	tier	T2 CONFIRMED (live, Tests/test_deep_t2.c): sel 1 takes ONE scalar in (a zero-scalar call is rejected by IOKit's dispatch with BadArgument before the body runs). After a successful read lock (lockOptions 0): unlock -> 0, a second unlock -> CannotLock; the vtable-0x600 completion call is skipped because the buffer owns no VRAM yet.
+Surface 0	tier	T2 CONFIRMED for lockOptions=0 (live): set_id_mode(0,0x4) -> read_lock_options(0) -> 0x44 bytes (deterministic across lock/unlock/lock); a second read lock while held -> CannotLock (the lock byte is written back unchanged); lockOptions 1/2/3 still untested (allocation paths, #94-#96).
+Surface 11	tier	T1/T2 CONFIRMED (live): set_id_mode(0,0x4) -> query_lock = 0 (available); while a read lock is held -> CannotLock; after the unlock -> 0 again.

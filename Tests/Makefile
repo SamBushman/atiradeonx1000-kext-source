@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wno-four-char-constants
 LDFLAGS = -framework IOKit -framework CoreFoundation
 
-SRCS = main.c test_gl_context.c test_2d_context.c test_dvd_context.c test_surface_context.c test_deep_t1.c
+SRCS = main.c test_gl_context.c test_2d_context.c test_dvd_context.c test_surface_context.c test_deep_t1.c test_deep_t2.c
 OBJS = $(SRCS:.c=.o)
 TARGET = parity_test_harness
 
