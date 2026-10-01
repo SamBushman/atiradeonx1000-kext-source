@@ -1394,7 +1394,7 @@ void __cyg_profile_func_exit(void *fn, void *site) {}
 ''' % HEADER_SYM)
 kind = '-dynamiclib' if m.filetype == 6 else '-bundle'
 ln = ['#!/bin/sh', '# build.sh - compile + link on the Tiger G5 (gcc 4.0.1). Usage: sh build.sh [OUT_NAME]',
-      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc -O0 -w -fPIC -fno-common -force_cpusubtype_ALL%s"' % (' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
+      'set -e', 'cd "$(dirname "$0")"', 'OUT=${1:-linked.out}', 'CFLAGS="-arch ppc %s -w -fPIC -fno-common -force_cpusubtype_ALL%s"' % (os.environ.get('LINK_OPT', '-O0'), ' -finstrument-functions' if os.environ.get('COVERAGE') else ''),
       'rm -rf obj; mkdir obj',
       'for f in part_*.c x_*part_*.c; do [ -f $f ] || continue; gcc $CFLAGS -c $f -o obj/${f%.c}.o || echo "COMPILE FAIL $f"; done',
       'as -arch ppc -o obj/data.o data.s',
