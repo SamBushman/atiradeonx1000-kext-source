@@ -14,6 +14,8 @@ labelled **manual**. Nothing here was run on hardware.
 - shipped callees (ordered): `IOLockLock IOATIR500Accelerator19find_surface_f IOATIR500Surface27remove_gl_context_ IOATIR500Surface13prune_buffersEv IOATIR500Surface14reset_req_bitsEv <vtable> <vtable> <vtable> IOATIR500Surface22add_gl_context_to_ IOATIR500Surface13prune_buffersEv IOATIR500Surface13prune_buffersEv <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (bVar1) {`; 0xe00002c2 BadArgument <- `uVar4 = 0xe00002c2;`
 - **manual tier**: provisional T2 (#100 table)
+- **manual preconditions**: Vendor call sites (GLDriver bundle, io_connect_method_scalarI_structureI selector 0 with 4 scalars, e.g. 0x72c0/0x749c/0x77cc/0x19fc4): scalar[0] = the surface's id (a field of the bundle's surface object, +8), scalar[1] = modeBits = (gl context flags at +0x3c) & 0xffff3fc0, scalar[2], scalar[3] = two context words (stored by the body into this+0x298/+0x29c). The id is the one registered on a Surface connection with set_id_mode(id, mode): find_surface_for_id walks the accelerator's live-surface list.
+- **manual sequence**: PROPOSED (unrun): Surface connection S: set_id_mode(1,0x0); set_id_mode(1,0x20); set_shape(0, 1, 20-byte 4x4 region) [all three proven live in the #42 harness] -> GL connection G: set_surface(1, 0x0, 0, 0) -> bound-surface rows -> set_surface(0,0,0,0) (detach) -> close G, then S. With modeBits 0 and no other context bound (surface +0x88/+0x8c/+0x90 all zero) the body takes the first branch (local = old & 0x803f | modeBits & 0xffffc03f) and never reaches setCompatibleSurfaceMode. Bind effects traced: surface+0xbe8 = mode word, this+0x8c = request bits (0x20000000 | surface_req_bits()), add_vendor_surface_required_bits (a 4-byte forwarder), add_gl_context_to_list, prune_buffers, then update_surface: build_scissor (pure computation) and ATIR500GLContext::invalidate (ORs 1 into word +0x1c of the context's own command-buffer header) - memory only, no hardware access, and the detach path already runs update_surface/invalidate live.
 - **manual reason**: baseline: only id 0 (detach) | deep path not yet exercised: bind a real surface (Surface connection id + modeBits)
 
 ## GL sel 1 - `IOATIR500GLContext::set_swap_rect` 
@@ -70,6 +72,7 @@ labelled **manual**. Nothing here was run on hardware.
 - shipped callees (ordered): `-`
 - return-code sites in the source (code <- nearest guard): 0xe00002bc Error <- `return 0xe00002bc;`
 - **manual tier**: provisional T1 (#100 table)
+- **manual preconditions**: HAZARD (traced): get_surface_size reads the surface shape halfwords +0xbd4..+0xbda; when +0xbd4 == +0xbd8 (an UNSHAPED surface: set_id_mode with bit 0x20 never fills them) it dereferences *(surface+0xb70)+0x1c/+0x1e. With mode 0x20 that record pointer is not established by set_id_mode, so calling this before set_shape may be a NULL dereference = kernel panic (the #43 failure class). Only run it after set_shape has given the surface a real shape (then +0xbd4 != +0xbd8 is NOT guaranteed either for a 4x4 square: widths equal -> the same dereference path). UNSAFE until the +0xb70 record is proven valid for the proposed sequence.
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound surface: real dimensions
 
 ## GL sel 6 - `IOATIR500GLContext::get_surface_info` 
@@ -82,6 +85,7 @@ labelled **manual**. Nothing here was run on hardware.
 - shipped callees (ordered): `IOLockLock IOATIR500Accelerator19find_surface_f IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `uVar3 = 0xe00002c2;`
 - **manual tier**: provisional T1 (#100 table)
+- **manual preconditions**: get_surface_info(id): walks find_surface_for_id under the lock and copies surface fields; id 0 -> BadArgument (baseline). A real id needs only the Surface-side registration (set_id_mode) - no GL bind - but reads the same record fields: prove +0xb70 before running.
 - **manual reason**: baseline: id 0 -> BadArgument | deep path not yet exercised: a real id: the info struct
 
 ## GL sel 7 - `IOATIR500GLContext::read_buffer` 
@@ -473,12 +477,12 @@ labelled **manual**. Nothing here was run on hardware.
 ## DVD sel 4 - `IOATIR500DVDContext::lock_all_buffers` 
 
 - wire shape: flags 2 (scalarI/structO), count0=1, count1=256
-- shipped body: `0xfd00`, 452 bytes; rebuilt body: 348 bytes; source: IOATIR500DVDContext_Lifecycle.cpp
+- shipped body: `0xfd00`, 452 bytes; rebuilt body: 400 bytes; source: IOATIR500DVDContext_lock_all_buffers_Port.cpp
 - IOReturn constants in the shipped body: 0xe00002cc CannotLock
 - rebuilt body and source produce the same constants
 - derived properties: SLEEPS, ALLOCATES, LOOP (5 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Surface14alloc_surfacesEmb IOLockUnlock thread_block IOSleep IOATIR500Surface14alloc_surfacesEmb IOLockUnlock`
-- return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `result = 0xe00002cc;`
+- return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `} while (iVar4 != 0);`
 - **manual tier**: provisional T3 (#100 table)
 - **manual reason**: baseline: unbound -> CannotLock | deep path not yet exercised: bound: VRAM allocation, retry loop up to 1000 times
 
