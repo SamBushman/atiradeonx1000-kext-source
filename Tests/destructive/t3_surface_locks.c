@@ -11,7 +11,7 @@
 #include "t3common.h"
 static int battery(dtest_t *t, io_connect_t s, const char *tag) {
     int bad = 0, k, o; kern_return_t r; unsigned char data[0x44]; IOByteCount sz; char m[160];
-    /* lockOptions 0 / 2 on a surface with VRAM but no backing store reach move/copy_buffer_to_backing_store -> alloc_buffer_backing_store and PANICKED the stock kernel (#123, Tests/destructive/phaseS/panics/):
+    /* lockOptions 0 / 2 on a surface with VRAM but no backing store reach move/copy_buffer_to_backing_store (-> dealloc_surface -> ATIR500Memory::dealloc, NULL element->next; see #123) and PANICKED the stock kernel (#123, Tests/destructive/phaseS/panics/):
      * only the non-backing lockOptions 3 and 1 and the baseline read lock (shortcut path) remain; sel 12 (read_lock, lockOptions 2) is the same panic path and is not run. */
     struct { int sel; int opts; int scalarsIn; int unlockSel; int unlockScalars; const char *name; } c[] = {
         { 3, 3, 1, 4, 1, "sel3 write_lock_options(3)" }, { 3, 1, 1, 4, 1, "sel3 write_lock_options(1)" },

@@ -1,6 +1,6 @@
 /* Test for #95 (Surface surface_read_lock, sel 12 = surface_lock_options(this, 1, 2, data, size): read lock, lockOptions 2), issue #87 protocol. Same call shape and surface state as the
  * #123 panic (t3_surface_locks state A: set_id_mode(0, 0x4) only, lockOptions 0 on the baseline surface); this test makes ONE call, sel 12 on that state, and nothing else, so that if
- * the stock kernel panics (expected: the move_buffer_to_backing_store -> alloc_buffer_backing_store NULL deref of #123) the panic log is attributable to this selector alone.
+ * the stock kernel panics (expected: the move_buffer_to_backing_store -> dealloc_surface -> ATIR500Memory::dealloc NULL deref of #123; corrected, see Tools/panic_symbolicate.py) the panic log is attributable to this selector alone.
  * The call is written to the write-ahead log (and the UDP mirror) before it is made. If it returns, an unlock (sel 1) is issued when it was granted and query_lock must report available. */
 #include "t3common.h"
 static const char *body(dtest_t *t, io_service_t svc) {
