@@ -212,3 +212,12 @@ DVD 19	tier	T2 CONFIRMED (live, test_deep_t2.c dvd_wait_stamps_finish): wait_for
 DVD 7	tier	T2 CONFIRMED (live): finish -> 0 on a fresh connection (this+0x7c = 0); Timeout 0xe00002d6 is the only other code.
 2D 13	tier	DONE (stub by design: the Unsupported return is the whole behaviour, baseline covers it)
 2D 14	tier	DONE (stub by design: the Unsupported return is the whole behaviour, baseline covers it)
+2D 8	tier	T3 (#119: shared allocator + AGP texture lifecycle, filed as one sequence with 9, 11, 12)
+2D 9	tier	T3 (#119)
+2D 11	tier	T3 (#119)
+2D 12	tier	T3 (#119)
+DVD 8	tier	T3 (#120)
+DVD 9	tier	T3 (#120)
+GL 11	tier	T3 by dependency: needs an allocated texture (GL 10, #104)
+GL 15	tier	T3 by dependency: needs an allocated texture (GL 10, #104)
+DVD 5	tier	T3 by dependency: needs a successful lock (DVD 4, #102)
