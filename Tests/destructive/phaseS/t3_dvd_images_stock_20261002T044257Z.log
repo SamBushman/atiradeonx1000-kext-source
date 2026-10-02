@@ -1,0 +1,18 @@
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE start: method=t3_dvd_images phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] ABOUT TO CALL open DVD connection
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] ABOUT TO CALL DVD delete_image(0) before any declare
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] RESULT -> 0xe00002be (kIOReturnNoResources) DVD delete_image(0) before any declare
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE delete before declare: got 0xe00002be want 0xe00002be -> MATCH
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] ABOUT TO CALL DVD declare_image(sel8, 0, addr = 64 KB user buffer, 0x1000)
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD declare_image(sel8, 0, addr = 64 KB user buffer, 0x1000)
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE declare_image -> r=0x00000000 out=0x1a000
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE declare_image: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] ABOUT TO CALL DVD delete_image(0) probe
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD delete_image(0) probe
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE declared image id (deleted by the probe): 0
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] ABOUT TO CALL DVD delete_image(id) again
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) DVD delete_image(id) again
+2026-10-02T04:42:57Z [t3_dvd_images/stock/S] NOTE delete twice: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T04:42:58Z [t3_dvd_images/stock/S] NOTE user buffer bytes changed: 0 (expected 0)
+2026-10-02T04:42:58Z [t3_dvd_images/stock/S] NOTE finish: outcome=PASS calls=5

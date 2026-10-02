@@ -1,0 +1,19 @@
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE start: method=t3_gl_global_shared phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL GL become_global_shared(0) without owning
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0xe00002cc (kIOReturnCannotLock) GL become_global_shared(0) without owning
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE release unowned: got 0xe00002cc want 0xe00002cc -> MATCH
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL GL become_global_shared(1)
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL become_global_shared(1)
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE claim: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL GL become_global_shared(1) again
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0xe00002cc (kIOReturnCannotLock) GL become_global_shared(1) again
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE claim twice: got 0xe00002cc want 0xe00002cc -> MATCH
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL GL become_global_shared(0) releases
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL become_global_shared(0) releases
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE release: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] ABOUT TO CALL GL become_global_shared(0) again
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] RESULT -> 0xe00002cc (kIOReturnCannotLock) GL become_global_shared(0) again
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE release twice: got 0xe00002cc want 0xe00002cc -> MATCH
+2026-10-02T04:08:25Z [t3_gl_global_shared/stock/S] NOTE finish: outcome=PASS calls=6

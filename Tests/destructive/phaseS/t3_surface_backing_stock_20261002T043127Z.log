@@ -1,0 +1,22 @@
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE start: method=t3_surface_backing phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface set_shape_backing(sel6, shapeBits 0, id 1, addr = 64 KB user buffer, pitch 64, region 4x4)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape_backing(sel6, shapeBits 0, id 1, addr = 64 KB user buffer, pitch 64, region 4x4)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE connect -> r=0x00000000
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE connect backing: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface get_state after connect
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface get_state after connect
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE get_state=0x1
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] ABOUT TO CALL Surface set_shape_backing(sel6, 0, 1, addr 0, pitch 0, region 4x4) disconnects
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape_backing(sel6, 0, 1, addr 0, pitch 0, region 4x4) disconnects
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE disconnect -> r=0x00000000
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE disconnect backing: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE user buffer bytes changed: 0 (expected 0)
+2026-10-02T04:31:27Z [t3_surface_backing/stock/S] NOTE finish: outcome=PASS calls=7

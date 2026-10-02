@@ -1,0 +1,33 @@
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE start: method=t3_2d_images phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D wait_image(0) with no shared allocator
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0xe00002be (kIOReturnNoResources) 2D wait_image(0) with no shared allocator
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE wait before create: got 0xe00002be want 0xe00002be -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D create_image(sel9, 0x1000, 0)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D create_image(sel9, 0x1000, 0)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE create_image -> r=0x00000000 lo=0xa000 hi=0xc000
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE create_image: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D wait_image(0) probe
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D wait_image(0) probe
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE image id found by probe: 0
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D delete_image(id)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D delete_image(id)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE delete_image: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D delete_image(id) again
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) 2D delete_image(id) again
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE delete twice: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D wait_image(id) after delete
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) 2D wait_image(id) after delete
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE wait deleted: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D create_transfer(sel10, mode 0, 0x1000 bytes)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D create_transfer(sel10, mode 0, 0x1000 bytes)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE create_transfer -> r=0x00000000 handle=0xa000 addr=0xc000
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE create_transfer: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D wait_image(0) probe
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D wait_image(0) probe
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE transfer id found by probe: 0
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] ABOUT TO CALL 2D delete_image(transfer id)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D delete_image(transfer id)
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE delete transfer: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:35:41Z [t3_2d_images/stock/S] NOTE finish: outcome=PASS calls=10

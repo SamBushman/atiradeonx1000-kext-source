@@ -253,3 +253,32 @@ DVD 17	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): 
 DVD 14	codes	NotReady only; the write itself is #91 (skipped destructive method).
 DVD 16	codes	codes 0xe00002c0 / NotReady: #90 (skipped destructive method).
 DVD 18	codes	codes BadArgument / NotReady with the lock leak: #98 / #93 (skipped destructive method).
+GL 7	tier	T3 Phase S PASS (#103): mode 0 -> CannotLock; mode 0x800 -> 0, 16 bytes copied, 0 outside; Tests/destructive/phaseS/
+GL 10	tier	T3 Phase S PASS (#104)
+GL 11	tier	T3 Phase S PASS (#104 run): delete -> 0, second delete -> BadArgument
+GL 12	tier	T3 Phase S PASS (#105)
+GL 13	tier	T3 Phase S PASS (#106)
+GL 14	tier	T3 Phase S PASS (#107)
+GL 15	tier	T3 Phase S PASS (#104 run): purge probe -> 0, after delete -> BadArgument
+GL 16	tier	T3 Phase S PASS (#108)
+GL 17	tier	T3 Phase S PASS (#109)
+2D 3	tier	T3 Phase S PASS (#110)
+2D 4	tier	T3 Phase S PASS (#111)
+2D 5	tier	T3 Phase S PASS (#101)
+2D 6	tier	T3 Phase S PASS (#112)
+2D 8	tier	T3 Phase S PASS (#119)
+2D 9	tier	T3 Phase S PASS (#119)
+2D 10	tier	T3 Phase S PASS (#113)
+2D 11	tier	T3 Phase S PASS (#119)
+2D 12	tier	T3 Phase S PASS (#119)
+2D 17	tier	T3 Phase S PASS (#114)
+2D 18	tier	T3 Phase S PASS (#115)
+DVD 4	tier	T3 Phase S PASS (#102): success, 13 pairs all zero
+DVD 5	tier	T3 Phase S PASS (#102)
+DVD 8	tier	T3 Phase S PASS (#120)
+DVD 9	tier	T3 Phase S PASS (#120)
+Surface 5	tier	T3 Phase S PASS (#116)
+Surface 6	tier	T3 Phase S PASS for the backing connect/disconnect (#121)
+Surface 8	tier	T3 Phase S PASS (#117)
+Surface 16	tier	T3 Phase S PASS (#118)
+Surface 18	tier	T3 Phase S PASS (#118)

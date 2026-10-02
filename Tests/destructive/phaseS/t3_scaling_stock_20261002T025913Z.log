@@ -1,0 +1,45 @@
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE start: method=t3_scaling phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_scale(flags 0, no struct) = disabled path
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_scale(flags 0, no struct) = disabled path
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE disabled: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_scale(flags 2, identity IOAccelSurfaceScaling 0x2c bytes)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_scale(flags 2, identity IOAccelSurfaceScaling 0x2c bytes)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE enable identity: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL 2D get_surface_info(id 1, mode 0x800)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D get_surface_info(id 1, mode 0x800)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE info d[2]=4 d[3]=4 (4x4 expected)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE 2D bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL 2D scale_surface(sel4, flags 3, 4, 4)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D scale_surface(sel4, flags 3, 4, 4)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE 2D scale: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL 2D set_surface(0) detaches
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL GL scale_surface(sel14, flags 3, 4, 4) UNBOUND
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0xe00002c7 (kIOReturnUnsupported) GL scale_surface(sel14, flags 3, 4, 4) UNBOUND
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE GL scale unbound: got 0xe00002c7 want 0xe00002c7 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL GL set_surface(1,0,0,0) binds
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface(1,0,0,0) binds
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE GL bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL GL scale_surface(sel14, flags 3, 4, 4)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL scale_surface(sel14, flags 3, 4, 4)
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE GL scale: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL GL set_surface(0) detaches
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface(0) detaches
+2026-10-02T02:59:13Z [t3_scaling/stock/S] ABOUT TO CALL Surface set_scale(flags 0, no struct) disables again
+2026-10-02T02:59:13Z [t3_scaling/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_scale(flags 0, no struct) disables again
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE disable: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:59:13Z [t3_scaling/stock/S] NOTE finish: outcome=PASS calls=17

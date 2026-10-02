@@ -1,0 +1,16 @@
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE start: method=t3_2d_write_regs phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] ABOUT TO CALL 2D read_regs(sel16, 0x00f8)
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x00f8 -> 0x10000000
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE read CONFIG_MEMSIZE: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] ABOUT TO CALL 2D write_regs(sel17, one pair {0x00f8, 0x10000000}) with a byte count of 4
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) 2D write_regs(sel17, one pair {0x00f8, 0x10000000}) with a byte count of 4
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE bad byte count: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] ABOUT TO CALL 2D write_regs(sel17, one pair {0x00f8, 0x10000000})
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D write_regs(sel17, one pair {0x00f8, 0x10000000})
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE write_regs: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] ABOUT TO CALL 2D read_regs(sel16, 0x00f8)
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) read_regs 0x00f8 -> 0x10000000
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE read-back: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T03:41:47Z [t3_2d_write_regs/stock/S] NOTE finish: outcome=PASS calls=5

@@ -1,0 +1,42 @@
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE start: method=t3_dvd_lock_buffers phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL open DVD connection
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD lock_all_buffers(0) UNBOUND
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0xe00002cc (kIOReturnCannotLock) DVD lock_all_buffers(0) UNBOUND
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE lock unbound: got 0xe00002cc want 0xe00002cc -> MATCH
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD set_surface(1,0,0) binds
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(1,0,0) binds
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD setup_buffers(0,0,16,16, 0x7ffc00)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD setup_buffers(0,0,16,16, 0x7ffc00)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE setup_buffers: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD lock_all_buffers(0) bound + set up
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD lock_all_buffers(0) bound + set up
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE lock_all_buffers -> r=0x00000000 outSize=256
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[10] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[11] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[12] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[13] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[14] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[15] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[16] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[17] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[18] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[19] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[20] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[21] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE buffer[22] address=0x0 pitch=0x0
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD unlock_memory(0)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD unlock_memory(0)
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] ABOUT TO CALL DVD set_surface(0) detaches
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(0) detaches
+2026-10-02T04:14:11Z [t3_dvd_lock_buffers/stock/S] NOTE finish: outcome=PASS calls=11

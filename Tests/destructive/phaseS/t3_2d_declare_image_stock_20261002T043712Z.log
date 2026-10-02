@@ -1,0 +1,15 @@
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE start: method=t3_2d_declare_image phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] ABOUT TO CALL 2D declare_image(sel8, 0, addr = 64 KB user buffer, 0x1000)
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D declare_image(sel8, 0, addr = 64 KB user buffer, 0x1000)
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE declare_image -> r=0x00000000 out=0x1a000
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE declare_image: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] ABOUT TO CALL 2D wait_image(0) probe
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D wait_image(0) probe
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE declared image id found by probe: 0
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] ABOUT TO CALL 2D delete_image(id)
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D delete_image(id)
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE delete_image: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE user buffer bytes changed: 0 (expected 0: declaring a buffer never writes it)
+2026-10-02T04:37:12Z [t3_2d_declare_image/stock/S] NOTE finish: outcome=PASS calls=4

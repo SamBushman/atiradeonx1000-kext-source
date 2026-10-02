@@ -101,7 +101,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: SLEEPS, ALLOCATES, LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOLockSleep IOATIR500Surface20alloc_surfaces_ret IOLockUnlock IOLockUnlock IOMemoryDescriptor11withAddressEjm11 <vtable> IOLockUnlock <vtable> IOLockLock <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `return 0xe00002c2;`; 0xe00002cc CannotLock <- `if (((M<UInt32>(pIVar3 + 0xbf8) & 0x20000000) != 0) || (M<SInt32>(iVar16 + 0x10) == 0)) {`; 0xe00002be NoResources <- `if (local_s.f40 == (SInt32 *)0x0) {`
-- **manual tier**: T3 (static trace, #103): GPU DMA copy into caller memory; moved out of T2.
+- **manual tier**: T3 Phase S PASS (#103): mode 0 -> CannotLock; mode 0x800 -> 0, 16 bytes copied, 0 outside; Tests/destructive/phaseS/
 - **manual reason**: baseline: bad kind -> BadArgument; unbound -> CannotLock | deep path not yet exercised: valid kind on a bound surface: copy of surface into user memory (struct `sIOGLContextReadBufferData`; also #86)
 - **manual codes**: NoResources 0xe00002be = IOMemoryDescriptor::withAddress failure on the valid path: #103 (T3).
 
@@ -139,7 +139,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES, LOOP (4 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Shared11new_textureEmmjmPjS IOATIR500Shared11new_textureEmmjmPjS IOATIR500Shared18new_agpref_textureE <vtable> IOATIR500Shared11new_textureEmmjmPjS IOATIR500Shared19new_surface_texture IOATIR500Shared18new_global_textureE IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `uVar2 = 0xe00002be;`; 0xe00002be NoResources <- `if (iVar1 == 0) {`
-- **manual tier**: T3 (#104)
+- **manual tier**: T3 Phase S PASS (#104)
 - **manual reason**: baseline: invalid kind -> NoResources | deep path not yet exercised: valid kind: allocates a texture (VRAM/GART), returns id/handle
 
 ## GL sel 11 - `IOATIR500GLContext::delete_texture` 
@@ -151,7 +151,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Shared14delete_textureEP19V IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `return 0xe00002c2;`
-- **manual tier**: T3 by dependency: needs an allocated texture (GL 10, #104)
+- **manual tier**: T3 Phase S PASS (#104 run): delete -> 0, second delete -> BadArgument
 - **manual reason**: baseline: unallocated id -> BadArgument | deep path not yet exercised: delete an allocated texture
 
 ## GL sel 12 - `IOATIR500GLContext::become_global_shared` 
@@ -163,7 +163,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `uVar3 = 0xe00002cc;`
-- **manual tier**: T3 (#105)
+- **manual tier**: T3 Phase S PASS (#105)
 - **manual reason**: baseline: (0) -> CannotLock | deep path not yet exercised: a valid call (global shared-state change)
 
 ## GL sel 13 - `IOATIR500GLContext::page_off_texture` 
@@ -175,7 +175,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `uVar2 = 0xe00002c2;`
-- **manual tier**: T3 (#106)
+- **manual tier**: T3 Phase S PASS (#106)
 - **manual reason**: baseline: unallocated id -> BadArgument | deep path not yet exercised: page off an allocated texture (VRAM to backing copy; #86 for rebuilt)
 
 ## GL sel 14 - `IOATIR500GLContext::scale_surface` 
@@ -187,7 +187,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Surface11set_scalingEmP21IO IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c7 Unsupported <- `if ((M<UInt8 *>(self + 0x290) == (UInt8 *)0x0) || ((param_1 & 1) == 0)) {`
-- **manual tier**: T3 (#107)
+- **manual tier**: T3 Phase S PASS (#107)
 - **manual reason**: baseline: unbound -> Unsupported | deep path not yet exercised: bound surface + `IOAccelSurfaceScaling` (layout unreconstructed)
 
 ## GL sel 15 - `IOATIR500GLContext::purge_texture` 
@@ -199,7 +199,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `return 0xe00002c2;`
-- **manual tier**: T3 by dependency: needs an allocated texture (GL 10, #104)
+- **manual tier**: T3 Phase S PASS (#104 run): purge probe -> 0, after delete -> BadArgument
 - **manual reason**: baseline: unallocated id -> BadArgument | deep path not yet exercised: purge an allocated texture
 
 ## GL sel 16 - `IOATIR500GLContext::set_surface_volatile_state` 
@@ -210,7 +210,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface18set_volatile_state`
-- **manual tier**: T3 (#108)
+- **manual tier**: T3 Phase S PASS (#108)
 - **manual reason**: baseline: value 0 -> success | deep path not yet exercised: non-zero (the body relinks the accelerator's global surface list)
 
 ## GL sel 17 - `IOATIR500GLContext::reclaim_resources` 
@@ -221,7 +221,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - rebuilt body and source produce the same constants
 - derived properties: LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock <vtable> IOATIR500Accelerator17freeOneDataBuf IOATIR500Accelerator17freeOneDataBuf IOLockUnlock`
-- **manual tier**: T3 (#109)
+- **manual tier**: T3 Phase S PASS (#109)
 - **manual reason**: baseline: success, nothing to reclaim | deep path not yet exercised: reclaim with real resources outstanding (global reclamation)
 
 ## GL sel 18 - `IOATIR500GLContext::get_data_buffer` 
@@ -290,7 +290,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: SLEEPS, ALLOCATES, LOOP (2 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOLockSleep IOATIR500Surface14alloc_surfacesEmb IOLockUnlock thread_block IOSleep IOATIR500Surface13flush_surfaceEmm IOATIR500Surface14alloc_surfacesEmb IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `result = 0xe00002be;`
-- **manual tier**: T3 (#110)
+- **manual tier**: T3 Phase S PASS (#110)
 - **manual reason**: baseline: unbound -> NoResources | deep path not yet exercised: bound: flips the displayed buffer (display-visible)
 
 ## 2D sel 4 - `IOATIR5002DContext::scale_surface` 
@@ -302,7 +302,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Surface11set_scalingEmP21IO IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c7 Unsupported <- `if ((M<UInt8 *>(self + 0x100) == (UInt8 *)0x0) || ((param_1 & 1) == 0)) {`
-- **manual tier**: T3 (#111)
+- **manual tier**: T3 Phase S PASS (#111)
 - **manual reason**: baseline: unbound -> Unsupported | deep path not yet exercised: bound + scaling struct
 
 ## 2D sel 5 - `IOATIR5002DContext::lock_memory` 
@@ -314,7 +314,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: SLEEPS, ALLOCATES, HW-ish callee, LOOP (4 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Surface14alloc_surfacesEmb IOLockUnlock thread_block IOSleep <vtable> IOATIR500Surface22surface_write_lock <vtable> <vtable> <vtable> IOATIR500Surface14alloc_surfacesEmb IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c8 ? <- `if (map == nullptr) {`; 0xe00002cc CannotLock <- `result = 0xe00002cc;`
-- **manual tier**: T3 (#101)
+- **manual tier**: T3 Phase S PASS (#101)
 - **manual reason**: baseline: unbound -> CannotLock | deep path not yet exercised: lock a bound surface (VRAM/GART mapping)
 - **manual codes**: NoResources-class 0xe00002c8 and the valid path: #101 (T3).
 
@@ -327,7 +327,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: HW-ish callee
 - shipped callees (ordered): `IOLockLock IOATIR500Surface24surface_write_unlo IOLockUnlock IOATIR5002DContext12swap_surfaceEmPm`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (boundSurface == nullptr) {`
-- **manual tier**: T3 (#112; calls swap_surface after the unlock - moved out of T2)
+- **manual tier**: T3 Phase S PASS (#112)
 - **manual reason**: baseline: unbound -> BadArgument | deep path not yet exercised: unlock after a successful lock
 
 ## 2D sel 7 - `IOATIR5002DContext::finish` 
@@ -352,7 +352,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES
 - shipped callees (ordered): `IOLockLock IOATIR5002DContext13create_sharedEv IOATIR500Shared15new_agp_textureEjmP IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 == 0) || (param_2 == 0)) {`; 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002bd NoMemory <- `if (iVar1 == 0) {`
-- **manual tier**: T3 (#119: shared allocator + AGP texture lifecycle, filed as one sequence with 9, 11, 12)
+- **manual tier**: T3 Phase S PASS (#119)
 - **manual reason**: baseline: zero size -> BadArgument | deep path not yet exercised: real declare (allocates through the shared allocator)
 - **manual codes**: NoMemory/NoResources are allocation failures; valid path: #119 (T3).
 
@@ -365,7 +365,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES
 - shipped callees (ordered): `IOLockLock IOATIR5002DContext13create_sharedEv IOATIR500Shared11new_textureEmmjmPjS IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (param_1 == 0) {`; 0xe00002be NoResources <- `if (iVar2 == 0) {`; 0xe00002bd NoMemory <- `if (iVar2 == 0) {`
-- **manual tier**: T3 (#119)
+- **manual tier**: T3 Phase S PASS (#119)
 - **manual reason**: baseline: p1 = 0 -> BadArgument | deep path not yet exercised: real create
 - **manual codes**: as 2D 8 (#119).
 
@@ -378,7 +378,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES
 - shipped callees (ordered): `IOLockLock IOATIR5002DContext13create_sharedEv IOATIR500Shared15new_agp_textureEjmP IOLockUnlock IOLockUnlock IOATIR500Surface25free_buffer_backin <vtable> IOATIR500Surface27attach_buffer_back IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (sizeInBytes == 0) {`; 0xe00002be NoResources <- `if (!create_shared()) {`; 0xe00002bd NoMemory <- `if (texture == nullptr) {`
-- **manual tier**: T3 (#113)
+- **manual tier**: T3 Phase S PASS (#113)
 - **manual reason**: baseline: bytes 0 -> BadArgument | deep path not yet exercised: real create (AGP texture allocation, GART)
 - **manual codes**: as 2D 8 (#113, T3).
 
@@ -391,7 +391,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock IOLockUnlock IOATIR500Surface25free_buffer_backin IOATIR500Shared14delete_textureEP19V IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (this_00 == (UInt8 *)0x0) {`; 0xe00002c2 BadArgument <- `else {`
-- **manual tier**: T3 (#119)
+- **manual tier**: T3 Phase S PASS (#119)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: delete after create
 - **manual codes**: BadArgument needs an allocator and a bad handle: #119 (T3).
 
@@ -404,7 +404,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock IOLockUnlock <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002d6 Timeout? <- `if (iVar1 == -1) {`; 0xe00002c2 BadArgument <- `uVar2 = 0xe00002c2;`
-- **manual tier**: T3 (#119)
+- **manual tier**: T3 Phase S PASS (#119)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: wait on a real image
 - **manual codes**: BadArgument/Timeout need an allocator and an image: #119 (T3).
 
@@ -498,7 +498,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: SLEEPS, ALLOCATES, LOOP (5 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Surface14alloc_surfacesEmb IOLockUnlock thread_block IOSleep IOATIR500Surface14alloc_surfacesEmb IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `} while (iVar4 != 0);`
-- **manual tier**: T3 (#102)
+- **manual tier**: T3 Phase S PASS (#102): success, 13 pairs all zero
 - **manual reason**: baseline: unbound -> CannotLock | deep path not yet exercised: bound: VRAM allocation, retry loop up to 1000 times
 
 ## DVD sel 5 - `IOATIR500DVDContext::unlock_memory` 
@@ -509,7 +509,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock`
-- **manual tier**: T3 by dependency: needs a successful lock (DVD 4, #102)
+- **manual tier**: T3 Phase S PASS (#102)
 - **manual reason**: baseline: unbound -> BadArgument | deep path not yet exercised: after a successful lock
 
 ## DVD sel 6 - `IOATIR500DVDContext::write_buffer` (own issue #88-#97, not part of #100)
@@ -545,7 +545,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES
 - shipped callees (ordered): `IOLockLock IOATIR500DVDContext13create_sharedEv IOATIR500Shared15new_agp_textureEjmP IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 == 0) || (param_2 == 0)) {`; 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002bd NoMemory <- `if (iVar1 == 0) {`
-- **manual tier**: T3 (#120)
+- **manual tier**: T3 Phase S PASS (#120)
 - **manual reason**: baseline: zero size -> BadArgument | deep path not yet exercised: real declare (shared allocator)
 - **manual codes**: NoMemory/NoResources are allocation failures; valid path: #120 (T3).
 
@@ -558,7 +558,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock IOATIR500Shared14delete_textureEP19V IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (this_00 == (UInt8 *)0x0) {`; 0xe00002c2 BadArgument <- `uVar2 = 0xe00002c2;`
-- **manual tier**: T3 (#120)
+- **manual tier**: T3 Phase S PASS (#120)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: after a real declare
 - **manual codes**: BadArgument needs an allocator and a bad handle: #120 (T3).
 
@@ -624,7 +624,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES, LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Surface20alloc_surfaces_ret IOLockUnlock IOLockUnlock IOMemoryDescriptor11withAddressEjm11 <vtable> IOLockUnlock <vtable> IOLockLock <vtable> <vtable> IOLockUnlock <vtable> IOLockLock <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `if (((M<unsigned int>(self + 0xbf8) & 0x20000000) != 0) || (M<int>(iVar17 + 0x10) == 0)) {`; 0xe00002be NoResources <- `if (local_4c == (int *)0x0) {`
-- **manual tier**: T3 (#116; GPU DMA into caller memory - moved out of T2)
+- **manual tier**: T3 Phase S PASS (#116)
 - **manual reason**: baseline: rectangle off-surface -> success | deep path not yet exercised: a real in-surface rectangle: surface to user copy
 - **manual codes**: NoResources 0xe00002be = withAddress failure on the valid path: #116 (T3).
 
@@ -636,7 +636,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - rebuilt body and source produce the same constants
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface28set_shape_backing_`
-- **manual tier**: T2 for the zero-backing variants (baseline); the non-zero backing-store connect path is T3 (#121).
+- **manual tier**: T3 Phase S PASS for the backing connect/disconnect (#121)
 - **manual reason**: baseline: real success | deep path not yet exercised: other arguments / the backing-store connect path
 
 ## Surface sel 7 - `IOATIR500Surface::set_id_mode` 
@@ -661,7 +661,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Surface11set_scalingEmP21IO IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (param3 != 0 && param3 != 0x2c) {`
-- **manual tier**: T3 (#117)
+- **manual tier**: T3 Phase S PASS (#117)
 - **manual reason**: baseline: disabled path (size 0) | deep path not yet exercised: enabled path: 0x2c-byte `IOAccelSurfaceScaling` (display scaling)
 
 ## Surface sel 9 - `IOATIR500Surface::set_shape` 
@@ -745,7 +745,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface20set_surface_blocki IOATIR500Surface18set_volatile_state`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `} else {`
-- **manual tier**: T3 (#118; sel 16 and 18 are one body)
+- **manual tier**: T3 Phase S PASS (#118)
 - **manual reason**: baseline: selector 0 -> BadArgument only | deep path not yet exercised: selector 1 (`set_surface_blocking`; value 0 sleeps on a lock) and 4 (`set_volatile_state`, relinks the global surface list)
 
 ## Surface sel 17 - `IOATIR500Surface::set_shape_backing_length` 
@@ -769,7 +769,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOATIR500Surface20set_surface_blocki IOATIR500Surface18set_volatile_state`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `} else {`
-- **manual tier**: T3 (#118)
+- **manual tier**: T3 Phase S PASS (#118)
 - **manual reason**: baseline: selector 0 -> BadArgument only | deep path not yet exercised: selectors 1 and 4 as above
 
 ## 2D sel 16 - `ATIR5002DContext::read_regs` 
@@ -794,7 +794,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
-- **manual tier**: T3 (#114)
+- **manual tier**: T3 Phase S PASS (#114)
 - **manual reason**: baseline: not multiple of 8 -> BadArgument; zero pairs | deep path not yet exercised: real register pairs: HARDWARE WRITE
 - **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #114)
 
@@ -807,7 +807,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar2 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
-- **manual tier**: T3 (#115)
+- **manual tier**: T3 Phase S PASS (#115)
 - **manual reason**: baseline: same two cases | deep path not yet exercised: real pairs: HARDWARE WRITE
 - **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #115)
 

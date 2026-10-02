@@ -1,0 +1,27 @@
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE start: method=t3_surface_read phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL 2D lock_memory(0) allocates the surface memory
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) allocates the surface memory
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL 2D unlock_memory(0)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL Surface surface_read(sel5, rect {0,0,4,4}, client_addr = 64 KB user buffer, row_bytes 64)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_read(sel5, rect {0,0,4,4}, client_addr = 64 KB user buffer, row_bytes 64)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE surface_read -> r=0x00000000 (0 = copied; CannotLock 0xe00002cc = surface memory not usable: predicted reject)
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE bytes changed inside rows 0..3: 16, outside: 0; first row: ff ff ff ff aa aa aa aa
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] ABOUT TO CALL 2D set_surface(0) detaches
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+2026-10-02T04:19:55Z [t3_surface_read/stock/S] NOTE finish: outcome=PASS calls=10

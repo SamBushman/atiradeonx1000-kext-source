@@ -1,0 +1,47 @@
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE start: method=t3_volatile_state phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control(sel16, selector 1 set_surface_blocking, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control(sel16, selector 1 set_surface_blocking, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE blocking=1: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control(sel16, selector 1, 0) wakes sleepers
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control(sel16, selector 1, 0) wakes sleepers
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE blocking=0: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control(sel16, selector 2) unknown
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0xe00002c2 (kIOReturnBadArgument) Surface surface_control(sel16, selector 2) unknown
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE selector 2: got 0xe00002c2 want 0xe00002c2 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control(sel16, selector 4 set_volatile_state, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control(sel16, selector 4 set_volatile_state, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE volatile=1: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface get_state after volatile=1
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface get_state after volatile=1
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE get_state=0x1
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control(sel16, selector 4, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control(sel16, selector 4, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE volatile=0: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control_alias(sel18, selector 4, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control_alias(sel18, selector 4, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE alias volatile=1: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL Surface surface_control_alias(sel18, selector 4, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface surface_control_alias(sel18, selector 4, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE alias volatile=0: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL GL set_surface(1,0,0,0) binds
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface(1,0,0,0) binds
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL GL set_surface_volatile_state(sel16, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface_volatile_state(sel16, 1)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE GL volatile=1: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL GL set_surface_volatile_state(sel16, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface_volatile_state(sel16, 0)
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE GL volatile=0: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] ABOUT TO CALL GL set_surface(0) detaches
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_surface(0) detaches
+2026-10-02T02:53:09Z [t3_volatile_state/stock/S] NOTE finish: outcome=PASS calls=17
