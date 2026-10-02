@@ -1,8 +1,8 @@
 /* Test for #90 (DVD set_macrovision, sel 16, scalars attribute, value), issue #87 protocol. Traced (ATIR500DVDContext_set_macrovision_Port.cpp, shipped 0x35010): needs a BOUND surface (the unbound call
  * is the #43 NULL-dereference panic and is NEVER made here); getFramebufferIndex() returns 0 or 1 (loop over two panels, never out of range), the panel's framebuffer is safe-cast to IONDRVFramebuffer
  * (NULL -> 0xe00002c0) and its vtable +0x70c is called with (attribute, &value). The pair comes from the real vendor client: ATIRadeonX1000VADriver.bundle (tiger-hd-pull) wrapper at 0x5280 sends
- * selector 16 with attribute 0x92 in scalar 0 and the caller's value in scalar 1 (disassembly in issue #90). Value 0 = macrovision off, so the call only restores the default. Phase A only: bound to the
- * registered 4x4 surface (proven set_surface(1,0,0)); no enable phase. Expected 0 or 0xe00002c0. */
+ * selector 16 with attribute 0x92 in scalar 0 and the caller's value in scalar 1 (disassembly in issue #90). Value 0 = macrovision off, so the call only restores the default. Phase A, then (run 2) B enable and C restore: bound to the
+ * registered 4x4 surface (proven set_surface(1,0,0)). Expected 0 or 0xe00002c0. */
 #include "t3common.h"
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0;
@@ -14,6 +14,11 @@ static const char *body(dtest_t *t, io_service_t svc) {
         T3CALL(t, r, "DVD set_macrovision(sel16, attribute 0x92, value 0) bound", IOConnectMethodScalarIScalarO(d, 16, 2, 0, 0x92, 0));
         dtest_note(t, "set_macrovision -> 0x%08x (0 = accepted; 0xe00002c0 = the framebuffer is not an NDRV one)", (unsigned)r);
         if (r != 0 && r != 0xe00002c0) bad++;
+        if (r == 0) {
+            /* Phase B/C (run 2): the 2D version of the same attribute (t3_2d_macrovision) accepted enable 1 and the restore 0 with identical screenshots, so the enable is followed at once by the restore */
+            T3CALL(t, r, "DVD set_macrovision(sel16, 0x92, value 1) Phase B enable", IOConnectMethodScalarIScalarO(d, 16, 2, 0, 0x92, 1)); dtest_note(t, "Phase B -> 0x%08x", (unsigned)r);
+            T3CALL(t, r, "DVD set_macrovision(sel16, 0x92, value 0) Phase C restore", IOConnectMethodScalarIScalarO(d, 16, 2, 0, 0x92, 0)); bad += t3_expect(t, "Phase C", r, 0);
+        }
         T3CALL(t, r, "DVD set_surface(0) detaches", IOConnectMethodScalarIStructureI(d, 0, 3, 0, 0, 0, 0, NULL));
     }
     IOServiceClose(d); IOServiceClose(s);
