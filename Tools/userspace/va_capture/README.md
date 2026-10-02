@@ -10,6 +10,7 @@ buffers - so #93's valid-path phases can be derived from evidence instead of gue
 | `iokit_record_va.c` | `DYLD_INSERT_LIBRARIES` shim (superset of `Tools/userspace/iokit_record.c`): logs `IOServiceOpen/Close`, `IOConnectMapMemory`, all four `io_connect_method_*` MIG routines the VA bundle imports, and dumps the first `VA_DUMP_BYTES` (4096) of every mapped buffer before each doIDCT-shaped call (`structureI_structureO`, selector 18, struct >= 0x34 bytes), at most `VA_DUMP_MAX` (64) calls |
 | `record_selftest.c` | proves the recorder on the G5 with the already-proven-safe Surface `get_state` (done: log `get_state -> 0x0 out=0x1`, recorded) |
 | `make_streams.sh`, `streams/*.mpg|vob` | three 4-second synthetic MPEG-2 streams (720x480 NTSC with B frames, the same as a DVD VOB, and a 352x240 control), generated with ffmpeg (6 MB) |
+| `author_video_ts.sh`, `dvd/disc/VIDEO_TS/` | DVD Player only opens a disc folder, not a bare .mpg (confirmed: it refuses the .mpg). The script authors a one-title NTSC disc (30 s, 720x480, AC-3 stereo) from `streams/test_ntsc_dvd.vob` with dvdauthor 0.7.2+ (build recipe in the script); the result `dvd/disc/` has `VIDEO_TS.IFO/BUP`, `VTS_01_0.IFO/BUP`, `VTS_01_1.VOB` |
 | `install_on_g5.sh` | copies this folder to `/tmp/va_cap` on the G5, builds the dylib there (`gcc -dynamiclib ... -framework IOKit -framework CoreFoundation`) and runs the self-test (**already run: INSTALL_OK**) |
 | `watch_hw_path.sh` | ON THE G5, read-only: once per second counts DVD/GL/2D/Surface user clients; "max DVD contexts seen: 0" means the player decoded in software (the hardware IDCT path was not used) |
 | `play_with_recorder_quicktime.command`, `..._dvdplayer.command`, `..._vlc.command` | double-click launchers: start the player binary directly with the recorder inserted and the watcher running; logs go to `/tmp/va_cap/rec_<time>.tsv` (+ `.mem`) and `hw_watch_<time>.log` |
@@ -25,6 +26,12 @@ buffers - so #93's valid-path phases can be derived from evidence instead of gue
 5. Record the findings in #93 (what the VA driver passes to `set_surface` / `setup_buffers`, the `sATIDVDIDCTParams` words, the mapped buffer layout). Only after that can anyone decide whether a valid-path run of `doIDCT` is
    justifiable; the hang/lock recovery protocol of #87 applies to any such run.
 
+## DVD Player
+Use `play_with_recorder_dvdplayer.command` (default argument `/tmp/va_cap/dvd/disc`); if DVD Player does not open the folder from the command line, use its File > Open VIDEO_TS Folder... on `/tmp/va_cap/dvd/disc` (the player is already running with the recorder loaded).
+
+## Results so far
+* QuickTime Player + `test_ntsc_720x480.mpg`: **software path** - `hw_watch` saw DVD contexts = 0 for the whole run (only GL 1-6, 2D, Surface); 109 recorded calls, none on a DVD connection; no doIDCT-shaped call (`captures/rec_000950.tsv`). DVD Player refuses the bare .mpg.
+
 ## Known unknowns
 * Whether Apple's players use this driver's hardware IDCT path on the X1900 at all (step 3 answers it).
-* Which player/stream triggers it (DVD Player normally wants a VIDEO_TS folder; no `dvdauthor` was available on the dev machine, so the streams are plain program streams / VOB files).
+* Which player/stream triggers it (DVD Player normally wants a VIDEO_TS folder; dvdauthor was built locally to author the disc folder).

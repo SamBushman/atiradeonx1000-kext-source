@@ -3,7 +3,7 @@
 # IOKit recorder loaded (iokit_record_va.dylib: logs every call the player makes to the kext, changes nothing) and runs watch_hw_path.sh in the background.
 # Usage: double-click for the default stream, or run  sh play_with_recorder_dvdplayer.command /path/to/file.mpg  from Terminal.
 D=/tmp/va_cap; cd "$D" || { echo "copy the va_capture folder to /tmp/va_cap first"; exit 1; }
-F=${1:-$D/streams/test_ntsc_720x480.mpg}
+F=${1:-$D/dvd/disc}
 ts=`date +%H%M%S`
 sh $D/watch_hw_path.sh 90 $D/hw_watch_$ts.log > /dev/null 2>&1 &
 echo "recording to $D/rec_$ts.tsv  (.mem = mapped-buffer dumps); play the file, then quit the player"
