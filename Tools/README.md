@@ -23,3 +23,15 @@ ordered recipe and `Userspace/README.md` describes the results.
 `userspace/detect_dropped_args.py` (calls printed without arguments), `userspace/detect_short_calls.py` (fewer arguments than parameters), `userspace/check_import_binding.py`
 (per-function import calls by mangled name, stock vs rebuilt image), `userspace/gs/{NopMillicode,CommitLiveSigs,RemoveExtras,UniqueNames,ThisToStdcall,CopySigToStubs}.java`
 and the drivers in `userspace/pipeline/` (Stage B2 of its README).
+
+### Static fidelity checks added 2026-10-01 (#85/#86, run against `otool -arch ppc -tV` of the shipped and rebuilt kext)
+| tool | finds |
+|---|---|
+| `this_register_check.py` (+ `this_register_allow.txt`) | an argument register dereferenced as another (first real argument used as `this`) - run by `check_ledger.sh` |
+| `alloc_size_compare.py`, `gen_layout_checks.py` -> `Sources/LayoutChecks.cpp` | wrong object sizes / member offsets (compile-time checks) |
+| `uninit_local_scan.py` | split stack objects: locals read but never assigned (gcc deletes the branches) |
+| `callee_compare.py`, `size_compare.py`, `imm_compare.py` (use the RAW `otool -tv` dump for real displacements) | missing calls / code / field accesses; classified in `Tests/body_triage.tsv` by `body_triage.py` |
+| `decomp_vs_source.py` | hex constants of a fresh Ghidra decompile absent from the C++ body (omitted statements) |
+| `call_arg_origin_compare.py` | shifted / swapped call arguments (found the `alloc_surfaces_retry` bug: `this` passed as the mask). NOISY - register reuse makes many hits benign; read each against the disassembly |
+| `call_args_compare.py`, `result_use_compare.py` | literal-argument tuples and dropped call results (both noisy; low yield) |
+| `DecompList.java` | headless-Ghidra batch decompile of a list of addresses into `$SCRATCH/work/0xADDR.txt` (for `replace_fn.py`) |

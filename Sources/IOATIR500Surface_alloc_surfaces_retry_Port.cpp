@@ -68,12 +68,13 @@ LAB_000148e0:
     if ((!(bool)(bVar7 >> 1 & 1)) && (M<char>(M<int>(self + 0xd50) + 0x80) == '\0')) {
       return 0xe00002be;
     }
-    iVar2 = alloc_surfaces_pageq((UInt32)self,param_1,false);
+    /* the decompile passed `this` as a leading argument and dropped the last one: shipped asm 0x14910 is (this, mask = param_1, keepMask = 0, bool = 0) */
+    iVar2 = this->alloc_surfaces_pageq(param_1,0,false);
     if (iVar2 == 0) goto LAB_00014968;
     if (iVar2 == 2) goto LAB_00014970;
     iVar4 = iVar4 + -1;
     if (iVar4 == 0) {
-      iVar4 = alloc_surfaces_pageq((UInt32)self,M<unsigned int>(self + 0xc1c) & 3,false);
+      iVar4 = this->alloc_surfaces_pageq(M<unsigned int>(self + 0xc1c) & 3,0,true);   /* shipped asm 0x14988: r4 = self[0xc1c] & 3, r5 = 0, r6 = 1 */
       if (iVar4 == 0) {
 LAB_00014968:
         uVar3 = 0;
