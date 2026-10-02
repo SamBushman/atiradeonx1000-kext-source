@@ -3,7 +3,8 @@
  * client_addr in Surface surface_read), +0x18 the row bytes; sourceSelector 1 selects surface buffer slot 0 (the one the 2D lock below allocates). Traced (IOATIR500GLContext_read_buffer_Port.cpp,
  * shipped 0x8d10): the buffer is only used when this context's requirement mask (this+0x8c) covers the slot, which set_surface(1, mode 0) may or may not set: CannotLock 0xe00002cc is the
  * predicted reject (EXPECTED-REJECT, nothing written). The valid path wraps the user range and has the GPU copy the slot into it through surface vtable +0x5e8 (copy_buffer_using_DMA family).
- * Derived like t3_surface_read (#116, same DMA): the memory is created the proven way (2D bind + lock_memory + unlock_memory(0)), the destination is a page-aligned 64 KB pre-filled buffer. */
+ * Run 1 (mode 0) returned the predicted CannotLock; GL set_surface (shipped 0x87b0, source lines 93-117) sets this+0x8c |= 1 only when modeBits has 0x800 (0x400 -> 0x20000002), so run 2 binds with
+ * modeBits 0x800 (the same bit 2D set_surface uses for the front buffer). Derived like t3_surface_read (#116, same DMA): the memory is created the proven way (2D bind + lock_memory + unlock_memory(0)), the destination is a page-aligned 64 KB pre-filled buffer. */
 /* original header of t3_surface_read.c follows for the shared trace: Surface surface_read, IOAccelSurfaceReadData {x,y,w,h,client_addr,row_bytes}:
  * Traced (IOATIR500Surface_surface_read_Port.cpp, shipped 0x14a30): for an in-surface rectangle the body wraps [client_addr rounded to a page, length from
  * row_bytes * (h-1) + the surface pitch * w + offset] in an IOMemoryDescriptor (withAddress, the connection's task) and has the GPU copy the surface buffer into it through surface vtable
@@ -28,7 +29,7 @@ static const char *body(dtest_t *t, io_service_t svc) {
         if (r == 0) { T3CALL(t, r, "2D unlock_memory(0)", IOConnectMethodScalarIScalarO(d, 6, 1, 1, 0, &tag)); bad += t3_expect(t, "unlock", r, 0); }
         in[0] = 0; in[1] = 0; in[2] = 4; in[3] = 4; in[4] = 1; in[5] = (UInt32)buf; in[6] = 64;
         T3CALL(t, r, "open GL connection", open_user_client(svc, CLIENT_TYPE_GL, &g)); bad += t3_expect(t, "open GL", r, 0);
-        T3CALL(t, r, "GL set_surface(1,0,0,0) binds", IOConnectMethodScalarIStructureI(g, 0, 4, 0, 1, 0, 0, 0, NULL)); bad += t3_expect(t, "GL bind", r, 0);
+        T3CALL(t, r, "GL set_surface(1, modeBits 0x800, 0, 0) binds with the front-buffer requirement", IOConnectMethodScalarIStructureI(g, 0, 4, 0, 1, 0x800, 0, 0, NULL)); bad += t3_expect(t, "GL bind", r, 0);
         T3CALL(t, r, "GL read_buffer(sel7, rect {0,0,4,4}, selector 1, user buffer, row_bytes 64)", IOConnectMethodStructureIStructureO(g, 7, sizeof in, &zero, in, NULL));
         dtest_note(t, "read_buffer -> r=0x%08x (0 = copied; CannotLock 0xe00002cc = surface memory not usable: predicted reject)", (unsigned)r);
         if (r != 0 && r != TEST_kIOReturnCannotLock) bad++;
