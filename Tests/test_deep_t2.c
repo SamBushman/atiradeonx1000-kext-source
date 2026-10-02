@@ -345,7 +345,7 @@ static void dvd_check_stamps_values(io_service_t service) {
     printf("-- DVD T2: check_stamps with real values --\n");
     if (open_user_client(service, CLIENT_TYPE_DVD, &d) != TEST_kIOReturnSuccess) { printf("[FAIL] DVD open\n"); g_testsUnexpected++; return; }
     r = IOConnectMethodScalarIScalarO(d, 20, 2, 1, 5, 5, &both);
-    /* live result on stock: both=0 - the accelerator's stamp polarity is not yet traced, so this value is recorded, not asserted */
+    /* live result on stock: both=0 - ATIRadeonX1000::checkForTimeStamp (0x1e090) is done iff stamp <= the counter cached at +0x54 / read from the GPU (+0x864/+0x86c); an idle counter below 5 explains both=0, but the counter value itself is not read here */
     check("DVD check_stamps(5,5) call succeeds and writes a 0/1 result", r == TEST_kIOReturnSuccess && (both == 0 || both == 1), "r=0x%08x both=%d (recorded: 0 on stock)", (unsigned int)r, both);
     r = IOConnectMethodScalarIScalarO(d, 20, 2, 1, 0x7fffffff, 0, &both);
     check("DVD check_stamps(0x7fffffff,0) -> not done (first stamp never submitted)", r == TEST_kIOReturnSuccess && both == 0, "r=0x%08x both=%d", (unsigned int)r, both);
