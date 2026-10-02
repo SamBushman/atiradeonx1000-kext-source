@@ -104,5 +104,10 @@
 [OK] 2D get_surface_info(id 1, mode 0x800) returns the same info r=0x00000000
 [OK] 2D set_surface(0, mode 0x800) detaches and returns the panel info of the baseline call r=0x00000000
 [OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
+-- GL T2: wait_for_stamp / finish --
+[OK] GL wait_for_stamp(0) -> 0 (baseline) r=0x00000000
+[OK] GL wait_for_stamp(5) -> 0 (a stamp the GPU has already passed) r=0x00000000
+[OK] GL wait_for_stamp(0x7fffffff) -> Timeout 0xe00002d6 (a stamp that was never submitted; bounded wait) r=0xe00002d6
+[OK] GL finish -> 0 r=0x00000000
 
-94 calls made (93 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+98 calls made (97 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

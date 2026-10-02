@@ -319,6 +319,25 @@ static void twod_bind_round_trip(io_service_t service) {
     check("leak check: driver class instance counts identical before/after", same, "before={%d,%d,%d,%d,%d,%d} after={%d,%d,%d,%d,%d,%d}", before[0], before[1], before[2], before[3], before[4], before[5], after[0], after[1], after[2], after[3], after[4], after[5]);
 }
 
+/* T2 row 8 (issue #100): GL wait_for_stamp (sel 9) / finish (sel 8). Shipped wait_for_stamp (0x7de0): `r = accelerator->vtable[0x550](accelerator, stamp)`; r == -1 -> Timeout (0xe00002d6),
+ * else accelerator[0x768] += r. The stamp reaches the callee because r4 is left untouched (a decompile-dropped argument: the first #86 fix wrongly called it unused and this
+ * test's first run caught it: a stamp that was never submitted times out). finish (0x7d60) is the same with this+0x7c (the last submitted stamp) as the argument. */
+static void gl_wait_finish(io_service_t service) {
+    io_connect_t g = IO_OBJECT_NULL; kern_return_t r;
+    printf("-- GL T2: wait_for_stamp / finish --\n");
+    g = IO_OBJECT_NULL;
+    if (open_user_client(service, CLIENT_TYPE_GL, &g) != TEST_kIOReturnSuccess) { printf("[FAIL] GL open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIStructureI(g, 9, 1, 0, 0, NULL);
+    check("GL wait_for_stamp(0) -> 0 (baseline)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(g, 9, 1, 0, 5, NULL);
+    check("GL wait_for_stamp(5) -> 0 (a stamp the GPU has already passed)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(g, 9, 1, 0, 0x7fffffff, NULL);
+    check("GL wait_for_stamp(0x7fffffff) -> Timeout 0xe00002d6 (a stamp that was never submitted; bounded wait)", r == 0xe00002d6, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(g, 8, 0, 0, NULL);
+    check("GL finish -> 0", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    IOServiceClose(g);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -327,4 +346,5 @@ void run_deep_t2_tests(io_service_t service) {
     set_id_mode_errors(service);
     gl_swap_params_bound(service);
     twod_bind_round_trip(service);
+    gl_wait_finish(service);
 }

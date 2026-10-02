@@ -29,12 +29,14 @@
 /* real addr 0x7de0 */
 IOReturn IOATIR500GLContext::wait_for_stamp(UInt32 param_2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the stamp (r4) is its param_2, unused by the shipped body (#86) */
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the stamp (r4) is its param_2, forwarded to the accelerator's wait (#86) */
 
   SInt32 iVar1;
   UInt32 uVar2;
   
-  iVar1 = VCALL(*M<SInt32 *>(param_1 + 200), 0x550)(M<SInt32 *>(param_1 + 200));
+  /* CORRECTED (found by the live T2 test: wait_for_stamp(0x7fffffff) returned Timeout on stock): the shipped body leaves r4 - the caller's stamp - untouched, so the
+   * stamp IS the second argument of the accelerator's wait (vtable +0x550); the decompile dropped it and #86's first fix wrongly called it unused. */
+  iVar1 = VCALL(*M<SInt32 *>(param_1 + 200), 0x550)(M<SInt32 *>(param_1 + 200),param_2);
   if (iVar1 == -1) {
     uVar2 = 0xe00002d6;
   }
