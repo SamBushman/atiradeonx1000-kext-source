@@ -423,6 +423,24 @@ static void twod_finish_modes(io_service_t service) {
     IOServiceClose(c);
 }
 
+/* T2 row 12 (issue #100): DVD wait_for_stamps (sel 19, stamps a, b) and finish (sel 7). Traced (ATIR500DVDContext_wait_for_stamps_Port.cpp, shipped 0x34120): a != 0 -> accelerator
+ * vtable +0x5fc with the untouched r4 (= a), b != 0 -> +0x558(b); it returns 0 whatever the waits did. finish (IOATIR500DVDContext, 0xea30) is +0x55c(this+0x7c): 0 or Timeout
+ * 0xe00002d6. Only stamps the GPU has already passed are used (5), so no wait can run to its timeout. The accelerator's wait statistics are the only state touched. */
+static void dvd_wait_stamps_finish(io_service_t service) {
+    io_connect_t d = IO_OBJECT_NULL; kern_return_t r;
+    printf("-- DVD T2: wait_for_stamps / finish --\n");
+    if (open_user_client(service, CLIENT_TYPE_DVD, &d) != TEST_kIOReturnSuccess) { printf("[FAIL] DVD open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIStructureI(d, 19, 2, 0, 0, 0, NULL);
+    check("DVD wait_for_stamps(0,0) -> 0 (baseline)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(d, 19, 2, 0, 0, 5, NULL);
+    check("DVD wait_for_stamps(0,5) -> 0 (second stamp already passed)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(d, 19, 2, 0, 5, 5, NULL);
+    check("DVD wait_for_stamps(5,5) -> 0 (both already passed)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(d, 7, 0, 0, NULL);
+    check("DVD finish -> 0 or Timeout (this+0x7c is 0 on a fresh connection)", r == TEST_kIOReturnSuccess || r == 0xe00002d6, "r=0x%08x", (unsigned int)r);
+    IOServiceClose(d);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -435,4 +453,5 @@ void run_deep_t2_tests(io_service_t service) {
     dvd_check_stamps_values(service);
     dvd_bound_setters(service);
     twod_finish_modes(service);
+    dvd_wait_stamps_finish(service);
 }

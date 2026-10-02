@@ -208,3 +208,7 @@ Surface 5	tier	T3 (#116; GPU DMA into caller memory - moved out of T2)
 Surface 8	tier	T3 (#117)
 Surface 16	tier	T3 (#118; sel 16 and 18 are one body)
 Surface 18	tier	T3 (#118)
+DVD 19	tier	T2 CONFIRMED (live, test_deep_t2.c dvd_wait_stamps_finish): wait_for_stamps(0,0), (0,5), (5,5) -> 0 (returns 0 whatever the waits did; only already-passed stamps used).
+DVD 7	tier	T2 CONFIRMED (live): finish -> 0 on a fresh connection (this+0x7c = 0); Timeout 0xe00002d6 is the only other code.
+2D 13	tier	DONE (stub by design: the Unsupported return is the whole behaviour, baseline covers it)
+2D 14	tier	DONE (stub by design: the Unsupported return is the whole behaviour, baseline covers it)
