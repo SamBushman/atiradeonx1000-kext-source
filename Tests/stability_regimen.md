@@ -69,4 +69,14 @@ Stock result against the bar: see the "Stock soak results" section appended belo
 
 ## Stock soak results
 
-(2026-10-02) 150 s validation soak: 8 rounds (153 s), perf_baseline x50 each, parity and deep identical to their references, 0 failures, kext address unchanged (0x588000). Tooling validated; the 4 h stock run is recorded below when done.
+**Run 1, 2026-10-02 (stock 4.1.9, fresh boot at 09:14, soak started 09:17:24): the bar was NOT met as defined.** Log and watchdog traces: `Tests/baseline/soak/`.
+
+* **703 complete rounds plus the first two steps of round 704, 3 h 43 min (09:17:24 - 13:00:58), then `STEP-DIFF r704 deep`** and the soak stopped itself. That is ~35 200 GL context create/draw/readback/destroy cycles (`perf_baseline` x50 per round) and ~1 400 full harness passes, every one identical to its round-1 reference until round 704.
+* The reference was clean (parity: 87 calls, 0 unexpected; deep: 136 calls, 0 unexpected).
+* **The difference, in one round only:** 6 calls of the DVD guarded wrappers returned `0xe00002d8` (kIOReturnNotReady): `dvd_setup_overlay` and `dvd_enable_deint` unbound (expected `Error`, 0xe00002bc), and `dvd_setup_overlay`, `dvd_enable_deint` x2, `setup_buffers` bound (expected success). Everything else in the round matched.
+* **It did not persist:** a deep and a normal harness pass run ~90 s later were both clean (0 unexpected), the `machine_fingerprint.sh` fingerprint was unchanged (id0=[0x4] id1=[0x0], 2221852201), the kext was still at 0x588000, no panic (`panic.log` still 6718 bytes), no crashdump.
+* **Watchdog (`Tools/stability_watch.sh`): no verdict other than OK for the whole run.** It was killed at the 2 h background cap and restarted with a 16 s gap (uptime and panic.log size continuous across it); part 2 ends ~13:13. The final minutes were checked by hand.
+* **Likely cause (inferred from the source, not observed):** the wrappers return NotReady when `accelerator+0x80 == 0`, the "hardware up" flag that `stop_promo4_engine()` clears and `start_promo4_engine()` sets; the display-mode-change path (`ATIRadeonX1000_DisplayMode.cpp:146`) runs between them. A display reconfiguration at ~13:00 (display/screen-saver/mode event; `pmset` has display sleep and sleep both set to never) would open exactly such a window. Nothing on the machine identifies the trigger.
+* **What this means for the bar:** the stock driver ran 3 h 43 min under load with no crash, hang, leak symptom or drift, but the criterion "zero STEP-DIFF in 4 h" is literally unmet, and the cause of the one difference is not proven to be external. Next step (needs a decision): rerun on a fresh boot with the console left alone; if the same kind of NotReady transient recurs, the soak should treat a *transient* NotReady on the DVD wrappers as retryable (retry the step once after ~2 s; fail only if it persists) and log each retry, which would be an explicit, recorded change to the bar.
+
+Earlier: 150 s validation soak (8 rounds, 153 s): all rounds identical to their references, 0 failures.
