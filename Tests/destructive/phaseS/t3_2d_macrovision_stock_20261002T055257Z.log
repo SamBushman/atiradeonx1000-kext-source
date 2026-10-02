@@ -1,0 +1,13 @@
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] NOTE start: method=t3_2d_macrovision phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] ABOUT TO CALL 2D set_macrovision(sel15, 0) Phase A
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_macrovision(sel15, 0) Phase A
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] NOTE Phase A -> 0x00000000 (0 = a display accepted attribute 0x92; 0xe00002c0 = none did)
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] ABOUT TO CALL 2D set_macrovision(sel15, 1) Phase B
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_macrovision(sel15, 1) Phase B
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] NOTE Phase B -> 0x00000000
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] ABOUT TO CALL 2D set_macrovision(sel15, 0) Phase C restore
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_macrovision(sel15, 0) Phase C restore
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] NOTE Phase C: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:52:57Z [t3_2d_macrovision/stock/S] NOTE finish: outcome=PASS calls=4

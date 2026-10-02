@@ -1,0 +1,118 @@
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE start: method=t3_surface_locks phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL open Surface connection A
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection A
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE state A: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] Surface sel3 write_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] Surface sel3 write_lock_options(1) -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] Surface sel14 write_lock -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] Surface sel0 read_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] Surface sel0 read_lock_options(1) -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL open 2D connection
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open 2D connection
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(id 1, mode 0x800) binds
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL 2D lock_memory(0) allocates the surface memory
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D lock_memory(0) allocates the surface memory
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE 2D lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL 2D unlock_memory(0)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D unlock_memory(0)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE 2D unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] Surface sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] Surface sel3 write_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=4,4,0 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] unlock for sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] unlock for sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] query_lock after sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] Surface sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] Surface sel3 write_lock_options(1) -> 0x00000000 data[0]=0x3812000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] unlock for sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] unlock for sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] query_lock after sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel3 write_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] query_lock after sel3 write_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] Surface sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] Surface sel14 write_lock -> 0x00000000 data[0]=0x3812000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] unlock for sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] unlock for sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] query_lock after sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel14 write_lock
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] query_lock after sel14 write_lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] Surface sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] Surface sel0 read_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=4,4,0 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] unlock for sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] unlock for sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] query_lock after sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel0 read_lock_options(3)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] query_lock after sel0 read_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] Surface sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] Surface sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] Surface sel0 read_lock_options(1) -> 0x00000000 data[0]=0x3812000 data[4]=0x100 data[5..7]=4,4,0 data[8]=0x0
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] unlock for sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] unlock for sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] unlock for sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL [B] query_lock after sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [B] query_lock after sel0 read_lock_options(1)
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE [B] query_lock after sel0 read_lock_options(1): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] ABOUT TO CALL 2D set_surface(0) detaches
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) 2D set_surface(0) detaches
+2026-10-02T05:33:15Z [t3_surface_locks/stock/S] NOTE finish: outcome=PASS calls=41

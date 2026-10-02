@@ -1,0 +1,10 @@
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] NOTE start: method=t3_gl_set_stereo phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] ABOUT TO CALL open GL connection
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open GL connection
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] ABOUT TO CALL GL set_stereo(sel19, mode 0, panel 0)
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_stereo(sel19, mode 0, panel 0)
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] NOTE GL set_stereo(sel19, mode 0, panel 0) -> 0x00000000
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] ABOUT TO CALL GL set_stereo(sel19, mode 0, panel 1)
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) GL set_stereo(sel19, mode 0, panel 1)
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] NOTE GL set_stereo(sel19, mode 0, panel 1) -> 0x00000000
+2026-10-02T06:18:48Z [t3_gl_set_stereo/stock/S] NOTE finish: outcome=PASS calls=3

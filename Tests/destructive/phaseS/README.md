@@ -28,3 +28,18 @@ were IDENTICAL after a reboot at the end). Outcome class for every test: **PASS*
 | #121 | Surface set_shape_backing (6) | t3_surface_backing | connect (addr, pitch 64) -> 0; disconnect (0, 0) -> 0; user buffer untouched; the sel 17 `param5 < param4*dim` Error was already observed (deep suite) |
 
 Not covered by a T3 run (they are #88-#97 under #87, never run so far): DVD write_regs/write_buffer/set_macrovision/doIDCT, 2D set_macrovision, GL set_stereo, Surface lock variants and flush.
+
+## #88-#97 (the ten destructive-protocol methods), Phase S on stock
+
+| issue | selector | test | result on stock |
+|---|---|---|---|
+| #88 | GL set_stereo (19) | t3_gl_set_stereo | wire order from the vendor call site (scalar 0 = mode, scalar 1 = panel). mode 0 on panels 0 and 1 -> 0 (no-op). The ENABLE (allocates per-panel VRAM, walks all surfaces, #32 loop) was NOT run |
+| #89 | 2D set_macrovision (15) | t3_2d_macrovision | attribute 0x92: Phase A (0) -> 0 (a display accepted it), Phase B (1) -> 0, Phase C (0) restore -> 0; screenshots identical |
+| #90 | DVD set_macrovision (16) | t3_dvd_macrovision | vendor pair (0x92, value) from the VA bundle wrapper at 0x5280; bound surface, (0x92, 0) -> 0. No enable phase; the unbound call (the #43 panic) was never made |
+| #91 | DVD write_regs (14) | t3_dvd_write_regs | Phase A: CONFIG_MEMSIZE read 0x10000000, write the same value -> 0, read-back identical. Phase B (flip bits of a scratch register) NOT run: no register proven side-effect-free (SCRATCH_REG0-5 at 0x15e0-0x15f4 are the kext's stamp registers) |
+| #92 | DVD write_buffer (6) | t3_dvd_write_buffer | bound + setup_buffers: bufferSelect 0 and 1 -> 0 as a no-op (the slot has no backing record, so no DMA path was reached); the user source buffer untouched. Unbound call never made (NULL-deref panic) |
+| #93 | DVD doIDCT (18) | (valid path NOT run) t3_dvd_idct_lock_leak for Phase C | the valid IDCT submission programs the GPU with caller-supplied coefficient/destination addresses from a real macroblock stream: no safe evidence-derived stream exists offline, so Phase A/B are not run. Phase C: see the issue |
+| #94 | Surface write_lock_options (3) | t3_surface_locks | **lockOptions 0 on the baseline surface PANICKED the stock kernel (#123)**; lockOptions 3 -> 0 (pending tail: data[0]=0, 1920x1080 data in state A); lockOptions 1 -> 0 with data[0] = 0x3018000, data[4] (pitch) 0x1e00 in state A, 0x3812000 / 0x100 for the 4x4 surface (state B); unlock and query_lock clean in every case |
+| #95 | Surface read_lock (12) | (not run) | lockOptions 2 reaches the same backing-store path that panicked (#123); not run on stock |
+| #96 | Surface write_lock (14) | t3_surface_locks | -> 0, data[0] 0x3018000, pitch 0x1e00 (state A); 0x3812000 / 0x100 (state B); unlock sel 15 -> 0 |
+| #97 | Surface surface_flush (10) | t3_surface_flush | Phase A (a=0) -> 0; Phase B (a=1, b=0, surface with memory, 2D-bound) -> 0; again -> 0; no allocation phase needed |

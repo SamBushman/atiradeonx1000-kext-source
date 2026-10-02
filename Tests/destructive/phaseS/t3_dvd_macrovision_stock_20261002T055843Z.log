@@ -1,0 +1,20 @@
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] NOTE start: method=t3_dvd_macrovision phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x0)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x0)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL Surface set_id_mode(1,0x20)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(1,0x20)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL Surface set_shape(region WxH)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_shape(region WxH)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL open DVD connection
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open DVD connection
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL DVD set_surface(1,0,0) binds
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(1,0,0) binds
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] NOTE bind: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL DVD set_macrovision(sel16, attribute 0x92, value 0) bound
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_macrovision(sel16, attribute 0x92, value 0) bound
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] NOTE set_macrovision -> 0x00000000 (0 = accepted; 0xe00002c0 = the framebuffer is not an NDRV one)
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] ABOUT TO CALL DVD set_surface(0) detaches
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) DVD set_surface(0) detaches
+2026-10-02T05:58:43Z [t3_dvd_macrovision/stock/S] NOTE finish: outcome=PASS calls=8
