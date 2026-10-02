@@ -55,7 +55,7 @@ The backup of the stock driver bundles with checksums is `backups/stock-driver-2
   entry for the requested mode bits, 4 = 32-bit colour. On 2026-10-02 (after the G5 had been up ~10 h) `probe_set_id_mode` shows both ids 0 and 1 match kind 4, so `parity_test_harness` reports 3 unexpected results and `--deep` 7, all in
   the set_id_mode(1,...) preconditions, with identical outputs run to run. The T3 runs of the previous evening passed with the same single 1920x1080 display, so the field changed with no change of attached displays (likely a display mode set on display sleep/wake).
   Consequence: before comparing any run (stock or rebuilt) with the recorded baseline, record the machine's id/kind fingerprint (`probe_set_id_mode`, 24 validated calls) next to it, or compare only against a same-session reference as the soak does.
-  Rebooting restored state in the past; a baseline taken right after boot is the cleanest.
+  **Confirmed 2026-10-02:** after a reboot `probe_set_id_mode` shows id0=[0x4] id1=[0x0] again and both recorded baselines (normal and `--deep`) are IDENTICAL on stock (`Tests/baseline/FINGERPRINT.txt`); the baselines were never wrong, they are valid in the fresh-boot state.
 * The soak step for the harness therefore uses a self-consistency reference, and `Tests/soak.sh` records the reference's "unexpected" count in its log.
 * `/Library/Logs/panic.log` contains older, unrelated panics (a 2026-08-21 AppleGPIO/AppleSMU mutex panic); the symbolicator selects entries that name the ATI kext.
 

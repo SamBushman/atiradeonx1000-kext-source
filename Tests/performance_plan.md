@@ -17,39 +17,47 @@ All calls are the ones `Tests/test_deep_t1.c` already asserts on stock: no surfa
 
 ## 2. Baseline numbers (criterion 2)
 
-Stock `com.apple.ATIRadeonX1000` 4.1.9, G5 2.5 GHz x4, Mac OS X 10.4.11, ATI X1900 (R580), one 1920x1080 display, 5 fresh-process repetitions 5 s apart.
-Raw files and the environment record: `Tests/baseline/perf/stock_4.1.9_g5_tiger_20261002/` (`env.txt`, `run<k>_methods.txt`, `run<k>_gl.txt`). Collected with `sh Tests/perf_collect.sh OUTDIR` on the G5.
+**Baseline of record: `Tests/baseline/perf/stock_4.1.9_g5_tiger_20261002_freshboot/`** - stock `com.apple.ATIRadeonX1000` 4.1.9, G5 2.5 GHz x4, Mac OS X 10.4.11, ATI X1900 (R580), one 1920x1080 display, collected minutes after a reboot
+(login window / fresh session), 5 fresh-process repetitions 5 s apart (`env.txt`, `fingerprint.txt`, `run<k>_methods.txt`, `run<k>_gl.txt`; collected with `sh Tests/perf_collect.sh OUTDIR` on the G5).
 Each number is the median over the 5 runs of the run's p10 (`perf_methods`) or median (`perf_baseline`); "noise" is (max - min) of the 5 run values / the median; "margin" is the regression threshold of section 3.
 
 | metric | stock | noise | margin |
 |---|---|---:|---:|
-| `2d.get_config.sel1` | 3.54 us | 4.2 % | 13 % |
-| `2d.get_surface_info.sel2` | 3.69 us | 2.4 % | 7 % |
-| `2d.read_regs_1.sel16` | 4.32 us | 2.8 % | 8 % |
-| `2d.read_regs_2.sel16` | 4.77 us | 1.3 % | 5 % |
-| `dvd.check_stamps.sel20` | 3.54 us | 2.5 % | 8 % |
-| `dvd.get_config.sel1` | 3.51 us | 2.6 % | 8 % |
-| `dvd.get_status.sel2` | 3.54 us | 3.4 % | 10 % |
-| `dvd.read_regs.sel13` | 4.32 us | 2.8 % | 8 % |
-| `gl.get_config.sel3` | 3.69 us | 1.6 % | 5 % |
-| `gl.get_hw_info.sel20` | 3.63 us | 1.7 % | 5 % |
-| `gl.get_status.sel4` | 3.63 us | 1.7 % | 5 % |
-| `glcycle.ChoosePixelFormat` | 33.00 us (0% of a 7.2 ms cycle) | 0.0 % | 5 % |
-| `glcycle.Clear+Flush` | 195.00 us (3% of a 7.2 ms cycle) | 0.5 % | 5 % |
-| `glcycle.CreateContext` | 1.99 ms (27% of a 7.2 ms cycle) | 1.3 % | 5 % |
-| `glcycle.Draw100Tri+Flush` | 230.00 us (3% of a 7.2 ms cycle) | 0.9 % | 5 % |
-| `glcycle.ReadPixels` | 1.78 ms (25% of a 7.2 ms cycle) | 5.8 % | 18 % |
-| `glcycle.SetPBuffer` | 1.93 ms (27% of a 7.2 ms cycle) | 1.3 % | 5 % |
-| `glcycle.Teardown` | 1.08 ms (15% of a 7.2 ms cycle) | 0.6 % | 5 % |
-| `open_close.2d` | 89.50 us | 0.7 % | 5 % |
-| `open_close.dvd` | 157.78 us | 1.5 % | 5 % |
-| `open_close.gl` | 303.71 us | 0.5 % | 5 % |
-| `open_close.surface` | 62.97 us | 0.6 % | 5 % |
-| `surface.get_state.sel2` | 3.57 us | 3.4 % | 10 % |
-| `surface.query_lock.sel11` | 3.60 us | 1.7 % | 5 % |
+| `2d.get_config.sel1` | 3.51 us | 6.0 % | 18 % |
+| `2d.get_surface_info.sel2` | 3.69 us | 5.7 % | 17 % |
+| `2d.read_regs_1.sel16` | 4.32 us | 4.2 % | 12 % |
+| `2d.read_regs_2.sel16` | 4.74 us | 1.3 % | 5 % |
+| `dvd.check_stamps.sel20` | 3.51 us | 3.4 % | 10 % |
+| `dvd.get_config.sel1` | 3.48 us | 5.2 % | 16 % |
+| `dvd.get_status.sel2` | 3.48 us | 4.3 % | 13 % |
+| `dvd.read_regs.sel13` | 4.32 us | 1.4 % | 5 % |
+| `gl.get_config.sel3` | 3.75 us | 1.6 % | 5 % |
+| `gl.get_hw_info.sel20` | 3.66 us | 4.1 % | 12 % |
+| `gl.get_status.sel4` | 3.72 us | 4.0 % | 12 % |
+| `glcycle.ChoosePixelFormat` | 33.00 us (1% of a 6.6 ms cycle) | 0.0 % | 5 % |
+| `glcycle.Clear+Flush` | 192.00 us (3% of a 6.6 ms cycle) | 1.0 % | 5 % |
+| `glcycle.CreateContext` | 1.95 ms (30% of a 6.6 ms cycle) | 1.0 % | 5 % |
+| `glcycle.Draw100Tri+Flush` | 117.00 us (2% of a 6.6 ms cycle) | 0.9 % | 5 % |
+| `glcycle.ReadPixels` | 1.51 ms (23% of a 6.6 ms cycle) | 1.3 % | 5 % |
+| `glcycle.SetPBuffer` | 1.89 ms (29% of a 6.6 ms cycle) | 1.3 % | 5 % |
+| `glcycle.Teardown` | 908.00 us (14% of a 6.6 ms cycle) | 2.6 % | 8 % |
+| `open_close.2d` | 87.70 us | 0.7 % | 5 % |
+| `open_close.dvd` | 149.59 us | 0.8 % | 5 % |
+| `open_close.gl` | 279.83 us | 1.0 % | 5 % |
+| `open_close.surface` | 61.83 us | 0.7 % | 5 % |
+| `surface.get_state.sel2` | 3.54 us | 3.4 % | 10 % |
+| `surface.query_lock.sel11` | 3.63 us | 0.8 % | 5 % |
 
-GL cycle phases (where the time goes, criterion 4): CreateContext 27 %, SetPBuffer 27 %, ReadPixels 25 %, Teardown 15 %, Clear 3 %, Draw 3 %, ChoosePixelFormat < 1 % of a 7.2 ms cycle: context and pbuffer set-up/readback/teardown
-(the kext's context, surface and memory management and the DMA readback) dominate; actual drawing is a few percent.
+GL cycle phases (where the time goes, criterion 4), share of a 6.6 ms cycle: CreateContext 30 %, SetPBuffer 29 %, ReadPixels 23 %, Teardown 14 %, Clear+Flush 3 %, Draw100Tri+Flush 2 %, ChoosePixelFormat 1 %.
+
+### The baseline depends on machine state (found by comparing across a reboot)
+
+An earlier set (`..._20261002/`, collected after ~10 h of uptime with the desktop session in use) compared against this fresh-boot set with `perf_compare.py`: the kext **method latencies are identical within 2.5 %**
+(every `gl/2d/dvd/surface` per-call metric is OK), but several GL-cycle and lifecycle metrics moved: `Draw100Tri+Flush` 230 -> 117 us (**2.0x faster after the reboot**), `Teardown` -16 %,
+`ReadPixels` -15 %, `open_close.gl` -8 %, `open_close.dvd` -5 %. Whatever accumulates over hours of uptime or in a used session (VRAM/GART fragmentation, window-server state, the display "kind" state of
+`Tests/stability_regimen.md` section 5) slows the GL path while leaving the kext's method bodies unchanged. Consequences: (1) compare a candidate only with a baseline taken in the same state - a fresh boot is the
+reference state; (2) the per-selector `perf_methods` metrics are the robust regression gate, the `glcycle.*` metrics are state-sensitive and need the same boot/session discipline; (3) the cross-boot spread of
+`glcycle.*` (up to 2x) is far above the 5 % margin, so a rebuilt-kext run must be preceded by a fresh-boot stock run under the same session conditions, never compared with an old baseline.
 
 ## 3. "No worse than" (criterion 3) and noise (criterion 5)
 
