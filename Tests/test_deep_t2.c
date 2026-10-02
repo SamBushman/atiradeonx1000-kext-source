@@ -274,6 +274,51 @@ static void gl_swap_params_bound(io_service_t service) {
     IOServiceClose(s);
 }
 
+/* T2 row 7 (issue #100): the 2D twin. IOATIR5002DContext::set_surface (0xc570) with mode bit 0x800 resolves a registered surface id (find_surface_for_id), links the context
+ * (add_2d_context_to_list), prune_buffers, calls vtable 0x5a4 = ATIR5002DContext::invalidate (ORs 1 into word +0x1c of *(this+0xc8), already executed by the panel-mode
+ * baseline call) and vtable 0x5b0 = set_destination -> get_buffer_info(surface, ...) whose surface path only READS the surface's record (+0xb70, +0xbe4/+0xbe6). With bit
+ * 0x800 clear the id is a panel index (the #42 baseline); set_surface(0, 0x800) detaches and returns the panel-0 info. */
+static void twod_bind_round_trip(io_service_t service) {
+    int before[NCLS], after[NCLS], i, same = 1; io_connect_t s = IO_OBJECT_NULL, t = IO_OBJECT_NULL; kern_return_t r;
+    unsigned char region[20], out[0x30], out2[0x30], base[0x30]; IOByteCount osz;
+    printf("-- 2D T2: bind a registered surface by id, read its info, detach --\n");
+    class_counts(before);
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+    if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+    if (r == TEST_kIOReturnSuccess) {
+        memset(region, 0, sizeof region);
+        *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = 4; *(SInt16 *)(region + 10) = 4; *(SInt16 *)(region + 16) = 4; *(SInt16 *)(region + 18) = 4;
+        r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+    }
+    check("Surface preconditions (set_id_mode x2, set_shape)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    if (r == TEST_kIOReturnSuccess && open_user_client(service, CLIENT_TYPE_2D, &t) == TEST_kIOReturnSuccess) {
+        UInt32 *d = (UInt32 *)out;
+        osz = sizeof base; memset(base, 0xAA, sizeof base);
+        r = IOConnectMethodScalarIStructureO(t, 0, 2, &osz, 0, 0, base);
+        check("2D set_surface(panel 0) [the #42 baseline call] succeeds", r == TEST_kIOReturnSuccess && osz == 0x30, "r=0x%08x", (unsigned int)r);
+        osz = sizeof out; memset(out, 0xAA, sizeof out);
+        r = IOConnectMethodScalarIStructureO(t, 0, 2, &osz, 1, 0x800, out);
+        check("2D set_surface(id 1, mode 0x800) binds the registered surface, 0x30-byte info", r == TEST_kIOReturnSuccess && osz == 0x30, "r=0x%08x size=%u", (unsigned int)r, (unsigned int)osz);
+        if (r == TEST_kIOReturnSuccess) {
+            printf("[INFO] bound info d[2..7]={%u,%u,0x%x,%u,%u,%u}\n", (unsigned)d[2], (unsigned)d[3], (unsigned)d[4], (unsigned)d[5], (unsigned)d[6], (unsigned)d[7]);
+            check("2D bound info d[2], d[3] are the surface's recorded size (the 4x4 shape)", d[2] == 4 && d[3] == 4, "d[2]=%u d[3]=%u", (unsigned)d[2], (unsigned)d[3]);
+            osz = sizeof out2; memset(out2, 0x55, sizeof out2);
+            r = IOConnectMethodScalarIStructureO(t, 2, 2, &osz, 1, 0x800, out2);
+            check("2D get_surface_info(id 1, mode 0x800) returns the same info", r == TEST_kIOReturnSuccess && osz == 0x30 && !memcmp(out, out2, sizeof out), "r=0x%08x", (unsigned int)r);
+            osz = sizeof out2; memset(out2, 0x55, sizeof out2);
+            r = IOConnectMethodScalarIStructureO(t, 0, 2, &osz, 0, 0x800, out2);
+            check("2D set_surface(0, mode 0x800) detaches and returns the panel info of the baseline call", r == TEST_kIOReturnSuccess && osz == 0x30 && !memcmp(base, out2, sizeof base), "r=0x%08x", (unsigned int)r);
+        }
+        IOServiceClose(t);
+    } else if (r == TEST_kIOReturnSuccess) { printf("[FAIL] 2D open\n"); g_testsUnexpected++; }
+    IOServiceClose(s);
+    usleep(300000);
+    class_counts(after);
+    for (i = 0; i < NCLS; i++) if (before[i] != after[i]) same = 0;
+    check("leak check: driver class instance counts identical before/after", same, "before={%d,%d,%d,%d,%d,%d} after={%d,%d,%d,%d,%d,%d}", before[0], before[1], before[2], before[3], before[4], before[5], after[0], after[1], after[2], after[3], after[4], after[5]);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -281,4 +326,5 @@ void run_deep_t2_tests(io_service_t service) {
     lock_unlock_variants(service);
     set_id_mode_errors(service);
     gl_swap_params_bound(service);
+    twod_bind_round_trip(service);
 }

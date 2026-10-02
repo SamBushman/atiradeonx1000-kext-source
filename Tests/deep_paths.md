@@ -250,7 +250,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Accelerator19find_surface_f IOATIR500Surface27remove_2d_context_ IOATIR500Surface13prune_buffersEv IOATIR500Surface14reset_req_bitsEv IOATIR500Surface22add_2d_context_to_ IOATIR500Surface13prune_buffersEv IOATIR500Surface27remove_2d_context_ IOATIR500Surface13prune_buffersEv <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `} else {`
-- **manual tier**: provisional T2 (#100 table)
+- **manual tier**: T2 CONFIRMED (live, Tests/test_deep_t2.c): mode bit 0x800 = "id is a registered surface id" (clear = panel index, the #42 baseline). set_surface(1, 0x800) on the registered 4x4 surface -> 0 with the 0x30-byte info (d[2]=d[3]=4 = the surface record's 0xbe4/0xbe6 shorts); traced path: find_surface_for_id, add_2d_context_to_list, prune_buffers, invalidate (ORs 1 into word +0x1c of *(this+0xc8)), set_destination -> get_buffer_info surface path (reads only). set_surface(0, 0x800) detaches and returns the same info as the panel-0 baseline call.
 - **manual reason**: baseline: panel 0, no surface -> success + info | deep path not yet exercised: bind a real surface to a panel
 
 ## 2D sel 1 - `IOATIR5002DContext::get_config` 
@@ -273,7 +273,7 @@ labelled **manual**. Nothing here was run on hardware.
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOATIR500Accelerator19find_surface_f <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (U32At(accelerator, 0xcc) <= surfaceID) {`; 0xe00002f0 NotFound <- `if (surface == nullptr) {`
-- **manual tier**: T1 CONFIRMED for panel 0 (live): 0x30-byte info, d[1] = d[2]<<16 | d[3] (width/height 1920x1080), repeatable; read-only fields of the accelerator's panel record.
+- **manual tier**: T2 CONFIRMED (live): get_surface_info(1, 0x800) returns the same 0x30-byte info as the bind.
 - **manual reason**: baseline: 3 cases incl. real read-only info for panel 0 | deep path not yet exercised: other panels / ids if present
 
 ## 2D sel 3 - `IOATIR5002DContext::swap_surface` 

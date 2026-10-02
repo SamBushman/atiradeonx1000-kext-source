@@ -95,5 +95,14 @@
 [OK] GL set_swap_rect(0,0,0,0) restores the defaults r=0x00000000
 [OK] GL set_swap_interval(0,0) restores the defaults r=0x00000000
 [OK] GL set_surface(0) detaches r=0x00000000
+-- 2D T2: bind a registered surface by id, read its info, detach --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] 2D set_surface(panel 0) [the #42 baseline call] succeeds r=0x00000000
+[OK] 2D set_surface(id 1, mode 0x800) binds the registered surface, 0x30-byte info r=0x00000000 size=48
+[INFO] bound info d[2..7]={4,4,0x100,0,0,1}
+[OK] 2D bound info d[2], d[3] are the surface's recorded size (the 4x4 shape) d[2]=4 d[3]=4
+[OK] 2D get_surface_info(id 1, mode 0x800) returns the same info r=0x00000000
+[OK] 2D set_surface(0, mode 0x800) detaches and returns the panel info of the baseline call r=0x00000000
+[OK] leak check: driver class instance counts identical before/after before={1,2,1,0,1,2} after={1,2,1,0,1,2}
 
-87 calls made (86 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+94 calls made (93 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
