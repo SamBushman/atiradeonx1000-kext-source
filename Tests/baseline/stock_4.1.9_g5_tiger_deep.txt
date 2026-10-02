@@ -136,5 +136,16 @@
 [OK] DVD wait_for_stamps(0,5) -> 0 (second stamp already passed) r=0x00000000
 [OK] DVD wait_for_stamps(5,5) -> 0 (both already passed) r=0x00000000
 [OK] DVD finish -> 0 or Timeout (this+0x7c is 0 on a fresh connection) r=0x00000000
+-- Surface T2: set_shape with other dimensions, read back through a bound 2D connection --
+[OK] Surface set_id_mode x2 r=0x00000000
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 64x64
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=64 d[3]=64 want 64x64
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 16x8
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=16 d[3]=8 want 16x8
+[OK] Surface set_shape(region WxH) -> success r=0x00000000 4x4
+[OK] 2D get_surface_info(id 1) d[2],d[3] == the new size r=0x00000000 d[2]=4 d[3]=4 want 4x4
+[OK] Surface set_shape with a negative width -> Error 0xe00002bc (before anything is touched) r=0xe00002bc
+[OK] leak check: driver class instance counts identical before/after
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
 
-121 calls made (120 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+131 calls made (130 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

@@ -441,6 +441,44 @@ static void dvd_wait_stamps_finish(io_service_t service) {
     IOServiceClose(d);
 }
 
+/* T2 row 13 (issue #100): Surface set_shape (sel 9) with other dimensions. Traced (IOATIR500Surface_set_shape_backing_length_ext_Port.cpp, shipped 0x159f0 -> 0x15960 family): the region's
+ * width/height (SInt16 at +8/+10) become the surface's recorded size (+0xbd4/+0xbd6) and the surface buffer is re-allocated through surface vtable +0x5b0 (VRAM, freed when the surface
+ * is torn down); a zero dimension is replaced by 1 (and param4/param5 cleared); a negative dimension -> Error 0xe00002bc before anything is touched. 2D get_surface_info(id 1) reports
+ * the recorded size, so the new dimensions are read back through a bound 2D connection. Sizes stay tiny (<= 64x64 = 16 KB). */
+static void surface_reshape(io_service_t service) {
+    int before[NCLS], after[NCLS], i, same = 1, k0, k1; io_connect_t s = IO_OBJECT_NULL, t = IO_OBJECT_NULL; kern_return_t r;
+    unsigned char region[20], out[0x30]; IOByteCount osz; UInt32 *d = (UInt32 *)out;
+    static const int dims[][2] = { { 64, 64 }, { 16, 8 }, { 4, 4 } };
+    printf("-- Surface T2: set_shape with other dimensions, read back through a bound 2D connection --\n");
+    class_counts(before); k0 = kext_count();
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+    if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+    check("Surface set_id_mode x2", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    if (r == TEST_kIOReturnSuccess && open_user_client(service, CLIENT_TYPE_2D, &t) == TEST_kIOReturnSuccess) {
+        for (i = 0; i < 3; i++) {
+            memset(region, 0, sizeof region);
+            *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = dims[i][0]; *(SInt16 *)(region + 10) = dims[i][1]; *(SInt16 *)(region + 16) = dims[i][0]; *(SInt16 *)(region + 18) = dims[i][1];
+            r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+            check("Surface set_shape(region WxH) -> success", r == TEST_kIOReturnSuccess, "r=0x%08x %dx%d", (unsigned int)r, dims[i][0], dims[i][1]);
+            osz = sizeof out; memset(out, 0xAA, sizeof out);
+            r = IOConnectMethodScalarIStructureO(t, 2, 2, &osz, 1, 0x800, out);
+            check("2D get_surface_info(id 1) d[2],d[3] == the new size", r == TEST_kIOReturnSuccess && osz == 0x30 && (int)d[2] == dims[i][0] && (int)d[3] == dims[i][1], "r=0x%08x d[2]=%u d[3]=%u want %dx%d", (unsigned int)r, (unsigned)d[2], (unsigned)d[3], dims[i][0], dims[i][1]);
+        }
+        memset(region, 0, sizeof region);
+        *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = -1; *(SInt16 *)(region + 10) = 4;
+        r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+        check("Surface set_shape with a negative width -> Error 0xe00002bc (before anything is touched)", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        IOServiceClose(t);
+    } else if (r == TEST_kIOReturnSuccess) { printf("[FAIL] 2D open\n"); g_testsUnexpected++; }
+    IOServiceClose(s);
+    usleep(300000);
+    class_counts(after); k1 = kext_count();
+    for (i = 0, same = 1; i < NCLS; i++) if (before[i] != after[i]) same = 0;
+    check("leak check: driver class instance counts identical before/after", same, NULL);
+    check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -454,4 +492,5 @@ void run_deep_t2_tests(io_service_t service) {
     dvd_bound_setters(service);
     twod_finish_modes(service);
     dvd_wait_stamps_finish(service);
+    surface_reshape(service);
 }

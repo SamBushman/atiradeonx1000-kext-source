@@ -221,3 +221,6 @@ DVD 9	tier	T3 (#120)
 GL 11	tier	T3 by dependency: needs an allocated texture (GL 10, #104)
 GL 15	tier	T3 by dependency: needs an allocated texture (GL 10, #104)
 DVD 5	tier	T3 by dependency: needs a successful lock (DVD 4, #102)
+Surface 9	tier	T2 CONFIRMED (live, test_deep_t2.c surface_reshape): set_shape 64x64, 16x8, 4x4 each -> 0 and read back via 2D get_surface_info d[2],d[3]; negative width -> Error 0xe00002bc.
+Surface 6	tier	T2 for the zero-backing variants (baseline); the non-zero backing-store connect path is T3 (#121).
+Surface 17	tier	T2 for the zero-backing variants (baseline); the non-zero backing-store connect path and the param5 < param4*dim Error are T3 (#121).
