@@ -66,8 +66,8 @@ Comparisons are only valid like-with-like: same machine, same boot (a fresh boot
 ### The G5 dynamic-power-step trap (found while building this)
 
 The first stock baseline (kept as `stock_4.1.9_g5_tiger_20261002_unwarmed_first_attempt/`) used 2000-call samples and showed an apparent **2x bimodality**: the same call measured 3.5 us in one run and 7.3 us in the next
-(52-100 % "spread", which made the self-test report a false regression). A 50 000-call sample was uniformly fast, so it is a start-up transient: an idle G5 starts a process at roughly half speed for its first tens of ms
-(dynamic power stepping) and ramps up under load. Fix, now built in: `perf_methods` burns ~0.7 s of CPU before each group, takes 50 000 calls per metric and reports p10 as the headline (the fast-mode floor). After this every
+(52-100 % "spread", which made the self-test report a false regression). A 50 000-call sample was uniformly fast, so it is a start-up transient of tens of ms after an idle gap. The cause is most likely the G5's dynamic power stepping (a ~2x clock step that ramps up under load); that is an inference from the
+size and timing of the effect, not something measured directly (the clock was not read). Fix, now built in: `perf_methods` burns ~0.7 s of CPU before each group, takes 50 000 calls per metric and reports p10 as the headline (the fast-mode floor). After this every
 metric's run-to-run spread is <= 6 %. Any new benchmark on this machine needs a warm-up and a long sample, or it measures the power governor.
 
 ## 4. Localising a regression (criterion 4)
