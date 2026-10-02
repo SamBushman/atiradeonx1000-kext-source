@@ -43,3 +43,8 @@ Not covered by a T3 run (they are #88-#97 under #87, never run so far): DVD writ
 | #95 | Surface read_lock (12) | (not run) | lockOptions 2 reaches the same backing-store path that panicked (#123); not run on stock |
 | #96 | Surface write_lock (14) | t3_surface_locks | -> 0, data[0] 0x3018000, pitch 0x1e00 (state A); 0x3812000 / 0x100 (state B); unlock sel 15 -> 0 |
 | #97 | Surface surface_flush (10) | t3_surface_flush | Phase A (a=0) -> 0; Phase B (a=1, b=0, surface with memory, 2D-bound) -> 0; again -> 0; no allocation phase needed |
+
+### Follow-up runs
+* **#90 enable/restore** (t3_dvd_macrovision run 2): bound surface, (0x92, 1) -> 0, restore (0x92, 0) -> 0 (same as the 2D version in #89).
+* **#91 Phase B** (t3_dvd_write_regs_scratch): SCRATCH_REG5 (0x15f4) with evidence (SCRATCH_UMSK 0x0770 = 0xff, SCRATCH_ADDR 0x0774 = 0x10005000, REG0 = stamp counter, REG1 = GL driver, REG2-5 = 0; kext only zeroes them at init; GL/VA bundles reference only 0x15e4): write 0 -> 0, write 0x5a5a5a5a -> 0, read-back exactly 0x5a5a5a5a, restore 0 -> 0, read-back 0; REG0 kept counting. PASS.
+* **#88 enable, #95, #98/#99/#32/#123 live work:** not run (stock-bug / hang-prone paths; skipped on the user's instruction and after repeated safety-check stops).
