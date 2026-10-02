@@ -11,10 +11,12 @@
 #include "t3common.h"
 static int battery(dtest_t *t, io_connect_t s, const char *tag) {
     int bad = 0, k, o; kern_return_t r; unsigned char data[0x44]; IOByteCount sz; char m[160];
+    /* lockOptions 0 / 2 on a surface with VRAM but no backing store reach move/copy_buffer_to_backing_store -> alloc_buffer_backing_store and PANICKED the stock kernel (#123, Tests/destructive/phaseS/panics/):
+     * only the non-backing lockOptions 3 and 1 and the baseline read lock (shortcut path) remain; sel 12 (read_lock, lockOptions 2) is the same panic path and is not run. */
     struct { int sel; int opts; int scalarsIn; int unlockSel; int unlockScalars; const char *name; } c[] = {
-        { 3, 3, 1, 4, 1, "sel3 write_lock_options(3)" }, { 3, 0, 1, 4, 1, "sel3 write_lock_options(0)" }, { 3, 1, 1, 4, 1, "sel3 write_lock_options(1)" }, { 3, 2, 1, 4, 1, "sel3 write_lock_options(2)" },
-        { 14, 0, 0, 15, 0, "sel14 write_lock" }, { 12, 0, 0, 13, 0, "sel12 read_lock" },
-        { 0, 3, 1, 1, 1, "sel0 read_lock_options(3)" }, { 0, 1, 1, 1, 1, "sel0 read_lock_options(1)" }, { 0, 2, 1, 1, 1, "sel0 read_lock_options(2)" }, { 0, 0, 1, 1, 1, "sel0 read_lock_options(0)" } };
+        { 3, 3, 1, 4, 1, "sel3 write_lock_options(3)" }, { 3, 1, 1, 4, 1, "sel3 write_lock_options(1)" },
+        { 14, 0, 0, 15, 0, "sel14 write_lock" },
+        { 0, 3, 1, 1, 1, "sel0 read_lock_options(3)" }, { 0, 1, 1, 1, 1, "sel0 read_lock_options(1)" } };
     for (k = 0; k < (int)(sizeof c / sizeof c[0]); k++) {
         sz = sizeof data; memset(data, 0, sizeof data);
         snprintf(m, sizeof m, "[%s] Surface %s", tag, c[k].name); dtest_about(t, "%s", m);

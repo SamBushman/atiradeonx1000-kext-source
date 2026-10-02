@@ -1,0 +1,17 @@
+Ðòøÿ÷Õï¶Ñ´ÀìæáèÊðööÐòøÿ÷Õï¶Ñ´ÀìæáèÊðööÐòøÿ÷Õï¶Ñ´ÀìæáèÊðöö2026-10-02T05:08:26Z [t3_surface_locks/stock/S] NOTE start: method=t3_surface_locks phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL open Surface connection A
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection A
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] NOTE state A: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] Surface sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] NOTE [A] Surface sel3 write_lock_options(3) -> 0x00000000 data[0]=0x0 data[4]=0x0 data[5..7]=780,438,4 data[8]=0x0
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] unlock for sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] unlock for sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] NOTE [A] unlock for sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) [A] query_lock after sel3 write_lock_options(3)
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] NOTE [A] query_lock after sel3 write_lock_options(3): got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T05:08:26Z [t3_surface_locks/stock/S] ABOUT TO CALL [A] Surface sel3 write_lock_options(0)
+Ðòøÿ÷Õï¶Ñ´ÀìæáèÊðööÐòøÿ÷Õï¶Ñ´ÀìæáèÊðööÐòøÿ÷Õï¶Ñ´ÀìæáèÊðöö

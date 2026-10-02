@@ -3,7 +3,7 @@
 # Copies Tests/ to the G5, builds NAME, writes the peer acknowledgement, mirrors the write-ahead log to a local UDP listener, runs preflight -> the test
 # (phase S, stock kext) -> postflight over ssh, then (optional) reboots the G5 and waits for ssh to come back. Output: /tmp/t3_NAME.{mirror,out}.
 # A hung G5 shows up as the ssh session never returning: this script then prints the last mirrored line (the call in flight) and exits 3 WITHOUT touching the machine.
-N=${1:?usage: run_t3.sh NAME [reboot]}; REBOOT=$2
+N=${1:?usage: run_t3.sh NAME [reboot]}; REBOOT=$2; [ -n "$ACK" ] && ACKFLAG=--acknowledge-interrupted
 H=G5; D="/Volumes/Test HD/ati-parity/Tests/destructive"; ME=`ssh $H 'echo $SSH_CLIENT' | cut -d' ' -f1`
 S=${SCRATCH:-/tmp}; OUT=$S/t3_$N.out; MIR=$S/t3_$N.mirror; : > $MIR
 tar czf $S/t3_tests.tgz Tests && scp -q $S/t3_tests.tgz $H:/tmp/t3_tests.tgz || exit 1
@@ -11,7 +11,7 @@ ssh $H "cd '/Volumes/Test HD/ati-parity' && tar xzf /tmp/t3_tests.tgz && cd Test
 sh Tests/destructive/peer_ack.sh $H "$D" || exit 1
 python3 Tests/destructive/udp_listen.py $MIR &
 LP=$!
-ssh $H "cd '$D' && rm -rf results/$N; sh preflight.sh $N 2>&1 && screencapture -x /tmp/t3_$N.before.png; ./$N --phase S --kext stock --mirror $ME:9999 --i-understand-this-may-hang-the-machine 2>&1; echo TEST_EXIT=\$?; screencapture -x /tmp/t3_$N.after.png; sh postflight.sh $N 2>&1" > $OUT 2>&1 &
+ssh $H "cd '$D' && rm -rf results/$N; sh preflight.sh $N 2>&1 && screencapture -x /tmp/t3_$N.before.png; ./$N --phase S --kext stock --mirror $ME:9999 --i-understand-this-may-hang-the-machine $ACKFLAG 2>&1; echo TEST_EXIT=\$?; screencapture -x /tmp/t3_$N.after.png; sh postflight.sh $N 2>&1" > $OUT 2>&1 &
 SP=$!
 # wait for the ssh session to finish. Preflight/postflight are slow (volume verification, ioreg), so a long silence is NOT a hang: only declare HANG when the G5 itself stops
 # answering ssh for 5 consecutive minutes while the session is still open.
