@@ -60,7 +60,7 @@ static void test_set_swap_interval(io_connect_t connect) {
 static void test_get_config(io_connect_t connect) {
     int out0 = -1, out1 = -1, out2 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 3, 0, 3, &out0, &out1, &out2);
-    report("GL get_config(sel 3)", r, NULL);
+    report("GL get_config(sel 3)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) printf("    out={%d,%d,%d}\n", out0, out1, out2);
 }
 
@@ -70,7 +70,7 @@ static void test_get_config(io_connect_t connect) {
 static void test_get_status(io_connect_t connect) {
     int out0 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 4, 0, 1, &out0);
-    report("GL get_status(sel 4)", r, NULL);
+    report("GL get_status(sel 4)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) printf("    status=0x%x\n", out0);
 }
 
@@ -81,7 +81,7 @@ static void test_get_status(io_connect_t connect) {
 static void test_get_surface_size(io_connect_t connect) {
     int d0 = -1, d1 = -1, d2 = -1, d3 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 5, 0, 4, &d0, &d1, &d2, &d3);
-    report("GL get_surface_size(sel 5)", r, NULL);
+    report("GL get_surface_size(sel 5)", r, kExpectError);
     if (r == TEST_kIOReturnSuccess) printf("    dims={%d,%d,%d,%d}\n", d0, d1, d2, d3);
 }
 
@@ -119,7 +119,7 @@ static void test_read_buffer(io_connect_t connect) {
  * "wait for GPU idle"-style call, safe. */
 static void test_finish(io_connect_t connect) {
     kern_return_t r = IOConnectMethodScalarIStructureI(connect, 8, 0, 0, NULL);
-    report("GL finish(sel 8)", r, NULL);
+    report("GL finish(sel 8)", r, kExpectSuccess);
 }
 
 /* selector 9: wait_for_stamp(UInt32 stamp) - CONFIRMED: structureI,
@@ -198,7 +198,7 @@ static void test_set_surface_volatile_state(io_connect_t connect) {
  * reclaim). */
 static void test_reclaim_resources(io_connect_t connect) {
     kern_return_t r = IOConnectMethodScalarIStructureI(connect, 17, 0, 0, NULL);
-    report("GL reclaim_resources(sel 17)", r, NULL);
+    report("GL reclaim_resources(sel 17)", r, kExpectSuccess);
 }
 
 /* selector 18: get_data_buffer(UInt32*,UInt32*) - CONFIRMED: scalarO,
@@ -207,7 +207,7 @@ static void test_reclaim_resources(io_connect_t connect) {
 static void test_get_data_buffer(io_connect_t connect) {
     int out0 = -1, out1 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 18, 0, 2, &out0, &out1);
-    report("GL get_data_buffer(sel 18)", r, NULL);
+    report("GL get_data_buffer(sel 18)", r, kExpectSuccess);
     /* NOT a pure query (issue #100 Step 0, Tests/deep_paths.md): the body calls IOATIR500Accelerator::allocOneDataBuffer / allocDataBuffers, and out[0] is
      * state-dependent: 0xd000 when the baseline was recorded (2026-09-18); on 2026-10-01 0x10000, 0x5000 and (inside the full harness run) 0x32000, with the stock kext unchanged. The baseline therefore pins
      * only the invariants: out[1] (0x10000) and that out[0] is a non-zero multiple of the 0x1000 page size. */

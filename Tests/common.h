@@ -106,6 +106,7 @@ extern int g_testsRecorded; /* calls with no assertion: outcome recorded only */
  * set_id_mode precondition). A failure here is counted UNEXPECTED, so a silently
  * unmet precondition can no longer hide behind an unconditional "OK". */
 /* Outcomes predicted by tracing the stock bodies (issue #42 shape-correction pass): */
+static const kern_return_t kExpectError[]        = { TEST_kIOReturnError, (kern_return_t)-1 };
 static const kern_return_t kExpectCannotLock[] = { TEST_kIOReturnCannotLock, (kern_return_t)-1 };
 /* DVD methods that check the bound surface first: Error when unbound, NotReady (0xe00002d8) if the accelerator flag is clear */
 static const kern_return_t kExpectUnboundGuard[] = { TEST_kIOReturnError, (kern_return_t)0xe00002d8, (kern_return_t)-1 };

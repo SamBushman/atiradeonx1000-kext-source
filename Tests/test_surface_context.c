@@ -73,7 +73,7 @@ static void test_surface_read_lock_options(io_connect_t connect) {
     IOByteCount structSize = sizeof(data);
     UInt32 lockOptions = 0;
     kern_return_t r = IOConnectMethodScalarIStructureO(connect, 0, 1, &structSize, lockOptions, data);
-    report("Surface surface_read_lock_options(sel 0, lockOptions=0)", r, NULL);
+    report("Surface surface_read_lock_options(sel 0, lockOptions=0)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) {
         UInt32 *d = (UInt32 *)data;
         printf("    structSize=%u data[0..4]={0x%x,0x%x,0x%x,0x%x,0x%x}\n",
@@ -99,7 +99,7 @@ static void test_surface_read_unlock_options(io_connect_t connect) {
 static void test_get_state(io_connect_t connect) {
     int outState = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 2, 0, 1, &outState);
-    report("Surface get_state(sel 2)", r, NULL);
+    report("Surface get_state(sel 2)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) printf("    outState=0x%x\n", outState);
 }
 
@@ -221,7 +221,7 @@ static void test_set_shape_backing(io_connect_t connect) {
  * plain mode setter, no struct/ID indexing - safe. */
 static void test_set_id_mode(io_connect_t connect) {
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 7, 2, 0, 0, 0);
-    report("Surface set_id_mode(sel 7, 0,0)", r, NULL);
+    report("Surface set_id_mode(sel 7, 0,0)", r, kExpectError);
 }
 
 /* selector 8: set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling,
@@ -306,7 +306,7 @@ static void test_surface_flush(io_connect_t connect) {
  * CHECK that does not acquire anything - 0 in / 0 out, global, safe. */
 static void test_surface_query_lock(io_connect_t connect) {
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 11, 0, 0);
-    report("Surface surface_query_lock(sel 11)", r, NULL);
+    report("Surface surface_query_lock(sel 11)", r, kExpectCannotLock);
 }
 
 /* selector 12: surface_read_lock(data, size) - table: flags 2, 0 in, struct-out variable. NOT run: stock body is
@@ -400,7 +400,7 @@ static void test_set_shape_backing_length(io_connect_t connect) {
     UInt32 shapeBits = 0, id = 1, param3 = 0, param4 = 0xffffffff, param5 = 0;
     kern_return_t r = IOConnectMethodScalarIStructureI(connect, 17, 5, structSize,
                                                          shapeBits, id, param3, param4, param5, region);
-    report("Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified)", r, NULL);
+    report("Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified)", r, kExpectSuccess);
 }
 
 /* selector 18: identical table entry and function to selector 16 (a deliberate alias). */

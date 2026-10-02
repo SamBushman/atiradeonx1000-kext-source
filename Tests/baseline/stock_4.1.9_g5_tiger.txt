@@ -2,15 +2,15 @@
 [OK] GL set_surface(sel 0, id 0 = detach) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL set_swap_rect(sel 1, 0,0,0,0) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL set_swap_interval(sel 2, 0,0) -> 0x00000000 (kIOReturnSuccess)
-[REC] GL get_config(sel 3) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL get_config(sel 3) -> 0x00000000 (kIOReturnSuccess)
     out={8454208,259817472,268435456}
-[REC] GL get_status(sel 4) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL get_status(sel 4) -> 0x00000000 (kIOReturnSuccess)
     status=0x0
-[REC] GL get_surface_size(sel 5) -> 0xe00002bc (kIOReturnError)
+[OK] GL get_surface_size(sel 5) -> 0xe00002bc (kIOReturnError)
 [OK] GL get_surface_info(sel 6, id 0) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] GL read_buffer(sel 7, invalid kind 5) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] GL read_buffer(sel 7, valid kind 0, no surface bound) -> 0xe00002cc (kIOReturnCannotLock)
-[REC] GL finish(sel 8) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL finish(sel 8) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL wait_for_stamp(sel 9, stamp=0) -> 0x00000000 (kIOReturnSuccess)
 [OK] GL new_texture(sel 10, invalid kind 5) -> 0xe00002be (kIOReturnNoResources)
 [OK] GL delete_texture(sel 11, unallocated id) -> 0xe00002c2 (kIOReturnBadArgument)
@@ -19,8 +19,8 @@
 [OK] GL scale_surface(sel 14, no surface bound) -> 0xe00002c7 (kIOReturnUnsupported)
 [OK] GL purge_texture(sel 15, unallocated id) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] GL set_surface_volatile_state(sel 16, 0) -> 0x00000000 (kIOReturnSuccess)
-[REC] GL reclaim_resources(sel 17) -> 0x00000000 (kIOReturnSuccess)
-[REC] GL get_data_buffer(sel 18) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL reclaim_resources(sel 17) -> 0x00000000 (kIOReturnSuccess)
+[OK] GL get_data_buffer(sel 18) -> 0x00000000 (kIOReturnSuccess)
     out[0] is a non-zero page multiple, out[1]=0x10000
 [SKIP] GL set_stereo(sel 19, 0,0) -- not run live: shape corrected (2 scalars) but mutates global accelerator stereo state
 [OK] GL get_hw_info(sel 20) -> 0x00000000 (kIOReturnSuccess)
@@ -57,7 +57,7 @@
 [OK] DVD set_surface(sel 0, id 0 = detach) -> 0x00000000 (kIOReturnSuccess)
 [OK] DVD get_config(sel 1) -> 0x00000000 (kIOReturnSuccess)
     out={8454208,268435456}
-[REC] DVD get_status(sel 2) -> 0x00000000 (kIOReturnSuccess)
+[OK] DVD get_status(sel 2) -> 0x00000000 (kIOReturnSuccess)
     out0=0
 [OK] DVD get_surface_size(sel 3, unbound surface) -> 0xe00002bc (kIOReturnError)
 [OK] DVD lock_all_buffers(sel 4, no surface bound) -> 0xe00002cc (kIOReturnCannotLock)
@@ -77,15 +77,15 @@
 [OK] DVD dvd_enable_deint(sel 17, no surface bound) -> 0xe00002bc (kIOReturnError)
 [SKIP] DVD doIDCT(sel 18) -- not run live: drives real IDCT hardware; body not traced for a safe minimal input
 [OK] DVD wait_for_stamps(sel 19, 0,0) -> 0x00000000 (kIOReturnSuccess)
-[REC] DVD check_stamps(sel 20, 0,0) -> 0x00000000 (kIOReturnSuccess)
+[OK] DVD check_stamps(sel 20, 0,0) -> 0x00000000 (kIOReturnSuccess)
     outBothDone=1
 [OK] DVD setup_buffers(sel 21, no surface bound) -> 0xe00002d8 (???)
 -- Surface context (type=0), all 19 selectors --
 [OK] Surface set_id_mode(0,0x4) [precondition] -> 0x00000000 (kIOReturnSuccess)
-[REC] Surface surface_read_lock_options(sel 0, lockOptions=0) -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface surface_read_lock_options(sel 0, lockOptions=0) -> 0x00000000 (kIOReturnSuccess)
     structSize=68 data[0..4]={0x1008000,0x0,0x0,0x0,0x1e00}
 [OK] Surface surface_read_unlock_options(sel 1) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
-[REC] Surface get_state(sel 2) -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface get_state(sel 2) -> 0x00000000 (kIOReturnSuccess)
     outState=0x1
 [SKIP] Surface surface_write_lock_options(sel 3) -- not run live: lock family + real Apple struct type unreconstructed
 [OK] Surface surface_write_unlock_options(sel 4) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
@@ -94,14 +94,14 @@
 [OK] Surface set_id_mode(1,0x0) [precondition: allocate record] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x20) [precondition: set bit 0x20, keep record] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_shape_backing(sel 6, real preconditions established) -> 0x00000000 (kIOReturnSuccess)
-[REC] Surface set_id_mode(sel 7, 0,0) -> 0xe00002bc (kIOReturnError)
+[OK] Surface set_id_mode(sel 7, 0,0) -> 0xe00002bc (kIOReturnError)
 [OK] Surface set_id_mode(0,0x4) [precondition: id=0 record + prune_buffers] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_scale(sel 8, disabled path: struct size 0) -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x0) [precondition for set_shape] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x20) [precondition for set_shape] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_shape(sel 9, real preconditions established) -> 0x00000000 (kIOReturnSuccess)
 [SKIP] Surface surface_flush(sel 10) -- not run live: calls alloc_surfaces_retry (VRAM allocation + sleep-retry loop), not traced for a safe input
-[REC] Surface surface_query_lock(sel 11) -> 0xe00002cc (kIOReturnCannotLock)
+[OK] Surface surface_query_lock(sel 11) -> 0xe00002cc (kIOReturnCannotLock)
 [SKIP] Surface surface_read_lock(sel 12) -- not run live: lockOptions=2 reaches VRAM allocation / prepare_vram; only lockOptions=0 (sel 0) is traced
 [OK] Surface surface_read_unlock(sel 13) [no prior lock] -> 0xe00002cc (kIOReturnCannotLock)
 [SKIP] Surface surface_write_lock(sel 14) -- not run live: write-lock path with lockOptions=1 is not traced
@@ -109,7 +109,7 @@
 [OK] Surface surface_control(sel 16, selector 0 -> BadArgument) -> 0xe00002c2 (kIOReturnBadArgument)
 [OK] Surface set_id_mode(1,0x0) [precondition, idempotent] -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface set_id_mode(1,0x20) [precondition, idempotent] -> 0x00000000 (kIOReturnSuccess)
-[REC] Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified) -> 0x00000000 (kIOReturnSuccess)
+[OK] Surface set_shape_backing_length(sel 17, real preconditions established, wire shape unverified) -> 0x00000000 (kIOReturnSuccess)
 [OK] Surface surface_control_alias(sel 18, selector 0 -> BadArgument) -> 0xe00002c2 (kIOReturnBadArgument)
 
-87 calls made (74 asserted, 13 recorded-only), 0 unexpected result(s), 10 skipped (shape-known, not live-tested)
+87 calls made (87 asserted, 0 recorded-only), 0 unexpected result(s), 10 skipped (shape-known, not live-tested)

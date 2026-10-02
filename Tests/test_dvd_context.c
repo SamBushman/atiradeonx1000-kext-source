@@ -44,7 +44,7 @@ static void test_get_config(io_connect_t connect) {
 static void test_get_status(io_connect_t connect) {
     int out0 = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 2, 0, 1, &out0);
-    report("DVD get_status(sel 2)", r, NULL);
+    report("DVD get_status(sel 2)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) printf("    out0=%d\n", out0);
 }
 
@@ -217,7 +217,7 @@ static void test_wait_for_stamps(io_connect_t connect) {
 static void test_check_stamps(io_connect_t connect) {
     int outBothDone = -1;
     kern_return_t r = IOConnectMethodScalarIScalarO(connect, 20, 2, 1, 0, 0, &outBothDone);
-    report("DVD check_stamps(sel 20, 0,0)", r, NULL);
+    report("DVD check_stamps(sel 20, 0,0)", r, kExpectSuccess);
     if (r == TEST_kIOReturnSuccess) printf("    outBothDone=%d\n", outBothDone);
 }
 
