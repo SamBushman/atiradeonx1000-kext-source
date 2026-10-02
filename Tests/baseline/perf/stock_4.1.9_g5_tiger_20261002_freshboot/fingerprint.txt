@@ -1,0 +1,5 @@
+uptime: 9:18  up 5 mins, 1 user, load averages: 0.67 0.34 0.14
+kext: 0x588000 com.apple.ATIRadeonX1000 (4.1.9)
+displays: Resolution: 1920 x 1080 @ 60 Hz;Mirror: Off;Online: Yes;
+idkind: id0=[ 0x4 ] id1=[ 0x0 ] id2=[ ] id3=[ ] 
+fingerprint: 2221852201

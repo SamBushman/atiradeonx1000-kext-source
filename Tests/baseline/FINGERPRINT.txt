@@ -1,0 +1,7 @@
+Machine state the recorded harness baselines (stock_4.1.9_g5_tiger.txt, stock_4.1.9_g5_tiger_deep.txt) are valid in (issue #42):
+verified IDENTICAL on 2026-10-02 right after a reboot (compare_to_baseline.sh, normal and DEEP=1), 49 s after boot, kext 4.1.9 at 0x588000.
+displays: Resolution: 1920 x 1080 @ 60 Hz;Mirror: Off;Online: Yes;
+idkind: id0=[ 0x4 ] id1=[ 0x0 ] id2=[ ] id3=[ ] 
+fingerprint: 2221852201
+After ~10 h of uptime the same G5 had id1=[ 0x4 ] and the harness reported 3 (normal) / 7 (--deep) unexpected results; see Tests/stability_regimen.md section 5.
+Rule: run Tests/machine_fingerprint.sh before comparing with these baselines; if the idkind line differs, reboot (or compare only against a same-session reference, as Tests/soak.sh does).
