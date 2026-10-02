@@ -1,0 +1,6 @@
+# ATIRadeonX1000VADriver.bundle (Tiger ppc slice, __text 0x1070..): every `li r4,<selector>` followed within 12 instructions by a bl (the MIG wrapper call) -> the user-client selector each call site sends.
+# selector 0x12 (18) = DVD doIDCT, 0x10 (16) = set_macrovision, 0x15 (21) = setup_buffers, 6 = write_buffer, 0 = set_surface. Source for the capture analysis in analyze_capture.py.
+0x14a0: li r4,1 ; call at 0x14a4 (bl 0xd0e0)
+0x14e4: li r4,16 ; call at 0x14e8 (bl 0xd020)
+0x1c30: li r4,0 ; call at 0x1c34 (bl 0x18a0)
+# NOTE: the static scan finds only these three constant-selector call sites; the doIDCT (18) site is NOT among them (the selector reaches the MIG wrapper some other way: register copy / table), which is why a live capture of a real player is needed.
