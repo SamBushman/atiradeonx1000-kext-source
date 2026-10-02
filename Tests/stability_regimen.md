@@ -67,6 +67,8 @@ The bar is a proposal for the user to adjust; the tooling takes the duration as 
 
 Stock result against the bar: see the "Stock soak results" section appended below as runs complete.
 
+**Setup requirement for any long run on this G5 (from the two stock runs):** the shared monitor must not be able to switch away from, or re-handshake with, the G5 during the run: set the monitor to a fixed input (disable auto source switching), or leave the other computer asleep/disconnected, or the run will be interrupted by display reconfigurations (and `hwup_sampler` will log them).
+
 ## Stock soak results
 
 **Run 1, 2026-10-02 (stock 4.1.9, fresh boot at 09:14, soak started 09:17:24): the bar was NOT met as defined.** Log and watchdog traces: `Tests/baseline/soak/`.
@@ -85,7 +87,7 @@ Stock result against the bar: see the "Stock soak results" section appended belo
 * **What changed in that round:** `get_surface_info` went from 1920x1080 (`0x780 x 0x438`) to **3840x2160** (`0xf00 x 0x870`), `get_config` usable VRAM from 259817472 to 234995712, and a Surface lock address/pitch accordingly. The display really was reconfigured: the display EDID is a Samsung `U32J59x` (vendor 0x4C2D, product 0x0F52), a 4K monitor.
 * **The independent sampler (`hwup_sampler`) caught the event:** UP for 5 020 564 ms, then at 14:45:00.796 DOWN for 8 457 ms, then UP/DOWN toggling (53 ms UP, 250 ms DOWN, 50 UP, 150 DOWN, 50 UP, 150 DOWN) until 14:45:09.956 UP. That is a ~9 s display reconfiguration with a final flicker burst.
 * **By the time it was inspected (15:14) the display was back at 1920x1080 @ 60 Hz, `machine_fingerprint.sh` unchanged (2221852201), kext 0x588000, `panic.log` unchanged (6718 bytes), no crashdump, G5 up since 13:20.** The watchdog showed only OK.
-* **Whether anyone touched the G5 at 14:45 is not confirmed** (the user confirmed only that nothing was done at the 13:00:58 event of run 1). The same mechanism most likely explains run 1's 13:00:58 NotReady transient (flag down briefly; that time the mode was not observed to change). The trigger is not identified; it looks like the monitor or its link re-announcing itself (hotplug/re-handshake: EDID prefers 3840x2160, the G5 normally runs it at 1920x1080).
+* **Whether anyone touched the G5 at 14:45 is not confirmed** (the user confirmed only that nothing was done at the 13:00:58 event of run 1). The same mechanism most likely explains run 1's 13:00:58 NotReady transient (flag down briefly; that time the mode was not observed to change). **The monitor is shared with another computer (user, 2026-10-02)**, so the trigger is very likely the monitor's input/source switching or the other machine's signal appearing or disappearing, which makes the monitor re-announce itself to the G5 (hotplug/re-handshake: the EDID prefers 3840x2160, the G5 normally runs it at 1920x1080). This is inferred, not observed: the monitor's own source-switch setting has not been checked and the other computer's activity at 13:00:58 and 14:45:00 has not been correlated.
 * **Consequence for the bar:** a 4 h soak on this machine cannot be expected to run free of display reconfigurations unless the cause is removed or the soak recognises them. The NotReady-only retry rule is too narrow for a full mode change. See the proposal on #43.
 
 Earlier: 150 s validation soak (8 rounds, 153 s): all rounds identical to their references, 0 failures.
