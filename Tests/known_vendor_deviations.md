@@ -1,0 +1,20 @@
+# Known vendor behaviours the parity tests must not flag as regressions (issue #42 criterion 5)
+
+The goal of the rebuild is bug-for-bug parity with Apple's stock `ATIRadeonX1000.kext` 4.1.9. A rebuilt kext that **reproduces** one of the behaviours below is correct;
+one that "fixes" it is a divergence to be reported (and then decided on: faithful reproduction is the default, see #73 for the one deliberate beyond-stock item).
+Each row says how a parity run must treat it. Status of each is **stock-side evidence only** until Phase R (#122 / #45) runs the same call on a loaded rebuild.
+
+| id | where (stock 4.1.9) | behaviour | evidence | parity treatment |
+|---|---|---|---|---|
+| V1 | `IOATIR500Surface::allocAllSlaveSwapBuffers` (0x11e50), #32 | unconditional `b` back to an invariant test on its allocation-failure cleanup path: infinite loop | static, complete instruction trace; **never triggered live** (needs `withOptions` to return NULL) | Do NOT inject an allocation failure to test it on any machine you care about. Rebuild must contain the same loop (compare disassembly, not behaviour). |
+| V2 | `IOATIR500GLContext::get_data_buffer` (GL sel 18, 0x9a30), #99 | third `NoResources` return (0xa0a8) leaves the accelerator command lock (`accel+0x840`) held, blocking every later client | static; reachable only under memory/VRAM exhaustion | static comparison only; no live exhaustion test. |
+| V3 | `IOATIR500DVDContext::doIDCT` (DVD sel 18), #98 | `BadArgument` exit for an invalid planeSelector (0x355cc-0x355d4) has no `IOLockUnlock` | static; live: call returned 0xe00002c2 as predicted, but a following harness run was NOT blocked, so the claim is **unreconciled** (#98) | treat as OPEN: do not assert either "lock leaks" or "lock does not leak" until #98 settles it. |
+| V4 | `IOATIR500Surface::surface_write_lock_options` (Surface sel 3), lockOptions 0 on the baseline surface, #123 | kernel **panic**: NULL+0xC data access, `alloc_buffer_backing_store`+0x1c reached through `move_buffer_to_backing_store` (`accelerator+0x220`/`inTaskWithOptions`) | live on stock (panic.log archived in `Tests/destructive/phaseS/panics/`) | A rebuild that panics at the same offset is parity. Only run with the user at the machine. `surface_read_lock` (sel 12, lockOptions 2) on the same state does NOT panic (#95). |
+| V5 | DVD `set_macrovision` (sel 16) and `write_buffer` (sel 6) with **no bound surface** | NULL deref `this+0xf8` (`ATIR500Surface::getFramebufferIndex`) -> kernel panic / hard hang | live on stock (the original #43 incident; README "SAFETY") | never call unbound in any suite, stock or rebuilt. Bound calls are safe (Phase S, #90/#92). |
+| V6 | GL `get_data_buffer` (sel 18) | not a pure query: grows a global data-buffer pool; out[0] was 0xd000, later 0x10000 with the stock kext unchanged | baseline notes in `Tests/README.md` | assert only invariants out[0] in {0xd000, 0x10000}, out[1] = 0x10000 (already how `compare_to_baseline.sh` treats it). |
+| V7 | Surface `surface_control` (sel 16/18) selector 1 (set_surface_blocking) | never sleeps (the issue text expected otherwise) | Phase S #118 | parity = also never sleeps. |
+| V8 | GL `set_stereo` (sel 19) enable, mode 1 panel 0 | returns NoMemory (0xe00002bd) on the test machine (stereo-record allocation branch) | Phase S #88 | parity = same code on the same hardware. |
+| V9 | Userspace `PPEmulatorBuild` dispatch on freshly-JIT-compiled code, #78 | crashes in the stock bundle and identically in the rebuilt one | `Tests/userspace`, #78 | already bug-for-bug; do not report. |
+| V10 | Return values of calls that fail are not copied to the caller (IOKit copies outputs only on success) | e.g. the 0xdeadbeef sentinel of `lock_memory` is unobservable from userspace | `Tests/README.md` | not a deviation; do not try to assert error-path outputs. |
+
+Adding a row: a behaviour qualifies only if it is shown in the **stock** binary (static trace or live), not merely absent from the rebuild. Cite the evidence and say how a parity run should treat it.
