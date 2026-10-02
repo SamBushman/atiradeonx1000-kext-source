@@ -224,3 +224,32 @@ DVD 5	tier	T3 by dependency: needs a successful lock (DVD 4, #102)
 Surface 9	tier	T2 CONFIRMED (live, test_deep_t2.c surface_reshape): set_shape 64x64, 16x8, 4x4 each -> 0 and read back via 2D get_surface_info d[2],d[3]; negative width -> Error 0xe00002bc.
 Surface 6	tier	T2 for the zero-backing variants (baseline); the non-zero backing-store connect path is T3 (#121).
 Surface 17	tier	T2 for the zero-backing variants (baseline); the non-zero backing-store connect path and the param5 < param4*dim Error are T3 (#121).
+GL 7	codes	NoResources 0xe00002be = IOMemoryDescriptor::withAddress failure on the valid path: #103 (T3).
+GL 8	codes	Timeout 0xe00002d6 needs the accelerator stamp wait to fail (+0x55c returns -1): not producible from userspace on an idle device; the wait primitive's Timeout IS observed through GL wait_for_stamp(0x7fffffff).
+GL 18	codes	NoResources 0xe00002be is the allocation-failure path, tracked by #99 (Apple's lock leak there); not safely producible.
+2D 5	codes	NoResources-class 0xe00002c8 and the valid path: #101 (T3).
+2D 7	codes	Timeout 0xe00002d6 needs the wait to fail (-1): unreachable on an idle device; modes 0-3 all observed.
+2D 8	codes	NoMemory/NoResources are allocation failures; valid path: #119 (T3).
+2D 9	codes	as 2D 8 (#119).
+2D 10	codes	as 2D 8 (#113, T3).
+2D 11	codes	BadArgument needs an allocator and a bad handle: #119 (T3).
+2D 12	codes	BadArgument/Timeout need an allocator and an image: #119 (T3).
+2D 15	codes	BadArgument-class 0xe00002c0 (display-driver attribute rejected): #89 (skipped destructive method).
+DVD 6	codes	valid path with a bound surface: #92.
+DVD 7	codes	Timeout 0xe00002d6 as GL 8: unreachable on an idle device; success observed.
+DVD 8	codes	NoMemory/NoResources are allocation failures; valid path: #120 (T3).
+DVD 9	codes	BadArgument needs an allocator and a bad handle: #120 (T3).
+Surface 5	codes	NoResources 0xe00002be = withAddress failure on the valid path: #116 (T3).
+Surface 7	codes	NoResources 0xe00002be = IOMallocAligned failure of the per-id record (allocation failure): not producible from userspace; BadArgument/Error/CannotLock/success all observed.
+2D 16	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+2D 17	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #114)
+2D 18	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #115)
+DVD 10	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 11	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 12	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 13	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 15	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 17	codes	NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
+DVD 14	codes	NotReady only; the write itself is #91 (skipped destructive method).
+DVD 16	codes	codes 0xe00002c0 / NotReady: #90 (skipped destructive method).
+DVD 18	codes	codes BadArgument / NotReady with the lock leak: #98 / #93 (skipped destructive method).

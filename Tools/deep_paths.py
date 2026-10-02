@@ -151,7 +151,7 @@ for cls, sel, flags, c0, c1, sym in rows:
                 guards.append('%s <- `%s`' % (nm(int(m.group(0), 16)), (ctx[-1] if ctx else line.strip())[:110]))
     if guards: print('- return-code sites in the source (code <- nearest guard): ' + '; '.join(dict.fromkeys(guards)))
     n = notes.get(key, {})
-    for fld in ('tier', 'preconditions', 'sequence', 'reason'):
+    for fld in ('tier', 'preconditions', 'sequence', 'reason', 'codes'):
         if fld in n: print('- **manual %s**: %s' % (fld, n[fld]))
     if not skipped: nrows += 1
     print()

@@ -479,6 +479,44 @@ static void surface_reshape(io_service_t service) {
     check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
 }
 
+/* T2 row 14 (issue #100 criterion 2): reject paths of the bind/scale selectors that no earlier row reached. All are argument or lookup rejections taken before any state
+ * changes: set_surface with an id no Surface connection registered (find_surface_for_id fails -> BadArgument, GL 0 / 2D 0 / DVD 0), set_scale with a structure size that is
+ * neither 0 nor 0x2c (BadArgument before the lock), set_shape_backing_length with param5 < param4 * dim (Error before the forward; the shipped check at 0x158f0). */
+static void reject_paths(io_service_t service) {
+    io_connect_t c = IO_OBJECT_NULL, s = IO_OBJECT_NULL; kern_return_t r; unsigned char out[0x30], buf[8], region[20]; IOByteCount osz;
+    printf("-- T2: reject paths (unregistered surface id, bad scaling size, bad backing length) --\n");
+    if (open_user_client(service, CLIENT_TYPE_GL, &c) == TEST_kIOReturnSuccess) {
+        r = IOConnectMethodScalarIStructureI(c, 0, 4, 0, 0x7777, 0, 0, 0, NULL);
+        check("GL set_surface(unregistered id) -> BadArgument", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+        IOServiceClose(c);
+    }
+    if (open_user_client(service, CLIENT_TYPE_2D, &c) == TEST_kIOReturnSuccess) {
+        osz = sizeof out;
+        r = IOConnectMethodScalarIStructureO(c, 0, 2, &osz, 0x7777, 0x800, out);
+        check("2D set_surface(unregistered id) -> BadArgument", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+        IOServiceClose(c);
+    }
+    if (open_user_client(service, CLIENT_TYPE_DVD, &c) == TEST_kIOReturnSuccess) {
+        r = IOConnectMethodScalarIStructureI(c, 0, 3, 0, 0x7777, 0, 0, NULL);
+        check("DVD set_surface(unregistered id) -> BadArgument", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+        IOServiceClose(c);
+    }
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) == TEST_kIOReturnSuccess) {
+        memset(buf, 0, sizeof buf);
+        r = IOConnectMethodScalarIStructureI(s, 8, 1, sizeof buf, 0, buf);
+        check("Surface set_scale with an 8-byte structure -> BadArgument (size must be 0 or 0x2c)", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+        r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+        if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+        if (r == TEST_kIOReturnSuccess) {
+            memset(region, 0, sizeof region);
+            *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = 4; *(SInt16 *)(region + 10) = 4; *(SInt16 *)(region + 16) = 4; *(SInt16 *)(region + 18) = 4;
+            r = IOConnectMethodScalarIStructureI(s, 17, 5, sizeof region, 0, 1, 0, 1, 0, region);
+            check("Surface set_shape_backing_length(param4=1, param5=0) -> Error 0xe00002bc (param5 < param4*dim, before the forward)", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        }
+        IOServiceClose(s);
+    }
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -493,4 +531,5 @@ void run_deep_t2_tests(io_service_t service) {
     twod_finish_modes(service);
     dvd_wait_stamps_finish(service);
     surface_reshape(service);
+    reject_paths(service);
 }

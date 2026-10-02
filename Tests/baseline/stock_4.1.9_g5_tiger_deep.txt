@@ -147,5 +147,11 @@
 [OK] Surface set_shape with a negative width -> Error 0xe00002bc (before anything is touched) r=0xe00002bc
 [OK] leak check: driver class instance counts identical before/after
 [OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- T2: reject paths (unregistered surface id, bad scaling size, bad backing length) --
+[OK] GL set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] 2D set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] DVD set_surface(unregistered id) -> BadArgument r=0xe00002c2
+[OK] Surface set_scale with an 8-byte structure -> BadArgument (size must be 0 or 0x2c) r=0xe00002c2
+[OK] Surface set_shape_backing_length(param4=1, param5=0) -> Error 0xe00002bc (param5 < param4*dim, before the forward) r=0xe00002bc
 
-131 calls made (130 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+136 calls made (135 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

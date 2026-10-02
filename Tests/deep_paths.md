@@ -103,6 +103,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `return 0xe00002c2;`; 0xe00002cc CannotLock <- `if (((M<UInt32>(pIVar3 + 0xbf8) & 0x20000000) != 0) || (M<SInt32>(iVar16 + 0x10) == 0)) {`; 0xe00002be NoResources <- `if (local_s.f40 == (SInt32 *)0x0) {`
 - **manual tier**: T3 (static trace, #103): GPU DMA copy into caller memory; moved out of T2.
 - **manual reason**: baseline: bad kind -> BadArgument; unbound -> CannotLock | deep path not yet exercised: valid kind on a bound surface: copy of surface into user memory (struct `sIOGLContextReadBufferData`; also #86)
+- **manual codes**: NoResources 0xe00002be = IOMemoryDescriptor::withAddress failure on the valid path: #103 (T3).
 
 ## GL sel 8 - `IOATIR500GLContext::finish` 
 
@@ -115,6 +116,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d6 Timeout? <- `if (iVar1 == -1) {`
 - **manual tier**: T2 CONFIRMED (live): finish -> 0 (it passes this+0x7c, the last submitted stamp, to accelerator vtable +0x55c; with nothing submitted the stamp is already reached).
 - **manual reason**: baseline: success with nothing pending | deep path not yet exercised: finish after submitted work (waits on the GPU timestamp)
+- **manual codes**: Timeout 0xe00002d6 needs the accelerator stamp wait to fail (+0x55c returns -1): not producible from userspace on an idle device; the wait primitive's Timeout IS observed through GL wait_for_stamp(0x7fffffff).
 
 ## GL sel 9 - `IOATIR500GLContext::wait_for_stamp` 
 
@@ -233,6 +235,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `return 0xe00002be;`; 0xe00002be NoResources <- `if (piVar4 == (int *)0x0) {`
 - **manual tier**: RECLASSIFIED T1 -> T2 (hand-traced + live evidence). The body calls IOATIR500Accelerator::allocOneDataBuffer / allocDataBuffers and so grows a GLOBAL pool (and is the method of #99: one allocation-failure path returns NoResources with the command lock still held). Live: out[0] was 0xd000 at baseline time (2026-09-18), 0x10000, 0x5000 and (inside the full harness run) 0x32000 on 2026-10-01 with the stock kext unchanged - a state-dependent quantity, not a fixed one. The normal baseline pins only the invariants (out[0] a non-zero page multiple, out[1] = 0x10000).
 - **manual reason**: baseline: success, recorded only | deep path not yet exercised: after allocations; the allocation-failure path (#99)
+- **manual codes**: NoResources 0xe00002be is the allocation-failure path, tracked by #99 (Apple's lock leak there); not safely producible.
 
 ## GL sel 19 - `IOATIR500GLContext::set_stereo` (own issue #88-#97, not part of #100)
 
@@ -313,6 +316,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c8 ? <- `if (map == nullptr) {`; 0xe00002cc CannotLock <- `result = 0xe00002cc;`
 - **manual tier**: T3 (#101)
 - **manual reason**: baseline: unbound -> CannotLock | deep path not yet exercised: lock a bound surface (VRAM/GART mapping)
+- **manual codes**: NoResources-class 0xe00002c8 and the valid path: #101 (T3).
 
 ## 2D sel 6 - `IOATIR5002DContext::unlock_memory` 
 
@@ -337,6 +341,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d6 Timeout? <- `if (iVar3 == -1) {`; 0xe00002c2 BadArgument <- `if (param_1 != 2) {`
 - **manual tier**: T2 CONFIRMED (live, test_deep_t2.c twod_finish_modes): finish(3) -> BadArgument; finish(0) -> 0; finish(1), finish(2) -> 0 on an idle stock kernel (bounded waits on accelerator+0x50-1; Timeout 0xe00002d6 would also be legal).
 - **manual reason**: baseline: mode 0 | deep path not yet exercised: other modes / after work
+- **manual codes**: Timeout 0xe00002d6 needs the wait to fail (-1): unreachable on an idle device; modes 0-3 all observed.
 
 ## 2D sel 8 - `IOATIR5002DContext::declare_image` 
 
@@ -349,6 +354,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 == 0) || (param_2 == 0)) {`; 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002bd NoMemory <- `if (iVar1 == 0) {`
 - **manual tier**: T3 (#119: shared allocator + AGP texture lifecycle, filed as one sequence with 9, 11, 12)
 - **manual reason**: baseline: zero size -> BadArgument | deep path not yet exercised: real declare (allocates through the shared allocator)
+- **manual codes**: NoMemory/NoResources are allocation failures; valid path: #119 (T3).
 
 ## 2D sel 9 - `IOATIR5002DContext::create_image` 
 
@@ -361,6 +367,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (param_1 == 0) {`; 0xe00002be NoResources <- `if (iVar2 == 0) {`; 0xe00002bd NoMemory <- `if (iVar2 == 0) {`
 - **manual tier**: T3 (#119)
 - **manual reason**: baseline: p1 = 0 -> BadArgument | deep path not yet exercised: real create
+- **manual codes**: as 2D 8 (#119).
 
 ## 2D sel 10 - `IOATIR5002DContext::create_transfer` 
 
@@ -373,6 +380,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (sizeInBytes == 0) {`; 0xe00002be NoResources <- `if (!create_shared()) {`; 0xe00002bd NoMemory <- `if (texture == nullptr) {`
 - **manual tier**: T3 (#113)
 - **manual reason**: baseline: bytes 0 -> BadArgument | deep path not yet exercised: real create (AGP texture allocation, GART)
+- **manual codes**: as 2D 8 (#113, T3).
 
 ## 2D sel 11 - `IOATIR5002DContext::delete_image` 
 
@@ -385,6 +393,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (this_00 == (UInt8 *)0x0) {`; 0xe00002c2 BadArgument <- `else {`
 - **manual tier**: T3 (#119)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: delete after create
+- **manual codes**: BadArgument needs an allocator and a bad handle: #119 (T3).
 
 ## 2D sel 12 - `IOATIR5002DContext::wait_image` 
 
@@ -397,6 +406,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002d6 Timeout? <- `if (iVar1 == -1) {`; 0xe00002c2 BadArgument <- `uVar2 = 0xe00002c2;`
 - **manual tier**: T3 (#119)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: wait on a real image
+- **manual codes**: BadArgument/Timeout need an allocator and an image: #119 (T3).
 
 ## 2D sel 13 - `IOATIR5002DContext::set_surface_paging_options` 
 
@@ -431,6 +441,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock OSMetaClassBase12safeMetaCastEPKS_PK <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c0 NoDevice <- `if (U8At(accel, 0x80) == 0 || U32At(accel, 0xcc) == 0) {`; 0xe00002c0 NoDevice <- `} else {`
+- **manual codes**: BadArgument-class 0xe00002c0 (display-driver attribute rejected): #89 (skipped destructive method).
 
 ## DVD sel 0 - `IOATIR500DVDContext::set_surface` 
 
@@ -510,6 +521,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES, LOOP (1 backward branch(es))
 - shipped callees (ordered): `IOLockLock IOATIR500Surface20alloc_surfaces_ret IOLockUnlock IOLockUnlock IOMemoryDescriptor11withAddressEjm11 <vtable> IOLockUnlock <vtable> IOLockLock <vtable> <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `if (((M<unsigned int>(pIVar1 + 0xbf8) & 0x20000000) != 0) || (M<int>(iVar14 + 0x10) == 0)) {`; 0xe00002be NoResources <- `if (local_s.f40 == (int *)0x0) {`
+- **manual codes**: valid path with a bound surface: #92.
 
 ## DVD sel 7 - `IOATIR500DVDContext::finish` 
 
@@ -522,6 +534,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d6 Timeout? <- `if (iVar1 == -1) {`
 - **manual tier**: T2 CONFIRMED (live): finish -> 0 on a fresh connection (this+0x7c = 0); Timeout 0xe00002d6 is the only other code.
 - **manual reason**: baseline: success | deep path not yet exercised: after work
+- **manual codes**: Timeout 0xe00002d6 as GL 8: unreachable on an idle device; success observed.
 
 ## DVD sel 8 - `IOATIR500DVDContext::declare_image` 
 
@@ -534,6 +547,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 == 0) || (param_2 == 0)) {`; 0xe00002be NoResources <- `if (iVar1 == 0) {`; 0xe00002bd NoMemory <- `if (iVar1 == 0) {`
 - **manual tier**: T3 (#120)
 - **manual reason**: baseline: zero size -> BadArgument | deep path not yet exercised: real declare (shared allocator)
+- **manual codes**: NoMemory/NoResources are allocation failures; valid path: #120 (T3).
 
 ## DVD sel 9 - `IOATIR500DVDContext::delete_image` 
 
@@ -546,6 +560,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002be NoResources <- `if (this_00 == (UInt8 *)0x0) {`; 0xe00002c2 BadArgument <- `uVar2 = 0xe00002c2;`
 - **manual tier**: T3 (#120)
 - **manual reason**: baseline: no allocator -> NoResources | deep path not yet exercised: after a real declare
+- **manual codes**: BadArgument needs an allocator and a bad handle: #120 (T3).
 
 ## Surface sel 0 - `IOATIR500Surface::surface_read_lock_options` 
 
@@ -611,6 +626,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002cc CannotLock <- `if (((M<unsigned int>(self + 0xbf8) & 0x20000000) != 0) || (M<int>(iVar17 + 0x10) == 0)) {`; 0xe00002be NoResources <- `if (local_4c == (int *)0x0) {`
 - **manual tier**: T3 (#116; GPU DMA into caller memory - moved out of T2)
 - **manual reason**: baseline: rectangle off-surface -> success | deep path not yet exercised: a real in-surface rectangle: surface to user copy
+- **manual codes**: NoResources 0xe00002be = withAddress failure on the valid path: #116 (T3).
 
 ## Surface sel 6 - `IOATIR500Surface::set_shape_backing` 
 
@@ -634,6 +650,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if ((param_3 & 0xffff7fc0) != 0) {`; 0xe00002cc CannotLock <- `if ((M<unsigned int>(self + 0xbd0) & 0xffff0000) != 0) {`; 0xe00002be NoResources <- `if (iVar5 == 0) {`; 0xe00002bc Error <- `uVar8 = 0xe00002bc;`
 - **manual tier**: T2 CONFIRMED (live) for the error paths: mode bits outside 0xffff7fc0's complement (0x40, 0x80000000) -> BadArgument before the lock; with a read lock held -> CannotLock; success again after the unlock. (The success paths were already in the #42 baseline.)
 - **manual reason**: baseline: many real success cases; (0,0) -> Error | deep path not yet exercised: every mode bit and id class, error paths
+- **manual codes**: NoResources 0xe00002be = IOMallocAligned failure of the per-id record (allocation failure): not producible from userspace; BadArgument/Error/CannotLock/success all observed.
 
 ## Surface sel 8 - `IOATIR500Surface::set_scale` 
 
@@ -766,6 +783,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar2 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
 - **manual tier**: T1 CONFIRMED (live): reads (offset & 0x1ffc) through the MMIO window, no write. CONFIG_MEMSIZE (0xf8) == get_config VRAM; RBBM_STATUS (0xe40) recorded (0x10000140 idle).
 - **manual reason**: baseline: zero registers; size mismatch | deep path not yet exercised: READ real registers (non-zero count): read-only, easy
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## 2D sel 17 - `ATIR5002DContext::write_regs` 
 
@@ -778,6 +796,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
 - **manual tier**: T3 (#114)
 - **manual reason**: baseline: not multiple of 8 -> BadArgument; zero pairs | deep path not yet exercised: real register pairs: HARDWARE WRITE
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #114)
 
 ## 2D sel 18 - `ATIR5002DContext::write_2_regs` 
 
@@ -790,6 +809,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar2 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
 - **manual tier**: T3 (#115)
 - **manual reason**: baseline: same two cases | deep path not yet exercised: real pairs: HARDWARE WRITE
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock. (write path: #115)
 
 ## DVD sel 10 - `ATIR500DVDContext::show_buffer` 
 
@@ -801,6 +821,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - shipped callees (ordered): `IOLockLock ATIR500Surface10showbufferEii IOLockUnlock`
 - **manual tier**: T1 CONFIRMED (live) bound: 0 (ATIR500Surface::showbuffer is a `blr` stub); unbound -> Error.
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound surface
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 11 - `ATIR500DVDContext::dvd_setup_overlay` 
 
@@ -813,6 +834,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<SInt32>(self + 0xf8) == 0) {`
 - **manual tier**: T2 CONFIRMED (live, test_deep_t2.c dvd_bound_setters): unbound -> Error 0xe00002bc; bound (0,0,16,16, enable 0) -> 0. Body writes only surface+0xda4 (and +0xbed/+0xbee when enable==0) plus ATIR500Surface::dvd_setup_overlay's geometry; no hardware access.
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound: writes the surface's overlay geometry
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 12 - `ATIR500DVDContext::dvd_enable_overlay` 
 
@@ -825,6 +847,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<SInt32>(self + 0xf8) == 0) {`
 - **manual tier**: T1 CONFIRMED (live) bound, arg 0: 0 (enable/disable_overlay are `blr` stubs).
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound (the body behind the guard is an empty no-op)
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 13 - `ATIR500DVDContext::read_regs` 
 
@@ -837,6 +860,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar2 + 0x80) == '\0') {`; 0xe00002c2 BadArgument <- `else {`
 - **manual tier**: T1 CONFIRMED (live): same body shape as 2D read_regs (struct sizes must match and be a multiple of 4, else BadArgument before the lock; Error 0xe00002d8 NotReady if the device-active flag is clear).
 - **manual reason**: baseline: zero registers; size mismatch | deep path not yet exercised: READ real registers (non-zero count): read-only
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 14 - `ATIR500DVDContext::write_regs` (own issue #88-#97, not part of #100)
 
@@ -847,6 +871,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`
+- **manual codes**: NotReady only; the write itself is #91 (skipped destructive method).
 
 ## DVD sel 15 - `ATIR500DVDContext::dvd_setup_subpicture` 
 
@@ -859,6 +884,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<int>(self + 0xf8) == 0) {`
 - **manual tier**: T1 CONFIRMED (live) bound, (0,0,0,0): 0 (dvd_setup_subpicture is a `blr` stub).
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound (empty no-op behind the guard)
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 16 - `ATIR500DVDContext::set_macrovision` (own issue #88-#97, not part of #100)
 
@@ -869,6 +895,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: none detected
 - shipped callees (ordered): `IOLockLock ATIR500Surface19getFramebufferIndexE OSMetaClassBase12safeMetaCastEPKS_PK <vtable> IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002c0 NoDevice <- `if (piVar2 == (SInt32 *)0x0) {`
+- **manual codes**: codes 0xe00002c0 / NotReady: #90 (skipped destructive method).
 
 ## DVD sel 17 - `ATIR500DVDContext::dvd_enable_deint` 
 
@@ -881,6 +908,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - return-code sites in the source (code <- nearest guard): 0xe00002d8 NotReady <- `if (M<char>(iVar1 + 0x80) == '\0') {`; 0xe00002bc Error <- `else if (M<UInt8 *>(self + 0xf8) == (UInt8 *)0x0) {`
 - **manual tier**: T2 CONFIRMED (live): unbound -> Error; bound enable_deint(1) then (0) -> 0 (stores the surface's deinterlace mode only).
 - **manual reason**: baseline: unbound -> Error | deep path not yet exercised: bound: sets the surface's deinterlace mode
+- **manual codes**: NotReady 0xe00002d8 needs accelerator+0x80 == 0 (hardware not up): unreachable from userspace while the accelerator is running; all other shipped codes of this row observed live on stock.
 
 ## DVD sel 18 - `ATIR500DVDContext::doIDCT` (own issue #88-#97, not part of #100)
 
@@ -891,6 +919,7 @@ labelled **manual**. The machine-derived parts need no hardware; the rows listed
 - derived properties: ALLOCATES, HW-ish callee
 - shipped callees (ordered): `<vtable> IOLockLock IOATIR500DVDContext20map_transfer_to ATIRadeonX100027submit_idct_buffer_c IOLockUnlock IOLockUnlock`
 - return-code sites in the source (code <- nearest guard): 0xe00002c2 BadArgument <- `if (M<SInt32>(param_2 + 0xc) != 1) {`; 0xe00002d8 NotReady <- `return 0xe00002d8;`
+- **manual codes**: codes BadArgument / NotReady with the lock leak: #98 / #93 (skipped destructive method).
 
 ## DVD sel 19 - `ATIR500DVDContext::wait_for_stamps` 
 
