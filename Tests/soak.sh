@@ -17,6 +17,8 @@ start=`date +%s`; round=0; : > "$LOG"
 note() { echo "`date '+%Y-%m-%dT%H:%M:%S'` $*" >> "$LOG"; }
 note "SOAK START duration=${D}s gln=$GLN kext=`kextstat 2>/dev/null | grep ' com.apple.ATIRadeonX1000 ' | awk '{print $3, $6}'`"
 note "fingerprint: `sh ./machine_fingerprint.sh 2>&1 | tr '\n' '|'`"
+# diagnostic only (changes no verdict): log every window in which the accelerator reports "hardware not up" (NotReady on the guarded DVD wrappers), see Tests/hwup_sampler.c and #43
+if [ -x ./hwup_sampler ]; then ./hwup_sampler 50 300 > "$LOG.hwup" 2>&1 & HWUP=$!; trap 'kill $HWUP 2>/dev/null' 0; note "hwup_sampler started pid $HWUP -> $LOG.hwup"; fi
 step() { # step NAME REF COMMAND...   REF = "" (no reference check) or a reference file: created by the first run, compared on later ones
   n=$1; ref=$2; shift; shift; o=/tmp/soak_step.$$; "$@" > $o 2>&1; rc=$?
   # no reference: the exit status is the verdict. With a reference: the harness exits 1 when it reports unexpected results (a standing machine state, see above), so the verdict is
