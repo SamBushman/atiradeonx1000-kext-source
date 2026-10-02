@@ -31,6 +31,7 @@ Use `play_with_recorder_dvdplayer.command` (default argument `/tmp/va_cap/dvd/di
 
 ## Results so far
 * QuickTime Player + `test_ntsc_720x480.mpg`: **software path** - `hw_watch` saw DVD contexts = 0 for the whole run (only GL 1-6, 2D, Surface); 109 recorded calls, none on a DVD connection; no doIDCT-shaped call (`captures/rec_000950.tsv`). DVD Player refuses the bare .mpg.
+* DVD Player + the authored disc (`dvd/disc`, 30 s): **also software path**. `captures/hw_watch_001822.log`: DVD contexts = 0 throughout (GL 1-2, 2D 2-3, Surface 1-2). `captures/rec_001822.tsv` (504 lines): client types opened = Surface x11, GL x33, 2D x1 and **no type 3 (DVD)**; no doIDCT-shaped call, no .mem file. It did call 2D `set_macrovision` (selector 15) five times, all with scalar 0 and rc 0 - the same call/value #89 ran, so a real client sends exactly that. Conclusion: on this Tiger/X1900 setup neither player uses the kext's DVD context, so the hardware IDCT path cannot be captured this way.
 
 ## Known unknowns
 * Whether Apple's players use this driver's hardware IDCT path on the X1900 at all (step 3 answers it).
