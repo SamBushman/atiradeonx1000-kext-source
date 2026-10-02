@@ -36,7 +36,8 @@ IOReturn ATIR500DVDContext::check_stamps(UInt32 param_1, UInt32 param_2, UInt32*
   
   iVar3 = 1;
   if (param_1 != 0) {
-    iVar3 = VCALL(*M<SInt32 *>(self + 0x8c), 0x5f4)(M<SInt32 *>(self + 0x8c));
+    /* r4 (the first stamp) is left untouched by the shipped code, so it is forwarded to the accelerator's check (vtable +0x5f4); the decompile dropped it */
+    iVar3 = VCALL(*M<SInt32 *>(self + 0x8c), 0x5f4)(M<SInt32 *>(self + 0x8c),param_1);
   }
   iVar2 = 1;
   if (param_2 != 0) {

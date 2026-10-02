@@ -338,6 +338,22 @@ static void gl_wait_finish(io_service_t service) {
     IOServiceClose(g);
 }
 
+/* T2 row 9 (issue #100): DVD check_stamps (sel 20, stamps a, b -> bothDone). Shipped 0x341a0: a != 0 -> accelerator vtable +0x5f4 with r4 (= a, left untouched: forwarded; the
+ * decompile dropped it), b != 0 -> vtable +0x554(b); zero counts as done; bothDone = both results non-zero. Read-only stamp comparisons. */
+static void dvd_check_stamps_values(io_service_t service) {
+    io_connect_t d = IO_OBJECT_NULL; kern_return_t r; int both = -1;
+    printf("-- DVD T2: check_stamps with real values --\n");
+    if (open_user_client(service, CLIENT_TYPE_DVD, &d) != TEST_kIOReturnSuccess) { printf("[FAIL] DVD open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(d, 20, 2, 1, 5, 5, &both);
+    /* live result on stock: both=0 - the accelerator's stamp polarity is not yet traced, so this value is recorded, not asserted */
+    check("DVD check_stamps(5,5) call succeeds and writes a 0/1 result", r == TEST_kIOReturnSuccess && (both == 0 || both == 1), "r=0x%08x both=%d (recorded: 0 on stock)", (unsigned int)r, both);
+    r = IOConnectMethodScalarIScalarO(d, 20, 2, 1, 0x7fffffff, 0, &both);
+    check("DVD check_stamps(0x7fffffff,0) -> not done (first stamp never submitted)", r == TEST_kIOReturnSuccess && both == 0, "r=0x%08x both=%d", (unsigned int)r, both);
+    r = IOConnectMethodScalarIScalarO(d, 20, 2, 1, 0, 0x7fffffff, &both);
+    check("DVD check_stamps(0,0x7fffffff) -> not done (second stamp never submitted)", r == TEST_kIOReturnSuccess && both == 0, "r=0x%08x both=%d", (unsigned int)r, both);
+    IOServiceClose(d);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -347,4 +363,5 @@ void run_deep_t2_tests(io_service_t service) {
     gl_swap_params_bound(service);
     twod_bind_round_trip(service);
     gl_wait_finish(service);
+    dvd_check_stamps_values(service);
 }

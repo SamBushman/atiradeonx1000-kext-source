@@ -63,6 +63,7 @@ def calls(rows):
         elif op in ('bl', 'bla'):
             t = rest.split()[0] if rest else ''
             name = a2s.get(int(t, 16), t) if t.startswith('0x') else t.lstrip('_')
+        elif op == 'bctrl': name = '<vtable>'
         if name:
             o = origins(rows, k, al)
             if o: out[(name, o)] += 1
