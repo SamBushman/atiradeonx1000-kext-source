@@ -188,3 +188,23 @@ DVD 11	tier	T2 CONFIRMED (live, test_deep_t2.c dvd_bound_setters): unbound -> Er
 DVD 17	tier	T2 CONFIRMED (live): unbound -> Error; bound enable_deint(1) then (0) -> 0 (stores the surface's deinterlace mode only).
 DVD 21	tier	T2 CONFIRMED (live): unbound -> NotReady 0xe00002d8 (no surface and hardware-down share the code); bound (0,0,16,16,0) -> 0; writes surface+0x94..0x9a, +0xbed/+0xbee and ctx+0x88 only.
 DVD 20	tier	T1 CONFIRMED for (5,5), (0x7fffffff,0), (0,0x7fffffff): call succeeds, both=0 on an idle stock kernel (checkForTimeStamp 0x1e090: done iff stamp <= counter); asserted only as a 0/1 result for (5,5).
+2D 7	tier	T2 CONFIRMED (live, test_deep_t2.c twod_finish_modes): finish(3) -> BadArgument; finish(0) -> 0; finish(1), finish(2) -> 0 on an idle stock kernel (bounded waits on accelerator+0x50-1; Timeout 0xe00002d6 would also be legal).
+GL 7	tier	T3 (static trace, #103): GPU DMA copy into caller memory; moved out of T2.
+GL 10	tier	T3 (#104)
+GL 12	tier	T3 (#105)
+GL 13	tier	T3 (#106)
+GL 14	tier	T3 (#107)
+GL 16	tier	T3 (#108)
+GL 17	tier	T3 (#109)
+2D 3	tier	T3 (#110)
+2D 4	tier	T3 (#111)
+2D 5	tier	T3 (#101)
+2D 6	tier	T3 (#112; calls swap_surface after the unlock - moved out of T2)
+2D 10	tier	T3 (#113)
+2D 17	tier	T3 (#114)
+2D 18	tier	T3 (#115)
+DVD 4	tier	T3 (#102)
+Surface 5	tier	T3 (#116; GPU DMA into caller memory - moved out of T2)
+Surface 8	tier	T3 (#117)
+Surface 16	tier	T3 (#118; sel 16 and 18 are one body)
+Surface 18	tier	T3 (#118)

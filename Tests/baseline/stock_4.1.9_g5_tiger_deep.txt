@@ -126,5 +126,10 @@
 [OK] DVD set_surface(0) detaches r=0x00000000
 [OK] leak check: driver class instance counts identical before/after
 [OK] leak check: the ATI kext list is unchanged 1 vs 1
+-- 2D T2: finish modes --
+[OK] 2D finish(3) -> BadArgument (stock) r=0xe00002c2
+[OK] 2D finish(0) -> 0 (baseline) r=0x00000000
+[OK] 2D finish(1) -> success or Timeout (bounded wait on the accelerator's last stamp) r=0x00000000
+[OK] 2D finish(2) -> success or Timeout (bounded wait on the accelerator's last stamp) r=0x00000000
 
-113 calls made (112 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+117 calls made (116 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

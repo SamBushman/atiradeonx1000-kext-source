@@ -403,6 +403,26 @@ static void dvd_bound_setters(io_service_t service) {
     check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
 }
 
+/* T2 row 11 (issue #100): 2D finish modes. Traced (IOATIR5002DContext_finish_Port.cpp, shipped 0xbdc0): mode 0 waits on this context's own last stamp (+0x7c), mode 1 / mode 2
+ * wait on accelerator +0x50 - 1 through accelerator vtable +0x55c / +0x558 (the same bounded wait primitives the GL wait_for_stamp row uses: success, or Timeout 0xe00002d6),
+ * any other mode -> BadArgument before touching anything. The only state changed is the accelerator's wait statistics (+0x7a0/+0x7a4). The stamp state is not controlled here,
+ * so modes 1 and 2 accept success or Timeout; the invalid mode is asserted exactly. */
+static void twod_finish_modes(io_service_t service) {
+    io_connect_t c = IO_OBJECT_NULL; kern_return_t r; int m;
+    printf("-- 2D T2: finish modes --\n");
+    if (open_user_client(service, CLIENT_TYPE_2D, &c) != TEST_kIOReturnSuccess) { printf("[FAIL] 2D open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIStructureI(c, 7, 1, 0, 3, NULL);
+    check("2D finish(3) -> BadArgument (stock)", r == TEST_kIOReturnBadArgument, "r=0x%08x", (unsigned int)r);
+    r = IOConnectMethodScalarIStructureI(c, 7, 1, 0, 0, NULL);
+    check("2D finish(0) -> 0 (baseline)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    for (m = 1; m <= 2; m++) {
+        r = IOConnectMethodScalarIStructureI(c, 7, 1, 0, m, NULL);
+        check(m == 1 ? "2D finish(1) -> success or Timeout (bounded wait on the accelerator's last stamp)" : "2D finish(2) -> success or Timeout (bounded wait on the accelerator's last stamp)",
+              r == TEST_kIOReturnSuccess || r == 0xe00002d6, "r=0x%08x", (unsigned int)r);
+    }
+    IOServiceClose(c);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -414,4 +434,5 @@ void run_deep_t2_tests(io_service_t service) {
     gl_wait_finish(service);
     dvd_check_stamps_values(service);
     dvd_bound_setters(service);
+    twod_finish_modes(service);
 }
