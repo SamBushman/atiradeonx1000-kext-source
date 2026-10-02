@@ -354,6 +354,55 @@ static void dvd_check_stamps_values(io_service_t service) {
     IOServiceClose(d);
 }
 
+/* T2 row 10 (issue #100): DVD bound-surface setters. Traced (Sources/ATIR500DVDContext_dvd_setup_overlay/enable_deint/setup_buffers_Port.cpp, shipped 0x34d50/0x34c90/0x34260):
+ * all three only write fields of the bound surface (+0x94..+0x9a overlay geometry, +0xbed/+0xbee dirty flags, +0xda4, the deinterlace mode) and the context's own +0x88;
+ * no hardware access, no allocation. Unbound -> Error (setup_buffers -> NotReady, it has no unbound check of its own: 0xe00002d8 when +0xf8 == NULL). The overlay-enable
+ * value (param 5) is kept 0: that path only sets the two dirty flags. State is private to the registered surface and dies with the connections. */
+static void dvd_bound_setters(io_service_t service) {
+    int before[NCLS], after[NCLS], i, same = 1, k0, k1; io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r;
+    unsigned char region[20];
+    printf("-- DVD T2: setup_overlay / enable_deint / setup_buffers on a bound surface --\n");
+    class_counts(before); k0 = kext_count();
+    if (open_user_client(service, CLIENT_TYPE_SURFACE, &s) != TEST_kIOReturnSuccess) { printf("[FAIL] Surface open\n"); g_testsUnexpected++; return; }
+    r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x0);
+    if (r == TEST_kIOReturnSuccess) r = IOConnectMethodScalarIScalarO(s, 7, 2, 0, 1, 0x20);
+    if (r == TEST_kIOReturnSuccess) {
+        memset(region, 0, sizeof region);
+        *(UInt32 *)(region + 0) = 1; *(SInt16 *)(region + 8) = 4; *(SInt16 *)(region + 10) = 4; *(SInt16 *)(region + 16) = 4; *(SInt16 *)(region + 18) = 4;
+        r = IOConnectMethodScalarIStructureI(s, 9, 2, sizeof region, 0, 1, region);
+    }
+    check("Surface preconditions (set_id_mode x2, set_shape)", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+    if (r == TEST_kIOReturnSuccess && open_user_client(service, CLIENT_TYPE_DVD, &d) == TEST_kIOReturnSuccess) {
+        r = IOConnectMethodScalarIScalarO(d, 11, 5, 0, 0, 0, 0, 0, 0);
+        check("DVD dvd_setup_overlay unbound -> Error (stock: 0xe00002bc)", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        r = IOConnectMethodScalarIScalarO(d, 17, 1, 0, 0);
+        check("DVD dvd_enable_deint unbound -> Error", r == TEST_kIOReturnError, "r=0x%08x", (unsigned int)r);
+        r = IOConnectMethodScalarIScalarO(d, 21, 5, 0, 0, 0, 0, 0, 0);
+        check("DVD setup_buffers unbound -> NotReady (0xe00002d8: no surface = same code as hardware-down)", r == (kern_return_t)0xe00002d8, "r=0x%08x", (unsigned int)r);
+        r = IOConnectMethodScalarIStructureI(d, 0, 3, 0, 1, 0, 0, NULL);
+        check("DVD set_surface(1,0,0) binds", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+        if (r == TEST_kIOReturnSuccess) {
+            r = IOConnectMethodScalarIScalarO(d, 11, 5, 0, 0, 0, 16, 16, 0, 0);
+            check("DVD dvd_setup_overlay(0,0,16,16, enable 0) bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 17, 1, 0, 1);
+            check("DVD dvd_enable_deint(1) bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 17, 1, 0, 0);
+            check("DVD dvd_enable_deint(0) bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIScalarO(d, 21, 5, 0, 0, 0, 16, 16, 0);
+            check("DVD setup_buffers(0,0,16,16,0) bound -> success", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+            r = IOConnectMethodScalarIStructureI(d, 0, 3, 0, 0, 0, 0, NULL);
+            check("DVD set_surface(0) detaches", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
+        }
+        IOServiceClose(d);
+    } else if (r == TEST_kIOReturnSuccess) { printf("[FAIL] DVD open\n"); g_testsUnexpected++; }
+    IOServiceClose(s);
+    usleep(300000);
+    class_counts(after); k1 = kext_count();
+    for (i = 0; i < NCLS; i++) if (before[i] != after[i]) same = 0;
+    check("leak check: driver class instance counts identical before/after", same, NULL);
+    check("leak check: the ATI kext list is unchanged", k0 == k1, "%d vs %d", k0, k1);
+}
+
 void run_deep_t2_tests(io_service_t service) {
     lock_round_trip(service);
     gl_bind_round_trip(service);
@@ -364,4 +413,5 @@ void run_deep_t2_tests(io_service_t service) {
     twod_bind_round_trip(service);
     gl_wait_finish(service);
     dvd_check_stamps_values(service);
+    dvd_bound_setters(service);
 }

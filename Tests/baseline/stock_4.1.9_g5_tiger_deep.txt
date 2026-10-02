@@ -109,5 +109,22 @@
 [OK] GL wait_for_stamp(5) -> 0 (a stamp the GPU has already passed) r=0x00000000
 [OK] GL wait_for_stamp(0x7fffffff) -> Timeout 0xe00002d6 (a stamp that was never submitted; bounded wait) r=0xe00002d6
 [OK] GL finish -> 0 r=0x00000000
+-- DVD T2: check_stamps with real values --
+[OK] DVD check_stamps(5,5) call succeeds and writes a 0/1 result r=0x00000000 both=0 (recorded: 0 on stock)
+[OK] DVD check_stamps(0x7fffffff,0) -> not done (first stamp never submitted) r=0x00000000 both=0
+[OK] DVD check_stamps(0,0x7fffffff) -> not done (second stamp never submitted) r=0x00000000 both=0
+-- DVD T2: setup_overlay / enable_deint / setup_buffers on a bound surface --
+[OK] Surface preconditions (set_id_mode x2, set_shape) r=0x00000000
+[OK] DVD dvd_setup_overlay unbound -> Error (stock: 0xe00002bc) r=0xe00002bc
+[OK] DVD dvd_enable_deint unbound -> Error r=0xe00002bc
+[OK] DVD setup_buffers unbound -> NotReady (0xe00002d8: no surface = same code as hardware-down) r=0xe00002d8
+[OK] DVD set_surface(1,0,0) binds r=0x00000000
+[OK] DVD dvd_setup_overlay(0,0,16,16, enable 0) bound -> success r=0x00000000
+[OK] DVD dvd_enable_deint(1) bound -> success r=0x00000000
+[OK] DVD dvd_enable_deint(0) bound -> success r=0x00000000
+[OK] DVD setup_buffers(0,0,16,16,0) bound -> success r=0x00000000
+[OK] DVD set_surface(0) detaches r=0x00000000
+[OK] leak check: driver class instance counts identical before/after
+[OK] leak check: the ATI kext list is unchanged 1 vs 1
 
-98 calls made (97 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+113 calls made (112 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
