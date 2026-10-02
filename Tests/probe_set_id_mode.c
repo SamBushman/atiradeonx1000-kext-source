@@ -39,6 +39,7 @@
 int g_testsRun = 0;
 int g_testsUnexpected = 0;
 int g_testsSkipped = 0;
+int g_testsRecorded = 0;
 
 static UInt32 kinds[] = {0x0, 0x3, 0x4, 0xb, 0xc, 0xd};
 

@@ -9,7 +9,7 @@ mkdir -p "$O" || exit 1
 { echo "date: `date`"; echo "uptime: `uptime`"; echo "kext: `kextstat 2>/dev/null | grep ' com.apple.ATIRadeonX1000 '`"; echo "uname: `uname -a`"
   echo "hw.cpufrequency: `sysctl -n hw.cpufrequency 2>/dev/null`  hw.ncpu: `sysctl -n hw.ncpu 2>/dev/null`  hw.memsize: `sysctl -n hw.memsize 2>/dev/null`"
   echo "displays:"; system_profiler SPDisplaysDataType 2>/dev/null | egrep -i "Chipset|VRAM|Resolution|Main Display|Mirror|Online"
-  echo "busy processes (cpu >= 5%):"; ps auxww | awk '$3 >= 5.0 {print}' | cut -c1-120; } > "$O/env.txt" 2>&1
+  echo "fingerprint:"; sh ./machine_fingerprint.sh 2>&1; echo "busy processes (cpu >= 5%):"; ps auxww | awk '$3 >= 5.0 {print}' | cut -c1-120; } > "$O/env.txt" 2>&1
 k=1
 while [ $k -le $R ]; do
   ./perf_methods $C 200 > "$O/run${k}_methods.txt" 2>&1 || echo "perf_methods run $k failed" >> "$O/env.txt"
