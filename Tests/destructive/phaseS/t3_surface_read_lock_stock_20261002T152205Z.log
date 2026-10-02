@@ -1,0 +1,16 @@
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE start: method=t3_surface_read_lock phase=S kext=stock mirror=192.168.5.213:9999
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] ABOUT TO CALL open Surface connection
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) open Surface connection
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] ABOUT TO CALL Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface set_id_mode(0, 0x4) [harness baseline state A]
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE state A: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] ABOUT TO CALL Surface sel12 surface_read_lock (lockOptions 2) [PANIC PATH, #123]
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface sel12 surface_read_lock (lockOptions 2) [PANIC PATH, #123]
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE sel12 -> 0x00000000 data[0]=0x3018000 data[4]=0x1e00
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] ABOUT TO CALL Surface sel1 unlock
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface sel1 unlock
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE unlock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] ABOUT TO CALL Surface query_lock
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] RESULT -> 0x00000000 (kIOReturnSuccess) Surface query_lock
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE query_lock: got 0x00000000 want 0x00000000 -> MATCH
+2026-10-02T15:22:05Z [t3_surface_read_lock/stock/S] NOTE finish: outcome=PASS calls=5
