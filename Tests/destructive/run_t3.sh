@@ -13,9 +13,17 @@ python3 Tests/destructive/udp_listen.py $MIR &
 LP=$!
 ssh $H "cd '$D' && rm -rf results/$N; sh preflight.sh $N 2>&1 && screencapture -x /tmp/t3_$N.before.png; ./$N --phase S --kext stock --mirror $ME:9999 --i-understand-this-may-hang-the-machine 2>&1; echo TEST_EXIT=\$?; screencapture -x /tmp/t3_$N.after.png; sh postflight.sh $N 2>&1" > $OUT 2>&1 &
 SP=$!
-# wait up to 240 s for the ssh session to finish
-i=0; while kill -0 $SP 2>/dev/null && [ $i -lt 240 ]; do sleep 2; i=$((i+2)); done
-if kill -0 $SP 2>/dev/null; then echo "NO RESPONSE after 240 s: possible HANG. Last mirrored lines:"; tail -3 $MIR; kill $LP 2>/dev/null; exit 3; fi
+# wait for the ssh session to finish. Preflight/postflight are slow (volume verification, ioreg), so a long silence is NOT a hang: only declare HANG when the G5 itself stops
+# answering ssh for 5 consecutive minutes while the session is still open.
+i=0; down=0
+while kill -0 $SP 2>/dev/null; do
+    sleep 10; i=$((i+10))
+    if [ $((i % 60)) -eq 0 ]; then
+        if timeout 25 ssh -o ConnectTimeout=20 $H true >/dev/null 2>&1; then down=0; else down=$((down+60)); fi
+        [ $down -ge 300 ] && { echo "G5 UNRESPONSIVE for $down s with the test session open: possible HANG. Last mirrored lines:"; tail -3 $MIR; kill $LP 2>/dev/null; exit 3; }
+    fi
+    [ $i -ge 3600 ] && { echo "test session still open after 1 h"; kill $LP 2>/dev/null; exit 5; }
+done
 kill $LP 2>/dev/null
 cat $OUT | tail -30
 echo "--- mirror tail"; tail -5 $MIR
