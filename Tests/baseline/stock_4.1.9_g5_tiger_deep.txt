@@ -17,7 +17,7 @@
 [OK] 2D get_surface_info(panel 0) is repeatable
 [OK] 2D read_regs(sel 16) of CONFIG_MEMSIZE 0x00f8 + RBBM_STATUS 0x0e40 succeeds r=0x00000000
 [OK] 2D read_regs CONFIG_MEMSIZE == the VRAM size reported by get_config reg=0x10000000 vram=0x10000000
-[REC] 2D read_regs RBBM_STATUS(0x0e40) (bit 31 = GUI active; varies) = 0x10000140
+[OK] 2D read_regs RBBM_STATUS(0x0e40) is a live register read (neither 0 nor all ones: a dead or unmapped device reads 0xffffffff; bit 31 = GUI active, which varies, so the value itself is not pinned)
 [OK] 2D read_regs one register: CONFIG_MEMSIZE is repeatable 0x10000000 vs 0x10000000
 -- DVD T1 --
 [OK] DVD get_config(sel 1) == 2D get_config DVD={8454208,268435456}
@@ -154,4 +154,4 @@
 [OK] Surface set_scale with an 8-byte structure -> BadArgument (size must be 0 or 0x2c) r=0xe00002c2
 [OK] Surface set_shape_backing_length(param4=1, param5=0) -> Error 0xe00002bc (param5 < param4*dim, before the forward) r=0xe00002bc
 
-136 calls made (135 asserted, 1 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)

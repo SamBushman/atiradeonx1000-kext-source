@@ -6,7 +6,7 @@
  * no sleep on a normally active device) and is a call the #42 harness has already made live without incident - the only NEW kind of call is a real
  * register READ through ATIR5002DContext::read_regs / ATIR500DVDContext::read_regs (offset & 0x1ffc into the MMIO window, assembled byte by byte,
  * nothing written; the driver itself reads RBBM_STATUS 0x0e40 in dump_registers). Registers read: CONFIG_MEMSIZE 0x00f8 (the VRAM size - cross-checked
- * against the get_config output) and RBBM_STATUS 0x0e40 (recorded, bit 31 = GUI active, not asserted).
+ * against the get_config output) and RBBM_STATUS 0x0e40 (asserted only as a live read: not 0 and not 0xffffffff; bit 31 = GUI active varies).
  *
  * Assertions are INVARIANTS and values taken from the stock driver on the hardware (R580 X1900, 256 MB), not from the rebuild: a value that
  * legitimately varies is recorded ([REC]) instead.
@@ -88,7 +88,7 @@ static void twod_t1(io_service_t service) {
     r = read_regs(c, 16, offs, v1, 2);
     check("2D read_regs(sel 16) of CONFIG_MEMSIZE 0x00f8 + RBBM_STATUS 0x0e40 succeeds", r == TEST_kIOReturnSuccess, "r=0x%08x", (unsigned int)r);
     check("2D read_regs CONFIG_MEMSIZE == the VRAM size reported by get_config", (int)v1[0] == g_vram, "reg=0x%x vram=0x%x", (unsigned int)v1[0], (unsigned int)g_vram);
-    rec("2D read_regs RBBM_STATUS(0x0e40) (bit 31 = GUI active; varies)", "= 0x%08x", (unsigned int)v1[1]);
+    check("2D read_regs RBBM_STATUS(0x0e40) is a live register read (neither 0 nor all ones: a dead or unmapped device reads 0xffffffff; bit 31 = GUI active, which varies, so the value itself is not pinned)", v1[1] != 0 && v1[1] != 0xffffffffu, NULL);
     r = read_regs(c, 16, offs, v2, 1);
     check("2D read_regs one register: CONFIG_MEMSIZE is repeatable", r == TEST_kIOReturnSuccess && v2[0] == v1[0], "0x%x vs 0x%x", (unsigned int)v2[0], (unsigned int)v1[0]);
     IOServiceClose(c);
