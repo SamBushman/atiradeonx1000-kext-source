@@ -136,3 +136,16 @@ Direct test: rebooted the G5, ran the unmodified `t3_dvd_inject.c` (53-opcode li
 **Revised understanding:** the crash is not localized to the texture-bind family (0x19-0x2a) or any single opcode - it is a genuine race condition between this test's DVD flush activity and something in the accelerator/GPU's own post-boot settling (mode-setting, memory training, or similar), that manifests at different points run to run depending on timing. The SAME test, same fix, same opcode list: passes completely clean after the system has been up for a while (confirmed: 1h+ uptime run, PASS, 61 calls), and crashes somewhere in the first ~20 flushes when run within the first minute of boot, with the exact failure point varying.
 
 **Not yet established:** how much settling time is actually needed (next experiment: reboot, wait a measured interval e.g. 60-90s, then run - bisect from there).
+
+## Ring warm-up experiment: NEGATIVE result - not a call-count race, likely a real elapsed-time hardware condition
+
+Tested whether 3 throwaway DVD-connection open/close cycles (each re-running `start_xdct_engine`, issue #127) before the real connection would let the IDCT ring genuinely settle even though its own readiness poll can't be trusted. Run on a freshly-rebooted G5 (3 min uptime): **crashed again, at the exact same opcode (0x1d) as the very first crash**, despite the warm-up. This argues against "needs more attempts" and toward a race bounded by real elapsed time (PLL lock, memory training, or similar), not by how many times software pokes at the hardware.
+
+Cross-referencing all data points so far:
+- 34 s uptime: crashed (at 0x1d, run 1; at 0x07, run 2).
+- 3 min uptime, with warm-up: crashed (at 0x1d).
+- 11 min uptime: crashed (at 0x1d) - same full 53-opcode test.
+- 11 min uptime, isolated bisection probe (exact same 18-opcode prefix, no warm-up): passed clean.
+- 1 h+ uptime: passed clean (all 53 opcodes).
+
+The 11-minute split result (probe passed, full inject crashed, same opcode sequence) is the strongest evidence yet that this is **probabilistic hardware timing, not a deterministic settling threshold** - two runs at the same uptime with ostensibly the same sequence gave different outcomes. The bug in #127 (unconditional ready-report) means the driver itself has no reliable way to know when it's actually safe, so from a client's perspective this hazard cannot be fully eliminated by waiting a fixed amount of time, warming up the connection, or any other software-side workaround available to this project - it is an inherent property of the real hardware/vendor driver combination under investigation.
