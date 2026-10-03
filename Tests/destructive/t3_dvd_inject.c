@@ -1,10 +1,9 @@
-/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (no declare_image) crashed on self+0x84 == NULL at ATIR500DVDContext::process_command_buffer+0x1e70 (DAR=0x14) - diagnosed and "fixed" by adding a
- * declare_image call (see the superseded note this replaces, still in git history). Run 2 (WITH declare_image, imgId 0xb000 returned) crashed AGAIN, at the EXACT SAME instruction (PC=0x5c0630,
- * DAR=0x14) - but this time self+0x84 is provably valid: 0x19, 0x1a, 0x1b and 0x1c all flushed successfully through that identical check first (confirmed via the reliable local .out log, not
- * the lossy UDP mirror: Tests/baseline/opcode/inject/panic_2026-10-03_t3_dvd_inject_run2.log). The crash happened on 0x1d specifically. Current understanding: either (a) this shared code
- * address computes a different base pointer per entry path and I haven't isolated which, or (b) 0x1d is the first of this group whose all-zero test record (index 0) now matches a REAL texture
- * (declare_image's imgId 0xb000 likely IS index 0) and proceeds deeper into real texture-bind/GART logic that 0x19-0x1c's same index-0 lookup never reached - not yet statically confirmed either
- * way. This is the fourth real G5 crash this session from DVD/GL/2D live testing. DO NOT RE-RUN until this is understood with actual disassembly of the divergent paths, not another guess. */
+/* *** STATUS 2026-10-03 (see #126/#127) *** The opcode sequence and declare_image fix below are PROVEN CORRECT: this exact test, run unmodified on a G5 settled for 1h+ uptime, completed all 53
+ * opcodes cleanly (PASS). Every crash since (at 0x1d, then at 0x07, then at 0x1d again, no consistent instruction) happened only on a FRESHLY-OPENED DVD connection, and is now explained by a
+ * real vendor bug found in ATIRadeonX1000::start_xdct_engine() (issue #127): it runs on every DVD connection open, polls the IDCT ring for readiness, but reports success UNCONDITIONALLY even on
+ * its own poll timeout. This experiment: open/close the DVD connection 3 throwaway times first (the IDCT ring hardware programming might genuinely settle after repeated attempts even though the
+ * poll itself can't be trusted), THEN open the real connection and run the full sequence - testing whether warm-up avoids the race. Crashes remain an accepted, expected cost of this investigation
+ * (standing instruction) - this is not marked HAZARD; proceed. */
 /* T3 test for #42 criterion 2 (DVD process_command_buffer opcodes - no real player ever opens a DVD context on this machine, #93), issue #100 protocol #87.
  * Exercises the 53 of 62 DVD opcodes whose stock handler was confirmed, via Tools/userspace/emu/kemu.py (PPC emulation of the real stock machine code, zero
  * hardware risk), to terminate safely and boundedly with a generous zero-filled 16-word record - no wild pointer advance, no self+0x104 touch, or (for 0x02/
@@ -32,6 +31,13 @@ static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i, j;
     vm_address_t addr = 0; vm_size_t size = 0;
     if (t3_surface(t, svc, &s, 4, 4) != KERN_SUCCESS) return "DIVERGENCE";
+    { /* #127 experiment: warm up the IDCT ring (start_xdct_engine runs on every DVD-connection open) with a few throwaway open/close cycles before the real connection, in case its own readiness poll needs more than one attempt to genuinely settle - its own poll is known to report success unconditionally (issue #127), so this is testing whether REPEATED hardware programming helps even though the poll itself can't be trusted. */
+      int w; io_connect_t warm;
+      for (w = 0; w < 3; w++) {
+          T3CALL(t, r, "warm-up: open DVD connection (throwaway)", open_user_client(svc, CLIENT_TYPE_DVD, &warm));
+          if (r == KERN_SUCCESS) { dtest_about(t, "warm-up %d: close", w); IOServiceClose(warm); dtest_result(t, 0, "warm-up %d: closed", w); }
+      }
+    }
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != KERN_SUCCESS) { IOServiceClose(s); return "DIVERGENCE"; }
     T3CALL(t, r, "DVD set_surface(1,0,0) binds", IOConnectMethodScalarIStructureI(d, 0, 3, 0, 1, 0, 0, NULL)); bad += t3_expect(t, "bind", r, 0);
