@@ -145,16 +145,41 @@ static kern_return_t my_close(io_connect_t c) {
     pthread_mutex_lock(&g_mu); k = find(c); if (k) { if (k->type) summary("CLOSE", k); k->used = 0; } pthread_mutex_unlock(&g_mu);
     return real_close(c);
 }
+
+/* INJECTION (issue #42, opcodes no real consumer emits): OPCODE_INJECT_WORDS="0x2b000001,..." are spliced in at the START of the stream (+g_start) of the Nth GL flush (OPCODE_INJECT_FLUSH, default 3),
+ * the existing stream shifted up by the same number of words, so the real driver's context/surface/register state around it stays valid. Done once per process. The tail is moved up to 256 words past
+ * the first n==0 header; if that does not fit in the buffer the injection is skipped and logged. */
+static unsigned g_inj_words[64]; static int g_inj_n = -1, g_inj_done; static unsigned char *g_inj_base; static unsigned long g_inj_flush = 3;
+static void inject_init(void) {
+    const char *e = getenv("OPCODE_INJECT_WORDS"); char *q;
+    if (g_inj_n >= 0) return; g_inj_n = 0;
+    if (!e) return;
+    while (*e && g_inj_n < 64) { g_inj_words[g_inj_n++] = (unsigned)strtoul(e, &q, 0); if (q == e) { g_inj_n--; break; } e = q; while (*e == ',' || *e == ' ') e++; }
+    if (getenv("OPCODE_INJECT_FLUSH")) g_inj_flush = strtoul(getenv("OPCODE_INJECT_FLUSH"), NULL, 0);
+}
+static void inject_into(conn_t *c) {
+    unsigned char *base = (unsigned char *)c->cur_addr; unsigned long off = g_start, end, k = (unsigned long)g_inj_n * 4; unsigned long size = c->cur_size, i;
+    for (;;) { unsigned w; if (off + 4 > size) { fprintf(g_log, "INJECT\tskipped: no terminator\n"); return; } w = *(unsigned *)(base + off); if ((w & 0xffffff) == 0) break; off += (unsigned long)(w & 0xffffff) * 4; }
+    end = off + 4 + 256 * 4; if (end > size) end = size;
+    if (end + k > size) { fprintf(g_log, "INJECT\tskipped: buffer too full (end=+0x%lx k=0x%lx size=0x%lx)\n", end, k, size); return; }
+    memmove(base + g_start + k, base + g_start, end - g_start);
+    for (i = 0; i < (unsigned long)g_inj_n; i++) *(unsigned *)(base + g_start + i * 4) = g_inj_words[i];
+    fprintf(g_log, "INJECT\tconn=0x%x\tflush=%lu\twords=%d first=0x%08x tail_header_was_at=+0x%lx\n", (unsigned)c->connect, c->flushes, g_inj_n, g_inj_words[0], off);
+    fflush(g_log); g_inj_done = 1; g_inj_base = base;
+}
 static kern_return_t my_map(io_connect_t c, uint32_t mt, task_port_t task, vm_address_t *at, vm_size_t *sz, IOOptionBits opt) {
     conn_t *k; kern_return_t r; ensure_log(); if (!real_map) real_map = resolve_real("IOConnectMapMemory");
     pthread_mutex_lock(&g_mu); k = find(c);
     if (k && k->type && mt == k->flush_type) {
         k->flushes++; g_tot_flush[k->type & 3]++;
+        inject_init();
+        if (k->have_cur && !g_inj_done && g_inj_n > 0 && (k->type & 3) == 1 && k->flushes == g_inj_flush) inject_into(k);
         if (k->have_cur) scan(k, k->cur_addr, k->cur_size);          /* the buffer being submitted: the one the previous flush-map returned */
         if ((g_tot_flush[k->type & 3] & 15) == 0) emit_totals();      /* snapshot every 16 flushes */
     }
     pthread_mutex_unlock(&g_mu);
     r = real_map(c, mt, task, at, sz, opt);                           /* forwarded unchanged */
+    if (g_inj_base) { int i; fprintf(g_log, "INJECT-POST\tflush returned %d; first words after the kernel processed the buffer:", (int)r); for (i = 0; i < g_inj_n && i < 8; i++) fprintf(g_log, " %08x->%08x", g_inj_words[i], *(unsigned *)(g_inj_base + g_start + i * 4)); fprintf(g_log, "\n"); fflush(g_log); g_inj_base = NULL; }
     if (g_post_pending) {                                              /* the kernel has processed (and rewritten in place) the buffer that gave an anomaly: show where */
         vm_size_t got2 = 0; unsigned long i, first = (unsigned long)-1, last = 0, nchg = 0; unsigned long lo = g_post_off > 0x40 ? g_post_off - 0x40 : 0;
         if (g_post_size > g_bufsz) { free(g_buf); g_bufsz = g_post_size; g_buf = malloc(g_bufsz); }

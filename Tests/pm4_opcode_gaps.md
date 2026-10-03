@@ -59,3 +59,24 @@ operations, copy-pixels, CGL context parameters, VBOs, big draws), the windowed 
 
 `Tools/userspace/gdb_emitter_trace.py` builds a gdb-696 script that sets raw-address breakpoints on stock GLDriver functions (runtime address = 0x1008000 + the function's address) and prints a backtrace on each hit, so the GL call behind a driver
 function can be read off the stack (`glClear_Exec`, `glBegin_Exec`, `glDrawPixels_Exec`, ...); `Tools/userspace/gdb_trace_runner.sh` runs the generated scripts on the G5.
+
+## Injection results (2026-10-03): 8 of the 9 unseen opcodes now exercised on the stock kernel
+
+No real workload emits these, so `Tools/userspace/opcode_recorder.c` gained an injection mode (`OPCODE_INJECT_WORDS`, `OPCODE_INJECT_FLUSH`; runner `Tools/userspace/run_inject.sh`): hand-built, well-formed records are spliced
+at the start of the stream of one flush of a stock `glcov clear` client, the real stream shifted up behind them, so context/surface/register state is the real one. `INJECT-POST` logs the injected words after the kernel processed
+the buffer. Records whose output would be a PM4 packet (0x2c, 0x2a, 0x46, 0x38, 0x3d) are followed by a **discard guard**: a 0x43 record with an out-of-range texture id, whose handler zeroes the pending word count and ends the loop,
+so the kernel runs the handler (rewriting the record in place) but submits 0 words to the GPU. Logs: `Tests/baseline/opcode/inject/`. Every run: flush returned 0, process exit 0, no crashdump, panic.log unchanged.
+
+| opcode | injected | kernel's rewrite (observed) | matches handler |
+|---|---|---|---|
+| 0x2b | `2b000001` | `80000000` (nothing pending, so no submit) | yes |
+| 0x27 | `27000001` | `80000000` (context+0x328 is zero, so no-op) | yes |
+| 0x43 | `43000004 0 ffff 0` (invalid texture id) | `c0021000` (PM4 NOP), loop ends with 0 words | yes |
+| 0x3d | `3d000002 1` (selector != 0x132) | `80000000 80000000` | yes |
+| 0x38 | `38000004 0 0 0` (count 0) | `80000000` x4 | yes |
+| 0x2c | `2c000003 00010001 00ff00ff` | word 0 -> `c8002020`, bounds words unchanged | yes (a type-3 packet header: this is why it is discard-guarded) |
+| 0x46 | `46000010 8 ...` | `000013c8` (register write), `00888000`, `00d00200`, `001fe1ff`, ... | yes |
+| 0x2a | `2a000020 1 ...` | `c8002020 c8002020 02000200 ...` | yes |
+| 0x36 | not run | | its handler dereferences `puVar65[1]` as a kernel `VendorTransferBuffer *` taken straight from the client-writable command buffer (`+0x48`, `+0xe`, `+4`, `+0x5c` read/written through it): injecting it needs a real kernel pointer, so it is not exercised. Note for the project: this is a client-controlled kernel pointer (0x36 and 0x44 do it), only reachable because the user client lets the client write the stream. |
+
+Still unexercised after this: 0x36 (above), the valid-texture branch of 0x43 (needs a real kernel texture id), the 0x132 selector of 0x3d (`set_volatile_state`), and every 2D / DVD dispatcher opcode.

@@ -30,6 +30,8 @@ leaves the last record's length field at 0 until the next record is appended); t
 
 **2D/DVD attempt (2026-10-03).** The recorder now also logs every `OPEN type=N` and seeds the first 2D (memory type 1) / DVD (type 2) buffer. An SSH-launched Cocoa GL window opens only GL connections (type 1), so the Quartz 2D context is opened only by WindowServer or by apps launched at the console (the earlier QuickTime capture opened one type-2 connection); an SSH run cannot produce 2D or DVD flushes. **These need a person at the console** (run QuickTime/DVD Player under the recorder via the `play_with_recorder_*.command` scripts with `OPCODE_LOG` set).
 
+**Injection (2026-10-03):** the 9 GL opcodes no workload emits were attacked by splicing hand-built records into a stock client's buffer (`run_inject.sh`); 8 exercised, results in `Tests/pm4_opcode_gaps.md`.
+
 **Limits.** (1) Only buffers submitted through the flush-map are counted; if the kernel also processes a pending buffer inside another call (a swap/read selector), those words are not seen. (2) **2D and DVD: no flushes were recorded by these workloads**: the 2D context is
 used by WindowServer (a system process the recorder cannot be safely injected into without changing the login setup), and no Apple player on this machine opens a DVD context; see the GA/VA plugin drivers below. (3) Record lengths of the last record in a buffer are unknown (only its opcode is counted).
 (4) A SIGTERM-killed run keeps its tally through the periodic TOTAL snapshots (every 16 flushes), losing at most 15 flushes. (5) Hazardous modes (random state stress, window exact-0/1 clears) stalled or wedged the stock GL stack and are not part of any default run (see `Tests/pm4_opcode_gaps.md`).
