@@ -40,7 +40,7 @@ STUB = 0x10                                 # every sub-0x1000 / out-of-image ca
 DISPATCH = {
     'gl':  ('__ZN16ATIR500GLContext22process_command_bufferEP23VendorCommandDescriptor', dict(bufoff=0xe0, accoff=0x290, accoff2=0x200)),
     '2d':  ('__ZN16ATIR5002DContext22process_command_bufferEP23VendorCommandDescriptor', dict(bufoff=0xac, accoff=0x94, accoff2=0x94)),
-    'dvd': ('__ZN17ATIR500DVDContext22process_command_bufferEP23VendorCommandDescriptor', dict(bufoff=0xe8, accoff=0x94, accoff2=0x94)),
+    'dvd': ('__ZN17ATIR500DVDContext22process_command_bufferEP23VendorCommandDescriptor', dict(bufoff=0xa4, accoff=0x8c, accoff2=0xf8)),  # 0xa4 buffer (verified: puVar40 = M<SInt32>(self+0xa4)+0x1c), 0x8c accelerator, 0xf8 bound surface (both read-only stand-ins here)
 }
 
 
@@ -146,9 +146,11 @@ def main():
     # at all and silently fell into the texture-slot fast path instead - caught by cross-checking against the real compare-site address
     # from Tools/opcode_inventory.py's analyser, not by a crash (see pm4_opcode_gaps.md, 0x36 session).
     self_bytes = bytearray(SELF_SIZE)
-    if ctx == '2d':
-        struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar18 = M<SInt32>(self+0xac) + 0x1c  -> BUF + 0x1c
-        struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)               # self+0x94: accelerator ptr (texture/surface table lookups)
+    if ctx in ('2d', 'dvd'):
+        struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar18/40 = M<SInt32>(self+0xac/0xa4) + 0x1c -> BUF + 0x1c
+        struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)               # accelerator ptr (self+0x94 for 2D, self+0x8c for DVD)
+        if ctx == 'dvd':
+            struct.pack_into('>I', self_bytes, off['accoff2'], ACCEL)          # self+0xf8: DVD's bound-surface pointer (zeroed stand-in - every surface-field read comes back 0)
     else:
         struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar65 = (UInt32*)(M<SInt32>(self+0xe0) + 0x1c) -> BUF + 0x1c
         struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)
