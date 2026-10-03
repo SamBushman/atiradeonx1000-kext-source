@@ -1,8 +1,9 @@
-/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (2026-10-03, ~16:50 local) crashed the G5 (user confirmed, rebooting). No write-ahead log output was captured before the session died - unknown which
- * opcode, or whether it got past set_surface/the initial map at all. The emulator sweep this file's header describes was a real, substantive filter (it caught the three "wild advance" opcodes
- * and the whole self+0x104 hazard class) but is NOT a hardware-accurate guarantee - see kemu.py's own documented blind spot (auto-zero-fills unmapped reads, which can mask a real null-deref
- * panic the exact way #124/#125 were masked before their live crashes). DO NOT RE-RUN until the real panic.log is read and symbolicated; do not assume the emulator-clean set is actually safe
- * a second time without that evidence. */
+/* *** FIXED 2026-10-03, see issue #126 *** Run 1 crashed the G5: null self+0x84 (IOATIR500Shared*, DVD's shared allocator) dereferenced unconditionally by every opcode in the 0x19-0x2a
+ * texture-bind family's bounds check - same class as #124/V12, just a wider family than first scoped. Root cause confirmed via panic.log: PC inside process_command_buffer itself
+ * (ATIR500DVDContext::process_command_buffer+0x1e70), DAR=0x14, `lwz r2,0x14(r11)` with r11 = self+0x84 = NULL. Fix: call declare_image (sel 8) once after binding, before any opcode in that
+ * family - it lazily creates self+0x84 when null (IOATIR500DVDContext_declare_image_Port.cpp:40-47), exactly like #124's 2D fix. Tools/userspace/emu/kemu.py's DVD setup was also fixed to
+ * populate self+0x84 (it previously masked this exact null, the same blind spot as #125) and the full 62-opcode sweep re-verified against the corrected harness: the 53-opcode list below is
+ * unchanged by the fix (it was already the right list; the MISSING step was establishing self+0x84 live, not the opcode selection). */
 /* T3 test for #42 criterion 2 (DVD process_command_buffer opcodes - no real player ever opens a DVD context on this machine, #93), issue #100 protocol #87.
  * Exercises the 53 of 62 DVD opcodes whose stock handler was confirmed, via Tools/userspace/emu/kemu.py (PPC emulation of the real stock machine code, zero
  * hardware risk), to terminate safely and boundedly with a generous zero-filled 16-word record - no wild pointer advance, no self+0x104 touch, or (for 0x02/
@@ -34,6 +35,13 @@ static const char *body(dtest_t *t, io_service_t svc) {
     if (r != KERN_SUCCESS) { IOServiceClose(s); return "DIVERGENCE"; }
     T3CALL(t, r, "DVD set_surface(1,0,0) binds", IOConnectMethodScalarIStructureI(d, 0, 3, 0, 1, 0, 0, NULL)); bad += t3_expect(t, "bind", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+    /* #126 fix: establish self+0x84 (shared allocator) BEFORE any opcode in the 0x19-0x2a texture-bind family. declare_image (sel 8): 3 scalar in (unused, width, height), 1 scalar out (image id). */
+    { unsigned imgId = 0xffffffff;
+      T3CALL(t, r, "DVD declare_image(4,4) - lazily creates the shared allocator (self+0x84)", IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, 4, 4, &imgId));
+      bad += t3_expect(t, "declare_image", r, 0);
+      dtest_note(t, "declare_image -> r=0x%08x imgId=0x%x", (unsigned)r, imgId);
+      if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+    }
     T3CALL(t, r, "map the initial/flush command buffer (DVD memType 1)", IOConnectMapMemory(d, 1, mach_task_self(), &addr, &size, kIOMapAnywhere));
     bad += t3_expect(t, "map buffer", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
