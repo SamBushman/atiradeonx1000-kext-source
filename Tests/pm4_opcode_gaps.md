@@ -6,7 +6,7 @@ literal-store search cannot find headers built at run time, so "no emitter found
 
 | opcode | kernel meaning (source) | userspace emitter | status |
 |---|---|---|---|
-| 0x02 | sets the dispatcher's return value to 1 (GAPS.md section 3: DVD sets 3) | none found (only flag constants `0x2000000` in other structures) | no known trigger |
+| 0x02 | sets the dispatcher's return value to 1 (GAPS.md: the DVD dispatcher sets 3 for its own opcode 0x02) | none found (only flag constants `0x2000000` in other structures) | no known trigger |
 | 0x03 | not characterised | none found (only flag constants) | no known trigger |
 | 0x27 | handler at dispatcher line 1015, not characterised | none found | no known trigger |
 | 0x2a | maps a mode value (1->0, 2->4, 3->5, 4->6, 7->2, default 1) to a hardware value | `FUN_00020b30` (part_003.c:4831; PM4 `0xc0089b00` + rectangle parameters) | emitter exists; trigger not found (draw/read buffer selection, copy and resolve operations tried) |
@@ -24,8 +24,8 @@ literal-store search cannot find headers built at run time, so "no emitter found
 
 What was run to look for them (all logs in `Tests/baseline/opcode/`): per-feature pbuffer programs (multiple texture units, texture formats/targets, FBO, queries/fences, clears, fixed-function state, draw methods, shaders and ARB
 programs, pixel operations, VBOs, big draws), the windowed program with 0/2/4/6-sample multisample, depth/stencil variants and clear/hz/resolve modes, and two real applications (the Godot game and editor).
-The 12 opcodes found by these were mostly the texture-bind family (units 2-14 need 16-unit multitexturing, 0x08-0x14), 0x05 (per frame in windows and with 16-unit fragment programs), 0x04 and 0x30 (multisample windows), 0x32 (window
-copy/readback), 0x26 (big draws), 0x09/0x0d and others.
+The 24 opcodes added on top of the first 27 (Godot + five small probes) were mostly the texture-bind family (units 2-14 need 16-unit multitexturing: 0x08-0x14), 0x05 (once per frame in windows and with 16-unit fragment programs),
+0x04 and 0x30 (multisample windows), 0x32 (window copy/readback), 0x26 (big draws), and a few state/format records.
 
 ## Hazards found while doing this (stock driver, G5, 2026-10-03)
 
