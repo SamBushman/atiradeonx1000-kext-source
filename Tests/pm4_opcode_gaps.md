@@ -80,3 +80,10 @@ so the kernel runs the handler (rewriting the record in place) but submits 0 wor
 | 0x36 | not run | | its handler dereferences `puVar65[1]` as a kernel `VendorTransferBuffer *` taken straight from the client-writable command buffer (`+0x48`, `+0xe`, `+4`, `+0x5c` read/written through it): injecting it needs a real kernel pointer, so it is not exercised. Note for the project: this is a client-controlled kernel pointer (0x36 and 0x44 do it), only reachable because the user client lets the client write the stream. |
 
 Still unexercised after this: 0x36 (above), the valid-texture branch of 0x43 (needs a real kernel texture id), the 0x132 selector of 0x3d (`set_volatile_state`), and every 2D / DVD dispatcher opcode.
+
+## 2D injection attempt (2026-10-03): HUNG the G5 - lesson
+
+`Tests/destructive/t3_2d_inject.c` opened a 2D client, wrote one record + a discard guard into the buffer from `IOConnectMapMemory(2D, memType 1)` and flushed with memType 0. The first record (0x05) read back **unchanged**
+(`05000000 07000002 0000dead`): the kernel had not rewritten it, so that buffer is not the one the dispatcher processed and the guard never ran. The second injection (0x06000008 + zeros) therefore reached the GPU raw and the
+G5 stopped answering ssh and ping (last mirrored line: `ABOUT TO CALL inject 0x06 (8 nops) then flush`). The GL injection above is not affected: there the spliced words are inside the stream of a flush the driver itself is submitting,
+and `INJECT-POST` proves the kernel rewrote them. For 2D/DVD the same method needs a real 2D/DVD client to splice into (console-launched QuickTime/DVD Player under the recorder) - not a hand-made client.

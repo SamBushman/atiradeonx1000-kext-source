@@ -1,3 +1,7 @@
+/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (2026-10-03 02:02 local) HUNG THE G5 (no ssh, no ping) on the SECOND injection. The first record (0x05) was read back UNCHANGED (05000000, not 80000000)
+ * and the guard word untouched: the buffer from memType 1 is NOT the buffer the dispatcher processed, so no guard ran and the next hand-built record (0x06000008 + zeros) reached the GPU raw. The
+ * discard-guard design only works on the buffer the kernel actually processes (proved for GL by INJECT-POST). Needs the real 2D buffer handoff worked out first (which memType the dispatcher's
+ * self+0xac mapping corresponds to), or injection under a real 2D client like the GL recorder does. */
 /* T3 test for #42 criterion 2 (2D process_command_buffer opcodes no real consumer emits on this machine), issue #100 protocol #87.
  * A 2D connection bound to a 4x4 surface (as t3_2d_swap) gets its command buffer from IOConnectMapMemory(2D, memType 1); this test writes ONE hand-built record at buffer+0x1c, the
  * discard guard behind it, and submits with the flush map (memType 0), then reads the first words back from the (still mapped) old buffer: the kernel rewrites every record in place,
