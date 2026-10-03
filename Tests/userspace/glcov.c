@@ -4,7 +4,7 @@
  * ordinary GL; nothing here fuzzes arguments. Respects the catalog: only `#version 110`-class GLSL, power-of-two sizes for GL_TEXTURE_2D (rectangle textures for NPOT), no extra
  * glBindBuffer tricks before draws.
  *
- * Usage: glcov FEATURE [FEATURE ...]      features: multitex texfmt fbo msaa query clear state draw shaders pixel vbo
+ * Usage: glcov FEATURE [FEATURE ...]      features: multitex texfmt fbo msaa query clear state draw shaders pixel vbo bigdraw stress (env GLSTRESS_ITERS, GLSTRESS_SEED)
  * Build on the G5:  gcc -arch ppc -std=gnu99 -w -o glcov glcov.c -framework OpenGL -framework ApplicationServices
  * Each feature ends with glFinish and prints "feature <name>: glGetError sum=<n>"; exit 0 unless the context could not be created.
  */
@@ -16,9 +16,12 @@
 #include <OpenGL/OpenGL.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
+#include <signal.h>
+#include <unistd.h>
 
 #define W 512
 #define H 512
+#include "glstress.h"
 static CGLContextObj g_ctx; static CGLPBufferObj g_pb; static int g_err;
 
 static int make_ctx(int msaa) {
@@ -260,6 +263,39 @@ static void f_pixel(void) {
     glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1); glEnable(GL_TEXTURE_2D); { GLuint t; glGenTextures(1, &t); glBindTexture(GL_TEXTURE_2D, t); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE); glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 64, 64, 0, GL_RGBA, GL_UNSIGNED_BYTE, buf); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); quad(0); glDeleteTextures(1, &t); }
     glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 0); glDisable(GL_TEXTURE_2D); errs("pixel store"); done("pixel");
 }
+
+static void f_bigdraw(void) {
+    int sizes[] = { 600, 3000, 20000, 100000 }, si, i, k; float *v, *c; unsigned short *ix; unsigned int *uix; GLuint b[4], dl; ortho();
+    for (si = 0; si < 4; si++) {
+        int n = sizes[si]; v = malloc(n * 3 * sizeof(float)); c = malloc(n * 4 * sizeof(float)); ix = malloc(n * sizeof(unsigned short)); uix = malloc(n * sizeof(unsigned int));
+        for (i = 0; i < n; i++) { v[i * 3] = -0.9f + 1.8f * ((i * 7) % 1000) / 1000.f; v[i * 3 + 1] = -0.9f + 1.8f * ((i * 13) % 1000) / 1000.f; v[i * 3 + 2] = 0; c[i * 4] = (i % 100) / 100.f; c[i * 4 + 1] = .5f; c[i * 4 + 2] = 1 - (i % 100) / 100.f; c[i * 4 + 3] = 1; ix[i] = (unsigned short)(n > 65535 ? i % 65535 : i); uix[i] = i; }
+        glEnableClientState(GL_VERTEX_ARRAY); glVertexPointer(3, GL_FLOAT, 0, v); glEnableClientState(GL_COLOR_ARRAY); glColorPointer(4, GL_FLOAT, 0, c);
+        glDrawArrays(GL_TRIANGLES, 0, n - n % 3); glDrawArrays(GL_TRIANGLE_STRIP, 0, n); glDrawArrays(GL_POINTS, 0, n); glDrawArrays(GL_LINES, 0, n & ~1); glDrawArrays(GL_QUADS, 0, n & ~3);
+        glDrawElements(GL_TRIANGLES, n - n % 3, GL_UNSIGNED_SHORT, ix); glDrawElements(GL_TRIANGLES, n - n % 3, GL_UNSIGNED_INT, uix); glDrawElements(GL_TRIANGLE_STRIP, n, GL_UNSIGNED_INT, uix);
+        glDrawRangeElementsEXT(GL_TRIANGLES, 0, n - 1, n - n % 3, GL_UNSIGNED_INT, uix); glLockArraysEXT(0, n); glDrawArrays(GL_TRIANGLES, 0, n - n % 3); glDrawArrays(GL_TRIANGLES, 0, n - n % 3); glUnlockArraysEXT();
+        { GLint first[2] = { 0, n / 2 - (n / 2) % 3 }; GLsizei cnt[2] = { n / 2 - (n / 2) % 3, n / 2 - (n / 2) % 3 }; glMultiDrawArraysEXT(GL_TRIANGLES, first, cnt, 2); }
+        glDisableClientState(GL_COLOR_ARRAY); errs("big client arrays");
+        /* buffer objects of every usage, array + element, plus buffer updates between draws */
+        glGenBuffersARB(3, b); { GLenum us[] = { GL_STATIC_DRAW_ARB, GL_DYNAMIC_DRAW_ARB, GL_STREAM_DRAW_ARB };
+          for (k = 0; k < 3; k++) { glBindBufferARB(GL_ARRAY_BUFFER_ARB, b[0]); glBufferDataARB(GL_ARRAY_BUFFER_ARB, n * 3 * sizeof(float), v, us[k]); glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, b[1]); glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, n * sizeof(unsigned int), uix, us[k]);
+            glVertexPointer(3, GL_FLOAT, 0, 0); glDrawArrays(GL_TRIANGLES, 0, n - n % 3); glDrawElements(GL_TRIANGLES, n - n % 3, GL_UNSIGNED_INT, 0); glDrawArrays(GL_POINTS, 0, n);
+            glBufferSubDataARB(GL_ARRAY_BUFFER_ARB, 0, n * 3 * sizeof(float) / 2, v); glDrawArrays(GL_TRIANGLES, 0, n - n % 3); { void *m = glMapBufferARB(GL_ARRAY_BUFFER_ARB, GL_READ_WRITE_ARB); if (m) glUnmapBufferARB(GL_ARRAY_BUFFER_ARB); } glDrawArrays(GL_TRIANGLE_STRIP, 0, n); }
+          glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0); glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0); }
+        glDeleteBuffersARB(3, b); errs("big VBOs");
+        /* APPLE_vertex_array_range / element_array: draws straight from "AGP" client memory */
+        glVertexPointer(3, GL_FLOAT, 0, v); glVertexArrayRangeAPPLE(n * 3 * sizeof(float), v); glVertexArrayParameteriAPPLE(GL_VERTEX_ARRAY_STORAGE_HINT_APPLE, GL_STORAGE_SHARED_APPLE); glEnableClientState(GL_VERTEX_ARRAY_RANGE_APPLE);
+        glDrawArrays(GL_TRIANGLES, 0, n - n % 3); glFlushVertexArrayRangeAPPLE(n * 3 * sizeof(float), v); glElementPointerAPPLE(GL_UNSIGNED_INT, uix); glEnableClientState(GL_ELEMENT_ARRAY_APPLE); glDrawElementArrayAPPLE(GL_TRIANGLES, 0, n - n % 3); glDisableClientState(GL_ELEMENT_ARRAY_APPLE);
+        glDisableClientState(GL_VERTEX_ARRAY_RANGE_APPLE); glDisableClientState(GL_VERTEX_ARRAY); errs("vertex array range");
+        free(v); free(c); free(ix); free(uix); glFinish();
+    }
+    /* a big compiled display list, called repeatedly */
+    dl = glGenLists(1); glNewList(dl, GL_COMPILE); glBegin(GL_TRIANGLES); for (i = 0; i < 30000; i++) { glColor3f((i % 50) / 50.f, .5f, .5f); glVertex2f(-.9f + (i % 300) * .006f, -.9f + (i / 300) * .018f); } glEnd(); glEndList(); for (i = 0; i < 8; i++) glCallList(dl); glDeleteLists(dl, 1);
+    errs("bigdraw"); done("bigdraw");
+}
+static void f_stress(void) {
+    int it = getenv("GLSTRESS_ITERS") ? atoi(getenv("GLSTRESS_ITERS")) : 120; unsigned seed = getenv("GLSTRESS_SEED") ? (unsigned)atoi(getenv("GLSTRESS_SEED")) : 1;
+    printf("  stress: %d iterations, seed %u\n", it, seed); gs_run(it, seed, W, H); errs("stress"); done("stress");
+}
 static void f_vbo(void) {
     GLuint b[3], vao; float v[] = { -.8f, -.8f, 0, .8f, -.8f, 0, 0, .8f, 0, -.5f, .5f, 0 }; unsigned short ix[] = { 0, 1, 2, 0, 2, 3 }; ortho();
     glGenBuffersARB(2, b); glBindBufferARB(GL_ARRAY_BUFFER_ARB, b[0]); glBufferDataARB(GL_ARRAY_BUFFER_ARB, sizeof v, v, GL_STATIC_DRAW_ARB); glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, b[1]); glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof ix, ix, GL_STATIC_DRAW_ARB);
@@ -271,8 +307,11 @@ static void f_vbo(void) {
     glDeleteBuffersARB(2, b); errs("vbo"); done("vbo");
 }
 
+static void on_sig(int sg) { char m[48]; int n = snprintf(m, sizeof m, "glcov: caught signal %d\n", sg); write(1, m, n); _exit(100 + sg); }
+static void on_exit_marker(void) { printf("glcov: exit() called\n"); }
 int main(int argc, char **argv) {
     int i, msaa = 0; setvbuf(stdout, NULL, _IONBF, 0);
+    signal(SIGSEGV, on_sig); signal(SIGBUS, on_sig); signal(SIGILL, on_sig); signal(SIGABRT, on_sig); signal(SIGFPE, on_sig); signal(SIGTERM, on_sig); signal(SIGHUP, on_sig); signal(SIGPIPE, on_sig); atexit(on_exit_marker);
     if (argc < 2) { printf("usage: glcov FEATURE...\n"); return 2; }
     for (i = 1; i < argc; i++) if (!strncmp(argv[i], "msaa", 4)) msaa = argv[i][4] ? atoi(argv[i] + 4) : 4;
     if (!make_ctx(msaa)) return 1;
@@ -281,7 +320,7 @@ int main(int argc, char **argv) {
         if (!strcmp(f, "multitex")) f_multitex(); else if (!strcmp(f, "texfmt")) f_texfmt(); else if (!strcmp(f, "fbo")) f_fbo();
         else if (!strncmp(f, "msaa", 4)) f_msaa(); else if (!strcmp(f, "query")) f_query(); else if (!strcmp(f, "clear")) f_clear();
         else if (!strcmp(f, "state")) f_state(); else if (!strcmp(f, "draw")) f_draw(); else if (!strcmp(f, "shaders")) f_shaders();
-        else if (!strcmp(f, "pixel")) f_pixel(); else if (!strcmp(f, "vbo")) f_vbo(); else printf("unknown feature %s\n", f);
+        else if (!strcmp(f, "pixel")) f_pixel(); else if (!strcmp(f, "vbo")) f_vbo(); else if (!strcmp(f, "bigdraw")) f_bigdraw(); else if (!strcmp(f, "stress")) f_stress(); else printf("unknown feature %s\n", f);
     }
     CGLSetCurrentContext(NULL); CGLDestroyContext(g_ctx); CGLDestroyPBuffer(g_pb); printf("glcov done errors=%d\n", g_err); return 0;
 }

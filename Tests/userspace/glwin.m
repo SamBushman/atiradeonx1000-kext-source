@@ -1,8 +1,9 @@
+/* !!! The "fastclear" and "stress" modes hung the stock driver on 2026-10-03 (the window never finished its frames; afterwards new GL clients hung until a reboot). Use only basic, clears, hz, resolve. */
 /* glwin.m - issue #42: windowed GL workload for the opcode recorder. The pbuffer contexts of glcov.c silently get NO multisample buffers (GL_SAMPLE_BUFFERS = 0 even when the pixel format asks
  * for them), so everything that needs a real drawable - FSAA resolve, depth resolve, front/back buffer handling, buffer swaps - needs a window. This opens one small NSWindow with an
  * NSOpenGLContext of the requested format, renders N frames (depth-tested, textured, blended triangles; clears; a 1-pixel glReadPixels that forces a resolve) and swaps each one, then exits.
  *
- * Usage: glwin [samples=0] [frames=60] [stencil=1] [depthbits=24] [mode=basic|clears|hz]
+ * Usage: glwin [samples=0] [frames=60] [stencil=1] [depthbits=24] [mode=basic|clears|hz|resolve|fastclear|stress(NOT in default runs: see glstress.h warning)]
  * Build on the G5:  gcc -arch ppc -x objective-c -w -o glwin glwin.m -framework Cocoa -framework OpenGL
  * Launch over SSH like the other GUI workloads (no interaction, window appears on the console, killed or exits by itself): see Tools/userspace/run_gl_features.sh and the tiger-ssh skill.
  */
@@ -13,6 +14,9 @@
 #include <string.h>
 #include <math.h>
 #include <unistd.h>
+#define GL_GLEXT_PROTOTYPES 1
+#import <OpenGL/glext.h>
+#include "glstress.h"
 
 int main(int argc, char **argv) {
     int samples = argc > 1 ? atoi(argv[1]) : 0, frames = argc > 2 ? atoi(argv[2]) : 60, stencil = argc > 3 ? atoi(argv[3]) : 1, depthbits = argc > 4 ? atoi(argv[4]) : 24;
@@ -44,6 +48,24 @@ int main(int argc, char **argv) {
         glEnable(GL_BLEND); glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); glLoadIdentity(); glBegin(GL_QUADS); glColor4f(1, 1, 1, 0.4f); glVertex2f(-.9f, -.2f); glVertex2f(.9f, -.2f); glVertex2f(.9f, .2f); glVertex2f(-.9f, .2f); glEnd(); glDisable(GL_BLEND); glDisable(GL_DEPTH_TEST);
         if (!strcmp(mode, "clears")) { int i; glEnable(GL_SCISSOR_TEST); for (i = 0; i < 4; i++) { glScissor(i * 30, i * 20, 80, 60); glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT); } glDisable(GL_SCISSOR_TEST); glClearDepth(0.0); glClear(GL_DEPTH_BUFFER_BIT); glClearDepth(1.0); glClear(GL_DEPTH_BUFFER_BIT); }
         if (!strcmp(mode, "hz")) { int i; glEnable(GL_DEPTH_TEST); for (i = 0; i < 20; i++) { glClear(GL_DEPTH_BUFFER_BIT); glDepthFunc(i & 1 ? GL_GREATER : GL_LESS); glLoadIdentity(); glBegin(GL_QUADS); glColor3f(i / 20.f, .5f, .5f); glVertex3f(-.8f, -.8f, -.5f + i * 0.04f); glVertex3f(.8f, -.8f, -.5f + i * 0.04f); glVertex3f(.8f, .8f, -.5f + i * 0.04f); glVertex3f(-.8f, .8f, -.5f + i * 0.04f); glEnd(); } glDepthFunc(GL_LESS); glDisable(GL_DEPTH_TEST); }
+        if (!strcmp(mode, "fastclear")) {                                    /* exact 0/1 clears of every buffer, full-surface and after drawing: the conditions hardware fast clear normally needs */
+            static const float cc[6][4] = { {0,0,0,0}, {1,1,1,1}, {0,0,0,1}, {1,0,0,1}, {0,1,0,0}, {0.5f,0.5f,0.5f,0.5f} }; int i, k;
+            for (i = 0; i < 6; i++) { glClearColor(cc[i][0], cc[i][1], cc[i][2], cc[i][3]); glClear(GL_COLOR_BUFFER_BIT); glClearDepth(i & 1); glClear(GL_DEPTH_BUFFER_BIT); glClearStencil(0); glClear(GL_STENCIL_BUFFER_BIT);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); for (k = 0; k < 2; k++) { glEnable(GL_DEPTH_TEST); glLoadIdentity(); glBegin(GL_TRIANGLES); glColor3f(1, 0, 0); glVertex3f(-.5f, -.5f, 0); glVertex3f(.5f, -.5f, 0); glVertex3f(0, .5f, 0); glEnd(); glDisable(GL_DEPTH_TEST); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); } }
+            glEnable(GL_SCISSOR_TEST); glScissor(0, 0, 320, 240); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); glScissor(0, 0, 160, 120); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); glDisable(GL_SCISSOR_TEST);
+            glColorMask(1, 1, 1, 0); glClear(GL_COLOR_BUFFER_BIT); glColorMask(1, 1, 1, 1); glDepthMask(0); glClear(GL_DEPTH_BUFFER_BIT); glDepthMask(1); glFinish();
+        }
+        if (!strcmp(mode, "stress")) { gs_run(8, 1000u + f * 7919u, 320, 240); }
+        if (!strcmp(mode, "resolve")) {                                      /* reads, copies and buffer selection on a (possibly multisampled) drawable: the resolve/blit paths */
+            static unsigned char big[320 * 240 * 16]; GLuint t; int i; GLenum db[] = { GL_FRONT, GL_FRONT_AND_BACK, GL_BACK, GL_NONE, GL_BACK };
+            glReadPixels(0, 0, 320, 240, GL_RGBA, GL_UNSIGNED_BYTE, big); glReadPixels(0, 0, 320, 240, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, big); glReadPixels(0, 0, 320, 240, GL_DEPTH_COMPONENT, GL_FLOAT, big);
+            glReadPixels(0, 0, 160, 120, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, big); if (stencil) glReadPixels(0, 0, 320, 240, GL_STENCIL_INDEX, GL_UNSIGNED_BYTE, big); glReadPixels(0, 0, 64, 64, GL_RGBA, GL_FLOAT, big);
+            glGenTextures(1, &t); glBindTexture(GL_TEXTURE_2D, t); glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 0, 0, 256, 128, 0); glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 10, 10, 128, 64);
+            glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 0, 0, 128, 128, 0); glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 20, 20, 64, 64); glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGB5, 0, 0, 64, 64, 0); glDeleteTextures(1, &t);
+            glRasterPos2f(-.5f, -.5f); glCopyPixels(0, 0, 100, 100, GL_COLOR); glCopyPixels(0, 0, 60, 60, GL_DEPTH); if (stencil) glCopyPixels(0, 0, 60, 60, GL_STENCIL);
+            for (i = 0; i < 5; i++) { glDrawBuffer(db[i]); if (db[i] != GL_NONE) { glLoadIdentity(); glBegin(GL_TRIANGLES); glColor3f(1, 1, 1); glVertex2f(-.2f, -.2f); glVertex2f(.2f, -.2f); glVertex2f(0, .2f); glEnd(); } glFlush(); }
+            glReadBuffer(GL_FRONT); glReadPixels(0, 0, 64, 64, GL_RGBA, GL_UNSIGNED_BYTE, big); glReadBuffer(GL_BACK); glDrawBuffer(GL_BACK); glFinish();
+        }
         glReadPixels(160, 120, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, px);             /* forces the multisample buffer to resolve on a multisampled drawable */
         [ctx flushBuffer];
     }
