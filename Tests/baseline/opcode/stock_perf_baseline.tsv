@@ -1,0 +1,83 @@
+# opcode_recorder start pid=18254 start_offset=0x1c dump=0
+CLOSE	conn=0x220b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	HIST
+FLUSH	conn=0x220f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x220f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x220f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x220f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x230f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x230f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x230f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x230f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2217	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2217	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2217	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2217	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2317	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2317	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2317	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2317	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x221f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x221f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x221f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x221f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x231f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x231f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x231f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x231f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2227	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2227	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2227	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2227	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2327	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2327	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2327	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2327	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x222f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x222f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x222f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x222f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x232f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x232f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x232f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x232f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2237	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2237	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2237	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2237	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2337	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2337	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2337	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2337	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x223f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x223f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x223f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x223f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x233f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x233f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x233f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x233f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2247	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2247	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2247	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2247	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2347	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2347	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2347	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2347	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x224f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x224f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x224f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x224f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x234f	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x234f	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x234f	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x234f	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2257	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2257	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2257	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2257	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+FLUSH	conn=0x2357	type=gl	n=2	addr=0x36a000	size=0x20000	records=36	words=845	terminated=1
+FLUSH	conn=0x2357	type=gl	n=3	addr=0x643000	size=0x40000	records=2	words=3255	terminated=1
+FLUSH	conn=0x2357	type=gl	n=4	addr=0x683000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2357	type=gl	flushes=4	buffers=3	empty=0	records=40	words=4110	anomalies=0	HIST 00:3:269 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:3263 29:2:114 2f:1:13
+TOTAL	pid=18254	type=gl	flushes=80	anomalies=0	HIST 00:60:5380 16:40:40 17:40:40 18:40:40 19:40:40 1a:40:40 1b:40:40 1c:40:40 1d:40:40 1e:40:40 1f:40:40 20:40:40 21:40:40 22:40:40 23:40:40 24:40:40 25:40:8420 28:40:65260 29:40:2280 2f:20:260

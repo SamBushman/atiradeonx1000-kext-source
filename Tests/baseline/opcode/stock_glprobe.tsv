@@ -1,0 +1,4 @@
+# opcode_recorder start pid=18260 start_offset=0x1c dump=0
+CLOSE	conn=0x220b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	HIST
+EXIT	conn=0x220f	type=gl	flushes=1	buffers=0	empty=0	records=0	words=0	anomalies=0	HIST
+TOTAL	pid=18260	type=gl	flushes=1	anomalies=0	HIST

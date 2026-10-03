@@ -37,3 +37,10 @@ and the drivers in `userspace/pipeline/` (Stage B2 of its README).
 | `call_arg_origin_compare.py` | shifted / swapped call arguments (found the `alloc_surfaces_retry` bug: `this` passed as the mask). NOISY - register reuse makes many hits benign; read each against the disassembly |
 | `call_args_compare.py`, `result_use_compare.py` | literal-argument tuples and dropped call results (both noisy; low yield) |
 | `DecompList.java` | headless-Ghidra batch decompile of a list of addresses into `$SCRATCH/work/0xADDR.txt` (for `replace_fn.py`) |
+
+### Opcode usage recorder (#42, 2026-10-02)
+| tool | purpose |
+|---|---|
+| `opcode_inventory.py` -> `Tests/pm4_opcode_inventory.md` | opcodes the stock `process_command_buffer` of each context compares against (Capstone over the stock kext; GL 66, DVD 62, 2D 17) |
+| `userspace/opcode_recorder.c` (+ `userspace/run_opcode_workloads.sh`) | `DYLD_INSERT_LIBRARIES` interposer: tallies the opcodes in the command buffers a process submits (flush-map = submit); passive, fault-safe, periodic TOTAL snapshots |
+| `opcode_usage.py` -> `Tests/pm4_opcode_usage.md` | merges recorder logs per workload and compares with the inventory (coverage, observed-not-in-inventory, never-observed, anomalies); raw logs in `Tests/baseline/opcode/` |

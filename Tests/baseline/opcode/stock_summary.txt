@@ -1,0 +1,5 @@
+cgl_probe: exit 0 ; RESULT: PASS
+perf_baseline: exit 0 ; RESULT: PASS
+glprobe: exit 0 ; GL_ARB_transpose_matrix GL_ARB_vertex_program GL_ARB_vertex_blend GL_ARB_window_
+glsl120test: exit 0 ; 
+nesttest: exit 0 ; 
