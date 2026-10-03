@@ -151,6 +151,10 @@ def main():
         struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)               # accelerator ptr (self+0x94 for 2D, self+0x8c for DVD)
         if ctx == 'dvd':
             struct.pack_into('>I', self_bytes, off['accoff2'], ACCEL)          # self+0xf8: DVD's bound-surface pointer (zeroed stand-in - every surface-field read comes back 0)
+            struct.pack_into('>I', self_bytes, 0x84, ACCEL)                    # self+0x84: shared-allocator ptr (IOATIR500Shared*) - MUST be non-null: issue #126/V14 was missed because this
+                                                                                 # harness left it null and Unicorn auto-zero-fills the unmapped read instead of faulting like real hardware does.
+                                                                                 # Non-null here only avoids the FALSE-CLEAN result; the zeroed stand-in's own +0x14 "texture count" field is
+                                                                                 # still 0, so a bounds check against it still correctly takes the "index out of range" branch, not a free pass.
     else:
         struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar65 = (UInt32*)(M<SInt32>(self+0xe0) + 0x1c) -> BUF + 0x1c
         struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)

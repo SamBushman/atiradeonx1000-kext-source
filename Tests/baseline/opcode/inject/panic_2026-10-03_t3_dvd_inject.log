@@ -1,0 +1,282 @@
+Fri Aug 21 11:41:43 2026
+panic(cpu 2 caller 0x000A4554): attempt to interlock mutex (0x037B0D58) failed on mutex lock
+
+Latest stack backtrace for cpu 2:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A4554 0x0003FFBC 0x0002BDCC 0x002B1B68 0x006B2240 
+         0x006B1514 0x006B1468 0x0079CD70 0x0079CDA8 0x00773048 0x002D1B8C 0x002D0A54 0x000A9714 
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.driver.AppleGPIO(1.1.9d0)@0x79a000
+            dependency: com.apple.driver.IOPlatformFunction(1.8.0d12)@0x6c9000
+         com.apple.driver.MacIOGPIO(1.1.9d0)@0x771000
+         com.apple.driver.AppleSMU(1.1.1d2)@0x6af000
+Proceeding back via exception chain:
+   Exception state (sv=0x00C0FC80)
+      PC=0x00000000; MSR=0x0000D030; DAR=0x00000000; DSISR=0x00000000; LR=0x00000000; R1=0x00000000; XCP=0x00000000 (Unknown)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+
+*********
+
+Fri Aug 21 14:33:49 2026
+panic(cpu 2 caller 0x000A4554): attempt to interlock mutex (0x037B0D58) failed on mutex lock
+
+Latest stack backtrace for cpu 2:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A4554 0x0003FFBC 0x0002BDCC 0x002B1B68 0x006B2240 
+         0x006B1514 0x006B1468 0x0079CD70 0x0079CDA8 0x00773048 0x002D1B8C 0x002D0A54 0x000A9714 
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.driver.AppleGPIO(1.1.9d0)@0x79a000
+            dependency: com.apple.driver.IOPlatformFunction(1.8.0d12)@0x6c9000
+         com.apple.driver.MacIOGPIO(1.1.9d0)@0x771000
+         com.apple.driver.AppleSMU(1.1.1d2)@0x6af000
+Proceeding back via exception chain:
+   Exception state (sv=0x00C0FC80)
+      PC=0x00000000; MSR=0x0000D030; DAR=0x00000000; DSISR=0x00000000; LR=0x00000000; R1=0x00000000; XCP=0x00000000 (Unknown)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+
+*********
+
+Fri Sep 18 07:55:46 2026
+
+
+Unresolved kernel trap(cpu 2): 0x300 - Data access DAR=0x0000000000000D64 PC=0x00000000005C37A8
+Latest crash info for cpu 2:
+   Exception state (sv=0x69E68280)
+      PC=0x005C37A8; MSR=0x00009030; DAR=0x00000D64; DSISR=0x40000000; LR=0x005BE05C; R1=0x4FB83CF0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x0001E3D0 0x002EC058 0x0008C69C 0x00029234 0x000233F8 0x000ABEAC 
+         0x2F2F2F2F 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFF800
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x69E68280)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x6A473780)
+      PC=0x9000AF48; MSR=0x0000F030; DAR=0x5A129000; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFF800; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 2 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 2:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x69E68280)
+      PC=0x005C37A8; MSR=0x00009030; DAR=0x00000D64; DSISR=0x40000000; LR=0x005BE05C; R1=0x4FB83CF0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x0001E3D0 0x002EC058 0x0008C69C 0x00029234 0x000233F8 0x000ABEAC 
+         0x2F2F2F2F 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFF800
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x6A473780)
+      PC=0x9000AF48; MSR=0x0000F030; DAR=0x5A129000; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFF800; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 P@
+*********
+
+Thu Oct  1 22:24:09 2026
+
+
+Unresolved kernel trap(cpu 3): 0x300 - Data access DAR=0x000000000000000C PC=0x00000000005A2830
+Latest crash info for cpu 3:
+   Exception state (sv=0x69E60280)
+      PC=0x005A2830; MSR=0x00009030; DAR=0x0000000C; DSISR=0x40000000; LR=0x0059B5FC; R1=0x4FD23B30; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DAE400 0x0059B5FC 0x005C71BC 0x0059A46C 0x0059F1AC 0x0059F494 
+         0x002EC370 0x0008C7DC 0x00029234 0x000233F8 0x000ABEAC 0x696E7465 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFDC60
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x69E60280)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x69E64C80)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0xE0000494; DSISR=0x40000000; LR=0x9000AE9C; R1=0xBFFFDC60; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 3 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 3:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x69E60280)
+      PC=0x005A2830; MSR=0x00009030; DAR=0x0000000C; DSISR=0x40000000; LR=0x0059B5FC; R1=0x4FD23B30; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DAE400 0x0059B5FC 0x005C71BC 0x0059A46C 0x0059F1AC 0x0059F494 
+         0x002EC370 0x0008C7DC 0x00029234 0x000233F8 0x000ABEAC 0x696E7465 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFDC60
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x69E64C80)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0xE0000494; DSISR=0x40000000; LR=0x9000AE9C; R1=0xBFFFD@
+*********
+
+Sat Oct  3 08:07:29 2026
+
+
+Unresolved kernel trap(cpu 1): 0x300 - Data access DAR=0x0000000000000014 PC=0x00000000005BBAB0
+Latest crash info for cpu 1:
+   Exception state (sv=0x6A46C780)
+      PC=0x005BBAB0; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00596A54; R1=0x4FB3BBE0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x005A34F8 0x00596A54 0x002E9A80 0x002EB94C 0x0008C248 0x00029234 
+         0x000233F8 0x000ABEAC 0x65793E3C 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFED40
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x6A46C780)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x79ECA780)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0000B01C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFED40; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 1 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 1:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x6A46C780)
+      PC=0x005BBAB0; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00596A54; R1=0x4FB3BBE0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x005A34F8 0x00596A54 0x002E9A80 0x002EB94C 0x0008C248 0x00029234 
+         0x000233F8 0x000ABEAC 0x65793E3C 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFED40
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x79ECA780)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0000B01C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFED40; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin @
+*********
+
+Sat Oct  3 09:08:19 2026
+
+
+Unresolved kernel trap(cpu 2): 0x300 - Data access DAR=0x0000000000000008 PC=0x00000000005901CC
+Latest crash info for cpu 2:
+   Exception state (sv=0x7938D000)
+      PC=0x005901CC; MSR=0x0000B030; DAR=0x00000008; DSISR=0x42000000; LR=0x00593654; R1=0x4FDABBB0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0xC24BC195 0x00593654 0x005B0084 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x383C2F69 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEF30
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x7938D000)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x69FCB280)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0001A01C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEF30; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 2 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 2:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x7938D000)
+      PC=0x005901CC; MSR=0x0000B030; DAR=0x00000008; DSISR=0x42000000; LR=0x00593654; R1=0x4FDABBB0; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0xC24BC195 0x00593654 0x005B0084 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x383C2F69 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEF30
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x69FCB280)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0001A01C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEF30; XCP=0x00000030 (0xC00 - System call)
+
+K`
+*********
+
+Sat Oct  3 10:04:57 2026
+
+
+Unresolved kernel trap(cpu 3): 0x300 - Data access DAR=0x0000000000000014 PC=0x00000000005C0630
+Latest crash info for cpu 3:
+   Exception state (sv=0x79693C80)
+      PC=0x005C0630; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00598428; R1=0x4FB93B20; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DE9428 0x00598428 0x005BE2D8 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x43644145 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEE10
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x79693C80)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x69E65500)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0130801C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEE10; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 3 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 3:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x79693C80)
+      PC=0x005C0630; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00598428; R1=0x4FB93B20; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DE9428 0x00598428 0x005BE2D8 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x43644145 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEE10
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x69E65500)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0130801C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEE10; XCP=0x00000030 (0xC00 - System call)
+
+K`
+*********
+
