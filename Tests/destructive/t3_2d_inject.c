@@ -1,7 +1,11 @@
-/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (2026-10-03 02:02 local) HUNG THE G5 (no ssh, no ping) on the SECOND injection. The first record (0x05) was read back UNCHANGED (05000000, not 80000000)
- * and the guard word untouched: the buffer from memType 1 is NOT the buffer the dispatcher processed, so no guard ran and the next hand-built record (0x06000008 + zeros) reached the GPU raw. The
- * discard-guard design only works on the buffer the kernel actually processes (proved for GL by INJECT-POST). Needs the real 2D buffer handoff worked out first (which memType the dispatcher's
- * self+0xac mapping corresponds to), or injection under a real 2D client like the GL recorder does. */
+/* *** HAZARD - DO NOT RE-RUN AS IS: root cause now KNOWN, see below *** Run 1 (2026-10-03 02:02 local) made the G5 stop answering ssh/ping. The panic.log recovered after reboot (8:07) gives the
+ * exact cause, and it is NOT what the first analysis below guessed: PC=0x5bbab0, ATIR5002DContext::process_command_buffer+0x3e0, `lwz r2,0x88(r27); lwz r0,0x14(r2)` = M<UInt32>(M<SInt32>(self+0x88)+0x14)
+ * with self+0x88 (IOATIR500Shared*) NULL - a genuine, reproducible STOCK-KERNEL PANIC (Tests/known_vendor_deviations.md V12), triggered by calling the memType-0 FLUSH ITSELF on a connection that
+ * only ever did t3_surface()+2D set_surface (no GA-plugin-level setup that would establish self+0x88). The hand-built record content below is NOT the trigger - ANY flush on a connection set up this
+ * way panics, before any injected word is even scanned. Confirmed safe in isolation via Tools/userspace/emu/kemu.py (PPC emulation, self+0x88 deliberately left null): every opcode queued below
+ * rewrites exactly as the ported C source predicts with NO wild pointer excursion - the records themselves were always fine; it is the FLUSH CALL on an under-initialised 2D context that panics.
+ * The buffer-type note (memType 1 vs 0) below is also real (self+0xbc != self+0xac) but was a secondary bug, not the cause of the hang.
+ * DO NOT RE-RUN until a real GA-plugin-equivalent setup call that establishes self+0x88 is identified; until then every flush on a hand-made 2D client will panic the kernel by this exact path. */
 /* T3 test for #42 criterion 2 (2D process_command_buffer opcodes no real consumer emits on this machine), issue #100 protocol #87.
  * A 2D connection bound to a 4x4 surface (as t3_2d_swap) gets its command buffer from IOConnectMapMemory(2D, memType 1); this test writes ONE hand-built record at buffer+0x1c, the
  * discard guard behind it, and submits with the flush map (memType 0), then reads the first words back from the (still mapped) old buffer: the kernel rewrites every record in place,
