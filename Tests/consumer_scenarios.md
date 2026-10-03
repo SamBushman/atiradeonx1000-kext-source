@@ -23,13 +23,14 @@ length in words including the header, a record with n = 0 ends the stream. It is
 **The format is validated by the data, not assumed:** over 3 014 buffers every one decoded into a well-formed record chain ending at a zero-length terminator (0 anomalies), and every observed opcode except 0x00 is in the independently derived
 disassembly inventory. (0x00 appears as 1-word pads and large register-state blocks; the dispatcher has no dedicated comparison for it, so it presumably takes the fall-through path - not traced to the end.)
 
-**Result so far (stock, GL):** 7 workloads (`cgl_probe`, `perf_baseline`, `glprobe`, `glsl120test`, `nesttest`, the Godot game, the Godot editor UI): 3 014 flushes, 63 508 records, **27 of the 66 inventory opcodes observed (41 %)**. Most flushes are one
-repeating frame skeleton (texture-slot clears 0x16-0x25 plus 0x28/0x29/0x2f); the texture-bind opcodes are barely used by these scenes (0x06 x57, 0x07 x11, 0x15 x2). 39 opcodes were never emitted: 0x02-0x05, 0x08-0x14, 0x26, 0x27, 0x2a-0x2d,
-0x30-0x32, 0x34-0x36, 0x38, 0x3b, 0x3d-0x40, 0x43-0x46.
+**Result (stock, GL, after the recorder correction of 2026-10-03):** about 40 workload runs (five small probes, 16 offscreen feature programs, 11 window variants with 0/2/4/6-sample multisample, the Godot game and editor): 5 353 flushes, 78 077 records,
+**57 of the 66 inventory opcodes observed (86 %)**, 0 anomalies. Per-opcode counts and workloads in `Tests/pm4_opcode_usage.md`; the 9 never seen are analysed in `Tests/pm4_opcode_gaps.md`: **0x2a, 0x36, 0x38 and 0x3d have emitters that are statically
+unreachable** (proven from the driver's code), and **0x27, 0x2b, 0x2c, 0x43 and 0x46 have no code that stores their header** (reachability through an opcode-indexed data table cannot be excluded). The recorder initially undercounted by one record per flush (the driver
+leaves the last record's length field at 0 until the next record is appended); the corrected recorder counts that final record, which adds 0x01, 0x02 (once per frame in windows) and 0x03.
 
-**Limits.** (1) Only buffers submitted through the flush-map are counted; if the kernel also processes a pending buffer inside another call (a swap/read selector), those words are not seen. (2) **2D and DVD: no flushes were recorded**: the 2D context is
-used by WindowServer (a system process the recorder cannot be safely injected into without changing the login setup), and no player on this machine opens a DVD context. (3) The unobserved GL opcodes need richer workloads (more textures bound at once,
-FSAA resolve, other render targets, the remaining state records); candidates are other Godot scenes, a GL demo using many texture units, an FSAA pixel format. (4) A SIGTERM-killed run keeps its tally through the periodic TOTAL snapshots (every 16 flushes), losing at most 15 flushes.
+**Limits.** (1) Only buffers submitted through the flush-map are counted; if the kernel also processes a pending buffer inside another call (a swap/read selector), those words are not seen. (2) **2D and DVD: no flushes were recorded by these workloads**: the 2D context is
+used by WindowServer (a system process the recorder cannot be safely injected into without changing the login setup), and no Apple player on this machine opens a DVD context; see the GA/VA plugin drivers below. (3) Record lengths of the last record in a buffer are unknown (only its opcode is counted).
+(4) A SIGTERM-killed run keeps its tally through the periodic TOTAL snapshots (every 16 flushes), losing at most 15 flushes. (5) Hazardous modes (random state stress, window exact-0/1 clears) stalled or wedged the stock GL stack and are not part of any default run (see `Tests/pm4_opcode_gaps.md`).
 
 ## Pass/fail definition for a scenario (used by the parity report)
 
