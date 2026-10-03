@@ -32,7 +32,7 @@ def load_inventory(path):
 def load_logs(items):
     """-> data[ctx][workload] = {opcode: [records, words]}, flushes[ctx][workload], anomalies, processes[workload]"""
     data = collections.defaultdict(lambda: collections.defaultdict(lambda: collections.defaultdict(lambda: [0, 0])))
-    flushes = collections.defaultdict(lambda: collections.defaultdict(int)); anomalies = 0; procs = collections.defaultdict(int)
+    flushes = collections.defaultdict(lambda: collections.defaultdict(int)); anomalies = 0; strays = 0; procs = collections.defaultdict(int)
     for item in items:
         name, _, path = item.partition("=")
         if not path:
@@ -43,6 +43,8 @@ def load_logs(items):
             f = ln.rstrip("\n").split("\t")
             if f[0] == "ANOMALY":
                 anomalies += 1
+            if f[0] == "STRAY":
+                strays += 1
             if f[0] != "TOTAL":
                 continue
             kv = dict(x.split("=", 1) for x in f[1:] if "=" in x and not x.startswith("HIST"))
@@ -57,10 +59,10 @@ def load_logs(items):
                 op, r, w = h.split(":")
                 d = data[ctx][name][int(op, 16)]
                 d[0] += int(r); d[1] += int(w)
-    return data, flushes, anomalies, procs
+    return data, flushes, anomalies, strays, procs
 
 
-def render(inv, data, flushes, anomalies, procs):
+def render(inv, data, flushes, anomalies, strays, procs):
     out = ["# Command-stream opcode usage by real workloads (issue #42 criterion 2)", "",
            "Recorded on the stock kext (4.1.9, G5, Tiger) with `Tools/userspace/opcode_recorder.c`, merged by `Tools/opcode_usage.py`, compared with the dispatcher inventory in `Tests/pm4_opcode_inventory.md`.",
            "Counts are buffers submitted through the flush-map path (the kernel's `process_command_buffer`); buffers processed by other kernel paths are not counted.", "",
@@ -86,7 +88,8 @@ def render(inv, data, flushes, anomalies, procs):
         out += ["", "Observed but NOT in the inventory: %s." % (", ".join("0x%02x" % o for o in extra) or "none") +
                 ("  (0x00 is observed as 1-word pads and as large register-state blocks and is not compared against by the dispatcher, so it presumably takes the default path - to be confirmed; any other entry here needs checking.)" if 0 in extra else ""),
                 "", "In the inventory but never observed (%d): %s." % (len(missing), ", ".join("0x%02x" % o for o in missing) or "none"), ""]
-    out += ["Anomalies recorded (record overruns a buffer / buffer never terminates / unreadable mapping): **%d**." % anomalies, ""]
+    out += ["Anomalies recorded (record overruns a buffer / buffer never terminates / unreadable mapping): **%d**." % anomalies,
+            "Stray words (one word between the end of the last record and a zero terminator, logged as STRAY, not as an anomaly): %d." % strays, ""]
     return "\n".join(out) + "\n"
 
 
@@ -97,8 +100,8 @@ def main():
     ap.add_argument("-o"); ap.add_argument("logs", nargs="+")
     a = ap.parse_args()
     inv = load_inventory(a.inventory)
-    data, flushes, anomalies, procs = load_logs(a.logs)
-    txt = render(inv, data, flushes, anomalies, procs)
+    data, flushes, anomalies, strays, procs = load_logs(a.logs)
+    txt = render(inv, data, flushes, anomalies, strays, procs)
     if a.o:
         open(a.o, "w").write(txt)
     else:

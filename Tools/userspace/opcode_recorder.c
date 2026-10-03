@@ -33,14 +33,14 @@
 typedef struct {
     int used; io_connect_t connect; unsigned type;           /* IOServiceOpen type: 0 surface, 1 GL, 2 2D, 3 DVD */
     unsigned flush_type; vm_address_t cur_addr; vm_size_t cur_size; int have_cur;
-    unsigned long flushes, buffers_scanned, records, words, anomalies, empty_buffers;
+    unsigned long flushes, buffers_scanned, records, words, anomalies, empty_buffers, strays;
     unsigned long hist_rec[256], hist_words[256];
 } conn_t;
 static conn_t g_conn[MAXCONN];
 static unsigned long g_tot_rec[4][256], g_tot_words[4][256];       /* per client type 0..3 */
 static unsigned long g_tot_flush[4], g_tot_anom[4];
 static pthread_mutex_t g_mu = PTHREAD_MUTEX_INITIALIZER;
-static FILE *g_log; static int g_pid; static unsigned g_start = 0x1c; static int g_dump = 0; static unsigned char *g_buf; static vm_size_t g_bufsz;
+static FILE *g_log; static int g_pid; static unsigned g_start = 0x1c; static int g_dump = 0; static unsigned char *g_buf; static vm_size_t g_bufsz; static unsigned char *g_pre; static vm_size_t g_presz; static int g_post_pending; static vm_address_t g_post_addr; static vm_size_t g_post_size; static unsigned long g_post_off;
 static const char *tname[4] = { "surface", "gl", "2d", "dvd" };
 
 static void ensure_log(void) {
@@ -86,13 +86,27 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
         fprintf(g_log, "\n");
     }
     p = g_buf + g_start; end = g_buf + got;
+    { unsigned lo[16], ln[16], lf[16]; int nl = 0, k;                  /* trace of the last 16 records, printed with any anomaly */
     while (p + 4 <= end) {
         unsigned w = *(unsigned *)p, n = w & 0xffffff, op = w >> 24;
         if (n == 0) { term = 1; break; }
-        if (p + (unsigned long)n * 4 > end) { anom = 1; fprintf(g_log, "ANOMALY\tconn=0x%x\ttype=%s\trecord at +0x%lx op=0x%02x n=%u overruns the buffer (size 0x%lx)\n", (unsigned)c->connect, tname[t], (unsigned long)(p - g_buf), op, n, (unsigned long)got); break; }
+        if (p + (unsigned long)n * 4 > end && p + 8 <= end && *(unsigned *)(p + 4) == 0) {
+            /* one stray word between the end of the previous record and a zero terminator (seen once, after a 2825-word 0x25 record from a 900-vertex glBegin/glEnd; the kernel's in-place rewrite stops at
+               that record, see the POST lines): logged as STRAY, not as an anomaly, because the stream is otherwise consistent and terminates one word later */
+            fprintf(g_log, "STRAY\tconn=0x%x\ttype=%s\tone stray word 0x%08x at +0x%lx before the terminator\n", (unsigned)c->connect, tname[t], w, (unsigned long)(p - g_buf));
+            c->strays++; term = 1; break;
+        }
+        if (p + (unsigned long)n * 4 > end) {
+            anom = 1; fprintf(g_log, "ANOMALY\tconn=0x%x\ttype=%s\trecord at +0x%lx op=0x%02x n=%u overruns the buffer (size 0x%lx)\n", (unsigned)c->connect, tname[t], (unsigned long)(p - g_buf), op, n, (unsigned long)got);
+            for (k = (nl > 16 ? 16 : nl); k > 0; k--) { int j = (nl - k) & 15; fprintf(g_log, "  prev\t+0x%x\top=0x%02x\tn=%u\n", lf[j], lo[j], ln[j]); }
+            { unsigned long a0 = (unsigned long)(p - g_buf); int i; a0 = a0 > 0x20 ? a0 - 0x20 : 0; fprintf(g_log, "  bytes from +0x%lx:", a0); for (i = 0; i < 0x60 && a0 + i < got; i++) fprintf(g_log, "%s%02x", (i & 3) == 0 ? " " : "", g_buf[a0 + i]); fprintf(g_log, "\n"); }
+            if (!g_post_pending) { if (got > g_presz) { free(g_pre); g_presz = got; g_pre = malloc(g_presz); } memcpy(g_pre, g_buf, got); g_post_pending = 1; g_post_addr = addr; g_post_size = got; g_post_off = (unsigned long)(p - g_buf); }
+            break;
+        }
+        lo[nl & 15] = op; ln[nl & 15] = n; lf[nl & 15] = (unsigned)(p - g_buf); nl++;
         c->hist_rec[op]++; c->hist_words[op] += n; g_tot_rec[t][op]++; g_tot_words[t][op] += n; nrec++; nwords += n;
         p += (unsigned long)n * 4;
-    }
+    } }
     if (!term && !anom) { anom = 1; fprintf(g_log, "ANOMALY\tconn=0x%x\ttype=%s\tbuffer never terminates (no record with n == 0) after %lu records\n", (unsigned)c->connect, tname[t], nrec); }
     if (anom) { c->anomalies++; g_tot_anom[t]++; }
     if (nrec == 0 && term) c->empty_buffers++;
@@ -100,7 +114,7 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
     fprintf(g_log, "FLUSH\tconn=0x%x\ttype=%s\tn=%lu\taddr=0x%lx\tsize=0x%lx\trecords=%lu\twords=%lu\tterminated=%d\n", (unsigned)c->connect, tname[t], c->flushes, (unsigned long)addr, (unsigned long)size, nrec, nwords, term);
 }
 static void summary(const char *what, conn_t *c) {
-    int i; fprintf(g_log, "%s\tconn=0x%x\ttype=%s\tflushes=%lu\tbuffers=%lu\tempty=%lu\trecords=%lu\twords=%lu\tanomalies=%lu\tHIST", what, (unsigned)c->connect, tname[c->type & 3], c->flushes, c->buffers_scanned, c->empty_buffers, c->records, c->words, c->anomalies);
+    int i; fprintf(g_log, "%s\tconn=0x%x\ttype=%s\tflushes=%lu\tbuffers=%lu\tempty=%lu\trecords=%lu\twords=%lu\tanomalies=%lu\tstrays=%lu\tHIST", what, (unsigned)c->connect, tname[c->type & 3], c->flushes, c->buffers_scanned, c->empty_buffers, c->records, c->words, c->anomalies, c->strays);
     for (i = 0; i < 256; i++) if (c->hist_rec[i]) fprintf(g_log, " %02x:%lu:%lu", i, c->hist_rec[i], c->hist_words[i]);
     fprintf(g_log, "\n");
 }
@@ -134,6 +148,17 @@ static kern_return_t my_map(io_connect_t c, uint32_t mt, task_port_t task, vm_ad
     }
     pthread_mutex_unlock(&g_mu);
     r = real_map(c, mt, task, at, sz, opt);                           /* forwarded unchanged */
+    if (g_post_pending) {                                              /* the kernel has processed (and rewritten in place) the buffer that gave an anomaly: show where */
+        vm_size_t got2 = 0; unsigned long i, first = (unsigned long)-1, last = 0, nchg = 0; unsigned long lo = g_post_off > 0x40 ? g_post_off - 0x40 : 0;
+        if (g_post_size > g_bufsz) { free(g_buf); g_bufsz = g_post_size; g_buf = malloc(g_bufsz); }
+        if (vm_read_overwrite(mach_task_self(), g_post_addr, g_post_size, (vm_address_t)g_buf, &got2) == KERN_SUCCESS) {
+            for (i = 0; i + 4 <= got2 && i + 4 <= g_post_size; i += 4) if (*(unsigned *)(g_buf + i) != *(unsigned *)(g_pre + i)) { nchg++; if (first == (unsigned long)-1) first = i; last = i; }
+            fprintf(g_log, "POST\taddr=0x%lx\twords_changed_by_kernel=%lu\tfirst=+0x%lx\tlast=+0x%lx\tanomaly_at=+0x%lx\n", (unsigned long)g_post_addr, nchg, first, last, g_post_off);
+            fprintf(g_log, "  pre  from +0x%lx:", lo); for (i = 0; i < 0x80 && lo + i < got2; i += 4) fprintf(g_log, " %08x", *(unsigned *)(g_pre + lo + i)); fprintf(g_log, "\n");
+            fprintf(g_log, "  post from +0x%lx:", lo); for (i = 0; i < 0x80 && lo + i < got2; i += 4) fprintf(g_log, " %08x", *(unsigned *)(g_buf + lo + i)); fprintf(g_log, "\n");
+        } else fprintf(g_log, "POST\tcould not re-read the buffer after the flush\n");
+        g_post_pending = 0;
+    }
     pthread_mutex_lock(&g_mu); k = find(c);
     if (k && k->type && mt == k->flush_type && r == KERN_SUCCESS && at && sz) { k->cur_addr = *at; k->cur_size = *sz; k->have_cur = 1; }
     pthread_mutex_unlock(&g_mu);

@@ -1,0 +1,90 @@
+# opcode_recorder start pid=19084 start_offset=0x1c dump=0
+CLOSE	conn=0x2c0b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	HIST
+FLUSH	conn=0x2c0f	type=gl	n=2	addr=0x280000	size=0x20000	records=44	words=2196	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=3	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=4	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=5	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=6	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=7	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=8	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=9	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=10	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=11	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=12	addr=0x17b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=13	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=14	addr=0x2535000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=15	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=16	addr=0x2575000	size=0x40000	records=11	words=1636	terminated=1
+TOTAL	pid=19084	type=gl	flushes=16	anomalies=0	HIST 00:15:421 04:8:2172 05:8:896 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:7:196 29:2:114 2f:47:6527 30:15:3750 33:15:2925
+FLUSH	conn=0x2c0f	type=gl	n=17	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=18	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=19	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=20	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=21	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=22	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=23	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=24	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=25	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=26	addr=0x17b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=27	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=28	addr=0x2535000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=29	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=30	addr=0x2575000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=31	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=32	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+TOTAL	pid=19084	type=gl	flushes=32	anomalies=0	HIST 00:31:597 04:16:4348 05:16:1792 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:15:420 29:2:114 2f:95:13079 30:31:7750 33:31:6045
+FLUSH	conn=0x2c0f	type=gl	n=33	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=34	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=35	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=36	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=37	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=38	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=39	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=40	addr=0x17b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=41	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=42	addr=0x2535000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=43	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=44	addr=0x2575000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=45	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=46	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=47	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=48	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+TOTAL	pid=19084	type=gl	flushes=48	anomalies=0	HIST 00:47:773 04:24:6524 05:24:2688 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:23:644 29:2:114 2f:143:19631 30:47:11750 33:47:9165
+FLUSH	conn=0x2c0f	type=gl	n=49	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=50	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=51	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=52	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=53	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=54	addr=0x17b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=55	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=56	addr=0x2535000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=57	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=58	addr=0x2575000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=59	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=60	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=61	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=62	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=63	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=64	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+TOTAL	pid=19084	type=gl	flushes=64	anomalies=0	HIST 00:63:949 04:32:8700 05:32:3584 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:31:868 29:2:114 2f:191:26183 30:63:15750 33:63:12285
+FLUSH	conn=0x2c0f	type=gl	n=65	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=66	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=67	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=68	addr=0x17b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=69	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=70	addr=0x2535000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=71	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=72	addr=0x2575000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=73	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=74	addr=0x7a5000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=75	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=76	addr=0x16b9000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=77	addr=0x1679000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=78	addr=0x1739000	size=0x40000	records=11	words=1636	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=79	addr=0x16f9000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=80	addr=0x1779000	size=0x40000	records=11	words=1636	terminated=1
+TOTAL	pid=19084	type=gl	flushes=80	anomalies=0	HIST 00:79:1125 04:40:10876 05:40:4480 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:39:1092 29:2:114 2f:239:32735 30:79:19750 33:79:15405
+FLUSH	conn=0x2c0f	type=gl	n=81	addr=0x725000	size=0x40000	records=4	words=507	terminated=1
+FLUSH	conn=0x2c0f	type=gl	n=82	addr=0x17b9000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x2c0f	type=gl	flushes=82	buffers=81	empty=0	records=635	words=86290	anomalies=0	strays=0	HIST 00:81:1147 04:40:10876 05:40:4480 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:40:1101 29:2:114 2f:240:32776 30:80:20000 33:80:15600
+TOTAL	pid=19084	type=gl	flushes=82	anomalies=0	HIST 00:81:1147 04:40:10876 05:40:4480 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:166 28:40:1101 29:2:114 2f:240:32776 30:80:20000 33:80:15600

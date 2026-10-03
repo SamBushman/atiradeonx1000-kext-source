@@ -1,0 +1,17 @@
+# opcode_recorder start pid=18685 start_offset=0x1c dump=0
+CLOSE	conn=0x220b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	HIST
+FLUSH	conn=0x220f	type=gl	n=2	addr=0x230000	size=0x20000	records=45	words=1906	terminated=1
+FLUSH	conn=0x220f	type=gl	n=3	addr=0x298000	size=0x40000	records=5	words=770	terminated=1
+FLUSH	conn=0x220f	type=gl	n=4	addr=0x560000	size=0x40000	records=5	words=770	terminated=1
+FLUSH	conn=0x220f	type=gl	n=5	addr=0x5a0000	size=0x40000	records=5	words=770	terminated=1
+FLUSH	conn=0x220f	type=gl	n=6	addr=0x705000	size=0x40000	records=6	words=25830	terminated=1
+FLUSH	conn=0x220f	type=gl	n=7	addr=0x745000	size=0x40000	records=2	words=107	terminated=1
+FLUSH	conn=0x220f	type=gl	n=8	addr=0x785000	size=0x40000	records=4	words=33467	terminated=1
+FLUSH	conn=0x220f	type=gl	n=9	addr=0x1555000	size=0x40000	records=2	words=8431	terminated=1
+FLUSH	conn=0x220f	type=gl	n=10	addr=0x1595000	size=0x40000	records=6	words=17051	terminated=1
+FLUSH	conn=0x220f	type=gl	n=11	addr=0x15d5000	size=0x40000	records=10	words=947	terminated=1
+FLUSH	conn=0x220f	type=gl	n=12	addr=0x298000	size=0x40000	records=5	words=488	terminated=1
+FLUSH	conn=0x220f	type=gl	n=13	addr=0x560000	size=0x40000	records=2	words=134	terminated=1
+FLUSH	conn=0x220f	type=gl	n=14	addr=0x5a0000	size=0x40000	records=2	words=10	terminated=1
+CLOSE	conn=0x220f	type=gl	flushes=14	buffers=13	empty=0	records=99	words=90681	anomalies=0	HIST 00:13:42457 05:1:112 06:12:1974 16:21:9688 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:1:9 29:3:175 2f:12:34627 33:3:573 3e:1:206 3f:1:205 40:1:206
+TOTAL	pid=18685	type=gl	flushes=14	anomalies=0	HIST 00:13:42457 05:1:112 06:12:1974 16:21:9688 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:1:9 29:3:175 2f:12:34627 33:3:573 3e:1:206 3f:1:205 40:1:206
