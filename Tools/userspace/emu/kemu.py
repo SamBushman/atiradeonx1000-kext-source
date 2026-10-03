@@ -139,14 +139,18 @@ def main():
     uc.mem_map(STOP & ~0xfff, 0x1000)
     entry = addr_of(r.m, symname)
 
-    # fake "self": the buffer pointer field (bufoff) points BUF-0x20 so that M<SInt32>(self+0xe0)+0x20 == BUF for GL/DVD (their loop start is
-    # M<SInt32>(self+0xe0)+0x1c, i.e. "buffer base" + 0x1c directly for 2D; GL/DVD add another +0x20 bias - see the Sources/*_Port.cpp prologues).
+    # fake "self": the buffer pointer field (bufoff) holds BUF directly for every context - the scan pointer is always "buffer base" + 0x1c
+    # (`M<SInt32>(self+0xac/0xe0/0xe8) + 0x1c`), matching where the stream is written below (BUF+0x1c). An earlier version of this harness
+    # subtracted 0x20 for GL/DVD on a misreading of a SEPARATE local (`local_1c0 = base + 0x20`, unrelated to the scan pointer) - that bug made
+    # the GL/DVD dispatcher read 4 bytes before the real stream (into an auto-zero-filled unmapped page), so it never saw the injected opcode
+    # at all and silently fell into the texture-slot fast path instead - caught by cross-checking against the real compare-site address
+    # from Tools/opcode_inventory.py's analyser, not by a crash (see pm4_opcode_gaps.md, 0x36 session).
     self_bytes = bytearray(SELF_SIZE)
     if ctx == '2d':
         struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar18 = M<SInt32>(self+0xac) + 0x1c  -> BUF + 0x1c
         struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)               # self+0x94: accelerator ptr (texture/surface table lookups)
     else:
-        struct.pack_into('>I', self_bytes, off['bufoff'], BUF - 0x20)          # puVar65 = (UInt32*)(M<SInt32>(self+0xe0) + 0x1c) ; local_1c0 uses +0x20
+        struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar65 = (UInt32*)(M<SInt32>(self+0xe0) + 0x1c) -> BUF + 0x1c
         struct.pack_into('>I', self_bytes, off['accoff'], ACCEL)
         struct.pack_into('>I', self_bytes, off['accoff2'], ACCEL)
         struct.pack_into('>I', self_bytes, 0x108, ACCEL + 0x100)               # puVar69 = M<UInt32*>(self+0x108): read as 6 words by the GL prologue (compute_sc_hyperz_en/compute_zb_bw_cntl args)
