@@ -68,23 +68,32 @@ int main(void) {
             printf("quirk4refinement: FBO incomplete (status=0x%04x), cannot test\n", status);
             bad++;
         } else {
+            /* #128 diagnostic (diag_fbo.c): rendering into the FBO via glClear alone was NOT reliably sample-able even
+             * with glFinish - only a real polygon draw was proven to work. Using that proven method here, not glClear. */
             glViewport(0, 0, 32, 32);
-            glClearColor(0, 1, 0, 1);   /* render pure green into the FBO's texture */
-            glClear(GL_COLOR_BUFFER_BIT);
+            glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(-1, 1, -1, 1, -1, 1);
+            glMatrixMode(GL_MODELVIEW); glLoadIdentity();
+            glDisable(GL_TEXTURE_2D); glDisable(GL_TEXTURE_RECTANGLE_ARB);
+            glColor3f(0, 1, 0);
+            glBegin(GL_QUADS); glVertex2f(-1,-1); glVertex2f(1,-1); glVertex2f(1,1); glVertex2f(-1,1); glEnd();
+            glFinish();
             glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
             glViewport(0, 0, 64, 64);
 
-            /* second draw: sample the FBO's texture via texture2DRect through a fixed-function rectangle-texture unit */
+            /* second draw: sample the FBO's texture via texture2DRect through a fixed-function rectangle-texture unit.
+             * Per-vertex texcoords spanning the real texture extent, not a constant coordinate at every vertex (the
+             * original version of this test used a constant (16,16) at all 4 vertices and also lacked the glFinish
+             * above - both fixed after the #128 diagnostic in diag_fbo.c isolated them). */
             glEnable(GL_TEXTURE_RECTANGLE_ARB);
             glBindTexture(GL_TEXTURE_RECTANGLE_ARB, tex);
             glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
             glColor3f(1, 1, 1);
             glClearColor(0, 0, 0, 1); glClear(GL_COLOR_BUFFER_BIT);
             glBegin(GL_QUADS);
-            glTexCoord2f(16, 16); glVertex2f(-1, -1);
-            glTexCoord2f(16, 16); glVertex2f(1, -1);
-            glTexCoord2f(16, 16); glVertex2f(1, 1);
-            glTexCoord2f(16, 16); glVertex2f(-1, 1);
+            glTexCoord2f(0, 0);   glVertex2f(-1, -1);
+            glTexCoord2f(32, 0);  glVertex2f(1, -1);
+            glTexCoord2f(32, 32); glVertex2f(1, 1);
+            glTexCoord2f(0, 32);  glVertex2f(-1, 1);
             glEnd();
             glFinish();
             static GLubyte buf[64 * 64 * 4];
