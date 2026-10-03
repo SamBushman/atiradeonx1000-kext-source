@@ -1,3 +1,8 @@
+/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (2026-10-03, ~16:50 local) crashed the G5 (user confirmed, rebooting). No write-ahead log output was captured before the session died - unknown which
+ * opcode, or whether it got past set_surface/the initial map at all. The emulator sweep this file's header describes was a real, substantive filter (it caught the three "wild advance" opcodes
+ * and the whole self+0x104 hazard class) but is NOT a hardware-accurate guarantee - see kemu.py's own documented blind spot (auto-zero-fills unmapped reads, which can mask a real null-deref
+ * panic the exact way #124/#125 were masked before their live crashes). DO NOT RE-RUN until the real panic.log is read and symbolicated; do not assume the emulator-clean set is actually safe
+ * a second time without that evidence. */
 /* T3 test for #42 criterion 2 (DVD process_command_buffer opcodes - no real player ever opens a DVD context on this machine, #93), issue #100 protocol #87.
  * Exercises the 53 of 62 DVD opcodes whose stock handler was confirmed, via Tools/userspace/emu/kemu.py (PPC emulation of the real stock machine code, zero
  * hardware risk), to terminate safely and boundedly with a generous zero-filled 16-word record - no wild pointer advance, no self+0x104 touch, or (for 0x02/
