@@ -1,11 +1,10 @@
-/* *** HAZARD - DO NOT RE-RUN AS IS: root cause now KNOWN, see below *** Run 1 (2026-10-03 02:02 local) made the G5 stop answering ssh/ping. The panic.log recovered after reboot (8:07) gives the
- * exact cause, and it is NOT what the first analysis below guessed: PC=0x5bbab0, ATIR5002DContext::process_command_buffer+0x3e0, `lwz r2,0x88(r27); lwz r0,0x14(r2)` = M<UInt32>(M<SInt32>(self+0x88)+0x14)
- * with self+0x88 (IOATIR500Shared*) NULL - a genuine, reproducible STOCK-KERNEL PANIC (Tests/known_vendor_deviations.md V12), triggered by calling the memType-0 FLUSH ITSELF on a connection that
- * only ever did t3_surface()+2D set_surface (no GA-plugin-level setup that would establish self+0x88). The hand-built record content below is NOT the trigger - ANY flush on a connection set up this
- * way panics, before any injected word is even scanned. Confirmed safe in isolation via Tools/userspace/emu/kemu.py (PPC emulation, self+0x88 deliberately left null): every opcode queued below
- * rewrites exactly as the ported C source predicts with NO wild pointer excursion - the records themselves were always fine; it is the FLUSH CALL on an under-initialised 2D context that panics.
- * The buffer-type note (memType 1 vs 0) below is also real (self+0xbc != self+0xac) but was a secondary bug, not the cause of the hang.
- * DO NOT RE-RUN until a real GA-plugin-equivalent setup call that establishes self+0x88 is identified; until then every flush on a hand-made 2D client will panic the kernel by this exact path. */
+/* *** FIXED 2026-10-03, see issue #124 *** Run 1 made the G5 stop answering ssh/ping: panic.log showed ATIR5002DContext::process_command_buffer+0x3e0 null-dereferencing self+0x88 (sharedAllocator),
+ * which this project's own headers already documented as "lazily created via create_shared() on first texture/transfer allocation" (Headers/IOATIR5002DContext.h:146) - a connection that never
+ * calls declare_image/create_image has a null self+0x88 for its whole life, and process_command_buffer's image-record handlers (0x03/0x04/0x07/0x08/0x10/0x13, including this test's own 0x07
+ * discard guard) dereference it unconditionally. Fix: call declare_image (selector 8) ONCE right after binding, before any flush - it lazily calls create_shared() when self+0x88 is null
+ * (Sources/IOATIR5002DContext_declare_image_Port.cpp:40-47), a plain `new IOATIR500Shared()` + init wired to the already-valid self+0x94/self+0x78, no further hazard. Also fixed the secondary bug:
+ * memType 1 returns self+0xbc (a separate, unrelated per-connection descriptor, re-initialised to 0x1000 - IOATIR5002DContext_clientMemoryForType_Port.cpp:61-63), NOT the buffer
+ * process_command_buffer scans (self+0xac, returned only by memType 0's ping-pong swap); the first buffer to write into now comes from memType 0 directly. */
 /* T3 test for #42 criterion 2 (2D process_command_buffer opcodes no real consumer emits on this machine), issue #100 protocol #87.
  * A 2D connection bound to a 4x4 surface (as t3_2d_swap) gets its command buffer from IOConnectMapMemory(2D, memType 1); this test writes ONE hand-built record at buffer+0x1c, the
  * discard guard behind it, and submits with the flush map (memType 0), then reads the first words back from the (still mapped) old buffer: the kernel rewrites every record in place,
@@ -36,7 +35,7 @@ static const rec_t recs[] = {
     { "0x02 (end marker, returns 1)",      1, { 0x02000001 } },
 };
 static const char *body(dtest_t *t, io_service_t svc) {
-    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i, j; IOByteCount osz; unsigned char out[0x30];
+    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i, j; IOByteCount osz; unsigned char out[0x30]; unsigned imgId = 0xffffffff;
     vm_address_t addr = 0; vm_size_t size = 0;
     if (t3_surface(t, svc, &s, 4, 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open 2D connection", open_user_client(svc, CLIENT_TYPE_2D, &d));
@@ -44,7 +43,13 @@ static const char *body(dtest_t *t, io_service_t svc) {
     osz = sizeof out;
     T3CALL(t, r, "2D set_surface(id 1, mode 0x800) binds", IOConnectMethodScalarIStructureO(d, 0, 2, &osz, 1, 0x800, out)); bad += t3_expect(t, "bind", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
-    T3CALL(t, r, "map the initial context buffer (memType 1)", IOConnectMapMemory(d, 1, mach_task_self(), &addr, &size, kIOMapAnywhere)); bad += t3_expect(t, "map buffer", r, 0);
+    /* #124 fix: establish self+0x88 (sharedAllocator) BEFORE any flush can reach an image-record opcode. declare_image(sel 8): 3 scalar in (unused, width, height), 1 scalar out (image id). */
+    T3CALL(t, r, "2D declare_image(4,4) - lazily creates sharedAllocator (self+0x88)", IOConnectMethodScalarIScalarO(d, 8, 3, 1, 0, 4, 4, &imgId));
+    bad += t3_expect(t, "declare_image", r, 0);
+    dtest_note(t, "declare_image -> r=0x%08x imgId=0x%x", (unsigned)r, imgId);
+    if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
+    /* #124 fix: memType 1 returns self+0xbc, NOT the buffer process_command_buffer scans - get the real one (self+0xac) from memType 0 directly. */
+    T3CALL(t, r, "map the initial command buffer (memType 0)", IOConnectMapMemory(d, 0, mach_task_self(), &addr, &size, kIOMapAnywhere)); bad += t3_expect(t, "map buffer", r, 0);
     if (r != 0) { IOServiceClose(d); IOServiceClose(s); return "DIVERGENCE"; }
     dtest_note(t, "initial buffer addr=0x%lx size=0x%lx header words: %08x %08x %08x %08x %08x %08x %08x then stream %08x %08x", (unsigned long)addr, (unsigned long)size,
                ((unsigned *)addr)[0], ((unsigned *)addr)[1], ((unsigned *)addr)[2], ((unsigned *)addr)[3], ((unsigned *)addr)[4], ((unsigned *)addr)[5], ((unsigned *)addr)[6], ((unsigned *)addr)[7], ((unsigned *)addr)[8]);
