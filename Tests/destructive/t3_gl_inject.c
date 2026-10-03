@@ -1,3 +1,10 @@
+/* *** HAZARD - DO NOT RE-RUN AS IS *** Run 1 (2026-10-03 16:02 UTC) hung the G5 (no ssh response within 300s; user confirms a real crash requiring a restart). The write-ahead log's last line was
+ * "ABOUT TO CALL inject 0x36 (real handle 0xa000) then flush (GL memType 1)" - the flush itself did not return. "0xa000" is a suspiciously small value for get_data_buffer's returned handle; the
+ * static trust claim in Tests/pm4_opcode_gaps.md ("the client only ever relays a handle the kernel itself issued, so it is safe") is NOT established by this result - a kernel-issued handle is not
+ * automatically safe to replay in isolation, outside whatever internal state the real driver's own call sequence maintains around it (the real GLDriver's emitter calls get_data_buffer and 0x36
+ * back-to-back inside one larger sequence with other state already set - Userspace/ATIRadeonX1000GLDriver/ppc/part_004.c FUN_00027150 - not as two bare, isolated external-method calls). The exact
+ * panic has not yet been pulled/symbolicated (G5 was down at time of writing). DO NOT RE-RUN until the panic log is read and the real cause is understood - do not assume the "trusted handle"
+ * reasoning again without re-verifying it against the actual crash. */
 /* T3 test for #42 (GL opcode 0x36 - the one opcode left unexercised after the Oct 3 injection pass, Tests/pm4_opcode_gaps.md), issue #100 protocol #87.
  * 0x36's handler (Sources/ATIR500GLContext_process_command_buffer_Port.cpp) treats record word 1 as a kernel VendorTransferBuffer* and maps it to the GART
  * (map_transfer_to_GART / IOATIR500Accelerator::freeTransferToAllocGART) - confirmed via Tools/userspace/emu/kemu.py that this does REAL GART-pool bookkeeping,
