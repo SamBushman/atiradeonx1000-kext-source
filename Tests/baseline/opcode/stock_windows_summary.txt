@@ -1,0 +1,11 @@
+win_0_30_1_24_basic: exit 0 ; 61 flushes ; glwin done: 30 frames
+win_4_40_1_24_basic: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_2_40_1_24_basic: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_6_40_1_24_basic: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_0_40_0_16_basic: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_0_40_1_24_clears: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_0_40_1_24_hz: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_4_40_1_24_hz: exit 0 ; 81 flushes ; glwin done: 40 frames
+win_4_30_1_24_resolve: exit 0 ; 603 flushes ; glwin done: 30 frames
+win_0_30_1_24_resolve: exit 0 ; 483 flushes ; glwin done: 30 frames
+win_6_30_0_24_resolve: exit 0 ; 601 flushes ; glwin done: 30 frames

@@ -4,7 +4,7 @@
  * ordinary GL; nothing here fuzzes arguments. Respects the catalog: only `#version 110`-class GLSL, power-of-two sizes for GL_TEXTURE_2D (rectangle textures for NPOT), no extra
  * glBindBuffer tricks before draws.
  *
- * Usage: glcov FEATURE [FEATURE ...]      features: multitex texfmt fbo msaa query clear state draw shaders pixel vbo bigdraw stress (env GLSTRESS_ITERS, GLSTRESS_SEED)
+ * Usage: glcov FEATURE [FEATURE ...]      features: multitex texfmt fbo fbo2 copypix copydepth cglparams msaa query clear state draw shaders pixel vbo bigdraw stress (env GLSTRESS_ITERS, GLSTRESS_SEED)
  * Build on the G5:  gcc -arch ppc -std=gnu99 -w -o glcov glcov.c -framework OpenGL -framework ApplicationServices
  * Each feature ends with glFinish and prints "feature <name>: glGetError sum=<n>"; exit 0 unless the context could not be created.
  */
@@ -137,6 +137,85 @@ static void f_fbo(void) {
       printf("  depth-texture fbo status 0x%x\n", glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT)); glViewport(0, 0, 128, 128); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); glEnable(GL_DEPTH_TEST); tri(0, 0, .5f, 0); glDisable(GL_DEPTH_TEST);
       glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, db); glDeleteTextures(1, &dt); }
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); glViewport(0, 0, W, H); glDeleteFramebuffersEXT(1, &fb); glDeleteRenderbuffersEXT(1, &db); glDeleteRenderbuffersEXT(1, &rb); glDisable(GL_TEXTURE_2D); errs("fbo"); done("fbo");
+}
+
+static void f_fbo2(void) {
+    /* consistent-size framebuffers (the "fbo" feature's float and depth-texture cases were INCOMPLETE_DIMENSIONS and rendered nothing): shadow-map style depth-only FBOs with depth TEXTURES,
+     * depth+colour FBOs, float colour targets without a stale depth attachment, and sampling the depth texture afterwards */
+    GLuint fb, dt, ct, rb; int i, f; GLenum dfmt[] = { GL_DEPTH_COMPONENT16, GL_DEPTH_COMPONENT24, GL_DEPTH_COMPONENT32 }; static unsigned char buf[256 * 256 * 4]; static float fbuf[256 * 256]; memset(buf, 0x30, sizeof buf); for (i = 0; i < 256 * 256; i++) fbuf[i] = (float)(i % 256) / 255.f; ortho();
+    glGenFramebuffersEXT(1, &fb);
+    for (f = 0; f < 3; f++) {
+        int sz = f == 0 ? 128 : 256; GLenum st;
+        glGenTextures(1, &dt); glBindTexture(GL_TEXTURE_2D, dt); glTexImage2D(GL_TEXTURE_2D, 0, dfmt[f], sz, sz, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE_ARB);
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, dt, 0); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, 0, 0);
+        glDrawBuffer(GL_NONE); glReadBuffer(GL_NONE); st = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT); printf("  depth-only fbo (%d bits-ish, %d) status 0x%x\n", f, sz, st);
+        glViewport(0, 0, sz, sz); glClearDepth(1.0); glClear(GL_DEPTH_BUFFER_BIT); glEnable(GL_DEPTH_TEST); glColorMask(0, 0, 0, 0); for (i = 0; i < 6; i++) { glLoadIdentity(); glRotatef(i * 30.f, 0, 0, 1); tri(0, 0, .6f, -0.8f + i * 0.2f); } glColorMask(1, 1, 1, 1); glDisable(GL_DEPTH_TEST);
+        glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); glDrawBuffer(GL_BACK); glReadBuffer(GL_BACK); glViewport(0, 0, W, H); glLoadIdentity();
+        glBindTexture(GL_TEXTURE_2D, dt); glEnable(GL_TEXTURE_2D); glTexParameteri(GL_TEXTURE_2D, GL_DEPTH_TEXTURE_MODE_ARB, GL_LUMINANCE); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_NONE); quad(0);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE_ARB, GL_COMPARE_R_TO_TEXTURE_ARB); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC_ARB, GL_LEQUAL); glEnable(GL_TEXTURE_GEN_S); glEnable(GL_TEXTURE_GEN_T); glEnable(GL_TEXTURE_GEN_R); glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR); glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR); glTexGeni(GL_R, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR); quad(0);
+        glDisable(GL_TEXTURE_GEN_S); glDisable(GL_TEXTURE_GEN_T); glDisable(GL_TEXTURE_GEN_R); glDisable(GL_TEXTURE_2D); glDeleteTextures(1, &dt); errs("depth-only fbo");
+    }
+    /* depth texture + colour texture of the same size, rendered, then both sampled */
+    glGenTextures(1, &dt); glBindTexture(GL_TEXTURE_2D, dt); glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 128, 128, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_INT, NULL); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glGenTextures(1, &ct); glBindTexture(GL_TEXTURE_2D, ct); glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL); glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, ct, 0); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, dt, 0);
+    printf("  colour+depth-texture fbo status 0x%x\n", glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT)); glViewport(0, 0, 128, 128); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); glEnable(GL_DEPTH_TEST); for (i = 0; i < 4; i++) { glLoadIdentity(); glRotatef(i * 45.f, 0, 0, 1); tri(0, 0, .7f, -0.6f + i * 0.3f); } glDisable(GL_DEPTH_TEST);
+    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); glViewport(0, 0, W, H); glLoadIdentity(); glEnable(GL_TEXTURE_2D); glBindTexture(GL_TEXTURE_2D, ct); quad(0); glBindTexture(GL_TEXTURE_2D, dt); quad(0); glDisable(GL_TEXTURE_2D); errs("colour+depth fbo");
+    /* depth textures filled from the CPU and from the framebuffer, then sampled */
+    glGenTextures(1, &rb); glBindTexture(GL_TEXTURE_2D, rb); glEnable(GL_TEXTURE_2D); glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 128, 128, 0, GL_DEPTH_COMPONENT, GL_FLOAT, fbuf); glTexSubImage2D(GL_TEXTURE_2D, 0, 8, 8, 64, 64, GL_DEPTH_COMPONENT, GL_FLOAT, fbuf);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, 64, 64, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, buf); quad(0); glClear(GL_DEPTH_BUFFER_BIT); glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT24, 0, 0, 128, 128, 0); quad(0); glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 16, 16, 64, 64); quad(0);
+    glDisable(GL_TEXTURE_2D); glDeleteTextures(1, &rb); errs("depth texture uploads");
+    /* float colour targets, no depth attachment, consistent sizes */
+    { GLenum ff[] = { GL_RGBA_FLOAT16_ATI, GL_RGBA_FLOAT32_ATI, GL_RGB_FLOAT16_ATI, GL_LUMINANCE_FLOAT16_ATI, GL_ALPHA_FLOAT16_ATI, GL_INTENSITY_FLOAT16_ATI, GL_LUMINANCE_ALPHA_FLOAT16_ATI };
+      GLenum tgt[2] = { GL_TEXTURE_2D, GL_TEXTURE_RECTANGLE_EXT };
+      for (f = 0; f < 7; f++) { int t2; for (t2 = 0; t2 < 2; t2++) { GLuint ft; GLenum st; glGenTextures(1, &ft); glBindTexture(tgt[t2], ft); glTexImage2D(tgt[t2], 0, ff[f], 64, 64, 0, GL_RGBA, GL_FLOAT, NULL); glTexParameteri(tgt[t2], GL_TEXTURE_MIN_FILTER, GL_NEAREST); glTexParameteri(tgt[t2], GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+          glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, fb); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_TEXTURE_2D, 0, 0); glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, tgt[t2], ft, 0); st = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+          printf("  float fbo fmt %d target %d status 0x%x\n", f, t2, st); glViewport(0, 0, 64, 64); glClearColor(0.25f, 0.5f, 0.75f, 1); glClear(GL_COLOR_BUFFER_BIT); glClearColor(0, 0, 0, 0); glClear(GL_COLOR_BUFFER_BIT); glClearColor(1, 1, 1, 1); glClear(GL_COLOR_BUFFER_BIT); tri(0, 0, .6f, 0);
+          glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); glViewport(0, 0, W, H); glEnable(tgt[t2]); glBegin(GL_QUADS); glTexCoord2f(0, 0); glVertex2f(-.5f, -.5f); glTexCoord2f(t2 ? 64 : 1, 0); glVertex2f(.5f, -.5f); glTexCoord2f(t2 ? 64 : 1, t2 ? 64 : 1); glVertex2f(.5f, .5f); glTexCoord2f(0, t2 ? 64 : 1); glVertex2f(-.5f, .5f); glEnd(); glDisable(tgt[t2]); glDeleteTextures(1, &ft); } } }
+    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0); glDeleteFramebuffersEXT(1, &fb); glDeleteTextures(1, &dt); glDeleteTextures(1, &ct); errs("fbo2"); done("fbo2");
+}
+
+static void f_copypix(void) {
+    /* glCopyPixels with the conditions the stock driver's accelerated path (FUN_00018120) tests: NON-overlapping source and destination rectangles, default pixel-transfer state,
+     * no fog/blend/texture state bits for colour copies; for GL_DEPTH copies depth test on, glDepthFunc(GL_ALWAYS), depth mask on, stencil off. Window-space raster positions via glWindowPos2iARB. */
+    int i, k; int pos[][4] = { { 0, 0, 128, 128 }, { 0, 0, 64, 64 }, { 10, 10, 200, 100 }, { 100, 50, 32, 32 }, { 0, 0, 256, 128 } }; ortho(); glClearColor(.3f, .5f, .7f, 1); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST); tri(0, 0, .8f, -.5f); glDisable(GL_DEPTH_TEST);
+    for (i = 0; i < 5; i++) for (k = 0; k < 3; k++) { int dx = 260 + k * 10, dy = 260 + k * 10; glWindowPos2iARB(dx, dy); glCopyPixels(pos[i][0], pos[i][1], pos[i][2] > 240 ? 240 : pos[i][2], pos[i][3] > 240 ? 240 : pos[i][3], GL_COLOR); }
+    glEnable(GL_DEPTH_TEST); glDepthFunc(GL_ALWAYS); glDepthMask(GL_TRUE); glDisable(GL_STENCIL_TEST); glColorMask(1, 1, 1, 1);
+    for (i = 0; i < 5; i++) { glWindowPos2iARB(260, 260); glCopyPixels(pos[i][0], pos[i][1], pos[i][2] > 240 ? 240 : pos[i][2], pos[i][3] > 240 ? 240 : pos[i][3], GL_DEPTH); }
+    glDepthFunc(GL_LESS); glDisable(GL_DEPTH_TEST);
+    glEnable(GL_SCISSOR_TEST); glScissor(250, 250, 200, 200); glWindowPos2iARB(260, 260); glCopyPixels(0, 0, 100, 100, GL_COLOR); glDisable(GL_SCISSOR_TEST);
+    glWindowPos2iARB(300, 10); glCopyPixels(0, 300, 128, 128, GL_COLOR); glWindowPos2iARB(10, 300); glCopyPixels(300, 10, 100, 100, GL_COLOR); glFinish(); errs("copypix"); done("copypix");
+}
+
+static void f_copydepth(void) {
+    /* every on/off combination of 8 GL states, each followed by a non-overlapping glCopyPixels(GL_DEPTH): finds which state mix the driver's accelerated depth copy (record 0x31) accepts */
+    int m; GLuint t = tex2d(16, 16, GL_RGBA, GL_RGBA, GL_UNSIGNED_BYTE, 1); ortho(); glClearColor(.3f, .5f, .7f, 1); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST); tri(0, 0, .8f, -.5f); glDisable(GL_DEPTH_TEST);
+    for (m = 0; m < 256; m++) {
+        if (m & 1) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+        glDepthFunc(m & 2 ? GL_ALWAYS : GL_LESS); glDepthMask(m & 4 ? GL_TRUE : GL_FALSE); glColorMask(m & 8, m & 8, m & 8, m & 8);
+        if (m & 16) glEnable(GL_STENCIL_TEST); else glDisable(GL_STENCIL_TEST); if (m & 32) glEnable(GL_BLEND); else glDisable(GL_BLEND);
+        if (m & 64) { glEnable(GL_SCISSOR_TEST); glScissor(200, 200, 300, 300); } else glDisable(GL_SCISSOR_TEST); if (m & 128) glEnable(GL_TEXTURE_2D); else glDisable(GL_TEXTURE_2D);
+        glWindowPos2iARB(260, 260); glCopyPixels(0, 0, 120, 120, GL_DEPTH);
+    }
+    glColorMask(1, 1, 1, 1); glDepthMask(GL_TRUE); glDisable(GL_STENCIL_TEST); glDisable(GL_BLEND); glDisable(GL_SCISSOR_TEST); glDisable(GL_TEXTURE_2D); glDepthFunc(GL_LESS); glDisable(GL_DEPTH_TEST); glDeleteTextures(1, &t); glFinish(); errs("copydepth"); done("copydepth");
+}
+
+static void f_cglparams(void) {
+    /* CGL-level context parameters/enables: the stock driver's gldSetInteger (and the 0x3d records) are probably behind these; each call is the documented CGL API with in-range values */
+    GLint v[4]; int i; CGLError e; ortho();
+    { CGLContextParameter ps[] = { kCGLCPSwapInterval, kCGLCPSurfaceOrder, kCGLCPSurfaceOpacity, kCGLCPSurfaceBackingSize, kCGLCPSwapRectangle, kCGLCPClientStorage, kCGLCPDispatchTableSize, kCGLCPGPUVertexProcessing, kCGLCPGPUFragmentProcessing };
+      for (i = 0; i < 9; i++) { GLint o = 0; e = CGLGetParameter(g_ctx, ps[i], &o); v[0] = o; v[1] = v[2] = v[3] = 0; if (ps[i] == kCGLCPSurfaceBackingSize) { v[0] = 640; v[1] = 480; } if (ps[i] == kCGLCPSwapRectangle) { v[0] = 0; v[1] = 0; v[2] = 256; v[3] = 256; }
+        e = CGLSetParameter(g_ctx, ps[i], v); printf("  CGLSetParameter %d -> %d (get %d)\n", (int)ps[i], (int)e, o); quad(0); } }
+    { CGLContextEnable es[] = { kCGLCESwapRectangle, kCGLCESwapLimit, kCGLCERasterization, kCGLCEStateValidation, kCGLCESurfaceBackingSize, kCGLCEDisplayListOptimization, kCGLCEMPEngine };
+      for (i = 0; i < 7; i++) { e = CGLEnable(g_ctx, es[i]); printf("  CGLEnable %d -> %d\n", (int)es[i], (int)e); quad(0); glFlush(); e = CGLDisable(g_ctx, es[i]); quad(0); glFlush(); } }
+    { int ids[] = { 300, 306, 0x1fe, 0x29b }; int j; for (j = 0; j < 4; j++) { int val; for (val = 0; val < 2; val++) { GLint pv[4]; pv[0] = val; pv[1] = pv[2] = pv[3] = 0; e = CGLSetParameter(g_ctx, (CGLContextParameter)ids[j], pv); printf("  CGLSetParameter id %d value %d -> %d\n", ids[j], val, (int)e); quad(0); glFlush();
+          e = (j < 4) ? CGLEnable(g_ctx, (CGLContextEnable)ids[j]) : 0; printf("  CGLEnable id %d -> %d\n", ids[j], (int)e); quad(0); glFlush(); CGLDisable(g_ctx, (CGLContextEnable)ids[j]); } } }
+    { GLint o; CGLGetParameter(g_ctx, kCGLCPCurrentRendererID, &o); CGLGetParameter(g_ctx, kCGLCPSwapInterval, &o); }
+    { CGLGlobalOption go[] = { kCGLGOFormatCacheSize, kCGLGOClearFormatCache, kCGLGORetainRenderers, kCGLGOResetLibrary }; GLint o = 0; for (i = 0; i < 3; i++) { e = CGLGetOption(go[i], &o); } }
+    glFinish(); errs("cglparams"); done("cglparams");
 }
 static void f_msaa(void) {
     int i; unsigned char px[16 * 16 * 4]; { GLint sb = -1, sm = -1, db = -1, sbit = -1; glGetIntegerv(GL_SAMPLE_BUFFERS_ARB, &sb); glGetIntegerv(GL_SAMPLES_ARB, &sm); glGetIntegerv(GL_DEPTH_BITS, &db); glGetIntegerv(GL_STENCIL_BITS, &sbit); printf("  context: sample buffers %d, samples %d, depth bits %d, stencil bits %d\n", sb, sm, db, sbit); } glClearColor(0, 0, 0, 1); glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT); ortho();
@@ -317,7 +396,7 @@ int main(int argc, char **argv) {
     if (!make_ctx(msaa)) return 1;
     for (i = 1; i < argc; i++) {
         const char *f = argv[i];
-        if (!strcmp(f, "multitex")) f_multitex(); else if (!strcmp(f, "texfmt")) f_texfmt(); else if (!strcmp(f, "fbo")) f_fbo();
+        if (!strcmp(f, "multitex")) f_multitex(); else if (!strcmp(f, "fbo2")) f_fbo2(); else if (!strcmp(f, "copypix")) f_copypix(); else if (!strcmp(f, "copydepth")) f_copydepth(); else if (!strcmp(f, "cglparams")) f_cglparams(); else if (!strcmp(f, "texfmt")) f_texfmt(); else if (!strcmp(f, "fbo")) f_fbo();
         else if (!strncmp(f, "msaa", 4)) f_msaa(); else if (!strcmp(f, "query")) f_query(); else if (!strcmp(f, "clear")) f_clear();
         else if (!strcmp(f, "state")) f_state(); else if (!strcmp(f, "draw")) f_draw(); else if (!strcmp(f, "shaders")) f_shaders();
         else if (!strcmp(f, "pixel")) f_pixel(); else if (!strcmp(f, "vbo")) f_vbo(); else if (!strcmp(f, "bigdraw")) f_bigdraw(); else if (!strcmp(f, "stress")) f_stress(); else printf("unknown feature %s\n", f);

@@ -1,0 +1,16 @@
+multitex: exit 0 ; 5 flushes ; glcov: exit() called
+texfmt: exit 0 ; 23 flushes ; glcov: exit() called
+fbo: exit 0 ; 11 flushes ; glcov: exit() called
+fbo2: exit 0 ; 34 flushes ; glcov: exit() called
+query: exit 0 ; 4 flushes ; glcov: exit() called
+clear: exit 0 ; 2 flushes ; glcov: exit() called
+state: exit 0 ; 3 flushes ; glcov: exit() called
+draw: exit 0 ; 2 flushes ; glcov: exit() called
+shaders: exit 0 ; 3 flushes ; glcov: exit() called
+pixel: exit 0 ; 13 flushes ; glcov: exit() called
+vbo: exit 0 ; 5 flushes ; glcov: exit() called
+bigdraw: exit 0 ; 147 flushes ; glcov: exit() called
+copypix: exit 0 ; 11 flushes ; glcov: exit() called
+copydepth: exit 0 ; 246 flushes ; glcov: exit() called
+cglparams: exit 0 ; 12 flushes ; glcov: exit() called
+msaa4: exit 0 ; 4 flushes ; glcov: exit() called

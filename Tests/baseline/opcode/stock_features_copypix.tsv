@@ -1,0 +1,26 @@
+# opcode_recorder start pid=1756 start_offset=0x1c dump=0
+CLOSE	conn=0x220b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x13164
+FLUSH	conn=0x220f	type=gl	n=2	addr=0x358000	size=0x20000	records=74	words=19539	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x3cfb0
+FLUSH	conn=0x220f	type=gl	n=3	addr=0x75e000	size=0x40000	records=6	words=62438	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x45128
+FLUSH	conn=0x220f	type=gl	n=4	addr=0x1008000	size=0x80000	records=7	words=70724	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x20b08
+FLUSH	conn=0x220f	type=gl	n=5	addr=0x1494000	size=0x80000	records=5	words=33468	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x7eb50
+FLUSH	conn=0x220f	type=gl	n=6	addr=0x1514000	size=0x80000	records=9	words=129742	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x1fcbc
+FLUSH	conn=0x220f	type=gl	n=7	addr=0x1594000	size=0x80000	records=5	words=32553	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x83d8
+FLUSH	conn=0x220f	type=gl	n=8	addr=0x1614000	size=0x80000	records=3	words=8432	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x79e10
+FLUSH	conn=0x220f	type=gl	n=9	addr=0x1694000	size=0x80000	records=10	words=124798	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x03 header=0x03000000 at +0x7d67c
+FLUSH	conn=0x220f	type=gl	n=10	addr=0x1714000	size=0x80000	records=17	words=128409	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x03 header=0x03000000 at +0x44
+FLUSH	conn=0x220f	type=gl	n=11	addr=0x2008000	size=0x80000	records=3	words=11	terminated=1
+TAIL	conn=0x220f	type=gl	final record op=0x01 header=0x01000000 at +0x44
+FLUSH	conn=0x220f	type=gl	n=12	addr=0x75e000	size=0x80000	records=3	words=11	terminated=1
+CLOSE	conn=0x220f	type=gl	flushes=12	buffers=11	empty=0	records=142	words=610125	anomalies=0	strays=0	tails=11	HIST 00:11:103294 01:9:9 03:2:2 05:1:112 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:18 29:2:114 2d:18:18504 2f:47:484129 33:18:3492
+TOTAL	pid=1756	type=gl	flushes=12	anomalies=0	HIST 00:11:103294 01:9:9 03:2:2 05:1:112 16:2:2 17:2:2 18:2:2 19:2:2 1a:2:2 1b:2:2 1c:2:2 1d:2:2 1e:2:2 1f:2:2 20:2:2 21:2:2 22:2:2 23:2:2 24:2:2 25:2:421 28:2:18 29:2:114 2d:18:18504 2f:47:484129 33:18:3492

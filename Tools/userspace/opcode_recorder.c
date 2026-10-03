@@ -33,7 +33,7 @@
 typedef struct {
     int used; io_connect_t connect; unsigned type;           /* IOServiceOpen type: 0 surface, 1 GL, 2 2D, 3 DVD */
     unsigned flush_type; vm_address_t cur_addr; vm_size_t cur_size; int have_cur;
-    unsigned long flushes, buffers_scanned, records, words, anomalies, empty_buffers, strays;
+    unsigned long flushes, buffers_scanned, records, words, anomalies, empty_buffers, strays, tails;
     unsigned long hist_rec[256], hist_words[256];
 } conn_t;
 static conn_t g_conn[MAXCONN];
@@ -89,7 +89,12 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
     { unsigned lo[16], ln[16], lf[16]; int nl = 0, k;                  /* trace of the last 16 records, printed with any anomaly */
     while (p + 4 <= end) {
         unsigned w = *(unsigned *)p, n = w & 0xffffff, op = w >> 24;
-        if (n == 0) { term = 1; break; }
+        if (n == 0) {
+            /* the driver back-patches each record's length when the NEXT record is appended (*prev |= (next - prev) >> 2), so the LAST record of a buffer keeps length 0: a non-zero header word
+             * with length 0 is that final record (count its opcode, length unknown); an all-zero word is the plain terminator */
+            if (w != 0) { c->hist_rec[op]++; c->hist_words[op] += 1; g_tot_rec[t][op]++; g_tot_words[t][op] += 1; nrec++; nwords++; c->tails++; fprintf(g_log, "TAIL\tconn=0x%x\ttype=%s\tfinal record op=0x%02x header=0x%08x at +0x%lx\n", (unsigned)c->connect, tname[t], op, w, (unsigned long)(p - g_buf)); }
+            term = 1; break;
+        }
         if (p + (unsigned long)n * 4 > end && p + 8 <= end && *(unsigned *)(p + 4) == 0) {
             /* one stray word between the end of the previous record and a zero terminator (seen once, after a 2825-word 0x25 record from a 900-vertex glBegin/glEnd; the kernel's in-place rewrite stops at
                that record, see the POST lines): logged as STRAY, not as an anomaly, because the stream is otherwise consistent and terminates one word later */
@@ -114,7 +119,7 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
     fprintf(g_log, "FLUSH\tconn=0x%x\ttype=%s\tn=%lu\taddr=0x%lx\tsize=0x%lx\trecords=%lu\twords=%lu\tterminated=%d\n", (unsigned)c->connect, tname[t], c->flushes, (unsigned long)addr, (unsigned long)size, nrec, nwords, term);
 }
 static void summary(const char *what, conn_t *c) {
-    int i; fprintf(g_log, "%s\tconn=0x%x\ttype=%s\tflushes=%lu\tbuffers=%lu\tempty=%lu\trecords=%lu\twords=%lu\tanomalies=%lu\tstrays=%lu\tHIST", what, (unsigned)c->connect, tname[c->type & 3], c->flushes, c->buffers_scanned, c->empty_buffers, c->records, c->words, c->anomalies, c->strays);
+    int i; fprintf(g_log, "%s\tconn=0x%x\ttype=%s\tflushes=%lu\tbuffers=%lu\tempty=%lu\trecords=%lu\twords=%lu\tanomalies=%lu\tstrays=%lu\ttails=%lu\tHIST", what, (unsigned)c->connect, tname[c->type & 3], c->flushes, c->buffers_scanned, c->empty_buffers, c->records, c->words, c->anomalies, c->strays, c->tails);
     for (i = 0; i < 256; i++) if (c->hist_rec[i]) fprintf(g_log, " %02x:%lu:%lu", i, c->hist_rec[i], c->hist_words[i]);
     fprintf(g_log, "\n");
 }
