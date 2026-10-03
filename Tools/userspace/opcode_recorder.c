@@ -32,7 +32,7 @@
 #define MAXCONN 64
 typedef struct {
     int used; io_connect_t connect; unsigned type;           /* IOServiceOpen type: 0 surface, 1 GL, 2 2D, 3 DVD */
-    unsigned flush_type; vm_address_t cur_addr; vm_size_t cur_size; int have_cur;
+    unsigned flush_type; unsigned init_type; vm_address_t cur_addr; vm_size_t cur_size; int have_cur;
     unsigned long flushes, buffers_scanned, records, words, anomalies, empty_buffers, strays, tails;
     unsigned long hist_rec[256], hist_words[256];
 } conn_t;
@@ -127,11 +127,13 @@ static void summary(const char *what, conn_t *c) {
 static kern_return_t my_open(io_service_t s, task_port_t task, uint32_t type, io_connect_t *conn) {
     kern_return_t r; ensure_log(); if (!real_open) real_open = resolve_real("IOServiceOpen");
     r = real_open(s, task, type, conn);
+    if (r == KERN_SUCCESS && conn) fprintf(g_log, "OPEN\ttype=%u\tconnect=0x%x\n", type, (unsigned)*conn);
     if (r == KERN_SUCCESS && conn && type <= 3) {
         int i; pthread_mutex_lock(&g_mu);
         for (i = 0; i < MAXCONN; i++) if (!g_conn[i].used) {
             memset(&g_conn[i], 0, sizeof g_conn[i]); g_conn[i].used = 1; g_conn[i].connect = *conn; g_conn[i].type = type;
             g_conn[i].flush_type = (type == 1) ? 1 : (type == 2) ? 0 : (type == 3) ? 1 : 0xffffffff;   /* surface connections carry no command buffer */
+            g_conn[i].init_type = (type == 2) ? 1 : (type == 3) ? 2 : 0xffffffff;                          /* 2D: the first buffer comes from memory type 1, DVD: type 2 (GL: the first flush-type map returns it) */
             break;
         }
         pthread_mutex_unlock(&g_mu);
@@ -165,7 +167,7 @@ static kern_return_t my_map(io_connect_t c, uint32_t mt, task_port_t task, vm_ad
         g_post_pending = 0;
     }
     pthread_mutex_lock(&g_mu); k = find(c);
-    if (k && k->type && mt == k->flush_type && r == KERN_SUCCESS && at && sz) { k->cur_addr = *at; k->cur_size = *sz; k->have_cur = 1; }
+    if (k && k->type && r == KERN_SUCCESS && at && sz && (mt == k->flush_type || (mt == k->init_type && !k->have_cur))) { k->cur_addr = *at; k->cur_size = *sz; k->have_cur = 1; }
     pthread_mutex_unlock(&g_mu);
     return r;
 }
