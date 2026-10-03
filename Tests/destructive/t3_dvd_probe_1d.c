@@ -8,8 +8,8 @@
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; unsigned i;
     unsigned imgId = 0xffffffff; vm_address_t addr = 0; vm_size_t size = 0;
-    const char *probeEnv = getenv("PROBE_N"); int PROBE_N = probeEnv ? atoi(probeEnv) : 0; /* how many of {0x19,0x1a,0x1b,0x1c} to run before the real 0x1d probe */
-    static const unsigned pre[] = {0x19,0x1a,0x1b,0x1c};
+    const char *probeEnv = getenv("PROBE_N"); int PROBE_N = probeEnv ? atoi(probeEnv) : 0; /* how many of the FULL real pre-opcode sequence (0x02..0x17 then 0x19..0x1c, matching the original crashing run exactly) to run before the real 0x1d probe */
+    static const unsigned pre[] = {0x02,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0c,0x13,0x15,0x16,0x17,0x19,0x1a,0x1b,0x1c};
     if (t3_surface(t, svc, &s, 4, 4) != KERN_SUCCESS) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != KERN_SUCCESS) { IOServiceClose(s); return "DIVERGENCE"; }
