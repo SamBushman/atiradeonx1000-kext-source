@@ -65,11 +65,19 @@ The backup of the stock driver bundles with checksums is `backups/stock-driver-2
 Rationale: the soak's GL churn is ~35 k contexts in 4 h, an order of magnitude beyond anything run so far; a leak or slow corruption in a context/surface path shows up as a diverging round or a panic well inside that window.
 The bar is a proposal for the user to adjust; the tooling takes the duration as an argument.
 
-Stock result against the bar: see the "Stock soak results" section appended below as runs complete.
+Stock result against the bar: **met by run 3** (4 h, 756 rounds, zero differences, zero DOWN windows, watchdog OK); see "Stock soak results" below for runs 1 and 2 (interrupted by display reconfigurations while the monitor was shared).
 
 **Setup requirement for any long run on this G5 (from the two stock runs):** the shared monitor must not be able to switch away from, or re-handshake with, the G5 during the run: set the monitor to a fixed input (disable auto source switching), or leave the other computer asleep/disconnected, or the run will be interrupted by display reconfigurations (and `hwup_sampler` will log them).
 
 ## Stock soak results
+
+**Run 3, 2026-10-02 (stock 4.1.9, monitor now dedicated to the G5, fresh boot 19:13, soak 19:18:46 - 23:18:50): the bar is MET.** Logs: `Tests/baseline/soak/stock_4.1.9_soak_run3_*.log`, `...hwup.log`, `watch_run3_part1.tsv`, `watch_run3_part2.tsv`.
+
+* **`SOAK DONE rounds=756 elapsed=14404s transients_recovered=0`: 4 h 00 min 04 s, 756 rounds, ~37 800 GL context create/draw/readback/destroy cycles and ~1 500 harness passes, every one identical to its round-1 reference (0 unexpected in the reference). No `STEP-FAIL`, `STEP-DIFF` or `TRANSIENT` line at all: the retry rule was never needed, so the run also passes the original, unamended bar.**
+* **`hwup_sampler` (20 Hz for the whole run): the hardware-up flag never went down** (one initial UP line, 48 five-minute heartbeats all UP, 0 DOWN windows). No display reconfiguration occurred, versus two in the ~5 h of runs 1 and 2 with the monitor shared.
+* **Watchdog (`Tools/stability_watch.sh`): OK throughout, no HANG/REBOOT/PANIC/KEXT/CRASHDUMP verdict.** Part 1 19:19-21:15 and part 2 21:15-23:10 (exit 0 each), with a 5 s gap between them (uptime continuous 7303 -> 7309 s). The last ~9 minutes (23:10-23:19) were covered by the sampler and a manual spot check at 23:19:47 (G5 up 4:06, `panic.log` 6718 bytes, kext 0x588000, no crashdump, nothing left running), not by continuous watchdog sampling.
+* **Machine state:** the fingerprint matched the recorded baseline state at the start (2221852201) with the new dedicated display; `Test HD` had failed to mount at one earlier boot (SonnetSATA link-training errors) and returned after a reboot, backup checksums and deployed files verified intact before the run (cause not determined).
+* **What it shows about the earlier interruptions:** with the second computer removed from the monitor, a full 4 h ran with no display reconfiguration and no driver difference, which supports the shared-monitor explanation for runs 1 and 2 (inferred; the monitor setting itself was not inspected, and the change was made between run 2 and run 3).
 
 **Run 1, 2026-10-02 (stock 4.1.9, fresh boot at 09:14, soak started 09:17:24): the bar was NOT met as defined.** Log and watchdog traces: `Tests/baseline/soak/`.
 
