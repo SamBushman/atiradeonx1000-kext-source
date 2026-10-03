@@ -11,7 +11,7 @@ ssh $H "cd '/Volumes/Test HD/ati-parity' && tar xzf /tmp/t3_tests.tgz && cd Test
 sh Tests/destructive/peer_ack.sh $H "$D" || exit 1
 python3 Tests/destructive/udp_listen.py $MIR &
 LP=$!
-ssh $H "cd '$D' && rm -rf results/$N; sh preflight.sh $N 2>&1 && screencapture -x /tmp/t3_$N.before.png; ./$N --phase S --kext stock --mirror $ME:9999 --i-understand-this-may-hang-the-machine $ACKFLAG 2>&1; echo TEST_EXIT=\$?; screencapture -x /tmp/t3_$N.after.png; sh postflight.sh $N 2>&1" > $OUT 2>&1 &
+ssh $H "cd '$D' && rm -rf results/$N; sh preflight.sh $N 2>&1 && screencapture -x /tmp/t3_$N.before.png; ${PROBE_N:+PROBE_N=$PROBE_N} ./$N --phase S --kext stock --mirror $ME:9999 --i-understand-this-may-hang-the-machine $ACKFLAG 2>&1; echo TEST_EXIT=\$?; screencapture -x /tmp/t3_$N.after.png; sh postflight.sh $N 2>&1" > $OUT 2>&1 &
 SP=$!
 # wait for the ssh session to finish. Preflight/postflight are slow (volume verification, ioreg), so a long silence is NOT a hang: only declare HANG when the G5 itself stops
 # answering ssh for 5 consecutive minutes while the session is still open.
