@@ -110,3 +110,10 @@ The static trust argument above ("0x36's word 1 comes from a kernel-dispatched e
 2. Live, with a REAL handle from `get_data_buffer` (`0xa000`): the flush that processed the 0x36 record returned successfully, but the **next** flush on the same connection panicked inside `remove_texture_from_stream`, a function unrelated to 0x36 on its face - a deferred-corruption signature, not an immediate fault. Full analysis: issue #125, `Tests/known_vendor_deviations.md` V13.
 
 0x36 is the one GL opcode of the original 9 that remains genuinely unexercised and unresolved. Final GL tally stands at **57/66 observed**, 8 of the remaining 9 safely exercised by injection, 0x36 explicitly NOT safe to retry without further static work (issue #125).
+
+
+## 0x36: RESOLVED - confirmed dead code, no further live attempt needed or warranted
+
+Re-verifying the original static-unreachability finding (the "4 statically unreachable" emitters found before any injection work): the gating byte at context offset `0x2b82` has exactly two references in the whole GLDriver image - one read (installs `FUN_00027150`, 0x36's only emitter, into dispatch slot 0x15 only when the byte is non-zero) and one write (unconditionally sets it to 0). **0x36 never runs in the real driver.** Its kernel-side handler is the one member of the unreachable group whose code unconditionally dereferences and writes through word[1] as a real pointer with no validation (unlike 0x2a/0x38/0x3d, which only touch PM4-local header words and were proven safe to inject with dummy data). The earlier comparison to 0x44 (same dereference pattern, proven safe via real usage) does not transfer: 0x44 is exercised by real apps under a real precondition (a bound texture); 0x36 is exercised by nothing, ever.
+
+This settles 0x36's status without a third live attempt: it is **confirmed dead code with an unvalidated handler** - a real, if currently unreachable, defect in the stock driver (documented as V13/#125), not a gap in this project's testing. Final tally stands: **57/66 GL opcodes observed**, 8 of the remaining 9 safely exercised by injection, 0x36 statically explained and deliberately left untried a third time.
