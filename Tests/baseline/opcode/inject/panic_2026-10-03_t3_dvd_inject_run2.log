@@ -1,0 +1,48 @@
+Sat Oct  3 10:19:44 2026
+
+
+Unresolved kernel trap(cpu 3): 0x300 - Data access DAR=0x0000000000000014 PC=0x00000000005C0630
+Latest crash info for cpu 3:
+   Exception state (sv=0x79693C80)
+      PC=0x005C0630; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00598428; R1=0x4FB93B20; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DE9428 0x00598428 0x005BE2D8 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x43644145 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEE10
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+Proceeding back via exception chain:
+   Exception state (sv=0x79693C80)
+      previously dumped as "Latest" state. skipping...
+   Exception state (sv=0x69E65500)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0130801C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEE10; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+panic(cpu 3 caller 0xFFFF0003): 0x300 - Data access
+Latest stack backtrace for cpu 3:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x000A8204 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x79693C80)
+      PC=0x005C0630; MSR=0x00009030; DAR=0x00000014; DSISR=0x40000000; LR=0x00598428; R1=0x4FB93B20; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x10DE9428 0x00598428 0x005BE2D8 0x002E9A80 0x002EB94C 0x0008C248 
+         0x00029234 0x000233F8 0x000ABEAC 0x43644145 
+         backtrace terminated - frame not mapped or invalid: 0xBFFFEE10
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.apple.ATIRadeonX1000(4.1.9)@0x588000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+   Exception state (sv=0x69E65500)
+      PC=0x9000AF48; MSR=0x0200F030; DAR=0x0130801C; DSISR=0x42000000; LR=0x9000AE9C; R1=0xBFFFEE10; XCP=0x00000030 (0xC00 - System call)
+
+K`
+*********
+
