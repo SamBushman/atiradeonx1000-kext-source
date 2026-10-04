@@ -94,6 +94,26 @@
      "mode": "00008000"
     }
    ]
+  },
+  {
+   "name": "R3a one intra MB, DC only (rung 3)",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "00000800",
+    "00000000",
+    "04000001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 3,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
   }
  ]
 }

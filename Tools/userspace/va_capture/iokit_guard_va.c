@@ -7,7 +7,7 @@
  *                        IDCT stream buffers) and any other type: SWALLOW - return success with the mapping we already hold, log it and snapshot the mapped bytes to the .mem file.
  *   scalar/struct selectors on a DVD connection:
  *     forward  : 1 get_config, 2 get_status, 0 set_surface, 21 setup_buffers   (proven live on the stock kext; GUARD_FORWARD env adds more, comma separated)
- *     doIDCT 18: SWALLOW: return 0, zero the output, log the 0x38-byte parameter block and snapshot the type 4/5 buffers (first GUARD_DUMP_BYTES bytes) to the .mem file
+ *     doIDCT 18: SWALLOW (unless GUARD_FORWARD includes 18: then write-ahead-logged and FORWARDED - rung 3 only): return 0, zero the output, log the 0x38-byte parameter block and snapshot the type 4/5 buffers (first GUARD_DUMP_BYTES bytes) to the .mem file
  *     19 wait_for_stamps / 20 check_stamps: SWALLOW with synthetic "done" (a forwarded wait could block forever: nothing is ever submitted)
  *     8 declare_image: SWALLOW with a private calloc'd block as the returned handle (the driver dereferences it; a zero crashed the first run)
  *     everything else (write_regs, set_macrovision, overlay, deint, lock/declare/delete, write_buffer, ...): SWALLOW, return 0, outputs zeroed, logged
@@ -35,6 +35,7 @@ static int g_fwd_extra[64]; static int g_nfwd_extra = 0;
 static struct { long fwd, swallow, dvd_opens, dvd_sel18, dvd_remaps; } g_stats;
 
 /* exported for the harness */
+int guard_dvd_connect(void) { int i; for (i = 0; i < g_nconn; i++) if (g_conn[i].type == 3) return (int)g_conn[i].c; return 0; }
 long guard_stat(int which) { switch (which) { case 0: return g_stats.fwd; case 1: return g_stats.swallow; case 2: return g_stats.dvd_opens; case 3: return g_stats.dvd_sel18; case 4: return g_stats.dvd_remaps; } return -1; }
 
 static void ensure(void) {
@@ -155,6 +156,15 @@ static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_num
         snapshot(c, "doIDCT", (unsigned)g_seq);
         if (out && oc) memset(out, 0, *oc);
         g_stats.swallow++; g_stats.dvd_sel18++; return 0;
+    }
+    if (is_dvd(c) && sel == 18 && extra_fwd(18)) {
+        /* RUNG 3: a real doIDCT. Write-ahead: the parameter block and the snapshot are on disk (fsync) BEFORE the kernel sees the call (issue #87 criterion 2). */
+        fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tABOUT-TO-CALL(doIDCT FORWARDED)\tin=%u\tparams=", ++g_seq, g_pid, us(), (unsigned)c, ic);
+        hexs(g_log, in, ic); fprintf(g_log, "\t-\n"); snapshot(c, "doIDCT-forwarded", (unsigned)g_seq);
+        fflush(g_log); fsync(fileno(g_log)); if (g_mem) { fflush(g_mem); fsync(fileno(g_mem)); }
+        kern_return_t r18 = r_stto(c, sel, in, ic, out, oc);
+        fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tRESULT(doIDCT FORWARDED)\trc=0x%08x\tout=%u\t0x%08x\n", ++g_seq, g_pid, us(), (unsigned)c, (unsigned)r18, oc ? *oc : 0, (unsigned)r18);
+        fflush(g_log); fsync(fileno(g_log)); g_stats.fwd++; g_stats.dvd_sel18++; return r18;
     }
     if (is_dvd(c) && !fwd_selector(sel)) { if (out && oc) memset(out, 0, *oc); line("structureI_structureO", c, "SWALLOW", sel, "-", 0); g_stats.swallow++; return 0; }
     kern_return_t r = r_stto(c, sel, in, ic, out, oc); line("structureI_structureO", c, "FWD", sel, "-", r); g_stats.fwd++; return r;

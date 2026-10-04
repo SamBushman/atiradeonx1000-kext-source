@@ -4,12 +4,13 @@
 Usage: compare_guard.py run.tsv [run.tsv.mem] [ava_expected.json]"""
 import sys, os, json, re, struct
 
-tsv = sys.argv[1]; mem = sys.argv[2] if len(sys.argv) > 2 else tsv + '.mem'
-exp = json.load(open(sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ava_expected.json')))
+args = [x for x in sys.argv[1:] if not x.startswith('--')]; sel = [int(x) for x in next((a.split('=')[1] for a in sys.argv if a.startswith('--pictures=')), '').split(',') if x]
+tsv = args[0]; mem = args[1] if len(args) > 1 else tsv + '.mem'
+exp = json.load(open(args[2] if len(args) > 2 else os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ava_expected.json')))
 
 calls = []                                   # (seq, params words)
 for l in open(tsv):
-    if 'SWALLOW(doIDCT)' in l:
+    if 'SWALLOW(doIDCT)' in l or 'ABOUT-TO-CALL(doIDCT' in l:
         f = l.rstrip('\n').split('\t'); seq = int(f[0]); m = re.search(r'params=([0-9a-f]+)', l)
         calls.append((seq, struct.unpack('>%dI' % (len(m.group(1)) // 8), bytes.fromhex(m.group(1)))))
 snaps = {}                                   # seq -> {type: bytes}
@@ -21,7 +22,8 @@ for l in open(mem):
         t = int(re.search(r'type=(\d+)', l).group(1)); snaps[cur][t] = bytes.fromhex(l.split()[-1])
 
 want = []
-for p in exp['pictures']:
+for pi_, p in enumerate(exp['pictures']):
+    if sel and pi_ not in sel: continue
     for e in p['expected_doidct']:
         want.append((p, e))
 bad = 0

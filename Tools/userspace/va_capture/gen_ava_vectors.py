@@ -44,7 +44,9 @@ PICTURES = [
         (4, {5: [(2, 10), (9, -7), (40, 3)]}, 0, 0)]),
     ('P0 frame, forward MB + intra MB', 2, 0, 2, 0, [
         (0, {0: [(0, -64)]}, 1, 0),                 # forward-predicted MB with a residual -> stream 1
-        (1, {0: [(0, 1024)]}, 0, 0)]),              # intra MB in a P picture -> stream 0
+        (1, {0: [(0, 1024)]}, 0, 0)]),              # intra MB in a P picture -> stream 0,
+    ('R3a one intra MB, DC only (rung 3)', 1, 0, 0, 0, [
+        (0, {0: [(0, 1024)]}, 0, 0)])
 ]
 
 

@@ -39,7 +39,13 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int skipdecode = argc > 1 && !strcmp(argv[1], "--open-only");
+    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k; unsigned picmask = ~0u;
+    for (k = 1; k < argc; k++) {
+        if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
+        else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
+        else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
+        else if (!strcmp(argv[k], "--pictures") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); picmask = 0; for (t = strtok(v, ","); t; t = strtok(NULL, ",")) picmask |= 1u << atoi(t); }
+    }
     signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
     guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
     printf("ava_drive: display 0x%x, guard %s\n", display, guard_stat ? "LOADED" : "NOT LOADED (refusing to continue)"); fflush(stdout);
@@ -57,7 +63,9 @@ int main(int argc, char **argv) {
     if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
     if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
     if (skipdecode) { printf("--open-only: stop after open\n"); goto out; }
+    if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
     for (i = 0; i < VEC_NPIC; i++) {
+        if (!(picmask & (1u << i))) continue;
         unsigned char desc[0x20]; size_t nrec = VEC_NMB * 0x1c; unsigned char *recs = malloc(nrec); unsigned *coefs = malloc((vec_pics[i].ncoefs + 1) * 4);
         memcpy(recs, vec_pics[i].recs, nrec); memcpy(coefs, vec_pics[i].coefs, vec_pics[i].ncoefs * 4);
         memset(desc, 0, sizeof desc);
@@ -67,6 +75,7 @@ int main(int argc, char **argv) {
         DVDDriverDecodeImpl(dev, desc, rect);
         printf("  decode returned\n"); stats("after decode");
     }
+    if (hold_after) { printf("HOLD-AFTER %d s (take the 'after' screenshot now)\n", hold_after); fflush(stdout); sleep(hold_after); }
 out:
     if (dev) DVDDriverCloseDeviceImpl(dev);
     stats("after close");
