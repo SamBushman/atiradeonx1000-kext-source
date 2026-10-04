@@ -65,6 +65,7 @@ static int rb_read(const char *label, int w, int h) {
         printf("  %d non-zero bytes in the %dx%d read (0xAA fill is gone where the copy wrote)\n", nz, w, h);
         for (y = 0; y < 18; y++) { printf("  row %2d:", y); for (x = 0; x < 24; x++) printf(" %02x", rb_buf[y * rowbytes + x]); printf("\n"); }
     }
+    if (r == 0 && getenv("RB_DUMP")) { char fn[300]; FILE *fp; snprintf(fn, sizeof fn, "%s_%s.bin", getenv("RB_DUMP"), label); fp = fopen(fn, "wb"); if (fp) { for (y = 0; y < h; y++) fwrite(rb_buf + y * rowbytes, 1, w * 4, fp); fclose(fp); printf("  dumped %s (%d bytes)\n", fn, w * 4 * h); } }
     fflush(stdout); return (int)r;
 }
 static long (*guard_stat)(int);

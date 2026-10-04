@@ -3,5 +3,5 @@
 cd /tmp/rung3/va || exit 1
 N=$1; shift
 rm -f $N.out $N.tsv $N.tsv.mem
-GUARD_LOG=/tmp/rung3/va/$N.tsv GUARD_FORWARD=${GF:-18} DYLD_INSERT_LIBRARIES=/tmp/rung3/va/iokit_guard_va.dylib WATCHDOG_S=${WATCHDOG_S:-60} ./ava_drive "$@" > $N.out 2>&1
+RB_DUMP=/tmp/rung3/va/$N GUARD_LOG=/tmp/rung3/va/$N.tsv GUARD_FORWARD=${GF:-18} DYLD_INSERT_LIBRARIES=/tmp/rung3/va/iokit_guard_va.dylib WATCHDOG_S=${WATCHDOG_S:-60} ./ava_drive "$@" > $N.out 2>&1
 echo "EXIT=$?" >> $N.out
