@@ -140,6 +140,106 @@
      "mode": "00000000"
     }
    ]
+  },
+  {
+   "name": "R3c alternate scan: Y0 idx1, Y1 idx2, Y2 idx3, Y3 idx4 (each DC64 + 40)",
+   "dst": 0,
+   "alt": 1,
+   "ptype": 1,
+   "stream0": [
+    "02000f00",
+    "00000000",
+    "00400000",
+    "00280001",
+    "00400000",
+    "00280003",
+    "00400000",
+    "00280005",
+    "00400000",
+    "00280007"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 10,
+     "flag": "000100a8",
+     "mode": "00000000"
+    }
+   ]
+  },
+  {
+   "name": "R3d runs/clip: Y0 DC64+idx5,20,63 (runs 4,14,42), Y1 DC-400, Y2 DC2000, Y3 DC-2000",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "00000f00",
+    "00000000",
+    "00400000",
+    "001e0008",
+    "ffe2001c",
+    "000a0055",
+    "fe700001",
+    "07d00001",
+    "f8300001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 9,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
+  },
+  {
+   "name": "R3e field DCT: the R3b content with field_dct set",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "80000f00",
+    "00000000",
+    "00400000",
+    "00280003",
+    "00400000",
+    "00280001",
+    "00200000",
+    "00280003",
+    "00600001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 9,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
+  },
+  {
+   "name": "R3f CBP subset: only Y1 (DC128) and Y2 (DC-128) coded",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "00000600",
+    "00000000",
+    "00800001",
+    "ff800001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 4,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
   }
  ]
 }
