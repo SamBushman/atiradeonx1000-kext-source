@@ -35,6 +35,24 @@ extern int DVDDriverOpenDeviceImpl(void **dev, unsigned *sizes /*[2] out*/, unsi
 extern void DVDDriverDecodeImpl(void *dev, unsigned char *picture, short *rect);
 extern void DVDDriverCloseDeviceImpl(void *dev);
 
+static io_connect_t rb_gl = 0; static unsigned char *rb_buf = NULL;
+/* read-back through the proven GL read_buffer path (Tests/destructive/t3_gl_read_buffer.c): GL user client bound to the same surface, sourceSelector 1 = surface buffer slot 0 */
+static int rb_setup(int sid) {
+    io_service_t svc = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("ATIRadeonX1000")); kern_return_t r;
+    if (!svc) return -1;
+    r = IOServiceOpen(svc, mach_task_self(), 1, &rb_gl); printf("readback: open GL client rc=0x%x\n", (unsigned)r); if (r) return -2;
+    r = IOConnectMethodScalarIStructureI(rb_gl, 0, 4, 0, sid, 0x800, 0, 0, NULL); printf("readback: GL set_surface(sid, 0x800) rc=0x%x\n", (unsigned)r);
+    rb_buf = (unsigned char *)valloc(0x10000); return r ? -3 : 0;
+}
+static int rb_read(const char *label, int w, int h) {
+    unsigned in[7]; IOByteCount zero = 0; kern_return_t r; int y, x;
+    memset(rb_buf, 0xAA, 0x10000);
+    in[0] = 0; in[1] = 0; in[2] = w; in[3] = h; in[4] = 1; in[5] = (unsigned)rb_buf; in[6] = 64;
+    r = IOConnectMethodStructureIStructureO(rb_gl, 7, sizeof in, &zero, in, NULL);
+    printf("readback[%s]: GL read_buffer rc=0x%08x (0 = copied; 0xe00002cc = surface memory not usable)\n", label, (unsigned)r);
+    if (r == 0) for (y = 0; y < h; y++) { printf("  row %2d:", y); for (x = 0; x < w * 4; x++) printf(" %02x", rb_buf[y * 64 + x]); printf("\n"); }
+    fflush(stdout); return (int)r;
+}
 static long (*guard_stat)(int);
 static int (*guard_dvd_connect)(void);
 static void on_alarm(int s) { fprintf(stderr, "WATCHDOG: no completion in time (decode stuck?) - exiting\n"); fflush(stderr); _exit(3); }
@@ -43,12 +61,13 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = -1, lockbuf = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = -1, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
+        else if (!strcmp(argv[k], "--readback")) readback = 1;
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--dst") && k + 1 < argc) dst_override = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--pictures") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); picmask = 0; for (t = strtok(v, ","); t; t = strtok(NULL, ",")) picmask |= 1u << atoi(t); }
@@ -81,6 +100,7 @@ int main(int argc, char **argv) {
     }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
+    if (readback) { if (rb_setup(sid) == 0) rb_read("before", 8, 20); else readback = 0; }
     for (i = 0; i < VEC_NPIC; i++) {
         if (!(picmask & (1u << i))) continue;
         { int rep; for (rep = 0; rep < repeat; rep++) {
@@ -94,6 +114,7 @@ int main(int argc, char **argv) {
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
         } }
     }
+    if (readback) rb_read("after", 8, 20);
     if (hold_after) { printf("HOLD-AFTER %d s (take the 'after' screenshot now)\n", hold_after); fflush(stdout); sleep(hold_after); }
 out:
     if (dev) DVDDriverCloseDeviceImpl(dev);
