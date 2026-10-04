@@ -55,12 +55,16 @@ static int rb_setup(int sid) {
     rb_buf = (unsigned char *)valloc(0x10000); return r ? -3 : 0;
 }
 static int rb_read(const char *label, int w, int h) {
-    unsigned in[7]; IOByteCount zero = 0; kern_return_t r; int y, x;
+    unsigned in[7]; IOByteCount zero = 0; kern_return_t r; int y, x, nz = 0, shown = 0; int rowbytes = 256;
     memset(rb_buf, 0xAA, 0x10000);
-    in[0] = 0; in[1] = 0; in[2] = w; in[3] = h; in[4] = 1; in[5] = (unsigned)rb_buf; in[6] = 64;
+    in[0] = 0; in[1] = 0; in[2] = w; in[3] = h; in[4] = 1; in[5] = (unsigned)rb_buf; in[6] = rowbytes;
     r = IOConnectMethodStructureIStructureO(rb_gl, 7, sizeof in, &zero, in, NULL);
-    printf("readback[%s]: GL read_buffer rc=0x%08x (0 = copied; 0xe00002cc = surface memory not usable)\n", label, (unsigned)r);
-    if (r == 0) for (y = 0; y < h; y++) { printf("  row %2d:", y); for (x = 0; x < w * 4; x++) printf(" %02x", rb_buf[y * 64 + x]); printf("\n"); }
+    printf("readback[%s]: GL read_buffer %dx%d rc=0x%08x (0 = copied; 0xe00002cc = surface memory not usable)\n", label, w, h, (unsigned)r);
+    if (r == 0) {
+        for (y = 0; y < h; y++) for (x = 0; x < w * 4; x++) if (rb_buf[y * rowbytes + x] != 0) { nz++; if (shown < 24) { printf("  nonzero: row %d byte %d = %02x\n", y, x, rb_buf[y * rowbytes + x]); shown++; } }
+        printf("  %d non-zero bytes in the %dx%d read (0xAA fill is gone where the copy wrote)\n", nz, w, h);
+        for (y = 0; y < 18; y++) { printf("  row %2d:", y); for (x = 0; x < 24; x++) printf(" %02x", rb_buf[y * rowbytes + x]); printf("\n"); }
+    }
     fflush(stdout); return (int)r;
 }
 static long (*guard_stat)(int);
@@ -110,7 +114,7 @@ int main(int argc, char **argv) {
     }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
-    if (readback) { if (rb_setup(sid) == 0) rb_read("before", 8, 20); else readback = 0; }
+    if (readback) { if (rb_setup(sid) == 0) rb_read("before", 64, 48); else readback = 0; }
     for (i = 0; i < VEC_NPIC; i++) {
         if (!(picmask & (1u << i))) continue;
         { int rep; for (rep = 0; rep < repeat; rep++) {
@@ -124,7 +128,7 @@ int main(int argc, char **argv) {
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
         } }
     }
-    if (readback) rb_read("after", 8, 20);
+    if (readback) { rb_read("after", 64, 48); sleep(3); rb_read("after+3s", 64, 48); }
     if (hold_after) { printf("HOLD-AFTER %d s (take the 'after' screenshot now)\n", hold_after); fflush(stdout); sleep(hold_after); }
 out:
     if (dev) DVDDriverCloseDeviceImpl(dev);
