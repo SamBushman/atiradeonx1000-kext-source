@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
     if (!guard_stat) return 2;
     cid = CGSMainConnectionID();
     rc = CGSNewRegionWithRect(&r, &reg); printf("CGSNewRegionWithRect rc=%d\n", rc);
-    rc = CGSNewWindow(cid, 2, 0, 0, reg, &wid); printf("CGSNewWindow cid=%d -> wid=%d rc=%d\n", cid, wid, rc);
+    { const char *wx = getenv("WIN_X"), *wy = getenv("WIN_Y"); rc = CGSNewWindow(cid, 2, wx ? atof(wx) : 300, wy ? atof(wy) : 300, reg, &wid); } printf("CGSNewWindow cid=%d -> wid=%d rc=%d\n", cid, wid, rc);
     rc = CGSAddSurface(cid, wid, &sid); printf("CGSAddSurface -> sid=%d rc=%d\n", sid, rc);
     rc = CGSOrderWindow(cid, wid, 1, 0); printf("CGSOrderWindow rc=%d\n", rc); fflush(stdout);
     if (!wid || !sid) { printf("no window/surface: stop\n"); return 2; }

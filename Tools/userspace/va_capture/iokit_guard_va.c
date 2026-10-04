@@ -150,7 +150,7 @@ static kern_return_t my_sisto(mach_port_t c, int sel, int *in, mach_msg_type_num
 }
 static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_number_t ic, char *out, mach_msg_type_number_t *oc) {
     ensure(); RES(r_stto, "io_connect_method_structureI_structureO");
-    if (is_dvd(c) && sel == 18) {
+    if (is_dvd(c) && sel == 18 && !extra_fwd(18)) {
         fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tSWALLOW(doIDCT)\tin=%u\tparams=", ++g_seq, g_pid, us(), (unsigned)c, ic);
         hexs(g_log, in, ic); fprintf(g_log, "\t0\n");
         snapshot(c, "doIDCT", (unsigned)g_seq);
