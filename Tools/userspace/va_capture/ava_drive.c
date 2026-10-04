@@ -76,17 +76,19 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
         else if (!strcmp(argv[k], "--readback")) readback = 1;
+        else if (!strcmp(argv[k], "--height") && k + 1 < argc) height_arg = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--dst") && k + 1 < argc) dst_override = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--pictures") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); picmask = 0; for (t = strtok(v, ","); t; t = strtok(NULL, ",")) picmask |= 1u << atoi(t); }
     }
+    if (height_arg) rect[2] = (short)height_arg;   /* open/decode rectangle height (default VEC_H) */
     signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
     guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
     guard_dvd_connect = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_dvd_connect");

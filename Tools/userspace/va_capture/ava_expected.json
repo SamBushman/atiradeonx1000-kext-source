@@ -292,6 +292,33 @@
      "mode": "00000000"
     }
    ]
+  },
+  {
+   "name": "R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "00000fc0",
+    "00000000",
+    "00400001",
+    "00400001",
+    "00400001",
+    "00400001",
+    "00400000",
+    "00280003",
+    "ffc00000",
+    "00280001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 10,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
   }
  ]
 }
