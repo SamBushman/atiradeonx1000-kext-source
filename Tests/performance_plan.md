@@ -10,7 +10,7 @@ Running the same tooling against the rebuilt kext and iterating on regressions i
 | kext external methods, all four contexts | `gl.*`, `2d.*`, `dvd.*`, `surface.*`: latency of one proven-safe call (user -> IOConnectMethod* -> method body -> back), p10 of 50 000 calls | `Tests/perf_methods.c` | per-selector cost, so a regression localises to a context and selector; includes two real MMIO register reads (`read_regs`, ~+0.7 us over a pure query) |
 | connection lifecycle | `open_close.surface/gl/2d/dvd`: open + close one user client | `Tests/perf_methods.c` | allocation/teardown of each context object and its state |
 | GL rendering path | `glcycle.*`: one create-context / pbuffer / clear / 100-triangle draw / readback / destroy cycle, per-phase median over 100 cycles | `Tests/perf_baseline.c` | the userspace GL driver + the kext's GL/Surface contexts together |
-| 2D / compositing responsiveness (real desktop) | window move/resize/scroll frame times | **manual, not automated**: needs a person at the console (SSH-launched GUI apps deadlock); the 2D *context* is covered by `2d.*` above | see `Tests/consumer_scenarios.md` |
+| 2D / compositing responsiveness (real desktop) | window open/move/resize/scroll, Dock hover - flush rate via Quartz Debug's Frames Meter | **manual, not automated**: needs a person at the console (SSH-launched GUI apps deadlock); the 2D *context* is covered by `2d.*` above | captured 2026-10-04, see section 8 and `Tests/consumer_scenarios.md` |
 | DVD / video decode (IDCT throughput, dropped frames) | **not measurable on stock today**: QuickTime and DVD Player both decode in software on this machine (no DVD context is ever opened, `Tools/userspace/va_capture/`), and `doIDCT` has no safe valid call (#93). The DVD context is covered by `dvd.*` latency only | - | revisit when a client really uses the hardware IDCT path |
 
 All calls are the ones `Tests/test_deep_t1.c` already asserts on stock: no surface binding, locking, flipping, submission or register writes.
@@ -192,3 +192,28 @@ Three more benchmark programs, same methodology, baseline of record `Tests/basel
 **What this settles from section 6's gap list:** texture upload cost, PBO-vs-plain upload, auto-mipmap generation cost, pixel-transfer-op cost at more than one size, state-change cost (texture/program/blend), multi-draw-arrays batching benefit, context-switch cost, occlusion-query and fence overhead, and GPU-bound-at-scale behavior across three independent axes (viewport fill, texture size, triangle count) are now all measured with a recorded stock baseline.
 
 **Still not covered, for the same structural reasons as section 5:** heavier kext method bodies (T3 destructive calls, one-shot per boot, cannot be safely looped into a stable number), 2D/DVD hardware throughput (no safe workload - the DVD context is never opened by any real consumer on this machine), and real desktop compositing/app frame times (needs a human at the console, SSH-launched GUI apps deadlock per the `tiger-ssh` skill).
+
+## 8. Real desktop compositing - first numbers (closes that part of section 5's gap list)
+
+Captured 2026-10-04, at the console (not SSH - required per section 5/the `tiger-ssh` skill), by the user directly, with Claude guiding the session interactively. G5 at 21h19m uptime, 2 users logged in, load average 0.10-0.16 (not a fresh-boot/idle session - see the caveat below).
+
+**Method:** `/Developer/Applications/Performance Tools/Quartz Debug.app`, **Tools/Debug menu -> "Show Frames Meter"** (a small floating HUD showing the live WindowServer screen-flush rate - distinct from its "Autoflush drawing"/"Flash screen updates" panel, which visualizes *what* redraws rather than *how fast*). The meter is read live, during each action, not after - a static desktop immediately drops to 0 (no flush activity, not a hang). This exercises the Quartz 2D context (`2d.*` in section 1/2 covers only its external-method latency, never real compositing work) and is the first-ever numeric data point for the "2D / compositing responsiveness" row in section 1's table, which had been manual/unmeasured since the plan was first written.
+
+| scenario | observed flush rate | notes |
+|---|---:|---|
+| idle desktop (nothing moving) | 0 fps | expected - no screen updates, no flushes, not a hang |
+| window open (new Finder window) | ~5 fps peak | lowest of the real-activity numbers - the open/zoom transition is a short, few-frame effect, not sustained redraw |
+| window drag (continuous title-bar drag) | ~35 fps peak, continuous | highest sustained number captured |
+| window resize (continuous corner-drag) | ~30 fps steady, ~32 fps peak | close to drag's number, slightly lower - plausible given resize also reflows window content, not just repositioning it |
+| scrolling (Finder list/column view, continuous) | ~15 fps steady, ~17 fps peak | the lowest of the continuous-interaction numbers - scrolling content redraw costs more per update than repositioning a whole window |
+| Dock hover (mouse across the Dock, magnification effect) | ~30 fps steady | comparable to window resize |
+
+**Reading this data:** every continuous-interaction scenario (drag, resize, scroll, Dock) sits in the 15-35 fps band on this hardware - well short of this era's 60 Hz display-refresh ceiling, consistent with this being 2.5 GHz PowerPC-era software/mixed compositing, not a lightweight task for the CPU+GPU pair even with real hardware acceleration in the path. Scrolling is the most expensive of the four continuous scenarios by a clear margin (~15-17 fps vs ~30-35 for drag/resize/Dock) - worth remembering if a future investigation ever needs to prioritize which 2D path to optimize first.
+
+**Caveats, stated plainly rather than treated as a finished baseline:**
+- **Not a fresh-boot/idle-session measurement** - section 2's own finding (a GL-cycle metric moved up to 2x between a fresh boot and a used session) means these numbers may not be the "clean" reference point a fresh-boot capture would give; they are a first real data point, not yet the rigorous baseline section 2's GL numbers are.
+- **Single-session, not repeated** - no noise/repeatability data the way every other section's numbers have (3+ repetitions, explicit noise %). A human manually reading a live meter during a gesture is not repeatable the way an automated `BENCH` loop is.
+- **No automated regression gate** - unlike every `METRIC` line elsewhere in this file, nothing here feeds `Tools/perf_compare.py`. A rebuilt-kext comparison of desktop compositing responsiveness would need the same manual, at-console method repeated by a person, not a script.
+- **Quartz Debug's Frames Meter counts WindowServer-level screen flushes**, not an application's own internal render rate - appropriate for measuring 2D/compositing responsiveness specifically (what this row of section 1 asks for), not a stand-in for GL application frame time.
+
+This is a genuine first step on the "2D / compositing responsiveness" gap, not a closure of it to the same rigor as sections 2-7 - a repeat capture on a fresh boot, with a few repetitions per scenario, would be the natural next pass if this needs to become a real regression gate rather than a first data point.
