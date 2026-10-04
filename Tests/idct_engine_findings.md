@@ -197,6 +197,9 @@ The client sends `0x10080 | alt_scan << 3 | (stream 0 ? 0x20 : 0)`. With the gua
 | 0x08 (bit 3) | Set = alternate scan (run `alt1`, matches the alternate table). |
 So the control word is: bit 3 alternate scan, bit 5 intra (8-bit biased/clipped pixels vs 16-bit residuals), bit 7 required (first-block position handling), bit 16 dither/rounding, other bits as in the client's value (0 elsewhere). The oracle matches the engine exactly when bit 16 is clear.
 
+## 9i. Rung 3: end-of-block semantics (2026-10-04; run `last1`, picture `R3b` with every last flag cleared)
+`GUARD_CLEAR_LAST=1` cleared bit 0 of every dword in the stream buffer (the guard edits the mapped buffer just before forwarding). Result: **no hang, no fault** (rc 0, 313 us, ring consumed, postflight rc 0). Output: block Y0 now contains the sum of *all* eight coefficients of the stream (a complex pattern: Y0's DC 64 and idx 2, then the run/level pairs of Y1, Y2 and Y3 accumulating positions), and Y1, Y2, Y3 are zero. So: **block boundaries are marked only by the last flag**; the six CBP bits say which blocks follow and in what order, not where they end; without flags the first coded block consumes every dword up to the DMA length (`dmaDwordCount`) and the remaining coded blocks receive no data (written as zero). A stream without end-of-block flags is therefore harmless to the engine (bounded by the DMA length) but decodes wrongly.
+
 ## 10. Producer hunt result, and what is still open
 **Resolved by locating the producer (second pass).** `AppleVADriverG5` `FUN_00054070` writes the macroblock records and the run/level dwords (section 7): layout = level<<16 | run<<1 | last,
 bit 0 is the end-of-block flag, levels are dequantised. `AVASliceCreate` exists only in `AppleVA`, `AppleVADriver` and `AppleVADriverG5` (G5-wide scan of the QuickTime, DVD and VA
