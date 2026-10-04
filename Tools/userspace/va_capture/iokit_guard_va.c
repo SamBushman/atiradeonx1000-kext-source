@@ -158,6 +158,20 @@ static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_num
         g_stats.swallow++; g_stats.dvd_sel18++; return 0;
     }
     if (is_dvd(c) && sel == 18 && extra_fwd(18)) {
+        /* RUNG 3 probes (issue #140): GUARD_FLAG_CLEAR=<hex mask> clears bits of the control word (params+0x14, the value written to IDCT_CONTROL 0x1fbc) and GUARD_CLEAR_LAST=1 clears bit 0 of every
+         * dword of the stream (the last-coefficient flags). Only for deliberate experiments; both are logged in the write-ahead line. Clearing is used instead of setting so no reset/flush bit is ever added. */
+        char modnote[160]; modnote[0] = 0;
+        if (ic >= 0x38) {
+            unsigned *pw = (unsigned *)in; const char *fc = getenv("GUARD_FLAG_CLEAR"), *cl = getenv("GUARD_CLEAR_LAST");
+            if (fc) { unsigned m = (unsigned)strtoul(fc, NULL, 16), old = pw[5]; pw[5] = old & ~m; snprintf(modnote + strlen(modnote), sizeof modnote - strlen(modnote), "FLAG %08x->%08x ", old, pw[5]); }
+            if (cl && atoi(cl)) {
+                int i; unsigned n = pw[4], cleared = 0;
+                for (i = 0; i < g_nmaps; i++) if (g_maps[i].c == c && g_maps[i].type == (pw[3] == 0 ? 4u : 5u)) {
+                    unsigned *sp = (unsigned *)(g_maps[i].addr + 0x20), k; for (k = 0; k < n; k++) if (sp[k] & 1) { sp[k] &= ~1u; cleared++; } break; }
+                snprintf(modnote + strlen(modnote), sizeof modnote - strlen(modnote), "LASTBITS_CLEARED=%u ", cleared);
+            }
+        }
+        if (modnote[0]) { fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tMODIFIED(doIDCT)\t%s\t-\n", ++g_seq, g_pid, us(), (unsigned)c, modnote); }
         /* RUNG 3: a real doIDCT. Write-ahead: the parameter block and the snapshot are on disk (fsync) BEFORE the kernel sees the call (issue #87 criterion 2). */
         fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tABOUT-TO-CALL(doIDCT FORWARDED)\tin=%u\tparams=", ++g_seq, g_pid, us(), (unsigned)c, ic);
         hexs(g_log, in, ic); fprintf(g_log, "\t-\n"); snapshot(c, "doIDCT-forwarded", (unsigned)g_seq);
