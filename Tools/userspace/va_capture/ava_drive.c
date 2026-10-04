@@ -13,6 +13,9 @@
 #include <signal.h>
 #include <unistd.h>
 #include <dlfcn.h>
+#include <mach/mach.h>
+#include <IOKit/IOKitLib.h>
+#include <IOKit/iokitmig_c.h>
 #include <ApplicationServices/ApplicationServices.h>
 #include "ava_vectors.h"
 
@@ -33,23 +36,26 @@ extern void DVDDriverDecodeImpl(void *dev, unsigned char *picture, short *rect);
 extern void DVDDriverCloseDeviceImpl(void *dev);
 
 static long (*guard_stat)(int);
+static int (*guard_dvd_connect)(void);
 static void on_alarm(int s) { fprintf(stderr, "WATCHDOG: no completion in time (decode stuck?) - exiting\n"); fflush(stderr); _exit(3); }
 static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%ld swallow=%ld dvd_opens=%ld doIDCT(sel18)=%ld remaps=%ld\n", when, guard_stat(0), guard_stat(1), guard_stat(2), guard_stat(3), guard_stat(4)); fflush(stdout); }
 
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = -1; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = -1, lockbuf = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
+        else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--dst") && k + 1 < argc) dst_override = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--pictures") && k + 1 < argc) { char *t, *v = strdup(argv[++k]); picmask = 0; for (t = strtok(v, ","); t; t = strtok(NULL, ",")) picmask |= 1u << atoi(t); }
     }
     signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
     guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
+    guard_dvd_connect = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_dvd_connect");
     printf("ava_drive: display 0x%x, guard %s\n", display, guard_stat ? "LOADED" : "NOT LOADED (refusing to continue)"); fflush(stdout);
     if (!guard_stat) return 2;
     cid = CGSMainConnectionID();
@@ -64,6 +70,15 @@ int main(int argc, char **argv) {
     stats("after open");
     if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
     if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
+    if (lockbuf) {   /* what the driver's own set-parameter tail does after setup_buffers + set_surface: selector 4 lock_all_buffers (allocates slots 10..22, returns 13 {address,pitch} pairs) */
+        int conn = guard_dvd_connect ? guard_dvd_connect() : 0, in[1] = {0}; unsigned out[64]; mach_msg_type_number_t oc = sizeof out; kern_return_t kr; int q;
+        memset(out, 0, sizeof out);
+        printf("lock_all_buffers: connect=0x%x (forwarded only if GUARD_FORWARD includes 4)\n", conn); fflush(stdout);
+        kr = io_connect_method_scalarI_structureO(conn, 4, in, 1, (char *)out, &oc);
+        printf("lock_all_buffers -> rc=0x%08x outSize=%u\n", (unsigned)kr, (unsigned)oc);
+        for (q = 0; q < 13; q++) printf("  slot %d: address=0x%08x pitch=0x%x\n", 10 + q, out[q * 2], out[q * 2 + 1]);
+        fflush(stdout);
+    }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
     for (i = 0; i < VEC_NPIC; i++) {
