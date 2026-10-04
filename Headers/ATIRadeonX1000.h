@@ -359,8 +359,8 @@ public:
      * pass), real addr 0x1eb30. CORRECTED from the prior "8 pairs"
      * count: real body writes exactly 10 real (register-or-address,
      * value) pairs (20 dwords: `sATIDVDIDCTParams`'s own destBaseAddress/
-     * destEndAddress/computedStride/computedChromaStride/dmaByteCount/
-     * idctCoeffAddr24/strideBroadcast/idctCoeffAddr14/idctCoeffAddr18,
+     * destEndAddress/computedStride/computedChromaStride/dmaDwordCount/
+     * dimensionsHeightWidth/strideBroadcast/engineFlagWord/planeModeWord,
      * a real computed DMA address derived from the caller's own buffer
      * pointer/count, and this class's own separate IDCT completion
      * stamp at `this+0x854`) into a SEPARATE, previously-uncatalogued

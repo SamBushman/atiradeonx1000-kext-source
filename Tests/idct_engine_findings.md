@@ -17,7 +17,7 @@ Per submission it appends type-0 register-write packets (`0x8000<reg>`, value) t
 | 0x1fe4 | params+0x30 (destination end) |
 | 0x1fec | params+0x1c (plane size - 1) |
 | 0x1ff0 | params+0x20 (half-height size - 1) |
-| 0x1f8c | params+0x10 (`dmaByteCount`, dwords) |
+| 0x1f8c | params+0x10 (`dmaDwordCount`, dwords) |
 | 0x1ffc | params+0x24 |
 | 0x1ff8 | params+0x28 (pitch, replicated in both halves) |
 | (one more dword pair) | `(transferBufferGartAddr + accel+0x8a4) >> 1 & 0x7ffffff0`, then params+0x14 |
@@ -26,7 +26,7 @@ Per submission it appends type-0 register-write packets (`0x8000<reg>`, value) t
 | 0x1fb4 | 0, written six times |
 | MMIO 0x1fa0 (kick) | `wptr << 24 | (wptr & 0x700) << 8` |
 
-Only the plumbing is known. What the `dmaByteCount` words at the transfer buffer contain (the "coefficient/macroblock stream"), what 0x1ffc/0x1fac mean, and what the engine does with a malformed stream are not documented anywhere available. The values in params+0x10..+0x28 are supplied by the VA client (they are not computed by the kext) and point at memory the GPU will read.
+Only the plumbing is known. What the `dmaDwordCount` words at the transfer buffer contain (the "coefficient/macroblock stream"), what 0x1ffc/0x1fac mean, and what the engine does with a malformed stream are not documented anywhere available. The values in params+0x10..+0x28 are supplied by the VA client (they are not computed by the kext) and point at memory the GPU will read.
 
 ## 3. Real-client capture
 QuickTime Player and DVD Player (with the passive recorder, `Tools/userspace/va_capture/`) never open a DVD (type 3) connection on this Tiger/X1900 setup; they decode in software. No captured `doIDCT` call exists.
@@ -37,6 +37,8 @@ No documentation and no real-client example gives a valid macroblock stream or v
 
 ---
 # Issue #140 - the engine and its stream, derived (2026-10-04)
+
+(Struct fields were renamed after this analysis: `dmaByteCount` -> `dmaDwordCount`, `chromaFlag` -> `fieldPictureFlag`, `fieldFlag` -> `bottomFieldFlag`, `idctCoeffAddr14/18/24` -> `engineFlagWord` / `planeModeWord` / `dimensionsHeightWidth`; `sATIDVDIDCTInfo` luma/chroma buffers -> stream0/stream1. Section 2's older text still says luma/chroma and byte count - superseded by sections 5-6.)
 
 **Correction to sections 2-3 above.** (a) The doIDCT call site in the VA driver *is* findable: `ATIRadeonX1000VADriver` `FUN_00005fd0` (0x5fd0) calls
 `_io_connect_method_structureI_structureO(conn, 0x12, &in, 0x38, 0, &out)`; the selector reaches the wrapper through a register copy that the old
@@ -56,7 +58,7 @@ Confidence labels below: **EXACT** = read directly from stock code on both sides
 * The Rage 128 Pro RRG (bitsavers `RRG-G04500-C`) lists "iDCT registers" in its chapter overview but contains no register definitions for them; the AMD archive
   (R3xx/R5xx/RV630/M76/RS690/M56) mentions IDCT only as an MC client and a clock-gate bit. **No document defines the 0x1fe0-0x1ffc front end the R5xx kext uses.**
 * Consequence (INFERRED): the kext's 11 registers are a DMA front end added in front of the legacy block. Only 0x1f8c overlaps a name in Linux's list (`IDCT_AUTH`),
-  and the kext writes `dmaByteCount` there, so Linux's names are not reliable for the R5xx variant. 0x1fa0/0x1fa8/0x1fac/0x1fb4/0x1fe0..0x1ffc are in no public header.
+  and the kext writes `dmaDwordCount` there, so Linux's names are not reliable for the R5xx variant. 0x1fa0/0x1fa8/0x1fac/0x1fb4/0x1fe0..0x1ffc are in no public header.
 * Motion compensation is **not** done by this engine on this hardware: the VA driver builds it from 3D-engine quads (`FUN_0000bf20`, command buffer = mapped
   type 1) from the motion-vector lists written by `FUN_00008820`. The engine only reconstructs the residual / intra pixels.
 
@@ -138,4 +140,4 @@ selects; +0x14 motion flags (1 fwd, 2 bwd, 4 second vector; 0 = intra); +0x15 fi
 Success criterion 1 asks for a derived stream format "with enough confidence to justify attempting #93's Phase A". The parameter block, the buffer layout, the macroblock header, and the
 run/level structure are derived from stock code on both sides and the hardware lineage is documented externally; the stream is therefore no longer invented. What remains open (items 1-2)
 is a one-bit/one-layout question that only a hardware test, under the #87 protocol, can decide. The test vector is already determined: one stream-0 macroblock, CBP = Y0 only,
-one dword with `level = L` and `run = 0` (and, as the alternative, the same with bit 0 set), a destination surface the test owns, `dmaByteCount` = real dword count <= buffer capacity.
+one dword with `level = L` and `run = 0` (and, as the alternative, the same with bit 0 set), a destination surface the test owns, `dmaDwordCount` = real dword count <= buffer capacity.

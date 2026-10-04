@@ -2,7 +2,7 @@
 """analyze_capture.py REC.tsv [REC.tsv.mem]   (issue #93)  - summarise a capture made with iokit_record_va.dylib.
 Prints: the connections opened per user-client type (0 Surface, 1 GL, 2 2D, 3 DVD), the selector sequence of the DVD connection(s) with counts, the arguments of the set-up calls (set_surface sel 0,
 setup_buffers sel 21, write_buffer sel 6, set_macrovision sel 16), every doIDCT-shaped call (structureI_structureO, sel 18, struct >= 0x34 bytes) decoded as sATIDVDIDCTParams
-(+0 chromaFlag, +4 fieldFlag, +8 destPlaneIndex, +0xc planeSelector, +0x10 dmaByteCount, +0x14/+0x18/+0x24/+0x28 coefficient addresses; the kext writes +0x1c..+0x30 back), the IOConnectMapMemory
+(+0 fieldPictureFlag, +4 bottomFieldFlag, +8 destPlaneIndex, +0xc planeSelector, +0x10 dmaDwordCount, +0x14 engineFlagWord, +0x18 planeModeWord, +0x24 dimensionsHeightWidth; the kext computes +0x1c/+0x20/+0x28/+0x2c/+0x30 and writes +0x1c..+0x30 back), the IOConnectMapMemory
 regions, and - with the .mem file - the head of each mapped buffer before the call. Read-only analysis of a text log; touches no hardware."""
 import sys, collections, struct, binascii
 tsv = sys.argv[1]; mem = sys.argv[2] if len(sys.argv) > 2 else tsv + '.mem'
@@ -36,7 +36,7 @@ for f in rows:
         b = binascii.unhexlify(f[9].replace('...TRUNC', '')); n += 1
         w = struct.unpack('>%dI' % (len(b) // 4), b[:len(b) // 4 * 4])
         print('  #%d seq %s rc=%s words=%s' % (n, f[0], f[8], ' '.join('%08x' % x for x in w[:14])))
-        if n <= 3: print('     chroma=%d field=%d destPlane=%d planeSel=%d dmaByteCount=0x%x addr14=0x%x addr18=0x%x' % (w[0], w[1], w[2], w[3], w[4], w[5], w[6]))
+        if n <= 3: print('     fieldPic=%d bottomField=%d destPlane=%d stream=%d dmaDwordCount=0x%x flagWord=0x%x modeWord=0x%x' % (w[0], w[1], w[2], w[3], w[4], w[5], w[6]))
 print('  total doIDCT-shaped calls: %d' % n)
 try:
     m = open(mem).read().splitlines(); print('\n.mem: %d lines (CALL/MAP blocks); first MAP heads:' % len(m))

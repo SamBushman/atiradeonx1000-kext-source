@@ -391,6 +391,12 @@ struct r500_zdecompress_restore_add_on_packet_struct {
 /*
  * sATIDVDIDCTInfo - CONFIRMED several fields from doIDCT's real trace
  * (stage4-real-hardware-idct-engine-found.md / stage5's doIDCT decode).
+ *
+ * "stream 0" / "stream 1" are the two IDCT transfer buffers (client IOConnectMapMemory types 4 and 5), NOT luma / chroma
+ * (issue #140, Tests/idct_engine_findings.md section 6): stream 0 carries intra macroblocks and is reconstructed straight into
+ * the destination surface; stream 1 carries the residuals of motion-compensated macroblocks, reconstructed into a separate
+ * residual surface (surfaceInfo + 0x8a0). Both streams hold 4:2:0 macroblocks (Y0-Y3, Cb, Cr). Earlier revisions of this file
+ * called the fields lumaBufferA/B and chromaBufferA/B; offsets and layout are unchanged.
  */
 struct sATIDVDIDCTInfo {
     UInt8   _pad_0x00[0x7c];
@@ -401,17 +407,17 @@ struct sATIDVDIDCTInfo {
     UInt32  surfaceInfo;         /* +0xf8, CONFIRMED: real surface-geometry pointer, fields +0x94/+0x9a read as field heights */
     UInt8   _pad_0xfc[0x150 - 0xfc];
     UInt32  lastSubmittedTag;    /* +0x150, CONFIRMED: written from submit_idct_buffer_consumed's return value */
-    UInt32  lastConsumedTagLuma; /* +0x154, CONFIRMED: mirrors +0x150 for the luma-plane (param_2+0xc==0) case */
+    UInt32  lastConsumedTagStream0; /* +0x154, CONFIRMED: mirrors +0x150 for the stream-0 (param_2+0xc==0) case */
     UInt8   _pad_0x158[0x164 - 0x158];
-    UInt32  lumaBufferAField_0x164; /* +0x164, CONFIRMED: real ping-pong-buffer selector flag for the luma plane */
-    UInt32  lumaBufferA;         /* +0x168, CONFIRMED: real VendorTransferBuffer-shaped pointer (luma plane, buffer A) */
+    UInt32  stream0BufferAField_0x164; /* +0x164, CONFIRMED: ping-pong-buffer selector flag for stream 0 */
+    UInt32  stream0BufferA;         /* +0x168, CONFIRMED: real VendorTransferBuffer-shaped pointer (stream 0, buffer A) */
     UInt8   _pad_0x16c[0x184 - 0x16c];
-    UInt32  lumaBufferB;         /* +0x184, CONFIRMED: real VendorTransferBuffer-shaped pointer (luma plane, buffer B) */
+    UInt32  stream0BufferB;         /* +0x184, CONFIRMED: real VendorTransferBuffer-shaped pointer (stream 0, buffer B) */
     UInt8   _pad_0x188[0x1a0 - 0x188];
-    UInt32  chromaBufferAField_0x1a0; /* +0x1a0, CONFIRMED: same ping-pong pattern for chroma */
-    UInt32  chromaBufferA;       /* +0x1a4, CONFIRMED */
+    UInt32  stream1BufferAField_0x1a0; /* +0x1a0, CONFIRMED: same ping-pong pattern for stream 1 */
+    UInt32  stream1BufferA;       /* +0x1a4, CONFIRMED */
     UInt8   _pad_0x1a8[0x1c0 - 0x1a8];
-    UInt32  chromaBufferB;       /* +0x1c0, CONFIRMED */
+    UInt32  stream1BufferB;       /* +0x1c0, CONFIRMED */
     /* UNKNOWN: real total size not established beyond these confirmed
      * offsets. */
 };
@@ -421,38 +427,34 @@ struct sATIDVDIDCTInfo {
  * use of its second argument (real mangled signature just calls it
  * `unsigned long`, but every real use in the decompile treats it as a
  * pointer to this real struct - a classic decompiler pointer-degraded-to-
- * integer artifact, not a real scalar argument). This is the real,
- * caller-supplied "which plane, which field, where to put the computed
- * geometry" IDCT ioctl parameter block - distinct from sATIDVDIDCTInfo,
- * which is the real per-context IDCT state object.
+ * integer artifact, not a real scalar argument). It is the 0x38-byte block the VA driver sends in selector 18
+ * (ATIRadeonX1000VADriver FUN_00005fd0); distinct from sATIDVDIDCTInfo, the per-context state object.
+ *
+ * Field meanings below were derived from that real caller in issue #140 (Tests/idct_engine_findings.md section 5); earlier
+ * revisions named +0x00 chromaFlag, +0x04 fieldFlag, +0x10 dmaByteCount, +0x14/+0x18/+0x24 idctCoeffAddr14/18/24 - misleading
+ * (nothing here is a coefficient address, and +0x10 counts dwords, not bytes). Offsets and layout are unchanged.
+ * The kext computes +0x1c, +0x20, +0x28, +0x2c, +0x30 itself; the client supplies the rest.
  */
 struct sATIDVDIDCTParams {
-    UInt32  chromaFlag;      /* +0x00, CONFIRMED: 0 => luma-only pitch, nonzero => chroma pitch doubled */
-    UInt32  fieldFlag;       /* +0x04, CONFIRMED: gates which of two address-computation branches runs */
-    UInt32  destPlaneIndex;  /* +0x08, CONFIRMED: used as a mip/plane-table index (`*8 * 0x78 + ...`) in the luma (chromaFlag==0... actually fieldFlag==0) branch */
-    UInt32  planeSelector;   /* +0x0c, CONFIRMED: 0 => luma plane (uses lumaBufferA/B), 1 => chroma plane (uses chromaBufferA/B); any other value => kIOReturnBadArgument */
+    UInt32  fieldPictureFlag;  /* +0x00, CONFIRMED (client: picture_structure != 3): nonzero => field picture, kext doubles the pitch */
+    UInt32  bottomFieldFlag;   /* +0x04, CONFIRMED (client: picture_structure == 2): nonzero => destination starts one line down */
+    UInt32  destPlaneIndex;    /* +0x08, CONFIRMED: destination surface index into the 0x78-byte plane-record table (stream 0 only; client: ctx+0x568) */
+    UInt32  planeSelector;     /* +0x0c, CONFIRMED: stream selector, 0 => stream 0 (stream0BufferA/B), 1 => stream 1 (stream1BufferA/B); any other value => kIOReturnBadArgument (command lock leaked, faithful) */
     /*
-     * dmaByteCount / idctCoeffAddr14 / idctCoeffAddr18 - RESOLVED (issue
-     * #1, get-it-linking pass), found decompiling `submit_idct_buffer_
-     * consumed`. `dmaByteCount` is read twice for two apparently
-     * distinct real roles: once as a real dword count (multiplied by 4)
-     * sizing that function's own cache-flush range over the caller's
-     * ring buffer, and later written verbatim as one of the eight real
-     * per-plane coefficient-address ring dwords - both real, faithfully
-     * transcribed, dual role not further explained. `idctCoeffAddr14`/
-     * `idctCoeffAddr18` are each written verbatim as one more of those
-     * same eight coefficient-address dwords. Exact hardware semantics
-     * beyond "a real per-submission address/count the caller
-     * precomputes" UNKNOWN for all three.
+     * dmaDwordCount / engineFlagWord / planeModeWord - meanings from the real client (issue #140). `dmaDwordCount` is the stream
+     * length in DWORDS ((write ptr - base) >> 2): it sizes the cache flush in submit_idct_buffer_consumed (x4) and is written to
+     * MMIO 0x1f8c; the kext does NOT bound-check it against the buffer capacity. `engineFlagWord` is written to the register
+     * after the DMA-address dword: client value 0x10080 | (alternate_scan << 3) | (stream 0 ? 0x20 : 0). `planeModeWord`
+     * is written to 0x1fac: client value (stream 1 ? 0x8000 : 0). Individual flag bits other than alt-scan/stream-0 are UNKNOWN.
      */
-    UInt32  dmaByteCount;     /* +0x10 */
-    UInt32  idctCoeffAddr14;  /* +0x14 */
-    UInt32  idctCoeffAddr18;  /* +0x18 */
+    UInt32  dmaDwordCount;     /* +0x10 */
+    UInt32  engineFlagWord;    /* +0x14 */
+    UInt32  planeModeWord;     /* +0x18 */
     UInt32  computedStride;  /* +0x1c, CONFIRMED: real computed (height * strideOrDoubled - 1) value */
-    UInt32  computedChromaStride; /* +0x20, CONFIRMED: real computed (strideOrDoubled * (height>>1) - 1) value, chroma-plane-shaped */
-    UInt32  idctCoeffAddr24; /* +0x24, RESOLVED (issue #1) - same family as idctCoeffAddr14/18 above, one more verbatim coefficient-address ring dword. */
+    UInt32  computedChromaStride; /* +0x20, CONFIRMED: real computed (strideOrDoubled * (height>>1) - 1) value ("half-height size - 1", written to 0x1ff0) */
+    UInt32  dimensionsHeightWidth; /* +0x24, CONFIRMED (client): (height << 16) | width in pixels, height halved unless a frame picture; written to 0x1ffc */
     UInt32  strideBroadcast; /* +0x28, CONFIRMED: real (stride | stride<<16) packed value - REORDERED (build fixup, issue #1): this field is genuinely accessed by name (ATIR500DVDContext_IDCT.cpp writes `params->strideBroadcast`), so its previous declaration position (after destEndAddress, real offset +0x30) produced a WRONG compiler-computed offset - a real functional bug, not just a documentation ordering nit. */
-    UInt32  destBaseAddress; /* +0x2c, CONFIRMED: real computed destination base address (luma or chroma plane) */
+    UInt32  destBaseAddress; /* +0x2c, CONFIRMED: real computed destination base address (stream 0: the picture surface; stream 1: the residual surface) */
     UInt32  destEndAddress;  /* +0x30, CONFIRMED: real computed destination end address */
 };
 
