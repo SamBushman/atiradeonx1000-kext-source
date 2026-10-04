@@ -4,3 +4,5 @@
 0x14e4: li r4,16 ; call at 0x14e8 (bl 0xd020)
 0x1c30: li r4,0 ; call at 0x1c34 (bl 0x18a0)
 # NOTE: the static scan finds only these three constant-selector call sites; the doIDCT (18) site is NOT among them (the selector reaches the MIG wrapper some other way: register copy / table), which is why a live capture of a real player is needed.
+# CORRECTION (issue #140): the doIDCT site IS in the bundle - FUN_00005fd0 @ 0x5fd0 calls the MIG wrapper with selector 0x12 and a 0x38-byte struct; the selector arrives via a
+# register copy, which this constant-`li r4` scan could not see. See Tests/idct_engine_findings.md sections 5-9. The capture is also blocked by DVDPlayback's software-driver gate (section 9).

@@ -15,7 +15,7 @@ buffers - so #93's valid-path phases can be derived from evidence instead of gue
 | `watch_hw_path.sh` | ON THE G5, read-only: once per second counts DVD/GL/2D/Surface user clients; "max DVD contexts seen: 0" means the player decoded in software (the hardware IDCT path was not used) |
 | `play_with_recorder_quicktime.command`, `..._dvdplayer.command`, `..._vlc.command` | double-click launchers: start the player binary directly with the recorder inserted and the watcher running; logs go to `/tmp/va_cap/rec_<time>.tsv` (+ `.mem`) and `hw_watch_<time>.log` |
 | `analyze_capture.py` | dev-machine summary of a capture: connections, selector sequence per context, set-up call arguments, mapped regions, every doIDCT-shaped call decoded as `sATIDVDIDCTParams`, `.mem` heads |
-| `va_callsites.txt` | static scan of the VA bundle: only three constant-selector call sites (1, 16, 0) are found; the doIDCT site is not, which is why a live capture is needed |
+| `va_callsites.txt` | static scan of the VA bundle: only three constant-selector call sites (1, 16, 0) are found; the doIDCT site (`FUN_00005fd0`) was later found by reading the decompile (issue #140) - a live capture is no longer needed to learn the stream format |
 
 ## Procedure (needs a person at the G5 console: a GUI app started from ssh deadlocks Cocoa on this machine)
 1. Dev machine: `sh Tools/userspace/va_capture/install_on_g5.sh` (already done once; repeat after editing the recorder).
