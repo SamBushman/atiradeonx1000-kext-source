@@ -1,0 +1,28 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=59183 -> wid=159 rc=0
+CGSAddSurface -> sid=385993639 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+lock_all_buffers: connect=0x2403 (forwarded only if GUARD_FORWARD includes 4)
+lock_all_buffers -> rc=0x00000000 outSize=256
+  slot 10: address=0x08e18000 pitch=0x100
+  slot 11: address=0x08e1d000 pitch=0x100
+  slot 12: address=0x08e22000 pitch=0x100
+  slot 13: address=0x08e27000 pitch=0x100
+  slot 14: address=0x08e2c000 pitch=0x100
+  slot 15: address=0x00000000 pitch=0x0
+  slot 16: address=0x08e31000 pitch=0xc00
+  slot 17: address=0x08f99000 pitch=0x200
+  slot 18: address=0x00000000 pitch=0x0
+  slot 19: address=0x00000000 pitch=0x0
+  slot 20: address=0x00000000 pitch=0x0
+  slot 21: address=0x00000000 pitch=0x0
+  slot 22: address=0x00000000 pitch=0x0
+HOLD-BEFORE 8 s (open-only: DVD context is open, XDCT engine started)
+--open-only: stop after open
+  [guard after close] fwd=19 swallow=40 dvd_opens=1 doIDCT(sel18)=0 remaps=8
+ava_drive: done
+EXIT=0

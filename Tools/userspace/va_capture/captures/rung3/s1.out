@@ -1,0 +1,30 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=60911 -> wid=162 rc=0
+CGSAddSurface -> sid=386729736 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+lock_all_buffers: connect=0x2403 (forwarded only if GUARD_FORWARD includes 4)
+lock_all_buffers -> rc=0x00000000 outSize=256
+  slot 10: address=0x08ed0000 pitch=0x100
+  slot 11: address=0x08ed5000 pitch=0x100
+  slot 12: address=0x08eda000 pitch=0x100
+  slot 13: address=0x08edf000 pitch=0x100
+  slot 14: address=0x08ee4000 pitch=0x100
+  slot 15: address=0x00000000 pitch=0x0
+  slot 16: address=0x08ee9000 pitch=0xc00
+  slot 17: address=0x09051000 pitch=0x200
+  slot 18: address=0x00000000 pitch=0x0
+  slot 19: address=0x00000000 pitch=0x0
+  slot 20: address=0x00000000 pitch=0x0
+  slot 21: address=0x00000000 pitch=0x0
+  slot 22: address=0x00000000 pitch=0x0
+picture 3 'R3a one intra MB, DC only (rung 3)': type 1 alt 0 dst 0 fwd 0, 1 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=18 swallow=22 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+HOLD-AFTER 20 s (take the 'after' screenshot now)
+  [guard after close] fwd=20 swallow=41 dvd_opens=1 doIDCT(sel18)=1 remaps=9
+ava_drive: done
+EXIT=0
