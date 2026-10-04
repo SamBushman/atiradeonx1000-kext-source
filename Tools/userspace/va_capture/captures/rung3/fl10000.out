@@ -1,0 +1,156 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=56327 -> wid=214 rc=0
+CGSAddSurface -> sid=385258551 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809400 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+readback: open 2D client rc=0x0
+readback: 2D set_surface(sid, 0x800) rc=0x0
+readback: 2D lock_memory(0) rc=0x0 addr=0xb8d75000 size=0x100
+readback: 2D unlock_memory(0) rc=0x0
+readback: open GL client rc=0x0
+readback: GL set_surface(sid, 0x800) rc=0x0
+readback[before]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 0 = ff
+  nonzero: row 0 byte 1 = ff
+  nonzero: row 0 byte 2 = ff
+  nonzero: row 0 byte 3 = ff
+  nonzero: row 0 byte 4 = ff
+  nonzero: row 0 byte 5 = ff
+  nonzero: row 0 byte 6 = ff
+  nonzero: row 0 byte 7 = ff
+  nonzero: row 0 byte 8 = ff
+  nonzero: row 0 byte 9 = ff
+  nonzero: row 0 byte 10 = ff
+  nonzero: row 0 byte 11 = ff
+  nonzero: row 0 byte 12 = ff
+  nonzero: row 0 byte 13 = ff
+  nonzero: row 0 byte 14 = ff
+  nonzero: row 0 byte 15 = ff
+  nonzero: row 0 byte 16 = ff
+  nonzero: row 0 byte 17 = ff
+  nonzero: row 0 byte 18 = ff
+  nonzero: row 0 byte 19 = ff
+  nonzero: row 0 byte 20 = ff
+  nonzero: row 0 byte 21 = ff
+  nonzero: row 0 byte 22 = ff
+  nonzero: row 0 byte 23 = ff
+  12195 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  dumped /tmp/rung3/va/fl10000_before.bin (12288 bytes)
+picture 4 'R3b gain/tile probe: Y0 DC64+vertical, Y1 DC64+horizontal, Y2 DC32+vertical, Y3 DC96': type 1 alt 0 dst 0 fwd 0, 7 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=19 swallow=22 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+readback[after]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 0 = ff
+  nonzero: row 0 byte 1 = ff
+  nonzero: row 0 byte 2 = ff
+  nonzero: row 0 byte 3 = ff
+  nonzero: row 0 byte 4 = ff
+  nonzero: row 0 byte 5 = ff
+  nonzero: row 0 byte 6 = ff
+  nonzero: row 0 byte 7 = ff
+  nonzero: row 0 byte 8 = ff
+  nonzero: row 0 byte 9 = ff
+  nonzero: row 0 byte 10 = ff
+  nonzero: row 0 byte 11 = ff
+  nonzero: row 0 byte 12 = ff
+  nonzero: row 0 byte 13 = ff
+  nonzero: row 0 byte 14 = ff
+  nonzero: row 0 byte 15 = ff
+  nonzero: row 0 byte 16 = ff
+  nonzero: row 0 byte 17 = ff
+  nonzero: row 0 byte 18 = ff
+  nonzero: row 0 byte 19 = ff
+  nonzero: row 0 byte 20 = ff
+  nonzero: row 0 byte 21 = ff
+  nonzero: row 0 byte 22 = ff
+  nonzero: row 0 byte 23 = ff
+  12195 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  dumped /tmp/rung3/va/fl10000_after.bin (12288 bytes)
+readback[after+3s]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 0 = ff
+  nonzero: row 0 byte 1 = ff
+  nonzero: row 0 byte 2 = ff
+  nonzero: row 0 byte 3 = ff
+  nonzero: row 0 byte 4 = ff
+  nonzero: row 0 byte 5 = ff
+  nonzero: row 0 byte 6 = ff
+  nonzero: row 0 byte 7 = ff
+  nonzero: row 0 byte 8 = ff
+  nonzero: row 0 byte 9 = ff
+  nonzero: row 0 byte 10 = ff
+  nonzero: row 0 byte 11 = ff
+  nonzero: row 0 byte 12 = ff
+  nonzero: row 0 byte 13 = ff
+  nonzero: row 0 byte 14 = ff
+  nonzero: row 0 byte 15 = ff
+  nonzero: row 0 byte 16 = ff
+  nonzero: row 0 byte 17 = ff
+  nonzero: row 0 byte 18 = ff
+  nonzero: row 0 byte 19 = ff
+  nonzero: row 0 byte 20 = ff
+  nonzero: row 0 byte 21 = ff
+  nonzero: row 0 byte 22 = ff
+  nonzero: row 0 byte 23 = ff
+  12195 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
+  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  dumped /tmp/rung3/va/fl10000_after+3s.bin (12288 bytes)
+HOLD-AFTER 2 s (take the 'after' screenshot now)
+  [guard after close] fwd=21 swallow=41 dvd_opens=1 doIDCT(sel18)=1 remaps=9
+ava_drive: done
+EXIT=0

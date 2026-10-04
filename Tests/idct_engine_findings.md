@@ -187,6 +187,16 @@ All on the stock kext, forwarded `doIDCT` into the window surface's slot 0, read
 | CBP subset (`R3f`, `cbp1`) | only Y1 (DC 128 -> 144) and Y2 (DC -128 -> 112) coded: those blocks exact, Y0/Y3 written as 0: **the six CBP bits select which blocks are decoded; the rest of the macroblock is zero-filled** (a coded macroblock is written as a whole) |
 So the stream format derived in sections 5-7 (macroblock header, run/level dwords with the last flag on the final coefficient of each coded block, block order Y0 Y1 Y2 Y3) is confirmed on hardware, including the end-of-block *presence* (every coded block here ended with the flag). Still open: what the engine does when the last flag is absent; the other bits of the control word (`0x10080`: bits 7 and 16; bit 5 = intra is expected to gate the +128 bias); chroma blocks and the chroma plane address; stream 1 (residual); macroblock positions other than (0,0); multi-macroblock streams; field pictures.
 
+## 9h. Rung 3: the control word (`engineFlagWord` -> IDCT_CONTROL 0x1fbc) decoded by clearing its bits (2026-10-04; runs `fl20`, `fl80`, `fl10000`, `alt1`)
+The client sends `0x10080 | alt_scan << 3 | (stream 0 ? 0x20 : 0)`. With the guard's `GUARD_FLAG_CLEAR` knob (clearing only, never setting) on the zigzag probe picture:
+| bit cleared | observed effect |
+|---|---|
+| 0x20 (bit 5) | **Intra vs non-intra mode.** Cleared: no +128 bias, no 8-bit clip, samples are **16-bit signed** values (Y0 rows read 15, 14, 12, 9, 7, 4, 2, 1 = the biased values minus 128, in 32 sixteen-byte groups instead of 16: two bytes per sample). Set: 8-bit pixels, +128, clipped to 0..255. Stream 1 (residual) therefore produces 16-bit residuals - consistent with its slot's pitch 0x200 vs 0x100 for the intra slots. |
+| 0x80 (bit 7) | Normal layout needs it set. Cleared: the **first coded block's coefficients land two scan positions later** (the DC level 64 appears at position 2 = vertical (1,0), the AC level 40 at position 4 = (1,1)); Y1-Y3 unchanged. (Likely a "first block / header" handling bit; semantics beyond this effect unknown.) |
+| 0x10000 (bit 16) | Cleared: output **exactly equals the oracle (256/256)**; set: +-1 differences in about 17 of 256 samples. Bit 16 enables a dither/rounding variation. |
+| 0x08 (bit 3) | Set = alternate scan (run `alt1`, matches the alternate table). |
+So the control word is: bit 3 alternate scan, bit 5 intra (8-bit biased/clipped pixels vs 16-bit residuals), bit 7 required (first-block position handling), bit 16 dither/rounding, other bits as in the client's value (0 elsewhere). The oracle matches the engine exactly when bit 16 is clear.
+
 ## 10. Producer hunt result, and what is still open
 **Resolved by locating the producer (second pass).** `AppleVADriverG5` `FUN_00054070` writes the macroblock records and the run/level dwords (section 7): layout = level<<16 | run<<1 | last,
 bit 0 is the end-of-block flag, levels are dequantised. `AVASliceCreate` exists only in `AppleVA`, `AppleVADriver` and `AppleVADriverG5` (G5-wide scan of the QuickTime, DVD and VA
