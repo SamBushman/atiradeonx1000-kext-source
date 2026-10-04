@@ -71,7 +71,7 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = -1, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
         unsigned char desc[0x20]; size_t nrec = VEC_NMB * 0x1c; unsigned char *recs = malloc(nrec); unsigned *coefs = malloc((vec_pics[i].ncoefs + 1) * 4);
         memcpy(recs, vec_pics[i].recs, nrec); memcpy(coefs, vec_pics[i].coefs, vec_pics[i].ncoefs * 4);
         memset(desc, 0, sizeof desc);
-        desc[0] = vec_pics[i].ptype; desc[2] = 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override >= 0 ? dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = 0;
+        desc[0] = vec_pics[i].ptype; desc[2] = 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = 0;
         *(unsigned char **)(desc + 0x0c) = recs; *(unsigned **)(desc + 0x10) = coefs;
         printf("picture %d '%s': type %d alt %d dst %d fwd %d, %d coefficient dwords\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].ncoefs); fflush(stdout);
         DVDDriverDecodeImpl(dev, desc, rect);
