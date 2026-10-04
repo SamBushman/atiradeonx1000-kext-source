@@ -18,6 +18,12 @@
  * Log (tab separated): FLUSH lines per scanned buffer, a CLOSE/EXIT summary with the sparse histogram "op:records:words" per connection, and ANOMALY lines (a record that overruns the
  * buffer, a buffer that never terminates): any anomaly means the format assumption is wrong for that buffer - do not trust the tallies without checking them.
  * Limitation: buffers the kernel processes by a path other than the flush-map (e.g. a swap or read selector that submits the pending buffer itself) are not counted.
+ *
+ * t_us field (added for issue #44's real-GL-application-frame-rate follow-up): each FLUSH line now also carries t_us=<microseconds since recorder init, mach_absolute_time-based>, a
+ * purely additive field appended at the end of the existing tab-separated FLUSH format (nothing already parsing this format by field count/order from the front breaks). The interval
+ * between consecutive FLUSH t_us values for the SAME connection is the real time between two command-buffer submissions for that context - for a GL connection whose client calls flush
+ * once per rendered frame (the common case for a real app's main loop), that interval is a real per-frame time, i.e. real application frame rate, derived from an unmodified run of the
+ * real app rather than a synthetic benchmark. Tools/frame_rate_from_log.py turns a captured log into per-connection frame-time statistics.
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,6 +33,7 @@
 #include <pthread.h>
 #include <mach/mach.h>
 #include <mach/vm_map.h>
+#include <mach/mach_time.h>
 #include <IOKit/IOKitLib.h>
 
 #define MAXCONN 64
@@ -42,10 +49,13 @@ static unsigned long g_tot_flush[4], g_tot_anom[4];
 static pthread_mutex_t g_mu = PTHREAD_MUTEX_INITIALIZER;
 static FILE *g_log; static int g_pid; static unsigned g_start = 0x1c; static int g_dump = 0; static unsigned char *g_buf; static vm_size_t g_bufsz; static unsigned char *g_pre; static vm_size_t g_presz; static int g_post_pending; static vm_address_t g_post_addr; static vm_size_t g_post_size; static unsigned long g_post_off;
 static const char *tname[4] = { "surface", "gl", "2d", "dvd" };
+static double g_ticks_to_us; static double g_t0_us;
+static double now_us_rel(void) { return (double)mach_absolute_time() * g_ticks_to_us - g_t0_us; }
 
 static void ensure_log(void) {
     char b[256]; const char *p;
     if (g_log) return;
+    { mach_timebase_info_data_t tb; mach_timebase_info(&tb); g_ticks_to_us = (double)tb.numer / tb.denom / 1000.0; g_t0_us = (double)mach_absolute_time() * g_ticks_to_us; }
     p = getenv("OPCODE_LOG"); g_pid = (int)getpid();
     if (!p) { snprintf(b, sizeof b, "/tmp/opcode_recorder.%d.tsv", g_pid); p = b; }
     g_log = fopen(p, "a"); if (!g_log) g_log = stderr;
@@ -116,7 +126,7 @@ static void scan(conn_t *c, vm_address_t addr, vm_size_t size) {
     if (anom) { c->anomalies++; g_tot_anom[t]++; }
     if (nrec == 0 && term) c->empty_buffers++;
     c->buffers_scanned++; c->records += nrec; c->words += nwords;
-    fprintf(g_log, "FLUSH\tconn=0x%x\ttype=%s\tn=%lu\taddr=0x%lx\tsize=0x%lx\trecords=%lu\twords=%lu\tterminated=%d\n", (unsigned)c->connect, tname[t], c->flushes, (unsigned long)addr, (unsigned long)size, nrec, nwords, term);
+    fprintf(g_log, "FLUSH\tconn=0x%x\ttype=%s\tn=%lu\taddr=0x%lx\tsize=0x%lx\trecords=%lu\twords=%lu\tterminated=%d\tt_us=%.2f\n", (unsigned)c->connect, tname[t], c->flushes, (unsigned long)addr, (unsigned long)size, nrec, nwords, term, now_us_rel());
 }
 static void summary(const char *what, conn_t *c) {
     int i; fprintf(g_log, "%s\tconn=0x%x\ttype=%s\tflushes=%lu\tbuffers=%lu\tempty=%lu\trecords=%lu\twords=%lu\tanomalies=%lu\tstrays=%lu\ttails=%lu\tHIST", what, (unsigned)c->connect, tname[c->type & 3], c->flushes, c->buffers_scanned, c->empty_buffers, c->records, c->words, c->anomalies, c->strays, c->tails);

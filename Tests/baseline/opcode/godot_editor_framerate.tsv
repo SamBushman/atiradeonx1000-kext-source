@@ -1,0 +1,258 @@
+# opcode_recorder start pid=2986 start_offset=0x1c dump=0
+OPEN	type=1	connect=0x4e0b
+CLOSE	conn=0x4e0b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+OPEN	type=1	connect=0x4e0f
+OPEN	type=1	connect=0x4f03
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x2abc
+FLUSH	conn=0x4e0f	type=gl	n=2	addr=0x5774000	size=0x20000	records=40	words=2729	terminated=1	t_us=114712.00
+OPEN	type=0	connect=0x6107
+OPEN	type=0	connect=0x660f
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0xb1c
+FLUSH	conn=0x4e0f	type=gl	n=3	addr=0x11ac1000	size=0x40000	records=19	words=705	terminated=1	t_us=353337.78
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x122c
+FLUSH	conn=0x4e0f	type=gl	n=4	addr=0x11d85000	size=0x40000	records=38	words=1157	terminated=1	t_us=461577.37
+TAIL	conn=0x4e0f	type=gl	final record op=0x02 header=0x02000000 at +0x118
+FLUSH	conn=0x4e0f	type=gl	n=5	addr=0x128db000	size=0x40000	records=4	words=64	terminated=1	t_us=479888.89
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x125c
+FLUSH	conn=0x4e0f	type=gl	n=6	addr=0x120da000	size=0x40000	records=12	words=1169	terminated=1	t_us=1241062.68
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=7	addr=0x11d85000	size=0x40000	records=4	words=201	terminated=1	t_us=2794095.07
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x650
+FLUSH	conn=0x4e0f	type=gl	n=8	addr=0x11ac1000	size=0x40000	records=19	words=398	terminated=1	t_us=2803271.07
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1dc
+FLUSH	conn=0x4e0f	type=gl	n=9	addr=0x128db000	size=0x40000	records=3	words=113	terminated=1	t_us=3420139.95
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x194
+FLUSH	conn=0x4e0f	type=gl	n=10	addr=0x12045000	size=0x40000	records=3	words=95	terminated=1	t_us=3425730.11
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0xb57c
+FLUSH	conn=0x4e0f	type=gl	n=11	addr=0x1211a000	size=0x40000	records=91	words=11609	terminated=1	t_us=8766670.94
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=12	addr=0x13c42000	size=0x40000	records=4	words=201	terminated=1	t_us=8769563.66
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x3dc
+FLUSH	conn=0x4e0f	type=gl	n=13	addr=0x13ca4000	size=0x40000	records=5	words=241	terminated=1	t_us=8770528.77
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=14	addr=0x120da000	size=0x40000	records=4	words=201	terminated=1	t_us=8771621.45
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x37c
+FLUSH	conn=0x4e0f	type=gl	n=15	addr=0x11d85000	size=0x40000	records=4	words=217	terminated=1	t_us=8772451.56
+TOTAL	pid=2986	type=gl	flushes=16	anomalies=0	HIST 00:14:1839 01:13:13 02:1:1 06:29:87 15:1:40 16:42:335 17:5:5 18:5:5 19:5:5 1a:5:5 1b:5:5 1c:5:5 1d:5:5 1e:5:5 1f:5:5 20:5:5 21:5:5 22:5:5 23:5:5 24:5:14 25:6:99 28:1:16 29:2:445 2f:1:268 33:29:5539 37:29:8970 39:1:22 3a:1:317 41:10:1030
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=16	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8773280.31
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=17	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8774064.81
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=18	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=8774838.02
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=19	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8775634.70
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=20	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8776396.43
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=21	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8777390.10
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=22	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8778180.78
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=23	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8778936.12
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=24	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8779665.86
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=25	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8780427.65
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=26	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8781197.35
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1ac
+FLUSH	conn=0x4e0f	type=gl	n=27	addr=0x12045000	size=0x40000	records=3	words=101	terminated=1	t_us=8782275.39
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1dc
+FLUSH	conn=0x4e0f	type=gl	n=28	addr=0x13e16000	size=0x40000	records=3	words=113	terminated=1	t_us=8783046.87
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x3dc
+FLUSH	conn=0x4e0f	type=gl	n=29	addr=0x1211a000	size=0x40000	records=5	words=241	terminated=1	t_us=8783935.42
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=30	addr=0x13c42000	size=0x40000	records=4	words=201	terminated=1	t_us=8784754.66
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x37c
+FLUSH	conn=0x4e0f	type=gl	n=31	addr=0x13ca4000	size=0x40000	records=4	words=217	terminated=1	t_us=8785508.52
+TOTAL	pid=2986	type=gl	flushes=32	anomalies=0	HIST 00:30:3183 01:29:29 02:1:1 06:29:87 15:1:40 16:58:602 17:5:5 18:5:5 19:5:5 1a:5:5 1b:5:5 1c:5:5 1d:5:5 1e:5:5 1f:5:5 20:5:5 21:5:5 22:5:5 23:5:5 24:5:14 25:6:99 28:1:16 29:2:445 2f:1:268 33:29:5539 37:29:8970 39:1:22 3a:1:317 41:25:2575
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=32	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8786302.95
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=33	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8787029.94
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=34	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8787731.06
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=35	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8788463.71
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=36	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=8789178.19
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=37	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8789986.54
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=38	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8790742.32
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=39	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8791484.40
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=40	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8792218.85
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=41	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8792966.18
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=42	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8793772.49
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=43	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8859361.70
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=44	addr=0x128db000	size=0x40000	records=4	words=201	terminated=1	t_us=8860383.45
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x3dc
+FLUSH	conn=0x4e0f	type=gl	n=45	addr=0x12045000	size=0x40000	records=5	words=241	terminated=1	t_us=8861282.08
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=46	addr=0x13e16000	size=0x40000	records=4	words=201	terminated=1	t_us=8862231.23
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x37c
+FLUSH	conn=0x4e0f	type=gl	n=47	addr=0x1211a000	size=0x40000	records=4	words=217	terminated=1	t_us=8863009.10
+TOTAL	pid=2986	type=gl	flushes=48	anomalies=0	HIST 00:46:4607 01:45:45 02:1:1 06:29:87 15:1:40 16:75:882 17:5:5 18:5:5 19:5:5 1a:5:5 1b:5:5 1c:5:5 1d:5:5 1e:5:5 1f:5:5 20:5:5 21:5:5 22:5:5 23:5:5 24:5:14 25:6:99 28:1:16 29:2:445 2f:1:268 33:29:5539 37:29:8970 39:1:22 3a:1:317 41:41:4223
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=48	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8863807.13
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=49	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8864565.46
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=50	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8865341.98
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=51	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8866062.27
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=52	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8866762.08
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=53	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8867644.47
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=54	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=8868380.13
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=55	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8869158.26
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=56	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8869895.75
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=57	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8870648.26
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=58	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8871407.11
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1ac
+FLUSH	conn=0x4e0f	type=gl	n=59	addr=0x120da000	size=0x40000	records=3	words=101	terminated=1	t_us=8872478.28
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1dc
+FLUSH	conn=0x4e0f	type=gl	n=60	addr=0x11d85000	size=0x40000	records=3	words=113	terminated=1	t_us=8873217.80
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x3dc
+FLUSH	conn=0x4e0f	type=gl	n=61	addr=0x11ac1000	size=0x40000	records=5	words=241	terminated=1	t_us=8874069.90
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=62	addr=0x128db000	size=0x40000	records=4	words=201	terminated=1	t_us=8874894.42
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x37c
+FLUSH	conn=0x4e0f	type=gl	n=63	addr=0x12045000	size=0x40000	records=4	words=217	terminated=1	t_us=8875717.23
+TOTAL	pid=2986	type=gl	flushes=64	anomalies=0	HIST 00:62:5951 01:61:61 02:1:1 06:29:87 15:1:40 16:91:1149 17:5:5 18:5:5 19:5:5 1a:5:5 1b:5:5 1c:5:5 1d:5:5 1e:5:5 1f:5:5 20:5:5 21:5:5 22:5:5 23:5:5 24:5:14 25:6:99 28:1:16 29:2:445 2f:1:268 33:29:5539 37:29:8970 39:1:22 3a:1:317 41:56:5768
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=64	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8876506.20
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=65	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8877252.68
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=66	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8878002.32
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=67	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8878735.03
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=68	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8879471.59
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=69	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8880242.22
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=70	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8880953.79
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=71	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8881686.77
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=72	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=8882416.43
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=73	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8883160.93
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=74	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8883904.30
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=75	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8884995.78
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x3dc
+FLUSH	conn=0x4e0f	type=gl	n=76	addr=0x13ca4000	size=0x40000	records=5	words=241	terminated=1	t_us=8885910.78
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=77	addr=0x120da000	size=0x40000	records=4	words=201	terminated=1	t_us=8886845.41
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x37c
+FLUSH	conn=0x4e0f	type=gl	n=78	addr=0x11d85000	size=0x40000	records=4	words=217	terminated=1	t_us=8887628.95
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=79	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8888365.00
+TOTAL	pid=2986	type=gl	flushes=80	anomalies=0	HIST 00:78:7375 01:77:77 02:1:1 06:29:87 15:1:40 16:108:1437 17:5:5 18:5:5 19:5:5 1a:5:5 1b:5:5 1c:5:5 1d:5:5 1e:5:5 1f:5:5 20:5:5 21:5:5 22:5:5 23:5:5 24:5:14 25:6:99 28:1:16 29:2:445 2f:1:268 33:29:5539 37:29:8970 39:1:22 3a:1:317 41:72:7416
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=80	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8889151.60
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=81	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=8889873.03
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=82	addr=0x13e16000	size=0x40000	records=4	words=209	terminated=1	t_us=8890690.26
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=83	addr=0x1211a000	size=0x40000	records=4	words=209	terminated=1	t_us=8891482.62
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=84	addr=0x13c42000	size=0x40000	records=4	words=209	terminated=1	t_us=8892420.70
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=85	addr=0x13ca4000	size=0x40000	records=4	words=209	terminated=1	t_us=8893187.76
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=86	addr=0x120da000	size=0x40000	records=4	words=209	terminated=1	t_us=8893937.31
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=87	addr=0x11d85000	size=0x40000	records=4	words=209	terminated=1	t_us=8894667.98
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=88	addr=0x11ac1000	size=0x40000	records=4	words=209	terminated=1	t_us=8895383.12
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=89	addr=0x128db000	size=0x40000	records=4	words=209	terminated=1	t_us=8896124.77
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x35c
+FLUSH	conn=0x4e0f	type=gl	n=90	addr=0x12045000	size=0x40000	records=4	words=209	terminated=1	t_us=9815073.80
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0xb3c
+FLUSH	conn=0x4e0f	type=gl	n=91	addr=0x13e16000	size=0x40000	records=19	words=713	terminated=1	t_us=10260441.17
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=92	addr=0x1211a000	size=0x40000	records=4	words=201	terminated=1	t_us=10386216.10
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x33c
+FLUSH	conn=0x4e0f	type=gl	n=93	addr=0x13c42000	size=0x40000	records=4	words=201	terminated=1	t_us=10743369.65
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1148
+FLUSH	conn=0x4e0f	type=gl	n=94	addr=0x13ca4000	size=0x40000	records=11	words=1100	terminated=1	t_us=11261374.66
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x160c
+FLUSH	conn=0x4e0f	type=gl	n=95	addr=0x120da000	size=0x40000	records=24	words=1405	terminated=1	t_us=14962951.45
+TOTAL	pid=2986	type=gl	flushes=96	anomalies=0	HIST 00:94:10025 01:93:93 02:1:1 06:33:99 15:1:40 16:127:1660 17:7:7 18:7:7 19:7:7 1a:7:7 1b:7:7 1c:7:7 1d:7:7 1e:7:7 1f:7:7 20:7:7 21:7:7 22:7:7 23:7:7 24:7:16 25:8:115 28:1:16 29:3:507 2f:1:268 33:32:6112 37:32:9867 39:1:22 3a:1:317 41:86:8858
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0xfe8
+FLUSH	conn=0x4e0f	type=gl	n=96	addr=0x12045000	size=0x40000	records=10	words=1012	terminated=1	t_us=15715877.23
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0xfe8
+FLUSH	conn=0x4e0f	type=gl	n=97	addr=0x13e16000	size=0x40000	records=10	words=1012	terminated=1	t_us=16407618.07
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x125c
+FLUSH	conn=0x4e0f	type=gl	n=98	addr=0x1211a000	size=0x40000	records=11	words=1169	terminated=1	t_us=18120353.98
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x75c
+FLUSH	conn=0x4e0f	type=gl	n=99	addr=0x13c42000	size=0x40000	records=19	words=465	terminated=1	t_us=18158348.71
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x53c
+FLUSH	conn=0x4e0f	type=gl	n=100	addr=0x13ca4000	size=0x40000	records=19	words=329	terminated=1	t_us=18162762.03
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4b4
+FLUSH	conn=0x4e0f	type=gl	n=101	addr=0x15817000	size=0x40000	records=18	words=295	terminated=1	t_us=18204389.34
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x1dc
+FLUSH	conn=0x4e0f	type=gl	n=102	addr=0x15817000	size=0x40000	records=3	words=113	terminated=1	t_us=18274523.88
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=103	addr=0x11ac1000	size=0x40000	records=19	words=305	terminated=1	t_us=18275448.49
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=104	addr=0x120da000	size=0x40000	records=19	words=305	terminated=1	t_us=18340273.07
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=105	addr=0x12045000	size=0x40000	records=19	words=305	terminated=1	t_us=18341051.69
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=106	addr=0x13e16000	size=0x40000	records=19	words=305	terminated=1	t_us=18382430.18
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=107	addr=0x1211a000	size=0x40000	records=19	words=305	terminated=1	t_us=18383224.73
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=108	addr=0x13c42000	size=0x40000	records=19	words=305	terminated=1	t_us=18429268.63
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=109	addr=0x13ca4000	size=0x40000	records=19	words=305	terminated=1	t_us=18430048.39
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=110	addr=0x128db000	size=0x40000	records=19	words=305	terminated=1	t_us=18479326.20
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=111	addr=0x15817000	size=0x40000	records=19	words=305	terminated=1	t_us=18480038.25
+TOTAL	pid=2986	type=gl	flushes=112	anomalies=0	HIST 00:110:12375 01:109:109 02:1:1 06:50:205 07:11:33 15:1:40 16:134:1715 17:8:8 18:19:19 19:19:19 1a:19:19 1b:19:19 1c:19:19 1d:19:19 1e:19:19 1f:19:19 20:19:19 21:19:19 22:19:19 23:19:19 24:19:28 25:20:211 28:1:16 29:3:507 2f:1:268 33:38:7258 37:38:11709 39:1:22 3a:1:317 41:99:10197
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=112	addr=0x11ac1000	size=0x40000	records=19	words=305	terminated=1	t_us=18532244.84
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=113	addr=0x120da000	size=0x40000	records=19	words=305	terminated=1	t_us=18532963.55
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=114	addr=0x12045000	size=0x40000	records=19	words=305	terminated=1	t_us=18633544.68
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x51c
+FLUSH	conn=0x4e0f	type=gl	n=115	addr=0x13e16000	size=0x40000	records=19	words=321	terminated=1	t_us=18707015.78
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=116	addr=0x1211a000	size=0x40000	records=19	words=305	terminated=1	t_us=25547831.75
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=117	addr=0x13c42000	size=0x40000	records=19	words=305	terminated=1	t_us=25548578.57
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=118	addr=0x13ca4000	size=0x40000	records=19	words=305	terminated=1	t_us=32271301.29
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=119	addr=0x128db000	size=0x40000	records=19	words=305	terminated=1	t_us=32272022.96
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=120	addr=0x15817000	size=0x40000	records=19	words=305	terminated=1	t_us=39088395.19
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=121	addr=0x11ac1000	size=0x40000	records=19	words=305	terminated=1	t_us=39089111.16
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=122	addr=0x120da000	size=0x40000	records=19	words=305	terminated=1	t_us=45913956.56
+TAIL	conn=0x4e0f	type=gl	final record op=0x01 header=0x01000000 at +0x4dc
+FLUSH	conn=0x4e0f	type=gl	n=123	addr=0x12045000	size=0x40000	records=19	words=305	terminated=1	t_us=45915751.45
