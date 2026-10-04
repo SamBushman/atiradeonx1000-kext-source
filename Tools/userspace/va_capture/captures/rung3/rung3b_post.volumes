@@ -1,0 +1,20 @@
+== /
+Error detected (-9972) while verifying/repairing volume disk1s3 Tiger HD
+Checking HFS Plus volume.
+Checking Extents Overflow file.
+Checking Catalog file.
+Checking multi-linked files.
+Checking Catalog hierarchy.
+Checking Extended Attributes file.
+Checking volume bitmap.
+[31mVolume Bit Map needs minor repair[0m
+Checking volume information.
+== /Volumes/Test HD
+Checking HFS Plus volume.
+Checking Extents Overflow file.
+Checking Catalog file.
+Checking multi-linked files.
+Checking Catalog hierarchy.
+Checking Extended Attributes file.
+Checking volume bitmap.
+Checking volume information.

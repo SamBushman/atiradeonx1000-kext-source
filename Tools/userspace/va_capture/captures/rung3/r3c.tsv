@@ -1,0 +1,59 @@
+# iokit_guard start pid=10192
+1	10192	233	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	10192	279	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	10192	308	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0xd000 size=0x1000	0
+4	10192	362	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0xc0000 size=0x1000	0
+5	10192	389	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	10192	597	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	10192	615	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	10192	640	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	10192	806	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	10192	827	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	10192	846	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0xd7000 size=0x1000	0
+12	10192	1096	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	170d5ca3 00004000 00000001 	0
+13	10192	1223	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	10192	1240	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	170d5ca3 00004000 00000001 	0
+15	10192	1266	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 000dc000 00007800  fake_handle=0x611050	0
+16	10192	6541	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+17	10192	6564	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 000e4000 00004800  fake_handle=0x611190	0
+18	10192	11498	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+19	10192	11625	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 02810800 00003000  fake_handle=0x6112d0	0
+20	10192	11637	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 02813a00 00003000  fake_handle=0x611410	0
+21	10192	11648	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 02816c00 00003000  fake_handle=0x611550	0
+22	10192	11659	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 02819e00 00003000  fake_handle=0x611690	0
+23	10192	11670	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 0281d000 00003000  fake_handle=0x6117d0	0
+24	10192	14055	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 00290000 00016800  fake_handle=0x611910	0
+25	10192	14089	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 002b9000 00016800  fake_handle=0x611a50	0
+26	10192	14101	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 002e2000 00016800  fake_handle=0x611b90	0
+27	10192	14111	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 005ae000 00016800  fake_handle=0x611cd0	0
+28	10192	14122	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 005d7000 00016800  fake_handle=0x611e10	0
+29	10192	14133	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 00785000 00016800  fake_handle=0x611f50	0
+30	10192	14144	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 007ae000 00016800  fake_handle=0x612090	0
+31	10192	14155	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 007d7000 00016800  fake_handle=0x6121d0	0
+32	10192	14166	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	SWALLOW(fake image handle)	00000000 02807600 00000800  fake_handle=0x612310	0
+33	10192	19165	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+34	10192	19189	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+35	10192	19212	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	170d5ca3 00004000 00000001 	0
+36	10192	24227	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+37	10192	29235	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+38	10192	14029277	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+39	10192	14041040	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+40	10192	14041066	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+41	10192	14041123	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+42	10192	14041142	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+43	10192	14041159	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+44	10192	14041176	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+45	10192	14041194	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+46	10192	14041211	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+47	10192	14041228	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+48	10192	14041245	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+49	10192	14041311	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+50	10192	14041333	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+51	10192	14041388	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+52	10192	14041421	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+53	10192	14041455	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+54	10192	14051278	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+55	10192	14051295	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+56	10192	14061190	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+57	10192	14061208	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW	00000000 	0
+58	10192	14061620	IOServiceClose	connect=0x2403	ctype=3	sel=-1	FWD	-	0

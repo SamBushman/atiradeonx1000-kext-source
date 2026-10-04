@@ -62,7 +62,7 @@ int main(int argc, char **argv) {
     stats("after open");
     if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
     if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
-    if (skipdecode) { printf("--open-only: stop after open\n"); goto out; }
+    if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
     for (i = 0; i < VEC_NPIC; i++) {
         if (!(picmask & (1u << i))) continue;
