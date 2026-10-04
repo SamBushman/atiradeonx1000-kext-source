@@ -4,7 +4,7 @@
 N=$1; P=$2; shift; shift
 D=$(cd "$(dirname "$0")" && pwd); R=$(cd "$D/../../.." && pwd); OUT=$D/captures/rung3/rb; mkdir -p $OUT
 (cd $R && sh Tests/destructive/peer_ack.sh G5 /tmp/rung3/Tests/destructive 2>&1 | head -1)
-scp -q $D/ava_vectors.h G5:/tmp/rung3/va/ && ssh G5 'cd /tmp/rung3/va && gcc -o ava_drive ava_drive.c -F/System/Library/PrivateFrameworks -framework AppleVA -framework ApplicationServices -framework IOKit 2>&1 | grep -v warning'
+scp -q $D/ava_vectors.h $D/ava_drive.c $D/run_rung3.sh G5:/tmp/rung3/va/ && ssh G5 'cd /tmp/rung3/va && gcc -o ava_drive ava_drive.c -F/System/Library/PrivateFrameworks -framework AppleVA -framework ApplicationServices -framework IOKit 2>&1 | grep -v warning'
 ssh G5 "cd /tmp/rung3/Tests/destructive && sh preflight.sh px_$N 2>&1 | tail -1"
 ssh G5 "osascript -e \"tell application \\\"Terminal\\\" to do script \\\"GF=18 $PX_ENV WIN_X=800 WIN_Y=500 sh /tmp/rung3/va/run_rung3.sh $N --pictures $P --dst -10 --readback --hold-after 2 $*\\\"\" >/dev/null 2>&1"
 for i in `seq 1 90`; do ssh -o ConnectTimeout=10 G5 "grep -q 'EXIT=' /tmp/rung3/va/$N.out 2>/dev/null" && break; sleep 1; done
