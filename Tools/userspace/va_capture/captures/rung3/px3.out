@@ -1,0 +1,153 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=60419 -> wid=179 rc=0
+CGSAddSurface -> sid=386518381 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+readback: open 2D client rc=0x0
+readback: 2D set_surface(sid, 0x800) rc=0x0
+readback: 2D lock_memory(0) rc=0x0 addr=0xb93ed000 size=0x100
+readback: 2D unlock_memory(0) rc=0x0
+readback: open GL client rc=0x0
+readback: GL set_surface(sid, 0x800) rc=0x0
+readback[before]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 40 = 80
+  nonzero: row 0 byte 156 = 80
+  nonzero: row 0 byte 224 = 02
+  nonzero: row 0 byte 244 = 08
+  nonzero: row 1 byte 224 = 04
+  nonzero: row 1 byte 228 = 80
+  nonzero: row 1 byte 236 = 20
+  nonzero: row 1 byte 240 = 82
+  nonzero: row 1 byte 244 = 04
+  nonzero: row 1 byte 252 = 02
+  nonzero: row 2 byte 119 = 80
+  nonzero: row 2 byte 140 = 02
+  nonzero: row 2 byte 244 = 20
+  nonzero: row 3 byte 104 = 10
+  nonzero: row 3 byte 112 = 20
+  nonzero: row 3 byte 127 = 80
+  nonzero: row 3 byte 224 = 20
+  nonzero: row 3 byte 243 = 04
+  nonzero: row 3 byte 248 = 08
+  nonzero: row 3 byte 251 = 84
+  nonzero: row 3 byte 252 = 06
+  nonzero: row 3 byte 255 = 80
+  nonzero: row 4 byte 13 = 08
+  nonzero: row 4 byte 224 = 04
+  212 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  1: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  2: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  3: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  4: 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00
+  row  5: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  6: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  7: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  9: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 13: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 17: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+picture 3 'R3a one intra MB, DC only (rung 3)': type 1 alt 0 dst 0 fwd 0, 1 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=19 swallow=22 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+readback[after]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 40 = 80
+  nonzero: row 0 byte 156 = 80
+  nonzero: row 0 byte 224 = 02
+  nonzero: row 0 byte 244 = 08
+  nonzero: row 1 byte 224 = 04
+  nonzero: row 1 byte 228 = 80
+  nonzero: row 1 byte 236 = 20
+  nonzero: row 1 byte 240 = 82
+  nonzero: row 1 byte 244 = 04
+  nonzero: row 1 byte 252 = 02
+  nonzero: row 2 byte 119 = 80
+  nonzero: row 2 byte 140 = 02
+  nonzero: row 2 byte 244 = 20
+  nonzero: row 3 byte 104 = 10
+  nonzero: row 3 byte 112 = 20
+  nonzero: row 3 byte 127 = 80
+  nonzero: row 3 byte 224 = 20
+  nonzero: row 3 byte 243 = 04
+  nonzero: row 3 byte 248 = 08
+  nonzero: row 3 byte 251 = 84
+  nonzero: row 3 byte 252 = 06
+  nonzero: row 3 byte 255 = 80
+  nonzero: row 4 byte 13 = 08
+  nonzero: row 4 byte 224 = 04
+  271 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  1: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  2: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  3: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  4: 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00
+  row  5: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  6: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  7: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  9: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 13: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 17: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+readback[after+3s]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+  nonzero: row 0 byte 40 = 80
+  nonzero: row 0 byte 156 = 80
+  nonzero: row 0 byte 224 = 02
+  nonzero: row 0 byte 244 = 08
+  nonzero: row 1 byte 224 = 04
+  nonzero: row 1 byte 228 = 80
+  nonzero: row 1 byte 236 = 20
+  nonzero: row 1 byte 240 = 82
+  nonzero: row 1 byte 244 = 04
+  nonzero: row 1 byte 252 = 02
+  nonzero: row 2 byte 119 = 80
+  nonzero: row 2 byte 140 = 02
+  nonzero: row 2 byte 244 = 20
+  nonzero: row 3 byte 104 = 10
+  nonzero: row 3 byte 112 = 20
+  nonzero: row 3 byte 127 = 80
+  nonzero: row 3 byte 224 = 20
+  nonzero: row 3 byte 243 = 04
+  nonzero: row 3 byte 248 = 08
+  nonzero: row 3 byte 251 = 84
+  nonzero: row 3 byte 252 = 06
+  nonzero: row 3 byte 255 = 80
+  nonzero: row 4 byte 13 = 08
+  nonzero: row 4 byte 224 = 04
+  271 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  1: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  2: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  3: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  4: 00 00 00 00 00 00 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00 00 00 00
+  row  5: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  6: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  7: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  8: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row  9: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 10: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 11: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 12: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 13: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 14: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 15: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 16: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 17: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+HOLD-AFTER 4 s (take the 'after' screenshot now)
+  [guard after close] fwd=21 swallow=41 dvd_opens=1 doIDCT(sel18)=1 remaps=9
+ava_drive: done
+EXIT=0
