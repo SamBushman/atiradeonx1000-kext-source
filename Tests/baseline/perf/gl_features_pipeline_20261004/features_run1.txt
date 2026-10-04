@@ -1,0 +1,17 @@
+perf_gl_features: 3000 draws/metric, 64x64 pbuffer, timer tick 0.0300 us
+METRIC gl.baseline.flatcolor n=3000 min_us=121.81 p10_us=122.20 median_us=122.44 p90_us=122.77 max_us=124.81
+METRIC gl.blend.srcalpha n=3000 min_us=121.84 p10_us=122.20 median_us=122.44 p90_us=122.80 max_us=124.48
+METRIC gl.blend.equation_func_separate n=3000 min_us=121.84 p10_us=122.17 median_us=122.44 p90_us=122.80 max_us=125.89
+METRIC gl.fog.linear n=3000 min_us=123.82 p10_us=124.27 median_us=124.54 p90_us=124.81 max_us=126.43
+METRIC gl.stencil.funcop n=3000 min_us=121.93 p10_us=122.17 median_us=122.35 p90_us=122.62 max_us=124.78
+METRIC gl.alphatest n=3000 min_us=121.96 p10_us=122.23 median_us=122.38 p90_us=122.59 max_us=125.41
+METRIC gl.tex2d.modulate n=3000 min_us=123.91 p10_us=124.39 median_us=124.60 p90_us=124.87 max_us=128.98
+METRIC gl.tex2d.dot3combine n=3000 min_us=70.18 p10_us=124.33 median_us=124.54 p90_us=124.81 max_us=145.18
+METRIC gl.tex.multiunit2.modulate_add n=3000 min_us=124.45 p10_us=124.78 median_us=124.93 p90_us=125.14 max_us=129.16
+METRIC gl.tex.cubemap n=3000 min_us=124.27 p10_us=124.57 median_us=124.75 p90_us=124.93 max_us=126.64
+METRIC gl.tex.3d n=3000 min_us=124.21 p10_us=124.45 median_us=124.63 p90_us=124.87 max_us=129.31
+METRIC gl.tex.s3tc_dxt1 n=3000 min_us=124.24 p10_us=124.54 median_us=124.72 p90_us=124.96 max_us=127.36
+METRIC gl.tex.shadow_compare n=3000 min_us=124.51 p10_us=124.75 median_us=124.90 p90_us=125.08 max_us=129.58
+METRIC gl.texgen.objectlinear n=3000 min_us=122.17 p10_us=122.47 median_us=122.65 p90_us=122.86 max_us=125.14
+METRIC gl.lighting.onelight n=3000 min_us=124.45 p10_us=124.72 median_us=124.84 p90_us=125.08 max_us=128.95
+RESULT: PASS

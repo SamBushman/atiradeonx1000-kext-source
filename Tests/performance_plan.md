@@ -91,3 +91,46 @@ metric's run-to-run spread is <= 6 %. Any new benchmark on this machine needs a 
 * Heavier method bodies (surface bind, lock, swap, scaling, texture allocation) are not timed: they are the destructive/T3 calls, one per boot by protocol #87, and cannot be looped safely. A timing for those would be a single-shot number per boot, too noisy to gate on.
 * Real GL application frame times and desktop compositing: manual runs at the console (section 1).
 * 2D and DVD hardware throughput: no safe workload exists (section 1).
+
+## 6. Feature-level GL cost (added after issue #128's 62-test correctness sweep)
+
+The domains above time one GENERIC rendering path (a plain 100-triangle draw). They say nothing about whether any of the SPECIFIC GL features #128 correctness-tested (blend modes, texture combine chains, shadow sampling, texture compression, texgen, lighting, GLSL/ARB compile, FBO switching, display lists, VBO vs client arrays) costs more than a plain draw - a feature can be correct and pathologically slow and #128's tests would never catch it. `Tests/userspace/perf_gl_features.c` and `Tests/userspace/perf_gl_pipeline.c` close that gap, same methodology (mach_absolute_time, warmup, N timed repetitions, p10 headline, same `METRIC` line format).
+
+**Baseline of record** (stock 4.1.9, same G5/display/session conditions as section 2; 3 repetitions, `Tests/baseline/perf/gl_features_pipeline_20261004/`). Each number is the median over 3 runs of that run's p10; noise is (max-min)/median across the 3 runs - every metric below came in under 1% noise, well inside the existing 5%-floor margin rule in section 3, so no change to that rule was needed.
+
+Per-draw feature cost, `perf_gl_features.c`, 64x64 pbuffer, single quad, p10 median over 3000-draw samples:
+
+| metric | stock | noise | notes |
+|---|---:|---:|---|
+| `gl.baseline.flatcolor` | 122.05 us | 0.3 % | reference: every other row below is read relative to this |
+| `gl.blend.srcalpha` | 122.14 us | 0.2 % | +0.1 us over baseline - free at this scale |
+| `gl.blend.equation_func_separate` | 122.14 us | 0.2 % | separate func+equation costs the same as plain blend |
+| `gl.fog.linear` | 124.12 us | 0.4 % | +2.1 us over baseline - the one fixed-function-only metric with a real, measurable cost |
+| `gl.stencil.funcop` | 122.02 us | 0.4 % | free |
+| `gl.alphatest` | 122.11 us | 0.4 % | free |
+| `gl.tex2d.modulate` | 124.24 us | 0.4 % | +2.2 us - baseline texture-sampling cost, every other `gl.tex.*`/`gl.texgen.*` row below is close to this, not stacking further |
+| `gl.tex2d.dot3combine` | 124.27 us | 0.4 % | same as plain modulate - combine mode doesn't change the cost |
+| `gl.tex.multiunit2.modulate_add` | 124.36 us | 0.5 % | a second texture unit adds nothing measurable beyond the first |
+| `gl.tex.cubemap` | 124.15 us | 0.6 % | same as 2D texturing |
+| `gl.tex.3d` | 124.06 us | 0.6 % | same as 2D texturing |
+| `gl.tex.s3tc_dxt1` | 124.06 us | 0.5 % | compressed sampling costs the same as uncompressed at this texture size |
+| `gl.tex.shadow_compare` | 124.36 us | 0.6 % | the depth-compare path costs the same as a normal texture sample |
+| `gl.texgen.objectlinear` | 121.96 us | 0.5 % | free - no measurable cost over the non-textured baseline |
+| `gl.lighting.onelight` | 124.18 us | 0.5 % | +2.1 us, same order as the texturing/fog cost |
+
+Reading this table: on this hardware at this scale, essentially all of the real per-draw cost comes from just THREE things being active at all - texturing (any kind), fog, or lighting (each ~+2 us flat) - and none of the specific MODE within those categories (which blend equation, which combine mode, which texture target, compressed vs not, shadow-compare vs not) costs anything extra once that category is paid for. No feature found here is disproportionately expensive relative to its own category.
+
+One-shot/setup-phase costs, `perf_gl_pipeline.c`, p10 median over 3 runs:
+
+| metric | stock | noise | notes |
+|---|---:|---:|---|
+| `gl.glsl.compile_link` | 582.67 us | 0.6 % | n=200/run (capped - compiling is far more expensive than a draw) |
+| `gl.arbfp.parse` | 56.79 us | 0.3 % | **ARB assembly program parsing is ~10x cheaper than GLSL compile+link** for a comparable single-texture-sample shader - a real, substantial difference worth knowing before choosing a shading path for anything compiled at load time or runtime on this hardware |
+| `gl.fbo.bind_unbind_roundtrip` | 125.08 us | 0.2 % | bind+unbind+finish, no draw - about the same cost as one textured quad draw |
+| `gl.displaylist.compile_100tri` | 47.19 us | 0.5 % | compiling the list is cheaper than either replaying it or drawing it immediately |
+| `gl.displaylist.replay_100tri` | 146.71 us | 0.3 % | |
+| `gl.immediate.draw_100tri` | 147.73 us | 0.4 % | display-list replay is only about 0.7% faster than immediate mode for this workload - a negligible, not a real, advantage on this driver at this geometry size |
+| `gl.client_array.draw_100tri` | 123.34 us | 0.4 % | |
+| `gl.vbo.draw_100tri` | 122.32 us | 0.2 % | VBO is about 0.8% faster than a client array for the identical draw - real but small at this geometry size; correctness of this exact comparison was separately confirmed identical in `gl_feature_vbo_correctness_test.c` (#128) |
+
+Not covered here either (same reasons as section 5): any of this at a GEOMETRY SIZE large enough to be GPU-bound rather than dominated by the fixed per-draw/per-call overhead visible above - all these numbers are measuring a tiny (64x64, ~100-triangle) workload on purpose, matching this project's existing `glcycle.*` convention, not a real scene's throughput.

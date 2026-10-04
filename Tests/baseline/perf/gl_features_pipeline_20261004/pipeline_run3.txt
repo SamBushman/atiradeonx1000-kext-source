@@ -1,0 +1,10 @@
+perf_gl_pipeline: 300 iterations/metric, 64x64 pbuffer, timer tick 0.0300 us
+METRIC gl.glsl.compile_link n=200 min_us=579.46 p10_us=582.67 median_us=584.38 p90_us=587.74 max_us=664.13
+METRIC gl.arbfp.parse n=300 min_us=56.55 p10_us=56.79 median_us=56.97 p90_us=57.24 max_us=66.39
+METRIC gl.fbo.bind_unbind_roundtrip n=300 min_us=81.88 p10_us=124.96 median_us=125.23 p90_us=125.62 max_us=152.62
+METRIC gl.displaylist.compile_100tri n=300 min_us=47.10 p10_us=47.22 median_us=47.37 p90_us=47.61 max_us=50.88
+METRIC gl.displaylist.replay_100tri n=300 min_us=146.17 p10_us=146.35 median_us=146.50 p90_us=146.80 max_us=147.97
+METRIC gl.immediate.draw_100tri n=300 min_us=147.82 p10_us=148.03 median_us=148.27 p90_us=148.57 max_us=149.77
+METRIC gl.client_array.draw_100tri n=300 min_us=122.68 p10_us=122.92 median_us=123.16 p90_us=123.46 max_us=127.03
+METRIC gl.vbo.draw_100tri n=300 min_us=122.17 p10_us=122.26 median_us=122.44 p90_us=122.65 max_us=125.14
+RESULT: PASS
