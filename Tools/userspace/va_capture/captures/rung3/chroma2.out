@@ -1,155 +1,126 @@
 ava_drive: display 0xb4390d8, guard LOADED
 CGSNewRegionWithRect rc=0
-CGSNewWindow cid=56571 -> wid=238 rc=0
-CGSAddSurface -> sid=273291421 rc=0
+CGSNewWindow cid=57975 -> wid=242 rc=0
+CGSAddSurface -> sid=386750430 rc=0
 CGSOrderWindow rc=0
   [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
 DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809600 sizes=1024,768 flags=0x1180 out9=5 out10=8
   [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
 readback: open 2D client rc=0x0
 readback: 2D set_surface(sid, 0x800) rc=0x0
-readback: 2D lock_memory(0) rc=0x0 addr=0xb91c5000 size=0x100
+readback: 2D lock_memory(0) rc=0x0 addr=0xb927d000 size=0x100
 readback: 2D unlock_memory(0) rc=0x0
 readback: open GL client rc=0x0
 readback: GL set_surface(sid, 0x800) rc=0x0
-readback[before]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 1: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
   nonzero: row 0 byte 0 = ff
-  nonzero: row 0 byte 1 = ff
-  nonzero: row 0 byte 2 = ff
-  nonzero: row 0 byte 3 = ff
+  nonzero: row 0 byte 1 = 8c
+  nonzero: row 0 byte 2 = 8c
+  nonzero: row 0 byte 3 = 8c
   nonzero: row 0 byte 4 = ff
-  nonzero: row 0 byte 5 = ff
-  nonzero: row 0 byte 6 = ff
-  nonzero: row 0 byte 7 = ff
+  nonzero: row 0 byte 5 = 8c
+  nonzero: row 0 byte 6 = 8c
+  nonzero: row 0 byte 7 = 8c
   nonzero: row 0 byte 8 = ff
-  nonzero: row 0 byte 9 = ff
-  nonzero: row 0 byte 10 = ff
-  nonzero: row 0 byte 11 = ff
+  nonzero: row 0 byte 9 = 8c
+  nonzero: row 0 byte 10 = 8c
+  nonzero: row 0 byte 11 = 8c
   nonzero: row 0 byte 12 = ff
-  nonzero: row 0 byte 13 = ff
-  nonzero: row 0 byte 14 = ff
-  nonzero: row 0 byte 15 = ff
+  nonzero: row 0 byte 13 = 8c
+  nonzero: row 0 byte 14 = 8c
+  nonzero: row 0 byte 15 = 8c
   nonzero: row 0 byte 16 = ff
-  nonzero: row 0 byte 17 = ff
-  nonzero: row 0 byte 18 = ff
-  nonzero: row 0 byte 19 = ff
+  nonzero: row 0 byte 17 = 8c
+  nonzero: row 0 byte 18 = 8c
+  nonzero: row 0 byte 19 = 8c
   nonzero: row 0 byte 20 = ff
-  nonzero: row 0 byte 21 = ff
-  nonzero: row 0 byte 22 = ff
-  nonzero: row 0 byte 23 = ff
-  12189 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
-  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  dumped /tmp/rung3/va/chroma2_before.bin (12288 bytes)
+  nonzero: row 0 byte 21 = 8c
+  nonzero: row 0 byte 22 = 8c
+  nonzero: row 0 byte 23 = 8c
+  12288 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  1: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  2: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  3: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  4: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  5: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  6: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  7: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  8: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row  9: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 10: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 11: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 12: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 13: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 14: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 15: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 16: ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1
+  row 17: ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1
+  dumped /tmp/rung3/va/chroma2_before_s1.bin (12288 bytes)
+readback[before] sel 0: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 7: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 8: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 2: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 3: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 4: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 10: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[before] sel 11: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
 picture 11 'R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal': type 1 alt 0 dst 0 fwd 0, 8 coefficient dwords
   decode returned (repeat 0)
   [guard after decode] fwd=19 swallow=22 dvd_opens=1 doIDCT(sel18)=1 remaps=6
-readback[after]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 1: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
   nonzero: row 0 byte 0 = ff
-  nonzero: row 0 byte 1 = ff
-  nonzero: row 0 byte 2 = ff
-  nonzero: row 0 byte 3 = ff
+  nonzero: row 0 byte 1 = 8c
+  nonzero: row 0 byte 2 = 8c
+  nonzero: row 0 byte 3 = 8c
   nonzero: row 0 byte 4 = ff
-  nonzero: row 0 byte 5 = ff
-  nonzero: row 0 byte 6 = ff
-  nonzero: row 0 byte 7 = ff
+  nonzero: row 0 byte 5 = 8c
+  nonzero: row 0 byte 6 = 8c
+  nonzero: row 0 byte 7 = 8c
   nonzero: row 0 byte 8 = ff
-  nonzero: row 0 byte 9 = ff
-  nonzero: row 0 byte 10 = ff
-  nonzero: row 0 byte 11 = ff
+  nonzero: row 0 byte 9 = 8c
+  nonzero: row 0 byte 10 = 8c
+  nonzero: row 0 byte 11 = 8c
   nonzero: row 0 byte 12 = ff
-  nonzero: row 0 byte 13 = ff
-  nonzero: row 0 byte 14 = ff
-  nonzero: row 0 byte 15 = ff
+  nonzero: row 0 byte 13 = 8c
+  nonzero: row 0 byte 14 = 8c
+  nonzero: row 0 byte 15 = 8c
   nonzero: row 0 byte 16 = ff
-  nonzero: row 0 byte 17 = ff
-  nonzero: row 0 byte 18 = ff
-  nonzero: row 0 byte 19 = ff
+  nonzero: row 0 byte 17 = 8c
+  nonzero: row 0 byte 18 = 8c
+  nonzero: row 0 byte 19 = 8c
   nonzero: row 0 byte 20 = ff
-  nonzero: row 0 byte 21 = ff
-  nonzero: row 0 byte 22 = ff
-  nonzero: row 0 byte 23 = ff
-  12189 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
-  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  dumped /tmp/rung3/va/chroma2_after.bin (12288 bytes)
-readback[after+3s]: GL read_buffer 64x48 rc=0x00000000 (0 = copied; 0xe00002cc = surface memory not usable)
-  nonzero: row 0 byte 0 = ff
-  nonzero: row 0 byte 1 = ff
-  nonzero: row 0 byte 2 = ff
-  nonzero: row 0 byte 3 = ff
-  nonzero: row 0 byte 4 = ff
-  nonzero: row 0 byte 5 = ff
-  nonzero: row 0 byte 6 = ff
-  nonzero: row 0 byte 7 = ff
-  nonzero: row 0 byte 8 = ff
-  nonzero: row 0 byte 9 = ff
-  nonzero: row 0 byte 10 = ff
-  nonzero: row 0 byte 11 = ff
-  nonzero: row 0 byte 12 = ff
-  nonzero: row 0 byte 13 = ff
-  nonzero: row 0 byte 14 = ff
-  nonzero: row 0 byte 15 = ff
-  nonzero: row 0 byte 16 = ff
-  nonzero: row 0 byte 17 = ff
-  nonzero: row 0 byte 18 = ff
-  nonzero: row 0 byte 19 = ff
-  nonzero: row 0 byte 20 = ff
-  nonzero: row 0 byte 21 = ff
-  nonzero: row 0 byte 22 = ff
-  nonzero: row 0 byte 23 = ff
-  12189 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
-  row  0: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  1: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  2: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  3: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  4: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  5: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  6: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  7: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  8: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row  9: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 10: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 11: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 12: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 13: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 14: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 15: ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-  row 16: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  row 17: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
-  dumped /tmp/rung3/va/chroma2_after+3s.bin (12288 bytes)
+  nonzero: row 0 byte 21 = 8c
+  nonzero: row 0 byte 22 = 8c
+  nonzero: row 0 byte 23 = 8c
+  12288 non-zero bytes in the 64x48 read (0xAA fill is gone where the copy wrote)
+  row  0: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  1: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  2: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  3: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  4: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  5: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  6: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  7: ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c ff 8c 8c 8c
+  row  8: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row  9: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 10: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 11: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 12: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 13: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 14: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 15: ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca ff ca ca ca
+  row 16: ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1
+  row 17: ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1 ff d1 d1 d1
+  dumped /tmp/rung3/va/chroma2_after_s1.bin (12288 bytes)
+readback[after] sel 0: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 7: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 8: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 2: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 3: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 4: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 10: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
+readback[after] sel 11: GL read_buffer 64x48 rc=0xe00002cc (0 = copied; 0xe00002cc = surface memory not usable)
 HOLD-AFTER 2 s (take the 'after' screenshot now)
   [guard after close] fwd=21 swallow=41 dvd_opens=1 doIDCT(sel18)=1 remaps=9
 ava_drive: done
