@@ -54,18 +54,19 @@ static int rb_setup(int sid) {
     r = IOConnectMethodScalarIStructureI(rb_gl, 0, 4, 0, sid, 0x800, 0, 0, NULL); printf("readback: GL set_surface(sid, 0x800) rc=0x%x\n", (unsigned)r);
     rb_buf = (unsigned char *)valloc(0x10000); return r ? -3 : 0;
 }
+static int rb_sel = 1;
 static int rb_read(const char *label, int w, int h) {
     unsigned in[7]; IOByteCount zero = 0; kern_return_t r; int y, x, nz = 0, shown = 0; int rowbytes = 256;
     memset(rb_buf, 0xAA, 0x10000);
-    in[0] = 0; in[1] = 0; in[2] = w; in[3] = h; in[4] = 1; in[5] = (unsigned)rb_buf; in[6] = rowbytes;
+    in[0] = 0; in[1] = 0; in[2] = w; in[3] = h; in[4] = rb_sel; in[5] = (unsigned)rb_buf; in[6] = rowbytes;
     r = IOConnectMethodStructureIStructureO(rb_gl, 7, sizeof in, &zero, in, NULL);
-    printf("readback[%s]: GL read_buffer %dx%d rc=0x%08x (0 = copied; 0xe00002cc = surface memory not usable)\n", label, w, h, (unsigned)r);
+    printf("readback[%s] sel %d: GL read_buffer %dx%d rc=0x%08x (0 = copied; 0xe00002cc = surface memory not usable)\n", label, rb_sel, w, h, (unsigned)r);
     if (r == 0) {
         for (y = 0; y < h; y++) for (x = 0; x < w * 4; x++) if (rb_buf[y * rowbytes + x] != 0) { nz++; if (shown < 24) { printf("  nonzero: row %d byte %d = %02x\n", y, x, rb_buf[y * rowbytes + x]); shown++; } }
         printf("  %d non-zero bytes in the %dx%d read (0xAA fill is gone where the copy wrote)\n", nz, w, h);
         for (y = 0; y < 18; y++) { printf("  row %2d:", y); for (x = 0; x < 24; x++) printf(" %02x", rb_buf[y * rowbytes + x]); printf("\n"); }
     }
-    if (r == 0 && getenv("RB_DUMP")) { char fn[300]; FILE *fp; snprintf(fn, sizeof fn, "%s_%s.bin", getenv("RB_DUMP"), label); fp = fopen(fn, "wb"); if (fp) { for (y = 0; y < h; y++) fwrite(rb_buf + y * rowbytes, 1, w * 4, fp); fclose(fp); printf("  dumped %s (%d bytes)\n", fn, w * 4 * h); } }
+    if (r == 0 && getenv("RB_DUMP")) { char fn[300]; FILE *fp; snprintf(fn, sizeof fn, "%s_%s_s%d.bin", getenv("RB_DUMP"), label, rb_sel); fp = fopen(fn, "wb"); if (fp) { for (y = 0; y < h; y++) fwrite(rb_buf + y * rowbytes, 1, w * 4, fp); fclose(fp); printf("  dumped %s (%d bytes)\n", fn, w * 4 * h); } }
     fflush(stdout); return (int)r;
 }
 static long (*guard_stat)(int);
@@ -76,13 +77,14 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
         else if (!strcmp(argv[k], "--readback")) readback = 1;
+        else if (!strcmp(argv[k], "--readall")) { readback = 1; readall = 1; }
         else if (!strcmp(argv[k], "--height") && k + 1 < argc) height_arg = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--dst") && k + 1 < argc) dst_override = atoi(argv[++k]);
@@ -117,7 +119,7 @@ int main(int argc, char **argv) {
     }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
-    if (readback) { if (rb_setup(sid) == 0) rb_read("before", 64, 48); else readback = 0; }
+    if (readback) { if (rb_setup(sid) == 0) { static const int sels[] = {1, 0, 7, 8, 2, 3, 4, 10, 11}; int q; for (q = 0; q < (readall ? 9 : 1); q++) { rb_sel = sels[q]; rb_read("before", 64, 48); } } else readback = 0; }
     for (i = 0; i < VEC_NPIC; i++) {
         if (!(picmask & (1u << i))) continue;
         { int rep; for (rep = 0; rep < repeat; rep++) {
@@ -131,7 +133,7 @@ int main(int argc, char **argv) {
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
         } }
     }
-    if (readback) { rb_read("after", 64, 48); sleep(3); rb_read("after+3s", 64, 48); }
+    if (readback) { static const int sels[] = {1, 0, 7, 8, 2, 3, 4, 10, 11}; int q; for (q = 0; q < (readall ? 9 : 1); q++) { rb_sel = sels[q]; rb_read("after", 64, 48); } if (!readall) { sleep(3); rb_read("after+3s", 64, 48); } }
     if (hold_after) { printf("HOLD-AFTER %d s (take the 'after' screenshot now)\n", hold_after); fflush(stdout); sleep(hold_after); }
 out:
     if (dev) DVDDriverCloseDeviceImpl(dev);
