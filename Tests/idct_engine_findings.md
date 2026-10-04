@@ -91,17 +91,21 @@ Per macroblock that has at least one non-zero block (MBs with six zero counts em
 * then the coded blocks' coefficient dwords, verbatim, in block order Y0 Y1 Y2 Y3 Cb Cr, N = sum of the six counts of the host record.
 No padding or terminator between macroblocks. (The 0xffff1000 / 0x80000000 / 0xc0001000 pad words seen in `FUN_00007de0` belong to the type-1 command buffer, not to these streams.)
 
-## 7. The coefficient dword - EXACT for Apple's AVA software consumer (`AppleVADriverG5` `FUN_0000aac0`, first loop); see section 10 item 1 for the second, older reader that disagrees
+## 7. The coefficient dword - EXACT for the AVA contract (producer `AppleVADriverG5` `FUN_00054070`, consumer `FUN_0000aac0`)
 ```
-dword  = level << 16 | run << 1 | b0          level: signed 16 bit, run: 15 bits, b0: ignored by the software consumer
+dword  = level << 16 | run << 1 | last          level: signed 16 bit, already inverse-quantised; run: 15 bits; last = bit 0
 idx    = prev + run;  prev = idx + 1;  block[scan[idx]] = level      (prev restarts at 0 for every block)
-scan   = one of two tables (zigzag, alternate) selected by the picture's alternate_scan byte
+scan   = zigzag or alternate, selected by the picture's alternate_scan byte (the producer emits scan *positions*, it never de-zigzags)
 ```
-This is the "run-level decode + de-zigzag" half of the engine, which the vidix text and the W100 RUNS/LEVELS registers independently describe.
-Levels are **already inverse-quantised**: no quantiser matrix or scale appears anywhere in the VA interface (the picture descriptor is 3 byte-pairs, 3 surface indices
-and two pointers, all of whose uses were read in both `FUN_00003930` and Apple's `FUN_000050e0`), nor in the kext's register list; the dense software decoders
-(`FUN_00010510` etc.) do the dequantisation in the VLD. (INFERRED from absence; the producer was not found, see section 10.)
-
+**Producer** (`FUN_00054070`, the host macroblock decoder in Apple's AVA driver, reached through `AVASliceCreate`; it also writes the 0x1c-byte record: +0x14 motion flags,
++0x15 field_dct, +0x16+blk counts, +0x00..0x0f the vectors):
+* intra DC: `dword = ((dc_pred + diff) << (3 - intra_dc_precision)) << 16` (run 0);
+* AC and escape levels: `level = ((2*|QF| + k) * W[idx]) >> 5`, sign applied afterwards (`(x ^ s) - s`), `k = 0` intra, `k = 1` non-intra, `W` = a 16-bit table indexed by scan
+  position (the quantiser matrix scaled by the quantiser scale, selected per macroblock). That is the MPEG-2 inverse quantisation (truncating toward zero). So the engine receives
+  **dequantised** coefficients. No clip to +-2047 and no mismatch-control step was found in this routine - whatever clamping exists is in the IDCT stage;
+* **bit 0 = "last coefficient of the block"**: after each block's loop, `if (count != 0) last_dword |= 1`, and the count goes to the record byte `+0x16+blk`.
+Both software readers (`FUN_0000aac0` here, and the older `mp2decv` one in section 10) ignore bit 0 because they get the count from the record; the ATI packet has no counts,
+so for the hardware bit 0 is what marks block ends.
 The host macroblock record the client reads is 0x1c bytes: +0x00..0x0f four (x,y) short pairs = forward MV, backward MV, second forward MV, second backward MV; +0x10..0x13 reference-field
 selects; +0x14 motion flags (1 fwd, 2 bwd, 4 second vector; 0 = intra); +0x15 field_dct; +0x16..0x1b six per-block dword counts. Motion vectors are converted to half-pel
 (`v - (v>>31) >> 1` plus fraction) for the 3D path, and are never part of the IDCT stream.
@@ -109,7 +113,7 @@ selects; +0x14 motion flags (1 fwd, 2 bwd, 4 second vector; 0 = intra); +0x15 fi
 ## 8. Resolution of the issue's questions
 1. Stream format: **derived** (sections 5-7), good enough to build a stream and a parameter block without inventing anything but the pixel content.
 2. Fields: 0x1ffc = (height<<16 | width); 0x1fac = plane-1 mode 0x8000; 0x1f8c = stream length in dwords; the (GART>>1 & 0x7ffffff0, +0x14) pair = DMA address and the
-   flag word. UNKNOWN: the individual bits of the flag word beyond alt-scan/intra, and the meaning of b0.
+   flag word. UNKNOWN: the individual bits of the flag word beyond alt-scan/intra (b0 = last-coefficient flag, resolved in section 7).
 3. Why the old capture failed (see section 9): DVD Player's framework decides per display whether to use the accelerator's own VA driver or its built-in AltiVec software
    driver, and on this machine it never picks the former. The software renderers consume the same macroblock records and coefficient dwords, which is why they are the best
    available specification of the stream.
@@ -124,20 +128,23 @@ selects; +0x14 motion flags (1 fwd, 2 bwd, 4 second vector; 0 = intra); +0x15 fi
 * Consequence: a capture of a stock player on this GPU will not be obtained by playing more content. Either the gate has to be satisfied (not attempted), or a purpose-built client has to call
   the VA driver, which the derived format now makes possible without guessing the stream.
 
-## 10. Open items, stated plainly
-1. **Coefficient dword layout has two software readers that disagree.** `AppleVADriverG5` `FUN_0000aac0` (AVA API v1.1, the same API family the ATI driver exports, v1.2) reads
-   `level = dword >> 16`, `run = (dword >> 1) & 0x7fff`. The older `AppleAltiVecDVDDriver` back end (`mp2decvbin1`, `_VEO_idct_cbp`, pre-AVA `_DVDDriver*` API) reads `run = byte 0`
-   and `level = halfword at +2`. The ATI client copies the dwords verbatim, so the hardware takes whatever the front end for the AVA path emits; the AVA layout (first form) is the
-   best-supported reading, but **no code was found that produces the dwords** (the VLD front end that writes them was not located in `DVDPlayback`, `AppleVA`, `QuickTimeMPEG2` or
-   `AppleAltiVecDVDDriver`; the dense `Decode_MPEG2_*_Block` routines in `AppleVADriverG5` are the host renderer's own and do not emit this form). Confidence: INFERRED.
-2. **Bit 0 of the dword** is ignored by both software readers. The ATI packet carries no per-block counts (only the six CBP bits), so the hardware has to find block ends in the
-   data; bit 0 is the obvious end-of-block candidate. UNKNOWN - this is the first thing a live Phase A must test, with a one-block, one-coefficient packet.
-3. **Dequantisation** is not in the stream interface (INFERRED from absence, section 7). A DC-only block is the safest first test content.
-4. The individual bits of the +0x14 flag word other than alt-scan (bit 3) and "stream 0" (bit 5), and what 0x8000 in +0x18 selects in the engine: UNKNOWN.
-5. Linux's names for 0x1f80-0x1f8c do not match the R5xx front end's use of 0x1f8c (the kext writes the stream length there).
+## 10. Producer hunt result, and what is still open
+**Resolved by locating the producer (second pass).** `AppleVADriverG5` `FUN_00054070` writes the macroblock records and the run/level dwords (section 7): layout = level<<16 | run<<1 | last,
+bit 0 is the end-of-block flag, levels are dequantised. `AVASliceCreate` exists only in `AppleVA`, `AppleVADriver` and `AppleVADriverG5` (G5-wide scan of the QuickTime, DVD and VA
+binaries; `DVDBase` in DVD Studio Pro and `AppleHDVCodec` only call `AVAFQT*`). The older reader (`AppleAltiVecDVDDriver` / `mp2decvbin1`, `_VEO_idct_cbp`: run = byte 0, level = low halfword)
+belongs to the pre-AVA `_DVDDriver*` path with its own producer and is not the contract the ATI VA driver (an AVA renderer) serves. `AppleVADriver` (the non-G5 build) was not compared.
+What is established is the *software* AVA contract and that the ATI client forwards the arrays verbatim; that the **hardware** implements the same contract is the (strong) remaining inference.
+
+**Still open - these need hardware:**
+1. Does the engine use bit 0 as the block terminator (it must, there are no counts), and what does it do with a block whose last dword lacks it, or with extra/missing dwords.
+2. Numeric behaviour: output = clip(IDCT + bias?) for stream 0, signed residual for stream 1; saturation of levels; absence of mismatch control; whether stream 0 adds a +128 bias.
+3. The flag bits of `engineFlagWord` other than alt-scan (bit 3) and stream-0 (bit 5), and `planeModeWord` 0x8000.
+4. Alt-scan really selecting the alternate table in hardware; field-picture addressing (`fieldPictureFlag`/`bottomFieldFlag`).
+5. Whether `dimensionsHeightWidth` limits or merely informs the engine (what happens when the stream addresses macroblocks outside it).
+6. Linux's names for 0x1f80-0x1f8c do not match the R5xx front end's use of 0x1f8c (stream length).
+7. Why the stock players never take this path is explained only by inference (section 9).
 
 ## 11. Verdict for issue #140 / what #93 can now do
-Success criterion 1 asks for a derived stream format "with enough confidence to justify attempting #93's Phase A". The parameter block, the buffer layout, the macroblock header, and the
-run/level structure are derived from stock code on both sides and the hardware lineage is documented externally; the stream is therefore no longer invented. What remains open (items 1-2)
-is a one-bit/one-layout question that only a hardware test, under the #87 protocol, can decide. The test vector is already determined: one stream-0 macroblock, CBP = Y0 only,
-one dword with `level = L` and `run = 0` (and, as the alternative, the same with bit 0 set), a destination surface the test owns, `dmaDwordCount` = real dword count <= buffer capacity.
+The parameter block, buffer layout, macroblock header, and the coefficient dword (layout, end-of-block flag, dequantisation) are derived from stock code on both the producer and the
+consumer side, with external documentation of the engine's lineage. The stream is no longer invented. What remains (section 10) concerns the hardware's own behaviour and can only be
+learned by running it, under the #87 protocol; the experiment ladder is proposed on #140.
