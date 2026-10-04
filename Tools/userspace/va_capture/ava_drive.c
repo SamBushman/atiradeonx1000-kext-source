@@ -35,11 +35,21 @@ extern int DVDDriverOpenDeviceImpl(void **dev, unsigned *sizes /*[2] out*/, unsi
 extern void DVDDriverDecodeImpl(void *dev, unsigned char *picture, short *rect);
 extern void DVDDriverCloseDeviceImpl(void *dev);
 
-static io_connect_t rb_gl = 0; static unsigned char *rb_buf = NULL;
+static io_connect_t rb_gl = 0, rb_2d = 0; static unsigned char *rb_buf = NULL;
 /* read-back through the proven GL read_buffer path (Tests/destructive/t3_gl_read_buffer.c): GL user client bound to the same surface, sourceSelector 1 = surface buffer slot 0 */
 static int rb_setup(int sid) {
     io_service_t svc = IOServiceGetMatchingService(kIOMasterPortDefault, IOServiceMatching("ATIRadeonX1000")); kern_return_t r;
     if (!svc) return -1;
+    { /* the proven way to give the surface backing memory (t3_gl_read_buffer.c): 2D client binds the surface, lock_memory(0) allocates, unlock_memory(0) */
+        io_connect_t d2 = 0; unsigned char o30[0x30]; IOByteCount osz = sizeof o30; int addr = -1, size = -1, tag = -1;
+        r = IOServiceOpen(svc, mach_task_self(), 2, &d2); printf("readback: open 2D client rc=0x%x\n", (unsigned)r);
+        if (!r) {
+            r = IOConnectMethodScalarIStructureO(d2, 0, 2, &osz, sid, 0x800, o30); printf("readback: 2D set_surface(sid, 0x800) rc=0x%x\n", (unsigned)r);
+            if (!r) { r = IOConnectMethodScalarIScalarO(d2, 5, 1, 2, 0, &addr, &size); printf("readback: 2D lock_memory(0) rc=0x%x addr=0x%x size=0x%x\n", (unsigned)r, addr, size);
+                      if (!r) { r = IOConnectMethodScalarIScalarO(d2, 6, 1, 1, 0, &tag); printf("readback: 2D unlock_memory(0) rc=0x%x\n", (unsigned)r); } }
+            rb_2d = d2;
+        }
+    }
     r = IOServiceOpen(svc, mach_task_self(), 1, &rb_gl); printf("readback: open GL client rc=0x%x\n", (unsigned)r); if (r) return -2;
     r = IOConnectMethodScalarIStructureI(rb_gl, 0, 4, 0, sid, 0x800, 0, 0, NULL); printf("readback: GL set_surface(sid, 0x800) rc=0x%x\n", (unsigned)r);
     rb_buf = (unsigned char *)valloc(0x10000); return r ? -3 : 0;
