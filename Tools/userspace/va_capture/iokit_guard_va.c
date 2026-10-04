@@ -162,8 +162,10 @@ static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_num
         fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tABOUT-TO-CALL(doIDCT FORWARDED)\tin=%u\tparams=", ++g_seq, g_pid, us(), (unsigned)c, ic);
         hexs(g_log, in, ic); fprintf(g_log, "\t-\n"); snapshot(c, "doIDCT-forwarded", (unsigned)g_seq);
         fflush(g_log); fsync(fileno(g_log)); if (g_mem) { fflush(g_mem); fsync(fileno(g_mem)); }
+        struct timeval ta, tb; gettimeofday(&ta, NULL);
         kern_return_t r18 = r_stto(c, sel, in, ic, out, oc);
-        fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tRESULT(doIDCT FORWARDED)\trc=0x%08x\tout=%u\t0x%08x\n", ++g_seq, g_pid, us(), (unsigned)c, (unsigned)r18, oc ? *oc : 0, (unsigned)r18);
+        gettimeofday(&tb, NULL); long dt = (tb.tv_sec - ta.tv_sec) * 1000000L + (tb.tv_usec - ta.tv_usec);
+        fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tRESULT(doIDCT FORWARDED)\trc=0x%08x\tkernel_call_us=%ld\tout=%u\n", ++g_seq, g_pid, us(), (unsigned)c, (unsigned)r18, dt, oc ? *oc : 0);
         fflush(g_log); fsync(fileno(g_log)); g_stats.fwd++; g_stats.dvd_sel18++; return r18;
     }
     if (is_dvd(c) && !fwd_selector(sel)) { if (out && oc) memset(out, 0, *oc); line("structureI_structureO", c, "SWALLOW", sel, "-", 0); g_stats.swallow++; return 0; }
