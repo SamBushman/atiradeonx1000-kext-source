@@ -46,7 +46,9 @@ PICTURES = [
         (0, {0: [(0, -64)]}, 1, 0),                 # forward-predicted MB with a residual -> stream 1
         (1, {0: [(0, 1024)]}, 0, 0)]),              # intra MB in a P picture -> stream 0,
     ('R3a one intra MB, DC only (rung 3)', 1, 0, 0, 0, [
-        (0, {0: [(0, 1024)]}, 0, 0)])
+        (0, {0: [(0, 1024)]}, 0, 0)]),
+    ('R3b gain/tile probe: Y0 DC64+vertical, Y1 DC64+horizontal, Y2 DC32+vertical, Y3 DC96', 1, 0, 0, 0, [
+        (0, {0: [(0, 64), (2, 40)], 1: [(0, 64), (1, 40)], 2: [(0, 32), (2, 40)], 3: [(0, 96)]}, 0, 0)])
 ]
 
 

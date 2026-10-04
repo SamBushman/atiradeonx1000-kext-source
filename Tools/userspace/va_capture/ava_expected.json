@@ -114,6 +114,32 @@
      "mode": "00000000"
     }
    ]
+  },
+  {
+   "name": "R3b gain/tile probe: Y0 DC64+vertical, Y1 DC64+horizontal, Y2 DC32+vertical, Y3 DC96",
+   "dst": 0,
+   "alt": 0,
+   "ptype": 1,
+   "stream0": [
+    "00000f00",
+    "00000000",
+    "00400000",
+    "00280003",
+    "00400000",
+    "00280001",
+    "00200000",
+    "00280003",
+    "00600001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 9,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
   }
  ]
 }
