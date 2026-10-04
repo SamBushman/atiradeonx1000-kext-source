@@ -1,0 +1,14 @@
+perf_gl_scale: 100 iterations/metric, timer tick 0.0300 us
+METRIC gl.scale.fullscreenquad.64x64 n=100 min_us=121.87 p10_us=122.05 median_us=122.32 p90_us=146.14 max_us=148.03
+METRIC gl.scale.fullscreenquad.256x256 n=100 min_us=121.90 p10_us=122.05 median_us=122.26 p90_us=146.92 max_us=147.85
+METRIC gl.scale.fullscreenquad.512x512 n=100 min_us=122.80 p10_us=122.92 median_us=123.22 p90_us=146.92 max_us=148.33
+METRIC gl.scale.fullscreenquad.1024x1024 n=100 min_us=226.01 p10_us=226.25 median_us=226.49 p90_us=250.73 max_us=252.95
+METRIC gl.scale.texsample.16x16 n=100 min_us=124.12 p10_us=124.21 median_us=124.45 p90_us=148.63 max_us=150.58
+METRIC gl.scale.texsample.64x64 n=100 min_us=124.06 p10_us=124.21 median_us=124.39 p90_us=124.69 max_us=125.35
+METRIC gl.scale.texsample.256x256 n=100 min_us=124.15 p10_us=124.27 median_us=124.51 p90_us=124.87 max_us=126.31
+METRIC gl.scale.texsample.512x512 n=100 min_us=124.21 p10_us=124.36 median_us=124.57 p90_us=124.93 max_us=126.37
+METRIC gl.scale.tricount.100 n=100 min_us=129.31 p10_us=129.49 median_us=129.73 p90_us=153.85 max_us=156.13
+METRIC gl.scale.tricount.1000 n=100 min_us=299.60 p10_us=299.87 median_us=300.47 p90_us=301.07 max_us=302.81
+METRIC gl.scale.tricount.5000 n=100 min_us=1049.00 p10_us=1049.84 median_us=1052.87 p90_us=1056.17 max_us=1070.60
+METRIC gl.scale.tricount.20000 n=100 min_us=2893.53 p10_us=2896.35 median_us=2903.32 p90_us=2910.79 max_us=2913.19
+RESULT: PASS

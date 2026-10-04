@@ -1,0 +1,13 @@
+perf_gl_statechange: 300 iterations/metric, 64x64 pbuffer, timer tick 0.0300 us
+METRIC gl.statechange.tex_bind.same_x10 n=300 min_us=126.49 p10_us=126.70 median_us=126.94 p90_us=127.33 max_us=165.55
+METRIC gl.statechange.tex_bind.alternate_x10 n=300 min_us=142.69 p10_us=142.87 median_us=143.11 p90_us=143.44 max_us=149.38
+METRIC gl.statechange.program.same_x10 n=300 min_us=124.78 p10_us=124.93 median_us=125.08 p90_us=125.41 max_us=131.08
+METRIC gl.statechange.program.alternate_x10 n=300 min_us=159.37 p10_us=176.80 median_us=177.04 p90_us=177.64 max_us=190.54
+METRIC gl.statechange.blendfunc.same_x10 n=300 min_us=124.60 p10_us=124.78 median_us=125.26 p90_us=125.62 max_us=127.66
+METRIC gl.statechange.blendfunc.alternate_x10 n=300 min_us=133.48 p10_us=133.72 median_us=133.90 p90_us=134.26 max_us=136.42
+METRIC gl.batching.loop_drawarrays_x10 n=300 min_us=123.79 p10_us=123.97 median_us=124.24 p90_us=124.66 max_us=125.89
+METRIC gl.batching.multidrawarrays_x10 n=300 min_us=123.70 p10_us=123.85 median_us=124.12 p90_us=124.48 max_us=128.74
+METRIC gl.context_switch.roundtrip n=300 min_us=0.12 p10_us=0.12 median_us=0.12 p90_us=0.12 max_us=0.33
+METRIC gl.occlusionquery.roundtrip n=300 min_us=228.62 p10_us=228.86 median_us=229.10 p90_us=229.67 max_us=233.75
+METRIC gl.fence.set_finish_roundtrip n=300 min_us=121.57 p10_us=121.78 median_us=122.05 p90_us=122.38 max_us=124.81
+RESULT: PASS

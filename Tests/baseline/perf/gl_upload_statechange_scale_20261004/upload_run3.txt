@@ -1,0 +1,14 @@
+perf_gl_upload: 300 iterations/metric, 64x64 pbuffer, timer tick 0.0300 us
+METRIC gl.teximage2d.16x16 n=300 min_us=25.26 p10_us=25.29 median_us=25.32 p90_us=25.35 max_us=27.84
+METRIC gl.teximage2d.64x64 n=300 min_us=418.02 p10_us=418.59 median_us=419.01 p90_us=419.76 max_us=421.56
+METRIC gl.teximage2d.256x256 n=300 min_us=6570.22 p10_us=6577.54 median_us=6583.81 p90_us=6591.64 max_us=6602.17
+METRIC gl.teximage2d.64x64.plain n=300 min_us=418.23 p10_us=419.10 median_us=419.67 p90_us=420.18 max_us=422.67
+METRIC gl.teximage2d.64x64.pbo n=300 min_us=414.69 p10_us=416.07 median_us=416.64 p90_us=417.15 max_us=419.58
+METRIC gl.teximage2d.64x64.automipmap n=300 min_us=472.45 p10_us=477.64 median_us=483.97 p90_us=488.29 max_us=2950.96
+METRIC gl.drawpixels.16x16 n=300 min_us=210.83 p10_us=211.61 median_us=212.48 p90_us=213.47 max_us=222.20
+METRIC gl.copypixels.16x16 n=300 min_us=278.87 p10_us=279.11 median_us=279.44 p90_us=279.98 max_us=288.26
+METRIC gl.readpixels.16x16 n=300 min_us=126.34 p10_us=126.49 median_us=126.64 p90_us=126.88 max_us=129.22
+METRIC gl.drawpixels.64x64 n=300 min_us=214.25 p10_us=215.18 median_us=216.41 p90_us=217.76 max_us=220.07
+METRIC gl.copypixels.64x64 n=300 min_us=699.17 p10_us=700.91 median_us=703.04 p90_us=705.29 max_us=714.29
+METRIC gl.readpixels.64x64 n=300 min_us=132.25 p10_us=132.52 median_us=132.79 p90_us=133.15 max_us=140.23
+RESULT: PASS

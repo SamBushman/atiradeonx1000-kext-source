@@ -133,4 +133,62 @@ One-shot/setup-phase costs, `perf_gl_pipeline.c`, p10 median over 3 runs:
 | `gl.client_array.draw_100tri` | 123.34 us | 0.4 % | |
 | `gl.vbo.draw_100tri` | 122.32 us | 0.2 % | VBO is about 0.8% faster than a client array for the identical draw - real but small at this geometry size; correctness of this exact comparison was separately confirmed identical in `gl_feature_vbo_correctness_test.c` (#128) |
 
-Not covered here either (same reasons as section 5): any of this at a GEOMETRY SIZE large enough to be GPU-bound rather than dominated by the fixed per-draw/per-call overhead visible above - all these numbers are measuring a tiny (64x64, ~100-triangle) workload on purpose, matching this project's existing `glcycle.*` convention, not a real scene's throughput.
+Not covered here either (same reasons as section 5): any of this at a GEOMETRY SIZE large enough to be GPU-bound rather than dominated by the fixed per-draw/per-call overhead visible above - all these numbers are measuring a tiny (64x64, ~100-triangle) workload on purpose, matching this project's existing `glcycle.*` convention, not a real scene's throughput. Section 7 covers that scaling question directly, plus the rest of the gaps section 6 left behind.
+
+## 7. Upload/pixel-transfer cost, state-change cost, batching, and scale (closes the remaining #44 gaps from section 6)
+
+Three more benchmark programs, same methodology, baseline of record `Tests/baseline/perf/gl_upload_statechange_scale_20261004/` (3 repetitions each, noise <1% on every metric except `tricount.20000` at ~2.9%, still well inside the 25% noisy-metric threshold from section 3).
+
+**`Tests/userspace/perf_gl_upload.c`** - texture upload and pixel-transfer-op cost, never measured before (p10 median over 300 iterations, 64x64 pbuffer unless noted):
+
+| metric | stock | noise | notes |
+|---|---:|---:|---|
+| `gl.teximage2d.16x16` | 25.29 us | 0.0 % | |
+| `gl.teximage2d.64x64` | 419.37 us | 0.2 % | 16x more texels than 16x16, ~16.6x slower - upload cost scales essentially linearly with pixel count |
+| `gl.teximage2d.256x256` | 6570.46 us | 0.2 % | 16x more texels than 64x64, ~15.7x slower - same linear scaling holds |
+| `gl.teximage2d.64x64.plain` | 419.16 us | 0.1 % | re-measured alongside the PBO comparison below |
+| `gl.teximage2d.64x64.pbo` | 416.04 us | 0.0 % | **PBO-backed upload is about 0.7% faster than plain client-memory upload** - small but consistent across all 3 runs, a real if modest win |
+| `gl.teximage2d.64x64.automipmap` | 477.64 us | 0.3 % | **+58.5 us (+14%) over plain upload** to auto-generate the full mip chain - a real, worth-knowing cost; correctness of the generated chain was confirmed in #128's `gl_feature_automipmap_test.c` |
+| `gl.drawpixels.16x16` | 211.25 us | 0.6 % | |
+| `gl.copypixels.16x16` | 279.11 us | 0.1 % | +32% over DrawPixels at the same size |
+| `gl.readpixels.16x16` | 126.37 us | 0.1 % | cheapest of the three at this size |
+| `gl.drawpixels.64x64` | 215.42 us | 0.5 % | barely more than the 16x16 case - DrawPixels is not size-bound at this scale |
+| `gl.copypixels.64x64` | 700.70 us | 0.5 % | **+2.5x over the 16x16 CopyPixels case** for only a 16x pixel-count increase - CopyPixels is clearly bandwidth-bound here in a way DrawPixels/ReadPixels are not; it is also the single most expensive of the three pixel-transfer paths at every size tested |
+| `gl.readpixels.64x64` | 132.46 us | 0.1 % | barely more than the 16x16 case, same pattern as DrawPixels |
+
+**`Tests/userspace/perf_gl_statechange.c`** - state-change cost, batching benefit, context-switch cost, query/fence overhead (each "x10" metric is 10 real draws plus `glFinish()`, p10 median over 300 iterations):
+
+| metric | stock | noise | notes |
+|---|---:|---:|---|
+| `gl.statechange.tex_bind.same_x10` | 126.88 us | 0.2 % | baseline: 10 draws, texture bound once |
+| `gl.statechange.tex_bind.alternate_x10` | 143.35 us | 0.3 % | +16.5 us for 10 switches = **~1.6 us per texture bind** |
+| `gl.statechange.program.same_x10` | 125.23 us | 0.5 % | baseline: 10 draws, one GLSL program bound once |
+| `gl.statechange.program.alternate_x10` | 177.25 us | 0.2 % | +52.0 us for 10 switches = **~5.2 us per `glUseProgram` switch - the most expensive state change measured, more than 3x the cost of a texture bind** |
+| `gl.statechange.blendfunc.same_x10` | 125.02 us | 0.5 % | baseline: 10 draws, blend func set once |
+| `gl.statechange.blendfunc.alternate_x10` | 134.02 us | 0.5 % | +9.0 us for 10 switches = **~0.9 us per `glBlendFunc` call - the cheapest state change measured** |
+| `gl.batching.loop_drawarrays_x10` | 123.97 us | 0.4 % | 10 separate `glDrawArrays` calls |
+| `gl.batching.multidrawarrays_x10` | 123.85 us | 0.4 % | one `glMultiDrawArraysEXT` covering the same 10 sub-ranges - **no measurable benefit over the naive loop** (the two are within each other's noise) |
+| `gl.context_switch.roundtrip` | 0.12 us | 0.0 % | `CGLSetCurrentContext` between two live contexts - **essentially free**, a pure CPU-side pointer update with no GPU synchronization |
+| `gl.occlusionquery.roundtrip` | 228.86 us | 0.3 % | begin query + one draw + end query + fetch result |
+| `gl.fence.set_finish_roundtrip` | 122.05 us | 0.2 % | set + finish after an already-submitted draw - cheaper than the occlusion-query round trip, which also includes its own draw |
+
+**`Tests/userspace/perf_gl_scale.c`** - does any of this scale differently once the GPU is doing real work? (p10 median over 100 iterations; each group isolates one axis, holding the others fixed)
+
+| metric | stock | noise | notes |
+|---|---:|---:|---|
+| `gl.scale.fullscreenquad.64x64` | 122.05 us | 0.4 % | flat-color quad filling the whole viewport |
+| `gl.scale.fullscreenquad.256x256` | 122.05 us | 0.4 % | identical to 64x64 - **fill rate is not the bottleneck up to this size** |
+| `gl.scale.fullscreenquad.512x512` | 122.32 us | 0.8 % | still identical |
+| `gl.scale.fullscreenquad.1024x1024` | 225.83 us | 0.3 % | **cost roughly doubles crossing the 512->1024 boundary** - the first size tested where fill rate (or some other viewport-size-dependent cost) actually shows up |
+| `gl.scale.texsample.16x16` | 124.21 us | 0.5 % | textured quad, fixed 256x256 viewport, increasing SOURCE texture size |
+| `gl.scale.texsample.64x64` | 124.21 us | 0.3 % | identical |
+| `gl.scale.texsample.256x256` | 124.27 us | 0.4 % | identical |
+| `gl.scale.texsample.512x512` | 124.36 us | 0.4 % | **completely flat from 16x16 to 512x512 - texture cache/bandwidth is not a bottleneck at this draw scale, source texture size essentially does not matter** |
+| `gl.scale.tricount.100` | 129.46 us | 0.3 % | fixed 256x256 viewport, increasing triangle count in one draw call |
+| `gl.scale.tricount.1000` | 299.87 us | 0.2 % | 10x the triangles, only 2.3x the time - sub-linear, per-triangle submission cost dominates at low counts |
+| `gl.scale.tricount.5000` | 1049.93 us | 0.3 % | 5x the triangles (from 1000), 3.5x the time |
+| `gl.scale.tricount.20000` | 2896.35 us | 2.9 % | 4x the triangles (from 5000), 2.76x the time - **triangle count is the one axis tested here that scales clearly and substantially, unlike viewport fill or texture size**; this is also the noisiest metric found in any perf_gl_*.c file so far, still well under the 25% noisy-metric threshold |
+
+**What this settles from section 6's gap list:** texture upload cost, PBO-vs-plain upload, auto-mipmap generation cost, pixel-transfer-op cost at more than one size, state-change cost (texture/program/blend), multi-draw-arrays batching benefit, context-switch cost, occlusion-query and fence overhead, and GPU-bound-at-scale behavior across three independent axes (viewport fill, texture size, triangle count) are now all measured with a recorded stock baseline.
+
+**Still not covered, for the same structural reasons as section 5:** heavier kext method bodies (T3 destructive calls, one-shot per boot, cannot be safely looped into a stable number), 2D/DVD hardware throughput (no safe workload - the DVD context is never opened by any real consumer on this machine), and real desktop compositing/app frame times (needs a human at the console, SSH-launched GUI apps deadlock per the `tiger-ssh` skill).
