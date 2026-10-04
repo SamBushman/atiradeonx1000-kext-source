@@ -1,0 +1,12 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=59211 -> wid=138 rc=0
+CGSAddSurface -> sid=386020287 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=16 swallow=21 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+--open-only: stop after open
+  [guard after close] fwd=18 swallow=40 dvd_opens=1 doIDCT(sel18)=0 remaps=8
+ava_drive: done
+EXIT=0

@@ -128,6 +128,20 @@ selects; +0x14 motion flags (1 fwd, 2 bwd, 4 second vector; 0 = intra); +0x15 fi
 * Consequence: a capture of a stock player on this GPU will not be obtained by playing more content. Either the gate has to be satisfied (not attempted), or a purpose-built client has to call
   the VA driver, which the derived format now makes possible without guessing the stream.
 
+## 9b. Live capture from the real VA driver (rung 2, 2026-10-04) - confirms sections 5-7 with real data
+Method: `Tools/userspace/va_capture/ava_drive.c` drove Apple's own `AppleVA` entry points (`DVDDriverOpenDeviceImpl` / `DVDDriverDecodeImpl`, which load and call the real `ATIRadeonX1000VADriver` through its AVA 1.2 table) under the default-deny shim `iokit_guard_va.dylib` (doIDCT,
+every command-buffer re-map and every stream re-map swallowed; nothing reached the engine). Three pictures (two I, one P; 64x48) with a known content were built from `Tools/idct_stream.py` in the DVD-driver coefficient layout. `compare_guard.py` checked the capture against predictions made *before* the run:
+* all 4 `doIDCT` parameter blocks match on every client-written field: fieldPictureFlag/bottomFieldFlag 0 (frame), destPlaneIndex = destination surface, planeSelector 0 for intra MBs (also the intra MB of the P picture) and 1 for the forward-predicted MB, `dmaDwordCount` 19/9/3/3 (dwords),
+  `engineFlagWord` `0x100a0` (intra, zigzag) / `0x100a8` (intra, alternate scan) / `0x10080` (stream 1), `planeModeWord` `0x8000` for stream 1 only, `dimensionsHeightWidth` `0x00300040`;
+* all 34 stream dwords captured from the type 4/5 buffers equal the predicted packets (macroblock header dwords, CBP bits, MB row/column, run/level dwords with the last-flag, block order): this validates AppleVA's in-place conversion from the DVD-driver layout (`FUN_97d83730`), the ATI client's packet writer (`FUN_00008510`) and the stream routing;
+* the client leaves +0x1c/+0x20/+0x28/+0x2c/+0x30 uninitialised (stack residue such as "ATIVADri") - the kernel computes them; confirms the kext/client split in section 5;
+* stream buffer header: `+0x10 = 0x0001fff8` (capacity in dwords: a 0x80000-byte buffer minus the 0x20-byte header), `+0x1c = 1`; data starts at +0x20.
+Real set-up sequence the driver uses (forwarded calls, all returned success on the stock kext): `IOServiceOpen` type 3; selector 1 `get_config` (out `0x810040, 0x10000000`); `IOConnectMapMemory` type 1 (command buffer, 0x80000), type 4 and 5 (IDCT streams, 0x80000 each), type 2 (0x1000);
+`set_surface(sid, 0x4000, 1)` where `sid` is the WindowServer surface id from `CGSAddSurface` (bound through `CGSBindSurface`); `setup_buffers(0, 0x40, 0x30, 0, 0x27c00)` (width, height in pixels, then a size) and again with `0x37c00`; then 17 `declare_image` calls (selector 8, in = 0, a 256-byte-aligned CPU address, a size; out = a pointer
+the driver dereferences and increments) and at close one `delete_image` (selector 9) per image. A 2D connection is also opened and used (selectors 1, 0) by the display extension. The DVD context was released cleanly on close in every run.
+Lesson recorded in the shim: a swallowed `declare_image` must hand back a valid private block (a zero crashed the harness, SIGBUS in `FUN_00003cd0`; the kernel was unaffected and released the context). Five real DVD command-buffer snapshots (type 1) were also captured and can be pushed through `kemu.py` safely.
+What this does NOT show: any behaviour of the engine itself (nothing was submitted); the open hardware questions in section 10 stand.
+
 ## 10. Producer hunt result, and what is still open
 **Resolved by locating the producer (second pass).** `AppleVADriverG5` `FUN_00054070` writes the macroblock records and the run/level dwords (section 7): layout = level<<16 | run<<1 | last,
 bit 0 is the end-of-block flag, levels are dequantised. `AVASliceCreate` exists only in `AppleVA`, `AppleVADriver` and `AppleVADriverG5` (G5-wide scan of the QuickTime, DVD and VA

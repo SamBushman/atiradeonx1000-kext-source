@@ -1,0 +1,75 @@
+/* ava_drive.c - issue #140 rung 2: drive Apple's real DVD-decode entry points in AppleVA.framework (which load and call the real ATIRadeonX1000VADriver) with the
+ * pictures from ava_vectors.h, UNDER iokit_guard_va.dylib (default-deny: doIDCT and every command-buffer submission are swallowed and logged, nothing reaches the engine).
+ * Must run inside the console (Aqua) session: it needs a WindowServer connection to create the window + surface the ATI renderer binds (CGSBindSurface).
+ *
+ *   gcc -o ava_drive ava_drive.c -F/System/Library/PrivateFrameworks -framework AppleVA -framework ApplicationServices
+ *   GUARD_LOG=/tmp/va_guard.tsv DYLD_INSERT_LIBRARIES=/tmp/va_cap/iokit_guard_va.dylib ./ava_drive
+ *
+ * Safety: refuses to decode unless the guard reports it saw the DVD connection open; SIGALRM watchdog kills the process after WATCHDOG_S (default 90 s);
+ * everything printed is also in the guard log. No doIDCT, no command buffer, no register write can reach the kernel from this process. */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <signal.h>
+#include <unistd.h>
+#include <dlfcn.h>
+#include <ApplicationServices/ApplicationServices.h>
+#include "ava_vectors.h"
+
+typedef int CGSConnectionID, CGSWindowID, CGSSurfaceID;
+typedef void *CGSRegionRef;
+extern CGSConnectionID CGSMainConnectionID(void);
+extern CGError CGSNewRegionWithRect(const CGRect *rect, CGSRegionRef *region);
+extern CGError CGSNewWindow(CGSConnectionID cid, int backingType, float left, float top, CGSRegionRef region, CGSWindowID *wid);
+extern CGError CGSAddSurface(CGSConnectionID cid, CGSWindowID wid, CGSSurfaceID *sid);
+extern CGError CGSOrderWindow(CGSConnectionID cid, CGSWindowID wid, int place, CGSWindowID relativeTo);
+extern CGError CGSRemoveSurface(CGSConnectionID cid, CGSWindowID wid, CGSSurfaceID sid);
+extern CGError CGSReleaseWindow(CGSConnectionID cid, CGSWindowID wid);
+extern CGError CGSReleaseRegion(CGSRegionRef region);
+
+/* AppleVA.framework exports (signatures read from the decompile, ppc ABI: args 9 and 10 are on the stack) */
+extern int DVDDriverOpenDeviceImpl(void **dev, unsigned *sizes /*[2] out*/, unsigned display, int cid, int wid, int sid, unsigned *flags /*out*/, short *rect /*top,left,bottom,right*/, short *out9, short *out10);
+extern void DVDDriverDecodeImpl(void *dev, unsigned char *picture, short *rect);
+extern void DVDDriverCloseDeviceImpl(void *dev);
+
+static long (*guard_stat)(int);
+static void on_alarm(int s) { fprintf(stderr, "WATCHDOG: no completion in time (decode stuck?) - exiting\n"); fflush(stderr); _exit(3); }
+static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%ld swallow=%ld dvd_opens=%ld doIDCT(sel18)=%ld remaps=%ld\n", when, guard_stat(0), guard_stat(1), guard_stat(2), guard_stat(3), guard_stat(4)); fflush(stdout); }
+
+int main(int argc, char **argv) {
+    int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
+    void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
+    const char *ws = getenv("WATCHDOG_S"); int skipdecode = argc > 1 && !strcmp(argv[1], "--open-only");
+    signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
+    guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
+    printf("ava_drive: display 0x%x, guard %s\n", display, guard_stat ? "LOADED" : "NOT LOADED (refusing to continue)"); fflush(stdout);
+    if (!guard_stat) return 2;
+    cid = CGSMainConnectionID();
+    rc = CGSNewRegionWithRect(&r, &reg); printf("CGSNewRegionWithRect rc=%d\n", rc);
+    rc = CGSNewWindow(cid, 2, 0, 0, reg, &wid); printf("CGSNewWindow cid=%d -> wid=%d rc=%d\n", cid, wid, rc);
+    rc = CGSAddSurface(cid, wid, &sid); printf("CGSAddSurface -> sid=%d rc=%d\n", sid, rc);
+    rc = CGSOrderWindow(cid, wid, 1, 0); printf("CGSOrderWindow rc=%d\n", rc); fflush(stdout);
+    if (!wid || !sid) { printf("no window/surface: stop\n"); return 2; }
+    stats("before open");
+    rc = DVDDriverOpenDeviceImpl(&dev, sizes, display, cid, wid, sid, &flags, rect, &o9, &o10);
+    printf("DVDDriverOpenDeviceImpl rc=0x%x dev=%p sizes=%u,%u flags=0x%x out9=%d out10=%d\n", (unsigned)rc, dev, sizes[0], sizes[1], flags, o9, o10);
+    stats("after open");
+    if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
+    if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
+    if (skipdecode) { printf("--open-only: stop after open\n"); goto out; }
+    for (i = 0; i < VEC_NPIC; i++) {
+        unsigned char desc[0x20]; size_t nrec = VEC_NMB * 0x1c; unsigned char *recs = malloc(nrec); unsigned *coefs = malloc((vec_pics[i].ncoefs + 1) * 4);
+        memcpy(recs, vec_pics[i].recs, nrec); memcpy(coefs, vec_pics[i].coefs, vec_pics[i].ncoefs * 4);
+        memset(desc, 0, sizeof desc);
+        desc[0] = vec_pics[i].ptype; desc[2] = 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = 0;
+        *(unsigned char **)(desc + 0x0c) = recs; *(unsigned **)(desc + 0x10) = coefs;
+        printf("picture %d '%s': type %d alt %d dst %d fwd %d, %d coefficient dwords\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].ncoefs); fflush(stdout);
+        DVDDriverDecodeImpl(dev, desc, rect);
+        printf("  decode returned\n"); stats("after decode");
+    }
+out:
+    if (dev) DVDDriverCloseDeviceImpl(dev);
+    stats("after close");
+    CGSRemoveSurface(cid, wid, sid); CGSReleaseWindow(cid, wid); if (reg) CGSReleaseRegion(reg);
+    printf("ava_drive: done\n"); return 0;
+}
