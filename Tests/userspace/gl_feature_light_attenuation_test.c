@@ -4,8 +4,9 @@
  * NOTE (separate finding, see diag_posdim.c): a positional (w=1) light at atten=(1,0,0) - i.e. no
  * attenuation requested at all - reads back at ~208/255 (~82%) instead of a full 255, identical across
  * every projection matrix tried (including plain identity) and with GL_NORMALIZE both on and off. This is
- * NOT explained by quirk 20 (the projection-matrix lighting bug fixed below via a symmetric Z range) since
- * it reproduces even with identity projection. Documented as quirk 23/#136: a real, consistent ~18% dimming
+ * NOT related to quirk 20 (which turned out to be a misdiagnosed near-plane-clipping artifact, not a real
+ * bug - see quirk 20's RETRACTED entry) since this dimming reproduces even with a plain identity
+ * projection, where no clipping-confound is possible at all. Documented as quirk 23/#136: a real, consistent ~18% dimming
  * specific to positional lights vs. directional ones, not yet root-caused. Because of this, run_case()
  * compares the MEASURED atten=(1,0,0) baseline at each distance against the requested attenuation's
  * predicted RATIO, rather than against the textbook formula's absolute value - this still meaningfully
@@ -74,9 +75,11 @@ int main(void) {
     if (err) { die("CreatePBuffer",err); return 1; }
     err=CGLSetCurrentContext(ctx); if (err) { die("SetCurrentContext",err); return 1; }
     err=CGLSetPBuffer(ctx,pbuf,0,0,0); if (err) { die("SetPBuffer",err); return 1; }
-    /* CONFIRMED REAL DRIVER BUG (quirk 20/#133, see diag_poslight*.c): an asymmetric near/far Z range in
-     * the PROJECTION matrix breaks fixed-function lighting entirely (fully black output). Using a
-     * symmetric near/far range (near = -far) as a workaround so this test can exercise attenuation. */
+    /* NOTE (correction, see quirk 20's RETRACTED entry in the skill doc): this symmetric near/far range
+     * was originally chosen to work around a believed "driver bug" (quirk 20/#133) that was later found to
+     * be a misdiagnosed test-construction issue in the tests that originally found it (near-plane clipping
+     * of z=0 geometry under an asymmetric near=0.1 range, not a lighting defect - see diag_clip_recheck.c).
+     * Kept here anyway since it is a perfectly valid, convenient range for this test's own geometry. */
     glViewport(0,0,W,H);
     glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(-10,10,-10,10,-50,50);
     glMatrixMode(GL_MODELVIEW); glLoadIdentity();

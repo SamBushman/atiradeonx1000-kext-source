@@ -30,12 +30,14 @@ int main(void) {
     if (err) { die("CreatePBuffer",err); return 1; }
     err=CGLSetCurrentContext(ctx); if (err) { die("SetCurrentContext",err); return 1; }
     err=CGLSetPBuffer(ctx,pbuf,0,0,0); if (err) { die("SetPBuffer",err); return 1; }
-    /* CONFIRMED REAL DRIVER BUG (quirk 20/#133, see diag_poslight*.c): an asymmetric near/far Z range in
-     * the PROJECTION matrix (glOrtho(...,0.1,100) or glFrustum with any realistic near/far) makes the
-     * fixed-function lighting pipeline produce fully black output regardless of light/material state - even
-     * though lighting is defined to happen in eye space, before the projection matrix is ever applied. A
-     * SYMMETRIC near/far range (near = -far) does not trigger it. Using that symmetric-range workaround here
-     * so this test can actually exercise spotlight behavior instead of just rediscovering quirk 20. */
+    /* NOTE (correction, see quirk 20's RETRACTED entry in the skill doc): an earlier version of this test's
+     * comment attributed the symmetric near/far range below to a "confirmed real driver bug" (quirk 20/
+     * #133) that was later found to be a misdiagnosed test-construction bug in the ORIGINAL tests that
+     * found it, not a real lighting defect - those tests placed geometry at z=0 with an asymmetric
+     * near=0.1 range, which simply near-plane-clips the geometry away entirely (see diag_clip_recheck.c).
+     * The symmetric range (-50,50) used here was never actually necessary for correct lighting - it is
+     * kept only because it conveniently avoids ever having to think about near-plane placement for this
+     * test's own geometry, not because asymmetric ranges are broken. */
     glViewport(0,0,W,H);
     glMatrixMode(GL_PROJECTION); glLoadIdentity(); glOrtho(-10,10,-10,10,-50,50);
     glMatrixMode(GL_MODELVIEW); glLoadIdentity();
