@@ -13,10 +13,12 @@
  *     emitter (Userspace/ATIRadeonX1000VADriver/ppc/part_001.c), not yet built into a live test.
  *   - 0x12: gated behind the accelerator's ring-active flag (self+0x8c, offset 0x22f*4) - a fresh connection never sets it, so it safely falls through; not
  *     separately verified live here, matching the established GL/2D precedent for hardware-gated paths.
- *   - 0x14, 0x3d, 0x46: the emulator sweep showed a wild buffer-pointer advance with a naive 16-word record - the real record shape for these is NOT what
- *     was guessed; left unexercised rather than retry a guess (see the "wrong record length" lesson from the GL/2D sessions - a wrong n, not necessarily a
- *     kext defect, and not safe to just try a bigger n blind).
- *   - 0x3e: no real emitter found anywhere in the VA driver (ppc or i386) - likely dead code, same resolution as GL's 0x36 (#125); not exercised.
+ *   - 0x14, 0x3d, 0x3e, 0x46: RESOLVED by static trace, not a record-shape guessing problem (idct_engine_findings.md 9x, pm4_opcode_gaps.md "resolved by
+ *     static trace" section). All four write the identical register signature as 0x12's composite (0x1150-range offset/pitch, RB3D_DSTCACHE_CTLSTAT=10,
+ *     0x138a-range) - they are syntactic variants (single-forward/single-backward/two-source-average) of the exact #142 firmware defect (completion stamp
+ *     never posts). Permanently excluded, same reason as 0x12 itself: live-testing any of them would only reproduce the known hang for zero new information.
+ *     0x3e additionally has no real emitter anywhere in the VA driver (ppc or i386) - unreachable from real software, like 0x36 (#125), though its kernel
+ *     handler (unlike 0x36's) is real code in this same family, not dead code.
  * Each opcode gets its own flush (memType 1, both the initial buffer and the flush for DVD - IOATIR500DVDContext_ClientMemoryForType.cpp "type 1: the DVD
  * flush... path", same convention as GL, NOT 2D's split memType 0/1 bug), one at a time, with full readback. */
 #include "t3common.h"
