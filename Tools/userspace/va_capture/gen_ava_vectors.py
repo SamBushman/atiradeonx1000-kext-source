@@ -62,7 +62,13 @@ PICTURES = [
     ('R3h MB address 4 (row 1, column 0): the R3b content', 1, 0, 0, 0, [
         (4, {0: [(0, 64), (2, 40)], 1: [(0, 64), (1, 40)], 2: [(0, 32), (2, 40)], 3: [(0, 96)]}, 0, 0)]),
     ('R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal', 1, 0, 0, 0, [
-        (0, {0: [(0, 64)], 1: [(0, 64)], 2: [(0, 64)], 3: [(0, 64)], 4: [(0, 64), (2, 40)], 5: [(0, -64), (1, 40)]}, 0, 0)])
+        (0, {0: [(0, 64)], 1: [(0, 64)], 2: [(0, 64)], 3: [(0, 64)], 4: [(0, 64), (2, 40)], 5: [(0, -64), (1, 40)]}, 0, 0)]),
+    # #141 isolation of the P-picture GPU wedge seen in run g8 (picture 2: forward MB + residual): smaller P pictures, one variable each
+    ('P1 frame, intra MBs only (stream 0 only, P picture type)', 2, 0, 2, 0, [
+        (0, {0: [(0, 1024)]}, 0, 0),
+        (1, {0: [(0, 512)], 4: [(0, 64)]}, 0, 0)]),
+    ('P2 frame, forward MB without residual (motion, no coefficients)', 2, 0, 2, 0, [
+        (0, {}, 1, 0)])
 ]
 
 

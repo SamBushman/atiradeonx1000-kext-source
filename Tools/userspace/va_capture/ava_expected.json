@@ -319,6 +319,39 @@
      "mode": "00000000"
     }
    ]
+  },
+  {
+   "name": "P1 frame, intra MBs only (stream 0 only, P picture type)",
+   "dst": 2,
+   "alt": 0,
+   "ptype": 2,
+   "stream0": [
+    "00000800",
+    "00000000",
+    "04000001",
+    "00000880",
+    "00000010",
+    "02000001",
+    "00400001"
+   ],
+   "stream1": [],
+   "expected_doidct": [
+    {
+     "stream": 0,
+     "dwords": 7,
+     "flag": "000100a0",
+     "mode": "00000000"
+    }
+   ]
+  },
+  {
+   "name": "P2 frame, forward MB without residual (motion, no coefficients)",
+   "dst": 2,
+   "alt": 0,
+   "ptype": 2,
+   "stream0": [],
+   "stream1": [],
+   "expected_doidct": []
   }
  ]
 }
