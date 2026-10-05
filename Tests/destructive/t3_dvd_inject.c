@@ -4,6 +4,12 @@
  * its own poll timeout. This experiment: open/close the DVD connection 3 throwaway times first (the IDCT ring hardware programming might genuinely settle after repeated attempts even though the
  * poll itself can't be trusted), THEN open the real connection and run the full sequence - testing whether warm-up avoids the race. Crashes remain an accepted, expected cost of this investigation
  * (standing instruction) - this is not marked HAZARD; proceed. */
+/* *** CORRECTION 2026-10-05 (#144) *** The "completed all 53 opcodes cleanly" PASS above did NOT actually exercise 0x19-0x24 (the texture-bind family): every
+ * record below is a generic 16-word ZERO-FILLED injection, so word[1] (the image id to bind) was always 0 - never a registered id, so the kernel's own
+ * pVVar42!=NULL guard made every one of these opcodes a silent no-op, every time this test ran. The bind mechanism itself was first exercised with a REAL
+ * image id in Tests/destructive/t3_dvd_bind_and_use.c and hard-hung the G5 on 0x1c (no panic, no crash dump - a silent hang, manual power cycle required).
+ * Treat 0x19-0x24 in THIS file's results as "no-op completed cleanly," not "bind mechanism proven safe" - they are different claims. See
+ * Tests/pm4_opcode_gaps.md's 2026-10-05 section for the live evidence. */
 /* T3 test for #42 criterion 2 (DVD process_command_buffer opcodes - no real player ever opens a DVD context on this machine, #93), issue #100 protocol #87.
  * Exercises the 53 of 62 DVD opcodes whose stock handler was confirmed, via Tools/userspace/emu/kemu.py (PPC emulation of the real stock machine code, zero
  * hardware risk), to terminate safely and boundedly with a generous zero-filled 16-word record - no wild pointer advance, no self+0x104 touch, or (for 0x02/

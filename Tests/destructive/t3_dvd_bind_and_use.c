@@ -1,3 +1,7 @@
+/* *** RESULT 2026-10-05 (#144) *** 0xb and 0xd completed cleanly (live-verified, register writes matched the static derivation below exactly). The
+ * REAL crash was NOT 0x18 - it was the bind step itself (0x1c, the first flush in this file's history to carry a real, registered image id instead
+ * of the 0/no-op every prior test used) - the G5 hard-hung with no panic/crash dump, needing a manual power cycle. 0x18 itself was never reached.
+ * See Tests/pm4_opcode_gaps.md's 2026-10-05 section for the full writeup; filed as #144. Original rationale, still accurate for what was INTENDED: */
 /* T3 test for #42 criterion 2 (DVD process_command_buffer opcodes) - the last open DVD opcode-coverage gap after idct_engine_findings.md 9x resolved
  * 0x14/0x3d/0x3e/0x46 statically. Exercises 0xb, 0xd, and 0x18 with a REAL bound texture, not the no-op path every prior live test of the bind-family
  * opcodes (0x19-0x24) actually took.

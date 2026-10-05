@@ -394,3 +394,17 @@ Per the user's "move on to DVD opcode coverage" instruction. The earlier emulato
 This resolves every open "wrong guessed shape" item from the 2026-10-03 emulator sweep. The only DVD opcode-coverage gaps left after this are the 5 bound-texture-array opcodes (`0xb`, `0xd`, `0x18`, `0x43`, `0x44`) already identified as needing a real `declare_image` + slot-binding precondition before a live test is buildable.
 
 Related: #42 (criterion 2), #142, #125.
+
+## 9y. Live test of the bind precondition: `0xb`/`0xd` pass clean, but the real texture-bind itself (`0x1c`) hard-hangs the G5 - #144 (2026-10-05)
+
+Built `Tests/destructive/t3_dvd_bind_and_use.c` to actually exercise the precondition 9x's remaining gap (`0xb`/`0xd`/`0x18`) needed: a real `declare_image` id bound into the context's texture-array slots via the `0x19`-`0x24` family, instead of the generic zero-filled record every prior live test of that family used (which bound image id `0` - never a registered id, so the kernel's own null-guard made it a silent no-op every time, undetected until now).
+
+**`0xb` and `0xd` ran clean, live, for the first time** - word[2]=1 (the real VA-driver emitters' own value, confirmed by reading both real call sites in `Userspace/ATIRadeonX1000VADriver/ppc/part_001.c`), taking the branch that never touches the texture array. Register writes matched the statically-derived formulas exactly (`0x1150`/`0x1393=10`/`0x138a`/`0x138e` for `0xb`; `0x1393=10`/`0x5c8`/`0x20000`/`0xc0069a00`/`0x52f036da`/`0xd0b`/`5` for `0xd`).
+
+**The crash was not `0x18` - it was the bind itself.** After `0xb`/`0xd`, the test bound a real `declare_image` id (`0xc000`) into slot 3 via opcode `0x1c` (the first real use of `LAB_00037620`'s binding code in this project's history - every prior "test" of this opcode family used image id 0, which the kernel's `pVVar42 != NULL` check turned into a no-op). The mirror log shows the call starting (`ABOUT TO CALL inject 0x1c ...`) with no result line after it; the G5 went fully unreachable (`ping`: Destination Host Unreachable) within seconds. Required a manual power cycle from the user. **No panic.log, no new crash dump, no new CrashReporter entry - `system.log` jumps directly from the last pre-crash line to the next boot's own startup with nothing in between.** This is a silent hang, the same failure class as #141/#142's GPU wedge (not a catchable kernel panic like #123's). Volume integrity confirmed clean afterward (`diskutil verifyVolume`, no repairs). `0x18` itself was never reached.
+
+**This happened at 1h3m uptime** - past the only previously-observed-clean point for #127's unrelated post-boot timing race, so it is not a recurrence of that; it's a distinct, newly-triggered real defect in the bind mechanism. No GAProbe or other live register capture was running for this test, so unlike #142 the actual stuck sub-unit is not identified here - only the trigger and the failure class are known.
+
+**Practical consequence:** `0x19`-`0x24` (the whole bind-family range) must be treated as hazardous with a real image id, not proven safe - `t3_dvd_inject.c`'s "PASS" for this family only ever covered the no-op case; corrected its header comment accordingly. `0x18`/`0x44`'s own hazard status (which needs a successful bind as precondition) remains genuinely unknown - this didn't get far enough to test them. Filed as **#144**.
+
+Related: #144, #141, #142, #127.
