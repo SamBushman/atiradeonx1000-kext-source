@@ -295,3 +295,12 @@ Section 9q flagged the existing write-ahead log's 4 KiB-per-snapshot cap as the 
 **Where this leaves it:** every data-level avenue this project's own tooling can check without new instrumentation has now been checked and comes back clean. The remaining candidates are behavioral, not data: e.g. whether the shared 3D engine needs some warm/active state (a concurrently running GL client, as every real desktop has via WindowServer) that a bare, minimal DVD-only test harness never establishes. That is the next thing worth trying live, not another data read.
 
 Related: #93, #140, #86, #122.
+## 9s. Correction to 9r: `RBBM_SOFTRESET` clears the register-level hang but NOT the display - the machine still needs a reboot
+
+9r reported the AMD-documented `RBBM_SOFTRESET` (0x00f0, within the already-proven-safe write_regs mask) as a working, reboot-free recovery from this hang, based on `RBBM_STATUS` reading back to the documented idle baseline (`0x10000140`) after the reset, twice. That conclusion was **premature - the recovery is partial.**
+
+After the second recovery (following the `glwin`-concurrent experiment in 9r), a screenshot taken minutes apart (`09:28:58` and `09:29:25`, `date` on the live shell confirming the clock was really advancing) came back **byte-for-byte identical** - the display is frozen on a stale frame from before the first hang, even though `ssh`, `ps`, `kill` and register reads all work normally and `RBBM_STATUS` reads idle. A new GUI process (the next `ava_drive` run, launched via `osascript ... tell application "Terminal" to do script`) never produced any output file at all (`g13.out` was never created), consistent with the WindowServer/Terminal AppleEvent path itself being wedged downstream of whatever `RBBM_SOFTRESET` does and does not reach.
+
+**Revised conclusion:** `RBBM_SOFTRESET` genuinely clears the CP/VAP-visible busy bits this project can read (useful as a diagnostic - it confirms the stuck unit is reachable by a CP+VAP-only reset, narrowing it away from a pure back-end/GA hang), but it does **not** restore the machine to a usable state. The display compositor stays wedged and a reboot is still required before any further GUI-dependent test (anything using `ava_drive`, which needs a live WindowServer session) can run. Treat `RBBM_SOFTRESET` as a useful read-only-adjacent diagnostic probe for this hang class, not as a substitute for the reboot in the existing protocol.
+
+Rebooted before continuing with criterion 4 (field pictures, run `g13`+).

@@ -1,0 +1,35 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=57611 -> wid=107 rc=0
+CGSAddSurface -> sid=273095298 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809600 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=37 swallow=0 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+picture 0 'I0 frame, zigzag': type 1 alt 0 dst 0 fwd 0, 11 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=38 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+  GetFrame(dev, frame 0, buf 0x1288000, rowbytes 128, mode 2) ...
+  GetFrame rc=0: 6144 bytes changed from the 0xAA fill (first 0x0, last 0x17ff)
+  row 0: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 1: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 2: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 3: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 4: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 5: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  dumped /Users/bushmas/rung3/va/g12_gf_p0_m2.bin
+picture 2 'P0 frame, forward MB + intra MB': type 2 alt 0 dst 2 fwd 0, 2 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=47 swallow=3 dvd_opens=1 doIDCT(sel18)=3 remaps=12
+  GetFrame(dev, frame 2, buf 0x1288000, rowbytes 128, mode 2) ...
+  GetFrame rc=0: 0 bytes changed from the 0xAA fill (first 0xffffffff, last 0xffffffff)
+  row 0: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  row 1: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  row 2: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  row 3: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  row 4: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  row 5: aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa aa
+  dumped /Users/bushmas/rung3/va/g12_gf_p2_m2.bin
+HOLD-AFTER 2 s (take the 'after' screenshot now)
+WATCHDOG: no completion in time (decode stuck?) - exiting
+EXIT=3
