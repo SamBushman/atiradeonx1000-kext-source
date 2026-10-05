@@ -34,7 +34,14 @@ static struct { io_connect_t c; unsigned type; unsigned long addr, size; } g_map
 static int g_fwd_extra[64]; static int g_nfwd_extra = 0;
 static struct { long fwd, swallow, dvd_opens, dvd_sel18, dvd_remaps; } g_stats;
 
+static struct { unsigned addr, size; } g_img[64]; static int g_nimg = 0;   /* declare_image(8) buffers actually handed to the kernel (user-memory frames the GPU may write: #141) */
 /* exported for the harness */
+int guard_dump_images(const char *prefix) {
+    int i, n = 0; char fn[400]; FILE *fp;
+    for (i = 0; i < g_nimg; i++) { snprintf(fn, sizeof fn, "%s_img%02d_%08x.bin", prefix, i, g_img[i].addr); fp = fopen(fn, "wb"); if (!fp) continue; fwrite((void *)(unsigned long)g_img[i].addr, 1, g_img[i].size, fp); fclose(fp); n++; }
+    return n;
+}
+int guard_nimages(void) { return g_nimg; }
 int guard_dvd_connect(void) { int i; for (i = 0; i < g_nconn; i++) if (g_conn[i].type == 3) return (int)g_conn[i].c; return 0; }
 long guard_stat(int which) { switch (which) { case 0: return g_stats.fwd; case 1: return g_stats.swallow; case 2: return g_stats.dvd_opens; case 3: return g_stats.dvd_sel18; case 4: return g_stats.dvd_remaps; } return -1; }
 
@@ -106,6 +113,21 @@ static kern_return_t my_map(io_connect_t c, uint32_t type, task_port_t t, vm_add
     char x[96]; int i;
     if (is_dvd(c)) {
         for (i = 0; i < g_nmaps; i++) if (g_maps[i].c == c && g_maps[i].type == type) break;
+        if (i < g_nmaps && type == 1 && getenv("GUARD_FWD_REMAP")) {
+            /* #141 composite run: forward the type-1 re-map = a real DVD command-buffer submit (process_command_buffer runs, the kernel swaps the ping-pong buffer and returns the new one).
+             * Write-ahead first: a snapshot of the buffer being submitted is on disk (fsync) before the kernel sees it (issue #87 criterion 2). Only for deliberate experiments. */
+            snapshot(c, "type1-remap-FORWARDED(write-ahead)", (unsigned)g_seq + 1);
+            snprintf(x, sizeof x, "memType=1 old_addr=0x%lx", g_maps[i].addr);
+            fprintf(g_log, "%ld\t%d\t%ld\tIOConnectMapMemory\tconnect=0x%x\tctype=3\tsel=-1\tABOUT-TO-CALL(type1 remap FORWARDED)\t%s\t-\n", ++g_seq, g_pid, us(), (unsigned)c, x);
+            fflush(g_log); fsync(fileno(g_log)); if (g_mem) { fflush(g_mem); fsync(fileno(g_mem)); }
+            struct timeval ta, tb; gettimeofday(&ta, NULL);
+            kern_return_t rr = r_map(c, type, t, a, sz, o);
+            gettimeofday(&tb, NULL);
+            if (rr == 0 && a && sz) { g_maps[i].addr = *a; g_maps[i].size = *sz; }
+            snprintf(x, sizeof x, "memType=1 addr=0x%lx size=0x%lx us=%ld", a ? (unsigned long)*a : 0, sz ? (unsigned long)*sz : 0, (long)((tb.tv_sec - ta.tv_sec) * 1000000L + (tb.tv_usec - ta.tv_usec)));
+            line("IOConnectMapMemory", c, "FWD(type1 remap FORWARDED)", -1, x, rr); fflush(g_log); fsync(fileno(g_log)); g_stats.fwd++; g_stats.dvd_remaps++;
+            return rr;
+        }
         if (i < g_nmaps || !(type == 1 || type == 2 || type == 4 || type == 5)) {
             if (i < g_nmaps && a && sz) { *a = g_maps[i].addr; *sz = g_maps[i].size; }
             snapshot(c, type == 1 ? "type1-remap(submit)" : "map-swallowed", (unsigned)g_seq + 1);
@@ -134,7 +156,9 @@ static kern_return_t my_sisO(mach_port_t c, int sel, int *in, mach_msg_type_numb
         char y[96]; snprintf(y, sizeof y, "%s fake_handle=%p", x, blk); line("scalarI_scalarO", c, "SWALLOW(fake image handle)", sel, y, 0); g_stats.swallow++; return 0;
     }
     if (is_dvd(c) && !fwd_selector(sel)) { synth_out(sel, out, oc, NULL, NULL); line("scalarI_scalarO", c, "SWALLOW", sel, x, 0); g_stats.swallow++; return 0; }
-    kern_return_t r = r_sisO(c, sel, in, ic, out, oc); line("scalarI_scalarO", c, "FWD", sel, x, r); g_stats.fwd++; return r;
+    kern_return_t r = r_sisO(c, sel, in, ic, out, oc); line("scalarI_scalarO", c, "FWD", sel, x, r); g_stats.fwd++;
+    if (is_dvd(c) && sel == 8 && r == 0 && ic >= 3 && g_nimg < 64) { g_img[g_nimg].addr = (unsigned)in[1]; g_img[g_nimg].size = (unsigned)in[2]; g_nimg++; }
+    return r;
 }
 static kern_return_t my_sisti(mach_port_t c, int sel, int *in, mach_msg_type_number_t ic, char *s, mach_msg_type_number_t sc) {
     ensure(); RES(r_sisti, "io_connect_method_scalarI_structureI"); char x[200]; unsigned i; int n = 0;

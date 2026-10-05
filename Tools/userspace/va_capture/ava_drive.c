@@ -34,6 +34,7 @@ extern CGError CGSReleaseRegion(CGSRegionRef region);
 extern int DVDDriverOpenDeviceImpl(void **dev, unsigned *sizes /*[2] out*/, unsigned display, int cid, int wid, int sid, unsigned *flags /*out*/, short *rect /*top,left,bottom,right*/, short *out9, short *out10);
 extern void DVDDriverDecodeImpl(void *dev, unsigned char *picture, short *rect);
 extern void DVDDriverCloseDeviceImpl(void *dev);
+extern int DVDDriverGetFrameImpl(void *dev, int frame, void *buf, int rowbytes, int mode);   /* AppleVA 0x97d8241c: mode 2 'yuvs', 8 'yuv2', 16 'argb', 32 'rgba', 64 'ar15' (renderer table +0x54 converts the decoded frame into buf) */
 
 static io_connect_t rb_gl = 0, rb_2d = 0; static unsigned char *rb_buf = NULL;
 /* read-back through the proven GL read_buffer path (Tests/destructive/t3_gl_read_buffer.c): GL user client bound to the same surface, sourceSelector 1 = surface buffer slot 0 */
@@ -71,19 +72,22 @@ static int rb_read(const char *label, int w, int h) {
 }
 static long (*guard_stat)(int);
 static int (*guard_dvd_connect)(void);
+static int (*guard_dump_images)(const char *); static int (*guard_nimages)(void);
 static void on_alarm(int s) { fprintf(stderr, "WATCHDOG: no completion in time (decode stuck?) - exiting\n"); fflush(stderr); _exit(3); }
 static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%ld swallow=%ld dvd_opens=%ld doIDCT(sel18)=%ld remaps=%ld\n", when, guard_stat(0), guard_stat(1), guard_stat(2), guard_stat(3), guard_stat(4)); fflush(stdout); }
 
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0, dumpimg = 0, getframe = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
         else if (!strcmp(argv[k], "--readback")) readback = 1;
+        else if (!strcmp(argv[k], "--getframe") && k + 1 < argc) getframe = atoi(argv[++k]);   /* #141: after each decode call DVDDriverGetFrameImpl(dev, dst, buf, rowbytes, MODE) and dump buf */
+        else if (!strcmp(argv[k], "--dump-images")) dumpimg = 1;   /* #141: dump every declare_image buffer (GPU-visible user memory) before the first picture and after each decode (+1 s settle) */
         else if (!strcmp(argv[k], "--readall")) { readback = 1; readall = 1; }
         else if (!strcmp(argv[k], "--height") && k + 1 < argc) height_arg = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--repeat") && k + 1 < argc) repeat = atoi(argv[++k]);
@@ -94,6 +98,7 @@ int main(int argc, char **argv) {
     signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
     guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
     guard_dvd_connect = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_dvd_connect");
+    guard_dump_images = (int (*)(const char *))dlsym(RTLD_DEFAULT, "guard_dump_images"); guard_nimages = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_nimages");
     printf("ava_drive: display 0x%x, guard %s\n", display, guard_stat ? "LOADED" : "NOT LOADED (refusing to continue)"); fflush(stdout);
     if (!guard_stat) return 2;
     cid = CGSMainConnectionID();
@@ -120,6 +125,7 @@ int main(int argc, char **argv) {
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
     if (hold_before) { printf("HOLD-BEFORE %d s (window is up; take the 'before' screenshot now)\n", hold_before); fflush(stdout); sleep(hold_before); }
     if (readback) { if (rb_setup(sid) == 0) { static const int sels[] = {1, 0, 7, 8, 2, 3, 4, 10, 11}; int q; for (q = 0; q < (readall ? 9 : 1); q++) { rb_sel = sels[q]; rb_read("before", 64, 48); } } else readback = 0; }
+    if (dumpimg && guard_dump_images && getenv("RB_DUMP")) { char pf[300]; snprintf(pf, sizeof pf, "%s_before", getenv("RB_DUMP")); printf("dump-images: %d images declared, wrote %d (before)\n", guard_nimages(), guard_dump_images(pf)); fflush(stdout); }
     for (i = 0; i < VEC_NPIC; i++) {
         if (!(picmask & (1u << i))) continue;
         { int rep; for (rep = 0; rep < repeat; rep++) {
@@ -131,6 +137,18 @@ int main(int argc, char **argv) {
         printf("picture %d '%s': type %d alt %d dst %d fwd %d, %d coefficient dwords\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].ncoefs); fflush(stdout);
         DVDDriverDecodeImpl(dev, desc, rect);
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
+        if (getframe) {
+            size_t gsz = 4u << 20; unsigned char *gb = (unsigned char *)valloc(gsz); int grc, gy; long gnz = 0, gfirst = -1, glast = -1; size_t gq;
+            memset(gb, 0xAA, gsz); sleep(1);
+            printf("  GetFrame(dev, frame %d, buf %p, rowbytes %d, mode %d) ...\n", vec_pics[i].dst, (void *)gb, 2048, getframe); fflush(stdout);
+            grc = DVDDriverGetFrameImpl(dev, dst_override != 1000 ? dst_override : vec_pics[i].dst, gb, 2048, getframe);
+            for (gq = 0; gq < gsz; gq++) if (gb[gq] != 0xAA) { gnz++; if (gfirst < 0) gfirst = (long)gq; glast = (long)gq; }
+            printf("  GetFrame rc=%d: %ld bytes changed from the 0xAA fill (first 0x%lx, last 0x%lx)\n", grc, gnz, gfirst, glast);
+            for (gy = 0; gy < 6; gy++) { int gx; printf("  row %d:", gy); for (gx = 0; gx < 32; gx++) printf(" %02x", gb[gy * 2048 + gx]); printf("\n"); }
+            if (getenv("RB_DUMP")) { char gf[300]; FILE *gfp; snprintf(gf, sizeof gf, "%s_gf_p%d_m%d.bin", getenv("RB_DUMP"), i, getframe); gfp = fopen(gf, "wb"); if (gfp) { fwrite(gb, 1, glast >= 0 ? (size_t)glast + 1 : 0, gfp); fclose(gfp); printf("  dumped %s\n", gf); } }
+            fflush(stdout); free(gb);
+        }
+        if (dumpimg && guard_dump_images && getenv("RB_DUMP")) { char pf[300]; sleep(1); snprintf(pf, sizeof pf, "%s_after_p%d", getenv("RB_DUMP"), i); printf("dump-images: wrote %d (after picture %d)\n", guard_dump_images(pf), i); fflush(stdout); }
         } }
     }
     if (readback) { static const int sels[] = {1, 0, 7, 8, 2, 3, 4, 10, 11}; int q; for (q = 0; q < (readall ? 9 : 1); q++) { rb_sel = sels[q]; rb_read("after", 64, 48); } if (!readall) { sleep(3); rb_read("after+3s", 64, 48); } }
