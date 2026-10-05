@@ -3,11 +3,16 @@
  * sATIDVDIDCTParams.planeSelector (+0xc) other than 0/1 it returns kIOReturnBadArgument WITHOUT unlocking (the same leak on the success-less exit is the other half of the issue). It returns before
  * touching any buffer, the GART, the ring or the hardware: no stream, no address, no DMA is involved, so nothing is submitted. The params block is 0x40 zero bytes except planeSelector = 2.
  * After the call every other client that needs the accelerator lock blocks: confirmed with a forked child that issues 2D swap_surface(0) (unbound: takes the lock, then fails) and is given 15 s.
- * The valid doIDCT path (Phase A/B: real IDCT hardware submission) is NOT run: it programs the GPU with caller-supplied coefficient/destination addresses and needs a real macroblock stream. */
+ * The valid doIDCT path (Phase A/B: real IDCT hardware submission) is NOT run: it programs the GPU with caller-supplied coefficient/destination addresses and needs a real macroblock stream.
+ * *** CORRECTION 2026-10-05: the first run of this test (2026-10-02) got "no lock leak observed" - but the child silently _exit(0)'d with NO logging of whether open_user_client/swap_surface
+ * even ran, and fork() after Mach port/IOKit setup is a well-known source of silent breakage. Fixed: the child now explicitly logs both return codes via a pipe to the parent (writing directly
+ * to t->logfd from the child is unsafe across fork - buffered stdio state and the mirror UDP socket could double-flush/corrupt - so the child reports over a dedicated pipe instead, and the
+ * PARENT does the actual dtest_note logging after reading it). Re-run needed to get a trustworthy answer either way. */
 #include "t3common.h"
 #include <sys/wait.h>
+#include <unistd.h>
 static const char *body(dtest_t *t, io_service_t svc) {
-    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0, i, st = 0; IOByteCount osz; UInt32 in[16], out[16]; pid_t pid;
+    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0, i, st = 0; IOByteCount osz; UInt32 in[16], out[16]; pid_t pid; int pipefd[2];
     if (t3_surface(t, svc, &s, 4, 4) != 0) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != 0) { IOServiceClose(s); return "DIVERGENCE"; }
@@ -19,13 +24,35 @@ static const char *body(dtest_t *t, io_service_t svc) {
         if (r == TEST_kIOReturnBadArgument) {
             dtest_about(t, "forked child: 2D swap_surface(0) unbound, must BLOCK on the leaked lock (15 s)");
             fflush(stdout);
+            if (pipe(pipefd) != 0) { dtest_note(t, "pipe() failed, cannot run the child check"); bad++; goto done; }
             pid = fork();
-            if (pid == 0) { io_connect_t c; if (open_user_client(svc, CLIENT_TYPE_2D, &c) == 0) { int tag; IOConnectMethodScalarIScalarO(c, 3, 1, 1, 0, &tag); } _exit(0); }
+            if (pid == 0) {
+                io_connect_t c; kern_return_t openRc; int swapRc = -999, tag;
+                close(pipefd[0]);
+                openRc = open_user_client(svc, CLIENT_TYPE_2D, &c);
+                if (openRc == 0) swapRc = IOConnectMethodScalarIScalarO(c, 3, 1, 1, 0, &tag);
+                { int msg[2] = { (int)openRc, swapRc }; write(pipefd[1], msg, sizeof msg); }
+                close(pipefd[1]);
+                _exit(0);
+            }
+            close(pipefd[1]);
             for (i = 0; i < 15; i++) { if (waitpid(pid, &st, WNOHANG) == pid) break; sleep(1); }
-            if (i == 15) dtest_note(t, "LOCK LEAK CONFIRMED: the child is still blocked after 15 s (accelerator lock never released); reboot required");
-            else { dtest_note(t, "child returned: no lock leak observed"); bad++; }
+            if (i == 15) {
+                dtest_note(t, "LOCK LEAK CONFIRMED: the child is still blocked after 15 s (accelerator lock never released); reboot required");
+            } else {
+                int msg[2] = { -999, -999 }; ssize_t n = read(pipefd[0], msg, sizeof msg);
+                if (n == (ssize_t)sizeof msg) {
+                    dtest_note(t, "child returned: open_user_client rc=0x%08x, swap_surface rc=0x%08x (no lock leak observed)", (unsigned)msg[0], (unsigned)msg[1]);
+                    if (msg[0] != 0) { dtest_note(t, "INCONCLUSIVE: child's open_user_client itself failed (0x%08x) - it never reached swap_surface, so this run says nothing about the lock", (unsigned)msg[0]); }
+                    else bad++;
+                } else {
+                    dtest_note(t, "child exited but reported nothing over the pipe (n=%ld) - cannot tell whether it ever called swap_surface; INCONCLUSIVE", (long)n);
+                }
+            }
+            close(pipefd[0]);
         }
     }
+done:
     return bad ? "DIVERGENCE" : "PASS";
 }
 int main(int argc, char **argv) { return dtest_main(argc, argv, "t3_dvd_idct_lock_leak", 0, body); }

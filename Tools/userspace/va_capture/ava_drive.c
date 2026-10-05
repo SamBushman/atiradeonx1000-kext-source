@@ -80,12 +80,13 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1, writebuf_sel = -1; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
+        else if (!strcmp(argv[k], "--write-buffer") && k + 1 < argc) writebuf_sel = atoi(argv[++k]);   /* #92: real DVD write_buffer (sel 6) after --lock-buffers establishes real backing */
         else if (!strcmp(argv[k], "--readback")) readback = 1;
         else if (!strcmp(argv[k], "--getframe") && k + 1 < argc) getframe = atoi(argv[++k]);   /* #141: after each decode call DVDDriverGetFrameImpl(dev, dst, buf, rowbytes, MODE) and dump buf */
         else if (!strcmp(argv[k], "--dump-images")) dumpimg = 1;   /* #141: dump every declare_image buffer (GPU-visible user memory) before the first picture and after each decode (+1 s settle) */
@@ -122,6 +123,16 @@ int main(int argc, char **argv) {
         kr = io_connect_method_scalarI_structureO(conn, 4, in, 1, (char *)out, &oc);
         printf("lock_all_buffers -> rc=0x%08x outSize=%u\n", (unsigned)kr, (unsigned)oc);
         for (q = 0; q < 13; q++) printf("  slot %d: address=0x%08x pitch=0x%x\n", 10 + q, out[q * 2], out[q * 2 + 1]);
+        fflush(stdout);
+    }
+    if (writebuf_sel >= 0) {   /* #92: real write_buffer (sel 6) - only takes the real DMA path (vs. the documented no-op) if --lock-buffers already gave the target slot a backing record */
+        int conn = guard_dvd_connect ? guard_dvd_connect() : 0; kern_return_t kr;
+        static unsigned char wbuf[0x10000]; int in[7]; mach_msg_type_number_t oc = 0;
+        memset(wbuf, 0x55, sizeof wbuf);
+        in[0] = 0; in[1] = 0; in[2] = 4; in[3] = 4; in[4] = writebuf_sel; in[5] = (int)wbuf; in[6] = 64;
+        printf("write_buffer: connect=0x%x bufferSelect=%d (forwarded only if GUARD_FORWARD includes 6)\n", conn, writebuf_sel); fflush(stdout);
+        kr = io_connect_method_structureI_structureO(conn, 6, (char *)in, sizeof in, NULL, &oc);
+        printf("write_buffer -> rc=0x%08x (0xe00002cc=slot not usable; 0 is ambiguous: real DMA or the documented no-op when the backing record is 0 - compare register snapshots around this call)\n", (unsigned)kr);
         fflush(stdout);
     }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
