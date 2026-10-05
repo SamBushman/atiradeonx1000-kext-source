@@ -2,8 +2,12 @@
  * Shared::new_agp_texture(p2 = user address, p3 = length, &out); delete_image(id) -> Shared::delete_texture): see t3_2d_declare_image.c for the trace of new_agp_texture. The DVD context has
  * no wait_image, so the id is found by probing delete_image(i) itself (BadArgument for an id with no texture, 0 for ours: it deletes the ONLY image this connection created, which is the
  * intended cleanup). Our own 64 KB page-aligned buffer, length 0x1000, nothing foreign touched.
- * *** This file already ran once (phaseS log, 2026-10-02T04:42:57Z, outcome=PASS) but was never reported to #120. Added 2026-10-05: ioreg class-instance counts (IOATIR500Shared,
- * ATIR500Memory) before/after - the specific "GART accounting and class counts" check #120's success criteria ask for, which the original run's "user buffer unchanged" proxy didn't cover. */
+ * *** This file already ran once (phaseS log, 2026-10-02T04:42:57Z, outcome=PASS) but was never reported to #120. Added 2026-10-05: live instance counts (IOATIR500Shared,
+ * ATIR500Memory) before/after - the specific "GART accounting and class counts" check #120's success criteria ask for, which the original run's "user buffer unchanged" proxy didn't cover.
+ * *** CORRECTION (same day): `ioreg -w0 -c CLASS` does NOT filter on this machine's ioreg build - confirmed it returns the identical full-tree dump even for a nonsense class name, so a
+ * first version of this check using `-c` silently always read 0/0 (not "nothing leaked", just "the check never worked"). Switched to the mechanism Tests/test_deep_t2.c already uses and
+ * verified this session: `ioreg -l -w0 | grep IOKitDiagnostics`, which publishes a real `"ClassName"=N` property per loaded kext class and DOES reflect real live counts (confirmed
+ * nonzero: ATIR500Memory=2, IOATIR500Shared=1, baseline). */
 #include "t3common.h"
 #include <stdlib.h>
 #include <unistd.h>
@@ -11,14 +15,16 @@
 #define NCLS 2
 static const char *kClasses[NCLS] = { "IOATIR500Shared", "ATIR500Memory" };
 static int class_counts(int *out) {
-    FILE *p = popen("/usr/sbin/ioreg -w0 -c IOATIR500Shared -c ATIR500Memory 2>/dev/null", "r");
-    char line[512]; int i;
-    for (i = 0; i < NCLS; i++) out[i] = 0;
-    if (!p) return -1;
-    while (fgets(line, sizeof line, p)) {
-        for (i = 0; i < NCLS; i++) { char tag[64]; snprintf(tag, sizeof tag, "<class %s", kClasses[i]); if (strstr(line, tag)) out[i]++; }
+    FILE *p = popen("/usr/sbin/ioreg -l -w0 | grep IOKitDiagnostics", "r");
+    char *buf = (char *)malloc(200000); size_t n; int i;
+    for (i = 0; i < NCLS; i++) out[i] = -1;
+    if (!p || !buf) { if (p) pclose(p); if (buf) free(buf); return -1; }
+    n = fread(buf, 1, 199999, p); buf[n] = 0; pclose(p);
+    for (i = 0; i < NCLS; i++) {
+        char key[80]; char *q; snprintf(key, sizeof key, "\"%s\"=", kClasses[i]);
+        q = strstr(buf, key); out[i] = q ? atoi(q + strlen(key)) : -1;
     }
-    pclose(p); return 0;
+    free(buf); return 0;
 }
 static void log_counts(dtest_t *t, const char *label, int *c) { dtest_note(t, "class counts %s: IOATIR500Shared=%d ATIR500Memory=%d", label, c[0], c[1]); }
 

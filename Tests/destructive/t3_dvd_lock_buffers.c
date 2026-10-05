@@ -12,21 +12,27 @@
  * success in the sense of a return code, but the allocation evidently did not happen for real. idct_engine_findings.md section 9d got genuine non-zero descriptors (slots 10-14 pitch
  * 0x100 etc.) using a real 64x48 surface and TWO setup_buffers calls (masks 0x27c00 then 0x37c00, matching the actual VA driver's own tail sequence) - this file's smaller 16x16/single-mask
  * setup never gave the allocator real work to do. Updated the surface size and setup_buffers calls below to match 9d's proven-real parameters, so the repeat-lock/leak-check additions
- * below are actually exercising a real allocation, not another all-zero no-op. */
+ * below are actually exercising a real allocation, not another all-zero no-op.
+ * *** CORRECTION (same day, found running #120's sibling test): `ioreg -w0 -c CLASS` does NOT filter on this machine's ioreg build (confirmed: returns the identical full-tree dump
+ * even for a nonsense class name) - a leak check built on it silently always reads 0/0. Switched to the mechanism Tests/test_deep_t2.c already uses, verified this session to show real
+ * nonzero counts: `ioreg -l -w0 | grep IOKitDiagnostics`'s own `"ClassName"=N` properties. */
 #include "t3common.h"
 #include <unistd.h>
+#include <stdlib.h>
 
 #define NCLS 2
 static const char *kClasses[NCLS] = { "ATIR500DVDContext", "ATIR500Surface" };
 static int class_counts(int *out) {
-    FILE *p = popen("/usr/sbin/ioreg -w0 -c ATIR500DVDContext -c ATIR500Surface 2>/dev/null", "r");
-    char line[512]; int i;
-    for (i = 0; i < NCLS; i++) out[i] = 0;
-    if (!p) return -1;
-    while (fgets(line, sizeof line, p)) {
-        for (i = 0; i < NCLS; i++) { char tag[64]; snprintf(tag, sizeof tag, "<class %s", kClasses[i]); if (strstr(line, tag)) out[i]++; }
+    FILE *p = popen("/usr/sbin/ioreg -l -w0 | grep IOKitDiagnostics", "r");
+    char *buf = (char *)malloc(200000); size_t n; int i;
+    for (i = 0; i < NCLS; i++) out[i] = -1;
+    if (!p || !buf) { if (p) pclose(p); if (buf) free(buf); return -1; }
+    n = fread(buf, 1, 199999, p); buf[n] = 0; pclose(p);
+    for (i = 0; i < NCLS; i++) {
+        char key[80]; char *q; snprintf(key, sizeof key, "\"%s\"=", kClasses[i]);
+        q = strstr(buf, key); out[i] = q ? atoi(q + strlen(key)) : -1;
     }
-    pclose(p); return 0;
+    free(buf); return 0;
 }
 static void log_counts(dtest_t *t, const char *label, int *c) {
     dtest_note(t, "class counts %s: ATIR500DVDContext=%d ATIR500Surface=%d", label, c[0], c[1]);
