@@ -1,0 +1,68 @@
+# iokit_guard start pid=472
+1	472	27892	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	472	27945	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	472	27972	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0x11000 size=0x1000	0
+4	472	28024	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0x12000 size=0x1000	0
+5	472	28049	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	472	28574	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	472	28595	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	472	28626	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	472	28787	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	472	28807	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	472	28826	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0x13000 size=0x1000	0
+12	472	29107	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1048bd00 00004000 00000001 	0
+13	472	29258	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	472	29275	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1048bd00 00004000 00000001 	0
+15	472	29381	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 000de000 00007800 	0
+16	472	34606	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+17	472	34634	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 000e8000 00004800 	0
+18	472	40712	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+19	472	41642	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02810800 00003000 	0
+20	472	41680	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02813a00 00003000 	0
+21	472	41730	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02816c00 00003000 	0
+22	472	41764	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02819e00 00003000 	0
+23	472	41798	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0281d000 00003000 	0
+24	472	46378	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00290000 00016800 	0
+25	472	46447	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002b9000 00016800 	0
+26	472	46483	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002e2000 00016800 	0
+27	472	46518	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005ae000 00016800 	0
+28	472	46553	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005d7000 00016800 	0
+29	472	46588	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00785000 00016800 	0
+30	472	46623	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007ae000 00016800 	0
+31	472	46658	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007d7000 00016800 	0
+32	472	46695	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02807600 00000800 	0
+33	472	56807	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+34	472	56839	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+35	472	56881	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	1048bd00 00004000 00000001 	0
+36	472	66822	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+37	472	76954	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+38	472	77639	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=000000000000000000000000000000000000000a000100a00000000041544956414472690030004000000000000000000000000000000000	-
+39	472	90319	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0xe00002d8	kernel_call_us=60	out=0
+40	472	100586	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=4 addr=0x705000 size=0x80000	0
+41	472	1114679	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01088000 00001800 	0
+42	472	1124815	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+43	472	1134813	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+44	472	1134845	scalarI_structureI	connect=0x2403	ctype=3	sel=19	FWD	00000000 00000000 	0
+45	472	1144842	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+46	472	1144888	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000010 	0
+47	472	3244271	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+48	472	3255737	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+49	472	3255799	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000f 	0
+50	472	3255860	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000007 	0
+51	472	3255917	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000008 	0
+52	472	3255973	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000009 	0
+53	472	3256030	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000a 	0
+54	472	3256085	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000b 	0
+55	472	3256141	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000c 	0
+56	472	3256196	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000d 	0
+57	472	3256252	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	0000000e 	0
+58	472	3256322	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000002 	0
+59	472	3256357	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000003 	0
+60	472	3256417	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000004 	0
+61	472	3256467	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000005 	0
+62	472	3256516	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000006 	0
+63	472	3266503	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+64	472	3266539	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000000 	0
+65	472	3276541	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=1 addr=0x520000 size=0x80000	0
+66	472	3276577	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000001 	0
+67	472	3276936	IOServiceClose	connect=0x2403	ctype=3	sel=-1	FWD	-	0

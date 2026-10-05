@@ -72,7 +72,8 @@ static int rb_read(const char *label, int w, int h) {
 }
 static long (*guard_stat)(int);
 static int (*guard_dvd_connect)(void);
-static int (*guard_dump_images)(const char *); static int (*guard_nimages)(void);
+static void (*guard_mark)(const char *); static int (*guard_dump_images)(const char *); static int (*guard_nimages)(void);
+#define MARK(s) do { if (guard_mark) guard_mark(s); } while (0)
 static void on_alarm(int s) { fprintf(stderr, "WATCHDOG: no completion in time (decode stuck?) - exiting\n"); fflush(stderr); _exit(3); }
 static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%ld swallow=%ld dvd_opens=%ld doIDCT(sel18)=%ld remaps=%ld\n", when, guard_stat(0), guard_stat(1), guard_stat(2), guard_stat(3), guard_stat(4)); fflush(stdout); }
 
@@ -98,7 +99,7 @@ int main(int argc, char **argv) {
     signal(SIGALRM, on_alarm); alarm(ws ? atoi(ws) : 90);
     guard_stat = (long (*)(int))dlsym(RTLD_DEFAULT, "guard_stat");
     guard_dvd_connect = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_dvd_connect");
-    guard_dump_images = (int (*)(const char *))dlsym(RTLD_DEFAULT, "guard_dump_images"); guard_nimages = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_nimages");
+    guard_mark = (void (*)(const char *))dlsym(RTLD_DEFAULT, "guard_mark"); guard_dump_images = (int (*)(const char *))dlsym(RTLD_DEFAULT, "guard_dump_images"); guard_nimages = (int (*)(void))dlsym(RTLD_DEFAULT, "guard_nimages");
     printf("ava_drive: display 0x%x, guard %s\n", display, guard_stat ? "LOADED" : "NOT LOADED (refusing to continue)"); fflush(stdout);
     if (!guard_stat) return 2;
     cid = CGSMainConnectionID();
@@ -135,16 +136,18 @@ int main(int argc, char **argv) {
         desc[0] = vec_pics[i].ptype; desc[2] = 3 /* frame */; desc[4] = vec_pics[i].alt; desc[6] = dst_override != 1000 ? (unsigned char)dst_override : vec_pics[i].dst; desc[7] = vec_pics[i].fwd; desc[8] = 0;
         *(unsigned char **)(desc + 0x0c) = recs; *(unsigned **)(desc + 0x10) = coefs;
         printf("picture %d '%s': type %d alt %d dst %d fwd %d, %d coefficient dwords\n", i, vec_pics[i].name, vec_pics[i].ptype, vec_pics[i].alt, vec_pics[i].dst, vec_pics[i].fwd, vec_pics[i].ncoefs); fflush(stdout);
-        DVDDriverDecodeImpl(dev, desc, rect);
+        MARK("decode: calling DVDDriverDecodeImpl"); DVDDriverDecodeImpl(dev, desc, rect); MARK("decode: DVDDriverDecodeImpl returned");
         printf("  decode returned (repeat %d)\n", rep); stats("after decode");
         if (getframe) {
-            size_t gsz = 4u << 20; unsigned char *gb = (unsigned char *)valloc(gsz); int grc, gy; long gnz = 0, gfirst = -1, glast = -1; size_t gq;
-            memset(gb, 0xAA, gsz); sleep(1);
-            printf("  GetFrame(dev, frame %d, buf %p, rowbytes %d, mode %d) ...\n", vec_pics[i].dst, (void *)gb, 2048, getframe); fflush(stdout);
-            grc = DVDDriverGetFrameImpl(dev, dst_override != 1000 ? dst_override : vec_pics[i].dst, gb, 2048, getframe);
+            int grow = 128; size_t gsz = 4u << 20; unsigned char *gb = (unsigned char *)valloc(gsz); int grc, gy; long gnz = 0, gfirst = -1, glast = -1; size_t gq;
+            MARK("getframe: buffer allocated"); memset(gb, 0xAA, gsz); MARK("getframe: buffer filled"); sleep(1); MARK("getframe: settle sleep done, calling DVDDriverGetFrameImpl");
+            { int bpp = (getframe == 16 || getframe == 32) ? 4 : 2; grow = rect[3] * bpp;   /* MUST equal width*bytes-per-pixel: GetFrame declares the destination image as height*width*bpp and programs the render pitch from this argument; a larger value (2048 in runs g2-g6) makes the GPU write far past the mapped image -> DART out-of-bounds panic */
+              printf("  GetFrame(dev, frame %d, buf %p, rowbytes %d, mode %d) ...\n", vec_pics[i].dst, (void *)gb, grow, getframe); fflush(stdout); }
+            grc = DVDDriverGetFrameImpl(dev, dst_override != 1000 ? dst_override : vec_pics[i].dst, gb, grow, getframe);
+            MARK("getframe: DVDDriverGetFrameImpl returned");
             for (gq = 0; gq < gsz; gq++) if (gb[gq] != 0xAA) { gnz++; if (gfirst < 0) gfirst = (long)gq; glast = (long)gq; }
             printf("  GetFrame rc=%d: %ld bytes changed from the 0xAA fill (first 0x%lx, last 0x%lx)\n", grc, gnz, gfirst, glast);
-            for (gy = 0; gy < 6; gy++) { int gx; printf("  row %d:", gy); for (gx = 0; gx < 32; gx++) printf(" %02x", gb[gy * 2048 + gx]); printf("\n"); }
+            for (gy = 0; gy < 6; gy++) { int gx; printf("  row %d:", gy); for (gx = 0; gx < 32; gx++) printf(" %02x", gb[gy * grow + gx]); printf("\n"); }
             if (getenv("RB_DUMP")) { char gf[300]; FILE *gfp; snprintf(gf, sizeof gf, "%s_gf_p%d_m%d.bin", getenv("RB_DUMP"), i, getframe); gfp = fopen(gf, "wb"); if (gfp) { fwrite(gb, 1, glast >= 0 ? (size_t)glast + 1 : 0, gfp); fclose(gfp); printf("  dumped %s\n", gf); } }
             fflush(stdout); free(gb);
         }

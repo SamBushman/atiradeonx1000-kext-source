@@ -1,0 +1,24 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=27155 -> wid=110 rc=0
+CGSAddSurface -> sid=278058400 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=37 swallow=0 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+picture 11 'R3i chroma probe (run with --height 32): Y flat 64, Cb DC64+vertical, Cr DC-64+horizontal': type 1 alt 0 dst 0 fwd 0, 8 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=38 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+  GetFrame(dev, frame 0, buf 0x1288000, rowbytes 128, mode 2) ...
+  GetFrame rc=0: 6144 bytes changed from the 0xAA fill (first 0x0, last 0x17ff)
+  row 0: 8f 88 7f 88 8f 88 7e 88 8f 88 7c 88 8f 88 79 88 8f 88 77 88 8f 88 74 88 8f 88 72 88 8f 88 71 88
+  row 1: 8f 88 7f 88 8f 88 7e 88 8f 88 7c 88 8f 88 79 88 8f 88 77 88 8f 88 74 88 8f 88 72 88 8f 88 71 88
+  row 2: 8e 88 7f 88 8e 88 7e 88 8e 88 7c 88 8e 88 7a 88 8e 88 77 88 8e 88 74 88 8e 88 72 88 8e 88 71 88
+  row 3: 8e 88 7f 88 8e 88 7e 88 8e 88 7c 88 8e 88 7a 88 8e 88 77 88 8e 88 74 88 8e 88 72 88 8e 88 71 88
+  row 4: 8c 88 7f 88 8c 88 7e 88 8c 88 7c 88 8c 88 79 88 8c 88 77 88 8c 88 74 88 8c 88 72 88 8c 88 71 88
+  row 5: 8c 88 7f 88 8c 88 7e 88 8c 88 7c 88 8c 88 79 88 8c 88 77 88 8c 88 74 88 8c 88 72 88 8c 88 71 88
+  dumped /Users/bushmas/rung3/va/g7_gf_p11_m2.bin
+HOLD-AFTER 2 s (take the 'after' screenshot now)
+  [guard after close] fwd=65 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=12
+ava_drive: done
+EXIT=0

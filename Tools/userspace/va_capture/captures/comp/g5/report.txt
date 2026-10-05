@@ -1,0 +1,13 @@
+23:04  up 40 secs, 1 user, load averages: 0.27 0.06 0.02
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+   87    0 0x9c1000   0x5000     0x4000     com.ATITechnologiesInc.TVOut (2.7.2d1) <75 74 16 11>
+root       137   0.0 -0.0        0      0  ??  Z    31Dec69   0:00.00 (crashdump)
+-rw-r--r--   1 bushmas  bushmas       0 Oct  4 22:39 /Users/bushmas/rung3/va/g5.out
+-rw-r--r--   1 bushmas  bushmas    7477 Oct  4 22:39 /Users/bushmas/rung3/va/g5.tsv
+-rw-r--r--   1 bushmas  bushmas  200704 Oct  4 22:39 /Users/bushmas/rung3/va/g5.tsv.mem
+-rw-r--r--   1 bushmas  bushmas     188 Oct  4 22:39 /Users/bushmas/rung3/va/g5_pre.kextstat
+-rw-r--r--   1 bushmas  bushmas      82 Oct  4 22:39 /Users/bushmas/rung3/va/g5_pre.ps
+-rw-r--r--   1 bushmas  bushmas      36 Oct  4 22:39 /Users/bushmas/rung3/va/g5_pre.regs
+-rw-r--r--   1 bushmas  bushmas       4 Oct  4 22:39 /Users/bushmas/rung3/va/g5_pre.syslog_lines
+-rw-r--r--   1 bushmas  bushmas     493 Oct  4 22:39 /Users/bushmas/rung3/va/g5_pre.vm
+-rw-r--r--   1 bushmas  bushmas       0 Oct  4 22:38 /Users/bushmas/rung3/va/g5_wrapper.log

@@ -1,0 +1,12 @@
+23:14  up 50 secs, 1 user, load averages: 0.18 0.05 0.01
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+   87    0 0x9c1000   0x5000     0x4000     com.ATITechnologiesInc.TVOut (2.7.2d1) <75 74 16 11>
+-rw-r--r--   1 bushmas  bushmas     239 Oct  4 23:08 /Users/bushmas/rung3/va/g6.out
+-rw-r--r--   1 bushmas  bushmas    8661 Oct  4 23:08 /Users/bushmas/rung3/va/g6.tsv
+-rw-r--r--   1 bushmas  bushmas  297302 Oct  4 23:08 /Users/bushmas/rung3/va/g6.tsv.mem
+-rw-r--r--   1 bushmas  bushmas     188 Oct  4 23:08 /Users/bushmas/rung3/va/g6_pre.kextstat
+-rw-r--r--   1 bushmas  bushmas      82 Oct  4 23:08 /Users/bushmas/rung3/va/g6_pre.ps
+-rw-r--r--   1 bushmas  bushmas      36 Oct  4 23:08 /Users/bushmas/rung3/va/g6_pre.regs
+-rw-r--r--   1 bushmas  bushmas       4 Oct  4 23:08 /Users/bushmas/rung3/va/g6_pre.syslog_lines
+-rw-r--r--   1 bushmas  bushmas     493 Oct  4 23:08 /Users/bushmas/rung3/va/g6_pre.vm
+-rw-r--r--   1 bushmas  bushmas     139 Oct  4 23:08 /Users/bushmas/rung3/va/g6_wrapper.log

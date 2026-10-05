@@ -20,6 +20,10 @@
 #include <string.h>
 #include <dlfcn.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 #include <sys/time.h>
 #include <mach/mach_types.h>
 #include <IOKit/IOKitLib.h>
@@ -35,6 +39,7 @@ static int g_fwd_extra[64]; static int g_nfwd_extra = 0;
 static struct { long fwd, swallow, dvd_opens, dvd_sel18, dvd_remaps; } g_stats;
 
 static struct { unsigned addr, size; } g_img[64]; static int g_nimg = 0;   /* declare_image(8) buffers actually handed to the kernel (user-memory frames the GPU may write: #141) */
+static unsigned g_last_stamp = 0;   /* timestamp of the last FORWARDED type-1 submit (word +0x18 of the new command-buffer mapping = DVD context's this+0x7c, init_command_buffer_header) */
 /* exported for the harness */
 int guard_dump_images(const char *prefix) {
     int i, n = 0; char fn[400]; FILE *fp;
@@ -45,11 +50,22 @@ int guard_nimages(void) { return g_nimg; }
 int guard_dvd_connect(void) { int i; for (i = 0; i < g_nconn; i++) if (g_conn[i].type == 3) return (int)g_conn[i].c; return 0; }
 long guard_stat(int which) { switch (which) { case 0: return g_stats.fwd; case 1: return g_stats.swallow; case 2: return g_stats.dvd_opens; case 3: return g_stats.dvd_sel18; case 4: return g_stats.dvd_remaps; } return -1; }
 
+/* Durable + mirrored log (#141): a kernel panic loses everything the drive had not written. fsync() on Mac OS X does NOT flush the drive cache; fcntl(F_FULLFSYNC) does. In addition GUARD_MIRROR=ip:port sends every
+ * log line as a UDP datagram (g_log is a funopen() stream whose write hook writes the file AND the datagram), so the last line before a panic is on the dev machine even if the disk lost it. */
+static int g_fd = -1, g_sock = -1; static struct sockaddr_in g_mir;
+static void fullsync(int fd) { if (fd < 0) return; if (fcntl(fd, F_FULLFSYNC, 0) != 0) fsync(fd); }
+static int g_wr(void *ck, const char *b, int n) { if (g_fd >= 0) { if (write(g_fd, b, n) < 0) {} } if (g_sock >= 0) sendto(g_sock, b, n, 0, (struct sockaddr *)&g_mir, sizeof g_mir); return n; }
+static void open_log(const char *path) {
+    const char *m = getenv("GUARD_MIRROR");
+    g_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+    if (m && strchr(m, ':')) { char ip[64]; int port = atoi(strchr(m, ':') + 1); size_t l = (size_t)(strchr(m, ':') - m); if (l < sizeof ip) { memcpy(ip, m, l); ip[l] = 0; memset(&g_mir, 0, sizeof g_mir); g_mir.sin_family = AF_INET; g_mir.sin_port = htons((unsigned short)port); if (inet_pton(AF_INET, ip, &g_mir.sin_addr) == 1) g_sock = socket(AF_INET, SOCK_DGRAM, 0); } }
+    g_log = (g_fd >= 0) ? funopen(NULL, NULL, g_wr, NULL, NULL) : NULL;
+}
 static void ensure(void) {
     if (g_log) return;
     const char *p = getenv("GUARD_LOG"); char b[256];
     if (!p) { snprintf(b, sizeof b, "/tmp/iokit_guard.%d.tsv", (int)getpid()); p = b; }
-    g_log = fopen(p, "a"); if (!g_log) g_log = stderr;
+    open_log(p); if (!g_log) g_log = fopen(p, "a"); if (!g_log) g_log = stderr;
     setvbuf(g_log, NULL, _IOLBF, 0); gettimeofday(&g_t0, NULL); g_pid = (int)getpid();
     fprintf(g_log, "# iokit_guard start pid=%d\n", g_pid);
     const char *e = getenv("GUARD_FORWARD");
@@ -94,9 +110,14 @@ static void snapshot(io_connect_t c, const char *why, unsigned seq) {
         fprintf(g_mem, "\n");
     }
 }
+static int fsync_all(void) { static int v = -1; if (v < 0) v = getenv("GUARD_FSYNC_ALL") ? 1 : 0; return v; }
 static void line(const char *fn, io_connect_t c, const char *verdict, int sel, const char *extra, long r) {
     fprintf(g_log, "%ld\t%d\t%ld\t%s\tconnect=0x%x\tctype=%d\tsel=%d\t%s\t%s\t%ld\n", ++g_seq, g_pid, us(), fn, (unsigned)c, conn_type(c), sel, verdict, extra, r);
+    if (fsync_all()) { fflush(g_log); fullsync(g_fd); }
 }
+/* GUARD_FSYNC_ALL=1: write-ahead line (on disk before the kernel sees the call) for EVERY forwarded call, so a panic leaves the exact last call in the log */
+static void wal(const char *fn, io_connect_t c, int sel, const char *extra) { if (fsync_all()) line(fn, c, "ABOUT-TO-CALL(forward)", sel, extra, -1); }
+void guard_mark(const char *m) { ensure(); line("mark", 0, "MARK", -1, m, 0); fflush(g_log); fullsync(g_fd); }   /* exported: progress marks from the harness, durable + mirrored */
 
 static kern_return_t my_open(io_service_t s, task_port_t t, uint32_t type, io_connect_t *c) {
     ensure(); RES(r_open, "IOServiceOpen");
@@ -105,7 +126,8 @@ static kern_return_t my_open(io_service_t s, task_port_t t, uint32_t type, io_co
     char x[64]; snprintf(x, sizeof x, "type=%u out=0x%x", type, c ? (unsigned)*c : 0); line("IOServiceOpen", c ? *c : 0, "FWD", -1, x, r); g_stats.fwd++;
     return r;
 }
-static kern_return_t my_close(io_connect_t c) { ensure(); RES(r_close, "IOServiceClose"); kern_return_t r = r_close(c); line("IOServiceClose", c, "FWD", -1, "-", r); g_stats.fwd++; return r; }
+static int sync_gpu(io_connect_t c, const char *why);
+static kern_return_t my_close(io_connect_t c) { ensure(); RES(r_close, "IOServiceClose"); if (is_dvd(c)) sync_gpu(c, "before DVD close"); wal("IOServiceClose", c, -1, "-"); kern_return_t r = r_close(c); line("IOServiceClose", c, "FWD", -1, "-", r); g_stats.fwd++; return r; }
 static kern_return_t my_addc(io_connect_t c, io_connect_t d) { ensure(); RES(r_addc, "IOConnectAddClient"); kern_return_t r = r_addc(c, d); line("IOConnectAddClient", c, "FWD", -1, "-", r); g_stats.fwd++; return r; }
 
 static kern_return_t my_map(io_connect_t c, uint32_t type, task_port_t t, vm_address_t *a, vm_size_t *sz, IOOptionBits o) {
@@ -119,13 +141,13 @@ static kern_return_t my_map(io_connect_t c, uint32_t type, task_port_t t, vm_add
             snapshot(c, "type1-remap-FORWARDED(write-ahead)", (unsigned)g_seq + 1);
             snprintf(x, sizeof x, "memType=1 old_addr=0x%lx", g_maps[i].addr);
             fprintf(g_log, "%ld\t%d\t%ld\tIOConnectMapMemory\tconnect=0x%x\tctype=3\tsel=-1\tABOUT-TO-CALL(type1 remap FORWARDED)\t%s\t-\n", ++g_seq, g_pid, us(), (unsigned)c, x);
-            fflush(g_log); fsync(fileno(g_log)); if (g_mem) { fflush(g_mem); fsync(fileno(g_mem)); }
+            fflush(g_log); fullsync(g_fd); if (g_mem) { fflush(g_mem); fullsync(fileno(g_mem)); }
             struct timeval ta, tb; gettimeofday(&ta, NULL);
             kern_return_t rr = r_map(c, type, t, a, sz, o);
             gettimeofday(&tb, NULL);
-            if (rr == 0 && a && sz) { g_maps[i].addr = *a; g_maps[i].size = *sz; }
+            if (rr == 0 && a && sz) { g_maps[i].addr = *a; g_maps[i].size = *sz; g_last_stamp = *(volatile unsigned *)(g_maps[i].addr + 0x18); }
             snprintf(x, sizeof x, "memType=1 addr=0x%lx size=0x%lx us=%ld", a ? (unsigned long)*a : 0, sz ? (unsigned long)*sz : 0, (long)((tb.tv_sec - ta.tv_sec) * 1000000L + (tb.tv_usec - ta.tv_usec)));
-            line("IOConnectMapMemory", c, "FWD(type1 remap FORWARDED)", -1, x, rr); fflush(g_log); fsync(fileno(g_log)); g_stats.fwd++; g_stats.dvd_remaps++;
+            line("IOConnectMapMemory", c, "FWD(type1 remap FORWARDED)", -1, x, rr); fflush(g_log); fullsync(g_fd); g_stats.fwd++; g_stats.dvd_remaps++;
             return rr;
         }
         if (i < g_nmaps || !(type == 1 || type == 2 || type == 4 || type == 5)) {
@@ -146,6 +168,22 @@ static void synth_out(int sel, int *out, mach_msg_type_number_t *oc, char *so, m
     if (out && oc) { mach_msg_type_number_t i; for (i = 0; i < *oc; i++) out[i] = 0; if (sel == 20 && *oc >= 1) out[0] = 1; }   /* check_stamps: 1 = complete */
     if (so && soc) memset(so, 0, *soc);
 }
+/* GUARD_SYNC_STAMPS=1 (#141): block until the GPU has retired the last forwarded submit - poll check_stamps (sel 20, scalarI_scalarO {0, stamp} -> out[0]==1 when complete; both calls are proven live on stock) every ms
+ * up to GUARD_SYNC_TIMEOUT_MS (default 5000). Returns 1 if complete (or nothing pending), 0 on timeout. Write-ahead logged: the line is on disk before the first poll. */
+static int sync_gpu(io_connect_t c, const char *why) {
+    char y[160]; long t0, waited = 0, tmo = getenv("GUARD_SYNC_TIMEOUT_MS") ? atol(getenv("GUARD_SYNC_TIMEOUT_MS")) : 5000; int in[2], out[1]; mach_msg_type_number_t oc; kern_return_t r = 0;
+    if (!getenv("GUARD_SYNC_STAMPS") || !g_last_stamp) return 1;
+    RES(r_sisO, "io_connect_method_scalarI_scalarO");
+    snprintf(y, sizeof y, "%s: waiting for stamp 0x%x (timeout %ld ms)", why, g_last_stamp, tmo); line("sync", c, "SYNC-BEGIN", 20, y, 0); fflush(g_log); fullsync(g_fd); t0 = us();
+    for (;;) {
+        in[0] = 0; in[1] = (int)g_last_stamp; out[0] = 0; oc = 1; r = r_sisO(c, 20, in, 2, out, &oc);
+        if (r == 0 && out[0] == 1) break;
+        waited = (us() - t0) / 1000; if (waited >= tmo || r != 0) break; usleep(1000);
+    }
+    snprintf(y, sizeof y, "%s: stamp 0x%x %s after %ld ms (rc=0x%x out=%d)", why, g_last_stamp, (r == 0 && out[0] == 1) ? "COMPLETE" : "NOT COMPLETE", waited, (unsigned)r, out[0]);
+    line("sync", c, (r == 0 && out[0] == 1) ? "SYNC-DONE" : "SYNC-TIMEOUT", 20, y, r); fflush(g_log); fullsync(g_fd);
+    return r == 0 && out[0] == 1;
+}
 static kern_return_t my_sisO(mach_port_t c, int sel, int *in, mach_msg_type_number_t ic, int *out, mach_msg_type_number_t *oc) {
     ensure(); RES(r_sisO, "io_connect_method_scalarI_scalarO"); char x[200]; unsigned i; int n = 0;
     for (i = 0; i < ic && i < 8; i++) n += snprintf(x + n, sizeof x - n, "%08x ", (unsigned)in[i]);
@@ -156,7 +194,7 @@ static kern_return_t my_sisO(mach_port_t c, int sel, int *in, mach_msg_type_numb
         char y[96]; snprintf(y, sizeof y, "%s fake_handle=%p", x, blk); line("scalarI_scalarO", c, "SWALLOW(fake image handle)", sel, y, 0); g_stats.swallow++; return 0;
     }
     if (is_dvd(c) && !fwd_selector(sel)) { synth_out(sel, out, oc, NULL, NULL); line("scalarI_scalarO", c, "SWALLOW", sel, x, 0); g_stats.swallow++; return 0; }
-    kern_return_t r = r_sisO(c, sel, in, ic, out, oc); line("scalarI_scalarO", c, "FWD", sel, x, r); g_stats.fwd++;
+    wal("scalarI_scalarO", c, sel, x); kern_return_t r = r_sisO(c, sel, in, ic, out, oc); line("scalarI_scalarO", c, "FWD", sel, x, r); g_stats.fwd++;
     if (is_dvd(c) && sel == 8 && r == 0 && ic >= 3 && g_nimg < 64) { g_img[g_nimg].addr = (unsigned)in[1]; g_img[g_nimg].size = (unsigned)in[2]; g_nimg++; }
     return r;
 }
@@ -164,13 +202,20 @@ static kern_return_t my_sisti(mach_port_t c, int sel, int *in, mach_msg_type_num
     ensure(); RES(r_sisti, "io_connect_method_scalarI_structureI"); char x[200]; unsigned i; int n = 0;
     for (i = 0; i < ic && i < 8; i++) n += snprintf(x + n, sizeof x - n, "%08x ", (unsigned)in[i]);
     if (is_dvd(c) && !fwd_selector(sel)) { line("scalarI_structureI", c, "SWALLOW", sel, x, 0); g_stats.swallow++; return 0; }
-    kern_return_t r = r_sisti(c, sel, in, ic, s, sc); line("scalarI_structureI", c, "FWD", sel, x, r); g_stats.fwd++; return r;
+    if (is_dvd(c) && sel == 9 && getenv("GUARD_DELAY_DELETE_MS")) {
+        /* #141: GetFrame submits a GPU pass writing into a freshly declared image, calls wait_for_stamps(0,0) (a no-op) and deletes the image at once; the g2 run panicked with a DART out-of-bounds GPU write.
+         * Hypothesis: the image's GART mapping is torn down while the GPU is still writing. This knob waits before forwarding delete_image so the pass can finish. Write-ahead logged. */
+        long ms = atol(getenv("GUARD_DELAY_DELETE_MS")); char y[120]; snprintf(y, sizeof y, "%s delay %ld ms before forwarding", x, ms);
+        line("scalarI_structureI", c, "DELAY(delete_image)", sel, y, 0); fflush(g_log); fullsync(g_fd); usleep((useconds_t)(ms * 1000));
+    }
+    if (is_dvd(c) && sel == 9 && !sync_gpu(c, "before delete_image")) { line("scalarI_structureI", c, "SWALLOW(delete_image: GPU job not retired)", sel, x, 0); g_stats.swallow++; return 0; }
+    wal("scalarI_structureI", c, sel, x); kern_return_t r = r_sisti(c, sel, in, ic, s, sc); line("scalarI_structureI", c, "FWD", sel, x, r); g_stats.fwd++; return r;
 }
 static kern_return_t my_sisto(mach_port_t c, int sel, int *in, mach_msg_type_number_t ic, char *o, mach_msg_type_number_t *oc) {
     ensure(); RES(r_sisto, "io_connect_method_scalarI_structureO"); char x[200]; unsigned i; int n = 0;
     for (i = 0; i < ic && i < 8; i++) n += snprintf(x + n, sizeof x - n, "%08x ", (unsigned)in[i]);
     if (is_dvd(c) && !fwd_selector(sel)) { synth_out(sel, NULL, NULL, o, oc); line("scalarI_structureO", c, "SWALLOW", sel, x, 0); g_stats.swallow++; return 0; }
-    kern_return_t r = r_sisto(c, sel, in, ic, o, oc); line("scalarI_structureO", c, "FWD", sel, x, r); g_stats.fwd++; return r;
+    wal("scalarI_structureO", c, sel, x); kern_return_t r = r_sisto(c, sel, in, ic, o, oc); line("scalarI_structureO", c, "FWD", sel, x, r); g_stats.fwd++; return r;
 }
 static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_number_t ic, char *out, mach_msg_type_number_t *oc) {
     ensure(); RES(r_stto, "io_connect_method_structureI_structureO");
@@ -199,15 +244,15 @@ static kern_return_t my_stto(mach_port_t c, int sel, char *in, mach_msg_type_num
         /* RUNG 3: a real doIDCT. Write-ahead: the parameter block and the snapshot are on disk (fsync) BEFORE the kernel sees the call (issue #87 criterion 2). */
         fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tABOUT-TO-CALL(doIDCT FORWARDED)\tin=%u\tparams=", ++g_seq, g_pid, us(), (unsigned)c, ic);
         hexs(g_log, in, ic); fprintf(g_log, "\t-\n"); snapshot(c, "doIDCT-forwarded", (unsigned)g_seq);
-        fflush(g_log); fsync(fileno(g_log)); if (g_mem) { fflush(g_mem); fsync(fileno(g_mem)); }
+        fflush(g_log); fullsync(g_fd); if (g_mem) { fflush(g_mem); fullsync(fileno(g_mem)); }
         struct timeval ta, tb; gettimeofday(&ta, NULL);
         kern_return_t r18 = r_stto(c, sel, in, ic, out, oc);
         gettimeofday(&tb, NULL); long dt = (tb.tv_sec - ta.tv_sec) * 1000000L + (tb.tv_usec - ta.tv_usec);
         fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tctype=3\tsel=18\tRESULT(doIDCT FORWARDED)\trc=0x%08x\tkernel_call_us=%ld\tout=%u\n", ++g_seq, g_pid, us(), (unsigned)c, (unsigned)r18, dt, oc ? *oc : 0);
-        fflush(g_log); fsync(fileno(g_log)); g_stats.fwd++; g_stats.dvd_sel18++; return r18;
+        fflush(g_log); fullsync(g_fd); g_stats.fwd++; g_stats.dvd_sel18++; return r18;
     }
     if (is_dvd(c) && !fwd_selector(sel)) { if (out && oc) memset(out, 0, *oc); line("structureI_structureO", c, "SWALLOW", sel, "-", 0); g_stats.swallow++; return 0; }
-    kern_return_t r = r_stto(c, sel, in, ic, out, oc); line("structureI_structureO", c, "FWD", sel, "-", r); g_stats.fwd++; return r;
+    wal("structureI_structureO", c, sel, "-"); kern_return_t r = r_stto(c, sel, in, ic, out, oc); line("structureI_structureO", c, "FWD", sel, "-", r); g_stats.fwd++; return r;
 }
 
 typedef struct { void *replacement; void *replacee; } interpose_t;
