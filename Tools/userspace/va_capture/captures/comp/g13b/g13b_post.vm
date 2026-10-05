@@ -1,0 +1,12 @@
+Mach Virtual Memory Statistics: (page size of 4096 bytes)
+Pages free:                  4016074.
+Pages active:                  24434.
+Pages inactive:                41341.
+Pages wired down:             112455.
+"Translation faults":         334098.
+Pages copy-on-write:           24411.
+Pages zero filled:            103589.
+Pages reactivated:                 0.
+Pageins:                       18501.
+Pageouts:                          0.
+Object cache: 7105 hits of 11717 lookups (60% hit rate)
