@@ -1,0 +1,15 @@
+23:29  up 2 mins, 4 users, load averages: 0.37 0.17 0.07
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+   87    0 0x9c1000   0x5000     0x4000     com.ATITechnologiesInc.TVOut (2.7.2d1) <75 74 16 11>
+bushmas    431   0.0 -0.8   183268  16132  p3  U+   11:29PM   0:00.96 ./ava_drive --pictures 0,13 --hold-after 2 --getframe 2
+root       134   0.0 -0.0        0      0  ??  Z    31Dec69   0:00.00 (crashdump)
+-rw-r--r--   1 bushmas  bushmas    1710 Oct  4 23:29 /Users/bushmas/rung3/va/g10.out
+-rw-r--r--   1 bushmas  bushmas   11608 Oct  4 23:29 /Users/bushmas/rung3/va/g10.tsv
+-rw-r--r--   1 bushmas  bushmas  462493 Oct  4 23:29 /Users/bushmas/rung3/va/g10.tsv.mem
+-rw-r--r--   1 bushmas  bushmas    6144 Oct  4 23:29 /Users/bushmas/rung3/va/g10_gf_p0_m2.bin
+-rw-r--r--   1 bushmas  bushmas     188 Oct  4 23:29 /Users/bushmas/rung3/va/g10_pre.kextstat
+-rw-r--r--   1 bushmas  bushmas      82 Oct  4 23:29 /Users/bushmas/rung3/va/g10_pre.ps
+-rw-r--r--   1 bushmas  bushmas      36 Oct  4 23:29 /Users/bushmas/rung3/va/g10_pre.regs
+-rw-r--r--   1 bushmas  bushmas       4 Oct  4 23:29 /Users/bushmas/rung3/va/g10_pre.syslog_lines
+-rw-r--r--   1 bushmas  bushmas     494 Oct  4 23:29 /Users/bushmas/rung3/va/g10_pre.vm
+-rw-r--r--   1 bushmas  bushmas     141 Oct  4 23:29 /Users/bushmas/rung3/va/g10_wrapper.log

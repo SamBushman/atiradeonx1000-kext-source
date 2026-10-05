@@ -1,0 +1,36 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=39447 -> wid=110 rc=0
+CGSAddSurface -> sid=277653856 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809400 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=37 swallow=0 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+picture 0 'I0 frame, zigzag': type 1 alt 0 dst 0 fwd 0, 11 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=38 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+  GetFrame(dev, frame 0, buf 0x1308000, rowbytes 128, mode 2) ...
+  GetFrame rc=0: 6144 bytes changed from the 0xAA fill (first 0x0, last 0x17ff)
+  row 0: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 1: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 2: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 3: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 4: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 5: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  dumped /Users/bushmas/rung3/va/g9_gf_p0_m2.bin
+picture 12 'P1 frame, intra MBs only (stream 0 only, P picture type)': type 2 alt 0 dst 2 fwd 0, 3 coefficient dwords
+  decode returned (repeat 0)
+  [guard after decode] fwd=46 swallow=2 dvd_opens=1 doIDCT(sel18)=2 remaps=11
+  GetFrame(dev, frame 2, buf 0x1308000, rowbytes 128, mode 2) ...
+  GetFrame rc=0: 6144 bytes changed from the 0xAA fill (first 0x0, last 0x17ff)
+  row 0: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 1: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 2: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 3: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 4: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  row 5: 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 ff 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  dumped /Users/bushmas/rung3/va/g9_gf_p12_m2.bin
+HOLD-AFTER 2 s (take the 'after' screenshot now)
+  [guard after close] fwd=73 swallow=2 dvd_opens=1 doIDCT(sel18)=2 remaps=17
+ava_drive: done
+EXIT=0
