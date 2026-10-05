@@ -353,3 +353,27 @@ A real capture (`g21`) showed the kernel stuck retrying **stamp `0xf33`** specif
 Either answer is a real step toward "solving" rather than just "characterizing" the stall - this section exists so the next session (or the next hour of this one) picks up exactly here instead of re-deriving the stamp mechanism from scratch.
 
 Related: #93, #140, #86, #122.
+## 9w. The completion stamp genuinely never posts - confirmed, not a kernel-side bug (2026-10-05, run g24)
+
+9v built the tool; this is the capture. Loaded GAProbe fresh after a clean reboot, ran the exact hang scenario (`g24`, `GUARD_SYNC_STAMPS=1`, `--pictures 0,2 --getframe 2`), and caught it mid-hang (tick t=308, ~77s in):
+
+```
+RBBM_STATUS=0x90010140 GA_IDLE=0x07ffffff VAP_CNTL_STATUS=0x00080102 CP_RB_RPTR=0x300 CP_RB_WPTR=0x300
+LIVE_STAMP=0x105e CACHED_0x54=0x105e
+```
+
+`g24.tsv` (the write-ahead log) shows the kernel's own target at that exact moment: it completed stamp `0x105e` normally, then went on to submit at least one more operation (target advanced to `0x1062`), then got stuck repeatedly retrying **stamp `0x1063`** - never completing, across many 5 s timeouts spanning the whole capture window.
+
+**`LIVE_STAMP` (`0x105e`) is not just behind the target - it is *exactly* the last stamp that ever successfully completed.** The completion counter has not advanced by even one, despite the ring having been fed at least two further submissions (`CP_RB_WPTR` moved from `0xb8` at idle baseline up to `0x300`) that CP evidently fetched and drained (`RPTR == WPTR`). GA and VAP both report zero busy bits throughout.
+
+**This settles the question 9v posed.** It is not a kernel-side read bug (stale cache, wrong address, a sign error in the comparison) - the live value really is frozen at the old stamp, confirmed by reading the identical memory location the kernel itself polls, through the same object, at the same moment. The GPU's own completion-fence mechanism for this specific submission never fires. Combined with CP/VAP/GA all appearing to have finished their own visible work, this points at the **specific hand-off that's supposed to post the fence** - almost certainly the color-buffer destination-cache flush-completion signal (`RB3D_DSTCACHE_CTLSTAT`, the one register this exact composite record writes with a fixed value of `10` = `DC_FLUSH=2, DC_FREE=2` - section 9o/9t found this value identical in *every* composite record, passing or failing, so the write itself isn't the differentiator; whether the *hardware's own internal cache-flush-complete detection* reliably fires for this surface/format is not something readable with the registers identified so far) rather than anything CP/VAP/GA's own documented busy bits track.
+
+**What this does and doesn't establish:**
+- Established: a real, hardware-visible non-completion, not a software artifact. The project's own submitted-data audit (9o-9r) already ruled out malformed input: the defect is in how the GPU signals "done," not in what it was asked to do.
+- Not established: the exact mechanism inside the color-buffer cache / fence path that fails specifically for this draw and not for an intra-only one. Narrowing further would need either a cache-controller-specific status register not yet identified in the archive, or the earlier-proposed live variable (a forward MB referencing a fully-composited reference frame) to see if it changes whether the fence posts - both are real next steps, not dead ends, but neither was attempted this pass.
+
+**Practical path forward, given this.** This now looks like a genuine silicon/firmware erratum in the X1900's completion-fence signaling for this one draw shape, not a bug in anything this project's own code submits - section 9r already showed the generated stream is clean, and this section shows the hardware's own side of the handshake (not the data) is where it breaks down. For the rebuilt driver's actual purpose (a working decode path), the pragmatic fix is very unlikely to be "patch the fence logic" (that's Apple/ATI's closed firmware behavior, reproduced faithfully) - it's a **software workaround**: don't route forward-predicted (P/B) macroblocks through this hardware motion-compensation fast path at all. Composite them in software (CPU-side, using the real, working hardware IDCT output for the intra/residual blocks - sections 9d-9l show that part is solid) instead of relying on the point-sprite hardware path that this section shows never reliably signals completion. That sidesteps the erratum entirely rather than chasing a fix for a vendor firmware behavior this project can't patch.
+
+Related: #93, #140, #86, #122.
+
+**The full tick sequence makes this even sharper** (`gaprobe_system_log.txt` in this run's capture dir): at t=308 (~77 s in) `RBBM_STATUS` is stuck (`0x90010140`), `LIVE_STAMP=0x105e`. At t=435 (~108 s in, 31 s later), **`RBBM_STATUS` has already self-cleared back to the idle value (`0x10000140`) - but `LIVE_STAMP` is still exactly `0x105e`, unchanged.** This decouples the two signals outright: whatever makes the `RBBM_STATUS` busy bit self-clear (the same self-clearing behavior sections 9r/9s already puzzled over) does **not** touch the actual missing completion - the client is still waiting on a stamp that will never come, with or without that bit set. `RBBM_STATUS` is not a reliable proxy for "did this operation finish" at all for this failure mode; only the stamp memory itself is.

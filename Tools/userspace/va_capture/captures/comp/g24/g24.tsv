@@ -1,0 +1,116 @@
+# iokit_guard start pid=375
+1	375	6379	IOServiceOpen	connect=0x230b	ctype=2	sel=-1	FWD	type=2 out=0x230b	0
+2	375	6478	scalarI_scalarO	connect=0x230b	ctype=2	sel=1	FWD		0
+3	375	6552	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=1 addr=0x13000 size=0x1000	0
+4	375	6645	IOConnectMapMemory	connect=0x230b	ctype=2	sel=-1	FWD	memType=0 addr=0x14000 size=0x1000	0
+5	375	6695	scalarI_structureO	connect=0x230b	ctype=2	sel=0	FWD	00000000 00000000 	0
+6	375	7754	IOServiceOpen	connect=0x2403	ctype=3	sel=-1	FWD	type=3 out=0x2403	0
+7	375	7794	scalarI_scalarO	connect=0x2403	ctype=3	sel=1	FWD		0
+8	375	7851	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=1 addr=0x520000 size=0x80000	0
+9	375	8169	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=4 addr=0x705000 size=0x80000	0
+10	375	8209	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=5 addr=0x1008000 size=0x80000	0
+11	375	8247	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD	memType=2 addr=0x15000 size=0x1000	0
+12	375	8733	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10460bc0 00004000 00000001 	0
+13	375	8989	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00027c00 	0
+14	375	9023	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10460bc0 00004000 00000001 	0
+15	375	9179	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 000e0000 00007800 	0
+16	375	20233	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+17	375	314506	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=806	0
+18	375	380316	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 000ea000 00004800 	0
+19	375	392004	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+20	375	506019	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1108000 size=0x80000 us=728	0
+21	375	572587	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0280ca00 00003000 	0
+22	375	572639	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02811c00 00003000 	0
+23	375	572675	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02814e00 00003000 	0
+24	375	572710	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02818000 00003000 	0
+25	375	572746	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 0281b200 00003000 	0
+26	375	577439	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00290000 00016800 	0
+27	375	577512	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002b9000 00016800 	0
+28	375	577548	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 002e2000 00016800 	0
+29	375	577583	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005ae000 00016800 	0
+30	375	577728	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 005d7000 00016800 	0
+31	375	577765	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 00785000 00016800 	0
+32	375	577800	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007ae000 00016800 	0
+33	375	577835	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 007d7000 00016800 	0
+34	375	577873	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 02807600 00000800 	0
+35	375	589627	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1108000	-
+36	375	697559	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1188000 size=0x80000 us=671	0
+37	375	763410	scalarI_scalarO	connect=0x2403	ctype=3	sel=21	FWD	00000000 00000040 00000030 00000000 00037c00 	0
+38	375	763472	scalarI_structureI	connect=0x2403	ctype=3	sel=0	FWD	10460bc0 00004000 00000001 	0
+39	375	774135	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1188000	-
+40	375	906071	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1208000 size=0x80000 us=872	0
+41	375	1014797	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1208000	-
+42	375	1130451	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=577	0
+43	375	1217681	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: calling DVDDriverDecodeImpl	0
+44	375	1279944	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=0000000000000000000000000000000000000013000100a00000000041544956414472690030004000000000000000000000000000000000	-
+45	375	1397075	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0x00000000	kernel_call_us=551	out=0
+46	375	1474400	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=4 addr=0x705000 size=0x80000	0
+47	375	1474423	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: DVDDriverDecodeImpl returned	0
+48	375	1521400	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer allocated	0
+49	375	1593817	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer filled	0
+50	375	2646285	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: settle sleep done, calling DVDDriverGetFrameImpl	0
+51	375	2695825	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01288000 00001800 	0
+52	375	2707092	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+53	375	2837462	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=78	0
+54	375	2915682	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+55	375	3037331	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1108000 size=0x80000 us=67	0
+56	375	3112165	scalarI_structureI	connect=0x2403	ctype=3	sel=19	FWD	00000000 0000105d 	0
+57	375	3123436	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1108000	-
+58	375	3237416	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1188000 size=0x80000 us=55	0
+59	375	3312047	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x105e (timeout 5000 ms)	0
+60	375	3370354	sync	connect=0x2403	ctype=3	sel=20	SYNC-DONE	before delete_image: stamp 0x105e COMPLETE after 0 ms (rc=0x0 out=1)	0
+61	375	3429091	scalarI_structureI	connect=0x2403	ctype=3	sel=9	FWD	00000010 	0
+62	375	3429165	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: DVDDriverGetFrameImpl returned	0
+63	375	3581965	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: calling DVDDriverDecodeImpl	0
+64	375	3637286	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=0000000000000000000000020000000000000003000100a000000000000000000000000100300040000b2658000d655c00000080006120fc	-
+65	375	3770241	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0x00000000	kernel_call_us=26	out=0
+66	375	3848154	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=4 addr=0x705000 size=0x80000	0
+67	375	3848176	structureI_structureO	connect=0x2403	ctype=3	sel=18	ABOUT-TO-CALL(doIDCT FORWARDED)	in=56	params=0000000000000000000000020000000100000003000100800000800000080000007050000030004000000000000d655c00000080006120fc	-
+68	375	3971589	structureI_structureO	connect=0x2403	ctype=3	sel=18	RESULT(doIDCT FORWARDED)	rc=0x00000000	kernel_call_us=621	out=0
+69	375	4048135	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	SWALLOW(remap)	memType=5 addr=0x1008000 size=0x80000	0
+70	375	4058980	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1188000	-
+71	375	4170159	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1208000 size=0x80000 us=133	0
+72	375	4236558	mark	connect=0x0	ctype=-1	sel=-1	MARK	decode: DVDDriverDecodeImpl returned	0
+73	375	4294918	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer allocated	0
+74	375	4367614	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: buffer filled	0
+75	375	5419915	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: settle sleep done, calling DVDDriverGetFrameImpl	0
+76	375	5469397	scalarI_scalarO	connect=0x2403	ctype=3	sel=8	FWD	00000000 01288000 00001800 	0
+77	375	5480698	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1208000	-
+78	375	5586042	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x520000 size=0x80000 us=66	0
+79	375	5672534	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x520000	-
+80	375	5794202	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1088000 size=0x80000 us=54	0
+81	375	11246355	scalarI_structureI	connect=0x2403	ctype=3	sel=19	FWD	00000000 00001061 	0
+82	375	11257801	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1088000	-
+83	375	11366716	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1108000 size=0x80000 us=62	0
+84	375	11432803	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1062 (timeout 5000 ms)	0
+85	375	16482806	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1062 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+86	375	16530196	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	00000010 	0
+87	375	16530236	mark	connect=0x0	ctype=-1	sel=-1	MARK	getframe: DVDDriverGetFrameImpl returned	0
+88	375	18670119	IOServiceClose	connect=0x230b	ctype=2	sel=-1	FWD	-	0
+89	375	18681582	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	ABOUT-TO-CALL(type1 remap FORWARDED)	memType=1 old_addr=0x1108000	-
+90	375	18804273	IOConnectMapMemory	connect=0x2403	ctype=3	sel=-1	FWD(type1 remap FORWARDED)	memType=1 addr=0x1288000 size=0x80000 us=173	0
+91	375	18870641	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+92	375	23929359	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+93	375	23984751	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	0000000f 	0
+94	375	23984851	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+95	375	29051811	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+96	375	29082394	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	00000007 	0
+97	375	29082442	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+98	375	34148742	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+99	375	34196266	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	00000008 	0
+100	375	34196329	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+101	375	39271344	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+102	375	39318675	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	00000009 	0
+103	375	39318720	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+104	375	44385423	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+105	375	44440748	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	0000000a 	0
+106	375	44440802	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+107	375	49500038	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+108	375	49546584	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	0000000b 	0
+109	375	49546637	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+110	375	54613707	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+111	375	54660665	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	0000000c 	0
+112	375	54660708	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
+113	375	59744201	sync	connect=0x2403	ctype=3	sel=20	SYNC-TIMEOUT	before delete_image: stamp 0x1063 NOT COMPLETE after 5000 ms (rc=0x0 out=0)	0
+114	375	59791142	scalarI_structureI	connect=0x2403	ctype=3	sel=9	SWALLOW(delete_image: GPU job not retired)	0000000d 	0
+115	375	59791192	sync	connect=0x2403	ctype=3	sel=20	SYNC-BEGIN	before delete_image: waiting for stamp 0x1063 (timeout 5000 ms)	0
