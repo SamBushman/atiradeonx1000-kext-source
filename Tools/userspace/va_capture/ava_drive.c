@@ -128,11 +128,18 @@ int main(int argc, char **argv) {
     if (writebuf_sel >= 0) {   /* #92: real write_buffer (sel 6) - only takes the real DMA path (vs. the documented no-op) if --lock-buffers already gave the target slot a backing record */
         int conn = guard_dvd_connect ? guard_dvd_connect() : 0; kern_return_t kr;
         static unsigned char wbuf[0x10000]; int in[7]; mach_msg_type_number_t oc = 0;
+        unsigned rin, rout; mach_msg_type_number_t rsz; UInt32 rptr0 = 0xffffffff, wptr0 = 0xffffffff, rptr1 = 0xffffffff, wptr1 = 0xffffffff;
         memset(wbuf, 0x55, sizeof wbuf);
         in[0] = 0; in[1] = 0; in[2] = 4; in[3] = 4; in[4] = writebuf_sel; in[5] = (int)wbuf; in[6] = 64;
-        printf("write_buffer: connect=0x%x bufferSelect=%d (forwarded only if GUARD_FORWARD includes 6)\n", conn, writebuf_sel); fflush(stdout);
+        /* bracket the call tightly with CP_RB_RPTR/WPTR (0x710/0x714) reads - a real GPU blit dispatch (vtable +0x5ec) submits to this ring; the documented no-op exit never touches it */
+        rin = 0x710; rsz = sizeof rout; io_connect_method_structureI_structureO(conn, 13, (char *)&rin, sizeof rin, (char *)&rout, &rsz); rptr0 = rout;
+        rin = 0x714; rsz = sizeof rout; io_connect_method_structureI_structureO(conn, 13, (char *)&rin, sizeof rin, (char *)&rout, &rsz); wptr0 = rout;
+        printf("write_buffer: connect=0x%x bufferSelect=%d (forwarded only if GUARD_FORWARD includes 6); CP_RB_RPTR=0x%08x CP_RB_WPTR=0x%08x (before)\n", conn, writebuf_sel, rptr0, wptr0); fflush(stdout);
         kr = io_connect_method_structureI_structureO(conn, 6, (char *)in, sizeof in, NULL, &oc);
-        printf("write_buffer -> rc=0x%08x (0xe00002cc=slot not usable; 0 is ambiguous: real DMA or the documented no-op when the backing record is 0 - compare register snapshots around this call)\n", (unsigned)kr);
+        rin = 0x710; rsz = sizeof rout; io_connect_method_structureI_structureO(conn, 13, (char *)&rin, sizeof rin, (char *)&rout, &rsz); rptr1 = rout;
+        rin = 0x714; rsz = sizeof rout; io_connect_method_structureI_structureO(conn, 13, (char *)&rin, sizeof rin, (char *)&rout, &rsz); wptr1 = rout;
+        printf("write_buffer -> rc=0x%08x; CP_RB_RPTR=0x%08x CP_RB_WPTR=0x%08x (after) - %s\n", (unsigned)kr, rptr1, wptr1,
+               (rptr1 != rptr0 || wptr1 != wptr0) ? "RING MOVED: real GPU submission happened" : "ring unchanged: consistent with the documented no-op (no backing record / no real DMA)");
         fflush(stdout);
     }
     if (skipdecode) { if (hold_before) { printf("HOLD-BEFORE %d s (open-only: DVD context is open, XDCT engine started)\n", hold_before); fflush(stdout); sleep(hold_before); } printf("--open-only: stop after open\n"); goto out; }
