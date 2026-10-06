@@ -6,18 +6,22 @@
  * 0x12, #142) never posts a completion stamp on stock hardware - the project's own standing decision is to preserve that hang faithfully, not route a
  * benchmark through it, and #44's banner explicitly excludes P/B throughput as permanently unmeasurable, not a gap. Do not add a P/B-composite path here.
  *
- * Safety: every call sequence below (set_surface bind, two setup_buffers calls, lock_all_buffers, map memType 4, doIDCT with planeSelector 0, a real
- * macroblock stream) is the exact sequence #93/#140/#141's live investigation (Tests/idct_engine_findings.md sections 9b-9l) and Tests/destructive/
- * t3_dvd_lock_buffers.c already ran repeatedly, many times per boot session, with zero incidents. The one real G5 crash hazard in this area (#145) needs a
- * SECOND kext loaded/unloaded concurrently while a DVD connection like this one is held open - this program never loads a kext, so it does not touch that
- * hazard. planeSelector is NEVER anything but 0 here (2 is the confirmed #98 lock-leak bug; 1 is stream-1/motion, out of this benchmark's intra-only scope).
+ * Safety / destination choice: this deliberately does NOT call setup_buffers/lock_all_buffers to get a "real" VRAM slot. Section 10 of
+ * idct_engine_findings.md (the #92/#145 session) found that path gated on surface+0xbf8's 0x20000000 bit, which starts set on every fresh surface and
+ * was never reliably cleared by anything this project's own client code can call - chasing it cost THREE G5 crashes (#145, still open/unresolved) and
+ * produced all-zero slot descriptors most of the time even without a crash. Sections 9e-9l's entire successful, repeated, crash-free investigation
+ * (dozens of real doIDCT submissions) used destPlaneIndex = -10 instead, which lands on the surface's OWN built-in slot-0 record (surface+0xa8) -
+ * always present after basic surface creation, no allocator gate, no setup_buffers/lock_all_buffers involved at all. This file does the same and never
+ * calls setup_buffers/lock_all_buffers. The one real G5 crash hazard in this general area (#145) needs a SECOND kext loaded/unloaded concurrently while
+ * a DVD connection like this one is held open - this program never loads a kext, so it does not touch that hazard either way. planeSelector is NEVER
+ * anything but 0 here (2 is the confirmed #98 lock-leak bug; 1 is stream-1/motion, out of this benchmark's intra-only scope).
  *
  * Macroblock stream format (Tests/idct_engine_findings.md sections 5-7, derived + hardware-confirmed, not guessed):
  *   stream buffer (memType 4): 0x20-byte header (+0x10 = capacity in dwords, +0x18 = a client tag), data from +0x20.
  *   per macroblock (only emitted if at least one block is coded): dword0 = CBP<<6 (Y0=bit11..Cr=bit6; this file always codes Y0 only, CBP=0x20<<6=0x800),
  *   dword1 = (mbRow<<20)|(mbCol<<4), then one coefficient dword per coded block: level<<16 | run<<1 | last (DC-only Y0: run=0, last=1).
- *   doIDCT params (0x38 bytes, client-filled subset): +0x00 fieldPictureFlag=0, +0x04 bottomFieldFlag=0, +0x08 destPlaneIndex=0 (real slot 10 from
- *   lock_all_buffers, not the slot-0 CPU-readback trick section 9e used - this benchmark only times submission, it never reads pixels back), +0x0c
+ *   doIDCT params (0x38 bytes, client-filled subset): +0x00 fieldPictureFlag=0, +0x04 bottomFieldFlag=0, +0x08 destPlaneIndex=-10 (surface's own
+ *   slot-0 record, section 9e's proven CPU-independent destination - this benchmark only times submission, it never reads pixels back), +0x0c
  *   planeSelector=0, +0x10 dmaDwordCount (2 + codedBlocks per MB, no padding, summed over all MBs in the submission), +0x14 engineFlagWord=0x100a0
  *   (0x10080 | plane0 0x20, matching section 9d's live-confirmed 0x1fbc value exactly), +0x18 planeModeWord=0 (stream 0), +0x24 dimensionsHeightWidth
  *   = (48<<16)|64 for this test's fixed 64x48 picture.
@@ -80,7 +84,6 @@ int main(int argc, char **argv) {
     kern_return_t r; IOByteCount osz;
     vm_address_t streamAddr = 0; vm_size_t streamSize = 0;
     unsigned char region[20];
-    UInt32 lockOut[64];
     int sizes[3] = { 1, 4, 12 }, nSizes = 0, s;
 
     mach_timebase_info(&tb); ticks_to_us = (double)tb.numer / tb.denom / 1000.0;
@@ -103,18 +106,12 @@ int main(int argc, char **argv) {
     r = IOConnectMethodScalarIStructureI(surf, 9, 2, sizeof region, 0, 1, region);
     if (r != 0) { printf("Surface set_shape failed: 0x%08x\n", (unsigned)r); IOServiceClose(surf); return 1; }
 
-    /* DVD bind + the exact proven setup_buffers/lock_all_buffers sequence (Tests/destructive/t3_dvd_lock_buffers.c, idct_engine_findings.md 9b/9d). */
+    /* DVD bind only - deliberately no setup_buffers/lock_all_buffers, see the header comment. set_surface's bind is what starts the XDCT ring
+     * (ATIR500DVDContext::start -> start_xdct_engine) and gives this connection a boundSurface, both of which doIDCT itself requires. */
     r = open_user_client(svc, CLIENT_TYPE_DVD, &dvd);
     if (r != 0) { printf("open DVD connection failed: 0x%08x\n", (unsigned)r); IOServiceClose(surf); return 1; }
     r = IOConnectMethodScalarIStructureI(dvd, 0, 3, 0, 1, 0, 0, NULL);
     if (r != 0) { printf("DVD set_surface bind failed: 0x%08x\n", (unsigned)r); goto cleanup; }
-    r = IOConnectMethodScalarIScalarO(dvd, 21, 5, 0, 0, 64, 48, 0, 0x27c00);
-    if (r == 0) r = IOConnectMethodScalarIScalarO(dvd, 21, 5, 0, 0, 64, 48, 0, 0x37c00);
-    if (r != 0) { printf("DVD setup_buffers failed: 0x%08x\n", (unsigned)r); goto cleanup; }
-    osz = sizeof lockOut; memset(lockOut, 0, sizeof lockOut);
-    r = IOConnectMethodScalarIStructureO(dvd, 4, 1, &osz, 0, lockOut);
-    if (r != 0) { printf("DVD lock_all_buffers failed: 0x%08x\n", (unsigned)r); goto cleanup; }
-    printf("lock_all_buffers OK: slot 10 address=0x%x pitch=0x%x\n", (unsigned)lockOut[0], (unsigned)lockOut[1]);
 
     r = IOConnectMapMemory(dvd, 4, mach_task_self(), &streamAddr, &streamSize, kIOMapAnywhere);
     if (r != 0) { printf("map stream-0 buffer (memType 4) failed: 0x%08x\n", (unsigned)r); goto cleanup; }
@@ -126,7 +123,7 @@ int main(int argc, char **argv) {
 
         dmaDwords = build_intra_stream((UInt32 *)streamAddr, mbCount);
         memset(in, 0, sizeof in);
-        in[2] = 0;                 /* destPlaneIndex: real slot 10 */
+        in[2] = (UInt32)-10;       /* destPlaneIndex: surface's own slot-0 record (section 9e), not a lock_all_buffers-allocated slot */
         in[3] = 0;                 /* planeSelector: stream 0 (intra), never anything else in this file */
         in[4] = dmaDwords;         /* dmaDwordCount */
         in[5] = 0x100a0;           /* engineFlagWord: 0x10080 | plane0 0x20, live-confirmed section 9d */
@@ -141,7 +138,7 @@ int main(int argc, char **argv) {
             r = IOConnectMethodStructureIStructureO(dvd, 18, sizeof in, &osz, in, out);
             t1 = now_us();
             samp[i] = t1 - t0;
-            if (r != 0) { liveBad++; }
+            if (r != 0) { if (!liveBad) printf("doIDCT (%d MB) first unexpected code: 0x%08x\n", mbCount, (unsigned)r); liveBad++; }
         }
         if (liveBad) {
             printf("doIDCT (%d MB) returned an unexpected code %d of %d times - stopping the escalation here, not trying a larger size\n", mbCount, liveBad, N);
@@ -159,7 +156,6 @@ int main(int argc, char **argv) {
 
 cleanup:
     if (streamAddr) IOConnectUnmapMemory(dvd, 4, mach_task_self(), streamAddr);
-    { UInt32 tag; int sr = IOConnectMethodScalarIScalarO(dvd, 5, 1, 1, 0, (int *)&tag); (void)sr; } /* DVD unlock_memory(0), best-effort cleanup */
     IOConnectMethodScalarIStructureI(dvd, 0, 3, 0, 0, 0, 0, NULL); /* detach */
     if (dvd != IO_OBJECT_NULL) IOServiceClose(dvd);
     if (surf != IO_OBJECT_NULL) IOServiceClose(surf);
