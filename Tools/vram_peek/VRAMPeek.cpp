@@ -21,7 +21,9 @@
 #define TARGET_ADDR 0  /* must be overridden at build time: -DTARGET_ADDR=0x... */
 #endif
 #ifndef TARGET_LEN
-#define TARGET_LEN 0x3000  /* 3 rows at pitch 0xc00, covers the 4x4 write_buffer blit's first 3 of 4 rows */
+#define TARGET_LEN 0x100  /* kept small deliberately: a first full-size (0x3000) dump showed only its LAST ~20 lines survived in system.log - the
+                            * kernel's own IOLog message buffer drops earlier lines under a burst this large. Row 0 of the blit (the only one that
+                            * matters for a first check) is within the first 16 bytes; 0x100 is a safety margin, not a guess at the real row size. */
 #endif
 
 extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data);
