@@ -80,12 +80,13 @@ static void stats(const char *when) { if (guard_stat) printf("  [guard %s] fwd=%
 int main(int argc, char **argv) {
     int i, rc; CGSConnectionID cid; CGSWindowID wid = 0; CGSSurfaceID sid = 0; CGSRegionRef reg = NULL; CGRect r = CGRectMake(0, 0, VEC_W, VEC_H);
     void *dev = NULL; unsigned sizes[2] = {0, 0}, flags = 0; short rect[4] = {0, 0, VEC_H, VEC_W}, o9 = 0, o10 = 0; unsigned display = (unsigned)(unsigned long)CGMainDisplayID();
-    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1, writebuf_sel = -1, prelock_delay_ms = 0; unsigned picmask = ~0u;
+    const char *ws = getenv("WATCHDOG_S"); int readall = 0, height_arg = 0, skipdecode = 0, hold_before = 0, hold_after = 0, k, repeat = 1, dst_override = 1000, lockbuf = 0, setupbuf = 0, readback = 0, dumpimg = 0, getframe = 0, pstruct_override = -1, writebuf_sel = -1, prelock_delay_ms = 0; unsigned picmask = ~0u;
     for (k = 1; k < argc; k++) {
         if (!strcmp(argv[k], "--open-only")) skipdecode = 1;
         else if (!strcmp(argv[k], "--hold-before") && k + 1 < argc) hold_before = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--hold-after") && k + 1 < argc) hold_after = atoi(argv[++k]);
         else if (!strcmp(argv[k], "--lock-buffers")) lockbuf = 1;
+        else if (!strcmp(argv[k], "--setup-buffers")) setupbuf = 1;   /* #92: real setup_buffers (sel 21) calls - ATIR500DVDContext_setup_buffers_Port.cpp:40 sets this+0x88 = param5&0xfffffc00|0x20000002, the real source of lock_all_buffers' request mask; without this, self+0x88 keeps start()'s 0x20000402 default which never overlaps surface+0xbf8 - proven-real two-call sequence from Tests/destructive/t3_dvd_lock_buffers.c (masks 0x27c00 then 0x37c00, 64x48) */
         else if (!strcmp(argv[k], "--pre-lock-delay-ms") && k + 1 < argc) prelock_delay_ms = atoi(argv[++k]);   /* #92: test whether lock_all_buffers' own "available & requested == 0 -> skip allocation" fast path (real code, IOATIR500DVDContext_lock_all_buffers_Port.cpp:49) is being hit because *(surface+0xbf8) hasn't been populated yet by the time we call it - this test skips setup_buffers/set_surface entirely, unlike the real driver */
         else if (!strcmp(argv[k], "--write-buffer") && k + 1 < argc) writebuf_sel = atoi(argv[++k]);   /* #92: real DVD write_buffer (sel 6) after --lock-buffers establishes real backing */
         else if (!strcmp(argv[k], "--readback")) readback = 1;
@@ -117,6 +118,16 @@ int main(int argc, char **argv) {
     stats("after open");
     if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
     if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
+    if (setupbuf) {   /* #92: real setup_buffers (sel 21) - sets this+0x88, the source of lock_all_buffers' request mask (see ATIR500DVDContext_setup_buffers_Port.cpp:40). Two-call sequence proven real in Tests/destructive/t3_dvd_lock_buffers.c (section 9b/9c/9d of idct_engine_findings.md). */
+        int conn = guard_dvd_connect ? guard_dvd_connect() : 0; kern_return_t kr;
+        printf("setup_buffers: connect=0x%x (forwarded only if GUARD_FORWARD includes 21)\n", conn); fflush(stdout);
+        kr = IOConnectMethodScalarIScalarO(conn, 21, 5, 0, 0, 64, 48, 0, 0x27c00);
+        printf("setup_buffers #1(0,64,48,0,0x27c00) -> rc=0x%08x\n", (unsigned)kr); fflush(stdout);
+        if (kr == 0) {
+            kr = IOConnectMethodScalarIScalarO(conn, 21, 5, 0, 0, 64, 48, 0, 0x37c00);
+            printf("setup_buffers #2(0,64,48,0,0x37c00) -> rc=0x%08x\n", (unsigned)kr); fflush(stdout);
+        }
+    }
     if (prelock_delay_ms > 0) { printf("pre-lock delay: %d ms\n", prelock_delay_ms); fflush(stdout); usleep(prelock_delay_ms * 1000); }
     if (lockbuf) {   /* what the driver's own set-parameter tail does after setup_buffers + set_surface: selector 4 lock_all_buffers (allocates slots 10..22, returns 13 {address,pitch} pairs) */
         int conn = guard_dvd_connect ? guard_dvd_connect() : 0, in[1] = {0}; unsigned out[64]; mach_msg_type_number_t oc = sizeof out; kern_return_t kr; int q;
