@@ -12,7 +12,7 @@ OUT=${OUT:-$HOME/rung3/vrampeek}
 SRC=$(cd "$(dirname "$0")" && pwd)
 KFW=/System/Library/Frameworks/Kernel.framework/Headers
 GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
-TARGET_ADDR=${TARGET_ADDR:?usage: TARGET_ADDR=0xADDR sh build.sh (a fresh address from the current run, see Pass 1's own comment)}
+TARGET_ADDR=${TARGET_ADDR:?usage: TARGET_ADDR=0xADDR sh build.sh - a fresh address from the current run}
 COMMON="-arch ppc -static -fno-common -mlongcall -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -DTARGET_ADDR=$TARGET_ADDR -I$KFW -w"
 CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0 -Dstatic_assert(a,b)="
 
