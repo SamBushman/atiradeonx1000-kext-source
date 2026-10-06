@@ -131,9 +131,9 @@ int main(int argc, char **argv) {
         in[9] = (UInt32)((48 << 16) | 64); /* dimensionsHeightWidth */
 
         warmup();
-        for (i = 0; i < warm; i++) { osz = sizeof out; IOConnectMethodStructureIStructureO(dvd, 18, sizeof in, &osz, in, out); }
+        for (i = 0; i < warm; i++) { osz = 0; IOConnectMethodStructureIStructureO(dvd, 18, sizeof in, &osz, in, out); }
         for (i = 0; i < N; i++) {
-            double t0, t1; osz = sizeof out;
+            double t0, t1; osz = 0;
             t0 = now_us();
             r = IOConnectMethodStructureIStructureO(dvd, 18, sizeof in, &osz, in, out);
             t1 = now_us();
