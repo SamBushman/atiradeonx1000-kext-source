@@ -8,17 +8,17 @@
  * even ran, and fork() after Mach port/IOKit setup is a well-known source of silent breakage. First fix (same day): the child reported its return codes over a pipe instead of exiting silently
  * - and that re-run PROVED the real problem: the fork()'d child's OWN open_user_client call failed (rc=0x10000003), before it ever reached swap_surface. fork() after this process already has
  * a live IOKit/Mach bootstrap context does not reliably produce a child that can make its own IOKit calls.
- * *** SECOND FIX (same day): stop using fork() entirely. t3_dvd_idct_lock_leak_child (a separate, standalone binary - see that file) is launched via posix_spawn instead, which gives it a
- * genuinely fresh exec()'d process image and bootstrap context, not an inherited one. Its stdout is piped back and read incrementally (non-blocking, 1s poll) so the parent can tell "still
- * trying to open" from "opened, now calling swap_surface (which may block forever if the lock leaked)" from "returned" - a graded result, not just blocked-or-not. */
+ * *** SECOND FIX (same day): stop staying in the SAME process image after fork() - the fix is not "avoid fork()", it's "exec() a fresh image before making any IOKit call", which is what
+ * actually re-establishes a usable bootstrap context (posix_spawn, tried first, doesn't exist on Tiger - no <spawn.h> until Leopard; classic fork()+execv() does the same job: the exec() step
+ * is what matters, not the absence of fork()). t3_dvd_idct_lock_leak_child (a separate, standalone binary - see that file) is now launched via fork()+execv(). Its stdout is piped back and read
+ * incrementally (non-blocking, 1s poll) so the parent can tell "still trying to open" from "opened, now calling swap_surface (which may block forever if the lock leaked)" from "returned" - a
+ * graded result, not just blocked-or-not. */
 #include "t3common.h"
 #include <sys/wait.h>
 #include <unistd.h>
-#include <spawn.h>
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-extern char **environ;
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0, i; IOByteCount osz; UInt32 in[16], out[16];
     if (t3_surface(t, svc, &s, 4, 4) != 0) return "DIVERGENCE";
@@ -30,18 +30,19 @@ static const char *body(dtest_t *t, io_service_t svc) {
         T3CALL(t, r, "DVD doIDCT(sel18, planeSelector 2) -> BadArgument with the accelerator lock still held", IOConnectMethodStructureIStructureO(d, 18, sizeof in, &osz, in, out));
         dtest_note(t, "doIDCT planeSelector 2 -> 0x%08x (BadArgument 0xe00002c2 predicted; NotReady 0xe00002d8 if the ring is not active: nothing leaked)", (unsigned)r);
         if (r == TEST_kIOReturnBadArgument) {
-            int pipefd[2]; posix_spawn_file_actions_t fa; pid_t pid; char buf[256]; int blen = 0; int sawOpen = 0, sawSwap = 0; int done_ = 0;
+            int pipefd[2]; pid_t pid; char buf[256]; int blen = 0; int sawOpen = 0, sawSwap = 0; int done_ = 0;
             char *argvChild[] = { "./t3_dvd_idct_lock_leak_child", NULL };
-            dtest_about(t, "posix_spawn child: 2D swap_surface(0) unbound, must BLOCK on the leaked lock (15 s)");
+            dtest_about(t, "fork()+execv() child: 2D swap_surface(0) unbound, must BLOCK on the leaked lock (15 s)");
             if (pipe(pipefd) != 0) { dtest_note(t, "pipe() failed, cannot run the child check"); bad++; goto done; }
             fcntl(pipefd[0], F_SETFL, O_NONBLOCK);
-            posix_spawn_file_actions_init(&fa);
-            posix_spawn_file_actions_adddup2(&fa, pipefd[1], 1);  /* child's stdout -> our pipe write end */
-            posix_spawn_file_actions_addclose(&fa, pipefd[0]);
-            if (posix_spawn(&pid, "./t3_dvd_idct_lock_leak_child", &fa, NULL, argvChild, environ) != 0) {
-                dtest_note(t, "posix_spawn failed: %s", strerror(errno)); bad++; posix_spawn_file_actions_destroy(&fa); close(pipefd[0]); close(pipefd[1]); goto done;
+            pid = fork();
+            if (pid == 0) {
+                /* the ONLY thing this process does before exec() is dup2+close - no IOKit call happens in the forked-but-not-yet-exec'd image */
+                dup2(pipefd[1], 1); close(pipefd[0]); close(pipefd[1]);
+                execv("./t3_dvd_idct_lock_leak_child", argvChild);
+                _exit(127);   /* execv failed */
             }
-            posix_spawn_file_actions_destroy(&fa);
+            if (pid < 0) { dtest_note(t, "fork() failed: %s", strerror(errno)); bad++; close(pipefd[0]); close(pipefd[1]); goto done; }
             close(pipefd[1]);
             for (i = 0; i < 15 && !done_; i++) {
                 int st; ssize_t n;

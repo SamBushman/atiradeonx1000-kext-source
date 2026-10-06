@@ -6,6 +6,7 @@
  * this process itself never returns. */
 #include "../common.h"
 #include <stdio.h>
+int g_testsRun = 0, g_testsUnexpected = 0, g_testsSkipped = 0, g_testsRecorded = 0;   /* common.h declares these extern; this standalone binary doesn't link dtest.c */
 int main(void) {
     io_connect_t c = IO_OBJECT_NULL; kern_return_t r; int tag = -1;
     io_service_t svc = find_accelerator_service();
