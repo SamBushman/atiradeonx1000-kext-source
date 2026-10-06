@@ -5,14 +5,22 @@
  * After the call every other client that needs the accelerator lock blocks: confirmed with a forked child that issues 2D swap_surface(0) (unbound: takes the lock, then fails) and is given 15 s.
  * The valid doIDCT path (Phase A/B: real IDCT hardware submission) is NOT run: it programs the GPU with caller-supplied coefficient/destination addresses and needs a real macroblock stream.
  * *** CORRECTION 2026-10-05: the first run of this test (2026-10-02) got "no lock leak observed" - but the child silently _exit(0)'d with NO logging of whether open_user_client/swap_surface
- * even ran, and fork() after Mach port/IOKit setup is a well-known source of silent breakage. Fixed: the child now explicitly logs both return codes via a pipe to the parent (writing directly
- * to t->logfd from the child is unsafe across fork - buffered stdio state and the mirror UDP socket could double-flush/corrupt - so the child reports over a dedicated pipe instead, and the
- * PARENT does the actual dtest_note logging after reading it). Re-run needed to get a trustworthy answer either way. */
+ * even ran, and fork() after Mach port/IOKit setup is a well-known source of silent breakage. First fix (same day): the child reported its return codes over a pipe instead of exiting silently
+ * - and that re-run PROVED the real problem: the fork()'d child's OWN open_user_client call failed (rc=0x10000003), before it ever reached swap_surface. fork() after this process already has
+ * a live IOKit/Mach bootstrap context does not reliably produce a child that can make its own IOKit calls.
+ * *** SECOND FIX (same day): stop using fork() entirely. t3_dvd_idct_lock_leak_child (a separate, standalone binary - see that file) is launched via posix_spawn instead, which gives it a
+ * genuinely fresh exec()'d process image and bootstrap context, not an inherited one. Its stdout is piped back and read incrementally (non-blocking, 1s poll) so the parent can tell "still
+ * trying to open" from "opened, now calling swap_surface (which may block forever if the lock leaked)" from "returned" - a graded result, not just blocked-or-not. */
 #include "t3common.h"
 #include <sys/wait.h>
 #include <unistd.h>
+#include <spawn.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+extern char **environ;
 static const char *body(dtest_t *t, io_service_t svc) {
-    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0, i, st = 0; IOByteCount osz; UInt32 in[16], out[16]; pid_t pid; int pipefd[2];
+    io_connect_t s = IO_OBJECT_NULL, d = IO_OBJECT_NULL; kern_return_t r; int bad = 0, i; IOByteCount osz; UInt32 in[16], out[16];
     if (t3_surface(t, svc, &s, 4, 4) != 0) return "DIVERGENCE";
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != 0) { IOServiceClose(s); return "DIVERGENCE"; }
@@ -22,32 +30,36 @@ static const char *body(dtest_t *t, io_service_t svc) {
         T3CALL(t, r, "DVD doIDCT(sel18, planeSelector 2) -> BadArgument with the accelerator lock still held", IOConnectMethodStructureIStructureO(d, 18, sizeof in, &osz, in, out));
         dtest_note(t, "doIDCT planeSelector 2 -> 0x%08x (BadArgument 0xe00002c2 predicted; NotReady 0xe00002d8 if the ring is not active: nothing leaked)", (unsigned)r);
         if (r == TEST_kIOReturnBadArgument) {
-            dtest_about(t, "forked child: 2D swap_surface(0) unbound, must BLOCK on the leaked lock (15 s)");
-            fflush(stdout);
+            int pipefd[2]; posix_spawn_file_actions_t fa; pid_t pid; char buf[256]; int blen = 0; int sawOpen = 0, sawSwap = 0; int done_ = 0;
+            char *argvChild[] = { "./t3_dvd_idct_lock_leak_child", NULL };
+            dtest_about(t, "posix_spawn child: 2D swap_surface(0) unbound, must BLOCK on the leaked lock (15 s)");
             if (pipe(pipefd) != 0) { dtest_note(t, "pipe() failed, cannot run the child check"); bad++; goto done; }
-            pid = fork();
-            if (pid == 0) {
-                io_connect_t c; kern_return_t openRc; int swapRc = -999, tag;
-                close(pipefd[0]);
-                openRc = open_user_client(svc, CLIENT_TYPE_2D, &c);
-                if (openRc == 0) swapRc = IOConnectMethodScalarIScalarO(c, 3, 1, 1, 0, &tag);
-                { int msg[2] = { (int)openRc, swapRc }; write(pipefd[1], msg, sizeof msg); }
-                close(pipefd[1]);
-                _exit(0);
+            fcntl(pipefd[0], F_SETFL, O_NONBLOCK);
+            posix_spawn_file_actions_init(&fa);
+            posix_spawn_file_actions_adddup2(&fa, pipefd[1], 1);  /* child's stdout -> our pipe write end */
+            posix_spawn_file_actions_addclose(&fa, pipefd[0]);
+            if (posix_spawn(&pid, "./t3_dvd_idct_lock_leak_child", &fa, NULL, argvChild, environ) != 0) {
+                dtest_note(t, "posix_spawn failed: %s", strerror(errno)); bad++; posix_spawn_file_actions_destroy(&fa); close(pipefd[0]); close(pipefd[1]); goto done;
             }
+            posix_spawn_file_actions_destroy(&fa);
             close(pipefd[1]);
-            for (i = 0; i < 15; i++) { if (waitpid(pid, &st, WNOHANG) == pid) break; sleep(1); }
-            if (i == 15) {
-                dtest_note(t, "LOCK LEAK CONFIRMED: the child is still blocked after 15 s (accelerator lock never released); reboot required");
+            for (i = 0; i < 15 && !done_; i++) {
+                int st; ssize_t n;
+                while ((n = read(pipefd[0], buf + blen, sizeof buf - 1 - blen)) > 0) { blen += (int)n; buf[blen] = 0; }
+                if (strstr(buf, "OPEN=") && !sawOpen) { sawOpen = 1; dtest_note(t, "child: open_user_client completed (line seen within %d s)", i); }
+                if (strstr(buf, "SWAP=")) { sawSwap = 1; }
+                if (waitpid(pid, &st, WNOHANG) == pid) { done_ = 1; break; }
+                sleep(1);
+            }
+            if (!done_) {
+                dtest_note(t, "LOCK LEAK CONFIRMED: the child is still running after 15 s (saw OPEN=%s, SWAP=%s) - accelerator lock never released; reboot required", sawOpen ? "yes" : "no", sawSwap ? "yes" : "no");
+                if (!sawOpen) { dtest_note(t, "but open_user_client itself never completed either - inconclusive whether it's the lock or something else blocking"); }
             } else {
-                int msg[2] = { -999, -999 }; ssize_t n = read(pipefd[0], msg, sizeof msg);
-                if (n == (ssize_t)sizeof msg) {
-                    dtest_note(t, "child returned: open_user_client rc=0x%08x, swap_surface rc=0x%08x (no lock leak observed)", (unsigned)msg[0], (unsigned)msg[1]);
-                    if (msg[0] != 0) { dtest_note(t, "INCONCLUSIVE: child's open_user_client itself failed (0x%08x) - it never reached swap_surface, so this run says nothing about the lock", (unsigned)msg[0]); }
-                    else bad++;
-                } else {
-                    dtest_note(t, "child exited but reported nothing over the pipe (n=%ld) - cannot tell whether it ever called swap_surface; INCONCLUSIVE", (long)n);
-                }
+                while ((read(pipefd[0], buf + blen, sizeof buf - 1 - blen)) > 0) {} /* drain any trailing output */
+                dtest_note(t, "child exited; output: %s", buf[0] ? buf : "(none)");
+                if (!sawOpen) { dtest_note(t, "INCONCLUSIVE: child never got past open_user_client - this run says nothing about the lock"); bad++; }
+                else if (!sawSwap) { dtest_note(t, "INCONCLUSIVE: child opened but exited before logging a swap_surface result (crashed? check exit status)"); bad++; }
+                else { dtest_note(t, "no lock leak observed: child's swap_surface returned on its own"); bad++; }
             }
             close(pipefd[0]);
         }

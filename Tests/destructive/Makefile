@@ -8,8 +8,13 @@ LDFLAGS = -framework IOKit -framework CoreFoundation
 destructive-%: %.c dtest.c dtest.h ../common.h
 	$(CC) $(CFLAGS) -o $* $*.c dtest.c $(LDFLAGS)
 
+# #98: a standalone (non-dtest, non-fork()'d) helper posix_spawn'd by t3_dvd_idct_lock_leak itself
+destructive-t3_dvd_idct_lock_leak: t3_dvd_idct_lock_leak_child
+t3_dvd_idct_lock_leak_child: t3_dvd_idct_lock_leak_child.c ../common.h
+	$(CC) $(CFLAGS) -o t3_dvd_idct_lock_leak_child t3_dvd_idct_lock_leak_child.c $(LDFLAGS)
+
 clean:
-	rm -f selftest_get_state regsnap
+	rm -f selftest_get_state regsnap t3_dvd_idct_lock_leak_child
 
 .PHONY: clean regsnap
 
