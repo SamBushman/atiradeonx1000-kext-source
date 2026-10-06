@@ -79,6 +79,11 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     UInt32 apertureBase = *(UInt32 *)(surface + 0xc10);
     IOLog("VRAMPeek: apertureBase(surface+0xc10)=0x%08x\n", (unsigned)apertureBase);
 
+    UInt32 pendingMask = *(UInt32 *)(surface + 0xbf8);
+    UInt32 reqMask = *(UInt32 *)(dvdCtx + 0x88);
+    IOLog("VRAMPeek: surface+0xbf8(pending)=0x%08x dvdCtx+0x88(request)=0x%08x bit0x20000000=%s\n",
+          (unsigned)pendingMask, (unsigned)reqMask, (pendingMask & 0x20000000) ? "SET(blocks lock_all_buffers)" : "clear");
+
     UInt32 bufPtr = *(UInt32 *)(surface + TARGET_SLOT * 4 + 0xb70);
     IOLog("VRAMPeek: bufPtr(surface+slot*4+0xb70)=0x%08x\n", (unsigned)bufPtr);
     if (bufPtr == 0) { IOLog("VRAMPeek: slot %d buffer record not allocated\n", (int)TARGET_SLOT); accelSvc->release(); return KERN_SUCCESS; }
