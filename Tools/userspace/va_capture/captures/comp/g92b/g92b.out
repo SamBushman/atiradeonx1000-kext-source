@@ -1,0 +1,32 @@
+ava_drive: display 0xb4390d8, guard LOADED
+CGSNewRegionWithRect rc=0
+CGSNewWindow cid=40947 -> wid=119 rc=0
+CGSAddSurface -> sid=272894978 rc=0
+CGSOrderWindow rc=0
+  [guard before open] fwd=0 swallow=0 dvd_opens=0 doIDCT(sel18)=0 remaps=0
+DVDDriverOpenDeviceImpl rc=0x0 dev=0x2809000 sizes=1024,768 flags=0x1180 out9=5 out10=8
+  [guard after open] fwd=37 swallow=0 dvd_opens=1 doIDCT(sel18)=0 remaps=5
+lock_all_buffers: connect=0x2403 (forwarded only if GUARD_FORWARD includes 4)
+lock_all_buffers -> rc=0x00000000 outSize=256
+  slot 10: address=0x08ffe000 pitch=0x100
+  slot 11: address=0x09003000 pitch=0x100
+  slot 12: address=0x09008000 pitch=0x100
+  slot 13: address=0x0900d000 pitch=0x100
+  slot 14: address=0x09012000 pitch=0x100
+  slot 15: address=0x00000000 pitch=0x0
+  slot 16: address=0x09020000 pitch=0xc00
+  slot 17: address=0x09017000 pitch=0x200
+  slot 18: address=0x00000000 pitch=0x0
+  slot 19: address=0x00000000 pitch=0x0
+  slot 20: address=0x00000000 pitch=0x0
+  slot 21: address=0x00000000 pitch=0x0
+  slot 22: address=0x00000000 pitch=0x0
+write_buffer: connect=0x2403 bufferSelect=1 (forwarded only if GUARD_FORWARD includes 6); CP_RB_RPTR=0x000000c8 CP_RB_WPTR=0x000000c8 (before)
+write_buffer -> rc=0x00000000; CP_RB_RPTR=0x000000d0 CP_RB_WPTR=0x000000d0 (after) - RING MOVED: real GPU submission happened
+picture 0 'I0 frame, zigzag': type 1 alt 0 dst 0 fwd 0, 11 coefficient dwords, pstruct 3
+  decode returned (repeat 0)
+  [guard after decode] fwd=44 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=6
+HOLD-AFTER 2 s (take the 'after' screenshot now)
+  [guard after close] fwd=65 swallow=1 dvd_opens=1 doIDCT(sel18)=1 remaps=9
+ava_drive: done
+EXIT=0
