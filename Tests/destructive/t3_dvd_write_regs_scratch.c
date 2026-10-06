@@ -5,8 +5,18 @@
  * makes the CP mirror its value to the write-back slot SCRATCH_ADDR + 5*4 - the same page the CP already writes for REG0 with every stamp (so it is mapped), a slot nobody reads. Sequence: read REG5
  * (expect 0), write 0 (identity), write 0x5a5a5a5a, read back (expect exactly that), write 0, read back (expect 0); abort at the first mismatch, restoring 0 first. Also re-reads REG0 to show it kept counting.
  * Phase C (added 2026-10-05): offset masking per the body's own `offset & 0x1ffc` - write_regs(0x15f4 | 0x10000, pattern) and write_regs(0x15f4 | 3, pattern) must both land on the SAME register
- * (verified via a plain read_regs(0x15f4) after each), confirming the high bits above 0x1ffc and the low 2 bits are both dropped as documented, not validated/rejected. */
+ * (verified via a plain read_regs(0x15f4) after each), confirming the high bits above 0x1ffc and the low 2 bits are both dropped as documented, not validated/rejected.
+ * Full-range snapshot (added 2026-10-05, same day): the Measurements this issue asks for include "ALL registers in 0x0-0x1ffc... before the test and after the reset step, diffed: only the
+ * chosen register may differ, and not after restoration" - a full 2048-dword read_regs scan before any write and after every restore, confirming nothing else moved. */
 #include "t3common.h"
+#define NREGS (0x2000 / 4)
+static kern_return_t rd_quiet(io_connect_t d, UInt32 off, UInt32 *val) {
+    UInt32 in = off, out = 0; IOByteCount osz = sizeof out; kern_return_t r;
+    r = IOConnectMethodStructureIStructureO(d, 13, sizeof in, &osz, &in, &out); *val = out; return r;
+}
+static void snap(io_connect_t d, UInt32 *out) {
+    UInt32 off; for (off = 0; off < 0x2000; off += 4) { UInt32 v = 0xdeadbeef; rd_quiet(d, off, &v); out[off / 4] = v; }
+}
 static kern_return_t rd(dtest_t *t, io_connect_t d, UInt32 off, UInt32 *val) {
     UInt32 in = off, out = 0; IOByteCount osz = sizeof out; kern_return_t r;
     dtest_about(t, "DVD read_regs(sel13, 0x%04x)", (unsigned)off);
@@ -18,12 +28,16 @@ static kern_return_t wr(dtest_t *t, io_connect_t d, UInt32 off, UInt32 v) {
     kern_return_t r; char m[96]; snprintf(m, sizeof m, "DVD write_regs(sel14, 0x%04x, 0x%08x)", (unsigned)off, (unsigned)v);
     T3CALL(t, r, m, IOConnectMethodScalarIScalarO(d, 14, 2, 0, (int)off, (int)v)); return r;
 }
+static UInt32 g_pre[NREGS], g_post[NREGS];
 static const char *body(dtest_t *t, io_service_t svc) {
     io_connect_t d = IO_OBJECT_NULL; kern_return_t r; int bad = 0; UInt32 v = 1, umsk = 0, s0a = 0, s0b = 0;
     T3CALL(t, r, "open DVD connection", open_user_client(svc, CLIENT_TYPE_DVD, &d));
     if (r != KERN_SUCCESS) return "DIVERGENCE";
     r = rd(t, d, 0x0770, &umsk); if (r || umsk != 0xff) { dtest_note(t, "SCRATCH_UMSK 0x%08x is not the evidence value 0xff: NOT writing", (unsigned)umsk); IOServiceClose(d); return "DIVERGENCE"; }
     r = rd(t, d, 0x15f4, &v); if (r || v != 0) { dtest_note(t, "SCRATCH_REG5 0x%08x is not 0: NOT writing", (unsigned)v); IOServiceClose(d); return "DIVERGENCE"; }
+    dtest_about(t, "full 0x0-0x1ffc register snapshot (2048 reads) BEFORE any write");
+    snap(d, g_pre);
+    dtest_note(t, "pre-write snapshot done");
     rd(t, d, 0x15e0, &s0a);
     bad += t3_expect(t, "write identity", wr(t, d, 0x15f4, 0), 0);
     bad += t3_expect(t, "write pattern", wr(t, d, 0x15f4, 0x5a5a5a5a), 0);
@@ -48,6 +62,21 @@ static const char *body(dtest_t *t, io_service_t svc) {
     rd(t, d, 0x15e0, &s0b);
     dtest_note(t, "SCRATCH_REG0 before 0x%08x after 0x%08x (stamp register, must not go backwards)", (unsigned)s0a, (unsigned)s0b);
     if ((SInt32)(s0b - s0a) < 0) bad++;
+
+    dtest_about(t, "full 0x0-0x1ffc register snapshot (2048 reads) AFTER all restores");
+    snap(d, g_post);
+    { int i, diffs = 0;
+      for (i = 0; i < NREGS; i++) {
+          UInt32 off = i * 4;
+          if (off == 0x15e0) continue;   /* the live stamp counter - expected to differ, already checked separately above */
+          if (g_pre[i] != g_post[i]) {
+              if (diffs < 20) dtest_note(t, "FULL-RANGE DIFF at 0x%04x: pre=0x%08x post=0x%08x", (unsigned)off, (unsigned)g_pre[i], (unsigned)g_post[i]);
+              diffs++;
+          }
+      }
+      dtest_note(t, "full-range diff (excluding the live stamp 0x15e0): %d register(s) differ (expected 0)", diffs);
+      if (diffs) bad++;
+    }
     IOServiceClose(d);
     return bad ? "DIVERGENCE" : "PASS";
 }
