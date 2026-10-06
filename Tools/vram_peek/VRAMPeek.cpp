@@ -62,8 +62,14 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     if (!accelSvc) { IOLog("VRAMPeek: ATIRadeonX1000 service not found\n"); return KERN_SUCCESS; }
     UInt8 *accel = (UInt8 *)accelSvc;
 
+    UInt32 openCount = *(UInt32 *)(accel + 0x73c);
+    IOLog("VRAMPeek: openDVDCount(accel+0x73c)=%u\n", (unsigned)openCount);
+
     UInt32 dvdCtx = *(UInt32 *)(accel + 0x68);
     IOLog("VRAMPeek: accel=0x%08x dvdCtx(accel+0x68)=0x%08x\n", (unsigned)(UInt32)accel, (unsigned)dvdCtx);
+    unsigned chainLen = 0;
+    for (UInt32 cur = dvdCtx; cur != 0 && chainLen < 32; cur = *(UInt32 *)(cur + 0x80)) chainLen++;
+    IOLog("VRAMPeek: DVD-context list length=%u\n", chainLen);
     if (dvdCtx == 0) { IOLog("VRAMPeek: no active DVD context\n"); accelSvc->release(); return KERN_SUCCESS; }
 
     UInt32 surface = *(UInt32 *)(dvdCtx + 0xf8);
