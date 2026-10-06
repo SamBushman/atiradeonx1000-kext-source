@@ -1,0 +1,37 @@
+Oct  5 20:09:45 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas/rung3/vram_peek_src ; USER=root ; COMMAND=/usr/sbin/chown -R root:wheel /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:09:45 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas/rung3/vram_peek_src ; USER=root ; COMMAND=/bin/chmod -R go-w /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextload -v /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2c00]: 00 00 00 80 00 88 00 00 00 1d dd d3 08 f7 7c 38 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2c20]: 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd d4 08 f7 7c 64 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2c40]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2c60]: 00 1d dd d5 08 f7 7c 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2c80]: ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd d6 08 f7 7c bc 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2ca0]: 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd d7 08 f7 7c e8 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2cc0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2ce0]: 00 88 00 00 00 1d dd d8 08 f7 7d 14 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2d00]: ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd d9 08 f7 7d 40 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2d20]: 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd da 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2d40]: 08 f7 7d 6c 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2d60]: 00 00 00 80 00 88 00 00 00 1d dd db 08 f7 7d 98 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2d80]: 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd dc 08 f7 7d c4 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2da0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2dc0]: 00 1d dd dd 08 f7 7d f0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2de0]: ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd de 08 f7 7e 1c 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2e00]: 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd df 08 f7 7e 48 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2e20]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2e40]: 00 88 00 00 00 1d dd e0 08 f7 7e 74 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2e60]: ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e1 08 f7 7e a0 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2e80]: 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e2 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2ea0]: 08 f7 7e cc 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2ec0]: 00 00 00 80 00 88 00 00 00 1d dd e3 08 f7 7e f8 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2ee0]: 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e4 08 f7 7f 24 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2f00]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2f20]: 00 1d dd e5 08 f7 7f 50 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2f40]: ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e6 08 f7 7f 7c 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2f60]: 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e7 08 f7 7f a8 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2f80]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2fa0]: 00 88 00 00 00 1d dd e8 08 f7 7f d4 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2fc0]: ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd e9 08 f7 80 00 00 00 00 00 00 00 00 00 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x2fe0]: 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1d dd ea 
+Oct  5 20:09:49 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: dump done

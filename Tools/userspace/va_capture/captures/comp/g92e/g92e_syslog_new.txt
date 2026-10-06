@@ -1,0 +1,16 @@
+Oct  5 20:11:18 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/usr/sbin/chown -R bushmas /Users/bushmas/rung3/vrampeek
+Oct  5 20:11:18 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas/rung3/vram_peek_src ; USER=root ; COMMAND=/usr/sbin/chown -R root:wheel /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:11:18 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas/rung3/vram_peek_src ; USER=root ; COMMAND=/bin/chmod -R go-w /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextload -v /Users/bushmas/rung3/vrampeek/VRAMPeek.kext
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: start, TARGET_ADDR=0x0902d000 TARGET_LEN=0x100
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0000]: 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1e 1f bc 09 02 d0 44 00 00 00 00 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0020]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0040]: 00 1e 1f bd 09 02 d0 70 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0060]: ff ff ff ff 00 00 00 80 00 88 00 00 00 1e 1f be 09 02 d0 9c 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x0080]: 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1e 1f bf 09 02 d0 c8 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00a0]: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff 00 00 00 80 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00c0]: 00 88 00 00 00 1e 1f c0 09 02 d0 f4 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek[+0x00e0]: ff ff ff ff ff ff ff ff 00 00 00 80 00 88 00 00 00 1e 1f c1 09 02 d1 20 00 00 00 00 00 00 00 00 
+Oct  5 20:11:22 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: dump done
+Oct  5 20:11:50 sam-bushmans-power-mac-g5 sudo:  bushmas : TTY=unknown ; PWD=/Users/bushmas ; USER=root ; COMMAND=/sbin/kextunload -b com.sambushman.VRAMPeek
+Oct  5 20:11:50 sam-bushmans-power-mac-g5 kernel[0]: VRAMPeek: stop
