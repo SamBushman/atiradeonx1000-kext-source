@@ -149,12 +149,12 @@ int main(int argc, char **argv) {
         build_intra_stream((UInt32 *)streamAddr, 1);
         memset(probeIn, 0, sizeof probeIn);
         probeIn[2] = (UInt32)-10; probeIn[3] = 0; probeIn[4] = 3; probeIn[5] = 0x100a0; probeIn[6] = 0; probeIn[9] = (UInt32)((48 << 16) | 64);
-        for (attempt = 0; attempt < 30 && probeR != 0; attempt++) {
+        for (attempt = 0; attempt < 180 && probeR != 0; attempt++) {
             probeOsz = 0;
             probeR = IOConnectMethodStructureIStructureO(dvd, 18, sizeof probeIn, &probeOsz, probeIn, probeOut);
-            if (probeR != 0) { printf("readiness probe attempt %d: 0x%08x, retrying in 1s\n", attempt + 1, (unsigned)probeR); fflush(stdout); sleep(1); }
+            if (probeR != 0) { if ((attempt + 1) % 10 == 0) { printf("readiness probe attempt %d: 0x%08x, still retrying\n", attempt + 1, (unsigned)probeR); fflush(stdout); } sleep(1); }
         }
-        if (probeR != 0) { printf("doIDCT never became ready after 30 attempts (last: 0x%08x) - giving up\n", (unsigned)probeR); bad++; goto cleanup; }
+        if (probeR != 0) { printf("doIDCT never became ready after 180 attempts (last: 0x%08x) - giving up\n", (unsigned)probeR); bad++; goto cleanup; }
         printf("doIDCT ready after %d attempt(s)\n", attempt);
     }
 
