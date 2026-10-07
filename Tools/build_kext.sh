@@ -23,13 +23,25 @@
 #    kernel-internal mutex_unlock_rwcmb/lck_mtx_unlock: those are not in the kernel's
 #    exported symbol sets and kld rejects them.
 #  * Follow with Tools/link_check.sh to prove it links (without loading).
+#  * -mlongcall is required (issue #122, Stage 2 live test, 2026-10-06): without it, gcc emits a
+#    plain 24-bit `bl`/BR24 relocation for calls to libkmodc++/libcc_kext runtime symbols
+#    (OSMetaClass/IOUserClient constructors, OSObject::operator new, ...) that only resolve to a
+#    real address once the kernel actually loads the kext. A real (non-`-n`) kextload of this repo's
+#    tree was confirmed to land at an address ~1.7GB from the kernel/other kexts (e.g. 0x70160000
+#    for a ~0x5xxxxx-0x9xxxxx resident cluster) - far past the 24-bit branch's +-32MB range, so
+#    kld's real in-kernel relocation pass (NOT kextload -n -s's userspace symbol-only pass, which
+#    never hits this) fails with "relocation overflow ... displacement too large" for every such
+#    call, regardless of the kext's own size (confirmed: still fails at a build whose __TEXT size
+#    matches stock's almost exactly). The *stock* kext's own object code never has this problem
+#    because it already uses the long-call (JBSR+HI16+LO16) sequence for exactly these symbols
+#    (confirmed via `otool -rv` on both) - `-mlongcall` is gcc's flag for emitting that sequence.
 set -e
 OUT=${OUT:-/tmp/kext_build}
 KEXT_ID=${KEXT_ID:-com.apple.ATIRadeonX1000}
 KEXT_VERSION=${KEXT_VERSION:-4.1.9}
 KFW=/System/Library/Frameworks/Kernel.framework/Headers
 GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
-COMMON="$OPT -arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW -w"
+COMMON="$OPT -mlongcall -arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW -w"
 CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0 -Dstatic_assert(a,b)="
 
 rm -rf "$OUT"; mkdir -p "$OUT/obj"
