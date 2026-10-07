@@ -65,6 +65,16 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     UInt32 openCount = *(UInt32 *)(accel + 0x73c);
     IOLog("VRAMPeek: openDVDCount(accel+0x73c)=%u\n", (unsigned)openCount);
 
+    /* perf_dvd_idct.c debugging (2026-10-06): ATIR500DVDContext::doIDCT's own outer gate is
+     * (dvdCtx+0xf8 != 0) && (accel+0x80 != 0) && (accel+0x8bc != 0) - read the two accelerator-level
+     * fields directly (dvdCtx+0xf8 is already read as "surface" below) instead of inferring them
+     * from doIDCT's return code alone. */
+    {
+        UInt8 hwUp = *(UInt8 *)(accel + 0x80);
+        UInt32 ringReady = *(UInt32 *)(accel + 0x8bc);
+        IOLog("VRAMPeek: accel+0x80(hwUp)=0x%02x accel+0x8bc(ringReady)=0x%08x\n", (unsigned)hwUp, (unsigned)ringReady);
+    }
+
     UInt32 dvdCtx = *(UInt32 *)(accel + 0x68);
     IOLog("VRAMPeek: accel=0x%08x dvdCtx(accel+0x68)=0x%08x\n", (unsigned)(UInt32)accel, (unsigned)dvdCtx);
     unsigned chainLen = 0;

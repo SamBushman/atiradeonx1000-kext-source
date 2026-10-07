@@ -31,7 +31,9 @@
  * check still succeeds - each step is "more of the same already-specified format", not a structurally new operation, but this still stops at the first
  * sign of trouble rather than plowing ahead.
  *
- * Usage: perf_dvd_idct [calls per metric, default 2000] [max macroblocks per submission: 1, 4, or 12, default 12]
+ * Usage: perf_dvd_idct [calls per metric, default 2000] [max macroblocks per submission: 1, 4, or 12, default 12] [hold seconds after bind, default 0]
+ * The optional 3rd arg sleeps after the DVD bind (before any doIDCT call) - for attaching a read-only diagnostic (e.g. Tools/vram_peek/VRAMPeek.cpp)
+ * to inspect the live gate state (accel+0x80/+0x8bc, dvdCtx+0xf8) while the connection is actually open, same pattern ava_drive.c's --hold-after uses.
  * Output (same stable format as perf_methods.c/perf_baseline.c, parsed by Tools/perf_compare.py):
  *   METRIC <name> n=<n> min_us=<> p10_us=<> median_us=<> p90_us=<> max_us=<>
  * Build on the G5:  gcc -arch ppc -std=gnu99 -w -o perf_dvd_idct perf_dvd_idct.c -framework IOKit -framework CoreFoundation
@@ -41,6 +43,7 @@
 #include <string.h>
 #include <mach/mach_time.h>
 #include <mach/mach.h>
+#include <unistd.h>
 
 int g_testsRun = 0, g_testsUnexpected = 0, g_testsSkipped = 0, g_testsRecorded = 0;
 
@@ -78,6 +81,7 @@ static UInt32 build_intra_stream(UInt32 *w, int mbCount) {
 int main(int argc, char **argv) {
     int N = argc > 1 ? atoi(argv[1]) : 2000;
     int maxMB = argc > 2 ? atoi(argv[2]) : 12;
+    int holdSec = argc > 3 ? atoi(argv[3]) : 0;
     int warm = 20, bad = 0, i;
     mach_timebase_info_data_t tb; double *samp;
     io_service_t svc; io_connect_t surf = IO_OBJECT_NULL, dvd = IO_OBJECT_NULL;
@@ -112,6 +116,8 @@ int main(int argc, char **argv) {
     if (r != 0) { printf("open DVD connection failed: 0x%08x\n", (unsigned)r); IOServiceClose(surf); return 1; }
     r = IOConnectMethodScalarIStructureI(dvd, 0, 3, 0, 1, 0, 0, NULL);
     if (r != 0) { printf("DVD set_surface bind failed: 0x%08x\n", (unsigned)r); goto cleanup; }
+
+    if (holdSec > 0) { printf("HOLD %d s after bind (pid=%d) - attach a diagnostic now\n", holdSec, (int)getpid()); fflush(stdout); sleep(holdSec); }
 
     r = IOConnectMapMemory(dvd, 4, mach_task_self(), &streamAddr, &streamSize, kIOMapAnywhere);
     if (r != 0) { printf("map stream-0 buffer (memType 4) failed: 0x%08x\n", (unsigned)r); goto cleanup; }
