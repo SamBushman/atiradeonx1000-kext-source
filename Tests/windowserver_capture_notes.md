@@ -102,3 +102,46 @@ one session, rather than cycling the live instance repeatedly.
 
 Given this, the remaining 6 opcodes were accepted as closed by existing static/emulator evidence instead of chasing a
 further live confirmation - see `Tests/pm4_opcode_usage.md`'s 2D section for the reasoning per opcode.
+
+
+## A real stock-driver bug found via this testing, and the fix (2026-10-07, kext-source#152)
+
+The scheduled attempt at the final 6 "terminator-family" opcodes (`0x03`/`0x04`/`0x07`/`0x08`/`0x10`/`0x13`) panicked the
+kernel **twice**, identical signature both times (`PC=0x005BB888`, `DAR=0x00000014`), and **both required a physical
+power cycle** - SSH itself went fully unreachable (`No route to host`), a harder failure than every other incident in
+this project's history, which stayed SSH-reachable even when the GUI died.
+
+Root cause, found by disassembling the exact faulting instruction from the live stock binary (`otool -tV`):
+
+```
+00032880  lwz   r2,0x88(r27)     ; r27 = self
+00032888  lwz   r0,0x14(r2)      ; <-- faults: *(r2 + 0x14), r2 is NULL
+```
+
+This is the real-machine-code form of every one of these six opcodes' opening bounds check:
+`M<UInt32>(M<SInt32>(self + 0x88) + 0x14) <= puVar18[1]` - the left side (`self+0x88`'s own target) is read
+*unconditionally*, before the right side (the injected id) is ever compared. The earlier safety analysis only reasoned
+about the id being out of range; it never traced where `self+0x88` itself comes from. Traced
+(`Sources/IOATIR5002DContext_declare_image_Port.cpp`): `self+0x88` is NULL until `declare_image` (external method
+selector 8) is called at least once on that connection - lazily allocated there and nowhere else. Ordinary
+`WindowServer` desktop compositing never calls it (confirmed by this project's own pure-observation capture above),
+so every connection these opcodes were scheduled against was in exactly the NULL-pointer state. Filed as its own
+permanent record: **#152**.
+
+**The fix**: `opcode_recorder.c` gained `OPCODE_PRIME_IMAGE=1`, which calls `declare_image` for real
+(`IOConnectMethodScalarIScalarO`, selector 8, 3 scalar in/1 scalar out, a real page-aligned `valloc`'d buffer as the
+second argument - the *exact* call shape `Tests/destructive/t3_2d_declare_image.c` already proved safe; passing 0
+there, which an earlier draft of this fix tried, is itself rejected by `declare_image`'s own argument check) on each
+2D connection right as it opens, before any scheduled injection can run against it. Verified mechanically safe first
+against a disposable standalone 2D-connection opener (no real client, no WindowServer) before ever trying it live
+again. With priming in place, all six opcodes fired cleanly on the next live attempt - zero anomalies, every record
+entirely unchanged (confirming the predicted "safe early-exit" behavior now that the real crash cause is gone).
+
+**Lesson applied going forward** (see also the standing memory this incident produced): before injecting into *any*
+target function live, trace every pointer precondition it depends on back to where it's first allocated - not just
+the parameter being deliberately varied. The emulator's earlier "safe" verdict for these opcodes wasn't wrong, it
+just happened to use a hand-built test context where this specific pointer was already populated - it never
+exercised the real NULL-at-cold-start state a freshly-restarted `WindowServer` connection is actually in.
+
+Both panics' volumes (`Tiger HD`, `Test HD`) verified clean afterward both times - no filesystem damage from either
+hard crash.

@@ -109,13 +109,24 @@ Since no real consumer emits the 17 "masked" 2D opcodes (same situation GL was i
 
 Chained in one buffer (all 11 in a single flush): the real client's own stream, shifted up behind them, continued processing normally afterward - none of these terminate the loop. Full log: `Tests/baseline/opcode/stock_windowserver_inject.tsv`.
 
-**6 of 17 not live-tested, but closed by other means - a real methodology limit, not a safety concern:** `0x03`, `0x04`, `0x07`, `0x08`, `0x10`, `0x13` all share one shape - with a deliberately out-of-range id, the handler takes a safe early-exit (`goto LAB_00033420`, `uVar17 = 0`) that ends the *whole* buffer's processing for that flush (the exact reason each needs its own flush via `OPCODE_INJECT_SCHEDULE`, and exactly the GL-proven-safe "invalid id -> clean no-op" pattern already live-confirmed for 0x43). A scheduled live attempt at these six lost a race during the manual relaunch (the recorder-instrumented `WindowServer` process started, logged its startup banner, then exited before any client connected - a real, uninstrumented `WindowServer` won the on-demand relaunch race instead; desktop recovered cleanly, no crash, no data corruption, nothing to revert). Rather than retry the relaunch race again (this is the second real fragility this session has hit around repeated rapid `WindowServer` kill+relaunch cycling - see `Tests/windowserver_capture_notes.md` - and further cycling has a real cost), these six are accepted as closed on the existing evidence instead:
-- `0x03`, `0x04`, `0x08`, `0x10`, `0x13`: already individually verified safe and predictable via the zero-risk Unicorn emulator (`Tools/userspace/emu/kemu.py`, 2026-10-03 run against the real stock PPC machine code) - see the injection section above this one.
-- `0x07`: not part of that emulator sweep, but statically confirmed here (2026-10-07) to share the *identical* code path as `0x08` (`goto LAB_00032a78`, the real surface-cleanup + `find_surface_for_id`-or-safe-exit body) - same safety argument applies.
+**The remaining 6 (`0x03`, `0x04`, `0x07`, `0x08`, `0x10`, `0x13`) found a real stock-driver bug first, then were live-verified too.** All six share one shape: the handler's very first bounds check, `M<UInt32>(M<SInt32>(self + 0x88) + 0x14) <= puVar18[1]`, dereferences `self+0x88` *unconditionally* - before the id is ever compared. The first scheduled live attempt (on an unprimed connection) panicked the kernel twice with an identical signature (`DAR=0x14`, `PC` inside this exact bounds check) - root-caused and filed as **kext-source#152**: `self+0x88` is a per-connection pointer that stays NULL until `declare_image` (external method selector 8) is called at least once, and ordinary `WindowServer` desktop compositing never calls it (confirmed by this file's own observation capture above). Fixed by extending `opcode_recorder.c` with `OPCODE_PRIME_IMAGE=1`, which calls `declare_image` for real (`IOConnectMethodScalarIScalarO`, the exact call shape `Tests/destructive/t3_2d_declare_image.c` already proved safe) on each 2D connection as it opens, before any schedule can fire - populating `self+0x88` the real way first.
 
-**Net: 0 of 18 inventory opcodes observed from ordinary use, but all 17 real ones are now either live-verified against the real stock kernel (11) or independently verified safe via emulation/identical-code-path analysis (6) - genuinely closed, not an open gap.**
+With priming in place, all six fired cleanly on the next connections, **zero anomalies, every record entirely unchanged** - confirming the predicted "safe early-exit, no rewrite" behavior (the short-circuit `||` means an out-of-range id never reaches the second half of the check, and this family never writes `puVar18` on that path):
 
-Capture logs: `Tests/baseline/opcode/stock_windowserver_gestures.tsv` (pure observation), `stock_windowserver_inject.tsv` (the 11-opcode injection batch). Technique notes (mach_init.d/launchd config caching per boot session, Test-HD-mount-timing trap, the working manual kill+relaunch method, `OPCODE_INJECT_TYPE`/`OPCODE_INJECT_SCHEDULE`, and the relaunch-race limitation) written up in `Tests/windowserver_capture_notes.md`.
+| opcode | records | words | kernel's rewrite (observed) | matches handler |
+|---|---:|---:|---|---|
+| 0x03 | 1 | 4 | unchanged | yes |
+| 0x04 | 1 | 4 | unchanged | yes |
+| 0x07 | 1 | 4 | unchanged | yes |
+| 0x08 | 1 | 4 | unchanged | yes |
+| 0x10 | 1 | 4 | unchanged | yes |
+| 0x13 | 1 | 4 | unchanged | yes |
+
+(Each needed its own 2D connection reaching flush 2 - these connections only ever live for ~2 flushes before closing, so `OPCODE_INJECT_SCHEDULE` targeted flush 2 on several separate connections, generated across a few kill+relaunch cycles, rather than several flushes of one.)
+
+**Net: 0 of 18 inventory opcodes observed from ordinary use, but all 17 real opcodes are now live-verified against the real stock kernel, zero anomalies - genuinely closed, not an open gap. A real, previously-unknown stock-driver NULL-deref bug (#152) was found and fixed-around along the way.**
+
+Capture logs: `Tests/baseline/opcode/stock_windowserver_gestures.tsv` (pure observation), `stock_windowserver_inject.tsv` (the first 11-opcode batch), `windowserver_inject4.tsv` through `windowserver_inject7.tsv` (the primed six, one or more opcodes per file). Technique notes (mach_init.d/launchd config caching per boot session, Test-HD-mount-timing trap, the working manual kill+relaunch method, `OPCODE_INJECT_TYPE`/`OPCODE_INJECT_SCHEDULE`/`OPCODE_PRIME_IMAGE`, the relaunch-race limitation, and the #152 panic/root-cause/fix story) written up in `Tests/windowserver_capture_notes.md`.
 
 ## DVD
 

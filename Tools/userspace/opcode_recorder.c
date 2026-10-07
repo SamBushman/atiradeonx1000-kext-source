@@ -134,10 +134,30 @@ static void summary(const char *what, conn_t *c) {
     fprintf(g_log, "\n");
 }
 
+/* PRIMING (added 2026-10-07, see kext-source#152): several 2D process_command_buffer opcodes (0x03/0x04/0x07/0x08/0x10/0x13) unconditionally dereference the context's self+0x88 pointer as part of
+ * their own bounds check, before the id they're given is even looked at - traced (Sources/IOATIR5002DContext_declare_image_Port.cpp) to a pointer that stays NULL until declare_image (external method
+ * selector 8) is called at least once on that connection. A connection fresh off WindowServer's own restart has never called it (ordinary desktop compositing never does - confirmed by this project's
+ * own observation capture), so injecting any of those six opcodes into an unprimed connection panics the kernel - confirmed live twice, real precondition, not a timing fluke. OPCODE_PRIME_IMAGE=1 calls
+ * declare_image for real (IOConnectMethodScalarIScalarO, the exact real calling convention from Tests/destructive/t3_2d_declare_image.c: selector 8, 3 scalar in/1 scalar out, p2=0 lets the kernel
+ * allocate) on a newly-opened 2D connection before any injection can run against it, so self+0x88 is genuinely populated the real way before these opcodes are ever exercised. */
+static int g_prime_image = -1;
+static void prime_declare_image(io_connect_t c) {
+    unsigned h = 0; kern_return_t r;
+    unsigned char *buf = (unsigned char *)valloc(0x10000);   /* real page-aligned buffer - declare_image forbids param_2==0 ("let the kernel allocate"), needs a genuine user address, per
+                                                                  Tests/destructive/t3_2d_declare_image.c's own already-proven-safe call shape */
+    if (!buf) { fprintf(g_log, "PRIME\tconn=0x%x\tskipped: valloc failed\n", (unsigned)c); return; }
+    memset(buf, 0xAA, 0x10000);
+    r = IOConnectMethodScalarIScalarO(c, 8, 3, 1, 0, (int)buf, 0x1000, &h);
+    fprintf(g_log, "PRIME\tconn=0x%x\tdeclare_image(sel8,0,buf,0x1000) -> r=0x%08x id=0x%x\n", (unsigned)c, (unsigned)r, h);
+    fflush(g_log);
+    /* buf deliberately leaked, same as the T3 test: "the buffer is freed only after the connection is closed" - it's wrapped live in an IOMemoryDescriptor */
+}
 static kern_return_t my_open(io_service_t s, task_port_t task, uint32_t type, io_connect_t *conn) {
     kern_return_t r; ensure_log(); if (!real_open) real_open = resolve_real("IOServiceOpen");
+    if (g_prime_image < 0) g_prime_image = getenv("OPCODE_PRIME_IMAGE") ? atoi(getenv("OPCODE_PRIME_IMAGE")) : 0;
     r = real_open(s, task, type, conn);
     if (r == KERN_SUCCESS && conn) fprintf(g_log, "OPEN\ttype=%u\tconnect=0x%x\n", type, (unsigned)*conn);
+    if (r == KERN_SUCCESS && conn && type == 2 && g_prime_image) prime_declare_image(*conn);
     if (r == KERN_SUCCESS && conn && type <= 3) {
         int i; pthread_mutex_lock(&g_mu);
         for (i = 0; i < MAXCONN; i++) if (!g_conn[i].used) {
