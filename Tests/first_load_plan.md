@@ -18,12 +18,14 @@ drawing; this has not been observed on this machine, treat a blank screen as pos
 2. `sh Tools/link_check.sh` (done for the current tree: only the five KPI symbols listed in `build_kext.sh` are undefined).
 3. `kextutil -t -n` (Tiger: `kextload -t -n`; test, no load) on a copy in `/Volumes/Test HD/...`: prints undefined symbols, missing dependencies, and Info.plist problems without touching the kernel.
    Record the output in the issue. Expected: dependency resolution against `IOPCIFamily`, `IOGraphicsFamily`, `IONDRVSupport`, `IOAGPFamily` as the stock kext's `OSBundleLibraries` lists.
-4. Verify the stock backup is intact before anything else: `cd /Volumes/Test\ HD/atiradeonx1000-kext-source/backups/stock-driver-2026-09-19 && md5 -r ... | diff - CHECKSUMS.md5.txt`.
+4. Verify the stock backup is intact before anything else: `cd /Volumes/Test\ HD/atiradeonx1000-kext-source-current/backups/stock-driver-2026-10-06 && md5 -r ... | diff - CHECKSUMS.md5.txt`
+   (the 2026-09-19 backup referenced by the original wording was lost when the checkout was re-cloned as `-current`; recreated 2026-10-06, verified intact, also mirrored off-machine).
 
-## Stage 1 - rehearse the rollback on a harmless kext (needs authorization)
+## Stage 1 - rehearse the rollback on a harmless kext - SKIPPED per #41's 2026-10-02 scope decision
 
-Per #41's own open item: exercise `kextunload` -> `kextload` -> `kextcache` rebuild on a kext whose absence cannot affect graphics (for example a scratch copy of a
-small, unused Apple kext under a different identifier), and write down the exact commands and timings. Goal: the rollback commands have been typed once before they matter.
+#41 (closed) amended its own criterion: the rollback procedure is a plain swap of the backed-up binaries, written down but **not** rehearsed up front - it's exercised only
+if/when a real rollback is actually needed. This stage as originally written (exercise `kextunload`/`kextload`/`kextcache` on a harmless scratch kext first) is superseded;
+go straight from Stage 0 to Stage 2.
 
 ## Stage 2 - load the rebuilt kext without letting it match hardware (needs authorization)
 
