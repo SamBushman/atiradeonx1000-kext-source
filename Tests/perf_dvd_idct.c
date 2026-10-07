@@ -125,6 +125,11 @@ int main(int argc, char **argv) {
         if (twod != IO_OBJECT_NULL) IOServiceClose(twod);
         if (r != 0) { IOServiceClose(surf); return 1; }
     }
+    /* Empirically required (2026-10-06): calling doIDCT immediately after priming returned NotReady (0xe00002d8) consistently, even though a live
+     * VRAMPeek read confirmed every gate doIDCT's source checks (bound surface, hardware-up, ring-ready, destination record populated) was already
+     * satisfied - so something needs a moment to settle after the 2D priming call that isn't visible in any of those fields. A 20 s diagnostic hold
+     * made it work every time; 1 s here is a deliberately generous, cheap margin, not the minimal delay (not worth more live cycles to shave down). */
+    sleep(1);
 
     /* DVD bind only - deliberately no setup_buffers/lock_all_buffers, see the header comment. set_surface's bind is what starts the XDCT ring
      * (ATIR500DVDContext::start -> start_xdct_engine) and gives this connection a boundSurface, both of which doIDCT itself requires. */
