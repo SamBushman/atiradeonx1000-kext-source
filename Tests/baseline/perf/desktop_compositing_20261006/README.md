@@ -64,3 +64,13 @@ investigation). Pinning down which output corresponds to the Frame Meter's exact
 the dense FP block at `Quartz Debug` binary offset ~0x6a48-0x6c00 (computes something from `host_processor_info`
 CPU-tick deltas combined with these four values) - not attempted here, since all four already serve this baseline's
 actual purpose (a real, reproducible load signal) without it.
+
+## Repeat pass (2026-10-07): real noise found, not just "more data"
+
+Ran twice more (`run2.txt`, `run3.txt`) to apply this project's noise/regression rule (same spirit as `Tools/perf_compare.py`'s own `S`/`noise`/`margin` computation, computed directly here since that tool is wired specifically to `perf_methods.c`/`perf_baseline.c`'s file-naming convention, not this baseline's). Result: **13 of 24 metrics exceed a 25% run-to-run spread** across the 3 runs - this baseline is substantially noisier than the GL or DVD/IDCT baselines, and that noise is not evenly spread:
+
+- **Steady-state continuous gestures' primary value is tight**: `window_drag.a` spread 0.2%, `window_resize.a` 5.5%, `dock_hover.a` 3.4% - these are trustworthy as-is.
+- **Transient/history-dependent scenarios are not**: `idle.c`/`idle.d` (159%/125%) - `idle.a`/`idle.b` even read exactly `0.000` in two of three runs but a real nonzero value in the first, i.e. "idle" isn't a stable "nothing happening" reading, it's sensitive to how recently a window changed (the first run followed right after opening the test's own Finder window; runs 2-3 followed immediately after run 1, with no intervening state change, and caught a more truly-settled idle). `window_open.*` (32-220%) and most of `scroll.*` (except `.d`) are similarly noisy - both are inherently bursty/transient events, not steady continuous ones.
+- **The `b` metric specifically is noisy almost everywhere it's large** (`window_drag.b` 100%, `window_resize.b` 89%, `window_open.b` 95%) - whatever this raw value tracks (undetermined, see the mechanism note above), it does not average out the way `a`/`c`/`d` mostly do.
+
+**Practical implication**: this baseline is not yet a reliable regression gate across all its metrics as currently measured. The continuous-gesture `a` values are solid; the transient-scenario and `b`-metric values need either more repeats, a different sampling window, or acceptance that they're inherently high-variance signals not suited to a tight numeric gate. Recorded here plainly rather than treated as settled by simply having more runs - a future regression check using this baseline should weight metrics accordingly (or restrict itself to the metrics shown stable here) rather than trust all 24 equally.

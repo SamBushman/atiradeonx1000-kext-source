@@ -38,3 +38,9 @@ overhead at this picture size, not by the engine's own per-macroblock decode tim
 - Single run, not yet repeated 3-5x the way the GL-side baselines were (`Tests/performance_plan.md` sections 1-7) -
   this establishes the metric and the methodology works end to end; repeating it to apply the project's own noise/
   regression rule (`Tools/perf_compare.py`) is the natural next step before this counts as a enforceable gate.
+
+## Repeat pass (2026-10-07): rock-solid, no noise
+
+Ran twice more (`run2.txt`, `run3.txt`) to apply this project's noise/regression rule. Result: **0 of 3 metrics exceed even a 1% run-to-run spread** (`1mb` 2.1%, `4mb` 0.6%, `12mb` 0.0% across all three runs) - this baseline is as stable as a measurement gets on this hardware, in sharp contrast to the desktop-compositing baseline's own repeat pass. Safe to treat as an enforceable regression gate as-is; no further repeats needed.
+
+(The readiness-wait time before the first real `doIDCT` call stayed consistent with run1's own finding - 50-53 attempts this time vs 49 before - confirming that variability is in the probabilistic hardware-readiness window noted above, not in the measured throughput metric itself.)

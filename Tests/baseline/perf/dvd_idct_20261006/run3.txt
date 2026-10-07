@@ -1,0 +1,12 @@
+perf_dvd_idct: 2000 calls/metric, macroblock sizes up to 12, timer tick 0.0300 us
+surface primed via 2D lock_memory: addr=0x2810000 size=0x100
+stream-0 buffer mapped: addr=0xb000 size=524288
+readiness probe attempt 10: 0xe00002d8, still retrying
+readiness probe attempt 20: 0xe00002d8, still retrying
+readiness probe attempt 30: 0xe00002d8, still retrying
+readiness probe attempt 40: 0xe00002d8, still retrying
+doIDCT ready after 50 attempt(s)
+METRIC dvd.doIDCT.intra.1mb n=2000 min_us=4.17 p10_us=4.23 median_us=4.29 p90_us=4.32 max_us=7.08
+METRIC dvd.doIDCT.intra.4mb n=2000 min_us=4.11 p10_us=4.26 median_us=5.04 p90_us=5.13 max_us=6.18
+METRIC dvd.doIDCT.intra.12mb n=2000 min_us=4.14 p10_us=11.94 median_us=12.03 p90_us=12.12 max_us=13.26
+RESULT: PASS (0 size step(s) failed)
