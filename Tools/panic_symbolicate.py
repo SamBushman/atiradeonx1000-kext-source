@@ -101,9 +101,9 @@ def parse(text):
     return entries
 
 
-def label(addr, mods, st, pad):
+def label(addr, mods, st, pad, prefix):
     for name, base in mods.items():
-        if name.startswith("com.apple.ATIRadeonX1000"):
+        if name.startswith(prefix):
             r = st.lookup(addr - base - pad)
             if r:
                 return "kext %s" % r
@@ -126,11 +126,11 @@ def follows_call(st, off):
     return bool(i) and i[0].mnemonic in ("bl", "bla", "bctrl", "blrl")
 
 
-def find_pad(st, entries):
+def find_pad(st, entries, prefix):
     """-> (best pad, frames matched, frames total, runner-up score)"""
     frames = []
     for e in entries:
-        base = [b for k, b in e["mods"].items() if k.startswith("com.apple.ATIRadeonX1000")][0]
+        base = [b for k, b in e["mods"].items() if k.startswith(prefix)][0]
         frames += [w - base for w in e["bt"] if base <= w < base + 0x80000]
     if not frames:
         return None
@@ -146,16 +146,19 @@ def main():
     ap.add_argument("--pad", type=lambda s: int(s, 0), default=0x1000)
     ap.add_argument("--find-pad", action="store_true", help="derive PAD from the log: the pad for which most kext frames follow a call instruction")
     ap.add_argument("--entry", type=int, help="only the Nth ATI-related entry (1-based); default: all entries that name the kext")
+    ap.add_argument("--module-prefix", default="com.apple.ATIRadeonX1000",
+                     help="match panic-log module names starting with this instead of the stock bundle id - "
+                          "needed for a locally-built test kext loaded under its own id (e.g. com.example.ATIRadeonX1000.stage3test)")
     a = ap.parse_args()
     st = Symtab(a.kext)
-    ents = [e for e in parse(open(a.log, errors="replace").read()) if any(k.startswith("com.apple.ATIRadeonX1000") for k in e["mods"])]
+    ents = [e for e in parse(open(a.log, errors="replace").read()) if any(k.startswith(a.module_prefix) for k in e["mods"])]
     if a.entry:
         ents = ents[a.entry - 1:a.entry]
     if not ents:
-        print("no panic entry naming com.apple.ATIRadeonX1000 found"); return 2
+        print("no panic entry naming a module starting with %r found" % a.module_prefix); return 2
     resolved = 0
     if a.find_pad:
-        fp = find_pad(st, ents)
+        fp = find_pad(st, ents, a.module_prefix)
         if not fp:
             print("--find-pad: no kext frames in the log"); return 2
         a.pad = fp[0]
@@ -168,19 +171,19 @@ def main():
             print("   %s  DAR=0x%x DSISR=0x%x" % (e.get("xcp", ""), r.get("DAR", 0), r.get("DSISR", 0)))
             for k in ("PC", "LR"):
                 if k in r:
-                    lb = label(r[k], e["mods"], st, a.pad)
+                    lb = label(r[k], e["mods"], st, a.pad, a.module_prefix)
                     resolved += lb.startswith("kext")
                     print("   %s = 0x%08x  %s" % (k, r[k], lb))
                     if lb.startswith("kext"):
                         for base_name, base in e["mods"].items():
-                            if base_name.startswith("com.apple.ATIRadeonX1000"):
+                            if base_name.startswith(a.module_prefix):
                                 for mark, ad, mn, op in st.disasm(r[k] - base - a.pad):
                                     print("        %s %05x  %s %s" % (mark, ad, mn, op))
         for k, b in e["mods"].items():
-            if k.startswith("com.apple.ATIRadeonX1000"):
+            if k.startswith(a.module_prefix):
                 print("   module %s base 0x%x text starts 0x%x" % (k, b, b + a.pad))
         for i, w in enumerate(e["bt"]):
-            lb = label(w, e["mods"], st, a.pad)
+            lb = label(w, e["mods"], st, a.pad, a.module_prefix)
             resolved += lb.startswith("kext")
             print("   #%-2d 0x%08x  %s" % (i, w, lb))
     return 0 if resolved else 1
