@@ -1,0 +1,41 @@
+# opcode_recorder start pid=338 start_offset=0x1c dump=0
+OPEN	type=0	connect=0x1303
+OPEN	type=0	connect=0x1e03
+OPEN	type=2	connect=0x2303
+TAIL	conn=0x2303	type=2d	final record op=0x80 header=0x80000000 at +0x20
+FLUSH	conn=0x2303	type=2d	n=1	addr=0x1b000	size=0x1000	records=2	words=2	terminated=1	t_us=3318508.40
+OPEN	type=0	connect=0x2503
+OPEN	type=2	connect=0x280f
+TAIL	conn=0x280f	type=2d	final record op=0x80 header=0x80000000 at +0x20
+FLUSH	conn=0x280f	type=2d	n=1	addr=0x1d000	size=0x1000	records=2	words=2	terminated=1	t_us=3333944.13
+OPEN	type=1	connect=0x3b0f
+CLOSE	conn=0x3b0f	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+OPEN	type=1	connect=0x3b13
+OPEN	type=1	connect=0x3c03
+CLOSE	conn=0x3c03	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+CLOSE	conn=0x3b13	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+OPEN	type=1	connect=0x3b2b
+OPEN	type=1	connect=0x3d13
+CLOSE	conn=0x3d13	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+CLOSE	conn=0x3b2b	type=gl	flushes=0	buffers=0	empty=0	records=0	words=0	anomalies=0	strays=0	tails=0	HIST
+OPEN	type=1	connect=0x3b43
+TAIL	conn=0x3b43	type=gl	final record op=0x03 header=0x03000000 at +0x7a88
+FLUSH	conn=0x3b43	type=gl	n=2	addr=0xc5000	size=0x20000	records=77	words=7836	terminated=1	t_us=3882352.34
+TAIL	conn=0x2303	type=2d	final record op=0x01 header=0x01000000 at +0x210
+FLUSH	conn=0x2303	type=2d	n=2	addr=0x1c000	size=0x1000	records=2	words=126	terminated=1	t_us=3887370.63
+TAIL	conn=0x2303	type=2d	final record op=0x01 header=0x01000000 at +0x210
+FLUSH	conn=0x2303	type=2d	n=3	addr=0x342000	size=0x1000	records=2	words=126	terminated=1	t_us=3887643.47
+TAIL	conn=0x2303	type=2d	final record op=0x01 header=0x01000000 at +0x20
+FLUSH	conn=0x2303	type=2d	n=4	addr=0x343000	size=0x1000	records=2	words=2	terminated=1	t_us=3906820.59
+TAIL	conn=0x280f	type=2d	final record op=0x01 header=0x01000000 at +0x20
+FLUSH	conn=0x280f	type=2d	n=2	addr=0x1e000	size=0x1000	records=2	words=2	terminated=1	t_us=3908534.71
+TAIL	conn=0x3b43	type=gl	final record op=0x03 header=0x03000000 at +0x7d08
+FLUSH	conn=0x3b43	type=gl	n=3	addr=0x39d000	size=0x20000	records=63	words=7996	terminated=1	t_us=3917492.09
+TAIL	conn=0x3b43	type=gl	final record op=0x03 header=0x03000000 at +0xc48
+FLUSH	conn=0x3b43	type=gl	n=4	addr=0xc5000	size=0x20000	records=24	words=780	terminated=1	t_us=3918338.48
+EXIT	conn=0x2303	type=2d	flushes=4	buffers=4	empty=0	records=8	words=256	anomalies=0	strays=0	tails=4	HIST 00:4:252 01:3:3 80:1:1
+EXIT	conn=0x280f	type=2d	flushes=2	buffers=2	empty=0	records=4	words=4	anomalies=0	strays=0	tails=2	HIST 00:2:2 01:1:1 80:1:1
+EXIT	conn=0x3b43	type=gl	flushes=4	buffers=3	empty=0	records=164	words=16612	anomalies=0	strays=0	tails=3	HIST 00:3:269 03:3:3 06:81:14543 16:6:18 17:4:4 18:4:4 19:4:4 1a:4:4 1b:4:4 1c:4:4 1d:4:4 1e:4:4 1f:4:4 20:4:4 21:4:4 22:4:4 23:4:4 24:4:4 25:4:933 28:2:254 29:9:536
+TOTAL	pid=338	type=gl	flushes=4	anomalies=0	HIST 00:3:269 03:3:3 06:81:14543 16:6:18 17:4:4 18:4:4 19:4:4 1a:4:4 1b:4:4 1c:4:4 1d:4:4 1e:4:4 1f:4:4 20:4:4 21:4:4 22:4:4 23:4:4 24:4:4 25:4:933 28:2:254 29:9:536
+TOTAL	pid=338	type=2d	flushes=6	anomalies=0	HIST 00:6:254 01:4:4 80:2:2
+# opcode_recorder start pid=271 start_offset=0x1c dump=0
