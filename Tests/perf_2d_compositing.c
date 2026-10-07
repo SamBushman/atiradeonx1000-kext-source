@@ -16,23 +16,23 @@
  * What this buys instead: a fully automated, precisely repeatable procedure - the same inputs, byte-for-byte, every
  * run - which is what a real regression gate actually needs, more than matching an old human-eyeballed number.
  *
- * Readout: Quartz Debug's Frame Meter is an ANALOG NEEDLE GAUGE (0-90 dial), not a digital counter - there is no
- * text to read, so this program cannot "parse" a value directly. It instead saves timestamped screencapture frames
- * during each gesture into a results directory; Tools/gauge_read.py (plain-stdlib PNG decoding, no PIL/numpy) reads
- * the needle's angle from each frame and converts it to a value, using a calibration derived and cross-validated
- * directly from real captures (see that file's own header). Full-screen `screencapture` costs ~1.1s/capture on this
- * hardware (confirmed by direct measurement - there is no faster non-invasive capture path on Tiger: CGDisplay-
- * CreateImage/CGWindowListCreateImage don't exist on this SDK, and CGDisplayBaseAddress needs CGDisplayCapture,
- * which would blank other apps' drawing - unacceptable on a live session), so each gesture runs long enough (10s)
- * to collect several samples despite that cost, rather than trying to catch a true instantaneous peak.
+ * Readout (revised 2026-10-06 - no screenshots at all): Quartz Debug's own Frame Meter is an analog needle gauge
+ * fed by the private CGSGetPerformanceData() call - found by disassembling Quartz Debug's own binary (otool -tV),
+ * not guessed: `bl __CGSDefaultConnection` then `bl _CGSGetPerformanceData` with 4 output pointers at stack offsets
+ * 0x44,0x3c,0x40,0x38 (in that argument order). Calling it directly gives live values with zero screenshot/file-I/O
+ * cost, sampleable every tick of the input loop - confirmed empirically (not just by the disassembly) to respond
+ * clearly to real redraw load: idle readings of roughly a=25-26, b=2.0-2.9M, c=146-153, d=77-86 versus roughly
+ * a=52-58, b=8.3-10M, c=321-352, d=329-377 during an active window drag on this machine. Which exact one (or what
+ * derived rate of them) matches the Frame Meter's own displayed 0-90 number is NOT established - Quartz Debug's own
+ * binary runs a block of floating-point math on values derived from this call before displaying anything, which
+ * was not fully traced - so this reports all four raw values per scenario rather than overclaiming a single "fps".
  *
- * Precondition (checked, not set up by this program): Quartz Debug running with Tools -> Show Frame Meter already
- * active, and a disposable Finder window open in LIST view on a folder with enough items to scroll (e.g. Desktop).
- * This program finds that window by name via AppleScript rather than assuming fixed screen coordinates for it.
+ * Precondition (checked, not set up by this program): a disposable Finder window open (this program finds it by
+ * querying the front window's bounds via AppleScript, not fixed coordinates).
  *
- * Usage: perf_2d_compositing OUTDIR
- *   Captures idle + 5 gesture scenarios, ~10s each, into OUTDIR/<scenario>_NN.png. Run Tools/gauge_read.py OUTDIR/*
- *   afterward to get per-scenario peak/mean values.
+ * Usage: perf_2d_compositing [ticks per scenario, default 200] [tick interval us, default 16000]
+ * Output (same stable METRIC-line format as perf_methods.c/perf_baseline.c, parsed by Tools/perf_compare.py):
+ *   METRIC <scenario>.<a|b|c|d> n=<n> min=<> p10=<> median=<> p90=<> max=<>
  * Build on the G5: gcc -arch ppc -o perf_2d_compositing perf_2d_compositing.c -framework ApplicationServices
  */
 #include <ApplicationServices/ApplicationServices.h>
@@ -40,67 +40,62 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <sys/wait.h>
 
-static char g_outdir[512];
+extern int _CGSDefaultConnection(void);
+extern int CGSGetPerformanceData(int cid, void *out1, void *out2, void *out3, void *out4);
 
-static void capture(const char *scenario, int n) {
-    char path[600];
-    pid_t pid;
-    snprintf(path, sizeof path, "%s/%s_%02d.png", g_outdir, scenario, n);
-    pid = fork();
-    if (pid == 0) {
-        execlp("screencapture", "screencapture", "-x", path, (char *)NULL);
-        _exit(127);
-    }
-    waitpid(pid, NULL, 0);
+static int g_cid;
+static int g_ticks;
+static int g_tick_us;
+
+static int cmp_f(const void *a, const void *b) {
+    float x = *(const float *)a, y = *(const float *)b;
+    return x < y ? -1 : x > y;
 }
 
-static CGPoint cur_pos(void) {
-    CGEventRef ev = CGEventCreate(NULL);
-    CGPoint p = CGEventGetLocation(ev);
-    CFRelease(ev);
-    return p;
+static void report_metric(const char *name, float *s, int n) {
+    qsort(s, n, sizeof(float), cmp_f);
+    printf("METRIC %s n=%d min=%.3f p10=%.3f median=%.3f p90=%.3f max=%.3f\n",
+           name, n, s[0], s[(int)(n * 0.1)], s[n / 2], s[(int)(n * 0.9)], s[n - 1]);
 }
 
-static void drag_lap(double fx, double fy, double tx, double ty, int steps, int step_us) {
-    int i;
-    for (i = 1; i <= steps; i++) {
-        double x = fx + (tx - fx) * i / (double)steps;
-        double y = fy + (ty - fy) * i / (double)steps;
-        CGPostMouseEvent(CGPointMake(x, y), TRUE, 1, TRUE);
-        usleep(step_us);
-    }
-}
-
-/* Runs `samples` capture() calls, each preceded by `between_frames` of continuous synthetic input generated by
- * calling gesture_step(i) in a tight loop for roughly one capture interval's worth of wall-clock time - this is an
- * interleaved approximation (capture blocks for ~1.1s, during which no new input is posted), not true concurrent
- * sampling; see the file header for why a faster, non-blocking capture path isn't available on this OS. */
 typedef void (*gesture_step_fn)(int tick);
 
-static void run_scenario(const char *name, int samples, gesture_step_fn step) {
-    int s, tick = 0;
-    printf("scenario %s: %d samples\n", name, samples);
-    for (s = 0; s < samples; s++) {
-        int i;
-        for (i = 0; i < 20; i++) { if (step) step(tick++); usleep(15000); }
-        capture(name, s);
+/* Samples CGSGetPerformanceData once per tick, interleaved with the gesture's own input event for that tick -
+ * both are now cheap (a function call, not a blocking screenshot), so this is true per-tick interleaving, not the
+ * capture-blocks-for-a-second approximation the screenshot-based first draft of this file needed. */
+static void run_scenario(const char *name, gesture_step_fn step) {
+    float *sa = malloc(g_ticks * sizeof(float)), *sb = malloc(g_ticks * sizeof(float));
+    float *sc = malloc(g_ticks * sizeof(float)), *sd = malloc(g_ticks * sizeof(float));
+    char nbuf[64];
+    int i;
+    printf("scenario %s: %d ticks at %d us\n", name, g_ticks, g_tick_us);
+    for (i = 0; i < g_ticks; i++) {
+        union { unsigned int i; float f; } a, b, c, d;
+        if (step) step(i);
+        CGSGetPerformanceData(g_cid, &a, &b, &c, &d);
+        sa[i] = a.f; sb[i] = b.f; sc[i] = c.f; sd[i] = d.f;
+        usleep(g_tick_us);
     }
+    snprintf(nbuf, sizeof nbuf, "%s.a", name); report_metric(nbuf, sa, g_ticks);
+    snprintf(nbuf, sizeof nbuf, "%s.b", name); report_metric(nbuf, sb, g_ticks);
+    snprintf(nbuf, sizeof nbuf, "%s.c", name); report_metric(nbuf, sc, g_ticks);
+    snprintf(nbuf, sizeof nbuf, "%s.d", name); report_metric(nbuf, sd, g_ticks);
+    free(sa); free(sb); free(sc); free(sd);
 }
 
 /* --- per-scenario gesture step functions --- */
 static double g_dragFX, g_dragFY, g_dragTX, g_dragTY;
 static void step_drag(int tick) {
-    int lap = tick / 20, sub = tick % 20;
+    int lap = tick / 40, sub = tick % 40;
     double fx = (lap % 2 == 0) ? g_dragFX : g_dragTX, fy = (lap % 2 == 0) ? g_dragFY : g_dragTY;
     double tx = (lap % 2 == 0) ? g_dragTX : g_dragFX, ty = (lap % 2 == 0) ? g_dragTY : g_dragFY;
-    double x = fx + (tx - fx) * (sub + 1) / 20.0, y = fy + (ty - fy) * (sub + 1) / 20.0;
+    double x = fx + (tx - fx) * (sub + 1) / 40.0, y = fy + (ty - fy) * (sub + 1) / 40.0;
     CGPostMouseEvent(CGPointMake(x, y), TRUE, 1, TRUE);
 }
 
 static void step_scroll(int tick) {
-    int dir = ((tick / 15) % 2 == 0) ? -3 : 3; /* alternate scroll direction every 15 ticks */
+    int dir = ((tick / 30) % 2 == 0) ? -3 : 3; /* alternate scroll direction every 30 ticks */
     CGPostScrollWheelEvent(1, dir);
 }
 
@@ -112,42 +107,34 @@ static void step_dock(int tick) {
 
 static void step_idle(int tick) { (void)tick; }
 
+static void step_window_open(int tick) {
+    if (tick % 40 == 0) {
+        system("osascript -e 'tell application \"Finder\" to make new Finder window' "
+               "-e 'tell application \"Finder\" to set bounds of front window to {700,100,1000,350}' "
+               "-e 'tell application \"Finder\" to close front window' > /dev/null 2>&1 &");
+    }
+}
+
 int main(int argc, char **argv) {
-    char cmd[256];
     double winL, winT, winR, winB;
     FILE *fp;
 
-    if (argc < 2) { fprintf(stderr, "usage: perf_2d_compositing OUTDIR\n"); return 1; }
-    snprintf(g_outdir, sizeof g_outdir, "%s", argv[1]);
-    snprintf(cmd, sizeof cmd, "mkdir -p '%s'", g_outdir);
-    system(cmd);
+    g_ticks = argc > 1 ? atoi(argv[1]) : 200;
+    g_tick_us = argc > 2 ? atoi(argv[2]) : 16000;
+    g_cid = _CGSDefaultConnection();
 
     /* Find the disposable test window's bounds via AppleScript rather than assume fixed coordinates. */
     fp = popen("osascript -e 'tell application \"Finder\" to get bounds of front window'", "r");
     if (!fp || fscanf(fp, "%lf, %lf, %lf, %lf", &winL, &winT, &winR, &winB) != 4) {
-        fprintf(stderr, "could not read front Finder window bounds - open one first (List view, a folder with "
-                        "enough items to scroll, e.g. Desktop)\n");
+        fprintf(stderr, "could not read front Finder window bounds - open one first\n");
         if (fp) pclose(fp);
         return 1;
     }
     pclose(fp);
     printf("using Finder window bounds: %.0f,%.0f - %.0f,%.0f\n", winL, winT, winR, winB);
 
-    /* idle baseline */
-    run_scenario("idle", 5, step_idle);
-
-    /* window open/close: repeatedly toggle a second window - counts as real compositing work each time */
-    {
-        int i;
-        printf("scenario window_open: 5 samples\n");
-        for (i = 0; i < 5; i++) {
-            system("osascript -e 'tell application \"Finder\" to make new Finder window' "
-                   "-e 'tell application \"Finder\" to set bounds of front window to {700,100,1000,350}' "
-                   "-e 'tell application \"Finder\" to close front window' > /dev/null 2>&1");
-            usleep(300000);
-            capture("window_open", i);
-        }
-    }
+    run_scenario("idle", step_idle);
+    run_scenario("window_open", step_window_open);
 
     /* window drag: titlebar is ~11px above winT, centered horizontally */
     g_dragFX = (winL + winR) / 2.0; g_dragFY = winT - 11;
@@ -156,15 +143,15 @@ int main(int argc, char **argv) {
     usleep(150000);
     CGPostMouseEvent(CGPointMake(g_dragFX, g_dragFY), TRUE, 1, TRUE);
     usleep(100000);
-    run_scenario("window_drag", 10, step_drag);
-    CGPostMouseEvent(CGPointMake(cur_pos().x, cur_pos().y), TRUE, 1, FALSE);
-    /* put the window back roughly where it was for the resize scenario's math below */
+    run_scenario("window_drag", step_drag);
+    CGPostMouseEvent(CGPointMake(g_dragTX, g_dragTY), TRUE, 1, FALSE);
     {
         char restoreCmd[400];
         snprintf(restoreCmd, sizeof restoreCmd,
                  "osascript -e 'tell application \"Finder\" to set bounds of front window to {%.0f,%.0f,%.0f,%.0f}'"
                  " > /dev/null 2>&1", winL, winT, winR, winB);
         system(restoreCmd);
+        usleep(200000);
     }
 
     /* window resize: drag the bottom-right corner */
@@ -174,19 +161,19 @@ int main(int argc, char **argv) {
     usleep(150000);
     CGPostMouseEvent(CGPointMake(g_dragFX, g_dragFY), TRUE, 1, TRUE);
     usleep(100000);
-    run_scenario("window_resize", 10, step_drag);
-    CGPostMouseEvent(CGPointMake(cur_pos().x, cur_pos().y), TRUE, 1, FALSE);
+    run_scenario("window_resize", step_drag);
+    CGPostMouseEvent(CGPointMake(g_dragTX, g_dragTY), TRUE, 1, FALSE);
 
     /* scrolling: cursor needs to be over the Finder window's content area */
     CGPostMouseEvent(CGPointMake((winL + winR) / 2.0, (winT + winB) / 2.0), TRUE, 1, FALSE);
     usleep(100000);
-    run_scenario("scroll", 10, step_scroll);
+    run_scenario("scroll", step_scroll);
 
     /* Dock hover: Dock sits at the very bottom of the screen */
     g_dockY = (double)(int)CGDisplayPixelsHigh(CGMainDisplayID()) - 20;
-    run_scenario("dock_hover", 10, step_dock);
+    run_scenario("dock_hover", step_dock);
     CGPostMouseEvent(CGPointMake(960, 540), TRUE, 1, FALSE); /* park the cursor away from the Dock when done */
 
-    printf("done - run: python3 Tools/gauge_read.py '%s'/*.png\n", g_outdir);
+    printf("RESULT: PASS\n");
     return 0;
 }
