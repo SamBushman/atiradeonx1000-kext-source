@@ -74,3 +74,25 @@ Ran twice more (`run2.txt`, `run3.txt`) to apply this project's noise/regression
 - **The `b` metric specifically is noisy almost everywhere it's large** (`window_drag.b` 100%, `window_resize.b` 89%, `window_open.b` 95%) - whatever this raw value tracks (undetermined, see the mechanism note above), it does not average out the way `a`/`c`/`d` mostly do.
 
 **Practical implication**: this baseline is not yet a reliable regression gate across all its metrics as currently measured. The continuous-gesture `a` values are solid; the transient-scenario and `b`-metric values need either more repeats, a different sampling window, or acceptance that they're inherently high-variance signals not suited to a tight numeric gate. Recorded here plainly rather than treated as settled by simply having more runs - a future regression check using this baseline should weight metrics accordingly (or restrict itself to the metrics shown stable here) rather than trust all 24 equally.
+
+## SUPERSEDED (2026-10-07): root cause found and fixed - see `../desktop_compositing_20261007_fixed/`
+
+The "noise" above was investigated further rather than accepted as inherent. Two real, distinct causes were found
+and fixed (not just documented): `window_resize` was missing a restore-to-original-size step that `window_drag`
+already had (so repeated runs permanently grew the test window), and separately, Finder's own "remembered" window
+size can be large enough on this G5's `1920x1080` display that the resize/drag gestures' target coordinates land
+off-screen, producing inconsistent synthetic-input behavior. `idle`'s own apparent noise was a third, different
+thing - not a bug at all, a real and correct state-dependent reading (confirmed via a standalone `CGSGetPerformanceData`
+probe at true rest) that just needs a consistent precondition to be comparable run-to-run.
+
+`run4.txt` through `run10.txt` were added here during that investigation (7 more runs, same unfixed binary/
+precondition as `run1`-`run3`) specifically to get a large enough pool to see the drift as a real trend rather than
+apparent randomness - **note the file listing sorts lexicographically (`run1, run10, run2, run3, ...`), which
+scrambles the actual time order; reorder by run number before reading any trend out of them.** Once correctly
+ordered, `window_resize.a` shows a clean monotonic decay (~60 -> ~2) and `window_drag.b` a clean rise-then-plateau
+(~9M -> ~65M) across the 10 sequential runs - this is what led to finding the missing-restore bug, not further
+evidence of inherent randomness.
+
+The fixed `Tests/perf_2d_compositing.c` plus a controlled precondition (explicit window size, not Finder's
+remembered default) produces **0 of 24 metrics exceeding 25% spread** - see `../desktop_compositing_20261007_fixed/README.md`
+for the full writeup. Use that baseline going forward; this directory is kept for the historical investigation trail.

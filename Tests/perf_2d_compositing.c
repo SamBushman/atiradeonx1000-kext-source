@@ -163,6 +163,19 @@ int main(int argc, char **argv) {
     usleep(100000);
     run_scenario("window_resize", step_drag);
     CGPostMouseEvent(CGPointMake(g_dragTX, g_dragTY), TRUE, 1, FALSE);
+    /* BUG FIX (2026-10-07): unlike window_drag above, this scenario never restored the window's original SIZE - each
+     * invocation permanently grew it by the same (150,100) delta with nothing resetting it, so repeated back-to-back
+     * runs measured a progressively larger window (confirmed: a 10-run pool showed a clean monotonic drift in both
+     * window_resize's own metrics and window_drag's, the latter because each run's drag step then dragged whatever
+     * size the window had grown to by the previous run's unrestored resize). Restore it the same way window_drag does. */
+    {
+        char restoreCmd[400];
+        snprintf(restoreCmd, sizeof restoreCmd,
+                 "osascript -e 'tell application \"Finder\" to set bounds of front window to {%.0f,%.0f,%.0f,%.0f}'"
+                 " > /dev/null 2>&1", winL, winT, winR, winB);
+        system(restoreCmd);
+        usleep(200000);
+    }
 
     /* scrolling: cursor needs to be over the Finder window's content area */
     CGPostMouseEvent(CGPointMake((winL + winR) / 2.0, (winT + winB) / 2.0), TRUE, 1, FALSE);
