@@ -86,6 +86,16 @@ extern "C" kern_return_t VRAMPeek_start(kmod_info_t *ki, void *data) {
     IOLog("VRAMPeek: surface(dvdCtx+0xf8)=0x%08x\n", (unsigned)surface);
     if (surface == 0) { IOLog("VRAMPeek: no bound surface\n"); accelSvc->release(); return KERN_SUCCESS; }
 
+    /* perf_dvd_idct.c debugging (2026-10-06): doIDCT's destPlaneIndex=-10 resolves to surface+0xa8 (section 9e); param_2+0x2c is set FROM
+     * *(thatRecord+8), i.e. *(surface+0xb0). Read it directly to see whether it's actually populated, vs. the generic buffer-slot array at
+     * surface+idx*4+0xb70 (what 2D lock_memory/unlock_memory(0) populates) - these may not be the same record at all. */
+    {
+        UInt32 slot0RecordPlus8 = *(UInt32 *)(surface + 0xb0);
+        UInt32 genericSlot0 = *(UInt32 *)(surface + 0xb70);
+        IOLog("VRAMPeek: surface+0xb0(destPlaneIndex=-10 record+8)=0x%08x surface+0xb70(generic slot0 ptr)=0x%08x\n",
+              (unsigned)slot0RecordPlus8, (unsigned)genericSlot0);
+    }
+
     UInt32 apertureBase = *(UInt32 *)(surface + 0xc10);
     IOLog("VRAMPeek: apertureBase(surface+0xc10)=0x%08x\n", (unsigned)apertureBase);
 
