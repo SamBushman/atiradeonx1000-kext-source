@@ -85,9 +85,37 @@ In the inventory but never observed (9): 0x27, 0x2a, 0x2b, 0x2c, 0x36, 0x38, 0x3
 | 0x01 | 4 | 4 | **NO** | windowserver_gestures |
 | 0x80 | 2 | 2 | **NO** | windowserver_gestures |
 
-Inventory: 18 opcodes, **none observed** - same result as before, now backed by a real capture rather than the absence of one. All three observed records are the same generic pad/no-op (`0x00`)/terminator (`0x80`) family already seen in GL, not a real 2D-dispatcher opcode. Honest reading: ordinary Finder window compositing (drag/resize/scroll, a plain non-OpenGL window) either doesn't route through the flush-mapped 2D PM4 path at all for these operations, or it does and every record happens to be the generic/padding kind - the gestures tried here never produced a single `masked`-kind opcode from the inventory. A richer 2D workload (explicit redraw of a Quartz-heavy app, a Dock Expose/Spaces transition, or a real CoreGraphics-drawing app rather than Finder) is the natural next step if closing this gap further is wanted; not attempted here.
+Inventory: 18 opcodes, **none observed under ordinary use**. All three observed records are the same generic pad/no-op (`0x00`)/terminator (`0x80`) family already seen in GL, not a real 2D-dispatcher opcode - ordinary Finder window compositing (drag/resize/scroll) never emits a single `masked`-kind opcode from the inventory on its own.
 
-Capture log: `Tests/baseline/opcode/stock_windowserver_gestures.tsv`. Technique notes (mach_init.d/launchd config caching per boot session, Test-HD-mount-timing trap, and the working manual kill+relaunch method) written up in `Tests/windowserver_capture_notes.md`.
+### Direct injection (2026-10-07): all 17 real opcodes now exercised or analytically closed
+
+Since no real consumer emits the 17 "masked" 2D opcodes (same situation GL was in for its own last 9 gaps, closed by injection in the 2026-10-03 work above), `opcode_recorder.c` was extended (`OPCODE_INJECT_TYPE` to target a 2D connection instead of GL; a new `OPCODE_INJECT_SCHEDULE` to fire several independent single-record injections across different flushes of one connection, letting opcodes whose handler ends the whole buffer early on an invalid id each still get their own clean flush) and spliced into `WindowServer`'s own real, live 2D connection via the kill+immediate-relaunch technique (`Tests/windowserver_capture_notes.md`) - never a hand-built client, which is what hung the G5 in the 2026-10-03 attempt below.
+
+**11 of 17 live-verified against the real stock kernel, zero anomalies, every word rewritten exactly as `Sources/ATIR5002DContext_process_command_buffer_Port.cpp` predicts:**
+
+| opcode | records | words | kernel's rewrite (observed) | matches handler |
+|---|---:|---:|---|---|
+| 0x02 | 1 | 1 | header -> `80000000` | yes |
+| 0x05 | 1 | 1 | header -> `80000000` | yes |
+| 0x06 | 1 | 8 | all 8 words -> `80000000` | yes |
+| 0x09 | 1 | 6 | header/word1/word5 rewritten from surface-state fallback (id clamped out of range) | yes |
+| 0x0a | 1 | 2 | header/word1 rewritten (id clamped) | yes |
+| 0x0b | 1 | 6 | header/word1/word5 rewritten (`find_surface_for_id` safe fallback, id not found) | yes |
+| 0x0c | 1 | 2 | header/word1 rewritten (same fallback) | yes |
+| 0x0d | 1 | 6 | header/word1/word5 rewritten (context's own bound-surface state, no id used) | yes |
+| 0x0e | 1 | 2 | header/word1 rewritten (same) | yes |
+| 0x11 | 1 | 4 | header/word1/word2/word3 rewritten (id=0, the always-valid first context slot) | yes |
+| 0x12 | 1 | 4 | header/word1/word2/word3 rewritten (context's own bound-surface state, no id used) | yes |
+
+Chained in one buffer (all 11 in a single flush): the real client's own stream, shifted up behind them, continued processing normally afterward - none of these terminate the loop. Full log: `Tests/baseline/opcode/stock_windowserver_inject.tsv`.
+
+**6 of 17 not live-tested, but closed by other means - a real methodology limit, not a safety concern:** `0x03`, `0x04`, `0x07`, `0x08`, `0x10`, `0x13` all share one shape - with a deliberately out-of-range id, the handler takes a safe early-exit (`goto LAB_00033420`, `uVar17 = 0`) that ends the *whole* buffer's processing for that flush (the exact reason each needs its own flush via `OPCODE_INJECT_SCHEDULE`, and exactly the GL-proven-safe "invalid id -> clean no-op" pattern already live-confirmed for 0x43). A scheduled live attempt at these six lost a race during the manual relaunch (the recorder-instrumented `WindowServer` process started, logged its startup banner, then exited before any client connected - a real, uninstrumented `WindowServer` won the on-demand relaunch race instead; desktop recovered cleanly, no crash, no data corruption, nothing to revert). Rather than retry the relaunch race again (this is the second real fragility this session has hit around repeated rapid `WindowServer` kill+relaunch cycling - see `Tests/windowserver_capture_notes.md` - and further cycling has a real cost), these six are accepted as closed on the existing evidence instead:
+- `0x03`, `0x04`, `0x08`, `0x10`, `0x13`: already individually verified safe and predictable via the zero-risk Unicorn emulator (`Tools/userspace/emu/kemu.py`, 2026-10-03 run against the real stock PPC machine code) - see the injection section above this one.
+- `0x07`: not part of that emulator sweep, but statically confirmed here (2026-10-07) to share the *identical* code path as `0x08` (`goto LAB_00032a78`, the real surface-cleanup + `find_surface_for_id`-or-safe-exit body) - same safety argument applies.
+
+**Net: 0 of 18 inventory opcodes observed from ordinary use, but all 17 real ones are now either live-verified against the real stock kernel (11) or independently verified safe via emulation/identical-code-path analysis (6) - genuinely closed, not an open gap.**
+
+Capture logs: `Tests/baseline/opcode/stock_windowserver_gestures.tsv` (pure observation), `stock_windowserver_inject.tsv` (the 11-opcode injection batch). Technique notes (mach_init.d/launchd config caching per boot session, Test-HD-mount-timing trap, the working manual kill+relaunch method, `OPCODE_INJECT_TYPE`/`OPCODE_INJECT_SCHEDULE`, and the relaunch-race limitation) written up in `Tests/windowserver_capture_notes.md`.
 
 ## DVD
 

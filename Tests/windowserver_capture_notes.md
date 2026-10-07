@@ -58,3 +58,47 @@ same breath.
 `Tests/perf_2d_compositing.c` (already built for #44) was reused as-is to drive real desktop interaction (window
 open/drag/resize, scroll, Dock hover) via synthetic `CGPostMouseEvent`/`CGPostScrollWheelEvent` input against the live
 login session - no new tooling needed for that half.
+
+
+## Direct injection into WindowServer's real 2D connection (2026-10-07)
+
+Extended `opcode_recorder.c`'s existing GL-only injection mechanism (built 2026-10-02/03) two ways, both backward
+compatible (default behavior unchanged):
+
+- `OPCODE_INJECT_TYPE` (default `1` = GL): which `IOServiceOpen` connection type to target. Set to `2` for 2D, `3` for
+  DVD. The original mechanism was hardcoded to GL only (`(k->type & 3) == 1`).
+- `OPCODE_INJECT_SCHEDULE="flush:word[,word...];flush:word[,word...];..."`: schedules several independent single-shot
+  injections across different flushes of the same matched connection, each firing once the first time its own flush
+  count is reached. Added specifically because several 2D opcodes (`0x03`/`0x04`/`0x07`/`0x08`/`0x10`/`0x13`) each end
+  the *whole* command buffer's processing early when given a deliberately-invalid id (the same safe "no-op" pattern
+  already proven for GL's `0x43`) - two of them can never share one flush, and the original mechanism only supported
+  one single-shot injection per process lifetime, meaning each would otherwise need its own full kill+relaunch cycle.
+  `OPCODE_INJECT_SCHEDULE` lets all of them fire in one process lifetime instead, each on its own flush.
+
+Verified the schedule mechanism itself first against a disposable GL client (two independent scheduled injections,
+flush 2 and flush 3 of the same connection, both fired and rewrote exactly as predicted) before ever pointing it at
+WindowServer.
+
+**11 of the 17 real 2D opcodes were then live-injected into WindowServer's own real 2D connection in one batch (one
+flush), all rewritten exactly as the static source predicts, zero anomalies** - see `Tests/pm4_opcode_usage.md`'s 2D
+section for the full table. This is the first live, real-kernel confirmation of any 2D-context opcode in this
+project's history (previously only GL opcodes had been live-injected).
+
+### A second real WindowServer-relaunch fragility (distinct from the mach_init.d/Test-HD one above)
+
+A follow-up attempt to schedule the remaining 6 ("terminator-family") opcodes across flushes 2-7 of one connection hit
+a **different** failure mode than the mach_init.d one documented above: the recorder-instrumented `WindowServer`
+process started (logged its own startup banner to its log file) but exited before any client ever connected to it -
+a second, *uninstrumented* `WindowServer` evidently won the on-demand relaunch race instead and served the desktop
+(Finder, the gesture driver) completely normally and successfully, just with no recorder attached. No crash, no
+anomaly, no corruption - the desktop recovered and worked fine throughout; the only cost was that specific test's data
+never got recorded. This happened on the *third* manual kill+relaunch cycle within one boot session (the first two,
+earlier the same session, both won the race cleanly) - consistent with a real, reproducible fragility around rapid
+repeated `WindowServer` kill+relaunch cycling specifically, not with anything about the injected opcode content
+(this project has an unrelated precedent for the same general shape of problem with a different subsystem: #145,
+DVD `setup_buffers`/`lock_all_buffers` cycling). **Treat more than ~2 manual WindowServer kill+relaunch cycles within
+one boot session as a real reliability risk** - prefer a fresh reboot between cycles if more than two are needed in
+one session, rather than cycling the live instance repeatedly.
+
+Given this, the remaining 6 opcodes were accepted as closed by existing static/emulator evidence instead of chasing a
+further live confirmation - see `Tests/pm4_opcode_usage.md`'s 2D section for the reasoning per opcode.

@@ -156,26 +156,49 @@ static kern_return_t my_close(io_connect_t c) {
     return real_close(c);
 }
 
-/* INJECTION (issue #42, opcodes no real consumer emits): OPCODE_INJECT_WORDS="0x2b000001,..." are spliced in at the START of the stream (+g_start) of the Nth GL flush (OPCODE_INJECT_FLUSH, default 3),
- * the existing stream shifted up by the same number of words, so the real driver's context/surface/register state around it stays valid. Done once per process. The tail is moved up to 256 words past
- * the first n==0 header; if that does not fit in the buffer the injection is skipped and logged. */
-static unsigned g_inj_words[64]; static int g_inj_n = -1, g_inj_done; static unsigned char *g_inj_base; static unsigned long g_inj_flush = 3;
+/* INJECTION (issue #42, opcodes no real consumer emits): OPCODE_INJECT_WORDS="0x2b000001,..." are spliced in at the START of the stream (+g_start) of the Nth flush (OPCODE_INJECT_FLUSH, default 3) of
+ * the Nth connection whose IOServiceOpen type matches OPCODE_INJECT_TYPE (default 1 = GL, unchanged; 2 = 2D, 3 = DVD), the existing stream shifted up by the same number of words, so the real driver's
+ * context/surface/register state around it stays valid. CRITICAL (2026-10-03 postmortem, Tests/pm4_opcode_gaps.md): this only works safely because it splices into the REAL buffer a REAL client's own
+ * flush-map call already returned (k->cur_addr/cur_size) - never attempt an equivalent injection through a hand-built/synthetic client or buffer address; that hung the G5 once (the guard never ran
+ * because the wrong buffer was targeted). Done once per process. The tail is moved up to 256 words past the first n==0 header; if that does not fit in the buffer the injection is skipped and logged.
+ *
+ * OPCODE_INJECT_SCHEDULE (2026-10-07, added for #42's remaining "terminator-family" 2D opcodes - each one that takes an invalid-id safe-exit path ends that flush's whole buffer early, so two of them
+ * can never share one flush): "flush:word[,word...];flush:word[,word...];..." schedules MULTIPLE independent single-shot injections across different flush numbers of the SAME matched connection,
+ * instead of the single OPCODE_INJECT_WORDS/FLUSH shot above (both can be set; SCHEDULE entries are checked in addition to the single shot). Each entry fires once, independently, the first time its
+ * own flush count is reached - letting several otherwise-mutually-exclusive (stream-terminating) opcodes each get their own flush in one process lifetime, avoiding a separate kill+relaunch per opcode. */
+static unsigned g_inj_words[64]; static int g_inj_n = -1, g_inj_done; static unsigned char *g_inj_base; static unsigned long g_inj_flush = 3; static unsigned g_inj_type = 1;
+#define MAXSCHED 16
+static struct { unsigned long flush; unsigned words[16]; int n; int done; } g_sched[MAXSCHED];
+static int g_sched_n = 0;
 static void inject_init(void) {
-    const char *e = getenv("OPCODE_INJECT_WORDS"); char *q;
+    const char *e = getenv("OPCODE_INJECT_WORDS"); char *q; const char *se;
     if (g_inj_n >= 0) return; g_inj_n = 0;
-    if (!e) return;
-    while (*e && g_inj_n < 64) { g_inj_words[g_inj_n++] = (unsigned)strtoul(e, &q, 0); if (q == e) { g_inj_n--; break; } e = q; while (*e == ',' || *e == ' ') e++; }
     if (getenv("OPCODE_INJECT_FLUSH")) g_inj_flush = strtoul(getenv("OPCODE_INJECT_FLUSH"), NULL, 0);
+    if (getenv("OPCODE_INJECT_TYPE")) g_inj_type = (unsigned)strtoul(getenv("OPCODE_INJECT_TYPE"), NULL, 0);   /* IOServiceOpen type to target: 1 GL (default, unchanged), 2 2D, 3 DVD */
+    if (e) while (*e && g_inj_n < 64) { g_inj_words[g_inj_n++] = (unsigned)strtoul(e, &q, 0); if (q == e) { g_inj_n--; break; } e = q; while (*e == ',' || *e == ' ') e++; }
+    se = getenv("OPCODE_INJECT_SCHEDULE");
+    if (se) while (*se && g_sched_n < MAXSCHED) {
+        g_sched[g_sched_n].flush = strtoul(se, &q, 0); if (q == se) break; se = q; if (*se == ':') se++;
+        g_sched[g_sched_n].n = 0;
+        while (*se && *se != ';' && g_sched[g_sched_n].n < 16) { g_sched[g_sched_n].words[g_sched[g_sched_n].n++] = (unsigned)strtoul(se, &q, 0); if (q == se) break; se = q; while (*se == ',' || *se == ' ') se++; }
+        g_sched_n++; while (*se == ';' || *se == ' ') se++;
+    }
 }
-static void inject_into(conn_t *c) {
-    unsigned char *base = (unsigned char *)c->cur_addr; unsigned long off = g_start, end, k = (unsigned long)g_inj_n * 4; unsigned long size = c->cur_size, i;
+static unsigned g_last_words[16]; static int g_last_n;
+static void inject_words_at(conn_t *c, unsigned *words, int n) {
+    unsigned char *base = (unsigned char *)c->cur_addr; unsigned long off = g_start, end, k = (unsigned long)n * 4; unsigned long size = c->cur_size, i;
     for (;;) { unsigned w; if (off + 4 > size) { fprintf(g_log, "INJECT\tskipped: no terminator\n"); return; } w = *(unsigned *)(base + off); if ((w & 0xffffff) == 0) break; off += (unsigned long)(w & 0xffffff) * 4; }
     end = off + 4 + 256 * 4; if (end > size) end = size;
     if (end + k > size) { fprintf(g_log, "INJECT\tskipped: buffer too full (end=+0x%lx k=0x%lx size=0x%lx)\n", end, k, size); return; }
     memmove(base + g_start + k, base + g_start, end - g_start);
-    for (i = 0; i < (unsigned long)g_inj_n; i++) *(unsigned *)(base + g_start + i * 4) = g_inj_words[i];
-    fprintf(g_log, "INJECT\tconn=0x%x\tflush=%lu\twords=%d first=0x%08x tail_header_was_at=+0x%lx\n", (unsigned)c->connect, c->flushes, g_inj_n, g_inj_words[0], off);
-    fflush(g_log); g_inj_done = 1; g_inj_base = base;
+    for (i = 0; i < (unsigned long)n; i++) *(unsigned *)(base + g_start + i * 4) = words[i];
+    fprintf(g_log, "INJECT\tconn=0x%x\tflush=%lu\twords=%d first=0x%08x tail_header_was_at=+0x%lx\n", (unsigned)c->connect, c->flushes, n, words[0], off);
+    fflush(g_log); g_inj_base = base;
+    for (i = 0; i < (unsigned long)n && i < 16; i++) g_last_words[i] = words[i]; g_last_n = n < 16 ? n : 16;
+}
+static void inject_into(conn_t *c) { inject_words_at(c, g_inj_words, g_inj_n); g_inj_done = 1; }
+static void inject_scheduled(conn_t *c) {
+    int i; for (i = 0; i < g_sched_n; i++) if (!g_sched[i].done && c->flushes == g_sched[i].flush) { inject_words_at(c, g_sched[i].words, g_sched[i].n); g_sched[i].done = 1; return; }
 }
 static kern_return_t my_map(io_connect_t c, uint32_t mt, task_port_t task, vm_address_t *at, vm_size_t *sz, IOOptionBits opt) {
     conn_t *k; kern_return_t r; ensure_log(); if (!real_map) real_map = resolve_real("IOConnectMapMemory");
@@ -183,13 +206,16 @@ static kern_return_t my_map(io_connect_t c, uint32_t mt, task_port_t task, vm_ad
     if (k && k->type && mt == k->flush_type) {
         k->flushes++; g_tot_flush[k->type & 3]++;
         inject_init();
-        if (k->have_cur && !g_inj_done && g_inj_n > 0 && (k->type & 3) == 1 && k->flushes == g_inj_flush) inject_into(k);
+        if (k->have_cur && (k->type & 3) == g_inj_type) {
+            if (!g_inj_done && g_inj_n > 0 && k->flushes == g_inj_flush) inject_into(k);
+            else if (g_sched_n > 0) inject_scheduled(k);
+        }
         if (k->have_cur) scan(k, k->cur_addr, k->cur_size);          /* the buffer being submitted: the one the previous flush-map returned */
         if ((g_tot_flush[k->type & 3] & 15) == 0) emit_totals();      /* snapshot every 16 flushes */
     }
     pthread_mutex_unlock(&g_mu);
     r = real_map(c, mt, task, at, sz, opt);                           /* forwarded unchanged */
-    if (g_inj_base) { int i; fprintf(g_log, "INJECT-POST\tflush returned %d; first words after the kernel processed the buffer:", (int)r); for (i = 0; i < g_inj_n && i < 8; i++) fprintf(g_log, " %08x->%08x", g_inj_words[i], *(unsigned *)(g_inj_base + g_start + i * 4)); fprintf(g_log, "\n"); fflush(g_log); g_inj_base = NULL; }
+    if (g_inj_base) { int i; fprintf(g_log, "INJECT-POST\tflush returned %d; first words after the kernel processed the buffer:", (int)r); for (i = 0; i < g_last_n && i < 8; i++) fprintf(g_log, " %08x->%08x", g_last_words[i], *(unsigned *)(g_inj_base + g_start + i * 4)); fprintf(g_log, "\n"); fflush(g_log); g_inj_base = NULL; }
     if (g_post_pending) {                                              /* the kernel has processed (and rewritten in place) the buffer that gave an anomaly: show where */
         vm_size_t got2 = 0; unsigned long i, first = (unsigned long)-1, last = 0, nchg = 0; unsigned long lo = g_post_off > 0x40 ? g_post_off - 0x40 : 0;
         if (g_post_size > g_bufsz) { free(g_buf); g_bufsz = g_post_size; g_buf = malloc(g_bufsz); }
