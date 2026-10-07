@@ -125,12 +125,6 @@ int main(int argc, char **argv) {
         if (twod != IO_OBJECT_NULL) IOServiceClose(twod);
         if (r != 0) { IOServiceClose(surf); return 1; }
     }
-    /* Empirically required (2026-10-06): calling doIDCT immediately after priming returned NotReady (0xe00002d8) consistently, even though a live
-     * VRAMPeek read confirmed every gate doIDCT's source checks (bound surface, hardware-up, ring-ready, destination record populated) was already
-     * satisfied - so something needs a moment to settle after the 2D priming call that isn't visible in any of those fields. A 20 s diagnostic hold
-     * made it work every time; 1 s here is a deliberately generous, cheap margin, not the minimal delay (not worth more live cycles to shave down). */
-    sleep(1);
-
     /* DVD bind only - deliberately no setup_buffers/lock_all_buffers, see the header comment. set_surface's bind is what starts the XDCT ring
      * (ATIR500DVDContext::start -> start_xdct_engine) and gives this connection a boundSurface, both of which doIDCT itself requires. */
     r = open_user_client(svc, CLIENT_TYPE_DVD, &dvd);
@@ -143,6 +137,26 @@ int main(int argc, char **argv) {
     r = IOConnectMapMemory(dvd, 4, mach_task_self(), &streamAddr, &streamSize, kIOMapAnywhere);
     if (r != 0) { printf("map stream-0 buffer (memType 4) failed: 0x%08x\n", (unsigned)r); goto cleanup; }
     printf("stream-0 buffer mapped: addr=0x%lx size=%lu\n", (unsigned long)streamAddr, (unsigned long)streamSize);
+
+    /* Empirically required (2026-10-06): calling doIDCT right after priming/bind returned NotReady (0xe00002d8) consistently, even though a live
+     * VRAMPeek read confirmed doIDCT's own documented gate (bound surface, hardware-up, ring-ready) was already satisfied and no ASIC-hang dump
+     * was ever logged - i.e. not the known #127/V15 "ring falsely reports ready" failure mode either. #127's own prior finding is that this kind
+     * of readiness is genuinely probabilistic hardware timing, not a fixed delay (two of its trials at the identical 11-minute uptime gave
+     * different outcomes) - so retry the real call itself, bounded, rather than guess at a sleep duration. One real success (the 20 s diagnostic
+     * hold run) confirms this does resolve on its own within a bounded time on this hardware. */
+    {
+        UInt32 probeIn[16], probeOut[16]; IOByteCount probeOsz; int attempt; kern_return_t probeR = 0xe00002d8;
+        build_intra_stream((UInt32 *)streamAddr, 1);
+        memset(probeIn, 0, sizeof probeIn);
+        probeIn[2] = (UInt32)-10; probeIn[3] = 0; probeIn[4] = 3; probeIn[5] = 0x100a0; probeIn[6] = 0; probeIn[9] = (UInt32)((48 << 16) | 64);
+        for (attempt = 0; attempt < 30 && probeR != 0; attempt++) {
+            probeOsz = 0;
+            probeR = IOConnectMethodStructureIStructureO(dvd, 18, sizeof probeIn, &probeOsz, probeIn, probeOut);
+            if (probeR != 0) { printf("readiness probe attempt %d: 0x%08x, retrying in 1s\n", attempt + 1, (unsigned)probeR); fflush(stdout); sleep(1); }
+        }
+        if (probeR != 0) { printf("doIDCT never became ready after 30 attempts (last: 0x%08x) - giving up\n", (unsigned)probeR); bad++; goto cleanup; }
+        printf("doIDCT ready after %d attempt(s)\n", attempt);
+    }
 
     for (s = 0; s < nSizes && !bad; s++) {
         int mbCount = sizes[s];
