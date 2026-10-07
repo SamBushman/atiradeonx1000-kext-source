@@ -110,6 +110,22 @@ int main(int argc, char **argv) {
     r = IOConnectMethodScalarIStructureI(surf, 9, 2, sizeof region, 0, 1, region);
     if (r != 0) { printf("Surface set_shape failed: 0x%08x\n", (unsigned)r); IOServiceClose(surf); return 1; }
 
+    /* Prime the surface's slot-0 record with real backing memory - Tests/destructive/t3_gl_read_buffer.c's proven sequence (a 2D client binds
+     * with the front-buffer requirement bit and locks/unlocks once). Without this, doIDCT's destPlaneIndex=-10 destination record's own base-
+     * address field stays zero, which doIDCT reads back as NotReady (0xe00002d8) from a DIFFERENT check than the outer gate - confirmed via a
+     * live VRAMPeek read (2026-10-06) showing the outer gate (boundSurface/hwUp/ringReady) was already fully satisfied while this still failed. */
+    {
+        io_connect_t twod = IO_OBJECT_NULL; UInt32 primeOut[0x30 / 4]; IOByteCount primeOsz = sizeof primeOut; int addr, size, tag;
+        r = open_user_client(svc, CLIENT_TYPE_2D, &twod);
+        if (r == 0) r = IOConnectMethodScalarIStructureO(twod, 0, 2, &primeOsz, 1, 0x800, primeOut);
+        if (r == 0) r = IOConnectMethodScalarIScalarO(twod, 5, 1, 2, 0, &addr, &size);
+        if (r == 0) r = IOConnectMethodScalarIScalarO(twod, 6, 1, 1, 0, &tag);
+        if (r == 0) printf("surface primed via 2D lock_memory: addr=0x%x size=0x%x\n", addr, size);
+        else printf("surface priming failed: 0x%08x\n", (unsigned)r);
+        if (twod != IO_OBJECT_NULL) IOServiceClose(twod);
+        if (r != 0) { IOServiceClose(surf); return 1; }
+    }
+
     /* DVD bind only - deliberately no setup_buffers/lock_all_buffers, see the header comment. set_surface's bind is what starts the XDCT ring
      * (ATIR500DVDContext::start -> start_xdct_engine) and gives this connection a boundSurface, both of which doIDCT itself requires. */
     r = open_user_client(svc, CLIENT_TYPE_DVD, &dvd);
