@@ -27,6 +27,20 @@ extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");
 
 extern "C" UInt32 GH_ZN12OSDictionary12withCapacityEj(...) asm("__ZN12OSDictionary12withCapacityEj");
 
+/* #153 live context diagnostic (temporary, not a fix): issue153_probe and issue153_ctxprobe both
+ * ruled out "OSDictionary::setObject is generically broken in our kext" - the defect is specific
+ * to the real call site, invoked via a real IOServiceOpen on the live, fully-started accelerator.
+ * Logging thread/interrupt-state context immediately around the one call already isolated
+ * (Tests/surface_only_main.c) as the crash site, to see what's actually different about that
+ * moment versus every other context this call shape has already been proven safe in. */
+/* current_thread() is already declared (returning thread_t) via headers transitively included
+ * above - redeclaring it here conflicted at compile time, so just use it as-is and cast at the
+ * call site below. */
+extern "C" boolean_t ml_at_interrupt_context(void) asm("_ml_at_interrupt_context");
+extern "C" int get_preemption_level(void) asm("_get_preemption_level");
+extern "C" void IOLog(const char *format, ...);
+extern "C" void IOSleep(unsigned int milliseconds);
+
 
 /* real addr 0x2070 */
 IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, UInt32 param_3, IOUserClient**param_4) {
@@ -38,7 +52,7 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
   SInt32 iVar3;
   SInt32 *piVar4;
   UInt8 bVar5;
-  
+
   *param_4 = (IOUserClient *)0x0;
   if (param_3 == 1) {
     pcVar1 = M<code *>(M<SInt32>(self) + 0x5e0);
@@ -50,7 +64,19 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
       if (piVar4 == (SInt32 *)0x0) {
         return 0xe00002be;
       }
+      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x kOSBooleanTrue=%p thread=%p at_interrupt_context=%d preemption_level=%d\n",
+            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (void *)current_thread(),
+            (int)ml_at_interrupt_context(), get_preemption_level());
+      /* #153: the 2026-10-08 hot-swap test lost this exact diagnostic line - no panic.log was
+       * produced (a silent hang, not a trapped panic) and system.log never got the new line
+       * before the hang, only stale 10-07 lines from an earlier, already-superseded diagnostic.
+       * Root cause: this machine's boot volume is at 98% capacity, and syslogd's flush-to-disk is
+       * slow enough there that a hang occurring seconds after this IOLog can outrun it. A fixed
+       * sleep here gives syslogd time to actually persist this line to /var/log/system.log before
+       * the risky call runs, so the data survives even if the call hangs immediately after. */
+      IOSleep(3000);
       VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",(UInt32)g_kOSBooleanTrue);
+      IOLog("ATI153DIAG: post-setObject - returned, NO CRASH\n");
       pIVar2 = (UInt8 *)VCALL(M<SInt32>(self), 0x5d4)(self);
       if (pIVar2 == (UInt8 *)0x0) {
         VCALL(*piVar4, 0x18)(piVar4);
