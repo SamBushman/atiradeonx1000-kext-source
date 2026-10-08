@@ -124,14 +124,23 @@ LAB_0001bea0:
   if ((M<UInt32>(self + 0x98) & 0x200000) == 0) {
     return;
   }
+  /* #147/#155/#156-class bug (fixed 2026-10-08, same pattern as ATIRadeonX1000_Start.cpp's chip-ID/
+   * chip-rev read): self+0x860[8..0xb] is a write-strobe/read-back MMIO register - write a modified
+   * value to +8 to trigger a hardware latch, READ the latched data (here, +0xf) while still strobed,
+   * THEN restore the original +8 value (confirmed via stock's own disassembly,
+   * ATIRadeonX1000::setupR520Pipes ~0x1bff4-0x1c014, lwbrx/stwbrx byte-reversed access). This read
+   * was happening after the restore instead of between the strobe and the restore - moved to the
+   * correct position, matching stock's real instruction order. This function was previously
+   * unreachable on a hot-swapped instance (blocked by #147's original chip-ID bug), so this bug was
+   * never exercised until #147/#156's real fix let setupR520Pipes() run for the first time. */
   bVar1 = M<UInt8>(iVar3 + 8);
   M<UInt32>(iVar3 + 8) =
        (bVar1 & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar3 + 9) << 0x10 |
        (UInt32)M<UInt8>(iVar3 + 10) << 8 | (UInt32)M<UInt8>(iVar3 + 0xb);
+  uVar2 = ((UInt32)M<UInt8>(iVar3 + 0xf) << 0x18 ^ 0x30000000) >> 0x1c & 3;
   M<UInt32>(iVar3 + 8) =
        (UInt32)bVar1 << 0x18 | (UInt32)M<UInt8>(iVar3 + 9) << 0x10 | (UInt32)M<UInt8>(iVar3 + 10) << 8 |
        (UInt32)M<UInt8>(iVar3 + 0xb);
-  uVar2 = ((UInt32)M<UInt8>(iVar3 + 0xf) << 0x18 ^ 0x30000000) >> 0x1c & 3;
   if (uVar2 != 0) {
     if (uVar2 < 3) {
       M<UInt32>(self + 0xb9c) = 1;
