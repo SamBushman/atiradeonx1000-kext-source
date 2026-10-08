@@ -24,23 +24,33 @@
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
 #include <libkern/c++/OSBoolean.h>
-extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");
+
+/* #153 ROOT CAUSE (found 2026-10-08, live-verified): this file used to declare its own
+ * `extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");` alias instead of including the real
+ * header - a pattern inherited from the original hand-written body (Sources/IOATIR500Accelerator_
+ * NewUserClient.cpp, now dead/historical) that the mechanical port kept without question. That
+ * alias does NOT resolve to the real OSBoolean TRUE singleton's address - a live comparison
+ * against Apple's own properly-typed `kOSBooleanTrue` global (from this header), logged from the
+ * same call site at the same moment, showed the hand-rolled version is one dereference short:
+ * it gives the ADDRESS OF THE POINTER VARIABLE (0x3d7960, stable across every boot) instead of
+ * the ADDRESS OF THE ACTUAL OBJECT that variable points to (0x1038fd30 in that boot, matching
+ * exactly what the real `kOSBooleanTrue` global reads directly and what *(UInt32*)g_kOSBooleanTrue
+ * gave when dereferenced once by hand).
+ *
+ * This explains the Surface-client-open crash completely: passing 0x3d7960 as the real
+ * `OSDictionary::setObject`'s `anObject` argument, stock setObject correctly calls
+ * `anObject->vtable[0x28]` (OSBoolean::taggedRetain) on it - reading *(UInt32*)0x3d7960 as "the
+ * vtable" (actually 0x1038fd30, the real object's address, not a vtable at all), then reading
+ * *(UInt32*)(0x1038fd30 + 0x28) as a function pointer and jumping there - a wild branch to
+ * whatever garbage happens to live at that offset into an unrelated object. Confirmed
+ * independently via raw kernel disassembly (issue #153's own GitHub thread) that stock's
+ * `taggedRetain` is a trivial no-op `blr`, and via `nm`/relocation-table reads of /mach_kernel
+ * that the real `__ZTV9OSBoolean` vtable (0x35e330) was never actually reached.
+ *
+ * Fix: use the real, properly-typed `kOSBooleanTrue` global (this header) directly instead of the
+ * broken hand-rolled alias - same methodology as `issue153_probe`'s working comparison kext. */
 
 extern "C" UInt32 GH_ZN12OSDictionary12withCapacityEj(...) asm("__ZN12OSDictionary12withCapacityEj");
-
-/* #153 live context diagnostic (temporary, not a fix): issue153_probe and issue153_ctxprobe both
- * ruled out "OSDictionary::setObject is generically broken in our kext" - the defect is specific
- * to the real call site, invoked via a real IOServiceOpen on the live, fully-started accelerator.
- * Logging thread/interrupt-state context immediately around the one call already isolated
- * (Tests/surface_only_main.c) as the crash site, to see what's actually different about that
- * moment versus every other context this call shape has already been proven safe in. */
-/* current_thread() is already declared (returning thread_t) via headers transitively included
- * above - redeclaring it here conflicted at compile time, so just use it as-is and cast at the
- * call site below. */
-extern "C" boolean_t ml_at_interrupt_context(void) asm("_ml_at_interrupt_context");
-extern "C" int get_preemption_level(void) asm("_get_preemption_level");
-extern "C" void IOLog(const char *format, ...);
-extern "C" void IOSleep(unsigned int milliseconds);
 
 
 /* real addr 0x2070 */
@@ -65,29 +75,8 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
       if (piVar4 == (SInt32 *)0x0) {
         return 0xe00002be;
       }
-      /* #153 Update 6 (2026-10-08): the IOSleep(3000) that used to sit here was only ever a
-       * workaround for the then-98%-full boot disk outrunning syslogd's flush - disk space is
-       * fixed now (16GB free) and the diagnostic line below reached system.log without it needing
-       * to wait at all in the 2026-10-08 10:44 live test. Removed per standing guidance: this
-       * exact crash predates the sleep entirely (seen as far back as the Oct 7 session), so the
-       * sleep was never a fix and removing it should not be expected to change the outcome -
-       * assume the real fault is still somewhere after this point. */
-      /* #153 Update 7 (2026-10-08): the 2026-10-08 10:56 live test's kOSBooleanTrue_vtable read
-       * (0x1038fd30) did not match the known-good 0x35e330 that issue153_probe found - but that
-       * probe's OWN raw "kOSBooleanTrue" value (printed directly from Apple's real, properly-typed
-       * <libkern/c++/OSBoolean.h> global) was ALSO 0x1038fd30, one full dereference "ahead" of
-       * ours. Our hand-rolled `extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");` may be
-       * resolving to the wrong thing (or at the wrong indirection level) versus the real typed
-       * global - comparing both directly, from the same call site, same moment, to settle it. */
-      void *real_kOSBooleanTrue = const_cast<void *>(static_cast<const void *>(kOSBooleanTrue));
-      UInt32 our_vtable = g_kOSBooleanTrue ? *(UInt32 *)g_kOSBooleanTrue : 0;
-      UInt32 real_vtable = real_kOSBooleanTrue ? *(UInt32 *)real_kOSBooleanTrue : 0;
-      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x g_kOSBooleanTrue=%p our_vtable=0x%x real_kOSBooleanTrue=%p real_vtable=0x%x thread=%p at_interrupt_context=%d preemption_level=%d\n",
-            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (unsigned)our_vtable,
-            real_kOSBooleanTrue, (unsigned)real_vtable,
-            (void *)current_thread(), (int)ml_at_interrupt_context(), get_preemption_level());
-      VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",(UInt32)g_kOSBooleanTrue);
-      IOLog("ATI153DIAG: post-setObject - returned, NO CRASH\n");
+      VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",
+                          (UInt32)const_cast<void *>(static_cast<const void *>(kOSBooleanTrue)));
       pIVar2 = (UInt8 *)VCALL(M<SInt32>(self), 0x5d4)(self);
       if (pIVar2 == (UInt8 *)0x0) {
         VCALL(*piVar4, 0x18)(piVar4);
