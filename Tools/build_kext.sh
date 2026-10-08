@@ -4,7 +4,8 @@
 #
 # Run ON a Tiger PPC machine (e.g. the G5) from the repo root:
 #     sh Tools/build_kext.sh
-# Env: OUT (build dir, default /tmp/kext_build), KEXT_ID, KEXT_VERSION (must match
+# Env: OUT (build dir, default ~/rung3/kext_build - NOT /tmp, which every reboot wipes and
+# every live test in this project's history ends in one), KEXT_ID, KEXT_VERSION (must match
 # the bundle's Info.plist; use a different KEXT_ID for a dry-run copy).
 #
 # Notes:
@@ -36,7 +37,7 @@
 #    because it already uses the long-call (JBSR+HI16+LO16) sequence for exactly these symbols
 #    (confirmed via `otool -rv` on both) - `-mlongcall` is gcc's flag for emitting that sequence.
 set -e
-OUT=${OUT:-/tmp/kext_build}
+OUT=${OUT:-$HOME/rung3/kext_build}
 KEXT_ID=${KEXT_ID:-com.apple.ATIRadeonX1000}
 KEXT_VERSION=${KEXT_VERSION:-4.1.9}
 KFW=/System/Library/Frameworks/Kernel.framework/Headers
