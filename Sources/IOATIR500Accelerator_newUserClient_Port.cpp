@@ -74,7 +74,16 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
     }
     pcVar1 = M<code *>(M<SInt32>(self) + 0x5d8);
   }
-  pIVar2 = (UInt8 *)(*pcVar1)();
+  /* #153 root cause: real disassembly (addr 0x2070; GL/2D branches at 0x2160/0x2170) confirms this
+   * call explicitly loads only r2 (the vtable, to fetch the function pointer) - r3 (self/"this")
+   * is never clobbered since function entry, so it is still self's value when the real compiled
+   * code's bctrl executes. The naive 0-argument transcription dropped that implicit first
+   * argument entirely; our own compiler has no reason to leave self in r3 for a call that
+   * references no arguments at all in the C++ source. This is the actual cause of #153's
+   * deterministic, build-independent crash: newUserClient is the very first thing called when
+   * opening a GL (param_3==1) or 2D (param_3==2) user client, which is why the crash recurred
+   * identically regardless of any GART/texture-buffer fix tried earlier. */
+  pIVar2 = (UInt8 *)(*pcVar1)(self);
   if (pIVar2 == (UInt8 *)0x0) {
     return 0xe00002be;
   }
