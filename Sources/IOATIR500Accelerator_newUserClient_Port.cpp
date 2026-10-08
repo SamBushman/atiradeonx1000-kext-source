@@ -64,17 +64,17 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
       if (piVar4 == (SInt32 *)0x0) {
         return 0xe00002be;
       }
-      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x kOSBooleanTrue=%p thread=%p at_interrupt_context=%d preemption_level=%d\n",
-            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (void *)current_thread(),
-            (int)ml_at_interrupt_context(), get_preemption_level());
-      /* #153: the 2026-10-08 hot-swap test lost this exact diagnostic line - no panic.log was
-       * produced (a silent hang, not a trapped panic) and system.log never got the new line
-       * before the hang, only stale 10-07 lines from an earlier, already-superseded diagnostic.
-       * Root cause: this machine's boot volume is at 98% capacity, and syslogd's flush-to-disk is
-       * slow enough there that a hang occurring seconds after this IOLog can outrun it. A fixed
-       * sleep here gives syslogd time to actually persist this line to /var/log/system.log before
-       * the risky call runs, so the data survives even if the call hangs immediately after. */
-      IOSleep(3000);
+      /* #153 Update 6 (2026-10-08): the IOSleep(3000) that used to sit here was only ever a
+       * workaround for the then-98%-full boot disk outrunning syslogd's flush - disk space is
+       * fixed now (16GB free) and the diagnostic line below reached system.log without it needing
+       * to wait at all in the 2026-10-08 10:44 live test. Removed per standing guidance: this
+       * exact crash predates the sleep entirely (seen as far back as the Oct 7 session), so the
+       * sleep was never a fix and removing it should not be expected to change the outcome -
+       * assume the real fault is still somewhere after this point. */
+      UInt32 kOSBooleanTrue_vtable = g_kOSBooleanTrue ? *(UInt32 *)g_kOSBooleanTrue : 0;
+      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x kOSBooleanTrue=%p kOSBooleanTrue_vtable=0x%x thread=%p at_interrupt_context=%d preemption_level=%d\n",
+            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (unsigned)kOSBooleanTrue_vtable,
+            (void *)current_thread(), (int)ml_at_interrupt_context(), get_preemption_level());
       VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",(UInt32)g_kOSBooleanTrue);
       IOLog("ATI153DIAG: post-setObject - returned, NO CRASH\n");
       pIVar2 = (UInt8 *)VCALL(M<SInt32>(self), 0x5d4)(self);
