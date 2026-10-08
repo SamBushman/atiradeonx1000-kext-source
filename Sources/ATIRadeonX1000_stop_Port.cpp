@@ -25,6 +25,7 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
+extern "C" void IOLog(const char *format, ...);
 
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
@@ -32,6 +33,22 @@ UInt32 HZMEM_Destroy(_HZDATA *hz);
 void ATIRadeonX1000::stop(IOService *real_param_1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+
+  /* #153 (2026-10-08): stop()-path panic on unload - "IORegistryEntry::_RESERVEDIORegistryEntry10
+   * called" via self+0x74's vtable+0x17c (the ATIFEDSInfo removeProperty call). Confirmed the
+   * stock kext's own compiled code uses this exact same offset (0x17c) at the exact same relative
+   * position - the offset itself is right, so the object pointer at self+0x74 is the suspect
+   * (same defect class as the kOSBooleanTrue bug: a bad pointer landing on a real-but-wrong
+   * vtable, not a bad offset). self+0x74 is read-only in every one of our own ported functions
+   * (never assigned by our own code) and works fine during start() (the same field, same calls),
+   * so logging its raw value and first vtable word right here to see if it's already garbage by
+   * the time stop() runs, before touching it. */
+  {
+    void *field_0x74 = *(void **)(self + 0x74);
+    UInt32 field_0x74_vtable = field_0x74 ? *(UInt32 *)field_0x74 : 0;
+    IOLog("ATI153DIAG: stop() entry self=%p field_0x74=%p field_0x74_vtable=0x%x\n",
+          self, field_0x74, (unsigned)field_0x74_vtable);
+  }
 
   bool bVar1;
   int iVar2;
