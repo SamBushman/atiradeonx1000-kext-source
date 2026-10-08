@@ -169,8 +169,20 @@ bool ATIRadeonX1000::start(IOService *param_1) {
             M<UInt32>(iVar5 + 8) =
                  (UInt32)bVar2 << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
                  (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
-            puVar3 = (UInt8 *)
-                     (UInt32)CONCAT11(M<UInt8>(iVar5 + 0xd),M<UInt8>(iVar5 + 0xc));
+            /* #147 root cause: self+0x860[0xc,0xd] (the stock decompile's literal chip-ID source)
+             * is NOT a static chip-ID strap - live cross-check against a running stock instance
+             * proved it drifts to unrelated garbage (0xac8f) once the GPU has been running a while,
+             * while self+0xc50 (saved at real boot) correctly held 0x7240. It only reads valid data
+             * in a narrow window tied to a hardware reset that happens to precede a normal boot-time
+             * start(), which a later hot-swapped reload doesn't get. With garbage input here, this
+             * classifier falls through to the branch that sets none of self+0x98's capability bits
+             * and never calls setupR520Pipes(), which starves startupPCIeGART()'s gate and leaves
+             * self+0xc4c unallocated - the actual root cause of #147's null deref. PCI config space's
+             * device ID (vtable+0x53c = IOPCIDevice::configRead16(UInt8)) is the standard, timing-
+             * independent mechanism for chip identity and was confirmed to reliably read 0x7240
+             * regardless of GPU runtime state - use it instead of the volatile MMIO register. */
+            puVar3 = (UInt8 *)(UInt32)VCALL(*M<SInt32 *>(self + 0x74), 0x53c)
+                                            (M<SInt32 *>(self + 0x74), (UInt8)2);
             M<UInt32>(self + 0xc54) = M<UInt8>(iVar5 + 0xf) & 0xf;
             M<UInt8 *>(self + 0xc50) = puVar3;
             if (puVar3 == (UInt8 *)0x7157) goto LAB_0001fafc;

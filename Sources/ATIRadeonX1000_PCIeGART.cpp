@@ -451,7 +451,7 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
   
   local_38[0] = 0;
   if ((param_2 != 0) && (param_3 != 0)) {
-    uVar3 = VCALL(*param_2, 0x128)(param_2);
+    uVar3 = VCALL(M<UInt32>(param_2), 0x128)(param_2);
     uVar10 = GH_page_shift;
     uVar1 = M<UInt32>(self + 0x830);
     M<UInt32>(param_3) = 0;
@@ -462,11 +462,11 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
         iVar5 = 0;
         uVar3 = 0;
 LAB_0001de4c:
-        iVar4 = VCALL(*param_2, 0x144)(param_2,3);
+        iVar4 = VCALL(M<UInt32>(param_2), 0x144)(param_2,3);
         if (iVar4 == 0) {
           iVar4 = 0;
           M<SInt32>(param_3) = iVar5 << (GH_page_shift & 0x3f);
-          while (uVar10 = VCALL(*param_2, 0x13c)(param_2,iVar4,local_38),
+          while (uVar10 = VCALL(M<UInt32>(param_2), 0x13c)(param_2,iVar4,local_38),
                 uVar1 = GH_page_shift, uVar10 != 0) {
             iVar4 = iVar4 + local_38[0];
             if (GH_page_size <= local_38[0]) {

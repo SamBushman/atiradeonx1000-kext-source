@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>English</string>
+    <key>CFBundleExecutable</key>
+    <string>MinStart</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.example.ATIRadeonX1000.minstart</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>MinStart</string>
+    <key>CFBundlePackageType</key>
+    <string>KEXT</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0.0</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleVersion</key>
+    <string>1.0.0</string>
+    <key>IOKitPersonalities</key>
+    <dict>
+        <key>ATIRadeonX1000</key>
+        <dict>
+            <key>ATIEnableWideBlitSupport</key>
+            <true/>
+            <key>ATIUseTearingWideBlit</key>
+            <false/>
+            <key>CFBundleIdentifier</key>
+            <string>com.example.ATIRadeonX1000.minstart</string>
+            <key>IOClass</key>
+            <string>ATIRadeonX1000</string>
+            <key>IOMatchCategory</key>
+            <string>IOAccelerator</string>
+            <key>IOPCIMatch</key>
+            <string>0x72401002 0x71461002 0x71421002 0x71091002 0x71C51002 0x71C01002 0x72491002</string>
+            <key>IOProviderClass</key>
+            <string>IOPCIDevice</string>
+            <key>IOSourceVersion</key>
+            <string>1.4.19.00</string>
+        </dict>
+    </dict>
+    <key>OSBundleLibraries</key>
+    <dict>
+        <key>com.apple.iokit.IOPCIFamily</key>
+        <string>1.0.0b1</string>
+        <key>com.apple.kernel.iokit</key>
+        <string>1.0.0b1</string>
+    </dict>
+</dict>
+</plist>
