@@ -47,22 +47,18 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
     IOLog("Issue155Probe: found object of real class '%s', retainCount=%d\n",
           accel->getMetaClass()->getClassName(), accel->getRetainCount());
 
-    dumpField("self+0x74 (PCI provider)", R32(0x74));
-    IOLog("Issue155Probe: self+0xcc (head count) = %u\n", (unsigned)R32(0xcc));
-    dumpField("self+0xb4 (own IOWorkLoop)", R32(0xb4));
-    dumpField("self+0xbc (garbage_collector interrupt ES)", R32(0xbc));
-    dumpField("self+0xb8", R32(0xb8));
-    dumpField("self+0xc0 (gart_collector timer ES)", R32(0xc0));
-    dumpField("self+0xc4", R32(0xc4));
-    dumpField("self+0x22c (command buffer owner?)", R32(0x22c));
-    dumpField("self+0x7c (ATIR500Memory)", R32(0x7c));
-
-    /* IOService's own real workloop, via the standard public accessor - compare against self+0xb4
-     * (our driver's own private workloop) to see if they're the same object or different ones. */
-    IOWorkLoop *realWl = accel->getWorkLoop();
-    IOLog("Issue155Probe: accel->getWorkLoop() = %p (class '%s'), matches self+0xb4? %s\n",
-          realWl, realWl ? realWl->getMetaClass()->getClassName() : "(null)",
-          (realWl != NULL && (UInt32)(uintptr_t)realWl == R32(0xb4)) ? "YES" : "NO");
+    /* Wide, unbiased raw dump of the object's low-offset region (0x0-0x300) - this is base-class
+     * (OSObject/IORegistryEntry/IOService/IOAccelerator) territory our own ported code is NOT
+     * supposed to write into at all. The point isn't to interpret these values (most are real Apple
+     * kernel bookkeeping this project has no documentation for) - it's to get a byte-for-byte
+     * comparison against the identical dump from a stock instance, to catch a struct-offset/layout
+     * bug in our own code that corrupts memory outside what our own fields are supposed to occupy. */
+    IOLog("Issue155Probe: raw dump self+0x0..0x300:\n");
+    for (UInt32 off = 0; off < 0x300; off += 0x20) {
+        IOLog("Issue155Probe: +%03x: %08x %08x %08x %08x %08x %08x %08x %08x\n", (unsigned)off,
+              (unsigned)R32(off), (unsigned)R32(off+4), (unsigned)R32(off+8), (unsigned)R32(off+0xc),
+              (unsigned)R32(off+0x10), (unsigned)R32(off+0x14), (unsigned)R32(off+0x18), (unsigned)R32(off+0x1c));
+    }
 
     return KERN_SUCCESS;
 }
