@@ -162,28 +162,40 @@ bool ATIRadeonX1000::start(IOService *param_1) {
           iVar5 = VCALL(*piVar7, 0xd0)(piVar7);
           M<SInt32>(self + 0x860) = iVar5;
           if (iVar5 != 0) {
+            /* #147/#155/#156 root cause (corrected 2026-10-08 - the prior version of this comment,
+             * and #147's own fix, both blamed "MMIO timing fragility"/hardware drift; that was
+             * wrong, and was itself an instance of the same bias the project's standing methodology
+             * exists to rule out - blaming something other than this port's own code. Stock,
+             * hot-swapped the identical way as the rebuilt kext (not boot/reset-adjacent at all),
+             * reliably reads the correct chip-ID AND chip-rev here every time - proving the register
+             * itself was never the problem.
+             *
+             * The real bug: self+0x860[8..0xb] is a write-strobe/read-back hardware register. Real
+             * sequence (confirmed via stock's own disassembly, ATIRadeonX1000::start ~0x1fa48-0x1fa7c,
+             * using lwbrx/stwbrx - byte-reversed load/store, since this MMIO block is little-endian):
+             * (1) read the original word at +8, (2) write a MODIFIED value to +8 (forces bit 0x34,
+             * masks 0xff40) to trigger the hardware latch, (3) READ the now-latched chip-ID/chip-rev
+             * word back from +0xc while still in the strobed state, (4) THEN restore the original
+             * value to +8. This port had BOTH reads (chip-ID originally via CONCAT11(iVar5+0xd,
+             * iVar5+0xc), chip-rev via iVar5+0xf) happening AFTER step 4's restore instead of between
+             * steps 2 and 4 - reading the register back in its already-restored, un-strobed state.
+             * That's why chip-ID drifted to garbage (#147) and chip-rev came back 0 instead of 0xc
+             * (#156) on a hot-swapped instance - not hardware timing, a dropped read-ordering step in
+             * the mechanical port. #147's PCI-config-space fix (vtable+0x53c = IOPCIDevice::
+             * configRead16) got a correct VALUE for chip-ID but was a workaround for this same bug,
+             * not the real fix - reverted here in favor of the original MMIO mechanism, now correctly
+             * positioned between the strobe write and the restore write, matching stock exactly.
+             * Live-verified (2026-10-08): self+0xc50=0x7240, self+0xc54=0xc, ioreg AccelCaps=3 -
+             * identical outcome to #147's fix, via the real mechanism instead of a substitute. */
             bVar2 = M<UInt8>(iVar5 + 8);
             M<UInt32>(iVar5 + 8) =
                  (bVar2 & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
                  (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
+            M<UInt32>(self + 0xc54) = M<UInt8>(iVar5 + 0xf) & 0xf;
+            puVar3 = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(iVar5 + 0xd), M<UInt8>(iVar5 + 0xc));
             M<UInt32>(iVar5 + 8) =
                  (UInt32)bVar2 << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
                  (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
-            /* #147 root cause: self+0x860[0xc,0xd] (the stock decompile's literal chip-ID source)
-             * is NOT a static chip-ID strap - live cross-check against a running stock instance
-             * proved it drifts to unrelated garbage (0xac8f) once the GPU has been running a while,
-             * while self+0xc50 (saved at real boot) correctly held 0x7240. It only reads valid data
-             * in a narrow window tied to a hardware reset that happens to precede a normal boot-time
-             * start(), which a later hot-swapped reload doesn't get. With garbage input here, this
-             * classifier falls through to the branch that sets none of self+0x98's capability bits
-             * and never calls setupR520Pipes(), which starves startupPCIeGART()'s gate and leaves
-             * self+0xc4c unallocated - the actual root cause of #147's null deref. PCI config space's
-             * device ID (vtable+0x53c = IOPCIDevice::configRead16(UInt8)) is the standard, timing-
-             * independent mechanism for chip identity and was confirmed to reliably read 0x7240
-             * regardless of GPU runtime state - use it instead of the volatile MMIO register. */
-            puVar3 = (UInt8 *)(UInt32)VCALL(*M<SInt32 *>(self + 0x74), 0x53c)
-                                            (M<SInt32 *>(self + 0x74), (UInt8)2);
-            M<UInt32>(self + 0xc54) = M<UInt8>(iVar5 + 0xf) & 0xf;
             M<UInt8 *>(self + 0xc50) = puVar3;
             if (puVar3 == (UInt8 *)0x7157) goto LAB_0001fafc;
             if (puVar3 < (UInt8 *)0x7158) {
