@@ -27,6 +27,11 @@ extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surfa
 
 extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
+extern "C" void IOLog(const char *format, ...);
+
+/* #154 DIAGNOSTIC (2026-10-08): the Surface user client's own start() consistently fails live
+ * (issue #154 - every open attempt returns 0xe00002c9). Logging the head-count branch and both
+ * failure points (IOMallocAligned, allocMasterSwapBuffer) to find which one is responsible. */
 
 
 /* real addr 0x119f0 */
@@ -176,9 +181,11 @@ bool IOATIR500Surface::start(IOService *real_param_1) {
   this_00 = M<UInt8 *>(self + 0xd50);
   M<UInt32>(self + 0xbf8) = 0x307fffff;
   M<UInt32>(self + 0xc14) = 0xffff;
+  IOLog("ATI154DIAG: start() this_00+0xcc(head count)=%d\n", (int)M<SInt32>(this_00 + 0xcc));
   if (M<SInt32>(this_00 + 0xcc) == 0) {
 LAB_00011d4c:
     iVar3 = ((IOATIR500Accelerator *)(this_00))->getVRAMDescriptors();
+    IOLog("ATI154DIAG: start() getVRAMDescriptors=%d\n", (int)iVar3);
     if (iVar3 != 0) {
       this_00 = M<UInt8 *>(self + 0xd50);
       bVar1 = true;
@@ -192,6 +199,7 @@ LAB_00011d4c:
     do {
       iVar3 = GH_IOMallocAligned(0xc,0x20);
       M<SInt32>(pIVar2 + 0xd60) = iVar3;
+      IOLog("ATI154DIAG: start() loop uVar8=%u IOMallocAligned=0x%x\n", (unsigned)uVar8, (unsigned)iVar3);
       if (iVar3 == 0) {
 LAB_00011d38:
         this_00 = M<UInt8 *>(self + 0xd50);
@@ -208,11 +216,13 @@ LAB_00011d38:
       M<UInt16>(M<SInt32>(pIVar2 + 0xd60) + 8) = 0;
       M<UInt16>(M<SInt32>(pIVar2 + 0xd60) + 10) = 0;
       iVar3 = this->allocMasterSwapBuffer(uVar8,0x9000);
+      IOLog("ATI154DIAG: start() loop uVar8=%u allocMasterSwapBuffer=%d\n", (unsigned)uVar8, (int)iVar3);
       if (iVar3 == 0) goto LAB_00011d38;
       this_00 = M<UInt8 *>(self + 0xd50);
       uVar8 = uVar8 + 1;
       pIVar2 = pIVar2 + 8;
     } while (uVar8 < M<UInt32>(this_00 + 0xcc));
+    IOLog("ATI154DIAG: start() loop done uVar8=%u target=%u\n", (unsigned)uVar8, (unsigned)M<UInt32>(this_00 + 0xcc));
     if (M<UInt32>(this_00 + 0xcc) == uVar8) goto LAB_00011d4c;
   }
   bVar1 = false;

@@ -25,6 +25,7 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
+extern "C" void IOLog(const char *format, ...);
 
 
 /* real addr 0x118e0 */
@@ -41,12 +42,16 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 param_1, UInt32 param_2) {
   iVar4 = param_1 * 0x94;
   M<UInt32>(self + iVar4 + 0xcb0) = 0;
   iVar3 = M<SInt32>(self + 0xd50);
+  IOLog("ATI154DIAG: allocMasterSwapBuffer param_1=%u per-head-count(+0x114)=%d\n",
+        (unsigned)param_1, (int)M<SInt32>(param_1 * 4 + iVar3 + 0x114));
   if (M<SInt32>(param_1 * 4 + iVar3 + 0x114) != 0) {
     uVar5 = 0;
     pIVar6 = self + iVar4 + 0xc28;
     do {
       piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar3 + 0x82c) | 0x10023,param_2,GH_page_size);
       M<SInt32 *>(pIVar6) = piVar1;
+      IOLog("ATI154DIAG: allocMasterSwapBuffer uVar5=%u withOptions opts=0x%x len=%u align=%u result=%p\n",
+            (unsigned)uVar5, (unsigned)(M<UInt32>(iVar3 + 0x82c) | 0x10023), (unsigned)param_2, (unsigned)GH_page_size, piVar1);
       if (piVar1 == (SInt32 *)0x0) {
         return 0;
       }
