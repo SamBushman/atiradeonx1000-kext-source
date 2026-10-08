@@ -27,6 +27,7 @@
 extern "C" void *GH_IOATIR500Accelerator_metaClass asm("__ZN20IOATIR500Accelerator9metaClassE");
 static inline void GH_FreeTexvert(void *accelerator, void *texture) { IOATIR500Shared::free_texvert(reinterpret_cast<IOATIR500Accelerator *>(accelerator), reinterpret_cast<IOTextureBuffer *>(texture)); }
 
+extern "C" void IOLog(const char *format, ...);
 extern "C" UInt32 GH_IOFreeContiguous(...) asm("_IOFreeContiguous");
 extern "C" UInt32 GH_IOGetTime(...) asm("_IOGetTime");
 extern "C" UInt32 GH_IOLockWakeup(...) asm("_IOLockWakeup");
@@ -289,7 +290,7 @@ void IOATIR500Accelerator::teardownAGP(IOService *real_provider) {
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
-  
+
   if (M<SInt32>(self + 0x83c) != 0) {
     GH_IOFreeContiguous(M<SInt32>(self + 0x83c),GH_page_size * 2 + M<SInt32>(self + 0x830));
     M<UInt32>(self + 0x848) = 1;
@@ -298,8 +299,12 @@ void IOATIR500Accelerator::teardownAGP(IOService *real_provider) {
     M<UInt32>(self + 0x83c) = 0;
     M<SInt32>(self + 0x7fc) = M<SInt32>(self + 0x7fc) - (iVar1 * 2 + M<SInt32>(self + 0x830));
   }
+  IOLog("ATI155DIAG: teardownAGP() self+0x74=%p self+0x98=0x%x (bit2=%d)\n",
+        M<SInt32 *>(self + 0x74), (unsigned)M<UInt32>(self + 0x98), (M<UInt32>(self + 0x98) & 2) != 0);
   if ((M<SInt32 *>(self + 0x74) != (SInt32 *)0x0) && ((M<UInt32>(self + 0x98) & 2) != 0)) {
+    IOLog("ATI155DIAG: teardownAGP() about to VCALL self+0x74 vtable+0x5e0\n");
     VCALL(*M<SInt32 *>(self + 0x74), 0x5e0)(M<SInt32 *>(self + 0x74));
+    IOLog("ATI155DIAG: teardownAGP() VCALL+0x5e0 RETURNED\n");
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) & 0xfffffffd;
   }
   return;

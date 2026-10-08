@@ -225,6 +225,8 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
     VCALL(*M<int *>(self + 0x93c), 0x18)(M<int *>(self + 0x93c));
     M<UInt32>(self + 0x93c) = 0;
   }
+  IOLog("ATI155DIAG: ATIRadeonX1000::stop() about to tail-call IOATIR500Accelerator::stop() self=%p\n", self);
   ((IOATIR500Accelerator *)(self))->stop((IOService *)(param_1));
+  IOLog("ATI155DIAG: ATIRadeonX1000::stop() - IOATIR500Accelerator::stop() RETURNED (unexpected if it panics)\n");
   return;
 }
