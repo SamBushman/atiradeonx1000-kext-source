@@ -23,6 +23,7 @@
 #include "../Headers/GhidraExterns.h"
 #include "../Headers/GhidraCompat.h"
 #include "../Headers/GhidraLiterals.h"
+#include <libkern/c++/OSBoolean.h>
 extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");
 
 extern "C" UInt32 GH_ZN12OSDictionary12withCapacityEj(...) asm("__ZN12OSDictionary12withCapacityEj");
@@ -71,9 +72,19 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
        * exact crash predates the sleep entirely (seen as far back as the Oct 7 session), so the
        * sleep was never a fix and removing it should not be expected to change the outcome -
        * assume the real fault is still somewhere after this point. */
-      UInt32 kOSBooleanTrue_vtable = g_kOSBooleanTrue ? *(UInt32 *)g_kOSBooleanTrue : 0;
-      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x kOSBooleanTrue=%p kOSBooleanTrue_vtable=0x%x thread=%p at_interrupt_context=%d preemption_level=%d\n",
-            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (unsigned)kOSBooleanTrue_vtable,
+      /* #153 Update 7 (2026-10-08): the 2026-10-08 10:56 live test's kOSBooleanTrue_vtable read
+       * (0x1038fd30) did not match the known-good 0x35e330 that issue153_probe found - but that
+       * probe's OWN raw "kOSBooleanTrue" value (printed directly from Apple's real, properly-typed
+       * <libkern/c++/OSBoolean.h> global) was ALSO 0x1038fd30, one full dereference "ahead" of
+       * ours. Our hand-rolled `extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");` may be
+       * resolving to the wrong thing (or at the wrong indirection level) versus the real typed
+       * global - comparing both directly, from the same call site, same moment, to settle it. */
+      void *real_kOSBooleanTrue = const_cast<void *>(static_cast<const void *>(kOSBooleanTrue));
+      UInt32 our_vtable = g_kOSBooleanTrue ? *(UInt32 *)g_kOSBooleanTrue : 0;
+      UInt32 real_vtable = real_kOSBooleanTrue ? *(UInt32 *)real_kOSBooleanTrue : 0;
+      IOLog("ATI153DIAG: pre-setObject self=%p piVar4=%p piVar4_vtable=0x%x g_kOSBooleanTrue=%p our_vtable=0x%x real_kOSBooleanTrue=%p real_vtable=0x%x thread=%p at_interrupt_context=%d preemption_level=%d\n",
+            self, piVar4, (unsigned)*piVar4, g_kOSBooleanTrue, (unsigned)our_vtable,
+            real_kOSBooleanTrue, (unsigned)real_vtable,
             (void *)current_thread(), (int)ml_at_interrupt_context(), get_preemption_level());
       VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",(UInt32)g_kOSBooleanTrue);
       IOLog("ATI153DIAG: post-setObject - returned, NO CRASH\n");
