@@ -54,7 +54,13 @@ UInt32 ATIRadeonX1000::pageoff_linear_buffer(VendorTextureBuffer *real_param_1, 
   if (param_1[0x20] == 0x3) {
     VVar11 = 0x3;
     if (M<int>(param_1 + 4) == 0) {
-      iVar4 = VCALL(M<int>(self), 0x5a8)(self);
+      /* #153: real disassembly (addr 0x217d8) confirms this first 0x5a8 call explicitly loads
+       * only r3 (this) - r4 (param_1) is unclobbered since function entry, so it's still the real
+       * buffer value here. The retry at this function's second 0x5a8 call (below) DOES reload r4
+       * explicitly in the real binary, because the intervening freeToAllocGART call clobbers it -
+       * that one was already correctly ported with the param_1 argument; only this first, bare
+       * occurrence was missing it. */
+      iVar4 = VCALL(M<int>(self), 0x5a8)(self, param_1);
       if ((iVar4 == 0) &&
          (iVar4 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                              (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),

@@ -51,6 +51,14 @@ extern "C" kern_return_t Issue147Probe_start(kmod_info_t *ki, void *data) {
     IOLog("Issue147Probe: self+0x98=0x%x self+0x830=%u self+3000=%u self+0xc4c=0x%x self+0x860=0x%x self+0xc50(saved puVar3)=0x%x self+0xc54=0x%x\n",
           (unsigned)f98, (unsigned)f830, (unsigned)f3000, (unsigned)fc4c, (unsigned)f860, (unsigned)fc50, (unsigned)fc54);
 
+    /* #153: read-only check of self's own vtable slot +0x5a4 (removeFromGART on
+     * ATIRadeonX1000/IOATIR500Accelerator) - removeTransferFromGART's VCALL through this slot is
+     * the suspected site of the Inst-access panic (PC=garbage) seen running the parity harness.
+     * Pure memory reads, no calls - same safety class as every other read in this probe. */
+    UInt32 *vtable = *(UInt32 **)g_accel;
+    UInt32 slot5a4 = vtable[0x5a4 / 4];
+    IOLog("Issue147Probe: self_vtable=%p slot[0x5a4]=0x%x\n", vtable, (unsigned)slot5a4);
+
     if (f860 != 0) {
         UInt8 *p = (UInt8 *)f860;
         IOLog("Issue147Probe: raw bytes at self+0x860 [8..0xf]: %02x %02x %02x %02x %02x %02x %02x %02x\n",

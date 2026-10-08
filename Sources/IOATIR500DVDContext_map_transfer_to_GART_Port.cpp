@@ -32,8 +32,13 @@ void IOATIR500DVDContext::map_transfer_to_GART(VendorTransferBuffer *real_param_
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
 
   SInt32 iVar1;
-  
-  iVar1 = VCALL(*M<SInt32 *>(self + 0x8c), 0x5a8)(M<SInt32 *>(self + 0x8c));
+
+  /* #153: real disassembly (addr 0xe820) confirms the compiled call only explicitly loads r3
+   * (the accelerator at self+0x8c) before this bctrl - but r4 (param_1, the buffer) is never
+   * clobbered since function entry (`mr r30,r4` copies without clearing it), so it's still the
+   * real buffer value at the call. The naive 1-argument transcription dropped that implicit
+   * second argument, which our own compiler does not replicate - restoring it explicitly. */
+  iVar1 = VCALL(*M<SInt32 *>(self + 0x8c), 0x5a8)(M<SInt32 *>(self + 0x8c), param_1);
   if (iVar1 == 0) {
     ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),(IOATIR500DVDContext *)(self),
                (IOATIR500GLContext *)((UInt8 *)0x0),(IOATIR500Surface *)(M<UInt8 *>(self + 0xf8)),

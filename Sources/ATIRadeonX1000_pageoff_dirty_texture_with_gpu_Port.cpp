@@ -72,7 +72,14 @@ UInt32 ATIRadeonX1000::pageoff_dirty_texture_with_gpu(VendorTextureBuffer *real_
   if (param_1[0x20] == 0x3) {
     VVar17 = 0x3;
     if (M<int>(param_1 + 4) == 0) {
-      iVar15 = VCALL(M<int>(self), 0x5a8)(self);
+      /* #153: real disassembly (addr 0x21158) confirms this first 0x5a8 call explicitly loads
+       * only r3 (this) - r4 (param_1) is unclobbered since function entry, so it's still the real
+       * buffer value here. The retry below (second 0x5a8 call) DOES reload r4 explicitly in the
+       * real binary, because the intervening freeToAllocGART call clobbers it - that one was
+       * already correctly ported with the param_1 argument; only this first, bare occurrence
+       * was missing it (same defect class as pageoff_linear_buffer and the four
+       * map_transfer_to_GART overrides). */
+      iVar15 = VCALL(M<int>(self), 0x5a8)(self, param_1);
       if ((iVar15 == 0) &&
          (iVar15 = ((IOATIR500Accelerator *)((UInt8 *)self))->freeToAllocGART((IOATIR5002DContext *)((UInt8 *)0x0),
                               (IOATIR500DVDContext *)((UInt8 *)0x0),(IOATIR500GLContext *)((UInt8 *)0x0),
