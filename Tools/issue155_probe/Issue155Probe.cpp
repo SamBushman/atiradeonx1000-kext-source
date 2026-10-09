@@ -47,17 +47,40 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
     IOLog("Issue155Probe: found object of real class '%s', retainCount=%d\n",
           accel->getMetaClass()->getClassName(), accel->getRetainCount());
 
-    /* Wide, unbiased raw dump of the object's low-offset region (0x0-0x300) - this is base-class
-     * (OSObject/IORegistryEntry/IOService/IOAccelerator) territory our own ported code is NOT
-     * supposed to write into at all. The point isn't to interpret these values (most are real Apple
-     * kernel bookkeeping this project has no documentation for) - it's to get a byte-for-byte
-     * comparison against the identical dump from a stock instance, to catch a struct-offset/layout
-     * bug in our own code that corrupts memory outside what our own fields are supposed to occupy. */
-    IOLog("Issue155Probe: raw dump self+0x0..0x300:\n");
-    for (UInt32 off = 0; off < 0x300; off += 0x20) {
-        IOLog("Issue155Probe: +%03x: %08x %08x %08x %08x %08x %08x %08x %08x\n", (unsigned)off,
-              (unsigned)R32(off), (unsigned)R32(off+4), (unsigned)R32(off+8), (unsigned)R32(off+0xc),
-              (unsigned)R32(off+0x10), (unsigned)R32(off+0x14), (unsigned)R32(off+0x18), (unsigned)R32(off+0x1c));
+    /* #155 follow-up (2026-10-08): the removeEventSource argument fix (passing the real event source
+     * instead of a missing/garbage one, matching stock) didn't change the crash at all. Checking here,
+     * non-destructively, on a kext that's been loaded and idle (NOT right after load, NOT via the
+     * crash-triggering unload path) whether self+0xb4 (our private workloop) and the four event
+     * sources still have valid, non-null vtables - to see if corruption happens during ordinary
+     * operation (before stop() ever runs) rather than during stop()'s own cleanup sequence. */
+    static const struct { int off; const char *label; } fields[] = {
+        {0xb4, "workloop"}, {0xbc, "eventSource(0xbc)"}, {0xb8, "eventSource(0xb8)"},
+        {0xc0, "eventSource(0xc0)"}, {0xc4, "eventSource(0xc4)"},
+    };
+    for (unsigned i = 0; i < sizeof(fields)/sizeof(fields[0]); i++) {
+        UInt32 val = R32(fields[i].off);
+        /* Raw memory read only - deliberately NOT calling any virtual method (even getMetaClass())
+         * here, since if the vtable word itself is 0/garbage, a virtual dispatch would crash exactly
+         * like the bug under investigation. Report the raw vtable word only; resolve to a class name
+         * in a SEPARATE pass below, only for fields whose vtable word looks plausibly valid. */
+        UInt32 vt = val ? *(UInt32 *)(uintptr_t)val : 0;
+        IOLog("Issue155Probe: self+0x%x %s = 0x%x vtable=0x%x\n",
+              fields[i].off, fields[i].label, (unsigned)val, (unsigned)vt);
+    }
+    for (unsigned i = 0; i < sizeof(fields)/sizeof(fields[0]); i++) {
+        UInt32 val = R32(fields[i].off);
+        UInt32 vt = val ? *(UInt32 *)(uintptr_t)val : 0;
+        /* Only now, having confirmed the vtable word is a plausible kernel-text address (not 0, not
+         * some tiny/obviously-bogus value), is it safe to attempt the real virtual call. */
+        if (vt > 0x1000 && vt < 0x10000000) {
+            OSObject *obj = (OSObject *)(uintptr_t)val;
+            const OSMetaClass *mc = obj->getMetaClass();
+            IOLog("Issue155Probe: self+0x%x %s class='%s'\n",
+                  fields[i].off, fields[i].label, mc ? mc->getClassName() : "(getMetaClass null)");
+        } else if (val != 0) {
+            IOLog("Issue155Probe: self+0x%x %s vtable=0x%x looks NOT SAFE to dispatch through - skipping getMetaClass\n",
+                  fields[i].off, fields[i].label, (unsigned)vt);
+        }
     }
 
     return KERN_SUCCESS;
