@@ -234,7 +234,22 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
     M<UInt32>(self + 0x93c) = 0;
   }
   IOLog("ATI155DIAG: ATIRadeonX1000::stop() about to tail-call IOATIR500Accelerator::stop() self=%p\n", self);
-  ((IOATIR500Accelerator *)(self))->stop((IOService *)(param_1));
+  /* #155 ROOT CAUSE FIX (2026-10-11): the mechanical port wrote this base-class chain-up as a
+   * pointer-cast-and-arrow call. Under -fapple-kext (required for this build; it disables
+   * devirtualization so kexts stay binary-patchable), `((Base*)obj)->virtualMethod()` ALWAYS
+   * compiles to a real vtable dispatch, regardless of the cast - verified directly in this
+   * build's own disassembly (reads self's live vtable pointer, adds the literal slot offset
+   * 0x34c, matching stop()'s documented vtable slot, then calls through it). Since `self` is a
+   * live ATIRadeonX1000 instance and ATIRadeonX1000 overrides that exact same slot, this called
+   * ATIRadeonX1000::stop() itself - recursively, deterministically, every single time - instead
+   * of reaching IOATIR500Accelerator::stop()'s base implementation. Confirmed via stock's own
+   * disassembly that the real compiled driver uses a direct, fixed-address long-call here, not a
+   * vtable read - meaning stock's real source used non-virtual scope-resolution call syntax,
+   * which the mechanical Ghidra port didn't reproduce. Fixed by using the same explicit
+   * Base::method() syntax already used correctly elsewhere in this file family (e.g.
+   * ATIRadeonX1000::start()'s own `IOAccelerator::start(param_1)` chain call) - this is defined
+   * by the C++ standard to bypass virtual dispatch entirely, independent of -fapple-kext. */
+  this->IOATIR500Accelerator::stop((IOService *)(param_1));
   IOLog("ATI155DIAG: ATIRadeonX1000::stop() - IOATIR500Accelerator::stop() RETURNED (unexpected if it panics)\n");
   return;
 }
