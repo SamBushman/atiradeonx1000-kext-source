@@ -100,6 +100,24 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
      * memory, so it can be resolved against /mach_kernel's own symbol table (nm) on the G5 side -
      * removing all guesswork about what 0x158 actually dispatches to in this context. Read-only:
      * just the vtable slot value, no call through it. */
+    /* #155 follow-up (2026-10-11): waitForTimeStamp() hangs on the very first line of
+     * IOATIR500Accelerator::stop() - a bounded retry loop, confirmed by the user this is a genuine
+     * hang, not just a long wait. Candidate fix: disable garbage_collector's INTERRUPT source
+     * (self+0xbc), not just its timer, very early in teardown. Read the real vtable+0xf0 function
+     * pointer for self+0xbc/self+0xc4 (both confirmed IOInterruptEventSource) non-destructively,
+     * to resolve against /mach_kernel's nm symbols and confirm disable()'s real offset before
+     * trusting it in a live fix - same verification discipline as the cancelTimeout() check below. */
+    {
+        static const int intOffs[] = {0xbc, 0xc4};
+        for (unsigned i = 0; i < sizeof(intOffs)/sizeof(intOffs[0]); i++) {
+            UInt32 val = R32(intOffs[i]);
+            if (!val) continue;
+            UInt32 vt = *(UInt32 *)(uintptr_t)val;
+            UInt32 slotF0 = *(UInt32 *)(uintptr_t)(vt + 0xf0);
+            IOLog("Issue155Probe: self+0x%x interrupt-source vtable=0x%x vtable[0xf0]=0x%x (resolve against nm /mach_kernel - disable() candidate)\n",
+                  intOffs[i], (unsigned)vt, (unsigned)slotF0);
+        }
+    }
     {
         static const int timerOffs[] = {0xb8, 0xc0};
         for (unsigned i = 0; i < sizeof(timerOffs)/sizeof(timerOffs[0]); i++) {
