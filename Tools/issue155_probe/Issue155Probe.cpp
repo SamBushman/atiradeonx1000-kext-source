@@ -83,6 +83,17 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
         }
     }
 
+    /* #155 follow-up (2026-10-10): after the removeEventSource() argument fix, kextunload now
+     * crashes deeper in stop(), in removeFromPCIeGART() writing through a null self+0xc4c (GART
+     * page table pointer). startupPCIeGART()'s own allocation of self+0xc4c is gated behind
+     * (self+0x98 & 0xf00000) != 0 AND self+3000(0xbb8) == 0 AND self+0x830 != 0 - dumping all three
+     * plus the chip-ID/chip-rev fields (self+0xc50/0xc54) non-destructively, before any kextunload,
+     * to see which precondition actually fails for this hot-swap session. */
+    IOLog("Issue155Probe: GART gate: self+0x98=0x%x (mask 0xf00000 -> %s) self+0x830=0x%x self+0xbb8(3000)=0x%x self+0xc4c=0x%x self+0xc50(chipID)=0x%x self+0xc54(chipRev)=0x%x self+0x74(pci)=0x%x\n",
+          (unsigned)R32(0x98), (R32(0x98) & 0xf00000) ? "SET" : "clear",
+          (unsigned)R32(0x830), (unsigned)R32(3000), (unsigned)R32(0xc4c),
+          (unsigned)R32(0xc50), (unsigned)R32(0xc54), (unsigned)R32(0x74));
+
     return KERN_SUCCESS;
 }
 
