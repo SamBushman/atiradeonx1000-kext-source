@@ -162,6 +162,23 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
         }
     }
 
+    /* #155 heap-layout forensics (2026-10-11): dump every real heap/object address this project's
+     * teardown path touches, for a direct stock-vs-rebuilt comparison under matched (both hot-swapped)
+     * conditions - looking for a structural placement difference (e.g. an address range collision, an
+     * unusual alignment, a vastly different distance between related objects) that identical source
+     * wouldn't predict but a different compiled artifact's section sizes/zone-allocator pressure could
+     * cause. Pure address/metadata reads only - nothing is dereferenced beyond the single already-
+     * proven-safe vtable/metaclass pattern used elsewhere in this probe. */
+    {
+        IOLog("Issue155Probe: HEAPDUMP self=%p vtable=0x%x self+0x74(pci)=0x%x self+0x7c(pool1)=0x%x self+0x93c(pool2)=0x%x self+0x934(mmioMap)=0x%x self+0xc4c(gartTable)=0x%x self+0xbb8(gartTable2)=0x%x self+0x8d0(fenceDMA)=0x%x\n",
+              g_accel, (unsigned)R32(0x0), (unsigned)R32(0x74), (unsigned)R32(0x7c), (unsigned)R32(0x93c),
+              (unsigned)R32(0x934), (unsigned)R32(0xc4c), (unsigned)R32(0xbb8), (unsigned)R32(0x8d0));
+        IOWorkLoop *realWL = ((IOService *)g_accel)->getWorkLoop();
+        IOLog("Issue155Probe: HEAPDUMP2 IOService::getWorkLoop()=%p self+0xb4(privateWL)=0x%x delta=0x%x\n",
+              realWL, (unsigned)R32(0xb4),
+              (unsigned)((uintptr_t)realWL - (uintptr_t)R32(0xb4)));
+    }
+
     return KERN_SUCCESS;
 }
 
