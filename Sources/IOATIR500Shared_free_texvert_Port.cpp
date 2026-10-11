@@ -45,7 +45,16 @@ void IOATIR500Shared::free_texvert(IOATIR500Accelerator *real_param_1, IOTexture
   M<SInt32>(iVar3 + 0x24) = iVar5;
   M<UInt8 *>(param_2 + 0x24) = param_2;
   if (iVar1 != 0) {
-    VCALL(M<SInt32>(param_1), 0x5ac)(param_1);
+    /* #155 FIX (2026-10-11): this vtable+0x5ac call is missing its second argument - confirmed via
+     * stock's own disassembly (real addr 0x18710+0x44: r4/param_2 stays live, untouched, from this
+     * function's entry all the way to the bctrl, so stock genuinely passes (param_1, param_2)).
+     * Confirmed independently by the sibling call site at the same vtable slot in
+     * IOATIR500Accelerator_free_gart_wirings_Port.cpp (`VCALL(self,0x5ac)(self,pIVar6)`, 2 args).
+     * Same dropped-argument defect class as removeEventSource()/IOLockFree earlier in this issue.
+     * This runs on the garbage_collector interrupt path implicated in #155's teardown hang - live-
+     * tested fixing this alone, does NOT resolve the hang (the hang persisted identically), but
+     * it's a real, independently-verified bug worth keeping regardless. */
+    VCALL(M<SInt32>(param_1), 0x5ac)(param_1, param_2);
   }
   if (M<UInt8 *>(param_2 + 0x1c) != (UInt8 *)0x0) {
     ((IOATIR500Shared *)(M<UInt8 *>(param_2 + 0x1c)))->free_buf_handle(param_2,*M<UInt32 *>(param_2 + 0x14));   /* record, handle - the owner is `this` of the call */
