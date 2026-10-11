@@ -59,12 +59,20 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
   int iVar7;
   
   if (M<int>(self + 0x9a8) != 0) {
-    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4));
+    /* #155 FIX: real IOWorkLoop::removeEventSource(IOEventSource*) at vtable+0xe8 takes TWO args
+     * (this, toRemove) - confirmed against the real XNU IOWorkLoop.cpp source (_maintRequest's
+     * mRemoveEvent case) and against stock's own disassembly, which keeps the event-source pointer
+     * live in r4 from an earlier load, not reloaded immediately before the bctrl. The mechanical
+     * Ghidra port dropped this second argument (GhidraVFn is a bare variadic function pointer, so
+     * the compiler only sets up registers for args actually written here) - the real callee read
+     * whatever happened to be in r4, a valid-looking but wrong pointer, matching this issue's
+     * "valid pointer, zeroed vtable" crash signature exactly. */
+    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4), M<int *>(self + 0x9a8));
     VCALL(*M<int *>(self + 0x9a8), 0x18)(M<int *>(self + 0x9a8));
     M<UInt32>(self + 0x9a8) = 0;
   }
   if (M<int>(self + 0x9b8) != 0) {
-    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4));
+    VCALL(*M<int *>(self + 0xb4), 0xe8)(M<int *>(self + 0xb4), M<int *>(self + 0x9b8));
     VCALL(*M<int *>(self + 0x9b8), 0x18)(M<int *>(self + 0x9b8));
     M<UInt32>(self + 0x9b8) = 0;
   }

@@ -36,12 +36,14 @@ void IOATIR500Accelerator::stop(IOService *param_1) {
   
   VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + 0x50) + -1);
   if (M<SInt32>(self + 0xbc) != 0) {
-    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4));
+    /* #155 FIX: IOWorkLoop::removeEventSource() at vtable+0xe8 takes (this, toRemove) - see the
+     * matching comment in ATIRadeonX1000_stop_Port.cpp for the full ground-truth derivation. */
+    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4), M<SInt32 *>(self + 0xbc));
     VCALL(*M<SInt32 *>(self + 0xbc), 0x18)(M<SInt32 *>(self + 0xbc));
     M<UInt32>(self + 0xbc) = 0;
   }
   if (M<SInt32>(self + 0xb8) != 0) {
-    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4));
+    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4), M<SInt32 *>(self + 0xb8));
     VCALL(*M<SInt32 *>(self + 0xb8), 0x18)(M<SInt32 *>(self + 0xb8));
     M<UInt32>(self + 0xb8) = 0;
   }
@@ -58,12 +60,12 @@ void IOATIR500Accelerator::stop(IOService *param_1) {
   }
   self[0x89] = 0x0;
   if (M<SInt32>(self + 0xc4) != 0) {
-    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4));
+    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4), M<SInt32 *>(self + 0xc4));
     VCALL(*M<SInt32 *>(self + 0xc4), 0x18)(M<SInt32 *>(self + 0xc4));
     M<UInt32>(self + 0xc4) = 0;
   }
   if (M<SInt32>(self + 0xc0) != 0) {
-    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4));
+    VCALL(*M<SInt32 *>(self + 0xb4), 0xe8)(M<SInt32 *>(self + 0xb4), M<SInt32 *>(self + 0xc0));
     VCALL(*M<SInt32 *>(self + 0xc0), 0x18)(M<SInt32 *>(self + 0xc0));
     M<UInt32>(self + 0xc0) = 0;
   }
