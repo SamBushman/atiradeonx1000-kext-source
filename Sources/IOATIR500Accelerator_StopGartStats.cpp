@@ -112,7 +112,15 @@ LAB_000067e8:
   }
   VCALL(M<SInt32>(self), 0x584)(self,param_1);
   if (M<SInt32>(self + 0x840) != 0) {
-    GH_IOLockFree();
+    /* #155 FIX (2026-10-10): _IOLockFree(lock_t) takes the lock pointer as its one argument -
+     * confirmed via stock's own disassembly (0x68b8: `lwz r3,0x840(r30)` loads self+0x840 into r3
+     * immediately before the `bl` to IOLockFree). GH_IOLockFree is a bare variadic declaration, so
+     * this call site compiled with zero explicit arguments - the real kernel function received
+     * whatever garbage happened to be in r3. Same dropped-argument defect class as the
+     * removeEventSource() fix earlier in this issue; a real bug regardless of whether it's also
+     * the cause of this issue's remaining teardown hang (live-tested: fixing this alone did not
+     * resolve the hang - see the issue comments for the checkpoint-panic localization that followed). */
+    GH_IOLockFree(M<SInt32>(self + 0x840));
     M<UInt32>(self + 0x840) = 0;
   }
   
