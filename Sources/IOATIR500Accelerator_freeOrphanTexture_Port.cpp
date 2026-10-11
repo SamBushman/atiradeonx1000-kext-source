@@ -69,8 +69,17 @@ void IOATIR500Accelerator::freeOrphanTexture(bool param_1) {
       }
     }
     else {
+      /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3680+0x7c) shows r4
+       * still holding uVar4 (loaded a few instructions earlier for the branch above) live across
+       * this call - waitForTimeStamp(UInt32) genuinely takes uVar4 as its target stamp here, not
+       * just `self`. Our port never wrote it explicitly, so an unoptimized (-O0) build can't rely
+       * on the same register-reuse coincidence stock's optimized build gets for free. Confirmed
+       * benign in practice: self+0x790 (the only consumer of this call's return value) is a purely
+       * cosmetic IOKit performance-stat property (IOATIR500Accelerator_StopGartStats.cpp's
+       * writePerformanceStats), not used in any control-flow decision - but a real, independently
+       * verified dropped-argument bug, same class as removeEventSource()/IOLockFree/free_texvert. */
       iVar5 = M<SInt32>(self + 0x790);
-      iVar3 = VCALL(M<SInt32>(self), 0x54c)(self);
+      iVar3 = VCALL(M<SInt32>(self), 0x54c)(self, uVar4);
       M<SInt32>(self + 0x790) = iVar5 + iVar3;
     }
     if (bVar2) {

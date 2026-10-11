@@ -115,8 +115,15 @@ bool ATIRadeonX1000::display_mode_will_change(SInt32 param_1) {
     M<UInt32>(iVar6 + uVar2 * 4) = M<UInt32>(self + 0x50);
     M<UInt32>(self + 0x914) = uVar5 & 0x7ff;
     this->submit_ring_data();
+    /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x25f00+0xcc) loads the
+     * PRE-increment self+0x50 into r4 before incrementing/storing the new value, and that register
+     * stays live, unmodified, all the way to this call - stock passes (self, old_self+0x50) i.e.
+     * the same "self+0x50 - 1" target used at every other waitForTimeStamp call site in this
+     * codebase. Our port dropped it. Same benign-in-practice (self+0x790 is cosmetic) dropped-
+     * argument class as the sibling fixes in freeOrphanTexture_Port.cpp/
+     * freeTransferToAllocGART_Port.cpp. */
     M<SInt32>(self + 0x50) = M<SInt32>(self + 0x50) + 1;
-    VCALL(M<SInt32>(self), 0x54c)(self);
+    VCALL(M<SInt32>(self), 0x54c)(self, M<SInt32>(self + 0x50) - 1);
   }
   if (M<SInt32>(self + 0x8bc) != 0) {
     VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + 0x854) + -1);

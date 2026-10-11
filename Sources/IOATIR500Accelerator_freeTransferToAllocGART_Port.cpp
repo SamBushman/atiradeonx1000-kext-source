@@ -47,8 +47,14 @@ LAB_00003650:
       if (iVar1 == 0) goto LAB_00003650;
     }
     else {
+      /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3580) shows param_3
+       * (the 3rd real parameter, r6 at entry) gets moved into r4 unconditionally early in the
+       * function (`mr r4,r6` at +0x20) and is never overwritten before this call - stock genuinely
+       * passes (self, param_3) to waitForTimeStamp here. Our port dropped param_3. Same benign-
+       * in-practice dropped-argument defect class as the sibling fix in freeOrphanTexture_Port.cpp
+       * (self+0x790 is a cosmetic stat only). */
       iVar3 = M<SInt32>(self + 0x790);
-      iVar1 = VCALL(M<SInt32>(self), 0x54c)(self);
+      iVar1 = VCALL(M<SInt32>(self), 0x54c)(self, param_3);
       M<SInt32>(self + 0x790) = iVar3 + iVar1;
     }
     VCALL(M<SInt32>(self), 0x5ac)(self,param_1);
