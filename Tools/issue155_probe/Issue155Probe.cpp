@@ -94,6 +94,24 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
           (unsigned)R32(0x830), (unsigned)R32(3000), (unsigned)R32(0xc4c),
           (unsigned)R32(0xc50), (unsigned)R32(0xc54), (unsigned)R32(0x74));
 
+    /* #155 follow-up (2026-10-10 cont'd): the cancelTimeout() fix at vtable+0x158 didn't change the
+     * crash at all. Before guessing further, read the REAL function pointer at vtable+0x158 for
+     * self+0xb8/self+0xc0 (both confirmed IOTimerEventSource instances) directly out of live kernel
+     * memory, so it can be resolved against /mach_kernel's own symbol table (nm) on the G5 side -
+     * removing all guesswork about what 0x158 actually dispatches to in this context. Read-only:
+     * just the vtable slot value, no call through it. */
+    {
+        static const int timerOffs[] = {0xb8, 0xc0};
+        for (unsigned i = 0; i < sizeof(timerOffs)/sizeof(timerOffs[0]); i++) {
+            UInt32 val = R32(timerOffs[i]);
+            if (!val) continue;
+            UInt32 vt = *(UInt32 *)(uintptr_t)val;
+            UInt32 slot158 = *(UInt32 *)(uintptr_t)(vt + 0x158);
+            IOLog("Issue155Probe: self+0x%x timer vtable=0x%x vtable[0x158]=0x%x (resolve against nm /mach_kernel)\n",
+                  timerOffs[i], (unsigned)vt, (unsigned)slot158);
+        }
+    }
+
     return KERN_SUCCESS;
 }
 

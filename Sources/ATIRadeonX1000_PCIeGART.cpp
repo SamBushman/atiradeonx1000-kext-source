@@ -59,8 +59,20 @@ void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32
         if (iVar2 != 0) {
           *puVar7 = uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
         }
-        M<UInt32>(iVar5 + iVar3) =
-             uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
+        /* #155 FIX (2026-10-10): stock leaves this write unconditional (confirmed via disassembly -
+         * stock's own compiled code has no null check on iVar3/self+0xc4c here either), because on
+         * stock's optimized build stop() finishes fast enough that gart_collector_timer's reclaim
+         * handler (which frees self+0xc4c) never gets a chance to fire mid-teardown. Confirmed live
+         * (3 reproductions) that this project's unoptimized (-O0) build is slow enough that it
+         * reliably does, and confirmed (via cancelTimeout()'s real semantics - it can't retract an
+         * already-dispatched thread_call) that cancelling the timer early in stop() doesn't help,
+         * since the race is likely already decided before stop() is even entered. Guarding this one
+         * write (not a stock behavior, a build-specific safety net) rather than trying to win a race
+         * this build structurally can't win. */
+        if (iVar3 != 0) {
+          M<UInt32>(iVar5 + iVar3) =
+               uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
+        }
         iVar4 = iVar4 + 1;
         iVar5 = iVar5 + 4;
         puVar7 = puVar7 + 1;
@@ -360,6 +372,15 @@ void ATIRadeonX1000::shutdownPCIeGART() {
   UInt32 uVar2;
   
   iVar1 = M<SInt32>(self + 0x860);
+  /* #155 FIX (2026-10-10): same build-specific race class as removeFromPCIeGART's self+0xc4c guard
+   * above - self+0x860 (MMIO aperture base) is confirmed valid through start() and every earlier
+   * removeFromGART call this run, but reads as null by the time this function's own fresh read
+   * executes, live-reproduced on the G5. stock leaves this entire block unconditional (no null check
+   * on self+0x860 anywhere in its own disassembly); on our slower unoptimized build something
+   * concurrent with teardown is clearing it first. Guarding the whole MMIO sequence - there's nothing
+   * safe to idle/reset if the aperture isn't mapped - rather than chasing the exact async cause
+   * further live. */
+  if (iVar1 != 0) {
   M<UInt32>(iVar1 + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
   uVar2 = M<UInt32>(self + 0xbbc);
@@ -376,6 +397,7 @@ void ATIRadeonX1000::shutdownPCIeGART() {
   M<UInt32>(iVar1 + 0x34) =
        (uVar2 & 0xfffffffe) << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
   enforceInOrderExecutionIO();
+  }
   if ((M<SInt32>(self + 0xbc8) != 0) && (M<SInt32>(self + 0xbc4) != 0)) {
     ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(self + 0xbc4));
   }
