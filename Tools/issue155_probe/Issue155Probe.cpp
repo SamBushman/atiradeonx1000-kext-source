@@ -130,6 +130,38 @@ extern "C" kern_return_t Issue155Probe_start(kmod_info_t *ki, void *data) {
         }
     }
 
+    /* #155 follow-up (2026-10-11): offline analysis plan, live step 3 - establish a clean idle-time
+     * baseline for everything waitForTimeStamp() touches, before any kextunload is attempted. This is
+     * the exact same MMIO access pattern waitForTimeStamp()/submit_buffer() perform during ordinary,
+     * already-proven-safe operation (every real draw call waits on this same fence) - reading it here
+     * at idle carries no more risk than normal GPU use already does. Also reads RBBM_STATUS via the
+     * same byte-assembly pattern submit_buffer()'s own FIFO-overflow log line uses (self+0x860+0xe40),
+     * to check whether the chip already shows hang symptoms before any teardown is ever attempted. */
+    {
+        UInt32 stampCurrent = R32(0x50);   /* next stamp to be submitted (submit_buffer's self+0x50) */
+        UInt32 stampRetired = R32(0x54);   /* last stamp confirmed retired (waitForTimeStamp's own cache) */
+        UInt32 mmioBase = R32(0x860);
+        UInt32 fenceBase = R32(0x864);
+        UInt32 fenceOff = R32(0x86c);
+        IOLog("Issue155Probe: stamps: self+0x50(current)=0x%x self+0x54(retired)=0x%x self+0x860(mmioBase)=0x%x self+0x864(fenceBase)=0x%x self+0x86c(fenceOff)=0x%x\n",
+              stampCurrent, stampRetired, mmioBase, fenceBase, fenceOff);
+        if (fenceBase != 0) {
+            UInt8 *pbFence = (UInt8 *)(uintptr_t)(fenceBase + fenceOff);
+            UInt32 fenceVal = (UInt32)pbFence[3] << 0x18 | (UInt32)pbFence[2] << 0x10 |
+                               (UInt32)pbFence[1] << 8 | (UInt32)pbFence[0];
+            IOLog("Issue155Probe: computed fence addr=0x%x live fence value=0x%x (vs self+0x54=0x%x cached)\n",
+                  (unsigned)(uintptr_t)pbFence, fenceVal, stampRetired);
+        } else {
+            IOLog("Issue155Probe: fenceBase (self+0x864) is NULL - skipping live fence read\n");
+        }
+        if (mmioBase != 0) {
+            UInt8 *pbRbbm = (UInt8 *)(uintptr_t)(mmioBase + 0xe40);
+            UInt32 rbbmStatus = (UInt32)pbRbbm[3] << 0x18 | (UInt32)pbRbbm[2] << 0x10 |
+                                 (UInt32)pbRbbm[1] << 8 | (UInt32)pbRbbm[0];
+            IOLog("Issue155Probe: RBBM_STATUS (self+0x860+0xe40) = 0x%x\n", rbbmStatus);
+        }
+    }
+
     return KERN_SUCCESS;
 }
 
