@@ -68,11 +68,11 @@ LAB_00016c4c:
     }
   } while( true );
   while( true ) {
+    uVar6 = uVar3;
+    if ((uVar2 >> (uVar3 & 0x3f) & 1) == 0) goto LAB_00016c7c;
     uVar3 = uVar3 + 1;
     iVar1 = iVar1 + -1;
     if (iVar1 == 0) break;
-    uVar6 = uVar3;
-    if ((uVar2 >> (uVar3 & 0x3f) & 1) == 0) goto LAB_00016c7c;
   }
   uVar6 = 0x20;
 LAB_00016c7c:
