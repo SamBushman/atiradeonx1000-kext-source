@@ -33,26 +33,28 @@ IOReturn IOATIR500GLContext::scale_surface(UInt32 param_1, UInt32 param_2, UInt3
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
-  UInt16 local_48;
-  UInt16 local_46;
-  UInt16 local_44;
-  UInt16 local_42;
-  UInt16 local_40;
-  UInt16 local_3e;
-  
+  /* real stock (0x9230) writes these as ONE contiguous 12-byte stack buffer (r1+0x38..0x42) and passes its base
+   * address to set_scaling, which reads it back at fixed byte offsets (+0,+2,+4,+6,+8,+10) as an IOAccelSurfaceScaling
+   * prefix. Six separate named locals (as Ghidra's decompile and the original port emitted) have no layout guarantee
+   * relative to each other, so a real compiler is free to lay them out in any order/with padding - confirmed live
+   * (2026-10-12, issue #160) that gcc 4.0.1 does NOT preserve the needed adjacency here, producing garbage
+   * width/height when set_scaling reads past the end of whichever local actually sits at that address. A real array
+   * is the only layout C guarantees. */
+  UInt16 local_scale_buf[6];
+
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
   if ((M<UInt8 *>(self + 0x290) == (UInt8 *)0x0) || ((param_1 & 1) == 0)) {
     uVar1 = 0xe00002c7;
   }
   else {
-    local_44 = (UInt16)param_2;
-    local_42 = (UInt16)param_3;
-    local_46 = 0;
-    local_48 = 0;
-    local_40 = local_44;
-    local_3e = local_42;
+    local_scale_buf[2] = (UInt16)param_2;
+    local_scale_buf[3] = (UInt16)param_3;
+    local_scale_buf[1] = 0;
+    local_scale_buf[0] = 0;
+    local_scale_buf[4] = local_scale_buf[2];
+    local_scale_buf[5] = local_scale_buf[3];
     uVar1 = ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_scaling(param_1 >> 2 & 1 | param_1 & 2,
-                       (IOAccelSurfaceScaling *)&local_48);
+                       (IOAccelSurfaceScaling *)local_scale_buf);
   }
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
   return uVar1;
