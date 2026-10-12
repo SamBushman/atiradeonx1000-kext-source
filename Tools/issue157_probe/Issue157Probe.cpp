@@ -56,6 +56,20 @@ extern "C" kern_return_t Issue157Probe_start(kmod_info_t *ki, void *data) {
     OSObject *prop = accel->getProperty("ATIEnableWideBlitSupport");
     IOLog("Issue157Probe: live getProperty(ATIEnableWideBlitSupport)=%p\n", prop);
 
+    /* #157 follow-up: does STOCK, hot-swapped, show the same zero-capacity VRAM pool as the
+     * rebuilt kext? self+0x9c/self+0x84c are only ever written by set_display_mode_and_vram()
+     * (called from initialize_hardware(), called from display_mode_did_change() - a real
+     * display-mode-change callback that a hot-swap never receives, per this issue's own tracing).
+     * Reading these on whichever kext is currently loaded answers whether this is a genuine
+     * hot-swap-only limitation (same on stock) or specific to the rebuilt kext's own code. */
+    UInt32 f9c = R32(0x9c);
+    UInt32 f84c = R32(0x84c);
+    void *pool93c = *(void **)(g_accel + 0x93c);
+    void *pool7c = *(void **)(g_accel + 0x7c);
+    UInt32 fe4 = R32(0xe4);
+    IOLog("Issue157Probe: self+0x9c(vramsize)=0x%x self+0x84c=0x%x self+0x93c(tmppool)=%p self+0x7c(gartpool)=%p self+0xe4=0x%x\n",
+          (unsigned)f9c, (unsigned)f84c, pool93c, pool7c, (unsigned)fe4);
+
     return KERN_SUCCESS;
 }
 
