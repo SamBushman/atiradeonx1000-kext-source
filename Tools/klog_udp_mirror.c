@@ -18,12 +18,22 @@
  * way it never holds up the kernel. Pair with Tools/udp_log_receiver.py running on another machine
  * BEFORE starting any crash-prone test.
  *
- * Usage (on the G5, background it before a risky test):
- *   cc -o /tmp/klog_udp_mirror Tools/klog_udp_mirror.c
- *   nohup /tmp/klog_udp_mirror <receiver_ip> <receiver_port> > /tmp/klog_mirror.log 2>&1 < /dev/null &
+ * Usage (on the G5, background it before a risky test): build/stage under ~/rung3, NOT /tmp - /tmp
+ * is wiped on every reboot, same rule as every other G5 artifact (see
+ * feedback_g5_crash_evidence_capture memory - this bit a kext build staged in /tmp once already).
+ *   mkdir -p ~/rung3 && cc -o ~/rung3/klog_udp_mirror Tools/klog_udp_mirror.c
+ *   nohup ~/rung3/klog_udp_mirror <receiver_ip> <receiver_port> > ~/rung3/klog_mirror.log 2>&1 < /dev/null &
  *   disown -a
  * Stop it with: pkill klog_udp_mirror   (harmless to leave running across reboots/crashes - it's
  * read-only on /dev/klog and reconnecting after a reboot just means restarting it).
+ *
+ * This is the general-purpose counterpart to the GUARD_MIRROR funopen hook in
+ * Tools/userspace/va_capture/comp_run.sh: GUARD_MIRROR mirrors a specific userspace test
+ * harness's own stdout; this tool mirrors the kernel's /dev/klog stream directly, so it catches
+ * IOLog/kprintf from ANY kext (including diagnostics added straight to the driver under test, as
+ * in issue #167) with no per-harness instrumentation needed. Reach for this one first for kext-
+ * side diagnostics; use GUARD_MIRROR when the thing you need visibility into is a userspace test
+ * program's own output instead.
  */
 #include <stdio.h>
 #include <stdlib.h>
