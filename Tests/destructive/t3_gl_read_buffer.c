@@ -5,6 +5,13 @@
  * predicted reject (EXPECTED-REJECT, nothing written). The valid path wraps the user range and has the GPU copy the slot into it through surface vtable +0x5e8 (copy_buffer_using_DMA family).
  * Run 1 (mode 0) returned the predicted CannotLock; GL set_surface (shipped 0x87b0, source lines 93-117) sets this+0x8c |= 1 only when modeBits has 0x800 (0x400 -> 0x20000002), so run 2 binds with
  * modeBits 0x800 (the same bit 2D set_surface uses for the front buffer). Derived like t3_surface_read (#116, same DMA): the memory is created the proven way (2D bind + lock_memory + unlock_memory(0)), the destination is a page-aligned 64 KB pre-filled buffer. */
+/* #158 follow-up (2026-10-13): "the GPU copy the slot into it" above is NOT a memcpy, even though 2D lock_memory(0) and
+ * this call's sourceSelector 1 resolve to the identical buffer record (confirmed live via kernel instrumentation). The
+ * real +0x5e8 path renders a textured quad (write_3dtexquad_cmds_for_copy_buffer_using_DMA) and submits it to the GPU
+ * without this call chain waiting for hardware completion. A CPU write made by locking/writing the source surface
+ * directly (as this test's own 2D lock_memory/unlock_memory does) was confirmed to have NO observable effect on what
+ * read_buffer returns. Don't extend this test to assert exact byte VALUES against a known-written source pattern -
+ * only extent (changed_inside/changed_outside below) is a meaningful check here. See the #158 issue comments. */
 /* original header of t3_surface_read.c follows for the shared trace: Surface surface_read, IOAccelSurfaceReadData {x,y,w,h,client_addr,row_bytes}:
  * Traced (IOATIR500Surface_surface_read_Port.cpp, shipped 0x14a30): for an in-surface rectangle the body wraps [client_addr rounded to a page, length from
  * row_bytes * (h-1) + the surface pitch * w + offset] in an IOMemoryDescriptor (withAddress, the connection's task) and has the GPU copy the surface buffer into it through surface vtable

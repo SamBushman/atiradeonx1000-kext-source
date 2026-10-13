@@ -176,6 +176,14 @@ LAB_00008f74:
     else {
       piVar5 = M<SInt32 *>(param_1 + 0x290);
       iVar11 = piVar5[0x1f];
+      /* +0x5e8 is copy_from_buffer -> copy_buffer_using_DMA (ATIR500Surface_copy_buffer_using_DMA_Port.cpp):
+       * this is NOT a memcpy of iVar16's backing bytes. It builds a real GPU 3D-render command
+       * (write_3dtexquad_cmds_for_copy_buffer_using_DMA - the function issue #158's root-cause fix
+       * touched) that samples iVar16 as a texture and renders a quad into local_s.f40, then submits
+       * it to the GPU and returns without waiting here. Confirmed live (#158 follow-up, 2026-10-13):
+       * a CPU write made through a separately-locked mapping of this same buffer record had no
+       * observable effect on what came back - don't assume a CPU-side write to the source surface
+       * is visible to this call, and don't assume the returned content is a literal byte copy. */
       VCALL(*piVar5, 0x5e8)
                 (piVar5,iVar18,iVar15,iVar13,iVar12,M<UInt32>(param_1 + 0x298),
                  M<UInt32>(param_1 + 0x29c),iVar16,M<UInt32>(param_1 + 0x7c),&local_s,
