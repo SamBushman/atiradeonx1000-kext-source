@@ -191,6 +191,10 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
   UInt32 uVar9;
   
   uVar2 = 0;
+  /* #167 ATI167DIAG: live-capture on every entry, before the gate decides anything. */
+  GH_kprintf("ATI167DIAG: startupPCIeGART entry self=%p c4c=%p 830=0x%x 3000=%p 98=0x%x\n",
+             self, M<UInt32 *>(self + 0xc4c), M<UInt32>(self + 0x830), M<UInt32 *>(self + 3000),
+             M<UInt32>(self + 0x98));
   if (((M<UInt32>(self + 0x98) & 0xf00000) != 0) && (uVar2 = 1, M<SInt32>(self + 3000) == 0)) {
     iVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x568)(M<SInt32 *>(self + 0x74),0x10,0);
     if (iVar3 == 0) {
@@ -216,6 +220,8 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
       if (M<SInt32>(self + 0xc4c) == 0) {
         puVar5 = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
         M<UInt32 *>(self + 0xc4c) = puVar5;
+        GH_kprintf("ATI167DIAG: startupPCIeGART fresh-alloc self=%p uVar4=0x%x new_c4c=%p\n",
+                   self, uVar4, puVar5);
         if (puVar5 == (UInt32 *)0x0) {
           M<UInt32>(self + 0xbb0) = 0;
           M<UInt32>(self + 0xbac) = 0;
@@ -271,6 +277,10 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
                (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -3) << 8 |
                (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -4);
         }
+      }
+      else {
+        GH_kprintf("ATI167DIAG: startupPCIeGART SKIPPED realloc (c4c already non-null) self=%p c4c=%p\n",
+                   self, M<UInt32 *>(self + 0xc4c));
       }
       iVar3 = 0xc;
       self[0xc00] = 0x0;
@@ -448,7 +458,13 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
   UInt32 uVar10;
   SInt32 iVar11;
   UInt32 local_38 [6];
-  
+
+  /* #167 ATI167DIAG: live-capture self+0xc4c/self+0x830/self+3000/self+0x844/self+0x98 on every
+   * entry, before anything dereferences self+0xc4c, so a crash still leaves this line in the
+   * console buffer. GH_kprintf (not IOLog) for panic-survival reliability. */
+  GH_kprintf("ATI167DIAG: addToPCIeGART entry self=%p c4c=%p 830=0x%x 3000=%p 844=0x%x 98=0x%x param_2=%p param_3=%p param_4=0x%x param_5=0x%x\n",
+             self, M<UInt32 *>(self + 0xc4c), M<UInt32>(self + 0x830), M<UInt32 *>(self + 3000),
+             M<UInt32>(self + 0x844), M<UInt32>(self + 0x98), param_2, param_3, param_4, param_5);
   local_38[0] = 0;
   if ((param_2 != 0) && (param_3 != 0)) {
     uVar3 = VCALL(M<UInt32>(param_2), 0x128)(param_2);
