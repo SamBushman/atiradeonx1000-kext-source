@@ -121,13 +121,14 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *real_
   UInt8 *local_37c;
   UInt8 *local_378;
   UInt8 local_374 [0x80];   /* the ATIR500SurfaceBuffer on the shipped stack (Ghidra shows 0x2c bytes here + M<UInt32>(local_374 + 0x2c) = its +0x2c word) */
-  register_tracking_state arStack_2fc [1];   /* one 24-byte record on the shipped stack */
-  UInt32 local_2e4;
-  UInt32 local_2e0;
-  UInt32 *local_1c8;
-  UInt32 *local_1c4;
-  SInt32 local_1c0;
-  UInt32 *local_1bc;
+  /* #170: ONE real 0x144-byte stack object (shipped frame -0x2fc..-0x1b8): the 0x134-byte register_tracking_state
+   * plus four range words at +0x134..+0x140 that restore_state_destroyed_by_pageoff hands to track_regs_written_by_pm4.
+   * Ghidra split it into arStack_2fc plus separate locals (local_2e4/local_2e0 = +0x18/+0x1c; local_1c8, local_1c4,
+   * local_1c0, local_1bc = +0x134/+0x138/+0x13c/+0x140), which only works if the compiler lays those locals out
+   * contiguously after the array; our gcc 4.0.1 build scatters them, so the callee read garbage ranges and ran off
+   * the end of a buffer. */
+  struct { register_tracking_state s; UInt32 rangeWords[4]; } trackBlk;
+  register_tracking_state *arStack_2fc = &trackBlk.s;
   UInt32 local_1b8;
   SInt32 iStack_1b4;
   UInt32 local_1b0;
@@ -189,15 +190,15 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *real_
   local_388 = 0;
   local_384 = 0xffffffff;
   local_380 = 0;
-  local_1c8 = puVar69 + 8;
+  M<UInt32 *>((UInt8 *)&trackBlk + 0x134) = puVar69 + 8;
   local_c8 = 0;
   local_c4 = 0;
   local_cc = 0;
-  local_1c0 = M<SInt32>(self + 0xe0) + 0x20;
+  M<SInt32>((UInt8 *)&trackBlk + 0x13c) = M<SInt32>(self + 0xe0) + 0x20;
   puVar65 = (UInt32 *)(M<SInt32>(self + 0xe0) + 0x1c);
-  local_1c4 = local_1c8 + puVar69[5];
-  local_2e4 = this->compute_sc_hyperz_en(*puVar69);
-  local_2e0 = this->compute_zb_bw_cntl(puVar69[1]);
+  M<UInt32 *>((UInt8 *)&trackBlk + 0x138) = M<UInt32 *>((UInt8 *)&trackBlk + 0x134) + puVar69[5];
+  M<UInt32>((UInt8 *)&trackBlk + 0x18) = this->compute_sc_hyperz_en(*puVar69);
+  M<UInt32>((UInt8 *)&trackBlk + 0x1c) = this->compute_zb_bw_cntl(puVar69[1]);
   uVar55 = local_384;
   do {
     local_384 = uVar55;
@@ -253,7 +254,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *real_
         }
         this->alloc_and_load_texture((VendorTextureBuffer *)(pVVar70));
         if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-          local_1bc = puVar65;
+          M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
           this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
         }
         if (M<SInt32>(self + 0xd0) == 0) {
@@ -432,7 +433,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *real_
       bVar1 = false;
 LAB_0002c0b4:
       if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-        local_1bc = puVar65;
+        M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
         this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
       }
       if (!bVar1) {
@@ -1178,7 +1179,7 @@ LAB_0002f978:
             }
             this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
             if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-              local_1bc = puVar65;
+              M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
               this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
             }
             if (M<SInt32>(self + 0xd0) == 0) {
@@ -1293,7 +1294,7 @@ LAB_00030994:
               }
               this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
               if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-                local_1bc = puVar65;
+                M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
                 this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
               }
               if (M<SInt32>(self + 0xd0) == 0) {
@@ -1431,7 +1432,7 @@ LAB_00030994:
                   }
                   this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
                   if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-                    local_1bc = puVar65;
+                    M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
                     this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
                   }
                   if (M<SInt32>(self + 0xd0) == 0) {
@@ -1502,7 +1503,7 @@ LAB_000300b8:
                 }
                 this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
                 if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
-                  local_1bc = puVar65;
+                  M<UInt32 *>((UInt8 *)&trackBlk + 0x140) = puVar65;
                   this->restore_state_destroyed_by_pageoff((register_tracking_state *)(arStack_2fc));
                 }
                 if (M<SInt32>(self + 0xd0) == 0) {

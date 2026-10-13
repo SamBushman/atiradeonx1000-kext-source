@@ -108,6 +108,7 @@ LAYOUT_CHECK(off77_AtiFormatInfoEntry_fieldDC, __builtin_offsetof(AtiFormatInfoE
 LAYOUT_CHECK(off78_AtiFormatInfoEntry_fieldE0, __builtin_offsetof(AtiFormatInfoEntry, fieldE0) == 0x10);
 LAYOUT_CHECK(off79_AtiFormatInfoEntry_fieldE4, __builtin_offsetof(AtiFormatInfoEntry, fieldE4) == 0x14);
 LAYOUT_CHECK(off80_AtiFormatInfoEntry_sharedConst2, __builtin_offsetof(AtiFormatInfoEntry, sharedConst2) == 0x18);
+LAYOUT_CHECK(sizeof_register_tracking_state_is_0x134, sizeof(register_tracking_state) == 0x134);   /* #170: process_command_buffer appends 4 range words at +0x134..+0x140 to it */
 LAYOUT_CHECK(off81_register_tracking_state_sc_edgerule, __builtin_offsetof(register_tracking_state, sc_edgerule) == 0x00);
 LAYOUT_CHECK(off82_register_tracking_state_sc_screendoor, __builtin_offsetof(register_tracking_state, sc_screendoor) == 0x04);
 LAYOUT_CHECK(off83_register_tracking_state_gb_aa_config, __builtin_offsetof(register_tracking_state, gb_aa_config) == 0x0c);
