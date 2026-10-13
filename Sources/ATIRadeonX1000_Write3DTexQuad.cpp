@@ -13,15 +13,22 @@
  * shorts local_368/sStack_366/local_364/sStack_362 is (param_19, param_20, param_23, param_24) truncated to 16 bits;
  * param_25 is the "flip vertically" flag (the decompile's stack overflow slot _in_stack_00000078).
  *
- * BUG FIXED (2026-10-12, issue #158): the final point-size/position computation (the branch taken when neither
- * srcPitchShifted- nor srcHeight-derived dimension exceeds 4096 - the common case for small copies, e.g. the T3
- * 4x4 read_buffer test) multiplied by `fVar5`/`fVar1` instead of the literal constants `FLOAT_0004c380` (0.5) /
- * `FLOAT_0004c37c` (6.0) that a fresh decompile of the real stock binary uses directly in this branch. fVar5/fVar1
- * are never assigned on any path reaching this branch (confirmed against the fresh decompile's own control flow) -
- * reading them here was reading leftover register/stack content, not a real value, producing a garbage point-size
- * scale that collapsed the rendered quad to ~1 row instead of the full height. Root-caused by regenerating a fresh
- * Ghidra decompile of this exact function against the real binary and diffing it directly against this file,
- * rather than trusting the archived decompile the original port was made from.
+ * BUG FIXED (2026-10-12, issue #158, second attempt - a first attempt, f74bc27, was a no-op and is superseded):
+ * every texcoord (0xbe/0xbf/0xc0/0xc1) and vertex-position (0xc6/0xc7=199, and their per-sub-quad equivalents
+ * puVar33[5/6/7/8/0xd/0xe]) word in this function was written as `(UInt32)(some_float_expr)` - a real C++ numeric
+ * cast, which TRUNCATES the float to an integer value. The real stock PPC code stores these words with `stfs`
+ * (store-float-single: the raw IEEE bit pattern, unconverted) - confirmed both by re-disassembling the real
+ * binary (every one of these words corresponds to an `stfs`, never `fctiwz`+`stw`) and by live-testing: a 4-pixel
+ * point size that should store the float bits of `2.0` (`0x40000000`) was instead storing the truncated integer
+ * value `2` (`0x00000002`), collapsing the GPU's point-sprite blit to a tiny/degenerate size. Ghidra's own decompile
+ * shows this exact pattern as `(ulong)(float_expr)` for every one of these stores - that's the decompiler's idiom
+ * for "a float stored through an integer-typed pointer" (i.e. a raw bit-level store), not an instruction to
+ * numerically convert; the original mechanical port mistranslated it as a literal C-style value cast. Fixed by
+ * using this project's existing `FBITS()` helper (Headers/GhidraCompat.h - a bit-reinterpreting cast, exactly the
+ * tool already used elsewhere in this project for the identical idiom) in place of every `(UInt32)(float)` cast
+ * that targets one of these word slots. The point-size encoding itself (0xc3, two packed 16-bit integers) is a
+ * genuine value truncation and was NOT changed - confirmed correct both via live output (24,24 for a 4x4 copy at
+ * the 6x scale factor) and via the real disassembly (`stw`, not `stfs`, for that one word).
  */
 
 #include "../Headers/ATIRadeonX1000.h"
@@ -522,18 +529,18 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
                 fVar4 = (fVar4 + fVar12) * FLOAT_0004c380;
                 dVar44 = (double)CONCAT44d(0x43300000,uVar26) - DOUBLE_0004c3a8;
                 puVar33[4] = 0x31080;
-                puVar33[6] = (UInt32)(fVar3 * (fVar14 - fVar5));
-                puVar33[8] = (UInt32)(fVar3 * (fVar15 - fVar5));
+                puVar33[6] = FBITS(fVar3 * (fVar14 - fVar5));
+                puVar33[8] = FBITS(fVar3 * (fVar15 - fVar5));
                 puVar33[0xb] = 0xc0033500;
                 puVar33[0xc] = 0x10031;
-                puVar33[0xd] = (UInt32)fVar4;
+                puVar33[0xd] = FBITS(fVar4);
                 fVar4 = (float)dVar44;
-                puVar33[0xe] = (UInt32)fVar16;
+                puVar33[0xe] = FBITS(fVar16);
                 puVar33[9] = 0x1087;
                 puVar33[10] = (SInt32)fVar20 << 0x10 | (SInt32)fVar21;
                 puVar33[0xf] = 0;
-                puVar33[7] = (UInt32)(fVar7 * (fVar9 - fVar4));
-                puVar33[5] = (UInt32)(fVar7 * (fVar10 - fVar4));
+                puVar33[7] = FBITS(fVar7 * (fVar9 - fVar4));
+                puVar33[5] = FBITS(fVar7 * (fVar10 - fVar4));
                 puVar33 = puVar33 + 0x10;
                 uVar43 = uVar43 - 1;
               } while (uVar43 != 0);
@@ -561,14 +568,14 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         fVar9 = (local_308 + fVar5) * FLOAT_0004c380;
         fVar18 = (local_30c + fVar2) * FLOAT_0004c380;
         *puVar27 = 0x31080;
-        puVar41[0xbe] = (UInt32)(fVar3 * (fVar4 + fVar6));
-        puVar41[0xbf] = (UInt32)(fVar8 * (fVar7 * fVar5 + fVar17));
-        puVar41[0xc0] = (UInt32)(fVar3 * (fVar2 * fVar1 + fVar6));
-        puVar41[0xc1] = (UInt32)(fVar8 * (fVar7 * local_308 + fVar17));
+        puVar41[0xbe] = FBITS(fVar3 * (fVar4 + fVar6));
+        puVar41[0xbf] = FBITS(fVar8 * (fVar7 * fVar5 + fVar17));
+        puVar41[0xc0] = FBITS(fVar3 * (fVar2 * fVar1 + fVar6));
+        puVar41[0xc1] = FBITS(fVar8 * (fVar7 * local_308 + fVar17));
         puVar41[0xc4] = 0xc0033500;
         puVar41[0xc5] = 0x10031;
-        puVar41[0xc6] = (UInt32)fVar18;
-        puVar41[199] = (UInt32)fVar9;
+        puVar41[0xc6] = FBITS(fVar18);
+        puVar41[199] = FBITS(fVar9);
         puVar41[0xc2] = 0x1087;
         puVar41[0xc3] = (SInt32)fVar13 << 0x10 | (SInt32)fVar11;
         puVar41[200] = 0;
@@ -681,15 +688,15 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         fVar1 = (fVar1 + local_30c) * FLOAT_0004c380;
         fVar7 = (local_308 + local_300) * FLOAT_0004c380;
         puVar41[0xbd] = 0x31080;
-        puVar41[0xbe] = (UInt32)fVar2;
+        puVar41[0xbe] = FBITS(fVar2);
         puVar41[0xc2] = 0x1087;
-        puVar41[0xbf] = (UInt32)(float)(dVar47 * (double)(float)dVar45);
-        puVar41[0xc0] = (UInt32)fVar5;
-        puVar41[0xc1] = (UInt32)(float)(dVar47 * (double)(float)dVar44);
+        puVar41[0xbf] = FBITS((float)(dVar47 * (double)(float)dVar45));
+        puVar41[0xc0] = FBITS(fVar5);
+        puVar41[0xc1] = FBITS((float)(dVar47 * (double)(float)dVar44));
         puVar41[0xc4] = 0xc0033500;
         puVar41[0xc5] = 0x10031;
-        puVar41[0xc6] = (UInt32)fVar1;
-        puVar41[199] = (UInt32)fVar7;
+        puVar41[0xc6] = FBITS(fVar1);
+        puVar41[199] = FBITS(fVar7);
         puVar41[200] = 0;
         puVar41[0xc3] = (SInt32)fVar4 << 0x10 | (SInt32)fVar6;
         iVar30 = 0xc9;
@@ -739,15 +746,15 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         fVar7 = (local_308 + local_300) * FLOAT_0004c380;
         fVar2 = (fVar2 + local_30c + local_304) * FLOAT_0004c380;
         puVar41[iVar23] = 0x31080;
-        puVar41[iVar30 + 5] = (UInt32)fVar5;
-        puVar41[iVar30 + 6] = (UInt32)(float)(dVar47 * (double)(float)dVar45);
-        puVar41[iVar30 + 7] = (UInt32)fVar1;
+        puVar41[iVar30 + 5] = FBITS(fVar5);
+        puVar41[iVar30 + 6] = FBITS((float)(dVar47 * (double)(float)dVar45));
+        puVar41[iVar30 + 7] = FBITS(fVar1);
         puVar41[iVar30 + 9] = 0x1087;
-        puVar41[iVar30 + 8] = (UInt32)(float)(dVar47 * (double)(float)dVar44);
+        puVar41[iVar30 + 8] = FBITS((float)(dVar47 * (double)(float)dVar44));
         puVar41[iVar30 + 0xb] = 0xc0033500;
         puVar41[iVar30 + 0xc] = 0x10031;
-        puVar41[iVar30 + 0xd] = (UInt32)fVar2;
-        puVar41[iVar30 + 0xe] = (UInt32)fVar7;
+        puVar41[iVar30 + 0xd] = FBITS(fVar2);
+        puVar41[iVar30 + 0xe] = FBITS(fVar7);
         puVar41[iVar30 + 0xf] = 0;
         puVar41[iVar30 + 10] = (SInt32)fVar4 << 0x10 | (SInt32)fVar6;
       }
@@ -768,15 +775,15 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
     dVar48 = (double)CONCAT44d(0x43300000,uVar34 ^ 0x80000000) - DOUBLE_0004c3a8;
     dVar49 = (double)CONCAT44d(0x43300000,uVar32 ^ 0x80000000) - DOUBLE_0004c3a8;
     puVar41[0xbd] = 0x31080;
-    puVar41[0xbe] = (UInt32)(float)(dVar44 * (double)(float)dVar45);
-    puVar41[0xbf] = (UInt32)(float)(dVar47 * (double)(float)dVar49);
-    puVar41[0xc0] = (UInt32)(float)(dVar44 * (double)(float)dVar46);
-    puVar41[0xc1] = (UInt32)(float)(dVar47 * (double)(float)dVar48);
+    puVar41[0xbe] = FBITS((float)(dVar44 * (double)(float)dVar45));
+    puVar41[0xbf] = FBITS((float)(dVar47 * (double)(float)dVar49));
+    puVar41[0xc0] = FBITS((float)(dVar44 * (double)(float)dVar46));
+    puVar41[0xc1] = FBITS((float)(dVar47 * (double)(float)dVar48));
     puVar41[0xc2] = 0x1087;
     puVar41[0xc4] = 0xc0033500;
     puVar41[0xc5] = 0x10031;
-    puVar41[0xc6] = (UInt32)((local_30c + local_30c + local_304) * FLOAT_0004c380);
-    puVar41[199] = (UInt32)((local_308 + local_308 + local_300) * FLOAT_0004c380);
+    puVar41[0xc6] = FBITS((local_30c + local_30c + local_304) * FLOAT_0004c380);
+    puVar41[199] = FBITS((local_308 + local_308 + local_300) * FLOAT_0004c380);
     puVar41[200] = 0;
     puVar41[0xc3] =
          (SInt32)(((local_30c + local_304) - local_30c) * FLOAT_0004c37c) << 0x10 |
