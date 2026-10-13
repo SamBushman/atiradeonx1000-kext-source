@@ -12,6 +12,16 @@
  * ATIR500Surface_BuildSwap.cpp for the conventions). The rectangle {x, y, w, h} that Ghidra shows as the four stack
  * shorts local_368/sStack_366/local_364/sStack_362 is (param_19, param_20, param_23, param_24) truncated to 16 bits;
  * param_25 is the "flip vertically" flag (the decompile's stack overflow slot _in_stack_00000078).
+ *
+ * BUG FIXED (2026-10-12, issue #158): the final point-size/position computation (the branch taken when neither
+ * srcPitchShifted- nor srcHeight-derived dimension exceeds 4096 - the common case for small copies, e.g. the T3
+ * 4x4 read_buffer test) multiplied by `fVar5`/`fVar1` instead of the literal constants `FLOAT_0004c380` (0.5) /
+ * `FLOAT_0004c37c` (6.0) that a fresh decompile of the real stock binary uses directly in this branch. fVar5/fVar1
+ * are never assigned on any path reaching this branch (confirmed against the fresh decompile's own control flow) -
+ * reading them here was reading leftover register/stack content, not a real value, producing a garbage point-size
+ * scale that collapsed the rendered quad to ~1 row instead of the full height. Root-caused by regenerating a fresh
+ * Ghidra decompile of this exact function against the real binary and diffing it directly against this file,
+ * rather than trusting the archived decompile the original port was made from.
  */
 
 #include "../Headers/ATIRadeonX1000.h"
@@ -765,12 +775,12 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
     puVar41[0xc2] = 0x1087;
     puVar41[0xc4] = 0xc0033500;
     puVar41[0xc5] = 0x10031;
-    puVar41[0xc6] = (UInt32)((local_30c + local_30c + local_304) * fVar5);
-    puVar41[199] = (UInt32)((local_308 + local_308 + local_300) * fVar5);
+    puVar41[0xc6] = (UInt32)((local_30c + local_30c + local_304) * FLOAT_0004c380);
+    puVar41[199] = (UInt32)((local_308 + local_308 + local_300) * FLOAT_0004c380);
     puVar41[200] = 0;
     puVar41[0xc3] =
-         (SInt32)(((local_30c + local_304) - local_30c) * fVar1) << 0x10 |
-         (SInt32)(((local_308 + local_300) - local_308) * fVar1);
+         (SInt32)(((local_30c + local_304) - local_30c) * FLOAT_0004c37c) << 0x10 |
+         (SInt32)(((local_308 + local_300) - local_308) * FLOAT_0004c37c);
     iVar22 = 0xc9;
   }
   puVar41[iVar22] = 0x1393;
