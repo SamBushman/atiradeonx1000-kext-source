@@ -459,6 +459,8 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
   UInt32 uVar10;
   SInt32 iVar11;
   UInt32 local_38 [6];
+  UInt32 ATI167DIAG_tableCapacity = 0;
+  bool ATI167DIAG_overflowLogged = false;
 
   /* #167 ATI167DIAG: live-capture self+0xc4c/self+0x830/self+3000/self+0x844/self+0x98 on every
    * entry, before anything dereferences self+0xc4c, so a crash still leaves this line in the
@@ -470,11 +472,18 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
   local_38[0] = 0;
   if ((param_2 != 0) && (param_3 != 0)) {
     uVar3 = VCALL(M<UInt32>(param_2), 0x128)(param_2);
+    /* #167 ATI167DIAG: raw descriptor->getLength() before the >>page_shift below, to tell apart
+     * "the descriptor itself reports a huge length" from "length is sane but the segment-walk
+     * overshoots it". */
+    IOLog("ATI167DIAG: addToPCIeGART raw getLength()=0x%x (descriptor=%p)\n", uVar3, param_2);
     uVar10 = GH_page_shift;
     uVar1 = M<UInt32>(self + 0x830);
     M<UInt32>(param_3) = 0;
     uVar1 = uVar1 >> 2;
     uVar3 = uVar3 >> (uVar10 & 0x3f);
+    ATI167DIAG_tableCapacity = uVar1;
+    IOLog("ATI167DIAG: addToPCIeGART uVar3(pages requested)=0x%x table_capacity_pages=0x%x\n",
+          uVar3, uVar1);
     if (uVar1 == 0) {
       if (uVar3 == 0) {
         iVar5 = 0;
@@ -493,6 +502,17 @@ LAB_0001de4c:
               iVar9 = iVar5 << 2;
               uVar7 = M<UInt32>(self + 0xbc0);
               do {
+                /* #167 ATI167DIAG: one-shot capture of the exact moment iVar5 (the GART page
+                 * index) first exceeds the table's own real capacity, before the write below can
+                 * fault - so this always gets logged even if the very next store panics. */
+                if ((!ATI167DIAG_overflowLogged) && ((UInt32)iVar5 >= ATI167DIAG_tableCapacity)) {
+                  ATI167DIAG_overflowLogged = true;
+                  IOLog("ATI167DIAG: addToPCIeGART OVERFLOW iVar5=0x%x >= capacity=0x%x "
+                        "iVar9=0x%x iVar6(c4c)=%p writeAddr=0x%x local_38[0]=0x%x uVar10=0x%x "
+                        "uVar3=0x%x self=%p param_2=%p\n",
+                        (unsigned)iVar5, ATI167DIAG_tableCapacity, (unsigned)iVar9, (void *)iVar6,
+                        (unsigned)(iVar9 + iVar6), (unsigned)local_38[0], uVar10, uVar3, self, param_2);
+                }
                 if (iVar11 != 0) {
                   uVar2 = uVar10 >> 8 | uVar7;
                   M<UInt32>(iVar9 + iVar11) =
