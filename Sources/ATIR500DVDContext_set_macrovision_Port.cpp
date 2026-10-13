@@ -47,7 +47,7 @@ IOReturn ATIR500DVDContext::set_macrovision(UInt32 param_2, UInt32 param_3) {
   else {
     iVar1 = ((ATIR500Surface *)(M<UInt8 *>(param_1 + 0xf8)))->getFramebufferIndex();
     piVar2 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(iVar1 * 0x20 + M<SInt32>(param_1 + 0x8c) + 0xd4),
-                                 (UInt32)&GH_IONDRVFramebuffer_metaClass);
+                                 GH_IONDRVFramebuffer_metaClass);
     M<SInt32 *>(param_1 + 0x160) = piVar2;
     if (piVar2 == (SInt32 *)0x0) {
       iVar1 = M<SInt32>(param_1 + 0x8c);
