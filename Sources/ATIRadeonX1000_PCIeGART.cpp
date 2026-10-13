@@ -493,8 +493,11 @@ LAB_0001de4c:
         if (iVar4 == 0) {
           iVar4 = 0;
           M<SInt32>(param_3) = iVar5 << (GH_page_shift & 0x3f);
+          /* #167: the per-entry step is _page_size (stock 0x1de94 HA16/LO16 _page_size), NOT _page_shift
+           * - the Ghidra dump labeled both zero-immediate data relocs alike; with the shift (12) as the
+           * step each segment page wrote ~341 GART entries and ran off the end of the table. */
           while (uVar10 = VCALL(M<UInt32>(param_2), 0x13c)(param_2,iVar4,local_38),
-                uVar1 = GH_page_shift, uVar10 != 0) {
+                uVar1 = GH_page_size, uVar10 != 0) {
             iVar4 = iVar4 + local_38[0];
             if (GH_page_size <= local_38[0]) {
               iVar11 = M<SInt32>(self + 3000);

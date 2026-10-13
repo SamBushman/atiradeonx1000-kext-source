@@ -56,13 +56,8 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 param_1, UInt32*param_2,
   int *piVar16;
   /* one 16-byte stack object filled by the +0x5b4 / +0x560 callees (Ghidra named its words auStack_68 / auStack_68[2] / auStack_68[3]; #85) */
   int auStack_68[4];
-  int local_58;
-  int local_54;
-  int local_50;
-  int local_4c;
-  int local_48;
-  int local_44;
-  int local_40;
+  /* one real 7-word VendorCommandBuffer (mirror of the 0x1c-byte slot at self+0xcc/0x90). allocCommandBuffer fills it by address, so it must be ONE contiguous object - seven separate int locals only worked in stock by stack-adjacency luck (same bug class as #164/#160); in our gcc 4.0.1 build they scatter and the alloc result never reached the copy-back (#168) */
+  int cmdBufBlock[7];
   
   iVar3 = GH_page_size;
   switch(param_1) {
@@ -367,13 +362,13 @@ LAB_0000a7f8:
 LAB_0000a9bc:
         M<UInt16>(iVar3 + 0x400) = M<SInt16>(iVar3 + 0x400) + 1U & M<SInt16>(iVar3 + 0x402) - 1U
         ;
-        local_4c = M<int>(self + 0xd8);
-        local_48 = M<int>(self + 0xdc);
-        local_44 = M<int>(self + 0xe0);
-        local_40 = M<int>(self + 0xe4);
-        local_58 = M<int>(self + 0xcc);
-        local_54 = M<int>(self + 0xd0);
-        local_50 = M<int>(self + 0xd4);
+        cmdBufBlock[3] = M<int>(self + 0xd8);
+        cmdBufBlock[4] = M<int>(self + 0xdc);
+        cmdBufBlock[5] = M<int>(self + 0xe0);
+        cmdBufBlock[6] = M<int>(self + 0xe4);
+        cmdBufBlock[0] = M<int>(self + 0xcc);
+        cmdBufBlock[1] = M<int>(self + 0xd0);
+        cmdBufBlock[2] = M<int>(self + 0xd4);
         iVar3 = piVar16[1];
         iVar9 = piVar16[2];
         iVar10 = piVar16[3];
@@ -386,23 +381,23 @@ LAB_0000a9bc:
         M<int>(self + 0xdc) = piVar16[4];
         M<int>(self + 0xe0) = iVar3;
         M<int>(self + 0xe4) = iVar9;
-        *piVar16 = local_58;
-        piVar16[1] = local_54;
-        piVar16[2] = local_50;
-        piVar16[3] = local_4c;
-        piVar16[4] = local_48;
-        piVar16[5] = local_44;
-        piVar16[6] = local_40;
+        *piVar16 = cmdBufBlock[0];
+        piVar16[1] = cmdBufBlock[1];
+        piVar16[2] = cmdBufBlock[2];
+        piVar16[3] = cmdBufBlock[3];
+        piVar16[4] = cmdBufBlock[4];
+        piVar16[5] = cmdBufBlock[5];
+        piVar16[6] = cmdBufBlock[6];
         pIVar13 = M<UInt8 *>(self + 200);
         if (M<int>(self + 0xe4) != M<int>(pIVar13 + 0x5c8)) {
-          local_4c = 0x10000;
-          local_40 = 0;
-          local_58 = 0;
-          local_54 = 0;
-          local_50 = 0;
-          local_48 = 0;
-          local_44 = 0;
-          iVar3 = ((IOATIR500Accelerator *)(pIVar13))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&local_58),M<UInt32>(pIVar13 + 0x5c8));
+          cmdBufBlock[3] = 0x10000;
+          cmdBufBlock[6] = 0;
+          cmdBufBlock[0] = 0;
+          cmdBufBlock[1] = 0;
+          cmdBufBlock[2] = 0;
+          cmdBufBlock[4] = 0;
+          cmdBufBlock[5] = 0;
+          iVar3 = ((IOATIR500Accelerator *)(pIVar13))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(pIVar13 + 0x5c8));
           if (iVar3 == 0) {
             pIVar13 = M<UInt8 *>(self + 200);
           }
@@ -410,13 +405,13 @@ LAB_0000a9bc:
             this->freeCommandBuffer();
             ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0xcc)));
             pIVar13 = M<UInt8 *>(self + 200);
-            M<int>(self + 0xd0) = local_54;
-            M<int>(self + 0xd4) = local_50;
-            M<int>(self + 0xd8) = local_4c;
-            M<int>(self + 0xdc) = local_48;
-            M<int>(self + 0xe0) = local_44;
-            M<int>(self + 0xe4) = local_40;
-            M<int>(self + 0xcc) = local_58;
+            M<int>(self + 0xd0) = cmdBufBlock[1];
+            M<int>(self + 0xd4) = cmdBufBlock[2];
+            M<int>(self + 0xd8) = cmdBufBlock[3];
+            M<int>(self + 0xdc) = cmdBufBlock[4];
+            M<int>(self + 0xe0) = cmdBufBlock[5];
+            M<int>(self + 0xe4) = cmdBufBlock[6];
+            M<int>(self + 0xcc) = cmdBufBlock[0];
           }
         }
         M<UInt32>(self + 0xdc) = M<UInt32>(self + 0x7c);

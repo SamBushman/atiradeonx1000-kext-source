@@ -50,13 +50,8 @@ IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 param_1, UInt32*param_2
   /* one 16-byte stack object filled by the +0x5ac/+0x5b4/+0x560 callees (Ghidra named its words auStack_58 and local_50; #85) */
   int auStack_58[4];
   SInt32 rv5b4 = 0;
-  int local_48;
-  int local_44;
-  int local_40;
-  int local_3c;
-  int local_38;
-  int local_34;
-  int local_30;
+  /* one real 7-word VendorCommandBuffer (mirror of the 0x1c-byte slot at self+0x90). allocCommandBuffer fills it by address, so it must be ONE contiguous object - seven separate int locals only worked in stock by stack-adjacency luck (same bug class as #164/#160); in our gcc 4.0.1 build they scatter and the alloc result never reached the copy-back (#168) */
+  int cmdBufBlock[7];
   
   if (param_1 != 1) {
     if (param_1 == 0) {
@@ -258,13 +253,13 @@ LAB_0000f380:
 LAB_0000f6bc:
           M<UInt16>(iVar8 + 0x400) =
                M<SInt16>(iVar8 + 0x400) + 1U & M<SInt16>(iVar8 + 0x402) - 1U;
-          local_3c = M<int>(self + 0x9c);
-          local_38 = M<int>(self + 0xa0);
-          local_34 = M<int>(self + 0xa4);
-          local_30 = M<int>(self + 0xa8);
-          local_48 = M<int>(self + 0x90);
-          local_44 = M<int>(self + 0x94);
-          local_40 = M<int>(self + 0x98);
+          cmdBufBlock[3] = M<int>(self + 0x9c);
+          cmdBufBlock[4] = M<int>(self + 0xa0);
+          cmdBufBlock[5] = M<int>(self + 0xa4);
+          cmdBufBlock[6] = M<int>(self + 0xa8);
+          cmdBufBlock[0] = M<int>(self + 0x90);
+          cmdBufBlock[1] = M<int>(self + 0x94);
+          cmdBufBlock[2] = M<int>(self + 0x98);
           iVar8 = piVar2[1];
           iVar4 = piVar2[2];
           iVar5 = piVar2[3];
@@ -277,33 +272,33 @@ LAB_0000f6bc:
           M<int>(self + 0xa0) = piVar2[4];
           M<int>(self + 0xa4) = iVar8;
           M<int>(self + 0xa8) = iVar4;
-          *piVar2 = local_48;
-          piVar2[1] = local_44;
-          piVar2[2] = local_40;
-          piVar2[3] = local_3c;
-          piVar2[4] = local_38;
-          piVar2[5] = local_34;
-          piVar2[6] = local_30;
+          *piVar2 = cmdBufBlock[0];
+          piVar2[1] = cmdBufBlock[1];
+          piVar2[2] = cmdBufBlock[2];
+          piVar2[3] = cmdBufBlock[3];
+          piVar2[4] = cmdBufBlock[4];
+          piVar2[5] = cmdBufBlock[5];
+          piVar2[6] = cmdBufBlock[6];
           pIVar11 = M<UInt8 *>(self + 0x8c);
           if (M<int>(self + 0xa8) != M<int>(pIVar11 + 0x5c8)) {
-            local_3c = 0x10000;
-            local_30 = 0;
-            local_48 = 0;
-            local_44 = 0;
-            local_40 = 0;
-            local_38 = 0;
-            local_34 = 0;
-            iVar8 = ((IOATIR500Accelerator *)(pIVar11))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&local_48),M<UInt32>(pIVar11 + 0x5c8))
+            cmdBufBlock[3] = 0x10000;
+            cmdBufBlock[6] = 0;
+            cmdBufBlock[0] = 0;
+            cmdBufBlock[1] = 0;
+            cmdBufBlock[2] = 0;
+            cmdBufBlock[4] = 0;
+            cmdBufBlock[5] = 0;
+            iVar8 = ((IOATIR500Accelerator *)(pIVar11))->allocCommandBuffer((VendorCommandBuffer *)((UInt8 *)&cmdBufBlock[0]),M<UInt32>(pIVar11 + 0x5c8))
             ;
             if (iVar8 != 0) {
               ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x8c)))->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)(self + 0x90)));
-              M<int>(self + 0x94) = local_44;
-              M<int>(self + 0x98) = local_40;
-              M<int>(self + 0x9c) = local_3c;
-              M<int>(self + 0xa0) = local_38;
-              M<int>(self + 0xa4) = local_34;
-              M<int>(self + 0xa8) = local_30;
-              M<int>(self + 0x90) = local_48;
+              M<int>(self + 0x94) = cmdBufBlock[1];
+              M<int>(self + 0x98) = cmdBufBlock[2];
+              M<int>(self + 0x9c) = cmdBufBlock[3];
+              M<int>(self + 0xa0) = cmdBufBlock[4];
+              M<int>(self + 0xa4) = cmdBufBlock[5];
+              M<int>(self + 0xa8) = cmdBufBlock[6];
+              M<int>(self + 0x90) = cmdBufBlock[0];
             }
           }
           goto LAB_0000f800;
