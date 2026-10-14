@@ -25,7 +25,6 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
-extern "C" void IOLog(const char *format, ...);
 
 
 /* real addr 0x44880 */
@@ -53,15 +52,6 @@ void *ATIR500Surface::back_resolve_fsaa_buffer(UInt32 param_1, UInt32 param_2, U
   
   iVar17 = M<SInt32>(self + param_2 * 4 + 0xb70);
   iVar18 = M<SInt32>(self + 0xb94);
-  /* #165 ATI165DIAG: log-only (no guard - stock has none) when this+0xb94 (fixedSurfaceBuffer) is NULL or
-   * not a plausible kernel pointer, right before the first deref of it (M<>(iVar18 + 0x3c) below faulted
-   * at DAR=0x3c). Captures enough state to tell a surface that was never shaped from a stale/torn one. */
-  if ((UInt32)iVar18 < 0x1000) {
-    IOLog("ATI165DIAG: back_resolve_fsaa_buffer self=%p fixedSurfaceBuffer(+0xb94)=0x%x param_1=0x%x "
-          "param_2(formatCode)=0x%x param_3=%p +0xb70[param_2]=0x%x +0xd50(accel)=0x%x +0xb98=0x%x\n",
-          self, (unsigned)iVar18, (unsigned)param_1, (unsigned)param_2, param_3, (unsigned)iVar17,
-          (unsigned)M<UInt32>(self + 0xd50), (unsigned)M<UInt32>(self + 0xb98));
-  }
   GH_memcpy(param_3,&g_r500_3d_blit_state_packet,0x2f4);
   uVar16 = 0;
   param_3[0xb] = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
