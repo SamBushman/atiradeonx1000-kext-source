@@ -1,0 +1,14 @@
+#!/bin/sh
+# #174 repeat: 10 x Godot game (autopilot scene) 40 s under the opcode recorder; odd runs take a screencapture at 25 s, even runs don't.
+R=$HOME/rung3; O=$R/r174_@TAG@; rm -rf $O; mkdir -p $O
+k=1
+while [ $k -le 10 ]; do
+  echo "start $k `date +%T`" >> $O/progress.txt
+  DYLD_INSERT_LIBRARIES=$R/rec.dylib OPCODE_LOG=$O/run$k.tsv $R/godot_bin --path $R/squash_play Main.tscn > $O/run$k.out 2>&1 < /dev/null &
+  pid=$!; i=0
+  while kill -0 $pid 2>/dev/null && [ $i -lt 40 ]; do sleep 1; i=`expr $i + 1`; if [ $i = 25 ] && [ `expr $k % 2` = 1 ]; then screencapture -x $O/shot$k.png; fi; done
+  kill $pid 2>/dev/null; sleep 3; kill -9 $pid 2>/dev/null
+  echo "done $k flushes=`grep -c ^FLUSH $O/run$k.tsv` shot=`expr $k % 2`" >> $O/progress.txt
+  sleep 5; k=`expr $k + 1`
+done
+echo DONE >> $O/progress.txt
