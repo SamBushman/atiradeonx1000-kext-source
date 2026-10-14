@@ -35,7 +35,7 @@ IOReturn IOATIR5002DContext::delete_image(UInt32 param_1) {
   UInt8 *this_00;
   UInt8 *pVVar1;
   int iVar2;
-  ATIR500SurfaceBuffer *pAVar3;
+  UInt8 *pAVar3;   /* #176: byte pointer - typed ATIR500SurfaceBuffer* scaled `pAVar3 + 0x24` by sizeof=0x80 */
   UInt32 uVar4;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 0x94) + 0x840));
@@ -51,7 +51,7 @@ IOReturn IOATIR5002DContext::delete_image(UInt32 param_1) {
       M<UInt32>(self + 0x114) = 0;
     }
     if (M<int>(self + 0x100) != 0) {
-      pAVar3 = M<ATIR500SurfaceBuffer *>(M<int>(self + 0x100) + 0xb70);
+      pAVar3 = M<UInt8 *>(M<int>(self + 0x100) + 0xb70);
       iVar2 = M<int>(pAVar3 + 0x24);
       if ((iVar2 != 0) && (M<int>(iVar2 + 8) == M<int>(pVVar1 + 8))) {
         M<UInt8>(iVar2 + 0x59) = 0;

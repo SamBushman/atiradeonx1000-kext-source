@@ -415,7 +415,7 @@ bool IOATIR500Accelerator::disp_mode_will_change(SInt32 param_1) {
   UInt8 *this_00;
   UInt32 uVar5;
   UInt8 *pIVar6;
-  ATIR500SurfaceBuffer *pAVar7;
+  UInt8 *pAVar7;   /* #176: byte pointer - a typed ATIR500SurfaceBuffer* scaled the +0x78 slot stride by sizeof(ATIR500SurfaceBuffer)=0x80 */
   UInt8 *pIVar8;
   UInt8 *pIVar9;
   
@@ -473,11 +473,11 @@ bool IOATIR500Accelerator::disp_mode_will_change(SInt32 param_1) {
     if (this_00 != (UInt8 *)0x0) {
       do {
         iVar2 = 0;
-        pAVar7 = (ATIR500SurfaceBuffer *)(this_00 + 0xa8);
+        pAVar7 = this_00 + 0xa8;
         pIVar9 = this_00;
         do {
           if (M<SInt32>(pIVar9 + 0xb0) != 0) {
-            ((IOATIR500Surface *)(this_00))->move_buffer_to_backing_store(pAVar7);
+            ((IOATIR500Surface *)(this_00))->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)(pAVar7));
           }
           bVar1 = iVar2 != 0x16;
           pAVar7 = pAVar7 + 0x78;
