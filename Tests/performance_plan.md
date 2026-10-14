@@ -222,6 +222,10 @@ Captured 2026-10-04, at the console (not SSH - required per section 5/the `tiger
 
 This is a genuine first step on the "2D / compositing responsiveness" gap, not a closure of it to the same rigor as sections 2-7 - a repeat capture on a fresh boot, with a few repetitions per scenario, would be the natural next pass if this needs to become a real regression gate rather than a first data point.
 
+### 8b. WindowServer gesture scenarios (added 2026-10-14, automated)
+
+`Tests/perf_2d_compositing.c` also runs `expose_all_windows` (F9), `show_desktop` (F11), `dashboard` (F12) and `minimize_genie` (Finder `collapsed` toggle) with synthetic key events, same `CGSGetPerformanceData` readout and METRIC format (skip with `GESTURES=0`). `Tests/perf_2d_gestures.sh` is the G5-side wrapper (disposable Finder window, 80 ticks per scenario; run it in a foreground ssh). First functional run on the rebuilt kext during a soak: all four scenarios complete, `RESULT: PASS` (metric a medians: Expose 10.5, show desktop 8.9, Dashboard 3.6, minimise 7.5); not a quiet-machine baseline - take stock and rebuilt numbers back to back in the same swap state before comparing (section 8's caveat on swap state applies).
+
 ## 9. Real GL application frame rate (closes the "OpenGL, real application" row's remaining gap)
 
 `Tests/consumer_scenarios.md`'s Godot game/editor captures (#42) recorded opcode histograms but never timestamps, so frame time could not be mined from the existing logs - this needed a real instrumentation change, not a report over old data. `Tools/userspace/opcode_recorder.c` now stamps every `FLUSH` line with `t_us` (mach_absolute_time-based, relative to recorder init; purely additive field, does not change the existing tab-separated format anything else parses), and `Tools/frame_rate_from_log.py` turns consecutive per-connection `t_us` values into real inter-frame-time statistics.

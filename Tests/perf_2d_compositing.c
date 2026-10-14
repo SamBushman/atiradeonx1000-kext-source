@@ -30,7 +30,7 @@
  * Precondition (checked, not set up by this program): a disposable Finder window open (this program finds it by
  * querying the front window's bounds via AppleScript, not fixed coordinates).
  *
- * Usage: perf_2d_compositing [ticks per scenario, default 200] [tick interval us, default 16000]
+ * Usage: perf_2d_compositing [ticks per scenario, default 200] [tick interval us, default 16000]   (env GESTURES=0 skips the Expose/Desktop/Dashboard/minimise scenarios added 2026-10-14)
  * Output (same stable METRIC-line format as perf_methods.c/perf_baseline.c, parsed by Tools/perf_compare.py):
  *   METRIC <scenario>.<a|b|c|d> n=<n> min=<> p10=<> median=<> p90=<> max=<>
  * Build on the G5: gcc -arch ppc -o perf_2d_compositing perf_2d_compositing.c -framework ApplicationServices
@@ -115,6 +115,26 @@ static void step_window_open(int tick) {
     }
 }
 
+/* --- WindowServer gesture scenarios (2026-10-14: replaces the "WindowServer gestures need a person at the console" item; plain synthetic key events) ---
+ * Tiger default Expose bindings: F9 all windows, F11 show desktop, F12 Dashboard; pressing the same key again leaves the mode. Each scenario toggles the mode every 40 ticks (enter, then leave),
+ * so the animation in both directions is inside the sampled window. CGPostKeyboardEvent(char, virtual keycode, down). */
+static void key_tap(CGKeyCode code) { CGPostKeyboardEvent(0, code, TRUE); usleep(40000); CGPostKeyboardEvent(0, code, FALSE); }
+static CGKeyCode g_gestureKey;
+static void step_key_toggle(int tick) { if (tick % 40 == 0) key_tap(g_gestureKey); }
+/* minimise to the Dock (genie) and restore the front Finder window: Finder's own `collapsed` property */
+static void step_minimize(int tick) {
+    if (tick % 40 == 0)
+        system("osascript -e 'tell application \"Finder\" to set collapsed of front window to true' > /dev/null 2>&1 &");
+    else if (tick % 40 == 20)
+        system("osascript -e 'tell application \"Finder\" to set collapsed of every window to false' > /dev/null 2>&1 &");
+}
+static void gesture_scenario(const char *name, CGKeyCode key, gesture_step_fn fn) {
+    g_gestureKey = key;
+    run_scenario(name, fn);
+    if (fn == step_key_toggle && g_ticks / 40 % 2 == 1) { key_tap(key); usleep(600000); }   /* odd number of toggles: leave the mode so the next scenario starts clean */
+    usleep(500000);
+}
+
 int main(int argc, char **argv) {
     double winL, winT, winR, winB;
     FILE *fp;
@@ -186,6 +206,15 @@ int main(int argc, char **argv) {
     g_dockY = (double)(int)CGDisplayPixelsHigh(CGMainDisplayID()) - 20;
     run_scenario("dock_hover", step_dock);
     CGPostMouseEvent(CGPointMake(960, 540), TRUE, 1, FALSE); /* park the cursor away from the Dock when done */
+
+    /* WindowServer gestures (skipped with GESTURES=0 in the environment) */
+    if (!getenv("GESTURES") || strcmp(getenv("GESTURES"), "0") != 0) {
+        CGPostMouseEvent(CGPointMake(960, 400), TRUE, 1, FALSE);
+        gesture_scenario("expose_all_windows", 101, step_key_toggle);   /* F9 */
+        gesture_scenario("show_desktop", 103, step_key_toggle);         /* F11 */
+        gesture_scenario("dashboard", 111, step_key_toggle);            /* F12 */
+        gesture_scenario("minimize_genie", 0, step_minimize);
+    }
 
     printf("RESULT: PASS\n");
     return 0;
