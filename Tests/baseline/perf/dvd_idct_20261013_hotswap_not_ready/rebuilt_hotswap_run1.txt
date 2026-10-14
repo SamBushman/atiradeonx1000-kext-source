@@ -1,0 +1,23 @@
+perf_dvd_idct: 2000 calls/metric, macroblock sizes up to 12, timer tick 0.0300 us
+surface primed via 2D lock_memory: addr=0x3810000 size=0x100
+stream-0 buffer mapped: addr=0xb000 size=524288
+readiness probe attempt 10: 0xe00002d8, still retrying
+readiness probe attempt 20: 0xe00002d8, still retrying
+readiness probe attempt 30: 0xe00002d8, still retrying
+readiness probe attempt 40: 0xe00002d8, still retrying
+readiness probe attempt 50: 0xe00002d8, still retrying
+readiness probe attempt 60: 0xe00002d8, still retrying
+readiness probe attempt 70: 0xe00002d8, still retrying
+readiness probe attempt 80: 0xe00002d8, still retrying
+readiness probe attempt 90: 0xe00002d8, still retrying
+readiness probe attempt 100: 0xe00002d8, still retrying
+readiness probe attempt 110: 0xe00002d8, still retrying
+readiness probe attempt 120: 0xe00002d8, still retrying
+readiness probe attempt 130: 0xe00002d8, still retrying
+readiness probe attempt 140: 0xe00002d8, still retrying
+readiness probe attempt 150: 0xe00002d8, still retrying
+readiness probe attempt 160: 0xe00002d8, still retrying
+readiness probe attempt 170: 0xe00002d8, still retrying
+readiness probe attempt 180: 0xe00002d8, still retrying
+doIDCT never became ready after 180 attempts (last: 0xe00002d8) - giving up
+RESULT: FAIL (1 size step(s) failed)
