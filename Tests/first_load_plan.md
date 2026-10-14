@@ -37,7 +37,7 @@ go straight from Stage 0 to Stage 2.
    `IONDRVFramebuffer::metaClass`). It exercises none of the GPU code.
 4. Report the outputs. Stop here unless told to continue.
 
-## Stage 3 - replace the stock accelerator (needs explicit, separate authorization; physical access to the G5 required)
+## Stage 3 - replace the stock accelerator (needs explicit, separate authorization; run entirely over SSH - physical access is needed only to power-cycle after a hang)
 
 1. Have the recovery ladder from #41 ready before starting: `kextunload` -> remove the bundle + `kextcache -k` -> physical power-off (hold the power button; not a soft restart) ->
    Option-key boot picker -> Sorbet HD (Leopard has its own separate copy of the driver). Target Disk Mode remains the last fallback.

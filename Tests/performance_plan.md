@@ -10,7 +10,7 @@ Running the same tooling against the rebuilt kext and iterating on regressions i
 | kext external methods, all four contexts | `gl.*`, `2d.*`, `dvd.*`, `surface.*`: latency of one proven-safe call (user -> IOConnectMethod* -> method body -> back), p10 of 50 000 calls | `Tests/perf_methods.c` | per-selector cost, so a regression localises to a context and selector; includes two real MMIO register reads (`read_regs`, ~+0.7 us over a pure query) |
 | connection lifecycle | `open_close.surface/gl/2d/dvd`: open + close one user client | `Tests/perf_methods.c` | allocation/teardown of each context object and its state |
 | GL rendering path | `glcycle.*`: one create-context / pbuffer / clear / 100-triangle draw / readback / destroy cycle, per-phase median over 100 cycles | `Tests/perf_baseline.c` | the userspace GL driver + the kext's GL/Surface contexts together |
-| 2D / compositing responsiveness (real desktop) | window open/move/resize/scroll, Dock hover - flush rate via Quartz Debug's Frames Meter | **manual, not automated**: needs a person at the console (SSH-launched GUI apps deadlock); the 2D *context* is covered by `2d.*` above | captured 2026-10-04, see section 8 and `Tests/consumer_scenarios.md` |
+| 2D / compositing responsiveness (real desktop) | window open/move/resize/scroll, Dock hover - flush rate via Quartz Debug's Frames Meter | `Tests/perf_2d_compositing.c`: synthetic `CGPostMouseEvent`/`CGPostScrollWheelEvent` input into the live login session, 200 `CGSGetPerformanceData` samples per scenario, run over SSH (foreground ssh, interleave hot-swaps - see section 8); the 2D *context* is also covered by `2d.*` above | automated baselines in `Tests/baseline/perf/desktop_compositing_*`; section 8 is the superseded 2026-10-04 manual capture |
 | DVD / video decode (IDCT throughput, dropped frames) | **not measurable on stock today**: QuickTime and DVD Player both decode in software on this machine (no DVD context is ever opened, `Tools/userspace/va_capture/`), and `doIDCT` has no safe valid call (#93). The DVD context is covered by `dvd.*` latency only | - | revisit when a client really uses the hardware IDCT path |
 
 All calls are the ones `Tests/test_deep_t1.c` already asserts on stock: no surface binding, locking, flipping, submission or register writes.
@@ -89,7 +89,7 @@ metric's run-to-run spread is <= 6 %. Any new benchmark on this machine needs a 
 ## 5. Not covered yet (and why)
 
 * Heavier method bodies (surface bind, lock, swap, scaling, texture allocation) are not timed: they are the destructive/T3 calls, one per boot by protocol #87, and cannot be looped safely. A timing for those would be a single-shot number per boot, too noisy to gate on.
-* Real GL application frame times and desktop compositing: manual runs at the console (section 1).
+* Real GL application frame times and desktop compositing: automated (sections 8-9, `Tests/perf_2d_compositing.c`, GUI-session launch via `open -a Terminal x.command`); no console needed.
 * 2D and DVD hardware throughput: no safe workload exists (section 1).
 
 ## 6. Feature-level GL cost (added after issue #128's 62-test correctness sweep)
@@ -191,9 +191,11 @@ Three more benchmark programs, same methodology, baseline of record `Tests/basel
 
 **What this settles from section 6's gap list:** texture upload cost, PBO-vs-plain upload, auto-mipmap generation cost, pixel-transfer-op cost at more than one size, state-change cost (texture/program/blend), multi-draw-arrays batching benefit, context-switch cost, occlusion-query and fence overhead, and GPU-bound-at-scale behavior across three independent axes (viewport fill, texture size, triangle count) are now all measured with a recorded stock baseline.
 
-**Still not covered, for the same structural reasons as section 5:** heavier kext method bodies (T3 destructive calls, one-shot per boot, cannot be safely looped into a stable number), 2D/DVD hardware throughput (no safe workload - the DVD context is never opened by any real consumer on this machine), and real desktop compositing/app frame times (needs a human at the console, SSH-launched GUI apps deadlock per the `tiger-ssh` skill).
+**Still not covered, for the same structural reasons as section 5:** heavier kext method bodies (T3 destructive calls, one-shot per boot, cannot be safely looped into a stable number), 2D/DVD hardware throughput (no safe workload - the DVD context is never opened by any real consumer on this machine), and real desktop compositing/app frame times (now automated: synthetic input + `CGSGetPerformanceData`, and GUI apps launched into the Aqua session with `open -a Terminal x.command`; see section 8).
 
 ## 8. Real desktop compositing - first numbers (closes that part of section 5's gap list)
+
+> **SUPERSEDED (2026-10-06, automation):** the method below (a person reading Quartz Debug's Frames Meter) is retired. Use `Tests/perf_2d_compositing.c`, which drives the same six scenarios with synthetic input and reads `CGSGetPerformanceData` directly; it is repeatable, scriptable over SSH, and feeds comparisons. Baselines: `Tests/baseline/perf/desktop_compositing_*`. Run each pass in a foreground ssh, and interleave hot-swaps before judging a 2D delta (swap state alone moved numbers ~1.6x). The numbers and caveats below are kept as history only; the caveats about 'single session', 'no regression gate' and 'needs a person at the console' no longer apply.
 
 Captured 2026-10-04, at the console (not SSH - required per section 5/the `tiger-ssh` skill), by the user directly, with Claude guiding the session interactively. G5 at 21h19m uptime, 2 users logged in, load average 0.10-0.16 (not a fresh-boot/idle session - see the caveat below).
 

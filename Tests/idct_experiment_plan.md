@@ -56,7 +56,7 @@ The shim is itself tested first with the already-safe Surface `get_state` call (
 **Steps.**
 - 2.0 (static, no G5): resolve AppleVA's `AVAFQTInitDecoder` init-parameter struct (`numReferenceBuffers`, `numOutputBuffers`, NV12 buffer descriptors) and the decode-picture argument layout from `AVAFQTImpl.c`'s decompile; find out how `AVAFGetGPURenderer` chooses the ATI renderer (and whether it has a GPU allow-list of its own - the DVDPlayback list is a separate gate); classify every selector the real flow uses against the allowlist; write the harness `Tools/userspace/va_capture/ava_drive.c`.
 - 2.1 (dev machine): build the test stream(s), compute the predicted dwords/params with `idct_stream.py`, write the comparison script.
-- 2.2 (G5, at the console - a GUI-session process is needed for CoreGraphics; ssh-started GUI processes deadlock on this machine): preflight/peer-ack per #87, install the shim, run the harness with the allowlist, collect log + `.mem` dumps, postflight. Phase S, stock kext, one run per boot.
+- 2.2 (G5, in the Aqua session - launch via `ssh G5 'open -a Terminal x.command'`, which gives a CoreGraphics-capable GUI-session process; plain ssh-started GUI processes deadlock on this machine): preflight/peer-ack per #87, install the shim, run the harness with the allowlist, collect log + `.mem` dumps, postflight. Phase S, stock kext, one run per boot.
 - 2.3: compare captured vs predicted; record results in this file; update findings sections 5-7 (anything that differs is a finding).
 - Abort criteria: any kernel return not in the allowlist's expected set, a panic/hang (reboot protocol, issue), or AVA choosing the software renderer (then record why and stop - that is itself the answer to "can the stock stack reach this path").
 
