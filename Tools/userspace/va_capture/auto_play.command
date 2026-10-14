@@ -1,10 +1,10 @@
 #!/bin/sh
 # auto_play.command - fully automated replacement for the "double-click the launcher, play, quit" steps of the VA capture procedure (README).
-# Run INSIDE the Aqua session with no person present:  ssh G5 'open -a Terminal /tmp/va_cap/auto_play.command'   (a .command cannot take arguments, so the job is
-# read from /tmp/va_cap/auto_play.args, one line:  PLAYER STREAM SECONDS [ip:port]   e.g.  quicktime /tmp/va_cap/streams/test_ntsc_720x480.mpg 20
+# Run INSIDE the Aqua session with no person present:  ssh G5 'open -a Terminal $HOME/rung3/va_cap/auto_play.command'   (a .command cannot take arguments, so the job is
+# read from $HOME/rung3/va_cap/auto_play.args, one line:  PLAYER STREAM SECONDS [ip:port]   e.g.  quicktime $HOME/rung3/va_cap/streams/test_ntsc_720x480.mpg 20
 # PLAYER = quicktime | dvdplayer | vlc.) It starts the existing play_with_recorder_<player>.command (recorder + watch_hw_path.sh), drives the player with AppleScript,
-# takes a mid-play screenshot, quits the player, and writes /tmp/va_cap/auto_DONE (last line = the recorder log name) for the dev machine to poll.
-D=/tmp/va_cap; cd "$D" || exit 1
+# takes a mid-play screenshot, quits the player, and writes $HOME/rung3/va_cap/auto_DONE (last line = the recorder log name) for the dev machine to poll.
+D=$HOME/rung3/va_cap; cd "$D" || exit 1
 rm -f $D/auto_DONE
 read PLAYER STREAM SECS MIRROR < $D/auto_play.args   # MIRROR (optional) = ip:port of Tools/udp_log_receiver.py: every recorder line incl. the PRE line before each call is also sent as UDP
 [ -n "$MIRROR" ] && export IOKIT_RECORD_MIRROR=$MIRROR

@@ -2,7 +2,7 @@
 # watch_hw_path.sh [SECONDS] [OUTFILE] - run ON THE G5 (read-only) while a player plays a stream: once per second records how many ATIR500DVDContext / ATIR500GLContext / ATIR5002DContext /
 # ATIR500Surface user clients exist and the ATI kext lines of kextstat. A DVD context that appears only during playback means the player is using this driver's hardware (VA/IDCT) path;
 # no DVD context at all means it decodes in software and this capture approach cannot observe doIDCT. Uses only ioreg and kextstat.
-N=${1:-120}; OUT=${2:-/tmp/va_cap/hw_watch.log}; mkdir -p "`dirname "$OUT"`"; : > "$OUT"
+N=${1:-120}; OUT=${2:-$HOME/rung3/va_cap/hw_watch.log}; mkdir -p "`dirname "$OUT"`"; : > "$OUT"
 echo "# watch_hw_path start `date`" >> "$OUT"
 i=0; MAXDVD=0
 while [ $i -lt $N ]; do

@@ -2,7 +2,7 @@
 # play_with_recorder_dvdplayer.command - DOUBLE-CLICK this at the G5 console (an app started from ssh deadlocks Cocoa on this machine). It plays a test stream in "DVD Player" with the passive
 # IOKit recorder loaded (iokit_record_va.dylib: logs every call the player makes to the kext, changes nothing) and runs watch_hw_path.sh in the background.
 # Usage: double-click for the default stream, or run  sh play_with_recorder_dvdplayer.command /path/to/file.mpg  from Terminal.
-D=/tmp/va_cap; cd "$D" || { echo "copy the va_capture folder to /tmp/va_cap first"; exit 1; }
+D=$HOME/rung3/va_cap; cd "$D" || { echo "copy the va_capture folder to $HOME/rung3/va_cap first"; exit 1; }
 F=${1:-$D/dvd/disc}
 ts=`date +%H%M%S`
 sh $D/watch_hw_path.sh 90 $D/hw_watch_$ts.log > /dev/null 2>&1 &

@@ -38,6 +38,16 @@ only_notready_dvd() { # $1 = reference, $2 = new output
 # MASK_INSTANCE_COUNTS=1: when real consumers run concurrently with the soak (QuickTime/WindowServer/Godot hold Surface/2D/GL connections open), the harness'
 # leak-check line's absolute instance counts legitimately differ round to round while its own verdict ("identical before/after" -> [OK]) stays valid. Mask the numbers, keep the verdict.
 mask() { [ "$MASK_INSTANCE_COUNTS" = 1 ] || return 0; sed 's/before={[0-9,]*} after={[0-9,]*}/before={*} after={*}/' "$1" > "$1.m" && mv "$1.m" "$1"; }
+# MASK_INSTANCE_COUNTS=1 only: 0 if the ONLY differing lines are the harness's own before/after leak check (its [OK]/[UNEXPECTED] verdict) and the "calls made" summary, i.e. a concurrent consumer
+# (QuickTime/DVD Player opening or closing a client mid-run) changed an instance count between the harness's two samples. Handled like the NotReady transient: rerun, up to RETRIES times; a real
+# leak reproduces every time and still fails the soak (STEP-DIFF), a concurrency blip does not.
+only_leakcheck() { # $1 = reference, $2 = new output
+  [ "$MASK_INSTANCE_COUNTS" = 1 ] || return 1
+  diff "$1" "$2" | grep '^[<>]' | grep -v 'calls made' > /tmp/soak_ll.$$
+  [ -s /tmp/soak_ll.$$ ] || { rm -f /tmp/soak_ll.$$; return 1; }
+  if grep -v 'leak check' /tmp/soak_ll.$$ | grep -q .; then rm -f /tmp/soak_ll.$$; return 1; fi
+  rm -f /tmp/soak_ll.$$; return 0
+}
 step() { # step NAME REF COMMAND...   REF = "" (no reference check) or a reference file: created by the first run, compared on later ones
   n=$1; ref=$2; shift; shift; o=/tmp/soak_step.$$; "$@" > $o 2>&1; rc=$?; mask $o
   # no reference: the exit status is the verdict. With a reference: the harness exits 1 when it reports unexpected results (a standing machine state, see above), so the verdict is
@@ -49,8 +59,8 @@ step() { # step NAME REF COMMAND...   REF = "" (no reference check) or a referen
     else
       tries=0
       while ! cmp -s $o "$ref"; do
-        if only_notready_dvd "$ref" $o && [ $tries -lt $RETRIES ]; then
-          tries=`expr $tries + 1`; note "TRANSIENT $n: only NotReady on DVD lines differs from the reference (hardware-up flag down); retry $tries/$RETRIES in ${RETRY_WAIT}s"; diff "$ref" $o | head -12 >> "$LOG"
+        if { only_notready_dvd "$ref" $o || only_leakcheck "$ref" $o; } && [ $tries -lt $RETRIES ]; then
+          tries=`expr $tries + 1`; note "TRANSIENT $n: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry $tries/$RETRIES in ${RETRY_WAIT}s"; diff "$ref" $o | head -12 >> "$LOG"
           sleep $RETRY_WAIT; "$@" > $o 2>&1; rc=$?; mask $o
           if ! grep -q "calls made" $o; then note "STEP-FAIL $n rc=$rc (no summary line on retry: crashed or cut short)"; tail -20 $o >> "$LOG"; rm -f $o; note "SOAK STOPPED round=$round"; exit 1; fi
         else
