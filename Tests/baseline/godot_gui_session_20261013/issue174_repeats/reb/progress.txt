@@ -1,0 +1,21 @@
+start 1 20:18:21
+done 1 flushes=11296 shot=1
+start 2 20:19:10
+done 2 flushes=11235 shot=0
+start 3 20:19:59
+done 3 flushes=11386 shot=1
+start 4 20:20:48
+done 4 flushes=11208 shot=0
+start 5 20:21:37
+done 5 flushes=11406 shot=1
+start 6 20:22:26
+done 6 flushes=11244 shot=0
+start 7 20:23:15
+done 7 flushes=11325 shot=1
+start 8 20:24:04
+done 8 flushes=11219 shot=0
+start 9 20:24:53
+done 9 flushes=11405 shot=1
+start 10 20:25:42
+done 10 flushes=11241 shot=0
+DONE
