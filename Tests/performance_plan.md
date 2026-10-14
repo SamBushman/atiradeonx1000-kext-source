@@ -226,6 +226,10 @@ This is a genuine first step on the "2D / compositing responsiveness" gap, not a
 
 `Tests/perf_2d_compositing.c` also runs `expose_all_windows` (F9), `show_desktop` (F11), `dashboard` (F12) and `minimize_genie` (Finder `collapsed` toggle) with synthetic key events, same `CGSGetPerformanceData` readout and METRIC format (skip with `GESTURES=0`). `Tests/perf_2d_gestures.sh` is the G5-side wrapper (disposable Finder window, 80 ticks per scenario; run it in a foreground ssh). First functional run on the rebuilt kext during a soak: all four scenarios complete, `RESULT: PASS` (metric a medians: Expose 10.5, show desktop 8.9, Dashboard 3.6, minimise 7.5); not a quiet-machine baseline - take stock and rebuilt numbers back to back in the same swap state before comparing (section 8's caveat on swap state applies).
 
+### 8c. Stock vs rebuilt, interleaved (2026-10-14)
+
+`Tools/perf_2d_compare.sh` + `Tools/perf_2d_report.py` (data and report: `Tests/baseline/perf/desktop_compositing_20261014_interleaved/`): 2D scenarios plus the section-8b gestures, kexts interleaved stock/rebuilt/stock/rebuilt in the same hot-swap + unstick state, 4 runs each. Result: 23 of 40 metrics OK, 17 NOISY (stock's own spread too large to conclude), **no metric higher or lower on the rebuilt kext**. Known hole: the synthetic `scroll` scenario produces no flush activity (a/b = 0 on both kexts), so scrolling is not actually measured yet.
+
 ## 9. Real GL application frame rate (closes the "OpenGL, real application" row's remaining gap)
 
 `Tests/consumer_scenarios.md`'s Godot game/editor captures (#42) recorded opcode histograms but never timestamps, so frame time could not be mined from the existing logs - this needed a real instrumentation change, not a report over old data. `Tools/userspace/opcode_recorder.c` now stamps every `FLUSH` line with `t_us` (mach_absolute_time-based, relative to recorder init; purely additive field, does not change the existing tab-separated format anything else parses), and `Tools/frame_rate_from_log.py` turns consecutive per-connection `t_us` values into real inter-frame-time statistics.
