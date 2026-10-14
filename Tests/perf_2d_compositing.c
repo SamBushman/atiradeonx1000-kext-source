@@ -47,6 +47,7 @@ extern int CGSGetPerformanceData(int cid, void *out1, void *out2, void *out3, vo
 static int g_cid;
 static int g_ticks;
 static int g_tick_us;
+static FILE *g_raw;   /* RAW=<file>: every tick's four values, one line `scenario tick a b c d` (comparability plan: distributions, not only summaries) */
 
 static int cmp_f(const void *a, const void *b) {
     float x = *(const float *)a, y = *(const float *)b;
@@ -75,6 +76,7 @@ static void run_scenario(const char *name, gesture_step_fn step) {
         if (step) step(i);
         CGSGetPerformanceData(g_cid, &a, &b, &c, &d);
         sa[i] = a.f; sb[i] = b.f; sc[i] = c.f; sd[i] = d.f;
+        if (g_raw) fprintf(g_raw, "%s %d %.6g %.6g %.6g %.6g\n", name, i, a.f, b.f, c.f, d.f);
         usleep(g_tick_us);
     }
     snprintf(nbuf, sizeof nbuf, "%s.a", name); report_metric(nbuf, sa, g_ticks);
@@ -142,6 +144,7 @@ int main(int argc, char **argv) {
     g_ticks = argc > 1 ? atoi(argv[1]) : 200;
     g_tick_us = argc > 2 ? atoi(argv[2]) : 16000;
     g_cid = _CGSDefaultConnection();
+    if (getenv("RAW") && *getenv("RAW")) { g_raw = fopen(getenv("RAW"), "w"); if (!g_raw) fprintf(stderr, "cannot open RAW file\n"); }
 
     /* Find the disposable test window's bounds via AppleScript rather than assume fixed coordinates. */
     fp = popen("osascript -e 'tell application \"Finder\" to get bounds of front window'", "r");
@@ -216,6 +219,7 @@ int main(int argc, char **argv) {
         gesture_scenario("minimize_genie", 0, step_minimize);
     }
 
+    if (g_raw) fclose(g_raw);
     printf("RESULT: PASS\n");
     return 0;
 }
