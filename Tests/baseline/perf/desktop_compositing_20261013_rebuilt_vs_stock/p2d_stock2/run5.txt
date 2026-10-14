@@ -1,0 +1,32 @@
+using Finder window bounds: 100,100 - 700,500
+scenario idle: 200 ticks at 16000 us
+METRIC idle.a n=200 min=0.000 p10=0.000 median=0.000 p90=0.000 max=0.000
+METRIC idle.b n=200 min=0.000 p10=0.000 median=0.000 p90=0.000 max=0.000
+METRIC idle.c n=200 min=68.063 p10=69.126 median=78.569 p90=115.222 max=123.157
+METRIC idle.d n=200 min=61.327 p10=61.406 median=72.390 p90=118.000 max=128.000
+scenario window_open: 200 ticks at 16000 us
+METRIC window_open.a n=200 min=0.000 p10=1.000 median=8.346 p90=11.852 max=14.348
+METRIC window_open.b n=200 min=0.000 p10=265608.000 median=1858570.375 p90=2606561.750 max=3144033.000
+METRIC window_open.c n=200 min=67.683 p10=161.153 median=251.003 p90=305.925 max=334.176
+METRIC window_open.d n=200 min=61.158 p10=208.535 median=309.314 p90=387.405 max=430.352
+scenario window_drag: 200 ticks at 16000 us
+METRIC window_drag.a n=200 min=5.950 p10=17.007 median=39.300 p90=39.982 max=40.003
+METRIC window_drag.b n=200 min=1290488.000 p10=4730837.500 median=11469109.000 p90=11667456.000 max=11673555.000
+METRIC window_drag.c n=200 min=158.621 p10=166.938 median=206.564 p90=226.407 max=237.009
+METRIC window_drag.d n=200 min=216.534 p10=230.234 median=356.837 p90=360.566 max=362.621
+scenario window_resize: 200 ticks at 16000 us
+METRIC window_resize.a n=200 min=17.272 p10=20.144 median=34.281 p90=35.159 max=35.769
+METRIC window_resize.b n=200 min=5109163.000 p10=6210569.000 median=12178145.000 p90=13076421.000 max=13320649.000
+METRIC window_resize.c n=200 min=158.563 p10=215.908 median=411.480 p90=422.658 max=425.993
+METRIC window_resize.d n=200 min=231.321 p10=449.350 median=811.339 p90=848.326 max=868.404
+scenario scroll: 200 ticks at 16000 us
+METRIC scroll.a n=200 min=0.000 p10=0.000 median=0.000 p90=8.361 max=19.098
+METRIC scroll.b n=200 min=0.000 p10=0.000 median=0.000 p90=3155016.250 max=6880363.500
+METRIC scroll.c n=200 min=124.210 p10=125.722 median=128.851 p90=196.174 max=291.714
+METRIC scroll.d n=200 min=297.373 p10=317.138 median=367.471 p90=373.402 max=526.606
+scenario dock_hover: 200 ticks at 16000 us
+METRIC dock_hover.a n=200 min=0.000 p10=15.777 median=56.322 p90=59.817 max=59.969
+METRIC dock_hover.b n=200 min=0.000 p10=1593998.250 median=5372983.000 p90=6267027.500 max=6459386.000
+METRIC dock_hover.c n=200 min=125.609 p10=177.182 median=265.594 p90=272.739 max=276.187
+METRIC dock_hover.d n=200 min=370.567 p10=579.510 median=1004.770 p90=1043.449 max=1051.954
+RESULT: PASS
