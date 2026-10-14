@@ -12,11 +12,11 @@
 
 #include "ATIRadeonX1000Types.h"
 
-template <class T, class A> inline T &M(A address) { return *reinterpret_cast<T *>(static_cast<UInt32>(reinterpret_cast<unsigned long>(address))); }
-template <class T> inline T &M(int address) { return *reinterpret_cast<T *>(address); }
-template <class T> inline T &M(unsigned int address) { return *reinterpret_cast<T *>(address); }
-template <class T> inline T &M(long address) { return *reinterpret_cast<T *>(address); }
-template <class T> inline T &M(unsigned long address) { return *reinterpret_cast<T *>(address); }
+template <class T, class A> inline volatile T &M(A address) { return *reinterpret_cast<volatile T *>(static_cast<UInt32>(reinterpret_cast<unsigned long>(address))); }
+template <class T> inline volatile T &M(int address) { return *reinterpret_cast<volatile T *>(address); }
+template <class T> inline volatile T &M(unsigned int address) { return *reinterpret_cast<volatile T *>(address); }
+template <class T> inline volatile T &M(long address) { return *reinterpret_cast<volatile T *>(address); }
+template <class T> inline volatile T &M(unsigned long address) { return *reinterpret_cast<volatile T *>(address); }
 
 typedef UInt32 (*GhidraVFn)(...);
 typedef UInt32 code(...);   /* Ghidra's `code` (a function of unknown signature): `code *p` is a pointer to a variadic function */
