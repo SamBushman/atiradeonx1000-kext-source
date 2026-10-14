@@ -53,8 +53,7 @@ IOReturn ATIR500DVDContext::read_regs(UInt32*param_1, UInt32*param_2, UInt32 par
         do {
           pbVar1 = (UInt8 *)(iVar3 + (M<UInt32>((SInt32)param_1 + iVar2) & 0x1ffc));
           M<UInt32>((SInt32)param_2 + iVar2) =
-               (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-               (UInt32)*pbVar1;
+               loadWordByteReversed(pbVar1);
           iVar2 = iVar2 + 4;
           uVar4 = uVar4 - 1;
         } while (uVar4 != 0);

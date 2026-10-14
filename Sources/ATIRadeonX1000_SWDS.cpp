@@ -451,16 +451,13 @@ LAB_00024750:
                   }
                   pbVar4 = (UInt8 *)(iVar8 + iVar26);
                   M<UInt32>(pAVar21 + 0xb14) =
-                       (UInt32)pbVar4[3] << 0x18 | (UInt32)pbVar4[2] << 0x10 | (UInt32)pbVar4[1] << 8 |
-                       (UInt32)*pbVar4;
+                       loadWordByteReversed(pbVar4);
                   pbVar4 = (UInt8 *)(M<SInt32>(self + 0x860) + iVar9);
                   M<UInt32>(pAVar21 + 0xb18) =
-                       (UInt32)pbVar4[3] << 0x18 | (UInt32)pbVar4[2] << 0x10 | (UInt32)pbVar4[1] << 8 |
-                       (UInt32)*pbVar4;
+                       loadWordByteReversed(pbVar4);
                   pbVar4 = (UInt8 *)(M<SInt32>(self + 0x860) + iVar13);
                   M<UInt32>(pAVar21 + 0xb1c) =
-                       (UInt32)pbVar4[3] << 0x18 | (UInt32)pbVar4[2] << 0x10 | (UInt32)pbVar4[1] << 8 |
-                       (UInt32)*pbVar4;
+                       loadWordByteReversed(pbVar4);
                   iVar8 = M<SInt32>(self + 0x860);
                   M<UInt32>(iVar8 + iVar26) =
                        uVar11 << 0x18 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00 |

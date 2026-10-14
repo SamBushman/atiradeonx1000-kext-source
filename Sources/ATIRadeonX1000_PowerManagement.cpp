@@ -37,11 +37,10 @@ void ATIRadeonX1000::GPUSensorFunc(OSObject *real_param_1, IOTimerEventSource *p
   GH_IOLockLock(M<UInt32>(param_1 + 0x840));
   if (param_1[0x80] != 0x0) {
     pbVar1 = (UInt8 *)(M<SInt32>(param_1 + 0x90c) + M<SInt32>(param_1 + 0x910));
-    if ((((UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1)
+    if (((loadWordByteReversed(pbVar1))
          == M<UInt32>(param_1 + 0x914)) &&
        (iVar2 = M<SInt32>(param_1 + 0x860),
-       -1 < (SInt32)((UInt32)M<UInt8>(iVar2 + 0xe43) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0xe42) << 0x10 |
-                  (UInt32)M<UInt8>(iVar2 + 0xe41) << 8 | (UInt32)M<UInt8>(iVar2 + 0xe40)))) {
+       -1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40))))) {
       if ((M<UInt8>(iVar2 + 0x1722) & 1) != 0) {
         if ((M<UInt8>(iVar2 + 0xe42) & 6) == 0) {
           if (((M<UInt8>(iVar2 + 0x1722) & 2) != 0) && ((M<UInt8>(iVar2 + 0xe42) & 0x38) == 0)) {
@@ -121,16 +120,12 @@ void ATIRadeonX1000::system_will_change_speed() {
         VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + 0x854) + -1);
         enforceInOrderExecutionIO();
         iVar3 = M<SInt32>(self + 0x860);
-        if (-1 < (SInt32)((UInt32)M<UInt8>(iVar3 + 0x1fb7) << 0x18 |
-                       (UInt32)M<UInt8>(iVar3 + 0x1fb6) << 0x10 |
-                       (UInt32)M<UInt8>(iVar3 + 0x1fb5) << 8 | (UInt32)M<UInt8>(iVar3 + 0x1fb4))) {
+        if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fb4)))) {
           iVar3 = 999;
           do {
             GH_IODelay(0x32);
             iVar5 = M<SInt32>(self + 0x860);
-            if ((SInt32)((UInt32)M<UInt8>(iVar5 + 0x1fb7) << 0x18 |
-                      (UInt32)M<UInt8>(iVar5 + 0x1fb6) << 0x10 | (UInt32)M<UInt8>(iVar5 + 0x1fb5) << 8
-                     | (UInt32)M<UInt8>(iVar5 + 0x1fb4)) < 0) {
+            if ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fb4))) < 0) {
               return;
             }
             bVar1 = iVar3 != 0;

@@ -77,10 +77,8 @@ bool ATIRadeonX1000::start_xdct_engine() {
   enforceInOrderExecutionIO();
   M<UInt32>(iVar5 + 0x1f80) = 0xa000580;
   enforceInOrderExecutionIO();
-  if (((UInt32)M<UInt8>(iVar5 + 0x1f9f) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1f9e) << 0x10 |
-       (UInt32)M<UInt8>(iVar5 + 0x1f9d) << 8 | (UInt32)M<UInt8>(iVar5 + 0x1f9c)) <
-      ((UInt32)M<UInt8>(iVar5 + 0x1fa3) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1fa2) << 0x10 |
-       (UInt32)M<UInt8>(iVar5 + 0x1fa1) << 8 | (UInt32)M<UInt8>(iVar5 + 0x1fa0))) {
+  if ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f9c))) <
+      (loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fa0)))) {
     iVar4 = 0;
     do {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
@@ -89,10 +87,8 @@ bool ATIRadeonX1000::start_xdct_engine() {
       bVar1 = iVar4 == 10000;
       iVar4 = iVar4 + 1;
       if (bVar1) break;
-    } while (((UInt32)M<UInt8>(iVar5 + 0x1f9f) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1f9e) << 0x10 |
-              (UInt32)M<UInt8>(iVar5 + 0x1f9d) << 8 | (UInt32)M<UInt8>(iVar5 + 0x1f9c)) <
-             ((UInt32)M<UInt8>(iVar5 + 0x1fa3) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1fa2) << 0x10 |
-              (UInt32)M<UInt8>(iVar5 + 0x1fa1) << 8 | (UInt32)M<UInt8>(iVar5 + 0x1fa0)));
+    } while ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f9c))) <
+             (loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fa0))));
   }
   M<UInt32>(self + 0x8bc) = 1;
   return 1;
@@ -107,10 +103,8 @@ bool ATIRadeonX1000::stop_xdct_engine() {
   SInt32 iVar3;
   
   iVar2 = M<SInt32>(self + 0x860);
-  if (((UInt32)M<UInt8>(iVar2 + 0x1f9f) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x1f9e) << 0x10 |
-       (UInt32)M<UInt8>(iVar2 + 0x1f9d) << 8 | (UInt32)M<UInt8>(iVar2 + 0x1f9c)) <
-      ((UInt32)M<UInt8>(iVar2 + 0x1fa3) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x1fa2) << 0x10 |
-       (UInt32)M<UInt8>(iVar2 + 0x1fa1) << 8 | (UInt32)M<UInt8>(iVar2 + 0x1fa0))) {
+  if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f9c))) <
+      (loadWordByteReversed(&M<UInt8>(iVar2 + 0x1fa0)))) {
     iVar3 = 0;
     do {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
@@ -119,10 +113,8 @@ bool ATIRadeonX1000::stop_xdct_engine() {
       bVar1 = iVar3 == 10000;
       iVar3 = iVar3 + 1;
       if (bVar1) break;
-    } while (((UInt32)M<UInt8>(iVar2 + 0x1f9f) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x1f9e) << 0x10 |
-              (UInt32)M<UInt8>(iVar2 + 0x1f9d) << 8 | (UInt32)M<UInt8>(iVar2 + 0x1f9c)) <
-             ((UInt32)M<UInt8>(iVar2 + 0x1fa3) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x1fa2) << 0x10 |
-              (UInt32)M<UInt8>(iVar2 + 0x1fa1) << 8 | (UInt32)M<UInt8>(iVar2 + 0x1fa0)));
+    } while ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f9c))) <
+             (loadWordByteReversed(&M<UInt8>(iVar2 + 0x1fa0))));
   }
   enforceInOrderExecutionIO();
   M<UInt32>(iVar2 + 0x1f94) =

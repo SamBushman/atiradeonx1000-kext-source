@@ -80,9 +80,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *param_1, UInt32 param_2, UI
 LAB_000208e8:
     iVar1 = M<SInt32>(self + 0x860);
     GH_IOLog("ATIRadeon::submit_buffer: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
-                 ,uVar4,8,(UInt32)M<UInt8>(iVar1 + 0xe43) << 0x18 |
-                          (UInt32)M<UInt8>(iVar1 + 0xe42) << 0x10 |
-                          (UInt32)M<UInt8>(iVar1 + 0xe41) << 8 | (UInt32)M<UInt8>(iVar1 + 0xe40));
+                 ,uVar4,8,loadWordByteReversed(&M<UInt8>(iVar1 + 0xe40)));
     ((ATIRadeonX1000 *)(self))->DumpASICHangState();
     iVar1 = M<SInt32>(self + 0x850) + -1;
   }

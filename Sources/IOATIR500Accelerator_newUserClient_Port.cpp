@@ -125,14 +125,11 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
   bVar5 = 2;
 LAB_000021d0:
   iVar3 = VCALL(M<SInt32>(pIVar2), 0x150)(pIVar2,piVar4);
-  IOLog("ATI154DIAG: param_3=%u pIVar2=%p +0x150 iVar3=%d\n", (unsigned)param_3, pIVar2, (int)iVar3);
   if (iVar3 != 0) {
     iVar3 = VCALL(M<SInt32>(pIVar2), 0x3a4)(pIVar2,self);
-    IOLog("ATI154DIAG: +0x3a4 iVar3=%d\n", (int)iVar3);
   }
   if (iVar3 != 0) {
     iVar3 = VCALL(M<SInt32>(pIVar2), 0x348)(pIVar2,self);
-    IOLog("ATI154DIAG: +0x348 iVar3=%d\n", (int)iVar3);
     if (iVar3 != 0) {
       *param_4 = (IOUserClient *)pIVar2;
       if (!(bool)(bVar5 >> 1 & 1)) {

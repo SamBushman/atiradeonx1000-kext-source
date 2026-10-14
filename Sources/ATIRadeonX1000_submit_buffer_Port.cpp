@@ -147,9 +147,7 @@ LAB_00020b4c:
   }
   iVar3 = M<SInt32>(self + 0x860);
   GH_IOLog("ATIRadeon::wait_for_rb_space: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
-               ,iVar1,5,(UInt32)M<UInt8>(iVar3 + 0xe43) << 0x18 |
-                        (UInt32)M<UInt8>(iVar3 + 0xe42) << 0x10 | (UInt32)M<UInt8>(iVar3 + 0xe41) << 8
-                        | (UInt32)M<UInt8>(iVar3 + 0xe40));
+               ,iVar1,5,loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)));
   this->DumpASICHangState();
   return *(SInt32 *)(self + 0x50) + -1;
 }

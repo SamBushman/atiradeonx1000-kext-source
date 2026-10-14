@@ -76,8 +76,7 @@ void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32
     if (iVar2 != 0) {
       iVar6 = M<SInt32>(self + 0x860);
       M<UInt32>(self + 0xc5c) =
-           (UInt32)M<UInt8>(iVar6 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar6 + 0x132) << 0x10 |
-           (UInt32)M<UInt8>(iVar6 + 0x131) << 8 | (UInt32)M<UInt8>(iVar6 + 0x130);
+           loadWordByteReversed(&M<UInt8>(iVar6 + 0x130));
       uVar8 = M<UInt32>(self + 0xc5c);
       M<UInt32>(iVar6 + 0x130) =
            uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | (uVar8 & 0xff0000) >> 8 |
@@ -87,8 +86,7 @@ void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32
            uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
       iVar2 = uVar9 * 4 + iVar2;
       M<UInt32>(self + 0xc5c) =
-           (UInt32)M<UInt8>(iVar2 + -1) << 0x18 | (UInt32)M<UInt8>(iVar2 + -2) << 0x10 |
-           (UInt32)M<UInt8>(iVar2 + -3) << 8 | (UInt32)M<UInt8>(iVar2 + -4);
+           loadWordByteReversed(&M<UInt8>(iVar2 + -4));
     }
     uVar9 = param_2 >> (GH_page_shift & 0x3f);
     VCALL(M<SInt32>(self), 0x59c)(self,uVar9,uVar1 - uVar9);
@@ -109,8 +107,7 @@ bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
   if (iVar2 != 0) {
     iVar2 = (param_1 >> (GH_page_shift & 0x3f)) * 4;
     puVar3 = (UInt32 *)(iVar2 + M<SInt32>(self + 0xc4c));
-    if (((UInt32)(UInt8)*puVar3 << 0x18 | (UInt32)M<UInt8>((SInt32)puVar3 + 2) << 0x10 |
-         (UInt32)M<UInt8>((SInt32)puVar3 + 1) << 8 | (UInt32)M<UInt8>(puVar3)) != M<UInt32>(self + 0x844))
+    if ((loadWordByteReversed(puVar3)) != M<UInt32>(self + 0x844))
     {
       BASE_clearInGART(param_1 >> (GH_page_shift & 0x3f));
       GH_IOSleep(10);
@@ -124,8 +121,7 @@ bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
       enforceInOrderExecutionIO();
       iVar2 = M<SInt32>(self + 0x860);
       M<UInt32>(self + 0xc5c) =
-           (UInt32)M<UInt8>(iVar2 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x132) << 0x10 |
-           (UInt32)M<UInt8>(iVar2 + 0x131) << 8 | (UInt32)M<UInt8>(iVar2 + 0x130);
+           loadWordByteReversed(&M<UInt8>(iVar2 + 0x130));
       uVar1 = M<UInt32>(self + 0xc5c);
       M<UInt32>(iVar2 + 0x130) =
            uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | (uVar1 & 0xff0000) >> 8 |
@@ -134,8 +130,7 @@ bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
       M<UInt32>(iVar2 + 0x130) =
            uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
       M<UInt32>(self + 0xc5c) =
-           (UInt32)(UInt8)*puVar3 << 0x18 | (UInt32)M<UInt8>((SInt32)puVar3 + 2) << 0x10 |
-           (UInt32)M<UInt8>((SInt32)puVar3 + 1) << 8 | (UInt32)M<UInt8>(puVar3);
+           loadWordByteReversed(puVar3);
       return 1;
     }
   }
@@ -161,8 +156,7 @@ void ATIRadeonX1000::clearInGART(UInt32 param_1) {
     enforceInOrderExecutionIO();
     iVar3 = M<SInt32>(self + 0x860);
     M<UInt32>(self + 0xc5c) =
-         (UInt32)M<UInt8>(iVar3 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x132) << 0x10 |
-         (UInt32)M<UInt8>(iVar3 + 0x131) << 8 | (UInt32)M<UInt8>(iVar3 + 0x130);
+         loadWordByteReversed(&M<UInt8>(iVar3 + 0x130));
     uVar2 = M<UInt32>(self + 0xc5c);
     M<UInt32>(iVar3 + 0x130) =
          uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | (uVar2 & 0xff0000) >> 8 |
@@ -171,8 +165,7 @@ void ATIRadeonX1000::clearInGART(UInt32 param_1) {
     M<UInt32>(iVar3 + 0x130) =
          uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
     M<UInt32>(self + 0xc5c) =
-         (UInt32)(UInt8)*puVar1 << 0x18 | (UInt32)M<UInt8>((SInt32)puVar1 + 2) << 0x10 |
-         (UInt32)M<UInt8>((SInt32)puVar1 + 1) << 8 | (UInt32)M<UInt8>(puVar1);
+         loadWordByteReversed(puVar1);
   }
   return;
 }
@@ -192,10 +185,6 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
   UInt32 uVar9;
   
   uVar2 = 0;
-  /* #167 ATI167DIAG: live-capture on every entry, before the gate decides anything. */
-  IOLog("ATI167DIAG: startupPCIeGART entry self=%p c4c=%p 830=0x%x 3000=%p 98=0x%x\n",
-             self, M<UInt32 *>(self + 0xc4c), M<UInt32>(self + 0x830), M<UInt32 *>(self + 3000),
-             M<UInt32>(self + 0x98));
   if (((M<UInt32>(self + 0x98) & 0xf00000) != 0) && (uVar2 = 1, M<SInt32>(self + 3000) == 0)) {
     iVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x568)(M<SInt32 *>(self + 0x74),0x10,0);
     if (iVar3 == 0) {
@@ -207,8 +196,7 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
     uVar4 = M<UInt32>(self + 0x830);
     if (uVar4 != 0) {
       iVar3 = M<SInt32>(self + 0x860);
-      uVar1 = (UInt32)M<UInt8>(iVar3 + 0xfb) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0xfa) << 0x10 |
-              (UInt32)M<UInt8>(iVar3 + 0xf9) << 8 | (UInt32)M<UInt8>(iVar3 + 0xf8);
+      uVar1 = loadWordByteReversed(&M<UInt8>(iVar3 + 0xf8));
       if (0x8000000 < uVar1) {
         uVar1 = 0x8000000;
       }
@@ -221,8 +209,6 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
       if (M<SInt32>(self + 0xc4c) == 0) {
         puVar5 = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
         M<UInt32 *>(self + 0xc4c) = puVar5;
-        IOLog("ATI167DIAG: startupPCIeGART fresh-alloc self=%p uVar4=0x%x new_c4c=%p\n",
-                   self, uVar4, puVar5);
         if (puVar5 == (UInt32 *)0x0) {
           M<UInt32>(self + 0xbb0) = 0;
           M<UInt32>(self + 0xbac) = 0;
@@ -263,8 +249,7 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           }
           iVar8 = M<SInt32>(self + 0x860);
           M<UInt32>(self + 0xc5c) =
-               (UInt32)M<UInt8>(iVar8 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar8 + 0x132) << 0x10 |
-               (UInt32)M<UInt8>(iVar8 + 0x131) << 8 | (UInt32)M<UInt8>(iVar8 + 0x130);
+               loadWordByteReversed(&M<UInt8>(iVar8 + 0x130));
           uVar1 = M<UInt32>(self + 0xc5c);
           M<UInt32>(iVar8 + 0x130) =
                uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | (uVar1 & 0xff0000) >> 8 |
@@ -273,15 +258,10 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           M<UInt32>(iVar8 + 0x130) =
                uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
           M<UInt32>(self + 0xc5c) =
-               (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -1) << 0x18 |
-               (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -2) << 0x10 |
-               (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -3) << 8 |
-               (UInt32)M<UInt8>((SInt32)puVar6 + iVar3 + -4);
+               loadWordByteReversed(&M<UInt8>((SInt32)puVar6 + iVar3 + -4));
         }
       }
       else {
-        IOLog("ATI167DIAG: startupPCIeGART SKIPPED realloc (c4c already non-null) self=%p c4c=%p\n",
-                   self, M<UInt32 *>(self + 0xc4c));
       }
       iVar3 = 0xc;
       self[0xc00] = 0x0;
@@ -422,8 +402,7 @@ void ATIRadeonX1000::pageOnPCIeGART() {
     enforceInOrderExecutionIO();
     iVar3 = M<SInt32>(self + 0x860);
     M<UInt32>(self + 0xc5c) =
-         (UInt32)M<UInt8>(iVar3 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x132) << 0x10 |
-         (UInt32)M<UInt8>(iVar3 + 0x131) << 8 | (UInt32)M<UInt8>(iVar3 + 0x130);
+         loadWordByteReversed(&M<UInt8>(iVar3 + 0x130));
     uVar4 = M<UInt32>(self + 0xc5c);
     M<UInt32>(iVar3 + 0x130) =
          uVar4 << 0x18 | (uVar4 & 0xff00) << 8 | (uVar4 & 0xff0000) >> 8 |
@@ -433,8 +412,7 @@ void ATIRadeonX1000::pageOnPCIeGART() {
          uVar4 << 0x18 | (uVar4 & 0xff00) << 8 | uVar4 >> 8 & 0xff00 | uVar4 >> 0x18;
     iVar1 = iVar1 + iVar2;
     M<UInt32>(self + 0xc5c) =
-         (UInt32)M<UInt8>(iVar1 + -1) << 0x18 | (UInt32)M<UInt8>(iVar1 + -2) << 0x10 |
-         (UInt32)M<UInt8>(iVar1 + -3) << 8 | (UInt32)M<UInt8>(iVar1 + -4);
+         loadWordByteReversed(&M<UInt8>(iVar1 + -4));
     return;
   }
   return;
@@ -459,31 +437,15 @@ IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 
   UInt32 uVar10;
   SInt32 iVar11;
   UInt32 local_38 [6];
-  UInt32 ATI167DIAG_tableCapacity = 0;
-  bool ATI167DIAG_overflowLogged = false;
 
-  /* #167 ATI167DIAG: live-capture self+0xc4c/self+0x830/self+3000/self+0x844/self+0x98 on every
-   * entry, before anything dereferences self+0xc4c, so a crash still leaves this line in the
-   * console buffer. GH_kprintf never reaches dmesg on this G5 (no serial console attached, and
-   * debug=0x100 didn't change that) - using IOLog instead, confirmed to reach dmesg reliably. */
-  IOLog("ATI167DIAG: addToPCIeGART entry self=%p c4c=%p 830=0x%x 3000=%p 844=0x%x 98=0x%x param_2=%p param_3=%p param_4=0x%x param_5=0x%x\n",
-             self, M<UInt32 *>(self + 0xc4c), M<UInt32>(self + 0x830), M<UInt32 *>(self + 3000),
-             M<UInt32>(self + 0x844), M<UInt32>(self + 0x98), param_2, param_3, param_4, param_5);
   local_38[0] = 0;
   if ((param_2 != 0) && (param_3 != 0)) {
     uVar3 = VCALL(M<UInt32>(param_2), 0x128)(param_2);
-    /* #167 ATI167DIAG: raw descriptor->getLength() before the >>page_shift below, to tell apart
-     * "the descriptor itself reports a huge length" from "length is sane but the segment-walk
-     * overshoots it". */
-    IOLog("ATI167DIAG: addToPCIeGART raw getLength()=0x%x (descriptor=%p)\n", uVar3, param_2);
     uVar10 = GH_page_shift;
     uVar1 = M<UInt32>(self + 0x830);
     M<UInt32>(param_3) = 0;
     uVar1 = uVar1 >> 2;
     uVar3 = uVar3 >> (uVar10 & 0x3f);
-    ATI167DIAG_tableCapacity = uVar1;
-    IOLog("ATI167DIAG: addToPCIeGART uVar3(pages requested)=0x%x table_capacity_pages=0x%x\n",
-          uVar3, uVar1);
     if (uVar1 == 0) {
       if (uVar3 == 0) {
         iVar5 = 0;
@@ -505,17 +467,6 @@ LAB_0001de4c:
               iVar9 = iVar5 << 2;
               uVar7 = M<UInt32>(self + 0xbc0);
               do {
-                /* #167 ATI167DIAG: one-shot capture of the exact moment iVar5 (the GART page
-                 * index) first exceeds the table's own real capacity, before the write below can
-                 * fault - so this always gets logged even if the very next store panics. */
-                if ((!ATI167DIAG_overflowLogged) && ((UInt32)iVar5 >= ATI167DIAG_tableCapacity)) {
-                  ATI167DIAG_overflowLogged = true;
-                  IOLog("ATI167DIAG: addToPCIeGART OVERFLOW iVar5=0x%x >= capacity=0x%x "
-                        "iVar9=0x%x iVar6(c4c)=%p writeAddr=0x%x local_38[0]=0x%x uVar10=0x%x "
-                        "uVar3=0x%x self=%p param_2=%p\n",
-                        (unsigned)iVar5, ATI167DIAG_tableCapacity, (unsigned)iVar9, (void *)iVar6,
-                        (unsigned)(iVar9 + iVar6), (unsigned)local_38[0], uVar10, uVar3, self, param_2);
-                }
                 if (iVar11 != 0) {
                   uVar2 = uVar10 >> 8 | uVar7;
                   M<UInt32>(iVar9 + iVar11) =
@@ -538,8 +489,7 @@ LAB_0001de4c:
           if (iVar4 != 0) {
             iVar9 = M<SInt32>(self + 0x860);
             M<UInt32>(self + 0xc5c) =
-                 (UInt32)M<UInt8>(iVar9 + 0x133) << 0x18 | (UInt32)M<UInt8>(iVar9 + 0x132) << 0x10 |
-                 (UInt32)M<UInt8>(iVar9 + 0x131) << 8 | (UInt32)M<UInt8>(iVar9 + 0x130);
+                 loadWordByteReversed(&M<UInt8>(iVar9 + 0x130));
             uVar1 = M<UInt32>(self + 0xc5c);
             M<UInt32>(iVar9 + 0x130) =
                  uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | (uVar1 & 0xff0000) >> 8 |
@@ -549,8 +499,7 @@ LAB_0001de4c:
                  uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
             iVar4 = iVar5 * 4 + iVar4;
             M<UInt32>(self + 0xc5c) =
-                 (UInt32)M<UInt8>(iVar4 + -1) << 0x18 | (UInt32)M<UInt8>(iVar4 + -2) << 0x10 |
-                 (UInt32)M<UInt8>(iVar4 + -3) << 8 | (UInt32)M<UInt8>(iVar4 + -4);
+                 loadWordByteReversed(&M<UInt8>(iVar4 + -4));
           }
           VCALL(M<SInt32>(self), 0x59c)(self,iVar5 - uVar3,uVar3);
           M<UInt32>(self + 0xa0) =
@@ -565,8 +514,7 @@ LAB_0001de4c:
       iVar5 = 0;
       do {
         uVar10 = uVar10 + 1;
-        if (((UInt32)pbVar8[3] << 0x18 | (UInt32)pbVar8[2] << 0x10 | (UInt32)pbVar8[1] << 8 |
-            (UInt32)*pbVar8) != M<UInt32>(self + 0x844)) {
+        if ((loadWordByteReversed(pbVar8)) != M<UInt32>(self + 0x844)) {
           uVar10 = 0;
         }
         iVar5 = iVar5 + 1;

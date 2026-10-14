@@ -46,8 +46,6 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
   {
     void *field_0x74 = *(void **)(self + 0x74);
     UInt32 field_0x74_vtable = field_0x74 ? *(UInt32 *)field_0x74 : 0;
-    IOLog("ATI153DIAG: stop() entry self=%p field_0x74=%p field_0x74_vtable=0x%x\n",
-          self, field_0x74, (unsigned)field_0x74_vtable);
   }
 
   bool bVar1;
@@ -233,7 +231,6 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
     VCALL(*M<int *>(self + 0x93c), 0x18)(M<int *>(self + 0x93c));
     M<UInt32>(self + 0x93c) = 0;
   }
-  IOLog("ATI155DIAG: ATIRadeonX1000::stop() about to tail-call IOATIR500Accelerator::stop() self=%p\n", self);
   /* #155 ROOT CAUSE FIX (2026-10-11): the mechanical port wrote this base-class chain-up as a
    * pointer-cast-and-arrow call. Under -fapple-kext (required for this build; it disables
    * devirtualization so kexts stay binary-patchable), `((Base*)obj)->virtualMethod()` ALWAYS
@@ -250,6 +247,5 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
    * ATIRadeonX1000::start()'s own `IOAccelerator::start(param_1)` chain call) - this is defined
    * by the C++ standard to bypass virtual dispatch entirely, independent of -fapple-kext. */
   this->IOATIR500Accelerator::stop((IOService *)(param_1));
-  IOLog("ATI155DIAG: ATIRadeonX1000::stop() - IOATIR500Accelerator::stop() RETURNED (unexpected if it panics)\n");
   return;
 }

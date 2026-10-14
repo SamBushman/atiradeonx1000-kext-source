@@ -241,8 +241,7 @@ LAB_0001e668:
               enforceInOrderExecutionIO();
               pbVar2 = (UInt8 *)(iVar27 + iVar26);
               global_dummy_read_back_a_register =
-                   (UInt32)pbVar2[3] << 0x18 | (UInt32)pbVar2[2] << 0x10 | (UInt32)pbVar2[1] << 8 |
-                   (UInt32)*pbVar2;
+                   loadWordByteReversed(pbVar2);
               if (iVar38 < 1) {
                 uVar22 = (UInt32)(UInt8)param_2[0x1a];
               }

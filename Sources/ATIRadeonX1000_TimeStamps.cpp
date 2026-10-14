@@ -45,7 +45,7 @@ IOReturn ATIRadeonX1000::waitForRetiredTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x858) = uVar2;
     if (0 < (SInt32)(param_1 - uVar2)) {
@@ -54,8 +54,7 @@ IOReturn ATIRadeonX1000::waitForRetiredTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x858) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;
@@ -89,7 +88,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x54) = uVar2;
     iVar3 = 0;
@@ -99,8 +98,7 @@ UInt32 ATIRadeonX1000::waitForTimeStampNoLock(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x54) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;
@@ -137,8 +135,7 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     iVar1 = M<SInt32>(self + 0x860);
-    uVar2 = (UInt32)M<UInt8>(iVar1 + 0x1fab) << 0x18 | (UInt32)M<UInt8>(iVar1 + 0x1faa) << 0x10 |
-            (UInt32)M<UInt8>(iVar1 + 0x1fa9) << 8 | (UInt32)M<UInt8>(iVar1 + 0x1fa8);
+    uVar2 = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
     M<UInt32>(self + 0x85c) = uVar2;
     iVar1 = 0;
     if (0 < (SInt32)(param_1 - uVar2)) {
@@ -147,8 +144,7 @@ UInt32 ATIRadeonX1000::sleepForConsumedIDCTTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         iVar3 = M<SInt32>(self + 0x860);
-        uVar2 = (UInt32)M<UInt8>(iVar3 + 0x1fab) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x1faa) << 0x10 |
-                (UInt32)M<UInt8>(iVar3 + 0x1fa9) << 8 | (UInt32)M<UInt8>(iVar3 + 0x1fa8);
+        uVar2 = loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fa8));
         M<UInt32>(self + 0x85c) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar1 = iVar1 + 1;
@@ -185,7 +181,7 @@ UInt32 ATIRadeonX1000::sleepForRetiredTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x858) = uVar2;
     iVar3 = 0;
@@ -195,8 +191,7 @@ UInt32 ATIRadeonX1000::sleepForRetiredTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x868));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x858) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;
@@ -233,7 +228,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x54) = uVar2;
     iVar3 = 0;
@@ -243,8 +238,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStampNoLock(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x54) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;
@@ -281,7 +275,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x54) = uVar2;
     iVar3 = 0;
@@ -291,8 +285,7 @@ UInt32 ATIRadeonX1000::waitForTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x54) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;
@@ -329,8 +322,7 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     iVar1 = M<SInt32>(self + 0x860);
-    uVar2 = (UInt32)M<UInt8>(iVar1 + 0x1fab) << 0x18 | (UInt32)M<UInt8>(iVar1 + 0x1faa) << 0x10 |
-            (UInt32)M<UInt8>(iVar1 + 0x1fa9) << 8 | (UInt32)M<UInt8>(iVar1 + 0x1fa8);
+    uVar2 = loadWordByteReversed(&M<UInt8>(iVar1 + 0x1fa8));
     M<UInt32>(self + 0x85c) = uVar2;
     iVar1 = 0;
     if (0 < (SInt32)(param_1 - uVar2)) {
@@ -339,8 +331,7 @@ IOReturn ATIRadeonX1000::waitForConsumedIDCTTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         iVar3 = M<SInt32>(self + 0x860);
-        uVar2 = (UInt32)M<UInt8>(iVar3 + 0x1fab) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x1faa) << 0x10 |
-                (UInt32)M<UInt8>(iVar3 + 0x1fa9) << 8 | (UInt32)M<UInt8>(iVar3 + 0x1fa8);
+        uVar2 = loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fa8));
         M<UInt32>(self + 0x85c) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar1 = iVar1 + 1;
@@ -377,7 +368,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 param_1) {
   else {
     GH_clock_get_uptime(&t0[0]);
     pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-    uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 | (UInt32)*pbVar1
+    uVar2 = loadWordByteReversed(pbVar1)
     ;
     M<UInt32>(self + 0x54) = uVar2;
     iVar3 = 0;
@@ -387,8 +378,7 @@ UInt32 ATIRadeonX1000::sleepForTimeStamp(UInt32 param_1) {
         GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
         GH_thread_block(0);
         pbVar1 = (UInt8 *)(M<SInt32>(self + 0x864) + M<SInt32>(self + 0x86c));
-        uVar2 = (UInt32)pbVar1[3] << 0x18 | (UInt32)pbVar1[2] << 0x10 | (UInt32)pbVar1[1] << 8 |
-                (UInt32)*pbVar1;
+        uVar2 = loadWordByteReversed(pbVar1);
         M<UInt32>(self + 0x54) = uVar2;
         if ((SInt32)(param_1 - uVar2) < 1) break;
         iVar3 = iVar3 + 1;

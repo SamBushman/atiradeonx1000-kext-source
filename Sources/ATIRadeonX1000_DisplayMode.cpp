@@ -129,14 +129,12 @@ bool ATIRadeonX1000::display_mode_will_change(SInt32 param_1) {
     VCALL(M<SInt32>(self), 0x5ec)(self,M<SInt32>(self + 0x854) + -1);
     enforceInOrderExecutionIO();
     iVar3 = M<SInt32>(self + 0x860);
-    if (-1 < (SInt32)((UInt32)M<UInt8>(iVar3 + 0x1fb7) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x1fb6) << 0x10
-                   | (UInt32)M<UInt8>(iVar3 + 0x1fb5) << 8 | (UInt32)M<UInt8>(iVar3 + 0x1fb4))) {
+    if (-1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0x1fb4)))) {
       iVar3 = 999;
       do {
         GH_IODelay(100);
         iVar6 = M<SInt32>(self + 0x860);
-        if ((SInt32)((UInt32)M<UInt8>(iVar6 + 0x1fb7) << 0x18 | (UInt32)M<UInt8>(iVar6 + 0x1fb6) << 0x10
-                  | (UInt32)M<UInt8>(iVar6 + 0x1fb5) << 8 | (UInt32)M<UInt8>(iVar6 + 0x1fb4)) < 0)
+        if ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar6 + 0x1fb4))) < 0)
         break;
         bVar1 = iVar3 != 0;
         iVar3 = iVar3 + -1;
