@@ -43,7 +43,7 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *real_param_1)
   VVar1 = param_1[0x20];
   if (VVar1 == 0x3) {
     if ((((M<SInt32>(param_1 + 0x48) == 0) &&
-         (iVar3 = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200)), iVar3 == 0)) &&
+         (iVar3 = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),param_1) /* #171: stock 0x2a40c: r4 = the texture buffer (incoming), allocate_texture(VendorTextureBuffer*) */, iVar3 == 0)) &&
         (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
                             (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,(VendorTextureBuffer *)(param_1)), iVar3 == 0)) &&
        (iVar3 = this->compact_current_textures((VendorTextureBuffer *)(param_1)), iVar3 == 0)) {
@@ -161,7 +161,8 @@ LAB_0002a5f4:
     }
   }
   else if ((M<UInt8>(M<SInt32>(param_1 + 0x14) + 0x14) & 2) != 0) {
-    VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200));
+    /* #171: stock 0x2a58c: r4 = the texture buffer (incoming), deallocate_texture(VendorTextureBuffer*) */
+    VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200),param_1);
     M<UInt8>(M<SInt32>(param_1 + 0x14) + 0x14) = 1;
     M<UInt16>(M<SInt32>(param_1 + 0x14) + 0x28) = 0;
     M<UInt16>(M<SInt32>(param_1 + 0x14) + 0x2a) = 0;

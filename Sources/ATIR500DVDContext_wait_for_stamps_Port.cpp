@@ -31,7 +31,8 @@ IOReturn ATIR500DVDContext::wait_for_stamps(UInt32 param_1, UInt32 param_2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   if (param_1 != 0) {
-    VCALL(*M<SInt32 *>(self + 0x8c), 0x5fc)(M<SInt32 *>(self + 0x8c));
+    /* #171: stock 0x34148 passes param_1 (incoming r4, untouched since entry) to sleepForConsumedIDCTTimeStamp(unsigned long); the port dropped it */
+    VCALL(*M<SInt32 *>(self + 0x8c), 0x5fc)(M<SInt32 *>(self + 0x8c),param_1);
   }
   if (param_2 != 0) {
     VCALL(*M<SInt32 *>(self + 0x8c), 0x558)(M<SInt32 *>(self + 0x8c),param_2);

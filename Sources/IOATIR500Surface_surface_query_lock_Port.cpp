@@ -45,7 +45,8 @@ IOReturn IOATIR500Surface::surface_query_lock() {
         uVar1 = uVar1 & 1 ^ 1;
         if ((M<SInt32>(self + uVar1 * 0x78 + 0xb8) != 0) &&
            (M<SInt32>(self + uVar1 * 0x78 + 0xb0) == 0)) {
-          iVar2 = VCALL(M<SInt32>(self), 0x5d0)(self);
+          /* #171: stock 0x15210: r4 = this + idx*0x78 + 0xa8 (the buffer record), alloc_surface_buffer(ATIR500SurfaceBuffer*) */
+          iVar2 = VCALL(M<SInt32>(self), 0x5d0)(self,self + uVar1 * 0x78 + 0xa8);
           if (iVar2 != 0) {
             uVar3 = 0;
             VCALL(M<SInt32>(self), 0x5cc)(self,uVar1);

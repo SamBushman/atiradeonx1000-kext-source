@@ -49,7 +49,8 @@ bool IOATIR500Surface::copy_buffer_to_backing_store(ATIR500SurfaceBuffer *real_p
   iVar3 = M<SInt32>(param_1 + 0x24);
   local_38 = 2;
   if (iVar3 == 0) {
-    iVar3 = VCALL(M<SInt32>(self), 0x5e4)(self);
+    /* #171: stock 0x11140: r4 = the buffer (incoming, r30), alloc_buffer_backing_store(ATIR500SurfaceBuffer*) */
+    iVar3 = VCALL(M<SInt32>(self), 0x5e4)(self,param_1);
     if (iVar3 == 0) {
       return 0;
     }

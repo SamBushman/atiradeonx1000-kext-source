@@ -149,7 +149,8 @@ void ATIRadeonX1000::SWDSFunc(OSObject *real_param_1, IOTimerEventSource *param_
             M<SInt32>(param_1 + uVar13 * 4 + 0xacc) = iVar5;
           }
           else {
-            uVar4 = VCALL(M<SInt32>(param_1), 0x554)(param_1);
+            /* #171: stock 0x2442c: r4 = lwz 0xacc(r9) = this[uVar13*4+0xacc], the stamp to check (checkForTimeStamp(unsigned long)); the port dropped it */
+            uVar4 = VCALL(M<SInt32>(param_1), 0x554)(param_1,M<UInt32>(param_1 + uVar13 * 4 + 0xacc));
             uVar9 = uVar9 | uVar4;
           }
 LAB_00024480:

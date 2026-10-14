@@ -38,7 +38,8 @@ IOReturn IOATIR500GLContext::purge_texture(UInt32 param_1) {
   if ((param_1 < M<UInt32>(M<SInt32>(self + 0x88) + 0x14)) &&
      (iVar1 = M<SInt32>(param_1 * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)), iVar1 != 0)) {
     if (M<SInt32>(iVar1 + 0x48) != 0) {
-      VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200));
+      /* #171: stock 0x98c0: r4 = the texture (lwzx r4 ... stw r4,0x38(r1)), deallocate_texture(VendorTextureBuffer*) */
+      VCALL(*M<SInt32 *>(self + 200), 0x524)(M<SInt32 *>(self + 200),iVar1);
       M<UInt8>(M<SInt32>(iVar1 + 0x14) + 0x14) = 1;
       M<UInt16>(M<SInt32>(iVar1 + 0x14) + 0x28) = 0;
       M<UInt16>(M<SInt32>(iVar1 + 0x14) + 0x2a) = 0;

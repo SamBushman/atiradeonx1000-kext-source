@@ -36,7 +36,8 @@ void IOATIR500Accelerator::freeOneDataBuffer(VendorTextureBuffer *real_param_1) 
   SInt32 iVar3;
   
   if (M<SInt32>(param_1 + 0x48) != 0) {
-    VCALL(M<SInt32>(self), 0x524)(self);
+    /* #171: stock 0x32fc: r4 = the buffer (incoming), deallocate_texture(VendorTextureBuffer*) */
+    VCALL(M<SInt32>(self), 0x524)(self,param_1);
     iVar3 = M<SInt32>(param_1 + 0x24);
     M<UInt32>(iVar3 + 0x28) = M<UInt32>(param_1 + 0x28);
     iVar1 = M<SInt32>(param_1 + 0x28);
