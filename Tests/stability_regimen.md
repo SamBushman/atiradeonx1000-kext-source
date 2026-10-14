@@ -99,3 +99,11 @@ Stock result against the bar: **met by run 3** (4 h, 756 rounds, zero difference
 * **Consequence for the bar:** a 4 h soak on this machine cannot be expected to run free of display reconfigurations unless the cause is removed or the soak recognises them. The NotReady-only retry rule is too narrow for a full mode change. See the proposal on #43.
 
 Earlier: 150 s validation soak (8 rounds, 153 s): all rounds identical to their references, 0 failures.
+
+## Rebuilt-kext soak, with concurrent real consumers (2026-10-14)
+
+**Build:** rebuilt HEAD `95edbd2` (`-Os`; includes the #177/#178 fixes), hot-swapped over the stock accelerator + `Tools/issue157_unstick_hotswap/`, G5 freshly booted (uptime 10 min at start). Boot-time driver never touched.
+**Workload:** `Tests/soak.sh 14400` (`MASK_INSTANCE_COUNTS=1 RETRIES=3`) **while** `Tools/soak_consumers.sh` cycled, every ~2.5 min, automated QuickTime playback, DVD Player (opens a DVD context and maps/uses it: the hot-swapped state makes the VA driver choose it) and the 2D-compositing + WindowServer-gesture scenarios (Expose, show desktop, Dashboard, minimise) via synthetic input. Watchdog: `Tools/stability_watch.sh` (30 s).
+**Result: the bar is MET.** 586 rounds in 14 410 s, zero STEP-FAIL / STEP-DIFF, no crash, hang or panic; watchdog 467 samples all OK (kext load address 0x6a908000 throughout, `panic.log` unchanged, no crashdump); `hwup_sampler`: state UP for the whole run, 0 down samples; ~180 consumer cycles with no failure.
+**Retries (disclosed, not hidden):** 145 retry events across 110 recovered steps (78 after 1 retry, 29 after 2, 3 after 3), all in the `--deep` step and **all** the harness's own before/after leak-check line flipping to `[UNEXPECTED]` because a consumer opened or closed a Surface/2D/GL/DVD client between the harness's two instance-count samples; none was a NotReady, none persisted, no step exhausted its retries. A real leak would reproduce on every retry and fail the soak. The rule (`only_leakcheck` in `Tests/soak.sh`) only applies with `MASK_INSTANCE_COUNTS=1`. The no-consumer soak (stock run 3, 2026-10-02) used neither.
+Logs: `Tests/baseline/soak/rebuilt_f820602fix_soak_20261014.*`.

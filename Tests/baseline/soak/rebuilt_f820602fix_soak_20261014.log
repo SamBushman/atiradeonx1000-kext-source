@@ -1,0 +1,3391 @@
+2026-10-14T12:12:25 SOAK START duration=14400s gln=50 kext=0x6a908000 com.apple.ATIRadeonX1000
+2026-10-14T12:12:25 fingerprint: uptime: 12:12  up 10 mins, 1 user, load averages: 1.47 0.96 0.50|kext: 0x6a908000 com.apple.ATIRadeonX1000 (4.1.9)|displays: Resolution: 1920 x 1080 @ 60 Hz;Mirror: Off;Online: Yes;|idkind: id0=[ 0x4 ] id1=[ 0x0 ] id2=[ ] id3=[ ] |fingerprint: 2221852201|
+2026-10-14T12:12:25 hwup_sampler started pid 6677 -> /Users/bushmas/rung3/soak_fix2.log.hwup
+2026-10-14T12:12:26 ok r1 perf_baseline
+2026-10-14T12:12:26 reference saved /tmp/soak_ref_parity.6644: 87 calls made (87 asserted, 0 recorded-only), 0 unexpected result(s), 10 skipped (shape-known, not live-tested)
+2026-10-14T12:12:26 ok r1 parity
+2026-10-14T12:12:44 reference saved /tmp/soak_ref_deep.6644: 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:12:44 ok r1 deep
+2026-10-14T12:12:45 ok r2 perf_baseline
+2026-10-14T12:12:45 ok r2 parity
+2026-10-14T12:13:04 ok r2 deep
+2026-10-14T12:13:04 ok r3 perf_baseline
+2026-10-14T12:13:04 ok r3 parity
+2026-10-14T12:13:23 TRANSIENT r3 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:13:44 TRANSIENT-RECOVERED r3 deep after 1 retr(y/ies); transients so far: 1
+2026-10-14T12:13:44 ok r3 deep
+2026-10-14T12:13:45 ok r4 perf_baseline
+2026-10-14T12:13:45 ok r4 parity
+2026-10-14T12:14:04 ok r4 deep
+2026-10-14T12:14:04 ok r5 perf_baseline
+2026-10-14T12:14:04 ok r5 parity
+2026-10-14T12:14:23 ok r5 deep
+2026-10-14T12:14:23 ok r6 perf_baseline
+2026-10-14T12:14:23 ok r6 parity
+2026-10-14T12:14:42 ok r6 deep
+2026-10-14T12:14:42 ok r7 perf_baseline
+2026-10-14T12:14:42 ok r7 parity
+2026-10-14T12:15:02 TRANSIENT r7 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:15:23 TRANSIENT r7 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T12:15:45 TRANSIENT-RECOVERED r7 deep after 2 retr(y/ies); transients so far: 2
+2026-10-14T12:15:45 ok r7 deep
+2026-10-14T12:15:46 ok r8 perf_baseline
+2026-10-14T12:15:46 ok r8 parity
+2026-10-14T12:16:04 ok r8 deep
+2026-10-14T12:16:05 ok r9 perf_baseline
+2026-10-14T12:16:05 ok r9 parity
+2026-10-14T12:16:24 ok r9 deep
+2026-10-14T12:16:24 ok r10 perf_baseline
+2026-10-14T12:16:24 ok r10 parity
+2026-10-14T12:16:43 ok r10 deep
+2026-10-14T12:16:43 ok r11 perf_baseline
+2026-10-14T12:16:43 ok r11 parity
+2026-10-14T12:17:02 ok r11 deep
+2026-10-14T12:17:02 ok r12 perf_baseline
+2026-10-14T12:17:02 ok r12 parity
+2026-10-14T12:17:21 ok r12 deep
+2026-10-14T12:17:21 ok r13 perf_baseline
+2026-10-14T12:17:21 ok r13 parity
+2026-10-14T12:17:40 ok r13 deep
+2026-10-14T12:17:40 ok r14 perf_baseline
+2026-10-14T12:17:40 ok r14 parity
+2026-10-14T12:17:59 ok r14 deep
+2026-10-14T12:18:00 ok r15 perf_baseline
+2026-10-14T12:18:00 ok r15 parity
+2026-10-14T12:18:18 ok r15 deep
+2026-10-14T12:18:19 ok r16 perf_baseline
+2026-10-14T12:18:19 ok r16 parity
+2026-10-14T12:18:37 ok r16 deep
+2026-10-14T12:18:38 ok r17 perf_baseline
+2026-10-14T12:18:38 ok r17 parity
+2026-10-14T12:18:57 ok r17 deep
+2026-10-14T12:18:57 ok r18 perf_baseline
+2026-10-14T12:18:57 ok r18 parity
+2026-10-14T12:19:17 TRANSIENT r18 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:19:38 TRANSIENT-RECOVERED r18 deep after 1 retr(y/ies); transients so far: 3
+2026-10-14T12:19:38 ok r18 deep
+2026-10-14T12:19:39 ok r19 perf_baseline
+2026-10-14T12:19:39 ok r19 parity
+2026-10-14T12:19:58 ok r19 deep
+2026-10-14T12:19:58 ok r20 perf_baseline
+2026-10-14T12:19:59 ok r20 parity
+2026-10-14T12:20:17 ok r20 deep
+2026-10-14T12:20:17 ok r21 perf_baseline
+2026-10-14T12:20:18 ok r21 parity
+2026-10-14T12:20:36 ok r21 deep
+2026-10-14T12:20:37 ok r22 perf_baseline
+2026-10-14T12:20:37 ok r22 parity
+2026-10-14T12:20:55 ok r22 deep
+2026-10-14T12:20:56 ok r23 perf_baseline
+2026-10-14T12:20:57 ok r23 parity
+2026-10-14T12:21:16 TRANSIENT r23 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:21:37 TRANSIENT-RECOVERED r23 deep after 1 retr(y/ies); transients so far: 4
+2026-10-14T12:21:37 ok r23 deep
+2026-10-14T12:21:38 ok r24 perf_baseline
+2026-10-14T12:21:38 ok r24 parity
+2026-10-14T12:21:57 ok r24 deep
+2026-10-14T12:21:57 ok r25 perf_baseline
+2026-10-14T12:21:57 ok r25 parity
+2026-10-14T12:22:16 ok r25 deep
+2026-10-14T12:22:16 ok r26 perf_baseline
+2026-10-14T12:22:16 ok r26 parity
+2026-10-14T12:22:35 ok r26 deep
+2026-10-14T12:22:35 ok r27 perf_baseline
+2026-10-14T12:22:35 ok r27 parity
+2026-10-14T12:22:54 ok r27 deep
+2026-10-14T12:22:54 ok r28 perf_baseline
+2026-10-14T12:22:54 ok r28 parity
+2026-10-14T12:23:14 ok r28 deep
+2026-10-14T12:23:14 ok r29 perf_baseline
+2026-10-14T12:23:14 ok r29 parity
+2026-10-14T12:23:33 ok r29 deep
+2026-10-14T12:23:33 ok r30 perf_baseline
+2026-10-14T12:23:34 ok r30 parity
+2026-10-14T12:23:52 ok r30 deep
+2026-10-14T12:23:53 ok r31 perf_baseline
+2026-10-14T12:23:53 ok r31 parity
+2026-10-14T12:24:12 TRANSIENT r31 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:24:33 TRANSIENT-RECOVERED r31 deep after 1 retr(y/ies); transients so far: 5
+2026-10-14T12:24:33 ok r31 deep
+2026-10-14T12:24:34 ok r32 perf_baseline
+2026-10-14T12:24:34 ok r32 parity
+2026-10-14T12:24:53 ok r32 deep
+2026-10-14T12:24:54 ok r33 perf_baseline
+2026-10-14T12:24:54 ok r33 parity
+2026-10-14T12:25:12 ok r33 deep
+2026-10-14T12:25:13 ok r34 perf_baseline
+2026-10-14T12:25:13 ok r34 parity
+2026-10-14T12:25:31 ok r34 deep
+2026-10-14T12:25:32 ok r35 perf_baseline
+2026-10-14T12:25:32 ok r35 parity
+2026-10-14T12:25:51 ok r35 deep
+2026-10-14T12:25:52 ok r36 perf_baseline
+2026-10-14T12:25:53 ok r36 parity
+2026-10-14T12:26:12 TRANSIENT r36 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T12:26:33 TRANSIENT r36 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:26:53 TRANSIENT-RECOVERED r36 deep after 2 retr(y/ies); transients so far: 6
+2026-10-14T12:26:53 ok r36 deep
+2026-10-14T12:26:54 ok r37 perf_baseline
+2026-10-14T12:26:54 ok r37 parity
+2026-10-14T12:27:12 ok r37 deep
+2026-10-14T12:27:13 ok r38 perf_baseline
+2026-10-14T12:27:13 ok r38 parity
+2026-10-14T12:27:32 ok r38 deep
+2026-10-14T12:27:32 ok r39 perf_baseline
+2026-10-14T12:27:32 ok r39 parity
+2026-10-14T12:27:51 ok r39 deep
+2026-10-14T12:27:51 ok r40 perf_baseline
+2026-10-14T12:27:51 ok r40 parity
+2026-10-14T12:28:10 ok r40 deep
+2026-10-14T12:28:11 ok r41 perf_baseline
+2026-10-14T12:28:11 ok r41 parity
+2026-10-14T12:28:29 ok r41 deep
+2026-10-14T12:28:30 ok r42 perf_baseline
+2026-10-14T12:28:30 ok r42 parity
+2026-10-14T12:28:48 ok r42 deep
+2026-10-14T12:28:49 ok r43 perf_baseline
+2026-10-14T12:28:49 ok r43 parity
+2026-10-14T12:29:08 TRANSIENT r43 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:29:30 TRANSIENT-RECOVERED r43 deep after 1 retr(y/ies); transients so far: 7
+2026-10-14T12:29:30 ok r43 deep
+2026-10-14T12:29:30 ok r44 perf_baseline
+2026-10-14T12:29:30 ok r44 parity
+2026-10-14T12:29:49 ok r44 deep
+2026-10-14T12:29:50 ok r45 perf_baseline
+2026-10-14T12:29:50 ok r45 parity
+2026-10-14T12:30:09 ok r45 deep
+2026-10-14T12:30:09 ok r46 perf_baseline
+2026-10-14T12:30:09 ok r46 parity
+2026-10-14T12:30:28 ok r46 deep
+2026-10-14T12:30:28 ok r47 perf_baseline
+2026-10-14T12:30:28 ok r47 parity
+2026-10-14T12:30:48 TRANSIENT r47 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:31:09 TRANSIENT r47 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:31:30 TRANSIENT-RECOVERED r47 deep after 2 retr(y/ies); transients so far: 8
+2026-10-14T12:31:30 ok r47 deep
+2026-10-14T12:31:31 ok r48 perf_baseline
+2026-10-14T12:31:31 ok r48 parity
+2026-10-14T12:31:49 ok r48 deep
+2026-10-14T12:31:50 ok r49 perf_baseline
+2026-10-14T12:31:50 ok r49 parity
+2026-10-14T12:32:09 ok r49 deep
+2026-10-14T12:32:09 ok r50 perf_baseline
+2026-10-14T12:32:09 ok r50 parity
+2026-10-14T12:32:28 ok r50 deep
+2026-10-14T12:32:28 ok r51 perf_baseline
+2026-10-14T12:32:28 ok r51 parity
+2026-10-14T12:32:47 ok r51 deep
+2026-10-14T12:32:47 ok r52 perf_baseline
+2026-10-14T12:32:47 ok r52 parity
+2026-10-14T12:33:06 ok r52 deep
+2026-10-14T12:33:07 ok r53 perf_baseline
+2026-10-14T12:33:07 ok r53 parity
+2026-10-14T12:33:25 ok r53 deep
+2026-10-14T12:33:26 ok r54 perf_baseline
+2026-10-14T12:33:26 ok r54 parity
+2026-10-14T12:33:44 ok r54 deep
+2026-10-14T12:33:45 ok r55 perf_baseline
+2026-10-14T12:33:45 ok r55 parity
+2026-10-14T12:34:04 TRANSIENT r55 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:34:26 TRANSIENT-RECOVERED r55 deep after 1 retr(y/ies); transients so far: 9
+2026-10-14T12:34:26 ok r55 deep
+2026-10-14T12:34:26 ok r56 perf_baseline
+2026-10-14T12:34:26 ok r56 parity
+2026-10-14T12:34:45 TRANSIENT r56 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:35:06 TRANSIENT-RECOVERED r56 deep after 1 retr(y/ies); transients so far: 10
+2026-10-14T12:35:06 ok r56 deep
+2026-10-14T12:35:06 ok r57 perf_baseline
+2026-10-14T12:35:06 ok r57 parity
+2026-10-14T12:35:25 ok r57 deep
+2026-10-14T12:35:25 ok r58 perf_baseline
+2026-10-14T12:35:25 ok r58 parity
+2026-10-14T12:35:45 TRANSIENT r58 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:36:06 TRANSIENT r58 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:36:27 TRANSIENT r58 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 3/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:36:48 TRANSIENT-RECOVERED r58 deep after 3 retr(y/ies); transients so far: 11
+2026-10-14T12:36:48 ok r58 deep
+2026-10-14T12:36:48 ok r59 perf_baseline
+2026-10-14T12:36:48 ok r59 parity
+2026-10-14T12:37:07 ok r59 deep
+2026-10-14T12:37:07 ok r60 perf_baseline
+2026-10-14T12:37:07 ok r60 parity
+2026-10-14T12:37:26 ok r60 deep
+2026-10-14T12:37:26 ok r61 perf_baseline
+2026-10-14T12:37:27 ok r61 parity
+2026-10-14T12:37:45 ok r61 deep
+2026-10-14T12:37:46 ok r62 perf_baseline
+2026-10-14T12:37:46 ok r62 parity
+2026-10-14T12:38:04 ok r62 deep
+2026-10-14T12:38:05 ok r63 perf_baseline
+2026-10-14T12:38:05 ok r63 parity
+2026-10-14T12:38:24 ok r63 deep
+2026-10-14T12:38:24 ok r64 perf_baseline
+2026-10-14T12:38:24 ok r64 parity
+2026-10-14T12:38:43 ok r64 deep
+2026-10-14T12:38:43 ok r65 perf_baseline
+2026-10-14T12:38:43 ok r65 parity
+2026-10-14T12:39:03 TRANSIENT r65 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:39:24 TRANSIENT-RECOVERED r65 deep after 1 retr(y/ies); transients so far: 12
+2026-10-14T12:39:24 ok r65 deep
+2026-10-14T12:39:25 ok r66 perf_baseline
+2026-10-14T12:39:25 ok r66 parity
+2026-10-14T12:39:44 ok r66 deep
+2026-10-14T12:39:45 ok r67 perf_baseline
+2026-10-14T12:39:45 ok r67 parity
+2026-10-14T12:40:03 ok r67 deep
+2026-10-14T12:40:04 ok r68 perf_baseline
+2026-10-14T12:40:04 ok r68 parity
+2026-10-14T12:40:22 ok r68 deep
+2026-10-14T12:40:23 ok r69 perf_baseline
+2026-10-14T12:40:23 ok r69 parity
+2026-10-14T12:40:42 ok r69 deep
+2026-10-14T12:40:44 ok r70 perf_baseline
+2026-10-14T12:40:44 ok r70 parity
+2026-10-14T12:41:04 TRANSIENT r70 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T12:41:25 TRANSIENT-RECOVERED r70 deep after 1 retr(y/ies); transients so far: 13
+2026-10-14T12:41:25 ok r70 deep
+2026-10-14T12:41:25 ok r71 perf_baseline
+2026-10-14T12:41:25 ok r71 parity
+2026-10-14T12:41:44 ok r71 deep
+2026-10-14T12:41:45 ok r72 perf_baseline
+2026-10-14T12:41:45 ok r72 parity
+2026-10-14T12:42:03 ok r72 deep
+2026-10-14T12:42:04 ok r73 perf_baseline
+2026-10-14T12:42:04 ok r73 parity
+2026-10-14T12:42:22 ok r73 deep
+2026-10-14T12:42:23 ok r74 perf_baseline
+2026-10-14T12:42:23 ok r74 parity
+2026-10-14T12:42:42 ok r74 deep
+2026-10-14T12:42:42 ok r75 perf_baseline
+2026-10-14T12:42:42 ok r75 parity
+2026-10-14T12:43:01 ok r75 deep
+2026-10-14T12:43:01 ok r76 perf_baseline
+2026-10-14T12:43:01 ok r76 parity
+2026-10-14T12:43:20 ok r76 deep
+2026-10-14T12:43:20 ok r77 perf_baseline
+2026-10-14T12:43:20 ok r77 parity
+2026-10-14T12:43:39 ok r77 deep
+2026-10-14T12:43:40 ok r78 perf_baseline
+2026-10-14T12:43:40 ok r78 parity
+2026-10-14T12:43:59 TRANSIENT r78 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:44:21 TRANSIENT-RECOVERED r78 deep after 1 retr(y/ies); transients so far: 14
+2026-10-14T12:44:21 ok r78 deep
+2026-10-14T12:44:21 ok r79 perf_baseline
+2026-10-14T12:44:21 ok r79 parity
+2026-10-14T12:44:40 TRANSIENT r79 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:45:01 TRANSIENT-RECOVERED r79 deep after 1 retr(y/ies); transients so far: 15
+2026-10-14T12:45:01 ok r79 deep
+2026-10-14T12:45:01 ok r80 perf_baseline
+2026-10-14T12:45:01 ok r80 parity
+2026-10-14T12:45:20 ok r80 deep
+2026-10-14T12:45:20 ok r81 perf_baseline
+2026-10-14T12:45:20 ok r81 parity
+2026-10-14T12:45:40 TRANSIENT r81 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:46:01 TRANSIENT r81 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:46:22 TRANSIENT-RECOVERED r81 deep after 2 retr(y/ies); transients so far: 16
+2026-10-14T12:46:22 ok r81 deep
+2026-10-14T12:46:22 ok r82 perf_baseline
+2026-10-14T12:46:22 ok r82 parity
+2026-10-14T12:46:41 ok r82 deep
+2026-10-14T12:46:41 ok r83 perf_baseline
+2026-10-14T12:46:41 ok r83 parity
+2026-10-14T12:47:00 ok r83 deep
+2026-10-14T12:47:00 ok r84 perf_baseline
+2026-10-14T12:47:01 ok r84 parity
+2026-10-14T12:47:19 ok r84 deep
+2026-10-14T12:47:20 ok r85 perf_baseline
+2026-10-14T12:47:20 ok r85 parity
+2026-10-14T12:47:38 ok r85 deep
+2026-10-14T12:47:39 ok r86 perf_baseline
+2026-10-14T12:47:39 ok r86 parity
+2026-10-14T12:47:58 ok r86 deep
+2026-10-14T12:47:58 ok r87 perf_baseline
+2026-10-14T12:47:58 ok r87 parity
+2026-10-14T12:48:17 ok r87 deep
+2026-10-14T12:48:17 ok r88 perf_baseline
+2026-10-14T12:48:17 ok r88 parity
+2026-10-14T12:48:36 ok r88 deep
+2026-10-14T12:48:36 ok r89 perf_baseline
+2026-10-14T12:48:37 ok r89 parity
+2026-10-14T12:48:56 TRANSIENT r89 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:49:17 TRANSIENT-RECOVERED r89 deep after 1 retr(y/ies); transients so far: 17
+2026-10-14T12:49:17 ok r89 deep
+2026-10-14T12:49:18 ok r90 perf_baseline
+2026-10-14T12:49:18 ok r90 parity
+2026-10-14T12:49:37 ok r90 deep
+2026-10-14T12:49:37 ok r91 perf_baseline
+2026-10-14T12:49:38 ok r91 parity
+2026-10-14T12:49:56 ok r91 deep
+2026-10-14T12:49:57 ok r92 perf_baseline
+2026-10-14T12:49:57 ok r92 parity
+2026-10-14T12:50:15 ok r92 deep
+2026-10-14T12:50:16 ok r93 perf_baseline
+2026-10-14T12:50:16 ok r93 parity
+2026-10-14T12:50:36 TRANSIENT r93 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:50:57 TRANSIENT r93 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:51:18 TRANSIENT-RECOVERED r93 deep after 2 retr(y/ies); transients so far: 18
+2026-10-14T12:51:18 ok r93 deep
+2026-10-14T12:51:18 ok r94 perf_baseline
+2026-10-14T12:51:19 ok r94 parity
+2026-10-14T12:51:37 ok r94 deep
+2026-10-14T12:51:38 ok r95 perf_baseline
+2026-10-14T12:51:38 ok r95 parity
+2026-10-14T12:51:56 ok r95 deep
+2026-10-14T12:51:57 ok r96 perf_baseline
+2026-10-14T12:51:57 ok r96 parity
+2026-10-14T12:52:16 ok r96 deep
+2026-10-14T12:52:16 ok r97 perf_baseline
+2026-10-14T12:52:16 ok r97 parity
+2026-10-14T12:52:35 ok r97 deep
+2026-10-14T12:52:35 ok r98 perf_baseline
+2026-10-14T12:52:35 ok r98 parity
+2026-10-14T12:52:54 ok r98 deep
+2026-10-14T12:52:55 ok r99 perf_baseline
+2026-10-14T12:52:55 ok r99 parity
+2026-10-14T12:53:13 ok r99 deep
+2026-10-14T12:53:14 ok r100 perf_baseline
+2026-10-14T12:53:14 ok r100 parity
+2026-10-14T12:53:33 ok r100 deep
+2026-10-14T12:53:33 ok r101 perf_baseline
+2026-10-14T12:53:33 ok r101 parity
+2026-10-14T12:53:52 TRANSIENT r101 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:54:13 TRANSIENT-RECOVERED r101 deep after 1 retr(y/ies); transients so far: 19
+2026-10-14T12:54:13 ok r101 deep
+2026-10-14T12:54:14 ok r102 perf_baseline
+2026-10-14T12:54:14 ok r102 parity
+2026-10-14T12:54:33 TRANSIENT r102 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:54:54 TRANSIENT-RECOVERED r102 deep after 1 retr(y/ies); transients so far: 20
+2026-10-14T12:54:54 ok r102 deep
+2026-10-14T12:54:54 ok r103 perf_baseline
+2026-10-14T12:54:54 ok r103 parity
+2026-10-14T12:55:13 ok r103 deep
+2026-10-14T12:55:13 ok r104 perf_baseline
+2026-10-14T12:55:13 ok r104 parity
+2026-10-14T12:55:33 TRANSIENT r104 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:55:54 TRANSIENT r104 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:56:14 TRANSIENT-RECOVERED r104 deep after 2 retr(y/ies); transients so far: 21
+2026-10-14T12:56:14 ok r104 deep
+2026-10-14T12:56:15 ok r105 perf_baseline
+2026-10-14T12:56:15 ok r105 parity
+2026-10-14T12:56:34 ok r105 deep
+2026-10-14T12:56:34 ok r106 perf_baseline
+2026-10-14T12:56:34 ok r106 parity
+2026-10-14T12:56:53 ok r106 deep
+2026-10-14T12:56:53 ok r107 perf_baseline
+2026-10-14T12:56:53 ok r107 parity
+2026-10-14T12:57:12 ok r107 deep
+2026-10-14T12:57:12 ok r108 perf_baseline
+2026-10-14T12:57:12 ok r108 parity
+2026-10-14T12:57:31 ok r108 deep
+2026-10-14T12:57:31 ok r109 perf_baseline
+2026-10-14T12:57:31 ok r109 parity
+2026-10-14T12:57:50 ok r109 deep
+2026-10-14T12:57:51 ok r110 perf_baseline
+2026-10-14T12:57:51 ok r110 parity
+2026-10-14T12:58:09 ok r110 deep
+2026-10-14T12:58:10 ok r111 perf_baseline
+2026-10-14T12:58:10 ok r111 parity
+2026-10-14T12:58:29 ok r111 deep
+2026-10-14T12:58:29 ok r112 perf_baseline
+2026-10-14T12:58:29 ok r112 parity
+2026-10-14T12:58:49 TRANSIENT r112 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T12:59:10 TRANSIENT-RECOVERED r112 deep after 1 retr(y/ies); transients so far: 22
+2026-10-14T12:59:10 ok r112 deep
+2026-10-14T12:59:10 ok r113 perf_baseline
+2026-10-14T12:59:10 ok r113 parity
+2026-10-14T12:59:29 ok r113 deep
+2026-10-14T12:59:30 ok r114 perf_baseline
+2026-10-14T12:59:30 ok r114 parity
+2026-10-14T12:59:49 ok r114 deep
+2026-10-14T12:59:49 ok r115 perf_baseline
+2026-10-14T12:59:49 ok r115 parity
+2026-10-14T13:00:08 ok r115 deep
+2026-10-14T13:00:08 ok r116 perf_baseline
+2026-10-14T13:00:08 ok r116 parity
+2026-10-14T13:00:27 ok r116 deep
+2026-10-14T13:00:28 ok r117 perf_baseline
+2026-10-14T13:00:29 ok r117 parity
+2026-10-14T13:00:47 TRANSIENT r117 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:01:08 TRANSIENT r117 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:01:29 TRANSIENT-RECOVERED r117 deep after 2 retr(y/ies); transients so far: 23
+2026-10-14T13:01:29 ok r117 deep
+2026-10-14T13:01:29 ok r118 perf_baseline
+2026-10-14T13:01:29 ok r118 parity
+2026-10-14T13:01:48 ok r118 deep
+2026-10-14T13:01:48 ok r119 perf_baseline
+2026-10-14T13:01:48 ok r119 parity
+2026-10-14T13:02:07 ok r119 deep
+2026-10-14T13:02:07 ok r120 perf_baseline
+2026-10-14T13:02:08 ok r120 parity
+2026-10-14T13:02:26 ok r120 deep
+2026-10-14T13:02:27 ok r121 perf_baseline
+2026-10-14T13:02:27 ok r121 parity
+2026-10-14T13:02:45 ok r121 deep
+2026-10-14T13:02:46 ok r122 perf_baseline
+2026-10-14T13:02:46 ok r122 parity
+2026-10-14T13:03:04 ok r122 deep
+2026-10-14T13:03:05 ok r123 perf_baseline
+2026-10-14T13:03:05 ok r123 parity
+2026-10-14T13:03:24 ok r123 deep
+2026-10-14T13:03:24 ok r124 perf_baseline
+2026-10-14T13:03:24 ok r124 parity
+2026-10-14T13:03:44 TRANSIENT r124 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:04:05 TRANSIENT r124 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T13:04:26 TRANSIENT-RECOVERED r124 deep after 2 retr(y/ies); transients so far: 24
+2026-10-14T13:04:26 ok r124 deep
+2026-10-14T13:04:27 ok r125 perf_baseline
+2026-10-14T13:04:27 ok r125 parity
+2026-10-14T13:04:45 ok r125 deep
+2026-10-14T13:04:46 ok r126 perf_baseline
+2026-10-14T13:04:46 ok r126 parity
+2026-10-14T13:05:04 ok r126 deep
+2026-10-14T13:05:05 ok r127 perf_baseline
+2026-10-14T13:05:05 ok r127 parity
+2026-10-14T13:05:24 ok r127 deep
+2026-10-14T13:05:24 ok r128 perf_baseline
+2026-10-14T13:05:24 ok r128 parity
+2026-10-14T13:05:43 TRANSIENT r128 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:06:04 TRANSIENT-RECOVERED r128 deep after 1 retr(y/ies); transients so far: 25
+2026-10-14T13:06:04 ok r128 deep
+2026-10-14T13:06:04 ok r129 perf_baseline
+2026-10-14T13:06:04 ok r129 parity
+2026-10-14T13:06:23 TRANSIENT r129 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:06:43 TRANSIENT-RECOVERED r129 deep after 1 retr(y/ies); transients so far: 26
+2026-10-14T13:06:43 ok r129 deep
+2026-10-14T13:06:44 ok r130 perf_baseline
+2026-10-14T13:06:44 ok r130 parity
+2026-10-14T13:07:03 ok r130 deep
+2026-10-14T13:07:03 ok r131 perf_baseline
+2026-10-14T13:07:03 ok r131 parity
+2026-10-14T13:07:22 ok r131 deep
+2026-10-14T13:07:22 ok r132 perf_baseline
+2026-10-14T13:07:22 ok r132 parity
+2026-10-14T13:07:41 ok r132 deep
+2026-10-14T13:07:41 ok r133 perf_baseline
+2026-10-14T13:07:42 ok r133 parity
+2026-10-14T13:08:00 ok r133 deep
+2026-10-14T13:08:01 ok r134 perf_baseline
+2026-10-14T13:08:01 ok r134 parity
+2026-10-14T13:08:19 ok r134 deep
+2026-10-14T13:08:20 ok r135 perf_baseline
+2026-10-14T13:08:20 ok r135 parity
+2026-10-14T13:08:39 ok r135 deep
+2026-10-14T13:08:39 ok r136 perf_baseline
+2026-10-14T13:08:39 ok r136 parity
+2026-10-14T13:08:58 TRANSIENT r136 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T13:09:20 TRANSIENT-RECOVERED r136 deep after 1 retr(y/ies); transients so far: 27
+2026-10-14T13:09:20 ok r136 deep
+2026-10-14T13:09:20 ok r137 perf_baseline
+2026-10-14T13:09:20 ok r137 parity
+2026-10-14T13:09:39 ok r137 deep
+2026-10-14T13:09:39 ok r138 perf_baseline
+2026-10-14T13:09:39 ok r138 parity
+2026-10-14T13:09:58 ok r138 deep
+2026-10-14T13:09:58 ok r139 perf_baseline
+2026-10-14T13:09:58 ok r139 parity
+2026-10-14T13:10:17 ok r139 deep
+2026-10-14T13:10:17 ok r140 perf_baseline
+2026-10-14T13:10:17 ok r140 parity
+2026-10-14T13:10:36 TRANSIENT r140 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:10:57 TRANSIENT-RECOVERED r140 deep after 1 retr(y/ies); transients so far: 28
+2026-10-14T13:10:57 ok r140 deep
+2026-10-14T13:10:57 ok r141 perf_baseline
+2026-10-14T13:10:57 ok r141 parity
+2026-10-14T13:11:16 ok r141 deep
+2026-10-14T13:11:17 ok r142 perf_baseline
+2026-10-14T13:11:17 ok r142 parity
+2026-10-14T13:11:35 ok r142 deep
+2026-10-14T13:11:36 ok r143 perf_baseline
+2026-10-14T13:11:36 ok r143 parity
+2026-10-14T13:11:54 ok r143 deep
+2026-10-14T13:11:55 ok r144 perf_baseline
+2026-10-14T13:11:55 ok r144 parity
+2026-10-14T13:12:14 ok r144 deep
+2026-10-14T13:12:14 ok r145 perf_baseline
+2026-10-14T13:12:14 ok r145 parity
+2026-10-14T13:12:33 ok r145 deep
+2026-10-14T13:12:33 ok r146 perf_baseline
+2026-10-14T13:12:34 ok r146 parity
+2026-10-14T13:12:52 ok r146 deep
+2026-10-14T13:12:53 ok r147 perf_baseline
+2026-10-14T13:12:53 ok r147 parity
+2026-10-14T13:13:11 ok r147 deep
+2026-10-14T13:13:12 ok r148 perf_baseline
+2026-10-14T13:13:12 ok r148 parity
+2026-10-14T13:13:31 ok r148 deep
+2026-10-14T13:13:31 ok r149 perf_baseline
+2026-10-14T13:13:31 ok r149 parity
+2026-10-14T13:13:50 TRANSIENT r149 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:14:11 TRANSIENT-RECOVERED r149 deep after 1 retr(y/ies); transients so far: 29
+2026-10-14T13:14:11 ok r149 deep
+2026-10-14T13:14:12 ok r150 perf_baseline
+2026-10-14T13:14:12 ok r150 parity
+2026-10-14T13:14:31 TRANSIENT r150 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:14:51 TRANSIENT-RECOVERED r150 deep after 1 retr(y/ies); transients so far: 30
+2026-10-14T13:14:51 ok r150 deep
+2026-10-14T13:14:52 ok r151 perf_baseline
+2026-10-14T13:14:52 ok r151 parity
+2026-10-14T13:15:10 ok r151 deep
+2026-10-14T13:15:11 ok r152 perf_baseline
+2026-10-14T13:15:11 ok r152 parity
+2026-10-14T13:15:31 TRANSIENT r152 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:15:52 TRANSIENT r152 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:16:13 TRANSIENT-RECOVERED r152 deep after 2 retr(y/ies); transients so far: 31
+2026-10-14T13:16:13 ok r152 deep
+2026-10-14T13:16:13 ok r153 perf_baseline
+2026-10-14T13:16:13 ok r153 parity
+2026-10-14T13:16:32 ok r153 deep
+2026-10-14T13:16:33 ok r154 perf_baseline
+2026-10-14T13:16:33 ok r154 parity
+2026-10-14T13:16:51 ok r154 deep
+2026-10-14T13:16:52 ok r155 perf_baseline
+2026-10-14T13:16:52 ok r155 parity
+2026-10-14T13:17:10 ok r155 deep
+2026-10-14T13:17:11 ok r156 perf_baseline
+2026-10-14T13:17:11 ok r156 parity
+2026-10-14T13:17:30 ok r156 deep
+2026-10-14T13:17:30 ok r157 perf_baseline
+2026-10-14T13:17:30 ok r157 parity
+2026-10-14T13:17:49 ok r157 deep
+2026-10-14T13:17:49 ok r158 perf_baseline
+2026-10-14T13:17:49 ok r158 parity
+2026-10-14T13:18:08 ok r158 deep
+2026-10-14T13:18:08 ok r159 perf_baseline
+2026-10-14T13:18:09 ok r159 parity
+2026-10-14T13:18:28 ok r159 deep
+2026-10-14T13:18:28 ok r160 perf_baseline
+2026-10-14T13:18:28 ok r160 parity
+2026-10-14T13:18:47 TRANSIENT r160 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:19:08 TRANSIENT-RECOVERED r160 deep after 1 retr(y/ies); transients so far: 32
+2026-10-14T13:19:08 ok r160 deep
+2026-10-14T13:19:08 ok r161 perf_baseline
+2026-10-14T13:19:09 ok r161 parity
+2026-10-14T13:19:28 TRANSIENT r161 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:19:48 TRANSIENT-RECOVERED r161 deep after 1 retr(y/ies); transients so far: 33
+2026-10-14T13:19:48 ok r161 deep
+2026-10-14T13:19:49 ok r162 perf_baseline
+2026-10-14T13:19:49 ok r162 parity
+2026-10-14T13:20:07 ok r162 deep
+2026-10-14T13:20:08 ok r163 perf_baseline
+2026-10-14T13:20:08 ok r163 parity
+2026-10-14T13:20:27 ok r163 deep
+2026-10-14T13:20:28 ok r164 perf_baseline
+2026-10-14T13:20:28 ok r164 parity
+2026-10-14T13:20:47 TRANSIENT r164 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:21:08 TRANSIENT r164 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:21:29 TRANSIENT-RECOVERED r164 deep after 2 retr(y/ies); transients so far: 34
+2026-10-14T13:21:29 ok r164 deep
+2026-10-14T13:21:29 ok r165 perf_baseline
+2026-10-14T13:21:29 ok r165 parity
+2026-10-14T13:21:48 ok r165 deep
+2026-10-14T13:21:48 ok r166 perf_baseline
+2026-10-14T13:21:49 ok r166 parity
+2026-10-14T13:22:07 ok r166 deep
+2026-10-14T13:22:08 ok r167 perf_baseline
+2026-10-14T13:22:08 ok r167 parity
+2026-10-14T13:22:26 ok r167 deep
+2026-10-14T13:22:27 ok r168 perf_baseline
+2026-10-14T13:22:27 ok r168 parity
+2026-10-14T13:22:46 ok r168 deep
+2026-10-14T13:22:46 ok r169 perf_baseline
+2026-10-14T13:22:46 ok r169 parity
+2026-10-14T13:23:05 ok r169 deep
+2026-10-14T13:23:05 ok r170 perf_baseline
+2026-10-14T13:23:05 ok r170 parity
+2026-10-14T13:23:24 ok r170 deep
+2026-10-14T13:23:24 ok r171 perf_baseline
+2026-10-14T13:23:25 ok r171 parity
+2026-10-14T13:23:43 TRANSIENT r171 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:24:05 TRANSIENT-RECOVERED r171 deep after 1 retr(y/ies); transients so far: 35
+2026-10-14T13:24:05 ok r171 deep
+2026-10-14T13:24:05 ok r172 perf_baseline
+2026-10-14T13:24:05 ok r172 parity
+2026-10-14T13:24:24 TRANSIENT r172 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:24:45 TRANSIENT-RECOVERED r172 deep after 1 retr(y/ies); transients so far: 36
+2026-10-14T13:24:45 ok r172 deep
+2026-10-14T13:24:45 ok r173 perf_baseline
+2026-10-14T13:24:45 ok r173 parity
+2026-10-14T13:25:04 ok r173 deep
+2026-10-14T13:25:04 ok r174 perf_baseline
+2026-10-14T13:25:04 ok r174 parity
+2026-10-14T13:25:24 TRANSIENT r174 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:25:45 TRANSIENT r174 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:26:05 TRANSIENT-RECOVERED r174 deep after 2 retr(y/ies); transients so far: 37
+2026-10-14T13:26:05 ok r174 deep
+2026-10-14T13:26:06 ok r175 perf_baseline
+2026-10-14T13:26:06 ok r175 parity
+2026-10-14T13:26:25 ok r175 deep
+2026-10-14T13:26:25 ok r176 perf_baseline
+2026-10-14T13:26:25 ok r176 parity
+2026-10-14T13:26:44 ok r176 deep
+2026-10-14T13:26:44 ok r177 perf_baseline
+2026-10-14T13:26:44 ok r177 parity
+2026-10-14T13:27:03 ok r177 deep
+2026-10-14T13:27:03 ok r178 perf_baseline
+2026-10-14T13:27:03 ok r178 parity
+2026-10-14T13:27:22 ok r178 deep
+2026-10-14T13:27:22 ok r179 perf_baseline
+2026-10-14T13:27:23 ok r179 parity
+2026-10-14T13:27:41 ok r179 deep
+2026-10-14T13:27:42 ok r180 perf_baseline
+2026-10-14T13:27:42 ok r180 parity
+2026-10-14T13:28:00 ok r180 deep
+2026-10-14T13:28:01 ok r181 perf_baseline
+2026-10-14T13:28:01 ok r181 parity
+2026-10-14T13:28:20 ok r181 deep
+2026-10-14T13:28:20 ok r182 perf_baseline
+2026-10-14T13:28:20 ok r182 parity
+2026-10-14T13:28:39 ok r182 deep
+2026-10-14T13:28:41 ok r183 perf_baseline
+2026-10-14T13:28:42 ok r183 parity
+2026-10-14T13:29:01 ok r183 deep
+2026-10-14T13:29:02 ok r184 perf_baseline
+2026-10-14T13:29:02 ok r184 parity
+2026-10-14T13:29:21 ok r184 deep
+2026-10-14T13:29:21 ok r185 perf_baseline
+2026-10-14T13:29:21 ok r185 parity
+2026-10-14T13:29:40 ok r185 deep
+2026-10-14T13:29:40 ok r186 perf_baseline
+2026-10-14T13:29:40 ok r186 parity
+2026-10-14T13:29:59 ok r186 deep
+2026-10-14T13:29:59 ok r187 perf_baseline
+2026-10-14T13:30:00 ok r187 parity
+2026-10-14T13:30:19 TRANSIENT r187 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:30:40 TRANSIENT r187 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:31:01 TRANSIENT-RECOVERED r187 deep after 2 retr(y/ies); transients so far: 38
+2026-10-14T13:31:01 ok r187 deep
+2026-10-14T13:31:01 ok r188 perf_baseline
+2026-10-14T13:31:02 ok r188 parity
+2026-10-14T13:31:20 ok r188 deep
+2026-10-14T13:31:21 ok r189 perf_baseline
+2026-10-14T13:31:21 ok r189 parity
+2026-10-14T13:31:39 ok r189 deep
+2026-10-14T13:31:40 ok r190 perf_baseline
+2026-10-14T13:31:40 ok r190 parity
+2026-10-14T13:31:58 ok r190 deep
+2026-10-14T13:31:59 ok r191 perf_baseline
+2026-10-14T13:31:59 ok r191 parity
+2026-10-14T13:32:18 ok r191 deep
+2026-10-14T13:32:18 ok r192 perf_baseline
+2026-10-14T13:32:18 ok r192 parity
+2026-10-14T13:32:37 ok r192 deep
+2026-10-14T13:32:37 ok r193 perf_baseline
+2026-10-14T13:32:37 ok r193 parity
+2026-10-14T13:32:56 ok r193 deep
+2026-10-14T13:32:56 ok r194 perf_baseline
+2026-10-14T13:32:57 ok r194 parity
+2026-10-14T13:33:15 ok r194 deep
+2026-10-14T13:33:16 ok r195 perf_baseline
+2026-10-14T13:33:16 ok r195 parity
+2026-10-14T13:33:35 TRANSIENT r195 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:33:57 TRANSIENT r195 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:34:18 TRANSIENT-RECOVERED r195 deep after 2 retr(y/ies); transients so far: 39
+2026-10-14T13:34:18 ok r195 deep
+2026-10-14T13:34:18 ok r196 perf_baseline
+2026-10-14T13:34:19 ok r196 parity
+2026-10-14T13:34:37 ok r196 deep
+2026-10-14T13:34:38 ok r197 perf_baseline
+2026-10-14T13:34:38 ok r197 parity
+2026-10-14T13:34:56 ok r197 deep
+2026-10-14T13:34:57 ok r198 perf_baseline
+2026-10-14T13:34:57 ok r198 parity
+2026-10-14T13:35:16 ok r198 deep
+2026-10-14T13:35:17 ok r199 perf_baseline
+2026-10-14T13:35:18 ok r199 parity
+2026-10-14T13:35:37 TRANSIENT r199 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:35:57 TRANSIENT-RECOVERED r199 deep after 1 retr(y/ies); transients so far: 40
+2026-10-14T13:35:57 ok r199 deep
+2026-10-14T13:35:58 ok r200 perf_baseline
+2026-10-14T13:35:58 ok r200 parity
+2026-10-14T13:36:17 ok r200 deep
+2026-10-14T13:36:17 ok r201 perf_baseline
+2026-10-14T13:36:17 ok r201 parity
+2026-10-14T13:36:36 ok r201 deep
+2026-10-14T13:36:36 ok r202 perf_baseline
+2026-10-14T13:36:36 ok r202 parity
+2026-10-14T13:36:55 ok r202 deep
+2026-10-14T13:36:55 ok r203 perf_baseline
+2026-10-14T13:36:55 ok r203 parity
+2026-10-14T13:37:14 ok r203 deep
+2026-10-14T13:37:14 ok r204 perf_baseline
+2026-10-14T13:37:15 ok r204 parity
+2026-10-14T13:37:33 ok r204 deep
+2026-10-14T13:37:34 ok r205 perf_baseline
+2026-10-14T13:37:34 ok r205 parity
+2026-10-14T13:37:52 ok r205 deep
+2026-10-14T13:37:53 ok r206 perf_baseline
+2026-10-14T13:37:53 ok r206 parity
+2026-10-14T13:38:12 ok r206 deep
+2026-10-14T13:38:12 ok r207 perf_baseline
+2026-10-14T13:38:12 ok r207 parity
+2026-10-14T13:38:31 ok r207 deep
+2026-10-14T13:38:33 ok r208 perf_baseline
+2026-10-14T13:38:34 ok r208 parity
+2026-10-14T13:38:53 TRANSIENT r208 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:39:14 TRANSIENT-RECOVERED r208 deep after 1 retr(y/ies); transients so far: 41
+2026-10-14T13:39:14 ok r208 deep
+2026-10-14T13:39:15 ok r209 perf_baseline
+2026-10-14T13:39:15 ok r209 parity
+2026-10-14T13:39:33 ok r209 deep
+2026-10-14T13:39:34 ok r210 perf_baseline
+2026-10-14T13:39:34 ok r210 parity
+2026-10-14T13:39:53 ok r210 deep
+2026-10-14T13:39:53 ok r211 perf_baseline
+2026-10-14T13:39:53 ok r211 parity
+2026-10-14T13:40:12 ok r211 deep
+2026-10-14T13:40:14 ok r212 perf_baseline
+2026-10-14T13:40:14 ok r212 parity
+2026-10-14T13:40:33 ok r212 deep
+2026-10-14T13:40:34 ok r213 perf_baseline
+2026-10-14T13:40:34 ok r213 parity
+2026-10-14T13:40:53 ok r213 deep
+2026-10-14T13:40:54 ok r214 perf_baseline
+2026-10-14T13:40:54 ok r214 parity
+2026-10-14T13:41:12 ok r214 deep
+2026-10-14T13:41:13 ok r215 perf_baseline
+2026-10-14T13:41:13 ok r215 parity
+2026-10-14T13:41:32 ok r215 deep
+2026-10-14T13:41:32 ok r216 perf_baseline
+2026-10-14T13:41:32 ok r216 parity
+2026-10-14T13:41:51 ok r216 deep
+2026-10-14T13:41:51 ok r217 perf_baseline
+2026-10-14T13:41:51 ok r217 parity
+2026-10-14T13:42:10 ok r217 deep
+2026-10-14T13:42:10 ok r218 perf_baseline
+2026-10-14T13:42:10 ok r218 parity
+2026-10-14T13:42:29 ok r218 deep
+2026-10-14T13:42:30 ok r219 perf_baseline
+2026-10-14T13:42:30 ok r219 parity
+2026-10-14T13:42:49 ok r219 deep
+2026-10-14T13:42:49 ok r220 perf_baseline
+2026-10-14T13:42:49 ok r220 parity
+2026-10-14T13:43:08 ok r220 deep
+2026-10-14T13:43:08 ok r221 perf_baseline
+2026-10-14T13:43:08 ok r221 parity
+2026-10-14T13:43:28 TRANSIENT r221 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:43:49 TRANSIENT-RECOVERED r221 deep after 1 retr(y/ies); transients so far: 42
+2026-10-14T13:43:49 ok r221 deep
+2026-10-14T13:43:50 ok r222 perf_baseline
+2026-10-14T13:43:50 ok r222 parity
+2026-10-14T13:44:09 ok r222 deep
+2026-10-14T13:44:10 ok r223 perf_baseline
+2026-10-14T13:44:10 ok r223 parity
+2026-10-14T13:44:28 ok r223 deep
+2026-10-14T13:44:29 ok r224 perf_baseline
+2026-10-14T13:44:29 ok r224 parity
+2026-10-14T13:44:47 ok r224 deep
+2026-10-14T13:44:48 ok r225 perf_baseline
+2026-10-14T13:44:48 ok r225 parity
+2026-10-14T13:45:06 ok r225 deep
+2026-10-14T13:45:07 ok r226 perf_baseline
+2026-10-14T13:45:08 ok r226 parity
+2026-10-14T13:45:27 TRANSIENT r226 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T13:45:47 TRANSIENT-RECOVERED r226 deep after 1 retr(y/ies); transients so far: 43
+2026-10-14T13:45:47 ok r226 deep
+2026-10-14T13:45:48 ok r227 perf_baseline
+2026-10-14T13:45:48 ok r227 parity
+2026-10-14T13:46:07 TRANSIENT r227 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:46:27 TRANSIENT-RECOVERED r227 deep after 1 retr(y/ies); transients so far: 44
+2026-10-14T13:46:27 ok r227 deep
+2026-10-14T13:46:28 ok r228 perf_baseline
+2026-10-14T13:46:28 ok r228 parity
+2026-10-14T13:46:46 ok r228 deep
+2026-10-14T13:46:47 ok r229 perf_baseline
+2026-10-14T13:46:47 ok r229 parity
+2026-10-14T13:47:05 ok r229 deep
+2026-10-14T13:47:06 ok r230 perf_baseline
+2026-10-14T13:47:06 ok r230 parity
+2026-10-14T13:47:25 ok r230 deep
+2026-10-14T13:47:25 ok r231 perf_baseline
+2026-10-14T13:47:25 ok r231 parity
+2026-10-14T13:47:44 ok r231 deep
+2026-10-14T13:47:44 ok r232 perf_baseline
+2026-10-14T13:47:45 ok r232 parity
+2026-10-14T13:48:03 ok r232 deep
+2026-10-14T13:48:04 ok r233 perf_baseline
+2026-10-14T13:48:04 ok r233 parity
+2026-10-14T13:48:23 ok r233 deep
+2026-10-14T13:48:23 ok r234 perf_baseline
+2026-10-14T13:48:24 ok r234 parity
+2026-10-14T13:48:43 TRANSIENT r234 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T13:49:05 TRANSIENT-RECOVERED r234 deep after 1 retr(y/ies); transients so far: 45
+2026-10-14T13:49:05 ok r234 deep
+2026-10-14T13:49:05 ok r235 perf_baseline
+2026-10-14T13:49:05 ok r235 parity
+2026-10-14T13:49:24 ok r235 deep
+2026-10-14T13:49:24 ok r236 perf_baseline
+2026-10-14T13:49:24 ok r236 parity
+2026-10-14T13:49:43 ok r236 deep
+2026-10-14T13:49:43 ok r237 perf_baseline
+2026-10-14T13:49:43 ok r237 parity
+2026-10-14T13:50:02 ok r237 deep
+2026-10-14T13:50:02 ok r238 perf_baseline
+2026-10-14T13:50:02 ok r238 parity
+2026-10-14T13:50:21 TRANSIENT r238 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:50:42 TRANSIENT-RECOVERED r238 deep after 1 retr(y/ies); transients so far: 46
+2026-10-14T13:50:42 ok r238 deep
+2026-10-14T13:50:42 ok r239 perf_baseline
+2026-10-14T13:50:42 ok r239 parity
+2026-10-14T13:51:01 ok r239 deep
+2026-10-14T13:51:02 ok r240 perf_baseline
+2026-10-14T13:51:02 ok r240 parity
+2026-10-14T13:51:21 ok r240 deep
+2026-10-14T13:51:21 ok r241 perf_baseline
+2026-10-14T13:51:21 ok r241 parity
+2026-10-14T13:51:40 ok r241 deep
+2026-10-14T13:51:40 ok r242 perf_baseline
+2026-10-14T13:51:40 ok r242 parity
+2026-10-14T13:51:59 ok r242 deep
+2026-10-14T13:51:59 ok r243 perf_baseline
+2026-10-14T13:51:59 ok r243 parity
+2026-10-14T13:52:18 ok r243 deep
+2026-10-14T13:52:19 ok r244 perf_baseline
+2026-10-14T13:52:19 ok r244 parity
+2026-10-14T13:52:37 ok r244 deep
+2026-10-14T13:52:38 ok r245 perf_baseline
+2026-10-14T13:52:38 ok r245 parity
+2026-10-14T13:52:56 ok r245 deep
+2026-10-14T13:52:57 ok r246 perf_baseline
+2026-10-14T13:52:57 ok r246 parity
+2026-10-14T13:53:16 ok r246 deep
+2026-10-14T13:53:16 ok r247 perf_baseline
+2026-10-14T13:53:16 ok r247 parity
+2026-10-14T13:53:35 TRANSIENT r247 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:53:56 TRANSIENT r247 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:54:17 TRANSIENT-RECOVERED r247 deep after 2 retr(y/ies); transients so far: 47
+2026-10-14T13:54:17 ok r247 deep
+2026-10-14T13:54:17 ok r248 perf_baseline
+2026-10-14T13:54:17 ok r248 parity
+2026-10-14T13:54:36 ok r248 deep
+2026-10-14T13:54:36 ok r249 perf_baseline
+2026-10-14T13:54:36 ok r249 parity
+2026-10-14T13:54:55 ok r249 deep
+2026-10-14T13:54:55 ok r250 perf_baseline
+2026-10-14T13:54:56 ok r250 parity
+2026-10-14T13:55:14 TRANSIENT r250 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:55:35 TRANSIENT-RECOVERED r250 deep after 1 retr(y/ies); transients so far: 48
+2026-10-14T13:55:35 ok r250 deep
+2026-10-14T13:55:35 ok r251 perf_baseline
+2026-10-14T13:55:36 ok r251 parity
+2026-10-14T13:55:54 ok r251 deep
+2026-10-14T13:55:55 ok r252 perf_baseline
+2026-10-14T13:55:55 ok r252 parity
+2026-10-14T13:56:13 ok r252 deep
+2026-10-14T13:56:14 ok r253 perf_baseline
+2026-10-14T13:56:14 ok r253 parity
+2026-10-14T13:56:33 ok r253 deep
+2026-10-14T13:56:33 ok r254 perf_baseline
+2026-10-14T13:56:33 ok r254 parity
+2026-10-14T13:56:52 ok r254 deep
+2026-10-14T13:56:52 ok r255 perf_baseline
+2026-10-14T13:56:52 ok r255 parity
+2026-10-14T13:57:11 ok r255 deep
+2026-10-14T13:57:11 ok r256 perf_baseline
+2026-10-14T13:57:11 ok r256 parity
+2026-10-14T13:57:30 ok r256 deep
+2026-10-14T13:57:31 ok r257 perf_baseline
+2026-10-14T13:57:31 ok r257 parity
+2026-10-14T13:57:49 ok r257 deep
+2026-10-14T13:57:50 ok r258 perf_baseline
+2026-10-14T13:57:50 ok r258 parity
+2026-10-14T13:58:08 ok r258 deep
+2026-10-14T13:58:09 ok r259 perf_baseline
+2026-10-14T13:58:09 ok r259 parity
+2026-10-14T13:58:28 TRANSIENT r259 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:58:49 TRANSIENT-RECOVERED r259 deep after 1 retr(y/ies); transients so far: 49
+2026-10-14T13:58:49 ok r259 deep
+2026-10-14T13:58:50 ok r260 perf_baseline
+2026-10-14T13:58:50 ok r260 parity
+2026-10-14T13:59:09 TRANSIENT r260 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T13:59:29 TRANSIENT-RECOVERED r260 deep after 1 retr(y/ies); transients so far: 50
+2026-10-14T13:59:29 ok r260 deep
+2026-10-14T13:59:30 ok r261 perf_baseline
+2026-10-14T13:59:30 ok r261 parity
+2026-10-14T13:59:48 ok r261 deep
+2026-10-14T13:59:49 ok r262 perf_baseline
+2026-10-14T13:59:49 ok r262 parity
+2026-10-14T14:00:08 ok r262 deep
+2026-10-14T14:00:10 ok r263 perf_baseline
+2026-10-14T14:00:11 ok r263 parity
+2026-10-14T14:00:30 TRANSIENT r263 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:00:51 TRANSIENT r263 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:01:12 TRANSIENT-RECOVERED r263 deep after 2 retr(y/ies); transients so far: 51
+2026-10-14T14:01:12 ok r263 deep
+2026-10-14T14:01:12 ok r264 perf_baseline
+2026-10-14T14:01:12 ok r264 parity
+2026-10-14T14:01:31 ok r264 deep
+2026-10-14T14:01:31 ok r265 perf_baseline
+2026-10-14T14:01:31 ok r265 parity
+2026-10-14T14:01:50 ok r265 deep
+2026-10-14T14:01:50 ok r266 perf_baseline
+2026-10-14T14:01:50 ok r266 parity
+2026-10-14T14:02:09 ok r266 deep
+2026-10-14T14:02:09 ok r267 perf_baseline
+2026-10-14T14:02:10 ok r267 parity
+2026-10-14T14:02:28 ok r267 deep
+2026-10-14T14:02:29 ok r268 perf_baseline
+2026-10-14T14:02:29 ok r268 parity
+2026-10-14T14:02:47 ok r268 deep
+2026-10-14T14:02:48 ok r269 perf_baseline
+2026-10-14T14:02:48 ok r269 parity
+2026-10-14T14:03:07 ok r269 deep
+2026-10-14T14:03:07 ok r270 perf_baseline
+2026-10-14T14:03:07 ok r270 parity
+2026-10-14T14:03:27 TRANSIENT r270 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:03:48 TRANSIENT-RECOVERED r270 deep after 1 retr(y/ies); transients so far: 52
+2026-10-14T14:03:48 ok r270 deep
+2026-10-14T14:03:48 ok r271 perf_baseline
+2026-10-14T14:03:48 ok r271 parity
+2026-10-14T14:04:08 ok r271 deep
+2026-10-14T14:04:08 ok r272 perf_baseline
+2026-10-14T14:04:08 ok r272 parity
+2026-10-14T14:04:27 ok r272 deep
+2026-10-14T14:04:27 ok r273 perf_baseline
+2026-10-14T14:04:27 ok r273 parity
+2026-10-14T14:04:46 ok r273 deep
+2026-10-14T14:04:46 ok r274 perf_baseline
+2026-10-14T14:04:46 ok r274 parity
+2026-10-14T14:05:06 ok r274 deep
+2026-10-14T14:05:07 ok r275 perf_baseline
+2026-10-14T14:05:08 ok r275 parity
+2026-10-14T14:05:28 TRANSIENT r275 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:05:49 TRANSIENT-RECOVERED r275 deep after 1 retr(y/ies); transients so far: 53
+2026-10-14T14:05:49 ok r275 deep
+2026-10-14T14:05:49 ok r276 perf_baseline
+2026-10-14T14:05:49 ok r276 parity
+2026-10-14T14:06:08 ok r276 deep
+2026-10-14T14:06:08 ok r277 perf_baseline
+2026-10-14T14:06:09 ok r277 parity
+2026-10-14T14:06:27 ok r277 deep
+2026-10-14T14:06:28 ok r278 perf_baseline
+2026-10-14T14:06:28 ok r278 parity
+2026-10-14T14:06:46 ok r278 deep
+2026-10-14T14:06:47 ok r279 perf_baseline
+2026-10-14T14:06:47 ok r279 parity
+2026-10-14T14:07:05 ok r279 deep
+2026-10-14T14:07:06 ok r280 perf_baseline
+2026-10-14T14:07:06 ok r280 parity
+2026-10-14T14:07:25 ok r280 deep
+2026-10-14T14:07:25 ok r281 perf_baseline
+2026-10-14T14:07:25 ok r281 parity
+2026-10-14T14:07:44 ok r281 deep
+2026-10-14T14:07:44 ok r282 perf_baseline
+2026-10-14T14:07:44 ok r282 parity
+2026-10-14T14:08:03 ok r282 deep
+2026-10-14T14:08:04 ok r283 perf_baseline
+2026-10-14T14:08:04 ok r283 parity
+2026-10-14T14:08:22 TRANSIENT r283 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:08:43 TRANSIENT-RECOVERED r283 deep after 1 retr(y/ies); transients so far: 54
+2026-10-14T14:08:43 ok r283 deep
+2026-10-14T14:08:44 ok r284 perf_baseline
+2026-10-14T14:08:44 ok r284 parity
+2026-10-14T14:09:03 TRANSIENT r284 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:09:24 TRANSIENT-RECOVERED r284 deep after 1 retr(y/ies); transients so far: 55
+2026-10-14T14:09:24 ok r284 deep
+2026-10-14T14:09:24 ok r285 perf_baseline
+2026-10-14T14:09:24 ok r285 parity
+2026-10-14T14:09:43 ok r285 deep
+2026-10-14T14:09:43 ok r286 perf_baseline
+2026-10-14T14:09:43 ok r286 parity
+2026-10-14T14:10:03 TRANSIENT r286 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:10:24 TRANSIENT r286 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:10:44 TRANSIENT-RECOVERED r286 deep after 2 retr(y/ies); transients so far: 56
+2026-10-14T14:10:44 ok r286 deep
+2026-10-14T14:10:45 ok r287 perf_baseline
+2026-10-14T14:10:45 ok r287 parity
+2026-10-14T14:11:04 ok r287 deep
+2026-10-14T14:11:04 ok r288 perf_baseline
+2026-10-14T14:11:04 ok r288 parity
+2026-10-14T14:11:23 ok r288 deep
+2026-10-14T14:11:23 ok r289 perf_baseline
+2026-10-14T14:11:23 ok r289 parity
+2026-10-14T14:11:42 ok r289 deep
+2026-10-14T14:11:42 ok r290 perf_baseline
+2026-10-14T14:11:42 ok r290 parity
+2026-10-14T14:12:01 ok r290 deep
+2026-10-14T14:12:02 ok r291 perf_baseline
+2026-10-14T14:12:02 ok r291 parity
+2026-10-14T14:12:20 ok r291 deep
+2026-10-14T14:12:21 ok r292 perf_baseline
+2026-10-14T14:12:21 ok r292 parity
+2026-10-14T14:12:39 ok r292 deep
+2026-10-14T14:12:40 ok r293 perf_baseline
+2026-10-14T14:12:40 ok r293 parity
+2026-10-14T14:12:59 ok r293 deep
+2026-10-14T14:12:59 ok r294 perf_baseline
+2026-10-14T14:13:00 ok r294 parity
+2026-10-14T14:13:18 TRANSIENT r294 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:13:39 TRANSIENT-RECOVERED r294 deep after 1 retr(y/ies); transients so far: 57
+2026-10-14T14:13:39 ok r294 deep
+2026-10-14T14:13:40 ok r295 perf_baseline
+2026-10-14T14:13:40 ok r295 parity
+2026-10-14T14:13:59 TRANSIENT r295 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:14:19 TRANSIENT-RECOVERED r295 deep after 1 retr(y/ies); transients so far: 58
+2026-10-14T14:14:19 ok r295 deep
+2026-10-14T14:14:20 ok r296 perf_baseline
+2026-10-14T14:14:20 ok r296 parity
+2026-10-14T14:14:38 ok r296 deep
+2026-10-14T14:14:39 ok r297 perf_baseline
+2026-10-14T14:14:39 ok r297 parity
+2026-10-14T14:14:58 ok r297 deep
+2026-10-14T14:14:59 ok r298 perf_baseline
+2026-10-14T14:15:00 ok r298 parity
+2026-10-14T14:15:19 TRANSIENT r298 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:15:40 TRANSIENT-RECOVERED r298 deep after 1 retr(y/ies); transients so far: 59
+2026-10-14T14:15:40 ok r298 deep
+2026-10-14T14:15:40 ok r299 perf_baseline
+2026-10-14T14:15:40 ok r299 parity
+2026-10-14T14:15:59 ok r299 deep
+2026-10-14T14:15:59 ok r300 perf_baseline
+2026-10-14T14:16:00 ok r300 parity
+2026-10-14T14:16:18 ok r300 deep
+2026-10-14T14:16:19 ok r301 perf_baseline
+2026-10-14T14:16:19 ok r301 parity
+2026-10-14T14:16:37 ok r301 deep
+2026-10-14T14:16:38 ok r302 perf_baseline
+2026-10-14T14:16:38 ok r302 parity
+2026-10-14T14:16:56 ok r302 deep
+2026-10-14T14:16:57 ok r303 perf_baseline
+2026-10-14T14:16:57 ok r303 parity
+2026-10-14T14:17:16 ok r303 deep
+2026-10-14T14:17:16 ok r304 perf_baseline
+2026-10-14T14:17:16 ok r304 parity
+2026-10-14T14:17:35 ok r304 deep
+2026-10-14T14:17:35 ok r305 perf_baseline
+2026-10-14T14:17:35 ok r305 parity
+2026-10-14T14:17:54 ok r305 deep
+2026-10-14T14:17:54 ok r306 perf_baseline
+2026-10-14T14:17:55 ok r306 parity
+2026-10-14T14:18:13 TRANSIENT r306 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:18:34 TRANSIENT-RECOVERED r306 deep after 1 retr(y/ies); transients so far: 60
+2026-10-14T14:18:34 ok r306 deep
+2026-10-14T14:18:35 ok r307 perf_baseline
+2026-10-14T14:18:35 ok r307 parity
+2026-10-14T14:18:54 TRANSIENT r307 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:19:14 TRANSIENT-RECOVERED r307 deep after 1 retr(y/ies); transients so far: 61
+2026-10-14T14:19:14 ok r307 deep
+2026-10-14T14:19:15 ok r308 perf_baseline
+2026-10-14T14:19:15 ok r308 parity
+2026-10-14T14:19:33 ok r308 deep
+2026-10-14T14:19:34 ok r309 perf_baseline
+2026-10-14T14:19:34 ok r309 parity
+2026-10-14T14:19:54 TRANSIENT r309 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:20:15 TRANSIENT r309 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:20:36 TRANSIENT r309 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 3/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:20:57 TRANSIENT-RECOVERED r309 deep after 3 retr(y/ies); transients so far: 62
+2026-10-14T14:20:57 ok r309 deep
+2026-10-14T14:20:57 ok r310 perf_baseline
+2026-10-14T14:20:57 ok r310 parity
+2026-10-14T14:21:16 ok r310 deep
+2026-10-14T14:21:16 ok r311 perf_baseline
+2026-10-14T14:21:16 ok r311 parity
+2026-10-14T14:21:35 ok r311 deep
+2026-10-14T14:21:35 ok r312 perf_baseline
+2026-10-14T14:21:35 ok r312 parity
+2026-10-14T14:21:54 ok r312 deep
+2026-10-14T14:21:55 ok r313 perf_baseline
+2026-10-14T14:21:55 ok r313 parity
+2026-10-14T14:22:13 ok r313 deep
+2026-10-14T14:22:14 ok r314 perf_baseline
+2026-10-14T14:22:14 ok r314 parity
+2026-10-14T14:22:33 ok r314 deep
+2026-10-14T14:22:33 ok r315 perf_baseline
+2026-10-14T14:22:33 ok r315 parity
+2026-10-14T14:22:52 ok r315 deep
+2026-10-14T14:22:52 ok r316 perf_baseline
+2026-10-14T14:22:52 ok r316 parity
+2026-10-14T14:23:11 TRANSIENT r316 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:23:32 TRANSIENT-RECOVERED r316 deep after 1 retr(y/ies); transients so far: 63
+2026-10-14T14:23:32 ok r316 deep
+2026-10-14T14:23:33 ok r317 perf_baseline
+2026-10-14T14:23:33 ok r317 parity
+2026-10-14T14:23:52 TRANSIENT r317 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:24:12 TRANSIENT-RECOVERED r317 deep after 1 retr(y/ies); transients so far: 64
+2026-10-14T14:24:12 ok r317 deep
+2026-10-14T14:24:13 ok r318 perf_baseline
+2026-10-14T14:24:13 ok r318 parity
+2026-10-14T14:24:31 ok r318 deep
+2026-10-14T14:24:32 ok r319 perf_baseline
+2026-10-14T14:24:32 ok r319 parity
+2026-10-14T14:24:51 ok r319 deep
+2026-10-14T14:24:52 ok r320 perf_baseline
+2026-10-14T14:24:52 ok r320 parity
+2026-10-14T14:25:12 TRANSIENT r320 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:25:33 TRANSIENT r320 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:25:53 TRANSIENT-RECOVERED r320 deep after 2 retr(y/ies); transients so far: 65
+2026-10-14T14:25:53 ok r320 deep
+2026-10-14T14:25:54 ok r321 perf_baseline
+2026-10-14T14:25:54 ok r321 parity
+2026-10-14T14:26:12 ok r321 deep
+2026-10-14T14:26:13 ok r322 perf_baseline
+2026-10-14T14:26:13 ok r322 parity
+2026-10-14T14:26:32 ok r322 deep
+2026-10-14T14:26:32 ok r323 perf_baseline
+2026-10-14T14:26:32 ok r323 parity
+2026-10-14T14:26:51 ok r323 deep
+2026-10-14T14:26:51 ok r324 perf_baseline
+2026-10-14T14:26:51 ok r324 parity
+2026-10-14T14:27:10 ok r324 deep
+2026-10-14T14:27:10 ok r325 perf_baseline
+2026-10-14T14:27:11 ok r325 parity
+2026-10-14T14:27:29 ok r325 deep
+2026-10-14T14:27:30 ok r326 perf_baseline
+2026-10-14T14:27:30 ok r326 parity
+2026-10-14T14:27:48 ok r326 deep
+2026-10-14T14:27:49 ok r327 perf_baseline
+2026-10-14T14:27:49 ok r327 parity
+2026-10-14T14:28:08 ok r327 deep
+2026-10-14T14:28:10 ok r328 perf_baseline
+2026-10-14T14:28:10 ok r328 parity
+2026-10-14T14:28:30 ok r328 deep
+2026-10-14T14:28:30 ok r329 perf_baseline
+2026-10-14T14:28:30 ok r329 parity
+2026-10-14T14:28:49 ok r329 deep
+2026-10-14T14:28:50 ok r330 perf_baseline
+2026-10-14T14:28:50 ok r330 parity
+2026-10-14T14:29:08 ok r330 deep
+2026-10-14T14:29:09 ok r331 perf_baseline
+2026-10-14T14:29:09 ok r331 parity
+2026-10-14T14:29:27 ok r331 deep
+2026-10-14T14:29:28 ok r332 perf_baseline
+2026-10-14T14:29:28 ok r332 parity
+2026-10-14T14:29:47 ok r332 deep
+2026-10-14T14:29:49 ok r333 perf_baseline
+2026-10-14T14:29:49 ok r333 parity
+2026-10-14T14:30:08 TRANSIENT r333 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:30:29 TRANSIENT-RECOVERED r333 deep after 1 retr(y/ies); transients so far: 66
+2026-10-14T14:30:29 ok r333 deep
+2026-10-14T14:30:29 ok r334 perf_baseline
+2026-10-14T14:30:30 ok r334 parity
+2026-10-14T14:30:48 ok r334 deep
+2026-10-14T14:30:49 ok r335 perf_baseline
+2026-10-14T14:30:49 ok r335 parity
+2026-10-14T14:31:07 ok r335 deep
+2026-10-14T14:31:08 ok r336 perf_baseline
+2026-10-14T14:31:08 ok r336 parity
+2026-10-14T14:31:26 ok r336 deep
+2026-10-14T14:31:27 ok r337 perf_baseline
+2026-10-14T14:31:27 ok r337 parity
+2026-10-14T14:31:45 ok r337 deep
+2026-10-14T14:31:46 ok r338 perf_baseline
+2026-10-14T14:31:46 ok r338 parity
+2026-10-14T14:32:05 ok r338 deep
+2026-10-14T14:32:05 ok r339 perf_baseline
+2026-10-14T14:32:05 ok r339 parity
+2026-10-14T14:32:24 ok r339 deep
+2026-10-14T14:32:24 ok r340 perf_baseline
+2026-10-14T14:32:24 ok r340 parity
+2026-10-14T14:32:43 ok r340 deep
+2026-10-14T14:32:44 ok r341 perf_baseline
+2026-10-14T14:32:44 ok r341 parity
+2026-10-14T14:33:03 TRANSIENT r341 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:33:24 TRANSIENT r341 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T14:33:46 TRANSIENT-RECOVERED r341 deep after 2 retr(y/ies); transients so far: 67
+2026-10-14T14:33:46 ok r341 deep
+2026-10-14T14:33:46 ok r342 perf_baseline
+2026-10-14T14:33:46 ok r342 parity
+2026-10-14T14:34:05 ok r342 deep
+2026-10-14T14:34:05 ok r343 perf_baseline
+2026-10-14T14:34:05 ok r343 parity
+2026-10-14T14:34:24 ok r343 deep
+2026-10-14T14:34:24 ok r344 perf_baseline
+2026-10-14T14:34:24 ok r344 parity
+2026-10-14T14:34:43 ok r344 deep
+2026-10-14T14:34:43 ok r345 perf_baseline
+2026-10-14T14:34:44 ok r345 parity
+2026-10-14T14:35:02 TRANSIENT r345 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T14:35:23 TRANSIENT-RECOVERED r345 deep after 1 retr(y/ies); transients so far: 68
+2026-10-14T14:35:23 ok r345 deep
+2026-10-14T14:35:24 ok r346 perf_baseline
+2026-10-14T14:35:24 ok r346 parity
+2026-10-14T14:35:42 TRANSIENT r346 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:36:03 TRANSIENT-RECOVERED r346 deep after 1 retr(y/ies); transients so far: 69
+2026-10-14T14:36:03 ok r346 deep
+2026-10-14T14:36:03 ok r347 perf_baseline
+2026-10-14T14:36:03 ok r347 parity
+2026-10-14T14:36:22 ok r347 deep
+2026-10-14T14:36:22 ok r348 perf_baseline
+2026-10-14T14:36:23 ok r348 parity
+2026-10-14T14:36:41 ok r348 deep
+2026-10-14T14:36:42 ok r349 perf_baseline
+2026-10-14T14:36:42 ok r349 parity
+2026-10-14T14:37:01 ok r349 deep
+2026-10-14T14:37:01 ok r350 perf_baseline
+2026-10-14T14:37:01 ok r350 parity
+2026-10-14T14:37:20 ok r350 deep
+2026-10-14T14:37:20 ok r351 perf_baseline
+2026-10-14T14:37:20 ok r351 parity
+2026-10-14T14:37:39 ok r351 deep
+2026-10-14T14:37:40 ok r352 perf_baseline
+2026-10-14T14:37:40 ok r352 parity
+2026-10-14T14:37:58 ok r352 deep
+2026-10-14T14:37:59 ok r353 perf_baseline
+2026-10-14T14:37:59 ok r353 parity
+2026-10-14T14:38:18 TRANSIENT r353 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T14:38:39 TRANSIENT-RECOVERED r353 deep after 1 retr(y/ies); transients so far: 70
+2026-10-14T14:38:39 ok r353 deep
+2026-10-14T14:38:40 ok r354 perf_baseline
+2026-10-14T14:38:40 ok r354 parity
+2026-10-14T14:38:58 ok r354 deep
+2026-10-14T14:38:59 ok r355 perf_baseline
+2026-10-14T14:38:59 ok r355 parity
+2026-10-14T14:39:17 ok r355 deep
+2026-10-14T14:39:18 ok r356 perf_baseline
+2026-10-14T14:39:18 ok r356 parity
+2026-10-14T14:39:36 ok r356 deep
+2026-10-14T14:39:37 ok r357 perf_baseline
+2026-10-14T14:39:37 ok r357 parity
+2026-10-14T14:39:56 TRANSIENT r357 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:40:17 TRANSIENT-RECOVERED r357 deep after 1 retr(y/ies); transients so far: 71
+2026-10-14T14:40:17 ok r357 deep
+2026-10-14T14:40:17 ok r358 perf_baseline
+2026-10-14T14:40:17 ok r358 parity
+2026-10-14T14:40:36 ok r358 deep
+2026-10-14T14:40:37 ok r359 perf_baseline
+2026-10-14T14:40:37 ok r359 parity
+2026-10-14T14:40:56 ok r359 deep
+2026-10-14T14:40:56 ok r360 perf_baseline
+2026-10-14T14:40:56 ok r360 parity
+2026-10-14T14:41:15 ok r360 deep
+2026-10-14T14:41:15 ok r361 perf_baseline
+2026-10-14T14:41:16 ok r361 parity
+2026-10-14T14:41:34 ok r361 deep
+2026-10-14T14:41:35 ok r362 perf_baseline
+2026-10-14T14:41:35 ok r362 parity
+2026-10-14T14:41:53 ok r362 deep
+2026-10-14T14:41:54 ok r363 perf_baseline
+2026-10-14T14:41:54 ok r363 parity
+2026-10-14T14:42:13 ok r363 deep
+2026-10-14T14:42:13 ok r364 perf_baseline
+2026-10-14T14:42:13 ok r364 parity
+2026-10-14T14:42:32 ok r364 deep
+2026-10-14T14:42:32 ok r365 perf_baseline
+2026-10-14T14:42:32 ok r365 parity
+2026-10-14T14:42:51 ok r365 deep
+2026-10-14T14:42:51 ok r366 perf_baseline
+2026-10-14T14:42:51 ok r366 parity
+2026-10-14T14:43:10 TRANSIENT r366 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:43:31 TRANSIENT-RECOVERED r366 deep after 1 retr(y/ies); transients so far: 72
+2026-10-14T14:43:31 ok r366 deep
+2026-10-14T14:43:32 ok r367 perf_baseline
+2026-10-14T14:43:32 ok r367 parity
+2026-10-14T14:43:51 TRANSIENT r367 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:44:11 TRANSIENT-RECOVERED r367 deep after 1 retr(y/ies); transients so far: 73
+2026-10-14T14:44:11 ok r367 deep
+2026-10-14T14:44:12 ok r368 perf_baseline
+2026-10-14T14:44:12 ok r368 parity
+2026-10-14T14:44:30 ok r368 deep
+2026-10-14T14:44:31 ok r369 perf_baseline
+2026-10-14T14:44:31 ok r369 parity
+2026-10-14T14:44:50 ok r369 deep
+2026-10-14T14:44:52 ok r370 perf_baseline
+2026-10-14T14:44:52 ok r370 parity
+2026-10-14T14:45:11 TRANSIENT r370 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:45:32 TRANSIENT-RECOVERED r370 deep after 1 retr(y/ies); transients so far: 74
+2026-10-14T14:45:32 ok r370 deep
+2026-10-14T14:45:32 ok r371 perf_baseline
+2026-10-14T14:45:32 ok r371 parity
+2026-10-14T14:45:51 ok r371 deep
+2026-10-14T14:45:51 ok r372 perf_baseline
+2026-10-14T14:45:52 ok r372 parity
+2026-10-14T14:46:10 ok r372 deep
+2026-10-14T14:46:11 ok r373 perf_baseline
+2026-10-14T14:46:11 ok r373 parity
+2026-10-14T14:46:29 ok r373 deep
+2026-10-14T14:46:30 ok r374 perf_baseline
+2026-10-14T14:46:30 ok r374 parity
+2026-10-14T14:46:48 ok r374 deep
+2026-10-14T14:46:49 ok r375 perf_baseline
+2026-10-14T14:46:49 ok r375 parity
+2026-10-14T14:47:08 ok r375 deep
+2026-10-14T14:47:08 ok r376 perf_baseline
+2026-10-14T14:47:08 ok r376 parity
+2026-10-14T14:47:27 ok r376 deep
+2026-10-14T14:47:27 ok r377 perf_baseline
+2026-10-14T14:47:27 ok r377 parity
+2026-10-14T14:47:46 ok r377 deep
+2026-10-14T14:47:46 ok r378 perf_baseline
+2026-10-14T14:47:47 ok r378 parity
+2026-10-14T14:48:06 TRANSIENT r378 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:48:27 TRANSIENT r378 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:48:48 TRANSIENT-RECOVERED r378 deep after 2 retr(y/ies); transients so far: 75
+2026-10-14T14:48:48 ok r378 deep
+2026-10-14T14:48:48 ok r379 perf_baseline
+2026-10-14T14:48:48 ok r379 parity
+2026-10-14T14:49:07 ok r379 deep
+2026-10-14T14:49:07 ok r380 perf_baseline
+2026-10-14T14:49:08 ok r380 parity
+2026-10-14T14:49:26 ok r380 deep
+2026-10-14T14:49:27 ok r381 perf_baseline
+2026-10-14T14:49:27 ok r381 parity
+2026-10-14T14:49:46 ok r381 deep
+2026-10-14T14:49:47 ok r382 perf_baseline
+2026-10-14T14:49:48 ok r382 parity
+2026-10-14T14:50:07 TRANSIENT r382 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T14:50:28 TRANSIENT-RECOVERED r382 deep after 1 retr(y/ies); transients so far: 76
+2026-10-14T14:50:28 ok r382 deep
+2026-10-14T14:50:29 ok r383 perf_baseline
+2026-10-14T14:50:29 ok r383 parity
+2026-10-14T14:50:48 ok r383 deep
+2026-10-14T14:50:48 ok r384 perf_baseline
+2026-10-14T14:50:48 ok r384 parity
+2026-10-14T14:51:07 ok r384 deep
+2026-10-14T14:51:07 ok r385 perf_baseline
+2026-10-14T14:51:07 ok r385 parity
+2026-10-14T14:51:26 ok r385 deep
+2026-10-14T14:51:26 ok r386 perf_baseline
+2026-10-14T14:51:26 ok r386 parity
+2026-10-14T14:51:45 ok r386 deep
+2026-10-14T14:51:46 ok r387 perf_baseline
+2026-10-14T14:51:46 ok r387 parity
+2026-10-14T14:52:04 ok r387 deep
+2026-10-14T14:52:05 ok r388 perf_baseline
+2026-10-14T14:52:05 ok r388 parity
+2026-10-14T14:52:23 ok r388 deep
+2026-10-14T14:52:24 ok r389 perf_baseline
+2026-10-14T14:52:24 ok r389 parity
+2026-10-14T14:52:43 ok r389 deep
+2026-10-14T14:52:43 ok r390 perf_baseline
+2026-10-14T14:52:43 ok r390 parity
+2026-10-14T14:53:03 TRANSIENT r390 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:53:24 TRANSIENT r390 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:53:46 TRANSIENT-RECOVERED r390 deep after 2 retr(y/ies); transients so far: 77
+2026-10-14T14:53:46 ok r390 deep
+2026-10-14T14:53:46 ok r391 perf_baseline
+2026-10-14T14:53:46 ok r391 parity
+2026-10-14T14:54:05 ok r391 deep
+2026-10-14T14:54:05 ok r392 perf_baseline
+2026-10-14T14:54:05 ok r392 parity
+2026-10-14T14:54:24 ok r392 deep
+2026-10-14T14:54:24 ok r393 perf_baseline
+2026-10-14T14:54:24 ok r393 parity
+2026-10-14T14:54:44 TRANSIENT r393 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:55:05 TRANSIENT r393 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T14:55:26 TRANSIENT-RECOVERED r393 deep after 2 retr(y/ies); transients so far: 78
+2026-10-14T14:55:26 ok r393 deep
+2026-10-14T14:55:27 ok r394 perf_baseline
+2026-10-14T14:55:27 ok r394 parity
+2026-10-14T14:55:45 ok r394 deep
+2026-10-14T14:55:46 ok r395 perf_baseline
+2026-10-14T14:55:46 ok r395 parity
+2026-10-14T14:56:04 ok r395 deep
+2026-10-14T14:56:05 ok r396 perf_baseline
+2026-10-14T14:56:05 ok r396 parity
+2026-10-14T14:56:24 ok r396 deep
+2026-10-14T14:56:24 ok r397 perf_baseline
+2026-10-14T14:56:24 ok r397 parity
+2026-10-14T14:56:43 ok r397 deep
+2026-10-14T14:56:43 ok r398 perf_baseline
+2026-10-14T14:56:43 ok r398 parity
+2026-10-14T14:57:02 ok r398 deep
+2026-10-14T14:57:03 ok r399 perf_baseline
+2026-10-14T14:57:03 ok r399 parity
+2026-10-14T14:57:21 ok r399 deep
+2026-10-14T14:57:22 ok r400 perf_baseline
+2026-10-14T14:57:22 ok r400 parity
+2026-10-14T14:57:41 ok r400 deep
+2026-10-14T14:57:41 ok r401 perf_baseline
+2026-10-14T14:57:41 ok r401 parity
+2026-10-14T14:58:00 ok r401 deep
+2026-10-14T14:58:02 ok r402 perf_baseline
+2026-10-14T14:58:03 ok r402 parity
+2026-10-14T14:58:22 ok r402 deep
+2026-10-14T14:58:23 ok r403 perf_baseline
+2026-10-14T14:58:23 ok r403 parity
+2026-10-14T14:58:42 ok r403 deep
+2026-10-14T14:58:42 ok r404 perf_baseline
+2026-10-14T14:58:42 ok r404 parity
+2026-10-14T14:59:01 ok r404 deep
+2026-10-14T14:59:01 ok r405 perf_baseline
+2026-10-14T14:59:01 ok r405 parity
+2026-10-14T14:59:20 ok r405 deep
+2026-10-14T14:59:20 ok r406 perf_baseline
+2026-10-14T14:59:20 ok r406 parity
+2026-10-14T14:59:39 ok r406 deep
+2026-10-14T14:59:41 ok r407 perf_baseline
+2026-10-14T14:59:42 ok r407 parity
+2026-10-14T15:00:01 TRANSIENT r407 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:00:22 TRANSIENT-RECOVERED r407 deep after 1 retr(y/ies); transients so far: 79
+2026-10-14T15:00:22 ok r407 deep
+2026-10-14T15:00:22 ok r408 perf_baseline
+2026-10-14T15:00:22 ok r408 parity
+2026-10-14T15:00:41 ok r408 deep
+2026-10-14T15:00:41 ok r409 perf_baseline
+2026-10-14T15:00:42 ok r409 parity
+2026-10-14T15:01:00 ok r409 deep
+2026-10-14T15:01:01 ok r410 perf_baseline
+2026-10-14T15:01:01 ok r410 parity
+2026-10-14T15:01:19 ok r410 deep
+2026-10-14T15:01:20 ok r411 perf_baseline
+2026-10-14T15:01:20 ok r411 parity
+2026-10-14T15:01:38 ok r411 deep
+2026-10-14T15:01:39 ok r412 perf_baseline
+2026-10-14T15:01:39 ok r412 parity
+2026-10-14T15:01:58 ok r412 deep
+2026-10-14T15:01:58 ok r413 perf_baseline
+2026-10-14T15:01:58 ok r413 parity
+2026-10-14T15:02:17 ok r413 deep
+2026-10-14T15:02:17 ok r414 perf_baseline
+2026-10-14T15:02:17 ok r414 parity
+2026-10-14T15:02:36 ok r414 deep
+2026-10-14T15:02:36 ok r415 perf_baseline
+2026-10-14T15:02:36 ok r415 parity
+2026-10-14T15:02:56 TRANSIENT r415 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:03:17 TRANSIENT r415 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:03:38 TRANSIENT r415 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 3/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:03:59 TRANSIENT-RECOVERED r415 deep after 3 retr(y/ies); transients so far: 80
+2026-10-14T15:03:59 ok r415 deep
+2026-10-14T15:04:00 ok r416 perf_baseline
+2026-10-14T15:04:00 ok r416 parity
+2026-10-14T15:04:18 ok r416 deep
+2026-10-14T15:04:19 ok r417 perf_baseline
+2026-10-14T15:04:19 ok r417 parity
+2026-10-14T15:04:37 ok r417 deep
+2026-10-14T15:04:38 ok r418 perf_baseline
+2026-10-14T15:04:38 ok r418 parity
+2026-10-14T15:04:57 TRANSIENT r418 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:05:17 TRANSIENT-RECOVERED r418 deep after 1 retr(y/ies); transients so far: 81
+2026-10-14T15:05:17 ok r418 deep
+2026-10-14T15:05:18 ok r419 perf_baseline
+2026-10-14T15:05:18 ok r419 parity
+2026-10-14T15:05:37 TRANSIENT r419 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:05:57 TRANSIENT-RECOVERED r419 deep after 1 retr(y/ies); transients so far: 82
+2026-10-14T15:05:57 ok r419 deep
+2026-10-14T15:05:58 ok r420 perf_baseline
+2026-10-14T15:05:58 ok r420 parity
+2026-10-14T15:06:16 ok r420 deep
+2026-10-14T15:06:17 ok r421 perf_baseline
+2026-10-14T15:06:17 ok r421 parity
+2026-10-14T15:06:35 ok r421 deep
+2026-10-14T15:06:36 ok r422 perf_baseline
+2026-10-14T15:06:36 ok r422 parity
+2026-10-14T15:06:55 ok r422 deep
+2026-10-14T15:06:56 ok r423 perf_baseline
+2026-10-14T15:06:56 ok r423 parity
+2026-10-14T15:07:14 ok r423 deep
+2026-10-14T15:07:15 ok r424 perf_baseline
+2026-10-14T15:07:15 ok r424 parity
+2026-10-14T15:07:34 ok r424 deep
+2026-10-14T15:07:34 ok r425 perf_baseline
+2026-10-14T15:07:34 ok r425 parity
+2026-10-14T15:07:53 ok r425 deep
+2026-10-14T15:07:53 ok r426 perf_baseline
+2026-10-14T15:07:53 ok r426 parity
+2026-10-14T15:08:12 TRANSIENT r426 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:08:34 TRANSIENT r426 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:08:54 TRANSIENT-RECOVERED r426 deep after 2 retr(y/ies); transients so far: 83
+2026-10-14T15:08:54 ok r426 deep
+2026-10-14T15:08:55 ok r427 perf_baseline
+2026-10-14T15:08:55 ok r427 parity
+2026-10-14T15:09:13 ok r427 deep
+2026-10-14T15:09:14 ok r428 perf_baseline
+2026-10-14T15:09:14 ok r428 parity
+2026-10-14T15:09:32 ok r428 deep
+2026-10-14T15:09:33 ok r429 perf_baseline
+2026-10-14T15:09:33 ok r429 parity
+2026-10-14T15:09:52 TRANSIENT r429 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:10:12 TRANSIENT-RECOVERED r429 deep after 1 retr(y/ies); transients so far: 84
+2026-10-14T15:10:12 ok r429 deep
+2026-10-14T15:10:13 ok r430 perf_baseline
+2026-10-14T15:10:13 ok r430 parity
+2026-10-14T15:10:31 ok r430 deep
+2026-10-14T15:10:32 ok r431 perf_baseline
+2026-10-14T15:10:32 ok r431 parity
+2026-10-14T15:10:51 ok r431 deep
+2026-10-14T15:10:51 ok r432 perf_baseline
+2026-10-14T15:10:51 ok r432 parity
+2026-10-14T15:11:10 ok r432 deep
+2026-10-14T15:11:10 ok r433 perf_baseline
+2026-10-14T15:11:10 ok r433 parity
+2026-10-14T15:11:29 ok r433 deep
+2026-10-14T15:11:29 ok r434 perf_baseline
+2026-10-14T15:11:30 ok r434 parity
+2026-10-14T15:11:48 ok r434 deep
+2026-10-14T15:11:49 ok r435 perf_baseline
+2026-10-14T15:11:49 ok r435 parity
+2026-10-14T15:12:07 ok r435 deep
+2026-10-14T15:12:08 ok r436 perf_baseline
+2026-10-14T15:12:08 ok r436 parity
+2026-10-14T15:12:27 ok r436 deep
+2026-10-14T15:12:27 ok r437 perf_baseline
+2026-10-14T15:12:27 ok r437 parity
+2026-10-14T15:12:46 ok r437 deep
+2026-10-14T15:12:47 ok r438 perf_baseline
+2026-10-14T15:12:47 ok r438 parity
+2026-10-14T15:13:06 TRANSIENT r438 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:13:28 TRANSIENT-RECOVERED r438 deep after 1 retr(y/ies); transients so far: 85
+2026-10-14T15:13:28 ok r438 deep
+2026-10-14T15:13:28 ok r439 perf_baseline
+2026-10-14T15:13:28 ok r439 parity
+2026-10-14T15:13:47 ok r439 deep
+2026-10-14T15:13:48 ok r440 perf_baseline
+2026-10-14T15:13:48 ok r440 parity
+2026-10-14T15:14:06 ok r440 deep
+2026-10-14T15:14:07 ok r441 perf_baseline
+2026-10-14T15:14:07 ok r441 parity
+2026-10-14T15:14:26 ok r441 deep
+2026-10-14T15:14:26 ok r442 perf_baseline
+2026-10-14T15:14:26 ok r442 parity
+2026-10-14T15:14:46 TRANSIENT r442 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:15:07 TRANSIENT r442 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:15:28 TRANSIENT-RECOVERED r442 deep after 2 retr(y/ies); transients so far: 86
+2026-10-14T15:15:28 ok r442 deep
+2026-10-14T15:15:29 ok r443 perf_baseline
+2026-10-14T15:15:29 ok r443 parity
+2026-10-14T15:15:47 ok r443 deep
+2026-10-14T15:15:48 ok r444 perf_baseline
+2026-10-14T15:15:48 ok r444 parity
+2026-10-14T15:16:07 ok r444 deep
+2026-10-14T15:16:07 ok r445 perf_baseline
+2026-10-14T15:16:07 ok r445 parity
+2026-10-14T15:16:26 ok r445 deep
+2026-10-14T15:16:26 ok r446 perf_baseline
+2026-10-14T15:16:26 ok r446 parity
+2026-10-14T15:16:45 ok r446 deep
+2026-10-14T15:16:45 ok r447 perf_baseline
+2026-10-14T15:16:45 ok r447 parity
+2026-10-14T15:17:04 ok r447 deep
+2026-10-14T15:17:05 ok r448 perf_baseline
+2026-10-14T15:17:05 ok r448 parity
+2026-10-14T15:17:23 ok r448 deep
+2026-10-14T15:17:24 ok r449 perf_baseline
+2026-10-14T15:17:24 ok r449 parity
+2026-10-14T15:17:43 ok r449 deep
+2026-10-14T15:17:43 ok r450 perf_baseline
+2026-10-14T15:17:43 ok r450 parity
+2026-10-14T15:18:03 TRANSIENT r450 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:18:24 TRANSIENT-RECOVERED r450 deep after 1 retr(y/ies); transients so far: 87
+2026-10-14T15:18:24 ok r450 deep
+2026-10-14T15:18:24 ok r451 perf_baseline
+2026-10-14T15:18:25 ok r451 parity
+2026-10-14T15:18:44 TRANSIENT r451 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:19:04 TRANSIENT-RECOVERED r451 deep after 1 retr(y/ies); transients so far: 88
+2026-10-14T15:19:04 ok r451 deep
+2026-10-14T15:19:05 ok r452 perf_baseline
+2026-10-14T15:19:05 ok r452 parity
+2026-10-14T15:19:23 ok r452 deep
+2026-10-14T15:19:24 ok r453 perf_baseline
+2026-10-14T15:19:24 ok r453 parity
+2026-10-14T15:19:43 TRANSIENT r453 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:20:04 TRANSIENT-RECOVERED r453 deep after 1 retr(y/ies); transients so far: 89
+2026-10-14T15:20:04 ok r453 deep
+2026-10-14T15:20:05 ok r454 perf_baseline
+2026-10-14T15:20:05 ok r454 parity
+2026-10-14T15:20:23 ok r454 deep
+2026-10-14T15:20:24 ok r455 perf_baseline
+2026-10-14T15:20:24 ok r455 parity
+2026-10-14T15:20:42 ok r455 deep
+2026-10-14T15:20:43 ok r456 perf_baseline
+2026-10-14T15:20:43 ok r456 parity
+2026-10-14T15:21:02 ok r456 deep
+2026-10-14T15:21:02 ok r457 perf_baseline
+2026-10-14T15:21:02 ok r457 parity
+2026-10-14T15:21:21 ok r457 deep
+2026-10-14T15:21:21 ok r458 perf_baseline
+2026-10-14T15:21:21 ok r458 parity
+2026-10-14T15:21:40 ok r458 deep
+2026-10-14T15:21:40 ok r459 perf_baseline
+2026-10-14T15:21:40 ok r459 parity
+2026-10-14T15:21:59 ok r459 deep
+2026-10-14T15:22:00 ok r460 perf_baseline
+2026-10-14T15:22:00 ok r460 parity
+2026-10-14T15:22:18 ok r460 deep
+2026-10-14T15:22:19 ok r461 perf_baseline
+2026-10-14T15:22:19 ok r461 parity
+2026-10-14T15:22:38 ok r461 deep
+2026-10-14T15:22:38 ok r462 perf_baseline
+2026-10-14T15:22:38 ok r462 parity
+2026-10-14T15:22:58 TRANSIENT r462 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:23:19 TRANSIENT-RECOVERED r462 deep after 1 retr(y/ies); transients so far: 90
+2026-10-14T15:23:19 ok r462 deep
+2026-10-14T15:23:19 ok r463 perf_baseline
+2026-10-14T15:23:19 ok r463 parity
+2026-10-14T15:23:39 ok r463 deep
+2026-10-14T15:23:39 ok r464 perf_baseline
+2026-10-14T15:23:39 ok r464 parity
+2026-10-14T15:23:58 ok r464 deep
+2026-10-14T15:23:58 ok r465 perf_baseline
+2026-10-14T15:23:58 ok r465 parity
+2026-10-14T15:24:17 ok r465 deep
+2026-10-14T15:24:17 ok r466 perf_baseline
+2026-10-14T15:24:17 ok r466 parity
+2026-10-14T15:24:36 ok r466 deep
+2026-10-14T15:24:38 ok r467 perf_baseline
+2026-10-14T15:24:39 ok r467 parity
+2026-10-14T15:24:58 TRANSIENT r467 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:25:19 TRANSIENT-RECOVERED r467 deep after 1 retr(y/ies); transients so far: 91
+2026-10-14T15:25:19 ok r467 deep
+2026-10-14T15:25:20 ok r468 perf_baseline
+2026-10-14T15:25:20 ok r468 parity
+2026-10-14T15:25:39 ok r468 deep
+2026-10-14T15:25:40 ok r469 perf_baseline
+2026-10-14T15:25:40 ok r469 parity
+2026-10-14T15:25:58 ok r469 deep
+2026-10-14T15:25:59 ok r470 perf_baseline
+2026-10-14T15:25:59 ok r470 parity
+2026-10-14T15:26:17 ok r470 deep
+2026-10-14T15:26:18 ok r471 perf_baseline
+2026-10-14T15:26:18 ok r471 parity
+2026-10-14T15:26:36 ok r471 deep
+2026-10-14T15:26:37 ok r472 perf_baseline
+2026-10-14T15:26:37 ok r472 parity
+2026-10-14T15:26:56 ok r472 deep
+2026-10-14T15:26:56 ok r473 perf_baseline
+2026-10-14T15:26:56 ok r473 parity
+2026-10-14T15:27:15 ok r473 deep
+2026-10-14T15:27:15 ok r474 perf_baseline
+2026-10-14T15:27:15 ok r474 parity
+2026-10-14T15:27:34 ok r474 deep
+2026-10-14T15:27:35 ok r475 perf_baseline
+2026-10-14T15:27:35 ok r475 parity
+2026-10-14T15:27:54 TRANSIENT r475 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:28:16 TRANSIENT r475 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:28:37 TRANSIENT-RECOVERED r475 deep after 2 retr(y/ies); transients so far: 92
+2026-10-14T15:28:37 ok r475 deep
+2026-10-14T15:28:37 ok r476 perf_baseline
+2026-10-14T15:28:37 ok r476 parity
+2026-10-14T15:28:56 ok r476 deep
+2026-10-14T15:28:56 ok r477 perf_baseline
+2026-10-14T15:28:56 ok r477 parity
+2026-10-14T15:29:15 ok r477 deep
+2026-10-14T15:29:15 ok r478 perf_baseline
+2026-10-14T15:29:16 ok r478 parity
+2026-10-14T15:29:34 ok r478 deep
+2026-10-14T15:29:36 ok r479 perf_baseline
+2026-10-14T15:29:36 ok r479 parity
+2026-10-14T15:29:55 TRANSIENT r479 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:30:16 TRANSIENT-RECOVERED r479 deep after 1 retr(y/ies); transients so far: 93
+2026-10-14T15:30:16 ok r479 deep
+2026-10-14T15:30:16 ok r480 perf_baseline
+2026-10-14T15:30:16 ok r480 parity
+2026-10-14T15:30:35 ok r480 deep
+2026-10-14T15:30:36 ok r481 perf_baseline
+2026-10-14T15:30:36 ok r481 parity
+2026-10-14T15:30:54 ok r481 deep
+2026-10-14T15:30:55 ok r482 perf_baseline
+2026-10-14T15:30:55 ok r482 parity
+2026-10-14T15:31:13 ok r482 deep
+2026-10-14T15:31:14 ok r483 perf_baseline
+2026-10-14T15:31:14 ok r483 parity
+2026-10-14T15:31:32 ok r483 deep
+2026-10-14T15:31:33 ok r484 perf_baseline
+2026-10-14T15:31:33 ok r484 parity
+2026-10-14T15:31:52 ok r484 deep
+2026-10-14T15:31:52 ok r485 perf_baseline
+2026-10-14T15:31:52 ok r485 parity
+2026-10-14T15:32:11 ok r485 deep
+2026-10-14T15:32:11 ok r486 perf_baseline
+2026-10-14T15:32:11 ok r486 parity
+2026-10-14T15:32:30 ok r486 deep
+2026-10-14T15:32:31 ok r487 perf_baseline
+2026-10-14T15:32:31 ok r487 parity
+2026-10-14T15:32:50 ok r487 deep
+2026-10-14T15:32:51 ok r488 perf_baseline
+2026-10-14T15:32:52 ok r488 parity
+2026-10-14T15:33:11 TRANSIENT r488 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:33:32 TRANSIENT-RECOVERED r488 deep after 1 retr(y/ies); transients so far: 94
+2026-10-14T15:33:32 ok r488 deep
+2026-10-14T15:33:33 ok r489 perf_baseline
+2026-10-14T15:33:33 ok r489 parity
+2026-10-14T15:33:51 ok r489 deep
+2026-10-14T15:33:52 ok r490 perf_baseline
+2026-10-14T15:33:52 ok r490 parity
+2026-10-14T15:34:11 ok r490 deep
+2026-10-14T15:34:11 ok r491 perf_baseline
+2026-10-14T15:34:11 ok r491 parity
+2026-10-14T15:34:30 ok r491 deep
+2026-10-14T15:34:31 ok r492 perf_baseline
+2026-10-14T15:34:32 ok r492 parity
+2026-10-14T15:34:50 TRANSIENT r492 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:35:12 TRANSIENT-RECOVERED r492 deep after 1 retr(y/ies); transients so far: 95
+2026-10-14T15:35:12 ok r492 deep
+2026-10-14T15:35:13 ok r493 perf_baseline
+2026-10-14T15:35:13 ok r493 parity
+2026-10-14T15:35:31 ok r493 deep
+2026-10-14T15:35:32 ok r494 perf_baseline
+2026-10-14T15:35:32 ok r494 parity
+2026-10-14T15:35:50 ok r494 deep
+2026-10-14T15:35:51 ok r495 perf_baseline
+2026-10-14T15:35:51 ok r495 parity
+2026-10-14T15:36:09 ok r495 deep
+2026-10-14T15:36:10 ok r496 perf_baseline
+2026-10-14T15:36:10 ok r496 parity
+2026-10-14T15:36:29 ok r496 deep
+2026-10-14T15:36:29 ok r497 perf_baseline
+2026-10-14T15:36:29 ok r497 parity
+2026-10-14T15:36:48 ok r497 deep
+2026-10-14T15:36:48 ok r498 perf_baseline
+2026-10-14T15:36:49 ok r498 parity
+2026-10-14T15:37:07 ok r498 deep
+2026-10-14T15:37:07 ok r499 perf_baseline
+2026-10-14T15:37:08 ok r499 parity
+2026-10-14T15:37:26 ok r499 deep
+2026-10-14T15:37:27 ok r500 perf_baseline
+2026-10-14T15:37:27 ok r500 parity
+2026-10-14T15:37:46 TRANSIENT r500 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:38:08 TRANSIENT r500 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:38:29 TRANSIENT-RECOVERED r500 deep after 2 retr(y/ies); transients so far: 96
+2026-10-14T15:38:29 ok r500 deep
+2026-10-14T15:38:29 ok r501 perf_baseline
+2026-10-14T15:38:29 ok r501 parity
+2026-10-14T15:38:48 ok r501 deep
+2026-10-14T15:38:48 ok r502 perf_baseline
+2026-10-14T15:38:48 ok r502 parity
+2026-10-14T15:39:07 ok r502 deep
+2026-10-14T15:39:08 ok r503 perf_baseline
+2026-10-14T15:39:08 ok r503 parity
+2026-10-14T15:39:27 ok r503 deep
+2026-10-14T15:39:28 ok r504 perf_baseline
+2026-10-14T15:39:28 ok r504 parity
+2026-10-14T15:39:48 TRANSIENT r504 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:40:08 TRANSIENT r504 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:40:29 TRANSIENT-RECOVERED r504 deep after 2 retr(y/ies); transients so far: 97
+2026-10-14T15:40:29 ok r504 deep
+2026-10-14T15:40:29 ok r505 perf_baseline
+2026-10-14T15:40:29 ok r505 parity
+2026-10-14T15:40:48 ok r505 deep
+2026-10-14T15:40:48 ok r506 perf_baseline
+2026-10-14T15:40:49 ok r506 parity
+2026-10-14T15:41:07 ok r506 deep
+2026-10-14T15:41:08 ok r507 perf_baseline
+2026-10-14T15:41:08 ok r507 parity
+2026-10-14T15:41:26 ok r507 deep
+2026-10-14T15:41:27 ok r508 perf_baseline
+2026-10-14T15:41:27 ok r508 parity
+2026-10-14T15:41:46 ok r508 deep
+2026-10-14T15:41:46 ok r509 perf_baseline
+2026-10-14T15:41:46 ok r509 parity
+2026-10-14T15:42:05 ok r509 deep
+2026-10-14T15:42:05 ok r510 perf_baseline
+2026-10-14T15:42:05 ok r510 parity
+2026-10-14T15:42:24 ok r510 deep
+2026-10-14T15:42:24 ok r511 perf_baseline
+2026-10-14T15:42:25 ok r511 parity
+2026-10-14T15:42:43 ok r511 deep
+2026-10-14T15:42:45 ok r512 perf_baseline
+2026-10-14T15:42:46 ok r512 parity
+2026-10-14T15:43:05 TRANSIENT r512 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:43:26 TRANSIENT-RECOVERED r512 deep after 1 retr(y/ies); transients so far: 98
+2026-10-14T15:43:26 ok r512 deep
+2026-10-14T15:43:27 ok r513 perf_baseline
+2026-10-14T15:43:27 ok r513 parity
+2026-10-14T15:43:45 ok r513 deep
+2026-10-14T15:43:46 ok r514 perf_baseline
+2026-10-14T15:43:46 ok r514 parity
+2026-10-14T15:44:05 ok r514 deep
+2026-10-14T15:44:05 ok r515 perf_baseline
+2026-10-14T15:44:05 ok r515 parity
+2026-10-14T15:44:24 ok r515 deep
+2026-10-14T15:44:25 ok r516 perf_baseline
+2026-10-14T15:44:25 ok r516 parity
+2026-10-14T15:44:44 TRANSIENT r516 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:45:05 TRANSIENT-RECOVERED r516 deep after 1 retr(y/ies); transients so far: 99
+2026-10-14T15:45:05 ok r516 deep
+2026-10-14T15:45:06 ok r517 perf_baseline
+2026-10-14T15:45:06 ok r517 parity
+2026-10-14T15:45:25 ok r517 deep
+2026-10-14T15:45:26 ok r518 perf_baseline
+2026-10-14T15:45:26 ok r518 parity
+2026-10-14T15:45:44 ok r518 deep
+2026-10-14T15:45:45 ok r519 perf_baseline
+2026-10-14T15:45:45 ok r519 parity
+2026-10-14T15:46:04 ok r519 deep
+2026-10-14T15:46:04 ok r520 perf_baseline
+2026-10-14T15:46:04 ok r520 parity
+2026-10-14T15:46:23 ok r520 deep
+2026-10-14T15:46:23 ok r521 perf_baseline
+2026-10-14T15:46:23 ok r521 parity
+2026-10-14T15:46:42 ok r521 deep
+2026-10-14T15:46:43 ok r522 perf_baseline
+2026-10-14T15:46:43 ok r522 parity
+2026-10-14T15:47:01 ok r522 deep
+2026-10-14T15:47:02 ok r523 perf_baseline
+2026-10-14T15:47:02 ok r523 parity
+2026-10-14T15:47:21 ok r523 deep
+2026-10-14T15:47:21 ok r524 perf_baseline
+2026-10-14T15:47:22 ok r524 parity
+2026-10-14T15:47:40 ok r524 deep
+2026-10-14T15:47:41 ok r525 perf_baseline
+2026-10-14T15:47:42 ok r525 parity
+2026-10-14T15:48:01 TRANSIENT r525 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T15:48:22 TRANSIENT-RECOVERED r525 deep after 1 retr(y/ies); transients so far: 100
+2026-10-14T15:48:22 ok r525 deep
+2026-10-14T15:48:23 ok r526 perf_baseline
+2026-10-14T15:48:23 ok r526 parity
+2026-10-14T15:48:41 ok r526 deep
+2026-10-14T15:48:42 ok r527 perf_baseline
+2026-10-14T15:48:42 ok r527 parity
+2026-10-14T15:49:01 ok r527 deep
+2026-10-14T15:49:01 ok r528 perf_baseline
+2026-10-14T15:49:01 ok r528 parity
+2026-10-14T15:49:20 ok r528 deep
+2026-10-14T15:49:20 ok r529 perf_baseline
+2026-10-14T15:49:20 ok r529 parity
+2026-10-14T15:49:39 ok r529 deep
+2026-10-14T15:49:40 ok r530 perf_baseline
+2026-10-14T15:49:40 ok r530 parity
+2026-10-14T15:49:59 ok r530 deep
+2026-10-14T15:49:59 ok r531 perf_baseline
+2026-10-14T15:50:00 ok r531 parity
+2026-10-14T15:50:19 ok r531 deep
+2026-10-14T15:50:19 ok r532 perf_baseline
+2026-10-14T15:50:19 ok r532 parity
+2026-10-14T15:50:38 ok r532 deep
+2026-10-14T15:50:38 ok r533 perf_baseline
+2026-10-14T15:50:38 ok r533 parity
+2026-10-14T15:50:57 ok r533 deep
+2026-10-14T15:50:57 ok r534 perf_baseline
+2026-10-14T15:50:58 ok r534 parity
+2026-10-14T15:51:16 ok r534 deep
+2026-10-14T15:51:17 ok r535 perf_baseline
+2026-10-14T15:51:17 ok r535 parity
+2026-10-14T15:51:35 ok r535 deep
+2026-10-14T15:51:36 ok r536 perf_baseline
+2026-10-14T15:51:36 ok r536 parity
+2026-10-14T15:51:55 ok r536 deep
+2026-10-14T15:51:55 ok r537 perf_baseline
+2026-10-14T15:51:55 ok r537 parity
+2026-10-14T15:52:14 ok r537 deep
+2026-10-14T15:52:14 ok r538 perf_baseline
+2026-10-14T15:52:14 ok r538 parity
+2026-10-14T15:52:33 ok r538 deep
+2026-10-14T15:52:33 ok r539 perf_baseline
+2026-10-14T15:52:34 ok r539 parity
+2026-10-14T15:52:52 TRANSIENT r539 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:53:13 TRANSIENT-RECOVERED r539 deep after 1 retr(y/ies); transients so far: 101
+2026-10-14T15:53:13 ok r539 deep
+2026-10-14T15:53:14 ok r540 perf_baseline
+2026-10-14T15:53:14 ok r540 parity
+2026-10-14T15:53:33 TRANSIENT r540 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:53:53 TRANSIENT-RECOVERED r540 deep after 1 retr(y/ies); transients so far: 102
+2026-10-14T15:53:53 ok r540 deep
+2026-10-14T15:53:54 ok r541 perf_baseline
+2026-10-14T15:53:54 ok r541 parity
+2026-10-14T15:54:12 ok r541 deep
+2026-10-14T15:54:13 ok r542 perf_baseline
+2026-10-14T15:54:13 ok r542 parity
+2026-10-14T15:54:33 TRANSIENT r542 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:54:54 TRANSIENT r542 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:55:15 TRANSIENT-RECOVERED r542 deep after 2 retr(y/ies); transients so far: 103
+2026-10-14T15:55:15 ok r542 deep
+2026-10-14T15:55:15 ok r543 perf_baseline
+2026-10-14T15:55:15 ok r543 parity
+2026-10-14T15:55:34 ok r543 deep
+2026-10-14T15:55:35 ok r544 perf_baseline
+2026-10-14T15:55:35 ok r544 parity
+2026-10-14T15:55:53 ok r544 deep
+2026-10-14T15:55:54 ok r545 perf_baseline
+2026-10-14T15:55:54 ok r545 parity
+2026-10-14T15:56:12 ok r545 deep
+2026-10-14T15:56:13 ok r546 perf_baseline
+2026-10-14T15:56:13 ok r546 parity
+2026-10-14T15:56:31 ok r546 deep
+2026-10-14T15:56:32 ok r547 perf_baseline
+2026-10-14T15:56:32 ok r547 parity
+2026-10-14T15:56:51 ok r547 deep
+2026-10-14T15:56:51 ok r548 perf_baseline
+2026-10-14T15:56:51 ok r548 parity
+2026-10-14T15:57:10 ok r548 deep
+2026-10-14T15:57:10 ok r549 perf_baseline
+2026-10-14T15:57:10 ok r549 parity
+2026-10-14T15:57:29 ok r549 deep
+2026-10-14T15:57:30 ok r550 perf_baseline
+2026-10-14T15:57:30 ok r550 parity
+2026-10-14T15:57:49 TRANSIENT r550 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T15:58:11 TRANSIENT-RECOVERED r550 deep after 1 retr(y/ies); transients so far: 104
+2026-10-14T15:58:11 ok r550 deep
+2026-10-14T15:58:11 ok r551 perf_baseline
+2026-10-14T15:58:11 ok r551 parity
+2026-10-14T15:58:30 ok r551 deep
+2026-10-14T15:58:31 ok r552 perf_baseline
+2026-10-14T15:58:31 ok r552 parity
+2026-10-14T15:58:50 ok r552 deep
+2026-10-14T15:58:50 ok r553 perf_baseline
+2026-10-14T15:58:50 ok r553 parity
+2026-10-14T15:59:09 ok r553 deep
+2026-10-14T15:59:09 ok r554 perf_baseline
+2026-10-14T15:59:09 ok r554 parity
+2026-10-14T15:59:28 ok r554 deep
+2026-10-14T15:59:29 ok r555 perf_baseline
+2026-10-14T15:59:30 ok r555 parity
+2026-10-14T15:59:49 TRANSIENT r555 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 2 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T16:00:10 TRANSIENT r555 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T16:00:31 TRANSIENT-RECOVERED r555 deep after 2 retr(y/ies); transients so far: 105
+2026-10-14T16:00:31 ok r555 deep
+2026-10-14T16:00:31 ok r556 perf_baseline
+2026-10-14T16:00:31 ok r556 parity
+2026-10-14T16:00:50 ok r556 deep
+2026-10-14T16:00:50 ok r557 perf_baseline
+2026-10-14T16:00:50 ok r557 parity
+2026-10-14T16:01:09 ok r557 deep
+2026-10-14T16:01:09 ok r558 perf_baseline
+2026-10-14T16:01:10 ok r558 parity
+2026-10-14T16:01:28 ok r558 deep
+2026-10-14T16:01:29 ok r559 perf_baseline
+2026-10-14T16:01:29 ok r559 parity
+2026-10-14T16:01:48 ok r559 deep
+2026-10-14T16:01:48 ok r560 perf_baseline
+2026-10-14T16:01:48 ok r560 parity
+2026-10-14T16:02:07 ok r560 deep
+2026-10-14T16:02:07 ok r561 perf_baseline
+2026-10-14T16:02:07 ok r561 parity
+2026-10-14T16:02:26 ok r561 deep
+2026-10-14T16:02:27 ok r562 perf_baseline
+2026-10-14T16:02:27 ok r562 parity
+2026-10-14T16:02:46 TRANSIENT r562 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+148c148
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T16:03:08 TRANSIENT r562 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 2/3 in 2s
+42c42
+< [OK] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after (Surface/2D/GL/DVD/Shared/Memory) before={*} after={*}
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T16:03:29 TRANSIENT-RECOVERED r562 deep after 2 retr(y/ies); transients so far: 106
+2026-10-14T16:03:29 ok r562 deep
+2026-10-14T16:03:29 ok r563 perf_baseline
+2026-10-14T16:03:29 ok r563 parity
+2026-10-14T16:03:48 ok r563 deep
+2026-10-14T16:03:48 ok r564 perf_baseline
+2026-10-14T16:03:48 ok r564 parity
+2026-10-14T16:04:07 ok r564 deep
+2026-10-14T16:04:07 ok r565 perf_baseline
+2026-10-14T16:04:07 ok r565 parity
+2026-10-14T16:04:26 ok r565 deep
+2026-10-14T16:04:26 ok r566 perf_baseline
+2026-10-14T16:04:27 ok r566 parity
+2026-10-14T16:04:46 TRANSIENT r566 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+106c106
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T16:05:07 TRANSIENT-RECOVERED r566 deep after 1 retr(y/ies); transients so far: 107
+2026-10-14T16:05:07 ok r566 deep
+2026-10-14T16:05:07 ok r567 perf_baseline
+2026-10-14T16:05:07 ok r567 parity
+2026-10-14T16:05:26 TRANSIENT r567 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T16:05:47 TRANSIENT-RECOVERED r567 deep after 1 retr(y/ies); transients so far: 108
+2026-10-14T16:05:47 ok r567 deep
+2026-10-14T16:05:47 ok r568 perf_baseline
+2026-10-14T16:05:47 ok r568 parity
+2026-10-14T16:06:06 ok r568 deep
+2026-10-14T16:06:07 ok r569 perf_baseline
+2026-10-14T16:06:07 ok r569 parity
+2026-10-14T16:06:25 ok r569 deep
+2026-10-14T16:06:26 ok r570 perf_baseline
+2026-10-14T16:06:26 ok r570 parity
+2026-10-14T16:06:44 ok r570 deep
+2026-10-14T16:06:45 ok r571 perf_baseline
+2026-10-14T16:06:45 ok r571 parity
+2026-10-14T16:07:04 ok r571 deep
+2026-10-14T16:07:04 ok r572 perf_baseline
+2026-10-14T16:07:04 ok r572 parity
+2026-10-14T16:07:23 ok r572 deep
+2026-10-14T16:07:23 ok r573 perf_baseline
+2026-10-14T16:07:24 ok r573 parity
+2026-10-14T16:07:42 ok r573 deep
+2026-10-14T16:07:43 ok r574 perf_baseline
+2026-10-14T16:07:43 ok r574 parity
+2026-10-14T16:08:02 TRANSIENT r574 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+55c55
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+68c68
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+81c81
+< [OK] leak check: driver class instance counts identical before/after before={*} after={*}
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after before={*} after={*}
+2026-10-14T16:08:23 TRANSIENT-RECOVERED r574 deep after 1 retr(y/ies); transients so far: 109
+2026-10-14T16:08:23 ok r574 deep
+2026-10-14T16:08:23 ok r575 perf_baseline
+2026-10-14T16:08:24 ok r575 parity
+2026-10-14T16:08:42 ok r575 deep
+2026-10-14T16:08:43 ok r576 perf_baseline
+2026-10-14T16:08:43 ok r576 parity
+2026-10-14T16:09:01 ok r576 deep
+2026-10-14T16:09:02 ok r577 perf_baseline
+2026-10-14T16:09:02 ok r577 parity
+2026-10-14T16:09:20 ok r577 deep
+2026-10-14T16:09:21 ok r578 perf_baseline
+2026-10-14T16:09:21 ok r578 parity
+2026-10-14T16:09:40 TRANSIENT r578 deep: only NotReady on DVD lines (hardware-up flag down) or, with MASK_INSTANCE_COUNTS=1, only the leak-check verdict differs from the reference; retry 1/3 in 2s
+127c127
+< [OK] leak check: driver class instance counts identical before/after
+---
+> [UNEXPECTED] leak check: driver class instance counts identical before/after
+157c157
+< 136 calls made (136 asserted, 0 recorded-only), 0 unexpected result(s), 0 skipped (shape-known, not live-tested)
+---
+> 136 calls made (136 asserted, 0 recorded-only), 1 unexpected result(s), 0 skipped (shape-known, not live-tested)
+2026-10-14T16:10:01 TRANSIENT-RECOVERED r578 deep after 1 retr(y/ies); transients so far: 110
+2026-10-14T16:10:01 ok r578 deep
+2026-10-14T16:10:01 ok r579 perf_baseline
+2026-10-14T16:10:01 ok r579 parity
+2026-10-14T16:10:20 ok r579 deep
+2026-10-14T16:10:21 ok r580 perf_baseline
+2026-10-14T16:10:21 ok r580 parity
+2026-10-14T16:10:39 ok r580 deep
+2026-10-14T16:10:40 ok r581 perf_baseline
+2026-10-14T16:10:40 ok r581 parity
+2026-10-14T16:10:59 ok r581 deep
+2026-10-14T16:10:59 ok r582 perf_baseline
+2026-10-14T16:10:59 ok r582 parity
+2026-10-14T16:11:18 ok r582 deep
+2026-10-14T16:11:18 ok r583 perf_baseline
+2026-10-14T16:11:18 ok r583 parity
+2026-10-14T16:11:37 ok r583 deep
+2026-10-14T16:11:37 ok r584 perf_baseline
+2026-10-14T16:11:38 ok r584 parity
+2026-10-14T16:11:56 ok r584 deep
+2026-10-14T16:11:57 ok r585 perf_baseline
+2026-10-14T16:11:57 ok r585 parity
+2026-10-14T16:12:15 ok r585 deep
+2026-10-14T16:12:16 ok r586 perf_baseline
+2026-10-14T16:12:16 ok r586 parity
+2026-10-14T16:12:35 ok r586 deep
+2026-10-14T16:12:35 SOAK DONE rounds=586 elapsed=14410s transients_recovered=110
