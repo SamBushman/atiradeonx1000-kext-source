@@ -25,7 +25,6 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__ZN24IOBufferMemoryDescriptor11withOptionsEmjj");
-extern "C" void IOLog(const char *format, ...);
 
 
 /* real addr 0x118e0 */

@@ -26,7 +26,6 @@
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_kprintf(...) asm("_kprintf");
-extern "C" void IOLog(const char *format, ...);
 
 /* real addr 0x1b540 */
 void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32 param_2) {

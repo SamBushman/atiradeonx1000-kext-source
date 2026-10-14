@@ -25,7 +25,6 @@
 #include "../Headers/GhidraLiterals.h"
 
 extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
-extern "C" void IOLog(const char *format, ...);
 
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 

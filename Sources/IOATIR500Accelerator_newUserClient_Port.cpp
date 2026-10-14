@@ -25,12 +25,6 @@
 #include "../Headers/GhidraLiterals.h"
 #include <libkern/c++/OSBoolean.h>
 
-extern "C" void IOLog(const char *format, ...);
-
-/* #154 DIAGNOSTIC (2026-10-08): instrumenting each of the three post-create init calls
- * (+0x150/+0x3a4/+0x348) individually to find which one returns falsy - every live Surface
- * (type=0) open currently fails with 0xe00002c9 and prior investigation had not yet determined
- * which call in this chain is responsible. See issue #154. */
 
 /* #153 ROOT CAUSE (found 2026-10-08, live-verified): this file used to declare its own
  * `extern "C" void *g_kOSBooleanTrue asm("_kOSBooleanTrue");` alias instead of including the real

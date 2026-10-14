@@ -29,12 +29,7 @@ static inline void dataCacheBlockTouch(const void *addr) { dataCacheBlockTouch(r
 static inline void dataCacheBlockStore(UInt32 addr) { __asm__ __volatile__("dcbst 0,%0" : : "r"(addr) : "memory"); }
 /* lwbrx: ONE byte-reversed 32-bit load (the shipped code reads little-endian hardware registers this way). Ghidra expands it to
  * four byte loads at A+3,A+2,A+1,A shifted together, which on MMIO is four bus transactions instead of one (#172). */
-#ifdef LWBRX_OFF
-/* #174 bisect build switch (Tools/build_kext.sh LWBRX_OFF_FILES): the pre-#172 behaviour, four byte loads, for files named in the list. Not for production. */
-static inline UInt32 loadWordByteReversed(const volatile void *addr) { const volatile UInt8 *p = static_cast<const volatile UInt8 *>(addr); UInt32 b3 = p[3], b2 = p[2], b1 = p[1], b0 = p[0]; return b3 << 24 | b2 << 16 | b1 << 8 | b0; }
-#else
 static inline UInt32 loadWordByteReversed(const volatile void *addr) { UInt32 v; __asm__ __volatile__("lwbrx %0,0,%1" : "=r"(v) : "r"(addr) : "memory"); return v; }
-#endif
 static inline void enforceInOrderExecutionIO(void) { __asm__ __volatile__("eieio" : : : "memory"); }
 static inline void ppcSync(void) { __asm__ __volatile__("sync" : : : "memory"); }
 static inline void instructionSynchronize(void) { __asm__ __volatile__("isync" : : : "memory"); }

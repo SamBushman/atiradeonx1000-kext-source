@@ -52,8 +52,7 @@ rm -rf "$OUT"; mkdir -p "$OUT/obj"
 fail=0
 for f in Sources/*.cpp; do
     b=$(basename "$f" .cpp)
-    FX=""; case " $LWBRX_OFF_FILES " in *" $b "*) FX="-DLWBRX_OFF";; esac   # #174 bisect: per-file pre-#172 four-byte register reads
-    g++ $CXXFLAGS $FX -c "$f" -o "$OUT/obj/$b.o" 2>"$OUT/obj/$b.err" || { echo "FAIL $f"; head -5 "$OUT/obj/$b.err"; fail=1; }
+    g++ $CXXFLAGS -c "$f" -o "$OUT/obj/$b.o" 2>"$OUT/obj/$b.err" || { echo "FAIL $f"; head -5 "$OUT/obj/$b.err"; fail=1; }
 done
 [ $fail -eq 0 ] || exit 1
 

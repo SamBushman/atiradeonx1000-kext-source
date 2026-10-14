@@ -55,7 +55,6 @@ extern "C" void RingSubmit_IOSleep(UInt32 milliseconds) asm("_IOSleep");
 
 /* real varargs logger - shape (format string + values, no return used)
  * matches Apple's standard kernel IOLog exactly. */
-extern "C" void RingSubmit_IOLog(const char *fmt, ...) asm("_IOLog");
 
 /* real Mach kernel primitives - exact argument shapes match Apple's
  * published API. */

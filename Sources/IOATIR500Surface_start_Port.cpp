@@ -27,12 +27,6 @@ extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surfa
 
 extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
-extern "C" void IOLog(const char *format, ...);
-
-/* #154 DIAGNOSTIC (2026-10-08): the Surface user client's own start() consistently fails live
- * (issue #154 - every open attempt returns 0xe00002c9). Logging the head-count branch and both
- * failure points (IOMallocAligned, allocMasterSwapBuffer) to find which one is responsible. */
-
 
 /* real addr 0x119f0 */
 bool IOATIR500Surface::start(IOService *real_param_1) {

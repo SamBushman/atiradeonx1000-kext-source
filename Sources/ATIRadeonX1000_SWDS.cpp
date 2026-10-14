@@ -17,7 +17,6 @@ extern "C" UInt32 global_dummy_read_back_a_register;
 extern "C" UInt32 GH_IODelay(...) asm("_IODelay");
 extern "C" UInt32 GH_IOLockLock(...) asm("_IOLockLock");
 extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
-extern "C" UInt32 GH_IOLog(...) asm("_IOLog");
 extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_OSDecrementAtomic(...) asm("_OSDecrementAtomic");
 extern "C" UInt32 GH_OSIncrementAtomic(...) asm("_OSIncrementAtomic");

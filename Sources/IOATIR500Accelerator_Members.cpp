@@ -27,7 +27,6 @@
 extern "C" void *GH_IOATIR500Accelerator_metaClass asm("__ZN20IOATIR500Accelerator9metaClassE");
 static inline void GH_FreeTexvert(void *accelerator, void *texture) { IOATIR500Shared::free_texvert(reinterpret_cast<IOATIR500Accelerator *>(accelerator), reinterpret_cast<IOTextureBuffer *>(texture)); }
 
-extern "C" void IOLog(const char *format, ...);
 extern "C" UInt32 GH_IOFreeContiguous(...) asm("_IOFreeContiguous");
 extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_IOGetTime(...) asm("_IOGetTime");
