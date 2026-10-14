@@ -33,3 +33,18 @@ now defaults to it and gives the editor 100 s. Result on the stock driver (hot-s
 player + blue creeps animating, no overlay) and `editor_loaded_stock.png` (full editor, 3D viewport with player, cylinder,
 shadow). Flush counts with this method: game 11 506 / 11 594 per 40 s, editor 705 per 100 s. These REPLACE the table above
 as the Godot baseline; the rebuilt kext still needs a run with the new scene (and the #174 hang repeats).
+
+## Rebuilt kext (issue172c) on the new scene (same day, hot-swap + unstick)
+
+| | stock (hot-swap) | rebuilt |
+|---|--:|--:|
+| game flushes / 40 s | 11 506, 11 594 | 11 502 |
+| game records/flush, words/flush | 248.2, 8489 | 243.9, 8409 (-1.7 %, within scene-timing variation: creep count differs per frame) |
+| editor flushes / 100 s | 705 | 580 |
+| anomalies | 0 | 0 |
+
+Screenshots (`*_rebuilt.png` vs `*_stock.png`): game shows the orange player + blue creeps, editor fully loaded with the
+3D viewport, player, cylinder and shadow - visually identical. No hang, no panic (`panic.log` unchanged). The editor
+flush count is event-driven (idle redraws depend on load timing) and was not repeated, so the 580 vs 705 gap is
+unexplained but both editors reached the identical fully-rendered state; 1 run each. #174's hang did not recur (this is
+the 3rd clean rebuilt Godot run of 4).
