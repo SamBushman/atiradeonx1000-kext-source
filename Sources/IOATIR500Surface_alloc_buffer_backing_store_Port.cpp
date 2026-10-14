@@ -37,7 +37,8 @@ bool IOATIR500Surface::alloc_buffer_backing_store(ATIR500SurfaceBuffer *real_par
   
   pIVar1 = (UInt8 *)
            GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(M<SInt32>(self + 0xd50) + 0x220),0x10063,
-                        (GH_page_size + M<SInt32>(param_1 + 0x10)) - 1U & -GH_page_size);
+                        (GH_page_size + M<SInt32>(param_1 + 0x10)) - 1U & -GH_page_size,
+                        GH_page_size);   /* #175: 4th argument (alignment) - stock leaves r6 = _page_size live from the capacity computation (0x12944: r6 never rewritten); Ghidra dropped it */
   if (pIVar1 != (UInt8 *)0x0) {
     self[0xbf7] = 0x1;
     this->attach_buffer_backing_store((ATIR500SurfaceBuffer *)(param_1),(IOMemoryDescriptor *)(pIVar1),0,(UInt32)M<UInt16>(param_1 + 0x18));
