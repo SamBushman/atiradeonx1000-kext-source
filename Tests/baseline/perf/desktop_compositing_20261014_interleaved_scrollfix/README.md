@@ -1,0 +1,2 @@
+Same procedure as `../desktop_compositing_20261014_interleaved/` (supersedes it) with the scroll scenario fixed: `Tests/perf_2d_gestures.sh` now opens `/usr/bin` in list view so the synthetic scroll has content (the first run's scroll.a/.b were 0 on both kexts). Rebuilt = HEAD `95edbd2`; stock = installed bundle hot-swapped; order stock, rebuilt, stock, rebuilt, 2 runs per visit.
+Verdict: 40 metrics, 24 OK, 16 NOISY (stock's own spread too large to conclude), 0 HIGHER, 0 LOWER. scroll.a median 29.85 stock vs 29.76 rebuilt (-0.3 %).

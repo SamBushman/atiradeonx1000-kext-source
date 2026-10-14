@@ -228,7 +228,7 @@ This is a genuine first step on the "2D / compositing responsiveness" gap, not a
 
 ### 8c. Stock vs rebuilt, interleaved (2026-10-14)
 
-`Tools/perf_2d_compare.sh` + `Tools/perf_2d_report.py` (data and report: `Tests/baseline/perf/desktop_compositing_20261014_interleaved/`): 2D scenarios plus the section-8b gestures, kexts interleaved stock/rebuilt/stock/rebuilt in the same hot-swap + unstick state, 4 runs each. Result: 23 of 40 metrics OK, 17 NOISY (stock's own spread too large to conclude), **no metric higher or lower on the rebuilt kext**. Known hole: the synthetic `scroll` scenario produces no flush activity (a/b = 0 on both kexts), so scrolling is not actually measured yet.
+`Tools/perf_2d_compare.sh` + `Tools/perf_2d_report.py` (data and report: `Tests/baseline/perf/desktop_compositing_20261014_interleaved/`): 2D scenarios plus the section-8b gestures, kexts interleaved stock/rebuilt/stock/rebuilt in the same hot-swap + unstick state, 4 runs each. Result: 23 of 40 metrics OK, 17 NOISY (stock's own spread too large to conclude), **no metric higher or lower on the rebuilt kext**. The first pass had a hole (synthetic scroll produced no activity because the Finder window had nothing to scroll); fixed in `Tests/perf_2d_gestures.sh` and re-run: `desktop_compositing_20261014_interleaved_scrollfix/` (24 OK, 16 NOISY, 0 differing; scroll.a 29.85 stock vs 29.76 rebuilt).
 
 ## 9. Real GL application frame rate (closes the "OpenGL, real application" row's remaining gap)
 
