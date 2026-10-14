@@ -104,6 +104,7 @@ LAB_0003d310:
       enforceInOrderExecutionIO();
     }
   }
-  ((IOATIR500Surface *)(self))->setupFullScreen();
+  /* #178: explicit base-class call (stock tail-calls 0x13900 directly); a cast-and-call is virtual under -fapple-kext and would re-enter this function (vtable +0x5a4). Same bug class as #155/#177. */
+  IOATIR500Surface::setupFullScreen();
   return;
 }

@@ -35,8 +35,11 @@ only_notready_dvd() { # $1 = reference, $2 = new output
   grep '^>' /tmp/soak_dl.$$ | grep -v '0xe00002d8' | grep -q . && bad=1
   rm -f /tmp/soak_dl.$$; return $bad
 }
+# MASK_INSTANCE_COUNTS=1: when real consumers run concurrently with the soak (QuickTime/WindowServer/Godot hold Surface/2D/GL connections open), the harness'
+# leak-check line's absolute instance counts legitimately differ round to round while its own verdict ("identical before/after" -> [OK]) stays valid. Mask the numbers, keep the verdict.
+mask() { [ "$MASK_INSTANCE_COUNTS" = 1 ] || return 0; sed 's/before={[0-9,]*} after={[0-9,]*}/before={*} after={*}/' "$1" > "$1.m" && mv "$1.m" "$1"; }
 step() { # step NAME REF COMMAND...   REF = "" (no reference check) or a reference file: created by the first run, compared on later ones
-  n=$1; ref=$2; shift; shift; o=/tmp/soak_step.$$; "$@" > $o 2>&1; rc=$?
+  n=$1; ref=$2; shift; shift; o=/tmp/soak_step.$$; "$@" > $o 2>&1; rc=$?; mask $o
   # no reference: the exit status is the verdict. With a reference: the harness exits 1 when it reports unexpected results (a standing machine state, see above), so the verdict is
   # "it ran to its summary line" (a crash/hang would not print it) plus an exact match with the reference.
   if [ -z "$ref" ] && [ $rc -ne 0 ]; then note "STEP-FAIL $n rc=$rc"; tail -20 $o >> "$LOG"; rm -f $o; note "SOAK STOPPED round=$round"; exit 1; fi
@@ -48,7 +51,7 @@ step() { # step NAME REF COMMAND...   REF = "" (no reference check) or a referen
       while ! cmp -s $o "$ref"; do
         if only_notready_dvd "$ref" $o && [ $tries -lt $RETRIES ]; then
           tries=`expr $tries + 1`; note "TRANSIENT $n: only NotReady on DVD lines differs from the reference (hardware-up flag down); retry $tries/$RETRIES in ${RETRY_WAIT}s"; diff "$ref" $o | head -12 >> "$LOG"
-          sleep $RETRY_WAIT; "$@" > $o 2>&1; rc=$?
+          sleep $RETRY_WAIT; "$@" > $o 2>&1; rc=$?; mask $o
           if ! grep -q "calls made" $o; then note "STEP-FAIL $n rc=$rc (no summary line on retry: crashed or cut short)"; tail -20 $o >> "$LOG"; rm -f $o; note "SOAK STOPPED round=$round"; exit 1; fi
         else
           note "STEP-DIFF $n differs from $ref (retries used: $tries)"; diff "$ref" $o | head -20 >> "$LOG"; rm -f $o; note "SOAK STOPPED round=$round"; exit 1

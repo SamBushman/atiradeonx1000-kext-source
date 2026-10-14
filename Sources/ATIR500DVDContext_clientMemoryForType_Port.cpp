@@ -35,7 +35,9 @@ IOReturn ATIR500DVDContext::clientMemoryForType(UInt32 param_1, UInt32*param_2, 
   UInt32 uVar1;
   
   if (param_1 < 4) {
-    uVar1 = ((IOATIR500DVDContext *)((UInt8 *)self))->clientMemoryForType(param_1,(UInt32 *)(param_2),(IOMemoryDescriptor **)(param_3));
+    /* #177: explicit base-class call, as the shipped kext does (a direct call to 0xf0c0). `((IOATIR500DVDContext *)self)->clientMemoryForType(..)` is a VIRTUAL call under -fapple-kext and
+     * re-enters this function through vtable +0x580 forever (kernel stack overflow, whole-machine hang on any IOConnectMapMemory of type 0-3). Same bug class as #155. */
+    uVar1 = IOATIR500DVDContext::clientMemoryForType(param_1,(UInt32 *)(param_2),(IOMemoryDescriptor **)(param_3));
   }
   else {
     if (param_1 == 4) {

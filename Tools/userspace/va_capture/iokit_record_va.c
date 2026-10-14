@@ -25,6 +25,13 @@
  * struct-layout knowledge needed to record or to later diff two logs byte-for-byte.
  */
 #include <stdio.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 #include <stdlib.h>
 #include <string.h>
 #include <dlfcn.h>
@@ -43,12 +50,23 @@ static long g_seq = 0;
 static struct timeval g_t0;
 static int g_pid = 0;
 
+static int g_fd = -1, g_sock = -1; static struct sockaddr_in g_mir;
+static int rec_wr(void *ck, const char *b, int n) { if (g_fd >= 0) { if (write(g_fd, b, n) < 0) {} fcntl(g_fd, F_FULLFSYNC, 0); } if (g_sock >= 0) sendto(g_sock, b, n, 0, (struct sockaddr *)&g_mir, sizeof g_mir); return n; }
+
 static void ensure_log(void) {
     if (g_log) return;
     const char *path = getenv("IOKIT_RECORD_LOG");
     char buf[256];
     if (!path) { snprintf(buf, sizeof buf, "/tmp/iokit_record.%d.tsv", (int)getpid()); path = buf; }
-    g_log = fopen(path, "a");
+    g_log = NULL;
+    { const char *m = getenv("IOKIT_RECORD_MIRROR");   /* ip:port: every log line is also sent as a UDP datagram, so the last line before a hang/panic survives (see Tools/udp_log_receiver.py) */
+      if (m && strchr(m, ':')) {
+        char ip[64]; size_t l = (size_t)(strchr(m, ':') - m); memset(&g_mir, 0, sizeof g_mir);
+        if (l < sizeof ip) { memcpy(ip, m, l); ip[l] = 0; g_mir.sin_family = AF_INET; g_mir.sin_port = htons((unsigned short)atoi(strchr(m, ':') + 1));
+          if (inet_pton(AF_INET, ip, &g_mir.sin_addr) == 1) g_sock = socket(AF_INET, SOCK_DGRAM, 0); }
+        g_fd = open(path, O_WRONLY | O_CREAT | O_APPEND, 0644);
+        if (g_fd >= 0) g_log = funopen(NULL, NULL, rec_wr, NULL, NULL); } }
+    if (!g_log) g_log = fopen(path, "a");
     if (!g_log) g_log = stderr;
     setvbuf(g_log, NULL, _IOLBF, 0);
     gettimeofday(&g_t0, NULL);
@@ -131,6 +149,7 @@ static void dump_maps(io_connect_t connect, const char *input, unsigned inputCnt
 
 static kern_return_t my_IOServiceOpen(io_service_t service, task_port_t owningTask, uint32_t type, io_connect_t *connect) {
     ensure_log(); RESOLVE(IOServiceOpen);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "IOServiceOpen", (unsigned)0, -1);
     kern_return_t r = real_IOServiceOpen(service, owningTask, type, connect);
     fprintf(g_log, "%ld\t%d\t%ld\tIOServiceOpen\tservice=0x%x\ttype=%u\t-\t-\t%d\tconnect_out=0x%x\t-\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)service, type, r, connect ? (unsigned)*connect : 0);
@@ -138,6 +157,7 @@ static kern_return_t my_IOServiceOpen(io_service_t service, task_port_t owningTa
 }
 static kern_return_t my_IOServiceClose(io_connect_t connect) {
     ensure_log(); RESOLVE(IOServiceClose);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "IOServiceClose", (unsigned)connect, -1);
     kern_return_t r = real_IOServiceClose(connect);
     fprintf(g_log, "%ld\t%d\t%ld\tIOServiceClose\tconnect=0x%x\t-\t-\t-\t%d\t-\t-\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)connect, r);
@@ -145,6 +165,7 @@ static kern_return_t my_IOServiceClose(io_connect_t connect) {
 }
 static kern_return_t my_IOConnectAddClient(io_connect_t connect, io_connect_t client) {
     ensure_log(); RESOLVE(IOConnectAddClient);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "IOConnectAddClient", (unsigned)connect, -1);
     kern_return_t r = real_IOConnectAddClient(connect, client);
     fprintf(g_log, "%ld\t%d\t%ld\tIOConnectAddClient\tconnect=0x%x\tclient=0x%x\t-\t-\t%d\t-\t-\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)connect, (unsigned)client, r);
@@ -153,6 +174,7 @@ static kern_return_t my_IOConnectAddClient(io_connect_t connect, io_connect_t cl
 static kern_return_t my_IOConnectMapMemory(io_connect_t connect, uint32_t memoryType, task_port_t intoTask,
                                             vm_address_t *atAddress, vm_size_t *ofSize, IOOptionBits options) {
     ensure_log(); RESOLVE(IOConnectMapMemory);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "IOConnectMapMemory", (unsigned)connect, -1);
     kern_return_t r = real_IOConnectMapMemory(connect, memoryType, intoTask, atAddress, ofSize, options);
     if (r == 0 && atAddress && ofSize && g_nmaps < MAXMAP) { g_maps[g_nmaps].connect = connect; g_maps[g_nmaps].type = memoryType; g_maps[g_nmaps].addr = (unsigned long)*atAddress; g_maps[g_nmaps].size = (unsigned long)*ofSize; g_nmaps++; }
     fprintf(g_log, "%ld\t%d\t%ld\tIOConnectMapMemory\tconnect=0x%x\tmemType=%u\toptions=0x%x\t-\t%d\taddr=0x%lx\tsize=0x%lx\n",
@@ -165,6 +187,7 @@ static kern_return_t my_scalarI_scalarO(mach_port_t connect, int selector, int *
     ensure_log(); RESOLVE_AS(scalarI_scalarO, "io_connect_method_scalarI_scalarO");
     mach_msg_type_number_t outCntBefore = outputCnt ? *outputCnt : 0;
     hexdump(g_inhex, sizeof g_inhex, input, inputCnt, 1);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "scalarI_scalarO", (unsigned)connect, selector);
     kern_return_t r = real_scalarI_scalarO(connect, selector, input, inputCnt, output, outputCnt);
     hexdump(g_outhex, sizeof g_outhex, output, outputCnt ? *outputCnt : 0, 1);
     fprintf(g_log, "%ld\t%d\t%ld\tscalarI_scalarO\tconnect=0x%x\tsel=%d\t%u\t%u->%u\t%d\t%s\t%s\n",
@@ -177,6 +200,7 @@ static kern_return_t my_scalarI_structureI(mach_port_t connect, int selector, in
     ensure_log(); RESOLVE_AS(scalarI_structureI, "io_connect_method_scalarI_structureI");
     hexdump(g_inhex, sizeof g_inhex, input, inputCnt, 1);
     hexdump(g_outhex, sizeof g_outhex, inputStruct, inputStructCnt, 0);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "scalarI_structureI", (unsigned)connect, selector);
     kern_return_t r = real_scalarI_structureI(connect, selector, input, inputCnt, inputStruct, inputStructCnt);
     fprintf(g_log, "%ld\t%d\t%ld\tscalarI_structureI\tconnect=0x%x\tsel=%d\t%u\tstruct=%u\t%d\t%s\t%s\n",
             ++g_seq, g_pid, usec_since_start(), (unsigned)connect, selector, inputCnt, inputStructCnt, r, g_inhex, g_outhex);
@@ -187,6 +211,7 @@ static kern_return_t my_scalarI_structureO(mach_port_t connect, int selector, in
     ensure_log(); RESOLVE_AS(scalarI_structureO, "io_connect_method_scalarI_structureO");
     mach_msg_type_number_t outCntBefore = outputCnt ? *outputCnt : 0;
     hexdump(g_inhex, sizeof g_inhex, input, inputCnt, 1);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "scalarI_structureO", (unsigned)connect, selector);
     kern_return_t r = real_scalarI_structureO(connect, selector, input, inputCnt, output, outputCnt);
     hexdump(g_outhex, sizeof g_outhex, output, outputCnt ? *outputCnt : 0, 0);
     fprintf(g_log, "%ld\t%d\t%ld\tscalarI_structureO\tconnect=0x%x\tsel=%d\t%u\t%u->%u\t%d\t%s\t%s\n",
@@ -200,6 +225,7 @@ static kern_return_t my_structureI_structureO(mach_port_t connect, int selector,
     mach_msg_type_number_t outCntBefore = outputCnt ? *outputCnt : 0;
     hexdump(g_inhex, sizeof g_inhex, input, inputCnt, 0);
     if (selector == 18 && inputCnt >= 0x34) dump_maps(connect, input, inputCnt);
+    fprintf(g_log, "PRE\t%s\tconnect=0x%x\tsel=%d\n", "structureI_structureO", (unsigned)connect, selector);
     kern_return_t r = real_structureI_structureO(connect, selector, input, inputCnt, output, outputCnt);
     hexdump(g_outhex, sizeof g_outhex, output, outputCnt ? *outputCnt : 0, 0);
     fprintf(g_log, "%ld\t%d\t%ld\tstructureI_structureO\tconnect=0x%x\tsel=%d\tin=%u\t%u->%u\t%d\t%s\t%s\n",
