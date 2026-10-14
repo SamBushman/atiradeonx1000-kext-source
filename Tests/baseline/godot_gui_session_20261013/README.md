@@ -20,3 +20,16 @@ stock, so not a rebuilt-driver regression; cause undetermined (not investigated)
 One rebuilt run (1st attempt, game, ~25 s in, at the moment of the screenshot) ended in a hard hang/crash of the whole
 machine with NO panic text written (`panic.log` gained only a stale re-dump of the 16:45 entry). Not reproduced in the
 2nd rebuilt run; stock 0 of 3. Filed as a separate issue.
+
+## Update: making the Godot test render something useful (stock driver, same day)
+
+Why it was grey: (1) `/Volumes/Test HD/squash_the_creeps_start` is a stub (empty Main) - nothing to draw; (2) the real game
+(`~/Godot/squash_the_creeps_start_1.1.0`) kills an idle player in ~1 s and then a full-screen 51%-grey "Press Enter To Retry"
+overlay covers the lit white ground (frames `game_*` above are that state); (3) the editor needs ~60-90 s to load, so
+40 s runs captured only splash/blank (the old "120 flushes" editor baseline is the editor still loading).
+
+Fix: `Tools/userspace/squash_play/` (autopilot copy: circle walk + jump, invulnerable, fixed seed) + `godot_gui.command`
+now defaults to it and gives the editor 100 s. Result on the stock driver (hot-swapped): `game_playable_stock.png` (orange
+player + blue creeps animating, no overlay) and `editor_loaded_stock.png` (full editor, 3D viewport with player, cylinder,
+shadow). Flush counts with this method: game 11 506 / 11 594 per 40 s, editor 705 per 100 s. These REPLACE the table above
+as the Godot baseline; the rebuilt kext still needs a run with the new scene (and the #174 hang repeats).
