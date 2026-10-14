@@ -48,7 +48,7 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32*param_1, UInt32 param_2, UInt32 para
   iVar5 = M<SInt32>(self + 0x910);
   uVar4 = M<UInt32>(self + 0x914);
   iVar7 = 0;
-  if ((SInt32)(((CONCAT11(((UInt8 *)(iVar3 + iVar5))[1],M<UInt8>(iVar3 + iVar5)) - uVar4) -
+  if ((SInt32)((((loadWordByteReversed((UInt8 *)(iVar3 + iVar5)) & 0xffff) - uVar4) -
              1 & 0x7ff) - 7) < 5) {
     do {
       iVar7 = iVar7 + 1;
@@ -56,7 +56,7 @@ UInt32 ATIRadeonX1000::submit_buffer(UInt32*param_1, UInt32 param_2, UInt32 para
       iVar3 = M<SInt32>(self + 0x90c);
       iVar5 = M<SInt32>(self + 0x910);
       uVar4 = M<UInt32>(self + 0x914);
-      iVar1 = ((CONCAT11(((UInt8 *)(iVar3 + iVar5))[1],M<UInt8>(iVar3 + iVar5)) - uVar4)
+      iVar1 = (((loadWordByteReversed((UInt8 *)(iVar3 + iVar5)) & 0xffff) - uVar4)
                - 1 & 0x7ff) - 7;
       if (4 < iVar1) goto LAB_00020a3c;
     } while (iVar7 != 1000);
@@ -94,7 +94,7 @@ LAB_00020a3c:
     }
     iVar7 = M<SInt32>(self + 0x8a4);
     iVar8 = 0;
-    if (4 < (SInt32)(((CONCAT11(((UInt8 *)(iVar3 + iVar5))[1],M<UInt8>(iVar3 + iVar5)) -
+    if (4 < (SInt32)((((loadWordByteReversed((UInt8 *)(iVar3 + iVar5)) & 0xffff) -
                    uVar4) - 1 & 0x7ff) - 7)) {
 LAB_00020b4c:
       if (M<SInt32>(self + 0x8d0) == 0) {
@@ -139,8 +139,7 @@ LAB_00020b4c:
       iVar8 = iVar8 + 1;
       GH_IOSleep(1);
       uVar4 = M<UInt32>(self + 0x914);
-      iVar1 = ((CONCAT11(((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910)))[1],
-                         M<UInt8>(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) - uVar4)
+      iVar1 = (((loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - uVar4)
                - 1 & 0x7ff) - 7;
       if (4 < iVar1) goto LAB_00020b4c;
     } while (iVar8 != 1000);

@@ -19,6 +19,7 @@
 #include "../Headers/ATIR500Memory.h"
 #include "../Headers/ATIRadeonX1000PPCIntrinsics.h"
 #include "../Headers/GhidraExterns.h"
+#include "../Headers/GhidraCompat.h"
 
 extern "C" void SmallX_IOSleep(UInt32 ms) asm("_IOSleep");
 extern "C" void *SmallX_safeMetaCast(void *obj, UInt32 metaClass) asm("__ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass");
@@ -26,8 +27,10 @@ extern "C" void *SmallX_safeMetaCast(void *obj, UInt32 metaClass) asm("__ZN15OSM
 namespace {
 inline UInt32 &U32At(void *base, int offset) { return *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(base) + offset); }
 inline UInt8  &U8At(void *base, int offset)  { return *(reinterpret_cast<UInt8 *>(base) + offset); }
-/* the shipped code reads a little-endian 32-bit word byte by byte */
-inline UInt32 ReadLE32(const UInt8 *p) { return (static_cast<UInt32>(p[3]) << 24) | (static_cast<UInt32>(p[2]) << 16) | (static_cast<UInt32>(p[1]) << 8) | p[0]; }
+/* #174: the shipped code reads a little-endian 32-bit word with ONE lwbrx (stock 0x1e044/0x1e074/0x1e0a4/0x1e0c8). The earlier four plain byte loads were four
+ * non-volatile bus reads the optimizer could merge, reorder or hoist, on a GPU-written stamp and on MMIO. */
+inline UInt32 ReadLE32(const UInt8 *p) { return loadWordByteReversed(p); }
+inline UInt32 SwapBytes32(UInt32 v) { return (v << 24) | ((v & 0xff00u) << 8) | ((v >> 8) & 0xff00u) | (v >> 24); }
 typedef void *(*Fn0)(void *);
 typedef void *(*FnProp)(void *, char *);
 typedef IOReturn (*SetAttrFn)(void *, UInt32, UInt32 *);
@@ -198,12 +201,12 @@ bool ATIRadeonX1000::checkForTimeStamp(UInt32 tag) {
 }
 
 void ATIRadeonX1000::initialize_GUI() {
+    /* stock 0x1e0c0: lwbrx; clear bit 5; stwbrx; eieio; stwbrx 0 -> +0x208c; eieio; sync; isync. Register accesses are volatile and the read is one lwbrx (#174). */
     UInt8 *mmio = reinterpret_cast<UInt8 *>(U32At(this, 0x860));
-    *reinterpret_cast<UInt32 *>(mmio + 0x4c) = (static_cast<UInt32>(mmio[0x4c] & 0xffffffdfu) << 0x18) |
-                                               (static_cast<UInt32>(mmio[0x4d]) << 0x10) |
-                                               (static_cast<UInt32>(mmio[0x4e]) << 8) | mmio[0x4f];
+    UInt32 value = ReadLE32(mmio + 0x4c);
+    M<UInt32>(mmio + 0x4c) = SwapBytes32(value & 0xffffffdfu);
     enforceInOrderExecutionIO();
-    *reinterpret_cast<UInt32 *>(mmio + 0x208c) = 0;
+    M<UInt32>(mmio + 0x208c) = 0;
     enforceInOrderExecutionIO();
     __asm__ __volatile__("sync" : : : "memory");
     instructionSynchronize();

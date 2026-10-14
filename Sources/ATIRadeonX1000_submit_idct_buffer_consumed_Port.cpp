@@ -70,8 +70,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*param_1, UInt32 param_
   if (M<SInt32>(self + 0x8bc) != 0) {
     iVar5 = M<SInt32>(self + 0x930);
     iVar6 = 0;
-    while ((((UInt32)CONCAT11(((UInt8 *)(M<SInt32>(self + 0x928) + M<SInt32>(self + 0x92c)))[1],
-                            M<UInt8>(M<SInt32>(self + 0x928) + M<SInt32>(self + 0x92c))) -
+    while ((((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x928) + M<SInt32>(self + 0x92c))) & 0xffff) -
             iVar5) - 1 & 0x7ff) < 0x20) {
       iVar6 = iVar6 + 1;
       if (iVar6 == 0xf4241) goto LAB_0001ef58;

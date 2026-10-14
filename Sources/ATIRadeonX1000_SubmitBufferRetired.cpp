@@ -64,9 +64,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *param_1, UInt32 param_2, UI
   iVar1 = M<SInt32>(self + 0x8a4);
   iVar5 = 0;
   iVar2 = M<SInt32>(self + 0x914);
-  while (uVar4 = (((UInt32)CONCAT11(((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910)))
-                                  [1],*(UInt8 *)
-                                       (M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) - iVar2) -
+  while (uVar4 = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - iVar2) -
                   1 & 0x7ff) - 7, uVar4 < 8) {
     iVar5 = iVar5 + 1;
     if (iVar5 == 0xf4241) goto LAB_000208e8;
