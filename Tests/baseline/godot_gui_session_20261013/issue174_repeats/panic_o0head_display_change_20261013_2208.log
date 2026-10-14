@@ -1,0 +1,28 @@
+Tue Oct 13 22:08:29 2026
+panic(cpu 3 caller 0x00099ED8): mapping_remove: hw_rem_map failed - pmap = 00368000, va = 000000000000E000, code = 02C4A182
+
+Latest stack backtrace for cpu 3:
+      Backtrace:
+         0x000954F8 0x00095A10 0x00026898 0x00099ED8 0x00098F90 0x00062AC8 0x000A8078 0x000ABB80 
+Proceeding back via exception chain:
+   Exception state (sv=0x6A180C80)
+      PC=0x6A5C93EC; MSR=0x00009030; DAR=0x0021B054; DSISR=0x0A000000; LR=0x6A5C93E4; R1=0x4FBDB990; XCP=0x0000000C (0x300 - Data access)
+      Backtrace:
+0x00000000 0x6A5CBCF4 0x6A596830 0x6A561EBC 0x6A59FDE4 0x005624FC 
+         0x005611CC 0x00567480 0x002EC058 0x0008C69C 0x00029234 0x000233F8 0x000ABEAC 0x67757261 
+         backtrace terminated - frame not mapped or invalid: 0xBFFF6D20
+
+      Kernel loadable modules in backtrace (with dependencies):
+         com.example.ATIRadeonX1000.issue174o0(4.1.9)@0x6a507000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+            dependency: com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IONDRVSupport(1.4.2)@0x572000
+         com.apple.iokit.IOGraphicsFamily(1.4.2)@0x54e000
+            dependency: com.apple.iokit.IOPCIFamily(1.7)@0x4ec000
+   Exception state (sv=0x79F5F500)
+      PC=0x9000AF48; MSR=0x0000F030; DAR=0x11AA101C; DSISR=0x40000000; LR=0x9000AE9C; R1=0xBFFF6D20; XCP=0x00000030 (0xC00 - System call)
+
+Kernel version:
+Darwin Kernel Version 8.11.0: Wed Oct 10 18:26:00 PDT 2007; root:xnu-792.24.17~1/RELEASE_PPC
+*********
+
