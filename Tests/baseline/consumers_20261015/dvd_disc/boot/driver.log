@@ -1,3 +1,3 @@
 boot: no swap
 /dev/disk3          	                               	/Volumes/TESTDVD
-done: Tests/baseline/consumers_20261015/dvd_disc_boot
+done: Tests/baseline/consumers_20261015/dvd_disc/boot

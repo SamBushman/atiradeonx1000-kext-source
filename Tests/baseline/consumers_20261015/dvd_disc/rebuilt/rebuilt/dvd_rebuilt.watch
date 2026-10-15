@@ -1,13 +1,13 @@
-# watch_hw_path start Thu Oct 15 10:43:21 PDT 2026
+# watch_hw_path start Thu Oct 15 11:51:37 PDT 2026
 t=0 dvd=0 gl=0 2d=0 surface=0
 t=1 dvd=0 gl=0 2d=0 surface=0
 t=2 dvd=0 gl=1 2d=0 surface=0
-t=3 dvd=1 gl=1 2d=1 surface=1
-t=4 dvd=1 gl=1 2d=1 surface=1
-t=5 dvd=1 gl=1 2d=1 surface=1
-t=6 dvd=1 gl=1 2d=1 surface=1
-t=7 dvd=1 gl=1 2d=1 surface=1
-t=8 dvd=1 gl=1 2d=1 surface=1
+t=3 dvd=0 gl=1 2d=0 surface=0
+t=4 dvd=0 gl=1 2d=0 surface=0
+t=5 dvd=0 gl=1 2d=0 surface=0
+t=6 dvd=0 gl=1 2d=0 surface=0
+t=7 dvd=0 gl=1 2d=0 surface=0
+t=8 dvd=0 gl=3 2d=0 surface=0
 t=9 dvd=1 gl=1 2d=1 surface=1
 t=10 dvd=1 gl=1 2d=1 surface=1
 t=11 dvd=1 gl=1 2d=1 surface=1
@@ -56,9 +56,3 @@ t=53 dvd=1 gl=1 2d=1 surface=1
 t=54 dvd=1 gl=1 2d=1 surface=1
 t=55 dvd=1 gl=1 2d=1 surface=1
 t=56 dvd=1 gl=1 2d=1 surface=1
-t=57 dvd=1 gl=1 2d=1 surface=1
-t=58 dvd=1 gl=1 2d=1 surface=1
-t=59 dvd=1 gl=1 2d=1 surface=1
-   88    0 0x9c1000   0x5000     0x4000     com.ATITechnologiesInc.TVOut (2.7.2d1) <75 74 16 11>
-  107    0 0x6a34e000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
-# max DVD contexts seen: 1  (0 = the hardware IDCT path was NOT used)
