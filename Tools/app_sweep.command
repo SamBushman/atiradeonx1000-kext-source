@@ -12,6 +12,8 @@ screencapture -x $O/shot2.png
 ps auxww | grep -i "`basename "$APP" .app`" | grep -v grep | head -3 > $O/ps.txt
 ioreg -l -w0 | grep -E '"(ATIR500|IOATIR500)' | head -20 > $O/ioreg_after.txt
 ls -t $HOME/Library/Logs/CrashReporter 2>/dev/null | head -3 > $O/crash_after.txt
+EXE=`defaults read "$APP/Contents/Info" CFBundleExecutable 2>/dev/null`
 osascript -e "tell application \"`basename "$APP" .app`\" to quit" > /dev/null 2>&1; sleep 4
-killall "`basename "$APP" .app`" 2>/dev/null; sleep 1
+killall "`basename "$APP" .app`" 2>/dev/null; [ -n "$EXE" ] && killall "$EXE" 2>/dev/null; sleep 2
+ps auxww | grep -i "`basename "$APP" .app`" | grep -v grep | head -3 > $O/ps_after_quit.txt
 echo "ran ${SECS}s app=$APP" > $O/summary.txt; echo DONE >> $O/summary.txt

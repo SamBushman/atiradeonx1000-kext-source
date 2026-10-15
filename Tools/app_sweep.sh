@@ -4,7 +4,9 @@
 O=${1:?outdir}; shift; SEQ=${SEQ:-"stock rebuilt"}; RB=${REBUILT_DIR:-kext_build_fix}; ST=${STOCK_DIR:-stockkext}; SETTLE=${SETTLE:-45}; mkdir -p "$O"
 for tag in $SEQ; do
   if [ $tag = stock ]; then D=$ST; else D=$RB; fi
+  if [ $tag = boot ]; then echo "boot: no swap" >> "$O/driver.log"; else
   timeout 100 ssh G5 "sh \$HOME/rung3/swap.sh $D 2>&1 | tail -1; sh \$HOME/rung3/srchead/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; md5 -r \$HOME/rung3/$D/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000" >> "$O/driver.log" 2>&1 || { echo "swap FAILED $tag" >> "$O/driver.log"; exit 1; }
+  fi
   sleep $SETTLE
   for spec in "$@"; do
     secs=${spec%%|*}; app=${spec#*|}; name=`basename "$app" .app | tr -c 'A-Za-z0-9\n' _`; b=${tag}_$name
