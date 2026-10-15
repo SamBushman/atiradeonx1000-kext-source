@@ -12,6 +12,8 @@ while [ $visit -le $VISITS ]; do
     if [ $tag = stock ]; then D=$ST; else D=$RB; fi
     timeout 100 ssh G5 "sh \$HOME/rung3/swap.sh $D 2>&1 | tail -1; sh \$HOME/rung3/srchead/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; true" >> "$O/driver.log" 2>&1 || { echo "swap FAILED v$visit $tag" >> "$O/driver.log"; exit 1; }
     sleep $SETTLE
+    # planted-difference control: BURN_TAGS="rebuilt" runs BURN_N CPU burners on the G5 during that side's warm-up and runs (the burner is the known difference)
+    case " $BURN_TAGS " in *" $tag "*) timeout 30 ssh G5 "i=0; while [ \$i -lt ${BURN_N:-2} ]; do (nohup yes > /dev/null 2>&1 < /dev/null &); i=\$((i+1)); done; true" >> "$O/driver.log" 2>&1;; esac
     timeout 400 ssh G5 "WARMUP=1 OUTFILE=\$HOME/rung3/warm.txt TICKS=$TICKS sh \$HOME/rung3/gest2d.sh" > /dev/null 2>&1 || echo "warmup v$visit $tag FAILED" >> "$O/driver.log"
     sleep 10
     r=1; while [ $r -le $RUNS ]; do
@@ -21,7 +23,9 @@ while [ $visit -le $VISITS ]; do
       for x in txt raw quiesce; do scp -q G5:rung3/$b.$x "$O/$b.$x"; done
       r=$((r+1)); sleep 10
     done
+    timeout 30 ssh G5 "killall yes 2>/dev/null; true" > /dev/null 2>&1
   done
+  timeout 30 ssh G5 "killall yes 2>/dev/null; true" > /dev/null 2>&1
   visit=$((visit+1))
 done
 echo "done: $O" | tee -a "$O/driver.log"
