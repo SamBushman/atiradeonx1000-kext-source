@@ -1,0 +1,8 @@
+auto_play: quicktime /Users/bushmas/rung3/va_cap/streams/test_ntsc_720x480.mpg 20s
+recording to /Users/bushmas/rung3/va_cap/rec_150906.tsv  (.mem = mapped-buffer dumps); play the file, then quit the player
+2026-10-15 15:09:19.041 QuickTime Player[261] .scriptSuite warning for argument 'UsingDescriptors' of command 'SaveReferenceMovie' in suite 'QTPSuite': 'list' is not a valid type name.
+player exited; logs:
+-rw-r--r--   1 bushmas  bushmas    754 Oct 15 15:09 /Users/bushmas/rung3/va_cap/hw_watch_150906.log
+-rw-r--r--   1 bushmas  bushmas  11746 Oct 15 15:09 /Users/bushmas/rung3/va_cap/rec_150906.tsv
+No matching processes belonging to you were found
+auto_play: finished Thu Oct 15 15:09:51 PDT 2026
