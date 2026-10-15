@@ -1,0 +1,18 @@
+start Wed Oct 14 10:00:47 PM PDT 2026 runs=3 visits=4 ticks=200 seq=stock rebuilt
+  116    0 0x6a7e7000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  117    0 0x6a7e7000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  118    0 0x6a7e7000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  119    0 0x6a7e7000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  120    0 0x6a7e7000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  121    0 0x6a7e7000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  122    0 0x6a7e7000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+  123    0 0x6a7e7000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+done: Tests/baseline/perf/desktop_compositing_20261014_comparability/main2

@@ -2,7 +2,7 @@
 """perf_2d_report2.py DIR [--aa] [--margin 0.10] [-o report.md] - three-way verdicts for the stock-vs-rebuilt desktop-compositing data of Tools/perf_2d_compare.sh
 (Tests/perf_2d_comparability_plan.md). Per metric the unit of replication is the VISIT (hot-swap + unstick state) with its runs nested inside, never the tick (ticks are autocorrelated).
 Metrics: the per-run medians of every `scenario.{a,b,c,d}` METRIC line, plus, when the per-run .raw dumps exist, whole-animation readouts derived from the per-tick samples:
-`.sum` (sum over the scenario's ticks), `.peak` (max), `.active` (ticks above an idle threshold = the idle median x 1.5 of the same run, a duration-like readout).
+`.sum` (sum over the scenario's ticks), `.peak` (max), `.tail` (median of the second half of the ticks = the settled value after the previous scenario's decay), `.active` (ticks above an idle threshold = the idle median x 1.5 of the same run, a duration-like readout).
 Ratio = median(candidate)/median(reference) with a 90 % hierarchical-bootstrap CI (resample visits, then runs within a visit, 4000 draws).
   EQUIVALENT    CI inside [1-margin, 1+margin]            DIFFERENT     CI excludes 1.0 and is not inside the margin band (or lies wholly outside it)
   INCONCLUSIVE  anything else (more/better data needed)   ZERO          both sides all-zero (nothing flushed)
@@ -33,8 +33,9 @@ def runs_of(tag):
                 for k, name in enumerate('abcd'):
                     col = [r[k] for r in rows]
                     m['%s.%s.sum' % (sc, name)] = sum(col); m['%s.%s.peak' % (sc, name)] = max(col)
+                    m['%s.%s.tail' % (sc, name)] = st.median(col[len(col)//2:])  # settled second half: the counters decay from the previous scenario's activity, so the whole-run median carries that transient
                     if idle:
-                        thr = st.median([r[k] for r in idle]) * 1.5
+                        thr = st.median([r[k] for r in idle[len(idle)//2:]]) * 1.5
                         if thr > 0: m['%s.%s.active' % (sc, name)] = float(sum(1 for x in col if x > thr))
         if m: res.setdefault(v, []).append(m)
     return res
