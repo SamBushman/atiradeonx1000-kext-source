@@ -1,0 +1,2 @@
+installed rebuilt 95edbd2 binary 2de86c49 into /System/Library/Extensions at Thu Oct 15 09:18:07 PDT 2026; mkext rebuilt with kextcache -a ppc -l -m; backups in ~/rung3/bootinstall_backup
+stock restored Thu Oct 15 09:27:25 PDT 2026
