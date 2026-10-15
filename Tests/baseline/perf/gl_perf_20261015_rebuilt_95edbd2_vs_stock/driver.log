@@ -1,0 +1,11 @@
+  110    0 0x6a4ee000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+collected 5 repetitions into /Users/bushmas/rung3/glperf_stockA
+collected 5 repetitions into /Users/bushmas/rung3/glperf_stockB
+  111    0 0x6ac11000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+collected 5 repetitions into /Users/bushmas/rung3/glperf_rebuilt
+  112    0 0x6ac11000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
+collected 5 repetitions into /Users/bushmas/rung3/glperf_stockC
+done
