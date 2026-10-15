@@ -9,7 +9,7 @@ mkdir -p "$O"; echo "start $(date) runs=$RUNS visits=$VISITS ticks=$TICKS seq=$S
 visit=1
 while [ $visit -le $VISITS ]; do
   for tag in $SEQ; do
-    if [ $tag = stock ]; then D=$ST; else D=$RB; fi
+    if [ $tag = stock ] || [ $tag = burn ]; then D=$ST; else D=$RB; fi
     timeout 100 ssh G5 "sh \$HOME/rung3/swap.sh $D 2>&1 | tail -1; sh \$HOME/rung3/srchead/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; true" >> "$O/driver.log" 2>&1 || { echo "swap FAILED v$visit $tag" >> "$O/driver.log"; exit 1; }
     sleep $SETTLE
     # planted-difference control: BURN_TAGS="rebuilt" runs BURN_N CPU burners on the G5 during that side's warm-up and runs (the burner is the known difference)

@@ -21,3 +21,20 @@ No metric differs between stock and the rebuilt kext. 165 are shown equal within
 
 ## Not done (session ended on request)
 Planted-difference control (hook `BURN_TAGS`/`BURN_N` is in the driver, never run), re-running the 26 INCONCLUSIVE metrics with a longer/repeated-animation readout, GL perf re-run on HEAD, DVD IDCT comparison (needs boot-time install, not authorized). #45 stays open.
+
+## Update 2026-10-15: planted-difference control, margin analysis, end states
+
+* **Planted-difference control (`planted_burner`, report `planted_report.md`):** stock vs the same stock kext with 2 CPU burners (`yes`) running, 3+3 visits x 3 runs. **61 metrics DIFFERENT, 90 EQUIVALENT, 21 INCONCLUSIVE.** The test is therefore not blind: e.g. dashboard.c x1.89, dock_hover.c x2.5, expose_all_windows.c.active 44 -> 200, and also the a/b counters (+30 %), so a/b respond to system load. (Pre-run load average does not explain the run-level latent: corr dashboard.a vs 1-min load = 0.06 over 71 runs.)
+* **Margins (pooled 14+14 visits, 36 runs/side), stock-only A/A (7 vs 7 visits) run with the same margin:**
+
+| margin | stock vs rebuilt: EQUIVALENT / INCONCLUSIVE / DIFFERENT | stock vs stock (A/A): EQUIVALENT / INCONCLUSIVE / DIFFERENT |
+|---|---|---|
+| +-10 % | 165 / 26 / 0 | (A/A, 7v7) see aa_stockonly_m0.15 for +-15 % |
+| +-15 % | 171 / 20 / 0 | 152 / 19 / 0 |
+| +-25 % | **182 / 9 / 0** | 165 / 6 / 0 |
+
+  Rebuilt behaves like stock to within the stock-vs-stock noise at every margin; nothing is DIFFERENT at any margin.
+* **End states of the 9 metrics not EQUIVALENT at +-25 %** (`pooled_m0.25.md`):
+  * `idle.a.active`, `idle.b.active`, `idle.c.active`, `idle.d.active`: **NOT MEASURABLE as `.active`** - idle.a/b are 0 everywhere (the threshold is 0), idle.c/d.active count ticks above 1.5x a decaying counter's floor, so a few ticks decide it; A/A gives the same INCONCLUSIVE. Replacement readouts `idle.c.tail`, `idle.d.tail` are EQUIVALENT (CI [0.994, 1.000]); idle.a/b read 0 on both kexts (ZERO).
+  * `dashboard.d.active`, `expose_all_windows.d.active`: **NOT MEASURABLE as `.active`** (A/A INCONCLUSIVE too; animation duration in ticks varies +-40 % run to run); replacement: the `.sum`/`.peak` readouts of the same counter (EQUIVALENT).
+  * `dashboard.a`, `expose_all_windows.a.tail`, `expose_all_windows.b.tail`: still a run-level latent (stock A/A shows the same: dashboard.a A/A CI [0.894, 1.257]); not resolvable at +-25 % with 36 runs; their `.peak`/`.sum` readouts are EQUIVALENT. Latent not root-caused (not pre-run load; not visible in `hw.cpufrequency`).

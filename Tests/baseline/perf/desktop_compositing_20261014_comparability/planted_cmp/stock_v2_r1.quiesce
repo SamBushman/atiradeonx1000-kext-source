@@ -1,0 +1,7 @@
+ 8:21  up 15 mins, 1 user, load averages: 0.62 1.06 0.65
+  5.5 sshd
+  0.6 lookupd
+  0.3 netinfod
+  0.2 DirectoryService
+  0.1 launchproxy
+  0.1 configd

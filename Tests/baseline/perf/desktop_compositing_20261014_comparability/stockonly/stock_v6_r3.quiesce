@@ -1,0 +1,7 @@
+22:16  up  1:23, 1 user, load averages: 0.75 0.47 0.38
+  5.8 sshd
+  0.3 lookupd
+  0.2 configd
+  0.1 syslogd
+%CPU COMMAND
+  0.0 usbmuxd

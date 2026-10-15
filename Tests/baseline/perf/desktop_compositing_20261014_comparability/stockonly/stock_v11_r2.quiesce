@@ -1,0 +1,7 @@
+23:11  up  2:19, 1 user, load averages: 0.48 0.36 0.32
+  5.1 sshd
+  0.4 lookupd
+  0.3 syslogd
+  0.1 notifyd
+  0.1 launchproxy
+  0.1 launchd
