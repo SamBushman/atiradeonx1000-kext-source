@@ -1,0 +1,31 @@
+# iokit_record start pid=340 path=/Users/bushmas/rung3/va_cap/rec_160346.tsv
+PRE	IOServiceOpen	connect=0x0	sel=-1
+1	340	265	IOServiceOpen	service=0x5503	type=0	-	-	0	connect_out=0x5607	-
+PRE	IOConnectMapMemory	connect=0x5607	sel=-1
+2	340	342	IOConnectMapMemory	connect=0x5607	memType=0	options=0x1	-	0	addr=0x4fe000	size=0x1000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+3	340	2508	IOServiceOpen	service=0x5b0b	type=0	-	-	0	connect_out=0x5917	-
+PRE	IOConnectMapMemory	connect=0x5917	sel=-1
+4	340	2561	IOConnectMapMemory	connect=0x5917	memType=0	options=0x1	-	0	addr=0x721000	size=0x1000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+5	340	2369120	IOServiceOpen	service=0xa003	type=2	-	-	0	connect_out=0xa103	-
+PRE	scalarI_scalarO	connect=0xa103	sel=1
+6	340	2369204	scalarI_scalarO	connect=0xa103	sel=1	0	2->2	0	NULL	0081004010000000
+PRE	IOConnectMapMemory	connect=0xa103	sel=-1
+7	340	2369239	IOConnectMapMemory	connect=0xa103	memType=1	options=0x1	-	0	addr=0x2d95000	size=0x1000
+PRE	IOConnectMapMemory	connect=0xa103	sel=-1
+8	340	2369314	IOConnectMapMemory	connect=0xa103	memType=0	options=0x1	-	0	addr=0x2d96000	size=0x1000
+PRE	scalarI_structureO	connect=0xa103	sel=0
+9	340	2369366	scalarI_structureO	connect=0xa103	sel=0	2	48->48	0	0000000000000000	00000000078004380000078000000438000007800000000000000000000000040000000200000006000000020000000b
+PRE	scalarI_structureO	connect=0xa103	sel=0
+10	340	2384041	scalarI_structureO	connect=0xa103	sel=0	2	48->48	0	1067988000000800	0000000002d00142000002d000000142000003000000000000000000000000040000000200000006000000020000000b
+PRE	scalarI_scalarO	connect=0xa103	sel=4
+11	340	2384073	scalarI_scalarO	connect=0xa103	sel=4	3	0->0	0	00000017000002d0000001e0	NULL
+PRE	scalarI_scalarO	connect=0xa103	sel=10
+12	340	2384169	scalarI_scalarO	connect=0xa103	sel=10	2	2->2	0	00000009000b4600	0696a000060f9000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+13	340	11436943	IOServiceOpen	service=0xafcf	type=1	-	-	0	connect_out=0xb05b	-
+PRE	scalarI_structureI	connect=0xa103	sel=11
+14	340	39359873	scalarI_structureI	connect=0xa103	sel=11	1	struct=0	0	00000000	NULL
+PRE	IOServiceClose	connect=0xa103	sel=-1
+15	340	39360058	IOServiceClose	connect=0xa103	-	-	-	0	-	-
