@@ -107,3 +107,11 @@ Earlier: 150 s validation soak (8 rounds, 153 s): all rounds identical to their 
 **Result: the bar is MET.** 586 rounds in 14 410 s, zero STEP-FAIL / STEP-DIFF, no crash, hang or panic; watchdog 467 samples all OK (kext load address 0x6a908000 throughout, `panic.log` unchanged, no crashdump); `hwup_sampler`: state UP for the whole run, 0 down samples; ~180 consumer cycles with no failure.
 **Retries (disclosed, not hidden):** 145 retry events across 110 recovered steps (78 after 1 retry, 29 after 2, 3 after 3), all in the `--deep` step and **all** the harness's own before/after leak-check line flipping to `[UNEXPECTED]` because a consumer opened or closed a Surface/2D/GL/DVD client between the harness's two instance-count samples; none was a NotReady, none persisted, no step exhausted its retries. A real leak would reproduce on every retry and fail the soak. The rule (`only_leakcheck` in `Tests/soak.sh`) only applies with `MASK_INSTANCE_COUNTS=1`. The no-consumer soak (stock run 3, 2026-10-02) used neither.
 Logs: `Tests/baseline/soak/rebuilt_f820602fix_soak_20261014.*`.
+
+## Rebuilt-kext quiet soak, no consumers (2026-10-14)
+
+**Build:** same rebuilt `95edbd2` hot-swap as above, G5 freshly booted (16:43), swap + unstick 16:45. Boot-time driver never touched.
+**Workload:** `Tests/soak.sh 14400` alone: no `MASK_INSTANCE_COUNTS`, no retry masking, no concurrent consumers, G5 otherwise idle (load ~0.7). Watchdog `Tools/stability_watch.sh` (30 s).
+**Result: the literal bar is MET.** 754 rounds in 14 417 s, zero STEP-FAIL / STEP-DIFF / STOPPED / TRANSIENT, `transients_recovered=0` (no retry was used at all); watchdog 470 samples all OK (kext load address 0x6a317000 throughout, `panic.log` unchanged at 218602 bytes, no crashdump). No display reconfiguration occurred during the run.
+Together with the consumer soak above, the rebuilt kext passes both the unmasked no-retry soak and the loaded soak.
+Logs: `Tests/baseline/soak/rebuilt_f820602fix_quiet_soak_20261014.log`, `.watchdog.tsv`.
