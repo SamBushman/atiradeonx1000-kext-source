@@ -20,8 +20,9 @@ sh $D/play_with_recorder_$PLAYER.command "$STREAM" >> $OUT 2>&1 &
 sleep 12                                              # app launch + document open
 osascript -e "$PLAY" >> $OUT 2>&1
 sleep 3; screencapture -x $D/auto_$ts.png
-sleep $SECS
+H=`expr $SECS / 2`; sleep $H; screencapture -x $D/auto_${ts}_mid.png; sleep `expr $SECS - $H`; screencapture -x $D/auto_${ts}_end.png
 osascript -e "tell application \"$APP\" to quit" >> $OUT 2>&1
+sleep 5; killall "$APP" >> $OUT 2>&1   # a player that ignores quit (VLC) must not leave this script waiting forever
 wait
 echo "auto_play: finished `date`" >> $OUT
 echo "rec_* from this run: `ls -t $D/rec_*.tsv | head -1`  out=$OUT  max-dvd: `grep -h 'max DVD' $D/hw_watch_*.log | tail -1`" > $D/auto_DONE
