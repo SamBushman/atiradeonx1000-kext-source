@@ -7,6 +7,8 @@ O=$HOME/rung3/sw_$TAG; mkdir -p $O; rm -f $O/*
 ioreg -l -w0 | grep -E '"(ATIR500|IOATIR500)' | head -20 > $O/ioreg_before.txt
 ls -t $HOME/Library/Logs/CrashReporter 2>/dev/null | head -3 > $O/crash_before.txt
 open -a "$APP"
+# optional scripted clicks: $HOME/rung3/sweep_clicks, lines "SECONDS_AFTER_LAUNCH X Y" (global coordinates), e.g. to dismiss a first-run dialog
+if [ -f $HOME/rung3/sweep_clicks ]; then prev=0; while read t x y; do [ -z "$t" ] && continue; sleep `expr $t - $prev`; $HOME/rung3/gui_input click $x $y; prev=$t; done < $HOME/rung3/sweep_clicks; SECS=`expr $SECS - $prev`; fi
 i=0; while [ $i -lt $SECS ]; do sleep 1; i=`expr $i + 1`; [ $i -eq `expr $SECS / 2` ] && screencapture -x $O/shot1.png; done
 screencapture -x $O/shot2.png
 ps auxww | grep -i "`basename "$APP" .app`" | grep -v grep | head -3 > $O/ps.txt
