@@ -5,7 +5,12 @@ The *_Port.cpp files are generated from the Ghidra decompile (Tools/replace_fn.p
 a remap table, `Tools/renames/<Class>.tsv`, and this tool applies the table. Run it after any re-port and the names come back; it is idempotent.
 
 Usage: apply_renames.py [--check] [--root DIR] [TABLE.tsv ...]      (default: every Tools/renames/*.tsv)
-  --check   change nothing; exit 1 if any row is not yet applied or cannot be applied
+  --check   change nothing; exit 1 if any row or patch is not yet applied or cannot be applied
+
+After the renames, every Tools/renames/patches/*.patch is applied (unified diffs, -p1 from the repository root, one per source file, made against the
+RENAMED text). They carry the structural edits that need more than a rename - such as expressing `self + panel * 0x94 + 0xcad` as
+`panels[panel].swapMode` - so that a re-port from the Ghidra decompile followed by this tool reproduces the same source. A patch that is already
+applied is skipped; one that applies neither way is an error (the re-ported text differs: redo the edit and regenerate the patch).
 
 Table format (tab separated, '#' starts a comment line):
     kind  target  old  new  tier  evidence
@@ -197,12 +202,25 @@ def main():
         pending += len(mapping)
         files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
     for e in errors: print('ERROR', e, file=sys.stderr)
+    if not a.check and not errors:
+        for f, s in files.items(): open(f, 'w').write(s)
+    # structural patches (after the renames)
+    import subprocess
+    def run_patch(pf, *flags):
+        with open(pf) as fh:
+            return subprocess.call(['patch', '-p1', '-s', '-d', a.root] + list(flags), stdin=fh, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL) == 0
+    p_pending = p_done = 0
+    for pf in sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', 'patches', '*.patch'))):
+        if run_patch(pf, '--dry-run', '-R'): p_done += 1; continue
+        if not run_patch(pf, '--dry-run'):
+            errors.append('%s: applies neither forward nor in reverse (the source text differs from what the patch was made against)' % os.path.basename(pf)); print('ERROR', errors[-1], file=sys.stderr); continue
+        p_pending += 1
+        if not a.check and not errors: run_patch(pf)
     if a.check:
-        print('%d renames pending, %d already applied, %d errors' % (pending, applied, len(errors)))
-        sys.exit(1 if pending or errors else 0)
+        print('%d renames pending, %d already applied, %d patches pending, %d patches applied, %d errors' % (pending, applied, p_pending, p_done, len(errors)))
+        sys.exit(1 if pending or p_pending or errors else 0)
     if errors: sys.exit(1)
-    for f, s in files.items(): open(f, 'w').write(s)
-    print('applied %d renames in %d files (%d already applied)' % (pending, len(files), applied))
+    print('applied %d renames in %d files (%d already applied), %d patches (%d already applied)' % (pending, len(files), applied, p_pending, p_done))
 
 
 if __name__ == '__main__':

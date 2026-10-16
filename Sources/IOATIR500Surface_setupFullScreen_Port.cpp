@@ -37,7 +37,7 @@ void IOATIR500Surface::setupFullScreen() {
   if (iVar1 != 0) {
     uVar2 = M<UInt32>(self + 0xc14);
     if ((1 << (uVar2 & 0x3f) & M<UInt32>(M<SInt32>(self + 0xd50) + 0xd0)) != 0) {
-      M<UInt16>(self + uVar2 * 0x94 + 0xcae) = M<SInt16>(self + uVar2 * 0x94 + 0xcae) + 1U & 3;
+      Vol(PANEL_RECORD(self, uVar2)->slotIndex) = M<SInt16>(&PANEL_RECORD(self, uVar2)->slotIndex) + 1U & 3;
       VCALL(M<SInt32>(self), 0x5e0)(self,M<UInt32>(self + 0xc14),0,0);
       M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
     }

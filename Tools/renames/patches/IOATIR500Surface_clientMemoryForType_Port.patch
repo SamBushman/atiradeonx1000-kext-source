@@ -1,0 +1,20 @@
+diff --git a/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp b/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp
+index 0d7521c..6df0ee8 100644
+--- a/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp
++++ b/Sources/IOATIR500Surface_clientMemoryForType_Port.cpp
+@@ -37,12 +37,12 @@ IOReturn IOATIR500Surface::clientMemoryForType(UInt32 type, UInt32*options, IOMe
+   
+   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+   if (type < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc)) {
+-    pIVar2 = M<UInt8 *>(self + type * 0x94 + 0xc28);
++    pIVar2 = (UInt8 *)Vol(PANEL_RECORD(self, type)->entries[0].memory);
+     VCALL(M<SInt32>(pIVar2), 0x14)(pIVar2);
+     *options = 0;
+     *memory = (IOMemoryDescriptor *)pIVar2;
+-    this->init_swap_buffer_header((VendorSwapBufferHeader *)(M<VendorSwapBufferHeader *>(self + type * 0x94 + 0xc34)),
+-               M<UInt32>(self + type * 0x94 + 0xcb0));
++    this->init_swap_buffer_header((VendorSwapBufferHeader *)(Vol(PANEL_RECORD(self, type)->entries[0].header)),
++               Vol(PANEL_RECORD(self, type)->swapBufferSize));
+     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
+     uVar1 = 0;
+   }

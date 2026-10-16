@@ -213,3 +213,22 @@ LAYOUT_CHECK(off181_IOATIR500Surface_accelerator, __builtin_offsetof(IOATIR500Su
 LAYOUT_CHECK(off182_IOATIR500Surface_lastFlipFlag, __builtin_offsetof(IOATIR500Surface, lastFlipFlag) == 0xd54);
 LAYOUT_CHECK(off183_IOATIR500Surface_vramInitSucceeded, __builtin_offsetof(IOATIR500Surface, vramInitSucceeded) == 0xd58);
 LAYOUT_CHECK(off184_IOATIR500Surface_methodTable, __builtin_offsetof(IOATIR500Surface, methodTable) == 0xd5c);
+
+/* PanelRecord / SwapBufferEntry (the per-panel swap-buffer records inside IOATIR500Surface) */
+LAYOUT_CHECK(size_PanelRecord, sizeof(PanelRecord) == 0x94);
+LAYOUT_CHECK(size_SwapBufferEntry, sizeof(SwapBufferEntry) == 0x1c);
+LAYOUT_CHECK(panel_SwapBufferEntry_unknown_0x00, __builtin_offsetof(SwapBufferEntry, unknown_0x00) == 0x00);
+LAYOUT_CHECK(panel_SwapBufferEntry_gartOffset, __builtin_offsetof(SwapBufferEntry, gartOffset) == 0x04);
+LAYOUT_CHECK(panel_SwapBufferEntry_memory, __builtin_offsetof(SwapBufferEntry, memory) == 0x08);
+LAYOUT_CHECK(panel_SwapBufferEntry_unknown_0x0c, __builtin_offsetof(SwapBufferEntry, unknown_0x0c) == 0x0c);
+LAYOUT_CHECK(panel_SwapBufferEntry_unknown_0x0e, __builtin_offsetof(SwapBufferEntry, unknown_0x0e) == 0x0e);
+LAYOUT_CHECK(panel_SwapBufferEntry_stamp, __builtin_offsetof(SwapBufferEntry, stamp) == 0x10);
+LAYOUT_CHECK(panel_SwapBufferEntry_header, __builtin_offsetof(SwapBufferEntry, header) == 0x14);
+LAYOUT_CHECK(panel_SwapBufferEntry_rectWordIndex, __builtin_offsetof(SwapBufferEntry, rectWordIndex) == 0x18);
+LAYOUT_CHECK(panel_PanelRecord_entries, __builtin_offsetof(PanelRecord, entries) == 0x00);
+LAYOUT_CHECK(panel_PanelRecord_active, __builtin_offsetof(PanelRecord, active) == 0x8c);
+LAYOUT_CHECK(panel_PanelRecord_swapMode, __builtin_offsetof(PanelRecord, swapMode) == 0x8d);
+LAYOUT_CHECK(panel_PanelRecord_slotIndex, __builtin_offsetof(PanelRecord, slotIndex) == 0x8e);
+LAYOUT_CHECK(panel_PanelRecord_swapBufferSize, __builtin_offsetof(PanelRecord, swapBufferSize) == 0x90);
+LAYOUT_CHECK(panel_IOATIR500Surface_panels, __builtin_offsetof(IOATIR500Surface, panels) == 0xc20);
+LAYOUT_CHECK(panel_constants, kPanelsOffset == 0xc20 && kPanelRecordSize == sizeof(PanelRecord) && kSwapBufferEntrySize == sizeof(SwapBufferEntry));

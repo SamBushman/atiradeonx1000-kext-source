@@ -638,7 +638,9 @@ protected:
     ATIR500SurfaceBuffer **surfaceBuffersByFormat; /* +0xb70, CONFIRMED base address */
     UInt8 _pad_0xb74[0xb94 - 0xb74];
     ATIR500SurfaceBuffer *fixedSurfaceBuffer;       /* +0xb94, CONFIRMED: a single real `ATIR500SurfaceBuffer*`, always read regardless of the caller's own format-code argument - the "primary"/depth-or-stencil-style attachment resolve_fsaa_buffer treats as fixed rather than per-format-code. */
-    UInt8 _pad_0xb98[0xd50 - 0xb98];
+    UInt8 _pad_0xb98[0xc20 - 0xb98];
+    PanelRecord panels[2];  /* +0xc20, CONFIRMED: two per-panel swap-buffer records of 0x94 bytes (see PanelRecord in ATIRadeonX1000Types.h) */
+    UInt8 _pad_0xd48[0xd50 - 0xd48];
     ATIRadeonX1000 *accelerator; /* +0xd50, CONFIRMED offset (surface_control/surface_flush/etc. all reach hardware through `*(int*)(this+0xd50)`). CORRECTED to the concrete ATIRadeonX1000 type - see ATIRadeonX1000.h's real-Info.plist correction note. */
 
     /*

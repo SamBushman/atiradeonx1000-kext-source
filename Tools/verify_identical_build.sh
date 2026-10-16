@@ -17,7 +17,11 @@ mkdir "$T/base"; git archive "$BASE" Headers Sources Tools Resources | tar -x -C
 tar czf "$T/cand.tgz" Headers Sources Tools Resources
 tar czf "$T/base.tgz" -C "$T/base" Headers Sources Tools Resources
 ssh $H "mkdir -p $WORK" && scp -q "$T/cand.tgz" "$T/base.tgz" $H:$WORK/ || exit 2
-for side in base cand; do
+BASE_SHA=$(git rev-parse "$BASE")
+sides='base cand'
+# the baseline build is reused when the evidence directory already holds a build of the same revision with the same flags
+if [ -f "$EV/base.key" ] && [ "$(cat "$EV/base.key")" = "$BASE_SHA ${OPT--Os}" ] && [ -f "$EV/base.bin" ]; then sides='cand'; echo "reusing the baseline build of $BASE_SHA"; fi
+for side in $sides; do
   # both sides build in the SAME directory: anonymous-namespace symbols embed a hash of the source path
   ssh $H "cd $WORK && rm -rf tree && mkdir tree && cd tree && tar xzf ../$side.tgz && OPT='${OPT--Os}' OUT=\$HOME/$WORK/tree/out KEXT_ID=com.example.ATIRadeonX1000.identcheck sh Tools/build_kext.sh > ../$side.log 2>&1; echo \$? > ../$side.rc"
   [ "$(ssh $H "cat $WORK/$side.rc")" = 0 ] || { echo "build of $side failed:"; ssh $H "tail -20 $WORK/$side.log"; rm -rf "$T"; exit 2; }
@@ -25,6 +29,7 @@ for side in base cand; do
   ssh $H "otool -arch ppc -tV $WORK/tree/out/ATIRadeonX1000" > "$EV/$side.dis"
 done
 rm -rf "$T"
+echo "$BASE_SHA ${OPT--Os}" > "$EV/base.key"
 # gcc 4.0.1 puts a per-compile hash into anonymous-namespace symbol names (_GLOBAL__N_<file>_00000000_<8 hex>): it differs between two builds of the SAME
 # tree, so it is masked in both binaries (and the disassembly) before comparing. Nothing else is masked.
 python3 - "$EV" <<'PY'

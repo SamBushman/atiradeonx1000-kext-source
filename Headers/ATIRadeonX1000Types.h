@@ -577,4 +577,45 @@ struct VendorExternalMethod {
     UInt32 count2;
 };
 
+/*
+ * SwapBufferEntry / PanelRecord - the per-panel swap-buffer bookkeeping inside an IOATIR500Surface (members `panels[]`, +0xc20, two records of 0x94
+ * bytes; the loop in IOATIR500Surface::start initialises exactly two). A "panel" is one output of the accelerator (the per-panel counters live at
+ * accelerator+0x114+panel*4 and the panel count at accelerator+0xcc).
+ *
+ * A record is five 0x1c-byte entries followed by 8 bytes of state: entries[0] holds the panel's pending batch (its `header` is the swap-write batch
+ * ATIR500Surface::submit_swap_buffer fills, its `memory` the master buffer clientMemoryForType hands to clients); entries[1..4] are the four submit
+ * slots that submit_swap_buffer rotates through (slotIndex, 0..3). Evidence: the init loop in IOATIR500Surface::start, allocMasterSwapBuffer /
+ * allocAllSlaveSwapBuffers / freeAllSwapBuffers, and the layout notes at the top of Sources/ATIR500Surface_SubmitSwapBuffer.cpp.
+ * Entries are passed to the accelerator's freeTransferToAllocGART and map_transfer_to_GART as VendorTransferBuffer* and share that type's +0x04
+ * (gartOffset here) and +0x14 roles, so they are modelled as its first 0x1c bytes; the tier of every field is in its comment.
+ *
+ * Access: the ported bodies hold the surface as a byte pointer, and PANEL_RECORD(self, panel) reproduces the stock address expression
+ * `self + panel * 0x94 + 0xc20`, so the generated code is unchanged. (Writing `this->panels[panel].field` is equivalent but gcc 4.0.1 then folds the
+ * constants differently and emits an extra add, which would change the object code of an already hardware-validated kext.)
+ */
+enum { kPanelsOffset = 0xc20, kPanelRecordSize = 0x94, kSwapBufferEntrySize = 0x1c };
+#define PANEL_RECORD(selfBytes, panel) ((PanelRecord *)((selfBytes) + (panel) * kPanelRecordSize + kPanelsOffset))
+
+struct VendorSwapBufferHeader;
+/* a volatile view of a plain member, for the places where the stock code accessed it through a volatile load/store (M<T>) and the generated object code must stay identical */
+template <class T> inline volatile T &Vol(T &x) { return x; }
+struct SwapBufferEntry {
+    UInt32  unknown_0x00;                 /* +0x00, zeroed with the entry, no reader found */
+    UInt32  gartOffset;                   /* +0x04, CONFIRMED: the buffer's address in the GART once mapped (submit_buffer is given gartOffset + 0x20); 0 = not mapped yet, so map_transfer_to_GART runs first. Same field as VendorTransferBuffer's +0x04 */
+    void   *memory;                       /* +0x08, CONFIRMED: the IOBufferMemoryDescriptor allocated by alloc{Master,AllSlave}SwapBuffer(s); released with vtable +0x18 */
+    UInt16  unknown_0x0c;                 /* +0x0c, set to 2 on init and free (a state or count) */
+    UInt16  unknown_0x0e;                 /* +0x0e, set to 0 on init and free */
+    UInt32  stamp;                        /* +0x10, CONFIRMED: the submit stamp of the last use (RecordSubmit), the wait target of PrepareSlot */
+    VendorSwapBufferHeader *header;       /* +0x14, CONFIRMED: the mapped address of `memory` (descriptor vtable +0x1cc), where the batch is written */
+    UInt32  rectWordIndex;                /* +0x18, INFERRED from the layout note in SubmitSwapBuffer.cpp (entries[0] only is known to use it) */
+};
+
+struct PanelRecord {
+    SwapBufferEntry entries[5];           /* +0x00, 5 * 0x1c: [0] pending batch / master buffer, [1..4] submit slots */
+    UInt8   active;                       /* +0x8c, INFERRED: flush_surface only submits panels where this is set; set_id_mode sets it, set_shape_backing_length_ext derives it */
+    UInt8   swapMode;                     /* +0x8d, CONFIRMED (SubmitSwapBuffer.cpp): last swap mode byte; a change marks the batch dirty */
+    UInt16  slotIndex;                    /* +0x8e, CONFIRMED: index of the submit slot in use, advanced & 3 by setupFullScreen / submit_swap_buffer */
+    UInt32  swapBufferSize;               /* +0x90, CONFIRMED: size passed to alloc*SwapBuffer(s) (0 until allocated) */
+};
+
 #endif /* ATIRADEONX1000_TYPES_H */

@@ -55,8 +55,8 @@ void ATIR500Surface::submit_swap_buffer(UInt32 param_1, UInt32 param_2) {
   }
   if (M<int>(self + 0xd54) != 0) {
     M<UInt32>(self + 0xd54) = 0;
-    M<unsigned int>(M<int>(self + param_1 * 0x94 + 0xc34) + 0x1c) =
-         M<unsigned int>(M<int>(self + param_1 * 0x94 + 0xc34) + 0x1c) | 1;
+    M<unsigned int>((int)Vol(PANEL_RECORD(self, param_1)->entries[0].header) + 0x1c) =
+         M<unsigned int>((int)Vol(PANEL_RECORD(self, param_1)->entries[0].header) + 0x1c) | 1;
   }
   iVar8 = param_1 * 0x94;
   if ((M<unsigned int>(M<int>(self + iVar8 + 0xc34) + 0x1c) & 1) == 0) {

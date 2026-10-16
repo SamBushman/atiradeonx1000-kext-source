@@ -169,7 +169,7 @@ IOReturn IOATIR500Surface::set_shape_backing_length_ext(eIOAccelSurfaceShapeBits
   else {
     IVar5 = 0x1;
   }
-  self[id * 0x94 + 0xcac] = IVar5;
+  PANEL_RECORD(self, id)->active = IVar5;
   if (self[0xbec] == 0x0) {
     uVar3 = M<UInt16>(regionRaw + 2);
     M<UInt16>(self + 0xbd4) = uVar3;

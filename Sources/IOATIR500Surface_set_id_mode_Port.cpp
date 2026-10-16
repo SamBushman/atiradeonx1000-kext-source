@@ -132,7 +132,7 @@ LAB_0001460c:
         M<UInt16>(self + 0xbda) = uVar1;
         iVar5 = VCALL(M<int>(self), 0x5dc)(self);
         if (iVar5 == 0) {
-          self[M<int>(self + 0xc14) * 0x94 + 0xcac] = 0x1;
+          PANEL_RECORD(self, M<int>(self + 0xc14))->active = 0x1;
           M<unsigned int>(self + 0xbf8) = M<unsigned int>(self + 0xbf8) | 0x10000000;
           M<unsigned int>(self + 0xc1c) = M<unsigned int>(self + 0xc1c) | 0x10000000;
         }
