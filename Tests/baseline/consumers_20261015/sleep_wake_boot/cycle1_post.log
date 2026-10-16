@@ -1,0 +1,6 @@
+harness_rc=0
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+-rw-r--r--   1 root  admin  220971 Oct 15 10:56 /Library/Logs/panic.log
+16:14  up 4 mins, 1 user, load averages: 0.09 0.05 0.01
+diff_rc=0
+       0 /Users/bushmas/rung3/sw_diff.txt

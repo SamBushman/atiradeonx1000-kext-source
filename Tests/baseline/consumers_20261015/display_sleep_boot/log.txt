@@ -1,0 +1,28 @@
+== cycle 1 16:59:56
+pre_harness_rc=0
+set
+alive_during_display_sleep
+myCurrentState = 0
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+-rw-r--r--   1 root  admin  220971 Oct 15 10:56 /Library/Logs/panic.log
+post_harness_rc=0
+       0
+== cycle 2 17:01:38
+pre_harness_rc=0
+set
+alive_during_display_sleep
+myCurrentState = 1
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+-rw-r--r--   1 root  admin  220971 Oct 15 10:56 /Library/Logs/panic.log
+post_harness_rc=0
+       0
+== cycle 3 17:03:20
+pre_harness_rc=0
+set
+alive_during_display_sleep
+myCurrentState = 1
+   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
+-rw-r--r--   1 root  admin  220971 Oct 15 10:56 /Library/Logs/panic.log
+post_harness_rc=0
+       0
+done
