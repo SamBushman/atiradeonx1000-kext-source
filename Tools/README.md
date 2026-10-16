@@ -50,3 +50,9 @@ and the drivers in `userspace/pipeline/` (Stage B2 of its README).
 |---|---|
 | `apply_renames.py` + `renames/<Class>.tsv` | the remap table: `def` rows rename an identifier inside one function definition (Sources), `decl` rows rename a parameter in a header declaration; each row has a tier (CONFIRMED / INFERRED / UNKNOWN) and an evidence note. The mechanically ported `*_Port.cpp` files are regenerated from the Ghidra decompile, so names are never edited in them by hand: `replace_fn.py` re-applies the table after every re-port, and `apply_renames.py --check` reports rows not yet applied. A rename whose new name collides with a code identifier in the function is refused. After the renames it also applies `renames/patches/*.patch` (one unified diff per source file) for structural edits that are more than a rename, e.g. `self + panel * 0x94 + 0xcad` -> `PANEL_RECORD(self, panel)->swapMode`; a patch that applies neither forward nor in reverse is an error |
 | `verify_identical_build.sh [host] [rev]` | builds the kext from `rev` (default HEAD) and from the working tree on a Tiger machine and compares the binaries byte for byte (gcc's per-build anonymous-namespace hashes are masked). A rename must print `IDENTICAL` |
+
+### Behaviour tests (stock vs rebuilt, per function)
+| tool | purpose |
+|---|---|
+| `difftest/difftest.py` + `Tests/difftest/*_cases.py` | runs one function of the stock kext and of a rebuilt kext on the same inputs in a PowerPC emulator and compares the calls it makes (callees are mocked), the memory it leaves behind, its return value, how it ends, and its instruction count. The generated code may differ; the behaviour must not. See `difftest/README.md`. **Add or extend a case whenever a function is renamed, restructured, re-ported or fixed** |
+| `difftest/build_rebuilt.sh` | builds the working tree on the Tiger machine and fetches the kext binary the tests need |
