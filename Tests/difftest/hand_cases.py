@@ -23,6 +23,19 @@ def w_linear_transform(m, rng):
     return [SELF, rng.choice([0, 1]), ctl, regs]
 
 
+def w_surface_from_texture(m, rng):
+    """build_surface_from_texture(texture, surfaceBuffer, width, height, formatIndex, offset, pitch): formatIndex selects one of the 48 entries of
+    ati_format_info_table (a larger one reads past the table: the two builds lay the table out differently); the texture header's byte at +0x15 holds the
+    tiling/sample field (bits 2-4), the texture's own fields are read from +0x40..+0x4c, +0x6c and +0x7a."""
+    this = m.alloc(0x100); fill_words(m, this, 0x100, rng); m.w32(this, m.vtable('ATIR500GLContext'))
+    tex = m.alloc(0xc0); fill_words(m, tex, 0xc0, rng)
+    hdr = m.alloc(0x40); fill_words(m, hdr, 0x40, rng); m.w32(tex + 0x14, hdr)
+    m.w8(tex + 0x20, rng.choice([0, 6, 6, 1])); m.w8(hdr + 0x15, rng.getrandbits(8))
+    buf = m.alloc(0x60); fill_words(m, buf, 0x60, rng)
+    return [this, tex, buf, rng.choice([0, 8, 16, 64, 256, 1024]), rng.choice([0, 8, 16, 64, 256, 1024]), rng.randrange(48), word(rng) & 0xffff00, rng.choice([0, 16, 64, 512, 4096])]
+
+
 CASES = [
+    Case('ATIR500GLContext::build_surface_from_texture', w_surface_from_texture, ret='void', seeds=40),
     Case('ATIR500Surface::set_linear_transform', w_linear_transform, ret='void', seeds=40),
 ]
