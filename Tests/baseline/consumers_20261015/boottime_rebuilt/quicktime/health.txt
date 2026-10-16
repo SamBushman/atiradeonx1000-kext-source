@@ -1,0 +1,1 @@
+boot_quicktime panic=220971 17:55  up 23 mins kext=1

@@ -1,0 +1,181 @@
+# iokit_record start pid=2378 path=/Users/bushmas/rung3/va_cap/rec_175451.tsv
+PRE	IOServiceOpen	connect=0x0	sel=-1
+1	2378	157	IOServiceOpen	service=0x5503	type=0	-	-	0	connect_out=0x5607	-
+PRE	IOConnectMapMemory	connect=0x5607	sel=-1
+2	2378	198	IOConnectMapMemory	connect=0x5607	memType=0	options=0x1	-	0	addr=0x4ff000	size=0x1000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+3	2378	1388	IOServiceOpen	service=0x5b0b	type=0	-	-	0	connect_out=0x5917	-
+PRE	IOConnectMapMemory	connect=0x5917	sel=-1
+4	2378	1417	IOConnectMapMemory	connect=0x5917	memType=0	options=0x1	-	0	addr=0x721000	size=0x1000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+5	2378	688875	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9e0b	-
+PRE	scalarI_scalarO	connect=0x9e0b	sel=3
+6	2378	689018	scalarI_scalarO	connect=0x9e0b	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0x9e0b	sel=-1
+7	2378	689379	IOServiceClose	connect=0x9e0b	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+8	2378	691160	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9e0f	-
+PRE	scalarI_scalarO	connect=0x9e0f	sel=3
+9	2378	691219	scalarI_scalarO	connect=0x9e0f	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0x9e0f	sel=-1
+10	2378	691293	IOConnectMapMemory	connect=0x9e0f	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0x9e0f	sel=-1
+11	2378	691356	IOConnectMapMemory	connect=0x9e0f	memType=1	options=0x1	-	0	addr=0x608e000	size=0x20000
+PRE	IOConnectMapMemory	connect=0x9e0f	sel=-1
+12	2378	691415	IOConnectMapMemory	connect=0x9e0f	memType=2	options=0x1	-	0	addr=0x60ae000	size=0x8000
+PRE	IOConnectMapMemory	connect=0x9e0f	sel=-1
+13	2378	691476	IOConnectMapMemory	connect=0x9e0f	memType=4	options=0x1	-	0	addr=0x1c2000	size=0x1000
+PRE	scalarI_scalarO	connect=0x9e0f	sel=20
+14	2378	692167	scalarI_scalarO	connect=0x9e0f	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+15	2378	704892	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9f03	-
+PRE	IOConnectAddClient	connect=0x9f03	sel=-1
+16	2378	704976	IOConnectAddClient	connect=0x9f03	client=0x9e0f	-	-	0	-	-
+PRE	scalarI_scalarO	connect=0x9f03	sel=3
+17	2378	705032	scalarI_scalarO	connect=0x9f03	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0x9f03	sel=-1
+18	2378	705112	IOConnectMapMemory	connect=0x9f03	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0x9f03	sel=-1
+19	2378	705176	IOConnectMapMemory	connect=0x9f03	memType=1	options=0x1	-	0	addr=0x60cd000	size=0x20000
+PRE	IOConnectMapMemory	connect=0x9f03	sel=-1
+20	2378	705232	IOConnectMapMemory	connect=0x9f03	memType=2	options=0x1	-	0	addr=0x60ed000	size=0x8000
+PRE	IOConnectMapMemory	connect=0x9f03	sel=-1
+21	2378	705291	IOConnectMapMemory	connect=0x9f03	memType=4	options=0x1	-	0	addr=0x17ff000	size=0x1000
+PRE	scalarI_scalarO	connect=0x9f03	sel=20
+22	2378	705836	scalarI_scalarO	connect=0x9f03	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	scalarI_structureI	connect=0x9f03	sel=0
+23	2378	709549	scalarI_structureI	connect=0x9f03	sel=0	4	struct=0	0	0000000000000000bfffd59044004222	NULL
+PRE	IOServiceClose	connect=0x9f03	sel=-1
+24	2378	710711	IOServiceClose	connect=0x9f03	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+25	2378	711427	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9f07	-
+PRE	scalarI_scalarO	connect=0x9f07	sel=3
+26	2378	711486	scalarI_scalarO	connect=0x9f07	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+27	2378	711897	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xa003	-
+PRE	scalarI_scalarO	connect=0xa003	sel=3
+28	2378	711948	scalarI_scalarO	connect=0xa003	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0xa003	sel=-1
+29	2378	712272	IOServiceClose	connect=0xa003	-	-	-	0	-	-
+PRE	IOServiceClose	connect=0x9f07	sel=-1
+30	2378	712581	IOServiceClose	connect=0x9f07	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+31	2378	748078	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9f0b	-
+PRE	scalarI_scalarO	connect=0x9f0b	sel=3
+32	2378	748175	scalarI_scalarO	connect=0x9f0b	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0x9f0b	sel=-1
+33	2378	748364	IOServiceClose	connect=0x9f0b	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+34	2378	748787	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0x9f0f	-
+PRE	scalarI_scalarO	connect=0x9f0f	sel=3
+35	2378	748816	scalarI_scalarO	connect=0x9f0f	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0x9f0f	sel=-1
+36	2378	748845	IOConnectMapMemory	connect=0x9f0f	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0x9f0f	sel=-1
+37	2378	748878	IOConnectMapMemory	connect=0x9f0f	memType=1	options=0x1	-	0	addr=0x60d7000	size=0x20000
+PRE	IOConnectMapMemory	connect=0x9f0f	sel=-1
+38	2378	748909	IOConnectMapMemory	connect=0x9f0f	memType=2	options=0x1	-	0	addr=0x60f7000	size=0x8000
+PRE	IOConnectMapMemory	connect=0x9f0f	sel=-1
+39	2378	748943	IOConnectMapMemory	connect=0x9f0f	memType=4	options=0x1	-	0	addr=0x17ff000	size=0x1000
+PRE	scalarI_scalarO	connect=0x9f0f	sel=20
+40	2378	749173	scalarI_scalarO	connect=0x9f0f	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+41	2378	751435	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xa007	-
+PRE	IOConnectAddClient	connect=0xa007	sel=-1
+42	2378	751462	IOConnectAddClient	connect=0xa007	client=0x9f0f	-	-	0	-	-
+PRE	scalarI_scalarO	connect=0xa007	sel=3
+43	2378	751491	scalarI_scalarO	connect=0xa007	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0xa007	sel=-1
+44	2378	751520	IOConnectMapMemory	connect=0xa007	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0xa007	sel=-1
+45	2378	751551	IOConnectMapMemory	connect=0xa007	memType=1	options=0x1	-	0	addr=0x6561000	size=0x20000
+PRE	IOConnectMapMemory	connect=0xa007	sel=-1
+46	2378	751581	IOConnectMapMemory	connect=0xa007	memType=2	options=0x1	-	0	addr=0x6581000	size=0x8000
+PRE	IOConnectMapMemory	connect=0xa007	sel=-1
+47	2378	751612	IOConnectMapMemory	connect=0xa007	memType=4	options=0x1	-	0	addr=0x2dcb000	size=0x1000
+PRE	scalarI_scalarO	connect=0xa007	sel=20
+48	2378	751920	scalarI_scalarO	connect=0xa007	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+49	2378	944835	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xab0b	-
+PRE	scalarI_scalarO	connect=0xab0b	sel=3
+50	2378	944872	scalarI_scalarO	connect=0xab0b	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0xab0b	sel=-1
+51	2378	945068	IOServiceClose	connect=0xab0b	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+52	2378	945500	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xab0f	-
+PRE	scalarI_scalarO	connect=0xab0f	sel=3
+53	2378	945528	scalarI_scalarO	connect=0xab0f	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0xab0f	sel=-1
+54	2378	945556	IOConnectMapMemory	connect=0xab0f	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0xab0f	sel=-1
+55	2378	945587	IOConnectMapMemory	connect=0xab0f	memType=1	options=0x1	-	0	addr=0x6910000	size=0x20000
+PRE	IOConnectMapMemory	connect=0xab0f	sel=-1
+56	2378	945615	IOConnectMapMemory	connect=0xab0f	memType=2	options=0x1	-	0	addr=0x6930000	size=0x8000
+PRE	IOConnectMapMemory	connect=0xab0f	sel=-1
+57	2378	945645	IOConnectMapMemory	connect=0xab0f	memType=4	options=0x1	-	0	addr=0x2dcc000	size=0x1000
+PRE	scalarI_scalarO	connect=0xab0f	sel=20
+58	2378	945953	scalarI_scalarO	connect=0xab0f	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+59	2378	948436	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xac03	-
+PRE	scalarI_scalarO	connect=0xac03	sel=3
+60	2378	948469	scalarI_scalarO	connect=0xac03	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+61	2378	948732	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xad03	-
+PRE	scalarI_scalarO	connect=0xad03	sel=3
+62	2378	948758	scalarI_scalarO	connect=0xad03	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0xad03	sel=-1
+63	2378	949034	IOServiceClose	connect=0xad03	-	-	-	0	-	-
+PRE	IOServiceClose	connect=0xac03	sel=-1
+64	2378	949229	IOServiceClose	connect=0xac03	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+65	2378	949980	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xac07	-
+PRE	scalarI_scalarO	connect=0xac07	sel=3
+66	2378	950013	scalarI_scalarO	connect=0xac07	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOServiceClose	connect=0xac07	sel=-1
+67	2378	950199	IOServiceClose	connect=0xac07	-	-	-	0	-	-
+PRE	IOServiceOpen	connect=0x0	sel=-1
+68	2378	950553	IOServiceOpen	service=0x9c07	type=1	-	-	0	connect_out=0xac0b	-
+PRE	IOConnectAddClient	connect=0xac0b	sel=-1
+69	2378	950578	IOConnectAddClient	connect=0xac0b	client=0xab0f	-	-	0	-	-
+PRE	scalarI_scalarO	connect=0xac0b	sel=3
+70	2378	950602	scalarI_scalarO	connect=0xac0b	sel=3	0	3->3	0	NULL	008100400f7c800010000000
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+71	2378	950630	IOConnectMapMemory	connect=0xac0b	memType=0	options=0x101	-	0	addr=0x1c1000	size=0x1000
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+72	2378	950660	IOConnectMapMemory	connect=0xac0b	memType=1	options=0x1	-	0	addr=0x6947000	size=0x20000
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+73	2378	950689	IOConnectMapMemory	connect=0xac0b	memType=2	options=0x1	-	0	addr=0x6967000	size=0x8000
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+74	2378	950722	IOConnectMapMemory	connect=0xac0b	memType=4	options=0x1	-	0	addr=0x2ed8000	size=0x1000
+PRE	scalarI_scalarO	connect=0xac0b	sel=20
+75	2378	951041	scalarI_scalarO	connect=0xac0b	sel=20	0	5->5	0	NULL	00000003000072400000000c0000000100000000
+PRE	scalarI_structureI	connect=0xac0b	sel=2
+76	2378	953030	scalarI_structureI	connect=0xac0b	sel=2	2	struct=0	0	0000000100000001	NULL
+PRE	scalarI_scalarO	connect=0xac0b	sel=6
+77	2378	969920	scalarI_scalarO	connect=0xac0b	sel=6	1	3->3	-536870206	11b920b4	0020b750bfffd220bfffd220
+PRE	scalarI_structureI	connect=0xac0b	sel=0
+78	2378	970323	scalarI_structureI	connect=0xac0b	sel=0	4	struct=0	0	11b920b4000004000000000000000000	NULL
+PRE	scalarI_structureI	connect=0xac0b	sel=16
+79	2378	970347	scalarI_structureI	connect=0xac0b	sel=16	1	struct=0	0	00000000	NULL
+PRE	scalarI_scalarO	connect=0xac0b	sel=5
+80	2378	970378	scalarI_scalarO	connect=0xac0b	sel=5	0	4->4	0	NULL	000002d000000142000002d000000142
+PRE	scalarI_scalarO	connect=0xac0b	sel=3
+81	2378	970406	scalarI_scalarO	connect=0xac0b	sel=3	0	3->3	0	NULL	008100400f6c000010000000
+PRE	scalarI_scalarO	connect=0xac0b	sel=4
+82	2378	970430	scalarI_scalarO	connect=0xac0b	sel=4	0	1->1	0	NULL	00000001
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+83	2378	982282	IOConnectMapMemory	connect=0xac0b	memType=1	options=0x1	-	0	addr=0x6980000	size=0x80000
+PRE	IOServiceOpen	connect=0x0	sel=-1
+84	2378	11864774	IOServiceOpen	service=0xafeb	type=1	-	-	0	connect_out=0xb7bf	-
+PRE	scalarI_structureI	connect=0xac0b	sel=0
+85	2378	39002468	scalarI_structureI	connect=0xac0b	sel=0	4	struct=0	0	0000000000000000bfffc5d0005d5ab8	NULL
+PRE	IOConnectMapMemory	connect=0xac0b	sel=-1
+86	2378	39003173	IOConnectMapMemory	connect=0xac0b	memType=1	options=0x1	-	0	addr=0x6980000	size=0x80000
+PRE	IOServiceClose	connect=0xac0b	sel=-1
+87	2378	39003850	IOServiceClose	connect=0xac0b	-	-	-	0	-	-
+PRE	IOServiceClose	connect=0xa007	sel=-1
+88	2378	39357227	IOServiceClose	connect=0xa007	-	-	-	0	-	-
+PRE	IOServiceClose	connect=0x9f0f	sel=-1
+89	2378	39364923	IOServiceClose	connect=0x9f0f	-	-	-	0	-	-
+PRE	IOServiceClose	connect=0x9e0f	sel=-1
+90	2378	39413277	IOServiceClose	connect=0x9e0f	-	-	-	0	-	-

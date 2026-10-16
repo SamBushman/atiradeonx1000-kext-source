@@ -1,0 +1,52 @@
+using Finder window bounds: 100,100 - 700,500
+scenario idle: 200 ticks at 16000 us
+METRIC idle.a n=200 min=0.000 p10=0.000 median=0.000 p90=0.000 max=0.000
+METRIC idle.b n=200 min=0.000 p10=0.000 median=0.000 p90=0.000 max=0.000
+METRIC idle.c n=200 min=64.441 p10=65.617 median=69.440 p90=105.018 max=113.269
+METRIC idle.d n=200 min=61.243 p10=61.301 median=67.544 p90=114.008 max=124.000
+scenario window_open: 200 ticks at 16000 us
+METRIC window_open.a n=200 min=0.000 p10=2.000 median=8.783 p90=12.550 max=14.910
+METRIC window_open.b n=200 min=0.000 p10=388852.000 median=2314672.000 p90=3359910.000 max=3936050.750
+METRIC window_open.c n=200 min=66.095 p10=166.288 median=254.581 p90=328.049 max=352.936
+METRIC window_open.d n=200 min=60.931 p10=196.914 median=327.677 p90=427.716 max=470.515
+scenario window_drag: 200 ticks at 16000 us
+METRIC window_drag.a n=200 min=6.728 p10=23.319 median=56.786 p90=57.643 max=57.938
+METRIC window_drag.b n=200 min=1761062.375 p10=6647591.000 median=16484294.000 p90=16730327.000 max=16815236.000
+METRIC window_drag.c n=200 min=186.502 p10=213.081 median=270.976 p90=277.921 max=280.554
+METRIC window_drag.d n=200 min=242.287 p10=276.250 median=347.037 p90=349.511 max=350.962
+scenario window_resize: 200 ticks at 16000 us
+METRIC window_resize.a n=200 min=22.990 p10=30.694 median=58.408 p90=60.631 max=60.658
+METRIC window_resize.b n=200 min=6639927.500 p10=9439604.000 median=19864046.000 p90=22505958.000 max=22684594.000
+METRIC window_resize.c n=200 min=168.398 p10=357.857 median=533.264 p90=540.938 max=544.946
+METRIC window_resize.d n=200 min=210.757 p10=549.224 median=1364.148 p90=1419.629 max=1430.728
+scenario scroll: 200 ticks at 16000 us
+METRIC scroll.a n=200 min=27.856 p10=28.613 median=29.874 p90=31.763 max=33.566
+METRIC scroll.b n=200 min=3907078.750 p10=4036665.500 median=4223247.500 p90=9295582.000 max=12029934.000
+METRIC scroll.c n=200 min=271.155 p10=280.262 median=295.213 p90=319.284 max=347.991
+METRIC scroll.d n=200 min=485.489 p10=493.177 median=514.022 p90=691.538 max=797.990
+scenario dock_hover: 200 ticks at 16000 us
+METRIC dock_hover.a n=200 min=30.367 p10=40.195 median=59.724 p90=60.166 max=60.292
+METRIC dock_hover.b n=200 min=4178675.750 p10=5035543.500 median=6389855.500 p90=7035687.000 max=7234865.500
+METRIC dock_hover.c n=200 min=275.394 p10=283.219 median=297.709 p90=309.113 max=317.654
+METRIC dock_hover.d n=200 min=519.531 p10=716.231 median=1032.540 p90=1065.863 max=1079.806
+scenario expose_all_windows: 200 ticks at 16000 us
+METRIC expose_all_windows.a n=200 min=16.203 p10=19.507 median=25.992 p90=59.376 max=60.338
+METRIC expose_all_windows.b n=200 min=10673214.000 p10=27495230.000 median=41113624.000 p90=52882648.000 max=62357072.000
+METRIC expose_all_windows.c n=200 min=113.248 p10=123.400 median=134.212 p90=309.113 max=327.774
+METRIC expose_all_windows.d n=200 min=142.035 p10=160.312 median=194.768 p90=909.401 max=1062.172
+scenario show_desktop: 200 ticks at 16000 us
+METRIC show_desktop.a n=200 min=12.495 p10=17.156 median=22.918 p90=27.778 max=32.866
+METRIC show_desktop.b n=200 min=3703258.500 p10=4659551.000 median=6038039.500 p90=14799698.000 max=22107442.000
+METRIC show_desktop.c n=200 min=64.602 p10=80.814 median=123.994 p90=137.205 max=146.022
+METRIC show_desktop.d n=200 min=103.376 p10=141.271 median=178.434 p90=205.394 max=225.242
+scenario dashboard: 200 ticks at 16000 us
+METRIC dashboard.a n=200 min=6.694 p10=17.150 median=27.693 p90=33.337 max=38.521
+METRIC dashboard.b n=200 min=5408956.500 p10=32603346.000 median=57424700.000 p90=68901416.000 max=79877960.000
+METRIC dashboard.c n=200 min=50.305 p10=77.577 median=135.731 p90=143.247 max=146.522
+METRIC dashboard.d n=200 min=58.499 p10=114.054 median=201.745 p90=227.354 max=243.946
+scenario minimize_genie: 200 ticks at 16000 us
+METRIC minimize_genie.a n=200 min=4.619 p10=9.150 median=59.674 p90=60.775 max=60.879
+METRIC minimize_genie.b n=200 min=5197154.500 p10=7146521.000 median=14504366.000 p90=17057496.000 max=20326940.000
+METRIC minimize_genie.c n=200 min=56.412 p10=131.911 median=444.014 p90=485.508 max=507.073
+METRIC minimize_genie.d n=200 min=53.185 p10=158.721 median=725.206 p90=757.071 max=770.759
+RESULT: PASS
