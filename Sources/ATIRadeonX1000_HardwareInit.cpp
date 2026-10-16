@@ -36,6 +36,7 @@ void ATIRadeonX1000::setupR520Pipes() {
   UInt32 uVar2;
   SInt32 iVar3;
   UInt32 uVar4;
+  UInt32 uVar5;
   
   enforceInOrderExecutionIO();
   iVar3 = M<SInt32>(self + 0x860);
@@ -44,9 +45,7 @@ void ATIRadeonX1000::setupR520Pipes() {
     } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
   } while (((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
            ((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0));
-  M<UInt32>(iVar3 + 0x402c) =
-       (UInt32)M<UInt8>(iVar3 + 0x402c) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x402d) << 0x10 |
-       ((UInt32)M<UInt8>(iVar3 + 0x402e) << 0x10 | 0x40000) >> 8 | (UInt32)M<UInt8>(iVar3 + 0x402f);
+  storeWordByteReversed(&M<UInt8>(iVar3 + 0x402c), loadWordByteReversed(&M<UInt8>(iVar3 + 0x402c)) | 0x40000);
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
@@ -54,8 +53,7 @@ void ATIRadeonX1000::setupR520Pipes() {
     } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
   } while ((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
           (((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0))));
-  bVar1 = M<UInt8>(iVar3 + 0x402d) >> 4;
-  uVar4 = bVar1 & 3;
+  uVar4 = loadWordByteReversed(&M<UInt8>(iVar3 + 0x402c)) >> 0xc & 3;
   uVar2 = (1 << uVar4 + 1) - 1;
   M<UInt32>(iVar3 + 0x42c8) =
        uVar2 * 0x1000000 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
@@ -70,7 +68,7 @@ void ATIRadeonX1000::setupR520Pipes() {
     uVar2 = 6;
     M<UInt32>(self + 0xb98) = 2;
   }
-  else if ((bVar1 & 3) == 0) {
+  else if (uVar4 == 0) {
 LAB_0001bea0:
     uVar2 = 0;
     M<UInt32>(self + 0xb98) = 1;
@@ -93,10 +91,7 @@ LAB_0001bea0:
     } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
   } while (((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
            ((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0));
-  M<UInt32>(iVar3 + 0x170c) =
-       (UInt32)M<UInt8>(iVar3 + 0x170c) << 0x18 | (UInt32)M<UInt8>(iVar3 + 0x170d) << 0x10 |
-       (UInt32)M<UInt8>(iVar3 + 0x170e) << 8 |
-       ((UInt32)M<UInt8>(iVar3 + 0x170f) << 0x18 | 0x80000000) >> 0x18;
+  storeWordByteReversed(&M<UInt8>(iVar3 + 0x170c), loadWordByteReversed(&M<UInt8>(iVar3 + 0x170c)) | 0x80000000);
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
@@ -127,14 +122,10 @@ LAB_0001bea0:
    * correct position, matching stock's real instruction order. This function was previously
    * unreachable on a hot-swapped instance (blocked by #147's original chip-ID bug), so this bug was
    * never exercised until #147/#156's real fix let setupR520Pipes() run for the first time. */
-  bVar1 = M<UInt8>(iVar3 + 8);
-  M<UInt32>(iVar3 + 8) =
-       (bVar1 & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar3 + 9) << 0x10 |
-       (UInt32)M<UInt8>(iVar3 + 10) << 8 | (UInt32)M<UInt8>(iVar3 + 0xb);
-  uVar2 = ((UInt32)M<UInt8>(iVar3 + 0xf) << 0x18 ^ 0x30000000) >> 0x1c & 3;
-  M<UInt32>(iVar3 + 8) =
-       (UInt32)bVar1 << 0x18 | (UInt32)M<UInt8>(iVar3 + 9) << 0x10 | (UInt32)M<UInt8>(iVar3 + 10) << 8 |
-       (UInt32)M<UInt8>(iVar3 + 0xb);
+  uVar5 = loadWordByteReversed(&M<UInt8>(iVar3 + 8));
+  storeWordByteReversed(&M<UInt8>(iVar3 + 8), uVar5 & 0xffffff40 | 0x34);
+  uVar2 = (loadWordByteReversed(&M<UInt8>(iVar3 + 0xc)) ^ 0x30000000) >> 0x1c & 3;
+  storeWordByteReversed(&M<UInt8>(iVar3 + 8), uVar5);
   if (uVar2 != 0) {
     if (uVar2 < 3) {
       M<UInt32>(self + 0xb9c) = 1;
@@ -288,23 +279,22 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
     uVar14 = L.f54;
   }
   iVar10 = M<SInt32>(self + 0x860);
-  uVar11 = (UInt32)M<UInt8>(iVar10 + 0x16c7) << 0x18 | (UInt32)M<UInt8>(iVar10 + 0x16c6) << 0x10 |
-           (UInt32)M<UInt8>(iVar10 + 0x16c5) << 8 | M<UInt8>(iVar10 + 0x16c4) & 0xfffffff0;
-  if ((M<UInt8>(iVar10 + 0x6080) & 1) == 0) {
+  uVar11 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x16c4)) & 0xfffffff0;
+  if ((loadWordByteReversed(&M<UInt8>(iVar10 + 0x6080)) & 1) == 0) {
     uVar5 = 0;
     uVar11 = 0;
     uVar14 = 0;
   }
   else {
-    bVar1 = M<UInt8>(iVar10 + 0x6104) & 3;
-    bVar2 = M<UInt8>(iVar10 + 0x6105) & 7;
+    bVar1 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) & 3;
+    bVar2 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) >> 8 & 7;
     if (bVar1 == 1) {
       uVar16 = 4;
       if (((bVar2 != 1) && (uVar16 = 3, bVar2 != 0)) && (uVar16 = 0xf, bVar2 != 2))
       goto LAB_0001c414;
     }
     else {
-      if ((M<UInt8>(iVar10 + 0x6104) & 3) == 0) {
+      if (bVar1 == 0) {
         uVar16 = 9;
 joined_r0x0001c43c:
         if (bVar2 == 0) goto LAB_0001c418;
@@ -321,7 +311,7 @@ LAB_0001c414:
       uVar16 = 0xff;
     }
 LAB_0001c418:
-    M<UInt32>(self + 0x898) = M<UInt8>(iVar10 + 0x6088) & 1;
+    M<UInt32>(self + 0x898) = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6088)) & 1;
     if (uVar16 == 6) {
       uVar11 = uVar11 | 6;
       M<UInt32>(iVar10 + 0x15d4) = 0x2000000;
@@ -378,8 +368,8 @@ LAB_0001c54c:
     M<UInt32>(self + 0x134) = uVar4;
     M<SInt16>(self + 0x144) = (SInt16)uVar11;
     M<UInt32>(self + 0x13c) = uVar5;
-    if ((M<UInt8>(iVar10 + 0x6106) & 0x10) == 0) {
-      self[0x164] = (M<UInt8>(iVar10 + 0x6106) >> 5 & 1);
+    if ((loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) & 0x100000) == 0) {
+      self[0x164] = (loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) >> 0x15 & 1);
     }
     else {
       self[0x164] = 0x3;
@@ -395,7 +385,7 @@ LAB_0001c54c:
     uVar14 = 0x200000;
     goto LAB_0001c9b0;
   }
-  bVar1 = M<UInt8>(iVar10 + 0x6880);
+  bVar1 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6880)) & 1;
   M<UInt32>(self + 0x894) = 0;
   if ((loadWordByteReversed(&M<UInt8>(iVar10 + 0x6910))) !=
       M<UInt32>(self + 0xb70)) {
@@ -421,8 +411,8 @@ LAB_0001c54c:
     uVar13 = L.f54;
   }
   iVar10 = M<SInt32>(self + 0x860);
-  bVar1 = M<UInt8>(iVar10 + 0x6904) & 3;
-  bVar2 = M<UInt8>(iVar10 + 0x6905) & 7;
+  bVar1 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6904)) & 3;
+  bVar2 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6904)) >> 8 & 7;
   if (bVar1 == 1) {
     if (bVar2 == 1) {
       uVar8 = 4;
@@ -438,7 +428,7 @@ LAB_0001c54c:
       AVar6 = 0xf;
     }
   }
-  else if ((M<UInt8>(iVar10 + 0x6904) & 3) == 0) {
+  else if (bVar1 == 0) {
     if (bVar2 == 0) {
       uVar8 = 9;
       AVar6 = 0x9;
@@ -465,7 +455,7 @@ LAB_0001c710:
     uVar8 = 10;
     AVar6 = 0xa;
   }
-  M<UInt32>(self + 0x89c) = M<UInt8>(iVar10 + 0x6888) & 1;
+  M<UInt32>(self + 0x89c) = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6888)) & 1;
   if (uVar8 < 3) {
 LAB_0001c7d0:
     AVar7 = 0x1;
@@ -500,8 +490,8 @@ LAB_0001c7d0:
   self[0x1db] = 0xff;
   M<UInt32>(self + 0x1ac) = uVar16;
   M<UInt32>(self + 0x1b4) = uVar15;
-  if ((M<UInt8>(iVar10 + 0x6906) & 0x10) == 0) {
-    self[0x1dc] = (M<UInt8>(iVar10 + 0x6906) >> 5 & 1);
+  if ((loadWordByteReversed(&M<UInt8>(iVar10 + 0x6904)) & 0x100000) == 0) {
+    self[0x1dc] = (loadWordByteReversed(&M<UInt8>(iVar10 + 0x6904)) >> 0x15 & 1);
   }
   else {
     self[0x1dc] = 0x3;
@@ -789,21 +779,19 @@ void ATIRadeonX1000::setup_R500_internal_space() {
     M<UInt32>(iVar5 + 0x70) = 0x1007f00;
     enforceInOrderExecutionIO();
   }
-  uVar4 = (UInt32)CONCAT11(M<UInt8>(iVar5 + 0x75),M<UInt8>(iVar5 + 0x74));
+  uVar4 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x74)) & 0xffff;
   if (uVar4 != 0) {
     uVar8 = loadWordByteReversed(&M<UInt8>(iVar5 + 0xf8));
     if (uVar8 == 0) {
       uVar8 = 0x8000000;
     }
-    uVar11 = (UInt32)M<UInt8>(iVar5 + 0x133) << 0x18;
-    uVar2 = (UInt32)M<UInt8>(iVar5 + 0x132) << 0x10;
-    uVar3 = (UInt32)M<UInt8>(iVar5 + 0x131) << 8;
+    uVar11 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x130));
     uVar9 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x108));
-    uVar10 = uVar11 | uVar2 & 0xff7fffff | uVar3 | (UInt32)M<UInt8>(iVar5 + 0x130);
+    uVar10 = uVar11 & 0xff7fffff;
     if ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x104))) ==
         uVar9 + (loadWordByteReversed(&M<UInt8>(iVar5 + 0x100)))) {
       uVar9 = uVar9 << 1;
-      uVar10 = uVar11 | uVar2 | uVar3 | (UInt32)M<UInt8>(iVar5 + 0x130) | 0x800000;
+      uVar10 = uVar11 | 0x800000;
     }
     if (uVar9 < uVar8) {
       M<UInt32>(iVar5 + 0xf8) =
@@ -817,10 +805,10 @@ void ATIRadeonX1000::setup_R500_internal_space() {
          uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18;
     enforceInOrderExecutionIO();
     bVar1 = (uVar7 & 0x400000) == 0;
-    uVar11 = (loadWordByteReversed(&M<UInt8>(iVar5 + 0x6910))) +
-             uVar4 * -0x10000;
-    uVar4 = (loadWordByteReversed(&M<UInt8>(iVar5 + 0x6110))) +
-            uVar4 * -0x10000;
+    uVar2 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x6110));
+    uVar3 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x6910));
+    uVar2 = uVar2 + uVar4 * -0x10000;
+    uVar11 = uVar3 + uVar4 * -0x10000;
     if (bVar1) {
       M<UInt32>(iVar5 + 0x70) = 0x400ff00;
       enforceInOrderExecutionIO();
@@ -833,13 +821,9 @@ void ATIRadeonX1000::setup_R500_internal_space() {
     enforceInOrderExecutionIO();
     M<UInt32>(iVar5 + 0x134) = 0;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar5 + 0x6110) =
-         (UInt32)M<UInt8>(iVar5 + 0x6110) * 0x1000000 | (uVar4 & 0xff00) << 8 | uVar4 >> 8 & 0xff00 |
-         uVar4 >> 0x18;
+    storeWordByteReversed(&M<UInt8>(iVar5 + 0x6110), uVar2);
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar5 + 0x6910) =
-         (UInt32)M<UInt8>(iVar5 + 0x6910) * 0x1000000 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00
-         | uVar11 >> 0x18;
+    storeWordByteReversed(&M<UInt8>(iVar5 + 0x6910), uVar11);
     enforceInOrderExecutionIO();
     if (bVar1) {
       M<UInt32>(iVar5 + 0x70) = 0x400ff00;
@@ -861,7 +845,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
     enforceInOrderExecutionIO();
   }
   iVar6 = M<SInt32>(self + 0x8d4);
-  uVar8 = ((UInt32)M<UInt8>(iVar5 + 0x77) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x76) << 0x10) + 0x10000;
+  uVar8 = (loadWordByteReversed(&M<UInt8>(iVar5 + 0x74)) & 0xffff0000) + 0x10000;
   M<UInt32>(self + 0x8a4) = uVar8;
   uVar4 = uVar8 + iVar6;
   M<UInt32>(iVar5 + 0x30) = 0x13000000;
@@ -951,6 +935,7 @@ bool ATIRadeonX1000::initialize_hardware() {
   UInt32 uVar6;
   SInt32 iVar7;
   SInt32 iVar8;
+  UInt32 uVar9;
   
   if ((M<UInt32>(self + 0x98) & 0xf00000) != 0) {
     setupR520Pipes();
@@ -1047,17 +1032,14 @@ bool ATIRadeonX1000::initialize_hardware() {
       uVar5 = 1;
       if (M<SInt32>(self + 3000) != 0) {
         enforceInOrderExecutionIO();
-        bVar1 = M<UInt8>(iVar7 + 0x1727);
-        bVar2 = M<UInt8>(iVar7 + 0x1726);
-        bVar3 = M<UInt8>(iVar7 + 0x1725);
-        bVar4 = M<UInt8>(iVar7 + 0x1724);
+        uVar9 = loadWordByteReversed(&M<UInt8>(iVar7 + 0x1724));
         iVar7 = M<SInt32>(self + 0x914);
         iVar8 = M<SInt32>(self + 0x900);
         M<UInt32>(iVar8 + iVar7 * 4) = 0x5c9;
         uVar6 = iVar7 + 1U & 0x7ff;
         M<UInt32>(self + 0x914) = uVar6;
         M<UInt32>(iVar8 + uVar6 * 4) =
-             (UInt32)bVar1 << 0x18 | (UInt32)bVar2 << 0x10 | (UInt32)bVar3 << 8 | (UInt32)bVar4 | 3;
+             uVar9 | 3;
         M<UInt32>(self + 0x914) = uVar6 + 1 & 0x7ff;
         this->submit_ring_data();
         uVar5 = 1;

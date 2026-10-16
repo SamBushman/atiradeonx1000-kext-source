@@ -67,29 +67,24 @@ void ATIRadeonX1000::DumpASICHangState() {
   UInt32 uVar30;
   UInt32 uVar31;
   UInt32 uVar32;
+  UInt32 uVar33;
   
   this->disable_GPUSensor();
   iVar24 = M<SInt32>(self + 0x860);
-  bVar4 = M<UInt8>(iVar24 + 0x7fb);
-  bVar5 = M<UInt8>(iVar24 + 0x7fa);
-  bVar6 = M<UInt8>(iVar24 + 0x7f9);
-  bVar7 = M<UInt8>(iVar24 + 0x7f8);
+  uVar33 = loadWordByteReversed(&M<UInt8>(iVar24 + 0x7f8));
   iVar24 = 0;
   do {
     GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
     GH_thread_block(0);
     iVar25 = M<SInt32>(self + 0x860);
-    if (((UInt32)bVar4 << 0x18 | (UInt32)bVar5 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar7) !=
-        (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
+    if (uVar33 != (loadWordByteReversed(&M<UInt8>(iVar25 + 0x7f8)))) {
       this->enable_GPUSensor();
       return;
     }
     iVar24 = iVar24 + 1;
   } while (iVar24 != 0x186a1);
-  uVar2 = M<UInt8>(iVar25 + 0x5003);
-  uVar3 = M<UInt8>(iVar25 + 0x5002);
+  uVar32 = loadHalfByteReversed(&M<UInt8>(iVar25 + 0x5002)) | 0x1000000;      /* one lhbrx, as the shipped code */
   GH_IOSleep(10);
-  uVar32 = CONCAT11(uVar2,uVar3) | 0x1000000;
   GH_IOLog("** ASIC Hang Log Start **\n");
   GH_IOSleep(10);
   iVar24 = M<SInt32>(self + 0x860);

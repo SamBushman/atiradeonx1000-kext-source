@@ -54,8 +54,7 @@ void ATIRadeonX1000::submit_empty_buffer() {
     enforceInOrderExecutionIO();
     M<UInt32>(iVar1 + 0x30) = 0x22000000;
     enforceInOrderExecutionIO();
-    if (((M<char>(iVar1 + 0x37) == '\0' && M<char>(iVar1 + 0x36) == '\0') &&
-        M<char>(iVar1 + 0x35) == '\0') && M<char>(iVar1 + 0x34) == '\0') {
+    if (loadWordByteReversed(&M<UInt8>(iVar1 + 0x34)) == 0) {      /* one byte-reversed read, as the shipped code (Ghidra showed four byte loads) */
       return;
     }
     iVar3 = iVar3 + -1;

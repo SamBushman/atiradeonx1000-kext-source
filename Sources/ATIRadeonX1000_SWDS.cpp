@@ -112,7 +112,7 @@ void ATIRadeonX1000::SWDSFunc(OSObject *real_param_1, IOTimerEventSource *param_
   
   GH_IOLockLock(M<UInt32>(param_1 + 0x840));
   if ((param_1[0x80] != 0x0) && (param_1[0x9b0] != 0x0)) {
-    bVar1 = M<UInt8>(M<SInt32>(param_1 + 0x860) + 0xbf8);
+    bVar1 = (UInt8)loadWordByteReversed(&M<UInt8>(M<SInt32>(param_1 + 0x860) + 0xbf8));      /* one word read; only the masks 0x80/0x40 are tested */
     if ((M<SInt32>(param_1 + 0xb10) == 0) || (bVar2 = true, M<SInt32>(param_1 + 0xb28) == 0)) {
       bVar2 = false;
     }

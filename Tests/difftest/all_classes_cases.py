@@ -33,6 +33,8 @@ def header_return(cls, meth):
 
 # per-function options: calls whose unused declared parameters hold leftover register contents
 OPTIONS = {
+    # no register access in the shipped function (checked in its disassembly): a plain buffer behind +0x860, so soup pointers that land in it are not 'hardware'
+    'ATIRadeonX1000::SWDSWriteBlitToCmdBuf': dict(no_mmio=True),
     'IOATIR500GLContext::set_surface': dict(ignore_args={'setCompatibleSurfaceMode': [3]}),
 }
 
@@ -41,9 +43,12 @@ for cls in CLASSES:
     names = sorted(n for n in _stock.funcs if re.match(r'^__ZN%d%s\d' % (len(cls), cls), n) and not SKIP.search(n))
     dem = demangle_all(names)
     world = make_generic_world(cls)
+    world_nommio = make_generic_world(cls, mmio=False)
     for n in names:
         d = dem[n]
         meth = d.split('(')[0].split('::')[-1]
         if (cls + '::' + meth) in _manual:
             continue
-        CASES.append(Case(cls + '::' + meth, world, ret=header_return(cls, meth), signature=d[d.index('::') + 2:], name=d, seeds=10, **OPTIONS.get(cls + '::' + meth, {})))
+        CASES.append(Case(cls + '::' + meth, world, ret=header_return(cls, meth), signature=d[d.index('::') + 2:], name=d, seeds=10, **{k: v for k, v in OPTIONS.get(cls + '::' + meth, {}).items() if k != 'no_mmio'}))
+        if OPTIONS.get(cls + '::' + meth, {}).get('no_mmio'):
+            CASES[-1].world = world_nommio

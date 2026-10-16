@@ -192,7 +192,7 @@ def make_pool(m, rng, n=10, size=0x400):
     return pool
 
 
-def accelerator_object(m, rng, pool):
+def accelerator_object(m, rng, pool, mmio=True):
     """the accelerator: a soup object with its vtable, the hardware-alive flag, the command lock and a register window (device model: flip-flop)"""
     a = m.alloc(0x1000)
     m.uc.mem_write(a, soup_words(rng, 0x400, pool))
@@ -201,16 +201,19 @@ def accelerator_object(m, rng, pool):
     m.w32(a + 0xcc, rng.choice([1, 2, 2]))
     for i in range(2): m.w32(a + 0x114 + 4 * i, rng.choice([0, 1, 1]))
     m.w32(a + 0x840, rng.choice(pool))
-    m.w32(a + 0x860, m.mmio(0x20000, FlipFlopRegisters(rng)))
+    if mmio:
+        m.w32(a + 0x860, m.mmio(0x20000, R500Registers(rng)))
+    else:
+        m.w32(a + 0x860, m.alloc(0x20000))        # a plain buffer: for functions that never touch the registers
     return a
 
 
-def generic_this(m, rng, cls):
+def generic_this(m, rng, cls, mmio=True):
     """returns (this, pool) for a method of `cls` (or of its base): a soup object of the concrete class with a vtable and, where known, an accelerator"""
     cls = CONCRETE.get(cls, cls)
     pool = make_pool(m, rng)
     if cls == 'ATIRadeonX1000':
-        this = accelerator_object(m, rng, pool)
+        this = accelerator_object(m, rng, pool, mmio)
         m.alloc(0x200)                       # keep allocation parity with the other classes
         return this, pool
     size = (OBJECT_SIZES.get(cls, 0x400) + 0xfff) & ~0xfff
@@ -218,7 +221,7 @@ def generic_this(m, rng, cls):
     m.uc.mem_write(this, soup_words(rng, OBJECT_SIZES.get(cls, 0x400) // 4, pool))
     m.w32(this, m.vtable(cls))
     if cls in ACCEL_OFFSET:
-        m.w32(this + ACCEL_OFFSET[cls], accelerator_object(m, rng, pool))
+        m.w32(this + ACCEL_OFFSET[cls], accelerator_object(m, rng, pool, mmio))
     return this, pool
 
 
@@ -231,9 +234,9 @@ def soup_args(m, rng, kinds, this, pool):
     return args
 
 
-def make_generic_world(cls):
+def make_generic_world(cls, mmio=True):
     def world(m, rng, kinds):
-        this, pool = generic_this(m, rng, cls)
+        this, pool = generic_this(m, rng, cls, mmio)
         return soup_args(m, rng, kinds, this, pool)
     return world
 
@@ -259,3 +262,15 @@ class FlipFlopRegisters:
         base = (((off & ~3) * 2654435761) + 0x1234567) & 0xffffffff
         v = base if seq is None else seq
         return bytes((v >> (8 * (3 - ((off + i) & 3)))) & 0xff for i in range(size))
+
+
+class R500Registers(FlipFlopRegisters):
+    """the register file of an idle R5xx: RBBM_STATUS (0xe40) says not busy, 0x1720 (the pipe-ready register the idle-wait loops test) has its ready bits set;
+    every other register behaves like FlipFlopRegisters"""
+    FIXED = {0xe40: 0x00000000, 0x1720: 0x00030000}
+
+    def __call__(self, kind, off, size, data):
+        if kind == 'R' and (off & ~3) in self.FIXED and not all((off + i) in self.written for i in range(size)):
+            v = self.FIXED[off & ~3]          # the registers are little-endian: lwbrx of these four bytes gives v
+            return bytes((v >> (8 * ((off + i) & 3))) & 0xff for i in range(size))
+        return FlipFlopRegisters.__call__(self, kind, off, size, data)

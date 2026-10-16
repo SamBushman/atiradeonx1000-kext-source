@@ -117,44 +117,32 @@ void dump_registers(ATIRadeonX1000 *accelerator) {
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 0x221c));
   IOLog("REG> VAP_CLIP_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x130000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x130000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x170000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x170000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x180000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x180000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x190000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x190000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x1a0000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x1a0000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);
   IOSleep(0);
-  M<UInt32>(iVar2 + 2000) =
-       (UInt32)M<UInt8>(iVar2 + 2000) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x7d1) << 0x10 |
-       ((M<UInt8>(iVar2 + 0x7d2) & 0xe0) << 0x10 | 0x1b0000) >> 8 | (UInt32)M<UInt8>(iVar2 + 0x7d3);
+  storeWordByteReversed(&M<UInt8>(iVar2 + 2000), loadWordByteReversed(&M<UInt8>(iVar2 + 2000)) & 0xffe0ffff | 0x1b0000);
   enforceInOrderExecutionIO();
   uVar1 = loadWordByteReversed(&M<UInt8>(iVar2 + 2000));
   IOLog("REG> CP_ME_CNTL = 0x%08lX (%lu)\n",uVar1,uVar1);

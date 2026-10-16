@@ -896,6 +896,7 @@ def coverage(runs):
 
 def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
+    cyc = [0, 0]
     all_runs = ([], [])
     sym_s = find_symbol(stock, case.function, case.signature)
     sym_r = find_symbol(rebuilt, case.function, case.signature)
@@ -915,9 +916,11 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             outs.append(out); all_runs[len(outs) - 1].append(out)
         probs = compare(case, outs[0], outs[1], strict_order, strict_calls)
         case.hw_events = getattr(case, 'hw_events', 0) + sum(1 for e in outs[0].events if e[0] in 'RW')
+        if probs != ['INCONCLUSIVE'] and outs[0].status == 'RET' and outs[1].status == 'RET':
+            cyc[0] += outs[0].cycles; cyc[1] += outs[1].cycles      # only runs both sides finished: the two sums are comparable
         results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if ((probs == ['INCONCLUSIVE'] and (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read)) or (outs[0].status == 'FAULT' and outs[1].status == 'FAULT' and probs == ['INCONCLUSIVE'])) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
-    case.cycles = (sum(r.cycles for r in all_runs[0] if r.status == 'RET' and not r.bad_read), sum(r.cycles for r in all_runs[1] if r.status == 'RET' and not r.bad_read))
+    case.cycles = (cyc[0], cyc[1])
     return sym_s, results
 
 
