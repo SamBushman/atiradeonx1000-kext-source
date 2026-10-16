@@ -124,12 +124,12 @@ void ATIR500Surface::set_linear_transform(int matrixIndex, OverlayPictureControl
     double f13 = static_cast<double>(F32At(control, 0xc));
     double zero = 0.0;
     double base = gain * c0;                              /* f29 */
-    double t1 = c0 - co[4] * zero;                        /* fnmsub f28 */
+    double t1 = -(co[4] * zero - co[2]);                  /* fnmsub f28: -(a*b - c), NOT c - a*b (differs in the sign of a zero result) */
     double t2 = co[6] * zero + co[8];                     /* fmadd  f26 */
     double t3 = co[10] * zero + co[12];                   /* fmadd  f25 */
-    double t4 = c0 * zero + co[4];                        /* fmadd  f27 */
-    double t5 = co[6] - co[8] * zero;                     /* fnmsub f30 */
-    double t6 = co[10] - co[12] * zero;                   /* fnmsub f11 */
+    double t4 = co[2] * zero + co[4];                     /* fmadd  f27 */
+    double t5 = -(co[8] * zero - co[6]);                  /* fnmsub f30 */
+    double t6 = -(co[12] * zero - co[10]);                /* fnmsub f11 */
     double f13m = (base * f13) * 1023.0;
     float fBase = static_cast<float>(base);
     float a28 = static_cast<float>(f31 * t1);
