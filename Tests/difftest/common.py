@@ -125,3 +125,35 @@ def texture_buffer(m, rng, SELF):
     ring = m.alloc(0x40); fill_words(m, ring, 0x40, rng)
     m.w32(b + 0x24, ring); m.w32(b + 0x28, ring)
     return b
+
+
+class RegisterFile:
+    """a minimal device model for a register window: remembers what was written (by the bytes at that offset) and returns it on a read; offsets never
+    written read as `default(offset)`. Both sides get an identical one, so it only decides what the code under test sees."""
+    def __init__(self, rng, default=None):
+        self.rng, self.mem = rng, {}
+        self.default = default or (lambda off: (off * 2654435761 + 0x1234567) & 0xffffffff)
+
+    def __call__(self, kind, off, size, data):
+        if kind == 'W':
+            for i in range(size):
+                self.mem[off + i] = data[i]
+            return None
+        out = bytearray()
+        for i in range(size):
+            if off + i in self.mem:
+                out.append(self.mem[off + i])
+            else:
+                out.append((self.default(off & ~3) >> (8 * (3 - ((off + i) & 3)))) & 0xff)
+        return bytes(out)
+
+
+def accelerator_with_registers(m, rng, window=0x20000):
+    """an accelerator object whose register window pointer (+0x860) is a register file; also +0x80 'hardware alive' flag and the command lock"""
+    ACCEL = m.alloc(0x1000)
+    fill_words(m, ACCEL, 0x1000, rng)
+    m.w32(ACCEL, m.vtable('ATIRadeonX1000'))
+    m.w8(ACCEL + 0x80, rng.choice([1, 1, 1, 0]))
+    m.w32(ACCEL + 0x840, ACCEL + 0x900)
+    m.w32(ACCEL + 0x860, m.mmio(window, RegisterFile(rng)))
+    return ACCEL

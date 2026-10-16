@@ -8,6 +8,9 @@ Success criteria for one function and one input (a "run"), judged against the st
   2. every write to memory that outlives the call (through a pointer argument, into an object, into a global) leaves the same bytes behind;
   3. the return value is the same;
   4. it ends the same way (returns / runs out of budget / faults), with the stack pointer and the callee-saved registers restored.
+  5. HARDWARE REGISTERS: every access to a register window (Machine.mmio) is compared strictly - the same reads and writes, at the same offsets, with the
+     same widths and the same bytes, in the same order, interleaved identically with the calls the function makes (a callee may touch the hardware
+     too). The business logic around them may differ; what the hardware sees may not.
 The execution time of each side is also reported, as an instruction count (the emulator is not cycle-accurate): the generated code may be bigger or
 smaller than the stock code - that is not a failure, a large ratio is flagged for a human.
 
@@ -226,6 +229,11 @@ class Machine:
         self.visited = set()
         self.trail = []
         self.read_trace = None
+        self.hw = []                  # register windows: (base, end, model)
+        self.events = []              # calls and register accesses, in order
+        self.write_log = []           # [addr, size, old bytes, new bytes]
+        self.pending = None           # index in write_log of the store whose result has not been read back yet
+        self.snapshots = []
         self.status = '?'
         self.stub_count = {}
 
@@ -239,6 +247,20 @@ class Machine:
         if fill is not None:
             self.uc.mem_write(a, fill)
         return a
+
+    def mmio(self, size=0x10000, model=None):
+        """a register window: memory whose reads and writes are hardware accesses, compared strictly between the two sides.
+        model(kind, offset, size, data) may emulate the device: kind 'W' is told what was written (data = the bytes), kind 'R' returns the bytes to be
+        read (or None to leave the memory as it is). Without a model the window is plain memory."""
+        a = self.alloc(size)
+        self.hw.append((a, a + size, model))
+        return a
+
+    def _hw_of(self, addr):
+        for b, e, mdl in self.hw:
+            if b <= addr < e:
+                return b, mdl
+        return None
 
     def rand_bytes(self, n, tag):
         r = random.Random((self.seed << 16) ^ zlib.crc32(tag.encode()))
@@ -278,17 +300,45 @@ class Machine:
             uc.mem_write(base, self.rand_bytes(PAGE, 'page%x' % base))
         return True
 
+    def _flush(self):
+        """read back the bytes of the last store (the hook runs before the store, so its result is only known afterwards)"""
+        if self.pending is not None:
+            i, hwidx = self.pending
+            ent = self.write_log[i]
+            ent[3] = bytes(self.uc.mem_read(ent[0], ent[1]))
+            if hwidx is not None:
+                self.events[hwidx][3] = ent[3].hex()
+                h = self._hw_of(ent[0])
+                if h and h[1]:
+                    h[1]('W', ent[0] - h[0], ent[1], ent[3])
+            self.pending = None
+
     def _write(self, uc, access, addr, size, value, ud):
+        self._flush()
         if any(a <= addr < b for a, b in self.ro):
             self.bad_read = True          # a store into the kext's own machine code / constants: a garbage pointer in the test world
             return
-        old = bytes(uc.mem_read(addr, size))
-        self.writes.append((addr, size, old, value & ((1 << (8 * size)) - 1) if size <= 8 else value))
+        self.write_log.append([addr, size, bytes(uc.mem_read(addr, size)), None])
+        h = self._hw_of(addr)
+        hwidx = None
+        if h:
+            self.events.append(['W', addr - h[0], size, None])
+            hwidx = len(self.events) - 1
+        self.pending = (len(self.write_log) - 1, hwidx)
+
+    def _hw_read(self, uc, access, addr, size, value, ud):
+        self._flush()
+        h = self._hw_of(addr)
+        if h and h[1]:
+            data = h[1]('R', addr - h[0], size, None)
+            if data is not None:
+                uc.mem_write(addr, bytes(data))
+        self.events.append(['R', addr - h[0], size, bytes(uc.mem_read(addr, size)).hex()])
 
     def _read_code(self, uc, access, addr, size, value, ud):
         if self.own[0] <= addr < self.own[1]:
             return                # the function's own extent holds its jump tables
-        self.bad_read = True          # the function read its own (or another function's) machine code as data: a garbage pointer in the test world
+        self.bad_read = True      # the function read machine code as data: a garbage pointer in the test world
 
     def _trace_read(self, uc, access, addr, size, value, ud):
         if not (STACK_TOP - STACK_SIZE <= addr < STACK_TOP) and not (self.image.size > addr >= 0 and False):
@@ -327,6 +377,9 @@ class Machine:
             vals.append(self.normalise(v, name, gi - 1))
         k = self.stub_count.get(name, 0); self.stub_count[name] = k + 1
         self.calls.append((name, tuple(vals), unknown))
+        self._flush()
+        self.events.append(['C', name, tuple(vals)])
+        self.snapshots.append(self.memory_diff())
         uc.reg_write(UC_PPC_REG_3, self.mock_policy(self, name, k) & 0xffffffff)
 
     def normalise(self, v, name, index):
@@ -357,6 +410,8 @@ class Machine:
         self.uc.hook_add(UC_HOOK_BLOCK, self._block, begin=0, end=self.image.size - 1)
         self.uc.hook_add(UC_HOOK_MEM_UNMAPPED, self._unmapped)
         self.uc.hook_add(UC_HOOK_MEM_WRITE, self._write)
+        for b, e, _ in self.hw:
+            self.uc.hook_add(UC_HOOK_MEM_READ, self._hw_read, begin=b, end=e - 1)
         if self.read_trace is not None:
             self.uc.hook_add(UC_HOOK_MEM_READ, self._trace_read)
         t = next(x for x in self.image.m.secs if x['name'] == '__text')
@@ -381,7 +436,8 @@ class Machine:
         for i, v in enumerate(args):
             uc.reg_write(UC_PPC_REG_3 + i, v & 0xffffffff)
         uc.reg_write(UC_PPC_REG_LR, STOP)
-        self.writes.clear(); self.calls.clear(); self.insns = 0; self.status = '?'
+        self.write_log.clear(); self.events.clear(); self.snapshots.clear(); self.pending = None
+        self.calls.clear(); self.insns = 0; self.status = '?'
         try:
             uc.emu_start(entry, STOP + 4, count=self.limit * 4)
             if self.status == '?':
@@ -390,6 +446,17 @@ class Machine:
             self.status = 'FAULT'
             self.fault = str(e)
         return self.result()
+
+    def memory_diff(self):
+        """{address: byte} of every byte outside the function's own stack frame whose value now differs from before the call"""
+        initial, final = {}, {}
+        lo, hi = STACK_TOP - STACK_SIZE, ENTRY_SP
+        for addr, size, old, new in self.write_log:
+            if new is None or lo <= addr < hi:
+                continue
+            for i in range(size):
+                initial.setdefault(addr + i, old[i]); final[addr + i] = new[i]
+        return {a: b for a, b in final.items() if b != initial[a]}
 
     def result(self):
         uc = self.uc
@@ -408,19 +475,11 @@ class Machine:
             for i, v in self.callee_saved.items():
                 if uc.reg_read(UC_PPC_REG_0 + i) != v:
                     r.abi.append('r%d not preserved' % i)
-        # non-local writes, as final-bytes-that-differ-from-the-initial ones
-        initial, final, order = {}, {}, []
-        lo, hi = STACK_TOP - STACK_SIZE, ENTRY_SP
-        for addr, size, old, val in self.writes:
-            if lo <= addr < hi:                              # the function's own stack frame
-                continue
-            newb = val.to_bytes(size, 'big') if isinstance(val, int) and size <= 8 else b''
-            for i in range(size):
-                initial.setdefault(addr + i, old[i])
-                if newb: final[addr + i] = newb[i]
-            order.append((addr, size, val))
-        r.writes = {a: b for a, b in final.items() if b != initial[a]}
-        r.write_order = order
+        self._flush()
+        r.writes = self.memory_diff()
+        r.write_order = [(a, n, b) for a, n, o, b in self.write_log if not (STACK_TOP - STACK_SIZE <= a < ENTRY_SP)]
+        r.events = [tuple(e) for e in self.events]
+        r.snapshots = list(self.snapshots)
         r.fault = getattr(self, 'fault', '') if self.status == 'FAULT' else ''
         return r
 
@@ -516,7 +575,7 @@ def find_symbol(image, function, signature=None):
     return cand[0]
 
 
-def compare(case, st, rb, strict_order=False):
+def compare(case, st, rb, strict_order=False, strict_calls=False):
     """-> list of problems (strings); empty = identical behaviour"""
     probs = []
     if st.status == 'TIMEOUT' or rb.status == 'TIMEOUT' or st.bad_read or rb.bad_read:
@@ -524,6 +583,20 @@ def compare(case, st, rb, strict_order=False):
     if st.status != rb.status:
         probs.append('ends differently: stock %s%s, rebuilt %s%s' % (st.status, ' (%s)' % st.fault if st.fault else '', rb.status, ' (%s)' % rb.fault if rb.fault else ''))
         return probs
+    # hardware register accesses, interleaved with the calls: exact
+    if any(e[0] in 'RW' for e in st.events + rb.events):
+        for i in range(max(len(st.events), len(rb.events))):
+            a = st.events[i] if i < len(st.events) else None
+            b = rb.events[i] if i < len(rb.events) else None
+            if a != b:
+                probs.append('HARDWARE access pattern differs at event #%d: stock %s, rebuilt %s' % (i, fmt_event(a), fmt_event(b)))
+                break
+    if strict_calls:
+        for i, (a, b) in enumerate(zip(st.snapshots, rb.snapshots)):
+            if a != b:
+                keys = sorted(set(a) | set(b)); d = [k for k in keys if a.get(k) != b.get(k)]
+                probs.append('memory visible to call #%d differs at %d byte(s), first 0x%x' % (i, len(d), d[0]))
+                break
     # calls
     for i in range(max(len(st.calls), len(rb.calls))):
         a = st.calls[i] if i < len(st.calls) else None
@@ -555,6 +628,12 @@ def compare(case, st, rb, strict_order=False):
     return probs
 
 
+def fmt_event(e):
+    if e is None: return '<none>'
+    if e[0] == 'C': return 'call ' + fmt_call((e[1], e[2], False))
+    return '%s +0x%x/%d %s' % ('write' if e[0] == 'W' else 'read', e[1], e[2], e[3])
+
+
 def hexs(v):
     if v is None: return 'none'
     if isinstance(v, tuple): return '(' + ','.join(hexs(x) for x in v) + ')'
@@ -579,7 +658,7 @@ def coverage(runs):
     return (len(vis) * 4 / float(own[1] - own[0])) if own and own[1] > own[0] else 0.0
 
 
-def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False):
+def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, strict_calls=False):
     results = []
     all_runs = ([], [])
     sym_s = find_symbol(stock, case.function, case.signature)
@@ -593,7 +672,8 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False):
             args = case.world(m, rng, kinds) if getattr(case.world, '__code__', None) and case.world.__code__.co_argcount >= 3 else case.world(m, rng)
             out = m.call(sym, args)
             outs.append(out); all_runs[len(outs) - 1].append(out)
-        probs = compare(case, outs[0], outs[1], strict_order)
+        probs = compare(case, outs[0], outs[1], strict_order, strict_calls)
+        case.hw_events = getattr(case, 'hw_events', 0) + sum(1 for e in outs[0].events if e[0] in 'RW')
         results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if (outs[0].status == 'TIMEOUT' or outs[1].status == 'TIMEOUT' or outs[0].bad_read or outs[1].bad_read) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
     return sym_s, results
@@ -631,7 +711,8 @@ def main():
     ap.add_argument('--rebuilt', default=REBUILT_DEFAULT, help='rebuilt kext binary (or $REBUILT_KEXT; default build/difftest/rebuilt.bin)')
     ap.add_argument('-f', '--filter', default='')
     ap.add_argument('-v', '--verbose', action='store_true')
-    ap.add_argument('--strict-order', action='store_true', help='also require the same order and granularity of stores')
+    ap.add_argument('--strict-order', action='store_true', help='also require the same order and width of ALL stores (register accesses are always strict)')
+    ap.add_argument('--strict-calls', action='store_true', help='also require the memory a callee could observe (everything written so far) to be the same at every call')
     ap.add_argument('--json')
     ap.add_argument('--explain', type=int, metavar='SEED', help='print the sequence of basic blocks each side executed for this seed (debugging a difference)')
     ap.add_argument('cases', nargs='+')
@@ -649,7 +730,7 @@ def main():
                 explain(case, stock, rebuilt, reg, a.explain); continue
             t0 = time.time()
             try:
-                sym, res = run_case(case, stock, rebuilt, reg, a.verbose, a.strict_order)
+                sym, res = run_case(case, stock, rebuilt, reg, a.verbose, a.strict_order, a.strict_calls)
             except LookupError as e:
                 print('ERROR  %s: %s' % (case.name, e)); bad += 1; continue
             fails = [r for r in res if r[1]]
@@ -662,7 +743,7 @@ def main():
             verdict = 'PASS' if not fails else 'FAIL'
             if not res:
                 verdict = 'NO-RESULT'; fails = [(0, ['no run finished: every input made the function exceed the budget'])]
-            print('%s  %-58s %2d/%2d runs identical   insns stock %d rebuilt %d (x%.2f)   cov %d%%/%d%%   runs with calls %d%s' % (verdict, case.name, len(res) - len(fails), len(res), si, ri, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached, ('   (%d inconclusive: budget exceeded or code read as data)' % len(inconclusive)) if inconclusive else ''))
+            print('%s  %-58s %2d/%2d runs identical   insns stock %d rebuilt %d (x%.2f)   cov %d%%/%d%%   runs with calls %d%s%s' % (verdict, case.name, len(res) - len(fails), len(res), si, ri, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached, ('   register accesses %d' % case.hw_events) if getattr(case, 'hw_events', 0) else '', ('   (%d inconclusive: budget exceeded or code read as data)' % len(inconclusive)) if inconclusive else ''))
             if ratio > 1.5 or (ratio and ratio < 0.5):
                 print('       note: instruction count ratio x%.2f' % ratio)
             for seed, probs, *_ in fails[:3 if not a.verbose else 99]:

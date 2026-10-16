@@ -10,10 +10,17 @@
    (inside the callee's return domain: a `bool` callee returns 0 or 1, a pointer-returning one an object).
 2. **Memory**: every write that outlives the call (through a pointer argument, into an object, into a global) leaves the same bytes. Writes to the
    function's own stack frame are not compared; a store that does not change a byte is not a difference. `--strict-order` also compares the order and
-   width of stores.
+   width of ALL stores (debugging aid: harmless reordering and `stmw`-versus-`stw` differences fail it); `--strict-calls` also requires the memory a
+   callee could observe (everything written so far) to be the same at every call.
 3. **Return value**: the same (what is compared depends on the declared return type: `void` nothing, `bool` the low byte, ...).
 4. **Ending**: both return (or both run out of budget / fault the same way), with the stack pointer and r14-r31 restored.
-5. **Time**: reported as an instruction count of each side with the ratio. The emulator is not cycle-accurate, so this is a proxy; a ratio outside
+5. **Hardware registers**: every access to a register window is compared *strictly*: the same reads and writes, at the same offsets, with the same
+   width and the same bytes, in the same order, interleaved identically with the calls (a callee may touch the hardware too). The code around the
+   accesses may differ; what the hardware sees may not. A window is declared by the test world with `machine.mmio(size, model)`; the accelerator's
+   register pointer (`+0x860`) must point into one (`accelerator_with_registers` in `Tests/difftest/common.py`). The optional `model` emulates the
+   device (`RegisterFile` remembers writes and returns them on reads). The output shows `register accesses N` for a case, so a case that never
+   touched its window is visible.
+6. **Time**: reported as an instruction count of each side with the ratio. The emulator is not cycle-accurate, so this is a proxy; a ratio outside
    0.5-1.5 is flagged for a human, it is not a failure.
 
 Each run also reports **coverage**: the fraction of the function's instructions executed by at least one run, for each side. A passing test with low
@@ -56,12 +63,12 @@ function needs a hand-written world in `surface_cases.py`.
 Both images are unlinked MH_OBJECT kexts based at address 0 whose local relocations are already resolved, so the raw bytes are mapped at 0. External
 symbols are redirected to stubs through their relocation entries, and every other function of the image is mocked by overwriting its first instruction
 with a branch to a stub, so only the function under test runs. Stub addresses come from one registry shared by both sides. Not modelled: hardware
-registers (MMIO is plain memory), interrupts, other threads, exact timing, and floating-point arguments of callees (compared as absent). Argument
+behaviour beyond what a `model` supplies (status bits that change, read-after-write side effects, the index/data handshake), interrupts, other threads, exact timing, and floating-point arguments of callees (compared as absent). Argument
 registers beyond a callee's declared arity are not compared; where the arity is unknown (a plain-C external missing from `EXTERN_ARITY`) three registers
 are compared and the call is marked `[arity unknown]`.
 
 ## Negative controls
 
 A harness that cannot fail is worthless. Binary-patch a copy of the rebuilt kext (a different return register, a different immediate in a call, a store
-to the wrong offset) and run the matching case with `--rebuilt`: it must FAIL. This was done for a return value, a call argument and a store when the
+to the wrong offset, a register offset mask) and run the matching case with `--rebuilt`: it must FAIL. This was done for a return value, a call argument and a store when the
 harness was written.
