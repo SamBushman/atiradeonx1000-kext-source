@@ -103,7 +103,8 @@ disassembly first. `Tests/destructive/README.md` describes the protocol for the 
 
 - Broader hardware validation of a rebuilt kext: other X1900/R580 cards and Mac models, and other workloads. System sleep (as opposed to display sleep)
   hangs the machine on Apple's own stock kext, so it cannot be compared.
-- A differential run of the recompiled GLSL compiler (libGLProgrammability) against the shipped one on real shaders.
+- Wider coverage for the GLSL compiler differential. The recompiled libGLProgrammability matches the shipped one byte for byte on 544 shaders
+  (403 real, 141 hand-written; `Tests/userspace/glsl_test.c`), but those shaders do not reach a large part of the compiler (`Userspace/README.md`).
 - The i386 slices (kext and userspace), which are not required.
 - Known defects in Apple's own code (for example the infinite loop on the allocation-failure path of `allocAllSlaveSwapBuffers`, and several
   NULL-dereference panics reachable from userspace) are reproduced as shipped, not fixed.
