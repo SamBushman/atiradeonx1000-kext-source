@@ -25,7 +25,8 @@ How it works
     Ledger/kext_ppc_vtables.txt), so virtual calls are recorded by method name.
 Limits (be aware when reading a result): argument registers beyond a callee's declared arity are not compared (the arity comes from the mangled
 signature; for plain C externs from EXTERN_ARITY below; unknown arity compares r3-r5 and says so); floating-point arguments are compared as raw doubles;
-the cost is an instruction count; hardware registers are not modelled (mock `M<>` MMIO is plain memory).
+the cost is an instruction count; a register window is plain memory unless the test supplies a device model, so device behaviour (status bits that
+change, side effects of a read) exists only as far as the model makes it.
 
 Usage: difftest.py [--stock BIN] [--rebuilt BIN] [-f SUBSTRING] [-v] [--json OUT] CASEFILE.py [CASEFILE.py ...]
   A case file defines CASES = [Case(...), ...] (see class Case). Exit 0 if every run matches, 1 otherwise.
