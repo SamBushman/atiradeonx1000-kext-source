@@ -49,6 +49,11 @@ the copy/build/pull for you; the host name is an argument.
     python3 Tools/alloc_size_compare.py STOCK.dis OURS.dis
     python3 Tools/audit_kext_data.py STOCK OURS          # data symbol comparison
     python3 Tools/audit_cast_types.py                    # must print 0 flagged after any re-port
+    python3 Tools/return_code_audit.py Tests/deep_paths.json   # shipped IOReturn codes per external method vs the recorded stock baselines
+    python3 Tools/opcode_usage.py --inventory Tests/pm4_opcode_inventory.json NAME=LOG ...   # opcodes real workloads emit vs the dispatcher's
+
+The last two read JSON data files (formats are documented at the top of each tool); `Tools/deep_paths.py --json` and
+`Tools/opcode_inventory.py --json` regenerate them from the shipped kext's disassembly.
 
 ## Status
 
@@ -59,7 +64,7 @@ the copy/build/pull for you; the host name is an argument.
 | static fidelity checks | vtable diff, argument-register use, object sizes and member offsets (`Sources/LayoutChecks.cpp`), callee comparison, uninitialised-local scan; every remaining difference is classified in `Tests/body_triage.tsv`. These compare calls, sizes, registers and layouts - they do not prove each body is instruction-for-instruction equivalent |
 | kext data | every shipped data symbol is defined under its own name (`Tools/audit_kext_data.py`, `Ledger/data/`) |
 | userspace binaries (PPC) | `Userspace/` - 4033 / 80 / 120 / 897 / 1799 functions (GLDriver / GA / VA / libGL / libGLProgrammability); all compile as C and are callee-verified against the shipped binaries; see `Userspace/README.md` |
-| running on hardware | `Tests/` is a userspace harness that exercises the driver through its IOKit external methods; validate any build of your own on a machine you can reset (see Safety) |
+| running on hardware | yes, on a Power Mac G5 (Mac OS X 10.4.11, X1900): the rebuilt kext has been loaded and exercised with the `Tests/` harness (a userspace program that drives the external methods), GL, 2D and DVD workloads, real applications, display sleep/wake and multi-hour soak runs. Performance matched stock on the metrics compared. This is evidence, not a proof of equivalence: it covers the workloads tried, mostly on that one machine, and the raw run logs are not part of this tree. Validate any build of your own on a machine you can reset (see Safety) |
 | i386 slices | not transcribed (not required) |
 
 ## How the code was produced (read this before trusting a file)
@@ -96,12 +101,9 @@ disassembly first. `Tests/destructive/README.md` describes the protocol for the 
 
 ## What is not done
 
-- Complete hardware validation of a rebuilt kext across every external method and workload.
+- Broader hardware validation of a rebuilt kext: other X1900/R580 cards and Mac models, and other workloads. System sleep (as opposed to display sleep)
+  hangs the machine on Apple's own stock kext, so it cannot be compared.
 - A differential run of the recompiled GLSL compiler (libGLProgrammability) against the shipped one on real shaders.
 - The i386 slices (kext and userspace), which are not required.
-- Known defects in Apple's own code (for example the infinite loop on the allocation-failure path of `allocAllSlaveSwapBuffers`) are reproduced
-  as shipped, not fixed.
-
-The development diary (`GAPS.md`) and the long analysis notes (IDCT engine findings, per-method deep-path traces, stability and performance plans)
-were removed from the tree. Source comments that cite them refer to the repository history before the commit that removed them
-(`git log --diff-filter=D -- GAPS.md`).
+- Known defects in Apple's own code (for example the infinite loop on the allocation-failure path of `allocAllSlaveSwapBuffers`, and several
+  NULL-dereference panics reachable from userspace) are reproduced as shipped, not fixed.
