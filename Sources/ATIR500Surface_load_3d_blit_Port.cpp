@@ -223,10 +223,10 @@ LAB_0003d700:
   }
   else {
     param_1[0x67] =
-         (UInt32)(float)((double)CONCAT44d(0x43300000,
+         FBITS((float)((double)CONCAT44d(0x43300000,
                                          (SInt32)((UInt32)M<UInt16>(param_2 + 0x1c) /
                                               (M<UInt32>(param_2 + 0x3c) >> 0x14 & 0xf)) >> 1 ^
-                                         0x80000000) - DOUBLE_0004c3a8);
+                                         0x80000000) - DOUBLE_0004c3a8));
   }
   dVar3 = DOUBLE_0004c3a8;
   uVar2 = M<UInt16>(param_2 + 0x1e);
@@ -234,7 +234,7 @@ LAB_0003d700:
   param_1[0x69] = 0;
   param_1[0x6a] = 0x13c6;
   param_1[0x6b] = 3;
-  param_1[0x68] = (UInt32)(float)((double)CONCAT44d(0x43300000,uVar2 >> 1 ^ 0x80000000) - dVar3);
+  param_1[0x68] = FBITS((float)((double)CONCAT44d(0x43300000,uVar2 >> 1 ^ 0x80000000) - dVar3));
   if ((param_2[0x34] != 0x0) &&
      ((2 < M<UInt16>(param_2 + 0x16) ||
       (uVar10 = 4, 2 < (M<UInt32>(param_2 + 0x3c) >> 0x14 & 0xf))))) {

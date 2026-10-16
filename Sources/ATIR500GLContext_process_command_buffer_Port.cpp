@@ -679,8 +679,8 @@ LAB_0002c898:
                          iVar48 * (uVar15 - uVar38) >> 1 | puVar65[uVar55 + 1] & 0xffff0000;
                     local_1b8 = 0x43300000;
                     puVar65[uVar55 + 7] =
-                         (UInt32)(float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
-                                       * dVar31);
+                         FBITS((float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
+                                       * dVar31));
                   }
                   pAVar77[0x36] = 0x1;
                 }
@@ -2858,10 +2858,10 @@ LAB_0002d820:
         *puVar42 = 0x31080;
         puVar65[0xc2] = 0x1087;
         uVar38 = 0;
-        puVar65[0xbe] = (UInt32)(fVar28 * (fVar6 + fVar5));
-        puVar65[0xc0] = (UInt32)(fVar28 * (fVar7 + fVar5));
-        puVar65[0xbf] = (UInt32)(fVar23 * (fVar8 + fVar9));
-        puVar65[0xc1] = (UInt32)(fVar23 * (fVar4 + fVar9));
+        puVar65[0xbe] = FBITS(fVar28 * (fVar6 + fVar5));
+        puVar65[0xc0] = FBITS(fVar28 * (fVar7 + fVar5));
+        puVar65[0xbf] = FBITS(fVar23 * (fVar8 + fVar9));
+        puVar65[0xc1] = FBITS(fVar23 * (fVar4 + fVar9));
         iVar59 = (SInt32)((fVar7 - fVar6) * fVar30);
         uVar73 = (UInt32)((fVar8 - fVar4) * fVar30);
         local_130 = (SInt64)iVar59;
@@ -2870,8 +2870,8 @@ LAB_0002d820:
         fVar4 = (fVar4 + fVar8) * FLOAT_0004c380;
         puVar65[0xc4] = 0xc0033500;
         puVar65[0xc5] = 0x10031;
-        puVar65[0xc6] = (UInt32)fVar5;
-        puVar65[199] = (UInt32)fVar4;
+        puVar65[0xc6] = FBITS(fVar5);
+        puVar65[199] = FBITS(fVar4);
         puVar65[0xc3] = iVar59 << 0x10 | uVar73;
         puVar65[200] = 0;
       }
@@ -3082,18 +3082,18 @@ LAB_0002d820:
                 iVar74 = (SInt32)((fVar26 - fVar20) * fVar30);
                 uVar50 = (UInt32)((fVar19 - fVar29) * fVar30);
                 puVar54[4] = 0x31080;
-                puVar54[6] = (UInt32)(fVar27 * (fVar21 - fVar4));
-                puVar54[8] = (UInt32)(fVar27 * (fVar7 - fVar4));
+                puVar54[6] = FBITS(fVar27 * (fVar21 - fVar4));
+                puVar54[8] = FBITS(fVar27 * (fVar7 - fVar4));
                 puVar54[9] = 0x1087;
                 fVar7 = (float)((double)CONCAT44d(0x43300000,uStack_ec) - dVar31);
-                puVar54[7] = (UInt32)(fVar25 * (fVar8 - fVar7));
-                puVar54[5] = (UInt32)(fVar25 * (fVar6 - fVar7));
+                puVar54[7] = FBITS(fVar25 * (fVar8 - fVar7));
+                puVar54[5] = FBITS(fVar25 * (fVar6 - fVar7));
                 local_e8 = (SInt64)iVar74;
                 local_e0 = (SInt64)(SInt32)uVar50;
                 puVar54[0xb] = 0xc0033500;
                 puVar54[0xc] = 0x10031;
-                puVar54[0xd] = (UInt32)((fVar20 + fVar26) * fVar23);
-                puVar54[0xe] = (UInt32)((fVar29 + fVar19) * fVar23);
+                puVar54[0xd] = FBITS((fVar20 + fVar26) * fVar23);
+                puVar54[0xe] = FBITS((fVar29 + fVar19) * fVar23);
                 puVar54[10] = iVar74 << 0x10 | uVar50;
                 puVar54[0xf] = 0;
                 puVar54 = puVar54 + 0x10;

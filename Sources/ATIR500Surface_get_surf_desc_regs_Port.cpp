@@ -52,9 +52,7 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
   int iVar19;
   int local_e8 [6];
   int local_d0 [6];
-  unsigned int local_b8 [4];
-  int local_a8;
-  int local_a4;
+  unsigned int local_b8 [6];
   UInt32 local_98;
   unsigned int uStack_94;
   UInt32 local_90;
@@ -101,8 +99,8 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
       local_b8[1] = ((int)uVar8 >> 4) + (unsigned int)((int)uVar8 < 0 && (uVar8 & 0xf) != 0);
       local_b8[2] = ((int)uVar12 >> 4) + (unsigned int)((int)uVar12 < 0 && (uVar12 & 0xf) != 0);
       local_b8[3] = local_b8[0];
-      local_a8 = local_b8[1];
-      local_a4 = local_b8[2];
+      local_b8[4] = local_b8[1];
+      local_b8[5] = local_b8[2];
     }
     else {
       uVar6 = M<unsigned int>(param_1 + 0xd4);

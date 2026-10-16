@@ -167,14 +167,14 @@ void* ATIR500Surface::resolve_fsaa_buffer(UInt32 param_1, UInt32 param_2, UInt32
     param_3[0xca] = 10;
     fVar2 = (float)((double)CONCAT44d(0x43300000,param_5 ^ 0x80000000) - dVar12);
     fVar3 = (float)((double)CONCAT44d(0x43300000,param_5 + param_7 ^ 0x80000000) - dVar12);
-    param_3[0xc0] = (UInt32)(fVar4 * fVar3);
-    param_3[0xbe] = (UInt32)(fVar4 * fVar2);
-    param_3[0xc6] = (UInt32)((fVar2 + fVar3) * fVar11);
+    param_3[0xc0] = FBITS((fVar4 * fVar3));
+    param_3[0xbe] = FBITS((fVar4 * fVar2));
+    param_3[0xc6] = FBITS(((fVar2 + fVar3) * fVar11));
     fVar4 = (float)((double)CONCAT44d(0x43300000,param_6 + param_8 ^ 0x80000000) - dVar12);
     fVar5 = (float)((double)CONCAT44d(0x43300000,param_6 ^ 0x80000000) - dVar12);
-    param_3[0xbf] = (UInt32)(fVar9 * fVar4);
-    param_3[0xc1] = (UInt32)(fVar9 * fVar5);
-    param_3[199] = (UInt32)((fVar5 + fVar4) * fVar11);
+    param_3[0xbf] = FBITS((fVar9 * fVar4));
+    param_3[0xc1] = FBITS((fVar9 * fVar5));
+    param_3[199] = FBITS(((fVar5 + fVar4) * fVar11));
     param_3[0xc3] = (SInt32)((fVar3 - fVar2) * fVar10) << 0x10 | (SInt32)((fVar4 - fVar5) * fVar10);
     goto LAB_0004481c;
   }
@@ -281,11 +281,11 @@ LAB_00044100:
   puVar23 = puVar20 + 0xb;
   *puVar20 = 0xc0033500;
   puVar20[1] = 0x10031;
-  puVar20[2] = (UInt32)((float)((double)CONCAT44d(0x43300000,param_7 + param_5 * 2 ^ 0x80000000) -
-                              dVar12) * fVar4);
+  puVar20[2] = FBITS(((float)((double)CONCAT44d(0x43300000,param_7 + param_5 * 2 ^ 0x80000000) -
+                              dVar12) * fVar4));
   puVar20[4] = 0;
-  puVar20[3] = (UInt32)((float)((double)CONCAT44d(0x43300000,param_8 + param_6 * 2 ^ 0x80000000) -
-                              dVar12) * fVar4);
+  puVar20[3] = FBITS(((float)((double)CONCAT44d(0x43300000,param_8 + param_6 * 2 ^ 0x80000000) -
+                              dVar12) * fVar4));
   puVar20[5] = 0x1393;
   puVar20[6] = 10;
   puVar20[7] = 0x13c6;

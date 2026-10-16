@@ -324,12 +324,12 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *real
               uStack_84 = uVar4 >> 2 ^ 0x80000000;
               local_88 = 0x43300000;
               puVar40[0x61] =
-                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
-                                 DOUBLE_0004c3c0) * DOUBLE_0004c3b8);
+                   FBITS((float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
+                                 DOUBLE_0004c3c0) * DOUBLE_0004c3b8));
               local_80 = 0x43300000;
               uStack_7c = M<UInt16>(iVar18 + 0x576) >> 1 ^ 0x80000000;
               puVar40[0x62] =
-                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_7c) - dVar7) + dVar9) * dVar8)
+                   FBITS((float)((((double)CONCAT44d(0x43300000,uStack_7c) - dVar7) + dVar9) * dVar8))
               ;
               uVar37 = uVar37 & 0xffffff;
             }
