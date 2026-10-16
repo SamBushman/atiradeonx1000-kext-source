@@ -1,5 +1,8 @@
 # IOATIR500Surface remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
 # kind	target	old	new	tier	evidence
+# Convention (user, Oct 16): an index parameter is named `id` unless the function specifically indexes the per-panel record array
+# (0x94-byte records), in which case it is `panel` / `panelMask`: allocAllSlaveSwapBuffers, allocMasterSwapBuffer, freeAllSwapBuffers, flush_surface, surface_flush.
+# set_id_mode, set_shape, set_shape_backing, set_shape_backing_length(_ext) keep `id`.
 def	IOATIR500Surface::add_2d_context_to_list@0x10ba0	real_param_1	context	INFERRED	name from the class header declaration
 def	IOATIR500Surface::add_2d_context_to_list@0x10ba0	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
 def	IOATIR500Surface::add_gl_context_to_list@0x10b80	real_param_1	context	INFERRED	name from the class header declaration
