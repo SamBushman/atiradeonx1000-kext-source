@@ -1,7 +1,7 @@
 # Reproducing the userspace corpora
 
 Inputs (not in this repo - vendor binaries): `ATI-X1900-Decomp/tiger-hd-pull/*` (GA.plugin, VADriver.bundle, GLDriver.bundle, libGL.dylib,
-libGLProgrammability.dylib, ATIRadeonX1000.kext). Ghidra 12.1.3, Apple gcc 4.0.1 on the Tiger G5 (`ssh G5`).
+libGLProgrammability.dylib, ATIRadeonX1000.kext). Ghidra 12.1.3, Apple gcc 4.0.1 on a Tiger PPC machine (the scripts take the SSH host as an argument).
 
 Archived so the corpora can be rebuilt without redoing the decompiles: `Userspace/<bin>/ppc/ghidra/decompile_dump.tar.xz` (main dump `n_*` with
 `INDEX.tsv`/`RANGES.tsv`, landing-pad dump `p_*`, orphan dump `o_*`) and `Ledger/ghidra/kext_ppc_decompile_dump.tar.xz` (kext).
@@ -9,7 +9,7 @@ Archived so the corpora can be rebuilt without redoing the decompiles: `Userspac
 ## Stage A - corpora from the archived dump (no Ghidra needed)
     tar -xJf Userspace/<bin>/ppc/ghidra/decompile_dump.tar.xz -C $SCRATCH         # -> $SCRATCH/n_<x>, p_<x>, o_<x>
     python3 Tools/userspace/pipeline/extract_slices.py <vendor binary> /tmp/spec/slices
-    python3 Tools/userspace/build_corpus.py <slice> ppc $SCRATCH/n_<x> Userspace/<bin>/ppc     # C corpus + compile check on the G5
+    python3 Tools/userspace/build_corpus.py <slice> ppc $SCRATCH/n_<x> Userspace/<bin>/ppc     # C corpus + compile check on the Tiger machine
     LOOSE_NAMES=1(C++ only) EXTRA=Userspace/<bin>/ppc/extra_decls.h sh Tools/userspace/verify_corpus.sh <name> <slice> $SCRATCH/n_<x>
 `run_corpora_and_verify.sh`, `run_landing_pads.sh`, `run_unowned_code.sh` are the exact drivers used (paths are the author's; edit SCR/TG).
 Then `raw_blocks.py` -> `raw_emit.py` (data/asm blocks, byte-verified) -> `text_complete.py` (accounting) -> `unowned_blocks.py`.
@@ -154,7 +154,7 @@ the ones in the archived `n_<x>` dumps. Each step fixes a defect class the GLSL 
    reused stack slot) makes it `float`; the C then converts the VALUE where the stock moves bits:
    * glprog `TIntermConstantUnion::fold` keeps int, float and bool constants in one `float *` array, and its C converted their values
      (`(int)fVar6` of the bits of a small integer); the function has no fctiw at all. CORRECTION: this step was first reported as fixing the
-     wrong vector folding of `Tests/userspace/glsl_intfold2.vert`. That check compared with `diff <(..) <(..)` on the G5, which on Tiger's bash
+     wrong vector folding of `Tests/userspace/glsl_intfold2.vert`. That check compared with `diff <(..) <(..)` on Tiger, whose bash
      2.05b exits 0 whatever the contents - it did not. Instrumenting the fold showed its arithmetic right and its INPUT array overwritten: the
      cause was a dropped argument of an indirect call (step 17). The rewrite here stays (it is what the stock does), but it was not the fix.
    * GLDriver FUN_00180830 kept the object pointers FUN_001043f0 returns in float locals (`fVar7 = (float)FUN_001043f0(..)`, `*(T *)((int)fVar7 +

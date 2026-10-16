@@ -1,24 +1,65 @@
-# ATIRadeonX1000.kext - source reconstruction and full transcription of the Tiger X1900 driver stack
+# ATIRadeonX1000.kext - source reconstruction of the Tiger X1900 driver stack
 
-A C++ reconstruction of Apple's `ATIRadeonX1000.kext` (the Tiger IOKit driver for the ATI Radeon X1900 / R580) built from Ghidra decompilation
-of the shipped binary, plus a machine-generated transcription of the driver's userspace binaries. The kext is built with Apple gcc 4.0.1 on the
-Tiger G5 and checked function by function against the shipped kext; the userspace binaries (GLDriver bundle, GA plugin, VA driver, libGL,
-libGLProgrammability) are transcribed to C corpora and checked the same way.
+A C++ reconstruction of Apple's `ATIRadeonX1000.kext` (the Mac OS X 10.4 Tiger IOKit driver for the ATI Radeon X1900 / R580), built from a Ghidra
+decompilation of the shipped binary, plus a machine-generated transcription of the driver's userspace binaries (GLDriver bundle, GA plugin, VA
+driver, libGL, libGLProgrammability) to C corpora.
 
-Context: this began as a side project of [`g5-h264-gpu-decode`](https://github.com/SamBushman/g5-h264-gpu-decode) (whose decoder deliberately talks to
-Apple's unmodified kext from userspace); it is standalone. See that repo's `promo4-client/reveng/` for the register maps and command-language notes.
+The goal is a source tree that compiles to a kext equivalent to the shipped one, so the driver can be studied, audited and modified.
 
-## Status (2026-09-19)
+Related project: [`g5-h264-gpu-decode`](https://github.com/SamBushman/g5-h264-gpu-decode) drives Apple's unmodified kext from userspace; its
+`promo4-client/reveng/` directory holds register maps and command-language notes that complement this tree. This repository is standalone.
+
+## What you need to build it
+
+| requirement | notes |
+|---|---|
+| Mac OS X 10.4 Tiger, PowerPC | the kext is built natively; it is a Tiger-style `MH_OBJECT` kext, linked with `-static -nostdlib -r` against `libkmodc++`, `libkmod` and `libcc_kext` |
+| Apple gcc 4.0.1 (Xcode 2.x) and the Kernel.framework headers | `powerpc-apple-darwin8` toolchain; see `Tools/build_kext.sh` for the exact flags (`-fapple-kext`, `-fno-rtti`, `-fno-exceptions`, `-mlongcall`) |
+| `sh`, `otool`, `nm` | for the link check |
+| Python 3 | the ledger and comparison tools in `Tools/` are Python; they read disassembly dumps, so they do not have to run on the Tiger machine |
+| the shipped `ATIRadeonX1000.kext` binary | only for the verification tools (vtable diff, callee comparison, data audit). It is not included; extract it from your own Tiger 10.4.x install |
+
+You do not need Ghidra to build the kext: the archived decompile is in `Ledger/ghidra/`. Ghidra 12.1.3 is only needed to regenerate the userspace
+corpora (`Tools/userspace/pipeline/README.md`).
+
+## Building
+
+On the Tiger machine, from the repository root:
+
+    sh Tools/build_kext.sh                    # builds ATIRadeonX1000.kext under $OUT
+    sh Tools/link_check.sh                    # confirms it links, without loading it
+
+Environment variables: `OUT` (build directory; set it explicitly), `KEXT_ID` (bundle identifier - use a different one for a trial build so it
+cannot be confused with the system kext), `KEXT_VERSION`, `OPT` (default `-Os`; `OPT=` gives the unoptimized build that the callee comparison
+expects). Large PowerPC links may need a newer linker (ld64) first on `PATH`.
+
+The only undefined symbols in a correct build are the kernel/IOKit imports the shipped kext also imports, plus the two symbols the shipped kext
+leaves undefined itself (`ATIRadeonX1000::system_will_sleep` / `did_wake`).
+
+If you build from another machine and drive the Tiger box over SSH, `Tools/remote_build.sh [ssh-host]` and `Tools/check_ledger.sh [ssh-host]` do
+the copy/build/pull for you; the host name is an argument.
+
+## Verifying a build
+
+`Tools/check_ledger.sh` regenerates the completeness ledger (`Ledger/kext_ppc_ledger.tsv`) and diffs the vtables against the shipped kext; set
+`STOCK` to the path of the shipped kext binary. Further static checks are documented in `Tools/README.md`:
+
+    python3 Tools/callee_compare.py STOCK.dis OURS.dis   # per-method callee multiset diff (build with OPT=)
+    python3 Tools/this_register_check.py STOCK.dis OURS.dis
+    python3 Tools/alloc_size_compare.py STOCK.dis OURS.dis
+    python3 Tools/audit_kext_data.py STOCK OURS          # data symbol comparison
+    python3 Tools/audit_cast_types.py                    # must print 0 flagged after any re-port
+
+## Status
 
 | what | state |
 |---|---|
-| kext builds and links | yes - `sh Tools/remote_build.sh` (copies the tree to the G5, builds with Apple gcc 4.0.1, prints failures + link summary). The only undefined symbols are the expected kernel/IOKit imports and the two stock-undefined `ATIRadeonX1000::system_will_sleep/did_wake` |
-| every shipped kext function is transcribed | yes - `Ledger/kext_ppc_ledger.tsv`: 2116 functions, 506 methods DONE (249104 bytes), 0 MISSING; 470 of 470 named C++ methods present (`Tests/function_coverage.md`) |
-| vtables match the shipped kext | yes - `sh Tools/check_ledger.sh G5` reports 0 differing vtable lines (only stock's `___cxa_pure_virtual` slots differ by construction) |
-| fidelity checks | **what is established:** every shipped method has a body (symbols, 470/470) and the body passed these static checks against the shipped kext, run by `Tools/check_ledger.sh` after `Tools/remote_build.sh`: vtable diff; `Tools/this_register_check.py` (no argument register is dereferenced as another); `Tools/alloc_size_compare.py` and `Sources/LayoutChecks.cpp` (every `new` has the shipped object size, every documented member offset is checked at compile time); `Tools/callee_compare.py` (ordered/multiset callees, tail calls and stubs resolved) and `Tools/size_compare.py`, with every difference classified in `Tests/body_triage.tsv` (`Tools/body_triage.py`); `Tools/uninit_local_scan.py` (no split-stack-object locals). **What is NOT established:** that each body is instruction-for-instruction equivalent (the checks compare calls, sizes, registers and layouts, not every path), and that anything runs - the rebuilt kext has never been loaded (below) |
-| kext data | every stock data symbol is defined under the stock's own name and no stock data content is missing (`Tools/audit_kext_data.py`, `Ledger/data/`) |
-| userspace binaries (PPC) | `Userspace/` - 4033 / 80 / 120 / 897 / 1799 functions (GLDriver / GA / VA / libGL / libGLProgrammability), all compile as C, callee-verified against the stock binaries; every byte of every code section is accounted for; all data sections transcribed. See `Userspace/README.md` |
-| runs on hardware | **not yet for the rebuilt kext.** The rebuilt kext has never been loaded; the mechanically re-ported methods have only been checked statically. `Tests/` (a userspace harness) drives the *stock* driver. Issues #41-45 track the load/test process, #32 a real Apple bug |
+| every shipped kext function is transcribed | yes - `Ledger/kext_ppc_ledger.tsv`: 2116 functions, 506 methods DONE, 0 MISSING; 470 of 470 named C++ methods present (`Tests/function_coverage.md`) |
+| vtables match the shipped kext | yes, apart from the shipped kext's own `___cxa_pure_virtual` slots |
+| static fidelity checks | vtable diff, argument-register use, object sizes and member offsets (`Sources/LayoutChecks.cpp`), callee comparison, uninitialised-local scan; every remaining difference is classified in `Tests/body_triage.tsv`. These compare calls, sizes, registers and layouts - they do not prove each body is instruction-for-instruction equivalent |
+| kext data | every shipped data symbol is defined under its own name (`Tools/audit_kext_data.py`, `Ledger/data/`) |
+| userspace binaries (PPC) | `Userspace/` - 4033 / 80 / 120 / 897 / 1799 functions (GLDriver / GA / VA / libGL / libGLProgrammability); all compile as C and are callee-verified against the shipped binaries; see `Userspace/README.md` |
+| running on hardware | see "Open items" in `GAPS.md` for the current state; `Tests/` is a userspace harness that exercises the driver through its IOKit external methods |
 | i386 slices | not transcribed (not required) |
 
 ## How the code was produced (read this before trusting a file)
@@ -27,42 +68,34 @@ Each method is in one of three provenance classes; the file banner says which:
 
 1. **Mechanical port** - `Sources/<Class>_<method>_Port.cpp`, generated from the Ghidra decompile of the shipped kext by `Tools/replace_fn.py` /
    `Tools/port_fn.py` (control flow and arithmetic are Ghidra's; only types, `this`, base-class calls, atomics and data references are rewritten).
-   This is now the source of truth for every method of 150 bytes or more and for most smaller ones (238 methods were re-ported after an audit found
-   real defects in earlier hand-written bodies: non-atomic stand-ins for `lwarx/stwcx.`, dropped calls, wrong out-parameter layouts).
-2. **Hand-verified body** - 38 tiny tail-forwarders and base-class thunks whose Ghidra decompile drops register arguments (`f()` with no arguments),
-   so they were kept as bodies verified against the disassembly (`Tools/restore_old.py` restores them if a re-port is attempted).
+   This is the source of truth for every method of 150 bytes or more and for most smaller ones.
+2. **Hand-verified body** - tiny tail-forwarders and base-class thunks whose Ghidra decompile drops register arguments, kept as bodies verified
+   against the disassembly (`Tools/restore_old.py` restores them if a re-port is attempted).
 3. **Generated** - compiler-generated members (metaclass, constructors, static-init) and the data tables.
 
-Old hand-written source files keep their analysis comments as history. Where a function body was later replaced, the file carries a
-`(re-ported mechanically: see X_Port.cpp)` marker at that spot; the prose above it describes the earlier hand-written analysis, not the current code.
-Confidence tags in comments (`CONFIRMED` / `INFERRED` / `UNKNOWN`) describe *names and semantics* of fields and calls, not whether the machine
-code was transcribed - that is now complete.
+Older hand-written source files keep their analysis comments as history. Where a body was later replaced, the file carries a
+`(re-ported mechanically: see X_Port.cpp)` marker; the prose above it describes the earlier analysis, not the current code. Confidence tags in
+comments (`CONFIRMED` / `INFERRED` / `UNKNOWN`) describe the *names and semantics* of fields and calls, not whether the machine code was transcribed.
 
 ## Layout
 
 - `Headers/` - class headers, shared types (`ATIRadeonX1000Types.h`), the R5xx register map, PPC intrinsics (`ATIRadeonX1000PPCIntrinsics.h`: real
   `lwarx/stwcx.` atomics), Ghidra compatibility shims (`GhidraCompat.h`, `GhidraExterns.h`, `GhidraLiterals.h`).
-- `Sources/` - implementations (`*_Port.cpp` = mechanical ports; other files = older analysis + data tables + hand-verified bodies).
-- `Ledger/` - the completeness ledger (`kext_ppc_ledger.tsv`), vtable listing, work list, `data/` (the kext's data sections), `ghidra/` (the
-  archived kext decompile dump).
+- `Sources/` - implementations (`*_Port.cpp` = mechanical ports; other files = older analysis, data tables, hand-verified bodies).
+- `Ledger/` - the completeness ledger, vtable listing, work list, `data/` (the kext's data sections) and `ghidra/` (the archived decompile dump).
 - `Userspace/` - the userspace transcription (see its README); `Resources/Info.plist` - the kext's personality.
-- `Tools/` - build, ledger, port and comparison tools; `Tools/userspace/` - the userspace pipeline (`pipeline/README.md` = how to reproduce it).
-- `Tests/` - the userspace feature-parity harness for the stock driver (issue #42) and its recorded baseline.
-- `GAPS.md` - the running log of what was found and resolved, plus the list of what is still open.
+- `Tools/` - build, ledger, port and comparison tools; `Tools/userspace/` - the userspace pipeline (`pipeline/README.md` is the recipe).
+- `Tests/` - a userspace feature-parity harness for the driver's external methods and its recorded baseline.
+- `GAPS.md` - the running log of findings and the list of what is still open.
 
-## Working with it
+## Safety
 
-    sh Tools/remote_build.sh                  # build on the G5 (OPT=-O0 for the callee comparison, LINES_MAX=N for more output)
-    sh Tools/check_ledger.sh G5               # regenerate the ledger + vtable diff (expect 0 MISSING)
-    python3 Tools/callee_compare.py STOCK.dis OURS.dis   # per-method callee multiset diff (build with OPT=-O0)
-    NOEXACT=1 python3 Tools/replace_fn.py 0xADDR ...     # re-port a method from the archived decompile (override table: Tools/replace_fn_overrides.tsv)
-    python3 Tools/audit_cast_types.py         # must print 0 flagged after any replace_fn batch (scalar-pointer params aliased as bytes)
-    python3 Tools/audit_kext_data.py STOCK OURS          # data symbol comparison
-
-The Tiger G5 is reached as `ssh G5`; large PPC builds need ld64 on PATH. Live tests on the G5 need explicit per-step authorization (never scan
-`/dev/kmem`, never fuzz `IOConnect*`).
+This is a kernel driver for real GPU hardware. A faulty build can hang or panic the machine, and a hard power-off can damage the filesystem. Test on
+a machine you can afford to reset, keep a way in that does not depend on the display (SSH from a second machine), and keep the stock kext available
+to restore. Do not scan kernel memory broadly and do not fuzz the IOKit external methods with arbitrary arguments; derive call shapes from the
+disassembly first. `Tests/destructive/README.md` describes the protocol for the methods known to be hang- or panic-prone.
 
 ## What is not done
 
-See `GAPS.md` ("Open items" at the top). In short: running the rebuilt kext on hardware (issues #41-45), the differential run of the
-recompiled GLSL compiler against the stock one, linking the userspace corpora into loadable binaries, and the i386 slices.
+See `GAPS.md` ("Open items" at the top): the remaining hardware validation of the rebuilt kext, a differential run of the recompiled GLSL compiler
+against the shipped one, and the i386 slices.

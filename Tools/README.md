@@ -1,11 +1,11 @@
 # Tools
 
-Kext build and verification (run from the repo root; the G5 is `ssh G5`):
+Kext build and verification (run from the repo root; the build tools run on a Tiger PPC machine, the Python tools anywhere):
 
 | tool | purpose |
 |---|---|
-| `remote_build.sh` | copy the tree to the G5, build with Apple gcc 4.0.1, print only failures + the link summary (`OPT=-O0` for the callee comparison) |
-| `build_kext.sh`, `link_check.sh`, `kmod_info.c` | the on-G5 build (kext bundle, `kmod_info`) and the link-state check |
+| `remote_build.sh` | copy the tree to a Tiger PPC machine over SSH (host is an argument), build with Apple gcc 4.0.1, print only failures + the link summary (`OPT=-O0` for the callee comparison) |
+| `build_kext.sh`, `link_check.sh`, `kmod_info.c` | the on-Tiger build (kext bundle, `kmod_info`) and the link-state check |
 | `check_ledger.sh`, `build_ledger.py`, `vtable_map.py` | regenerate `Ledger/` and diff the vtables against the shipped kext |
 | `callee_compare.py`, `imm_compare.py`, `size_compare.py`, `arch_compare.py` | fidelity comparisons against the shipped kext (callee multisets, immediates/displacements, size at -O1, PPC vs i386) |
 | `replace_fn.py`, `port_fn.py`, `ghidra2cpp.py`, `replace_fn_overrides.tsv` | mechanical port of a method from the archived Ghidra decompile; `restore_old.py` undoes one |

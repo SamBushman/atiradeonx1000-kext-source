@@ -1,7 +1,7 @@
 # Userspace binaries - machine-transcribed C corpus
 
 Every function Ghidra finds in each userspace binary of the Tiger X1900 driver stack, transcribed to C that compiles
-(gcc 4.0.1 on the Tiger G5, `-w`), one directory per binary/slice:
+(gcc 4.0.1 on a Tiger PPC machine, `-w`), one directory per binary/slice:
 
     Userspace/<Binary>/<arch>/decls.h      prototypes for every function, imports, data symbols, float tables
     Userspace/<Binary>/<arch>/ghidra_c.h   Ghidra's type/intrinsic vocabulary (undefined4, CONCAT44, sync, ...)
@@ -17,10 +17,10 @@ Names are Ghidra's (`FUN_<addr>` unless the binary exports a symbol). Nothing is
 Ghidra function count minus its thunks/imports. Ghidra's EXTERNAL-block placeholders for dyld imports (1 byte, no code in the binary) are
 recorded in `externals.tsv`, not transcribed. Ledger status `converted (...)` carries the one function-level caveat where a caveat exists.
 
-## Status (2026-09-19) - PowerPC slices, the ones that matter for the G5
+## Status (2026-09-19) - PowerPC slices, the ones that matter for PowerPC Macs
 
 The functions below are ALL functions Ghidra 12.1.3 finds after an extra discovery pass (`gs/FindMoreFuncs.java`: code between functions that a
-`bl` reaches but analysis did not turn into a function). Every one is transcribed, compiles as C (gcc 4.0.1, Tiger G5), and has been checked
+`bl` reaches but analysis did not turn into a function). Every one is transcribed, compiles as C (gcc 4.0.1, Tiger PPC), and has been checked
 against the shipped binary with the callee comparison described below.
 
 | binary | functions | compile-clean | callee check vs stock (`verify_callees.txt`) |
@@ -35,7 +35,7 @@ i386 slices: not extended. The i386 directories are the earlier generation (fewe
 
 ### What "callee check" means
 
-`Tools/userspace/verify_corpus.sh` regenerates the corpus with one translation unit per function, compiles it -O0 on the G5, disassembles
+`Tools/userspace/verify_corpus.sh` regenerates the corpus with one translation unit per function, compiles it -O0 on the Tiger machine, disassembles
 both the stock binary and the recompile, and compares each function's *set of callees* (direct calls by name, dyld stubs by import name,
 `bctrl` counted separately) - `Tools/userspace/callee_compare_c.py`. A decompile that dropped a branch, a switch body, or a call shows up as
 a callee the stock function makes and the recompile never does. Handled so it is not noise: PIC/import stubs, register save/restore millicode,
@@ -67,7 +67,7 @@ tail-call edge itself. `LOWCOUNT` (informational) lists functions where the stoc
   from the binary; each table carries its `bctr` and decoded targets in a comment).
 * `raw/raw_code.c` - register save/restore millicode, clipped function entries and jump-table case bodies (code that Ghidra's owner decompile
   already contains when it recovered the switch, and which is kept here as the machine code itself) as top-level asm: real mnemonics wherever the
-  Tiger assembler reproduces the exact machine word (6 blocks fall back to `.long` + mnemonic comment). **Every block is assembled on the G5 and
+  Tiger assembler reproduces the exact machine word (6 blocks fall back to `.long` + mnemonic comment). **Every block is assembled on the Tiger machine and
   compared byte-for-byte with the stock binary** (`raw/verify.txt`: GLDriver 677/677, libGLProgrammability 405/405, GA/VA/libGL 3/3 identical).
 
 `_ShCompile` (libGLProgrammability) is complete: its four constant-selector dispatch `bctr`s are rewritten as direct `b` in the analysed copy of the
@@ -80,14 +80,14 @@ instruction, not the target code.
 `load_commands.tsv` (dependencies, install name, segments), `cstrings.c` (one C string per string; **byte-verified** against the binary by
 `verify_cstrings.py`), and every other section (`__const`, `__data`, `__literal4/8`, `__la_symbol_ptr`, `__nl_symbol_ptr`, `__gcc_except_tab`,
 `__eh_frame`, ...) as `const unsigned int` words with a comment on each word that points at a function, string or data (lazy/non-lazy pointer slots
-name their imported symbol; literals show the float). The generated C is re-parsed against the binary word by word and compiles on the G5.
+name their imported symbol; literals show the float). The generated C is re-parsed against the binary word by word and compiles on the Tiger machine.
 This is a faithful *representation* of the data; it is not yet linked at the original addresses (the corpora reference data by Ghidra's `DAT_`/`PTR_`
 names, declared `extern`). `Info.plist` of each bundle sits beside it.
 
 ## Linking (issue #61)
 
 `Tools/userspace/link_corpus.py CORPUS STOCK_BINARY GHIDRA_DATA.tsv OUTDIR --config Tools/userspace/link_config/<x>.json` turns a corpus into a build directory that
-`build.sh` (run on the Tiger G5) compiles and links into a dylib/bundle. Inputs: the corpus, the stock Mach-O (relocation entries, symbol/indirect tables, sections),
+`build.sh` (run on a Tiger PPC machine) compiles and links into a dylib/bundle. Inputs: the corpus, the stock Mach-O (relocation entries, symbol/indirect tables, sections),
 and `gs/DumpData.java` output (every defined data item with Ghidra's type, plus `.syms` for plain labels). What it does:
 
 * **data symbol map** (`symbol_map.tsv` in the output dir): every `DAT_/PTR_/s_/FLOAT_/...` name the code uses -> address, section, Ghidra type, C declaration, content (pointer target or word), and where the link defines it;
@@ -96,7 +96,7 @@ and `gs/DumpData.java` output (every defined data item with Ghidra's type, plus 
 * `exports.txt` (the stock's exports), toolchain-supplied code dropped (crt atexit shim, `dyld_stub_binding_helper`, register save/restore millicode, C++ EH runtime linked from libstdc++), clipped function entries and exported entry points that fall through into a function emitted as asm next to it;
 * link-time semantic rewrites (`rewrites.py`, listed in `rewrites.txt`): the lwarx/stwcx. idiom (`in_RESERVE`/`storeWordConditionalIndexed`, 319 sites) as compare-and-swap loops; call sites Ghidra prints by short C++ name bound to the callee the stock code actually calls (`bind_calls`, leaves 27 unconfirmed same-class guesses in `rewrites.txt`); data-address literals in code symbolised; constants that Ghidra printed as function names turned back into literals.
 
-Each build directory's mapping is stored beside the corpus: `Userspace/<bin>/ppc/link/symbol_map.tsv` (name, address, section, Ghidra type, C declaration, content, where it is defined - or why the toolchain/linker provides it), `rewrites.txt`, `exports.txt`; `Tools/userspace/check_symbol_map.py MAP NM_OF_DATA_OBJECT` checks that every mapped name is a defined symbol of the assembled `data.o`. To rebuild an image: `python3 Tools/userspace/link_corpus.py Userspace/<Bin>/ppc <stock binary> <ghidra data .tsv from gs/DumpData.java> <outdir> --config Tools/userspace/link_config/<x>.json`, copy `<outdir>` to the G5 and `INSTALL=<other install name> sh build.sh <out>` (libGL additionally needs the OpenGL headers via `GL_HEADERS`; glprog needs `SCRATCH_LINK` with its `INDEX.tsv` and stock disassembly).
+Each build directory's mapping is stored beside the corpus: `Userspace/<bin>/ppc/link/symbol_map.tsv` (name, address, section, Ghidra type, C declaration, content, where it is defined - or why the toolchain/linker provides it), `rewrites.txt`, `exports.txt`; `Tools/userspace/check_symbol_map.py MAP NM_OF_DATA_OBJECT` checks that every mapped name is a defined symbol of the assembled `data.o`. To rebuild an image: `python3 Tools/userspace/link_corpus.py Userspace/<Bin>/ppc <stock binary> <ghidra data .tsv from gs/DumpData.java> <outdir> --config Tools/userspace/link_config/<x>.json`, copy `<outdir>` to the Tiger machine and `INSTALL=<other install name> sh build.sh <out>` (libGL additionally needs the OpenGL headers via `GL_HEADERS`; glprog needs `SCRATCH_LINK` with its `INDEX.tsv` and stock disassembly).
 
 Findings that changed the corpora: **libGL, GA and VA had been imported into Ghidra as `PowerPC:BE:64:VLE-32addr`** (GLDriver and libGLProgrammability were `BE:32`); integer registers were `undefined8`/`longlong`, so a linked GA returned 0 from `window_mode_to_ati_format` (value in r4 of a register pair). They were re-imported as 32-bit PowerPC (`Tools/userspace/pipeline/regen_32bit.sh`) and the three corpora regenerated (callee check still 0 differences; VA's `FUN_000010c0` grew 24 bytes that a clipped block had held). libGL's 888 dispatch stubs lose float arguments in any Ghidra rendering (FPR-passed), so the link build regenerates them from one template with prototypes from `<OpenGL/gl.h>`; the dispatch index of every stub is checked against the stock machine code (`check_gl_stub_indices.py`, 888/888). One corpus defect fixed: `operator=` on a long templated class was sanitised into an assignment (call lost).
 
@@ -270,7 +270,7 @@ of a class no static check sees, and each class was checked across all five imag
     * the seventh variadic argument of a `sprintf` (a stack word) read as an uninitialised `in_stack_ffffff88` (patches.py `TGenericLinker__GetBindingTableString`; every other
       negative `in_stack_` read in the corpora is a SysV float-argument overflow nobody reads or an outgoing word the stock leaves unset).
     Result: **141/141 hand-written and 403/403 real shaders identical** through compile and link (`v_longident`: both images segfault).
-Checks after the fixes, all on the G5: glsl_test 141/141 + 403/403 real, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
+Checks after the fixes, all on a Tiger PPC machine: glsl_test 141/141 + 403/403 real, `glsl_probes.sh` 4/4, glprog/gld/GA/VA/libGL behavioural tests PASS, `ftoa_test` identical, callee verification of glprog
 unchanged and of GLDriver improved (`FUN_000a7050` no longer differs).
 
 ### Pure-function differential (issue #68, criterion 1)
@@ -335,8 +335,8 @@ side only is re-run with a longer limit (the -O0 rebuild is several times slower
   The ledger's rebuilt offsets are layout-specific: regenerate it (`fnfuzz_gen.py`, nm of the new `rebuilt.out`) after EVERY rebuild, or fnfuzz calls the
   wrong rebuilt function and reports crashes that are not there.
 ### Compiler-warning audit (issue #68, criterion 2)
-`Tools/userspace/wall_audit.sh TREE OUT gcc4|gcc14` (run on the G5 on a link tree) compiles every part with warnings: Apple gcc 4.0.1 `-O1 -Wall` (the compiler of the images; data-flow warnings
-need -O1) and the Tigerbrew `gcc-14 -fsyntax-only` with the conversion diagnostics gcc 4.0.1 lacks (`-Wfloat-conversion`, `-Wtype-limits`, `-Wsequence-point`, `-Wshift-*`,
+`Tools/userspace/wall_audit.sh TREE OUT gcc4|gcc14` (run on the Tiger machine on a link tree) compiles every part with warnings: Apple gcc 4.0.1 `-O1 -Wall` (the compiler of the images; data-flow warnings
+need -O1) and a modern `gcc-14 -fsyntax-only` with the conversion diagnostics gcc 4.0.1 lacks (`-Wfloat-conversion`, `-Wtype-limits`, `-Wsequence-point`, `-Wshift-*`,
 `-Wtautological-compare`). gcc 4.0.1 has no warning at all for a float converted into an integer (`-Wconversion` is silent), which is why this class was invisible.
 gcc 4.0.1 `-Wall` volume on glprog: ~6900 warnings, of which the rare categories were read one by one (always-false / tautological compares, `a<=b<=c`, oversized constants - gcc 4.0.1 keeps a too-large constant as 64 bits, verified -, pointer/integer
 compares = globals declared `int` tested against a null pointer); each was an equivalent print of the stock's own test (a loop guard `count + 1 > 0` the stock also emits, `-2 << n | 0xfffffffe >> 32-n` rotates, a `char` compared with -1

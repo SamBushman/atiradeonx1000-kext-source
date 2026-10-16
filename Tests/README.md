@@ -13,7 +13,7 @@ application, built with the stock system `gcc` and linked against
 
 ## Update (2026-09-19)
 
-The rebuilt kext now has a body for every one of the 470 named methods (`function_coverage.md`, regenerated: 470/470) and builds on the Tiger G5, but it has
+The rebuilt kext now has a body for every one of the 470 named methods (`function_coverage.md`, regenerated: 470/470) and builds on Tiger, but it has
 **still never been loaded**: everything below ran against the *stock* driver, and "shape coverage" means call shapes are documented, not that the rebuild
 was exercised. Running this harness against a loaded rebuild is issue #42/#45 and needs a per-step authorized live test plan (#41).
 
@@ -102,7 +102,7 @@ root-caused (CORRECTED, see #43's correction comment - the first diagnosis
 was off by one page) to `ATIR500DVDContext::set_macrovision` calling
 `ATIR500Surface::getFramebufferIndex()` on its still-unbound surface
 (`this+0xf8 == NULL`): a plain null dereference reachable by one call on a
-fresh DVD connection. The G5 hard-hung and needed a physical restart (it recovered
+fresh DVD connection. The machine hard-hung and needed a physical restart (it recovered
 cleanly - issue #41's recovery plan, now validated for real). Full
 writeup: issue #43's comment thread.
 
@@ -121,7 +121,7 @@ real, valid setup sequence** (an actually-created/bound surface, etc.) -
 that is exactly what the #43 incident was missing.
 
 **The established, safe way to upgrade a skipped test (2026-09-18,
-user-authorized after full code tracing, see `Tests/test_surface_context.c`'s
+run only after full code tracing, see `Tests/test_surface_context.c`'s
 `test_set_shape_backing` and `Tests/probe_set_id_mode.c`/
 `probe_shape_backing.c` for a worked example):** trace the FULL real code
 path in this project's own reconstructed source for the target method
@@ -182,10 +182,10 @@ bogus texture ID must return exactly X") is part of the full-coverage
 pass, informed by what the stock driver's real live responses turn out
 to be.
 
-## Building and running (on the G5, Tiger 10.4.11)
+## Building and running (on Tiger 10.4.x)
 
 ```
-cd "/Volumes/Test HD/atiradeonx1000-kext-source/Tests"
+cd Tests
 make
 ./parity_test_harness
 ```
@@ -246,7 +246,7 @@ root-caused (CORRECTED, see #43's correction comment - the first diagnosis
 was off by one page) to `ATIR500DVDContext::set_macrovision` calling
 `ATIR500Surface::getFramebufferIndex()` on its still-unbound surface
 (`this+0xf8 == NULL`): a plain null dereference reachable by one call on a
-fresh DVD connection. The G5 hard-hung and needed a physical restart (it recovered
+fresh DVD connection. The machine hard-hung and needed a physical restart (it recovered
 cleanly - issue #41's recovery plan, now validated for real). Full
 writeup: issue #43's comment thread.
 
@@ -265,7 +265,7 @@ real, valid setup sequence** (an actually-created/bound surface, etc.) -
 that is exactly what the #43 incident was missing.
 
 **The established, safe way to upgrade a skipped test (2026-09-18,
-user-authorized after full code tracing, see `Tests/test_surface_context.c`'s
+run only after full code tracing, see `Tests/test_surface_context.c`'s
 `test_set_shape_backing` and `Tests/probe_set_id_mode.c`/
 `probe_shape_backing.c` for a worked example):** trace the FULL real code
 path in this project's own reconstructed source for the target method
@@ -326,10 +326,10 @@ bogus texture ID must return exactly X") is part of the full-coverage
 pass, informed by what the stock driver's real live responses turn out
 to be.
 
-## Building and running (on the G5, Tiger 10.4.11)
+## Building and running (on Tiger 10.4.x)
 
 ```
-cd "/Volumes/Test HD/atiradeonx1000-kext-source/Tests"
+cd Tests
 make
 ./parity_test_harness
 ```

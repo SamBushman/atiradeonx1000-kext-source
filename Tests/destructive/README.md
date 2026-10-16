@@ -4,12 +4,12 @@ Ten external methods (#88-#97) and the T3 rows of #100 can hang or panic the mac
 state, or corrupt a display. Each is ONE binary built from `<name>.c` + `dtest.c`, run **one per boot session**, never linked into the parity
 suite (`../Makefile` does not know this directory), and always through `dtest_main()` (`dtest.h`), which enforces the gates below.
 
-## Running a test (on the G5, Tiger, from this directory)
+## Running a test (on the Tiger machine, from this directory)
 
 1. `make destructive-<name>`
-2. On the **dev machine** (a second machine): `sh peer_ack.sh G5 <dir-on-G5>` - checks the dev git tree is clean and pushed, touches
+2. On a **second machine** (your development machine): `sh peer_ack.sh <tiger-host> <test-dir-on-tiger>` - checks the git tree is clean and pushed, touches
    `results/peer_ack` over ssh (proof that a second ssh session answers) and tells you to run `nc -ul 9999` in a second terminal.
-3. On the G5: `sh preflight.sh <name>` - captures kextstat, `ioreg -l -w0`, displays, vm_stat, the system.log tail, (register snapshot through `./regsnap` - `make regsnap`; it reads `regs.list`, default CONFIG_MEMSIZE 0xf8 + RBBM_STATUS 0xe40, via the read-only 2D `read_regs`), a screenshot, and `diskutil verifyVolume` output of `/` and `/Volumes/Test HD` (Tiger cannot verify a mounted volume absolutely - the check is the pre/post CHANGE); checks the ATI kext is loaded, no GL application or DVD client exists (an idle desktop holds one GL context: WindowServer's; `DTEST_MAX_GL`/`DTEST_MAX_DVD` override), and the peer acknowledged. Any failure aborts. On success it writes `results/preflight.ok`.
+3. On the Tiger machine: `sh preflight.sh <name>` - captures kextstat, `ioreg -l -w0`, displays, vm_stat, the system.log tail, (register snapshot through `./regsnap` - `make regsnap`; it reads `regs.list`, default CONFIG_MEMSIZE 0xf8 + RBBM_STATUS 0xe40, via the read-only 2D `read_regs`), a screenshot, and `diskutil verifyVolume` output of `/` and `/Volumes/Test HD` (Tiger cannot verify a mounted volume absolutely - the check is the pre/post CHANGE); checks the ATI kext is loaded, no GL application or DVD client exists (an idle desktop holds one GL context: WindowServer's; `DTEST_MAX_GL`/`DTEST_MAX_DVD` override), and the peer acknowledged. Any failure aborts. On success it writes `results/preflight.ok`.
 4. `./<name> --phase <A|B|..> [--kext stock|rebuilt] [--mirror DEVHOST:9999] --i-understand-this-may-hang-the-machine`
 5. `sh postflight.sh <name>` - repeats the capture into `post.*`, diffs it (kextstat must be identical, volumes clean), prints the other diffs.
 6. Put the outcome class, the log and the diffs into the issue.
@@ -20,7 +20,7 @@ suite (`../Makefile` does not know this directory), and always through `dtest_ma
 
 ## Write-ahead log
 `dtest_about()` appends `ABOUT TO CALL <selector> args=...` to `results/<name>_<kext>_<UTC>.log` and `fsync()`s **before** the call;
-`dtest_result()` appends the outcome after. The same line goes to stdout (`ssh G5 ./x | tee` on a second terminal) and, with `--mirror`, to a UDP
+`dtest_result()` appends the outcome after. The same line goes to stdout (`ssh <tiger-host> ./x | tee` on a second terminal) and, with `--mirror`, to a UDP
 listener on the second machine. A hang or panic therefore always leaves the exact last call on disk and on the other machine's screen.
 
 ## Outcome classes (recorded in `results/<name>.state` and the issue)
@@ -30,7 +30,7 @@ about the stock driver and becomes its own issue (see #98, #99); on the rebuilt 
 written by the dying process - the state file is simply left `IN PROGRESS`; whoever resets the machine records the class.
 
 ## Reset procedure (referenced by every per-method issue)
-1. soft: `ssh G5 'sudo shutdown -r now'`;
+1. soft: `ssh <tiger-host> 'sudo shutdown -r now'`;
 2. if ssh is dead but the display responds: hold the power button 5 s, then power on;
 3. if the machine is unresponsive: physical power-off.
 After ANY reset: `diskutil verifyVolume` on every mounted volume (`capture.sh` does it), `kextstat | grep -i ati` shows the stock kext (or the
@@ -41,13 +41,13 @@ corrupted files on the Tiger working volume (godot-ports #9): never skip the vol
 ## Order and isolation
 One test per boot session. Reboot between tests whose issue says "reboot after" (all that change global or hardware state). Never two destructive
 tests in one session. Never while a GL / 2D / DVD client other than WindowServer is running unless the issue says the test needs one.
-Never broad-scan kernel memory and never broad-fuzz call shapes (each crashed the G5 before; `feedback` in the issues #43/#87): the setup of every
+Never broad-scan kernel memory and never broad-fuzz call shapes (each crashed the test machine during development; `feedback` in the issues #43/#87): the setup of every
 test is built from calls already proven live on the stock kext, and every parameter that is not proven (a register offset, an IDCT stream, a
 mode-bit combination) must be derived from evidence first (Step 0 of the issue), never chosen.
 
 ## Two phases
 **Phase S**: the STOCK kext (what is installed) - the reference behaviour and measurements; may be run today. **Phase R**: the rebuilt kext - only
-inside Stage 3 of `../first_load_plan.md` with the user's per-stage authorisation, and only after #85 and #86 (both resolved 2026-10-01). A test is
+inside Stage 3 of `../first_load_plan.md` with your explicit go-ahead at each stage, and only after #85 and #86 (both resolved 2026-10-01). A test is
 "exercised" when Phase S has a recorded PASS/EXPECTED-REJECT and Phase R matches it (or its divergence is a tracked defect).
 
 ## Measurement toolkit
