@@ -115,3 +115,11 @@ Logs: `Tests/baseline/soak/rebuilt_f820602fix_soak_20261014.*`.
 **Result: the literal bar is MET.** 754 rounds in 14 417 s, zero STEP-FAIL / STEP-DIFF / STOPPED / TRANSIENT, `transients_recovered=0` (no retry was used at all); watchdog 470 samples all OK (kext load address 0x6a317000 throughout, `panic.log` unchanged at 218602 bytes, no crashdump). No display reconfiguration occurred during the run.
 Together with the consumer soak above, the rebuilt kext passes both the unmasked no-retry soak and the loaded soak.
 Logs: `Tests/baseline/soak/rebuilt_f820602fix_quiet_soak_20261014.log`, `.watchdog.tsv`.
+
+## Rebuilt-kext 4 h unmasked soak as the REAL boot-time driver (2026-10-15)
+
+**Build/identity:** rebuilt `95edbd2` binary (md5 `2de86c496d062dd618e715e34c29bb74`) copied over `/System/Library/Extensions/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000`, `touch /System/Library/Extensions`, reboot. The prelinked kernel cache was left untouched but is stale after the touch, so the accelerator was **loaded by kextd at boot**, not prelinked. Loaded image verified from `kextstat` (not from the md5): `78 0x71bac000 0x53000 0x52000` (stock is 0x4f000/0x4e000). Same address/size at the end of the run.
+**Workload:** `Tests/soak.sh 14400`, GLN=50, no `MASK_INSTANCE_COUNTS`, no retries, no concurrent consumers, started 18:02:40 on a boot 30 min old.
+**Result: the literal bar is MET.** 1051 rounds in 14 408 s, 3153 step lines `ok`, zero STEP-FAIL / STEP-DIFF / STOPPED / TRANSIENT, `transients_recovered=0`. `panic.log` unchanged at 220971 bytes, no crashdump, kext address stable. hwup sampler: `down_samples=0`, `changes=1` over 287 866 calls.
+**Caveats:** the dev-side watchdog TSV was overwritten when the watchdog exited (only the last 2 samples survived; I saw every sample `ok` live at hourly checks), so it is not archived; the soak log and hwup log are the evidence. Stock soaks/baselines used the prelinked driver, the rebuilt boot run used the kextd-loaded one.
+Logs: `Tests/baseline/soak/rebuilt_boottime_95edbd2_soak_20261015.log`.
