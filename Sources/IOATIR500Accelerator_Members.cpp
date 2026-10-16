@@ -299,11 +299,8 @@ void IOATIR500Accelerator::teardownAGP(IOService *real_provider) {
     M<UInt32>(self + 0x83c) = 0;
     M<SInt32>(self + 0x7fc) = M<SInt32>(self + 0x7fc) - (iVar1 * 2 + M<SInt32>(self + 0x830));
   }
-  GH_IOSleep(150);
   if ((M<SInt32 *>(self + 0x74) != (SInt32 *)0x0) && ((M<UInt32>(self + 0x98) & 2) != 0)) {
-    GH_IOSleep(150);
     VCALL(*M<SInt32 *>(self + 0x74), 0x5e0)(M<SInt32 *>(self + 0x74));
-    GH_IOSleep(150);
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) & 0xfffffffd;
   }
   return;

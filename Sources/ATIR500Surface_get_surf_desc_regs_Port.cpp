@@ -158,18 +158,18 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar8) - 4503601774854144.0) * fVar1 *
                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x44)) -
                        4503599627370496.0);
-        if (2.1474836e+09 <= fVar4) {
-          local_48 = (SInt64)(int)(fVar4 - 2.1474836e+09);
-          iVar16 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
+        if (2147483648.0 <= fVar4) {
+          local_48 = (SInt64)(int)(fVar4 - 2147483648.0);
+          iVar16 = (int)(fVar4 - 2147483648.0) + -0x80000000;
         }
         else {
           iVar16 = (int)fVar4;
           local_50 = (SInt64)iVar16;
         }
         iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
-        if (2.1474836e+09 <= fVar2) {
-          local_30 = (SInt64)(int)(fVar2 - 2.1474836e+09);
-          iVar13 = (int)(fVar2 - 2.1474836e+09) + -0x80000000;
+        if (2147483648.0 <= fVar2) {
+          local_30 = (SInt64)(int)(fVar2 - 2147483648.0);
+          iVar13 = (int)(fVar2 - 2147483648.0) + -0x80000000;
         }
         else {
           iVar13 = (int)fVar2;
@@ -182,18 +182,18 @@ void ATIR500Surface::get_surf_desc_regs(OverlaySurfaceInfo *real_param_1, UInt32
         fVar4 = (float)((double)CONCAT44d(0x43300000,uVar6) - 4503601774854144.0) * fVar1 *
                 (float)((double)CONCAT44d(0x43300000,M<UInt32>(param_1 + 0x48)) -
                        4503599627370496.0);
-        if (2.1474836e+09 <= fVar4) {
-          local_80 = (SInt64)(int)(fVar4 - 2.1474836e+09);
-          iVar16 = (int)(fVar4 - 2.1474836e+09) + -0x80000000;
+        if (2147483648.0 <= fVar4) {
+          local_80 = (SInt64)(int)(fVar4 - 2147483648.0);
+          iVar16 = (int)(fVar4 - 2147483648.0) + -0x80000000;
         }
         else {
           iVar16 = (int)fVar4;
           local_88 = (SInt64)iVar16;
         }
         iVar16 = iVar16 + M<int>(pOVar11 + 0xa0);
-        if (2.1474836e+09 <= fVar3) {
-          local_68 = (SInt64)(int)(fVar3 - 2.1474836e+09);
-          iVar13 = (int)(fVar3 - 2.1474836e+09) + -0x80000000;
+        if (2147483648.0 <= fVar3) {
+          local_68 = (SInt64)(int)(fVar3 - 2147483648.0);
+          iVar13 = (int)(fVar3 - 2147483648.0) + -0x80000000;
         }
         else {
           iVar13 = (int)fVar3;

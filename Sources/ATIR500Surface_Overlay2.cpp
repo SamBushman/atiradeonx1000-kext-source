@@ -61,12 +61,11 @@ inline UInt32 &W(void *p, int o) { return *reinterpret_cast<UInt32 *>(reinterpre
 
 UInt32 ATIR500Surface::alloc_overlay(void) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    if (W(self, 0xda4) != 0) {
+    bool haveOverlay = W(self, 0xda4) != 0;      /* real: the compare result is also the return value (addic/subfe before the beqlr) */
+    if (haveOverlay) {
         W(self, 0xd70) |= 2;
     }
-    /* real: no explicit return statement - r3 (this) is never
-       overwritten, see file header comment. */
-    return reinterpret_cast<UInt32>(self);
+    return haveOverlay;
 }
 
 

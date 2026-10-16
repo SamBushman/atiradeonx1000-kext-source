@@ -54,15 +54,33 @@ ARENA = 0x20000000                                         # test objects are al
 STACK_TOP, STACK_SIZE = 0x7ff00000, 0x00100000
 ENTRY_SP = STACK_TOP - 0x4000                              # r1 at entry; 0x4000 bytes above it are the caller's frame
 PAGE = 0x1000
+STACKPTR_MARK = b'\x7f\xff\xff\xf0'
+CALLER_SCRATCH = 0x100                                      # bytes above the entry SP that belong to the callee: LR/CR slots and the home area of the register arguments
 BLR = 0x4e800020
 
-# external DATA symbols and the value their cell holds (a function pointer or an int would be a stub; these are variables)
-EXTERN_DATA = {'_page_size': 0x1000}
-# argument counts of the plain-C externs the kext calls (the mangled ones are parsed from their name)
-EXTERN_ARITY = {'_IOLockLock': 1, '_IOLockUnlock': 1, '_IOLockSleep': 3, '_IOLockWakeup': 3, '_IOSleep': 1, '_IOFree': 2, '_IOFreeAligned': 2,
-                '_IOMalloc': 1, '_IOMallocAligned': 2, '_bzero': 2, '_bcopy': 3, '_memcpy': 3, '_memset': 3, '_IOLog': 1, '_IOGetTime': 1,
-                '_IODelay': 1, '_IOLockAlloc': 0, '_IOLockFree': 1, '_panic': 1, '_kprintf': 1, '_IOSimpleLockLock': 1, '_IOSimpleLockUnlock': 1,
-                '_thread_block': 1, '_assert_wait': 2, '_IOMemoryDescriptor_withAddress': 4}
+VTEXT_BASE, VTEXT_SIZE = 0x00500000, 0x00001000          # vtables of classes outside the kext (IOService, OSObject, ...): data with named-stub slots
+VTEXT_SLOTS = {'__ZTV9IOService': {0x48: '__ZN8OSObject4initEv', 0x4c: '__ZN9IOService4freeEv'}}    # known slots of those vtables; the rest are named by symbol and offset
+IOKIT_FAMILY_VTABLES = {'__ZTV8OSObject', '__ZTV15IORegistryEntry', '__ZTV9IOService', '__ZTV12IOUserClient'}   # one hierarchy: slot +0xNN is the same method in each
+COMMON_BASE, COMMON_SIZE = 0x00400000, 0x00010000        # storage of the rebuilt kext's `.comm` symbols (the kext linker allocates them at load time)
+DATA_OBJ = DATA_BASE + 0x1000                              # a page of stand-in kernel objects the external data symbols point at
+# external DATA symbols and what their cell holds: variables (the page size) and pointers to kernel objects (OSBoolean true, the kernel task, ...)
+EXTERN_DATA = {'_page_size': 0x1000, '_page_shift': 12, '_kOSBooleanTrue': DATA_OBJ + 0x00, '_kernel_task': DATA_OBJ + 0x40,
+               '_gIODTPlane': DATA_OBJ + 0x80, '_gIOServicePlane': DATA_OBJ + 0xc0}
+# argument counts of the plain-C externs the kext imports (the mangled ones are parsed from their name). Variadic functions list the registers compared.
+EXTERN_ARITY = {'_IODelay': 1, '_IOFree': 2, '_IOFreeAligned': 2, '_IOFreeContiguous': 2, '_IOFreePageable': 2, '_IOGetTime': 1, '_IOLockAlloc': 0,
+                '_IOLockFree': 1, '_IOLockLock': 1, '_IOLockSleep': 3, '_IOLockUnlock': 1, '_IOLockWakeup': 3, '_IOLog': 6, '_IOMalloc': 1,
+                '_IOMallocAligned': 2, '_IOMallocContiguous': 3, '_IOMallocPageable': 2, '_IOPanic': 1, '_IOSleep': 1, '_OSAddAtomic': 2,
+                '_OSDecrementAtomic': 1, '_OSIncrementAtomic': 1, '_OSRuntimeFinalizeCPP': 0, '_OSRuntimeInitializeCPP': 0, '___cxa_pure_virtual': 0,
+                '_absolutetime_to_nanoseconds': 3, '_assert_wait_timeout': 3, '_bzero': 2, '_clock_get_uptime': 1, '_kprintf': 6, '_memcpy': 3,
+                '_memset': 3, '_panic': 6, '_sscanf': 6, '_sysctlbyname': 6, '_thread_block': 1, '_bcopy': 3, '_assert_wait': 2}
+# what a mocked plain-C extern returns: 'void', 'ptr' (a fresh object), 'arg0' (its first argument), 'int'
+EXTERN_RET = {'_IODelay': 'void', '_IOFree': 'void', '_IOFreeAligned': 'void', '_IOFreeContiguous': 'void', '_IOFreePageable': 'void',
+              '_IOGetTime': 'void', '_IOLockAlloc': 'ptr', '_IOLockFree': 'void', '_IOLockLock': 'void', '_IOLockSleep': 'int',
+              '_IOLockUnlock': 'void', '_IOLockWakeup': 'void', '_IOLog': 'void', '_IOMalloc': 'ptr', '_IOMallocAligned': 'ptr',
+              '_IOMallocContiguous': 'ptr', '_IOMallocPageable': 'ptr', '_IOPanic': 'void', '_IOSleep': 'void', '_OSAddAtomic': 'int',
+              '_OSDecrementAtomic': 'int', '_OSIncrementAtomic': 'int', '_absolutetime_to_nanoseconds': 'void', '_assert_wait_timeout': 'int',
+              '_bzero': 'void', '_clock_get_uptime': 'void', '_kprintf': 'int', '_memcpy': 'arg0', '_memset': 'arg0', '_panic': 'void',
+              '_sscanf': 'int', '_sysctlbyname': 'int', '_thread_block': 'int', '_bcopy': 'void', '_assert_wait': 'int'}
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -163,37 +181,121 @@ class Image:
         for sy in m.syms:
             if (sy['type'] & 0x0e) == 0x0e and sy['sect'] == text_idx and sy['name']:
                 self.funcs.setdefault(sy['name'], sy['value'])
+        self._canon_cache = {}
+        self.addr2func = {}
+        self.commons = {sy['name']: sy['value'] for sy in m.syms if (sy['type'] & 0x0e) == 0 and (sy['type'] & 1) and sy['value'] > 0 and sy['name']}
+        data_secs = {i + 1 for i, x in enumerate(m.secs) if x['seg'] == '__DATA'}
+        self.datasyms = sorted((sy['value'], sy['name']) for sy in m.syms if (sy['type'] & 0x0e) == 0x0e and sy['sect'] in data_secs and sy['name'])
+        self.data_ranges = [(x['addr'], x['addr'] + x['size']) for x in m.secs if x['seg'] == '__DATA' and x['size']]
+        for n, a in self.funcs.items():
+            self.addr2func.setdefault(a, n)
         self.extern_names = set()
         self._extern_relocs = []
         for (sg, sn), lst in m.sec_relocs.items():
-            for r in lst:
+            for i, r in enumerate(lst):
                 if r['ext'] and not r['scattered'] and r['symnum'] is not None:
                     nm = m.syms[r['symnum']]['name']
-                    self._extern_relocs.append((r['addr'], r['rtype'], nm))
+                    pair = lst[i + 1]['symnum'] & 0xffff if r['rtype'] in (4, 5, 6) and i + 1 < len(lst) and lst[i + 1]['rtype'] == 1 else 0
+                    self._extern_relocs.append((r['addr'], r['rtype'], nm, pair))
                     self.extern_names.add(nm)
 
     def instantiate(self, reg):
         """-> (patched bytes of the image, {extern name: stub or cell address}); external references resolved to the registry's stubs / data cells"""
         data = bytearray(self.data)
         target = {}
+        self.common_cells, off = {}, 0
+        for nm in sorted(self.commons):
+            self.common_cells[nm] = (COMMON_BASE + off, self.commons[nm]); off += (self.commons[nm] + 15) & ~15
+        self.vtable_externs = {}
         for nm in sorted(self.extern_names):
-            target[nm] = (DATA_BASE + 4 * sorted(EXTERN_DATA).index(nm)) if nm in EXTERN_DATA else reg.get(nm)
-        for addr, rtype, nm in self._extern_relocs:
+            if nm in self.common_cells:
+                target[nm] = self.common_cells[nm][0]
+            elif nm in EXTERN_DATA:
+                target[nm] = DATA_BASE + 4 * sorted(EXTERN_DATA).index(nm)
+            elif nm.startswith('__ZTV'):                 # a vtable of a class outside the kext: data whose slots are stubs
+                self.vtable_externs[nm] = VTEXT_BASE + len(self.vtable_externs) * VTEXT_SIZE
+                target[nm] = self.vtable_externs[nm]
+            else:
+                target[nm] = reg.get(nm)
+        word = lambda a: struct.unpack('>I', bytes(self.data[a:a + 4]))[0]      # the ORIGINAL words: the low half may already be patched when its high half is handled
+        los = {}                                           # symbol -> addresses of its LO16 instructions (the baked low half is the addend)
+        for addr, rtype, nm, pair in self._extern_relocs:
+            if rtype == 5: los.setdefault(nm, []).append(addr)
+        for addr, rtype, nm, pair in self._extern_relocs:
             s = target[nm]
-            w = struct.unpack('>I', data[addr:addr + 4])[0]
-            if rtype == 4:      w = (w & 0xffff0000) | ((s >> 16) & 0xffff)                       # HI16
-            elif rtype == 6:    w = (w & 0xffff0000) | (((s + 0x8000) >> 16) & 0xffff)            # HA16
-            elif rtype == 5:    w = (w & 0xffff0000) | (s & 0xffff)                                # LO16
+            w = word(addr)
+            def low_addend(signed):
+                near = [a for a in los.get(nm, []) if addr < a <= addr + 0x20]
+                v = (word(min(near)) & 0xffff) if near else 0
+                return (v - 0x10000 if signed and v >= 0x8000 else v)
+            if rtype == 4:                                                                         # HI16 (paired with an unsigned low half, e.g. ori)
+                add = ((w & 0xffff) << 16) + low_addend(False)
+                w = (w & 0xffff0000) | (((s + add) >> 16) & 0xffff)
+            elif rtype == 6:                                                                       # HA16 (paired with a signed low half, e.g. lwz/addi)
+                add = ((w & 0xffff) << 16) + low_addend(True)
+                w = (w & 0xffff0000) | (((s + add + 0x8000) >> 16) & 0xffff)
+            elif rtype == 5:                                                                       # LO16: only its own baked half is the addend
+                w = (w & 0xffff0000) | ((s + (w & 0xffff)) & 0xffff)
             elif rtype == 3:                                                                       # BR24: bl/b to an external
                 disp = s - addr
                 assert -0x2000000 <= disp < 0x2000000
                 w = (w & 0xfc000003) | (disp & 0x03fffffc)
-            elif rtype == 0:    w = s                                                              # VANILLA: a pointer in data
+            elif rtype == 0:    w = (s + w) & 0xffffffff                                           # VANILLA: a pointer in data (+ addend)
             elif rtype in (1, 13):  continue                                                       # PAIR / JBSR marker
             else:
                 raise AssertionError('%s: unhandled external relocation type %d at 0x%x (%s)' % (self.label, rtype, addr, nm))
             struct.pack_into('>I', data, addr, w)
         return data, target
+
+    def canon(self, addr):
+        c = self._canon_cache.get(addr)
+        if c is None:
+            c = self._canon_cache[addr] = self._canon(addr)
+        return c
+
+    def canon_ptr(self, v):
+        """a pointer argument into the kext's own image, named so the two builds compare: a C string by its text, a global by (symbol, offset)"""
+        if v in self.addr2func and v:
+            return ('fn', self.addr2func[v])
+        if not (0x1000 <= v < self.size):
+            return v
+        for x in self.m.secs:
+            if x['size'] and x['addr'] <= v < x['addr'] + x['size']:
+                if x['name'] == '__text':
+                    nm = self.addr2func.get(v)
+                    return ('fn', nm) if nm else v
+                if x['name'] == '__cstring':
+                    d = bytes(self.data[v:v + 200]).split(b'\0')[0]
+                    return ('str', d.decode('latin1'))
+                if x['seg'] == '__DATA':
+                    return self.canon(v)
+                for sy in self.m.syms:                    # a named table / vtable in __const
+                    pass
+                return self._const_name(v, x)
+        return v
+
+    def _const_name(self, v, sec):
+        if not hasattr(self, '_consts'):
+            ids = {i + 1 for i, x in enumerate(self.m.secs) if x['seg'] == '__TEXT' and x['name'] != '__text'}
+            self._consts = sorted((sy['value'], sy['name']) for sy in self.m.syms if (sy['type'] & 0x0e) == 0x0e and sy['sect'] in ids and sy['name'])
+        import bisect
+        i = bisect.bisect_right(self._consts, (v, '\uffff')) - 1
+        if i >= 0 and self._consts[i][0] >= sec['addr']:
+            return ('g', self._consts[i][1], v - self._consts[i][0])
+        return v
+
+    def _canon(self, addr):
+        """a stable name for an address that is a global variable of the kext, so that the two builds (which lay their data out differently) can be
+        compared: ('g', symbol, offset); any other address is returned unchanged"""
+        for nm, (a, n) in getattr(self, 'common_cells', {}).items():
+            if a <= addr < a + n:
+                return ('g', nm, addr - a)
+        if any(a <= addr < b for a, b in self.data_ranges):
+            import bisect
+            i = bisect.bisect_right(self.datasyms, (addr, '\uffff')) - 1
+            if i >= 0:
+                return ('g', self.datasyms[i][1], addr - self.datasyms[i][0])
+        return addr
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
@@ -206,8 +308,10 @@ class Run:
 class Machine:
     """one emulated side. `world` is a callable(machine) that builds the test objects; it must allocate in the same order on both sides."""
 
-    def __init__(self, image, reg, seed, lazy='zero', mock_policy=None, limit=300000, stack_args=None):
+    def __init__(self, image, reg, seed, lazy='zero', mock_policy=None, limit=300000, stack_args=None, transparent=None):
         self.image, self.reg, self.seed, self.lazy, self.limit = image, reg, seed, lazy, limit
+        self.transparent = re.compile(transparent) if transparent else None
+        self.exclusive = set()      # functions that exist only in this image: the other build inlined them, so they run for real here
         self.stack_args = stack_args or {}
         self.mock_policy = mock_policy or default_mock
         self.uc = uc = Uc(UC_ARCH_PPC, UC_MODE_PPC32 | UC_MODE_BIG_ENDIAN)
@@ -217,19 +321,29 @@ class Machine:
         uc.mem_write(0, bytes(data))
         uc.mem_map(STUB_BASE, STUB_SIZE)
         uc.mem_write(STUB_BASE, struct.pack('>I', BLR) * (STUB_SIZE // 4))
-        uc.mem_map(DATA_BASE, PAGE)
+        uc.mem_map(DATA_BASE, 2 * PAGE)
+        uc.mem_map(COMMON_BASE, COMMON_SIZE)
+        for nm, base in image.vtable_externs.items():
+            uc.mem_map(base, VTEXT_SIZE)
+            for off in range(0, VTEXT_SIZE, 4):
+                fam = nm in IOKIT_FAMILY_VTABLES
+                slot = VTEXT_SLOTS.get(nm if not fam else '__ZTV9IOService', {}).get(off) or (('inherited IOService virtual +0x%x' % off) if fam else ('%s slot +0x%x' % (nm, off)))
+                uc.mem_write(base + off, struct.pack('>I', reg.get(slot)))
         for i, k in enumerate(sorted(EXTERN_DATA)):
             uc.mem_write(DATA_BASE + 4 * i, struct.pack('>I', EXTERN_DATA[k]))
         uc.mem_map(STOP, PAGE)
         uc.mem_write(STOP, struct.pack('>I', BLR))
         uc.mem_map(STACK_TOP - STACK_SIZE, STACK_SIZE)
         self.arena_next = ARENA
-        self.mapped = [(0, image.size), (STUB_BASE, STUB_SIZE), (DATA_BASE, PAGE), (STOP, PAGE), (STACK_TOP - STACK_SIZE, STACK_SIZE)]
+        self.mapped = [(0, image.size), (STUB_BASE, STUB_SIZE), (DATA_BASE, 2 * PAGE), (COMMON_BASE, COMMON_SIZE), (STOP, PAGE), (STACK_TOP - STACK_SIZE, STACK_SIZE)]
         self.entry_patched = {}
         self.calls, self.writes, self.insns = [], [], 0
-        self.visited = set()
+        self.visited = {}
         self.trail = []
         self.read_trace = None
+        self.want_snapshots = False   # --strict-calls: keep the memory visible at every call
+        self.replay_reads = None      # register read results recorded from the other side, handed back in order
+        self.replay_pos = 0
         self.hw = []                  # register windows: (base, end, model)
         self.events = []              # calls and register accesses, in order
         self.write_log = []           # [addr, size, old bytes, new bytes]
@@ -292,6 +406,9 @@ class Machine:
         base = addr & ~(PAGE - 1)
         if base < 0x1000:                                    # null-page accesses are faults, not data
             return False
+        if len(self.mapped) > 2000:                          # a loop sweeping through address space: a wild pointer, not a test
+            self.bad_read = True
+            return False
         try:
             uc.mem_map(base, PAGE)
         except UcError:
@@ -307,6 +424,14 @@ class Machine:
             i, hwidx = self.pending
             ent = self.write_log[i]
             ent[3] = bytes(self.uc.mem_read(ent[0], ent[1]))
+            if ent[1] == 4 and STACK_TOP - STACK_SIZE <= struct.unpack('>I', ent[3])[0] < STACK_TOP and not (STACK_TOP - STACK_SIZE <= ent[0] < STACK_TOP):
+                ent[3] = STACKPTR_MARK         # the address of a local of the function: differs between builds by construction
+            elif ent[1] == 4:
+                v = struct.unpack('>I', ent[3])[0]
+                if 0x1000 <= v < self.image.size:
+                    c = self.image.canon_ptr(v)
+                    if isinstance(c, tuple):   # the address of one of the kext's own globals / functions / strings: named, so the two layouts compare
+                        ent[3] = struct.pack('>I', 0xfe000000 | (zlib.crc32(repr(c).encode()) & 0xffffff))
             if hwidx is not None:
                 self.events[hwidx][3] = ent[3].hex()
                 h = self._hw_of(ent[0])
@@ -330,11 +455,22 @@ class Machine:
     def _hw_read(self, uc, access, addr, size, value, ud):
         self._flush()
         h = self._hw_of(addr)
-        if h and h[1]:
+        if self.replay_reads is not None and self.replay_pos < len(self.replay_reads) and len(self.replay_reads[self.replay_pos]) == size:
+            uc.mem_write(addr, self.replay_reads[self.replay_pos])      # the device answers as it answered the stock function
+        elif h and h[1]:
             data = h[1]('R', addr - h[0], size, None)
             if data is not None:
                 uc.mem_write(addr, bytes(data))
+        self.replay_pos += 1
         self.events.append(['R', addr - h[0], size, bytes(uc.mem_read(addr, size)).hex()])
+
+    def _null_call(self, uc, addr, size, ud):
+        self.bad_read = True              # a call through a null function pointer: a hole in the test world, not behaviour
+        self.status = 'NULLCALL'; uc.emu_stop()
+
+    def _barrier(self, uc, addr, size, ud):
+        self._flush()
+        self.events.append(['B', ud])
 
     def _read_code(self, uc, access, addr, size, value, ud):
         if self.own[0] <= addr < self.own[1]:
@@ -355,7 +491,7 @@ class Machine:
 
     def _block(self, uc, addr, size, ud):
         self.insns += size // 4
-        self.visited.add((addr, size))
+        self.visited[(addr, size)] = self.visited.get((addr, size), 0) + 1
         self.trail.append(addr)
         if self.insns > self.limit:
             self.status = 'TIMEOUT'; uc.emu_stop()
@@ -367,20 +503,25 @@ class Machine:
         unknown = n is None
         if unknown:
             kinds = ['i', 'i', 'i']; n = 3
+        sp = uc.reg_read(UC_PPC_REG_1)
         vals, gi, fi = [], 0, 0
         for k in kinds:
             if k == 'f':
                 fi += 1
-                vals.append(('f', struct.pack('>d', uc.reg_read(UC_PPC_REG_FPR0 + fi)).hex() if False else 0))
+                vals.append(('f', '%016x' % uc.reg_read(UC_PPC_REG_FPR0 + fi)))     # raw bits of the double in f<fi>
                 continue
-            if gi >= 8: break
-            v = regs[gi]; gi += 1
+            if gi < 8:
+                v = regs[gi]
+            else:                                   # the 9th word and later are passed in the caller's frame, after the 56-byte linkage and home area
+                v = struct.unpack('>I', bytes(uc.mem_read(sp + 0x38 + 4 * (gi - 8), 4)))[0]
+            gi += 1
             vals.append(self.normalise(v, name, gi - 1))
         k = self.stub_count.get(name, 0); self.stub_count[name] = k + 1
         self.calls.append((name, tuple(vals), unknown))
         self._flush()
         self.events.append(['C', name, tuple(vals)])
-        self.snapshots.append(self.memory_diff())
+        if self.want_snapshots:
+            self.snapshots.append(self.memory_diff())
         uc.reg_write(UC_PPC_REG_3, self.mock_policy(self, name, k) & 0xffffffff)
 
     def normalise(self, v, name, index):
@@ -393,7 +534,7 @@ class Machine:
                 if key in name:
                     n = spec.get(index, 0)
             return ('stack', bytes(self.uc.mem_read(v, min(n, STACK_TOP - v))).hex() if n else '')
-        return v
+        return self.image.canon_ptr(v)
 
     # -- running -----------------------------------------------------------------------------------------------------------------------------
     def prepare(self, target_name):
@@ -402,12 +543,19 @@ class Machine:
         later = [a for a in self.image.funcs.values() if a > entry]
         self.own = (entry, min(later) if later else self.image.size)
         for name, a in self.image.funcs.items():
-            if name == target_name:
+            if name == target_name or (self.transparent and self.transparent.search(name)) or name in self.exclusive:
                 continue
             s = self.reg.get(name)
             self.uc.mem_write(a, struct.pack('>I', 0x48000002 | s))      # ba s  (AA=1, LK=0)
         self.uc.hook_add(UC_HOOK_CODE, self._stub_hook, begin=STUB_BASE, end=STUB_BASE + STUB_SIZE - 1)
         self.uc.hook_add(UC_HOOK_CODE, self._stub_hook, begin=STOP, end=STOP + 3)
+        if self.own[0] != 0:
+            self.uc.hook_add(UC_HOOK_CODE, self._null_call, begin=0, end=3)
+        for a in range(self.own[0], self.own[1], 4):      # barriers inside the function: eieio / sync / lwsync / isync
+            w = struct.unpack('>I', self.patched[a:a + 4])[0]
+            kind = {0x7c0006ac: 'eieio', 0x7c0004ac: 'sync', 0x7c2004ac: 'lwsync', 0x4c00012c: 'isync'}.get(w)
+            if kind:
+                self.uc.hook_add(UC_HOOK_CODE, self._barrier, begin=a, end=a + 3, user_data=kind)
         self.uc.hook_add(UC_HOOK_BLOCK, self._block, begin=0, end=self.image.size - 1)
         self.uc.hook_add(UC_HOOK_MEM_UNMAPPED, self._unmapped)
         self.uc.hook_add(UC_HOOK_MEM_WRITE, self._write)
@@ -451,12 +599,13 @@ class Machine:
     def memory_diff(self):
         """{address: byte} of every byte outside the function's own stack frame whose value now differs from before the call"""
         initial, final = {}, {}
-        lo, hi = STACK_TOP - STACK_SIZE, ENTRY_SP
+        lo, hi = STACK_TOP - STACK_SIZE, ENTRY_SP + CALLER_SCRATCH
         for addr, size, old, new in self.write_log:
             if new is None or lo <= addr < hi:
                 continue
             for i in range(size):
-                initial.setdefault(addr + i, old[i]); final[addr + i] = new[i]
+                k = self.image.canon(addr + i)
+                initial.setdefault(k, old[i]); final[k] = new[i]
         return {a: b for a, b in final.items() if b != initial[a]}
 
     def result(self):
@@ -464,7 +613,8 @@ class Machine:
         r = Run()
         r.status, r.calls, r.insns = self.status, list(self.calls), self.insns
         r.bad_read = self.bad_read
-        r.visited = set(self.visited)
+        r.visited = dict(self.visited)
+        r.cycles = sum(cnt * block_cost(self.patched, a, n) for (a, n), cnt in self.visited.items())
         r.trail = list(self.trail)
         r.fault_pc = self.uc.reg_read(UC_PPC_REG_PC)
         r.own = self.own
@@ -478,19 +628,57 @@ class Machine:
                     r.abi.append('r%d not preserved' % i)
         self._flush()
         r.writes = self.memory_diff()
-        r.write_order = [(a, n, b) for a, n, o, b in self.write_log if not (STACK_TOP - STACK_SIZE <= a < ENTRY_SP)]
+        r.write_order = [(self.image.canon(a), n, b) for a, n, o, b in self.write_log if not (STACK_TOP - STACK_SIZE <= a < ENTRY_SP + CALLER_SCRATCH)]
         r.events = [tuple(e) for e in self.events]
         r.snapshots = list(self.snapshots)
         r.fault = getattr(self, 'fault', '') if self.status == 'FAULT' else ''
         return r
 
 
+_cost_cache = {}
+
+
+def insn_cost(w):
+    """a coarse PowerPC 970 (G5) cost in cycles of one instruction word, by its opcode class: not a measurement, a weighting that makes
+    'ten more adds' and 'ten more divides' differ. Loads 3, stores 1, multiplies 4, divides 20, FP arithmetic 6 (divide 30), atomics 8, sync 30,
+    eieio 10, SPR moves 3, everything else 1."""
+    op = w >> 26
+    if op in (32, 33, 34, 35, 40, 41, 42, 43, 46, 48, 49, 50, 51): return 3
+    if op in (36, 37, 38, 39, 44, 45, 47, 52, 53, 54, 55): return 1
+    if op == 7: return 4
+    if op in (59, 63):
+        xo = (w >> 1) & 0x1f
+        return 30 if xo == 18 else 6
+    if op == 31:
+        xo = (w >> 1) & 0x3ff
+        if xo in (23, 87, 279, 343, 534, 535, 599, 20, 103, 55, 119, 311, 375, 311): return 3 if xo != 20 else 8
+        if xo in (151, 215, 407, 662, 663, 727, 247, 183, 439): return 1
+        if xo == 150: return 8
+        if xo in (235, 75, 11): return 4
+        if xo in (491, 459, 395, 363): return 20
+        if xo == 598: return 30
+        if xo == 854: return 10
+        if xo in (339, 467, 144, 19): return 3
+    return 1
+
+
+def block_cost(image_bytes, addr, size):
+    key = (id(image_bytes), addr, size)
+    if key not in _cost_cache:
+        _cost_cache[key] = sum(insn_cost(struct.unpack('>I', bytes(image_bytes[a:a + 4]))[0]) for a in range(addr, addr + size, 4))
+    return _cost_cache[key]
+
+
 _ret_kind_cache = {}
+BOOL_METHODS = {'init', 'start', 'attach', 'open', 'isOpen', 'initWithTask', 'initWithOptions', 'matchPropertyTable', 'isInactive', 'isParent', 'inPlane',
+                'setProperty', 'serializeProperties', 'handleOpen', 'handleIsOpen', 'terminate', 'requestTerminate', 'willTerminate', 'didTerminate'}
 
 
 def callee_ret_kind(name):
     """'void' | 'bool' | 'ptr' | 'status' (IOReturn) | 'int' for a mocked callee, from its declaration in Headers/<Class>.h ('int' when unknown)"""
     base = name.split(' [vcall')[0]
+    if base in EXTERN_RET:
+        return EXTERN_RET[base]
     if base in _ret_kind_cache:
         return _ret_kind_cache[base]
     kind = 'int'
@@ -505,6 +693,8 @@ def callee_ret_kind(name):
                     t = m2.group(1).strip()
                     kind = 'void' if t == 'void' else 'bool' if t == 'bool' else 'status' if t == 'IOReturn' else 'ptr' if t.endswith('*') else 'int'
                     break
+    if kind == 'int' and mm and mm.group(2) in BOOL_METHODS:      # IOKit / libkern virtuals declared outside the kext's headers
+        kind = 'bool'
     _ret_kind_cache[base] = kind
     return kind
 
@@ -515,6 +705,7 @@ def default_mock(machine, name, k):
     r = random.Random((machine.seed << 20) ^ zlib.crc32(name.encode()) ^ (k * 2654435761 & 0xffffffff))
     kind = callee_ret_kind(name)
     if kind == 'void': return 0
+    if kind == 'arg0': return machine.uc.reg_read(UC_PPC_REG_3)
     if kind == 'bool': return r.choice([0, 1])
     if kind == 'ptr':
         if r.random() < 0.2: return 0
@@ -544,6 +735,10 @@ def load_vtables():
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # cases
 
+# functions that are NOT mocked but run for real on both sides: one build may inline them and the other call them, which a mock cannot tell apart from a
+# difference. Constructors and destructors are the usual case (`new T` expands the constructor inline in the stock code).
+DEFAULT_TRANSPARENT = r'(C[12]E|D[012]E)'
+
 class Case:
     """one function, many inputs.
     function  'Class::method' (add `signature` to choose between overloads: a substring of the demangled name, e.g. '(unsigned long, eDoSwap')
@@ -553,9 +748,13 @@ class Case:
     lazy      'zero' (default) or 'random': contents of memory the test did not set up
     limit     instruction budget per run
     mock      callable(machine, callee name, call index) -> value a mocked callee returns (default: seeded choice among typical status values)
+    replay    True: the register reads the stock function received are handed back, in order, to the rebuilt one (so a device that answers differently
+              from the plain-memory window - a status bit that changes - cannot make the two sides differ; a different read PATTERN still fails)
     stack_args  {callee name substring: {argument index: bytes}} for pointers to locals that the callee reads (their contents are compared)
     """
-    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=300000, mock=None, name=None, stack_args=None):
+    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT):
+        self.transparent = transparent
+        self.replay = replay
         self.stack_args = stack_args or {}
         self.function, self.world, self.ret, self.seeds = function, world, ret, seeds
         self.signature, self.lazy, self.limit, self.mock = signature, lazy, limit, mock
@@ -579,13 +778,13 @@ def find_symbol(image, function, signature=None):
 def compare(case, st, rb, strict_order=False, strict_calls=False):
     """-> list of problems (strings); empty = identical behaviour"""
     probs = []
-    if st.status == 'TIMEOUT' or rb.status == 'TIMEOUT' or st.bad_read or rb.bad_read:
+    if st.status in ('TIMEOUT', 'NULLCALL') or rb.status in ('TIMEOUT', 'NULLCALL') or st.bad_read or rb.bad_read:
         return ['INCONCLUSIVE']          # budget exceeded, or a wild pointer in the test world (a read of machine code as data, a store into it): not comparable
     if st.status != rb.status:
         probs.append('ends differently: stock %s%s, rebuilt %s%s' % (st.status, ' (%s)' % st.fault if st.fault else '', rb.status, ' (%s)' % rb.fault if rb.fault else ''))
         return probs
     # hardware register accesses, interleaved with the calls: exact
-    if any(e[0] in 'RW' for e in st.events + rb.events):
+    if any(e[0] in 'RWB' for e in st.events + rb.events):
         for i in range(max(len(st.events), len(rb.events))):
             a = st.events[i] if i < len(st.events) else None
             b = rb.events[i] if i < len(rb.events) else None
@@ -595,8 +794,8 @@ def compare(case, st, rb, strict_order=False, strict_calls=False):
     if strict_calls:
         for i, (a, b) in enumerate(zip(st.snapshots, rb.snapshots)):
             if a != b:
-                keys = sorted(set(a) | set(b)); d = [k for k in keys if a.get(k) != b.get(k)]
-                probs.append('memory visible to call #%d differs at %d byte(s), first 0x%x' % (i, len(d), d[0]))
+                keys = sorted(set(a) | set(b), key=str); d = [k for k in keys if a.get(k) != b.get(k)]
+                probs.append('memory visible to call #%d differs at %d byte(s), first %s' % (i, len(d), fmt_key(d[0])))
                 break
     # calls
     for i in range(max(len(st.calls), len(rb.calls))):
@@ -618,25 +817,32 @@ def compare(case, st, rb, strict_order=False, strict_calls=False):
             probs.append('return value differs: stock %s, rebuilt %s' % (hexs(a), hexs(b)))
     # writes
     if st.writes != rb.writes:
-        keys = sorted(set(st.writes) | set(rb.writes))
+        keys = sorted(set(st.writes) | set(rb.writes), key=str)
         d = [(k, st.writes.get(k), rb.writes.get(k)) for k in keys if st.writes.get(k) != rb.writes.get(k)]
-        probs.append('memory left behind differs at %d byte(s), first: %s' % (len(d), ', '.join('0x%x stock %s rebuilt %s' % (k, hexs(a), hexs(b)) for k, a, b in d[:4])))
+        probs.append('memory left behind differs at %d byte(s), first: %s' % (len(d), ', '.join('%s stock %s rebuilt %s' % (fmt_key(k), hexs(a), hexs(b)) for k, a, b in d[:4])))
     elif strict_order and st.write_order != rb.write_order:
         probs.append('same final memory but different write order/granularity (stock %d stores, rebuilt %d)' % (len(st.write_order), len(rb.write_order)))
-    for side, r in (('stock', st), ('rebuilt', rb)):
-        for a in r.abi:
-            probs.append('%s: %s' % (side, a))
+    for a in rb.abi:
+        if a not in st.abi:
+            probs.append('rebuilt: %s (the stock function does not)' % a)
     return probs
+
+
+def fmt_key(k):
+    return '%s+0x%x' % (k[1], k[2]) if isinstance(k, tuple) else '0x%x' % k
 
 
 def fmt_event(e):
     if e is None: return '<none>'
     if e[0] == 'C': return 'call ' + fmt_call((e[1], e[2], False))
+    if e[0] == 'B': return 'barrier ' + str(e[1])
     return '%s +0x%x/%d %s' % ('write' if e[0] == 'W' else 'read', e[1], e[2], e[3])
 
 
 def hexs(v):
     if v is None: return 'none'
+    if isinstance(v, str): return v
+    if isinstance(v, tuple) and v and v[0] == 'f': return 'float:' + v[1]
     if isinstance(v, tuple): return '(' + ','.join(hexs(x) for x in v) + ')'
     return '0x%x' % v
 
@@ -667,7 +873,11 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
     for seed in range(case.seeds):
         outs = []
         for img, sym in ((stock, sym_s), (rebuilt, sym_r)):
-            m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args)
+            m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
+            m.want_snapshots = strict_calls
+            m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
+            if case.replay and outs:
+                m.replay_reads = [bytes.fromhex(e[3]) for e in outs[0].events if e[0] == 'R']
             rng = random.Random(seed * 7919 + zlib.crc32(case.name.encode()))
             kinds = signature_of(sym)[1] or []
             args = case.world(m, rng, kinds) if getattr(case.world, '__code__', None) and case.world.__code__.co_argcount >= 3 else case.world(m, rng)
@@ -675,15 +885,17 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             outs.append(out); all_runs[len(outs) - 1].append(out)
         probs = compare(case, outs[0], outs[1], strict_order, strict_calls)
         case.hw_events = getattr(case, 'hw_events', 0) + sum(1 for e in outs[0].events if e[0] in 'RW')
-        results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if (outs[0].status == 'TIMEOUT' or outs[1].status == 'TIMEOUT' or outs[0].bad_read or outs[1].bad_read) else outs[0].status, len(outs[0].calls)))
+        results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
+    case.cycles = (sum(r.cycles for r in all_runs[0] if r.status == 'RET' and not r.bad_read), sum(r.cycles for r in all_runs[1] if r.status == 'RET' and not r.bad_read))
     return sym_s, results
 
 
 def explain(case, stock, rebuilt, reg, seed):
     for img in (stock, rebuilt):
         sym = find_symbol(img, case.function, case.signature)
-        m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args)
+        m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
+        m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
         rng = random.Random(seed * 7919 + zlib.crc32(case.name.encode()))
         kinds = signature_of(sym)[1] or []
         args = case.world(m, rng, kinds) if getattr(case.world, '__code__', None) and case.world.__code__.co_argcount >= 3 else case.world(m, rng)
@@ -695,6 +907,7 @@ def explain(case, stock, rebuilt, reg, seed):
         for c in r.calls[:8]:
             print('  call', fmt_call(c))
         print('  data reads (addr size value): ' + ' '.join('%x/%d=%s' % x for x in m.read_trace[:40]))
+        print('  stores: ' + ' '.join('%x/%d=%s' % (a, n, (b or b'').hex()) for a, n, o, b in m.write_log if not (STACK_TOP - STACK_SIZE <= a < STACK_TOP))[:1500])
 
 
 def load_cases(path):
@@ -705,6 +918,58 @@ def load_cases(path):
     return mod.CASES
 
 
+def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
+    """run one case and return (verdict, report lines, report dict)"""
+    try:
+        sym, res = run_case(case, stock, rebuilt, reg, verbose, strict_order, strict_calls)
+    except LookupError as e:
+        return 'ERROR', ['ERROR  %s: %s' % (case.name, e)], None
+    fails = [r for r in res if r[1]]
+    inconclusive = [r for r in res if r[4] == 'TIMEOUT']
+    res = [r for r in res if r[4] != 'TIMEOUT']
+    si = sum(r[2] for r in res); ri = sum(r[3] for r in res)
+    cs, cr = case.cycles
+    ratio = (cr / cs) if cs else ((ri / si) if si else 0)
+    reached = sum(1 for r in res if r[5] > 0)
+    verdict = 'PASS' if not fails else 'FAIL'
+    if not res:
+        verdict = 'NO-RESULT'; fails = [(0, ['no run finished: every input made the function exceed the budget or touch a wild pointer'])]
+    lines = ['%s  %-58s %2d/%2d runs identical   est. cycles stock %d rebuilt %d (x%.2f)   cov %d%%/%d%%   runs with calls %d%s%s' % (
+        verdict, case.name, len(res) - len(fails), len(res), cs, cr, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached,
+        ('   register accesses %d' % case.hw_events) if getattr(case, 'hw_events', 0) else '',
+        ('   (%d inconclusive: budget exceeded or wild pointer)' % len(inconclusive)) if inconclusive else '')]
+    if ratio > 1.5 or (ratio and ratio < 0.5):
+        lines.append('       note: estimated-cycle ratio x%.2f' % ratio)
+    for seed, probs, *_ in fails[:3 if not verbose else 99]:
+        lines.append('       seed %d: %s' % (seed, '; '.join(probs)))
+    rep = dict(case=case.name, symbol=sym, verdict=verdict, runs=len(res), failures=len(fails), inconclusive=len(inconclusive),
+               insns_stock=si, insns_rebuilt=ri, cycles_stock=cs, cycles_rebuilt=cr, coverage_stock=case.cov[0], coverage_rebuilt=case.cov[1],
+               register_accesses=getattr(case, 'hw_events', 0), problems=[dict(seed=sd, problems=pb) for sd, pb, *_ in fails])
+    return verdict, lines, rep
+
+
+_G = {}
+
+
+class CaseTimeout(Exception):
+    pass
+
+
+def _work(i):
+    import signal
+    case = _G['cases'][i]
+    def on_alarm(sig, frm):
+        raise CaseTimeout()
+    signal.signal(signal.SIGALRM, on_alarm)
+    signal.alarm(_G['case_seconds'])
+    try:
+        return i, evaluate(case, _G['stock'], _G['rebuilt'], _G['reg'], *_G['opts'])
+    except CaseTimeout:
+        return i, ('NO-RESULT', ['NO-RESULT  %-58s the harness gave up after %ds (a run is too slow: lower Case.limit or fix the world)' % (case.name, _G['case_seconds'])], None)
+    finally:
+        signal.alarm(0)
+
+
 def main():
     import argparse
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -712,8 +977,10 @@ def main():
     ap.add_argument('--rebuilt', default=REBUILT_DEFAULT, help='rebuilt kext binary (or $REBUILT_KEXT; default build/difftest/rebuilt.bin)')
     ap.add_argument('-f', '--filter', default='')
     ap.add_argument('-v', '--verbose', action='store_true')
+    ap.add_argument('-j', '--jobs', type=int, default=1, help='run cases in this many processes')
     ap.add_argument('--strict-order', action='store_true', help='also require the same order and width of ALL stores (register accesses are always strict)')
     ap.add_argument('--strict-calls', action='store_true', help='also require the memory a callee could observe (everything written so far) to be the same at every call')
+    ap.add_argument('--case-seconds', type=int, default=120, help='give up on a case that takes longer than this (wall clock)')
     ap.add_argument('--json')
     ap.add_argument('--explain', type=int, metavar='SEED', help='print the sequence of basic blocks each side executed for this seed (debugging a difference)')
     ap.add_argument('cases', nargs='+')
@@ -722,39 +989,29 @@ def main():
         ap.error('give the shipped kext binary with --stock or $STOCK_KEXT')
     stock, rebuilt = Image(a.stock, 'stock'), Image(a.rebuilt, 'rebuilt')
     reg = StubRegistry()
-    report, bad = [], 0
-    for cf in a.cases:
-        for case in load_cases(cf):
-            if a.filter and a.filter not in case.name:
-                continue
-            if a.explain is not None:
-                explain(case, stock, rebuilt, reg, a.explain); continue
-            t0 = time.time()
-            try:
-                sym, res = run_case(case, stock, rebuilt, reg, a.verbose, a.strict_order, a.strict_calls)
-            except LookupError as e:
-                print('ERROR  %s: %s' % (case.name, e)); bad += 1; continue
-            fails = [r for r in res if r[1]]
-            inconclusive = [r for r in res if r[4] == 'TIMEOUT']
-            usable = [r for r in res if r[4] != 'TIMEOUT']
-            res_all, res = res, usable
-            si = sum(r[2] for r in res); ri = sum(r[3] for r in res)
-            ratio = (ri / si) if si else 0
-            reached = sum(1 for r in res if r[5] > 0)
-            verdict = 'PASS' if not fails else 'FAIL'
-            if not res:
-                verdict = 'NO-RESULT'; fails = [(0, ['no run finished: every input made the function exceed the budget'])]
-            print('%s  %-58s %2d/%2d runs identical   insns stock %d rebuilt %d (x%.2f)   cov %d%%/%d%%   runs with calls %d%s%s' % (verdict, case.name, len(res) - len(fails), len(res), si, ri, ratio, round(100 * case.cov[0]), round(100 * case.cov[1]), reached, ('   register accesses %d' % case.hw_events) if getattr(case, 'hw_events', 0) else '', ('   (%d inconclusive: budget exceeded or code read as data)' % len(inconclusive)) if inconclusive else ''))
-            if ratio > 1.5 or (ratio and ratio < 0.5):
-                print('       note: instruction count ratio x%.2f' % ratio)
-            for seed, probs, *_ in fails[:3 if not a.verbose else 99]:
-                print('       seed %d: %s' % (seed, '; '.join(probs)))
-            if fails: bad += 1
-            report.append(dict(case=case.name, symbol=sym, runs=len(res), failures=len(fails), insns_stock=si, insns_rebuilt=ri,
-                               problems=[dict(seed=s, problems=p) for s, p, *_ in fails]))
+    cases = [c for cf in a.cases for c in load_cases(cf) if not a.filter or a.filter in c.name]
+    if a.explain is not None:
+        for c in cases:
+            explain(c, stock, rebuilt, reg, a.explain)
+        return 0
+    opts = (a.verbose, a.strict_order, a.strict_calls)
+    _G.update(cases=cases, stock=stock, rebuilt=rebuilt, reg=reg, opts=opts, case_seconds=a.case_seconds)
+    if a.jobs > 1:
+        import multiprocessing
+        with multiprocessing.get_context('fork').Pool(a.jobs) as pool:
+            results = dict(pool.imap_unordered(_work, range(len(cases))))
+    else:
+        results = dict(_work(i) for i in range(len(cases)))
+    report, bad, counts = [], 0, {}
+    for i in range(len(cases)):
+        verdict, lines, rep = results[i]
+        print('\n'.join(lines))
+        counts[verdict] = counts.get(verdict, 0) + 1
+        if verdict != 'PASS': bad += 1
+        if rep: report.append(rep)
     if a.json:
         json.dump(report, open(a.json, 'w'), indent=1)
-    print('%d case(s), %d with differences' % (len(report) + 0, bad))
+    print('%d case(s): %s' % (len(cases), ', '.join('%d %s' % (v, k) for k, v in sorted(counts.items()))))
     return 1 if bad else 0
 
 

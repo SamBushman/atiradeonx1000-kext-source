@@ -76,32 +76,14 @@ void ATIR500Surface::resetFullScreen() {
   if (iVar9 == 0) {
     iVar9 = M<SInt32>(self + 0xd50);
     iVar10 = M<SInt32>(iVar9 + 0x860);
-    bVar2 = M<UInt8>(iVar10 + 0x6107);
-    bVar3 = M<UInt8>(iVar10 + 0x6105);
-    bVar4 = M<UInt8>(iVar10 + 0x6104);
+    uVar5 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x6104)) & 0xffcfffff;
     iVar11 = M<SInt32>(self + 0xc14);
-    uVar5 = (M<UInt8>(iVar10 + 0x6106) & 0xffcf) << 0x10;
     uVar7 = (UInt32)M<UInt8>(iVar11 * 0x78 + iVar9 + 0x164);
-    uVar6 = (uVar7 & 1) << 0x15;
-    uVar7 = (UInt32)(1 < uVar7) * 0x100000;
-    if (iVar11 == 0) {
-      iVar8 = 0x6104;
-    }
-    else {
-      iVar8 = 0x6904;
-    }
-    M<UInt32>(iVar10 + iVar8) =
-         (UInt32)bVar4 << 0x18 | (UInt32)bVar3 << 0x10 | (uVar7 | uVar5 | uVar6) >> 8 | (UInt32)bVar2;
+    uVar6 = uVar5 | (uVar7 & 1) << 0x15 | (UInt32)(1 < uVar7) << 0x14;
+    storeWordByteReversed(&M<UInt8>(iVar10 + (iVar11 == 0 ? 0x6104 : 0x6904)), uVar6);
     enforceInOrderExecutionIO();
     if (M<SInt32>(iVar9 + 0x894) != 0) {
-      if (iVar11 == 0) {
-        iVar9 = 0x6904;
-      }
-      else {
-        iVar9 = 0x6104;
-      }
-      M<UInt32>(iVar10 + iVar9) =
-           (UInt32)bVar4 << 0x18 | (UInt32)bVar3 << 0x10 | (uVar7 | uVar5 | uVar6) >> 8 | (UInt32)bVar2;
+      storeWordByteReversed(&M<UInt8>(iVar10 + (iVar11 == 0 ? 0x6904 : 0x6104)), uVar6);
       enforceInOrderExecutionIO();
     }
   }

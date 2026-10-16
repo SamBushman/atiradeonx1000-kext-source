@@ -30,6 +30,11 @@ static inline void dataCacheBlockStore(UInt32 addr) { __asm__ __volatile__("dcbs
 /* lwbrx: ONE byte-reversed 32-bit load (the shipped code reads little-endian hardware registers this way). Ghidra expands it to
  * four byte loads at A+3,A+2,A+1,A shifted together, which on MMIO is four bus transactions instead of one (#172). */
 static inline UInt32 loadWordByteReversed(const volatile void *addr) { UInt32 v; __asm__ __volatile__("lwbrx %0,0,%1" : "=r"(v) : "r"(addr) : "memory"); return v; }
+/* stwbrx / lhbrx / sthbrx: the byte-reversed store and the byte-reversed halfword load/store (little-endian hardware registers). One bus transaction each;
+ * the Ghidra expansion into per-byte accesses is not equivalent for MMIO (Tools/difftest finds it as a different register access pattern). */
+static inline void storeWordByteReversed(volatile void *addr, UInt32 v) { __asm__ __volatile__("stwbrx %0,0,%1" : : "r"(v), "r"(addr) : "memory"); }
+static inline UInt32 loadHalfByteReversed(const volatile void *addr) { UInt32 v; __asm__ __volatile__("lhbrx %0,0,%1" : "=r"(v) : "r"(addr) : "memory"); return v; }
+static inline void storeHalfByteReversed(volatile void *addr, UInt32 v) { __asm__ __volatile__("sthbrx %0,0,%1" : : "r"(v), "r"(addr) : "memory"); }
 static inline void enforceInOrderExecutionIO(void) { __asm__ __volatile__("eieio" : : : "memory"); }
 static inline void ppcSync(void) { __asm__ __volatile__("sync" : : : "memory"); }
 static inline void instructionSynchronize(void) { __asm__ __volatile__("isync" : : : "memory"); }

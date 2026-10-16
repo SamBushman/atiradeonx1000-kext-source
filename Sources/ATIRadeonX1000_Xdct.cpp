@@ -41,12 +41,8 @@ bool ATIRadeonX1000::start_xdct_engine() {
   M<UInt32>(iVar5 + 0x1f80) = 0;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
-  uVar6 = (UInt32)M<UInt8>(iVar5 + 0x1f97) << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1f96) << 0x10 |
-          (UInt32)M<UInt8>(iVar5 + 0x1f95) << 8;
-  bVar2 = M<UInt8>(iVar5 + 0x1f94);
-  M<UInt32>(iVar5 + 0x1f94) =
-       (UInt32)bVar2 << 0x18 | (UInt32)M<UInt8>(iVar5 + 0x1f95) << 0x10 |
-       (UInt32)M<UInt8>(iVar5 + 0x1f96) << 8 | (uVar6 | 0x88000000) >> 0x18;
+  uVar6 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f94)) | 0x88000000;      /* one byte-reversed read, kept: reused below, as in the shipped code */
+  storeWordByteReversed(&M<UInt8>(iVar5 + 0x1f94), uVar6);
   enforceInOrderExecutionIO();
   uVar3 = M<UInt32>(self + 0x930);
   M<UInt32>(iVar5 + 0x1f9c) =
@@ -64,9 +60,8 @@ bool ATIRadeonX1000::start_xdct_engine() {
   M<UInt32>(iVar5 + 0x1f90) =
        uVar3 * 0x1000000 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
-  uVar6 = uVar6 & 0x67fcc0ff | (UInt32)bVar2 | 0x2002030a;
-  M<UInt32>(iVar5 + 0x1f94) =
-       uVar6 << 0x18 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
+  uVar6 = uVar6 & 0x67fcc0ff | 0x2002030a;
+  storeWordByteReversed(&M<UInt8>(iVar5 + 0x1f94), uVar6);
   enforceInOrderExecutionIO();
   M<UInt32>(iVar5 + 0x1f80) = 0x40;
   enforceInOrderExecutionIO();
@@ -116,10 +111,7 @@ bool ATIRadeonX1000::stop_xdct_engine() {
              (loadWordByteReversed(&M<UInt8>(iVar2 + 0x1fa0))));
   }
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar2 + 0x1f94) =
-       (UInt32)M<UInt8>(iVar2 + 0x1f94) << 0x18 | (UInt32)M<UInt8>(iVar2 + 0x1f95) << 0x10 |
-       (UInt32)M<UInt8>(iVar2 + 0x1f96) << 8 |
-       ((UInt32)M<UInt8>(iVar2 + 0x1f97) << 0x18 | 0x88000000) >> 0x18;
+  storeWordByteReversed(&M<UInt8>(iVar2 + 0x1f94), loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f94)) | 0x88000000);
   enforceInOrderExecutionIO();
   M<UInt32>(iVar2 + 0x1f80) = 0;
   enforceInOrderExecutionIO();

@@ -68,7 +68,7 @@ public:
     virtual UInt32   setup2D(void);                                             /* +0x534, real addr 0x25d0 */
     virtual void     teardown3D(void);                                          /* +0x538, real addr 0x5890 */
     virtual void     teardown2D(void);                                          /* +0x53c, real addr 0x2310 */
-    virtual bool     tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment) = 0; /* +0x540 */
+    virtual UInt32   tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment) = 0; /* +0x540 */
     virtual void     tmpDeallocVRAM(GLKMemoryElement *element) = 0;             /* +0x544 */
     virtual UInt32   tmpTotalVRAM(void) = 0;                                    /* +0x548 */
     virtual UInt32   waitForTimeStamp(UInt32 tag) = 0;                          /* +0x54c */

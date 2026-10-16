@@ -69,7 +69,7 @@ public:
     virtual void     deallocate_texture(VendorTextureBuffer *texture);          /* +0x524, real addr 0x1a620 */
     virtual IOReturn allocate_texture(VendorTextureBuffer *texture);            /* +0x528, real addr 0x1a800 */
     virtual void     pageoff_dirty_texture(VendorTextureBuffer *texture, SInt32 param2, SInt32 param3); /* +0x52c */
-    virtual bool     tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 */
+    virtual UInt32   tmpAllocVRAM(GLKMemoryElement *element, UInt32 size, UInt32 alignment); /* +0x540, real addr 0x1aad0 */
     virtual void     tmpDeallocVRAM(GLKMemoryElement *element);                 /* +0x544, real addr 0x1ab20 */
     virtual UInt32   tmpTotalVRAM(void);                                        /* +0x548, real addr 0x1ab60 */
     virtual UInt32   waitForTimeStamp(UInt32 tag);                              /* +0x54c, real addr 0x251e0 */

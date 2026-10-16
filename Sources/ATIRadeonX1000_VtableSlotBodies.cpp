@@ -105,9 +105,9 @@ inline UInt8 *ByteAt(void *base, int offset) { return reinterpret_cast<UInt8 *>(
 /* (re-ported mechanically: see IOATIR500Accelerator_allocMoreCommandBuffers_Port.cpp) */
 
 
-bool ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment) {
+UInt32 ATIRadeonX1000::tmpAllocVRAM(GLKMemoryElement *elem, UInt32 size, UInt32 alignment) {
     ATIR500Memory *pool = *reinterpret_cast<ATIR500Memory **>(reinterpret_cast<UInt8 *>(this) + 0x93c);
-    return pool->alloc(elem, size, alignment, 0, *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x84c)) != 0;
+    return pool->alloc(elem, size, alignment, 0, *reinterpret_cast<UInt32 *>(reinterpret_cast<UInt8 *>(this) + 0x84c));      /* real: a tail call, the result is returned as it is */
 }
 
 

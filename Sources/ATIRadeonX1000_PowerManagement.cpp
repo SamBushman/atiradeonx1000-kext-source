@@ -40,9 +40,9 @@ void ATIRadeonX1000::GPUSensorFunc(OSObject *real_param_1, IOTimerEventSource *p
          == M<UInt32>(param_1 + 0x914)) &&
        (iVar2 = M<SInt32>(param_1 + 0x860),
        -1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40))))) {
-      if ((M<UInt8>(iVar2 + 0x1722) & 1) != 0) {
-        if ((M<UInt8>(iVar2 + 0xe42) & 6) == 0) {
-          if (((M<UInt8>(iVar2 + 0x1722) & 2) != 0) && ((M<UInt8>(iVar2 + 0xe42) & 0x38) == 0)) {
+      if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1720)) & 0x10000) != 0) {
+        if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40)) & 0x60000) == 0) {
+          if (((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1720)) & 0x20000) != 0) && ((loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40)) & 0x380000) == 0)) {
             M<SInt32>(param_1 + 0x99c) = M<SInt32>(param_1 + 0x99c) + 1;
           }
         }

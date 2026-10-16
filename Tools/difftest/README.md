@@ -26,11 +26,33 @@
 Each run also reports **coverage**: the fraction of the function's instructions executed by at least one run, for each side. A passing test with low
 coverage proves little: improve the world (below).
 
+## What the harness checks beyond the basics
+
+* **Barriers**: `eieio`, `sync`, `lwsync` and `isync` inside the function become events in the same ordered stream as the register accesses and the calls, so a
+  rebuilt function that drops or moves a barrier among its register accesses fails.
+* **Device behaviour**: a register window can have a `model` (`Tests/difftest/common.py`: `RegisterFile`, `FlipFlopRegisters` - a rotation of answers so that
+  both "wait until the bit clears" and "wait until it sets" loops end). A case with `replay=True` hands the register reads the stock function received back to
+  the rebuilt one, in order, so the device cannot be the reason they differ; a different read PATTERN still fails.
+* **Arguments**: integer, pointer, floating-point (raw bits) and stack-passed (9th word on) arguments of every mocked call are compared. A pointer into the
+  kext's own image is compared by name (a C string by its text, a global by symbol and offset, a function by name), because the two builds lay the image out
+  differently; a pointer to one of the function's own locals is compared by contents only when the case says how many bytes (`stack_args`).
+* **Globals**: writes to the kext's own data are compared by symbol name and offset, not by address. `.comm` symbols of the rebuilt kext get storage
+  like the kext linker would give them. Stored pointers to the kext's own data are compared by name; stored addresses of locals are masked.
+* **Inlining**: a function that exists in only one image (the other build inlined it) is run for real on the side that has it; constructors and
+  destructors run for real on both. Everything else is mocked.
+* **Cost**: `est. cycles` weights each executed instruction by a coarse PowerPC 970 latency class (loads 3, multiplies 4, divides 20, FP 6, atomics 8, sync 30 ...).
+  It is a model, not a measurement; a ratio outside 0.5-1.5 is flagged.
+* **Speed**: `-j N` runs cases in N processes; `--case-seconds` bounds one case.
+
+What is deliberately NOT in a single-function test: interrupts and other threads. The driver's locking is covered (every `IOLockLock/Unlock/Sleep/Wakeup` is a mocked
+call that must match in order and arguments), and an interrupt handler is just another function that can be given a case, but a race between two threads
+cannot be provoked by running one function; that is for the hardware soak tests.
+
 ## Running
 
     pip install --break-system-packages --target ~/.cache/kext-difftest/pkgs unicorn        # once
-    sh Tools/difftest/build_rebuilt.sh [tiger-host]                                          # builds the working tree on the Tiger box, fetches the binary
-    STOCK_KEXT=/path/to/stock/ATIRadeonX1000.kext.bin sh Tests/difftest/run_all.sh [-f substring] [-v] [--json out.json]
+    sh Tools/difftest/build_rebuilt.sh [tiger-host]                                          # builds the working tree on the Tiger box; fetches build/difftest/rebuilt.bin and .dis
+    STOCK_KEXT=/path/to/stock/ATIRadeonX1000.kext.bin sh Tests/difftest/run_all.sh [-j 24] [-f substring] [-v] [--json out.json] [--explain SEED]
 
 `STOCK_KEXT` is the shipped kext binary (extract it from your own install); `REBUILT_KEXT` overrides the default `build/difftest/rebuilt.bin`.
 Exit status 0 = every run identical.
@@ -72,3 +94,11 @@ are compared and the call is marked `[arity unknown]`.
 A harness that cannot fail is worthless. Binary-patch a copy of the rebuilt kext (a different return register, a different immediate in a call, a store
 to the wrong offset, a register offset mask) and run the matching case with `--rebuilt`: it must FAIL. This was done for a return value, a call argument and a store when the
 harness was written.
+
+## Reading the generic cases
+
+`all_classes_cases.py` gives every method of every class a generic world (a "pointer soup": objects whose words are small integers, zeros, typical values and
+pointers to LATER objects of the pool, so chains are valid and end). They reach the code but not every branch, and some inputs drive a function out of bounds
+of one of its tables, where the two builds' data layouts differ: that is an artifact of the input, not a defect (`--explain` prints the reads and stores to
+check). NO-RESULT means no run finished (budget exceeded or a wild pointer): the function needs a hand-written world.
+To look at the machine code of a function in both builds: `Tools/difftest/disassemble.sh` makes the dump, `Tools/difftest/disfn.py NAME` prints it.

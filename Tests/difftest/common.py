@@ -157,3 +157,105 @@ def accelerator_with_registers(m, rng, window=0x20000):
     m.w32(ACCEL + 0x840, ACCEL + 0x900)
     m.w32(ACCEL + 0x860, m.mmio(window, RegisterFile(rng)))
     return ACCEL
+
+
+# ---- generic worlds: a "pointer soup" -----------------------------------------------------------------------------------------------------------
+# For code whose object layout is not documented, every field the code might dereference must still point at valid memory. The soup is a pool of
+# objects whose words are mostly small integers, some zero, some typical values, and some pointers to LATER objects of the pool (so pointer chains are
+# valid and end, and linked-list walks terminate). It is reproducible from the rng, hence identical on both sides.
+
+OBJECT_SIZES = {'ATIRadeonX1000': 0xc60, 'ATIR500GLContext': 0x690, 'ATIR5002DContext': 0x12c, 'ATIR500DVDContext': 0x1e0, 'ATIR500Surface': 0xdbc,
+                'ATIR500Memory': 0x14, 'IOATIR500Shared': 0x28}
+CONCRETE = {'IOATIR500Accelerator': 'ATIRadeonX1000', 'IOATIR500GLContext': 'ATIR500GLContext', 'IOATIR5002DContext': 'ATIR5002DContext',
+            'IOATIR500DVDContext': 'ATIR500DVDContext', 'IOATIR500Surface': 'ATIR500Surface'}
+ACCEL_OFFSET = {'ATIR5002DContext': 0x94, 'ATIR500DVDContext': 0x8c, 'ATIR500Surface': 0xd50}     # where a context keeps its accelerator pointer
+
+
+def soup_words(rng, n, pool, index=None):
+    out = []
+    for _ in range(n):
+        r = rng.random()
+        if r < 0.45: v = rng.randrange(0, 9)
+        elif r < 0.60: v = 0
+        elif r < 0.68: v = word(rng)
+        else:
+            later = pool if index is None else pool[index + 1:]
+            v = (rng.choice(later) + 4 * rng.randrange(0, 8)) if later else rng.randrange(0, 9)
+        out.append(v)
+    return struct.pack('>%dI' % n, *out)
+
+
+def make_pool(m, rng, n=10, size=0x400):
+    pool = [m.alloc(size) for _ in range(n)]
+    for i, o in enumerate(pool):
+        m.uc.mem_write(o, soup_words(rng, size // 4, pool, i))
+    return pool
+
+
+def accelerator_object(m, rng, pool):
+    """the accelerator: a soup object with its vtable, the hardware-alive flag, the command lock and a register window (device model: flip-flop)"""
+    a = m.alloc(0x1000)
+    m.uc.mem_write(a, soup_words(rng, 0x400, pool))
+    m.w32(a, m.vtable('ATIRadeonX1000'))
+    m.w8(a + 0x80, 1)
+    m.w32(a + 0xcc, rng.choice([1, 2, 2]))
+    for i in range(2): m.w32(a + 0x114 + 4 * i, rng.choice([0, 1, 1]))
+    m.w32(a + 0x840, rng.choice(pool))
+    m.w32(a + 0x860, m.mmio(0x20000, FlipFlopRegisters(rng)))
+    return a
+
+
+def generic_this(m, rng, cls):
+    """returns (this, pool) for a method of `cls` (or of its base): a soup object of the concrete class with a vtable and, where known, an accelerator"""
+    cls = CONCRETE.get(cls, cls)
+    pool = make_pool(m, rng)
+    if cls == 'ATIRadeonX1000':
+        this = accelerator_object(m, rng, pool)
+        m.alloc(0x200)                       # keep allocation parity with the other classes
+        return this, pool
+    size = (OBJECT_SIZES.get(cls, 0x400) + 0xfff) & ~0xfff
+    this = m.alloc(size)
+    m.uc.mem_write(this, soup_words(rng, OBJECT_SIZES.get(cls, 0x400) // 4, pool))
+    m.w32(this, m.vtable(cls))
+    if cls in ACCEL_OFFSET:
+        m.w32(this + ACCEL_OFFSET[cls], accelerator_object(m, rng, pool))
+    return this, pool
+
+
+def soup_args(m, rng, kinds, this, pool):
+    args = [this]
+    for k in kinds[1:]:
+        if k == 'p': args.append(rng.choice(pool))
+        elif k == 'f': args.append(0)
+        else: args.append(rng.choice([0, 0, 1, 2, 3, 4, 8, 0x10, 0x44, 0x100, 0xffff, word(rng)]))
+    return args
+
+
+def make_generic_world(cls):
+    def world(m, rng, kinds):
+        this, pool = generic_this(m, rng, cls)
+        return soup_args(m, rng, kinds, this, pool)
+    return world
+
+
+class FlipFlopRegisters:
+    """a device model that lets polling loops end: a register that has been written reads back what was written; one that has not been written
+    answers its first read with a fixed per-offset value and later reads with a rotation of 0, all-ones, the top bit, 1 - so a wait for a bit to
+    clear and a wait for a bit to set both terminate. Identical on both sides, so it only decides what the code under test sees."""
+    SEQ = (None, 0, 0xffffffff, 0x80000000, 1, 0x1)
+
+    def __init__(self, rng):
+        self.written, self.count = {}, {}
+
+    def __call__(self, kind, off, size, data):
+        if kind == 'W':
+            for i in range(size):
+                self.written[off + i] = data[i]
+            return None
+        if all((off + i) in self.written for i in range(size)):
+            return bytes(self.written[off + i] for i in range(size))
+        k = self.count.get(off & ~3, 0); self.count[off & ~3] = k + 1
+        seq = self.SEQ[k % len(self.SEQ)]
+        base = (((off & ~3) * 2654435761) + 0x1234567) & 0xffffffff
+        v = base if seq is None else seq
+        return bytes((v >> (8 * (3 - ((off + i) & 3)))) & 0xff for i in range(size))
