@@ -1,2 +1,0 @@
-2
-boot panic=220971 11:43  up 3 mins kext=1

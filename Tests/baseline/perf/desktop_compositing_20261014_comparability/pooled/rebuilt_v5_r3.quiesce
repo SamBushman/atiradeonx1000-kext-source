@@ -1,7 +1,0 @@
-22:10  up  1:18, 1 user, load averages: 0.20 0.35 0.35
-  4.7 sshd
-  0.5 lookupd
-  0.3 DirectoryService
-  0.2 netinfod
-  0.2 configd
-%CPU COMMAND

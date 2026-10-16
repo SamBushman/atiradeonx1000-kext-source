@@ -1,1 +1,0 @@
-bushmas   1632   3.4 -1.5   245808  31572  ??  S    12:33PM   0:02.99 /Developer/Applications/Graphics Tools/Quartz Composer.app/Contents/MacOS/Quartz Composer -psn_0_5242881

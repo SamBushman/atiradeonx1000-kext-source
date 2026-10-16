@@ -1,2 +1,0 @@
-   78    0 0x71bac000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <77 76 16 11>
-2de86c496d062dd618e715e34c29bb74 /System/Library/Extensions/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000

@@ -1,1 +1,0 @@
-bushmas    445  50.6 -4.1   388648  86416  ??  R    12:27PM   0:18.40 /Applications/Half-Life_10.4_Tiger-SDL2.app/Contents/MacOS/xash3d.bin -menulib /Applications/Half-Life_10.4_Tiger-SDL2.app/Contents/Frameworks/libmenu.dylib -rodir /Applications/Half-Life_10.4_Tiger-SDL2.app/Contents/Resources/Half-Life -game valve -psn_0_2097153

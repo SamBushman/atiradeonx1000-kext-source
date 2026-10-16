@@ -1,9 +1,0 @@
-boot_Srb2mac panic=220971 up=12:27  up 3 mins 1
-boot_Half_Life_10_4_Tiger_SDL2 panic=220971 up=12:28  up 3 mins 1
-boot_Unreal_Tournament_2004 panic=220971 up=12:29  up 4 mins 1
-boot_Aquaria panic=220971 up=12:30  up 5 mins 1
-boot_VVVVVV panic=220971 up=12:31  up 6 mins 1
-boot_Marathon panic=220971 up=12:32  up 7 mins 1
-boot_Motion panic=220971 up=12:33  up 8 mins 1
-boot_Quartz_Composer panic=220971 up=12:33  up 9 mins 1
-boot_Godot panic=220971 up=12:34  up 10 mins 1

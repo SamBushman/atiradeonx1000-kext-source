@@ -1,5 +1,0 @@
-  104    0 0x6a5a1000 0x53000    0x52000    com.apple.ATIRadeonX1000 (4.1.9) <76 75 16 11>
-unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
-2de86c496d062dd618e715e34c29bb74 /Users/bushmas/rung3/kext_build_fix/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000
-/dev/disk3          	                               	/Volumes/TESTDVD
-done: Tests/baseline/consumers_20261015/dvd_disc/rebuilt

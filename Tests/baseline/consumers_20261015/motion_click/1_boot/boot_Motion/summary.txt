@@ -1,2 +1,0 @@
-ran 36s app=/Applications/Motion.app
-DONE

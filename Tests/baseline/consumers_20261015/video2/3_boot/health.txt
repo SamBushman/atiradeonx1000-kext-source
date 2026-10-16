@@ -1,2 +1,0 @@
-boot_quicktime panic=220971 15:29  up 3 mins kext=1
-boot_vlc panic=220971 15:30  up 4 mins kext=1

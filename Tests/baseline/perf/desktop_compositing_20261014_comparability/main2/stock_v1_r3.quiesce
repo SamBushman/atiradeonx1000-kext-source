@@ -1,7 +1,0 @@
-22:05  up  1:12, 1 user, load averages: 0.25 0.38 0.36
-  8.8 sshd
-  0.8 lookupd
-  0.4 configd
-  0.1 launchproxy
-%CPU COMMAND
-  0.0 usbmuxd

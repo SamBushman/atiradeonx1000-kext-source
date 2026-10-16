@@ -1,5 +1,0 @@
-rec_* from this run: /Users/bushmas/rung3/va_cap/rec_145339.tsv  out=/Users/bushmas/rung3/va_cap/auto_145339.out  max-dvd: # max DVD contexts seen: 0  (0 = the hardware IDCT path was NOT used)
-rec_145339.tsv
-hw_watch_145242.log
-auto_145339.png
-auto_145339.out

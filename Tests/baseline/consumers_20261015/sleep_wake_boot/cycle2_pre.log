@@ -1,3 +1,0 @@
-harness_rc=0
-   76    0 0x588000   0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
--rw-r--r--   1 root  admin  220971 Oct 15 10:56 /Library/Logs/panic.log

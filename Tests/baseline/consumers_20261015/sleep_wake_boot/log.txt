@@ -1,6 +1,0 @@
-mac=00:16:cb:39:ae:48 side=boot
-== cycle 1 16:12:29
-did not go to sleep
-asleep after ~62s
-woke after 2s
-== cycle 2 16:14:27

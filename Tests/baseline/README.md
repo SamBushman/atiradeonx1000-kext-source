@@ -1,7 +1,7 @@
 # Stock-driver baseline
 
 `stock_4.1.9_g5_tiger.txt` is the harness's own output (`./parity_test_harness`) against
-Apple's **stock** `com.apple.ATIRadeonX1000` 4.1.9 on the G5 (Mac OS X 10.4.11, xnu-792.24.17,
+Apple's **stock** `com.apple.ATIRadeonX1000` 4.1.9 on a Power Mac G5 (Mac OS X 10.4.11, xnu-792.24.17,
 ATI Radeon X1900), recorded 2026-09-18 from a fresh build, AFTER the 14 call shapes that the kernel had been rejecting
 were corrected to their dispatch-table shapes (see ../README.md). Two consecutive runs were
 byte-identical, so the output is deterministic on this machine/state.
@@ -18,6 +18,6 @@ Read it with these caveats (details in ../README.md):
   return `kIOReturnError` on a fresh connection (the stock body checks for it), and reading unlock
   with no lock held returns `kIOReturnCannotLock`.
 - Values such as `get_config`'s VRAM sizes and `get_hw_info`'s device id are properties of this
-  specific machine; compare like with like (same G5, same GPU).
+  specific machine; compare like with like (same machine, same GPU).
 
 Compare a new run against it with `../compare_to_baseline.sh`.

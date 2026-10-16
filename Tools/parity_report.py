@@ -6,7 +6,7 @@ Inputs (all are the files the existing harnesses already write; nothing new is r
   * harness text outputs: Tests/baseline/*.txt vs a candidate output file of the same harness (--text STOCK CAND, repeatable)
 
 Usage:
-  parity_report.py --stock-dir Tests/destructive/phaseS --cand-dir <dir with *_rebuilt_*.log> [--cand-kext rebuilt] [--text A B]... [-o report.md]
+  parity_report.py --stock-dir <dir with *_stock_*.log> --cand-dir <dir with *_rebuilt_*.log> [--cand-kext rebuilt] [--text A B]... [-o report.md]
   parity_report.py --self-test            (compares the stock logs with themselves, then with one deliberately altered call: must say IDENTICAL, then DIVERGENT)
 
 Per test the stock log (newest) and the candidate log (newest) are reduced to the sequence of (call description, return code) plus NOTE lines (observed values),
@@ -169,7 +169,9 @@ if __name__ == "__main__":
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
     if a.self_test:
-        sys.exit(self_test((a.stock_dir or ["Tests/destructive/phaseS"])[0]))
+        if not a.stock_dir:
+            ap.error("--self-test needs --stock-dir (a directory of stock-kext logs)")
+        sys.exit(self_test(a.stock_dir[0]))
     if not a.stock_dir or not a.cand_dir:
         ap.error("--stock-dir and --cand-dir are required")
     sys.exit(report(a))

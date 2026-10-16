@@ -1,4 +1,0 @@
-  104    0 0x6a416000 0x4f000    0x4e000    com.apple.ATIRadeonX1000 (4.1.9) <75 74 16 11>
-unstick_hotswap_vram: done - VRAM pool should now be populated (verify with Tools/issue157_probe if needed)
-9c7a9fff5ee767ed5280e58d55df92cd /Users/bushmas/rung3/stockkext/ATIRadeonX1000.kext/Contents/MacOS/ATIRadeonX1000
-done: Tests/baseline/consumers_20261015/motion_click/stock

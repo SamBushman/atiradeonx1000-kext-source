@@ -1,7 +1,0 @@
-22:13  up  1:21, 1 user, load averages: 0.32 0.33 0.34
-  4.2 sshd
-  0.4 lookupd
-  0.3 configd
-  0.1 netinfod
-%CPU COMMAND
-  0.0 usbmuxd

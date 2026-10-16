@@ -1,1 +1,0 @@
-stock_quicktime panic=220971 15:56  up 3 mins kext=1

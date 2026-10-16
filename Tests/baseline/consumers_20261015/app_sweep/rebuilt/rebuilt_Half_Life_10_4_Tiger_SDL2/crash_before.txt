@@ -1,3 +1,0 @@
-vram_peek.crash.log
-ava_drive.crash.log
-godot.osx.opt.ppc.crash.log

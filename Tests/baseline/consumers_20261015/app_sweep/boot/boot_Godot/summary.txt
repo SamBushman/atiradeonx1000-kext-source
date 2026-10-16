@@ -1,2 +1,0 @@
-ran 30s app=/Applications/Godot.app
-DONE

@@ -1,2 +1,0 @@
-ran 30s app=/Applications/Half-Life_10.4_Tiger-SDL2.app
-DONE

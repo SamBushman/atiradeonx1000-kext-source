@@ -1,2 +1,0 @@
-ran 30s app=/Developer/Applications/Graphics Tools/Quartz Composer.app
-DONE
