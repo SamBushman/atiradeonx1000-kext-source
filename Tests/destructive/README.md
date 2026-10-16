@@ -47,7 +47,7 @@ mode-bit combination) must be derived from evidence first (Step 0 of the issue),
 
 ## Two phases
 **Phase S**: the STOCK kext (what is installed) - the reference behaviour and measurements; may be run today. **Phase R**: the rebuilt kext - only
-inside Stage 3 of `../first_load_plan.md` with your explicit go-ahead at each stage, and only after #85 and #86 (both resolved 2026-10-01). A test is
+only with your explicit go-ahead at each stage. A test is
 "exercised" when Phase S has a recorded PASS/EXPECTED-REJECT and Phase R matches it (or its divergence is a tracked defect).
 
 ## Measurement toolkit

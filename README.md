@@ -59,7 +59,7 @@ the copy/build/pull for you; the host name is an argument.
 | static fidelity checks | vtable diff, argument-register use, object sizes and member offsets (`Sources/LayoutChecks.cpp`), callee comparison, uninitialised-local scan; every remaining difference is classified in `Tests/body_triage.tsv`. These compare calls, sizes, registers and layouts - they do not prove each body is instruction-for-instruction equivalent |
 | kext data | every shipped data symbol is defined under its own name (`Tools/audit_kext_data.py`, `Ledger/data/`) |
 | userspace binaries (PPC) | `Userspace/` - 4033 / 80 / 120 / 897 / 1799 functions (GLDriver / GA / VA / libGL / libGLProgrammability); all compile as C and are callee-verified against the shipped binaries; see `Userspace/README.md` |
-| running on hardware | see "Open items" in `GAPS.md` for the current state; `Tests/` is a userspace harness that exercises the driver through its IOKit external methods |
+| running on hardware | `Tests/` is a userspace harness that exercises the driver through its IOKit external methods; validate any build of your own on a machine you can reset (see Safety) |
 | i386 slices | not transcribed (not required) |
 
 ## How the code was produced (read this before trusting a file)
@@ -86,7 +86,6 @@ comments (`CONFIRMED` / `INFERRED` / `UNKNOWN`) describe the *names and semantic
 - `Userspace/` - the userspace transcription (see its README); `Resources/Info.plist` - the kext's personality.
 - `Tools/` - build, ledger, port and comparison tools; `Tools/userspace/` - the userspace pipeline (`pipeline/README.md` is the recipe).
 - `Tests/` - a userspace feature-parity harness for the driver's external methods and its recorded baseline.
-- `GAPS.md` - the running log of findings and the list of what is still open.
 
 ## Safety
 
@@ -97,5 +96,12 @@ disassembly first. `Tests/destructive/README.md` describes the protocol for the 
 
 ## What is not done
 
-See `GAPS.md` ("Open items" at the top): the remaining hardware validation of the rebuilt kext, a differential run of the recompiled GLSL compiler
-against the shipped one, and the i386 slices.
+- Complete hardware validation of a rebuilt kext across every external method and workload.
+- A differential run of the recompiled GLSL compiler (libGLProgrammability) against the shipped one on real shaders.
+- The i386 slices (kext and userspace), which are not required.
+- Known defects in Apple's own code (for example the infinite loop on the allocation-failure path of `allocAllSlaveSwapBuffers`) are reproduced
+  as shipped, not fixed.
+
+The development diary (`GAPS.md`) and the long analysis notes (IDCT engine findings, per-method deep-path traces, stability and performance plans)
+were removed from the tree. Source comments that cite them refer to the repository history before the commit that removed them
+(`git log --diff-filter=D -- GAPS.md`).
