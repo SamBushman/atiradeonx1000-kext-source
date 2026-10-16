@@ -5,7 +5,7 @@ Tools/userspace/opcode_recorder.c log.
 A GL client's flush (IOConnectMapMemory of the flush memory type) submits the current command buffer and
 IS the real-world analogue of "finished a frame" for an app that flushes once per rendered frame (the
 common case for a real app's main loop - confirmed for the Godot workloads this script was built against:
-see Tests/consumer_scenarios.md's "OpenGL, real application" row). The recorder's FLUSH lines now carry
+real-application OpenGL workload). The recorder's FLUSH lines now carry
 t_us (added alongside this script); the interval between consecutive FLUSH t_us values for the SAME
 connection is a real per-frame time. This is NOT simulated or synthetic - it is mined directly from an
 unmodified run of the real app under Tools/userspace/opcode_recorder.c, the same capture mechanism already

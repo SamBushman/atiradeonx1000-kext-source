@@ -2,7 +2,7 @@
  * kext. Additions over iokit_record.c: (1) it also hooks io_connect_method_scalarI_structureO (the VA bundle imports all four MIG routines); (2) it remembers every IOConnectMapMemory region (the mapped
  * command / transfer buffers the IDCT stream is written into) and, for every structureI_structureO call with selector 18 and an input struct of at least 0x34 bytes (the shape of DVD doIDCT), writes the
  * first VA_DUMP_BYTES (default 4096) of each mapped region, BEFORE the call, to the .mem file next to the log (VA_DUMP_MAX calls, default 64). Still a passive observer: every call is forwarded
- * unchanged, nothing is invented, no call is ever made that the player did not make. Build/use: see Tools/userspace/va_capture/README.md.
+ * unchanged, nothing is invented, no call is ever made that the player did not make.
  * ---- original header of iokit_record.c follows ----
  * iokit_record.c - issue #64: DYLD_INSERT_LIBRARIES interpose shim that records every IOKit user-client
  * call a process makes (IOServiceOpen/Close, IOConnectAddClient, IOConnectMapMemory, and the three

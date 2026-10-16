@@ -6,7 +6,7 @@ Inputs (all are the files the existing harnesses already write; nothing new is r
   * harness text outputs: Tests/baseline/*.txt vs a candidate output file of the same harness (--text STOCK CAND, repeatable)
 
 Usage:
-  parity_report.py --stock-dir <dir with *_stock_*.log> --cand-dir <dir with *_rebuilt_*.log> [--cand-kext rebuilt] [--text A B]... [-o report.md]
+  parity_report.py --stock-dir <dir with *_stock_*.log> --cand-dir <dir with *_rebuilt_*.log> [--cand-kext rebuilt] [--text A B]... [-o REPORT]
   parity_report.py --self-test            (compares the stock logs with themselves, then with one deliberately altered call: must say IDENTICAL, then DIVERGENT)
 
 Per test the stock log (newest) and the candidate log (newest) are reduced to the sequence of (call description, return code) plus NOTE lines (observed values),
@@ -14,13 +14,13 @@ with timestamps, kext name and phase tags removed. Verdicts:
   PARITY      identical call/return sequence and notes
   VALUE-DIFF  same calls and return codes, different NOTE values (printed)
   DIVERGENT   a return code differs, a call is missing/extra, or the candidate run did not finish (no `finish:` note)
-  KNOWN       divergent/differing, but the test is on the deviation list (Tests/known_vendor_deviations.md) -> shown with its V-id, not counted as a failure
+  KNOWN       divergent/differing, but the test is on the known-deviation list -> shown with its V-id, not counted as a failure
   NO-CAND     no candidate log for a test that has a stock log
 Exit status: 0 when no DIVERGENT / NO-CAND (VALUE-DIFF and KNOWN are reported but do not fail), 1 otherwise, 2 on usage errors.
 """
 import argparse, difflib, glob, os, re, sys
 
-# test -> deviation id(s) in Tests/known_vendor_deviations.md (a divergence in these tests is expected to be explained by the entry)
+# test -> deviation id(s) from the known-deviation list (a divergence in these tests is expected to be explained by the entry)
 KNOWN = {
     "t3_surface_locks": "V4 (#123: lockOptions 0 panics stock; the stock run dropped those calls)",
     "t3_dvd_idct_lock_leak": "V3 (#98: lock-leak claim unreconciled)",

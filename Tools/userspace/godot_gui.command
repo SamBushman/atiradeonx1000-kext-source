@@ -1,6 +1,6 @@
 #!/bin/sh
 # usage (run from inside the Aqua session, e.g. via `open -a Terminal`): godot_gui.command TAG
-# PROJ defaults to the autopilot copy ~/rung3/squash_play (see Tools/userspace/squash_play/README.md): the real game kills an idle player in ~1 s.
+# PROJ defaults to the autopilot copy ~/rung3/squash_play: the real game kills an idle player in ~1 s.
 # Runs the Godot game, then the editor, 40 s (game) / 100 s (editor, slow to load) under the opcode recorder, screenshotting at 25 s.
 R=$HOME/rung3; PROJ=${PROJ:-$HOME/rung3/squash_play}; T=${1:-run}; O=$R/gd_$T; rm -rf $O; mkdir -p $O
 for m in game editor; do

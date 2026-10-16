@@ -11,7 +11,7 @@
 # makes it return Error - see #42. Comparing to the baseline would flag the machine's state, not the driver.) The number of "unexpected" results in the reference is logged as a NOTE.
 # A step that exits non-zero, or whose output differs from its reference, stops the soak with exit 1 (the log has the output), with ONE exception - the TRANSIENT RETRY RULE (#43, 2026-10-02):
 # if every difference from the reference is a DVD-context line whose new result is NotReady (0xe00002d8), the accelerator's "hardware up" flag was briefly down (a display reconfiguration;
-# see V11 in Tests/known_vendor_deviations.md and Tests/hwup_sampler.c). The step is then rerun after RETRY_WAIT seconds (default 2), up to RETRIES times (default 3); the soak continues only if
+# see V11 and Tests/hwup_sampler.c). The step is then rerun after RETRY_WAIT seconds (default 2), up to RETRIES times (default 3); the soak continues only if
 # a rerun matches the reference exactly. Each retry and each recovery is logged (TRANSIENT / TRANSIENT-RECOVERED), a difference that persists is still a STEP-DIFF failure, and ANY other kind of
 # difference (a different code, a different value, a non-DVD line) fails at once. Optional budget: TRANSIENT_MAX_PER_HOUR=N (default 0 = off) fails the soak if recovered transients exceed
 # N x (elapsed hours + 1), so the rule cannot hide an instability that recurs. The watchdog (Tools/stability_watch.sh, on the dev machine)

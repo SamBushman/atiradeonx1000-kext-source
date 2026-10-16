@@ -144,7 +144,7 @@ def main():
     # subtracted 0x20 for GL/DVD on a misreading of a SEPARATE local (`local_1c0 = base + 0x20`, unrelated to the scan pointer) - that bug made
     # the GL/DVD dispatcher read 4 bytes before the real stream (into an auto-zero-filled unmapped page), so it never saw the injected opcode
     # at all and silently fell into the texture-slot fast path instead - caught by cross-checking against the real compare-site address
-    # from Tools/opcode_inventory.py's analyser, not by a crash (see pm4_opcode_gaps.md, 0x36 session).
+    # from Tools/opcode_inventory.py's analyser, not by a crash.
     self_bytes = bytearray(SELF_SIZE)
     if ctx in ('2d', 'dvd'):
         struct.pack_into('>I', self_bytes, off['bufoff'], BUF)                 # puVar18/40 = M<SInt32>(self+0xac/0xa4) + 0x1c -> BUF + 0x1c

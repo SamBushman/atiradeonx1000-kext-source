@@ -10,7 +10,7 @@ cd0=`ps auxww | grep "[c]rashdump" | grep -v " Z " | wc -l`
 for f in "$@"; do
   case "$f" in
     win:*) a=`echo "${f#win:}" | tr , ' '`; f=`echo "$f" | tr ':,' '__'`; cmd="./glwin $a" ;;      # win:SAMPLES,FRAMES,STENCIL,DEPTHBITS,MODE  -> the windowed workload glwin
-    stress:*) sd=`echo "${f#stress:}" | cut -d, -f1`; it=`echo "${f#stress:}" | cut -d, -f2`; f=`echo "$f" | tr ':,' '__'`; cmd="env GLSTRESS_SEED=$sd GLSTRESS_ITERS=$it GLSTRESS_NO=${GLSTRESS_NO:-v} ./glcov stress" ;;   # stress:SEED,ITERS (ARB vertex programs skipped by default: see Tests/pm4_opcode_usage.md)
+    stress:*) sd=`echo "${f#stress:}" | cut -d, -f1`; it=`echo "${f#stress:}" | cut -d, -f2`; f=`echo "$f" | tr ':,' '__'`; cmd="env GLSTRESS_SEED=$sd GLSTRESS_ITERS=$it GLSTRESS_NO=${GLSTRESS_NO:-v} ./glcov stress" ;;   # stress:SEED,ITERS (ARB vertex programs skipped by default)
     *) cmd="./glcov $f" ;;
   esac
   DYLD_INSERT_LIBRARIES="$P/opcode_recorder.dylib" OPCODE_LOG="$O/$f.tsv" $cmd > "$O/$f.out" 2>&1 &

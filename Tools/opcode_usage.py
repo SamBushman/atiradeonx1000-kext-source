@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """opcode_usage.py - issue #42 criterion 2: merge opcode_recorder logs and compare what real workloads emit with the opcodes the stock dispatchers handle.
 
-Input: workload logs written by Tools/userspace/opcode_recorder.c (one file per process run), each given as NAME=PATH; the inventory is Tests/pm4_opcode_inventory.md
-(from Tools/opcode_inventory.py: the opcodes the stock process_command_buffer of each context compares against).
+Input: workload logs written by Tools/userspace/opcode_recorder.c (one file per process run), each given as NAME=PATH; the inventory is the report written by Tools/opcode_inventory.py
+( the opcodes the stock process_command_buffer of each context compares against).
 Per context (GL / 2D / DVD) the report gives: flushes, records and words observed; for every observed opcode its record/word counts and which workloads emitted it;
   * observed AND in the inventory   -> coverage
   * observed but NOT in the inventory -> either the recorder's record format is wrong for that stream, or the opcode takes the dispatcher's default path (opcode 0x00 is the
@@ -10,7 +10,7 @@ Per context (GL / 2D / DVD) the report gives: flushes, records and words observe
   * in the inventory but never observed -> the gap a workload still has to fill
 and the anomaly count (records that overrun a buffer, buffers that never terminate). Exit 0, or 1 if anomalies were recorded.
 
-Usage: opcode_usage.py [--inventory Tests/pm4_opcode_inventory.md] [-o Tests/pm4_opcode_usage.md] NAME=LOG [NAME=LOG ...]
+Usage: opcode_usage.py --inventory INVENTORY [-o REPORT] NAME=LOG [NAME=LOG ...]
 """
 import argparse, collections, os, re, sys
 
@@ -64,7 +64,7 @@ def load_logs(items):
 
 def render(inv, data, flushes, anomalies, strays, procs):
     out = ["# Command-stream opcode usage by real workloads (issue #42 criterion 2)", "",
-           "Recorded on the stock kext (4.1.9, G5, Tiger) with `Tools/userspace/opcode_recorder.c`, merged by `Tools/opcode_usage.py`, compared with the dispatcher inventory in `Tests/pm4_opcode_inventory.md`.",
+           "Recorded on the stock kext (4.1.9, G5, Tiger) with `Tools/userspace/opcode_recorder.c`, merged by `Tools/opcode_usage.py`, compared with the dispatcher inventory from `Tools/opcode_inventory.py`.",
            "Counts are buffers submitted through the flush-map path (the kernel's `process_command_buffer`); buffers processed by other kernel paths are not counted.", "",
            "Workloads: " + ", ".join("`%s` (%d run%s)" % (n, c, "" if c == 1 else "s") for n, c in sorted(procs.items())), ""]
     for ctx in ("GL", "2D", "DVD"):
@@ -96,7 +96,7 @@ def render(inv, data, flushes, anomalies, strays, procs):
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--inventory", default=os.path.join(here, "..", "Tests", "pm4_opcode_inventory.md"))
+    ap.add_argument("--inventory", required=True, help="report written by opcode_inventory.py")
     ap.add_argument("-o"); ap.add_argument("logs", nargs="+")
     a = ap.parse_args()
     inv = load_inventory(a.inventory)

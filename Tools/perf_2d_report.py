@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""perf_2d_report.py DIR [-o report.md] - compare the interleaved stock/rebuilt runs written by Tools/perf_2d_compare.sh (files stock_v*_r*.txt / rebuilt_v*_r*.txt of
+"""perf_2d_report.py DIR [-o REPORT] - compare the interleaved stock/rebuilt runs written by Tools/perf_2d_compare.sh (files stock_v*_r*.txt / rebuilt_v*_r*.txt of
 Tests/perf_2d_compositing.c METRIC lines). Same decision rule as Tools/perf_compare.py: per metric S = median over stock runs of the run median, noise = (max-min of those)/S,
 margin = max(5 %, 3 x noise), NOISY if margin > 25 %; REGRESSION / IMPROVED when the candidate median is outside S*(1+-margin). Raw CGSGetPerformanceData values: HIGHER = more
 flush activity per tick, so a LOWER candidate on a drag/resize/scroll metric means the rebuilt desktop redrew less (reported as LOWER, not as an improvement). Exit 1 on any REGRESSION/LOWER."""

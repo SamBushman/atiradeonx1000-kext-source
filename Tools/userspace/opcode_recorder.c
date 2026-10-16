@@ -178,7 +178,7 @@ static kern_return_t my_close(io_connect_t c) {
 
 /* INJECTION (issue #42, opcodes no real consumer emits): OPCODE_INJECT_WORDS="0x2b000001,..." are spliced in at the START of the stream (+g_start) of the Nth flush (OPCODE_INJECT_FLUSH, default 3) of
  * the Nth connection whose IOServiceOpen type matches OPCODE_INJECT_TYPE (default 1 = GL, unchanged; 2 = 2D, 3 = DVD), the existing stream shifted up by the same number of words, so the real driver's
- * context/surface/register state around it stays valid. CRITICAL (2026-10-03 postmortem, Tests/pm4_opcode_gaps.md): this only works safely because it splices into the REAL buffer a REAL client's own
+ * context/surface/register state around it stays valid. CRITICAL (2026-10-03 postmortem): this only works safely because it splices into the REAL buffer a REAL client's own
  * flush-map call already returned (k->cur_addr/cur_size) - never attempt an equivalent injection through a hand-built/synthetic client or buffer address; that hung the G5 once (the guard never ran
  * because the wrong buffer was targeted). Done once per process. The tail is moved up to 256 words past the first n==0 header; if that does not fit in the buffer the injection is skipped and logged.
  *

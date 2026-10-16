@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """return_code_audit.py  (issue #100 criterion 2; run from the repo root)
-For every external-method section of Tests/deep_paths.md, lists the IOReturn constants the SHIPPED body can produce and which of them were observed live on
+Usage: return_code_audit.py DEEP_PATHS_REPORT   (the report written by Tools/deep_paths.py)
+For every external-method section of the deep-paths report, lists the IOReturn constants the SHIPPED body can produce and which of them were observed live on
 STOCK in the two recorded baselines (Tests/baseline/stock_4.1.9_g5_tiger.txt, ..._deep.txt). A baseline line is attributed to a method when it names the context
 and the method (`GL set_surface`, `DVD dvd_enable_deint`, `Surface set_id_mode`) or its `(sel N)`; codes are read from `r=0x........` / `-> 0x........`.
 Heuristic attribution: every row printed as UNOBSERVED must be justified by hand in Tests/deep_paths_notes.tsv (`<row> codes ...`)."""
 import re, sys
-doc = open('Tests/deep_paths.md').read()
+doc = open(sys.argv[1]).read()
 lines = []
 for f in ('Tests/baseline/stock_4.1.9_g5_tiger.txt', 'Tests/baseline/stock_4.1.9_g5_tiger_deep.txt'):
     lines += [l.rstrip('\n') for l in open(f)]

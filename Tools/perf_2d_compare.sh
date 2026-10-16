@@ -1,6 +1,6 @@
 #!/bin/sh
 # perf_2d_compare.sh (dev machine) - back-to-back desktop-compositing + WindowServer-gesture comparison, stock vs rebuilt, in the SAME hot-swap + unstick state. Hot-swap only.
-# Protocol (Tests/perf_2d_comparability_plan.md): visits alternate stock/rebuilt (A B A B ...); each visit = hot-swap + unstick + killall Dock (clears stale Docks) + SETTLE s + quiesce check +
+# Protocol: visits alternate stock/rebuilt (A B A B ...); each visit = hot-swap + unstick + killall Dock (clears stale Docks) + SETTLE s + quiesce check +
 # one DISCARDED warm-up run + RUNS measured runs, each with a per-tick RAW dump. Per-run files: <tag>_v<visit>_r<run>.txt (METRIC lines), .raw (per tick), .quiesce (ps/load snapshot before the run).
 #   sh Tools/perf_2d_compare.sh OUTDIR [RUNS=3] [VISITS=4] [TICKS=200] [SEQ="stock rebuilt"]    env: REBUILT_DIR (kext_build_fix) STOCK_DIR (stockkext) SETTLE (60)
 # SEQ lets you run an A/A pilot ("stock stock") or a planted-difference control. Needs ~/rung3/gest2d.sh (Tests/perf_2d_gestures.sh) on the G5.

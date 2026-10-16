@@ -2,7 +2,7 @@
 # regen_b3.sh - Stage B3 (issues #67-#72, 2026-09-24/25): targeted re-decompiles on top of the Stage B2 projects. Each step works on a COPY of the
 # B2 project; the address lists are in pipeline/b3/. The functions listed in b3/redump_*.txt are re-decompiled and replace their files in the
 # archived dump (n_<x>/0x<entry>.txt); RANGES rows of the seven switch owners are widened to b3/ranges_widened_glprog.tsv (Tools/userspace
-# flow_ranges.py). See pipeline/README.md, "Stage B3".
+# flow_ranges.py). Stage B3 of the pipeline recipe.
 G=~/Documents/ATI-X1900-Decomp/atiradeonx1000-kext-source/Tools/userspace/gs
 B=~/Documents/ATI-X1900-Decomp/atiradeonx1000-kext-source/Tools/userspace/pipeline/b3
 AH=~/ghidra_12.1.3_PUBLIC/support/analyzeHeadless

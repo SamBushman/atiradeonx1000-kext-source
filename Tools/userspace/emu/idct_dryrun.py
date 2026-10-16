@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """idct_dryrun.py - issue #140 rung 0: run the STOCK kext's real machine code for ATIR500DVDContext::doIDCT (0x35540) and
 ATIRadeonX1000::submit_idct_buffer_consumed (0x1eb30) in the unicorn PPC emulator against a hand-built context, accelerator, ring, MMIO window and surface,
-and compare what it does with an INDEPENDENT model of the derived behaviour (Tests/idct_engine_findings.md sections 2 and 5).
+and compare what it does with an INDEPENDENT model of the derived behaviour.
 Zero hardware risk: the emulator's sandboxed memory is the only thing that can be touched. Same unlinked-image / stub conventions as kemu.py (read its docstring).
 
 Usage: idct_dryrun.py            run every scenario, print a report, exit 1 on any mismatch
@@ -92,7 +92,7 @@ def client_params(field_pic, bottom, dest_idx, stream, dwords, alt_scan, w, h):
 
 
 def model(p, surf_h, pitch, plane_base, resid_base, resid_pitch):
-    """independent model of doIDCT + submit_idct_buffer_consumed from Tests/idct_engine_findings.md (written before running the emulator)"""
+    """independent model of doIDCT + submit_idct_buffer_consumed (written before running the emulator)"""
     stream = p[3]
     if stream == 0: base, pt = plane_base, pitch
     else: base, pt = resid_base, resid_pitch

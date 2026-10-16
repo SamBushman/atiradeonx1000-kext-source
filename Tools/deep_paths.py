@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""deep_paths.py STOCK_DIS OURS_DIS [NOTES_TSV] > Tests/deep_paths.md   (issue #100, Step 0 - offline, no hardware)
+"""deep_paths.py STOCK_DIS OURS_DIS [NOTES_TSV] > REPORT   (issue #100, Step 0 - offline, no hardware)
 
 One section per external method (GL 0-19, 2D 0-17, DVD 0-21, Surface 0-18 - the 81 methods of Tests/method_shapes.txt; the ten of #88-#97 are
 marked, the 71 of #100 get the full treatment) with the MACHINE-DERIVED half of the path map:

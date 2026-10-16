@@ -46,7 +46,7 @@ public class DarwinStorage extends GhidraScript {
             n++;
             println("DARWIN " + f.getEntryPoint() + " " + f.getName(true) + sb);
             // only an integer argument in the wrong register changes what callers pass; float-only differences (fparam_9..13 that Ghidra put on the
-            // SysV stack) are listed, not applied - they are never read (Userspace/README.md)
+            // SysV stack) are listed, not applied - they are never read
             if (apply && intMoved) { f.updateFunction(f.getCallingConventionName(), f.getReturn(), out, FunctionUpdateType.CUSTOM_STORAGE, true, SourceType.USER_DEFINED); applied++; }
         }
         println("DARWIN " + n + " functions differ, " + applied + " rewritten");

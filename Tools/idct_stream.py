@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """idct_stream.py - issue #140 rung 1: encoder, decoder and software oracle for the DVD IDCT engine's macroblock stream, exactly as derived in
-Tests/idct_engine_findings.md (sections 5-7) from the VA driver (client) and Apple's AVA software renderer (producer FUN_00054070, consumer FUN_0000aac0).
+the project's IDCT analysis notes, from the VA driver (client) and Apple's AVA software renderer (producer FUN_00054070, consumer FUN_0000aac0).
 
   coefficient dword  = level(int16) << 16 | run(15 bit) << 1 | last          (idx = prev + run; prev = idx + 1; block[scan[idx]] = level; last = bit 0)
   macroblock packet  = dword0: field_dct << 31 | alt_scan << 25 | CBP << 6   (Y0 = bit 11 ... Y3 = bit 8, Cb = bit 7, Cr = bit 6)

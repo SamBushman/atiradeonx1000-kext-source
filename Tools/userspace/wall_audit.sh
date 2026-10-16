@@ -3,7 +3,7 @@
 #   MODE gcc4   Apple gcc 4.0.1 `-O1 -Wall`: the compiler the images are built with (uninitialised use needs -O1; -O0 does not analyse data flow)
 #   MODE gcc14  Tigerbrew gcc-14 `-fsyntax-only` with the front-end conversion diagnostics gcc 4.0.1 does not have: -Wfloat-conversion (a float VALUE converted into an integer
 #               word - the stock stores its bits), -Wtype-limits, -Wsequence-point, -Wshift-*, -Wtautological-compare ...
-# One <part>.warn per part in OUT (DONE when finished). Triage: `cat OUT/part_*.warn | grep warning: | sed ... | sort | uniq -c` - see Userspace/README.md, "Compiler-warning audit".
+# One <part>.warn per part in OUT (DONE when finished). Triage: `cat OUT/part_*.warn | grep warning: | sed ... | sort | uniq -c`.
 T="$1"; O="$2"; M="${3:-gcc4}"
 cd "$T" || exit 1
 rm -rf "$O"; mkdir -p "$O"

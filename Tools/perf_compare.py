@@ -14,7 +14,7 @@ Rule (per metric, in microseconds; each run contributes its p10 (perf_methods: t
 Exit status: 0 when no REGRESSION, 1 when at least one, 2 on usage/parse errors.  `--self-test STOCKDIR` splits the stock runs into two groups and must report no regression, then scales one
 metric by +20 % (must be REGRESSION) and by +4 % (must be OK).
 
-Usage: perf_compare.py STOCKDIR CANDDIR [-o report.md]      |      perf_compare.py --self-test STOCKDIR
+Usage: perf_compare.py STOCKDIR CANDDIR [-o REPORT]      |      perf_compare.py --self-test STOCKDIR
 """
 import argparse, glob, os, re, statistics, sys
 

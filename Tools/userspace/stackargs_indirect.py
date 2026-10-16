@@ -28,7 +28,7 @@ __file__ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'reg_supply.
 exec(src)
 
 # hand-written expressions for phi words the tool cannot tie to a C variable: {"<function entry hex>": {"<word offset hex>@<call address hex>": "<C expression>"}} - the C must
-# already contain the variable (added by hand at the merge point, see Userspace/README.md)
+# already contain the variable (added by hand at the merge point)
 import json as _json
 _ovp = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'stackargs_overrides.json')
 OVERRIDES = _json.load(open(_ovp)) if os.path.exists(_ovp) else {}

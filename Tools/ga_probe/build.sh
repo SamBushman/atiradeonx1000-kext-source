@@ -1,5 +1,5 @@
 #!/bin/sh
-# Tools/ga_probe/build.sh - issue #141, user-authorized raw-MMIO probe (see Tests/idct_engine_findings.md section 9u).
+# Tools/ga_probe/build.sh - issue #141, user-authorized raw-MMIO probe.
 #
 # Builds GAProbe.kext: a small, SEPARATE, read-only diagnostic kext (not part of the rebuilt driver under Sources/ -
 # it never matches or competes for the GPU; it locates the already-running stock ATIRadeonX1000 service by name and

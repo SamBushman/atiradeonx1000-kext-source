@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
     if (rc != 0 || !dev) { printf("open failed (the host renderer fallback may have been used): stop\n"); goto out; }
     if (guard_stat(2) < 1) { printf("the guard did not see a DVD (type 3) connection open: the renderer in use is not the ATI one, or interposition missed it. Refusing to decode.\n"); goto out; }
     if (prime_surface) { int prc = rb_setup(sid); printf("prime-surface: rb_setup(sid) -> %d\n", prc); fflush(stdout); }
-    if (setupbuf) {   /* #92: real setup_buffers (sel 21) - sets this+0x88, the source of lock_all_buffers' request mask (see ATIR500DVDContext_setup_buffers_Port.cpp:40). Two-call sequence proven real in Tests/destructive/t3_dvd_lock_buffers.c (section 9b/9c/9d of idct_engine_findings.md). */
+    if (setupbuf) {   /* #92: real setup_buffers (sel 21) - sets this+0x88, the source of lock_all_buffers' request mask (see ATIR500DVDContext_setup_buffers_Port.cpp:40). Two-call sequence proven real in Tests/destructive/t3_dvd_lock_buffers.c. */
         int conn = guard_dvd_connect ? guard_dvd_connect() : 0; kern_return_t kr;
         printf("setup_buffers: connect=0x%x (forwarded only if GUARD_FORWARD includes 21)\n", conn); fflush(stdout);
         kr = IOConnectMethodScalarIScalarO(conn, 21, 5, 0, 0, 64, 48, 0, 0x27c00);
