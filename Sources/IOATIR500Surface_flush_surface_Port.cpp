@@ -27,7 +27,7 @@
 
 
 /* real addr 0x10fa0 */
-void IOATIR500Surface::flush_surface(UInt32 param_1, UInt32 param_2) {
+void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
@@ -47,8 +47,8 @@ void IOATIR500Surface::flush_surface(UInt32 param_1, UInt32 param_2) {
       uVar2 = 0;
       pIVar3 = self;
       do {
-        if (((1 << (uVar2 & 0x3f) & param_1) != 0) && (pIVar3[0xcac] != 0x0)) {
-          VCALL(M<SInt32>(self), 0x5d4)(self,uVar2,param_2);
+        if (((1 << (uVar2 & 0x3f) & panelMask) != 0) && (pIVar3[0xcac] != 0x0)) {
+          VCALL(M<SInt32>(self), 0x5d4)(self,uVar2,swapArg);
           M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
           iVar1 = M<SInt32>(self + 0xd50);
         }

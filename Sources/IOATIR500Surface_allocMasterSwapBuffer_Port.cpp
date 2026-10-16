@@ -28,7 +28,7 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__Z
 
 
 /* real addr 0x118e0 */
-bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 param_1, UInt32 param_2) {
+bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 panel, UInt32 swapBufferSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 *piVar1;
@@ -38,14 +38,14 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 param_1, UInt32 param_2) {
   UInt32 uVar5;
   UInt8 *pIVar6;
   
-  iVar4 = param_1 * 0x94;
+  iVar4 = panel * 0x94;
   M<UInt32>(self + iVar4 + 0xcb0) = 0;
   iVar3 = M<SInt32>(self + 0xd50);
-  if (M<SInt32>(param_1 * 4 + iVar3 + 0x114) != 0) {
+  if (M<SInt32>(panel * 4 + iVar3 + 0x114) != 0) {
     uVar5 = 0;
     pIVar6 = self + iVar4 + 0xc28;
     do {
-      piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar3 + 0x82c) | 0x10023,param_2,GH_page_size);
+      piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar3 + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
       M<SInt32 *>(pIVar6) = piVar1;
       if (piVar1 == (SInt32 *)0x0) {
         return 0;
@@ -54,10 +54,10 @@ bool IOATIR500Surface::allocMasterSwapBuffer(UInt32 param_1, UInt32 param_2) {
       pVVar2 = (VendorSwapBufferHeader *)VCALL(*piVar1, 0x1cc)(piVar1);
       M<VendorSwapBufferHeader *>(pIVar6 + 0xc) = pVVar2;
       pIVar6 = pIVar6 + 0x1c;
-      this->init_swap_buffer_header((VendorSwapBufferHeader *)(pVVar2),param_2);
+      this->init_swap_buffer_header((VendorSwapBufferHeader *)(pVVar2),swapBufferSize);
       iVar3 = M<SInt32>(self + 0xd50);
-    } while (uVar5 < M<UInt32>(param_1 * 4 + iVar3 + 0x114));
+    } while (uVar5 < M<UInt32>(panel * 4 + iVar3 + 0x114));
   }
-  M<UInt32>(self + iVar4 + 0xcb0) = param_2;
+  M<UInt32>(self + iVar4 + 0xcb0) = swapBufferSize;
   return 1;
 }

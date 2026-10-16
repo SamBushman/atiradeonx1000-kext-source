@@ -27,11 +27,11 @@
 
 
 /* real addr 0x131b0 */
-UInt32 IOATIR500Surface::move_buffer_from_backing_store(ATIR500SurfaceBuffer *real_param_1) {
+UInt32 IOATIR500Surface::move_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  this->copy_buffer_from_backing_store((ATIR500SurfaceBuffer *)(param_1));
-  this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(param_1));
+  this->copy_buffer_from_backing_store((ATIR500SurfaceBuffer *)(bufferBytes));
+  this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(bufferBytes));
   return 1;
 }

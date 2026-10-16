@@ -27,9 +27,9 @@
 
 
 /* real addr 0x10c60 */
-bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *real_param_1, bool param_2) {
+bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   bool bVar1;
   UInt8 *this_00;
@@ -50,8 +50,8 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *real_param_1, bool 
         pIVar8 = self + uVar4 * 0x94 + 0xc30;
         do {
           iVar6 = uVar5 * 0x1c + uVar4 * 0x94;
-          iVar2 = ((IOATIR500Accelerator *)(this_00))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar6 + 0xc20)),(VendorTransferBuffer *)(param_1),
-                             M<UInt32>(pIVar8),param_2);
+          iVar2 = ((IOATIR500Accelerator *)(this_00))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar6 + 0xc20)),(VendorTransferBuffer *)(neededBytes),
+                             M<UInt32>(pIVar8),aggressive);
           if (iVar2 != 0) {
             return 1;
           }
@@ -59,8 +59,8 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *real_param_1, bool 
           pVVar3 = (UInt8 *)(self + iVar6 + 0xc3c);
           pIVar7 = self + iVar6 + 0xc4c;
           do {
-            iVar6 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(param_1),
-                               M<UInt32>(pIVar7),param_2);
+            iVar6 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(neededBytes),
+                               M<UInt32>(pIVar7),aggressive);
             if (iVar6 != 0) {
               return 1;
             }
@@ -79,8 +79,8 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *real_param_1, bool 
   }
   pIVar8 = self;
   while ((pVVar3 = M<UInt8 *>(pIVar8 + 0xcc), pVVar3 == (UInt8 *)0x0
-         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(param_1),
-                                M<UInt32>(M<SInt32>(pVVar3 + 0x14) + 8),param_2), iVar2 == 0))) {
+         || (iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(neededBytes),
+                                M<UInt32>(M<SInt32>(pVVar3 + 0x14) + 8),aggressive), iVar2 == 0))) {
     pIVar8 = pIVar8 + 0x78;
     if (self + 0xac8 == pIVar8) {
       return 0;

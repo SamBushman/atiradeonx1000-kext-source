@@ -27,11 +27,11 @@
 
 
 /* real addr 0x13de0 */
-void IOATIR500Surface::remove_dvd_context(IOATIR500DVDContext *real_param_1) {
+void IOATIR500Surface::remove_dvd_context(IOATIR500DVDContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  if (M<UInt8 *>(self + 0x90) == param_1) {
+  if (M<UInt8 *>(self + 0x90) == contextBytes) {
     M<UInt32>(self + 0x90) = 0;
   }
   this->reset_req_bits();

@@ -30,10 +30,10 @@ extern "C" UInt32 GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(.
 
 
 /* real addr 0x14a30 */
-IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *real_param_2, UInt32 param_3) {
+IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *readData, UInt32 structSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *readDataBytes = reinterpret_cast<UInt8 *>(readData);
 
   int iVar1;
   int iVar2;
@@ -79,11 +79,11 @@ IOReturn IOATIR500Surface::surface_read(IOAccelSurfaceReadData *real_param_2, UI
   M<SInt32>(xferBufBlock + 4) = 0;           /* local_58[1] = 0 */
   M<SInt32>(xferBufBlock + 8) = 0;           /* local_58[2] = 0 */
   M<SInt32>(xferBufBlock + 0xc) = 0;         /* local_4c = 0 */
-  iVar14 = M<int>(param_2);
-  iVar13 = M<int>(param_2 + 4);
-  iVar12 = M<int>(param_2 + 8);
-  iVar11 = M<int>(param_2 + 0xc);
-  iVar15 = M<int>(param_2 + 0x10);
+  iVar14 = M<int>(readDataBytes);
+  iVar13 = M<int>(readDataBytes + 4);
+  iVar12 = M<int>(readDataBytes + 8);
+  iVar11 = M<int>(readDataBytes + 0xc);
+  iVar15 = M<int>(readDataBytes + 0x10);
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
   iVar17 = M<int>(self + 0xb70);
   if ((M<unsigned int>(self + 0xc1c) & 3 & M<unsigned int>(self + 0xbf8)) == 0) {
@@ -105,7 +105,7 @@ LAB_00014af4:
   if ((((0 < iVar7) && (iVar5 = iVar13 + iVar11, 0 < iVar5)) &&
       (iVar1 = (int)M<SInt16>(self + 0xbd4), iVar14 < iVar1)) &&
      (iVar8 = (int)M<SInt16>(self + 0xbd6), iVar13 < iVar8)) {
-    iVar10 = M<int>(param_2 + 0x14);
+    iVar10 = M<int>(readDataBytes + 0x14);
     iVar2 = 0;
     if (iVar14 < 0) {
       iVar2 = (unsigned int)M<UInt16>(iVar17 + 0x16) * iVar14;

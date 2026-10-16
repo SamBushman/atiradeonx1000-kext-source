@@ -27,9 +27,9 @@
 
 
 /* real addr 0x150e0 */
-void IOATIR500Surface::surface_write_unlock_options(UInt32 param_1) {
+void IOATIR500Surface::surface_write_unlock_options(UInt32 options) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  this->surface_unlock_options((eLockType)(2),param_1);
+  this->surface_unlock_options((eLockType)(2),options);
   return;
 }

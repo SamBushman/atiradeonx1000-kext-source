@@ -29,9 +29,9 @@ extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 
 /* real addr 0x119f0 */
-bool IOATIR500Surface::start(IOService *real_param_1) {
+bool IOATIR500Surface::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   bool bVar1;
   UInt8 *pIVar2;
@@ -44,13 +44,13 @@ bool IOATIR500Surface::start(IOService *real_param_1) {
   UInt32 uVar8;
   SInt32 iVar9;
   
-  iVar3 = IOUserClient::start(real_param_1);
+  iVar3 = IOUserClient::start(provider);
   if (iVar3 == 0) {
     return false;
   }
-  M<UInt8 *>(self + 0xd50) = param_1;
+  M<UInt8 *>(self + 0xd50) = providerBytes;
   M<UInt32>(self + 0xd58) = 0;
-  iVar3 = M<SInt32>(param_1 + 0x50);
+  iVar3 = M<SInt32>(providerBytes + 0x50);
   M<UInt32>(self + 0xa4) = 0xffffffe0;
   M<UInt32>(self + 0x80) = 0;
   M<UInt32>(self + 0x84) = 0;
@@ -235,7 +235,7 @@ LAB_00011d6c:
     M<UInt32>(self + 0xd58) = 1;
   }
   else {
-    IOATIR500Surface::stop(real_param_1);
+    IOATIR500Surface::stop(provider);
   }
   return bVar1;
 }

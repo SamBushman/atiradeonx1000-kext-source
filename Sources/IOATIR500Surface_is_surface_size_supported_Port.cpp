@@ -27,22 +27,22 @@
 
 
 /* real addr 0x13fb0 */
-SInt32 IOATIR500Surface::is_surface_size_supported(short param_1, short param_2) {
+SInt32 IOATIR500Surface::is_surface_size_supported(short width, short height) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   /* #157 FIX: the mechanical port reconstructed the caller's full-register width/height via
    * CONCAT22(in_register_..., param_N) - Ghidra's placeholder for "upper 16 bits came from a
    * register whose origin wasn't traced" - but ported it as a genuinely UNINITIALIZED C++ local,
    * not the caller's actual (already sign-extended) value. Confirmed live (issue #157): with
-   * param_1=param_2=4 and the real max-size fields both 0x1000, this returned 0 (should be 1) -
+   * width=height=4 and the real max-size fields both 0x1000, this returned 0 (should be 1) -
    * the uninitialized upper bits were corrupting the comparison. Stock's real disassembly
    * (0x13fb0, cmpw on the full raw register) relies on the caller having already placed a clean
    * sign-extended value there, which set_shape_backing_length_ext's own call site does via
    * `(int)M<SInt16>(...)` - ordinary C++ integer promotion of `short` to `SInt32` reproduces that
    * exact value with no UB, so no CONCAT22/in_register reconstruction is needed at all. */
-  if (((SInt32)param_1 <=
+  if (((SInt32)width <=
        (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + 0xd50) + 0xa8)) &&
-     ((SInt32)param_2 <=
+     ((SInt32)height <=
       (SInt32)(UInt32)M<UInt16>(M<SInt32>(self + 0xd50) + 0xaa))) {
     return 1;
   }

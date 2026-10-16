@@ -31,9 +31,9 @@ extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 
 
 /* real addr 0x142b0 */
-IOReturn IOATIR500Surface::set_id_mode(UInt32 param_1, eIOSurfaceModeBits real_param_3) {
+IOReturn IOATIR500Surface::set_id_mode(UInt32 mode, eIOSurfaceModeBits modeBits) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt32 param_3 = real_param_3;   /* the body edits the mode bits as a plain integer */
+    UInt32 modeBitsValue = modeBits;   /* the body edits the mode bits as a plain integer */
 
   UInt16 uVar1;
   UInt8 *pIVar2;
@@ -48,7 +48,7 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 param_1, eIOSurfaceModeBits real_p
   UInt32 local_30;
   UInt32 local_2c;
   
-  if ((param_3 & 0xffff7fc0) != 0) {
+  if ((modeBitsValue & 0xffff7fc0) != 0) {
     return 0xe00002c2;
   }
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
@@ -60,21 +60,21 @@ IOReturn IOATIR500Surface::set_id_mode(UInt32 param_1, eIOSurfaceModeBits real_p
   if (((M<int>(self + 0x90) == 0) && (M<int>(self + 0x88) == 0)) && (M<int>(self + 0x8c) == 0)
      ) {
 LAB_00014370:
-    if ((param_3 & 0x20) != 0) {
-      uVar7 = param_1;
-      param_1 = 0xffff;
+    if ((modeBitsValue & 0x20) != 0) {
+      uVar7 = mode;
+      mode = 0xffff;
 LAB_00014454:
       uVar3 = M<unsigned int>(self + 0xc14);
-      if (((uVar3 != 0xffff) && (param_1 != uVar3)) &&
+      if (((uVar3 != 0xffff) && (mode != uVar3)) &&
          (self == M<UInt8 *>(uVar3 * 0x20 + M<int>(self + 0xd50) + 0xe8))) {
         VCALL(M<int>(self), 0x5a8)(self);
         M<UInt32>(M<int>(self + 0xc14) * 0x20 + M<int>(self + 0xd50) + 0xe8) = 0;
       }
       M<unsigned int>(self + 0xa4) = uVar7;
-      M<unsigned int>(self + 0xbe8) = param_3;
-      M<unsigned int>(self + 0xc14) = param_1;
-      if ((param_1 != 0xffff) && ((param_3 & 0x8000) != 0)) {
-        M<UInt8 *>(param_1 * 0x20 + M<int>(self + 0xd50) + 0xe8) = self;
+      M<unsigned int>(self + 0xbe8) = modeBitsValue;
+      M<unsigned int>(self + 0xc14) = mode;
+      if ((mode != 0xffff) && ((modeBitsValue & 0x8000) != 0)) {
+        M<UInt8 *>(mode * 0x20 + M<int>(self + 0xd50) + 0xe8) = self;
       }
       M<UInt32>(self + 0xc1c) = 0x20000000;
       if ((M<unsigned int>(self + 0xbe8) & 0x20) != 0) {
@@ -171,11 +171,11 @@ LAB_0001460c:
       goto LAB_000147d0;
     }
     iVar5 = M<int>(self + 0xd50);
-    if (param_1 < M<unsigned int>(iVar5 + 0xcc)) {
-      uVar7 = ~param_1;
-      pIVar2 = M<UInt8 *>(param_1 * 0x20 + iVar5 + 0xe8);
-      if (((pIVar2 == (UInt8 *)0x0) || (self == pIVar2)) || ((param_3 & 0x8000) == 0)) {
-        switch(param_3 & 0xf) {
+    if (mode < M<unsigned int>(iVar5 + 0xcc)) {
+      uVar7 = ~mode;
+      pIVar2 = M<UInt8 *>(mode * 0x20 + iVar5 + 0xe8);
+      if (((pIVar2 == (UInt8 *)0x0) || (self == pIVar2)) || ((modeBitsValue & 0x8000) == 0)) {
+        switch(modeBitsValue & 0xf) {
         case 3:
           sVar4 = 2;
           break;
@@ -192,13 +192,13 @@ LAB_0001460c:
         case 0xd:
           sVar4 = 0x10;
         }
-        if (M<SInt16>(param_1 * 0x78 + iVar5 + 0x142) == sVar4) goto LAB_00014454;
+        if (M<SInt16>(mode * 0x78 + iVar5 + 0x142) == sVar4) goto LAB_00014454;
       }
     }
   }
   else {
-    if (((param_3 ^ M<unsigned int>(self + 0xbe8)) & 0x803f) == 0) {
-      param_3 = param_3 | M<unsigned int>(self + 0xbe8) & 0xffff7fc0;
+    if (((modeBitsValue ^ M<unsigned int>(self + 0xbe8)) & 0x803f) == 0) {
+      modeBitsValue = modeBitsValue | M<unsigned int>(self + 0xbe8) & 0xffff7fc0;
       goto LAB_00014370;
     }
     iVar5 = M<int>(self + 0xd50);

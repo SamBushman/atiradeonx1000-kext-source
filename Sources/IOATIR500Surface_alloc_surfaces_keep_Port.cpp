@@ -27,9 +27,9 @@
 
 
 /* real addr 0x124b0 */
-UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *real_param_1, VendorTextureBuffer**param_2, SInt32 param_3, UInt32 param_4) {
+UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *excludeSurface, VendorTextureBuffer**excludeList, SInt32 excludeCount, UInt32 mask) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *excludeSurfaceBytes = reinterpret_cast<UInt8 *>(excludeSurface);
 
   bool bVar1;
   UInt32 uVar2;
@@ -41,8 +41,8 @@ UInt32 IOATIR500Surface::alloc_surfaces_keep(IOATIR500Surface *real_param_1, Ven
   uVar4 = 1;
   uVar2 = M<UInt32>(self + 0xbf8);
   while( true ) {
-    if ((param_4 & uVar2 & 1 << (uVar5 & 0x3f)) != 0) {
-      uVar3 = VCALL(M<SInt32>(self), 0x5f8)(self,param_1,param_2,param_3,uVar5);
+    if ((mask & uVar2 & 1 << (uVar5 & 0x3f)) != 0) {
+      uVar3 = VCALL(M<SInt32>(self), 0x5f8)(self,excludeSurfaceBytes,excludeList,excludeCount,uVar5);
       uVar4 = uVar4 & uVar3;
     }
     bVar1 = uVar5 == 0x16;

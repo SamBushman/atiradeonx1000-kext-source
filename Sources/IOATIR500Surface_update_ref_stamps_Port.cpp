@@ -27,9 +27,9 @@
 
 
 /* real addr 0x13fe0 */
-UInt32 IOATIR500Surface::update_ref_stamps(UInt32 param_1, UInt32 param_2) {
+UInt32 IOATIR500Surface::update_ref_stamps(UInt32 generation, UInt32 tag) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  /* CORRECTED: shipped `or r3,r4,r4; blr` returns the FIRST real argument; the Ghidra decompile numbered it param_2 (param_1 = this) and the port kept that number (the #86 class) */
-  return param_1;
+  /* CORRECTED: shipped `or r3,r4,r4; blr` returns the FIRST real argument; the Ghidra decompile numbered it tag (generation = this) and the port kept that number (the #86 class) */
+  return generation;
 }

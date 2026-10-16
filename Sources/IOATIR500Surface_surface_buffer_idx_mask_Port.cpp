@@ -27,60 +27,60 @@
 
 
 /* real addr 0x13ac0 */
-UInt32 IOATIR500Surface::surface_buffer_idx_mask(UInt32 param_1, UInt32*param_2) {
+UInt32 IOATIR500Surface::surface_buffer_idx_mask(UInt32 bufferType, UInt32*outMask) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  switch(param_1) {
+  switch(bufferType) {
   case 1:
 switchD_00013ae0_caseD_1:
     if (M<UInt8 *>(self + 0xb70) == self + 0xa8) {
-      *param_2 = 1;
+      *outMask = 1;
       return 0;
     }
-    *param_2 = 2;
+    *outMask = 2;
     return 0;
   case 2:
     if (M<UInt8 *>(self + 0xb80) == self + 0x300) {
-      *param_2 = 0x20;
+      *outMask = 0x20;
       return 4;
     }
-    *param_2 = 0x10;
+    *outMask = 0x10;
     return 4;
   case 3:
     if (M<UInt8 *>(self + 0xb84) == self + 0x300) {
-      *param_2 = 0x20;
+      *outMask = 0x20;
       return 5;
     }
-    *param_2 = 0x10;
+    *outMask = 0x10;
     return 5;
   case 4:
-    *param_2 = 0x40;
+    *outMask = 0x40;
     return 6;
   case 7:
-    *param_2 = 4;
+    *outMask = 4;
     return 2;
   case 8:
-    *param_2 = 8;
+    *outMask = 8;
     return 3;
   case 10:
-    *param_2 = 0x80;
+    *outMask = 0x80;
     return 7;
   case 0xb:
-    *param_2 = 0x100;
+    *outMask = 0x100;
     return 8;
   case 0x11:
     if ((M<UInt32>(self + 0xc18) & 2) == 0) {
       if ((M<UInt32>(self + 0xc18) & 1) == 0) {
-        *param_2 = 0;
+        *outMask = 0;
         return 0;
       }
       goto switchD_00013ae0_caseD_1;
     }
   }
   if (M<UInt8 *>(self + 0xb74) == self + 0xa8) {
-    *param_2 = 1;
+    *outMask = 1;
     return 1;
   }
-  *param_2 = 2;
+  *outMask = 2;
   return 1;
 }

@@ -27,19 +27,19 @@
 
 
 /* real addr 0x12580 */
-UInt32 IOATIR500Surface::dealloc_surface(UInt32 param_1) {
+UInt32 IOATIR500Surface::dealloc_surface(UInt32 surfaceIndex) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
   
-  if (M<SInt32>(self + param_1 * 0x78 + 0xb0) != 0) {
-    if ((3 >> (param_1 & 0x3f) & 1U) != 0) {
+  if (M<SInt32>(self + surfaceIndex * 0x78 + 0xb0) != 0) {
+    if ((3 >> (surfaceIndex & 0x3f) & 1U) != 0) {
       for (iVar1 = M<SInt32>(self + 0xbcc); iVar1 != 0; iVar1 = M<SInt32>(iVar1 + 0x54)) {
         M<UInt8>(M<SInt32>(iVar1 + 0x14) + 0x14) = 1;
       }
     }
-    ((ATIR500Memory *)(M<UInt8 *>(M<SInt32>(self + 0xd50) + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + param_1 * 0x78 + 0xa8)));
+    ((ATIR500Memory *)(M<UInt8 *>(M<SInt32>(self + 0xd50) + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + surfaceIndex * 0x78 + 0xa8)));
   }
-  M<UInt32>(self + 0xbf8) = 1 << (param_1 & 0x3f) | M<UInt32>(self + 0xbf8);
+  M<UInt32>(self + 0xbf8) = 1 << (surfaceIndex & 0x3f) | M<UInt32>(self + 0xbf8);
   return 1;
 }

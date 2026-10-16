@@ -27,9 +27,9 @@
 
 
 /* real addr 0x12640 */
-UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *real_param_1, IOMemoryDescriptor*param_2, UInt32 param_3, UInt32 param_4) {
+UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *buffer, IOMemoryDescriptor*memory, UInt32 pageOffset, UInt32 alignedPitch) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   UInt32 uVar1;
   SInt32 iVar2;
@@ -38,7 +38,7 @@ UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *real_
   iVar2 = VCALL(*M<SInt32 *>(self + 0xd50), 0x570)(M<SInt32 *>(self + 0xd50),0xc0);
   uVar1 = 0;
   if (iVar2 != 0) {
-    M<SInt32>(param_1 + 0x24) = iVar2;
+    M<SInt32>(bufferBytes + 0x24) = iVar2;
     M<UInt32>(iVar2 + 0x80) = 0;
     M<SInt32>(iVar2 + 0x14) = iVar2 + 0x80;
     M<UInt32>(iVar2 + 0x84) = 0;
@@ -64,15 +64,15 @@ UInt32 IOATIR500Surface::attach_buffer_backing_store(ATIR500SurfaceBuffer *real_
     M<UInt8>(M<SInt32>(iVar2 + 0x14) + 0x35) = 0;
     M<UInt8>(M<SInt32>(iVar2 + 0x14) + 0x17) = 0;
     M<UInt16>(M<SInt32>(iVar2 + 0x14) + 0x36) = 0;
-    M<UInt8 *>(iVar2 + 8) = (UInt8 *)param_2;
+    M<UInt8 *>(iVar2 + 8) = (UInt8 *)memory;
     M<UInt8>(M<SInt32>(iVar2 + 0x14) + 0x16) = 5;
     M<UInt8>(iVar2 + 0x20) = 5;
-    M<SInt16>(iVar2 + 0x50) = (SInt16)param_3;
-    M<SInt16>(iVar2 + 0x52) = (SInt16)param_4;
+    M<SInt16>(iVar2 + 0x50) = (SInt16)pageOffset;
+    M<SInt16>(iVar2 + 0x52) = (SInt16)alignedPitch;
     M<UInt8>(iVar2 + 0x58) = 1;
     M<UInt32>(iVar2 + 0x54) = M<UInt32>(self + 0x7c);
-    if (((self[0xbf7] == 0x0) || (M<SInt32>(param_1 + 0x24) == 0)) ||
-       (piVar3 = M<SInt32 *>(M<SInt32>(param_1 + 0x24) + 8), piVar3 == (SInt32 *)0x0)) {
+    if (((self[0xbf7] == 0x0) || (M<SInt32>(bufferBytes + 0x24) == 0)) ||
+       (piVar3 = M<SInt32 *>(M<SInt32>(bufferBytes + 0x24) + 8), piVar3 == (SInt32 *)0x0)) {
       uVar1 = 1;
     }
     else {

@@ -28,9 +28,9 @@ extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
 
 
 /* real addr 0x134b0 */
-void IOATIR500Surface::stop(IOService *real_param_1) {
+void IOATIR500Surface::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   bool bVar1;
   UInt8 IVar2;
@@ -164,6 +164,6 @@ void IOATIR500Surface::stop(IOService *real_param_1) {
   if (M<SInt32>(self + 0xd8c) != 0) {
     this->free_buffer_backing_orphans();
   }
-  IOUserClient::stop(real_param_1);
+  IOUserClient::stop(provider);
   return;
 }

@@ -27,7 +27,7 @@
 
 
 /* real addr 0x13ff0 */
-void IOATIR500Surface::increment_refcounts(UInt32 param_1) {
+void IOATIR500Surface::increment_refcounts(UInt32 tag) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   return;

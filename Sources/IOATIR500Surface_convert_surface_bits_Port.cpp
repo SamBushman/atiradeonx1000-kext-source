@@ -27,7 +27,7 @@
 
 
 /* real addr 0x12320 */
-UInt32 IOATIR500Surface::convert_surface_bits(UInt32 param_1) {
+UInt32 IOATIR500Surface::convert_surface_bits(UInt32 selectorBits) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
@@ -35,12 +35,12 @@ UInt32 IOATIR500Surface::convert_surface_bits(UInt32 param_1) {
   UInt32 uVar3;
   
   uVar1 = 0;
-  if (param_1 == 0) {
+  if (selectorBits == 0) {
     return uVar1;
   }
   uVar3 = 1;
   do {
-    if ((uVar3 & param_1) == 0) goto LAB_00012454;
+    if ((uVar3 & selectorBits) == 0) goto LAB_00012454;
     if (uVar3 == 0x10) {
       iVar2 = 6;
 LAB_00012420:
@@ -91,7 +91,7 @@ LAB_00012420:
     }
 LAB_00012454:
     uVar3 = uVar3 << 1;
-    if (param_1 < uVar3) {
+    if (selectorBits < uVar3) {
       return uVar1;
     }
   } while( true );

@@ -27,9 +27,9 @@
 
 
 /* real addr 0x11640 */
-IOReturn IOATIR500Surface::set_scaling(UInt32 param_1, IOAccelSurfaceScaling *real_param_2) {
+IOReturn IOATIR500Surface::set_scaling(UInt32 flags, IOAccelSurfaceScaling *scaling) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *scalingBytes = reinterpret_cast<UInt8 *>(scaling);
 
   bool bVar1;
   UInt16 uVar2;
@@ -41,10 +41,10 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 param_1, IOAccelSurfaceScaling *re
   UInt32 local_20;
   UInt32 local_1c;
   
-  bVar1 = (param_1 >> 1 & 1) == 0;
-  if ((bVar1) || (param_2 != (UInt8 *)0x0)) {
-    self[0xbee] = ((UInt8)param_1 & 1);
-    self[0xbf1] = ((UInt8)param_1 & 0xf0);
+  bVar1 = (flags >> 1 & 1) == 0;
+  if ((bVar1) || (scalingBytes != (UInt8 *)0x0)) {
+    self[0xbee] = ((UInt8)flags & 1);
+    self[0xbf1] = ((UInt8)flags & 0xf0);
     self[0xbed] = SUB41m(-(M<UInt32>(self + 0xbec) & 0xffff00) >> 0x1f,0);
     if (bVar1) {
       self[0xbec] = 0x0;
@@ -59,12 +59,12 @@ IOReturn IOATIR500Surface::set_scaling(UInt32 param_1, IOAccelSurfaceScaling *re
     }
     else if ((M<UInt32>(self + 0xbe8) & 0x20) != 0) {
       self[0xbec] = 0x1;
-      M<UInt16>(self + 0xbd4) = M<UInt16>(param_2 + 4);
-      M<UInt16>(self + 0xbd6) = M<UInt16>(param_2 + 6);
-      M<UInt16>(self + 0xbdc) = M<UInt16>(param_2);
-      M<UInt16>(self + 0xbde) = M<UInt16>(param_2 + 2);
-      M<UInt16>(self + 0xbe0) = M<UInt16>(param_2 + 8);
-      M<UInt16>(self + 0xbe2) = M<UInt16>(param_2 + 10);
+      M<UInt16>(self + 0xbd4) = M<UInt16>(scalingBytes + 4);
+      M<UInt16>(self + 0xbd6) = M<UInt16>(scalingBytes + 6);
+      M<UInt16>(self + 0xbdc) = M<UInt16>(scalingBytes);
+      M<UInt16>(self + 0xbde) = M<UInt16>(scalingBytes + 2);
+      M<UInt16>(self + 0xbe0) = M<UInt16>(scalingBytes + 8);
+      M<UInt16>(self + 0xbe2) = M<UInt16>(scalingBytes + 10);
     }
     M<UInt16>(self + 0xbda) = M<UInt16>(self + 0xbd6);
     M<UInt16>(self + 0xbd8) = M<UInt16>(self + 0xbd4);

@@ -1,0 +1,188 @@
+# IOATIR500Surface remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+def	IOATIR500Surface::add_2d_context_to_list@0x10ba0	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::add_2d_context_to_list@0x10ba0	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::add_gl_context_to_list@0x10b80	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::add_gl_context_to_list@0x10b80	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_buffer_backing_store@0x12900	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::alloc_surface@0x13360	param_1	index	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surface@0x13360	param_2	moveFromBacking	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surface_keep@0x13210	real_param_1	other	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surface_keep@0x13210	param_1	otherBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::alloc_surface_keep@0x13210	param_2	texture	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surface_keep@0x13210	param_4	index	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	real_param_1	excludeSurface	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	param_1	excludeSurfaceBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	param_2	excludeList	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	param_3	excludeCount	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_keep@0x124b0	param_4	mask	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	param_2	mask	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	param_3	keepMask	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_pageq@0x12110	param_4	unused	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	param_1	flags	INFERRED	name from the class header declaration
+def	IOATIR500Surface::alloc_surfaces_retry@0x14860	param_3	lockType	INFERRED	name from the class header declaration
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	param_2	memory	INFERRED	name from the class header declaration
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	param_4	alignedPitch	INFERRED	name from the class header declaration
+def	IOATIR500Surface::buffer_map_offset@0x14010	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_4	w	INFERRED	name from the class header declaration
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_5	h	INFERRED	name from the class header declaration
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_6	bytes	INFERRED	name from the class header declaration
+def	IOATIR500Surface::clientMemoryForType@0x141b0	param_1	type	INFERRED	name from the class header declaration
+def	IOATIR500Surface::clientMemoryForType@0x141b0	param_2	options	INFERRED	name from the class header declaration
+def	IOATIR500Surface::clientMemoryForType@0x141b0	param_3	memory	INFERRED	name from the class header declaration
+def	IOATIR500Surface::complete_vram@0x110f0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::complete_vram@0x110f0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::convert_surface_bits@0x12320	param_1	selectorBits	INFERRED	name from the class header declaration
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::copy_buffer_from_backing_store@0x12a00	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::copy_buffer_to_backing_store@0x11110	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::dealloc_surface@0x12580	param_1	surfaceIndex	INFERRED	name from the class header declaration
+def	IOATIR500Surface::decrement_refcounts@0x14000	param_1	tag	INFERRED	name from the class header declaration
+def	IOATIR500Surface::delete_buffer_backing@0x12c30	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::delete_buffer_backing@0x12c30	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::freeToAllocGART@0x10c60	real_param_1	needed	INFERRED	name from the class header declaration
+def	IOATIR500Surface::freeToAllocGART@0x10c60	param_1	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::freeToAllocGART@0x10c60	param_2	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500Surface::free_buffer_backing_store@0x12df0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::free_buffer_backing_store@0x12df0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::get_state@0x10f30	real_param_1	outStateBits	INFERRED	name from the class header declaration
+def	IOATIR500Surface::get_state@0x10f30	param_1	outStateBitsBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::increment_refcounts@0x13ff0	param_1	tag	INFERRED	name from the class header declaration
+def	IOATIR500Surface::init_swap_buffer_header@0x10b40	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR500Surface::init_swap_buffer_header@0x10b40	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::init_swap_buffer_header@0x10b40	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Surface::is_surface_size_supported@0x13fb0	param_1	width	INFERRED	name from the class header declaration
+def	IOATIR500Surface::is_surface_size_supported@0x13fb0	param_2	height	INFERRED	name from the class header declaration
+def	IOATIR500Surface::map_transfer_to_GART@0x10be0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::map_transfer_to_GART@0x10be0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::move_buffer_from_backing_store@0x131b0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::move_buffer_from_backing_store@0x131b0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::move_buffer_to_backing_store@0x11420	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::move_buffer_to_backing_store@0x11420	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::prepare_vram@0x110e0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Surface::prepare_vram@0x110e0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::remove_2d_context_from_list@0x13e30	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::remove_2d_context_from_list@0x13e30	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::remove_dvd_context@0x13de0	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::remove_dvd_context@0x13de0	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::remove_gl_context_from_list@0x13ec0	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::remove_gl_context_from_list@0x13ec0	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::set_dvd_context@0x10bc0	real_param_1	context	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_dvd_context@0x10bc0	param_1	contextBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::set_id_mode@0x142b0	param_1	mode	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_id_mode@0x142b0	real_param_3	modeBits	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_id_mode@0x142b0	param_3	modeBitsValue	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::set_scaling@0x11640	param_1	flags	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_scaling@0x11640	real_param_2	scaling	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_scaling@0x11640	param_2	scalingBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_2	shapeBits	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_3	id	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	real_param_6	region	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_6	regionRaw	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::set_surface_blocking@0x15ac0	param_1	blockingMode	INFERRED	name from the class header declaration
+def	IOATIR500Surface::set_volatile_state@0x15b70	param_2	state	INFERRED	name from the class header declaration
+def	IOATIR500Surface::start@0x119f0	real_param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500Surface::start@0x119f0	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::stop@0x134b0	real_param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500Surface::stop@0x134b0	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::surface_lock_options@0x15d30	param_2	lockType	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_lock_options@0x15d30	real_param_4	data	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_lock_options@0x15d30	param_4	dataRaw	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::surface_lock_options@0x15d30	param_5	size	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_read@0x14a30	real_param_2	readData	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_read@0x14a30	param_2	readDataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::surface_read@0x14a30	param_3	structSize	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_unlock_options@0x14f60	param_2	lockType	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock@0x16430	real_param_1	data	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock@0x16430	param_1	dataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::surface_write_lock@0x16430	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock_int@0x114a0	param_1	bufferIndex	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock_options@0x16470	param_1	lockOptions	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock_options@0x16470	real_param_2	data	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_lock_options@0x16470	param_2	dataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Surface::surface_write_lock_options@0x16470	param_3	size	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_unlock_int@0x11540	param_1	bufferIndex	INFERRED	name from the class header declaration
+def	IOATIR500Surface::surface_write_unlock_options@0x150e0	param_1	options	INFERRED	name from the class header declaration
+def	IOATIR500Surface::update_ref_stamps@0x13fe0	param_1	generation	INFERRED	name from the class header declaration
+def	IOATIR500Surface::update_ref_stamps@0x13fe0	param_2	tag	INFERRED	name from the class header declaration
+
+# --- names derived by reading the bodies and their callers (second pass) ---
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	param_1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+decl	IOATIR500Surface::allocAllSlaveSwapBuffers	param1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+def	IOATIR500Surface::allocAllSlaveSwapBuffers@0x11e50	param_2	swapBufferSize	CONFIRMED	IOBufferMemoryDescriptor::withOptions capacity, stored at panel*0x94+0xcb0, passed to init_swap_buffer_header(header, size)
+decl	IOATIR500Surface::allocAllSlaveSwapBuffers	param2	swapBufferSize	CONFIRMED	IOBufferMemoryDescriptor::withOptions capacity, stored at panel*0x94+0xcb0, passed to init_swap_buffer_header(header, size)
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	param_1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+decl	IOATIR500Surface::allocMasterSwapBuffer	param1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+def	IOATIR500Surface::allocMasterSwapBuffer@0x118e0	param_2	swapBufferSize	CONFIRMED	same use as allocAllSlaveSwapBuffers
+decl	IOATIR500Surface::allocMasterSwapBuffer	param2	swapBufferSize	CONFIRMED	same use as allocAllSlaveSwapBuffers
+def	IOATIR500Surface::alloc_surface_keep@0x13210	param_3	excludeCount	INFERRED	forwarded to freeToAllocSurfaceVRAM in the slot alloc_surfaces_keep calls excludeCount
+decl	IOATIR500Surface::alloc_surface_keep	param3	excludeCount	INFERRED	forwarded to freeToAllocSurfaceVRAM in the slot alloc_surfaces_keep calls excludeCount
+def	IOATIR500Surface::attach_buffer_backing_store@0x12640	param_3	pageOffset	CONFIRMED	stored at record+0x50; connect_buffer_backing_store passes userAddress & (page_size-1)
+decl	IOATIR500Surface::attach_buffer_backing_store	param3	pageOffset	CONFIRMED	stored at record+0x50; connect_buffer_backing_store passes userAddress & (page_size-1)
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_2	index	CONFIRMED	unread here; ATIR500Surface::buffer_map_offset (same vtable slot) names it index
+decl	IOATIR500Surface::buffer_map_offset	a	index	CONFIRMED	unread here; ATIR500Surface::buffer_map_offset (same vtable slot) names it index
+def	IOATIR500Surface::buffer_map_offset@0x14010	param_3	level	CONFIRMED	unread here; ATIR500Surface::buffer_map_offset (same vtable slot) names it level (mip level)
+decl	IOATIR500Surface::buffer_map_offset	b	level	CONFIRMED	unread here; ATIR500Surface::buffer_map_offset (same vtable slot) names it level (mip level)
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	param_2	userAddress	CONFIRMED	page-aligned for IOMemoryDescriptor::withAddress in the caller task; low bits become the page offset
+decl	IOATIR500Surface::connect_buffer_backing_store	param2	userAddress	CONFIRMED	page-aligned for IOMemoryDescriptor::withAddress in the caller task; low bits become the page offset
+def	IOATIR500Surface::connect_buffer_backing_store@0x12800	param_3	pitch	CONFIRMED	length = height(+0x1e) * param + page offset; passed on as the attached record pitch
+decl	IOATIR500Surface::connect_buffer_backing_store	param3	pitch	CONFIRMED	length = height(+0x1e) * param + page offset; passed on as the attached record pitch
+def	IOATIR500Surface::flush_surface@0x10fa0	param_1	panelMask	CONFIRMED	tested as (1 << panel) & param for each panel below the accelerator panel count; 2D context passes 0xffffffff
+decl	IOATIR500Surface::flush_surface	param1	panelMask	CONFIRMED	tested as (1 << panel) & param for each panel below the accelerator panel count; 2D context passes 0xffffffff
+def	IOATIR500Surface::flush_surface@0x10fa0	param_2	swapArg	INFERRED	passed through to submit_swap_buffer(panel, param)
+decl	IOATIR500Surface::flush_surface	param2	swapArg	INFERRED	passed through to submit_swap_buffer(panel, param)
+def	IOATIR500Surface::surface_flush@0x14e70	param_1	panelMask	CONFIRMED	forwarded to flush_surface
+decl	IOATIR500Surface::surface_flush	param1	panelMask	CONFIRMED	forwarded to flush_surface
+def	IOATIR500Surface::surface_flush@0x14e70	param_2	swapArg	INFERRED	forwarded to flush_surface
+decl	IOATIR500Surface::surface_flush	param2	swapArg	INFERRED	forwarded to flush_surface
+def	IOATIR500Surface::freeAllSwapBuffers@0x10860	param_1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+decl	IOATIR500Surface::freeAllSwapBuffers	param1	panel	CONFIRMED	per-panel tables are indexed panel*0x94 (also in ATIR500Surface::SubmitSwapBuffer, which names it panel)
+def	IOATIR500Surface::surface_buffer_idx_mask@0x13ac0	param_1	bufferType	INFERRED	callers pass the +0x58 field of a texture/buffer descriptor; the function switches on it
+decl	IOATIR500Surface::surface_buffer_idx_mask	param1	bufferType	INFERRED	callers pass the +0x58 field of a texture/buffer descriptor; the function switches on it
+def	IOATIR500Surface::surface_buffer_idx_mask@0x13ac0	param_2	outMask	CONFIRMED	written with single-bit masks (1,2,4,8,0x10,0x20,0x40,0x80,0x100)
+decl	IOATIR500Surface::surface_buffer_idx_mask	outParam	outMask	CONFIRMED	written with single-bit masks (1,2,4,8,0x10,0x20,0x40,0x80,0x100)
+def	IOATIR500Surface::surface_lock_options@0x15d30	param_3	lockOptions	CONFIRMED	the surface_*_lock_options external methods forward their lockOptions here; masked & 3
+decl	IOATIR500Surface::surface_lock_options	param2	lockOptions	CONFIRMED	the surface_*_lock_options external methods forward their lockOptions here; masked & 3
+def	IOATIR500Surface::surface_unlock_options@0x14f60	param_3	unlockOptions	INFERRED	the surface_*_unlock_options external methods forward their options here
+decl	IOATIR500Surface::surface_unlock_options	param2	unlockOptions	INFERRED	the surface_*_unlock_options external methods forward their options here
+def	IOATIR500Surface::surface_write_lock_int@0x114a0	param_2	outAddress	INFERRED	receives record+8, the address surface_lock_options returns in data[0]
+decl	IOATIR500Surface::surface_write_lock_int	outParam2	outAddress	INFERRED	receives record+8, the address surface_lock_options returns in data[0]
+def	IOATIR500Surface::surface_write_lock_int@0x114a0	param_3	outPitch	INFERRED	receives the UInt16 at record+0x18, the pitch surface_lock_options returns in data[4]
+decl	IOATIR500Surface::surface_write_lock_int	outParam3	outPitch	INFERRED	receives the UInt16 at record+0x18, the pitch surface_lock_options returns in data[4]
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_4	backingAddress	CONFIRMED	shape-backing wire arguments: connect_buffer_backing_store(buffer, address, pitch); the Phase S tests call set_shape_backing as (address, pitch 64) to connect and (0, 0) to disconnect
+decl	IOATIR500Surface::set_shape_backing_length_ext	param3	backingAddress	CONFIRMED	shape-backing wire arguments: connect_buffer_backing_store(buffer, address, pitch); the Phase S tests call set_shape_backing as (address, pitch 64) to connect and (0, 0) to disconnect
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_5	backingPitch	CONFIRMED	shape-backing wire arguments: connect_buffer_backing_store(buffer, address, pitch); the Phase S tests call set_shape_backing as (address, pitch 64) to connect and (0, 0) to disconnect; 0xffffffff means no backing store
+decl	IOATIR500Surface::set_shape_backing_length_ext	param4	backingPitch	CONFIRMED	shape-backing wire arguments: connect_buffer_backing_store(buffer, address, pitch); the Phase S tests call set_shape_backing as (address, pitch 64) to connect and (0, 0) to disconnect; 0xffffffff means no backing store
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_7	regionSize	CONFIRMED	must equal region->count*8+0xc or 0 (then computed); IOMallocAligned size of the per-panel region copy
+decl	IOATIR500Surface::set_shape_backing_length_ext	param6	regionSize	CONFIRMED	must equal region->count*8+0xc or 0 (then computed); IOMallocAligned size of the per-panel region copy
+def	IOATIR500Surface::set_shape_backing_length_ext@0x152d0	param_8	backingLength	CONFIRMED	stored at this+0xd4c, the length connect_buffer_backing_store maps; set_shape_backing_length checks pitch*height <= it
+decl	IOATIR500Surface::set_shape_backing_length_ext	param7	backingLength	CONFIRMED	stored at this+0xd4c, the length connect_buffer_backing_store maps; set_shape_backing_length checks pitch*height <= it
+def	IOATIR500Surface::set_shape_backing	param2	id	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing	param2	id	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing	param3	backingAddress	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing	param3	backingAddress	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing	param4	backingPitch	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing	param4	backingPitch	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing	param6	regionSize	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing	param6	regionSize	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing_length	param2	id	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing_length	param2	id	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing_length	param3	backingAddress	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing_length	param3	backingAddress	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing_length	param4	backingPitch	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing_length	param4	backingPitch	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape_backing_length	param5	backingLength	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+decl	IOATIR500Surface::set_shape_backing_length	param5	backingLength	CONFIRMED	forwards to set_shape_backing_length_ext in that parameter slot
+def	IOATIR500Surface::set_shape	param4	regionSize	CONFIRMED	forwarded to set_shape_backing_length_ext as its regionSize
+decl	IOATIR500Surface::set_shape	param4	regionSize	CONFIRMED	forwarded to set_shape_backing_length_ext as its regionSize
+def	IOATIR500Surface::set_scale	param3	scalingSize	CONFIRMED	accepted values 0 or 0x2c (sizeof IOAccelSurfaceScaling); non-zero means scaling is supplied
+decl	IOATIR500Surface::set_scale	param3	scalingSize	CONFIRMED	accepted values 0 or 0x2c (sizeof IOAccelSurfaceScaling); non-zero means scaling is supplied
+def	IOATIR500Surface::surface_read_unlock_options	param1	unlockOptions	CONFIRMED	forwarded to surface_unlock_options(read, param)
+decl	IOATIR500Surface::surface_read_unlock_options	param1	unlockOptions	CONFIRMED	forwarded to surface_unlock_options(read, param)

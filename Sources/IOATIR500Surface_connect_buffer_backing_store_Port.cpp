@@ -28,26 +28,26 @@ extern "C" UInt32 GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(.
 
 
 /* real addr 0x12800 */
-bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *real_param_1, unsigned int param_2, UInt32 param_3) {
+bool IOATIR500Surface::connect_buffer_backing_store(ATIR500SurfaceBuffer *buffer, unsigned int userAddress, UInt32 pitch) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   UInt8 *pIVar1;
   UInt32 uVar2;
   UInt32 uVar3;
   
-  uVar3 = GH_page_size - 1U & param_2;
-  uVar2 = -GH_page_size & (GH_page_size + M<UInt16>(param_1 + 0x1e) * param_3 + uVar3) - 1
+  uVar3 = GH_page_size - 1U & userAddress;
+  uVar2 = -GH_page_size & (GH_page_size + M<UInt16>(bufferBytes + 0x1e) * pitch + uVar3) - 1
   ;
   if (M<UInt32>(self + 0xd4c) != 0) {
     uVar2 = M<UInt32>(self + 0xd4c);
   }
   pIVar1 = (UInt8 *)
-           GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(param_2 & -GH_page_size,uVar2,0x10003,M<UInt32>(self + 0x78));
+           GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(userAddress & -GH_page_size,uVar2,0x10003,M<UInt32>(self + 0x78));
   if (pIVar1 != (UInt8 *)0x0) {
     VCALL(M<SInt32>(pIVar1), 0xdc)(pIVar1,2,0);
-    this->attach_buffer_backing_store((ATIR500SurfaceBuffer *)(param_1),(IOMemoryDescriptor *)(pIVar1),uVar3,param_3);
-    M<UInt8>(M<SInt32>(param_1 + 0x24) + 0x59) = 1;
+    this->attach_buffer_backing_store((ATIR500SurfaceBuffer *)(bufferBytes),(IOMemoryDescriptor *)(pIVar1),uVar3,pitch);
+    M<UInt8>(M<SInt32>(bufferBytes + 0x24) + 0x59) = 1;
   }
   return pIVar1 != (UInt8 *)0x0;
 }

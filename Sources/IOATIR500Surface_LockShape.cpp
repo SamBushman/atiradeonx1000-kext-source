@@ -82,14 +82,14 @@ extern "C" void FUN_00015aa4(void *lockPtr) asm("_IOLockLock");
 extern "C" void FUN_00015a84(void *lockPtr) asm("_IOLockUnlock");
 
 
-IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 param3) {
-    if (param3 != 0 && param3 != 0x2c) {
+IOReturn IOATIR500Surface::set_scale(UInt32 flags, IOAccelSurfaceScaling *scaling, UInt32 scalingSize) {
+    if (scalingSize != 0 && scalingSize != 0x2c) {
         return 0xe00002c2; /* real: kIOReturnBadArgument-family literal, same constant used elsewhere in this project */
     }
 
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *accel = *reinterpret_cast<UInt8 **>(self + 0xd50);
-    bool passedScaling = (param3 != 0); /* real: `bVar2` gate, INFERRED role from the real decompile's own inverted-bit encoding */
+    bool passedScaling = (scalingSize != 0); /* real: `bVar2` gate, INFERRED role from the real decompile's own inverted-bit encoding */
 
     FUN_00015aa4(*reinterpret_cast<void **>(accel + 0x840));
     IOReturn result = set_scaling(flags, passedScaling ? scaling : nullptr);
@@ -435,27 +435,27 @@ extern "C" void FUN_00015870(void *lockPtr) asm("_IOLockUnlock");
  * `region` - real evidence this project's transcription order below
  * matters and was checked, not assumed).
  */
-IOReturn IOATIR500Surface::set_shape_backing_length(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3,
-                                                      UInt32 param4, UInt32 param5,
+IOReturn IOATIR500Surface::set_shape_backing_length(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, unsigned int backingAddress,
+                                                      UInt32 backingPitch, UInt32 backingLength,
                                                       IOAccelDeviceRegion *region) {
-    if (param4 != 0xffffffffu) {
+    if (backingPitch != 0xffffffffu) {
         UInt16 dim = *reinterpret_cast<UInt16 *>(reinterpret_cast<UInt8 *>(region) + 0xa);
-        if (param5 < param4 * static_cast<UInt32>(dim)) {
+        if (backingLength < backingPitch * static_cast<UInt32>(dim)) {
             return 0xe00002bc;
         }
     }
-    return set_shape_backing_length_ext(shapeBits, param2, param3, param4, region, 0, param5);
+    return set_shape_backing_length_ext(shapeBits, id, backingAddress, backingPitch, region, 0, backingLength);
 }
 
 
 
-void IOATIR500Surface::set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UInt32 param2, unsigned int param3, UInt32 param4,
-                                          IOAccelDeviceRegion *region, UInt32 param6) {
+void IOATIR500Surface::set_shape_backing(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, unsigned int backingAddress, UInt32 backingPitch,
+                                          IOAccelDeviceRegion *region, UInt32 regionSize) {
     /* real: discards set_shape_backing_length_ext's own return value -
      * matches this function's real `void` return type (confirmed via the
      * raw disassembly: r3 is never touched again after the call before
      * `blr`, i.e. nothing reads it - not this project's own choice to
      * ignore it). */
-    set_shape_backing_length_ext(shapeBits, param2, param3, param4, region, param6, 0);
+    set_shape_backing_length_ext(shapeBits, id, backingAddress, backingPitch, region, regionSize, 0);
 }
 

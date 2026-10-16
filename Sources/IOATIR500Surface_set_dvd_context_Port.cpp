@@ -27,11 +27,11 @@
 
 
 /* real addr 0x10bc0 */
-void IOATIR500Surface::set_dvd_context(IOATIR500DVDContext *real_param_1) {
+void IOATIR500Surface::set_dvd_context(IOATIR500DVDContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
-  M<UInt8 *>(self + 0x90) = param_1;
-  M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | M<UInt32>(param_1 + 0x88);
+  M<UInt8 *>(self + 0x90) = contextBytes;
+  M<UInt32>(self + 0xc18) = M<UInt32>(self + 0xc18) | M<UInt32>(contextBytes + 0x88);
   return;
 }

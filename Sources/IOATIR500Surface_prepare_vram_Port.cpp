@@ -27,9 +27,9 @@
 
 
 /* real addr 0x110e0 */
-UInt32 IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer *real_param_1) {
+UInt32 IOATIR500Surface::prepare_vram(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   return 1;
 }

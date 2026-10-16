@@ -30,10 +30,10 @@ extern "C" UInt32 GH_bzero(...) asm("_bzero");
 
 
 /* real addr 0x15d30 */
-IOReturn IOATIR500Surface::surface_lock_options(eLockType param_2, UInt32 param_3, IOAccelSurfaceData *real_param_4, UInt32 param_5) {
+IOReturn IOATIR500Surface::surface_lock_options(eLockType lockType, UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    int *param_4 = reinterpret_cast<int *>(real_param_4);
+    int *dataRaw = reinterpret_cast<int *>(data);
 
   bool bVar1;
   bool bVar2;
@@ -48,8 +48,8 @@ IOReturn IOATIR500Surface::surface_lock_options(eLockType param_2, UInt32 param_
   UInt8 bVar11;
   int local_38 [7];
   
-  bVar11 = (param_2 == 1) << 1;
-  GH_bzero(param_4,0x44);
+  bVar11 = (lockType == 1) << 1;
+  GH_bzero(dataRaw,0x44);
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
   if ((bool)(bVar11 >> 1 & 1)) {
     IVar7 = self[0xbd0];
@@ -73,7 +73,7 @@ LAB_00016330:
   }
   if (((((bool)(bVar11 >> 1 & 1)) && ((M<unsigned int>(self + 0xc18) & 0x7ffc00) != 0)) &&
       (M<int>(self + 0x90) != 0)) && (self[0xbf0] != 0x0)) {
-    param_3 = param_3 | 3;
+    lockOptions = lockOptions | 3;
   }
   else if (M<int>(pAVar9 + 0x10) == 0) goto LAB_00016330;
   iVar8 = M<int>(pAVar9 + 0x24);
@@ -81,10 +81,10 @@ LAB_00016330:
   if ((iVar8 == 0) || (bVar2 = true, M<int>(iVar8 + 0x54) != M<int>(self + 0x7c))) {
     bVar2 = false;
   }
-  param_3 = param_3 & 3;
+  lockOptions = lockOptions & 3;
   bVar1 = (uVar6 & uVar3) == 0;
-  if (param_3 == 1) {
-    if ((((param_2 != 2) && (!bVar1)) && (!bVar2)) || (self[0xbf4] == 0x0))
+  if (lockOptions == 1) {
+    if ((((lockType != 2) && (!bVar1)) && (!bVar2)) || (self[0xbf4] == 0x0))
     goto LAB_00015e70;
 LAB_00015ec8:
     self[0xc08] = 0x1;
@@ -92,7 +92,7 @@ LAB_00015ec8:
       iVar10 = 0;
     }
     else {
-      iVar10 = this->alloc_surfaces_retry(uVar3,(eLockType)(param_2));
+      iVar10 = this->alloc_surfaces_retry(uVar3,(eLockType)(lockType));
       if (iVar10 != 0) {
 LAB_00016344:
         bVar2 = false;
@@ -100,8 +100,8 @@ LAB_00016344:
         goto LAB_00016360;
       }
     }
-    param_4[4] = (unsigned int)M<UInt16>(pAVar9 + 0x18);
-    *param_4 = M<int>(pAVar9 + 8) + M<int>(self + 0xc0c);
+    dataRaw[4] = (unsigned int)M<UInt16>(pAVar9 + 0x18);
+    *dataRaw = M<int>(pAVar9 + 8) + M<int>(self + 0xc0c);
     VCALL(M<int>(self), 0x5fc)(self,pAVar9);
     if ((bool)(bVar11 >> 1 & 1)) {
       bVar2 = false;
@@ -121,14 +121,14 @@ LAB_00016344:
     }
   }
   else {
-    if (param_3 == 0) {
-      if (((param_2 == 2) || (bVar1)) || (bVar2)) goto LAB_00015fe4;
+    if (lockOptions == 0) {
+      if (((lockType == 2) || (bVar1)) || (bVar2)) goto LAB_00015fe4;
     }
     else {
-      if (param_3 == 2) {
+      if (lockOptions == 2) {
         if ((!bVar2) || (M<char>(iVar8 + 0x58) == '\0')) {
           if ((bVar1) && (self[0xbf4] != 0x0)) goto LAB_00015ec8;
-          if (((param_2 != 2) && (!bVar1)) && (!bVar2)) goto LAB_00015e70;
+          if (((lockType != 2) && (!bVar1)) && (!bVar2)) goto LAB_00015e70;
         }
 LAB_00015fe4:
         if ((self[0xbf7] == 0x0) || (self[0xc08] != 0x0))
@@ -189,7 +189,7 @@ LAB_000160c4:
             else {
               self[0xbd1] = 0x3;
             }
-            iVar10 = this->alloc_surfaces_retry(uVar3,(eLockType)(param_2));
+            iVar10 = this->alloc_surfaces_retry(uVar3,(eLockType)(lockType));
             if ((bool)(bVar11 >> 1 & 1)) {
               self[0xbd0] = 0x0;
             }
@@ -205,7 +205,7 @@ LAB_000160c4:
           if (((iVar8 == 0) || (M<int>(iVar8 + 0x54) != M<int>(self + 0x7c))) ||
              (bVar2 = false, M<char>(iVar8 + 0x58) == '\0')) goto LAB_00016174;
         }
-        if (param_2 == 2) {
+        if (lockType == 2) {
           VCALL(M<int>(self), 0x5cc)
                     (self,((int)pAVar9 - (int)(self + 0xa8) >> 3) * -0x11111111);
         }
@@ -227,13 +227,13 @@ LAB_00016350:
             iVar8 = M<int>(pAVar9 + 0x24);
           }
         }
-        param_4[4] = (unsigned int)M<UInt16>(iVar8 + 0x52);
+        dataRaw[4] = (unsigned int)M<UInt16>(iVar8 + 0x52);
         iVar8 = VCALL(*M<int *>(M<int>(pAVar9 + 0x24) + 0x10), 0xd0)(M<int *>(M<int>(pAVar9 + 0x24) + 0x10));
         IVar7 = 0x3;
-        *param_4 = iVar8 + (unsigned int)M<UInt16>(M<int>(pAVar9 + 0x24) + 0x50);
+        *dataRaw = iVar8 + (unsigned int)M<UInt16>(M<int>(pAVar9 + 0x24) + 0x50);
         goto LAB_00015e7c;
       }
-      if (param_3 != 3) {
+      if (lockOptions != 3) {
         bVar2 = false;
         IVar7 = 0x0;
         iVar10 = -0x1ffffd3e;
@@ -246,26 +246,26 @@ LAB_00015e70:
     IVar7 = 0x2;
   }
 LAB_00015e7c:
-  param_4[5] = (unsigned int)M<UInt16>(pAVar9 + 0x1c);
-  param_4[6] = (unsigned int)M<UInt16>(pAVar9 + 0x1e);
+  dataRaw[5] = (unsigned int)M<UInt16>(pAVar9 + 0x1c);
+  dataRaw[6] = (unsigned int)M<UInt16>(pAVar9 + 0x1e);
   uVar6 = M<unsigned int>(self + 0xbe8) & 0xf;
-  param_4[7] = uVar6;
+  dataRaw[7] = uVar6;
   if (uVar6 == 6) {
-    param_4[7] = 0x79757673;
+    dataRaw[7] = 0x79757673;
   }
   else if (uVar6 == 9) {
-    param_4[7] = 0x32767579;
+    dataRaw[7] = 0x32767579;
   }
   else if (uVar6 == 10) {
-    param_4[7] = 4;
+    dataRaw[7] = 4;
   }
-  param_4[8] = M<int>(self + 0xd70);
-  param_4[0xd] = M<int>(self + 0xd74);
-  param_4[0xe] = M<int>(self + 0xd78);
-  param_4[0xf] = M<int>(self + 0xd7c);
+  dataRaw[8] = M<int>(self + 0xd70);
+  dataRaw[0xd] = M<int>(self + 0xd74);
+  dataRaw[0xe] = M<int>(self + 0xd78);
+  dataRaw[0xf] = M<int>(self + 0xd7c);
   iVar8 = M<int>(self + 0xd80);
-  param_4[9] = 0x1cccc;
-  param_4[0x10] = iVar8;
+  dataRaw[9] = 0x1cccc;
+  dataRaw[0x10] = iVar8;
 LAB_00016360:
   if ((bool)(bVar11 >> 1 & 1)) {
     self[0xbd0] = IVar7;

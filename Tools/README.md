@@ -44,3 +44,9 @@ and the drivers in `userspace/pipeline/` (Stage B2 of its README).
 | `opcode_inventory.py` -> `Tests/pm4_opcode_inventory.json` (`--json`) | opcodes the stock `process_command_buffer` of each context compares against (Capstone over the stock kext; GL 66, DVD 62, 2D 17) |
 | `userspace/opcode_recorder.c` (+ `userspace/run_opcode_workloads.sh`) | `DYLD_INSERT_LIBRARIES` interposer: tallies the opcodes in the command buffers a process submits (flush-map = submit); passive, fault-safe, periodic TOTAL snapshots |
 | `opcode_usage.py --inventory Tests/pm4_opcode_inventory.json` | merges recorder logs per workload and compares with the inventory (coverage, observed-not-in-inventory, never-observed, anomalies); raw logs in `Tests/baseline/opcode/` |
+
+### Naming (placeholder names -> real names)
+| tool | purpose |
+|---|---|
+| `apply_renames.py` + `renames/<Class>.tsv` | the remap table: `def` rows rename an identifier inside one function definition (Sources), `decl` rows rename a parameter in a header declaration; each row has a tier (CONFIRMED / INFERRED / UNKNOWN) and an evidence note. The mechanically ported `*_Port.cpp` files are regenerated from the Ghidra decompile, so names are never edited in them by hand: `replace_fn.py` re-applies the table after every re-port, and `apply_renames.py --check` reports rows not yet applied. A rename whose new name collides with a code identifier in the function is refused |
+| `verify_identical_build.sh [host] [rev]` | builds the kext from `rev` (default HEAD) and from the working tree on a Tiger machine and compares the binaries byte for byte (gcc's per-build anonymous-namespace hashes are masked). A rename must print `IDENTICAL` |

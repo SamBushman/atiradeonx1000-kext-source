@@ -27,17 +27,17 @@
 
 
 /* real addr 0x13360 */
-bool IOATIR500Surface::alloc_surface(UInt32 param_1, bool param_2) {
+bool IOATIR500Surface::alloc_surface(UInt32 index, bool moveFromBacking) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
   UInt32 in_register_00000014;
   UInt8 *pAVar2;
   
-  pAVar2 = (UInt8 *)(self + param_1 * 0x78 + 0xa8);
-  if ((M<SInt32>(self + param_1 * 0x78 + 0xb8) == 0) || (M<SInt32>(self + param_1 * 0x78 + 0xb0) != 0)
+  pAVar2 = (UInt8 *)(self + index * 0x78 + 0xa8);
+  if ((M<SInt32>(self + index * 0x78 + 0xb8) == 0) || (M<SInt32>(self + index * 0x78 + 0xb0) != 0)
      ) {
-    if (M<SInt32>(self + param_1 * 0x78 + 0xcc) == 0) goto LAB_00013448;
+    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
   }
   else {
     iVar1 = VCALL(M<SInt32>(self), 0x5d0)(self,pAVar2);
@@ -46,11 +46,11 @@ bool IOATIR500Surface::alloc_surface(UInt32 param_1, bool param_2) {
                            (VendorTextureBuffer **)((UInt8 **)0x0),0,(ATIR500SurfaceBuffer *)(pAVar2)), iVar1 == 0)) {
       return 0;
     }
-    if ((3U >> (param_1 & 0x3f) & 1) != 0) {
+    if ((3U >> (index & 0x3f) & 1) != 0) {
       M<UInt32>(self + 0xbf8) = M<UInt32>(self + 0xbf8) | 0x10000000;
     }
-    if (M<SInt32>(self + param_1 * 0x78 + 0xcc) == 0) goto LAB_00013448;
-    if (((UInt32)param_2) != 0) {
+    if (M<SInt32>(self + index * 0x78 + 0xcc) == 0) goto LAB_00013448;
+    if (((UInt32)moveFromBacking) != 0) {
       this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
       goto LAB_00013448;
     }
@@ -58,6 +58,6 @@ bool IOATIR500Surface::alloc_surface(UInt32 param_1, bool param_2) {
   this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
 LAB_00013448:
   M<UInt32>(self + 0xbf8) =
-       (-2 << (param_1 & 0x1f) | 0xfffffffeU >> 0x20 - (param_1 & 0x1f)) & M<UInt32>(self + 0xbf8);
+       (-2 << (index & 0x1f) | 0xfffffffeU >> 0x20 - (index & 0x1f)) & M<UInt32>(self + 0xbf8);
   return 1;
 }

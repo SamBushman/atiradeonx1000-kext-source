@@ -27,35 +27,35 @@
 
 
 /* real addr 0x13210 */
-bool IOATIR500Surface::alloc_surface_keep(IOATIR500Surface *real_param_1, VendorTextureBuffer**param_2, SInt32 param_3, UInt32 param_4) {
+bool IOATIR500Surface::alloc_surface_keep(IOATIR500Surface *other, VendorTextureBuffer**texture, SInt32 excludeCount, UInt32 index) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *otherBytes = reinterpret_cast<UInt8 *>(other);
 
   SInt32 iVar1;
   UInt8 *pAVar2;
   
-  pAVar2 = (UInt8 *)(self + param_4 * 0x78 + 0xa8);
-  if ((M<SInt32>(self + param_4 * 0x78 + 0xb8) == 0) || (M<SInt32>(self + param_4 * 0x78 + 0xb0) != 0)
+  pAVar2 = (UInt8 *)(self + index * 0x78 + 0xa8);
+  if ((M<SInt32>(self + index * 0x78 + 0xb8) == 0) || (M<SInt32>(self + index * 0x78 + 0xb0) != 0)
      ) {
-    if (M<SInt32>(self + param_4 * 0x78 + 0xcc) != 0) {
+    if (M<SInt32>(self + index * 0x78 + 0xcc) != 0) {
       this->free_buffer_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
     }
   }
   else {
     iVar1 = VCALL(M<SInt32>(self), 0x5d0)(self,pAVar2);
     if ((iVar1 == 0) &&
-       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)(param_1),(VendorTextureBuffer **)(param_2),param_3,
+       (iVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeToAllocSurfaceVRAM((IOATIR500Surface *)(self),(IOATIR500Surface *)(otherBytes),(VendorTextureBuffer **)(texture),excludeCount,
                            (ATIR500SurfaceBuffer *)(pAVar2)), iVar1 == 0)) {
       return 0;
     }
-    if ((3U >> (param_4 & 0x3f) & 1) != 0) {
+    if ((3U >> (index & 0x3f) & 1) != 0) {
       M<UInt32>(self + 0xbf8) = M<UInt32>(self + 0xbf8) | 0x10000000;
     }
-    if (M<SInt32>(self + param_4 * 0x78 + 0xcc) != 0) {
+    if (M<SInt32>(self + index * 0x78 + 0xcc) != 0) {
       this->move_buffer_from_backing_store((ATIR500SurfaceBuffer *)(pAVar2));
     }
   }
   M<UInt32>(self + 0xbf8) =
-       (-2 << (param_4 & 0x1f) | 0xfffffffeU >> 0x20 - (param_4 & 0x1f)) & M<UInt32>(self + 0xbf8);
+       (-2 << (index & 0x1f) | 0xfffffffeU >> 0x20 - (index & 0x1f)) & M<UInt32>(self + 0xbf8);
   return 1;
 }

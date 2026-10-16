@@ -27,9 +27,9 @@
 
 
 /* real addr 0x11540 */
-void IOATIR500Surface::surface_write_unlock_int(UInt32 param_1) {
+void IOATIR500Surface::surface_write_unlock_int(UInt32 bufferIndex) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  VCALL(M<SInt32>(self), 0x600)(self,M<UInt32>(self + param_1 * 4 + 0xb70));
+  VCALL(M<SInt32>(self), 0x600)(self,M<UInt32>(self + bufferIndex * 4 + 0xb70));
   return;
 }

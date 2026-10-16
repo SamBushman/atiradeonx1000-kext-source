@@ -29,7 +29,7 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x15b70 */
-void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState param_2) {
+void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState state) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   int iVar1;
@@ -37,8 +37,8 @@ void IOATIR500Surface::set_volatile_state(eSurfaceVolatileState param_2) {
   int iVar3;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));
-  M<int>(self + 0xd48) = param_2;
-  if (param_2 == 1) {
+  M<int>(self + 0xd48) = state;
+  if (state == 1) {
     iVar2 = M<int>(self + 0xd50);
     if (self != M<UInt8 *>(iVar2 + 0x5c)) {
       iVar3 = M<int>(self + 0x9c);

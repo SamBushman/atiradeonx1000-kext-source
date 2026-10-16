@@ -27,13 +27,13 @@
 
 
 /* real addr 0x12df0 */
-UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *real_param_1) {
+UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   UInt8 *pIVar1;
   
-  pIVar1 = M<UInt8 *>(param_1 + 0x24);
+  pIVar1 = M<UInt8 *>(bufferBytes + 0x24);
   if (pIVar1[0x59] == 0x0) {
     if ((M<SInt32>(pIVar1 + 0x10) == 0) || (M<SInt32>(self + 0xd8c) != 0)) {
       this->delete_buffer_backing((IOTextureBuffer *)(pIVar1));
@@ -41,7 +41,7 @@ UInt32 IOATIR500Surface::free_buffer_backing_store(ATIR500SurfaceBuffer *real_pa
     else {
       M<UInt8 *>(self + 0xd8c) = pIVar1;
     }
-    M<UInt32>(param_1 + 0x24) = 0;
+    M<UInt32>(bufferBytes + 0x24) = 0;
   }
   return 1;
 }

@@ -27,9 +27,9 @@
 
 
 /* real addr 0x12a00 */
-UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *real_param_1) {
+UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   SInt32 iVar1;
   UInt16 uVar3;
@@ -43,29 +43,29 @@ UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *re
   UInt32 local_38;
   UInt32 local_34 [6];
   
-  if (M<SInt32>(M<SInt32>(param_1 + 0x24) + 0x54) == M<SInt32>(self + 0x7c)) {
+  if (M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x54) == M<SInt32>(self + 0x7c)) {
     M<SInt32>(M<SInt32>(self + 0xd50) + 0x724) =
-         M<SInt32>(M<SInt32>(self + 0xd50) + 0x724) + M<SInt32>(param_1 + 0x10);
-    uVar6 = (UInt32)M<UInt16>(param_1 + 0x20);
+         M<SInt32>(M<SInt32>(self + 0xd50) + 0x724) + M<SInt32>(bufferBytes + 0x10);
+    uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
     iVar7 = M<SInt32>(self + 0x7c);
     iVar1 = M<SInt32>(M<SInt32>(self + 0xd50) + 0x50);
     if (uVar6 != 0) {
-      uVar3 = M<UInt16>(param_1 + 0x22);
+      uVar3 = M<UInt16>(bufferBytes + 0x22);
       uVar8 = 0;
       do {
         if (uVar3 != 0) {
           uVar6 = 0;
           do {
-            VCALL(M<SInt32>(self), 0x5f0)(self,param_1,uVar8,uVar6,&local_38,local_34,0);
+            VCALL(M<SInt32>(self), 0x5f0)(self,bufferBytes,uVar8,uVar6,&local_38,local_34,0);
             uVar9 = uVar6 + 1;
             VCALL(M<SInt32>(self), 0x5ec)
-                      (self,0,0,local_38,local_34[0],uVar8,uVar6,param_1,iVar1 + -1,0,0,0,1);
-            M<UInt32>(M<SInt32>(M<SInt32>(param_1 + 0x24) + 0x14) + 8) =
+                      (self,0,0,local_38,local_34[0],uVar8,uVar6,bufferBytes,iVar1 + -1,0,0,0,1);
+            M<UInt32>(M<SInt32>(M<SInt32>(bufferBytes + 0x24) + 0x14) + 8) =
                  M<UInt32>(self + 0x7c);
-            uVar3 = M<UInt16>(param_1 + 0x22);
+            uVar3 = M<UInt16>(bufferBytes + 0x22);
             uVar6 = uVar9;
           } while (uVar9 < uVar3);
-          uVar6 = (UInt32)M<UInt16>(param_1 + 0x20);
+          uVar6 = (UInt32)M<UInt16>(bufferBytes + 0x20);
         }
         uVar8 = uVar8 + 1;
       } while (uVar8 < uVar6);
@@ -83,8 +83,8 @@ UInt32 IOATIR500Surface::copy_buffer_from_backing_store(ATIR500SurfaceBuffer *re
   }
   if ((((self[0xc09] == 0x0) && ((M<UInt32>(self + 0xbd0) & 0xffff0000) == 0)) &&
       (self[0xc08] == 0x0)) &&
-     (((self[0xbf7] != 0x0 && (M<SInt32>(param_1 + 0x24) != 0)) &&
-      (piVar4 = M<SInt32 *>(M<SInt32>(param_1 + 0x24) + 8), piVar4 != (SInt32 *)0x0)))) {
+     (((self[0xbf7] != 0x0 && (M<SInt32>(bufferBytes + 0x24) != 0)) &&
+      (piVar4 = M<SInt32 *>(M<SInt32>(bufferBytes + 0x24) + 8), piVar4 != (SInt32 *)0x0)))) {
     VCALL(*piVar4, 0xdc)(piVar4,3,0);
   }
   return 1;

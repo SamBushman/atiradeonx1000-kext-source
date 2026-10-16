@@ -29,20 +29,20 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x141b0 */
-IOReturn IOATIR500Surface::clientMemoryForType(UInt32 param_1, UInt32*param_2, IOMemoryDescriptor**param_3) {
+IOReturn IOATIR500Surface::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
   UInt8 *pIVar2;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
-  if (param_1 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc)) {
-    pIVar2 = M<UInt8 *>(self + param_1 * 0x94 + 0xc28);
+  if (type < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc)) {
+    pIVar2 = M<UInt8 *>(self + type * 0x94 + 0xc28);
     VCALL(M<SInt32>(pIVar2), 0x14)(pIVar2);
-    *param_2 = 0;
-    *param_3 = (IOMemoryDescriptor *)pIVar2;
-    this->init_swap_buffer_header((VendorSwapBufferHeader *)(M<VendorSwapBufferHeader *>(self + param_1 * 0x94 + 0xc34)),
-               M<UInt32>(self + param_1 * 0x94 + 0xcb0));
+    *options = 0;
+    *memory = (IOMemoryDescriptor *)pIVar2;
+    this->init_swap_buffer_header((VendorSwapBufferHeader *)(M<VendorSwapBufferHeader *>(self + type * 0x94 + 0xc34)),
+               M<UInt32>(self + type * 0x94 + 0xcb0));
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
     uVar1 = 0;
   }

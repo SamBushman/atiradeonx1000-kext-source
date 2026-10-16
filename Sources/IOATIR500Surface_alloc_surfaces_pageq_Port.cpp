@@ -27,7 +27,7 @@
 
 
 /* real addr 0x12110 */
-UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 param_2, UInt32 param_3, bool param_4) {
+UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 mask, UInt32 keepMask, bool unused) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
@@ -45,7 +45,7 @@ UInt32 IOATIR500Surface::alloc_surfaces_pageq(UInt32 param_2, UInt32 param_3, bo
   UInt32 uVar11;
   
   this->invalidate_contexts();
-  uVar8 = param_2 & M<unsigned int>(self + 0xbf8);
+  uVar8 = mask & M<unsigned int>(self + 0xbf8);
   if (uVar8 == 0) {
 LAB_000122dc:
     uVar5 = 0;
@@ -57,7 +57,7 @@ LAB_000122dc:
       uVar3 = 1 << (uVar10 & 0x3f);
       if ((uVar8 & uVar3) != 0) {
         uVar3 = VCALL(M<int>(self), 0x5f4)
-                          (self,uVar10,(((UInt32)param_3) & uVar3) == 0);
+                          (self,uVar10,(((UInt32)keepMask) & uVar3) == 0);
         uVar7 = uVar7 & uVar3;
       }
       uVar10 = uVar10 + 1;
@@ -93,7 +93,7 @@ LAB_000122dc:
       iVar9 = iVar9 + 1;
     } while (bVar2);
     if (bVar4) {
-      uVar8 = param_2 & M<unsigned int>(self + 0xbf8);
+      uVar8 = mask & M<unsigned int>(self + 0xbf8);
       if (uVar8 == 0) goto LAB_000122dc;
       uVar10 = 0;
       uVar7 = 1;
@@ -101,7 +101,7 @@ LAB_000122dc:
         uVar3 = 1 << (uVar10 & 0x3f);
         if ((uVar8 & uVar3) != 0) {
           uVar3 = VCALL(M<int>(self), 0x5f4)
-                            (self,uVar10,(uVar3 & ((UInt32)param_3)) == 0);
+                            (self,uVar10,(uVar3 & ((UInt32)keepMask)) == 0);
           uVar7 = uVar7 & uVar3;
         }
         uVar10 = uVar10 + 1;

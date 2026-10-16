@@ -27,25 +27,25 @@
 
 
 /* real addr 0x14010 */
-SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *real_param_1, UInt32 param_2, UInt32 param_3, SInt32*param_4, SInt32*param_5, SInt32*param_6) {
+SInt32 IOATIR500Surface::buffer_map_offset(ATIR500SurfaceBuffer *buffer, UInt32 index, UInt32 level, SInt32*w, SInt32*h, SInt32*bytes) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   UInt16 uVar1;
   UInt16 uVar2;
   UInt16 uVar3;
   
-  uVar1 = M<UInt16>(param_1 + 0x14);
-  uVar2 = M<UInt16>(param_1 + 0x16);
-  uVar3 = M<UInt16>(param_1 + 0x1e);
-  if (param_4 != (long *)0x0) {
-    *param_4 = (UInt32)M<UInt16>(param_1 + 0x1c);
+  uVar1 = M<UInt16>(bufferBytes + 0x14);
+  uVar2 = M<UInt16>(bufferBytes + 0x16);
+  uVar3 = M<UInt16>(bufferBytes + 0x1e);
+  if (w != (long *)0x0) {
+    *w = (UInt32)M<UInt16>(bufferBytes + 0x1c);
   }
-  if (param_5 != (long *)0x0) {
-    *param_5 = (UInt32)uVar3;
+  if (h != (long *)0x0) {
+    *h = (UInt32)uVar3;
   }
-  if (param_6 != (long *)0x0) {
-    *param_6 = (UInt32)uVar2 * (UInt32)uVar1;
+  if (bytes != (long *)0x0) {
+    *bytes = (UInt32)uVar2 * (UInt32)uVar1;
   }
   return 0;
 }

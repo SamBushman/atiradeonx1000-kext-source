@@ -94,8 +94,8 @@ IOReturn IOATIR500Surface::surface_read_unlock() {
  * complete, one-line thin forward; real return value propagated per the
  * same tail-call-passthrough reasoning as surface_read_lock/unlock above.
  */
-IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
-    return surface_unlock_options(static_cast<eLockType>(1), param1);
+IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 unlockOptions) {
+    return surface_unlock_options(static_cast<eLockType>(1), unlockOptions);
 }
 
 
@@ -133,8 +133,8 @@ IOReturn IOATIR500Surface::surface_read_unlock_options(UInt32 param1) {
  * header comment for why this differs from set_shape_backing's own
  * genuinely-void real behavior.
  */
-IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 param4) {
-    return set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffffu, region, param4, 0);
+IOReturn IOATIR500Surface::set_shape(eIOAccelSurfaceShapeBits shapeBits, UInt32 id, IOAccelDeviceRegion *region, UInt32 regionSize) {
+    return set_shape_backing_length_ext(shapeBits, id, 0, 0xffffffffu, region, regionSize, 0);
 }
 
 

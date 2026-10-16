@@ -27,26 +27,26 @@
 
 
 /* real addr 0x13e30 */
-void IOATIR500Surface::remove_2d_context_from_list(IOATIR5002DContext *real_param_1) {
+void IOATIR500Surface::remove_2d_context_from_list(IOATIR5002DContext *context) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *contextBytes = reinterpret_cast<UInt8 *>(context);
 
   UInt8 *pIVar1;
   UInt8 *pIVar2;
   
   pIVar1 = M<UInt8 *>(self + 0x8c);
-  if (M<UInt8 *>(self + 0x8c) == param_1) {
-    M<UInt32>(self + 0x8c) = M<UInt32>(param_1 + 0x84);
+  if (M<UInt8 *>(self + 0x8c) == contextBytes) {
+    M<UInt32>(self + 0x8c) = M<UInt32>(contextBytes + 0x84);
   }
   else {
     do {
       pIVar2 = pIVar1;
       pIVar1 = M<UInt8 *>(pIVar2 + 0x84);
       if (pIVar1 == (UInt8 *)0x0) break;
-    } while (param_1 != pIVar1);
-    M<UInt32>(pIVar2 + 0x84) = M<UInt32>(param_1 + 0x84);
+    } while (contextBytes != pIVar1);
+    M<UInt32>(pIVar2 + 0x84) = M<UInt32>(contextBytes + 0x84);
   }
-  M<UInt32>(param_1 + 0x84) = 0;
+  M<UInt32>(contextBytes + 0x84) = 0;
   this->reset_req_bits();
   return;
 }

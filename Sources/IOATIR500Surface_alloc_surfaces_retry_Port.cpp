@@ -31,7 +31,7 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0x14860 */
-IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 param_1, eLockType param_3) {
+IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 flags, eLockType lockType) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 IVar1;
@@ -42,9 +42,9 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 param_1, eLockType param_
   UInt8 bVar6;
   UInt8 bVar7;
   
-  bVar7 = (param_3 == 0) << 1;
-  bVar5 = (param_3 == 2) << 1;
-  bVar6 = (param_3 == 1) << 1;
+  bVar7 = (lockType == 0) << 1;
+  bVar5 = (lockType == 2) << 1;
+  bVar6 = (lockType == 1) << 1;
   iVar4 = 0x3e9;
   do {
     if ((bool)(bVar7 >> 1 & 1)) {
@@ -64,12 +64,12 @@ IOReturn IOATIR500Surface::alloc_surfaces_retry(UInt32 param_1, eLockType param_
     }
 LAB_000148e0:
     if ((M<unsigned int>(self + 0xbf8) & 0x20000000) != 0) goto LAB_00014970;
-    if ((M<unsigned int>(self + 0xbf8) & param_1) == 0) goto LAB_00014968;
+    if ((M<unsigned int>(self + 0xbf8) & flags) == 0) goto LAB_00014968;
     if ((!(bool)(bVar7 >> 1 & 1)) && (M<char>(M<int>(self + 0xd50) + 0x80) == '\0')) {
       return 0xe00002be;
     }
-    /* the decompile passed `this` as a leading argument and dropped the last one: shipped asm 0x14910 is (this, mask = param_1, keepMask = 0, bool = 0) */
-    iVar2 = this->alloc_surfaces_pageq(param_1,0,false);
+    /* the decompile passed `this` as a leading argument and dropped the last one: shipped asm 0x14910 is (this, mask = flags, keepMask = 0, bool = 0) */
+    iVar2 = this->alloc_surfaces_pageq(flags,0,false);
     if (iVar2 == 0) goto LAB_00014968;
     if (iVar2 == 2) goto LAB_00014970;
     iVar4 = iVar4 + -1;

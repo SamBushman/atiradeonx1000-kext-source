@@ -274,3 +274,7 @@ for arg in sys.argv[1:]:
         doc = '/*\n * %s\n *\n * %s (real addr %s, %s bytes) - mechanically ported from the Ghidra decompile of the shipped kext (Tools/replace_fn.py /\n * Tools/port_fn.py); replaces the earlier hand-written body, which the callee/atomics comparison (Tools/callee_compare.py) showed had\n * dropped or simplified parts of the original.\n */\n\n' % (os.path.basename(dst), qual, hex(a), dm.count('') and str(next((sz for aa, sz in [(0, 0)]), 0)))
         open(dst, 'w').write(doc + hdr + pre + '\n' + body)
         print('   ->', os.path.basename(dst))
+
+# apply the remap table (Tools/renames/*.tsv) so a re-ported function gets its real names back
+import subprocess
+subprocess.call([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "apply_renames.py")])

@@ -29,7 +29,7 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x14e70 */
-IOReturn IOATIR500Surface::surface_flush(UInt32 param_1, UInt32 param_2) {
+IOReturn IOATIR500Surface::surface_flush(UInt32 panelMask, UInt32 swapArg) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
@@ -41,7 +41,7 @@ IOReturn IOATIR500Surface::surface_flush(UInt32 param_1, UInt32 param_2) {
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));
   iVar1 = this->alloc_surfaces_retry(M<UInt32>(self + 0xc1c) & 3,(eLockType)(0));
   if (iVar1 == 0) {
-    this->flush_surface(param_1,param_2);
+    this->flush_surface(panelMask,swapArg);
   }
   uVar4 = M<UInt32>(self + 0x84);
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 0xd50) + 0x840));

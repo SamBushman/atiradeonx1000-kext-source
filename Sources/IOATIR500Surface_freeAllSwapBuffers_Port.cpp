@@ -27,7 +27,7 @@
 
 
 /* real addr 0x10860 */
-void IOATIR500Surface::freeAllSwapBuffers(UInt32 param_1) {
+void IOATIR500Surface::freeAllSwapBuffers(UInt32 panel) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
@@ -45,8 +45,8 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 param_1) {
   SInt32 *piVar13;
   
   piVar13 = M<SInt32 *>(self + 0xd50);
-  if (piVar13[param_1 + 0x45] != 0) {
-    iVar4 = param_1 * 0x94;
+  if (piVar13[panel + 0x45] != 0) {
+    iVar4 = panel * 0x94;
     uVar11 = 0;
     do {
       iVar9 = piVar13[0x1e2];
@@ -56,8 +56,8 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 param_1) {
                         (piVar13,M<UInt32>(self + iVar2 * 0x1c + iVar4 + 0xc4c));
       piVar13[0x1e2] = iVar9 + iVar2;
       piVar13 = M<SInt32 *>(self + 0xd50);
-    } while (uVar11 < (UInt32)piVar13[param_1 + 0x45]);
-    if (piVar13[param_1 + 0x45] != 0) {
+    } while (uVar11 < (UInt32)piVar13[panel + 0x45]);
+    if (piVar13[panel + 0x45] != 0) {
       pIVar3 = self + iVar4;
       uVar11 = 0;
       pIVar7 = self + iVar4 + 0xc20;
@@ -105,9 +105,9 @@ void IOATIR500Surface::freeAllSwapBuffers(UInt32 param_1) {
         pIVar6 = pIVar6 + 0x1c;
         pIVar5 = pIVar5 + 0x1c;
         pIVar7 = pIVar7 + 0x1c;
-      } while (uVar11 < M<UInt32>(param_1 * 4 + M<SInt32>(self + 0xd50) + 0x114));
+      } while (uVar11 < M<UInt32>(panel * 4 + M<SInt32>(self + 0xd50) + 0x114));
     }
   }
-  M<UInt32>(self + param_1 * 0x94 + 0xcb0) = 0;
+  M<UInt32>(self + panel * 0x94 + 0xcb0) = 0;
   return;
 }

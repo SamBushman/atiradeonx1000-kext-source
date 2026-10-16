@@ -29,7 +29,7 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x14f60 */
-IOReturn IOATIR500Surface::surface_unlock_options(eLockType param_2, UInt32 param_3) {
+IOReturn IOATIR500Surface::surface_unlock_options(eLockType lockType, UInt32 unlockOptions) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
@@ -40,7 +40,7 @@ IOReturn IOATIR500Surface::surface_unlock_options(eLockType param_2, UInt32 para
   int iVar5;
   
   pIVar3 = self + 0xbd0;
-  if (param_2 != 1) {
+  if (lockType != 1) {
     pIVar3 = self + 0xbd1;
   }
   GH_IOLockLock(M<UInt32>(M<int>(self + 0xd50) + 0x840));

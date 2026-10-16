@@ -27,18 +27,18 @@
 
 
 /* real addr 0x10f30 */
-IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *real_param_1) {
+IOReturn IOATIR500Surface::get_state(eIOAccelSurfaceStateBits *outStateBits) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *outStateBitsBytes = reinterpret_cast<UInt8 *>(outStateBits);
 
   SInt32 iVar1;
   
   iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x520)(M<SInt32 *>(self + 0xd50));
   if (iVar1 == 0) {
-    M<UInt32>(param_1) = 0;
+    M<UInt32>(outStateBitsBytes) = 0;
   }
   else {
-    M<UInt32>(param_1) = 1;
+    M<UInt32>(outStateBitsBytes) = 1;
   }
   return 0;
 }

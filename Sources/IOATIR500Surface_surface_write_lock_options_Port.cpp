@@ -27,10 +27,10 @@
 
 
 /* real addr 0x16470 */
-void IOATIR500Surface::surface_write_lock_options(UInt32 param_1, IOAccelSurfaceData *real_param_2, UInt32 param_3) {
+void IOATIR500Surface::surface_write_lock_options(UInt32 lockOptions, IOAccelSurfaceData *data, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *dataBytes = reinterpret_cast<UInt8 *>(data);
 
-  this->surface_lock_options((eLockType)(2),param_1,(IOAccelSurfaceData *)(param_2),param_3);
+  this->surface_lock_options((eLockType)(2),lockOptions,(IOAccelSurfaceData *)(dataBytes),size);
   return;
 }
