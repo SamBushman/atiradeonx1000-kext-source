@@ -10,7 +10,11 @@ Reads the STOCK kext (fat Mach-O; PPC slice, via Tools/userspace/machoutil.py), 
 This is a *heuristic* extraction (the output states how many compare sites each opcode came from) cross-checked, per context, against the literal `0x??000000` comparisons present
 in Sources/*process_command_buffer_Port.cpp. Opcodes found by only one of the two methods are listed so a human can settle them.
 
-Usage: opcode_inventory.py [--kext PATH] [--src DIR] [-o REPORT]
+Usage: opcode_inventory.py [--kext PATH] [--src DIR] [-o REPORT] [--json INVENTORY.json]
+
+--json writes the machine-readable inventory consumed by Tools/opcode_usage.py:
+  {"GL": ["0x01", ...], "2D": [...], "DVD": [...]}   one sorted list of opcodes (top byte of a command word, "0xNN") per context,
+  each the union of the opcodes recovered from the disassembly and the literal constants in the C++ port (the same set the report's table lists).
 """
 import argparse, os, re, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "userspace"))
@@ -117,6 +121,7 @@ def main():
     ap.add_argument("--kext", default=os.path.join(here, "..", "..", "tiger-hd-pull", "ATIRadeonX1000.kext.bin"))
     ap.add_argument("--src", default=os.path.join(here, "..", "Sources"))
     ap.add_argument("-o")
+    ap.add_argument("--json", help="write the per-context opcode sets as JSON (input of opcode_usage.py)")
     a = ap.parse_args()
     m = machoutil.load(a.kext)
     text = [s for s in m.secs if s["name"] == "__text"][0]
@@ -126,11 +131,13 @@ def main():
            "Opcodes come from compare sites in the disassembly of each context's `process_command_buffer`; the last column cross-checks against the literal `0x??000000` constants in the C++ port. "
            "**Heuristic**: a table dispatch (`lwzx`+`mtctr`) or a comparison form not recognised would be missed; those are flagged below. Whether a real client ever emits an opcode is NOT established here "
            "(capture real workloads with `Tools/userspace/opcode_recorder.c`).", ""]
+    inventory = {}
     for ctx, name, start, srcfile in DISPATCHERS:
         end = func_end(m, start, text_end)
         found, table, n = analyse(m, start, end)
         srcset = source_opcodes(os.path.join(a.src, srcfile))
         asmset = set(found)
+        inventory[ctx] = ["0x%02x" % o for o in sorted(asmset | srcset)]
         out += ["## %s - `%s` @ 0x%x (%d instructions, to 0x%x)" % (ctx, name, start, n, end), "",
                 "Opcodes recovered from the disassembly: %d; literal opcode constants in the C++ port: %d." % (len(asmset), len(srcset)), ""]
         for taddr, from_opcode, bound in table:
@@ -147,6 +154,9 @@ def main():
         out += ["", "Only in the disassembly: %s." % (", ".join("0x%02x" % o for o in only_asm) or "none"),
                 "Only in the C++ literals: %s (constants in the source that are not opcode compares, e.g. data words, show up here)." % (", ".join("0x%02x" % o for o in only_src) or "none"), ""]
         sys.stderr.write("%s: %d asm opcodes, %d src constants, tables at %s\n" % (ctx, len(asmset), len(srcset), [(hex(t[0]), t[1]) for t in table]))
+    if a.json:
+        import json
+        json.dump(inventory, open(a.json, "w"), indent=1); open(a.json, "a").write("\n")
     txt = "\n".join(out) + "\n"
     if a.o:
         open(a.o, "w").write(txt)

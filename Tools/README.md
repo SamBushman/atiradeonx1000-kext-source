@@ -31,7 +31,7 @@ and the drivers in `userspace/pipeline/` (Stage B2 of its README).
 | `alloc_size_compare.py`, `gen_layout_checks.py` -> `Sources/LayoutChecks.cpp` | wrong object sizes / member offsets (compile-time checks) |
 | `uninit_local_scan.py` | split stack objects: locals read but never assigned (gcc deletes the branches) |
 | `arg_setup_compare.py` | small methods: which r3..r10 are written before the first call (finds implicit-r4 forwarding / dropped-result defects; 19 residual hits as of 0ccb392 are codegen noise, e.g. `lwbrx` vs byte loads) |
-| `return_code_audit.py` | #100 criterion 2: shipped IOReturn codes per external method vs codes observed live on stock in the baselines; unjustified gaps listed |
+| `return_code_audit.py Tests/deep_paths.json` (from `deep_paths.py --json`) | #100 criterion 2: shipped IOReturn codes per external method vs codes observed live on stock in the baselines; unjustified gaps listed |
 | `callee_compare.py`, `size_compare.py`, `imm_compare.py` (use the RAW `otool -tv` dump for real displacements) | missing calls / code / field accesses; classified in `Tests/body_triage.tsv` by `body_triage.py` |
 | `decomp_vs_source.py` | hex constants of a fresh Ghidra decompile absent from the C++ body (omitted statements) |
 | `call_arg_origin_compare.py` | shifted / swapped call arguments (found the `alloc_surfaces_retry` bug: `this` passed as the mask). NOISY - register reuse makes many hits benign; read each against the disassembly |
@@ -41,6 +41,6 @@ and the drivers in `userspace/pipeline/` (Stage B2 of its README).
 ### Opcode usage recorder (#42, 2026-10-02)
 | tool | purpose |
 |---|---|
-| `opcode_inventory.py` -> `Tests/pm4_opcode_inventory.md` | opcodes the stock `process_command_buffer` of each context compares against (Capstone over the stock kext; GL 66, DVD 62, 2D 17) |
+| `opcode_inventory.py` -> `Tests/pm4_opcode_inventory.json` (`--json`) | opcodes the stock `process_command_buffer` of each context compares against (Capstone over the stock kext; GL 66, DVD 62, 2D 17) |
 | `userspace/opcode_recorder.c` (+ `userspace/run_opcode_workloads.sh`) | `DYLD_INSERT_LIBRARIES` interposer: tallies the opcodes in the command buffers a process submits (flush-map = submit); passive, fault-safe, periodic TOTAL snapshots |
-| `opcode_usage.py` -> `Tests/pm4_opcode_usage.md` | merges recorder logs per workload and compares with the inventory (coverage, observed-not-in-inventory, never-observed, anomalies); raw logs in `Tests/baseline/opcode/` |
+| `opcode_usage.py --inventory Tests/pm4_opcode_inventory.json` | merges recorder logs per workload and compares with the inventory (coverage, observed-not-in-inventory, never-observed, anomalies); raw logs in `Tests/baseline/opcode/` |

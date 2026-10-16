@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """opcode_usage.py - issue #42 criterion 2: merge opcode_recorder logs and compare what real workloads emit with the opcodes the stock dispatchers handle.
 
-Input: workload logs written by Tools/userspace/opcode_recorder.c (one file per process run), each given as NAME=PATH; the inventory is the report written by Tools/opcode_inventory.py
+Input: workload logs written by Tools/userspace/opcode_recorder.c (one file per process run), each given as NAME=PATH; the inventory is the JSON written by Tools/opcode_inventory.py --json
 ( the opcodes the stock process_command_buffer of each context compares against).
 Per context (GL / 2D / DVD) the report gives: flushes, records and words observed; for every observed opcode its record/word counts and which workloads emitted it;
   * observed AND in the inventory   -> coverage
@@ -12,21 +12,16 @@ and the anomaly count (records that overrun a buffer, buffers that never termina
 
 Usage: opcode_usage.py --inventory INVENTORY [-o REPORT] NAME=LOG [NAME=LOG ...]
 """
-import argparse, collections, os, re, sys
+import argparse, collections, json, os, re, sys
 
 CTX = {"gl": "GL", "2d": "2D", "dvd": "DVD"}
 
 
 def load_inventory(path):
-    inv, cur = {}, None
-    for ln in open(path):
-        m = re.match(r"^## (GL|2D|DVD) ", ln)
-        if m:
-            cur = m.group(1); inv[cur] = set(); continue
-        m = re.match(r"^\| 0x([0-9a-f]{2}) \|", ln)
-        if m and cur:
-            inv[cur].add(int(m.group(1), 16))
-    return inv
+    """Required data: JSON object {"GL": ["0x01", ...], "2D": [...], "DVD": [...]} - for each context, the opcodes (top byte of a command word)
+    its stock process_command_buffer handles. Written by Tools/opcode_inventory.py --json. Returns {context: set of int}."""
+    raw = json.load(open(path))
+    return {ctx: {int(op, 16) for op in ops} for ctx, ops in raw.items()}
 
 
 def load_logs(items):
@@ -96,7 +91,7 @@ def render(inv, data, flushes, anomalies, strays, procs):
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--inventory", required=True, help="report written by opcode_inventory.py")
+    ap.add_argument("--inventory", required=True, help="JSON written by opcode_inventory.py --json")
     ap.add_argument("-o"); ap.add_argument("logs", nargs="+")
     a = ap.parse_args()
     inv = load_inventory(a.inventory)

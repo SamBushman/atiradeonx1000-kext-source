@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""deep_paths.py STOCK_DIS OURS_DIS [NOTES_TSV] > REPORT   (issue #100, Step 0 - offline, no hardware)
+"""deep_paths.py STOCK_DIS OURS_DIS [NOTES_TSV] [--json METHODS.json] > REPORT   (issue #100, Step 0 - offline, no hardware)
 
 One section per external method (GL 0-19, 2D 0-17, DVD 0-21, Surface 0-18 - the 81 methods of Tests/method_shapes.txt; the ten of #88-#97 are
 marked, the 71 of #100 get the full treatment) with the MACHINE-DERIVED half of the path map:
@@ -11,9 +11,17 @@ marked, the 71 of #100 get the full treatment) with the MACHINE-DERIVED half of 
     IOSleep / thread_block), ALLOCATES, HW-WRITE (a store through the MMIO base is not detected - see the manual notes), LOOP (a backward branch);
   * the guard line next to each return-code site in the source.
 The MANUAL half (preconditions of each non-guard path, the proven call sequence that builds them, the confirmed tier, reasons) comes from NOTES_TSV
-(`key<TAB>field<TAB>text`, key = `<Class> <sel>`), so a hand-written statement can never be mistaken for a derived one."""
-import sys, re, bisect, collections, glob, os
+(`key<TAB>field<TAB>text`, key = `<Class> <sel>`), so a hand-written statement can never be mistaken for a derived one.
+
+--json writes the machine-readable subset consumed by Tools/return_code_audit.py:
+  {"methods": [{"context": "GL|2D|DVD|Surface", "selector": N, "name": "method", "shipped_codes": ["0xe00002c2", ...]}]}
+shipped_codes = the IOReturn constants the shipped body can produce (empty when it returns only 0 / a callee's result)."""
+import sys, re, bisect, collections, glob, os, json
+json_out = None
+if '--json' in sys.argv:
+    i = sys.argv.index('--json'); json_out = sys.argv[i + 1]; del sys.argv[i:i + 2]
 sdis, odis = sys.argv[1], sys.argv[2]
+methods_json = []   # --json: [{context, selector, name, shipped_codes}] - the input of Tools/return_code_audit.py
 notes = collections.defaultdict(dict)
 if len(sys.argv) > 3 and os.path.exists(sys.argv[3]):
     for l in open(sys.argv[3]):
@@ -112,6 +120,8 @@ for cls, sel, flags, c0, c1, sym in rows:
     ent = sym2row.get(sym)
     skipped = (LABEL[cls], sel) in SKIPPED
     print('## %s sel %d - `%s` %s\n' % (LABEL[cls], sel, short, '(own issue #88-#97, not part of #100)' if skipped else ''))
+    entry = {'context': LABEL[cls], 'selector': sel, 'name': mname, 'shipped_codes': []}
+    methods_json.append(entry)
     print('- wire shape: flags %d (%s), count0=%s, count1=%s' % (flags, FLAGS.get(flags, '?'), c0, c1))
     if not ent:
         print('- **no ledger entry for `%s`** (overload/alias?)\n' % sym); continue
@@ -121,6 +131,7 @@ for cls, sel, flags, c0, c1, sym in rows:
     srng = srows[bisect.bisect_left(saddr, a):bisect.bisect_left(saddr, hi)]
     orng = ofun.get(sym, [])
     sc, oc = codes(srng), codes(orng)
+    entry['shipped_codes'] = ['0x%08x' % c for c in sorted(sc)]
     sco, oco = callees(srng, a, hi), callees(orng)
     bodies = source_of(lname)
     qc = set()
@@ -156,3 +167,5 @@ for cls, sel, flags, c0, c1, sym in rows:
     if not skipped: nrows += 1
     print()
 print('\n---\n%d methods of #100 documented; %d with a code-set difference between shipped / rebuilt / source: %s' % (nrows, len(mism), ', '.join(mism) or 'none'))
+if json_out:
+    json.dump({'methods': methods_json}, open(json_out, 'w'), indent=1); open(json_out, 'a').write('\n')

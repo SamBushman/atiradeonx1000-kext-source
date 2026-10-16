@@ -1,0 +1,635 @@
+{
+ "methods": [
+  {
+   "context": "GL",
+   "selector": 0,
+   "name": "set_surface",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 1,
+   "name": "set_swap_rect",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 2,
+   "name": "set_swap_interval",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 3,
+   "name": "get_config",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 4,
+   "name": "get_status",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 5,
+   "name": "get_surface_size",
+   "shipped_codes": [
+    "0xe00002bc"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 6,
+   "name": "get_surface_info",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 7,
+   "name": "read_buffer",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002c2",
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 8,
+   "name": "finish",
+   "shipped_codes": [
+    "0xe00002d6"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 9,
+   "name": "wait_for_stamp",
+   "shipped_codes": [
+    "0xe00002d6"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 10,
+   "name": "new_texture",
+   "shipped_codes": [
+    "0xe00002be"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 11,
+   "name": "delete_texture",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 12,
+   "name": "become_global_shared",
+   "shipped_codes": [
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 13,
+   "name": "page_off_texture",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 14,
+   "name": "scale_surface",
+   "shipped_codes": [
+    "0xe00002c7"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 15,
+   "name": "purge_texture",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 16,
+   "name": "set_surface_volatile_state",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 17,
+   "name": "reclaim_resources",
+   "shipped_codes": []
+  },
+  {
+   "context": "GL",
+   "selector": 18,
+   "name": "get_data_buffer",
+   "shipped_codes": [
+    "0xe00002be"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 19,
+   "name": "set_stereo",
+   "shipped_codes": []
+  },
+  {
+   "context": "2D",
+   "selector": 0,
+   "name": "set_surface",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 1,
+   "name": "get_config",
+   "shipped_codes": []
+  },
+  {
+   "context": "2D",
+   "selector": 2,
+   "name": "get_surface_info",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002f0"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 3,
+   "name": "swap_surface",
+   "shipped_codes": [
+    "0xe00002be"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 4,
+   "name": "scale_surface",
+   "shipped_codes": [
+    "0xe00002c7"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 5,
+   "name": "lock_memory",
+   "shipped_codes": [
+    "0xe00002c8",
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 6,
+   "name": "unlock_memory",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 7,
+   "name": "finish",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d6"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 8,
+   "name": "declare_image",
+   "shipped_codes": [
+    "0xe00002bd",
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 9,
+   "name": "create_image",
+   "shipped_codes": [
+    "0xe00002bd",
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 10,
+   "name": "create_transfer",
+   "shipped_codes": [
+    "0xe00002bd",
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 11,
+   "name": "delete_image",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 12,
+   "name": "wait_image",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002c2",
+    "0xe00002d6"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 13,
+   "name": "set_surface_paging_options",
+   "shipped_codes": [
+    "0xe00002c7"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 14,
+   "name": "set_surface_vsync_options",
+   "shipped_codes": [
+    "0xe00002c7"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 15,
+   "name": "set_macrovision",
+   "shipped_codes": [
+    "0xe00002c0"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 0,
+   "name": "set_surface",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 1,
+   "name": "get_config",
+   "shipped_codes": []
+  },
+  {
+   "context": "DVD",
+   "selector": 2,
+   "name": "get_status",
+   "shipped_codes": []
+  },
+  {
+   "context": "DVD",
+   "selector": 3,
+   "name": "get_surface_size",
+   "shipped_codes": [
+    "0xe00002bc"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 4,
+   "name": "lock_all_buffers",
+   "shipped_codes": [
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 5,
+   "name": "unlock_memory",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 6,
+   "name": "write_buffer",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 7,
+   "name": "finish",
+   "shipped_codes": [
+    "0xe00002d6"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 8,
+   "name": "declare_image",
+   "shipped_codes": [
+    "0xe00002bd",
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 9,
+   "name": "delete_image",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 0,
+   "name": "surface_read_lock_options",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 1,
+   "name": "surface_read_unlock_options",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 2,
+   "name": "get_state",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 3,
+   "name": "surface_write_lock_options",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 4,
+   "name": "surface_write_unlock_options",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 5,
+   "name": "surface_read",
+   "shipped_codes": [
+    "0xe00002be",
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 6,
+   "name": "set_shape_backing",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 7,
+   "name": "set_id_mode",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002be",
+    "0xe00002c2",
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 8,
+   "name": "set_scale",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 9,
+   "name": "set_shape",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 10,
+   "name": "surface_flush",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 11,
+   "name": "surface_query_lock",
+   "shipped_codes": [
+    "0xe00002cc"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 12,
+   "name": "surface_read_lock",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 13,
+   "name": "surface_read_unlock",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 14,
+   "name": "surface_write_lock",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 15,
+   "name": "surface_write_unlock",
+   "shipped_codes": []
+  },
+  {
+   "context": "Surface",
+   "selector": 16,
+   "name": "surface_control",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 17,
+   "name": "set_shape_backing_length",
+   "shipped_codes": [
+    "0xe00002bc"
+   ]
+  },
+  {
+   "context": "Surface",
+   "selector": 18,
+   "name": "surface_control",
+   "shipped_codes": [
+    "0xe00002c2"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 16,
+   "name": "read_regs",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 17,
+   "name": "write_regs",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "2D",
+   "selector": 18,
+   "name": "write_2_regs",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 10,
+   "name": "show_buffer",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 11,
+   "name": "dvd_setup_overlay",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 12,
+   "name": "dvd_enable_overlay",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 13,
+   "name": "read_regs",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 14,
+   "name": "write_regs",
+   "shipped_codes": [
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 15,
+   "name": "dvd_setup_subpicture",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 16,
+   "name": "set_macrovision",
+   "shipped_codes": [
+    "0xe00002c0",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 17,
+   "name": "dvd_enable_deint",
+   "shipped_codes": [
+    "0xe00002bc",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 18,
+   "name": "doIDCT",
+   "shipped_codes": [
+    "0xe00002c2",
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "DVD",
+   "selector": 19,
+   "name": "wait_for_stamps",
+   "shipped_codes": []
+  },
+  {
+   "context": "DVD",
+   "selector": 20,
+   "name": "check_stamps",
+   "shipped_codes": []
+  },
+  {
+   "context": "DVD",
+   "selector": 21,
+   "name": "setup_buffers",
+   "shipped_codes": [
+    "0xe00002d8"
+   ]
+  },
+  {
+   "context": "GL",
+   "selector": 20,
+   "name": "get_hw_info",
+   "shipped_codes": []
+  }
+ ]
+}
