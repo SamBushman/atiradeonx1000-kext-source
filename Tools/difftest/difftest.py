@@ -73,6 +73,16 @@ EXTERN_ARITY = {'_IODelay': 1, '_IOFree': 2, '_IOFreeAligned': 2, '_IOFreeContig
                 '_OSDecrementAtomic': 1, '_OSIncrementAtomic': 1, '_OSRuntimeFinalizeCPP': 0, '_OSRuntimeInitializeCPP': 0, '___cxa_pure_virtual': 0,
                 '_absolutetime_to_nanoseconds': 3, '_assert_wait_timeout': 3, '_bzero': 2, '_clock_get_uptime': 1, '_kprintf': 6, '_memcpy': 3,
                 '_memset': 3, '_panic': 6, '_sscanf': 6, '_sysctlbyname': 6, '_thread_block': 1, '_bcopy': 3, '_assert_wait': 2}
+# which arguments of the plain-C externs are pointers (a pointer into the kext's own image is compared by name, not by address)
+EXTERN_PTR_ARGS = {'_IOLog': [0], '_kprintf': [0], '_panic': [0], '_IOPanic': [0], '_sscanf': [0, 1], '_memcpy': [0, 1], '_bcopy': [0, 1], '_memset': [0], '_bzero': [0],
+                   '_assert_wait_timeout': [0], '_assert_wait': [0], '_sysctlbyname': [0, 1, 2, 3], '_IOFree': [0], '_IOFreeAligned': [0], '_IOFreeContiguous': [0],
+                   '_IOFreePageable': [0], '_IOLockFree': [0], '_IOLockLock': [0], '_IOLockUnlock': [0], '_IOLockSleep': [0, 1], '_IOLockWakeup': [0, 1],
+                   '_clock_get_uptime': [0], '_absolutetime_to_nanoseconds': [2], '_OSAddAtomic': [1], '_OSDecrementAtomic': [0], '_OSIncrementAtomic': [0],
+                   '_IOGetTime': [0], '_IOMallocContiguous': [2]}
+# static member functions of classes outside the kext (no `this`): the mangled name does not say
+STATIC_METHODS = {'withCapacity', 'withOptions', 'withAddress', 'withObjects', 'withCString', 'withString', 'withBytes', 'withData', 'withArray', 'withDictionary', 'withNumber',
+                  'withPhysicalAddress', 'withRange', 'withTask', 'withCapacityAndSize', 'getMetaClass', 'metaClass', 'nameMatching', 'serviceMatching', 'getMatchingServices',
+                  'checkResource', 'waitForService', 'getPlatform', 'getServiceRoot', 'fromPath', 'getLockedServiceName', 'registerService', 'getUserClient'}
 # what a mocked plain-C extern returns: 'void', 'ptr' (a fresh object), 'arg0' (its first argument), 'int'
 EXTERN_RET = {'_IODelay': 'void', '_IOFree': 'void', '_IOFreeAligned': 'void', '_IOFreeContiguous': 'void', '_IOFreePageable': 'void',
               '_IOGetTime': 'void', '_IOLockAlloc': 'ptr', '_IOLockFree': 'void', '_IOLockLock': 'void', '_IOLockSleep': 'int',
@@ -118,7 +128,9 @@ def signature_of(name, demangled=None):
     d = demangled if demangled is not None else demangle_all([name])[name]
     if demangled is None and (d == name or d == name[1:]):                                         # not a C++ name
         n = EXTERN_ARITY.get(name)
-        return (n, ['i'] * n) if n is not None else (None, None)
+        if n is None:
+            return (None, None)
+        return (n, ['p' if i in EXTERN_PTR_ARGS.get(name, ()) else 'i' for i in range(n)])
     m = re.match(r'^(.*?)\((.*)\)(\s*const)?$', d)
     if not m:
         return (None, None)
@@ -126,7 +138,7 @@ def signature_of(name, demangled=None):
     ps = split_params(params)
     if ps == ['void']: ps = []
     kinds = []
-    if '::' in head and not head.startswith('non-virtual') and not re.search(r'::(\w+)::\1$', '') :
+    if '::' in head and not head.startswith('non-virtual') and head.split('::')[-1] not in STATIC_METHODS:
         kinds.append('this')
     for p in ps:
         pl = p.replace('const', '').replace('volatile', '').strip()
@@ -255,7 +267,7 @@ class Image:
 
     def canon_ptr(self, v):
         """a pointer argument into the kext's own image, named so the two builds compare: a C string by its text, a global by (symbol, offset)"""
-        if v in self.addr2func and v:
+        if v in self.addr2func and v >= 0x200:
             return ('fn', self.addr2func[v])
         if not (0x1000 <= v < self.size):
             return v
@@ -311,6 +323,7 @@ class Machine:
     def __init__(self, image, reg, seed, lazy='zero', mock_policy=None, limit=300000, stack_args=None, transparent=None):
         self.image, self.reg, self.seed, self.lazy, self.limit = image, reg, seed, lazy, limit
         self.transparent = re.compile(transparent) if transparent else None
+        self.ignore_args = {}
         self.exclusive = set()      # functions that exist only in this image: the other build inlined them, so they run for real here
         self.stack_args = stack_args or {}
         self.mock_policy = mock_policy or default_mock
@@ -515,7 +528,9 @@ class Machine:
             else:                                   # the 9th word and later are passed in the caller's frame, after the 56-byte linkage and home area
                 v = struct.unpack('>I', bytes(uc.mem_read(sp + 0x38 + 4 * (gi - 8), 4)))[0]
             gi += 1
-            vals.append(self.normalise(v, name, gi - 1))
+            if any(key in name and (gi - 1) in idx for key, idx in self.ignore_args.items()):
+                vals.append('ignored'); continue
+            vals.append(self.normalise(v, name, gi - 1, k))
         k = self.stub_count.get(name, 0); self.stub_count[name] = k + 1
         self.calls.append((name, tuple(vals), unknown))
         self._flush()
@@ -524,7 +539,7 @@ class Machine:
             self.snapshots.append(self.memory_diff())
         uc.reg_write(UC_PPC_REG_3, self.mock_policy(self, name, k) & 0xffffffff)
 
-    def normalise(self, v, name, index):
+    def normalise(self, v, name, index, kind='p'):
         """a pointer into the function's own stack frame differs between the two builds (their frames differ), so it is replaced by the contents it points
         to - but only when the case says how many bytes the callee reads there (Case.stack_args: {callee substring: {arg index: bytes}});
         otherwise just a marker, because the bytes around a local are not part of the contract"""
@@ -534,7 +549,7 @@ class Machine:
                 if key in name:
                     n = spec.get(index, 0)
             return ('stack', bytes(self.uc.mem_read(v, min(n, STACK_TOP - v))).hex() if n else '')
-        return self.image.canon_ptr(v)
+        return self.image.canon_ptr(v) if kind in ('p', 'this') else v      # an integer argument that happens to equal an address is just an integer
 
     # -- running -----------------------------------------------------------------------------------------------------------------------------
     def prepare(self, target_name):
@@ -750,9 +765,12 @@ class Case:
     mock      callable(machine, callee name, call index) -> value a mocked callee returns (default: seeded choice among typical status values)
     replay    True: the register reads the stock function received are handed back, in order, to the rebuilt one (so a device that answers differently
               from the plain-memory window - a status bit that changes - cannot make the two sides differ; a different read PATTERN still fails)
+    ignore_args {callee name substring: [argument indexes]} not compared: the call site never sets that register (the callee's declared parameter is unused, so
+              the register holds whatever was left in it)
     stack_args  {callee name substring: {argument index: bytes}} for pointers to locals that the callee reads (their contents are compared)
     """
-    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT):
+    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None):
+        self.ignore_args = ignore_args or {}
         self.transparent = transparent
         self.replay = replay
         self.stack_args = stack_args or {}
@@ -778,8 +796,19 @@ def find_symbol(image, function, signature=None):
 def compare(case, st, rb, strict_order=False, strict_calls=False):
     """-> list of problems (strings); empty = identical behaviour"""
     probs = []
+    if st.status == 'TIMEOUT' and rb.status == 'TIMEOUT' and not (st.bad_read or rb.bad_read):
+        for i in range(min(len(st.events), len(rb.events))):         # both ran out of budget: the observable part so far must still agree
+            if st.events[i] != rb.events[i]:
+                return ['before the budget ran out, event #%d differs: stock %s, rebuilt %s' % (i, fmt_event(st.events[i]), fmt_event(rb.events[i]))]
     if st.status in ('TIMEOUT', 'NULLCALL') or rb.status in ('TIMEOUT', 'NULLCALL') or st.bad_read or rb.bad_read:
         return ['INCONCLUSIVE']          # budget exceeded, or a wild pointer in the test world (a read of machine code as data, a store into it): not comparable
+    if st.status == 'FAULT' and rb.status == 'FAULT':
+        # both dereferenced a wild pointer the test world handed them: the state they leave behind is not a result, but what they did BEFORE it
+        # (calls and register accesses, which are the observable part) still must agree up to the point where the shorter one stopped
+        for i in range(min(len(st.events), len(rb.events))):
+            if st.events[i] != rb.events[i]:
+                return ['before the fault, event #%d differs: stock %s, rebuilt %s' % (i, fmt_event(st.events[i]), fmt_event(rb.events[i]))]
+        return ['INCONCLUSIVE']
     if st.status != rb.status:
         probs.append('ends differently: stock %s%s, rebuilt %s%s' % (st.status, ' (%s)' % st.fault if st.fault else '', rb.status, ' (%s)' % rb.fault if rb.fault else ''))
         return probs
@@ -874,6 +903,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
         outs = []
         for img, sym in ((stock, sym_s), (rebuilt, sym_r)):
             m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
+            m.ignore_args = case.ignore_args
             m.want_snapshots = strict_calls
             m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
             if case.replay and outs:
@@ -885,7 +915,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
             outs.append(out); all_runs[len(outs) - 1].append(out)
         probs = compare(case, outs[0], outs[1], strict_order, strict_calls)
         case.hw_events = getattr(case, 'hw_events', 0) + sum(1 for e in outs[0].events if e[0] in 'RW')
-        results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read) else outs[0].status, len(outs[0].calls)))
+        results.append((seed, [] if probs == ['INCONCLUSIVE'] else probs, outs[0].insns, outs[1].insns, 'TIMEOUT' if ((probs == ['INCONCLUSIVE'] and (outs[0].status in ('TIMEOUT', 'NULLCALL') or outs[1].status in ('TIMEOUT', 'NULLCALL') or outs[0].bad_read or outs[1].bad_read)) or (outs[0].status == 'FAULT' and outs[1].status == 'FAULT' and probs == ['INCONCLUSIVE'])) else outs[0].status, len(outs[0].calls)))
     case.cov = (coverage(all_runs[0]), coverage(all_runs[1]))
     case.cycles = (sum(r.cycles for r in all_runs[0] if r.status == 'RET' and not r.bad_read), sum(r.cycles for r in all_runs[1] if r.status == 'RET' and not r.bad_read))
     return sym_s, results
@@ -895,6 +925,7 @@ def explain(case, stock, rebuilt, reg, seed):
     for img in (stock, rebuilt):
         sym = find_symbol(img, case.function, case.signature)
         m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
+        m.ignore_args = case.ignore_args
         m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
         rng = random.Random(seed * 7919 + zlib.crc32(case.name.encode()))
         kinds = signature_of(sym)[1] or []
@@ -925,8 +956,8 @@ def evaluate(case, stock, rebuilt, reg, verbose, strict_order, strict_calls):
     except LookupError as e:
         return 'ERROR', ['ERROR  %s: %s' % (case.name, e)], None
     fails = [r for r in res if r[1]]
-    inconclusive = [r for r in res if r[4] == 'TIMEOUT']
-    res = [r for r in res if r[4] != 'TIMEOUT']
+    inconclusive = [r for r in res if r[4] == 'TIMEOUT' and not r[1]]
+    res = [r for r in res if not (r[4] == 'TIMEOUT' and not r[1])]
     si = sum(r[2] for r in res); ri = sum(r[3] for r in res)
     cs, cr = case.cycles
     ratio = (cr / cs) if cs else ((ri / si) if si else 0)

@@ -53,4 +53,6 @@ CASES = [
     Case('ATIR5002DContext::read_regs', w_read_regs, ret='u32', seeds=24),
     Case('ATIR5002DContext::write_regs', w_write_regs, ret='u32', seeds=24),
     Case('ATIR5002DContext::write_2_regs', w_write_2_regs, ret='u32', seeds=24),
+    # the same read method with the device answering the rebuilt function exactly as it answered the stock one (record/replay of register reads)
+    Case('ATIR5002DContext::read_regs', w_read_regs, ret='u32', seeds=24, replay=True, name='ATIR5002DContext::read_regs [replay]'),
 ]

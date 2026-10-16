@@ -31,6 +31,11 @@ def header_return(cls, meth):
     return 'u32'
 
 
+# per-function options: calls whose unused declared parameters hold leftover register contents
+OPTIONS = {
+    'IOATIR500GLContext::set_surface': dict(ignore_args={'setCompatibleSurfaceMode': [3]}),
+}
+
 CASES = []
 for cls in CLASSES:
     names = sorted(n for n in _stock.funcs if re.match(r'^__ZN%d%s\d' % (len(cls), cls), n) and not SKIP.search(n))
@@ -41,4 +46,4 @@ for cls in CLASSES:
         meth = d.split('(')[0].split('::')[-1]
         if (cls + '::' + meth) in _manual:
             continue
-        CASES.append(Case(cls + '::' + meth, world, ret=header_return(cls, meth), signature=d[d.index('::') + 2:], name=d, seeds=10))
+        CASES.append(Case(cls + '::' + meth, world, ret=header_return(cls, meth), signature=d[d.index('::') + 2:], name=d, seeds=10, **OPTIONS.get(cls + '::' + meth, {})))
