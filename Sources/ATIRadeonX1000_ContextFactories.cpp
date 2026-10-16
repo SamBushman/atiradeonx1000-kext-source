@@ -53,25 +53,32 @@
 #include "../Headers/ATIRadeonX1000.h"
 
 
+/* gcc 4.0.1 emits no null test after an unconditional `new T()` here, the shipped code tests the allocation (difftest: with a failed allocation the
+ * rebuilt code ran the constructor on a null pointer). So the allocation is made by hand and tested; the object is built in the block by placement new. */
+inline void *operator new(size_t, void *where) { return where; }
+
 ATIR500Surface *ATIRadeonX1000::new_surface(void) {
-    return new ATIR500Surface(); /* real allocation size 0xdbc bytes - see this file's own header comment */
+    void *mem = OSObject::operator new(0xdbc);   /* real allocation size 0xdbc bytes - see this file's own header comment */
+    return mem ? ::new (mem) ATIR500Surface() : 0;
 }
 
 
 
 ATIR5002DContext *ATIRadeonX1000::new_2d_context(void) {
-    return new ATIR5002DContext(); /* real allocation size 300 (0x12c) bytes - see this file's own header comment */
+    void *mem = OSObject::operator new(300);     /* real allocation size 300 (0x12c) bytes */
+    return mem ? ::new (mem) ATIR5002DContext() : 0;
 }
 
 
 
 ATIR500DVDContext *ATIRadeonX1000::new_dvd_context(void) {
-    return new ATIR500DVDContext(); /* real allocation size 0x1e0 bytes - see this file's own header comment */
+    void *mem = OSObject::operator new(0x1e0);   /* real allocation size 0x1e0 bytes */
+    return mem ? ::new (mem) ATIR500DVDContext() : 0;
 }
 
 
 
 ATIR500GLContext *ATIRadeonX1000::new_gl_context(void) {
-    return new ATIR500GLContext(); /* real allocation size 0x690 bytes - see this file's own header comment */
+    void *mem = OSObject::operator new(0x690);   /* real allocation size 0x690 bytes */
+    return mem ? ::new (mem) ATIR500GLContext() : 0;
 }
-

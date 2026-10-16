@@ -12,7 +12,7 @@ CLASSES = ['ATIRadeonX1000', 'IOATIR500Accelerator', 'IOATIR500GLContext', 'ATIR
 _stock = Image(os.environ['STOCK_KEXT'], 'stock')
 SKIP = re.compile(r'(C[12]E|D[012]E|MetaClass|metaClass|_GLOBAL__N|__static_init)')
 _manual = set()
-for mod in ('surface_cases', 'registers_cases', 'hand_cases'):
+for mod in ('surface_cases', 'registers_cases', 'hand_cases', 'hand_cases_A', 'hand_cases_B', 'hand_cases_C', 'hand_cases_D'):
     try:
         m = __import__(mod)
         _manual |= {c.function for c in m.CASES}

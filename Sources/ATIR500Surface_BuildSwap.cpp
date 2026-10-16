@@ -582,11 +582,11 @@ LAB_0003f654:
                   puVar45[iVar43 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
                                                        dVar61)));
                   puVar45[iVar43 + 2] =
-                       fVar8 * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62);
+                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62));
                   puVar45[iVar43 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
                                                        dVar61)));
                   puVar45[iVar43 + 4] =
-                       fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62);
+                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
                   puVar45[iVar43 + 7] = 0xc0033500;
                   puVar45[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
                   puVar45[iVar43 + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
@@ -685,11 +685,11 @@ LAB_0003f654:
                   puVar45[iVar32 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar59 - dVar68) -
                                                        dVar61)));
                   puVar45[iVar32 + 2] =
-                       fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62);
+                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
                   puVar45[iVar32 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar48 - dVar68) -
                                                        dVar61)));
                   puVar45[iVar32 + 4] =
-                       fVar8 * (float)(dVar64 * (double)(float)(dVar49 - dVar67) - dVar62);
+                       FBITS(fVar8 * (float)(dVar64 * (double)(float)(dVar49 - dVar67) - dVar62));
                   puVar45[iVar32 + 7] = 0xc0033500;
                   puVar45[iVar32 + 9] = FBITS((float)(dVar59 + dVar48) * fVar4);
                   puVar45[iVar32 + 10] = FBITS((float)(dVar49 + dVar50) * fVar4);
@@ -808,11 +808,11 @@ LAB_0003f654:
                   puVar45[iVar43 + 5] = 0x1087;
                   iVar26 = iVar43 * 4 + 0x30 >> 2;
                   puVar45[iVar43 + 1] =
-                       fVar8 * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61);
+                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61));
                   puVar45[iVar43 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
                                                        dVar62)));
                   puVar45[iVar43 + 3] =
-                       fVar8 * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61);
+                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61));
                   puVar45[iVar43 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
                                                        dVar62)));
                   puVar45[iVar43 + 7] = 0xc0033500;
@@ -909,11 +909,11 @@ LAB_0003f654:
                   puVar45[iVar32 + 5] = 0x1087;
                   iVar26 = iVar32 * 4 + 0x30 >> 2;
                   puVar45[iVar32 + 1] =
-                       fVar8 * (float)(dVar63 * (double)(float)(dVar66 - dVar68) - dVar61);
+                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar66 - dVar68) - dVar61));
                   puVar45[iVar32 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar52 - dVar67) -
                                                        dVar62)));
                   puVar45[iVar32 + 3] =
-                       fVar8 * (float)(dVar63 * (double)(float)(dVar50 - dVar68) - dVar61);
+                       FBITS(fVar8 * (float)(dVar63 * (double)(float)(dVar50 - dVar68) - dVar61));
                   puVar45[iVar32 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar48 - dVar67) -
                                                        dVar62)));
                   puVar45[iVar32 + 7] = 0xc0033500;
@@ -972,13 +972,13 @@ LAB_0003f654:
             }
             puVar45[0xdb] = 0x1040;
             puVar45[0xcf] = 0x1101;
-            puVar45[0xc0] = fVar8;
+            puVar45[0xc0] = FBITS(fVar8);
             puVar45[0xd1] = 0x1111;
             puVar45[0xc4] = 0x3f800000;
             puVar45[0xd3] = 0x1121;
-            puVar45[200] = fVar41 * fVar4;
-            puVar45[0xc6] = fVar41;
-            puVar45[0xce] = fVar3;
+            puVar45[200] = FBITS(fVar41 * fVar4);
+            puVar45[0xc6] = FBITS(fVar41);
+            puVar45[0xce] = FBITS(fVar3);
             puVar45[0xc2] = 0x3f800000;
             puVar45[0xdc] = 0;
             puVar45[0xbf] = 0x1095;

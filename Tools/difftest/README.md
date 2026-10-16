@@ -66,7 +66,8 @@ returns the argument registers (`this` first). It runs once per side per seed, s
 leaves unset is zero (or seeded noise with `lazy='random'`). Helpers in `Tests/difftest/common.py`: `surface_world` (a surface with a vtable, an
 accelerator, panel counts, list nodes and buffer pointers), `context_lists`, `texture_buffer`, `auto_args` (typed arguments from the mangled
 signature). Useful options: `mock` (what callees return), `stack_args` (how many bytes a callee reads through a pointer to the caller's local),
-`seeds`, `limit`, `signature` (choose between overloads).
+`seeds`, `limit`, `signature` (choose between overloads), `plain_words` (the function stores numbers - sizes, offsets, packet words - so a stored word that
+happens to fall inside the kext image's address range is compared as a number, not as a pointer to the kext's own data).
 
 `surface_auto_cases.py` generates a generic case for every other method of the class. Read its output: a low `cov` or many `inconclusive` runs mean the
 function needs a hand-written world in `surface_cases.py`.

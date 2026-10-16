@@ -185,19 +185,19 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
           iVar2 = iVar4 - iVar7;
           iVar7 = iVar7 + 1;
           VCALL(M<int>(self), 0x5a4)
-                    (self,M<UInt32>(self + 0x22c),iVar2 << (GH_page_size & 0x3f));
+                    (self,M<UInt32>(self + 0x22c),iVar2 << (GH_page_shift & 0x3f));
         } while (iVar4 != iVar7);
       }
     }
     else {
       iVar4 = (unsigned int)(UInt8)self[0x8cc] * 2;
       while (iVar7 = iVar4 + -2, 0 < iVar7) {
-        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_size & 0x3f));
+        VCALL(M<int>(self), 0x598)(self,iVar4 + -1 << (GH_page_shift & 0x3f));
         VCALL(M<int>(self), 0x5a4)
-                  (self,M<UInt32>(self + 0x22c),iVar7 << (GH_page_size & 0x3f));
+                  (self,M<UInt32>(self + 0x22c),iVar7 << (GH_page_shift & 0x3f));
         iVar4 = iVar7;
       }
-      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_size & 0x3f));
+      VCALL(M<int>(self), 0x598)(self,1 << (GH_page_shift & 0x3f));
     }
     VCALL(M<int>(self), 0x5a4)
               (self,M<UInt32>(self + 0x22c),M<UInt32>(self + 0x228));

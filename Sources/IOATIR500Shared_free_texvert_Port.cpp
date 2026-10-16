@@ -60,7 +60,7 @@ void IOATIR500Shared::free_texvert(IOATIR500Accelerator *real_param_1, IOTexture
     ((IOATIR500Shared *)(M<UInt8 *>(param_2 + 0x1c)))->free_buf_handle(param_2,*M<UInt32 *>(param_2 + 0x14));   /* record, handle - the owner is `this` of the call */
   }
   IVar4 = param_2[0x20];
-  if (((UInt8)IVar4 - 3 < 5) && (M<SInt32 *>(param_2 + 8) != (SInt32 *)0x0)) {
+  if (((UInt32)IVar4 - 3 < 5) && (M<SInt32 *>(param_2 + 8) != (SInt32 *)0x0)) {
     VCALL(*M<SInt32 *>(param_2 + 8), 0x18)(M<SInt32 *>(param_2 + 8));
     IVar4 = param_2[0x20];
     M<UInt32>(param_2 + 8) = 0;

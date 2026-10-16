@@ -354,6 +354,7 @@ class Machine:
         self.visited = {}
         self.trail = []
         self.read_trace = None
+        self.plain_words = False      # Case.plain_words
         self.want_snapshots = False   # --strict-calls: keep the memory visible at every call
         self.replay_reads = None      # register read results recorded from the other side, handed back in order
         self.replay_pos = 0
@@ -439,7 +440,7 @@ class Machine:
             ent[3] = bytes(self.uc.mem_read(ent[0], ent[1]))
             if ent[1] == 4 and STACK_TOP - STACK_SIZE <= struct.unpack('>I', ent[3])[0] < STACK_TOP and not (STACK_TOP - STACK_SIZE <= ent[0] < STACK_TOP):
                 ent[3] = STACKPTR_MARK         # the address of a local of the function: differs between builds by construction
-            elif ent[1] == 4:
+            elif ent[1] == 4 and not self.plain_words:
                 v = struct.unpack('>I', ent[3])[0]
                 if 0x1000 <= v < self.image.size:
                     c = self.image.canon_ptr(v)
@@ -598,7 +599,12 @@ class Machine:
         for i, v in self.callee_saved.items():
             uc.reg_write(UC_PPC_REG_0 + i, v)
         for i, v in enumerate(args):
-            uc.reg_write(UC_PPC_REG_3 + i, v & 0xffffffff)
+            if i < 8:
+                uc.reg_write(UC_PPC_REG_3 + i, v & 0xffffffff)
+            else:                                   # the 9th word and later are passed in the caller's frame, after the 56-byte linkage and home area
+                self.w32(ENTRY_SP + 0x38 + 4 * (i - 8), v)
+        for i, v in enumerate(fargs or getattr(self, 'fargs', ())):       # floating-point arguments (a world sets `m.fargs = [1.0, 2.5]`): f1, f2, ... as doubles
+            uc.reg_write(UC_PPC_REG_FPR1 + i, struct.unpack('>Q', struct.pack('>d', v))[0])
         uc.reg_write(UC_PPC_REG_LR, STOP)
         self.write_log.clear(); self.events.clear(); self.snapshots.clear(); self.pending = None
         self.calls.clear(); self.insns = 0; self.status = '?'
@@ -768,9 +774,13 @@ class Case:
     ignore_args {callee name substring: [argument indexes]} not compared: the call site never sets that register (the callee's declared parameter is unused, so
               the register holds whatever was left in it)
     stack_args  {callee name substring: {argument index: bytes}} for pointers to locals that the callee reads (their contents are compared)
+    plain_words True: a stored word that falls inside the kext image's address range is a NUMBER (a size, an offset, a packet word), not a pointer to the
+              kext's own data, and is compared as such (default: such words are compared by the name of what they point at, because the two builds lay
+              their data out differently)
     """
-    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None):
+    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None, plain_words=False):
         self.ignore_args = ignore_args or {}
+        self.plain_words = plain_words
         self.transparent = transparent
         self.replay = replay
         self.stack_args = stack_args or {}
@@ -905,6 +915,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
         for img, sym in ((stock, sym_s), (rebuilt, sym_r)):
             m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
             m.ignore_args = case.ignore_args
+            m.plain_words = case.plain_words
             m.want_snapshots = strict_calls
             m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
             if case.replay and outs:
@@ -929,6 +940,7 @@ def explain(case, stock, rebuilt, reg, seed):
         sym = find_symbol(img, case.function, case.signature)
         m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
         m.ignore_args = case.ignore_args
+        m.plain_words = case.plain_words
         m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
         rng = random.Random(seed * 7919 + zlib.crc32(case.name.encode()))
         kinds = signature_of(sym)[1] or []

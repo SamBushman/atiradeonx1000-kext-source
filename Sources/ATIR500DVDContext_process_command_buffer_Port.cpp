@@ -732,7 +732,7 @@ IOReturn ATIR500DVDContext::process_command_buffer(VendorCommandDescriptor *real
             puVar40[7] = M<UInt32>(self + 0x158);
             puVar40[8] = CONCAT22(M<UInt16>(iVar23 + 0x576),M<UInt16>(iVar23 + 0x574));
             puVar40[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
-                                  (UInt32)M<UInt8>((SInt32)puVar40 + 0xf) << 8;
+                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
             puVar40[10] = 0;
             uVar17 = uVar17 | (uVar4 & 0xfffc) << 0xe;
 LAB_00037c4c:
@@ -773,7 +773,7 @@ LAB_00037c4c:
             puVar40[7] = M<UInt32>(self + 0x158);
             puVar40[8] = CONCAT22(M<UInt16>(iVar18 + 0x576),M<UInt16>(iVar18 + 0x574));
             puVar40[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
-                                  (UInt32)M<UInt8>((SInt32)puVar40 + 0xf) << 8;
+                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
             puVar40[10] = 0;
             uVar17 = (uVar4 & 0xfffc) << 0xe | uVar17 >> 1;
             goto LAB_00037c4c;

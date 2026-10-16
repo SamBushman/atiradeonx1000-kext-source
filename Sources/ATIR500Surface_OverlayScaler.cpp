@@ -37,6 +37,15 @@ inline UInt32 F2U(double v) {
     }
     return static_cast<UInt32>(static_cast<SInt32>(v));
 }
+
+/* the same conversion with the test the other way round, as calc_h_scaler_blank has it: a NaN is not < 2^31, so it takes the subtract-and-add path
+ * (and ends up as 0), whereas F2U sends a NaN down the plain path (0x80000000) */
+inline UInt32 F2UNotBelow(double v) {
+    if (v < 2147483648.0) {
+        return static_cast<UInt32>(static_cast<SInt32>(v));
+    }
+    return static_cast<UInt32>(static_cast<SInt32>(v - 2147483648.0)) + 0x80000000u;
+}
 } // namespace
 
 void ATIR500Surface::setup_overlay_reg(OverlaySurfaceInfo *, OverlayBandwidthInfo *, OverlayRegisters *) {}
@@ -316,11 +325,11 @@ void ATIR500Surface::calc_h_scaler_blank(OverlaySurfaceInfo *infoIn, OverlayBand
     }
     UInt32 blank = static_cast<UInt32>((latency - adjust) + 4);
     *o9 = blank;
-    if (static_cast<float>(span) <= fVar1) {
+    if (!(static_cast<float>(span) > fVar1)) {      /* (not `<=`: with a NaN, the shipped code takes this branch) */
         *o7 = static_cast<UInt32>(lineWidth) + blank;
     } else {
         float rest = static_cast<float>(UD(static_cast<UInt32>(lineWidth))) - fVar1;
-        *o7 = blank + F2U(static_cast<double>(rest));
+        *o7 = blank + F2UNotBelow(static_cast<double>(rest));
     }
     *o8 = ((U32At(bw, 0x24) * 8 + U32At(info, 0x14)) - static_cast<UInt32>(window)) + *o9 + 8;
 }

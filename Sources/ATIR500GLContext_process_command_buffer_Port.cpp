@@ -2863,7 +2863,7 @@ LAB_0002d820:
         puVar65[0xbf] = FBITS(fVar23 * (fVar8 + fVar9));
         puVar65[0xc1] = FBITS(fVar23 * (fVar4 + fVar9));
         iVar59 = (SInt32)((fVar7 - fVar6) * fVar30);
-        uVar73 = (UInt32)((fVar8 - fVar4) * fVar30);
+        uVar73 = (UInt32)(SInt32)((fVar8 - fVar4) * fVar30);
         local_130 = (SInt64)iVar59;
         local_128 = (SInt64)(SInt32)uVar73;
         fVar5 = (fVar6 + fVar7) * FLOAT_0004c380;
@@ -2916,7 +2916,7 @@ LAB_0002d820:
         }
         uVar35 = uVar53 - 1;
         uVar34 = (((SInt32)uVar35 >> 9) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x1ff) != 0)) * 0x200;
-        uVar35 = (UInt32)fVar24;
+        uVar35 = (UInt32)(SInt32)fVar24;
         local_160 = (SInt64)(SInt32)uVar35;
         if (FLOAT_0004c370 < fVar24) {
           uStack_154 = uVar35 ^ 0x80000000;
@@ -2939,7 +2939,7 @@ LAB_0002d820:
         }
         uVar34 = uVar37 - 1;
         uVar41 = (((SInt32)uVar34 >> 6) + (UInt32)((SInt32)uVar34 < 0 && (uVar34 & 0x3f) != 0)) * 0x40;
-        uVar34 = (UInt32)fVar18;
+        uVar34 = (UInt32)(SInt32)fVar18;
         local_150 = (SInt64)(SInt32)uVar34;
         if (FLOAT_0004c370 < fVar18) {
           local_148 = 0x43300000;
@@ -3080,7 +3080,7 @@ LAB_0002d820:
                 uVar47 = uVar47 + 0xc00;
                 uVar46 = uVar46 - 0xc00;
                 iVar74 = (SInt32)((fVar26 - fVar20) * fVar30);
-                uVar50 = (UInt32)((fVar19 - fVar29) * fVar30);
+                uVar50 = (UInt32)(SInt32)((fVar19 - fVar29) * fVar30);
                 puVar54[4] = 0x31080;
                 puVar54[6] = FBITS(fVar27 * (fVar21 - fVar4));
                 puVar54[8] = FBITS(fVar27 * (fVar7 - fVar4));

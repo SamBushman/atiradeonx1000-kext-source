@@ -1,5 +1,5 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 14:39:39.415347362 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 14:39:39.418580065 -0700
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 15:10:01.635017888 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 15:10:01.637465386 -0700
 @@ -679,8 +679,8 @@
                           iVar48 * (uVar15 - uVar38) >> 1 | puVar65[uVar55 + 1] & 0xffff0000;
                      local_1b8 = 0x43300000;
@@ -11,7 +11,7 @@
                    }
                    pAVar77[0x36] = 0x1;
                  }
-@@ -2858,10 +2858,10 @@
+@@ -2858,20 +2858,20 @@
          *puVar42 = 0x31080;
          puVar65[0xc2] = 0x1087;
          uVar38 = 0;
@@ -24,9 +24,11 @@
 +        puVar65[0xbf] = FBITS(fVar23 * (fVar8 + fVar9));
 +        puVar65[0xc1] = FBITS(fVar23 * (fVar4 + fVar9));
          iVar59 = (SInt32)((fVar7 - fVar6) * fVar30);
-         uVar73 = (UInt32)((fVar8 - fVar4) * fVar30);
+-        uVar73 = (UInt32)((fVar8 - fVar4) * fVar30);
++        uVar73 = (UInt32)(SInt32)((fVar8 - fVar4) * fVar30);
          local_130 = (SInt64)iVar59;
-@@ -2870,8 +2870,8 @@
+         local_128 = (SInt64)(SInt32)uVar73;
+         fVar5 = (fVar6 + fVar7) * FLOAT_0004c380;
          fVar4 = (fVar4 + fVar8) * FLOAT_0004c380;
          puVar65[0xc4] = 0xc0033500;
          puVar65[0xc5] = 0x10031;
@@ -37,9 +39,30 @@
          puVar65[0xc3] = iVar59 << 0x10 | uVar73;
          puVar65[200] = 0;
        }
-@@ -3082,18 +3082,18 @@
+@@ -2916,7 +2916,7 @@
+         }
+         uVar35 = uVar53 - 1;
+         uVar34 = (((SInt32)uVar35 >> 9) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x1ff) != 0)) * 0x200;
+-        uVar35 = (UInt32)fVar24;
++        uVar35 = (UInt32)(SInt32)fVar24;
+         local_160 = (SInt64)(SInt32)uVar35;
+         if (FLOAT_0004c370 < fVar24) {
+           uStack_154 = uVar35 ^ 0x80000000;
+@@ -2939,7 +2939,7 @@
+         }
+         uVar34 = uVar37 - 1;
+         uVar41 = (((SInt32)uVar34 >> 6) + (UInt32)((SInt32)uVar34 < 0 && (uVar34 & 0x3f) != 0)) * 0x40;
+-        uVar34 = (UInt32)fVar18;
++        uVar34 = (UInt32)(SInt32)fVar18;
+         local_150 = (SInt64)(SInt32)uVar34;
+         if (FLOAT_0004c370 < fVar18) {
+           local_148 = 0x43300000;
+@@ -3080,20 +3080,20 @@
+                 uVar47 = uVar47 + 0xc00;
+                 uVar46 = uVar46 - 0xc00;
                  iVar74 = (SInt32)((fVar26 - fVar20) * fVar30);
-                 uVar50 = (UInt32)((fVar19 - fVar29) * fVar30);
+-                uVar50 = (UInt32)((fVar19 - fVar29) * fVar30);
++                uVar50 = (UInt32)(SInt32)((fVar19 - fVar29) * fVar30);
                  puVar54[4] = 0x31080;
 -                puVar54[6] = (UInt32)(fVar27 * (fVar21 - fVar4));
 -                puVar54[8] = (UInt32)(fVar27 * (fVar7 - fVar4));

@@ -7,7 +7,8 @@ set -e
 F=$1; P=Tools/renames/patches/$(basename "$F" .cpp).patch; T=$(mktemp -d)
 mkdir -p "$T/a/Sources" "$T/b/Sources"
 git show "HEAD:$F" > "$T/a/$F"
-[ -f "$P" ] && patch -R -s -p1 -d "$T/a" < "$P"
+# the patch as COMMITTED (the one in the working tree may already hold an earlier run of this script)
+if git cat-file -e "HEAD:$P" 2>/dev/null; then git show "HEAD:$P" > "$T/old.patch"; patch -R -s -p1 -d "$T/a" < "$T/old.patch"; fi
 cp "$F" "$T/b/$F"
 ( cd "$T" && diff -u "a/$F" "b/$F" ) > "$P" || true
 rm -rf "$T"

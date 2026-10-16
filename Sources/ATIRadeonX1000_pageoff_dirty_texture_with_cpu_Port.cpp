@@ -36,18 +36,9 @@ void ATIRadeonX1000::pageoff_dirty_texture_with_cpu(VendorTextureBuffer *real_pa
 
   UInt8 bVar1;
   UInt8 *pbVar2;
-  UInt8 bVar3;
-  UInt8 bVar4;
-  UInt8 bVar5;
-  UInt8 bVar6;
-  UInt8 bVar7;
-  UInt8 bVar8;
-  UInt8 bVar9;
-  UInt8 bVar10;
-  UInt8 bVar11;
-  UInt8 bVar12;
-  UInt8 bVar13;
-  UInt8 bVar14;
+  UInt32 saved0;
+  UInt32 saved1;
+  UInt32 saved2;
   SInt32 iVar15;
   SInt32 iVar16;
   bool bVar17;
@@ -100,23 +91,12 @@ LAB_0001e594:
   }
   iVar31 = M<SInt32>(self + 0x860);
   iVar15 = (iVar26 + 0x2c3) * 4;
-  pbVar2 = (UInt8 *)(iVar31 + iVar15);
-  bVar3 = pbVar2[3];
-  bVar6 = pbVar2[2];
-  bVar9 = pbVar2[1];
-  bVar12 = *pbVar2;
+  /* the three registers are read as words (lwbrx) and written back later (stwbrx), exactly as the shipped code does: four single-byte reads would be a different access on the bus */
+  saved0 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar15));
   iVar16 = (iVar26 + 0x2c1) * 4;
-  pbVar2 = (UInt8 *)(iVar31 + iVar16);
-  bVar4 = pbVar2[3];
-  bVar7 = pbVar2[2];
-  bVar10 = pbVar2[1];
-  bVar13 = *pbVar2;
+  saved1 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar16));
   iVar26 = (iVar26 + 0x2c2) * 4;
-  pbVar2 = (UInt8 *)(iVar31 + iVar26);
-  bVar5 = pbVar2[3];
-  bVar8 = pbVar2[2];
-  bVar11 = pbVar2[1];
-  bVar14 = *pbVar2;
+  saved2 = loadWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26));
   bVar18 = M<UInt8>(M<SInt32>(param_1 + 0x14) + 0x15) >> 3;
   iVar20 = -(bVar18 & 3);
   if ((bVar18 & 2) == 0) {
@@ -308,14 +288,11 @@ LAB_0001e668:
     iVar31 = M<SInt32>(self + 0x860);
   }
   M<SInt32>(self + 0x720) = local_84 + M<SInt32>(self + 0x720);
-  M<UInt32>(iVar31 + iVar15) =
-       (UInt32)bVar12 << 0x18 | (UInt32)bVar9 << 0x10 | (UInt32)bVar6 << 8 | (UInt32)bVar3;
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar15), saved0);
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar31 + iVar16) =
-       (UInt32)bVar13 << 0x18 | (UInt32)bVar10 << 0x10 | (UInt32)bVar7 << 8 | (UInt32)bVar4;
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar16), saved1);
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar31 + iVar26) =
-       (UInt32)bVar14 << 0x18 | (UInt32)bVar11 << 0x10 | (UInt32)bVar8 << 8 | (UInt32)bVar5;
+  storeWordByteReversed(reinterpret_cast<UInt8 *>(iVar31 + iVar26), saved2);
   enforceInOrderExecutionIO();
   if (local_6c != (SInt32 *)0x0) {
     VCALL(*local_6c, 0x18)(local_6c);
