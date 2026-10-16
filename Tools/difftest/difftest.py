@@ -161,7 +161,7 @@ class StubRegistry:
             a = STUB_BASE + 16 * len(self.addr)
             assert a < STUB_BASE + STUB_SIZE, 'stub registry full'
             self.addr[name] = a; self.name[a] = name
-        if sig is not None and name not in self.sig:
+        if sig is not None and (name not in self.sig or self.sig[name] == (None, None)):   # an explicit declaration replaces an "unknown" derived one
             self.sig[name] = sig
         return self.addr[name]
 
