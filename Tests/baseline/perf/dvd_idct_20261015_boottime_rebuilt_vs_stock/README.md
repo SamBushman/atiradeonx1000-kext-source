@@ -1,3 +1,5 @@
+> **RETRACTED 2026-10-15 17:35: this comparison is INVALID (it measured the stock driver twice).** The boot-time accelerator is loaded from the prelinked kernel cache `/System/Library/Caches/com.apple.kernelcaches/kernelcache.86C01707`, not from `/System/Library/Extensions`; replacing the binary under Extensions without making that cache stale changes nothing. Evidence: after that "install" `kextstat` still showed the STOCK size (0x4f000 / wired 0x4e000 at 0x588000; the rebuilt binary is 0x53000 / 0x52000). The rebuilt kext only becomes the boot driver after the Extensions folder is touched (cache stale) and the system reboots (kextd then loads it: 0x53000 at 0x71bac000). The caveat below that "the loaded image was inferred from the on-disk md5" was exactly the gap that hid this. The DVD IDCT comparison is being redone (see `../dvd_idct_20261015_boottime_valid/` once present).
+
 # DVD IDCT throughput, rebuilt vs stock, both as the BOOT-TIME driver (2026-10-15, #45)
 
 `Tests/perf_dvd_idct.c` (2000 calls/metric, up to 12 MB), 3 runs each, fresh boot each side, `Tools/perf_compare.py`.

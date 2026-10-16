@@ -10,7 +10,9 @@ visit=1
 while [ $visit -le $VISITS ]; do
   for tag in $SEQ; do
     if [ $tag = stock ] || [ $tag = burn ]; then D=$ST; else D=$RB; fi
+    if [ $tag = boot ]; then echo "boot: no swap (whatever driver the G5 booted with)" >> "$O/driver.log"; else
     timeout 100 ssh G5 "sh \$HOME/rung3/swap.sh $D 2>&1 | tail -1; sh \$HOME/rung3/srchead/Tools/issue157_unstick_hotswap/unstick_hotswap_vram.sh 2>&1 | tail -1; killall Dock; true" >> "$O/driver.log" 2>&1 || { echo "swap FAILED v$visit $tag" >> "$O/driver.log"; exit 1; }
+    fi
     sleep $SETTLE
     # planted-difference control: BURN_TAGS="rebuilt" runs BURN_N CPU burners on the G5 during that side's warm-up and runs (the burner is the known difference)
     case " $BURN_TAGS " in *" $tag "*) timeout 30 ssh G5 "i=0; while [ \$i -lt ${BURN_N:-2} ]; do (nohup yes > /dev/null 2>&1 < /dev/null &); i=\$((i+1)); done; true" >> "$O/driver.log" 2>&1;; esac
