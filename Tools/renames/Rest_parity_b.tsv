@@ -1,0 +1,4 @@
+#!use-decl: end
+# Gated (parity gate OK: track_regs_written_by_pm4).
+use	::track_regs_written_by_pm4	uVar3	packetType	CONFIRMED	header >> 30: 0 = register writes, 1 = two register pairs, 2 = skip one dword, 3 = skip the payload	uVar3 = header >> 0x1e;	uVar3 = header & 0x1fff;
+use	::track_regs_written_by_pm4	uVar3	packetType	CONFIRMED	header >> 30: 2 = skip one dword, 3 = skip the payload	else if \(uVar3 == 2\)

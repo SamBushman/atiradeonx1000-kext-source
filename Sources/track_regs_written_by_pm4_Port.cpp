@@ -41,17 +41,18 @@ extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32*ra
   UInt32 value;
   SInt32 written;
   UInt32 header;
+  UInt32 packetType;
   
   while (rangeStart < rangeEnd) {
     header = *rangeStart;
-    uVar3 = header >> 0x1e;
-    if (uVar3 == 1) {
+    packetType = header >> 0x1e;
+    if (packetType == 1) {
       store_reg(state,header & 0x7ff,rangeStart[1]);
       secondValue = rangeStart + 2;
       rangeStart = rangeStart + 3;
       store_reg(state,header >> 0xb & 0x7ff,*secondValue);
     }
-    else if (uVar3 == 0) {
+    else if (packetType == 0) {
       countMinusOne = header >> 0x10 & 0x3fff;
       rangeStart = rangeStart + 1;
       reg = header & 0x1fff;
@@ -77,10 +78,10 @@ extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32*ra
         } while (countMinusOne + 1 != written);
       }
     }
-    else if (uVar3 == 2) {
+    else if (packetType == 2) {
       rangeStart = rangeStart + 1;
     }
-    else if (uVar3 == 3) {
+    else if (packetType == 3) {
       rangeStart = (UInt32 *)((SInt32)rangeStart + (header >> 0xe & 0xfffc) + 8);
     }
   }
