@@ -36,7 +36,8 @@ bool ATIRadeonX1000::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  UInt8 savedStrobeByte;
+  UInt32 savedStrobeWord;
+  UInt32 chipWord;
   UInt8 *chipID;
   UInt8 *pAVar4;
   SInt32 iVar5;
@@ -201,15 +202,12 @@ bool ATIRadeonX1000::start(IOService *provider) {
              * positioned between the strobe write and the restore write, matching stock exactly.
              * Live-verified (2026-10-08): self+0xc50=0x7240, self+0xc54=0xc, ioreg AccelCaps=3 -
              * identical outcome to #147's fix, via the real mechanism instead of a substitute. */
-            savedStrobeByte = M<UInt8>(registers + 8);
-            M<UInt32>(registers + 8) =
-                 (savedStrobeByte & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(registers + 9) << 0x10 |
-                 (UInt32)M<UInt8>(registers + 10) << 8 | (UInt32)M<UInt8>(registers + 0xb);
-            M<UInt32>(self + 0xc54) = M<UInt8>(registers + 0xf) & 0xf;
-            chipID = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(registers + 0xd), M<UInt8>(registers + 0xc));
-            M<UInt32>(registers + 8) =
-                 (UInt32)savedStrobeByte << 0x18 | (UInt32)M<UInt8>(registers + 9) << 0x10 |
-                 (UInt32)M<UInt8>(registers + 10) << 8 | (UInt32)M<UInt8>(registers + 0xb);
+            savedStrobeWord = loadWordByteReversed(&M<UInt8>(registers + 8));
+            storeWordByteReversed(&M<UInt8>(registers + 8), savedStrobeWord & 0xffffff40 | 0x34);
+            chipWord = loadWordByteReversed(&M<UInt8>(registers + 0xc));
+            storeWordByteReversed(&M<UInt8>(registers + 8), savedStrobeWord);
+            M<UInt32>(self + 0xc54) = chipWord >> 24 & 0xf;
+            chipID = (UInt8 *)(chipWord & 0xffff);
             M<UInt8 *>(self + 0xc50) = chipID;
             if (chipID == (UInt8 *)0x7157) goto LAB_0001fafc;
             if (chipID < (UInt8 *)0x7158) {

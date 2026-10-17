@@ -79,7 +79,6 @@ def	ATIRadeonX1000::setupR520Pipes@0x1bd20	iVar3	mmioBase	CONFIRMED	self+0x860 (
 def	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar4	pipeCountCode	INFERRED	bits 13:12 of register 0x402c; selects the pipe count stored at self+0xb98 (1,2,3,4)
 def	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar5	savedStrobeWord	CONFIRMED	original word at +8, restored after the strobed read (see the comment in the function)
 def	ATIRadeonX1000::start@0x1f750	puVar3	chipID	CONFIRMED	stored to self+0xc50 (chip ID) and switched on to choose the pipe family
-def	ATIRadeonX1000::start@0x1f750	bVar2	savedStrobeByte	CONFIRMED	original byte at +8, restored after the strobed read of +0xc/+0xf
 def	ATIRadeonX1000::start@0x1f750	this_00	memoryPool	CONFIRMED	the new ATIR500Memory stored at self+0x93c
 def	ATIRadeonX1000::start@0x1f750	local_38	gartOffset	INFERRED	page index << page_shift, passed by address to the vtable +0x590 GART-reserve call
 def	ATIRadeonX1000::start@0x1f750	uVar12	cacheFlushStart	INFERRED	line-aligned start of the range flushed with dcbst/dcbf

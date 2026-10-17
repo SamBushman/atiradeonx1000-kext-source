@@ -109,12 +109,8 @@ CASES = [
     Case('ATIRadeonX1000::set_display_mode_and_vram', w_set_display, ret='bool', seeds=200, mock=display_mock, plain_words=True, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8]}),
 ]
 
-# start() against STOCK currently FAILS for a defect that is not a naming matter: the chip-id strobe block reads/writes the registers at +8..+0xf one BYTE at a time
-# where the shipped code does word accesses (first difference: stock `read +0x8/4`, rebuilt `read +0x8/1`). Until that is fixed the case cannot be part of CASES
-# (the whole suite would fail); it is still the best check of the renames in start(): run it BASELINE against CANDIDATE (two rebuilt images):
-#   python3 Tools/difftest/difftest.py --stock <baseline rebuilt.bin> --rebuilt <candidate rebuilt.bin> Tests/difftest/hand_cases_U4P.py   (it uses START_CASES)
+# start(): matches stock since the #184 fix (chip-id strobe block uses word accesses). Before it, the rebuilt code did byte accesses.
 START_CASES = [
-    Case('ATIRadeonX1000::start', w_start, ret='bool', seeds=100, mock=start_mock, plain_words=True, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8]}),
+    Case('ATIRadeonX1000::start', w_start, ret='bool', seeds=100, mock=start_mock, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8], 'vtable slot +0x164': [1, 2]}),
 ]
-if os.environ.get('U4P_START'):
-    CASES = CASES + START_CASES
+CASES = CASES + START_CASES      # #184 fixed: start() now matches stock (the +0x164 string args are image addresses, ignored; image pointers stored are compared by name)
