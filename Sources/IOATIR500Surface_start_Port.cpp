@@ -28,6 +28,18 @@ extern const VendorExternalMethod kSurfaceMethods[19] asm("__ZZN16IOATIR500Surfa
 extern "C" UInt32 GH_IOLockAlloc(...) asm("_IOLockAlloc");
 extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 
+/* a swap-buffer entry as IOATIR500Surface::start leaves it: every field zero except the 16-bit state at +0x0c, which is 2 */
+static inline void ClearSwapBufferEntry(SwapBufferEntry *e) {
+    e->unknown_0x00 = 0;
+    e->gartOffset = 0;
+    e->memory = 0;
+    e->unknown_0x0e = 0;
+    e->unknown_0x0c = 2;
+    e->stamp = 0;
+    e->header = 0;
+    e->rectWordIndex = 0;
+}
+
 /* real addr 0x119f0 */
 bool IOATIR500Surface::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
@@ -43,6 +55,7 @@ bool IOATIR500Surface::start(IOService *provider) {
   UInt8 *pIVar7;
   UInt32 uVar8;
   SInt32 iVar9;
+  PanelRecord *panel;
   
   iVar3 = IOUserClient::start(provider);
   if (iVar3 == 0) {
@@ -112,45 +125,19 @@ bool IOATIR500Surface::start(IOService *provider) {
     pIVar5 = pIVar5 + 4;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  iVar3 = 0;
-  pIVar6 = self + 0xc30;
-  pIVar2 = self;
-  pIVar5 = self;
-  do {
-    M<UInt32>(pIVar2 + 0xd60) = 0;
-    M<UInt32>(pIVar2 + 0xd64) = 0;
-    pIVar7 = pIVar6 + 0xc;
-    pIVar5[0xcac] = 0x0;
-    pIVar5[0xcad] = 0x0;
-    iVar9 = 4;
-    M<UInt16>(pIVar5 + 0xcae) = 0;
-    M<UInt32>(pIVar5 + 0xcb0) = 0;
-    M<UInt32>(pIVar5 + 0xc20) = 0;
-    M<UInt32>(pIVar5 + 0xc24) = 0;
-    M<UInt32>(pIVar5 + 0xc28) = 0;
-    M<UInt16>(pIVar5 + 0xc2e) = 0;
-    M<UInt16>(pIVar5 + 0xc2c) = 2;
-    M<UInt32>(pIVar5 + 0xc30) = 0;
-    M<UInt32>(pIVar5 + 0xc34) = 0;
-    M<UInt32>(pIVar5 + 0xc38) = 0;
-    do {
-      M<UInt32>(pIVar7) = 0;
-      M<UInt32>(pIVar7 + 4) = 0;
-      M<UInt32>(pIVar7 + 8) = 0;
-      M<UInt16>(pIVar7 + 0xe) = 0;
-      M<UInt16>(pIVar7 + 0xc) = 2;
-      M<UInt32>(pIVar7 + 0x10) = 0;
-      M<UInt32>(pIVar7 + 0x14) = 0;
-      M<UInt32>(pIVar7 + 0x18) = 0;
-      pIVar7 = pIVar7 + 0x1c;
-      iVar9 = iVar9 + -1;
-    } while (iVar9 != 0);
-    bVar1 = iVar3 != 1;
-    pIVar6 = pIVar6 + 0x94;
-    pIVar2 = pIVar2 + 8;
-    pIVar5 = pIVar5 + 0x94;
-    iVar3 = iVar3 + 1;
-  } while (bVar1);
+  panel = PANEL_RECORD(self, 0);
+  for (iVar3 = 0; iVar3 < 2; iVar3++, panel++) {
+    M<UInt32>(self + iVar3 * 8 + 0xd60) = 0;                 /* the per-id region record pointer and size */
+    M<UInt32>(self + iVar3 * 8 + 0xd64) = 0;
+    panel->active = 0x0;
+    panel->swapMode = 0x0;
+    panel->slotIndex = 0;
+    panel->swapBufferSize = 0;
+    ClearSwapBufferEntry(&panel->entries[0]);
+    for (iVar9 = 1; iVar9 < 5; iVar9++) {
+      ClearSwapBufferEntry(&panel->entries[iVar9]);
+    }
+  }
   self[0xbd1] = 0x0;
   M<UInt16>(self + 0xbd2) = 0;
   self[0xc08] = 0x0;

@@ -35,6 +35,7 @@ UInt32 ATIR500Surface::copy_buffer_using_DMA(SInt32 param_1, SInt32 param_2, SIn
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_7 = reinterpret_cast<UInt8 *>(real_param_7);
     UInt8 *param_8 = reinterpret_cast<UInt8 *>(real_param_8);
+    PanelRecord *rec0 = PANEL_RECORD(self, 0);     /* the surface's first panel: batch in entries[0], submit slots in entries[1..4] */
 
   bool bVar1;
   UInt16 uVar2;
@@ -259,11 +260,11 @@ LAB_00042bf4:
     uVar17 = 0;
     uVar20 = 0;
   }
-  M<unsigned int>(M<int>(self + 0xc34) + 0x1c) = M<unsigned int>(M<int>(self + 0xc34) + 0x1c) | 1;
-  uVar6 = M<UInt16>(self + 0xcae) + 1 & 3;
-  M<SInt16>(self + 0xcae) = (SInt16)uVar6;
-  if (M<int>(self + uVar6 * 0x1c + 0xc44) == 0) {
-    iVar15 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(0,M<UInt32>(self + 0xcb0));
+  M<unsigned int>((int)Vol(rec0->entries[0].header) + 0x1c) = M<unsigned int>((int)Vol(rec0->entries[0].header) + 0x1c) | 1;
+  uVar6 = Vol(rec0->slotIndex) + 1 & 3;
+  Vol(rec0->slotIndex) = (UInt16)uVar6;
+  if ((int)Vol(rec0->entries[1 + uVar6].memory) == 0) {
+    iVar15 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(0,Vol(rec0->swapBufferSize));
     if (iVar15 == 0) {
       return 0;
     }
@@ -271,10 +272,10 @@ LAB_00042bf4:
   else {
     piVar23 = M<int *>(self + 0xd50);
     iVar24 = piVar23[0x1e2];
-    iVar15 = VCALL(*piVar23, 0x54c)(piVar23,M<UInt32>(self + uVar6 * 0x1c + 0xc4c));
+    iVar15 = VCALL(*piVar23, 0x54c)(piVar23,Vol(rec0->entries[1 + uVar6].stamp));
     piVar23[0x1e2] = iVar24 + iVar15;
   }
-  puVar25 = (UInt32 *)(M<int>(self + uVar6 * 0x1c + 0xc50) + 0x20);
+  puVar25 = (UInt32 *)((int)Vol(rec0->entries[1 + uVar6].header) + 0x20);
   if ((bVar7) || ((bool)((bVar27 & 2) >> 1))) {
     uVar11 = 0;
   }
@@ -296,20 +297,20 @@ LAB_00042bf4:
     uVar12 = uVar9 + 1;
     puVar25[uVar9] = 0x80000000;
   }
-  M<unsigned int>(M<int>(self + uVar6 * 0x1c + 0xc50) + 0x14) = uVar12;
-  iVar14 = M<int>(self + uVar6 * 0x1c + 0xc40);
+  M<unsigned int>((int)Vol(rec0->entries[1 + uVar6].header) + 0x14) = uVar12;
+  iVar14 = (int)Vol(rec0->entries[1 + uVar6].gartOffset);
   sVar8 = M<SInt16>(param_8 + 0xe) + 1;
   M<SInt16>(param_8 + 0xe) = sVar8;
   if (iVar14 == 0) {
-    ((IOATIR500Surface *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + uVar6 * 0x1c + 0xc3c)));
+    ((IOATIR500Surface *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)&rec0->entries[1 + uVar6]));
     sVar8 = M<SInt16>(param_8 + 0xe);
-    iVar14 = M<int>(self + uVar6 * 0x1c + 0xc40);
+    iVar14 = (int)Vol(rec0->entries[1 + uVar6].gartOffset);
   }
   M<SInt16>(param_8 + 0xe) = sVar8 + -1;
-  uVar13 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0xd50)))->submit_buffer((UInt32 *)(M<int>(self + uVar6 * 0x1c + 0xc50) + 0x20),iVar14 + 0x20,
-                      M<UInt32>(M<int>(self + uVar6 * 0x1c + 0xc50) + 0x14));
+  uVar13 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0xd50)))->submit_buffer((UInt32 *)((int)Vol(rec0->entries[1 + uVar6].header) + 0x20),iVar14 + 0x20,
+                      M<UInt32>((int)Vol(rec0->entries[1 + uVar6].header) + 0x14));
   M<UInt32>(self + 0x7c) = uVar13;
-  M<UInt32>(self + uVar6 * 0x1c + 0xc4c) = uVar13;
+  Vol(rec0->entries[1 + uVar6].stamp) = uVar13;
   if ((bool)(bVar26 >> 1 & 1)) {
     VCALL(*M<int *>(self + 0xd50), 0x54c)(M<int *>(self + 0xd50),uVar13);
     VCALL(*M<int *>(self + 0xd50), 0x5ac)(M<int *>(self + 0xd50),param_8);

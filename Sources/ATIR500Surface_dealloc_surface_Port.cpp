@@ -38,25 +38,26 @@ UInt32 ATIR500Surface::dealloc_surface(UInt32 param_1) {
   UInt8 *pVVar6;
   SInt32 iVar7;
   SInt32 *piVar8;
+  PanelRecord *rec0 = PANEL_RECORD(self, 0);     /* the surface's first panel */
   
   if (2 < param_1 - 6) goto LAB_0003e150;
   iVar5 = param_1 * 0x78;
   if ((M<SInt32>(self + iVar5 + 0xb0) != 0) && (piVar8 = M<SInt32 *>(self + 0xd50), piVar8[0x2e5] != 0)
      ) {
-    uVar1 = M<UInt16>(self + 0xcae) + 1 & 3;
-    M<SInt16>(self + 0xcae) = (SInt16)uVar1;
-    pVVar6 = (UInt8 *)(self + uVar1 * 0x1c + 0xc3c);
-    if (M<SInt32>(self + uVar1 * 0x1c + 0xc44) == 0) {
-      iVar2 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(0,M<UInt32>(self + 0xcb0));
+    uVar1 = Vol(rec0->slotIndex) + 1 & 3;
+    Vol(rec0->slotIndex) = (UInt16)uVar1;
+    pVVar6 = (UInt8 *)&rec0->entries[1 + uVar1];     /* the submit slot in use */
+    if ((SInt32)Vol(rec0->entries[1 + uVar1].memory) == 0) {
+      iVar2 = ((IOATIR500Surface *)((UInt8 *)self))->allocAllSlaveSwapBuffers(0,Vol(rec0->swapBufferSize));
       if (iVar2 != 0) goto LAB_0003e028;
       pVVar6 = (UInt8 *)0x0;
     }
     else {
       iVar7 = piVar8[0x1e2];
-      iVar2 = VCALL(*piVar8, 0x54c)(piVar8,M<UInt32>(self + uVar1 * 0x1c + 0xc4c));
+      iVar2 = VCALL(*piVar8, 0x54c)(piVar8,Vol(rec0->entries[1 + uVar1].stamp));
       piVar8[0x1e2] = iVar7 + iVar2;
 LAB_0003e028:
-      if (M<SInt32>(self + uVar1 * 0x1c + 0xc40) == 0) {
+      if ((SInt32)Vol(rec0->entries[1 + uVar1].gartOffset) == 0) {
         ((IOATIR500Surface *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(pVVar6));
       }
     }
@@ -69,7 +70,7 @@ LAB_0003e028:
         uVar3 = uVar3 + 1;
         M<UInt32>(iVar2 + M<SInt32>(pVVar6 + 0x14) + 0x20) = 0x80000000;
       }
-      M<UInt32>(M<SInt32>(self + 0xc34) + 0x1c) = M<UInt32>(M<SInt32>(self + 0xc34) + 0x1c) | 1;
+      M<UInt32>((SInt32)Vol(rec0->entries[0].header) + 0x1c) = M<UInt32>((SInt32)Vol(rec0->entries[0].header) + 0x1c) | 1;
       M<UInt32>(M<SInt32>(self + 0xd50) + 0x710) =
            uVar3 * 4 + M<SInt32>(M<SInt32>(self + 0xd50) + 0x710);
       uVar4 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 0xd50)))->submit_buffer((UInt32 *)(M<SInt32>(pVVar6 + 0x14) + 0x20),M<SInt32>(pVVar6 + 4) + 0x20,uVar3);

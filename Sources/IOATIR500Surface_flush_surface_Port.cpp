@@ -32,7 +32,7 @@ void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
 
   SInt32 iVar1;
   UInt32 uVar2;
-  UInt8 *pIVar3;
+  PanelRecord *panel;
   
   if ((self[0xbed] == 0x0) ||
      (iVar1 = VCALL(*M<SInt32 *>(self + 0xd50), 0x554)
@@ -45,15 +45,15 @@ void IOATIR500Surface::flush_surface(UInt32 panelMask, UInt32 swapArg) {
     M<UInt32>(self + 0x84) = M<UInt32>(self + 0x80);
     if (M<SInt32>(iVar1 + 0xcc) != 0) {
       uVar2 = 0;
-      pIVar3 = self;
+      panel = PANEL_RECORD(self, 0);
       do {
-        if (((1 << (uVar2 & 0x3f) & panelMask) != 0) && (pIVar3[0xcac] != 0x0)) {
+        if (((1 << (uVar2 & 0x3f) & panelMask) != 0) && (panel->active != 0x0)) {
           VCALL(M<SInt32>(self), 0x5d4)(self,uVar2,swapArg);
           M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) = M<SInt32>(M<SInt32>(self + 0xd50) + 0x74c) + 1;
           iVar1 = M<SInt32>(self + 0xd50);
         }
         uVar2 = uVar2 + 1;
-        pIVar3 = pIVar3 + 0x94;
+        panel = panel + 1;
       } while (uVar2 < M<UInt32>(iVar1 + 0xcc));
     }
     M<UInt32>(iVar1 + 0x78) = 0;

@@ -1,0 +1,119 @@
+--- a/Sources/IOATIR500Surface_allocAllSlaveSwapBuffers_Port.cpp	2026-10-16 17:54:58.831725068 -0700
++++ b/Sources/IOATIR500Surface_allocAllSlaveSwapBuffers_Port.cpp	2026-10-16 17:54:58.836436822 -0700
+@@ -30,69 +30,62 @@
+ /* real addr 0x11e50 */
+ UInt32 IOATIR500Surface::allocAllSlaveSwapBuffers(UInt32 panel, UInt32 swapBufferSize) {
+     UInt8 *self = reinterpret_cast<UInt8 *>(this);
++    PanelRecord *rec = PANEL_RECORD(self, panel);
+ 
+   bool bVar1;
+   SInt32 iVar2;
+-  SInt32 iVar3;
+   VendorSwapBufferHeader *pVVar4;
+   SInt32 iVar5;
+-  SInt32 iVar6;
+   UInt32 uVar7;
+   SInt32 *piVar8;
+   UInt32 uVar9;
+-  UInt8 *pIVar10;
+-  UInt8 *pIVar11;
+-  UInt8 *pIVar12;
+-  UInt8 *pIVar13;
++  SwapBufferEntry *slot;
++  SwapBufferEntry *victim;
+   
++  /* The four submit slots are entries[1..4]; slot number uVar9 (0..3) allocates one descriptor per buffer of the panel, into entries[uVar9 + 1 + uVar7]
++     (with more than one buffer per panel that runs past the record into the next one - stock behaviour, kept). */
+   piVar8 = (SInt32 *)0x0;
+   uVar9 = 0;
+   iVar2 = panel * 4;
+-  iVar6 = 0;
+   iVar5 = M<SInt32>(self + 0xd50);
+   do {
+     if (M<SInt32>(iVar2 + iVar5 + 0x114) == 0) {
+       if (piVar8 == (SInt32 *)0x0) {
+ LAB_00011f54:
+-        iVar6 = (uVar9 - 1) * 0x1c + panel * 0x94;
+-        pIVar11 = self + iVar6 + 0xc30;
+-        pIVar12 = self + iVar6 + 0xc40;
++        /* Failure unwind: release the slots allocated so far, walking backwards from entries[uVar9]. The shipped code has no exit condition here
++           (issue #32: it keeps walking down through memory until it faults); the loop is kept exactly that way. */
++        victim = &rec->entries[uVar9];
+         do {
+           if (M<SInt32>(iVar2 + iVar5 + 0x114) != 0) {
+-            pIVar13 = pIVar11 + 0x14;
+-            pIVar10 = pIVar12 + 0xc;
++            SwapBufferEntry *v = victim;
+             uVar9 = 0;
+             do {
+-              if (M<SInt32 *>(pIVar13) != (SInt32 *)0x0) {
+-                VCALL(*M<SInt32 *>(pIVar13), 0x18)(M<SInt32 *>(pIVar13));
++              if (v->memory != (void *)0x0) {
++                VCALL(*(SInt32 *)v->memory, 0x18)((SInt32 *)v->memory);
+               }
+-              M<UInt16>(pIVar13 + 6) = 0;
+-              M<UInt16>(pIVar13 + 4) = 2;
++              v->unknown_0x0e = 0;
++              v->unknown_0x0c = 2;
+               uVar9 = uVar9 + 1;
+-              M<UInt32>(pIVar13 + -8) = 0;
+-              M<UInt32>(pIVar13 + -4) = 0;
+-              M<UInt32>(pIVar13) = 0;
+-              M<UInt32>(pIVar10) = 0;
+-              M<UInt32>(pIVar10 + 4) = 0;
+-              M<UInt32>(pIVar10 + 8) = 0;
+-              pIVar13 = pIVar13 + 0x1c;
+-              pIVar10 = pIVar10 + 0x1c;
++              v->unknown_0x00 = 0;
++              v->gartOffset = 0;
++              v->memory = (void *)0x0;
++              v->stamp = 0;
++              v->header = (VendorSwapBufferHeader *)0x0;
++              v->rectWordIndex = 0;
++              v = v + 1;
+               iVar5 = M<SInt32>(self + 0xd50);
+             } while (uVar9 < M<UInt32>(iVar2 + iVar5 + 0x114));
+           }
+-          pIVar11 = pIVar11 + -0x1c;
+-          pIVar12 = pIVar12 + -0x1c;
++          victim = victim - 1;
+         } while( true );
+       }
+     }
+     else {
+-      iVar3 = iVar6 + panel * 0x94;
+       uVar7 = 0;
+-      pIVar12 = self + iVar3 + 0xc50;
+-      pIVar11 = self + iVar3 + 0xc44;
++      slot = &rec->entries[uVar9 + 1];
+       do {
+         piVar8 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(iVar5 + 0x82c) | 0x10023,swapBufferSize,GH_page_size);
+-        M<SInt32 *>(pIVar11) = piVar8;
++        slot->memory = piVar8;
+         if (piVar8 == (SInt32 *)0x0) {
+           if (3 < uVar9) {
+             return 1;
+@@ -100,20 +93,19 @@
+           iVar5 = M<SInt32>(self + 0xd50);
+           goto LAB_00011f54;
+         }
+-        pIVar11 = pIVar11 + 0x1c;
+         uVar7 = uVar7 + 1;
+         pVVar4 = (VendorSwapBufferHeader *)VCALL(*piVar8, 0x1cc)(piVar8);
+-        M<VendorSwapBufferHeader *>(pIVar12) = pVVar4;
+-        pIVar12 = pIVar12 + 0x1c;
++        slot->header = pVVar4;
++        slot = slot + 1;
+         this->init_swap_buffer_header((VendorSwapBufferHeader *)(pVVar4),swapBufferSize);
+         iVar5 = M<SInt32>(self + 0xd50);
+       } while (uVar7 < M<UInt32>(iVar2 + iVar5 + 0x114));
+     }
+     bVar1 = uVar9 == 3;
+-    iVar6 = iVar6 + 0x1c;
+     uVar9 = uVar9 + 1;
+     if (bVar1) {
+       return 1;
+     }
+   } while( true );
+ }
++

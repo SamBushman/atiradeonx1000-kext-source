@@ -30,20 +30,20 @@
 void ATIR500Surface::invalidate() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *pAVar1;
+  UInt8 *batchHeader;
   UInt32 uVar2;
-  UInt8 *pAVar3;
+  PanelRecord *panel;
   
   if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) == 0) {
     return;
   }
   uVar2 = 0;
-  pAVar3 = self;
+  panel = PANEL_RECORD(self, 0);
   do {
-    pAVar1 = pAVar3 + 0xc34;
+    batchHeader = reinterpret_cast<UInt8 *>(panel->entries[0].header);     /* the panel's pending swap-write batch */
     uVar2 = uVar2 + 1;
-    pAVar3 = pAVar3 + 0x94;
-    M<UInt32>(M<SInt32>(pAVar1) + 0x1c) = M<UInt32>(M<SInt32>(pAVar1) + 0x1c) | 1;
+    panel = panel + 1;
+    M<UInt32>(batchHeader + 0x1c) = M<UInt32>(batchHeader + 0x1c) | 1;
   } while (uVar2 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
   return;
 }

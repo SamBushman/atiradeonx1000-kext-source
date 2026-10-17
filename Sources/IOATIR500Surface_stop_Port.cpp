@@ -44,6 +44,7 @@ void IOATIR500Surface::stop(IOService *provider) {
   UInt32 uVar8;
   UInt8 *pIVar9;
   UInt8 *pIVar10;
+  PanelRecord *panel;
   
   M<UInt32>(self + 0xd58) = 0;
   iVar6 = M<SInt32>(self + 0x9c);
@@ -141,10 +142,10 @@ void IOATIR500Surface::stop(IOService *provider) {
   } while (bVar1);
   if (M<SInt32>(M<SInt32>(self + 0xd50) + 0xcc) != 0) {
     uVar8 = 0;
-    pIVar9 = self;
+    panel = PANEL_RECORD(self, 0);
     pIVar10 = self;
     do {
-      if (M<SInt32>(pIVar9 + 0xc28) != 0) {
+      if (panel->entries[0].memory != 0) {
         this->freeAllSwapBuffers(uVar8);
       }
       if (M<SInt32>(pIVar10 + 0xd60) != 0) {
@@ -157,7 +158,7 @@ void IOATIR500Surface::stop(IOService *provider) {
         M<UInt32>(pIVar10 + 0xd60) = 0;
       }
       uVar8 = uVar8 + 1;
-      pIVar9 = pIVar9 + 0x94;
+      panel = panel + 1;
       pIVar10 = pIVar10 + 8;
     } while (uVar8 < M<UInt32>(M<SInt32>(self + 0xd50) + 0xcc));
   }

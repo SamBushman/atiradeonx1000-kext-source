@@ -68,8 +68,8 @@ void ATIR500Surface::build_swap() {
   SInt32 iVar33;
   SInt32 iVar34;
   SInt32 iVar35;
-  UInt8 *pAVar36;
-  UInt8 *pAVar37;
+  SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
+  PanelRecord *panelRec;
   UInt32 uVar38;
   UInt32 *puVar39;
   UInt32 uVar40;
@@ -112,7 +112,7 @@ void ATIR500Surface::build_swap() {
     dVar58 = (double)FLOAT_0004c370;
     dVar57 = (double)FLOAT_0004c374;
     dVar56 = (double)FLOAT_0004c380;
-    pAVar37 = self;
+    panelRec = PANEL_RECORD(self, 0);
     dVar60 = DOUBLE_0004c3a8;
     local_108 = self;
     do {
@@ -151,8 +151,8 @@ void ATIR500Surface::build_swap() {
           return;
         }
       }
-      iVar44 = M<SInt32>(pAVar37 + 0xc34);
-      pAVar36 = pAVar37 + 0xc34;
+      iVar44 = (SInt32)Vol(panelRec->entries[0].header);
+      batchEntry = &panelRec->entries[0];
       bVar46 = (local_104 == 0) << 1;
       puVar39 = (UInt32 *)(iVar44 + 0x20);
       if (((local_104 != 0) || (M<SInt32>(self + 0xb70) == M<SInt32>(self + 0xb74))) || (bVar1)) {
@@ -271,8 +271,8 @@ void ATIR500Surface::build_swap() {
         iVar44 = iVar28 + 4;
         puVar39[iVar28 + 3] = 0x70000;
       }
-      M<SInt32>(M<SInt32>(pAVar36) + 0x18) = iVar44;
-      if (pAVar37[0xcac] != 0x0) {
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x18) = iVar44;
+      if (panelRec->active != 0x0) {
         iVar26 = iVar44;
         if (self[0xbed] == 0x0) {
           iVar28 = M<SInt32>(self + 0xd50);
@@ -1163,15 +1163,15 @@ LAB_0003f654:
         }
         puVar45[iVar26] = 0x1393;
         puVar45[iVar26 + 1] = 10;
-        M<SInt32>(pAVar37 + 0xc38) = (SInt32)puVar45 + (0x2c8 - (SInt32)puVar39) >> 2;
+        Vol(panelRec->entries[0].rectWordIndex) = (SInt32)puVar45 + (0x2c8 - (SInt32)puVar39) >> 2;
         iVar44 = (SInt32)puVar45 + ((iVar26 + 2) * 4 - (SInt32)puVar39) >> 2;
       }
-      pAVar37 = pAVar37 + 0x94;
+      panelRec = panelRec + 1;
       local_104 = local_104 + 1;
-      M<SInt32>(M<SInt32>(pAVar36) + 0xc) = iVar34;
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0xc) = iVar34;
       local_108 = local_108 + 8;
-      M<SInt32>(M<SInt32>(pAVar36) + 0x14) = iVar44;
-      M<UInt32>(M<SInt32>(pAVar36) + 0x1c) = M<UInt32>(M<SInt32>(pAVar36) + 0x1c) | 1;
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = iVar44;
+      M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
       M<UInt16>(self + 0xdb4) = 1;
       iVar32 = M<SInt32>(self + 0xd50);
     } while (local_104 < M<UInt32>(iVar32 + 0xcc));

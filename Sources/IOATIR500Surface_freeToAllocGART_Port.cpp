@@ -38,7 +38,6 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
   UInt32 uVar4;
   UInt32 uVar5;
   SInt32 iVar6;
-  UInt8 *pIVar7;
   UInt8 *pIVar8;
   
   uVar4 = 0;
@@ -46,32 +45,30 @@ bool IOATIR500Surface::freeToAllocGART(VendorTransferBuffer *needed, bool aggres
   if (M<SInt32>(this_00 + 0xcc) != 0) {
     do {
       if (M<SInt32>(this_00 + uVar4 * 4 + 0x114) != 0) {
+        PanelRecord *rec = PANEL_RECORD(self, uVar4);
         uVar5 = 0;
-        pIVar8 = self + uVar4 * 0x94 + 0xc30;
         do {
-          iVar6 = uVar5 * 0x1c + uVar4 * 0x94;
-          iVar2 = ((IOATIR500Accelerator *)(this_00))->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar6 + 0xc20)),(VendorTransferBuffer *)(neededBytes),
-                             M<UInt32>(pIVar8),aggressive);
+          SwapBufferEntry *master = &rec->entries[uVar5];
+          iVar2 = ((IOATIR500Accelerator *)(this_00))->freeTransferToAllocGART((VendorTransferBuffer *)(master),(VendorTransferBuffer *)(neededBytes),
+                             master->stamp,aggressive);
           if (iVar2 != 0) {
             return 1;
           }
           iVar2 = 0;
-          pVVar3 = (UInt8 *)(self + iVar6 + 0xc3c);
-          pIVar7 = self + iVar6 + 0xc4c;
+          /* the four submit slots entries[uVar5 + 1 .. uVar5 + 4]; with more than one buffer per panel this walks past the record (stock behaviour, kept) */
+          SwapBufferEntry *slot = &rec->entries[uVar5 + 1];
           do {
-            iVar6 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(neededBytes),
-                               M<UInt32>(pIVar7),aggressive);
+            iVar6 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xd50)))->freeTransferToAllocGART((VendorTransferBuffer *)(slot),(VendorTransferBuffer *)(neededBytes),
+                               slot->stamp,aggressive);
             if (iVar6 != 0) {
               return 1;
             }
             bVar1 = iVar2 != 3;
-            pVVar3 = pVVar3 + 0x1c;
-            pIVar7 = pIVar7 + 0x1c;
+            slot = slot + 1;
             iVar2 = iVar2 + 1;
           } while (bVar1);
           this_00 = M<UInt8 *>(self + 0xd50);
           uVar5 = uVar5 + 1;
-          pIVar8 = pIVar8 + 0x1c;
         } while (uVar5 < M<UInt32>(this_00 + uVar4 * 4 + 0x114));
       }
       uVar4 = uVar4 + 1;
