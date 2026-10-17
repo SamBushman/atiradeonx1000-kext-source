@@ -51,7 +51,9 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   UInt32 uVar13;
   SInt32 iVar14;
   UInt32 uVar15;
-  SInt32 iVar16;
+  SInt32 rotation;
+  SInt32 pitch;
+  SInt32 endAddress;
   UInt32 uVar17;
   UInt32 uVar18;
   UInt32 uVar19;
@@ -74,7 +76,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   
   dVar25 = DOUBLE_0004c3b0;
   uStack_a4 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8);
-  iVar16 = M<SInt32>(self + panel * 4 + 0xb5c);
+  rotation = M<SInt32>(self + panel * 4 + 0xb5c);
   local_a8 = 0x43300000;
   uStack_9c = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9da);
   local_a0 = 0x43300000;
@@ -222,12 +224,12 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     blk[33] = M<UInt32>(self + 0x8c4);
     blk[16] = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14c) *
                 M<SInt32>(self + panel * 0x78 + 0x16c) + M<SInt32>(self + panel * 0x78 + 0x134);
-    if (iVar16 == 0xb4) {
-      iVar16 = (SInt32)pcl_CopyPix(buffer + wordCount,(pcl_ParamsR500_t *)&blk[0],true,true);
-      return iVar16 - (SInt32)buffer >> 2;
+    if (rotation == 0xb4) {
+      endAddress = (SInt32)pcl_CopyPix(buffer + wordCount,(pcl_ParamsR500_t *)&blk[0],true,true);
+      return endAddress - (SInt32)buffer >> 2;
     }
-    iVar16 = (SInt32)pcl_CopyPix(buffer + wordCount,(pcl_ParamsR500_t *)&blk[0],false,false);
-    return iVar16 - (SInt32)buffer >> 2;
+    endAddress = (SInt32)pcl_CopyPix(buffer + wordCount,(pcl_ParamsR500_t *)&blk[0],false,false);
+    return endAddress - (SInt32)buffer >> 2;
   }
   blitPacket = buffer + wordCount;
   GH_memcpy(blitPacket,&g_r500_3d_blit_state_packet,0x2f4);
@@ -321,15 +323,15 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   blitPacket[0xb] = uVar15;
   if (M<UInt16>(self + panel * 0x78 + 0x14a) < 0x1001) {
 LAB_00023ca0:
-    if (iVar16 == 0xb4) {
+    if (rotation == 0xb4) {
       uVar20 = 0x3f800000;
       uVar18 = 0;
       uVar15 = 0x3f800000;
       uVar19 = 0;
     }
     else {
-      if (iVar16 == 0x10e) goto LAB_00023c68;
-      if (iVar16 == 0x5a) goto LAB_00023c18;
+      if (rotation == 0x10e) goto LAB_00023c68;
+      if (rotation == 0x5a) goto LAB_00023c18;
       uVar20 = 0;
       uVar18 = 0x3f800000;
       uVar15 = 0;
@@ -344,7 +346,7 @@ LAB_00023ca0:
       uVar10 = 0;
     }
     blitPacket[0xa6] = uVar10 & 0x7ff | 0x803ff800;
-    if (iVar16 == 0x5a) {
+    if (rotation == 0x5a) {
       uVar17 = 0;
       if (M<UInt16>(self + panel * 0x78 + 0x9da) != 0) {
         uVar17 = M<UInt16>(self + panel * 0x78 + 0x9da) - 1;
@@ -356,7 +358,7 @@ LAB_00023c18:
       uVar18 = 0x3f800000;
     }
     else {
-      if (iVar16 != 0x10e) goto LAB_00023ca0;
+      if (rotation != 0x10e) goto LAB_00023ca0;
       if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
          (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
                    (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf),
@@ -374,7 +376,7 @@ LAB_00023c68:
     uVar20 = uVar19;
   }
   if (0x1000 < M<UInt16>(self + panel * 0x78 + 0x14a)) {
-    if (iVar16 == 0x5a) {
+    if (rotation == 0x5a) {
       dVar23 = (double)FLOAT_0004c37c;
       iVar14 = iVar9 * 4 + 0x30 >> 2;
       fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
@@ -392,7 +394,7 @@ LAB_00023c68:
       buffer[iVar9 + 6] = (SInt32)(dVar25 * dVar23) | 0x60000000;
       goto LAB_00023f44;
     }
-    if (iVar16 == 0x10e) {
+    if (rotation == 0x10e) {
       dVar23 = (double)FLOAT_0004c37c;
       dVar22 = (double)FLOAT_0004c378;
       iVar14 = iVar9 * 4 + 0x30 >> 2;
@@ -434,8 +436,8 @@ LAB_00023c68:
 LAB_00023f44:
   uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
   if (0x1000 < uVar17) {
-    if (iVar16 == 0x5a) {
-      iVar16 = M<SInt32>(self + panel * 0x78 + 0x16c);
+    if (rotation == 0x5a) {
+      pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
       uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
       uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
       iVar9 = M<SInt32>(self + panel * 0x78 + 0x134);
@@ -451,7 +453,7 @@ LAB_00023f44:
       }
       buffer[iVar14] = 0x1150;
       buffer[iVar14 + 1] =
-           (UInt32)uVar3 * iVar16 + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
+           (UInt32)uVar3 * pitch + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
       buffer[iVar14 + 2] = 0x1120;
       buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
       buffer[iVar14 + 4] = 0x10f8;
@@ -477,8 +479,8 @@ LAB_00023f44:
            (SInt32)((double)(float)(dVar24 - dVar23) * dVar22) << 0x10 | (SInt32)(dVar25 * dVar22);
       iVar14 = (iVar14 + 8) * 4 + 0x30 >> 2;
     }
-    else if (iVar16 == 0x10e) {
-      iVar16 = M<SInt32>(self + panel * 0x78 + 0x16c);
+    else if (rotation == 0x10e) {
+      pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
       uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
       uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
       iVar9 = M<SInt32>(self + panel * 0x78 + 0x134);
@@ -494,7 +496,7 @@ LAB_00023f44:
       }
       buffer[iVar14] = 0x1150;
       buffer[iVar14 + 1] =
-           (UInt32)uVar3 * iVar16 + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
+           (UInt32)uVar3 * pitch + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
       buffer[iVar14 + 2] = 0x1120;
       buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
       buffer[iVar14 + 4] = 0x10f8;

@@ -1,0 +1,7 @@
+# ATIRadeonX1000 per-use renames: variables the decompile reuses for several unrelated roles, named one use at a time (see `use` in Tools/apply_renames.py).
+# kind	target	old	new	tier	evidence	from	to
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	iVar16	rotation	CONFIRMED	read from panel+0xb5c and compared with 0xb4/0x5a/0x10e (rotation in degrees) at every branch of the packet builder
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	rotation	endAddress	CONFIRMED	pcl_CopyPix's return value (the address after the packet it wrote), turned into a dword count by the return statement	rotation = \(SInt32\)pcl_CopyPix\(.*true,true	rotation = \(SInt32\)pcl_CopyPix\(.*false,false
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	rotation	endAddress	CONFIRMED	same, the unflipped call	rotation = \(SInt32\)pcl_CopyPix\(.*false,false	blitPacket = buffer \+ wordCount;
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	rotation	pitch	CONFIRMED	the surface buffer's pitch (+0x16c), multiplied by the row index in the texture-offset word	rotation = M<SInt32>\(self \+ panel \* 0x78 \+ 0x16c\)	buffer\[iVar14 \+ 2\] = 0x1120
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	rotation	pitch	CONFIRMED	same, the second rotation branch	rotation = M<SInt32>\(self \+ panel \* 0x78 \+ 0x16c\)#2	buffer\[iVar14 \+ 2\] = 0x1120
