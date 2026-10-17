@@ -32,47 +32,47 @@ UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*outputBuffer, UInt32 star
 
   bool more;
   UInt32 arrayOffset;
-  SInt32 iVar3;
+  SInt32 slotA;
   UInt32 packetHeader;
-  SInt32 iVar5;
-  UInt8 *pAVar6;
-  UInt8 *pAVar7;
-  SInt32 iVar8;
-  SInt32 iVar9;
-  SInt32 iVar10;
+  SInt32 pairIndex;
+  UInt8 *extraOffsetA;
+  UInt8 *extraOffsetB;
+  SInt32 slotB;
+  SInt32 byteOffsetB;
+  SInt32 byteOffsetA;
   UInt8 bVar11;
   
-  iVar5 = 1;
+  pairIndex = 1;
   packetHeader = 0x832;
-  pAVar7 = self + 4;
-  iVar10 = startIndex * 4 + 4;
+  extraOffsetB = self + 4;
+  byteOffsetA = startIndex * 4 + 4;
   bVar11 = (M<SInt32>(self + 0x364) == 0) << 1;
-  pAVar6 = self;
-  iVar9 = startIndex * 4 + 8;
+  extraOffsetA = self;
+  byteOffsetB = startIndex * 4 + 8;
   do {
     if ((bool)(bVar11 >> 1 & 1)) {
-      iVar3 = 0x10;
-      iVar8 = 0x10;
+      slotA = 0x10;
+      slotB = 0x10;
     }
     else {
-      iVar3 = iVar5 + 0xf;
-      iVar8 = iVar5 + 0x10;
+      slotA = pairIndex + 0xf;
+      slotB = pairIndex + 0x10;
     }
     outputBuffer[startIndex] = packetHeader | 0x10000;
-    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar3 * 4 + 0x2a4)),
-                       M<UInt32>(pAVar6 + 0x368));
-    M<UInt32>((SInt32)outputBuffer + iVar10) = arrayOffset;
+    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + slotA * 4 + 0x2a4)),
+                       M<UInt32>(extraOffsetA + 0x368));
+    M<UInt32>((SInt32)outputBuffer + byteOffsetA) = arrayOffset;
     startIndex = startIndex + 3;
-    iVar10 = iVar10 + 0xc;
-    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar8 * 4 + 0x2a4)),
-                       M<UInt32>(pAVar7 + 0x368));
-    M<UInt32>((SInt32)outputBuffer + iVar9) = arrayOffset;
-    more = iVar5 != 0xf;
-    pAVar7 = pAVar7 + 8;
-    pAVar6 = pAVar6 + 8;
+    byteOffsetA = byteOffsetA + 0xc;
+    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + slotB * 4 + 0x2a4)),
+                       M<UInt32>(extraOffsetB + 0x368));
+    M<UInt32>((SInt32)outputBuffer + byteOffsetB) = arrayOffset;
+    more = pairIndex != 0xf;
+    extraOffsetB = extraOffsetB + 8;
+    extraOffsetA = extraOffsetA + 8;
     packetHeader = packetHeader + 3;
-    iVar5 = iVar5 + 2;
-    iVar9 = iVar9 + 0xc;
+    pairIndex = pairIndex + 2;
+    byteOffsetB = byteOffsetB + 0xc;
   } while (more);
   return 0x18;
 }

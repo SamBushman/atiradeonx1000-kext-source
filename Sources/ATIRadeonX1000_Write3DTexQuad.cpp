@@ -71,16 +71,23 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   SInt32 iVar22;
   SInt32 iVar23;
   UInt32 uVar24;
+  UInt32 firstRow;
   UInt32 uVar25;
   UInt32 uVar26;
   UInt32 *puVar27;
   UInt32 uVar28;
+  UInt32 firstColumn;
   UInt32 uVar29;
   SInt32 iVar30;
   UInt32 uVar31;
   UInt32 uVar32;
+  UInt32 srcLeft;
+  UInt32 dstTileBits;
+  UInt32 srcTileBits;
   UInt32 *puVar33;
   UInt32 uVar34;
+  UInt32 srcTop;
+  UInt32 lastColumn;
   UInt32 uVar35;
   UInt32 uVar36;
   UInt32 uVar37;
@@ -189,7 +196,7 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   local_308 = FLOAT_0004c370;
   local_2fc = FLOAT_0004c370;
   local_2e0 = 0x3f800000;
-  uVar32 = 0;
+  srcTileBits = 0;
   local_2dc = 1;
   local_2d8 = 0;
   local_2f4 = (float)((double)CONCAT44d(0x43300000,srcWidth) - DOUBLE_0004c3b0);
@@ -207,41 +214,41 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
   dVar50 = (double)(float)dVar49;
   local_2f0 = (float)((double)CONCAT44d(0x43300000,srcHeight) - DOUBLE_0004c3b0);
   if (srcShift != 4) {
-    uVar32 = (srcTileFlags & 6) << 2;
+    srcTileBits = (srcTileFlags & 6) << 2;
   }
-  uVar34 = srcWidth - 1;
-  local_35c = uVar34 & 0x7ff | (srcHeight - 1) * 0x800 & 0x3ff800 | 0x80000000;
-  local_360 = uVar32 | (srcTileFlags & 1) << 2 | srcLowBits & 3 | srcAddress & 0xffffffe0;
+  lastColumn = srcWidth - 1;
+  local_35c = lastColumn & 0x7ff | (srcHeight - 1) * 0x800 & 0x3ff800 | 0x80000000;
+  local_360 = srcTileBits | (srcTileFlags & 1) << 2 | srcLowBits & 3 | srcAddress & 0xffffffe0;
   local_348 = dstAddress & 0xffffffe0;
-  local_354 = uVar34 & 0x3fff | uVar34 * 0x10 & 0x8000 | (srcHeight - 1) * 0x20 & 0x10000;
+  local_354 = lastColumn & 0x3fff | lastColumn * 0x10 & 0x8000 | (srcHeight - 1) * 0x20 & 0x10000;
   local_358 = (UInt32)(srcShift != 0) * 0x2000 |
               (UInt32)texture_type[srcShift] & 0x1f | 0x8600;
-  uVar32 = 0;
+  dstTileBits = 0;
   if (dstShift != 4) {
-    uVar32 = (dstTileFlags & 6) << 0x10;
+    dstTileBits = (dstTileFlags & 6) << 0x10;
   }
-  local_34c = uVar32 | (dstTileFlags & 1) << 0x10 | dstPitch & 0x3ffe | (unknown_param18 & 3) << 0x13 |
+  local_34c = dstTileBits | (dstTileFlags & 1) << 0x10 | dstPitch & 0x3ffe | (unknown_param18 & 3) << 0x13 |
               (rb3d_dst_format[srcShift] & 0xf) << 0x15;
   local_344 = out_fmt[srcShift] & 0x1f | 0x1b00;
   if (DOUBLE_0004c3c8 <= dVar51) {
     iVar30 = (SInt32)(dVar51 - DOUBLE_0004c3c8);
     local_280 = (SInt64)iVar30;
-    uVar32 = iVar30 + 0x80000000;
+    srcLeft = iVar30 + 0x80000000;
   }
   else {
-    uVar32 = (UInt32)dVar44;
-    local_288 = (SInt64)(SInt32)uVar32;
+    srcLeft = (UInt32)dVar44;
+    local_288 = (SInt64)(SInt32)srcLeft;
   }
   if (DOUBLE_0004c3c8 <= dVar48) {
     iVar30 = (SInt32)(dVar48 - DOUBLE_0004c3c8);
     local_270 = (SInt64)iVar30;
-    uVar34 = iVar30 + 0x80000000;
+    srcTop = iVar30 + 0x80000000;
   }
   else {
-    uVar34 = (UInt32)dVar47;
-    local_278 = (SInt64)(SInt32)uVar34;
+    srcTop = (UInt32)dVar47;
+    local_278 = (SInt64)(SInt32)srcTop;
   }
-  local_340 = uVar32 & 0x1fff | (uVar34 & 0x1fff) << 0xd;
+  local_340 = srcLeft & 0x1fff | (srcTop & 0x1fff) << 0xd;
   if (DOUBLE_0004c3c8 <= dVar46) {
     iVar30 = (SInt32)(dVar46 - DOUBLE_0004c3c8);
     local_260 = (SInt64)iVar30;
@@ -322,8 +329,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
       uVar34 = (SInt32)dVar46 & 0xffff;
       uVar32 = (SInt32)dVar45 & 0xffff;
       if ((uVar34 < 0x1001) && (uVar32 < 0x1001)) {
-        uVar24 = 0;
-        uVar28 = 0;
+        firstRow = 0;
+        firstColumn = 0;
         uVar35 = 0;
         uVar25 = 0;
         uVar42 = 0;
@@ -350,23 +357,23 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
         uVar25 = (SInt32)dVar46 & 0xfe00;
         uVar42 = (SInt32)fVar11 - 1;
         uVar42 = (((SInt32)uVar42 >> 9) + (UInt32)((SInt32)uVar42 < 0 && (uVar42 & 0x1ff) != 0)) * 0x200;
-        uVar28 = 0;
-        if ((-1 < (SInt32)uVar42) && (uVar28 = uVar25, (SInt32)uVar42 <= (SInt32)uVar25)) {
-          uVar28 = uVar42 & 0xfe00;
+        firstColumn = 0;
+        if ((-1 < (SInt32)uVar42) && (firstColumn = uVar25, (SInt32)uVar42 <= (SInt32)uVar25)) {
+          firstColumn = uVar42 & 0xfe00;
         }
         uVar42 = 0x40;
         if ((0x40 < uVar32) && (uVar42 = (SInt32)dVar45 & 0xffc0, (SInt32)(uVar32 - uVar42) < 0x40)) {
           uVar42 = uVar42 - 0x40;
         }
-        uVar24 = 0;
+        firstRow = 0;
         uVar25 = (SInt32)fVar18 - 1;
         uVar25 = (((SInt32)uVar25 >> 6) + (UInt32)((SInt32)uVar25 < 0 && (uVar25 & 0x3f) != 0)) * 0x40;
-        if ((-1 < (SInt32)uVar25) && (uVar24 = uVar42 & 0xffff, (SInt32)uVar25 <= (SInt32)uVar42)) {
-          uVar24 = uVar25 & 0xffc0;
+        if ((-1 < (SInt32)uVar25) && (firstRow = uVar42 & 0xffff, (SInt32)uVar25 <= (SInt32)uVar42)) {
+          firstRow = uVar25 & 0xffc0;
         }
         uVar42 = 0x200;
-        if (0x1ff < uVar28) {
-          uVar42 = uVar28;
+        if (0x1ff < firstColumn) {
+          uVar42 = firstColumn;
         }
         uVar25 = uVar34 - 1;
         uVar35 = (((SInt32)uVar25 >> 9) + (UInt32)((SInt32)uVar25 < 0 && (uVar25 & 0x1ff) != 0)) * 0x200;
@@ -383,8 +390,8 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
           uVar25 = (SInt32)((uVar35 - uVar42) + 0xbff) / 0xc00 & 0xff;
         }
         uVar42 = 0x40;
-        if (0x3f < uVar24) {
-          uVar42 = uVar24;
+        if (0x3f < firstRow) {
+          uVar42 = firstRow;
         }
         uVar35 = uVar32 - 1;
         uVar37 = (((SInt32)uVar35 >> 6) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x3f) != 0)) * 0x40;
@@ -413,18 +420,18 @@ UInt32 write_3dtexquad_cmds_for_copy_buffer_using_DMA(ATIRadeonX1000 *accelerato
           fVar1 = FLOAT_0004c374 / fVar7;
         }
         if (uVar35 != 0) {
-          uVar37 = uVar32 - uVar24;
+          uVar37 = uVar32 - firstRow;
           uVar38 = 0;
           iVar30 = 0;
           puVar33 = puVar27;
-          uVar39 = uVar24;
+          uVar39 = firstRow;
           do {
             if (uVar25 != 0) {
-              uVar40 = uVar24 + iVar30;
-              uVar29 = uVar34 - uVar28;
+              uVar40 = firstRow + iVar30;
+              uVar29 = uVar34 - firstColumn;
               iVar22 = 0;
               fVar5 = (float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - DOUBLE_0004c3a8);
-              uVar31 = uVar28;
+              uVar31 = firstColumn;
               uVar43 = uVar25;
               do {
                 *puVar33 = uVar31;

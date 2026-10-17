@@ -1,7 +1,7 @@
---- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 18:50:31.131156392 -0700
-+++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 18:50:31.132541883 -0700
-@@ -679,8 +679,8 @@
-                          iVar48 * (uVar15 - uVar38) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
+--- a/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 22:44:56.717727108 -0700
++++ b/Sources/ATIR500GLContext_process_command_buffer_Port.cpp	2026-10-16 22:44:56.718152774 -0700
+@@ -700,8 +700,8 @@
+                          iVar48 * (uVar15 - hzBlockCount) >> 1 | recordCursor[uVar55 + 1] & 0xffff0000;
                      local_1b8 = 0x43300000;
                      recordCursor[uVar55 + 7] =
 -                         (UInt32)(float)(((double)CONCAT44d(0x43300000,iStack_1b4) - DOUBLE_0004c3b0)
@@ -11,10 +11,10 @@
                    }
                    pAVar77[0x36] = 0x1;
                  }
-@@ -2858,20 +2858,20 @@
+@@ -2879,20 +2879,20 @@
          *puVar42 = 0x31080;
          recordCursor[0xc2] = 0x1087;
-         uVar38 = 0;
+         opcode = 0;
 -        recordCursor[0xbe] = (UInt32)(fVar28 * (fVar6 + fVar5));
 -        recordCursor[0xc0] = (UInt32)(fVar28 * (fVar7 + fVar5));
 -        recordCursor[0xbf] = (UInt32)(fVar23 * (fVar8 + fVar9));
@@ -39,7 +39,7 @@
          recordCursor[0xc3] = iVar59 << 0x10 | uVar73;
          recordCursor[200] = 0;
        }
-@@ -2916,7 +2916,7 @@
+@@ -2937,7 +2937,7 @@
          }
          uVar35 = uVar53 - 1;
          uVar34 = (((SInt32)uVar35 >> 9) + (UInt32)((SInt32)uVar35 < 0 && (uVar35 & 0x1ff) != 0)) * 0x200;
@@ -48,7 +48,7 @@
          local_160 = (SInt64)(SInt32)uVar35;
          if (FLOAT_0004c370 < fVar24) {
            uStack_154 = uVar35 ^ 0x80000000;
-@@ -2939,7 +2939,7 @@
+@@ -2960,7 +2960,7 @@
          }
          uVar34 = uVar37 - 1;
          uVar41 = (((SInt32)uVar34 >> 6) + (UInt32)((SInt32)uVar34 < 0 && (uVar34 & 0x3f) != 0)) * 0x40;
@@ -57,7 +57,7 @@
          local_150 = (SInt64)(SInt32)uVar34;
          if (FLOAT_0004c370 < fVar18) {
            local_148 = 0x43300000;
-@@ -3080,20 +3080,20 @@
+@@ -3101,20 +3101,20 @@
                  uVar47 = uVar47 + 0xc00;
                  uVar46 = uVar46 - 0xc00;
                  iVar74 = (SInt32)((fVar26 - fVar20) * fVar30);

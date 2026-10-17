@@ -40,6 +40,8 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
   SInt32 *mapping;
   SInt32 *hwInfo;
   SInt32 iVar8;
+  SInt32 nextMipLevel;
+  SInt32 waited;
   UInt32 uVar9;
   UInt32 *record;
   SInt32 iVar11;
@@ -49,6 +51,9 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
   SInt32 iVar15;
   UInt32 *tileCursor;
   SInt32 iVar17;
+  SInt32 gartAddress;
+  SInt32 gartOffset;
+  SInt32 nextNode;
   UInt32 uVar18;
   UInt32 uVar19;
   UInt32 uVar20;
@@ -57,28 +62,31 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
   UInt32 uVar23;
   UInt32 uVar24;
   UInt32 uVar25;
-  SInt32 iVar26;
-  UInt32 uVar27;
+  SInt32 textureOffset;
+  SInt32 lodBlendWeight;
+  UInt32 lastLevel;
   UInt32 uVar28;
   UInt32 uVar29;
   SInt32 *accelerator;
   UInt32 uVar31;
   SInt32 iVar32;
+  SInt32 mipLevel;
+  SInt32 waitTotal;
   UInt8 *innerBuffer;
   SInt32 payloadByteLen;
   
   iVar17 = M<SInt32>(textureBytes + 0x14);
-  iVar26 = M<SInt32>(textureBytes + 0x48);
+  textureOffset = M<SInt32>(textureBytes + 0x48);
   uVar24 = (UInt32)M<UInt8>(iVar17 + 0x34);
   uVar25 = (UInt32)M<UInt8>(iVar17 + 0x17);
-  uVar27 = (uVar25 + M<UInt8>(iVar17 + 0x35)) - 1;
+  lastLevel = (uVar25 + M<UInt8>(iVar17 + 0x35)) - 1;
   if (uVar24 == 0) {
     return;
   }
   uVar20 = 0;
   bVar4 = false;
   do {
-    if (uVar25 <= uVar27) {
+    if (uVar25 <= lastLevel) {
       uVar18 = uVar25;
       do {
         if ((((UInt32)M<UInt16>(iVar17 + 0x1c) & ~(UInt32)M<UInt16>(iVar17 + 0x28)) >>
@@ -86,7 +94,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
           bVar4 = true;
         }
         uVar18 = uVar18 + 1;
-      } while (uVar18 <= uVar27);
+      } while (uVar18 <= lastLevel);
     }
     uVar20 = uVar20 + 1;
     iVar17 = iVar17 + 2;
@@ -106,9 +114,9 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
        (((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
        M<SInt32>(textureBytes + 4) != 0)) {
       GH_IOGetTime(textureBytes + 0x2c);
-      iVar17 = M<SInt32>(textureBytes + 0x34);
-      M<UInt32>(iVar17 + 0x38) = M<UInt32>(textureBytes + 0x38);
-      M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = iVar17;
+      nextNode = M<SInt32>(textureBytes + 0x34);
+      M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
       M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
       M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
       M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
@@ -117,7 +125,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
 LAB_00029704:
     if (textureBytes[0x20] != 0x7) goto LAB_00029724;
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
-    iVar17 = M<SInt32>(M<SInt32>(textureBytes + 0x58) + 4);
+    gartAddress = M<SInt32>(M<SInt32>(textureBytes + 0x58) + 4);
   }
   else {
     if (textureBytes[0x20] == 0x7) {
@@ -128,16 +136,16 @@ LAB_00029704:
       if (M<SInt32>(textureBytes + 4) == 0) {
         M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + 1;
         ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes));
-        iVar17 = M<SInt32>(textureBytes + 4);
+        gartOffset = M<SInt32>(textureBytes + 4);
         M<SInt16>(innerBuffer + 0xe) = M<SInt16>(innerBuffer + 0xe) + -1;
-        if (iVar17 != 0) goto LAB_00029660;
+        if (gartOffset != 0) goto LAB_00029660;
       }
       else {
 LAB_00029660:
         GH_IOGetTime(textureBytes + 0x2c);
-        iVar17 = M<SInt32>(textureBytes + 0x34);
-        M<UInt32>(iVar17 + 0x38) = M<UInt32>(textureBytes + 0x38);
-        M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = iVar17;
+        nextNode = M<SInt32>(textureBytes + 0x34);
+        M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+        M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
         M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
         M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
         M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
@@ -145,9 +153,9 @@ LAB_00029660:
       }
       if (M<SInt32>(innerBuffer + 4) != 0) {
         GH_IOGetTime(innerBuffer + 0x2c);
-        iVar17 = M<SInt32>(innerBuffer + 0x34);
-        M<UInt32>(iVar17 + 0x38) = M<UInt32>(innerBuffer + 0x38);
-        M<SInt32>(M<SInt32>(innerBuffer + 0x38) + 0x34) = iVar17;
+        nextNode = M<SInt32>(innerBuffer + 0x34);
+        M<UInt32>(nextNode + 0x38) = M<UInt32>(innerBuffer + 0x38);
+        M<SInt32>(M<SInt32>(innerBuffer + 0x38) + 0x34) = nextNode;
         M<UInt32>(innerBuffer + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
         M<SInt32>(innerBuffer + 0x38) = M<SInt32>(self + 200) + 0x69c;
         M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = innerBuffer;
@@ -157,14 +165,14 @@ LAB_00029660:
     }
 LAB_00029724:
     payloadByteLen = M<SInt32>(textureBytes + 0x50);
-    iVar17 = M<SInt32>(textureBytes + 4);
+    gartAddress = M<SInt32>(textureBytes + 4);
   }
   accelerator = M<SInt32 *>(self + 200);
-  iVar32 = accelerator[0x1d5];
-  iVar8 = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
+  waitTotal = accelerator[0x1d5];
+  waited = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
   record = (UInt32 *)(hwInfo + 0x280);
-  accelerator[0x1d5] = iVar32 + iVar8;
-  iVar17 = iVar17 + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+  accelerator[0x1d5] = waitTotal + waited;
+  gartAddress = gartAddress + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
   if (hwInfo[8] < 0) {
     if (M<SInt32>(textureBytes + 100) == 2) {
       hwInfo[0x285] = 1;
@@ -178,7 +186,7 @@ LAB_00029724:
       }
     }
     do {
-      if (uVar27 < uVar25) {
+      if (lastLevel < uVar25) {
         iVar32 = M<SInt32>(textureBytes + 0x14);
         iVar8 = uVar20 << 1;
       }
@@ -205,8 +213,8 @@ LAB_00029724:
             }
             else {
               record[uVar21] = 0x80000000;
-              record[iVar12] = iVar11 + iVar17;
-              record[iVar13] = iVar15 + iVar26;
+              record[iVar12] = iVar11 + gartAddress;
+              record[iVar13] = iVar15 + textureOffset;
             }
             uVar14 = uVar14 - 1;
             if (uVar14 == 0) break;
@@ -217,7 +225,7 @@ LAB_00029724:
             iVar15 = iVar15 + hwInfo[iVar5 * 8 + 0x14];
           }
           uVar18 = uVar18 + 1;
-        } while (uVar18 <= uVar27);
+        } while (uVar18 <= lastLevel);
       }
       iVar8 = iVar8 + iVar32;
       uVar20 = uVar20 + 1;
@@ -226,16 +234,16 @@ LAB_00029724:
     iVar17 = *hwInfo;
     record[iVar17] = 0x50b;
     if (M<SInt32>(self + 0x3bc) == 0) {
-      iVar32 = M<SInt32>(self + 0x29c);
-      iVar26 = M<SInt32>(self + 0x298);
-      iVar8 = iVar32 + 1;
+      mipLevel = M<SInt32>(self + 0x29c);
+      lodBlendWeight = M<SInt32>(self + 0x298);
+      nextMipLevel = mipLevel + 1;
       currentSurfaceBuffer = *(UInt8 **)
                  ((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
     }
     else {
-      iVar26 = 0;
-      iVar32 = 0;
-      iVar8 = 1;
+      lodBlendWeight = 0;
+      mipLevel = 0;
+      nextMipLevel = 1;
       currentSurfaceBuffer = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
     }
     uVar24 = 0;
@@ -246,15 +254,15 @@ LAB_00029724:
     if (uVar25 <= uVar24) {
       uVar25 = uVar24;
     }
-    uVar27 = 0x80000000;
+    lastLevel = 0x80000000;
     if ((UInt8)currentSurfaceBuffer[0x38] < 2) {
-      uVar27 = 0;
+      lastLevel = 0;
     }
     uVar24 = iVar17 + 2;
     record[iVar17 + 1] =
-         uVar27 | M<SInt32>(currentSurfaceBuffer + iVar32 * 4 + 0x40) * (UInt32)M<UInt16>(currentSurfaceBuffer + 0x20) +
-                  iVar26 * (M<SInt32>(currentSurfaceBuffer + iVar8 * 4 + 0x40) -
-                           M<SInt32>(currentSurfaceBuffer + iVar32 * 4 + 0x40)) + M<SInt32>(currentSurfaceBuffer + 8) >> 10 |
+         lastLevel | M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40) * (UInt32)M<UInt16>(currentSurfaceBuffer + 0x20) +
+                  lodBlendWeight * (M<SInt32>(currentSurfaceBuffer + nextMipLevel * 4 + 0x40) -
+                           M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40)) + M<SInt32>(currentSurfaceBuffer + 8) >> 10 |
                   uVar25 * M<UInt16>(currentSurfaceBuffer + 0x16) * 0x10000 & 0x3fc00000 |
                   ((UInt8)currentSurfaceBuffer[0x38] & 1) << 0x1e;
     goto LAB_00029cb4;
@@ -301,7 +309,7 @@ LAB_00029a94:
     uVar28 = (UInt32)M<UInt8>(iVar32 + 0x15);
     uVar29 = (UInt32)hwInfo[4] >> (uVar20 & 0x3f);
     uVar20 = (UInt32)hwInfo[3] >> (uVar20 & 0x3f);
-    if (uVar25 <= uVar27) {
+    if (uVar25 <= lastLevel) {
       uVar31 = uVar25;
       while( true ) {
         iVar11 = uVar14 * 0xd + uVar31;
@@ -332,13 +340,13 @@ LAB_00029a94:
             iVar13 = 0;
             do {
               iVar13 = iVar13 + 1;
-              tileCursor[1] = iVar12 + iVar26;
+              tileCursor[1] = iVar12 + textureOffset;
               tileCursor[3] = (uVar20 >> 1 & 0x1fff) << 1 |
                            (uVar28 >> 3 & 3) << 0x11 |
                            (uVar28 >> 2 & 1) << 0x10 | tileCursor[3] & 0xffe0c001;
               bVar1 = M<UInt8>((SInt32)hwInfo + 0x1b);
               tileCursor[9] = uVar29 - 1 & 0x3fff | tileCursor[9] & 0xffffc000;
-              tileCursor[5] = iVar32 + iVar17 & 0xffffffe0U | bVar1 & 3;
+              tileCursor[5] = iVar32 + gartAddress & 0xffffffe0U | bVar1 & 3;
               tileCursor = tileCursor + 0x1d;
               iVar32 = iVar32 + hwInfo[iVar11 * 8 + 0x13];
               iVar12 = iVar12 + hwInfo[iVar11 * 8 + 0x14];
@@ -356,7 +364,7 @@ LAB_00029a94:
           uVar20 = uVar23;
         }
         uVar31 = uVar31 + 1;
-        if (uVar27 < uVar31) break;
+        if (lastLevel < uVar31) break;
         iVar32 = M<SInt32>(textureBytes + 0x14);
       }
       iVar32 = M<SInt32>(textureBytes + 0x14);

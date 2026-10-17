@@ -49,10 +49,12 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
   SInt32 iVar24;
   SInt32 iVar25;
   UInt32 uVar26;
+  UInt32 firstRow;
   UInt32 uVar27;
   UInt32 uVar28;
   UInt32 *puVar29;
   UInt32 uVar30;
+  UInt32 firstColumn;
   SInt32 iVar31;
   SInt32 iVar32;
   UInt32 uVar33;
@@ -147,8 +149,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
       uVar38 = (SInt32)dVar51 & 0xffff;
       uVar23 = (SInt32)dVar50 & 0xffff;
       if ((uVar38 < 0x1001) && (uVar23 < 0x1001)) {
-        uVar26 = 0;
-        uVar30 = 0;
+        firstRow = 0;
+        firstColumn = 0;
         uVar39 = 0;
         uVar27 = 0;
         uVar40 = 0;
@@ -175,23 +177,23 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
         uVar27 = (SInt32)dVar51 & 0xfe00;
         uVar40 = (SInt32)fVar14 - 1;
         uVar40 = (((SInt32)uVar40 >> 9) + (UInt32)((SInt32)uVar40 < 0 && (uVar40 & 0x1ff) != 0)) * 0x200;
-        uVar30 = 0;
-        if ((-1 < (SInt32)uVar40) && (uVar30 = uVar27, (SInt32)uVar40 <= (SInt32)uVar27)) {
-          uVar30 = uVar40 & 0xfe00;
+        firstColumn = 0;
+        if ((-1 < (SInt32)uVar40) && (firstColumn = uVar27, (SInt32)uVar40 <= (SInt32)uVar27)) {
+          firstColumn = uVar40 & 0xfe00;
         }
         uVar40 = 0x40;
         if ((0x40 < uVar23) && (uVar40 = (SInt32)dVar50 & 0xffc0, (SInt32)(uVar23 - uVar40) < 0x40)) {
           uVar40 = uVar40 - 0x40;
         }
-        uVar26 = 0;
+        firstRow = 0;
         uVar27 = (SInt32)fVar19 - 1;
         uVar27 = (((SInt32)uVar27 >> 6) + (UInt32)((SInt32)uVar27 < 0 && (uVar27 & 0x3f) != 0)) * 0x40;
-        if ((-1 < (SInt32)uVar27) && (uVar26 = uVar40 & 0xffff, (SInt32)uVar27 <= (SInt32)uVar40)) {
-          uVar26 = uVar27 & 0xffc0;
+        if ((-1 < (SInt32)uVar27) && (firstRow = uVar40 & 0xffff, (SInt32)uVar27 <= (SInt32)uVar40)) {
+          firstRow = uVar27 & 0xffc0;
         }
         uVar40 = 0x200;
-        if (0x1ff < uVar30) {
-          uVar40 = uVar30;
+        if (0x1ff < firstColumn) {
+          uVar40 = firstColumn;
         }
         uVar27 = uVar38 - 1;
         uVar39 = (((SInt32)uVar27 >> 9) + (UInt32)((SInt32)uVar27 < 0 && (uVar27 & 0x1ff) != 0)) * 0x200;
@@ -208,8 +210,8 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
           uVar27 = (SInt32)((uVar39 - uVar40) + 0xbff) / 0xc00 & 0xff;
         }
         uVar40 = 0x40;
-        if (0x3f < uVar26) {
-          uVar40 = uVar26;
+        if (0x3f < firstRow) {
+          uVar40 = firstRow;
         }
         uVar39 = uVar23 - 1;
         uVar33 = (((SInt32)uVar39 >> 6) + (UInt32)((SInt32)uVar39 < 0 && (uVar39 & 0x3f) != 0)) * 0x40;
@@ -238,18 +240,18 @@ UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, 
           fVar2 = FLOAT_0004c374 / fVar10;
         }
         if (uVar39 != 0) {
-          uVar33 = uVar23 - uVar26;
+          uVar33 = uVar23 - firstRow;
           uVar43 = 0;
           iVar32 = 0;
-          uVar36 = uVar26;
+          uVar36 = firstRow;
           puVar37 = puVar29;
           do {
             if (uVar27 != 0) {
-              uVar42 = uVar26 + iVar32;
-              uVar34 = uVar38 - uVar30;
+              uVar42 = firstRow + iVar32;
+              uVar34 = uVar38 - firstColumn;
               iVar31 = 0;
               fVar5 = (float)((double)CONCAT44d(0x43300000,uVar42 ^ 0x80000000) - DOUBLE_0004c3a8);
-              uVar35 = uVar30;
+              uVar35 = firstColumn;
               uVar45 = uVar27;
               do {
                 *puVar37 = uVar35;

@@ -27,32 +27,32 @@
 
 
 /* real addr 0x26ce0 */
-UInt32 convertIOGLBufferToBufIdx(UInt32 param_1, UInt32 *param_2) {
+UInt32 convertIOGLBufferToBufIdx(UInt32 bufferKind, UInt32 *outIndex) {
 
-  switch(param_1) {
+  switch(bufferKind) {
   case 0:
-    *param_2 = 1;
+    *outIndex = 1;
     return 1;
   case 1:
-    *param_2 = 0;
+    *outIndex = 0;
     return 1;
   case 2:
-    *param_2 = 4;
+    *outIndex = 4;
     return 1;
   case 3:
-    *param_2 = 5;
+    *outIndex = 5;
     return 1;
   case 4:
-    *param_2 = 6;
+    *outIndex = 6;
     return 1;
   default:
-    *param_2 = 1;
+    *outIndex = 1;
     return 0;
   case 7:
-    *param_2 = 2;
+    *outIndex = 2;
     return 1;
   case 8:
-    *param_2 = 3;
+    *outIndex = 3;
     return 1;
   }
 }

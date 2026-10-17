@@ -1,0 +1,12 @@
+#!use-decl: beside
+# ATIRadeonX1000 per-use renames, part D: start() properties, SWDSInit (rows kept only if the compiled objects stay byte-identical: Tools/renames/filter_rows.py)
+# kind	target	old	new	tier	evidence	from	to
+use	ATIRadeonX1000::start@0x1f750	uVar6	property	CONFIRMED	the object returned by getProperty(const char *) (vtable +0x188) for "ATIEnableWideBlitSupport", passed to safeMetaCast	uVar6 = VCALL\(M<SInt32>\(self\), 0x188\)\(self,"ATIEnableWideBlitSupport"\);	if \(piVar7 != \(SInt32 \*\)0x0\) \{
+use	ATIRadeonX1000::start@0x1f750	uVar6	property	CONFIRMED	same, for "ATIUseTearingWideBlit"	uVar6 = VCALL\(M<SInt32>\(self\), 0x188\)\(self,"ATIUseTearingWideBlit"\);	if \(piVar7 != \(SInt32 \*\)0x0\) \{
+use	ATIRadeonX1000::start@0x1f750	uVar6	flag	CONFIRMED	OSBoolean::getValue (vtable +0xd8) of the property, stored to self+0x8c0	uVar6 = VCALL\(\*piVar7, 0xd8\)\(piVar7\);	^  \}$
+use	ATIRadeonX1000::start@0x1f750	uVar6	flag	CONFIRMED	same, stored to self+0x8c4	uVar6 = VCALL\(\*piVar7, 0xd8\)\(piVar7\);#2	^  \}$
+use	ATIRadeonX1000::start@0x1f750	piVar7	booleanObject	CONFIRMED	the property cast to OSBoolean (safeMetaCast against GH_OSBoolean_metaClass); null if it is not one	piVar7 = \(SInt32 \*\)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass\(uVar6,GH_OSBoolean_metaClass\);	^  if \(M<SInt32>\(self \+ 0x8c0\) == 0\) \{
+use	ATIRadeonX1000::start@0x1f750	piVar7	period	CONFIRMED	the OSNumber-like period returned by getPeriodValue("polling-period"): seconds * 1000 + fraction / 1000000 into self+0x994	piVar7 = \(SInt32 \*\)this->getPeriodValue\("polling-period"\);	piVar7 = \(SInt32 \*\)this->getPeriodValue\("sample-period"\);
+use	ATIRadeonX1000::start@0x1f750	piVar7	period	CONFIRMED	same for "sample-period", into self+0x998	piVar7 = \(SInt32 \*\)this->getPeriodValue\("sample-period"\);	this->enable_GPUSensor\(\);
+def	ATIRadeonX1000::SWDSInit@0x24670	uVar22	panel	CONFIRMED	the panel being set up: the loop runs panel 1 then 0 (uVar22 - 1 until it was 0), it selects the register set (uVar22 == 1) and is the panel argument of SWDSWriteBlitToCmdBuf
+def	ATIRadeonX1000::SWDSInit@0x24670	iVar19	recordOffset	CONFIRMED	panel * 0x78, the byte offset into the per-panel 0x78-byte surface records (self + recordOffset + 0x134/0x164...), stepped down by 0x78 with the panel

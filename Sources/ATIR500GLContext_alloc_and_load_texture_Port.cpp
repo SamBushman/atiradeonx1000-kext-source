@@ -34,8 +34,10 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
 
   UInt8 type;
   bool compacted;
-  SInt32 iVar3;
-  SInt32 iVar4;
+  SInt32 result;
+  SInt32 prev;
+  SInt32 nextNode;
+  SInt32 next;
   UInt8 *surface;
   UInt8 *linked;
   UInt32 bufferMask [6];
@@ -43,10 +45,10 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
   type = textureBytes[0x20];
   if (type == 0x3) {
     if ((((M<SInt32>(textureBytes + 0x48) == 0) &&
-         (iVar3 = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),textureBytes) /* #171: stock 0x2a40c: r4 = the texture buffer (incoming), allocate_texture(VendorTextureBuffer*) */, iVar3 == 0)) &&
-        (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
-                            (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,(VendorTextureBuffer *)(textureBytes)), iVar3 == 0)) &&
-       (iVar3 = this->compact_current_textures((VendorTextureBuffer *)(textureBytes)), iVar3 == 0)) {
+         (result = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),textureBytes) /* #171: stock 0x2a40c: r4 = the texture buffer (incoming), allocate_texture(VendorTextureBuffer*) */, result == 0)) &&
+        (result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
+                            (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,(VendorTextureBuffer *)(textureBytes)), result == 0)) &&
+       (result = this->compact_current_textures((VendorTextureBuffer *)(textureBytes)), result == 0)) {
       return;
     }
     goto LAB_0002a650;
@@ -56,9 +58,9 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
        (((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)textureBytes)),
        M<SInt32>(textureBytes + 4) != 0)) {
       GH_IOGetTime(textureBytes + 0x2c);
-      iVar3 = M<SInt32>(textureBytes + 0x34);
-      M<UInt32>(iVar3 + 0x38) = M<UInt32>(textureBytes + 0x38);
-      M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = iVar3;
+      nextNode = M<SInt32>(textureBytes + 0x34);
+      M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+      M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
       M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
       M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
       M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
@@ -72,9 +74,9 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
        (((IOATIR500GLContext *)(self))->map_transfer_to_GART((VendorTransferBuffer *)(linked)),
        M<SInt32>(linked + 4) != 0)) {
       GH_IOGetTime(linked + 0x2c);
-      iVar3 = M<SInt32>(linked + 0x34);
-      M<UInt32>(iVar3 + 0x38) = M<UInt32>(linked + 0x38);
-      M<SInt32>(M<SInt32>(linked + 0x38) + 0x34) = iVar3;
+      nextNode = M<SInt32>(linked + 0x34);
+      M<UInt32>(nextNode + 0x38) = M<UInt32>(linked + 0x38);
+      M<SInt32>(M<SInt32>(linked + 0x38) + 0x34) = nextNode;
       M<UInt32>(linked + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
       M<SInt32>(linked + 0x38) = M<SInt32>(self + 200) + 0x69c;
       M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = linked;
@@ -105,12 +107,12 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
       if ((bufferMask[0] & M<UInt32>(surface + 0xc18) & M<UInt32>(surface + 0xbf8)) == 0) {
         return;
       }
-      iVar3 = ((IOATIR500Surface *)(surface))->alloc_surfaces_keep((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
+      result = ((IOATIR500Surface *)(surface))->alloc_surfaces_keep((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
                          (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,bufferMask[0]);
       compacted = false;
-      if (iVar3 != 0) {
-        iVar3 = this->compact_current_textures((VendorTextureBuffer *)(textureBytes));
-        compacted = iVar3 == 0;
+      if (result != 0) {
+        result = this->compact_current_textures((VendorTextureBuffer *)(textureBytes));
+        compacted = result == 0;
       }
       M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x14) =
            1U - !compacted | M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x14);
@@ -135,9 +137,9 @@ void ATIR500GLContext::alloc_and_load_texture(VendorTextureBuffer *texture) {
     }
 LAB_0002a798:
     GH_IOGetTime(textureBytes + 0x2c);
-    iVar3 = M<SInt32>(textureBytes + 0x34);
-    M<UInt32>(iVar3 + 0x38) = M<UInt32>(textureBytes + 0x38);
-    M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = iVar3;
+    nextNode = M<SInt32>(textureBytes + 0x34);
+    M<UInt32>(nextNode + 0x38) = M<UInt32>(textureBytes + 0x38);
+    M<SInt32>(M<SInt32>(textureBytes + 0x38) + 0x34) = nextNode;
     M<UInt32>(textureBytes + 0x34) = M<UInt32>(M<SInt32>(self + 200) + 0x6d0);
     M<SInt32>(textureBytes + 0x38) = M<SInt32>(self + 200) + 0x69c;
     M<UInt8 *>(M<SInt32>(self + 200) + 0x6d0) = textureBytes;
@@ -146,16 +148,16 @@ LAB_0002a798:
   }
   if (M<SInt32>(textureBytes + 0x48) == 0) {
 LAB_0002a5f4:
-    iVar3 = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),textureBytes);
-    if (((iVar3 == 0) &&
-        (iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
-                            (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,(VendorTextureBuffer *)(textureBytes)), iVar3 == 0)) &&
-       (iVar3 = this->compact_current_textures((VendorTextureBuffer *)(textureBytes)), iVar3 == 0)) {
-      iVar3 = M<SInt32>(textureBytes + 0x24);
-      M<UInt32>(iVar3 + 0x28) = M<UInt32>(textureBytes + 0x28);
-      iVar4 = M<SInt32>(textureBytes + 0x28);
+    result = VCALL(*M<SInt32 *>(self + 200), 0x528)(M<SInt32 *>(self + 200),textureBytes);
+    if (((result == 0) &&
+        (result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeToAllocTextureVRAM((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)),
+                            (VendorTextureBuffer **)((UInt8 **)(self + 0x2a4)),0x2a,(VendorTextureBuffer *)(textureBytes)), result == 0)) &&
+       (result = this->compact_current_textures((VendorTextureBuffer *)(textureBytes)), result == 0)) {
+      prev = M<SInt32>(textureBytes + 0x24);
+      M<UInt32>(prev + 0x28) = M<UInt32>(textureBytes + 0x28);
+      next = M<SInt32>(textureBytes + 0x28);
       M<UInt8 *>(textureBytes + 0x28) = textureBytes;
-      M<SInt32>(iVar4 + 0x24) = iVar3;
+      M<SInt32>(next + 0x24) = prev;
       M<UInt8 *>(textureBytes + 0x24) = textureBytes;
       return;
     }

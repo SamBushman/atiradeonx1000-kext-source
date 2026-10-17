@@ -1,14 +1,14 @@
---- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 20:25:14.576129347 -0700
-+++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 20:25:14.577224137 -0700
+--- a/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 22:12:09.177755918 -0700
++++ b/Sources/ATIR500Surface_submit_flip_buffer_Port.cpp	2026-10-16 22:12:09.179113958 -0700
 @@ -39,7 +39,6 @@
    UInt16 uVar5;
    int iVar6;
    SInt16 sVar7;
 -  int iVar8;
    UInt32 *puVar9;
+   UInt32 *packet;
    unsigned int uVar10;
-   int iVar11;
-@@ -63,27 +62,27 @@
+@@ -68,27 +67,27 @@
    }
    if (M<UInt32>(self + 0xd54) != (UInt32)contextBytes) {
      M<UInt32>(self + 0xd54) = (UInt32)contextBytes;
@@ -50,13 +50,13 @@
      if (iVar17 == 0) {
        return;
      }
-@@ -91,11 +90,11 @@
+@@ -96,11 +95,11 @@
    else {
      piVar24 = M<int *>(self + 0xd50);
      iVar12 = piVar24[0x1e2];
--    iVar17 = VCALL(*piVar24, 0x54c)(piVar24,M<UInt32>(iVar8 + 0xc4c));
-+    iVar17 = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
-     piVar24[0x1e2] = iVar12 + iVar17;
+-    waited = VCALL(*piVar24, 0x54c)(piVar24,M<UInt32>(iVar8 + 0xc4c));
++    waited = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
+     piVar24[0x1e2] = iVar12 + waited;
    }
 -  puVar18 = M<UInt32 *>(iVar8 + 0xc50);
 -  puVar9 = M<UInt32 *>(iVar11 + self + 0xc34);
@@ -65,18 +65,18 @@
    uVar21 = puVar9[1];
    uVar20 = puVar9[2];
    uVar14 = puVar9[3];
-@@ -110,7 +109,7 @@
+@@ -115,7 +114,7 @@
    puVar18[7] = uVar14;
    puVar18[4] = uVar21;
    puVar18[6] = uVar20;
--  iVar17 = M<int>(iVar8 + 0xc50);
-+  iVar17 = (int)Vol(slot->header);
-   puVar9 = (UInt32 *)(iVar17 + 0x20);
-   *puVar9 = 0xd0b;
-   M<UInt32>(iVar17 + 0x24) = 5;
-@@ -314,7 +313,7 @@
+-  slotHeaderAddr = M<int>(iVar8 + 0xc50);
++  slotHeaderAddr = (int)Vol(slot->header);
+   packet = (UInt32 *)(slotHeaderAddr + 0x20);
+   *packet = 0xd0b;
+   M<UInt32>(slotHeaderAddr + 0x24) = 5;
+@@ -319,7 +318,7 @@
      uVar16 = uVar13 + 1;
-     puVar9[uVar13] = 0x80000000;
+     packet[uVar13] = 0x80000000;
    }
 -  M<unsigned int>(M<int>(iVar8 + 0xc50) + 0x14) = uVar16;
 +  M<unsigned int>((int)Vol(slot->header) + 0x14) = uVar16;

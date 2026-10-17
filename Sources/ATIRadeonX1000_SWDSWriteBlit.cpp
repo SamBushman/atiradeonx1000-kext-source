@@ -43,9 +43,12 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   float fVar6;
   UInt32 uVar7;
   UInt32 uVar8;
-  SInt32 iVar9;
+  SInt32 packetEnd;
+  SInt32 baseOffset;
+  SInt32 regValueIndex;
   UInt32 uVar10;
   UInt32 uVar11;
+  UInt32 blkFormatFieldE4;
   UInt32 uVar12;
   UInt32 in_register_00000018;
   UInt32 uVar13;
@@ -55,6 +58,8 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   SInt32 pitch;
   SInt32 endAddress;
   UInt32 uVar17;
+  UInt32 packetFormatFieldE4;
+  UInt32 blkFormatFieldE0;
   UInt32 uVar18;
   UInt32 uVar19;
   UInt32 uVar20;
@@ -93,17 +98,17 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
       buffer[wordCount + 2] = 0x194e;
       buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + 0x898)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
-      iVar9 = wordCount + 5;
+      regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
-      buffer[iVar9] = 8;
+      buffer[regValueIndex] = 8;
     }
     else {
       buffer[wordCount + 2] = 0x1b4e;
       buffer[wordCount + 3] = ((UInt32)uVar3 & ~M<UInt32>(self + 0x89c)) << 0x10 | 0x80000000;
       buffer[wordCount + 4] = 0x5c8;
-      iVar9 = wordCount + 5;
+      regValueIndex = wordCount + 5;
       wordCount = wordCount + 6;
-      buffer[iVar9] = 0x80000008;
+      buffer[regValueIndex] = 0x80000008;
     }
   }
   if (0x1000 < M<UInt16>(self + panel * 0x78 + 0x148)) {
@@ -147,15 +152,15 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     if (0x20 / M<UInt16>(self + panel * 0x78 + 0x9d2) <= uVar17) {
       uVar10 = uVar17;
     }
-    uVar17 = FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c);
+    blkFormatFieldE0 = FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c);
     blk[5] = uVar10 & 0x3ffe | ((UInt8)self[panel * 0x78 + 0x9f4] & 1) << 0x10 |
                 ((UInt8)self[panel * 0x78 + 0x9f4] & 6) << 0x10 |
                 ((UInt8)self[panel * 0x78 + 0x9f5] & 3) << 0x13 |
                 FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c) >> 1 &
                 0x1e00000;
-    blk[7] = (uVar17 & 0x600) << 5 |
-                (uVar17 & 0x1800) << 1 |
-                uVar17 >> 3 & 0xc00 | uVar17 >> 7 & 0x300 | uVar17 >> 0x11 & 0x1f;
+    blk[7] = (blkFormatFieldE0 & 0x600) << 5 |
+                (blkFormatFieldE0 & 0x1800) << 1 |
+                blkFormatFieldE0 >> 3 & 0xc00 | blkFormatFieldE0 >> 7 & 0x300 | blkFormatFieldE0 >> 0x11 & 0x1f;
     if (((M<UInt32>(self + panel * 0x78 + 0x9f8) & 0xf00000) == 0) ||
        (uVar10 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x9d8) /
                  (M<UInt32>(self + panel * 0x78 + 0x9f8) >> 0x14 & 0xf), uVar17 = uVar10 - 1,
@@ -181,10 +186,10 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     if (M<UInt16>(self + panel * 0x78 + 0x14a) != 0) {
       uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
     }
-    uVar11 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)self[panel * 0x78 + 0x166] * 0x1c);
+    blkFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)self[panel * 0x78 + 0x166] * 0x1c);
     blk[1] = uVar17 & 0x7ff | (uVar10 & 0x7ff) << 0xb | 0x80000000;
-    blk[2] = uVar11 >> 0x13 & 0x1f | (uVar11 & 0x40) << 0x10 | uVar11 >> 7 & 0xe00 |
-                uVar11 >> 1 & 0x7000 | (uVar11 & 0x1c00) << 5 | (uVar11 & 0x380) << 0xb;
+    blk[2] = blkFormatFieldE4 >> 0x13 & 0x1f | (blkFormatFieldE4 & 0x40) << 0x10 | blkFormatFieldE4 >> 7 & 0xe00 |
+                blkFormatFieldE4 >> 1 & 0x7000 | (blkFormatFieldE4 & 0x1c00) << 5 | (blkFormatFieldE4 & 0x380) << 0xb;
     uVar17 = M<UInt32>(self + panel * 0x78 + 0x168);
     bVar1 = (uVar17 & 0xf00000) == 0;
     if (bVar1) {
@@ -234,7 +239,7 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
   blitPacket = buffer + wordCount;
   GH_memcpy(blitPacket,&g_r500_3d_blit_state_packet,0x2f4);
   iVar14 = (UInt32)(UInt8)self[panel * 0x78 + 0x9f6] * 0x1c;
-  iVar9 = (SInt32)blitPacket + (0x2f4 - (SInt32)buffer) >> 2;
+  packetEnd = (SInt32)blitPacket + (0x2f4 - (SInt32)buffer) >> 2;
   uVar17 = 0;
   blitPacket[0x9a] =
        (UInt32)M<UInt16>(self + panel * 0x78 + 0x9dc) * M<SInt32>(self + panel * 0x78 + 0x9fc) +
@@ -291,10 +296,10 @@ UInt32 ATIRadeonX1000::SWDSWriteBlitToCmdBuf(UInt32 *buffer, UInt32 wordCount, b
     uVar10 = M<UInt16>(self + panel * 0x78 + 0x14a) - 1;
   }
   blitPacket[0xa6] = uVar17 & 0x7ff | (uVar10 & 0x7ff) << 0xb | 0x80000000;
-  uVar17 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar2 * 0x1c);
+  packetFormatFieldE4 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar2 * 0x1c);
   blitPacket[0xa8] =
-       uVar17 >> 0x13 & 0x1f | (uVar17 & 0x40) << 0x10 | uVar17 >> 7 & 0xe00 | uVar17 >> 1 & 0x7000
-       | (uVar17 & 0x1c00) << 5 | (uVar17 & 0x380) << 0xb;
+       packetFormatFieldE4 >> 0x13 & 0x1f | (packetFormatFieldE4 & 0x40) << 0x10 | packetFormatFieldE4 >> 7 & 0xe00 | packetFormatFieldE4 >> 1 & 0x7000
+       | (packetFormatFieldE4 & 0x1c00) << 5 | (packetFormatFieldE4 & 0x380) << 0xb;
   uVar17 = M<UInt32>(self + panel * 0x78 + 0x168);
   bVar1 = (uVar17 & 0xf00000) == 0;
   if (bVar1) {
@@ -378,40 +383,40 @@ LAB_00023c68:
   if (0x1000 < M<UInt16>(self + panel * 0x78 + 0x14a)) {
     if (rotation == 0x5a) {
       dVar23 = (double)FLOAT_0004c37c;
-      iVar14 = iVar9 * 4 + 0x30 >> 2;
+      iVar14 = packetEnd * 4 + 0x30 >> 2;
       fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-      buffer[iVar9] = 0x31080;
-      buffer[iVar9 + 5] = 0x1087;
-      buffer[iVar9 + 7] = 0xc0033500;
-      buffer[iVar9 + 8] = 0x10031;
-      buffer[iVar9 + 9] = 0x45000000;
-      buffer[iVar9 + 10] = FBITS(fVar5);
-      buffer[iVar9 + 1] = uVar20;
-      buffer[iVar9 + 2] = uVar19;
-      buffer[iVar9 + 3] = uVar18;
-      buffer[iVar9 + 4] = uVar15;
-      buffer[iVar9 + 0xb] = 0;
-      buffer[iVar9 + 6] = (SInt32)(dVar25 * dVar23) | 0x60000000;
+      buffer[packetEnd] = 0x31080;
+      buffer[packetEnd + 5] = 0x1087;
+      buffer[packetEnd + 7] = 0xc0033500;
+      buffer[packetEnd + 8] = 0x10031;
+      buffer[packetEnd + 9] = 0x45000000;
+      buffer[packetEnd + 10] = FBITS(fVar5);
+      buffer[packetEnd + 1] = uVar20;
+      buffer[packetEnd + 2] = uVar19;
+      buffer[packetEnd + 3] = uVar18;
+      buffer[packetEnd + 4] = uVar15;
+      buffer[packetEnd + 0xb] = 0;
+      buffer[packetEnd + 6] = (SInt32)(dVar25 * dVar23) | 0x60000000;
       goto LAB_00023f44;
     }
     if (rotation == 0x10e) {
       dVar23 = (double)FLOAT_0004c37c;
       dVar22 = (double)FLOAT_0004c378;
-      iVar14 = iVar9 * 4 + 0x30 >> 2;
+      iVar14 = packetEnd * 4 + 0x30 >> 2;
       fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
       fVar6 = (float)(dVar24 + (double)(float)(dVar24 - dVar22)) * FLOAT_0004c380;
-      buffer[iVar9] = 0x31080;
-      buffer[iVar9 + 7] = 0xc0033500;
-      buffer[iVar9 + 5] = 0x1087;
-      buffer[iVar9 + 8] = 0x10031;
-      buffer[iVar9 + 9] = FBITS(fVar6);
-      buffer[iVar9 + 10] = FBITS(fVar5);
-      buffer[iVar9 + 0xb] = 0;
-      buffer[iVar9 + 1] = uVar20;
-      buffer[iVar9 + 2] = uVar19;
-      buffer[iVar9 + 3] = uVar18;
-      buffer[iVar9 + 4] = uVar15;
-      buffer[iVar9 + 6] =
+      buffer[packetEnd] = 0x31080;
+      buffer[packetEnd + 7] = 0xc0033500;
+      buffer[packetEnd + 5] = 0x1087;
+      buffer[packetEnd + 8] = 0x10031;
+      buffer[packetEnd + 9] = FBITS(fVar6);
+      buffer[packetEnd + 10] = FBITS(fVar5);
+      buffer[packetEnd + 0xb] = 0;
+      buffer[packetEnd + 1] = uVar20;
+      buffer[packetEnd + 2] = uVar19;
+      buffer[packetEnd + 3] = uVar18;
+      buffer[packetEnd + 4] = uVar15;
+      buffer[packetEnd + 6] =
            (SInt32)((double)(float)(dVar24 - (double)(float)(dVar24 - dVar22)) * dVar23) << 0x10 |
            (SInt32)(dVar25 * dVar23);
       goto LAB_00023f44;
@@ -420,19 +425,19 @@ LAB_00023c68:
   dVar23 = (double)FLOAT_0004c37c;
   fVar5 = (float)(dVar25 + (double)FLOAT_0004c370) * FLOAT_0004c380;
   fVar6 = (float)(dVar24 + (double)FLOAT_0004c370) * FLOAT_0004c380;
-  buffer[iVar9] = 0x31080;
-  buffer[iVar9 + 7] = 0xc0033500;
-  buffer[iVar9 + 8] = 0x10031;
-  buffer[iVar9 + 5] = 0x1087;
-  buffer[iVar9 + 9] = FBITS(fVar6);
-  buffer[iVar9 + 10] = FBITS(fVar5);
-  buffer[iVar9 + 1] = uVar20;
-  buffer[iVar9 + 2] = uVar19;
-  buffer[iVar9 + 3] = uVar18;
-  buffer[iVar9 + 4] = uVar15;
-  buffer[iVar9 + 0xb] = 0;
-  buffer[iVar9 + 6] = (SInt32)(dVar24 * dVar23) << 0x10 | (SInt32)(dVar25 * dVar23);
-  iVar14 = iVar9 * 4 + 0x30 >> 2;
+  buffer[packetEnd] = 0x31080;
+  buffer[packetEnd + 7] = 0xc0033500;
+  buffer[packetEnd + 8] = 0x10031;
+  buffer[packetEnd + 5] = 0x1087;
+  buffer[packetEnd + 9] = FBITS(fVar6);
+  buffer[packetEnd + 10] = FBITS(fVar5);
+  buffer[packetEnd + 1] = uVar20;
+  buffer[packetEnd + 2] = uVar19;
+  buffer[packetEnd + 3] = uVar18;
+  buffer[packetEnd + 4] = uVar15;
+  buffer[packetEnd + 0xb] = 0;
+  buffer[packetEnd + 6] = (SInt32)(dVar24 * dVar23) << 0x10 | (SInt32)(dVar25 * dVar23);
+  iVar14 = packetEnd * 4 + 0x30 >> 2;
 LAB_00023f44:
   uVar17 = (UInt32)M<UInt16>(self + panel * 0x78 + 0x14a);
   if (0x1000 < uVar17) {
@@ -440,7 +445,7 @@ LAB_00023f44:
       pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
       uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
       uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
-      iVar9 = M<SInt32>(self + panel * 0x78 + 0x134);
+      baseOffset = M<SInt32>(self + panel * 0x78 + 0x134);
       uVar7 = blitPacket[0xa0];
       uVar13 = blitPacket[0xa6];
       uVar11 = blitPacket[0xb2];
@@ -453,7 +458,7 @@ LAB_00023f44:
       }
       buffer[iVar14] = 0x1150;
       buffer[iVar14 + 1] =
-           (UInt32)uVar3 * pitch + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
+           (UInt32)uVar3 * pitch + baseOffset + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
       buffer[iVar14 + 2] = 0x1120;
       buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
       buffer[iVar14 + 4] = 0x10f8;
@@ -483,7 +488,7 @@ LAB_00023f44:
       pitch = M<SInt32>(self + panel * 0x78 + 0x16c);
       uVar3 = M<UInt16>(self + panel * 0x78 + 0x14c);
       uVar4 = M<UInt16>(self + panel * 0x78 + 0x144);
-      iVar9 = M<SInt32>(self + panel * 0x78 + 0x134);
+      baseOffset = M<SInt32>(self + panel * 0x78 + 0x134);
       uVar7 = blitPacket[0xa0];
       uVar13 = blitPacket[0xa6];
       uVar11 = blitPacket[0xb2];
@@ -496,7 +501,7 @@ LAB_00023f44:
       }
       buffer[iVar14] = 0x1150;
       buffer[iVar14 + 1] =
-           (UInt32)uVar3 * pitch + iVar9 + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
+           (UInt32)uVar3 * pitch + baseOffset + (UInt32)uVar4 * 0x1000 & 0xffffffe0 | uVar7 & 0x1f;
       buffer[iVar14 + 2] = 0x1120;
       buffer[iVar14 + 3] = (uVar17 - 0x1001) * 0x800 & 0x3ff800 | uVar13 & 0xffc007ff;
       buffer[iVar14 + 4] = 0x10f8;

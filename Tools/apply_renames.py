@@ -13,13 +13,18 @@ RENAMED text). They carry the structural edits that need more than a rename - su
 applied is skipped; one that applies neither way is an error (the re-ported text differs: redo the edit and regenerate the patch).
 
 Table format (tab separated, '#' starts a comment line):
-    kind  target  old  new  tier  evidence  [from  to]
+    #!use-decl: end|beside      (a line of its own in a table, before its `use` rows; default end)
+    kind  target  old  new  tier  evidence  [from  to  [occ]]
   kind    def   rename an identifier inside one function DEFINITION in Sources/*.cpp (signature included)
           decl  rename a parameter name inside one function DECLARATION in Headers/<Class>.h
           use   rename ONE USE of a variable that the decompile reuses for several unrelated roles: only the lines from the first line matching the
                 regex `from` up to (not including) the first following line matching the regex `to` (empty or '-' = to the end of the function;
-                `from` '-' = from the first line after the declarations). `new` is declared next to the declaration of `old` (same type), so the
-                variable is split in two. Rows of one function are applied in table order and may split the same `old` several times.
+                `from` '-' = from the first line after the declarations). `new` is declared (same type as `old`) at the END of the function's declaration block (the table directive `#!use-decl: beside` instead puts it right after the declaration of `old`, which is how the first tables were verified):
+                gcc 4.0.1 numbers pseudo-registers in declaration order, so any other position changes the allocation of the existing variables - so the
+                variable is split in two. The optional 9th column `occ` (comma list of 1-based indices) renames only those occurrences of the variable
+                inside the segment - for a line like `x = f(x)` whose two sides play different roles; the indices count, in text order, every code
+                occurrence (comments and string literals excluded) of `old` or of any `new` name that a use row gives the same `old`, so they stay stable
+                as rows are applied. Rows of one function are applied in table order and may split the same `old` several times.
   target  Class::method, optionally Class::method@0xADDR (several definitions with that name: the one whose "real addr" comment matches)
           or Class::method#N (decl only: the N-th declaration, 1-based). A FREE function (no class) is written with an empty class: `::pcl_CopyPix`
           (def rows only; a decl row needs a class header)
@@ -171,18 +176,61 @@ def find_decls(root, cls, meth, nth, read):
     return found
 
 
+def code_idents(s, names):
+    """[(start, end, name)] of every identifier of `names` in s, outside comments and string/char literals, in text order"""
+    out, i = [], 0
+    while i < len(s):
+        sk = lex_skip(s, i)
+        if sk: i = sk[0]; continue
+        m = IDENT.match(s, i)
+        if m:
+            if m.group() in names: out.append((m.start(), m.end(), m.group()))
+            i = m.end()
+        else: i += 1
+    return out
+
+
 def nth_match(pattern, norm, start):
-    """index of the first line at or after `start` matching the regex; a trailing `#N` on the pattern selects the N-th match instead"""
-    m = re.match(r'^(.*)#(\d+)$', pattern)
-    pat, n = (m.group(1), int(m.group(2))) if m else (pattern, 1)
+    """index of the line an anchor designates: the first line at or after `start` matching the regex; a trailing `#N` selects the N-th match, a further
+    trailing `@K` / `@-K` moves the result K lines down / up from the matching line (an anchor can thus sit on a line that no `use` row renames).
+    norm[i] is the list of variants of line i (see line_variants); the line matches when any variant does"""
+    m = re.match(r'^(.*?)(?:#(\d+))?(?:@(-?\d+))?$', pattern)
+    pat, n, off = m.group(1), int(m.group(2) or 1), int(m.group(3) or 0)
     for i in range(start, len(norm)):
-        if re.search(pat, norm[i]):
+        if any(re.search(pat, v) for v in (norm[i] if isinstance(norm[i], list) else [norm[i]])):
             n -= 1
-            if n == 0: return i
+            if n == 0:
+                j = i + off
+                return j if 0 <= j < len(norm) else None
     return None
 
 
 DECL_RE = r'^(\s*)((?:[A-Za-z_][\w:<>]*\s+)*[A-Za-z_][\w:<>]*(?:\s*\*+\s*|\s+))%s\s*;\s*$'
+
+
+def line_variants(line, revert, limit=64):
+    """the line with every use-renamed identifier taken back to its old name; a new name shared by several old variables gives one variant per choice"""
+    keys = sorted({m.group() for m in IDENT.finditer(line) if m.group() in revert})
+    variants = [{}]
+    for k in keys:
+        variants = [dict(v, **{k: o}) for v in variants for o in revert[k]][:limit]
+    return [rename_in(line, v) for v in variants]
+
+
+def is_decl_line(l):
+    """a local-variable declaration line of a decompiled function: `type name;` / `type name [n];`, no call or initialiser"""
+    t = l.strip()
+    return bool(t) and t.endswith(';') and '(' not in t and '=' not in t and re.match(r'^[A-Za-z_][\w:<>]*(\s+[\w:<>]+|\s*\*+)*\s*\**\s*\w+\s*(\[[^\]]*\]\s*)*;$', t) is not None
+
+
+def decl_block(lines, decl_i):
+    """(end of the declarations after line decl_i, index of the first statement): the new variable of a `use` row is declared LAST in the block - gcc 4.0.1
+    numbers pseudo-registers in declaration order, so declaring it beside the old one (earlier) changes register and stack-slot allocation of the old ones"""
+    j = decl_i
+    while j + 1 < len(lines) and is_decl_line(lines[j + 1]): j += 1
+    k = j + 1
+    while k < len(lines) and not lines[k].strip(): k += 1
+    return j + 1, k
 
 
 def apply_uses(use_rows, root, read, files, errors):
@@ -202,21 +250,23 @@ def apply_uses(use_rows, root, read, files, errors):
         s = read(f); scope = s[st:en]
         revert = {}
         for r in rs:
-            if revert.get(r[4], r[3]) != r[3]: errors.append('%s:%d: %s is the new name of two different variables in %s' % (r[0], r[1], r[4], target))
-            revert[r[4]] = r[3]
-        for (t, n, _, old, new, frm, to) in rs:
+            if r[3] not in revert.setdefault(r[4], []): revert[r[4]].append(r[3])
+        for (t, n, _, old, new, frm, to, occ, dmode) in rs:
             where = '%s:%d: %s' % (t, n, target)
             have = idents_in(scope)
             lines = scope.split('\n')
             if not IDENT.fullmatch(new) or new in KEYWORDS: errors.append('%s: %r is not a usable identifier' % (where, new)); continue
             declared = any(re.match(DECL_RE % re.escape(new), l) for l in lines)
+            if declared:
+                dn = next(re.match(DECL_RE % re.escape(new), l) for l in lines if re.match(DECL_RE % re.escape(new), l))
+                do = next((re.match(DECL_RE % re.escape(old), l) for l in lines if re.match(DECL_RE % re.escape(old), l)), None)
+                if do is not None and dn.group(2).split() != do.group(2).split():
+                    print('WARNING %s: %s is declared as %r but %s as %r (a shared new name should have the same type; the byte-identical build is the check)' % (where, new, dn.group(2).strip(), old, do.group(2).strip()), file=sys.stderr)
             if new in have and not declared: errors.append('%s: %s already occurs in the function and is not a variable declared by a use row' % (where, new)); continue
-            norm = [rename_in(l, revert) for l in lines]
+            norm = [line_variants(l, revert) for l in lines]
             decl_i = next((i for i, l in enumerate(lines) if re.match(DECL_RE % re.escape(old), l)), None)
             if decl_i is None: errors.append('%s: no declaration of %s to copy the type from' % (where, old)); continue
-            j = decl_i + 1                                          # the first line after the declarations
-            while j < len(lines) and (re.match(DECL_RE % r'\w+', lines[j]) or not lines[j].strip()): j += 1
-            body0 = j
+            decl_end, body0 = decl_block(lines, decl_i)
             if frm in ('', '-'): a = body0
             else:
                 a = nth_match(frm, norm, body0)
@@ -224,16 +274,33 @@ def apply_uses(use_rows, root, read, files, errors):
             if to in ('', '-'): b = len(lines)
             else:
                 b = nth_match(to, norm, a + 1)
-                if b is None: errors.append('%s: no line after the from-line matches to=%r' % (where, to)); continue
+                if b is None or b <= a: errors.append('%s: no line after the from-line matches to=%r' % (where, to)); continue
             seg = '\n'.join(lines[a:b])
-            if old not in idents_in(seg, comments=False):
-                if declared: applied += 1
-                else: errors.append('%s: %s does not occur in lines %d-%d' % (where, old, a + 1, b))
-                continue
-            lines[a:b] = rename_in(seg, {old: new}).split('\n')
+            if not occ.strip():
+                if old not in idents_in(seg, comments=False):
+                    if declared: applied += 1
+                    else: errors.append('%s: %s does not occur in lines %d-%d' % (where, old, a + 1, b))
+                    continue
+                lines[a:b] = rename_in(seg, {old: new}).split('\n')
+            else:
+                try: want = sorted({int(x) for x in occ.split(',')})
+                except ValueError: errors.append('%s: bad occ %r' % (where, occ)); continue
+                family = {old} | {r[4] for r in rs if r[3] == old}
+                hits = code_idents(seg, family)
+                if want[-1] > len(hits): errors.append('%s: occ %d but only %d occurrences of %s in lines %d-%d' % (where, want[-1], len(hits), old, a + 1, b)); continue
+                todo = [hits[k - 1] for k in want]
+                bad = [h for h in todo if h[2] not in (old, new)]
+                if bad: errors.append('%s: occurrence at %d is already named %s' % (where, bad[0][0], bad[0][2])); continue
+                todo = [h for h in todo if h[2] == old]
+                if not todo:
+                    if declared: applied += 1
+                    else: errors.append('%s: nothing to rename (occurrences already %s but %s is not declared)' % (where, new, new))
+                    continue
+                for (i, j, _) in sorted(todo, reverse=True): seg = seg[:i] + new + seg[j:]
+                lines[a:b] = seg.split('\n')
             if not declared:
                 m = re.match(DECL_RE % re.escape(old), lines[decl_i])
-                lines.insert(decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
+                lines.insert(decl_end if dmode == 'end' else decl_i + 1, '%s%s%s;' % (m.group(1), m.group(2), new))
             scope = '\n'.join(lines)
             pending += 1
         files[f] = s[:st] + scope + s[en:]
@@ -242,20 +309,25 @@ def apply_uses(use_rows, root, read, files, errors):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('--check', action='store_true'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
+    ap.add_argument('--check', action='store_true'); ap.add_argument('--no-use', action='store_true', help='ignore the `use` rows (to see the text the anchors of the use rows are matched against)'); ap.add_argument('--root', default=os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
     ap.add_argument('tables', nargs='*')
     a = ap.parse_args()
     tables = a.tables or sorted(glob.glob(os.path.join(a.root, 'Tools', 'renames', '*.tsv')))
     rows, use_rows = [], []
     for t in tables:
+        dmode = 'end'                                   # where the new variable of this table's `use` rows is declared (see `#!use-decl:` in the module docstring)
         for n, l in enumerate(open(t), 1):
+            if l.startswith('#!use-decl:'):
+                dmode = l.split(':', 1)[1].strip()
+                if dmode not in ('end', 'beside'): sys.exit('%s:%d: #!use-decl must be end or beside' % (t, n))
+                continue
             if l.startswith('#') or not l.strip(): continue
             f = l.rstrip('\n').split('\t')
             if len(f) < 5 or f[0] not in ('def', 'decl', 'use') or f[4] not in ('CONFIRMED', 'INFERRED', 'UNKNOWN'):
                 sys.exit('%s:%d: bad row (kind target old new tier [evidence [from to]])' % (t, n))
             if f[0] == 'use':
-                f += [''] * (8 - len(f))
-                use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7]))
+                f += [''] * (9 - len(f))
+                use_rows.append((t, n, f[1], f[2], f[3], f[6], f[7], f[8], dmode))
                 continue
             rows.append((t, n, f[0], f[1], f[2], f[3]))
     # group rows by (kind, target) so one scope gets all its renames at once
@@ -291,7 +363,7 @@ def main():
         if not mapping: continue
         pending += len(mapping)
         files[f] = s[:st] + rename_in(scope, mapping) + s[en:]
-    up, ua = apply_uses(use_rows, a.root, read, files, errors)
+    up, ua = apply_uses([] if a.no_use else use_rows, a.root, read, files, errors)
     pending += up; applied += ua
     for e in errors: print('ERROR', e, file=sys.stderr)
     if not a.check and not errors:

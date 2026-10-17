@@ -1,0 +1,120 @@
+#!use-decl: beside
+# Rest_splits: per-use renames (see `use` in Tools/apply_renames.py) for decompile variables reused for several roles, in the classes not covered by the other split tables.
+# kind	target	old	new	tier	evidence	from	to
+def	ATIRadeonX1000::submit_buffer_retired@0x20700	uVar3	nextIndex	CONFIRMED	ringIndex + 1: stored back to the ring write index (self+0x914) after each dword
+def	ATIRadeonX1000::submit_ring_data@0x1f030	iVar4	flushEnd	CONFIRMED	end of the byte range of ring dwords to push out of the data cache (one value per flushed run)
+def	ATIRadeonX1000::submit_ring_data@0x1f030	uVar8	tailLineBase	CONFIRMED	cache-line aligned start of the run from the old read index to the end of the ring, when the new dwords wrap around
+def	::HZMEM_GetBlockOffset	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as declared in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_GetBlockOffset	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_GetBlockOffset	param_2	surfaceHzField	CONFIRMED	the rolling surface HyperZ bitfield (three 10-bit block indexes, 0x3ff = none), as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_GetBlockOffset	param_3	blockKind	CONFIRMED	the block kind 0/1/2 that selects the pool (hizData+0x10+kind*4) and the 10-bit field of surfaceHzField
+def	::HZMEM_GetBlockCount	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as declared in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_GetBlockCount	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_GetBlockCount	param_2	surfaceHzField	CONFIRMED	the rolling surface HyperZ bitfield (three 10-bit block indexes, 0x3ff = none), as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_GetBlockCount	param_3	blockKind	CONFIRMED	the block kind 0/1/2 that selects the pool (hizData+0x10+kind*4) and the 10-bit field of surfaceHzField
+def	::HZMEM_IsPartial	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as declared in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_IsPartial	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_IsPartial	param_2	surfaceHzField	CONFIRMED	the rolling surface HyperZ bitfield (three 10-bit block indexes, 0x3ff = none), as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_IsPartial	param_3	blockKind	CONFIRMED	the block kind 0/1/2 that selects the pool (hizData+0x10+kind*4) and the 10-bit field of surfaceHzField
+def	::HZMEM_Free	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as declared in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_Free	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_Free	param_2	surfaceHzField	CONFIRMED	the rolling surface HyperZ bitfield (three 10-bit block indexes, 0x3ff = none), as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_Free	param_3	blockKind	CONFIRMED	the block kind 0/1/2 that selects the pool (hizData+0x10+kind*4) and the 10-bit field of surfaceHzField
+def	::HZMEM_Alloc	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as declared in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_Alloc	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_Alloc	param_2	surfaceHzField	CONFIRMED	the rolling surface HyperZ bitfield (three 10-bit block indexes, 0x3ff = none), as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_Alloc	param_3	blockKind	CONFIRMED	the block kind 0/1/2 that selects the pool (hizData+0x10+kind*4) and the 10-bit field of surfaceHzField
+def	::HZMEM_GetBlockOffset	uVar1	blockIndex	CONFIRMED	the 10-bit block index extracted from surfaceHzField for blockKind (0x3ff = none)
+def	::HZMEM_GetBlockOffset	iVar2	block	CONFIRMED	the block descriptor: pool + blockIndex*0x10; its +0x18/+0x1c/+0x20 words are the offset/count/used fields the three functions return
+def	::HZMEM_GetBlockCount	uVar1	blockIndex	CONFIRMED	the 10-bit block index extracted from surfaceHzField for blockKind (0x3ff = none)
+def	::HZMEM_GetBlockCount	iVar2	block	CONFIRMED	the block descriptor: pool + blockIndex*0x10; its +0x18/+0x1c/+0x20 words are the offset/count/used fields the three functions return
+def	::HZMEM_IsPartial	uVar1	blockIndex	CONFIRMED	the 10-bit block index extracted from surfaceHzField for blockKind (0x3ff = none)
+def	::HZMEM_IsPartial	iVar2	block	CONFIRMED	the block descriptor: pool + blockIndex*0x10; its +0x18/+0x1c/+0x20 words are the offset/count/used fields the three functions return
+def	::HZMEM_Destroy	real_param_1	hizData	CONFIRMED	_HZDATA *hizData, as in Headers/ATIRadeonX1000Registers.h
+def	::HZMEM_Destroy	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::HZMEM_Destroy	uVar1	poolCount	CONFIRMED	hizData+0xc: the number of pools (3 block kinds); the loop frees that many
+def	::HZMEM_Destroy	uVar2	result	CONFIRMED	1 for a null hizData, 0 after the pools were freed
+def	::HZMEM_Destroy	puVar3	pool	CONFIRMED	the pool of one block kind (hizData+0x10+kind*4): +0xc is its bitmap, freed with its size from +0
+def	::HZMEM_Destroy	uVar4	kind	CONFIRMED	loop index over the block kinds
+def	::HZMEM_Destroy	p_Var5	poolSlot	CONFIRMED	cursor over the pool pointers at hizData+0x10
+def	::HZMEM_Free	uVar1	blockIndex	CONFIRMED	the 10-bit block index extracted from surfaceHzField for blockKind (0x3ff = none)
+def	::HZMEM_Free	puVar6	pool	CONFIRMED	the pool of this block kind (hizData+0x10+kind*4); +0xc is its occupancy bitmap, +0x10 its count of used blocks
+def	::HZMEM_Free	uVar4	startUnit	CONFIRMED	first bitmap unit of the block: its byte offset divided by the pool's unit size (pool[1])
+def	::HZMEM_Free	iVar2	unitsLeft	CONFIRMED	count of bitmap units still to clear
+def	::HZMEM_Free	puVar3	bitmapCursor	CONFIRMED	cursor over the pool's occupancy bitmap while clearing the freed units
+def	::HZMEM_Alloc	param_4	tileDim	CONFIRMED	tile dimension argument, as declared in Headers/ATIRadeonX1000Registers.h (checked against the pool unit width, hizData+4)
+def	::HZMEM_Alloc	param_5	size	CONFIRMED	size argument, as declared in Headers/ATIRadeonX1000Registers.h (checked against the pool unit height, hizData+8)
+def	::HZMEM_Alloc	piVar9	pool	CONFIRMED	the pool of this block kind (hizData+0x10+kind*4); +4 is its unit size, +0xc its occupancy bitmap, +0x10 its count of used blocks, descriptors start at +0x14
+def	::HZMEM_Alloc	iVar1	kindOffset	CONFIRMED	blockKind * 4: the byte offset of the pool pointer in hizData (also used to bump the pool's used count)
+def	::HZMEM_Alloc	uVar8	blockSlot	CONFIRMED	index of the block descriptor allocated (0xffffffff = failure); packed into the 10-bit field of the result for blockKind
+def	::HZMEM_Alloc	uVar13	poolLimit	CONFIRMED	pool[2]: the largest end offset a block may reach
+def	::HZMEM_InitMemResource	real_param_1	hizData	CONFIRMED	_HZDATA *hizData (the declaration in Headers/ATIRadeonX1000Registers.h calls it hz)
+def	::HZMEM_InitMemResource	param_1	hizDataBytes	INFERRED	untyped alias of the typed parameter hizData
+def	::track_regs_written_by_pm4	real_param_1	state	CONFIRMED	tracked_register_set *state, as declared in Headers/ATIR500GLContext_RestoreState.cpp
+def	::track_regs_written_by_pm4	param_2	rangeStart	CONFIRMED	UInt32 *rangeStart as declared; the function advances it through the packets
+def	::track_regs_written_by_pm4	param_3	rangeEnd	CONFIRMED	UInt32 *rangeEnd as declared: the walk stops there
+def	::track_regs_written_by_pm4	uVar6	header	CONFIRMED	the PM4 packet header word at the cursor (type in bits 30-31)
+def	::track_regs_written_by_pm4	uVar2	countMinusOne	CONFIRMED	type-0 packet: (header >> 16) & 0x3fff, the dword count minus one; the loops run countMinusOne + 1 times
+def	::track_regs_written_by_pm4	uVar4	value	CONFIRMED	the register value dword passed to store_reg
+def	::track_regs_written_by_pm4	iVar5	written	CONFIRMED	count of values already stored in the type-0 loop
+def	::track_regs_written_by_pm4	puVar1	secondValue	CONFIRMED	type-1 packet: the pointer to its second register value
+def	::store_reg	real_param_1	state	CONFIRMED	tracked_register_set *state, as declared in Sources/ATIRadeonX1000_StoreReg.cpp
+def	::store_reg	param_1	stateBytes	INFERRED	untyped alias of the typed parameter state
+def	::store_reg	param_2	regIndex	CONFIRMED	the register index switched on to pick the tracked slot
+def	::store_reg	param_3	value	CONFIRMED	the register value stored into the slot
+def	::convertIOGLBufferToBufIdx	param_1	bufferKind	CONFIRMED	UInt32 bufferKind, as declared in Headers/ATIR500GLContext.h
+def	::convertIOGLBufferToBufIdx	param_2	outIndex	CONFIRMED	UInt32 *outIndex, as declared in Headers/ATIR500GLContext.h: receives the buffer index
+def	::window_mode_to_ati_format	param_1	windowModeBits	CONFIRMED	UInt32 windowModeBits, as declared in Sources/ATIR500Surface_ShapeSurface.cpp: the low nibble selects the format
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	waited	CONFIRMED	result of the accelerator vtable +0x54c (wait for the slot's previous stamp), added to the accelerator's wait total at +0x788	iVar17 = VCALL\(\*piVar24, 0x54c\)	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	slotHeaderAddr	CONFIRMED	entries[1+slotIndex].header: the packet is written at +0x20 of it and its dword count stored at +0x14	iVar17 = (M<int>\(iVar8 \+ 0xc50\)|\(int\)Vol\(slot->header\));	^\s*iVar17 = M<int>\(self \+ 0xd50\);
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	puVar9	packet	CONFIRMED	slot header + 0x20: the register-write packet words (0xd0b, 0x1848, 0x1841 ...) the function appends to	puVar9 = \(UInt32 \*\)\(iVar17 \+ 0x20\);
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar11	valueIndex	CONFIRMED	the dword index of the value stored right after a register id dword: packet[valueIndex] = value	iVar11 = uVar13 \+ 1;#1	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar11	valueIndex	CONFIRMED	the dword index of the value stored right after the register id of a multi-register block: packet[valueIndex] = value	iVar11 = uVar13 \+ 5;#1	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar11	valueIndex	CONFIRMED	the dword index of the value stored right after a register id dword (panel 1): packet[valueIndex] = value	iVar11 = uVar13 \+ 1;#2	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar11	valueIndex	CONFIRMED	the dword index of the value stored right after the register id of a multi-register block (panel 1): packet[valueIndex] = value	iVar11 = uVar13 \+ 5;#2	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	markerValueIndex	CONFIRMED	the dword index of the value after the 0x5c8 register id (end-of-flip marker): packet[markerValueIndex] = 1 or 0x80000001	iVar17 = uVar13 \+ 1;#1	^\s*}\s*$
+use	ATIR500Surface::submit_flip_buffer@0x3e5c0	iVar17	markerValueIndex	CONFIRMED	same, panel 1	iVar17 = uVar13 \+ 1;#2	^\s*}\s*$
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar12	offsetAdjust	CONFIRMED	result of vtable +0x5f0 (the byte offset of the surface within its tiled storage), added to the transfer offset	iVar12 = VCALL\(M<int>\(self\), 0x5f0\)	^LAB_00043834:
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar12	dmaResult	CONFIRMED	copy_buffer_using_DMA's return value: nonzero means the DMA path handled the copy and the function returns	iVar12 = this->copy_buffer_using_DMA	if \(synchronous\) goto LAB_00043888;
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar12	transferAddress	CONFIRMED	the mapped CPU address of the transfer buffer (vtable +0xd0 of its memory map); transferRow starts at transferAddress + offset	iVar12 = VCALL\(\*transferMap, 0xd0\)\(transferMap\);	iVar25 = piVar24\[0x1ed\];
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar12	waited	CONFIRMED	result of the accelerator vtable +0x558 (sleepForTimeStamp(stamp)), added to the accelerator's wait total at +0x7b4	iVar12 = VCALL\(\*piVar24, 0x558\)	if \(\(\(synchronous\) && \(uVar6 = 
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar25	waitTotal	CONFIRMED	the accelerator's accumulated wait time, read before sleepForTimeStamp and written back plus the time waited	iVar25 = piVar24\[0x1ed\];	if \(\(\(synchronous\) && \(uVar6 = 
+use	ATIR500Surface::copy_from_buffer@0x43730	piVar24	accel	CONFIRMED	this+0xd50, the accelerator, used for its wait total and sleepForTimeStamp	piVar24 = M<int \*>\(self \+ 0xd50\);	if \(\(\(synchronous\) && \(uVar6 = 
+use	ATIR500Surface::copy_from_buffer@0x43730	piVar24	backingMap	CONFIRMED	the CPU mapping (vtable +0x150) of the backing buffer's memory descriptor; its address (vtable +0xd0) is the copy source/destination; released with vtable +0x18 at the end	piVar24 = \(int \*\)VCALL\(\*M<int \*>\(backing \+ 8\), 0x150\)
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar12	xScaled	CONFIRMED	x times the horizontal sample multiplier (uVar6): the left edge of the copy in samples	iVar12 = uVar6 \* x;	iVar12 = \(int\)puVar9 - \(int\)surfaceRow;
+use	ATIR500Surface::copy_from_buffer@0x43730	iVar25	surfaceY	CONFIRMED	y times the vertical sample multiplier, flipped against the surface height for a synchronous copy; then the current row counted down to the first row of the copy	iVar25 = uVar11 \* y;	^\s*iVar25 = 0;
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar3	cacheLine	CONFIRMED	the data cache line size (self+0x84): the flush loop steps by it	uVar3 = \(UInt32\)\(UInt8\)self\[0x84\];	if \(M<SInt32>\(self \+ 0x8a0\) != 0\)
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar1	bufferFlushEnd	CONFIRMED	end of the byte range of the IDCT command buffer to push out of the data cache (info->dwordCount*4 plus the start misalignment, minus one line)	iVar1 = \(M<SInt32>\(infoBytes \+ 0x10\) \* 4	iVar1 = M<SInt32>\(self \+ 0x8a4\);
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar1	gartBase	INFERRED	self+0x8a4: added to the buffer's GART offset to form the address of the indirect-buffer packet	iVar1 = M<SInt32>\(self \+ 0x8a4\);	iVar1 = M<SInt32>\(self \+ 0x854\);
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar1	stamp	CONFIRMED	self+0x854, the submit stamp counter: returned as this submission's stamp and stored back incremented	iVar1 = M<SInt32>\(self \+ 0x854\);
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar5	writeIndex	CONFIRMED	the ring's write index (self+0x930) when the packet was started; the free-space test uses it	iVar5 = M<SInt32>\(self \+ 0x930\);	^\s*iVar5 = 0;
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar6	spinCount	CONFIRMED	iterations spent waiting for 0x20 free ring dwords; 1000001 means the hang path	^\s*iVar6 = 0;	iVar6 = M<SInt32>\(self \+ 0x91c\);
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar6	ringBase	CONFIRMED	self+0x91c, the base of the ring buffer in memory: ringBase[index] = dword	iVar6 = M<SInt32>\(self \+ 0x91c\);
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar8	startIndex	CONFIRMED	the ring write index at entry (self+0x930): where this submission's dwords start; startIndex*4 + ringBase is the first dword to flush	iVar8 = M<SInt32>\(self \+ 0x930\);	iVar8 = \(\(uVar7 & uVar4 - 1\)
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	iVar8	ringFlushEnd	CONFIRMED	end of the byte range of the ring dwords just written to push out of the data cache	iVar8 = \(\(uVar7 & uVar4 - 1\)
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar3	ringIndex	CONFIRMED	index of the ring dword being written; the final value (unmasked) is written to the ring-write-pointer register	uVar3 = iVar5 \+ 1U & 0x7ff;
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar7	nextIndex	CONFIRMED	ringIndex + 1: the value stored back to the ring write index (self+0x930) after each dword	uVar7 = uVar3 \+ 1;	uVar7 = iVar8 \* 4 \+ iVar6;
+use	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	uVar7	ringAddress	CONFIRMED	address of the first ring dword written (startIndex*4 + ringBase): the start of the cache range to flush	uVar7 = iVar8 \* 4 \+ iVar6;
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	uVar4	cacheLine	CONFIRMED	the data cache line size (self+0x84): the flush loop steps by it	uVar4 = \(UInt32\)\(UInt8\)self\[0x84\];	while \(uVar4 = 
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	uVar4	freeDwords	CONFIRMED	free dwords in the ring minus 7, computed from the hardware read pointer; below 8 the function waits (the error path logs it as "Have %lu, need 8")	while \(uVar4 = 	uVar4 = iVar2 \+ 1U & 0x7ff;
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	uVar4	ringIndex	CONFIRMED	index of the ring dword being written	uVar4 = iVar2 \+ 1U & 0x7ff;
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar1	flushOffset	CONFIRMED	byte offset of the cache line being stored in the flush loop	^\s*iVar1 = 0;	iVar1 = M<SInt32>\(self \+ 0x8a4\);
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar1	registers	CONFIRMED	this+0x860, the register window (RBBM_STATUS at +0xe40 is read for the hang report)	iVar1 = M<SInt32>\(self \+ 0x860\);	iVar1 = M<SInt32>\(self \+ 0x850\) \+ -1;
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar2	flushEnd	CONFIRMED	end of the byte range of the buffer to push out of the data cache	iVar2 = \(dwordCount \* 4	iVar2 = M<SInt32>\(self \+ 0x914\);
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar2	writeIndex	CONFIRMED	the ring's write index (self+0x914)	iVar2 = M<SInt32>\(self \+ 0x914\);
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar5	spinCount	CONFIRMED	iterations spent waiting for ring space; 1000001 means the hang path	^\s*iVar5 = 0;	iVar5 = M<SInt32>\(self \+ 0x900\);
+use	ATIRadeonX1000::submit_buffer_retired@0x20700	iVar5	ringBase	CONFIRMED	self+0x900, the base of the ring buffer in memory	iVar5 = M<SInt32>\(self \+ 0x900\);
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar1	submittedIndex	CONFIRMED	self+0x918: the ring index up to which dwords were already handed to the hardware; the dwords from here to the write index are new	uVar1 = M<UInt32>\(self \+ 0x918\);	uVar1 = -uVar7 & uVar5;
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar1	headLineBase	CONFIRMED	cache-line aligned start of the run from the ring base to the write index, when the new dwords wrap around	uVar1 = -uVar7 & uVar5;
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar3	nextIndex	CONFIRMED	writeIndex + 1 while padding the new dwords with 0x80000000 to a multiple of 8	uVar3 = writeIndex \+ 1;	uVar3 = uVar1 \* 4 \+ M<SInt32>
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar3	rangeStart	CONFIRMED	address of the first new ring dword (ring base + submittedIndex*4): the flushed range starts at its cache line	uVar3 = uVar1 \* 4 \+ M<SInt32>
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar3	rangeStart	CONFIRMED	address of the first new ring dword (ring base + submittedIndex*4) when the new dwords wrap around	uVar3 = uVar5 \+ uVar1 \* 4;
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar5	cacheLine	CONFIRMED	the data cache line size (self+0x84)	uVar5 = \(UInt32\)\(UInt8\)self\[0x84\];	uVar5 = M<UInt32>\(self \+ 0x900\);
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar5	ringBase	CONFIRMED	self+0x900, the base of the ring buffer in memory	uVar5 = M<UInt32>\(self \+ 0x900\);
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar7	lineBase	CONFIRMED	cache-line aligned start of the flushed range	uVar7 = -uVar5 & uVar3;	uVar7 = \(UInt32\)\(UInt8\)self\[0x84\];
+use	ATIRadeonX1000::submit_ring_data@0x1f030	uVar7	lineSize	CONFIRMED	the data cache line size (self+0x84)	uVar7 = \(UInt32\)\(UInt8\)self\[0x84\];
+use	ATIRadeonX1000::submit_ring_data@0x1f030	iVar6	ringPtr	CONFIRMED	self+0x900, the base of the ring buffer in memory, while padding the new dwords	iVar6 = M<SInt32>\(self \+ 0x900\);	iVar6 = 0;
+use	ATIRadeonX1000::submit_ring_data@0x1f030	iVar6	flushOffset	CONFIRMED	byte offset of the cache line being stored in the flush loop	iVar6 = 0;#1	uVar7 = \(UInt32\)\(UInt8\)self\[0x84\];
+use	ATIRadeonX1000::submit_ring_data@0x1f030	iVar6	flushOffset	CONFIRMED	byte offset of the cache line being stored in the flush loop (tail run)	iVar6 = 0;#2	uVar1 = -uVar7 & uVar5;
+use	ATIRadeonX1000::submit_ring_data@0x1f030	iVar6	flushOffset	CONFIRMED	byte offset of the cache line being stored in the flush loop (head run)	iVar6 = 0;#3
+use	::track_regs_written_by_pm4	uVar3	reg	CONFIRMED	type-0 packet: the first register index (header & 0x1fff), incremented per value unless the packet writes one register	uVar3 = header & 0x1fff;	else if \(uVar3 == 2\)

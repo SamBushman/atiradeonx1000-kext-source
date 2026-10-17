@@ -29,37 +29,37 @@ extern "C" UInt32 GH_bzero(...) asm("_bzero");
 
 
 /* real addr 0x45280 */
-UInt32 HZMEM_Destroy(_HZDATA *real_param_1) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+UInt32 HZMEM_Destroy(_HZDATA *hizData) {
+    UInt8 *hizDataBytes = reinterpret_cast<UInt8 *>(hizData);
 
-  unsigned int uVar1;
-  UInt32 uVar2;
-  UInt32 *puVar3;
-  unsigned int uVar4;
-  UInt8 *p_Var5;
+  unsigned int poolCount;
+  UInt32 result;
+  UInt32 *pool;
+  unsigned int kind;
+  UInt8 *poolSlot;
   
-  uVar2 = 1;
-  if (param_1 != (UInt8 *)0x0) {
-    uVar1 = M<unsigned int>(param_1 + 0xc);
-    if (uVar1 != 0) {
-      uVar4 = 0;
-      p_Var5 = param_1;
+  result = 1;
+  if (hizDataBytes != (UInt8 *)0x0) {
+    poolCount = M<unsigned int>(hizDataBytes + 0xc);
+    if (poolCount != 0) {
+      kind = 0;
+      poolSlot = hizDataBytes;
       do {
-        puVar3 = M<UInt32 *>(p_Var5 + 0x10);
-        if (puVar3 != (UInt32 *)0x0) {
-          if (puVar3[3] != 0) {
-            GH_IOFreePageable(puVar3[3],*puVar3);
-            puVar3 = M<UInt32 *>(p_Var5 + 0x10);
+        pool = M<UInt32 *>(poolSlot + 0x10);
+        if (pool != (UInt32 *)0x0) {
+          if (pool[3] != 0) {
+            GH_IOFreePageable(pool[3],*pool);
+            pool = M<UInt32 *>(poolSlot + 0x10);
           }
-          GH_IOFreePageable(puVar3,0x1014);
-          uVar1 = M<unsigned int>(param_1 + 0xc);
+          GH_IOFreePageable(pool,0x1014);
+          poolCount = M<unsigned int>(hizDataBytes + 0xc);
         }
-        uVar4 = uVar4 + 1;
-        p_Var5 = p_Var5 + 4;
-      } while (uVar4 < uVar1);
+        kind = kind + 1;
+        poolSlot = poolSlot + 4;
+      } while (kind < poolCount);
     }
-    GH_bzero(param_1,0x1c);
-    uVar2 = 0;
+    GH_bzero(hizDataBytes,0x1c);
+    result = 0;
   }
-  return uVar2;
+  return result;
 }

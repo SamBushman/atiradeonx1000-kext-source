@@ -1,0 +1,4 @@
+#!use-decl: beside
+# ATIRadeonX1000 per-use renames, part F: set_display_mode_and_vram, the first display's mode decode (rows kept only if the compiled objects stay byte-identical: Tools/renames/filter_rows.py)
+# kind	target	old	new	tier	evidence	from	to
+use	ATIRadeonX1000::set_display_mode_and_vram@0x1c120	uVar16	pixelFormat	INFERRED	the first display's pixel format code decoded from register +0x6104 bits 0-1 and 8-10 (9, 6, 5, 10, 4, 3, 0xf, 0xff), stored to self[0x167] and selecting the bytes per pixel and the format-table index	^      uVar16 = 4;$	^    uVar16 = 0;$

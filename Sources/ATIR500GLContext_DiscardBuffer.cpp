@@ -28,21 +28,26 @@ void ATIR500GLContext::discard_command_buffer() {
 
   bool bVar1;
   SInt32 iVar2;
-  SInt32 *piVar3;
-  UInt32 uVar4;
+  SInt32 *useCount;
+  UInt32 opcode;
+  UInt32 newTexture;
+  UInt32 mode;
   SInt32 *piVar5;
   UInt8 *shared;
   UInt8 *boundTexture;
-  SInt32 iVar8;
-  SInt32 iVar9;
-  UInt32 uVar10;
+  SInt32 texture;
+  SInt32 previousTexture;
+  SInt32 wordOffset;
+  SInt32 oldCount;
+  SInt32 slotTableOffset;
+  UInt32 handle;
   SInt32 iVar11;
-  UInt32 uVar12;
+  UInt32 packetWords;
   UInt32 uVar13;
-  SInt32 iVar14;
+  SInt32 slotOffset;
   UInt32 header;
   UInt32 *packet;
-  UInt8 *pAVar17;
+  UInt8 *slotCursor;
   char in_RESERVE;
   UInt8 in_cr0;
   UInt8 bVar18;
@@ -51,95 +56,95 @@ void ATIR500GLContext::discard_command_buffer() {
   packet = (UInt32 *)(M<SInt32>(self + 0xe0) + 0x1c);
   do {
     header = *packet;
-    uVar4 = header & 0xff000000;
-    if (uVar4 == 0x19000000) {
+    opcode = header & 0xff000000;
+    if (opcode == 0x19000000) {
 LAB_00027ab0:
-      uVar12 = header & 0xffffff;
-      uVar4 = uVar4 + 0xea000000 >> 0x16;
-      boundTexture = M<UInt8 *>(self + uVar4 + 0x2a4);
+      packetWords = header & 0xffffff;
+      opcode = opcode + 0xea000000 >> 0x16;
+      boundTexture = M<UInt8 *>(self + opcode + 0x2a4);
       if (boundTexture != (UInt8 *)0x0) {
-        piVar3 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-        iVar8 = atomicAddReturningOld((SInt32 *)piVar3, -1);
-        if (iVar8 == 1) {
+        useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
+        oldCount = atomicAddReturningOld((SInt32 *)useCount, -1);
+        if (oldCount == 1) {
           ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)boundTexture);
         }
-        uVar12 = header & 0xffffff;
-        M<UInt32>(self + uVar4 + 0x2a4) = 0;
+        packetWords = header & 0xffffff;
+        M<UInt32>(self + opcode + 0x2a4) = 0;
       }
     }
     else {
-      if (0x19000000 < uVar4) {
-        if (uVar4 != 0x23000000) {
-          if (uVar4 < 0x23000001) {
-            if (uVar4 != 0x1e000000) {
-              if (uVar4 < 0x1e000001) {
-                if (uVar4 != 0x1b000000) {
-                  if (uVar4 < 0x1b000001) {
-                    if (uVar4 == 0x1a000000) goto LAB_00027ab0;
+      if (0x19000000 < opcode) {
+        if (opcode != 0x23000000) {
+          if (opcode < 0x23000001) {
+            if (opcode != 0x1e000000) {
+              if (opcode < 0x1e000001) {
+                if (opcode != 0x1b000000) {
+                  if (opcode < 0x1b000001) {
+                    if (opcode == 0x1a000000) goto LAB_00027ab0;
                   }
-                  else if ((uVar4 == 0x1c000000) || (uVar4 == 0x1d000000)) goto LAB_00027ab0;
+                  else if ((opcode == 0x1c000000) || (opcode == 0x1d000000)) goto LAB_00027ab0;
                   goto LAB_00027e70;
                 }
               }
-              else if (uVar4 != 0x20000000) {
-                if (uVar4 < 0x20000001) {
-                  if (uVar4 == 0x1f000000) goto LAB_00027ab0;
+              else if (opcode != 0x20000000) {
+                if (opcode < 0x20000001) {
+                  if (opcode == 0x1f000000) goto LAB_00027ab0;
                 }
-                else if ((uVar4 == 0x21000000) || (uVar4 == 0x22000000)) goto LAB_00027ab0;
+                else if ((opcode == 0x21000000) || (opcode == 0x22000000)) goto LAB_00027ab0;
                 goto LAB_00027e70;
               }
             }
           }
           else {
-            if (uVar4 == 0x29000000) {
-              iVar8 = 0;
-              iVar14 = 4;
+            if (opcode == 0x29000000) {
+              wordOffset = 0;
+              slotOffset = 4;
               M<UInt32>(self + 0x3bc) = 0;
-              pAVar17 = self;
+              slotCursor = self;
               do {
-                switch(M<UInt32>((SInt32)packet + iVar8 + 4)) {
+                switch(M<UInt32>((SInt32)packet + wordOffset + 4)) {
                 default:
-                  M<UInt16>(pAVar17 + 0x3aa) = 1;
+                  M<UInt16>(slotCursor + 0x3aa) = 1;
                   break;
                 case 1:
-                  M<UInt16>(pAVar17 + 0x3aa) = 0;
+                  M<UInt16>(slotCursor + 0x3aa) = 0;
                   break;
                 case 2:
-                  M<UInt16>(pAVar17 + 0x3aa) = 4;
+                  M<UInt16>(slotCursor + 0x3aa) = 4;
                   break;
                 case 3:
-                  M<UInt16>(pAVar17 + 0x3aa) = 5;
+                  M<UInt16>(slotCursor + 0x3aa) = 5;
                   break;
                 case 7:
-                  M<UInt16>(pAVar17 + 0x3aa) = 2;
+                  M<UInt16>(slotCursor + 0x3aa) = 2;
                   break;
                 case 8:
-                  M<UInt16>(pAVar17 + 0x3aa) = 3;
+                  M<UInt16>(slotCursor + 0x3aa) = 3;
                   break;
                 case 0x10:
-                  M<UInt16>(pAVar17 + 0x3aa) = 9;
+                  M<UInt16>(slotCursor + 0x3aa) = 9;
                   break;
                 case 0x11:
-                  M<UInt16>(pAVar17 + 0x3aa) = 0x17;
+                  M<UInt16>(slotCursor + 0x3aa) = 0x17;
                 }
-                iVar14 = iVar14 + -1;
-                iVar8 = iVar8 + 4;
-                pAVar17 = pAVar17 + 2;
-              } while (iVar14 != 0);
+                slotOffset = slotOffset + -1;
+                wordOffset = wordOffset + 4;
+                slotCursor = slotCursor + 2;
+              } while (slotOffset != 0);
               M<UInt16>(self + 0xac) = M<UInt16>(self + 0x3aa);
               M<UInt32>(self + 0x35c) = (UInt32)M<UInt16>(self + 0x3aa);
               if (packet[5] == 0x10) {
                 M<UInt16>(self + 0x3aa) = 9;
                 M<UInt16>(self + 0xac) = 9;
               }
-              uVar12 = header & 0xffffff;
+              packetWords = header & 0xffffff;
               bVar1 = (M<UInt32>(self + 0x8c) & 0x80) == 0;
               in_cr0 = bVar1 << 1;
               if (!bVar1) {
-                uVar4 = packet[1];
-                if ((uVar4 == 7) || (uVar4 == 8)) {
-                  uVar12 = header & 0xffffff;
-                  M<SInt16>(self + 0xae) = (SInt16)uVar4;
+                mode = packet[1];
+                if ((mode == 7) || (mode == 8)) {
+                  packetWords = header & 0xffffff;
+                  M<SInt16>(self + 0xae) = (SInt16)mode;
                 }
                 else {
                   M<UInt16>(self + 0xae) = 6;
@@ -147,125 +152,125 @@ LAB_00027ab0:
               }
               goto LAB_00027e90;
             }
-            if (0x29000000 < uVar4) {
-              if (uVar4 == 0x3a000000) {
+            if (0x29000000 < opcode) {
+              if (opcode == 0x3a000000) {
                 bVar18 = (packet[1] == 0) << 1;
-                pAVar17 = self;
+                slotCursor = self;
                 do {
-                  boundTexture = M<UInt8 *>(pAVar17 + 0x2e4);
+                  boundTexture = M<UInt8 *>(slotCursor + 0x2e4);
                   if (boundTexture != (UInt8 *)0x0) {
-                    piVar3 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-                    iVar8 = atomicAddReturningOld((SInt32 *)piVar3, -1);
-                    if (iVar8 == 1) {
+                    useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
+                    oldCount = atomicAddReturningOld((SInt32 *)useCount, -1);
+                    if (oldCount == 1) {
                       ((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->delete_texture((VendorTextureBuffer *)boundTexture);
                     }
-                    M<UInt32>(pAVar17 + 0x2e4) = 0;
+                    M<UInt32>(slotCursor + 0x2e4) = 0;
                   }
                 } while ((!(bool)(bVar18 >> 1 & 1)) &&
-                        (pAVar17 = pAVar17 + 4, pAVar17 != self + 0x44));
+                        (slotCursor = slotCursor + 4, slotCursor != self + 0x44));
               }
-              else if (uVar4 < 0x3a000001) {
-                if (uVar4 == 0x36000000) {
-                  iVar8 = M<SInt32>(self + 0x334);
-                  uVar4 = packet[1];
-                  if ((iVar8 != 0) && (M<SInt32>(iVar8 + 0x48) == 0)) {
-                    M<SInt16>(iVar8 + 0xe) = M<SInt16>(iVar8 + 0xe) + -1;
+              else if (opcode < 0x3a000001) {
+                if (opcode == 0x36000000) {
+                  previousTexture = M<SInt32>(self + 0x334);
+                  newTexture = packet[1];
+                  if ((previousTexture != 0) && (M<SInt32>(previousTexture + 0x48) == 0)) {
+                    M<SInt16>(previousTexture + 0xe) = M<SInt16>(previousTexture + 0xe) + -1;
                   }
-                  if (M<SInt32>(uVar4 + 0x48) == 0) {
-                    M<SInt16>(uVar4 + 0xe) = M<SInt16>(uVar4 + 0xe) + 1;
+                  if (M<SInt32>(newTexture + 0x48) == 0) {
+                    M<SInt16>(newTexture + 0xe) = M<SInt16>(newTexture + 0xe) + 1;
                   }
-                  uVar12 = header & 0xffffff;
-                  M<UInt32>(self + 0x334) = uVar4;
+                  packetWords = header & 0xffffff;
+                  M<UInt32>(self + 0x334) = newTexture;
                   goto LAB_00027e90;
                 }
-                if (uVar4 == 0x39000000) {
-                  uVar4 = packet[1];
+                if (opcode == 0x39000000) {
+                  opcode = packet[1];
                   uVar13 = packet[4];
                   if (packet[2] == 0) {
-                    uVar4 = 1;
+                    opcode = 1;
                   }
                   bVar18 = (packet[3] == 0) << 1;
                   if (packet[3] != 0) {
-                    uVar4 = uVar4 + 1;
+                    opcode = opcode + 1;
                   }
-                  uVar12 = header & 0xffffff;
-                  if (uVar4 == 0) goto LAB_00027e90;
-                  uVar12 = 0;
-                  iVar8 = 0x10;
-                  iVar14 = 0;
-                  piVar3 = textures;
+                  packetWords = header & 0xffffff;
+                  if (opcode == 0) goto LAB_00027e90;
+                  packetWords = 0;
+                  texture = 0x10;
+                  slotOffset = 0;
+                  useCount = textures;
                   do {
-                    if ((!(bool)(bVar18 >> 1 & 1)) && (uVar12 == uVar4 - 1)) {
-                      iVar8 = 0x20;
+                    if ((!(bool)(bVar18 >> 1 & 1)) && (packetWords == opcode - 1)) {
+                      texture = 0x20;
                     }
                     shared = M<UInt8 *>(self + 0x88);
-                    uVar10 = M<UInt32>((SInt32)packet + iVar14 + 0x20);
-                    if ((M<UInt32>(shared + 0x14) <= uVar10) ||
-                       (iVar9 = M<SInt32>(uVar10 * 4 + M<SInt32>(shared + 0x10)), iVar9 == 0))
+                    handle = M<UInt32>((SInt32)packet + slotOffset + 0x20);
+                    if ((M<UInt32>(shared + 0x14) <= handle) ||
+                       (slotTableOffset = M<SInt32>(handle * 4 + M<SInt32>(shared + 0x10)), slotTableOffset == 0))
                     goto LAB_00027e80;
-                    *piVar3 = iVar9;
-                    iVar9 = iVar8 * 4;
-                    boundTexture = M<UInt8 *>(self + iVar9 + 0x2a4);
+                    *useCount = slotTableOffset;
+                    slotTableOffset = texture * 4;
+                    boundTexture = M<UInt8 *>(self + slotTableOffset + 0x2a4);
                     if (boundTexture != (UInt8 *)0x0) {
                       piVar5 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
                       iVar11 = atomicAddReturningOld((SInt32 *)piVar5, -1);
                       if (iVar11 == 1) {
                         ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)boundTexture);
                       }
-                      M<UInt32>(self + iVar9 + 0x2a4) = 0;
+                      M<UInt32>(self + slotTableOffset + 0x2a4) = 0;
                     }
-                    if (((iVar8 == 0x20) &&
-                        (iVar11 = M<SInt32>(iVar14 + (SInt32)(unsigned long)textures), M<char>(iVar11 + 0x20) == '\a'
+                    if (((texture == 0x20) &&
+                        (iVar11 = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures), M<char>(iVar11 + 0x20) == '\a'
                         )) && (uVar13 != M<UInt32>(iVar11 + 100))) {
                       M<UInt32>(iVar11 + 100) = uVar13;
-                      M<UInt8>(M<SInt32>(M<SInt32>(iVar14 + (SInt32)(unsigned long)textures) + 0x14) + 0x14) = 1;
+                      M<UInt8>(M<SInt32>(M<SInt32>(slotOffset + (SInt32)(unsigned long)textures) + 0x14) + 0x14) = 1;
                     }
-                    iVar11 = M<SInt32>(iVar14 + (SInt32)(unsigned long)textures);
+                    iVar11 = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures);
                     piVar5 = (SInt32 *)(M<SInt32>(iVar11 + 0x14) + 0x10);
                     atomicAddReturningOld((SInt32 *)piVar5, -0xffff);
-                    uVar12 = uVar12 + 1;
-                    piVar3 = piVar3 + 1;
-                    iVar8 = iVar8 + 1;
-                    M<SInt32>(self + iVar9 + 0x2a4) = iVar11;
-                    iVar14 = iVar14 + 4;
-                  } while (uVar4 != uVar12);
+                    packetWords = packetWords + 1;
+                    useCount = useCount + 1;
+                    texture = texture + 1;
+                    M<SInt32>(self + slotTableOffset + 0x2a4) = iVar11;
+                    slotOffset = slotOffset + 4;
+                  } while (opcode != packetWords);
                 }
               }
-              else if (uVar4 == 0x3b000000) {
+              else if (opcode == 0x3b000000) {
                 shared = M<UInt8 *>(self + 0x88);
-                uVar4 = packet[3];
+                opcode = packet[3];
                 if ((M<UInt32>(shared + 0x14) <= packet[1]) ||
-                   (iVar8 = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), iVar8 == 0))
+                   (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), texture == 0))
                 goto LAB_00027e80;
                 boundTexture = M<UInt8 *>(self + 0x32c);
                 if (boundTexture != (UInt8 *)0x0) {
-                  piVar3 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-                  iVar14 = atomicAddReturningOld((SInt32 *)piVar3, -1);
-                  if (iVar14 == 1) {
+                  useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
+                  slotOffset = atomicAddReturningOld((SInt32 *)useCount, -1);
+                  if (slotOffset == 1) {
                     ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)boundTexture);
                   }
                 }
-                piVar3 = (SInt32 *)(M<SInt32>(iVar8 + 0x14) + 0x10);
-                atomicAddReturningOld((SInt32 *)piVar3, -0xffff);
-                M<SInt32>(self + 0x32c) = iVar8;
-                piVar3 = (SInt32 *)0x0;
-                if (M<SInt32>(iVar8 + 0x54) != 0) {
-                  piVar3 = M<SInt32 *>(M<SInt32>(iVar8 + 0x54) + 8);
-                  piVar3 = (SInt32 *)VCALL(*piVar3, 0x14c)(piVar3,GH_kernel_task,0,1,0,0);
-                  in_cr0 = (piVar3 == (SInt32 *)0x0) << 1;
-                  if (piVar3 != (SInt32 *)0x0) {
-                    iVar8 = VCALL(*piVar3, 0xd0)(piVar3);
-                    iVar8 = uVar4 * 0x20 + iVar8;
-                    M<UInt32>(iVar8 + 0x21c) = 0;
-                    M<UInt32>(iVar8 + 0x210) = 0;
-                    M<UInt32>(iVar8 + 0x220) = 0;
-                    M<UInt32>(iVar8 + 0x218) = 0;
+                useCount = (SInt32 *)(M<SInt32>(texture + 0x14) + 0x10);
+                atomicAddReturningOld((SInt32 *)useCount, -0xffff);
+                M<SInt32>(self + 0x32c) = texture;
+                useCount = (SInt32 *)0x0;
+                if (M<SInt32>(texture + 0x54) != 0) {
+                  useCount = M<SInt32 *>(M<SInt32>(texture + 0x54) + 8);
+                  useCount = (SInt32 *)VCALL(*useCount, 0x14c)(useCount,GH_kernel_task,0,1,0,0);
+                  in_cr0 = (useCount == (SInt32 *)0x0) << 1;
+                  if (useCount != (SInt32 *)0x0) {
+                    texture = VCALL(*useCount, 0xd0)(useCount);
+                    texture = opcode * 0x20 + texture;
+                    M<UInt32>(texture + 0x21c) = 0;
+                    M<UInt32>(texture + 0x210) = 0;
+                    M<UInt32>(texture + 0x220) = 0;
+                    M<UInt32>(texture + 0x218) = 0;
                   }
                 }
-                VCALL(*piVar3, 0x18)(piVar3);
+                VCALL(*useCount, 0x18)(useCount);
               }
-              else if (uVar4 == 0x3d000000) {
-                uVar12 = header & 0xffffff;
+              else if (opcode == 0x3d000000) {
+                packetWords = header & 0xffffff;
                 if (packet[1] == 0x132) {
                   if (M<UInt8 *>(self + 0x290) != (UInt8 *)0x0) {
                     ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_volatile_state((eSurfaceVolatileState)packet[2]);
@@ -276,94 +281,94 @@ LAB_00027ab0:
               }
               goto LAB_00027e70;
             }
-            if (uVar4 != 0x25000000) {
-              if (0x25000000 < uVar4) {
-                if (uVar4 == 0x26000000) {
+            if (opcode != 0x25000000) {
+              if (0x25000000 < opcode) {
+                if (opcode == 0x26000000) {
                   if ((M<UInt32>(M<SInt32>(self + 0x88) + 0x14) <= packet[1]) ||
-                     (iVar8 = M<SInt32>(packet[1] * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
-                     iVar8 == 0)) goto LAB_00027e80;
-                  uVar12 = header & 0xffffff;
-                  M<SInt32>(self + 0x328) = iVar8;
+                     (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
+                     texture == 0)) goto LAB_00027e80;
+                  packetWords = header & 0xffffff;
+                  M<SInt32>(self + 0x328) = texture;
                 }
                 else {
-                  if (uVar4 != 0x27000000) goto LAB_00027e70;
-                  uVar12 = header & 0xffffff;
+                  if (opcode != 0x27000000) goto LAB_00027e70;
+                  packetWords = header & 0xffffff;
                   M<UInt32>(self + 0x328) = 0;
                 }
                 goto LAB_00027e90;
               }
-              if (uVar4 != 0x24000000) goto LAB_00027e70;
+              if (opcode != 0x24000000) goto LAB_00027e70;
             }
           }
         }
         goto LAB_00027ab0;
       }
-      if (uVar4 != 0xf000000) {
-        if (uVar4 < 0xf000001) {
-          if (uVar4 != 0xa000000) {
-            if (uVar4 < 0xa000001) {
-              if (uVar4 != 0x7000000) {
-                if (uVar4 < 0x7000001) {
-                  if (uVar4 != 0x6000000) {
+      if (opcode != 0xf000000) {
+        if (opcode < 0xf000001) {
+          if (opcode != 0xa000000) {
+            if (opcode < 0xa000001) {
+              if (opcode != 0x7000000) {
+                if (opcode < 0x7000001) {
+                  if (opcode != 0x6000000) {
 LAB_00027e70:
-                    uVar12 = header & 0xffffff;
+                    packetWords = header & 0xffffff;
                     goto LAB_00027e90;
                   }
                 }
-                else if ((uVar4 != 0x8000000) && (uVar4 != 0x9000000)) goto LAB_00027e70;
+                else if ((opcode != 0x8000000) && (opcode != 0x9000000)) goto LAB_00027e70;
               }
             }
-            else if (uVar4 != 0xc000000) {
-              if (uVar4 < 0xc000001) {
-                if (uVar4 != 0xb000000) goto LAB_00027e70;
+            else if (opcode != 0xc000000) {
+              if (opcode < 0xc000001) {
+                if (opcode != 0xb000000) goto LAB_00027e70;
               }
-              else if ((uVar4 != 0xd000000) && (uVar4 != 0xe000000)) goto LAB_00027e70;
+              else if ((opcode != 0xd000000) && (opcode != 0xe000000)) goto LAB_00027e70;
             }
           }
         }
-        else if (uVar4 != 0x14000000) {
-          if (0x14000000 < uVar4) {
-            if (uVar4 == 0x16000000) goto LAB_00027ab0;
-            if (uVar4 < 0x16000001) {
-              if (uVar4 == 0x15000000) goto LAB_00027a00;
+        else if (opcode != 0x14000000) {
+          if (0x14000000 < opcode) {
+            if (opcode == 0x16000000) goto LAB_00027ab0;
+            if (opcode < 0x16000001) {
+              if (opcode == 0x15000000) goto LAB_00027a00;
             }
-            else if ((uVar4 == 0x17000000) || (uVar4 == 0x18000000)) goto LAB_00027ab0;
+            else if ((opcode == 0x17000000) || (opcode == 0x18000000)) goto LAB_00027ab0;
             goto LAB_00027e70;
           }
-          if (uVar4 != 0x11000000) {
-            if (uVar4 < 0x11000001) {
-              if (uVar4 != 0x10000000) goto LAB_00027e70;
+          if (opcode != 0x11000000) {
+            if (opcode < 0x11000001) {
+              if (opcode != 0x10000000) goto LAB_00027e70;
             }
-            else if ((uVar4 != 0x12000000) && (uVar4 != 0x13000000)) goto LAB_00027e70;
+            else if ((opcode != 0x12000000) && (opcode != 0x13000000)) goto LAB_00027e70;
           }
         }
       }
 LAB_00027a00:
       shared = M<UInt8 *>(self + 0x88);
       if ((packet[1] < M<UInt32>(shared + 0x14)) &&
-         (iVar8 = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), iVar8 != 0)) {
-        iVar14 = (uVar4 + 0xfa000000 >> 0x18) * 4;
-        boundTexture = M<UInt8 *>(self + iVar14 + 0x2a4);
+         (texture = M<SInt32>(packet[1] * 4 + M<SInt32>(shared + 0x10)), texture != 0)) {
+        slotOffset = (opcode + 0xfa000000 >> 0x18) * 4;
+        boundTexture = M<UInt8 *>(self + slotOffset + 0x2a4);
         if (boundTexture != (UInt8 *)0x0) {
-          piVar3 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
-          iVar9 = atomicAddReturningOld((SInt32 *)piVar3, -1);
-          if (iVar9 == 1) {
+          useCount = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
+          slotTableOffset = atomicAddReturningOld((SInt32 *)useCount, -1);
+          if (slotTableOffset == 1) {
             ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)boundTexture);
           }
         }
-        piVar3 = (SInt32 *)(M<SInt32>(iVar8 + 0x14) + 0x10);
-        atomicAddReturningOld((SInt32 *)piVar3, -0xffff);
-        uVar12 = header & 0xffffff;
-        M<SInt32>(self + iVar14 + 0x2a4) = iVar8;
+        useCount = (SInt32 *)(M<SInt32>(texture + 0x14) + 0x10);
+        atomicAddReturningOld((SInt32 *)useCount, -0xffff);
+        packetWords = header & 0xffffff;
+        M<SInt32>(self + slotOffset + 0x2a4) = texture;
       }
       else {
 LAB_00027e80:
-        uVar12 = 0;
+        packetWords = 0;
       }
     }
 LAB_00027e90:
-    packet = packet + uVar12;
-    if (uVar12 == 0) {
+    packet = packet + packetWords;
+    if (packetWords == 0) {
       return;
     }
   } while( true );

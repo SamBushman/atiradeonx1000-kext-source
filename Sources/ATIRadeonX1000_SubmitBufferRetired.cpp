@@ -33,10 +33,19 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     static UInt32 u32Dummy;
 
   SInt32 iVar1;
+  SInt32 registers;
+  SInt32 flushOffset;
   SInt32 iVar2;
-  UInt32 uVar3;
+  SInt32 writeIndex;
+  SInt32 flushEnd;
+  UInt32 nextIndex;
   UInt32 uVar4;
+  UInt32 ringIndex;
+  UInt32 freeDwords;
+  UInt32 cacheLine;
   SInt32 iVar5;
+  SInt32 ringBase;
+  SInt32 spinCount;
   
   M<UInt32>(self + 0x6fc) = dwordCount * 4 + M<SInt32>(self + 0x6fc);
   if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
@@ -44,70 +53,70 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     instructionSynchronize();
   }
   else {
-    uVar4 = (UInt32)(UInt8)self[0x84];
-    iVar1 = 0;
-    iVar2 = (dwordCount * 4 + ((UInt32)bufferStart & uVar4 - 1)) - uVar4;
-    if (0 < iVar2) {
-      iVar1 = 0;
+    cacheLine = (UInt32)(UInt8)self[0x84];
+    flushOffset = 0;
+    flushEnd = (dwordCount * 4 + ((UInt32)bufferStart & cacheLine - 1)) - cacheLine;
+    if (0 < flushEnd) {
+      flushOffset = 0;
       do {
-        dataCacheBlockStore((-uVar4 & (UInt32)bufferStart) + iVar1);
-        iVar1 = iVar1 + uVar4;
-      } while (iVar1 < iVar2);
+        dataCacheBlockStore((-cacheLine & (UInt32)bufferStart) + flushOffset);
+        flushOffset = flushOffset + cacheLine;
+      } while (flushOffset < flushEnd);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-uVar4 & (UInt32)bufferStart) + iVar1);
+    dataCacheBlockFlush((-cacheLine & (UInt32)bufferStart) + flushOffset);
     ppcSync();
     instructionSynchronize();
     instructionSynchronize();
   }
   iVar1 = M<SInt32>(self + 0x8a4);
-  iVar5 = 0;
-  iVar2 = M<SInt32>(self + 0x914);
-  while (uVar4 = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - iVar2) -
-                  1 & 0x7ff) - 7, uVar4 < 8) {
-    iVar5 = iVar5 + 1;
-    if (iVar5 == 0xf4241) goto LAB_000208e8;
+  spinCount = 0;
+  writeIndex = M<SInt32>(self + 0x914);
+  while (freeDwords = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - writeIndex) -
+                  1 & 0x7ff) - 7, freeDwords < 8) {
+    spinCount = spinCount + 1;
+    if (spinCount == 0xf4241) goto LAB_000208e8;
     do {
       u32Dummy =
            u32Dummy + 1;
     } while ((u32Dummy & 0xf) !=
              0);
   }
-  if (iVar5 == 0xf4241) {
+  if (spinCount == 0xf4241) {
 LAB_000208e8:
-    iVar1 = M<SInt32>(self + 0x860);
+    registers = M<SInt32>(self + 0x860);
     GH_IOLog("ATIRadeon::submit_buffer: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
-                 ,uVar4,8,loadWordByteReversed(&M<UInt8>(iVar1 + 0xe40)));
+                 ,freeDwords,8,loadWordByteReversed(&M<UInt8>(registers + 0xe40)));
     ((ATIRadeonX1000 *)(self))->DumpASICHangState();
     iVar1 = M<SInt32>(self + 0x850) + -1;
   }
   else {
-    iVar5 = M<SInt32>(self + 0x900);
-    M<UInt32>(iVar5 + iVar2 * 4) = 0x101ce;
-    uVar4 = iVar2 + 1U & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = gartOffset + iVar1 & 0xfffffffc;
-    uVar4 = uVar4 + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = dwordCount & 0x7fffff;
-    uVar4 = uVar4 + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = 0x394;
-    uVar4 = uVar4 + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = 1;
-    uVar4 = uVar4 + 1 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = 0x579;
-    uVar4 = uVar4 + 1 & 0x7ff;
-    uVar3 = uVar4 + 1;
-    M<UInt32>(self + 0x914) = uVar3;
-    M<UInt32>(iVar5 + uVar4 * 4) = M<UInt32>(self + 0x850);
-    uVar3 = uVar3 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar3;
-    M<UInt32>(iVar5 + uVar3 * 4) = 0x80000000;
-    M<UInt32>(self + 0x914) = uVar3 + 1 & 0x7ff;
+    ringBase = M<SInt32>(self + 0x900);
+    M<UInt32>(ringBase + writeIndex * 4) = 0x101ce;
+    ringIndex = writeIndex + 1U & 0x7ff;
+    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = gartOffset + iVar1 & 0xfffffffc;
+    ringIndex = ringIndex + 1 & 0x7ff;
+    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = dwordCount & 0x7fffff;
+    ringIndex = ringIndex + 1 & 0x7ff;
+    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = 0x394;
+    ringIndex = ringIndex + 1 & 0x7ff;
+    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = 1;
+    ringIndex = ringIndex + 1 & 0x7ff;
+    M<UInt32>(self + 0x914) = ringIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = 0x579;
+    ringIndex = ringIndex + 1 & 0x7ff;
+    nextIndex = ringIndex + 1;
+    M<UInt32>(self + 0x914) = nextIndex;
+    M<UInt32>(ringBase + ringIndex * 4) = M<UInt32>(self + 0x850);
+    nextIndex = nextIndex & 0x7ff;
+    M<UInt32>(self + 0x914) = nextIndex;
+    M<UInt32>(ringBase + nextIndex * 4) = 0x80000000;
+    M<UInt32>(self + 0x914) = nextIndex + 1 & 0x7ff;
     ((ATIRadeonX1000 *)(self))->submit_ring_data();
     iVar1 = M<SInt32>(self + 0x850);
     M<SInt32>(self + 0x850) = iVar1 + 1;

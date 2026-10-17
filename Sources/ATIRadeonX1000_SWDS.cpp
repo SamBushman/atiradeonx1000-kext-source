@@ -230,10 +230,10 @@ bool ATIRadeonX1000::SWDSInit() {
   UInt32 uVar16;
   UInt32 uVar17;
   UInt32 uVar18;
-  SInt32 iVar19;
+  SInt32 recordOffset;
   UInt8 *pGVar20;
   UInt8 *pAVar21;
-  UInt32 uVar22;
+  UInt32 panel;
   UInt8 *pGVar23;
   UInt8 *pAVar24;
   UInt32 uVar25;
@@ -246,10 +246,10 @@ bool ATIRadeonX1000::SWDSInit() {
     bVar6 = false;
     bVar5 = false;
     uVar18 = 0;
-    uVar22 = 1;
+    panel = 1;
     pGVar20 = (self + 0xabc);
     pGVar23 = (self + 0xa34);
-    iVar19 = 0x78;
+    recordOffset = 0x78;
     pAVar21 = self;
     pAVar24 = self;
     pAVar28 = self;
@@ -273,13 +273,13 @@ bool ATIRadeonX1000::SWDSInit() {
           uVar15 = M<UInt32>(self + 0x9c);
           uVar25 = uVar16 * uVar11;
           if (uVar17 < uVar15) {
-            if ((uVar22 == 1) ||
+            if ((panel == 1) ||
                ((((M<SInt32>(self + 0x894) == 1 && (M<SInt32>(self + 0xb2c) != 0)) &&
                  (M<SInt32>(self + 0xb30) != 0)) &&
                 ((M<SInt32>(self + 0xb34) == M<SInt32>(self + 0xb38) ||
                  (M<SInt32>(self + 0xb3c) == M<SInt32>(self + 0xb40))))))) {
               iVar8 = uVar15 - uVar25;
-              bVar6 = uVar22 == 1;
+              bVar6 = panel == 1;
             }
             else {
               if (bVar6) {
@@ -355,7 +355,7 @@ LAB_00024750:
                     M<UInt32>(iVar9 + 0x2c) = 10;
                     M<UInt32>(iVar9 + 0x30) = 0x5c8;
                     M<UInt32>(iVar9 + 0x34) = 0x30000;
-                    iVar9 = this->SWDSWriteBlitToCmdBuf(puVar27,6,false,uVar22);
+                    iVar9 = this->SWDSWriteBlitToCmdBuf(puVar27,6,false,panel);
                     puVar27[iVar9] = 0x2ff;
                     puVar27[iVar9 + 1] = 0xc0;
                     puVar27[iVar9 + 2] = 0x5c8;
@@ -388,7 +388,7 @@ LAB_00024750:
                     M<UInt32>(self + 0xb70) = M<UInt32>(pAVar28 + 0xa3c);
                   }
                   else {
-                    if (uVar22 == 0) {
+                    if (panel == 0) {
                       iVar8 = M<SInt32>(self + 0x860);
                       uVar12 = M<UInt32>(self + 0x9c4);
                       M<UInt32>(iVar8 + 0x6110) =
@@ -416,11 +416,11 @@ LAB_00024750:
                     M<UInt32>(pAVar24 + 0xb70) = uVar12;
                   }
                   uVar12 = 0;
-                  AVar2 = self[iVar19 + 0x164];
-                  uVar11 = M<UInt32>(self + iVar19 + 0x134);
+                  AVar2 = self[recordOffset + 0x164];
+                  uVar11 = M<UInt32>(self + recordOffset + 0x134);
                   uVar14 = 0;
                   if (AVar2 != 0x0) {
-                    uVar12 = (UInt32)(M<UInt16>(self + iVar19 + 0x144) >> 3);
+                    uVar12 = (UInt32)(M<UInt16>(self + recordOffset + 0x144) >> 3);
                     if (AVar2 == 0x2) {
                       uVar14 = 0x20000;
                     }
@@ -434,19 +434,19 @@ LAB_00024750:
                       uVar14 = 0;
                     }
                   }
-                  if (uVar22 == 1) {
+                  if (panel == 1) {
                     iVar26 = 0xb64;
                     iVar9 = 0xb68;
                     iVar13 = 0xb6c;
-                    uVar12 = uVar12 | uVar14 | ((UInt8)self[iVar19 + 0x165] & 3) << 0x14 |
-                             ((UInt8)self[iVar19 + 0x165] & 3) << 0x16;
+                    uVar12 = uVar12 | uVar14 | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
+                             ((UInt8)self[recordOffset + 0x165] & 3) << 0x16;
                   }
                   else {
                     iVar26 = 0xb74;
                     iVar9 = 0xb78;
                     iVar13 = 0xb7c;
-                    uVar12 = uVar12 | uVar14 | ((UInt8)self[iVar19 + 0x165] & 3) << 0x14 |
-                             ((UInt8)self[iVar19 + 0x165] & 3) << 0x16;
+                    uVar12 = uVar12 | uVar14 | ((UInt8)self[recordOffset + 0x165] & 3) << 0x14 |
+                             ((UInt8)self[recordOffset + 0x165] & 3) << 0x16;
                   }
                   pbVar4 = (UInt8 *)(iVar8 + iVar26);
                   M<UInt32>(pAVar21 + 0xb14) =
@@ -462,7 +462,7 @@ LAB_00024750:
                        uVar11 << 0x18 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00 |
                        uVar11 >> 0x18;
                   enforceInOrderExecutionIO();
-                  uVar14 = (uVar11 + M<SInt32>(self + iVar19 + 0x13c)) - 1;
+                  uVar14 = (uVar11 + M<SInt32>(self + recordOffset + 0x13c)) - 1;
                   M<UInt32>(iVar8 + iVar9) =
                        uVar14 * 0x1000000 | (uVar14 & 0xff00) << 8 | uVar14 >> 8 & 0xff00 |
                        uVar14 >> 0x18;
@@ -480,7 +480,7 @@ LAB_00024750:
                   ((M<SInt32>(self + 0xb30) != 0 &&
                    ((M<SInt32>(self + 0xb34) != M<SInt32>(self + 0xb38) ||
                     (M<SInt32>(self + 0xb3c) != M<SInt32>(self + 0xb40))))))) {
-            if (uVar22 == 1) {
+            if (panel == 1) {
               iVar9 = M<SInt32>(self + 0xbac);
               iVar8 = M<SInt32>(self + 0x1ac);
               iVar26 = M<SInt32>(self + 0x1b4);
@@ -495,7 +495,7 @@ LAB_00024a0c:
             }
           }
           else {
-            if ((uVar22 != 0) || ((M<SInt32>(self + 0x1b4) == 0 || (M<SInt32>(self + 0x894) != 0)))) {
+            if ((panel != 0) || ((M<SInt32>(self + 0x1b4) == 0 || (M<SInt32>(self + 0x894) != 0)))) {
               iVar9 = M<SInt32>(self + 0xbac);
               iVar8 = M<SInt32>(pAVar28 + 0x1ac);
               iVar26 = M<SInt32>(pAVar28 + 0x1b4);
@@ -507,14 +507,14 @@ LAB_00024a0c:
           }
         }
       }
-      bVar1 = uVar22 != 0;
-      iVar19 = iVar19 + -0x78;
+      bVar1 = panel != 0;
+      recordOffset = recordOffset + -0x78;
       pGVar23 = pGVar23 + -0x78;
       pGVar20 = pGVar20 + -0x10;
       pAVar24 = pAVar24 + -4;
       pAVar21 = pAVar21 + -0x18;
       pAVar28 = pAVar28 + -0x78;
-      uVar22 = uVar22 - 1;
+      panel = panel - 1;
     } while (bVar1);
     if (bVar5) {
       VCALL(*M<SInt32 *>(self + 0x9b8), 300)

@@ -29,9 +29,9 @@
 /* real addr 0x3a810 */
 extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) asm("__Z25window_mode_to_ati_formatm");   /* free function with a C++-mangled stock name */
 
-extern "C" UInt32 window_mode_to_ati_format(UInt32 param_1) {
+extern "C" UInt32 window_mode_to_ati_format(UInt32 windowModeBits) {
 
-  switch(param_1 & 0xf) {
+  switch(windowModeBits & 0xf) {
   case 3:
     return 7;
   case 4:

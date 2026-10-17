@@ -40,8 +40,22 @@ bool ATIRadeonX1000::start(IOService *provider) {
   UInt8 *chipID;
   UInt8 *pAVar4;
   SInt32 iVar5;
+  SInt32 swdsTimer;
+  SInt32 hzmemResult;
+  SInt32 flushLength;
+  SInt32 pageIndex;
+  SInt32 mapped;
+  SInt32 gartStartResult;
+  SInt32 registers;
+  SInt32 poolReady;
+  SInt32 index;
+  SInt32 baseStarted;
   UInt32 uVar6;
+  UInt32 flag;
+  UInt32 property;
   SInt32 *piVar7;
+  SInt32 *period;
+  SInt32 *booleanObject;
   UInt8 *memoryPool;
   UInt32 uVar8;
   SInt32 iVar9;
@@ -56,8 +70,8 @@ bool ATIRadeonX1000::start(IOService *provider) {
   UInt8 *local_34 [6];
   
   gartOffset = 0;
-  iVar5 = IOATIR500Accelerator::start(provider);
-  if (iVar5 == 0) {
+  baseStarted = IOATIR500Accelerator::start(provider);
+  if (baseStarted == 0) {
     return 0;
   }
   M<UInt32>(self + 0x858) = 0;
@@ -103,10 +117,10 @@ bool ATIRadeonX1000::start(IOService *provider) {
   M<UInt32>(self + 0x8f8) = 0;
   ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(0);
   M<UInt32>(self + 0x93c) = 0;
-  iVar5 = 0;
+  index = 0;
   pAVar4 = self;
   do {
-    bVar1 = iVar5 != 1;
+    bVar1 = index != 1;
     M<UInt32>(pAVar4 + 0x940) = 0;
     M<UInt32>(pAVar4 + 0x944) = 0;
     M<UInt32>(pAVar4 + 0x948) = 0;
@@ -115,23 +129,23 @@ bool ATIRadeonX1000::start(IOService *provider) {
     M<UInt32>(pAVar4 + 0x954) = 0;
     M<UInt32>(pAVar4 + 0x958) = 0;
     M<UInt32>(pAVar4 + 0x95c) = 0;
-    iVar5 = iVar5 + 1;
+    index = index + 1;
     pAVar4 = pAVar4 + 0x20;
   } while (bVar1);
   M<UInt32>(self + 0x8c4) = 0;
   M<UInt32>(self + 0x8c0) = 0;
-  uVar6 = VCALL(M<SInt32>(self), 0x188)(self,"ATIEnableWideBlitSupport");
+  property = VCALL(M<SInt32>(self), 0x188)(self,"ATIEnableWideBlitSupport");
   uVar11 = GH_OSBoolean_metaClass;
-  piVar7 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSBoolean_metaClass);
-  if (piVar7 != (SInt32 *)0x0) {
-    uVar6 = VCALL(*piVar7, 0xd8)(piVar7);
-    M<UInt32>(self + 0x8c0) = uVar6;
+  booleanObject = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,GH_OSBoolean_metaClass);
+  if (booleanObject != (SInt32 *)0x0) {
+    flag = VCALL(*booleanObject, 0xd8)(booleanObject);
+    M<UInt32>(self + 0x8c0) = flag;
   }
-  uVar6 = VCALL(M<SInt32>(self), 0x188)(self,"ATIUseTearingWideBlit");
-  piVar7 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,uVar11);
-  if (piVar7 != (SInt32 *)0x0) {
-    uVar6 = VCALL(*piVar7, 0xd8)(piVar7);
-    M<UInt32>(self + 0x8c4) = uVar6;
+  property = VCALL(M<SInt32>(self), 0x188)(self,"ATIUseTearingWideBlit");
+  booleanObject = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(property,uVar11);
+  if (booleanObject != (SInt32 *)0x0) {
+    flag = VCALL(*booleanObject, 0xd8)(booleanObject);
+    M<UInt32>(self + 0x8c4) = flag;
   }
   if (M<SInt32>(self + 0x8c0) == 0) {
     M<UInt32>(self + 0x8c4) = 0;
@@ -146,8 +160,8 @@ bool ATIRadeonX1000::start(IOService *provider) {
   memoryPool = (UInt8 *)new ATIR500Memory();
   M<UInt8 *>(self + 0x93c) = memoryPool;
   if (memoryPool != (UInt8 *)0x0) {
-    iVar5 = ((ATIR500Memory *)(memoryPool))->init_pool(0);
-    if (iVar5 == 0) {
+    poolReady = ((ATIR500Memory *)(memoryPool))->init_pool(0);
+    if (poolReady == 0) {
       VCALL(*M<SInt32 *>(self + 0x93c), 0x18)(M<SInt32 *>(self + 0x93c));
       M<UInt32>(self + 0x93c) = 0;
     }
@@ -159,9 +173,9 @@ bool ATIRadeonX1000::start(IOService *provider) {
                                   (M<SInt32 *>(self + 0x74),0x18,0);
         M<SInt32 *>(self + 0x934) = piVar7;
         if (piVar7 != (SInt32 *)0x0) {
-          iVar5 = VCALL(*piVar7, 0xd0)(piVar7);
-          M<SInt32>(self + 0x860) = iVar5;
-          if (iVar5 != 0) {
+          registers = VCALL(*piVar7, 0xd0)(piVar7);
+          M<SInt32>(self + 0x860) = registers;
+          if (registers != 0) {
             /* #147/#155/#156 root cause (corrected 2026-10-08 - the prior version of this comment,
              * and #147's own fix, both blamed "MMIO timing fragility"/hardware drift; that was
              * wrong, and was itself an instance of the same bias the project's standing methodology
@@ -176,8 +190,8 @@ bool ATIRadeonX1000::start(IOService *provider) {
              * (1) read the original word at +8, (2) write a MODIFIED value to +8 (forces bit 0x34,
              * masks 0xff40) to trigger the hardware latch, (3) READ the now-latched chip-ID/chip-rev
              * word back from +0xc while still in the strobed state, (4) THEN restore the original
-             * value to +8. This port had BOTH reads (chip-ID originally via CONCAT11(iVar5+0xd,
-             * iVar5+0xc), chip-rev via iVar5+0xf) happening AFTER step 4's restore instead of between
+             * value to +8. This port had BOTH reads (chip-ID originally via CONCAT11(registers+0xd,
+             * registers+0xc), chip-rev via registers+0xf) happening AFTER step 4's restore instead of between
              * steps 2 and 4 - reading the register back in its already-restored, un-strobed state.
              * That's why chip-ID drifted to garbage (#147) and chip-rev came back 0 instead of 0xc
              * (#156) on a hot-swapped instance - not hardware timing, a dropped read-ordering step in
@@ -187,15 +201,15 @@ bool ATIRadeonX1000::start(IOService *provider) {
              * positioned between the strobe write and the restore write, matching stock exactly.
              * Live-verified (2026-10-08): self+0xc50=0x7240, self+0xc54=0xc, ioreg AccelCaps=3 -
              * identical outcome to #147's fix, via the real mechanism instead of a substitute. */
-            savedStrobeByte = M<UInt8>(iVar5 + 8);
-            M<UInt32>(iVar5 + 8) =
-                 (savedStrobeByte & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
-                 (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
-            M<UInt32>(self + 0xc54) = M<UInt8>(iVar5 + 0xf) & 0xf;
-            chipID = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(iVar5 + 0xd), M<UInt8>(iVar5 + 0xc));
-            M<UInt32>(iVar5 + 8) =
-                 (UInt32)savedStrobeByte << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
-                 (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
+            savedStrobeByte = M<UInt8>(registers + 8);
+            M<UInt32>(registers + 8) =
+                 (savedStrobeByte & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(registers + 9) << 0x10 |
+                 (UInt32)M<UInt8>(registers + 10) << 8 | (UInt32)M<UInt8>(registers + 0xb);
+            M<UInt32>(self + 0xc54) = M<UInt8>(registers + 0xf) & 0xf;
+            chipID = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(registers + 0xd), M<UInt8>(registers + 0xc));
+            M<UInt32>(registers + 8) =
+                 (UInt32)savedStrobeByte << 0x18 | (UInt32)M<UInt8>(registers + 9) << 0x10 |
+                 (UInt32)M<UInt8>(registers + 10) << 8 | (UInt32)M<UInt8>(registers + 0xb);
             M<UInt8 *>(self + 0xc50) = chipID;
             if (chipID == (UInt8 *)0x7157) goto LAB_0001fafc;
             if (chipID < (UInt8 *)0x7158) {
@@ -264,43 +278,43 @@ LAB_0001fbd0:
             }
 LAB_0001fc04:
             self[0x990] = 0x6;
-            iVar5 = this->startupPCIeGART();
-            if (iVar5 != -1) {
+            gartStartResult = this->startupPCIeGART();
+            if (gartStartResult != -1) {
               self[0x8cd] = 0x0;
               self[0x8cc] = 0x0;
               M<UInt32>(self + 0x86c) = 0x15e0;
               M<UInt32>(self + 0x8c8) = 0;
               M<UInt32>(self + 0x864) = M<UInt32>(self + 0x860);
               M<UInt32>(self + 0x868) = 0x15e4;
-              iVar5 = VCALL(M<SInt32>(self), 0x590)
+              mapped = VCALL(M<SInt32>(self), 0x590)
                                 (self,M<UInt32>(self + 0x22c),self + 0x228,0,0x1000);
-              if (iVar5 != 0) {
+              if (mapped != 0) {
                 if (M<SInt32>(self + 0x8c8) == 0) {
                   if ((self[0x8cc] != 0x0) && (1 < (UInt8)self[0x8cc])) {
-                    iVar5 = 1;
+                    pageIndex = 1;
                     do {
-                      gartOffset = iVar5 << (GH_page_shift & 0x3f);
+                      gartOffset = pageIndex << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
                                         (self,M<UInt32>(self + 0x22c),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
                       if (iVar9 == 0) {
-                        if (iVar5 < (SInt32)(UInt32)(UInt8)self[0x8cc]) {
-                          if (-1 < iVar5 + -1) {
+                        if (pageIndex < (SInt32)(UInt32)(UInt8)self[0x8cc]) {
+                          if (-1 < pageIndex + -1) {
                             iVar9 = 0;
                             do {
-                              iVar16 = (iVar5 + -1) - iVar9;
+                              iVar16 = (pageIndex + -1) - iVar9;
                               iVar9 = iVar9 + 1;
                               VCALL(M<SInt32>(self), 0x5a4)
                                         (self,M<UInt32>(self + 0x22c),
                                          iVar16 << (GH_page_shift & 0x3f));
-                            } while (iVar5 != iVar9);
+                            } while (pageIndex != iVar9);
                           }
                           goto LAB_0001f9a0;
                         }
                         break;
                       }
-                      iVar5 = iVar5 + 1;
-                    } while (iVar5 < (SInt32)(UInt32)(UInt8)self[0x8cc]);
+                      pageIndex = pageIndex + 1;
+                    } while (pageIndex < (SInt32)(UInt32)(UInt8)self[0x8cc]);
                   }
                 }
                 else {
@@ -327,13 +341,13 @@ LAB_0001fc04:
                   uVar11 = (UInt32)(UInt8)self[0x84];
                   iVar9 = 0;
                   cacheFlushStart = -uVar11 & M<SInt32>(self + 0x238) + 0x20U;
-                  iVar5 = ((M<SInt32>(self + 0x238) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
-                  if (0 < iVar5) {
+                  flushLength = ((M<SInt32>(self + 0x238) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
+                  if (0 < flushLength) {
                     iVar9 = 0;
                     do {
                       dataCacheBlockStore(cacheFlushStart + iVar9);
                       iVar9 = iVar9 + uVar11;
-                    } while (iVar9 < iVar5);
+                    } while (iVar9 < flushLength);
                   }
                   ppcSync();
                   instructionSynchronize();
@@ -423,9 +437,9 @@ LAB_0001fc04:
                             M<UInt32>(self + 0x980) = 0x7b8;
                             M<UInt32>(self + 0x984) = 0x3ff;
                             M<UInt32>(self + 0x988) = 0;
-                            iVar5 = HZMEM_Init((_HZDATA *)(self + 0x870),uVar13,
+                            hzmemResult = HZMEM_Init((_HZDATA *)(self + 0x870),uVar13,
                                                M<UInt32>(self + 0xb98),M<UInt32>(self + 0xb9c));
-                            if (iVar5 == 0) {
+                            if (hzmemResult == 0) {
                               GH_memset(self + 0xb2c,0,0x40);
                               self[0x9b0] = 0x0;
                               M<UInt32>(self + 0xb6c) = 0;
@@ -443,11 +457,11 @@ LAB_0001fc04:
                               M<UInt32>(self + 0xac8) = 0;
                               GH_memset(self + 0x9bc,0,0xf0);
                               GH_memset(self + 0xafc,0,0x30);
-                              iVar5 = GH_ZN18IOTimerEventSource16timerEventSourceEP8OSObjectPFvS1_PS_(self,SWDSFunc);
-                              M<SInt32>(self + 0x9b8) = iVar5;
-                              if (iVar5 != 0) {
+                              swdsTimer = GH_ZN18IOTimerEventSource16timerEventSourceEP8OSObjectPFvS1_PS_(self,SWDSFunc);
+                              M<SInt32>(self + 0x9b8) = swdsTimer;
+                              if (swdsTimer != 0) {
                                 VCALL(*M<SInt32 *>(self + 0xb4), 0xe4)
-                                          (M<SInt32 *>(self + 0xb4),iVar5);
+                                          (M<SInt32 *>(self + 0xb4),swdsTimer);
                                 M<UInt32>(self + 0xaf8) = 0;
                                 M<UInt32>(self + 0xadc) = 0;
                                 M<UInt32>(self + 0xae0) = 0;
@@ -480,9 +494,9 @@ LAB_0001fc04:
                                     piVar7 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSArray_metaClass);
                                     if (piVar7 != (SInt32 *)0x0) {
                                       piVar15 = (SInt32 *)0x0;
-                                      iVar5 = 0;
+                                      index = 0;
                                       while( true ) {
-                                        uVar6 = VCALL(*piVar7, 0x138)(piVar7,iVar5);
+                                        uVar6 = VCALL(*piVar7, 0x138)(piVar7,index);
                                         iVar9 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSDictionary_metaClass);
                                         if (iVar9 == 0) break;
                                         piVar10 = (SInt32 *)GH_ZN8OSObjectnwEm(0x50);
@@ -495,7 +509,7 @@ LAB_0001fc04:
                                             VCALL(*piVar10, 0x4c)(piVar10);
                                           }
                                         }
-                                        iVar5 = iVar5 + 1;
+                                        index = index + 1;
                                       }
                                       if ((piVar15 != (SInt32 *)0x0) &&
                                          (iVar5 = VCALL(*piVar15, 0x1d8)
@@ -514,15 +528,15 @@ LAB_0001fc04:
                                         iVar5 = VCALL(*M<SInt32 *>(self + 0xb4), 0xe4)
                                                           (M<SInt32 *>(self + 0xb4),iVar5);
                                         if (iVar5 == 0) {
-                                          piVar7 = (SInt32 *)this->getPeriodValue("polling-period");
-                                          if (piVar7 != (SInt32 *)0x0) {
+                                          period = (SInt32 *)this->getPeriodValue("polling-period");
+                                          if (period != (SInt32 *)0x0) {
                                             M<UInt32>(self + 0x994) =
-                                                 *piVar7 * 1000 + (UInt32)piVar7[1] / 1000000;
+                                                 *period * 1000 + (UInt32)period[1] / 1000000;
                                           }
-                                          piVar7 = (SInt32 *)this->getPeriodValue("sample-period");
-                                          if (piVar7 != (SInt32 *)0x0) {
+                                          period = (SInt32 *)this->getPeriodValue("sample-period");
+                                          if (period != (SInt32 *)0x0) {
                                             M<UInt32>(self + 0x998) =
-                                                 *piVar7 * 1000 + (UInt32)piVar7[1] / 1000000;
+                                                 *period * 1000 + (UInt32)period[1] / 1000000;
                                           }
                                           this->enable_GPUSensor();
                                         }

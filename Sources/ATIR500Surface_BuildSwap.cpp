@@ -104,6 +104,9 @@ void ATIR500Surface::build_swap() {
   UInt8 *local_108;
   UInt32 panel;
   SInt32 *local_100;
+  SInt32 surfaceBuffer;
+  SInt32 packetIndex;
+  SInt32 textureOffsetWord;
   
   M<UInt16>(self + 0xdb4) = 0;
   iVar32 = M<SInt32>(self + 0xd50);
@@ -118,10 +121,10 @@ void ATIR500Surface::build_swap() {
     do {
       bVar1 = (M<UInt32>(self + 0xbe8) & 0x20) == 0;
       if (bVar1) {
-        iVar43 = M<SInt32>(self + 0xb74);
+        surfaceBuffer = M<SInt32>(self + 0xb74);
       }
       else {
-        iVar43 = M<SInt32>(self + 0xb70);
+        surfaceBuffer = M<SInt32>(self + 0xb70);
       }
       iVar32 = panel * 0x78 + iVar32;
       if ((self[0xbf1] == 0x10) ||
@@ -355,7 +358,7 @@ LAB_0003f654:
                             - signedIntBias);
           }
         }
-        uVar29 = (UInt32)M<UInt8>(iVar43 + 0x3a);
+        uVar29 = (UInt32)M<UInt8>(surfaceBuffer + 0x3a);
         uVar19 = (UInt32)M<UInt8>(iVar32 + 0x166);
         uVar16 = M<UInt32>(iVar28 + 0xb74);
         if (uVar29 == uVar19) {
@@ -367,8 +370,8 @@ LAB_0003f654:
                    FormatTableLookup_0x0004d2d8(uVar29 * 0x1c)) & 0xffffc000) != 0;
           uVar17 = uVar29;
         }
-        uVar15 = (UInt32)M<UInt16>(iVar43 + 0x1e);
-        uVar42 = (UInt32)M<UInt16>(iVar43 + 0x1c);
+        uVar15 = (UInt32)M<UInt16>(surfaceBuffer + 0x1e);
+        uVar42 = (UInt32)M<UInt16>(surfaceBuffer + 0x1c);
         iVar44 = M<SInt32>(iVar32 + 0x16c);
         uVar13 = M<UInt16>(iVar32 + 0x14c);
         iVar18 = M<SInt32>(iVar32 + 0x134);
@@ -395,13 +398,13 @@ LAB_0003f654:
         if (M<UInt16>(iVar32 + 0x14a) != 0) {
           uVar21 = M<UInt16>(iVar32 + 0x14a) - 1;
         }
-        uVar14 = M<UInt16>(iVar43 + 0x20);
-        iVar32 = M<SInt32>(iVar43 + 0x40);
-        iVar33 = M<SInt32>(iVar43 + 8);
-        bVar7 = M<UInt8>(iVar43 + 0x38);
-        bVar2 = (M<UInt32>(iVar43 + 0x3c) & 0xf00000) == 0;
+        uVar14 = M<UInt16>(surfaceBuffer + 0x20);
+        iVar32 = M<SInt32>(surfaceBuffer + 0x40);
+        iVar33 = M<SInt32>(surfaceBuffer + 8);
+        bVar7 = M<UInt8>(surfaceBuffer + 0x38);
+        bVar2 = (M<UInt32>(surfaceBuffer + 0x3c) & 0xf00000) == 0;
         if ((bVar2) ||
-           (uVar22 = uVar42 / (M<UInt32>(iVar43 + 0x3c) >> 0x14 & 0xf), uVar23 = uVar22 - 1,
+           (uVar22 = uVar42 / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), uVar23 = uVar22 - 1,
            uVar22 == 0)) {
           uVar23 = 0;
         }
@@ -416,14 +419,14 @@ LAB_0003f654:
           uVar24 = 0;
         }
         else {
-          uVar24 = (UInt32)M<UInt16>(iVar43 + 0x14) / (M<UInt32>(iVar43 + 0x3c) >> 0x14 & 0xf);
+          uVar24 = (UInt32)M<UInt16>(surfaceBuffer + 0x14) / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf);
         }
-        uVar31 = 0x20 / M<UInt16>(iVar43 + 0x16);
+        uVar31 = 0x20 / M<UInt16>(surfaceBuffer + 0x16);
         if (uVar31 <= uVar24) {
           uVar31 = uVar24;
         }
         if ((bVar2) ||
-           (uVar24 = uVar42 / (M<UInt32>(iVar43 + 0x3c) >> 0x14 & 0xf), uVar25 = uVar24 - 1,
+           (uVar24 = uVar42 / (M<UInt32>(surfaceBuffer + 0x3c) >> 0x14 & 0xf), uVar25 = uVar24 - 1,
            uVar24 == 0)) {
           uVar25 = 0;
         }
@@ -523,7 +526,7 @@ LAB_0003f654:
             if (iVar34 != 0) {
               dVar59 = (double)(float)(dVar68 + dVar47);
               dVar48 = (double)(float)(dVar67 + dVar66);
-              iVar43 = iVar32;
+              packetIndex = iVar32;
               piVar27 = local_100;
               iVar35 = iVar34;
               do {
@@ -573,38 +576,38 @@ LAB_0003f654:
                 if (-fVar3 < 0.0) {
                   dVar51 = dVar48;
                 }
-                iVar32 = iVar43;
+                iVar32 = packetIndex;
                 if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
                    (FLOAT_0004c370 < (float)(dVar51 - dVar50))) {
-                  blitPacket[iVar43] = 0x31080;
-                  blitPacket[iVar43 + 5] = 0x1087;
-                  iVar32 = iVar43 * 4 + 0x30 >> 2;
-                  blitPacket[iVar43 + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
+                  blitPacket[packetIndex] = 0x31080;
+                  blitPacket[packetIndex + 5] = 0x1087;
+                  iVar32 = packetIndex * 4 + 0x30 >> 2;
+                  blitPacket[packetIndex + 1] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar49 - dVar68) -
                                                        dVar61)));
-                  blitPacket[iVar43 + 2] =
+                  blitPacket[packetIndex + 2] =
                        FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar51 - dVar67) - dVar62));
-                  blitPacket[iVar43 + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
+                  blitPacket[packetIndex + 3] = FBITS((float)(dVar55 * (double)(float)(dVar63 * (double)(float)(dVar52 - dVar68) -
                                                        dVar61)));
-                  blitPacket[iVar43 + 4] =
+                  blitPacket[packetIndex + 4] =
                        FBITS(widthRatio * (float)(dVar64 * (double)(float)(dVar50 - dVar67) - dVar62));
-                  blitPacket[iVar43 + 7] = 0xc0033500;
-                  blitPacket[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  blitPacket[iVar43 + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
-                  blitPacket[iVar43 + 8] = 0x10031;
-                  blitPacket[iVar43 + 0xb] = 0;
-                  blitPacket[iVar43 + 6] =
+                  blitPacket[packetIndex + 7] = 0xc0033500;
+                  blitPacket[packetIndex + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
+                  blitPacket[packetIndex + 10] = FBITS((float)(dVar50 + dVar51) * fVar4);
+                  blitPacket[packetIndex + 8] = 0x10031;
+                  blitPacket[packetIndex + 0xb] = 0;
+                  blitPacket[packetIndex + 6] =
                        (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
                        (SInt32)((float)(dVar51 - dVar50) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
-                iVar43 = iVar32;
+                packetIndex = iVar32;
               } while (iVar35 != 0);
             }
-            iVar43 = blitPacket[0xa0];
+            textureOffsetWord = blitPacket[0xa0];
             blitPacket[iVar32] = 0x1150;
             blitPacket[iVar32 + 1] =
-                 iVar43 + (uVar38 * ((uVar29 & 0x3fff) + 1) << (uVar19 >> 0xc & 7) & 0xffffffe0);
+                 textureOffsetWord + (uVar38 * ((uVar29 & 0x3fff) + 1) << (uVar19 >> 0xc & 7) & 0xffffffe0);
             uVar40 = blitPacket[0xa6];
             blitPacket[iVar32 + 2] = 0x1120;
             blitPacket[iVar32 + 3] = (uVar42 - 1) * 0x800 & 0x3ff800 | uVar40 & 0xffc007ff;
@@ -752,7 +755,7 @@ LAB_0003f654:
               dVar66 = (double)(float)(dVar68 + dVar65);
               dVar48 = (double)(float)(dVar67 + dVar54);
               piVar27 = local_100;
-              iVar43 = iVar26;
+              packetIndex = iVar26;
               iVar35 = iVar34;
               do {
                 dVar50 = (double)(float)((double)CONCAT44d(0x43300000,
@@ -801,37 +804,37 @@ LAB_0003f654:
                 if (-fVar3 < 0.0) {
                   dVar53 = dVar51;
                 }
-                iVar26 = iVar43;
+                iVar26 = packetIndex;
                 if ((FLOAT_0004c370 < (float)(dVar52 - dVar49)) &&
                    (FLOAT_0004c370 < (float)(dVar53 - dVar50))) {
-                  blitPacket[iVar43] = 0x31080;
-                  blitPacket[iVar43 + 5] = 0x1087;
-                  iVar26 = iVar43 * 4 + 0x30 >> 2;
-                  blitPacket[iVar43 + 1] =
+                  blitPacket[packetIndex] = 0x31080;
+                  blitPacket[packetIndex + 5] = 0x1087;
+                  iVar26 = packetIndex * 4 + 0x30 >> 2;
+                  blitPacket[packetIndex + 1] =
                        FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar49 - dVar68) - dVar61));
-                  blitPacket[iVar43 + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
+                  blitPacket[packetIndex + 2] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar53 - dVar67) -
                                                        dVar62)));
-                  blitPacket[iVar43 + 3] =
+                  blitPacket[packetIndex + 3] =
                        FBITS(widthRatio * (float)(dVar63 * (double)(float)(dVar52 - dVar68) - dVar61));
-                  blitPacket[iVar43 + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
+                  blitPacket[packetIndex + 4] = FBITS((float)(dVar59 * (double)(float)(dVar64 * (double)(float)(dVar50 - dVar67) -
                                                        dVar62)));
-                  blitPacket[iVar43 + 7] = 0xc0033500;
-                  blitPacket[iVar43 + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
-                  blitPacket[iVar43 + 10] = FBITS((float)(dVar50 + dVar53) * fVar4);
-                  blitPacket[iVar43 + 8] = 0x10031;
-                  blitPacket[iVar43 + 0xb] = 0;
-                  blitPacket[iVar43 + 6] =
+                  blitPacket[packetIndex + 7] = 0xc0033500;
+                  blitPacket[packetIndex + 9] = FBITS((float)(dVar49 + dVar52) * fVar4);
+                  blitPacket[packetIndex + 10] = FBITS((float)(dVar50 + dVar53) * fVar4);
+                  blitPacket[packetIndex + 8] = 0x10031;
+                  blitPacket[packetIndex + 0xb] = 0;
+                  blitPacket[packetIndex + 6] =
                        (SInt32)((float)(dVar52 - dVar49) * heightRatio) << 0x10 |
                        (SInt32)((float)(dVar53 - dVar50) * heightRatio);
                 }
                 piVar27 = piVar27 + 2;
                 iVar35 = iVar35 + -1;
-                iVar43 = iVar26;
+                packetIndex = iVar26;
               } while (iVar35 != 0);
             }
-            iVar43 = blitPacket[0xa0];
+            textureOffsetWord = blitPacket[0xa0];
             blitPacket[iVar26] = 0x1150;
-            blitPacket[iVar26 + 1] = iVar43 + iVar32;
+            blitPacket[iVar26 + 1] = textureOffsetWord + iVar32;
             uVar40 = blitPacket[0xa6];
             blitPacket[iVar26 + 2] = 0x1120;
             iVar32 = iVar26 + 3;

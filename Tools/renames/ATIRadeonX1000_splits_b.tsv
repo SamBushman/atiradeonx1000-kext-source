@@ -1,0 +1,24 @@
+#!use-decl: beside
+# ATIRadeonX1000 per-use renames, part B: write_3dtexquad/pcl_CopyPix/SWDS*/HardwareInit/Start. See `use` in Tools/apply_renames.py.
+# kind	target	old	new	tier	evidence	from	to
+# ---- SWDSWriteBlitToCmdBuf (extends ATIRadeonX1000_splits.tsv, which names rotation/endAddress/pitch)
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	iVar9	packetEnd	CONFIRMED	the dword index just past the copied 0x2f4-byte state packet (blitPacket + 0x2f4 - buffer), where the trailing packets are written (buffer[packetEnd + k]) and from which cmdIndex is derived
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	packetEnd	regValueIndex	INFERRED	the index of the value word of the 0x5c8 register write that closes the 6-word header block (buffer[regValueIndex] = 8 / 0x80000008)	packetEnd = wordCount \+ 5;	^\s*else \{
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	packetEnd	regValueIndex	INFERRED	same, the second panel	packetEnd = wordCount \+ 5;#2	if \(0x1000 < M<UInt16>\(self \+ panel \* 0x78 \+ 0x148\)\) \{
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	packetEnd	baseOffset	CONFIRMED	the surface buffer's base offset (record +0x134), added to row * pitch in the texture-offset word	packetEnd = M<SInt32>\(self \+ panel \* 0x78 \+ 0x134\)	buffer\[iVar14 \+ 2\] = 0x1120
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	packetEnd	baseOffset	CONFIRMED	same, the second rotation branch	packetEnd = M<SInt32>\(self \+ panel \* 0x78 \+ 0x134\)#2	buffer\[iVar14 \+ 2\] = 0x1120
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	uVar17	blkFormatFieldE0	CONFIRMED	ati_format_info_table entry field E0 (FormatTableLookup_0x0004d2e0), unpacked into blk[7]	uVar17 = FormatTableLookup_0x0004d2e0\(\(UInt32\)\(UInt8\)self	if \(\(\(M<UInt32>\(self \+ panel \* 0x78 \+ 0x9f8\) & 0xf00000\) == 0\) \|\|
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	uVar11	blkFormatFieldE4	CONFIRMED	ati_format_info_table entry field E4 (FormatTableLookup_0x0004d2e4), unpacked into blk[2]	uVar11 = FormatTableLookup_0x0004d2e4\(	uVar17 = M<UInt32>\(self \+ panel \* 0x78 \+ 0x168\);
+use	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	uVar17	packetFormatFieldE4	CONFIRMED	same, the blitPacket path (this variable holds field E4 until it is overwritten by the +0x168 read)	uVar17 = FormatTableLookup_0x0004d2e4\(	uVar17 = M<UInt32>\(self \+ panel \* 0x78 \+ 0x168\);
+# ---- write_3dtexquad_cmds_for_copy_buffer_using_DMA: the packet-setup stage (uVar32/uVar34 hold, in turn, the tile bits and the integer rectangle corners packed into packet words 0xb2/0xb3)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar32	srcTileBits	CONFIRMED	`(srcTileFlags & 6) << 2` (zero for the linear format 4), ORed into the source texture-offset word local_360	^  uVar32 = 0;	^  uVar32 = 0;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar32	dstTileBits	CONFIRMED	`(dstTileFlags & 6) << 0x10`, ORed into the destination pitch/format word local_34c	^  uVar32 = 0;#2	if \(DOUBLE_0004c3c8 <= dVar51\)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar32	srcLeft	CONFIRMED	the float source X (dVar44 = srcX) converted to int and packed as the low field of packet word 0xb2	if \(DOUBLE_0004c3c8 <= dVar51\)	if \(DOUBLE_0004c3c8 <= dVar46\)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar34	lastColumn	CONFIRMED	srcWidth - 1, used for the source size words local_35c and local_354	uVar34 = srcWidth - 1;	^  uVar32 = 0;
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar34	srcTop	CONFIRMED	the float source Y (dVar47 = srcY) converted to int and packed as the high field of packet word 0xb2	if \(DOUBLE_0004c3c8 <= dVar48\)	if \(DOUBLE_0004c3c8 <= dVar46\)
+# write_3dtexquad: the chunking stage (the source rectangle is cut into 0xc00-wide by 0xf80-high chunks, one 0x10-dword packet each)
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar28	firstColumn	INFERRED	the x origin of the first chunk (the source left edge aligned down to 0x200 and clamped); copied to the per-chunk x origin uVar31 and subtracted from the right edge for the first chunk width	^        uVar28 = 0;$	uVar34 = packet\[0xaa\];
+use	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	uVar24	firstRow	INFERRED	the y origin of the first chunk (the source top edge aligned down to 0x40 and clamped); copied to the per-chunk y origin uVar39 and subtracted from the bottom edge	^        uVar24 = 0;$	uVar34 = packet\[0xaa\];
+# ---- pcl_CopyPix: the same chunking stage as write_3dtexquad (names follow it)
+use	::pcl_CopyPix	uVar30	firstColumn	INFERRED	the x origin of the first chunk (the left edge aligned down to 0x200 and clamped), as firstColumn in write_3dtexquad_cmds_for_copy_buffer_using_DMA	^        uVar30 = 0;$	uVar38 = cmd\[0xaa\];
+use	::pcl_CopyPix	uVar26	firstRow	INFERRED	the y origin of the first chunk (the top edge aligned down to 0x40 and clamped)	^        uVar26 = 0;$	uVar38 = cmd\[0xaa\];

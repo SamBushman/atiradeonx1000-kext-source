@@ -27,57 +27,57 @@
 
 
 /* real addr 0x45680 */
-UInt32 HZMEM_Free(_HZDATA *real_param_1, UInt32 param_2, UInt32 param_3) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+UInt32 HZMEM_Free(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
+    UInt8 *hizDataBytes = reinterpret_cast<UInt8 *>(hizData);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt8 *puVar3;
-  UInt32 uVar4;
+  UInt32 blockIndex;
+  SInt32 unitsLeft;
+  UInt8 *bitmapCursor;
+  UInt32 startUnit;
   UInt32 uVar5;
-  UInt32 *puVar6;
+  UInt32 *pool;
   
-  if (param_1 != (UInt8 *)0x0) {
-    puVar6 = M<UInt32 *>(param_1 + param_3 * 4 + 0x10);
-    if (puVar6 != (UInt32 *)0x0) {
-      if (param_3 == 1) {
-        uVar1 = param_2 >> 10 & 0x3ff;
+  if (hizDataBytes != (UInt8 *)0x0) {
+    pool = M<UInt32 *>(hizDataBytes + blockKind * 4 + 0x10);
+    if (pool != (UInt32 *)0x0) {
+      if (blockKind == 1) {
+        blockIndex = surfaceHzField >> 10 & 0x3ff;
       }
       else {
-        uVar1 = param_2 & 0x3ff;
-        if (param_3 != 0) {
-          if (param_3 != 2) {
+        blockIndex = surfaceHzField & 0x3ff;
+        if (blockKind != 0) {
+          if (blockKind != 2) {
             return 1;
           }
-          uVar1 = param_2 >> 0x14 & 0x3ff;
+          blockIndex = surfaceHzField >> 0x14 & 0x3ff;
         }
       }
-      if ((uVar1 != 0x3ff) && (puVar6 + uVar1 * 4 + 5 != (UInt32 *)0x0)) {
-        uVar5 = puVar6[1];
+      if ((blockIndex != 0x3ff) && (pool + blockIndex * 4 + 5 != (UInt32 *)0x0)) {
+        uVar5 = pool[1];
         if (uVar5 == 0) {
-          uVar4 = 0;
+          startUnit = 0;
           uVar5 = 0;
         }
         else {
-          uVar4 = puVar6[uVar1 * 4 + 6] / uVar5;
-          uVar5 = uVar4 + puVar6[uVar1 * 4 + 7] / uVar5;
-          if (*puVar6 < uVar5) {
+          startUnit = pool[blockIndex * 4 + 6] / uVar5;
+          uVar5 = startUnit + pool[blockIndex * 4 + 7] / uVar5;
+          if (*pool < uVar5) {
             return 1;
           }
         }
-        if (puVar6[3] != 0) {
-          if (uVar4 < uVar5) {
-            iVar2 = uVar5 - uVar4;
-            puVar3 = (UInt8 *)(uVar4 + puVar6[3]);
+        if (pool[3] != 0) {
+          if (startUnit < uVar5) {
+            unitsLeft = uVar5 - startUnit;
+            bitmapCursor = (UInt8 *)(startUnit + pool[3]);
             do {
-              *puVar3 = 0;
-              puVar3 = puVar3 + 1;
-              iVar2 = iVar2 + -1;
-            } while (iVar2 != 0);
+              *bitmapCursor = 0;
+              bitmapCursor = bitmapCursor + 1;
+              unitsLeft = unitsLeft + -1;
+            } while (unitsLeft != 0);
           }
-          puVar6[uVar1 * 4 + 5] = 0;
-          M<SInt32>(M<SInt32>(param_1 + param_3 * 4 + 0x10) + 0x10) =
-               M<SInt32>(M<SInt32>(param_1 + param_3 * 4 + 0x10) + 0x10) + -1;
+          pool[blockIndex * 4 + 5] = 0;
+          M<SInt32>(M<SInt32>(hizDataBytes + blockKind * 4 + 0x10) + 0x10) =
+               M<SInt32>(M<SInt32>(hizDataBytes + blockKind * 4 + 0x10) + 0x10) + -1;
           return 0;
         }
       }

@@ -31,56 +31,57 @@ extern "C" void store_reg(tracked_register_set *state, UInt32 regIndex, UInt32 v
 extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32 *rangeStart, UInt32 *rangeEnd) asm("__Z25track_regs_written_by_pm4P20tracked_register_setPmS1_");
 
 /* real addr 0x1b180 */
-extern "C" void track_regs_written_by_pm4(tracked_register_set *real_param_1, UInt32*param_2, UInt32*param_3) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+extern "C" void track_regs_written_by_pm4(tracked_register_set *state, UInt32*rangeStart, UInt32*rangeEnd) {
+    UInt8 *param_1 = reinterpret_cast<UInt8 *>(state);
 
-  UInt32 *puVar1;
-  UInt32 uVar2;
+  UInt32 *secondValue;
+  UInt32 countMinusOne;
   UInt32 uVar3;
-  UInt32 uVar4;
-  SInt32 iVar5;
-  UInt32 uVar6;
+  UInt32 reg;
+  UInt32 value;
+  SInt32 written;
+  UInt32 header;
   
-  while (param_2 < param_3) {
-    uVar6 = *param_2;
-    uVar3 = uVar6 >> 0x1e;
+  while (rangeStart < rangeEnd) {
+    header = *rangeStart;
+    uVar3 = header >> 0x1e;
     if (uVar3 == 1) {
-      store_reg(real_param_1,uVar6 & 0x7ff,param_2[1]);
-      puVar1 = param_2 + 2;
-      param_2 = param_2 + 3;
-      store_reg(real_param_1,uVar6 >> 0xb & 0x7ff,*puVar1);
+      store_reg(state,header & 0x7ff,rangeStart[1]);
+      secondValue = rangeStart + 2;
+      rangeStart = rangeStart + 3;
+      store_reg(state,header >> 0xb & 0x7ff,*secondValue);
     }
     else if (uVar3 == 0) {
-      uVar2 = uVar6 >> 0x10 & 0x3fff;
-      param_2 = param_2 + 1;
-      uVar3 = uVar6 & 0x1fff;
-      if ((uVar6 & 0x8000) == 0) {
-        if (uVar2 != 0xffffffff) {
-          iVar5 = 0;
+      countMinusOne = header >> 0x10 & 0x3fff;
+      rangeStart = rangeStart + 1;
+      reg = header & 0x1fff;
+      if ((header & 0x8000) == 0) {
+        if (countMinusOne != 0xffffffff) {
+          written = 0;
           do {
-            uVar4 = *param_2;
-            iVar5 = iVar5 + 1;
-            param_2 = param_2 + 1;
-            store_reg(real_param_1,uVar3,uVar4);
-            uVar3 = uVar3 + 1;
-          } while (uVar2 + 1 != iVar5);
+            value = *rangeStart;
+            written = written + 1;
+            rangeStart = rangeStart + 1;
+            store_reg(state,reg,value);
+            reg = reg + 1;
+          } while (countMinusOne + 1 != written);
         }
       }
-      else if (uVar2 != 0xffffffff) {
-        iVar5 = 0;
+      else if (countMinusOne != 0xffffffff) {
+        written = 0;
         do {
-          uVar4 = *param_2;
-          iVar5 = iVar5 + 1;
-          param_2 = param_2 + 1;
-          store_reg(real_param_1,uVar3,uVar4);
-        } while (uVar2 + 1 != iVar5);
+          value = *rangeStart;
+          written = written + 1;
+          rangeStart = rangeStart + 1;
+          store_reg(state,reg,value);
+        } while (countMinusOne + 1 != written);
       }
     }
     else if (uVar3 == 2) {
-      param_2 = param_2 + 1;
+      rangeStart = rangeStart + 1;
     }
     else if (uVar3 == 3) {
-      param_2 = (UInt32 *)((SInt32)param_2 + (uVar6 >> 0xe & 0xfffc) + 8);
+      rangeStart = (UInt32 *)((SInt32)rangeStart + (header >> 0xe & 0xfffc) + 8);
     }
   }
   return;

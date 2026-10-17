@@ -40,14 +40,19 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   int iVar6;
   SInt16 sVar7;
   UInt32 *puVar9;
+  UInt32 *packet;
   unsigned int uVar10;
   int iVar11;
+  int valueIndex;
   int iVar12;
   unsigned int uVar13;
   UInt32 uVar14;
   unsigned int uVar15;
   unsigned int uVar16;
   int iVar17;
+  int markerValueIndex;
+  int slotHeaderAddr;
+  int waited;
   UInt32 *puVar18;
   int iVar19;
   UInt32 uVar20;
@@ -90,8 +95,8 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   else {
     piVar24 = M<int *>(self + 0xd50);
     iVar12 = piVar24[0x1e2];
-    iVar17 = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
-    piVar24[0x1e2] = iVar12 + iVar17;
+    waited = VCALL(*piVar24, 0x54c)(piVar24,Vol(slot->stamp));
+    piVar24[0x1e2] = iVar12 + waited;
   }
   puVar18 = (UInt32 *)Vol(slot->header);
   puVar9 = (UInt32 *)Vol(rec->entries[0].header);
@@ -109,14 +114,14 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   puVar18[7] = uVar14;
   puVar18[4] = uVar21;
   puVar18[6] = uVar20;
-  iVar17 = (int)Vol(slot->header);
-  puVar9 = (UInt32 *)(iVar17 + 0x20);
-  *puVar9 = 0xd0b;
-  M<UInt32>(iVar17 + 0x24) = 5;
-  M<UInt32>(iVar17 + 0x28) = 0x1393;
-  M<UInt32>(iVar17 + 0x2c) = 10;
-  M<UInt32>(iVar17 + 0x30) = 0x5c8;
-  M<UInt32>(iVar17 + 0x34) = 0x30000;
+  slotHeaderAddr = (int)Vol(slot->header);
+  packet = (UInt32 *)(slotHeaderAddr + 0x20);
+  *packet = 0xd0b;
+  M<UInt32>(slotHeaderAddr + 0x24) = 5;
+  M<UInt32>(slotHeaderAddr + 0x28) = 0x1393;
+  M<UInt32>(slotHeaderAddr + 0x2c) = 10;
+  M<UInt32>(slotHeaderAddr + 0x30) = 0x5c8;
+  M<UInt32>(slotHeaderAddr + 0x34) = 0x30000;
   if (contextBytes == 0) {
     uVar13 = 6;
     sVar7 = 0;
@@ -156,14 +161,14 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
     }
     uVar15 = FormatTableLookup_0x0004d2dc(iVar6);
     uVar10 = FormatTableLookup_0x0004d2e0(iVar6);
-    M<UInt32>(iVar17 + 0x38) = 0x50b;
-    M<unsigned int>(iVar17 + 0x3c) =
+    M<UInt32>(slotHeaderAddr + 0x38) = 0x50b;
+    M<unsigned int>(slotHeaderAddr + 0x3c) =
          uVar22 | iVar12 + (unsigned int)uVar4 * iVar11 >> 10 | uVar16 * uVar5 * 0x10000 & 0x3fc00000 |
                   (bVar3 & 1) << 0x1e;
-    M<UInt32>(iVar17 + 0x40) = 0x138a;
-    M<int>(iVar17 + 0x44) = iVar12;
-    M<UInt32>(iVar17 + 0x48) = 0x138e;
-    M<unsigned int>(iVar17 + 0x4c) =
+    M<UInt32>(slotHeaderAddr + 0x40) = 0x138a;
+    M<int>(slotHeaderAddr + 0x44) = iVar12;
+    M<UInt32>(slotHeaderAddr + 0x48) = 0x138e;
+    M<unsigned int>(slotHeaderAddr + 0x4c) =
          uVar10 >> 1 & 0x1e00000 |
          (uVar15 & 0xc00) << 9 | (bVar3 & 6) << 0x10 | (bVar3 & 1) << 0x10 | uVar13 & 0x3ffe;
     sVar7 = M<SInt16>(contextBytes + 0x98);
@@ -220,79 +225,79 @@ void ATIR500Surface::submit_flip_buffer(UInt32 panel, IOATIR500GLContext *contex
   bVar1 = panel == 0;
   if ((bVar1) || (M<int>(iVar17 + 0x894) != 0)) {
     if (panel[self + 0xdb6] != 0x0) {
-      puVar9[uVar13] = 0x1848;
-      iVar11 = uVar13 + 1;
+      packet[uVar13] = 0x1848;
+      valueIndex = uVar13 + 1;
       uVar13 = uVar13 + 2;
-      puVar9[iVar11] = uVar16;
+      packet[valueIndex] = uVar16;
     }
-    puVar9[uVar13] = 0x1841;
-    puVar9[uVar13 + 1] = M<UInt32>(iVar17 + 0xb78);
-    puVar9[uVar13 + 2] = 0x1852;
-    puVar9[uVar13 + 3] = M<UInt32>(iVar17 + 0xb80);
-    puVar9[uVar13 + 4] = 0x1831;
-    iVar11 = uVar13 + 5;
+    packet[uVar13] = 0x1841;
+    packet[uVar13 + 1] = M<UInt32>(iVar17 + 0xb78);
+    packet[uVar13 + 2] = 0x1852;
+    packet[uVar13 + 3] = M<UInt32>(iVar17 + 0xb80);
+    packet[uVar13 + 4] = 0x1831;
+    valueIndex = uVar13 + 5;
     uVar13 = uVar13 + 6;
-    puVar9[iVar11] = M<UInt32>(iVar17 + 0xb88);
+    packet[valueIndex] = M<UInt32>(iVar17 + 0xb88);
   }
   bVar2 = panel == 1;
   if ((bVar2) || (M<int>(iVar17 + 0x894) != 0)) {
     if (panel[self + 0xdb6] != 0x0) {
-      puVar9[uVar13] = 0x1a48;
-      iVar11 = uVar13 + 1;
+      packet[uVar13] = 0x1a48;
+      valueIndex = uVar13 + 1;
       uVar13 = uVar13 + 2;
-      puVar9[iVar11] = uVar16;
+      packet[valueIndex] = uVar16;
     }
-    puVar9[uVar13] = 0x1a41;
-    puVar9[uVar13 + 1] = M<UInt32>(iVar17 + 0xb7c);
-    puVar9[uVar13 + 2] = 0x1a52;
-    puVar9[uVar13 + 3] = M<UInt32>(iVar17 + 0xb84);
-    puVar9[uVar13 + 4] = 0x1a31;
-    iVar11 = uVar13 + 5;
+    packet[uVar13] = 0x1a41;
+    packet[uVar13 + 1] = M<UInt32>(iVar17 + 0xb7c);
+    packet[uVar13 + 2] = 0x1a52;
+    packet[uVar13 + 3] = M<UInt32>(iVar17 + 0xb84);
+    packet[uVar13 + 4] = 0x1a31;
+    valueIndex = uVar13 + 5;
     uVar13 = uVar13 + 6;
-    puVar9[iVar11] = M<UInt32>(iVar17 + 0xb8c);
+    packet[valueIndex] = M<UInt32>(iVar17 + 0xb8c);
   }
   uVar14 = M<UInt32>(M<int>(self + 0xb70) + 8);
   if ((bVar1) || (uVar16 = uVar13, M<int>(iVar17 + 0x894) != 0)) {
-    puVar9[uVar13] = 0x1844;
-    puVar9[uVar13 + 1] = uVar14;
-    puVar9[uVar13 + 2] = 0x1844;
-    puVar9[uVar13 + 3] = uVar14;
-    puVar9[uVar13 + 4] = 0x1844;
+    packet[uVar13] = 0x1844;
+    packet[uVar13 + 1] = uVar14;
+    packet[uVar13 + 2] = 0x1844;
+    packet[uVar13 + 3] = uVar14;
+    packet[uVar13 + 4] = 0x1844;
     uVar16 = uVar13 + 6;
-    puVar9[uVar13 + 5] = uVar14;
+    packet[uVar13 + 5] = uVar14;
     if (panel[self + 0xdb6] != 0x0) {
-      puVar9[uVar16] = 0x1846;
+      packet[uVar16] = 0x1846;
       uVar16 = uVar13 + 8;
-      puVar9[uVar13 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
+      packet[uVar13 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
     }
   }
   if ((bVar2) || (uVar13 = uVar16, M<int>(iVar17 + 0x894) != 0)) {
-    puVar9[uVar16] = 0x1a44;
-    puVar9[uVar16 + 1] = uVar14;
-    puVar9[uVar16 + 2] = 0x1a44;
-    puVar9[uVar16 + 3] = uVar14;
-    puVar9[uVar16 + 4] = 0x1a44;
+    packet[uVar16] = 0x1a44;
+    packet[uVar16 + 1] = uVar14;
+    packet[uVar16 + 2] = 0x1a44;
+    packet[uVar16 + 3] = uVar14;
+    packet[uVar16 + 4] = 0x1a44;
     uVar13 = uVar16 + 6;
-    puVar9[uVar16 + 5] = uVar14;
+    packet[uVar16 + 5] = uVar14;
     if (panel[self + 0xdb6] != 0x0) {
-      puVar9[uVar13] = 0x1a46;
+      packet[uVar13] = 0x1a46;
       uVar13 = uVar16 + 8;
-      puVar9[uVar16 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
+      packet[uVar16 + 7] = M<UInt32>(M<int>(self + 0xb84) + 8);
     }
   }
   if (M<char>(iVar17 + 0x9b0) == '\0') {
 LAB_0003ed40:
     if (bVar1) {
-      puVar9[uVar13] = 0x5c8;
-      iVar17 = uVar13 + 1;
+      packet[uVar13] = 0x5c8;
+      markerValueIndex = uVar13 + 1;
       uVar13 = uVar13 + 2;
-      puVar9[iVar17] = 1;
+      packet[markerValueIndex] = 1;
     }
     else if (bVar2) {
-      puVar9[uVar13] = 0x5c8;
-      iVar17 = uVar13 + 1;
+      packet[uVar13] = 0x5c8;
+      markerValueIndex = uVar13 + 1;
       uVar13 = uVar13 + 2;
-      puVar9[iVar17] = 0x80000001;
+      packet[markerValueIndex] = 0x80000001;
     }
   }
   else if (M<int>((int)panel * 0x18 + iVar17 + 0xb10) == 0) {
@@ -311,7 +316,7 @@ LAB_0003eda0:
   uVar16 = uVar13;
   if ((uVar13 & 7) != 0) {
     uVar16 = uVar13 + 1;
-    puVar9[uVar13] = 0x80000000;
+    packet[uVar13] = 0x80000000;
   }
   M<unsigned int>((int)Vol(slot->header) + 0x14) = uVar16;
 LAB_0003ee00:

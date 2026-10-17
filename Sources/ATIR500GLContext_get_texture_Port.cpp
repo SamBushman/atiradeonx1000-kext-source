@@ -32,24 +32,25 @@ void ATIR500GLContext::get_texture(UInt32*record, VendorTextureBuffer *texture, 
     UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
     UInt8 *scratchBytes = reinterpret_cast<UInt8 *>(scratch);
 
-  UInt32 uVar1;
+  UInt32 blockWords;
   SInt32 *countField;
-  SInt32 iVar3;
+  SInt32 header;
+  SInt32 prev;
   UInt32 stamp;
-  UInt32 uVar5;
+  UInt32 blockHeader;
   char in_RESERVE;
   UInt8 in_cr0;
   
-  iVar3 = M<SInt32>(textureBytes + 0x14);
-  if (M<char>(iVar3 + 0x14) != '\0') {
+  header = M<SInt32>(textureBytes + 0x14);
+  if (M<char>(header + 0x14) != '\0') {
     if (*pendingWords != 0) {
-      uVar1 = record[-1] >> 2;
-      if (4 < uVar1) {
-        uVar5 = 0x80000000;
-        if (uVar1 != 5) {
-          uVar5 = (uVar1 - 6) * 0x10000 | 0xc0001000;
+      blockWords = record[-1] >> 2;
+      if (4 < blockWords) {
+        blockHeader = 0x80000000;
+        if (blockWords != 5) {
+          blockHeader = (blockWords - 6) * 0x10000 | 0xc0001000;
         }
-        record[-uVar1] = uVar5;
+        record[-blockWords] = blockHeader;
       }
       record[-4] = 0x1393;
       record[-3] = 0;
@@ -72,18 +73,18 @@ void ATIR500GLContext::get_texture(UInt32*record, VendorTextureBuffer *texture, 
     }
     if (M<SInt32>(self + 0xd0) == 0) {
       ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0xcc)));
-      iVar3 = M<SInt32>(textureBytes + 0x14);
+      header = M<SInt32>(textureBytes + 0x14);
     }
     else {
-      iVar3 = M<SInt32>(textureBytes + 0x14);
+      header = M<SInt32>(textureBytes + 0x14);
     }
   }
-  countField = (SInt32 *)(iVar3 + 0x10);
+  countField = (SInt32 *)(header + 0x10);
   atomicAddReturningOld((SInt32 *)countField, -0xffff);
   if (M<SInt32>(textureBytes + 0x48) != 0) {
-    iVar3 = M<SInt32>(textureBytes + 0x24);
-    M<UInt32>(iVar3 + 0x28) = M<UInt32>(textureBytes + 0x28);
-    M<SInt32>(M<SInt32>(textureBytes + 0x28) + 0x24) = iVar3;
+    prev = M<SInt32>(textureBytes + 0x24);
+    M<UInt32>(prev + 0x28) = M<UInt32>(textureBytes + 0x28);
+    M<SInt32>(M<SInt32>(textureBytes + 0x28) + 0x24) = prev;
     M<UInt32>(textureBytes + 0x24) = M<UInt32>(M<SInt32>(self + 200) + 0x600);
     M<SInt32>(textureBytes + 0x28) = M<SInt32>(self + 200) + 0x5dc;
     M<UInt8 *>(M<SInt32>(self + 200) + 0x600) = textureBytes;

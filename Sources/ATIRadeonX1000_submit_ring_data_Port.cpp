@@ -31,80 +31,90 @@ void ATIRadeonX1000::submit_ring_data() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
+  UInt32 headLineBase;
+  UInt32 submittedIndex;
   UInt32 writeIndex;
   UInt32 uVar3;
-  SInt32 iVar4;
+  UInt32 rangeStart;
+  UInt32 nextIndex;
+  SInt32 flushEnd;
   UInt32 uVar5;
+  UInt32 ringBase;
+  UInt32 cacheLine;
   SInt32 iVar6;
+  SInt32 flushOffset;
+  SInt32 ringPtr;
   UInt32 uVar7;
-  UInt32 uVar8;
+  UInt32 lineSize;
+  UInt32 lineBase;
+  UInt32 tailLineBase;
   
   writeIndex = M<UInt32>(self + 0x914);
-  uVar1 = M<UInt32>(self + 0x918);
-  if (writeIndex != uVar1) {
+  submittedIndex = M<UInt32>(self + 0x918);
+  if (writeIndex != submittedIndex) {
     if ((writeIndex & 7) != 0) {
-      iVar6 = M<SInt32>(self + 0x900);
+      ringPtr = M<SInt32>(self + 0x900);
       do {
-        uVar3 = writeIndex + 1;
-        M<UInt32>(iVar6 + writeIndex * 4) = 0x80000000;
-        writeIndex = uVar3 & 0x7ff;
-      } while ((uVar3 & 7) != 0);
+        nextIndex = writeIndex + 1;
+        M<UInt32>(ringPtr + writeIndex * 4) = 0x80000000;
+        writeIndex = nextIndex & 0x7ff;
+      } while ((nextIndex & 7) != 0);
       M<UInt32>(self + 0x914) = writeIndex;
     }
     if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
       ppcSync();
       instructionSynchronize();
     }
-    else if (uVar1 < writeIndex) {
-      uVar5 = (UInt32)(UInt8)self[0x84];
-      uVar3 = uVar1 * 4 + M<SInt32>(self + 0x900);
-      uVar7 = -uVar5 & uVar3;
-      iVar6 = 0;
-      iVar4 = ((writeIndex - uVar1) * 4 + (uVar3 & uVar5 - 1)) - uVar5;
-      if (0 < iVar4) {
+    else if (submittedIndex < writeIndex) {
+      cacheLine = (UInt32)(UInt8)self[0x84];
+      rangeStart = submittedIndex * 4 + M<SInt32>(self + 0x900);
+      lineBase = -cacheLine & rangeStart;
+      flushOffset = 0;
+      flushEnd = ((writeIndex - submittedIndex) * 4 + (rangeStart & cacheLine - 1)) - cacheLine;
+      if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(uVar7 + iVar6);
-          iVar6 = iVar6 + uVar5;
-        } while (iVar6 < iVar4);
+          dataCacheBlockStore(lineBase + flushOffset);
+          flushOffset = flushOffset + cacheLine;
+        } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(uVar7 + iVar6);
+      dataCacheBlockFlush(lineBase + flushOffset);
       ppcSync();
       instructionSynchronize();
       instructionSynchronize();
     }
     else {
-      uVar7 = (UInt32)(UInt8)self[0x84];
-      uVar5 = M<UInt32>(self + 0x900);
-      uVar3 = uVar5 + uVar1 * 4;
-      uVar8 = -uVar7 & uVar3;
-      iVar6 = 0;
-      iVar4 = ((0x800 - uVar1) * 4 + (uVar3 & uVar7 - 1)) - uVar7;
-      if (0 < iVar4) {
+      lineSize = (UInt32)(UInt8)self[0x84];
+      ringBase = M<UInt32>(self + 0x900);
+      rangeStart = ringBase + submittedIndex * 4;
+      tailLineBase = -lineSize & rangeStart;
+      flushOffset = 0;
+      flushEnd = ((0x800 - submittedIndex) * 4 + (rangeStart & lineSize - 1)) - lineSize;
+      if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(uVar8 + iVar6);
-          iVar6 = iVar6 + uVar7;
-        } while (iVar6 < iVar4);
+          dataCacheBlockStore(tailLineBase + flushOffset);
+          flushOffset = flushOffset + lineSize;
+        } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(uVar8 + iVar6);
+      dataCacheBlockFlush(tailLineBase + flushOffset);
       ppcSync();
       instructionSynchronize();
       instructionSynchronize();
-      uVar1 = -uVar7 & uVar5;
-      iVar6 = 0;
-      iVar4 = (writeIndex * 4 + (uVar7 - 1 & uVar5)) - uVar7;
-      if (0 < iVar4) {
+      headLineBase = -lineSize & ringBase;
+      flushOffset = 0;
+      flushEnd = (writeIndex * 4 + (lineSize - 1 & ringBase)) - lineSize;
+      if (0 < flushEnd) {
         do {
-          dataCacheBlockStore(uVar1 + iVar6);
-          iVar6 = iVar6 + uVar7;
-        } while (iVar6 < iVar4);
+          dataCacheBlockStore(headLineBase + flushOffset);
+          flushOffset = flushOffset + lineSize;
+        } while (flushOffset < flushEnd);
       }
       ppcSync();
       instructionSynchronize();
-      dataCacheBlockFlush(uVar1 + iVar6);
+      dataCacheBlockFlush(headLineBase + flushOffset);
       ppcSync();
       instructionSynchronize();
       instructionSynchronize();

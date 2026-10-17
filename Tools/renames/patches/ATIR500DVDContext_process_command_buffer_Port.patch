@@ -1,7 +1,7 @@
---- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-16 20:21:54.914538391 -0700
-+++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-16 20:21:54.921411768 -0700
-@@ -324,12 +324,12 @@
-               uStack_84 = uVar4 >> 2 ^ 0x80000000;
+--- a/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-16 22:17:24.022767563 -0700
++++ b/Sources/ATIR500DVDContext_process_command_buffer_Port.cpp	2026-10-16 22:17:24.024083240 -0700
+@@ -334,12 +334,12 @@
+               uStack_84 = pitch >> 2 ^ 0x80000000;
                local_88 = 0x43300000;
                recordCursor[0x61] =
 -                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_84) - DOUBLE_0004c3a8) +
@@ -14,23 +14,23 @@
 -                   (UInt32)(float)((((double)CONCAT44d(0x43300000,uStack_7c) - dVar7) + dVar9) * dVar8)
 +                   FBITS((float)((((double)CONCAT44d(0x43300000,uStack_7c) - dVar7) + dVar9) * dVar8))
                ;
-               uVar37 = uVar37 & 0xffffff;
+               recordWord = recordWord & 0xffffff;
              }
-@@ -732,7 +732,7 @@
+@@ -742,7 +742,7 @@
              recordCursor[7] = M<UInt32>(self + 0x158);
-             recordCursor[8] = CONCAT22(M<UInt16>(iVar23 + 0x576),M<UInt16>(iVar23 + 0x574));
+             recordCursor[8] = CONCAT22(M<UInt16>(bufferInfo + 0x576),M<UInt16>(bufferInfo + 0x574));
              recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
 -                                  (UInt32)M<UInt8>((SInt32)recordCursor + 0xf) << 8;
 +                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
              recordCursor[10] = 0;
-             uVar17 = uVar17 | (uVar4 & 0xfffc) << 0xe;
+             uVar17 = uVar17 | (pitch & 0xfffc) << 0xe;
  LAB_00037c4c:
-@@ -773,7 +773,7 @@
+@@ -783,7 +783,7 @@
              recordCursor[7] = M<UInt32>(self + 0x158);
              recordCursor[8] = CONCAT22(M<UInt16>(iVar18 + 0x576),M<UInt16>(iVar18 + 0x574));
              recordCursor[9] = uVar21 | uVar21 << 0x18 | uVar21 << 0x10 |
 -                                  (UInt32)M<UInt8>((SInt32)recordCursor + 0xf) << 8;
 +                                  uVar21 << 8;   /* the byte replicated four times: uVar21 holds the byte read BEFORE the packet rewrite overwrote the command (re-reading it here read the rewritten word: 0x20200020) */
              recordCursor[10] = 0;
-             uVar17 = (uVar4 & 0xfffc) << 0xe | uVar17 >> 1;
+             uVar17 = (pitch & 0xfffc) << 0xe | uVar17 >> 1;
              goto LAB_00037c4c;

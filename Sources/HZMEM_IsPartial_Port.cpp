@@ -27,29 +27,29 @@
 
 
 /* real addr 0x45890 */
-UInt32 HZMEM_IsPartial(_HZDATA *real_param_1, UInt32 param_2, UInt32 param_3) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+UInt32 HZMEM_IsPartial(_HZDATA *hizData, UInt32 surfaceHzField, UInt32 blockKind) {
+    UInt8 *hizDataBytes = reinterpret_cast<UInt8 *>(hizData);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
+  UInt32 blockIndex;
+  SInt32 block;
   
-  if ((param_1 != (UInt8 *)0x0) && (M<SInt32>(param_1 + param_3 * 4 + 0x10) != 0)) {
-    if (param_3 == 1) {
-      uVar1 = param_2 >> 10 & 0x3ff;
+  if ((hizDataBytes != (UInt8 *)0x0) && (M<SInt32>(hizDataBytes + blockKind * 4 + 0x10) != 0)) {
+    if (blockKind == 1) {
+      blockIndex = surfaceHzField >> 10 & 0x3ff;
     }
     else {
-      uVar1 = param_2 & 0x3ff;
-      if (param_3 != 0) {
-        if (param_3 != 2) {
+      blockIndex = surfaceHzField & 0x3ff;
+      if (blockKind != 0) {
+        if (blockKind != 2) {
           return 1;
         }
-        uVar1 = param_2 >> 0x14 & 0x3ff;
+        blockIndex = surfaceHzField >> 0x14 & 0x3ff;
       }
     }
-    if (uVar1 != 0x3ff) {
-      iVar2 = uVar1 * 0x10 + M<SInt32>(param_1 + param_3 * 4 + 0x10);
-      if (iVar2 != -0x14) {
-        return (UInt32)(M<SInt32>(iVar2 + 0x1c) != M<SInt32>(iVar2 + 0x20));
+    if (blockIndex != 0x3ff) {
+      block = blockIndex * 0x10 + M<SInt32>(hizDataBytes + blockKind * 4 + 0x10);
+      if (block != -0x14) {
+        return (UInt32)(M<SInt32>(block + 0x1c) != M<SInt32>(block + 0x20));
       }
       return 0xfffffffe;
     }
