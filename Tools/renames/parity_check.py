@@ -37,16 +37,22 @@ def warnings(logpath):
     return out
 
 
+def case_files():
+    """every case file named in Tests/difftest/run_all.sh (all of them: the hand-written worlds live in several files)"""
+    txt = open('Tests/difftest/run_all.sh').read()
+    return re.findall(r'Tests/difftest/\w+\.py', txt)
+
+
 def run_cases(image, filters, tag, which):
     res = {}
-    cases = sh('sed -n "s/.*difftest.py[^\\n]*\\(Tests\\/difftest.*\\)$/\\1/p" Tests/difftest/run_all.sh').stdout.split()
-    cases = [c for c in cases if c.endswith('.py')]
+    cases = case_files()
     for f in filters:
         js = tempfile.NamedTemporaryFile(suffix='.json', delete=False).name
         sh('python3 Tools/difftest/difftest.py -j 8 --rebuilt %s -f %s --json %s %s' % (image, "'%s'" % f, js, ' '.join(cases)))
         try: data = json.load(open(js))
         except Exception: data = []
         os.unlink(js)
+        if not data: res.setdefault('__nomatch__', []).append(f)
         for d in data: res[d['case']] = d
     return res
 
@@ -71,7 +77,9 @@ def main():
     for k, n in wc.items():
         if n > wb.get(k, 0): bad.append('NEW uninitialized warning (%d vs %d): %s: %s' % (n, wb.get(k, 0), k[0], k[1]))
     rb, rc = run_cases(base_img, a.filters, a.tag, 'base'), run_cases(cand_img, a.filters, a.tag, 'cand')
-    if not rc: bad.append('no difftest case matched %s' % a.filters)
+    for f in rc.pop('__nomatch__', []): bad.append('no difftest case matched the filter %r (the gate would prove nothing)' % f)
+    rb.pop('__nomatch__', None)
+    if not rc: bad.append('no difftest case ran')
     for name, c in rc.items():
         b = rb.get(name)
         if c['verdict'] != 'PASS': bad.append('%s: difftest %s %s' % (name, c['verdict'], c.get('problems') or c.get('failures'))); continue
