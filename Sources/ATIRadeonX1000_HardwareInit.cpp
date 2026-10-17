@@ -187,6 +187,9 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   UInt32 uVar15;
   UInt32 uVar16;
   UInt32 pixelFormat;
+  UInt32 vramSize;
+  UInt32 bytesPerPixel;
+  UInt32 pitch;
   /* One 0xa8-byte stack object (r1+0x58..): Ghidra named its slots separately. getCurrentDisplayMode fills f8/f4 and getPixelInformation fills
    `pix` AND the two words after it (L.f54 / L.f50), so they must be one object: as separate scalars the compiler saw L.f54/L.f50
    as never written and deleted the branches that read them (4 of the 10 ATIR500Memory::reserve calls, #85). */
@@ -225,9 +228,9 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   if (memorySize == 0) {
     M<UInt32>(self + 0x9c) = 0x800000;
   }
-  uVar5 = M<UInt32>(self + 0x9c);
-  if (uVar5 < 0x8000001) {
-    M<UInt32>(self + 0x84c) = uVar5;
+  vramSize = M<UInt32>(self + 0x9c);
+  if (vramSize < 0x8000001) {
+    M<UInt32>(self + 0x84c) = vramSize;
   }
   else {
     M<UInt32>(self + 0x84c) = 0x8000000;
@@ -235,7 +238,7 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   usableSize = M<UInt32>(self + 0x84c);
   M<UInt32>(self + 0xd0) = 0;
   uVar12 = (usableSize >> 1) - 1;
-  if (uVar5 == usableSize) {
+  if (vramSize == usableSize) {
     poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(usableSize);
     if (poolReady == 0) {
       return 0;
@@ -243,7 +246,7 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
     ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->init_pool(M<UInt32>(self + 0x9c));
   }
   else {
-    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(uVar5, usableSize, 0);
+    poolReady = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->init_pool(vramSize, usableSize, 0);
     if (poolReady == 0) {
       return 0;
     }
@@ -290,7 +293,7 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   uVar11 = loadWordByteReversed(&M<UInt8>(registers + 0x16c4)) & 0xfffffff0;
   if ((loadWordByteReversed(&M<UInt8>(registers + 0x6080)) & 1) == 0) {
     uVar5 = 0;
-    uVar11 = 0;
+    pitch = 0;
     uVar14 = 0;
   }
   else {
@@ -327,7 +330,7 @@ LAB_0001c418:
       M<UInt32>(registers + 0x15d0) = 0x2000000;
       enforceInOrderExecutionIO();
       AVar6 = 0xb;
-      uVar13 = 4;
+      bytesPerPixel = 4;
       uVar9 = 4;
     }
     else {
@@ -339,7 +342,7 @@ LAB_0001c418:
           M<UInt32>(registers + 0x15d0) = 0x1000000;
           enforceInOrderExecutionIO();
           AVar6 = 0x7;
-          uVar13 = 2;
+          bytesPerPixel = 2;
           uVar9 = 2;
           goto LAB_0001c54c;
         }
@@ -352,29 +355,29 @@ LAB_0001c418:
         enforceInOrderExecutionIO();
       }
       AVar6 = 0x1;
-      uVar13 = 1;
+      bytesPerPixel = 1;
       uVar9 = 1;
     }
 LAB_0001c54c:
     M<UInt32>(registers + 0x16c4) =
          uVar11 << 0x18 | (uVar11 & 0xff00) << 8 | uVar11 >> 8 & 0xff00 | uVar11 >> 0x18;
     enforceInOrderExecutionIO();
-    uVar11 = uVar14 * uVar13 + 0xff & 0xffffff00;
-    if (uVar13 != 0) {
-      uVar14 = uVar11 / uVar13;
+    pitch = uVar14 * bytesPerPixel + 0xff & 0xffffff00;
+    if (bytesPerPixel != 0) {
+      uVar14 = pitch / bytesPerPixel;
     }
     uVar8 = L.f50;
     if ((L.f50 & 0xf) != 0) {
       uVar8 = (L.f50 & 0xfffffff0) + 0x10;
     }
-    uVar5 = uVar8 * uVar11;
+    uVar5 = uVar8 * pitch;
     M<UInt16>(self + 0x142) = uVar9;
     M<SInt16>(self + 0x140) = (SInt16)uVar14;
     M<SInt16>(self + 0x148) = (SInt16)L.f54;
     M<SInt16>(self + 0x14a) = (SInt16)L.f50;
     self[0x163] = 0xff;
     M<UInt32>(self + 0x134) = uVar4;
-    M<SInt16>(self + 0x144) = (SInt16)uVar11;
+    M<SInt16>(self + 0x144) = (SInt16)pitch;
     M<UInt32>(self + 0x13c) = uVar5;
     if ((loadWordByteReversed(&M<UInt8>(registers + 0x6104)) & 0x100000) == 0) {
       self[0x164] = (loadWordByteReversed(&M<UInt8>(registers + 0x6104)) >> 0x15 & 1);
@@ -386,7 +389,7 @@ LAB_0001c54c:
     self[0x166] = AVar6;
     M<UInt32>(self + 0xd0) = 1;
     uVar14 = 0xff;
-    self[0x165] = ('\x01' - (char)((SInt32)-(uVar13 ^ 2) >> 0x1f));
+    self[0x165] = ('\x01' - (char)((SInt32)-(bytesPerPixel ^ 2) >> 0x1f));
   }
   if (((M<UInt32>(self + 0x98) & 0x10000) == 0) || (M<UInt32>(self + 0xcc) < 2)) {
     uVar16 = 0;
@@ -567,7 +570,7 @@ LAB_0001c9b0:
   }
   registers = M<SInt32>(self + 0x860);
   M<UInt32>(registers + 0xb00) = uVar14 >> 8 | 0x1000000;
-  uVar12 = (uVar11 & 0x3f00) << 0x10;
+  uVar12 = (pitch & 0x3f00) << 0x10;
   uVar4 = uVar4 >> 10;
   M<UInt32>(registers + 0x16e0) =
        uVar4 << 0x18 | (uVar4 & 0xff00) << 8 | (uVar4 & 0x3f0000) >> 8 |

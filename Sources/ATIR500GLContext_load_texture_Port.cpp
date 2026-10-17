@@ -74,12 +74,14 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
   SInt32 waitTotal;
   UInt8 *innerBuffer;
   SInt32 payloadByteLen;
+  SInt32 header;
+  SInt32 recordIndex;
   
-  iVar17 = M<SInt32>(textureBytes + 0x14);
+  header = M<SInt32>(textureBytes + 0x14);
   textureOffset = M<SInt32>(textureBytes + 0x48);
-  uVar24 = (UInt32)M<UInt8>(iVar17 + 0x34);
-  uVar25 = (UInt32)M<UInt8>(iVar17 + 0x17);
-  lastLevel = (uVar25 + M<UInt8>(iVar17 + 0x35)) - 1;
+  uVar24 = (UInt32)M<UInt8>(header + 0x34);
+  uVar25 = (UInt32)M<UInt8>(header + 0x17);
+  lastLevel = (uVar25 + M<UInt8>(header + 0x35)) - 1;
   if (uVar24 == 0) {
     return;
   }
@@ -89,7 +91,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
     if (uVar25 <= lastLevel) {
       uVar18 = uVar25;
       do {
-        if ((((UInt32)M<UInt16>(iVar17 + 0x1c) & ~(UInt32)M<UInt16>(iVar17 + 0x28)) >>
+        if ((((UInt32)M<UInt16>(header + 0x1c) & ~(UInt32)M<UInt16>(header + 0x28)) >>
              (uVar18 & 0x3f) & 1) != 0) {
           bVar4 = true;
         }
@@ -97,7 +99,7 @@ void ATIR500GLContext::load_texture(VendorTextureBuffer *texture) {
       } while (uVar18 <= lastLevel);
     }
     uVar20 = uVar20 + 1;
-    iVar17 = iVar17 + 2;
+    header = header + 2;
   } while (uVar20 < uVar24);
   if (!bVar4) {
     return;
@@ -231,8 +233,8 @@ LAB_00029724:
       uVar20 = uVar20 + 1;
       M<UInt16>(iVar8 + 0x28) = M<UInt16>(iVar8 + 0x28) | M<UInt16>(iVar8 + 0x1c);
     } while (uVar20 < uVar24);
-    iVar17 = *hwInfo;
-    record[iVar17] = 0x50b;
+    recordIndex = *hwInfo;
+    record[recordIndex] = 0x50b;
     if (M<SInt32>(self + 0x3bc) == 0) {
       mipLevel = M<SInt32>(self + 0x29c);
       lodBlendWeight = M<SInt32>(self + 0x298);
@@ -258,8 +260,8 @@ LAB_00029724:
     if ((UInt8)currentSurfaceBuffer[0x38] < 2) {
       lastLevel = 0;
     }
-    uVar24 = iVar17 + 2;
-    record[iVar17 + 1] =
+    uVar24 = recordIndex + 2;
+    record[recordIndex + 1] =
          lastLevel | M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40) * (UInt32)M<UInt16>(currentSurfaceBuffer + 0x20) +
                   lodBlendWeight * (M<SInt32>(currentSurfaceBuffer + nextMipLevel * 4 + 0x40) -
                            M<SInt32>(currentSurfaceBuffer + mipLevel * 4 + 0x40)) + M<SInt32>(currentSurfaceBuffer + 8) >> 10 |
@@ -387,15 +389,15 @@ LAB_00029cb4:
   M<UInt32>(M<SInt32>(self + 200) + 0x704) = uVar25 * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
   M<SInt32>(M<SInt32>(self + 200) + 0x71c) = payloadByteLen + M<SInt32>(M<SInt32>(self + 200) + 0x71c);
   if (hwInfo[8] < 0) {
-    iVar17 = M<SInt32>(textureBytes + 0x14);
+    header = M<SInt32>(textureBytes + 0x14);
     uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(record),M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
-    M<UInt32>(iVar17 + 0xc) = uVar9;
+    M<UInt32>(header + 0xc) = uVar9;
   }
   else {
-    iVar17 = M<SInt32>(textureBytes + 0x14);
+    header = M<SInt32>(textureBytes + 0x14);
     uVar9 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)(record),
                        hwInfo[1] * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar25);
-    M<UInt32>(iVar17 + 0xc) = uVar9;
+    M<UInt32>(header + 0xc) = uVar9;
   }
   if (textureBytes[0x20] == 0x7) {
     M<UInt32>(M<SInt32>(M<SInt32>(textureBytes + 0x58) + 0x14) + 8) =

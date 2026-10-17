@@ -52,6 +52,7 @@ void ATIR500GLContext::discard_command_buffer() {
   UInt8 in_cr0;
   UInt8 bVar18;
   SInt32 textures [22];
+  SInt32 slot;
   
   packet = (UInt32 *)(M<SInt32>(self + 0xe0) + 0x1c);
   do {
@@ -196,12 +197,12 @@ LAB_00027ab0:
                   packetWords = header & 0xffffff;
                   if (opcode == 0) goto LAB_00027e90;
                   packetWords = 0;
-                  texture = 0x10;
+                  slot = 0x10;
                   slotOffset = 0;
                   useCount = textures;
                   do {
                     if ((!(bool)(bVar18 >> 1 & 1)) && (packetWords == opcode - 1)) {
-                      texture = 0x20;
+                      slot = 0x20;
                     }
                     shared = M<UInt8 *>(self + 0x88);
                     handle = M<UInt32>((SInt32)packet + slotOffset + 0x20);
@@ -209,7 +210,7 @@ LAB_00027ab0:
                        (slotTableOffset = M<SInt32>(handle * 4 + M<SInt32>(shared + 0x10)), slotTableOffset == 0))
                     goto LAB_00027e80;
                     *useCount = slotTableOffset;
-                    slotTableOffset = texture * 4;
+                    slotTableOffset = slot * 4;
                     boundTexture = M<UInt8 *>(self + slotTableOffset + 0x2a4);
                     if (boundTexture != (UInt8 *)0x0) {
                       piVar5 = (SInt32 *)(M<SInt32>(boundTexture + 0x14) + 0x10);
@@ -219,7 +220,7 @@ LAB_00027ab0:
                       }
                       M<UInt32>(self + slotTableOffset + 0x2a4) = 0;
                     }
-                    if (((texture == 0x20) &&
+                    if (((slot == 0x20) &&
                         (iVar11 = M<SInt32>(slotOffset + (SInt32)(unsigned long)textures), M<char>(iVar11 + 0x20) == '\a'
                         )) && (uVar13 != M<UInt32>(iVar11 + 100))) {
                       M<UInt32>(iVar11 + 100) = uVar13;
@@ -230,7 +231,7 @@ LAB_00027ab0:
                     atomicAddReturningOld((SInt32 *)piVar5, -0xffff);
                     packetWords = packetWords + 1;
                     useCount = useCount + 1;
-                    texture = texture + 1;
+                    slot = slot + 1;
                     M<SInt32>(self + slotTableOffset + 0x2a4) = iVar11;
                     slotOffset = slotOffset + 4;
                   } while (opcode != packetWords);

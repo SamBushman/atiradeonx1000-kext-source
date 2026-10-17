@@ -44,9 +44,11 @@ IOReturn IOATIR500DVDContext::clientMemoryForType(UInt32 type, UInt32*options, I
   unsigned int uVar7;
   UInt8 *this_00;
   int iVar8;
-  UInt8 *pIVar9;
+  UInt8 *textureSlot;
   int *piVar10;
   UInt8 *pIVar11;
+  int *surfaceWords;
+  int *bufferEntry;
   /* one 16-byte stack object filled by the +0x5ac/+0x5b4/+0x560 callees (Ghidra named its words auStack_58 and local_50; #85) */
   int auStack_58[4];
   SInt32 rv5b4 = 0;
@@ -146,13 +148,13 @@ LAB_0000f180:
 LAB_0000f264:
         if (uVar7 < 1000) {
 LAB_0000f380:
-          pIVar9 = self;
+          textureSlot = self;
           do {
-            if (M<UInt8 *>(pIVar9 + 0x104) != (UInt8 *)0x0) {
-              this->add_texture_to_stream((VendorTextureBuffer *)(M<UInt8 *>(pIVar9 + 0x104)));
+            if (M<UInt8 *>(textureSlot + 0x104) != (UInt8 *)0x0) {
+              this->add_texture_to_stream((VendorTextureBuffer *)(M<UInt8 *>(textureSlot + 0x104)));
             }
-            pIVar9 = pIVar9 + 4;
-          } while (self + 0x48 != pIVar9);
+            textureSlot = textureSlot + 4;
+          } while (self + 0x48 != textureSlot);
           if (self != M<UInt8 *>(M<int>(self + 0x8c) + 0x78)) {
             VCALL(M<int>(self), 0x5b0)(self);
             M<int>(M<int>(self + 0x8c) + 0x748) = M<int>(M<int>(self + 0x8c) + 0x748) + 1;
@@ -163,13 +165,13 @@ LAB_0000f380:
           }
           /* the decompile dropped this call's result (shipped: `or r28,r3,r3` at 0xf428, tested at 0xf534) */
           rv5b4 = VCALL(M<int>(self), 0x5b4)(self,auStack_58);
-          pIVar9 = self;
+          textureSlot = self;
           do {
-            if (M<UInt8 *>(pIVar9 + 0x104) != (UInt8 *)0x0) {
-              this->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(pIVar9 + 0x104)));
+            if (M<UInt8 *>(textureSlot + 0x104) != (UInt8 *)0x0) {
+              this->remove_texture_from_stream((VendorTextureBuffer *)(M<UInt8 *>(textureSlot + 0x104)));
             }
-            pIVar9 = pIVar9 + 4;
-          } while (self + 0x48 != pIVar9);
+            textureSlot = textureSlot + 4;
+          } while (self + 0x48 != textureSlot);
           if (auStack_58[2] == 0) {
             iVar8 = M<int>(M<int>(self + 0x8c) + 0x50) + -1;
           }
@@ -179,9 +181,9 @@ LAB_0000f380:
             iVar8 = VCALL(*M<int *>(self + 0x8c), 0x560)
                               (M<int *>(self + 0x8c),auStack_58);
           }
-          piVar2 = M<int *>(self + 0xf8);
-          iVar8 = VCALL(*piVar2, 0x5b4)(piVar2,iVar8,M<UInt32>(self + 0x88));
-          piVar2[0x1f] = iVar8;
+          surfaceWords = M<int *>(self + 0xf8);
+          iVar8 = VCALL(*surfaceWords, 0x5b4)(surfaceWords,iVar8,M<UInt32>(self + 0x88));
+          surfaceWords[0x1f] = iVar8;
           M<int>(self + 0x7c) = iVar8;
           M<int>(self + 0xa0) = iVar8;
           iVar8 = M<int>(self + 0xf8);
@@ -225,25 +227,25 @@ LAB_0000f380:
             }
           }
           piVar10 = M<int *>(self + 0x8c);
-          piVar2 = piVar10 + (unsigned int)M<UInt16>(piVar10 + 0x100) * 7 + 0x90;
+          bufferEntry = piVar10 + (unsigned int)M<UInt16>(piVar10 + 0x100) * 7 + 0x90;
           if ((unsigned int)piVar10[0x172] < 0x80000) {
             piVar10[0x172] = 0x80000;
             piVar10 = M<int *>(self + 0x8c);
           }
-          iVar8 = VCALL(*piVar10, 0x554)(piVar10,piVar2[4]);
+          iVar8 = VCALL(*piVar10, 0x554)(piVar10,bufferEntry[4]);
           if (iVar8 == 0) {
             pIVar11 = M<UInt8 *>(self + 0x8c);
             if (M<UInt16>(pIVar11 + 0x402) < 0x10) {
               iVar8 = ((IOATIR500Accelerator *)(pIVar11))->allocMoreCommandBuffers(0, 0x80000);
               if (iVar8 != 0) {
                 iVar8 = M<int>(self + 0x8c);
-                piVar2 = (int *)(iVar8 + (unsigned int)M<UInt16>(iVar8 + 0x400) * 0x1c + 0x240);
+                bufferEntry = (int *)(iVar8 + (unsigned int)M<UInt16>(iVar8 + 0x400) * 0x1c + 0x240);
                 goto LAB_0000f6bc;
               }
               pIVar11 = M<UInt8 *>(self + 0x8c);
             }
             iVar4 = M<int>(pIVar11 + 0x774);
-            iVar8 = VCALL(M<int>(pIVar11), 0x54c)(pIVar11,piVar2[4]);
+            iVar8 = VCALL(M<int>(pIVar11), 0x54c)(pIVar11,bufferEntry[4]);
             M<int>(pIVar11 + 0x774) = iVar4 + iVar8;
             iVar8 = M<int>(self + 0x8c);
           }
@@ -260,25 +262,25 @@ LAB_0000f6bc:
           cmdBufBlock[0] = M<int>(self + 0x90);
           cmdBufBlock[1] = M<int>(self + 0x94);
           cmdBufBlock[2] = M<int>(self + 0x98);
-          iVar8 = piVar2[1];
-          iVar4 = piVar2[2];
-          iVar5 = piVar2[3];
-          M<int>(self + 0x90) = *piVar2;
+          iVar8 = bufferEntry[1];
+          iVar4 = bufferEntry[2];
+          iVar5 = bufferEntry[3];
+          M<int>(self + 0x90) = *bufferEntry;
           M<int>(self + 0x94) = iVar8;
           M<int>(self + 0x98) = iVar4;
           M<int>(self + 0x9c) = iVar5;
-          iVar8 = piVar2[5];
-          iVar4 = piVar2[6];
-          M<int>(self + 0xa0) = piVar2[4];
+          iVar8 = bufferEntry[5];
+          iVar4 = bufferEntry[6];
+          M<int>(self + 0xa0) = bufferEntry[4];
           M<int>(self + 0xa4) = iVar8;
           M<int>(self + 0xa8) = iVar4;
-          *piVar2 = cmdBufBlock[0];
-          piVar2[1] = cmdBufBlock[1];
-          piVar2[2] = cmdBufBlock[2];
-          piVar2[3] = cmdBufBlock[3];
-          piVar2[4] = cmdBufBlock[4];
-          piVar2[5] = cmdBufBlock[5];
-          piVar2[6] = cmdBufBlock[6];
+          *bufferEntry = cmdBufBlock[0];
+          bufferEntry[1] = cmdBufBlock[1];
+          bufferEntry[2] = cmdBufBlock[2];
+          bufferEntry[3] = cmdBufBlock[3];
+          bufferEntry[4] = cmdBufBlock[4];
+          bufferEntry[5] = cmdBufBlock[5];
+          bufferEntry[6] = cmdBufBlock[6];
           pIVar11 = M<UInt8 *>(self + 0x8c);
           if (M<int>(self + 0xa8) != M<int>(pIVar11 + 0x5c8)) {
             cmdBufBlock[3] = 0x10000;
@@ -311,9 +313,9 @@ LAB_0000f2b8:
 LAB_0000f2ec:
         iVar8 = ((IOATIR500Surface *)(M<UInt32>(self + 0xf8)))->alloc_surfaces((M<UInt32>(self + 0x88) | M<UInt32>(M<UInt32>(self + 0xf8) + 0xc1c)) & 0x7fffff, true);
         if (iVar8 == 0) {
-          piVar2 = M<int *>(self + 0xf8);
-          if ((piVar2[0x2fe] & piVar2[0x307] & 0x10000000U) != 0) {
-            VCALL(*piVar2, 0x5c0)(piVar2);
+          surfaceWords = M<int *>(self + 0xf8);
+          if ((surfaceWords[0x2fe] & surfaceWords[0x307] & 0x10000000U) != 0) {
+            VCALL(*surfaceWords, 0x5c0)(surfaceWords);
             M<unsigned int>(M<int>(self + 0xf8) + 0xbf8) =
                  M<unsigned int>(M<int>(self + 0xf8) + 0xbf8) & 0xefffffff;
           }

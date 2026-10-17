@@ -1,0 +1,12 @@
+#!use-decl: end
+# ATIR500GLContext per-use renames that need the PARITY gate (they change gcc's allocation; see Tools/renames/parity_check.py).
+# kind	target	old	new	tier	evidence	from	to
+use	ATIR500GLContext::load_texture@0x29480	iVar17	header	CONFIRMED	texture+0x14, the ATITextureBufferHeader (the mip record of the load_texture note): walked by +2 per face in the dirty scan	iVar17 = M<SInt32>\(textureBytes \+ 0x14\);	mapping = 
+use	ATIR500GLContext::load_texture@0x29480	iVar17	header	CONFIRMED	texture+0x14, the ATITextureBufferHeader (the mip record of the load_texture note): read at the tail to store the submit stamp at +0xc (path A)	iVar17 = M<SInt32>\(textureBytes \+ 0x14\);#2	^  \}\s*$
+use	ATIR500GLContext::load_texture@0x29480	iVar17	header	CONFIRMED	texture+0x14, the ATITextureBufferHeader (the mip record of the load_texture note): read at the tail to store the submit stamp at +0xc (path B)	iVar17 = M<SInt32>\(textureBytes \+ 0x14\);#3	^  \}\s*$
+use	ATIR500GLContext::load_texture@0x29480	iVar17	recordIndex	CONFIRMED	hwInfo[0]: the index in the burst buffer where the trailing LOD-bias words go (record[recordIndex] = 0x50b; recordIndex + 2 is the dword count)	iVar17 = \*hwInfo;	goto LAB_00029cb4;
+use	ATIR500GLContext::discard_command_buffer@0x27580	texture	slot	CONFIRMED	binding slot number: 0x10, or 0x20 for the last texture of the list (slot*4 is the table offset)	texture = 0x10;	\} while \(opcode != packetWords\);
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	lodBlendWeight	INFERRED	this+0x298 (set_surface's unknown_0x298 argument), 0 in the other arm: the weight multiplying (offset[nextMipLevel] - offset[mipLevel]) in the LOD-bias word and in the per-attachment addresses	iVar29 = M<int>\(self \+ 0x298\);	^  else \{
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar29	lodBlendWeight	INFERRED	same, the other arm (0)	iVar29 = 0;#2	iVar29 = iVar13 << 4;
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	nextMipLevel	INFERRED	mipLevel + 1: the second per-level offset of the interpolation (1 in the other arm)	iVar13 = uVar26 \+ 1;	^  else \{
+use	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	iVar13	nextMipLevel	INFERRED	same, the other arm	iVar13 = 1;	iVar13 = M<int>\(M<int>\(self \+ 200\) \+ 0xb98\);

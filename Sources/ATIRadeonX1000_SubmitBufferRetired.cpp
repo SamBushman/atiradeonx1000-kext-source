@@ -46,6 +46,8 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
   SInt32 iVar5;
   SInt32 ringBase;
   SInt32 spinCount;
+  SInt32 gartBase;
+  SInt32 stamp;
   
   M<UInt32>(self + 0x6fc) = dwordCount * 4 + M<SInt32>(self + 0x6fc);
   if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
@@ -70,7 +72,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOff
     instructionSynchronize();
     instructionSynchronize();
   }
-  iVar1 = M<SInt32>(self + 0x8a4);
+  gartBase = M<SInt32>(self + 0x8a4);
   spinCount = 0;
   writeIndex = M<SInt32>(self + 0x914);
   while (freeDwords = (((UInt32)(loadWordByteReversed((UInt8 *)(M<SInt32>(self + 0x90c) + M<SInt32>(self + 0x910))) & 0xffff) - writeIndex) -
@@ -89,14 +91,14 @@ LAB_000208e8:
     GH_IOLog("ATIRadeon::submit_buffer: Overflowed block waiting for FIFO space.   Have %lu, need %lu. RBBM_STATUS 0x%08x\n"
                  ,freeDwords,8,loadWordByteReversed(&M<UInt8>(registers + 0xe40)));
     ((ATIRadeonX1000 *)(self))->DumpASICHangState();
-    iVar1 = M<SInt32>(self + 0x850) + -1;
+    stamp = M<SInt32>(self + 0x850) + -1;
   }
   else {
     ringBase = M<SInt32>(self + 0x900);
     M<UInt32>(ringBase + writeIndex * 4) = 0x101ce;
     ringIndex = writeIndex + 1U & 0x7ff;
     M<UInt32>(self + 0x914) = ringIndex;
-    M<UInt32>(ringBase + ringIndex * 4) = gartOffset + iVar1 & 0xfffffffc;
+    M<UInt32>(ringBase + ringIndex * 4) = gartOffset + gartBase & 0xfffffffc;
     ringIndex = ringIndex + 1 & 0x7ff;
     M<UInt32>(self + 0x914) = ringIndex;
     M<UInt32>(ringBase + ringIndex * 4) = dwordCount & 0x7fffff;
@@ -118,9 +120,9 @@ LAB_000208e8:
     M<UInt32>(ringBase + nextIndex * 4) = 0x80000000;
     M<UInt32>(self + 0x914) = nextIndex + 1 & 0x7ff;
     ((ATIRadeonX1000 *)(self))->submit_ring_data();
-    iVar1 = M<SInt32>(self + 0x850);
-    M<SInt32>(self + 0x850) = iVar1 + 1;
+    stamp = M<SInt32>(self + 0x850);
+    M<SInt32>(self + 0x850) = stamp + 1;
   }
-  return iVar1;
+  return stamp;
 }
 

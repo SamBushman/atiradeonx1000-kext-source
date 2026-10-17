@@ -68,6 +68,10 @@ void ATIR500Surface::build_swap() {
   SInt32 iVar33;
   SInt32 iVar34;
   SInt32 iVar35;
+  SInt32 formatOffset;
+  SInt32 nextIndex;
+  SInt32 accelerator;
+  SInt32 rectPacketIndex;
   SwapBufferEntry *batchEntry;     /* entries[0] of the panel being built: its `header` is the pending swap-write batch */
   PanelRecord *panelRec;
   UInt32 uVar38;
@@ -107,6 +111,9 @@ void ATIR500Surface::build_swap() {
   SInt32 surfaceBuffer;
   SInt32 packetIndex;
   SInt32 textureOffsetWord;
+  SInt32 batchHeader;
+  SInt32 batchIndex;
+  SInt32 pitch;
   
   M<UInt16>(self + 0xdb4) = 0;
   iVar32 = M<SInt32>(self + 0xd50);
@@ -154,21 +161,21 @@ void ATIR500Surface::build_swap() {
           return;
         }
       }
-      iVar44 = (SInt32)Vol(panelRec->entries[0].header);
+      batchHeader = (SInt32)Vol(panelRec->entries[0].header);
       batchEntry = &panelRec->entries[0];
       bVar46 = (panel == 0) << 1;
-      batchWords = (UInt32 *)(iVar44 + 0x20);
+      batchWords = (UInt32 *)(batchHeader + 0x20);
       if (((panel != 0) || (M<SInt32>(self + 0xb70) == M<SInt32>(self + 0xb74))) || (bVar1)) {
-        iVar44 = 0;
+        batchIndex = 0;
       }
       else {
         *batchWords = 0xd0b;
-        M<UInt32>(iVar44 + 0x24) = 5;
-        GCopy(iVar44 + 0x28,(&g_r500_3d_blit_state_packet),0x2f4);
-        iVar26 = (iVar44 + 0x31c) - (SInt32)batchWords >> 2;
-        iVar28 = (UInt32)(UInt8)self[0xe2] * 0x1c;
+        M<UInt32>(batchHeader + 0x24) = 5;
+        GCopy(batchHeader + 0x28,(&g_r500_3d_blit_state_packet),0x2f4);
+        rectPacketIndex = (batchHeader + 0x31c) - (SInt32)batchWords >> 2;
+        formatOffset = (UInt32)(UInt8)self[0xe2] * 0x1c;
         uVar29 = 0;
-        M<UInt32>(iVar44 + 0x290) =
+        M<UInt32>(batchHeader + 0x290) =
              (UInt32)M<UInt16>(self + 200) * M<SInt32>(self + 0xe8) + M<SInt32>(self + 0xb0) &
              0xffffffe0;
         if ((M<UInt32>(self + 0xe4) & 0xf00000) != 0) {
@@ -178,21 +185,21 @@ void ATIR500Surface::build_swap() {
         if (0x20 / M<UInt16>(self + 0xbe) <= uVar29) {
           uVar19 = uVar29;
         }
-        uVar15 = M<UInt32>(iVar44 + 0x250);
-        M<UInt32>(iVar44 + 0x298) =
+        uVar15 = M<UInt32>(batchHeader + 0x250);
+        M<UInt32>(batchHeader + 0x298) =
              uVar19 & 0x3ffe | ((UInt8)self[0xe0] & 1) << 0x10 | ((UInt8)self[0xe0] & 6) << 0x10 |
              ((UInt8)self[0xe1] & 3) << 0x13 |
              FormatTableLookup_0x0004d2e0((UInt32)(UInt8)self[0xe2] * 0x1c) >> 1 & 0x1e00000;
-        uVar29 = FormatTableLookup_0x0004d2e0(iVar28) >> 0x11 & 0x1f;
-        M<UInt32>(iVar44 + 0x250) = uVar29 | uVar15 & 0xffffffe0;
-        uVar19 = FormatTableLookup_0x0004d2e0(iVar28) >> 7 & 0x300;
-        M<UInt32>(iVar44 + 0x250) = uVar19 | uVar29 | uVar15 & 0xfffffce0;
-        uVar17 = FormatTableLookup_0x0004d2e0(iVar28) >> 3 & 0xc00;
-        M<UInt32>(iVar44 + 0x250) = uVar17 | uVar19 | uVar29 | uVar15 & 0xfffff0e0;
-        uVar42 = (FormatTableLookup_0x0004d2e0(iVar28) & 0x1800) << 1;
-        M<UInt32>(iVar44 + 0x250) = uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffffc0e0;
-        M<UInt32>(iVar44 + 0x250) =
-             (FormatTableLookup_0x0004d2e0(iVar28) & 0x600) << 5 |
+        uVar29 = FormatTableLookup_0x0004d2e0(formatOffset) >> 0x11 & 0x1f;
+        M<UInt32>(batchHeader + 0x250) = uVar29 | uVar15 & 0xffffffe0;
+        uVar19 = FormatTableLookup_0x0004d2e0(formatOffset) >> 7 & 0x300;
+        M<UInt32>(batchHeader + 0x250) = uVar19 | uVar29 | uVar15 & 0xfffffce0;
+        uVar17 = FormatTableLookup_0x0004d2e0(formatOffset) >> 3 & 0xc00;
+        M<UInt32>(batchHeader + 0x250) = uVar17 | uVar19 | uVar29 | uVar15 & 0xfffff0e0;
+        uVar42 = (FormatTableLookup_0x0004d2e0(formatOffset) & 0x1800) << 1;
+        M<UInt32>(batchHeader + 0x250) = uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffffc0e0;
+        M<UInt32>(batchHeader + 0x250) =
+             (FormatTableLookup_0x0004d2e0(formatOffset) & 0x600) << 5 |
              uVar42 | uVar17 | uVar19 | uVar29 | uVar15 & 0xffff00e0;
         if (((M<UInt32>(self + 0xe4) & 0xf00000) == 0) ||
            (uVar19 = (UInt32)M<UInt16>(self + 0xc4) / (M<UInt32>(self + 0xe4) >> 0x14 & 0xf),
@@ -203,9 +210,9 @@ void ATIR500Surface::build_swap() {
         if (M<UInt16>(self + 0xc6) != 0) {
           uVar19 = M<UInt16>(self + 0xc6) - 1;
         }
-        M<UInt32>(iVar44 + 0x2f4) = uVar29 & 0x1fff | (uVar19 & 0x1fff) << 0xd;
+        M<UInt32>(batchHeader + 0x2f4) = uVar29 & 0x1fff | (uVar19 & 0x1fff) << 0xd;
         AVar5 = self[0x15a];
-        M<UInt32>(iVar44 + 0x2a8) =
+        M<UInt32>(batchHeader + 0x2a8) =
              ((UInt8)self[0x158] & 7) << 2 |
              (UInt32)M<UInt16>(self + 0x140) * M<SInt32>(self + 0x160) + M<SInt32>(self + 0x128) &
              0xffffffe0;
@@ -218,9 +225,9 @@ void ATIR500Surface::build_swap() {
         if (M<UInt16>(self + 0x13e) != 0) {
           uVar19 = M<UInt16>(self + 0x13e) - 1;
         }
-        M<UInt32>(iVar44 + 0x2c0) = uVar29 & 0x7ff | (uVar19 & 0x7ff) << 0xb | 0x80000000;
+        M<UInt32>(batchHeader + 0x2c0) = uVar29 & 0x7ff | (uVar19 & 0x7ff) << 0xb | 0x80000000;
         uVar29 = FormatTableLookup_0x0004d2e4((UInt32)(UInt8)AVar5 * 0x1c);
-        M<UInt32>(iVar44 + 0x2c8) =
+        M<UInt32>(batchHeader + 0x2c8) =
              uVar29 >> 0x13 & 0x1f | (uVar29 & 0x40) << 0x10 | uVar29 >> 7 & 0xe00 |
              uVar29 >> 1 & 0x7000 | (uVar29 & 0x1c00) << 5 | (uVar29 & 0x380) << 0xb;
         uVar29 = M<UInt32>(self + 0x15c);
@@ -244,46 +251,46 @@ void ATIR500Surface::build_swap() {
         if (M<UInt16>(self + 0x13e) != 0) {
           uVar19 = M<UInt16>(self + 0x13e) - 1;
         }
-        M<UInt32>(iVar44 + 0x2d0) =
+        M<UInt32>(batchHeader + 0x2d0) =
              uVar17 - 1 & 0x3fff | (uVar29 & 0x800) << 4 | (uVar19 & 0x800) << 5;
         dVar54 = (double)FLOAT_0004c37c;
-        iVar28 = iVar26 * 4 + 0x30 >> 2;
+        nextIndex = rectPacketIndex * 4 + 0x30 >> 2;
         uVar16 = M<UInt32>(M<SInt32>(self + 0xd50) + 0xb74);
-        M<UInt32>(iVar44 + 0x2b0) = M<UInt32>(iVar44 + 0x2b0) & 0xffffe1ff | 0x1400;
-        M<UInt32>(iVar44 + 0x3c) = 0x70000;
-        M<UInt32>(iVar44 + 0x54) = uVar16;
+        M<UInt32>(batchHeader + 0x2b0) = M<UInt32>(batchHeader + 0x2b0) & 0xffffe1ff | 0x1400;
+        M<UInt32>(batchHeader + 0x3c) = 0x70000;
+        M<UInt32>(batchHeader + 0x54) = uVar16;
         surfaceWidth = M<SInt16>(self + 0xbd4);
         surfaceHeight = M<SInt16>(self + 0xbd6);
-        batchWords[iVar26] = 0x31080;
-        batchWords[iVar26 + 5] = 0x1087;
-        batchWords[iVar26 + 1] = FBITS((float)zero);
-        batchWords[iVar26 + 2] = FBITS((float)one);
-        batchWords[iVar26 + 3] = FBITS((float)one);
-        batchWords[iVar26 + 4] = FBITS((float)zero);
+        batchWords[rectPacketIndex] = 0x31080;
+        batchWords[rectPacketIndex + 5] = 0x1087;
+        batchWords[rectPacketIndex + 1] = FBITS((float)zero);
+        batchWords[rectPacketIndex + 2] = FBITS((float)one);
+        batchWords[rectPacketIndex + 3] = FBITS((float)one);
+        batchWords[rectPacketIndex + 4] = FBITS((float)zero);
         dVar47 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceWidth ^ 0x80000000) - signedIntBias);
         dVar55 = (double)(float)((double)CONCAT44d(0x43300000,(SInt32)surfaceHeight ^ 0x80000000) - signedIntBias);
-        batchWords[iVar26 + 7] = 0xc0033500;
-        batchWords[iVar26 + 8] = 0x10031;
-        batchWords[iVar26 + 9] = FBITS((float)((double)(float)(dVar47 + zero) * half));
-        batchWords[iVar26 + 10] = FBITS((float)((double)(float)(dVar55 + zero) * half));
-        batchWords[iVar26 + 0xb] = 0;
-        batchWords[iVar26 + 6] = (SInt32)(dVar47 * dVar54) << 0x10 | (SInt32)(dVar55 * dVar54);
-        batchWords[iVar28] = 0x1393;
-        batchWords[iVar28 + 1] = 10;
-        batchWords[iVar28 + 2] = 0x5c8;
-        iVar44 = iVar28 + 4;
-        batchWords[iVar28 + 3] = 0x70000;
+        batchWords[rectPacketIndex + 7] = 0xc0033500;
+        batchWords[rectPacketIndex + 8] = 0x10031;
+        batchWords[rectPacketIndex + 9] = FBITS((float)((double)(float)(dVar47 + zero) * half));
+        batchWords[rectPacketIndex + 10] = FBITS((float)((double)(float)(dVar55 + zero) * half));
+        batchWords[rectPacketIndex + 0xb] = 0;
+        batchWords[rectPacketIndex + 6] = (SInt32)(dVar47 * dVar54) << 0x10 | (SInt32)(dVar55 * dVar54);
+        batchWords[nextIndex] = 0x1393;
+        batchWords[nextIndex + 1] = 10;
+        batchWords[nextIndex + 2] = 0x5c8;
+        batchIndex = nextIndex + 4;
+        batchWords[nextIndex + 3] = 0x70000;
       }
-      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x18) = iVar44;
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x18) = batchIndex;
       if (panelRec->active != 0x0) {
-        iVar26 = iVar44;
+        iVar26 = batchIndex;
         if (self[0xbed] == 0x0) {
-          iVar28 = M<SInt32>(self + 0xd50);
+          accelerator = M<SInt32>(self + 0xd50);
         }
         else {
-          iVar28 = M<SInt32>(self + 0xd50);
-          if ((M<char>(iVar28 + 0x9b0) == '\0') ||
-             (M<SInt32>(panel * 0x18 + iVar28 + 0xb10) == 0)) {
+          accelerator = M<SInt32>(self + 0xd50);
+          if ((M<char>(accelerator + 0x9b0) == '\0') ||
+             (M<SInt32>(panel * 0x18 + accelerator + 0xb10) == 0)) {
             if ((SInt32)uVar38 < 0) {
               uVar29 = 0;
               uVar19 = uVar40;
@@ -299,23 +306,23 @@ void ATIR500Surface::build_swap() {
             if (uVar17 < uVar19) {
               uVar19 = uVar17;
             }
-            batchWords[iVar44] = 0x1393;
-            batchWords[iVar44 + 1] = 10;
-            batchWords[iVar44 + 2] = 0xd0b;
-            batchWords[iVar44 + 3] = 5;
-            batchWords[iVar44 + 4] = 0x5c8;
-            iVar26 = iVar44 + 6;
-            batchWords[iVar44 + 5] = 0x70000;
+            batchWords[batchIndex] = 0x1393;
+            batchWords[batchIndex + 1] = 10;
+            batchWords[batchIndex + 2] = 0xd0b;
+            batchWords[batchIndex + 3] = 5;
+            batchWords[batchIndex + 4] = 0x5c8;
+            iVar26 = batchIndex + 6;
+            batchWords[batchIndex + 5] = 0x70000;
             if ((bool)(bVar46 >> 1 & 1)) {
-              iVar18 = M<SInt32>(iVar28 + 0x894);
+              iVar18 = M<SInt32>(accelerator + 0x894);
               if (iVar18 == 0) {
                 batchWords[iVar26] = 0x194e;
-                batchWords[iVar44 + 7] =
-                     uVar29 & ~M<UInt32>(iVar28 + 0x898) |
-                     (uVar19 & ~M<UInt32>(iVar28 + 0x898)) << 0x10 | 0x80000000;
-                batchWords[iVar44 + 8] = 0x5c8;
-                iVar26 = iVar44 + 10;
-                batchWords[iVar44 + 9] = 8;
+                batchWords[batchIndex + 7] =
+                     uVar29 & ~M<UInt32>(accelerator + 0x898) |
+                     (uVar19 & ~M<UInt32>(accelerator + 0x898)) << 0x10 | 0x80000000;
+                batchWords[batchIndex + 8] = 0x5c8;
+                iVar26 = batchIndex + 10;
+                batchWords[batchIndex + 9] = 8;
               }
               else {
 LAB_0003f644:
@@ -324,17 +331,17 @@ LAB_0003f644:
             }
             else {
               if (panel != 1) {
-                iVar18 = M<SInt32>(iVar28 + 0x894);
+                iVar18 = M<SInt32>(accelerator + 0x894);
                 goto LAB_0003f644;
               }
 LAB_0003f654:
               batchWords[iVar26] = 0x1b4e;
-              batchWords[iVar44 + 7] =
-                   uVar29 & ~M<UInt32>(iVar28 + 0x89c) |
-                   (uVar19 & ~M<UInt32>(iVar28 + 0x89c)) << 0x10 | 0x80000000;
-              batchWords[iVar44 + 8] = 0x5c8;
-              batchWords[iVar44 + 9] = 0x80000008;
-              iVar26 = iVar44 + 10;
+              batchWords[batchIndex + 7] =
+                   uVar29 & ~M<UInt32>(accelerator + 0x89c) |
+                   (uVar19 & ~M<UInt32>(accelerator + 0x89c)) << 0x10 | 0x80000000;
+              batchWords[batchIndex + 8] = 0x5c8;
+              batchWords[batchIndex + 9] = 0x80000008;
+              iVar26 = batchIndex + 10;
             }
           }
         }
@@ -360,7 +367,7 @@ LAB_0003f654:
         }
         uVar29 = (UInt32)M<UInt8>(surfaceBuffer + 0x3a);
         uVar19 = (UInt32)M<UInt8>(iVar32 + 0x166);
-        uVar16 = M<UInt32>(iVar28 + 0xb74);
+        uVar16 = M<UInt32>(accelerator + 0xb74);
         if (uVar29 == uVar19) {
           bVar1 = false;
           uVar17 = uVar19;
@@ -372,7 +379,7 @@ LAB_0003f654:
         }
         uVar15 = (UInt32)M<UInt16>(surfaceBuffer + 0x1e);
         uVar42 = (UInt32)M<UInt16>(surfaceBuffer + 0x1c);
-        iVar44 = M<SInt32>(iVar32 + 0x16c);
+        pitch = M<SInt32>(iVar32 + 0x16c);
         uVar13 = M<UInt16>(iVar32 + 0x14c);
         iVar18 = M<SInt32>(iVar32 + 0x134);
         bVar2 = (M<UInt32>(iVar32 + 0x168) & 0xf00000) == 0;
@@ -452,7 +459,7 @@ LAB_0003f654:
                                 signedIntBias);
         dVar63 = (double)widthRatio;
         dVar64 = (double)heightRatio;
-        iVar43 = M<SInt32>(iVar28 + 0x8c4);
+        iVar43 = M<SInt32>(accelerator + 0x8c4);
         if (dVar66 != dVar55) {
           dVar55 = (double)(float)(one / dVar66);
         }
@@ -472,7 +479,7 @@ LAB_0003f654:
         blitPacket[0x9c] =
              uVar20 & 0x3ffe | (bVar46 & 1) << 0x10 | (bVar46 & 6) << 0x10 | (bVar6 & 3) << 0x13 |
              uVar19 >> 1 & 0x1e00000;
-        blitPacket[0x9a] = (UInt32)uVar13 * iVar44 + iVar18 & 0xffffffe0;
+        blitPacket[0x9a] = (UInt32)uVar13 * pitch + iVar18 & 0xffffffe0;
         blitPacket[0x8a] =
              (uVar19 & 0x600) << 5 |
              (uVar19 & 0x1800) << 1 |
@@ -1167,13 +1174,13 @@ LAB_0003f654:
         blitPacket[iVar26] = 0x1393;
         blitPacket[iVar26 + 1] = 10;
         Vol(panelRec->entries[0].rectWordIndex) = (SInt32)blitPacket + (0x2c8 - (SInt32)batchWords) >> 2;
-        iVar44 = (SInt32)blitPacket + ((iVar26 + 2) * 4 - (SInt32)batchWords) >> 2;
+        batchIndex = (SInt32)blitPacket + ((iVar26 + 2) * 4 - (SInt32)batchWords) >> 2;
       }
       panelRec = panelRec + 1;
       panel = panel + 1;
       M<SInt32>((SInt32)Vol(batchEntry->header) + 0xc) = iVar34;
       local_108 = local_108 + 8;
-      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = iVar44;
+      M<SInt32>((SInt32)Vol(batchEntry->header) + 0x14) = batchIndex;
       M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) = M<UInt32>((SInt32)Vol(batchEntry->header) + 0x1c) | 1;
       M<UInt16>(self + 0xdb4) = 1;
       iVar32 = M<SInt32>(self + 0xd50);

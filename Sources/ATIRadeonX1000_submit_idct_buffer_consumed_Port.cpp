@@ -52,6 +52,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
   SInt32 iVar8;
   SInt32 ringFlushEnd;
   SInt32 startIndex;
+  SInt32 flushOffset;
   
   startIndex = M<SInt32>(self + 0x930);
   if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
@@ -60,17 +61,17 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
   }
   else {
     cacheLine = (UInt32)(UInt8)self[0x84];
-    iVar5 = 0;
+    flushOffset = 0;
     bufferFlushEnd = (M<SInt32>(infoBytes + 0x10) * 4 + ((UInt32)buffer & cacheLine - 1)) - cacheLine;
     if (0 < bufferFlushEnd) {
       do {
-        dataCacheBlockStore((-cacheLine & (UInt32)buffer) + iVar5);
-        iVar5 = iVar5 + cacheLine;
-      } while (iVar5 < bufferFlushEnd);
+        dataCacheBlockStore((-cacheLine & (UInt32)buffer) + flushOffset);
+        flushOffset = flushOffset + cacheLine;
+      } while (flushOffset < bufferFlushEnd);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-cacheLine & (UInt32)buffer) + iVar5);
+    dataCacheBlockFlush((-cacheLine & (UInt32)buffer) + flushOffset);
     ppcSync();
     instructionSynchronize();
     instructionSynchronize();
@@ -208,19 +209,19 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOff
       }
       else {
         uVar4 = (UInt32)(UInt8)self[0x84];
-        iVar5 = 0;
+        flushOffset = 0;
         ringAddress = startIndex * 4 + ringBase;
         uVar2 = -uVar4 & ringAddress;
         ringFlushEnd = ((ringAddress & uVar4 - 1) + 0x80) - uVar4;
         if (0 < ringFlushEnd) {
           do {
-            dataCacheBlockStore(uVar2 + iVar5);
-            iVar5 = iVar5 + uVar4;
-          } while (iVar5 < ringFlushEnd);
+            dataCacheBlockStore(uVar2 + flushOffset);
+            flushOffset = flushOffset + uVar4;
+          } while (flushOffset < ringFlushEnd);
         }
         ppcSync();
         instructionSynchronize();
-        dataCacheBlockFlush(uVar2 + iVar5);
+        dataCacheBlockFlush(uVar2 + flushOffset);
         ppcSync();
         instructionSynchronize();
         instructionSynchronize();

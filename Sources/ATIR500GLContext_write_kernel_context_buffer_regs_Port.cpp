@@ -64,6 +64,8 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
   UInt32 local_78 [4];
   UInt32 local_68 [4];
   int local_58;
+  int lodBlendWeight;
+  int nextMipLevel;
   
   iVar29 = 4;
   iVar13 = 0;
@@ -77,7 +79,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
   } while (iVar29 != 0);
   if (M<int>(self + 0x3bc) == 0) {
     uVar9 = (unsigned int)M<UInt16>(self + 0x3a8);
-    iVar29 = M<int>(self + 0x298);
+    lodBlendWeight = M<int>(self + 0x298);
     uVar26 = M<unsigned int>(self + 0x29c);
     if (uVar9 == 0) {
       iVar19 = M<int>(self + 0x290);
@@ -95,7 +97,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
         uVar9 = uVar9 - 1;
       } while (uVar9 != 0);
     }
-    iVar13 = uVar26 + 1;
+    nextMipLevel = uVar26 + 1;
     pAVar27 = M<UInt8 *>((unsigned int)M<UInt16>(self + 0xae) * 4 + iVar19 + 0xb70);
     pAVar21 = (UInt8 *)((unsigned int)M<UInt16>(self + 0xae) * 0x78 + iVar19 + 0xa8);
   }
@@ -118,9 +120,9 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
       } while (uVar26 != 0);
     }
     pAVar27 = self + 0x5a0;
-    iVar29 = 0;
+    lodBlendWeight = 0;
     uVar26 = 0;
-    iVar13 = 1;
+    nextMipLevel = 1;
     pAVar21 = pAVar27;
   }
   outputBuffer[wordIndex] = 0x13c6;
@@ -135,7 +137,7 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, U
   outputBuffer[wordIndex + 7] = M<UInt32>(iVar16 + 0xb74);
   uVar9 = 0;
   iVar19 = M<int>(uVar26 * 4 + attachmentBuffers[0] + 0x40);
-  iVar14 = M<int>(iVar13 * 4 + attachmentBuffers[0] + 0x40);
+  iVar14 = M<int>(nextMipLevel * 4 + attachmentBuffers[0] + 0x40);
   uVar6 = M<UInt16>(attachmentBuffers[0] + 0x20);
   iVar22 = M<int>(attachmentBuffers[0] + 8);
   if ((M<unsigned int>(attachmentBuffers[0] + 0x3c) & 0xf00000) != 0) {
@@ -189,7 +191,7 @@ LAB_00028bac:
       iVar11 = M<int>(uVar26 * 4 + iVar20 + 0x40);
       M<unsigned int>((int)local_78 + iVar16) =
            iVar11 * (unsigned int)M<UInt16>(iVar20 + 0x20) +
-           iVar29 * (M<int>(iVar13 * 4 + iVar20 + 0x40) - iVar11) + M<int>(iVar20 + 8);
+           lodBlendWeight * (M<int>(nextMipLevel * 4 + iVar20 + 0x40) - iVar11) + M<int>(iVar20 + 8);
       iVar11 = (unsigned int)M<UInt8>(iVar20 + 0x3a) * 0x1c;
       if ((M<unsigned int>(iVar20 + 0x3c) & 0xf00000) != 0) {
         uVar15 = (int)((unsigned int)M<UInt16>(iVar20 + 0x14) / (M<unsigned int>(iVar20 + 0x3c) >> 0x14 & 0xf))
@@ -210,7 +212,7 @@ LAB_00028bac:
   }
   outputBuffer[local_58] = 0x50b;
   outputBuffer[wordIndex + 9] =
-       uVar9 | iVar19 * (unsigned int)uVar6 + iVar29 * (iVar14 - iVar19) + iVar22 >> 10 |
+       uVar9 | iVar19 * (unsigned int)uVar6 + lodBlendWeight * (iVar14 - iVar19) + iVar22 >> 10 |
                uVar10 * uVar7 * 0x10000 & 0x3fc00000 | (bVar2 & 1) << 0x1e;
   outputBuffer[wordIndex + 10] = 0x3138a;
   outputBuffer[wordIndex + 0xb] = local_78[0];

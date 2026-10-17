@@ -40,7 +40,7 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
   int iVar5;
   int iVar6;
   UInt8 **excludeCursor;
-  unsigned int uVar8;
+  unsigned int faceIndex;
   UInt8 *surfaceListHead;
   unsigned int uVar10;
   UInt8 *surfaceBuffer;
@@ -48,7 +48,7 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
   UInt8 *surface;
   UInt8 excludeAIsNull;
   UInt8 bVar14;
-  long lVar15;
+  long excludeLeft;
   unsigned int uVar16;
   
   excludeAIsNull = (excludeABytes == (UInt8 *)0x0) << 1;
@@ -70,11 +70,11 @@ UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, 
             if (excludeCount < 1) break;
             if (texture != (UInt8 *)*excludeList) {
               iVar5 = 0;
-              lVar15 = excludeCount;
+              excludeLeft = excludeCount;
               do {
                 iVar5 = iVar5 + 1;
-                lVar15 = lVar15 + -1;
-                if (lVar15 == 0) goto LAB_00004654;
+                excludeLeft = excludeLeft + -1;
+                if (excludeLeft == 0) goto LAB_00004654;
               } while (texture != (UInt8 *)excludeList[iVar5]);
             }
 LAB_000046a0:
@@ -84,16 +84,16 @@ LAB_000046a0:
 LAB_00004654:
         if ((secondPass) || (iVar5 = M<int>(texture + 0x14), iVar5 == 0)) break;
         uVar10 = (unsigned int)M<UInt8>(iVar5 + 0x34);
-        uVar8 = 0;
+        faceIndex = 0;
         if (uVar10 != 0) {
           if ((M<UInt16>(iVar5 + 0x28) & ~M<UInt16>(iVar5 + 0x1c)) == 0) {
-            uVar8 = 0;
+            faceIndex = 0;
             uVar16 = uVar10;
             if (uVar10 == 0) {
               uVar16 = 1;
             }
             do {
-              uVar8 = uVar8 + 1;
+              faceIndex = faceIndex + 1;
               uVar16 = uVar16 - 1;
               if (uVar16 == 0) goto LAB_000046b8;
               puVar1 = (UInt16 *)(iVar5 + 0x1e);
@@ -104,7 +104,7 @@ LAB_00004654:
           goto LAB_000046a0;
         }
 LAB_000046b8: ;
-      } while (uVar8 != uVar10);
+      } while (faceIndex != uVar10);
       if (M<int>(texture + 0x48) != 0) {
         VCALL(M<int>(self), 0x524)(self,texture);
         M<UInt8>(M<int>(texture + 0x14) + 0x14) = 1;
@@ -137,7 +137,7 @@ LAB_00004794:
         surface = M<UInt8 *>(surface + 0xa0);
         if ((excludeABytes != surface) && (surface != excludeBBytes)) {
           excludeCursor = (UInt8 **)excludeList;
-          lVar15 = excludeCount;
+          excludeLeft = excludeCount;
           if ((bool)(bVar14 >> 2 & 1)) {
             do {
               excludedTexture = *excludeCursor;
@@ -145,8 +145,8 @@ LAB_00004794:
               if (((excludedTexture != (UInt8 *)0x0) &&
                   (excludedTexture[0x20] == 0x0)) &&
                  (surface == M<UInt8 *>(excludedTexture + 0x50))) goto LAB_0000492c;
-              lVar15 = lVar15 + -1;
-            } while (lVar15 != 0);
+              excludeLeft = excludeLeft + -1;
+            } while (excludeLeft != 0);
           }
           else if (!(bool)(bVar14 >> 1 & 1)) goto LAB_0000492c;
           uVar10 = 0;

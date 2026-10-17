@@ -49,10 +49,16 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
   int iVar12;
   UInt32 savedStamp;
   UInt32 bufferFlags;
-  unsigned int uVar15;
+  unsigned int retries;
   UInt8 *surface;
   int iVar16;
   UInt8 *accel;
+  int *surfaceWords;
+  int *accelWords;
+  int accelAddr;
+  int allocResult;
+  int panelOffset;
+  int waited;
   /* one 16-byte stack object filled by the +0x5ac/+0x5b4/+0x560 callees (Ghidra named its words descriptor and local_30; #85) */
   int descriptor[4];
   
@@ -65,7 +71,7 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
     return 0;
   }
-  uVar15 = 0;
+  retries = 0;
   if (type != 0) {
     if (type != 2) {
       return 0xe00002c2;
@@ -83,20 +89,20 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
       GH_IOLockLock(M<UInt32>(M<int>(self + 0x94) + 0x840));
       surface = M<UInt8 *>(self + 0x100);
       if ((surface == (UInt8 *)0x0) || (M<unsigned int>(surface + 0xa4) < 0x100)) {
-        iVar16 = M<int>(self + 0x94);
+        accelAddr = M<int>(self + 0x94);
       }
       else {
-        iVar16 = M<int>(self + 0x94);
-        if (M<char>(iVar16 + 0x80) == '\0') {
+        accelAddr = M<int>(self + 0x94);
+        if (M<char>(accelAddr + 0x80) == '\0') {
           do {
-            GH_IOLockSleep(M<UInt32>(iVar16 + 0x840),iVar16,0);
-          } while (M<char>(iVar16 + 0x80) == '\0');
-          iVar16 = M<int>(self + 0x94);
+            GH_IOLockSleep(M<UInt32>(accelAddr + 0x840),accelAddr,0);
+          } while (M<char>(accelAddr + 0x80) == '\0');
+          accelAddr = M<int>(self + 0x94);
           surface = M<UInt8 *>(self + 0x100);
         }
       }
-      if (M<char>(iVar16 + 0x80) == '\0') {
-        uVar15 = 0x3e9;
+      if (M<char>(accelAddr + 0x80) == '\0') {
+        retries = 0x3e9;
         bufferFlags = 0;
         goto LAB_0000d930;
       }
@@ -115,20 +121,20 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
     if ((M<unsigned int>(surface + 0xbec) & 0xffffff) != 0) {
       bufferFlags = bufferFlags | 2;
     }
-    if ((surface[0xbd0] == 0x0) || (uVar15 == 999)) {
+    if ((surface[0xbd0] == 0x0) || (retries == 999)) {
       uVar8 = M<unsigned int>(surface + 0xbf8);
       if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & uVar8) == 0) goto LAB_0000d950;
       if ((uVar8 & 0x20000000) != 0) {
-        uVar15 = 0x3e9;
+        retries = 0x3e9;
         goto LAB_0000d950;
       }
       surfaceMask = (M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
       if ((uVar8 & surfaceMask) != 0) {
-        iVar16 = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces(surfaceMask, false);
-        if (iVar16 != 0) {
-          if (iVar16 != 2) goto LAB_0000d8b8;
+        allocResult = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces(surfaceMask, false);
+        if (allocResult != 0) {
+          if (allocResult != 2) goto LAB_0000d8b8;
           surface = M<UInt8 *>(self + 0x100);
-          uVar15 = 0x3e9;
+          retries = 0x3e9;
           goto LAB_0000d930;
         }
         surface = M<UInt8 *>(self + 0x100);
@@ -142,8 +148,8 @@ IOReturn IOATIR5002DContext::clientMemoryForType(UInt32 type, UInt32*options, IO
       goto LAB_0000d930;
     }
 LAB_0000d8b8:
-    if (uVar15 == 1000) break;
-    uVar15 = uVar15 + 1;
+    if (retries == 1000) break;
+    retries = retries + 1;
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 0x94) + 0x840));
     GH_thread_block(0);
     GH_IOSleep(1);
@@ -155,13 +161,13 @@ LAB_0000d93c:
     if (M<int>(self + 0x110) == 0xffff) goto LAB_0000de0c;
   }
 LAB_0000d950:
-  if (999 < uVar15) {
-    if ((1000 < uVar15) ||
+  if (999 < retries) {
+    if ((1000 < retries) ||
        (iVar16 = ((IOATIR500Surface *)((UInt32)surface))->alloc_surfaces((M<UInt32>(self + 0x8c) | M<UInt32>(surface + 0xc1c)) & 0x7fffff, true), iVar16 != 0))
     goto LAB_0000de0c;
-    piVar3 = M<int *>(self + 0x100);
-    if ((piVar3[0x2fe] & piVar3[0x307] & 0x10000000U) != 0) {
-      VCALL(*piVar3, 0x5c0)(piVar3);
+    surfaceWords = M<int *>(self + 0x100);
+    if ((surfaceWords[0x2fe] & surfaceWords[0x307] & 0x10000000U) != 0) {
+      VCALL(*surfaceWords, 0x5c0)(surfaceWords);
       M<unsigned int>(M<int>(self + 0x100) + 0xbf8) =
            M<unsigned int>(M<int>(self + 0x100) + 0xbf8) & 0xefffffff;
     }
@@ -171,9 +177,9 @@ LAB_0000d950:
     M<int>(M<int>(self + 0x94) + 0x744) = M<int>(M<int>(self + 0x94) + 0x744) + 1;
     M<UInt8 *>(M<int>(self + 0x94) + 0x78) = self;
   }
-  piVar3 = M<int *>(self + 0x100);
-  if (piVar3 != (int *)0x0) {
-    VCALL(*piVar3, 0x5b8)(piVar3,M<UInt32>(self + 0x8c));
+  surfaceWords = M<int *>(self + 0x100);
+  if (surfaceWords != (int *)0x0) {
+    VCALL(*surfaceWords, 0x5b8)(surfaceWords,M<UInt32>(self + 0x8c));
   }
   if (M<int>(self + 0x9c) == 0) {
     this->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)));
@@ -191,21 +197,21 @@ LAB_0000d950:
     ;
     iVar4 = VCALL(*M<int *>(self + 0x94), 0x560)(M<int *>(self + 0x94),descriptor);
   }
-  piVar3 = M<int *>(self + 0x100);
+  surfaceWords = M<int *>(self + 0x100);
   M<int>(self + 0x7c) = iVar4;
   M<int>(self + 0xa8) = iVar4;
-  if (piVar3 == (int *)0x0) {
+  if (surfaceWords == (int *)0x0) {
 LAB_0000dc70:
     M<UInt32>(M<int>(self + 0x110) * 0x20 + M<int>(self + 0x94) + 0xec) =
          M<UInt32>(self + 0x7c);
   }
   else {
-    VCALL(*piVar3, 0x5bc)(piVar3,M<UInt32>(self + 0x8c));
-    piVar3 = M<int *>(self + 0x100);
-    if (piVar3 == (int *)0x0) goto LAB_0000dc70;
-    iVar4 = VCALL(*piVar3, 0x5b4)
-                      (piVar3,M<UInt32>(self + 0x7c),M<UInt32>(self + 0x8c));
-    piVar3[0x1f] = iVar4;
+    VCALL(*surfaceWords, 0x5bc)(surfaceWords,M<UInt32>(self + 0x8c));
+    surfaceWords = M<int *>(self + 0x100);
+    if (surfaceWords == (int *)0x0) goto LAB_0000dc70;
+    iVar4 = VCALL(*surfaceWords, 0x5b4)
+                      (surfaceWords,M<UInt32>(self + 0x7c),M<UInt32>(self + 0x8c));
+    surfaceWords[0x1f] = iVar4;
     if (self[0x92] != 0x0) {
       M<UInt32>(M<int>(M<int>(M<int>(self + 0x100) + 0xb70) + 0x24) + 0x54) =
            M<UInt32>(M<int>(self + 0x100) + 0x7c);
@@ -227,29 +233,29 @@ LAB_0000dc70:
       iVar16 = M<int>(self + 0x100);
       savedStamp = M<UInt32>(iVar16 + 0x84);
       M<UInt32>(iVar16 + 0x84) = M<UInt32>(iVar16 + 0x80);
-      piVar3 = M<int *>(self + 0x94);
-      if (piVar3[0x33] != 0) {
-        uVar15 = 0;
-        iVar16 = 0;
+      accelWords = M<int *>(self + 0x94);
+      if (accelWords[0x33] != 0) {
+        retries = 0;
+        panelOffset = 0;
         do {
           piVar5 = M<int *>(self + 0x100);
-          if (M<char>((int)piVar5 + iVar16 + 0xcac) != '\0') {
-            VCALL(*piVar5, 0x5d4)(piVar5,uVar15,0);
+          if (M<char>((int)piVar5 + panelOffset + 0xcac) != '\0') {
+            VCALL(*piVar5, 0x5d4)(piVar5,retries,0);
             M<int>(M<int>(self + 0x94) + 0x74c) = M<int>(M<int>(self + 0x94) + 0x74c) + 1;
-            piVar3 = M<int *>(self + 0x94);
+            accelWords = M<int *>(self + 0x94);
           }
-          uVar15 = uVar15 + 1;
-          iVar16 = iVar16 + 0x94;
-        } while (uVar15 < (unsigned int)piVar3[0x33]);
+          retries = retries + 1;
+          panelOffset = panelOffset + 0x94;
+        } while (retries < (unsigned int)accelWords[0x33]);
       }
-      iVar4 = piVar3[0x1e5];
-      iVar16 = VCALL(*piVar3, 0x558)(piVar3,savedStamp);
-      piVar3[0x1e5] = iVar4 + iVar16;
+      iVar4 = accelWords[0x1e5];
+      waited = VCALL(*accelWords, 0x558)(accelWords,savedStamp);
+      accelWords[0x1e5] = iVar4 + waited;
     }
   }
-  piVar3 = M<int *>(self + 0x94);
-  piVar5 = piVar3 + (unsigned int)M<UInt16>(piVar3 + 0x171) * 7 + 0x101;
-  iVar16 = VCALL(*piVar3, 0x554)(piVar3,piVar5[4]);
+  accelWords = M<int *>(self + 0x94);
+  piVar5 = accelWords + (unsigned int)M<UInt16>(accelWords + 0x171) * 7 + 0x101;
+  iVar16 = VCALL(*accelWords, 0x554)(accelWords,piVar5[4]);
   if (iVar16 == 0) {
     accel = M<UInt8 *>(self + 0x94);
     if (M<UInt16>(accel + 0x5c6) < 8) {

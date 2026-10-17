@@ -69,6 +69,15 @@ bool ATIRadeonX1000::start(IOService *provider) {
   SInt32 iVar16;
   SInt32 gartOffset;
   UInt8 *local_34 [6];
+  SInt32 *sensorArray;
+  SInt32 bufferMemory;
+  SInt32 bufferDescriptor;
+  SInt32 mapResult;
+  SInt32 commandBufferAllocated;
+  SInt32 hardwareReady;
+  SInt32 attached;
+  SInt32 gpuSensorTimer;
+  SInt32 addResult;
   
   gartOffset = 0;
   baseStarted = IOATIR500Accelerator::start(provider);
@@ -318,20 +327,20 @@ LAB_0001fc04:
                 else {
                   VCALL(M<SInt32>(self), 0x594)(self,1 << (GH_page_shift & 0x3f));
                   if (1 < (UInt8)self[0x8cc]) {
-                    iVar5 = 2;
+                    pageIndex = 2;
                     do {
-                      gartOffset = iVar5 << (GH_page_shift & 0x3f);
+                      gartOffset = pageIndex << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
                                         (self,M<UInt32>(self + 0x22c),&gartOffset,gartOffset,
                                          gartOffset + 0x1000);
                       if (iVar9 == 0) {
-                        if (iVar5 < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
+                        if (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
                         break;
                       }
-                      iVar9 = iVar5 + 1;
-                      iVar5 = iVar5 + 2;
+                      iVar9 = pageIndex + 1;
+                      pageIndex = pageIndex + 2;
                       VCALL(M<SInt32>(self), 0x594)(self,iVar9 << (GH_page_shift & 0x3f));
-                    } while (iVar5 < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1));
+                    } while (pageIndex < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1));
                   }
                 }
                 M<UInt32>(self + 0x938) = 1;
@@ -363,20 +372,20 @@ LAB_0001fc04:
                   M<UInt32>(self + 0x90c) = M<UInt32>(self + 0x860);
                 }
                 M<UInt32>(self + 0xba0) = 0x2000;
-                iVar5 = GH_IOMallocAligned(0x2000,GH_page_size);
-                M<SInt32>(self + 0x900) = iVar5;
-                if (iVar5 != 0) {
-                  iVar5 = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(iVar5,M<UInt32>(self + 0xba0),3);
-                  M<SInt32>(self + 0x908) = iVar5;
-                  if (iVar5 != 0) {
-                    iVar5 = VCALL(M<SInt32>(self), 0x5a0)(self,iVar5,self + 0x904);
-                    if (iVar5 != 0) {
+                bufferMemory = GH_IOMallocAligned(0x2000,GH_page_size);
+                M<SInt32>(self + 0x900) = bufferMemory;
+                if (bufferMemory != 0) {
+                  bufferDescriptor = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(bufferMemory,M<UInt32>(self + 0xba0),3);
+                  M<SInt32>(self + 0x908) = bufferDescriptor;
+                  if (bufferDescriptor != 0) {
+                    mapResult = VCALL(M<SInt32>(self), 0x5a0)(self,bufferDescriptor,self + 0x904);
+                    if (mapResult != 0) {
                       iVar9 = M<SInt32>(self + 0x900);
-                      iVar5 = 0;
+                      index = 0;
                       iVar16 = 0x800;
                       do {
-                        M<UInt32>(iVar9 + iVar5 * 4) = 0x80000000;
-                        iVar5 = iVar5 + 1;
+                        M<UInt32>(iVar9 + index * 4) = 0x80000000;
+                        index = index + 1;
                         iVar16 = iVar16 + -1;
                       } while (iVar16 != 0);
                       if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
@@ -387,37 +396,37 @@ LAB_0001fc04:
                         M<UInt32>(self + 0x92c) = 0x1f9c;
                         M<UInt32>(self + 0x928) = M<UInt32>(self + 0x860);
                       }
-                      iVar5 = GH_IOMallocAligned(0x2000,GH_page_size);
-                      M<SInt32>(self + 0x91c) = iVar5;
-                      if (iVar5 != 0) {
-                        iVar5 = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(iVar5,0x2000,3);
-                        M<SInt32>(self + 0x924) = iVar5;
-                        if (iVar5 != 0) {
-                          iVar5 = VCALL(M<SInt32>(self), 0x5a0)(self,iVar5,self + 0x920);
-                          if (iVar5 != 0) {
+                      bufferMemory = GH_IOMallocAligned(0x2000,GH_page_size);
+                      M<SInt32>(self + 0x91c) = bufferMemory;
+                      if (bufferMemory != 0) {
+                        bufferDescriptor = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(bufferMemory,0x2000,3);
+                        M<SInt32>(self + 0x924) = bufferDescriptor;
+                        if (bufferDescriptor != 0) {
+                          mapResult = VCALL(M<SInt32>(self), 0x5a0)(self,bufferDescriptor,self + 0x920);
+                          if (mapResult != 0) {
                             iVar9 = M<SInt32>(self + 0x91c);
-                            iVar5 = 0;
+                            index = 0;
                             iVar16 = 0x800;
                             do {
-                              M<UInt32>(iVar9 + iVar5 * 4) = 0x80000000;
-                              iVar5 = iVar5 + 1;
+                              M<UInt32>(iVar9 + index * 4) = 0x80000000;
+                              index = index + 1;
                               iVar16 = iVar16 + -1;
                             } while (iVar16 != 0);
                             M<UInt32>(self + 0xb74) = 0x11;
                             if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
-                              iVar5 = GH_IOMallocAligned(GH_page_size,GH_page_size);
-                              M<SInt32>(self + 0x8d0) = iVar5;
-                              if (iVar5 != 0) {
-                                iVar5 = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(iVar5,GH_page_size,3);
-                                M<SInt32>(self + 0x8d8) = iVar5;
-                                if (iVar5 == 0) {
+                              bufferMemory = GH_IOMallocAligned(GH_page_size,GH_page_size);
+                              M<SInt32>(self + 0x8d0) = bufferMemory;
+                              if (bufferMemory != 0) {
+                                bufferDescriptor = GH_ZN18IOMemoryDescriptor11withAddressEPvm11IODirection(bufferMemory,GH_page_size,3);
+                                M<SInt32>(self + 0x8d8) = bufferDescriptor;
+                                if (bufferDescriptor == 0) {
                                   GH_IOFreeAligned(M<UInt32>(self + 0x8d0),GH_page_size);
                                   M<UInt32>(self + 0x8d0) = 0;
                                 }
                                 else {
-                                  iVar5 = VCALL(M<SInt32>(self), 0x5a0)
-                                                    (self,iVar5,self + 0x8d4);
-                                  if (iVar5 == 0) {
+                                  mapResult = VCALL(M<SInt32>(self), 0x5a0)
+                                                    (self,bufferDescriptor,self + 0x8d4);
+                                  if (mapResult == 0) {
                                     VCALL(*M<SInt32 *>(self + 0x8d8), 0x18)(M<SInt32 *>(self + 0x8d8));
                                     GH_IOFreeAligned(M<UInt32>(self + 0x8d0),GH_page_size);
                                     M<UInt32>(self + 0x8d0) = 0;
@@ -469,11 +478,11 @@ LAB_0001fc04:
                                 M<UInt16>(self + 0xaee) = 0;
                                 M<UInt32>(self + 0xaf0) = 0;
                                 M<UInt32>(self + 0xaf4) = 0;
-                                iVar5 = IOATIR500Accelerator::allocCommandBuffer((VendorCommandBuffer *)(self + 0xae0),0x1000);
-                                if ((iVar5 != 0) &&
-                                   (iVar5 = VCALL(M<SInt32>(self), 0x5a0)
+                                commandBufferAllocated = IOATIR500Accelerator::allocCommandBuffer((VendorCommandBuffer *)(self + 0xae0),0x1000);
+                                if ((commandBufferAllocated != 0) &&
+                                   (mapResult = VCALL(M<SInt32>(self), 0x5a0)
                                                       (self,M<UInt32>(self + 0xae8),
-                                                       self + 0xae4), iVar5 != 0)) {
+                                                       self + 0xae4), mapResult != 0)) {
                                   M<UInt32>(self + 0xb58) = 7;
                                   M<UInt32>(self + 0xb54) = 7;
                                   local_34[0] = self + 0xb2c;
@@ -481,7 +490,7 @@ LAB_0001fc04:
                                             (M<SInt32 *>(self + 0x74),"ATIFEDSInfo",local_34,4);
                                   if ((M<SInt32>(self + 0xcc) == 0) ||
                                      ((M<SInt32>(self + 0xe4) == 0 ||
-                                      (iVar5 = this->initialize_hardware(), iVar5 != 0)))) {
+                                      (hardwareReady = this->initialize_hardware(), hardwareReady != 0)))) {
                                     pcVar14 = M<code *>(M<SInt32>(self) + 0x16c);
                                     uVar6 = VCALL(M<SInt32>(self), 0x5d0)(self);
                                     (*pcVar14)(self,"AccelCaps",0,uVar6,0x20);
@@ -489,12 +498,12 @@ LAB_0001fc04:
                                     M<UInt32>(self + 0x9a4) = 0;
                                     uVar6 = VCALL(M<SInt32>(self), 0x188)
                                                       (self,"sensor-properties");
-                                    piVar7 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSArray_metaClass);
-                                    if (piVar7 != (SInt32 *)0x0) {
+                                    sensorArray = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSArray_metaClass);
+                                    if (sensorArray != (SInt32 *)0x0) {
                                       piVar15 = (SInt32 *)0x0;
                                       index = 0;
                                       while( true ) {
-                                        uVar6 = VCALL(*piVar7, 0x138)(piVar7,index);
+                                        uVar6 = VCALL(*sensorArray, 0x138)(sensorArray,index);
                                         iVar9 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar6,GH_OSDictionary_metaClass);
                                         if (iVar9 == 0) break;
                                         piVar10 = (SInt32 *)GH_ZN8OSObjectnwEm(0x50);
@@ -510,9 +519,9 @@ LAB_0001fc04:
                                         index = index + 1;
                                       }
                                       if ((piVar15 != (SInt32 *)0x0) &&
-                                         (iVar5 = VCALL(*piVar15, 0x1d8)
+                                         (attached = VCALL(*piVar15, 0x1d8)
                                                             (piVar15,self,GH_gIOServicePlane),
-                                         iVar5 != 0)) {
+                                         attached != 0)) {
                                         M<SInt32 *>(self + 0x9a4) = piVar15;
                                         VCALL(*piVar15, 0x340)(piVar15,0);
                                       }
@@ -520,12 +529,12 @@ LAB_0001fc04:
                                     if (M<SInt32>(self + 0x9a4) != 0) {
                                       M<UInt32>(self + 0x994) = 0;
                                       M<UInt32>(self + 0x998) = 0;
-                                      iVar5 = GH_ZN18IOTimerEventSource16timerEventSourceEP8OSObjectPFvS1_PS_(self,GPUSensorFunc);
-                                      M<SInt32>(self + 0x9a8) = iVar5;
-                                      if (iVar5 != 0) {
-                                        iVar5 = VCALL(*M<SInt32 *>(self + 0xb4), 0xe4)
-                                                          (M<SInt32 *>(self + 0xb4),iVar5);
-                                        if (iVar5 == 0) {
+                                      gpuSensorTimer = GH_ZN18IOTimerEventSource16timerEventSourceEP8OSObjectPFvS1_PS_(self,GPUSensorFunc);
+                                      M<SInt32>(self + 0x9a8) = gpuSensorTimer;
+                                      if (gpuSensorTimer != 0) {
+                                        addResult = VCALL(*M<SInt32 *>(self + 0xb4), 0xe4)
+                                                          (M<SInt32 *>(self + 0xb4),gpuSensorTimer);
+                                        if (addResult == 0) {
                                           period = (SInt32 *)this->getPeriodValue("polling-period");
                                           if (period != (SInt32 *)0x0) {
                                             M<UInt32>(self + 0x994) =
@@ -579,11 +588,11 @@ LAB_0001f9c0:
   M<UInt32>(self + 0x9ac) = uVar8;
   return uVar6;
 LAB_0001fd88:
-  while (iVar9 = iVar5 + -2, -1 < iVar9) {
-    VCALL(M<SInt32>(self), 0x598)(self,iVar5 + -1 << (GH_page_shift & 0x3f));
+  while (iVar9 = pageIndex + -2, -1 < iVar9) {
+    VCALL(M<SInt32>(self), 0x598)(self,pageIndex + -1 << (GH_page_shift & 0x3f));
     VCALL(M<SInt32>(self), 0x5a4)
               (self,M<UInt32>(self + 0x22c),iVar9 << (GH_page_shift & 0x3f));
-    iVar5 = iVar9;
+    pageIndex = iVar9;
   }
   goto LAB_0001f9a0;
 }

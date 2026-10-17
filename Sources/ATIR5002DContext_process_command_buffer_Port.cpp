@@ -48,8 +48,8 @@ IOReturn ATIR5002DContext::process_command_buffer(VendorCommandDescriptor *descr
   UInt32 result;
   SInt32 streamOffset;
   UInt32 pendingWords;
-  UInt32 uVar16;
-  UInt32 uVar17;
+  UInt32 submitWords;
+  UInt32 header;
   UInt32 *recordCursor;
   UInt8 *bindTexture;
   
@@ -58,8 +58,8 @@ IOReturn ATIR5002DContext::process_command_buffer(VendorCommandDescriptor *descr
   pendingWords = 0xffffffff;
   recordCursor = (UInt32 *)(M<SInt32>(self + 0xac) + 0x1c);
   do {
-    uVar17 = *recordCursor;
-    uVar6 = uVar17 & 0xff000000;
+    header = *recordCursor;
+    uVar6 = header & 0xff000000;
     if (uVar6 == 0xa000000) {
 LAB_00032d30:
       uVar7 = recordCursor[1];
@@ -88,7 +88,7 @@ LAB_00032ef4:
         uVar7 = 0;
       }
       recordCursor[5] = uVar7 | uVar6 >> 10 | (uVar3 & 0x3fc0) << 0x10 | (bVar1 & 1) << 0x1e;
-      uVar17 = uVar17 & 0xffffff;
+      header = header & 0xffffff;
     }
     else if (uVar6 < 0xa000001) {
       if (uVar6 == 0x5000000) {
@@ -112,9 +112,9 @@ LAB_00032ef4:
                         (recordCursor[1] * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
              texture == (UInt8 *)0x0)) goto LAB_00033420;
           if (M<char>(M<SInt32>(texture + 0x14) + 0x14) != '\0') {
-            uVar16 = pendingWords;
+            submitWords = pendingWords;
             if (pendingWords != 0) {
-              uVar16 = 0;
+              submitWords = 0;
               M<UInt32>(M<SInt32>(self + 0x94) + 0x700) =
                    pendingWords * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
               iVar12 = streamOffset + M<SInt32>(self + 0xac);
@@ -125,7 +125,7 @@ LAB_00032ef4:
               M<UInt32>(self + 0xa8) = stamp;
             }
             this->alloc_and_load_image((VendorTextureBuffer *)(texture));
-            pendingWords = uVar16;
+            pendingWords = submitWords;
             if (M<SInt32>(self + 0x9c) == 0) {
               ((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)));
             }
@@ -158,14 +158,14 @@ LAB_00032ef4:
             recordCursor[1] = 0x575;
             recordCursor[5] = uVar7 >> 10 | (recordCursor[5] & 0x3fc0) << 0x10;
           }
-          uVar17 = uVar17 & 0xffffff;
+          header = header & 0xffffff;
           M<UInt8 *>(self + 0x114) = texture;
         }
         else {
           if (uVar6 != 0x2000000) goto LAB_00032f54;
           *recordCursor = 0x80000000;
           result = 1;
-          uVar17 = uVar17 & 0xffffff;
+          header = header & 0xffffff;
         }
         goto LAB_00033430;
       }
@@ -193,9 +193,9 @@ LAB_00032a78:
           }
         }
         else {
-          uVar16 = pendingWords;
+          submitWords = pendingWords;
           if (pendingWords != 0) {
-            uVar16 = 0;
+            submitWords = 0;
             M<UInt32>(M<SInt32>(self + 0x94) + 0x700) =
                  pendingWords * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
             iVar12 = streamOffset + M<SInt32>(self + 0xac);
@@ -206,7 +206,7 @@ LAB_00032a78:
             M<UInt32>(self + 0xa8) = stamp;
           }
           this->alloc_and_load_image((VendorTextureBuffer *)(bindTexture));
-          pendingWords = uVar16;
+          pendingWords = submitWords;
           if (M<SInt32>(self + 0x9c) == 0) {
             ((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)));
           }
@@ -253,7 +253,7 @@ LAB_00032a78:
                        uVar6 & 3 | uVar7 & 0xffffffe0 | M<UInt8>(iVar11 + 0x15) & 4;
         }
 LAB_00033400:
-        uVar17 = uVar17 & 0xffffff;
+        header = header & 0xffffff;
         M<UInt8 *>(self + 0x114) = bindTexture;
         if (bindTexture != (UInt8 *)0x0) {
           M<UInt32>(M<SInt32>(bindTexture + 0x14) + 8) = M<UInt32>(iVar12 + 0x50);
@@ -270,7 +270,7 @@ LAB_00033400:
             recordCursor[5] = 0x80000000;
             recordCursor[6] = 0x80000000;
             recordCursor[7] = 0x80000000;
-            uVar17 = uVar17 & 0xffffff;
+            header = header & 0xffffff;
             goto LAB_00033430;
           }
         }
@@ -279,7 +279,7 @@ LAB_00033400:
           if (uVar6 == 0x9000000) goto LAB_00032d30;
         }
 LAB_00032f54:
-        uVar17 = uVar17 & 0xffffff;
+        header = header & 0xffffff;
       }
     }
     else {
@@ -301,11 +301,11 @@ LAB_00032ea0:
         }
         surface = (UInt8 *)
                   ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0x94)))->find_surface_for_id(recordCursor[1]);
-        uVar16 = pendingWords;
+        submitWords = pendingWords;
         if (surface == (UInt8 *)0x0) {
 LAB_00032e64:
           iVar12 = M<SInt32>(self + 0x94) + 300;
-          pendingWords = uVar16;
+          pendingWords = submitWords;
         }
         else {
           uVar7 = M<UInt32>(surface + 0xbf8);
@@ -313,7 +313,7 @@ LAB_00032e64:
             uVar8 = M<UInt32>(surface + 0xc18);
             if ((uVar7 & uVar8 & 3) != 0) {
               if (pendingWords != 0) {
-                uVar16 = 0;
+                submitWords = 0;
                 M<UInt32>(M<SInt32>(self + 0x94) + 0x700) =
                      pendingWords * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
                 iVar12 = streamOffset + M<SInt32>(self + 0xac);
@@ -340,7 +340,7 @@ LAB_00032e64:
               }
             }
             iVar12 = M<SInt32>(surface + 0xb70);
-            pendingWords = uVar16;
+            pendingWords = submitWords;
             if (M<SInt32>(iVar12 + 8) == 0) goto LAB_00032e64;
           }
           else {
@@ -413,9 +413,9 @@ LAB_0003323c:
           }
         }
         else {
-          uVar16 = pendingWords;
+          submitWords = pendingWords;
           if (pendingWords != 0) {
-            uVar16 = 0;
+            submitWords = 0;
             M<UInt32>(M<SInt32>(self + 0x94) + 0x700) =
                  pendingWords * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
             iVar12 = streamOffset + M<SInt32>(self + 0xac);
@@ -426,7 +426,7 @@ LAB_0003323c:
             M<UInt32>(self + 0xa8) = stamp;
           }
           this->alloc_and_load_image((VendorTextureBuffer *)(bindTexture));
-          pendingWords = uVar16;
+          pendingWords = submitWords;
           if (M<SInt32>(self + 0x9c) == 0) {
             ((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)));
           }
@@ -466,9 +466,9 @@ LAB_0003323c:
           }
         }
         else {
-          uVar16 = pendingWords;
+          submitWords = pendingWords;
           if (pendingWords != 0) {
-            uVar16 = 0;
+            submitWords = 0;
             M<UInt32>(M<SInt32>(self + 0x94) + 0x700) =
                  pendingWords * 4 + M<SInt32>(M<SInt32>(self + 0x94) + 0x700);
             iVar12 = streamOffset + M<SInt32>(self + 0xac);
@@ -479,7 +479,7 @@ LAB_0003323c:
             M<UInt32>(self + 0xa8) = stamp;
           }
           this->alloc_and_load_image((VendorTextureBuffer *)(texture));
-          pendingWords = uVar16;
+          pendingWords = submitWords;
           if (M<SInt32>(self + 0x9c) == 0) {
             ((IOATIR5002DContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0x98)));
           }
@@ -490,7 +490,7 @@ LAB_0003323c:
         recordCursor[3] = -(M<UInt8>(M<SInt32>(texture + 0x14) + 0x15) >> 3 & 3) >> 0xe & 0x20000 |
                      uVar6 & 0x3ffe | (M<UInt8>(M<SInt32>(texture + 0x14) + 0x15) & 4) << 0xe |
                      (uVar7 & 0xf) << 0x15;
-        uVar17 = uVar17 & 0xffffff;
+        header = header & 0xffffff;
         M<UInt8 *>(self + 0x114) = texture;
         if (texture != (UInt8 *)0x0) {
           M<UInt32>(M<SInt32>(texture + 0x14) + 8) =
@@ -500,12 +500,12 @@ LAB_0003323c:
       }
 LAB_00033420:
       pendingWords = 0;
-      uVar17 = 0;
+      header = 0;
     }
 LAB_00033430:
-    pendingWords = pendingWords + uVar17;
-    recordCursor = recordCursor + uVar17;
-    if (uVar17 == 0) {
+    pendingWords = pendingWords + header;
+    recordCursor = recordCursor + header;
+    if (header == 0) {
       if ((pendingWords & 1) != 0) {
         *recordCursor = 0x80000000;
         pendingWords = pendingWords + 1;

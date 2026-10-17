@@ -37,7 +37,7 @@ UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *surface, V
   bool bVar3;
   bool secondPass;
   SInt32 iVar5;
-  UInt8 *pIVar6;
+  UInt8 *node;
   UInt32 uVar7;
   UInt32 uVar8;
   SInt32 iVar9;
@@ -45,7 +45,7 @@ UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *surface, V
   UInt8 *pIVar11;
   UInt8 bVar12;
   UInt8 bVar13;
-  long lVar14;
+  long excludeLeft;
   UInt32 uVar15;
   
   if (((M<SInt32>(self + 0x21c) == 0) ||
@@ -57,28 +57,28 @@ LAB_00004450:
     if (iVar5 == 0) {
       M<SInt32>(self + 0x7cc) = M<SInt32>(self + 0x7cc) + 1;
       if (surfaceBytes == (UInt8 *)0x0) {
-        pIVar6 = M<UInt8 *>(self + 0x604);
+        node = M<UInt8 *>(self + 0x604);
       }
       else {
-        pIVar6 = M<UInt8 *>(self + 0x604);
+        node = M<UInt8 *>(self + 0x604);
         pIVar10 = self + 0x5dc;
-        if ((pIVar6 == pIVar10) ||
-           (M<SInt32>(surfaceBytes + 0x84) - M<SInt32>(M<SInt32>(pIVar6 + 0x14) + 8) < 1)) {
+        if ((node == pIVar10) ||
+           (M<SInt32>(surfaceBytes + 0x84) - M<SInt32>(M<SInt32>(node + 0x14) + 8) < 1)) {
           pIVar11 = M<UInt8 *>(self + 0x600);
           bVar12 = !secondPass << 1;
-          pIVar6 = (UInt8 *)0x0;
+          node = (UInt8 *)0x0;
           bVar3 = pIVar11 == pIVar10;
 LAB_00004294:
-          if ((!bVar3) && (bVar13 = (pIVar11 == pIVar6) << 1, pIVar11 != pIVar6)) {
+          if ((!bVar3) && (bVar13 = (pIVar11 == node) << 1, pIVar11 != node)) {
             M<SInt32>(self + 0x7e4) = M<SInt32>(self + 0x7e4) + 1;
             if (excludeCount < 1) goto code_r0x00004264;
             if (pIVar11 != (UInt8 *)*excludeList) {
               iVar5 = 0;
-              lVar14 = excludeCount;
+              excludeLeft = excludeCount;
               do {
                 iVar5 = iVar5 + 1;
-                lVar14 = lVar14 + -1;
-                if (lVar14 == 0) goto LAB_000042b8;
+                excludeLeft = excludeLeft + -1;
+                if (excludeLeft == 0) goto LAB_000042b8;
               } while ((UInt8 *)excludeList[iVar5] != pIVar11);
             }
             M<SInt32>(self + 0x7e8) = M<SInt32>(self + 0x7e8) + 1;
@@ -92,14 +92,14 @@ LAB_00004294:
       pIVar10 = (UInt8 *)0x0;
 LAB_00004040:
       do {
-        if ((pIVar6 == pIVar11) || (bVar13 = (pIVar10 == pIVar6) << 1, pIVar10 == pIVar6))
+        if ((node == pIVar11) || (bVar13 = (pIVar10 == node) << 1, pIVar10 == node))
         goto LAB_00004448;
         M<SInt32>(self + 2000) = M<SInt32>(self + 2000) + 1;
         if (excludeCount < 1) {
           if (excludeCount == 0) {
 LAB_000040b8:
             if ((bool)(bVar12 >> 1 & 1)) {
-              iVar5 = M<SInt32>(pIVar6 + 0x14);
+              iVar5 = M<SInt32>(node + 0x14);
               if ((iVar5 == 0) || (uVar7 = (UInt32)M<UInt8>(iVar5 + 0x34), uVar7 == 0))
               goto LAB_00004124;
               if ((M<UInt16>(iVar5 + 0x28) & ~M<UInt16>(iVar5 + 0x1c)) == 0) {
@@ -124,60 +124,60 @@ LAB_000040b8:
               M<SInt32>(self + 0x7d8) = M<SInt32>(self + 0x7d8) + 1;
             }
             else {
-              iVar5 = M<SInt32>(pIVar6 + 0x14);
+              iVar5 = M<SInt32>(node + 0x14);
 LAB_00004124:
               iVar5 = VCALL(M<SInt32>(self), 0x554)(self,M<UInt32>(iVar5 + 0xc));
               if (iVar5 != 0) {
-                if (M<SInt32>(pIVar6 + 0x48) != 0) {
-                  VCALL(M<SInt32>(self), 0x524)(self,pIVar6);
-                  M<UInt8>(M<SInt32>(pIVar6 + 0x14) + 0x14) = 1;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x28) = 0;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2a) = 0;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2c) = 0;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x2e) = 0;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x30) = 0;
-                  M<UInt16>(M<SInt32>(pIVar6 + 0x14) + 0x32) = 0;
+                if (M<SInt32>(node + 0x48) != 0) {
+                  VCALL(M<SInt32>(self), 0x524)(self,node);
+                  M<UInt8>(M<SInt32>(node + 0x14) + 0x14) = 1;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x28) = 0;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x2a) = 0;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x2c) = 0;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x2e) = 0;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x30) = 0;
+                  M<UInt16>(M<SInt32>(node + 0x14) + 0x32) = 0;
                 }
-                iVar9 = M<SInt32>(pIVar6 + 0x24);
-                M<UInt32>(iVar9 + 0x28) = M<UInt32>(pIVar6 + 0x28);
-                iVar5 = M<SInt32>(pIVar6 + 0x28);
-                M<UInt8 *>(pIVar6 + 0x28) = pIVar6;
+                iVar9 = M<SInt32>(node + 0x24);
+                M<UInt32>(iVar9 + 0x28) = M<UInt32>(node + 0x28);
+                iVar5 = M<SInt32>(node + 0x28);
+                M<UInt8 *>(node + 0x28) = node;
                 M<SInt32>(iVar5 + 0x24) = iVar9;
-                M<UInt8 *>(pIVar6 + 0x24) = pIVar6;
+                M<UInt8 *>(node + 0x24) = node;
                 M<SInt32>(self + 0x7e0) = M<SInt32>(self + 0x7e0) + 1;
-                if (pIVar11 != pIVar6) goto LAB_00004430;
+                if (pIVar11 != node) goto LAB_00004430;
                 goto LAB_00004448;
               }
               M<SInt32>(self + 0x7dc) = M<SInt32>(self + 0x7dc) + 1;
             }
             if (pIVar10 == (UInt8 *)0x0) {
-              pIVar10 = pIVar6;
+              pIVar10 = node;
             }
-            if (M<SInt32>(pIVar6 + 0x48) != 0) {
-              iVar9 = M<SInt32>(pIVar6 + 0x24);
-              M<UInt32>(iVar9 + 0x28) = M<UInt32>(pIVar6 + 0x28);
-              iVar5 = M<SInt32>(pIVar6 + 0x28);
-              M<UInt8 *>(pIVar6 + 0x28) = pIVar11;
+            if (M<SInt32>(node + 0x48) != 0) {
+              iVar9 = M<SInt32>(node + 0x24);
+              M<UInt32>(iVar9 + 0x28) = M<UInt32>(node + 0x28);
+              iVar5 = M<SInt32>(node + 0x28);
+              M<UInt8 *>(node + 0x28) = pIVar11;
               M<SInt32>(iVar5 + 0x24) = iVar9;
-              M<UInt32>(pIVar6 + 0x24) = M<UInt32>(self + 0x600);
-              M<UInt8 *>(self + 0x600) = pIVar6;
-              M<UInt8 *>(M<SInt32>(pIVar6 + 0x24) + 0x28) = pIVar6;
+              M<UInt32>(node + 0x24) = M<UInt32>(self + 0x600);
+              M<UInt8 *>(self + 0x600) = node;
+              M<UInt8 *>(M<SInt32>(node + 0x24) + 0x28) = node;
             }
-            pIVar6 = M<UInt8 *>(pIVar6 + 0x28);
+            node = M<UInt8 *>(node + 0x28);
           }
           goto LAB_00004040;
         }
-        if ((UInt8 *)*excludeList != pIVar6) {
+        if ((UInt8 *)*excludeList != node) {
           iVar5 = 0;
-          lVar14 = excludeCount;
+          excludeLeft = excludeCount;
           do {
             iVar5 = iVar5 + 1;
-            lVar14 = lVar14 + -1;
-            if (lVar14 == 0) goto LAB_000040b8;
-          } while ((UInt8 *)excludeList[iVar5] != pIVar6);
+            excludeLeft = excludeLeft + -1;
+            if (excludeLeft == 0) goto LAB_000040b8;
+          } while ((UInt8 *)excludeList[iVar5] != node);
         }
         M<SInt32>(self + 0x7d4) = M<SInt32>(self + 0x7d4) + 1;
-        pIVar6 = M<UInt8 *>(pIVar6 + 0x28);
+        node = M<UInt8 *>(node + 0x28);
       } while( true );
     }
 LAB_00004474:
@@ -222,8 +222,8 @@ LAB_00004314:
     if (iVar5 == 0) {
       M<SInt32>(self + 0x7f0) = M<SInt32>(self + 0x7f0) + 1;
 joined_r0x00004360:
-      if (pIVar6 == (UInt8 *)0x0) {
-        pIVar6 = pIVar11;
+      if (node == (UInt8 *)0x0) {
+        node = pIVar11;
       }
       if (M<SInt32>(pIVar11 + 0x48) != 0) {
         iVar9 = M<SInt32>(pIVar11 + 0x24);

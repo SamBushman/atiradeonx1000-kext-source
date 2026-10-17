@@ -77,27 +77,31 @@ void ATIR500Surface::shape_surface() {
   UInt32 bufferCount;
   UInt32 bufferId;
   UInt32 bytesPerPixel;
+  UInt32 windowMode;
+  UInt32 shapeMask;
+  UInt32 alignedHeight;
+  UInt32 overlayHeight;
   
   M<UInt32>(M<SInt32>(self + 0xd50) + 0xb94) = 1;
-  uVar29 = M<UInt32>(self + 0xbe8);
-  if ((uVar29 & 0x70000000) == 0) {
-    uVar28 = M<UInt32>(self + 0xc18);
+  windowMode = M<UInt32>(self + 0xbe8);
+  if ((windowMode & 0x70000000) == 0) {
+    shapeMask = M<UInt32>(self + 0xc18);
   }
   else {
-    uVar29 = uVar29 & 0xff83ffff;
-    M<UInt32>(self + 0xbe8) = uVar29;
-    uVar28 = M<UInt32>(self + 0xc18) & 0xfffffdff;
-    M<UInt32>(self + 0xc18) = uVar28;
+    windowMode = windowMode & 0xff83ffff;
+    M<UInt32>(self + 0xbe8) = windowMode;
+    shapeMask = M<UInt32>(self + 0xc18) & 0xfffffdff;
+    M<UInt32>(self + 0xc18) = shapeMask;
   }
-  if ((uVar29 & 0x7c0000) == 0) {
+  if ((windowMode & 0x7c0000) == 0) {
 LAB_0003c260:
     iVar23 = 1;
     heightScale = 1;
   }
   else {
-    uVar7 = uVar29 & 0x700000;
+    uVar7 = windowMode & 0x700000;
     if (uVar7 == 0) {
-      uVar7 = uVar29 & 0xc0000;
+      uVar7 = windowMode & 0xc0000;
       if (uVar7 == 0) goto LAB_0003c260;
       if (uVar7 == 0x40000) {
         iVar23 = 1;
@@ -132,8 +136,8 @@ LAB_0003c260:
       heightScale = 1;
     }
   }
-  if ((uVar28 & 0x1c0) != 0) {
-    if (((uVar29 & 0x30000) == 0x20000) || ((uVar29 & 0x30000) == 0x30000)) {
+  if ((shapeMask & 0x1c0) != 0) {
+    if (((windowMode & 0x30000) == 0x20000) || ((windowMode & 0x30000) == 0x30000)) {
       AVar12 = 0x29;
       AVar22 = 0x3;
       iVar16 = 0x29;
@@ -159,7 +163,7 @@ LAB_0003c260:
     bufferIds[2] = 8;
     do {
       uVar26 = (UInt32)bufferIds[iVar16];
-      if ((uVar28 >> (uVar26 & 0x3f) & 1) != 0) {
+      if ((shapeMask >> (uVar26 & 0x3f) & 1) != 0) {
         bufferHeightScale = heightScale;
         iVar9 = iVar23;
         if (uVar26 != 6) {
@@ -168,7 +172,7 @@ LAB_0003c260:
         }
         iVar14 = (SInt32)M<SInt16>(self + 0xbd4);
         iVar25 = iVar14;
-        if (((uVar29 & 0x700000) != 0) && (uVar26 == 6)) {
+        if (((windowMode & 0x700000) != 0) && (uVar26 == 6)) {
           iVar25 = iVar14 + 0x18;
         }
         rowBytes = iVar25 * uVar24;
@@ -227,15 +231,15 @@ LAB_0003c260:
                iVar9 << 0x14 | M<UInt32>(self + iVar27 + 0xe4) & 0xff000fff | 0x11000;
         }
         M<UInt32>(self + iVar27 + 0xe4) = M<UInt32>(self + iVar27 + 0xe4) | 0x800;
-        uVar29 = M<UInt32>(self + 0xbe8);
-        uVar28 = M<UInt32>(self + 0xc18);
+        windowMode = M<UInt32>(self + 0xbe8);
+        shapeMask = M<UInt32>(self + 0xc18);
       }
       bVar1 = iVar16 != 2;
       iVar16 = iVar16 + 1;
     } while (bVar1);
   }
-  if ((uVar29 & 0xf) < 0xe) {
-    formatBit = 1 << (uVar29 & 0xf);
+  if ((windowMode & 0xf) < 0xe) {
+    formatBit = 1 << (windowMode & 0xf);
     if ((formatBit & 0x1c18) == 0) {
       if (((formatBit & 0x2000) == 0) ||
          (AVar12 = 0x1, M<SInt16>(self + 0xbd6) < 0x10)) goto LAB_0003c52c;
@@ -248,15 +252,15 @@ LAB_0003c260:
 LAB_0003c52c:
     AVar12 = 0x0;
   }
-  if ((M<SInt32>(self + 0xc14) != 0xffff) && ((uVar28 & 2) != 0)) {
+  if ((M<SInt32>(self + 0xc14) != 0xffff) && ((shapeMask & 2) != 0)) {
     M<UInt8>(M<SInt32>(self + 0xc14) * 0x78 + M<SInt32>(self + 0xd50) + 0x164) = AVar12;
-    uVar28 = M<UInt32>(self + 0xc18);
+    shapeMask = M<UInt32>(self + 0xc18);
   }
   if (M<SInt32>(self + 0x90) == 0) {
-    pendingMask = uVar28 & 0x23f;
+    pendingMask = shapeMask & 0x23f;
   }
   else {
-    pendingMask = uVar28 & 0x7ffc03;
+    pendingMask = shapeMask & 0x7ffc03;
   }
   if (pendingMask == 0) {
     return;
@@ -267,7 +271,7 @@ LAB_0003c52c:
   AVar22 = ((UInt8)(formatEntry >> 10) & 3);
   AVar5 = ((UInt8)(formatEntry >> 3) & 0x1f);
   bytesPerPixel = 1 << (formatEntry >> 0xc & 7);
-  if ((uVar28 & 0x200) != 0) {
+  if ((shapeMask & 0x200) != 0) {
     if (((bytesPerPixel != M<UInt16>(self + 0x4f6)) ||
         ((UInt32)M<UInt16>(self + 0x4fc) != iVar23 * M<SInt16>(self + 0xbd4))) ||
        ((UInt32)M<UInt16>(self + 0x4fe) != heightScale * (SInt32)M<SInt16>(self + 0xbd6))) {
@@ -345,14 +349,14 @@ LAB_0003c52c:
     if ((uVar24 & 0xff) != 0) {
       uVar24 = (uVar24 & 0xffffff00) + 0x100;
     }
-    uVar28 = (UInt32)M<SInt16>(self + 0xbd6);
-    if ((uVar28 & 0x1f) != 0) {
-      uVar28 = (uVar28 - (SInt32)(SInt16)(M<SInt16>(self + 0xbd6) +
-                                     (SInt16)(((SInt32)uVar28 >> 5) +
-                                            (UInt32)((SInt32)uVar28 < 0 && (uVar28 & 0x1f) != 0)) * -0x20
+    alignedHeight = (UInt32)M<SInt16>(self + 0xbd6);
+    if ((alignedHeight & 0x1f) != 0) {
+      alignedHeight = (alignedHeight - (SInt32)(SInt16)(M<SInt16>(self + 0xbd6) +
+                                     (SInt16)(((SInt32)alignedHeight >> 5) +
+                                            (UInt32)((SInt32)alignedHeight < 0 && (alignedHeight & 0x1f) != 0)) * -0x20
                                      )) + 0x20;
     }
-    iVar9 = uVar24 * uVar28;
+    iVar9 = uVar24 * alignedHeight;
     uVar26 = 0;
     uVar7 = 1;
     uVar8 = 1;
@@ -459,7 +463,7 @@ LAB_0003c9d0:
   }
   else {
     iVar23 = (SInt32)M<SInt16>(self + 0x98) - (SInt32)M<SInt16>(self + 0x96);
-    uVar28 = (SInt32)M<SInt16>(self + 0x9a) - (SInt32)M<SInt16>(self + 0x94);
+    overlayHeight = (SInt32)M<SInt16>(self + 0x9a) - (SInt32)M<SInt16>(self + 0x94);
     if (iVar23 == 0) {
       iVar23 = 0x300;
       uVar6 = 0x300;
@@ -467,23 +471,23 @@ LAB_0003c9d0:
     else {
       uVar6 = (UInt16)iVar23;
     }
-    if (uVar28 == 0) {
-      uVar28 = 0x240;
+    if (overlayHeight == 0) {
+      overlayHeight = 0x240;
       uVar19 = 0;
       uVar21 = 0x240;
     }
     else {
-      uVar19 = uVar28 & 0xf;
-      uVar21 = (UInt16)uVar28;
+      uVar19 = overlayHeight & 0xf;
+      uVar21 = (UInt16)overlayHeight;
     }
     uVar24 = iVar23 * bytesPerPixel;
     if ((uVar24 & 0xff) != 0) {
       uVar24 = (uVar24 & 0xffffff00) + 0x100;
     }
     if (uVar19 != 0) {
-      uVar28 = (uVar28 & 0xfffffff0) + 0x10;
+      overlayHeight = (overlayHeight & 0xfffffff0) + 0x10;
     }
-    iVar9 = uVar24 * uVar28;
+    iVar9 = uVar24 * overlayHeight;
     M<UInt16>(self + 0xbe0) = uVar6;
     M<UInt16>(self + 0xbe2) = uVar21;
     self[0xbec] = 0x1;
