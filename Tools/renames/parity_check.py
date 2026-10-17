@@ -67,7 +67,7 @@ def main():
     cand_img = os.path.join(ev, 'cand.bin')
     build('.', cand_img, 'rung3/parity_%s_cand' % a.tag, {})
     bad = []
-    wb, wc = warnings(base_img[:-4] + '.log'), warnings(cand_img[:-4] + '.log')
+    wb, wc = warnings(base_img[:-4] + '.err'), warnings(cand_img[:-4] + '.err')
     for k, n in wc.items():
         if n > wb.get(k, 0): bad.append('NEW uninitialized warning (%d vs %d): %s: %s' % (n, wb.get(k, 0), k[0], k[1]))
     rb, rc = run_cases(base_img, a.filters, a.tag, 'base'), run_cases(cand_img, a.filters, a.tag, 'cand')

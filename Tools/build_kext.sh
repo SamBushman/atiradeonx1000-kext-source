@@ -56,6 +56,7 @@ for f in Sources/*.cpp; do
     g++ $CXXFLAGS -c "$f" -o "$OUT/obj/$b.o" 2>"$OUT/obj/$b.err" || { echo "FAIL $f"; head -5 "$OUT/obj/$b.err"; fail=1; }
 done
 [ $fail -eq 0 ] || exit 1
+cat "$OUT"/obj/*.err > "$OUT/compile.err" 2>/dev/null   # all compiler diagnostics in one file (empty unless WARN enables some)
 
 gcc $COMMON -DKEXT_ID=$KEXT_ID "-DKEXT_VERSION=\"$KEXT_VERSION\"" -c Tools/kmod_info.c -o "$OUT/kmod_info.o"
 g++ -arch ppc -nostdlib -static -r -o "$OUT/ATIRadeonX1000" "$OUT/kmod_info.o" "$OUT"/obj/*.o \
