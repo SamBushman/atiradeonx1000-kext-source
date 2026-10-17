@@ -27,9 +27,9 @@
 
 
 /* real addr 0x4590 */
-SInt32 IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer *real_param_1) {
+SInt32 IOATIR500Accelerator::alloc_surface_buffer(ATIR500SurfaceBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
   return 0;
 }

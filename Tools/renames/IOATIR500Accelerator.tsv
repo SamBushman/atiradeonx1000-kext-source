@@ -1,0 +1,260 @@
+# IOATIR500Accelerator remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+def	IOATIR500Accelerator::foundFramebuffer@0x550	real_param_1	framebuffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::foundFramebuffer@0x550	param_1	framebufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	param_1	target	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	param_2	ref	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	param_3	serializer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeAllCommandBuffers@0x1fd0	param_1	recordIndex	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::mapVendorTransferBuffer@0x4f20	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::mapVendorTransferBuffer@0x4f20	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::unmapVendorTransferBuffer@0x4fe0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::unmapVendorTransferBuffer@0x4fe0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	param_1	mode	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::start@0x2650	param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::stop@0x65c0	param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	real_param_1	memory	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	param_1	memoryBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	param_2	outOffset	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	param_3	minOffset	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	param_4	maxOffset	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::writePerformanceStats@0xac0	real_param_1	dictionary	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::writePerformanceStats@0xac0	param_1	dictionaryBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::addOrphanTexture@0x49c0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addOrphanTexture@0x49c0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::addTransferToGART@0x34b0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::addTransferToGART@0x34b0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::allocCommandBuffer@0x23e0	real_param_1	outBuffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocCommandBuffer@0x23e0	param_1	outBufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::allocCommandBuffer@0x23e0	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocDataBufferBacking@0x30d0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocDataBufferBacking@0x30d0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	param_1	recordIndex	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocOneDataBuffer@0x6960	param_1	sizeClass	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocOneDataBuffer@0x6960	param_2	forWrite	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::allocVendorTextureBuffer@0x4dc0	param_1	size	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::alloc_surface_buffer@0x4590	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::alloc_surface_buffer@0x4590	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::display_change_handler@0x370	real_param_1	owner	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::display_change_handler@0x370	param_1	ownerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::display_change_handler@0x370	param_2	ref	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::display_change_handler@0x370	real_param_3	framebuffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::display_change_handler@0x370	param_3	framebufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::display_change_handler@0x370	param_4	event	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::display_change_handler@0x370	param_5	info	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::find_surface_for_id@0x59e0	param_1	surfaceID	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeCommandBuffer@0x1f10	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeCommandBuffer@0x1f10	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeOneDataBuffer@0x32d0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeOneDataBuffer@0x32d0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	param_1	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	real_param_1	excludeA	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	param_1	excludeABytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	real_param_2	excludeB	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	param_2	excludeBBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	param_3	excludeList	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	param_4	excludeCount	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	real_param_5	needed	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	param_5	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	real_param_1	surface	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	param_1	surfaceBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	param_2	excludeList	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	param_3	excludeCount	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	real_param_4	needed	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	param_4	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	real_param_1	candidate	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	param_1	candidateBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	real_param_2	needed	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	param_2	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	param_4	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_1	exclude2D	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_1	exclude2DBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_2	excludeDVD	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_2	excludeDVDBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_3	excludeGL	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_3	excludeGLBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_4	excludeSurface	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_4	excludeSurfaceBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_5	excludeShared	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_5	excludeSharedBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	real_param_6	needed	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_6	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	param_7	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::getVRAMDescriptor@0x290	param_1	index	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::init_command_buffer_header@0x2350	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::init_command_buffer_header@0x2350	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::init_command_buffer_header@0x2350	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::newUserClient@0x2070	real_param_1	owningTask	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::newUserClient@0x2070	param_1	owningTaskBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::newUserClient@0x2070	param_2	securityID	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::newUserClient@0x2070	param_3	type	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::newUserClient@0x2070	param_4	handler	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::pageOffDataBuffer@0x3140	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::pageOffDataBuffer@0x3140	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::releaseVendorTextureBuffer@0x4ec0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::releaseVendorTextureBuffer@0x4ec0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::releaseVendorTextureBuffer@0x4ec0	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::removeFromGART@0x5270	param_1	descriptor	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::removeFromGART@0x5270	param_2	gartOffset	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::removeTransferFromGART@0x34f0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::removeTransferFromGART@0x34f0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	real_param_1	excludeSurface	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	param_1	excludeSurfaceBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	param_2	excludeList	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	param_3	excludeCount	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	real_param_4	needed	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	param_4	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	param_5	skipExcludeCheck	INFERRED	name from the class header declaration
+def	IOATIR500Accelerator::start@0x2650	bVar1	notLastIteration	INFERRED	loop-continue flag `iVar3 != 1` of both two-iteration init loops (one pass per panel)
+def	IOATIR500Accelerator::start@0x2650	this_00	memoryManager	CONFIRMED	`new ATIR500Memory()`, stored at this+0x7c and used only as that object
+def	IOATIR500Accelerator::start@0x2650	puVar7	agpCommandValue	CONFIRMED	getBytesNoCopy() of the "IOAGPCommandValue" OSData; bit 0x10 is tested
+def	IOATIR500Accelerator::start@0x2650	pIVar9	buffersPerPanelCursor	INFERRED	walks this+0x114+panel*4 (the per-panel buffer counts set to 1)
+def	IOATIR500Accelerator::start@0x2650	iVar13	entriesLeft	INFERRED	inner down-counter of 0x10 per-context records
+def	IOATIR500Accelerator::configureAGP@0x5b80	local_28	sysctlLength	CONFIRMED	in/out length of sysctlbyname("hw.memsize")
+def	IOATIR500Accelerator::configureAGP@0x5b80	local_24	gartBytes	CONFIRMED	GART size in bytes (this+0x830 pages << 10), in/out of the provider's vtable +0x5dc call
+def	IOATIR500Accelerator::configureAGP@0x5b80	piVar4	agpFlagsNumber	CONFIRMED	the "IOAGPFlags" property cast to OSNumber
+def	IOATIR500Accelerator::configureAGP@0x5b80	uVar6	totalPages	INFERRED	hw.memsize >> 12 as a page count; compared with 0x8000/0x20001 to size the GART
+def	IOATIR500Accelerator::configureAGP@0x5b80	iVar1	byteOffset	INFERRED	uVar5*4, the byte offset of the GART entry being filled
+def	IOATIR500Accelerator::stop@0x65c0	bVar1	notLastRecord	INFERRED	loop-continue flag `uVar8 != 1` of the two-iteration freeAllCommandBuffers loop
+def	IOATIR500Accelerator::stop@0x65c0	uVar8	recordIndex	CONFIRMED	passed as freeAllCommandBuffers's recordIndex argument
+def	IOATIR500Accelerator::stop@0x65c0	uVar7	panelIndex	INFERRED	counts the per-panel 0x20-byte records up to this+0xcc (the panel count)
+def	IOATIR500Accelerator::stop@0x65c0	pIVar9	panelRecordCursor	INFERRED	steps 0x20 bytes per panel through the objects at +0xd8/+0xdc/+0xe0 that are released
+def	IOATIR500Accelerator::stop@0x65c0	pIVar6	texvert	CONFIRMED	each node of the list at this+0x664 is unlinked and passed to FreeTexvert
+def	IOATIR500Accelerator::stop@0x65c0	iVar5	prevNode	CONFIRMED	node->+0x24 (previous link) in the list unlink
+def	IOATIR500Accelerator::stop@0x65c0	iVar3	nextNode	CONFIRMED	node->+0x28 (next link) in the list unlink
+def	IOATIR500Accelerator::stop@0x65c0	piVar4	commandBufferMemory	INFERRED	this+0x22c, the memory descriptor of the kernel command buffer (+0x224)
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	uVar3	pageCount	CONFIRMED	memory length (vtable +0x128) >> page_shift: pages to map
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	uVar7	firstEntry	INFERRED	GART table index where the free run starts (minOffset >> page_shift, advanced while searching)
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	uVar8	freeRun	CONFIRMED	number of consecutive free (unmapped) GART entries found so far; compared with pageCount
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	uVar5	physAddress	INFERRED	getPhysicalSegment result (vtable +0x13c), written byte-swapped into the GART entry
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	uVar4	result	CONFIRMED	the function's return value
+def	IOATIR500Accelerator::addToMinMaxGART@0x5fe0	local_48	segmentLength	INFERRED	length out-parameter of getPhysicalSegment (its first word is used)
+def	IOATIR500Accelerator::writePerformanceStats@0xac0	piVar1	number	CONFIRMED	OSNumber::withNumber result added to the dictionary and released
+def	IOATIR500Accelerator::foundFramebuffer@0x550	uVar3	knownCount	CONFIRMED	this+0xcc: the number of framebuffers already recorded, also the slot index of the new one
+def	IOATIR500Accelerator::foundFramebuffer@0x550	iVar8	index	CONFIRMED	this+0xcc re-read as the slot index passed to addFramebufferNotification and used for +0xd8
+def	IOATIR500Accelerator::foundFramebuffer@0x550	pIVar2	knownFramebuffer	INFERRED	the framebuffer stored in a slot (+0xd4), compared with the new one
+def	IOATIR500Accelerator::foundFramebuffer@0x550	pIVar6	slotCursor	INFERRED	steps 0x20 bytes per recorded slot
+def	IOATIR500Accelerator::foundFramebuffer@0x550	pcVar7	setProperty	CONFIRMED	framebuffer vtable +0x160 called as (fb, "IOCFPlugInTypes", value); the same slot start() uses with ("PerformanceStatistics", obj)
+def	IOATIR500Accelerator::foundFramebuffer@0x550	local_138	pathLength	INFERRED	in/out size (0x100) of the buffer passed to vtable +0x218 with the service plane
+def	IOATIR500Accelerator::foundFramebuffer@0x550	auStack_134	path	INFERRED	288-byte buffer filled by vtable +0x218 and published as "IOAccelTypes"
+def	IOATIR500Accelerator::findFramebuffers@0x770	piVar1	iterator	CONFIRMED	both values are registry iterators (vtable 0xd8 = getNextObject, 0x18 = release)
+def	IOATIR500Accelerator::findFramebuffers@0x770	piVar2	framebufferClassName	CONFIRMED	OSSymbol::withCString("IOFramebuffer")
+def	IOATIR500Accelerator::findFramebuffers@0x770	pIVar4	framebuffer	CONFIRMED	safeMetaCast to IOFramebuffer, passed to foundFramebuffer
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	piVar1	accelerator	CONFIRMED	target cast to IOATIR500Accelerator
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	piVar2	statsDictionary	CONFIRMED	OSDictionary::withCapacity(1) filled by writePerformanceStats and serialized
+def	IOATIR500Accelerator::serializePerformanceStats@0x9f0	uVar3	result	CONFIRMED	the return value (serialize result)
+def	IOATIR500Accelerator::freeAllCommandBuffers@0x1fd0	iVar1	recordOffset	CONFIRMED	recordIndex * 0x1c4: byte offset of the per-record command-buffer table
+def	IOATIR500Accelerator::freeAllCommandBuffers@0x1fd0	iVar2	bufferIndex	CONFIRMED	counts up to the record's buffer count (+0x402)
+def	IOATIR500Accelerator::freeAllCommandBuffers@0x1fd0	pIVar3	commandBuffer	CONFIRMED	each 0x1c-byte entry is passed to freeCommandBuffer
+def	IOATIR500Accelerator::freeAllDataBuffers@0x3410	pVVar1	dataBuffer	CONFIRMED	each node of the list at this+0x5cc is passed to freeOneDataBuffer
+def	IOATIR500Accelerator::freeAllDataBuffers@0x3410	pVVar2	nextBuffer	CONFIRMED	the node's +0x3c link, read before the node is freed
+def	IOATIR500Accelerator::teardownAGP@0x5090	iVar1	pageSize	CONFIRMED	a copy of page_size used in the GART-size arithmetic
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	this_00	surface	CONFIRMED	each node of the surface list at this+0x5c; reset_access() is called on it
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	uVar3	panelCount	CONFIRMED	this+0xcc, the number of panels
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	uVar4	panelIndex	INFERRED	index tested against the active-panel mask at this+0xd0
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	pIVar2	panelRecord	CONFIRMED	surface + panelIndex*0x94: the byte at +0xcac is the PanelRecord's `active` flag
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	uVar5	panel	INFERRED	index of the per-panel arrays (+0x114 buffer counts, +0x124 stereo request) in the second loop
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	pIVar7	perPanelCursor	INFERRED	this + panel*4, the per-panel word arrays
+def	IOATIR500Accelerator::disp_mode_did_change@0x5710	uVar1	panelSurface	INFERRED	the surface at the panel's +0xe8 slot, on which alloc_surfaces is called
+def	IOATIR500Accelerator::teardown3D@0x5890	uVar1	panelCount	CONFIRMED	this+0xcc, the number of panels
+def	IOATIR500Accelerator::teardown3D@0x5890	uVar2	panel	INFERRED	index of the per-panel word arrays, passed to setup_stereo
+def	IOATIR500Accelerator::teardown3D@0x5890	pIVar3	perPanelCursor	INFERRED	this + panel*4
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	bVar1	notLastBuffer	INFERRED	loop-continue flag `iVar2 != 0x16` over the surface's 23 buffers
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	uVar5	panel	INFERRED	index of the per-panel arrays, passed to setup_stereo
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	pIVar8	perPanelCursor	INFERRED	this + panel*4
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	pIVar4	texvert	CONFIRMED	each node of the list at this+0x664 is unlinked and passed to FreeTexvert
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	iVar3	prevNode	CONFIRMED	node->+0x24 (previous link) in the list unlinks
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	this_00	surface	CONFIRMED	each node of the surface list at this+0x5c
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	pAVar7	surfaceBuffer	CONFIRMED	surface+0xa8 stepped by 0x78: the surface's ATIR500SurfaceBuffer array (comment #176)
+def	IOATIR500Accelerator::disp_mode_will_change@0x6ad0	pIVar9	bufferSlot	INFERRED	surface + i*0x78, tested at +0xb0 (the buffer's backing flag)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	this_00	context2D	CONFIRMED	each node of the 2D-context list at this+0x64 (cast to IOATIR5002DContext)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	this_01	contextDVD	CONFIRMED	each node of the DVD-context list at this+0x68 (cast to IOATIR500DVDContext)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	this_02	contextGL	CONFIRMED	each node of the GL-context list at this+0x60 (cast to IOATIR500GLContext)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	this_03	surface	CONFIRMED	each node of the surface list at this+0x5c (cast to IOATIR500Surface)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	pIVar4	shared	CONFIRMED	the context's IOATIR500Shared (+0x88 / +0x84), freeToAllocGART is called on it
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	pIVar2	surfaceListHead	CONFIRMED	this+0x5c, the head of the surface list
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	pVVar7	dataBuffer	CONFIRMED	each node of the data-buffer list at this+0x5cc (+0x3c is the next link)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	uVar1	ringEntryCount	INFERRED	u16 entry count (power of two: used as a mask) of a command-buffer ring (+0x5c6 / +0x402)
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	uVar5	ringIndex	INFERRED	read position in that ring, masked with ringEntryCount-1
+def	IOATIR500Accelerator::freeWaitToAllocGART@0x37f0	uVar6	visited	INFERRED	number of ring entries examined
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	bVar3	secondPass	CONFIRMED	false on the first pass, set once the surface buffers have been tried; a failure on the second pass returns 0
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	bVar13	excludeAIsNull	INFERRED	bit 1 holds (excludeA == NULL): the call goes to this (vtable +0x56c) instead of excludeA (+0x5d0)
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	pIVar12	texture	CONFIRMED	each node of the texture list at this+0x604, compared with the entries of excludeList
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	pIVar9	surfaceListHead	CONFIRMED	this+0x5c, the head of the surface list
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	this_00	surface	CONFIRMED	each node of the surface list (+0xa0 next link), skipped when it is excludeA/excludeB
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	pAVar11	surfaceBuffer	CONFIRMED	surface+0xa8 stepped by 0x78: the surface's ATIR500SurfaceBuffer array
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	pVVar4	excludedTexture	CONFIRMED	an entry of excludeList
+def	IOATIR500Accelerator::freeToAllocSurfaceVRAM@0x45a0	ppVVar7	excludeCursor	CONFIRMED	walks excludeList
+def	IOATIR500Accelerator::freeToAllocTextureVRAM@0x3f60	bVar4	secondPass	INFERRED	false on the first pass over the texture list, true once the second pass has been requested
+decl	IOATIR500Accelerator::setup_stereo	param1	panel	INFERRED	indexes the per-panel word arrays (+0x114/+0x11c/+0x124) and the per-panel 0x78-byte stereo buffer
+decl	IOATIR500Accelerator::setup_stereo	param2	stereoMode	INFERRED	bit 0 enables the second-eye buffer, bit 1 selects the stereo display mode (passed to vtable +0x5cc)
+def	IOATIR500Accelerator::setup_stereo@0x5460	param_1	panel	INFERRED	indexes the per-panel word arrays (+0x114/+0x11c/+0x124) and the per-panel 0x78-byte stereo buffer
+def	IOATIR500Accelerator::setup_stereo@0x5460	param_2	stereoMode	INFERRED	bit 0 enables the second-eye buffer, bit 1 selects the stereo display mode
+def	IOATIR500Accelerator::setup_stereo@0x5460	iVar1	panelOffset	CONFIRMED	panel * 4, the byte offset into the per-panel word arrays
+def	IOATIR500Accelerator::setup_stereo@0x5460	iVar2	oldBufferCount	CONFIRMED	this+0x114+panel*4 as read on entry, compared with its final value to decide whether to reallocate swap buffers
+def	IOATIR500Accelerator::setup_stereo@0x5460	iVar3	result	CONFIRMED	the function's return value (an IOReturn)
+def	IOATIR500Accelerator::setup_stereo@0x5460	this_00	surface	CONFIRMED	each node of the surface list at this+0x5c (IOATIR500Surface)
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	uVar1	oldCount16	CONFIRMED	the record's u16 buffer count (+0x402) as read on entry
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	uVar6	currentCount	CONFIRMED	oldCount16 widened
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	uVar4	newCount	CONFIRMED	the count after doubling (1 if there were none)
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	iVar5	recordOffset	CONFIRMED	recordIndex * 0x1c4
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	uVar7	bufferIndex	CONFIRMED	index of the buffer being allocated
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	pVVar8	commandBuffer	CONFIRMED	the 0x1c-byte entry passed to allocCommandBuffer
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	pIVar9	allocatedBuffer	CONFIRMED	entries passed to freeCommandBuffer when the allocation fails part-way
+def	IOATIR500Accelerator::allocMoreCommandBuffers@0x24a0	uVar3	result	CONFIRMED	the return value
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	pIVar6	transfer	CONFIRMED	each node of the GART garbage list at this+0x6d4 (the panic strings call it a transfer buffer)
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	pIVar5	listHead	CONFIRMED	this+0x69c, the list sentinel
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	IVar1	bufferType	INFERRED	byte at transfer+0x20: 3/7 and 2/4/5 select which header word is the key
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	bVar2	blockedOnce	CONFIRMED	set after the first buffer is freed; thread_block(0) is called before each later one
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	local_38	cutoffSeconds	INFERRED	IOGetTime seconds minus the reclaim timeout (this+0x90); compared with the buffer's timestamp (+0x2c)
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	local_34	cutoffNanos	INFERRED	IOGetTime nanoseconds minus this+0x94; compared with the buffer's timestamp (+0x30)
+decl	IOATIR500Accelerator::freeTransferToAllocGART	arg	stamp	CONFIRMED	passed to waitForTimeStamp (vtable +0x54c) / the stamp-complete test (+0x554) - see the #155 comment in the body
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	param_3	stamp	CONFIRMED	passed to waitForTimeStamp (vtable +0x54c) / the stamp-complete test (+0x554) - see the #155 comment in the body
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	iVar3	waitStat	CONFIRMED	this+0x790 as read before the wait; the wait's return value is added to it
+def	IOATIR500Accelerator::freeTransferToAllocGART@0x3580	uVar2	result	CONFIRMED	the return value
+def	IOATIR500Accelerator::free_gart_wirings@0x4a90	uVar4	stamp	INFERRED	the time stamp read from the transfer's header (word +0xc or +0x8 by type), passed to the stamp-complete test (vtable +0x554)
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	uVar4	stamp	CONFIRMED	the time stamp read from the texture's header, passed to the stamp-complete test and to waitForTimeStamp (see the #155 comment)
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	IVar1	bufferType	INFERRED	byte at texture+0x20: 3/7 and 4/5 select which header word is the stamp
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	bVar2	blockedOnce	CONFIRMED	set after the first texture is freed; thread_block(0) is called before each later one
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	bVar7	notAggressive	INFERRED	bit 1 holds (aggressive == 0): pick the poll (+0x554) over the wait (+0x54c)
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	pIVar6	texvert	CONFIRMED	each node of the list at this+0x664, passed to IOATIR500Shared::free_texvert
+def	IOATIR500Accelerator::freeOrphanTexture@0x3680	iVar5	waitStat	CONFIRMED	this+0x790 as read before the wait; the wait's return value is added to it
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	bVar1	notLastBuffer	INFERRED	loop-continue flag `uVar6 != 0x16` over a surface's 23 buffers
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	pVVar2	excludedTexture	CONFIRMED	an entry of excludeList
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	ppVVar4	excludeCursor	CONFIRMED	walks excludeList
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	lVar9	excludeLeft	CONFIRMED	entries of excludeList left to examine
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	pIVar5	surfaceListHead	CONFIRMED	this+0x5c, the head of the surface list
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	this_00	surface	CONFIRMED	each node of the surface list (+0xa0 next link)
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	pAVar7	surfaceBuffer	CONFIRMED	surface+0xa8 stepped by 0x78: the surface's ATIR500SurfaceBuffer array
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	uVar6	bufferIndex	CONFIRMED	index of the surface buffer (passed to vtable +0x5cc)
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	uVar3	result	CONFIRMED	the return value
+def	IOATIR500Accelerator::tossSurfacesForVRAM@0x3d60	bVar8	excludeFlags	INFERRED	bit 2 = excludeCount > 0, bit 1 = excludeCount == 0
+def	IOATIR500Accelerator::removeFromGART@0x5270	uVar4	entry	CONFIRMED	GART table index: gartOffset >> page_shift, then the loop counter
+def	IOATIR500Accelerator::removeFromGART@0x5270	uVar1	endEntry	CONFIRMED	first entry + pages in the descriptor
+def	IOATIR500Accelerator::removeFromGART@0x5270	iVar2	tableOffset	CONFIRMED	entry * 4, the byte offset of the GART entry being reset
+def	IOATIR500Accelerator::newUserClient@0x2070	pcVar1	factory	INFERRED	vtable function (+0x5e0 GL / +0x5d8 2D) called with this to create the user client for the type
+def	IOATIR500Accelerator::newUserClient@0x2070	pIVar2	client	CONFIRMED	the new user client: task stored at +0x78, initialised, attached, started, returned through handler
+def	IOATIR500Accelerator::newUserClient@0x2070	piVar4	properties	CONFIRMED	OSDictionary::withCapacity(1) holding "IOUserClientCrossEndianCompatible", passed to initWithTask-style vtable +0x150
+def	IOATIR500Accelerator::newUserClient@0x2070	bVar5	noProperties	INFERRED	bit 1 holds (properties == NULL): the dictionary is released only when it exists
+def	IOATIR500Accelerator::allocOneDataBuffer@0x6960	pVVar1	dataBuffer	CONFIRMED	the 0xc0-byte buffer record allocated, filled in and returned
+def	IOATIR500Accelerator::allocOneDataBuffer@0x6960	iVar3	prevNode	CONFIRMED	buffer->+0x24 (previous link) in the list unlink
+def	IOATIR500Accelerator::pageOffDataBuffer@0x3140	uVar4	wordIndex	INFERRED	counts the 32-bit words copied (buffer size >> 2)
+def	IOATIR500Accelerator::find_surface_for_id@0x59e0	iVar2	head	CONFIRMED	this+0x5c, the head of the surface list
+def	IOATIR500Accelerator::find_surface_for_id@0x59e0	iVar3	surface	CONFIRMED	the surface being examined (its +0xa4 is compared with surfaceID)
+def	IOATIR500Accelerator::find_surface_for_id@0x59e0	piVar1	nextLink	CONFIRMED	surface+0x9c, the next link
+def	IOATIR500Accelerator::init_command_buffer_header@0x2350	iVar1	byteOffset	INFERRED	offset into the 8-word header being zeroed
+def	IOATIR500Accelerator::init_command_buffer_header@0x2350	iVar2	wordsLeft	INFERRED	down-counter of the 8 header words
+def	IOATIR500Accelerator::getVRAMDescriptor@0x290	uVar3	result	CONFIRMED	the return value (1 once the descriptor exists)
+def	IOATIR500Accelerator::getVRAMDescriptor@0x290	uVar2	address	INFERRED	virtual address of the mapped VRAM descriptor, stored at +0xe4 of the framebuffer record
+def	IOATIR500Accelerator::removeTransferFromGART@0x34f0	iVar1	prevNode	CONFIRMED	transfer->+0x34 (previous link) in the list unlink
+def	IOATIR500Accelerator::removeTransferFromGART@0x34f0	iVar2	nextNode	CONFIRMED	transfer->+0x38 (next link) in the list unlink
+def	IOATIR500Accelerator::freeOneDataBuffer@0x32d0	iVar3	prevNode	CONFIRMED	buffer->+0x24 (previous link) in the list unlink
+def	IOATIR500Accelerator::freeOneDataBuffer@0x32d0	iVar1	nextNode	CONFIRMED	buffer->+0x28 (next link) in the list unlink
+def	IOATIR500Accelerator::freeOneDataBuffer@0x32d0	piVar2	backing	CONFIRMED	the buffer's IOBufferMemoryDescriptor at +8, released with vtable +0x18
+def	IOATIR500Accelerator::addOrphanTexture@0x49c0	iVar2	prevNode	CONFIRMED	buffer->+0x24 (previous link) in the list unlink
+def	IOATIR500Accelerator::addOrphanTexture@0x49c0	iVar1	nextNode	CONFIRMED	buffer->+0x28 (next link) in the list unlink
+def	IOATIR500Accelerator::allocDataBufferBacking@0x30d0	iVar1	backing	CONFIRMED	the IOBufferMemoryDescriptor created and stored at buffer+8
+def	IOATIR500Accelerator::allocCommandBuffer@0x23e0	piVar1	backing	CONFIRMED	the IOBufferMemoryDescriptor created and stored at outBuffer+8
+def	IOATIR500Accelerator::allocCommandBuffer@0x23e0	pVVar2	header	CONFIRMED	the mapped address of the backing (vtable +0x1cc), stored at +0x14 and initialised by init_command_buffer_header
+def	IOATIR500Accelerator::allocVendorTextureBuffer@0x4dc0	puVar1	texture	CONFIRMED	the IOMalloc'd VendorTextureBuffer that is initialised and returned

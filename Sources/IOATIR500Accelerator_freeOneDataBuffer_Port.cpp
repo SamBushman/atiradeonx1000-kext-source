@@ -27,38 +27,38 @@
 
 
 /* real addr 0x32d0 */
-void IOATIR500Accelerator::freeOneDataBuffer(VendorTextureBuffer *real_param_1) {
+void IOATIR500Accelerator::freeOneDataBuffer(VendorTextureBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
-  SInt32 *piVar2;
-  SInt32 iVar3;
+  SInt32 nextNode;
+  SInt32 *backing;
+  SInt32 prevNode;
   
-  if (M<SInt32>(param_1 + 0x48) != 0) {
+  if (M<SInt32>(bufferBytes + 0x48) != 0) {
     /* #171: stock 0x32fc: r4 = the buffer (incoming), deallocate_texture(VendorTextureBuffer*) */
-    VCALL(M<SInt32>(self), 0x524)(self,param_1);
-    iVar3 = M<SInt32>(param_1 + 0x24);
-    M<UInt32>(iVar3 + 0x28) = M<UInt32>(param_1 + 0x28);
-    iVar1 = M<SInt32>(param_1 + 0x28);
-    M<UInt8 *>(param_1 + 0x28) = param_1;
-    M<SInt32>(iVar1 + 0x24) = iVar3;
-    M<UInt8 *>(param_1 + 0x24) = param_1;
+    VCALL(M<SInt32>(self), 0x524)(self,bufferBytes);
+    prevNode = M<SInt32>(bufferBytes + 0x24);
+    M<UInt32>(prevNode + 0x28) = M<UInt32>(bufferBytes + 0x28);
+    nextNode = M<SInt32>(bufferBytes + 0x28);
+    M<UInt8 *>(bufferBytes + 0x28) = bufferBytes;
+    M<SInt32>(nextNode + 0x24) = prevNode;
+    M<UInt8 *>(bufferBytes + 0x24) = bufferBytes;
   }
-  if (M<SInt32 *>(param_1 + 0x10) != (SInt32 *)0x0) {
-    VCALL(*M<SInt32 *>(param_1 + 0x10), 0x18)(M<SInt32 *>(param_1 + 0x10));
-    M<UInt32>(param_1 + 0x10) = 0;
+  if (M<SInt32 *>(bufferBytes + 0x10) != (SInt32 *)0x0) {
+    VCALL(*M<SInt32 *>(bufferBytes + 0x10), 0x18)(M<SInt32 *>(bufferBytes + 0x10));
+    M<UInt32>(bufferBytes + 0x10) = 0;
   }
-  piVar2 = M<SInt32 *>(param_1 + 8);
-  if (piVar2 != (SInt32 *)0x0) {
-    if (M<SInt32>(param_1 + 4) != 0) {
-      VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(param_1 + 0x5c));
-      VCALL(M<SInt32>(self), 0x5ac)(self,param_1);
-      piVar2 = M<SInt32 *>(param_1 + 8);
+  backing = M<SInt32 *>(bufferBytes + 8);
+  if (backing != (SInt32 *)0x0) {
+    if (M<SInt32>(bufferBytes + 4) != 0) {
+      VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(bufferBytes + 0x5c));
+      VCALL(M<SInt32>(self), 0x5ac)(self,bufferBytes);
+      backing = M<SInt32 *>(bufferBytes + 8);
     }
-    VCALL(*piVar2, 0x18)(piVar2);
+    VCALL(*backing, 0x18)(backing);
   }
-  VCALL(M<SInt32>(self), 0x574)(self,param_1,0xc0);
+  VCALL(M<SInt32>(self), 0x574)(self,bufferBytes,0xc0);
   M<SInt32>(self + 0x750) = M<SInt32>(self + 0x750) + -1;
   return;
 }

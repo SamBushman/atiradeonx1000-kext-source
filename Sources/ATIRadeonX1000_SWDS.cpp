@@ -31,12 +31,12 @@ bool ATIRadeonX1000::SWDSShutdown() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  UInt32 uVar2;
+  UInt32 savedValue;
   SInt32 iVar3;
-  SInt32 iVar4;
+  SInt32 registers;
   SInt32 iVar5;
   SInt32 iVar6;
-  SInt32 iVar7;
+  SInt32 panel;
   UInt8 *pGVar8;
   UInt8 *pAVar9;
   UInt8 *pAVar10;
@@ -45,7 +45,7 @@ bool ATIRadeonX1000::SWDSShutdown() {
     VCALL(*M<SInt32 *>(self + 0x9b8), 0xf0)(M<SInt32 *>(self + 0x9b8));
   }
   if (self[0x9b0] != 0x0) {
-    iVar7 = 0;
+    panel = 0;
     self[0x9b0] = 0x0;
     pGVar8 = (self + 0x9bc);
     pAVar9 = self;
@@ -53,7 +53,7 @@ bool ATIRadeonX1000::SWDSShutdown() {
     do {
       if (M<SInt32>(pAVar10 + 0xb10) != 0) {
         M<UInt32>(pAVar10 + 0xb10) = 0;
-        if (iVar7 == 1) {
+        if (panel == 1) {
           iVar6 = 0xb64;
           iVar5 = 0xb68;
           iVar3 = 0xb6c;
@@ -63,93 +63,93 @@ bool ATIRadeonX1000::SWDSShutdown() {
           iVar5 = 0xb78;
           iVar3 = 0xb7c;
         }
-        iVar4 = M<SInt32>(self + 0x860);
-        uVar2 = M<UInt32>(pAVar10 + 0xafc);
-        M<UInt32>(iVar4 + iVar6) =
-             uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+        registers = M<SInt32>(self + 0x860);
+        savedValue = M<UInt32>(pAVar10 + 0xafc);
+        M<UInt32>(registers + iVar6) =
+             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
-        uVar2 = M<UInt32>(pAVar10 + 0xb00);
-        M<UInt32>(iVar4 + iVar5) =
-             uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+        savedValue = M<UInt32>(pAVar10 + 0xb00);
+        M<UInt32>(registers + iVar5) =
+             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
-        uVar2 = M<UInt32>(pAVar10 + 0xb04);
-        M<UInt32>(iVar4 + iVar3) =
-             uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+        savedValue = M<UInt32>(pAVar10 + 0xb04);
+        M<UInt32>(registers + iVar3) =
+             savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
         enforceInOrderExecutionIO();
         if ((M<SInt32>(pAVar9 + 0x9c0) != 0) && (M<SInt32>(pAVar9 + 0x9bc) != 0)) {
           ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)pGVar8);
         }
       }
-      bVar1 = iVar7 != 1;
+      bVar1 = panel != 1;
       pGVar8 = pGVar8 + 0x78;
       pAVar10 = pAVar10 + 0x18;
       pAVar9 = pAVar9 + 0x78;
-      iVar7 = iVar7 + 1;
+      panel = panel + 1;
     } while (bVar1);
   }
   return 1;
 }
 
 /* real addr 0x24340 */
-void ATIRadeonX1000::SWDSFunc(OSObject *real_param_1, IOTimerEventSource *param_2) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+void ATIRadeonX1000::SWDSFunc(OSObject *owner, IOTimerEventSource *source) {
+    UInt8 *ownerBytes = reinterpret_cast<UInt8 *>(owner);
 
-  UInt8 bVar1;
-  bool bVar2;
+  UInt8 statusBits;
+  bool dualPanel;
   UInt8 bVar3;
   UInt32 uVar4;
   SInt32 iVar5;
-  UInt32 uVar6;
-  UInt32 uVar7;
-  UInt8 *pOVar8;
+  UInt32 stamp;
+  UInt32 bufferOffset;
+  UInt8 *entry;
   UInt32 uVar9;
-  UInt32 uVar10;
+  UInt32 cmdWordCount;
   SInt32 iVar11;
-  UInt32 *puVar12;
-  UInt32 uVar13;
+  UInt32 *cmdBuffer;
+  UInt32 panel;
   UInt8 bVar14;
   UInt8 bVar15;
   
-  GH_IOLockLock(M<UInt32>(param_1 + 0x840));
-  if ((param_1[0x80] != 0x0) && (param_1[0x9b0] != 0x0)) {
-    bVar1 = (UInt8)loadWordByteReversed(&M<UInt8>(M<SInt32>(param_1 + 0x860) + 0xbf8));      /* one word read; only the masks 0x80/0x40 are tested */
-    if ((M<SInt32>(param_1 + 0xb10) == 0) || (bVar2 = true, M<SInt32>(param_1 + 0xb28) == 0)) {
-      bVar2 = false;
+  GH_IOLockLock(M<UInt32>(ownerBytes + 0x840));
+  if ((ownerBytes[0x80] != 0x0) && (ownerBytes[0x9b0] != 0x0)) {
+    statusBits = (UInt8)loadWordByteReversed(&M<UInt8>(M<SInt32>(ownerBytes + 0x860) + 0xbf8));      /* one word read; only the masks 0x80/0x40 are tested */
+    if ((M<SInt32>(ownerBytes + 0xb10) == 0) || (dualPanel = true, M<SInt32>(ownerBytes + 0xb28) == 0)) {
+      dualPanel = false;
     }
     iVar11 = 0;
-    pOVar8 = (UInt8 *)0x0;
+    entry = (UInt8 *)0x0;
     uVar9 = 0;
-    puVar12 = (UInt32 *)0x0;
+    cmdBuffer = (UInt32 *)0x0;
     bVar14 = 2;
-    uVar7 = 0;
-    uVar10 = 0;
-    uVar13 = 0;
+    bufferOffset = 0;
+    cmdWordCount = 0;
+    panel = 0;
     do {
-      if (M<SInt32>(param_1 + uVar13 * 0x18 + 0xb10) != 0) {
-        bVar15 = (uVar13 == 0) << 1;
-        if (uVar13 == 0) {
+      if (M<SInt32>(ownerBytes + panel * 0x18 + 0xb10) != 0) {
+        bVar15 = (panel == 0) << 1;
+        if (panel == 0) {
           bVar3 = 0x80;
         }
         else {
           bVar3 = 0x40;
         }
-        if ((bVar1 & bVar3) == 0) {
-          if (M<SInt32>(param_1 + uVar13 * 4 + 0xacc) - M<SInt32>(param_1 + uVar13 * 4 + 0xad4) < 1) {
-            if (M<SInt32>(param_1 + 0x894) == 1) {
-              iVar5 = M<SInt32>(param_1 + 0xec);
-              if (iVar5 - M<SInt32>(param_1 + 0x10c) < 1) {
-                M<SInt32>(param_1 + uVar13 * 4 + 0xacc) = M<SInt32>(param_1 + 0x10c);
+        if ((statusBits & bVar3) == 0) {
+          if (M<SInt32>(ownerBytes + panel * 4 + 0xacc) - M<SInt32>(ownerBytes + panel * 4 + 0xad4) < 1) {
+            if (M<SInt32>(ownerBytes + 0x894) == 1) {
+              iVar5 = M<SInt32>(ownerBytes + 0xec);
+              if (iVar5 - M<SInt32>(ownerBytes + 0x10c) < 1) {
+                M<SInt32>(ownerBytes + panel * 4 + 0xacc) = M<SInt32>(ownerBytes + 0x10c);
                 goto LAB_00024480;
               }
             }
             else {
-              iVar5 = M<SInt32>(param_1 + uVar13 * 0x20 + 0xec);
+              iVar5 = M<SInt32>(ownerBytes + panel * 0x20 + 0xec);
             }
-            M<SInt32>(param_1 + uVar13 * 4 + 0xacc) = iVar5;
+            M<SInt32>(ownerBytes + panel * 4 + 0xacc) = iVar5;
           }
           else {
-            /* #171: stock 0x2442c: r4 = lwz 0xacc(r9) = this[uVar13*4+0xacc], the stamp to check (checkForTimeStamp(unsigned long)); the port dropped it */
-            uVar4 = VCALL(M<SInt32>(param_1), 0x554)(param_1,M<UInt32>(param_1 + uVar13 * 4 + 0xacc));
+            /* #171: stock 0x2442c: r4 = lwz 0xacc(r9) = this[panel*4+0xacc], the stamp to check (checkForTimeStamp(unsigned long)); the port dropped it */
+            uVar4 = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(ownerBytes + panel * 4 + 0xacc));
             uVar9 = uVar9 | uVar4;
           }
 LAB_00024480:
@@ -159,52 +159,52 @@ LAB_00024480:
           uVar9 = 1;
         }
         if ((bool)(bVar14 >> 1 & 1)) {
-          pOVar8 = param_1 + M<SInt32>(param_1 + 0xadc) * 0x1c + 0xae0;
-          iVar5 = VCALL(M<SInt32>(param_1), 0x554)(param_1,M<UInt32>(pOVar8 + 0x10));
+          entry = ownerBytes + M<SInt32>(ownerBytes + 0xadc) * 0x1c + 0xae0;
+          iVar5 = VCALL(M<SInt32>(ownerBytes), 0x554)(ownerBytes,M<UInt32>(entry + 0x10));
           if (iVar5 != 0) {
-            puVar12 = (UInt32 *)(M<SInt32>(pOVar8 + 0x14) + 0x20);
-            uVar7 = M<SInt32>(pOVar8 + 4) + 0x20;
-            iVar11 = ((ATIRadeonX1000 *)param_1)->SWDSWriteBlitToCmdBuf(puVar12,0,false,uVar13);
+            cmdBuffer = (UInt32 *)(M<SInt32>(entry + 0x14) + 0x20);
+            bufferOffset = M<SInt32>(entry + 4) + 0x20;
+            iVar11 = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,0,false,panel);
             if ((bool)(bVar15 >> 1 & 1)) {
-              puVar12[iVar11] = 0x2ff;
-              puVar12[iVar11 + 1] = 0x80;
+              cmdBuffer[iVar11] = 0x2ff;
+              cmdBuffer[iVar11 + 1] = 0x80;
             }
             else {
-              puVar12[iVar11] = 0x2ff;
-              puVar12[iVar11 + 1] = 0x40;
+              cmdBuffer[iVar11] = 0x2ff;
+              cmdBuffer[iVar11 + 1] = 0x40;
             }
-            uVar10 = iVar11 + 2;
-            iVar11 = uVar13 + 1;
+            cmdWordCount = iVar11 + 2;
+            iVar11 = panel + 1;
             bVar14 = (iVar11 == 0) << 1;
           }
         }
         else {
-          iVar5 = ((ATIRadeonX1000 *)param_1)->SWDSWriteBlitToCmdBuf(puVar12,uVar10,false,uVar13);
-          puVar12[iVar5] = 0x2ff;
-          uVar10 = iVar5 + 2;
-          puVar12[iVar5 + 1] = 0x40;
+          iVar5 = ((ATIRadeonX1000 *)ownerBytes)->SWDSWriteBlitToCmdBuf(cmdBuffer,cmdWordCount,false,panel);
+          cmdBuffer[iVar5] = 0x2ff;
+          cmdWordCount = iVar5 + 2;
+          cmdBuffer[iVar5 + 1] = 0x40;
         }
       }
 LAB_00024584:
-      uVar13 = uVar13 + 1;
-    } while (uVar13 < 2);
+      panel = panel + 1;
+    } while (panel < 2);
     if (!(bool)(bVar14 >> 1 & 1)) {
-      if (bVar2) {
-        uVar6 = ((ATIRadeonX1000 *)param_1)->submit_buffer(puVar12,uVar7,uVar10);
-        M<UInt32>(pOVar8 + 0x10) = uVar6;
-        M<UInt32>(param_1 + 0xad4) = uVar6;
-        M<UInt32>(param_1 + 0xad8) = uVar6;
+      if (dualPanel) {
+        stamp = ((ATIRadeonX1000 *)ownerBytes)->submit_buffer(cmdBuffer,bufferOffset,cmdWordCount);
+        M<UInt32>(entry + 0x10) = stamp;
+        M<UInt32>(ownerBytes + 0xad4) = stamp;
+        M<UInt32>(ownerBytes + 0xad8) = stamp;
       }
       else {
-        uVar6 = ((ATIRadeonX1000 *)param_1)->submit_buffer(puVar12,uVar7,uVar10);
-        M<UInt32>(pOVar8 + 0x10) = uVar6;
-        M<UInt32>(param_1 + iVar11 * 4 + 0xad0) = uVar6;
+        stamp = ((ATIRadeonX1000 *)ownerBytes)->submit_buffer(cmdBuffer,bufferOffset,cmdWordCount);
+        M<UInt32>(entry + 0x10) = stamp;
+        M<UInt32>(ownerBytes + iVar11 * 4 + 0xad0) = stamp;
       }
     }
-    VCALL(*M<SInt32 *>(param_1 + 0x9b8), 300)
-              (M<SInt32 *>(param_1 + 0x9b8),M<UInt32>(param_1 + 0x9b4));
+    VCALL(*M<SInt32 *>(ownerBytes + 0x9b8), 300)
+              (M<SInt32 *>(ownerBytes + 0x9b8),M<UInt32>(ownerBytes + 0x9b4));
   }
-  GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
+  GH_IOLockUnlock(M<UInt32>(ownerBytes + 0x840));
   return;
 }
 

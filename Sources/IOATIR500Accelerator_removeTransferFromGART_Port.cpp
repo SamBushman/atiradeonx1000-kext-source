@@ -27,25 +27,25 @@
 
 
 /* real addr 0x34f0 */
-void IOATIR500Accelerator::removeTransferFromGART(VendorTransferBuffer *real_param_1) {
+void IOATIR500Accelerator::removeTransferFromGART(VendorTransferBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
+  SInt32 prevNode;
+  SInt32 nextNode;
   
-  if (param_1 != (UInt8 *)0x0) {
-    if (M<SInt16>(param_1 + 0xc) == 4) {
-      iVar1 = M<SInt32>(param_1 + 0x34);
-      M<UInt32>(iVar1 + 0x38) = M<UInt32>(param_1 + 0x38);
-      iVar2 = M<SInt32>(param_1 + 0x38);
-      M<UInt8 *>(param_1 + 0x38) = param_1;
-      M<SInt32>(iVar2 + 0x34) = iVar1;
-      M<UInt8 *>(param_1 + 0x34) = param_1;
+  if (bufferBytes != (UInt8 *)0x0) {
+    if (M<SInt16>(bufferBytes + 0xc) == 4) {
+      prevNode = M<SInt32>(bufferBytes + 0x34);
+      M<UInt32>(prevNode + 0x38) = M<UInt32>(bufferBytes + 0x38);
+      nextNode = M<SInt32>(bufferBytes + 0x38);
+      M<UInt8 *>(bufferBytes + 0x38) = bufferBytes;
+      M<SInt32>(nextNode + 0x34) = prevNode;
+      M<UInt8 *>(bufferBytes + 0x34) = bufferBytes;
     }
     VCALL(M<SInt32>(self), 0x5a4)
-              (self,M<UInt32>(param_1 + 8),M<UInt32>(param_1 + 4));
-    M<UInt32>(param_1 + 4) = 0;
+              (self,M<UInt32>(bufferBytes + 8),M<UInt32>(bufferBytes + 4));
+    M<UInt32>(bufferBytes + 4) = 0;
   }
   return;
 }

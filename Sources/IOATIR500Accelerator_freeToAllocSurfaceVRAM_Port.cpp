@@ -27,62 +27,62 @@
 
 
 /* real addr 0x45a0 */
-UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *real_param_1, IOATIR500Surface *real_param_2, VendorTextureBuffer**param_3, SInt32 param_4, ATIR500SurfaceBuffer *real_param_5) {
+UInt32 IOATIR500Accelerator::freeToAllocSurfaceVRAM(IOATIR500Surface *excludeA, IOATIR500Surface *excludeB, VendorTextureBuffer**excludeList, SInt32 excludeCount, ATIR500SurfaceBuffer *needed) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
-    UInt8 *param_5 = reinterpret_cast<UInt8 *>(real_param_5);
+    UInt8 *excludeABytes = reinterpret_cast<UInt8 *>(excludeA);
+    UInt8 *excludeBBytes = reinterpret_cast<UInt8 *>(excludeB);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   UInt16 *puVar1;
   UInt16 *puVar2;
-  bool bVar3;
-  UInt8 *pVVar4;
+  bool secondPass;
+  UInt8 *excludedTexture;
   int iVar5;
   int iVar6;
-  UInt8 **ppVVar7;
+  UInt8 **excludeCursor;
   unsigned int uVar8;
-  UInt8 *pIVar9;
+  UInt8 *surfaceListHead;
   unsigned int uVar10;
-  UInt8 *pAVar11;
-  UInt8 *pIVar12;
-  UInt8 *this_00;
-  UInt8 bVar13;
+  UInt8 *surfaceBuffer;
+  UInt8 *texture;
+  UInt8 *surface;
+  UInt8 excludeAIsNull;
   UInt8 bVar14;
   long lVar15;
   unsigned int uVar16;
   
-  bVar13 = (param_1 == (UInt8 *)0x0) << 1;
-  bVar3 = false;
+  excludeAIsNull = (excludeABytes == (UInt8 *)0x0) << 1;
+  secondPass = false;
   do {
     while( true ) {
-      if ((bool)(bVar13 >> 1 & 1)) {
-        iVar5 = VCALL(M<int>(self), 0x56c)(self,param_5);
+      if ((bool)(excludeAIsNull >> 1 & 1)) {
+        iVar5 = VCALL(M<int>(self), 0x56c)(self,neededBytes);
       }
       else {
-        iVar5 = VCALL(M<int>(param_1), 0x5d0)(param_1,param_5);
+        iVar5 = VCALL(M<int>(excludeABytes), 0x5d0)(excludeABytes,neededBytes);
       }
       if (iVar5 == 1) break;
-      pIVar12 = M<UInt8 *>(self + 0x604);
+      texture = M<UInt8 *>(self + 0x604);
       do {
         do {
           while( true ) {
-            if (self + 0x5dc == pIVar12) goto LAB_00004794;
-            if (param_4 < 1) break;
-            if (pIVar12 != (UInt8 *)*param_3) {
+            if (self + 0x5dc == texture) goto LAB_00004794;
+            if (excludeCount < 1) break;
+            if (texture != (UInt8 *)*excludeList) {
               iVar5 = 0;
-              lVar15 = param_4;
+              lVar15 = excludeCount;
               do {
                 iVar5 = iVar5 + 1;
                 lVar15 = lVar15 + -1;
                 if (lVar15 == 0) goto LAB_00004654;
-              } while (pIVar12 != (UInt8 *)param_3[iVar5]);
+              } while (texture != (UInt8 *)excludeList[iVar5]);
             }
 LAB_000046a0:
-            pIVar12 = M<UInt8 *>(pIVar12 + 0x28);
+            texture = M<UInt8 *>(texture + 0x28);
           }
-        } while (param_4 != 0);
+        } while (excludeCount != 0);
 LAB_00004654:
-        if ((bVar3) || (iVar5 = M<int>(pIVar12 + 0x14), iVar5 == 0)) break;
+        if ((secondPass) || (iVar5 = M<int>(texture + 0x14), iVar5 == 0)) break;
         uVar10 = (unsigned int)M<UInt8>(iVar5 + 0x34);
         uVar8 = 0;
         if (uVar10 != 0) {
@@ -105,82 +105,82 @@ LAB_00004654:
         }
 LAB_000046b8: ;
       } while (uVar8 != uVar10);
-      if (M<int>(pIVar12 + 0x48) != 0) {
-        VCALL(M<int>(self), 0x524)(self,pIVar12);
-        M<UInt8>(M<int>(pIVar12 + 0x14) + 0x14) = 1;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x28) = 0;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x2a) = 0;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x2c) = 0;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x2e) = 0;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x30) = 0;
-        M<UInt16>(M<int>(pIVar12 + 0x14) + 0x32) = 0;
+      if (M<int>(texture + 0x48) != 0) {
+        VCALL(M<int>(self), 0x524)(self,texture);
+        M<UInt8>(M<int>(texture + 0x14) + 0x14) = 1;
+        M<UInt16>(M<int>(texture + 0x14) + 0x28) = 0;
+        M<UInt16>(M<int>(texture + 0x14) + 0x2a) = 0;
+        M<UInt16>(M<int>(texture + 0x14) + 0x2c) = 0;
+        M<UInt16>(M<int>(texture + 0x14) + 0x2e) = 0;
+        M<UInt16>(M<int>(texture + 0x14) + 0x30) = 0;
+        M<UInt16>(M<int>(texture + 0x14) + 0x32) = 0;
       }
-      iVar5 = M<int>(pIVar12 + 0x24);
-      M<UInt32>(iVar5 + 0x28) = M<UInt32>(pIVar12 + 0x28);
-      iVar6 = M<int>(pIVar12 + 0x28);
-      M<UInt8 *>(pIVar12 + 0x28) = pIVar12;
+      iVar5 = M<int>(texture + 0x24);
+      M<UInt32>(iVar5 + 0x28) = M<UInt32>(texture + 0x28);
+      iVar6 = M<int>(texture + 0x28);
+      M<UInt8 *>(texture + 0x28) = texture;
       M<int>(iVar6 + 0x24) = iVar5;
-      M<UInt8 *>(pIVar12 + 0x24) = pIVar12;
+      M<UInt8 *>(texture + 0x24) = texture;
     }
 LAB_00004794:
-    if (M<int>(param_5 + 8) != 0) {
+    if (M<int>(neededBytes + 8) != 0) {
       return 1;
     }
-    if (bVar3) {
+    if (secondPass) {
       return 0;
     }
-    pIVar9 = M<UInt8 *>(self + 0x5c);
-    if (pIVar9 != (UInt8 *)0x0) {
-      bVar14 = (0 < param_4) << 2 | (param_4 == 0) << 1;
-      this_00 = pIVar9;
+    surfaceListHead = M<UInt8 *>(self + 0x5c);
+    if (surfaceListHead != (UInt8 *)0x0) {
+      bVar14 = (0 < excludeCount) << 2 | (excludeCount == 0) << 1;
+      surface = surfaceListHead;
       do {
-        this_00 = M<UInt8 *>(this_00 + 0xa0);
-        if ((param_1 != this_00) && (this_00 != param_2)) {
-          ppVVar7 = (UInt8 **)param_3;
-          lVar15 = param_4;
+        surface = M<UInt8 *>(surface + 0xa0);
+        if ((excludeABytes != surface) && (surface != excludeBBytes)) {
+          excludeCursor = (UInt8 **)excludeList;
+          lVar15 = excludeCount;
           if ((bool)(bVar14 >> 2 & 1)) {
             do {
-              pVVar4 = *ppVVar7;
-              ppVVar7 = ppVVar7 + 1;
-              if (((pVVar4 != (UInt8 *)0x0) &&
-                  (pVVar4[0x20] == 0x0)) &&
-                 (this_00 == M<UInt8 *>(pVVar4 + 0x50))) goto LAB_0000492c;
+              excludedTexture = *excludeCursor;
+              excludeCursor = excludeCursor + 1;
+              if (((excludedTexture != (UInt8 *)0x0) &&
+                  (excludedTexture[0x20] == 0x0)) &&
+                 (surface == M<UInt8 *>(excludedTexture + 0x50))) goto LAB_0000492c;
               lVar15 = lVar15 + -1;
             } while (lVar15 != 0);
           }
           else if (!(bool)(bVar14 >> 1 & 1)) goto LAB_0000492c;
           uVar10 = 0;
-          pAVar11 = (UInt8 *)(this_00 + 0xa8);
+          surfaceBuffer = (UInt8 *)(surface + 0xa8);
           do {
-            if ((((M<int>(this_00 + 0xc14) == 0xffff) || ((1 < uVar10 && (1 < uVar10 - 4)))) &&
-                (M<int>(pAVar11 + 8) != 0)) &&
-               (((M<unsigned int>(this_00 + 0xbd0) & 0xffff0000) == 0 ||
-                (pAVar11 != M<UInt8 *>(this_00 + 0xb70))))) {
-              if (M<int>(this_00 + 0xd48) == 0) {
-                ((IOATIR500Surface *)(this_00))->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)(pAVar11));
+            if ((((M<int>(surface + 0xc14) == 0xffff) || ((1 < uVar10 && (1 < uVar10 - 4)))) &&
+                (M<int>(surfaceBuffer + 8) != 0)) &&
+               (((M<unsigned int>(surface + 0xbd0) & 0xffff0000) == 0 ||
+                (surfaceBuffer != M<UInt8 *>(surface + 0xb70))))) {
+              if (M<int>(surface + 0xd48) == 0) {
+                ((IOATIR500Surface *)(surface))->move_buffer_to_backing_store((ATIR500SurfaceBuffer *)(surfaceBuffer));
               }
               else {
-                VCALL(M<int>(this_00), 0x5cc)(this_00,uVar10);
+                VCALL(M<int>(surface), 0x5cc)(surface,uVar10);
               }
-              if ((bool)(bVar13 >> 1 & 1)) {
-                VCALL(M<int>(self), 0x56c)(self,param_5);
+              if ((bool)(excludeAIsNull >> 1 & 1)) {
+                VCALL(M<int>(self), 0x56c)(self,neededBytes);
               }
               else {
-                VCALL(M<int>(param_1), 0x5d0)(param_1,param_5);
+                VCALL(M<int>(excludeABytes), 0x5d0)(excludeABytes,neededBytes);
               }
-              if (M<int>(param_5 + 8) != 0) {
+              if (M<int>(neededBytes + 8) != 0) {
                 return 1;
               }
             }
-            bVar3 = uVar10 != 0x16;
-            pAVar11 = pAVar11 + 0x78;
+            secondPass = uVar10 != 0x16;
+            surfaceBuffer = surfaceBuffer + 0x78;
             uVar10 = uVar10 + 1;
-          } while (bVar3);
-          pIVar9 = M<UInt8 *>(self + 0x5c);
+          } while (secondPass);
+          surfaceListHead = M<UInt8 *>(self + 0x5c);
         }
 LAB_0000492c: ;
-      } while (this_00 != pIVar9);
+      } while (surface != surfaceListHead);
     }
-    bVar3 = true;
+    secondPass = true;
   } while( true );
 }

@@ -31,7 +31,7 @@ void ATIRadeonX1000::submit_ring_data() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
-  UInt32 uVar2;
+  UInt32 writeIndex;
   UInt32 uVar3;
   SInt32 iVar4;
   UInt32 uVar5;
@@ -39,28 +39,28 @@ void ATIRadeonX1000::submit_ring_data() {
   UInt32 uVar7;
   UInt32 uVar8;
   
-  uVar2 = M<UInt32>(self + 0x914);
+  writeIndex = M<UInt32>(self + 0x914);
   uVar1 = M<UInt32>(self + 0x918);
-  if (uVar2 != uVar1) {
-    if ((uVar2 & 7) != 0) {
+  if (writeIndex != uVar1) {
+    if ((writeIndex & 7) != 0) {
       iVar6 = M<SInt32>(self + 0x900);
       do {
-        uVar3 = uVar2 + 1;
-        M<UInt32>(iVar6 + uVar2 * 4) = 0x80000000;
-        uVar2 = uVar3 & 0x7ff;
+        uVar3 = writeIndex + 1;
+        M<UInt32>(iVar6 + writeIndex * 4) = 0x80000000;
+        writeIndex = uVar3 & 0x7ff;
       } while ((uVar3 & 7) != 0);
-      M<UInt32>(self + 0x914) = uVar2;
+      M<UInt32>(self + 0x914) = writeIndex;
     }
     if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
       ppcSync();
       instructionSynchronize();
     }
-    else if (uVar1 < uVar2) {
+    else if (uVar1 < writeIndex) {
       uVar5 = (UInt32)(UInt8)self[0x84];
       uVar3 = uVar1 * 4 + M<SInt32>(self + 0x900);
       uVar7 = -uVar5 & uVar3;
       iVar6 = 0;
-      iVar4 = ((uVar2 - uVar1) * 4 + (uVar3 & uVar5 - 1)) - uVar5;
+      iVar4 = ((writeIndex - uVar1) * 4 + (uVar3 & uVar5 - 1)) - uVar5;
       if (0 < iVar4) {
         do {
           dataCacheBlockStore(uVar7 + iVar6);
@@ -95,7 +95,7 @@ void ATIRadeonX1000::submit_ring_data() {
       instructionSynchronize();
       uVar1 = -uVar7 & uVar5;
       iVar6 = 0;
-      iVar4 = (uVar2 * 4 + (uVar7 - 1 & uVar5)) - uVar7;
+      iVar4 = (writeIndex * 4 + (uVar7 - 1 & uVar5)) - uVar7;
       if (0 < iVar4) {
         do {
           dataCacheBlockStore(uVar1 + iVar6);
@@ -109,9 +109,9 @@ void ATIRadeonX1000::submit_ring_data() {
       instructionSynchronize();
       instructionSynchronize();
     }
-    M<UInt32>(M<SInt32>(self + 0x860) + 0x714) = uVar2 << 0x18 | (uVar2 & 0x700) << 8;
+    M<UInt32>(M<SInt32>(self + 0x860) + 0x714) = writeIndex << 0x18 | (writeIndex & 0x700) << 8;
     enforceInOrderExecutionIO();
-    M<UInt32>(self + 0x918) = uVar2;
+    M<UInt32>(self + 0x918) = writeIndex;
     return;
   }
   return;

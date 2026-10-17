@@ -28,20 +28,20 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(...) asm("__Z
 
 
 /* real addr 0x23e0 */
-bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *real_param_1, UInt32 param_2) {
+bool IOATIR500Accelerator::allocCommandBuffer(VendorCommandBuffer *outBuffer, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *outBufferBytes = reinterpret_cast<UInt8 *>(outBuffer);
 
-  SInt32 *piVar1;
-  VendorCommandBufferHeader *pVVar2;
+  SInt32 *backing;
+  VendorCommandBufferHeader *header;
   
-  piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(self + 0x82c) | 0x10022,param_2,GH_page_size);
-  M<SInt32 *>(param_1 + 8) = piVar1;
-  if (piVar1 != (SInt32 *)0x0) {
-    M<UInt32>(param_1 + 0x18) = param_2;
-    pVVar2 = (VendorCommandBufferHeader *)VCALL(*piVar1, 0x1cc)(piVar1);
-    M<VendorCommandBufferHeader *>(param_1 + 0x14) = pVVar2;
-    this->init_command_buffer_header((VendorCommandBufferHeader *)(pVVar2),param_2);
+  backing = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor11withOptionsEmjj(M<UInt32>(self + 0x82c) | 0x10022,size,GH_page_size);
+  M<SInt32 *>(outBufferBytes + 8) = backing;
+  if (backing != (SInt32 *)0x0) {
+    M<UInt32>(outBufferBytes + 0x18) = size;
+    header = (VendorCommandBufferHeader *)VCALL(*backing, 0x1cc)(backing);
+    M<VendorCommandBufferHeader *>(outBufferBytes + 0x14) = header;
+    this->init_command_buffer_header((VendorCommandBufferHeader *)(header),size);
   }
-  return piVar1 != (SInt32 *)0x0;
+  return backing != (SInt32 *)0x0;
 }

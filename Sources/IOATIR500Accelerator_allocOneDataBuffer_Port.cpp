@@ -27,41 +27,41 @@
 
 
 /* real addr 0x6960 */
-VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 param_1, bool param_2) {
+VendorTextureBuffer *IOATIR500Accelerator::allocOneDataBuffer(UInt32 sizeClass, bool forWrite) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *pVVar1;
+  UInt8 *dataBuffer;
   SInt32 iVar2;
   UInt32 in_register_00000014;
-  SInt32 iVar3;
+  SInt32 prevNode;
   
-  pVVar1 = (UInt8 *)VCALL(M<SInt32>(self), 0x570)(self,0xc0);
-  if (pVVar1 != (UInt8 *)0x0) {
-    M<UInt32>(pVVar1 + 0x50) = param_1;
-    M<UInt8 *>(pVVar1 + 0x14) = pVVar1 + 0x80;
-    pVVar1[0x20] = 0x8;
-    if ((((UInt32)param_2) == 0) ||
-       (iVar2 = VCALL(M<SInt32>(self), 0x528)(self,pVVar1), iVar2 == 0)) {
-      iVar2 = this->allocDataBufferBacking((VendorTextureBuffer *)(pVVar1));
+  dataBuffer = (UInt8 *)VCALL(M<SInt32>(self), 0x570)(self,0xc0);
+  if (dataBuffer != (UInt8 *)0x0) {
+    M<UInt32>(dataBuffer + 0x50) = sizeClass;
+    M<UInt8 *>(dataBuffer + 0x14) = dataBuffer + 0x80;
+    dataBuffer[0x20] = 0x8;
+    if ((((UInt32)forWrite) == 0) ||
+       (iVar2 = VCALL(M<SInt32>(self), 0x528)(self,dataBuffer), iVar2 == 0)) {
+      iVar2 = this->allocDataBufferBacking((VendorTextureBuffer *)(dataBuffer));
       if (iVar2 == 0) {
-        VCALL(M<SInt32>(self), 0x574)(self,pVVar1,0xc0);
+        VCALL(M<SInt32>(self), 0x574)(self,dataBuffer,0xc0);
         return (VendorTextureBuffer *)((UInt8 *)0x0);
       }
     }
     else {
-      if (M<SInt32>(pVVar1 + 0x48) != 0) {
-        iVar3 = M<SInt32>(pVVar1 + 0x24);
-        M<UInt32>(iVar3 + 0x28) = M<UInt32>(pVVar1 + 0x28);
-        iVar2 = M<SInt32>(pVVar1 + 0x28);
-        M<UInt8 *>(pVVar1 + 0x28) = self + 0x5dc;
-        M<SInt32>(iVar2 + 0x24) = iVar3;
-        M<UInt32>(pVVar1 + 0x24) = M<UInt32>(self + 0x600);
-        M<UInt8 *>(self + 0x600) = pVVar1;
-        M<UInt8 *>(M<SInt32>(pVVar1 + 0x24) + 0x28) = pVVar1;
+      if (M<SInt32>(dataBuffer + 0x48) != 0) {
+        prevNode = M<SInt32>(dataBuffer + 0x24);
+        M<UInt32>(prevNode + 0x28) = M<UInt32>(dataBuffer + 0x28);
+        iVar2 = M<SInt32>(dataBuffer + 0x28);
+        M<UInt8 *>(dataBuffer + 0x28) = self + 0x5dc;
+        M<SInt32>(iVar2 + 0x24) = prevNode;
+        M<UInt32>(dataBuffer + 0x24) = M<UInt32>(self + 0x600);
+        M<UInt8 *>(self + 0x600) = dataBuffer;
+        M<UInt8 *>(M<SInt32>(dataBuffer + 0x24) + 0x28) = dataBuffer;
       }
       VCALL(M<SInt32>(self), 0x54c)(self,M<SInt32>(self + 0x50) + -1);
     }
     M<SInt32>(self + 0x750) = M<SInt32>(self + 0x750) + 1;
   }
-  return (VendorTextureBuffer *)(pVVar1);
+  return (VendorTextureBuffer *)(dataBuffer);
 }

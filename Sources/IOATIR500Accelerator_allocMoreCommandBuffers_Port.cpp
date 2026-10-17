@@ -27,55 +27,55 @@
 
 
 /* real addr 0x24a0 */
-bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 param_1, UInt32 param_2) {
+bool IOATIR500Accelerator::allocMoreCommandBuffers(UInt32 recordIndex, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt16 uVar1;
+  UInt16 oldCount16;
   SInt32 iVar2;
-  UInt32 uVar3;
-  UInt32 uVar4;
-  SInt32 iVar5;
-  UInt32 uVar6;
-  UInt32 uVar7;
-  UInt8 *pVVar8;
-  UInt8 *pIVar9;
+  UInt32 result;
+  UInt32 newCount;
+  SInt32 recordOffset;
+  UInt32 currentCount;
+  UInt32 bufferIndex;
+  UInt8 *commandBuffer;
+  UInt8 *allocatedBuffer;
   
-  iVar5 = param_1 * 0x1c4;
-  uVar1 = M<UInt16>(self + iVar5 + 0x402);
-  uVar6 = (UInt32)uVar1;
-  if (uVar6 == 0x10) {
+  recordOffset = recordIndex * 0x1c4;
+  oldCount16 = M<UInt16>(self + recordOffset + 0x402);
+  currentCount = (UInt32)oldCount16;
+  if (currentCount == 0x10) {
 LAB_00002580:
-    uVar3 = 0;
+    result = 0;
   }
   else {
-    uVar4 = 1;
-    if (uVar6 != 0) {
-      uVar4 = uVar6 << 1;
+    newCount = 1;
+    if (currentCount != 0) {
+      newCount = currentCount << 1;
     }
-    if (uVar6 < uVar4) {
-      pVVar8 = (UInt8 *)(self + uVar6 * 0x1c + iVar5 + 0x240);
-      uVar7 = uVar6;
+    if (currentCount < newCount) {
+      commandBuffer = (UInt8 *)(self + currentCount * 0x1c + recordOffset + 0x240);
+      bufferIndex = currentCount;
       do {
-        iVar2 = this->allocCommandBuffer((VendorCommandBuffer *)(pVVar8),param_2);
+        iVar2 = this->allocCommandBuffer((VendorCommandBuffer *)(commandBuffer),size);
         if (iVar2 == 0) {
-          iVar2 = uVar7 - 1;
-          if ((SInt32)uVar6 <= iVar2) {
-            pIVar9 = self + iVar2 * 0x1c + iVar5 + 0x240;
+          iVar2 = bufferIndex - 1;
+          if ((SInt32)currentCount <= iVar2) {
+            allocatedBuffer = self + iVar2 * 0x1c + recordOffset + 0x240;
             do {
               iVar2 = iVar2 + -1;
-              this->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)pIVar9));
-              pIVar9 = (UInt8 *)(pIVar9 + -0x1c);
-            } while ((SInt32)uVar6 <= iVar2);
+              this->freeCommandBuffer((VendorCommandBuffer *)((UInt8 *)allocatedBuffer));
+              allocatedBuffer = (UInt8 *)(allocatedBuffer + -0x1c);
+            } while ((SInt32)currentCount <= iVar2);
           }
           goto LAB_00002580;
         }
-        uVar7 = uVar7 + 1;
-        pVVar8 = pVVar8 + 0x1c;
-      } while (uVar4 != uVar7);
+        bufferIndex = bufferIndex + 1;
+        commandBuffer = commandBuffer + 0x1c;
+      } while (newCount != bufferIndex);
     }
-    uVar3 = 1;
-    M<SInt16>(self + iVar5 + 0x402) = (SInt16)uVar4;
-    M<UInt16>(self + iVar5 + 0x400) = uVar1;
+    result = 1;
+    M<SInt16>(self + recordOffset + 0x402) = (SInt16)newCount;
+    M<UInt16>(self + recordOffset + 0x400) = oldCount16;
   }
-  return uVar3;
+  return result;
 }

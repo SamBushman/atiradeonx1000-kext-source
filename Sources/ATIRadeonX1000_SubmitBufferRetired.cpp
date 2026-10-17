@@ -28,7 +28,7 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0x20700 */
-UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *param_1, UInt32 param_2, UInt32 param_3) {
+UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     static UInt32 u32Dummy;
 
@@ -38,7 +38,7 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *param_1, UInt32 param_2, UI
   UInt32 uVar4;
   SInt32 iVar5;
   
-  M<UInt32>(self + 0x6fc) = param_3 * 4 + M<SInt32>(self + 0x6fc);
+  M<UInt32>(self + 0x6fc) = dwordCount * 4 + M<SInt32>(self + 0x6fc);
   if ((M<UInt32>(self + 0x98) & 0x80) == 0) {
     ppcSync();
     instructionSynchronize();
@@ -46,17 +46,17 @@ UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *param_1, UInt32 param_2, UI
   else {
     uVar4 = (UInt32)(UInt8)self[0x84];
     iVar1 = 0;
-    iVar2 = (param_3 * 4 + ((UInt32)param_1 & uVar4 - 1)) - uVar4;
+    iVar2 = (dwordCount * 4 + ((UInt32)bufferStart & uVar4 - 1)) - uVar4;
     if (0 < iVar2) {
       iVar1 = 0;
       do {
-        dataCacheBlockStore((-uVar4 & (UInt32)param_1) + iVar1);
+        dataCacheBlockStore((-uVar4 & (UInt32)bufferStart) + iVar1);
         iVar1 = iVar1 + uVar4;
       } while (iVar1 < iVar2);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-uVar4 & (UInt32)param_1) + iVar1);
+    dataCacheBlockFlush((-uVar4 & (UInt32)bufferStart) + iVar1);
     ppcSync();
     instructionSynchronize();
     instructionSynchronize();
@@ -87,10 +87,10 @@ LAB_000208e8:
     M<UInt32>(iVar5 + iVar2 * 4) = 0x101ce;
     uVar4 = iVar2 + 1U & 0x7ff;
     M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = param_2 + iVar1 & 0xfffffffc;
+    M<UInt32>(iVar5 + uVar4 * 4) = bufferOffsetOrEnd + iVar1 & 0xfffffffc;
     uVar4 = uVar4 + 1 & 0x7ff;
     M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = param_3 & 0x7fffff;
+    M<UInt32>(iVar5 + uVar4 * 4) = dwordCount & 0x7fffff;
     uVar4 = uVar4 + 1 & 0x7ff;
     M<UInt32>(self + 0x914) = uVar4;
     M<UInt32>(iVar5 + uVar4 * 4) = 0x394;

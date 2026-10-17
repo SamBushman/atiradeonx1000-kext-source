@@ -27,40 +27,40 @@
 
 
 /* real addr 0x5270 */
-void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*param_1, UInt32 param_2) {
+void IOATIR500Accelerator::removeFromGART(IOMemoryDescriptor*descriptor, UInt32 gartOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  unsigned int uVar1;
-  int iVar2;
+  unsigned int endEntry;
+  int tableOffset;
   int iVar3;
-  unsigned int uVar4;
+  unsigned int entry;
   
-  uVar4 = param_2 >> (GH_page_shift & 0x3f);
-  if (param_1 != 0) {
-    uVar1 = VCALL(M<int>(param_1), 0x128)(param_1);
-    uVar1 = uVar4 + (uVar1 >> (GH_page_shift & 0x3f));
-    iVar3 = uVar1 - uVar4;
+  entry = gartOffset >> (GH_page_shift & 0x3f);
+  if (descriptor != 0) {
+    endEntry = VCALL(M<int>(descriptor), 0x128)(descriptor);
+    endEntry = entry + (endEntry >> (GH_page_shift & 0x3f));
+    iVar3 = endEntry - entry;
     M<int>(self + 0x718) = (iVar3 << (GH_page_shift & 0x3f)) + M<int>(self + 0x718);
     M<int>(self + 0xa0) = M<int>(self + 0xa0) - (iVar3 << (GH_page_shift & 0x3f));
-    if (uVar4 < uVar1) {
-      iVar2 = uVar4 << 2;
+    if (entry < endEntry) {
+      tableOffset = entry << 2;
       do {
-        M<UInt32>(M<int>(self + 0x83c) + iVar2) = M<UInt32>(self + 0x844);
-        iVar2 = iVar2 + 4;
+        M<UInt32>(M<int>(self + 0x83c) + tableOffset) = M<UInt32>(self + 0x844);
+        tableOffset = tableOffset + 4;
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
     }
     if (((M<unsigned int>(self + 0x98) & 2) != 0) &&
-       (uVar4 = param_2 >> (GH_page_shift & 0x3f), uVar4 < uVar1)) {
+       (entry = gartOffset >> (GH_page_shift & 0x3f), entry < endEntry)) {
       do {
-        iVar3 = uVar4 << (GH_page_shift & 0x3f);
-        uVar4 = uVar4 + 1;
+        iVar3 = entry << (GH_page_shift & 0x3f);
+        entry = entry + 1;
         VCALL(M<int>(self), 0x588)(self,M<UInt32>(self + 0x22c),iVar3,0);
-      } while (uVar4 != uVar1);
+      } while (entry != endEntry);
     }
-    uVar4 = param_2 >> (GH_page_shift & 0x3f);
-    VCALL(M<int>(self), 0x59c)(self,uVar4,uVar1 - uVar4);
-    VCALL(M<int>(param_1), 0x148)(param_1,3);
+    entry = gartOffset >> (GH_page_shift & 0x3f);
+    VCALL(M<int>(self), 0x59c)(self,entry,endEntry - entry);
+    VCALL(M<int>(descriptor), 0x148)(descriptor,3);
   }
   return;
 }

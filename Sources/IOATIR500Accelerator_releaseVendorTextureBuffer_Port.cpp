@@ -28,11 +28,11 @@ extern "C" UInt32 GH_IOFree(...) asm("_IOFree");
 
 
 /* real addr 0x4ec0 */
-void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *real_param_1, UInt32 param_2) {
+void IOATIR500Accelerator::releaseVendorTextureBuffer(VendorTextureBuffer *buffer, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  GH_IOFree(param_1,param_2);
-  M<UInt32>(self + 0x808) = M<SInt32>(self + 0x808) - param_2;
+  GH_IOFree(bufferBytes,size);
+  M<UInt32>(self + 0x808) = M<SInt32>(self + 0x808) - size;
   return;
 }

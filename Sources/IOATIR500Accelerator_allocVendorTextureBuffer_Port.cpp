@@ -28,46 +28,46 @@ extern "C" UInt32 GH_IOMalloc(...) asm("_IOMalloc");
 
 
 /* real addr 0x4dc0 */
-VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 param_1) {
+VendorTextureBuffer *IOATIR500Accelerator::allocVendorTextureBuffer(UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 *puVar1;
+  UInt32 *texture;
   
-  puVar1 = (UInt32 *)GH_IOMalloc(param_1);
-  M<UInt32>(self + 0x808) = param_1 + M<SInt32>(self + 0x808);
-  M<UInt16>(puVar1 + 3) = 4;
-  *puVar1 = 0;
-  puVar1[1] = 0;
-  puVar1[2] = 0;
-  M<UInt16>((SInt32)puVar1 + 0xe) = 0;
-  puVar1[4] = 0;
-  puVar1[5] = 0;
-  puVar1[6] = 0;
-  puVar1[7] = 0;
-  M<UInt16>((SInt32)puVar1 + 0x22) = 0;
-  puVar1[0xb] = 0;
-  puVar1[0xc] = 0;
-  puVar1[0xf] = 0;
-  puVar1[0x10] = 0;
-  puVar1[0x11] = 0;
-  puVar1[0x12] = 0;
-  puVar1[0x13] = 0;
-  puVar1[0x14] = 0;
-  puVar1[0x15] = 0;
-  puVar1[0x16] = 0;
-  puVar1[0x18] = 0;
-  puVar1[0x19] = 0;
-  M<UInt16>(puVar1 + 0x1c) = 0;
-  M<UInt16>((SInt32)puVar1 + 0x72) = 0;
-  puVar1[9] = (UInt32)(puVar1);
-  puVar1[10] = (UInt32)(puVar1);
-  puVar1[0xd] = (UInt32)(puVar1);
-  puVar1[0xe] = (UInt32)(puVar1);
-  puVar1[0x1b] = 0xffffffff;
-  puVar1[0x1a] = 0;
-  puVar1[0x1d] = 0;
-  M<UInt16>(puVar1 + 0x1e) = 0;
-  M<UInt16>((SInt32)puVar1 + 0x7a) = 0;
-  puVar1[0x1f] = 0;
-  return (VendorTextureBuffer *)puVar1;   /* r3 still holds the IOMalloc result at the blr */
+  texture = (UInt32 *)GH_IOMalloc(size);
+  M<UInt32>(self + 0x808) = size + M<SInt32>(self + 0x808);
+  M<UInt16>(texture + 3) = 4;
+  *texture = 0;
+  texture[1] = 0;
+  texture[2] = 0;
+  M<UInt16>((SInt32)texture + 0xe) = 0;
+  texture[4] = 0;
+  texture[5] = 0;
+  texture[6] = 0;
+  texture[7] = 0;
+  M<UInt16>((SInt32)texture + 0x22) = 0;
+  texture[0xb] = 0;
+  texture[0xc] = 0;
+  texture[0xf] = 0;
+  texture[0x10] = 0;
+  texture[0x11] = 0;
+  texture[0x12] = 0;
+  texture[0x13] = 0;
+  texture[0x14] = 0;
+  texture[0x15] = 0;
+  texture[0x16] = 0;
+  texture[0x18] = 0;
+  texture[0x19] = 0;
+  M<UInt16>(texture + 0x1c) = 0;
+  M<UInt16>((SInt32)texture + 0x72) = 0;
+  texture[9] = (UInt32)(texture);
+  texture[10] = (UInt32)(texture);
+  texture[0xd] = (UInt32)(texture);
+  texture[0xe] = (UInt32)(texture);
+  texture[0x1b] = 0xffffffff;
+  texture[0x1a] = 0;
+  texture[0x1d] = 0;
+  M<UInt16>(texture + 0x1e) = 0;
+  M<UInt16>((SInt32)texture + 0x7a) = 0;
+  texture[0x1f] = 0;
+  return (VendorTextureBuffer *)texture;   /* r3 still holds the IOMalloc result at the blr */
 }

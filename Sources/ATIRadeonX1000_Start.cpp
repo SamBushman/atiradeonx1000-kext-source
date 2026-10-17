@@ -32,31 +32,31 @@ UInt32 HZMEM_Init(_HZDATA *hz, UInt32 param_2, UInt32 param_3, UInt32 param_4);
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
 /* real addr 0x1f750 */
-bool ATIRadeonX1000::start(IOService *param_1) {
+bool ATIRadeonX1000::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  UInt8 bVar2;
-  UInt8 *puVar3;
+  UInt8 savedStrobeByte;
+  UInt8 *chipID;
   UInt8 *pAVar4;
   SInt32 iVar5;
   UInt32 uVar6;
   SInt32 *piVar7;
-  UInt8 *this_00;
+  UInt8 *memoryPool;
   UInt32 uVar8;
   SInt32 iVar9;
   SInt32 *piVar10;
   UInt32 uVar11;
-  UInt32 uVar12;
+  UInt32 cacheFlushStart;
   UInt32 uVar13;
   code *pcVar14;
   SInt32 *piVar15;
   SInt32 iVar16;
-  SInt32 local_38;
+  SInt32 gartOffset;
   UInt8 *local_34 [6];
   
-  local_38 = 0;
-  iVar5 = IOATIR500Accelerator::start(param_1);
+  gartOffset = 0;
+  iVar5 = IOATIR500Accelerator::start(provider);
   if (iVar5 == 0) {
     return 0;
   }
@@ -143,10 +143,10 @@ bool ATIRadeonX1000::start(IOService *param_1) {
   }
   /* #85: the decompile's `operator new(0x14); if (p) ATIR500Memory::ATIR500Memory(p)` pair is exactly what `new ATIR500Memory()` compiles to; the
    * mechanical port wrote both, which allocated twice and leaked the first object on every start(). */
-  this_00 = (UInt8 *)new ATIR500Memory();
-  M<UInt8 *>(self + 0x93c) = this_00;
-  if (this_00 != (UInt8 *)0x0) {
-    iVar5 = ((ATIR500Memory *)(this_00))->init_pool(0);
+  memoryPool = (UInt8 *)new ATIR500Memory();
+  M<UInt8 *>(self + 0x93c) = memoryPool;
+  if (memoryPool != (UInt8 *)0x0) {
+    iVar5 = ((ATIR500Memory *)(memoryPool))->init_pool(0);
     if (iVar5 == 0) {
       VCALL(*M<SInt32 *>(self + 0x93c), 0x18)(M<SInt32 *>(self + 0x93c));
       M<UInt32>(self + 0x93c) = 0;
@@ -187,38 +187,38 @@ bool ATIRadeonX1000::start(IOService *param_1) {
              * positioned between the strobe write and the restore write, matching stock exactly.
              * Live-verified (2026-10-08): self+0xc50=0x7240, self+0xc54=0xc, ioreg AccelCaps=3 -
              * identical outcome to #147's fix, via the real mechanism instead of a substitute. */
-            bVar2 = M<UInt8>(iVar5 + 8);
+            savedStrobeByte = M<UInt8>(iVar5 + 8);
             M<UInt32>(iVar5 + 8) =
-                 (bVar2 & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
+                 (savedStrobeByte & 0xffffff40 | 0x34) << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
                  (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
             M<UInt32>(self + 0xc54) = M<UInt8>(iVar5 + 0xf) & 0xf;
-            puVar3 = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(iVar5 + 0xd), M<UInt8>(iVar5 + 0xc));
+            chipID = (UInt8 *)(UInt32)CONCAT11(M<UInt8>(iVar5 + 0xd), M<UInt8>(iVar5 + 0xc));
             M<UInt32>(iVar5 + 8) =
-                 (UInt32)bVar2 << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
+                 (UInt32)savedStrobeByte << 0x18 | (UInt32)M<UInt8>(iVar5 + 9) << 0x10 |
                  (UInt32)M<UInt8>(iVar5 + 10) << 8 | (UInt32)M<UInt8>(iVar5 + 0xb);
-            M<UInt8 *>(self + 0xc50) = puVar3;
-            if (puVar3 == (UInt8 *)0x7157) goto LAB_0001fafc;
-            if (puVar3 < (UInt8 *)0x7158) {
-              if (puVar3 < (UInt8 *)0x7147) {
-                if ((puVar3 < (UInt8 *)0x7144) && (puVar3 != (UInt8 *)0x7140)) {
-                  if (puVar3 < (UInt8 *)0x7141) {
-                    if (puVar3 + -0x7100 < (UInt8 *)0x10) {
+            M<UInt8 *>(self + 0xc50) = chipID;
+            if (chipID == (UInt8 *)0x7157) goto LAB_0001fafc;
+            if (chipID < (UInt8 *)0x7158) {
+              if (chipID < (UInt8 *)0x7147) {
+                if ((chipID < (UInt8 *)0x7144) && (chipID != (UInt8 *)0x7140)) {
+                  if (chipID < (UInt8 *)0x7141) {
+                    if (chipID + -0x7100 < (UInt8 *)0x10) {
                       uVar13 = 0;
                       M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 0x110000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
                     }
                   }
-                  else if (puVar3 == (UInt8 *)0x7142) goto LAB_0001fafc;
+                  else if (chipID == (UInt8 *)0x7142) goto LAB_0001fafc;
                   goto LAB_0001fbc8;
                 }
               }
-              else if (puVar3 != (UInt8 *)0x714e) {
-                if (puVar3 < (UInt8 *)0x714f) {
-                  if (puVar3 + -29000 < (UInt8 *)0x3) goto LAB_0001fafc;
+              else if (chipID != (UInt8 *)0x714e) {
+                if (chipID < (UInt8 *)0x714f) {
+                  if (chipID + -29000 < (UInt8 *)0x3) goto LAB_0001fafc;
                 }
-                else if ((puVar3 == (UInt8 *)0x7150) ||
-                        (((UInt8 *)0x714f < puVar3 && (puVar3 + -0x7152 < (UInt8 *)0x2))))
+                else if ((chipID == (UInt8 *)0x7150) ||
+                        (((UInt8 *)0x714f < chipID && (chipID + -0x7152 < (UInt8 *)0x2))))
                 goto LAB_0001fafc;
                 goto LAB_0001fbc8;
               }
@@ -228,32 +228,32 @@ LAB_0001fafc:
               this->setupR520Pipes();
             }
             else {
-              if (puVar3 != (UInt8 *)0x71d2) {
-                if ((UInt8 *)0x71d2 < puVar3) {
-                  if (puVar3 < (UInt8 *)0x7250) {
-                    if ((UInt8 *)0x723f < puVar3) {
+              if (chipID != (UInt8 *)0x71d2) {
+                if ((UInt8 *)0x71d2 < chipID) {
+                  if (chipID < (UInt8 *)0x7250) {
+                    if ((UInt8 *)0x723f < chipID) {
 LAB_0001fbec:
                       uVar13 = 3;
                       M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 0x810000;
                       this->setupR520Pipes();
                       goto LAB_0001fc04;
                     }
-                    if (puVar3 == (UInt8 *)0x71de) goto LAB_0001fbd0;
+                    if (chipID == (UInt8 *)0x71de) goto LAB_0001fbd0;
                   }
-                  else if ((puVar3 == (UInt8 *)0x7260) ||
-                          (((UInt8 *)0x725f < puVar3 && (puVar3 + -0x7263 < (UInt8 *)0xd))))
+                  else if ((chipID == (UInt8 *)0x7260) ||
+                          (((UInt8 *)0x725f < chipID && (chipID + -0x7263 < (UInt8 *)0xd))))
                   goto LAB_0001fbec;
 LAB_0001fbc8:
                   uVar13 = 0;
                   goto LAB_0001fc04;
                 }
-                if (puVar3 != (UInt8 *)0x71c2) {
-                  if (puVar3 < (UInt8 *)0x71c3) {
-                    if (puVar3 == (UInt8 *)0x715e) goto LAB_0001fafc;
-                    if (puVar3 != (UInt8 *)0x71c0) goto LAB_0001fbc8;
+                if (chipID != (UInt8 *)0x71c2) {
+                  if (chipID < (UInt8 *)0x71c3) {
+                    if (chipID == (UInt8 *)0x715e) goto LAB_0001fafc;
+                    if (chipID != (UInt8 *)0x71c0) goto LAB_0001fbc8;
                   }
-                  else if ((puVar3 < (UInt8 *)0x71c4) ||
-                          (((UInt8 *)0x71c6 < puVar3 && (puVar3 != (UInt8 *)0x71ce))))
+                  else if ((chipID < (UInt8 *)0x71c4) ||
+                          (((UInt8 *)0x71c6 < chipID && (chipID != (UInt8 *)0x71ce))))
                   goto LAB_0001fbc8;
                 }
               }
@@ -279,10 +279,10 @@ LAB_0001fc04:
                   if ((self[0x8cc] != 0x0) && (1 < (UInt8)self[0x8cc])) {
                     iVar5 = 1;
                     do {
-                      local_38 = iVar5 << (GH_page_shift & 0x3f);
+                      gartOffset = iVar5 << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
-                                        (self,M<UInt32>(self + 0x22c),&local_38,local_38,
-                                         local_38 + 0x1000);
+                                        (self,M<UInt32>(self + 0x22c),&gartOffset,gartOffset,
+                                         gartOffset + 0x1000);
                       if (iVar9 == 0) {
                         if (iVar5 < (SInt32)(UInt32)(UInt8)self[0x8cc]) {
                           if (-1 < iVar5 + -1) {
@@ -308,10 +308,10 @@ LAB_0001fc04:
                   if (1 < (UInt8)self[0x8cc]) {
                     iVar5 = 2;
                     do {
-                      local_38 = iVar5 << (GH_page_shift & 0x3f);
+                      gartOffset = iVar5 << (GH_page_shift & 0x3f);
                       iVar9 = VCALL(M<SInt32>(self), 0x590)
-                                        (self,M<UInt32>(self + 0x22c),&local_38,local_38,
-                                         local_38 + 0x1000);
+                                        (self,M<UInt32>(self + 0x22c),&gartOffset,gartOffset,
+                                         gartOffset + 0x1000);
                       if (iVar9 == 0) {
                         if (iVar5 < (SInt32)((UInt32)(UInt8)self[0x8cc] << 1)) goto LAB_0001fd88;
                         break;
@@ -326,18 +326,18 @@ LAB_0001fc04:
                 if ((M<UInt32>(self + 0x98) & 0x80) != 0) {
                   uVar11 = (UInt32)(UInt8)self[0x84];
                   iVar9 = 0;
-                  uVar12 = -uVar11 & M<SInt32>(self + 0x238) + 0x20U;
+                  cacheFlushStart = -uVar11 & M<SInt32>(self + 0x238) + 0x20U;
                   iVar5 = ((M<SInt32>(self + 0x238) + 0x20U & uVar11 - 1) + 0x20) - uVar11;
                   if (0 < iVar5) {
                     iVar9 = 0;
                     do {
-                      dataCacheBlockStore(uVar12 + iVar9);
+                      dataCacheBlockStore(cacheFlushStart + iVar9);
                       iVar9 = iVar9 + uVar11;
                     } while (iVar9 < iVar5);
                   }
                   ppcSync();
                   instructionSynchronize();
-                  dataCacheBlockFlush(uVar12 + iVar9);
+                  dataCacheBlockFlush(cacheFlushStart + iVar9);
                   ppcSync();
                   instructionSynchronize();
                   instructionSynchronize();
@@ -561,7 +561,7 @@ LAB_0001fc04:
   }
 LAB_0001f9a0:
   uVar6 = 0;
-  VCALL(M<SInt32>(self), 0x34c)(self,param_1);
+  VCALL(M<SInt32>(self), 0x34c)(self,provider);
 LAB_0001f9c0:
   uVar8 = GH_ZN8OSSymbol17withCStringNoCopyEPKc("getSensorValue");
   M<UInt32>(self + 0x9ac) = uVar8;

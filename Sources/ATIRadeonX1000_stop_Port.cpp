@@ -29,9 +29,9 @@ extern "C" UInt32 GH_IOFreeAligned(...) asm("_IOFreeAligned");
 UInt32 HZMEM_Destroy(_HZDATA *hz);
 
 /* real addr 0x26250 */
-void ATIRadeonX1000::stop(IOService *real_param_1) {
+void ATIRadeonX1000::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   /* #153 (2026-10-08): stop()-path panic on unload - "IORegistryEntry::_RESERVEDIORegistryEntry10
    * called" via self+0x74's vtable+0x17c (the ATIFEDSInfo removeProperty call). Confirmed the
@@ -51,8 +51,8 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
   int iVar2;
   unsigned int uVar3;
   int iVar4;
-  UInt8 *pGVar5;
-  UInt8 *pAVar6;
+  UInt8 *memoryElement;
+  UInt8 *displayRecord;
   int iVar7;
   
   if (M<int>(self + 0x9a8) != 0) {
@@ -74,16 +74,16 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
     M<UInt32>(self + 0x9b8) = 0;
   }
   iVar4 = 0;
-  pGVar5 = (UInt8 *)(self + 0x9bc);
+  memoryElement = (UInt8 *)(self + 0x9bc);
   VCALL(*M<int *>(self + 0x74), 0x17c)(M<int *>(self + 0x74),"ATIFEDSInfo");
-  pAVar6 = self;
+  displayRecord = self;
   do {
-    if ((M<int>(pAVar6 + 0x9c0) != 0) && (M<int>(pAVar6 + 0x9bc) != 0)) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(pGVar5));
+    if ((M<int>(displayRecord + 0x9c0) != 0) && (M<int>(displayRecord + 0x9bc) != 0)) {
+      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
     bVar1 = iVar4 != 1;
-    pGVar5 = pGVar5 + 0x78;
-    pAVar6 = pAVar6 + 0x78;
+    memoryElement = memoryElement + 0x78;
+    displayRecord = displayRecord + 0x78;
     iVar4 = iVar4 + 1;
   } while (bVar1);
   if (M<int>(self + 0xae8) != 0) {
@@ -96,15 +96,15 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
     ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)((UInt8 *)(self + 0x8ec)));
   }
   iVar4 = 0;
-  pGVar5 = (UInt8 *)(self + 300);
-  pAVar6 = self;
+  memoryElement = (UInt8 *)(self + 300);
+  displayRecord = self;
   do {
-    if ((M<int>(pAVar6 + 0x130) != 0) && (M<int>(pAVar6 + 300) != 0)) {
-      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(pGVar5));
+    if ((M<int>(displayRecord + 0x130) != 0) && (M<int>(displayRecord + 300) != 0)) {
+      ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(memoryElement));
     }
     bVar1 = iVar4 != 1;
-    pGVar5 = pGVar5 + 0x78;
-    pAVar6 = pAVar6 + 0x78;
+    memoryElement = memoryElement + 0x78;
+    displayRecord = displayRecord + 0x78;
     iVar4 = iVar4 + 1;
   } while (bVar1);
   VCALL(M<int>(self), 0x54c)(self,M<int>(self + 0x50) + -1);
@@ -243,8 +243,8 @@ void ATIRadeonX1000::stop(IOService *real_param_1) {
    * vtable read - meaning stock's real source used non-virtual scope-resolution call syntax,
    * which the mechanical Ghidra port didn't reproduce. Fixed by using the same explicit
    * Base::method() syntax already used correctly elsewhere in this file family (e.g.
-   * ATIRadeonX1000::start()'s own `IOAccelerator::start(param_1)` chain call) - this is defined
+   * ATIRadeonX1000::start()'s own `IOAccelerator::start(providerBytes)` chain call) - this is defined
    * by the C++ standard to bypass virtual dispatch entirely, independent of -fapple-kext. */
-  this->IOATIR500Accelerator::stop((IOService *)(param_1));
+  this->IOATIR500Accelerator::stop((IOService *)(providerBytes));
   return;
 }

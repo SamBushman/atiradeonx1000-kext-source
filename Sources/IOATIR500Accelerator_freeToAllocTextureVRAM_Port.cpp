@@ -27,15 +27,15 @@
 
 
 /* real addr 0x3f60 */
-UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *real_param_1, VendorTextureBuffer**param_2, SInt32 param_3, VendorTextureBuffer *real_param_4) {
+UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *surface, VendorTextureBuffer**excludeList, SInt32 excludeCount, VendorTextureBuffer *needed) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_4 = reinterpret_cast<UInt8 *>(real_param_4);
+    UInt8 *surfaceBytes = reinterpret_cast<UInt8 *>(surface);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   UInt16 *puVar1;
   UInt16 *puVar2;
   bool bVar3;
-  bool bVar4;
+  bool secondPass;
   SInt32 iVar5;
   UInt8 *pIVar6;
   UInt32 uVar7;
@@ -49,37 +49,37 @@ UInt32 IOATIR500Accelerator::freeToAllocTextureVRAM(IOATIR500Surface *real_param
   UInt32 uVar15;
   
   if (((M<SInt32>(self + 0x21c) == 0) ||
-      (iVar5 = VCALL(M<SInt32>(self), 0x528)(self,param_4), iVar5 != 0)) ||
-     (iVar5 = this->tossSurfacesForVRAM((IOATIR500Surface *)(param_1),(VendorTextureBuffer **)(param_2),param_3,(VendorTextureBuffer *)(param_4),true), iVar5 == 0)) {
-    bVar4 = false;
+      (iVar5 = VCALL(M<SInt32>(self), 0x528)(self,neededBytes), iVar5 != 0)) ||
+     (iVar5 = this->tossSurfacesForVRAM((IOATIR500Surface *)(surfaceBytes),(VendorTextureBuffer **)(excludeList),excludeCount,(VendorTextureBuffer *)(neededBytes),true), iVar5 == 0)) {
+    secondPass = false;
 LAB_00004450:
-    iVar5 = VCALL(M<SInt32>(self), 0x528)(self,param_4);
+    iVar5 = VCALL(M<SInt32>(self), 0x528)(self,neededBytes);
     if (iVar5 == 0) {
       M<SInt32>(self + 0x7cc) = M<SInt32>(self + 0x7cc) + 1;
-      if (param_1 == (UInt8 *)0x0) {
+      if (surfaceBytes == (UInt8 *)0x0) {
         pIVar6 = M<UInt8 *>(self + 0x604);
       }
       else {
         pIVar6 = M<UInt8 *>(self + 0x604);
         pIVar10 = self + 0x5dc;
         if ((pIVar6 == pIVar10) ||
-           (M<SInt32>(param_1 + 0x84) - M<SInt32>(M<SInt32>(pIVar6 + 0x14) + 8) < 1)) {
+           (M<SInt32>(surfaceBytes + 0x84) - M<SInt32>(M<SInt32>(pIVar6 + 0x14) + 8) < 1)) {
           pIVar11 = M<UInt8 *>(self + 0x600);
-          bVar12 = !bVar4 << 1;
+          bVar12 = !secondPass << 1;
           pIVar6 = (UInt8 *)0x0;
           bVar3 = pIVar11 == pIVar10;
 LAB_00004294:
           if ((!bVar3) && (bVar13 = (pIVar11 == pIVar6) << 1, pIVar11 != pIVar6)) {
             M<SInt32>(self + 0x7e4) = M<SInt32>(self + 0x7e4) + 1;
-            if (param_3 < 1) goto code_r0x00004264;
-            if (pIVar11 != (UInt8 *)*param_2) {
+            if (excludeCount < 1) goto code_r0x00004264;
+            if (pIVar11 != (UInt8 *)*excludeList) {
               iVar5 = 0;
-              lVar14 = param_3;
+              lVar14 = excludeCount;
               do {
                 iVar5 = iVar5 + 1;
                 lVar14 = lVar14 + -1;
                 if (lVar14 == 0) goto LAB_000042b8;
-              } while ((UInt8 *)param_2[iVar5] != pIVar11);
+              } while ((UInt8 *)excludeList[iVar5] != pIVar11);
             }
             M<SInt32>(self + 0x7e8) = M<SInt32>(self + 0x7e8) + 1;
             goto LAB_0000428c;
@@ -88,15 +88,15 @@ LAB_00004294:
         }
       }
       pIVar11 = self + 0x5dc;
-      bVar12 = !bVar4 << 1;
+      bVar12 = !secondPass << 1;
       pIVar10 = (UInt8 *)0x0;
 LAB_00004040:
       do {
         if ((pIVar6 == pIVar11) || (bVar13 = (pIVar10 == pIVar6) << 1, pIVar10 == pIVar6))
         goto LAB_00004448;
         M<SInt32>(self + 2000) = M<SInt32>(self + 2000) + 1;
-        if (param_3 < 1) {
-          if (param_3 == 0) {
+        if (excludeCount < 1) {
+          if (excludeCount == 0) {
 LAB_000040b8:
             if ((bool)(bVar12 >> 1 & 1)) {
               iVar5 = M<SInt32>(pIVar6 + 0x14);
@@ -167,28 +167,28 @@ LAB_00004124:
           }
           goto LAB_00004040;
         }
-        if ((UInt8 *)*param_2 != pIVar6) {
+        if ((UInt8 *)*excludeList != pIVar6) {
           iVar5 = 0;
-          lVar14 = param_3;
+          lVar14 = excludeCount;
           do {
             iVar5 = iVar5 + 1;
             lVar14 = lVar14 + -1;
             if (lVar14 == 0) goto LAB_000040b8;
-          } while ((UInt8 *)param_2[iVar5] != pIVar6);
+          } while ((UInt8 *)excludeList[iVar5] != pIVar6);
         }
         M<SInt32>(self + 0x7d4) = M<SInt32>(self + 0x7d4) + 1;
         pIVar6 = M<UInt8 *>(pIVar6 + 0x28);
       } while( true );
     }
 LAB_00004474:
-    if ((M<SInt32>(param_4 + 0x48) == 0) &&
-       (iVar5 = this->tossSurfacesForVRAM((IOATIR500Surface *)(param_1),(VendorTextureBuffer **)(param_2),param_3,(VendorTextureBuffer *)(param_4),false), iVar5 == 0)) {
+    if ((M<SInt32>(neededBytes + 0x48) == 0) &&
+       (iVar5 = this->tossSurfacesForVRAM((IOATIR500Surface *)(surfaceBytes),(VendorTextureBuffer **)(excludeList),excludeCount,(VendorTextureBuffer *)(neededBytes),false), iVar5 == 0)) {
       return 0;
     }
   }
   return 1;
 code_r0x00004264:
-  if (param_3 != 0) goto LAB_00004294;
+  if (excludeCount != 0) goto LAB_00004294;
 LAB_000042b8:
   if ((bool)(bVar12 >> 1 & 1)) {
     iVar5 = M<SInt32>(pIVar11 + 0x14);
@@ -264,7 +264,7 @@ LAB_00004430:
   if ((bool)(bVar13 >> 1 & 1)) {
 LAB_00004448:
     if (!(bool)(bVar12 >> 1 & 1)) goto LAB_00004474;
-    bVar4 = true;
+    secondPass = true;
   }
   goto LAB_00004450;
 }

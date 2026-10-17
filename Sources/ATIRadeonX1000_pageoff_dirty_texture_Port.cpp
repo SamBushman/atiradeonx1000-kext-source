@@ -27,52 +27,52 @@
 
 
 /* real addr 0x21c60 */
-void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *real_param_2, SInt32 param_3, SInt32 param_4) {
+void ATIRadeonX1000::pageoff_dirty_texture(VendorTextureBuffer *texture, SInt32 param_3, SInt32 param_4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   unsigned int uVar1;
   int iVar2;
-  int *piVar3;
-  UInt8 *pAVar4;
+  int *mapping;
+  UInt8 *hwInfo;
   int iVar5;
-  int iVar6;
+  int face;
   
-  if ((M<int>(param_2 + 0x48) != 0) &&
-     (piVar3 = (int *)VCALL(*M<int *>(param_2 + 8), 0x14c)
-                                (M<int *>(param_2 + 8),GH_kernel_task,0,1,0,0),
-     piVar3 != (int *)0x0)) {
-    pAVar4 = (UInt8 *)VCALL(*piVar3, 0xd0)(piVar3);
-    if ((M<unsigned int>(pAVar4 + 0x20) & 0x20000000) == 0) {
-      if ((((M<unsigned int>(pAVar4 + 0x20) & 0x40000000) == 0) ||
-          (iVar5 = this->pageoff_dirty_texture_with_gpu((VendorTextureBuffer *)((UInt8 *)param_2),(ATITextureBufferHeader *)(pAVar4)),
+  if ((M<int>(textureBytes + 0x48) != 0) &&
+     (mapping = (int *)VCALL(*M<int *>(textureBytes + 8), 0x14c)
+                                (M<int *>(textureBytes + 8),GH_kernel_task,0,1,0,0),
+     mapping != (int *)0x0)) {
+    hwInfo = (UInt8 *)VCALL(*mapping, 0xd0)(mapping);
+    if ((M<unsigned int>(hwInfo + 0x20) & 0x20000000) == 0) {
+      if ((((M<unsigned int>(hwInfo + 0x20) & 0x40000000) == 0) ||
+          (iVar5 = this->pageoff_dirty_texture_with_gpu((VendorTextureBuffer *)((UInt8 *)textureBytes),(ATITextureBufferHeader *)(hwInfo)),
           iVar5 == 0)) &&
-         (iVar5 = this->prepare_texture_for_pageoff_with_cpu((VendorTextureBuffer *)((UInt8 *)param_2),(ATITextureBufferHeader *)(pAVar4)),
+         (iVar5 = this->prepare_texture_for_pageoff_with_cpu((VendorTextureBuffer *)((UInt8 *)textureBytes),(ATITextureBufferHeader *)(hwInfo)),
          iVar5 != 0)) {
-        this->pageoff_dirty_texture_with_cpu((VendorTextureBuffer *)((UInt8 *)param_2),(ATITextureBufferHeader *)(pAVar4));
+        this->pageoff_dirty_texture_with_cpu((VendorTextureBuffer *)((UInt8 *)textureBytes),(ATITextureBufferHeader *)(hwInfo));
       }
     }
     else {
-      this->pageoff_linear_buffer((VendorTextureBuffer *)((UInt8 *)param_2),(ATITextureBufferHeader *)(pAVar4));
+      this->pageoff_linear_buffer((VendorTextureBuffer *)((UInt8 *)textureBytes),(ATITextureBufferHeader *)(hwInfo));
     }
-    iVar5 = M<int>(param_2 + 0x14);
+    iVar5 = M<int>(textureBytes + 0x14);
     if ((M<SInt16>(iVar5 + 0x36) == 0) && (uVar1 = (unsigned int)M<UInt8>(iVar5 + 0x34), uVar1 != 0)) {
-      iVar6 = 0;
+      face = 0;
       if (uVar1 == 0) {
         uVar1 = 1;
       }
       while( true ) {
-        iVar2 = iVar6 * 2;
-        iVar6 = iVar6 + 1;
+        iVar2 = face * 2;
+        face = face + 1;
         iVar2 = iVar2 + iVar5;
         M<UInt16>(iVar2 + 0x1c) = M<UInt16>(iVar2 + 0x1c) | M<UInt16>(iVar2 + 0x28);
         uVar1 = uVar1 - 1;
         if (uVar1 == 0) break;
-        iVar5 = M<int>(param_2 + 0x14);
+        iVar5 = M<int>(textureBytes + 0x14);
       }
     }
-    VCALL(*piVar3, 0x18)(piVar3);
+    VCALL(*mapping, 0x18)(mapping);
   }
   return;
 }

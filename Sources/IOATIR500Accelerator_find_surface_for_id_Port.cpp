@@ -27,23 +27,23 @@
 
 
 /* real addr 0x59e0 */
-void *IOATIR500Accelerator::find_surface_for_id(UInt32 param_1) {
+void *IOATIR500Accelerator::find_surface_for_id(UInt32 surfaceID) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 *nextLink;
+  SInt32 head;
+  SInt32 surface;
   
-  iVar2 = M<SInt32>(self + 0x5c);
-  iVar3 = iVar2;
-  if (iVar2 != 0) {
+  head = M<SInt32>(self + 0x5c);
+  surface = head;
+  if (head != 0) {
     do {
-      if (M<UInt32>(iVar3 + 0xa4) == param_1) {
-        return (void *)(iVar3);
+      if (M<UInt32>(surface + 0xa4) == surfaceID) {
+        return (void *)(surface);
       }
-      piVar1 = (SInt32 *)(iVar3 + 0x9c);
-      iVar3 = *piVar1;
-    } while (iVar2 != *piVar1);
+      nextLink = (SInt32 *)(surface + 0x9c);
+      surface = *nextLink;
+    } while (head != *nextLink);
   }
   return 0;
 }

@@ -27,32 +27,32 @@
 
 
 /* real addr 0x290 */
-UInt32 IOATIR500Accelerator::getVRAMDescriptor(UInt32 param_1) {
+UInt32 IOATIR500Accelerator::getVRAMDescriptor(UInt32 index) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 *piVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
+  UInt32 address;
+  UInt32 result;
   
-  uVar3 = 1;
-  if (M<SInt32>(self + param_1 * 0x20 + 0xdc) == 0) {
-    piVar1 = (SInt32 *)VCALL(*M<SInt32 *>(self + param_1 * 0x20 + 0xd4), 0x5d0)(M<SInt32 *>(self + param_1 * 0x20 + 0xd4));
-    uVar3 = 0;
-    M<SInt32 *>(self + param_1 * 0x20 + 0xdc) = piVar1;
+  result = 1;
+  if (M<SInt32>(self + index * 0x20 + 0xdc) == 0) {
+    piVar1 = (SInt32 *)VCALL(*M<SInt32 *>(self + index * 0x20 + 0xd4), 0x5d0)(M<SInt32 *>(self + index * 0x20 + 0xd4));
+    result = 0;
+    M<SInt32 *>(self + index * 0x20 + 0xdc) = piVar1;
     if (piVar1 != (SInt32 *)0x0) {
       piVar1 = (SInt32 *)VCALL(*piVar1, 0x150)(piVar1,0x101);
-      M<SInt32 *>(self + param_1 * 0x20 + 0xe0) = piVar1;
+      M<SInt32 *>(self + index * 0x20 + 0xe0) = piVar1;
       if (piVar1 == (SInt32 *)0x0) {
-        VCALL(*M<SInt32 *>(self + param_1 * 0x20 + 0xdc), 0x18)(M<SInt32 *>(self + param_1 * 0x20 + 0xdc));
-        M<UInt32>(self + param_1 * 0x20 + 0xdc) = 0;
-        uVar3 = 0;
+        VCALL(*M<SInt32 *>(self + index * 0x20 + 0xdc), 0x18)(M<SInt32 *>(self + index * 0x20 + 0xdc));
+        M<UInt32>(self + index * 0x20 + 0xdc) = 0;
+        result = 0;
       }
       else {
-        uVar2 = VCALL(*piVar1, 0xd0)(piVar1);
-        uVar3 = 1;
-        M<UInt32>(self + param_1 * 0x20 + 0xe4) = uVar2;
+        address = VCALL(*piVar1, 0xd0)(piVar1);
+        result = 1;
+        M<UInt32>(self + index * 0x20 + 0xe4) = address;
       }
     }
   }
-  return uVar3;
+  return result;
 }

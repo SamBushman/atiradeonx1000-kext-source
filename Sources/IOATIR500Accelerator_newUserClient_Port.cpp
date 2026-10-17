@@ -55,51 +55,51 @@ extern "C" UInt32 GH_ZN12OSDictionary12withCapacityEj(...) asm("__ZN12OSDictiona
 
 
 /* real addr 0x2070 */
-IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, UInt32 param_3, IOUserClient**param_4) {
+IOReturn IOATIR500Accelerator::newUserClient(task *owningTask, void*securityID, UInt32 type, IOUserClient**handler) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *owningTaskBytes = reinterpret_cast<UInt8 *>(owningTask);
 
-  code *pcVar1;
-  UInt8 *pIVar2;
+  code *factory;
+  UInt8 *client;
   SInt32 iVar3;
-  SInt32 *piVar4;
-  UInt8 bVar5;
+  SInt32 *properties;
+  UInt8 noProperties;
 
-  *param_4 = (IOUserClient *)0x0;
-  if (param_3 == 1) {
-    pcVar1 = M<code *>(M<SInt32>(self) + 0x5e0);
+  *handler = (IOUserClient *)0x0;
+  if (type == 1) {
+    factory = M<code *>(M<SInt32>(self) + 0x5e0);
   }
   else {
-    if (param_3 == 0) {
-      piVar4 = (SInt32 *)GH_ZN12OSDictionary12withCapacityEj(1);
-      bVar5 = (piVar4 == (SInt32 *)0x0) << 1;
-      if (piVar4 == (SInt32 *)0x0) {
+    if (type == 0) {
+      properties = (SInt32 *)GH_ZN12OSDictionary12withCapacityEj(1);
+      noProperties = (properties == (SInt32 *)0x0) << 1;
+      if (properties == (SInt32 *)0x0) {
         return 0xe00002be;
       }
-      VCALL(*piVar4, 300)(piVar4,"IOUserClientCrossEndianCompatible",
+      VCALL(*properties, 300)(properties,"IOUserClientCrossEndianCompatible",
                           (UInt32)const_cast<void *>(static_cast<const void *>(kOSBooleanTrue)));
-      pIVar2 = (UInt8 *)VCALL(M<SInt32>(self), 0x5d4)(self);
-      if (pIVar2 == (UInt8 *)0x0) {
-        VCALL(*piVar4, 0x18)(piVar4);
+      client = (UInt8 *)VCALL(M<SInt32>(self), 0x5d4)(self);
+      if (client == (UInt8 *)0x0) {
+        VCALL(*properties, 0x18)(properties);
         return 0xe00002be;
       }
-      M<task *>(pIVar2 + 0x78) = real_param_1;
+      M<task *>(client + 0x78) = owningTask;
       goto LAB_000021d0;
     }
-    if (param_3 != 2) {
-      if (param_3 != 3) {
+    if (type != 2) {
+      if (type != 3) {
         return 0xe00002c2;
       }
-      pIVar2 = (UInt8 *)VCALL(M<SInt32>(self), 0x5dc)(self);
-      if (pIVar2 == (UInt8 *)0x0) {
+      client = (UInt8 *)VCALL(M<SInt32>(self), 0x5dc)(self);
+      if (client == (UInt8 *)0x0) {
         return 0xe00002be;
       }
-      M<task *>(pIVar2 + 0x78) = real_param_1;
-      piVar4 = (SInt32 *)0x0;
-      bVar5 = 2;
+      M<task *>(client + 0x78) = owningTask;
+      properties = (SInt32 *)0x0;
+      noProperties = 2;
       goto LAB_000021d0;
     }
-    pcVar1 = M<code *>(M<SInt32>(self) + 0x5d8);
+    factory = M<code *>(M<SInt32>(self) + 0x5d8);
   }
   /* #153 root cause: real disassembly (addr 0x2070; GL/2D branches at 0x2160/0x2170) confirms this
    * call explicitly loads only r2 (the vtable, to fetch the function pointer) - r3 (self/"this")
@@ -108,34 +108,34 @@ IOReturn IOATIR500Accelerator::newUserClient(task *real_param_1, void*param_2, U
    * argument entirely; our own compiler has no reason to leave self in r3 for a call that
    * references no arguments at all in the C++ source. This is the actual cause of #153's
    * deterministic, build-independent crash: newUserClient is the very first thing called when
-   * opening a GL (param_3==1) or 2D (param_3==2) user client, which is why the crash recurred
+   * opening a GL (type==1) or 2D (type==2) user client, which is why the crash recurred
    * identically regardless of any GART/texture-buffer fix tried earlier. */
-  pIVar2 = (UInt8 *)(*pcVar1)(self);
-  if (pIVar2 == (UInt8 *)0x0) {
+  client = (UInt8 *)(*factory)(self);
+  if (client == (UInt8 *)0x0) {
     return 0xe00002be;
   }
-  piVar4 = (SInt32 *)0x0;
-  M<task *>(pIVar2 + 0x78) = real_param_1;
-  bVar5 = 2;
+  properties = (SInt32 *)0x0;
+  M<task *>(client + 0x78) = owningTask;
+  noProperties = 2;
 LAB_000021d0:
-  iVar3 = VCALL(M<SInt32>(pIVar2), 0x150)(pIVar2,piVar4);
+  iVar3 = VCALL(M<SInt32>(client), 0x150)(client,properties);
   if (iVar3 != 0) {
-    iVar3 = VCALL(M<SInt32>(pIVar2), 0x3a4)(pIVar2,self);
+    iVar3 = VCALL(M<SInt32>(client), 0x3a4)(client,self);
   }
   if (iVar3 != 0) {
-    iVar3 = VCALL(M<SInt32>(pIVar2), 0x348)(pIVar2,self);
+    iVar3 = VCALL(M<SInt32>(client), 0x348)(client,self);
     if (iVar3 != 0) {
-      *param_4 = (IOUserClient *)pIVar2;
-      if (!(bool)(bVar5 >> 1 & 1)) {
-        VCALL(*piVar4, 0x18)(piVar4);
+      *handler = (IOUserClient *)client;
+      if (!(bool)(noProperties >> 1 & 1)) {
+        VCALL(*properties, 0x18)(properties);
       }
       return 0;
     }
-    VCALL(M<SInt32>(pIVar2), 0x3a8)(pIVar2,self);
+    VCALL(M<SInt32>(client), 0x3a8)(client,self);
   }
-  VCALL(M<SInt32>(pIVar2), 0x18)(pIVar2);
-  if (!(bool)(bVar5 >> 1 & 1)) {
-    VCALL(*piVar4, 0x18)(piVar4);
+  VCALL(M<SInt32>(client), 0x18)(client);
+  if (!(bool)(noProperties >> 1 & 1)) {
+    VCALL(*properties, 0x18)(properties);
   }
   return 0xe00002c9;
 }

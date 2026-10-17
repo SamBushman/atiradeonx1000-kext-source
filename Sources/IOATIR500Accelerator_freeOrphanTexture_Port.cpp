@@ -28,37 +28,37 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0x3680 */
-void IOATIR500Accelerator::freeOrphanTexture(bool param_1) {
+void IOATIR500Accelerator::freeOrphanTexture(bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 IVar1;
-  bool bVar2;
+  UInt8 bufferType;
+  bool blockedOnce;
   SInt32 iVar3;
   UInt32 in_register_00000010;
-  UInt32 uVar4;
-  SInt32 iVar5;
-  UInt8 *pIVar6;
-  UInt8 bVar7;
+  UInt32 stamp;
+  SInt32 waitStat;
+  UInt8 *texvert;
+  UInt8 notAggressive;
   
-  pIVar6 = M<UInt8 *>(self + 0x664);
-  if (pIVar6 == (UInt8 *)(self + 0x63c)) {
+  texvert = M<UInt8 *>(self + 0x664);
+  if (texvert == (UInt8 *)(self + 0x63c)) {
     return;
   }
-  bVar7 = (((UInt32)param_1) == 0) << 1;
-  bVar2 = false;
+  notAggressive = (((UInt32)aggressive) == 0) << 1;
+  blockedOnce = false;
   while( true ) {
-    IVar1 = pIVar6[0x20];
-    if ((IVar1 == 0x3) || (IVar1 == 0x7)) {
-      uVar4 = M<UInt32>(M<SInt32>(pIVar6 + 0x14) + 0xc);
+    bufferType = texvert[0x20];
+    if ((bufferType == 0x3) || (bufferType == 0x7)) {
+      stamp = M<UInt32>(M<SInt32>(texvert + 0x14) + 0xc);
     }
     else {
-      if (1 < (UInt8)((char)IVar1 - 4U)) {
+      if (1 < (UInt8)((char)bufferType - 4U)) {
         return;
       }
-      uVar4 = M<UInt32>(M<SInt32>(pIVar6 + 0x14) + 8);
+      stamp = M<UInt32>(M<SInt32>(texvert + 0x14) + 8);
     }
-    if ((bool)(bVar7 >> 1 & 1)) {
-      iVar3 = VCALL(M<SInt32>(self), 0x554)(self,uVar4);
+    if ((bool)(notAggressive >> 1 & 1)) {
+      iVar3 = VCALL(M<SInt32>(self), 0x554)(self,stamp);
       if (iVar3 == 0) {
         if (self[0x82] != 0x0) {
           return;
@@ -70,25 +70,25 @@ void IOATIR500Accelerator::freeOrphanTexture(bool param_1) {
     }
     else {
       /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3680+0x7c) shows r4
-       * still holding uVar4 (loaded a few instructions earlier for the branch above) live across
-       * this call - waitForTimeStamp(UInt32) genuinely takes uVar4 as its target stamp here, not
+       * still holding stamp (loaded a few instructions earlier for the branch above) live across
+       * this call - waitForTimeStamp(UInt32) genuinely takes stamp as its target stamp here, not
        * just `self`. Our port never wrote it explicitly, so an unoptimized (-O0) build can't rely
        * on the same register-reuse coincidence stock's optimized build gets for free. Confirmed
        * benign in practice: self+0x790 (the only consumer of this call's return value) is a purely
        * cosmetic IOKit performance-stat property (IOATIR500Accelerator_StopGartStats.cpp's
        * writePerformanceStats), not used in any control-flow decision - but a real, independently
        * verified dropped-argument bug, same class as removeEventSource()/IOLockFree/free_texvert. */
-      iVar5 = M<SInt32>(self + 0x790);
-      iVar3 = VCALL(M<SInt32>(self), 0x54c)(self, uVar4);
-      M<SInt32>(self + 0x790) = iVar5 + iVar3;
+      waitStat = M<SInt32>(self + 0x790);
+      iVar3 = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
+      M<SInt32>(self + 0x790) = waitStat + iVar3;
     }
-    if (bVar2) {
+    if (blockedOnce) {
       GH_thread_block(0);
     }
-    IOATIR500Shared::free_texvert(this, (IOTextureBuffer *)pIVar6);
-    pIVar6 = M<UInt8 *>(self + 0x664);
-    if (pIVar6 == (UInt8 *)(self + 0x63c)) break;
-    bVar2 = true;
+    IOATIR500Shared::free_texvert(this, (IOTextureBuffer *)texvert);
+    texvert = M<UInt8 *>(self + 0x664);
+    if (texvert == (UInt8 *)(self + 0x63c)) break;
+    blockedOnce = true;
   }
   return;
 }

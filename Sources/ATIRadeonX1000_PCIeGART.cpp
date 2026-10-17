@@ -28,45 +28,45 @@ extern "C" UInt32 GH_IOSleep(...) asm("_IOSleep");
 extern "C" UInt32 GH_kprintf(...) asm("_kprintf");
 
 /* real addr 0x1b540 */
-void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32 param_2) {
+void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *descriptor, UInt32 gartOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *descriptorBytes = reinterpret_cast<UInt8 *>(descriptor);
 
   UInt32 uVar1;
   SInt32 iVar2;
-  SInt32 iVar3;
-  SInt32 iVar4;
-  SInt32 iVar5;
+  SInt32 pageTable;
+  SInt32 pagesCleared;
+  SInt32 entryOffset;
   SInt32 iVar6;
-  UInt32 *puVar7;
+  UInt32 *secondEntry;
   UInt32 uVar8;
   UInt32 uVar9;
   
-  if (param_1 != (UInt8 *)0x0) {
-    uVar9 = param_2 >> (GH_page_shift & 0x3f);
-    uVar1 = VCALL(M<SInt32>(param_1), 0x128)(param_1);
+  if (descriptorBytes != (UInt8 *)0x0) {
+    uVar9 = gartOffset >> (GH_page_shift & 0x3f);
+    uVar1 = VCALL(M<SInt32>(descriptorBytes), 0x128)(descriptorBytes);
     uVar1 = uVar9 + (uVar1 >> (GH_page_shift & 0x3f));
     iVar6 = uVar1 - uVar9;
     M<SInt32>(self + 0xa0) = M<SInt32>(self + 0xa0) - (iVar6 << (GH_page_shift & 0x3f));
     if (uVar9 < uVar1) {
       iVar2 = M<SInt32>(self + 3000);
-      iVar5 = uVar9 * 4;
-      iVar3 = M<SInt32>(self + 0xc4c);
+      entryOffset = uVar9 * 4;
+      pageTable = M<SInt32>(self + 0xc4c);
       uVar8 = M<UInt32>(self + 0x844);
-      iVar4 = 0;
-      puVar7 = (UInt32 *)(iVar2 + iVar5);
+      pagesCleared = 0;
+      secondEntry = (UInt32 *)(iVar2 + entryOffset);
       do {
         if (iVar2 != 0) {
-          *puVar7 = uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
+          *secondEntry = uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
         }
-        M<UInt32>(iVar5 + iVar3) =
+        M<UInt32>(entryOffset + pageTable) =
              uVar8 << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
-        iVar4 = iVar4 + 1;
-        iVar5 = iVar5 + 4;
-        puVar7 = puVar7 + 1;
+        pagesCleared = pagesCleared + 1;
+        entryOffset = entryOffset + 4;
+        secondEntry = secondEntry + 1;
         iVar6 = iVar6 + -1;
       } while (iVar6 != 0);
-      uVar9 = uVar9 + iVar4;
+      uVar9 = uVar9 + pagesCleared;
     }
     else {
       iVar2 = M<SInt32>(self + 3000);
@@ -87,36 +87,36 @@ void ATIRadeonX1000::removeFromPCIeGART(IOMemoryDescriptor *real_param_1, UInt32
       M<UInt32>(self + 0xc5c) =
            loadWordByteReversed(&M<UInt8>(iVar2 + -4));
     }
-    uVar9 = param_2 >> (GH_page_shift & 0x3f);
+    uVar9 = gartOffset >> (GH_page_shift & 0x3f);
     VCALL(M<SInt32>(self), 0x59c)(self,uVar9,uVar1 - uVar9);
-    VCALL(M<SInt32>(param_1), 0x148)(param_1,3);
+    VCALL(M<SInt32>(descriptorBytes), 0x148)(descriptorBytes,3);
   }
   return;
 }
 
 /* real addr 0x1b6d0 */
-bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
+bool ATIRadeonX1000::reserveInGART(UInt32 gartOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
   SInt32 iVar2;
-  UInt32 *puVar3;
+  UInt32 *entry;
   
-  iVar2 = BASE_reserveInGART(param_1);
+  iVar2 = BASE_reserveInGART(gartOffset);
   if (iVar2 != 0) {
-    iVar2 = (param_1 >> (GH_page_shift & 0x3f)) * 4;
-    puVar3 = (UInt32 *)(iVar2 + M<SInt32>(self + 0xc4c));
-    if ((loadWordByteReversed(puVar3)) != M<UInt32>(self + 0x844))
+    iVar2 = (gartOffset >> (GH_page_shift & 0x3f)) * 4;
+    entry = (UInt32 *)(iVar2 + M<SInt32>(self + 0xc4c));
+    if ((loadWordByteReversed(entry)) != M<UInt32>(self + 0x844))
     {
-      BASE_clearInGART(param_1 >> (GH_page_shift & 0x3f));
+      BASE_clearInGART(gartOffset >> (GH_page_shift & 0x3f));
       GH_IOSleep(10);
       return 0;
     }
     uVar1 = M<UInt32>(self + 0x848);
-    *puVar3 = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
+    *entry = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
     if (M<SInt32>(self + 3000) != 0) {
-      puVar3 = (UInt32 *)(iVar2 + M<SInt32>(self + 3000));
-      *puVar3 = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
+      entry = (UInt32 *)(iVar2 + M<SInt32>(self + 3000));
+      *entry = uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
       enforceInOrderExecutionIO();
       iVar2 = M<SInt32>(self + 0x860);
       M<UInt32>(self + 0xc5c) =
@@ -129,7 +129,7 @@ bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
       M<UInt32>(iVar2 + 0x130) =
            uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
       M<UInt32>(self + 0xc5c) =
-           loadWordByteReversed(puVar3);
+           loadWordByteReversed(entry);
       return 1;
     }
   }
@@ -137,21 +137,21 @@ bool ATIRadeonX1000::reserveInGART(UInt32 param_1) {
 }
 
 /* real addr 0x1b7f0 */
-void ATIRadeonX1000::clearInGART(UInt32 param_1) {
+void ATIRadeonX1000::clearInGART(UInt32 gartOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 *puVar1;
+  UInt32 *secondEntry;
   UInt32 uVar2;
   SInt32 iVar3;
   
-  BASE_clearInGART(param_1);
+  BASE_clearInGART(gartOffset);
   uVar2 = M<UInt32>(self + 0x844);
-  iVar3 = (param_1 >> (GH_page_shift & 0x3f)) * 4;
+  iVar3 = (gartOffset >> (GH_page_shift & 0x3f)) * 4;
   M<UInt32>(iVar3 + M<SInt32>(self + 0xc4c)) =
        uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
   if (M<SInt32>(self + 3000) != 0) {
-    puVar1 = (UInt32 *)(iVar3 + M<SInt32>(self + 3000));
-    *puVar1 = uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+    secondEntry = (UInt32 *)(iVar3 + M<SInt32>(self + 3000));
+    *secondEntry = uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
     enforceInOrderExecutionIO();
     iVar3 = M<SInt32>(self + 0x860);
     M<UInt32>(self + 0xc5c) =
@@ -164,7 +164,7 @@ void ATIRadeonX1000::clearInGART(UInt32 param_1) {
     M<UInt32>(iVar3 + 0x130) =
          uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
     M<UInt32>(self + 0xc5c) =
-         loadWordByteReversed(puVar1);
+         loadWordByteReversed(secondEntry);
   }
   return;
 }
@@ -174,17 +174,17 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
-  UInt32 uVar2;
+  UInt32 result;
   SInt32 iVar3;
   UInt32 uVar4;
-  UInt32 *puVar5;
-  UInt32 *puVar6;
-  UInt32 *puVar7;
-  SInt32 iVar8;
-  UInt32 uVar9;
+  UInt32 *primaryEntry;
+  UInt32 *secondTable;
+  UInt32 *secondEntry;
+  SInt32 registers;
+  UInt32 emptyEntry;
   
-  uVar2 = 0;
-  if (((M<UInt32>(self + 0x98) & 0xf00000) != 0) && (uVar2 = 1, M<SInt32>(self + 3000) == 0)) {
+  result = 0;
+  if (((M<UInt32>(self + 0x98) & 0xf00000) != 0) && (result = 1, M<SInt32>(self + 3000) == 0)) {
     iVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x568)(M<SInt32 *>(self + 0x74),0x10,0);
     if (iVar3 == 0) {
       GH_kprintf(
@@ -206,24 +206,24 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
         M<UInt32>(self + 3000) = (uVar1 - uVar4) + M<SInt32>(self + 0xe4);
       }
       if (M<SInt32>(self + 0xc4c) == 0) {
-        puVar5 = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
-        M<UInt32 *>(self + 0xc4c) = puVar5;
-        if (puVar5 == (UInt32 *)0x0) {
+        primaryEntry = (UInt32 *)GH_IOMallocAligned(uVar4,GH_page_size);
+        M<UInt32 *>(self + 0xc4c) = primaryEntry;
+        if (primaryEntry == (UInt32 *)0x0) {
           M<UInt32>(self + 0xbb0) = 0;
           M<UInt32>(self + 0xbac) = 0;
           M<UInt32>(self + 0xbb4) = 0;
           M<UInt32>(self + 3000) = 0;
           return 0xffffffff;
         }
-        puVar6 = M<UInt32 *>(self + 3000);
-        if (puVar6 == (UInt32 *)0x0) {
+        secondTable = M<UInt32 *>(self + 3000);
+        if (secondTable == (UInt32 *)0x0) {
           uVar4 = M<UInt32>(self + 0x830);
           uVar1 = uVar4 >> 2;
           if (uVar1 != 0) {
-            uVar9 = M<UInt32>(self + 0x844);
+            emptyEntry = M<UInt32>(self + 0x844);
             do {
-              *puVar5 = uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18;
-              puVar5 = puVar5 + 1;
+              *primaryEntry = emptyEntry << 0x18 | (emptyEntry & 0xff00) << 8 | emptyEntry >> 8 & 0xff00 | emptyEntry >> 0x18;
+              primaryEntry = primaryEntry + 1;
               uVar1 = uVar1 - 1;
             } while (uVar1 != 0);
           }
@@ -233,31 +233,31 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
           iVar3 = 0;
           uVar1 = uVar4 >> 2;
           if (uVar1 != 0) {
-            uVar9 = M<UInt32>(self + 0x844);
+            emptyEntry = M<UInt32>(self + 0x844);
             iVar3 = 0;
-            puVar7 = puVar6;
+            secondEntry = secondTable;
             do {
-              *puVar7 = uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18;
-              *puVar5 = uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18;
+              *secondEntry = emptyEntry << 0x18 | (emptyEntry & 0xff00) << 8 | emptyEntry >> 8 & 0xff00 | emptyEntry >> 0x18;
+              *primaryEntry = emptyEntry << 0x18 | (emptyEntry & 0xff00) << 8 | emptyEntry >> 8 & 0xff00 | emptyEntry >> 0x18;
               iVar3 = iVar3 + 1;
-              puVar7 = puVar7 + 1;
-              puVar5 = puVar5 + 1;
+              secondEntry = secondEntry + 1;
+              primaryEntry = primaryEntry + 1;
               uVar1 = uVar1 - 1;
             } while (uVar1 != 0);
             iVar3 = iVar3 * 4;
           }
-          iVar8 = M<SInt32>(self + 0x860);
+          registers = M<SInt32>(self + 0x860);
           M<UInt32>(self + 0xc5c) =
-               loadWordByteReversed(&M<UInt8>(iVar8 + 0x130));
+               loadWordByteReversed(&M<UInt8>(registers + 0x130));
           uVar1 = M<UInt32>(self + 0xc5c);
-          M<UInt32>(iVar8 + 0x130) =
+          M<UInt32>(registers + 0x130) =
                uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | (uVar1 & 0xff0000) >> 8 |
                (uVar1 | 0x8000000) >> 0x18;
           uVar1 = M<UInt32>(self + 0xc5c);
-          M<UInt32>(iVar8 + 0x130) =
+          M<UInt32>(registers + 0x130) =
                uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
           M<UInt32>(self + 0xc5c) =
-               loadWordByteReversed(&M<UInt8>((SInt32)puVar6 + iVar3 + -4));
+               loadWordByteReversed(&M<UInt8>((SInt32)secondTable + iVar3 + -4));
         }
       }
       else {
@@ -337,34 +337,34 @@ SInt32 ATIRadeonX1000::startupPCIeGART() {
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
     }
-    uVar2 = 0xffffffff;
+    result = 0xffffffff;
   }
-  return uVar2;
+  return result;
 }
 
 /* real addr 0x1dc10 */
 void ATIRadeonX1000::shutdownPCIeGART() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
+  SInt32 registers;
+  UInt32 savedValue;
   
-  iVar1 = M<SInt32>(self + 0x860);
-  M<UInt32>(iVar1 + 0x30) = 0x10000000;
+  registers = M<SInt32>(self + 0x860);
+  M<UInt32>(registers + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
-  uVar2 = M<UInt32>(self + 0xbbc);
-  M<UInt32>(iVar1 + 0x34) =
-       uVar2 << 0x18 | (uVar2 & 0xff00 | 0x100) << 8 | (uVar2 & 0xff0000) >> 8 | uVar2 >> 0x18;
+  savedValue = M<UInt32>(self + 0xbbc);
+  M<UInt32>(registers + 0x34) =
+       savedValue << 0x18 | (savedValue & 0xff00 | 0x100) << 8 | (savedValue & 0xff0000) >> 8 | savedValue >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar1 + 0x30) = 0x10000000;
+  M<UInt32>(registers + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar1 + 0x34) =
-       uVar2 << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+  M<UInt32>(registers + 0x34) =
+       savedValue << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar1 + 0x30) = 0x10000000;
+  M<UInt32>(registers + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar1 + 0x34) =
-       (uVar2 & 0xfffffffe) << 0x18 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
+  M<UInt32>(registers + 0x34) =
+       (savedValue & 0xfffffffe) << 0x18 | (savedValue & 0xff00) << 8 | savedValue >> 8 & 0xff00 | savedValue >> 0x18;
   enforceInOrderExecutionIO();
   if ((M<SInt32>(self + 0xbc8) != 0) && (M<SInt32>(self + 0xbc4) != 0)) {
     ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(self + 0xbc4));
@@ -379,37 +379,37 @@ void ATIRadeonX1000::pageOnPCIeGART() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 iVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  SInt32 secondTable;
+  SInt32 registers;
   UInt32 uVar4;
   
-  iVar2 = M<SInt32>(self + 3000);
-  if (iVar2 != 0) {
+  secondTable = M<SInt32>(self + 3000);
+  if (secondTable != 0) {
     iVar1 = 0;
     uVar4 = 0;
     if (M<UInt32>(self + 0x830) >> 2 != 0) {
       while( true ) {
-        M<UInt32>(iVar2 + uVar4 * 4) = M<UInt32>(M<SInt32>(self + 0xc4c) + uVar4 * 4);
+        M<UInt32>(secondTable + uVar4 * 4) = M<UInt32>(M<SInt32>(self + 0xc4c) + uVar4 * 4);
         enforceInOrderExecutionIO();
         uVar4 = uVar4 + 1;
         if (M<UInt32>(self + 0x830) >> 2 <= uVar4) break;
-        iVar2 = M<SInt32>(self + 3000);
+        secondTable = M<SInt32>(self + 3000);
       }
-      iVar2 = M<SInt32>(self + 3000);
+      secondTable = M<SInt32>(self + 3000);
       iVar1 = uVar4 * 4;
     }
     enforceInOrderExecutionIO();
-    iVar3 = M<SInt32>(self + 0x860);
+    registers = M<SInt32>(self + 0x860);
     M<UInt32>(self + 0xc5c) =
-         loadWordByteReversed(&M<UInt8>(iVar3 + 0x130));
+         loadWordByteReversed(&M<UInt8>(registers + 0x130));
     uVar4 = M<UInt32>(self + 0xc5c);
-    M<UInt32>(iVar3 + 0x130) =
+    M<UInt32>(registers + 0x130) =
          uVar4 << 0x18 | (uVar4 & 0xff00) << 8 | (uVar4 & 0xff0000) >> 8 |
          (uVar4 | 0x8000000) >> 0x18;
     uVar4 = M<UInt32>(self + 0xc5c);
-    M<UInt32>(iVar3 + 0x130) =
+    M<UInt32>(registers + 0x130) =
          uVar4 << 0x18 | (uVar4 & 0xff00) << 8 | uVar4 >> 8 & 0xff00 | uVar4 >> 0x18;
-    iVar1 = iVar1 + iVar2;
+    iVar1 = iVar1 + secondTable;
     M<UInt32>(self + 0xc5c) =
          loadWordByteReversed(&M<UInt8>(iVar1 + -4));
     return;
@@ -418,69 +418,69 @@ void ATIRadeonX1000::pageOnPCIeGART() {
 }
 
 /* real addr 0x1dd80 */
-IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *real_param_2, UInt32 *real_param_3, UInt32 param_4, UInt32 param_5) {
+IOReturn ATIRadeonX1000::addToPCIeGART(IOMemoryDescriptor *descriptor, UInt32 *outOffset, UInt32 minOffset, UInt32 maxOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
-    UInt8 *param_3 = reinterpret_cast<UInt8 *>(real_param_3);
+    UInt8 *descriptorBytes = reinterpret_cast<UInt8 *>(descriptor);
+    UInt8 *outOffsetBytes = reinterpret_cast<UInt8 *>(outOffset);
 
   UInt32 uVar1;
-  UInt32 uVar2;
-  UInt32 uVar3;
+  UInt32 entry;
+  UInt32 pageCount;
   SInt32 iVar4;
-  SInt32 iVar5;
-  SInt32 iVar6;
-  UInt32 uVar7;
-  UInt8 *pbVar8;
+  SInt32 pageIndex;
+  SInt32 pageTable;
+  UInt32 entryBits;
+  UInt8 *entryScan;
   SInt32 iVar9;
   UInt32 uVar10;
-  SInt32 iVar11;
-  UInt32 local_38 [6];
+  SInt32 secondTable;
+  UInt32 segmentLength [6];
 
-  local_38[0] = 0;
-  if ((param_2 != 0) && (param_3 != 0)) {
-    uVar3 = VCALL(M<UInt32>(param_2), 0x128)(param_2);
+  segmentLength[0] = 0;
+  if ((descriptorBytes != 0) && (outOffsetBytes != 0)) {
+    pageCount = VCALL(M<UInt32>(descriptorBytes), 0x128)(descriptorBytes);
     uVar10 = GH_page_shift;
     uVar1 = M<UInt32>(self + 0x830);
-    M<UInt32>(param_3) = 0;
+    M<UInt32>(outOffsetBytes) = 0;
     uVar1 = uVar1 >> 2;
-    uVar3 = uVar3 >> (uVar10 & 0x3f);
+    pageCount = pageCount >> (uVar10 & 0x3f);
     if (uVar1 == 0) {
-      if (uVar3 == 0) {
-        iVar5 = 0;
-        uVar3 = 0;
+      if (pageCount == 0) {
+        pageIndex = 0;
+        pageCount = 0;
 LAB_0001de4c:
-        iVar4 = VCALL(M<UInt32>(param_2), 0x144)(param_2,3);
+        iVar4 = VCALL(M<UInt32>(descriptorBytes), 0x144)(descriptorBytes,3);
         if (iVar4 == 0) {
           iVar4 = 0;
-          M<SInt32>(param_3) = iVar5 << (GH_page_shift & 0x3f);
+          M<SInt32>(outOffsetBytes) = pageIndex << (GH_page_shift & 0x3f);
           /* #167: the per-entry step is _page_size (stock 0x1de94 HA16/LO16 _page_size), NOT _page_shift
            * - the Ghidra dump labeled both zero-immediate data relocs alike; with the shift (12) as the
            * step each segment page wrote ~341 GART entries and ran off the end of the table. */
-          while (uVar10 = VCALL(M<UInt32>(param_2), 0x13c)(param_2,iVar4,local_38),
+          while (uVar10 = VCALL(M<UInt32>(descriptorBytes), 0x13c)(descriptorBytes,iVar4,segmentLength),
                 uVar1 = GH_page_size, uVar10 != 0) {
-            iVar4 = iVar4 + local_38[0];
-            if (GH_page_size <= local_38[0]) {
-              iVar11 = M<SInt32>(self + 3000);
-              iVar6 = M<SInt32>(self + 0xc4c);
-              iVar9 = iVar5 << 2;
-              uVar7 = M<UInt32>(self + 0xbc0);
+            iVar4 = iVar4 + segmentLength[0];
+            if (GH_page_size <= segmentLength[0]) {
+              secondTable = M<SInt32>(self + 3000);
+              pageTable = M<SInt32>(self + 0xc4c);
+              iVar9 = pageIndex << 2;
+              entryBits = M<UInt32>(self + 0xbc0);
               do {
-                if (iVar11 != 0) {
-                  uVar2 = uVar10 >> 8 | uVar7;
-                  M<UInt32>(iVar9 + iVar11) =
-                       (uVar2 | 0xc) << 0x18 | (uVar2 & 0xff00) << 8 | (uVar2 & 0xff0000) >> 8 |
-                       uVar7 >> 0x18;
+                if (secondTable != 0) {
+                  entry = uVar10 >> 8 | entryBits;
+                  M<UInt32>(iVar9 + secondTable) =
+                       (entry | 0xc) << 0x18 | (entry & 0xff00) << 8 | (entry & 0xff0000) >> 8 |
+                       entryBits >> 0x18;
                 }
-                uVar2 = uVar10 >> 8 | uVar7;
-                M<UInt32>(iVar9 + iVar6) =
-                     (uVar2 | 0xc) << 0x18 | (uVar2 & 0xff00) << 8 | (uVar2 & 0xff0000) >> 8 |
-                     uVar7 >> 0x18;
-                local_38[0] = local_38[0] - uVar1;
+                entry = uVar10 >> 8 | entryBits;
+                M<UInt32>(iVar9 + pageTable) =
+                     (entry | 0xc) << 0x18 | (entry & 0xff00) << 8 | (entry & 0xff0000) >> 8 |
+                     entryBits >> 0x18;
+                segmentLength[0] = segmentLength[0] - uVar1;
                 uVar10 = uVar10 + uVar1;
-                iVar5 = iVar5 + 1;
+                pageIndex = pageIndex + 1;
                 iVar9 = iVar9 + 4;
-              } while (uVar1 <= local_38[0]);
+              } while (uVar1 <= segmentLength[0]);
             }
           }
           enforceInOrderExecutionIO();
@@ -496,32 +496,32 @@ LAB_0001de4c:
             uVar1 = M<UInt32>(self + 0xc5c);
             M<UInt32>(iVar9 + 0x130) =
                  uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
-            iVar4 = iVar5 * 4 + iVar4;
+            iVar4 = pageIndex * 4 + iVar4;
             M<UInt32>(self + 0xc5c) =
                  loadWordByteReversed(&M<UInt8>(iVar4 + -4));
           }
-          VCALL(M<SInt32>(self), 0x59c)(self,iVar5 - uVar3,uVar3);
+          VCALL(M<SInt32>(self), 0x59c)(self,pageIndex - pageCount,pageCount);
           M<UInt32>(self + 0xa0) =
-               (uVar3 << (GH_page_shift & 0x3f)) + M<SInt32>(self + 0xa0);
+               (pageCount << (GH_page_shift & 0x3f)) + M<SInt32>(self + 0xa0);
           return 1;
         }
       }
     }
     else {
-      pbVar8 = M<UInt8 *>(self + 0xc4c);
+      entryScan = M<UInt8 *>(self + 0xc4c);
       uVar10 = 0;
-      iVar5 = 0;
+      pageIndex = 0;
       do {
         uVar10 = uVar10 + 1;
-        if ((loadWordByteReversed(pbVar8)) != M<UInt32>(self + 0x844)) {
+        if ((loadWordByteReversed(entryScan)) != M<UInt32>(self + 0x844)) {
           uVar10 = 0;
         }
-        iVar5 = iVar5 + 1;
-        if (uVar10 == uVar3) {
-          iVar5 = iVar5 - uVar3;
+        pageIndex = pageIndex + 1;
+        if (uVar10 == pageCount) {
+          pageIndex = pageIndex - pageCount;
           goto LAB_0001de4c;
         }
-        pbVar8 = pbVar8 + 4;
+        entryScan = entryScan + 4;
         uVar1 = uVar1 - 1;
       } while (uVar1 != 0);
     }

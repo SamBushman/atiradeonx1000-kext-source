@@ -27,22 +27,22 @@
 
 
 /* real addr 0x2350 */
-void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader *real_param_1, UInt32 param_2) {
+void IOATIR500Accelerator::init_command_buffer_header(VendorCommandBufferHeader *header, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *headerBytes = reinterpret_cast<UInt8 *>(header);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
+  SInt32 byteOffset;
+  SInt32 wordsLeft;
   
-  iVar2 = 8;
-  iVar1 = 0;
+  wordsLeft = 8;
+  byteOffset = 0;
   do {
-    M<UInt32>(param_1 + iVar1) = 0;
-    iVar1 = iVar1 + 4;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  VCALL(M<SInt32>(self), 0x564)(self,param_1 + 0x20);
-  M<UInt32>(param_1 + 0x10) = param_2 - 0x20 >> 2;
-  M<SInt32>(param_1 + 0x18) = M<SInt32>(self + 0x50) + -1;
+    M<UInt32>(headerBytes + byteOffset) = 0;
+    byteOffset = byteOffset + 4;
+    wordsLeft = wordsLeft + -1;
+  } while (wordsLeft != 0);
+  VCALL(M<SInt32>(self), 0x564)(self,headerBytes + 0x20);
+  M<UInt32>(headerBytes + 0x10) = size - 0x20 >> 2;
+  M<SInt32>(headerBytes + 0x18) = M<SInt32>(self + 0x50) + -1;
   return;
 }

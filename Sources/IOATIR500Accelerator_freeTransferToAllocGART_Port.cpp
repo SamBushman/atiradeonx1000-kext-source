@@ -27,38 +27,38 @@
 
 
 /* real addr 0x3580 */
-bool IOATIR500Accelerator::freeTransferToAllocGART(VendorTransferBuffer *real_param_1, VendorTransferBuffer *real_param_2, UInt32 param_3, bool param_4) {
+bool IOATIR500Accelerator::freeTransferToAllocGART(VendorTransferBuffer *candidate, VendorTransferBuffer *needed, UInt32 stamp, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *candidateBytes = reinterpret_cast<UInt8 *>(candidate);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
   SInt32 iVar1;
-  UInt32 uVar2;
+  UInt32 result;
   UInt32 in_register_0000001c;
-  SInt32 iVar3;
+  SInt32 waitStat;
   
-  if ((M<SInt32>(param_1 + 4) == 0) || (M<SInt16>(param_1 + 0xe) != 0)) {
+  if ((M<SInt32>(candidateBytes + 4) == 0) || (M<SInt16>(candidateBytes + 0xe) != 0)) {
 LAB_00003650:
-    uVar2 = 0;
+    result = 0;
   }
   else {
-    if (((UInt32)param_4) == 0) {
-      iVar1 = VCALL(M<SInt32>(self), 0x554)(self,param_3);
+    if (((UInt32)aggressive) == 0) {
+      iVar1 = VCALL(M<SInt32>(self), 0x554)(self,stamp);
       if (iVar1 == 0) goto LAB_00003650;
     }
     else {
-      /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3580) shows param_3
+      /* #155 follow-up FIX (2026-10-11): stock's own disassembly (real addr 0x3580) shows stamp
        * (the 3rd real parameter, r6 at entry) gets moved into r4 unconditionally early in the
        * function (`mr r4,r6` at +0x20) and is never overwritten before this call - stock genuinely
-       * passes (self, param_3) to waitForTimeStamp here. Our port dropped param_3. Same benign-
+       * passes (self, stamp) to waitForTimeStamp here. Our port dropped stamp. Same benign-
        * in-practice dropped-argument defect class as the sibling fix in freeOrphanTexture_Port.cpp
        * (self+0x790 is a cosmetic stat only). */
-      iVar3 = M<SInt32>(self + 0x790);
-      iVar1 = VCALL(M<SInt32>(self), 0x54c)(self, param_3);
-      M<SInt32>(self + 0x790) = iVar3 + iVar1;
+      waitStat = M<SInt32>(self + 0x790);
+      iVar1 = VCALL(M<SInt32>(self), 0x54c)(self, stamp);
+      M<SInt32>(self + 0x790) = waitStat + iVar1;
     }
-    VCALL(M<SInt32>(self), 0x5ac)(self,param_1);
-    uVar2 = VCALL(M<SInt32>(self), 0x5a8)(self,param_2);
+    VCALL(M<SInt32>(self), 0x5ac)(self,candidateBytes);
+    result = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);
   }
-  return uVar2;
+  return result;
 }

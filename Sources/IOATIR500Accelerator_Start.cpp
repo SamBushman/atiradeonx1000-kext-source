@@ -30,27 +30,27 @@ extern "C" UInt32 GH_sscanf(...) asm("_sscanf");
 extern "C" UInt32 GH_sysctlbyname(...) asm("_sysctlbyname");
 
 /* real addr 0x2650 */
-bool IOATIR500Accelerator::start(IOService *param_1) {
+bool IOATIR500Accelerator::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool notLastIteration;
   UInt8 *pIVar2;
   SInt32 iVar3;
   UInt32 uVar4;
   SInt32 *piVar5;
   UInt32 uVar6;
-  UInt8 *this_00;
-  UInt32 *puVar7;
+  UInt8 *memoryManager;
+  UInt32 *agpCommandValue;
   UInt8 *pIVar8;
-  UInt8 *pIVar9;
+  UInt8 *buffersPerPanelCursor;
   UInt8 *pIVar10;
   SInt32 iVar11;
   UInt32 uVar12;
-  SInt32 iVar13;
+  SInt32 entriesLeft;
   SInt32 local_38 [2];
   UInt8 auStack_30 [8];   /* sysctl result buffer; the shipped code reads its last byte (a big-endian 64-bit value) */
   
-  iVar3 = IOAccelerator::start(param_1);
+  iVar3 = IOAccelerator::start(provider);
   if (iVar3 == 0) {
     return 0;
   }
@@ -93,11 +93,11 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
   pIVar10 = self + 0x150;
   pIVar2 = self;
   pIVar8 = self;
-  pIVar9 = self;
+  buffersPerPanelCursor = self;
   do {
     M<UInt32>(pIVar8 + 0xd4) = 0;
     M<UInt32>(pIVar8 + 0xd8) = 0;
-    bVar1 = iVar3 != 1;
+    notLastIteration = iVar3 != 1;
     iVar3 = iVar3 + 1;
     M<UInt32>(pIVar8 + 0xdc) = 0;
     M<UInt32>(pIVar8 + 0xe0) = 0;
@@ -134,10 +134,10 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
     M<UInt32>(pIVar2 + 0x16c) = 0;
     pIVar10 = pIVar10 + 0x78;
     M<UInt32>(pIVar2 + 0x170) = 0;
-    M<UInt32>(pIVar9 + 0x114) = 1;
+    M<UInt32>(buffersPerPanelCursor + 0x114) = 1;
     pIVar2 = pIVar2 + 0x78;
-    pIVar9 = pIVar9 + 4;
-  } while (bVar1);
+    buffersPerPanelCursor = buffersPerPanelCursor + 4;
+  } while (notLastIteration);
   M<UInt32>(self + 0x5c) = 0;
   M<UInt32>(self + 0x60) = 0;
   M<UInt32>(self + 100) = 0;
@@ -161,7 +161,7 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
     M<UInt16>(pIVar2 + 0x400) = 0;
     M<UInt16>(pIVar2 + 0x402) = 0;
     pIVar8 = self + iVar11;
-    iVar13 = 0x10;
+    entriesLeft = 0x10;
     do {
       M<UInt32>(pIVar8) = 0;
       M<UInt32>(pIVar8 + 4) = 0;
@@ -172,13 +172,13 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
       M<UInt32>(pIVar8 + 0x14) = 0;
       M<UInt32>(pIVar8 + 0x18) = 0;
       pIVar8 = pIVar8 + 0x1c;
-      iVar13 = iVar13 + -1;
-    } while (iVar13 != 0);
-    bVar1 = iVar3 != 1;
+      entriesLeft = entriesLeft + -1;
+    } while (entriesLeft != 0);
+    notLastIteration = iVar3 != 1;
     iVar11 = iVar11 + 0x1c4;
     pIVar2 = pIVar2 + 0x1c4;
     iVar3 = iVar3 + 1;
-  } while (bVar1);
+  } while (notLastIteration);
   pIVar2 = self + 0x5dc;
   pIVar8 = self + 0x63c;
   M<UInt32>(self + 0x5d4) = 0;
@@ -310,14 +310,14 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
     uVar4 = VCALL(*piVar5, 0xe8)(piVar5);
     M<UInt32>(self + 0xa4) = uVar4;
   }
-  iVar3 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(param_1,GH_IOPCIDevice_metaClass);
+  iVar3 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(provider,GH_IOPCIDevice_metaClass);
   M<SInt32>(self + 0x74) = iVar3;
   if (iVar3 == 0) goto LAB_00002f98;
   iVar3 = GH_IOLockAlloc();
   M<SInt32>(self + 0x840) = iVar3;
   if (iVar3 == 0) goto LAB_00002f98;
   M<UInt32>(self + 0x82c) = 0;
-  iVar3 = VCALL(M<SInt32>(self), 0x580)(self,param_1);
+  iVar3 = VCALL(M<SInt32>(self), 0x580)(self,provider);
   if (iVar3 == 0) goto LAB_00002f98;
   piVar5 = (SInt32 *)GH_ZN12OSSerializer9forTargetEPvPFbS0_S0_P11OSSerializeES0_(self,(void *)&IOATIR500Accelerator::serializePerformanceStats,0);
   if (piVar5 != (SInt32 *)0x0) {
@@ -326,10 +326,10 @@ bool IOATIR500Accelerator::start(IOService *param_1) {
   }
   VCALL(*M<SInt32 *>(self + 0x74), 0x55c)(M<SInt32 *>(self + 0x74),1);
   VCALL(*M<SInt32 *>(self + 0x74), 0x564)(M<SInt32 *>(self + 0x74),1);
-  this_00 = (UInt8 *)new ATIR500Memory();   /* real: OSObject::operator new(0x14) + the ATIR500Memory constructor */
-  M<UInt8 *>(self + 0x7c) = this_00;
-  if (this_00 == (UInt8 *)0x0) goto LAB_00002f98;
-  iVar3 = VCALL(M<SInt32>(this_00), 0x48)(this_00);
+  memoryManager = (UInt8 *)new ATIR500Memory();   /* real: OSObject::operator new(0x14) + the ATIR500Memory constructor */
+  M<UInt8 *>(self + 0x7c) = memoryManager;
+  if (memoryManager == (UInt8 *)0x0) goto LAB_00002f98;
+  iVar3 = VCALL(M<SInt32>(memoryManager), 0x48)(memoryManager);
   if (iVar3 == 0) {
     VCALL(*M<SInt32 *>(self + 0x7c), 0x18)(M<SInt32 *>(self + 0x7c));
     M<UInt32>(self + 0x7c) = 0;
@@ -366,14 +366,14 @@ LAB_00002f28:
   ;
   piVar5 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar4,GH_OSData_metaClass);
   if ((piVar5 != (SInt32 *)0x0) &&
-     (puVar7 = (UInt32 *)VCALL(*piVar5, 0x100)(piVar5), (*puVar7 & 0x10) != 0)) {
+     (agpCommandValue = (UInt32 *)VCALL(*piVar5, 0x100)(piVar5), (*agpCommandValue & 0x10) != 0)) {
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 0x20;
   }
   if (iVar3 != 0) {
     return iVar3;
   }
 LAB_00002f98:
-  IOATIR500Accelerator::stop(param_1);
+  IOATIR500Accelerator::stop(provider);
   return 0;
 }
 
@@ -384,15 +384,15 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 byteOffset;
   SInt32 iVar2;
   UInt32 uVar3;
-  SInt32 *piVar4;
+  SInt32 *agpFlagsNumber;
   UInt32 uVar5;
-  UInt32 uVar6;
+  UInt32 totalPages;
   UInt8 bVar7;
-  UInt32 local_28;
-  UInt32 local_24;
+  UInt32 sysctlLength;
+  UInt32 gartBytes;
   UInt32 local_mem[2];   /* hw.memsize as a big-endian 64-bit value: [0] high, [1] low (local_mem[0] / local_mem[1] in the decompile) */
   
   iVar2 = GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(M<UInt32>(self + 0x74),GH_IOAGPDevice_metaClass);
@@ -403,12 +403,12 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 1;
     uVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x188)
                       (M<SInt32 *>(self + 0x74),"IOAGPFlags");
-    piVar4 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_OSNumber_metaClass);
-    if (piVar4 == (SInt32 *)0x0) {
+    agpFlagsNumber = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_OSNumber_metaClass);
+    if (agpFlagsNumber == (SInt32 *)0x0) {
       M<UInt32>(self + 0x82c) = 0x400;
     }
     else {
-      uVar5 = VCALL(*piVar4, 0xe8)(piVar4);
+      uVar5 = VCALL(*agpFlagsNumber, 0xe8)(agpFlagsNumber);
       if ((uVar5 & 2) == 0) {
         M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 4;
       }
@@ -425,22 +425,22 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
   if (iVar2 != 0) {
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 0x40;
   }
-  local_28 = 8;
-  iVar2 = GH_sysctlbyname("hw.memsize",local_mem,&local_28,0,0);
+  sysctlLength = 8;
+  iVar2 = GH_sysctlbyname("hw.memsize",local_mem,&sysctlLength,0,0);
   if (iVar2 != 0) {
     local_mem[0] = 0;
     local_mem[1] = 0x20000000;
   }
   uVar5 = local_mem[1] >> 0xc;
-  uVar6 = local_mem[0] << 0x14 | uVar5;
-  M<UInt32>(self + 0x830) = uVar6;
+  totalPages = local_mem[0] << 0x14 | uVar5;
+  M<UInt32>(self + 0x830) = totalPages;
   if ((M<UInt32>(self + 0x98) & 1) == 0) {
-    if (uVar6 < 0x8000) {
+    if (totalPages < 0x8000) {
       M<UInt32>(self + 0x830) = 0x8000;
     }
-    else if (uVar6 < 0x20001) {
+    else if (totalPages < 0x20001) {
       if ((uVar5 & 0xffff) != 0) {
-        M<UInt32>(self + 0x830) = uVar6 + 0xffff & 0xffff0000;
+        M<UInt32>(self + 0x830) = totalPages + 0xffff & 0xffff0000;
       }
     }
     else {
@@ -448,35 +448,35 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
     }
   }
   else {
-    if (uVar6 < 0x8000) {
+    if (totalPages < 0x8000) {
       M<UInt32>(self + 0x830) = 0x8000;
     }
-    else if (uVar6 < 0x20001) {
+    else if (totalPages < 0x20001) {
       if ((uVar5 & 0xffff) != 0) {
-        M<UInt32>(self + 0x830) = uVar6 + 0xffff & 0xffff0000;
+        M<UInt32>(self + 0x830) = totalPages + 0xffff & 0xffff0000;
       }
     }
     else {
       M<UInt32>(self + 0x830) = 0x20000;
     }
-    local_24 = M<SInt32>(self + 0x830) << 10;
+    gartBytes = M<SInt32>(self + 0x830) << 10;
     iVar2 = VCALL(*M<SInt32 *>(self + 0x74), 0x5dc)
-                      (M<SInt32 *>(self + 0x74),0,self + 0x838,&local_24);
+                      (M<SInt32 *>(self + 0x74),0,self + 0x838,&gartBytes);
     if (iVar2 != 0) {
       return 0;
     }
-    M<UInt32>(self + 0x830) = local_24 >> 10;
-    if (0x18000 < (local_24 >> 10) - 0x8000) {
+    M<UInt32>(self + 0x830) = gartBytes >> 10;
+    if (0x18000 < (gartBytes >> 10) - 0x8000) {
       return 0;
     }
     M<UInt32>(self + 0x98) = M<UInt32>(self + 0x98) | 2;
     /* real: the "IOAGPFlags" property cast to OSNumber; its unsigned64BitValue() (vtable +0xec, a 64-bit return whose
      * low word is in r4) bit 0 becomes the byte at this+0x85 */
     uVar3 = VCALL(*M<SInt32 *>(self + 0x74), 0x188)(M<SInt32 *>(self + 0x74),"IOAGPFlags");
-    piVar4 = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_OSNumber_metaClass);
-    if (piVar4 != (SInt32 *)0x0) {
+    agpFlagsNumber = (SInt32 *)GH_ZN15OSMetaClassBase12safeMetaCastEPKS_PK11OSMetaClass(uVar3,GH_OSNumber_metaClass);
+    if (agpFlagsNumber != (SInt32 *)0x0) {
       typedef unsigned long long (*Value64Fn)(void *);
-      unsigned long long agpValue = (*reinterpret_cast<Value64Fn *>(*reinterpret_cast<UInt8 **>(piVar4) + 0xec))(piVar4);
+      unsigned long long agpValue = (*reinterpret_cast<Value64Fn *>(*reinterpret_cast<UInt8 **>(agpFlagsNumber) + 0xec))(agpFlagsNumber);
       self[0x85] = (UInt8)(agpValue & 1);
     }
   }
@@ -502,9 +502,9 @@ bool IOATIR500Accelerator::configureAGP(IOService *real_provider) {
   if (M<UInt32>(self + 0x830) >> 2 != 0) {
     uVar5 = 0;
     while( true ) {
-      iVar1 = uVar5 * 4;
+      byteOffset = uVar5 * 4;
       uVar5 = uVar5 + 1;
-      M<UInt32>(iVar1 + iVar2) = M<UInt32>(self + 0x844);
+      M<UInt32>(byteOffset + iVar2) = M<UInt32>(self + 0x844);
       if (M<UInt32>(self + 0x830) >> 2 <= uVar5) break;
       iVar2 = M<SInt32>(self + 0x83c);
     }

@@ -304,7 +304,7 @@ public:
      * calls `DumpASICHangState` before returning the stamp counter
      * unincremented (`this+0x50 - 1`).
      */
-    UInt32 submit_buffer(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount);
+    UInt32 submit_buffer(UInt32 *bufferStart, UInt32 gartOffset, UInt32 dwordCount);
 
     /*
      * submit_empty_buffer - RESOLVED (issue #1, get-it-linking pass),
@@ -386,7 +386,7 @@ public:
      * unincremented, mirroring `submit_buffer`'s own timeout-return
      * shape.
      */
-    UInt32 submit_idct_buffer_consumed(UInt32 *ringPtr, UInt32 ringOffset, sATIDVDIDCTInfo *info);
+    UInt32 submit_idct_buffer_consumed(UInt32 *buffer, UInt32 gartOffset, sATIDVDIDCTInfo *info);
 
     /*
      * waitForRetiredTimeStamp / waitForTimeStampNoLock - CONFIRMED to be

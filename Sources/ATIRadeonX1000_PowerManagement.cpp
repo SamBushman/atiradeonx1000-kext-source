@@ -27,32 +27,32 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0x1e100 */
-void ATIRadeonX1000::GPUSensorFunc(OSObject *real_param_1, IOTimerEventSource *param_2) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+void ATIRadeonX1000::GPUSensorFunc(OSObject *owner, IOTimerEventSource *source) {
+    UInt8 *ownerBytes = reinterpret_cast<UInt8 *>(owner);
 
-  UInt8 *pbVar1;
-  SInt32 iVar2;
+  UInt8 *ringReadPointerAddress;
+  SInt32 mmioBase;
   
-  GH_IOLockLock(M<UInt32>(param_1 + 0x840));
-  if (param_1[0x80] != 0x0) {
-    pbVar1 = (UInt8 *)(M<SInt32>(param_1 + 0x90c) + M<SInt32>(param_1 + 0x910));
-    if (((loadWordByteReversed(pbVar1))
-         == M<UInt32>(param_1 + 0x914)) &&
-       (iVar2 = M<SInt32>(param_1 + 0x860),
-       -1 < (SInt32)(loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40))))) {
-      if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1720)) & 0x10000) != 0) {
-        if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40)) & 0x60000) == 0) {
-          if (((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1720)) & 0x20000) != 0) && ((loadWordByteReversed(&M<UInt8>(iVar2 + 0xe40)) & 0x380000) == 0)) {
-            M<SInt32>(param_1 + 0x99c) = M<SInt32>(param_1 + 0x99c) + 1;
+  GH_IOLockLock(M<UInt32>(ownerBytes + 0x840));
+  if (ownerBytes[0x80] != 0x0) {
+    ringReadPointerAddress = (UInt8 *)(M<SInt32>(ownerBytes + 0x90c) + M<SInt32>(ownerBytes + 0x910));
+    if (((loadWordByteReversed(ringReadPointerAddress))
+         == M<UInt32>(ownerBytes + 0x914)) &&
+       (mmioBase = M<SInt32>(ownerBytes + 0x860),
+       -1 < (SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))))) {
+      if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) != 0) {
+        if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) == 0) {
+          if (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) != 0) && ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) == 0)) {
+            M<SInt32>(ownerBytes + 0x99c) = M<SInt32>(ownerBytes + 0x99c) + 1;
           }
         }
       }
     }
-    M<SInt32>(param_1 + 0x9a0) = M<SInt32>(param_1 + 0x9a0) + 1;
-    VCALL(*M<SInt32 *>(param_1 + 0x9a8), 300)
-              (M<SInt32 *>(param_1 + 0x9a8),M<UInt32>(param_1 + 0x998));
+    M<SInt32>(ownerBytes + 0x9a0) = M<SInt32>(ownerBytes + 0x9a0) + 1;
+    VCALL(*M<SInt32 *>(ownerBytes + 0x9a8), 300)
+              (M<SInt32 *>(ownerBytes + 0x9a8),M<UInt32>(ownerBytes + 0x998));
   }
-  GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
+  GH_IOLockUnlock(M<UInt32>(ownerBytes + 0x840));
   return;
 }
 
@@ -60,19 +60,19 @@ void ATIRadeonX1000::GPUSensorFunc(OSObject *real_param_1, IOTimerEventSource *p
 void ATIRadeonX1000::system_did_change_speed() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  SInt32 *piVar2;
+  SInt32 previousDepth;
+  SInt32 *period;
   
-  iVar1 = GH_OSDecrementAtomic(self + 200);
-  if (iVar1 == 1) {
+  previousDepth = GH_OSDecrementAtomic(self + 200);
+  if (previousDepth == 1) {
     if (M<SInt32>(self + 0x9a4) != 0) {
-      piVar2 = (SInt32 *)this->getPeriodValue("polling-period");
-      if (piVar2 != (SInt32 *)0x0) {
-        M<UInt32>(self + 0x994) = *piVar2 * 1000 + (UInt32)piVar2[1] / 1000000;
+      period = (SInt32 *)this->getPeriodValue("polling-period");
+      if (period != (SInt32 *)0x0) {
+        M<UInt32>(self + 0x994) = *period * 1000 + (UInt32)period[1] / 1000000;
       }
-      piVar2 = (SInt32 *)this->getPeriodValue("sample-period");
-      if (piVar2 != (SInt32 *)0x0) {
-        M<UInt32>(self + 0x998) = *piVar2 * 1000 + (UInt32)piVar2[1] / 1000000;
+      period = (SInt32 *)this->getPeriodValue("sample-period");
+      if (period != (SInt32 *)0x0) {
+        M<UInt32>(self + 0x998) = *period * 1000 + (UInt32)period[1] / 1000000;
       }
       ((ATIRadeonX1000 *)(self))->enable_GPUSensor();
     }
@@ -86,9 +86,9 @@ void ATIRadeonX1000::system_will_change_speed() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  UInt32 uVar2;
+  UInt32 ringIndex;
   SInt32 iVar3;
-  UInt32 uVar4;
+  UInt32 nextRingIndex;
   SInt32 iVar5;
   
   iVar3 = GH_OSIncrementAtomic(self + 200);
@@ -101,17 +101,17 @@ void ATIRadeonX1000::system_will_change_speed() {
       iVar3 = M<SInt32>(self + 0x914);
       iVar5 = M<SInt32>(self + 0x900);
       M<UInt32>(iVar5 + iVar3 * 4) = 0x5c8;
-      uVar2 = iVar3 + 1U & 0x7ff;
-      M<UInt32>(self + 0x914) = uVar2;
-      M<UInt32>(iVar5 + uVar2 * 4) = 0x70000;
-      uVar2 = uVar2 + 1 & 0x7ff;
-      M<UInt32>(self + 0x914) = uVar2;
-      M<UInt32>(iVar5 + uVar2 * 4) = 0x578;
-      uVar2 = uVar2 + 1 & 0x7ff;
-      uVar4 = uVar2 + 1;
-      M<UInt32>(self + 0x914) = uVar4;
-      M<UInt32>(iVar5 + uVar2 * 4) = M<UInt32>(self + 0x50);
-      M<UInt32>(self + 0x914) = uVar4 & 0x7ff;
+      ringIndex = iVar3 + 1U & 0x7ff;
+      M<UInt32>(self + 0x914) = ringIndex;
+      M<UInt32>(iVar5 + ringIndex * 4) = 0x70000;
+      ringIndex = ringIndex + 1 & 0x7ff;
+      M<UInt32>(self + 0x914) = ringIndex;
+      M<UInt32>(iVar5 + ringIndex * 4) = 0x578;
+      ringIndex = ringIndex + 1 & 0x7ff;
+      nextRingIndex = ringIndex + 1;
+      M<UInt32>(self + 0x914) = nextRingIndex;
+      M<UInt32>(iVar5 + ringIndex * 4) = M<UInt32>(self + 0x50);
+      M<UInt32>(self + 0x914) = nextRingIndex & 0x7ff;
       ((ATIRadeonX1000 *)(self))->submit_ring_data();
       VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(self + 0x50));
       M<SInt32>(self + 0x50) = M<SInt32>(self + 0x50) + 1;

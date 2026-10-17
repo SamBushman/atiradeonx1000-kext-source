@@ -27,66 +27,66 @@
 
 
 /* real addr 0x1a800 */
-IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *real_param_1) {
+IOReturn ATIRadeonX1000::allocate_texture(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt8 VVar1;
-  int *piVar2;
+  UInt8 type;
+  int *mapping;
   int iVar3;
-  UInt8 *this_00;
-  UInt32 uVar4;
-  UInt32 uVar5;
-  UInt32 uVar6;
-  unsigned int uVar7;
+  UInt8 *memory;
+  UInt32 result;
+  UInt32 cpuVisibleSize;
+  UInt32 size;
+  unsigned int flags;
   
-  VVar1 = param_1[0x20];
-  if ((VVar1 == 0x3) || (VVar1 == 0x7)) {
-    uVar6 = M<UInt32>(param_1 + 0x50);
+  type = textureBytes[0x20];
+  if ((type == 0x3) || (type == 0x7)) {
+    size = M<UInt32>(textureBytes + 0x50);
 LAB_0001a84c:
-    uVar5 = M<UInt32>(self + 0x84c);
-    if (uVar5 == M<UInt32>(self + 0x9c)) {
+    cpuVisibleSize = M<UInt32>(self + 0x84c);
+    if (cpuVisibleSize == M<UInt32>(self + 0x9c)) {
 LAB_0001a8f0:
       if (M<int>(self + 0xd0) == 0) {
-        iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)(param_1 + 0x40),
-                           uVar6,0x1000,0x10000,uVar5 - 0x10000);
+        iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),
+                           size,0x1000,0x10000,cpuVisibleSize - 0x10000);
       }
       else {
-        this_00 = M<UInt8 *>(self + 0x7c);
+        memory = M<UInt8 *>(self + 0x7c);
 LAB_0001a980:
-        iVar3 = ((ATIR500Memory *)(this_00))->alloc((GLKMemoryElement *)(param_1 + 0x40),uVar6,0x1000,0,uVar5);
+        iVar3 = ((ATIR500Memory *)(memory))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size,0x1000,0,cpuVisibleSize);
       }
       if (iVar3 == 0) goto LAB_0001a994;
     }
     else {
-      piVar2 = (int *)VCALL(*M<int *>(param_1 + 8), 0x14c)
-                                (M<int *>(param_1 + 8),GH_kernel_task,0,1,0,0);
-      if (piVar2 == (int *)0x0) {
-        uVar5 = M<UInt32>(self + 0x84c);
+      mapping = (int *)VCALL(*M<int *>(textureBytes + 8), 0x14c)
+                                (M<int *>(textureBytes + 8),GH_kernel_task,0,1,0,0);
+      if (mapping == (int *)0x0) {
+        cpuVisibleSize = M<UInt32>(self + 0x84c);
         goto LAB_0001a8f0;
       }
-      iVar3 = VCALL(*piVar2, 0xd0)(piVar2);
-      uVar7 = M<unsigned int>(iVar3 + 0x20);
-      VCALL(*piVar2, 0x18)(piVar2);
-      uVar5 = M<UInt32>(self + 0x84c);
-      if (((uVar7 ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
-      iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)(param_1 + 0x40),uVar6
-                         ,0x1000,uVar5,M<int>(self + 0x9c) - uVar5);
+      iVar3 = VCALL(*mapping, 0xd0)(mapping);
+      flags = M<unsigned int>(iVar3 + 0x20);
+      VCALL(*mapping, 0x18)(mapping);
+      cpuVisibleSize = M<UInt32>(self + 0x84c);
+      if (((flags ^ 0x40000000) >> 0x1e & 1) != 0) goto LAB_0001a8f0;
+      iVar3 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)(textureBytes + 0x40),size
+                         ,0x1000,cpuVisibleSize,M<int>(self + 0x9c) - cpuVisibleSize);
       if (iVar3 == 0) {
-        uVar5 = M<UInt32>(self + 0x84c);
-        this_00 = M<UInt8 *>(self + 0x7c);
+        cpuVisibleSize = M<UInt32>(self + 0x84c);
+        memory = M<UInt8 *>(self + 0x7c);
         goto LAB_0001a980;
       }
     }
-    uVar4 = 1;
+    result = 1;
   }
   else {
-    if (VVar1 != 0x8) {
-      uVar6 = 0;
+    if (type != 0x8) {
+      size = 0;
       goto LAB_0001a84c;
     }
 LAB_0001a994:
-    uVar4 = 0;
+    result = 0;
   }
-  return uVar4;
+  return result;
 }

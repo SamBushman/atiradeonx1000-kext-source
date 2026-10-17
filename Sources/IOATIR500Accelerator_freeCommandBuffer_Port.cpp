@@ -27,22 +27,22 @@
 
 
 /* real addr 0x1f10 */
-void IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer *real_param_1) {
+void IOATIR500Accelerator::freeCommandBuffer(VendorCommandBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  if (M<SInt32>(param_1 + 4) != 0) {
-    VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(param_1 + 0x10));
-    VCALL(M<SInt32>(self), 0x5ac)(self,param_1);
+  if (M<SInt32>(bufferBytes + 4) != 0) {
+    VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(bufferBytes + 0x10));
+    VCALL(M<SInt32>(self), 0x5ac)(self,bufferBytes);
   }
-  VCALL(*M<SInt32 *>(param_1 + 8), 0x18)(M<SInt32 *>(param_1 + 8));
-  M<UInt16>(param_1 + 0xc) = 1;
-  M<UInt16>(param_1 + 0xe) = 0;
-  M<UInt32>(param_1 + 0x18) = 0;
-  M<UInt32>(param_1) = 0;
-  M<UInt32>(param_1 + 4) = 0;
-  M<UInt32>(param_1 + 8) = 0;
-  M<UInt32>(param_1 + 0x10) = 0;
-  M<UInt32>(param_1 + 0x14) = 0;
+  VCALL(*M<SInt32 *>(bufferBytes + 8), 0x18)(M<SInt32 *>(bufferBytes + 8));
+  M<UInt16>(bufferBytes + 0xc) = 1;
+  M<UInt16>(bufferBytes + 0xe) = 0;
+  M<UInt32>(bufferBytes + 0x18) = 0;
+  M<UInt32>(bufferBytes) = 0;
+  M<UInt32>(bufferBytes + 4) = 0;
+  M<UInt32>(bufferBytes + 8) = 0;
+  M<UInt32>(bufferBytes + 0x10) = 0;
+  M<UInt32>(bufferBytes + 0x14) = 0;
   return;
 }

@@ -20,8 +20,8 @@
 struct pcl_ParamsR500_t;
 extern "C" const r500_3d_blit_state_packet_struct g_r500_3d_blit_state_packet;
 
-UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, bool param_4) {
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(params);
+UInt32 *pcl_CopyPix(UInt32 *cmd, pcl_ParamsR500_t *params, bool flipVertically, bool alternateBuffer) {
+    UInt8 *paramsBytes = reinterpret_cast<UInt8 *>(params);
 
   bool bVar1;
   float fVar2;
@@ -77,11 +77,11 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
   double dVar50;
   double dVar51;
   
-  iVar32 = ((UInt32)param_4);
+  iVar32 = ((UInt32)alternateBuffer);
   dVar49 = (double)FLOAT_0004c370;
-  dVar51 = (double)M<float>(param_2 + 0x6c);
-  psVar44 = M<SInt16 *>(param_2 + 0x50);
-  dVar50 = (double)M<float>(param_2 + 0x70);
+  dVar51 = (double)M<float>(paramsBytes + 0x6c);
+  psVar44 = M<SInt16 *>(paramsBytes + 0x50);
+  dVar50 = (double)M<float>(paramsBytes + 0x70);
   if (dVar51 != dVar49) {
     dVar49 = (double)(float)((double)FLOAT_0004c374 / dVar51);
   }
@@ -89,35 +89,35 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
   if (dVar50 != dVar48) {
     dVar48 = (double)(float)((double)FLOAT_0004c374 / dVar50);
   }
-  GCopy(param_1,(&g_r500_3d_blit_state_packet),0x2f4);
-  uVar38 = param_1[0xa2];
+  GCopy(cmd,(&g_r500_3d_blit_state_packet),0x2f4);
+  uVar38 = cmd[0xa2];
   iVar31 = 0xbd;
-  param_1[0xa0] = M<UInt32>(param_2);
-  param_1[0xa6] = M<UInt32>(param_2 + 4);
-  param_1[0xa8] = M<UInt32>(param_2 + 8);
-  param_1[0xaa] = M<UInt32>(param_2 + 0xc);
-  param_1[0x9c] = M<UInt32>(param_2 + 0x14);
-  param_1[0x9a] = M<UInt32>(param_2 + 0x18);
-  param_1[0x8a] = M<UInt32>(param_2 + 0x1c);
-  param_1[0xb2] = M<UInt32>(param_2 + 0x20);
-  param_1[0xb3] = M<UInt32>(param_2 + 0x24);
-  param_1[0xb] = M<UInt32>(param_2 + 0x28);
-  uVar23 = M<UInt32>(param_2 + 0x10);
-  param_1[0xa2] = uVar23 & 0x600 | uVar38 & 0xfffff9ff;
-  param_1[0xa2] = M<UInt32>(param_2 + 0x10) & 0x1800 | uVar23 & 0x600 | uVar38 & 0xffffe1ff;
-  if (M<SInt32>(param_2 + 0x88) != 0) {
-    param_1[0x1e] = param_1[0x1e] & 0xfffffffc | 2;
+  cmd[0xa0] = M<UInt32>(paramsBytes);
+  cmd[0xa6] = M<UInt32>(paramsBytes + 4);
+  cmd[0xa8] = M<UInt32>(paramsBytes + 8);
+  cmd[0xaa] = M<UInt32>(paramsBytes + 0xc);
+  cmd[0x9c] = M<UInt32>(paramsBytes + 0x14);
+  cmd[0x9a] = M<UInt32>(paramsBytes + 0x18);
+  cmd[0x8a] = M<UInt32>(paramsBytes + 0x1c);
+  cmd[0xb2] = M<UInt32>(paramsBytes + 0x20);
+  cmd[0xb3] = M<UInt32>(paramsBytes + 0x24);
+  cmd[0xb] = M<UInt32>(paramsBytes + 0x28);
+  uVar23 = M<UInt32>(paramsBytes + 0x10);
+  cmd[0xa2] = uVar23 & 0x600 | uVar38 & 0xfffff9ff;
+  cmd[0xa2] = M<UInt32>(paramsBytes + 0x10) & 0x1800 | uVar23 & 0x600 | uVar38 & 0xffffe1ff;
+  if (M<SInt32>(paramsBytes + 0x88) != 0) {
+    cmd[0x1e] = cmd[0x1e] & 0xfffffffc | 2;
   }
   dVar46 = DOUBLE_0004c3a8;
   fVar2 = FLOAT_0004c37c;
   fVar4 = FLOAT_0004c370;
   if (((double)FLOAT_0004c378 < dVar51) || ((double)FLOAT_0004c378 < dVar50)) {
-    bVar1 = ((UInt32)param_3) != 0;
+    bVar1 = ((UInt32)flipVertically) != 0;
     if ((bVar1) || (dVar51 <= (double)FLOAT_0004c378)) {
-      fVar4 = M<float>(param_2 + 0x5c);
-      fVar2 = M<float>(param_2 + 0x54);
-      fVar5 = M<float>(param_2 + 0x58);
-      fVar6 = M<float>(param_2 + 0x60);
+      fVar4 = M<float>(paramsBytes + 0x5c);
+      fVar2 = M<float>(paramsBytes + 0x54);
+      fVar5 = M<float>(paramsBytes + 0x58);
+      fVar6 = M<float>(paramsBytes + 0x60);
       fVar7 = fVar2 + fVar4;
       fVar3 = fVar5 + fVar6;
       fVar8 = FLOAT_0004c370;
@@ -227,7 +227,7 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
         }
         uVar40 = uVar39 * uVar27 & 0xff;
       }
-      puVar29 = param_1 + 0xbd;
+      puVar29 = cmd + 0xbd;
       if (uVar40 != 0) {
         fVar4 = FLOAT_0004c370;
         if (fVar8 != FLOAT_0004c370) {
@@ -393,20 +393,20 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
         fVar11 = (fVar5 + fVar3) * FLOAT_0004c380;
         fVar19 = (fVar2 + fVar7) * FLOAT_0004c380;
         *puVar29 = 0x31080;
-        param_1[0xbe] = FBITS((fVar4 * (fVar2 * fVar8 + fVar9)));
-        param_1[0xbf] = FBITS((fVar6 * (fVar10 * fVar3 + fVar18)));
-        param_1[0xc0] = FBITS((fVar4 * (fVar7 * fVar8 + fVar9)));
-        param_1[0xc1] = FBITS((fVar6 * (fVar10 * fVar5 + fVar18)));
-        param_1[0xc4] = 0xc0033500;
-        param_1[0xc5] = 0x10031;
-        param_1[0xc6] = FBITS(fVar19);
-        param_1[199] = FBITS(fVar11);
-        param_1[0xc2] = 0x1087;
-        param_1[0xc3] = (SInt32)fVar16 << 0x10 | (SInt32)fVar14;
-        param_1[200] = 0;
+        cmd[0xbe] = FBITS((fVar4 * (fVar2 * fVar8 + fVar9)));
+        cmd[0xbf] = FBITS((fVar6 * (fVar10 * fVar3 + fVar18)));
+        cmd[0xc0] = FBITS((fVar4 * (fVar7 * fVar8 + fVar9)));
+        cmd[0xc1] = FBITS((fVar6 * (fVar10 * fVar5 + fVar18)));
+        cmd[0xc4] = 0xc0033500;
+        cmd[0xc5] = 0x10031;
+        cmd[0xc6] = FBITS(fVar19);
+        cmd[199] = FBITS(fVar11);
+        cmd[0xc2] = 0x1087;
+        cmd[0xc3] = (SInt32)fVar16 << 0x10 | (SInt32)fVar14;
+        cmd[200] = 0;
       }
-      uVar38 = param_1[0xaa];
-      uVar23 = param_1[0xa0];
+      uVar38 = cmd[0xaa];
+      uVar23 = cmd[0xa0];
       uVar27 = uVar23 >> 2 & 1;
       uVar30 = uVar23 >> 3 & 3;
       if (uVar40 != 0) {
@@ -414,7 +414,7 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
           iVar32 = 0;
         }
         else {
-          iVar31 = (M<UInt32>(param_2 + 0x2c) & 0xff) * 0x1c;
+          iVar31 = (M<UInt32>(paramsBytes + 0x2c) & 0xff) * 0x1c;
           iVar32 = 0;
           puVar37 = puVar29;
           do {
@@ -440,7 +440,7 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
                          iVar24 + (((uVar38 & 0x3fff) + 1) * puVar37[1] << uVar26) & 0xffffffe0 |
                          uVar30 << 3 | uVar27 << 2;
             uVar36 = puVar37[2];
-            uVar26 = param_1[0xa6];
+            uVar26 = cmd[0xa6];
             puVar37[2] = 0x1120;
             puVar37[3] = (puVar37[3] - 1) * 0x800 & 0x3ff800 |
                          uVar36 - 1 & 0x7ff | uVar26 & 0xffc00000;
@@ -452,21 +452,21 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
         puVar29 = puVar29 + iVar32;
       }
       else {
-        puVar29 = param_1 + 0xc9;
+        puVar29 = cmd + 0xc9;
       }
-      iVar32 = (SInt32)puVar29 - (SInt32)param_1 >> 2;
+      iVar32 = (SInt32)puVar29 - (SInt32)cmd >> 2;
     }
     else {
-      uVar36 = param_1[0xa0];
+      uVar36 = cmd[0xa0];
       uVar23 = (SInt32)dVar51 >> 1 & 0xfffffe00;
       uVar38 = (SInt32)dVar51 - uVar23;
       uVar40 = uVar23 + 2;
       if ((uVar36 & 0x18) == 0) {
-        uVar30 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)param_2[0x2f] * 0x1c);
+        uVar30 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)paramsBytes[0x2f] * 0x1c);
         iVar24 = 0;
       }
       else {
-        uVar30 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)param_2[0x2f] * 0x1c);
+        uVar30 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)paramsBytes[0x2f] * 0x1c);
         iVar24 = -(uVar30 >> 8 & 3);
       }
       iVar25 = (SInt32)uVar23 >> ((iVar24 - (uVar30 >> 0xc & 7)) + 5 & 0x3f);
@@ -474,8 +474,8 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
       if ((uVar36 >> 2 & 1) != 0) {
         iVar24 = (iVar25 << 0xc) >> 3;
       }
-      uVar30 = uVar23 + 1 & 0x7ff | param_1[0xa6] & 0xfffff800;
-      param_1[0xa6] = uVar30;
+      uVar30 = uVar23 + 1 & 0x7ff | cmd[0xa6] & 0xfffff800;
+      cmd[0xa6] = uVar30;
       fVar2 = (float)((double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - dVar46);
       if (fVar2 != fVar4) {
         fVar4 = FLOAT_0004c374 / fVar2;
@@ -487,13 +487,13 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
         uVar27 = uVar26;
       }
       if ((SInt32)uVar40 < (SInt32)uVar26) {
-        fVar5 = M<float>(param_2 + 0x54);
+        fVar5 = M<float>(paramsBytes + 0x54);
         fVar2 = (float)((double)CONCAT44d(0x43300000,uVar40 - uVar39 ^ 0x80000000) - DOUBLE_0004c3a8)
         ;
       }
       else {
-        fVar5 = M<float>(param_2 + 0x54);
-        fVar2 = fVar5 + M<float>(param_2 + 0x5c);
+        fVar5 = M<float>(paramsBytes + 0x54);
+        fVar2 = fVar5 + M<float>(paramsBytes + 0x5c);
       }
       fVar6 = fVar4 * (float)((double)CONCAT44d(0x43300000,uVar27 ^ 0x80000000) - DOUBLE_0004c3a8);
       fVar4 = fVar4 * (float)((double)CONCAT44d(0x43300000,uVar39 ^ 0x80000000) - DOUBLE_0004c3a8);
@@ -507,37 +507,37 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
       }
       dVar49 = (double)CONCAT44d(0x43300000,uVar27 ^ 0x80000000) - DOUBLE_0004c3a8;
       dVar50 = (double)CONCAT44d(0x43300000,uVar40 ^ 0x80000000) - DOUBLE_0004c3a8;
-      fVar7 = M<float>(param_2 + 0x58);
-      fVar8 = M<float>(param_2 + 0x60);
+      fVar7 = M<float>(paramsBytes + 0x58);
+      fVar8 = M<float>(paramsBytes + 0x60);
       if (fVar4 < fVar6) {
         fVar3 = ((fVar7 + fVar8) - fVar7) * FLOAT_0004c37c;
         fVar9 = (fVar2 - fVar5) * FLOAT_0004c37c;
         fVar5 = (fVar2 + fVar5) * FLOAT_0004c380;
         fVar2 = (fVar7 + fVar7 + fVar8) * FLOAT_0004c380;
-        param_1[0xbd] = 0x31080;
-        param_1[0xbe] = FBITS(fVar4);
-        param_1[0xc2] = 0x1087;
-        param_1[0xbf] = FBITS((float)(dVar48 * (double)(float)dVar50));
-        param_1[0xc0] = FBITS(fVar6);
-        param_1[0xc1] = FBITS((float)(dVar48 * (double)(float)dVar49));
-        param_1[0xc4] = 0xc0033500;
-        param_1[0xc5] = 0x10031;
-        param_1[0xc6] = FBITS(fVar5);
-        param_1[199] = FBITS(fVar2);
-        param_1[200] = 0;
-        param_1[0xc3] = (SInt32)fVar9 << 0x10 | (SInt32)fVar3;
+        cmd[0xbd] = 0x31080;
+        cmd[0xbe] = FBITS(fVar4);
+        cmd[0xc2] = 0x1087;
+        cmd[0xbf] = FBITS((float)(dVar48 * (double)(float)dVar50));
+        cmd[0xc0] = FBITS(fVar6);
+        cmd[0xc1] = FBITS((float)(dVar48 * (double)(float)dVar49));
+        cmd[0xc4] = 0xc0033500;
+        cmd[0xc5] = 0x10031;
+        cmd[0xc6] = FBITS(fVar5);
+        cmd[199] = FBITS(fVar2);
+        cmd[200] = 0;
+        cmd[0xc3] = (SInt32)fVar9 << 0x10 | (SInt32)fVar3;
         iVar31 = 0xc9;
-        fVar5 = M<float>(param_2 + 0x54);
-        fVar7 = M<float>(param_2 + 0x58);
-        fVar8 = M<float>(param_2 + 0x60);
-        uVar36 = param_1[0xa0];
-        uVar30 = param_1[0xa6];
+        fVar5 = M<float>(paramsBytes + 0x54);
+        fVar7 = M<float>(paramsBytes + 0x58);
+        fVar8 = M<float>(paramsBytes + 0x60);
+        uVar36 = cmd[0xa0];
+        uVar30 = cmd[0xa6];
       }
-      param_1[iVar31] = 0x1150;
-      param_1[iVar31 + 1] = uVar36 + iVar24;
-      param_1[iVar31 + 2] = 0x1120;
+      cmd[iVar31] = 0x1150;
+      cmd[iVar31 + 1] = uVar36 + iVar24;
+      cmd[iVar31 + 2] = 0x1120;
       iVar24 = iVar31 + 4;
-      param_1[iVar31 + 3] = uVar38 - 1 & 0x7ff | uVar30 & 0xfffff800;
+      cmd[iVar31 + 3] = uVar38 - 1 & 0x7ff | uVar30 & 0xfffff800;
       fVar4 = (float)((double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_0004c3a8);
       fVar2 = FLOAT_0004c370;
       if (fVar4 != FLOAT_0004c370) {
@@ -570,23 +570,23 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
       dVar50 = (double)CONCAT44d(0x43300000,uVar23 ^ 0x80000000) - DOUBLE_0004c3a8;
       iVar32 = iVar24;
       if (fVar6 < fVar2) {
-        fVar9 = ((fVar5 + M<float>(param_2 + 0x5c)) - fVar4) * FLOAT_0004c37c;
+        fVar9 = ((fVar5 + M<float>(paramsBytes + 0x5c)) - fVar4) * FLOAT_0004c37c;
         fVar3 = ((fVar7 + fVar8) - fVar7) * FLOAT_0004c37c;
         iVar32 = iVar24 * 4 + 0x30 >> 2;
         fVar7 = (fVar7 + fVar7 + fVar8) * FLOAT_0004c380;
-        fVar4 = (fVar4 + fVar5 + M<float>(param_2 + 0x5c)) * FLOAT_0004c380;
-        param_1[iVar24] = 0x31080;
-        param_1[iVar31 + 5] = FBITS(fVar6);
-        param_1[iVar31 + 6] = FBITS((float)(dVar48 * (double)(float)dVar50));
-        param_1[iVar31 + 7] = FBITS(fVar2);
-        param_1[iVar31 + 9] = 0x1087;
-        param_1[iVar31 + 8] = FBITS((float)(dVar48 * (double)(float)dVar49));
-        param_1[iVar31 + 0xb] = 0xc0033500;
-        param_1[iVar31 + 0xc] = 0x10031;
-        param_1[iVar31 + 0xd] = FBITS(fVar4);
-        param_1[iVar31 + 0xe] = FBITS(fVar7);
-        param_1[iVar31 + 0xf] = 0;
-        param_1[iVar31 + 10] = (SInt32)fVar9 << 0x10 | (SInt32)fVar3;
+        fVar4 = (fVar4 + fVar5 + M<float>(paramsBytes + 0x5c)) * FLOAT_0004c380;
+        cmd[iVar24] = 0x31080;
+        cmd[iVar31 + 5] = FBITS(fVar6);
+        cmd[iVar31 + 6] = FBITS((float)(dVar48 * (double)(float)dVar50));
+        cmd[iVar31 + 7] = FBITS(fVar2);
+        cmd[iVar31 + 9] = 0x1087;
+        cmd[iVar31 + 8] = FBITS((float)(dVar48 * (double)(float)dVar49));
+        cmd[iVar31 + 0xb] = 0xc0033500;
+        cmd[iVar31 + 0xc] = 0x10031;
+        cmd[iVar31 + 0xd] = FBITS(fVar4);
+        cmd[iVar31 + 0xe] = FBITS(fVar7);
+        cmd[iVar31 + 0xf] = 0;
+        cmd[iVar31 + 10] = (SInt32)fVar9 << 0x10 | (SInt32)fVar3;
       }
     }
   }
@@ -604,28 +604,28 @@ UInt32 *pcl_CopyPix(UInt32 *param_1, pcl_ParamsR500_t *params, bool param_3, boo
     }
     dVar46 = (double)CONCAT44d(0x43300000,uVar38 ^ 0x80000000) - DOUBLE_0004c3a8;
     dVar47 = (double)CONCAT44d(0x43300000,uVar23 ^ 0x80000000) - DOUBLE_0004c3a8;
-    fVar4 = M<float>(param_2 + 0x54);
-    fVar5 = M<float>(param_2 + 0x58);
-    fVar6 = M<float>(param_2 + 0x5c);
-    fVar7 = M<float>(param_2 + 0x60);
-    param_1[0xbd] = 0x31080;
+    fVar4 = M<float>(paramsBytes + 0x54);
+    fVar5 = M<float>(paramsBytes + 0x58);
+    fVar6 = M<float>(paramsBytes + 0x5c);
+    fVar7 = M<float>(paramsBytes + 0x60);
+    cmd[0xbd] = 0x31080;
     fVar8 = FLOAT_0004c380;
-    param_1[0xbe] = FBITS((float)(dVar49 * (double)(float)dVar50));
-    param_1[0xbf] = FBITS((float)(dVar48 * (double)(float)dVar47));
-    param_1[0xc0] = FBITS((float)(dVar49 * (double)(float)dVar51));
-    param_1[0xc1] = FBITS((float)(dVar48 * (double)(float)dVar46));
-    param_1[0xc2] = 0x1087;
-    param_1[0xc4] = 0xc0033500;
-    param_1[0xc5] = 0x10031;
-    param_1[0xc6] = FBITS(((fVar4 + fVar4 + fVar6) * fVar8));
-    param_1[199] = FBITS(((fVar5 + fVar5 + fVar7) * fVar8));
-    param_1[200] = 0;
-    param_1[0xc3] =
+    cmd[0xbe] = FBITS((float)(dVar49 * (double)(float)dVar50));
+    cmd[0xbf] = FBITS((float)(dVar48 * (double)(float)dVar47));
+    cmd[0xc0] = FBITS((float)(dVar49 * (double)(float)dVar51));
+    cmd[0xc1] = FBITS((float)(dVar48 * (double)(float)dVar46));
+    cmd[0xc2] = 0x1087;
+    cmd[0xc4] = 0xc0033500;
+    cmd[0xc5] = 0x10031;
+    cmd[0xc6] = FBITS(((fVar4 + fVar4 + fVar6) * fVar8));
+    cmd[199] = FBITS(((fVar5 + fVar5 + fVar7) * fVar8));
+    cmd[200] = 0;
+    cmd[0xc3] =
          (SInt32)(((fVar4 + fVar6) - fVar4) * fVar2) << 0x10 | (SInt32)(((fVar5 + fVar7) - fVar5) * fVar2)
     ;
     iVar32 = 0xc9;
   }
-  param_1[iVar32] = 0x1393;
-  param_1[iVar32 + 1] = 10;
-  return param_1 + iVar32 + 2;
+  cmd[iVar32] = 0x1393;
+  cmd[iVar32 + 1] = 10;
+  return cmd + iVar32 + 2;
 }

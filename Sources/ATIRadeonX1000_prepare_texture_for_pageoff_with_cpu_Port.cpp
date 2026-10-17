@@ -28,66 +28,66 @@ extern "C" UInt32 GH_memcpy(...) asm("_memcpy");
 
 
 /* real addr 0x20d30 */
-UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer *real_param_1, ATITextureBufferHeader *real_param_2) {
+UInt32 ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu(VendorTextureBuffer *texture, ATITextureBufferHeader *hwInfo) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
+    UInt8 *hwInfoBytes = reinterpret_cast<UInt8 *>(hwInfo);
 
-  UInt8 bVar1;
+  UInt8 faceCount;
   bool bVar2;
   UInt8 bVar3;
   UInt32 uVar4;
   UInt32 uVar5;
   SInt32 iVar6;
-  UInt32 uVar7;
-  SInt32 iVar8;
-  UInt8 *pAVar9;
-  UInt8 *pAVar10;
+  UInt32 stamp;
+  SInt32 repeat;
+  UInt8 *tileRecord;
+  UInt8 *tileOut;
   UInt32 uVar11;
-  UInt32 uVar12;
+  UInt32 mipFlags;
   SInt32 iVar13;
-  UInt32 uVar14;
-  UInt32 uVar15;
-  UInt32 uVar16;
+  UInt32 baseLevel;
+  UInt32 face;
+  UInt32 lastLevel;
   UInt32 uVar17;
-  UInt8 *pAVar18;
-  UInt32 uVar19;
-  SInt32 iVar20;
+  UInt8 *record;
+  UInt32 oldVramOffset;
+  SInt32 newVramOffset;
   UInt32 uVar21;
   UInt32 uVar22;
-  UInt32 uVar23;
-  UInt8 aGStack_68[28];
+  UInt32 level;
+  UInt8 oldElement[28];
   
-  uVar19 = M<UInt32>(param_1 + 0x48);
-  if (uVar19 < M<UInt32>(self + 0x84c)) {
+  oldVramOffset = M<UInt32>(textureBytes + 0x48);
+  if (oldVramOffset < M<UInt32>(self + 0x84c)) {
     return 1;
   }
-  if ((param_1[0x20] != 0x3) && (param_1[0x20] != 0x7)) {
+  if ((textureBytes[0x20] != 0x3) && (textureBytes[0x20] != 0x7)) {
     return 0;
   }
-  uVar22 = M<UInt32>(param_1 + 0x50);
-  GH_memcpy(aGStack_68,(UInt8 *)(param_1 + 0x40),0x10);
-  iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)(param_1 + 0x40)),uVar22,
+  uVar22 = M<UInt32>(textureBytes + 0x50);
+  GH_memcpy(oldElement,(UInt8 *)(textureBytes + 0x40),0x10);
+  iVar6 = ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->alloc((GLKMemoryElement *)((UInt8 *)(textureBytes + 0x40)),uVar22,
                      0x1000,0,M<UInt32>(self + 0x84c));
-  if ((iVar6 == 0) && (iVar6 = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(param_1),uVar22), iVar6 == 0)) {
+  if ((iVar6 == 0) && (iVar6 = this->freeToAllocTextureCPUVisibleVRAM((VendorTextureBuffer *)(textureBytes),uVar22), iVar6 == 0)) {
     return 0;
   }
-  iVar20 = M<SInt32>(param_1 + 0x48);
-  pAVar18 = param_2 + M<SInt32>(param_2 + 4) * 4 + 0xa00;
-  M<UInt32>(pAVar18 + 0x2c) = M<UInt32>(self + 0xb74);
-  iVar6 = M<SInt32>(param_1 + 0x14);
-  uVar12 = (UInt32)M<UInt8>(iVar6 + 0x15);
-  uVar14 = (UInt32)M<UInt8>(iVar6 + 0x17);
-  bVar1 = M<UInt8>(iVar6 + 0x34);
+  newVramOffset = M<SInt32>(textureBytes + 0x48);
+  record = hwInfoBytes + M<SInt32>(hwInfoBytes + 4) * 4 + 0xa00;
+  M<UInt32>(record + 0x2c) = M<UInt32>(self + 0xb74);
+  iVar6 = M<SInt32>(textureBytes + 0x14);
+  mipFlags = (UInt32)M<UInt8>(iVar6 + 0x15);
+  baseLevel = (UInt32)M<UInt8>(iVar6 + 0x17);
+  faceCount = M<UInt8>(iVar6 + 0x34);
   bVar3 = M<UInt8>(iVar6 + 0x15) >> 3;
-  uVar16 = (uVar14 + M<UInt8>(iVar6 + 0x35)) - 1;
+  lastLevel = (baseLevel + M<UInt8>(iVar6 + 0x35)) - 1;
   iVar6 = -(bVar3 & 3);
   if ((bVar3 & 2) == 0) {
     if (-1 < iVar6) {
       bVar2 = false;
       goto LAB_00020e40;
     }
-    uVar11 = (UInt32)(UInt8)param_2[0x1a];
+    uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
     bVar2 = uVar11 == 0;
 LAB_00020e48:
     if (uVar11 < 4) {
@@ -106,26 +106,26 @@ LAB_00020e48:
     bVar2 = true;
 LAB_00020e40:
     if (iVar6 < 0) {
-      uVar11 = (UInt32)(UInt8)param_2[0x1a];
+      uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
       goto LAB_00020e48;
     }
-    uVar11 = (UInt32)(UInt8)param_2[0x1a];
+    uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
   }
   iVar13 = 0;
   iVar6 = 5;
 LAB_00020e80:
-  uVar15 = 0;
+  face = 0;
   uVar17 = 1 << (iVar6 - uVar11 & 0x3f);
-  if (bVar1 != 0) {
+  if (faceCount != 0) {
     while( true ) {
-      uVar11 = M<UInt32>(param_2 + 0xc) >> (uVar11 & 0x3f);
-      if (uVar14 <= uVar16) {
-        pAVar9 = param_2 + uVar14 * 0x20 + uVar15 * 0x1a0 + 0x40;
-        uVar23 = uVar14;
+      uVar11 = M<UInt32>(hwInfoBytes + 0xc) >> (uVar11 & 0x3f);
+      if (baseLevel <= lastLevel) {
+        tileRecord = hwInfoBytes + baseLevel * 0x20 + face * 0x1a0 + 0x40;
+        level = baseLevel;
         do {
-          pAVar10 = pAVar18 + (UInt32)M<UInt16>(pAVar9 + 0x18) * 4;
-          if ((uVar12 & 4) != 0) {
-            uVar4 = (SInt32)(UInt32)M<UInt16>(param_2 + 0x16) >> (uVar23 & 0x3f);
+          tileOut = record + (UInt32)M<UInt16>(tileRecord + 0x18) * 4;
+          if ((mipFlags & 4) != 0) {
+            uVar4 = (SInt32)(UInt32)M<UInt16>(hwInfoBytes + 0x16) >> (level & 0x3f);
             uVar5 = 1 << iVar13;
             if (1 << iVar13 < (SInt32)uVar4) {
               uVar5 = uVar4;
@@ -133,54 +133,54 @@ LAB_00020e80:
             if ((uVar11 < uVar17 << 3) || (iVar6 = 1, uVar5 < (UInt32)(1 << iVar13 + 3))) {
               iVar6 = 0;
             }
-            uVar12 = iVar6 << 2 | uVar12 & 0xfffffffb;
+            mipFlags = iVar6 << 2 | mipFlags & 0xfffffffb;
           }
-          iVar6 = M<SInt32>(pAVar9 + 8);
-          M<UInt32>(pAVar10) = 0x138a;
+          iVar6 = M<SInt32>(tileRecord + 8);
+          M<UInt32>(tileOut) = 0x138a;
           uVar5 = uVar11 >> 1;
-          if (M<SInt16>(pAVar9 + 2) != 0) {
-            uVar4 = uVar12 >> 2 & 1;
-            uVar21 = uVar12 >> 3 & 3;
-            iVar8 = 0;
+          if (M<SInt16>(tileRecord + 2) != 0) {
+            uVar4 = mipFlags >> 2 & 1;
+            uVar21 = mipFlags >> 3 & 3;
+            repeat = 0;
             do {
-              iVar8 = iVar8 + 1;
-              M<SInt32>(pAVar10 + 4) = iVar6 + iVar20;
-              M<UInt32>(pAVar10 + 0x24) =
-                   uVar11 - 1 & 0x3fff | M<UInt32>(pAVar10 + 0x24) & 0xffffc000;
-              M<UInt32>(pAVar10 + 0xc) =
+              repeat = repeat + 1;
+              M<SInt32>(tileOut + 4) = iVar6 + newVramOffset;
+              M<UInt32>(tileOut + 0x24) =
+                   uVar11 - 1 & 0x3fff | M<UInt32>(tileOut + 0x24) & 0xffffc000;
+              M<UInt32>(tileOut + 0xc) =
                    (uVar5 & 0x1fff) << 1 |
-                   uVar21 << 0x11 | uVar4 << 0x10 | M<UInt32>(pAVar10 + 0xc) & 0xffe0c001;
-              M<UInt32>(pAVar10 + 0x14) = iVar6 + uVar19 & 0xffffffe0 | uVar21 << 3 | uVar4 << 2;
-              pAVar10 = pAVar10 + 0x74;
-              iVar6 = iVar6 + M<SInt32>(pAVar9 + 0x10);
-            } while (iVar8 < (SInt32)(UInt32)M<UInt16>(pAVar9 + 2));
+                   uVar21 << 0x11 | uVar4 << 0x10 | M<UInt32>(tileOut + 0xc) & 0xffe0c001;
+              M<UInt32>(tileOut + 0x14) = iVar6 + oldVramOffset & 0xffffffe0 | uVar21 << 3 | uVar4 << 2;
+              tileOut = tileOut + 0x74;
+              iVar6 = iVar6 + M<SInt32>(tileRecord + 0x10);
+            } while (repeat < (SInt32)(UInt32)M<UInt16>(tileRecord + 2));
           }
           uVar11 = uVar17;
           if (uVar17 < uVar5) {
             uVar11 = uVar5;
           }
-          uVar23 = uVar23 + 1;
-          pAVar9 = pAVar9 + 0x20;
-        } while (uVar23 <= uVar16);
+          level = level + 1;
+          tileRecord = tileRecord + 0x20;
+        } while (level <= lastLevel);
       }
-      uVar15 = uVar15 + 1;
-      if (bVar1 <= uVar15) break;
-      uVar11 = (UInt32)(UInt8)param_2[0x1a];
+      face = face + 1;
+      if (faceCount <= face) break;
+      uVar11 = (UInt32)(UInt8)hwInfoBytes[0x1a];
     }
   }
-  uVar22 = M<UInt32>(param_2 + 8);
+  uVar22 = M<UInt32>(hwInfoBytes + 8);
   M<UInt32>(self + 0xb90) = 1;
   if ((uVar22 & 1) != 0) {
     iVar6 = uVar22 * 4;
     uVar22 = uVar22 + 1;
-    M<UInt32>(pAVar18 + iVar6) = 0x80000000;
+    M<UInt32>(record + iVar6) = 0x80000000;
   }
   M<UInt32>(self + 0x704) = uVar22 * 4 + M<SInt32>(self + 0x704);
-  iVar6 = M<SInt32>(param_1 + 0x14);
-  uVar7 = this->submit_buffer((UInt32 *)pAVar18,
-                        M<SInt32>(param_2 + 4) * 4 + M<SInt32>(param_1 + 4) + 0xa00,uVar22);
-  M<UInt32>(iVar6 + 0xc) = uVar7;
-  VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(M<SInt32>(param_1 + 0x14) + 0xc));
-  ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(aGStack_68));
+  iVar6 = M<SInt32>(textureBytes + 0x14);
+  stamp = this->submit_buffer((UInt32 *)record,
+                        M<SInt32>(hwInfoBytes + 4) * 4 + M<SInt32>(textureBytes + 4) + 0xa00,uVar22);
+  M<UInt32>(iVar6 + 0xc) = stamp;
+  VCALL(M<SInt32>(self), 0x54c)(self,M<UInt32>(M<SInt32>(textureBytes + 0x14) + 0xc));
+  ((ATIR500Memory *)(M<UInt8 *>(self + 0x7c)))->dealloc((GLKMemoryElement *)(oldElement));
   return 1;
 }

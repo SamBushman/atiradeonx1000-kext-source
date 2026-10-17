@@ -30,59 +30,59 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 bool ATIRadeonX1000::start_xdct_engine() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool pollLimitReached;
   UInt8 bVar2;
   UInt32 uVar3;
   SInt32 iVar4;
-  SInt32 iVar5;
+  SInt32 mmioBase;
   UInt32 uVar6;
   
-  iVar5 = M<SInt32>(self + 0x860);
-  M<UInt32>(iVar5 + 0x1f80) = 0;
+  mmioBase = M<SInt32>(self + 0x860);
+  M<UInt32>(mmioBase + 0x1f80) = 0;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
-  uVar6 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f94)) | 0x88000000;      /* one byte-reversed read, kept: reused below, as in the shipped code */
-  storeWordByteReversed(&M<UInt8>(iVar5 + 0x1f94), uVar6);
+  uVar6 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f94)) | 0x88000000;      /* one byte-reversed read, kept: reused below, as in the shipped code */
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), uVar6);
   enforceInOrderExecutionIO();
   uVar3 = M<UInt32>(self + 0x930);
-  M<UInt32>(iVar5 + 0x1f9c) =
+  M<UInt32>(mmioBase + 0x1f9c) =
        uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x1fa0) =
+  M<UInt32>(mmioBase + 0x1fa0) =
        uVar3 << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
   iVar4 = M<SInt32>(self + 0x8a4);
   uVar3 = iVar4 + M<SInt32>(self + 0x228) + (M<SInt32>(self + 0x928) - M<SInt32>(self + 0x238));
-  M<UInt32>(iVar5 + 0x1f98) =
+  M<UInt32>(mmioBase + 0x1f98) =
        (uVar3 & 0xfffffffc) << 0x18 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
   uVar3 = iVar4 + M<SInt32>(self + 0x920);
-  M<UInt32>(iVar5 + 0x1f90) =
+  M<UInt32>(mmioBase + 0x1f90) =
        uVar3 * 0x1000000 | (uVar3 & 0xff00) << 8 | uVar3 >> 8 & 0xff00 | uVar3 >> 0x18;
   enforceInOrderExecutionIO();
   uVar6 = uVar6 & 0x67fcc0ff | 0x2002030a;
-  storeWordByteReversed(&M<UInt8>(iVar5 + 0x1f94), uVar6);
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), uVar6);
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x1f80) = 0x40;
+  M<UInt32>(mmioBase + 0x1f80) = 0x40;
   enforceInOrderExecutionIO();
   uVar6 = M<SInt32>(self + 0x854) - 1;
-  M<UInt32>(iVar5 + 0x1fa8) =
+  M<UInt32>(mmioBase + 0x1fa8) =
        uVar6 * 0x1000000 | (uVar6 & 0xff00) << 8 | uVar6 >> 8 & 0xff00 | uVar6 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x1f80) = 0xa000580;
+  M<UInt32>(mmioBase + 0x1f80) = 0xa000580;
   enforceInOrderExecutionIO();
-  if ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f9c))) <
-      (loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fa0)))) {
+  if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
+      (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0)))) {
     iVar4 = 0;
     do {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
       GH_thread_block(0);
-      iVar5 = M<SInt32>(self + 0x860);
-      bVar1 = iVar4 == 10000;
+      mmioBase = M<SInt32>(self + 0x860);
+      pollLimitReached = iVar4 == 10000;
       iVar4 = iVar4 + 1;
-      if (bVar1) break;
-    } while ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x1f9c))) <
-             (loadWordByteReversed(&M<UInt8>(iVar5 + 0x1fa0))));
+      if (pollLimitReached) break;
+    } while ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
+             (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0))));
   }
   M<UInt32>(self + 0x8bc) = 1;
   return 1;
@@ -92,32 +92,32 @@ bool ATIRadeonX1000::start_xdct_engine() {
 bool ATIRadeonX1000::stop_xdct_engine() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  SInt32 iVar2;
-  SInt32 iVar3;
+  bool pollLimitReached;
+  SInt32 mmioBase;
+  SInt32 pollCount;
   
-  iVar2 = M<SInt32>(self + 0x860);
-  if ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f9c))) <
-      (loadWordByteReversed(&M<UInt8>(iVar2 + 0x1fa0)))) {
-    iVar3 = 0;
+  mmioBase = M<SInt32>(self + 0x860);
+  if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
+      (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0)))) {
+    pollCount = 0;
     do {
       GH_assert_wait_timeout(&gl_assert_wait_timeout_event,0,100,1000);
       GH_thread_block(0);
-      iVar2 = M<SInt32>(self + 0x860);
-      bVar1 = iVar3 == 10000;
-      iVar3 = iVar3 + 1;
-      if (bVar1) break;
-    } while ((loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f9c))) <
-             (loadWordByteReversed(&M<UInt8>(iVar2 + 0x1fa0))));
+      mmioBase = M<SInt32>(self + 0x860);
+      pollLimitReached = pollCount == 10000;
+      pollCount = pollCount + 1;
+      if (pollLimitReached) break;
+    } while ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f9c))) <
+             (loadWordByteReversed(&M<UInt8>(mmioBase + 0x1fa0))));
   }
   enforceInOrderExecutionIO();
-  storeWordByteReversed(&M<UInt8>(iVar2 + 0x1f94), loadWordByteReversed(&M<UInt8>(iVar2 + 0x1f94)) | 0x88000000);
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x1f94), loadWordByteReversed(&M<UInt8>(mmioBase + 0x1f94)) | 0x88000000);
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar2 + 0x1f80) = 0;
+  M<UInt32>(mmioBase + 0x1f80) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar2 + 0x1f9c) = 0;
+  M<UInt32>(mmioBase + 0x1f9c) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar2 + 0x1fa0) = 0;
+  M<UInt32>(mmioBase + 0x1fa0) = 0;
   enforceInOrderExecutionIO();
   M<UInt32>(self + 0x8bc) = 0;
   return 1;

@@ -27,171 +27,171 @@
 
 
 /* real addr 0x37f0 */
-bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *real_param_1, IOATIR500DVDContext *real_param_2, IOATIR500GLContext *real_param_3, IOATIR500Surface *real_param_4, IOATIR500Shared *real_param_5, VendorTransferBuffer *real_param_6, bool param_7) {
+bool IOATIR500Accelerator::freeWaitToAllocGART(IOATIR5002DContext *exclude2D, IOATIR500DVDContext *excludeDVD, IOATIR500GLContext *excludeGL, IOATIR500Surface *excludeSurface, IOATIR500Shared *excludeShared, VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
-    UInt8 *param_3 = reinterpret_cast<UInt8 *>(real_param_3);
-    UInt8 *param_4 = reinterpret_cast<UInt8 *>(real_param_4);
-    UInt8 *param_5 = reinterpret_cast<UInt8 *>(real_param_5);
-    UInt8 *param_6 = reinterpret_cast<UInt8 *>(real_param_6);
+    UInt8 *exclude2DBytes = reinterpret_cast<UInt8 *>(exclude2D);
+    UInt8 *excludeDVDBytes = reinterpret_cast<UInt8 *>(excludeDVD);
+    UInt8 *excludeGLBytes = reinterpret_cast<UInt8 *>(excludeGL);
+    UInt8 *excludeSurfaceBytes = reinterpret_cast<UInt8 *>(excludeSurface);
+    UInt8 *excludeSharedBytes = reinterpret_cast<UInt8 *>(excludeShared);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  UInt16 uVar1;
-  UInt8 *pIVar2;
+  UInt16 ringEntryCount;
+  UInt8 *surfaceListHead;
   SInt32 iVar3;
-  UInt8 *pIVar4;
-  UInt32 uVar5;
+  UInt8 *shared;
+  UInt32 ringIndex;
   UInt32 in_register_00000028;
-  UInt32 uVar6;
-  UInt8 *this_00;
-  UInt8 *this_01;
-  UInt8 *this_02;
-  UInt8 *this_03;
-  UInt8 *pVVar7;
+  UInt32 visited;
+  UInt8 *context2D;
+  UInt8 *contextDVD;
+  UInt8 *contextGL;
+  UInt8 *surface;
+  UInt8 *dataBuffer;
   
   if (M<UInt8 *>(self + 0x664) != self + 0x63c) {
-    this->freeOrphanTexture(param_7);
-    iVar3 = VCALL(M<SInt32>(self), 0x5a8)(self,param_6);
+    this->freeOrphanTexture(aggressive);
+    iVar3 = VCALL(M<SInt32>(self), 0x5a8)(self,neededBytes);
     if (iVar3 != 0) {
       return 1;
     }
   }
-  for (this_00 = M<UInt8 *>(self + 100); this_00 != (UInt8 *)0x0;
-      this_00 = M<UInt8 *>(this_00 + 0x80)) {
-    if (this_00 != param_1) {
-      pIVar4 = M<UInt8 *>(this_00 + 0x88);
-      if (((pIVar4 != (UInt8 *)0x0) && (param_5 != pIVar4)) &&
-         (iVar3 = ((IOATIR500Shared *)(pIVar4))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 != 0)) {
+  for (context2D = M<UInt8 *>(self + 100); context2D != (UInt8 *)0x0;
+      context2D = M<UInt8 *>(context2D + 0x80)) {
+    if (context2D != exclude2DBytes) {
+      shared = M<UInt8 *>(context2D + 0x88);
+      if (((shared != (UInt8 *)0x0) && (excludeSharedBytes != shared)) &&
+         (iVar3 = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR5002DContext *)(this_00))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7);
+      iVar3 = ((IOATIR5002DContext *)(context2D))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
       if (iVar3 != 0) {
         return 1;
       }
     }
   }
-  for (this_01 = M<UInt8 *>(self + 0x68); this_01 != (UInt8 *)0x0;
-      this_01 = M<UInt8 *>(this_01 + 0x80)) {
-    if (this_01 != param_2) {
-      pIVar4 = M<UInt8 *>(this_01 + 0x84);
-      if (((pIVar4 != (UInt8 *)0x0) && (param_5 != pIVar4)) &&
-         (iVar3 = ((IOATIR500Shared *)(pIVar4))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 != 0)) {
+  for (contextDVD = M<UInt8 *>(self + 0x68); contextDVD != (UInt8 *)0x0;
+      contextDVD = M<UInt8 *>(contextDVD + 0x80)) {
+    if (contextDVD != excludeDVDBytes) {
+      shared = M<UInt8 *>(contextDVD + 0x84);
+      if (((shared != (UInt8 *)0x0) && (excludeSharedBytes != shared)) &&
+         (iVar3 = ((IOATIR500Shared *)(shared))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR500DVDContext *)(this_01))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7);
+      iVar3 = ((IOATIR500DVDContext *)(contextDVD))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
       if (iVar3 != 0) {
         return 1;
       }
     }
   }
-  for (this_02 = M<UInt8 *>(self + 0x60); this_02 != (UInt8 *)0x0;
-      this_02 = M<UInt8 *>(this_02 + 0x80)) {
-    if (this_02 != param_3) {
-      if ((param_5 != M<UInt8 *>(this_02 + 0x88)) &&
-         (iVar3 = ((IOATIR500Shared *)(M<UInt8 *>(this_02 + 0x88)))->freeToAllocGART((VendorTransferBuffer *)(param_6),param_7), iVar3 != 0)) {
+  for (contextGL = M<UInt8 *>(self + 0x60); contextGL != (UInt8 *)0x0;
+      contextGL = M<UInt8 *>(contextGL + 0x80)) {
+    if (contextGL != excludeGLBytes) {
+      if ((excludeSharedBytes != M<UInt8 *>(contextGL + 0x88)) &&
+         (iVar3 = ((IOATIR500Shared *)(M<UInt8 *>(contextGL + 0x88)))->freeToAllocGART((VendorTransferBuffer *)(neededBytes),aggressive), iVar3 != 0)) {
         return 1;
       }
-      iVar3 = ((IOATIR500GLContext *)(this_02))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7);
+      iVar3 = ((IOATIR500GLContext *)(contextGL))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
       if (iVar3 != 0) {
         return 1;
       }
     }
   }
-  pIVar2 = M<UInt8 *>(self + 0x5c);
-  this_03 = pIVar2;
-  if (pIVar2 != (UInt8 *)0x0) {
+  surfaceListHead = M<UInt8 *>(self + 0x5c);
+  surface = surfaceListHead;
+  if (surfaceListHead != (UInt8 *)0x0) {
     do {
-      this_03 = M<UInt8 *>(this_03 + 0xa0);
-      if (param_4 != this_03) {
-        iVar3 = ((IOATIR500Surface *)(this_03))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7);
+      surface = M<UInt8 *>(surface + 0xa0);
+      if (excludeSurfaceBytes != surface) {
+        iVar3 = ((IOATIR500Surface *)(surface))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive);
         if (iVar3 != 0) {
           return 1;
         }
-        pIVar2 = M<UInt8 *>(self + 0x5c);
+        surfaceListHead = M<UInt8 *>(self + 0x5c);
       }
-    } while (this_03 != pIVar2);
+    } while (surface != surfaceListHead);
   }
-  if ((param_5 == (UInt8 *)0x0) ||
-     (iVar3 = ((IOATIR500Shared *)(param_5))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 == 0)) {
-    if (((UInt32)param_7) == 0) {
-      uVar1 = M<UInt16>(self + 0x5c6);
-      uVar5 = (UInt32)M<UInt16>(self + 0x5c4);
-      if (uVar1 != 0) {
-        uVar6 = 0;
+  if ((excludeSharedBytes == (UInt8 *)0x0) ||
+     (iVar3 = ((IOATIR500Shared *)(excludeSharedBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)) {
+    if (((UInt32)aggressive) == 0) {
+      ringEntryCount = M<UInt16>(self + 0x5c6);
+      ringIndex = (UInt32)M<UInt16>(self + 0x5c4);
+      if (ringEntryCount != 0) {
+        visited = 0;
         do {
-          uVar5 = uVar5 - 1 & uVar1 - 1;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + uVar5 * 0x1c + 0x404)),(VendorTransferBuffer *)(param_6),
-                             M<UInt32>(self + uVar5 * 0x1c + 0x414),false);
+          ringIndex = ringIndex - 1 & ringEntryCount - 1;
+          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x404)),(VendorTransferBuffer *)(neededBytes),
+                             M<UInt32>(self + ringIndex * 0x1c + 0x414),false);
           if (iVar3 != 0) {
             return 1;
           }
-          uVar6 = uVar6 + 1;
-        } while (uVar6 < M<UInt16>(self + 0x5c6));
+          visited = visited + 1;
+        } while (visited < M<UInt16>(self + 0x5c6));
       }
-      uVar1 = M<UInt16>(self + 0x402);
-      uVar5 = (UInt32)M<UInt16>(self + 0x400);
-      if (uVar1 != 0) {
-        uVar6 = 0;
+      ringEntryCount = M<UInt16>(self + 0x402);
+      ringIndex = (UInt32)M<UInt16>(self + 0x400);
+      if (ringEntryCount != 0) {
+        visited = 0;
         do {
-          uVar5 = uVar5 - 1 & uVar1 - 1;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + uVar5 * 0x1c + 0x240)),(VendorTransferBuffer *)(param_6),
-                             M<UInt32>(self + uVar5 * 0x1c + 0x250),false);
+          ringIndex = ringIndex - 1 & ringEntryCount - 1;
+          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + ringIndex * 0x1c + 0x240)),(VendorTransferBuffer *)(neededBytes),
+                             M<UInt32>(self + ringIndex * 0x1c + 0x250),false);
           if (iVar3 != 0) {
             return 1;
           }
-          uVar6 = uVar6 + 1;
-        } while (uVar6 < M<UInt16>(self + 0x402));
+          visited = visited + 1;
+        } while (visited < M<UInt16>(self + 0x402));
       }
     }
     else {
-      uVar1 = M<UInt16>(self + 0x5c6);
-      uVar5 = (UInt32)M<UInt16>(self + 0x5c4);
-      if (uVar1 != 0) {
-        uVar6 = 0;
+      ringEntryCount = M<UInt16>(self + 0x5c6);
+      ringIndex = (UInt32)M<UInt16>(self + 0x5c4);
+      if (ringEntryCount != 0) {
+        visited = 0;
         do {
-          uVar5 = uVar5 & uVar1 - 1;
-          iVar3 = uVar5 * 0x1c;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x404)),(VendorTransferBuffer *)(param_6),
+          ringIndex = ringIndex & ringEntryCount - 1;
+          iVar3 = ringIndex * 0x1c;
+          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x404)),(VendorTransferBuffer *)(neededBytes),
                              M<UInt32>(self + iVar3 + 0x414),true);
           if (iVar3 != 0) {
             return 1;
           }
-          uVar6 = uVar6 + 1;
-          uVar5 = uVar5 + 1;
-        } while (uVar6 < M<UInt16>(self + 0x5c6));
+          visited = visited + 1;
+          ringIndex = ringIndex + 1;
+        } while (visited < M<UInt16>(self + 0x5c6));
       }
-      uVar1 = M<UInt16>(self + 0x402);
-      uVar5 = (UInt32)M<UInt16>(self + 0x400);
-      if (uVar1 != 0) {
-        uVar6 = 0;
+      ringEntryCount = M<UInt16>(self + 0x402);
+      ringIndex = (UInt32)M<UInt16>(self + 0x400);
+      if (ringEntryCount != 0) {
+        visited = 0;
         do {
-          uVar5 = uVar5 & uVar1 - 1;
-          iVar3 = uVar5 * 0x1c;
-          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x240)),(VendorTransferBuffer *)(param_6),
+          ringIndex = ringIndex & ringEntryCount - 1;
+          iVar3 = ringIndex * 0x1c;
+          iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)((UInt8 *)(self + iVar3 + 0x240)),(VendorTransferBuffer *)(neededBytes),
                              M<UInt32>(self + iVar3 + 0x250),true);
           if (iVar3 != 0) {
             return 1;
           }
-          uVar6 = uVar6 + 1;
-          uVar5 = uVar5 + 1;
-        } while (uVar6 < M<UInt16>(self + 0x402));
+          visited = visited + 1;
+          ringIndex = ringIndex + 1;
+        } while (visited < M<UInt16>(self + 0x402));
       }
     }
-    for (pVVar7 = M<UInt8 *>(self + 0x5cc); pVVar7 != (UInt8 *)0x0;
-        pVVar7 = M<UInt8 *>(pVVar7 + 0x3c)) {
-      iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar7),(VendorTransferBuffer *)(param_6),M<UInt32>(pVVar7 + 0x5c),param_7);
+    for (dataBuffer = M<UInt8 *>(self + 0x5cc); dataBuffer != (UInt8 *)0x0;
+        dataBuffer = M<UInt8 *>(dataBuffer + 0x3c)) {
+      iVar3 = this->freeTransferToAllocGART((VendorTransferBuffer *)(dataBuffer),(VendorTransferBuffer *)(neededBytes),M<UInt32>(dataBuffer + 0x5c),aggressive);
       if (iVar3 != 0) {
         return 1;
       }
     }
-    if (((((param_1 == (UInt8 *)0x0) ||
-          (iVar3 = ((IOATIR5002DContext *)(param_1))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 == 0)) &&
-         ((param_2 == (UInt8 *)0x0 ||
-          (iVar3 = ((IOATIR500DVDContext *)(param_2))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 == 0)))) &&
-        ((param_3 == (UInt8 *)0x0 ||
-         (iVar3 = ((IOATIR500GLContext *)(param_3))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 == 0)))) &&
-       ((param_4 == (UInt8 *)0x0 ||
-        (iVar3 = ((IOATIR500Surface *)(param_4))->freeToAllocGART((VendorTransferBuffer *)(param_6), param_7), iVar3 == 0)))) {
+    if (((((exclude2DBytes == (UInt8 *)0x0) ||
+          (iVar3 = ((IOATIR5002DContext *)(exclude2DBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)) &&
+         ((excludeDVDBytes == (UInt8 *)0x0 ||
+          (iVar3 = ((IOATIR500DVDContext *)(excludeDVDBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) &&
+        ((excludeGLBytes == (UInt8 *)0x0 ||
+         (iVar3 = ((IOATIR500GLContext *)(excludeGLBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) &&
+       ((excludeSurfaceBytes == (UInt8 *)0x0 ||
+        (iVar3 = ((IOATIR500Surface *)(excludeSurfaceBytes))->freeToAllocGART((VendorTransferBuffer *)(neededBytes), aggressive), iVar3 == 0)))) {
       return 0;
     }
   }

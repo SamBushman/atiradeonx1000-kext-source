@@ -27,10 +27,10 @@
 
 
 /* real addr 0x1ab20 */
-void ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement *real_param_1) {
+void ATIRadeonX1000::tmpDeallocVRAM(GLKMemoryElement *element) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *elementBytes = reinterpret_cast<UInt8 *>(element);
 
-  ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->dealloc((GLKMemoryElement *)(param_1));
+  ((ATIR500Memory *)(M<UInt8 *>(self + 0x93c)))->dealloc((GLKMemoryElement *)(elementBytes));
   return;
 }

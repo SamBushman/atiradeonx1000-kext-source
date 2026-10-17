@@ -27,10 +27,10 @@
 
 
 /* real addr 0x1eb30 */
-UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*param_1, UInt32 param_2, sATIDVDIDCTInfo *real_param_3) {
+UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*buffer, UInt32 gartOffset, sATIDVDIDCTInfo *info) {
     static UInt32 u32Dummy;   /* real function-local static: submit_idct_buffer_consumed(unsigned long*, unsigned long, sATIDVDIDCTInfo*)::u32Dummy */
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_3 = reinterpret_cast<UInt8 *>(real_param_3);
+    UInt8 *infoBytes = reinterpret_cast<UInt8 *>(info);
 
   SInt32 iVar1;
   UInt32 uVar2;
@@ -49,16 +49,16 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*param_1, UInt32 param_
   else {
     uVar3 = (UInt32)(UInt8)self[0x84];
     iVar5 = 0;
-    iVar1 = (M<SInt32>(param_3 + 0x10) * 4 + ((UInt32)param_1 & uVar3 - 1)) - uVar3;
+    iVar1 = (M<SInt32>(infoBytes + 0x10) * 4 + ((UInt32)buffer & uVar3 - 1)) - uVar3;
     if (0 < iVar1) {
       do {
-        dataCacheBlockStore((-uVar3 & (UInt32)param_1) + iVar5);
+        dataCacheBlockStore((-uVar3 & (UInt32)buffer) + iVar5);
         iVar5 = iVar5 + uVar3;
       } while (iVar5 < iVar1);
     }
     ppcSync();
     instructionSynchronize();
-    dataCacheBlockFlush((-uVar3 & (UInt32)param_1) + iVar5);
+    dataCacheBlockFlush((-uVar3 & (UInt32)buffer) + iVar5);
     ppcSync();
     instructionSynchronize();
     instructionSynchronize();
@@ -87,56 +87,56 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*param_1, UInt32 param_
       uVar3 = iVar5 + 1U & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x2c);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x2c);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001fe4;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x30);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x30);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001fec;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x1c);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x1c);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001ff0;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x20);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x20);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001f8c;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x10);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x10);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001ffc;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x24);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x24);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001ff8;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x28);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x28);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar7 * 4) = param_2 + iVar1 >> 1 & 0x7ffffff0;
+      M<UInt32>(iVar6 + uVar7 * 4) = gartOffset + iVar1 >> 1 & 0x7ffffff0;
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x14);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x14);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001fa8;
@@ -151,7 +151,7 @@ UInt32 ATIRadeonX1000::submit_idct_buffer_consumed(UInt32*param_1, UInt32 param_
       uVar3 = uVar7 + 1 & 0x7ff;
       uVar7 = uVar3 + 1;
       M<UInt32>(self + 0x930) = uVar7;
-      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(param_3 + 0x18);
+      M<UInt32>(iVar6 + uVar3 * 4) = M<UInt32>(infoBytes + 0x18);
       uVar7 = uVar7 & 0x7ff;
       M<UInt32>(self + 0x930) = uVar7;
       M<UInt32>(iVar6 + uVar7 * 4) = 0x80001fb4;

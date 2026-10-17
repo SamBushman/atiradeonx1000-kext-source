@@ -28,13 +28,13 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 
 
 /* real addr 0x30d0 */
-bool IOATIR500Accelerator::allocDataBufferBacking(VendorTextureBuffer *real_param_1) {
+bool IOATIR500Accelerator::allocDataBufferBacking(VendorTextureBuffer *buffer) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
+  SInt32 backing;
   
-  iVar1 = GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(0,0x10422,M<UInt32>(param_1 + 0x50),GH_page_size);
-  M<SInt32>(param_1 + 8) = iVar1;
-  return iVar1 != 0;
+  backing = GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(0,0x10422,M<UInt32>(bufferBytes + 0x50),GH_page_size);
+  M<SInt32>(bufferBytes + 8) = backing;
+  return backing != 0;
 }

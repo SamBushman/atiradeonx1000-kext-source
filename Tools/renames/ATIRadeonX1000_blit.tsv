@@ -1,0 +1,53 @@
+# ATIRadeonX1000 (software display scaler and the 3D copy-blit builders) remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# `::name` targets are FREE functions (no class). Only variables that keep ONE role through the whole function are renamed (a rename is whole-function); the
+# decompile reuses most locals (iVar16 is the rotation and later pcl_CopyPix's result in SWDSWriteBlitToCmdBuf, ...), so those are left as placeholders.
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_1	acceleratorBytes	INFERRED	untyped alias of the typed parameter `accelerator` (reads +0xb74, the colour-buffer base word)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_2	cmd	CONFIRMED	command buffer: puVar41 = param_2 + param_3, the state packet is copied there and the function returns the new length (file header)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_3	wordCount	CONFIRMED	number of words already in `cmd`: the packet is written at cmd + param_3 and the new length is returned
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_4	formatIndex	INFERRED	(param_4 & 0xff) * 0x1c indexes ati_format_info_table in the quad loops
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_5	srcAddress	CONFIRMED	param_5 & 0xffffffe0 is the texture-offset word (packet word 0xa0), as in SWDSWriteBlitToCmdBuf
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_6	unused6	UNKNOWN	never read in the body
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_7	srcWidth	INFERRED	(param_7 - 1) packed into the texture-size word (packet word 0xa6) and converted to float for the s/t scale
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_8	srcHeight	INFERRED	(param_8 - 1) packed into the texture-size word next to the width
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_9	srcTileFlags	INFERRED	bit 0 and bits 1-2 shifted into the low bits of the texture-offset word, with the address
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_10	srcShift	INFERRED	indexes texture_type[]/rb3d_dst_format[]/out_fmt[]; the caller passes FormatTableLookup(..)>>12 & 7 (log2 of the pixel size)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_11	srcLowBits	UNKNOWN	param_11 & 3 is OR-ed into the low bits of the texture-offset word; role of the two bits not established
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_12	unused12	UNKNOWN	stored to local_330, which nothing reads
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_13	dstAddress	CONFIRMED	param_13 & 0xffffffe0 is the colour-offset word (packet word 0x9a)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_14	unused14	UNKNOWN	never read in the body
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_15	dstPitch	INFERRED	param_15 & 0x3ffe is the pitch field of the colour-pitch word (packet word 0x9c)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_16	dstTileFlags	INFERRED	bit 0 and bits 1-2 shifted to bits 16-18 of the colour-pitch word
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_17	dstShift	INFERRED	compared with 4 to decide whether the tile bits apply; the caller passes the destination FormatTableLookup(..)>>12 & 7
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_18	unknown_param18	UNKNOWN	(param_18 & 3) << 19 in the colour-pitch word; role of the two bits not established
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_19	dstX	INFERRED	low 16 bits are the first short of the rectangle at local_368 (x), file header
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_20	dstY	INFERRED	low 16 bits are the second short of the rectangle (y)
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_21	srcX	INFERRED	converted to float and added to param_23 (the right edge) for the texture coordinates
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_22	srcY	INFERRED	converted to float and added to param_24 (the bottom edge) for the texture coordinates
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_23	width	INFERRED	third short of the rectangle; also the width term of the source rectangle
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_24	height	INFERRED	fourth short of the rectangle; also the height term of the source rectangle
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	param_25	flip	CONFIRMED	"flip vertically" flag (file header); selects the mirrored vertex order
+def	::write_3dtexquad_cmds_for_copy_buffer_using_DMA	puVar41	packet	INFERRED	param_2 + param_3: base of the copied 0x2f4-byte state packet, patched through word indexes 0x9a..0xb3 and 0xbd..
+def	::pcl_CopyPix	param_1	cmd	CONFIRMED	destination command words: the state packet is copied there and the pointer after the emitted stream is returned
+def	::pcl_CopyPix	param_2	paramsBytes	INFERRED	untyped alias of the typed parameter `params` (the pcl_ParamsR500_t block, fields copied into packet words 0xa0.. )
+def	::pcl_CopyPix	param_3	flipVertically	CONFIRMED	file header: param_3 flips vertically
+def	::pcl_CopyPix	param_4	alternateBuffer	CONFIRMED	file header: param_4 selects the alternate-buffer variant
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_1	buffer	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_2	wordCount	INFERRED	name from the class header; words already used in `buffer`, the function writes at buffer[param_2] and returns the new count
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_3	flag	INFERRED	name from the class header; true from submit_swap_buffer (the function then prepends a register write and wait), false from SWDSFunc
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	param_4	panel	CONFIRMED	indexes the per-panel 0x78-byte records at +0x9c4.. and picks register 0x194e vs 0x1b4e; callers pass the panel (0/1)
+def	ATIRadeonX1000::SWDSWriteBlitToCmdBuf@0x23320	puVar21	blitPacket	CONFIRMED	buffer + wordCount: the 0x2f4-byte state packet copied there and patched (words 0x8a..0xb3) in the non-tall path
+def	ATIRadeonX1000::SWDSShutdown@0x1d350	iVar7	panel	CONFIRMED	loop 0..1 over the two panels: 1 selects registers 0xb64.. instead of 0xb74..
+def	ATIRadeonX1000::SWDSShutdown@0x1d350	iVar4	registers	CONFIRMED	M(self + 0x860), the register window, written at offsets iVar6/iVar5/iVar3
+def	ATIRadeonX1000::SWDSShutdown@0x1d350	uVar2	savedValue	INFERRED	each iteration: a saved word from the panel record, byte-swapped and written to a register
+def	ATIRadeonX1000::SWDSFunc@0x24340	real_param_1	owner	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::SWDSFunc@0x24340	param_1	ownerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::SWDSFunc@0x24340	param_2	source	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::SWDSFunc@0x24340	uVar13	panel	CONFIRMED	loop 0..1, passed as the panel argument of SWDSWriteBlitToCmdBuf
+def	ATIRadeonX1000::SWDSFunc@0x24340	bVar1	statusBits	INFERRED	low byte of the word read from register 0xbf8; bits 0x80/0x40 are tested per panel
+def	ATIRadeonX1000::SWDSFunc@0x24340	bVar2	dualPanel	INFERRED	true only when both panel records (+0xb10, +0xb28) are active
+def	ATIRadeonX1000::SWDSFunc@0x24340	puVar12	cmdBuffer	CONFIRMED	entry->header + 0x20: the command buffer the blit is written to and the submit_buffer first argument
+def	ATIRadeonX1000::SWDSFunc@0x24340	uVar10	cmdWordCount	CONFIRMED	words in cmdBuffer; submit_buffer third argument (dwordCount)
+def	ATIRadeonX1000::SWDSFunc@0x24340	uVar7	bufferOffset	INFERRED	entry->gartOffset + 0x20; submit_buffer second argument (bufferOffsetOrEnd)
+def	ATIRadeonX1000::SWDSFunc@0x24340	pOVar8	entry	CONFIRMED	ring slot (0x1c bytes at +0xae0): +0x10 stamp, +0x14 mapped header, +4 gartOffset: the SwapBufferEntry layout
+def	ATIRadeonX1000::SWDSFunc@0x24340	uVar6	stamp	INFERRED	submit_buffer result, stored into the slot stamp (+0x10) and the last-submitted stamps (+0xad4/+0xad8)

@@ -1,0 +1,146 @@
+# ATIRadeonX1000 PCIe GART, texture page-off and submit functions remap (fork A4): placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# Locals the decompile reuses for unrelated values inside one function (dual-use) are left alone: a rename applies to the whole function scope.
+# Names for shared concepts (type, mapping, hwInfo, record, faceCount, baseLevel, tileRecord, stamp) follow Tools/renames/ATIR500GLContext_textures.tsv and ATIR500GLContext_TextureLoad.cpp's load_texture note.
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	real_param_1	descriptor	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	param_1	descriptorBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	param_2	gartOffset	INFERRED	name from the class header declaration (byte offset into the GART aperture; shifted right by _page_shift into a page index)
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar3	pageTable	INFERRED	this+0xc4c, the GART page table written entry by entry (ATIRadeonX1000_PCIeGART.cpp file note)
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar4	pagesCleared	INFERRED	loop counter: entries written back to the "empty" value; added to the first page index afterwards
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	iVar5	entryOffset	INFERRED	byte offset (page index * 4) of the entry being cleared, advanced by 4 per page
+def	ATIRadeonX1000::removeFromPCIeGART@0x1b540	puVar7	secondEntry	INFERRED	cursor into the second table copy at this+3000 (the aperture-in-video-memory copy named in the file note)
+def	ATIRadeonX1000::reserveInGART@0x1b6d0	param_1	gartOffset	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::reserveInGART@0x1b6d0	puVar3	entry	INFERRED	the GART page table entry being reserved (primary table first, then the same entry in the second copy)
+def	ATIRadeonX1000::clearInGART@0x1b7f0	param_1	gartOffset	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::clearInGART@0x1b7f0	puVar1	secondEntry	INFERRED	entry in the second table copy at this+3000
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar2	result	INFERRED	returned value: 0 when the chip has no PCIe GART, 1 on success, 0xffffffff on failure
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	puVar5	primaryEntry	INFERRED	cursor over the primary page table (IOMallocAligned result stored at this+0xc4c)
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	puVar6	secondTable	INFERRED	this+3000, the second table copy used when the aperture sits in video memory
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	puVar7	secondEntry	INFERRED	cursor over the second table copy while both tables are initialised
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	iVar8	registers	INFERRED	this+0x860, the register window base (the GART flush register at +0x130 is kicked through it)
+def	ATIRadeonX1000::startupPCIeGART@0x1d830	uVar9	emptyEntry	INFERRED	this+0x844, the value an unused page table entry holds (reserveInGART tests entries against it)
+def	ATIRadeonX1000::shutdownPCIeGART@0x1dc10	iVar1	registers	INFERRED	this+0x860, the register window base
+def	ATIRadeonX1000::shutdownPCIeGART@0x1dc10	uVar2	savedValue	INFERRED	this+0xbbc, read back and written to register +0x34 in three variants (bit 8 set, unchanged, bit 0 cleared)
+def	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	iVar2	secondTable	INFERRED	this+3000, the second table copy that the primary table is copied into
+def	ATIRadeonX1000::pageOnPCIeGART@0x1dcd0	iVar3	registers	INFERRED	this+0x860, the register window base (GART flush register +0x130)
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	real_param_2	descriptor	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	param_2	descriptorBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	real_param_3	outOffset	INFERRED	name from the class header declaration (receives the GART byte offset the descriptor was mapped at)
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	param_3	outOffsetBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	param_4	minOffset	INFERRED	name from the class header declaration (not read by this implementation)
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	param_5	maxOffset	INFERRED	name from the class header declaration (not read by this implementation)
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	local_38	segmentLength	INFERRED	out-parameter of the descriptor vtable +0x13c call (getPhysicalSegment-shaped: returns an address, length in local_38[0])
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar3	pageCount	INFERRED	descriptor length (vtable +0x128) shifted right by _page_shift: the number of table entries needed
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	pbVar8	entryScan	INFERRED	cursor of the free-run search over the primary page table
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar5	pageIndex	INFERRED	index of the table entry being scanned, then (after the search) of the entry being written
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar6	pageTable	INFERRED	this+0xc4c, the primary page table
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	iVar11	secondTable	INFERRED	this+3000, the second table copy
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar7	entryBits	INFERRED	this+0xbc0 (0 or 1, set in startupPCIeGART from a this+0x98 flag), or-ed into every entry
+def	ATIRadeonX1000::addToPCIeGART@0x1dd80	uVar2	entry	INFERRED	page table entry value built from the physical address and entryBits
+def	ATIRadeonX1000::allocate_texture@0x1a800	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::allocate_texture@0x1a800	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::allocate_texture@0x1a800	VVar1	type	CONFIRMED	texture+0x20 type discriminant (3/7 allocate, 8 is rejected); same field GetTextureOffset names type
+def	ATIRadeonX1000::allocate_texture@0x1a800	piVar2	mapping	INFERRED	IOMemoryMap-shaped handle returned by the memoryDescriptor vtable +0x14c (map into kernel_task); released with vtable +0x18
+def	ATIRadeonX1000::allocate_texture@0x1a800	this_00	memory	INFERRED	this+0x7c, the ATIR500Memory VRAM pool the alloc is made from
+def	ATIRadeonX1000::allocate_texture@0x1a800	uVar4	result	INFERRED	the return value: 1 when the VRAM allocation succeeded, 0 on failure or type 8
+def	ATIRadeonX1000::allocate_texture@0x1a800	uVar5	cpuVisibleSize	INFERRED	this+0x84c: textures whose offset is below it are CPU visible (prepare_texture_for_pageoff_with_cpu tests the texture offset against it)
+def	ATIRadeonX1000::allocate_texture@0x1a800	uVar6	size	INFERRED	texture+0x50 (the size class) for types 3/7, 0 otherwise: the size passed to ATIR500Memory::alloc
+def	ATIRadeonX1000::allocate_texture@0x1a800	uVar7	flags	INFERRED	word at +0x20 of the mapped header (vtable +0xd0 result); bit 30 tested to choose the VRAM region
+def	ATIRadeonX1000::deallocate_texture@0x1a620	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::deallocate_texture@0x1a620	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::deallocate_texture@0x1a620	VVar3	type	CONFIRMED	texture+0x20 type discriminant (3/7 dirty-check then page off, 8 release/page off data buffer)
+def	ATIRadeonX1000::deallocate_texture@0x1a620	uVar5	faceCount	CONFIRMED	byte at mip record+0x34: the face count (ATIR500GLContext_TextureLoad.cpp load_texture note, step 1)
+def	ATIRadeonX1000::deallocate_texture@0x1a620	uVar4	hzHandle	INFERRED	texture+0x6c, the HZMEM block handle freed with HZMEM_Free (0xffffffff = none)
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	param_2	size	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	pAVar7	candidate	INFERRED	cursor over the accelerator list of textures (circular list head at this+0x5dc, next at +0x28) looking for one to page off
+def	ATIRadeonX1000::freeToAllocTextureCPUVisibleVRAM@0x1e320	uVar3	faceCount	CONFIRMED	byte at mip record+0x34: the face count
+def	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	real_param_2	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	param_2	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	piVar3	mapping	INFERRED	IOMemoryMap-shaped handle from the memoryDescriptor vtable +0x14c; released with vtable +0x18 at the end
+def	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	pAVar4	hwInfo	CONFIRMED	result of mapping vtable +0xd0: the ATITextureBufferHeader passed to the pageoff_* callees (hwInfo in the load_texture note)
+def	ATIRadeonX1000::pageoff_dirty_texture@0x21c60	iVar6	face	INFERRED	loop index over the faces of the mip record
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	real_param_2	hwInfo	INFERRED	name from the class header declaration (the mapped ATITextureBufferHeader)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	param_2	hwInfoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	real_param_2	hwInfo	INFERRED	name from the class header declaration (the mapped ATITextureBufferHeader)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	param_2	hwInfoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	real_param_2	hwInfo	INFERRED	name from the class header declaration (the mapped ATITextureBufferHeader)
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	param_2	hwInfoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	real_param_2	hwInfo	INFERRED	name from the class header declaration (the mapped ATITextureBufferHeader)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	param_2	hwInfoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar30	baseLevel	CONFIRMED	mip record byte +0x17 (load_texture note: mip[0x17] is the base level)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar21	lastLevel	CONFIRMED	baseLevel + mip[0x35] (level count) - 1
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	bVar1	faceCount	CONFIRMED	mip record byte +0x34: the face count
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	local_88	face	INFERRED	outer loop index over the faces
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	uVar34	level	INFERRED	inner loop index over the mip levels baseLevel..lastLevel
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	pAVar39	tileRecord	INFERRED	per-tile record at hwInfo + (face*13 + level)*0x20 + 0x40 (load_texture note, path A: tileIndex = face*13+level)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar15	surfaceInfoOffset	INFERRED	register offset (4*n+0x2c3)*4 = 0xb0c+16*n: SURFACEn_INFO of the free surface register set n (saved0/restored at the end)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar16	surfaceLowerOffset	INFERRED	register offset (4*n+0x2c1)*4 = 0xb04+16*n: SURFACEn_LOWER_BOUND (saved1 is its saved value)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	local_6c	innerMapping	INFERRED	IOMemoryMap-shaped handle for the type 7 inner buffer (vtable +0x14c); released with vtable +0x18 at the end
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	pAVar23	destination	INFERRED	CPU address in the texture memory that each row is copied to (memcpy destination), advanced by the row pitch
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar24	vramSource	INFERRED	VRAM address (aperture base + texture offset + tile offset) rows are copied from (memcpy source)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar38	rowCount	INFERRED	rows copied per repeat of the tile
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	iVar36	repeat	INFERRED	loop index over the tile record repeat count (record +0x40 UInt16)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_cpu@0x1e500	local_84	bytesCopied	INFERRED	total bytes copied; added to this+0x720 at the end (paged-off byte statistic)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	VVar17	type	CONFIRMED	texture+0x20 type discriminant (3 plain, 7 chained to an inner buffer)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	pVVar29	innerBuffer	CONFIRMED	texture+0x58 of a type 7 texture (load_texture innerBuffer): the inner transfer buffer
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	bVar1	faceCount	CONFIRMED	mip record byte +0x34: the face count
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar6	baseLevel	CONFIRMED	mip record byte +0x17 (load_texture note: mip[0x17] is the base level)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar7	lastLevel	CONFIRMED	baseLevel + mip[0x35] (level count) - 1
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar24	vramOffset	INFERRED	texture+0x48: the texture offset added to the tile base addresses
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	local_68	size	INFERRED	texture+0x50, added to the paged-off total at this+0x720
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar30	gartOffset	INFERRED	GART offset of the buffer: inner buffer +4 for type 7, texture+4 otherwise
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	pAVar25	record	CONFIRMED	the PM4 burst buffer at hwInfo + hwInfo[1]*4 + 0xa00 (load_texture note step 4: record)
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar21	face	INFERRED	loop index over the faces
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar27	level	INFERRED	loop index over the mip levels baseLevel..lastLevel
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	pAVar14	tileRecord	INFERRED	per-tile record at hwInfo + (face*13 + level)*0x20 + 0x40
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	pAVar16	tileOut	INFERRED	output slot in record where this tile register burst is written
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	iVar11	repeat	INFERRED	loop index over the tile record repeat count
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar13	wordCount	INFERRED	hwInfo[2] dwords of the burst, padded to even before submit_buffer
+def	ATIRadeonX1000::pageoff_dirty_texture_with_gpu@0x210f0	uVar12	stamp	CONFIRMED	submit_buffer return value, stored at mip record +0xc and waited on with waitForTimeStamp (load_texture note step 4)
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	VVar11	type	CONFIRMED	texture+0x20 type discriminant (3 plain, 7 chained)
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	pVVar16	innerBuffer	CONFIRMED	texture+0x58 of a type 7 texture: the inner transfer buffer
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar17	gartOffset	INFERRED	GART offset of the buffer: inner buffer +4 for type 7, texture+4 otherwise
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	pAVar7	record	CONFIRMED	hwInfo + 0xa00: the PM4 burst buffer (load_texture note step 4: record)
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	uVar12	burstIndex	INFERRED	dword index into record of the current row burst (starts at hwInfo[0x40 UInt16], advances 0x12 per repeat)
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	iVar18	vramOffset	INFERRED	texture+0x48 added to the burst base address
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	uVar8	wordCount	INFERRED	hwInfo[0] dwords of the burst, padded to even before submit_buffer
+def	ATIRadeonX1000::pageoff_linear_buffer@0x217a0	uVar6	stamp	CONFIRMED	submit_buffer return value, stored at mip record +0xc
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar19	oldVramOffset	INFERRED	texture+0x48 before the reallocation (tested against this+0x84c, the CPU visible size)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar20	newVramOffset	INFERRED	texture+0x48 after ATIR500Memory::alloc / freeToAllocTextureCPUVisibleVRAM gave the texture a visible offset
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	aGStack_68	oldElement	CONFIRMED	16-byte copy of the texture GLKMemoryElement (texture+0x40) made before the alloc; deallocated at the end
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	pAVar18	record	CONFIRMED	hwInfo + hwInfo[1]*4 + 0xa00: the PM4 burst buffer (load_texture note step 4: record)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	bVar1	faceCount	CONFIRMED	mip record byte +0x34: the face count
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar12	mipFlags	INFERRED	mip record byte +0x15, bit 2 recomputed per level (bits 3-4 select the tiling variant)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar14	baseLevel	CONFIRMED	mip record byte +0x17 (load_texture note: mip[0x17] is the base level)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar16	lastLevel	CONFIRMED	baseLevel + mip[0x35] (level count) - 1
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar15	face	INFERRED	loop index over the faces
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar23	level	INFERRED	loop index over the mip levels baseLevel..lastLevel
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	pAVar9	tileRecord	INFERRED	per-tile record at hwInfo + (face*13 + level)*0x20 + 0x40 (0x1a0 = 13*0x20 per face)
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	pAVar10	tileOut	INFERRED	output slot in record where this tile register burst is written
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	iVar8	repeat	INFERRED	loop index over the tile record repeat count
+def	ATIRadeonX1000::prepare_texture_for_pageoff_with_cpu@0x20d30	uVar7	stamp	CONFIRMED	submit_buffer return value, stored at mip record +0xc and waited on
+def	ATIRadeonX1000::submit_buffer@0x20980	param_1	bufferStart	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_buffer@0x20980	param_2	gartOffset	CONFIRMED	callers pass texture/entry +4 (the GART offset) plus the burst offset; the function adds this+0x8a4 and writes it as the indirect buffer address
+def	ATIRadeonX1000::submit_buffer@0x20980	param_3	dwordCount	INFERRED	name from the class header declaration (padded to a multiple of 8 and written as the indirect buffer size)
+def	ATIRadeonX1000::submit_buffer@0x20980	iVar5	rptrOffset	INFERRED	this+0x910: byte offset of the ring read pointer register, read as (this+0x90c)+offset
+def	ATIRadeonX1000::submit_buffer@0x20980	uVar4	writeIndex	INFERRED	this+0x914, the ring write index (dword index, masked & 0x7ff)
+def	ATIRadeonX1000::submit_buffer@0x20980	iVar8	spinCount	INFERRED	IOSleep(1) retries while waiting for ring space (gives up after 1000)
+def	ATIRadeonX1000::submit_buffer@0x20980	uVar2	stamp	CONFIRMED	this+0x50, the submit stamp written to the ring and returned (before it is incremented)
+def	ATIRadeonX1000::submit_ring_data@0x1f030	uVar2	writeIndex	CONFIRMED	this+0x914, the ring write index; padded to a multiple of 8, written to the write pointer register (+0x714) and stored at this+0x918
+def	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	param_1	buffer	INFERRED	pointer to the IDCT command buffer: its info->dwords*4 bytes are flushed from the data cache (callers pass the buffer mapping + 0x20)
+def	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	param_2	gartOffset	INFERRED	GART offset of the buffer; written (plus this+0x8a4, shifted) as the buffer address register value
+def	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	real_param_3	info	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_idct_buffer_consumed@0x1eb30	param_3	infoBytes	INFERRED	untyped alias of the typed parameter named from the class header
+decl	ATIRadeonX1000::submit_buffer#1	bufferOffsetOrEnd	gartOffset	CONFIRMED	callers pass a GART offset (texture+4 plus burst offset), see the def rows
+decl	ATIRadeonX1000::submit_idct_buffer_consumed#1	ringPtr	buffer	INFERRED	the IDCT command buffer whose cache lines are flushed, not the ring
+decl	ATIRadeonX1000::submit_idct_buffer_consumed#1	ringOffset	gartOffset	INFERRED	GART offset of that buffer

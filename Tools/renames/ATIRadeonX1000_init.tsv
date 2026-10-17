@@ -1,0 +1,121 @@
+# ATIRadeonX1000 remap (init, display mode, timestamps, power, debug dumps; the texture, GART, SWDS and blit files are other tables): placeholder -> real names. Applied by Tools/apply_renames.py.
+# kind	target	old	new	tier	evidence
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	param_1	mode	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	param_1	mode	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::GPUSensorFunc@0x1e100	real_param_1	owner	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::GPUSensorFunc@0x1e100	param_1	ownerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::GPUSensorFunc@0x1e100	param_2	source	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::start@0x1f750	param_1	provider	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_1	bufferStart	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_2	bufferOffsetOrEnd	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_3	dwordCount	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	param_1	tag	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::stop@0x26250	real_param_1	provider	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::stop@0x26250	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::tmpDeallocVRAM@0x1ab20	real_param_1	element	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::tmpDeallocVRAM@0x1ab20	param_1	elementBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	pbVar1	stampAddress	INFERRED	address (self+0x864 + self+0x868/0x86c) re-read with lwbrx every poll
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	iVar3	pollCount	CONFIRMED	counted up to 0xc351 and compared against it; -1 returned on timeout
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	iVar3	mmioBase	CONFIRMED	self+0x860 (mmioBase), the stamp is read at +0x1fa8
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	iVar3	mmioBase	CONFIRMED	self+0x860 (mmioBase), the stamp is read at +0x1fa8
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::sleepForRetiredTimeStamp@0x257e0	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::sleepForTimeStampNoLock@0x25ae0	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::waitForTimeStamp@0x251e0	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::sleepForTimeStamp@0x25960	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::sleepForConsumedIDCTTimeStamp@0x25660	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	uVar2	currentStamp	CONFIRMED	the stamp just read back; stored to the cached retired/consumed stamp field and compared with the awaited tag
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	bVar4	borrow	CONFIRMED	t1[1] < t0[1]: the borrow of the 64-bit subtraction endTime - startTime
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	t0	startTime	CONFIRMED	first clock_get_uptime result
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	t1	endTime	CONFIRMED	second clock_get_uptime result, then the difference
+def	ATIRadeonX1000::waitForConsumedIDCTTimeStamp@0x254e0	t2	elapsedNs	CONFIRMED	absolutetime_to_nanoseconds output; [1] is added to the wait-time total at self+0x760 and returned
+def	ATIRadeonX1000::setupR520Pipes@0x1bd20	iVar3	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar4	pipeCountCode	INFERRED	bits 13:12 of register 0x402c; selects the pipe count stored at self+0xb98 (1,2,3,4)
+def	ATIRadeonX1000::setupR520Pipes@0x1bd20	uVar5	savedStrobeWord	CONFIRMED	original word at +8, restored after the strobed read (see the comment in the function)
+def	ATIRadeonX1000::start@0x1f750	puVar3	chipID	CONFIRMED	stored to self+0xc50 (chip ID) and switched on to choose the pipe family
+def	ATIRadeonX1000::start@0x1f750	bVar2	savedStrobeByte	CONFIRMED	original byte at +8, restored after the strobed read of +0xc/+0xf
+def	ATIRadeonX1000::start@0x1f750	this_00	memoryPool	CONFIRMED	the new ATIR500Memory stored at self+0x93c
+def	ATIRadeonX1000::start@0x1f750	local_38	gartOffset	INFERRED	page index << page_shift, passed by address to the vtable +0x590 GART-reserve call
+def	ATIRadeonX1000::start@0x1f750	uVar12	cacheFlushStart	INFERRED	line-aligned start of the range flushed with dcbst/dcbf
+def	ATIRadeonX1000::display_mode_did_change@0x24e40	piVar4	period	CONFIRMED	result of getPeriodValue(): seconds, nanoseconds
+def	ATIRadeonX1000::display_mode_did_change@0x24e40	uVar5	clutIndex	CONFIRMED	loop 0..1 passed to SWDSEnableCLUT
+def	ATIRadeonX1000::display_mode_did_change@0x24e40	uVar6	result	CONFIRMED	the function return value
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	uVar7	result	CONFIRMED	the function return value
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	uVar2	ringIndex	CONFIRMED	write index into the ring buffer at self+0x900 (self+0x914), masked with 0x7ff
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	uVar5	nextRingIndex	INFERRED	ringIndex + 1 before masking
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	pGVar8	displayElement	INFERRED	GLKMemoryElement of the display record, passed to ATIR500Memory::dealloc
+def	ATIRadeonX1000::display_mode_will_change@0x25f00	pAVar9	displayRecord	INFERRED	walks the two 0x78-byte display records of the accelerator
+def	ATIRadeonX1000::system_did_change_speed@0x1e210	iVar1	previousDepth	CONFIRMED	OSDecrementAtomic result: the speed-change nesting count before the decrement
+def	ATIRadeonX1000::system_did_change_speed@0x1e210	piVar2	period	CONFIRMED	result of getPeriodValue(): seconds, nanoseconds
+def	ATIRadeonX1000::system_will_change_speed@0x1f1e0	uVar2	ringIndex	CONFIRMED	write index into the ring buffer at self+0x900 (self+0x914), masked with 0x7ff
+def	ATIRadeonX1000::system_will_change_speed@0x1f1e0	uVar4	nextRingIndex	INFERRED	ringIndex + 1 before masking
+def	ATIRadeonX1000::GPUSensorFunc@0x1e100	pbVar1	ringReadPointerAddress	INFERRED	self+0x90c + self+0x910: where the ring read pointer is read back (lwbrx) and compared with the write index self+0x914
+def	ATIRadeonX1000::GPUSensorFunc@0x1e100	iVar2	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::start_xdct_engine@0x25c60	iVar5	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::stop_xdct_engine@0x25df0	iVar2	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::stop_xdct_engine@0x25df0	iVar3	pollCount	CONFIRMED	counted up to 10000 while waiting for the engine
+def	ATIRadeonX1000::stop_xdct_engine@0x25df0	bVar1	pollLimitReached	CONFIRMED	pollCount == 10000
+def	ATIRadeonX1000::start_xdct_engine@0x25c60	bVar1	pollLimitReached	CONFIRMED	pollCount == 10000
+def	ATIRadeonX1000::stop@0x26250	pGVar5	memoryElement	INFERRED	GLKMemoryElement of the display record, passed to ATIR500Memory::dealloc
+def	ATIRadeonX1000::stop@0x26250	pAVar6	displayRecord	INFERRED	walks the two 0x78-byte display records of the accelerator
+def	ATIRadeonX1000::stop_promo4_engine@0x1cb00	iVar4	mmioBase	CONFIRMED	self+0x860 (mmioBase), re-read inside the idle-wait loops
+def	ATIRadeonX1000::stop_promo4_engine@0x1cb00	iVar5	timeoutCount	CONFIRMED	counts down from 1000 around GH_IODelay(100) in each idle wait
+def	ATIRadeonX1000::stop_promo4_engine@0x1cb00	bVar1	stillCounting	INFERRED	timeoutCount != 0 before the decrement
+def	ATIRadeonX1000::stop_promo4_engine@0x1cb00	uVar2	ringControl	CONFIRMED	register 0x704, labelled CP_RB_CNTL by dump_registers
+def	ATIRadeonX1000::load_promo4_micro_code@0x1cd30	iVar3	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::load_promo4_micro_code@0x1cd30	iVar4	pairsLeft	CONFIRMED	0x100 word pairs of aPM4_Microcode_R520 written, counted down
+def	ATIRadeonX1000::load_promo4_micro_code@0x1cd30	puVar2	microcodeCursor	CONFIRMED	walks aPM4_Microcode_R520 two words at a time
+def	ATIRadeonX1000::load_promo4_micro_code@0x1cd30	uVar1	microcodeWord	CONFIRMED	byte-swapped and written to registers 0x7dc/0x7e0
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	uVar12	ringControl	CONFIRMED	register 0x704 (CP_RB_CNTL per dump_registers): read, modified and written back
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	iVar10	mmioBase	CONFIRMED	self+0x860 (mmioBase), re-read inside the wait loop
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	uVar9	ringReadPointer	CONFIRMED	register 0x710, labelled CP_RB_RPTR by dump_registers
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	uVar5	ringWritePointer	CONFIRMED	ringReadPointer & 0x7ff, written to register 0x714 (CP_RB_WPTR)
+def	ATIRadeonX1000::start_promo4_engine@0x1cd90	pAVar8	displayRecord	INFERRED	walks the two 0x20-byte records at self+0xe4; the first with a non-zero field sets the active flag self+0x80
+def	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	iVar5	mmioBase	CONFIRMED	self+0x860 (mmioBase)
+def	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar5	result	CONFIRMED	the function return value (0 on any failed step, 1 at the end)

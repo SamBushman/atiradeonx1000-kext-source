@@ -34,81 +34,81 @@ void ATIRadeonX1000::setupR520Pipes() {
 
   UInt8 bVar1;
   UInt32 uVar2;
-  SInt32 iVar3;
-  UInt32 uVar4;
-  UInt32 uVar5;
+  SInt32 mmioBase;
+  UInt32 pipeCountCode;
+  UInt32 savedStrobeWord;
   
   enforceInOrderExecutionIO();
-  iVar3 = M<SInt32>(self + 0x860);
+  mmioBase = M<SInt32>(self + 0x860);
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while (((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-           ((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0));
-  storeWordByteReversed(&M<UInt8>(iVar3 + 0x402c), loadWordByteReversed(&M<UInt8>(iVar3 + 0x402c)) | 0x40000);
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while (((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+           ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0));
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x402c), loadWordByteReversed(&M<UInt8>(mmioBase + 0x402c)) | 0x40000);
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while ((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-          (((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0))));
-  uVar4 = loadWordByteReversed(&M<UInt8>(iVar3 + 0x402c)) >> 0xc & 3;
-  uVar2 = (1 << uVar4 + 1) - 1;
-  M<UInt32>(iVar3 + 0x42c8) =
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while ((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+          (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
+  pipeCountCode = loadWordByteReversed(&M<UInt8>(mmioBase + 0x402c)) >> 0xc & 3;
+  uVar2 = (1 << pipeCountCode + 1) - 1;
+  M<UInt32>(mmioBase + 0x42c8) =
        uVar2 * 0x1000000 | (uVar2 & 0xff00) << 8 | uVar2 >> 8 & 0xff00 | uVar2 >> 0x18;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while ((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-          (((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0))));
-  if (uVar4 == 1) {
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while ((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+          (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
+  if (pipeCountCode == 1) {
     uVar2 = 6;
     M<UInt32>(self + 0xb98) = 2;
   }
-  else if (uVar4 == 0) {
+  else if (pipeCountCode == 0) {
 LAB_0001bea0:
     uVar2 = 0;
     M<UInt32>(self + 0xb98) = 1;
   }
-  else if (uVar4 == 2) {
+  else if (pipeCountCode == 2) {
     uVar2 = 0xc;
     M<UInt32>(self + 0xb98) = 3;
   }
   else {
-    if (uVar4 != 3) goto LAB_0001bea0;
+    if (pipeCountCode != 3) goto LAB_0001bea0;
     uVar2 = 0xe;
     M<UInt32>(self + 0xb98) = 4;
   }
   M<UInt32>(self + 0xb74) = uVar2 | 0xc00011;
-  M<UInt32>(iVar3 + 0x4018) = (uVar2 | 0xc00011) << 0x18 | 0xc000;
+  M<UInt32>(mmioBase + 0x4018) = (uVar2 | 0xc00011) << 0x18 | 0xc000;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while (((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-           ((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0));
-  storeWordByteReversed(&M<UInt8>(iVar3 + 0x170c), loadWordByteReversed(&M<UInt8>(iVar3 + 0x170c)) | 0x80000000);
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while (((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+           ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0));
+  storeWordByteReversed(&M<UInt8>(mmioBase + 0x170c), loadWordByteReversed(&M<UInt8>(mmioBase + 0x170c)) | 0x80000000);
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while ((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-          (((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0))));
-  M<UInt32>(iVar3 + 0x429c) = 0x40000;
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while ((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+          (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
+  M<UInt32>(mmioBase + 0x429c) = 0x40000;
   enforceInOrderExecutionIO();
   GH_IOSleep(1);
   enforceInOrderExecutionIO();
-  iVar3 = M<SInt32>(self + 0x860);
+  mmioBase = M<SInt32>(self + 0x860);
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while ((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-          (((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0))));
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while ((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+          (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))));
   M<UInt32>(self + 0xb9c) = 1;
   if ((M<UInt32>(self + 0x98) & 0x200000) == 0) {
     return;
@@ -122,10 +122,10 @@ LAB_0001bea0:
    * correct position, matching stock's real instruction order. This function was previously
    * unreachable on a hot-swapped instance (blocked by #147's original chip-ID bug), so this bug was
    * never exercised until #147/#156's real fix let setupR520Pipes() run for the first time. */
-  uVar5 = loadWordByteReversed(&M<UInt8>(iVar3 + 8));
-  storeWordByteReversed(&M<UInt8>(iVar3 + 8), uVar5 & 0xffffff40 | 0x34);
-  uVar2 = (loadWordByteReversed(&M<UInt8>(iVar3 + 0xc)) ^ 0x30000000) >> 0x1c & 3;
-  storeWordByteReversed(&M<UInt8>(iVar3 + 8), uVar5);
+  savedStrobeWord = loadWordByteReversed(&M<UInt8>(mmioBase + 8));
+  storeWordByteReversed(&M<UInt8>(mmioBase + 8), savedStrobeWord & 0xffffff40 | 0x34);
+  uVar2 = (loadWordByteReversed(&M<UInt8>(mmioBase + 0xc)) ^ 0x30000000) >> 0x1c & 3;
+  storeWordByteReversed(&M<UInt8>(mmioBase + 8), savedStrobeWord);
   if (uVar2 != 0) {
     if (uVar2 < 3) {
       M<UInt32>(self + 0xb9c) = 1;
@@ -146,15 +146,15 @@ LAB_0001bea0:
   M<UInt32>(self + 0xb9c) = 1;
   uVar2 = 1;
 LAB_0001c040:
-  M<UInt32>(iVar3 + 0x4124) = uVar2 << 0x18;
+  M<UInt32>(mmioBase + 0x4124) = uVar2 << 0x18;
   enforceInOrderExecutionIO();
   enforceInOrderExecutionIO();
   do {
     do {
-    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40))) < 0);
-  } while (((((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x60000) != 0)) ||
-           ((loadWordByteReversed(&M<UInt8>(iVar3 + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar3 + 0xe40)) & 0x380000) != 0));
-  M<UInt32>(iVar3 + 0x4be8) = uVar2 << 0x18;
+    } while ((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0);
+  } while (((((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+           ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0)) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0));
+  M<UInt32>(mmioBase + 0x4be8) = uVar2 << 0x18;
   enforceInOrderExecutionIO();
   return;
 }
@@ -580,58 +580,58 @@ LAB_0001c9b0:
 bool ATIRadeonX1000::stop_promo4_engine() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt32 uVar2;
+  bool stillCounting;
+  UInt32 ringControl;
   UInt8 bVar3;
-  SInt32 iVar4;
-  SInt32 iVar5;
+  SInt32 mmioBase;
+  SInt32 timeoutCount;
   
   self[0x80] = 0x0;
-  iVar4 = M<SInt32>(self + 0x860);
-  if (iVar4 != 0) {
+  mmioBase = M<SInt32>(self + 0x860);
+  if (mmioBase != 0) {
     enforceInOrderExecutionIO();
-    iVar5 = 1000;
-    while ((((((SInt32)(loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40))) < 0 ||
-              ((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x10000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x60000) != 0)) ||
-            (((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x380000) != 0)))) &&
-           (bVar1 = iVar5 != 0, iVar5 = iVar5 + -1, bVar1))) {
+    timeoutCount = 1000;
+    while ((((((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0 ||
+              ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0)) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+            (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0)))) &&
+           (stillCounting = timeoutCount != 0, timeoutCount = timeoutCount + -1, stillCounting))) {
       GH_IODelay(100);
-      iVar4 = M<SInt32>(self + 0x860);
+      mmioBase = M<SInt32>(self + 0x860);
     }
-    M<UInt32>(iVar4 + 0x770) = 0;
+    M<UInt32>(mmioBase + 0x770) = 0;
     enforceInOrderExecutionIO();
-    storeWordByteReversed(&M<UInt8>(iVar4 + 0x704), loadWordByteReversed(&M<UInt8>(iVar4 + 0x704)) | 0x8000000);
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x704), loadWordByteReversed(&M<UInt8>(mmioBase + 0x704)) | 0x8000000);
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar4 + 0x744) = 0;
+    M<UInt32>(mmioBase + 0x744) = 0;
     enforceInOrderExecutionIO();
-    (void)loadWordByteReversed(&M<UInt8>(iVar4 + 0x744));       /* read-back of the register just written (the shipped code does it) */
-    uVar2 = loadWordByteReversed(&M<UInt8>(iVar4 + 0x704));
-    storeWordByteReversed(&M<UInt8>(iVar4 + 0x704), uVar2 | 0x80000000);
+    (void)loadWordByteReversed(&M<UInt8>(mmioBase + 0x744));       /* read-back of the register just written (the shipped code does it) */
+    ringControl = loadWordByteReversed(&M<UInt8>(mmioBase + 0x704));
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x704), ringControl | 0x80000000);
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar4 + 0x71c) = 0;
+    M<UInt32>(mmioBase + 0x71c) = 0;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar4 + 0x714) = 0;
+    M<UInt32>(mmioBase + 0x714) = 0;
     enforceInOrderExecutionIO();
-    storeWordByteReversed(&M<UInt8>(iVar4 + 0x704), uVar2 & 0x7fffffff);
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x704), ringControl & 0x7fffffff);
     enforceInOrderExecutionIO();
     enforceInOrderExecutionIO();
-    iVar5 = 1000;
-    while (((((SInt32)(loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40))) < 0 ||
-             ((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x10000) == 0)) ||
-            (((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x60000) != 0 ||
-             (((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x380000) != 0))))))
-           && (bVar1 = iVar5 != 0, iVar5 = iVar5 + -1, bVar1))) {
+    timeoutCount = 1000;
+    while (((((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0 ||
+             ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0)) ||
+            (((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0 ||
+             (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0))))))
+           && (stillCounting = timeoutCount != 0, timeoutCount = timeoutCount + -1, stillCounting))) {
       GH_IODelay(100);
-      iVar4 = M<SInt32>(self + 0x860);
+      mmioBase = M<SInt32>(self + 0x860);
     }
     enforceInOrderExecutionIO();
-    iVar5 = 1000;
-    while ((((((SInt32)(loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40))) < 0 ||
-              ((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x10000) == 0)) || ((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x60000) != 0)) ||
-            (((loadWordByteReversed(&M<UInt8>(iVar4 + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(iVar4 + 0xe40)) & 0x380000) != 0)))) &&
-           (bVar1 = iVar5 != 0, iVar5 = iVar5 + -1, bVar1))) {
+    timeoutCount = 1000;
+    while ((((((SInt32)(loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40))) < 0 ||
+              ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x10000) == 0)) || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x60000) != 0)) ||
+            (((loadWordByteReversed(&M<UInt8>(mmioBase + 0x1720)) & 0x20000) == 0 || ((loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40)) & 0x380000) != 0)))) &&
+           (stillCounting = timeoutCount != 0, timeoutCount = timeoutCount + -1, stillCounting))) {
       GH_IODelay(100);
-      iVar4 = M<SInt32>(self + 0x860);
+      mmioBase = M<SInt32>(self + 0x860);
     }
   }
   return 1;
@@ -641,102 +641,102 @@ bool ATIRadeonX1000::stop_promo4_engine() {
 void ATIRadeonX1000::load_promo4_micro_code() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  UInt32 *puVar2;
-  SInt32 iVar3;
-  SInt32 iVar4;
+  UInt32 microcodeWord;
+  UInt32 *microcodeCursor;
+  SInt32 mmioBase;
+  SInt32 pairsLeft;
   
-  iVar3 = M<SInt32>(self + 0x860);
-  M<UInt32>(iVar3 + 0x7d4) = 0;
+  mmioBase = M<SInt32>(self + 0x860);
+  M<UInt32>(mmioBase + 0x7d4) = 0;
   enforceInOrderExecutionIO();
-  iVar4 = 0x100;
-  puVar2 = aPM4_Microcode_R520 + 1;
+  pairsLeft = 0x100;
+  microcodeCursor = aPM4_Microcode_R520 + 1;
   do {
-    uVar1 = *puVar2;
-    M<UInt32>(iVar3 + 0x7dc) =
-         uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
+    microcodeWord = *microcodeCursor;
+    M<UInt32>(mmioBase + 0x7dc) =
+         microcodeWord << 0x18 | (microcodeWord & 0xff00) << 8 | microcodeWord >> 8 & 0xff00 | microcodeWord >> 0x18;
     enforceInOrderExecutionIO();
-    uVar1 = puVar2[-1];
-    M<UInt32>(iVar3 + 0x7e0) =
-         uVar1 << 0x18 | (uVar1 & 0xff00) << 8 | uVar1 >> 8 & 0xff00 | uVar1 >> 0x18;
+    microcodeWord = microcodeCursor[-1];
+    M<UInt32>(mmioBase + 0x7e0) =
+         microcodeWord << 0x18 | (microcodeWord & 0xff00) << 8 | microcodeWord >> 8 & 0xff00 | microcodeWord >> 0x18;
     enforceInOrderExecutionIO();
-    puVar2 = puVar2 + 2;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
+    microcodeCursor = microcodeCursor + 2;
+    pairsLeft = pairsLeft + -1;
+  } while (pairsLeft != 0);
   return;
 }
 
 /* real addr 0x1cd90 */
-bool ATIRadeonX1000::start_promo4_engine(UInt32 param_1) {
+bool ATIRadeonX1000::start_promo4_engine(UInt32 mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
   UInt8 bVar2;
   UInt8 bVar3;
   UInt32 uVar4;
-  UInt32 uVar5;
+  UInt32 ringWritePointer;
   UInt32 uVar6;
   UInt32 uVar7;
-  UInt8 *pAVar8;
-  UInt32 uVar9;
-  SInt32 iVar10;
+  UInt8 *displayRecord;
+  UInt32 ringReadPointer;
+  SInt32 mmioBase;
   SInt32 iVar11;
-  UInt32 uVar12;
+  UInt32 ringControl;
   
   enforceInOrderExecutionIO();
   iVar11 = M<SInt32>(self + 0x860);
-  uVar12 = loadWordByteReversed(&M<UInt8>(iVar11 + 0x704)) & 0x77f0c0ff | 0xa000a;
-  storeWordByteReversed(&M<UInt8>(iVar11 + 0x704), uVar12);
+  ringControl = loadWordByteReversed(&M<UInt8>(iVar11 + 0x704)) & 0x77f0c0ff | 0xa000a;
+  storeWordByteReversed(&M<UInt8>(iVar11 + 0x704), ringControl);
   enforceInOrderExecutionIO();
   load_promo4_micro_code();
-  if (param_1 == 4) {
-    iVar10 = M<SInt32>(self + 0x860);
-    M<UInt32>(iVar10 + 0x718) = 0x23000000;
+  if (mode == 4) {
+    mmioBase = M<SInt32>(self + 0x860);
+    M<UInt32>(mmioBase + 0x718) = 0x23000000;
     enforceInOrderExecutionIO();
-    uVar9 = loadWordByteReversed(&M<UInt8>(iVar10 + 0x710));
-    uVar5 = uVar9 & 0x7ff;
-    M<UInt32>(self + 0x914) = uVar9;
-    storeWordByteReversed(&M<UInt8>(iVar10 + 0x714), uVar5);
+    ringReadPointer = loadWordByteReversed(&M<UInt8>(mmioBase + 0x710));
+    ringWritePointer = ringReadPointer & 0x7ff;
+    M<UInt32>(self + 0x914) = ringReadPointer;
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x714), ringWritePointer);
     enforceInOrderExecutionIO();
-    M<UInt32>(self + 0x918) = uVar9;
+    M<UInt32>(self + 0x918) = ringReadPointer;
     iVar11 = M<SInt32>(self + 0x90c);
-    storeWordByteReversed(&M<UInt8>(iVar11 + M<SInt32>(self + 0x910)), uVar5);
+    storeWordByteReversed(&M<UInt8>(iVar11 + M<SInt32>(self + 0x910)), ringWritePointer);
     enforceInOrderExecutionIO();
     if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
       uVar7 = M<SInt32>(self + 0x8a4) + M<SInt32>(self + 0x228) + (iVar11 - M<SInt32>(self + 0x238));
-      M<UInt32>(iVar10 + 0x70c) =
+      M<UInt32>(mmioBase + 0x70c) =
            (uVar7 & 0xfffffffc) << 0x18 | (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 |
            uVar7 >> 0x18;
       enforceInOrderExecutionIO();
     }
-    M<UInt32>(iVar10 + 0x740) = 0x40;
+    M<UInt32>(mmioBase + 0x740) = 0x40;
     enforceInOrderExecutionIO();
     iVar11 = 0;
     while( true ) {
-      uVar7 = loadWordByteReversed(&M<UInt8>(iVar10 + 0xe40));
+      uVar7 = loadWordByteReversed(&M<UInt8>(mmioBase + 0xe40));
       iVar11 = iVar11 + 1;
       GH_IOSleep(1);
       if ((uVar7 & 0x10200) == 0) break;
       if (iVar11 == 0xf4241) {
         return 0;
       }
-      iVar10 = M<SInt32>(self + 0x860);
+      mmioBase = M<SInt32>(self + 0x860);
     }
     if (iVar11 != 0xf4241) {
       if ((M<UInt32>(self + 0x98) & 0x80000) == 0) {
-        uVar12 = uVar12 & 0xf7ffffff;
+        ringControl = ringControl & 0xf7ffffff;
       }
-      storeWordByteReversed(&M<UInt8>(M<SInt32>(self + 0x860) + 0x704), uVar12);
+      storeWordByteReversed(&M<UInt8>(M<SInt32>(self + 0x860) + 0x704), ringControl);
       enforceInOrderExecutionIO();
       iVar11 = 0;
-      pAVar8 = self;
+      displayRecord = self;
       do {
-        if (M<SInt32>(pAVar8 + 0xe4) != 0) {
+        if (M<SInt32>(displayRecord + 0xe4) != 0) {
           self[0x80] = 0x1;
           return 1;
         }
         bVar1 = iVar11 != 1;
-        pAVar8 = pAVar8 + 0x20;
+        displayRecord = displayRecord + 0x20;
         iVar11 = iVar11 + 1;
       } while (bVar1);
       return 1;
@@ -753,7 +753,7 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   UInt32 uVar2;
   UInt32 uVar3;
   UInt32 uVar4;
-  SInt32 iVar5;
+  SInt32 mmioBase;
   SInt32 iVar6;
   UInt32 uVar7;
   UInt32 uVar8;
@@ -764,161 +764,161 @@ void ATIRadeonX1000::setup_R500_internal_space() {
   enforceInOrderExecutionIO();
   ppcSync();
   instructionSynchronize();
-  iVar5 = M<SInt32>(self + 0x860);
-  M<UInt32>(iVar5 + 0x740) = 0;
+  mmioBase = M<SInt32>(self + 0x860);
+  M<UInt32>(mmioBase + 0x740) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x744) = 0;
+  M<UInt32>(mmioBase + 0x744) = 0;
   enforceInOrderExecutionIO();
   uVar7 = M<UInt32>(self + 0x98);
   M<UInt32>(self + 0x8fc) = 0;
   if ((uVar7 & 0x400000) == 0) {
-    M<UInt32>(iVar5 + 0x70) = 0x4007f00;
+    M<UInt32>(mmioBase + 0x70) = 0x4007f00;
     enforceInOrderExecutionIO();
   }
   else {
-    M<UInt32>(iVar5 + 0x70) = 0x1007f00;
+    M<UInt32>(mmioBase + 0x70) = 0x1007f00;
     enforceInOrderExecutionIO();
   }
-  uVar4 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x74)) & 0xffff;
+  uVar4 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x74)) & 0xffff;
   if (uVar4 != 0) {
-    uVar8 = loadWordByteReversed(&M<UInt8>(iVar5 + 0xf8));
+    uVar8 = loadWordByteReversed(&M<UInt8>(mmioBase + 0xf8));
     if (uVar8 == 0) {
       uVar8 = 0x8000000;
     }
-    uVar11 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x130));
-    uVar9 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x108));
+    uVar11 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x130));
+    uVar9 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x108));
     uVar10 = uVar11 & 0xff7fffff;
-    if ((loadWordByteReversed(&M<UInt8>(iVar5 + 0x104))) ==
-        uVar9 + (loadWordByteReversed(&M<UInt8>(iVar5 + 0x100)))) {
+    if ((loadWordByteReversed(&M<UInt8>(mmioBase + 0x104))) ==
+        uVar9 + (loadWordByteReversed(&M<UInt8>(mmioBase + 0x100)))) {
       uVar9 = uVar9 << 1;
       uVar10 = uVar11 | 0x800000;
     }
     if (uVar9 < uVar8) {
-      M<UInt32>(iVar5 + 0xf8) =
+      M<UInt32>(mmioBase + 0xf8) =
            uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 | uVar9 >> 0x18;
       enforceInOrderExecutionIO();
       M<UInt32>(self + 0x8a4) =
-           loadWordByteReversed(&M<UInt8>(iVar5 + 0xf8));
+           loadWordByteReversed(&M<UInt8>(mmioBase + 0xf8));
       uVar8 = uVar9;
     }
-    M<UInt32>(iVar5 + 0x130) =
+    M<UInt32>(mmioBase + 0x130) =
          uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18;
     enforceInOrderExecutionIO();
     bVar1 = (uVar7 & 0x400000) == 0;
-    uVar2 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x6110));
-    uVar3 = loadWordByteReversed(&M<UInt8>(iVar5 + 0x6910));
+    uVar2 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x6110));
+    uVar3 = loadWordByteReversed(&M<UInt8>(mmioBase + 0x6910));
     uVar2 = uVar2 + uVar4 * -0x10000;
     uVar11 = uVar3 + uVar4 * -0x10000;
     if (bVar1) {
-      M<UInt32>(iVar5 + 0x70) = 0x400ff00;
+      M<UInt32>(mmioBase + 0x70) = 0x400ff00;
       enforceInOrderExecutionIO();
     }
     else {
-      M<UInt32>(iVar5 + 0x70) = 0x100ff00;
+      M<UInt32>(mmioBase + 0x70) = 0x100ff00;
       enforceInOrderExecutionIO();
     }
-    M<UInt32>(iVar5 + 0x74) = 0xffff;
+    M<UInt32>(mmioBase + 0x74) = 0xffff;
     enforceInOrderExecutionIO();
-    M<UInt32>(iVar5 + 0x134) = 0;
+    M<UInt32>(mmioBase + 0x134) = 0;
     enforceInOrderExecutionIO();
-    storeWordByteReversed(&M<UInt8>(iVar5 + 0x6110), uVar2);
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6110), uVar2);
     enforceInOrderExecutionIO();
-    storeWordByteReversed(&M<UInt8>(iVar5 + 0x6910), uVar11);
+    storeWordByteReversed(&M<UInt8>(mmioBase + 0x6910), uVar11);
     enforceInOrderExecutionIO();
     if (bVar1) {
-      M<UInt32>(iVar5 + 0x70) = 0x400ff00;
+      M<UInt32>(mmioBase + 0x70) = 0x400ff00;
       enforceInOrderExecutionIO();
     }
     else {
-      M<UInt32>(iVar5 + 0x70) = 0x100ff00;
+      M<UInt32>(mmioBase + 0x70) = 0x100ff00;
       enforceInOrderExecutionIO();
     }
-    M<UInt32>(iVar5 + 0x74) = (uVar8 - 1 & 0xffff0000) >> 8 & 0xff00 | uVar8 - 1 >> 0x18;
+    M<UInt32>(mmioBase + 0x74) = (uVar8 - 1 & 0xffff0000) >> 8 & 0xff00 | uVar8 - 1 >> 0x18;
     enforceInOrderExecutionIO();
   }
   if ((uVar7 & 0x400000) == 0) {
-    M<UInt32>(iVar5 + 0x70) = 0x4007f00;
+    M<UInt32>(mmioBase + 0x70) = 0x4007f00;
     enforceInOrderExecutionIO();
   }
   else {
-    M<UInt32>(iVar5 + 0x70) = 0x1007f00;
+    M<UInt32>(mmioBase + 0x70) = 0x1007f00;
     enforceInOrderExecutionIO();
   }
   iVar6 = M<SInt32>(self + 0x8d4);
-  uVar8 = (loadWordByteReversed(&M<UInt8>(iVar5 + 0x74)) & 0xffff0000) + 0x10000;
+  uVar8 = (loadWordByteReversed(&M<UInt8>(mmioBase + 0x74)) & 0xffff0000) + 0x10000;
   M<UInt32>(self + 0x8a4) = uVar8;
   uVar4 = uVar8 + iVar6;
-  M<UInt32>(iVar5 + 0x30) = 0x13000000;
+  M<UInt32>(mmioBase + 0x30) = 0x13000000;
   enforceInOrderExecutionIO();
   uVar7 = M<UInt32>(self + 0xbb0);
-  M<UInt32>(iVar5 + 0x34) =
+  M<UInt32>(mmioBase + 0x34) =
        uVar7 << 0x18 | (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 | uVar7 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x17000000;
+  M<UInt32>(mmioBase + 0x30) = 0x17000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = 0;
+  M<UInt32>(mmioBase + 0x34) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x16000000;
+  M<UInt32>(mmioBase + 0x30) = 0x16000000;
   enforceInOrderExecutionIO();
   uVar7 = uVar8 + M<SInt32>(self + 0x830) * 0x400;
-  M<UInt32>(iVar5 + 0x34) = (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 | uVar7 >> 0x18;
+  M<UInt32>(mmioBase + 0x34) = (uVar7 & 0xff00) << 8 | uVar7 >> 8 & 0xff00 | uVar7 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x15000000;
+  M<UInt32>(mmioBase + 0x30) = 0x15000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = 0;
+  M<UInt32>(mmioBase + 0x34) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x14000000;
+  M<UInt32>(mmioBase + 0x30) = 0x14000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
+  M<UInt32>(mmioBase + 0x34) = uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x12000000;
+  M<UInt32>(mmioBase + 0x30) = 0x12000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = 0;
+  M<UInt32>(mmioBase + 0x34) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x11000000;
+  M<UInt32>(mmioBase + 0x30) = 0x11000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
+  M<UInt32>(mmioBase + 0x34) = uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
   enforceInOrderExecutionIO();
   M<UInt32>(self + 0xbbc) = 0x47;
-  M<UInt32>(iVar5 + 0x30) = 0x10000000;
+  M<UInt32>(mmioBase + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = 0x10000;
+  M<UInt32>(mmioBase + 0x34) = 0x10000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x30) = 0x10000000;
+  M<UInt32>(mmioBase + 0x30) = 0x10000000;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x34) = 0x47000000;
+  M<UInt32>(mmioBase + 0x34) = 0x47000000;
   enforceInOrderExecutionIO();
   uVar8 = uVar8 + M<SInt32>(self + 0x904);
-  M<UInt32>(iVar5 + 0x700) =
+  M<UInt32>(mmioBase + 0x700) =
        M<SInt32>(self + 0x904) << 0x18 | (uVar8 & 0xff00) << 8 | uVar8 >> 8 & 0xff00 | uVar8 >> 0x18;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15e0) = 0;
+  M<UInt32>(mmioBase + 0x15e0) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15e4) = 0;
+  M<UInt32>(mmioBase + 0x15e4) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15e8) = 0;
+  M<UInt32>(mmioBase + 0x15e8) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15ec) = 0;
+  M<UInt32>(mmioBase + 0x15ec) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15f0) = 0;
+  M<UInt32>(mmioBase + 0x15f0) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15f4) = 0;
+  M<UInt32>(mmioBase + 0x15f4) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15f8) = 0;
+  M<UInt32>(mmioBase + 0x15f8) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x15fc) = 0;
+  M<UInt32>(mmioBase + 0x15fc) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x1fa8) = 0;
+  M<UInt32>(mmioBase + 0x1fa8) = 0;
   enforceInOrderExecutionIO();
-  M<UInt32>(iVar5 + 0x774) =
+  M<UInt32>(mmioBase + 0x774) =
        iVar6 << 0x18 | (uVar4 & 0xff00) << 8 | uVar4 >> 8 & 0xff00 | uVar4 >> 0x18;
   enforceInOrderExecutionIO();
   if (M<SInt32>(self + 0x8d0) != 0) {
-    M<UInt32>(iVar5 + 0x770) = 0xff000000;
+    M<UInt32>(mmioBase + 0x770) = 0xff000000;
     enforceInOrderExecutionIO();
     return;
   }
-  M<UInt32>(iVar5 + 0x770) = 0;
+  M<UInt32>(mmioBase + 0x770) = 0;
   enforceInOrderExecutionIO();
   return;
 }
@@ -931,7 +931,7 @@ bool ATIRadeonX1000::initialize_hardware() {
   UInt8 bVar2;
   UInt8 bVar3;
   UInt8 bVar4;
-  UInt32 uVar5;
+  UInt32 result;
   UInt32 uVar6;
   SInt32 iVar7;
   SInt32 iVar8;
@@ -943,12 +943,12 @@ bool ATIRadeonX1000::initialize_hardware() {
   setup_R500_internal_space();
   this->initialize_GUI();
   iVar7 = start_promo4_engine(4);
-  uVar5 = 0;
+  result = 0;
   if (iVar7 != 0) {
     iVar7 = set_display_mode_and_vram();
     if (iVar7 == 0) {
       GH_IOLog("set_display_mode_and_vram failed\n");
-      uVar5 = 0;
+      result = 0;
     }
     else {
       iVar7 = M<SInt32>(self + 0x860);
@@ -1029,7 +1029,7 @@ bool ATIRadeonX1000::initialize_hardware() {
            loadWordByteReversed(&M<UInt8>(iVar7 + 0x60c4));
       M<UInt32>(self + 0xb8c) =
            loadWordByteReversed(&M<UInt8>(iVar7 + 0x68c4));
-      uVar5 = 1;
+      result = 1;
       if (M<SInt32>(self + 3000) != 0) {
         enforceInOrderExecutionIO();
         uVar9 = loadWordByteReversed(&M<UInt8>(iVar7 + 0x1724));
@@ -1042,10 +1042,10 @@ bool ATIRadeonX1000::initialize_hardware() {
              uVar9 | 3;
         M<UInt32>(self + 0x914) = uVar6 + 1 & 0x7ff;
         this->submit_ring_data();
-        uVar5 = 1;
+        result = 1;
       }
     }
   }
-  return uVar5;
+  return result;
 }
 

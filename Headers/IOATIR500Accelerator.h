@@ -208,7 +208,7 @@ public:
      * correct, honest transcription of the intended value.
      */
     bool freeTransferToAllocGART(VendorTransferBuffer *candidate, VendorTransferBuffer *needed,
-                                  UInt32 arg, bool aggressive);
+                                  UInt32 stamp, bool aggressive);
 
     /*
      * addTransferToGART - RESOLVED, issue #19/#23 (real vtable slot
@@ -445,7 +445,7 @@ public:
 
     /* setup_stereo - CONFIRMED real name (IOATIR500GLContext::set_stereo
      * calls it), signature INFERRED. */
-    IOReturn setup_stereo(UInt32 param1, UInt32 param2);
+    IOReturn setup_stereo(UInt32 panel, UInt32 stereoMode);
 
     /* freeOrphanTexture - CONFIRMED real name, called from both
      * garbage_collector and freeWaitToAllocGART. */

@@ -17,7 +17,8 @@ Table format (tab separated, '#' starts a comment line):
   kind    def   rename an identifier inside one function DEFINITION in Sources/*.cpp (signature included)
           decl  rename a parameter name inside one function DECLARATION in Headers/<Class>.h
   target  Class::method, optionally Class::method@0xADDR (several definitions with that name: the one whose "real addr" comment matches)
-          or Class::method#N (decl only: the N-th declaration, 1-based)
+          or Class::method#N (decl only: the N-th declaration, 1-based). A FREE function (no class) is written with an empty class: `::pcl_CopyPix`
+          (def rows only; a decl row needs a class header)
   old/new identifiers. A rename applies to the whole function scope, comments included, string literals excluded.
   tier    CONFIRMED (the meaning is established by a caller, a test or a disassembly) | INFERRED (consistent with every use seen) | UNKNOWN (a
           placeholder with a readable shape, e.g. unknown_0x84)
@@ -100,7 +101,7 @@ def rename_in(s, mapping):
 
 
 def parse_target(t):
-    m = re.match(r'^([A-Za-z0-9_]+)::([A-Za-z0-9_~]+)(?:@(0x[0-9a-fA-F]+)|#(\d+))?$', t)
+    m = re.match(r'^([A-Za-z0-9_]*)::([A-Za-z0-9_~]+)(?:@(0x[0-9a-fA-F]+)|#(\d+))?$', t)
     if not m: raise ValueError('bad target %r' % t)
     return m.group(1), m.group(2), (m.group(3) or '').lower(), int(m.group(4) or 0)
 
@@ -108,10 +109,15 @@ def parse_target(t):
 def find_defs(root, cls, meth, addr, read):
     """-> [(file, start, end)] of the matching definitions."""
     found = []
-    pat = re.compile(r'^[^\s#/*][^\n]*\b%s::%s\s*\(' % (re.escape(cls), re.escape(meth)), re.M)
+    if cls:
+        pat = re.compile(r'^[^\s#/*][^\n]*\b%s::%s\s*\(' % (re.escape(cls), re.escape(meth)), re.M)
+        needle = cls + '::' + meth
+    else:                                                      # a free function: its name at the start of a line's declarator, not preceded by `::` or `.`/`->`
+        pat = re.compile(r'^[^\s#/*][^\n]*?(?<![:\w.>])%s\s*\(' % re.escape(meth), re.M)
+        needle = meth
     for f in sorted(glob.glob(os.path.join(root, 'Sources', '*.cpp'))):
         s = read(f)
-        if cls + '::' + meth not in s: continue
+        if needle not in s: continue
         for m in pat.finditer(s):
             start = m.start()
             if addr:
