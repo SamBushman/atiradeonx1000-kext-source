@@ -14,7 +14,7 @@ CLASS = 'IOATIR500Surface'
 HEADER = os.path.join(HERE, '..', '..', 'Headers', CLASS + '.h')
 _stock = Image(os.environ['STOCK_KEXT'], 'stock')     # the shipped kext binary (also passed to difftest.py)
 _done = {c.function for c in surface_cases.CASES}
-for _m in ('hand_cases', 'hand_cases_A', 'hand_cases_B', 'hand_cases_C', 'hand_cases_D', 'hand_cases_P1', 'hand_cases_P2'):     # functions with a hand-written world need no generic one
+for _m in ('hand_cases', 'hand_cases_A', 'hand_cases_B', 'hand_cases_C', 'hand_cases_D', 'hand_cases_U4P', 'hand_cases_P1', 'hand_cases_P2'):     # functions with a hand-written world need no generic one
     _done |= {c.function for c in __import__(_m).CASES}
 SKIP = re.compile(r'(C[12]E|D[012]E|getMetaClass|MetaClass|^__ZN16IOATIR500Surface9metaClass)')
 
