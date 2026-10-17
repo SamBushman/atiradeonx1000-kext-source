@@ -27,86 +27,86 @@
 
 
 /* real addr 0x19430 */
-UInt32 ATIR500Memory::alloc(GLKMemoryElement *real_param_1, UInt32 param_2, UInt32 param_3) {
+UInt32 ATIR500Memory::alloc(GLKMemoryElement *elem, UInt32 size, UInt32 alignment) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *elemBytes = reinterpret_cast<UInt8 *>(elem);
 
-  UInt32 uVar1;
+  UInt32 oldSpareHead;
   UInt32 *puVar2;
-  SInt32 iVar3;
-  UInt32 uVar4;
-  UInt32 uVar5;
-  UInt32 uVar6;
-  UInt32 *puVar7;
-  UInt32 *puVar8;
-  UInt32 uVar9;
+  SInt32 refilled;
+  UInt32 result;
+  UInt32 allocEnd;
+  UInt32 allocOffset;
+  UInt32 *nextNode;
+  UInt32 *freeNode;
+  UInt32 alignMask;
   
-  uVar9 = 0;
-  if (param_3 != 0) {
-    uVar9 = param_3 - 1;
+  alignMask = 0;
+  if (alignment != 0) {
+    alignMask = alignment - 1;
   }
-  if (((M<SInt32>(self + 0xc) == 0) && (iVar3 = this->add_to_stack(), iVar3 == 0)) ||
+  if (((M<SInt32>(self + 0xc) == 0) && (refilled = this->add_to_stack(), refilled == 0)) ||
      (*(UInt32 **)*M<UInt32 *>(self + 8) == (UInt32 *)0x0)) {
 LAB_000195bc:
-    uVar4 = 0;
+    result = 0;
   }
   else {
-    puVar7 = *(UInt32 **)*M<UInt32 *>(self + 8);
+    nextNode = *(UInt32 **)*M<UInt32 *>(self + 8);
     do {
-      while (puVar8 = puVar7, -1 < (SInt32)puVar8[3]) {
-        puVar7 = (UInt32 *)*puVar8;
-        if ((UInt32 *)*puVar8 == (UInt32 *)0x0) goto LAB_000195bc;
+      while (freeNode = nextNode, -1 < (SInt32)freeNode[3]) {
+        nextNode = (UInt32 *)*freeNode;
+        if ((UInt32 *)*freeNode == (UInt32 *)0x0) goto LAB_000195bc;
       }
-      puVar7 = (UInt32 *)*puVar8;
-      uVar6 = uVar9 + puVar8[2] & ~uVar9;
-      uVar5 = param_2 + uVar6;
-    } while ((UInt32)puVar7[2] < uVar5);
-    M<UInt32>(param_1 + 8) = uVar6;
-    M<UInt32>(param_1 + 0xc) = uVar9 & 0xffff;
-    puVar2 = (UInt32 *)puVar8[1];
-    if (puVar8[2] == uVar6) {
-      if (uVar5 == puVar7[2]) {
-        M<UInt32 *>(param_1) = puVar7;
-        M<UInt32 *>(param_1 + 4) = puVar2;
-        uVar4 = 1;
-        *puVar2 = (UInt32)(param_1);
-        puVar7[1] = (UInt32)(param_1);
-        uVar1 = M<UInt32>(self + 0xc);
-        puVar8[3] = 0;
-        puVar8[1] = 0;
-        puVar8[2] = 0;
-        *puVar8 = uVar1;
-        M<UInt32 *>(self + 0xc) = puVar8;
+      nextNode = (UInt32 *)*freeNode;
+      allocOffset = alignMask + freeNode[2] & ~alignMask;
+      allocEnd = size + allocOffset;
+    } while ((UInt32)nextNode[2] < allocEnd);
+    M<UInt32>(elemBytes + 8) = allocOffset;
+    M<UInt32>(elemBytes + 0xc) = alignMask & 0xffff;
+    puVar2 = (UInt32 *)freeNode[1];
+    if (freeNode[2] == allocOffset) {
+      if (allocEnd == nextNode[2]) {
+        M<UInt32 *>(elemBytes) = nextNode;
+        M<UInt32 *>(elemBytes + 4) = puVar2;
+        result = 1;
+        *puVar2 = (UInt32)(elemBytes);
+        nextNode[1] = (UInt32)(elemBytes);
+        oldSpareHead = M<UInt32>(self + 0xc);
+        freeNode[3] = 0;
+        freeNode[1] = 0;
+        freeNode[2] = 0;
+        *freeNode = oldSpareHead;
+        M<UInt32 *>(self + 0xc) = freeNode;
       }
       else {
-        uVar4 = 1;
-        M<UInt32 *>(param_1) = puVar8;
-        M<UInt32 *>(param_1 + 4) = puVar2;
-        puVar8[2] = uVar5;
-        *puVar2 = (UInt32)(param_1);
-        puVar8[1] = (UInt32)(param_1);
+        result = 1;
+        M<UInt32 *>(elemBytes) = freeNode;
+        M<UInt32 *>(elemBytes + 4) = puVar2;
+        freeNode[2] = allocEnd;
+        *puVar2 = (UInt32)(elemBytes);
+        freeNode[1] = (UInt32)(elemBytes);
       }
     }
-    else if (puVar7[2] == uVar5) {
-      uVar4 = 1;
-      M<UInt32 *>(param_1) = puVar7;
-      M<UInt32 *>(param_1 + 4) = puVar8;
-      *puVar8 = (UInt32)(param_1);
-      puVar7[1] = (UInt32)(param_1);
+    else if (nextNode[2] == allocEnd) {
+      result = 1;
+      M<UInt32 *>(elemBytes) = nextNode;
+      M<UInt32 *>(elemBytes + 4) = freeNode;
+      *freeNode = (UInt32)(elemBytes);
+      nextNode[1] = (UInt32)(elemBytes);
     }
     else {
       puVar2 = M<UInt32 *>(self + 0xc);
-      uVar4 = 1;
+      result = 1;
       M<UInt32>(self + 0xc) = *puVar2;
-      *puVar2 = (UInt32)(puVar7);
-      puVar7[1] = (UInt32)(puVar2);
-      M<UInt32 *>(param_1) = puVar2;
-      puVar2[1] = (UInt32)(param_1);
+      *puVar2 = (UInt32)(nextNode);
+      nextNode[1] = (UInt32)(puVar2);
+      M<UInt32 *>(elemBytes) = puVar2;
+      puVar2[1] = (UInt32)(elemBytes);
       puVar2[3] = 0x80000000;
-      puVar2[2] = uVar5;
-      *puVar8 = (UInt32)(param_1);
-      M<UInt32 *>(param_1 + 4) = puVar8;
+      puVar2[2] = allocEnd;
+      *freeNode = (UInt32)(elemBytes);
+      M<UInt32 *>(elemBytes + 4) = freeNode;
     }
   }
-  return uVar4;
+  return result;
 }

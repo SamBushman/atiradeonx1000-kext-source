@@ -30,87 +30,87 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 
 
 /* real addr 0x16d50 */
-bool IOATIR500Shared::alloc_client_shared(UInt32 param_1, sIOClientShared**param_2, unsigned int*param_3) {
+bool IOATIR500Shared::alloc_client_shared(UInt32 index, sIOClientShared**outKernelPtr, unsigned int*outUserAddr) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   SInt32 *piVar1;
   UInt32 uVar2;
   SInt32 iVar3;
-  UInt32 *puVar4;
-  UInt32 *puVar5;
+  UInt32 *lastChunk;
+  UInt32 *chunk;
   
-  puVar4 = (UInt32 *)0x0;
-  puVar5 = M<UInt32 *>(self + 0x20);
-  while (puVar5 != (UInt32 *)0x0) {
+  lastChunk = (UInt32 *)0x0;
+  chunk = M<UInt32 *>(self + 0x20);
+  while (chunk != (UInt32 *)0x0) {
 LAB_00016f00:
-    puVar4 = puVar5;
-    if (param_1 < (UInt32)puVar4[6]) {
-      *param_2 = (sIOClientShared *)(param_1 * 0x40 + puVar4[4]);
-      *param_3 = param_1 * 0x40 + puVar4[5];
-      *(UInt32 *)(UInt8 *)*param_2 = 0;
-      M<UInt32>((UInt8 *)*param_2 + 4) = 0;
-      M<UInt32>((UInt8 *)*param_2 + 8) = 0;
-      M<UInt32>((UInt8 *)*param_2 + 0xc) = 0;
-      M<UInt32>((UInt8 *)*param_2 + 0x10) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x1c) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x1e) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x20) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x22) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x24) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x26) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x28) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x2a) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x2c) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x2e) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x30) = 0;
-      M<UInt16>((UInt8 *)*param_2 + 0x32) = 0;
-      ((UInt8 *)*param_2)[0x14] = 0x1;
-      ((UInt8 *)*param_2)[0x15] = 0x0;
-      ((UInt8 *)*param_2)[0x16] = 0x0;
-      ((UInt8 *)*param_2)[0x34] = 0x0;
-      ((UInt8 *)*param_2)[0x35] = 0x0;
-      ((UInt8 *)*param_2)[0x17] = 0x0;
-      M<UInt16>((UInt8 *)*param_2 + 0x36) = 0;
+    lastChunk = chunk;
+    if (index < (UInt32)lastChunk[6]) {
+      *outKernelPtr = (sIOClientShared *)(index * 0x40 + lastChunk[4]);
+      *outUserAddr = index * 0x40 + lastChunk[5];
+      *(UInt32 *)(UInt8 *)*outKernelPtr = 0;
+      M<UInt32>((UInt8 *)*outKernelPtr + 4) = 0;
+      M<UInt32>((UInt8 *)*outKernelPtr + 8) = 0;
+      M<UInt32>((UInt8 *)*outKernelPtr + 0xc) = 0;
+      M<UInt32>((UInt8 *)*outKernelPtr + 0x10) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x1c) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x1e) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x20) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x22) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x24) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x26) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x28) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x2a) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x2c) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x2e) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x30) = 0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x32) = 0;
+      ((UInt8 *)*outKernelPtr)[0x14] = 0x1;
+      ((UInt8 *)*outKernelPtr)[0x15] = 0x0;
+      ((UInt8 *)*outKernelPtr)[0x16] = 0x0;
+      ((UInt8 *)*outKernelPtr)[0x34] = 0x0;
+      ((UInt8 *)*outKernelPtr)[0x35] = 0x0;
+      ((UInt8 *)*outKernelPtr)[0x17] = 0x0;
+      M<UInt16>((UInt8 *)*outKernelPtr + 0x36) = 0;
       return 1;
     }
-    param_1 = param_1 - puVar4[6];
-    puVar5 = (UInt32 *)*puVar4;
+    index = index - lastChunk[6];
+    chunk = (UInt32 *)*lastChunk;
   }
-  puVar5 = (UInt32 *)GH_IOMalloc(0x1c);
-  if (puVar5 == (UInt32 *)0x0) {
+  chunk = (UInt32 *)GH_IOMalloc(0x1c);
+  if (chunk == (UInt32 *)0x0) {
     return 0;
   }
   piVar1 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),0x10022,0x2000,GH_page_size);
-  puVar5[1] = (UInt32)(piVar1);
+  chunk[1] = (UInt32)(piVar1);
   if (piVar1 == (SInt32 *)0x0) goto LAB_00016e80;
   piVar1 = (SInt32 *)VCALL(*piVar1, 0x14c)(piVar1,M<UInt32>(self + 8),0,1,0,0);
-  puVar5[2] = (UInt32)(piVar1);
+  chunk[2] = (UInt32)(piVar1);
   if (piVar1 != (SInt32 *)0x0) {
     uVar2 = VCALL(*piVar1, 0xd0)(piVar1);
-    puVar5[5] = uVar2;
-    iVar3 = VCALL(*(SInt32 *)puVar5[1], 0x14c)((SInt32 *)puVar5[1],GH_kernel_task,0,1,0,0);
-    puVar5[3] = iVar3;
+    chunk[5] = uVar2;
+    iVar3 = VCALL(*(SInt32 *)chunk[1], 0x14c)((SInt32 *)chunk[1],GH_kernel_task,0,1,0,0);
+    chunk[3] = iVar3;
     if (iVar3 != 0) {
       iVar3 = M<SInt32>(self + 0xc);
       if (iVar3 != 0) {
         M<SInt32>(iVar3 + 0x808) = M<SInt32>(iVar3 + 0x808) + 0x1c;
       }
-      uVar2 = VCALL(*(SInt32 *)puVar5[3], 0xd0)(puVar5[3]);
-      *puVar5 = 0;
-      puVar5[4] = uVar2;
-      puVar5[6] = 0x80;
-      if (puVar4 == (UInt32 *)0x0) {
-        M<UInt32 *>(self + 0x20) = puVar5;
+      uVar2 = VCALL(*(SInt32 *)chunk[3], 0xd0)(chunk[3]);
+      *chunk = 0;
+      chunk[4] = uVar2;
+      chunk[6] = 0x80;
+      if (lastChunk == (UInt32 *)0x0) {
+        M<UInt32 *>(self + 0x20) = chunk;
       }
       else {
-        *puVar4 = (UInt32)(puVar5);
+        *lastChunk = (UInt32)(chunk);
       }
       goto LAB_00016f00;
     }
-    VCALL(*(SInt32 *)puVar5[2], 0x18)(puVar5[2]);
+    VCALL(*(SInt32 *)chunk[2], 0x18)(chunk[2]);
   }
-  VCALL(*(SInt32 *)puVar5[1], 0x18)(puVar5[1]);
+  VCALL(*(SInt32 *)chunk[1], 0x18)(chunk[1]);
 LAB_00016e80:
-  GH_IOFree(puVar5,0x1c);
+  GH_IOFree(chunk,0x1c);
   return 0;
 }

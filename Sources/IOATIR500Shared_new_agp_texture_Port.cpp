@@ -30,94 +30,94 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 
 
 /* real addr 0x17150 */
-VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int param_1, UInt32 param_2, unsigned int*param_3) {
+VendorTextureBuffer *IOATIR500Shared::new_agp_texture(unsigned int address, UInt32 length, unsigned int*param_3) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  void *pvVar1;
+  void *candidate;
   void *pvVar2;
   SInt32 iVar3;
-  SInt32 *piVar4;
+  SInt32 *memory;
   void *pvVar5;
   SInt32 iVar6;
-  UInt32 uVar7;
-  UInt32 uVar8;
+  UInt32 descriptorLength;
+  UInt32 pageOffset;
   UInt32 uVar9;
-  UInt32 uVar10;
-  UInt32 local_38;
-  sIOClientShared *local_34;
-  UInt32 local_30 [4];
+  UInt32 roundedLength;
+  UInt32 handle;
+  sIOClientShared *clientShared;
+  UInt32 clientUserAddr [4];
   
-  uVar8 = GH_page_size - 1U & param_1;
-  uVar9 = param_1 & -GH_page_size;
-  uVar10 = -GH_page_size & (GH_page_size + uVar8 + param_2) - 1;
-  if (uVar10 <= (UInt32)(M<SInt32>(M<SInt32>(self + 0xc) + 0x830) * 0xc00) >> 2) {
+  pageOffset = GH_page_size - 1U & address;
+  uVar9 = address & -GH_page_size;
+  roundedLength = -GH_page_size & (GH_page_size + pageOffset + length) - 1;
+  if (roundedLength <= (UInt32)(M<SInt32>(M<SInt32>(self + 0xc) + 0x830) * 0xc00) >> 2) {
     if (uVar9 == 0) {
-      piVar4 = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),
-                                   M<UInt32>(M<SInt32>(self + 0xc) + 0x82c) | 0x10022,uVar10,
+      memory = (SInt32 *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),
+                                   M<UInt32>(M<SInt32>(self + 0xc) + 0x82c) | 0x10022,roundedLength,
                                    GH_page_size);
-      if (piVar4 != (SInt32 *)0x0) {
-        uVar9 = VCALL(*piVar4, 0x1cc)(piVar4);
+      if (memory != (SInt32 *)0x0) {
+        uVar9 = VCALL(*memory, 0x1cc)(memory);
         goto LAB_00017310;
       }
     }
     else {
       pvVar2 = M<void *>(self + 0x24);
       pvVar5 = M<void *>(self + 0x24);
-      while (pvVar1 = pvVar2, pvVar1 != (void *)0x0) {
-        if ((((M<char>((SInt32)pvVar1 + 0x20) == '\x04') && (M<SInt32>((SInt32)pvVar1 + 0x54) == 0)) &&
-            (uVar8 == M<UInt32>((SInt32)pvVar1 + 0x50))) &&
-           ((uVar9 == M<UInt32>((SInt32)pvVar1 + 0x58) && (uVar10 == M<UInt32>((SInt32)pvVar1 + 0x5c)))))
+      while (candidate = pvVar2, candidate != (void *)0x0) {
+        if ((((M<char>((SInt32)candidate + 0x20) == '\x04') && (M<SInt32>((SInt32)candidate + 0x54) == 0)) &&
+            (pageOffset == M<UInt32>((SInt32)candidate + 0x50))) &&
+           ((uVar9 == M<UInt32>((SInt32)candidate + 0x58) && (roundedLength == M<UInt32>((SInt32)candidate + 0x5c)))))
         {
-          piVar4 = (SInt32 *)GH_ZN18IOMemoryDescriptor30withPersistentMemoryDescriptorEPS_(M<UInt32>((SInt32)pvVar1 + 8));
-          if (piVar4 == M<SInt32 *>((SInt32)pvVar1 + 8)) {
-            VCALL(*piVar4, 0x18)(piVar4);
-            *param_3 = M<UInt32>((SInt32)pvVar1 + 0x18);
-            if (pvVar1 == M<void *>(self + 0x24)) {
-              return (VendorTextureBuffer *)(pvVar1);
+          memory = (SInt32 *)GH_ZN18IOMemoryDescriptor30withPersistentMemoryDescriptorEPS_(M<UInt32>((SInt32)candidate + 8));
+          if (memory == M<SInt32 *>((SInt32)candidate + 8)) {
+            VCALL(*memory, 0x18)(memory);
+            *param_3 = M<UInt32>((SInt32)candidate + 0x18);
+            if (candidate == M<void *>(self + 0x24)) {
+              return (VendorTextureBuffer *)(candidate);
             }
-            M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>((SInt32)pvVar1 + 0x3c);
-            M<UInt32>((SInt32)pvVar1 + 0x3c) = M<UInt32>(self + 0x24);
-            M<void *>(self + 0x24) = pvVar1;
-            return (VendorTextureBuffer *)(pvVar1);
+            M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>((SInt32)candidate + 0x3c);
+            M<UInt32>((SInt32)candidate + 0x3c) = M<UInt32>(self + 0x24);
+            M<void *>(self + 0x24) = candidate;
+            return (VendorTextureBuffer *)(candidate);
           }
-          M<UInt32>((SInt32)pvVar1 + 0x54) = 1;
-          if (piVar4 != (SInt32 *)0x0) goto LAB_00017310;
+          M<UInt32>((SInt32)candidate + 0x54) = 1;
+          if (memory != (SInt32 *)0x0) goto LAB_00017310;
           break;
         }
-        pvVar5 = pvVar1;
-        pvVar2 = M<void *>((SInt32)pvVar1 + 0x3c);
+        pvVar5 = candidate;
+        pvVar2 = M<void *>((SInt32)candidate + 0x3c);
       }
-      piVar4 = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar9,uVar10,0x10002,M<UInt32>(self + 8));
-      if (piVar4 != (SInt32 *)0x0) {
+      memory = (SInt32 *)GH_ZN18IOMemoryDescriptor11withAddressEjm11IODirectionP4task(uVar9,roundedLength,0x10002,M<UInt32>(self + 8));
+      if (memory != (SInt32 *)0x0) {
 LAB_00017310:
         pvVar5 = (void *)VCALL(*M<SInt32 *>(self + 0xc), 0x570)(M<SInt32 *>(self + 0xc),0x80);
         if (pvVar5 == (void *)0x0) {
-          VCALL(*piVar4, 0x18)(piVar4);
+          VCALL(*memory, 0x18)(memory);
           return (VendorTextureBuffer *)((void *)0x0);
         }
-        M<SInt32 *>((SInt32)pvVar5 + 8) = piVar4;
-        iVar6 = this->alloc_buf_handle(pvVar5,(UInt32 *)(&local_38));
+        M<SInt32 *>((SInt32)pvVar5 + 8) = memory;
+        iVar6 = this->alloc_buf_handle(pvVar5,(UInt32 *)(&handle));
         if (iVar6 != 0) {
-          iVar6 = this->alloc_client_shared(local_38,(sIOClientShared **)(&local_34),(unsigned int *)(local_30));
+          iVar6 = this->alloc_client_shared(handle,(sIOClientShared **)(&clientShared),(unsigned int *)(clientUserAddr));
           if (iVar6 != 0) {
-            M<sIOClientShared *>((SInt32)pvVar5 + 0x14) = local_34;
-            M<UInt32>((SInt32)pvVar5 + 0x18) = local_30[0];
-            M<UInt32>(local_34) = local_38;
+            M<sIOClientShared *>((SInt32)pvVar5 + 0x14) = clientShared;
+            M<UInt32>((SInt32)pvVar5 + 0x18) = clientUserAddr[0];
+            M<UInt32>(clientShared) = handle;
             M<UInt32>(M<SInt32>((SInt32)pvVar5 + 0x14) + 8) =
                  M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
             M<UInt32>(M<SInt32>((SInt32)pvVar5 + 0x14) + 0xc) =
                  M<UInt32>(M<SInt32>(self + 0xc) + 0x54);
             M<UInt8>(M<SInt32>((SInt32)pvVar5 + 0x14) + 0x16) = 4;
             M<UInt8>((SInt32)pvVar5 + 0x20) = 4;
-            M<UInt32>((SInt32)pvVar5 + 0x50) = uVar8;
+            M<UInt32>((SInt32)pvVar5 + 0x50) = pageOffset;
             M<UInt32>((SInt32)pvVar5 + 0x58) = uVar9;
             M<UInt8 *>((SInt32)pvVar5 + 0x1c) = self;
-            uVar7 = VCALL(*M<SInt32 *>((SInt32)pvVar5 + 8), 0x128)(M<SInt32 *>((SInt32)pvVar5 + 8));
-            M<UInt32>((SInt32)pvVar5 + 0x5c) = uVar7;
+            descriptorLength = VCALL(*M<SInt32 *>((SInt32)pvVar5 + 8), 0x128)(M<SInt32 *>((SInt32)pvVar5 + 8));
+            M<UInt32>((SInt32)pvVar5 + 0x5c) = descriptorLength;
             M<UInt32>((SInt32)pvVar5 + 0x54) = 0;
             M<UInt32>((SInt32)pvVar5 + 0x3c) = M<UInt32>(self + 0x24);
             M<void *>(self + 0x24) = pvVar5;
-            *param_3 = local_30[0];
+            *param_3 = clientUserAddr[0];
             M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) = M<SInt32>(M<SInt32>(self + 0xc) + 0x72c) + 1;
             iVar6 = M<SInt32>(self + 0xc);
             if (self != M<UInt8 *>(iVar6 + 0x6c)) {
@@ -128,9 +128,9 @@ LAB_00017310:
             M<SInt32>(iVar6 + 0x70) = iVar3 + 1;
             return (VendorTextureBuffer *)(pvVar5);
           }
-          this->free_buf_handle(pvVar5,local_38);
+          this->free_buf_handle(pvVar5,handle);
         }
-        VCALL(*piVar4, 0x18)(piVar4);
+        VCALL(*memory, 0x18)(memory);
         VCALL(*M<SInt32 *>(self + 0xc), 0x574)(M<SInt32 *>(self + 0xc),pvVar5,0x80);
         return (VendorTextureBuffer *)((void *)0x0);
       }

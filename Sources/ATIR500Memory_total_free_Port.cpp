@@ -30,16 +30,16 @@
 int ATIR500Memory::total_free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
-  SInt32 iVar2;
-  SInt32 *piVar3;
+  SInt32 *node;
+  SInt32 total;
+  SInt32 *nextNode;
   
-  iVar2 = 0;
-  piVar3 = *(SInt32 **)*M<UInt32 *>(self + 8);
-  while (piVar1 = piVar3, piVar3 = (SInt32 *)*piVar1, piVar3 != (SInt32 *)0x0) {
-    if (piVar1[3] < 0) {
-      iVar2 = iVar2 + (piVar3[2] - piVar1[2]);
+  total = 0;
+  nextNode = *(SInt32 **)*M<UInt32 *>(self + 8);
+  while (node = nextNode, nextNode = (SInt32 *)*node, nextNode != (SInt32 *)0x0) {
+    if (node[3] < 0) {
+      total = total + (nextNode[2] - node[2]);
     }
   }
-  return iVar2;
+  return total;
 }

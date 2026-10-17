@@ -28,19 +28,19 @@ extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 
 
 /* real addr 0x18e00 */
-bool ATIR500Memory::init_pool(UInt32 param_1) {
+bool ATIR500Memory::init_pool(UInt32 poolSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 *puVar1;
   SInt32 iVar2;
   UInt32 *puVar3;
-  UInt32 uVar4;
+  UInt32 result;
   SInt32 iVar5;
   
   iVar2 = VCALL(M<SInt32>(self), 0x48)(self);
   if (iVar2 == 0) {
 LAB_00018f2c:
-    uVar4 = 0;
+    result = 0;
   }
   else {
     iVar2 = M<SInt32>(self + 0x10);
@@ -63,7 +63,7 @@ LAB_00018f2c:
     M<SInt32>(iVar2 + 0x18) = iVar2 + 4;
     M<UInt32>(iVar2 + 0x2c) = 0;
     M<SInt32>(iVar2 + 0x28) = iVar2 + 0x14;
-    M<UInt32>(iVar2 + 0x3c) = param_1;
+    M<UInt32>(iVar2 + 0x3c) = poolSize;
     M<SInt32>(iVar2 + 0x38) = iVar2 + 0x24;
     M<SInt32>(iVar2 + 4) = iVar2 + 0x14;
     M<SInt32>(iVar2 + 0x14) = iVar2 + 0x24;
@@ -90,8 +90,8 @@ LAB_00018f2c:
         puVar3 = puVar3 + 4;
       } while (iVar5 != 0);
     }
-    uVar4 = 1;
+    result = 1;
     M<UInt32>(iVar2 + 500) = 0;
   }
-  return uVar4;
+  return result;
 }

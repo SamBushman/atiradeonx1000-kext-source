@@ -27,48 +27,48 @@
 
 
 /* real addr 0x18710 */
-void IOATIR500Shared::free_texvert(IOATIR500Accelerator *real_param_1, IOTextureBuffer *real_param_2) {
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
+void IOATIR500Shared::free_texvert(IOATIR500Accelerator *accel, IOTextureBuffer *texture) {
+    UInt8 *accelBytes = reinterpret_cast<UInt8 *>(accel);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  SInt32 iVar1;
-  UInt32 uVar2;
-  SInt32 iVar3;
-  UInt8 IVar4;
-  SInt32 iVar5;
+  SInt32 hasBacking;
+  UInt32 freeSize;
+  SInt32 nextNode;
+  UInt8 bufferType;
+  SInt32 prevNode;
   
-  iVar5 = M<SInt32>(param_2 + 0x24);
-  iVar1 = M<SInt32>(param_2 + 4);
-  M<UInt32>(iVar5 + 0x28) = M<UInt32>(param_2 + 0x28);
-  iVar3 = M<SInt32>(param_2 + 0x28);
-  M<UInt8 *>(param_2 + 0x28) = param_2;
-  M<SInt32>(iVar3 + 0x24) = iVar5;
-  M<UInt8 *>(param_2 + 0x24) = param_2;
-  if (iVar1 != 0) {
+  prevNode = M<SInt32>(textureBytes + 0x24);
+  hasBacking = M<SInt32>(textureBytes + 4);
+  M<UInt32>(prevNode + 0x28) = M<UInt32>(textureBytes + 0x28);
+  nextNode = M<SInt32>(textureBytes + 0x28);
+  M<UInt8 *>(textureBytes + 0x28) = textureBytes;
+  M<SInt32>(nextNode + 0x24) = prevNode;
+  M<UInt8 *>(textureBytes + 0x24) = textureBytes;
+  if (hasBacking != 0) {
     /* #155 FIX (2026-10-11): this vtable+0x5ac call is missing its second argument - confirmed via
-     * stock's own disassembly (real addr 0x18710+0x44: r4/param_2 stays live, untouched, from this
-     * function's entry all the way to the bctrl, so stock genuinely passes (param_1, param_2)).
+     * stock's own disassembly (real addr 0x18710+0x44: r4/textureBytes stays live, untouched, from this
+     * function's entry all the way to the bctrl, so stock genuinely passes (accelBytes, textureBytes)).
      * Confirmed independently by the sibling call site at the same vtable slot in
      * IOATIR500Accelerator_free_gart_wirings_Port.cpp (`VCALL(self,0x5ac)(self,pIVar6)`, 2 args).
      * Same dropped-argument defect class as removeEventSource()/IOLockFree earlier in this issue.
      * This runs on the garbage_collector interrupt path implicated in #155's teardown hang - live-
      * tested fixing this alone, does NOT resolve the hang (the hang persisted identically), but
      * it's a real, independently-verified bug worth keeping regardless. */
-    VCALL(M<SInt32>(param_1), 0x5ac)(param_1, param_2);
+    VCALL(M<SInt32>(accelBytes), 0x5ac)(accelBytes, textureBytes);
   }
-  if (M<UInt8 *>(param_2 + 0x1c) != (UInt8 *)0x0) {
-    ((IOATIR500Shared *)(M<UInt8 *>(param_2 + 0x1c)))->free_buf_handle(param_2,*M<UInt32 *>(param_2 + 0x14));   /* record, handle - the owner is `this` of the call */
+  if (M<UInt8 *>(textureBytes + 0x1c) != (UInt8 *)0x0) {
+    ((IOATIR500Shared *)(M<UInt8 *>(textureBytes + 0x1c)))->free_buf_handle(textureBytes,*M<UInt32 *>(textureBytes + 0x14));   /* record, handle - the owner is `this` of the call */
   }
-  IVar4 = param_2[0x20];
-  if (((UInt32)IVar4 - 3 < 5) && (M<SInt32 *>(param_2 + 8) != (SInt32 *)0x0)) {
-    VCALL(*M<SInt32 *>(param_2 + 8), 0x18)(M<SInt32 *>(param_2 + 8));
-    IVar4 = param_2[0x20];
-    M<UInt32>(param_2 + 8) = 0;
+  bufferType = textureBytes[0x20];
+  if (((UInt32)bufferType - 3 < 5) && (M<SInt32 *>(textureBytes + 8) != (SInt32 *)0x0)) {
+    VCALL(*M<SInt32 *>(textureBytes + 8), 0x18)(M<SInt32 *>(textureBytes + 8));
+    bufferType = textureBytes[0x20];
+    M<UInt32>(textureBytes + 8) = 0;
   }
-  uVar2 = 0xc0;
-  if (IVar4 != 0x5) {
-    uVar2 = 0x80;
+  freeSize = 0xc0;
+  if (bufferType != 0x5) {
+    freeSize = 0x80;
   }
-  VCALL(M<SInt32>(param_1), 0x574)(param_1,param_2,uVar2);
+  VCALL(M<SInt32>(accelBytes), 0x574)(accelBytes,textureBytes,freeSize);
   return;
 }

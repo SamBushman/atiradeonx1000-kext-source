@@ -27,24 +27,24 @@
 
 
 /* real addr 0x16cf0 */
-void IOATIR500Shared::free_buf_handle(void*param_1, UInt32 param_2) {
+void IOATIR500Shared::free_buf_handle(void*record, UInt32 handle) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 bitmapOffset;
   
-  if (M<UInt32>(self + 0x14) <= param_2) {
+  if (M<UInt32>(self + 0x14) <= handle) {
     return;
   }
-  if (M<void *>(M<SInt32>(self + 0x10) + param_2 * 4) != param_1) {
+  if (M<void *>(M<SInt32>(self + 0x10) + handle * 4) != record) {
     return;
   }
-  if (param_2 < M<UInt32>(self + 0x1c)) {
-    M<UInt32>(self + 0x1c) = param_2;
+  if (handle < M<UInt32>(self + 0x1c)) {
+    M<UInt32>(self + 0x1c) = handle;
   }
-  uVar1 = param_2 >> 3 & 0x1ffffffc;
-  M<UInt32>(param_2 * 4 + M<SInt32>(self + 0x10)) = 0;
-  M<UInt32>(uVar1 + M<SInt32>(self + 0x18)) =
-       (-2 << (param_2 & 0x1f) | 0xfffffffeU >> 0x20 - (param_2 & 0x1f)) &
-       M<UInt32>(uVar1 + M<SInt32>(self + 0x18));
+  bitmapOffset = handle >> 3 & 0x1ffffffc;
+  M<UInt32>(handle * 4 + M<SInt32>(self + 0x10)) = 0;
+  M<UInt32>(bitmapOffset + M<SInt32>(self + 0x18)) =
+       (-2 << (handle & 0x1f) | 0xfffffffeU >> 0x20 - (handle & 0x1f)) &
+       M<UInt32>(bitmapOffset + M<SInt32>(self + 0x18));
   return;
 }

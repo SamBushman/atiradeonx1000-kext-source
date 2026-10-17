@@ -34,51 +34,51 @@ extern "C" UInt32 GH_memset(...) asm("_memset");
 bool IOATIR500Shared::alloc_handles() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 bitmapBytes;
   SInt32 iVar2;
   UInt32 uVar3;
-  SInt32 iVar4;
+  SInt32 newCapacity;
   SInt32 iVar5;
-  SInt32 iVar6;
-  UInt32 uVar7;
-  SInt32 iVar8;
+  SInt32 totalBytes;
+  UInt32 oldCapacity;
+  SInt32 oldTable;
   
-  uVar7 = M<UInt32>(self + 0x14);
-  if (uVar7 == 0) {
-    iVar4 = 0x400;
-    uVar1 = 0x80;
+  oldCapacity = M<UInt32>(self + 0x14);
+  if (oldCapacity == 0) {
+    newCapacity = 0x400;
+    bitmapBytes = 0x80;
     iVar5 = 0x1000;
   }
   else {
-    iVar4 = uVar7 << 1;
-    iVar5 = uVar7 << 3;
-    uVar1 = (uVar7 & 0x7fffffff) >> 2;
+    newCapacity = oldCapacity << 1;
+    iVar5 = oldCapacity << 3;
+    bitmapBytes = (oldCapacity & 0x7fffffff) >> 2;
   }
-  iVar6 = iVar5 + uVar1;
-  iVar8 = M<SInt32>(self + 0x10);
+  totalBytes = iVar5 + bitmapBytes;
+  oldTable = M<SInt32>(self + 0x10);
   uVar3 = M<UInt32>(self + 0x18);
-  iVar2 = GH_IOMalloc(iVar6);
+  iVar2 = GH_IOMalloc(totalBytes);
   M<SInt32>(self + 0x10) = iVar2;
   if (iVar2 == 0) {
     uVar3 = 0;
-    M<SInt32>(self + 0x10) = iVar8;
+    M<SInt32>(self + 0x10) = oldTable;
   }
   else {
     iVar2 = M<SInt32>(self + 0xc);
     if (iVar2 != 0) {
-      M<SInt32>(iVar2 + 0x808) = iVar6 + M<SInt32>(iVar2 + 0x808);
+      M<SInt32>(iVar2 + 0x808) = totalBytes + M<SInt32>(iVar2 + 0x808);
     }
-    M<SInt32>(self + 0x14) = iVar4;
+    M<SInt32>(self + 0x14) = newCapacity;
     M<SInt32>(self + 0x18) = iVar5 + M<SInt32>(self + 0x10);
-    GH_memset(M<SInt32>(self + 0x10),0,iVar6);
-    if (iVar8 != 0) {
-      iVar5 = uVar7 * 4 + (uVar7 >> 3);
-      GH_memcpy(M<UInt32>(self + 0x10),iVar8,uVar7 * 4);
-      GH_memcpy(M<UInt32>(self + 0x18),uVar3,uVar7 >> 3);
-      GH_IOFree(iVar8,iVar5);
-      iVar4 = M<SInt32>(self + 0xc);
-      if (iVar4 != 0) {
-        M<SInt32>(iVar4 + 0x808) = M<SInt32>(iVar4 + 0x808) - iVar5;
+    GH_memset(M<SInt32>(self + 0x10),0,totalBytes);
+    if (oldTable != 0) {
+      iVar5 = oldCapacity * 4 + (oldCapacity >> 3);
+      GH_memcpy(M<UInt32>(self + 0x10),oldTable,oldCapacity * 4);
+      GH_memcpy(M<UInt32>(self + 0x18),uVar3,oldCapacity >> 3);
+      GH_IOFree(oldTable,iVar5);
+      newCapacity = M<SInt32>(self + 0xc);
+      if (newCapacity != 0) {
+        M<SInt32>(newCapacity + 0x808) = M<SInt32>(newCapacity + 0x808) - iVar5;
         return 1;
       }
     }

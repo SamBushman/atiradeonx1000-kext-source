@@ -27,54 +27,54 @@
 
 
 /* real addr 0x197d0 */
-UInt32 ATIR500Memory::dealloc(GLKMemoryElement *real_param_1) {
+UInt32 ATIR500Memory::dealloc(GLKMemoryElement *elem) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *elemBytes = reinterpret_cast<UInt8 *>(elem);
 
-  UInt32 *puVar1;
-  SInt32 iVar2;
-  SInt32 *piVar3;
-  SInt32 *piVar4;
+  UInt32 *spareNode;
+  SInt32 refilled;
+  SInt32 *nodePrev;
+  SInt32 *node;
   SInt32 iVar5;
   
-  iVar5 = M<SInt32>(param_1 + 8);
-  if ((M<SInt32>(self + 0xc) == 0) && (iVar2 = this->add_to_stack(), iVar2 == 0)) {
+  iVar5 = M<SInt32>(elemBytes + 8);
+  if ((M<SInt32>(self + 0xc) == 0) && (refilled = this->add_to_stack(), refilled == 0)) {
     return 0;
   }
-  piVar3 = M<SInt32 *>(param_1 + 4);
-  piVar4 = M<SInt32 *>(param_1);
-  M<UInt32>(param_1 + 0xc) = 0;
-  M<UInt32>(param_1 + 4) = 0;
-  M<UInt32>(param_1) = 0;
-  M<UInt32>(param_1 + 8) = 0;
-  if ((piVar3[3] & piVar4[3]) < 0) {
-    *piVar3 = *piVar4;
-    M<SInt32 *>(*piVar4 + 4) = piVar3;
+  nodePrev = M<SInt32 *>(elemBytes + 4);
+  node = M<SInt32 *>(elemBytes);
+  M<UInt32>(elemBytes + 0xc) = 0;
+  M<UInt32>(elemBytes + 4) = 0;
+  M<UInt32>(elemBytes) = 0;
+  M<UInt32>(elemBytes + 8) = 0;
+  if ((nodePrev[3] & node[3]) < 0) {
+    *nodePrev = *node;
+    M<SInt32 *>(*node + 4) = nodePrev;
     iVar5 = M<SInt32>(self + 0xc);
-    piVar4[3] = 0;
-    piVar4[1] = 0;
-    piVar4[2] = 0;
-    *piVar4 = iVar5;
-    M<SInt32 *>(self + 0xc) = piVar4;
+    node[3] = 0;
+    node[1] = 0;
+    node[2] = 0;
+    *node = iVar5;
+    M<SInt32 *>(self + 0xc) = node;
   }
-  else if (piVar3[3] < 0) {
-    piVar4[1] = (SInt32)piVar3;
-    *piVar3 = (SInt32)piVar4;
+  else if (nodePrev[3] < 0) {
+    node[1] = (SInt32)nodePrev;
+    *nodePrev = (SInt32)node;
   }
-  else if (piVar4[3] < 0) {
-    piVar4[2] = iVar5;
-    piVar4[1] = (SInt32)piVar3;
-    *piVar3 = (SInt32)piVar4;
+  else if (node[3] < 0) {
+    node[2] = iVar5;
+    node[1] = (SInt32)nodePrev;
+    *nodePrev = (SInt32)node;
   }
   else {
-    puVar1 = M<UInt32 *>(self + 0xc);
-    M<UInt32>(self + 0xc) = *puVar1;
-    *piVar3 = (SInt32)puVar1;
-    piVar4[1] = (SInt32)puVar1;
-    puVar1[3] = 0x80000000;
-    puVar1[2] = iVar5;
-    *puVar1 = (UInt32)(piVar4);
-    puVar1[1] = (UInt32)(piVar3);
+    spareNode = M<UInt32 *>(self + 0xc);
+    M<UInt32>(self + 0xc) = *spareNode;
+    *nodePrev = (SInt32)spareNode;
+    node[1] = (SInt32)spareNode;
+    spareNode[3] = 0x80000000;
+    spareNode[2] = iVar5;
+    *spareNode = (UInt32)(node);
+    spareNode[1] = (UInt32)(nodePrev);
   }
   return 1;
 }

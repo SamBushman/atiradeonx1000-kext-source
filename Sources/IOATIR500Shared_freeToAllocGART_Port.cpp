@@ -27,34 +27,34 @@
 
 
 /* real addr 0x17060 */
-bool IOATIR500Shared::freeToAllocGART(VendorTransferBuffer *real_param_1, bool param_2) {
+bool IOATIR500Shared::freeToAllocGART(VendorTransferBuffer *needed, bool aggressive) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *neededBytes = reinterpret_cast<UInt8 *>(needed);
 
-  UInt8 VVar1;
-  int iVar2;
-  UInt8 *pVVar3;
+  UInt8 bufferType;
+  int freed;
+  UInt8 *texture;
   
-  pVVar3 = M<UInt8 *>(self + 0x24);
+  texture = M<UInt8 *>(self + 0x24);
   do {
-    if (pVVar3 == (UInt8 *)0x0) {
+    if (texture == (UInt8 *)0x0) {
       return 0;
     }
-    VVar1 = pVVar3[0x20];
-    if (VVar1 == 0x4) {
-      M<UInt8>(M<int>(pVVar3 + 0x14) + 0x14) = 1;
-      iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(param_1),
-                         M<UInt32>(M<int>(pVVar3 + 0x14) + 8),param_2);
+    bufferType = texture[0x20];
+    if (bufferType == 0x4) {
+      M<UInt8>(M<int>(texture + 0x14) + 0x14) = 1;
+      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
+                         M<UInt32>(M<int>(texture + 0x14) + 8),aggressive);
 joined_r0x000170d8:
-      if (iVar2 != 0) {
+      if (freed != 0) {
         return 1;
       }
     }
-    else if ((VVar1 == 0x7) || (VVar1 == 0x3)) {
-      iVar2 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(pVVar3),(VendorTransferBuffer *)(param_1),
-                         M<UInt32>(M<int>(pVVar3 + 0x14) + 0xc),param_2);
+    else if ((bufferType == 0x7) || (bufferType == 0x3)) {
+      freed = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 0xc)))->freeTransferToAllocGART((VendorTransferBuffer *)(texture),(VendorTransferBuffer *)(neededBytes),
+                         M<UInt32>(M<int>(texture + 0x14) + 0xc),aggressive);
       goto joined_r0x000170d8;
     }
-    pVVar3 = M<UInt8 *>(pVVar3 + 0x3c);
+    texture = M<UInt8 *>(texture + 0x3c);
   } while( true );
 }

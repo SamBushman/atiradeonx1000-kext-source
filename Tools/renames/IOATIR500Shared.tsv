@@ -1,0 +1,121 @@
+# IOATIR500Shared remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# Parameter rows (first block) come from Tools/renames/gen_param_rows.py; the rest are named from reading the bodies and their callers
+# (IOATIR500GLContext::new_texture for the new_*_texture family). Layout of the object, as used below: +0xc accelerator, +0x10 record table (handle -> record),
+# +0x14 capacity, +0x18 in-use bitmap, +0x1c first-free hint, +0x20 client-shared chunk list, +0x24 texture list.
+# Locals reused for several roles in one function are not renamed (a rename is whole-function).
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	param_1	record	INFERRED	name from the class header declaration
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	param_2	outHandle	INFERRED	name from the class header declaration
+def	IOATIR500Shared::alloc_client_shared@0x16d50	param_1	index	INFERRED	name from the class header declaration
+def	IOATIR500Shared::alloc_client_shared@0x16d50	param_2	outKernelPtr	INFERRED	name from the class header declaration
+def	IOATIR500Shared::alloc_client_shared@0x16d50	param_3	outUserAddr	INFERRED	name from the class header declaration
+def	IOATIR500Shared::delete_texture@0x17950	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500Shared::delete_texture@0x17950	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Shared::freeToAllocGART@0x17060	real_param_1	needed	INFERRED	name from the class header declaration
+def	IOATIR500Shared::freeToAllocGART@0x17060	param_1	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Shared::freeToAllocGART@0x17060	param_2	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500Shared::free_buf_handle@0x16cf0	param_1	record	INFERRED	name from the class header declaration
+def	IOATIR500Shared::free_buf_handle@0x16cf0	param_2	handle	INFERRED	name from the class header declaration
+def	IOATIR500Shared::free_texvert@0x18710	real_param_1	accel	INFERRED	name from the class header declaration
+def	IOATIR500Shared::free_texvert@0x18710	param_1	accelBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Shared::free_texvert@0x18710	real_param_2	texture	INFERRED	name from the class header declaration
+def	IOATIR500Shared::free_texvert@0x18710	param_2	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	uVar7	wordIndex	CONFIRMED	index of the 32-bit bitmap word being searched: starts at the first-free hint (+0x1c) >> 5, scales the bitmap offset (*4) and the handle (*0x20 + bit)
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	uVar2	bitmapWord	CONFIRMED	the bitmap word loaded from (+0x18)[wordIndex]; a word equal to 0xffffffff is full
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	uVar3	bitIndex	CONFIRMED	counts up from 0 to the first clear bit of bitmapWord; handle = wordIndex*0x20 + bitIndex
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	uVar6	bit	CONFIRMED	the bit number that is set in the bitmap (bitIndex, or 0x20 when the scan ran off the end)
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	uVar8	handle	CONFIRMED	the allocated handle: stored to *outHandle, used as the index into the record table (+0x10) and as (hint at +0x1c) - 1
+def	IOATIR500Shared::alloc_buf_handle@0x16bb0	puVar5	bitmapCursor	INFERRED	pointer walked over the bitmap words (+0x18) while looking for a word that is not 0xffffffff
+def	IOATIR500Shared::alloc_client_shared@0x16d50	puVar4	lastChunk	CONFIRMED	the chunk the walk stopped at: a new chunk is linked after it (*lastChunk = newChunk) or becomes the list head (+0x20) when there is none
+def	IOATIR500Shared::alloc_client_shared@0x16d50	puVar5	chunk	CONFIRMED	the chunk currently examined (list at +0x20, next pointer in word 0); also the freshly IOMalloc(0x1c) chunk before it is linked
+def	IOATIR500Shared::alloc_handles@0x16910	uVar7	oldCapacity	CONFIRMED	the handle capacity read from +0x14 before it is replaced (0 on the first allocation)
+def	IOATIR500Shared::alloc_handles@0x16910	iVar4	newCapacity	INFERRED	capacity written to +0x14: 0x400 first time, otherwise doubled
+def	IOATIR500Shared::alloc_handles@0x16910	uVar1	bitmapBytes	CONFIRMED	size of the in-use bitmap (capacity/8): 0x80 first time, otherwise old capacity >> 2 (the new capacity / 8)
+def	IOATIR500Shared::alloc_handles@0x16910	iVar6	totalBytes	CONFIRMED	IOMalloc size: table bytes + bitmap bytes; also added to the accelerator accounting word at +0x808
+def	IOATIR500Shared::alloc_handles@0x16910	iVar8	oldTable	CONFIRMED	the record table pointer (+0x10) before the reallocation; copied from and freed afterwards
+def	IOATIR500Shared::free_buf_handle@0x16cf0	uVar1	bitmapOffset	INFERRED	byte offset of the bitmap word that holds the handle (handle >> 3 & ~3)
+def	IOATIR500Shared::free_handles@0x16b30	iVar1	accel	CONFIRMED	the accelerator (+0xc) whose accounting word at +0x808 is reduced by the freed bytes
+def	IOATIR500Shared::free@0x184d0	pVVar3	texture	CONFIRMED	each texture of the list at +0x24, handed to delete_texture
+def	IOATIR500Shared::free@0x184d0	pVVar6	nextTexture	CONFIRMED	the next node (+0x3c) to visit; nodes of buffer type 4 are skipped, their successors are visited instead
+def	IOATIR500Shared::free@0x184d0	piVar2	chunk	CONFIRMED	each client-shared chunk of the list at +0x20: its three descriptors (words 1-3) are released and the 0x1c-byte chunk freed
+def	IOATIR500Shared::free@0x184d0	piVar5	nextChunk	CONFIRMED	the chunk's next pointer (word 0), read before the chunk is freed
+def	IOATIR500Shared::free@0x184d0	this_00	accel	CONFIRMED	the accelerator (+0xc): its global-shared pointer (+0x6c) is cleared and freeOrphanTexture is called on it
+def	IOATIR500Shared::delete_texture@0x17950	VVar1	bufferType	CONFIRMED	byte at texture+0x20 (0 surface, 1 global, 2/3 plain, 4 AGP, 6 AGP reference, 7 plain with AGP backing): selects the teardown path
+def	IOATIR500Shared::delete_texture@0x17950	piVar5	accel	CONFIRMED	the accelerator (+0xc): its vtable +0x554 poll and +0x5ac are called
+def	IOATIR500Shared::delete_texture@0x17950	uVar6	stamp	INFERRED	the stamp read from the texture header (+0xc) and passed to the accelerator's vtable +0x554 completion test, as in freeOrphanTexture
+def	IOATIR500Shared::delete_texture@0x17950	uVar8	faceIndex	INFERRED	loop over the faces recorded in the header (count byte at +0x34): zeroes one 16-bit entry per face at +0x28
+def	IOATIR500Shared::delete_texture@0x17950	this_00	surface	CONFIRMED	for a type-0 texture, the owning surface (texture+0x50): its texture list head at +0xbcc is unlinked and its buffers pruned
+def	IOATIR500Shared::new_texture@0x18060	param_1	size	CONFIRMED	added to the 0xa00/0x80 header size and rounded to whole pages: the byte size of the IOBufferMemoryDescriptor allocated; caller passes newTextureData+4
+def	IOATIR500Shared::new_texture@0x18060	param_2	auxValue	INFERRED	non-zero selects buffer type 3 (0xa00-byte header) instead of 2, and is stored at texture+0x50 for types 3 and 7; caller passes newTextureData+8
+def	IOATIR500Shared::new_texture@0x18060	param_3	agpAddress	CONFIRMED	first argument of new_agp_texture (a client virtual address); non-zero with agpLength makes this a type-7 texture
+def	IOATIR500Shared::new_texture@0x18060	param_4	agpLength	CONFIRMED	second argument of new_agp_texture (byte length of the AGP range)
+def	IOATIR500Shared::new_texture@0x18060	real_param_5	outDataAddress	INFERRED	receives the client-task mapping address of the texture memory (descriptor map vtable +0xd0)
+def	IOATIR500Shared::new_texture@0x18060	param_5	outDataAddressAlias	INFERRED	untyped alias of the typed parameter
+def	IOATIR500Shared::new_texture@0x18060	real_param_6	outSharedUserAddr	CONFIRMED	receives the user address of the client-shared record (alloc_client_shared's outUserAddr)
+def	IOATIR500Shared::new_texture@0x18060	param_6	outSharedUserAddrAlias	INFERRED	untyped alias of the typed parameter
+def	IOATIR500Shared::new_texture@0x18060	pVVar2	agpTexture	CONFIRMED	the type-4 texture returned by new_agp_texture (or null); referenced from the new type-7 texture at +0x58 and released if allocation fails
+def	IOATIR500Shared::new_texture@0x18060	cVar7	bufferType	CONFIRMED	the type stored at texture+0x20 and in the client-shared record: 2, 3, or 7
+def	IOATIR500Shared::new_texture@0x18060	pvVar4	texture	CONFIRMED	the 0x80-byte VendorTextureBuffer from the accelerator (vtable +0x570), returned on success
+def	IOATIR500Shared::new_texture@0x18060	piVar5	memoryMap	INFERRED	the map of the descriptor created in the client task (vtable +0x14c), stored at texture+0x10
+def	IOATIR500Shared::new_texture@0x18060	local_48	handle	CONFIRMED	handle from alloc_buf_handle, passed to alloc_client_shared and stored in the client-shared record
+def	IOATIR500Shared::new_texture@0x18060	local_44	clientShared	CONFIRMED	kernel pointer of the client-shared record from alloc_client_shared, stored at texture+0x14
+def	IOATIR500Shared::new_texture@0x18060	local_40	clientUserAddr	CONFIRMED	user address of that record, stored at texture+0x18 and returned through outSharedUserAddr
+def	IOATIR500Shared::new_texture@0x18060	auStack_3c	agpUserAddr	INFERRED	the unused out value of new_agp_texture
+def	IOATIR500Shared::new_agp_texture@0x17150	param_1	address	CONFIRMED	client virtual address: split into the page offset (stored at texture+0x50) and the page base (+0x58)
+def	IOATIR500Shared::new_agp_texture@0x17150	param_2	length	CONFIRMED	byte length added to the page offset and rounded up to whole pages
+def	IOATIR500Shared::new_agp_texture@0x17150	uVar8	pageOffset	CONFIRMED	address & (page size - 1), stored at texture+0x50 and compared when looking for an existing mapping
+def	IOATIR500Shared::new_agp_texture@0x17150	uVar10	roundedLength	CONFIRMED	pageOffset + length rounded up to whole pages: the descriptor size, stored at texture+0x5c and compared when reusing
+def	IOATIR500Shared::new_agp_texture@0x17150	pvVar1	candidate	CONFIRMED	each type-4 texture of the list (+0x24) examined for an identical mapping (same page offset, base and length)
+def	IOATIR500Shared::new_agp_texture@0x17150	piVar4	memory	CONFIRMED	the IOMemoryDescriptor for the range (persistent copy, withAddress, or a new buffer descriptor), stored at texture+8
+def	IOATIR500Shared::new_agp_texture@0x17150	local_38	handle	CONFIRMED	handle from alloc_buf_handle
+def	IOATIR500Shared::new_agp_texture@0x17150	local_34	clientShared	CONFIRMED	kernel pointer of the client-shared record, stored at texture+0x14
+def	IOATIR500Shared::new_agp_texture@0x17150	local_30	clientUserAddr	CONFIRMED	user address of the record (element 0), stored at texture+0x18 and returned through outParam
+def	IOATIR500Shared::new_agp_texture@0x17150	uVar7	descriptorLength	INFERRED	the descriptor's length (vtable +0x128), stored at texture+0x5c
+decl	IOATIR500Shared::new_agp_texture	param1	address	INFERRED	named from the body
+decl	IOATIR500Shared::new_agp_texture	param2	length	INFERRED	named from the body
+def	IOATIR500Shared::new_agpref_texture@0x17df0	param_1	refAddress	CONFIRMED	when non-zero, texture+0x50 holds refAddress minus the AGP texture's page base (+0x58): an address inside the referenced AGP range
+def	IOATIR500Shared::new_agpref_texture@0x17df0	param_2	agpAddress	CONFIRMED	first argument of new_agp_texture
+def	IOATIR500Shared::new_agpref_texture@0x17df0	param_3	agpLength	CONFIRMED	second argument of new_agp_texture
+def	IOATIR500Shared::new_agpref_texture@0x17df0	pVVar2	agpTexture	CONFIRMED	the type-4 texture from new_agp_texture; referenced at texture+0x54 (type 6) and its refcount incremented
+def	IOATIR500Shared::new_agpref_texture@0x17df0	pvVar3	texture	CONFIRMED	the 0x80-byte VendorTextureBuffer from the accelerator (vtable +0x570), returned on success
+def	IOATIR500Shared::new_agpref_texture@0x17df0	uStack_38	agpUserAddr	INFERRED	the unused out value of new_agp_texture
+def	IOATIR500Shared::new_agpref_texture@0x17df0	local_34	handle	CONFIRMED	handle from alloc_buf_handle
+def	IOATIR500Shared::new_agpref_texture@0x17df0	local_30	clientShared	CONFIRMED	kernel pointer of the client-shared record, stored at texture+0x14
+def	IOATIR500Shared::new_agpref_texture@0x17df0	local_2c	clientUserAddr	CONFIRMED	user address of the record (element 0), stored at texture+0x18 and returned through outParam
+decl	IOATIR500Shared::new_agpref_texture	param2	refAddress	INFERRED	named from the body
+decl	IOATIR500Shared::new_agpref_texture	param3	agpAddress	INFERRED	named from the body
+decl	IOATIR500Shared::new_agpref_texture	param4	agpLength	INFERRED	named from the body
+def	IOATIR500Shared::new_surface_texture@0x17520	param_1	surfaceId	CONFIRMED	passed to the accelerator's find_surface_for_id and stored at texture+0x5c
+def	IOATIR500Shared::new_surface_texture@0x17520	param_2	unknown_0x58	UNKNOWN	stored verbatim at texture+0x58, never read in this function
+def	IOATIR500Shared::new_surface_texture@0x17520	param_3	unknown_0x34	UNKNOWN	stored as a byte at client-shared record +0x34, never read in this function
+def	IOATIR500Shared::new_surface_texture@0x17520	this_00	surface	CONFIRMED	the surface found for surfaceId: the new texture is linked into its list at +0xbcc and its buffers pruned
+def	IOATIR500Shared::new_surface_texture@0x17520	pvVar2	texture	CONFIRMED	the 0x80-byte VendorTextureBuffer from the accelerator (vtable +0x570), returned on success
+def	IOATIR500Shared::new_surface_texture@0x17520	local_38	handle	CONFIRMED	handle from alloc_buf_handle
+def	IOATIR500Shared::new_surface_texture@0x17520	local_34	clientShared	CONFIRMED	kernel pointer of the client-shared record, stored at texture+0x14
+def	IOATIR500Shared::new_surface_texture@0x17520	local_30	clientUserAddr	CONFIRMED	user address of the record (element 0), returned through outParam
+decl	IOATIR500Shared::new_surface_texture	param2	surfaceId	INFERRED	named from the body
+decl	IOATIR500Shared::new_surface_texture	param3	unknown_0x58	INFERRED	named from the body
+decl	IOATIR500Shared::new_surface_texture	param4	unknown_0x34	INFERRED	named from the body
+def	IOATIR500Shared::new_global_texture@0x17740	param_1	globalId	INFERRED	compared with the id stored at +4 of each texture's client-shared record in the global shared object's list
+def	IOATIR500Shared::new_global_texture@0x17740	pIVar1	globalShared	CONFIRMED	the accelerator's global IOATIR500Shared (accel+0x6c); a different object from this
+def	IOATIR500Shared::new_global_texture@0x17740	piVar2	accel	CONFIRMED	the accelerator (+0xc)
+def	IOATIR500Shared::new_global_texture@0x17740	iVar5	sourceTexture	CONFIRMED	the texture of the global shared object whose id matches; referenced from the new texture at +0x50 and its refcount incremented
+def	IOATIR500Shared::new_global_texture@0x17740	pvVar3	texture	CONFIRMED	the 0x80-byte VendorTextureBuffer from the accelerator (vtable +0x570), returned on success
+def	IOATIR500Shared::new_global_texture@0x17740	local_28	handle	CONFIRMED	handle from alloc_buf_handle
+def	IOATIR500Shared::new_global_texture@0x17740	local_24	clientShared	CONFIRMED	kernel pointer of the client-shared record, stored at texture+0x14
+def	IOATIR500Shared::new_global_texture@0x17740	local_20	clientUserAddr	CONFIRMED	user address of the record (element 0), returned through outParam
+decl	IOATIR500Shared::new_global_texture	param2	globalId	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	param2	size	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	param3	auxValue	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	param4	agpAddress	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	param5	agpLength	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	out1	outDataAddress	INFERRED	named from the body
+decl	IOATIR500Shared::new_texture	out2	outSharedUserAddr	INFERRED	named from the body
+def	IOATIR500Shared::free_texvert@0x18710	iVar5	prevNode	CONFIRMED	texture+0x24: previous node of the circular list, unlinked from it
+def	IOATIR500Shared::free_texvert@0x18710	iVar3	nextNode	CONFIRMED	texture+0x28: next node of the circular list, unlinked from it
+def	IOATIR500Shared::free_texvert@0x18710	iVar1	hasBacking	CONFIRMED	texture+4, non-zero when the texture has backing (VendorTextureBuffer.field_0x04): gates the accelerator's vtable +0x5ac release
+def	IOATIR500Shared::free_texvert@0x18710	IVar4	bufferType	CONFIRMED	byte at texture+0x20: types 3..7 release the descriptor at +8
+def	IOATIR500Shared::free_texvert@0x18710	uVar2	freeSize	CONFIRMED	size passed to the accelerator's vtable +0x574 free: 0xc0 for type 5, else 0x80
+def	IOATIR500Shared::freeToAllocGART@0x17060	VVar1	bufferType	CONFIRMED	byte at texture+0x20: 4 uses the header word at +8, 3 and 7 the word at +0xc as the stamp
+def	IOATIR500Shared::freeToAllocGART@0x17060	iVar2	freed	CONFIRMED	the accelerator's freeTransferToAllocGART result; non-zero ends the walk with true
+def	IOATIR500Shared::freeToAllocGART@0x17060	pVVar3	texture	CONFIRMED	each texture of the list at +0x24

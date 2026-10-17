@@ -29,124 +29,124 @@ extern "C" UInt32 GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(.
 
 
 /* real addr 0x18060 */
-VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 param_1, UInt32 param_2, unsigned int param_3, UInt32 param_4, unsigned int *real_param_5, unsigned int *real_param_6) {
+VendorTextureBuffer *IOATIR500Shared::new_texture(UInt32 size, UInt32 auxValue, unsigned int agpAddress, UInt32 agpLength, unsigned int *outDataAddress, unsigned int *outSharedUserAddr) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    unsigned int *param_5 = real_param_5;
-    unsigned int *param_6 = real_param_6;
+    unsigned int *outDataAddressAlias = outDataAddress;
+    unsigned int *outSharedUserAddrAlias = outSharedUserAddr;
 
   int iVar1;
-  UInt8 *pVVar2;
+  UInt8 *agpTexture;
   int *piVar3;
-  void *pvVar4;
-  int *piVar5;
+  void *texture;
+  int *memoryMap;
   int iVar6;
-  char cVar7;
+  char bufferType;
   unsigned int uVar8;
-  UInt32 local_48;
-  sIOClientShared *local_44;
-  unsigned int local_40;
-  unsigned int auStack_3c [6];
+  UInt32 handle;
+  sIOClientShared *clientShared;
+  unsigned int clientUserAddr;
+  unsigned int agpUserAddr [6];
   
-  if ((param_3 == 0) || (param_4 == 0)) {
-    if (param_2 == 0) {
-      pVVar2 = (UInt8 *)0x0;
-      cVar7 = '\x02';
+  if ((agpAddress == 0) || (agpLength == 0)) {
+    if (auxValue == 0) {
+      agpTexture = (UInt8 *)0x0;
+      bufferType = '\x02';
       iVar6 = 0x80;
     }
     else {
-      pVVar2 = (UInt8 *)0x0;
-      cVar7 = '\x03';
+      agpTexture = (UInt8 *)0x0;
+      bufferType = '\x03';
       iVar6 = 0xa00;
     }
   }
   else {
-    pVVar2 = (UInt8 *)this->new_agp_texture(param_3,param_4,(unsigned int *)(auStack_3c));
-    if (pVVar2 == (UInt8 *)0x0) {
+    agpTexture = (UInt8 *)this->new_agp_texture(agpAddress,agpLength,(unsigned int *)(agpUserAddr));
+    if (agpTexture == (UInt8 *)0x0) {
       return (VendorTextureBuffer *)((void *)0x0);
     }
-    cVar7 = '\a';
+    bufferType = '\a';
     iVar6 = 0xa00;
   }
   piVar3 = M<int *>(self + 0xc);
-  uVar8 = iVar6 + param_1 + GH_page_size + 7 & -GH_page_size;
+  uVar8 = iVar6 + size + GH_page_size + 7 & -GH_page_size;
   if (uVar8 <= (unsigned int)(piVar3[0x20c] * 0xc00) >> 2) {
-    pvVar4 = (void *)VCALL(*piVar3, 0x570)(piVar3,0x80);
-    if (pvVar4 == (void *)0x0) {
-      if (pVVar2 == (UInt8 *)0x0) {
+    texture = (void *)VCALL(*piVar3, 0x570)(piVar3,0x80);
+    if (texture == (void *)0x0) {
+      if (agpTexture == (UInt8 *)0x0) {
         return (VendorTextureBuffer *)((void *)0x0);
       }
-      if (M<int>(M<int>(pVVar2 + 0x14) + 0x10) != 0) {
+      if (M<int>(M<int>(agpTexture + 0x14) + 0x10) != 0) {
         return (VendorTextureBuffer *)((void *)0x0);
       }
-      this->delete_texture((VendorTextureBuffer *)(pVVar2));
+      this->delete_texture((VendorTextureBuffer *)(agpTexture));
       return (VendorTextureBuffer *)((void *)0x0);
     }
     piVar3 = (int *)GH_ZN24IOBufferMemoryDescriptor17inTaskWithOptionsEP4taskmjj(M<UInt32>(self + 8),
                                  M<unsigned int>(M<int>(self + 0xc) + 0x82c) | 0x10022,uVar8,
                                  GH_page_size);
     if (piVar3 != (int *)0x0) {
-      M<int *>((int)pvVar4 + 8) = piVar3;
-      iVar6 = this->alloc_buf_handle(pvVar4,(UInt32 *)(&local_48));
+      M<int *>((int)texture + 8) = piVar3;
+      iVar6 = this->alloc_buf_handle(texture,(UInt32 *)(&handle));
       if (iVar6 != 0) {
-        iVar6 = this->alloc_client_shared(local_48,(sIOClientShared **)(&local_44),(unsigned int *)(&local_40));
+        iVar6 = this->alloc_client_shared(handle,(sIOClientShared **)(&clientShared),(unsigned int *)(&clientUserAddr));
         if (iVar6 != 0) {
-          M<sIOClientShared *>((int)pvVar4 + 0x14) = local_44;
-          M<unsigned int>((int)pvVar4 + 0x18) = local_40;
-          M<UInt32>(local_44) = local_48;
-          M<UInt32>(M<int>((int)pvVar4 + 0x14) + 8) =
+          M<sIOClientShared *>((int)texture + 0x14) = clientShared;
+          M<unsigned int>((int)texture + 0x18) = clientUserAddr;
+          M<UInt32>(clientShared) = handle;
+          M<UInt32>(M<int>((int)texture + 0x14) + 8) =
                M<UInt32>(M<int>(self + 0xc) + 0x54);
-          M<UInt32>(M<int>((int)pvVar4 + 0x14) + 0xc) =
+          M<UInt32>(M<int>((int)texture + 0x14) + 0xc) =
                M<UInt32>(M<int>(self + 0xc) + 0x54);
-          M<char>(M<int>((int)pvVar4 + 0x14) + 0x16) = cVar7;
-          M<char>((int)pvVar4 + 0x20) = cVar7;
-          M<UInt8 *>((int)pvVar4 + 0x1c) = self;
-          piVar5 = (int *)VCALL(*piVar3, 0x14c)
+          M<char>(M<int>((int)texture + 0x14) + 0x16) = bufferType;
+          M<char>((int)texture + 0x20) = bufferType;
+          M<UInt8 *>((int)texture + 0x1c) = self;
+          memoryMap = (int *)VCALL(*piVar3, 0x14c)
                                     (piVar3,M<UInt32>(self + 8),0,
                                      M<unsigned int>(M<int>(self + 0xc) + 0x82c) | 1,0,0);
-          if (piVar5 != (int *)0x0) {
-            M<int *>((int)pvVar4 + 0x10) = piVar5;
-            if (cVar7 == '\x03') {
-              M<UInt32>((int)pvVar4 + 0x50) = param_2;
+          if (memoryMap != (int *)0x0) {
+            M<int *>((int)texture + 0x10) = memoryMap;
+            if (bufferType == '\x03') {
+              M<UInt32>((int)texture + 0x50) = auxValue;
             }
-            else if (cVar7 != '\x02') {
-              M<UInt32>((int)pvVar4 + 0x50) = param_2;
-              M<UInt8 *>((int)pvVar4 + 0x58) = pVVar2;
-              GH_OSIncrementAtomic(M<int>(pVVar2 + 0x14) + 0x10);
+            else if (bufferType != '\x02') {
+              M<UInt32>((int)texture + 0x50) = auxValue;
+              M<UInt8 *>((int)texture + 0x58) = agpTexture;
+              GH_OSIncrementAtomic(M<int>(agpTexture + 0x14) + 0x10);
             }
-            M<UInt32>((int)pvVar4 + 0x3c) = M<UInt32>(self + 0x24);
-            M<void *>(self + 0x24) = pvVar4;
-            uVar8 = VCALL(*piVar5, 0xd0)(piVar5);
-            *param_5 = uVar8;
-            *param_6 = local_40;
+            M<UInt32>((int)texture + 0x3c) = M<UInt32>(self + 0x24);
+            M<void *>(self + 0x24) = texture;
+            uVar8 = VCALL(*memoryMap, 0xd0)(memoryMap);
+            *outDataAddressAlias = uVar8;
+            *outSharedUserAddrAlias = clientUserAddr;
             M<int>(M<int>(self + 0xc) + 0x72c) = M<int>(M<int>(self + 0xc) + 0x72c) + 1;
             iVar6 = M<int>(self + 0xc);
             if (self == M<UInt8 *>(iVar6 + 0x6c)) {
               iVar1 = M<int>(iVar6 + 0x70);
-              M<int>(M<int>((int)pvVar4 + 0x14) + 4) = iVar1;
+              M<int>(M<int>((int)texture + 0x14) + 4) = iVar1;
               M<int>(iVar6 + 0x70) = iVar1 + 1;
-              return (VendorTextureBuffer *)(pvVar4);
+              return (VendorTextureBuffer *)(texture);
             }
-            return (VendorTextureBuffer *)(pvVar4);
+            return (VendorTextureBuffer *)(texture);
           }
-          this->free_buf_handle(pvVar4,*M<UInt32 *>((int)pvVar4 + 0x14));
+          this->free_buf_handle(texture,*M<UInt32 *>((int)texture + 0x14));
           VCALL(*piVar3, 0x18)(piVar3);
-          M<UInt32>((int)pvVar4 + 8) = 0;
+          M<UInt32>((int)texture + 8) = 0;
           goto joined_r0x0001834c;
         }
-        this->free_buf_handle(pvVar4,local_48);
+        this->free_buf_handle(texture,handle);
       }
       VCALL(*piVar3, 0x18)(piVar3);
-      M<UInt32>((int)pvVar4 + 8) = 0;
+      M<UInt32>((int)texture + 8) = 0;
     }
-    if ((pVVar2 != (UInt8 *)0x0) && (M<int>(M<int>(pVVar2 + 0x14) + 0x10) == 0)) {
-      this->delete_texture((VendorTextureBuffer *)(pVVar2));
+    if ((agpTexture != (UInt8 *)0x0) && (M<int>(M<int>(agpTexture + 0x14) + 0x10) == 0)) {
+      this->delete_texture((VendorTextureBuffer *)(agpTexture));
     }
-    VCALL(*M<int *>(self + 0xc), 0x574)(M<int *>(self + 0xc),pvVar4,0x80);
+    VCALL(*M<int *>(self + 0xc), 0x574)(M<int *>(self + 0xc),texture,0x80);
     return (VendorTextureBuffer *)((void *)0x0);
   }
 joined_r0x0001834c:
-  if ((pVVar2 != (UInt8 *)0x0) && (M<int>(M<int>(pVVar2 + 0x14) + 0x10) == 0)) {
-    this->delete_texture((VendorTextureBuffer *)(pVVar2));
+  if ((agpTexture != (UInt8 *)0x0) && (M<int>(M<int>(agpTexture + 0x14) + 0x10) == 0)) {
+    this->delete_texture((VendorTextureBuffer *)(agpTexture));
     return (VendorTextureBuffer *)((void *)0x0);
   }
   return (VendorTextureBuffer *)((void *)0x0);

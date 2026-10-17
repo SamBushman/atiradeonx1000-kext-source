@@ -31,14 +31,14 @@ extern "C" UInt32 GH_IOFree(...) asm("_IOFree");
 void IOATIR500Shared::free_handles() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 accel;
   
   GH_IOFree(M<UInt32>(self + 0x10),
                M<UInt32>(self + 0x14) * 4 + (M<UInt32>(self + 0x14) >> 3));
-  iVar1 = M<SInt32>(self + 0xc);
-  if (iVar1 != 0) {
-    M<UInt32>(iVar1 + 0x808) =
-         M<SInt32>(iVar1 + 0x808) - (M<UInt32>(self + 0x14) * 4 + (M<UInt32>(self + 0x14) >> 3));
+  accel = M<SInt32>(self + 0xc);
+  if (accel != 0) {
+    M<UInt32>(accel + 0x808) =
+         M<SInt32>(accel + 0x808) - (M<UInt32>(self + 0x14) * 4 + (M<UInt32>(self + 0x14) >> 3));
   }
   return;
 }

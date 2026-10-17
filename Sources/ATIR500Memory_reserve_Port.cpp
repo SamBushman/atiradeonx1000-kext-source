@@ -27,70 +27,70 @@
 
 
 /* real addr 0x19270 */
-UInt32 ATIR500Memory::reserve(GLKMemoryElement *real_param_1, UInt32 param_2, UInt32 param_3) {
+UInt32 ATIR500Memory::reserve(GLKMemoryElement *elem, UInt32 offset, UInt32 size) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *elemBytes = reinterpret_cast<UInt8 *>(elem);
 
   UInt32 *puVar1;
   SInt32 iVar2;
-  UInt32 uVar3;
+  UInt32 reserveEnd;
   SInt32 *piVar4;
-  SInt32 *piVar5;
+  SInt32 *node;
   
   if ((M<SInt32>(self + 0xc) != 0) || (iVar2 = this->add_to_stack(), iVar2 != 0)) {
-    uVar3 = param_2 + param_3;
+    reserveEnd = offset + size;
     piVar4 = *(SInt32 **)*M<UInt32 *>(self + 8);
 joined_r0x000192c4:
     if (piVar4 != (SInt32 *)0x0) {
-      while (piVar5 = piVar4, piVar5[3] < 0) {
-        piVar4 = (SInt32 *)*piVar5;
-        if (param_2 < (UInt32)piVar5[2]) goto joined_r0x000192c4;
-        if (uVar3 <= (UInt32)piVar4[2]) {
-          M<UInt32>(param_1 + 8) = param_2;
-          puVar1 = (UInt32 *)piVar5[1];
-          M<UInt32>(param_1 + 0xc) = 0;
-          if (param_2 != piVar5[2]) {
-            if (piVar4[2] == uVar3) {
-              M<SInt32 *>(param_1) = piVar4;
-              M<SInt32 *>(param_1 + 4) = piVar5;
-              *piVar5 = (SInt32)param_1;
-              piVar4[1] = (SInt32)param_1;
+      while (node = piVar4, node[3] < 0) {
+        piVar4 = (SInt32 *)*node;
+        if (offset < (UInt32)node[2]) goto joined_r0x000192c4;
+        if (reserveEnd <= (UInt32)piVar4[2]) {
+          M<UInt32>(elemBytes + 8) = offset;
+          puVar1 = (UInt32 *)node[1];
+          M<UInt32>(elemBytes + 0xc) = 0;
+          if (offset != node[2]) {
+            if (piVar4[2] == reserveEnd) {
+              M<SInt32 *>(elemBytes) = piVar4;
+              M<SInt32 *>(elemBytes + 4) = node;
+              *node = (SInt32)elemBytes;
+              piVar4[1] = (SInt32)elemBytes;
               return 1;
             }
             puVar1 = M<UInt32 *>(self + 0xc);
             M<UInt32>(self + 0xc) = *puVar1;
             *puVar1 = (UInt32)(piVar4);
             piVar4[1] = (SInt32)puVar1;
-            M<UInt32 *>(param_1) = puVar1;
-            puVar1[1] = (UInt32)(param_1);
+            M<UInt32 *>(elemBytes) = puVar1;
+            puVar1[1] = (UInt32)(elemBytes);
             puVar1[3] = 0x80000000;
-            puVar1[2] = uVar3;
-            *piVar5 = (SInt32)param_1;
-            M<SInt32 *>(param_1 + 4) = piVar5;
+            puVar1[2] = reserveEnd;
+            *node = (SInt32)elemBytes;
+            M<SInt32 *>(elemBytes + 4) = node;
             return 1;
           }
-          if (uVar3 == piVar4[2]) {
-            M<SInt32 *>(param_1) = piVar4;
-            M<UInt32 *>(param_1 + 4) = puVar1;
-            *puVar1 = (UInt32)(param_1);
-            piVar4[1] = (SInt32)param_1;
+          if (reserveEnd == piVar4[2]) {
+            M<SInt32 *>(elemBytes) = piVar4;
+            M<UInt32 *>(elemBytes + 4) = puVar1;
+            *puVar1 = (UInt32)(elemBytes);
+            piVar4[1] = (SInt32)elemBytes;
             iVar2 = M<SInt32>(self + 0xc);
-            piVar5[3] = 0;
-            piVar5[1] = 0;
-            piVar5[2] = 0;
-            *piVar5 = iVar2;
-            M<SInt32 *>(self + 0xc) = piVar5;
+            node[3] = 0;
+            node[1] = 0;
+            node[2] = 0;
+            *node = iVar2;
+            M<SInt32 *>(self + 0xc) = node;
             return 1;
           }
-          M<SInt32 *>(param_1) = piVar5;
-          M<UInt32 *>(param_1 + 4) = puVar1;
-          piVar5[2] = uVar3;
-          *puVar1 = (UInt32)(param_1);
-          piVar5[1] = (SInt32)param_1;
+          M<SInt32 *>(elemBytes) = node;
+          M<UInt32 *>(elemBytes + 4) = puVar1;
+          node[2] = reserveEnd;
+          *puVar1 = (UInt32)(elemBytes);
+          node[1] = (SInt32)elemBytes;
           return 1;
         }
       }
-      piVar4 = (SInt32 *)*piVar5;
+      piVar4 = (SInt32 *)*node;
       goto joined_r0x000192c4;
     }
   }

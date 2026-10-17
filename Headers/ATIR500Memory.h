@@ -148,15 +148,16 @@ public:
      *   - (UInt32 poolSize) - real addr 0x18e00. Bootstraps a single
      *     real region spanning the whole pool, offset range
      *     [0, poolSize).
-     *   - (UInt32 regionOffset, UInt32 regionSize, UInt32 poolSize) -
-     *     real addr 0x18f60. Same bootstrap, but real logic conditional
-     *     on `regionSize != 0` splits the pool into TWO initial regions:
-     *     a reserved lower boundary node describing
-     *     [0, regionOffset+regionSize) and only carves the actual usable
-     *     free region starting past it - used by real callers that need
-     *     to reserve a real fixed low range of the pool up front (the
-     *     third parameter, `poolSize`, is stored into the region's own
-     *     real per-node data as the pool's total real extent).
+     *   - (UInt32 poolSize, UInt32 reservedOffset, UInt32 reservedSize) -
+     *     real addr 0x18f60. Same bootstrap, but the pool starts with a
+     *     reserved range [reservedOffset, reservedOffset+reservedSize)
+     *     (a non-free boundary node at reservedOffset, and the FREE node
+     *     starting at reservedOffset+reservedSize); the first parameter,
+     *     `poolSize`, is stored as the offset of the last boundary node,
+     *     the pool's total extent - exactly where the 1-parameter
+     *     overload stores its own `poolSize`. (This declaration used to
+     *     read (regionOffset, regionSize, poolSize), a positional
+     *     guess the body contradicts; no caller of this overload was found.)
      * Both real bodies: call this object's own virtual `init()` first (a
      * genuine vtable call through `this`, slot +0x48 of ATIR500Memory's own
      * vtable - CORRECTED, issue #58 follow-up; issue #52 had misread the
@@ -181,7 +182,7 @@ public:
      * each function's own body below for the literal real arithmetic.
      */
     bool init_pool(UInt32 poolSize);
-    bool init_pool(UInt32 regionOffset, UInt32 regionSize, UInt32 poolSize);
+    bool init_pool(UInt32 poolSize, UInt32 reservedOffset, UInt32 reservedSize);
 
     /*
      * free - CONFIRMED real body, real addr 0x19120. Walks and frees the

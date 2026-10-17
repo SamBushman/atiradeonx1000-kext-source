@@ -1,0 +1,53 @@
+# ATIR500Memory remap (fork S2): placeholder -> real names, applied by Tools/apply_renames.py. Parameter rows generated from the class header by Tools/renames/gen_param_rows.py, except init_pool@0x18f60 (the header's parameter order was wrong; see below).
+# kind	target	old	new	tier	evidence
+def	ATIR500Memory::alloc@0x19430	real_param_1	elem	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x19430	param_1	elemBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Memory::alloc@0x19430	param_2	size	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x19430	param_3	alignment	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x195f0	real_param_1	elem	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x195f0	param_1	elemBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Memory::alloc@0x195f0	param_2	size	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x195f0	param_3	alignment	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x195f0	param_4	rangeStart	INFERRED	name from the class header declaration
+def	ATIR500Memory::alloc@0x195f0	param_5	rangeSize	INFERRED	name from the class header declaration
+def	ATIR500Memory::dealloc@0x197d0	real_param_1	elem	INFERRED	name from the class header declaration
+def	ATIR500Memory::dealloc@0x197d0	param_1	elemBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Memory::init_pool@0x18e00	param_1	poolSize	INFERRED	name from the class header declaration
+def	ATIR500Memory::reserve@0x19270	real_param_1	elem	INFERRED	name from the class header declaration
+def	ATIR500Memory::reserve@0x19270	param_1	elemBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500Memory::reserve@0x19270	param_2	offset	INFERRED	name from the class header declaration
+def	ATIR500Memory::reserve@0x19270	param_3	size	INFERRED	name from the class header declaration
+def	ATIR500Memory::init_pool@0x18f60	param_1	poolSize	CONFIRMED	stored as the offset of the LAST boundary node (piVar7[10]), exactly where the 1-parameter overload stores its poolSize (iVar2+0x3c); the header's position-order guess (regionOffset, regionSize, poolSize) is wrong
+def	ATIR500Memory::init_pool@0x18f60	param_2	reservedOffset	CONFIRMED	offset of the first node (piVar7[2]) that starts the reserved, non-free range
+def	ATIR500Memory::init_pool@0x18f60	param_3	reservedSize	CONFIRMED	added to param_2 to give the offset of the FREE node that follows (piVar7[6] = param_2 + param_3, freeFlag 0x80000000)
+def	ATIR500Memory::init_pool@0x18f60	uVar3	result	CONFIRMED	the function's return value (0 on init()/allocation failure, 1 on success)
+def	ATIR500Memory::init_pool@0x18f60	puVar2	newChunk	CONFIRMED	the IOMallocAligned(0x204, 0x20) result stored to chunkList (this+0x10)
+def	ATIR500Memory::init_pool@0x18f60	piVar4	chunkEnd	CONFIRMED	chunk + 500 (0x1f4): the end of the spare-node run, compared with the carve cursor and zeroed as the terminator
+def	ATIR500Memory::init_pool@0x18e00	uVar4	result	CONFIRMED	the function's return value (0 on failure, 1 on success)
+def	ATIR500Memory::add_to_stack@0x191b0	puVar2	chunk	CONFIRMED	the IOMallocAligned(0x204, 0x20) result, linked at the head of chunkList (this+0x10)
+def	ATIR500Memory::add_to_stack@0x191b0	uVar1	result	CONFIRMED	the function's return value (0 if the allocation failed, 1 otherwise)
+def	ATIR500Memory::add_to_stack@0x191b0	puVar4	node	INFERRED	the carve cursor: starts at the first spare BoundaryNode of the new chunk (chunk + 4 bytes) and advances 0x10 bytes per record
+def	ATIR500Memory::alloc@0x19430	uVar9	alignMask	CONFIRMED	alignment - 1 (0 for alignment 0); stored & 0xffff at elem+0xc, which the header names alignMask
+def	ATIR500Memory::alloc@0x19430	uVar6	allocOffset	CONFIRMED	the aligned start offset; stored at elem+8 (the header's `offset`)
+def	ATIR500Memory::alloc@0x19430	uVar5	allocEnd	INFERRED	allocOffset + size: compared with the next node's offset and stored as the leftover node's offset
+def	ATIR500Memory::alloc@0x19430	puVar8	freeNode	CONFIRMED	the free boundary node (freeFlag top bit set) whose region the allocation is carved from
+def	ATIR500Memory::alloc@0x19430	puVar7	nextNode	CONFIRMED	freeNode->next: the boundary that ends the free region (region = freeNode.offset .. nextNode.offset)
+def	ATIR500Memory::alloc@0x19430	uVar4	result	CONFIRMED	the function's return value (0 when nothing fits, 1 when allocated)
+def	ATIR500Memory::alloc@0x19430	uVar1	oldSpareHead	CONFIRMED	the previous head of spareNodeStack, written to the recycled node's next before the node is pushed back
+def	ATIR500Memory::alloc@0x19430	iVar3	refilled	INFERRED	the add_to_stack() result (0 = could not get more spare nodes)
+def	ATIR500Memory::alloc@0x195f0	uVar3	alignMask	CONFIRMED	alignment - 1 (0 for alignment 0); stored & 0xffff at elem+0xc
+def	ATIR500Memory::alloc@0x195f0	uVar6	allocOffset	CONFIRMED	the start offset (the range start if the free node begins below it, else the aligned node offset); stored at elem+8
+def	ATIR500Memory::alloc@0x195f0	uVar4	allocEnd	INFERRED	allocOffset + size
+def	ATIR500Memory::alloc@0x195f0	puVar8	freeNode	CONFIRMED	the free boundary node the allocation is carved from
+def	ATIR500Memory::alloc@0x195f0	puVar7	nextNode	CONFIRMED	freeNode->next: the boundary that ends the free region
+def	ATIR500Memory::alloc@0x195f0	uVar1	oldSpareHead	CONFIRMED	the previous head of spareNodeStack, written to the recycled node's next before the node is pushed back
+def	ATIR500Memory::alloc@0x195f0	iVar2	refilled	INFERRED	the add_to_stack() result (0 = could not get more spare nodes)
+def	ATIR500Memory::dealloc@0x197d0	piVar4	node	CONFIRMED	elem+0: the element's `node` back-pointer (the boundary node ending the block)
+def	ATIR500Memory::dealloc@0x197d0	piVar3	nodePrev	CONFIRMED	elem+4: the element's `nodePrev` back-pointer (the boundary node starting the block)
+def	ATIR500Memory::dealloc@0x197d0	puVar1	spareNode	CONFIRMED	popped from spareNodeStack to become the new free boundary in the neither-neighbour-is-free case
+def	ATIR500Memory::dealloc@0x197d0	iVar2	refilled	INFERRED	the add_to_stack() result (0 = could not get more spare nodes)
+def	ATIR500Memory::reserve@0x19270	uVar3	reserveEnd	CONFIRMED	offset + size: compared with the next node's offset and stored as the leftover node's offset
+def	ATIR500Memory::reserve@0x19270	piVar5	node	CONFIRMED	the boundary node under test (the free node whose region should contain the reserved range)
+def	ATIR500Memory::total_free@0x19910	iVar2	total	CONFIRMED	the running sum returned: the sizes of all free regions
+def	ATIR500Memory::total_free@0x19910	piVar1	node	CONFIRMED	the boundary node being summed (free if its flag is negative)
+def	ATIR500Memory::total_free@0x19910	piVar3	nextNode	CONFIRMED	node->next: the node that ends the region (region size = nextNode.offset - node.offset)

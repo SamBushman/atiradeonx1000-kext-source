@@ -32,36 +32,36 @@ void IOATIR500Shared::free() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt8 VVar1;
-  SInt32 *piVar2;
-  UInt8 *pVVar3;
+  SInt32 *chunk;
+  UInt8 *texture;
   SInt32 iVar4;
-  UInt8 *this_00;
-  SInt32 *piVar5;
-  UInt8 *pVVar6;
+  UInt8 *accel;
+  SInt32 *nextChunk;
+  UInt8 *nextTexture;
   
-  pVVar3 = M<UInt8 *>(self + 0x24);
+  texture = M<UInt8 *>(self + 0x24);
   iVar4 = 0;
-  if (pVVar3 != (UInt8 *)0x0) {
+  if (texture != (UInt8 *)0x0) {
     do {
-      if (pVVar3[0x20] == 0x4) {
-        pVVar6 = M<UInt8 *>(pVVar3 + 0x3c);
+      if (texture[0x20] == 0x4) {
+        nextTexture = M<UInt8 *>(texture + 0x3c);
       }
       else {
-        pVVar6 = M<UInt8 *>(pVVar3 + 0x3c);
-        if (pVVar6 != (UInt8 *)0x0) {
-          VVar1 = pVVar6[0x20];
+        nextTexture = M<UInt8 *>(texture + 0x3c);
+        if (nextTexture != (UInt8 *)0x0) {
+          VVar1 = nextTexture[0x20];
           while ((VVar1 == 0x4 &&
-                 (pVVar6 = M<UInt8 *>(pVVar6 + 0x3c),
-                 pVVar6 != (UInt8 *)0x0))) {
-            VVar1 = pVVar6[0x20];
+                 (nextTexture = M<UInt8 *>(nextTexture + 0x3c),
+                 nextTexture != (UInt8 *)0x0))) {
+            VVar1 = nextTexture[0x20];
           }
         }
-        M<UInt32>(M<SInt32>(pVVar3 + 0x14) + 0x10) =
-             (UInt32)M<UInt16>(M<SInt32>(pVVar3 + 0x14) + 0x12);
-        this->delete_texture((VendorTextureBuffer *)(pVVar3));
+        M<UInt32>(M<SInt32>(texture + 0x14) + 0x10) =
+             (UInt32)M<UInt16>(M<SInt32>(texture + 0x14) + 0x12);
+        this->delete_texture((VendorTextureBuffer *)(texture));
       }
-      pVVar3 = pVVar6;
-    } while (pVVar6 != (UInt8 *)0x0);
+      texture = nextTexture;
+    } while (nextTexture != (UInt8 *)0x0);
     iVar4 = M<SInt32>(self + 0x24);
   }
   while (iVar4 != 0) {
@@ -69,22 +69,22 @@ void IOATIR500Shared::free() {
     this->delete_texture((VendorTextureBuffer *)(M<UInt8 *>(self + 0x24)));
     iVar4 = M<SInt32>(self + 0x24);
   }
-  this_00 = M<UInt8 *>(self + 0xc);
-  if (self == M<UInt8 *>(this_00 + 0x6c)) {
-    M<UInt32>(this_00 + 0x6c) = 0;
+  accel = M<UInt8 *>(self + 0xc);
+  if (self == M<UInt8 *>(accel + 0x6c)) {
+    M<UInt32>(accel + 0x6c) = 0;
     M<UInt32>(M<SInt32>(self + 0xc) + 0x70) = 0;
-    this_00 = M<UInt8 *>(self + 0xc);
+    accel = M<UInt8 *>(self + 0xc);
   }
-  ((IOATIR500Accelerator *)(this_00))->freeOrphanTexture(true);
-  piVar2 = (SInt32 *)M<SInt32>(self + 0x20);
-  while (piVar2 != (SInt32 *)0x0) {
-    piVar5 = (SInt32 *)*piVar2;
-    VCALL(*(SInt32 *)piVar2[3], 0x18)(piVar2[3]);
-    VCALL(*(SInt32 *)piVar2[2], 0x18)(piVar2[2]);
-    VCALL(*(SInt32 *)piVar2[1], 0x18)(piVar2[1]);
-    GH_IOFree(piVar2,0x1c);
+  ((IOATIR500Accelerator *)(accel))->freeOrphanTexture(true);
+  chunk = (SInt32 *)M<SInt32>(self + 0x20);
+  while (chunk != (SInt32 *)0x0) {
+    nextChunk = (SInt32 *)*chunk;
+    VCALL(*(SInt32 *)chunk[3], 0x18)(chunk[3]);
+    VCALL(*(SInt32 *)chunk[2], 0x18)(chunk[2]);
+    VCALL(*(SInt32 *)chunk[1], 0x18)(chunk[1]);
+    GH_IOFree(chunk,0x1c);
     iVar4 = M<SInt32>(self + 0xc);
-    piVar2 = piVar5;
+    chunk = nextChunk;
     if (iVar4 != 0) {
       M<SInt32>(iVar4 + 0x808) = M<SInt32>(iVar4 + 0x808) + -0x1c;
     }

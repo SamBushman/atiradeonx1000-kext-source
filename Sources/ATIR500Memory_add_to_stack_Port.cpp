@@ -31,37 +31,37 @@ extern "C" UInt32 GH_IOMallocAligned(...) asm("_IOMallocAligned");
 bool ATIR500Memory::add_to_stack() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  UInt32 *puVar2;
+  UInt32 result;
+  UInt32 *chunk;
   UInt32 *puVar3;
-  UInt32 *puVar4;
+  UInt32 *node;
   SInt32 iVar5;
   
-  puVar2 = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
-  uVar1 = 0;
-  if (puVar2 != (UInt32 *)0x0) {
-    puVar4 = puVar2 + 1;
-    *puVar2 = M<UInt32>(self + 0x10);
-    M<UInt32 *>(self + 0xc) = puVar4;
-    M<UInt32 *>(self + 0x10) = puVar2;
-    puVar2[2] = 0;
-    puVar2[3] = 0;
-    puVar2[4] = 0;
-    if (puVar4 != puVar2 + 0x7d) {
-      puVar3 = puVar2 + 7;
+  chunk = (UInt32 *)GH_IOMallocAligned(0x204,0x20);
+  result = 0;
+  if (chunk != (UInt32 *)0x0) {
+    node = chunk + 1;
+    *chunk = M<UInt32>(self + 0x10);
+    M<UInt32 *>(self + 0xc) = node;
+    M<UInt32 *>(self + 0x10) = chunk;
+    chunk[2] = 0;
+    chunk[3] = 0;
+    chunk[4] = 0;
+    if (node != chunk + 0x7d) {
+      puVar3 = chunk + 7;
       iVar5 = 0x1f;
       do {
         *puVar3 = 0;
         puVar3[1] = 0;
         puVar3[-1] = 0;
-        *puVar4 = (UInt32)(puVar4 + 4);
+        *node = (UInt32)(node + 4);
         puVar3 = puVar3 + 4;
         iVar5 = iVar5 + -1;
-        puVar4 = puVar4 + 4;
+        node = node + 4;
       } while (iVar5 != 0);
     }
-    uVar1 = 1;
-    puVar2[0x7d] = 0;
+    result = 1;
+    chunk[0x7d] = 0;
   }
-  return uVar1;
+  return result;
 }
