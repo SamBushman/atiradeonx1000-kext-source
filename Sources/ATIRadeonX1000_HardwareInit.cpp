@@ -193,7 +193,10 @@ bool ATIRadeonX1000::set_display_mode_and_vram() {
   /* One 0xa8-byte stack object (r1+0x58..): Ghidra named its slots separately. getCurrentDisplayMode fills f8/f4 and getPixelInformation fills
    `pix` AND the two words after it (L.f54 / L.f50), so they must be one object: as separate scalars the compiler saw L.f54/L.f50
    as never written and deleted the branches that read them (4 of the 10 ATIR500Memory::reserve calls, #85). */
-  struct { UInt32 f8; UInt32 f4; UInt8 pix[156]; UInt32 f54; UInt32 f50; } L;
+  struct { UInt32 f8; UInt32 f4; UInt8 pix[156]; UInt32 f54; UInt32 f50; UInt32 reserved[3]; } L;
+  /* `reserved` is the tail of IOPixelInformation (sizeof 0xb0 = pix + activeWidth/activeHeight + reserved[3]): getPixelInformation fills all of it, and
+   without these 12 bytes it overran L into whatever the compiler placed next (spill slots) - harmless by luck in the 2c54898 layout, a zeroed
+   GLKMemoryElement* (NULL deref in ATIR500Memory::reserve) once a rename changed the slot order (hot-swap panic 2026-10-17). */
   
   self[0x168] = 0x0;
   M<UInt16>(self + 0x14e) = 1;

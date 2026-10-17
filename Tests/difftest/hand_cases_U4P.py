@@ -29,6 +29,10 @@ def display_regs(rng):
     return RegisterFile(rng, default)
 
 
+# getPixelInformation(.., &pix) writes 0xac bytes from pix on the real hardware (activeWidth/Height + reserved[0..1]); derived from the 2026-10-17 hot-swap panic
+PIXINFO = {'vtable slot +0x5ec': {4: 0xac}}
+
+
 def display_mock(m, name, k):
     if 'ATIR500Memory' in name and ('init_pool' in name or 'reserve' in name):
         return 1                                                            # the pool methods succeed
@@ -106,7 +110,7 @@ def w_start(m, rng):
 
 
 CASES = [
-    Case('ATIRadeonX1000::set_display_mode_and_vram', w_set_display, ret='bool', seeds=200, mock=display_mock, plain_words=True, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8]}),
+    Case('ATIRadeonX1000::set_display_mode_and_vram', w_set_display, ret='bool', seeds=200, mock=display_mock, plain_words=True, ignore_args={'IOLog': [2, 3, 4, 5, 6, 7, 8]}, out_extents=PIXINFO),
 ]
 
 # start(): matches stock since the #184 fix (chip-id strobe block uses word accesses). Before it, the rebuilt code did byte accesses.

@@ -324,6 +324,7 @@ class Machine:
         self.image, self.reg, self.seed, self.lazy, self.limit = image, reg, seed, lazy, limit
         self.transparent = re.compile(transparent) if transparent else None
         self.ignore_args = {}
+        self.out_extents = {}       # Case.out_extents
         self.exclusive = set()      # functions that exist only in this image: the other build inlined them, so they run for real here
         self.stack_args = stack_args or {}
         self.mock_policy = mock_policy or default_mock
@@ -538,6 +539,12 @@ class Machine:
         self.events.append(['C', name, tuple(vals)])
         if self.want_snapshots:
             self.snapshots.append(self.memory_diff())
+        for key, spec in self.out_extents.items():
+            if key in name:
+                for idx, n in spec.items():       # the callee's real output extent: fill it with a pattern first, so a caller whose local object is shorter is corrupted visibly
+                    a = regs[idx]
+                    if 0x1000 <= a < 0xf0000000:
+                        uc.mem_write(a, bytes(((self.seed * 31 + 0x5a + 7 * i) & 0xff) | 1 for i in range(n)))
         uc.reg_write(UC_PPC_REG_3, self.mock_policy(self, name, k) & 0xffffffff)
 
     def normalise(self, v, name, index, kind='p'):
@@ -774,12 +781,17 @@ class Case:
     ignore_args {callee name substring: [argument indexes]} not compared: the call site never sets that register (the callee's declared parameter is unused, so
               the register holds whatever was left in it)
     stack_args  {callee name substring: {argument index: bytes}} for pointers to locals that the callee reads (their contents are compared)
+    out_extents {callee name substring: {argument index: bytes}} the REAL number of bytes the callee writes through that pointer argument. Before the (mocked) callee runs,
+              that range is filled with a pattern, so a caller whose local object is shorter than the callee's real output corrupts its neighbours - which, unlike
+              the mock's own writes, depends on the compiler's stack layout and shows up as a stock/rebuilt difference (2026-10-17 hot-swap panic: IOPixelInformation).
+              Declare it for every callee that fills a caller-local struct.
     plain_words True: a stored word that falls inside the kext image's address range is a NUMBER (a size, an offset, a packet word), not a pointer to the
               kext's own data, and is compared as such (default: such words are compared by the name of what they point at, because the two builds lay
               their data out differently)
     """
-    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None, plain_words=False):
+    def __init__(self, function, world, ret='u32', seeds=16, signature=None, lazy='zero', limit=150000, mock=None, name=None, stack_args=None, replay=False, transparent=DEFAULT_TRANSPARENT, ignore_args=None, plain_words=False, out_extents=None):
         self.ignore_args = ignore_args or {}
+        self.out_extents = out_extents or {}
         self.plain_words = plain_words
         self.transparent = transparent
         self.replay = replay
@@ -915,6 +927,7 @@ def run_case(case, stock, rebuilt, reg, verbose=False, strict_order=False, stric
         for img, sym in ((stock, sym_s), (rebuilt, sym_r)):
             m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
             m.ignore_args = case.ignore_args
+            m.out_extents = case.out_extents
             m.plain_words = case.plain_words
             m.want_snapshots = strict_calls
             m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
@@ -940,6 +953,7 @@ def explain(case, stock, rebuilt, reg, seed):
         sym = find_symbol(img, case.function, case.signature)
         m = Machine(img, reg, seed, lazy=case.lazy, mock_policy=case.mock, limit=case.limit, stack_args=case.stack_args, transparent=case.transparent)
         m.ignore_args = case.ignore_args
+        m.out_extents = case.out_extents
         m.plain_words = case.plain_words
         m.exclusive = (set(stock.funcs) - set(rebuilt.funcs)) if img is stock else (set(rebuilt.funcs) - set(stock.funcs))
         rng = random.Random(seed * 7919 + zlib.crc32(case.name.encode()))
