@@ -137,7 +137,7 @@ public:
     void   initialize_GUI(void);                          /* real addr 0x1e0c0 */
     static void GPUSensorFunc(OSObject *owner, IOTimerEventSource *source); /* real addr 0x1e100 */
     bool   initialize_hardware(void);                     /* real addr 0x1f3c0 */
-    UInt32 submit_buffer_retired(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount); /* real addr 0x20700 */
+    UInt32 submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOffset, UInt32 dwordCount); /* real addr 0x20700 */
     static void SWDSFunc(OSObject *owner, IOTimerEventSource *source);      /* real addr 0x24340 */
     bool   SWDSInit(void);                                /* real addr 0x24670 */
     /*

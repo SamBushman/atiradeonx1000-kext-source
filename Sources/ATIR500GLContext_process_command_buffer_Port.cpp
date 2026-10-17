@@ -115,9 +115,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
   UInt8 in_cr0;
   UInt8 bVar80;
   UInt32 uVar81;
-  UInt32 pendingByteOffset;
-  UInt32 pendingDwordCount;
-  UInt32 local_380;
+  UInt32 streamOffset;
+  UInt32 pendingWords;
+  UInt32 reservedWords;
   UInt8 *local_37c;
   UInt8 *local_378;
   UInt8 local_374 [0x80];   /* the ATIR500SurfaceBuffer on the shipped stack (Ghidra shows 0x2c bytes here + M<UInt32>(local_374 + 0x2c) = its +0x2c word) */
@@ -187,9 +187,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
   UInt32 *trailerLastWord;
   
   puVar69 = M<UInt32 *>(self + 0x108);
-  pendingByteOffset = 0;
-  pendingDwordCount = 0xffffffff;
-  local_380 = 0;
+  streamOffset = 0;
+  pendingWords = 0xffffffff;
+  reservedWords = 0;
   M<UInt32 *>((UInt8 *)&trackBlk + 0x134) = puVar69 + 8;
   local_c8 = 0;
   local_c4 = 0;
@@ -199,9 +199,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
   M<UInt32 *>((UInt8 *)&trackBlk + 0x138) = M<UInt32 *>((UInt8 *)&trackBlk + 0x134) + puVar69[5];
   M<UInt32>((UInt8 *)&trackBlk + 0x18) = this->compute_sc_hyperz_en(*puVar69);
   M<UInt32>((UInt8 *)&trackBlk + 0x1c) = this->compute_zb_bw_cntl(puVar69[1]);
-  uVar55 = pendingDwordCount;
+  uVar55 = pendingWords;
   do {
-    pendingDwordCount = uVar55;
+    pendingWords = uVar55;
     uVar73 = *recordCursor;
     uVar63 = uVar73 & 0xffffff;
     iVar52 = uVar63 * 4;
@@ -228,7 +228,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
       ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
       iVar48 = M<SInt32>(pVVar70 + 0x14);
       if (M<char>(iVar48 + 0x14) != '\0') {
-        if (pendingDwordCount != 0) {
+        if (pendingWords != 0) {
           uVar38 = recordCursor[-1] >> 2;
           if (4 < uVar38) {
             uVar73 = 0x80000000;
@@ -242,15 +242,15 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
           recordCursor[-2] = 0x5c8;
           recordCursor[-1] = 0x20000;
           M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-               pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+               pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
           M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-          uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20),
-                              pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,pendingDwordCount);
-          uVar55 = pendingDwordCount;
+          uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20),
+                              streamOffset + M<SInt32>(self + 0xd0) + 0x20,pendingWords);
+          uVar55 = pendingWords;
           M<UInt32>(self + 0xdc) = uVar40;
-          local_380 = 0;
-          pendingDwordCount = 0;
-          pendingByteOffset = uVar55 * 4 + pendingByteOffset;
+          reservedWords = 0;
+          pendingWords = 0;
+          streamOffset = uVar55 * 4 + streamOffset;
         }
         this->alloc_and_load_texture((VendorTextureBuffer *)(pVVar70));
         if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -353,9 +353,9 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
           {
             bVar1 = true;
             uVar63 = 0;
-            pendingDwordCount = 0;
+            pendingWords = 0;
             M<UInt32>(M<SInt32>(self + 200) + 0x50) =
-                 M<SInt32>(M<SInt32>(self + 200) + 0x50) - local_380;
+                 M<SInt32>(M<SInt32>(self + 200) + 0x50) - reservedWords;
             goto LAB_0002c0b4;
           }
           M<SInt32>(pAVar45) = iVar49;
@@ -379,7 +379,7 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
           pAVar76 = local_374 + iVar33;
           ((IOATIR500GLContext *)((UInt8 *)self))->add_texture_to_stream((VendorTextureBuffer *)(M<UInt8 *>(local_374 + iVar33)));
           if (M<char>(M<SInt32>(M<SInt32>(local_374 + iVar33) + 0x14) + 0x14) != '\0') {
-            if (pendingDwordCount != 0) {
+            if (pendingWords != 0) {
               uVar73 = recordCursor[-1] >> 2;
               if (4 < uVar73) {
                 uVar75 = 0x80000000;
@@ -393,15 +393,15 @@ IOReturn ATIR500GLContext::process_command_buffer(VendorCommandDescriptor *descr
               recordCursor[-3] = 0;
               *trailerLastWord = 0x20000;
               M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                   pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                   pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
               M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
-                                  ,pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,pendingDwordCount);
-              uVar32 = pendingDwordCount;
+              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
+                                  ,streamOffset + M<SInt32>(self + 0xd0) + 0x20,pendingWords);
+              uVar32 = pendingWords;
               M<UInt32>(self + 0xdc) = uVar40;
-              local_380 = 0;
-              pendingDwordCount = 0;
-              pendingByteOffset = uVar32 * 4 + pendingByteOffset;
+              reservedWords = 0;
+              pendingWords = 0;
+              streamOffset = uVar32 * 4 + streamOffset;
             }
             this->alloc_and_load_texture((VendorTextureBuffer *)(M<UInt8 *>(pAVar76)));
             if (M<SInt32>(self + 0xd0) == 0) {
@@ -847,7 +847,7 @@ LAB_0002cb94:
                 M<UInt8 *>(self + 0x328) = pVVar70;
               }
               if (M<SInt32>(pVVar70 + 4) == 0) {
-                if (pendingDwordCount != 0) {
+                if (pendingWords != 0) {
                   uVar38 = recordCursor[-1] >> 2;
                   if (4 < uVar38) {
                     uVar73 = 0x80000000;
@@ -861,16 +861,16 @@ LAB_0002cb94:
                   recordCursor[-2] = 0x5c8;
                   recordCursor[-1] = 0x20000;
                   M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                       pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                       pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
                   M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-                  uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
-                                               0x20),pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,
-                                      pendingDwordCount);
-                  uVar55 = pendingDwordCount;
+                  uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
+                                               0x20),streamOffset + M<SInt32>(self + 0xd0) + 0x20,
+                                      pendingWords);
+                  uVar55 = pendingWords;
                   M<UInt32>(self + 0xdc) = uVar40;
-                  local_380 = 0;
-                  pendingDwordCount = 0;
-                  pendingByteOffset = uVar55 * 4 + pendingByteOffset;
+                  reservedWords = 0;
+                  pendingWords = 0;
+                  streamOffset = uVar55 * 4 + streamOffset;
                 }
                 ((IOATIR500GLContext *)((UInt8 *)self))->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)local_378));
                 if (M<SInt32>(self + 0xd0) == 0) {
@@ -1155,7 +1155,7 @@ LAB_0002f978:
           local_378 = pVVar70;
           ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
           if (M<char>(M<SInt32>(local_378 + 0x14) + 0x14) != '\0') {
-            if (pendingDwordCount != 0) {
+            if (pendingWords != 0) {
               uVar38 = recordCursor[-1] >> 2;
               if (4 < uVar38) {
                 uVar73 = 0x80000000;
@@ -1169,13 +1169,13 @@ LAB_0002f978:
               recordCursor[-2] = 0x5c8;
               recordCursor[-1] = 0x20000;
               M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                   pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
-                                  ,pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,pendingDwordCount);
-              uVar58 = pendingDwordCount;
+                   pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
+                                  ,streamOffset + M<SInt32>(self + 0xd0) + 0x20,pendingWords);
+              uVar58 = pendingWords;
               M<UInt32>(self + 0xdc) = uVar40;
-              pendingDwordCount = 0;
-              pendingByteOffset = uVar58 * 4 + pendingByteOffset;
+              pendingWords = 0;
+              streamOffset = uVar58 * 4 + streamOffset;
             }
             this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
             if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -1269,7 +1269,7 @@ LAB_00030994:
             }
             ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(local_378));
             if (M<char>(M<SInt32>(local_378 + 0x14) + 0x14) != '\0') {
-              if (pendingDwordCount != 0) {
+              if (pendingWords != 0) {
                 uVar73 = recordCursor[-1] >> 2;
                 if (4 < uVar73) {
                   uVar75 = 0x80000000;
@@ -1283,14 +1283,14 @@ LAB_00030994:
                 recordCursor[-2] = 0x5c8;
                 recordCursor[-1] = 0x20000;
                 M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                     pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-                uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
-                                             0x20),pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,
-                                    pendingDwordCount);
-                uVar61 = pendingDwordCount;
+                     pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
+                                             0x20),streamOffset + M<SInt32>(self + 0xd0) + 0x20,
+                                    pendingWords);
+                uVar61 = pendingWords;
                 M<UInt32>(self + 0xdc) = uVar40;
-                pendingDwordCount = 0;
-                pendingByteOffset = uVar61 * 4 + pendingByteOffset;
+                pendingWords = 0;
+                streamOffset = uVar61 * 4 + streamOffset;
               }
               this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
               if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -1407,7 +1407,7 @@ LAB_00030994:
                 local_378 = pVVar70;
                 ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
                 if (M<char>(M<SInt32>(local_378 + 0x14) + 0x14) != '\0') {
-                  if (pendingDwordCount != 0) {
+                  if (pendingWords != 0) {
                     uVar73 = recordCursor[-1] >> 2;
                     if (4 < uVar73) {
                       uVar75 = 0x80000000;
@@ -1421,14 +1421,14 @@ LAB_00030994:
                     recordCursor[-2] = 0x5c8;
                     recordCursor[-1] = 0x20000;
                     M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                         pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-                    uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
-                                                 0x20),pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,
-                                        pendingDwordCount);
-                    uVar58 = pendingDwordCount;
+                         pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                    uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
+                                                 0x20),streamOffset + M<SInt32>(self + 0xd0) + 0x20,
+                                        pendingWords);
+                    uVar58 = pendingWords;
                     M<UInt32>(self + 0xdc) = uVar40;
-                    pendingDwordCount = 0;
-                    pendingByteOffset = uVar58 * 4 + pendingByteOffset;
+                    pendingWords = 0;
+                    streamOffset = uVar58 * 4 + streamOffset;
                   }
                   this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
                   if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -1478,7 +1478,7 @@ LAB_000300b8:
               local_378 = pVVar70;
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
               if (M<char>(M<SInt32>(local_378 + 0x14) + 0x14) != '\0') {
-                if (pendingDwordCount != 0) {
+                if (pendingWords != 0) {
                   uVar38 = recordCursor[-1] >> 2;
                   if (4 < uVar38) {
                     uVar73 = 0x80000000;
@@ -1492,14 +1492,14 @@ LAB_000300b8:
                   recordCursor[-2] = 0x5c8;
                   recordCursor[-1] = 0x20000;
                   M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                       pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-                  uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
-                                               0x20),pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,
-                                      pendingDwordCount);
-                  uVar58 = pendingDwordCount;
+                       pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                  uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
+                                               0x20),streamOffset + M<SInt32>(self + 0xd0) + 0x20,
+                                      pendingWords);
+                  uVar58 = pendingWords;
                   M<UInt32>(self + 0xdc) = uVar40;
-                  pendingDwordCount = 0;
-                  pendingByteOffset = uVar58 * 4 + pendingByteOffset;
+                  pendingWords = 0;
+                  streamOffset = uVar58 * 4 + streamOffset;
                 }
                 this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
                 if (M<SInt32>(M<SInt32>(self + 200) + 0xb90) != 0) {
@@ -1530,7 +1530,7 @@ LAB_00030318:
             }
             else {
 LAB_00030fe0:
-              pendingDwordCount = 0;
+              pendingWords = 0;
               uVar63 = 0;
               iVar52 = 0;
             }
@@ -1547,7 +1547,7 @@ LAB_00030fe0:
                 local_378 = pVVar70;
                 ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
                 if (M<char>(M<SInt32>(local_378 + 0x14) + 0x14) != '\0') {
-                  if (pendingDwordCount != 0) {
+                  if (pendingWords != 0) {
                     uVar38 = recordCursor[-1] >> 2;
                     if (4 < uVar38) {
                       uVar73 = 0x80000000;
@@ -1561,14 +1561,14 @@ LAB_00030fe0:
                     recordCursor[-2] = 0x5c8;
                     recordCursor[-1] = 0x20000;
                     M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                         pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
-                    uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
-                                                 0x20),pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,
-                                        pendingDwordCount);
-                    uVar61 = pendingDwordCount;
+                         pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                    uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) +
+                                                 0x20),streamOffset + M<SInt32>(self + 0xd0) + 0x20,
+                                        pendingWords);
+                    uVar61 = pendingWords;
                     M<UInt32>(self + 0xdc) = uVar40;
-                    pendingDwordCount = 0;
-                    pendingByteOffset = uVar61 * 4 + pendingByteOffset;
+                    pendingWords = 0;
+                    streamOffset = uVar61 * 4 + streamOffset;
                   }
                   this->alloc_and_load_texture((VendorTextureBuffer *)(local_378));
                   if (M<SInt32>(self + 0xd0) == 0) {
@@ -1687,13 +1687,13 @@ LAB_00030fe0:
                                    (uVar63 * 4 + M<SInt32>(M<SInt32>(self + 0x88) + 0x10)),
                      local_37c == (UInt8 *)0x0)) {
                     uVar73 = 0;
-                    pendingDwordCount = 0;
+                    pendingWords = 0;
                     M<UInt32>(M<SInt32>(self + 200) + 0x50) =
-                         M<SInt32>(M<SInt32>(self + 200) + 0x50) - local_380;
+                         M<SInt32>(M<SInt32>(self + 200) + 0x50) - reservedWords;
                     goto LAB_0002e114;
                   }
                   ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(local_37c));
-                  this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&pendingByteOffset),(UInt32 *)(&pendingDwordCount),(UInt32 *)(&local_380),(register_tracking_state *)(trackingState));
+                  this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
                   uVar63 = puVar42[10] >> 0xf & 0x1fffe;
                   uVar15 = (UInt16)(1 << (puVar42[10] & 0x3f));
                   M<SInt16>(M<SInt32>(local_37c + 0x14) + 0x36) =
@@ -1746,7 +1746,7 @@ LAB_0002e114:
                  pVVar70 == (UInt8 *)0x0)) goto LAB_00030d40;
               local_37c = pVVar70;
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
-              this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&pendingByteOffset),(UInt32 *)(&pendingDwordCount),(UInt32 *)(&local_380),(register_tracking_state *)(trackingState));
+              this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
               uVar63 = M<UInt32>((SInt32)recordCursor + iVar52 + 0x10);
               uVar38 = uVar63 >> 0xf & 0x1fffe;
               uVar15 = (UInt16)(1 << (uVar63 & 0x3f));
@@ -1850,13 +1850,13 @@ LAB_00030d40:
                 uVar63 = 0;
                 iVar52 = 0;
                 M<UInt32>(M<SInt32>(self + 200) + 0x50) =
-                     M<SInt32>(M<SInt32>(self + 200) + 0x50) - local_380;
-                pendingDwordCount = 0;
+                     M<SInt32>(M<SInt32>(self + 200) + 0x50) - reservedWords;
+                pendingWords = 0;
                 goto LAB_00031340;
               }
               local_37c = pVVar70;
               ((IOATIR500GLContext *)(self))->add_texture_to_stream((VendorTextureBuffer *)(pVVar70));
-              this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&pendingByteOffset),(UInt32 *)(&pendingDwordCount),(UInt32 *)(&local_380),(register_tracking_state *)(trackingState));
+              this->get_texture((UInt32 *)(recordCursor),(VendorTextureBuffer *)(local_37c),(UInt32 *)(&streamOffset),(UInt32 *)(&pendingWords),(UInt32 *)(&reservedWords),(register_tracking_state *)(trackingState));
               uVar63 = puVar42[4] >> 0xf & 0x1fffe;
               uVar15 = (UInt16)(1 << (puVar42[4] & 0x3f));
               M<SInt16>(M<SInt32>(local_37c + 0x14) + 0x36) =
@@ -2152,7 +2152,7 @@ LAB_0002ef48:
           M<UInt32>(M<SInt32>(self + 0xc0) + uVar38) = uVar55;
           M<UInt32>(iVar59 + 0x50) = uVar55 + 1;
           M<UInt32>(uVar38 + M<SInt32>(self + 0xc0) + 4) = 0;
-          local_380 = local_380 + 1;
+          reservedWords = reservedWords + 1;
         }
         else if (uVar38 < 0x34000001) {
           if (uVar38 == 0x32000000) {
@@ -2531,17 +2531,17 @@ LAB_0002fe70:
       if (uVar38 != 0x2d000000) {
         if (uVar38 < 0x2d000001) {
           if (uVar38 == 0x2b000000) {
-            if (pendingDwordCount != 0) {
+            if (pendingWords != 0) {
               M<UInt32>(M<SInt32>(self + 200) + 0x704) =
-                   pendingDwordCount * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
+                   pendingWords * 4 + M<SInt32>(M<SInt32>(self + 200) + 0x704);
               M<UInt32>(M<SInt32>(self + 200) + 0xb94) = 1;
-              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
-                                  ,pendingByteOffset + M<SInt32>(self + 0xd0) + 0x20,pendingDwordCount);
+              uVar40 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->submit_buffer((UInt32 *)((streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20)
+                                  ,streamOffset + M<SInt32>(self + 0xd0) + 0x20,pendingWords);
               M<UInt32>(self + 0xdc) = uVar40;
-              iVar59 = pendingDwordCount * 4;
-              pendingDwordCount = 0;
-              pendingByteOffset = iVar59 + pendingByteOffset;
-              local_380 = 0;
+              iVar59 = pendingWords * 4;
+              pendingWords = 0;
+              streamOffset = iVar59 + streamOffset;
+              reservedWords = 0;
             }
             *recordCursor = 0x80000000;
           }
@@ -3176,19 +3176,19 @@ LAB_0002d820:
       M<UInt32>(M<SInt32>(self + 200) + 0x78) = 0;
     }
 LAB_00031340:
-    uVar55 = pendingDwordCount + uVar63;
+    uVar55 = pendingWords + uVar63;
     recordCursor = (UInt32 *)((SInt32)recordCursor + iVar52);
     if (uVar63 == 0) {
       if ((uVar55 & 1) != 0) {
         *recordCursor = 0x80000000;
-        uVar55 = pendingDwordCount + 1;
+        uVar55 = pendingWords + 1;
         recordCursor = recordCursor + 1;
       }
-      M<UInt32>(descriptorBytes) = (pendingByteOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20;
+      M<UInt32>(descriptorBytes) = (streamOffset & 0xfffffffc) + M<SInt32>(self + 0xe0) + 0x20;
       iVar52 = M<SInt32>(self + 0xd0);
       M<UInt32 *>(descriptorBytes + 0xc) = recordCursor;
       M<UInt32>(descriptorBytes + 8) = uVar55;
-      M<UInt32>(descriptorBytes + 4) = iVar52 + pendingByteOffset + 0x20;
+      M<UInt32>(descriptorBytes + 4) = iVar52 + streamOffset + 0x20;
       M<UInt32>(M<SInt32>(self + 200) + 0x78) = 0;
       return result;
     }

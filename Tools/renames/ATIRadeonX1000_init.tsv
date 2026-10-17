@@ -7,7 +7,7 @@ def	ATIRadeonX1000::GPUSensorFunc@0x1e100	param_1	ownerBytes	INFERRED	untyped al
 def	ATIRadeonX1000::GPUSensorFunc@0x1e100	param_2	source	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::start@0x1f750	param_1	provider	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_1	bufferStart	INFERRED	name from the class header declaration
-def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_2	bufferOffsetOrEnd	INFERRED	name from the class header declaration
+def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_2	gartOffset	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::submit_buffer_retired@0x20700	param_3	dwordCount	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::waitForRetiredTimeStamp@0x25080	param_1	tag	INFERRED	name from the class header declaration
 def	ATIRadeonX1000::waitForTimeStampNoLock@0x25360	param_1	tag	INFERRED	name from the class header declaration
@@ -119,3 +119,12 @@ def	ATIRadeonX1000::start_promo4_engine@0x1cd90	uVar5	ringWritePointer	CONFIRMED
 def	ATIRadeonX1000::start_promo4_engine@0x1cd90	pAVar8	displayRecord	INFERRED	walks the two 0x20-byte records at self+0xe4; the first with a non-zero field sets the active flag self+0x80
 def	ATIRadeonX1000::setup_R500_internal_space@0x1cf70	iVar5	mmioBase	CONFIRMED	self+0x860 (mmioBase)
 def	ATIRadeonX1000::initialize_hardware@0x1f3c0	uVar5	result	CONFIRMED	the function return value (0 on any failed step, 1 at the end)
+def	::DumpPCIeGART	param_1	gartTable	INFERRED	the GART table base: indexed by param_2 and printed as the GART(0x...) address in the log line
+def	::DumpPCIeGART	param_2	firstEntry	CONFIRMED	added to the loop counter to form the printed [%d] entry index, and to the base to start the walk
+def	::DumpPCIeGART	param_3	entryCount	CONFIRMED	the loop runs until this many entries were printed
+def	::DumpPCIeGART	puVar7	entryCursor	CONFIRMED	starts at gartTable + firstEntry, advanced one word per entry
+def	::DumpPCIeGART	iVar5	entryIndex	CONFIRMED	the printed [%d] index (done + firstEntry)
+def	::DumpPCIeGART	uVar6	printed	CONFIRMED	count of entries printed so far, compared with param_3 at the loop end
+def	::dump_registers	param_1	acceleratorBytes	INFERRED	untyped alias of the typed parameter `accelerator`
+def	::dump_registers	iVar2	registers	CONFIRMED	the register window pointer read from accelerator+0x860 (every access below is registers + offset)
+def	::dump_registers	uVar1	value	CONFIRMED	the register value last read, printed by the following IOLog

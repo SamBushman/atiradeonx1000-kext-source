@@ -28,7 +28,7 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0x20700 */
-UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 bufferOffsetOrEnd, UInt32 dwordCount) {
+UInt32 ATIRadeonX1000::submit_buffer_retired(UInt32 *bufferStart, UInt32 gartOffset, UInt32 dwordCount) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     static UInt32 u32Dummy;
 
@@ -87,7 +87,7 @@ LAB_000208e8:
     M<UInt32>(iVar5 + iVar2 * 4) = 0x101ce;
     uVar4 = iVar2 + 1U & 0x7ff;
     M<UInt32>(self + 0x914) = uVar4;
-    M<UInt32>(iVar5 + uVar4 * 4) = bufferOffsetOrEnd + iVar1 & 0xfffffffc;
+    M<UInt32>(iVar5 + uVar4 * 4) = gartOffset + iVar1 & 0xfffffffc;
     uVar4 = uVar4 + 1 & 0x7ff;
     M<UInt32>(self + 0x914) = uVar4;
     M<UInt32>(iVar5 + uVar4 * 4) = dwordCount & 0x7fffff;
