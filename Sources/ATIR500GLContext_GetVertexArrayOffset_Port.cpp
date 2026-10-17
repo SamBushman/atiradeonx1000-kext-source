@@ -27,26 +27,26 @@
 
 
 /* real addr 0x26ed0 */
-UInt32 ATIR500GLContext::GetVertexArrayOffset(VendorTextureBuffer *real_param_1, UInt32 param_2) {
+UInt32 ATIR500GLContext::GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt32 extraOffset) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  if (param_1 != (UInt8 *)0x0) {
-    if (param_2 == 0xffffffff) {
-      param_2 = 0;
+  if (bufferBytes != (UInt8 *)0x0) {
+    if (extraOffset == 0xffffffff) {
+      extraOffset = 0;
     }
-    if (param_1[0x20] == 0x7) {
-      if (M<SInt32>(param_1 + 0x48) == 0) {
+    if (bufferBytes[0x20] == 0x7) {
+      if (M<SInt32>(bufferBytes + 0x48) == 0) {
         return 0;
       }
-      return *(SInt32 *)(param_1 + 0x48) + param_2;
+      return *(SInt32 *)(bufferBytes + 0x48) + extraOffset;
     }
-    if (param_1[0x20] == 0x6) {
-      if (M<SInt32>(M<SInt32>(param_1 + 0x54) + 4) == 0) {
+    if (bufferBytes[0x20] == 0x6) {
+      if (M<SInt32>(M<SInt32>(bufferBytes + 0x54) + 4) == 0) {
         return 0;
       }
-      return *(SInt32 *)(M<SInt32>(param_1 + 0x54) + 4) +
-             param_2 + M<SInt32>(param_1 + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+      return *(SInt32 *)(M<SInt32>(bufferBytes + 0x54) + 4) +
+             extraOffset + M<SInt32>(bufferBytes + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
     }
   }
   return 0;

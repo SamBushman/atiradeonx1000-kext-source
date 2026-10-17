@@ -29,37 +29,37 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9640 */
-IOReturn IOATIR500GLContext::become_global_shared(UInt32 param_1) {
+IOReturn IOATIR500GLContext::become_global_shared(UInt32 makeShared) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
+  SInt32 accel;
+  SInt32 globalShared;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  if (param_1 == 0) {
-    iVar1 = M<SInt32>(self + 200);
-    iVar2 = M<SInt32>(iVar1 + 0x6c);
-    if (((iVar2 != 0) && (iVar2 == M<SInt32>(self + 0x88))) && (M<SInt32>(iVar2 + 0x24) == 0)) {
-      M<UInt32>(iVar1 + 0x6c) = 0;
+  if (makeShared == 0) {
+    accel = M<SInt32>(self + 200);
+    globalShared = M<SInt32>(accel + 0x6c);
+    if (((globalShared != 0) && (globalShared == M<SInt32>(self + 0x88))) && (M<SInt32>(globalShared + 0x24) == 0)) {
+      M<UInt32>(accel + 0x6c) = 0;
       M<UInt32>(M<SInt32>(self + 200) + 0x70) = 0;
-      iVar1 = M<SInt32>(self + 200);
-      uVar3 = 0;
+      accel = M<SInt32>(self + 200);
+      result = 0;
       goto LAB_000096f8;
     }
   }
   else {
-    iVar1 = M<SInt32>(self + 200);
-    if ((M<SInt32>(iVar1 + 0x6c) == 0) && (M<SInt32>(M<SInt32>(self + 0x88) + 0x24) == 0)) {
-      M<SInt32>(iVar1 + 0x6c) = M<SInt32>(self + 0x88);
-      uVar3 = 0;
+    accel = M<SInt32>(self + 200);
+    if ((M<SInt32>(accel + 0x6c) == 0) && (M<SInt32>(M<SInt32>(self + 0x88) + 0x24) == 0)) {
+      M<SInt32>(accel + 0x6c) = M<SInt32>(self + 0x88);
+      result = 0;
       M<UInt32>(M<SInt32>(self + 200) + 0x70) = 1;
-      iVar1 = M<SInt32>(self + 200);
+      accel = M<SInt32>(self + 200);
       goto LAB_000096f8;
     }
   }
-  uVar3 = 0xe00002cc;
+  result = 0xe00002cc;
 LAB_000096f8:
-  GH_IOLockUnlock(M<UInt32>(iVar1 + 0x840));
-  return uVar3;
+  GH_IOLockUnlock(M<UInt32>(accel + 0x840));
+  return result;
 }

@@ -1,0 +1,171 @@
+# IOATIR500GLContext remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# Parameters come from the class header declarations (Tools/renames/gen_param_rows.py); locals from reading the bodies and their callers.
+# Convention (user, Oct 16): an index parameter is named `id` unless the function specifically indexes the per-panel record array.
+def	IOATIR500GLContext::add_texture_to_stream@0x72c0	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::add_texture_to_stream@0x72c0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::add_vendor_surface_required_bits@0x83b0	param_1	mode	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::allocAllContextBuffers@0x74d0	param_1	size	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::become_global_shared@0x9640	param_1	makeShared	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::clientMemoryForType@0xa160	param_1	type	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::clientMemoryForType@0xa160	param_2	options	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::clientMemoryForType@0xa160	param_3	memory	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::connectClient@0x86d0	real_param_1	client	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::connectClient@0x86d0	param_1	clientBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::delete_texture@0x9570	param_1	textureID	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	real_param_1	needed	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	param_1	neededBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	param_2	aggressive	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_config@0xb010	param_1	out0	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_config@0xb010	param_2	out1	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_config@0xb010	param_3	out2	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_data_buffer@0x9a30	param_1	outHandle	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_data_buffer@0x9a30	param_2	outAddress	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_status@0xb250	param_1	out0	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_info@0x8bb0	param_1	surfaceID	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_info@0x8bb0	param_2	outFlags	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_info@0x8bb0	param_3	outW	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_info@0x8bb0	param_4	outH	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_size@0x7ca0	param_1	outW	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_size@0x7ca0	param_2	outH	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_size@0x7ca0	param_3	outX	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::get_surface_size@0x7ca0	param_4	outY	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	param_3	extra	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::init_context_buffer_header@0x7490	real_param_1	header	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::init_context_buffer_header@0x7490	param_1	headerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::init_context_buffer_header@0x7490	param_2	size	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::map_transfer_to_GART@0x79d0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::map_transfer_to_GART@0x79d0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::new_texture@0x9320	real_param_2	newTextureData	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::new_texture@0x9320	param_2	newTextureDataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::new_texture@0x9320	real_param_3	returnData	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::new_texture@0x9320	param_3	returnDataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::new_texture@0x9320	param_4	structSize	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::new_texture@0x9320	param_5	sizeOut	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::page_off_texture@0x9740	param_2	textureID	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::page_off_texture@0x9740	param_3	mipAndFace	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::page_off_texture@0x9740	param_4	structPtr	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::page_off_texture@0x9740	param_5	structSize	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::purge_texture@0x9840	param_1	textureID	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::read_buffer@0x8d10	real_param_2	readData	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::read_buffer@0x8d10	param_2	readDataBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::read_buffer@0x8d10	param_3	structSize	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::remove_texture_from_stream@0x71b0	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::remove_texture_from_stream@0x71b0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::scale_surface@0x9230	param_1	flags	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::scale_surface@0x9230	param_2	xScale	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::scale_surface@0x9230	param_3	yScale	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_stereo@0x99a0	param_1	leftOrRight	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_surface@0x87b0	param_1	surfaceID	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_surface@0x87b0	param_3	modeBits	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_interval@0x7c00	param_1	numerator	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_interval@0x7c00	param_2	denominator	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_rect@0x7ba0	param_1	x	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_rect@0x7ba0	param_2	y	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_rect@0x7ba0	param_3	w	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_swap_rect@0x7ba0	param_4	h	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_texture_flags@0x7e60	real_param_1	texture	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_texture_flags@0x7e60	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::start@0x7690	real_param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::start@0x7690	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::stop@0x7fa0	real_param_1	provider	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::stop@0x7fa0	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	IOATIR500GLContext::wait_for_stamp@0x7de0	param_2	stamp	INFERRED	name from the class header declaration
+def	IOATIR500GLContext::set_surface@0x87b0	param_4	unknown_0x298	UNKNOWN	stored verbatim to this+0x298; the header calls it param3 and no reader gives it a role
+def	IOATIR500GLContext::set_surface@0x87b0	param_5	mipLevel	CONFIRMED	stored to this+0x29c, which the class header documents as mipLevel
+def	IOATIR500GLContext::set_surface@0x87b0	this_00	surface	INFERRED	result of find_surface_for_id(surfaceID); becomes boundSurface (this+0x290) and receives add_gl_context_to_list
+def	IOATIR500GLContext::set_surface@0x87b0	bVar1	detach	INFERRED	true when surfaceID is 0 or the lookup failed: the context is then unbound (boundSurface/+0x298/+0x29c cleared)
+def	IOATIR500GLContext::set_surface@0x87b0	uVar4	result	INFERRED	the IOReturn returned (0, or 0xe00002c2 when the surface id is unknown)
+def	IOATIR500GLContext::set_surface@0x87b0	iVar2	compatible	INFERRED	result of the virtual setCompatibleSurfaceMode (vtable +0x5ac, class header)
+def	IOATIR500GLContext::set_surface@0x87b0	uVar3	surfaceBits	INFERRED	result of the surface's vtable +0x5ac, OR-ed into this+0x8c
+def	IOATIR500GLContext::set_surface@0x87b0	uVar5	contextBits	INFERRED	running value of this+0x8c, rebuilt from the requested mode bits
+def	IOATIR500GLContext::set_surface@0x87b0	local_38	surfaceModeBits	INFERRED	loaded from surface+0xbe8 and written back there after the mode-bit merge
+def	IOATIR500GLContext::set_stereo@0x99a0	param_2	stereoParam	UNKNOWN	header calls it param2; passed first to setup_stereo(param_2, param_1), role not established
+def	IOATIR500GLContext::set_stereo@0x99a0	uVar1	result	INFERRED	returned value of setup_stereo
+def	IOATIR500GLContext::set_swap_rect@0x7ba0	piVar1	surface	INFERRED	this+0x290 (boundSurface); its vtable +0x5c4 is called after the rect is stored
+def	IOATIR500GLContext::set_swap_interval@0x7c00	piVar1	surface	INFERRED	this+0x290 (boundSurface); its vtable +0x5c4 is called after the interval is stored
+def	IOATIR500GLContext::get_config@0xb010	bVar1	more	INFERRED	loop continuation flag of the walk over the 23 surface buffers
+def	IOATIR500GLContext::get_config@0xb010	uVar4	bufferIndex	INFERRED	index of the surface buffer: tested against the attached-buffer mask this+0x8c, record stride 0x78 (23 records)
+def	IOATIR500GLContext::get_config@0xb010	puVar7	info	INFERRED	cursor into the 4-word per-buffer info records filled by accelerator vtable +0x540
+def	IOATIR500GLContext::get_config@0xb010	local_1a8	infoRecords	INFERRED	4-word info record per buffer, released with accelerator vtable +0x544
+def	IOATIR500GLContext::get_status@0xb250	bVar1	more	INFERRED	loop continuation flag of the walk over the 23 surface buffers
+def	IOATIR500GLContext::get_status@0xb250	uVar3	bufferIndex	INFERRED	index of the surface buffer: tested against the attached-buffer mask this+0x8c, record stride 0x78 (23 records)
+def	IOATIR500GLContext::get_status@0xb250	puVar6	info	INFERRED	cursor into the 4-word per-buffer info records filled by accelerator vtable +0x540
+def	IOATIR500GLContext::get_status@0xb250	local_198	infoRecords	INFERRED	4-word info record per buffer, released with accelerator vtable +0x544
+def	IOATIR500GLContext::get_surface_size@0x7ca0	iVar4	surface	INFERRED	this+0x290 (boundSurface)
+def	IOATIR500GLContext::get_surface_size@0x7ca0	iVar3	levelsLeft	INFERRED	starts as mipLevel (this+0x29c) and counts down while the size is halved
+def	IOATIR500GLContext::get_surface_info@0x8bb0	iVar2	surface	INFERRED	result of find_surface_for_id(surfaceID)
+def	IOATIR500GLContext::get_surface_info@0x8bb0	uVar1	modeBits	INFERRED	surface+0xbe8 (the surface mode bits, as set_surface stores them), returned in outFlags
+def	IOATIR500GLContext::get_surface_info@0x8bb0	uVar3	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::get_data_buffer@0x9a30	pIVar2	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::get_data_buffer@0x9a30	pVVar6	buffer	INFERRED	the data buffer (VendorTextureBuffer) taken from the accelerator's free list or newly allocated
+def	IOATIR500GLContext::get_data_buffer@0x9a30	uVar3	commandBytes	INFERRED	dword count of the command buffer header (+0xc) times 4
+def	IOATIR500GLContext::new_texture@0x9320	iVar1	texture	INFERRED	the texture returned by IOATIR500Shared::new_*texture (0 on failure)
+def	IOATIR500GLContext::new_texture@0x9320	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::page_off_texture@0x9740	piVar1	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::page_off_texture@0x9740	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::become_global_shared@0x9640	iVar1	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::become_global_shared@0x9640	iVar2	globalShared	INFERRED	accelerator+0x6c: the shared-state object a context made global; compared with this+0x88 (clientHandle)
+def	IOATIR500GLContext::become_global_shared@0x9640	uVar3	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar18	x	INFERRED	read from the request record +0
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar15	y	INFERRED	read from the request record +4
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar13	width	INFERRED	read from the request record +8 and clipped against the surface width
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar12	height	INFERRED	read from the request record +0xc and clipped against the surface height
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar11	destAddress	INFERRED	request record +0x14: the client address wrapped by IOMemoryDescriptor::withAddress
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar10	rowBytes	INFERRED	request record +0x18: destination row pitch, multiplies (height-1) in the mapped length
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar14	attachment	INFERRED	attachment index chosen by the switch on the request record +0x10 (which buffer to read)
+def	IOATIR500GLContext::read_buffer@0x8d10	pIVar3	surface	INFERRED	this+0x290 (boundSurface)
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar16	sourceBuffer	INFERRED	the surface buffer record (surface+0xb70 table entry) copied by vtable +0x5e8
+def	IOATIR500GLContext::read_buffer@0x8d10	uVar8	bufferIndex	INFERRED	index of sourceBuffer in the surface's 23 buffer records (pointer difference times the inverse of 0x78)
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar2	surfaceWidth	INFERRED	surface+0xbd4, the limit the requested width is clipped to
+def	IOATIR500GLContext::read_buffer@0x8d10	iVar4	surfaceHeight	INFERRED	surface+0xbd6, the limit the requested height is clipped to
+def	IOATIR500GLContext::read_buffer@0x8d10	uVar17	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::start@0x7690	this_00	shared	CONFIRMED	the IOATIR500Shared allocated here and stored at clientHandle (+0x88), class header
+def	IOATIR500GLContext::start@0x7690	piVar4	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::stop@0x7fa0	piVar4	accelWords	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::stop@0x7fa0	this_00	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::stop@0x7fa0	pVVar7	buffer	INFERRED	a data buffer of this context, returned to the accelerator's free list or freed
+def	IOATIR500GLContext::stop@0x7fa0	pVVar5	nextBuffer	INFERRED	buffer+0x3c, the list link
+def	IOATIR500GLContext::stop@0x7fa0	uVar2	pooledCount	INFERRED	accelerator+0x5d4, the number of pooled data buffers (capped at 16)
+def	IOATIR500GLContext::connectClient@0x86d0	piVar1	handle	INFERRED	the other client's reference-counted handle (+0x88) taken over by this context
+def	IOATIR500GLContext::connectClient@0x86d0	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::delete_texture@0x9570	this_00	shared	INFERRED	this+0x88 (clientHandle, the IOATIR500Shared)
+def	IOATIR500GLContext::delete_texture@0x9570	pVVar2	texture	INFERRED	entry textureID of the shared texture table
+def	IOATIR500GLContext::delete_texture@0x9570	uVar1	result	INFERRED	returned value of IOATIR500Shared::delete_texture
+def	IOATIR500GLContext::scale_surface@0x9230	uVar1	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::purge_texture@0x9840	iVar1	texture	INFERRED	entry textureID of the shared texture table (+0x10 table, +0x14 count)
+def	IOATIR500GLContext::wait_for_stamp@0x7de0	iVar1	waited	INFERRED	result of the accelerator's wait (vtable +0x550), added to its wait counter
+def	IOATIR500GLContext::wait_for_stamp@0x7de0	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::finish@0x7d60	iVar1	waited	INFERRED	result of the accelerator's wait (vtable +0x55c), added to its wait counter
+def	IOATIR500GLContext::finish@0x7d60	uVar2	result	INFERRED	the IOReturn returned
+def	IOATIR500GLContext::reclaim_resources@0x83c0	pVVar1	buffer	INFERRED	a data buffer of this context (list head +0xe8, link +0x3c)
+def	IOATIR500GLContext::reclaim_resources@0x83c0	pVVar4	nextBuffer	INFERRED	buffer+0x3c, the list link
+def	IOATIR500GLContext::reclaim_resources@0x83c0	this_00	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::reclaim_resources@0x83c0	uVar2	pooledCount	INFERRED	accelerator+0x5d4, the number of pooled data buffers (kept at 16)
+def	IOATIR500GLContext::allocAllContextBuffers@0x74d0	piVar2	descriptor	INFERRED	the IOBufferMemoryDescriptor just allocated
+def	IOATIR500GLContext::allocAllContextBuffers@0x74d0	pVVar3	header	INFERRED	its mapped address (descriptor vtable +0x1cc), where init_context_buffer_header writes
+def	IOATIR500GLContext::allocAllContextBuffers@0x74d0	uVar4	result	INFERRED	the bool returned
+def	IOATIR500GLContext::allocAllContextBuffers@0x74d0	iVar6	bufferIndex	INFERRED	count of ring buffers allocated so far (16 in the ring)
+def	IOATIR500GLContext::freeAllContextBuffers@0x7000	piVar4	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::freeAllContextBuffers@0x7000	pIVar6	buffer	INFERRED	cursor over the 16 ring entries (stride 0x18) passed to accelerator vtable +0x5ac
+def	IOATIR500GLContext::freeAllContextBuffers@0x7000	iVar3	bufferIndex	INFERRED	ring entry index 0..15
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	pVVar6	candidate	INFERRED	the transfer buffer offered to freeTransferToAllocGART (fixed slots, ring entries, then the texture list)
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	uVar4	result	INFERRED	the bool returned
+def	IOATIR500GLContext::freeToAllocGART@0x7a50	iVar2	freed	INFERRED	result of freeTransferToAllocGART, tested for non-zero
+def	IOATIR500GLContext::freeCommandBuffer@0x7e70	iVar1	accel	INFERRED	this+0xc8 (the accelerator)
+def	IOATIR500GLContext::freeCommandBuffer@0x7e70	iVar3	context	INFERRED	walks the accelerator's live-context lists (+0x60, +0x68), link at +0x80
+def	IOATIR500GLContext::freeCommandBuffer@0x7e70	piVar2	mapping	INFERRED	result of removeMappingForDescriptor, released with vtable +0x18
+def	IOATIR500GLContext::add_texture_to_stream@0x72c0	VVar1	kind	INFERRED	texture+0x20, the texture kind that selects the case (0, 1, 6, 8)
+def	IOATIR500GLContext::add_texture_to_stream@0x72c0	pVVar5	source	INFERRED	texture+0x50 of a kind-1 texture: the texture it aliases
+def	IOATIR500GLContext::remove_texture_from_stream@0x71b0	VVar1	kind	INFERRED	texture+0x20, the texture kind that selects the case (0, 1, 6, 8)
+def	IOATIR500GLContext::remove_texture_from_stream@0x71b0	uVar2	stamp	INFERRED	accelerator+0x50, written to texture+0x14+8 and texture+0x5c
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	iVar1	offset	INFERRED	byte offset of the zeroing loop over the first 0x20 header bytes
+def	IOATIR500GLContext::init_command_buffer_header@0x7440	iVar2	wordsLeft	INFERRED	loop counter of the zeroing loop
+def	IOATIR500GLContext::init_context_buffer_header@0x7490	iVar1	offset	INFERRED	byte offset of the zeroing loop over the first 0x20 header bytes
+def	IOATIR500GLContext::init_context_buffer_header@0x7490	iVar2	wordsLeft	INFERRED	loop counter of the zeroing loop
+def	IOATIR500GLContext::clientMemoryForType@0xa160	this_00	surface	INFERRED	this+0x290 (boundSurface); alloc_surfaces_pageq and sleep_blocked are called on it
+def	IOATIR500GLContext::clientMemoryForType@0xa160	auStack_68	descriptor	INFERRED	the 16-byte record passed to vtable +0x5b4 (process_command_buffer) and +0x560
+def	IOATIR500GLContext::clientMemoryForType@0xa160	uVar7	surfaceBits	INFERRED	result of convert_surface_bits, passed on to alloc_surfaces_pageq

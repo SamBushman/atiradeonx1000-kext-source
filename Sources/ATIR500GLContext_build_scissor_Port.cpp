@@ -30,37 +30,37 @@
 void ATIR500GLContext::build_scissor() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
+  SInt32 levelWidth;
   UInt32 uVar2;
-  SInt32 iVar3;
-  UInt8 *pAVar4;
+  SInt32 formatShiftAdjust;
+  UInt8 *colorBuffer;
   UInt32 uVar5;
   
   if (M<SInt32>(self + 0x3bc) == 0) {
     uVar5 = M<UInt32>(self + 0x29c);
-    pAVar4 = *(UInt8 **)
+    colorBuffer = *(UInt8 **)
               ((UInt32)M<UInt16>(self + 0xac) * 4 + M<SInt32>(self + 0x290) + 0xb70);
   }
   else {
     uVar5 = 0;
-    pAVar4 = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
+    colorBuffer = self + (UInt32)M<UInt16>(self + 0x3b2) * 0x78 + 0x3c0;
   }
-  if (((M<UInt32>(pAVar4 + 0x3c) & 0xf00000) == 0) ||
-     (iVar1 = (SInt32)((UInt32)M<UInt16>(pAVar4 + 0x1c) / (M<UInt32>(pAVar4 + 0x3c) >> 0x14 & 0xf)) >>
-              (uVar5 & 0x3f), iVar1 == 0)) {
-    iVar1 = 1;
+  if (((M<UInt32>(colorBuffer + 0x3c) & 0xf00000) == 0) ||
+     (levelWidth = (SInt32)((UInt32)M<UInt16>(colorBuffer + 0x1c) / (M<UInt32>(colorBuffer + 0x3c) >> 0x14 & 0xf)) >>
+              (uVar5 & 0x3f), levelWidth == 0)) {
+    levelWidth = 1;
   }
-  uVar2 = (SInt32)(UInt32)M<UInt16>(pAVar4 + 0x1e) >> (uVar5 & 0x3f);
+  uVar2 = (SInt32)(UInt32)M<UInt16>(colorBuffer + 0x1e) >> (uVar5 & 0x3f);
   uVar5 = 1;
   if (uVar2 != 0) {
     uVar5 = uVar2;
   }
-  uVar2 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)pAVar4[0x3a] * 0x1c) >> 3 & 0x1f;
-  if ((uVar2 < 3) || ((iVar3 = 1, 4 < uVar2 && (iVar3 = 2, uVar2 != 6)))) {
-    iVar3 = 0;
+  uVar2 = FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c) >> 3 & 0x1f;
+  if ((uVar2 < 3) || ((formatShiftAdjust = 1, 4 < uVar2 && (formatShiftAdjust = 2, uVar2 != 6)))) {
+    formatShiftAdjust = 0;
   }
   M<UInt32>(self + 0x358) =
-       iVar1 << ((FormatTableLookup_0x0004d2dc((UInt32)(UInt8)pAVar4[0x3a] * 0x1c) >> 0xc & 7) - iVar3 &
+       levelWidth << ((FormatTableLookup_0x0004d2dc((UInt32)(UInt8)colorBuffer[0x3a] * 0x1c) >> 0xc & 7) - formatShiftAdjust &
                 0x3f) & 0x3fffU | (uVar5 & 0x3fff) << 0x10;
   return;
 }

@@ -34,14 +34,14 @@ extern "C" UInt32 GH_thread_block(...) asm("_thread_block");
 
 
 /* real addr 0xa160 */
-IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 param_1, UInt32*param_2, IOMemoryDescriptor**param_3) {
+IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
   unsigned int uVar2;
   int iVar3;
   unsigned int uVar4;
-  UInt8 uVar7;
+  UInt8 surfaceBits;
   int *piVar5;
   UInt32 uVar6;
   unsigned int uVar8;
@@ -50,34 +50,34 @@ IOReturn IOATIR500GLContext::clientMemoryForType(UInt32 param_1, UInt32*param_2,
   unsigned int uVar11;
   UInt32 uVar12;
   UInt8 *pIVar13;
-  UInt8 *this_00;
+  UInt8 *surface;
   UInt8 *pIVar14;
   unsigned int uVar15;
   int *piVar16;
-  /* one 16-byte stack object filled by the +0x5b4 / +0x560 callees (Ghidra named its words auStack_68 / auStack_68[2] / auStack_68[3]; #85) */
-  int auStack_68[4];
+  /* one 16-byte stack object filled by the +0x5b4 / +0x560 callees (Ghidra named its words descriptor / descriptor[2] / descriptor[3]; #85) */
+  int descriptor[4];
   /* one real 7-word VendorCommandBuffer (mirror of the 0x1c-byte slot at self+0xcc/0x90). allocCommandBuffer fills it by address, so it must be ONE contiguous object - seven separate int locals only worked in stock by stack-adjacency luck (same bug class as #164/#160); in our gcc 4.0.1 build they scatter and the alloc result never reached the copy-back (#168) */
   int cmdBufBlock[7];
   
   iVar3 = GH_page_size;
-  switch(param_1) {
+  switch(type) {
   case 0:
     if (M<int *>(M<int>(self + 200) + 0xac) != (int *)0x0) {
       VCALL(*M<int *>(M<int>(self + 200) + 0xac), 0x14)(M<int *>(M<int>(self + 200) + 0xac));
-      *param_2 = 0;
-      *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xac));
+      *options = 0;
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xac));
       return 0;
     }
     break;
   case 1:
     uVar11 = 0;
     uVar15 = 0;
-    uVar7 = 0;
+    surfaceBits = 0;
 LAB_0000a1e0:
     do {
       GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-      this_00 = M<UInt8 *>(self + 0x290);
-      if (this_00 == (UInt8 *)0x0) {
+      surface = M<UInt8 *>(self + 0x290);
+      if (surface == (UInt8 *)0x0) {
 LAB_0000a480:
         uVar12 = 0;
 LAB_0000a484:
@@ -109,8 +109,8 @@ LAB_0000ab68:
           M<UInt32>(self + 0xf0) = 1;
         }
         VCALL(*M<int *>(self + 0xd4), 0x14)(M<int *>(self + 0xd4));
-        *param_2 = 0;
-        *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xd4));
+        *options = 0;
+        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xd4));
         this->init_command_buffer_header((VendorCommandBufferHeader *)(M<VendorCommandBufferHeader *>(self + 0xe0)),M<UInt32>(self + 0xe4),uVar12)
         ;
         GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
@@ -124,7 +124,7 @@ LAB_0000ab68:
         piVar5[0x1e6] = iVar9 + iVar3;
         return 0;
       }
-      if (M<unsigned int>(this_00 + 0xa4) < 0x100) {
+      if (M<unsigned int>(surface + 0xa4) < 0x100) {
 LAB_0000a250:
         iVar3 = M<int>(self + 200);
       }
@@ -134,46 +134,46 @@ LAB_0000a250:
           do {
             GH_IOLockSleep(M<UInt32>(iVar3 + 0x840),iVar3,0);
           } while (M<char>(iVar3 + 0x80) == '\0');
-          this_00 = M<UInt8 *>(self + 0x290);
-          if (this_00 != (UInt8 *)0x0) goto LAB_0000a250;
+          surface = M<UInt8 *>(self + 0x290);
+          if (surface != (UInt8 *)0x0) goto LAB_0000a250;
           goto LAB_0000a480;
         }
       }
       if (M<char>(iVar3 + 0x80) == '\0') goto LAB_0000a480;
-      if (this_00[0xbf6] == 0x0) {
-        uVar12 = M<UInt32>(this_00 + 0xbfc);
-        if ((M<SInt16>(self + 0x98) != 0) && ((M<unsigned int>(this_00 + 0xbe8) & 0x20) != 0)) {
+      if (surface[0xbf6] == 0x0) {
+        uVar12 = M<UInt32>(surface + 0xbfc);
+        if ((M<SInt16>(self + 0x98) != 0) && ((M<unsigned int>(surface + 0xbe8) & 0x20) != 0)) {
           uVar12 = uVar12 | 2;
         }
-        if ((this_00[0xbd0] == 0x0) || (uVar15 == 999)) {
-          uVar8 = M<unsigned int>(this_00 + 0xbf8);
-          if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(this_00 + 0xc1c)) & uVar8) != 0) {
+        if ((surface[0xbd0] == 0x0) || (uVar15 == 999)) {
+          uVar8 = M<unsigned int>(surface + 0xbf8);
+          if (((M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & uVar8) != 0) {
             if ((uVar8 & 0x20000000) != 0) goto LAB_0000a484;
-            uVar2 = (M<unsigned int>(self + 0x8c) | M<unsigned int>(this_00 + 0xc1c)) & 0x7fffff;
+            uVar2 = (M<unsigned int>(self + 0x8c) | M<unsigned int>(surface + 0xc1c)) & 0x7fffff;
             uVar4 = uVar8 & uVar2;
             if (uVar4 == 0) {
-              iVar3 = M<int>(this_00);
+              iVar3 = M<int>(surface);
             }
             else {
-              if ((((uVar4 & 1) != 0) && (M<int>(this_00 + 0xcc) == 0)) &&
-                 (((uVar8 & 2) == 0 || (M<int>(this_00 + 0x144) != 0)))) {
+              if ((((uVar4 & 1) != 0) && (M<int>(surface + 0xcc) == 0)) &&
+                 (((uVar8 & 2) == 0 || (M<int>(surface + 0x144) != 0)))) {
                 uVar11 = uVar11 | 1;
               }
-              if (((M<unsigned int>(this_00 + 0xbe8) & 0x20) == 0) && ((uVar4 & 0x20) != 0)) {
+              if (((M<unsigned int>(surface + 0xbe8) & 0x20) == 0) && ((uVar4 & 0x20) != 0)) {
                 uVar11 = uVar11 | 2;
               }
-              uVar7 = ((IOATIR500Surface *)(this_00))->convert_surface_bits(M<UInt32>(M<int>(self + 0xe0) + 0xc));
-              iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + 0x290)))->alloc_surfaces_pageq(uVar2,uVar7,false);   /* r6 = 0: the decompile drops the register args after the mask; checked against the disassembly at 0xa3c4 */
+              surfaceBits = ((IOATIR500Surface *)(surface))->convert_surface_bits(M<UInt32>(M<int>(self + 0xe0) + 0xc));
+              iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + 0x290)))->alloc_surfaces_pageq(uVar2,surfaceBits,false);   /* r6 = 0: the decompile drops the register args after the mask; checked against the disassembly at 0xa3c4 */
               if (iVar3 != 0) {
                 if (iVar3 != 2) goto LAB_0000a408;
                 goto LAB_0000a484;
               }
-              this_00 = M<UInt8 *>(self + 0x290);
-              if ((M<unsigned int>(this_00 + 0xbf8) & M<unsigned int>(this_00 + 0xc1c) & 0x10000000) == 0)
+              surface = M<UInt8 *>(self + 0x290);
+              if ((M<unsigned int>(surface + 0xbf8) & M<unsigned int>(surface + 0xc1c) & 0x10000000) == 0)
               goto LAB_0000a354;
-              iVar3 = M<int>(this_00);
+              iVar3 = M<int>(surface);
             }
-            VCALL(iVar3, 0x5c0)(this_00);
+            VCALL(iVar3, 0x5c0)(surface);
             M<unsigned int>(M<int>(self + 0x290) + 0xbf8) =
                  M<unsigned int>(M<int>(self + 0x290) + 0xbf8) & 0xefffffff;
           }
@@ -194,7 +194,7 @@ LAB_0000a408:
           }
 LAB_0000a43c:
           iVar3 = ((IOATIR500Surface *)(M<UInt32>(self + 0x290)))->alloc_surfaces_pageq((M<unsigned int>(self + 0x8c) | M<unsigned int>(M<UInt32>(self + 0x290) + 0xc1c))
-                             & 0x7fffff,uVar7,true);   /* r6 = 1 (disassembly 0xa448) */
+                             & 0x7fffff,surfaceBits,true);   /* r6 = 1 (disassembly 0xa448) */
           if (iVar3 != 0) goto LAB_0000a484;
           piVar5 = M<int *>(self + 0x290);
           if ((piVar5[0x2fe] & piVar5[0x307] & 0x10000000U) != 0) {
@@ -233,7 +233,7 @@ LAB_0000a43c:
         if (M<int>(self + 0xd0) == 0) {
           this->map_transfer_to_GART((VendorTransferBuffer *)((UInt8 *)(self + 0xcc)));
         }
-        uVar11 = VCALL(M<int>(self), 0x5b4)(self,auStack_68);
+        uVar11 = VCALL(M<int>(self), 0x5b4)(self,descriptor);
         pIVar14 = self;
         do {
           if (M<UInt8 *>(pIVar14 + 0x2a4) != (UInt8 *)0x0) {
@@ -242,17 +242,17 @@ LAB_0000a43c:
           pIVar14 = pIVar14 + 4;
         } while (self + 0xa8 != pIVar14);
         if (((unsigned int)(M<int>(M<int>(self + 0xe0) + 0x10) * 4 - GH_page_size) <
-             (unsigned int)(auStack_68[3] - (M<int>(self + 0xe0) + 0x20))) &&
+             (unsigned int)(descriptor[3] - (M<int>(self + 0xe0) + 0x20))) &&
            (M<unsigned int>(self + 0xb0) < 0x80000)) {
           M<unsigned int>(self + 0xb0) = M<unsigned int>(self + 0xb0) << 1;
         }
-        if (auStack_68[2] == 0) {
+        if (descriptor[2] == 0) {
           iVar3 = M<int>(M<int>(self + 200) + 0x50) + -1;
         }
         else {
           M<int>(M<int>(self + 200) + 0x704) =
-               auStack_68[2] * 4 + M<int>(M<int>(self + 200) + 0x704);
-          iVar3 = VCALL(*M<int *>(self + 200), 0x560)(M<int *>(self + 200),auStack_68);
+               descriptor[2] * 4 + M<int>(M<int>(self + 200) + 0x704);
+          iVar3 = VCALL(*M<int *>(self + 200), 0x560)(M<int *>(self + 200),descriptor);
         }
         piVar5 = M<int *>(self + 0x290);
         iVar3 = VCALL(*piVar5, 0x5b4)(piVar5,iVar3,M<UInt32>(self + 0x8c));
@@ -425,24 +425,24 @@ LAB_0000a9bc:
         }
         goto LAB_0000ab68;
       }
-      VCALL(M<int>(this_00), 0x14)(this_00);
+      VCALL(M<int>(surface), 0x14)(surface);
       GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
-      ((IOATIR500Surface *)(this_00))->sleep_blocked();
-      VCALL(M<int>(this_00), 0x18)(this_00);
+      ((IOATIR500Surface *)(surface))->sleep_blocked();
+      VCALL(M<int>(surface), 0x18)(surface);
     } while( true );
   case 2:
     GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
     VCALL(*M<int *>(self + 0xfc), 0x14)(M<int *>(self + 0xfc));
-    *param_2 = 0;
-    *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xfc));
+    *options = 0;
+    *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xfc));
     this->init_context_buffer_header((VendorContextBufferHeader *)(M<VendorContextBufferHeader *>(self + 0x108)),0x8000);
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
     return 0;
   case 3:
     if (M<int *>(M<int>(self + 200) + 0xb0) != (int *)0x0) {
       VCALL(*M<int *>(M<int>(self + 200) + 0xb0), 0x14)(M<int *>(M<int>(self + 200) + 0xb0));
-      *param_2 = 0;
-      *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xb0));
+      *options = 0;
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<int>(self + 200) + 0xb0));
       return 0;
     }
     break;
@@ -456,8 +456,8 @@ LAB_0000a9bc:
         M<UInt32>(self + 0xc0) = uVar6;
 LAB_0000ae2c:
         VCALL(*M<int *>(self + 0xb8), 0x14)(M<int *>(self + 0xb8));
-        *param_2 = 0;
-        *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xb8));
+        *options = 0;
+        *memory = (IOMemoryDescriptor *)(M<UInt8 *>(self + 0xb8));
         return 0;
       }
     }

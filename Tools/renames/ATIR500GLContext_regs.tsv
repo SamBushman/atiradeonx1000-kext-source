@@ -1,0 +1,80 @@
+# ATIR500GLContext (register / packet / small methods) remap: placeholder -> real names. Applied by Tools/apply_renames.py (format in its header).
+# kind	target	old	new	tier	evidence
+def	ATIR500GLContext::compute_zb_bw_cntl@0x26e40	param_1	requested	INFERRED	name from the class header declaration
+def	ATIR500GLContext::compute_sc_hyperz_en@0x26df0	param_1	requested	INFERRED	name from the class header declaration
+def	ATIR500GLContext::compute_zb_bw_cntl@0x26e40	pAVar1	depthBuffer	INFERRED	the buffer table entry selected by +0xae (or the embedded record at +0x5a0); ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet and process_kATIGLStreamFastClearColor use the +0xae buffer for the depth/HyperZ side, +0xac for colour
+def	ATIR500GLContext::compute_zb_bw_cntl@0x26e40	uVar2	bandwidthBits	INFERRED	accumulates the ZB bandwidth control bits (0, 4, 0x1c, then bit 0) that are merged into the return value
+def	ATIR500GLContext::compute_sc_hyperz_en@0x26df0	pAVar2	depthBuffer	INFERRED	same +0xae buffer selection as compute_zb_bw_cntl; its hyperZEligible byte (+0x35) is tested
+def	ATIR500GLContext::compute_sc_hyperz_en@0x26df0	uVar1	enableBit	INFERRED	the bit 0 value merged into the return word
+def	ATIR500GLContext::clientMemoryForType@0x27000	param_1	type	INFERRED	name from the class header declaration
+def	ATIR500GLContext::clientMemoryForType@0x27000	param_2	options	INFERRED	name from the class header declaration
+def	ATIR500GLContext::clientMemoryForType@0x27000	param_3	memory	INFERRED	name from the class header declaration
+def	ATIR500GLContext::clientMemoryForType@0x27000	uVar1	result	INFERRED	the IOReturn returned (0xe00002be or 0)
+def	ATIR500GLContext::getTargetAndMethodForIndex@0x26db0	param_1	target	INFERRED	name from the class header declaration
+def	ATIR500GLContext::getTargetAndMethodForIndex@0x26db0	param_2	selector	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	param_1	out0	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	param_2	out1	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	param_3	out2	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	param_4	out3	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	param_5	out4	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_hw_info@0x27210	uVar1	value	INFERRED	the value just read from the accelerator (pipes, chip id, chip rev, z pipes)
+def	ATIR500GLContext::build_scissor@0x27ee0	pAVar4	colorBuffer	INFERRED	the buffer selected by +0xac (colour) or the embedded unit record; its +0x1c/+0x1e extents feed scissorX
+def	ATIR500GLContext::build_scissor@0x27ee0	iVar1	levelWidth	INFERRED	(+0x1c extent / tiling degree) >> mip level, at least 1: the low 14 bits of the scissor word
+def	ATIR500GLContext::build_scissor@0x27ee0	iVar3	formatShiftAdjust	INFERRED	0/1/2 chosen from the format table sub-field; subtracted from the format shift
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	real_param_1	modeBits	INFERRED	name from the class header declaration
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	param_1	modeBitsWords	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	real_param_3	mode	INFERRED	name from the class header declaration
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	param_3	modeValue	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	real_param_4	flags	INFERRED	name from the class header declaration
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	param_4	flagsValue	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	iVar2	baseResult	INFERRED	result of IOATIR500GLContext::setCompatibleSurfaceMode; nonzero short-circuits
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	uVar4	currentBits	INFERRED	*modeBits as it was on entry
+def	ATIR500GLContext::setCompatibleSurfaceMode@0x270a0	uVar3	mergedBits	INFERRED	the mode word being built up from currentBits and the requested mode
+def	ATIR500GLContext::set_texture_flags@0x26fd0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::set_texture_flags@0x26fd0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::update_surface@0x27fd0	iVar2	unitIndex	INFERRED	self+0x35c, someUnitIndex in the class header
+def	ATIR500GLContext::update_surface@0x27fd0	uVar3	surfaceFlags	INFERRED	the bound surface (self+0x290) word at +0xbe8, tested against 0x400 and 0x7c0000
+def	ATIR500GLContext::start@0x28540	real_param_1	provider	INFERRED	name from the class header declaration
+def	ATIR500GLContext::start@0x28540	param_1	providerBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::start@0x28540	uVar1	unitFormat	INFERRED	self+0xac copied into the four altUnitFormat slots (+0x3aa)
+def	ATIR500GLContext::start@0x28540	uVar4	result	INFERRED	the bool returned
+def	ATIR500GLContext::submit_context_buffer@0x2a8b0	piVar14	accelerator	INFERRED	self+200 is the accelerator (ATIRadeonX1000) throughout this class
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	param_1	record	INFERRED	name from the class header declaration (`record`)
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	iVar5	colorBuffer	INFERRED	the buffer-table entry selected by +0xac (colour)
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	iVar18	depthBuffer	INFERRED	the buffer-table entry selected by +0xae (depth); its +0x38/+0x39 tiling bytes feed the second descriptor
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	uVar2	basePitch	CONFIRMED	read from colorBuffer+0x20, ATIR500SurfaceBuffer::basePitch
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	iVar11	gpuBaseAddress	CONFIRMED	read from colorBuffer+8, ATIR500SurfaceBuffer::gpuBaseAddress
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	iVar8	formatByteOffset	CONFIRMED	formatTableIndex * 0x1c, the argument of FormatTableLookup_0x0004d2dc/e0
+def	ATIR500GLContext::process_kATIGLStreamFastClearColor@0x292a0	bVar1	colorTilingByte0	CONFIRMED	colorBuffer+0x38, ATIR500SurfaceBuffer::tilingConfigByte0
+def	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet@0x28780	real_param_1	packet	INFERRED	name from the class header declaration
+def	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet@0x28780	param_1	packetBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::write_r500_zdecompress_restore_add_on_packet@0x28780	pAVar6	depthBuffer	INFERRED	the +0xae buffer (or the embedded record at +0x5a0); same selection as compute_zb_bw_cntl
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	real_param_1	packet	INFERRED	name from the class header declaration
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	param_1	packetBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	iVar13	colorBuffer	INFERRED	the buffer-table entry selected by +0xac (colour)
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	pAVar16	colorRecord	INFERRED	the per-unit buffer record (surface+0xa8+idx*0x78, or the embedded record at self+0x3c0)
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	AVar1	formatIndex	CONFIRMED	colour buffer +0x3a, ATIR500SurfaceBuffer::formatTableIndex
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	AVar2	formatIndexCopy	CONFIRMED	second read of +0x3a, ATIR500SurfaceBuffer::formatTableIndex
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	AVar3	tilingByte0	CONFIRMED	colour buffer +0x38, ATIR500SurfaceBuffer::tilingConfigByte0
+def	ATIR500GLContext::write_r500_3d_blit_state_packet@0x2ac10	AVar4	tilingByte1	CONFIRMED	colour buffer +0x39, ATIR500SurfaceBuffer::tilingConfigByte1
+def	ATIR500GLContext::build_surface_from_texture@0x28200	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::build_surface_from_texture@0x28200	real_param_2	surfaceBuffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_2	surfaceBufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_3	width	INFERRED	stored at +0x1c, the low 14 bits of the scissor word (build_scissor)
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_4	height	INFERRED	stored at +0x1e, the high half of the scissor word (build_scissor)
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_5	formatIndex	CONFIRMED	stored at +0x3a, ATIR500SurfaceBuffer::formatTableIndex
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_6	baseOffset	INFERRED	added to the texture offset to give the surface gpuBaseAddress (+8)
+def	ATIR500GLContext::build_surface_from_texture@0x28200	param_7	pitch	INFERRED	stored at +0x18 and divided by the per-format unit in the +0x14 computation
+def	ATIR500GLContext::build_surface_from_texture@0x28200	iVar4	formatByteOffset	CONFIRMED	formatIndex * 0x1c, the argument of FormatTableLookup_0x0004d2dc
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	param_1	outputBuffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	param_2	wordIndex	INFERRED	submit_context_buffer passes the number of words already in the buffer and takes the new count back
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	param_3	headerWord0	INFERRED	submit_context_buffer passes the first word of the context header (self+0x108)
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	param_4	headerWord1	INFERRED	submit_context_buffer passes the second word of the context header (self+0x108)
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	local_98	attachmentRecords	INFERRED	per attachment: the unit record at surface+0xa8+idx*0x78 (or the embedded record at self+0x3c0)
+def	ATIR500GLContext::write_kernel_context_buffer_regs@0x288e0	local_88	attachmentBuffers	INFERRED	per attachment: the buffer-table entry surface+0xb70+idx*4 (or the embedded record)
+def	ATIR500GLContext::restore_state_destroyed_by_pageoff@0x2af10	real_param_1	savedState	INFERRED	name from the class header declaration
+def	ATIR500GLContext::restore_state_destroyed_by_pageoff@0x2af10	param_1	savedStateBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::restore_state_destroyed_by_pageoff@0x2af10	piVar9	accelerator	INFERRED	self+200 is the accelerator throughout this class
+def	ATIR500GLContext::restore_state_destroyed_by_pageoff@0x2af10	prVar11	blitPacket	CONFIRMED	typed r500_3d_blit_state_packet_struct* pointing at slotBuffer+0x20
+def	ATIR500GLContext::restore_state_destroyed_by_pageoff@0x2af10	uVar1	ringIndex	INFERRED	(self+0x28c + 1) & 0xf: the 16-entry submit ring (stride 0x18 from self+0x11c), same as submit_context_buffer

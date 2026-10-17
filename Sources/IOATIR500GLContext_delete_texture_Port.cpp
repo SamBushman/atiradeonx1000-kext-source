@@ -29,21 +29,21 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9570 */
-IOReturn IOATIR500GLContext::delete_texture(UInt32 param_1) {
+IOReturn IOATIR500GLContext::delete_texture(UInt32 textureID) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *this_00;
-  UInt32 uVar1;
-  UInt8 *pVVar2;
+  UInt8 *shared;
+  UInt32 result;
+  UInt8 *texture;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-  this_00 = M<UInt8 *>(self + 0x88);
-  if ((param_1 < M<unsigned int>(this_00 + 0x14)) &&
-     (pVVar2 = M<UInt8 *>(param_1 * 4 + M<int>(this_00 + 0x10)),
-     pVVar2 != (UInt8 *)0x0)) {
-    uVar1 = ((IOATIR500Shared *)(this_00))->delete_texture((VendorTextureBuffer *)(pVVar2));
+  shared = M<UInt8 *>(self + 0x88);
+  if ((textureID < M<unsigned int>(shared + 0x14)) &&
+     (texture = M<UInt8 *>(textureID * 4 + M<int>(shared + 0x10)),
+     texture != (UInt8 *)0x0)) {
+    result = ((IOATIR500Shared *)(shared))->delete_texture((VendorTextureBuffer *)(texture));
     GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
-    return uVar1;
+    return result;
   }
   GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
   return 0xe00002c2;

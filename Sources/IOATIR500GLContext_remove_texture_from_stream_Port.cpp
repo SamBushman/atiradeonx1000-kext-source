@@ -27,45 +27,45 @@
 
 
 /* real addr 0x71b0 */
-void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *real_param_1) {
+void IOATIR500GLContext::remove_texture_from_stream(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt8 VVar1;
-  UInt32 uVar2;
+  UInt8 kind;
+  UInt32 stamp;
   SInt32 iVar3;
   SInt32 *piVar4;
   
   do {
-    uVar2 = M<UInt32>(M<SInt32>(self + 200) + 0x50);
-    M<UInt32>(M<SInt32>(param_1 + 0x14) + 8) = uVar2;
-    VVar1 = param_1[0x20];
-    if (VVar1 == 0x6) {
-      iVar3 = M<SInt32>(param_1 + 0x54);
-      M<UInt32>(M<SInt32>(iVar3 + 0x14) + 8) = uVar2;
+    stamp = M<UInt32>(M<SInt32>(self + 200) + 0x50);
+    M<UInt32>(M<SInt32>(textureBytes + 0x14) + 8) = stamp;
+    kind = textureBytes[0x20];
+    if (kind == 0x6) {
+      iVar3 = M<SInt32>(textureBytes + 0x54);
+      M<UInt32>(M<SInt32>(iVar3 + 0x14) + 8) = stamp;
       M<SInt16>(iVar3 + 0xe) = M<SInt16>(iVar3 + 0xe) + -1;
       return;
     }
-    if (VVar1 == 0x0) {
-      piVar4 = M<SInt32 *>(param_1 + 0x50);
+    if (kind == 0x0) {
+      piVar4 = M<SInt32 *>(textureBytes + 0x50);
       if (piVar4 == (SInt32 *)0x0) {
         return;
       }
-      VCALL(*piVar4, 0x5b4)(piVar4,uVar2,3);
+      VCALL(*piVar4, 0x5b4)(piVar4,stamp,3);
       VCALL(*piVar4, 0x5bc)(piVar4,3);
       return;
     }
-    if (VVar1 != 0x1) {
-      if (VVar1 != 0x8) {
+    if (kind != 0x1) {
+      if (kind != 0x8) {
         return;
       }
-      if (M<SInt32>(param_1 + 0x48) == 0) {
-        M<SInt16>(param_1 + 0xe) = M<SInt16>(param_1 + 0xe) + -1;
+      if (M<SInt32>(textureBytes + 0x48) == 0) {
+        M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + -1;
       }
-      M<UInt32>(param_1 + 0x5c) = uVar2;
+      M<UInt32>(textureBytes + 0x5c) = stamp;
       return;
     }
-    param_1 = M<UInt8 *>(param_1 + 0x50);
-  } while (param_1 != (UInt8 *)0x0);
+    textureBytes = M<UInt8 *>(textureBytes + 0x50);
+  } while (textureBytes != (UInt8 *)0x0);
   return;
 }

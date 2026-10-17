@@ -27,9 +27,9 @@
 
 
 /* real addr 0x7e60 */
-void IOATIR500GLContext::set_texture_flags(VendorTextureBuffer *real_param_1) {
+void IOATIR500GLContext::set_texture_flags(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
   return;
 }

@@ -27,18 +27,18 @@
 
 
 /* real addr 0x26f60 */
-UInt32 ATIR500GLContext::GetQueryOffset(VendorTextureBuffer *real_param_1, UInt32 param_2, UInt32 param_3) {
+UInt32 ATIR500GLContext::GetQueryOffset(VendorTextureBuffer *buffer, UInt32 queryIndex, UInt32 selector) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *bufferBytes = reinterpret_cast<UInt8 *>(buffer);
 
-  SInt32 iVar1;
+  SInt32 queryOffset;
   
-  if (param_3 == 0) {
-    iVar1 = param_2 * 0x20 + 0x210;
+  if (selector == 0) {
+    queryOffset = queryIndex * 0x20 + 0x210;
   }
   else {
-    iVar1 = param_2 * 0x20 + 0x10;
+    queryOffset = queryIndex * 0x20 + 0x10;
   }
-  return *(SInt32 *)(param_1 + 0x50) + M<SInt32>(M<SInt32>(param_1 + 0x54) + 4) + iVar1 +
+  return *(SInt32 *)(bufferBytes + 0x50) + M<SInt32>(M<SInt32>(bufferBytes + 0x54) + 4) + queryOffset +
          M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
 }

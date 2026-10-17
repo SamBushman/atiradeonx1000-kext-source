@@ -27,7 +27,7 @@
 
 
 /* real addr 0x288e0 */
-UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32 param_2, UInt32 param_3, UInt32 param_4) {
+UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*outputBuffer, UInt32 wordIndex, UInt32 headerWord0, UInt32 headerWord1) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
@@ -59,8 +59,8 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32
   UInt8 *pAVar27;
   UInt32 uVar28;
   int iVar29;
-  int local_98 [4];
-  int local_88 [4];
+  int attachmentRecords [4];
+  int attachmentBuffers [4];
   UInt32 local_78 [4];
   UInt32 local_68 [4];
   int local_58;
@@ -68,8 +68,8 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32
   iVar29 = 4;
   iVar13 = 0;
   do {
-    M<UInt32>((int)local_98 + iVar13) = 0;
-    M<UInt32>((int)local_88 + iVar13) = 0;
+    M<UInt32>((int)attachmentRecords + iVar13) = 0;
+    M<UInt32>((int)attachmentBuffers + iVar13) = 0;
     M<UInt32>((int)local_78 + iVar13) = 0;
     M<UInt32>((int)local_68 + iVar13) = 0;
     iVar13 = iVar13 + 4;
@@ -89,8 +89,8 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32
       do {
         uVar6 = M<UInt16>(pAVar21 + 0x3aa);
         pAVar21 = pAVar21 + 2;
-        M<unsigned int>((int)local_98 + iVar13) = (unsigned int)uVar6 * 0x78 + iVar19 + 0xa8;
-        M<UInt32>((int)local_88 + iVar13) = M<UInt32>((unsigned int)uVar6 * 4 + iVar19 + 0xb70);
+        M<unsigned int>((int)attachmentRecords + iVar13) = (unsigned int)uVar6 * 0x78 + iVar19 + 0xa8;
+        M<UInt32>((int)attachmentBuffers + iVar13) = M<UInt32>((unsigned int)uVar6 * 4 + iVar19 + 0xb70);
         iVar13 = iVar13 + 4;
         uVar9 = uVar9 - 1;
       } while (uVar9 != 0);
@@ -108,10 +108,10 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32
       do {
         iVar19 = iVar13 * 0x78;
         iVar13 = iVar13 + 1;
-        M<UInt8 *>((int)local_98 + iVar29) = self + iVar19 + 0x3c0;
+        M<UInt8 *>((int)attachmentRecords + iVar29) = self + iVar19 + 0x3c0;
         pAVar27 = pAVar21 + 0x3b2;
         pAVar21 = pAVar21 + 2;
-        M<UInt8 *>((int)local_88 + iVar29) =
+        M<UInt8 *>((int)attachmentBuffers + iVar29) =
              self + (unsigned int)M<UInt16>(pAVar27) * 0x78 + 0x3c0;
         iVar29 = iVar29 + 4;
         uVar26 = uVar26 - 1;
@@ -123,40 +123,40 @@ UInt32 ATIR500GLContext::write_kernel_context_buffer_regs(UInt32*param_1, UInt32
     iVar13 = 1;
     pAVar21 = pAVar27;
   }
-  param_1[param_2] = 0x13c6;
-  param_1[param_2 + 1] = 3;
-  param_1[param_2 + 2] = 0xd0b;
-  param_1[param_2 + 3] = 5;
-  param_1[param_2 + 4] = 0x1393;
-  param_1[param_2 + 5] = 10;
-  param_1[param_2 + 6] = 0x1006;
-  local_58 = param_2 + 8;
+  outputBuffer[wordIndex] = 0x13c6;
+  outputBuffer[wordIndex + 1] = 3;
+  outputBuffer[wordIndex + 2] = 0xd0b;
+  outputBuffer[wordIndex + 3] = 5;
+  outputBuffer[wordIndex + 4] = 0x1393;
+  outputBuffer[wordIndex + 5] = 10;
+  outputBuffer[wordIndex + 6] = 0x1006;
+  local_58 = wordIndex + 8;
   iVar16 = M<int>(self + 200);
-  param_1[param_2 + 7] = M<UInt32>(iVar16 + 0xb74);
+  outputBuffer[wordIndex + 7] = M<UInt32>(iVar16 + 0xb74);
   uVar9 = 0;
-  iVar19 = M<int>(uVar26 * 4 + local_88[0] + 0x40);
-  iVar14 = M<int>(iVar13 * 4 + local_88[0] + 0x40);
-  uVar6 = M<UInt16>(local_88[0] + 0x20);
-  iVar22 = M<int>(local_88[0] + 8);
-  if ((M<unsigned int>(local_88[0] + 0x3c) & 0xf00000) != 0) {
-    uVar9 = (unsigned int)M<UInt16>(local_88[0] + 0x14) / (M<unsigned int>(local_88[0] + 0x3c) >> 0x14 & 0xf);
+  iVar19 = M<int>(uVar26 * 4 + attachmentBuffers[0] + 0x40);
+  iVar14 = M<int>(iVar13 * 4 + attachmentBuffers[0] + 0x40);
+  uVar6 = M<UInt16>(attachmentBuffers[0] + 0x20);
+  iVar22 = M<int>(attachmentBuffers[0] + 8);
+  if ((M<unsigned int>(attachmentBuffers[0] + 0x3c) & 0xf00000) != 0) {
+    uVar9 = (unsigned int)M<UInt16>(attachmentBuffers[0] + 0x14) / (M<unsigned int>(attachmentBuffers[0] + 0x3c) >> 0x14 & 0xf);
   }
-  uVar7 = M<UInt16>(local_88[0] + 0x16);
+  uVar7 = M<UInt16>(attachmentBuffers[0] + 0x16);
   uVar10 = 0x20 / uVar7;
   if (uVar10 <= uVar9) {
     uVar10 = uVar9;
   }
-  bVar2 = M<UInt8>(local_88[0] + 0x38);
+  bVar2 = M<UInt8>(attachmentBuffers[0] + 0x38);
   uVar9 = 0x80000000;
   if (bVar2 < 2) {
     uVar9 = 0;
   }
   uVar23 = 0;
-  uVar24 = M<UInt32>(local_98[0] + 0x30);
-  if ((M<unsigned int>(local_98[0] + 0x3c) & 0xf00000) != 0) {
-    uVar23 = (unsigned int)M<UInt16>(local_98[0] + 0x14) / (M<unsigned int>(local_98[0] + 0x3c) >> 0x14 & 0xf);
+  uVar24 = M<UInt32>(attachmentRecords[0] + 0x30);
+  if ((M<unsigned int>(attachmentRecords[0] + 0x3c) & 0xf00000) != 0) {
+    uVar23 = (unsigned int)M<UInt16>(attachmentRecords[0] + 0x14) / (M<unsigned int>(attachmentRecords[0] + 0x3c) >> 0x14 & 0xf);
   }
-  uVar15 = 0x20 / M<UInt16>(local_98[0] + 0x16);
+  uVar15 = 0x20 / M<UInt16>(attachmentRecords[0] + 0x16);
   if (uVar15 <= uVar23) {
     uVar15 = uVar23;
   }
@@ -170,9 +170,9 @@ LAB_00028bac:
     uVar25 = 0;
     if (iVar11 != 0) goto LAB_00028bac;
   }
-  uVar17 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(iVar16 + 0x870)),M<UInt32>(local_98[0] + 0x28),2);
-  if (((((M<unsigned int>(local_98[0] + 0x28) & 0x3ff00000) == 0x3ff00000) ||
-       (M<char>(local_98[0] + 0x36) == '\0')) ||
+  uVar17 = HZMEM_GetBlockOffset((_HZDATA *)((UInt8 *)(iVar16 + 0x870)),M<UInt32>(attachmentRecords[0] + 0x28),2);
+  if (((((M<unsigned int>(attachmentRecords[0] + 0x28) & 0x3ff00000) == 0x3ff00000) ||
+       (M<char>(attachmentRecords[0] + 0x36) == '\0')) ||
       ((M<unsigned int>(M<int>(self + 0x290) + 0xbe8) & 0x700000) == 0)) ||
      (uVar18 = 0x600, M<SInt16>(self + 0xac) != 9)) {
     uVar18 = 0;
@@ -184,7 +184,7 @@ LAB_00028bac:
       uVar23 = 1;
     }
     do {
-      iVar20 = M<int>((int)local_88 + iVar16);
+      iVar20 = M<int>((int)attachmentBuffers + iVar16);
       uVar15 = 0;
       iVar11 = M<int>(uVar26 * 4 + iVar20 + 0x40);
       M<unsigned int>((int)local_78 + iVar16) =
@@ -208,28 +208,28 @@ LAB_00028bac:
       uVar23 = uVar23 - 1;
     } while (uVar23 != 0);
   }
-  param_1[local_58] = 0x50b;
-  param_1[param_2 + 9] =
+  outputBuffer[local_58] = 0x50b;
+  outputBuffer[wordIndex + 9] =
        uVar9 | iVar19 * (unsigned int)uVar6 + iVar29 * (iVar14 - iVar19) + iVar22 >> 10 |
                uVar10 * uVar7 * 0x10000 & 0x3fc00000 | (bVar2 & 1) << 0x1e;
-  param_1[param_2 + 10] = 0x3138a;
-  param_1[param_2 + 0xb] = local_78[0];
-  param_1[param_2 + 0xc] = local_78[1];
-  param_1[param_2 + 0xd] = local_78[2];
-  param_1[param_2 + 0xe] = local_78[3];
-  param_1[param_2 + 0xf] = 0x3138e;
-  param_1[param_2 + 0x10] = local_68[0];
-  param_1[param_2 + 0x11] = local_68[1];
-  param_1[param_2 + 0x12] = local_68[2];
-  param_1[param_2 + 0x13] = local_68[3];
-  param_1[param_2 + 0x14] = 0x1380;
-  param_1[param_2 + 0x15] = uVar18;
-  param_1[param_2 + 0x16] = 0x1385;
-  param_1[param_2 + 0x17] = uVar24;
-  param_1[param_2 + 0x18] = 0x1395;
-  param_1[param_2 + 0x19] = uVar17;
-  param_1[param_2 + 0x1a] = 0x1399;
-  param_1[param_2 + 0x1b] = uVar25;
+  outputBuffer[wordIndex + 10] = 0x3138a;
+  outputBuffer[wordIndex + 0xb] = local_78[0];
+  outputBuffer[wordIndex + 0xc] = local_78[1];
+  outputBuffer[wordIndex + 0xd] = local_78[2];
+  outputBuffer[wordIndex + 0xe] = local_78[3];
+  outputBuffer[wordIndex + 0xf] = 0x3138e;
+  outputBuffer[wordIndex + 0x10] = local_68[0];
+  outputBuffer[wordIndex + 0x11] = local_68[1];
+  outputBuffer[wordIndex + 0x12] = local_68[2];
+  outputBuffer[wordIndex + 0x13] = local_68[3];
+  outputBuffer[wordIndex + 0x14] = 0x1380;
+  outputBuffer[wordIndex + 0x15] = uVar18;
+  outputBuffer[wordIndex + 0x16] = 0x1385;
+  outputBuffer[wordIndex + 0x17] = uVar24;
+  outputBuffer[wordIndex + 0x18] = 0x1395;
+  outputBuffer[wordIndex + 0x19] = uVar17;
+  outputBuffer[wordIndex + 0x1a] = 0x1399;
+  outputBuffer[wordIndex + 0x1b] = uVar25;
   uVar24 = M<UInt32>(pAVar21 + 8);
   uVar9 = 0;
   if ((M<unsigned int>(pAVar27 + 0x3c) & 0xf00000) != 0) {
@@ -293,68 +293,68 @@ LAB_00028f3c:
   }
   uVar28 = ((int)(uVar12 + iVar13 + -1) / iVar13) * iVar13;
 LAB_00028fac:
-  param_1[param_2 + 0x1c] = 0x113c8;
-  param_1[param_2 + 0x1d] = uVar24;
-  param_1[param_2 + 0x1e] =
+  outputBuffer[wordIndex + 0x1c] = 0x113c8;
+  outputBuffer[wordIndex + 0x1d] = uVar24;
+  outputBuffer[wordIndex + 0x1e] =
        ((UInt8)AVar4 & 6) << 0x10 |
        ((UInt8)AVar4 & 1) << 0x10 | ((UInt8)AVar3 & 3) << 0x13 | uVar10 & 0x3ffc;
-  param_1[param_2 + 0x1f] = 0x13d8;
-  param_1[param_2 + 0x20] = 0;
-  param_1[param_2 + 0x21] = 0x13c4;
-  param_1[param_2 + 0x22] = -((UInt8)AVar5 ^ 0x10) >> 0x1e & 2;
-  param_1[param_2 + 0x23] = 0x13ca;
-  param_1[param_2 + 0x24] = uVar17;
-  param_1[param_2 + 0x25] = 0x13c7;
-  uVar24 = this->compute_zb_bw_cntl(param_4);
-  param_1[param_2 + 0x26] = uVar24;
-  param_1[param_2 + 0x27] = 0x13cc;
-  param_1[param_2 + 0x28] = uVar25;
-  param_1[param_2 + 0x29] = 0x13cd;
-  param_1[param_2 + 0x2a] = uVar18;
-  param_1[param_2 + 0x2b] = 0x10e9;
-  uVar24 = this->compute_sc_hyperz_en(param_3);
-  param_1[param_2 + 0x2c] = uVar24;
-  param_1[param_2 + 0x2d] = 0x13d1;
-  param_1[param_2 + 0x2e] = uVar9;
-  param_1[param_2 + 0x2f] = 0x13d5;
-  param_1[param_2 + 0x30] = uVar28;
+  outputBuffer[wordIndex + 0x1f] = 0x13d8;
+  outputBuffer[wordIndex + 0x20] = 0;
+  outputBuffer[wordIndex + 0x21] = 0x13c4;
+  outputBuffer[wordIndex + 0x22] = -((UInt8)AVar5 ^ 0x10) >> 0x1e & 2;
+  outputBuffer[wordIndex + 0x23] = 0x13ca;
+  outputBuffer[wordIndex + 0x24] = uVar17;
+  outputBuffer[wordIndex + 0x25] = 0x13c7;
+  uVar24 = this->compute_zb_bw_cntl(headerWord1);
+  outputBuffer[wordIndex + 0x26] = uVar24;
+  outputBuffer[wordIndex + 0x27] = 0x13cc;
+  outputBuffer[wordIndex + 0x28] = uVar25;
+  outputBuffer[wordIndex + 0x29] = 0x13cd;
+  outputBuffer[wordIndex + 0x2a] = uVar18;
+  outputBuffer[wordIndex + 0x2b] = 0x10e9;
+  uVar24 = this->compute_sc_hyperz_en(headerWord0);
+  outputBuffer[wordIndex + 0x2c] = uVar24;
+  outputBuffer[wordIndex + 0x2d] = 0x13d1;
+  outputBuffer[wordIndex + 0x2e] = uVar9;
+  outputBuffer[wordIndex + 0x2f] = 0x13d5;
+  outputBuffer[wordIndex + 0x30] = uVar28;
   if (M<int>(self + 0x3bc) == 0) {
-    if ((local_88[0] == M<int>(self + 0x290) + 0x4e0) &&
+    if ((attachmentBuffers[0] == M<int>(self + 0x290) + 0x4e0) &&
        ((M<unsigned int>(M<int>(self + 0x290) + 0xbe8) & 0x700000) != 0)) {
-      if ((M<unsigned int>(local_88[0] + 0x3c) & 0xf00000) == 0) {
+      if ((M<unsigned int>(attachmentBuffers[0] + 0x3c) & 0xf00000) == 0) {
         uVar9 = 0;
       }
       else {
-        uVar9 = (unsigned int)M<UInt16>(local_88[0] + 0x1c) /
-                (M<unsigned int>(local_88[0] + 0x3c) >> 0x14 & 0xf) & 0x1fff;
+        uVar9 = (unsigned int)M<UInt16>(attachmentBuffers[0] + 0x1c) /
+                (M<unsigned int>(attachmentBuffers[0] + 0x3c) >> 0x14 & 0xf) & 0x1fff;
       }
     }
     else {
-      if (((M<unsigned int>(local_88[0] + 0x3c) & 0xf00000) == 0) ||
-         (uVar9 = (int)((unsigned int)M<UInt16>(local_88[0] + 0x1c) /
-                       (M<unsigned int>(local_88[0] + 0x3c) >> 0x14 & 0xf)) >> (uVar26 & 0x3f), uVar9 == 0
+      if (((M<unsigned int>(attachmentBuffers[0] + 0x3c) & 0xf00000) == 0) ||
+         (uVar9 = (int)((unsigned int)M<UInt16>(attachmentBuffers[0] + 0x1c) /
+                       (M<unsigned int>(attachmentBuffers[0] + 0x3c) >> 0x14 & 0xf)) >> (uVar26 & 0x3f), uVar9 == 0
          )) {
         uVar9 = 1;
       }
       uVar9 = uVar9 & 0x1fff;
     }
-    uVar26 = (int)(unsigned int)M<UInt16>(local_88[0] + 0x1e) >> (uVar26 & 0x3f);
+    uVar26 = (int)(unsigned int)M<UInt16>(attachmentBuffers[0] + 0x1e) >> (uVar26 & 0x3f);
     if (uVar26 == 0) {
       uVar26 = 1;
     }
     uVar24 = (uVar26 & 0x1fff) << 0xd | uVar9;
   }
   else {
-    uVar24 = (M<UInt16>(local_98[0] + 0x1e) & 0x1fff) << 0xd |
-             M<UInt16>(local_98[0] + 0x1c) & 0x1fff;
+    uVar24 = (M<UInt16>(attachmentRecords[0] + 0x1e) & 0x1fff) << 0xd |
+             M<UInt16>(attachmentRecords[0] + 0x1c) & 0x1fff;
   }
-  param_1[param_2 + 0x31] = 0x110ec   /* PM4 type-0 header word (1 register at 0x10ec); Ghidra labels the constant as a data address */;
-  param_1[param_2 + 0x32] = 0;
-  param_1[param_2 + 0x33] = uVar24;
-  param_1[param_2 + 0x34] = 0x10f4;
-  param_1[param_2 + 0x35] = 0xaaaa;
-  param_1[param_2 + 0x36] = 0x105bb;
-  param_1[param_2 + 0x37] = M<UInt32>(self + 0x354);
-  param_1[param_2 + 0x38] = M<UInt32>(self + 0x358);
-  return param_2 + 0x39;
+  outputBuffer[wordIndex + 0x31] = 0x110ec   /* PM4 type-0 header word (1 register at 0x10ec); Ghidra labels the constant as a data address */;
+  outputBuffer[wordIndex + 0x32] = 0;
+  outputBuffer[wordIndex + 0x33] = uVar24;
+  outputBuffer[wordIndex + 0x34] = 0x10f4;
+  outputBuffer[wordIndex + 0x35] = 0xaaaa;
+  outputBuffer[wordIndex + 0x36] = 0x105bb;
+  outputBuffer[wordIndex + 0x37] = M<UInt32>(self + 0x354);
+  outputBuffer[wordIndex + 0x38] = M<UInt32>(self + 0x358);
+  return wordIndex + 0x39;
 }

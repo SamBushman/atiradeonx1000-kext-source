@@ -27,14 +27,14 @@
 
 
 /* real addr 0x26db0 */
-IOExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService**param_1, UInt32 param_2) {
+IOExternalMethod *ATIR500GLContext::getTargetAndMethodForIndex(IOService**target, UInt32 selector) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  *param_1 = reinterpret_cast<IOService *>(this);
-  if (param_2 < 0x14) {
-    return (IOExternalMethod *)(param_2 * 0x18 + M<SInt32>(self + 0x2a0));
+  *target = reinterpret_cast<IOService *>(this);
+  if (selector < 0x14) {
+    return (IOExternalMethod *)(selector * 0x18 + M<SInt32>(self + 0x2a0));
   }
-  if (param_2 != 0x14) {
+  if (selector != 0x14) {
     return 0;
   }
   return (IOExternalMethod *)(*(SInt32 *)(self + 0x360));

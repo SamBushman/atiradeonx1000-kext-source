@@ -27,25 +27,25 @@
 
 
 /* real addr 0x26e40 */
-UInt32 ATIR500GLContext::compute_zb_bw_cntl(UInt32 param_1) {
+UInt32 ATIR500GLContext::compute_zb_bw_cntl(UInt32 requested) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt8 *pAVar1;
-  UInt32 uVar2;
+  UInt8 *depthBuffer;
+  UInt32 bandwidthBits;
   
-  pAVar1 = self + 0x5a0;
+  depthBuffer = self + 0x5a0;
   if (M<SInt32>(self + 0x3bc) == 0) {
-    pAVar1 = *(UInt8 **)
+    depthBuffer = *(UInt8 **)
               ((UInt32)M<UInt16>(self + 0xae) * 4 + M<SInt32>(self + 0x290) + 0xb70);
   }
-  uVar2 = 0;
-  if ((pAVar1[0x34] != 0x0) &&
-     ((2 < M<UInt16>(pAVar1 + 0x16) || (uVar2 = 4, 2 < (M<UInt32>(pAVar1 + 0x3c) >> 0x14 & 0xf))))
+  bandwidthBits = 0;
+  if ((depthBuffer[0x34] != 0x0) &&
+     ((2 < M<UInt16>(depthBuffer + 0x16) || (bandwidthBits = 4, 2 < (M<UInt32>(depthBuffer + 0x3c) >> 0x14 & 0xf))))
      ) {
-    uVar2 = 0x1c;
+    bandwidthBits = 0x1c;
   }
-  if ((pAVar1[0x35] != 0x0) && ((param_1 & 1) != 0)) {
-    uVar2 = uVar2 | 1;
+  if ((depthBuffer[0x35] != 0x0) && ((requested & 1) != 0)) {
+    bandwidthBits = bandwidthBits | 1;
   }
-  return param_1 & 0xffffffe2 | uVar2;
+  return requested & 0xffffffe2 | bandwidthBits;
 }

@@ -31,46 +31,46 @@ extern "C" UInt32 GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDes
 void IOATIR500GLContext::freeCommandBuffer() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 iVar1;
-  SInt32 *piVar2;
-  SInt32 iVar3;
+  SInt32 accel;
+  SInt32 *mapping;
+  SInt32 context;
   
   if (M<SInt32>(self + 0xd4) != 0) {
-    iVar1 = M<SInt32>(self + 200);
-    iVar3 = M<SInt32>(iVar1 + 0x60);
-    if (iVar3 == 0) {
-      if (M<SInt32>(iVar1 + 0x68) == 0) {
+    accel = M<SInt32>(self + 200);
+    context = M<SInt32>(accel + 0x60);
+    if (context == 0) {
+      if (M<SInt32>(accel + 0x68) == 0) {
         return;
       }
     }
     else {
       while( true ) {
-        if (M<UInt32>(iVar1 + 0x5c8) < M<UInt32>(iVar3 + 0xb0)) {
-          M<UInt32>(iVar1 + 0x5c8) = M<UInt32>(iVar3 + 0xb0);
+        if (M<UInt32>(accel + 0x5c8) < M<UInt32>(context + 0xb0)) {
+          M<UInt32>(accel + 0x5c8) = M<UInt32>(context + 0xb0);
         }
-        piVar2 = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar3,M<UInt32>(self + 0xd4));
-        if (piVar2 != (SInt32 *)0x0) {
-          VCALL(*piVar2, 0x18)(piVar2);
+        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + 0xd4));
+        if (mapping != (SInt32 *)0x0) {
+          VCALL(*mapping, 0x18)(mapping);
         }
-        iVar3 = M<SInt32>(iVar3 + 0x80);
-        if (iVar3 == 0) break;
-        iVar1 = M<SInt32>(self + 200);
+        context = M<SInt32>(context + 0x80);
+        if (context == 0) break;
+        accel = M<SInt32>(self + 200);
       }
-      iVar1 = M<SInt32>(self + 200);
+      accel = M<SInt32>(self + 200);
     }
-    iVar3 = M<SInt32>(iVar1 + 0x68);
-    if (iVar3 != 0) {
+    context = M<SInt32>(accel + 0x68);
+    if (context != 0) {
       while( true ) {
-        if (M<UInt32>(iVar1 + 0x5c8) < 0x80000) {
-          M<UInt32>(iVar1 + 0x5c8) = 0x80000;
+        if (M<UInt32>(accel + 0x5c8) < 0x80000) {
+          M<UInt32>(accel + 0x5c8) = 0x80000;
         }
-        piVar2 = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(iVar3,M<UInt32>(self + 0xd4));
-        if (piVar2 != (SInt32 *)0x0) {
-          VCALL(*piVar2, 0x18)(piVar2);
+        mapping = (SInt32 *)GH_ZN12IOUserClient26removeMappingForDescriptorEP18IOMemoryDesc(context,M<UInt32>(self + 0xd4));
+        if (mapping != (SInt32 *)0x0) {
+          VCALL(*mapping, 0x18)(mapping);
         }
-        iVar3 = M<SInt32>(iVar3 + 0x80);
-        if (iVar3 == 0) break;
-        iVar1 = M<SInt32>(self + 200);
+        context = M<SInt32>(context + 0x80);
+        if (context == 0) break;
+        accel = M<SInt32>(self + 200);
       }
     }
   }

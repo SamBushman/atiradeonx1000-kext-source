@@ -27,7 +27,7 @@
 
 
 /* real addr 0x83b0 */
-void IOATIR500GLContext::add_vendor_surface_required_bits(eIOGLContextModeBits param_1) {
+void IOATIR500GLContext::add_vendor_surface_required_bits(eIOGLContextModeBits mode) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   return;

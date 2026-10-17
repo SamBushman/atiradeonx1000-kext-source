@@ -28,29 +28,29 @@ extern "C" UInt32 GH_OSDecrementAtomic(...) asm("_OSDecrementAtomic");
 
 
 /* real addr 0x7fa0 */
-void IOATIR500GLContext::stop(IOService *real_param_1) {
+void IOATIR500GLContext::stop(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   UInt8 *pIVar1;
-  UInt32 uVar2;
+  UInt32 pooledCount;
   SInt32 iVar3;
-  SInt32 *piVar4;
-  UInt8 *this_00;
-  UInt8 *pVVar5;
+  SInt32 *accelWords;
+  UInt8 *accel;
+  UInt8 *nextBuffer;
   SInt32 iVar6;
-  UInt8 *pVVar7;
+  UInt8 *buffer;
   UInt8 *pIVar8;
   
   M<UInt32>(self + 0x294) = 0;
-  piVar4 = M<SInt32 *>(self + 200);
-  pIVar8 = (UInt8 *)piVar4[0x18];
-  if (self == (UInt8 *)piVar4[0x18]) {
-    piVar4[0x18] = M<SInt32>(self + 0x80);
-    piVar4 = M<SInt32 *>(self + 200);
-    if ((piVar4[0x18] == 0) && (piVar4[0x1a] == 0)) {
-      VCALL(*piVar4, 0x538)(piVar4);
-      piVar4 = M<SInt32 *>(self + 200);
+  accelWords = M<SInt32 *>(self + 200);
+  pIVar8 = (UInt8 *)accelWords[0x18];
+  if (self == (UInt8 *)accelWords[0x18]) {
+    accelWords[0x18] = M<SInt32>(self + 0x80);
+    accelWords = M<SInt32 *>(self + 200);
+    if ((accelWords[0x18] == 0) && (accelWords[0x1a] == 0)) {
+      VCALL(*accelWords, 0x538)(accelWords);
+      accelWords = M<SInt32 *>(self + 200);
     }
   }
   else {
@@ -61,12 +61,12 @@ void IOATIR500GLContext::stop(IOService *real_param_1) {
     } while (self != pIVar8);
     M<UInt32>(pIVar1 + 0x80) = M<UInt32>(self + 0x80);
   }
-  piVar4[0x1ce] = piVar4[0x1ce] + -1;
+  accelWords[0x1ce] = accelWords[0x1ce] + -1;
   M<UInt32>(M<SInt32>(self + 200) + 0x5c8) = 0x20000;
   this->freeCommandBuffer();
   M<UInt32>(M<SInt32>(self + 200) + 0x5d8) = 0x10000;
-  this_00 = M<UInt8 *>(self + 200);
-  iVar6 = M<SInt32>(this_00 + 0x5cc);
+  accel = M<UInt8 *>(self + 200);
+  iVar6 = M<SInt32>(accel + 0x5cc);
   if (iVar6 != 0) {
     do {
       if ((M<SInt32 *>(iVar6 + 0x10) != (SInt32 *)0x0) &&
@@ -77,50 +77,50 @@ void IOATIR500GLContext::stop(IOService *real_param_1) {
       }
       iVar6 = M<SInt32>(iVar6 + 0x3c);
     } while (iVar6 != 0);
-    this_00 = M<UInt8 *>(self + 200);
+    accel = M<UInt8 *>(self + 200);
   }
-  pVVar7 = M<UInt8 *>(self + 0xe8);
-  if (pVVar7 != (UInt8 *)0x0) {
+  buffer = M<UInt8 *>(self + 0xe8);
+  if (buffer != (UInt8 *)0x0) {
     while( true ) {
-      pVVar5 = M<UInt8 *>(pVVar7 + 0x3c);
-      if (M<UInt32>(this_00 + 0x5d4) < 0x10) {
-        if (M<SInt32>(this_00 + 0x5d0) == 0) {
-          M<UInt8 *>(this_00 + 0x5cc) = pVVar7;
-          M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = pVVar7;
-          M<UInt32>(pVVar7 + 0x3c) = 0;
+      nextBuffer = M<UInt8 *>(buffer + 0x3c);
+      if (M<UInt32>(accel + 0x5d4) < 0x10) {
+        if (M<SInt32>(accel + 0x5d0) == 0) {
+          M<UInt8 *>(accel + 0x5cc) = buffer;
+          M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = buffer;
+          M<UInt32>(buffer + 0x3c) = 0;
         }
         else {
-          M<UInt8 *>(M<SInt32>(this_00 + 0x5d0) + 0x3c) = pVVar7;
-          M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = pVVar7;
-          M<UInt32>(pVVar7 + 0x3c) = 0;
+          M<UInt8 *>(M<SInt32>(accel + 0x5d0) + 0x3c) = buffer;
+          M<UInt8 *>(M<SInt32>(self + 200) + 0x5d0) = buffer;
+          M<UInt32>(buffer + 0x3c) = 0;
         }
         M<SInt32>(M<SInt32>(self + 200) + 0x5d4) = M<SInt32>(M<SInt32>(self + 200) + 0x5d4) + 1;
-        pVVar7[0x54] = 0x0;
-        if (M<SInt32 *>(pVVar7 + 0x10) != (SInt32 *)0x0) {
-          VCALL(*M<SInt32 *>(pVVar7 + 0x10), 0x18)(M<SInt32 *>(pVVar7 + 0x10));
-          M<UInt32>(pVVar7 + 0x10) = 0;
+        buffer[0x54] = 0x0;
+        if (M<SInt32 *>(buffer + 0x10) != (SInt32 *)0x0) {
+          VCALL(*M<SInt32 *>(buffer + 0x10), 0x18)(M<SInt32 *>(buffer + 0x10));
+          M<UInt32>(buffer + 0x10) = 0;
         }
       }
       else {
-        ((IOATIR500Accelerator *)(this_00))->freeOneDataBuffer((VendorTextureBuffer *)(pVVar7));
+        ((IOATIR500Accelerator *)(accel))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
       }
-      if (pVVar5 == (UInt8 *)0x0) break;
-      this_00 = M<UInt8 *>(self + 200);
-      pVVar7 = pVVar5;
+      if (nextBuffer == (UInt8 *)0x0) break;
+      accel = M<UInt8 *>(self + 200);
+      buffer = nextBuffer;
     }
-    this_00 = M<UInt8 *>(self + 200);
+    accel = M<UInt8 *>(self + 200);
   }
   M<UInt32>(self + 0xf0) = 0;
   M<UInt32>(self + 0xe8) = 0;
   M<UInt32>(self + 0xec) = 0;
-  uVar2 = M<UInt32>(this_00 + 0x5d4);
-  while (0xf < uVar2) {
-    pVVar7 = M<UInt8 *>(this_00 + 0x5cc);
-    M<UInt32>(this_00 + 0x5cc) = M<UInt32>(pVVar7 + 0x3c);
+  pooledCount = M<UInt32>(accel + 0x5d4);
+  while (0xf < pooledCount) {
+    buffer = M<UInt8 *>(accel + 0x5cc);
+    M<UInt32>(accel + 0x5cc) = M<UInt32>(buffer + 0x3c);
     M<SInt32>(M<SInt32>(self + 200) + 0x5d4) = M<SInt32>(M<SInt32>(self + 200) + 0x5d4) + -1;
-    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeOneDataBuffer((VendorTextureBuffer *)(pVVar7));
-    this_00 = M<UInt8 *>(self + 200);
-    uVar2 = M<UInt32>(this_00 + 0x5d4);
+    ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->freeOneDataBuffer((VendorTextureBuffer *)(buffer));
+    accel = M<UInt8 *>(self + 200);
+    pooledCount = M<UInt32>(accel + 0x5d4);
   }
   if (M<SInt32>(self + 0xfc) != 0) {
     this->freeAllContextBuffers();
@@ -154,6 +154,6 @@ void IOATIR500GLContext::stop(IOService *real_param_1) {
     VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
     M<UInt32>(self + 0x88) = 0;
   }
-  IOUserClient::stop(real_param_1);
+  IOUserClient::stop(provider);
   return;
 }

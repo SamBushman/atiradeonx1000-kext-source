@@ -27,44 +27,44 @@
 
 
 /* real addr 0x280c0 */
-UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *real_param_1, bool param_2) {
+UInt32 ATIR500GLContext::GetTextureOffset(VendorTextureBuffer *texture, bool forWrite) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt8 VVar1;
-  SInt32 iVar2;
+  UInt8 type;
+  SInt32 offset;
   UInt32 in_register_00000014;
-  UInt8 *this_00;
-  UInt32 auStack_28 [8];
+  UInt8 *surface;
+  UInt32 bufferMask [8];
   
-  VVar1 = param_1[0x20];
-  if ((VVar1 == 0x3) || (VVar1 == 0x7)) {
-    iVar2 = 0;
-    if (((UInt32)param_2) == 0) {
-      iVar2 = M<SInt32>(param_1 + 0x60);
+  type = textureBytes[0x20];
+  if ((type == 0x3) || (type == 0x7)) {
+    offset = 0;
+    if (((UInt32)forWrite) == 0) {
+      offset = M<SInt32>(textureBytes + 0x60);
     }
-    iVar2 = iVar2 + M<SInt32>(param_1 + 0x48);
+    offset = offset + M<SInt32>(textureBytes + 0x48);
   }
   else {
-    if (VVar1 == 0x6) {
-      if (M<SInt32>(M<SInt32>(param_1 + 0x54) + 4) != 0) {
-        iVar2 = 0;
-        if (((UInt32)param_2) == 0) {
-          iVar2 = M<SInt32>(param_1 + 0x60);
+    if (type == 0x6) {
+      if (M<SInt32>(M<SInt32>(textureBytes + 0x54) + 4) != 0) {
+        offset = 0;
+        if (((UInt32)forWrite) == 0) {
+          offset = M<SInt32>(textureBytes + 0x60);
         }
-        return *(SInt32 *)(M<SInt32>(param_1 + 0x54) + 4) +
-               iVar2 + M<SInt32>(param_1 + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
+        return *(SInt32 *)(M<SInt32>(textureBytes + 0x54) + 4) +
+               offset + M<SInt32>(textureBytes + 0x50) + M<SInt32>(M<SInt32>(self + 200) + 0x8a4);
       }
     }
-    else if ((VVar1 == 0x0) &&
-            (this_00 = M<UInt8 *>(param_1 + 0x50), this_00 != (UInt8 *)0x0))
+    else if ((type == 0x0) &&
+            (surface = M<UInt8 *>(textureBytes + 0x50), surface != (UInt8 *)0x0))
     {
-      iVar2 = ((IOATIR500Surface *)(this_00))->surface_buffer_idx_mask(M<UInt32>(param_1 + 0x58),(UInt32 *)(auStack_28));
-      iVar2 = M<SInt32>(this_00 + iVar2 * 4 + 0xb70);
-      return (UInt32)M<UInt16>(iVar2 + 0x20) * M<SInt32>(M<SInt32>(param_1 + 0x60) * 4 + iVar2 + 0x40)
-             + M<SInt32>(iVar2 + 8);
+      offset = ((IOATIR500Surface *)(surface))->surface_buffer_idx_mask(M<UInt32>(textureBytes + 0x58),(UInt32 *)(bufferMask));
+      offset = M<SInt32>(surface + offset * 4 + 0xb70);
+      return (UInt32)M<UInt16>(offset + 0x20) * M<SInt32>(M<SInt32>(textureBytes + 0x60) * 4 + offset + 0x40)
+             + M<SInt32>(offset + 8);
     }
-    iVar2 = 0;
+    offset = 0;
   }
-  return iVar2;
+  return offset;
 }

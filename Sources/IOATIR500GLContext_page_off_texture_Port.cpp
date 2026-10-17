@@ -29,41 +29,41 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9740 */
-IOReturn IOATIR500GLContext::page_off_texture(UInt32 param_2, UInt32 param_3, unsigned int param_4, unsigned int param_5) {
+IOReturn IOATIR500GLContext::page_off_texture(UInt32 textureID, UInt32 mipAndFace, unsigned int structPtr, unsigned int structSize) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the real arguments start at param_2 (#86) */
+    UInt8 *param_1 = self;   /* Ghidra's param_1 IS `this` (r3); the real arguments start at textureID (#86) */
 
-  SInt32 *piVar1;
-  UInt32 uVar2;
+  SInt32 *accel;
+  UInt32 result;
   SInt32 iVar3;
   SInt32 texture;   /* #169: the texture-buffer pointer, live in r4 at the vcall in stock (0x9790 lwzx r4) */
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(param_1 + 200) + 0x840));
-  piVar1 = M<SInt32 *>(param_1 + 200);
-  if (M<char>(piVar1 + 0x20) == '\0') {
+  accel = M<SInt32 *>(param_1 + 200);
+  if (M<char>(accel + 0x20) == '\0') {
 LAB_00009800:
-    GH_IOLockUnlock(piVar1[0x210]);
-    uVar2 = 0;
+    GH_IOLockUnlock(accel[0x210]);
+    result = 0;
   }
   else {
-    if (param_2 < M<UInt32>(M<SInt32>(param_1 + 0x88) + 0x14)) {
-      iVar3 = M<SInt32>(param_2 * 4 + M<SInt32>(M<SInt32>(param_1 + 0x88) + 0x10));
+    if (textureID < M<UInt32>(M<SInt32>(param_1 + 0x88) + 0x14)) {
+      iVar3 = M<SInt32>(textureID * 4 + M<SInt32>(M<SInt32>(param_1 + 0x88) + 0x10));
       texture = iVar3;
       if (iVar3 != 0) {
-        iVar3 = (param_3 >> 0x10) * 2 + M<SInt32>(iVar3 + 0x14);
+        iVar3 = (mipAndFace >> 0x10) * 2 + M<SInt32>(iVar3 + 0x14);
         if ((((UInt32)M<UInt16>(iVar3 + 0x28) & ~(UInt32)M<UInt16>(iVar3 + 0x1c)) >>
-             (param_3 & 0x3f) & 1) != 0) {
+             (mipAndFace & 0x3f) & 1) != 0) {
           /* #169: stock 0x97e4 calls vtable+0x52c (ATIRadeonX1000::pageoff_dirty_texture) with r3=accel, r4=texture,
-           * r5=param_3>>16, r6=param_3&0xffff - all still live in registers from the check above. The earlier port
+           * r5=mipAndFace>>16, r6=mipAndFace&0xffff - all still live in registers from the check above. The earlier port
            * dropped the three arguments (implicit-argument forwarding), so the callee read a NULL texture. */
-          VCALL(*piVar1, 0x52c)(piVar1, texture, param_3 >> 0x10, param_3 & 0xffff);
-          piVar1 = M<SInt32 *>(param_1 + 200);
+          VCALL(*accel, 0x52c)(accel, texture, mipAndFace >> 0x10, mipAndFace & 0xffff);
+          accel = M<SInt32 *>(param_1 + 200);
         }
         goto LAB_00009800;
       }
     }
-    GH_IOLockUnlock(piVar1[0x210]);
-    uVar2 = 0xe00002c2;
+    GH_IOLockUnlock(accel[0x210]);
+    result = 0xe00002c2;
   }
-  return uVar2;
+  return result;
 }

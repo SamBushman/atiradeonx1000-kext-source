@@ -265,7 +265,7 @@ public:
     /* Real return value is the real dword-count written (3 or 4), not
      * void as an earlier draft guessed - fixed after full transcription
      * in Sources/ATIR500GLContext_TextureOffsets.cpp. */
-    UInt32 WriteTextureOffset(UInt32 param1, UInt32 *outputBuffer, UInt32 index, VendorTextureBuffer *texture);
+    UInt32 WriteTextureOffset(UInt32 unit, UInt32 *outputBuffer, UInt32 index, VendorTextureBuffer *texture);
 
     /* GetVertexArrayOffset / WriteVertexArrayOffset - CONFIRMED real names
      * (opcode 0x39's full trace, stage4-embedded-opcode-table-completed.md).
@@ -273,14 +273,14 @@ public:
      * WriteTextureOffset, confirmed to route through the identical
      * texture-fetch-unit hardware (a genuine, confirmed R5xx architectural
      * fact: vertex attributes and fragment textures share fetch hardware). */
-    UInt32 GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt32 param2);
+    UInt32 GetVertexArrayOffset(VendorTextureBuffer *buffer, UInt32 extraOffset);
     /* Real return value is a fixed dword-count constant (0x18), not void -
      * fixed after full transcription. */
     UInt32 WriteVertexArrayOffset(UInt32 *outputBuffer, UInt32 startIndex);
 
     /* GetQueryOffset - CONFIRMED real name (GL_ARB_occlusion_query support,
      * stage3-query-api-and-flush-safety-check.md), body UNKNOWN beyond role. */
-    UInt32 GetQueryOffset(VendorTextureBuffer *buffer, UInt32 param2, UInt32 param3);
+    UInt32 GetQueryOffset(VendorTextureBuffer *buffer, UInt32 queryIndex, UInt32 selector);
 
     /*
      * NOTE: add_texture_to_stream/remove_texture_from_stream/
@@ -322,8 +322,8 @@ public:
      * sites, plus a real atomic counter update this project hadn't
      * anticipated.
      */
-    void get_texture(UInt32 *record, VendorTextureBuffer *texture, UInt32 *pLocal388, UInt32 *pLocal384,
-                      UInt32 *pLocal380, register_tracking_state *scratch);
+    void get_texture(UInt32 *record, VendorTextureBuffer *texture, UInt32 *streamOffset, UInt32 *pendingWords,
+                      UInt32 *reservedWords, register_tracking_state *scratch);
 
     /*
      * convertIOGLBufferToBufIdx - RESOLVED (issue #5): real body fully

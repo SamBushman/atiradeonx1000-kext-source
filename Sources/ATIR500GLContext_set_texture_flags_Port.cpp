@@ -27,17 +27,17 @@
 
 
 /* real addr 0x26fd0 */
-void ATIR500GLContext::set_texture_flags(VendorTextureBuffer *real_param_1) {
+void ATIR500GLContext::set_texture_flags(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  if (param_1[0x20] != 0x0) {
+  if (textureBytes[0x20] != 0x0) {
     return;
   }
-  if (M<SInt32>(param_1 + 0x50) == 0) {
+  if (M<SInt32>(textureBytes + 0x50) == 0) {
     return;
   }
-  M<UInt8>(M<SInt32>(param_1 + 0x14) + 0x15) =
-       (M<UInt8>(M<SInt32>(M<SInt32>(param_1 + 0x50) + 0xb70) + 0x38) & 7) << 2;
+  M<UInt8>(M<SInt32>(textureBytes + 0x14) + 0x15) =
+       (M<UInt8>(M<SInt32>(M<SInt32>(textureBytes + 0x50) + 0xb70) + 0x38) & 7) << 2;
   return;
 }

@@ -30,21 +30,21 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x28540 */
-bool ATIR500GLContext::start(IOService *real_param_1) {
+bool ATIR500GLContext::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
-  UInt16 uVar1;
+  UInt16 unitFormat;
   UInt8 *pAVar2;
   SInt32 iVar3;
-  UInt32 uVar4;
+  UInt32 result;
   UInt8 *pAVar5;
   
-  GH_IOLockLock(M<UInt32>(param_1 + 0x840));
-  iVar3 = IOATIR500GLContext::start(real_param_1);
+  GH_IOLockLock(M<UInt32>(providerBytes + 0x840));
+  iVar3 = IOATIR500GLContext::start(provider);
   if (iVar3 == 0) {
-    GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
-    uVar4 = 0;
+    GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
+    result = 0;
   }
   else {
     M<UInt32>(self + 0x3bc) = 0;
@@ -87,12 +87,12 @@ bool ATIR500GLContext::start(IOService *real_param_1) {
       pAVar2 = pAVar2 + 0x78;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
-    uVar1 = M<UInt16>(self + 0xac);
+    unitFormat = M<UInt16>(self + 0xac);
     iVar3 = 4;
     pAVar2 = self;
     do {
       M<UInt16>(pAVar2 + 0x3b2) = 0;
-      M<UInt16>(pAVar2 + 0x3aa) = uVar1;
+      M<UInt16>(pAVar2 + 0x3aa) = unitFormat;
       pAVar2 = pAVar2 + 2;
       iVar3 = iVar3 + -1;
     } while (iVar3 != 0);
@@ -100,8 +100,8 @@ bool ATIR500GLContext::start(IOService *real_param_1) {
     M<UInt32>(M<SInt32>(self + 0xe0) + 0x1c) = 9;
     M<UInt32>(M<SInt32>(self + 0xe0) + 0x40) = 0x1000000;
     M<UInt8 **>(self + 0x360) = (UInt8 **)&kGLSpecialMethod20; /* ATIR500GLContext::start(IOService*)::methodDescs */
-    GH_IOLockUnlock(M<UInt32>(param_1 + 0x840));
-    uVar4 = 1;
+    GH_IOLockUnlock(M<UInt32>(providerBytes + 0x840));
+    result = 1;
   }
-  return uVar4;
+  return result;
 }

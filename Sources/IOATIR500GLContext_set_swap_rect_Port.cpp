@@ -27,18 +27,18 @@
 
 
 /* real addr 0x7ba0 */
-IOReturn IOATIR500GLContext::set_swap_rect(SInt32 param_1, SInt32 param_2, SInt32 param_3, SInt32 param_4) {
+IOReturn IOATIR500GLContext::set_swap_rect(SInt32 x, SInt32 y, SInt32 w, SInt32 h) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  SInt32 *piVar1;
+  SInt32 *surface;
   
-  M<SInt16>(self + 0x90) = (SInt16)param_1;
-  M<SInt16>(self + 0x92) = (SInt16)param_2;
-  M<SInt16>(self + 0x94) = (SInt16)param_3;
-  M<SInt16>(self + 0x96) = (SInt16)param_4;
-  piVar1 = M<SInt32 *>(self + 0x290);
-  if (piVar1 != (SInt32 *)0x0) {
-    VCALL(*piVar1, 0x5c4)(piVar1);
+  M<SInt16>(self + 0x90) = (SInt16)x;
+  M<SInt16>(self + 0x92) = (SInt16)y;
+  M<SInt16>(self + 0x94) = (SInt16)w;
+  M<SInt16>(self + 0x96) = (SInt16)h;
+  surface = M<SInt32 *>(self + 0x290);
+  if (surface != (SInt32 *)0x0) {
+    VCALL(*surface, 0x5c4)(surface);
   }
   return 0;
 }

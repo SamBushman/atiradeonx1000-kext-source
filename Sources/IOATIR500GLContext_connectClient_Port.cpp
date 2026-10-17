@@ -29,24 +29,24 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x86d0 */
-IOReturn IOATIR500GLContext::connectClient(IOUserClient *real_param_1) {
+IOReturn IOATIR500GLContext::connectClient(IOUserClient *client) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *clientBytes = reinterpret_cast<UInt8 *>(client);
 
-  SInt32 *piVar1;
-  UInt32 uVar2;
+  SInt32 *handle;
+  UInt32 result;
   
-  if (M<SInt32>(self + 0x78) == M<SInt32>(param_1 + 0x78)) {
+  if (M<SInt32>(self + 0x78) == M<SInt32>(clientBytes + 0x78)) {
     GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
     VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
-    piVar1 = M<SInt32 *>(param_1 + 0x88);
-    M<SInt32 *>(self + 0x88) = piVar1;
-    VCALL(*piVar1, 0x14)(piVar1);
+    handle = M<SInt32 *>(clientBytes + 0x88);
+    M<SInt32 *>(self + 0x88) = handle;
+    VCALL(*handle, 0x14)(handle);
     GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-    uVar2 = 0;
+    result = 0;
   }
   else {
-    uVar2 = 0xe00002bc;
+    result = 0xe00002bc;
   }
-  return uVar2;
+  return result;
 }

@@ -1,0 +1,86 @@
+# ATIR500GLContext texture / offset functions remap (fork N4): placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# Locals that the decompile reuses for unrelated values inside one function (dual-use) are left alone: a rename applies to the whole function scope.
+# get_texture's pointer parameters carry the process_command_buffer stream state (streamOffset / pendingWords / reservedWords): keep these names in step with the process_command_buffer table.
+def	ATIR500GLContext::GetTextureOffset@0x280c0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::GetTextureOffset@0x280c0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::GetTextureOffset@0x280c0	param_2	forWrite	INFERRED	name from the class header declaration (bool: when clear the +0x60 write offset is added)
+def	ATIR500GLContext::GetTextureOffset@0x280c0	VVar1	type	CONFIRMED	texture+0x20 is the 6-value type discriminant (3/7 plain, 6 chained, 0 surface-backed): ATIR500GLContext_TextureOffsets.cpp and alloc_and_load_texture dispatch on it
+def	ATIR500GLContext::GetTextureOffset@0x280c0	iVar2	offset	INFERRED	the function result (GPU-visible offset); also reused for the surface-buffer index/pointer inside the type-0 arm
+def	ATIR500GLContext::GetTextureOffset@0x280c0	this_00	surface	CONFIRMED	texture+0x50 of a type-0 texture is its IOATIR500Surface (alloc_and_load_texture resolves it with find_surface_for_id); surface_buffer_idx_mask is called on it
+def	ATIR500GLContext::GetTextureOffset@0x280c0	auStack_28	bufferMask	INFERRED	out-parameter (outMask) of surface_buffer_idx_mask(bufferType, UInt32 *outMask); value unused here
+def	ATIR500GLContext::WriteTextureOffset@0x28420	param_1	unit	INFERRED	texture unit number: compact_current_textures passes its 0..15 slot counter, the function guards `< 8` and adds it to register 0x1150/0x1158
+def	ATIR500GLContext::WriteTextureOffset@0x28420	param_2	outputBuffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::WriteTextureOffset@0x28420	param_3	index	INFERRED	name from the class header declaration (dword index into outputBuffer)
+def	ATIR500GLContext::WriteTextureOffset@0x28420	real_param_4	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::WriteTextureOffset@0x28420	param_4	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::WriteTextureOffset@0x28420	bVar1	formatBits	INFERRED	byte at mip record+0x15; its low 5 bits are merged into the low bits of the patched offset
+def	ATIR500GLContext::WriteTextureOffset@0x28420	uVar4	packedOffset	INFERRED	GetTextureOffset result with the low 5 bits replaced by formatBits; stored as the second dword of the packet
+def	ATIR500GLContext::WriteTextureOffset@0x28420	iVar3	nextIndex	INFERRED	index + 2: where the third dword of the packet goes
+def	ATIR500GLContext::GetVertexArrayOffset@0x26ed0	real_param_1	buffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::GetVertexArrayOffset@0x26ed0	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::GetVertexArrayOffset@0x26ed0	param_2	extraOffset	INFERRED	byte offset added to the buffer base; 0xffffffff means none (treated as 0)
+def	ATIR500GLContext::WriteVertexArrayOffset@0x27470	param_1	outputBuffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::WriteVertexArrayOffset@0x27470	param_2	startIndex	INFERRED	name from the class header declaration
+def	ATIR500GLContext::WriteVertexArrayOffset@0x27470	bVar1	more	INFERRED	loop-continue flag of the 8-iteration pair loop
+def	ATIR500GLContext::WriteVertexArrayOffset@0x27470	uVar4	packetHeader	INFERRED	register header word (0x832 + 3*i, OR 0x10000) written before each offset pair
+def	ATIR500GLContext::WriteVertexArrayOffset@0x27470	uVar2	arrayOffset	INFERRED	result of GetVertexArrayOffset, stored into the packet
+def	ATIR500GLContext::GetQueryOffset@0x26f60	real_param_1	buffer	INFERRED	name from the class header declaration
+def	ATIR500GLContext::GetQueryOffset@0x26f60	param_1	bufferBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::GetQueryOffset@0x26f60	param_2	queryIndex	INFERRED	scaled by the 0x20-byte query stride (GetQueryOffset note in ATIR500GLContext_TextureOffsets.cpp)
+def	ATIR500GLContext::GetQueryOffset@0x26f60	param_3	selector	INFERRED	chooses the base offset: 0x210 when 0, else 0x10 (meaning of the two regions not established)
+def	ATIR500GLContext::GetQueryOffset@0x26f60	iVar1	queryOffset	INFERRED	base offset + queryIndex*0x20 inside the query result buffer
+def	ATIR500GLContext::get_texture@0x2b5f0	param_1	record	INFERRED	name from the class header declaration (end of the pending command stream, indexed backwards)
+def	ATIR500GLContext::get_texture@0x2b5f0	real_param_2	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_texture@0x2b5f0	param_2	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::get_texture@0x2b5f0	param_3	streamOffset	INFERRED	caller process_command_buffer local_388: byte offset of the pending run in the context buffer, advanced by pendingWords*4 on every submit
+def	ATIR500GLContext::get_texture@0x2b5f0	param_4	pendingWords	INFERRED	caller local_384: dwords written since the last submit; passed as the submit_buffer size and zeroed afterwards
+def	ATIR500GLContext::get_texture@0x2b5f0	param_5	reservedWords	INFERRED	caller local_380: zeroed together with pendingWords on submit, and subtracted from accelerator+0x50 in process_command_buffer
+def	ATIR500GLContext::get_texture@0x2b5f0	real_param_6	scratch	INFERRED	name from the class header declaration
+def	ATIR500GLContext::get_texture@0x2b5f0	param_6	scratchBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::get_texture@0x2b5f0	piVar2	countField	CONFIRMED	mip record+0x10: packed dual counter decremented by 0xffff (TextureLoad.cpp get_texture note, verified against lwarx/stwcx. disassembly)
+def	ATIR500GLContext::get_texture@0x2b5f0	uVar4	stamp	INFERRED	submit_buffer result, stored at this+0xdc
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	VVar1	type	CONFIRMED	texture+0x20 type discriminant: 8-way dispatch documented in ATIR500GLContext_TextureLoad.cpp
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	bVar2	compacted	INFERRED	true when alloc_surfaces_keep and compact_current_textures both succeeded (type 0 arm)
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	this_00	surface	CONFIRMED	type 0: the IOATIR500Surface cached at texture+0x50 (find_surface_for_id)
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	pVVar5	linked	CONFIRMED	type 6: the VendorTextureBuffer at texture+0x54 (ATIRadeonX1000Types.h linkedBuffer)
+def	ATIR500GLContext::alloc_and_load_texture@0x2a3d0	local_28	bufferMask	INFERRED	out-parameter (outMask) of surface_buffer_idx_mask; also the mask handed to alloc_surfaces_keep
+def	ATIR500GLContext::compact_current_textures@0x29dd0	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::compact_current_textures@0x29dd0	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::compact_current_textures@0x29dd0	bVar1	more	INFERRED	loop-continue flag of the do/while loops
+def	ATIR500GLContext::compact_current_textures@0x29dd0	VVar2	type	CONFIRMED	texture+0x20 type discriminant (3/0/7 are re-bound in the second pass)
+def	ATIR500GLContext::compact_current_textures@0x29dd0	pAVar8	slotCursor	CONFIRMED	walks the 42-entry texture-slot array at this+0x2a4 (TextureLoad.cpp compact_current_textures note)
+def	ATIR500GLContext::compact_current_textures@0x29dd0	pIVar15	surface	CONFIRMED	the IOATIR500Surface of a type-0 texture (texture+0x50); evictSurfaceBuffers helper shape in TextureLoad.cpp
+def	ATIR500GLContext::compact_current_textures@0x29dd0	pAVar14	surfaceBuffer	CONFIRMED	ATIR500SurfaceBuffer entry: eviction walks the 0x17-entry, 0x78-stride array at surface+0xa8; later the entry found via surface_buffer_idx_mask
+def	ATIR500GLContext::compact_current_textures@0x29dd0	pVVar16	boundTexture	INFERRED	texture currently in the slot being visited in the second pass
+def	ATIR500GLContext::compact_current_textures@0x29dd0	piVar11	accelerator	CONFIRMED	this+200 is the ATIRadeonX1000 accelerator (vtable +0x54c and the +0x780 accumulator are used on it)
+def	ATIR500GLContext::compact_current_textures@0x29dd0	puVar7	record	INFERRED	kernel-mapped dword buffer of the ring slot (slot buffer+0x20) the offset table is written into
+def	ATIR500GLContext::compact_current_textures@0x29dd0	uVar9	wordCount	INFERRED	dwords written into record so far (return values of WriteTextureOffset/WriteVertexArrayOffset are added)
+def	ATIR500GLContext::compact_current_textures@0x29dd0	uVar17	totalWords	INFERRED	wordCount after the vertex-array offsets, before even padding
+def	ATIR500GLContext::compact_current_textures@0x29dd0	auStack_48	bufferMask	INFERRED	out-parameter (outMask) of surface_buffer_idx_mask; value unused here
+def	ATIR500GLContext::load_texture@0x29480	real_param_1	texture	INFERRED	name from the class header declaration
+def	ATIR500GLContext::load_texture@0x29480	param_1	textureBytes	INFERRED	untyped alias of the typed parameter named from the class header
+def	ATIR500GLContext::load_texture@0x29480	piVar6	mapping	CONFIRMED	handle returned by the texture memoryDescriptor vtable +0x14c; released with vtable +0x18 at the end (TextureLoad.cpp load_texture step 2)
+def	ATIR500GLContext::load_texture@0x29480	piVar7	hwInfo	CONFIRMED	result of mapping vtable +0xd0: the per-mip/tile hardware tiling descriptor (hwInfo in the load_texture note; its +0xa00 view is the GART allocation)
+def	ATIR500GLContext::load_texture@0x29480	local_54	payloadByteLen	CONFIRMED	payloadByteLen of the load_texture note, accumulated into accelerator+0x71c
+def	ATIR500GLContext::load_texture@0x29480	piVar30	accelerator	CONFIRMED	this+200 is the ATIRadeonX1000 accelerator (waitForTimeStamp accumulator at +0x744)
+def	ATIR500GLContext::load_texture@0x29480	puVar10	record	CONFIRMED	`record`, the PM4 burst output buffer (hwInfo+0xa00 bytes), load_texture note step 4
+def	ATIR500GLContext::load_texture@0x29480	puVar16	tileCursor	INFERRED	where the register burst of the current face/level tile is written (record + per-tile output slot)
+def	ATIR500GLContext::load_texture@0x29480	pVVar33	innerBuffer	CONFIRMED	type 7: the inner transfer buffer at texture+0x58, mapped and time-stamped before the texture itself
+def	ATIR500GLContext::load_texture@0x29480	uVar2	loadedBits	CONFIRMED	per-face UInt16 at mip record+face*2+0x28 (loadedBits in the load_texture note)
+def	ATIR500GLContext::load_texture@0x29480	uVar3	dirtyBits	CONFIRMED	per-face UInt16 at mip record+face*2+0x1c (dirtyBits in the load_texture note)
+def	ATIR500GLContext::load_texture@0x29480	pAVar22	currentSurfaceBuffer	INFERRED	pAVar22 of the load_texture note: the per-context current surface buffer entry whose fields feed the LOD-bias register word
+def	ATIR500GLContext::discard_command_buffer@0x27580	puVar16	packet	CONFIRMED	cursor over the embedded-opcode stream of the pending command buffer: header word at *packet, advanced by the header's length field (DiscardBuffer.cpp header)
+def	ATIR500GLContext::discard_command_buffer@0x27580	uVar15	header	CONFIRMED	first dword of the packet: opcode in bits 24-31, length in bits 0-23
+def	ATIR500GLContext::discard_command_buffer@0x27580	pVVar7	boundTexture	CONFIRMED	the texture currently held in the slot being replaced; its refcount (mip record+0x10) is atomically decremented and delete_texture runs at 1 -> 0
+def	ATIR500GLContext::discard_command_buffer@0x27580	pIVar6	shared	CONFIRMED	this+0x88 is the IOATIR500Shared whose texture table (+0x10/+0x14) the ids are resolved in and whose delete_texture is called
+def	ATIR500GLContext::discard_command_buffer@0x27580	local_94	textures	INFERRED	textures looked up through the shared table for the opcode 0x39 packet
+decl	ATIR500GLContext::WriteTextureOffset	param1	unit	INFERRED	see the definition (texture unit)
+decl	ATIR500GLContext::GetVertexArrayOffset	param2	extraOffset	INFERRED	see the definition
+decl	ATIR500GLContext::GetQueryOffset	param2	queryIndex	INFERRED	see the definition
+decl	ATIR500GLContext::GetQueryOffset	param3	selector	INFERRED	see the definition
+decl	ATIR500GLContext::get_texture	pLocal388	streamOffset	INFERRED	see the definition
+decl	ATIR500GLContext::get_texture	pLocal384	pendingWords	INFERRED	see the definition
+decl	ATIR500GLContext::get_texture	pLocal380	reservedWords	INFERRED	see the definition

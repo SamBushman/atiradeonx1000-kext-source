@@ -29,10 +29,10 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9230 */
-IOReturn IOATIR500GLContext::scale_surface(UInt32 param_1, UInt32 param_2, UInt32 param_3) {
+IOReturn IOATIR500GLContext::scale_surface(UInt32 flags, UInt32 xScale, UInt32 yScale) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 result;
   /* real stock (0x9230) writes these as ONE contiguous 12-byte stack buffer (r1+0x38..0x42) and passes its base
    * address to set_scaling, which reads it back at fixed byte offsets (+0,+2,+4,+6,+8,+10) as an IOAccelSurfaceScaling
    * prefix. Six separate named locals (as Ghidra's decompile and the original port emitted) have no layout guarantee
@@ -43,19 +43,19 @@ IOReturn IOATIR500GLContext::scale_surface(UInt32 param_1, UInt32 param_2, UInt3
   UInt16 local_scale_buf[6];
 
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  if ((M<UInt8 *>(self + 0x290) == (UInt8 *)0x0) || ((param_1 & 1) == 0)) {
-    uVar1 = 0xe00002c7;
+  if ((M<UInt8 *>(self + 0x290) == (UInt8 *)0x0) || ((flags & 1) == 0)) {
+    result = 0xe00002c7;
   }
   else {
-    local_scale_buf[2] = (UInt16)param_2;
-    local_scale_buf[3] = (UInt16)param_3;
+    local_scale_buf[2] = (UInt16)xScale;
+    local_scale_buf[3] = (UInt16)yScale;
     local_scale_buf[1] = 0;
     local_scale_buf[0] = 0;
     local_scale_buf[4] = local_scale_buf[2];
     local_scale_buf[5] = local_scale_buf[3];
-    uVar1 = ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_scaling(param_1 >> 2 & 1 | param_1 & 2,
+    result = ((IOATIR500Surface *)(M<UInt8 *>(self + 0x290)))->set_scaling(flags >> 2 & 1 | flags & 2,
                        (IOAccelSurfaceScaling *)local_scale_buf);
   }
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  return uVar1;
+  return result;
 }

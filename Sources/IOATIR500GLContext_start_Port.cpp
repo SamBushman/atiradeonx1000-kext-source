@@ -29,22 +29,22 @@ extern "C" UInt32 GH_ZN8OSObjectnwEm(...) asm("__ZN8OSObjectnwEm");
 
 
 /* real addr 0x7690 */
-bool IOATIR500GLContext::start(IOService *real_param_1) {
+bool IOATIR500GLContext::start(IOService *provider) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *providerBytes = reinterpret_cast<UInt8 *>(provider);
 
   bool bVar1;
   UInt8 *pIVar2;
   SInt32 iVar3;
-  UInt8 *this_00;
-  SInt32 *piVar4;
+  UInt8 *shared;
+  SInt32 *accel;
   UInt8 bVar5;
   
-  iVar3 = IOUserClient::start(real_param_1);
+  iVar3 = IOUserClient::start(provider);
   if (iVar3 == 0) {
     return 0;
   }
-  M<UInt8 *>(self + 200) = param_1;
+  M<UInt8 *>(self + 200) = providerBytes;
   M<UInt32>(self + 0x108) = 0;
   M<UInt32>(self + 0x294) = 0;
   M<UInt32>(self + 0x7c) = 0;
@@ -111,11 +111,11 @@ bool IOATIR500GLContext::start(IOService *real_param_1) {
     pIVar2 = pIVar2 + 4;
     iVar3 = iVar3 + -1;
   } while (iVar3 != 0);
-  this_00 = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */
-  bVar5 = (this_00 == (UInt8 *)0x0) << 1;
-  M<UInt8 *>(self + 0x88) = this_00;
+  shared = (UInt8 *)new IOATIR500Shared();   /* real: OSObject::operator new(0x28) + the IOATIR500Shared constructor */
+  bVar5 = (shared == (UInt8 *)0x0) << 1;
+  M<UInt8 *>(self + 0x88) = shared;
   if (!(bool)(bVar5 >> 1 & 1)) {
-    iVar3 = VCALL(M<SInt32>(this_00), 0x48)(this_00);
+    iVar3 = VCALL(M<SInt32>(shared), 0x48)(shared);
     if (iVar3 == 0) {
       VCALL(*M<SInt32 *>(self + 0x88), 0x18)(M<SInt32 *>(self + 0x88));
       M<UInt32>(self + 0x88) = 0;
@@ -123,14 +123,14 @@ bool IOATIR500GLContext::start(IOService *real_param_1) {
     else {
       M<UInt32>(M<SInt32>(self + 0x88) + 0xc) = M<UInt32>(self + 200);
       M<UInt32>(M<SInt32>(self + 0x88) + 8) = M<UInt32>(self + 0x78);
-      piVar4 = M<SInt32 *>(self + 200);
-      if ((piVar4[0x18] == 0) && (piVar4[0x1a] == 0)) {
-        iVar3 = VCALL(*piVar4, 0x530)(piVar4);
+      accel = M<SInt32 *>(self + 200);
+      if ((accel[0x18] == 0) && (accel[0x1a] == 0)) {
+        iVar3 = VCALL(*accel, 0x530)(accel);
         if (iVar3 == 0) goto LAB_0000790c;
-        piVar4 = M<SInt32 *>(self + 200);
+        accel = M<SInt32 *>(self + 200);
       }
-      M<SInt32>(self + 0x80) = piVar4[0x18];
-      piVar4[0x18] = (SInt32)self;
+      M<SInt32>(self + 0x80) = accel[0x18];
+      accel[0x18] = (SInt32)self;
       M<SInt32>(M<SInt32>(self + 200) + 0x738) = M<SInt32>(M<SInt32>(self + 200) + 0x738) + 1;
       iVar3 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->getVRAMDescriptors();
       if (((iVar3 != 0) &&
@@ -143,6 +143,6 @@ bool IOATIR500GLContext::start(IOService *real_param_1) {
     }
   }
 LAB_0000790c:
-  IOATIR500GLContext::stop(real_param_1);
+  IOATIR500GLContext::stop(provider);
   return 0;
 }

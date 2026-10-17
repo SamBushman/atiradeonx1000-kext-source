@@ -43,7 +43,7 @@ void ATIR500GLContext::submit_context_buffer() {
   UInt32 uVar11;
   UInt32 uVar12;
   UInt32 *puVar13;
-  SInt32 *piVar14;
+  SInt32 *accelerator;
   UInt8 *pAVar15;
   SInt32 iVar16;
   UInt8 *pAVar17;
@@ -76,13 +76,13 @@ void ATIR500GLContext::submit_context_buffer() {
     pAVar15 = self + M<SInt32>(self + 0x28c) * 0x18;
   }
   else {
-    piVar14 = M<SInt32 *>(self + 200);
+    accelerator = M<SInt32 *>(self + 200);
     uVar12 = M<SInt32>(self + 0x28c) + 1U & 0xf;
     M<UInt32>(self + 0x28c) = uVar12;
     pAVar15 = self + uVar12 * 0x18;
-    iVar16 = piVar14[0x1e0];
-    iVar3 = VCALL(*piVar14, 0x54c)(piVar14,M<UInt32>(pAVar15 + 0x11c));
-    piVar14[0x1e0] = iVar16 + iVar3;
+    iVar16 = accelerator[0x1e0];
+    iVar3 = VCALL(*accelerator, 0x54c)(accelerator,M<UInt32>(pAVar15 + 0x11c));
+    accelerator[0x1e0] = iVar16 + iVar3;
     puVar2 = M<UInt32 *>(self + 0x108);
     puVar7 = M<UInt32 *>(pAVar15 + 0x120);
     uVar9 = puVar2[1];

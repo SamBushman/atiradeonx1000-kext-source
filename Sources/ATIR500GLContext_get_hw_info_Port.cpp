@@ -29,21 +29,21 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x27210 */
-IOReturn ATIR500GLContext::get_hw_info(UInt32*param_1, UInt32*param_2, UInt32*param_3, UInt32*param_4, UInt32*param_5) {
+IOReturn ATIR500GLContext::get_hw_info(UInt32*out0, UInt32*out1, UInt32*out2, UInt32*out3, UInt32*out4) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 value;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  uVar1 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumPipes();
-  *param_1 = uVar1;
-  uVar1 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipID();
-  *param_2 = uVar1;
-  uVar1 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipRev();
-  *param_3 = uVar1;
-  uVar1 = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumZPipes();
-  *param_4 = uVar1;
-  *param_5 = 0;
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumPipes();
+  *out0 = value;
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipID();
+  *out1 = value;
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getChipRev();
+  *out2 = value;
+  value = ((ATIRadeonX1000 *)(M<UInt8 *>(self + 200)))->getNumZPipes();
+  *out3 = value;
+  *out4 = 0;
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
   return 0;
 }

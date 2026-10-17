@@ -27,13 +27,13 @@
 
 
 /* real addr 0x27470 */
-UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*param_1, UInt32 param_2) {
+UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*outputBuffer, UInt32 startIndex) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
-  UInt32 uVar2;
+  bool more;
+  UInt32 arrayOffset;
   SInt32 iVar3;
-  UInt32 uVar4;
+  UInt32 packetHeader;
   SInt32 iVar5;
   UInt8 *pAVar6;
   UInt8 *pAVar7;
@@ -43,12 +43,12 @@ UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*param_1, UInt32 param_2) 
   UInt8 bVar11;
   
   iVar5 = 1;
-  uVar4 = 0x832;
+  packetHeader = 0x832;
   pAVar7 = self + 4;
-  iVar10 = param_2 * 4 + 4;
+  iVar10 = startIndex * 4 + 4;
   bVar11 = (M<SInt32>(self + 0x364) == 0) << 1;
   pAVar6 = self;
-  iVar9 = param_2 * 4 + 8;
+  iVar9 = startIndex * 4 + 8;
   do {
     if ((bool)(bVar11 >> 1 & 1)) {
       iVar3 = 0x10;
@@ -58,21 +58,21 @@ UInt32 ATIR500GLContext::WriteVertexArrayOffset(UInt32*param_1, UInt32 param_2) 
       iVar3 = iVar5 + 0xf;
       iVar8 = iVar5 + 0x10;
     }
-    param_1[param_2] = uVar4 | 0x10000;
-    uVar2 = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar3 * 4 + 0x2a4)),
+    outputBuffer[startIndex] = packetHeader | 0x10000;
+    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar3 * 4 + 0x2a4)),
                        M<UInt32>(pAVar6 + 0x368));
-    M<UInt32>((SInt32)param_1 + iVar10) = uVar2;
-    param_2 = param_2 + 3;
+    M<UInt32>((SInt32)outputBuffer + iVar10) = arrayOffset;
+    startIndex = startIndex + 3;
     iVar10 = iVar10 + 0xc;
-    uVar2 = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar8 * 4 + 0x2a4)),
+    arrayOffset = this->GetVertexArrayOffset((VendorTextureBuffer *)(M<UInt8 *>(self + iVar8 * 4 + 0x2a4)),
                        M<UInt32>(pAVar7 + 0x368));
-    M<UInt32>((SInt32)param_1 + iVar9) = uVar2;
-    bVar1 = iVar5 != 0xf;
+    M<UInt32>((SInt32)outputBuffer + iVar9) = arrayOffset;
+    more = iVar5 != 0xf;
     pAVar7 = pAVar7 + 8;
     pAVar6 = pAVar6 + 8;
-    uVar4 = uVar4 + 3;
+    packetHeader = packetHeader + 3;
     iVar5 = iVar5 + 2;
     iVar9 = iVar9 + 0xc;
-  } while (bVar1);
+  } while (more);
   return 0x18;
 }

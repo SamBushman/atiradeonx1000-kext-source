@@ -31,21 +31,21 @@ void ATIR500GLContext::update_surface() {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   bool bVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
+  SInt32 unitIndex;
+  UInt32 surfaceFlags;
   
   if (M<SInt32>(self + 0x290) != 0) {
-    iVar2 = M<SInt32>(self + 0x35c);
-    uVar3 = M<UInt32>(M<SInt32>(self + 0x290) + 0xbe8);
-    if ((iVar2 == 1) || ((iVar2 == 0 && ((uVar3 & 0x400) == 0)))) {
+    unitIndex = M<SInt32>(self + 0x35c);
+    surfaceFlags = M<UInt32>(M<SInt32>(self + 0x290) + 0xbe8);
+    if ((unitIndex == 1) || ((unitIndex == 0 && ((surfaceFlags & 0x400) == 0)))) {
       bVar1 = true;
     }
     else {
       bVar1 = false;
     }
-    if (((uVar3 & 0x7c0000) == 0) || (!bVar1)) {
-      M<SInt16>(self + 0x3aa) = (SInt16)iVar2;
-      M<SInt16>(self + 0xac) = (SInt16)iVar2;
+    if (((surfaceFlags & 0x7c0000) == 0) || (!bVar1)) {
+      M<SInt16>(self + 0x3aa) = (SInt16)unitIndex;
+      M<SInt16>(self + 0xac) = (SInt16)unitIndex;
     }
     else {
       M<UInt16>(self + 0x3aa) = 9;

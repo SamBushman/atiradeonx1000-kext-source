@@ -27,25 +27,25 @@
 
 
 /* real addr 0x7ca0 */
-IOReturn IOATIR500GLContext::get_surface_size(SInt32*param_1, SInt32*param_2, SInt32*param_3, SInt32*param_4) {
+IOReturn IOATIR500GLContext::get_surface_size(SInt32*outW, SInt32*outH, SInt32*outX, SInt32*outY) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
   UInt32 uVar1;
   UInt32 uVar2;
-  SInt32 iVar3;
-  SInt32 iVar4;
+  SInt32 levelsLeft;
+  SInt32 surface;
   UInt32 uVar5;
   UInt32 uVar6;
   
-  iVar4 = M<SInt32>(self + 0x290);
-  if (iVar4 != 0) {
-    iVar3 = M<SInt32>(self + 0x29c);
-    if (M<SInt32>(iVar4 + 0xbd8) == M<SInt32>(iVar4 + 0xbd4)) {
-      uVar2 = (UInt32)M<UInt16>(M<SInt32>(iVar4 + 0xb70) + 0x1e);
-      uVar1 = (UInt32)M<UInt16>(M<SInt32>(iVar4 + 0xb70) + 0x1c);
+  surface = M<SInt32>(self + 0x290);
+  if (surface != 0) {
+    levelsLeft = M<SInt32>(self + 0x29c);
+    if (M<SInt32>(surface + 0xbd8) == M<SInt32>(surface + 0xbd4)) {
+      uVar2 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1e);
+      uVar1 = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1c);
       uVar5 = uVar1;
       uVar6 = uVar2;
-      if (0 < iVar3) {
+      if (0 < levelsLeft) {
         do {
           if (1 < uVar1) {
             uVar1 = (SInt32)uVar1 >> 1;
@@ -53,22 +53,22 @@ IOReturn IOATIR500GLContext::get_surface_size(SInt32*param_1, SInt32*param_2, SI
           if (1 < uVar2) {
             uVar2 = (SInt32)uVar2 >> 1;
           }
-          iVar3 = iVar3 + -1;
+          levelsLeft = levelsLeft + -1;
           uVar5 = uVar1;
           uVar6 = uVar2;
-        } while (iVar3 != 0);
+        } while (levelsLeft != 0);
       }
     }
     else {
-      uVar2 = (UInt32)M<SInt16>(iVar4 + 0xbda);
-      uVar1 = (UInt32)M<SInt16>(iVar4 + 0xbd4);
-      uVar5 = (SInt32)M<SInt16>(iVar4 + 0xbd8);
-      uVar6 = (SInt32)M<SInt16>(iVar4 + 0xbd6);
+      uVar2 = (UInt32)M<SInt16>(surface + 0xbda);
+      uVar1 = (UInt32)M<SInt16>(surface + 0xbd4);
+      uVar5 = (SInt32)M<SInt16>(surface + 0xbd8);
+      uVar6 = (SInt32)M<SInt16>(surface + 0xbd6);
     }
-    *param_1 = uVar5;
-    *param_2 = uVar2;
-    *param_3 = uVar1;
-    *param_4 = uVar6;
+    *outW = uVar5;
+    *outH = uVar2;
+    *outX = uVar1;
+    *outY = uVar6;
     return 0;
   }
   return 0xe00002bc;

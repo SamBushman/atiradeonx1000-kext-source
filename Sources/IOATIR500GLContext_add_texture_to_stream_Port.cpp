@@ -28,20 +28,20 @@ extern "C" UInt32 GH_IOGetTime(...) asm("_IOGetTime");
 
 
 /* real addr 0x72c0 */
-void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *real_param_1) {
+void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *texture) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_1 = reinterpret_cast<UInt8 *>(real_param_1);
+    UInt8 *textureBytes = reinterpret_cast<UInt8 *>(texture);
 
-  UInt8 VVar1;
+  UInt8 kind;
   int *piVar2;
   int iVar3;
   int iVar4;
-  UInt8 *pVVar5;
+  UInt8 *source;
   
-  VVar1 = param_1[0x20];
-  if (VVar1 == 0x6) {
-    iVar4 = M<int>(param_1 + 0x54);
-    iVar3 = M<int>(param_1 + 0x14);
+  kind = textureBytes[0x20];
+  if (kind == 0x6) {
+    iVar4 = M<int>(textureBytes + 0x54);
+    iVar3 = M<int>(textureBytes + 0x14);
     M<SInt16>(iVar4 + 0xe) = M<SInt16>(iVar4 + 0xe) + 1;
     M<UInt8>(iVar3 + 0x14) = M<UInt8>(iVar3 + 0x14) | M<UInt8>(M<int>(iVar4 + 0x14) + 0x14);
     if (M<int>(iVar4 + 4) != 0) {
@@ -55,22 +55,22 @@ void IOATIR500GLContext::add_texture_to_stream(VendorTextureBuffer *real_param_1
       M<int>(M<int>(iVar4 + 0x34) + 0x38) = iVar4;
     }
   }
-  else if (VVar1 == 0x0) {
-    piVar2 = M<int *>(param_1 + 0x50);
+  else if (kind == 0x0) {
+    piVar2 = M<int *>(textureBytes + 0x50);
     if (piVar2 != (int *)0x0) {
       VCALL(*piVar2, 0x5b8)(piVar2,3);
     }
   }
-  else if (VVar1 == 0x1) {
-    pVVar5 = M<UInt8 *>(param_1 + 0x50);
-    if (pVVar5 != (UInt8 *)0x0) {
-      this->add_texture_to_stream((VendorTextureBuffer *)(pVVar5));
-      M<UInt8>(M<int>(param_1 + 0x14) + 0x14) =
-           M<UInt8>(M<int>(param_1 + 0x14) + 0x14) | M<UInt8>(M<int>(pVVar5 + 0x14) + 0x14);
+  else if (kind == 0x1) {
+    source = M<UInt8 *>(textureBytes + 0x50);
+    if (source != (UInt8 *)0x0) {
+      this->add_texture_to_stream((VendorTextureBuffer *)(source));
+      M<UInt8>(M<int>(textureBytes + 0x14) + 0x14) =
+           M<UInt8>(M<int>(textureBytes + 0x14) + 0x14) | M<UInt8>(M<int>(source + 0x14) + 0x14);
     }
   }
-  else if ((VVar1 == 0x8) && (M<int>(param_1 + 0x48) == 0)) {
-    M<SInt16>(param_1 + 0xe) = M<SInt16>(param_1 + 0xe) + 1;
+  else if ((kind == 0x8) && (M<int>(textureBytes + 0x48) == 0)) {
+    M<SInt16>(textureBytes + 0xe) = M<SInt16>(textureBytes + 0xe) + 1;
   }
   return;
 }

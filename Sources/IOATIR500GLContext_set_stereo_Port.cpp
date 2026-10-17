@@ -29,14 +29,14 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x99a0 */
-IOReturn IOATIR500GLContext::set_stereo(UInt32 param_1, UInt32 param_2) {
+IOReturn IOATIR500GLContext::set_stereo(UInt32 leftOrRight, UInt32 stereoParam) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  uVar1 = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->setup_stereo(param_2, param_1)
+  result = ((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->setup_stereo(stereoParam, leftOrRight)
   ;
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  return uVar1;
+  return result;
 }

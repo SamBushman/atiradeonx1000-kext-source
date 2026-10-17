@@ -29,64 +29,64 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x9320 */
-IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *real_param_2, sIOGLNewTextureReturnData *real_param_3, UInt32 param_4, UInt32 *param_5) {
+IOReturn IOATIR500GLContext::new_texture(sIOGLNewTextureData *newTextureData, sIOGLNewTextureReturnData *returnData, UInt32 structSize, UInt32 *sizeOut) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
     UInt8 *param_1 = reinterpret_cast<UInt8 *>(this);
-    UInt8 *param_2 = reinterpret_cast<UInt8 *>(real_param_2);
-    UInt8 *param_3 = reinterpret_cast<UInt8 *>(real_param_3);
+    UInt8 *newTextureDataBytes = reinterpret_cast<UInt8 *>(newTextureData);
+    UInt8 *returnDataBytes = reinterpret_cast<UInt8 *>(returnData);
 
-  int iVar1;
-  UInt32 uVar2;
+  int texture;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<int>(self + 200) + 0x840));
-  switch(M<UInt32>(param_2)) {
+  switch(M<UInt32>(newTextureDataBytes)) {
   case 0:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_surface_texture(M<UInt32>(param_2 + 4),
-                       M<UInt32>(param_2 + 8),M<UInt32>(param_2 + 0xc),(unsigned int *)(param_3 + 4));
-    M<UInt32>(param_3) = 0;
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_surface_texture(M<UInt32>(newTextureDataBytes + 4),
+                       M<UInt32>(newTextureDataBytes + 8),M<UInt32>(newTextureDataBytes + 0xc),(unsigned int *)(returnDataBytes + 4));
+    M<UInt32>(returnDataBytes) = 0;
     break;
   case 1:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_global_texture(M<UInt32>(param_2 + 4),
-                       (unsigned int *)(param_3 + 4));
-    M<UInt32>(param_3) = 0;
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_global_texture(M<UInt32>(newTextureDataBytes + 4),
+                       (unsigned int *)(returnDataBytes + 4));
+    M<UInt32>(returnDataBytes) = 0;
     break;
   case 2:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(param_2 + 4),0,0,0,
-                       (unsigned int *)param_3,(unsigned int *)(param_3 + 4));
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),0,0,0,
+                       (unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
     break;
   case 3:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(param_2 + 4),
-                       M<UInt32>(param_2 + 8),0,0,(unsigned int *)param_3,(unsigned int *)(param_3 + 4));
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
+                       M<UInt32>(newTextureDataBytes + 8),0,0,(unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
     break;
   default:
-    uVar2 = 0xe00002be;
-    M<UInt32>(param_3) = 0;
-    M<UInt32>(param_3 + 4) = 0;
+    result = 0xe00002be;
+    M<UInt32>(returnDataBytes) = 0;
+    M<UInt32>(returnDataBytes + 4) = 0;
     goto LAB_000094e0;
   case 6:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_agpref_texture(M<unsigned int>(param_2 + 4),
-                       M<unsigned int>(param_2 + 8),M<UInt32>(param_2 + 0xc),(unsigned int *)(param_3 + 4));
-    if (iVar1 == 0) {
-      M<UInt32>(param_3) = 0;
-      uVar2 = 0xe00002be;
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_agpref_texture(M<unsigned int>(newTextureDataBytes + 4),
+                       M<unsigned int>(newTextureDataBytes + 8),M<UInt32>(newTextureDataBytes + 0xc),(unsigned int *)(returnDataBytes + 4));
+    if (texture == 0) {
+      M<UInt32>(returnDataBytes) = 0;
+      result = 0xe00002be;
       goto LAB_000094e0;
     }
-    M<UInt32>(param_3) = M<UInt32>(M<int>(iVar1 + 0x54) + 0x58);
+    M<UInt32>(returnDataBytes) = M<UInt32>(M<int>(texture + 0x54) + 0x58);
     goto LAB_00009410;
   case 7:
-    iVar1 = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(param_2 + 4),
-                       M<UInt32>(param_2 + 8),M<unsigned int>(param_2 + 0xc),M<UInt32>(param_2 + 0x10),
-                       (unsigned int *)param_3,(unsigned int *)(param_3 + 4));
+    texture = (int)((IOATIR500Shared *)(M<UInt8 *>(self + 0x88)))->new_texture(M<UInt32>(newTextureDataBytes + 4),
+                       M<UInt32>(newTextureDataBytes + 8),M<unsigned int>(newTextureDataBytes + 0xc),M<UInt32>(newTextureDataBytes + 0x10),
+                       (unsigned int *)returnDataBytes,(unsigned int *)(returnDataBytes + 4));
   }
-  if (iVar1 == 0) {
-    uVar2 = 0xe00002be;
+  if (texture == 0) {
+    result = 0xe00002be;
   }
   else {
 LAB_00009410:
-    uVar2 = 0;
-    VCALL(M<int>(self), 0x5c0)(self,iVar1);
+    result = 0;
+    VCALL(M<int>(self), 0x5c0)(self,texture);
   }
 LAB_000094e0:
   GH_IOLockUnlock(M<UInt32>(M<int>(self + 200) + 0x840));
-  return uVar2;
+  return result;
 }

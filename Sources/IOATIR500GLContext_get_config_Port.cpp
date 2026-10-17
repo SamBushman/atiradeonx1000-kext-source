@@ -30,17 +30,17 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0xb010 */
-IOReturn IOATIR500GLContext::get_config(UInt32*param_1, UInt32*param_2, UInt32*param_3) {
+IOReturn IOATIR500GLContext::get_config(UInt32*out0, UInt32*out1, UInt32*out2) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  bool bVar1;
+  bool more;
   SInt32 iVar2;
   UInt32 uVar3;
-  UInt32 uVar4;
+  UInt32 bufferIndex;
   SInt32 iVar5;
   SInt32 iVar6;
-  UInt32 *puVar7;
-  UInt32 local_1a8 [97];
+  UInt32 *info;
+  UInt32 infoRecords [97];
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
   if ((M<SInt32>(self + 0x290) != 0) && (0xff < M<UInt32>(M<SInt32>(self + 0x290) + 0xa4))) {
@@ -52,36 +52,36 @@ IOReturn IOATIR500GLContext::get_config(UInt32*param_1, UInt32*param_2, UInt32*p
   }
   iVar6 = M<SInt32>(self + 200);
 LAB_0000b08c:
-  *param_1 = M<UInt32>(iVar6 + 0x98);
-  *param_3 = M<UInt32>(M<SInt32>(self + 200) + 0x9c);
+  *out0 = M<UInt32>(iVar6 + 0x98);
+  *out2 = M<UInt32>(M<SInt32>(self + 200) + 0x9c);
   if (M<SInt32>(self + 0x290) == 0) {
     uVar3 = VCALL(*M<SInt32 *>(self + 200), 0x548)(M<SInt32 *>(self + 200));
   }
   else {
-    uVar4 = 0;
+    bufferIndex = 0;
     iVar6 = 0;
-    puVar7 = local_1a8;
+    info = infoRecords;
     do {
-      if ((1 << (uVar4 & 0x3f) & M<UInt32>(self + 0x8c)) != 0) {
-        *puVar7 = 0;
-        puVar7[1] = 0;
-        puVar7[2] = 0;
-        puVar7[3] = 0;
+      if ((1 << (bufferIndex & 0x3f) & M<UInt32>(self + 0x8c)) != 0) {
+        *info = 0;
+        info[1] = 0;
+        info[2] = 0;
+        info[3] = 0;
         iVar2 = VCALL(*M<SInt32 *>(self + 200), 0x540)
-                          (M<SInt32 *>(self + 200),puVar7,
+                          (M<SInt32 *>(self + 200),info,
                            M<UInt32>(iVar6 + M<SInt32>(self + 0x290) + 0xb8),0x1000);
         if (iVar2 == 0) {
-          iVar6 = uVar4 - 1;
+          iVar6 = bufferIndex - 1;
           uVar3 = 0;
           if (iVar6 < 0) goto LAB_0000b1f0;
           goto LAB_0000b174;
         }
       }
-      bVar1 = uVar4 != 0x16;
+      more = bufferIndex != 0x16;
       iVar6 = iVar6 + 0x78;
-      puVar7 = puVar7 + 4;
-      uVar4 = uVar4 + 1;
-    } while (bVar1);
+      info = info + 4;
+      bufferIndex = bufferIndex + 1;
+    } while (more);
     iVar6 = 0x16;
     uVar3 = VCALL(*M<SInt32 *>(self + 200), 0x548)(M<SInt32 *>(self + 200));
 LAB_0000b174:
@@ -89,14 +89,14 @@ LAB_0000b174:
     iVar5 = 0;
     do {
       if ((1 << (iVar6 - iVar5 & 0x3fU) & M<UInt32>(self + 0x8c)) != 0) {
-        VCALL(*M<SInt32 *>(self + 200), 0x544)(M<SInt32 *>(self + 200),(SInt32)local_1a8 + iVar2);
+        VCALL(*M<SInt32 *>(self + 200), 0x544)(M<SInt32 *>(self + 200),(SInt32)infoRecords + iVar2);
       }
       iVar5 = iVar5 + 1;
       iVar2 = iVar2 + -0x10;
     } while (iVar5 != iVar6 + 1);
   }
 LAB_0000b1f0:
-  *param_2 = uVar3;
+  *out1 = uVar3;
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
   return 0;
 }

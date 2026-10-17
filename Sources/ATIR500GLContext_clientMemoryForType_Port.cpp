@@ -27,24 +27,24 @@
 
 
 /* real addr 0x27000 */
-IOReturn ATIR500GLContext::clientMemoryForType(UInt32 param_1, UInt32*param_2, IOMemoryDescriptor**param_3) {
+IOReturn ATIR500GLContext::clientMemoryForType(UInt32 type, UInt32*options, IOMemoryDescriptor**memory) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
+  UInt32 result;
   
-  if (param_1 == 0) {
+  if (type == 0) {
     if (M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8) == (SInt32 *)0x0) {
-      uVar1 = 0xe00002be;
+      result = 0xe00002be;
     }
     else {
       VCALL(*M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8), 0x14)(M<SInt32 *>(M<SInt32>(self + 200) + 0x8d8));
-      uVar1 = 0;
-      *param_2 = 0x1000;
-      *param_3 = (IOMemoryDescriptor *)(M<UInt8 *>(M<SInt32>(self + 200) + 0x8d8));
+      result = 0;
+      *options = 0x1000;
+      *memory = (IOMemoryDescriptor *)(M<UInt8 *>(M<SInt32>(self + 200) + 0x8d8));
     }
   }
   else {
-    uVar1 = IOATIR500GLContext::clientMemoryForType(param_1, param_2, param_3);
+    result = IOATIR500GLContext::clientMemoryForType(type, options, memory);
   }
-  return uVar1;
+  return result;
 }

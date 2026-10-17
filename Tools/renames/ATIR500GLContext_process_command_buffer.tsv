@@ -1,0 +1,13 @@
+# ATIR500GLContext::process_command_buffer remap: placeholder -> real names. Applied by Tools/apply_renames.py (see its header for the format).
+# kind	target	old	new	tier	evidence
+# Scope note: the function is one ~3200-line dispatch chain whose Ghidra locals are REUSED across opcode cases (uVar38/uVar73/iVar59/uVar55/pAVar77 ... each
+# carry 3-10 unrelated roles), and a rename here applies to the whole function, so only variables with ONE role everywhere are named. The rest stay as placeholders.
+def	ATIR500GLContext::process_command_buffer@0x2b820	real_param_1	descriptor	INFERRED	name from the class header declaration (VendorCommandDescriptor *descriptor)
+def	ATIR500GLContext::process_command_buffer@0x2b820	param_1	descriptorBytes	INFERRED	untyped alias of the typed parameter; written only at the tail (VendorCommandDescriptor, Headers/ATIRadeonX1000Types.h)
+def	ATIR500GLContext::process_command_buffer@0x2b820	puVar65	recordCursor	CONFIRMED	starts at contextBufferHeader+0x1c, advanced by the record length at LAB_00031340, stored to descriptor->finalRecordCursor at the tail; every opcode case reads its operands as recordCursor[1..n]
+def	ATIR500GLContext::process_command_buffer@0x2b820	local_388	pendingByteOffset	CONFIRMED	byte offset of the first not-yet-submitted dword; advanced by 4*pendingDwordCount after each submit_buffer; stored (+ this+0xd0 + 0x20) to descriptor->pendingBufferOffset
+def	ATIR500GLContext::process_command_buffer@0x2b820	local_384	pendingDwordCount	CONFIRMED	dword count passed as submit_buffer's 3rd argument, zeroed after each submit; stored to descriptor->pendingDwordCount (VendorCommandDescriptor)
+def	ATIR500GLContext::process_command_buffer@0x2b820	local_cc	result	CONFIRMED	initialised 0, set to 2/3 by the opcode 0x02/0x03 cases, and is the function's return value (IOReturn)
+def	ATIR500GLContext::process_command_buffer@0x2b820	arStack_2fc	trackingState	CONFIRMED	the register_tracking_state passed to restore_state_destroyed_by_pageoff (issue #170 stack object trackBlk)
+def	ATIR500GLContext::process_command_buffer@0x2b820	local_d0	recordPayloadEnd	INFERRED	set once to recordCursor + recordCursor[1]; the unused space up to it is overwritten with a NOP packet at the end of the case (the 0x80000000 / 0xc0001000 filler)
+def	ATIR500GLContext::process_command_buffer@0x2b820	local_bc	trailerLastWord	INFERRED	set once to recordCursor - 1: the last of the 4-dword trailer (0x1393, 0, 0x5c8, 0x20000) written just before the cursor in the opcode 0x39 path

@@ -29,45 +29,45 @@ extern "C" UInt32 GH_IOLockUnlock(...) asm("_IOLockUnlock");
 
 
 /* real addr 0x8bb0 */
-IOReturn IOATIR500GLContext::get_surface_info(UInt32 param_1, SInt32*param_2, SInt32*param_3, SInt32*param_4) {
+IOReturn IOATIR500GLContext::get_surface_info(UInt32 surfaceID, SInt32*outFlags, SInt32*outW, SInt32*outH) {
     UInt8 *self = reinterpret_cast<UInt8 *>(this);
 
-  UInt32 uVar1;
-  SInt32 iVar2;
-  UInt32 uVar3;
+  UInt32 modeBits;
+  SInt32 surface;
+  UInt32 result;
   
   GH_IOLockLock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  if (param_1 != 0) {
-    iVar2 = (SInt32)((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->find_surface_for_id(param_1);
-    if (iVar2 != 0) {
-      uVar1 = M<UInt32>(iVar2 + 0xbe8);
-      *param_2 = uVar1;
-      if ((M<UInt32>(iVar2 + 0xc18) & 8) == 0) {
-        if ((M<UInt32>(iVar2 + 0xc18) & 4) != 0) {
-          *param_2 = uVar1 | 0x100;
+  if (surfaceID != 0) {
+    surface = (SInt32)((IOATIR500Accelerator *)(M<UInt8 *>(self + 200)))->find_surface_for_id(surfaceID);
+    if (surface != 0) {
+      modeBits = M<UInt32>(surface + 0xbe8);
+      *outFlags = modeBits;
+      if ((M<UInt32>(surface + 0xc18) & 8) == 0) {
+        if ((M<UInt32>(surface + 0xc18) & 4) != 0) {
+          *outFlags = modeBits | 0x100;
         }
       }
       else {
-        *param_2 = uVar1 | 0x200;
+        *outFlags = modeBits | 0x200;
       }
-      if (M<SInt32>(iVar2 + 0xbd8) == M<SInt32>(iVar2 + 0xbd4)) {
-        uVar3 = 0;
-        *param_3 = (UInt32)M<UInt16>(M<SInt32>(iVar2 + 0xb70) + 0x1c);
-        *param_4 = (UInt32)M<UInt16>(M<SInt32>(iVar2 + 0xb70) + 0x1e);
+      if (M<SInt32>(surface + 0xbd8) == M<SInt32>(surface + 0xbd4)) {
+        result = 0;
+        *outW = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1c);
+        *outH = (UInt32)M<UInt16>(M<SInt32>(surface + 0xb70) + 0x1e);
       }
       else {
-        uVar3 = 0;
-        *param_3 = (SInt32)M<SInt16>(iVar2 + 0xbd8);
-        *param_4 = (SInt32)M<SInt16>(iVar2 + 0xbda);
+        result = 0;
+        *outW = (SInt32)M<SInt16>(surface + 0xbd8);
+        *outH = (SInt32)M<SInt16>(surface + 0xbda);
       }
       goto LAB_00008cb0;
     }
   }
-  uVar3 = 0xe00002c2;
-  *param_2 = 0;
-  *param_3 = 0;
-  *param_4 = 0;
+  result = 0xe00002c2;
+  *outFlags = 0;
+  *outW = 0;
+  *outH = 0;
 LAB_00008cb0:
   GH_IOLockUnlock(M<UInt32>(M<SInt32>(self + 200) + 0x840));
-  return uVar3;
+  return result;
 }
