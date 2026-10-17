@@ -45,7 +45,8 @@ GCCLIB=/usr/lib/gcc/powerpc-apple-darwin8/4.0.1
 # #172/#173: optimized by default (-Os, like the shipped kext); the M<T> accessors are volatile so MMIO order is preserved. Use OPT= (set but empty) for the old unoptimized build
 # that Tools/callee_compare.py etc. expect.
 OPT=${OPT--Os}
-COMMON="$OPT -mlongcall -arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW -w"
+# WARN (default -w, no warnings) can be set to e.g. -Wuninitialized; Tools/renames/parity_check.py uses it to prove a variable split does not read an unassigned variable
+COMMON="$OPT -mlongcall -arch ppc -static -fno-common -DKERNEL -DKERNEL_PRIVATE -DDRIVER_PRIVATE -I$KFW ${WARN--w}"
 CXXFLAGS="$COMMON -fno-rtti -fno-exceptions -fapple-kext -Doverride= -Dnullptr=0 -Dstatic_assert(a,b)="
 
 rm -rf "$OUT"; mkdir -p "$OUT/obj"
