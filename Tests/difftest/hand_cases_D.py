@@ -12,6 +12,12 @@ from common import word, object_with_vtable, surface_world, accelerator_with_reg
 REL = {'vtable slot +0x18': [1, 2]}        # release() on an object of a class the vtable listing does not name: its extra argument registers hold leftovers
 
 
+# the 16-byte VendorTransferBuffer record that write_buffer/read_buffer keep on their stack (shipped r1+0x58..0x68, saved registers from r1+0x78) and hand to
+# copy_to_buffer/copy_from_buffer as the 10th argument. The callee chain really writes only the word at +4 (addTransferToGART's *result) and the halfword at
+# +0xe (copy_buffer_using_DMA's counter), so the object must reach +0x10.
+XFER_RECORD = {'copy_to_buffer': {9: [(4, 4), (0xe, 2)]}, 'copy_from_buffer': {9: [(4, 4), (0xe, 2)]}}
+
+
 def new_mock(m, name, k):
     """OSObject::operator new returns a real (zeroed) block of the requested size; everything else the harness default"""
     if name.startswith('__ZN8OSObjectnw') or 'operator new' in name:
@@ -314,6 +320,32 @@ def w_dvd_write_buffer(m, rng):
     m.w32(p + 0x10, rng.choice([0, 1])); m.w32(p + 0x14, rng.choice([0x10000000, 0x10000123, 0x2000000]))
     m.w32(p + 0x18, rng.choice([64, 640 * 4, 4096]))
     return [c, p, word(rng)]
+
+
+def w_gl_read_buffer(m, rng):
+    """IOATIR500GLContext::read_buffer(readData, size): +0xc8 accelerator, +0x290 bound surface (same buffer-record layout the DVD context sees), +0x8c buffer mask"""
+    c = obj(m, rng, 'ATIR500GLContext', 0x400)
+    A = accel(m, rng)
+    m.w32(c + 0xc8, A)
+    S = bound_surface(m, rng, c)
+    m.w32(c + 0x290, rng.choice([S, S, S, 0]))
+    m.w32(c + 0x8c, rng.choice([0x7fffff, 0x7fffff, word(rng) & 0x7fffff]))
+    m.w32(c + 0x78, plain(m, rng)); m.w32(c + 0x7c, plain(m, rng))
+    m.w32(c + 0x298, rng.choice([0, 1, 2])); m.w32(c + 0x29c, rng.choice([0, 1, 2]))
+    m.w8(A + 0x80, rng.choice([0, 1, 1]))
+    m.w32(S + 0xa4, rng.choice([0, 0x80, 0x100, 0x200]))
+    m.w32(S + 0xc14, rng.choice([0xffff, 0xffff, 0, 1]))
+    m.w16(S + 0xbd4, rng.choice([640, 1920])); m.w16(S + 0xbd6, rng.choice([480, 1080]))
+    p = m.alloc(0x40)
+    big = lambda: rng.choice([-5, -1, 0, 1, 16, 100, 100, 300, 640, 1920])
+    for off in (0, 4):
+        m.w32(p + off, big() & 0xffffffff)
+    for off in (8, 0xc):
+        m.w32(p + off, rng.choice([1, 16, 100, 300, 640, 4000, 0x7ffffff0]) & 0xffffffff)
+    m.w32(p + 0x10, rng.choice([0, 1, 2, 3, 4, 5, 7, 8, 10, 11, 12]))
+    m.w32(p + 0x14, rng.choice([0x10000000, 0x10000123, 0x2000000]))
+    m.w32(p + 0x18, rng.choice([64, 640 * 4, 4096]))
+    return [c, p, 0x1c]
 
 
 def w_dvd_submit(m, rng):
@@ -704,7 +736,8 @@ CASES = [
     Case('IOATIR500DVDContext::get_surface_size', w_dvd_get_surface_size, ret='u32', seeds=20, mock=new_mock),
     Case('IOATIR500DVDContext::freeAllContextBuffers', w_dvd_free_all, ret='void', seeds=20, mock=new_mock),
     Case('IOATIR500DVDContext::stop', w_dvd_stop, ret='void', seeds=40, mock=new_mock, ignore_args=REL),
-    Case('IOATIR500DVDContext::write_buffer', w_dvd_write_buffer, ret='u32', seeds=300, mock=new_mock, ignore_args=REL),
+    Case('IOATIR500GLContext::read_buffer', w_gl_read_buffer, ret='u32', seeds=300, mock=new_mock, ignore_args=REL, out_extents=XFER_RECORD, name='read_buffer (hand world)'),
+    Case('IOATIR500DVDContext::write_buffer', w_dvd_write_buffer, ret='u32', seeds=300, mock=new_mock, ignore_args=REL, out_extents=XFER_RECORD),
     Case('IOATIR500DVDContext::create_shared', lambda m, rng: [dvd(m, rng)[0]], ret='bool', seeds=20, mock=new_mock),
     Case('ATIR500DVDContext::submit_context_buffer', w_dvd_submit, ret='void', seeds=80, mock=new_mock),
     Case('ATIR500DVDContext::process_command_buffer', w_dvd_pcb, ret='u32', seeds=400, mock=new_mock, ignore_args=REL, limit=400000, plain_words=True),

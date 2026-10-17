@@ -542,9 +542,10 @@ class Machine:
         for key, spec in self.out_extents.items():
             if key in name:
                 for idx, n in spec.items():       # the callee's real output extent: fill it with a pattern first, so a caller whose local object is shorter is corrupted visibly
-                    a = regs[idx]
+                    a = regs[idx] if idx < 8 else struct.unpack('>I', bytes(uc.mem_read(sp + 0x38 + 4 * (idx - 8), 4)))[0]
                     if 0x1000 <= a < 0xf0000000:
-                        uc.mem_write(a, bytes(((self.seed * 31 + 0x5a + 7 * i) & 0xff) | 1 for i in range(n)))
+                        for off, ln in ([(0, n)] if isinstance(n, int) else n):       # n: bytes from the pointer, or [(offset, length), ...] for a callee that writes only parts of its record
+                            uc.mem_write(a + off, bytes(((self.seed * 31 + 0x5a + 7 * (off + i)) & 0xff) | 1 for i in range(ln)))
         uc.reg_write(UC_PPC_REG_3, self.mock_policy(self, name, k) & 0xffffffff)
 
     def normalise(self, v, name, index, kind='p'):
@@ -781,7 +782,7 @@ class Case:
     ignore_args {callee name substring: [argument indexes]} not compared: the call site never sets that register (the callee's declared parameter is unused, so
               the register holds whatever was left in it)
     stack_args  {callee name substring: {argument index: bytes}} for pointers to locals that the callee reads (their contents are compared)
-    out_extents {callee name substring: {argument index: bytes}} the REAL number of bytes the callee writes through that pointer argument. Before the (mocked) callee runs,
+    out_extents {callee name substring: {argument index: bytes | [(offset, length), ...]}} the REAL bytes the callee writes through that pointer argument (index 8 and up = stack-passed). Before the (mocked) callee runs,
               that range is filled with a pattern, so a caller whose local object is shorter than the callee's real output corrupts its neighbours - which, unlike
               the mock's own writes, depends on the compiler's stack layout and shows up as a stock/rebuilt difference (2026-10-17 hot-swap panic: IOPixelInformation).
               Declare it for every callee that fills a caller-local struct.

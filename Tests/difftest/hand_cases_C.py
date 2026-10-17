@@ -614,11 +614,14 @@ def pcb_special(m, rng, op, texs):
     return None
 
 
+# the 0x144-byte tracking block (trackBlk) on process_command_buffer's stack is read by restore_state_destroyed_by_pageoff / get_texture; compare what they see
+PCB_TRACK_READS = {'restore_state_destroyed_by_pageoff': {1: 0x144}, 'get_texture': {6: 0x144}}
+
 CASES += [
-    Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng: rng.choice(KNOWN_OPCODES), (2, 6), special=pcb_special), ret='u32', seeds=450, mock=scripted_mock, plain_words=True, name='process_command_buffer (random streams)'),
+    Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng: rng.choice(KNOWN_OPCODES), (2, 6), special=pcb_special), ret='u32', seeds=450, mock=scripted_mock, plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (random streams)'),
 ]
 
 
 for _op in KNOWN_OPCODES:
     CASES.append(Case('ATIR500GLContext::process_command_buffer', pcb_world_with(lambda rng, _op=_op: _op, (1, 3), special=pcb_special), ret='u32', seeds=60, mock=scripted_mock,
-                      plain_words=True, name='process_command_buffer (opcode 0x%02x)' % _op))
+                      plain_words=True, stack_args=PCB_TRACK_READS, name='process_command_buffer (opcode 0x%02x)' % _op))
